@@ -1,6 +1,6 @@
-# fluttertemplet
+# flutter_templet_project
 
-A Flutter project.
+个人模板工程, 支持 iOS, andriod, web, mac, window.
 
 achive：
 ```
