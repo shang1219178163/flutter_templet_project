@@ -77,6 +77,7 @@ import 'package:fluttertemplet/pages/demoPage/FutureBuilderDemo.dart';
 import 'package:fluttertemplet/pages/demoPage/StreamBuilderDemo.dart';
 import 'package:fluttertemplet/pages/demoPage/AnimatedSwitcherDemo.dart';
 import 'package:fluttertemplet/pages/demoPage/AnimatedWidgetDemo.dart';
+import 'package:fluttertemplet/provider/getx_state_demo.dart';
 import 'package:fluttertemplet/provider/rxDart_provider_demo.dart';
 import 'package:fluttertemplet/provider/state_manager_demo.dart';
 
@@ -182,6 +183,8 @@ class APPRouter {
 
   static const rxDartProviderDemo = '/RxDartProviderDemo';
   static const stateManagerDemo = '/StateManagerDemo';
+
+  static const getxStateDemo = '/getxStateDemo';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -616,6 +619,11 @@ class AppPage{
     GetPage(
       name: APPRouter.stateManagerDemo,
       page: () => StateManagerDemo(),
+    ),
+
+    GetPage(
+      name: APPRouter.getxStateDemo,
+      page: () => GetxStateDemo(),
     ),
 
   ];
