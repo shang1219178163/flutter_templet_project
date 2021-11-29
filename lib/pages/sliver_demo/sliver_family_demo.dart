@@ -7,6 +7,7 @@
 //
 
 import 'package:flutter/material.dart';
+import 'package:fluttertemplet/pages/sliver_demo/sliver_demo9.dart';
 import 'package:tuple/tuple.dart';
 
 import 'package:fluttertemplet/pages/sliver_demo/sliver_demo1.dart';
@@ -184,4 +185,10 @@ List<Tuple3<String, String, Widget>> _list = [
     '由prototypeItem属性来控制所有子控件的高度',
     SliverDemo8(),
   ),
+  Tuple3(
+    'SliverDemo9',
+    '瀑布流',
+    SliverDemo9(),
+  ),
+
 ];

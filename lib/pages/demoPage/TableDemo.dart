@@ -24,15 +24,7 @@ class TableDemo extends StatefulWidget {
 class _TableDemoState extends State<TableDemo> {
 
 
-  @override
-  void initState() {
-    super.initState();
-  }
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {

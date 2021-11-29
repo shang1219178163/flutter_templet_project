@@ -35,15 +35,7 @@ class _TabBarReusePageDemoState extends State<TabBarReusePageDemo> {
   bool isPageView = true;
   bool isTabBarTop = true;
 
-  @override
-  void initState() {
-    super.initState();
-  }
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {

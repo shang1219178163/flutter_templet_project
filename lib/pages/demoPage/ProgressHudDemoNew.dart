@@ -32,15 +32,7 @@ class _ProgressHudDemoNewState extends State<ProgressHudDemoNew> {
   var titles = ["0", "1", "2",
     "3", "4", "5", "6", "7", "8"];
 
-  @override
-  void initState() {
-    super.initState();
-  }
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {

@@ -23,15 +23,7 @@ class NestedScrollViewDemo extends StatefulWidget {
 class _NestedScrollViewDemoState extends State<NestedScrollViewDemo> {
 
 
-  @override
-  void initState() {
-    super.initState();
-  }
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {

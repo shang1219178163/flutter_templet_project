@@ -24,15 +24,7 @@ class _PickerDemoPageState extends State<PickerDemoPage> {
     "Picker浅封装", "Picker封装", "自定义",
     "单选滚动列表", "多选滚动列表", "8"];
 
-  @override
-  void initState() {
-    super.initState();
-  }
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {

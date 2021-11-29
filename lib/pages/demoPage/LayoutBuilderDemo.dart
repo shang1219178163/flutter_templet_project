@@ -23,15 +23,7 @@ class _LayoutBuilderDemoState extends State<LayoutBuilderDemo> {
 
   final imageUrl = "https://item.jd.com/12673329.html";
 
-  @override
-  void initState() {
-    super.initState();
-  }
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {

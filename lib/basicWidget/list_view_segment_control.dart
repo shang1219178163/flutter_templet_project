@@ -65,15 +65,7 @@ class _ListViewSegmentControlState extends State<ListViewSegmentControl> {
 
   late ScrollController _scrollController = ScrollController();
 
-  @override
-  void initState() {
-    super.initState();
-  }
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {

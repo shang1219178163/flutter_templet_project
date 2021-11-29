@@ -28,15 +28,7 @@ class _ShowSearchDemoPageState extends State<ShowSearchDemoPage> {
 
   List<String> _list = List.generate(100, (i) => 'item $i');
 
-  @override
-  void initState() {
-    super.initState();
-  }
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {

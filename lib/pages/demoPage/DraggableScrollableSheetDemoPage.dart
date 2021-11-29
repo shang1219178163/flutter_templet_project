@@ -24,15 +24,7 @@ class DraggableScrollableSheetDemoPage extends StatefulWidget {
 class _DraggableScrollableSheetDemoPageState extends State<DraggableScrollableSheetDemoPage> {
 
 
-  @override
-  void initState() {
-    super.initState();
-  }
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {

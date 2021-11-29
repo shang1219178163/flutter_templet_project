@@ -174,15 +174,7 @@ class LocalNotifationDemoPage extends StatefulWidget {
 class _LocalNotifationDemoPageState extends State<LocalNotifationDemoPage> {
 
 
-  @override
-  void initState() {
-    super.initState();
-  }
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {

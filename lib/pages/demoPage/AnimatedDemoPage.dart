@@ -31,15 +31,7 @@ class _AnimatedDemoPageState extends State<AnimatedDemoPage> with TickerProvider
 
   double size = 100;
 
-  @override
-  void initState() {
-    super.initState();
-  }
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
