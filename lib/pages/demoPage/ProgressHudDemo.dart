@@ -21,15 +21,7 @@ class ProgressHudDemo extends StatefulWidget {
 }
 
 class _ProgressHudDemoState extends State<ProgressHudDemo> {
-  @override
-  void initState() {
-    super.initState();
-  }
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {

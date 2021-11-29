@@ -27,16 +27,7 @@ class _LoginPageState extends State<LoginPage> {
   FocusNode focusNode2 = FocusNode();
   late FocusScopeNode focusScopeNode;
 
-  @override
-  void initState() {
-    super.initState();
 
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {

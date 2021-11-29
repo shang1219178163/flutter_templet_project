@@ -21,17 +21,7 @@ class APPDrawerMenuPage extends StatefulWidget {
 
 class _APPDrawerMenuPageState extends State<APPDrawerMenuPage> {
 
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
+  
   @override
   Widget build(BuildContext context) {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;

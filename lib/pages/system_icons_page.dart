@@ -19,15 +19,7 @@ class _SystemIconsPageState extends State<SystemIconsPage> {
   var titles = List.from(kIconDataDic.keys);
   var list = List.from(kIconDataDic.keys);
 
-  @override
-  void initState() {
-    super.initState();
-  }
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {

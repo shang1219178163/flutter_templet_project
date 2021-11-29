@@ -71,15 +71,7 @@ class _DateTableDemoPageState extends State<DateTableDemoPage> {
   var _sortAscending = true;
   var _sortColumnIndex = 0;
 
-  @override
-  void initState() {
-    super.initState();
-  }
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {

@@ -23,15 +23,7 @@ class MenuDemo extends StatefulWidget {
 class _MenuDemoState extends State<MenuDemo> {
 
 
-  @override
-  void initState() {
-    super.initState();
-  }
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {

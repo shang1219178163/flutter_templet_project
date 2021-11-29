@@ -27,15 +27,7 @@ class _DraggableDemoPageState extends State<DraggableDemoPage> {
 
   int acceptedData = 0;
 
-  @override
-  void initState() {
-    super.initState();
-  }
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
 
   Widget build(BuildContext context) {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
