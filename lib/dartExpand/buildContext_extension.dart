@@ -40,7 +40,8 @@ extension StatefulWidgetExt<T extends StatefulWidget> on State<T> {
   /// 扩展方法
   void showSnackBar(SnackBar snackBar, [bool isReplace = false]) {
     if (isReplace) {
-      scaffoldMessenger.hideCurrentSnackBar();
+      // scaffoldMessenger.hideCurrentSnackBar();
+      scaffoldMessenger.clearSnackBars();
     }
     scaffoldMessenger.showSnackBar(snackBar);
   }
