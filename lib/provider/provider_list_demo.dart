@@ -28,23 +28,36 @@ class ProviderListDemo extends StatefulWidget {
 
 class _ProviderListDemoState extends State<ProviderListDemo> {
   /// ChangeNotifier
-  static CartModel changeNotifierCartModel = CartModel();
+  static CartModel cartModel = CartModel();
+
+  static CartModelNew cartModelNew = CartModelNew(<OrderModel>[]);
+
   /// ValueNotifier
-  static ValueNotifierOrderModels valueNotifierOrderModels = ValueNotifierOrderModels();
+  static ValueNotifierOrderModels orderModels = ValueNotifierOrderModels();
+  // /// ValueNotifier
+  // static ValueNotifierNum valueNotifierInt = ValueNotifierNum(initValue: 6, minValue: 0, maxValue: 9, block: (int minValue, int maxValue){
+  //   ddlog("数值必须在${minValue} - ${maxValue} 之间");
+  // });
+
   /// ValueNotifier
-  static ValueNotifierInt valueNotifierInt = ValueNotifierInt(initValue: 6, minValue: 0, maxValue: 9, block: (int minValue, int maxValue){
+  static ValueNotifierNum valueNotifierInt = ValueNotifierNum(initValue: 6, minValue: 0, maxValue: 9, block:(num minValue, num maxValue){
+    ddlog("数值必须在${minValue} - ${maxValue} 之间");
+  });
+
+  static ValueNotifierNum valueNotifierDouble = ValueNotifierNum(initValue: 6, minValue: 0, maxValue: 9, block:(num minValue, num maxValue){
     ddlog("数值必须在${minValue} - ${maxValue} 之间");
   });
   // static ValueNotifierInt valueNotifierInt = ValueNotifierInt(initValue: 6, minValue: 0, maxValue: 9);
 
-  static ValueNotifier<int> valueNotifierIntOrigin = ValueNotifier(3);
+  ValueNotifier<int> notifier = ValueNotifier(3);
 
-  /// ValueNotifier
-  static ValueNotifierDouble valueNotifierDouble = ValueNotifierDouble(8.8);
   /// ValueNotifier
   static ValueNotifierList valueNotifierList = ValueNotifierList(<OrderModel>[]);
   /// ValueNotifier(addListener无效 因为数组地址未发生改变, 推荐使用 ValueNotifierList)
   static ValueNotifier<List<OrderModel>> valueNotifierListOrigin = ValueNotifier(<OrderModel>[]);
+
+  var counter = 3.notifier;
+
 
   @override
   void initState() {
@@ -55,22 +68,28 @@ class _ProviderListDemoState extends State<ProviderListDemo> {
 
     valueNotifierInt.maxValue = 12;
 
-    valueNotifierIntOrigin.addListener(update);
+    notifier.addListener(update);
+
     valueNotifierInt.addListener(update);
     valueNotifierDouble.addListener(update);
 
-    valueNotifierOrderModels.addListener(update);
+    orderModels.addListener(update);
+    cartModelNew.addListener(update);
+
     valueNotifierList.addListener(update);
     valueNotifierListOrigin.addListener(update);
   }
 
   @override
   void dispose() {
+    notifier.removeListener(update);
+
     valueNotifierInt.removeListener(update);
-    valueNotifierIntOrigin.removeListener(update);
     valueNotifierDouble.removeListener(update);
 
-    valueNotifierOrderModels.removeListener(update);
+    orderModels.removeListener(update);
+    cartModelNew.removeListener(update);
+
     valueNotifierList.removeListener(update);
     valueNotifierListOrigin.removeListener(update);
     super.dispose();
@@ -86,12 +105,14 @@ class _ProviderListDemoState extends State<ProviderListDemo> {
           actions: [
             IconButton(
               onPressed: (){
-                updateChangeNotifier(model: changeNotifierCartModel, value: 1);
+                updateChangeNotifier(model: cartModel, value: 1);
+
               },
               icon: Icon(Icons.add_circle_outline,)),
             IconButton(
               onPressed: (){
-                updateChangeNotifier(model: changeNotifierCartModel, value: -1);
+                updateChangeNotifier(model: cartModel, value: -1);
+
               },
               icon: Icon(Icons.remove_circle_outline,)),
           ],
@@ -110,7 +131,7 @@ class _ProviderListDemoState extends State<ProviderListDemo> {
             SliverToBoxAdapter(
               child: Container(
                 height: 30,
-                color: Colors.red,
+                color: Colors.green,
                 child: Align(
                   alignment: Alignment.centerLeft,
                     child: Text("SliverToBoxAdapter")),
@@ -194,15 +215,14 @@ class _ProviderListDemoState extends State<ProviderListDemo> {
       case "valueNotifierIntKey":
         {
           valueNotifierInt.add(value);
+          ddlog("${valueNotifierInt.value.toInt()}");
         }
         break;
       case "valueNotifierDoubleKey":
         {
-          ddlog("${value.toDouble()}");
-          valueNotifierDouble.add(value.toDouble());
-
+          valueNotifierDouble.add(value);
           // ddlog(cartCountKey.toString());
-          ddlog("${valueNotifierDouble.value}");
+          ddlog("${valueNotifierDouble.value.toDouble()}");
         }
         break;
 
@@ -210,12 +230,28 @@ class _ProviderListDemoState extends State<ProviderListDemo> {
         {
           final e = OrderModel(name: '商品', id: 99, pirce: 1.00);
           if (value > 0) {
-            changeNotifierCartModel.add(e);
+            cartModel.add(e);
           } else {
-            changeNotifierCartModel.removeLast();
+            cartModel.removeLast();
           }
 
-          ddlog(changeNotifierCartModel.toString());
+          ddlog(cartModel.toString());
+          // ddlog("${cartModelKey.totalPrice}");
+        }
+        break;
+
+      case "cartModelNew":
+        {
+          final e = OrderModel(name: '商品', id: 99, pirce: 1.00);
+          if (value > 0) {
+            cartModelNew.add(e);
+          } else {
+            cartModelNew.removeLast();
+          }
+
+          ddlog(cartModelNew.toString());
+          ddlog(cartModelNew.totalPrice);
+
           // ddlog("${cartModelKey.totalPrice}");
         }
         break;
@@ -223,12 +259,12 @@ class _ProviderListDemoState extends State<ProviderListDemo> {
         {
           final e = OrderModel(name: '商品', id: 99, pirce: 1.00);
           if (value > 0) {
-            valueNotifierOrderModels.add(e);
+            orderModels.add(e);
           } else {
-            valueNotifierOrderModels.removeLast();
+            orderModels.removeLast();
           }
 
-          ddlog(valueNotifierOrderModels.toString());
+          ddlog(orderModels.toString());
           // ddlog("${cartModelOneKey.totalPrice}");
         }
         break;
@@ -248,10 +284,10 @@ class _ProviderListDemoState extends State<ProviderListDemo> {
 
       case "valueNotifierIntOrigin":
         {
-          valueNotifierIntOrigin.value += value;
+          notifier.value += value;
 
           // ddlog(cartCountKey.toString());
-          ddlog("${valueNotifierIntOrigin.value}");
+          ddlog("${notifier.value}");
         }
         break;
 
@@ -287,7 +323,8 @@ class _ProviderListDemoState extends State<ProviderListDemo> {
     ddlog(model.toString());
 
     if (value > 0) {
-      ScaffoldMessenger.of(context).hideCurrentSnackBar();
+      ScaffoldMessenger.of(context).removeCurrentSnackBar();
+      ScaffoldMessenger.of(context).clearSnackBars();
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('CartModel num\'s +1')));
 
     } else {
@@ -297,9 +334,12 @@ class _ProviderListDemoState extends State<ProviderListDemo> {
   }
 
   var list = [
-    // ValueNotifierModel(name: "valueNotifierIntKey", notifier: valueNotifierInt),
-    // ValueNotifierModel(name: "valueNotifierDoubleKey", notifier: valueNotifierDouble),
-    ValueNotifierModel(name: "valueNotifierOrderModels", notifier: valueNotifierOrderModels),
+    ValueNotifierModel(name: "valueNotifierIntKey", notifier: valueNotifierInt),
+    ValueNotifierModel(name: "valueNotifierDoubleKey", notifier: valueNotifierDouble),
+    ValueNotifierModel(name: "valueNotifierOrderModels", notifier: orderModels),
+
+    ValueNotifierModel(name: "cartModelNew", notifier: cartModelNew),
+
     ValueNotifierModel(name: "valueNotifierList", notifier: valueNotifierList),
 
     // ValueNotifierModel(name: "valueNotifierIntOrigin", notifier: valueNotifierIntOrigin),

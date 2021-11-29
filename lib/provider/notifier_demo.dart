@@ -13,6 +13,7 @@ import 'dart:collection';
 import 'package:flutter/cupertino.dart';
 import 'package:fluttertemplet/dartExpand/ddlog.dart';
 import 'package:fluttertemplet/model/order_model.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 
 /// ChangeNotifier(不推荐使用,麻烦)
 class CartModel extends ChangeNotifier {
@@ -65,7 +66,7 @@ class CartModel extends ChangeNotifier {
 }
 
 
-/// ValueNotifier<List<OrderModel>>
+/// ValueNotifier<List<OrderModel>>(替代品 ValueNotifierList)
 class ValueNotifierOrderModels extends ValueNotifier<List<OrderModel>> {
 
   ValueNotifierOrderModels() : super(<OrderModel>[]); // 构造函数要提供value的初始值
@@ -176,24 +177,26 @@ class ValueNotifierList<T> extends ValueNotifier<List<T>> {
 //   }
 // }
 
+
 /// ValueNotifier<int>
-class ValueNotifierInt extends ValueNotifier<int> {
+class ValueNotifierNum extends ValueNotifier<num> {
 
-  int initValue = 0;
-
-  int minValue = 0;
-
-  int maxValue = 100000;
-
-  void Function(int minValue, int maxValue)? block;
-
-  ValueNotifierInt({
-    required this.initValue,
-    required this.minValue,
-    required this.maxValue,
+  ValueNotifierNum({
+    this.initValue = 0,
+    this.minValue = 0,
+    this.maxValue = 100000,
     this.block}) : super(initValue);
 
-  void add(int val) {
+  num initValue;
+
+  num minValue;
+
+  num maxValue;
+
+  void Function(num minValue, num maxValue)? block;
+
+
+  void add(num val) {
     if (val < 0 && value <= minValue) {
       if (block != null) block!(minValue, maxValue);
       return;
@@ -212,18 +215,21 @@ class ValueNotifierInt extends ValueNotifier<int> {
   }
 }
 
+extension ValueNotierExtension<T> on T {
 
-/// ValueNotifier<double>
-class ValueNotifierDouble extends ValueNotifier<double> {
+  /// ValueNotifier<T>
+  ValueNotifier<T> get notifier => ValueNotifier<T>(this);
+}
 
-  ValueNotifierDouble(double initValue) : super(initValue);
 
-  void add(double val) {
-    value += val;
-  }
+/// 购物车重新定义
+class CartModelNew extends ValueNotifierList<OrderModel>{
+  CartModelNew(List<OrderModel> value) : super(value);
 
-  @override
-  String toString() {
-    return "${this.runtimeType} 当前值 ${value.toStringAsFixed(2)}";
+  double get totalPrice {
+    if (value.length == 0) {
+      return 0;
+    }
+    return value.map((e) => e.pirce).reduce((value, element) => value + element).roundToDouble();
   }
 }
