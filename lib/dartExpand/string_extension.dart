@@ -10,6 +10,10 @@
 import 'dart:convert';
 
 extension StringExt on String{
+  static bool isNotEmpty(String s) {
+    return s != null && s.isNotEmpty;
+  }
+
   /// 获取匹配到的元素数组
   List<String> allMatchesByReg(RegExp regExp) {
     final reg = regExp.allMatches(this);
@@ -19,6 +23,15 @@ extension StringExt on String{
   ///首字母大写
   String toCapitalize() {
     return "${this[0].toUpperCase()}${this.substring(1)}";
+  }
+
+  /// 转我 int
+  int? toInt() {
+    return int.tryParse(this);
+  }
+  /// 转为 double
+  double? toDouble() {
+    return double.tryParse(this);
   }
 
   ///解析
