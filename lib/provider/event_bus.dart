@@ -15,10 +15,12 @@ class EventBus {
   EventBus._internal();
 
   //保存单例
-  static EventBus _singleton = EventBus._internal();
+  static EventBus _instance = EventBus._internal();
 
   //工厂构造函数
-  factory EventBus()=> _singleton;
+  factory EventBus() => _instance;
+
+  static EventBus get instance => _instance;
 
   //保存事件订阅者队列，key:事件名(id)，value: 对应事件的订阅者队列
   final _emap = Map<Object, List<EventCallback>?>();
