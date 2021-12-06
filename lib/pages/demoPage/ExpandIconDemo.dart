@@ -1,6 +1,6 @@
 //
 //  ExpandIconDemo.dart
-//  fluttertemplet
+//  flutter_templet_project
 //
 //  Created by shang on 7/16/21 10:03 AM.
 //  Copyright © 7/16/21 shang. All rights reserved.
@@ -8,8 +8,10 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertemplet/dartExpand/ddlog.dart';
-import 'package:fluttertemplet/dartExpand/color_extension.dart';
+import 'package:flutter_templet_project/basicWidget/list_view_segment_control.dart';
+import 'package:flutter_templet_project/basicWidget/visible_container.dart';
+import 'package:flutter_templet_project/extensions/ddlog.dart';
+import 'package:flutter_templet_project/extensions/color_extension.dart';
 
 import 'package:tuple/tuple.dart';
 
@@ -31,7 +33,6 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
   List<Color> colors = [
     Colors.black,
     Colors.pink,
-    Colors.purple,
     Colors.deepPurple,
     Colors.indigo,
     Colors.blue,
@@ -50,6 +51,14 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
     Colors.blueGrey,
   ];
 
+  List<int> _foldIndexs = List.generate(5, (index) => index);
+
+  // List<Tuple2<List<String>, int>> foldList = _foldIndexs.map((e){
+  //   final i = _foldIndexs.indexOf(e);
+  //   return Tuple2(List.generate(8, (index) => "item${i}_$index"), i);
+  // }).toList();
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -59,9 +68,36 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
       ),
-      body: Column(
+      body: ListView(
         children: [
+          Text("ExpansionTile", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
           buildExpandIconColors(context),
+          Divider(),
+          Text("ListViewSegmentControl", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+          buildListViewHorizontal(),
+          Divider(),
+          Text("Visibility", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+          _buildVisbility(),
+          Divider(),
+          Text("自定义 VisibleContainer", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+          _buildVisibleContainer(),
+          Divider(),
+          Text("自定义 FoldMenu", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+          FoldMenu(
+            // children: foldList,
+            children: [
+              Tuple2(List.generate(8, (index) => "item0_$index"), 0),
+              Tuple2(List.generate(8, (index) => "item1_$index"), 1),
+              Tuple2(List.generate(8, (index) => "item2_$index"), 2),
+              Tuple2(List.generate(8, (index) => "item3_$index"), 3),
+              Tuple2(List.generate(8, (index) => "item4_$index"), 4),
+            ],
+            foldCount: 2,
+            isVisible: _isVisible,
+            onValueChanged: (row, index, indexs){
+              ddlog("${row}, ${index}, ${indexs}");
+            },
+          )
         ],
       ),
     );
@@ -102,5 +138,97 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
       ],
     );
   }
+
+  ///设置单个宽度
+  Widget buildListViewHorizontal({List<String>? titles}) {
+    var items = titles ?? List.generate(8, (index) => "item_$index");
+    List<double> itemWiths = [60, 70, 80, 90, 100, 110, 120, 130];
+
+    return ListViewSegmentControl(
+      items: items,
+      // itemWidths: itemWiths,
+      selectedIndex: 0,
+      onValueChanged: (index){
+        ddlog(index);
+      });
+  }
+
+  bool _isShowing = true;
+  _buildVisbility() {
+    return Container(
+      color: Colors.green,
+      child: Column(
+        children: [
+          SizedBox(height:5),
+          buildListViewHorizontal(),
+          Visibility(
+            visible: _isShowing,
+            child:
+              Column(
+                children: [
+                  SizedBox(height:5),
+                  buildListViewHorizontal(titles: List.generate(8, (index) => "item4_$index")),
+                  SizedBox(height:5),
+                  buildListViewHorizontal(titles: List.generate(8, (index) => "item5_$index")),
+                  SizedBox(height:5),
+                ]
+              ),
+          ),
+          IconButton(
+            icon: _isShowing ? Icon(Icons.keyboard_arrow_up) : Icon(
+                Icons.keyboard_arrow_down),
+            onPressed: () {
+              setState(() {
+                _isShowing = !_isShowing;
+              });
+          },)
+        ]
+      ),
+    );
+  }
+
+
+  bool _isVisible = true;
+  _buildVisibleContainer() {
+    return VisibleContainer(
+        isVisible: _isVisible,
+        // indicator: ListTile(
+        //   leading: Icon(Icons.fourteen_mp),
+        //   title: Text("title"),
+        //   subtitle: Text("subtitle"),
+        //   trailing: RotatedBox(
+        //     quarterTurns: _isVisible == true ? 2 : 0,
+        //     child: Icon(Icons.keyboard_arrow_down),
+        //   ),
+        // //   trailing: Icon(Icons.chevron_right),
+        //   onTap: () {
+        //     setState(() {
+        //       _isVisible = !_isVisible;
+        //     });
+        //   }
+        // ),
+        top: Container(
+          color: Colors.orange,
+          // height: 50,
+          child: Column(
+            children: [
+              SizedBox(height:5),
+              buildListViewHorizontal(titles: List.generate(8, (index) => "item1_$index")),
+              SizedBox(height:5),
+            ]
+          ),
+        ),
+        body: Column(
+          children: [
+            SizedBox(height:5),
+            buildListViewHorizontal(titles: List.generate(8, (index) => "item4_$index")),
+            SizedBox(height:5),
+            buildListViewHorizontal(titles: List.generate(8, (index) => "item5_$index")),
+            SizedBox(height:5),
+          ]
+      ),
+    );
+  }
+
 }
 
