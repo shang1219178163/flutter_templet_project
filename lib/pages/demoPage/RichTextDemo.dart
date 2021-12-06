@@ -1,16 +1,16 @@
 //
 //  RichTextDemo.dart
-//  fluttertemplet
+//  flutter_templet_project
 //
 //  Created by shang on 7/31/21 12:11 PM.
 //  Copyright © 7/31/21 shang. All rights reserved.
 //
 
 import 'package:flutter/material.dart';
-import 'package:fluttertemplet/basicWidget/AttributedString.dart';
-import 'package:fluttertemplet/dartExpand/ddlog.dart';
-import 'package:fluttertemplet/dartExpand/richText_extension.dart';
-import 'package:fluttertemplet/dartExpand/string_extension.dart';
+import 'package:flutter_templet_project/basicWidget/AttributedString.dart';
+import 'package:flutter_templet_project/extensions/ddlog.dart';
+import 'package:flutter_templet_project/extensions/richText_extension.dart';
+import 'package:flutter_templet_project/extensions/string_extension.dart';
 
 class RichTextDemo extends StatefulWidget {
 

@@ -1,6 +1,6 @@
 //
 //  richText_extension.dart
-//  fluttertemplet
+//  flutter_templet_project
 //
 //  Created by shang on 7/31/21 1:48 PM.
 //  Copyright © 7/31/21 shang. All rights reserved.
@@ -9,7 +9,7 @@
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertemplet/dartExpand/ddlog.dart';
+import 'package:flutter_templet_project/extensions/ddlog.dart';
 
 extension RichTextExt on RichText{
 

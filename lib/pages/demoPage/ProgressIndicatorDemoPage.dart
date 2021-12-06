@@ -1,6 +1,6 @@
 //
 //  ProgressIndicatorDemoPage.dart
-//  fluttertemplet
+//  flutter_templet_project
 //
 //  Created by shang on 6/7/21 3:21 PM.
 //  Copyright © 6/7/21 shang. All rights reserved.
@@ -10,7 +10,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:fluttertemplet/dartExpand/ddlog.dart';
+import 'package:flutter_templet_project/extensions/ddlog.dart';
 
 class ProgressIndicatorDemoPage extends StatefulWidget {
 

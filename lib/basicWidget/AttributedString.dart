@@ -1,6 +1,6 @@
 //
 //  AttributedString.dart
-//  fluttertemplet
+//  flutter_templet_project
 //
 //  Created by shang on 7/31/21 12:08 PM.
 //  Copyright © 7/31/21 shang. All rights reserved.
@@ -9,7 +9,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertemplet/dartExpand/richText_extension.dart';
+import 'package:flutter_templet_project/extensions/richText_extension.dart';
 
 
 ///富文本处理

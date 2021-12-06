@@ -1,13 +1,13 @@
 //
 //  StateManagerDemo.dart
-//  fluttertemplet
+//  flutter_templet_project
 //
 //  Created by shang on 11/22/21 9:16 AM.
 //  Copyright © 11/22/21 shang. All rights reserved.
 //
 
 import 'package:flutter/material.dart';
-import 'package:fluttertemplet/routes/APPRouter.dart';
+import 'package:flutter_templet_project/routes/APPRouter.dart';
 import 'package:get/get.dart';
 import 'package:tuple/tuple.dart';
 

@@ -1,6 +1,6 @@
 //
 //  app_update_model.dart
-//  fluttertemplet
+//  flutter_templet_project
 //
 //  Created by shang on 5/19/21 5:34 PM.
 //  Copyright © 5/19/21 shang. All rights reserved.

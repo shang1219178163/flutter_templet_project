@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
-import 'package:fluttertemplet/basicWidget/hud/CirclePulseLoadingWidget.dart';
+import 'package:flutter_templet_project/basicWidget/hud/CirclePulseLoadingWidget.dart';
 
 //loading加载框
 class ToastDialog extends Dialog {

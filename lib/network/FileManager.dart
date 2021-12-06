@@ -1,6 +1,6 @@
 //
 //  FileManager.dart
-//  fluttertemplet
+//  flutter_templet_project
 //
 //  Created by shang on 7/26/21 4:23 PM.
 //  Copyright © 7/26/21 shang. All rights reserved.
@@ -10,7 +10,10 @@ import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 
 class FileManager {
-  FileManager._internal();
+  static final FileManager _instance = FileManager._();
+  FileManager._();
+  factory FileManager() => _instance;
+  static FileManager get instance => _instance;
 
   ///获取缓存目录路径
   static Future<String> getCacheDirPath() async {

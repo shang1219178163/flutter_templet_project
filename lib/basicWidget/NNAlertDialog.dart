@@ -1,6 +1,6 @@
 //
 //  NNAlertDialog.dart
-//  fluttertemplet
+//  flutter_templet_project
 //
 //  Created by shang on 7/30/21 11:03 AM.
 //  Copyright © 7/30/21 shang. All rights reserved.

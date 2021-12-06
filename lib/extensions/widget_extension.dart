@@ -1,6 +1,6 @@
 //
 //  widget_extension.dart
-//  fluttertemplet
+//  flutter_templet_project
 //
 //  Created by shang on 5/17/21 10:43 AM.
 //  Copyright © 5/17/21 shang. All rights reserved.
@@ -12,7 +12,7 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertemplet/dartExpand/ddlog.dart';
+import 'package:flutter_templet_project/extensions/ddlog.dart';
 import 'package:styled_widget/styled_widget.dart';
 
 const double kCupertinoButtonHeight = 56.0;

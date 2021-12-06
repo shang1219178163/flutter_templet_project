@@ -1,6 +1,6 @@
 //
 //  BannerDemo.dart
-//  fluttertemplet
+//  flutter_templet_project
 //
 //  Created by shang on 10/28/21 5:34 PM.
 //  Copyright © 10/28/21 shang. All rights reserved.

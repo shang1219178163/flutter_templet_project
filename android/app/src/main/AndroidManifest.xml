@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.fluttertemplet">
+    package="com.example.flutter_templet_project">
    <application
-        android:label="fluttertemplet"
+        android:label="flutter_templet_project"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

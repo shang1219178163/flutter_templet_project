@@ -1,15 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertemplet/routes/APPRouter.dart';
+import 'package:flutter_templet_project/routes/APPRouter.dart';
 import 'package:get/get.dart';
 
 import 'package:styled_widget/styled_widget.dart';
-import 'package:fluttertemplet/dartExpand/ddlog.dart';
+import 'package:flutter_templet_project/extensions/ddlog.dart';
 
-import 'package:fluttertemplet/basicWidget/chioce_list.dart';
-import 'package:fluttertemplet/basicWidget/chioce_wrap.dart';
-import 'package:fluttertemplet/DartExpand/actionSheet_extension.dart';
-import 'package:fluttertemplet/DartExpand/widget_extension.dart';
+import 'package:flutter_templet_project/basicWidget/chioce_list.dart';
+import 'package:flutter_templet_project/basicWidget/chioce_wrap.dart';
+import 'package:flutter_templet_project/extensions/actionSheet_extension.dart';
+import 'package:flutter_templet_project/extensions/widget_extension.dart';
 import 'ShowSearchDemoPage.dart';
 
 

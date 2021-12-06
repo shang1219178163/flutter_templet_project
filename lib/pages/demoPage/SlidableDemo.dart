@@ -1,6 +1,6 @@
 //
 //  SlidableDemoPage.dart
-//  fluttertemplet
+//  flutter_templet_project
 //
 //  Created by shang on 5/20/21 10:26 AM.
 //  Copyright © 5/20/21 shang. All rights reserved.

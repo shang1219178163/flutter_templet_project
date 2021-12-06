@@ -1,6 +1,6 @@
 //
 //  custome_animated.dart
-//  fluttertemplet
+//  flutter_templet_project
 //
 //  Created by shang on 10/21/21 8:54 AM.
 //  Copyright © 10/21/21 shang. All rights reserved.

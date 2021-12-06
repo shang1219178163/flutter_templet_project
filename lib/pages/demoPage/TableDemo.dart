@@ -1,6 +1,6 @@
 //
 //  TableDemo.dart
-//  fluttertemplet
+//  flutter_templet_project
 //
 //  Created by shang on 10/14/21 7:02 PM.
 //  Copyright © 10/14/21 shang. All rights reserved.
@@ -8,7 +8,6 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:fluttertemplet/uti/screen_uti.dart';
 
 class TableDemo extends StatefulWidget {
 

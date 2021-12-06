@@ -1,20 +1,20 @@
 //
 //  TabBarPageViewDemo.dart
-//  fluttertemplet
+//  flutter_templet_project
 //
 //  Created by shang on 10/22/21 5:11 PM.
 //  Copyright © 10/22/21 shang. All rights reserved.
 //
 
 import 'package:flutter/material.dart';
-import 'package:fluttertemplet/basicWidget/app_update_card.dart';
-import 'package:fluttertemplet/basicWidget/list_subtitle_cell.dart';
-import 'package:fluttertemplet/basicWidget/tabBar_pageView.dart';
-import 'package:fluttertemplet/basicWidget/tabBar_tabBarView.dart';
-import 'package:fluttertemplet/dartExpand/ddlog.dart';
-import 'package:fluttertemplet/dartExpand/divider_extension.dart';
-import 'package:fluttertemplet/mockData/mock_data.dart';
-import 'package:fluttertemplet/pages/tabBar_tabBarView_demo.dart';
+import 'package:flutter_templet_project/basicWidget/app_update_card.dart';
+import 'package:flutter_templet_project/basicWidget/list_subtitle_cell.dart';
+import 'package:flutter_templet_project/basicWidget/tabBar_pageView.dart';
+import 'package:flutter_templet_project/basicWidget/tabBar_tabBarView.dart';
+import 'package:flutter_templet_project/extensions/ddlog.dart';
+import 'package:flutter_templet_project/extensions/divider_extension.dart';
+import 'package:flutter_templet_project/mockData/mock_data.dart';
+import 'package:flutter_templet_project/pages/tabBar_tabBarView_demo.dart';
 import 'package:tuple/tuple.dart';
 
 

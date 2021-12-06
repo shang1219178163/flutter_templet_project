@@ -1,6 +1,6 @@
 //
 //  SectionListView.dart
-//  fluttertemplet
+//  flutter_templet_project
 //
 //  Created by shang on 10/15/21 3:00 PM.
 //  Copyright © 10/15/21 shang. All rights reserved.
@@ -8,7 +8,7 @@
 
 
 import 'package:flutter/material.dart';
-// import 'package:fluttertemplet/dartExpand/ddlog.dart';
+// import 'package:flutter_templet_project/extensions/ddlog.dart';
 
 
 ///抽象封装

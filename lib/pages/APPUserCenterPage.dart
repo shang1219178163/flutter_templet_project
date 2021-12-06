@@ -1,21 +1,22 @@
 //
 //  APPUserCenterPage.dart
-//  fluttertemplet
+//  flutter_templet_project
 //
 //  Created by shang on 5/20/21 4:57 PM.
 //  Copyright © 5/20/21 shang. All rights reserved.
 //
 
 import 'package:flutter/material.dart';
-import 'package:fluttertemplet/APPThemeSettings.dart';
-import 'package:fluttertemplet/main.dart';
-import 'package:fluttertemplet/routes/APPRouter.dart';
-import 'package:fluttertemplet/dartExpand/ddlog.dart';
-import 'package:fluttertemplet/DartExpand/navigator_extension.dart';
+import 'package:flutter_templet_project/APPThemeSettings.dart';
+import 'package:flutter_templet_project/main.dart';
+import 'package:flutter_templet_project/routes/APPRouter.dart';
+import 'package:flutter_templet_project/extensions/ddlog.dart';
+import 'package:flutter_templet_project/extensions/navigator_extension.dart';
+import 'package:flutter_templet_project/extensions/alertDialog_extension.dart';
+
 import 'package:get/get.dart';
 import 'package:styled_widget/styled_widget.dart';
 import 'APPDrawerMenuPage.dart';
-import 'package:fluttertemplet/dartExpand/alertDialog_extension.dart';
 import 'package:tuple/tuple.dart';
 
 

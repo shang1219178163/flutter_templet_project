@@ -1,7 +1,7 @@
 
 //
 //  CarouselSliderDemoPage.dart
-//  fluttertemplet
+//  flutter_templet_project
 //
 //  Created by shang on 6/8/21 5:00 PM.
 //  Copyright © 6/8/21 shang. All rights reserved.
@@ -10,7 +10,7 @@
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertemplet/dartExpand/ddlog.dart';
+import 'package:flutter_templet_project/extensions/ddlog.dart';
 import 'package:styled_widget/styled_widget.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 

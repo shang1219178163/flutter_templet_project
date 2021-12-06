@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertemplet/basicWidget/dash_line.dart';
-import 'package:fluttertemplet/dartExpand/ddlog.dart';
-import 'package:fluttertemplet/dartExpand/buildContext_extension.dart';
+import 'package:flutter_templet_project/basicWidget/dash_line.dart';
+import 'package:flutter_templet_project/extensions/ddlog.dart';
+import 'package:flutter_templet_project/extensions/buildContext_extension.dart';
 
 import 'package:styled_widget/styled_widget.dart';
 

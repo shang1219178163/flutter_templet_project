@@ -1,13 +1,13 @@
 //
 //  NumberFormatDemo.dart
-//  fluttertemplet
+//  flutter_templet_project
 //
 //  Created by shang on 8/3/21 2:35 PM.
 //  Copyright © 8/3/21 shang. All rights reserved.
 //
 
 import 'package:flutter/material.dart';
-import 'package:fluttertemplet/dartExpand/ddlog.dart';
+import 'package:flutter_templet_project/extensions/ddlog.dart';
 import "package:intl/intl.dart";
 
 

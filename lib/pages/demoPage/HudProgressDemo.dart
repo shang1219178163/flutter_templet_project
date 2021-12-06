@@ -1,6 +1,6 @@
 //
 //  HudProgressDemo.dart
-//  fluttertemplet
+//  flutter_templet_project
 //
 //  Created by shang on 6/10/21 4:27 PM.
 //  Copyright © 6/10/21 shang. All rights reserved.
@@ -8,10 +8,10 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:fluttertemplet/dartExpand/ddlog.dart';
+import 'package:flutter_templet_project/extensions/ddlog.dart';
 import 'package:styled_widget/styled_widget.dart';
-import 'package:fluttertemplet/basicWidget/hud/ToastDialog.dart';
-import 'package:fluttertemplet/basicWidget/hud/CirclePulseLoadingWidget.dart';
+import 'package:flutter_templet_project/basicWidget/hud/ToastDialog.dart';
+import 'package:flutter_templet_project/basicWidget/hud/CirclePulseLoadingWidget.dart';
 
 class HudProgressDemo extends StatelessWidget {
 

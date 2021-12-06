@@ -1,6 +1,6 @@
 //
 //  http.dart
-//  fluttertemplet
+//  flutter_templet_project
 //
 //  Created by shang on 7/26/21 3:57 PM.
 //  Copyright © 7/26/21 shang. All rights reserved.
@@ -14,7 +14,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:cookie_jar/cookie_jar.dart';
-import 'package:fluttertemplet/dartExpand/ddlog.dart';
+import 'package:flutter_templet_project/extensions/ddlog.dart';
 
 import 'package:get_storage/get_storage.dart';
 
@@ -48,7 +48,7 @@ class RequestClient{
         connectTimeout: 20000,
         receiveTimeout: 5000);
 
-    Dio dio = Dio(api.requestBaseOptions ?? options);
+    Dio _dio = Dio(api.requestBaseOptions ?? options);
 
     // Directory directory = await getApplicationDocumentsDirectory();
     // var cookieJar = PersistCookieJar(storage: FileStorage(directory.path + "/.cookies/"));
@@ -57,52 +57,52 @@ class RequestClient{
 
     FileManager.getDocumentsDirPath().then((value) {
       var cookieJar = PersistCookieJar(storage: FileStorage(value + "/.cookies/"));
-      dio.interceptors.add(CookieManager(cookieJar));
+      _dio.interceptors.add(CookieManager(cookieJar));
     });
 
-    // final interceptorsWrapper = InterceptorsWrapper(
-    // onRequest: (RequestOptions options, handler) {
-    //   print("请求之前");
-    //   return handler.next(options);
-    // },
-    // onResponse: (Response response, handler) {
-    //   print("响应之前");
-    //   return handler.next(response);
-    // },
-    // onError: (DioError e, handler) {
-    //   print("错误之前");
-    //   handleError(e);
-    //   return handler.next(e);
-    // });
+    final interceptorsWrapper = InterceptorsWrapper(
+    onRequest: (RequestOptions options, handler) {
+      print("请求之前");
+      return handler.next(options);
+    },
+    onResponse: (Response response, handler) {
+      print("响应之前");
+      return handler.next(response);
+    },
+    onError: (DioError e, handler) {
+      print("错误之前");
+      handleError(e);
+      return handler.next(e);
+    });
 
     late Response response;
     try {
       switch (api.requestType) {
         case RequestMethod.GET:
           {
-            response = await dio.get(api.requestURI, queryParameters: api.requestParams);
+            response = await _dio.get(api.requestURI, queryParameters: api.requestParams);
           }
           break;
         case RequestMethod.POST:
           {
             if (formData != null) {
-              response = await dio.post(api.requestURI,
+              response = await _dio.post(api.requestURI,
                   data: formData,
                   onSendProgress: onProgress,
                   options: Options(contentType: "multipart/form-data"));
             } else {
-              response = await dio.post(api.requestURI, data: api.requestParams, onSendProgress: onProgress);
+              response = await _dio.post(api.requestURI, data: api.requestParams, onSendProgress: onProgress);
             }
           }
           break;
         case RequestMethod.PUT:
           {
-            response = await dio.put(api.requestURI, data: api.requestParams, onSendProgress: onProgress);
+            response = await _dio.put(api.requestURI, data: api.requestParams, onSendProgress: onProgress);
           }
           break;
         case RequestMethod.DELETE:
           {
-            response = await dio.delete(api.requestURI, data: api.requestParams);
+            response = await _dio.delete(api.requestURI, data: api.requestParams);
           }
           break;
         default:
@@ -157,11 +157,11 @@ class RequestClient{
         connectTimeout: 20000,
         receiveTimeout: 5000);
 
-    Dio dio = Dio(options);
+    Dio _dio = Dio(options);
 
     late Response response;
     try {
-      response = await dio.download(url, savePath, onReceiveProgress: onReceiveProgress);
+      response = await _dio.download(url, savePath, onReceiveProgress: onReceiveProgress);
     } on DioError catch (exception) {
       onError(exception.toString());
     }

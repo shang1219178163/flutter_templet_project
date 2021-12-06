@@ -1,6 +1,6 @@
 //
 //  AbsorbPointerDemo.dart
-//  fluttertemplet
+//  flutter_templet_project
 //
 //  Created by shang on 10/25/21 11:05 AM.
 //  Copyright © 10/25/21 shang. All rights reserved.
@@ -8,7 +8,7 @@
 
 
 import "package:flutter/material.dart";
-import 'package:fluttertemplet/dartExpand/ddlog.dart';
+import 'package:flutter_templet_project/extensions/ddlog.dart';
 
 class AbsorbPointerDemo extends StatefulWidget {
   @override

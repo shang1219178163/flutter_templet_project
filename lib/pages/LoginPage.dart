@@ -1,6 +1,6 @@
 //
 //  LoginPage.dart
-//  fluttertemplet
+//  flutter_templet_project
 //
 //  Created by shang on 6/3/21 9:04 AM.
 //  Copyright © 6/3/21 shang. All rights reserved.
@@ -9,7 +9,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertemplet/dartExpand/ddlog.dart';
+import 'package:flutter_templet_project/extensions/ddlog.dart';
 
 class LoginPage extends StatefulWidget {
 

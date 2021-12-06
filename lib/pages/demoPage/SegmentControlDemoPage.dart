@@ -1,7 +1,7 @@
 
 //
 //  SegmentControlDemoPage.dart
-//  fluttertemplet
+//  flutter_templet_project
 //
 //  Created by shang on 6/4/21 10:54 AM.
 //  Copyright © 6/4/21 shang. All rights reserved.
@@ -10,10 +10,10 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertemplet/basicWidget/line_segment_view.dart';
-import 'package:fluttertemplet/basicWidget/list_view_segment_control.dart';
-import 'package:fluttertemplet/dartExpand/ddlog.dart';
-import 'package:fluttertemplet/dartExpand/color_extension.dart';
+import 'package:flutter_templet_project/basicWidget/line_segment_view.dart';
+import 'package:flutter_templet_project/basicWidget/list_view_segment_control.dart';
+import 'package:flutter_templet_project/extensions/ddlog.dart';
+import 'package:flutter_templet_project/extensions/color_extension.dart';
 import 'package:styled_widget/styled_widget.dart';
 
 class SegmentControlDemoPage extends StatefulWidget {

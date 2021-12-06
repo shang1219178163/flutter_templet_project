@@ -1,19 +1,17 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertemplet/basicWidget/AttributedString.dart';
 
-import 'package:fluttertemplet/basicWidget/chioce_list.dart';
-import 'package:fluttertemplet/basicWidget/chioce_wrap.dart';
-import 'package:fluttertemplet/basicWidget/NNUserPrivacy.dart';
-import 'package:fluttertemplet/basicWidget/NNWebView.dart';
-import 'package:fluttertemplet/basicWidget/NNPopupRoute.dart';
-import 'package:fluttertemplet/basicWidget/NNAlertDialog.dart';
+import 'package:flutter_templet_project/basicWidget/chioce_list.dart';
+import 'package:flutter_templet_project/basicWidget/chioce_wrap.dart';
+import 'package:flutter_templet_project/basicWidget/NNUserPrivacy.dart';
+import 'package:flutter_templet_project/basicWidget/NNWebView.dart';
+import 'package:flutter_templet_project/basicWidget/NNPopupRoute.dart';
+import 'package:flutter_templet_project/basicWidget/NNAlertDialog.dart';
 
-import 'package:fluttertemplet/dartExpand/ddlog.dart';
-import 'package:fluttertemplet/dartExpand/richText_extension.dart';
-import 'package:fluttertemplet/dartExpand/widget_extension.dart';
-import 'package:fluttertemplet/dartExpand/alertDialog_extension.dart';
+import 'package:flutter_templet_project/extensions/ddlog.dart';
+import 'package:flutter_templet_project/extensions/richText_extension.dart';
+import 'package:flutter_templet_project/extensions/widget_extension.dart';
+import 'package:flutter_templet_project/extensions/alertDialog_extension.dart';
 import 'package:get/get.dart';
 
 import 'package:popover/popover.dart';
