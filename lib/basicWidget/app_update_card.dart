@@ -1,8 +1,8 @@
 
 import 'package:flutter/material.dart';
-import 'package:fluttertemplet/dartExpand/ddlog.dart';
+import 'package:flutter_templet_project/extensions/ddlog.dart';
 import 'package:styled_widget/styled_widget.dart';
-import 'package:fluttertemplet/Model/app_update_model.dart';
+import 'package:flutter_templet_project/Model/app_update_model.dart';
 
 class AppUpdateCard extends StatefulWidget {
   final AppUpdateItemModel data;

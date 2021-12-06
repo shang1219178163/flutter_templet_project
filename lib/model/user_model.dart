@@ -1,6 +1,6 @@
 //
 //  UserModel.dart
-//  fluttertemplet
+//  flutter_templet_project
 //
 //  Created by shang on 5/19/21 6:32 PM.
 //  Copyright © 5/19/21 shang. All rights reserved.

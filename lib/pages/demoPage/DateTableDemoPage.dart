@@ -1,6 +1,6 @@
 //
 //  DateTableDemoPage.dart
-//  fluttertemplet
+//  flutter_templet_project
 //
 //  Created by shang on 6/4/21 8:09 AM.
 //  Copyright © 6/4/21 shang. All rights reserved.
@@ -10,7 +10,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertemplet/dartExpand/ddlog.dart';
+import 'package:flutter_templet_project/extensions/ddlog.dart';
 import 'package:tuple/tuple.dart';
 
 class DateTableDemoPage extends StatefulWidget {

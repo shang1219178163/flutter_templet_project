@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertemplet/DartExpand/widget_extension.dart';
+import 'package:flutter_templet_project/extensions/widget_extension.dart';
 
 import 'chioce_wrap.dart';
 

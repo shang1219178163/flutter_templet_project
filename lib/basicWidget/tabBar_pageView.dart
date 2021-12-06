@@ -1,6 +1,6 @@
 //
 //  TabBarPageView.dart
-//  fluttertemplet
+//  flutter_templet_project
 //
 //  Created by shang on 10/22/21 5:03 PM.
 //  Copyright © 10/22/21 shang. All rights reserved.
@@ -8,7 +8,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertemplet/dartExpand/ddlog.dart';
+import 'package:flutter_templet_project/extensions/ddlog.dart';
 import 'package:tuple/tuple.dart';
 
 /// TabBar + PageViewW

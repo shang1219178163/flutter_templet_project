@@ -1,16 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fluttertemplet/APPThemeSettings.dart';
-import 'package:fluttertemplet/pages/tabBar_tabBarView_demo.dart';
-import 'package:fluttertemplet/provider/rxDart_provider_demo.dart';
-import 'package:fluttertemplet/routes/APPRouter.dart';
-import 'package:fluttertemplet/Pages/APPUserCenterPage.dart';
-import 'package:fluttertemplet/Pages/demoPage/TabBarDemoPage.dart';
-import 'package:fluttertemplet/dartExpand/popupMenuButton_extension.dart';
-import 'package:fluttertemplet/dartExpand/alertDialog_extension.dart';
-import 'package:fluttertemplet/dartExpand/ddlog.dart';
-import 'package:fluttertemplet/dartExpand/widget_extension.dart';
+import 'package:flutter_templet_project/APPThemeSettings.dart';
+import 'package:flutter_templet_project/pages/tabBar_tabBarView_demo.dart';
+import 'package:flutter_templet_project/provider/rxDart_provider_demo.dart';
+import 'package:flutter_templet_project/routes/APPRouter.dart';
+import 'package:flutter_templet_project/Pages/APPUserCenterPage.dart';
+import 'package:flutter_templet_project/Pages/demoPage/TabBarDemoPage.dart';
+import 'package:flutter_templet_project/extensions/popupMenuButton_extension.dart';
+import 'package:flutter_templet_project/extensions/alertDialog_extension.dart';
+import 'package:flutter_templet_project/extensions/ddlog.dart';
+import 'package:flutter_templet_project/extensions/widget_extension.dart';
 
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';

@@ -1,18 +1,18 @@
 //
 //  provider_list_demo.dart
-//  fluttertemplet
+//  flutter_templet_project
 //
 //  Created by shang on 10/13/21 11:30 AM.
 //  Copyright © 10/13/21 shang. All rights reserved.
 //
 
 import 'package:flutter/material.dart';
-import 'package:fluttertemplet/basicWidget/dash_line.dart';
-import 'package:fluttertemplet/dartExpand/ddlog.dart';
-import 'package:fluttertemplet/dartExpand/buildContext_extension.dart';
+import 'package:flutter_templet_project/basicWidget/dash_line.dart';
+import 'package:flutter_templet_project/extensions/ddlog.dart';
+import 'package:flutter_templet_project/extensions/buildContext_extension.dart';
 
-import 'package:fluttertemplet/model/order_model.dart';
-import 'package:fluttertemplet/routes/APPRouter.dart';
+import 'package:flutter_templet_project/model/order_model.dart';
+import 'package:flutter_templet_project/routes/APPRouter.dart';
 import 'package:tuple/tuple.dart';
 import 'notifier_demo.dart';
 

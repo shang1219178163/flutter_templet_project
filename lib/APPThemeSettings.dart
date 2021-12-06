@@ -1,6 +1,6 @@
 //
 //  APPThemeSettings.dart
-//  fluttertemplet
+//  flutter_templet_project
 //
 //  Created by shang on 7/14/21 2:18 PM.
 //  Copyright © 7/14/21 shang. All rights reserved.
@@ -8,10 +8,10 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertemplet/dartExpand/ddlog.dart';
+import 'package:flutter_templet_project/extensions/ddlog.dart';
 import 'package:get/get.dart';
 
-import 'dartExpand/widget_extension.dart';
+import 'extensions/widget_extension.dart';
 
 class APPThemeSettings{
   APPThemeSettings._internal() {

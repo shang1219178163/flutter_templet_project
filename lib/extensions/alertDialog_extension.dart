@@ -1,6 +1,6 @@
 //
 //  alertDialog_extension.dart
-//  fluttertemplet
+//  flutter_templet_project
 //
 //  Created by shang on 5/17/21 3:57 PM.
 //  Copyright © 5/17/21 shang. All rights reserved.

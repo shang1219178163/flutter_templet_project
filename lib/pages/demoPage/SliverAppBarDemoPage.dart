@@ -1,6 +1,6 @@
 //
 //  SliverAppBarDemoPage.dart
-//  fluttertemplet
+//  flutter_templet_project
 //
 //  Created by shang on 6/8/21 6:00 PM.
 //  Copyright © 6/8/21 shang. All rights reserved.
@@ -9,7 +9,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertemplet/dartExpand/color_extension.dart';
+import 'package:flutter_templet_project/extensions/color_extension.dart';
 
 class SliverAppBarDemoPage extends StatefulWidget {
 

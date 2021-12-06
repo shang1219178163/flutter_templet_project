@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertemplet/basicWidget/NNDatePicker.dart';
-import 'package:fluttertemplet/dartExpand/ddlog.dart';
+import 'package:flutter_templet_project/basicWidget/NNDatePicker.dart';
+import 'package:flutter_templet_project/extensions/ddlog.dart';
 
 class CupertinoFormDemo extends StatefulWidget {
   final String? title;

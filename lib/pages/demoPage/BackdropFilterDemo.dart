@@ -1,6 +1,6 @@
 //
 //  BackdropFilterDemo.dart
-//  fluttertemplet
+//  flutter_templet_project
 //
 //  Created by shang on 7/30/21 11:13 AM.
 //  Copyright © 7/30/21 shang. All rights reserved.
@@ -8,7 +8,7 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:fluttertemplet/basicWidget/blur_view.dart';
+import 'package:flutter_templet_project/basicWidget/blur_view.dart';
 
 class BackdropFilterDemo extends StatefulWidget {
 

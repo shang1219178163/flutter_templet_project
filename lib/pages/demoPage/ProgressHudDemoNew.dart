@@ -1,6 +1,6 @@
 //
 //  ProgressHudDemoNew.dart
-//  fluttertemplet
+//  flutter_templet_project
 //
 //  Created by shang on 5/19/21 3:50 PM.
 //  Copyright © 5/19/21 shang. All rights reserved.
@@ -8,12 +8,12 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertemplet/routes/APPRouter.dart';
+import 'package:flutter_templet_project/routes/APPRouter.dart';
 import 'package:get/get.dart';
 import 'package:styled_widget/styled_widget.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-import 'package:fluttertemplet/dartExpand/ddlog.dart';
+import 'package:flutter_templet_project/extensions/ddlog.dart';
 
 final GlobalKey _globalKey = GlobalKey();
 

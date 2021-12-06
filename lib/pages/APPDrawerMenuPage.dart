@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertemplet/APPThemeSettings.dart';
-import 'package:fluttertemplet/dartExpand/ddlog.dart';
+import 'package:flutter_templet_project/APPThemeSettings.dart';
+import 'package:flutter_templet_project/extensions/ddlog.dart';
 import 'package:get/get.dart';
 
 class APPDrawerMenuPage extends StatefulWidget {

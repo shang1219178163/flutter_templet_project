@@ -1,6 +1,6 @@
 //
 //  notifier_demo.dart
-//  fluttertemplet
+//  flutter_templet_project
 //
 //  Created by shang on 10/13/21 1:58 PM.
 //  Copyright © 10/13/21 shang. All rights reserved.
@@ -11,8 +11,8 @@
 import 'dart:collection';
 
 import 'package:flutter/cupertino.dart';
-import 'package:fluttertemplet/dartExpand/ddlog.dart';
-import 'package:fluttertemplet/model/order_model.dart';
+import 'package:flutter_templet_project/extensions/ddlog.dart';
+import 'package:flutter_templet_project/model/order_model.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
 
 /// ChangeNotifier(不推荐使用,麻烦)

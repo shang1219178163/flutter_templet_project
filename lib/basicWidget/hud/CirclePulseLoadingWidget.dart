@@ -1,6 +1,6 @@
 //
 //  CirclePulseLoadingWidget.dart
-//  fluttertemplet
+//  flutter_templet_project
 //
 //  Created by shang on 6/10/21 4:29 PM.
 //  Copyright © 6/10/21 shang. All rights reserved.

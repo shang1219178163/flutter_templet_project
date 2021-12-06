@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertemplet/APPThemeSettings.dart';
-import 'package:fluttertemplet/dartExpand/ddlog.dart';
+import 'package:flutter_templet_project/APPThemeSettings.dart';
+import 'package:flutter_templet_project/extensions/ddlog.dart';
 import 'package:get/get.dart';
 import 'package:styled_widget/styled_widget.dart';
-import 'package:fluttertemplet/pages/FirstPage.dart';
-import 'package:fluttertemplet/pages/SecondPage.dart';
-import 'package:fluttertemplet/pages/ThirdPage.dart';
-import 'package:fluttertemplet/pages/FourthPage.dart';
-import 'package:fluttertemplet/pages/BatterLevelPage.dart';
+import 'package:flutter_templet_project/pages/FirstPage.dart';
+import 'package:flutter_templet_project/pages/SecondPage.dart';
+import 'package:flutter_templet_project/pages/ThirdPage.dart';
+import 'package:flutter_templet_project/pages/FourthPage.dart';
+import 'package:flutter_templet_project/pages/BatterLevelPage.dart';
 
 
 import 'package:flutter/cupertino.dart';

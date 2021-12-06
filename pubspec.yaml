@@ -1,4 +1,4 @@
-name: fluttertemplet
+name: flutter_templet_project
 description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
@@ -39,6 +39,7 @@ dependencies:
 #  splashscreen: ^1.3.5
 
   tuple: ^2.0.0
+  flutter_screenutil: ^5.0.1
 
 #  flutter_boost: ^1.17.1
   flutter_boost:

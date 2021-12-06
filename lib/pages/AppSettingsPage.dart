@@ -1,6 +1,6 @@
 //
 //  AppAppSettingsPage.dart
-//  fluttertemplet
+//  flutter_templet_project
 //
 //  Created by shang on 5/20/21 4:54 PM.
 //  Copyright © 5/20/21 shang. All rights reserved.
@@ -10,8 +10,8 @@
 // 设置
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertemplet/APPThemeSettings.dart';
-import 'package:fluttertemplet/dartExpand/widget_extension.dart';
+import 'package:flutter_templet_project/APPThemeSettings.dart';
+import 'package:flutter_templet_project/extensions/widget_extension.dart';
 
 
 class AppSettingsPage extends StatefulWidget{

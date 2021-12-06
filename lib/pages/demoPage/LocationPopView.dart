@@ -1,6 +1,6 @@
 //
 //  LocationPopView.dart
-//  fluttertemplet
+//  flutter_templet_project
 //
 //  Created by shang on 7/29/21 9:26 AM.
 //  Copyright © 7/29/21 shang. All rights reserved.
@@ -8,11 +8,11 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:fluttertemplet/dartExpand/ddlog.dart';
+import 'package:flutter_templet_project/extensions/ddlog.dart';
 
-import 'package:fluttertemplet/dartExpand/globalKey_extension.dart';
-import 'package:fluttertemplet/dartExpand/popupMenuButton_extension.dart';
-import 'package:fluttertemplet/dartExpand/color_extension.dart';
+import 'package:flutter_templet_project/extensions/globalKey_extension.dart';
+import 'package:flutter_templet_project/extensions/popupMenuButton_extension.dart';
+import 'package:flutter_templet_project/extensions/color_extension.dart';
 
 
 class LocationPopView extends StatelessWidget {

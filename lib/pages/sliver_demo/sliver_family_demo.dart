@@ -1,23 +1,23 @@
 //
 //  sliver_family_demo.dart
-//  fluttertemplet
+//  flutter_templet_project
 //
 //  Created by shang on 10/15/21 1:57 PM.
 //  Copyright © 10/15/21 shang. All rights reserved.
 //
 
 import 'package:flutter/material.dart';
-import 'package:fluttertemplet/pages/sliver_demo/sliver_demo9.dart';
+import 'package:flutter_templet_project/pages/sliver_demo/sliver_demo9.dart';
 import 'package:tuple/tuple.dart';
 
-import 'package:fluttertemplet/pages/sliver_demo/sliver_demo1.dart';
-import 'package:fluttertemplet/pages/sliver_demo/sliver_demo2.dart';
-import 'package:fluttertemplet/pages/sliver_demo/sliver_demo3.dart';
-import 'package:fluttertemplet/pages/sliver_demo/sliver_demo4.dart';
-import 'package:fluttertemplet/pages/sliver_demo/sliver_demo5.dart';
-import 'package:fluttertemplet/pages/sliver_demo/sliver_demo6.dart';
-import 'package:fluttertemplet/pages/sliver_demo/sliver_demo7.dart';
-import 'package:fluttertemplet/pages/sliver_demo/sliver_demo8.dart';
+import 'package:flutter_templet_project/pages/sliver_demo/sliver_demo1.dart';
+import 'package:flutter_templet_project/pages/sliver_demo/sliver_demo2.dart';
+import 'package:flutter_templet_project/pages/sliver_demo/sliver_demo3.dart';
+import 'package:flutter_templet_project/pages/sliver_demo/sliver_demo4.dart';
+import 'package:flutter_templet_project/pages/sliver_demo/sliver_demo5.dart';
+import 'package:flutter_templet_project/pages/sliver_demo/sliver_demo6.dart';
+import 'package:flutter_templet_project/pages/sliver_demo/sliver_demo7.dart';
+import 'package:flutter_templet_project/pages/sliver_demo/sliver_demo8.dart';
 
 class SliverFamilyDemo extends StatefulWidget {
 

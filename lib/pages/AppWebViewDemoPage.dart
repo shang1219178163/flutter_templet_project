@@ -1,6 +1,6 @@
 //
 //  AppWebViewDemoPage.dart
-//  fluttertemplet
+//  flutter_templet_project
 //
 //  Created by shang on 6/8/21 8:54 AM.
 //  Copyright © 6/8/21 shang. All rights reserved.
@@ -10,7 +10,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:fluttertemplet/dartExpand/ddlog.dart';
+import 'package:flutter_templet_project/extensions/ddlog.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 

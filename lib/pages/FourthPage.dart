@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertemplet/APPThemeSettings.dart';
+import 'package:flutter_templet_project/APPThemeSettings.dart';
 import 'package:get/get.dart';
 import 'package:styled_widget/styled_widget.dart';
-import 'package:fluttertemplet/dartExpand/ddlog.dart';
+import 'package:flutter_templet_project/extensions/ddlog.dart';
 
 class FourthPage extends StatelessWidget {
   @override

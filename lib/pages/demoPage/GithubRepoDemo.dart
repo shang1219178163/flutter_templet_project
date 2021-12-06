@@ -1,6 +1,6 @@
 //
 //  GithubRepoDemo.dart
-//  fluttertemplet
+//  flutter_templet_project
 //
 //  Created by shang on 7/26/21 5:56 PM.
 //  Copyright © 7/26/21 shang. All rights reserved.
@@ -13,11 +13,11 @@ import 'package:flutter/material.dart';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_boost/flutter_boost.dart';
-import 'package:fluttertemplet/dartExpand/ddlog.dart';
-import 'package:fluttertemplet/model/repo_model.dart';
-import 'package:fluttertemplet/model/repository.dart';
-import 'package:fluttertemplet/network/HttpManager.dart';
-import 'package:fluttertemplet/network/RequestClient.dart';
+import 'package:flutter_templet_project/extensions/ddlog.dart';
+import 'package:flutter_templet_project/model/repo_model.dart';
+import 'package:flutter_templet_project/model/repository.dart';
+import 'package:flutter_templet_project/network/HttpManager.dart';
+import 'package:flutter_templet_project/network/RequestClient.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 class GithubRepoDemo extends StatefulWidget {

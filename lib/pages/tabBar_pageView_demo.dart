@@ -1,6 +1,6 @@
 //
 //  TabBarPageViewDemo.dart
-//  fluttertemplet
+//  flutter_templet_project
 //
 //  Created by shang on 10/22/21 2:32 PM.
 //  Copyright © 10/22/21 shang. All rights reserved.
@@ -8,22 +8,22 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertemplet/basicWidget/list_subtitle_cell.dart';
-import 'package:fluttertemplet/dartExpand/color_extension.dart';
-import 'package:fluttertemplet/dartExpand/divider_extension.dart';
-import 'package:fluttertemplet/dartExpand/list_extension.dart';
-import 'package:fluttertemplet/dartExpand/string_extension.dart';
-import 'package:fluttertemplet/main.dart';
-import 'package:fluttertemplet/basicWidget/app_update_card.dart';
-import 'package:fluttertemplet/dartExpand/ddlog.dart';
-import 'package:fluttertemplet/mockData/mock_data.dart';
-import 'package:fluttertemplet/basicWidget/section_list_view.dart';
-import 'package:fluttertemplet/routes/APPRouter.dart';
+import 'package:flutter_templet_project/basicWidget/list_subtitle_cell.dart';
+import 'package:flutter_templet_project/extensions/color_extension.dart';
+import 'package:flutter_templet_project/extensions/divider_extension.dart';
+import 'package:flutter_templet_project/extensions/list_extension.dart';
+import 'package:flutter_templet_project/extensions/string_extension.dart';
+import 'package:flutter_templet_project/main.dart';
+import 'package:flutter_templet_project/basicWidget/app_update_card.dart';
+import 'package:flutter_templet_project/extensions/ddlog.dart';
+import 'package:flutter_templet_project/mockData/mock_data.dart';
+import 'package:flutter_templet_project/basicWidget/section_list_view.dart';
+import 'package:flutter_templet_project/routes/APPRouter.dart';
 
 import 'package:get/get.dart';
 import 'package:tuple/tuple.dart';
 
-import 'package:fluttertemplet/dartExpand/widget_extension.dart';
+import 'package:flutter_templet_project/extensions/widget_extension.dart';
 
 
 class TabBarPageViewDemo extends StatefulWidget {

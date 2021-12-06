@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:fluttertemplet/dartExpand/ddlog.dart';
+import 'package:flutter_templet_project/extensions/ddlog.dart';
 import 'package:styled_widget/styled_widget.dart';
 
 ///
@@ -137,15 +137,13 @@ class _AppUpgradeWidget extends State<AppUpgradeView> {
   ///
   _buildAppInfo() {
     return Container(
-        padding: EdgeInsets.only(left: 15, right: 15, bottom: 8),
-        // height: 200,
-        child:
-            Text(
-              widget.content,
-              style: widget.contentStyle ?? TextStyle(fontSize: 15),
-              
-            ).backgroundColor(Colors.white)
-            ,
+      padding: EdgeInsets.only(left: 15, right: 15, bottom: 8),
+      // height: 200,
+      child:
+          Text(
+            widget.content,
+            style: widget.contentStyle ?? TextStyle(fontSize: 15),
+          ).backgroundColor(Colors.white),
     );
   }
 

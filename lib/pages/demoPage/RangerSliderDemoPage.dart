@@ -1,6 +1,6 @@
 //
 //  RangerSliderDemoPage.dart
-//  fluttertemplet
+//  flutter_templet_project
 //
 //  Created by shang on 6/5/21 9:44 AM.
 //  Copyright © 6/5/21 shang. All rights reserved.

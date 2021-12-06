@@ -1,92 +1,94 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertemplet/Provider/provider_list_demo.dart';
-import 'package:fluttertemplet/basicWidget/responsive_column.dart';
-import 'package:fluttertemplet/pages/demoPage/TabBarViewDemo.dart';
-import 'package:fluttertemplet/pages/demoPage/AbsorbPointerDemo.dart';
-import 'package:fluttertemplet/pages/demoPage/AnimatedDemoPage.dart';
-import 'package:fluttertemplet/pages/demoPage/BackdropFilterDemo.dart';
-import 'package:fluttertemplet/pages/demoPage/ContextMenuActionDemo.dart';
-import 'package:fluttertemplet/pages/demoPage/CupertinoFormDemo.dart';
-import 'package:fluttertemplet/pages/demoPage/DateTimeDemo.dart';
-import 'package:fluttertemplet/pages/demoPage/ExpandIconDemo.dart';
-import 'package:fluttertemplet/pages/demoPage/ExpandIconDemoNew.dart';
-import 'package:fluttertemplet/pages/demoPage/GithubRepoDemo.dart';
-import 'package:fluttertemplet/pages/demoPage/GridViewDemoPage.dart';
-import 'package:fluttertemplet/pages/demoPage/GridPaperDemo.dart';
+import 'package:flutter_templet_project/Provider/provider_list_demo.dart';
+import 'package:flutter_templet_project/basicWidget/responsive_column.dart';
+import 'package:flutter_templet_project/pages/demoPage/OffstageDemo.dart';
+import 'package:flutter_templet_project/pages/demoPage/TabBarViewDemo.dart';
+import 'package:flutter_templet_project/pages/demoPage/AbsorbPointerDemo.dart';
+import 'package:flutter_templet_project/pages/demoPage/AnimatedDemoPage.dart';
+import 'package:flutter_templet_project/pages/demoPage/BackdropFilterDemo.dart';
+import 'package:flutter_templet_project/pages/demoPage/ContextMenuActionDemo.dart';
+import 'package:flutter_templet_project/pages/demoPage/CupertinoFormDemo.dart';
+import 'package:flutter_templet_project/pages/demoPage/DateTimeDemo.dart';
+import 'package:flutter_templet_project/pages/demoPage/ExpandIconDemo.dart';
+import 'package:flutter_templet_project/pages/demoPage/ExpandIconDemoNew.dart';
+import 'package:flutter_templet_project/pages/demoPage/GithubRepoDemo.dart';
+import 'package:flutter_templet_project/pages/demoPage/GridViewDemoPage.dart';
+import 'package:flutter_templet_project/pages/demoPage/GridPaperDemo.dart';
 
-import 'package:fluttertemplet/pages/demoPage/HudProgressDemo.dart';
-import 'package:fluttertemplet/pages/demoPage/IndexedStackDemo.dart';
-import 'package:fluttertemplet/pages/demoPage/LayoutBuilderDemo.dart';
-import 'package:fluttertemplet/pages/demoPage/LocationPopView.dart';
-import 'package:fluttertemplet/pages/demoPage/MenuDemo.dart';
-import 'package:fluttertemplet/pages/demoPage/NestedScrollViewDemo.dart';
-import 'package:fluttertemplet/pages/demoPage/NumberFormatDemo.dart';
-import 'package:fluttertemplet/pages/demoPage/NumberStepperDemoPage.dart';
-import 'package:fluttertemplet/pages/demoPage/ProgressHudDemo.dart';
-import 'package:fluttertemplet/pages/demoPage/RecordListDemo.dart';
-import 'package:fluttertemplet/pages/demoPage/ReorderableListViewDemoPage.dart';
-import 'package:fluttertemplet/pages/demoPage/RichTextDemo.dart';
-import 'package:fluttertemplet/pages/demoPage/SliverAppBarDemoPage.dart';
+import 'package:flutter_templet_project/pages/demoPage/HudProgressDemo.dart';
+import 'package:flutter_templet_project/pages/demoPage/IndexedStackDemo.dart';
+import 'package:flutter_templet_project/pages/demoPage/LayoutBuilderDemo.dart';
+import 'package:flutter_templet_project/pages/demoPage/LocationPopView.dart';
+import 'package:flutter_templet_project/pages/demoPage/MenuDemo.dart';
+import 'package:flutter_templet_project/pages/demoPage/NestedScrollViewDemo.dart';
+import 'package:flutter_templet_project/pages/demoPage/NumberFormatDemo.dart';
+import 'package:flutter_templet_project/pages/demoPage/NumberStepperDemoPage.dart';
+import 'package:flutter_templet_project/pages/demoPage/ProgressHudDemo.dart';
+import 'package:flutter_templet_project/pages/demoPage/RecordListDemo.dart';
+import 'package:flutter_templet_project/pages/demoPage/ReorderableListViewDemoPage.dart';
+import 'package:flutter_templet_project/pages/demoPage/RichTextDemo.dart';
+import 'package:flutter_templet_project/pages/demoPage/SliverAppBarDemoPage.dart';
 
-import 'package:fluttertemplet/Pages/APPNotFoundPage.dart';
-import 'package:fluttertemplet/Pages/AppSettingsPage.dart';
-import 'package:fluttertemplet/Pages/FirstPage.dart';
-import 'package:fluttertemplet/Pages/FourthPage.dart';
-import 'package:fluttertemplet/Pages/SecondPage.dart';
-import 'package:fluttertemplet/Pages/ThirdPage.dart';
-import 'package:fluttertemplet/pages/demoPage/banner_demo.dart';
-import 'package:fluttertemplet/pages/demoPage/will_pop_scope_demo.dart';
-import 'package:fluttertemplet/pages/system_icons_page.dart';
-import 'package:fluttertemplet/pages/tabBar_reuse_page_demo.dart';
-import 'package:fluttertemplet/pages/tabBar_tabBarView_demo.dart';
-import 'package:fluttertemplet/pages/tabBar_pageView_demo.dart';
-
-
-import 'package:fluttertemplet/Pages/demoPage/AlertDialogDemoPage.dart';
-import 'package:fluttertemplet/Pages/demoPage/AlertSheetDemoPage.dart';
-import 'package:fluttertemplet/Pages/demoPage/CupertinoTabScaffoldDemoPage.dart';
-// import 'package:fluttertemplet/Pages/demoPage/GridViewDemoPage.dart';
-import 'package:fluttertemplet/Pages/demoPage/LocalNotifationDemoPage.dart';
-import 'package:fluttertemplet/Pages/demoPage/PageViewDemo.dart';
-import 'package:fluttertemplet/Pages/demoPage/PickerDemoPage.dart';
-import 'package:fluttertemplet/Pages/demoPage/ProgressHudDemoNew.dart';
-import 'package:fluttertemplet/Pages/demoPage/SnackBarDemoPage.dart';
-import 'package:fluttertemplet/Pages/demoPage/TextFieldDemo.dart';
-import 'package:fluttertemplet/Pages/demoPage/SlidableDemo.dart';
-import 'package:fluttertemplet/pages/demoPage/CarouselSliderDemoPage.dart';
-import 'package:fluttertemplet/pages/demoPage/DateTableDemoPage.dart';
-import 'package:fluttertemplet/pages/demoPage/DraggableDemoPage.dart';
-import 'package:fluttertemplet/pages/demoPage/DraggableScrollableSheetDemoPage.dart';
-import 'package:fluttertemplet/pages/demoPage/ProgressIndicatorDemoPage.dart';
-import 'package:fluttertemplet/pages/demoPage/RangerSliderDemoPage.dart';
-import 'package:fluttertemplet/pages/demoPage/SegmentControlDemoPage.dart';
-import 'package:fluttertemplet/pages/demoPage/SliverPersistentHeaderDemo.dart';
-import 'package:fluttertemplet/pages/demoPage/StepperDemoPage.dart';
-import 'package:fluttertemplet/pages/demoPage/TabBarDemoPage.dart';
-import 'package:fluttertemplet/pages/demoPage/TableDemo.dart';
-
-import 'package:fluttertemplet/pages/AppWebViewDemoPage.dart';
-import 'package:fluttertemplet/pages/ForgetPasswordPage.dart';
-import 'package:fluttertemplet/pages/LoginPage.dart';
-import 'package:fluttertemplet/pages/LoginPage2.dart';
-import 'package:fluttertemplet/pages/SigninPage.dart';
-import 'package:fluttertemplet/Pages/textlessDemo.dart';
-import 'package:fluttertemplet/pages/sliver_demo/sliver_family_demo.dart';
-
-import 'package:fluttertemplet/pages/demoPage/FutureBuilderDemo.dart';
-import 'package:fluttertemplet/pages/demoPage/StreamBuilderDemo.dart';
-import 'package:fluttertemplet/pages/demoPage/AnimatedSwitcherDemo.dart';
-import 'package:fluttertemplet/pages/demoPage/AnimatedWidgetDemo.dart';
-import 'package:fluttertemplet/provider/getx_state_demo.dart';
-import 'package:fluttertemplet/provider/rxDart_provider_demo.dart';
-import 'package:fluttertemplet/provider/state_manager_demo.dart';
+import 'package:flutter_templet_project/Pages/APPNotFoundPage.dart';
+import 'package:flutter_templet_project/Pages/AppSettingsPage.dart';
+import 'package:flutter_templet_project/Pages/FirstPage.dart';
+import 'package:flutter_templet_project/Pages/FourthPage.dart';
+import 'package:flutter_templet_project/Pages/SecondPage.dart';
+import 'package:flutter_templet_project/Pages/ThirdPage.dart';
+import 'package:flutter_templet_project/pages/demoPage/banner_demo.dart';
+import 'package:flutter_templet_project/pages/demoPage/will_pop_scope_demo.dart';
+import 'package:flutter_templet_project/pages/system_icons_page.dart';
+import 'package:flutter_templet_project/pages/tabBar_reuse_page_demo.dart';
+import 'package:flutter_templet_project/pages/tabBar_tabBarView_demo.dart';
+import 'package:flutter_templet_project/pages/tabBar_pageView_demo.dart';
 
 
-import 'package:fluttertemplet/vendor/popover_demo.dart';
+import 'package:flutter_templet_project/Pages/demoPage/AlertDialogDemoPage.dart';
+import 'package:flutter_templet_project/Pages/demoPage/AlertSheetDemoPage.dart';
+import 'package:flutter_templet_project/Pages/demoPage/CupertinoTabScaffoldDemoPage.dart';
+// import 'package:flutter_templet_project/Pages/demoPage/GridViewDemoPage.dart';
+import 'package:flutter_templet_project/Pages/demoPage/LocalNotifationDemoPage.dart';
+import 'package:flutter_templet_project/Pages/demoPage/PageViewDemo.dart';
+import 'package:flutter_templet_project/Pages/demoPage/PickerDemoPage.dart';
+import 'package:flutter_templet_project/Pages/demoPage/ProgressHudDemoNew.dart';
+import 'package:flutter_templet_project/Pages/demoPage/SnackBarDemoPage.dart';
+import 'package:flutter_templet_project/Pages/demoPage/TextFieldDemo.dart';
+import 'package:flutter_templet_project/Pages/demoPage/SlidableDemo.dart';
+import 'package:flutter_templet_project/pages/demoPage/CarouselSliderDemoPage.dart';
+import 'package:flutter_templet_project/pages/demoPage/DateTableDemoPage.dart';
+import 'package:flutter_templet_project/pages/demoPage/DraggableDemoPage.dart';
+import 'package:flutter_templet_project/pages/demoPage/DraggableScrollableSheetDemoPage.dart';
+import 'package:flutter_templet_project/pages/demoPage/ProgressIndicatorDemoPage.dart';
+import 'package:flutter_templet_project/pages/demoPage/RangerSliderDemoPage.dart';
+import 'package:flutter_templet_project/pages/demoPage/SegmentControlDemoPage.dart';
+import 'package:flutter_templet_project/pages/demoPage/SliverPersistentHeaderDemo.dart';
+import 'package:flutter_templet_project/pages/demoPage/StepperDemoPage.dart';
+import 'package:flutter_templet_project/pages/demoPage/TabBarDemoPage.dart';
+import 'package:flutter_templet_project/pages/demoPage/TableDemo.dart';
+
+import 'package:flutter_templet_project/pages/AppWebViewDemoPage.dart';
+import 'package:flutter_templet_project/pages/ForgetPasswordPage.dart';
+import 'package:flutter_templet_project/pages/LoginPage.dart';
+import 'package:flutter_templet_project/pages/LoginPage2.dart';
+import 'package:flutter_templet_project/pages/SigninPage.dart';
+import 'package:flutter_templet_project/Pages/textlessDemo.dart';
+import 'package:flutter_templet_project/pages/sliver_demo/sliver_family_demo.dart';
+
+import 'package:flutter_templet_project/pages/demoPage/FutureBuilderDemo.dart';
+import 'package:flutter_templet_project/pages/demoPage/StreamBuilderDemo.dart';
+import 'package:flutter_templet_project/pages/demoPage/AnimatedSwitcherDemo.dart';
+import 'package:flutter_templet_project/pages/demoPage/AnimatedWidgetDemo.dart';
+import 'package:flutter_templet_project/pages/test_page.dart';
+import 'package:flutter_templet_project/provider/getx_state_demo.dart';
+import 'package:flutter_templet_project/provider/rxDart_provider_demo.dart';
+import 'package:flutter_templet_project/provider/state_manager_demo.dart';
+
+
+import 'package:flutter_templet_project/vendor/popover_demo.dart';
 
 import 'package:get/get.dart';
-import 'package:fluttertemplet/main.dart';
+import 'package:flutter_templet_project/main.dart';
 
 ///https://www.jianshu.com/p/b9d6ec92926f
 class APPRouter {
@@ -187,6 +189,8 @@ class APPRouter {
 
   static const getxStateDemo = '/getxStateDemo';
   static const responsiveColumnDemo = '/responsiveColumnDemo';
+  static const testPage = '/testPage';
+  static const offstageDemo = '/OffstageDemo';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -307,6 +311,9 @@ class AppPage{
     GetPage(name: APPRouter.stateManagerDemo, page: () => StateManagerDemo(), ),
     GetPage(name: APPRouter.getxStateDemo, page: () => GetxStateDemo(), ),
     GetPage(name: APPRouter.responsiveColumnDemo, page: () => ResponsiveColumnDemo(), ),
+    GetPage(name: APPRouter.testPage, page: () => TestPage(), ),
+    GetPage(name: APPRouter.offstageDemo, page: () => OffstageDemo(), ),
+
 
   ];
 

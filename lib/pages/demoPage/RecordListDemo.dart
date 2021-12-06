@@ -1,6 +1,6 @@
 //
 //  RecordListDemo.dart
-//  fluttertemplet
+//  flutter_templet_project
 //
 //  Created by shang on 5/19/21 6:32 PM.
 //  Copyright © 5/19/21 shang. All rights reserved.
@@ -8,7 +8,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertemplet/dartExpand/ddlog.dart';
+import 'package:flutter_templet_project/extensions/ddlog.dart';
 import 'package:intl/intl.dart';
 import 'package:styled_widget/styled_widget.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';

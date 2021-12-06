@@ -1,6 +1,6 @@
 //
 //  ProgressHudDemo.dart
-//  fluttertemplet
+//  flutter_templet_project
 //
 //  Created by shang on 7/27/21 5:15 PM.
 //  Copyright © 7/27/21 shang. All rights reserved.
@@ -8,8 +8,8 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertemplet/basicWidget/hud/progresshud.dart';
-import 'package:fluttertemplet/dartExpand/ddlog.dart';
+import 'package:flutter_templet_project/basicWidget/hud/progresshud.dart';
+import 'package:flutter_templet_project/extensions/ddlog.dart';
 
 class ProgressHudDemo extends StatefulWidget {
   final String? title;

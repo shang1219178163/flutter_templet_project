@@ -10,8 +10,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:fluttertemplet/dartExpand/color_extension.dart';
-import 'package:fluttertemplet/dartExpand/num_extension.dart';
+import 'package:flutter_templet_project/extensions/color_extension.dart';
+import 'package:flutter_templet_project/extensions/num_extension.dart';
 
 class SliverDemo9 extends StatefulWidget {
   final String? title;
