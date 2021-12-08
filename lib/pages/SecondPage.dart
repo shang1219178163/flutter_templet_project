@@ -78,7 +78,6 @@ class _SecondPageState extends State<SecondPage> {
   // late RenderBox renderBox;
 
   buildListView(BuildContext context) {
-
     return ListView(
       children: [
         Column(
@@ -92,7 +91,6 @@ class _SecondPageState extends State<SecondPage> {
             ElevatedButton.icon(
               icon: Icon(Icons.send),
               label: Text("ElevatedButton"),
-              // onPressed: () => ddlog('pressed'),
               key: _globalKey,
               onPressed: (){
                 // _showCustomPopView();
@@ -220,6 +218,25 @@ class _SecondPageState extends State<SecondPage> {
               },
             ),
             buildToggleButtons(context),
+
+            FloatingActionButton(
+              mini: true,
+              backgroundColor: const Color(0xff03dac6),
+              foregroundColor: Colors.black,
+              onPressed: () {
+                ddlog("FloatingActionButton");
+              },
+              child: Icon(Icons.add),
+            ),
+            FloatingActionButton.extended(
+              backgroundColor: const Color(0xff03dac6),
+              foregroundColor: Colors.black,
+              onPressed: () {
+                ddlog("FloatingActionButton.extended");
+              },
+              icon: Icon(Icons.add),
+              label: Text('EXTENDED'),
+            )
           ],
         ),
       ],
@@ -232,13 +249,11 @@ class _SecondPageState extends State<SecondPage> {
     return ToggleButtons(
       isSelected: _selecteds,
       children: <Widget>[
-        Icon(Icons.local_cafe),
-        Icon(Icons.fastfood),
-        Icon(Icons.cake),
+        Icon(Icons.format_align_right),
+        Icon(Icons.format_align_center),
+        Icon(Icons.format_align_left),
       ],
       onPressed: (index) {
-        _selecteds[index] = !_selecteds[index];
-        ddlog(_selecteds);
         setState(() {
           _selecteds[index] = !_selecteds[index];
         });
