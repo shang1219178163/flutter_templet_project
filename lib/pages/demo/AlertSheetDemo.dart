@@ -121,7 +121,7 @@ class _AlertSheetDemoState extends State<AlertSheetDemo> {
         {
           // List<String> list = List.generate(100, (i) => 'item $i');
           // showSearch(context: context, delegate: CustomSearchDelegate(list: list, select: ""));
-          Get.toNamed(APPRouter.showSearchDemoPage, arguments: []);
+          Get.toNamed(APPRouter.showSearchDemo, arguments: []);
         }
         break;
       // case 7:

@@ -286,9 +286,9 @@ final _tuples = [
   Tuple2("其它", _others)];
 
 var _list = [
-  Tuple2(APPRouter.alertDialogDemoPage, "AlertDialog", ),
-  Tuple2(APPRouter.alertSheetDemoPage, "AlertSheet", ),
-  Tuple2(APPRouter.appWebViewDemoPage, "appWebViewDemoPage", ),
+  Tuple2(APPRouter.alertDialogDemo, "AlertDialog", ),
+  Tuple2(APPRouter.alertSheetDemo, "AlertSheet", ),
+  Tuple2(APPRouter.appWebViewDemo, "appWebViewDemo", ),
 
   Tuple2(APPRouter.backdropFilterDemo, "backdropFilterDemo", ),
 
@@ -298,14 +298,14 @@ var _list = [
 
   Tuple2(APPRouter.dateTableDemo, "dateTableDemo", ),
   Tuple2(APPRouter.dataTableDemoNew, "dataTableDemoNew", ),
-  Tuple2(APPRouter.draggableDemoPage, "draggableDemoPage", ),
-  Tuple2(APPRouter.draggableScrollableSheetDemoPage, "draggableScrollableSheetDemoPage", ),
+  Tuple2(APPRouter.draggableDemo, "draggableDemo", ),
+  Tuple2(APPRouter.draggableScrollableSheetDemo, "draggableScrollableSheetDemo", ),
 
   Tuple2(APPRouter.enlargeStrategyDemo, "enlargeStrategyDemo", ),
   Tuple2(APPRouter.expandIconDemo, "expandIconDemo", ),
   Tuple2(APPRouter.expandIconDemoNew, "ExpandIconDemoNew", ),
 
-  Tuple2(APPRouter.gridViewDemoPage, "GridView", ),
+  Tuple2(APPRouter.gridViewDemo, "GridView", ),
   Tuple2(APPRouter.gridPaperDemo, "gridPaperDemo", ),
 
   Tuple2(APPRouter.menuDemo, "MenuDemo", ),
@@ -313,25 +313,25 @@ var _list = [
   Tuple2(APPRouter.pageViewDemo, "PageViewDemo", ),
   Tuple2(APPRouter.pageViewTabBarWidget, "PageViewTabBarWidget", ),
 
-  Tuple2(APPRouter.pickerDemoPage, "pickerDemoPage", ),
+  Tuple2(APPRouter.pickerDemo, "pickerDemo", ),
   Tuple2(APPRouter.progressHudDemo, "ProgressHudDemo", ),
   Tuple2(APPRouter.progressHudDemoNew, "ProgressHudDemoNew", ),
-  Tuple2(APPRouter.progressIndicatorDemoPage, "ProgressIndicatorDemo", ),
+  Tuple2(APPRouter.progressIndicatorDemo, "ProgressIndicatorDemo", ),
 
-  Tuple2(APPRouter.reorderableListViewDemoPage, "reorderableListViewDemoPage", ),
-  Tuple2(APPRouter.recordListDemo, "textFieldDemoPage", ),
-  Tuple2(APPRouter.rangerSliderDemoPage, "rangerSliderDemoPage", ),
+  Tuple2(APPRouter.reorderableListViewDemo, "reorderableListViewDemo", ),
+  Tuple2(APPRouter.recordListDemo, "textFieldDemo", ),
+  Tuple2(APPRouter.rangerSliderDemo, "rangerSliderDemo", ),
 
-  Tuple2(APPRouter.segmentControlDemoPage, "segmentControlDemoPage", ),
+  Tuple2(APPRouter.segmentControlDemo, "segmentControlDemo", ),
   Tuple2(APPRouter.snackBarDemo, "SnackBar", ),
-  Tuple2(APPRouter.stepperDemoPage, "stepperDemoPage", ),
+  Tuple2(APPRouter.stepperDemo, "stepperDemo", ),
   Tuple2(APPRouter.slidableDemo, "SlidableDemo", ),
-  Tuple2(APPRouter.sliverAppBarDemoPage, "SliverAppBarDemo", ),
+  Tuple2(APPRouter.sliverAppBarDemo, "SliverAppBarDemo", ),
   Tuple2(APPRouter.sliverFamilyDemo, "SliverFamilyDemo", ),
   Tuple2(APPRouter.sliverFamilyPageViewDemo, "sliverFamilyPageViewDemo", ),
   Tuple2(APPRouter.sliverPersistentHeaderDemo, "sliverPersistentHeaderDemo", ),
 
-  Tuple2(APPRouter.tabBarDemoPage, "tabBarDemoPage", ),
+  Tuple2(APPRouter.tabBarDemo, "tabBarDemo", ),
   Tuple2(APPRouter.textlessDemo, "textlessDemo", ),
   Tuple2(APPRouter.textFieldDemo, "textFieldDemo", ),
 
@@ -355,6 +355,9 @@ var _list = [
   Tuple2(APPRouter.chipDemo, "chipDemo", ),
   Tuple2(APPRouter.chipFilterDemo, "chipFilterDemo", ),
   Tuple2(APPRouter.bottomSheetDemo, "bottomSheetDemo", ),
+  Tuple2(APPRouter.timePickerDemo, "timePickerDemo", ),
+
+
 
 ];
 
@@ -371,8 +374,8 @@ var _specials = [
 ];
 
 var _animateds = [
-  // Tuple2(APPRouter.animatedIconDemoPage, "AnimatedIconDemoPage", ),
-  Tuple2(APPRouter.animatedDemoPage, "animatedDemoPage", ),
+  // Tuple2(APPRouter.animatedIconDemo, "AnimatedIconDemo", ),
+  Tuple2(APPRouter.animatedDemo, "animatedDemo", ),
 
   Tuple2(APPRouter.animatedSwitcherDemo, "animatedSwitcherDemo", ),
   Tuple2(APPRouter.animatedWidgetDemo, "animatedWidgetDemo", ),
@@ -384,7 +387,7 @@ var _customeWidgets = [
   Tuple2(APPRouter.datePickerPage, "DatePickerPage", ),
   Tuple2(APPRouter.dateTimeDemo, "dateTimeDemo", ),
   Tuple2(APPRouter.hudProgressDemo, "HudProgressDemo", ),
-  Tuple2(APPRouter.localNotifationDemoPage, "localNotifationDemoPage", ),
+  Tuple2(APPRouter.localNotifationDemo, "localNotifationDemo", ),
   Tuple2(APPRouter.locationPopView, "locationPopView", ),
   Tuple2(APPRouter.numberStepperDemo, "NumberStepperDemo", ),
   Tuple2(APPRouter.numberFormatDemo, "numberFormatDemo", ),

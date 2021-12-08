@@ -11,13 +11,13 @@ import 'package:flutter_templet_project/extensions/widget_extension.dart';
 
 import 'ListTileDemo.dart';
 
-class PickerDemoPage extends StatefulWidget {
+class PickerDemo extends StatefulWidget {
 
   @override
-  _PickerDemoPageState createState() => _PickerDemoPageState();
+  _PickerDemoState createState() => _PickerDemoState();
 }
 
-class _PickerDemoPageState extends State<PickerDemoPage> {
+class _PickerDemoState extends State<PickerDemo> {
 
   var titles = [
     "datePicker", "datePicker浅封装", "datePicker封装",
