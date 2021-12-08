@@ -191,7 +191,7 @@ extension WidgetExt on Widget {
             Expanded(child: Text(title,
               style: TextStyle(fontSize: 17,
                   fontWeight: FontWeight.normal,
-                  color: Colors.black,
+                  color: Colors.black54,
                   backgroundColor: Colors.white,
                   decoration: TextDecoration.none),
               textAlign: TextAlign.center,)
@@ -206,6 +206,7 @@ extension WidgetExt on Widget {
               },
             ),
           ],),
+          Divider(),
           Container(
             // height: (height ?? 300) - kCupertinoButtonHeight,
             color: Colors.white,
@@ -270,7 +271,7 @@ extension WidgetExt on Widget {
             height: 216,
             color: Colors.white,
             child: CupertinoDatePicker(
-                mode: mode ?? CupertinoDatePickerMode.dateAndTime,
+                mode: mode ?? CupertinoDatePickerMode.date,
                 initialDateTime: initialDateTime,
                 onDateTimeChanged: (val) {
                   dateTime = val;
