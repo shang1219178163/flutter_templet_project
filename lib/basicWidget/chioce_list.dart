@@ -43,12 +43,13 @@ class _ChioceListState extends State<ChioceList> {
   Widget _buildListView(BuildContext context) {
     return Material(
       child: Container(
-        color: widget.backgroudColor ?? Colors.black.withAlpha(35),
+        color: widget.backgroudColor,
         height: 73 * widget.children.length.toDouble(),
         width: 0,
         child: ListView(
           physics: NeverScrollableScrollPhysics(),//禁止滑动
           children: widget.children.map((e) => ListTile(
+            // tileColor: Colors.white,
             title: e.title,
             subtitle: e.subtitle,
             trailing: widget.indexs.contains(widget.children.indexOf(e)) ? Icon(Icons.check) : null,
@@ -65,7 +66,7 @@ class _ChioceListState extends State<ChioceList> {
   Widget _buildListViewSeparated(BuildContext context) {
     return Material(
       // color: Colors.transparent,
-      color: widget.backgroudColor ?? Colors.black.withAlpha(35),
+      color: widget.backgroudColor,
       child: ListView.separated(
         padding: EdgeInsets.all(0),
         itemCount: widget.children.length,

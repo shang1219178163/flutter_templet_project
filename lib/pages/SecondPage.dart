@@ -61,7 +61,6 @@ class _SecondPageState extends State<SecondPage> {
             // child: ColorFiltered(colorFilter: ColorFilter.mode(Colors.grey, BlendMode.saturation),
             //   child: buildListView(context),
             // ),
-
           ),
           floatingActionButton: FloatingActionButton(
             onPressed: () {
@@ -164,16 +163,17 @@ class _SecondPageState extends State<SecondPage> {
               height: 10,
             ),
             TextButtonExt.build(
-                    text: Text("菜单right"),
-                    image: Icon(Icons.info),
-                    imageAlignment: ImageAlignment.right,
-                    callback: (value) {
-                      ddlog(value.data);
-                    })
+              text: Text("菜单right"),
+              image: Icon(Icons.info),
+              imageAlignment: ImageAlignment.right,
+              callback: (value) {
+                ddlog(value.data);
+              })
                 .decorated(
-                    borderRadius: BorderRadius.all(Radius.circular(5)),
-                    border: Border.all(
-                        width: 1.0, color: Theme.of(context).primaryColor)),
+                borderRadius: BorderRadius.all(Radius.circular(5)),
+                border: Border.all(
+                      width: 1.0,
+                      color: Theme.of(context).primaryColor)),
             SizedBox(
               height: 10,
             ),

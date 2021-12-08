@@ -8,6 +8,14 @@
 
 
 extension ListExt<E> on List<E>{
+  ///运算符重载
+  List<E> operator *(int value) {
+    var l = <E>[];
+    for (var i = 0; i < value; i++) {
+      l.addAll([...this]);
+    }
+    return l;
+  }
 
   static bool isNotEmpty(List l) {
     return l != null && l.isNotEmpty;

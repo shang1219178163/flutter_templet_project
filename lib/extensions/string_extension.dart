@@ -12,6 +12,7 @@ import 'dart:convert';
 import 'package:flutter_templet_project/extensions/ddlog.dart';
 
 extension StringExt on String{
+
   static bool isNotEmpty(String s) {
     return s != null && s.isNotEmpty;
   }
