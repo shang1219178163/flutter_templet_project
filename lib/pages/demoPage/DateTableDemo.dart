@@ -1,5 +1,5 @@
 //
-//  DateTableDemoPage.dart
+//  DateTableDemo.dart
 //  flutter_templet_project
 //
 //  Created by shang on 6/4/21 8:09 AM.
@@ -13,18 +13,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extensions/ddlog.dart';
 import 'package:tuple/tuple.dart';
 
-class DateTableDemoPage extends StatefulWidget {
+class DateTableDemo extends StatefulWidget {
 
   final String? title;
 
-  DateTableDemoPage({ Key? key, this.title}) : super(key: key);
+  DateTableDemo({ Key? key, this.title}) : super(key: key);
 
   
   @override
-  _DateTableDemoPageState createState() => _DateTableDemoPageState();
+  _DateTableDemoState createState() => _DateTableDemoState();
 }
 
-class _DateTableDemoPageState extends State<DateTableDemoPage> {
+class _DateTableDemoState extends State<DateTableDemo> {
 
   // List<String> titles = ['姓名', '年龄', '性别', '出生年份', '出生月份'];
   List<Tuple2> titles = [
@@ -70,8 +70,6 @@ class _DateTableDemoPageState extends State<DateTableDemoPage> {
 
   var _sortAscending = true;
   var _sortColumnIndex = 0;
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -143,8 +141,9 @@ class _DateTableDemoPageState extends State<DateTableDemoPage> {
               DataCell(Text('${e.birdthYear}')),
               DataCell(Text('${e.birdthMonth}')),
             ],
-            selected: e.isSelected ?? false,
+            selected: e.isSelected,
             onSelectChanged: (bool? value) {
+              if (value == null) return;
               setState(() {
                 e.isSelected = value;
               });
@@ -156,7 +155,6 @@ class _DateTableDemoPageState extends State<DateTableDemoPage> {
     );
   }
 
-  
   void _changeSort({required int columnIndex, required bool ascending}) {
     setState(() {
       _sortColumnIndex = columnIndex;
@@ -213,33 +211,7 @@ class _DateTableDemoPageState extends State<DateTableDemoPage> {
       }
     });
   }
-
-  ///
-  // @override
-  // Widget buildDemo(BuildContext context) {
-  //   return SizedBox(
-  //     width: double.infinity,
-  //     child: DataTable(
-  //       columns: <DataColumn>[
-  //         DataColumn(
-  //           label: Text('Number'),
-  //         ),
-  //       ],
-  //       rows: List<DataRow>.generate(numItems, (int index) => DataRow(
-  //           cells: [ DataCell(Text('Row $index')) ],
-  //           selected: selected[index],
-  //           onSelectChanged: (bool? value) {
-  //             setState(() {
-  //               selected[index] = value!;
-  //             });
-  //           },
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
 }
-
 
 class User {
   User({required this.name, required this.sex, required this.age, required this.birdthYear, required this.birdthMonth});
@@ -251,6 +223,91 @@ class User {
   final int birdthYear;
   final int birdthMonth;
 
-  bool? isSelected = false;
+  bool isSelected = false;
 
+}
+
+
+class DataTableDemoNew extends StatelessWidget {
+  List<Tuple2> titles = [
+    Tuple2("姓名", "name",),
+    Tuple2("性别", "sex",),
+    Tuple2("年龄", "age",),
+    Tuple2('出生年份', "birdthYear",),
+    Tuple2('出生月份', "birdthMonth",),
+  ];
+
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Data Tables'),
+      ),
+      body: ListView(
+        padding: const EdgeInsets.all(16),
+        children: [
+          PaginatedDataTable(
+            header: Text('Header Text'),
+            rowsPerPage: 3,
+            columns: titles.map((e) => DataColumn(
+              label: Text(e.item1),
+
+            )).toList(),
+            source: _DataSource(context),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _DataSource extends DataTableSource {
+
+  _DataSource(this.context) {
+    _rows = <User>[
+      User(name: "name", sex: "男", age: 28, birdthYear: 2020, birdthMonth: 12),
+      User(name: "name1", sex: "女", age: 18, birdthYear: 2018, birdthMonth: 8),
+      User(name: "name2", sex: "男", age: 21, birdthYear: 2017, birdthMonth: 5),
+      User(name: "name3", sex: "女", age: 19, birdthYear: 2019, birdthMonth: 7),
+    ];
+  }
+
+  final BuildContext context;
+  late List<User> _rows;
+
+  int _selectedCount = 0;
+
+  @override
+  DataRow? getRow(int index) {
+    if (index >= _rows.length) return null;
+    final e = _rows[index];
+    return DataRow.byIndex(
+      index: index,
+      selected: e.isSelected,
+      onSelectChanged: (value) {
+        if (value == null) return;
+        if (e.isSelected != value) {
+          _selectedCount += value ? 1 : -1;
+          assert(_selectedCount >= 0);
+          e.isSelected = value;
+          notifyListeners();
+        }
+      },
+      cells: [
+        DataCell(Text('${e.name}')),
+        DataCell(Text('${e.age}')),
+        DataCell(Text('${e.sex}')),
+        DataCell(Text('${e.birdthYear}')),
+        DataCell(Text('${e.birdthMonth}')),
+      ],
+    );
+  }
+
+  @override
+  int get rowCount => _rows.length;
+
+  @override
+  bool get isRowCountApproximate => false;
+
+  @override
+  int get selectedRowCount => _selectedCount;
 }

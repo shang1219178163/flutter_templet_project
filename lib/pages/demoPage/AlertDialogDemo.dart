@@ -19,14 +19,14 @@ import 'package:popover/popover.dart';
 import 'package:styled_widget/styled_widget.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-import 'AlertSheetDemoPage.dart';
+import 'AlertSheetDemo.dart';
 
-class AlertDialogDemoPage extends StatefulWidget {
+class AlertDialogDemo extends StatefulWidget {
   @override
-  _AlertDialogDemoPageState createState() => _AlertDialogDemoPageState();
+  _AlertDialogDemoState createState() => _AlertDialogDemoState();
 }
 
-class _AlertDialogDemoPageState extends State<AlertDialogDemoPage>
+class _AlertDialogDemoState extends State<AlertDialogDemo>
     with SingleTickerProviderStateMixin {
   var itemSize = Size(70, 70);
 

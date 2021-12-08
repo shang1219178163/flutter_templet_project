@@ -1,6 +1,6 @@
 
 //
-//  CarouselSliderDemoPage.dart
+//  CarouselSliderDemo.dart
 //  flutter_templet_project
 //
 //  Created by shang on 6/8/21 5:00 PM.
@@ -14,7 +14,7 @@ import 'package:flutter_templet_project/extensions/ddlog.dart';
 import 'package:styled_widget/styled_widget.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
-class CarouselSliderDemoPage extends StatelessWidget {
+class CarouselSliderDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 

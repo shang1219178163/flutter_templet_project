@@ -15,13 +15,13 @@ final kUpdateContent = """
 5、新增加了分类查看功能;
 """;
 
-class SnackBarDemoPage extends StatefulWidget {
+class SnackBarDemo extends StatefulWidget {
   
   @override
-  State<StatefulWidget> createState() => SnackBarDemoPageState();
+  State<StatefulWidget> createState() => SnackBarDemoState();
 }
 
-class SnackBarDemoPageState extends State<SnackBarDemoPage> {
+class SnackBarDemoState extends State<SnackBarDemo> {
 
   GlobalKey globalKey = GlobalKey();
 

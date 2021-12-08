@@ -1,5 +1,5 @@
 //
-//  ShowSearchDemoPage.dart
+//  ShowSearchDemo.dart
 //  flutter_templet_project
 //
 //  Created by shang on 5/17/21 4:50 PM.
@@ -13,18 +13,18 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extensions/ddlog.dart';
 
-class ShowSearchDemoPage extends StatefulWidget {
+class ShowSearchDemo extends StatefulWidget {
 
   final String? title;
 
-  ShowSearchDemoPage({ Key? key, this.title}) : super(key: key);
+  ShowSearchDemo({ Key? key, this.title}) : super(key: key);
 
 
   @override
-  _ShowSearchDemoPageState createState() => _ShowSearchDemoPageState();
+  _ShowSearchDemoState createState() => _ShowSearchDemoState();
 }
 
-class _ShowSearchDemoPageState extends State<ShowSearchDemoPage> {
+class _ShowSearchDemoState extends State<ShowSearchDemo> {
 
   List<String> _list = List.generate(100, (i) => 'item $i');
 

@@ -1,5 +1,5 @@
 //
-//	StepperDemoPage.dart
+//	StepperDemo.dart
 //	MacTemplet
 //
 //	Created by Bin Shang on 2021/06/11 17:15
@@ -18,15 +18,15 @@ import '../../basicWidget/enhance_stepper.dart';
 
 
 ///步骤一二三
-class StepperDemoPage extends StatefulWidget {
-  StepperDemoPage({Key? key}) : super(key: key);
+class StepperDemo extends StatefulWidget {
+  StepperDemo({Key? key}) : super(key: key);
 
   @override
-  _StepperDemoPageState createState() => _StepperDemoPageState();
+  _StepperDemoState createState() => _StepperDemoState();
 }
 
 
-class _StepperDemoPageState extends State<StepperDemoPage> {
+class _StepperDemoState extends State<StepperDemo> {
   StepperType _type = StepperType.vertical;
 
   int groupValue = 0;

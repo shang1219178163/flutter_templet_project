@@ -1,5 +1,5 @@
 // //
-// //  LocalNotifationDemoPage.dart
+// //  LocalNotifationDemo.dart
 // //  flutter_templet_project
 // //
 // //  Created by shang on 5/19/21 2:23 PM.
@@ -14,18 +14,18 @@
 //
 // import 'package:flutter_templet_project/extensions/ddlog.dart';
 //
-// class LocalNotifationDemoPage extends StatefulWidget {
+// class LocalNotifationDemo extends StatefulWidget {
 //
 //   final String? title;
 //
-//   LocalNotifationDemoPage({ Key? key, this.title}) : super(key: key);
+//   LocalNotifationDemo({ Key? key, this.title}) : super(key: key);
 //
 //
 //   @override
-//   _LocalNotifationDemoPageState createState() => _LocalNotifationDemoPageState();
+//   _LocalNotifationDemoState createState() => _LocalNotifationDemoState();
 // }
 //
-// class _LocalNotifationDemoPageState extends State<LocalNotifationDemoPage> {
+// class _LocalNotifationDemoState extends State<LocalNotifationDemo> {
 //   late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
 //
 //   var titles = ["0", "1", "2",
@@ -160,18 +160,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class LocalNotifationDemoPage extends StatefulWidget {
+class LocalNotifationDemo extends StatefulWidget {
 
   final String? title;
 
-  LocalNotifationDemoPage({ Key? key, this.title}) : super(key: key);
+  LocalNotifationDemo({ Key? key, this.title}) : super(key: key);
 
   
   @override
-  _LocalNotifationDemoPageState createState() => _LocalNotifationDemoPageState();
+  _LocalNotifationDemoState createState() => _LocalNotifationDemoState();
 }
 
-class _LocalNotifationDemoPageState extends State<LocalNotifationDemoPage> {
+class _LocalNotifationDemoState extends State<LocalNotifationDemo> {
 
 
 

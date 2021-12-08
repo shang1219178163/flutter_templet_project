@@ -14,17 +14,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tuple/tuple.dart';
 
-class TabBarDemoPage extends StatefulWidget {
+class TabBarDemo extends StatefulWidget {
 
   final String? title;
 
-  TabBarDemoPage({ Key? key, this.title}) : super(key: key);
+  TabBarDemo({ Key? key, this.title}) : super(key: key);
 
   @override
-  _TabBarDemoPageState createState() => _TabBarDemoPageState();
+  _TabBarDemoState createState() => _TabBarDemoState();
 }
 
-class _TabBarDemoPageState extends State<TabBarDemoPage> with AutomaticKeepAliveClientMixin{
+class _TabBarDemoState extends State<TabBarDemo> with AutomaticKeepAliveClientMixin{
 
   final List<Tuple2<Tab, Widget>> items = [
     Tuple2(

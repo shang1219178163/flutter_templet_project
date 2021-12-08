@@ -6,7 +6,7 @@ import 'package:flutter_templet_project/pages/tabBar_tabBarView_demo.dart';
 import 'package:flutter_templet_project/provider/rxDart_provider_demo.dart';
 import 'package:flutter_templet_project/routes/APPRouter.dart';
 import 'package:flutter_templet_project/Pages/APPUserCenterPage.dart';
-import 'package:flutter_templet_project/Pages/demoPage/TabBarDemoPage.dart';
+import 'package:flutter_templet_project/Pages/demoPage/TabBarDemo.dart';
 import 'package:flutter_templet_project/extensions/popupMenuButton_extension.dart';
 import 'package:flutter_templet_project/extensions/alertDialog_extension.dart';
 import 'package:flutter_templet_project/extensions/ddlog.dart';
@@ -140,7 +140,7 @@ class _MyHomePageState extends State<MyHomePage> {
         icon: Icon(Icons.message),
         label: "消息",
       ),
-      TabBarDemoPage(),
+      TabBarDemo(),
     ),
     Tuple2(
       BottomNavigationBarItem(

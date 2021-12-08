@@ -9,7 +9,7 @@ import 'package:flutter_templet_project/basicWidget/chioce_list.dart';
 import 'package:flutter_templet_project/extensions/actionSheet_extension.dart';
 import 'package:flutter_templet_project/extensions/widget_extension.dart';
 
-import 'ListTileDemoPage.dart';
+import 'ListTileDemo.dart';
 
 class PickerDemoPage extends StatefulWidget {
 
@@ -272,7 +272,7 @@ class _PickerDemoPageState extends State<PickerDemoPage> {
         {
           widget.showBottomPicker(context: context,
             height: 600,
-            child: ListTileDemoPage(),
+            child: ListTileDemo(),
             callback: (String title) {
               ddlog(title);
             },

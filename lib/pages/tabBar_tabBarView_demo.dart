@@ -292,11 +292,12 @@ var _list = [
 
   Tuple2(APPRouter.backdropFilterDemo, "backdropFilterDemo", ),
 
-  Tuple2(APPRouter.cupertinoTabScaffoldDemo, "CupertinoTabScaffoldDemoPage", ),
+  Tuple2(APPRouter.cupertinoTabScaffoldDemo, "CupertinoTabScaffoldDemo", ),
   Tuple2(APPRouter.cupertinoFormDemo, "cupertinoFormDemo", ),
   Tuple2(APPRouter.contextMenuActionDemo, "cupertinoFormDemo", ),
 
-  Tuple2(APPRouter.dateTableDemoPage, "dateTableDemoPage", ),
+  Tuple2(APPRouter.dateTableDemo, "dateTableDemo", ),
+  Tuple2(APPRouter.dataTableDemoNew, "dataTableDemoNew", ),
   Tuple2(APPRouter.draggableDemoPage, "draggableDemoPage", ),
   Tuple2(APPRouter.draggableScrollableSheetDemoPage, "draggableScrollableSheetDemoPage", ),
 
@@ -315,17 +316,17 @@ var _list = [
   Tuple2(APPRouter.pickerDemoPage, "pickerDemoPage", ),
   Tuple2(APPRouter.progressHudDemo, "ProgressHudDemo", ),
   Tuple2(APPRouter.progressHudDemoNew, "ProgressHudDemoNew", ),
-  Tuple2(APPRouter.progressIndicatorDemoPage, "ProgressIndicatorDemoPage", ),
+  Tuple2(APPRouter.progressIndicatorDemoPage, "ProgressIndicatorDemo", ),
 
   Tuple2(APPRouter.reorderableListViewDemoPage, "reorderableListViewDemoPage", ),
   Tuple2(APPRouter.recordListDemo, "textFieldDemoPage", ),
   Tuple2(APPRouter.rangerSliderDemoPage, "rangerSliderDemoPage", ),
 
   Tuple2(APPRouter.segmentControlDemoPage, "segmentControlDemoPage", ),
-  Tuple2(APPRouter.snackBarDemoPage, "SnackBar", ),
+  Tuple2(APPRouter.snackBarDemo, "SnackBar", ),
   Tuple2(APPRouter.stepperDemoPage, "stepperDemoPage", ),
   Tuple2(APPRouter.slidableDemo, "SlidableDemo", ),
-  Tuple2(APPRouter.sliverAppBarDemoPage, "SliverAppBarDemoPage", ),
+  Tuple2(APPRouter.sliverAppBarDemoPage, "SliverAppBarDemo", ),
   Tuple2(APPRouter.sliverFamilyDemo, "SliverFamilyDemo", ),
   Tuple2(APPRouter.sliverFamilyPageViewDemo, "sliverFamilyPageViewDemo", ),
   Tuple2(APPRouter.sliverPersistentHeaderDemo, "sliverPersistentHeaderDemo", ),
@@ -349,6 +350,11 @@ var _list = [
   Tuple2(APPRouter.indexedStackDemo, "indexedStackDemo", ),
   Tuple2(APPRouter.responsiveColumnDemo, "responsiveColumnDemo", ),
   Tuple2(APPRouter.offstageDemo, "offstageDemo", ),
+  Tuple2(APPRouter.bottomAppBarDemo, "bottomAppBarDemo", ),
+  Tuple2(APPRouter.calendarDatePickerDemo, "calendarDatePickerDemo", ),
+  Tuple2(APPRouter.chipDemo, "chipDemo", ),
+  Tuple2(APPRouter.chipFilterDemo, "chipFilterDemo", ),
+  Tuple2(APPRouter.bottomSheetDemo, "bottomSheetDemo", ),
 
 ];
 
@@ -370,6 +376,7 @@ var _animateds = [
 
   Tuple2(APPRouter.animatedSwitcherDemo, "animatedSwitcherDemo", ),
   Tuple2(APPRouter.animatedWidgetDemo, "animatedWidgetDemo", ),
+  Tuple2(APPRouter.animatedGroupDemo, "animatedGroupDemo", ),
 
 ];
 
@@ -379,7 +386,7 @@ var _customeWidgets = [
   Tuple2(APPRouter.hudProgressDemo, "HudProgressDemo", ),
   Tuple2(APPRouter.localNotifationDemoPage, "localNotifationDemoPage", ),
   Tuple2(APPRouter.locationPopView, "locationPopView", ),
-  Tuple2(APPRouter.numberStepperDemoPage, "NumberStepperDemoPage", ),
+  Tuple2(APPRouter.numberStepperDemo, "NumberStepperDemo", ),
   Tuple2(APPRouter.numberFormatDemo, "numberFormatDemo", ),
 
 ];
