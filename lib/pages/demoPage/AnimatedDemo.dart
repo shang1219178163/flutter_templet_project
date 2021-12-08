@@ -1,5 +1,5 @@
 //
-//  AnimatedDemoPage.dart
+//  AnimatedDemo.dart
 //  flutter_templet_project
 //
 //  Created by shang on 6/22/21 5:44 PM.
@@ -14,18 +14,18 @@ import 'package:styled_widget/styled_widget.dart';
 import 'AnimatedSwitcherDemo.dart';
 
 
-class AnimatedDemoPage extends StatefulWidget {
+class AnimatedDemo extends StatefulWidget {
 
   String? title;
 
-  AnimatedDemoPage({ Key? key, this.title}) : super(key: key);
+  AnimatedDemo({ Key? key, this.title}) : super(key: key);
 
 
   @override
-  _AnimatedDemoPageState createState() => _AnimatedDemoPageState();
+  _AnimatedDemoState createState() => _AnimatedDemoState();
 }
 
-class _AnimatedDemoPageState extends State<AnimatedDemoPage> with TickerProviderStateMixin{
+class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMixin{
 
   late AnimationController _controller = AnimationController(duration: const Duration(milliseconds: 350), vsync: this);
 

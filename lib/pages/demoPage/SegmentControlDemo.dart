@@ -1,6 +1,6 @@
 
 //
-//  SegmentControlDemoPage.dart
+//  SegmentControlDemo.dart
 //  flutter_templet_project
 //
 //  Created by shang on 6/4/21 10:54 AM.
@@ -16,18 +16,18 @@ import 'package:flutter_templet_project/extensions/ddlog.dart';
 import 'package:flutter_templet_project/extensions/color_extension.dart';
 import 'package:styled_widget/styled_widget.dart';
 
-class SegmentControlDemoPage extends StatefulWidget {
+class SegmentControlDemo extends StatefulWidget {
 
   final String? title;
 
-  SegmentControlDemoPage({ Key? key, this.title}) : super(key: key);
+  SegmentControlDemo({ Key? key, this.title}) : super(key: key);
 
 
   @override
-  _SegmentControlDemoPageState createState() => _SegmentControlDemoPageState();
+  _SegmentControlDemoState createState() => _SegmentControlDemoState();
 }
 
-class _SegmentControlDemoPageState extends State<SegmentControlDemoPage> {
+class _SegmentControlDemoState extends State<SegmentControlDemo> {
 
 
   int groupValue = 0;

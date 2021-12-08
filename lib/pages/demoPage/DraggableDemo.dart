@@ -1,5 +1,5 @@
 //
-//  DraggableDemoPage.dart
+//  DraggableDemo.dart
 //  flutter_templet_project
 //
 //  Created by shang on 6/2/21 5:37 PM.
@@ -12,18 +12,18 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:styled_widget/styled_widget.dart';
 
-class DraggableDemoPage extends StatefulWidget {
+class DraggableDemo extends StatefulWidget {
 
   final String? title;
 
-  DraggableDemoPage({ Key? key, this.title}) : super(key: key);
+  DraggableDemo({ Key? key, this.title}) : super(key: key);
 
   
   @override
-  _DraggableDemoPageState createState() => _DraggableDemoPageState();
+  _DraggableDemoState createState() => _DraggableDemoState();
 }
 
-class _DraggableDemoPageState extends State<DraggableDemoPage> {
+class _DraggableDemoState extends State<DraggableDemo> {
 
   int acceptedData = 0;
 

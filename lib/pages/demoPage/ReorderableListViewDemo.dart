@@ -1,5 +1,5 @@
 //
-//	ReorderableListViewDemoPage.dart
+//	ReorderableListViewDemo.dart
 //	MacTemplet
 //
 //	Created by Bin Shang on 2021/06/11 15:42
@@ -10,15 +10,15 @@ import 'package:flutter/material.dart';
 
 
 /// This is the stateful widget that the main application instantiates.
-class ReorderableListViewDemoPage extends StatefulWidget {
-  const ReorderableListViewDemoPage({Key? key}) : super(key: key);
+class ReorderableListViewDemo extends StatefulWidget {
+  const ReorderableListViewDemo({Key? key}) : super(key: key);
 
   @override
-  State<ReorderableListViewDemoPage> createState() => _ReorderableListViewDemoPageState();
+  State<ReorderableListViewDemo> createState() => _ReorderableListViewDemoState();
 }
 
-/// This is the private State class that goes with ReorderableListViewDemoPage.
-class _ReorderableListViewDemoPageState extends State<ReorderableListViewDemoPage> {
+/// This is the private State class that goes with ReorderableListViewDemo.
+class _ReorderableListViewDemoState extends State<ReorderableListViewDemo> {
   final List<int> _items = List<int>.generate(50, (int index) => index);
 
   @override

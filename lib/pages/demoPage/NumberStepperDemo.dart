@@ -1,5 +1,5 @@
 //
-//  NumberStepperDemoPage.dart
+//  NumberStepperDemo.dart
 //  flutter_templet_project
 //
 //  Created by shang on 6/13/21 6:26 AM.
@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/NumberStepper.dart';
 import 'package:flutter_templet_project/extensions/ddlog.dart';
 
-class NumberStepperDemoPage extends StatelessWidget {
+class NumberStepperDemo extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {

@@ -1,5 +1,5 @@
 //
-//	ListTileDemoPage.dart.swift
+//	ListTileDemo.dart.swift
 //	MacTemplet
 //
 //	Created by Bin Shang on 2021/06/11 14:58
@@ -10,18 +10,18 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extensions/ddlog.dart';
 
-class ListTileDemoPage extends StatefulWidget {
+class ListTileDemo extends StatefulWidget {
 
   final String? title;
 
-  ListTileDemoPage({ Key? key, this.title}) : super(key: key);
+  ListTileDemo({ Key? key, this.title}) : super(key: key);
 
 
   @override
-  _ListTileDemoPageState createState() => _ListTileDemoPageState();
+  _ListTileDemoState createState() => _ListTileDemoState();
 }
 
-class _ListTileDemoPageState extends State<ListTileDemoPage> {
+class _ListTileDemoState extends State<ListTileDemo> {
 
   bool _value = false;
 

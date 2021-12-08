@@ -1,5 +1,5 @@
 //
-//  ProgressIndicatorDemoPage.dart
+//  ProgressIndicatorDemo.dart
 //  flutter_templet_project
 //
 //  Created by shang on 6/7/21 3:21 PM.
@@ -12,18 +12,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_templet_project/extensions/ddlog.dart';
 
-class ProgressIndicatorDemoPage extends StatefulWidget {
+class ProgressIndicatorDemo extends StatefulWidget {
 
   final String? title;
 
-  ProgressIndicatorDemoPage({ Key? key, this.title}) : super(key: key);
+  ProgressIndicatorDemo({ Key? key, this.title}) : super(key: key);
 
   
   @override
-  _ProgressIndicatorDemoPageState createState() => _ProgressIndicatorDemoPageState();
+  _ProgressIndicatorDemoState createState() => _ProgressIndicatorDemoState();
 }
 
-class _ProgressIndicatorDemoPageState extends State<ProgressIndicatorDemoPage> with TickerProviderStateMixin {
+class _ProgressIndicatorDemoState extends State<ProgressIndicatorDemo> with TickerProviderStateMixin {
 
   late AnimationController controller;
 

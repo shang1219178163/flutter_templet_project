@@ -1,5 +1,5 @@
 //
-//  SliverAppBarDemoPage.dart
+//  SliverAppBarDemo.dart
 //  flutter_templet_project
 //
 //  Created by shang on 6/8/21 6:00 PM.
@@ -11,18 +11,18 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extensions/color_extension.dart';
 
-class SliverAppBarDemoPage extends StatefulWidget {
+class SliverAppBarDemo extends StatefulWidget {
 
   final String? title;
 
-  SliverAppBarDemoPage({ Key? key, this.title}) : super(key: key);
+  SliverAppBarDemo({ Key? key, this.title}) : super(key: key);
 
 
   @override
-  _SliverAppBarDemoPageState createState() => _SliverAppBarDemoPageState();
+  _SliverAppBarDemoState createState() => _SliverAppBarDemoState();
 }
 
-class _SliverAppBarDemoPageState extends State<SliverAppBarDemoPage> with SingleTickerProviderStateMixin {
+class _SliverAppBarDemoState extends State<SliverAppBarDemo> with SingleTickerProviderStateMixin {
   var pages = List.generate(3, (index) => "Tab $index");
 
   late TabController _tabController;

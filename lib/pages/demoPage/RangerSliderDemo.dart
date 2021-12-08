@@ -1,5 +1,5 @@
 //
-//  RangerSliderDemoPage.dart
+//  RangerSliderDemo.dart
 //  flutter_templet_project
 //
 //  Created by shang on 6/5/21 9:44 AM.
@@ -13,16 +13,16 @@ import 'package:flutter/material.dart';
 
 
 /// This is the main application widget.
-class RangerSliderDemoPage extends StatefulWidget {
+class RangerSliderDemo extends StatefulWidget {
 
   final String? title;
-  RangerSliderDemoPage({ Key? key, this.title}) : super(key: key);
+  RangerSliderDemo({ Key? key, this.title}) : super(key: key);
 
   @override
-  _RangerSliderDemoPageState createState() => _RangerSliderDemoPageState();
+  _RangerSliderDemoState createState() => _RangerSliderDemoState();
 }
 
-class _RangerSliderDemoPageState extends State<RangerSliderDemoPage> {
+class _RangerSliderDemoState extends State<RangerSliderDemo> {
 
   RangeValues _currentRangeValues = RangeValues(40, 80);
 

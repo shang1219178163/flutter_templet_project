@@ -10,16 +10,16 @@ import 'package:flutter_templet_project/basicWidget/chioce_list.dart';
 import 'package:flutter_templet_project/basicWidget/chioce_wrap.dart';
 import 'package:flutter_templet_project/extensions/actionSheet_extension.dart';
 import 'package:flutter_templet_project/extensions/widget_extension.dart';
-import 'ShowSearchDemoPage.dart';
+import 'ShowSearchDemo.dart';
 
 
-class AlertSheetDemoPage extends StatefulWidget {
+class AlertSheetDemo extends StatefulWidget {
 
   @override
-  _AlertSheetDemoPageState createState() => _AlertSheetDemoPageState();
+  _AlertSheetDemoState createState() => _AlertSheetDemoState();
 }
 
-class _AlertSheetDemoPageState extends State<AlertSheetDemoPage> {
+class _AlertSheetDemoState extends State<AlertSheetDemo> {
 
   var titles = ["默认样式", "ListTile", "添加子视图", "自定义", "单选列表", "多选列表", "6", "7", "8"];
 

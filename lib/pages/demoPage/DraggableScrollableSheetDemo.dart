@@ -1,5 +1,5 @@
 //
-//  DraggableScrollableSheetDemoPage.dart
+//  DraggableScrollableSheetDemo.dart
 //  flutter_templet_project
 //
 //  Created by shang on 6/7/21 11:10 AM.
@@ -10,18 +10,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class DraggableScrollableSheetDemoPage extends StatefulWidget {
+class DraggableScrollableSheetDemo extends StatefulWidget {
 
   final String? title;
 
-  DraggableScrollableSheetDemoPage({ Key? key, this.title}) : super(key: key);
+  DraggableScrollableSheetDemo({ Key? key, this.title}) : super(key: key);
 
   
   @override
-  _DraggableScrollableSheetDemoPageState createState() => _DraggableScrollableSheetDemoPageState();
+  _DraggableScrollableSheetDemoState createState() => _DraggableScrollableSheetDemoState();
 }
 
-class _DraggableScrollableSheetDemoPageState extends State<DraggableScrollableSheetDemoPage> {
+class _DraggableScrollableSheetDemoState extends State<DraggableScrollableSheetDemo> {
 
 
 

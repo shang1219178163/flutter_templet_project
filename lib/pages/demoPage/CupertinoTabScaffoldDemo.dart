@@ -6,13 +6,13 @@ import 'package:flutter_templet_project/extensions/ddlog.dart';
 import 'package:flutter_templet_project/extensions/widget_extension.dart';
 import 'package:tuple/tuple.dart';
 
-class CupertinoTabScaffoldDemoPage extends StatefulWidget {
+class CupertinoTabScaffoldDemo extends StatefulWidget {
 
   @override
-  _CupertinoTabScaffoldDemoPageState createState() => _CupertinoTabScaffoldDemoPageState();
+  _CupertinoTabScaffoldDemoState createState() => _CupertinoTabScaffoldDemoState();
 }
 
-class _CupertinoTabScaffoldDemoPageState extends State {
+class _CupertinoTabScaffoldDemoState extends State {
 
   final List<Tuple2<BottomNavigationBarItem, Widget>> items = [
     Tuple2(

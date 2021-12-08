@@ -1,5 +1,5 @@
 //
-//  AppWebViewDemoPage.dart
+//  AppWebViewDemo.dart
 //  flutter_templet_project
 //
 //  Created by shang on 6/8/21 8:54 AM.
@@ -29,12 +29,12 @@ The navigation delegate is set to block navigation to the youtube website.
 </html>
 ''';
 
-class AppWebViewDemoPage extends StatefulWidget {
+class AppWebViewDemo extends StatefulWidget {
   @override
-  _AppWebViewDemoPageState createState() => _AppWebViewDemoPageState();
+  _AppWebViewDemoState createState() => _AppWebViewDemoState();
 }
 
-class _AppWebViewDemoPageState extends State<AppWebViewDemoPage> {
+class _AppWebViewDemoState extends State<AppWebViewDemo> {
   final Completer<WebViewController> _controller = Completer<WebViewController>();
 
   String _currentTitle = "";
