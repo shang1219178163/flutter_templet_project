@@ -1,5 +1,5 @@
 //
-//  LocalImageList.dart
+//  LocalImagePage.dart
 //  flutter_templet_project
 //
 //  Created by shang on 12/10/21 5:25 PM.
@@ -12,7 +12,7 @@ class LocalImagePage extends StatelessWidget {
 
   final String? title;
 
-  const LocalImagePage({
+  LocalImagePage({
   	Key? key,
   	this.title,
   }) : super(key: key);
@@ -32,38 +32,43 @@ class LocalImagePage extends StatelessWidget {
   buildGridView() {
     return GridView.count(
       padding: EdgeInsets.all(15.0),
-      crossAxisCount: 4,
+      crossAxisCount: 2,
       scrollDirection: Axis.vertical,
       crossAxisSpacing: 8,
       mainAxisSpacing: 8,
       childAspectRatio: 4 / 3,
-      children: imageNames
-          .map((e) => GridTile(
+      children: imageNames.map((e) => GridTile(
         footer: Container(
             color: Colors.green,
             height: 25,
-            child: Center(child: Text(e))),
+            child: Center(
+              child: FittedBox(
+                  fit: BoxFit.fitWidth,
+                  child: Text(e.split("/").last)
+              ),
+            )
+        ),
         child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(e, fit: BoxFit.fill),
-            ]),
-      ))
-          .toList(),
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(e, fit: BoxFit.contain),
+          ]),
+      )).toList(),
     );
   }
 
   var imageNames = [
-  "avatar.png",
-  "icon_appbar_back.png",
-  "icon_appbar_back_white.png",
-  "icon_home_delete.png",
-  "img_placeholder_empty.png",
-  "img_placeholder_empty_one.png",
-  "img_placeholder_offonline.png",
-  "img_placeholder_search.png",
-  "img_update.png",
-  "img_upload_placeholder.png",
+    "images/avatar.png",
+    "images/icon_appbar_back.png",
+    "images/icon_appbar_back_white.png",
+    "images/icon_home_delete.png",
+    "images/img_placeholder_empty.png",
+    "images/img_placeholder_empty_one.png",
+    "images/img_placeholder_offonline.png",
+    "images/img_placeholder_search.png",
+    "images/img_update.png",
+    "images/img_upload_placeholder.png",
+    "images/icon_delete.png",
   ];
   // var imageNames = [
   //   Image.asset("avatar.png", fit: BoxFit.fill),

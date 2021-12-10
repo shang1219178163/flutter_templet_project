@@ -134,6 +134,9 @@ class APPThemeSettings{
       highlightColor: Colors.transparent, // 长按时的扩散效果设置为透明
       accentColor: e,
       buttonColor: e,
+      // scaffoldBackgroundColor: e,
+      appBarTheme: ThemeData.light().appBarTheme.copyWith(color: e),
+      colorScheme: ThemeData.light().colorScheme.copyWith(secondary: e),
       indicatorColor: Colors.white,
       iconTheme: ThemeData.light().iconTheme.copyWith(
         color: e,

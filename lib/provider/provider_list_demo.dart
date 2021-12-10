@@ -12,7 +12,6 @@ import 'package:flutter_templet_project/extensions/ddlog.dart';
 import 'package:flutter_templet_project/extensions/buildContext_extension.dart';
 
 import 'package:flutter_templet_project/model/order_model.dart';
-import 'package:flutter_templet_project/routes/APPRouter.dart';
 import 'package:tuple/tuple.dart';
 import 'notifier_demo.dart';
 

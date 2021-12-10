@@ -2,11 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/Provider/provider_list_demo.dart';
 import 'package:flutter_templet_project/basicWidget/responsive_column.dart';
+import 'package:flutter_templet_project/pages/LocalImagePage.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedGroupDemo.dart';
+import 'package:flutter_templet_project/pages/demo/BlurViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/BottomAppBarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/BottomSheetDemo.dart';
 import 'package:flutter_templet_project/pages/demo/CalendarDatePickerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ChipDemo.dart';
+import 'package:flutter_templet_project/pages/demo/MouseRegionDemo.dart';
 import 'package:flutter_templet_project/pages/demo/OffstageDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AbsorbPointerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedDemo.dart';
@@ -33,6 +36,7 @@ import 'package:flutter_templet_project/pages/demo/ProgressHudDemo.dart';
 import 'package:flutter_templet_project/pages/demo/RecordListDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ReorderableListViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/RichTextDemo.dart';
+import 'package:flutter_templet_project/pages/demo/ShaderMaskDemo.dart';
 import 'package:flutter_templet_project/pages/demo/SliverAppBarDemo.dart';
 
 import 'package:flutter_templet_project/Pages/APPNotFoundPage.dart';
@@ -43,6 +47,7 @@ import 'package:flutter_templet_project/Pages/SecondPage.dart';
 import 'package:flutter_templet_project/Pages/ThirdPage.dart';
 import 'package:flutter_templet_project/pages/demo/TimePickerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/banner_demo.dart';
+import 'package:flutter_templet_project/pages/demo/box_demo.dart';
 import 'package:flutter_templet_project/pages/demo/will_pop_scope_demo.dart';
 import 'package:flutter_templet_project/pages/system_icons_page.dart';
 import 'package:flutter_templet_project/pages/tabBar_reuse_page_demo.dart';
@@ -205,7 +210,11 @@ class APPRouter {
   static const chipFilterDemo = '/chipFilterDemo';
   static const bottomSheetDemo = '/bottomSheetDemo';
   static const timePickerDemo = '/timePickerDemo';
-
+  static const shaderMaskDemo = '/ShaderMaskDemo';
+  static const blurViewDemo = '/blurViewDemo';
+  static const boxDemo = '/BoxDemo';
+  static const mouseRegionDemo = '/MouseRegionDemo';
+  static const localImagePage = '/LocalImagePage';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -338,7 +347,11 @@ class AppPage{
     GetPage(name: APPRouter.chipFilterDemo, page: () => ChipFilterDemo(), ),
     GetPage(name: APPRouter.bottomSheetDemo, page: () => BottomSheetDemo(), ),
     GetPage(name: APPRouter.timePickerDemo, page: () => TimePickerDemo(), ),
-
+    GetPage(name: APPRouter.shaderMaskDemo, page: () => ShaderMaskDemo(), ),
+    GetPage(name: APPRouter.blurViewDemo, page: () => BlurViewDemo(), ),
+    GetPage(name: APPRouter.boxDemo, page: () => BoxDemo(), ),
+    GetPage(name: APPRouter.mouseRegionDemo, page: () => MouseRegionDemo(), ),
+    GetPage(name: APPRouter.localImagePage, page: () => LocalImagePage(), ),
 
 
   ];
