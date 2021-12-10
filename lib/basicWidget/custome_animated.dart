@@ -8,11 +8,11 @@
 
 
 import 'package:flutter/animation.dart';
-import 'dart:math';
+import 'dart:math' as math;
 
 class ShakeCurve extends Curve {
   @override
   double transform(double t) {
-    return math.sin(t * math.PI * 2);
+    return math.sin(t * math.pi * 2);
   }
 }

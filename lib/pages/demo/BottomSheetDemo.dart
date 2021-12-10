@@ -7,6 +7,7 @@
 //
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/extensions/button_extension.dart';
 import 'package:flutter_templet_project/extensions/ddlog.dart';
 import 'package:flutter_templet_project/extensions/navigator_extension.dart';
 
@@ -104,7 +105,8 @@ class BottomSheetDemo extends StatelessWidget {
                     ),
                   ],
                 ),
-              )
+              ),
+
             ],
           ),
         ),
@@ -120,7 +122,7 @@ class BottomSheetDemo extends StatelessWidget {
                 }),
             TextButtonExt.build(
                 text: Text("SHARE"),
-                image: Icon(Icons.share_outlined),
+                image: Icon(Icons.open_in_new),
                 imageAlignment: ImageAlignment.top,
                 callback: (value) {
                   ddlog(value.data);

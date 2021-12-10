@@ -228,6 +228,8 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
           title: Text(e.item1, style: TextStyle(fontSize: 14),),
           subtitle: Text(e.item2, style: TextStyle(fontSize: 12),),
           trailing: Icon(Icons.chevron_right),
+          dense: true,
+          // contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
           onTap: () {
             ddlog("section_");
             if (e.item1.toLowerCase().contains("loginPage".toLowerCase())){
@@ -356,13 +358,17 @@ var _list = [
   Tuple2(APPRouter.chipFilterDemo, "chipFilterDemo", ),
   Tuple2(APPRouter.bottomSheetDemo, "bottomSheetDemo", ),
   Tuple2(APPRouter.timePickerDemo, "timePickerDemo", ),
-
+  Tuple2(APPRouter.shaderMaskDemo, "ShaderMaskDemo", ),
+  Tuple2(APPRouter.blurViewDemo, "blurViewDemo", ),
+  Tuple2(APPRouter.boxDemo, "boxDemo", ),
+  Tuple2(APPRouter.mouseRegionDemo, "mouseRegionDemo", ),
 
 
 ];
 
 var _specials = [
   Tuple2(APPRouter.systemIconsPage, "flutter 系统 Icons", ),
+  Tuple2(APPRouter.localImagePage, "本地图片", ),
   Tuple2(APPRouter.providerRoute, "providerRoute", ),
   Tuple2(APPRouter.stateManagerDemo, "状态管理", ),
 

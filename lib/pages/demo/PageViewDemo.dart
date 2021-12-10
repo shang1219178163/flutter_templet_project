@@ -5,6 +5,7 @@ import 'package:flutter_templet_project/pages/FirstPage.dart';
 import 'package:flutter_templet_project/pages/SecondPage.dart';
 import 'package:flutter_templet_project/pages/ThirdPage.dart';
 import 'package:flutter_templet_project/routes/APPRouter.dart';
+
 import 'package:get/get.dart';
 import 'package:styled_widget/styled_widget.dart';
 
