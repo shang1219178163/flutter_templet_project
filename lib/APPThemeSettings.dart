@@ -14,11 +14,10 @@ import 'package:get/get.dart';
 import 'extensions/widget_extension.dart';
 
 class APPThemeSettings{
-  APPThemeSettings._internal() {
-    // 初始化
-  }
-
-  static final APPThemeSettings instance = APPThemeSettings._internal();
+  static final APPThemeSettings _instance = APPThemeSettings._();
+  APPThemeSettings._();
+  factory APPThemeSettings() => _instance;
+  static APPThemeSettings get instance => _instance;
 
 
   ThemeData themeData = ThemeData.light().copyWith(

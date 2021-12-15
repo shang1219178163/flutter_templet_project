@@ -10,23 +10,23 @@ import 'package:enhance_expansion_panel/enhance_expansion_panel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_templet_project/basicWidget/list_subtitle_cell.dart';
+import 'package:flutter_templet_project/basicWidget/app_update_card.dart';
+import 'package:flutter_templet_project/basicWidget/section_list_view.dart';
+
 import 'package:flutter_templet_project/extensions/color_extension.dart';
 import 'package:flutter_templet_project/extensions/divider_extension.dart';
 import 'package:flutter_templet_project/extensions/list_extension.dart';
 import 'package:flutter_templet_project/extensions/string_extension.dart';
-import 'package:flutter_templet_project/main.dart';
-import 'package:flutter_templet_project/basicWidget/app_update_card.dart';
 import 'package:flutter_templet_project/extensions/ddlog.dart';
+import 'package:flutter_templet_project/extensions/widget_extension.dart';
+
+import 'package:flutter_templet_project/main.dart';
 import 'package:flutter_templet_project/mockData/mock_data.dart';
-import 'package:flutter_templet_project/basicWidget/section_list_view.dart';
 import 'package:flutter_templet_project/routes/APPRouter.dart';
 
 import 'package:get/get.dart';
 import 'package:tuple/tuple.dart';
 
-import 'package:flutter_templet_project/extensions/widget_extension.dart';
-
-import '../basicWidget/enhance_expand_list_view.dart';
 
 class TabBarTabBarViewDemo extends StatefulWidget {
 
@@ -284,8 +284,10 @@ final _tuples = [
   Tuple2("特殊功能", _specials),
   Tuple2("动画相关", _animateds),
   Tuple2("系统组件demo", _list),
-  Tuple2("自定义组件", _customeWidgets),
-  Tuple2("其它", _others)];
+  Tuple2("自定义组件", _customs),
+  Tuple2("第三方组件", _vendors),
+  Tuple2("其它", _others)
+];
 
 var _list = [
   Tuple2(APPRouter.alertDialogDemo, "AlertDialog", ),
@@ -362,6 +364,7 @@ var _list = [
   Tuple2(APPRouter.blurViewDemo, "blurViewDemo", ),
   Tuple2(APPRouter.boxDemo, "boxDemo", ),
   Tuple2(APPRouter.mouseRegionDemo, "mouseRegionDemo", ),
+  Tuple2(APPRouter.timelineDemo, "timelineDemo", ),
 
 
 ];
@@ -376,6 +379,7 @@ var _specials = [
   Tuple2(APPRouter.tabBarReusePageDemo, "tabBarReusePageDemo", ),
 
   Tuple2(APPRouter.githubRepoDemo, "githubRepoDemo", ),
+  Tuple2(APPRouter.hitTest, "hitTest", ),
 
 ];
 
@@ -389,7 +393,7 @@ var _animateds = [
 
 ];
 
-var _customeWidgets = [
+var _customs = [
   Tuple2(APPRouter.datePickerPage, "DatePickerPage", ),
   Tuple2(APPRouter.dateTimeDemo, "dateTimeDemo", ),
   Tuple2(APPRouter.hudProgressDemo, "HudProgressDemo", ),
@@ -400,7 +404,16 @@ var _customeWidgets = [
 
 ];
 
+var _vendors = [
+  Tuple2(APPRouter.timelinesDemo, "timelineTileDemo", ),
+
+];
+
+
 var _others = [
+  Tuple2(APPRouter.buttonBorderDemo, "buttonBorderDemo", ),
+
+  Tuple2(APPRouter.transparentNavgationBarDemo, "transparentNavgationBarDemo", ),
   Tuple2(APPRouter.richTextDemo, "richTextDemo", ),
   Tuple2(APPRouter.loginPage, "LoginPage", ),
   Tuple2(APPRouter.loginPage2, "LoginPage2", ),

@@ -18,14 +18,19 @@ class BottomAppBarDemo extends StatefulWidget {
 class _BottomAppBarDemoState extends State<BottomAppBarDemo> {
   bool _showFab = true;
   bool _showNotch = true;
-  FloatingActionButtonLocation _fabLocation =
-      FloatingActionButtonLocation.endDocked;
+  FloatingActionButtonLocation _fabLocation = FloatingActionButtonLocation.endDocked;
 
-  void _onShowNotchChanged(bool value) {
-    setState(() {
-      _showNotch = value;
-    });
-  }
+  final locations = <FloatingActionButtonLocation>[
+    FloatingActionButtonLocation.startTop,
+    FloatingActionButtonLocation.centerTop,
+    FloatingActionButtonLocation.endTop,
+    FloatingActionButtonLocation.startFloat,
+    FloatingActionButtonLocation.centerFloat,
+    FloatingActionButtonLocation.endFloat,
+    FloatingActionButtonLocation.startDocked,
+    FloatingActionButtonLocation.centerDocked,
+    FloatingActionButtonLocation.endDocked,
+  ];
 
   void _onShowFabChanged(bool value) {
     setState(() {
@@ -36,9 +41,10 @@ class _BottomAppBarDemoState extends State<BottomAppBarDemo> {
   void _onFabLocationChanged(FloatingActionButtonLocation? value) {
     setState(() {
       _fabLocation = value ?? FloatingActionButtonLocation.endDocked;
+      _showNotch = _fabLocation.toString().contains("Docked");
     });
   }
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,38 +62,18 @@ class _BottomAppBarDemoState extends State<BottomAppBarDemo> {
               value: _showFab,
               onChanged: _onShowFabChanged,
             ),
-            SwitchListTile(
-              title: const Text('Notch'),
-              value: _showNotch,
-              onChanged: _onShowNotchChanged,
-            ),
             const Padding(
               padding: EdgeInsets.all(16),
-              child: Text('Floating action button position'),
+              child: Text('Floating action button position:', style: TextStyle(fontSize: 18),),
             ),
-            RadioListTile<FloatingActionButtonLocation>(
-              title: const Text('Docked - End'),
-              value: FloatingActionButtonLocation.endDocked,
-              groupValue: _fabLocation,
-              onChanged: _onFabLocationChanged,
-            ),
-            RadioListTile<FloatingActionButtonLocation>(
-              title: const Text('Docked - Center'),
-              value: FloatingActionButtonLocation.centerDocked,
-              groupValue: _fabLocation,
-              onChanged: _onFabLocationChanged,
-            ),
-            RadioListTile<FloatingActionButtonLocation>(
-              title: const Text('Floating - End'),
-              value: FloatingActionButtonLocation.endFloat,
-              groupValue: _fabLocation,
-              onChanged: _onFabLocationChanged,
-            ),
-            RadioListTile<FloatingActionButtonLocation>(
-              title: const Text('Floating - Center'),
-              value: FloatingActionButtonLocation.centerFloat,
-              groupValue: _fabLocation,
-              onChanged: _onFabLocationChanged,
+
+            Column(
+              children: locations.map((e) => RadioListTile<FloatingActionButtonLocation>(
+                title: Text('${e.toString().split(".").last}'),
+                value: e,
+                groupValue: _fabLocation,
+                onChanged: _onFabLocationChanged,
+              )).toList(),
             ),
           ],
         ),
@@ -130,9 +116,15 @@ class _DemoBottomAppBar extends StatelessWidget {
         data: IconThemeData(color: Theme.of(context).colorScheme.onPrimary),
         child: Row(
           children: <Widget>[
+            if (fabLocation == FloatingActionButtonLocation.startDocked) const Spacer(),
             IconButton(
               tooltip: 'Open navigation menu',
               icon: const Icon(Icons.menu),
+              onPressed: () {},
+            ),
+            IconButton(
+              tooltip: 'Open navigation menu',
+              icon: const Icon(Icons.photo),
               onPressed: () {},
             ),
             if (centerLocations.contains(fabLocation)) const Spacer(),

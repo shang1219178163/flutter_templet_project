@@ -23,9 +23,25 @@ import 'pages/FirstPage.dart';
 import 'pages/SecondPage.dart';
 import 'pages/ThirdPage.dart';
 import 'pages/FourthPage.dart';
-import 'pages/TextlessDemo.dart';
+import 'pages/Vendor/TextlessDemo.dart';
 
 import 'provider/notifier_demo.dart';
+
+// void main() {
+//   runZonedGuarded(() async {
+//     WidgetsFlutterBinding.ensureInitialized();
+//     await myErrorsHandler.initialize();
+//     FlutterError.onError = (FlutterErrorDetails details) {
+//       FlutterError.presentError(details);
+//       myErrorsHandler.onError(details);
+//       exit(1);
+//     };
+//     runApp(MyApp());
+//   }, (Object error, StackTrace stack) {
+//     myErrorsHandler.onError(error, stack);
+//     exit(1);
+//   });
+// }
 
 Future<void> main() async {
   setCustomErrorPage();
@@ -50,9 +66,12 @@ void setCustomErrorPage(){
       // child: Text("Flutter 走神了"),
       child: Container(
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(Icons.error),
-            Text("Flutter 走神了"),
+            Text("Flutter 走神了",
+                style: TextStyle(fontSize: 16.0, color: Colors.red),
+            ),
           ],
         ),
       ),

@@ -48,119 +48,133 @@ class _TextFieldDemoState extends State<TextFieldDemo> {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
 
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title ?? "$widget"),
+      appBar: AppBar(
+        title: Text(widget.title ?? "$widget"),
+      ),
+      body: buildColumn(context),
+      bottomSheet: Container(
+        child: Row(
+          children: <Widget>[
+            Expanded(child: TextField()),
+            ElevatedButton(
+              child: Text('发送'),
+              onPressed: () {},
+            ),
+          ],
         ),
-        body: buildColumn(context),
+      ),
     );
   }
 
   Widget buildColumn(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(15),
-      child: Column(
-        children: [
-          CupertinoTextField(controller: _textController),
-          Spacer(),
-          CupertinoSearchTextField(
-            onChanged: (String value) {
-              print('The text has changed to: $value');
-            },
-            onSubmitted: (String value) {
-              print('Submitted text: $value');
-            },
-          ),
-          Spacer(),
-          TextField(
-            controller: editingController,
-            keyboardType: TextInputType.number,
-            decoration: InputDecoration(
-              labelText: 'Weight (KG)',
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(6),
+    return SafeArea(
+      child: Container(
+        padding: EdgeInsets.all(15),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            CupertinoTextField(controller: _textController),
+            Spacer(),
+            CupertinoSearchTextField(
+              onChanged: (String value) {
+                print('The text has changed to: $value');
+              },
+              onSubmitted: (String value) {
+                print('Submitted text: $value');
+              },
+            ),
+            Spacer(),
+            TextField(
+              controller: editingController,
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                labelText: 'Weight (KG)',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(6),
+                ),
               ),
             ),
-          ),
-          Spacer(),
-          TextFormField( //用户名
-            controller: _unameController,
-            focusNode: focusNode1,//关联focusNode1
-            keyboardType: TextInputType.text,//键盘类型
-            maxLength: 12,
-            textInputAction: TextInputAction.next,//显示'下一步'
-            decoration: InputDecoration(
-                hintText: '请输入账号',
-                // labelText: "账号",
-                // contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-                prefixIcon:Icon(Icons.perm_identity),
-                // border: OutlineInputBorder(
-                //     borderRadius: BorderRadius.circular(4.0) //圆角大小
-                // ),
-                suffixIcon: _unameController.text.length > 0 ? IconButton(
-                  icon: Icon(
-                    Icons.clear,
-                    size: 21,
-                    color: Color(0xff666666),
-                  ),
-                  onPressed: (){
-                    setState(() {
-                      _unameController.text = '';
-                      // checkLoginText();
-                    });
-                  },
-                ):null
+            Spacer(),
+            TextFormField( //用户名
+              controller: _unameController,
+              focusNode: focusNode1,//关联focusNode1
+              keyboardType: TextInputType.text,//键盘类型
+              maxLength: 12,
+              textInputAction: TextInputAction.next,//显示'下一步'
+              decoration: InputDecoration(
+                  hintText: '请输入账号',
+                  // labelText: "账号",
+                  // contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                  prefixIcon:Icon(Icons.perm_identity),
+                  // border: OutlineInputBorder(
+                  //     borderRadius: BorderRadius.circular(4.0) //圆角大小
+                  // ),
+                  suffixIcon: _unameController.text.length > 0 ? IconButton(
+                    icon: Icon(
+                      Icons.clear,
+                      size: 21,
+                      color: Color(0xff666666),
+                    ),
+                    onPressed: (){
+                      setState(() {
+                        _unameController.text = '';
+                        // checkLoginText();
+                      });
+                    },
+                  ):null
+              ),
+              validator: (v) {
+                return !_unameExp.hasMatch(v!)?'账号由6到12位数字与小写字母组成':null;
+              },
+              onEditingComplete: ()=>FocusScope.of(context).requestFocus(focusNode2),
+              onChanged: (v){
+                setState(() {
+                  // checkLoginText();
+                });
+              },
             ),
-            validator: (v) {
-              return !_unameExp.hasMatch(v!)?'账号由6到12位数字与小写字母组成':null;
-            },
-            onEditingComplete: ()=>FocusScope.of(context).requestFocus(focusNode2),
-            onChanged: (v){
-              setState(() {
-                // checkLoginText();
-              });
-            },
-          ),
-          // SizedBox(height: 15.0),
-          TextFormField( //密码
-            controller: _pwdController,
-            focusNode: focusNode2,//关联focusNode1
-            obscureText: isEye, //密码类型 内容用***显示
-            maxLength: 12,
-            textInputAction: TextInputAction.done, //显示'完成'
-            decoration: InputDecoration(
-                hintText: '请输入密码',
-                // labelText: '密码',
-                // contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-                prefixIcon:Icon(Icons.lock),
-                // border: OutlineInputBorder(
-                //     borderRadius: BorderRadius.circular(40.0)
-                // ),
-                suffixIcon: IconButton(
-                  icon: Icon(
-                    Icons.remove_red_eye,
-                    size: 21,
-                    color: Color(0xff666666),
-                  ),
-                  onPressed: (){
-                    setState(() {
-                      isEye = !isEye;
-                    });
-                  },
-                )
-            ),
-            validator:(v){
-              return !_pwdExp.hasMatch(v!)?'密码由6到12位数字与小写字母组成':null;
-            },
-            onChanged: (v){
-              setState(() {
-                // checkLoginText();
-              });
-            },
-            onEditingComplete: (){
-              ddlog("onEditingComplete");
-            }, //'完成'回调
-          )
-        ],
+            // SizedBox(height: 15.0),
+            TextFormField( //密码
+              controller: _pwdController,
+              focusNode: focusNode2,//关联focusNode1
+              obscureText: isEye, //密码类型 内容用***显示
+              maxLength: 12,
+              textInputAction: TextInputAction.done, //显示'完成'
+              decoration: InputDecoration(
+                  hintText: '请输入密码',
+                  // labelText: '密码',
+                  // contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                  prefixIcon:Icon(Icons.lock),
+                  // border: OutlineInputBorder(
+                  //     borderRadius: BorderRadius.circular(40.0)
+                  // ),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      Icons.remove_red_eye,
+                      size: 21,
+                      color: Color(0xff666666),
+                    ),
+                    onPressed: (){
+                      setState(() {
+                        isEye = !isEye;
+                      });
+                    },
+                  )
+              ),
+              validator:(v){
+                return !_pwdExp.hasMatch(v!)?'密码由6到12位数字与小写字母组成':null;
+              },
+              onChanged: (v){
+                setState(() {
+                  // checkLoginText();
+                });
+              },
+              onEditingComplete: (){
+                ddlog("onEditingComplete");
+              }, //'完成'回调
+            )
+          ],
+        ),
       ),
     );
   }

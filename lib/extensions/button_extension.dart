@@ -48,7 +48,8 @@ extension TextButtonExt on TextButton{
     required Widget image,
     ImageAlignment? imageAlignment = ImageAlignment.left,
     double? padding = 8,
-    BorderSide? side = const BorderSide(width: 1.0, color: Colors.black12),
+    // BorderSide? side = const BorderSide(width: 1.0, color: Colors.black12),
+    BorderSide? side,
     required void callback(Text text)}) {
 
     Widget child;

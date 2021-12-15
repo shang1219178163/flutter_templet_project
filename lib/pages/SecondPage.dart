@@ -2,11 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_templet_project/APPThemeSettings.dart';
+import 'package:flutter_templet_project/basicWidget/MyPainter.dart';
 import 'package:flutter_templet_project/basicWidget/NNPopupRoute.dart';
+import 'package:flutter_templet_project/basicWidget/gesture_detector_container.dart';
 import 'package:flutter_templet_project/basicWidget/upload_button.dart';
 import 'package:flutter_templet_project/extensions/button_extension.dart';
 import 'package:flutter_templet_project/extensions/ddlog.dart';
-import 'package:flutter_templet_project/extensions/navigator_extension.dart';
 
 import 'package:flutter_templet_project/extensions/globalKey_extension.dart';
 import 'package:flutter_templet_project/extensions/navigator_extension.dart';
@@ -33,6 +34,7 @@ class _SecondPageState extends State<SecondPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: Text(widget.title ?? "$widget"),
         // leading: BackButton(
         //           color: Colors.white,
         //           onPressed: (){ NavigatorExt.popPage(context); }
@@ -49,18 +51,18 @@ class _SecondPageState extends State<SecondPage> {
             },
           ),
         ],
-        title: Text(widget.title ?? "$widget"),
       ),
       body: Center(
         child: _isList ? buildListView() : buildGridView(),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          APPThemeSettings.instance.changeTheme();
-        },
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {
+      //     APPThemeSettings.instance.changeTheme();
+      //   },
+      //   tooltip: 'Increment',
+      //   child: Icon(Icons.add),
+      // ),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
     );
   }
 
@@ -157,6 +159,7 @@ class _SecondPageState extends State<SecondPage> {
                   text: Text("菜单left"),
                   image: Icon(Icons.info),
                   imageAlignment: ImageAlignment.left,
+                  side: BorderSide(width: 1.0, color: Colors.black12),
                   callback: (value) {
                     ddlog(value.data);
                   }),
@@ -164,6 +167,7 @@ class _SecondPageState extends State<SecondPage> {
                   text: Text("菜单right"),
                   image: Icon(Icons.info),
                   imageAlignment: ImageAlignment.right,
+                  side: BorderSide(width: 1.0, color: Colors.blue),
                   callback: (value) {
                     ddlog(value.data);
                   }),
@@ -171,6 +175,7 @@ class _SecondPageState extends State<SecondPage> {
                   text: Text("菜单top"),
                   image: Icon(Icons.info),
                   imageAlignment: ImageAlignment.top,
+                  side: BorderSide(width: 1.0, color: Colors.red),
                   callback: (value) {
                     ddlog(value.data);
                   }),
@@ -178,6 +183,7 @@ class _SecondPageState extends State<SecondPage> {
                   text: Text("菜单bottom"),
                   image: Icon(Icons.info),
                   imageAlignment: ImageAlignment.bottom,
+                  side: BorderSide(width: 1.0, color: Colors.green),
                   callback: (value) {
                     ddlog(value.data);
                   }),
@@ -255,9 +261,10 @@ class _SecondPageState extends State<SecondPage> {
                 style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
               ),
             ),
+
             UploadButton(
-              image: Image.asset("images/img_update.png", fit: BoxFit.fill, width: 130, height: 130,),
-              placeholderImage: Image.asset("images/icon_delete.png", fit: BoxFit.fill, width: 25, height: 25,),
+              image: Image.asset("images/img_update.png", fit: BoxFit.fill, width: 100, height: 100,),
+              deteleImage: Image.asset("images/icon_delete.png", fit: BoxFit.fill, width: 25, height: 25,),
               onPressed: () {
                 ddlog("onPressed");
               },
@@ -274,7 +281,76 @@ class _SecondPageState extends State<SecondPage> {
                 style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
               ),
             ),
+
+            OutlinedButton(
+                onPressed: () {
+                  ddlog("OutlinedButton");
+                },
+                child:Text("OutlinedButton")
+            ),
             _buildSpreadArea(),
+
+            Divider(),
+            GestureDetectorContainer(
+              // edge: EdgeInsets.all(10),
+              color: Colors.orange,
+              onTap: (){
+                ddlog("onTap");
+              },
+              child: OutlinedButton(
+                child: Text("OutlinedButton"),
+                onPressed: (){
+                  ddlog("onPressed");
+                },
+              ),
+            ),
+            Divider(),
+            _buildCustomPaint(),
+
+            Divider(),
+
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  // width: 100,
+                  color: Colors.green,
+                  child:  Column(
+                      children: [
+                        Text("07-08"),
+                        Text("13:20"),
+                      ]
+                  ),
+                ),
+                // _buildTimeLineIndicator(0),
+                Icon(Icons.add_circle, color: Colors.green),
+
+                Expanded(
+                  child: Container(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          "新建工单",
+                          style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
+                          maxLines: 2,
+                        ),
+                        SizedBox(height: 3, ),
+                        Text(
+                          "备注：降价1000客户可考虑，辛苦再撮合;备注：降价1000客户可考虑，辛苦再撮合备注：降价1000客户可考虑",
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Divider(),
+
+            // _buildTimeLineIndicator(1),
           ],
         ),
       ],
@@ -517,24 +593,74 @@ class _SecondPageState extends State<SecondPage> {
   }
 
 
-  _buildSpreadArea() {
+  _buildSpreadArea({EdgeInsets padding = const EdgeInsets.symmetric(horizontal: 25)}) {
     return GestureDetector(
       ///这里设置behavior
       behavior: HitTestBehavior.translucent,
       onTap: (){
-        ddlog("GestureDetector");
+        ddlog("onTap");
       },
       child: Container(
         // height: 50,
         // width: 100,
-        color: Colors.transparent,
-        padding: EdgeInsets.symmetric(horizontal: 25),
+        // color: Colors.transparent,
+        color: Colors.yellow,
+        padding: padding,
         child: OutlinedButton(
             onPressed: () {
               ddlog("OutlinedButton");
             },
             child:Text("OutlinedButton")),
       ),
+    );
+  }
+
+  _buildCustomPaint() {
+    return GestureDetector(
+      onTap: (){
+        ddlog("ontap");
+      },
+      child: Container(
+        height: 100,
+        width: 100,
+        color: Colors.green,
+        child: CustomPaint(
+          painter: MyPainter(
+            padding: EdgeInsets.only(top: 5, left: 10, bottom: 15, right: 20),
+            color: Colors.yellow,
+          ),
+        ),
+      ),
+    );
+  }
+
+  _buildTimeLineIndicator(int index) {
+    var list = <Widget>[];
+    switch (index) {
+      case 0:
+        list = [
+          Icon(Icons.add_circle),
+          _buildLine(true),
+          
+        ];
+        break;
+      case 1:
+        list = [
+          Icon(Icons.remove_circle),
+        ];
+        break;
+    }
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: list,
+    );
+  }
+
+  Widget _buildLine(bool visible) {
+    return Container(
+      width: visible ? 10.0 : 0.0,
+      height: 16.0,
+      color: Colors.grey.shade400,
     );
   }
 
