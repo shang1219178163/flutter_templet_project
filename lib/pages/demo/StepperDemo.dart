@@ -47,12 +47,15 @@ class _StepperDemoState extends State<StepperDemo> {
         appBar: AppBar(
           title: Text("$widget"),
           actions: [
-            TextButton(onPressed: (){
-              ddlog("change");
-              setState(() {
-                _type = _type == StepperType.vertical ? StepperType.horizontal : StepperType.vertical;
-              });
-            }, child: Icon(Icons.change_circle_outlined, color: Colors.white,)),
+            TextButton(
+              onPressed: (){
+                ddlog("change");
+                setState(() {
+                  _type = _type == StepperType.vertical ? StepperType.horizontal : StepperType.vertical;
+                });
+              },
+              child: Icon(Icons.change_circle_outlined,
+                color: Colors.white,)),
           ],
           bottom: buildPreferredSize(context),
         ),
@@ -99,8 +102,8 @@ class _StepperDemoState extends State<StepperDemo> {
                       });
                     },
                     borderColor: Colors.white,
-                    selectedColor: Theme.of(context).primaryColor,
-                    unselectedColor: Colors.white,
+                    unselectedColor: Theme.of(context).primaryColor,
+                    selectedColor: Colors.white,
                   ),
                 ),
                 SizedBox(width: 24)

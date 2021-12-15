@@ -8,7 +8,7 @@
 
 // example code:
 //```
-// ExpandAreaContainer(
+// GestureDetectorContainer(
 //   edge: EdgeInsets.all(20),
 //   color: Colors.yellow,
 //   onTap: (){
@@ -86,19 +86,19 @@ class GestureDetectorContainer extends StatelessWidget {
       behavior: HitTestBehavior.translucent,
       onTap: this.onTap,
       child: Container(
-          color: this.color,
-          alignment: this.alignment,
-          padding: this.edge,
-          child: this.child,
-          decoration: this.decoration,
-          foregroundDecoration: this.foregroundDecoration,
-          width: this.width,
-          height: this.height,
-          constraints: this.constraints,
-          margin: this.margin,
-          transform: this.transform,
-          transformAlignment: this.transformAlignment,
-          clipBehavior: this.clipBehavior
+        color: this.color,
+        alignment: this.alignment,
+        padding: this.edge,
+        child: this.child,
+        decoration: this.decoration,
+        foregroundDecoration: this.foregroundDecoration,
+        width: this.width,
+        height: this.height,
+        constraints: this.constraints,
+        margin: this.margin,
+        transform: this.transform,
+        transformAlignment: this.transformAlignment,
+        clipBehavior: this.clipBehavior
       ),
     );
   }

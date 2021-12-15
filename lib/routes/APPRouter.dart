@@ -3,12 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/Provider/provider_list_demo.dart';
 import 'package:flutter_templet_project/basicWidget/responsive_column.dart';
 import 'package:flutter_templet_project/pages/LocalImagePage.dart';
+import 'package:flutter_templet_project/pages/Vendor/timeline/timeline_demo.dart';
+import 'package:flutter_templet_project/pages/Vendor/timelines_demo/timelines_demo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedGroupDemo.dart';
 import 'package:flutter_templet_project/pages/demo/BlurViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/BottomAppBarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/BottomSheetDemo.dart';
 import 'package:flutter_templet_project/pages/demo/CalendarDatePickerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ChipDemo.dart';
+import 'package:flutter_templet_project/pages/demo/HitTestDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MouseRegionDemo.dart';
 import 'package:flutter_templet_project/pages/demo/OffstageDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AbsorbPointerDemo.dart';
@@ -48,6 +51,7 @@ import 'package:flutter_templet_project/Pages/ThirdPage.dart';
 import 'package:flutter_templet_project/pages/demo/TimePickerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/banner_demo.dart';
 import 'package:flutter_templet_project/pages/demo/box_demo.dart';
+import 'package:flutter_templet_project/pages/demo/button_border_demo.dart';
 import 'package:flutter_templet_project/pages/demo/will_pop_scope_demo.dart';
 import 'package:flutter_templet_project/pages/system_icons_page.dart';
 import 'package:flutter_templet_project/pages/tabBar_reuse_page_demo.dart';
@@ -90,6 +94,7 @@ import 'package:flutter_templet_project/pages/demo/StreamBuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedSwitcherDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedWidgetDemo.dart';
 import 'package:flutter_templet_project/pages/test_page.dart';
+import 'package:flutter_templet_project/pages/transparent_navgation_bar_demo.dart';
 import 'package:flutter_templet_project/provider/getx_state_demo.dart';
 import 'package:flutter_templet_project/provider/rxDart_provider_demo.dart';
 import 'package:flutter_templet_project/provider/state_manager_demo.dart';
@@ -215,7 +220,11 @@ class APPRouter {
   static const boxDemo = '/BoxDemo';
   static const mouseRegionDemo = '/MouseRegionDemo';
   static const localImagePage = '/LocalImagePage';
-
+  static const timelineDemo = '/timelineDemo';
+  static const timelinesDemo = '/timelinesDemo';
+  static const hitTest = '/hitTest';
+  static const transparentNavgationBarDemo = '/transparentNavgationBarDemo';
+  static const buttonBorderDemo = '/buttonBorderDemo';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -352,6 +361,11 @@ class AppPage{
     GetPage(name: APPRouter.boxDemo, page: () => BoxDemo(), ),
     GetPage(name: APPRouter.mouseRegionDemo, page: () => MouseRegionDemo(), ),
     GetPage(name: APPRouter.localImagePage, page: () => LocalImagePage(), ),
+    GetPage(name: APPRouter.timelineDemo, page: () => TimelineDemo(), ),
+    GetPage(name: APPRouter.timelinesDemo, page: () => TimelinesDemo(), ),
+    GetPage(name: APPRouter.hitTest, page: () => HitTest(), ),
+    GetPage(name: APPRouter.transparentNavgationBarDemo, page: () => TransparentNavgationBarDemo(), ),
+    GetPage(name: APPRouter.buttonBorderDemo, page: () => ButtonBorderDemo(), ),
 
 
   ];

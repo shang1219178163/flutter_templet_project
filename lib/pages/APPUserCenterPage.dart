@@ -63,6 +63,7 @@ class _APPUserCenterPageState extends State<APPUserCenterPage>{
               },
             ),
           ],
+          shadowColor: Colors.transparent,
         ),
       // drawer: APPDrawerMenuPage(),
 

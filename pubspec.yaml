@@ -56,9 +56,6 @@ dependencies:
   json_annotation: ^4.3.0
   json_serializable: ^6.0.1
 
-#  logger: ^1.1.0
-#  simple_logger: ^1.8.1+1
-
   textless: ^6.6.6
   division: ^0.8.8
   #  easy_localization:
@@ -104,10 +101,14 @@ dependencies:
   auto_size_text: ^2.1.0
   table_calendar: ^2.3.3
   web_socket_channel: ^2.0.0
+
+  font_awesome_flutter: ^9.0.0
   timelines: ^0.1.0
 
   enhance_stepper: ^0.0.8
   enhance_expansion_panel: ^0.0.3
+
+#  path_drawing: ^0.4.0
 #  User:
 #    hosted:
 #      name: syn_mine_pages

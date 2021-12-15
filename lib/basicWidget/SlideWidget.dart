@@ -37,11 +37,11 @@ class SlideWidgetState extends State<SlideWidget> with SingleTickerProviderState
   VoidCallback onButtonPressed;
 
   double _x = 0.0;
-  Offset _lastOffset;
+  late Offset _lastOffset;
   double screenSize = getWindowSize();
 
-  AnimationController _animation;
-  VoidCallback _animationListener;
+  late AnimationController _animation;
+  late VoidCallback _animationListener;
   bool isOpen = false;
 
   SlideWidgetState(
@@ -153,16 +153,18 @@ class SlideWidgetState extends State<SlideWidget> with SingleTickerProviderState
 }
 
 class Slide2Widget extends SingleChildRenderObjectWidget {
-  Offset offset;
 
   Slide2Widget({
     Key? key,
-    required Widget child,
+    required this.child,
     this.offset: Offset.zero})
       : super(key: key, child: child);
 
+  Offset offset;
+  Widget child;
+
   @override
-  RenderObject createRenderObject(BuildContext context) => RenderSlideObject();
+  RenderObject createRenderObject(BuildContext context) => RenderSlideObject(child: this.child);
 
   @override
   void updateRenderObject(
