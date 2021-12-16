@@ -412,6 +412,8 @@ var _vendors = [
 
 var _others = [
   Tuple2(APPRouter.buttonBorderDemo, "buttonBorderDemo", ),
+  Tuple2(APPRouter.clipDemo, "clipDemo", ),
+
 
   Tuple2(APPRouter.transparentNavgationBarDemo, "transparentNavgationBarDemo", ),
   Tuple2(APPRouter.richTextDemo, "richTextDemo", ),

@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_templet_project/APPThemeSettings.dart';
-import 'package:flutter_templet_project/basicWidget/MyPainter.dart';
+import 'package:flutter_templet_project/pages/demo/MyPainter.dart';
 import 'package:flutter_templet_project/basicWidget/NNPopupRoute.dart';
 import 'package:flutter_templet_project/basicWidget/gesture_detector_container.dart';
 import 'package:flutter_templet_project/basicWidget/upload_button.dart';
