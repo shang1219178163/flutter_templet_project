@@ -364,7 +364,6 @@ var _list = [
   Tuple2(APPRouter.blurViewDemo, "blurViewDemo", ),
   Tuple2(APPRouter.boxDemo, "boxDemo", ),
   Tuple2(APPRouter.mouseRegionDemo, "mouseRegionDemo", ),
-  Tuple2(APPRouter.timelineDemo, "timelineDemo", ),
 
 
 ];
@@ -401,19 +400,21 @@ var _customs = [
   Tuple2(APPRouter.locationPopView, "locationPopView", ),
   Tuple2(APPRouter.numberStepperDemo, "NumberStepperDemo", ),
   Tuple2(APPRouter.numberFormatDemo, "numberFormatDemo", ),
+  Tuple2(APPRouter.steperConnectorDemo, "steperConnectorDemo", ),
+
 
 ];
 
 var _vendors = [
-  Tuple2(APPRouter.timelinesDemo, "timelineTileDemo", ),
+  Tuple2(APPRouter.timelinesDemo, "timelinesDemo", ),
+  Tuple2(APPRouter.timelineDemo, "timelineDemo", ),
 
 ];
 
 
 var _others = [
-  Tuple2(APPRouter.buttonBorderDemo, "buttonBorderDemo", ),
+  Tuple2(APPRouter.borderDemo, "buttonBorderDemo", ),
   Tuple2(APPRouter.clipDemo, "clipDemo", ),
-
 
   Tuple2(APPRouter.transparentNavgationBarDemo, "transparentNavgationBarDemo", ),
   Tuple2(APPRouter.richTextDemo, "richTextDemo", ),

@@ -49,6 +49,7 @@ class TimelineElement extends StatelessWidget {
       ),
     );
   }
+
   Widget bubble() {
     return Stack(
       children: <Widget>[

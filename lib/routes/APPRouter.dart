@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/Provider/provider_list_demo.dart';
 import 'package:flutter_templet_project/basicWidget/responsive_column.dart';
 import 'package:flutter_templet_project/pages/LocalImagePage.dart';
+import 'package:flutter_templet_project/pages/Vendor/TextlessDemo.dart';
 import 'package:flutter_templet_project/pages/Vendor/timeline/timeline_demo.dart';
 import 'package:flutter_templet_project/pages/Vendor/timelines_demo/timelines_demo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedGroupDemo.dart';
@@ -51,8 +52,9 @@ import 'package:flutter_templet_project/Pages/ThirdPage.dart';
 import 'package:flutter_templet_project/pages/demo/TimePickerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/banner_demo.dart';
 import 'package:flutter_templet_project/pages/demo/box_demo.dart';
-import 'package:flutter_templet_project/pages/demo/button_border_demo.dart';
+import 'package:flutter_templet_project/pages/demo/border_demo.dart';
 import 'package:flutter_templet_project/pages/demo/clip_demo.dart';
+import 'package:flutter_templet_project/pages/demo/steper_connector_demo.dart';
 import 'package:flutter_templet_project/pages/demo/will_pop_scope_demo.dart';
 import 'package:flutter_templet_project/pages/system_icons_page.dart';
 import 'package:flutter_templet_project/pages/tabBar_reuse_page_demo.dart';
@@ -87,7 +89,6 @@ import 'package:flutter_templet_project/pages/ForgetPasswordPage.dart';
 import 'package:flutter_templet_project/pages/LoginPage.dart';
 import 'package:flutter_templet_project/pages/LoginPage2.dart';
 import 'package:flutter_templet_project/pages/SigninPage.dart';
-import 'package:flutter_templet_project/Pages/textlessDemo.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/sliver_family_demo.dart';
 
 import 'package:flutter_templet_project/pages/demo/FutureBuilderDemo.dart';
@@ -225,8 +226,9 @@ class APPRouter {
   static const timelinesDemo = '/timelinesDemo';
   static const hitTest = '/hitTest';
   static const transparentNavgationBarDemo = '/transparentNavgationBarDemo';
-  static const buttonBorderDemo = '/buttonBorderDemo';
+  static const borderDemo = '/borderDemo';
   static const clipDemo = '/clipDemo';
+  static const steperConnectorDemo = '/steperConnectorDemo';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -367,9 +369,9 @@ class AppPage{
     GetPage(name: APPRouter.timelinesDemo, page: () => TimelinesDemo(), ),
     GetPage(name: APPRouter.hitTest, page: () => HitTest(), ),
     GetPage(name: APPRouter.transparentNavgationBarDemo, page: () => TransparentNavgationBarDemo(), ),
-    GetPage(name: APPRouter.buttonBorderDemo, page: () => ButtonBorderDemo(), ),
+    GetPage(name: APPRouter.borderDemo, page: () => BorderDemo(), ),
     GetPage(name: APPRouter.clipDemo, page: () => ClipDemo(), ),
-
+    GetPage(name: APPRouter.steperConnectorDemo, page: () => SteperConnectorDemo(), ),
 
   ];
 
