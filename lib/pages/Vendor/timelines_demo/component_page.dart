@@ -133,7 +133,7 @@ class ComponentPage extends StatelessWidget {
           contents: Card(
             child: Container(
               padding: EdgeInsets.all(8.0),
-              child: Text('contents'),
+              child: Text('contents'*10),
             ),
           ),
           node: TimelineNode(
