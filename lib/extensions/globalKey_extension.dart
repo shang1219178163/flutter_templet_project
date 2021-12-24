@@ -20,20 +20,63 @@ extension GlobalKeyExt on GlobalKey{
     return renderBox;
   }
 
-  /// 获取当前组件的 Offset
-  Offset offset({Offset offset = Offset.zero}) {
+  /// 获取当前组件的 position
+  Offset? position({Offset offset = Offset.zero}) {
     if (this.renderBox() == null) {
-      return Offset.zero;
+      return null;
     }
     var point = this.renderBox()!.localToGlobal(offset); //组件坐标
     return point;
   }
 
   /// 获取当前组件的 Size
-  Size size() {
+  Size? size() {
     if (this.renderBox() == null) {
-      return Size.zero;
+      return null;
     }
     return this.renderBox()!.size;
   }
+
+  double? maxX() {
+    if (this.position() == null || this.size() == null) {
+      return null;
+    }
+    return this.position()!.dx + this.size()!.width;
+  }
+
+  double? maxY() {
+    if (this.position() == null || this.size() == null) {
+      return null;
+    }
+    return this.position()!.dy + this.size()!.height;
+  }
+
+  double? minX() {
+    if (this.position() == null) {
+      return null;
+    }
+    return this.position()!.dx;
+  }
+
+  double? minY() {
+    if (this.position() == null) {
+      return null;
+    }
+    return this.position()!.dy;
+  }
+
+  double? midX() {
+    if (this.position() == null || this.size() == null) {
+      return null;
+    }
+    return this.position()!.dx + this.size()!.width * 0.5;
+  }
+
+  double? midY() {
+    if (this.position() == null || this.size() == null) {
+      return null;
+    }
+    return this.position()!.dy + this.size()!.height * 0.5;
+  }
+
 }

@@ -87,7 +87,7 @@ class _ThirdPageState extends State<ThirdPage> {
                 selectedIndex = index;
               });
               ddlog([selectedIndex, index,]);
-              ddlog([_globalKey(index).offset(), _globalKey(index).size()]);
+              ddlog([_globalKey(index).position(), _globalKey(index).size()]);
             },
           ),
           onDismissed: (direction) {
