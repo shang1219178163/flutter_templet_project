@@ -6,9 +6,9 @@
 //  Copyright © 12/16/21 shang. All rights reserved.
 //
 
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:timelines/timelines.dart';
 
 // ignore: unused_element
 class SteperConnector extends StatelessWidget {
@@ -23,7 +23,7 @@ class SteperConnector extends StatelessWidget {
     this.indent = 0,
     this.endIndent = 0,
     required this.child,
-  })   : assert(space >= 0),
+  })  : assert(space >= 0),
         assert(indent >= 0),
         assert(endIndent >= 0),
         super(key: key);
@@ -57,13 +57,13 @@ class SteperConnector extends StatelessWidget {
         child: Padding(
           padding: direction == Axis.vertical
               ? EdgeInsetsDirectional.only(
-            top: indent,
-            bottom: endIndent,
-          )
+                  top: indent,
+                  bottom: endIndent,
+                )
               : EdgeInsetsDirectional.only(
-            start: indent,
-            end: endIndent,
-          ),
+                  start: indent,
+                  end: endIndent,
+                ),
           child: child,
         ),
       ),
@@ -71,9 +71,7 @@ class SteperConnector extends StatelessWidget {
   }
 }
 
-
 class SteperNode extends StatelessWidget {
-
   SteperNode({
     Key? key,
     this.direction = Axis.vertical,
@@ -103,30 +101,37 @@ class SteperNode extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final indicator = this.indicator ?? Container(
-      color: color,
-      width: 30,
-      height: 30,
-    );
+    final indicator = this.indicator ??
+        Container(
+          color: color,
+          width: 30,
+          height: 30,
+        );
 
-    var startConnector = this.direction == Axis.vertical ? this.startConnector ?? Container(
-      color: color,
-      width: 2,
-    ) : Container(
-      color: color,
-      height: 2,
-    );
+    var startConnector = this.direction == Axis.vertical
+        ? this.startConnector ??
+            Container(
+              color: color,
+              width: 2,
+            )
+        : Container(
+            color: color,
+            height: 2,
+          );
     if (this.drawStartConnector == false) {
       startConnector = Container();
     }
 
-    var endConnector = this.direction == Axis.vertical ? this.endConnector ?? Container(
-      color: color,
-      width: 2,
-    ) : Container(
-      color: color,
-      height: 2,
-    );
+    var endConnector = this.direction == Axis.vertical
+        ? this.endConnector ??
+            Container(
+              color: color,
+              width: 2,
+            )
+        : Container(
+            color: color,
+            height: 2,
+          );
 
     if (this.drawEndConnector == false) {
       endConnector = Container();
@@ -168,24 +173,48 @@ class SteperNode extends StatelessWidget {
   }
 }
 
-
-
-
 class NNTimelineTile extends StatelessWidget {
   const NNTimelineTile({
     Key? key,
     this.direction,
     required this.node,
+    this.nodeAlign = TimelineNodeAlign.basic,
+    this.nodePosition,
     this.contents,
     this.oppositeContents,
-    this.mainAxisExtent = 0,
+    this.mainAxisExtent,
     this.crossAxisExtent,
-  })  : super(key: key);
+  })  : assert(
+          nodeAlign == TimelineNodeAlign.basic ||
+              (nodeAlign != TimelineNodeAlign.basic && nodePosition == null),
+          'Cannot provide both a nodeAlign and a nodePosition',
+        ),
+        assert(nodePosition == null || nodePosition >= 0),
+        super(key: key);
 
+  /// {@template timelines.direction}
+  /// The axis along which the timeline scrolls.
+  /// {@endtemplate}
   final Axis? direction;
 
   /// A widget that displays indicator and two connectors.
   final Widget node;
+
+  /// Align the [node] within the timeline tile.
+  ///
+  /// If try to use indicators with different sizes in each timeline tile, the
+  /// timeline node may be broken.
+  /// This can be prevented by set [IndicatorThemeData.size] to an appropriate
+  /// size.
+  ///
+  /// If [nodeAlign] is not [TimelineNodeAlign.basic], then [nodePosition] is
+  /// ignored.
+  final TimelineNodeAlign nodeAlign;
+
+  /// A position of [node] inside both two contents.
+  ///
+  /// {@macro timelines.node.position}
+  final double? nodePosition;
 
   /// The contents to display inside the timeline tile.
   final Widget? contents;
@@ -193,15 +222,42 @@ class NNTimelineTile extends StatelessWidget {
   /// The contents to display on the opposite side of the [contents].
   final Widget? oppositeContents;
 
+  /// The extent of the child in the scrolling axis.
+  /// If the scroll axis is vertical, this extent is the child's height. If the
+  /// scroll axis is horizontal, this extent is the child's width.
+  ///
+  /// If non-null, forces the tile to have the given extent in the scroll
+  /// direction.
+  ///
+  /// Specifying an [mainAxisExtent] is more efficient than letting the tile
+  /// determine their own extent because the because it don't use the Intrinsic
   /// widget([IntrinsicHeight]/[IntrinsicWidth]) when building.
   final double? mainAxisExtent;
 
+  /// The extent of the child in the non-scrolling axis.
+  ///
+  /// If the scroll axis is vertical, this extent is the child's width. If the
+  /// scroll axis is horizontal, this extent is the child's height.
   final double? crossAxisExtent;
+
+  double _getEffectiveNodePosition(BuildContext context) {
+    if (nodeAlign == TimelineNodeAlign.start) return 0.0;
+    if (nodeAlign == TimelineNodeAlign.end) return 1.0;
+    var nodePosition = this.nodePosition;
+    nodePosition ??= (node is TimelineTileNode)
+        ? (node as TimelineTileNode).getEffectivePosition(context)
+        : TimelineTheme.of(context).nodePosition;
+    return nodePosition;
+  }
 
   @override
   Widget build(BuildContext context) {
-    const kFlexMultiplier = 1000.0;
+    final kFlexMultiplier = 1000;
+    // TODO: reduce direction check
+    final direction = this.direction;
     final nodeFlex = 0.5 * kFlexMultiplier;
+
+    // var minNodeExtent = TimelineTheme.of(context).indicatorTheme.size ?? 0.0;
     var minNodeExtent = 0.0;
 
     var items = [
