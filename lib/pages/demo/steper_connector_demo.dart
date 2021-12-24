@@ -110,8 +110,30 @@ class _SteperConnectorDemoState extends State<SteperConnectorDemo> {
                 _buildVerticalRight(),
               ]
             ),
+            Flex(
+              direction: Axis.vertical,
+              children: [
+                NNTimelineTile(
+                  direction: Axis.vertical,
+                  oppositeContents: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text('opposite\ncontents'),
+                  ),
+                  contents: Card(
+                    child: Container(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text('contents'*10),
+                    ),
+                  ),
+                  node: TimelineNode(
+                    indicator: DotIndicator(),
+                    startConnector: SolidLineConnector(),
+                    endConnector: SolidLineConnector(),
+                  ),
+                ),
           ],
         ),
+
       ]
     );
   }
