@@ -37,46 +37,51 @@ extension GlobalKeyExt on GlobalKey{
     return this.renderBox()!.size;
   }
 
-  double? maxX() {
-    if (this.position() == null || this.size() == null) {
-      return null;
-    }
-    return this.position()!.dx + this.size()!.width;
-  }
+  // double? maxX() {
+  //   if (this.position() == null || this.size() == null) {
+  //     return null;
+  //   }
+  //   return this.position()!.dx + this.size()!.width;
+  // }
+  //
+  // double? maxY() {
+  //   if (this.position() == null || this.size() == null) {
+  //     return null;
+  //   }
+  //   return this.position()!.dy + this.size()!.height;
+  // }
+  //
+  // double? minX() {
+  //   if (this.position() == null) {
+  //     return null;
+  //   }
+  //   return this.position()!.dx;
+  // }
+  //
+  // double? minY() {
+  //   if (this.position() == null) {
+  //     return null;
+  //   }
+  //   return this.position()!.dy;
+  // }
+  //
+  // double? midX() {
+  //   if (this.position() == null || this.size() == null) {
+  //     return null;
+  //   }
+  //   return this.position()!.dx + this.size()!.width * 0.5;
+  // }
+  //
+  // double? midY() {
+  //   if (this.position() == null || this.size() == null) {
+  //     return null;
+  //   }
+  //   return this.position()!.dy + this.size()!.height * 0.5;
+  // }
 
-  double? maxY() {
-    if (this.position() == null || this.size() == null) {
-      return null;
-    }
-    return this.position()!.dy + this.size()!.height;
-  }
+}
 
-  double? minX() {
-    if (this.position() == null) {
-      return null;
-    }
-    return this.position()!.dx;
-  }
 
-  double? minY() {
-    if (this.position() == null) {
-      return null;
-    }
-    return this.position()!.dy;
-  }
-
-  double? midX() {
-    if (this.position() == null || this.size() == null) {
-      return null;
-    }
-    return this.position()!.dx + this.size()!.width * 0.5;
-  }
-
-  double? midY() {
-    if (this.position() == null || this.size() == null) {
-      return null;
-    }
-    return this.position()!.dy + this.size()!.height * 0.5;
-  }
+extension SizeExt on Size{
 
 }
