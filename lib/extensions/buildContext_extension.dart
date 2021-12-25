@@ -15,12 +15,6 @@ extension BuildContextExt on BuildContext {
   /// 获取当前组件的 RenderBox
   RenderBox? renderBox() {
     return this.findRenderObject() is RenderBox ? (this.findRenderObject() as RenderBox) : null;
-    RenderObject? renderObj = this.findRenderObject();
-    if (renderObj == null || renderObj is! RenderBox) {
-      return null;
-    }
-    RenderBox renderBox = renderObj;
-    return renderBox;
   }
 
   /// 获取当前组件的 position
