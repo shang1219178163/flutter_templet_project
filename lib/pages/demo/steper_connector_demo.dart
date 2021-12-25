@@ -37,8 +37,6 @@ class _SteperConnectorDemoState extends State<SteperConnectorDemo> {
   _buildBody() {
     return ListView(
       children: [
-
-
         TimelineTile(
           oppositeContents: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -56,7 +54,6 @@ class _SteperConnectorDemoState extends State<SteperConnectorDemo> {
             endConnector: SolidLineConnector(),
           ),
         ),
-
 
         Container(
           color: Colors.green,
@@ -79,10 +76,10 @@ class _SteperConnectorDemoState extends State<SteperConnectorDemo> {
             ),
           ),
         ),
+
         Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -110,34 +107,34 @@ class _SteperConnectorDemoState extends State<SteperConnectorDemo> {
                 _buildVerticalRight(),
               ]
             ),
-            Flex(
-              direction: Axis.vertical,
-              children: [
-                NNTimelineTile(
-                  direction: Axis.vertical,
-                  oppositeContents: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text('opposite\ncontents'),
-                  ),
-                  contents: Card(
-                    child: Container(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text('contents'*10),
-                    ),
-                  ),
-                  node: TimelineNode(
-                    indicator: DotIndicator(),
-                    startConnector: SolidLineConnector(),
-                    endConnector: SolidLineConnector(),
-                  ),
-                ),
+
+            // Flex(
+            //   direction: Axis.vertical,
+            //   children: [
+            //     NNTimelineTile(
+            //       direction: Axis.vertical,
+            //       oppositeContents: Padding(
+            //         padding: const EdgeInsets.all(8.0),
+            //         child: Text('opposite\ncontents'),
+            //       ),
+            //       contents: Card(
+            //         child: Container(
+            //           padding: EdgeInsets.all(8.0),
+            //           child: Text('contents'*10),
+            //         ),
+            //       ),
+            //       node: TimelineNode(
+            //         indicator: DotIndicator(),
+            //         startConnector: SolidLineConnector(),
+            //         endConnector: SolidLineConnector(),
+            //       ),
+            //     ),
           ],
         ),
 
       ]
     );
   }
-
 
 
   _buildBodyColumn() {
