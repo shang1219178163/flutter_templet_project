@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
+import 'package:flutter_templet_project/extensions/buildContext_extension.dart';
 import 'package:flutter_templet_project/extensions/ddlog.dart';
-import 'package:flutter_templet_project/extensions/globalKey_extension.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:styled_widget/styled_widget.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
@@ -87,7 +87,7 @@ class _ThirdPageState extends State<ThirdPage> {
                 selectedIndex = index;
               });
               ddlog([selectedIndex, index,]);
-              ddlog([_globalKey(index).offset(), _globalKey(index).size()]);
+              ddlog([_globalKey(index).position(), _globalKey(index).size]);
             },
           ),
           onDismissed: (direction) {

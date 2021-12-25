@@ -12,15 +12,25 @@ import 'package:flutter_templet_project/extensions/ddlog.dart';
 
 extension BuildContextExt on BuildContext {
 
+  /// 获取当前组件的 RenderBox
+  RenderBox? renderBox() {
+    return this.findRenderObject() is RenderBox ? (this.findRenderObject() as RenderBox) : null;
+    RenderObject? renderObj = this.findRenderObject();
+    if (renderObj == null || renderObj is! RenderBox) {
+      return null;
+    }
+    RenderBox renderBox = renderObj;
+    return renderBox;
+  }
+
+  /// 获取当前组件的 position
+  Offset? position({Offset offset = Offset.zero}) {
+    return this.renderBox()?.localToGlobal(offset);
+  }
+
   ///扩展方法
   void logRendBoxInfo() {
-    RenderObject? renderObject = this.findRenderObject();
-    if (renderObject == null || renderObject is! RenderBox) {
-      return;
-    }
-    RenderBox box = renderObject;
-    Offset origin = box.localToGlobal(Offset.zero);
-    print([DateTime.now(), origin, box.size]);
+    print([DateTime.now(), this.position(), this.size]);
   }
 
   /// 扩展属性 Theme.of(this.context)
@@ -64,6 +74,21 @@ extension StatefulWidgetExt<T extends StatefulWidget> on State<T> {
   showSnackBar(SnackBar snackBar, [bool isReplace = false]) => this.context.showSnackBar(snackBar, isReplace);
 }
 
+
+extension GlobalKeyExt on GlobalKey{
+
+  /// 获取当前组件的 RenderBox
+  RenderBox? renderBox() => this.currentContext?.renderBox();
+
+  /// 获取当前组件的 position
+  Offset? position({Offset offset = Offset.zero}) => this.currentContext?.position(offset: offset);
+
+  /// 获取当前组件的 Size
+  Size? get size  => this.currentContext?.size;
+
+}
+
+
 // extension StatefulWidgetExt<T extends StatefulWidget> on State<T> {
 //   /// 扩展属性 ScaffoldMessenger.of(this.context);
 //   get scaffoldMessenger => ScaffoldMessenger.of(this.context);
@@ -82,19 +107,6 @@ extension StatefulWidgetExt<T extends StatefulWidget> on State<T> {
 //   get mediaQuery => MediaQuery.of(this.context);
 //   /// 扩展属性 MediaQuery.of(this.context).size
 //   get screenSize => MediaQuery.of(this.context).size;
-// }
-
-
-// showSnackBar({
-//   required BuildContext context,
-//   required SnackBar snackBar,
-//   bool isReplace = false
-// }) {
-//   final scaffoldMessenger = ScaffoldMessenger.of(context);
-//   if (isReplace) {
-//     scaffoldMessenger.hideCurrentSnackBar();
-//   }
-//   scaffoldMessenger.showSnackBar(snackBar);
 // }
 
 // extension SnackBarExt on SnackBar {

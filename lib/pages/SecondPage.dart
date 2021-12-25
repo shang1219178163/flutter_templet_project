@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_templet_project/APPThemeSettings.dart';
+import 'package:flutter_templet_project/extensions/buildContext_extension.dart';
 import 'package:flutter_templet_project/pages/demo/MyPainter.dart';
 import 'package:flutter_templet_project/basicWidget/NNPopupRoute.dart';
 import 'package:flutter_templet_project/basicWidget/gesture_detector_container.dart';
@@ -9,7 +10,6 @@ import 'package:flutter_templet_project/basicWidget/upload_button.dart';
 import 'package:flutter_templet_project/extensions/button_extension.dart';
 import 'package:flutter_templet_project/extensions/ddlog.dart';
 
-import 'package:flutter_templet_project/extensions/globalKey_extension.dart';
 import 'package:flutter_templet_project/extensions/navigator_extension.dart';
 
 import 'package:flutter_templet_project/network/fileManager.dart';
@@ -84,7 +84,7 @@ class _SecondPageState extends State<SecondPage> {
               key: _globalKey,
               onPressed: () {
                 // _showCustomPopView();
-                ddlog([_globalKey.offset(), _globalKey.size()]);
+                ddlog([_globalKey.position(), _globalKey.size]);
                 // test();
               },
             ),
@@ -94,7 +94,7 @@ class _SecondPageState extends State<SecondPage> {
               label: Text("OutlinedButton"),
               key: _globalKey1,
               onPressed: () {
-                ddlog([_globalKey1.offset(), _globalKey1.size()]);
+                ddlog([_globalKey1.position(), _globalKey1.size]);
                 // test();
               },
               style: OutlinedButton.styleFrom(
@@ -391,7 +391,7 @@ class _SecondPageState extends State<SecondPage> {
           key: _globalKey,
           onPressed: () {
             // _showCustomPopView();
-            ddlog([_globalKey.offset(), _globalKey.size()]);
+            ddlog([_globalKey.position(), _globalKey.size]);
             // test();
           },
         ),
@@ -404,7 +404,7 @@ class _SecondPageState extends State<SecondPage> {
           label: Text("OutlinedButton"),
           key: _globalKey1,
           onPressed: () {
-            ddlog([_globalKey1.offset(), _globalKey1.size()]);
+            ddlog([_globalKey1.position(), _globalKey1.size]);
             // test();
           },
         ),
