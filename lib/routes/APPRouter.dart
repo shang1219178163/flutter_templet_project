@@ -12,6 +12,7 @@ import 'package:flutter_templet_project/pages/demo/BottomAppBarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/BottomSheetDemo.dart';
 import 'package:flutter_templet_project/pages/demo/CalendarDatePickerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ChipDemo.dart';
+import 'package:flutter_templet_project/pages/demo/ConstrainedBoxDemo.dart';
 import 'package:flutter_templet_project/pages/demo/HitTestDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MouseRegionDemo.dart';
 import 'package:flutter_templet_project/pages/demo/OffstageDemo.dart';
@@ -229,6 +230,7 @@ class APPRouter {
   static const borderDemo = '/borderDemo';
   static const clipDemo = '/clipDemo';
   static const steperConnectorDemo = '/steperConnectorDemo';
+  static const constrainedBoxDemo = '/constrainedBoxDemo';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -372,6 +374,8 @@ class AppPage{
     GetPage(name: APPRouter.borderDemo, page: () => BorderDemo(), ),
     GetPage(name: APPRouter.clipDemo, page: () => ClipDemo(), ),
     GetPage(name: APPRouter.steperConnectorDemo, page: () => SteperConnectorDemo(), ),
+    GetPage(name: APPRouter.constrainedBoxDemo, page: () => ConstrainedBoxDemo(), ),
+
 
   ];
 
