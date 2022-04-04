@@ -633,7 +633,17 @@ xxxx十分重视用户权利及隐私政策并严格按照相关法律法规的�
         }
         break;
       case 18:
-        {}
+        {
+          showGeneralDialog(
+              context: context,
+              pageBuilder: (BuildContext context, Animation<double> animation,
+                  Animation<double> secondaryAnimation) {
+                return Center(
+
+                );
+              });
+
+        }
         break;
       case 19:
         {}

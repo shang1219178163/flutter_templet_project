@@ -379,6 +379,7 @@ var _specials = [
 
   Tuple2(APPRouter.githubRepoDemo, "githubRepoDemo", ),
   Tuple2(APPRouter.hitTest, "hitTest", ),
+  Tuple2(APPRouter.constrainedBoxDemo, "constrainedBoxDemo", ),
 
 ];
 
