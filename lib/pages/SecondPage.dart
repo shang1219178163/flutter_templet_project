@@ -387,6 +387,10 @@ class _SecondPageState extends State<SecondPage> {
   List<Tuple2<String, Widget>> get _tuples {
     return <Tuple2<String, Widget>>[
       Tuple2(
+      "ClipRRectGradientButton",
+      _buildClipRRectGradientButton(),
+      ),
+      Tuple2(
         "ElevatedButton",
         ElevatedButton.icon(
           icon: Icon(Icons.send),

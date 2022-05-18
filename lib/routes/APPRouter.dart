@@ -43,6 +43,7 @@ import 'package:flutter_templet_project/pages/demo/ReorderableListViewDemo.dart'
 import 'package:flutter_templet_project/pages/demo/RichTextDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ShaderMaskDemo.dart';
 import 'package:flutter_templet_project/pages/demo/SliverAppBarDemo.dart';
+import 'package:flutter_templet_project/pages/demo/NavigationBarDemo.dart';
 
 import 'package:flutter_templet_project/Pages/APPNotFoundPage.dart';
 import 'package:flutter_templet_project/Pages/AppSettingsPage.dart';
@@ -101,6 +102,7 @@ import 'package:flutter_templet_project/pages/transparent_navgation_bar_demo.dar
 import 'package:flutter_templet_project/provider/getx_state_demo.dart';
 import 'package:flutter_templet_project/provider/rxDart_provider_demo.dart';
 import 'package:flutter_templet_project/provider/state_manager_demo.dart';
+
 
 
 import 'package:flutter_templet_project/vendor/popover_demo.dart';
@@ -231,6 +233,8 @@ class APPRouter {
   static const clipDemo = '/clipDemo';
   static const steperConnectorDemo = '/steperConnectorDemo';
   static const constrainedBoxDemo = '/constrainedBoxDemo';
+  static const navigationBarDemo = '/navigationBarDemo';
+
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -375,6 +379,7 @@ class AppPage{
     GetPage(name: APPRouter.clipDemo, page: () => ClipDemo(), ),
     GetPage(name: APPRouter.steperConnectorDemo, page: () => SteperConnectorDemo(), ),
     GetPage(name: APPRouter.constrainedBoxDemo, page: () => ConstrainedBoxDemo(), ),
+    GetPage(name: APPRouter.navigationBarDemo, page: () => NavigationBarDemo(), ),
 
 
   ];

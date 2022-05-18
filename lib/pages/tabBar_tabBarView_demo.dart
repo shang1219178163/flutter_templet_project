@@ -364,8 +364,7 @@ var _list = [
   Tuple2(APPRouter.blurViewDemo, "blurViewDemo", ),
   Tuple2(APPRouter.boxDemo, "boxDemo", ),
   Tuple2(APPRouter.mouseRegionDemo, "mouseRegionDemo", ),
-
-
+  Tuple2(APPRouter.navigationBarDemo, "navigationBarDemo", ),
 ];
 
 var _specials = [
