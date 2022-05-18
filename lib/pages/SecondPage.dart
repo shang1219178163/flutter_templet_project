@@ -75,6 +75,9 @@ class _SecondPageState extends State<SecondPage> {
         Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
+            const SizedBox(height: 30),
+
+            _buildClipRRectGradientButton(),
             SizedBox(
               height: 10,
             ),
@@ -688,6 +691,37 @@ class _SecondPageState extends State<SecondPage> {
     );
   }
 
+  _buildClipRRectGradientButton() {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(4),
+      child: Stack(
+        children: <Widget>[
+          Positioned.fill(
+            child: Container(
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  colors: <Color>[
+                    Color(0xFF0D47A1),
+                    Color(0xFF1976D2),
+                    Color(0xFF42A5F5),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          TextButton(
+            style: TextButton.styleFrom(
+              padding: const EdgeInsets.all(16.0),
+              primary: Colors.white,
+              textStyle: const TextStyle(fontSize: 20),
+            ),
+            onPressed: () {},
+            child: const Text('Gradient'),
+          ),
+        ],
+      ),
+    );
+  }
 // testPageRouteBuilder(){
 // Navigator.of(context).push(
 //     PageRouteBuilder(
