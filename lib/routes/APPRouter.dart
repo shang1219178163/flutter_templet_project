@@ -4,6 +4,8 @@ import 'package:flutter_templet_project/Provider/provider_list_demo.dart';
 import 'package:flutter_templet_project/basicWidget/responsive_column.dart';
 import 'package:flutter_templet_project/pages/LocalImagePage.dart';
 import 'package:flutter_templet_project/pages/Vendor/TextlessDemo.dart';
+import 'package:flutter_templet_project/pages/Vendor/qr/qr_code_scannerDemo.dart';
+import 'package:flutter_templet_project/pages/Vendor/qr/qr_flutterDemo.dart';
 import 'package:flutter_templet_project/pages/Vendor/timeline/timeline_demo.dart';
 import 'package:flutter_templet_project/pages/Vendor/timelines_demo/timelines_demo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedGroupDemo.dart';
@@ -234,6 +236,8 @@ class APPRouter {
   static const steperConnectorDemo = '/steperConnectorDemo';
   static const constrainedBoxDemo = '/constrainedBoxDemo';
   static const navigationBarDemo = '/navigationBarDemo';
+  static const qrCodeScannerDemo = '/qrCodeScannerDemo';
+  static const qrFlutterDemo = '/qrFlutterDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -380,6 +384,8 @@ class AppPage{
     GetPage(name: APPRouter.steperConnectorDemo, page: () => SteperConnectorDemo(), ),
     GetPage(name: APPRouter.constrainedBoxDemo, page: () => ConstrainedBoxDemo(), ),
     GetPage(name: APPRouter.navigationBarDemo, page: () => NavigationBarDemo(), ),
+    GetPage(name: APPRouter.qrCodeScannerDemo, page: () => QrCodeScannerDemo(), ),
+    GetPage(name: APPRouter.qrFlutterDemo, page: () => QrFlutterDemo(), ),
 
 
   ];

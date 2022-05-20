@@ -402,12 +402,13 @@ var _customs = [
   Tuple2(APPRouter.numberFormatDemo, "numberFormatDemo", ),
   Tuple2(APPRouter.steperConnectorDemo, "steperConnectorDemo", ),
 
-
 ];
 
 var _vendors = [
   Tuple2(APPRouter.timelinesDemo, "timelinesDemo", ),
   Tuple2(APPRouter.timelineDemo, "timelineDemo", ),
+  Tuple2(APPRouter.qrCodeScannerDemo, "扫描二维码", ),
+  Tuple2(APPRouter.qrFlutterDemo, "生成二维码", ),
 
 ];
 
