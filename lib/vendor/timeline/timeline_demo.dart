@@ -8,7 +8,7 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/pages/Vendor/timeline/timeline.dart';
+import 'package:flutter_templet_project/vendor/timeline/timeline.dart';
 
 import 'common/colors.dart';
 
