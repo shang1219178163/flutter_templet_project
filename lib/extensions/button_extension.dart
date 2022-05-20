@@ -47,7 +47,8 @@ extension TextButtonExt on TextButton{
     required Text text,
     required Widget image,
     ImageAlignment? imageAlignment = ImageAlignment.left,
-    double? padding = 8,
+    EdgeInsets? padding = const EdgeInsets.all(5),
+    double? spacing = 3,
     // BorderSide? side = const BorderSide(width: 1.0, color: Colors.black12),
     BorderSide? side,
     required void callback(Text text)}) {
@@ -61,7 +62,7 @@ extension TextButtonExt on TextButton{
       //     mainAxisSize: MainAxisSize.min,
       //     children: [
       //       image,
-      //       SizedBox(width: 8),
+      //       SizedBox(width: spacing),
       //       text,
       //     ],
       //   );
@@ -74,7 +75,7 @@ extension TextButtonExt on TextButton{
           mainAxisSize: MainAxisSize.min,
           children: [
             image,
-            SizedBox(height: padding),
+            SizedBox(height: spacing),
             text,
           ],
         );
@@ -87,7 +88,7 @@ extension TextButtonExt on TextButton{
           mainAxisSize: MainAxisSize.min,
           children: [
             text,
-            SizedBox(width: padding),
+            SizedBox(width: spacing),
             image,
           ],
         );
@@ -100,7 +101,7 @@ extension TextButtonExt on TextButton{
           mainAxisSize: MainAxisSize.min,
           children: [
             text,
-            SizedBox(height: padding),
+            SizedBox(height: spacing),
             image,
           ],
         );
@@ -113,14 +114,17 @@ extension TextButtonExt on TextButton{
           mainAxisSize: MainAxisSize.min,
           children: [
             image,
-            SizedBox(width: padding),
+            SizedBox(width: spacing),
             text,
           ],
         );
     }
     return TextButton(
       onPressed: () => callback(text),
-      child: child,
+      child: Container(
+        padding: padding,
+        child: child,
+      ) ,
       style: OutlinedButton.styleFrom(side: side,),
     );
   }

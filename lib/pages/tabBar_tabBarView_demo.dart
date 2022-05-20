@@ -364,8 +364,7 @@ var _list = [
   Tuple2(APPRouter.blurViewDemo, "blurViewDemo", ),
   Tuple2(APPRouter.boxDemo, "boxDemo", ),
   Tuple2(APPRouter.mouseRegionDemo, "mouseRegionDemo", ),
-
-
+  Tuple2(APPRouter.navigationBarDemo, "navigationBarDemo", ),
 ];
 
 var _specials = [
@@ -403,12 +402,19 @@ var _customs = [
   Tuple2(APPRouter.numberFormatDemo, "numberFormatDemo", ),
   Tuple2(APPRouter.steperConnectorDemo, "steperConnectorDemo", ),
 
-
 ];
 
 var _vendors = [
   Tuple2(APPRouter.timelinesDemo, "timelinesDemo", ),
   Tuple2(APPRouter.timelineDemo, "timelineDemo", ),
+  Tuple2(APPRouter.qrCodeScannerDemo, "扫描二维码", ),
+  Tuple2(APPRouter.qrFlutterDemo, "生成二维码", ),
+  Tuple2(APPRouter.scribbleDemo, "scribble 画板", ),
+  Tuple2(APPRouter.aestheticDialogsDemo, "aestheticDialogs 对话框", ),
+  Tuple2(APPRouter.customTimerDemo, "自定义计时器", ),
+  Tuple2(APPRouter.glassmorphismDemo, "glass 玻璃效果", ),
+  Tuple2(APPRouter.glassmorphismDemoOne, "glass 玻璃效果1", ),
+
 
 ];
 

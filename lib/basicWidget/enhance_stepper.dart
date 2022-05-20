@@ -334,21 +334,13 @@ class _EnhanceStepperState extends State<EnhanceStepper>
       _oldStates[i] = oldWidget.steps[i].state;
   }
 
-  bool _isFirst(int index) {
-    return index == 0;
-  }
+  bool _isFirst(int index) => index == 0;
 
-  bool _isLast(int index) {
-    return widget.steps.length - 1 == index;
-  }
+  bool _isLast(int index) =>  widget.steps.length - 1 == index;
 
-  bool _isCurrent(int index) {
-    return widget.currentStep == index;
-  }
+  bool _isCurrent(int index) => widget.currentStep == index;
 
-  bool _isDark() {
-    return Theme.of(context).brightness == Brightness.dark;
-  }
+  bool _isDark() => Theme.of(context).brightness == Brightness.dark;
 
   Widget _buildLine(bool visible) {
     return Container(
@@ -475,11 +467,17 @@ class _EnhanceStepperState extends State<EnhanceStepper>
     }
   }
 
-  Widget _buildVerticalControls() {
+  Widget _buildVerticalControls(int stepIndex) {
     if (widget.controlsBuilder != null)
-      return widget.controlsBuilder!(context,
+      return widget.controlsBuilder!(
+        context,
+        ControlsDetails(
+          currentStep: widget.currentStep,
           onStepContinue: widget.onStepContinue,
-          onStepCancel: widget.onStepCancel);
+          onStepCancel: widget.onStepCancel,
+          stepIndex: stepIndex,
+        ),
+      );
 
     final Color cancelColor;
     switch (Theme.of(context).brightness) {
@@ -675,7 +673,7 @@ class _EnhanceStepperState extends State<EnhanceStepper>
             child: Column(
               children: <Widget>[
                 widget.steps[index].content,
-                _buildVerticalControls(),
+                _buildVerticalControls(index),
               ],
             ),
           ),
@@ -817,7 +815,7 @@ class _EnhanceStepperState extends State<EnhanceStepper>
                 child: widget.steps[widget.currentStep].content,
                 vsync: this,
               ),
-              _buildVerticalControls(),
+              _buildVerticalControls(widget.currentStep),
             ],
           ),
         ),

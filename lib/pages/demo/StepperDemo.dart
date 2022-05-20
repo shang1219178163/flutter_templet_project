@@ -153,18 +153,18 @@ class _StepperDemoState extends State<StepperDemo> {
           _index = index;
         });
       },
-      controlsBuilder: (BuildContext context, { VoidCallback? onStepContinue, VoidCallback? onStepCancel }){
+      controlsBuilder: (BuildContext context, ControlsDetails details){
         return Row(
           children: [
             SizedBox(height: 30,),
             if (_index != tuples.length - 1) ElevatedButton(
-              onPressed: onStepContinue,
+              onPressed: details.onStepContinue,
               child: Text("Continue"),
               style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Theme.of(context).primaryColor)),
             ),
             SizedBox(width: 8,),
             if (_index != 0)  ElevatedButton(
-              onPressed: onStepCancel,
+              onPressed: details.onStepCancel,
               child: Text("Cancel"),
               style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Theme.of(context).primaryColor)),
             ),
@@ -210,17 +210,18 @@ class _StepperDemoState extends State<StepperDemo> {
             _index = index;
           });
         },
-        controlsBuilder: (BuildContext context, { VoidCallback? onStepContinue, VoidCallback? onStepCancel }){
+        controlsBuilder: (BuildContext context, ControlsDetails details){
           return Row(
             children: [
               SizedBox(height: 30,),
               ElevatedButton(
-                onPressed: onStepContinue,
+                onPressed: details.onStepContinue,
                 child: Text("Next"),
                 style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Theme.of(context).primaryColor)),
               ),
               SizedBox(width: 8,),
-              TextButton(onPressed: onStepCancel,
+              TextButton(
+                onPressed: details.onStepCancel,
                 child: Text("Back"),
                 style: ButtonStyle(foregroundColor: MaterialStateProperty.all(Theme.of(context).primaryColor)),
               ),
