@@ -19,12 +19,12 @@ version: 1.0.0+1
 
 analyzer:
 #  enable-experiment:
-#    - nullable
+#    - nullablef
 #  enable-experiment:
 #    - non-nullable
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
+  sdk: ">=2.12.2 <3.0.0"
 
 dependencies:
   flutter:
@@ -61,7 +61,8 @@ dependencies:
   #  easy_localization:
 #  flutter_hooks: ^
 #  flutter_linkify: ^
-  qr_flutter: ^3.2.0
+  qr_flutter: ^4.0.0
+  qr_code_scanner: ^0.7.0
   webview_flutter: ^2.0.8
   carousel_slider: ^4.0.0-nullsafety.0
   #    git:
@@ -108,6 +109,8 @@ dependencies:
   enhance_stepper: ^0.0.8
   enhance_expansion_panel: ^0.0.3
 
+
+
 #  path_drawing: ^0.4.0
 #  User:
 #    hosted:
@@ -125,8 +128,8 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  integration_test:
-    sdk: flutter
+#  integration_test:
+#    sdk: flutter
 
   build_runner: ^2.1.4
 
