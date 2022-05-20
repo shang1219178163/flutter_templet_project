@@ -1,4 +1,6 @@
 PODS:
+  - aesthetic_dialogs (0.0.1):
+    - Flutter
   - Flutter (1.0.0)
   - flutter_boost (0.0.2):
     - Flutter
@@ -22,6 +24,7 @@ PODS:
     - Flutter
 
 DEPENDENCIES:
+  - aesthetic_dialogs (from `.symlinks/plugins/aesthetic_dialogs/ios`)
   - Flutter (from `Flutter`)
   - flutter_boost (from `.symlinks/plugins/flutter_boost/ios`)
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
@@ -38,6 +41,8 @@ SPEC REPOS:
     - Toast
 
 EXTERNAL SOURCES:
+  aesthetic_dialogs:
+    :path: ".symlinks/plugins/aesthetic_dialogs/ios"
   Flutter:
     :path: Flutter
   flutter_boost:
@@ -58,6 +63,7 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/webview_flutter_wkwebview/ios"
 
 SPEC CHECKSUMS:
+  aesthetic_dialogs: a5f6a847f4820321f7d2eadf80f36d5d558777f8
   Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
   flutter_boost: 1b5f53a54ba73726829691db891e85f40b4f6494
   fluttertoast: 6122fa75143e992b1d3470f61000f591a798cc58

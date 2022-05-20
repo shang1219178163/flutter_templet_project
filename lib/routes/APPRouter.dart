@@ -1,13 +1,18 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+// import 'package:flutter/cupertino.dart';
+// import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/Provider/provider_list_demo.dart';
 import 'package:flutter_templet_project/basicWidget/responsive_column.dart';
 import 'package:flutter_templet_project/pages/LocalImagePage.dart';
-import 'package:flutter_templet_project/pages/Vendor/TextlessDemo.dart';
-import 'package:flutter_templet_project/pages/Vendor/qr/qr_code_scannerDemo.dart';
-import 'package:flutter_templet_project/pages/Vendor/qr/qr_flutterDemo.dart';
-import 'package:flutter_templet_project/pages/Vendor/timeline/timeline_demo.dart';
-import 'package:flutter_templet_project/pages/Vendor/timelines_demo/timelines_demo.dart';
+import 'package:flutter_templet_project/vendor/ScribbleDemo.dart';
+import 'package:flutter_templet_project/vendor/TextlessDemo.dart';
+import 'package:flutter_templet_project/vendor/aesthetic_dialogs_demo.dart';
+import 'package:flutter_templet_project/vendor/custom_timer_demo.dart';
+import 'package:flutter_templet_project/vendor/glassmorphism_demo.dart';
+import 'package:flutter_templet_project/vendor/glassmorphism_demo_one.dart';
+import 'package:flutter_templet_project/vendor/qr/qr_code_scanner_demo.dart';
+import 'package:flutter_templet_project/vendor/qr/qr_flutter_demo.dart';
+import 'package:flutter_templet_project/vendor/timeline/timeline_demo.dart';
+import 'package:flutter_templet_project/vendor/timelines_demo/timelines_demo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedGroupDemo.dart';
 import 'package:flutter_templet_project/pages/demo/BlurViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/BottomAppBarDemo.dart';
@@ -238,7 +243,11 @@ class APPRouter {
   static const navigationBarDemo = '/navigationBarDemo';
   static const qrCodeScannerDemo = '/qrCodeScannerDemo';
   static const qrFlutterDemo = '/qrFlutterDemo';
-
+  static const scribbleDemo = '/scribbleDemo';
+  static const aestheticDialogsDemo = '/aestheticDialogsDemo';
+  static const customTimerDemo = '/customTimerDemo';
+  static const glassmorphismDemo = '/glassmorphismDemo';
+  static const glassmorphismDemoOne = '/glassmorphismDemoOne';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -386,6 +395,11 @@ class AppPage{
     GetPage(name: APPRouter.navigationBarDemo, page: () => NavigationBarDemo(), ),
     GetPage(name: APPRouter.qrCodeScannerDemo, page: () => QrCodeScannerDemo(), ),
     GetPage(name: APPRouter.qrFlutterDemo, page: () => QrFlutterDemo(), ),
+    GetPage(name: APPRouter.scribbleDemo, page: () => ScribbleDemo(), ),
+    GetPage(name: APPRouter.aestheticDialogsDemo, page: () => AestheticDialogsDemo(), ),
+    GetPage(name: APPRouter.customTimerDemo, page: () => CustomTimerDemo(), ),
+    GetPage(name: APPRouter.glassmorphismDemo, page: () => GlassmorphismDemo(), ),
+    GetPage(name: APPRouter.glassmorphismDemoOne, page: () => GlassmorphismDemoOne(), ),
 
 
   ];

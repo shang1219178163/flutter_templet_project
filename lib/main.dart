@@ -23,7 +23,7 @@ import 'pages/FirstPage.dart';
 import 'pages/SecondPage.dart';
 import 'pages/ThirdPage.dart';
 import 'pages/FourthPage.dart';
-import 'pages/Vendor/TextlessDemo.dart';
+import 'vendor/TextlessDemo.dart';
 
 import 'provider/notifier_demo.dart';
 
