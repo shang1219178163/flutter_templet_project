@@ -35,8 +35,12 @@ class _GlassmorphismDemoOneState extends State<GlassmorphismDemoOne> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("GlassmorphismDemo"),
+      ),
       body: Center(
         child: Container(
+          // margin: EdgeInsets.all(10),
           height: double.infinity,
           width: double.infinity,
           decoration: BoxDecoration(
@@ -47,7 +51,7 @@ class _GlassmorphismDemoOneState extends State<GlassmorphismDemoOne> {
           child: SafeArea(
             child: GlassmorphicContainer(
               width: MediaQuery.of(context).size.width * 0.9,
-              height: MediaQuery.of(context).size.height * 0.98,
+              height: MediaQuery.of(context).size.height * 0.9,
               borderRadius: 15,
               blur: 7,
               alignment: Alignment.bottomCenter,
@@ -113,6 +117,10 @@ class _GlassmorphismDemoOneState extends State<GlassmorphismDemoOne> {
                         ),
                         Column(
                           children: [
+                            // Container(
+                            //   margin: EdgeInsets.all(0),
+                            //   child: glassCard(context),
+                            // ),
                             glassCard(context),
                             Padding(
                               padding: const EdgeInsets.all(10.0),
@@ -176,7 +184,7 @@ Widget glassCard(var context) {
   return GlassmorphicFlexContainer(
       flex: 2,
       borderRadius: 15,
-      padding: EdgeInsets.all(35),
+      margin: EdgeInsets.all(35),
       blur: 14,
       alignment: Alignment.bottomCenter,
       border: 2,

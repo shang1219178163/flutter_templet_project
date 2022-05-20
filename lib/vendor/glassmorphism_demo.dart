@@ -16,7 +16,10 @@ class GlassmorphismDemo extends StatefulWidget {
 class _GlassmorphismDemoState extends State<GlassmorphismDemo> {
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("GlassmorphismDemo"),
+      ),
       body: Container(
         height: double.infinity,
         width: double.infinity,
