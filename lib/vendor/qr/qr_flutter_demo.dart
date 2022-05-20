@@ -54,9 +54,11 @@ class _QrFlutterDemoState extends State<QrFlutterDemo> {
       },
     );
 
-    return Material(
-      color: Colors.white,
-      child: SafeArea(
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('AestheticDialogs Flutter'),
+      ),
+      body: SafeArea(
         top: true,
         bottom: true,
         child: Container(
