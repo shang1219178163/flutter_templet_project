@@ -12,6 +12,9 @@ import 'package:flutter/material.dart';
 
 /// 高斯模糊
 class BlurView extends StatelessWidget {
+
+  const BlurView({this.margin, this.radius = 10, required this.child, this.backdropFilter, this.blur});
+
   final EdgeInsets? margin;
 
   final double? radius;
@@ -19,8 +22,6 @@ class BlurView extends StatelessWidget {
   final Widget child;
 
   final double? blur;
-
-  const BlurView({this.margin, this.radius = 10, required this.child, this.backdropFilter, this.blur});
 
   @override
   Widget build(BuildContext context) {
