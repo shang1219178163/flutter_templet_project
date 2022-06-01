@@ -4,8 +4,6 @@ import 'dart:ui';
 import 'package:http/http.dart' as http;
 import 'package:html/parser.dart';
 
-// import 'dart:html';
-
 late String likes = "0",
     gotpoints = "0",
     popularity = "0",
@@ -482,8 +480,8 @@ class Body2 extends StatelessWidget {
 }
 
 Future<int> maintest() async {
-  final response = await http.Client()
-      .get(Uri.parse("https://pub.dev/packages/glassmorphism/score"));
+  final response = await http.Client().get(Uri.parse("https://pub.dev/packages/glassmorphism/score"));
+  print("response ${response}");
   if (response.statusCode == 200) {
     var document = parse(response.body);
     likes =
