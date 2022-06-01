@@ -18,9 +18,9 @@ class BlurView extends StatelessWidget {
   final BackdropFilter? backdropFilter;
   final Widget child;
 
-  final double? sigma;
+  final double? blur;
 
-  const BlurView({this.margin, this.radius = 10, required this.child, this.backdropFilter, this.sigma});
+  const BlurView({this.margin, this.radius = 10, required this.child, this.backdropFilter, this.blur});
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +30,8 @@ class BlurView extends StatelessWidget {
         borderRadius: BorderRadius.all(Radius.circular(radius!)),
         child: backdropFilter ?? BackdropFilter(
           filter: ImageFilter.blur(
-            sigmaX: this.sigma ?? 20,
-            sigmaY: this.sigma ?? 20,
+            sigmaX: this.blur ?? 20,
+            sigmaY: this.blur ?? 20,
           ),
           child: child,
         ),
