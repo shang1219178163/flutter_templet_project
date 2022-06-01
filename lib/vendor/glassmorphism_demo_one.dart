@@ -484,13 +484,10 @@ Future<int> maintest() async {
   print("response ${response}");
   if (response.statusCode == 200) {
     var document = parse(response.body);
-    likes =
-        document.getElementsByClassName("score-key-figure-value")[0].innerHtml;
-    gotpoints =
-        document.getElementsByClassName("score-key-figure-value")[1].innerHtml;
+    likes = document.getElementsByClassName("score-key-figure-value")[0].innerHtml;
+    gotpoints = document.getElementsByClassName("score-key-figure-value")[1].innerHtml;
     totalPoints = "110";
-    popularity =
-        document.getElementsByClassName("score-key-figure-value")[2].innerHtml;
+    popularity = document.getElementsByClassName("score-key-figure-value")[2].innerHtml;
     details = document.getElementsByClassName("detail-lead-text")[0].innerHtml;
     pac = document.getElementsByClassName("code")[0].innerHtml;
     date = document.getElementsByClassName("metadata")[0].children[0].innerHtml;
