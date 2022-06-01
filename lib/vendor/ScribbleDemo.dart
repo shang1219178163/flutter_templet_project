@@ -30,11 +30,12 @@ class _ScribbleDemoState extends State<ScribbleDemo> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "-"),
-        leading: IconButton(
+          actions:[
+          IconButton(
           icon: const Icon(Icons.save),
           tooltip: "Save to Image",
           onPressed: () => _saveImage(context),
-        ),
+        ),]
       ),
       body: SingleChildScrollView(
         child: SizedBox(

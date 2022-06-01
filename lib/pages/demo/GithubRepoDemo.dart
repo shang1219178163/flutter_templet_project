@@ -37,24 +37,30 @@ class _GithubRepoDemoState extends State<GithubRepoDemo> {
   bool _isModel = false;
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("$widget"),
         actions: [
           IconButton(onPressed: (){
-            setState(() { });
-            requestRepos();
+            // setState(() { });
+             requestRepos();
 
-            final map = {
-            'admin': true,
-            'maintain': true,
-            'push': true,
-            'triage': false,
-            'pull': false,
-            };
-            final model = Permissions.fromJson(map);
-            ddlog(model);
+            // final map = {
+            // 'admin': true,
+            // 'maintain': true,
+            // 'push': true,
+            // 'triage': false,
+            // 'pull': false,
+            // };
+            // final model = Permissions.fromJson(map);
+            // ddlog(model);
 
           }, icon: Icon(Icons.refresh)),
           TextButton(onPressed: (){
@@ -168,15 +174,19 @@ class _GithubRepoDemoState extends State<GithubRepoDemo> {
     );
   }
   
-  void requestRepos() {
-    final api = ReposAPI();
+   requestRepos() async {
+    final api = new ReposAPI();
+    print("api: ${api.toString()}");
 
     HttpManager(api).request<List>(onSuccess: (data){
       ddlog(data);
     }, onError: (error){
       ddlog(error);
     });
-  }
+
+    Response response = await _dio.get("https://api.github.com/orgs/flutterchina/repos");
+    print("requestRepos: ${response.data.toString()}");
+   }
 }
 
 

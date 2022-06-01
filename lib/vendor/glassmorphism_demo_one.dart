@@ -4,8 +4,6 @@ import 'dart:ui';
 import 'package:http/http.dart' as http;
 import 'package:html/parser.dart';
 
-// import 'dart:html';
-
 late String likes = "0",
     gotpoints = "0",
     popularity = "0",
@@ -482,17 +480,14 @@ class Body2 extends StatelessWidget {
 }
 
 Future<int> maintest() async {
-  final response = await http.Client()
-      .get(Uri.parse("https://pub.dev/packages/glassmorphism/score"));
+  final response = await http.Client().get(Uri.parse("https://pub.dev/packages/glassmorphism/score"));
+  print("response ${response}");
   if (response.statusCode == 200) {
     var document = parse(response.body);
-    likes =
-        document.getElementsByClassName("score-key-figure-value")[0].innerHtml;
-    gotpoints =
-        document.getElementsByClassName("score-key-figure-value")[1].innerHtml;
+    likes = document.getElementsByClassName("score-key-figure-value")[0].innerHtml;
+    gotpoints = document.getElementsByClassName("score-key-figure-value")[1].innerHtml;
     totalPoints = "110";
-    popularity =
-        document.getElementsByClassName("score-key-figure-value")[2].innerHtml;
+    popularity = document.getElementsByClassName("score-key-figure-value")[2].innerHtml;
     details = document.getElementsByClassName("detail-lead-text")[0].innerHtml;
     pac = document.getElementsByClassName("code")[0].innerHtml;
     date = document.getElementsByClassName("metadata")[0].children[0].innerHtml;

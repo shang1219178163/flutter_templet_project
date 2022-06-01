@@ -25,7 +25,7 @@ import 'fileManager.dart';
 // enum RequestMethod { GET, POST, PUT, DELETE, DOWNLOAD }
 
 class HttpManager{
-  static const BASE_URL = "...";
+  static const BASE_URL = "";
   static const CODE_SUCCESS = 200;
   static const CODE_TIME_OUT = -1;
 
@@ -39,18 +39,18 @@ class HttpManager{
   // Dio _dio = Dio();
   Dio get _dio {
     final interceptorsWrapper = InterceptorsWrapper(
-        onRequest: (RequestOptions options, handler) {
-          print("请求之前");
-          return handler.next(options);
-        },
-        onResponse: (Response response, handler) {
-          print("响应之前");
-          return handler.next(response);
-        },
-        onError: (DioError e, handler) {
-          print("错误之前");
-          return handler.next(e);
-        });
+      onRequest: (RequestOptions options, handler) {
+        // print("请求之前");
+        return handler.next(options);
+      },
+      onResponse: (Response response, handler) {
+        // print("响应之前");
+        return handler.next(response);
+      },
+      onError: (DioError e, handler) {
+        print("错误之前");
+        return handler.next(e);
+      });
 
     Dio dio = Dio();
     dio.interceptors.add(interceptorsWrapper);
@@ -135,9 +135,9 @@ class HttpManager{
           break;
       }
 
-      var statusCode = response.statusCode ?? -1;
-      if (statusCode != CODE_SUCCESS) {
-        onError("$statusCode,${response.statusMessage}");
+      // var statusCode = response.statusCode ?? -1;
+      if (![CODE_SUCCESS, ].contains(response.statusCode)) {
+        onError("$response.statusCode, ${response.statusMessage}");
         return;
       }
 
@@ -164,8 +164,8 @@ abstract class BaseHttpRequestAPI {
   Map<String, dynamic>? get requestHeaders {
     var timestamp = DateTime.now().millisecondsSinceEpoch;
     return {
-      'timestamp': '${timestamp}',
       'Content-Type': 'application/json;charset=utf-8',
+      'timestamp': '${timestamp}',
       'accountToken': '${""}',
       // 'useid': id,
       // 'appVersion': '6.3.0',

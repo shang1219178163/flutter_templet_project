@@ -61,7 +61,7 @@ Future<void> main() async {
 
 void setCustomErrorPage(){
   ErrorWidget.builder = (FlutterErrorDetails flutterErrorDetails){
-    print(flutterErrorDetails.toString());
+    print("flutterErrorDetails:${flutterErrorDetails.toString()}");
     return Center(
       // child: Text("Flutter 走神了"),
       child: Container(
