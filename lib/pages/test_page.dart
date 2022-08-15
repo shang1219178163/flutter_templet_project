@@ -10,7 +10,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extensions/ddlog.dart';
 import 'package:flutter_templet_project/extensions/string_extension.dart';
+import 'package:flutter_templet_project/extensions/map_extension.dart';
+
 import 'package:flutter_templet_project/extensions/buildContext_extension.dart';
+
 
 class TestPage extends StatefulWidget {
 
@@ -42,7 +45,7 @@ class _TestPageState extends State<TestPage> {
   Wrap buildWrap(BuildContext context) {
     return Wrap(
       spacing: 8.0, // 主轴(水平)方向间距
-      runSpacing: -8.0, // 纵轴（垂直）方向间距
+      runSpacing: 8.0, // 纵轴（垂直）方向间距
       alignment: WrapAlignment.start, //沿主轴方向居中
       children: titles.map((e) => ActionChip(
         avatar: CircleAvatar(backgroundColor: Theme.of(context).primaryColor,
@@ -82,5 +85,26 @@ class _TestPageState extends State<TestPage> {
     ddlog(screenSize);
 
     showSnackBar(SnackBar(content: Text(d2)));
+
+    Map<String, dynamic> map = {
+      'msgType': '5',
+      'msgTag': '官方号',
+      'msgUnreadNum': 3,
+    };
+
+    ddlog('getUrlParams():${getUrlParams(map: map)}');
+    ddlog('map.join():${map.join()}' );
+  }
+
+  getUrlParams({Map<String, dynamic> map = const {}}) {
+    if (map.keys.length == 0) {
+      return '';
+    }
+    String paramStr = '';
+    map.forEach((key, value) {
+      paramStr += '${key}=${value}&';
+    });
+    String result = paramStr.substring(0, paramStr.length - 1);
+    return result;
   }
 }
