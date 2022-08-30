@@ -2,13 +2,13 @@
 // import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/Provider/provider_list_demo.dart';
 import 'package:flutter_templet_project/basicWidget/responsive_column.dart';
+import 'package:flutter_templet_project/pages/FlutterFFiTest.dart';
 import 'package:flutter_templet_project/pages/LocalImagePage.dart';
 import 'package:flutter_templet_project/vendor/ScribbleDemo.dart';
+import 'package:flutter_templet_project/vendor/SkeletonDemo.dart';
 import 'package:flutter_templet_project/vendor/TextlessDemo.dart';
 import 'package:flutter_templet_project/vendor/aesthetic_dialogs_demo.dart';
 import 'package:flutter_templet_project/vendor/custom_timer_demo.dart';
-import 'package:flutter_templet_project/vendor/glassmorphism_demo.dart';
-import 'package:flutter_templet_project/vendor/glassmorphism_demo_one.dart';
 import 'package:flutter_templet_project/vendor/qr/qr_code_scanner_demo.dart';
 import 'package:flutter_templet_project/vendor/qr/qr_flutter_demo.dart';
 import 'package:flutter_templet_project/vendor/timeline/timeline_demo.dart';
@@ -246,8 +246,9 @@ class APPRouter {
   static const scribbleDemo = '/scribbleDemo';
   static const aestheticDialogsDemo = '/aestheticDialogsDemo';
   static const customTimerDemo = '/customTimerDemo';
-  static const glassmorphismDemo = '/glassmorphismDemo';
-  static const glassmorphismDemoOne = '/glassmorphismDemoOne';
+  static const skeletonDemo = '/skeletonDemo';
+
+  static const flutterFFiTest = '/flutterFFiTest';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -398,8 +399,9 @@ class AppPage{
     GetPage(name: APPRouter.scribbleDemo, page: () => ScribbleDemo(), ),
     GetPage(name: APPRouter.aestheticDialogsDemo, page: () => AestheticDialogsDemo(), ),
     GetPage(name: APPRouter.customTimerDemo, page: () => CustomTimerDemo(), ),
-    GetPage(name: APPRouter.glassmorphismDemo, page: () => GlassmorphismDemo(), ),
-    GetPage(name: APPRouter.glassmorphismDemoOne, page: () => GlassmorphismDemoOne(), ),
+    GetPage(name: APPRouter.skeletonDemo, page: () => SkeletonDemo(), ),
+    GetPage(name: APPRouter.flutterFFiTest, page: () => FlutterFFiTest(), ),
+
 
 
   ];
