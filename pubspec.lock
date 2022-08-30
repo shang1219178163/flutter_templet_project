@@ -375,13 +375,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.0.3"
-  glassmorphism:
-    dependency: "direct main"
-    description:
-      name: glassmorphism
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "3.0.0"
   glob:
     dependency: transitive
     description:
@@ -423,7 +416,7 @@ packages:
       name: http
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.13.4"
+    version: "0.13.5"
   http_multi_server:
     dependency: transitive
     description:
@@ -718,6 +711,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.0.1"
+  shimmer_animation:
+    dependency: "direct main"
+    description:
+      name: shimmer_animation
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.1.0+1"
   simple_gesture_detector:
     dependency: transitive
     description:

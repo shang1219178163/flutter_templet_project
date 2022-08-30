@@ -43,8 +43,10 @@ class BlurViewDemo extends StatelessWidget {
         ),
         Center(
           child: BlurView(
+            margin: EdgeInsets.all(8),
+            blur: 25,
             child: Container(
-              // color: Colors.white10,
+              // color: Colors.red,
               padding: EdgeInsets.all(10),
               child: Column(
                 mainAxisSize: MainAxisSize.min,

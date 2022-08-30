@@ -287,6 +287,7 @@ final _tuples = [
   Tuple2("自定义组件", _customs),
   Tuple2("第三方组件", _vendors),
   Tuple2("其它", _others)
+
 ];
 
 var _list = [
@@ -379,6 +380,7 @@ var _specials = [
   Tuple2(APPRouter.githubRepoDemo, "githubRepoDemo", ),
   Tuple2(APPRouter.hitTest, "hitTest", ),
   Tuple2(APPRouter.constrainedBoxDemo, "constrainedBoxDemo", ),
+  Tuple2(APPRouter.flutterFFiTest, "ffi", ),
 
 ];
 
@@ -412,9 +414,7 @@ var _vendors = [
   Tuple2(APPRouter.scribbleDemo, "scribble 画板", ),
   Tuple2(APPRouter.aestheticDialogsDemo, "aestheticDialogs 对话框", ),
   Tuple2(APPRouter.customTimerDemo, "自定义计时器", ),
-  Tuple2(APPRouter.glassmorphismDemo, "glass 玻璃效果", ),
-  Tuple2(APPRouter.glassmorphismDemoOne, "glass 玻璃效果1", ),
-
+  Tuple2(APPRouter.skeletonDemo, "骨架屏", ),
 
 ];
 

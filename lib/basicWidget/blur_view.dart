@@ -12,30 +12,29 @@ import 'package:flutter/material.dart';
 
 /// 高斯模糊
 class BlurView extends StatelessWidget {
+
+  const BlurView({this.margin, this.radius = 10, required this.child, this.backdropFilter, this.blur});
+
   final EdgeInsets? margin;
+
   final double? radius;
   final BackdropFilter? backdropFilter;
   final Widget child;
 
-  const BlurView({this.margin, this.radius = 10, required this.child, this.backdropFilter});
+  final double? blur;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: margin ?? EdgeInsets.symmetric(horizontal: 50),
+      margin: margin,
       child: ClipRRect(
         borderRadius: BorderRadius.all(Radius.circular(radius!)),
         child: backdropFilter ?? BackdropFilter(
           filter: ImageFilter.blur(
-            sigmaX: 20,
-            sigmaY: 20,
+            sigmaX: this.blur ?? 20,
+            sigmaY: this.blur ?? 20,
           ),
           child: child,
-          // child: Container(
-          //   color: Colors.white10,
-          //   padding: EdgeInsets.all(spacing),
-          //   child: _widget,
-          // ),
         ),
       ),
     );
