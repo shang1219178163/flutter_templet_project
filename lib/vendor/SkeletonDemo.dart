@@ -34,6 +34,7 @@ class _SkeletonDemoState extends State<SkeletonDemo> {
       // This is the ONLY required parameter
       child: child ?? Container(
         color: Colors.lightBlue,
+        // marigin: EdgeInsets.only(top: 8),
       ),
       // This is the default value
       duration: Duration(seconds: 1),
@@ -52,8 +53,10 @@ class _SkeletonDemoState extends State<SkeletonDemo> {
 
   _buildSkeletonList() {
     final List<String> _items = <String>[
-      'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',
+      'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
     ];
+
+    const bgColor = Color(0xFFf3f3f3);
 
     return Scrollbar(
       child: ListView.builder(
@@ -63,7 +66,7 @@ class _SkeletonDemoState extends State<SkeletonDemo> {
           final String item = _items[index];
 
           final screenSize = MediaQuery.of(context).size;
-          print('screenSize:${screenSize}');
+          // print('screenSize:${screenSize}');
           return Column(
             children: [
               Row(
@@ -72,20 +75,20 @@ class _SkeletonDemoState extends State<SkeletonDemo> {
                     padding: EdgeInsets.all(16),
                     child: CircleAvatar(
                       // child: Text(item),
-                      backgroundColor: Color(0xFFf3f3f3)
+                      backgroundColor: bgColor,
                     ),
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        color: Color(0xFFf3f3f3),
+                        color: bgColor,
                         height: 20,
                         width: screenSize.width * 0.5,
                       ),
                       SizedBox(height: 4),
                       Container(
-                        color: Color(0xFFf3f3f3),
+                        color: bgColor,
                         height: 40,
                         width: screenSize.width - 100,
                       ),
