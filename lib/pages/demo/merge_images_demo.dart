@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ffi';
 import 'dart:io';
 import 'dart:math';
 import 'dart:typed_data';
@@ -14,7 +15,6 @@ class MergeImagesDemo extends StatefulWidget {
   final String? title;
 
   MergeImagesDemo({ Key? key, this.title}) : super(key: key);
-
 
   @override
   _MergeImagesDemoState createState() => _MergeImagesDemoState();
@@ -41,27 +41,34 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
               onPressed: () => {
                 // print("保存")
                 // storeImageNew().then((val) => { print("保存 ${val}")})
-                _compositePic().then((val) => { print("保存")})
+                _compositePic().then((pngBytes) {
+                  imageMerged = Image.memory(pngBytes!, width: 200, height: 600);
+                  setState(() {});
+                })
                 // _capturePng().then((val) => { print("保存")})
               },
               child: Text('保存', style: TextStyle(color: Colors.white),)
             ),
             TextButton(
               onPressed: () => {
-                _compositePicNew()
-                  .then((pngBytes) => {
-                    // imageMerged = Image.memory(pngBytes!, width: 200, height: 600);
-                    // setState(() {});
+                _compositePicNew().then((pngBytes) {
+                    imageMerged = Image.memory(pngBytes!, width: 400, height: 1200);
+                    setState(() {});
                   })
               },
               child: Text('保存三', style: TextStyle(color: Colors.white),)
             ),
             TextButton(
-              onPressed: () => {
-                [repaintBoundaryKey1,
+              onPressed: () {
+                final keys = [
+                  repaintBoundaryKey1,
                   repaintBoundaryKey2,
                   repaintBoundaryKey3
-                ].forEach((e) => {print("repaintBoundaryKey:${e.currentContext?.findRenderObject()}")})
+                ];
+                _compositePics(keys).then((pngBytes) {
+                  imageMerged = Image.memory(pngBytes!, width: 400, height: 600);
+                  setState(() {});
+                });
               },
               child: Text('key3', style: TextStyle(color: Colors.white),)
             ),
@@ -75,6 +82,7 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
     final screenSize = MediaQuery.of(this.context).size;
 
     return SingleChildScrollView(
+      key: _globalKey,
       child: Column(
         children: [
           if(imageMerged != null) imageMerged!,
@@ -115,72 +123,64 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
     BuildContext buildContext = key.currentContext!;
     print("key:${key}:${buildContext}");
     RenderRepaintBoundary boundary = buildContext.findRenderObject() as RenderRepaintBoundary;
-    // if (boundary.debugNeedsPaint) {
-    //   await Future.delayed(Duration(milliseconds: 20));
-    //   return _capturePic(key);
-    // }
-    ui.Image image = await boundary.toImage(pixelRatio: 2);
+    ui.Image image = await boundary.toImage(pixelRatio: ui.window.devicePixelRatio);
 
     // ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
     // Uint8List? pngBytes = byteData?.buffer.asUint8List() ?? Uint8List(10);
     // ui.Image img = ui.Image.memory(pngBytes);
-    return image;
+    return Future.value(image);
   }
 
   /// 合成截图
   Future<Uint8List?> _compositePicNew() async {
-      try {
-        ui.Image one = await _capturePic(repaintBoundaryKey1);
-        ui.Image two = await _capturePic(repaintBoundaryKey2);
-        ui.Image three = await _capturePic(repaintBoundaryKey3);
+    try {
+      ui.Image one = await _capturePic(repaintBoundaryKey1);
+      ui.Image two = await _capturePic(repaintBoundaryKey2);
+      ui.Image three = await _capturePic(repaintBoundaryKey3);
 
-        print("three: ${three.width} ${three.height}");
-        int totalWidth = one.width > two.width ? one.width : two.width;
-        // int totalHeight = one.height + two.height + 20.h.toInt();
-        // int totalHeight = one.height + two.height;
-        //初始化画布
-        ui.PictureRecorder recorder = ui.PictureRecorder();
-        final paint = Paint();
-        Canvas canvas = Canvas(recorder);
-        //画第一张图
-        canvas.drawRect(Rect.fromLTWH(
-            0,
-            0,
-            totalWidth * 1.0,
-            one.height * 1.0), paint);
-        canvas.drawImage(one, Offset((totalWidth - one.width) / 2, 0), paint);
-        //画第二张图
-        paint.shader = null;
-        paint.color = Colors.red;
-        canvas.drawRect(Rect.fromLTWH(
-            0,
-            one.height * 1.0,
-            totalWidth * 1.0,
-            two.height * 1.0), paint);
-        canvas.drawImage(two, Offset((totalWidth - two.width) / 2, one.height + 12), paint);
-        //画第三张图
-        canvas.drawRect(Rect.fromLTWH(
+      print("three: ${three.width} ${three.height}");
+      int totalWidth = one.width > two.width ? one.width : two.width;
+      // int totalHeight = one.height + two.height + 20.h.toInt();
+      // int totalHeight = one.height + two.height;
+      //初始化画布
+      ui.PictureRecorder recorder = ui.PictureRecorder();
+      final paint = Paint();
+      Canvas canvas = Canvas(recorder);
+      //画第一张图
+      canvas.drawRect(Rect.fromLTWH(
           0,
-          one.height * 1.0 + two.height * 1.0,
+          0,
           totalWidth * 1.0,
-            two.height * 1.0), paint);
-        canvas.drawImage(three, Offset((totalWidth - two.width) / 2, one.height + two.height + 12), paint);
+          one.height * 1.0), paint);
+      canvas.drawImage(one, Offset((totalWidth - one.width) / 2, 0), paint);
+      //画第二张图
+      paint.shader = null;
+      paint.color = Colors.red;
+      canvas.drawRect(Rect.fromLTWH(
+          0,
+          one.height * 1.0,
+          totalWidth * 1.0,
+          two.height * 1.0), paint);
+      canvas.drawImage(two, Offset(0, one.height + 12), paint);
+      //画第三张图
+      canvas.drawRect(Rect.fromLTWH(
+        0,
+        one.height * 1.0 + two.height * 1.0,
+        totalWidth * 1.0,
+          two.height * 1.0), paint);
+      canvas.drawImage(three, Offset((totalWidth - two.width) / 2, one.height + two.height + 12), paint);
 
-        ui.Image image = await recorder.endRecording().toImage(totalWidth, one.height + two.height + two.height + 24);
-        //获取合成的图片
-        // ui.Image image = await recorder.endRecording().toImage(totalWidth, one.height + two.height + 24);
-        ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
-        Uint8List? pngBytes = byteData?.buffer.asUint8List();
+      ui.Image image = await recorder.endRecording().toImage(totalWidth, one.height + two.height + three.height + 24);
+      //获取合成的图片
+      ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
+      Uint8List? pngBytes = byteData?.buffer.asUint8List();
 
-        imageMerged = Image.memory(pngBytes!, width: 400, height: 1200);
-        setState(() {});
-
-        return pngBytes;
-      } catch (e) {
-        print(e);
-      }
-      return null;
+      return Future.value(pngBytes);
+    } catch (e) {
+      print(e);
     }
+    return null;
+  }
 
   /// 合成截图
   Future<Uint8List?> _compositePic() async {
@@ -216,10 +216,60 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
       ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
       Uint8List? pngBytes = byteData?.buffer.asUint8List();
 
-      imageMerged = Image.memory(pngBytes!, width: 400, height: 600);
-      setState(() {});
+      return Future.value(pngBytes);
+    } catch (e) {
+      print(e);
+    }
+    return null;
+  }
 
-      return pngBytes;
+  /// 通过多个 SingleChildScrollView 的 RepaintBoundary 对象合成长海报
+  ///
+  /// keys: 根据 GlobalKey 获取 Image 数组
+  Future<Uint8List?> _compositePics([List<GlobalKey> keys = const [],]) async {
+    //根据 GlobalKey 获取 Image 数组
+    List<ui.Image> images = await Future.wait(
+      keys.map((key) async {
+        BuildContext buildContext = key.currentContext!;
+        RenderRepaintBoundary boundary = buildContext.findRenderObject() as RenderRepaintBoundary;
+        ui.Image image = await boundary.toImage(pixelRatio: ui.window.devicePixelRatio);
+        return image;
+      }
+    ).toList());
+    // print("images:${images}");
+    if (images.length == 0) {
+      throw new Exception('没有获取到任何图片!');
+    }
+
+    final List<int> imageHeights = images.map((e) => e.height).toList();
+    // print("imageHeights:${imageHeights}");
+
+    try {
+      int totalWidth = images[0].width;
+      int totalHeight = imageHeights.reduce((a,b) => a + b);
+      //初始化画布
+      ui.PictureRecorder recorder = ui.PictureRecorder();
+      Canvas canvas = Canvas(recorder);
+      final paint = Paint();
+
+      //画图
+      for (int i = 0; i < images.length; i++) {
+        final e = images[i];
+        final offsetY = i == 0 ? 0 : imageHeights.sublist(0, i).reduce((a,b) => a + b);
+        // print("offset:${i}_${e.height}_${offsetY}");
+        canvas.drawRect(Rect.fromLTWH(
+            0,
+            offsetY.toDouble(),
+            totalWidth * 1.0,
+            e.height * 1.0), paint);
+        canvas.drawImage(e, Offset(0, offsetY.toDouble()), paint);
+      }
+
+      //获取合成的图片
+      ui.Image image = await recorder.endRecording().toImage(totalWidth, totalHeight);
+      ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
+      Uint8List? pngBytes = byteData?.buffer.asUint8List();
+      return Future.value(pngBytes);
     } catch (e) {
       print(e);
     }
