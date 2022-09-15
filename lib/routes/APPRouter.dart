@@ -4,6 +4,8 @@ import 'package:flutter_templet_project/Provider/provider_list_demo.dart';
 import 'package:flutter_templet_project/basicWidget/responsive_column.dart';
 import 'package:flutter_templet_project/pages/FlutterFFiTest.dart';
 import 'package:flutter_templet_project/pages/LocalImagePage.dart';
+import 'package:flutter_templet_project/pages/demo/flutter_smart_dialog_demo.dart';
+import 'package:flutter_templet_project/pages/demo/merge_images_demo.dart';
 import 'package:flutter_templet_project/vendor/ScribbleDemo.dart';
 import 'package:flutter_templet_project/vendor/SkeletonDemo.dart';
 import 'package:flutter_templet_project/vendor/TextlessDemo.dart';
@@ -249,6 +251,8 @@ class APPRouter {
   static const skeletonDemo = '/skeletonDemo';
 
   static const flutterFFiTest = '/flutterFFiTest';
+  static const smartDialogPageDemo = '/smartDialogPageDemo';
+  static const mergeImagesDemo = '/mergeImagesDemo';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -401,8 +405,8 @@ class AppPage{
     GetPage(name: APPRouter.customTimerDemo, page: () => CustomTimerDemo(), ),
     GetPage(name: APPRouter.skeletonDemo, page: () => SkeletonDemo(), ),
     GetPage(name: APPRouter.flutterFFiTest, page: () => FlutterFFiTest(), ),
-
-
+    GetPage(name: APPRouter.smartDialogPageDemo, page: () => SmartDialogPageDemo(), ),
+    GetPage(name: APPRouter.mergeImagesDemo, page: () => MergeImagesDemo(), ),
 
   ];
 
