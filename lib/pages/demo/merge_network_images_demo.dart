@@ -29,21 +29,21 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
       message: 'https://fastly.jsdelivr.net/npm/@vant/assets/apple-1.jpeg',
       materialWidth: '400',
       materialHeight: '300', 
-      globalKey: GlobalKey(),
+      // globalKey: GlobalKey(),
     ),
     MaterialDetailConfig(
       id: 2,
       message: 'https://fastly.jsdelivr.net/npm/@vant/assets/apple-2.jpeg',
       materialWidth: '400',
       materialHeight: '700',
-      globalKey: GlobalKey(),
+      // globalKey: GlobalKey(),
     ),
     MaterialDetailConfig(
       id: 3,
       message: 'https://fastly.jsdelivr.net/npm/@vant/assets/apple-3.jpeg',
       materialWidth: '400',
       materialHeight: '700',
-      globalKey: GlobalKey(),
+      // globalKey: GlobalKey(),
     ),
   ]; // 素材详情列表
 
@@ -63,7 +63,7 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
             ),
             TextButton(
               onPressed: () {
-                List<GlobalKey> keys = detailList.map((e) => e.globalKey).toList();
+                List<GlobalKey?> keys = detailList.map((e) => e.globalKey).toList();
                 print("keys:${keys}");
                 _compositePics(keys).then((pngBytes) {
                   imageMerged = Image.memory(pngBytes!, width: 400, height: 600);
@@ -169,12 +169,12 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
   /// 通过多个 SingleChildScrollView 的 RepaintBoundary 对象合成长海报
   ///
   /// keys: 根据 GlobalKey 获取 Image 数组
-  Future<Uint8List?> _compositePics([List<GlobalKey> keys = const [],]) async {
+  Future<Uint8List?> _compositePics([List<GlobalKey?> keys = const [],]) async {
     //根据 GlobalKey 获取 Image 数组
     List<ui.Image> images = await Future.wait(
       keys.map((key) async {
-        BuildContext buildContext = key.currentContext!;
-        RenderRepaintBoundary boundary = buildContext.findRenderObject() as RenderRepaintBoundary;
+        BuildContext? buildContext = key?.currentContext!;
+        RenderRepaintBoundary boundary = buildContext?.findRenderObject() as RenderRepaintBoundary;
         ui.Image image = await boundary.toImage(pixelRatio: ui.window.devicePixelRatio);
         return image;
       }
@@ -236,7 +236,7 @@ class MaterialDetailConfig {
   String? examineId; // 审批id
   String? score; // 得分
   bool? deletedFlag; // 是否删除
-  GlobalKey globalKey;
+  GlobalKey? globalKey;
   
   MaterialDetailConfig({
     this.materialType,
@@ -250,6 +250,7 @@ class MaterialDetailConfig {
     this.examineId,
     this.score,
     this.deletedFlag,
-    required this.globalKey,
-  });
+  }): super() {
+    this.globalKey =  GlobalKey();
+  }
 }
