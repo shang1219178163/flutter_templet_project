@@ -1,15 +1,10 @@
 import 'dart:async';
-import 'dart:ffi';
-import 'dart:io';
-import 'dart:math';
 import 'dart:typed_data';
 
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_templet_project/extensions/image_extension.dart';
-import 'package:image_gallery_saver/image_gallery_saver.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/extensions/list_extension.dart';
 
 class MergeNetworkImagesDemo extends StatefulWidget {
@@ -25,21 +20,10 @@ class MergeNetworkImagesDemo extends StatefulWidget {
 class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
 
   GlobalKey _globalKey = GlobalKey();
-  // GlobalKey repaintBoundaryKey = GlobalKey(debugLabel: 'gk');
-
-  GlobalKey repaintBoundaryKey1 = GlobalKey(debugLabel: 'gk1');
-  GlobalKey repaintBoundaryKey2 = GlobalKey(debugLabel: 'gk2');
-  GlobalKey repaintBoundaryKey3 = GlobalKey(debugLabel: 'gk3');
 
   Widget? imageMerged;
 
-  final images = [
-    'https://fastly.jsdelivr.net/npm/@vant/assets/apple-1.jpeg',
-    'https://fastly.jsdelivr.net/npm/@vant/assets/apple-2.jpeg',
-    'https://fastly.jsdelivr.net/npm/@vant/assets/apple-3.jpeg',
-  ];
-
-  List detailList = <MaterialDetailConfig>[
+  List<MaterialDetailConfig> detailList = <MaterialDetailConfig>[
     MaterialDetailConfig(
       id: 1,
       message: 'https://fastly.jsdelivr.net/npm/@vant/assets/apple-1.jpeg',
@@ -72,66 +56,52 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
           title: Text(widget.title ?? "$widget"),
           actions: [
             TextButton(
-              onPressed: () => {
-                // print("保存")
-                // storeImageNew().then((val) => { print("保存 ${val}")})
-                _compositePic().then((pngBytes) {
-                  imageMerged = Image.memory(pngBytes!, width: 200, height: 600);
-                  setState(() {});
-                })
-                // _capturePng().then((val) => { print("保存")})
+              onPressed: () {
+                setState(() {});
               },
-              child: Text('保存', style: TextStyle(color: Colors.white),)
-            ),
-            TextButton(
-              onPressed: () => {
-                _compositePicNew().then((pngBytes) {
-                    imageMerged = Image.memory(pngBytes!, width: 400, height: 1200);
-                    setState(() {});
-                  })
-              },
-              child: Text('保存三', style: TextStyle(color: Colors.white),)
+              child: Text('刷新', style: TextStyle(color: Colors.white),)
             ),
             TextButton(
               onPressed: () {
-                final keys = [
-                  repaintBoundaryKey1,
-                  repaintBoundaryKey2,
-                  repaintBoundaryKey3
-                ];
+                List<GlobalKey> keys = detailList.map((e) => e.globalKey).toList();
+                print("keys:${keys}");
                 _compositePics(keys).then((pngBytes) {
                   imageMerged = Image.memory(pngBytes!, width: 400, height: 600);
                   setState(() {});
                 });
               },
-              child: Text('key3', style: TextStyle(color: Colors.white),)
+              child: Text('保存', style: TextStyle(color: Colors.white),)
             ),
           ],
         ),
         body: _buildBody(),
-      // body: _buildBodyNew(),
     );
   }
 
   _buildBody(){
     final screenSize = MediaQuery.of(this.context).size;
 
-    List children = detailList.map((e) => _buildItem(
-      repaintBoundary: RepaintBoundary(
-        key: e.globalKey,
-        child: Image.network(e.message,
-          fit: BoxFit.cover,
-          width: double.parse(e.materialWidth),
-          height: double.parse(e.materialHeight),
+    List children = detailList.map((e) {
+      int idx = detailList.indexOf(e);
+      return _buildItem(
+        hideUp: idx == 0,
+        hideDown: idx == detailList.length - 1,
+        repaintBoundary: RepaintBoundary(
+          key: e.globalKey,
+          child: FadeInImage.assetNetwork(
+              placeholder: 'images/sha_qiu.png',
+              image: e.message ?? 'https://fastly.jsdelivr.net/npm/@vant/assets/apple-1.jpeg',
+              fit: BoxFit.cover,
+              width: double.parse(e.materialWidth ?? "${screenSize.width}"),
+              height: double.parse(e.materialHeight ?? "${screenSize.height}"),
+          ),
         ),
-      ),
-      upPress: (){
-        print("upPress1");
-      },
-      downPress: (){
-        print("downPress1");
-      },
-    )).toList();
+        callback: (step){
+          print("callback:${step}");
+          detailList.exchange(idx, idx + step);
+          setState(() {});
+        });
+      }).toList();
 
     return SingleChildScrollView(
       key: _globalKey,
@@ -140,121 +110,6 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
           if(imageMerged != null) imageMerged!,
           Text('合成图片'),
           ...children,
-          // _buildItem(
-          //   repaintBoundary: RepaintBoundary(
-          //     key: repaintBoundaryKey1,
-          //     child: Image.asset(
-          //       'images/bg_alp.png',
-          //       fit: BoxFit.cover,
-          //       width: screenSize.width,
-          //       height: screenSize.height * 0.25,
-          //     ),
-          //   ),
-          //   upPress: (){
-          //     print("upPress1");
-          //   },
-          //   downPress: (){
-          //     print("downPress1");
-          //   },
-          // ),
-          // _buildItem(
-          //   repaintBoundary: RepaintBoundary(
-          //     key: repaintBoundaryKey3,
-          //     child: Image.asset(
-          //       'images/sha_qiu.png',
-          //       fit: BoxFit.cover,
-          //       width: screenSize.width,
-          //       height: screenSize.height,
-          //     ),
-          //   ),
-          //   upPress: (){
-          //     print("upPress3");
-          //   },
-          //   downPress: (){
-          //     print("downPress3");
-          //   },
-          // ),
-          // _buildItem(
-          //   repaintBoundary: RepaintBoundary(
-          //     key: repaintBoundaryKey2,
-          //     child: Image.asset(
-          //       'images/bg_ocean.png',
-          //       fit: BoxFit.cover,
-          //       width: screenSize.width,
-          //       height: screenSize.height,
-          //     ),
-          //   ),
-          //   upPress: (){
-          //     print("upPress2");
-          //   },
-          //   downPress: (){
-          //     print("downPress2");
-          //   },
-          // ),
-        ],
-      ),
-    );
-  }
-  _buildBodyNew(){
-    final screenSize = MediaQuery.of(this.context).size;
-
-    return SingleChildScrollView(
-      key: _globalKey,
-      child: Column(
-        children: [
-          if(imageMerged != null) imageMerged!,
-          Text('合成图片'),
-          _buildItem(
-            repaintBoundary: RepaintBoundary(
-                key: repaintBoundaryKey1,
-                child: Image.asset(
-                  'images/bg_alp.png',
-                  fit: BoxFit.cover,
-                  width: screenSize.width,
-                  height: screenSize.height * 0.25,
-                ),
-              ),
-            upPress: (){
-              print("upPress1");
-            },
-            downPress: (){
-              print("downPress1");
-            },
-          ),
-          _buildItem(
-            repaintBoundary: RepaintBoundary(
-              key: repaintBoundaryKey3,
-              child: Image.asset(
-                'images/sha_qiu.png',
-                fit: BoxFit.cover,
-                width: screenSize.width,
-                height: screenSize.height,
-              ),
-            ),
-            upPress: (){
-              print("upPress3");
-            },
-            downPress: (){
-              print("downPress3");
-            },
-          ),
-          _buildItem(
-            repaintBoundary: RepaintBoundary(
-              key: repaintBoundaryKey2,
-              child: Image.asset(
-                'images/bg_ocean.png',
-                fit: BoxFit.cover,
-                width: screenSize.width,
-                height: screenSize.height,
-              ),
-            ),
-            upPress: (){
-              print("upPress2");
-            },
-            downPress: (){
-              print("downPress2");
-            },
-          ),
         ],
       ),
     );
@@ -262,8 +117,9 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
 
   _buildItem({
     required RepaintBoundary repaintBoundary,
-    VoidCallback? upPress,
-    VoidCallback? downPress
+    bool hideUp = false,
+    bool hideDown = false,
+    void Function(int step)? callback,
   }) {
     final screenSize = MediaQuery.of(this.context).size;
     final moveBtnSize = 40.0;
@@ -276,7 +132,7 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
           left: 15,
           child: Column(
             children: [
-              Container(
+              hideUp ? Container() : Container(
                 width: moveBtnSize,
                 height: moveBtnSize,
                 child: FloatingActionButton(
@@ -285,12 +141,12 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(radius))
                   ),
-                  onPressed: upPress,
-                  child: Icon(Icons.arrow_circle_down,),
+                  onPressed: () => callback?.call(-1),
+                  child: Icon(Icons.arrow_circle_up,),
                 ),
               ),
-              SizedBox(height: 8),
-              Container(
+              hideUp ? Container() : SizedBox(height: 8),
+              hideDown ? Container() : Container(
                 width: moveBtnSize,
                 height: moveBtnSize,
                 child: FloatingActionButton(
@@ -299,8 +155,8 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(radius))
                   ),
-                  onPressed: downPress,
-                  child: Icon(Icons.arrow_circle_up,),
+                  onPressed: () => callback?.call(1),
+                  child: Icon(Icons.arrow_circle_down,),
                 ),
               ),
             ],
@@ -308,110 +164,6 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
         ),
       ],
     );
-  }
-
-  Future<ui.Image> _capturePic(GlobalKey key) async {
-    BuildContext buildContext = key.currentContext!;
-    print("key:${key}:${buildContext}");
-    RenderRepaintBoundary boundary = buildContext.findRenderObject() as RenderRepaintBoundary;
-    ui.Image image = await boundary.toImage(pixelRatio: ui.window.devicePixelRatio);
-
-    // ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
-    // Uint8List? pngBytes = byteData?.buffer.asUint8List() ?? Uint8List(10);
-    // ui.Image img = ui.Image.memory(pngBytes);
-    return Future.value(image);
-  }
-
-  /// 合成截图
-  Future<Uint8List?> _compositePicNew() async {
-    try {
-      ui.Image one = await _capturePic(repaintBoundaryKey1);
-      ui.Image two = await _capturePic(repaintBoundaryKey2);
-      ui.Image three = await _capturePic(repaintBoundaryKey3);
-
-      print("three: ${three.width} ${three.height}");
-      int totalWidth = one.width > two.width ? one.width : two.width;
-      // int totalHeight = one.height + two.height + 20.h.toInt();
-      // int totalHeight = one.height + two.height;
-      //初始化画布
-      ui.PictureRecorder recorder = ui.PictureRecorder();
-      final paint = Paint();
-      Canvas canvas = Canvas(recorder);
-      //画第一张图
-      canvas.drawRect(Rect.fromLTWH(
-          0,
-          0,
-          totalWidth * 1.0,
-          one.height * 1.0), paint);
-      canvas.drawImage(one, Offset((totalWidth - one.width) / 2, 0), paint);
-      //画第二张图
-      paint.shader = null;
-      paint.color = Colors.red;
-      canvas.drawRect(Rect.fromLTWH(
-          0,
-          one.height * 1.0,
-          totalWidth * 1.0,
-          two.height * 1.0), paint);
-      canvas.drawImage(two, Offset(0, one.height + 12), paint);
-      //画第三张图
-      canvas.drawRect(Rect.fromLTWH(
-        0,
-        one.height * 1.0 + two.height * 1.0,
-        totalWidth * 1.0,
-          two.height * 1.0), paint);
-      canvas.drawImage(three, Offset((totalWidth - two.width) / 2, one.height + two.height + 12), paint);
-
-      ui.Image image = await recorder.endRecording().toImage(totalWidth, one.height + two.height + three.height + 24);
-      //获取合成的图片
-      ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
-      Uint8List? pngBytes = byteData?.buffer.asUint8List();
-
-      return Future.value(pngBytes);
-    } catch (e) {
-      print(e);
-    }
-    return null;
-  }
-
-  /// 合成截图
-  Future<Uint8List?> _compositePic() async {
-    try {
-      ui.Image? one = await _capturePic(repaintBoundaryKey1);
-      ui.Image? two = await _capturePic(repaintBoundaryKey2);
-      print("two: ${two.width} ${two.height}");
-      int totalWidth = one.width > two.width ? one.width : two.width;
-      // int totalHeight = one.height + two.height + 20.h.toInt();
-      int totalHeight = one.height + two.height;
-      //初始化画布
-      ui.PictureRecorder recorder = ui.PictureRecorder();
-      Canvas canvas = Canvas(recorder);
-      final paint = Paint();
-      //画第一张图
-      canvas.drawRect(Rect.fromLTWH(
-        0,
-        0,
-        totalWidth * 1.0,
-        one.height * 1.0), paint);
-      canvas.drawImage(one, Offset((totalWidth - one.width) / 2, 0), paint);
-      //画第二张图
-      paint.shader = null;
-      paint.color = Colors.red;
-      canvas.drawRect(Rect.fromLTWH(
-        0,
-        one.height * 1.0,
-        totalWidth * 1.0,
-          (totalHeight - one.height)*1.0), paint);
-      canvas.drawImage(two, Offset((totalWidth - two.width) / 2, one.height + 12), paint);
-      //获取合成的图片
-      ui.Image image = await recorder.endRecording().toImage(totalWidth, totalHeight);
-      ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
-      Uint8List? pngBytes = byteData?.buffer.asUint8List();
-
-      return Future.value(pngBytes);
-    } catch (e) {
-      print(e);
-    }
-    return null;
   }
 
   /// 通过多个 SingleChildScrollView 的 RepaintBoundary 对象合成长海报
@@ -466,6 +218,7 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
       return Future.value(pngBytes);
     } catch (e) {
       print(e);
+      return Future.error(e);
     }
     return null;
   }
@@ -483,7 +236,7 @@ class MaterialDetailConfig {
   String? examineId; // 审批id
   String? score; // 得分
   bool? deletedFlag; // 是否删除
-  GlobalKey? globalKey;
+  GlobalKey globalKey;
   
   MaterialDetailConfig({
     this.materialType,
@@ -497,6 +250,6 @@ class MaterialDetailConfig {
     this.examineId,
     this.score,
     this.deletedFlag,
-    this.globalKey,
+    required this.globalKey,
   });
 }

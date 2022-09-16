@@ -8,9 +8,10 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_templet_project/extensions/image_extension.dart';
+import 'package:flutter_templet_project/extensions/list_extension.dart';
+
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_templet_project/extensions/list_extension.dart';
 
 class MergeImagesDemo extends StatefulWidget {
 
@@ -101,15 +102,13 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
                   height: screenSize.height * 0.25,
                 ),
               ),
-            upPress: (){
-                print("upPress1");
-                var items = ['a', 'b', 'c', 'd'];
-                final itemsNew = items.exchange(1, 2);
-                print("exchange:${itemsNew}");
+            callback: (step){
+              print("callback:${step}");
 
-            },
-            downPress: (){
-              print("downPress1");
+              var items = ['a', 'b', 'c', 'd'];
+              final itemsNew = items.exchange(1, 2);
+              print("exchange:${itemsNew}");
+
 
               var list = [1, 2, 3, 4, 5];
               // list.replaceRange(1, 1, [6]);
@@ -129,11 +128,8 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
                 height: screenSize.height,
               ),
             ),
-            upPress: (){
-              print("upPress3");
-            },
-            downPress: (){
-              print("downPress3");
+            callback: (step){
+              print("callback:${step}");
             },
           ),
           _buildItem(
@@ -146,11 +142,8 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
                 height: screenSize.height,
               ),
             ),
-            upPress: (){
-              print("upPress2");
-            },
-            downPress: (){
-              print("downPress2");
+            callback: (step){
+              print("callback:${step}");
             },
           ),
         ],
@@ -160,8 +153,7 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
 
   _buildItem({
     required RepaintBoundary repaintBoundary,
-    VoidCallback? upPress,
-    VoidCallback? downPress
+    void Function(int step)? callback,
   }) {
     final screenSize = MediaQuery.of(this.context).size;
     final moveBtnSize = 40.0;
@@ -183,7 +175,7 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(radius))
                   ),
-                  onPressed: upPress,
+                  onPressed: () => callback?.call(1),
                   child: Icon(Icons.arrow_circle_down,),
                 ),
               ),
@@ -197,7 +189,7 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(radius))
                   ),
-                  onPressed: downPress,
+                  onPressed: () => callback?.call(-1),
                   child: Icon(Icons.arrow_circle_up,),
                 ),
               ),
