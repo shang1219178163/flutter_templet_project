@@ -7,8 +7,10 @@ import 'dart:typed_data';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_templet_project/extensions/image_extension.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_templet_project/extensions/list_extension.dart';
 
 class MergeImagesDemo extends StatefulWidget {
 
@@ -23,6 +25,8 @@ class MergeImagesDemo extends StatefulWidget {
 class _MergeImagesDemoState extends State<MergeImagesDemo> {
 
   GlobalKey _globalKey = GlobalKey();
+  GlobalKey repaintBoundaryKey = GlobalKey(debugLabel: 'gk');
+
   GlobalKey repaintBoundaryKey1 = GlobalKey(debugLabel: 'gk1');
   GlobalKey repaintBoundaryKey2 = GlobalKey(debugLabel: 'gk2');
   GlobalKey repaintBoundaryKey3 = GlobalKey(debugLabel: 'gk3');
@@ -87,35 +91,118 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
         children: [
           if(imageMerged != null) imageMerged!,
           Text('合成图片'),
-          RepaintBoundary(
-            key: repaintBoundaryKey1,
-            child: Image.asset(
-              'images/bg_alp.png',
-              fit: BoxFit.cover,
-              width: screenSize.width,
-              height: screenSize.height * 0.25,
-            ),
+          _buildItem(
+            repaintBoundary: RepaintBoundary(
+                key: repaintBoundaryKey1,
+                child: Image.asset(
+                  'images/bg_alp.png',
+                  fit: BoxFit.cover,
+                  width: screenSize.width,
+                  height: screenSize.height * 0.25,
+                ),
+              ),
+            upPress: (){
+                print("upPress1");
+                var items = ['a', 'b', 'c', 'd'];
+                final itemsNew = items.exchange(1, 2);
+                print("exchange:${itemsNew}");
+
+            },
+            downPress: (){
+              print("downPress1");
+
+              var list = [1, 2, 3, 4, 5];
+              // list.replaceRange(1, 1, [6]);
+              print("${list.join(', ')}");
+              list[1] = list[2];
+              list[2] = list[1];
+              print("2_${list.join(', ')}");
+            },
           ),
-          RepaintBoundary(
-            key: repaintBoundaryKey3,
-            child: Image.asset(
-              'images/sha_qiu.png',
-              fit: BoxFit.cover,
-              width: screenSize.width,
-              height: screenSize.height,
+          _buildItem(
+            repaintBoundary: RepaintBoundary(
+              key: repaintBoundaryKey3,
+              child: Image.asset(
+                'images/sha_qiu.png',
+                fit: BoxFit.cover,
+                width: screenSize.width,
+                height: screenSize.height,
+              ),
             ),
+            upPress: (){
+              print("upPress3");
+            },
+            downPress: (){
+              print("downPress3");
+            },
           ),
-          RepaintBoundary(
-            key: repaintBoundaryKey2,
-            child: Image.asset(
-              'images/bg_ocean.png',
-              fit: BoxFit.cover,
-              width: screenSize.width,
-              height: screenSize.height,
+          _buildItem(
+            repaintBoundary: RepaintBoundary(
+              key: repaintBoundaryKey2,
+              child: Image.asset(
+                'images/bg_ocean.png',
+                fit: BoxFit.cover,
+                width: screenSize.width,
+                height: screenSize.height,
+              ),
             ),
+            upPress: (){
+              print("upPress2");
+            },
+            downPress: (){
+              print("downPress2");
+            },
           ),
         ],
       ),
+    );
+  }
+
+  _buildItem({
+    required RepaintBoundary repaintBoundary,
+    VoidCallback? upPress,
+    VoidCallback? downPress
+  }) {
+    final screenSize = MediaQuery.of(this.context).size;
+    final moveBtnSize = 40.0;
+    final radius = 8.0;
+    return Stack(
+      children: [
+        repaintBoundary,
+        Positioned(
+          top: 15,
+          left: 15,
+          child: Column(
+            children: [
+              Container(
+                width: moveBtnSize,
+                height: moveBtnSize,
+                child: FloatingActionButton(
+                  backgroundColor: Colors.red,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(radius))
+                  ),
+                  onPressed: upPress,
+                  child: Icon(Icons.arrow_circle_down,),
+                ),
+              ),
+              SizedBox(height: 8),
+              Container(
+                width: moveBtnSize,
+                height: moveBtnSize,
+                child: FloatingActionButton(
+                  backgroundColor: Colors.red,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(radius))
+                  ),
+                  onPressed: downPress,
+                  child: Icon(Icons.arrow_circle_up,),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 
@@ -269,6 +356,9 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
       ui.Image image = await recorder.endRecording().toImage(totalWidth, totalHeight);
       ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
       Uint8List? pngBytes = byteData?.buffer.asUint8List();
+      //图片大小
+      image.fileSize().then((value) => print(value));
+
       return Future.value(pngBytes);
     } catch (e) {
       print(e);
@@ -320,5 +410,5 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
   //   final ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
   //   return byteData?.buffer.asUint8List() ?? Uint8List(10);
   // }
-
 }
+

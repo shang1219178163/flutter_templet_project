@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/APPThemeSettings.dart';
 import 'package:flutter_templet_project/pages/demo/TabBarDemo.dart';
 import 'package:flutter_templet_project/pages/tabBar_tabBarView_demo.dart';
@@ -44,6 +46,8 @@ import 'provider/notifier_demo.dart';
 // }
 
 Future<void> main() async {
+  await ScreenUtil.ensureScreenSize();
+
   setCustomErrorPage();
   await initServices();
   // AppInit.catchException(() => runApp(MyApp()));

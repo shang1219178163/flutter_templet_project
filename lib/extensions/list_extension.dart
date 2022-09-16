@@ -26,4 +26,21 @@ extension ListExt<E> on List<E>{
     return this;
   }
 
+  List<E> exchange(int fromIdx, int toIdx) {
+    if (fromIdx >= this.length || toIdx >= this.length) {
+      print('Error: fromIdx, toIdx < length');
+      return this;
+    }
+    E e = this[fromIdx];
+    E toE = this[toIdx];
+    //exchange
+    this[fromIdx] = toE;
+    this[toIdx] = e;
+    return this;
+  }
+
+  // List<E> moveToDest(E e, int toIdx) {
+  //   final destIdx = this.indexOf(e)
+  //   return this;
+  // }
 }
