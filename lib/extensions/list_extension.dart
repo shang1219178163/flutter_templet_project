@@ -38,9 +38,4 @@ extension ListExt<E> on List<E>{
     this[toIdx] = e;
     return this;
   }
-
-  // List<E> moveToDest(E e, int toIdx) {
-  //   final destIdx = this.indexOf(e)
-  //   return this;
-  // }
 }

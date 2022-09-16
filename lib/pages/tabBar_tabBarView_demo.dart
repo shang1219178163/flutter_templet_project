@@ -382,7 +382,7 @@ var _specials = [
   Tuple2(APPRouter.constrainedBoxDemo, "constrainedBoxDemo", ),
   Tuple2(APPRouter.flutterFFiTest, "ffi", ),
   Tuple2(APPRouter.mergeImagesDemo, "图像合并", ),
-
+  Tuple2(APPRouter.mergeNetworkImagesDemo, "网络图像合并", ),
 
 ];
 
