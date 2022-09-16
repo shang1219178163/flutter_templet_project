@@ -25,7 +25,7 @@ class MergeImagesDemo extends StatefulWidget {
 class _MergeImagesDemoState extends State<MergeImagesDemo> {
 
   GlobalKey _globalKey = GlobalKey();
-  GlobalKey repaintBoundaryKey = GlobalKey(debugLabel: 'gk');
+  // GlobalKey repaintBoundaryKey = GlobalKey(debugLabel: 'gk');
 
   GlobalKey repaintBoundaryKey1 = GlobalKey(debugLabel: 'gk1');
   GlobalKey repaintBoundaryKey2 = GlobalKey(debugLabel: 'gk2');
@@ -178,6 +178,7 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
                 width: moveBtnSize,
                 height: moveBtnSize,
                 child: FloatingActionButton(
+                  heroTag: null,
                   backgroundColor: Colors.red,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(radius))
@@ -191,6 +192,7 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
                 width: moveBtnSize,
                 height: moveBtnSize,
                 child: FloatingActionButton(
+                  heroTag: null,
                   backgroundColor: Colors.red,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(radius))
