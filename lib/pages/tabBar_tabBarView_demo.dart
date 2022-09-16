@@ -44,7 +44,7 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
     super.initState();
     _tabController.index = _pages.length - 1;
 
-    testData();
+    // testData();
   }
 
   @override
@@ -381,6 +381,8 @@ var _specials = [
   Tuple2(APPRouter.hitTest, "hitTest", ),
   Tuple2(APPRouter.constrainedBoxDemo, "constrainedBoxDemo", ),
   Tuple2(APPRouter.flutterFFiTest, "ffi", ),
+  Tuple2(APPRouter.mergeImagesDemo, "图像合并", ),
+  Tuple2(APPRouter.mergeNetworkImagesDemo, "网络图像合并", ),
 
 ];
 
@@ -415,9 +417,8 @@ var _vendors = [
   Tuple2(APPRouter.aestheticDialogsDemo, "aestheticDialogs 对话框", ),
   Tuple2(APPRouter.customTimerDemo, "自定义计时器", ),
   Tuple2(APPRouter.skeletonDemo, "骨架屏", ),
-
+  Tuple2(APPRouter.smartDialogPageDemo, "弹窗", ),
 ];
-
 
 var _others = [
   Tuple2(APPRouter.borderDemo, "buttonBorderDemo", ),
