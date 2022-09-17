@@ -1,11 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_templet_project/extensions/ddlog.dart';
+
 import 'package:styled_widget/styled_widget.dart';
 
+import 'package:flutter_templet_project/extensions/ddlog.dart';
 import 'package:flutter_templet_project/extensions/widget_extension.dart';
-
 
 class SystemIconsPage extends StatefulWidget {
 
@@ -16,11 +15,9 @@ class SystemIconsPage extends StatefulWidget {
 class _SystemIconsPageState extends State<SystemIconsPage> {
   TextEditingController editingController = TextEditingController();
 
-  var titles = List.from(kIconDataDic.keys);
-  var list = List.from(kIconDataDic.keys);
-
-
-
+  var list = List.from(kIConDic.keys);
+  var searchResults = List.from(kIConDic.keys);
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +31,7 @@ class _SystemIconsPageState extends State<SystemIconsPage> {
             buildTextField(context)
                 .padding(all: 10.0)
             ,
-            Text("找到 ${list.length} 条数据")
+            Text("找到 ${searchResults.length} 条数据")
                 .padding(left: 10, right: 10)
             ,
             buildListView(context)
@@ -68,13 +65,13 @@ class _SystemIconsPageState extends State<SystemIconsPage> {
 
 
   CupertinoScrollbar buildListView(BuildContext context) {
-    list.sort((a, b) => a.compareTo(b));
+    searchResults.sort((a, b) => a.compareTo(b));
     return ListView.separated(
-        itemCount: list.length,
+        itemCount: searchResults.length,
         itemBuilder: (context, index) {
-          final item = list[index];
+          final item = searchResults[index];
           return ListTile(
-            leading: Icon(kIconDataDic[item]),
+            leading: Icon(kIConDic[item]),
             title: Text("$item"),
             // subtitle: Text(array[0]),
             onTap: (){
@@ -101,10 +98,10 @@ class _SystemIconsPageState extends State<SystemIconsPage> {
     // ddlog(value);
     setState(() {
       if (value.isEmpty) {
-        list = titles;
+        searchResults = list;
       } else {
-        list = titles.where((element) => element.contains(value)).toList();
-        ddlog(list.length);
+        searchResults = list.where((element) => element.contains(value)).toList();
+        ddlog(searchResults.length);
       }
     });
   }
@@ -112,7 +109,7 @@ class _SystemIconsPageState extends State<SystemIconsPage> {
 
 
 
-Map<String, IconData> kIconDataDic = {
+Map<String, IconData> kIConDic = {
 "Icons.rsvp": Icons.rsvp,
 "Icons.money_off": Icons.money_off,
 "Icons.camera_roll": Icons.camera_roll,
