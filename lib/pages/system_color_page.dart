@@ -6,8 +6,11 @@
 //  Copyright © 2022/9/17 shang. All rights reserved.
 //
 
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/SearchResultsListView.dart';
 import 'package:flutter_templet_project/extensions/ddlog.dart';
 
 import 'package:flutter_templet_project/extensions/widget_extension.dart';
@@ -44,6 +47,9 @@ class _SystemColorPageState extends State<SystemColorPage> {
   var list = List.from(kColorDic.keys);
   var searchResults = List.from(kColorDic.keys);
 
+  GlobalKey _globalKey = GlobalKey();
+  void Function(String value)? cellCallback;
+
   @override
   Widget build(BuildContext context) {
 
@@ -51,55 +57,13 @@ class _SystemColorPageState extends State<SystemColorPage> {
       appBar: AppBar(
         title: Text("fluttefr 系统 Icons"),
       ),
-      body: Container(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Padding(
-              child: buildTextField(context),
-              padding: EdgeInsets.all(10),
-            ),
-            Padding(
-              child: Text("找到 ${searchResults.length} 条数据"),
-              padding: EdgeInsets.only(left: 10, right: 10),
-            ),
-            Expanded(
-              child: buildListView(context),
-              flex: 1,
-            )
-          ],
-        ),
-      ),
-    );
-  }
-
-  TextField buildTextField(BuildContext context) {
-    return TextField(
-      onChanged: _changeValue,
-      //   onChanged: (value) {
-      //   ddlog(value);
-      // },
-      controller: editingController,
-      decoration: InputDecoration(
-        icon: Icon(Icons.search),
-        // labelText: "Search",
-        hintText: "Search",
-        // prefixIcon: Icon(Icons.search),
-        // border: OutlineInputBorder(
-        //     borderRadius: BorderRadius.all(Radius.circular(25.0))
-        // ),
-      ),
-    );
-  }
-
-  CupertinoScrollbar buildListView(BuildContext context) {
-    searchResults.sort((a, b) => "${a}".compareTo("${b}"));
-
-    return CupertinoScrollbar(
-      isAlwaysShown: false,
-      child: ListView.separated(
-        itemCount: searchResults.length,
-        itemBuilder: (context, index) {
+      body: SearchResultsListView(
+        key: _globalKey,
+        list: list,
+        searchResults: searchResults,
+        tapCallback: cellCallback,
+        // editingController: editingController,
+        itemBuilder: (context, index, searchResults) {
           final item = searchResults[index];
           var subtitle = "${kColorDic[item].toString()}"
               .replaceAll('MaterialColor(primary value:', '')
@@ -116,34 +80,18 @@ class _SystemColorPageState extends State<SystemColorPage> {
             subtitle: Text(subtitle),
             onTap: (){
               ddlog(item);
-              // Clipboard.setData(ClipboardData(text: "$item"));
-              editingController.text = "$item".split('.').last;
-              _changeValue(editingController.text);
+              final value = "$item".split('.').last;
+              // _globalKey.currentContext
+              final ctx = _globalKey.currentContext;
+              final cs = _globalKey.currentState;
+              final cw = _globalKey.currentWidget as SearchResultsListView;
+              // editingController.text = value;
+              cw.tapCallback?.call(value);
             },
-          );
-        },
-        separatorBuilder: (context, index) {
-          return Divider(
-            height: .5,
-            indent: 15,
-            endIndent: 15,
-            color: Color(0xFFDDDDDD),
           );
         },
       ),
     );
-  }
-
-  void _changeValue(String value) {
-    // ddlog(value);
-    setState(() {
-      if (value.isEmpty) {
-        searchResults = list;
-      } else {
-        searchResults = list.where((e) => "${e}".contains(value)).toList();
-        ddlog(list.length);
-      }
-    });
   }
 }
 
