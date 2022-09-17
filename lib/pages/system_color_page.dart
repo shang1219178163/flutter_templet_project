@@ -59,8 +59,14 @@ class _SystemColorPageState extends State<SystemColorPage> {
       body: SearchResultsListView(
         key: _globalKey,
         map: kColorDic,
-        keys: keys,
-        searchResults: searchResults,
+        leadingBuilder: (key) => Container(
+          color: kColorDic[key],
+          width: 50,
+          height: 50,
+        ),
+        tap: (obj) {
+          print("obj:${obj}");
+        }
         // itemBuilder: (context, index, searchResults) => _buildCell(context, index, searchResults),
       ),
     );
@@ -88,7 +94,7 @@ class _SystemColorPageState extends State<SystemColorPage> {
         final ctx = _globalKey.currentContext;
         final cs = _globalKey.currentState;
         final cw = _globalKey.currentWidget as SearchResultsListView;
-        cw.tapCallback?.call(value);
+        cw.searchCallback?.call(value);
       },
     );
   }

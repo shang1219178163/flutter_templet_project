@@ -5,26 +5,25 @@ import 'package:flutter_templet_project/extensions/ddlog.dart';
 class SearchResultsListView extends StatefulWidget {
 
   Map<String, dynamic> map;
-  List keys;
-  List searchResults;
   String? hintText;
   TextEditingController? editingController;
 
+  Widget Function(String key)? leadingBuilder;
   Widget Function(BuildContext context, int index, List searchResults)? itemBuilder;
-  // IndexedWidgetBuilder? itemBuilder;
   IndexedWidgetBuilder? separatorBuilder;
 
-  void Function(String value)? tapCallback;
+  void Function(String value)? searchCallback;
+  void Function(dynamic obj) tap;
 
   SearchResultsListView({
     Key? key,
     this.map = const {},
-    this.keys = const [],
-    this.searchResults = const [],
     this.hintText = "搜索",
     this.editingController,
+    this.leadingBuilder,
     this.itemBuilder,
-    this.tapCallback,
+    this.searchCallback,
+    required this.tap,
     this.separatorBuilder,
   }) : super(key: key){
     editingController = editingController ?? TextEditingController();
@@ -35,16 +34,26 @@ class SearchResultsListView extends StatefulWidget {
 }
 
 class _SearchResultsListViewState extends State<SearchResultsListView> {
-  // TextEditingController editingController = widget.editingController ??
-  //     TextEditingController();
+
+  var keys = [];
+  var searchResults = [];
 
   @override
-  Widget build(BuildContext context) {
-    widget.tapCallback = (value){
+  void initState() {
+    // TODO: implement initState
+    keys = List.from(widget.map.keys);
+    searchResults = List.from(widget.map.keys);
+
+    widget.searchCallback = (value){
       widget.editingController?.text = value;
       _textfieldChanged(value);
     };
 
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -54,7 +63,7 @@ class _SearchResultsListViewState extends State<SearchResultsListView> {
             padding: EdgeInsets.all(10),
           ),
           Padding(
-            child: Text("找到 ${widget.searchResults.length} 条数据"),
+            child: Text("找到 ${searchResults.length} 条数据"),
             padding: EdgeInsets.only(left: 10, right: 10),
           ),
           Expanded(
@@ -86,13 +95,13 @@ class _SearchResultsListViewState extends State<SearchResultsListView> {
   }
 
   _buildListView(BuildContext context) {
-    widget.searchResults.sort((a, b) => "${a}".compareTo("${b}"));
+    searchResults.sort((a, b) => "${a}".compareTo("${b}"));
 
     return CupertinoScrollbar(
       isAlwaysShown: false,
       child: ListView.separated(
-        itemCount: widget.searchResults.length,
-        itemBuilder:  (context, index) => widget.itemBuilder != null ? widget.itemBuilder!(context, index, widget.searchResults) : _buildCell(context, index),
+        itemCount: searchResults.length,
+        itemBuilder: (context, index) => widget.itemBuilder != null ? widget.itemBuilder!(context, index, searchResults) : _buildCell(context, index, searchResults),
         separatorBuilder: widget.separatorBuilder ?? (context, index) {
           return Divider(
             height: .5,
@@ -105,10 +114,10 @@ class _SearchResultsListViewState extends State<SearchResultsListView> {
     );
   }
 
-  _buildCell(context, index) {
-      final str = widget.searchResults[index];
+  _buildCell(context, index, List searchResults) {
+    final str = searchResults[index];
       return ListTile(
-        leading: Container(
+        leading: widget.leadingBuilder != null ? widget.leadingBuilder!(str) : Container(
           color: widget.map[str],
           width: 40,
           height: 40,
@@ -117,7 +126,13 @@ class _SearchResultsListViewState extends State<SearchResultsListView> {
         // subtitle: Text(subtitle),
         onTap: () {
           final value = "$str".split('.').last;
-          widget.tapCallback?.call(value);
+          widget.tap(widget.map[str]);
+          if (widget.searchCallback == null) {
+            widget.editingController?.text = value;
+            _textfieldChanged(value);
+            return;
+          }
+          widget.searchCallback?.call(value);
         },
       );
   }
@@ -125,11 +140,11 @@ class _SearchResultsListViewState extends State<SearchResultsListView> {
   void _textfieldChanged(String value) {
     setState(() {
       if (value.isEmpty) {
-        widget.searchResults = widget.keys;
+        searchResults = keys;
       } else {
-        widget.searchResults = widget.keys.where((e) => "${e}".contains(value)).toList();
+        searchResults = keys.where((e) => "${e}".contains(value)).toList();
       }
-      // ddlog("_changeValue:${value} searchResults:${widget.searchResults}");
+      // ddlog("_changeValue:${value} searchResults:${searchResults}");
     });
   }
 }
