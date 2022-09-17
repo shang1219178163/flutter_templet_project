@@ -4,7 +4,8 @@ import 'package:flutter_templet_project/extensions/ddlog.dart';
 
 class SearchResultsListView extends StatefulWidget {
 
-  List list;
+  Map<String, dynamic> map;
+  List keys;
   List searchResults;
   String? hintText;
   TextEditingController? editingController;
@@ -17,7 +18,8 @@ class SearchResultsListView extends StatefulWidget {
 
   SearchResultsListView({
     Key? key,
-    this.list = const [],
+    this.map = const {},
+    this.keys = const [],
     this.searchResults = const [],
     this.hintText = "搜索",
     this.editingController,
@@ -104,33 +106,28 @@ class _SearchResultsListViewState extends State<SearchResultsListView> {
   }
 
   _buildCell(context, index) {
-      final item = widget.searchResults[index];
-
+      final str = widget.searchResults[index];
       return ListTile(
         leading: Container(
+          color: widget.map[str],
           width: 40,
           height: 40,
         ),
-        title: Text("$item"),
+        title: Text("$str"),
         // subtitle: Text(subtitle),
         onTap: () {
-          cellCallback("$item".split('.').last);
+          final value = "$str".split('.').last;
+          widget.tapCallback?.call(value);
         },
       );
-  }
-
-  void cellCallback(String value) {
-    // Clipboard.setData(ClipboardData(text: value));
-    widget.editingController?.text = value;
-    _textfieldChanged(value);
   }
 
   void _textfieldChanged(String value) {
     setState(() {
       if (value.isEmpty) {
-        widget.searchResults = widget.list;
+        widget.searchResults = widget.keys;
       } else {
-        widget.searchResults = widget.list.where((e) => "${e}".contains(value)).toList();
+        widget.searchResults = widget.keys.where((e) => "${e}".contains(value)).toList();
       }
       // ddlog("_changeValue:${value} searchResults:${widget.searchResults}");
     });

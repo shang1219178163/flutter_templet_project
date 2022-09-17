@@ -44,11 +44,10 @@ class SystemColorPage extends StatefulWidget {
 class _SystemColorPageState extends State<SystemColorPage> {
   TextEditingController editingController = TextEditingController();
 
-  var list = List.from(kColorDic.keys);
+  var keys = List.from(kColorDic.keys);
   var searchResults = List.from(kColorDic.keys);
 
   GlobalKey _globalKey = GlobalKey();
-  void Function(String value)? cellCallback;
 
   @override
   Widget build(BuildContext context) {
@@ -59,38 +58,38 @@ class _SystemColorPageState extends State<SystemColorPage> {
       ),
       body: SearchResultsListView(
         key: _globalKey,
-        list: list,
+        map: kColorDic,
+        keys: keys,
         searchResults: searchResults,
-        tapCallback: cellCallback,
-        // editingController: editingController,
-        itemBuilder: (context, index, searchResults) {
-          final item = searchResults[index];
-          var subtitle = "${kColorDic[item].toString()}"
-              .replaceAll('MaterialColor(primary value:', '')
-              .replaceAll('MaterialAccentColor(primary value:', '')
-              .replaceAll('))', ')');
-
-          return ListTile(
-            leading: Container(
-              color: kColorDic[item],
-              width: 40,
-              height: 40,
-            ),
-            title: Text("$item"),
-            subtitle: Text(subtitle),
-            onTap: (){
-              ddlog(item);
-              final value = "$item".split('.').last;
-              // _globalKey.currentContext
-              final ctx = _globalKey.currentContext;
-              final cs = _globalKey.currentState;
-              final cw = _globalKey.currentWidget as SearchResultsListView;
-              // editingController.text = value;
-              cw.tapCallback?.call(value);
-            },
-          );
-        },
+        // itemBuilder: (context, index, searchResults) => _buildCell(context, index, searchResults),
       ),
+    );
+  }
+
+  _buildCell(BuildContext context, int index, List searchResults) {
+    final str = searchResults[index];
+    var subtitle = "${kColorDic[str].toString()}"
+        .replaceAll('MaterialColor(primary value:', '')
+        .replaceAll('MaterialAccentColor(primary value:', '')
+        .replaceAll('))', ')');
+
+    return ListTile(
+      leading: Container(
+        color: kColorDic[str],
+        width: 40,
+        height: 40,
+      ),
+      title: Text("$str"),
+      subtitle: Text(subtitle),
+      onTap: (){
+        ddlog(str);
+        final value = "$str".split('.').last;
+
+        final ctx = _globalKey.currentContext;
+        final cs = _globalKey.currentState;
+        final cw = _globalKey.currentWidget as SearchResultsListView;
+        cw.tapCallback?.call(value);
+      },
     );
   }
 }
