@@ -111,7 +111,7 @@ dependencies:
   enhance_expansion_panel: ^0.0.3
 
   custom_timer: ^0.1.1
-  scribble: ^0.4.0
+  scribble: ^0.9.1
   aesthetic_dialogs: ^0.0.15
   shimmer_animation: ^2.1.0+1
   flutter_smart_dialog: ^4.2.0

@@ -7,6 +7,7 @@ import 'package:flutter_templet_project/pages/LocalImagePage.dart';
 import 'package:flutter_templet_project/pages/demo/flutter_smart_dialog_demo.dart';
 import 'package:flutter_templet_project/pages/demo/merge_images_demo.dart';
 import 'package:flutter_templet_project/pages/demo/merge_network_images_demo.dart';
+import 'package:flutter_templet_project/pages/system_color_page.dart';
 import 'package:flutter_templet_project/vendor/ScribbleDemo.dart';
 import 'package:flutter_templet_project/vendor/SkeletonDemo.dart';
 import 'package:flutter_templet_project/vendor/TextlessDemo.dart';
@@ -143,7 +144,8 @@ class APPRouter {
   static const textlessDemo = '/textlessDemo';
   static const alertDialogDemo = '/AlertDialogDemo';
   static const alertSheetDemo = '/AlertSheetDemo';
-  static const systemIconsPage = '/IconsListPage';
+  static const systemIconsPage = '/systemIconsPage';
+  static const systemColorPage = '/systemColorPage';
   static const gridViewDemo = '/GridViewDemo';
   static const gridPaperDemo = '/GridPaperDemo';
 
@@ -310,6 +312,7 @@ class AppPage{
     GetPage(name: APPRouter.alertDialogDemo, page: () => AlertDialogDemo(), ),
     GetPage(name: APPRouter.alertSheetDemo, page: () => AlertSheetDemo(), ),
     GetPage(name: APPRouter.systemIconsPage, page: () => SystemIconsPage(), ),
+    GetPage(name: APPRouter.systemColorPage, page: () => SystemColorPage(), ),
     GetPage(name: APPRouter.gridViewDemo, page: () => GridViewDemo(), ),
     GetPage(name: APPRouter.pageViewDemo, page: () => PageViewDemo(), ),
     GetPage(name: APPRouter.pageViewTabBarWidget, page: () => PageViewTabBarWidget(), ),

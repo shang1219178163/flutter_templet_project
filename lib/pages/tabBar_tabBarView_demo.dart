@@ -370,6 +370,7 @@ var _list = [
 
 var _specials = [
   Tuple2(APPRouter.systemIconsPage, "flutter 系统 Icons", ),
+  Tuple2(APPRouter.systemColorPage, "flutter 系统 颜色", ),
   Tuple2(APPRouter.localImagePage, "本地图片", ),
   Tuple2(APPRouter.providerRoute, "providerRoute", ),
   Tuple2(APPRouter.stateManagerDemo, "状态管理", ),
