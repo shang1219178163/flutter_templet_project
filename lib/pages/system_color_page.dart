@@ -66,8 +66,8 @@ class _SystemColorPageState extends State<SystemColorPage> {
         ),
         tap: (obj) {
           print("obj:${obj}");
-        }
-        // itemBuilder: (context, index, searchResults) => _buildCell(context, index, searchResults),
+        },
+        itemBuilder: (context, index, searchResults) => _buildCell(context, index, searchResults),
       ),
     );
   }
