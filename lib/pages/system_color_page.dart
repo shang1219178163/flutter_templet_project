@@ -58,9 +58,10 @@ class _SystemColorPageState extends State<SystemColorPage> {
         actions: [
           TextButton(
             child: Text("Done", style: TextStyle(color: Colors.white),),
-            onPressed: (){
+            onPressed: () {
               ddlog("${widget}");
-          ),
+            }
+          )
         ],
       ),
       body: SearchResultsListView(
