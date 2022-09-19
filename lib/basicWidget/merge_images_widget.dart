@@ -42,7 +42,7 @@ class MergeImagesWidgetState extends State<MergeImagesWidget> {
           repaintBoundary: RepaintBoundary(
             key: e.globalKey,
             child: widget.imageBuilder != null ? widget.imageBuilder!(e) : FadeInImage.assetNetwork(
-              placeholder: 'images/sha_qiu.png',
+              placeholder: 'images/img_placeholder.png',
               image: e.url ?? '',
               fit: BoxFit.cover,
               width: double.parse(e.width ?? "${screenSize.width}"),
