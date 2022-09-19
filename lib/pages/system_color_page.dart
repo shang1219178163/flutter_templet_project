@@ -55,6 +55,13 @@ class _SystemColorPageState extends State<SystemColorPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("fluttefr 系统 Icons"),
+        actions: [
+          TextButton(
+            child: Text("Done", style: TextStyle(color: Colors.white),),
+            onPressed: (){
+              ddlog("${widget}");
+          ),
+        ],
       ),
       body: SearchResultsListView(
         key: _globalKey,

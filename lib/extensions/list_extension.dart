@@ -38,4 +38,13 @@ extension ListExt<E> on List<E>{
     this[toIdx] = e;
     return this;
   }
+
+  /// 转为 Map<String, dynamic>
+  Map<String, E> toJson() {
+    final Map<String, E> map = {};
+    for (var item in this) {
+      map["${item}"] = item;
+    }
+    return map;
+  }
 }
