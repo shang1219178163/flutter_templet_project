@@ -177,7 +177,7 @@ class MergeImagesWidgetState extends State<MergeImagesWidget> {
   }
 
   /// 合成图片
-  Future<Uint8List?> onDone() {
+  Future<Uint8List?> toCompositePics() {
     List<GlobalKey?> keys = widget.models.map((e) => e.globalKey).toList();
     // print("keys:${keys}");
     return _compositePics(keys);

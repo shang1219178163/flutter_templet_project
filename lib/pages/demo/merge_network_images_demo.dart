@@ -62,7 +62,7 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
                 final currentState = _globalKey.currentState as MergeImagesWidgetState;
                 print("${_globalKey}, ${currentWidget}, ${currentState}");
 
-                currentState.onDone().then((pngBytes) {
+                currentState.toCompositePics().then((pngBytes) {
                   // print(pngBytes);
                   imageMerged = Image.memory(pngBytes!, width: 400, height: 600);
                   setState(() {});
