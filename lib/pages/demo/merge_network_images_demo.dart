@@ -83,7 +83,7 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
 
     List children = detailList.map((e) {
       int idx = detailList.indexOf(e);
-      return _buildItem(
+      return _buildToolNew(
         hideUp: idx == 0,
         hideDown: idx == detailList.length - 1,
         repaintBoundary: RepaintBoundary(
@@ -115,54 +115,118 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
     );
   }
 
-  _buildItem({
+  _buildToolNew({
     required RepaintBoundary repaintBoundary,
     bool hideUp = false,
     bool hideDown = false,
     void Function(int step)? callback,
   }) {
-    final screenSize = MediaQuery.of(this.context).size;
-    final moveBtnSize = 40.0;
-    final radius = 8.0;
     return Stack(
       children: [
         repaintBoundary,
         Positioned(
-          top: 15,
-          left: 15,
+          top: 12,
+          left: 8,
           child: Column(
             children: [
-              hideUp ? Container() : Container(
-                width: moveBtnSize,
-                height: moveBtnSize,
-                child: FloatingActionButton(
-                  heroTag: null,
-                  backgroundColor: Colors.red,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(radius))
-                  ),
-                  onPressed: () => callback?.call(-1),
-                  child: Icon(Icons.arrow_circle_up,),
-                ),
+              _buildBtn(
+                onTap: () => callback?.call(-1),
+                image: Image.asset('images/icon_arrow_up.png'),
+                hidden: hideUp,
               ),
-              hideUp ? Container() : SizedBox(height: 8),
-              hideDown ? Container() : Container(
-                width: moveBtnSize,
-                height: moveBtnSize,
-                child: FloatingActionButton(
-                  heroTag: null,
-                  backgroundColor: Colors.red,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(radius))
-                  ),
-                  onPressed: () => callback?.call(1),
-                  child: Icon(Icons.arrow_circle_down,),
-                ),
+              hideUp ? Container() : SizedBox(height: 6),
+              _buildBtn(
+                image: Image.asset('images/icon_arrow_down.png'),
+                onTap: () => callback?.call(1),
+                hidden: hideDown,
               ),
             ],
           ),
         ),
       ],
+    );
+  }
+
+  _buildTool({
+    required RepaintBoundary repaintBoundary,
+    bool hideUp = false,
+    bool hideDown = false,
+    void Function(int step)? callback,
+  }) {
+    return Stack(
+      children: [
+        repaintBoundary,
+        Positioned(
+          top: 12,
+          left: 8,
+          child: Column(
+            children: [
+              _buildBtnSystemIcon(
+                image: Icon(Icons.arrow_circle_up,),
+                onTap: () {
+                  callback?.call(-1);
+                  print('arrow_circle_up');
+                },
+                hidden: hideUp,
+              ),
+              hideUp ? Container() : SizedBox(height: 6),
+              _buildBtnSystemIcon(
+                image: Icon(Icons.arrow_circle_down,),
+                onTap: () => callback?.call(1),
+                hidden: hideDown,
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  /// 本地图片
+  _buildBtn({
+    Widget? image,
+    GestureTapCallback? onTap,
+    double? width = 28,
+    double? height = 28,
+    bool hidden = false,
+  }) {
+    if (hidden) {
+      return Container();
+    }
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        width: width,
+        height: height,
+        child: image,
+      ),
+    );
+  }
+
+  /// 系统图标
+  _buildBtnSystemIcon({
+    Widget? image,
+    double? width = 28,
+    double? height = 28,
+    double radius = 6,
+    GestureTapCallback? onTap,
+    bool hidden = false,
+  }) {
+    if (hidden) {
+      return Container();
+    }
+    return Container(
+      width: width,
+      height: height,
+      child: FloatingActionButton(
+        heroTag: null,
+        backgroundColor: Colors.grey,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(radius))
+        ),
+        onPressed: onTap,
+        child: image,
+      ),
     );
   }
 
