@@ -4,6 +4,7 @@ import 'dart:typed_data';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_templet_project/basicWidget/merge_images_widget.dart';
 import 'package:flutter_templet_project/extensions/image_extension.dart';
 import 'package:flutter_templet_project/extensions/list_extension.dart';
 
@@ -19,7 +20,7 @@ class MergeNetworkImagesDemo extends StatefulWidget {
 
 class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
 
-  GlobalKey _globalKey = GlobalKey();
+  final _globalKey = GlobalKey();
 
   Widget? imageMerged;
 
@@ -28,7 +29,7 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
       id: 1,
       message: 'https://fastly.jsdelivr.net/npm/@vant/assets/apple-1.jpeg',
       materialWidth: '400',
-      materialHeight: '300', 
+      materialHeight: '300',
       // globalKey: GlobalKey(),
     ),
     MaterialDetailConfig(
@@ -57,7 +58,15 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
           actions: [
             TextButton(
               onPressed: () {
-                setState(() {});
+                final currentWidget = _globalKey.currentWidget as MergeImagesWidget;
+                final currentState = _globalKey.currentState as MergeImagesWidgetState;
+                print("${_globalKey}, ${currentWidget}, ${currentState}");
+
+                currentState.onDone().then((pngBytes) {
+                  // print(pngBytes);
+                  imageMerged = Image.memory(pngBytes!, width: 400, height: 600);
+                  setState(() {});
+                });
               },
               child: Text('刷新', style: TextStyle(color: Colors.white),)
             ),
@@ -74,7 +83,28 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
             ),
           ],
         ),
-        body: _buildBody(),
+        // body: _buildBody(),
+      body: _buildBodyNew(),
+    );
+  }
+
+  _buildBodyNew(){
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          if(imageMerged != null) imageMerged!,
+          Text('合成图片'),
+          Divider(),
+          MergeImagesWidget(
+            key: _globalKey,
+            models: detailList.map((e) => MergeImageModel(
+              url: e.message,
+              width: e.materialWidth,
+              height: e.materialHeight,
+            )).toList(),
+          ),
+        ],
+      ),
     );
   }
 
@@ -104,7 +134,6 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
       }).toList();
 
     return SingleChildScrollView(
-      key: _globalKey,
       child: Column(
         children: [
           if(imageMerged != null) imageMerged!,
@@ -163,10 +192,7 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
             children: [
               _buildBtnSystemIcon(
                 image: Icon(Icons.arrow_circle_up,),
-                onTap: () {
-                  callback?.call(-1);
-                  print('arrow_circle_up');
-                },
+                onTap: () => callback?.call(-1),
                 hidden: hideUp,
               ),
               hideUp ? Container() : SizedBox(height: 6),
