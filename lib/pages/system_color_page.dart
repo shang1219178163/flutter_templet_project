@@ -54,7 +54,7 @@ class _SystemColorPageState extends State<SystemColorPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("fluttefr 系统 Icons"),
+        title: Text("flutter 系统颜色"),
         actions: [
           TextButton(
             child: Text("Done", style: TextStyle(color: Colors.white),),

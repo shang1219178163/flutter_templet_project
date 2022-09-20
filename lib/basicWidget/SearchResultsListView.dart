@@ -6,6 +6,7 @@ class SearchResultsListView extends StatefulWidget {
 
   Map<String, dynamic> map;
   String? hintText;
+  bool? isSort;
   TextEditingController? editingController;
 
   Widget Function(String key)? leadingBuilder;
@@ -19,12 +20,14 @@ class SearchResultsListView extends StatefulWidget {
     Key? key,
     this.map = const {},
     this.hintText = "搜索",
+    this.isSort = true,
     this.editingController,
     this.leadingBuilder,
     this.itemBuilder,
+    this.separatorBuilder,
     this.searchCallback,
     required this.tap,
-    this.separatorBuilder,
+
   }) : super(key: key){
     editingController = editingController ?? TextEditingController();
   }
@@ -95,7 +98,9 @@ class _SearchResultsListViewState extends State<SearchResultsListView> {
   }
 
   _buildListView(BuildContext context) {
-    searchResults.sort((a, b) => "${a}".compareTo("${b}"));
+    if (widget.isSort != null && widget.isSort == true) {
+      searchResults.sort((a, b) => "${a}".compareTo("${b}"));
+    }
 
     return CupertinoScrollbar(
       isAlwaysShown: false,
