@@ -20,7 +20,7 @@ class MergeNetworkImagesDemo extends StatefulWidget {
 
 class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
 
-  final _globalKey = GlobalKey();
+  final _globalKey = GlobalKey<MergeImagesWidgetState>();
 
   Widget? imageMerged;
 
@@ -58,11 +58,17 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
           actions: [
             TextButton(
               onPressed: () {
-                final currentWidget = _globalKey.currentWidget as MergeImagesWidget;
-                final currentState = _globalKey.currentState as MergeImagesWidgetState;
-                print("${_globalKey}, ${currentWidget}, ${currentState}");
+                // final currentWidget = _globalKey.currentWidget as MergeImagesWidget;
+                // final currentState = _globalKey.currentState as MergeImagesWidgetState;
+                // print("${_globalKey}, ${currentWidget}, ${currentState}");
+                //
+                // currentState.toCompositePics().then((pngBytes) {
+                //   // print(pngBytes);
+                //   imageMerged = Image.memory(pngBytes!, width: 400, height: 600);
+                //   setState(() {});
+                // });
 
-                currentState.toCompositePics().then((pngBytes) {
+                _globalKey.currentState?.toCompositePics().then((pngBytes) {
                   // print(pngBytes);
                   imageMerged = Image.memory(pngBytes!, width: 400, height: 600);
                   setState(() {});
