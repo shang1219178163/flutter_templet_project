@@ -9,7 +9,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extensions/ddlog.dart';
+import 'package:flutter_templet_project/extension/ddlog.dart';
 
 class SystemIconsPage extends StatefulWidget {
 

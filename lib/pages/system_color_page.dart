@@ -11,9 +11,9 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/SearchResultsListView.dart';
-import 'package:flutter_templet_project/extensions/ddlog.dart';
+import 'package:flutter_templet_project/extension/ddlog.dart';
 
-import 'package:flutter_templet_project/extensions/widget_extension.dart';
+import 'package:flutter_templet_project/extension/widget_extension.dart';
 
 // List<Color> others = [
 //   Colors.transparent,

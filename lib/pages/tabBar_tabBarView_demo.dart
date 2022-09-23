@@ -13,12 +13,12 @@ import 'package:flutter_templet_project/basicWidget/list_subtitle_cell.dart';
 import 'package:flutter_templet_project/basicWidget/app_update_card.dart';
 import 'package:flutter_templet_project/basicWidget/section_list_view.dart';
 
-import 'package:flutter_templet_project/extensions/color_extension.dart';
-import 'package:flutter_templet_project/extensions/divider_extension.dart';
-import 'package:flutter_templet_project/extensions/list_extension.dart';
-import 'package:flutter_templet_project/extensions/string_extension.dart';
-import 'package:flutter_templet_project/extensions/ddlog.dart';
-import 'package:flutter_templet_project/extensions/widget_extension.dart';
+import 'package:flutter_templet_project/extension/color_extension.dart';
+import 'package:flutter_templet_project/extension/divider_extension.dart';
+import 'package:flutter_templet_project/extension/list_extension.dart';
+import 'package:flutter_templet_project/extension/string_extension.dart';
+import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/widget_extension.dart';
 
 import 'package:flutter_templet_project/main.dart';
 import 'package:flutter_templet_project/mockData/mock_data.dart';

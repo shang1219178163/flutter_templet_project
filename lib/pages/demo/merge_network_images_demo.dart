@@ -5,8 +5,10 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_templet_project/basicWidget/merge_images_widget.dart';
-import 'package:flutter_templet_project/extensions/image_extension.dart';
-import 'package:flutter_templet_project/extensions/list_extension.dart';
+import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/image_extension.dart';
+import 'package:flutter_templet_project/extension/list_extension.dart';
+import 'package:image_gallery_saver/image_gallery_saver.dart';
 
 class MergeNetworkImagesDemo extends StatefulWidget {
 
@@ -39,25 +41,28 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
       materialHeight: '700',
       // globalKey: GlobalKey(),
     ),
-    MaterialDetailConfig(
-      id: 3,
-      message: 'https://fastly.jsdelivr.net/npm/@vant/assets/apple-3.jpeg',
-      materialWidth: '400',
-      materialHeight: '700',
-      // globalKey: GlobalKey(),
-    ),
+    // MaterialDetailConfig(
+    //   id: 3,
+    //   message: 'https://fastly.jsdelivr.net/npm/@vant/assets/apple-3.jpeg',
+    //   materialWidth: '400',
+    //   materialHeight: '700',
+    //   // globalKey: GlobalKey(),
+    // ),
   ]; // 素材详情列表
 
 
+  final QRCodeUrl = "https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web/img/article.9d13ff7.png";
+
   Widget build(BuildContext context) {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
+    final screenSize = MediaQuery.of(this.context).size;
 
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.title ?? "$widget"),
           actions: [
             TextButton(
-              onPressed: () {
+              onPressed: () async {
                 // final currentWidget = _globalKey.currentWidget as MergeImagesWidget;
                 // final currentState = _globalKey.currentState as MergeImagesWidgetState;
                 // print("${_globalKey}, ${currentWidget}, ${currentState}");
@@ -70,7 +75,7 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
 
                 _globalKey.currentState?.toCompositePics().then((pngBytes) {
                   // print(pngBytes);
-                  imageMerged = Image.memory(pngBytes!, width: 400, height: 600);
+                  imageMerged = Image.memory(pngBytes, width: screenSize.width, height: 600);
                   setState(() {});
                 });
               },
@@ -78,11 +83,19 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
             ),
             TextButton(
               onPressed: () {
-                List<GlobalKey?> keys = detailList.map((e) => e.globalKey).toList();
-                print("keys:${keys}");
-                _compositePics(keys).then((pngBytes) {
-                  imageMerged = Image.memory(pngBytes!, width: 400, height: 600);
-                  setState(() {});
+                // List<GlobalKey?> keys = detailList.map((e) => e.globalKey).toList();
+                // print("keys:${keys}");
+                // _compositePics(keys).then((pngBytes) {
+                //   imageMerged = Image.memory(pngBytes!, width: 400, height: 600);
+                //   setState(() {});
+                // });
+                _globalKey.currentState?.toCompositePics().then((pngBytes) {
+                  // print(pngBytes);
+                  return ImageGallerySaver.saveImage(pngBytes, quality: 100,);
+                }).then((result) {
+                  ddlog("result:${result.isSuccess}");
+                }).catchError((e){
+                  print("error:${e.message}");
                 });
               },
               child: Text('保存', style: TextStyle(color: Colors.white),)
@@ -95,19 +108,25 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
   }
 
   _buildBodyNew(){
+    final screenSize = MediaQuery.of(this.context).size;
+
     return SingleChildScrollView(
       child: Column(
         children: [
           if(imageMerged != null) imageMerged!,
+
           Text('合成图片'),
           Divider(),
           MergeImagesWidget(
             key: _globalKey,
+            // width: screenSize.width,
             models: detailList.map((e) => MergeImageModel(
               url: e.message,
               width: e.materialWidth,
               height: e.materialHeight,
             )).toList(),
+            QRCodeBuilder: (url) => Image.asset('images/QRCode.png', width:90, height: 90),
+            QRCodeUrl: QRCodeUrl,
           ),
         ],
       ),
@@ -309,7 +328,7 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
       ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
       Uint8List? pngBytes = byteData?.buffer.asUint8List();
       //图片大小
-      image.fileSize().then((value) => print(value));
+      print("图片大小:${await image.fileSize() ?? "null"}");
 
       return Future.value(pngBytes);
     } catch (e) {

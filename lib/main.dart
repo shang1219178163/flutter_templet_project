@@ -4,12 +4,13 @@ import 'package:flutter/services.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/APPThemeSettings.dart';
+import 'package:flutter_templet_project/extension/button_extension.dart';
 import 'package:flutter_templet_project/pages/demo/TabBarDemo.dart';
 import 'package:flutter_templet_project/pages/tabBar_tabBarView_demo.dart';
 import 'package:flutter_templet_project/provider/rxDart_provider_demo.dart';
 import 'package:flutter_templet_project/Pages/APPUserCenterPage.dart';
 
-import 'package:flutter_templet_project/extensions/ddlog.dart';
+import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/routes/APPRouter.dart';
 
 import 'package:get/get.dart';
@@ -20,7 +21,6 @@ import 'package:tuple/tuple.dart';
 import 'Pages/APPDrawerMenuPage.dart';
 import 'Pages/APPUserCenterPage.dart';
 
-import 'extensions/button_extension.dart';
 import 'pages/FirstPage.dart';
 import 'pages/SecondPage.dart';
 import 'pages/ThirdPage.dart';

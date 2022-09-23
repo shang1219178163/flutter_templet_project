@@ -2,15 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_templet_project/APPThemeSettings.dart';
-import 'package:flutter_templet_project/extensions/buildContext_extension.dart';
+import 'package:flutter_templet_project/extension/buildContext_extension.dart';
 import 'package:flutter_templet_project/pages/demo/MyPainter.dart';
 import 'package:flutter_templet_project/basicWidget/NNPopupRoute.dart';
 import 'package:flutter_templet_project/basicWidget/gesture_detector_container.dart';
 import 'package:flutter_templet_project/basicWidget/upload_button.dart';
-import 'package:flutter_templet_project/extensions/button_extension.dart';
-import 'package:flutter_templet_project/extensions/ddlog.dart';
+import 'package:flutter_templet_project/extension/button_extension.dart';
+import 'package:flutter_templet_project/extension/ddlog.dart';
 
-import 'package:flutter_templet_project/extensions/navigator_extension.dart';
+import 'package:flutter_templet_project/extension/navigator_extension.dart';
 
 import 'package:flutter_templet_project/network/fileManager.dart';
 import 'package:flutter_templet_project/basicWidget/hud/progresshud.dart';
