@@ -4,6 +4,7 @@ import 'package:flutter_templet_project/Provider/provider_list_demo.dart';
 import 'package:flutter_templet_project/basicWidget/responsive_column.dart';
 import 'package:flutter_templet_project/pages/FlutterFFiTest.dart';
 import 'package:flutter_templet_project/pages/LocalImagePage.dart';
+import 'package:flutter_templet_project/pages/demo/drawImageNineDemo.dart';
 import 'package:flutter_templet_project/pages/demo/flutter_smart_dialog_demo.dart';
 import 'package:flutter_templet_project/pages/demo/merge_images_demo.dart';
 import 'package:flutter_templet_project/pages/demo/merge_network_images_demo.dart';
@@ -257,6 +258,7 @@ class APPRouter {
   static const smartDialogPageDemo = '/smartDialogPageDemo';
   static const mergeImagesDemo = '/mergeImagesDemo';
   static const mergeNetworkImagesDemo = '/mergeNetworkImagesDemo';
+  static const drawImageNineDemo = '/drawImageNineDemo';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -413,6 +415,9 @@ class AppPage{
     GetPage(name: APPRouter.smartDialogPageDemo, page: () => SmartDialogPageDemo(), ),
     GetPage(name: APPRouter.mergeImagesDemo, page: () => MergeImagesDemo(), ),
     GetPage(name: APPRouter.mergeNetworkImagesDemo, page: () => MergeNetworkImagesDemo(), ),
+    GetPage(name: APPRouter.drawImageNineDemo, page: () => DrawImageNineDemo(), ),
+
+
 
   ];
 
