@@ -7,7 +7,7 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extensions/ddlog.dart';
+import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
 class ChipDemo extends StatefulWidget {

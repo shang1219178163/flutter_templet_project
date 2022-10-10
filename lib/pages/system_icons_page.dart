@@ -1,11 +1,15 @@
+
+//
+//  SystemIconsPage.dart
+//  flutter_templet_project
+//
+//  Created by shang on 2022/9/17 14:57.
+//  Copyright © 2022/9/17 shang. All rights reserved.
+//
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_templet_project/extensions/ddlog.dart';
-import 'package:styled_widget/styled_widget.dart';
-
-import 'package:flutter_templet_project/extensions/widget_extension.dart';
-
+import 'package:flutter_templet_project/extension/ddlog.dart';
 
 class SystemIconsPage extends StatefulWidget {
 
@@ -16,40 +20,48 @@ class SystemIconsPage extends StatefulWidget {
 class _SystemIconsPageState extends State<SystemIconsPage> {
   TextEditingController editingController = TextEditingController();
 
-  var titles = List.from(kIconDataDic.keys);
-  var list = List.from(kIconDataDic.keys);
-
-
-
+  var list = List.from(kIConDic.keys);
+  var searchResults = List.from(kIConDic.keys);
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("fluttefr 系统 Icons"),
+        actions: [
+          TextButton(
+            child: Text("Done", style: TextStyle(color: Colors.white),),
+            onPressed: (){
+              ddlog("${widget}");
+            },
+          ),
+        ],
       ),
       body: Container(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            buildTextField(context)
-                .padding(all: 10.0)
-            ,
-            Text("找到 ${list.length} 条数据")
-                .padding(left: 10, right: 10)
-            ,
-            buildListView(context)
-                .expanded()
-            ,
+            Padding(
+              child: _buildTextField(context),
+              padding: EdgeInsets.all(10),
+            ),
+            Padding(
+              child: Text("找到 ${searchResults.length} 条数据"),
+              padding: EdgeInsets.only(left: 10, right: 10),
+            ),
+            Expanded(
+              child: _buildListView(context),
+              flex: 1,
+            )
           ],
         ),
       ),
     );
   }
 
-
-  TextField buildTextField(BuildContext context) {
+  TextField _buildTextField(BuildContext context) {
     return TextField(
-        onChanged: _changeValue,
+        onChanged: _textfieldChanged,
       //   onChanged: (value) {
       //   ddlog(value);
       // },
@@ -66,53 +78,53 @@ class _SystemIconsPageState extends State<SystemIconsPage> {
     );
   }
 
-
-  CupertinoScrollbar buildListView(BuildContext context) {
-    list.sort((a, b) => a.compareTo(b));
-    return ListView.separated(
-        itemCount: list.length,
-        itemBuilder: (context, index) {
-          final item = list[index];
-          return ListTile(
-            leading: Icon(kIconDataDic[item]),
-            title: Text("$item"),
-            // subtitle: Text(array[0]),
-            onTap: (){
-              ddlog(item);
-              // Clipboard.setData(ClipboardData(text: "$item"));
-              editingController.text = item.split('.').last;
-              _changeValue(editingController.text);
-            },
-          );
-        },
-        separatorBuilder: (context, index) {
-          return Divider(
-            height: .5,
-            indent: 15,
-            endIndent: 15,
-            color: Color(0xFFDDDDDD),
-          );
-        },
-      ).addCupertinoScrollbar()
-    ;
+  CupertinoScrollbar _buildListView(BuildContext context) {
+    searchResults.sort((a, b) => a.compareTo(b));
+    return CupertinoScrollbar(
+      isAlwaysShown: false,
+      child: ListView.separated(
+          itemCount: searchResults.length,
+          itemBuilder: (context, index) {
+            final item = searchResults[index];
+            return ListTile(
+              leading: Icon(kIConDic[item]),
+              title: Text("$item"),
+              // subtitle: Text(array[0]),
+              onTap: (){
+                ddlog(item);
+                // Clipboard.setData(ClipboardData(text: "$item"));
+                editingController.text = item.split('.').last;
+                _textfieldChanged(editingController.text);
+              },
+            );
+          },
+          separatorBuilder: (context, index) {
+            return Divider(
+              height: .5,
+              indent: 15,
+              endIndent: 15,
+              color: Color(0xFFDDDDDD),
+            );
+          },
+        )
+    );
   }
 
-  void _changeValue(String value) {
+  void _textfieldChanged(String value) {
     // ddlog(value);
     setState(() {
       if (value.isEmpty) {
-        list = titles;
+        searchResults = list;
       } else {
-        list = titles.where((element) => element.contains(value)).toList();
-        ddlog(list.length);
+        searchResults = list.where((element) => element.contains(value)).toList();
+        ddlog(searchResults.length);
       }
     });
   }
 }
 
 
-
-Map<String, IconData> kIconDataDic = {
+Map<String, IconData> kIConDic = {
 "Icons.rsvp": Icons.rsvp,
 "Icons.money_off": Icons.money_off,
 "Icons.camera_roll": Icons.camera_roll,

@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:ffi';
 import 'dart:io';
 import 'dart:math';
 import 'dart:typed_data';
@@ -7,8 +6,8 @@ import 'dart:typed_data';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_templet_project/extensions/image_extension.dart';
-import 'package:flutter_templet_project/extensions/list_extension.dart';
+import 'package:flutter_templet_project/extension/image_extension.dart';
+import 'package:flutter_templet_project/extension/list_extension.dart';
 
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -351,7 +350,7 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
       ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
       Uint8List? pngBytes = byteData?.buffer.asUint8List();
       //图片大小
-      image.fileSize().then((value) => print(value));
+      print("图片大小:${await image.fileSize() ?? "null"}");
 
       return Future.value(pngBytes);
     } catch (e) {

@@ -8,10 +8,10 @@ import 'package:flutter_templet_project/basicWidget/NNWebView.dart';
 import 'package:flutter_templet_project/basicWidget/NNPopupRoute.dart';
 import 'package:flutter_templet_project/basicWidget/NNAlertDialog.dart';
 
-import 'package:flutter_templet_project/extensions/ddlog.dart';
-import 'package:flutter_templet_project/extensions/richText_extension.dart';
-import 'package:flutter_templet_project/extensions/widget_extension.dart';
-import 'package:flutter_templet_project/extensions/alertDialog_extension.dart';
+import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/richText_extension.dart';
+import 'package:flutter_templet_project/extension/widget_extension.dart';
+import 'package:flutter_templet_project/extension/alertDialog_extension.dart';
 import 'package:get/get.dart';
 
 import 'package:popover/popover.dart';

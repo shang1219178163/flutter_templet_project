@@ -24,7 +24,7 @@ analyzer:
 #    - non-nullable
 
 environment:
-  sdk: ">=2.12.2 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -111,14 +111,19 @@ dependencies:
   enhance_expansion_panel: ^0.0.3
 
   custom_timer: ^0.1.1
-  scribble: ^0.4.0
+  scribble: ^0.9.1
   aesthetic_dialogs: ^0.0.15
   shimmer_animation: ^2.1.0+1
   flutter_smart_dialog: ^4.2.0
   image_gallery_saver: ^1.7.1
 
+  flutter_rating_bar: ^4.0.1
+  desktop_drop: ^0.3.3
+
+#  merge_images: ^1.0.3
+
   html: ^0.15.0
-  http: ^0.13.4
+  http: ^0.13.3
 #  path_drawing: ^0.4.0
 #  User:
 #    hosted:

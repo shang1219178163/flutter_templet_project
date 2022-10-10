@@ -8,8 +8,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/dash_line.dart';
-import 'package:flutter_templet_project/extensions/ddlog.dart';
-import 'package:flutter_templet_project/extensions/buildContext_extension.dart';
+import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/buildContext_extension.dart';
 
 import 'package:flutter_templet_project/model/order_model.dart';
 import 'package:tuple/tuple.dart';

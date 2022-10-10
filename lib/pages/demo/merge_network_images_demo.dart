@@ -4,8 +4,11 @@ import 'dart:typed_data';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_templet_project/extensions/image_extension.dart';
-import 'package:flutter_templet_project/extensions/list_extension.dart';
+import 'package:flutter_templet_project/basicWidget/merge_images_widget.dart';
+import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/image_extension.dart';
+import 'package:flutter_templet_project/extension/list_extension.dart';
+import 'package:image_gallery_saver/image_gallery_saver.dart';
 
 class MergeNetworkImagesDemo extends StatefulWidget {
 
@@ -19,7 +22,7 @@ class MergeNetworkImagesDemo extends StatefulWidget {
 
 class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
 
-  GlobalKey _globalKey = GlobalKey();
+  final _globalKey = GlobalKey<MergeImagesWidgetState>();
 
   Widget? imageMerged;
 
@@ -28,53 +31,105 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
       id: 1,
       message: 'https://fastly.jsdelivr.net/npm/@vant/assets/apple-1.jpeg',
       materialWidth: '400',
-      materialHeight: '300', 
-      globalKey: GlobalKey(),
+      materialHeight: '300',
+      // globalKey: GlobalKey(),
     ),
     MaterialDetailConfig(
       id: 2,
       message: 'https://fastly.jsdelivr.net/npm/@vant/assets/apple-2.jpeg',
       materialWidth: '400',
       materialHeight: '700',
-      globalKey: GlobalKey(),
+      // globalKey: GlobalKey(),
     ),
-    MaterialDetailConfig(
-      id: 3,
-      message: 'https://fastly.jsdelivr.net/npm/@vant/assets/apple-3.jpeg',
-      materialWidth: '400',
-      materialHeight: '700',
-      globalKey: GlobalKey(),
-    ),
+    // MaterialDetailConfig(
+    //   id: 3,
+    //   message: 'https://fastly.jsdelivr.net/npm/@vant/assets/apple-3.jpeg',
+    //   materialWidth: '400',
+    //   materialHeight: '700',
+    //   // globalKey: GlobalKey(),
+    // ),
   ]; // 素材详情列表
 
 
+  final QRCodeUrl = "https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web/img/article.9d13ff7.png";
+
   Widget build(BuildContext context) {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
+    final screenSize = MediaQuery.of(this.context).size;
 
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.title ?? "$widget"),
           actions: [
             TextButton(
-              onPressed: () {
-                setState(() {});
+              onPressed: () async {
+                // final currentWidget = _globalKey.currentWidget as MergeImagesWidget;
+                // final currentState = _globalKey.currentState as MergeImagesWidgetState;
+                // print("${_globalKey}, ${currentWidget}, ${currentState}");
+                //
+                // currentState.toCompositePics().then((pngBytes) {
+                //   // print(pngBytes);
+                //   imageMerged = Image.memory(pngBytes!, width: 400, height: 600);
+                //   setState(() {});
+                // });
+
+                _globalKey.currentState?.toCompositePics().then((pngBytes) {
+                  // print(pngBytes);
+                  imageMerged = Image.memory(pngBytes, width: screenSize.width, height: 600);
+                  setState(() {});
+                });
               },
               child: Text('刷新', style: TextStyle(color: Colors.white),)
             ),
             TextButton(
               onPressed: () {
-                List<GlobalKey> keys = detailList.map((e) => e.globalKey).toList();
-                print("keys:${keys}");
-                _compositePics(keys).then((pngBytes) {
-                  imageMerged = Image.memory(pngBytes!, width: 400, height: 600);
-                  setState(() {});
+                // List<GlobalKey?> keys = detailList.map((e) => e.globalKey).toList();
+                // print("keys:${keys}");
+                // _compositePics(keys).then((pngBytes) {
+                //   imageMerged = Image.memory(pngBytes!, width: 400, height: 600);
+                //   setState(() {});
+                // });
+                _globalKey.currentState?.toCompositePics().then((pngBytes) {
+                  // print(pngBytes);
+                  return ImageGallerySaver.saveImage(pngBytes, quality: 100,);
+                }).then((result) {
+                  ddlog("result:${result.isSuccess}");
+                }).catchError((e){
+                  print("error:${e.message}");
                 });
               },
               child: Text('保存', style: TextStyle(color: Colors.white),)
             ),
           ],
         ),
-        body: _buildBody(),
+        // body: _buildBody(),
+      body: _buildBodyNew(),
+    );
+  }
+
+  _buildBodyNew(){
+    final screenSize = MediaQuery.of(this.context).size;
+
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          if(imageMerged != null) imageMerged!,
+
+          Text('合成图片'),
+          Divider(),
+          MergeImagesWidget(
+            key: _globalKey,
+            // width: screenSize.width,
+            models: detailList.map((e) => MergeImageModel(
+              url: e.message,
+              width: e.materialWidth,
+              height: e.materialHeight,
+            )).toList(),
+            QRCodeBuilder: (url) => Image.asset('images/QRCode.png', width:90, height: 90),
+            QRCodeUrl: QRCodeUrl,
+          ),
+        ],
+      ),
     );
   }
 
@@ -83,7 +138,7 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
 
     List children = detailList.map((e) {
       int idx = detailList.indexOf(e);
-      return _buildItem(
+      return _buildToolNew(
         hideUp: idx == 0,
         hideDown: idx == detailList.length - 1,
         repaintBoundary: RepaintBoundary(
@@ -104,7 +159,6 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
       }).toList();
 
     return SingleChildScrollView(
-      key: _globalKey,
       child: Column(
         children: [
           if(imageMerged != null) imageMerged!,
@@ -115,49 +169,30 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
     );
   }
 
-  _buildItem({
+  _buildToolNew({
     required RepaintBoundary repaintBoundary,
     bool hideUp = false,
     bool hideDown = false,
     void Function(int step)? callback,
   }) {
-    final screenSize = MediaQuery.of(this.context).size;
-    final moveBtnSize = 40.0;
-    final radius = 8.0;
     return Stack(
       children: [
         repaintBoundary,
         Positioned(
-          top: 15,
-          left: 15,
+          top: 12,
+          left: 8,
           child: Column(
             children: [
-              hideUp ? Container() : Container(
-                width: moveBtnSize,
-                height: moveBtnSize,
-                child: FloatingActionButton(
-                  heroTag: null,
-                  backgroundColor: Colors.red,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(radius))
-                  ),
-                  onPressed: () => callback?.call(-1),
-                  child: Icon(Icons.arrow_circle_up,),
-                ),
+              _buildBtn(
+                onTap: () => callback?.call(-1),
+                image: Image.asset('images/icon_arrow_up.png'),
+                hidden: hideUp,
               ),
-              hideUp ? Container() : SizedBox(height: 8),
-              hideDown ? Container() : Container(
-                width: moveBtnSize,
-                height: moveBtnSize,
-                child: FloatingActionButton(
-                  heroTag: null,
-                  backgroundColor: Colors.red,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(radius))
-                  ),
-                  onPressed: () => callback?.call(1),
-                  child: Icon(Icons.arrow_circle_down,),
-                ),
+              hideUp ? Container() : SizedBox(height: 6),
+              _buildBtn(
+                image: Image.asset('images/icon_arrow_down.png'),
+                onTap: () => callback?.call(1),
+                hidden: hideDown,
               ),
             ],
           ),
@@ -166,15 +201,95 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
     );
   }
 
+  _buildTool({
+    required RepaintBoundary repaintBoundary,
+    bool hideUp = false,
+    bool hideDown = false,
+    void Function(int step)? callback,
+  }) {
+    return Stack(
+      children: [
+        repaintBoundary,
+        Positioned(
+          top: 12,
+          left: 8,
+          child: Column(
+            children: [
+              _buildBtnSystemIcon(
+                image: Icon(Icons.arrow_circle_up,),
+                onTap: () => callback?.call(-1),
+                hidden: hideUp,
+              ),
+              hideUp ? Container() : SizedBox(height: 6),
+              _buildBtnSystemIcon(
+                image: Icon(Icons.arrow_circle_down,),
+                onTap: () => callback?.call(1),
+                hidden: hideDown,
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  /// 本地图片
+  _buildBtn({
+    Widget? image,
+    GestureTapCallback? onTap,
+    double? width = 28,
+    double? height = 28,
+    bool hidden = false,
+  }) {
+    if (hidden) {
+      return Container();
+    }
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        width: width,
+        height: height,
+        child: image,
+      ),
+    );
+  }
+
+  /// 系统图标
+  _buildBtnSystemIcon({
+    Widget? image,
+    double? width = 28,
+    double? height = 28,
+    double radius = 6,
+    GestureTapCallback? onTap,
+    bool hidden = false,
+  }) {
+    if (hidden) {
+      return Container();
+    }
+    return Container(
+      width: width,
+      height: height,
+      child: FloatingActionButton(
+        heroTag: null,
+        backgroundColor: Colors.grey,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(radius))
+        ),
+        onPressed: onTap,
+        child: image,
+      ),
+    );
+  }
+
   /// 通过多个 SingleChildScrollView 的 RepaintBoundary 对象合成长海报
   ///
   /// keys: 根据 GlobalKey 获取 Image 数组
-  Future<Uint8List?> _compositePics([List<GlobalKey> keys = const [],]) async {
+  Future<Uint8List?> _compositePics([List<GlobalKey?> keys = const [],]) async {
     //根据 GlobalKey 获取 Image 数组
     List<ui.Image> images = await Future.wait(
       keys.map((key) async {
-        BuildContext buildContext = key.currentContext!;
-        RenderRepaintBoundary boundary = buildContext.findRenderObject() as RenderRepaintBoundary;
+        BuildContext? buildContext = key?.currentContext!;
+        RenderRepaintBoundary boundary = buildContext?.findRenderObject() as RenderRepaintBoundary;
         ui.Image image = await boundary.toImage(pixelRatio: ui.window.devicePixelRatio);
         return image;
       }
@@ -213,7 +328,7 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
       ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
       Uint8List? pngBytes = byteData?.buffer.asUint8List();
       //图片大小
-      image.fileSize().then((value) => print(value));
+      print("图片大小:${await image.fileSize() ?? "null"}");
 
       return Future.value(pngBytes);
     } catch (e) {
@@ -236,7 +351,7 @@ class MaterialDetailConfig {
   String? examineId; // 审批id
   String? score; // 得分
   bool? deletedFlag; // 是否删除
-  GlobalKey globalKey;
+  GlobalKey? globalKey;
   
   MaterialDetailConfig({
     this.materialType,
@@ -250,6 +365,7 @@ class MaterialDetailConfig {
     this.examineId,
     this.score,
     this.deletedFlag,
-    required this.globalKey,
-  });
+  }): super() {
+    this.globalKey =  GlobalKey();
+  }
 }

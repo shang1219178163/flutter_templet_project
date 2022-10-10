@@ -14,7 +14,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:cookie_jar/cookie_jar.dart';
-import 'package:flutter_templet_project/extensions/ddlog.dart';
+import 'package:flutter_templet_project/extension/ddlog.dart';
 
 import 'package:get_storage/get_storage.dart';
 

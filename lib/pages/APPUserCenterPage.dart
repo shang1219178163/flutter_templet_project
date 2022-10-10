@@ -8,11 +8,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/APPThemeSettings.dart';
-import 'package:flutter_templet_project/extensions/button_extension.dart';
+import 'package:flutter_templet_project/extension/button_extension.dart';
 import 'package:flutter_templet_project/main.dart';
-import 'package:flutter_templet_project/extensions/ddlog.dart';
-import 'package:flutter_templet_project/extensions/navigator_extension.dart';
-import 'package:flutter_templet_project/extensions/alertDialog_extension.dart';
+import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/navigator_extension.dart';
+import 'package:flutter_templet_project/extension/alertDialog_extension.dart';
 import 'package:flutter_templet_project/routes/APPRouter.dart';
 
 import 'package:get/get.dart';

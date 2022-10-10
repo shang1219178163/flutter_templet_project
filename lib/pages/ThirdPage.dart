@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
-import 'package:flutter_templet_project/extensions/buildContext_extension.dart';
-import 'package:flutter_templet_project/extensions/ddlog.dart';
+import 'package:flutter_templet_project/extension/buildContext_extension.dart';
+import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:styled_widget/styled_widget.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';

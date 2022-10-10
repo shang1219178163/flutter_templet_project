@@ -13,12 +13,12 @@ import 'package:flutter_templet_project/basicWidget/list_subtitle_cell.dart';
 import 'package:flutter_templet_project/basicWidget/app_update_card.dart';
 import 'package:flutter_templet_project/basicWidget/section_list_view.dart';
 
-import 'package:flutter_templet_project/extensions/color_extension.dart';
-import 'package:flutter_templet_project/extensions/divider_extension.dart';
-import 'package:flutter_templet_project/extensions/list_extension.dart';
-import 'package:flutter_templet_project/extensions/string_extension.dart';
-import 'package:flutter_templet_project/extensions/ddlog.dart';
-import 'package:flutter_templet_project/extensions/widget_extension.dart';
+import 'package:flutter_templet_project/extension/color_extension.dart';
+import 'package:flutter_templet_project/extension/divider_extension.dart';
+import 'package:flutter_templet_project/extension/list_extension.dart';
+import 'package:flutter_templet_project/extension/string_extension.dart';
+import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/widget_extension.dart';
 
 import 'package:flutter_templet_project/main.dart';
 import 'package:flutter_templet_project/mockData/mock_data.dart';
@@ -366,10 +366,14 @@ var _list = [
   Tuple2(APPRouter.boxDemo, "boxDemo", ),
   Tuple2(APPRouter.mouseRegionDemo, "mouseRegionDemo", ),
   Tuple2(APPRouter.navigationBarDemo, "navigationBarDemo", ),
+  Tuple2(APPRouter.shortcutsDemo, "shortcutsDemo", ),
+  Tuple2(APPRouter.shortcutsDemoOne, "shortcutsDemoOne", ),
+
 ];
 
 var _specials = [
   Tuple2(APPRouter.systemIconsPage, "flutter 系统 Icons", ),
+  Tuple2(APPRouter.systemColorPage, "flutter 系统 颜色", ),
   Tuple2(APPRouter.localImagePage, "本地图片", ),
   Tuple2(APPRouter.providerRoute, "providerRoute", ),
   Tuple2(APPRouter.stateManagerDemo, "状态管理", ),
@@ -383,6 +387,9 @@ var _specials = [
   Tuple2(APPRouter.flutterFFiTest, "ffi", ),
   Tuple2(APPRouter.mergeImagesDemo, "图像合并", ),
   Tuple2(APPRouter.mergeNetworkImagesDemo, "网络图像合并", ),
+  Tuple2(APPRouter.drawImageNineDemo, "图像拉伸", ),
+
+
 
 ];
 
@@ -418,6 +425,9 @@ var _vendors = [
   Tuple2(APPRouter.customTimerDemo, "自定义计时器", ),
   Tuple2(APPRouter.skeletonDemo, "骨架屏", ),
   Tuple2(APPRouter.smartDialogPageDemo, "弹窗", ),
+  Tuple2(APPRouter.ratingBarDemo, "星评", ),
+  Tuple2(APPRouter.dragAndDropDemo, "文件拖拽", ),
+
 ];
 
 var _others = [
