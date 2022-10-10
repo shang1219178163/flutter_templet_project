@@ -366,6 +366,9 @@ var _list = [
   Tuple2(APPRouter.boxDemo, "boxDemo", ),
   Tuple2(APPRouter.mouseRegionDemo, "mouseRegionDemo", ),
   Tuple2(APPRouter.navigationBarDemo, "navigationBarDemo", ),
+  Tuple2(APPRouter.shortcutsDemo, "shortcutsDemo", ),
+  Tuple2(APPRouter.shortcutsDemoOne, "shortcutsDemoOne", ),
+
 ];
 
 var _specials = [
@@ -422,6 +425,9 @@ var _vendors = [
   Tuple2(APPRouter.customTimerDemo, "自定义计时器", ),
   Tuple2(APPRouter.skeletonDemo, "骨架屏", ),
   Tuple2(APPRouter.smartDialogPageDemo, "弹窗", ),
+  Tuple2(APPRouter.ratingBarDemo, "星评", ),
+  Tuple2(APPRouter.dragAndDropDemo, "文件拖拽", ),
+
 ];
 
 var _others = [

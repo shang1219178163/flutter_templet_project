@@ -8,6 +8,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/Language/Property.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/string_extension.dart';
 import 'package:flutter_templet_project/extension/map_extension.dart';
@@ -106,5 +107,9 @@ class _TestPageState extends State<TestPage> {
     });
     String result = paramStr.substring(0, paramStr.length - 1);
     return result;
+  }
+
+  testProperty(){
+    // PropertyInfo.getVariableType();
   }
 }

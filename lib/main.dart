@@ -7,6 +7,7 @@ import 'package:flutter_templet_project/APPThemeSettings.dart';
 import 'package:flutter_templet_project/extension/button_extension.dart';
 import 'package:flutter_templet_project/pages/demo/TabBarDemo.dart';
 import 'package:flutter_templet_project/pages/tabBar_tabBarView_demo.dart';
+import 'package:flutter_templet_project/provider/ProxyProvider_demo.dart';
 import 'package:flutter_templet_project/provider/rxDart_provider_demo.dart';
 import 'package:flutter_templet_project/Pages/APPUserCenterPage.dart';
 
@@ -56,7 +57,10 @@ Future<void> main() async {
       providers: [
         ChangeNotifierProvider(create: (context) => CartModel()),
         Provider(create: (context) => CounterBloc()),
-
+        ChangeNotifierProvider<Person>(create: (ctx) => Person(),),
+        ProxyProvider<Person, EatModel>(
+          update: (ctx, person, eatModel) => EatModel(name: person.name),
+        )
       ],
       child: MyApp(),
     ),

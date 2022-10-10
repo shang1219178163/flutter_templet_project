@@ -1,14 +1,20 @@
 // import 'package:flutter/cupertino.dart';
 // import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/Provider/provider_list_demo.dart';
+import 'package:flutter_templet_project/basicWidget/DragDestinationView.dart';
 import 'package:flutter_templet_project/basicWidget/responsive_column.dart';
 import 'package:flutter_templet_project/pages/FlutterFFiTest.dart';
 import 'package:flutter_templet_project/pages/LocalImagePage.dart';
+import 'package:flutter_templet_project/pages/demo/DragAndDropDemo.dart';
+import 'package:flutter_templet_project/pages/demo/RatingBarDemo.dart';
+import 'package:flutter_templet_project/pages/demo/ShortcutsDemo.dart';
+import 'package:flutter_templet_project/pages/demo/ShortcutsDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/drawImageNineDemo.dart';
 import 'package:flutter_templet_project/pages/demo/flutter_smart_dialog_demo.dart';
 import 'package:flutter_templet_project/pages/demo/merge_images_demo.dart';
 import 'package:flutter_templet_project/pages/demo/merge_network_images_demo.dart';
 import 'package:flutter_templet_project/pages/system_color_page.dart';
+import 'package:flutter_templet_project/provider/ProxyProvider_demo.dart';
 import 'package:flutter_templet_project/vendor/ScribbleDemo.dart';
 import 'package:flutter_templet_project/vendor/SkeletonDemo.dart';
 import 'package:flutter_templet_project/vendor/TextlessDemo.dart';
@@ -259,6 +265,11 @@ class APPRouter {
   static const mergeImagesDemo = '/mergeImagesDemo';
   static const mergeNetworkImagesDemo = '/mergeNetworkImagesDemo';
   static const drawImageNineDemo = '/drawImageNineDemo';
+  static const proxyProviderDemo = '/proxyProviderDemo';
+  static const ratingBarDemo = '/ratingBarDemo';
+  static const shortcutsDemo = '/shortcutsDemo';
+  static const shortcutsDemoOne = '/shortcutsDemoOne';
+  static const dragAndDropDemo = '/dragAndDropDemo';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -416,7 +427,11 @@ class AppPage{
     GetPage(name: APPRouter.mergeImagesDemo, page: () => MergeImagesDemo(), ),
     GetPage(name: APPRouter.mergeNetworkImagesDemo, page: () => MergeNetworkImagesDemo(), ),
     GetPage(name: APPRouter.drawImageNineDemo, page: () => DrawImageNineDemo(), ),
-
+    GetPage(name: APPRouter.proxyProviderDemo, page: () => ProxyProviderDemo(), ),
+    GetPage(name: APPRouter.ratingBarDemo, page: () => RatingBarDemo(), ),
+    GetPage(name: APPRouter.shortcutsDemo, page: () => ShortcutsDemo(), ),
+    GetPage(name: APPRouter.shortcutsDemoOne, page: () => ShortcutsDemoOne(), ),
+    GetPage(name: APPRouter.dragAndDropDemo, page: () => DragAndDropDemo(), ),
 
 
   ];

@@ -30,9 +30,16 @@
   <link rel="manifest" href="manifest.json">
 </head>
 <body>
+    web有坑
   <!-- This script installs service_worker.js to provide PWA functionality to
        application. For more information, see:
        https://developers.google.com/web/fundamentals/primers/service-workers -->
+  <!--指定web运行模式-->
+  <!-- window.flutterWebRenderer = "canvaskit";-->
+ <script type="text/javascript">
+    window.flutterWebRenderer = "html";
+  </script>
+ <script src="main.dart.js" type="application/javascript"></script>
   <script>
     var serviceWorkerVersion = null;
     var scriptLoaded = false;
