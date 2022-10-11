@@ -5,6 +5,7 @@
 //  Created by shang on 10/25/21 11:05 AM.
 //  Copyright © 10/25/21 shang. All rights reserved.
 //
+// AbsorbPointer本身可以接收点击事件，消耗掉事件，而IgnorePointer无法接收点击事件，其下的控件可以接收到点击事件（不是子控件）。
 
 
 import "package:flutter/material.dart";

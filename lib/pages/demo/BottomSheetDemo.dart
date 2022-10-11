@@ -117,21 +117,21 @@ class BottomSheetDemo extends StatelessWidget {
                 text: Text("CALL"),
                 image: Icon(Icons.call),
                 imageAlignment: ImageAlignment.top,
-                callback: (value) {
+                callback: (value, tag) {
                   ddlog(value.data);
                 }),
             TextButtonExt.build(
                 text: Text("SHARE"),
                 image: Icon(Icons.open_in_new),
                 imageAlignment: ImageAlignment.top,
-                callback: (value) {
+                callback: (value, tag) {
                   ddlog(value.data);
                 }),
             TextButtonExt.build(
                 text: Text("SAVE"),
                 image: Icon(Icons.playlist_add),
                 imageAlignment: ImageAlignment.top,
-                callback: (value) {
+                callback: (value, tag) {
                   ddlog(value.data);
                 }),
           ],

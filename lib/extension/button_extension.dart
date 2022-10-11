@@ -51,23 +51,36 @@ extension TextButtonExt on TextButton{
     double? spacing = 3,
     // BorderSide? side = const BorderSide(width: 1.0, color: Colors.black12),
     BorderSide? side,
-    required void callback(Text text)}) {
+    int tag = 0,
+    required void callback(Text text, int tag)}) {
+
+    Widget child = TextButtonExt.buildTextAndImage(
+      text: text,
+      image: image,
+      imageAlignment: imageAlignment,
+      spacing: spacing,
+    );
+    return TextButton(
+      onPressed: () => callback(text, tag),
+      child: Container(
+        padding: padding,
+        child: child,
+      ),
+      style: OutlinedButton.styleFrom(side: side,),
+    );
+  }
+
+  /// 建立 TextAndImage
+  static Widget buildTextAndImage({
+    required Text text,
+    required Widget image,
+    ImageAlignment? imageAlignment = ImageAlignment.left,
+    double? spacing = 3,
+    }) {
 
     Widget child;
-    switch (imageAlignment) {
-      // case ImageAlignment.left:
-      //   child = Row(
-      //     crossAxisAlignment: CrossAxisAlignment.center,
-      //     mainAxisAlignment: MainAxisAlignment.center,
-      //     mainAxisSize: MainAxisSize.min,
-      //     children: [
-      //       image,
-      //       SizedBox(width: spacing),
-      //       text,
-      //     ],
-      //   );
-      // break;
 
+    switch (imageAlignment) {
       case ImageAlignment.top:
         child = Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -119,18 +132,9 @@ extension TextButtonExt on TextButton{
           ],
         );
     }
-    return TextButton(
-      onPressed: () => callback(text),
-      child: Container(
-        padding: padding,
-        child: child,
-      ) ,
-      style: OutlinedButton.styleFrom(side: side,),
-    );
+    return child;
   }
 }
-
-
 
 
 extension PopupMenuButtonExt on PopupMenuButton{

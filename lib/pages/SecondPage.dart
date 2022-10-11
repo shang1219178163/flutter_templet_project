@@ -84,8 +84,10 @@ class _SecondPageState extends State<SecondPage> {
             Divider(),
 
             MaterialButton(
-              onPressed: () => print("MaterialButton"),
+              color: Colors.blue.shade400,
+              textColor: Colors.white,
               child: Text("MaterialButton"),
+              onPressed: () => print("MaterialButton"),
             ),
             Divider(),
 
@@ -182,40 +184,67 @@ class _SecondPageState extends State<SecondPage> {
                 style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
               ),
             ),
-            Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-              TextButtonExt.build(
-                  text: Text("菜单left"),
-                  image: Icon(Icons.info),
-                  imageAlignment: ImageAlignment.left,
-                  side: BorderSide(width: 1.0, color: Colors.black12),
-                  callback: (value) {
-                    ddlog(value.data);
-                  }),
-              TextButtonExt.build(
-                  text: Text("菜单right"),
-                  image: Icon(Icons.info),
-                  imageAlignment: ImageAlignment.right,
-                  side: BorderSide(width: 1.0, color: Colors.blue),
-                  callback: (value) {
-                    ddlog(value.data);
-                  }),
-              TextButtonExt.build(
-                  text: Text("菜单top"),
-                  image: Icon(Icons.info),
-                  imageAlignment: ImageAlignment.top,
-                  side: BorderSide(width: 1.0, color: Colors.red),
-                  callback: (value) {
-                    ddlog(value.data);
-                  }),
-              TextButtonExt.build(
-                  text: Text("菜单bottom"),
-                  image: Icon(Icons.info),
-                  imageAlignment: ImageAlignment.bottom,
-                  side: BorderSide(width: 1.0, color: Colors.green),
-                  callback: (value) {
-                    ddlog(value.data);
-                  }),
-            ]),
+            Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  TextButtonExt.build(
+                    text: Text("left"),
+                    image: Icon(Icons.info),
+                    imageAlignment: ImageAlignment.left,
+                    side: BorderSide(width: 1.0, color: Colors.black12),
+                    callback: (value, tag) {
+                      ddlog([value.data, tag]);
+                    }),
+                  TextButtonExt.build(
+                    text: Text("right"),
+                    image: Icon(Icons.info),
+                    imageAlignment: ImageAlignment.right,
+                    side: BorderSide(width: 1.0, color: Colors.blue),
+                    callback: (value, tag) {
+                      ddlog(value.data);
+                    }),
+                  TextButtonExt.build(
+                    text: Text("top"),
+                    image: Icon(Icons.info),
+                    imageAlignment: ImageAlignment.top,
+                    side: BorderSide(width: 1.0, color: Colors.red),
+                    callback: (value, tag) {
+                      ddlog(value.data);
+                    }),
+                  TextButtonExt.build(
+                    text: Text("bottom"),
+                    image: Icon(Icons.info),
+                    imageAlignment: ImageAlignment.bottom,
+                    side: BorderSide(width: 1.0, color: Colors.green),
+                    callback: (value, tag) {
+                      ddlog(value.data);
+                    }),
+                ]
+            ),
+            Divider(),
+
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                "MaterialButton",
+                style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
+              ),
+            ),
+            MaterialButton(
+              padding: EdgeInsets.all(18),
+              minWidth: 0,
+              // color: Colors.green,
+              shape: RoundedRectangleBorder(
+                side: BorderSide(width: 1, color: Colors.grey),
+                borderRadius: BorderRadius.circular(4),
+              ),
+              onPressed: () { print("Press"); },
+              child: TextButtonExt.buildTextAndImage(
+                text: Text("bottom"),
+                image: Icon(Icons.info),
+                imageAlignment: ImageAlignment.top,
+              ),
+            ),
             Divider(),
 
             Align(
@@ -225,7 +254,6 @@ class _SecondPageState extends State<SecondPage> {
                 style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
               ),
             ),
-            Divider(),
 
             IconButton(
               tooltip: '这是一个图标按钮',
@@ -488,7 +516,7 @@ class _SecondPageState extends State<SecondPage> {
             text: Text("个人信息"),
             image: Icon(Icons.person),
             imageAlignment: ImageAlignment.right,
-            callback: (value) {
+            callback: (value, tag) {
               ddlog(value.data);
             }),
       ),
@@ -499,7 +527,7 @@ class _SecondPageState extends State<SecondPage> {
               text: Text("菜单left"),
               image: Icon(Icons.info),
               imageAlignment: ImageAlignment.left,
-              callback: (value) {
+              callback: (value, tag) {
                 ddlog(value.data);
               })),
 
@@ -509,7 +537,7 @@ class _SecondPageState extends State<SecondPage> {
             text: Text("菜单right"),
             image: Icon(Icons.info),
             imageAlignment: ImageAlignment.right,
-            callback: (value) {
+            callback: (value, tag) {
               ddlog(value.data);
             }),
       ),
@@ -520,7 +548,7 @@ class _SecondPageState extends State<SecondPage> {
               text: Text("菜单top"),
               image: Icon(Icons.info),
               imageAlignment: ImageAlignment.top,
-              callback: (value) {
+              callback: (value, tag) {
                 ddlog(value.data);
               })),
 
@@ -530,7 +558,7 @@ class _SecondPageState extends State<SecondPage> {
             text: Text("菜单bottom"),
             image: Icon(Icons.info),
             imageAlignment: ImageAlignment.bottom,
-            callback: (value) {
+            callback: (value, tag) {
               ddlog(value.data);
             }),
       ),
