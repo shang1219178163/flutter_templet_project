@@ -368,6 +368,15 @@ var _list = [
   Tuple2(APPRouter.navigationBarDemo, "navigationBarDemo", ),
   Tuple2(APPRouter.shortcutsDemo, "shortcutsDemo", ),
   Tuple2(APPRouter.shortcutsDemoOne, "shortcutsDemoOne", ),
+  Tuple2(APPRouter.transformDemo, "动画", ),
+  Tuple2(APPRouter.fittedBoxDemo, "fittedBox", ),
+  Tuple2(APPRouter.coloredBoxDemo, "coloredBoxDemo", ),
+  Tuple2(APPRouter.positionedDirectionalDemo, "positionedDirectionalDemo", ),
+  Tuple2(APPRouter.statefulBuilderDemo, "statefulBuilderDemo", ),
+  Tuple2(APPRouter.valueListenableBuilderDemo, "valueListenableBuilderDemo", ),
+  Tuple2(APPRouter.overflowBarDemo, "水平溢出自动垂直排列", ),
+  Tuple2(APPRouter.navigationToolbarDemo, "navigationToolbar", ),
+
 
 ];
 
@@ -388,8 +397,6 @@ var _specials = [
   Tuple2(APPRouter.mergeImagesDemo, "图像合并", ),
   Tuple2(APPRouter.mergeNetworkImagesDemo, "网络图像合并", ),
   Tuple2(APPRouter.drawImageNineDemo, "图像拉伸", ),
-
-
 
 ];
 

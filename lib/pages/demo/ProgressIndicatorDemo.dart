@@ -92,7 +92,7 @@ class _ProgressIndicatorDemoState extends State<ProgressIndicatorDemo> with Tick
             ),
 
             CupertinoActivityIndicator(
-              radius: 12,
+              radius: 15,
             ),
 
           ],

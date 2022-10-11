@@ -107,6 +107,15 @@ class _SecondPageState extends State<SecondPage> {
                 // test();
               },
             ),
+            SizedBox(height: 10),
+            Directionality(
+              textDirection: TextDirection.rtl,
+              child: ElevatedButton.icon(
+                onPressed: () { print("ElevatedButton"); },
+                icon: Icon(Icons.arrow_back,),
+                label: Text("ElevatedButton"),
+              )
+            ),
             Divider(),
 
             OutlinedButton.icon(
