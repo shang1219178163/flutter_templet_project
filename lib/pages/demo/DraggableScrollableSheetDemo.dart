@@ -53,8 +53,8 @@ class _DraggableScrollableSheetDemoState extends State<DraggableScrollableSheetD
             child: Container(
               color: Color.fromARGB(100, 100, 100, 100),
               child: Image.network(
-                'https://images.unsplash.com/photo-1531306728370-e2ebd9d7bb99?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80',
-                fit: BoxFit.fill,
+                'https://www.kindacode.com/wp-content/uploads/2020/12/dog-png.png',
+                fit: BoxFit.contain,
               ),
             ),
           ),

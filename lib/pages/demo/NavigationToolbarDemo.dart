@@ -1,0 +1,59 @@
+//
+//  NavigationToolbarDemo.dart
+//  flutter_templet_project
+//
+//  Created by shang on 10/11/22 5:42 PM.
+//  Copyright © 10/11/22 shang. All rights reserved.
+//
+
+import 'package:flutter/material.dart';
+
+class NavigationToolbarDemo extends StatefulWidget {
+
+  final String? title;
+
+  NavigationToolbarDemo({ Key? key, this.title}) : super(key: key);
+
+  
+  @override
+  _NavigationToolbarDemoState createState() => _NavigationToolbarDemoState();
+}
+
+class _NavigationToolbarDemoState extends State<NavigationToolbarDemo> {
+
+
+  @override
+  Widget build(BuildContext context) {
+    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
+
+    return Scaffold(
+        appBar: AppBar(
+          title: Text(widget.title ?? "$widget"),
+        ),
+        body: Container(
+          height: 50,
+          decoration: BoxDecoration(
+              border: Border.all(color: Colors.blueAccent)
+          ),
+          child: NavigationToolbar(
+            leading: IconButton(
+              icon: Icon(Icons.add),
+              onPressed: () { print("leading"); },
+            ),
+            middle: IconButton(
+              icon: Icon(Icons.clear),
+              onPressed: () { print("middle"); },
+            ),
+            trailing: IconButton(
+              icon: Icon(Icons.home),
+              onPressed: () { print("trailing"); },
+            ),
+          ),
+        )
+    );
+  }
+
+}
+
+
+

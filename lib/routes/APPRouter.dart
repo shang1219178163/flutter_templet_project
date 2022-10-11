@@ -5,10 +5,18 @@ import 'package:flutter_templet_project/basicWidget/DragDestinationView.dart';
 import 'package:flutter_templet_project/basicWidget/responsive_column.dart';
 import 'package:flutter_templet_project/pages/FlutterFFiTest.dart';
 import 'package:flutter_templet_project/pages/LocalImagePage.dart';
+import 'package:flutter_templet_project/pages/demo/ColoredBoxDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DragAndDropDemo.dart';
+import 'package:flutter_templet_project/pages/demo/FittedBoxDemo.dart';
+import 'package:flutter_templet_project/pages/demo/NavigationToolbarDemo.dart';
+import 'package:flutter_templet_project/pages/demo/OverflowBarDemo.dart';
+import 'package:flutter_templet_project/pages/demo/PositionedDirectionalDemo.dart';
 import 'package:flutter_templet_project/pages/demo/RatingBarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ShortcutsDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ShortcutsDemoOne.dart';
+import 'package:flutter_templet_project/pages/demo/StatefulBuilderDemo.dart';
+import 'package:flutter_templet_project/pages/demo/TransformDemo.dart';
+import 'package:flutter_templet_project/pages/demo/ValueListenableBuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/drawImageNineDemo.dart';
 import 'package:flutter_templet_project/pages/demo/flutter_smart_dialog_demo.dart';
 import 'package:flutter_templet_project/pages/demo/merge_images_demo.dart';
@@ -270,6 +278,16 @@ class APPRouter {
   static const shortcutsDemo = '/shortcutsDemo';
   static const shortcutsDemoOne = '/shortcutsDemoOne';
   static const dragAndDropDemo = '/dragAndDropDemo';
+  static const transformDemo = '/transformDemo';
+  static const fittedBoxDemo = '/fittedBoxDemo';
+  static const coloredBoxDemo = '/coloredBoxDemo';
+  static const positionedDirectionalDemo = '/positionedDirectionalDemo';
+  static const statefulBuilderDemo = '/statefulBuilderDemo';
+  static const valueListenableBuilderDemo = '/valueListenableBuilderDemo';
+  static const overflowBarDemo = '/overflowBarDemo';
+  static const navigationToolbarDemo = '/navigationToolbarDemo';
+
+
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -432,6 +450,14 @@ class AppPage{
     GetPage(name: APPRouter.shortcutsDemo, page: () => ShortcutsDemo(), ),
     GetPage(name: APPRouter.shortcutsDemoOne, page: () => ShortcutsDemoOne(), ),
     GetPage(name: APPRouter.dragAndDropDemo, page: () => DragAndDropDemo(), ),
+    GetPage(name: APPRouter.transformDemo, page: () => TransformDemo(), ),
+    GetPage(name: APPRouter.fittedBoxDemo, page: () => FittedBoxDemo(), ),
+    GetPage(name: APPRouter.coloredBoxDemo, page: () => ColoredBoxDemo(), ),
+    GetPage(name: APPRouter.positionedDirectionalDemo, page: () => PositionedDirectionalDemo(), ),
+    GetPage(name: APPRouter.statefulBuilderDemo, page: () => StatefulBuilderDemo(), ),
+    GetPage(name: APPRouter.valueListenableBuilderDemo, page: () => ValueListenableBuilderDemo(), ),
+    GetPage(name: APPRouter.overflowBarDemo, page: () => OverflowBarDemo(), ),
+    GetPage(name: APPRouter.navigationToolbarDemo, page: () => NavigationToolbarDemo(), ),
 
 
   ];
