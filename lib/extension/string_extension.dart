@@ -52,8 +52,20 @@ extension StringExt on String{
     }).join("");
   }
 
-  /// 转我 int
+  /// 转为 int
   int? parseInt() {
+    return int.tryParse(this);
+  }
+
+  /// 转为 int
+  int? toInt() {
+    RegExp regInt = new RegExp(r"[0-9]");
+    RegExp regIntNon = new RegExp(r"[^0-9]");
+
+    if (this.contains(regInt)) {
+      final result = this.replaceAll(regIntNon, '');
+      return int.tryParse(result);
+    }
     return int.tryParse(this);
   }
 
@@ -77,4 +89,18 @@ extension StringExt on String{
     return result;
   }
 
+  /// 处理字符串中包含数字排序异常的问题
+  int compareCustom(String b) {
+    String a = this;
+
+    RegExp regInt = new RegExp(r"[0-9]");
+    RegExp regIntNon = new RegExp(r"[^0-9]");
+
+    if (a.contains(regInt) && b.contains(regInt)) {
+      final one = int.parse(a.replaceAll(regIntNon, ''));
+      final two = int.parse(b.replaceAll(regIntNon, ''));
+      return one.compareTo(two);
+    }
+    return a.compareTo(b);
+  }
 }
