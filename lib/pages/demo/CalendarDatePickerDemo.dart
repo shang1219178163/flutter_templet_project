@@ -69,11 +69,8 @@ class _CalendarDatePickerDemoState extends State<CalendarDatePickerDemo> {
       initialDate: DateTime.now(), // 初始化选中日期
       firstDate: DateTime(2020, 6, 0), // 开始日期
       lastDate: DateTime(2023, 6, 0), // 结束日期
-
     );
   }
 
 }
-
-c
 

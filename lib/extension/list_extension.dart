@@ -6,6 +6,7 @@
 //  Copyright © 10/21/21 shang. All rights reserved.
 //
 
+import 'package:flutter_templet_project/extension/string_extension.dart';
 
 extension ListExt<E> on List<E>{
   ///运算符重载
@@ -48,3 +49,40 @@ extension ListExt<E> on List<E>{
     return map;
   }
 }
+
+
+extension ListExtObject<E extends Object> on List<E>{
+
+  // List<E> sortedByKey(String key, {bool ascending = true}) {
+  //   this.forEach((element) {
+  //     print("sortByKey:${element}");
+  //   });
+  //   if (ascending) {
+  //     this.sort((a, b) => a[key].compareTo(b[key]));
+  //   } else {
+  //     this.sort((a, b) => b[key].compareTo(a[key]));
+  //   }
+  //   return this;
+  // }
+
+  List<E> sortedByValue({bool ascending = true, required dynamic Function(E obj) cb}) {
+    if (ascending) {
+      // this.sort((a, b) => cb(a).compareTo(cb(b)));
+      this.sort((a, b) => _customeCompare(cb(a), cb(b)));
+    } else {
+      // this.sort((a, b) => cb(b).compareTo(cb(a)));
+      this.sort((a, b) => _customeCompare(cb(b), cb(a)));
+    }
+    return this;
+  }
+
+  /// 处理字符串中包含数字排序异常的问题
+  _customeCompare(dynamic a, dynamic b) {
+    if (a is String && b is String) {
+      return a.compareCustom(b);
+    }
+    return a.compareTo(b);
+  }
+
+}
+
