@@ -292,7 +292,6 @@ var _list = [
   Tuple2(APPRouter.draggableDemo, "draggableDemo", ),
   Tuple2(APPRouter.draggableScrollableSheetDemo, "draggableScrollableSheetDemo", ),
 
-  Tuple2(APPRouter.enlargeStrategyDemo, "enlargeStrategyDemo", ),
   Tuple2(APPRouter.expandIconDemo, "expandIconDemo", ),
   Tuple2(APPRouter.expandIconDemoNew, "ExpandIconDemoNew", ),
 
@@ -311,7 +310,7 @@ var _list = [
 
   Tuple2(APPRouter.reorderableListViewDemo, "reorderableListViewDemo", ),
   Tuple2(APPRouter.recordListDemo, "textFieldDemo", ),
-  Tuple2(APPRouter.rangerSliderDemo, "rangerSliderDemo", ),
+  Tuple2(APPRouter.sliderDemo, "sliderDemo", ),
 
   Tuple2(APPRouter.segmentControlDemo, "segmentControlDemo", ),
   Tuple2(APPRouter.snackBarDemo, "SnackBar", ),

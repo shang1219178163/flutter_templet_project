@@ -1,5 +1,5 @@
 //
-//  RangerSliderDemo.dart
+//  SliderDemo.dart
 //  flutter_templet_project
 //
 //  Created by shang on 6/5/21 9:44 AM.
@@ -13,20 +13,20 @@ import 'package:flutter/material.dart';
 
 
 /// This is the main application widget.
-class RangerSliderDemo extends StatefulWidget {
+class SliderDemo extends StatefulWidget {
 
   final String? title;
-  RangerSliderDemo({ Key? key, this.title}) : super(key: key);
+  SliderDemo({ Key? key, this.title}) : super(key: key);
 
   @override
-  _RangerSliderDemoState createState() => _RangerSliderDemoState();
+  _SliderDemoState createState() => _SliderDemoState();
 }
 
-class _RangerSliderDemoState extends State<RangerSliderDemo> {
-
-  RangeValues _currentRangeValues = RangeValues(40, 80);
+class _SliderDemoState extends State<SliderDemo> {
 
   var sliderValue = 5.0;
+
+  RangeValues _currentRangeValues = RangeValues(40, 80);
 
   @override
   Widget build(BuildContext context) {
@@ -35,36 +35,25 @@ class _RangerSliderDemoState extends State<RangerSliderDemo> {
       home: Scaffold(
         appBar: AppBar(title: Text(widget.title ?? "$widget"),),
         body: SafeArea(
-          child: Column(
-            children: [
-              buildRangeSlider(context),
-              buildSlider(context),
-            ],
-          ),
+          child: _buildBody(),
         )
       )
     );
   }
 
-  Widget buildRangeSlider(BuildContext context) {
-    return RangeSlider(
-      values: _currentRangeValues,
-      min: 0,
-      max: 100,
-      divisions: 10,
-      labels: RangeLabels(
-        _currentRangeValues.start.round().toString(),
-        _currentRangeValues.end.round().toString(),
-      ),
-      onChanged: (RangeValues values) {
-        setState(() {
-          _currentRangeValues = values;
-        });
-      },
+  _buildBody() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text('Slider'),
+        _buildSlider(context),
+        Text('RangeSlider'),
+        _buildRangeSlider(context),
+      ],
     );
   }
 
-  Widget buildSlider(BuildContext context) {
+  _buildSlider(BuildContext context) {
     return Slider(
       inactiveColor: Color(0xffC0C0C0),
       activeColor: Color(0xff21BA45),
@@ -87,5 +76,24 @@ class _RangerSliderDemoState extends State<RangerSliderDemo> {
       },
     );
   }
+
+  _buildRangeSlider(BuildContext context) {
+    return RangeSlider(
+      values: _currentRangeValues,
+      min: 0,
+      max: 100,
+      divisions: 10,
+      labels: RangeLabels(
+        _currentRangeValues.start.round().toString(),
+        _currentRangeValues.end.round().toString(),
+      ),
+      onChanged: (RangeValues values) {
+        setState(() {
+          _currentRangeValues = values;
+        });
+      },
+    );
+  }
+
 }
 

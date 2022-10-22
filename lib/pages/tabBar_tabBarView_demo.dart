@@ -306,7 +306,6 @@ var _list = [
   Tuple2(APPRouter.draggableDemo, "draggableDemo", ),
   Tuple2(APPRouter.draggableScrollableSheetDemo, "draggableScrollableSheetDemo", ),
 
-  Tuple2(APPRouter.enlargeStrategyDemo, "enlargeStrategyDemo", ),
   Tuple2(APPRouter.expandIconDemo, "expandIconDemo", ),
   Tuple2(APPRouter.expandIconDemoNew, "ExpandIconDemoNew", ),
 
@@ -325,10 +324,10 @@ var _list = [
 
   Tuple2(APPRouter.reorderableListViewDemo, "reorderableListViewDemo", ),
   Tuple2(APPRouter.recordListDemo, "textFieldDemo", ),
-  Tuple2(APPRouter.rangerSliderDemo, "rangerSliderDemo", ),
 
   Tuple2(APPRouter.segmentControlDemo, "segmentControlDemo", ),
   Tuple2(APPRouter.snackBarDemo, "SnackBar", ),
+  Tuple2(APPRouter.sliderDemo, "sliderDemo", ),
   Tuple2(APPRouter.stepperDemo, "stepperDemo", ),
   Tuple2(APPRouter.slidableDemo, "SlidableDemo", ),
   Tuple2(APPRouter.sliverAppBarDemo, "SliverAppBarDemo", ),
@@ -376,7 +375,7 @@ var _list = [
   Tuple2(APPRouter.valueListenableBuilderDemo, "valueListenableBuilderDemo", ),
   Tuple2(APPRouter.overflowBarDemo, "水平溢出自动垂直排列", ),
   Tuple2(APPRouter.navigationToolbarDemo, "navigationToolbar", ),
-
+  Tuple2(APPRouter.selectableTextDemo, "文字选择", ),
 
 ];
 
@@ -423,6 +422,7 @@ var _customs = [
 ];
 
 var _vendors = [
+  Tuple2(APPRouter.carouselSliderDemo, "carouselSliderDemo", ),
   Tuple2(APPRouter.timelinesDemo, "timelinesDemo", ),
   Tuple2(APPRouter.timelineDemo, "timelineDemo", ),
   Tuple2(APPRouter.qrCodeScannerDemo, "扫描二维码", ),
