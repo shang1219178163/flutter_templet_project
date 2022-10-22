@@ -12,6 +12,7 @@ import 'package:flutter_templet_project/pages/demo/NavigationToolbarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/OverflowBarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PositionedDirectionalDemo.dart';
 import 'package:flutter_templet_project/pages/demo/RatingBarDemo.dart';
+import 'package:flutter_templet_project/pages/demo/SelectableTextDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ShortcutsDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ShortcutsDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/StatefulBuilderDemo.dart';
@@ -104,7 +105,7 @@ import 'package:flutter_templet_project/pages/demo/DataTableDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DraggableDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DraggableScrollableSheetDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ProgressIndicatorDemo.dart';
-import 'package:flutter_templet_project/pages/demo/RangerSliderDemo.dart';
+import 'package:flutter_templet_project/pages/demo/SliderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/SegmentControlDemo.dart';
 import 'package:flutter_templet_project/pages/demo/SliverPersistentHeaderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/StepperDemo.dart';
@@ -182,11 +183,11 @@ class APPRouter {
   static const dateTableDemo = '/DateTableDemo';
   static const dataTableDemoNew = '/DataTableDemoNew';
   static const segmentControlDemo = '/SegmentControlDemo';
-  static const rangerSliderDemo = '/RangerSliderDemo';
+  static const sliderDemo = '/sliderDemo';
   static const draggableScrollableSheetDemo = '/DraggableScrollableSheetDemo';
   static const progressIndicatorDemo = '/ProgressIndicatorDemo';
   static const appWebViewDemo = '/AppWebViewDemo';
-  static const enlargeStrategyDemo = '/EnlargeStrategyDemo';
+  static const carouselSliderDemo = '/carouselSliderDemo';
   static const sliverAppBarDemo = '/SliverAppBarDemo';
   static const sliverFamilyDemo = '/SliverFamilyDemo';
   static const sliverFamilyPageViewDemo = '/sliverFamilyPageViewDemo';
@@ -283,6 +284,7 @@ class APPRouter {
   static const valueListenableBuilderDemo = '/valueListenableBuilderDemo';
   static const overflowBarDemo = '/overflowBarDemo';
   static const navigationToolbarDemo = '/navigationToolbarDemo';
+  static const selectableTextDemo = '/SelectableTextDemo';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -358,11 +360,11 @@ class AppPage {
     GetPage(name: APPRouter.dateTableDemo, page: () => DataTableDemo(),),
     GetPage(name: APPRouter.dataTableDemoNew, page: () => DataTableDemoNew(),),
     GetPage(name: APPRouter.segmentControlDemo, page: () => SegmentControlDemo(),),
-    GetPage(name: APPRouter.rangerSliderDemo, page: () => RangerSliderDemo(),),
+    GetPage(name: APPRouter.sliderDemo, page: () => SliderDemo(),),
     GetPage(name: APPRouter.draggableScrollableSheetDemo, page: () => DraggableScrollableSheetDemo(),),
     GetPage(name: APPRouter.progressIndicatorDemo, page: () => ProgressIndicatorDemo(),),
     GetPage(name: APPRouter.appWebViewDemo, page: () => AppWebViewDemo(),),
-    GetPage(name: APPRouter.enlargeStrategyDemo, page: () => CarouselSliderDemo(),),
+    GetPage(name: APPRouter.carouselSliderDemo, page: () => CarouselSliderDemo(),),
     GetPage(name: APPRouter.sliverAppBarDemo, page: () => SliverAppBarDemo(),),
     GetPage(name: APPRouter.hudProgressDemo, page: () => HudProgressDemo(),),
     GetPage(name: APPRouter.reorderableListViewDemo, page: () => ReorderableListViewDemo(),),
@@ -454,5 +456,8 @@ class AppPage {
     GetPage(name: APPRouter.valueListenableBuilderDemo, page: () => ValueListenableBuilderDemo(),),
     GetPage(name: APPRouter.overflowBarDemo, page: () => OverflowBarDemo(),),
     GetPage(name: APPRouter.navigationToolbarDemo, page: () => NavigationToolbarDemo(),),
+    GetPage(name: APPRouter.selectableTextDemo, page: () => SelectableTextDemo(),),
+
+
   ];
 }
