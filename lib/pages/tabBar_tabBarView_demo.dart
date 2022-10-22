@@ -376,6 +376,7 @@ var _list = [
   Tuple2(APPRouter.overflowBarDemo, "水平溢出自动垂直排列", ),
   Tuple2(APPRouter.navigationToolbarDemo, "navigationToolbar", ),
   Tuple2(APPRouter.selectableTextDemo, "文字选择", ),
+  Tuple2(APPRouter.materialBannerDemo, "一个 Banner", ),
 
 ];
 
