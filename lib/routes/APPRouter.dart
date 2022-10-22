@@ -8,6 +8,7 @@ import 'package:flutter_templet_project/pages/LocalImagePage.dart';
 import 'package:flutter_templet_project/pages/demo/ColoredBoxDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DragAndDropDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FittedBoxDemo.dart';
+import 'package:flutter_templet_project/pages/demo/MaterialBannerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NavigationToolbarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/OverflowBarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PositionedDirectionalDemo.dart';
@@ -285,6 +286,9 @@ class APPRouter {
   static const overflowBarDemo = '/overflowBarDemo';
   static const navigationToolbarDemo = '/navigationToolbarDemo';
   static const selectableTextDemo = '/SelectableTextDemo';
+  static const materialBannerDemo = '/materialBannerDemo';
+
+
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -457,6 +461,7 @@ class AppPage {
     GetPage(name: APPRouter.overflowBarDemo, page: () => OverflowBarDemo(),),
     GetPage(name: APPRouter.navigationToolbarDemo, page: () => NavigationToolbarDemo(),),
     GetPage(name: APPRouter.selectableTextDemo, page: () => SelectableTextDemo(),),
+    GetPage(name: APPRouter.materialBannerDemo, page: () => MaterialBannerDemo(),),
 
 
   ];
