@@ -22,6 +22,7 @@ import 'package:tuple/tuple.dart';
 import 'Pages/APPDrawerMenuPage.dart';
 import 'Pages/APPUserCenterPage.dart';
 
+import 'basicWidget/ErrorCustomWidget.dart';
 import 'pages/FirstPage.dart';
 import 'pages/SecondPage.dart';
 import 'pages/ThirdPage.dart';
@@ -68,22 +69,9 @@ Future<void> main() async {
 }
 
 void setCustomErrorPage(){
-  ErrorWidget.builder = (FlutterErrorDetails flutterErrorDetails){
-    print("flutterErrorDetails:${flutterErrorDetails.toString()}");
-    return Center(
-      // child: Text("Flutter 走神了"),
-      child: Container(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(Icons.error),
-            Text("Flutter 走神了",
-                style: TextStyle(fontSize: 16.0, color: Colors.red),
-            ),
-          ],
-        ),
-      ),
-    );
+  ErrorWidget.builder = (FlutterErrorDetails details){
+    print("flutterErrorDetails:${details.toString()}");
+    return ErrorCustomWidget(details: details);
   };
 }
 
