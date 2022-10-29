@@ -39,11 +39,12 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
 
   // late PageController _pageController = PageController(initialPage: 0, keepPage: true);
 
+  // late List<String> _titles = getTitlesOfTuples();
+
   @override
   void initState() {
     super.initState();
     _tabController.index = _pages.length - 1;
-
     // testData();
   }
 
@@ -110,6 +111,8 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
         onPressed: () {
           // ddlog(["a", 18, null, true, ["1", "2", "3"], {"a": "aa", "b": "bb"}]);
           // ddlog(_list);
+          // testData();
+          getTitles(tuples: _tuples);
         },
       ),
     );
@@ -208,42 +211,57 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
 
     Tuple2('列表(折叠)', EnhanceExpandListView(
       children: _tuples.map<ExpandPanelModel<Tuple2<String, String>>>((e) => ExpandPanelModel(
-      canTapOnHeader: true,
-      isExpanded: false,
-      arrowPosition: EnhanceExpansionPanelArrowPosition.none,
-      // backgroundColor: Color(0xFFDDDDDD),
-      headerBuilder: (contenx, isExpand) {
-        return Container(
-          // color: Colors.green,
-          color: isExpand ? Colors.black12 : null,
-          child: ListTile(
-            title: Text("${e.item1}", style: TextStyle(fontWeight: FontWeight.bold),),
-            // subtitle: Text("subtitle"),
-          ),
-        );
-      },
-      bodyChildren: e.item2,
-      bodyItemBuilder: (context, e) {
-        return ListTile(
-          title: Text(e.item1, style: TextStyle(fontSize: 14),),
-          subtitle: Text(e.item2, style: TextStyle(fontSize: 12),),
-          trailing: Icon(Icons.chevron_right),
-          dense: true,
-          // contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
-          onTap: () {
-            ddlog("section_");
-            if (e.item1.toLowerCase().contains("loginPage".toLowerCase())){
-              Get.offNamed(e.item1, arguments: e.item1);
-            } else {
-              Get.toNamed(e.item1, arguments: e.item1);
-            }
-          });
-      },
-    )).toList(),)),
-
+        canTapOnHeader: true,
+        isExpanded: false,
+        arrowPosition: EnhanceExpansionPanelArrowPosition.none,
+        // backgroundColor: Color(0xFFDDDDDD),
+        headerBuilder: (contenx, isExpand) {
+          return Container(
+            // color: Colors.green,
+            color: isExpand ? Colors.black12 : null,
+            child: ListTile(
+              title: Text("${e.item1}", style: TextStyle(fontWeight: FontWeight.bold),),
+              // subtitle: Text("subtitle"),
+            ),
+          );
+        },
+        bodyChildren: e.item2,
+        bodyItemBuilder: (context, e) {
+          return ListTile(
+            title: Text(e.item1, style: TextStyle(fontSize: 14),),
+            subtitle: Text(e.item2, style: TextStyle(fontSize: 12),),
+            trailing: Icon(Icons.chevron_right),
+            dense: true,
+            // contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
+            onTap: () {
+              ddlog("section_");
+              if (e.item1.toLowerCase().contains("loginPage".toLowerCase())){
+                Get.offNamed(e.item1, arguments: e.item1);
+              } else {
+                Get.toNamed(e.item1, arguments: e.item1);
+              }
+            });
+        },
+      )).toList(),),
+    ),
   ];
 
-  void testData() {
+  List<String> getTitles({required List<Tuple2<String, List<Tuple2<String, String>>>> tuples}) {
+    // List<String> arr = [];
+    // tuples.forEach((element) {
+    //   final tmp = element.item2.map((e) => e.item1);
+    //   arr.addAll(tmp);
+    // });
+    // print('runtimeType:${arr.runtimeType},${arr is List},${arr}');
+
+    final titles = _tuples.flatMap((e) => e.item2.map((e) => e.item1).toList());
+    final titlesNew = List<String>.from(titles);
+    // print('titles runtimeType:${titles.runtimeType},${titles.every((element) => element is String)},');
+    print('titlesNew runtimeType:${titlesNew.runtimeType}');
+    return titlesNew;
+  }
+
+  testData() {
     final String? a = null;
     ddlog(a.runtimeType);
 
@@ -280,7 +298,7 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
   }
 }
 
-final _tuples = [
+var _tuples = [
   Tuple2("特殊功能", _specials),
   Tuple2("动画相关", _animateds),
   Tuple2("系统组件demo", _list),
@@ -289,6 +307,7 @@ final _tuples = [
   Tuple2("其它", _others)
 
 ];
+
 
 var _list = [
   Tuple2(APPRouter.alertDialogDemo, "AlertDialog", ),
