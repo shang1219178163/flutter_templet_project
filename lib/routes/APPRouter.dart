@@ -5,6 +5,7 @@ import 'package:flutter_templet_project/basicWidget/DragDestinationView.dart';
 import 'package:flutter_templet_project/basicWidget/responsive_column.dart';
 import 'package:flutter_templet_project/pages/FlutterFFiTest.dart';
 import 'package:flutter_templet_project/pages/LocalImagePage.dart';
+import 'package:flutter_templet_project/pages/demo/AutocompleteDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ColoredBoxDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DragAndDropDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FittedBoxDemo.dart';
@@ -287,8 +288,7 @@ class APPRouter {
   static const navigationToolbarDemo = '/navigationToolbarDemo';
   static const selectableTextDemo = '/SelectableTextDemo';
   static const materialBannerDemo = '/materialBannerDemo';
-
-
+  static const autocompleteDemo = '/autocompleteDemo';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -462,6 +462,7 @@ class AppPage {
     GetPage(name: APPRouter.navigationToolbarDemo, page: () => NavigationToolbarDemo(),),
     GetPage(name: APPRouter.selectableTextDemo, page: () => SelectableTextDemo(),),
     GetPage(name: APPRouter.materialBannerDemo, page: () => MaterialBannerDemo(),),
+    GetPage(name: APPRouter.autocompleteDemo, page: () => AutocompleteDemo(),),
 
 
   ];

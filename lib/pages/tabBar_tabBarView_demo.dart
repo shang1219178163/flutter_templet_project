@@ -377,6 +377,8 @@ var _list = [
   Tuple2(APPRouter.navigationToolbarDemo, "navigationToolbar", ),
   Tuple2(APPRouter.selectableTextDemo, "文字选择", ),
   Tuple2(APPRouter.materialBannerDemo, "一个 Banner", ),
+  Tuple2(APPRouter.autocompleteDemo, "自动填写", ),
+
 
 ];
 
