@@ -418,6 +418,7 @@ var _specials = [
   Tuple2(APPRouter.mergeImagesDemo, "图像合并", ),
   Tuple2(APPRouter.mergeNetworkImagesDemo, "网络图像合并", ),
   Tuple2(APPRouter.drawImageNineDemo, "图像拉伸", ),
+  Tuple2(APPRouter.promptBuilderDemo, "指引模板", ),
 
 ];
 

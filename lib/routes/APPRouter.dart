@@ -13,6 +13,7 @@ import 'package:flutter_templet_project/pages/demo/MaterialBannerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NavigationToolbarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/OverflowBarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PositionedDirectionalDemo.dart';
+import 'package:flutter_templet_project/pages/demo/PromptBuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/RatingBarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/SelectableTextDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ShortcutsDemo.dart';
@@ -289,6 +290,7 @@ class APPRouter {
   static const selectableTextDemo = '/SelectableTextDemo';
   static const materialBannerDemo = '/materialBannerDemo';
   static const autocompleteDemo = '/autocompleteDemo';
+  static const promptBuilderDemo = '/promptBuilderDemo';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -463,6 +465,7 @@ class AppPage {
     GetPage(name: APPRouter.selectableTextDemo, page: () => SelectableTextDemo(),),
     GetPage(name: APPRouter.materialBannerDemo, page: () => MaterialBannerDemo(),),
     GetPage(name: APPRouter.autocompleteDemo, page: () => AutocompleteDemo(),),
+    GetPage(name: APPRouter.promptBuilderDemo, page: () => PromptBuilderDemo(),),
 
 
   ];
