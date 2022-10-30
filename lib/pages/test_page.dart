@@ -39,7 +39,11 @@ class _TestPageState extends State<TestPage> {
         appBar: AppBar(
           title: Text(widget.title ?? "$widget"),
         ),
-        body: buildWrap(context)
+        body: Column(
+          children: [
+            buildWrap(context),
+          ],
+        )
     );
   }
 
