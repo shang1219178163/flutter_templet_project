@@ -3,9 +3,7 @@
 import 'package:flutter/widgets.dart';
 
 class RadiusWidget extends StatelessWidget {
-  /// Creates a widget that both has state and delegates its build to a callback.
-  ///
-  /// The [builder] argument must not be null.
+
   RadiusWidget({
     Key? key,
     required this.child,
