@@ -329,6 +329,7 @@ var _list = [
   Tuple2(APPRouter.nestedScrollViewDemo, "nestedScrollViewDemo", ),
 
   Tuple2(APPRouter.popoverDemo, "popoverDemo", ),
+  Tuple2(APPRouter.rotatedBoxDemo, "rotatedBoxDemo", ),
 
 ];
 
