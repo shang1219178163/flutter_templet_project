@@ -9,11 +9,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/Language/Property.dart';
+import 'package:flutter_templet_project/basicWidget/RadiusWidget.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/string_extension.dart';
 import 'package:flutter_templet_project/extension/map_extension.dart';
 
 import 'package:flutter_templet_project/extension/buildContext_extension.dart';
+import 'package:tuple/tuple.dart';
 
 
 class TestPage extends StatefulWidget {
@@ -30,6 +32,7 @@ class TestPage extends StatefulWidget {
 class _TestPageState extends State<TestPage> {
 
   var titles = ["splitMapJoin", "1", "2", "3", "4", "5", "6", "7"];
+  int time = 60;
 
   @override
   Widget build(BuildContext context) {
@@ -41,13 +44,37 @@ class _TestPageState extends State<TestPage> {
         ),
         body: Column(
           children: [
-            buildWrap(context),
+            buildWrap(),
+            buildSection1(),
+            StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
+              return buildSection2();
+            }),
+            RepaintBoundary(child: buildSection3(),),
+            Container(
+              margin: const EdgeInsets.all(8),
+              child: RadiusWidget(
+                radius: 8,
+                child: Container(
+                    width: 200,
+                    height: 40,
+                    child: Text('widget.title')
+                ),
+                color: Colors.green,
+              ),
+            ),
+            TextField(
+              cursorColor: Colors.purple,
+              cursorRadius: Radius.circular(8.0),
+              cursorWidth: 8.0,
+            ),
+            buildBtnColor(),
+            buildSection4(),
           ],
         )
     );
   }
 
-  Wrap buildWrap(BuildContext context) {
+  Wrap buildWrap() {
     return Wrap(
       spacing: 8.0, // 主轴(水平)方向间距
       runSpacing: 8.0, // 纵轴（垂直）方向间距
@@ -61,6 +88,111 @@ class _TestPageState extends State<TestPage> {
           _onPressed(titles.indexOf(e));
         },
       )).toList(),
+    );
+  }
+
+  buildSection1() {
+    return Column(
+      children: [
+        Row(
+          children: [
+            Text('倒计时'),
+            Text('$time')
+          ],
+        ),
+        ElevatedButton.icon(
+          icon: Icon(Icons.send),
+          label: Text("ElevatedButton"),
+          onPressed: () {
+            setState(() {
+              time++;
+            });
+          },
+        ),
+      ],
+    );
+  }
+
+  buildSection2() {
+    return Column(
+        children: [
+          Row(
+            children: [
+              Text('倒计时'),
+              Text('$time')
+            ],
+          ),
+          ElevatedButton.icon(
+            icon: Icon(Icons.send),
+            label: Text("ElevatedButton"),
+            onPressed: () {
+              setState(() {
+                time++;
+              });
+            },
+          ),
+        ],
+      );
+  }
+
+  buildSection3() {
+    return Column(
+      children: [
+        Row(
+          children: [
+            Text('倒计时'),
+            Text('$time')
+          ],
+        ),
+        ElevatedButton.icon(
+          icon: Icon(Icons.send),
+          label: Text("ElevatedButton"),
+          onPressed: () {
+            setState(() {
+              time++;
+            });
+          },
+        ),
+      ],
+    );
+  }
+
+  buildSection4() {
+    final tuples = [
+      Tuple2('Color(0xFF4286f4)', Color(0xFF4286f4)),
+      Tuple2('Color(0xFF4286f4).withOpacity(0.5)', Color(0xFF4286f4).withOpacity(0.5)),
+      Tuple2('Colors.black.withOpacity(0.4)', Colors.black.withOpacity(0.4)),
+    ];
+    return Column(
+      children: tuples.map((e) => Row(
+          children: [
+            Container(
+              width: 30,
+              height: 30,
+              margin: EdgeInsets.only(left: 16, right: 8),
+              color: e.item2,
+            ),
+            Text('${e.item1}'),
+          ]
+      )).toList(),
+
+    );
+  }
+
+
+  buildBtnColor() {
+    return
+    TextButton(
+      onPressed: () {},
+      style: ButtonStyle(
+        foregroundColor: MaterialStateProperty.resolveWith<Color>((Set<MaterialState> states) {
+          if (states.contains(MaterialState.pressed))
+            return Colors.green;
+          return Colors.black87; // Defer to the widget's default.
+        }),
+      ),
+      child: Text('Change My Color',style: TextStyle(fontSize: 30),
+      ),
     );
   }
 
@@ -117,3 +249,6 @@ class _TestPageState extends State<TestPage> {
     // PropertyInfo.getVariableType();
   }
 }
+
+// typedef RadiusBuilder = Widget Function(BuildContext context, StateSetter setState);
+
