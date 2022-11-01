@@ -25,7 +25,7 @@ class RadiusWidget extends StatelessWidget {
     }
 
     final border = this.borderRadius ?? BorderRadius.circular(this.radius ?? 0);
-    return DecoratedBox(
+    return DecosceneOrderListratedBox(
       decoration: BoxDecoration(
         color: this.color,
         borderRadius: border,
