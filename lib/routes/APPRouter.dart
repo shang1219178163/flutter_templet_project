@@ -11,6 +11,7 @@ import 'package:flutter_templet_project/pages/demo/DismissibleDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DragAndDropDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FittedBoxDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MaterialBannerDemo.dart';
+import 'package:flutter_templet_project/pages/demo/ModalBarrierDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NavigationToolbarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/OverflowBarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PositionedDirectionalDemo.dart';
@@ -295,6 +296,8 @@ class APPRouter {
   static const promptBuilderDemo = '/promptBuilderDemo';
   static const rotatedBoxDemo = '/rotatedBoxDemo';
   static const dismissibleDemo = '/dismissibleDemo';
+  static const modalBarrierDemo = '/modalBarrierDemo';
+
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -472,7 +475,7 @@ class AppPage {
     GetPage(name: APPRouter.promptBuilderDemo, page: () => PromptBuilderDemo(),),
     GetPage(name: APPRouter.rotatedBoxDemo, page: () => RotatedBoxDemo(),),
     GetPage(name: APPRouter.dismissibleDemo, page: () => DismissibleDemo(),),
-
+    GetPage(name: APPRouter.modalBarrierDemo, page: () => ModalBarrierDemo(),),
 
   ];
 }

@@ -399,6 +399,9 @@ var _list = [
   Tuple2(APPRouter.autocompleteDemo, "自动填写", ),
   Tuple2(APPRouter.rotatedBoxDemo, "rotatedBoxDemo", ),
   Tuple2(APPRouter.dismissibleDemo, "左滑删除", ),
+  Tuple2(APPRouter.modalBarrierDemo, "静态蒙版", ),
+
+
 
 ];
 
