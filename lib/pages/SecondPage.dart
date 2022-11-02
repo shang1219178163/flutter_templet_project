@@ -81,22 +81,25 @@ class _SecondPageState extends State<SecondPage> {
             SizedBox(
               height: 10,
             ),
-            Divider(),
 
+            Divider(),
+            _buildSectionTitle("MaterialButton"),
             MaterialButton(
               color: Colors.blue.shade400,
               textColor: Colors.white,
               child: Text("MaterialButton"),
               onPressed: () => print("MaterialButton"),
             ),
-            Divider(),
 
+            Divider(),
+            _buildSectionTitle("BackButton"),
             BackButton(
               onPressed: () => print("BackButton"),
               color: Colors.red,
             ),
-            Divider(),
 
+            Divider(),
+            _buildSectionTitle("MaterialButton"),
             ElevatedButton.icon(
               icon: Icon(Icons.send),
               label: Text("ElevatedButton"),
@@ -107,7 +110,9 @@ class _SecondPageState extends State<SecondPage> {
                 // test();
               },
             ),
-            SizedBox(height: 10),
+
+            Divider(),
+            _buildSectionTitle("Directionality ElevatedButton"),
             Directionality(
               textDirection: TextDirection.rtl,
               child: ElevatedButton.icon(
@@ -116,8 +121,9 @@ class _SecondPageState extends State<SecondPage> {
                 label: Text("ElevatedButton"),
               )
             ),
-            Divider(),
 
+            Divider(),
+            _buildSectionTitle("OutlinedButton"),
             OutlinedButton.icon(
               icon: Icon(Icons.add),
               label: Text("OutlinedButton"),
@@ -133,8 +139,9 @@ class _SecondPageState extends State<SecondPage> {
                     style: BorderStyle.solid),
               ),
             ),
-            Divider(),
 
+            Divider(),
+            _buildSectionTitle("TextSelectionToolbarTextButton"),
             TextSelectionToolbarTextButton(
                 child: Text("TextSelectionToolbarTextButton"),
                 padding: EdgeInsets.all(8),
@@ -142,15 +149,9 @@ class _SecondPageState extends State<SecondPage> {
                   print("TextSelectionToolbarTextButton");
               },
             ),
-            Divider(),
 
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                "TextButton",
-                style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
-              ),
-            ),
+            Divider(),
+            _buildSectionTitle("TextButton"),
             Row(
               children: [
                 TextButton(
@@ -183,16 +184,9 @@ class _SecondPageState extends State<SecondPage> {
                 ),
               ],
             ),
-            SizedBox(
-              height: 8,
-            ),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                "TextButtonExt",
-                style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
-              ),
-            ),
+
+            Divider(),
+            _buildSectionTitle("TextButtonExt"),
             Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -230,15 +224,9 @@ class _SecondPageState extends State<SecondPage> {
                     }),
                 ]
             ),
-            Divider(),
 
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                "MaterialButton",
-                style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
-              ),
-            ),
+            Divider(),
+            _buildSectionTitle("MaterialButton"),
             MaterialButton(
               padding: EdgeInsets.all(18),
               minWidth: 0,
@@ -254,16 +242,9 @@ class _SecondPageState extends State<SecondPage> {
                 imageAlignment: ImageAlignment.top,
               ),
             ),
+
             Divider(),
-
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                "IconButton",
-                style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
-              ),
-            ),
-
+            _buildSectionTitle("IconButton"),
             IconButton(
               tooltip: '这是一个图标按钮',
               icon: Icon(Icons.person),
@@ -273,25 +254,13 @@ class _SecondPageState extends State<SecondPage> {
                 ddlog("这是一个图标按钮");
               },
             ),
-            Divider(),
 
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                "ToggleButtons",
-                style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
-              ),
-            ),
+            Divider(),
+            _buildSectionTitle("ToggleButtons"),
             buildToggleButtons(context),
-            Divider(),
 
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                "FloatingActionButton",
-                style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
-              ),
-            ),
+            Divider(),
+            _buildSectionTitle("FloatingActionButton"),
             FloatingActionButton(
               mini: true,
               backgroundColor: const Color(0xff03dac6),
@@ -312,26 +281,13 @@ class _SecondPageState extends State<SecondPage> {
               icon: Icon(Icons.add),
               label: Text('EXTENDED'),
             ),
-            Divider(),
 
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                "DropdownButton",
-                style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
-              ),
-            ),
+            Divider(),
+            _buildSectionTitle("DropdownButton"),
             _buildDropdownButton(),
+
             Divider(),
-
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                "UploadButton",
-                style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
-              ),
-            ),
-
+            _buildSectionTitle("UploadButton"),
             UploadButton(
               image: Image.asset("images/img_update.png", fit: BoxFit.fill, width: 100, height: 100,),
               deteleImage: Image.asset("images/icon_delete.png", fit: BoxFit.fill, width: 25, height: 25,),
@@ -342,16 +298,9 @@ class _SecondPageState extends State<SecondPage> {
                 ddlog("onDetele");
               },
             ),
+
             Divider(),
-
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                "SpreadArea",
-                style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
-              ),
-            ),
-
+            _buildSectionTitle("SpreadArea"),
             OutlinedButton(
                 onPressed: () {
                   ddlog("OutlinedButton");
@@ -359,8 +308,9 @@ class _SecondPageState extends State<SecondPage> {
                 child:Text("OutlinedButton")
             ),
             _buildSpreadArea(),
-            Divider(),
 
+            Divider(),
+            _buildSectionTitle("GestureDetectorContainer"),
             GestureDetectorContainer(
               // edge: EdgeInsets.all(10),
               color: Colors.orange,
@@ -374,11 +324,12 @@ class _SecondPageState extends State<SecondPage> {
                 },
               ),
             ),
-            Divider(),
 
+            Divider(),
+            _buildSectionTitle("_buildCustomPaint"),
             _buildCustomPaint(),
-            Divider(),
 
+            Divider(),
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -418,11 +369,26 @@ class _SecondPageState extends State<SecondPage> {
                 ),
               ],
             ),
+
             Divider(),
-            // _buildTimeLineIndicator(1),
+            _buildSectionTitle("buildCustome"),
+            _buildCustome(),
+
+            Divider(),
+
           ],
         ),
       ],
+    );
+  }
+
+  _buildSectionTitle(String title) {
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: Text(
+        title,
+        style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
+      ),
     );
   }
 
@@ -707,27 +673,7 @@ class _SecondPageState extends State<SecondPage> {
     );
   }
 
-  _buildTimeLineIndicator(int index) {
-    var list = <Widget>[];
-    switch (index) {
-      case 0:
-        list = [
-          Icon(Icons.add_circle),
-          _buildLine(true),
-          
-        ];
-        break;
-      case 1:
-        list = [
-          Icon(Icons.remove_circle),
-        ];
-        break;
-    }
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: list,
-    );
-  }
+
 
   Widget _buildLine(bool visible) {
     return Container(
@@ -818,4 +764,124 @@ class _SecondPageState extends State<SecondPage> {
 // ),
 // }
 
+  _buildCustome() {
+    return Column(
+      children: [
+        SizedBox(
+          height: 45,
+          width: 200,
+          child: ElevatedButton(
+            onPressed: () {},
+            style: ElevatedButton.styleFrom(
+                elevation: 10, 
+                shape: const StadiumBorder(),
+            ),
+            child: const Center(child: Text('Elevated Button')),
+          ),
+        ),
+        SizedBox(
+          height: 45,
+          width: 60,
+          child: ElevatedButton(
+            onPressed: () {},
+            style: ElevatedButton.styleFrom(
+                elevation: 10, shape: const CircleBorder()),
+            child: const Center(child: Icon(Icons.add)),
+          ),
+        ),
+
+        Divider(),
+        _buildSectionTitle("UIElevatedButton"),
+        UIElevatedButton(
+          height: 45,
+          width: 200,
+          child: Text('Elevated Button'),
+          onPressed: () {
+            print("Elevated");
+          },
+        ),
+        UIElevatedButton(
+          height: 45,
+          width: 60,
+          style: ElevatedButton.styleFrom(
+              elevation: 4,
+              shape: const CircleBorder(),
+          ),
+          child: const Center(child: Icon(Icons.add)),
+          onPressed: () {
+            print("Elevated");
+          },
+        ),
+
+        Divider(),
+        _buildSectionTitle("设置文字 3D效果"),
+        Center(
+          child: Text(
+            'Hello, world!',
+            style: TextStyle(
+              fontSize: 22,
+              color: Colors.pink,
+              fontWeight: FontWeight.w900,
+              shadows: <Shadow>[
+                const Shadow(
+                  offset: Offset(4.0, 4.0),
+                  blurRadius: 3.0,
+                  color: Color.fromARGB(99, 64, 64, 64),
+                ),
+                Shadow(
+                  offset: Offset(1.0, 1.0),
+                  blurRadius: 8.0,
+                  color: Colors.grey.shade100,
+                ),
+              ],
+            ),
+          ),
+        )
+      ],
+    );
+  }
+
+}
+
+
+/// 自定义按钮
+class UIElevatedButton extends StatelessWidget {
+
+  const UIElevatedButton({
+  	Key? key,
+    this.width,
+    this.height,
+    this.child,
+    required this.onPressed,
+    this.style,
+  }) : super(key: key);
+
+  /// If non-null, requires the child to have exactly this width.
+  final double? width;
+
+  /// If non-null, requires the child to have exactly this height.
+  final double? height;
+
+  final Widget? child;
+
+  final VoidCallback onPressed;
+
+  final ButtonStyle? style;
+
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: this.height,
+      width: this.width,
+      child: ElevatedButton(
+        onPressed: onPressed,
+        style: style ?? ElevatedButton.styleFrom(
+          elevation: 4,
+          shape: const StadiumBorder(),
+        ),
+        child: child ?? const Center(child: Text('UIElevatedButton')),
+      ),
+    );
+  }
 }
