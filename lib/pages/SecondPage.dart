@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_templet_project/APPThemeSettings.dart';
 import 'package:flutter_templet_project/extension/buildContext_extension.dart';
+import 'package:flutter_templet_project/extension/textStyle_extension.dart';
 import 'package:flutter_templet_project/pages/demo/MyPainter.dart';
 import 'package:flutter_templet_project/basicWidget/NNPopupRoute.dart';
 import 'package:flutter_templet_project/basicWidget/gesture_detector_container.dart';
@@ -819,21 +820,10 @@ class _SecondPageState extends State<SecondPage> {
           child: Text(
             'Hello, world!',
             style: TextStyle(
-              fontSize: 22,
+              fontSize: 42,
               color: Colors.pink,
               fontWeight: FontWeight.w900,
-              shadows: <Shadow>[
-                const Shadow(
-                  offset: Offset(4.0, 4.0),
-                  blurRadius: 3.0,
-                  color: Color.fromARGB(99, 64, 64, 64),
-                ),
-                Shadow(
-                  offset: Offset(1.0, 1.0),
-                  blurRadius: 8.0,
-                  color: Colors.grey.shade100,
-                ),
-              ],
+              shadows: shadow3D,
             ),
           ),
         )
