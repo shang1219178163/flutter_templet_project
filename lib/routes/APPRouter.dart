@@ -7,6 +7,7 @@ import 'package:flutter_templet_project/pages/FlutterFFiTest.dart';
 import 'package:flutter_templet_project/pages/LocalImagePage.dart';
 import 'package:flutter_templet_project/pages/demo/AutocompleteDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ColoredBoxDemo.dart';
+import 'package:flutter_templet_project/pages/demo/DismissibleDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DragAndDropDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FittedBoxDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MaterialBannerDemo.dart';
@@ -83,10 +84,10 @@ import 'package:flutter_templet_project/Pages/FourthPage.dart';
 import 'package:flutter_templet_project/Pages/SecondPage.dart';
 import 'package:flutter_templet_project/Pages/ThirdPage.dart';
 import 'package:flutter_templet_project/pages/demo/TimePickerDemo.dart';
-import 'package:flutter_templet_project/pages/demo/banner_demo.dart';
-import 'package:flutter_templet_project/pages/demo/box_demo.dart';
-import 'package:flutter_templet_project/pages/demo/border_demo.dart';
-import 'package:flutter_templet_project/pages/demo/clip_demo.dart';
+import 'package:flutter_templet_project/pages/demo/BannerDemo.dart';
+import 'package:flutter_templet_project/pages/demo/BoxDemo.dart';
+import 'package:flutter_templet_project/pages/demo/BorderDemo.dart';
+import 'package:flutter_templet_project/pages/demo/ClipDemo.dart';
 import 'package:flutter_templet_project/pages/demo/steper_connector_demo.dart';
 import 'package:flutter_templet_project/pages/demo/will_pop_scope_demo.dart';
 import 'package:flutter_templet_project/pages/system_icons_page.dart';
@@ -293,8 +294,7 @@ class APPRouter {
   static const autocompleteDemo = '/autocompleteDemo';
   static const promptBuilderDemo = '/promptBuilderDemo';
   static const rotatedBoxDemo = '/rotatedBoxDemo';
-
-
+  static const dismissibleDemo = '/dismissibleDemo';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -471,7 +471,7 @@ class AppPage {
     GetPage(name: APPRouter.autocompleteDemo, page: () => AutocompleteDemo(),),
     GetPage(name: APPRouter.promptBuilderDemo, page: () => PromptBuilderDemo(),),
     GetPage(name: APPRouter.rotatedBoxDemo, page: () => RotatedBoxDemo(),),
-
+    GetPage(name: APPRouter.dismissibleDemo, page: () => DismissibleDemo(),),
 
 
   ];

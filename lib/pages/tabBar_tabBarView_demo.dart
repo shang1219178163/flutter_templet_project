@@ -398,6 +398,7 @@ var _list = [
   Tuple2(APPRouter.materialBannerDemo, "一个 Banner", ),
   Tuple2(APPRouter.autocompleteDemo, "自动填写", ),
   Tuple2(APPRouter.rotatedBoxDemo, "rotatedBoxDemo", ),
+  Tuple2(APPRouter.dismissibleDemo, "左滑删除", ),
 
 ];
 
@@ -419,6 +420,7 @@ var _specials = [
   Tuple2(APPRouter.mergeNetworkImagesDemo, "网络图像合并", ),
   Tuple2(APPRouter.drawImageNineDemo, "图像拉伸", ),
   Tuple2(APPRouter.promptBuilderDemo, "指引模板", ),
+  Tuple2(APPRouter.bannerDemo, "bannerDemo", ),
 
 ];
 

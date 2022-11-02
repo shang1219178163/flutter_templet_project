@@ -35,14 +35,14 @@ class _DraggableScrollableSheetDemoState extends State<DraggableScrollableSheetD
           title: Text(widget.title ?? "$widget", style: TextStyle(fontSize: 15),),
         ),
         body: SizedBox.expand(
-          // child: buildDraggableScrollableSheet(context),
-          child: buildBody(context),
+          // child: buildDraggableScrollableSheet(),
 
+          child: buildBody(),
         )
     );
   }
 
-    Widget buildBody(BuildContext context) {
+    Widget buildBody() {
     return Stack(
         children: <Widget>[
           Positioned(
@@ -53,7 +53,7 @@ class _DraggableScrollableSheetDemoState extends State<DraggableScrollableSheetD
             child: Container(
               color: Color.fromARGB(100, 100, 100, 100),
               child: Image.network(
-                'https://www.kindacode.com/wp-content/uploads/2020/12/dog-png.png',
+                'https://fastly.jsdelivr.net/npm/@vant/assets/apple-1.jpeg',
                 fit: BoxFit.contain,
               ),
             ),
@@ -78,20 +78,42 @@ class _DraggableScrollableSheetDemoState extends State<DraggableScrollableSheetD
       );
     }
 
-    Widget buildDraggableScrollableSheet(BuildContext context) {
+    Widget buildDraggableScrollableSheet() {
+      return SizedBox.expand(
+          child: DraggableScrollableSheet(
+            builder: (BuildContext context, ScrollController scrollController) {
+              return Container(
+                color: Theme.of(context).primaryColor,
+                child: ListView.builder(
+                  controller: scrollController,
+                  itemCount: 25,
+                  itemBuilder: (BuildContext context, int index) {
+                    return ListTile(title: Text('Item $index'));
+                  },
+                ),
+              );
+            },
+          ),
+      );
+    }
+
+  Widget buildDraggableScrollableSheetNew() {
     return DraggableScrollableSheet(
       builder: (BuildContext context, ScrollController scrollController) {
-        return Container(
-          color: Theme.of(context).primaryColor,
-          child: ListView.builder(
-            controller: scrollController,
-            itemCount: 25,
-            itemBuilder: (BuildContext context, int index) {
-              return ListTile(title: Text('Item $index'));
-            },
+        return SingleChildScrollView(
+          controller: scrollController,
+          child: Container(
+            color: Theme.of(context).primaryColor,
+            child: ListView.builder(
+              itemCount: 25,
+              itemBuilder: (BuildContext context, int index) {
+                return ListTile(title: Text('Item $index'));
+              },
+            ),
           ),
         );
       },
     );
   }
+
 }

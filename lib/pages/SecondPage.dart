@@ -287,6 +287,9 @@ class _SecondPageState extends State<SecondPage> {
             _buildSectionTitle("DropdownButton"),
             _buildDropdownButton(),
 
+            _buildSectionTitle("_buildDropdownButton1"),
+            _buildDropdownButton1(),
+
             Divider(),
             _buildSectionTitle("UploadButton"),
             UploadButton(
@@ -632,6 +635,43 @@ class _SecondPageState extends State<SecondPage> {
     );
   }
 
+  var dropdownvalue = 'Item 1';
+
+  _buildDropdownButton1() {
+    var items = [
+      'Item 1',
+      'Item 2',
+      'Item 3',
+      'Item 4',
+      'Item 5',
+    ];
+
+    //Drop-Down
+    return Container(
+      padding: const EdgeInsets.all(5.0),
+      decoration: BoxDecoration(color: Colors.yellowAccent, border: Border.all()),
+      child: DropdownButton(
+        // Initial
+        value: dropdownvalue,
+        // Down Arrow
+        icon: const Icon(Icons.keyboard_arrow_down),
+        // Array list of
+        items: items.map((String items) {
+          return DropdownMenuItem(
+            value: items,
+            child: Text(items),
+          );
+        }).toList(),
+        // After selecting the desired option,it will
+        // change button value to selected
+        onChanged: (String? value) {
+          setState(() {
+            dropdownvalue = value!;
+          });
+        },
+      ),
+    );
+  }
 
   _buildSpreadArea({EdgeInsets padding = const EdgeInsets.symmetric(horizontal: 25)}) {
     return GestureDetector(
@@ -826,8 +866,55 @@ class _SecondPageState extends State<SecondPage> {
               shadows: shadow3D,
             ),
           ),
-        )
+        ),
+
+        Divider(),
+        _buildSectionTitle("_buildInkWell"),
+        _buildInkWell(),
+
+        Divider(),
+        _buildSectionTitle("_buildButtonBar"),
+        _buildButtonBar(),
       ],
+    );
+  }
+
+
+  int _volume = 0;
+  _buildInkWell() {
+    return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
+      return Column(
+        children: [
+          InkWell(
+            splashColor: Colors.green,
+            highlightColor: Colors.blue,
+            child: Icon(Icons.ring_volume, size: 30),
+            onTap: () {
+              setState(() {_volume += 2;});
+            },
+          ),
+          Text(_volume.toString(), style: TextStyle(fontSize: 20)),
+        ],
+      );
+    });
+  }
+
+  _buildButtonBar() {
+    return ButtonBar(
+        children: <Widget>[
+          ElevatedButton(
+            child: const Text ( 'Ok') ,
+            onPressed: () {
+              // To do
+            },
+          ),
+          ElevatedButton(
+            child: const Text ('Cancel') ,
+            onPressed: () {
+              // To do
+            },
+          ),
+        ]
     );
   }
 
