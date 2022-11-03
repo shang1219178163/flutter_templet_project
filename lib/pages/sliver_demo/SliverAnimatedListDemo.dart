@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class SliverDemo3 extends StatefulWidget {
+class SliverAnimatedListDemo extends StatefulWidget {
   @override
-  _SliverDemo3State createState() => _SliverDemo3State();
+  _SliverAnimatedListDemoState createState() => _SliverAnimatedListDemoState();
 }
 
-class _SliverDemo3State extends State<SliverDemo3> {
+class _SliverAnimatedListDemoState extends State<SliverAnimatedListDemo> {
   var _listKey = GlobalKey<SliverAnimatedListState>();
   List<int> _list = [0, 1, 2];
 

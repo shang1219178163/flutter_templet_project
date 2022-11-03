@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class SliverDemo5 extends StatelessWidget {
+class SliverFillRemainingDemo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {

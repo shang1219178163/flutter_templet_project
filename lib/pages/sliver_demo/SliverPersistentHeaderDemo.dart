@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'dart:math' as math;
 
-class SliverDemo2 extends StatelessWidget {
+import 'package:flutter_templet_project/basicWidget/SliverPersistentHeaderBuilder.dart';
+
+class SliverPersistentHeaderDemo extends StatelessWidget {
 
   final list = Colors.primaries.take(4).toList();
 
@@ -10,13 +12,15 @@ class SliverDemo2 extends StatelessWidget {
   SliverPersistentHeader makeHeader(String headerText) {
     return SliverPersistentHeader(
       pinned: true,
-      delegate: _SliverAppBarDelegate(
-        minHeight: 60.0,
-        maxHeight: 60.0,
-        child: Container(
-          color: Colors.white,
-          child: Center(
-            child: Text(headerText),
+      delegate: SliverPersistentHeaderBuilder(
+        min: 60.0,
+        max: 60.0,
+        builder: (ctx, offset) => SizedBox.expand(
+          child: Container(
+            color: Colors.white,
+            child: Center(
+              child: Text(headerText),
+            ),
           ),
         ),
       ),
@@ -53,7 +57,7 @@ class SliverDemo2 extends StatelessWidget {
                   child: Text('grid item $index'),
                 );
               },
-              childCount: 10,
+              childCount: 100,
             ),
           ),
         ],
@@ -66,11 +70,11 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   _SliverAppBarDelegate({
     required this.minHeight,
     required this.maxHeight,
-    required this.child,
+    required this.builder,
   });
   final double minHeight;
   final double maxHeight;
-  final Widget child;
+  final Widget Function(BuildContext context, double offset) builder;
 
   @override
   double get minExtent => minHeight; // 最小高度，即闭合时的高度
@@ -79,9 +83,8 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
 
   // 绘制header
   @override
-  Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return SizedBox.expand(child: child);
+  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return builder(context, shrinkOffset);
   }
 
   /// 是否需要重新绘制
@@ -89,7 +92,7 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   bool shouldRebuild(_SliverAppBarDelegate oldDelegate) {
     return maxHeight != oldDelegate.maxHeight ||
         minHeight != oldDelegate.minHeight ||
-        child != oldDelegate.child;
+        builder != oldDelegate.builder;
   }
 }
 

@@ -17,9 +17,7 @@ class _SliverDemo1State extends State<SliverDemo1> {
       appBar: AppBar(
         title: Text(widget.title,),
       ),
-      body: SafeArea(
-        child: createExample2(),
-      ),
+      body: createExample2(),
     );
   }
 

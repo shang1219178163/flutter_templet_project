@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class SliverDemo4 extends StatefulWidget {
+class SliverAppBarDemo extends StatefulWidget {
   @override
-  _SliverDemo4State createState() => _SliverDemo4State();
+  _SliverAppBarDemoState createState() => _SliverAppBarDemoState();
 }
 
-class _SliverDemo4State extends State<SliverDemo4>
+class _SliverAppBarDemoState extends State<SliverAppBarDemo>
     with SingleTickerProviderStateMixin {
 
   @override

@@ -9,7 +9,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/PersistentHeaderBuilder.dart';
+import 'package:flutter_templet_project/basicWidget/SliverPersistentHeaderBuilder.dart';
 
 class SliverPersistentHeaderDemo extends StatelessWidget {
   // 色彩数据
@@ -74,7 +74,7 @@ class SliverPersistentHeaderDemo extends StatelessWidget {
   Widget _buildPersistentHeader(String title) => SliverPersistentHeader(
       pinned: true,
       floating: true,
-      delegate: PersistentHeaderBuilder(builder: (ctx, offset) => Container(
+      delegate: SliverPersistentHeaderBuilder(builder: (ctx, offset) => Container(
         alignment: Alignment.center,
         color: Colors.orangeAccent,
         child: Text(
