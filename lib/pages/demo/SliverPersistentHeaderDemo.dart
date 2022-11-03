@@ -9,12 +9,14 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/PersistentHeaderBuilder.dart';
 
 class SliverPersistentHeaderDemo extends StatelessWidget {
   // 色彩数据
   // final List<Color> data = List.generate(24, (i) => Color(0xFFFF00FF - 24*i));
-  final List<Color> data = Colors.primaries.take(4).toList();
+  final List<Color> data = Colors.primaries.sublist(5, 10);
   final List<Color> data1 = Colors.primaries.take(1).toList();
+  final List<Color> data2 = Colors.accents.toList();
 
   @override
   Widget build(BuildContext context) {
@@ -24,11 +26,11 @@ class SliverPersistentHeaderDemo extends StatelessWidget {
       ),
       body: CustomScrollView(
         slivers: <Widget>[
+          _buildSliverList(list: data),
           _buildPersistentHeader("section0"), //<-- 在列表上方创建PersistentHeader
           _buildSliverList(list: data1),
           _buildPersistentHeader("section1"),
-          _buildSliverList(list: data),
-
+          _buildSliverList(list: data2),
         ],
       ),
     );
@@ -81,35 +83,4 @@ class SliverPersistentHeaderDemo extends StatelessWidget {
         ),
       )));
 
-}
-
-
-class PersistentHeaderBuilder extends SliverPersistentHeaderDelegate {
-  final double max;
-  final double min;
-  final Widget Function(BuildContext context, double offset) builder;
-
-  PersistentHeaderBuilder({
-    this.max = 120,
-    this.min = 80,
-    required this.builder})
-      : assert(max >= min);
-
-  @override
-  Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return builder(context, shrinkOffset);
-  }
-
-  @override
-  double get maxExtent => max;
-
-  @override
-  double get minExtent => min;
-
-  @override
-  bool shouldRebuild(covariant PersistentHeaderBuilder oldDelegate) =>
-      max != oldDelegate.max ||
-          min != oldDelegate.min ||
-          builder != oldDelegate.builder;
 }

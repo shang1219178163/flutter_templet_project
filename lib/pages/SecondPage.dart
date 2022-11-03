@@ -258,7 +258,7 @@ class _SecondPageState extends State<SecondPage> {
 
             Divider(),
             _buildSectionTitle("ToggleButtons"),
-            buildToggleButtons(context),
+            buildToggleButtons(),
 
             Divider(),
             _buildSectionTitle("FloatingActionButton"),
@@ -557,7 +557,7 @@ class _SecondPageState extends State<SecondPage> {
 
       Tuple2(
         "ToggleButtons",
-        buildToggleButtons(context),
+        buildToggleButtons(),
       ),
 
       Tuple2(
@@ -595,7 +595,7 @@ class _SecondPageState extends State<SecondPage> {
 
   List<bool> _selecteds = [false, false, true];
 
-  buildToggleButtons(BuildContext context) {
+  buildToggleButtons() {
     return ToggleButtons(
       isSelected: _selecteds,
       children: <Widget>[

@@ -25,7 +25,7 @@ class _SliverDemo1State extends State<SliverDemo1> {
 
   /// SliverGridDelegateWithMaxCrossAxisExtent
   Widget createExample3() {
-    print(MediaQuery.of(context).size.width.toString());
+    // print(MediaQuery.of(context).size.width.toString());
     return CustomScrollView(
       slivers: <Widget>[
         SliverToBoxAdapter(
@@ -93,7 +93,9 @@ class _SliverDemo1State extends State<SliverDemo1> {
               height: 50,
               color: Colors.primaries[index],
             );
-          }, childCount: Colors.primaries.length),
+          },
+              childCount: Colors.primaries.length
+          ),
         ),
         SliverToBoxAdapter(
           child: Container(
