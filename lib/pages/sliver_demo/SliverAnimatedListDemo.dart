@@ -9,37 +9,6 @@ class _SliverAnimatedListDemoState extends State<SliverAnimatedListDemo> {
   var _listKey = GlobalKey<SliverAnimatedListState>();
   List<int> _list = [0, 1, 2];
 
-  // 创建item
-  Widget _buildItem(BuildContext context, int index, Animation<double> animation) {
-    return SizeTransition(
-      sizeFactor: animation,
-      child: Card(
-        child: ListTile(
-          title: Text('Item $index',),
-        ),
-      ),
-    );
-  }
-
-  // 新增item
-  void _insert() {
-    final int _index = _list.length;
-    _list.insert(_index, _index);
-    _listKey.currentState!.insertItem(_index);
-  }
-
-  // 移除最后一个item
-  void _remove() {
-    if (_list.length == 0) {
-      return;
-    }
-    final int _index = _list.length - 1;
-    var item = _list[_index];
-    _listKey.currentState!.removeItem(_index,
-        (context, animation) => _buildItem(context, item, animation));
-    _list.removeAt(_index);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,4 +40,36 @@ class _SliverAnimatedListDemoState extends State<SliverAnimatedListDemo> {
         ),
       );
   }
+
+  // 创建item
+  Widget _buildItem(BuildContext context, int index, Animation<double> animation) {
+    return SizeTransition(
+      sizeFactor: animation,
+      child: Card(
+        child: ListTile(
+          title: Text('Item $index',),
+        ),
+      ),
+    );
+  }
+
+  // 新增item
+  _insert() {
+    final int _index = _list.length;
+    _list.insert(_index, _index);
+    _listKey.currentState!.insertItem(_index);
+  }
+
+  // 移除最后一个item
+  _remove() {
+    if (_list.length == 0) {
+      return;
+    }
+    final int _index = _list.length - 1;
+    var item = _list[_index];
+    _listKey.currentState!.removeItem(_index,
+            (context, animation) => _buildItem(context, item, animation));
+    _list.removeAt(_index);
+  }
+
 }

@@ -123,7 +123,7 @@ import 'package:flutter_templet_project/pages/ForgetPasswordPage.dart';
 import 'package:flutter_templet_project/pages/LoginPage.dart';
 import 'package:flutter_templet_project/pages/LoginPage2.dart';
 import 'package:flutter_templet_project/pages/SigninPage.dart';
-import 'package:flutter_templet_project/pages/sliver_demo/sliver_family_demo.dart';
+import 'package:flutter_templet_project/pages/sliver_demo/SliverFamilyDemo.dart';
 
 import 'package:flutter_templet_project/pages/demo/FutureBuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/StreamBuilderDemo.dart';

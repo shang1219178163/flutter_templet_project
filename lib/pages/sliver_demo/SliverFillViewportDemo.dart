@@ -5,24 +5,29 @@ class SliverFillViewportDemo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'SliverFillViewport'
-        ),
+        title: Text('SliverFillViewport'),
       ),
-      body: CustomScrollView(
-        slivers: <Widget>[
-          SliverFillViewport(
-            delegate: SliverChildBuilderDelegate(
-              (context, index) {
-                return Container(
-                  color: Colors.primaries[index % Colors.primaries.length],
-                );
-              }
-            ),
-            viewportFraction: 1.0,
+      body: _buildBody(),
+    );
+  }
+
+  _buildBody() {
+    List<Color> colors = Colors.primaries.sublist(6, 10);
+
+    return CustomScrollView(
+      slivers: <Widget>[
+        SliverFillViewport(
+          delegate: SliverChildBuilderDelegate((context, index) {
+              return Container(
+                color: colors[index],
+                child: Text('$index'),
+              );
+            },
+              childCount: colors.length,
           ),
-        ],
-      ),
+          viewportFraction: 1.0,
+        ),
+      ],
     );
   }
 }

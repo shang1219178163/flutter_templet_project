@@ -10,7 +10,6 @@ class _SliverAppBarDemoState extends State<SliverAppBarDemo>
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       body: createExample2(),
     );
