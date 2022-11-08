@@ -191,7 +191,7 @@ class _TestPageState extends State<TestPage> {
           return Colors.black87; // Defer to the widget's default.
         }),
       ),
-      child: Text('Change My Color',style: TextStyle(fontSize: 30),
+      child: Text('Change My Color', style: TextStyle(fontSize: 30),
       ),
     );
   }
