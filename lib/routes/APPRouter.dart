@@ -26,6 +26,7 @@ import 'package:flutter_templet_project/pages/demo/TransformDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ValueListenableBuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/drawImageNineDemo.dart';
 import 'package:flutter_templet_project/pages/demo/flutter_smart_dialog_demo.dart';
+import 'package:flutter_templet_project/pages/demo/isolateDemo.dart';
 import 'package:flutter_templet_project/pages/demo/merge_images_demo.dart';
 import 'package:flutter_templet_project/pages/demo/merge_network_images_demo.dart';
 import 'package:flutter_templet_project/pages/system_color_page.dart';
@@ -297,6 +298,7 @@ class APPRouter {
   static const rotatedBoxDemo = '/rotatedBoxDemo';
   static const dismissibleDemo = '/dismissibleDemo';
   static const modalBarrierDemo = '/modalBarrierDemo';
+  static const isolateDemo = '/isolateDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -476,6 +478,8 @@ class AppPage {
     GetPage(name: APPRouter.rotatedBoxDemo, page: () => RotatedBoxDemo(),),
     GetPage(name: APPRouter.dismissibleDemo, page: () => DismissibleDemo(),),
     GetPage(name: APPRouter.modalBarrierDemo, page: () => ModalBarrierDemo(),),
+    GetPage(name: APPRouter.isolateDemo, page: () => IsolateDemo(),),
+
 
   ];
 }
