@@ -10,6 +10,7 @@ import 'package:flutter_templet_project/pages/demo/ColoredBoxDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DismissibleDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DragAndDropDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FittedBoxDemo.dart';
+import 'package:flutter_templet_project/pages/demo/ListViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MaterialBannerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ModalBarrierDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NavigationToolbarDemo.dart';
@@ -299,6 +300,7 @@ class APPRouter {
   static const dismissibleDemo = '/dismissibleDemo';
   static const modalBarrierDemo = '/modalBarrierDemo';
   static const isolateDemo = '/isolateDemo';
+  static const listViewDemo = '/listViewDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -479,6 +481,7 @@ class AppPage {
     GetPage(name: APPRouter.dismissibleDemo, page: () => DismissibleDemo(),),
     GetPage(name: APPRouter.modalBarrierDemo, page: () => ModalBarrierDemo(),),
     GetPage(name: APPRouter.isolateDemo, page: () => IsolateDemo(),),
+    GetPage(name: APPRouter.listViewDemo, page: () => ListViewDemo(),),
 
 
   ];

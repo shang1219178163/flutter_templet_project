@@ -401,6 +401,7 @@ var _list = [
   Tuple2(APPRouter.dismissibleDemo, "左滑删除", ),
   Tuple2(APPRouter.modalBarrierDemo, "静态蒙版", ),
   Tuple2(APPRouter.bannerDemo, "角落价格标签", ),
+  Tuple2(APPRouter.listViewDemo, "listView", ),
 
 ];
 
