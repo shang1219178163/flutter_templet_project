@@ -1,3 +1,5 @@
+import 'dart:core';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -73,6 +75,14 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
 
   Object? sex = 1;
 
+  Map<String, Widget> map = {
+    'topCenter': Text("topCenter"),
+    'Center': Text("Center"),
+    'bottomCenter': Text("bottomCenter"),
+  };
+
+  var alignment = Alignment.center;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -96,6 +106,19 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
                   color: Colors.white,
                 ))
           ],
+          bottom: PreferredSize(
+            preferredSize: Size.fromHeight(45),
+            child: CupertinoSegmentedControl(
+              unselectedColor: Colors.blue,
+              selectedColor: Colors.white,
+              borderColor: Colors.transparent,
+              pressedColor: Colors.green,
+              onValueChanged: (Object value) {
+                print('onValueChanged:$value');
+              },
+              children: map,
+            ),
+          ),
         ),
         body: Flow(
           delegate: TestFlowDelegate(
@@ -480,10 +503,9 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
         {
           Size screenSize = MediaQuery.of(context).size;
           Size size = Size(screenSize.width - 30, 300);
-          Navigator.push(
-            context,
+          Navigator.push(context,
             NNPopupRoute(
-              alignment: Alignment.bottomCenter,
+              alignment: alignment,
               onClick: () {
                 ddlog("exit");
                 //点击空白处
@@ -509,10 +531,9 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
           // final list = [null, "aaa"];
           // ddlog(list);
 
-          Navigator.push(
-            context,
+          Navigator.push(context,
             NNPopupRoute(
-              alignment: Alignment.bottomCenter,
+              alignment: alignment,
               onClick: () {
                 ddlog("exit");
                 //点击空白处
@@ -560,7 +581,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
           Navigator.push(
             context,
             NNPopupRoute(
-              alignment: Alignment.topCenter,
+              alignment: alignment,
               onClick: () {
                 ddlog("exit");
                 //点击空白处
@@ -578,58 +599,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
         break;
       case 17:
         {
-          var linkMap = {
-            '《用户协议》': 'https://flutter.dev',
-            '《隐私政策》': 'https://flutter.dev',
-          };
-
-          String text = """
-亲爱的xxxx用户，感谢您信任并使用xxxxAPP！
-xxxx十分重视用户权利及隐私政策并严格按照相关法律法规的要求，对《用户协议》和《隐私政策》进行了更新,特向您说明如下：
-1.为向您提供更优质的服务，我们会收集、使用必要的信息，并会采取业界先进的安全措施保护您的信息安全；
-2.基于您的明示授权，我们可能会获取设备号信息、包括：设备型号、操作系统版本、设备设置、设备标识符、MAC（媒体访问控制）地址、IMEI（移动设备国际身份码）、广告标识符（“IDFA”与“IDFV”）、集成电路卡识别码（“ICCD”）、软件安装列表。我们将使用三方产品（友盟、极光等）统计使用我们产品的设备数量并进行设备机型数据分析与设备适配性分析。（以保障您的账号与交易安全），且您有权拒绝或取消授权；
-3.您可灵活设置伴伴账号的功能内容和互动权限，您可在《隐私政策》中了解到权限的详细应用说明；
-4.未经您同意，我们不会从第三方获取、共享或向其提供您的信息；
-5.您可以查询、更正、删除您的个人信息，我们也提供账户注销的渠道。
-请您仔细阅读并充分理解相关条款，其中重点条款已为您黑体加粗标识，方便您了解自己的权利。如您点击“同意”，即表示您已仔细阅读并同意本《用户协议》及《隐私政策》，将尽全力保障您的合法权益并继续为您提供优质的产品和服务。如您点击“不同意”，将可能导致您无法继续使用我们的产品和服务。
-""";
-          final textRich = Text.rich(
-            TextSpan(
-                text: '登录即代表同意并阅读，',
-                // style: TextStyle(fontSize: 14),
-                // children: AttributedString(
-                //     context: context,
-                //     text: text,
-                //     linkMap: protocolMap,
-                //     onTap: (key, value){
-                //       ddlog(key);
-                //       ddlog(value);
-                //     }
-                // ).textSpans,
-                children: RichTextExt.createTextSpans(context,
-                    text: text, linkMap: linkMap, onTap: (key, value) {
-                  ddlog(key);
-                  ddlog(value);
-                })),
-          );
-
-          showGeneralDialog(
-              context: context,
-              pageBuilder: (BuildContext context, Animation<double> animation,
-                  Animation<double> secondaryAnimation) {
-                return NNUserPrivacy(
-                  title: Text('用户隐私及协议', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
-                  content: textRich,
-                  onCancel: () {
-                    ddlog("Cancel");
-                    Navigator.of(context).pop();
-                  },
-                  onConfirm: () {
-                    ddlog("Confirm");
-                    Navigator.of(context).pop();
-                  },
-                );
-              });
+          showUserPrivacy();
         }
         break;
       case 18:
@@ -675,15 +645,13 @@ xxxx十分重视用户权利及隐私政策并严格按照相关法律法规的�
     AlertDialog(
       title: Text(title),
       content: Text(message).textAlignment(TextAlign.start),
-      actions: ["取消", "确定"]
-          .map((e) => TextButton(
-                onPressed: () {
-                  ddlog(e);
-                  Navigator.pop(context);
-                },
-                child: Text(e),
-              ))
-          .toList(),
+      actions: ["取消", "确定"].map((e) => TextButton(
+        onPressed: () {
+          ddlog(e);
+          Navigator.pop(context);
+        },
+        child: Text(e),
+      )).toList(),
     ).toShowCupertinoDialog(context: context);
     // .toShowDialog(context: context)
     ;
@@ -861,6 +829,61 @@ xxxx十分重视用户权利及隐私政策并严格按照相关法律法规的�
               .toList(),
         ),
         body: WebView(initialUrl: initialUrl));
+  }
+
+  showUserPrivacy() {
+    var linkMap = {
+      '《用户协议》': 'https://flutter.dev',
+      '《隐私政策》': 'https://flutter.dev',
+    };
+
+    String text = """
+亲爱的xxxx用户，感谢您信任并使用xxxxAPP！
+xxxx十分重视用户权利及隐私政策并严格按照相关法律法规的要求，对《用户协议》和《隐私政策》进行了更新,特向您说明如下：
+1.为向您提供更优质的服务，我们会收集、使用必要的信息，并会采取业界先进的安全措施保护您的信息安全；
+2.基于您的明示授权，我们可能会获取设备号信息、包括：设备型号、操作系统版本、设备设置、设备标识符、MAC（媒体访问控制）地址、IMEI（移动设备国际身份码）、广告标识符（“IDFA”与“IDFV”）、集成电路卡识别码（“ICCD”）、软件安装列表。我们将使用三方产品（友盟、极光等）统计使用我们产品的设备数量并进行设备机型数据分析与设备适配性分析。（以保障您的账号与交易安全），且您有权拒绝或取消授权；
+3.您可灵活设置伴伴账号的功能内容和互动权限，您可在《隐私政策》中了解到权限的详细应用说明；
+4.未经您同意，我们不会从第三方获取、共享或向其提供您的信息；
+5.您可以查询、更正、删除您的个人信息，我们也提供账户注销的渠道。
+请您仔细阅读并充分理解相关条款，其中重点条款已为您黑体加粗标识，方便您了解自己的权利。如您点击“同意”，即表示您已仔细阅读并同意本《用户协议》及《隐私政策》，将尽全力保障您的合法权益并继续为您提供优质的产品和服务。如您点击“不同意”，将可能导致您无法继续使用我们的产品和服务。
+""";
+    final textRich = Text.rich(
+      TextSpan(
+          text: '登录即代表同意并阅读，',
+          // style: TextStyle(fontSize: 14),
+          // children: AttributedString(
+          //     context: context,
+          //     text: text,
+          //     linkMap: protocolMap,
+          //     onTap: (key, value){
+          //       ddlog(key);
+          //       ddlog(value);
+          //     }
+          // ).textSpans,
+          children: RichTextExt.createTextSpans(context,
+              text: text, linkMap: linkMap, onTap: (key, value) {
+                ddlog(key);
+                ddlog(value);
+              })),
+    );
+
+    showGeneralDialog(
+        context: context,
+        pageBuilder: (BuildContext context, Animation<double> animation,
+            Animation<double> secondaryAnimation) {
+          return NNUserPrivacy(
+            title: Text('用户隐私及协议', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+            content: textRich,
+            onCancel: () {
+              ddlog("Cancel");
+              Navigator.of(context).pop();
+            },
+            onConfirm: () {
+              ddlog("Confirm");
+              Navigator.of(context).pop();
+            },
+          );
+        });
   }
 }
 

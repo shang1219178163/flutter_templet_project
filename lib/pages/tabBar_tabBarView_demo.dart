@@ -402,6 +402,7 @@ var _list = [
   Tuple2(APPRouter.modalBarrierDemo, "静态蒙版", ),
   Tuple2(APPRouter.bannerDemo, "角落价格标签", ),
   Tuple2(APPRouter.listViewDemo, "listView", ),
+  Tuple2(APPRouter.builderDemo, "各种回调 builder", ),
 
 ];
 
@@ -423,8 +424,9 @@ var _specials = [
   Tuple2(APPRouter.mergeNetworkImagesDemo, "网络图像合并", ),
   Tuple2(APPRouter.drawImageNineDemo, "图像拉伸", ),
   Tuple2(APPRouter.promptBuilderDemo, "指引模板", ),
-
   Tuple2(APPRouter.isolateDemo, "isolateDemo", ),
+  Tuple2(APPRouter.overlayDemo, "overlay弹窗", ),
+
 ];
 
 var _animateds = [
