@@ -329,7 +329,7 @@ packages:
       name: flutter_smart_dialog
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.2.0+9"
+    version: "4.2.1"
   flutter_staggered_grid_view:
     dependency: "direct main"
     description:
@@ -402,7 +402,7 @@ packages:
       name: glob
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.0"
+    version: "2.1.1"
   graphs:
     dependency: transitive
     description:
@@ -710,7 +710,7 @@ packages:
       name: rxdart
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.27.5"
+    version: "0.27.6"
   scribble:
     dependency: "direct main"
     description:
