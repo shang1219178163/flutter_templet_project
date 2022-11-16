@@ -213,6 +213,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
             title: Text("ChioceList 单选"),
             content: ChioceList(
               // isMutiple: true,
+              backgroudColor: Colors.black.withAlpha(10),
               children: list,
               indexs: [0],
               canScroll: false,
@@ -248,6 +249,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
           CupertinoAlertDialog(
             title: Text("ChioceList 多选"),
             content: ChioceList(
+              backgroudColor: Colors.black.withAlpha(10),
               isMutiple: true,
               children: list,
               indexs: [0],

@@ -53,10 +53,9 @@ class _ChioceListState extends State<ChioceList> {
             final e = widget.children[index];
             return Container(
               decoration: BoxDecoration(
-                color: Colors.black.withOpacity(0.14),
+                color: widget.backgroudColor,
                 border: Border.all(color: Colors.transparent),
               ),
-              // color: Colors.black.withOpacity(0.14),
               child: ListTile(
                 // tileColor: Colors.white,
                 title: e.title,

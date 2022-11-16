@@ -10,6 +10,7 @@ import 'package:flutter_templet_project/basicWidget/chioce_list.dart';
 import 'package:flutter_templet_project/basicWidget/chioce_wrap.dart';
 import 'package:flutter_templet_project/extension/actionSheet_extension.dart';
 import 'package:flutter_templet_project/extension/widget_extension.dart';
+import 'package:tuple/tuple.dart';
 import 'ShowSearchDemo.dart';
 
 
@@ -47,7 +48,7 @@ class _AlertSheetDemoState extends State<AlertSheetDemo> {
   Wrap buildWrap(BuildContext context) {
     return Wrap(
       spacing: 8.0, // 主轴(水平)方向间距
-      runSpacing: -8.0, // 纵轴（垂直）方向间距
+      runSpacing: 8.0, // 纵轴（垂直）方向间距
       alignment: WrapAlignment.start, //沿主轴方向居中
         children: titles.map((e) => ActionChip(
           avatar: CircleAvatar(backgroundColor: Theme.of(context).primaryColor,
@@ -160,10 +161,7 @@ class _AlertSheetDemoState extends State<AlertSheetDemo> {
           Navigator.pop(context);
         },
       ),
-    )
-        .toShowCupertinoModalPopup(context: context)
-
-    ;
+    ).toShowCupertinoModalPopup(context: context);
   }
 
   void showAlertSheetListTile() {
