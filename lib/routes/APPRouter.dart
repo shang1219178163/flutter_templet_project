@@ -6,6 +6,7 @@ import 'package:flutter_templet_project/basicWidget/responsive_column.dart';
 import 'package:flutter_templet_project/pages/FlutterFFiTest.dart';
 import 'package:flutter_templet_project/pages/LocalImagePage.dart';
 import 'package:flutter_templet_project/pages/demo/AutocompleteDemo.dart';
+import 'package:flutter_templet_project/pages/demo/BuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ColoredBoxDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DismissibleDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DragAndDropDemo.dart';
@@ -15,6 +16,7 @@ import 'package:flutter_templet_project/pages/demo/MaterialBannerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ModalBarrierDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NavigationToolbarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/OverflowBarDemo.dart';
+import 'package:flutter_templet_project/pages/demo/OverlayDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PositionedDirectionalDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PromptBuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/RatingBarDemo.dart';
@@ -301,6 +303,8 @@ class APPRouter {
   static const modalBarrierDemo = '/modalBarrierDemo';
   static const isolateDemo = '/isolateDemo';
   static const listViewDemo = '/listViewDemo';
+  static const builderDemo = '/builderDemo';
+  static const overlayDemo = '/overlayDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -482,6 +486,8 @@ class AppPage {
     GetPage(name: APPRouter.modalBarrierDemo, page: () => ModalBarrierDemo(),),
     GetPage(name: APPRouter.isolateDemo, page: () => IsolateDemo(),),
     GetPage(name: APPRouter.listViewDemo, page: () => ListViewDemo(),),
+    GetPage(name: APPRouter.builderDemo, page: () => BuilderDemo(),),
+    GetPage(name: APPRouter.overlayDemo, page: () => OverlayDemo(),),
 
 
   ];
