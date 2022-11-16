@@ -104,7 +104,8 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
                 child: Icon(
                   Icons.extension,
                   color: Colors.white,
-                ))
+                )
+            )
           ],
           bottom: PreferredSize(
             preferredSize: Size.fromHeight(45),
@@ -153,18 +154,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
               valueColor: AlwaysStoppedAnimation(Colors.blue),
               value: .5,
             ).padding(top: 15),
-            actions: ["确定",].map((e) => TextButton(
-              onPressed: () {
-                // if (["Cancel", "取消"].contains(e)) {
-                //   Navigator.pop(context);
-                // }
-                ddlog(e);
-
-                Navigator.pop(context);
-              },
-              child: Text(e),
-            ))
-            .toList(),
+            actions: ["确定",].map((e) => _buildButton(e, () => Navigator.pop(context),)).toList(),
           ).toShowCupertinoDialog(context: context);
           // .toShowDialog(context);
         }
@@ -174,23 +164,15 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
         {
           CupertinoAlertDialog(
             title: Text(title),
-            content: CircularProgressIndicator(
-              backgroundColor: Colors.grey[200],
-              valueColor: AlwaysStoppedAnimation(Colors.blue),
-              value: .7,
-            ).padding(top: 15),
-            actions: ["确定",].map((e) => TextButton(
-              onPressed: () {
-                // if (["Cancel", "取消"].contains(e)) {
-                //   Navigator.pop(context);
-                // }
-                ddlog(e);
-
-                Navigator.pop(context);
-              },
-              child: Text(e),
-            ))
-            .toList(),
+            content: Padding(
+              padding: const EdgeInsets.all(15),
+              child: CircularProgressIndicator(
+                backgroundColor: Colors.grey[200],
+                valueColor: AlwaysStoppedAnimation(Colors.blue),
+                value: .7,
+              ),
+            ),
+            actions: ["确定1",].map((e) => _buildButton(e, () => Navigator.pop(context),)).toList(),
           ).toShowCupertinoDialog(context: context);
           // .toShowDialog(context);
         }
@@ -201,18 +183,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
           CupertinoAlertDialog(
             title: Text(title),
             content: buildWrap(context),
-            actions: ["确定",].map((e) => TextButton(
-              onPressed: () {
-                // if (["Cancel", "取消"].contains(e)) {
-                //   Navigator.pop(context);
-                // }
-                ddlog(e);
-
-                Navigator.pop(context);
-              },
-              child: Text(e),
-            ))
-            .toList(),
+            actions: ["确定",].map((e) => _buildButton(e, () => Navigator.pop(context),)).toList(),
           ).toShowCupertinoDialog(context: context);
           // .toShowDialog(context);
         }
@@ -249,18 +220,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
                 ddlog([indexs.runtimeType, indexs]);
               },
             ),
-            actions: ["确定",].map((e) => TextButton(
-              onPressed: () {
-                // if (["Cancel", "取消"].contains(e)) {
-                //   Navigator.pop(context);
-                // }
-                ddlog(e);
-
-                Navigator.pop(context);
-              },
-              child: Text(e),
-            ))
-                .toList(),
+            actions: ["确定",].map((e) => _buildButton(e, () => Navigator.pop(context),)).toList(),
           ).toShowCupertinoDialog(context: context);
         }
         break;
@@ -296,14 +256,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
                 ddlog([indexs.runtimeType, indexs]);
               },
             ),
-            actions: ["确定",].map((e) => TextButton(
-              onPressed: () {
-                ddlog(e);
-                Navigator.pop(context);
-              },
-              child: Text(e),
-            ))
-                .toList(),
+            actions: ["确定",].map((e) => _buildButton(e, () => Navigator.pop(context),)).toList(),
           ).toShowDialog(context: context);
           // .toShowDialog(context);
         }
@@ -320,18 +273,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
                 ddlog(indexs);
               },
             ),
-            actions: ["确定",].map((e) => TextButton(
-              onPressed: () {
-                // if (["Cancel", "取消"].contains(e)) {
-                //   Navigator.pop(context);
-                // }
-                ddlog(e);
-
-                Navigator.pop(context);
-              },
-              child: Text(e),
-            ))
-                .toList(),
+            actions: ["确定",].map((e) => _buildButton(e, () => Navigator.pop(context),)).toList(),
           ).toShowCupertinoDialog(context: context);
         }
         break;
@@ -348,18 +290,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
                 ddlog(indexs);
               },
             ),
-            actions: ["确定",].map((e) => TextButton(
-              onPressed: () {
-                // if (["Cancel", "取消"].contains(e)) {
-                //   Navigator.pop(context);
-                // }
-                ddlog(e);
-
-                Navigator.pop(context);
-              },
-              child: Text(e),
-            ))
-            .toList(),
+            actions: ["确定",].map((e) => _buildButton(e, () => Navigator.pop(context),)).toList(),
           ).toShowCupertinoDialog(context: context);
           // .toShowDialog(context);
         }
@@ -372,18 +303,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
             content: RadioTileSexWidget(
               selectedIndex: 0,
             ),
-            actions: ["确定",].map((e) => TextButton(
-              onPressed: () {
-                // if (["Cancel", "取消"].contains(e)) {
-                //   Navigator.pop(context);
-                // }
-                ddlog(e);
-
-                Navigator.pop(context);
-              },
-              child: Text(e),
-            ))
-            .toList(),
+            actions: ["确定",].map((e) => _buildButton(e, () => Navigator.pop(context),)).toList(),
           ).toShowCupertinoDialog(context: context);
           // .toShowDialog(context);
         }
@@ -623,22 +543,38 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
     }
   }
 
+  Widget _buildButton(String title, VoidCallback onPressed) {
+    return TextButton(
+      onPressed: onPressed,
+      child: Container(
+        height: 45,
+        child: Center(child: Text(title)),
+      ),
+    );
+    return GestureDetector(
+      onTap: onPressed,
+      child: Container(
+        padding: EdgeInsets.only(top: 10, bottom: 10),
+        child: Center(
+          child: Text(title,
+            style: TextStyle(
+              decoration: TextDecoration.none,
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+              color: Colors.black87,
+            )),
+        ),
+      ),
+    );
+  }
+
   void showCupertinoAlertDialog() {
     CupertinoAlertDialog(
       title: Text(title),
-      content: Text(message).textAlignment(TextAlign.start),
-      actions: ["取消", "确定"]
-          .map((e) => TextButton(
-                onPressed: () {
-                  ddlog(e);
-                  Navigator.pop(context);
-                },
-                child: Text(e),
-              ))
-          .toList(),
+      content: Text(message, textAlign: TextAlign.start),
+      actions: ["取消", "确定"].map((e) => _buildButton(e, () => Navigator.pop(context),)).toList(),
     ).toShowCupertinoDialog(context: context);
-    // .toShowDialog(context)
-    ;
+    // .toShowDialog(context);
   }
 
   void showAlertDialog() {
@@ -653,8 +589,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
         child: Text(e),
       )).toList(),
     ).toShowCupertinoDialog(context: context);
-    // .toShowDialog(context: context)
-    ;
+    // .toShowDialog(context: context);
   }
 
   Wrap buildWrap(BuildContext context) {
