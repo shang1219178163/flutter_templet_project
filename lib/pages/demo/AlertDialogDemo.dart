@@ -618,13 +618,13 @@ xxxx十分重视用户权利及隐私政策并严格按照相关法律法规的�
               pageBuilder: (BuildContext context, Animation<double> animation,
                   Animation<double> secondaryAnimation) {
                 return NNUserPrivacy(
-                  title: "用户隐私及协议",
+                  title: Text('用户隐私及协议', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
                   content: textRich,
-                  onClickCancel: () {
+                  onCancel: () {
                     ddlog("Cancel");
                     Navigator.of(context).pop();
                   },
-                  onClickConfirm: () {
+                  onConfirm: () {
                     ddlog("Confirm");
                     Navigator.of(context).pop();
                   },
@@ -639,10 +639,9 @@ xxxx十分重视用户权利及隐私政策并严格按照相关法律法规的�
               pageBuilder: (BuildContext context, Animation<double> animation,
                   Animation<double> secondaryAnimation) {
                 return Center(
-
+                  child: Text('showGeneralDialog'),
                 );
               });
-
         }
         break;
       case 19:

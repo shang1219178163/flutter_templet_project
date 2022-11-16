@@ -11,19 +11,30 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/NNWebView.dart';
 
 class NNUserPrivacy extends StatefulWidget {
-  final String? title;
-  final Text? content;
-  final Function onClickCancel;
-  final Function onClickConfirm;
 
   NNUserPrivacy(
       {Key? key,
       this.title,
       this.content,
-      required this.onClickCancel,
-      required this.onClickConfirm})
-      : assert(title != null || content != null),
+      required this.onCancel,
+      required this.onConfirm,
+      this.radius = 8,
+      this.cancellBuilder,
+      this.confirmBuilder,
+      this.bottomBuilder,
+      }) : assert(title != null || content != null),
         super(key: key);
+
+  final Text? title;
+  final Text? content;
+  final VoidCallback onCancel;
+  final VoidCallback onConfirm;
+
+  final double radius;
+
+  final WidgetBuilder? cancellBuilder;
+  final WidgetBuilder? confirmBuilder;
+  final WidgetBuilder? bottomBuilder;
 
   @override
   _NNUserPrivacyState createState() => _NNUserPrivacyState();
@@ -56,30 +67,30 @@ class _NNUserPrivacyState extends State<NNUserPrivacy> {
 
   @override
   Widget build(BuildContext context) {
-    // dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     final screenSize = MediaQuery.of(context).size;
 
     return Center(
       child: Material(
+        color: Colors.red,
+        borderRadius: BorderRadius.circular(widget.radius),
         child: Container(
-          color: Colors.white,
+          decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(widget.radius),
+          ),
           width: screenSize.width * .8,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               if (widget.title != null)
                 Container(
-                  padding:
-                      EdgeInsets.only(top: 12, left: 12, bottom: 8, right: 12),
-                  child: Text(
-                    widget.title!,
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
+                  height: 45,
+                  padding: EdgeInsets.only(top: 12, left: 12, bottom: 8, right: 12),
+                  child: widget.title,
                 ),
               if (widget.content != null)
                 Container(
-                  padding: EdgeInsets.only(left: 12, bottom: 8, right: 12),
+                  padding: EdgeInsets.only(left: 16, bottom: 8, right: 16),
                   height: screenSize.height * .5,
                   child: CupertinoScrollbar(
                     controller: _scrollController,
@@ -92,46 +103,59 @@ class _NNUserPrivacyState extends State<NNUserPrivacy> {
               Divider(
                 height: 1,
               ),
-              Container(
-                height: 45,
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: GestureDetector(
-                        onTap: () {
-                          widget.onClickCancel();
-                        },
-                        child: Container(
-                          alignment: Alignment.center, child: Text('不同意')
-                        ),
-                      ),
-                    ),
-                    VerticalDivider(
-                      width: 1,
-                    ),
-                    Expanded(
-                      child: GestureDetector(
-                        onTap: !isScrollBottom
-                            ? null
-                            : () {
-                          widget.onClickConfirm();
-                        },
-                        child: Container(
-                          alignment: Alignment.center,
-                          color: !isScrollBottom
-                              ? Colors.grey
-                              : Theme.of(context).primaryColor,
-                          child: Text('同意',),
-                        ),
-                      )
-                    ),
-                  ],
-                ),
-              ),
+              widget.bottomBuilder ?? _buildButtonBar(),
             ],
           ),
         ),
       ),
     );
+  }
+
+  _buildButtonBar() {
+    return Container(
+      height: 45,
+      child: Row(
+        children: [
+          Expanded(
+            child: GestureDetector(
+              onTap: widget.onCancel,
+              child: Container(
+                color: Colors.transparent,
+                  alignment: Alignment.center,
+                  child: widget.cancellBuilder != null ? widget.cancellBuilder?.call(context) : Text('不同意',
+                    style: TextStyle(fontWeight: FontWeight.w500, color: Colors.black87),
+                  ),
+              ),
+            ),
+          ),
+          VerticalDivider(
+            width: 1,
+          ),
+          Expanded(
+              child: GestureDetector(
+                onTap: !isScrollBottom ? null : widget.onConfirm,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: _getConfirmBtnBgColor(),
+                    borderRadius: BorderRadius.only(bottomRight: Radius.circular(widget.radius)),
+                  ),
+                  alignment: Alignment.center,
+                  child: widget.confirmBuilder != null ? widget.confirmBuilder?.call(context) : Text('同意',
+                    style: TextStyle(fontWeight: FontWeight.w500, color: _getConfirmBtnTextColor()),
+                  ),
+                ),
+              )
+          ),
+        ],
+      ),
+    );
+  }
+
+  Color _getConfirmBtnBgColor() {
+    return !isScrollBottom ? Colors.grey : Theme.of(context).primaryColor;
+  }
+
+  Color _getConfirmBtnTextColor() {
+    return !isScrollBottom ? Colors.black87 : Colors.white;
   }
 }
