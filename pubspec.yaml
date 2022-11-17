@@ -115,9 +115,9 @@ dependencies:
   scribble: ^0.9.1
   aesthetic_dialogs: ^0.0.15
   shimmer_animation: ^2.1.0+1
-  flutter_smart_dialog: ^4.2.1
   image_gallery_saver: ^1.7.1
 
+  flutter_smart_dialog: ^4.2.1
   flutter_rating_bar: ^4.0.1
   desktop_drop: ^0.3.3
 
