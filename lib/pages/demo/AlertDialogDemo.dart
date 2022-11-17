@@ -243,19 +243,14 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
                   height: 300,
                   width: 250,
                   color: Colors.white,
-                  // child: TextButton(
-                  //   child: Text("button"),
-                  //   onPressed: () { ddlog("button"); },
-                  // ),
                   child: ChioceWrap(
                     children: titles.map((e) => Text(e)).toList(),
                     indexs: [0],
                     callback: (indexs) {
                       ddlog(indexs);
                     },
-                  ))
-              .decorated(
-                  color: Color(0xff7AC1E7), shape: BoxShape.circle),
+                  )
+                )
               );
             });
         }
@@ -304,11 +299,11 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
               ),
             ),
             onPop: () => print('Popover was popped!'),
-            direction: PopoverDirection.bottom,
-            width: 200,
-            height: 400,
-            arrowHeight: 15,
-            arrowWidth: 30,
+            // direction: PopoverDirection.bottom,
+            // width: 200,
+            // height: 400,
+            // arrowHeight: 15,
+            // arrowWidth: 30,
           );
         }
         break;

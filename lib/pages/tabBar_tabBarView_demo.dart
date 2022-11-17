@@ -362,7 +362,6 @@ var _list = [
   Tuple2(APPRouter.tableDemo, "tableDemo", ),
   Tuple2(APPRouter.nestedScrollViewDemo, "nestedScrollViewDemo", ),
 
-  Tuple2(APPRouter.popoverDemo, "popoverDemo", ),
   Tuple2(APPRouter.absorbPointerDemo, "absorbPointerDemo", ),
   Tuple2(APPRouter.willPopScopeDemo, "willPopScopeDemo", ),
 
@@ -464,6 +463,7 @@ var _vendors = [
   Tuple2(APPRouter.smartDialogPageDemo, "弹窗", ),
   Tuple2(APPRouter.ratingBarDemo, "星评", ),
   Tuple2(APPRouter.dragAndDropDemo, "文件拖拽", ),
+  Tuple2(APPRouter.popoverDemo, "popoverDemo", ),
 
 ];
 

@@ -8,6 +8,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/NNPickerTooBar.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 
 extension BuildContextExt on BuildContext {
@@ -49,6 +50,130 @@ extension BuildContextExt on BuildContext {
       scaffoldMessenger.clearSnackBars();
     }
     this.scaffoldMessenger.showSnackBar(snackBar);
+  }
+
+  /// 底部选择器
+  showBottomPicker({
+    double? height = 300,
+    required Widget child,
+    required void callback(String title)
+  }) {
+
+    final title = "请选择";
+    final actionTitles = ['取消', '确定'];
+
+    final widget =
+    Container(
+      height: height,
+      // color: Color.fromARGB(255, 255, 255, 255),
+      color: Colors.white,
+      child: Column(
+        children: [
+          NNPickerTooBar(
+            onCancel: (){
+              callback(actionTitles[0]);
+              Navigator.of(this).pop();
+            },
+            onConfirm: (){
+              callback(actionTitles[1]);
+              Navigator.of(this).pop();
+            },
+          ),
+          Divider(),
+          Expanded(
+            child: Container(
+              // height: (height ?? 300) - kCupertinoButtonHeight,
+              color: Colors.white,
+              child: child,
+            )
+          ),
+        ],
+      ),
+    );
+
+    return showModalBottomSheet(
+      context: this,
+      builder: (BuildContext context) {
+        return widget;
+      }
+    );
+  }
+
+  /// 时间选择器
+  showDatePicker({
+    DateTime? initialDateTime,
+    CupertinoDatePickerMode? mode,
+    // required void Function(DateTime dateTime, String title) callback}) {
+    required void callback(DateTime dateTime, String title)}) {
+
+    DateTime dateTime = initialDateTime ?? DateTime.now();
+
+    final title = "请选择";
+    final actionTitles = ['取消', '确定'];
+
+    final widget =
+    Container(
+      height: 300,
+      // color: Color.fromARGB(255, 255, 255, 255),
+      color: Colors.white,
+      child: Column(
+        children: [
+          NNPickerTooBar(
+            onCancel: (){
+              callback(dateTime, actionTitles[0]);
+              Navigator.of(this).pop();
+            },
+            onConfirm: (){
+              callback(dateTime, actionTitles[1]);
+              Navigator.of(this).pop();
+            },
+          ),
+          Divider(),
+          Container(
+            height: 216,
+            color: Colors.white,
+            child: CupertinoDatePicker(
+                mode: mode ?? CupertinoDatePickerMode.date,
+                initialDateTime: initialDateTime,
+                onDateTimeChanged: (val) {
+                  dateTime = val;
+                  // ddlog(val);
+                }),
+          ),
+        ],
+      ),
+    );
+
+    return showModalBottomSheet(
+        context: this,
+        builder: (BuildContext context) {
+          return widget;
+        }
+    );
+  }
+
+
+  /// 列表选择器
+  showPickerList({
+    required List<Widget> children,
+    required void callback(int index, String title)}) {
+
+    int selectedIndex = 0;
+
+    return showBottomPicker(
+      child: CupertinoPicker(
+        backgroundColor: Colors.white,
+        itemExtent: 30,
+        scrollController: FixedExtentScrollController(initialItem: 1),
+        children: children,
+        onSelectedItemChanged: (value) {
+          selectedIndex = value;
+        },
+      ),
+      callback: (title){
+        callback(selectedIndex, title);
+        ddlog([selectedIndex, title]);
+      });
   }
 }
 
