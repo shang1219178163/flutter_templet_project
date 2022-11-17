@@ -226,12 +226,12 @@ class _AlertSheetDemoState extends State<AlertSheetDemo> {
       ];
 
       CupertinoActionSheet(
-        title: Text(title),
-        message: Text(message),
+        title: Text(title, style: TextStyle(fontSize: 18, color: Colors.black)),
+        message: Text(message, textAlign: TextAlign.start,),
         actions: [
           ChioceList(
             isMutiple: isMutiple,
-            backgroudColor: Colors.black.withAlpha(10),
+            backgroudColor: Colors.red.withAlpha(10),
             children: list,
             indexs: [1],
             canScroll: false,

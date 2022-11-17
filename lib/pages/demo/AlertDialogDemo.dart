@@ -33,7 +33,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
   var itemSize = Size(70, 70);
 
   var titles = [
-    "iOS默认风格",
+    "iOS风格",
     "安卓风格",
     "进度条",
     "进度环",
@@ -131,7 +131,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
               // ddlog(e);
               _onPressed(titles.indexOf(e));
             },
-            child: Text(e)))
+            child: Text('${e}_${titles.indexOf(e)}')))
           .toList(),
         ));
   }
@@ -164,12 +164,15 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
         {
           CupertinoAlertDialog(
             title: Text(title),
-            content: Padding(
-              padding: const EdgeInsets.all(15),
-              child: CircularProgressIndicator(
-                backgroundColor: Colors.grey[200],
-                valueColor: AlwaysStoppedAnimation(Colors.blue),
-                value: .7,
+            content: SizedBox(
+              height: 160,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 36, right: 36, top: 16, bottom: 0,),
+                child: CircularProgressIndicator(
+                  backgroundColor: Colors.grey[200],
+                  valueColor: AlwaysStoppedAnimation(Colors.blue),
+                  value: .7,
+                ),
               ),
             ),
             actions: ["确定1",].map((e) => _buildButton(e, () => Navigator.pop(context),)).toList(),
@@ -191,110 +194,25 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
 
       case 5:
         {
-          final list = [
-            ChioceModel(
-                title: Text("微信支付"),
-                subtitle: Text("微信支付，不止支付"),
-                secondary: Icon(Icons.camera),
-                selected: true),
-            ChioceModel(
-                title: Text("阿里支付"),
-                subtitle: Text("支付就用支付宝"),
-                secondary: Icon(Icons.palette),
-                selected: true),
-            ChioceModel(
-                title: Text("银联支付"),
-                subtitle: Text("不打开APP就支付"),
-                secondary: Icon(Icons.payment),
-                selected: true),
-          ];
-
-          CupertinoAlertDialog(
-            title: Text("ChioceList 单选"),
-            content: ChioceList(
-              // isMutiple: true,
-              backgroudColor: Colors.black.withAlpha(10),
-              children: list,
-              indexs: [0],
-              canScroll: false,
-              callback: (indexs) {
-                ddlog([indexs.runtimeType, indexs]);
-              },
-            ),
-            actions: ["确定",].map((e) => _buildButton(e, () => Navigator.pop(context),)).toList(),
-          ).toShowCupertinoDialog(context: context);
+          showChioceListAlertDialog(isMutiple: false);
         }
         break;
 
       case 6:
         {
-          final list = [
-            ChioceModel(
-                title: Text("微信支付"),
-                subtitle: Text("微信支付，不止支付"),
-                secondary: Icon(Icons.camera),
-                selected: true),
-            ChioceModel(
-                title: Text("阿里支付"),
-                subtitle: Text("支付就用支付宝"),
-                secondary: Icon(Icons.palette),
-                selected: true),
-            ChioceModel(
-                title: Text("银联支付"),
-                subtitle: Text("不打开APP就支付"),
-                secondary: Icon(Icons.payment),
-                selected: true),
-          ];
-
-          CupertinoAlertDialog(
-            title: Text("ChioceList 多选"),
-            content: ChioceList(
-              backgroudColor: Colors.black.withAlpha(10),
-              isMutiple: true,
-              children: list,
-              indexs: [0],
-              canScroll: false,
-              callback: (indexs) {
-                ddlog([indexs.runtimeType, indexs]);
-              },
-            ),
-            actions: ["确定",].map((e) => _buildButton(e, () => Navigator.pop(context),)).toList(),
-          ).toShowDialog(context: context);
-          // .toShowDialog(context);
+          showChioceListAlertDialog(isMutiple: true);
         }
         break;
 
       case 7:
         {
-          CupertinoAlertDialog(
-            title: Text("ChioceWrap 单选"),
-            content: ChioceWrap(
-              children: titles.map((e) => Text(e)).toList(),
-              indexs:[0],
-              callback: (indexs) {
-                ddlog(indexs);
-              },
-            ),
-            actions: ["确定",].map((e) => _buildButton(e, () => Navigator.pop(context),)).toList(),
-          ).toShowCupertinoDialog(context: context);
+          showChioceWrapAlertDialog(isMutiple: false);
         }
         break;
 
       case 8:
         {
-          CupertinoAlertDialog(
-            title: Text("ChioceWrap 多选"),
-            content: ChioceWrap(
-              isMutiple: true,
-              children: titles.map((e) => Text(e)).toList(),
-              indexs: [0],
-              callback: (indexs) {
-                ddlog(indexs);
-              },
-            ),
-            actions: ["确定",].map((e) => _buildButton(e, () => Navigator.pop(context),)).toList(),
-          ).toShowCupertinoDialog(context: context);
-          // .toShowDialog(context);
+          showChioceWrapAlertDialog(isMutiple: true);
         }
         break;
 
@@ -599,22 +517,76 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
       spacing: 8.0, // 主轴(水平)方向间距
       runSpacing: -8.0, // 纵轴（垂直）方向间距
       alignment: WrapAlignment.start, //沿主轴方向居中
-      children: titles.map((e) => TextButton.icon(
-        onPressed: () {
-          ddlog(titles.indexOf(e));
-          // }, icon: Icon(Icons.check_circle_outline), label: Text("Button"))).toList(),
-        },
-        icon: Icon(Icons.radio_button_unchecked_outlined),
-        label: Text(e),
-        style: OutlinedButton.styleFrom(
-          primary: Colors.black87,
-          side: BorderSide(width: 1, color: Colors.transparent),
+      children: titles.map((e) => Padding(
+        padding: const EdgeInsets.symmetric(vertical: 2),
+        child: TextButton.icon(
+          onPressed: () {
+            ddlog(titles.indexOf(e));
+            // }, icon: Icon(Icons.check_circle_outline), label: Text("Button"))).toList(),
+          },
+          icon: Icon(Icons.radio_button_unchecked_outlined),
+          label: Text(e),
+          style: OutlinedButton.styleFrom(
+            primary: Colors.black87,
+            side: BorderSide(width: 1, color: Colors.transparent),
+          ),
         ),
       ))
       .toList(),
     );
   }
 
+  //多选/单选
+  showChioceListAlertDialog({bool isMutiple = false}) {
+    final list = [
+      ChioceModel(
+          title: Text("微信支付"),
+          subtitle: Text("微信支付，不止支付"),
+          secondary: Icon(Icons.camera),
+          selected: false),
+      ChioceModel(
+          title: Text("阿里支付"),
+          subtitle: Text("支付就用支付宝"),
+          secondary: Icon(Icons.palette),
+          selected: false),
+      ChioceModel(
+          title: Text("银联支付"),
+          subtitle: Text("不打开APP就支付"),
+          secondary: Icon(Icons.payment),
+          selected: false),
+    ];
+
+    CupertinoAlertDialog(
+      title: Text("ChioceList ${isMutiple ? '多选' : '单选'}"),
+      content: ChioceList(
+        isMutiple: isMutiple,
+        backgroudColor: Colors.black.withAlpha(10),
+        children: list,
+        indexs: [0],
+        canScroll: false,
+        callback: (indexs) {
+          ddlog([indexs.runtimeType, indexs]);
+        },
+      ),
+      actions: ["确定",].map((e) => _buildButton(e, () => Navigator.pop(context),)).toList(),
+    ).toShowDialog(context: context);
+    // .toShowDialog(context);
+  }
+
+  showChioceWrapAlertDialog({bool isMutiple = false}) {
+    CupertinoAlertDialog(
+      title: Text("ChioceWrap ${isMutiple ? '多选' : '单选'}"),
+      content: ChioceWrap(
+        isMutiple: isMutiple,
+        children: titles.map((e) => Text(e)).toList(),
+        indexs:[0],
+        callback: (indexs) {
+          ddlog(indexs);
+        },
+      ),
+      actions: ["确定",].map((e) => _buildButton(e, () => Navigator.pop(context),)).toList(),
+    ).toShowCupertinoDialog(context: context);
+  }
   ///自约束
   Widget buildAlertColumn(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
