@@ -20,7 +20,16 @@ extension ListExt<T,E> on List<E> {
     }
     return l;
   }
+  /// 带索引的map
+  List<T> mapWithIdx<T>(T Function(E, int i) action) {
+    List<T> result = [];
+    for (int i = 0; i < this.length; i++) {
+      result.add(action(this[i], i));
+    }
+    return result;
+  }
 
+  /// 数组降维
   List<T> flatMap(List<T> action(E e)) {
     List<T> result = [];
     this.forEach((e) {
