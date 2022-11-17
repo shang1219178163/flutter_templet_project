@@ -1,5 +1,5 @@
 //
-//  sliver_family_demo.dart
+//  SliverFamilyDemo.dart
 //  flutter_templet_project
 //
 //  Created by shang on 10/15/21 1:57 PM.
@@ -7,17 +7,18 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/pages/sliver_demo/sliver_demo9.dart';
+import 'package:flutter_templet_project/pages/sliver_demo/SliverGridDemo.dart';
+import 'package:flutter_templet_project/pages/sliver_demo/SliverListDemo.dart';
+import 'package:flutter_templet_project/pages/sliver_demo/StaggeredGridViewDemo.dart';
 import 'package:tuple/tuple.dart';
 
-import 'package:flutter_templet_project/pages/sliver_demo/sliver_demo1.dart';
-import 'package:flutter_templet_project/pages/sliver_demo/sliver_demo2.dart';
-import 'package:flutter_templet_project/pages/sliver_demo/sliver_demo3.dart';
-import 'package:flutter_templet_project/pages/sliver_demo/sliver_demo4.dart';
-import 'package:flutter_templet_project/pages/sliver_demo/sliver_demo5.dart';
-import 'package:flutter_templet_project/pages/sliver_demo/sliver_demo6.dart';
-import 'package:flutter_templet_project/pages/sliver_demo/sliver_demo7.dart';
-import 'package:flutter_templet_project/pages/sliver_demo/sliver_demo8.dart';
+import 'package:flutter_templet_project/pages/sliver_demo/SliverPersistentHeaderDemo.dart';
+import 'package:flutter_templet_project/pages/sliver_demo/SliverAnimatedListDemo.dart';
+import 'package:flutter_templet_project/pages/sliver_demo/SliverAppBarDemo.dart';
+import 'package:flutter_templet_project/pages/sliver_demo/SliverFillRemainingDemo.dart';
+import 'package:flutter_templet_project/pages/sliver_demo/SliverFillViewportDemo.dart';
+import 'package:flutter_templet_project/pages/sliver_demo/SliverBaseDemo.dart';
+import 'package:flutter_templet_project/pages/sliver_demo/SliverPrototypeExtentListDemo.dart';
 
 class SliverFamilyDemo extends StatefulWidget {
 
@@ -94,11 +95,11 @@ class _SliverFamilyPageViewDemoState extends State<SliverFamilyPageViewDemo> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
       ),
-      body: _buildPageView(context),
+      body: _buildPageView(),
     );
   }
 
-  Widget _buildPageView(BuildContext context) {
+  Widget _buildPageView() {
     return PageView(
       scrollDirection: Axis.horizontal,
       pageSnapping: true,
@@ -110,85 +111,63 @@ class _SliverFamilyPageViewDemoState extends State<SliverFamilyPageViewDemo> {
       )).toList(),
     );
   }
-
-  // Widget _buildPageView(BuildContext context) {
-  //   return PageView(
-  //     scrollDirection: Axis.horizontal,
-  //     pageSnapping: true,
-  //     onPageChanged: (index){
-  //       print('当前为第$index页');
-  //     },
-  //     children: <Widget>[
-  //       Container(
-  //         child: Text('第0页')
-  //         ,
-  //       )
-  //       ,
-  //       Container(
-  //         child: Text('第1页')
-  //         ,
-  //       )
-  //       ,
-  //       Container(
-  //         child: Text('第2页')
-  //         ,
-  //       )
-  //       ,
-  //     ],
-  //   );
-  // }
-
 }
-
 
 
 List<Tuple3<String, String, Widget>> _list = [
   Tuple3(
-    'SliverList、SliverGrid、SliverFixedExtentList',
+    'SliverBaseDemo',
+    '设置子控件透明度 SliverOpacity、SliverPadding',
+    SliverBaseDemo(),
+  ),
+  Tuple3(
+    'SliverAppBar',
+    '可变的导航栏',
+    SliverAppBarDemo(),
+  ),
+  Tuple3(
+    'SliverList、SliverFixedExtentList',
     '常用的组合方式',
-    SliverDemo1(title:
-    'SliverList、SliverGrid、SliverFixedExtentList',
+    SliverListDemo(title:
+    'SliverList、SliverFixedExtentList',
+    ),
+  ),
+  Tuple3(
+    'SliverGrid',
+    '常用的组合方式',
+    SliverGridDemo(title:
+    'SliverGrid',
     ),
   ),
   Tuple3(
     'SliverPersistentHeader',
     '吸顶效果',
-    SliverDemo2(),
+    SliverPersistentHeaderDemo(),
   ),
   Tuple3(
     'SliverAnimatedList',
     '带动画的SliverList组件',
-    SliverDemo3(),
-  ),
-  Tuple3(
-    'SliverAppBar',
-    '可变的导航栏',
-    SliverDemo4(),
+    SliverAnimatedListDemo(),
   ),
   Tuple3(
     'SliverFillRemaining',
     '充满视图的剩余空间，通常用于最后一个sliver组件',
-    SliverDemo5(),
+    SliverFillRemainingDemo(),
   ),
   Tuple3(
     'SliverFillViewport',
     '每个子元素都填充满整个视图',
-    SliverDemo6(),
-  ),
-  Tuple3(
-    'SliverOpacity、SliverPadding',
-    '设置子控件透明度和padding',
-    SliverDemo7(),
+    SliverFillViewportDemo(),
   ),
   Tuple3(
     'SliverPrototypeExtentList',
     '由prototypeItem属性来控制所有子控件的高度',
-    SliverDemo8(),
+    SliverPrototypeExtentListDemo(),
   ),
   Tuple3(
-    'SliverDemo9',
+    'StaggeredGridView',
     '瀑布流',
-    SliverDemo9(),
+    StaggeredGridViewDemo(),
   ),
 
 ];

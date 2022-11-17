@@ -6,7 +6,9 @@
 //  Copyright © 10/11/22 shang. All rights reserved.
 //
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/NNPickerTooBar.dart';
 
 class NavigationToolbarDemo extends StatefulWidget {
 
@@ -30,29 +32,47 @@ class _NavigationToolbarDemoState extends State<NavigationToolbarDemo> {
         appBar: AppBar(
           title: Text(widget.title ?? "$widget"),
         ),
-        body: Container(
-          height: 50,
-          decoration: BoxDecoration(
-              border: Border.all(color: Colors.blueAccent)
-          ),
-          child: NavigationToolbar(
-            leading: IconButton(
-              icon: Icon(Icons.add),
-              onPressed: () { print("leading"); },
+        body: Column(
+          children: [
+            _buildBody(),
+            Divider(),
+
+            NNPickerTooBar(
+              onCancel: (){
+                print("Cancel");
+              },
+              onConfirm: (){
+                print("onConfirm");
+              },
             ),
-            middle: IconButton(
-              icon: Icon(Icons.clear),
-              onPressed: () { print("middle"); },
-            ),
-            trailing: IconButton(
-              icon: Icon(Icons.home),
-              onPressed: () { print("trailing"); },
-            ),
-          ),
-        )
+            Divider(),
+          ],
+        ),
     );
   }
 
+  _buildBody() {
+    return Container(
+      height: 50,
+      // decoration: BoxDecoration(
+      //     border: Border.all(color: Colors.blueAccent)
+      // ),
+      child: NavigationToolbar(
+        leading: IconButton(
+          icon: Icon(Icons.add),
+          onPressed: () { print("leading"); },
+        ),
+        middle: IconButton(
+          icon: Icon(Icons.clear),
+          onPressed: () { print("middle"); },
+        ),
+        trailing: IconButton(
+          icon: Icon(Icons.home),
+          onPressed: () { print("trailing"); },
+        ),
+      ),
+    );
+  }
 }
 
 

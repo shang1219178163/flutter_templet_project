@@ -88,28 +88,34 @@ extension ActionSheetExt on BottomSheet{
         return Column(
           mainAxisSize: MainAxisSize.min, // 设置最小的弹出
           children:[
-            Row(children: [
-              TextButton(onPressed: (){
-                    ddlog("Done");
-                  },
-                  child: Text("取消", style: TextStyle(color: Colors.black87),)
+            Container(
+              height: 40,
+              child: Center(
+                child: Row(
+                  children: [
+                      TextButton(
+                        onPressed: (){
+                          ddlog("Done");
+                        },
+                        child: Text("取消", style: TextStyle(color: Colors.black87),)
+                      ),
+                      Expanded(
+                        child: Text(title,
+                          style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
+                          textAlign: TextAlign.center,),
+                      ),
+                      TextButton(
+                        onPressed: (){
+                          ddlog("Done");
+                        },
+                        child: Text("确定", style: TextStyle(color: Colors.black87,)),
+                    ),
+                  ],
+                ),
               ),
-              Text(title, style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600), textAlign: TextAlign.center,).expanded(),
-              TextButton(onPressed: (){
-                    ddlog("Done");
-                  },
-                  child: Text("确定", style: TextStyle(color: Colors.black87,)),
-                  // child: IconButton(onPressed: () {  },
-                  //   padding: EdgeInsets.all(0.0),
-                  //   iconSize: 20.0,
-                  //   icon: Icon(Icons.close),),
-              ),
-            ],
           ),
-          Column(
-            mainAxisSize: MainAxisSize.min, // 设置最小的弹出
-            children:list,
-          ),
+          Divider(),
+          listView
         ]);
       },
     );

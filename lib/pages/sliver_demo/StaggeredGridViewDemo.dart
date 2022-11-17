@@ -12,17 +12,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_templet_project/extension/color_extension.dart';
 import 'package:flutter_templet_project/extension/num_extension.dart';
+import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
-class SliverDemo9 extends StatefulWidget {
+class StaggeredGridViewDemo extends StatefulWidget {
   final String? title;
 
-  SliverDemo9({Key? key, this.title}) : super(key: key);
+  StaggeredGridViewDemo({Key? key, this.title}) : super(key: key);
 
   @override
-  _SliverDemo9State createState() => _SliverDemo9State();
+  _StaggeredGridViewDemoState createState() => _StaggeredGridViewDemoState();
 }
 
-class _SliverDemo9State extends State<SliverDemo9> {
+class _StaggeredGridViewDemoState extends State<StaggeredGridViewDemo> {
 
   bool _type = true;
 
@@ -70,6 +71,11 @@ class _SliverDemo9State extends State<SliverDemo9> {
   }
 
   Widget _buildCustomScrollView() {
+    List<Widget> list = List.generate(9, (index) => Container(
+        child: Text('$index'),
+      color: Colors.primaries[index],
+    ));
+
     return CustomScrollView(
       primary: false,
       slivers: <Widget>[
@@ -87,16 +93,7 @@ class _SliverDemo9State extends State<SliverDemo9> {
             StaggeredTile.count(2, 2),
             StaggeredTile.count(2, 1),
           ],
-          children: const <Widget>[
-            Text('1'),
-            Text('2'),
-            Text('3'),
-            Text('4'),
-            Text('5'),
-            Text('6'),
-            Text('7'),
-            Text('8'),
-          ],
+          children: list,
         )
       ],
     );

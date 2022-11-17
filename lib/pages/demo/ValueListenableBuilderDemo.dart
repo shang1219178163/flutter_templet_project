@@ -36,8 +36,6 @@ class _ValueListenableBuilderDemoState extends State<ValueListenableBuilderDemo>
             const Text('You have pushed the button this many times:'),
             ValueListenableBuilder<int>(
               builder: (BuildContext context, int value, Widget? child) {
-                // This builder will only get called when the _counter
-                // is updated.
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
@@ -47,9 +45,6 @@ class _ValueListenableBuilderDemoState extends State<ValueListenableBuilderDemo>
                 );
               },
               valueListenable: _counter,
-              // The child parameter is most helpful if the child is
-              // expensive to build and does not depend on the value from
-              // the notifier.
               child: goodJob,
             )
           ],

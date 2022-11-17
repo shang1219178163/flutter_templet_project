@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -22,6 +23,7 @@ import 'package:tuple/tuple.dart';
 import 'Pages/APPDrawerMenuPage.dart';
 import 'Pages/APPUserCenterPage.dart';
 
+import 'basicWidget/ErrorCustomWidget.dart';
 import 'pages/FirstPage.dart';
 import 'pages/SecondPage.dart';
 import 'pages/ThirdPage.dart';
@@ -51,6 +53,7 @@ Future<void> main() async {
 
   setCustomErrorPage();
   await initServices();
+  await initDebugInfo();
   // AppInit.catchException(() => runApp(MyApp()));
   runApp(
     MultiProvider(
@@ -68,22 +71,9 @@ Future<void> main() async {
 }
 
 void setCustomErrorPage(){
-  ErrorWidget.builder = (FlutterErrorDetails flutterErrorDetails){
-    print("flutterErrorDetails:${flutterErrorDetails.toString()}");
-    return Center(
-      // child: Text("Flutter 走神了"),
-      child: Container(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(Icons.error),
-            Text("Flutter 走神了",
-                style: TextStyle(fontSize: 16.0, color: Colors.red),
-            ),
-          ],
-        ),
-      ),
-    );
+  ErrorWidget.builder = (FlutterErrorDetails details){
+    print("flutterErrorDetails:${details.toString()}");
+    return ErrorCustomWidget(details: details);
   };
 }
 
@@ -92,6 +82,19 @@ Future<void> initServices() async {
   // await Get.putAsync(() => GlobalConfigService().init());
   // await Get.putAsync(SettingsService()).init();
   print('All services started...');
+}
+
+Future<void> initDebugInfo() async {
+  ///向Timeline事件中添加每个widget的build信息
+  debugProfileBuildsEnabled = true;
+  ///向timeline事件中添加每个renderObject的paint信息
+  // debugProfilePaintsEnabled = true;
+  // ///每个layer会出现一个边框,帮助区分layer层级
+  // debugPaintLayerBordersEnabled = true;
+  // ///打印标记为dirty的widgets
+  // debugPrintRebuildDirtyWidgets = true;
+  // ///打印标记为dirty的renderObjects
+  // debugPrintLayouts = true;
 }
 
 ///全局

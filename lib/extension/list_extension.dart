@@ -6,9 +6,12 @@
 //  Copyright © 10/21/21 shang. All rights reserved.
 //
 
+import 'dart:collection';
+import 'dart:ffi';
+
 import 'package:flutter_templet_project/extension/string_extension.dart';
 
-extension ListExt<E> on List<E>{
+extension ListExt<T,E> on List<E> {
   ///运算符重载
   List<E> operator *(int value) {
     var l = <E>[];
@@ -18,9 +21,18 @@ extension ListExt<E> on List<E>{
     return l;
   }
 
+  List<T> flatMap(List<T> action(E e)) {
+    List<T> result = [];
+    this.forEach((e) {
+      result.addAll(action(e));
+    });
+    return result;
+  }
+
   static bool isNotEmpty(List l) {
     return l != null && l.isNotEmpty;
   }
+
   /// 扩展方法
   List<E> sorted([int compare(E a, E b)?]) {
     this.sort(compare);
@@ -50,9 +62,7 @@ extension ListExt<E> on List<E>{
   }
 }
 
-
-extension ListExtObject<E extends Object> on List<E>{
-
+extension ListExtObject<E extends Object> on List<E> {
   // List<E> sortedByKey(String key, {bool ascending = true}) {
   //   this.forEach((element) {
   //     print("sortByKey:${element}");
@@ -83,6 +93,4 @@ extension ListExtObject<E extends Object> on List<E>{
     }
     return a.compareTo(b);
   }
-
 }
-

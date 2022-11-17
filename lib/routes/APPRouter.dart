@@ -5,14 +5,22 @@ import 'package:flutter_templet_project/basicWidget/DragDestinationView.dart';
 import 'package:flutter_templet_project/basicWidget/responsive_column.dart';
 import 'package:flutter_templet_project/pages/FlutterFFiTest.dart';
 import 'package:flutter_templet_project/pages/LocalImagePage.dart';
+import 'package:flutter_templet_project/pages/demo/AutocompleteDemo.dart';
+import 'package:flutter_templet_project/pages/demo/BuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ColoredBoxDemo.dart';
+import 'package:flutter_templet_project/pages/demo/DismissibleDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DragAndDropDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FittedBoxDemo.dart';
+import 'package:flutter_templet_project/pages/demo/ListViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MaterialBannerDemo.dart';
+import 'package:flutter_templet_project/pages/demo/ModalBarrierDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NavigationToolbarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/OverflowBarDemo.dart';
+import 'package:flutter_templet_project/pages/demo/OverlayDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PositionedDirectionalDemo.dart';
+import 'package:flutter_templet_project/pages/demo/PromptBuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/RatingBarDemo.dart';
+import 'package:flutter_templet_project/pages/demo/RotatedBoxDemo.dart';
 import 'package:flutter_templet_project/pages/demo/SelectableTextDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ShortcutsDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ShortcutsDemoOne.dart';
@@ -21,6 +29,7 @@ import 'package:flutter_templet_project/pages/demo/TransformDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ValueListenableBuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/drawImageNineDemo.dart';
 import 'package:flutter_templet_project/pages/demo/flutter_smart_dialog_demo.dart';
+import 'package:flutter_templet_project/pages/demo/isolateDemo.dart';
 import 'package:flutter_templet_project/pages/demo/merge_images_demo.dart';
 import 'package:flutter_templet_project/pages/demo/merge_network_images_demo.dart';
 import 'package:flutter_templet_project/pages/system_color_page.dart';
@@ -80,10 +89,10 @@ import 'package:flutter_templet_project/Pages/FourthPage.dart';
 import 'package:flutter_templet_project/Pages/SecondPage.dart';
 import 'package:flutter_templet_project/Pages/ThirdPage.dart';
 import 'package:flutter_templet_project/pages/demo/TimePickerDemo.dart';
-import 'package:flutter_templet_project/pages/demo/banner_demo.dart';
-import 'package:flutter_templet_project/pages/demo/box_demo.dart';
-import 'package:flutter_templet_project/pages/demo/border_demo.dart';
-import 'package:flutter_templet_project/pages/demo/clip_demo.dart';
+import 'package:flutter_templet_project/pages/demo/BannerDemo.dart';
+import 'package:flutter_templet_project/pages/demo/BoxDemo.dart';
+import 'package:flutter_templet_project/pages/demo/BorderDemo.dart';
+import 'package:flutter_templet_project/pages/demo/ClipDemo.dart';
 import 'package:flutter_templet_project/pages/demo/steper_connector_demo.dart';
 import 'package:flutter_templet_project/pages/demo/will_pop_scope_demo.dart';
 import 'package:flutter_templet_project/pages/system_icons_page.dart';
@@ -118,7 +127,7 @@ import 'package:flutter_templet_project/pages/ForgetPasswordPage.dart';
 import 'package:flutter_templet_project/pages/LoginPage.dart';
 import 'package:flutter_templet_project/pages/LoginPage2.dart';
 import 'package:flutter_templet_project/pages/SigninPage.dart';
-import 'package:flutter_templet_project/pages/sliver_demo/sliver_family_demo.dart';
+import 'package:flutter_templet_project/pages/sliver_demo/SliverFamilyDemo.dart';
 
 import 'package:flutter_templet_project/pages/demo/FutureBuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/StreamBuilderDemo.dart';
@@ -287,7 +296,15 @@ class APPRouter {
   static const navigationToolbarDemo = '/navigationToolbarDemo';
   static const selectableTextDemo = '/SelectableTextDemo';
   static const materialBannerDemo = '/materialBannerDemo';
-
+  static const autocompleteDemo = '/autocompleteDemo';
+  static const promptBuilderDemo = '/promptBuilderDemo';
+  static const rotatedBoxDemo = '/rotatedBoxDemo';
+  static const dismissibleDemo = '/dismissibleDemo';
+  static const modalBarrierDemo = '/modalBarrierDemo';
+  static const isolateDemo = '/isolateDemo';
+  static const listViewDemo = '/listViewDemo';
+  static const builderDemo = '/builderDemo';
+  static const overlayDemo = '/overlayDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -462,6 +479,15 @@ class AppPage {
     GetPage(name: APPRouter.navigationToolbarDemo, page: () => NavigationToolbarDemo(),),
     GetPage(name: APPRouter.selectableTextDemo, page: () => SelectableTextDemo(),),
     GetPage(name: APPRouter.materialBannerDemo, page: () => MaterialBannerDemo(),),
+    GetPage(name: APPRouter.autocompleteDemo, page: () => AutocompleteDemo(),),
+    GetPage(name: APPRouter.promptBuilderDemo, page: () => PromptBuilderDemo(),),
+    GetPage(name: APPRouter.rotatedBoxDemo, page: () => RotatedBoxDemo(),),
+    GetPage(name: APPRouter.dismissibleDemo, page: () => DismissibleDemo(),),
+    GetPage(name: APPRouter.modalBarrierDemo, page: () => ModalBarrierDemo(),),
+    GetPage(name: APPRouter.isolateDemo, page: () => IsolateDemo(),),
+    GetPage(name: APPRouter.listViewDemo, page: () => ListViewDemo(),),
+    GetPage(name: APPRouter.builderDemo, page: () => BuilderDemo(),),
+    GetPage(name: APPRouter.overlayDemo, page: () => OverlayDemo(),),
 
 
   ];

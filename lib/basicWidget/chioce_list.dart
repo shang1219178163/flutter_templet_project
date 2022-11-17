@@ -44,22 +44,31 @@ class _ChioceListState extends State<ChioceList> {
     return Material(
       child: Container(
         color: widget.backgroudColor,
-        height: 73 * widget.children.length.toDouble(),
-        width: 0,
-        child: ListView(
+        height: 65 * widget.children.length.toDouble(),
+        child: ListView.builder(
           physics: NeverScrollableScrollPhysics(),//禁止滑动
-          children: widget.children.map((e) => ListTile(
-            // tileColor: Colors.white,
-            title: e.title,
-            subtitle: e.subtitle,
-            trailing: widget.indexs.contains(widget.children.indexOf(e)) ? Icon(Icons.check) : null,
-            selected: widget.indexs.contains(widget.children.indexOf(e)),
-            onTap: (){
-              _changeValue(widget.children.indexOf(e));
-            },
-          ),).toList(),
-        )
-      )
+          itemExtent: 65,
+          itemCount: widget.children.length,
+          itemBuilder: (BuildContext context, int index) {
+            final e = widget.children[index];
+            return Container(
+              decoration: BoxDecoration(
+                color: widget.backgroudColor,
+                border: Border.all(color: Colors.transparent),
+              ),
+              child: ListTile(
+                // tileColor: Colors.white,
+                title: e.title,
+                subtitle: e.subtitle,
+                trailing: widget.indexs.contains(index) ? Icon(Icons.check) : null,
+                selected: widget.indexs.contains(index),
+                onTap: (){
+                  _changeValue(widget.children.indexOf(e));
+                },
+              ),
+            );
+          }),
+      ),
     );
   }
 

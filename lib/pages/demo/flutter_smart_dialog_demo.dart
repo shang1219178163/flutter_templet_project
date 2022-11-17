@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
+import 'package:tuple/tuple.dart';
 
 class SmartDialogPageDemo extends StatelessWidget {
   @override
@@ -41,7 +42,7 @@ class SmartDialogPage extends StatelessWidget {
 
           //attach
           ElevatedButton(
-            onPressed: () => _showAttach(context),
+            onPressed: () => _showAttach(),
             child: Text('showAttach'),
           ),
 
@@ -55,30 +56,42 @@ class SmartDialogPage extends StatelessWidget {
     );
   }
 
-  void _showToast() async {
-    await SmartDialog.showToast('test toast');
-    print('--------------------------');
+
+  _showToast() {
+    // SmartDialog.showToast('test toast11', alignment: Alignment.topCenter);
+    SmartDialog.showToast('the toast at the center', alignment: Alignment.center);
+    SmartDialog.showToast('the toast at the bottomCenter', alignment: Alignment.bottomCenter);
+
+    print('SmartDialog.showToast');
   }
 
-  void _show() {
-    SmartDialog.show(builder: (_) {
-      return Container(
-        height: 80,
-        width: 180,
-        decoration: BoxDecoration(
-          color: Colors.black,
-          borderRadius: BorderRadius.circular(10),
-        ),
-        alignment: Alignment.center,
-        child: Text(
-          'easy custom dialog',
-          style: TextStyle(color: Colors.white),
-        ),
-      );
+  void _show() async {
+    SmartDialog.show(
+        maskColor: Colors.transparent,
+        animationType: SmartAnimationType.fade,
+        builder: (_) {
+          return Container(
+            // margin:const EdgeInsets.only(left: 16, right: 16, top: 56, bottom: 56,),
+            // padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12,),
+            height: 50,
+            width: 200,
+            decoration: BoxDecoration(
+              color: Colors.black,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            alignment: Alignment.center,
+            child: Text(
+              'easy custom dialog',
+              style: TextStyle(color: Colors.white),
+            ),
+          );
     });
+
+    await Future.delayed(Duration(milliseconds: 1500));
+    SmartDialog.dismiss();
   }
 
-  void _showAttach(BuildContext ctx) {
+  void _showAttach() {
     var attachDialog = (BuildContext context) {
       SmartDialog.showAttach(
         targetContext: context,

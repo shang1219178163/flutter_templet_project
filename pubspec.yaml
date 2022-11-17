@@ -69,6 +69,7 @@ dependencies:
   #      url: 'git@github.com:Fliggy-Mobile/fcommon.git'
   #      ref: 'master'
   flutter_staggered_grid_view: ^0.4.1
+  intl: ^0.17.0
 
   permission_handler: ^7.2.0
   share: ^2.0.1
@@ -114,7 +115,7 @@ dependencies:
   scribble: ^0.9.1
   aesthetic_dialogs: ^0.0.15
   shimmer_animation: ^2.1.0+1
-  flutter_smart_dialog: ^4.2.0
+  flutter_smart_dialog: ^4.2.1
   image_gallery_saver: ^1.7.1
 
   flutter_rating_bar: ^4.0.1

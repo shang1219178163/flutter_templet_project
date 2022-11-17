@@ -168,8 +168,9 @@ class PopoverButton extends StatelessWidget {
       direction: PopoverDirection.bottom,
       width: 200,
       height: 60,
-      arrowHeight: 15,
-      arrowWidth: 30,
+      arrowHeight: 10,
+      arrowWidth: 15,
+      arrowDyOffset: 2,
       barrierColor: Colors.black.withAlpha(30),
     );
   }

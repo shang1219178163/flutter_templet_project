@@ -47,7 +47,7 @@ class _ColoredBoxDemoState extends State<ColoredBoxDemo> {
         Divider(),
 
         Image.network(
-          'https://www.kindacode.com/wp-content/uploads/2020/12/dog-png.png',
+          'https://fastly.jsdelivr.net/npm/@vant/assets/apple-1.jpeg',
           width: 150,
           height: 150
         ),
@@ -56,7 +56,7 @@ class _ColoredBoxDemoState extends State<ColoredBoxDemo> {
         ColoredBox(
           color: Colors.yellow,
           child: Image.network(
-            'https://www.kindacode.com/wp-content/uploads/2020/12/dog-png.png',
+            'https://fastly.jsdelivr.net/npm/@vant/assets/apple-1.jpeg',
             width: 150,
             height: 150
           ),
