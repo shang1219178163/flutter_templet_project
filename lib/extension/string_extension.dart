@@ -8,10 +8,18 @@
 
 
 import 'dart:convert';
+import 'dart:ffi';
 
 import 'package:flutter_templet_project/extension/ddlog.dart';
 
 extension StringExt on String{
+
+  int get parseInt => int.parse(this);
+  int? get tryParseInt => int.tryParse(this);
+  double get parseDouble => double.parse(this);
+  double? get tryParseDouble => double.tryParse(this);
+
+  String get toPath => 'images/$this';
 
   static bool isNotEmpty(String s) {
     return s != null && s.isNotEmpty;
@@ -53,11 +61,6 @@ extension StringExt on String{
   }
 
   /// 转为 int
-  int? parseInt() {
-    return int.tryParse(this);
-  }
-
-  /// 转为 int
   int? toInt() {
     RegExp regInt = new RegExp(r"[0-9]");
     RegExp regIntNon = new RegExp(r"[^0-9]");
@@ -69,22 +72,17 @@ extension StringExt on String{
     return int.tryParse(this);
   }
 
-  /// 转为 double
-  double? parseDouble() {
-    return double.tryParse(this);
-  }
-
   ///解析
   static parseResponse(dynamic data) {
     String result = "";
     if (data is Map) {
       result += json.encode(data);
+    } else if (data is List) {
+      result += json.encode(data);
     } else if (data is bool || data is num) {
       result += data.toString();
     } else if (data is String) {
       result += data;
-    } else if (data is List) {
-      result += json.encode(data);
     }
     return result;
   }
