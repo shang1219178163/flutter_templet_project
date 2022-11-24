@@ -28,84 +28,23 @@ const Divider kDivider = Divider(
 
 extension WidgetExt on Widget {
 
-  Container toContainer({
-    Key? key,
-    alignment,
-    padding,
-    color,
-    decoration,
-    foregroundDecoration,
-    double? width,
-    double? height,
-    BoxConstraints? constraints,
-    margin,
-    transform,
-    transformAlignment,
-    child,
-    clipBehavior = Clip.none,
-  }) => Container(
-    key: key,
-    alignment: alignment,
-    padding: padding,
-    color: color,
-    decoration: decoration,
-    foregroundDecoration: foregroundDecoration,
-    width: width,
-    height: height,
-    constraints: constraints,
-    margin: margin,
-    transform: transform,
-    transformAlignment: transformAlignment,
-    clipBehavior: clipBehavior,
-    child: this,
+  toShowCupertinoDialog({
+    required BuildContext context,
+    String? barrierLabel,
+    bool useRootNavigator = true,
+    bool barrierDismissible = false,
+    RouteSettings? routeSettings,
+  }) => showCupertinoDialog(
+    context: context,
+    builder: (context) => this,
+    barrierLabel: barrierLabel,
+    useRootNavigator: useRootNavigator,
+    barrierDismissible: barrierDismissible,
+    routeSettings: routeSettings,
   );
-
-
-  Material toMaterial({
-    Key? key,
-    type = MaterialType.canvas,
-    elevation = 0.0,
-    color,
-    shadowColor,
-    textStyle,
-    borderRadius,
-    shape,
-    borderOnForeground = true,
-    clipBehavior = Clip.none,
-    animationDuration = kThemeChangeDuration,
-    child,
-  }) => Material(
-    key: key,
-    type: type,
-    elevation: elevation,
-    color: color,
-    shadowColor: shadowColor,
-    textStyle: textStyle,
-    borderRadius: borderRadius,
-    shape: shape,
-    borderOnForeground: borderOnForeground,
-    clipBehavior: clipBehavior,
-    animationDuration: animationDuration,
-    child: this,
-  );
-
-  // toShowCupertinoDialog({
-  //   required BuildContext context,
-  //   String? barrierLabel,
-  //   bool useRootNavigator = true,
-  //   bool barrierDismissible = false,
-  //   RouteSettings? routeSettings,
-  // }) => showCupertinoDialog(
-  //   context: context,
-  //   builder: (context) => this,
-  //   barrierLabel: barrierLabel,
-  //   useRootNavigator: useRootNavigator,
-  //   barrierDismissible: barrierDismissible,
-  //   routeSettings: routeSettings,
-  // );
 
   ///底部弹窗
-  void toShowModalBottomSheet({
+  toShowModalBottomSheet({
     required BuildContext context,
     Color? backgroundColor,
     double? elevation,
@@ -135,7 +74,7 @@ extension WidgetExt on Widget {
   );
 
   ///正面弹窗
-  void toShowDialog({
+  toShowDialog({
     required BuildContext context,
     bool barrierDismissible = true,
     Color? barrierColor = Colors.black54,
@@ -152,21 +91,6 @@ extension WidgetExt on Widget {
     useSafeArea: useSafeArea,
     routeSettings: routeSettings,
   );
-
-  ConstrainedBox toConstrainedBox({
-    Key? key,
-    required BoxConstraints constraints,
-  }) => ConstrainedBox(
-    key: key,
-    constraints: constraints,
-    child: this,
-  );
-  
-}
-
-extension DateTimeExt on DateTime {
-  String toString19() => this.toString().split(".").first;
-
 }
 
 extension ScrollViewExt on ScrollView {
@@ -191,49 +115,18 @@ extension ScrollViewExt on ScrollView {
       );
 }
 
-
-
-extension ConstrainedBoxExt on ConstrainedBox {
-  SingleChildScrollView toSingleChildScrollView({
-    Key? key,
-    scrollDirection,
-    reverse,
-    padding,
-    primary,
-    physics,
-    controller,
-    dragStartBehavior,
-    clipBehavior,
-    restorationId,
-    keyboardDismissBehavior,
-
-  }) => SingleChildScrollView(
-    key: key,
-    scrollDirection: scrollDirection,
-    reverse: reverse,
-    padding: padding,
-    primary: primary,
-    physics: physics,
-    controller: controller,
-    child: this,
-    dragStartBehavior: dragStartBehavior,
-    clipBehavior: clipBehavior,
-    restorationId: restorationId,
-    keyboardDismissBehavior: keyboardDismissBehavior,
-  );
-}
-
-
 extension ListTileExt on ListTile {
 
   ///添加分割符
   Widget addBottomSeparator({
-    EdgeInsets inset = const EdgeInsets.symmetric(horizontal:10),
+    EdgeInsets margin = const EdgeInsets.symmetric(horizontal:10),
+    EdgeInsets padding = const EdgeInsets.all(0),
     double height = 0.5,
     Color color = const Color(0xffeeeeee),
   }) {
     return Container(
-      margin: inset,
+      margin: margin,
+      padding: padding,
       decoration: BoxDecoration(
           border: Border(
             bottom: BorderSide(width: height, color: color),
@@ -253,17 +146,6 @@ extension GetDynamicExt<T> on T {
   /// })
   T or(T Function() block) {
     return this ?? block();
-  }
-}
-
-extension IterableExt<T> on Iterable<T> {
-
-  double sum(double Function(T) extract) {
-    double result = 0.0;
-    for (T element in this) {
-      result += extract(element);
-    }
-    return result;
   }
 }
 
