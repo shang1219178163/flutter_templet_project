@@ -137,32 +137,3 @@ extension ListTileExt on ListTile {
   }
 }
 
-
-extension GetDynamicExt<T> on T {
-
-  /// 返回可选值或者 `else` 闭包返回的值
-  /// 例如. nullable.or(else: {
-  /// ... code
-  /// })
-  T or(T Function() block) {
-    return this ?? block();
-  }
-}
-
-// extension on dynamic{
-//
-//   dynamic or({required dynamic callback()}) async {
-//     return this ?? callback();
-//   }
-//
-// }
-
-// extension NullExt on Null{
-//
-//   dynamic or({required dynamic callback()}) async {
-//     return
-//   }
-//
-// }
-
-
