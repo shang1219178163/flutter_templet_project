@@ -12,15 +12,54 @@ import 'package:flutter_templet_project/basicWidget/NNPickerTooBar.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 
 extension BuildContextExt on BuildContext {
-
   /// 获取当前组件的 RenderBox
-  RenderBox? renderBox() {
-    return this.findRenderObject() is RenderBox ? (this.findRenderObject() as RenderBox) : null;
+  RenderBox? get renderBox {
+    RenderObject? renderObj = this.findRenderObject();
+    return renderObj is RenderBox ? renderObj : null;
   }
 
   /// 获取当前组件的 position
   Offset? position({Offset offset = Offset.zero}) {
-    return this.renderBox()?.localToGlobal(offset);
+    return this.renderBox?.localToGlobal(offset); //组件坐标
+  }
+
+  /// 获取当前组件的 Size
+  Size? get size => this.renderBox?.size;
+
+  double? minX({Offset offset = Offset.zero}) {
+    return this.position(offset: offset)?.dx;
+  }
+
+  double? minY({Offset offset = Offset.zero}) {
+    return this.position(offset: offset)?.dy;
+  }
+
+  double? maxX({Offset offset = Offset.zero}) {
+    if (this.minX(offset: offset) == null || this.size == null) {
+      return null;
+    }
+    return this.minX(offset: offset)! + this.size!.width;
+  }
+
+  double? maxY({Offset offset = Offset.zero}) {
+    if (this.minX(offset: offset) == null || this.size == null) {
+      return null;
+    }
+    return this.minX(offset: offset)! + this.size!.height;
+  }
+
+  double? midX({Offset offset = Offset.zero}) {
+    if (this.minX(offset: offset) == null || this.size == null) {
+      return null;
+    }
+    return this.position()!.dx + this.size!.width * 0.5;
+  }
+
+  double? midY({Offset offset = Offset.zero}) {
+    if (this.minX(offset: offset) == null || this.size == null) {
+      return null;
+    }
+    return this.position()!.dy + this.size!.height * 0.5;
   }
 
   ///扩展方法
@@ -197,13 +236,18 @@ extension StatefulWidgetExt<T extends StatefulWidget> on State<T> {
 extension GlobalKeyExt on GlobalKey{
 
   /// 获取当前组件的 RenderBox
-  RenderBox? renderBox() => this.currentContext?.renderBox();
-
+  RenderBox? get renderBox => this.currentContext?.renderBox;
   /// 获取当前组件的 position
   Offset? position({Offset offset = Offset.zero}) => this.currentContext?.position(offset: offset);
-
   /// 获取当前组件的 Size
-  Size? get size  => this.currentContext?.size;
+  Size? get size => this.currentContext?.size;
+
+  double? minX({Offset offset = Offset.zero}) => this.currentContext?.minX(offset: offset);
+  double? minY({Offset offset = Offset.zero}) => this.currentContext?.minY(offset: offset);
+  double? midX({Offset offset = Offset.zero}) => this.currentContext?.midX(offset: offset);
+  double? midY({Offset offset = Offset.zero}) => this.currentContext?.midY(offset: offset);
+  double? maxX({Offset offset = Offset.zero}) => this.currentContext?.maxX(offset: offset);
+  double? maxY({Offset offset = Offset.zero}) => this.currentContext?.maxY(offset: offset);
 
 }
 
