@@ -107,7 +107,7 @@ class _SecondPageState extends State<SecondPage> {
               key: _globalKey,
               onPressed: () {
                 // _showCustomPopView();
-                ddlog([_globalKey.position(), _globalKey.size]);
+                ddlog([_globalKey.currentContext?.position(), _globalKey.currentContext?.size]);
                 // test();
               },
             ),
@@ -130,7 +130,8 @@ class _SecondPageState extends State<SecondPage> {
               label: Text("OutlinedButton"),
               key: _globalKey1,
               onPressed: () {
-                ddlog([_globalKey1.position(), _globalKey1.size]);
+                ddlog([_globalKey1.position(),
+                  _globalKey1.size]);
                 // test();
               },
               style: OutlinedButton.styleFrom(
