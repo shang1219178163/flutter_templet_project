@@ -14,6 +14,9 @@ extension DateTimeExt on DateTime {
     final seconds = gap / 1000;
     return seconds;
   }
+
+  String toString19() => this.toString().split(".").first;
+
 }
 
 

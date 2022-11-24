@@ -103,3 +103,15 @@ extension ListExtObject<E extends Object> on List<E> {
     return a.compareTo(b);
   }
 }
+
+
+extension IterableExt<T> on Iterable<T> {
+
+  double sum(double Function(T) extract) {
+    double result = 0.0;
+    for (T element in this) {
+      result += extract(element);
+    }
+    return result;
+  }
+}

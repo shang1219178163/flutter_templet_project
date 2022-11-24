@@ -164,7 +164,7 @@ class _AlertSheetDemoState extends State<AlertSheetDemo> {
     ).toShowCupertinoModalPopup(context: context);
   }
 
-  void showAlertSheetListTile() {
+  showAlertSheetListTile() {
       final actions = [
         ListTile(
           leading: Icon(Icons.add),
@@ -182,7 +182,6 @@ class _AlertSheetDemoState extends State<AlertSheetDemo> {
           onTap: () {
             ddlog("accounts");
             Navigator.pop(context);
-
           },
         ),
         ListTile(
@@ -199,12 +198,21 @@ class _AlertSheetDemoState extends State<AlertSheetDemo> {
 
       CupertinoActionSheet(
         title: Text(title),
-        message: Text(message),
+        message: Text(message, textAlign: TextAlign.left,),
         actions: [
-          actions
-              .toColumn()
-              .decorated(color: Colors.black.withAlpha(10))
-              .toMaterial()
+          Material(
+            type: MaterialType.canvas,
+            elevation: 0,
+            borderOnForeground: true,
+            clipBehavior: Clip.none,
+            animationDuration: kThemeChangeDuration,
+            child: ColoredBox(
+              color: Colors.black.withAlpha(10),
+              child: Column(
+                children: actions,
+              ),
+            ),
+          ),
         ],
         cancelButton: CupertinoActionSheetAction(
           child: Text('取消'),

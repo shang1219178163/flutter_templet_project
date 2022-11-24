@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/NNPickerTooBar.dart';
 import 'package:flutter_templet_project/basicWidget/chioce_wrap.dart';
 import 'package:flutter_templet_project/extension/buildContext_extension.dart';
+import 'package:flutter_templet_project/extension/dateTime_extension.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/basicWidget/chioce_list.dart';
 import 'package:flutter_templet_project/extension/list_extension.dart';
@@ -190,18 +191,20 @@ class _PickerDemoState extends State<PickerDemo> {
 
           context.showBottomPicker(
             height: 500,
-            child: Container(
-              // color: Colors.green,
-              child: ChioceList(
-                // isMutiple: true,
-                children: list*5,
-                indexs: [0],
-                canScroll: true,
-                callback: (Object index) {
-                  ddlog(index);
-                },
+            child: Material(
+              child: Container(
+                // color: Colors.green,
+                child: ChioceList(
+                  // isMutiple: true,
+                  children: list*5,
+                  indexs: [0],
+                  canScroll: true,
+                  callback: (Object index) {
+                    ddlog(index);
+                  },
+                ),
               ),
-            ).toMaterial(),
+            ),
             callback: (String title) {
               ddlog(title);
             },
