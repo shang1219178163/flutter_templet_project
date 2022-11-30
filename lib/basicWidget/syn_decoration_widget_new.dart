@@ -175,6 +175,11 @@ class SynDecorationWidgetNew extends StatelessWidget {
       gradient: bgGradient,
     );
 
+    final decorationInner = buildBoxDecoration(
+      color: bgColor,
+      gradient: bgGradient,
+    );
+
     // bgUrl 不为空则为背景图片
     // final refreshImage = bgUrl != null && bgUrl != '' ? AutoRefreshImage(
     //   bgUrl,
@@ -199,42 +204,40 @@ class SynDecorationWidgetNew extends StatelessWidget {
       decoration: decoration,
     );
 
-    final bg = (bgGradient != null) ? SizedBox() : ClipRRect(
+    final bg = ClipRRect(
       borderRadius: borderRadius,
       child: bgChild ?? refreshImage,
     );
 
-    return Container(
-      width: width,
-      height: height,
-      child: Stack(
-        fit: StackFit.expand,
-        children: [
-          bgChild ?? refreshImage,
-          ClipRect(
-            child: BackdropFilter(
-              filter: ui.ImageFilter.blur(
-                sigmaX: blur,
-                sigmaY: blur,
-              ),
-              child: Opacity(
-                opacity: opacity,
-                child: Container(
-                  margin: margin,
-                  padding: padding,
-                  decoration: decoration,
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints.tightFor(
-                      width: double.infinity,
-                      height: double.infinity
-                    ),
-                    child: child
+    return Opacity(
+      opacity: opacity,
+      child: Container(
+        width: width,
+        height: height,
+        decoration: decoration,
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            bg,
+            ClipRRect(
+              borderRadius: borderRadius,
+              child: ClipRect(
+                child: BackdropFilter(
+                  filter: ui.ImageFilter.blur(
+                    sigmaX: blur,
+                    sigmaY: blur,
+                  ),
+                  child: Container(
+                    margin: margin,
+                    padding: padding,
+                    decoration: decorationInner,
+                    child: child,
                   ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -46,9 +46,9 @@ class _DecorationDemoState extends State<DecorationDemo> {
     final child = SynDecorationWidgetNew(
       width: 400,
       height: 400,
-      opacity: 0.8,
+      opacity: 1,
       blur: 10,
-      margin: const EdgeInsets.all(30),
+      margin: const EdgeInsets.all(20),
       padding: const EdgeInsets.all(30),
       topLeftRadius: 0,
       topRightRadius: 25,
