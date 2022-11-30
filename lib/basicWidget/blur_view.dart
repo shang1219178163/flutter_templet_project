@@ -7,13 +7,19 @@
 //
 
 
-import 'dart:ui';
+import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 
 /// 高斯模糊
 class BlurView extends StatelessWidget {
 
-  const BlurView({this.margin, this.radius = 10, required this.child, this.backdropFilter, this.blur});
+  const BlurView({
+    this.margin, 
+    this.radius = 10, 
+    required this.child, 
+    this.backdropFilter, 
+    this.blur
+  });
 
   final EdgeInsets? margin;
 
@@ -30,7 +36,7 @@ class BlurView extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.all(Radius.circular(radius!)),
         child: backdropFilter ?? BackdropFilter(
-          filter: ImageFilter.blur(
+          filter: ui.ImageFilter.blur(
             sigmaX: this.blur ?? 20,
             sigmaY: this.blur ?? 20,
           ),

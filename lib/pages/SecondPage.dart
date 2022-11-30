@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_templet_project/APPThemeSettings.dart';
 import 'package:flutter_templet_project/extension/buildContext_extension.dart';
+import 'package:flutter_templet_project/extension/decoration_extension.dart';
 import 'package:flutter_templet_project/extension/textStyle_extension.dart';
 import 'package:flutter_templet_project/pages/demo/MyPainter.dart';
 import 'package:flutter_templet_project/basicWidget/NNPopupRoute.dart';
@@ -190,41 +191,41 @@ class _SecondPageState extends State<SecondPage> {
             Divider(),
             _buildSectionTitle("TextButtonExt"),
             Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  TextButtonExt.build(
-                    text: Text("left"),
-                    image: Icon(Icons.info),
-                    imageAlignment: ImageAlignment.left,
-                    side: BorderSide(width: 1.0, color: Colors.black12),
-                    callback: (value, tag) {
-                      ddlog([value.data, tag]);
-                    }),
-                  TextButtonExt.build(
-                    text: Text("right"),
-                    image: Icon(Icons.info),
-                    imageAlignment: ImageAlignment.right,
-                    side: BorderSide(width: 1.0, color: Colors.blue),
-                    callback: (value, tag) {
-                      ddlog(value.data);
-                    }),
-                  TextButtonExt.build(
-                    text: Text("top"),
-                    image: Icon(Icons.info),
-                    imageAlignment: ImageAlignment.top,
-                    side: BorderSide(width: 1.0, color: Colors.red),
-                    callback: (value, tag) {
-                      ddlog(value.data);
-                    }),
-                  TextButtonExt.build(
-                    text: Text("bottom"),
-                    image: Icon(Icons.info),
-                    imageAlignment: ImageAlignment.bottom,
-                    side: BorderSide(width: 1.0, color: Colors.green),
-                    callback: (value, tag) {
-                      ddlog(value.data);
-                    }),
-                ]
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                TextButtonExt.build(
+                  text: Text("left"),
+                  image: Icon(Icons.info),
+                  imageAlignment: ImageAlignment.left,
+                  side: BorderSide(width: 1.0, color: Colors.black12),
+                  callback: (value, tag) {
+                    ddlog([value.data, tag]);
+                  }),
+                TextButtonExt.build(
+                  text: Text("right"),
+                  image: Icon(Icons.info),
+                  imageAlignment: ImageAlignment.right,
+                  side: BorderSide(width: 1.0, color: Colors.blue),
+                  callback: (value, tag) {
+                    ddlog(value.data);
+                  }),
+                TextButtonExt.build(
+                  text: Text("top"),
+                  image: Icon(Icons.info),
+                  imageAlignment: ImageAlignment.top,
+                  side: BorderSide(width: 1.0, color: Colors.red),
+                  callback: (value, tag) {
+                    ddlog(value.data);
+                  }),
+                TextButtonExt.build(
+                  text: Text("bottom"),
+                  image: Icon(Icons.info),
+                  imageAlignment: ImageAlignment.bottom,
+                  side: BorderSide(width: 1.0, color: Colors.green),
+                  callback: (value, tag) {
+                    ddlog(value.data);
+                  }),
+              ]
             ),
 
             Divider(),

@@ -52,6 +52,7 @@ class _BackdropFilterDemoState extends State<BackdropFilterDemo> {
                 alignment: Alignment.center,
                 width: 200.0,
                 height: 200.0,
+                // color: Colors.red,
                 child: const Text('Hello World'),
               ),
             ),

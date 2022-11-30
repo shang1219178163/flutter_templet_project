@@ -120,6 +120,8 @@ dependencies:
   flutter_smart_dialog: ^4.2.1
   flutter_rating_bar: ^4.0.1
   desktop_drop: ^0.3.3
+  badges: ^2.0.3
+  flutter_swiper_null_safety: ^1.0.0
 
 #  merge_images: ^1.0.3
 

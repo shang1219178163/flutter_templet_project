@@ -18,7 +18,7 @@ import 'package:flutter_templet_project/extension/divider_extension.dart';
 import 'package:flutter_templet_project/extension/list_extension.dart';
 import 'package:flutter_templet_project/extension/string_extension.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
-import 'package:flutter_templet_project/extension/widget_extension.dart';
+import 'package:flutter_templet_project/extension/object_extension.dart';
 
 import 'package:flutter_templet_project/main.dart';
 import 'package:flutter_templet_project/mockData/mock_data.dart';
@@ -402,6 +402,8 @@ var _list = [
   Tuple2(APPRouter.bannerDemo, "角落价格标签", ),
   Tuple2(APPRouter.listViewDemo, "listView", ),
   Tuple2(APPRouter.builderDemo, "各种回调 builder", ),
+  Tuple2(APPRouter.stackDemo, "StackDemo", ),
+
 
 ];
 
@@ -464,6 +466,7 @@ var _vendors = [
   Tuple2(APPRouter.ratingBarDemo, "星评", ),
   Tuple2(APPRouter.dragAndDropDemo, "文件拖拽", ),
   Tuple2(APPRouter.popoverDemo, "popoverDemo", ),
+  Tuple2(APPRouter.badgesDemo, "badgesDemo", ),
 
 ];
 
@@ -476,5 +479,6 @@ var _others = [
   Tuple2(APPRouter.loginPage, "LoginPage", ),
   Tuple2(APPRouter.loginPage2, "LoginPage2", ),
   Tuple2(APPRouter.testPage, "testPage", ),
+  Tuple2(APPRouter.decorationDemo, "decorationDemo", ),
 
 ];

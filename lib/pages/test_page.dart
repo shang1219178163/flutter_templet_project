@@ -75,6 +75,7 @@ class _TestPageState extends State<TestPage> {
             ),
             buildBtnColor(),
             buildSection4(),
+
           ],
         )
     );
@@ -259,6 +260,7 @@ class _TestPageState extends State<TestPage> {
     String result = paramStr.substring(0, paramStr.length - 1);
     return result;
   }
+
 
   testProperty(){
     // PropertyInfo.getVariableType();

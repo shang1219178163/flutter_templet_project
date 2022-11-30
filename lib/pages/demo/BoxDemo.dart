@@ -41,7 +41,7 @@ class _BoxDemoState extends State<BoxDemo> {
   }
 
   _buildBody() {
-    return ListView(
+    return Column(
       children: [
         _buildSizedBox(),
         Divider(),
@@ -50,7 +50,12 @@ class _BoxDemoState extends State<BoxDemo> {
         _buildFittedBox(),
         Divider(),
         _buildUnconstrainedBox(),
+        // Divider(),
+        // _buildOverflowBox(),
         Divider(),
+        _buildOverflowBox1(),
+        Divider(),
+        _buildOverflowBox2(),
       ],
     );
   }
@@ -128,7 +133,70 @@ class _BoxDemoState extends State<BoxDemo> {
       )
     );
   }
-  
+
+
+  _buildOverflowBox({
+    width: 70.0,
+    height: 70.0,
+    padding: const EdgeInsets.all(5.0),
+  }) {
+    return Container(
+      color: Colors.green,
+      width: width,
+      height: height,
+      padding: padding,
+      child: OverflowBox(
+        alignment: Alignment.topLeft,
+        maxWidth: width + 20 * 2,
+        maxHeight: width + 20 * 2,
+        child: Container(
+          color: Colors.yellow.withOpacity(0.5),
+        ),
+      ),
+    );
+  }
+
+  _buildOverflowBox1({
+    width: 70.0,
+    height: 70.0,
+    padding: const EdgeInsets.all(5.0),
+  }) {
+    return Container(
+      color: Colors.green,
+      width: width,
+      height: height,
+      // padding: padding,
+      child: OverflowBox(
+        alignment: Alignment.center,
+        maxWidth: width + 20 * 2,
+        maxHeight: width + 20 * 2,
+        child: Container(
+          color: Colors.yellow.withOpacity(0.5),
+        ),
+      ),
+    );
+  }
+
+  _buildOverflowBox2({
+    width: 70.0,
+    height: 70.0,
+    padding: const EdgeInsets.all(5.0),
+  }) {
+    return Container(
+      color: Colors.green,
+      width: width,
+      height: height,
+      // padding: padding,
+      child: OverflowBox(
+        alignment: Alignment.topRight,
+        maxWidth: 140,
+        maxHeight: 140,
+        child: Container(
+          color: Colors.blue.withOpacity(0.5),
+        ),
+      ),
+    );
+  }
 }
 
 
