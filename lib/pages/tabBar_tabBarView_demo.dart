@@ -467,6 +467,7 @@ var _vendors = [
   Tuple2(APPRouter.dragAndDropDemo, "文件拖拽", ),
   Tuple2(APPRouter.popoverDemo, "popoverDemo", ),
   Tuple2(APPRouter.badgesDemo, "badgesDemo", ),
+  Tuple2(APPRouter.flutterSwiperDemo, "flutterSwiperDemo", ),
 
 ];
 
@@ -480,5 +481,7 @@ var _others = [
   Tuple2(APPRouter.loginPage2, "LoginPage2", ),
   Tuple2(APPRouter.testPage, "testPage", ),
   Tuple2(APPRouter.decorationDemo, "decorationDemo", ),
+  Tuple2(APPRouter.synHomeSwiperDemo, "synHomeSwiperDemo", ),
+
 
 ];

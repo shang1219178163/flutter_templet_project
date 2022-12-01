@@ -5,6 +5,7 @@ import 'package:flutter_templet_project/basicWidget/DragDestinationView.dart';
 import 'package:flutter_templet_project/basicWidget/responsive_column.dart';
 import 'package:flutter_templet_project/pages/FlutterFFiTest.dart';
 import 'package:flutter_templet_project/pages/LocalImagePage.dart';
+import 'package:flutter_templet_project/pages/SynHomeSwiperDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AutocompleteDemo.dart';
 import 'package:flutter_templet_project/pages/demo/BuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ColoredBoxDemo.dart';
@@ -42,6 +43,7 @@ import 'package:flutter_templet_project/vendor/TextlessDemo.dart';
 import 'package:flutter_templet_project/vendor/aesthetic_dialogs_demo.dart';
 import 'package:flutter_templet_project/vendor/badges_demo.dart';
 import 'package:flutter_templet_project/vendor/custom_timer_demo.dart';
+import 'package:flutter_templet_project/vendor/flutter_swiper_demo.dart';
 import 'package:flutter_templet_project/vendor/qr/qr_code_scanner_demo.dart';
 import 'package:flutter_templet_project/vendor/qr/qr_flutter_demo.dart';
 import 'package:flutter_templet_project/vendor/timeline/timeline_demo.dart';
@@ -311,6 +313,8 @@ class APPRouter {
   static const decorationDemo = '/decorationDemo';
   static const stackDemo = '/stackDemo';
   static const badgesDemo = '/badgesDemo';
+  static const flutterSwiperDemo = '/flutterSwiperDemo';
+  static const synHomeSwiperDemo = '/synHomeSwiperDemo';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -496,6 +500,9 @@ class AppPage {
     GetPage(name: APPRouter.decorationDemo, page: () => DecorationDemo(),),
     GetPage(name: APPRouter.stackDemo, page: () => StackDemo(),),
     GetPage(name: APPRouter.badgesDemo, page: () => BadgesDemo(),),
+    GetPage(name: APPRouter.flutterSwiperDemo, page: () => FlutterSwiperDemo(),),
+    GetPage(name: APPRouter.synHomeSwiperDemo, page: () => SynHomeSwiperDemo(),),
+
 
   ];
 }
