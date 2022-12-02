@@ -15,6 +15,8 @@ import 'package:flutter_templet_project/pages/demo/DecorationDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DismissibleDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DragAndDropDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FittedBoxDemo.dart';
+import 'package:flutter_templet_project/pages/demo/GradientDemo.dart';
+import 'package:flutter_templet_project/pages/demo/ImageBlendModeDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ListViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MaterialBannerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ModalBarrierDemo.dart';
@@ -321,6 +323,8 @@ class APPRouter {
   static const synHomeNavDemo = '/synHomeNavDemo';
   static const wrapDemo = '/wrapDemo';
   static const boxConstraintsDemo = '/boxConstraintsDemo';
+  static const gradientDemo = '/gradientDemo';
+  static const imageBlendModeDemo = '/imageBlendModeDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -512,6 +516,8 @@ class AppPage {
     GetPage(name: APPRouter.synHomeNavDemo, page: () => SynHomeNavDemo(),),
     GetPage(name: APPRouter.wrapDemo, page: () => WrapDemo(),),
     GetPage(name: APPRouter.boxConstraintsDemo, page: () => BoxConstraintsDemo(),),
+    GetPage(name: APPRouter.gradientDemo, page: () => GradientDemo(),),
+    GetPage(name: APPRouter.imageBlendModeDemo, page: () => ImageBlendModeDemo(),),
 
 
   ];
