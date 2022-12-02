@@ -131,14 +131,16 @@ class MyApp extends StatelessWidget {
     //   },
     );
 
-    return Consumer<ColorFilteredProvider>(
-      builder: (BuildContext context, provider, Widget? child) {
-        return ColorFiltered(
-          colorFilter: ColorFilter.mode(provider.color, BlendMode.color),
-          child: app,
-        );
-      },
-    );
+    return app;
+    //全局置灰
+    // return Consumer<ColorFilteredProvider>(
+    //   builder: (BuildContext context, provider, Widget? child) {
+    //     return ColorFiltered(
+    //       colorFilter: ColorFilter.mode(provider.color, BlendMode.color),
+    //       child: app,
+    //     );
+    //   },
+    // );
   }
 }
 
@@ -228,7 +230,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    final page = Scaffold(
       key: kScaffoldKey,
       // drawer: MyDrawer(),
       drawer: APPDrawerMenuPage(),
@@ -257,7 +259,15 @@ class _MyHomePageState extends State<MyHomePage> {
       // ),
 
     );
-
+    return Consumer<ColorFilteredProvider>(
+      builder: (BuildContext context, provider, Widget? child) {
+        //仅首页置灰
+        return ColorFiltered(
+          colorFilter: ColorFilter.mode(provider.color, BlendMode.color),
+          child: page,
+        );
+      },
+    );
   }
 
   ///创建导航栏
