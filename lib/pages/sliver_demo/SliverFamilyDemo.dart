@@ -46,28 +46,28 @@ class _SliverFamilyDemoState extends State<SliverFamilyDemo> {
 
   Widget _buildListView(BuildContext context) {
     return ListView.separated(
-          itemCount: _list.length,
-          separatorBuilder: (context, index) {
-            return Divider(
-              color: Colors.green,
-            );
+      itemCount: _list.length,
+      separatorBuilder: (context, index) {
+        return Divider(
+          color: Colors.green,
+        );
+      },
+      itemBuilder: (context, index) {
+        final e = _list[index];
+        return GestureDetector(
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) {
+                  return e.item3;
+                }
+            ));
           },
-          itemBuilder: (context, index) {
-            final e = _list[index];
-            return GestureDetector(
-              onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) {
-                      return e.item3;
-                    }
-                ));
-              },
-              child: ListTile(
-                title: Text(e.item1),
-                subtitle: Text(e.item2),
-              ),
-            );
-          });
+          child: ListTile(
+            title: Text(e.item1),
+            subtitle: Text(e.item2),
+          ),
+        );
+      });
   }
 
 

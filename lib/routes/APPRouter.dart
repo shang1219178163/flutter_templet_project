@@ -5,9 +5,12 @@ import 'package:flutter_templet_project/basicWidget/DragDestinationView.dart';
 import 'package:flutter_templet_project/basicWidget/responsive_column.dart';
 import 'package:flutter_templet_project/pages/FlutterFFiTest.dart';
 import 'package:flutter_templet_project/pages/LocalImagePage.dart';
+import 'package:flutter_templet_project/pages/SynHomeNavDemo.dart';
+import 'package:flutter_templet_project/pages/SynHomeSwiperDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AutocompleteDemo.dart';
 import 'package:flutter_templet_project/pages/demo/BuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ColoredBoxDemo.dart';
+import 'package:flutter_templet_project/pages/demo/DecorationDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DismissibleDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DragAndDropDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FittedBoxDemo.dart';
@@ -24,9 +27,11 @@ import 'package:flutter_templet_project/pages/demo/RotatedBoxDemo.dart';
 import 'package:flutter_templet_project/pages/demo/SelectableTextDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ShortcutsDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ShortcutsDemoOne.dart';
+import 'package:flutter_templet_project/pages/demo/StackDemo.dart';
 import 'package:flutter_templet_project/pages/demo/StatefulBuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TransformDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ValueListenableBuilderDemo.dart';
+import 'package:flutter_templet_project/pages/demo/WrapDemo.dart';
 import 'package:flutter_templet_project/pages/demo/drawImageNineDemo.dart';
 import 'package:flutter_templet_project/pages/demo/flutter_smart_dialog_demo.dart';
 import 'package:flutter_templet_project/pages/demo/isolateDemo.dart';
@@ -38,7 +43,9 @@ import 'package:flutter_templet_project/vendor/ScribbleDemo.dart';
 import 'package:flutter_templet_project/vendor/SkeletonDemo.dart';
 import 'package:flutter_templet_project/vendor/TextlessDemo.dart';
 import 'package:flutter_templet_project/vendor/aesthetic_dialogs_demo.dart';
+import 'package:flutter_templet_project/vendor/badges_demo.dart';
 import 'package:flutter_templet_project/vendor/custom_timer_demo.dart';
+import 'package:flutter_templet_project/vendor/flutter_swiper_demo.dart';
 import 'package:flutter_templet_project/vendor/qr/qr_code_scanner_demo.dart';
 import 'package:flutter_templet_project/vendor/qr/qr_flutter_demo.dart';
 import 'package:flutter_templet_project/vendor/timeline/timeline_demo.dart';
@@ -305,7 +312,13 @@ class APPRouter {
   static const listViewDemo = '/listViewDemo';
   static const builderDemo = '/builderDemo';
   static const overlayDemo = '/overlayDemo';
-
+  static const decorationDemo = '/decorationDemo';
+  static const stackDemo = '/stackDemo';
+  static const badgesDemo = '/badgesDemo';
+  static const flutterSwiperDemo = '/flutterSwiperDemo';
+  static const synHomeSwiperDemo = '/synHomeSwiperDemo';
+  static const synHomeNavDemo = '/synHomeNavDemo';
+  static const wrapDemo = '/wrapDemo';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -488,6 +501,13 @@ class AppPage {
     GetPage(name: APPRouter.listViewDemo, page: () => ListViewDemo(),),
     GetPage(name: APPRouter.builderDemo, page: () => BuilderDemo(),),
     GetPage(name: APPRouter.overlayDemo, page: () => OverlayDemo(),),
+    GetPage(name: APPRouter.decorationDemo, page: () => DecorationDemo(),),
+    GetPage(name: APPRouter.stackDemo, page: () => StackDemo(),),
+    GetPage(name: APPRouter.badgesDemo, page: () => BadgesDemo(),),
+    GetPage(name: APPRouter.flutterSwiperDemo, page: () => FlutterSwiperDemo(),),
+    GetPage(name: APPRouter.synHomeSwiperDemo, page: () => SynHomeSwiperDemo(),),
+    GetPage(name: APPRouter.synHomeNavDemo, page: () => SynHomeNavDemo(),),
+    GetPage(name: APPRouter.wrapDemo, page: () => WrapDemo(),),
 
 
   ];

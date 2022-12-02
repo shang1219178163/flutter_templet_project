@@ -41,6 +41,12 @@ class _TestPageState extends State<TestPage> {
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.title ?? "$widget"),
+          actions: ['done',].map((e) => TextButton(
+            child: Text(e,
+                style: TextStyle(color: Colors.white),
+              ),
+            onPressed: onDone,)
+          ).toList(),
         ),
         body: Column(
           children: [
@@ -69,9 +75,20 @@ class _TestPageState extends State<TestPage> {
             ),
             buildBtnColor(),
             buildSection4(),
+
           ],
         )
     );
+  }
+
+  onDone() {
+    final a = true;
+    final b = "nested ${a ? "strings" : "can"} be wrapped by a double quote";
+
+    final list = 'final'.split('');
+    for (final char in list) {
+      debugPrint("e: $char");
+    }
   }
 
   Wrap buildWrap() {
@@ -175,7 +192,6 @@ class _TestPageState extends State<TestPage> {
             Text('${e.item1}'),
           ]
       )).toList(),
-
     );
   }
 
@@ -244,6 +260,7 @@ class _TestPageState extends State<TestPage> {
     String result = paramStr.substring(0, paramStr.length - 1);
     return result;
   }
+
 
   testProperty(){
     // PropertyInfo.getVariableType();

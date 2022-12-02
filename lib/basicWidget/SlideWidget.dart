@@ -17,13 +17,13 @@ class SlideWidget extends StatefulWidget {
   Color buttonColor;
   VoidCallback onButtonPressed;
 
-  SlideWidget(
-      {Key? key,
-      required this.child,
-      required this.button,
-      this.buttonColor: Colors.red,
-      required this.onButtonPressed})
-      : super(key: key);
+  SlideWidget({
+    Key? key,
+    this.buttonColor = Colors.red,
+    required this.child,
+    required this.button,
+    required this.onButtonPressed
+  }) : super(key: key);
 
   @override
   State<StatefulWidget> createState() =>
@@ -45,10 +45,11 @@ class SlideWidgetState extends State<SlideWidget> with SingleTickerProviderState
   bool isOpen = false;
 
   SlideWidgetState(
-      this.child,
-      this.button,
-      this.buttonColor,
-      this.onButtonPressed);
+    this.child,
+    this.button,
+    this.buttonColor,
+    this.onButtonPressed
+   );
 
   @override
   void initState() {
@@ -134,16 +135,17 @@ class SlideWidgetState extends State<SlideWidget> with SingleTickerProviderState
             Container(
               width: _buttonWidth,
               child: FlatButton(
-                  padding: EdgeInsets.all(0.0),
-                  shape: RoundedRectangleBorder(),
-                  onPressed: () {
-                    onButtonPressed();
-                  },
-                  color: buttonColor,
-                  child: Text(
-                    button,
-                    style: TextStyle(color: Colors.white, fontSize: 16.0),
-                  )),
+                padding: EdgeInsets.all(0.0),
+                shape: RoundedRectangleBorder(),
+                onPressed: () {
+                  onButtonPressed();
+                },
+                color: buttonColor,
+                child: Text(
+                  button,
+                  style: TextStyle(color: Colors.white, fontSize: 16.0),
+                )
+              ),
             ),
           ],
         ),
@@ -167,25 +169,28 @@ class Slide2Widget extends SingleChildRenderObjectWidget {
   RenderObject createRenderObject(BuildContext context) => RenderSlideObject(child: this.child);
 
   @override
-  void updateRenderObject(
-      BuildContext context, RenderSlideObject renderObject) {
+  void updateRenderObject(BuildContext context, RenderSlideObject renderObject) {
     renderObject._offset = offset;
     renderObject.markNeedsLayout();
   }
 }
 
 class RenderSlideObject extends RenderProxyBox {
-  Offset _offset = Offset.zero;
 
   RenderSlideObject({
-    required RenderBox child}) :
-        assert(child != null),
-        super(child);
+    required RenderBox child
+  }) : super(child);
+
+  Offset _offset = Offset.zero;
 
   @override
   void paint(PaintingContext context, Offset offset) {
     context.pushClipRect(
-        needsCompositing, offset, Offset.zero & size, defaultPaint);
+      needsCompositing,
+      offset,
+      Offset.zero & size,
+      defaultPaint
+    );
   }
 
   void defaultPaint(PaintingContext context, Offset offset) {
@@ -194,6 +199,10 @@ class RenderSlideObject extends RenderProxyBox {
 
   @override
   performLayout() {
+    if (child == null) {
+      return;
+    }
+
     BoxConstraints childConstraints = const BoxConstraints();
     child!.layout(childConstraints, parentUsesSize: true);
     size = child!.size - Offset(_buttonWidth, 0.0);
