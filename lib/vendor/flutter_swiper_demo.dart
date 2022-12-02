@@ -113,7 +113,7 @@ class ExampleHorizontal extends StatelessWidget {
         ),
         body: new Swiper(
           itemBuilder: (BuildContext context, int index) {
-            return MyItem(
+            return CustomSwiperItem(
               url: images[index],
               color: index.isEven ? Colors.green : Colors.yellow,
             );
@@ -124,7 +124,7 @@ class ExampleHorizontal extends StatelessWidget {
           pagination: new SwiperPagination(),
           control: new SwiperControl(),
           // itemWidth: screenSize.width * 0.5,
-          viewportFraction: 0.6,
+          // viewportFraction: 0.6,
         )
     );
   }
@@ -139,7 +139,7 @@ class ExampleVertical extends StatelessWidget {
         ),
         body: new Swiper(
           itemBuilder: (BuildContext context, int index) {
-            return MyItem(
+            return CustomSwiperItem(
               url: images[index],
               color: index.isEven ? Colors.green : Colors.yellow,
             );
@@ -182,7 +182,7 @@ class ExampleFraction extends StatelessWidget {
         child: new Swiper(
           itemBuilder: (BuildContext context, int index) {
             return Container(
-              child: MyItem(
+              child: CustomSwiperItem(
                 url: images[index],
                 color: index.isEven ? Colors.green : Colors.yellow,
               ),
@@ -214,7 +214,7 @@ class ExampleFraction extends StatelessWidget {
             return Container(
               margin: margin,
               padding: padding,
-              child: MyItem(
+              child: CustomSwiperItem(
                 url: images[index],
                 color: index.isEven ? Colors.green : Colors.yellow,
               ),
@@ -234,7 +234,7 @@ class ExampleFraction extends StatelessWidget {
     return Expanded(
         child: new Swiper(
           itemBuilder: (BuildContext context, int index) {
-            return MyItem(
+            return CustomSwiperItem(
               url: images[index],
               color: index.isEven ? Colors.green : Colors.yellow,
             );
@@ -253,7 +253,7 @@ class ExampleFraction extends StatelessWidget {
     return Expanded(
         child: new Swiper(
           itemBuilder: (BuildContext context, int index) {
-            return MyItem(
+            return CustomSwiperItem(
               url: images[index],
               color: index.isEven ? Colors.green : Colors.yellow,
             );
@@ -272,7 +272,7 @@ class ExampleFraction extends StatelessWidget {
     return Expanded(
       child: new Swiper(
         itemBuilder: (BuildContext context, int index) {
-          return MyItem(
+          return CustomSwiperItem(
             url: images[index],
             color: index.isEven ? Colors.green : Colors.yellow,
           );
@@ -318,7 +318,7 @@ class ExampleFraction extends StatelessWidget {
         itemWidth: 300.0,
         itemHeight: 200.0,
         itemBuilder: (BuildContext context, int index) {
-          return MyItem(
+          return CustomSwiperItem(
             url: images[index],
             color: index.isEven ? Colors.green : Colors.yellow,
           );
@@ -488,9 +488,9 @@ class ScaffoldWidget extends StatelessWidget {
 }
 
 
-class MyItem extends StatelessWidget {
+class CustomSwiperItem extends StatelessWidget {
 
-  const MyItem({
+  const CustomSwiperItem({
     Key? key,
     this.color = Colors.white,
     this.padding = const EdgeInsets.all(0),

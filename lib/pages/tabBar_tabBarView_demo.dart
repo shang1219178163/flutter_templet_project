@@ -403,7 +403,7 @@ var _list = [
   Tuple2(APPRouter.listViewDemo, "listView", ),
   Tuple2(APPRouter.builderDemo, "各种回调 builder", ),
   Tuple2(APPRouter.stackDemo, "StackDemo", ),
-
+  Tuple2(APPRouter.wrapDemo, "流水自动换行", ),
 
 ];
 
@@ -482,6 +482,6 @@ var _others = [
   Tuple2(APPRouter.testPage, "testPage", ),
   Tuple2(APPRouter.decorationDemo, "decorationDemo", ),
   Tuple2(APPRouter.synHomeSwiperDemo, "synHomeSwiperDemo", ),
-
+  Tuple2(APPRouter.synHomeNavDemo, "synHomeNavDemo", ),
 
 ];
