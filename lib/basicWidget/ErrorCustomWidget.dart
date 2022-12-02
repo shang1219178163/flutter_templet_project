@@ -11,25 +11,20 @@ class ErrorCustomWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text('Error Info'),
-        ),
-        body: Center(
-          child: Text(details.toString()),
-          // child: Container(
-          //   color: Colors.red.shade400,
-          //   child: Column(
-          //     mainAxisAlignment: MainAxisAlignment.center,
-          //     children: [
-          //       Icon(Icons.error, size: 44,),
-          //       Text(details.toString(),
-          //         style: TextStyle(fontSize: 16.0, color: Colors.red),
-          //       ),
-          //     ],
-          //   ),
-          // ),
-        ),
+    return Center(
+      child: Text(details.toString()),
+      // child: Container(
+      //   color: Colors.red.shade400,
+      //   child: Column(
+      //     mainAxisAlignment: MainAxisAlignment.center,
+      //     children: [
+      //       Icon(Icons.error, size: 44,),
+      //       Text(details.toString(),
+      //         style: TextStyle(fontSize: 16.0, color: Colors.red),
+      //       ),
+      //     ],
+      //   ),
+      // ),
     );
   }
 }
