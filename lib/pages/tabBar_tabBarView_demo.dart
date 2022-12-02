@@ -428,6 +428,7 @@ var _specials = [
   Tuple2(APPRouter.promptBuilderDemo, "指引模板", ),
   Tuple2(APPRouter.isolateDemo, "isolateDemo", ),
   Tuple2(APPRouter.overlayDemo, "overlay弹窗", ),
+  Tuple2(APPRouter.boxConstraintsDemo, "boxConstraints", ),
 
 ];
 
