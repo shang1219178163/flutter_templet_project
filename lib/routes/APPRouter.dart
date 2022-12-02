@@ -3,6 +3,7 @@
 import 'package:flutter_templet_project/Provider/provider_list_demo.dart';
 import 'package:flutter_templet_project/basicWidget/DragDestinationView.dart';
 import 'package:flutter_templet_project/basicWidget/responsive_column.dart';
+import 'package:flutter_templet_project/pages/BoxConstraintsDemo.dart';
 import 'package:flutter_templet_project/pages/FlutterFFiTest.dart';
 import 'package:flutter_templet_project/pages/LocalImagePage.dart';
 import 'package:flutter_templet_project/pages/SynHomeNavDemo.dart';
@@ -319,6 +320,8 @@ class APPRouter {
   static const synHomeSwiperDemo = '/synHomeSwiperDemo';
   static const synHomeNavDemo = '/synHomeNavDemo';
   static const wrapDemo = '/wrapDemo';
+  static const boxConstraintsDemo = '/boxConstraintsDemo';
+
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -508,6 +511,7 @@ class AppPage {
     GetPage(name: APPRouter.synHomeSwiperDemo, page: () => SynHomeSwiperDemo(),),
     GetPage(name: APPRouter.synHomeNavDemo, page: () => SynHomeNavDemo(),),
     GetPage(name: APPRouter.wrapDemo, page: () => WrapDemo(),),
+    GetPage(name: APPRouter.boxConstraintsDemo, page: () => BoxConstraintsDemo(),),
 
 
   ];

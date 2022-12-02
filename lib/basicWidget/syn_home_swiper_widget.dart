@@ -121,7 +121,7 @@ class SynHomeSwiperWidget extends StatelessWidget {
               image: url,
               fit: BoxFit.cover,
               width: itemWidth,
-              // height: double.infinity
+              height: double.infinity
             ),
         ),
       );
