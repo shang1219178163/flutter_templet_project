@@ -24,6 +24,7 @@ const shadow3D = [
   ),
 ];
 
+
 /// 外观样式
 enum IndicatorStyle{
   topLine,
@@ -77,6 +78,14 @@ extension BorderExt on Border{
 
 extension on BoxDecoration{
 
+  // lineDecoration() {
+  //   return BoxDecoration(
+  //     // color: Colors.green,
+  //     border: Border.all(
+  //       color: Colors.red,
+  //     ),
+  //   );
+  // }
 
 }
 
