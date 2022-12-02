@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/SectionHeader.dart';
 
 class BuilderDemo extends StatefulWidget {
 
@@ -37,16 +38,6 @@ class _BuilderDemoState extends State<BuilderDemo> with TickerProviderStateMixin
     );
   }
 
-  _buildSectionTitle(String title) {
-    return Align(
-      alignment: Alignment.centerLeft,
-      child: Text(
-        title,
-        style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
-      ),
-    );
-  }
-
   _buildBox(String title) {
     return Container(
       width: 150.0,
@@ -61,7 +52,7 @@ class _BuilderDemoState extends State<BuilderDemo> with TickerProviderStateMixin
   _buildBody() {
     return Column(
       children: [
-        _buildSectionTitle('AnimatedBuilder'),
+        SectionHeader.h5(title: 'AnimatedBuilder'),
         AnimatedBuilder(
           animation: _controller,
           child: _buildBox('AnimatedBuilder'),
@@ -74,13 +65,13 @@ class _BuilderDemoState extends State<BuilderDemo> with TickerProviderStateMixin
         ),
 
         Divider(),
-        _buildSectionTitle('Builder/约等于 StatelessWidget'),
+        SectionHeader.h5(title: 'Builder/约等于 StatelessWidget'),
         Builder(builder: (BuildContext context) {
           return _buildBox('Builder');
         }),
 
         Divider(),
-        _buildSectionTitle('StatefulBuilder/约等于 StatefulWidget'),
+        SectionHeader.h5(title: 'StatefulBuilder/约等于 StatefulWidget'),
         StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
           return _buildBox('StatefulBuilder');
         }),
