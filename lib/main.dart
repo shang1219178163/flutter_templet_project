@@ -9,6 +9,7 @@ import 'package:flutter_templet_project/extension/button_extension.dart';
 import 'package:flutter_templet_project/pages/demo/TabBarDemo.dart';
 import 'package:flutter_templet_project/pages/tabBar_tabBarView_demo.dart';
 import 'package:flutter_templet_project/provider/ProxyProvider_demo.dart';
+import 'package:flutter_templet_project/provider/color_filtered_provider.dart';
 import 'package:flutter_templet_project/provider/rxDart_provider_demo.dart';
 import 'package:flutter_templet_project/Pages/APPUserCenterPage.dart';
 
@@ -58,6 +59,8 @@ Future<void> main() async {
   runApp(
     MultiProvider(
       providers: [
+        ChangeNotifierProvider.value(value: ColorFilteredProvider()),
+
         ChangeNotifierProvider(create: (context) => CartModel()),
         Provider(create: (context) => CounterBloc()),
         ChangeNotifierProvider<Person>(create: (ctx) => Person(),),
@@ -105,7 +108,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    final app = GetMaterialApp(
       key: navigatorState,
       title: 'Flutter Templet',
       debugShowCheckedModeBanner: false,
@@ -127,6 +130,17 @@ class MyApp extends StatelessWidget {
     //     "/TwoPage": (context) => TwoPage(),
     //   },
     );
+
+    return app;
+    //全局置灰
+    // return Consumer<ColorFilteredProvider>(
+    //   builder: (BuildContext context, provider, Widget? child) {
+    //     return ColorFiltered(
+    //       colorFilter: ColorFilter.mode(provider.color, BlendMode.color),
+    //       child: app,
+    //     );
+    //   },
+    // );
   }
 }
 
@@ -216,7 +230,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    final page = Scaffold(
       key: kScaffoldKey,
       // drawer: MyDrawer(),
       drawer: APPDrawerMenuPage(),
@@ -245,7 +259,15 @@ class _MyHomePageState extends State<MyHomePage> {
       // ),
 
     );
-
+    return Consumer<ColorFilteredProvider>(
+      builder: (BuildContext context, provider, Widget? child) {
+        //仅首页置灰
+        return ColorFiltered(
+          colorFilter: ColorFilter.mode(provider.color, BlendMode.color),
+          child: page,
+        );
+      },
+    );
   }
 
   ///创建导航栏

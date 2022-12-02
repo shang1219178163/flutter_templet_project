@@ -20,7 +20,7 @@ class _ImageBlendModeDemoState extends State<ImageBlendModeDemo> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(widget.title ?? "$this"),
+          title: Text(widget.title ?? "$widget"),
           actions: [
             IconButton(
               onPressed: (){
@@ -39,6 +39,7 @@ class _ImageBlendModeDemoState extends State<ImageBlendModeDemo> {
     var name = flag ? 'images/img_update.png' : 'images/flutter_logo.png';
     return Container(
       // color: Colors.black,
+      padding: EdgeInsets.all(8),
       child: Wrap(
         children: blendModes.map((e) => Container(
           child: Column(
