@@ -15,7 +15,7 @@ class SynHomeNavWidget extends StatelessWidget {
     this.margin = EdgeInsets.zero,
     this.spacing = 22,
     this.runSpacing = 12,
-    this.direction = Axis.vertical,
+    this.direction = Axis.horizontal,
     this.rowCount = 5,
   }) : super(key: key);
 
@@ -108,37 +108,6 @@ class SynHomeNavWidget extends StatelessWidget {
             _buildText(text: '免费设计免'),
           ],
         ),
-      ),
-    );
-  }
-  
-  Widget _buildItem({
-    required String url,
-    required String text,
-    required VoidCallback onPressed,
-  }) {
-    return GestureDetector(
-      onTap: onPressed,
-      child: Column(
-        children: [
-          Container(
-            color: Colors.red,
-            constraints: BoxConstraints(
-              maxWidth: itemWidth(),
-              maxHeight: 80,
-              minWidth: 50,
-              minHeight: 70,
-            ),
-            child: FadeInImage.assetNetwork(
-              placeholder: 'images/img_placeholder.png',
-              image: url,
-              fit: BoxFit.fill,
-              // width: 30,
-            ),
-          ),
-          SizedBox(height: 6,),
-          Text(text),
-        ],
       ),
     );
   }
