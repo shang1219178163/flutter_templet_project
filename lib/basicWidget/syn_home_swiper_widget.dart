@@ -6,58 +6,67 @@ import 'package:tuple/tuple.dart';
 class SynHomeSwiperWidget extends StatelessWidget {
 
   final String? title;
-  final double? width;
-  final double? height;
+   double width;
+   double height;
+  final EdgeInsets padding;
+  final EdgeInsets margin;
 
-  const SynHomeSwiperWidget({
+  final ImageProvider? bg;
+  final IndexedWidgetBuilder? itemBuilder;
+
+  final double showCount;
+  final double startLeft;
+  final double endRight;
+  final double gap;
+
+   SynHomeSwiperWidget({
   	Key? key,
   	this.title,
     this.width = double.infinity,
     this.height = double.infinity,
+    this.padding = EdgeInsets.zero,
+    this.margin = EdgeInsets.zero,
+    this.bg,
+    this.itemBuilder,
+    this.showCount = 2.5,
+    this.startLeft = 12,
+    this.endRight = 12,
+    this.gap = 8,
   }) : super(key: key);
+
+  double getItemWidth() {
+    double w = this.width - this.padding.left - this.padding.right;
+    if (this.showCount == 2.5) {
+      w = (w - 2 * this.gap - this.startLeft)/2.8;
+    } else if ([1, 2, 3].contains(this.showCount)) {
+      w = (w - this.startLeft - this.endRight - (this.showCount - 1) * this.gap )/this.showCount;
+    }
+    return w;
+  }
 
   @override
   Widget build(BuildContext context) {
     return _buildBody();
   }
 
-  _buildBoxDecoration({
-    ImageProvider<Object>? image,
-    Color? color,
-    Border? border,
-    BorderRadiusGeometry? borderRadius = const BorderRadius.all(Radius.circular(5)),
-  }) {
-    return BoxDecoration(
-      color: color,
-      border: border ?? Border.all(width: 0, color: Colors.transparent),
-      borderRadius: borderRadius,
-      image: image == null ? null : DecorationImage(
-        image: image,
-        fit: BoxFit.fill
-      ), //设置图片
-    );
-  }
-
   _buildBody() {
     return Container(
-      margin: EdgeInsets.only(left: 12, right: 12, top: 12, bottom: 12),
-      width: double.infinity,
-      height: 147*1.2,
+      width: width,
+      height: height,
+      padding: padding,
+      margin: margin,
       decoration: BoxDecoration(
-        color: Colors.black,
-        border: Border.all(width: 3, color: Colors.red),
+        color: Colors.green,
+        // border: Border.all(width: 3, color: Colors.red),
         // borderRadius:const BorderRadius.all(Radius.circular(6)),
-        image: DecorationImage(
-          image: AssetImage('images/bg_home_swiper.png'),
-          fit: BoxFit.fill
+        image: bg == null ? null : DecorationImage(
+            image: bg!,
+            fit: BoxFit.fill
         ), //设置图片
       ),
-      child: Padding(
-        padding: EdgeInsets.only(top: 47, right: 0, bottom: 16, left: 0, ),
-        child: ListView(
-          scrollDirection: Axis.horizontal,
-          children: _buildChildren(),
-        ),
+      child: ListView(
+        scrollDirection: Axis.horizontal,
+        children: _buildChildren(),
       )
     );
   }
@@ -87,14 +96,34 @@ class SynHomeSwiperWidget extends StatelessWidget {
     ];
 
     return items.map((e) {
-      double width = e.item1;
+      double width = getItemWidth();
+      // double width = 150;
+
       final url = e.item2;
       final text = e.item3;
 
       int index = items.indexOf(e);
-      var padding = index == items.length - 1 ? EdgeInsets.only(left: 8, right: 8)
-          : EdgeInsets.only(left: 8, right: 0);
-      // padding = EdgeInsets.all(0);
+      var padding = EdgeInsets.zero;
+
+      if (this.showCount == 2.5) {
+        if (index == 0) {
+          padding = EdgeInsets.only(left: this.startLeft, right: this.gap);
+        } else if (index == items.length - 1) {
+          padding = EdgeInsets.only(left: 0, right: this.endRight);
+        } else {
+          padding = EdgeInsets.only(left: 0, right: this.gap);
+        }
+      } else {
+        var itemLeft = 0.0;
+        var itemRight = this.gap;
+        if (index == 0) {
+          itemLeft = this.startLeft;
+        }
+        if (index == items.length - 1) {
+          itemRight = 0;
+        }
+        padding = EdgeInsets.only(left: itemLeft, right: itemRight);
+      }
 
       return Padding(
         padding: padding,
@@ -105,9 +134,9 @@ class SynHomeSwiperWidget extends StatelessWidget {
             return FadeInImage.assetNetwork(
               placeholder: 'images/img_placeholder.png',
               image: url,
-              fit: BoxFit.fill,
+              fit: BoxFit.cover,
               width: width,
-              height: double.infinity
+              // height: double.infinity
             );
           },
         ),
@@ -146,6 +175,7 @@ class SynHomeSwiperWidget extends StatelessWidget {
   _buildItem1({
     text = '',
     padding = const EdgeInsets.all(0),
+    isVideo = true,
     required Widget Function() bgBuilder,
   }) {
     return Stack(
@@ -155,13 +185,6 @@ class SynHomeSwiperWidget extends StatelessWidget {
           alignment: Alignment.bottomLeft,
           children: [
             bgBuilder(),
-            // FadeInImage.assetNetwork(
-            //   placeholder: 'images/img_placeholder.png',
-            //   image: 'https://avatar.csdn.net/8/9/A/3_chenlove1.jpg',
-            //   fit: BoxFit.fill,
-            //   width: 100,
-            // ),
-
             _buildText(
               alignment: Alignment.bottomLeft,
               padding: padding,
@@ -176,7 +199,7 @@ class SynHomeSwiperWidget extends StatelessWidget {
             )
           ],
         ),
-        SizedBox(
+        if (isVideo) SizedBox(
           width: 24,
           height: 24,
           child: Image.asset('images/icon_play.png',),
@@ -185,44 +208,130 @@ class SynHomeSwiperWidget extends StatelessWidget {
     );
   }
 
-  // _buildItem({
-  //   double width = 200,
-  //   EdgeInsetsGeometry margin = const EdgeInsets.only(left: 8, right: 8),
-  //   String text = '-',
-  //   ImageProvider? bg,
-  // }) {
-  //   return Stack(
-  //     alignment: Alignment.center,
-  //     children: [
-  //       Container(
-  //         margin: margin,
-  //         width: width,
-  //         decoration: _buildBoxDecoration(
-  //           // image: AssetImage('images/img_placeholder.png'),
-  //           // image: NetworkImage('..'),
-  //           image: bg,
-  //         ),
-  //         child: _buildText(
-  //           alignment: Alignment.bottomLeft,
-  //           padding: EdgeInsets.only(left: 6, bottom: 4),
-  //           text: text,
-  //           maxLines: 1,
-  //           style: TextStyle(
-  //             fontSize: 12.0,
-  //             fontWeight: FontWeight.w400,
-  //             fontFamily: 'PingFangSC-Regular,PingFang SC',
-  //             color: Color(0xFFFFFFFF),
-  //           ),
-  //         ),
-  //       ),
-  //       SizedBox(
-  //         width: 24,
-  //         height: 24,
-  //         child: Image.asset('images/icon_play.png',),
-  //       ),
-  //     ],
-  //   );
-  // }
+}
 
+
+class _SynHomeSwiperTitleWidget extends StatelessWidget {
+
+  const _SynHomeSwiperTitleWidget({
+  	Key? key,
+  	this.title,
+    this.text,
+    this.maxLines,
+    this.style,
+    this.padding,
+    this.alignment,
+  }) : super(key: key);
+
+  final String? text;
+  final int? maxLines;
+  final TextStyle? style;
+  final String? title;
+  final EdgeInsets? padding;
+  final Alignment? alignment;
+
+  @override
+  Widget build(BuildContext context) {
+    return _buildText(
+      text: this.text,
+      maxLines: this.text,
+      style: this.style ?? const TextStyle(
+        fontSize: 12.0,
+        fontWeight: FontWeight.w400,
+        fontFamily: 'PingFangSC-Regular,PingFang SC',
+        color: Color(0xFFFFFFFF),
+      ),
+      padding: this.padding ?? const EdgeInsets.all(0),
+      alignment: this.alignment ?? Alignment.centerLeft,
+    );
+  }
+
+  _buildText({
+    text = '-',
+    maxLines = 1,
+    style = const TextStyle(
+      fontSize: 12.0,
+      fontWeight: FontWeight.w400,
+      fontFamily: 'PingFangSC-Regular,PingFang SC',
+      color: Color(0xFFFFFFFF),
+    ),
+    padding = const EdgeInsets.all(0),
+    alignment = Alignment.centerLeft,
+  }) {
+    return Align(
+      alignment: alignment,
+      child: Padding(
+        padding: padding,
+        child: Text(
+          text,
+          overflow: TextOverflow.ellipsis,
+          maxLines: maxLines,
+          style: style,
+        ),
+      ),
+    );
+  }
+}
+
+class _SynHomeSwiperItemWidget extends StatelessWidget {
+
+  const _SynHomeSwiperItemWidget({
+    Key? key,
+    this.text,
+    this.isVideo = true,
+    this.padding,
+    required this.bgBuilder,
+  }) : super(key: key);
+
+  final String? text;
+  final bool isVideo;
+  final EdgeInsets? padding;
+  final Widget Function() bgBuilder;
+
+  @override
+  Widget build(BuildContext context) {
+    return _buildItem(
+      text: this.text,
+      padding: this.text,
+      isVideo: this.isVideo,
+      bgBuilder: this.bgBuilder,
+    );
+  }
+
+  _buildItem({
+    text = '',
+    padding = const EdgeInsets.all(0),
+    isVideo = true,
+    required Widget Function() bgBuilder,
+  }) {
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        Stack(
+          alignment: Alignment.bottomLeft,
+          children: [
+            bgBuilder(),
+            _SynHomeSwiperTitleWidget(
+              alignment: Alignment.bottomLeft,
+              padding: padding,
+              text: text,
+              maxLines: 1,
+              style: TextStyle(
+                fontSize: 12.0,
+                fontWeight: FontWeight.w400,
+                fontFamily: 'PingFangSC-Regular,PingFang SC',
+                color: Color(0xFFFFFFFF),
+              ),
+            )
+          ],
+        ),
+        if (isVideo) SizedBox(
+          width: 24,
+          height: 24,
+          child: Image.asset('images/icon_play.png',),
+        ),
+      ],
+    );
+  }
 
 }
