@@ -429,6 +429,8 @@ var _specials = [
   Tuple2(APPRouter.isolateDemo, "isolateDemo", ),
   Tuple2(APPRouter.overlayDemo, "overlay弹窗", ),
   Tuple2(APPRouter.boxConstraintsDemo, "boxConstraints", ),
+  Tuple2(APPRouter.gradientDemo, "渐变色", ),
+  Tuple2(APPRouter.imageBlendModeDemo, "图片渲染模式", ),
 
 ];
 

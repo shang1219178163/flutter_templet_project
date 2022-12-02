@@ -114,6 +114,7 @@ class SynHomeSwiperWidget extends StatelessWidget {
       return Padding(
         padding: padding,
         child: this.itemBuilder != null ? this.itemBuilder!(index) : _buildItem(
+          itemWidth: itemWidth,
           text: text,
           padding: EdgeInsets.only(left: 6, bottom: 4),
           bg: this.bgBuilder != null ? this.bgBuilder!(itemWidth, index) : FadeInImage.assetNetwork(
@@ -128,7 +129,6 @@ class SynHomeSwiperWidget extends StatelessWidget {
     }).toList();
   }
 
-
   _buildText({
     text = '-',
     maxLines = 1,
@@ -140,27 +140,33 @@ class SynHomeSwiperWidget extends StatelessWidget {
     ),
     padding = const EdgeInsets.all(0),
     alignment = Alignment.centerLeft,
+    double? itemWidth,
   }) {
     return Align(
       alignment: alignment,
-      child: Padding(
+      child: Container(
         padding: padding,
-        child: Text(
-          text,
-          overflow: TextOverflow.ellipsis,
-          maxLines: maxLines,
-          style: style,
+        width: itemWidth,
+        // constraints: BoxConstraints(maxWidth: itemWidth),
+        decoration: BoxDecoration(
+          gradient: _buildLinearGradient(),
+          ),
+          child: Text(
+            text,
+            overflow: TextOverflow.ellipsis,
+            maxLines: maxLines,
+            style: style,
+          ),
         ),
-      ),
     );
   }
-
 
   _buildItem({
     text = '',
     padding = const EdgeInsets.all(0),
     isVideo = true,
     required Widget bg,
+    double? itemWidth,
   }) {
     return Stack(
       alignment: Alignment.center,
@@ -180,6 +186,7 @@ class SynHomeSwiperWidget extends StatelessWidget {
                 fontFamily: 'PingFangSC-Regular,PingFang SC',
                 color: Color(0xFFFFFFFF),
               ),
+                itemWidth: itemWidth,
             )
           ],
         ),
@@ -189,6 +196,19 @@ class SynHomeSwiperWidget extends StatelessWidget {
           child: Image.asset('images/icon_play.png',),
         ),
       ],
+    );
+  }
+
+  _buildLinearGradient({
+    bool isVertical = false,
+    List<Color> colors = const [Color(0xE5000000), Color(0x7F000000),],
+  }) {
+    Alignment begin = isVertical ? Alignment.topCenter : Alignment.centerLeft;
+    Alignment end = isVertical ? Alignment.bottomCenter : Alignment.centerRight;
+    return LinearGradient(
+      begin: begin,
+      end: end,
+      colors: colors,
     );
   }
 }
