@@ -6,7 +6,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/APPThemeSettings.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/provider/color_filtered_provider.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
 class APPDrawerMenuPage extends StatefulWidget {
 
@@ -21,6 +23,7 @@ class APPDrawerMenuPage extends StatefulWidget {
 
 class _APPDrawerMenuPageState extends State<APPDrawerMenuPage> {
 
+  bool isGrey = false;
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +32,8 @@ class _APPDrawerMenuPageState extends State<APPDrawerMenuPage> {
   }
   
   Drawer buildDrawerMenu(BuildContext context) {
+    var filteredProvider = Provider.of<ColorFilteredProvider>(context);
+
     return
       Drawer(
         child: Container(
@@ -122,6 +127,27 @@ class _APPDrawerMenuPageState extends State<APPDrawerMenuPage> {
                     leading: Icon(Icons.open_in_new, color: Theme.of(context).accentColor),
                     title: Text("退出",style: TextStyle(fontSize: 16.0)),
                     trailing: Icon(Icons.chevron_right),
+                    dense: true,
+                    // horizontalTitleGap: 0,
+                    minLeadingWidth: 0,
+                    minVerticalPadding: 0,
+                    onTap: (){
+                      ddlog("退出");
+                    },
+                  ),
+                  Divider(),
+                  ListTile(
+                    leading: Icon(Icons.change_circle_outlined, color: Theme.of(context).accentColor),
+                    title: Text("灰色滤镜",style: TextStyle(fontSize: 16.0)),
+                    trailing: Switch(
+                      onChanged: (bool value) {
+                        isGrey = !isGrey;
+                        print("isGrey:${isGrey}");
+                        final color = value ? Colors.grey : Colors.transparent;
+                        filteredProvider.setColor(color);
+                      },
+                      value: isGrey,
+                    ),
                     dense: true,
                     // horizontalTitleGap: 0,
                     minLeadingWidth: 0,
