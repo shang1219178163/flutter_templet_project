@@ -313,6 +313,7 @@ var _list = [
   Tuple2(APPRouter.alertDialogDemo, "AlertDialog", ),
   Tuple2(APPRouter.alertSheetDemo, "AlertSheet", ),
   Tuple2(APPRouter.appWebViewDemo, "appWebViewDemo", ),
+  Tuple2(APPRouter.builderDemo, "builderDemo", ),
 
   Tuple2(APPRouter.backdropFilterDemo, "backdropFilterDemo", ),
 
