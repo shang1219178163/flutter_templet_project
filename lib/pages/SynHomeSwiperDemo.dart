@@ -29,18 +29,25 @@ class _SynHomeSwiperDemoState extends State<SynHomeSwiperDemo> {
           // width: 400,
           child: ListView(
             children: [
-              // buildSwiper(),
-              buildSwiper(showCount: 2.0),
-              buildSwiper(showCount: 3.0),
-              buildSwiper(showCount: 2.5),
+              Column(
+                children: [
+                  // buildSwiper(),
+                  buildSwiper(showCount: 2.0),
+                  buildSwiper(showCount: 3.0),
+                  buildSwiper(showCount: 2.5),
+                  buildSwiper(showCount: 1, isSwiper: true),
+                ],
+              )
             ],
           ),
         )
     );
   }
 
-   buildSwiper({double showCount = 1.0}) {
+   buildSwiper({double showCount = 1.0, isSwiper = false}) {
     double paddingRight = showCount == 2.5 ? 0.0 : 12;
+    double paddingLeft = isSwiper ? 12 : 0;
+
     return Container(
       // color: Colors.red,
       decoration: BoxDecoration(
@@ -50,12 +57,13 @@ class _SynHomeSwiperDemoState extends State<SynHomeSwiperDemo> {
         ),
       ),
       child: SynHomeSwiperWidget(
+        isSwiper: isSwiper,
         items: items,
         margin: EdgeInsets.all(12),
         height: 147 * 1.2,
         width: screenSize.width,
         bg: AssetImage('images/bg_home_swiper.png'),
-        padding: EdgeInsets.only(top: 57, right: paddingRight, bottom: 16, left: 0, ),
+        padding: EdgeInsets.only(left: paddingLeft, top: 57, right: paddingRight, bottom: 16, ),
         showCount: showCount,
       ),
     );

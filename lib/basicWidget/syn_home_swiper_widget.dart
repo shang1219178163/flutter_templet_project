@@ -1,5 +1,9 @@
+/// 轮播样式2
+/// http://101.200.241.211/repos/app_project/uplus/dev_doc/05-UI/%E4%B8%89%E7%BF%BC%E9%B8%9F/V3.2.3/%E9%A6%96%E9%A1%B5%E6%9C%80%E6%96%B0%E6%A0%87%E6%B3%A8-%E6%96%B0%E5%A2%9E%E8%A7%86%E9%A2%91%E6%A8%A1%E5%9D%97/%E9%A6%96%E9%A1%B5%E6%9C%80%E6%96%B0%E6%A0%87%E6%B3%A8/index.html#s4
 
 import 'package:flutter/material.dart';
+import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
+import 'package:flutter_templet_project/vendor/flutter_swiper_demo.dart';
 import 'package:tuple/tuple.dart';
 
 typedef SynHomeSwiperBGWidgetBuilder = Widget Function(double itemWidth, int index);
@@ -23,6 +27,8 @@ class SynHomeSwiperWidget extends StatelessWidget {
   final double startLeft;
   final double endRight;
   final double gap;
+  final Radius radius;
+  final bool isSwiper;
 
    SynHomeSwiperWidget({
   	Key? key,
@@ -38,7 +44,9 @@ class SynHomeSwiperWidget extends StatelessWidget {
     this.startLeft = 12,
     this.endRight = 12,
     this.gap = 8,
-     this.items = const [],
+    this.items = const [],
+    this.radius = const Radius.circular(8),
+     this.isSwiper = false,
   }) : super(key: key);
 
   double getItemWidth() {
@@ -46,13 +54,19 @@ class SynHomeSwiperWidget extends StatelessWidget {
     if (this.showCount == 2.5) {
       w = (w - 2 * this.gap - this.startLeft)/2.7;
     } else if ([1, 2, 3].contains(this.showCount)) {
-      w = (w - this.startLeft - this.endRight - (this.showCount - 1) * this.gap )/this.showCount;
+      w = (w - this.startLeft - this.endRight - (this.showCount - 1) * this.gap - 16)/this.showCount;
+      if (this.showCount == 1 && this.isSwiper) {
+        w = this.width - this.padding.left - this.padding.right - 12;
+      }
     }
     return w;
   }
 
   @override
   Widget build(BuildContext context) {
+    if (isSwiper) {
+      return _buildBodySwiper();
+    }
     return _buildBody();
   }
 
@@ -73,17 +87,18 @@ class SynHomeSwiperWidget extends StatelessWidget {
       ),
       child: ListView(
         scrollDirection: Axis.horizontal,
-        children: _buildChildren(),
+        children: this.items.map((e) => _buildChildrenItem(e: e, isVideo: false)).toList(),
       )
     );
   }
 
-  _buildChildren() {
 
-    return this.items.map((e) {
+  Widget _buildChildrenItem({
+    required Tuple3<String, String, String> e,
+    bool isVideo = false,
+  }) {
       double itemWidth = getItemWidth();
       // double width = 150;
-
       final url = e.item1;
       final text = e.item2;
 
@@ -114,19 +129,22 @@ class SynHomeSwiperWidget extends StatelessWidget {
       return Padding(
         padding: padding,
         child: this.itemBuilder != null ? this.itemBuilder!(index) : _buildItem(
+          isVideo: isVideo,
           itemWidth: itemWidth,
           text: text,
           padding: EdgeInsets.only(left: 6, bottom: 4),
-          bg: this.bgBuilder != null ? this.bgBuilder!(itemWidth, index) : FadeInImage.assetNetwork(
+          bg: ClipRRect(
+            borderRadius: BorderRadius.all(this.radius),
+            child: this.bgBuilder != null ? this.bgBuilder!(itemWidth, index) : FadeInImage.assetNetwork(
               placeholder: 'images/img_placeholder.png',
               image: url,
               fit: BoxFit.cover,
               width: itemWidth,
               height: double.infinity
             ),
+          ),
         ),
       );
-    }).toList();
   }
 
   _buildText({
@@ -149,15 +167,16 @@ class SynHomeSwiperWidget extends StatelessWidget {
         width: itemWidth,
         // constraints: BoxConstraints(maxWidth: itemWidth),
         decoration: BoxDecoration(
-          gradient: _buildLinearGradient(),
-          ),
-          child: Text(
-            text,
-            overflow: TextOverflow.ellipsis,
-            maxLines: maxLines,
-            style: style,
-          ),
+          borderRadius: BorderRadius.only(bottomLeft: this.radius, bottomRight: this.radius),
+          gradient: _buildLinearGradient(isVertical: true),
         ),
+        child: Text(
+          text,
+          overflow: TextOverflow.ellipsis,
+          maxLines: maxLines,
+          style: style,
+        ),
+      ),
     );
   }
 
@@ -186,8 +205,8 @@ class SynHomeSwiperWidget extends StatelessWidget {
                 fontFamily: 'PingFangSC-Regular,PingFang SC',
                 color: Color(0xFFFFFFFF),
               ),
-                itemWidth: itemWidth,
-            )
+              itemWidth: itemWidth,
+            ),
           ],
         ),
         if (isVideo) SizedBox(
@@ -201,7 +220,7 @@ class SynHomeSwiperWidget extends StatelessWidget {
 
   _buildLinearGradient({
     bool isVertical = false,
-    List<Color> colors = const [Color(0xE5000000), Color(0x7F000000),],
+    List<Color> colors = const [Color(0x19000000), Color(0x7f000000), ],
   }) {
     Alignment begin = isVertical ? Alignment.topCenter : Alignment.centerLeft;
     Alignment end = isVertical ? Alignment.bottomCenter : Alignment.centerRight;
@@ -211,6 +230,42 @@ class SynHomeSwiperWidget extends StatelessWidget {
       colors: colors,
     );
   }
+
+
+  _buildBodySwiper() {
+    return Container(
+      width: this.width,
+      height: this.height,
+      padding: this.padding,
+      margin: this.margin,
+      decoration: BoxDecoration(
+        color: Colors.green,
+        // border: Border.all(width: 3, color: Colors.red),
+        // borderRadius:const BorderRadius.all(Radius.circular(6)),
+        image: this.bg == null ? null : DecorationImage(
+          image: this.bg!,
+          fit: BoxFit.fill
+        ), //设置图片
+      ),
+      child: Swiper(
+        itemBuilder: (BuildContext context, int index) {
+          // final e = this.items[index];
+          // final url = e.item1;
+          // final text = e.item2;
+
+          return _buildChildrenItem(e: this.items[index], isVideo: false);
+        },
+        indicatorLayout: PageIndicatorLayout.COLOR,
+        autoplay: true,
+        itemCount: this.items.length,
+        pagination: SwiperPagination(),
+        // control: SwiperControl(),
+        // itemWidth: screenSize.width * 0.5,
+        // viewportFraction: 0.6,
+      ),
+    );
+  }
+
 }
 
 
