@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/syn_decoration_widget.dart';
+import 'package:flutter_templet_project/basicWidget/syn_decoration_widget.dart';
 import 'package:flutter_templet_project/basicWidget/syn_horizontal_scroll_widget.dart';
 import 'package:flutter_templet_project/extension/buildContext_extension.dart';
 import 'package:tuple/tuple.dart';
@@ -17,58 +19,121 @@ class SynHomeSrollDemo extends StatefulWidget {
 class _SynHomeSrollDemoState extends State<SynHomeSrollDemo> {
 
 
+  bool isList = true;
+
   @override
   Widget build(BuildContext context) {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
 
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title ?? "$widget"),
-        ),
-        body: Container(
-          // width: 400,
-          child: ListView(
-            children: [
-              Column(
-                children: [
-                  // buildSwiper(),
-                  buildSwiper(showCount: 2.0),
-                  buildSwiper(showCount: 3.0),
-                  buildSwiper(showCount: 2.5),
-                  buildSwiper(showCount: 1, isSwiper: true),
-                ],
-              )
-            ],
+      appBar: AppBar(
+        title: Text(widget.title ?? "$widget"),
+        actions: [
+          IconButton(
+            onPressed: () {
+              isList = !isList;
+              setState(() {});
+            },
+            icon: Icon(Icons.all_inclusive),
           ),
-        )
+        ],
+      ),
+      body: isList ? _buildBodyList() : _buildBody(),
     );
   }
 
-   buildSwiper({double showCount = 1.0, isSwiper = false}) {
+  _buildBody() {
+    return buildShell(
+        child: buildSwiper(showCount: 2.0)
+    );
+  }
+
+  _buildBodyList() {
+    return CustomScrollView(
+      slivers: [
+        // buildSwiper(),
+        buildShell(
+            child: buildSwiper(showCount: 2.0)
+        ),
+        buildSwiper(showCount: 3.0, color: Colors.green),
+        buildSwiper(showCount: 2.5),
+        buildSwiper(showCount: 1, isSwiper: true),
+      ].map((e) => SliverToBoxAdapter(
+        child: e,
+      )).toList(),
+    );
+  }
+
+  buildSwiper({double showCount = 1.0, isSwiper = false, Color? color}) {
     double paddingRight = showCount == 2.5 ? 0.0 : 12;
     double paddingLeft = isSwiper ? 12 : 0;
 
-    return Container(
-      // color: Colors.red,
-      decoration: BoxDecoration(
-          color: Colors.green,
-          border: Border.all(
-            color: Colors.red,
+    return SynHorizontalScrollWidget(
+      isSwiper: isSwiper,
+      items: items,
+      margin: EdgeInsets.all(12),
+      height: 147 * 1.2,
+      width: screenSize.width,
+      bg: AssetImage('images/bg_home_swiper.png'),
+      boxShadow: [
+        BoxShadow(
+          color: Colors.grey.withOpacity(0.5),
+          // spreadRadius: 3,
+          blurRadius: 7,
+          offset: Offset(0, 3), // changes position of shadow
         ),
-      ),
-      child: SynHorizontalScrollWidget(
-        isSwiper: isSwiper,
-        items: items,
-        margin: EdgeInsets.all(12),
-        height: 147 * 1.2,
-        width: screenSize.width,
-        bg: AssetImage('images/bg_home_swiper.png'),
-        padding: EdgeInsets.only(left: paddingLeft, top: 57, right: paddingRight, bottom: 16, ),
-        showCount: showCount,
-        onTap: (Tuple4<String, String, String, bool> e) {
-          print("onTap:${e}");
-        },
-      ),
+      ],
+      padding: EdgeInsets.only(left: paddingLeft, top: 57, right: paddingRight, bottom: 16, ),
+      showCount: showCount,
+      onTap: (Tuple4<String, String, String, bool> e) {
+        print("onTap:${e}");
+      },
+    );
+  }
+
+  buildShell({required Widget child, hasShell: true}) {
+    if (!hasShell) {
+      return child;
+    }
+
+    return SynDecorationWidget(
+      width: 400,
+      height: 200,
+      opacity: 1.0,
+      blur: 5,
+      // margin: const EdgeInsets.all(50),
+      padding: const EdgeInsets.all(0),
+      topLeftRadius: 15,
+      topRightRadius: 15,
+      bottomLeftRadius: 15,
+      bottomRightRadius: 15,
+      // topLeftRadius: 0,
+      // topRightRadius: 25,
+      // bottomLeftRadius: 45,
+      // bottomRightRadius: 85,
+      bgUrl: 'https://tenfei02.cfp.cn/creative/vcg/800/new/VCG21409037867.jpg',
+      // bgChild: FadeInImage.assetNetwork(
+      //   placeholder: 'images/img_placeholder.png',
+      //   image: 'https://tenfei02.cfp.cn/creative/vcg/800/new/VCG21409037867.jpg',
+      //   fit: BoxFit.fill,
+      //   width: 400,
+      //   height: 400,
+      // ),
+      // bgColor: Colors.transparent,
+      // bgGradient: LinearGradient(
+      //   colors: [Colors.green, Colors.yellow],
+      //   begin: Alignment.topCenter,
+      //   end: Alignment.bottomCenter,
+      // ),
+      boxShadow: [
+        BoxShadow(
+          color: Colors.red.withOpacity(0.5),
+          // spreadRadius: 5,
+          blurRadius: 7,
+          offset: Offset(0, 3), // changes position of shadow
+        ),
+      ],
+      child: child,
     );
   }
 
