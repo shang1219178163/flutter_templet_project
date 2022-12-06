@@ -3,16 +3,16 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
-import 'package:flutter_templet_project/vendor/flutter_swiper_demo.dart';
 import 'package:tuple/tuple.dart';
 
 typedef SynHomeSwiperBGWidgetBuilder = Widget Function(double itemWidth, int index);
 typedef SynHomeSwiperItemWidgetBuilder = Widget Function(int index);
 
-class SynHomeSwiperWidget extends StatelessWidget {
+
+class SynHorizontalScrollWidget extends StatelessWidget {
 
   final String? title;
-  final List<Tuple3<String, String, bool>> items;
+  final List<Tuple4<String, String, String, bool>> items;
 
   final double width;
   final double height;
@@ -30,7 +30,9 @@ class SynHomeSwiperWidget extends StatelessWidget {
   final Radius radius;
   final bool isSwiper;
 
-   SynHomeSwiperWidget({
+  final void Function(Tuple4<String, String, String, bool> e) onTap;
+
+   SynHorizontalScrollWidget({
   	Key? key,
   	this.title,
     required this.width,
@@ -47,6 +49,7 @@ class SynHomeSwiperWidget extends StatelessWidget {
     this.items = const [],
     this.radius = const Radius.circular(8),
     this.isSwiper = false,
+    required this.onTap,
   }) : super(key: key);
 
   double getItemWidth() {
@@ -87,20 +90,20 @@ class SynHomeSwiperWidget extends StatelessWidget {
       ),
       child: ListView(
         scrollDirection: Axis.horizontal,
-        children: this.items.map((e) => _buildChildrenItem(e: e, isVideo: e.item3)).toList(),
+        children: this.items.map((e) => _buildChildrenItem(e: e)).toList(),
       )
     );
   }
 
 
   Widget _buildChildrenItem({
-    required Tuple3<String, String, bool> e,
-    bool isVideo = false,
+    required Tuple4<String, String, String, bool> e,
   }) {
       double itemWidth = getItemWidth();
       // double width = 150;
       final url = e.item1;
       final text = e.item2;
+      final isVideo = e.item4;
 
       int index = this.items.indexOf(e);
       var padding = EdgeInsets.zero;
@@ -129,21 +132,24 @@ class SynHomeSwiperWidget extends StatelessWidget {
         }
       }
 
-      return Padding(
-        padding: padding,
-        child: this.itemBuilder != null ? this.itemBuilder!(index) : _buildItem(
-          isVideo: isVideo,
-          itemWidth: itemWidth,
-          text: text,
-          padding: EdgeInsets.only(left: 6, bottom: 4),
-          bg: ClipRRect(
-            borderRadius: BorderRadius.all(this.radius),
-            child: this.bgBuilder != null ? this.bgBuilder!(itemWidth, index) : FadeInImage.assetNetwork(
-              placeholder: 'images/img_placeholder.png',
-              image: url,
-              fit: BoxFit.cover,
-              width: itemWidth,
-              height: double.infinity
+      return InkWell(
+        onTap: (){ this.onTap(e); },
+        child: Padding(
+          padding: padding,
+          child: this.itemBuilder != null ? this.itemBuilder!(index) : _buildItem(
+            isVideo: isVideo,
+            itemWidth: itemWidth,
+            text: text,
+            padding: EdgeInsets.symmetric(horizontal: 6, vertical: 4,),
+            bg: ClipRRect(
+              borderRadius: BorderRadius.all(this.radius),
+              child: this.bgBuilder != null ? this.bgBuilder!(itemWidth, index) : FadeInImage.assetNetwork(
+                placeholder: 'images/img_placeholder.png',
+                image: url,
+                fit: BoxFit.cover,
+                width: itemWidth,
+                height: double.infinity
+              ),
             ),
           ),
         ),
@@ -255,10 +261,7 @@ class SynHomeSwiperWidget extends StatelessWidget {
         child: Swiper(
           itemBuilder: (BuildContext context, int index) {
             final e = this.items[index];
-            return _buildChildrenItem(
-                e: e,
-                isVideo: e.item3,
-            );
+            return _buildChildrenItem(e: e,);
           },
           indicatorLayout: PageIndicatorLayout.COLOR,
           autoplay: true,

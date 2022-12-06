@@ -485,7 +485,7 @@ var _others = [
   Tuple2(APPRouter.loginPage2, "LoginPage2", ),
   Tuple2(APPRouter.testPage, "testPage", ),
   Tuple2(APPRouter.decorationDemo, "decorationDemo", ),
-  Tuple2(APPRouter.synHomeSwiperDemo, "synHomeSwiperDemo", ),
+  Tuple2(APPRouter.synHomeSrollDemo, "SynHomeSrollDemo", ),
   Tuple2(APPRouter.synHomeNavDemo, "synHomeNavDemo", ),
 
 ];
