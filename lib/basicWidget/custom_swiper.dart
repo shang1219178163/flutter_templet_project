@@ -7,12 +7,12 @@ class CustomSwipper extends StatefulWidget {
   final double height;
   final ValueChanged<int> onTap;
   final Curve curve;
-  // final IndexedWidgetBuilder itemBuilder;
+  final IndexedWidgetBuilder? itemBuilder;
 
   CustomSwipper({
     required this.images,
     required this.onTap,
-    // required this.itemBuilder,
+    this.itemBuilder,
     this.height = 200,
     this.curve = Curves.linear,
   }) : assert(images != null);
@@ -32,7 +32,7 @@ class _CustomSwipperState extends State<CustomSwipper> {
     super.initState();
     _curIndex = widget.images.length * 5;
     _pageController = PageController(initialPage: _curIndex);
-    // _initTimer();
+    _initTimer();
   }
 
   @override
@@ -82,6 +82,7 @@ class _CustomSwipperState extends State<CustomSwipper> {
               _curIndex = length;
               _changePage();
             }
+            print("_curIndex:${_curIndex}");
           });
         },
         itemBuilder: (context, index) {
@@ -90,14 +91,14 @@ class _CustomSwipperState extends State<CustomSwipper> {
               _cancelTimer();
             },
             onTap: () {
-
               final currIdx = index % length;
               print('onTap 当前 page 为 ${index},${length},${currIdx}');
 
               widget.onTap(currIdx);
             },
-            child: Image.network(
-              widget.images[index % length],
+            child: widget.itemBuilder != null ? widget.itemBuilder!(context, index) : FadeInImage.assetNetwork(
+              placeholder: 'images/img_placeholder.png',
+              image: widget.images[index % length],
               fit: BoxFit.cover,
             ),
           );

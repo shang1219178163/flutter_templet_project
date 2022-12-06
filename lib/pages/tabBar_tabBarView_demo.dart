@@ -431,6 +431,7 @@ var _specials = [
   Tuple2(APPRouter.boxConstraintsDemo, "boxConstraints", ),
   Tuple2(APPRouter.gradientDemo, "渐变色", ),
   Tuple2(APPRouter.imageBlendModeDemo, "图片渲染模式", ),
+  Tuple2(APPRouter.customSwipperDemo, "自定义轮播", ),
 
 ];
 

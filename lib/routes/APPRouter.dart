@@ -11,6 +11,7 @@ import 'package:flutter_templet_project/pages/SynHomeSrollDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AutocompleteDemo.dart';
 import 'package:flutter_templet_project/pages/demo/BuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ColoredBoxDemo.dart';
+import 'package:flutter_templet_project/pages/demo/CustomSwipperDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DecorationDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DismissibleDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DragAndDropDemo.dart';
@@ -325,7 +326,7 @@ class APPRouter {
   static const boxConstraintsDemo = '/boxConstraintsDemo';
   static const gradientDemo = '/gradientDemo';
   static const imageBlendModeDemo = '/imageBlendModeDemo';
-
+  static const customSwipperDemo = '/customSwipperDemo';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -518,6 +519,7 @@ class AppPage {
     GetPage(name: APPRouter.boxConstraintsDemo, page: () => BoxConstraintsDemo(),),
     GetPage(name: APPRouter.gradientDemo, page: () => GradientDemo(),),
     GetPage(name: APPRouter.imageBlendModeDemo, page: () => ImageBlendModeDemo(),),
+    GetPage(name: APPRouter.customSwipperDemo, page: () => CustomSwipperDemo(),),
 
 
   ];
