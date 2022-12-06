@@ -23,6 +23,7 @@ class SynDecorationWidgetNew extends StatelessWidget {
     this.bgGradient,
     this.bgUrl,
     this.bgChild,
+    this.boxShadow,
     required this.child
   }) : super(key: key);
 
@@ -68,6 +69,7 @@ class SynDecorationWidgetNew extends StatelessWidget {
   /// 组件子组件
   Widget child;
 
+  List<BoxShadow>? boxShadow;
   // 模型传参
   // SynDecorationWidgetNew.model({
   //   Key? key,
@@ -129,6 +131,7 @@ class SynDecorationWidgetNew extends StatelessWidget {
     Gradient? gradient,
     BoxBorder? border = const Border.fromBorderSide(BorderSide(color: Colors.transparent, width: 0)),
     BorderRadius? borderRadius,
+    List<BoxShadow>? boxShadow,
   }) {
     return BoxDecoration(
       gradient: gradient,
@@ -139,6 +142,15 @@ class SynDecorationWidgetNew extends StatelessWidget {
       //   image: NetworkImage(imgUrl),
       //     fit: BoxFit.cover,
       // ),
+      // boxShadow: boxShadow,
+    boxShadow: [
+        BoxShadow(
+          color: Colors.grey.withOpacity(0.5),
+          spreadRadius: 5,
+          blurRadius: 7,
+          offset: Offset(0, 3), // changes position of shadow
+        ),
+      ],
     );
   }
 
@@ -158,6 +170,7 @@ class SynDecorationWidgetNew extends StatelessWidget {
     Gradient? bgGradient,
     String? bgUrl,
     Widget? bgChild,
+    List<BoxShadow>? boxShadow,
     required Widget child,
   }) {
 
@@ -173,6 +186,7 @@ class SynDecorationWidgetNew extends StatelessWidget {
       borderRadius: borderRadius,
       color: bgColor,
       gradient: bgGradient,
+      boxShadow: boxShadow,
     );
 
     final decorationInner = buildBoxDecoration(
