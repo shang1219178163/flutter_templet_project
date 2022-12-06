@@ -12,7 +12,7 @@ typedef SynHomeSwiperItemWidgetBuilder = Widget Function(int index);
 class SynHomeSwiperWidget extends StatelessWidget {
 
   final String? title;
-  final List<Tuple3<String, String, String>> items;
+  final List<Tuple3<String, String, bool>> items;
 
   final double width;
   final double height;
@@ -46,7 +46,7 @@ class SynHomeSwiperWidget extends StatelessWidget {
     this.gap = 8,
     this.items = const [],
     this.radius = const Radius.circular(8),
-     this.isSwiper = false,
+    this.isSwiper = false,
   }) : super(key: key);
 
   double getItemWidth() {
@@ -79,7 +79,7 @@ class SynHomeSwiperWidget extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.green,
         // border: Border.all(width: 3, color: Colors.red),
-        // borderRadius:const BorderRadius.all(Radius.circular(6)),
+        // borderRadius:const BorderRadius.all(Radius.circular(8)),
         image: this.bg == null ? null : DecorationImage(
             image: this.bg!,
             fit: BoxFit.fill
@@ -87,14 +87,14 @@ class SynHomeSwiperWidget extends StatelessWidget {
       ),
       child: ListView(
         scrollDirection: Axis.horizontal,
-        children: this.items.map((e) => _buildChildrenItem(e: e, isVideo: false)).toList(),
+        children: this.items.map((e) => _buildChildrenItem(e: e, isVideo: e.item3)).toList(),
       )
     );
   }
 
 
   Widget _buildChildrenItem({
-    required Tuple3<String, String, String> e,
+    required Tuple3<String, String, bool> e,
     bool isVideo = false,
   }) {
       double itemWidth = getItemWidth();
@@ -124,6 +124,9 @@ class SynHomeSwiperWidget extends StatelessWidget {
           itemRight = 0;
         }
         padding = EdgeInsets.only(left: itemLeft, right: itemRight);
+        if (this.showCount == 1) {
+          padding = EdgeInsets.only(left: 0, right: 0);
+        }
       }
 
       return Padding(
@@ -241,27 +244,31 @@ class SynHomeSwiperWidget extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.green,
         // border: Border.all(width: 3, color: Colors.red),
-        // borderRadius:const BorderRadius.all(Radius.circular(6)),
+        // borderRadius:const BorderRadius.all(Radius.circular(8)),
         image: this.bg == null ? null : DecorationImage(
           image: this.bg!,
           fit: BoxFit.fill
         ), //设置图片
       ),
-      child: Swiper(
-        itemBuilder: (BuildContext context, int index) {
-          // final e = this.items[index];
-          // final url = e.item1;
-          // final text = e.item2;
-
-          return _buildChildrenItem(e: this.items[index], isVideo: false);
-        },
-        indicatorLayout: PageIndicatorLayout.COLOR,
-        autoplay: true,
-        itemCount: this.items.length,
-        pagination: SwiperPagination(),
-        // control: SwiperControl(),
-        // itemWidth: screenSize.width * 0.5,
-        // viewportFraction: 0.6,
+      child: ClipRRect(
+        borderRadius: BorderRadius.all(this.radius),
+        child: Swiper(
+          itemBuilder: (BuildContext context, int index) {
+            final e = this.items[index];
+            return _buildChildrenItem(
+                e: e,
+                isVideo: e.item3,
+            );
+          },
+          indicatorLayout: PageIndicatorLayout.COLOR,
+          autoplay: true,
+          loop: false,
+          itemCount: this.items.length,
+          // pagination: SwiperPagination(),
+          // control: SwiperControl(),
+          // itemWidth: screenSize.width * 0.5,
+          // viewportFraction: 0.6,
+        ),
       ),
     );
   }

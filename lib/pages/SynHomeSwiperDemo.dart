@@ -73,23 +73,23 @@ class _SynHomeSwiperDemoState extends State<SynHomeSwiperDemo> {
     Tuple3(
       'https://avatar.csdn.net/8/9/A/3_chenlove1.jpg',
       '海尔｜无边界厨房',
-      '',
+      true,
     ),
     Tuple3(
       'https://pic.616pic.com/bg_w1180/00/04/08/G5Bftx5ZDI.jpg!/fw/1120',
       '海尔｜无边界客厅',
-      '',
+      false,
     ),
-    Tuple3(
-      'https://cdn.pixabay.com/photo/2018/02/01/21/00/tree-3124103_1280.jpg',
-      '海尔｜无边界卧室',
-      '',
-    ),
-    Tuple3(
-      'https://cdn.pixabay.com/photo/2022/09/01/09/31/sunset-glow-7425170_1280.jpg',
-      '海尔｜无边界其他',
-      '',
-    ),
+    // Tuple3(
+    //   'https://cdn.pixabay.com/photo/2018/02/01/21/00/tree-3124103_1280.jpg',
+    //   '海尔｜无边界卧室',
+    //   false,
+    // ),
+    // Tuple3(
+    //   'https://cdn.pixabay.com/photo/2022/09/01/09/31/sunset-glow-7425170_1280.jpg',
+    //   '海尔｜无边界其他',
+    //    false,
+    // ),
   ];
 
 }
