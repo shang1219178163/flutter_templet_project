@@ -23,6 +23,7 @@ class SynDecorationWidget extends StatelessWidget {
     this.bgGradient,
     this.bgUrl,
     this.bgChild,
+    this.boxShadow,
     required this.child
   }) : super(key: key);
 
@@ -68,8 +69,9 @@ class SynDecorationWidget extends StatelessWidget {
   /// 组件子组件
   Widget child;
 
+  List<BoxShadow>? boxShadow;
   // 模型传参
-  // SynDecorationWidget.model({
+  // SynDecorationWidgetNew.model({
   //   Key? key,
   //   Object? model,
   // }): this(
@@ -105,6 +107,7 @@ class SynDecorationWidget extends StatelessWidget {
       bgUrl: this.bgUrl,
       bgColor: this.bgColor,
       bgGradient: this.bgGradient,
+      boxShadow: this.boxShadow,
       child: this.child,
       bgChild: this.bgChild,
     );
@@ -128,7 +131,8 @@ class SynDecorationWidget extends StatelessWidget {
     Color? color,
     Gradient? gradient,
     BoxBorder? border = const Border.fromBorderSide(BorderSide(color: Colors.transparent, width: 0)),
-    required BorderRadius borderRadius,
+    BorderRadius? borderRadius,
+    List<BoxShadow>? boxShadow,
   }) {
     return BoxDecoration(
       gradient: gradient,
@@ -139,14 +143,15 @@ class SynDecorationWidget extends StatelessWidget {
       //   image: NetworkImage(imgUrl),
       //     fit: BoxFit.cover,
       // ),
-      boxShadow: [
-        BoxShadow(
-          color: Colors.grey.withOpacity(0.5),
-          spreadRadius: 5,
-          blurRadius: 7,
-          offset: Offset(0, 3), // changes position of shadow
-        ),
-      ],
+      boxShadow: boxShadow,
+      // boxShadow: [
+      //   BoxShadow(
+      //     color: Colors.red.withOpacity(0.5),
+      //     // spreadRadius: 5,
+      //     blurRadius: 7,
+      //     offset: Offset(0, 3), // changes position of shadow
+      //   ),
+      // ],
     );
   }
 
@@ -166,6 +171,7 @@ class SynDecorationWidget extends StatelessWidget {
     Gradient? bgGradient,
     String? bgUrl,
     Widget? bgChild,
+    List<BoxShadow>? boxShadow,
     required Widget child,
   }) {
 
@@ -179,6 +185,12 @@ class SynDecorationWidget extends StatelessWidget {
     final decoration = buildBoxDecoration(
       border: border,
       borderRadius: borderRadius,
+      color: bgColor,
+      gradient: bgGradient,
+      boxShadow: boxShadow,
+    );
+
+    final decorationInner = buildBoxDecoration(
       color: bgColor,
       gradient: bgGradient,
     );
@@ -197,7 +209,7 @@ class SynDecorationWidget extends StatelessWidget {
 
     final refreshImage = bgUrl != null && bgUrl != '' ? FadeInImage.assetNetwork(
       placeholder: 'images/img_placeholder.png',
-      image: 'https://tenfei02.cfp.cn/creative/vcg/800/new/VCG21409037867.jpg',
+      image: bgUrl,
       fit: BoxFit.fill,
       width: width,
       height: height,
@@ -207,32 +219,39 @@ class SynDecorationWidget extends StatelessWidget {
       decoration: decoration,
     );
 
-    final bg = (bgGradient != null) ? SizedBox() : ClipRRect(
+    final bg = ClipRRect(
       borderRadius: borderRadius,
       child: bgChild ?? refreshImage,
     );
 
-    return ClipRect(
-      child: BackdropFilter(
-        filter: ui.ImageFilter.blur(
-          sigmaX: blur,
-          sigmaY: blur,
-        ),
-        child: Opacity(
-          opacity: opacity,
-          child: Container(
-            width: width,
-            height: height,
-            margin: margin,
-            padding: padding,
-            decoration: decoration,
-            child: Stack(
-              children: [
-                bg,
-                child,
-              ],
+    return Opacity(
+      opacity: opacity,
+      child: Container(
+        width: width,
+        height: height,
+        decoration: decoration,
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            bg,
+            ClipRRect(
+              borderRadius: borderRadius,
+              child: ClipRect(
+                child: BackdropFilter(
+                  filter: ui.ImageFilter.blur(
+                    sigmaX: blur,
+                    sigmaY: blur,
+                  ),
+                  child: Container(
+                    margin: margin,
+                    padding: padding,
+                    // decoration: decorationInner,
+                    child: child,
+                  ),
+                ),
+              ),
             ),
-          ),
+          ],
         ),
       ),
     );

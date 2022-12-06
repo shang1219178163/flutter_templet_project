@@ -29,6 +29,7 @@ class SynHorizontalScrollWidget extends StatelessWidget {
   final double gap;
   final Radius radius;
   final bool isSwiper;
+  List<BoxShadow>? boxShadow;
 
   final void Function(Tuple4<String, String, String, bool> e) onTap;
 
@@ -48,6 +49,7 @@ class SynHorizontalScrollWidget extends StatelessWidget {
     this.gap = 8,
     this.items = const [],
     this.radius = const Radius.circular(8),
+    this.boxShadow,
     this.isSwiper = false,
     required this.onTap,
   }) : super(key: key);
@@ -80,13 +82,22 @@ class SynHorizontalScrollWidget extends StatelessWidget {
       padding: this.padding,
       margin: this.margin,
       decoration: BoxDecoration(
-        color: Colors.green,
+        // color: Colors.green,
         // border: Border.all(width: 3, color: Colors.red),
         // borderRadius:const BorderRadius.all(Radius.circular(8)),
         image: this.bg == null ? null : DecorationImage(
-            image: this.bg!,
-            fit: BoxFit.fill
-        ), //设置图片
+          image: this.bg!,
+          fit: BoxFit.fill
+        ),
+        boxShadow: this.boxShadow,
+      //  boxShadow: [
+      //     BoxShadow(
+      //       color: Colors.grey.withOpacity(0.5),
+      //       spreadRadius: 5,
+      //       blurRadius: 7,
+      //       offset: Offset(0, 3), // changes position of shadow
+      //     ),
+      //   ],
       ),
       child: ListView(
         scrollDirection: Axis.horizontal,
