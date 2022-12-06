@@ -7,7 +7,7 @@ import 'package:flutter_templet_project/pages/BoxConstraintsDemo.dart';
 import 'package:flutter_templet_project/pages/FlutterFFiTest.dart';
 import 'package:flutter_templet_project/pages/LocalImagePage.dart';
 import 'package:flutter_templet_project/pages/SynHomeNavDemo.dart';
-import 'package:flutter_templet_project/pages/SynHomeSwiperDemo.dart';
+import 'package:flutter_templet_project/pages/SynHomeSrollDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AutocompleteDemo.dart';
 import 'package:flutter_templet_project/pages/demo/BuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ColoredBoxDemo.dart';
@@ -319,7 +319,7 @@ class APPRouter {
   static const stackDemo = '/stackDemo';
   static const badgesDemo = '/badgesDemo';
   static const flutterSwiperDemo = '/flutterSwiperDemo';
-  static const synHomeSwiperDemo = '/synHomeSwiperDemo';
+  static const synHomeSrollDemo = '/synHomeSrollDemo';
   static const synHomeNavDemo = '/synHomeNavDemo';
   static const wrapDemo = '/wrapDemo';
   static const boxConstraintsDemo = '/boxConstraintsDemo';
@@ -512,7 +512,7 @@ class AppPage {
     GetPage(name: APPRouter.stackDemo, page: () => StackDemo(),),
     GetPage(name: APPRouter.badgesDemo, page: () => BadgesDemo(),),
     GetPage(name: APPRouter.flutterSwiperDemo, page: () => FlutterSwiperDemo(),),
-    GetPage(name: APPRouter.synHomeSwiperDemo, page: () => SynHomeSwiperDemo(),),
+    GetPage(name: APPRouter.synHomeSrollDemo, page: () => SynHomeSrollDemo(),),
     GetPage(name: APPRouter.synHomeNavDemo, page: () => SynHomeNavDemo(),),
     GetPage(name: APPRouter.wrapDemo, page: () => WrapDemo(),),
     GetPage(name: APPRouter.boxConstraintsDemo, page: () => BoxConstraintsDemo(),),

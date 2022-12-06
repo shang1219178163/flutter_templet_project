@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/syn_home_swiper_widget.dart';
+import 'package:flutter_templet_project/basicWidget/syn_horizontal_scroll_widget.dart';
 import 'package:flutter_templet_project/extension/buildContext_extension.dart';
 import 'package:tuple/tuple.dart';
 
-class SynHomeSwiperDemo extends StatefulWidget {
+class SynHomeSrollDemo extends StatefulWidget {
 
   final String? title;
 
-  SynHomeSwiperDemo({ Key? key, this.title}) : super(key: key);
+  SynHomeSrollDemo({ Key? key, this.title}) : super(key: key);
 
 
   @override
-  _SynHomeSwiperDemoState createState() => _SynHomeSwiperDemoState();
+  _SynHomeSrollDemoState createState() => _SynHomeSrollDemoState();
 }
 
-class _SynHomeSwiperDemoState extends State<SynHomeSwiperDemo> {
+class _SynHomeSrollDemoState extends State<SynHomeSrollDemo> {
 
 
   @override
@@ -56,7 +56,7 @@ class _SynHomeSwiperDemoState extends State<SynHomeSwiperDemo> {
             color: Colors.red,
         ),
       ),
-      child: SynHomeSwiperWidget(
+      child: SynHorizontalScrollWidget(
         isSwiper: isSwiper,
         items: items,
         margin: EdgeInsets.all(12),
@@ -65,30 +65,37 @@ class _SynHomeSwiperDemoState extends State<SynHomeSwiperDemo> {
         bg: AssetImage('images/bg_home_swiper.png'),
         padding: EdgeInsets.only(left: paddingLeft, top: 57, right: paddingRight, bottom: 16, ),
         showCount: showCount,
+        onTap: (Tuple4<String, String, String, bool> e) {
+          print("onTap:${e}");
+        },
       ),
     );
   }
 
   final items = [
-    Tuple3(
+    Tuple4(
       'https://avatar.csdn.net/8/9/A/3_chenlove1.jpg',
       '海尔｜无边界厨房',
+      '跳转url',
       true,
     ),
-    Tuple3(
+    Tuple4(
       'https://pic.616pic.com/bg_w1180/00/04/08/G5Bftx5ZDI.jpg!/fw/1120',
       '海尔｜无边界客厅',
+      '跳转url',
       false,
     ),
-    // Tuple3(
-    //   'https://cdn.pixabay.com/photo/2018/02/01/21/00/tree-3124103_1280.jpg',
-    //   '海尔｜无边界卧室',
-    //   false,
-    // ),
-    // Tuple3(
+    Tuple4(
+      'https://cdn.pixabay.com/photo/2018/02/01/21/00/tree-3124103_1280.jpg',
+      '海尔｜无边界厨房',
+      '跳转url',
+      false,
+    ),
+    // Tuple4(
     //   'https://cdn.pixabay.com/photo/2022/09/01/09/31/sunset-glow-7425170_1280.jpg',
     //   '海尔｜无边界其他',
-    //    false,
+    //    '跳转url',
+    //    false
     // ),
   ];
 
