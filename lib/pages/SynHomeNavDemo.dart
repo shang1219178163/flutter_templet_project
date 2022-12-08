@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
-import 'package:flutter_templet_project/basicWidget/SynHomeNavWidget.dart';
+import 'package:flutter_templet_project/basicWidget/syn_collection_nav_widget.dart';
+import 'package:flutter_templet_project/basicWidget/syn_collection_nav_widget_new.dart';
 import 'package:flutter_templet_project/extension/buildContext_extension.dart';
 import 'package:flutter_templet_project/vendor/flutter_swiper_demo.dart';
 
@@ -35,28 +36,37 @@ class _SynHomeNavDemoState extends State<SynHomeNavDemo> {
       children: [
         Column(
           children: [
-            _buildNav(),
+            _buildNav(
+                child: SynCollectionNavWidget(
+                  width: screenSize.width - 24,
+                  rowCount: 3,
+              )
+            ),
             Divider(),
             _buildSwiper(),
+            Divider(),
+            _buildNav(
+              child: SynCollectionNavWidgetNew(
+                width: screenSize.width - 24,
+                rowCount: 3,
+              )
+            ),
           ],
         ),
       ],
     );
   }
 
-  _buildNav() {
+  _buildNav({required Widget child}) {
     return Container(
       // height: 200,
       // width: 400,
       constraints: BoxConstraints(
-        maxHeight: 200,
+        maxHeight: 700,
       ),
       margin: EdgeInsets.all(12),
       padding: EdgeInsets.all(0),
-      child: SynHomeNavWidget(
-        width: screenSize.width - 24,
-        // height: 500,
-      ),
+      child: child,
     );
   }
 
@@ -65,12 +75,17 @@ class _SynHomeNavDemoState extends State<SynHomeNavDemo> {
       color: Colors.lightBlue,
       // padding: EdgeInsets.all(0),
       // margin: EdgeInsets.all(0),
-      constraints: BoxConstraints.tightFor(
-        height: 200,
-      ),
+      constraints: BoxConstraints(
+        maxHeight: 400,
+      ).loosen(),
       child: Swiper(
         itemBuilder: (BuildContext context, int index) {
-          return _buildNav();
+          return _buildNav(
+              child: SynCollectionNavWidget(
+                width: screenSize.width - 24,
+                rowCount: 3,
+              )
+          );
           return CustomSwiperItem(
             url: images[index],
             color: index.isEven ? Colors.green : Colors.yellow,

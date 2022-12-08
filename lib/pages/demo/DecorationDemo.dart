@@ -2,7 +2,6 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/syn_decoration_widget.dart';
-import 'package:flutter_templet_project/basicWidget/syn_decoration_widget_new.dart';
 import 'package:flutter_templet_project/extension/buildContext_extension.dart';
 
 

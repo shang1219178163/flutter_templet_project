@@ -8,6 +8,7 @@ class SynDecorationWidget extends StatelessWidget {
   SynDecorationWidget({
     Key? key,
     this.title,
+    this.addToSliverBox = false,
     this.width = double.infinity,
     this.height = double.infinity,
     this.opacity = 1.0,
@@ -29,6 +30,8 @@ class SynDecorationWidget extends StatelessWidget {
 
   /// 标题
   String? title;
+
+  bool addToSliverBox;
 
   /// 高斯模糊
   double? width;
@@ -69,7 +72,9 @@ class SynDecorationWidget extends StatelessWidget {
   /// 组件子组件
   Widget child;
 
+  /// 阴影
   List<BoxShadow>? boxShadow;
+
   // 模型传参
   // SynDecorationWidgetNew.model({
   //   Key? key,
@@ -92,7 +97,7 @@ class SynDecorationWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return buildBody(
+    final child = buildBody(
       width: this.width,
       height: this.height,
       blur: this.blur,
@@ -111,6 +116,13 @@ class SynDecorationWidget extends StatelessWidget {
       child: this.child,
       bgChild: this.bgChild,
     );
+
+    if (this.addToSliverBox) {
+      return SliverToBoxAdapter(
+        child: child,
+      );
+    }
+    return child;
   }
 
   buildBorderRadius({

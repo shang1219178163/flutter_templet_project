@@ -210,25 +210,7 @@ class SynHorizontalScrollWidget extends StatelessWidget {
     return Stack(
       alignment: Alignment.center,
       children: [
-        Stack(
-          alignment: Alignment.bottomLeft,
-          children: [
-            bg,
-            _buildText(
-              alignment: Alignment.bottomLeft,
-              padding: padding,
-              text: text,
-              maxLines: 1,
-              style: TextStyle(
-                fontSize: 12.0,
-                fontWeight: FontWeight.w400,
-                fontFamily: 'PingFangSC-Regular,PingFang SC',
-                color: Color(0xFFFFFFFF),
-              ),
-              itemWidth: itemWidth,
-            ),
-          ],
-        ),
+        bg,
         if (isVideo) SizedBox(
           width: 24,
           height: 24,
@@ -350,4 +332,219 @@ class _SynHomeSwiperTitleWidget extends StatelessWidget {
       ),
     );
   }
+}
+
+Map<String, double> itemMap = {
+  '1': 327,
+  '2': 160,
+  '2.5': 125,
+  '3': 104,
+};
+
+class HorizontalScrollWidget extends StatelessWidget {
+
+  HorizontalScrollWidget({
+  	Key? key,
+  	this.title,
+    this.width = double.infinity,
+    this.height = 187,
+    this.showCount = 3,
+    this.isSwiper = false,
+    this.gap = 8,
+    this.radius = const Radius.circular(8),
+    required this.items,
+    this.isVideo = true,
+  }) : super(key: key);
+
+
+  final String? title;
+  final List<Tuple4<String, String, String, bool>> items;
+
+  final double width;
+  final double height;
+
+  final double gap;
+
+  final bool isSwiper;
+  final double showCount;
+
+  final Radius radius;
+
+  final bool isVideo;
+  /// 获取 item 宽
+  // double get itemWidth => itemMap['${this.showCount}'] ?? 225;
+  double get itemWidth{
+    if (this.showCount == 1) {
+      return 327;
+    }
+    if (this.showCount == 2) {
+      return 160;
+    }
+    if (this.showCount == 2.5) {
+      return 125;
+    }
+    if (this.showCount == 3) {
+      return 104;
+    }
+    return 125;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (isSwiper) {
+      return _buildSwiper();
+    }
+    return _buildListView();
+  }
+
+  _buildListView({
+    bool addToSliverBox = false,
+    IndexedWidgetBuilder? itemBuilder,
+    EdgeInsets padding = const EdgeInsets.all(0),
+  }) {
+    // final items = List.generate(3, (index) => "${index}");
+
+    final child = Container(
+      width: this.width,
+      height: this.height,
+      child: ListView.separated(
+        scrollDirection: Axis.horizontal,
+        padding: EdgeInsets.all(0),
+        itemCount: items.length,
+        // cacheExtent: 10,
+        itemBuilder: itemBuilder != null ? itemBuilder : (context, index) => _buildItem(context, index),
+        separatorBuilder: (context, index) => _buildSeparator(context, index),
+      ),
+    );
+
+
+    if (addToSliverBox) {
+      return SliverToBoxAdapter(
+        child: child,
+      );
+    }
+    return child;
+  }
+
+  _buildItem(context, index) {
+    final e = items[index];
+
+    return InkWell(
+      onTap: () => print(e),
+      child: Container(
+        // color: Colors.green,
+        width: this.itemWidth,
+        padding: EdgeInsets.only(bottom: 5),//为了显示阴影
+        decoration: _buildDecoration(),
+        child: ClipRRect(
+          borderRadius: BorderRadius.all(this.radius),
+          child: e.item1.startsWith('http') ? Stack(
+            alignment: Alignment.center,
+            fit: StackFit.expand,
+            children: [
+              FadeInImage(
+                placeholder: AssetImage('images/img_placeholder.png'),
+                image: NetworkImage(e.item1),
+                fit: BoxFit.fill,
+                height: double.infinity
+              ),
+              if (isVideo) SizedBox(
+                width: 24,
+                height: 24,
+                child: Image.asset('images/icon_play.png'),
+              ),
+            ],
+          ) : Center(child: Text('Index:${e.item1}')),
+        ),
+      ),
+    );
+  }
+
+  _buildSwiper() {
+    return Container(
+      width: this.width,
+      height: this.height,
+      // decoration: BoxDecoration(
+      //   color: Colors.green,
+      //   // border: Border.all(width: 3, color: Colors.red),
+      //   // borderRadius:const BorderRadius.all(Radius.circular(8)),
+      //   image: this.bg == null ? null : DecorationImage(
+      //       image: this.bg!,
+      //       fit: BoxFit.fill
+      //   ), //设置图片
+      // ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.all(this.radius),
+        child: Swiper(
+          itemBuilder: (context, index) => _buildItem(context, index),
+          indicatorLayout: PageIndicatorLayout.COLOR,
+          autoplay: this.items.length > 1,
+          loop: this.items.length > 1,
+          itemCount: this.items.length,
+          pagination: this.items.length <= 1 ? null : SwiperPagination(),
+          // control: SwiperControl(),
+          itemWidth: this.itemWidth,
+          // viewportFraction: 0.6,
+        ),
+      ),
+    );
+  }
+
+  //分割区间
+  _buildSeparator(context, index) {
+    // return Container(
+    //   width: gap,
+    //   color: Colors.blue,
+    // );
+    return Divider(
+      // height: 8,
+      indent: this.gap,
+      // color: Colors.blue,
+    );
+  }
+  
+  _buildDecoration() {
+    return BoxDecoration(
+      // color: Colors.green,
+      // border: Border.all(width: 3, color: Colors.red),
+      borderRadius: BorderRadius.all(Radius.circular(8)),
+      boxShadow: [
+        BoxShadow(
+          color: Colors.red.withOpacity(0.5),
+          // spreadRadius: 5,
+          blurRadius: 5,
+          offset: Offset(0, 3), // changes position of shadow
+        ),
+      ],
+    );
+  }
+
+  ///圆角
+  _buildBorderRadius({
+  lt: 0,
+  rt: 0,
+  lb: 0,
+  rb: 0,
+  }) {
+    return BorderRadius.only(
+      topLeft: Radius.circular(lt),
+      topRight: Radius.circular(rt),
+      bottomLeft: Radius.circular(lb),
+      bottomRight: Radius.circular(rb),
+    );
+  }
+
+  ///阴影
+  _buildBoxShadow({
+    Color color = Colors.red,
+    spread: 0,
+    blur: 5,
+    x: 0,
+    y: 0,
+  }) => BoxShadow(
+      color: color,
+      spreadRadius: spread,
+      blurRadius: blur,
+      offset: Offset(x, y), // changes position of shadow
+    );
 }
