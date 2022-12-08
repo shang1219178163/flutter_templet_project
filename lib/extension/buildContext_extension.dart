@@ -5,10 +5,12 @@
 //  Created by shang on 10/14/21 2:21 PM.
 //  Copyright © 10/14/21 shang. All rights reserved.
 //
+import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/NNPickerTooBar.dart';
+import 'package:flutter_templet_project/extension/actionSheet_extension.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 
 extension BuildContextExt on BuildContext {
@@ -89,6 +91,56 @@ extension BuildContextExt on BuildContext {
       scaffoldMessenger.clearSnackBars();
     }
     this.scaffoldMessenger.showSnackBar(snackBar);
+  }
+
+  ///alert弹窗
+  showCupertinoSheet({
+    Widget? title,
+    Widget? message,
+    List<Widget> items = const [],
+    ScrollController? messageScrollController,
+    ScrollController? actionScrollController,
+    required Widget cancel,
+    required Function(BuildContext context, int index)? onSelect,
+    Function(BuildContext context)? onCancell,
+    ImageFilter? filter,
+    Color barrierColor = kCupertinoModalBarrierColor,
+    bool barrierDismissible = true,
+    bool useRootNavigator = true,
+    bool? semanticsDismissible,
+    RouteSettings? routeSettings,
+  }) {
+    final child =
+    CupertinoActionSheet(
+      title: title,
+      message: message,
+      actions: items.map((e) => CupertinoActionSheetAction(
+        child: e,
+        onPressed: () {
+          if (onSelect != null) {
+            onSelect(this, items.indexOf(e));
+          }
+          Navigator.pop(this);
+        },
+      ),).toList(),
+      cancelButton: CupertinoActionSheetAction(
+        child: cancel,
+        isDestructiveAction: true,
+        onPressed: onCancell != null ? onCancell(this) : () {
+          Navigator.pop(this);
+        },
+      ),
+    );
+
+    showCupertinoModalPopup(
+      context: this,
+      builder: (context) => child,
+      filter: filter,
+      barrierColor: barrierColor,
+      barrierDismissible: barrierDismissible,
+      semanticsDismissible: semanticsDismissible,
+      routeSettings: routeSettings,
+    );
   }
 
   /// 底部选择器
