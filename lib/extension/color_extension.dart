@@ -14,6 +14,8 @@ import 'package:flutter/material.dart';
 
 extension ColorExt on Color{
 
+  Gradient? toGradient() => LinearGradient(colors:[this, this,], stops:[0.0, 1]);
+
   static Color random() {
     return Color.fromRGBO(
         Random().nextInt(256),
