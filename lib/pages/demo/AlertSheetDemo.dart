@@ -9,6 +9,8 @@ import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/basicWidget/chioce_list.dart';
 import 'package:flutter_templet_project/basicWidget/chioce_wrap.dart';
 import 'package:flutter_templet_project/extension/actionSheet_extension.dart';
+import 'package:flutter_templet_project/extension/buildContext_extension.dart';
+
 import 'package:flutter_templet_project/extension/widget_extension.dart';
 import 'package:tuple/tuple.dart';
 import 'ShowSearchDemo.dart';
@@ -125,11 +127,23 @@ class _AlertSheetDemoState extends State<AlertSheetDemo> {
           Get.toNamed(APPRouter.showSearchDemo, arguments: []);
         }
         break;
-      // case 7:
-      //   {
-      //
-      //   }
-      //   break;
+      case 7:
+        {
+          context.showCupertinoSheet(
+            title: Text(title),
+            message: Text(message, textAlign: TextAlign.start),
+            items: List.generate(5, (index) => Text("item_$index")).toList(),
+            cancel: Text('取消'),
+            onSelect: (BuildContext context, int index) {
+              print(index);
+            },
+            onCancell: (BuildContext context) {
+              print('onCancell');
+              Navigator.pop(context);
+            },
+          );
+        }
+        break;
       // case 8:
       //   {
       //
