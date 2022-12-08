@@ -453,6 +453,7 @@ var _customs = [
   Tuple2(APPRouter.numberStepperDemo, "NumberStepperDemo", ),
   Tuple2(APPRouter.numberFormatDemo, "numberFormatDemo", ),
   Tuple2(APPRouter.steperConnectorDemo, "steperConnectorDemo", ),
+  Tuple2(APPRouter.customSwipperDemo, "自定义轮播", ),
 
 ];
 

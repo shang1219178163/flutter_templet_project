@@ -6,6 +6,7 @@ import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/buildContext_extension.dart';
 
 import 'package:styled_widget/styled_widget.dart';
+import 'package:tuple/tuple.dart';
 
 final kUpdateContent = """
 1、支持立体声蓝牙耳机，同时改善配对性能;
@@ -27,6 +28,7 @@ class SnackBarDemoState extends State<SnackBarDemo> {
 
   final _globalKey = GlobalKey<ScaffoldMessengerState>();
 
+  var behavior = SnackBarBehavior.floating;
 
   @override
   void initState() {
@@ -38,6 +40,15 @@ class SnackBarDemoState extends State<SnackBarDemo> {
     return Scaffold(
         appBar: AppBar(
           title: Text('SnackBar'),
+          actions: [
+            IconButton(
+              onPressed: () {
+                behavior = behavior == SnackBarBehavior.floating ? SnackBarBehavior.fixed : SnackBarBehavior.floating;
+                setState(() {});
+              },
+              icon: Icon(Icons.all_inclusive),
+            ),
+          ],
         ),
         body: Builder(builder: (BuildContext context) {
           return RepaintBoundary(
@@ -47,44 +58,40 @@ class SnackBarDemoState extends State<SnackBarDemo> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Spacer(flex: 2),
-                    GestureDetector(
-                      onTap: () {
-                        final snackBar = buildSnackBar(context);
-                        // ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                        showSnackBar(buildSnackBar(context));
-                      },
-                      child: Text('显示SnackBar, 不覆盖'),
-                    ),
                     Spacer(),
+                    _buildItem(text: '显示SnackBar, 不覆盖', onPressed: () {
+                      // final snackBar = buildSnackBar();
+                      // ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      showSnackBar(buildSnackBar(behavior: behavior));
+                    }),
 
                     DashLine(color: Colors.red,),
+
+                    _buildItem(text: '显示SnackBar, 覆盖 isCenter', onPressed: () {
+                      showSnackBar(buildSnackBar(behavior: behavior, isCenter: true), true);
+                    }),
+
+                    _buildItem(text: '显示SnackBar, 覆盖', onPressed: () {
+                      showSnackBar(buildSnackBar(behavior: behavior), true);
+                    }),
+
+                    _buildItem(text: '显示断网SnackBar, 覆盖', onPressed: () {
+                      showSnackBar(buildSnackBar2(), true);
+                    }),
                     Spacer(),
-
-                    GestureDetector(
-                      onTap: () {
-                        // ScaffoldMessenger.of(context).showSnackBar(buildSnackBar(context));
-                        showSnackBar(buildSnackBar(context), true);
-                      },
-                      child: Text('显示SnackBar, 覆盖'),
-                    ),
-                    Spacer(),
-
-                    GestureDetector(
-                      onTap: () {
-                        // ScaffoldMessenger.of(context).showSnackBar(buildSnackBar(context));
-                        showSnackBar(buildSnackBar2(context), true);
-                      },
-                      child: Text('显示SnackBar, 覆盖'),
-                    ),
-                    Spacer(flex: 2),
-
                   ],
                 ),
               )
             ),
           );
         })
+    );
+  }
+
+  _buildItem({required String text, required VoidCallback onPressed}) {
+    return GestureDetector(
+      onTap: onPressed,
+      child: Text(text),
     );
   }
 
@@ -98,32 +105,36 @@ class SnackBarDemoState extends State<SnackBarDemo> {
   //   )..show(context);
   // }
 
-  SnackBar buildSnackBar(BuildContext context) {
-    return SnackBar(
-      content: Container(
-        // color: Colors.yellow,
-        // decoration: BoxDecoration(color: Colors.red,
-        //     border: Border.all(width: 2.0, color: Colors.black),
-        //     borderRadius: BorderRadius.circular(20)),
-        // margin: EdgeInsets.fromLTRB(0, 0, 0, 175),
-        margin: EdgeInsets.all(0),
-        padding: EdgeInsets.all(0),
-        child: Text(kUpdateContent)
-            // .padding(all: 8)
-            // .backgroundColor(Colors.yellow)
-      ,
-      ).gestures(onTap: (){
-        ddlog(kUpdateContent);
-      }),
+  SnackBar buildSnackBar({bool isCenter = false, SnackBarBehavior behavior = SnackBarBehavior.floating}) {
+     Widget child = Container(
+      // color: Colors.white,
+      // decoration: BoxDecoration(color: Colors.red,
+      //     border: Border.all(width: 2.0, color: Colors.black),
+      //     borderRadius: BorderRadius.circular(20)),
+      // width: 300,
+      // height: 300,
+      margin: EdgeInsets.all(0),
+      padding: EdgeInsets.all(10),
+      child: Text(kUpdateContent),
+    );
 
+    if (isCenter) {
+      child = Center(child: child,);
+    }
+
+    return SnackBar(
+      content: child,
       padding: EdgeInsets.only(left: 13, right: 13),
       // backgroundColor: Colors.green,
       elevation: 1000,
-      behavior: SnackBarBehavior.fixed,
+      behavior: behavior,
+      // shape: RoundedRectangleBorder(
+      //     borderRadius: BorderRadius.all(Radius.circular(50))
+      // ),
     );
   }
 
-  SnackBar buildSnackBar2(BuildContext context) {
+  SnackBar buildSnackBar2() {
     return SnackBar(
       onVisible: () {
         print("显示SnackBar");
@@ -140,8 +151,13 @@ class SnackBarDemoState extends State<SnackBarDemo> {
         label: '点击重试',
         onPressed: () {
           //执行相关逻辑
+          print('点击重试');
         },
       ),
+      // margin: EdgeInsets.only(
+      //     bottom: MediaQuery.of(context).size.height - 100,
+      //     right: 20,
+      //     left: 20),
     );
   }
 

@@ -43,28 +43,36 @@ class _SynHomeSrollDemoState extends State<SynHomeSrollDemo> {
   }
 
   _buildBody() {
-    return buildShell(
-        child: buildSwiper(showCount: 2.0)
+    return buildDecoration(
+        child: buildHorizontalScrollWidget(showCount: 2.0)
     );
   }
 
   _buildBodyList() {
     return CustomScrollView(
       slivers: [
-        // buildSwiper(),
-        buildShell(
-            child: buildSwiper(showCount: 2.0)
+        SizedBox(height: 16),
+        HorizontalScrollWidget(items: items, showCount: 1, isSwiper: true),
+        SizedBox(height: 16),
+
+        buildDecoration(
+            child: HorizontalScrollWidget(items: items, showCount: 1,),
         ),
-        buildSwiper(showCount: 3.0, color: Colors.green),
-        buildSwiper(showCount: 2.5),
-        buildSwiper(showCount: 1, isSwiper: true),
+        // buildSwiper(),
+        buildDecoration(
+            child: buildHorizontalScrollWidget(showCount: 2.0)
+        ),
+        buildHorizontalScrollWidget(showCount: 3.0, color: Colors.green),
+        buildHorizontalScrollWidget(showCount: 2.5),
+        buildHorizontalScrollWidget(showCount: 1, isSwiper: true),
+
       ].map((e) => SliverToBoxAdapter(
         child: e,
       )).toList(),
     );
   }
 
-  buildSwiper({double showCount = 1.0, isSwiper = false, Color? color}) {
+  buildHorizontalScrollWidget({double showCount = 1.0, bool isSwiper = false, Color? color}) {
     double paddingRight = showCount == 2.5 ? 0.0 : 12;
     double paddingLeft = isSwiper ? 12 : 0;
 
@@ -74,7 +82,7 @@ class _SynHomeSrollDemoState extends State<SynHomeSrollDemo> {
       margin: EdgeInsets.all(12),
       height: 147 * 1.2,
       width: screenSize.width,
-      bg: AssetImage('images/bg_home_swiper.png'),
+      bg: AssetImage('images/bg_horizontal_scroll.png'),
       boxShadow: [
         BoxShadow(
           color: Colors.grey.withOpacity(0.5),
@@ -91,18 +99,19 @@ class _SynHomeSrollDemoState extends State<SynHomeSrollDemo> {
     );
   }
 
-  buildShell({required Widget child, hasShell: true}) {
+  /// 外观设置
+  buildDecoration({required Widget child, hasShell: true}) {
     if (!hasShell) {
       return child;
     }
 
     return SynDecorationWidget(
       width: 400,
-      height: 200,
+      height: 150,
       opacity: 1.0,
       blur: 5,
       // margin: const EdgeInsets.all(50),
-      padding: const EdgeInsets.all(0),
+      padding: const EdgeInsets.all(10),
       topLeftRadius: 15,
       topRightRadius: 15,
       bottomLeftRadius: 15,

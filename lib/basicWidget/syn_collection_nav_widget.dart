@@ -3,18 +3,19 @@ import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
 import 'package:flutter_templet_project/vendor/flutter_swiper_demo.dart';
 
-class SynHomeNavWidget extends StatelessWidget {
 
+class SynCollectionNavWidget extends StatelessWidget {
 
-  const SynHomeNavWidget({
+  const SynCollectionNavWidget({
   	Key? key,
   	this.title,
     this.width = double.infinity,
     this.height = double.infinity,
+
     this.padding = EdgeInsets.zero,
     this.margin = EdgeInsets.zero,
     this.spacing = 22,
-    this.runSpacing = 12,
+    this.runSpacing = 16,
     this.direction = Axis.horizontal,
     this.rowCount = 5,
   }) : super(key: key);
@@ -44,7 +45,7 @@ class SynHomeNavWidget extends StatelessWidget {
     // return _buildSwiper();
 
     print("this.width:${this.width}");
-    return _buildSwiperItem();
+    return _buildBody();
   }
 
   _buildSwiper() {
@@ -65,7 +66,7 @@ class SynHomeNavWidget extends StatelessWidget {
     );
   }
 
-  _buildSwiperItem() {
+  _buildBody() {
     return ColoredBox(
       color: Colors.lightGreen,
       child: Wrap(
@@ -90,8 +91,12 @@ class SynHomeNavWidget extends StatelessWidget {
     return GestureDetector(
       onTap: () => print(color),
       child: Container(
-        width: itemWidth(),
-        height: 70,
+        // width: itemWidth(),
+        // height: 70,
+        constraints: BoxConstraints(
+          maxWidth: itemWidth(),
+          minWidth: 40,
+        ),
         color: color,
         child: Column(
           children: [
@@ -122,7 +127,7 @@ class SynHomeNavWidget extends StatelessWidget {
       color: Color(0xFF333333),
     ),
     padding = const EdgeInsets.all(0),
-    alignment = Alignment.centerLeft,
+    alignment = Alignment.center,
   }) {
     return Align(
       alignment: alignment,
@@ -138,7 +143,28 @@ class SynHomeNavWidget extends StatelessWidget {
     );
   }
 
+  // _buildBodySwiper() {
+  //   return Container(
+  //     width: this.width,
+  //     height: this.height,
+  //     padding: this.padding,
+  //     margin: this.margin,
+  //     decoration: BoxDecoration(
+  //       color: Colors.green,
+  //       // border: Border.all(width: 3, color: Colors.red),
+  //       // borderRadius:const BorderRadius.all(Radius.circular(8)),
+  //       image: this.bg == null ? null : DecorationImage(
+  //           image: this.bg!,
+  //           fit: BoxFit.fill
+  //       ), //设置图片
+  //     ),
+  //     child: _buildItemNew(),
+  //   );
+  // }
 }
+
+
+
 
 final List<String> images = [
   "https://cdn.pixabay.com/photo/2016/09/04/08/13/harbour-crane-1643476_1280.jpg",

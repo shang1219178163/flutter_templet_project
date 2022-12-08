@@ -247,6 +247,11 @@ class _TestPageState extends State<TestPage> {
 
     ddlog('getUrlParams():${getUrlParams(map: map)}');
     ddlog('map.join():${map.join()}' );
+
+    double? z;
+    double? z1 = null;
+    final list = [z, z1];
+    print('z1:${list}');
   }
 
   getUrlParams({Map<String, dynamic> map = const {}}) {

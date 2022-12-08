@@ -7,12 +7,12 @@ class CustomSwipper extends StatefulWidget {
   final double height;
   final ValueChanged<int> onTap;
   final Curve curve;
-  // final IndexedWidgetBuilder itemBuilder;
+  final IndexedWidgetBuilder? itemBuilder;
 
   CustomSwipper({
     required this.images,
     required this.onTap,
-    // required this.itemBuilder,
+    this.itemBuilder,
     this.height = 200,
     this.curve = Curves.linear,
   }) : assert(images != null);
@@ -32,7 +32,7 @@ class _CustomSwipperState extends State<CustomSwipper> {
     super.initState();
     _curIndex = widget.images.length * 5;
     _pageController = PageController(initialPage: _curIndex);
-    // _initTimer();
+    _initTimer();
   }
 
   @override
@@ -41,33 +41,56 @@ class _CustomSwipperState extends State<CustomSwipper> {
       alignment: Alignment.bottomCenter,
       children: <Widget>[
         _buildPageView(),
-        _buildIndicator(),
+        // Positioned(
+        //   bottom: 10,
+        //   child: _buildIndicator(),
+        // ),
+        Positioned(
+          bottom: 10,
+          child: _buildIndicatorNew(),
+        ),
       ],
     );
   }
 
   Widget _buildIndicator() {
     var length = widget.images.length;
-    return Positioned(
-      bottom: 10,
-      child: Row(
-        children: widget.images.map((s) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 3.0),
-            child: ClipOval(
-              child: Container(
-                width: 8,
-                height: 8,
-                color: s == widget.images[_curIndex % length]
-                    ? Colors.white
-                    : Colors.grey,
-              ),
+
+    return Row(
+      children: widget.images.map((e) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 3.0),
+          child: ClipOval(
+            child: Container(
+              width: 8,
+              height: 8,
+              color: e == widget.images[_curIndex % length]
+                  ? Colors.white
+                  : Colors.grey,
             ),
-          );
-        }).toList(),
-      ),
+          ),
+        );
+      }).toList(),
     );
   }
+
+   Widget _buildIndicatorNew() {
+     var length = widget.images.length;
+     return Row(
+       children: widget.images.map((e) {
+         return Padding(
+           padding: const EdgeInsets.symmetric(horizontal: 0.0),
+           child: Container(
+             width: 28,
+             height: 2,
+             color: e == widget.images[_curIndex % length]
+                 ? Colors.white
+                 : Colors.grey,
+           ),
+         );
+       }).toList(),
+     );
+   }
 
   Widget _buildPageView() {
     var length = widget.images.length;
@@ -82,6 +105,7 @@ class _CustomSwipperState extends State<CustomSwipper> {
               _curIndex = length;
               _changePage();
             }
+            print("_curIndex:${_curIndex}");
           });
         },
         itemBuilder: (context, index) {
@@ -90,14 +114,14 @@ class _CustomSwipperState extends State<CustomSwipper> {
               _cancelTimer();
             },
             onTap: () {
-
               final currIdx = index % length;
               print('onTap 当前 page 为 ${index},${length},${currIdx}');
 
               widget.onTap(currIdx);
             },
-            child: Image.network(
-              widget.images[index % length],
+            child: widget.itemBuilder != null ? widget.itemBuilder!(context, index) : FadeInImage.assetNetwork(
+              placeholder: 'images/img_placeholder.png',
+              image: widget.images[index % length],
               fit: BoxFit.cover,
             ),
           );
@@ -131,6 +155,8 @@ class _CustomSwipperState extends State<CustomSwipper> {
 
   /// 切换页面，并刷新小圆点
   _changePage() {
+    print("_changePage:${_curIndex}");
+
     Timer(Duration(milliseconds: 350), () {
       _pageController.jumpToPage(_curIndex);
     });
