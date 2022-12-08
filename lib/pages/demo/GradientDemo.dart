@@ -209,7 +209,24 @@ class _GradientDemoState extends State<GradientDemo> {
                   begin: Alignment.topLeft,
                   end: Alignment(0.5, 0.0),
                   // tileMode: TileMode.repeated,
-                  colors: [Color(0xFFFFC125), Color(0xFFFF7F24)]
+                  colors: [Color(0xFFFFC125), Color(0xFFFF7F24)],
+              )
+          )
+      ),
+
+      _buildBox(
+          text: '两种颜色 设置起始位置与终止位置 repeated',
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                tileMode: this.tileMode,
+                // begin: Alignment.topLeft,
+                // end: Alignment(0.5, 0.0),
+                colors: const <Color>[
+                  Colors.red, // blue
+                  Colors.blue,
+                  Colors.yellow,
+                ],
+                stops: const <double>[0.0, 0.5, 0.8]
               )
           )
       ),
