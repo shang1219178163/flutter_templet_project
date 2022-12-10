@@ -61,6 +61,16 @@ extension ListExt<T,E> on List<E> {
     return this;
   }
 
+  /// 是否全部满足某个条件
+  bool every(bool action(E e)) {
+    for (int i = 0; i < this.length; i++) {
+      if (!action(this[i])) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   /// 转为 Map<String, dynamic>
   Map<String, E> toJson() {
     final Map<String, E> map = {};

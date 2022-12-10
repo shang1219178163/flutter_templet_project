@@ -112,7 +112,7 @@ dependencies:
   enhance_expansion_panel: ^0.0.3
 
   custom_timer: ^0.1.1
-  scribble: ^0.9.1
+  scribble: ^0.9.0
   aesthetic_dialogs: ^0.0.15
   shimmer_animation: ^2.1.0+1
   image_gallery_saver: ^1.7.1
