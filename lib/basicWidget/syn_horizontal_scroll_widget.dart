@@ -446,7 +446,7 @@ class HorizontalScrollWidget extends StatelessWidget {
                 placeholder: AssetImage('images/img_placeholder.png'),
                 image: NetworkImage(e.item1),
                 fit: BoxFit.fill,
-                height: double.infinity
+                height: double.infinity,
               ),
               if (isVideo) SizedBox(
                 width: 24,
@@ -518,33 +518,4 @@ class HorizontalScrollWidget extends StatelessWidget {
       ],
     );
   }
-
-  ///圆角
-  _buildBorderRadius({
-  lt: 0,
-  rt: 0,
-  lb: 0,
-  rb: 0,
-  }) {
-    return BorderRadius.only(
-      topLeft: Radius.circular(lt),
-      topRight: Radius.circular(rt),
-      bottomLeft: Radius.circular(lb),
-      bottomRight: Radius.circular(rb),
-    );
-  }
-
-  ///阴影
-  _buildBoxShadow({
-    Color color = Colors.red,
-    spread: 0,
-    blur: 5,
-    x: 0,
-    y: 0,
-  }) => BoxShadow(
-      color: color,
-      spreadRadius: spread,
-      blurRadius: blur,
-      offset: Offset(x, y), // changes position of shadow
-    );
 }
