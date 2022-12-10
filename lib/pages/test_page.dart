@@ -17,6 +17,8 @@ import 'package:flutter_templet_project/extension/map_extension.dart';
 import 'package:flutter_templet_project/extension/buildContext_extension.dart';
 import 'package:tuple/tuple.dart';
 
+import '../R.dart';
+
 
 class TestPage extends StatefulWidget {
   TestPage({ Key? key, this.title}) : super(key: key);
@@ -48,7 +50,7 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
           flexibleSpace: Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: NetworkImage('https://tenfei02.cfp.cn/creative/vcg/800/new/VCG21409037867.jpg'),
+                image: NetworkImage(R.imgUrls[5]),
                 fit: BoxFit.cover,
               ),
             ),
