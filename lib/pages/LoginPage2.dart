@@ -10,10 +10,9 @@ import 'package:styled_widget/styled_widget.dart';
 
 class LoginPage2 extends StatefulWidget {
 
-  final String? title;
-
   LoginPage2({ Key? key, this.title}) : super(key: key);
 
+  final String? title;
 
   @override
   _LoginPage2State createState() => _LoginPage2State();

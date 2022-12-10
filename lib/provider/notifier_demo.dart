@@ -26,7 +26,9 @@ class CartModel extends ChangeNotifier {
     if (_items.length == 0) {
       return 0;
     }
-    return _items.map((e) => e.pirce).reduce((value, element) => value + element).roundToDouble();
+    return _items.map((e) => e.pirce)
+        .reduce((value, element) => value + element)
+        .roundToDouble();
   }
 
   /// 加入物品到购物车
@@ -161,22 +163,7 @@ class ValueNotifierList<T> extends ValueNotifier<List<T>> {
   }
 }
 
-
 /// StateNotifier(需要安装第三方插件包)
-// class CartModel extends StateNotifier<List<OrderModel>> {
-//   CartModel(): super(<OrderModel>[]); // 构造函数要提供state的初始值
-//
-//  int get totalPrice => state.length * 42;
-//
-//   void add(OrderModel item) {
-//    state.add(item);
-//   }
-//
-//   void removeAll() {
-//    state.clear();
-//   }
-// }
-
 
 /// ValueNotifier<int>
 class ValueNotifierNum extends ValueNotifier<num> {
@@ -185,7 +172,8 @@ class ValueNotifierNum extends ValueNotifier<num> {
     this.initValue = 0,
     this.minValue = 0,
     this.maxValue = 100000,
-    this.block}) : super(initValue);
+    this.block
+  }) : super(initValue);
 
   num initValue;
 
@@ -194,7 +182,6 @@ class ValueNotifierNum extends ValueNotifier<num> {
   num maxValue;
 
   void Function(num minValue, num maxValue)? block;
-
 
   void add(num val) {
     if (val < 0 && value <= minValue) {

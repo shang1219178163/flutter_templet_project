@@ -3,7 +3,7 @@
 import 'package:flutter_templet_project/Provider/provider_list_demo.dart';
 import 'package:flutter_templet_project/basicWidget/DragDestinationView.dart';
 import 'package:flutter_templet_project/basicWidget/responsive_column.dart';
-import 'package:flutter_templet_project/pages/BoxConstraintsDemo.dart';
+import 'package:flutter_templet_project/pages/demo/BoxConstraintsDemo.dart';
 import 'package:flutter_templet_project/pages/FlutterFFiTest.dart';
 import 'package:flutter_templet_project/pages/LocalImagePage.dart';
 import 'package:flutter_templet_project/pages/SynHomeNavDemo.dart';
@@ -11,6 +11,7 @@ import 'package:flutter_templet_project/pages/SynHomeSrollDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AutocompleteDemo.dart';
 import 'package:flutter_templet_project/pages/demo/BuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ColoredBoxDemo.dart';
+import 'package:flutter_templet_project/pages/demo/ContainerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/CustomSwipperDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DecorationDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DismissibleDemo.dart';
@@ -60,7 +61,7 @@ import 'package:flutter_templet_project/pages/demo/BottomAppBarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/BottomSheetDemo.dart';
 import 'package:flutter_templet_project/pages/demo/CalendarDatePickerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ChipDemo.dart';
-import 'package:flutter_templet_project/pages/demo/ConstrainedBoxDemo.dart';
+import 'package:flutter_templet_project/pages/demo/TextViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/HitTestDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MouseRegionDemo.dart';
 import 'package:flutter_templet_project/pages/demo/OffstageDemo.dart';
@@ -198,6 +199,7 @@ class APPRouter {
   static const recordListDemo = '/RecordListDemo';
   static const slidableDemo = '/SlidaableDemo';
   static const settingsPage = '/AppSettingsPage';
+  static const containerDemo = '/containerDemo';
   static const draggableDemo = '/DraggableDemo';
   // static const animatedIconDemo = '/AnimatedIconDemo';
   static const forgetPasswordPage = '/ForgetPasswordPage';
@@ -399,7 +401,7 @@ class AppPage {
     GetPage(name: APPRouter.slidableDemo, page: () => SlidableDemo(),),
     GetPage(name: APPRouter.settingsPage, page: () => AppSettingsPage(),),
     GetPage(name: APPRouter.draggableDemo, page: () => DraggableDemo(),),
-    GetPage(name: APPRouter.dateTableDemo, page: () => DataTableDemo(),),
+    GetPage(name: APPRouter.containerDemo, page: () => ContainerDemo(),),
     GetPage(name: APPRouter.dataTableDemoNew, page: () => DataTableDemoNew(),),
     GetPage(name: APPRouter.segmentControlDemo, page: () => SegmentControlDemo(),),
     GetPage(name: APPRouter.sliderDemo, page: () => SliderDemo(),),
@@ -472,7 +474,7 @@ class AppPage {
     GetPage(name: APPRouter.borderDemo, page: () => BorderDemo(),),
     GetPage(name: APPRouter.clipDemo, page: () => ClipDemo(),),
     GetPage(name: APPRouter.steperConnectorDemo, page: () => SteperConnectorDemo(),),
-    GetPage(name: APPRouter.constrainedBoxDemo, page: () => ConstrainedBoxDemo(),),
+    GetPage(name: APPRouter.constrainedBoxDemo, page: () => TextViewDemo(),),
     GetPage(name: APPRouter.navigationBarDemo, page: () => NavigationBarDemo(),),
     GetPage(name: APPRouter.qrCodeScannerDemo, page: () => QrCodeScannerDemo(),),
     GetPage(name: APPRouter.qrFlutterDemo, page: () => QrFlutterDemo(),),

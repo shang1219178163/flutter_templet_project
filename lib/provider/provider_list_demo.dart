@@ -57,6 +57,7 @@ class _ProviderListDemoState extends State<ProviderListDemo> {
 
   var counter = 3.notifier;
 
+  Color get primaryColor => Theme.of(context).primaryColor;
 
   @override
   void initState() {
@@ -105,13 +106,11 @@ class _ProviderListDemoState extends State<ProviderListDemo> {
             IconButton(
               onPressed: (){
                 updateChangeNotifier(model: cartModel, value: 1);
-
               },
               icon: Icon(Icons.add_circle_outline,)),
             IconButton(
               onPressed: (){
                 updateChangeNotifier(model: cartModel, value: -1);
-
               },
               icon: Icon(Icons.remove_circle_outline,)),
           ],
@@ -177,24 +176,37 @@ class _ProviderListDemoState extends State<ProviderListDemo> {
           height: 60,
           child: Row(
             children: [
-              IconButton(onPressed: (){
-                handleActionNum(e: e, value: 1, idx: index);
-
-              }, icon: Icon(Icons.add_circle_outline, color: Theme.of(context).primaryColor,)),
-              IconButton(onPressed: (){
-                handleActionNum(e: e, value: -1, idx: index);
-
-              }, icon: Icon(Icons.remove_circle_outline, color: Theme.of(context).primaryColor,)),
+              IconButton(
+                onPressed: (){
+                  handleActionNum(e: e, value: 1, idx: index);
+                },
+                icon: Icon(Icons.add_circle_outline, color: primaryColor,)
+              ),
+              IconButton(
+                onPressed: (){
+                  handleActionNum(e: e, value: -1, idx: index);
+                },
+                icon: Icon(Icons.remove_circle_outline, color: primaryColor,)
+              ),
               // SizedBox(width: 8,),
               // Text("${e.name}当前值: ${e.notifier?.value}"),
               Expanded(
-                  child: Text("${e.notifier.toString()}", overflow: TextOverflow.ellipsis, softWrap: true,)
+                child: Text("${e.notifier.toString()}",
+                  overflow: TextOverflow.ellipsis,
+                  softWrap: true,
+                )
               ),
               // Container(
               //   height: 50,
               //   child: Text("${e.notifier.toString()}", overflow: TextOverflow.ellipsis,),
               // )
               // Text("${e.notifier.toString()}", style: TextStyle(),),
+              IconButton(
+                onPressed: (){
+                  handleActionNum(e: e, value: -1, idx: index);
+                },
+                icon: Icon(Icons.arrow_forward_ios, color: Colors.grey,)
+              ),
             ],
           ),
         ),
