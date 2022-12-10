@@ -30,29 +30,14 @@ class _FirstPageState extends State<FirstPage> {
         length: 4,
         child: Scaffold(
           appBar: _hiddenAppBar ? null : AppBar(
-            // leading: Icon(Icons.arrow_back)
-            //       // .gestures(onTap: ()=> ddlog("back")
-            //         .gestures(onTap: (){
-            //           NavigatorExt.popPage(context);
-            //           // Navigator.popPage(context);
-            //           // if (!Navigator.canPop(context)) {
-            //           //   ddlog("已经是根页面了！");
-            //           //   return;
-            //           // }
-            //           // Navigator.pop(context);
-            //         }),
-
             title: Text("$this"),
           ),
           body: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text(
-                  'You have pushed the button this many times:',
-                ),
-                Text(
-                  '_counter',
+                Text('You have pushed the button this many times:',),
+                Text('_counter',
                   style: Theme.of(context).textTheme.headline4,
                 ),
                 Icon(_hiddenAppBar == false ? Icons.bedtime : Icons.beach_access,

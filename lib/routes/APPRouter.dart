@@ -34,6 +34,7 @@ import 'package:flutter_templet_project/pages/demo/ShortcutsDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ShortcutsDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/StackDemo.dart';
 import 'package:flutter_templet_project/pages/demo/StatefulBuilderDemo.dart';
+import 'package:flutter_templet_project/pages/demo/TabBarViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TransformDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ValueListenableBuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/WrapDemo.dart';
@@ -138,7 +139,6 @@ import 'package:flutter_templet_project/pages/AppWebViewDemo.dart';
 import 'package:flutter_templet_project/pages/ForgetPasswordPage.dart';
 import 'package:flutter_templet_project/pages/LoginPage.dart';
 import 'package:flutter_templet_project/pages/LoginPage2.dart';
-import 'package:flutter_templet_project/pages/SigninPage.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/SliverFamilyDemo.dart';
 
 import 'package:flutter_templet_project/pages/demo/FutureBuilderDemo.dart';
@@ -245,6 +245,8 @@ class APPRouter {
   static const nestedScrollViewDemo = '/NestedScrollViewDemo';
 
   static const popoverDemo = '/popoverDemo';
+  static const tabBarViewDemo = '/tabBarViewDemo';
+
   static const tabBarTabBarViewDemo = '/tabBarTabBarViewDemo';
   static const tabBarPageViewDemo = '/tabBarPageViewDemo';
   static const tabBarPageViewDemoNew = '/tabBarPageViewDemoNew';
@@ -375,7 +377,6 @@ class AppPage {
       // transition: Transition.downToUp,),
     ),
     GetPage(name: APPRouter.forgetPasswordPage, page: () => ForgetPasswordPage(),),
-    GetPage(name: APPRouter.signinPage, page: () => SigninPage(),),
     GetPage(name: APPRouter.firstPage, page: () => FirstPage(),),
     GetPage(name: APPRouter.secondPage, page: () => SecondPage(),),
     GetPage(name: APPRouter.thirdPage, page: () => ThirdPage(),),

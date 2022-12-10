@@ -15,6 +15,18 @@ import 'package:tuple/tuple.dart';
 
 class TabBarTabBarView extends StatefulWidget {
 
+  TabBarTabBarView({
+    Key? key,
+    this.isTabBarTop = true,
+    required this.items,
+    this.indicatorColor,
+    this.labelColor,
+    this.pageController,
+    this.tabController,
+    required this.onPageChanged,
+    this.canPageChanged,
+  }) : super(key: key);
+
   final List<Tuple2<String, Widget>> items;
 
   final Color? indicatorColor;
@@ -30,19 +42,6 @@ class TabBarTabBarView extends StatefulWidget {
   final bool Function(int)? canPageChanged;
 
   final bool isTabBarTop;
-
-  TabBarTabBarView({
-    Key? key,
-    this.isTabBarTop = true,
-    required this.items,
-    this.indicatorColor,
-    this.labelColor,
-    this.pageController,
-    this.tabController,
-    required this.onPageChanged,
-    this.canPageChanged,
-  }) : super(key: key);
-
 
   @override
   _TabBarTabBarViewState createState() => _TabBarTabBarViewState();
