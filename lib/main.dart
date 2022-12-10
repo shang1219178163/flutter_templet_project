@@ -71,6 +71,9 @@ Future<void> main() async {
       child: MyApp(),
     ),
   );
+
+  SystemUiOverlayStyle systemUiOverlayStyle = SystemUiOverlayStyle(statusBarColor: Colors.transparent);
+  SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
 }
 
 void setCustomErrorPage(){

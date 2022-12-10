@@ -405,7 +405,7 @@ var _list = [
   Tuple2(APPRouter.builderDemo, "各种回调 builder", ),
   Tuple2(APPRouter.stackDemo, "StackDemo", ),
   Tuple2(APPRouter.wrapDemo, "流水自动换行", ),
-
+  Tuple2(APPRouter.wrapDemo, "流水自动换行", ),
 ];
 
 var _specials = [

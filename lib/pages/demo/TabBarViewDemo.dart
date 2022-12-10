@@ -24,6 +24,14 @@ class TabBarViewDemo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: NetworkImage('https://tenfei02.cfp.cn/creative/vcg/800/new/VCG21409037867.jpg'),
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
         title: Text(this.title),
         leading: Builder(builder: (context) {
           return IconButton(

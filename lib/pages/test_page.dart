@@ -19,27 +19,40 @@ import 'package:tuple/tuple.dart';
 
 
 class TestPage extends StatefulWidget {
+  TestPage({ Key? key, this.title}) : super(key: key);
 
   final String? title;
 
-  TestPage({ Key? key, this.title}) : super(key: key);
-
-  
   @override
   _TestPageState createState() => _TestPageState();
 }
 
-class _TestPageState extends State<TestPage> {
+class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin {
+  List<String> items = List.generate(6, (index) => 'item_$index').toList();
+  late TabController _tabController;
 
   var titles = ["splitMapJoin", "1", "2", "3", "4", "5", "6", "7"];
   int time = 60;
 
   @override
-  Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
+  void initState() {
+    super.initState();
 
+    _tabController = TabController(length: items.length, vsync: this);
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: NetworkImage('https://tenfei02.cfp.cn/creative/vcg/800/new/VCG21409037867.jpg'),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
           title: Text(widget.title ?? "$widget"),
           actions: ['done',].map((e) => TextButton(
             child: Text(e,
@@ -47,6 +60,14 @@ class _TestPageState extends State<TestPage> {
               ),
             onPressed: onDone,)
           ).toList(),
+          // bottom: buildAppBarBottom(),
+          bottom: TabBar(
+            controller: _tabController,
+            isScrollable: true,
+            tabs: List.generate(6, (index) => Tab(text: 'item_$index')).toList(),
+            // indicatorSize: TabBarIndicatorSize.label,
+            // indicatorPadding: EdgeInsets.only(left: 6, right: 6),
+          ),
         ),
         body: Column(
           children: [
@@ -78,6 +99,30 @@ class _TestPageState extends State<TestPage> {
 
           ],
         )
+    );
+  }
+
+  buildAppBarBottom() {
+    final items = List.generate(6, (index) => Container(
+      padding: EdgeInsets.symmetric(horizontal: 8),
+      child: Text('item_$index'),
+    )).toList();
+    return PreferredSize(
+      preferredSize: Size.fromHeight(60),
+      child: Container(
+        child: Row(
+          children: items,
+        ),
+      ),
+    );
+
+    return PreferredSize(
+      preferredSize: Size(screenSize.width, 60),
+      child: Row(
+        children: List.generate(16, (i) => Container(
+          child: Text('item_$i'),
+        )).toList(),
+      ),
     );
   }
 
@@ -197,8 +242,7 @@ class _TestPageState extends State<TestPage> {
 
 
   buildBtnColor() {
-    return
-    TextButton(
+    return TextButton(
       onPressed: () {},
       style: ButtonStyle(
         foregroundColor: MaterialStateProperty.resolveWith<Color>((Set<MaterialState> states) {
@@ -266,10 +310,6 @@ class _TestPageState extends State<TestPage> {
     return result;
   }
 
-
-  testProperty(){
-    // PropertyInfo.getVariableType();
-  }
 }
 
 // typedef RadiusBuilder = Widget Function(BuildContext context, StateSetter setState);
