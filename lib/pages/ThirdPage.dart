@@ -52,7 +52,7 @@ class _ThirdPageState extends State<ThirdPage> {
         },
         onLoad: () async {
           ddlog("onLoad");
-          await Future.delayed(Duration(seconds: 2), () {
+          await Future.delayed(Duration(seconds: 1), () {
             if (!mounted) {
               return;
             }

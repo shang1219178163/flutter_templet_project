@@ -18,6 +18,9 @@ class _ListViewDemoState extends State<ListViewDemo> {
   final _scrollController = ScrollController();
   final _scrollController1 = ScrollController();
 
+  final _globalKey2 = GlobalKey();
+  final _scrollController2 = ScrollController();
+
   double height = 100;
   bool flag = true;
 
@@ -46,17 +49,17 @@ class _ListViewDemoState extends State<ListViewDemo> {
        '跳转url',
        false
     ),
+    ...List.generate(19, (index) => Tuple4(
+        'item_$index' + 'z'*index,
+        '海尔｜无边界其他',
+        '跳转url',
+        false
+    )),
   ];
 
 
   @override
   Widget build(BuildContext context) {
-    items.addAll(List.generate(9, (index) => Tuple4(
-        'item_$index' + 'z'*index,
-        '海尔｜无边界其他',
-        '跳转url',
-        false
-    )));
 
     return Scaffold(
       appBar: AppBar(
@@ -64,6 +67,7 @@ class _ListViewDemoState extends State<ListViewDemo> {
         actions: [
           TextButton(
             onPressed: () {
+              test();
               print(_scrollController);
               // _scrollController.jumpTo(200);
             },
@@ -82,19 +86,22 @@ class _ListViewDemoState extends State<ListViewDemo> {
       // body: _buildListViewSeparated(),
       body: Column(
         children: [
-          _buildListViewSeparated(),
-          _buildSection(),
+          // _buildListViewSeparated(),
+          // _buildSection(),
+          _buildListViewSeparatedNew(),
         ],
       ),
     );
   }
 
   _buildSection() {
+    // final items = List.generate(3, (index) => "${index}");
+
     return Container(
       height: 200,
       child: ListView(
-        controller: _scrollController1,
-        children: List.generate(3, (index) => Column(
+        // controller: _scrollController1,
+        children: List.generate(9, (index) => Column(
           children: [
             ListTile(
               leading: Text('Index: $index'),
@@ -114,7 +121,6 @@ class _ListViewDemoState extends State<ListViewDemo> {
     EdgeInsets padding = const EdgeInsets.all(0),
     double gap = 8,
   }) {
-    // final items = List.generate(3, (index) => "${index}");
 
     final child = Container(
       height: height,
@@ -173,6 +179,85 @@ class _ListViewDemoState extends State<ListViewDemo> {
       );
     }
     return child;
+  }
+
+  _buildListViewSeparatedNew({
+    bool addToSliverBox = false,
+    IndexedWidgetBuilder? itemBuilder,
+    EdgeInsets padding = const EdgeInsets.all(0),
+    double gap = 8,
+  }) {
+    // final items = List.generate(20, (index) => "${index}");
+
+    final child = Container(
+      height: 600,
+      child: ListView.separated(
+        key: _globalKey2,
+        controller: _scrollController2,
+        // scrollDirection: Axis.horizontal,
+        padding: EdgeInsets.all(0),
+        itemCount: items.length,
+        // cacheExtent: 10,
+        itemBuilder: itemBuilder != null ? itemBuilder : (context, index) {
+          final e = items[index];
+
+          final tabKey = GlobalKey(debugLabel: e.item1);
+          return InkWell(
+            key: tabKey,
+            onTap: () {
+              print(e);
+              _scrollController2.scrollToItem(
+                  itemKey: tabKey,
+                  scrollKey: _globalKey2,
+              );
+
+              _scrollController2.printInfo();
+            },
+            child: Padding(
+              padding: padding,
+              child: Container(
+                color: Colors.green,
+                // width: 200,
+                child: e.item1.startsWith('http') ? FadeInImage(
+                    placeholder: AssetImage('images/img_placeholder.png') ,
+                    image: NetworkImage(e.item1),
+                    fit: BoxFit.cover,
+                    height: 70
+                ) : Container(
+                    height: 75,
+                    child: Center(
+                      child: Text('Index:${e.item1}')
+                    )
+                ),
+              ),
+            ),
+          );
+        },
+        separatorBuilder: (context, index) {
+          // return Container(
+          //   width: gap,
+          //   color: Colors.blue,
+          // );
+          return Divider(
+            // height: 8,
+            indent: gap,
+            // color: Colors.blue,
+          );
+        },
+      ),
+    );
+
+
+    if (addToSliverBox) {
+      return SliverToBoxAdapter(
+        child: child,
+      );
+    }
+    return child;
+  }
+
+  test() {
+    print("Testing:${[GlobalKey(),GlobalKey(),]}");
   }
 }
 

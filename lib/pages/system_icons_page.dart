@@ -22,7 +22,12 @@ class _SystemIconsPageState extends State<SystemIconsPage> {
 
   var list = List.from(kIConDic.keys);
   var searchResults = List.from(kIConDic.keys);
-  
+
+
+  bool isGrid = false;
+
+  String get actionTitle => isGrid ? 'List' : 'Grid';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,9 +35,10 @@ class _SystemIconsPageState extends State<SystemIconsPage> {
         title: Text("fluttefr 系统 Icons"),
         actions: [
           TextButton(
-            child: Text("Done", style: TextStyle(color: Colors.white),),
+            child: Text(actionTitle, style: TextStyle(color: Colors.white),),
             onPressed: (){
-              ddlog("${widget}");
+              isGrid = !isGrid;
+              setState(() {});
             },
           ),
         ],
@@ -42,7 +48,7 @@ class _SystemIconsPageState extends State<SystemIconsPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Padding(
-              child: _buildTextField(context),
+              child: _buildTextField(),
               padding: EdgeInsets.all(10),
             ),
             Padding(
@@ -50,7 +56,7 @@ class _SystemIconsPageState extends State<SystemIconsPage> {
               padding: EdgeInsets.only(left: 10, right: 10),
             ),
             Expanded(
-              child: _buildListView(context),
+              child: isGrid ? _buildGridView() : _buildListView(),
               flex: 1,
             )
           ],
@@ -59,7 +65,7 @@ class _SystemIconsPageState extends State<SystemIconsPage> {
     );
   }
 
-  TextField _buildTextField(BuildContext context) {
+  TextField _buildTextField() {
     return TextField(
         onChanged: _textfieldChanged,
       //   onChanged: (value) {
@@ -78,7 +84,7 @@ class _SystemIconsPageState extends State<SystemIconsPage> {
     );
   }
 
-  CupertinoScrollbar _buildListView(BuildContext context) {
+  _buildListView() {
     searchResults.sort((a, b) => a.compareTo(b));
     return CupertinoScrollbar(
       isAlwaysShown: false,
@@ -110,7 +116,36 @@ class _SystemIconsPageState extends State<SystemIconsPage> {
     );
   }
 
-  void _textfieldChanged(String value) {
+  _buildGridView() {
+    searchResults.sort((a, b) => a.compareTo(b));
+    return GridView.builder(
+      itemCount: searchResults.length,
+      itemBuilder: (BuildContext context, int index) {
+        final item = searchResults[index];
+        return Container(
+          padding: EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            // color: index % 2 == 0 ? Colors.green : Colors.white,
+            border: Border(
+              top: BorderSide(color: index > 2 ? Colors.transparent : Color(0xffe4e4e4)),
+              right: BorderSide(color: index % 3 == 2 ? Colors.transparent : Color(0xffe4e4e4)),
+              bottom: BorderSide(color: Color(0xffe4e4e4)),
+            ),
+          ),
+          child: GridTile(
+            child: Icon(kIConDic[item]),
+            footer: Text("$item",),
+          ),
+        );
+      },
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 3, //每行三列
+        childAspectRatio: 1.0, //显示区域宽高相等
+      ),
+    );
+  }
+
+  _textfieldChanged(String value) {
     // ddlog(value);
     setState(() {
       if (value.isEmpty) {

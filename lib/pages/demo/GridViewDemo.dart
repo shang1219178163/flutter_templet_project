@@ -14,6 +14,7 @@ class _GridViewDemoState extends State<GridViewDemo> {
   var titles = ["默认样式", "ListTile", "添加子视图", "3", "4", "5", "6", "7", "8"];
 
 
+  Color get primaryColor => Theme.of(context).primaryColor;
 
   @override
   Widget build(BuildContext context) {
@@ -55,25 +56,32 @@ class _GridViewDemoState extends State<GridViewDemo> {
 
       children: [
         GridTile(
-          header: GridTileBar(
-            title: Text('title', style: TextStyle(color: Colors.black),),
-            subtitle: Text('subtitle', style: TextStyle(color: Colors.black),),
-            leading: Icon(Icons.add, color: Colors.black,),
-            trailing: Text("trailing", style: TextStyle(color: Colors.black),),
-          )
-              .decorated(color: Colors.green)
-          ,
+          header: DecoratedBox(
+            decoration: BoxDecoration(
+              color: Colors.green,
+            ),
+            child: GridTileBar(
+              title: Text('title', style: TextStyle(color: Colors.black),),
+              subtitle: Text('subtitle', style: TextStyle(color: Colors.black),),
+              leading: Icon(Icons.add, color: Colors.black,),
+              trailing: Text("trailing", style: TextStyle(color: Colors.black),),
+            ),
+          ),
           child: Container(
-              child: Center(
-                child: Text("GridTileBar"),
-              )
-          )
-              .decorated(color: Theme.of(context).primaryColor)
-          ,
-          footer: Text('footer', textAlign: TextAlign.center,)
-              .decorated(color: Colors.green),
+            decoration: BoxDecoration(
+              color: primaryColor,
+            ),
+            child: Center(
+              child: Text("GridTileBar"),
+            )
+          ),
+          footer: DecoratedBox(
+            decoration: BoxDecoration(
+              color: Colors.green,
+            ),
+            child: Text('footer', textAlign: TextAlign.center,),
+          ),
         ),
-
         GridPaper(
           interval: 1,
           divisions: 2,
@@ -82,7 +90,8 @@ class _GridViewDemoState extends State<GridViewDemo> {
           child: FadeInImage(
               image: NetworkImage("https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80"),
               placeholder: AssetImage('assets/img_404.png'),
-              fit: BoxFit.cover),
+              fit: BoxFit.cover
+          ),
         ),
 
         Container(
