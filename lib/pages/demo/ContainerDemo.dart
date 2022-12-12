@@ -43,6 +43,25 @@ class _ContainerDemoState extends State<ContainerDemo> {
           children: [
             buildSection(),
             Container(
+              // height: 300,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('images/img_update.png'),
+                  repeat: ImageRepeat.repeat,
+                  alignment: Alignment.topLeft,
+                )
+              ),
+              child: Container(
+                constraints: BoxConstraints.expand(),
+                child: TextButton(
+                  onPressed: () { print("ImageRepeat.repeat"); },
+                  child: Text('ImageRepeat.repeat',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ),
+            ),
+            Container(
               color: Colors.green,
               child: Text('Container'),
             ),
@@ -51,6 +70,7 @@ class _ContainerDemoState extends State<ContainerDemo> {
               color: Colors.yellow,
               child: Text('Container1'),
             ),
+
           ],
         )
     );

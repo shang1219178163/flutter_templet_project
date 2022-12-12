@@ -71,35 +71,41 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
             // indicatorPadding: EdgeInsets.only(left: 6, right: 6),
           ),
         ),
-        body: Column(
-          children: [
-            buildWrap(),
-            buildSection1(),
-            StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
-              return buildSection2();
-            }),
-            RepaintBoundary(child: buildSection3(),),
-            Container(
-              margin: const EdgeInsets.all(8),
-              child: RadiusWidget(
-                radius: 8,
-                child: Container(
-                    width: 200,
-                    height: 40,
-                    child: Text('widget.title')
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              buildWrap(),
+              buildSection1(),
+              StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
+                return buildSection2();
+              }),
+              RepaintBoundary(child: buildSection3(),),
+              Container(
+                margin: const EdgeInsets.all(8),
+                child: RadiusWidget(
+                  radius: 8,
+                  child: Container(
+                      width: 200,
+                      height: 40,
+                      child: Text('widget.title')
+                  ),
+                  color: Colors.green,
                 ),
-                color: Colors.green,
               ),
-            ),
-            TextField(
-              cursorColor: Colors.purple,
-              cursorRadius: Radius.circular(8.0),
-              cursorWidth: 8.0,
-            ),
-            buildBtnColor(),
-            buildSection4(),
+              TextField(
+                cursorColor: Colors.purple,
+                cursorRadius: Radius.circular(8.0),
+                cursorWidth: 8.0,
+              ),
+              buildBtnColor(),
+              buildSection4(),
 
-          ],
+              // Image.asset(
+              //   'images/img_update.png',
+              //   repeat: ImageRepeat.repeat,
+              // ),
+            ],
+          ),
         )
     );
   }
