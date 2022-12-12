@@ -44,6 +44,7 @@ import 'package:flutter_templet_project/pages/demo/isolateDemo.dart';
 import 'package:flutter_templet_project/pages/demo/merge_images_demo.dart';
 import 'package:flutter_templet_project/pages/demo/merge_network_images_demo.dart';
 import 'package:flutter_templet_project/pages/system_color_page.dart';
+import 'package:flutter_templet_project/pages/system_icons_page.dart';
 import 'package:flutter_templet_project/provider/ProxyProvider_demo.dart';
 import 'package:flutter_templet_project/vendor/ScribbleDemo.dart';
 import 'package:flutter_templet_project/vendor/SkeletonDemo.dart';
@@ -332,6 +333,7 @@ class APPRouter {
   static const imageBlendModeDemo = '/imageBlendModeDemo';
   static const customSwipperDemo = '/customSwipperDemo';
 
+
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
   // };
@@ -523,7 +525,6 @@ class AppPage {
     GetPage(name: APPRouter.gradientDemo, page: () => GradientDemo(),),
     GetPage(name: APPRouter.imageBlendModeDemo, page: () => ImageBlendModeDemo(),),
     GetPage(name: APPRouter.customSwipperDemo, page: () => CustomSwipperDemo(),),
-
 
   ];
 }
