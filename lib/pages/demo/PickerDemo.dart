@@ -44,9 +44,7 @@ class _PickerDemoState extends State<PickerDemo> {
         appBar: AppBar(
           title: Text("$title"),
         ),
-        // body: buildWrap(context).padding(all: 10)
         body: buildGridView(titles)
-
     );
   }
 

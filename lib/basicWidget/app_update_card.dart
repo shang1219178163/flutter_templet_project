@@ -35,22 +35,20 @@ class _AppUpdateCardState extends State<AppUpdateCard> {
     return Column( //用Column将上下两部分合体
         crossAxisAlignment: CrossAxisAlignment.start, //水平方向距左对⻬
         children: <Widget>[
-          buildTopRow(context), //上半部分
-          buildBottomRowNew(context) //下半部分
+          buildTopRow(), //上半部分
+          buildBottomRowNew(),//下半部分
         ]
     );
   }
 
-  Widget buildTopRow(BuildContext context) {
+  Widget buildTopRow() {
     return Row( //Row控件，用来水平摆放子Widget
         children: <Widget>[
           ClipRRect( //圆⻆矩形裁剪控件
             borderRadius: BorderRadius.circular(8.0), //圆⻆半径为8
             // child: Image.asset(data.appIcon, width: 60, height: 60),
             child: FlutterLogo(size: 60,),
-          )
-              .padding(all: 10)
-          ,
+          ),
           Expanded( //Expanded控件，用来拉伸中间区域
             child: Column( //Column控件，用来垂直摆放子Widget
               mainAxisAlignment: MainAxisAlignment.center, //垂直方向居中对⻬
@@ -80,8 +78,7 @@ class _AppUpdateCardState extends State<AppUpdateCard> {
     );
   }
 
-
-  Widget buildBottomRow(BuildContext context) {
+  Widget buildBottomRow() {
     return Padding( //Padding控件用来设置整体边距
         padding: EdgeInsets.fromLTRB(15, 0, 15, 0), //左边距和右边距为15
         child: Column( //Column控件用来垂直摆放子Widget
@@ -118,7 +115,7 @@ class _AppUpdateCardState extends State<AppUpdateCard> {
     );
   }
 
-  Widget buildBottomRowNew(BuildContext context) {
+  Widget buildBottomRowNew() {
     return Column( //Column控件用来垂直摆放子Widget
         crossAxisAlignment: CrossAxisAlignment.start, //水平方向距左对⻬
         children: <Widget>[

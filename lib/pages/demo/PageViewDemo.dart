@@ -41,24 +41,25 @@ class _PageViewDemoState extends State<PageViewDemo> {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
 
     return Scaffold(
-        appBar: AppBar(
-          title: Text("$widget"),
-            actions: rightTitles.map((e) => TextButton(onPressed: (){
-              // ddlog("e");
-              _actionTap(context: context, value: e);
-
-            }, child: Text(e,
-              style: TextStyle(color: Colors.white),)
-            )).toList(),
-
-        ),
-        body: buildPageView(context)
-            .padding(all: 10)
-      ,
+      appBar: AppBar(
+        title: Text("$widget"),
+        actions: rightTitles.map((e) => TextButton(
+          onPressed: (){
+            _actionTap(value: e);
+          },
+          child: Text(e,
+            style: TextStyle(color: Colors.white),
+          ),
+        )).toList(),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: buildPageView(),
+      ),
     );
   }
 
-  Widget buildPageView(BuildContext context) {
+  Widget buildPageView() {
     return PageView(
       scrollDirection: Axis.horizontal,
       pageSnapping: true,
@@ -67,31 +68,28 @@ class _PageViewDemoState extends State<PageViewDemo> {
       },
       children: <Widget>[
         Container(
-          child: Text('第0页')
-              .center()
-          ,
-        )
-            .decorated(color: Colors.red)
-        ,
+          decoration: BoxDecoration(
+            color: Colors.red,
+          ),
+          child: Center(child: Text('第0页')),
+        ),
         Container(
-          child: Text('第1页')
-              .center()
-          ,
-        )
-            .decorated(color: Colors.yellow)
-        ,
+          decoration: BoxDecoration(
+            color: Colors.yellow,
+          ),
+          child: Center(child: Text('第1页')),
+        ),
         Container(
-          child: Text('第2页')
-              .center()
-          ,
-        )
-            .decorated(color: Theme.of(context).primaryColor)
-        ,
+          decoration: BoxDecoration(
+            color: Theme.of(context).primaryColor,
+          ),
+          child: Center(child: Text('第2页')),
+        ),
       ],
     );
   }
 
-  void _actionTap({required BuildContext context, required String value}) {
+  void _actionTap({required String value}) {
     switch(value){
       case "自定义":
         {
@@ -100,7 +98,6 @@ class _PageViewDemoState extends State<PageViewDemo> {
         break;
       default:
         {
-
           CupertinoActionSheet(
             title: Text(title),
             message: Text(message),
