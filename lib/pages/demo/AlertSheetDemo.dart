@@ -43,11 +43,11 @@ class _AlertSheetDemoState extends State<AlertSheetDemo> {
         appBar: AppBar(
           title: Text("$widget"),
         ),
-        body: buildWrap(context).padding(all: 10)
+        body: buildWrap()
     );
   }
 
-  Wrap buildWrap(BuildContext context) {
+  Wrap buildWrap() {
     return Wrap(
       spacing: 8.0, // 主轴(水平)方向间距
       runSpacing: 8.0, // 纵轴（垂直）方向间距
@@ -64,7 +64,7 @@ class _AlertSheetDemoState extends State<AlertSheetDemo> {
     );
   }
 
-  void _onPressed(int e) {
+  _onPressed(int e) {
     switch (e) {
       case 1:
           showAlertSheetListTile();

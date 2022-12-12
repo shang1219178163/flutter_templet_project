@@ -30,11 +30,6 @@ class FourthPage extends StatelessWidget {
                   style: Theme.of(context).textTheme.headline4,
                 ),
                 Icon(Icons.beach_access, color: Colors.orange)
-                    .padding(all: 10)
-                    .decorated(color: Color(0xff7AC1E7), shape: BoxShape.circle)
-                    .padding(all: 15)
-                    .decorated(color: Color(0xffE8F2F7), shape: BoxShape.circle)
-                    .padding(all: 20)
                     .card(
                   elevation: 10,
                   shape: RoundedRectangleBorder(

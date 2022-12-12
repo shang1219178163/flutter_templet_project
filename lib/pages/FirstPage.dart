@@ -42,11 +42,6 @@ class _FirstPageState extends State<FirstPage> {
                 ),
                 Icon(_hiddenAppBar == false ? Icons.bedtime : Icons.beach_access,
                     color: _hiddenAppBar == false ? Colors.yellow : Colors.black)
-                    .padding(all: 10)
-                    .decorated(color: Color(0xff7AC1E7), shape: BoxShape.circle)
-                    .padding(all: 15)
-                    .decorated(color: Color(0xffE8F2F7), shape: BoxShape.circle)
-                    .padding(all: 20)
                     .card(
                       elevation: 10,
                       shape: RoundedRectangleBorder(

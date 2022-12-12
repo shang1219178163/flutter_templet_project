@@ -71,6 +71,8 @@ extension BuildContextExt on BuildContext {
 
   /// 扩展属性 Theme.of(this.context)
   get theme => Theme.of(this);
+  /// 扩展属性 Theme.of(this.context).primaryColor
+  get primaryColor => Theme.of(this).primaryColor;
   /// 扩展属性 MediaQuery.of(this.context)
   get mediaQuery => MediaQuery.of(this);
   /// 扩展属性 MediaQuery.of(this.context).size
