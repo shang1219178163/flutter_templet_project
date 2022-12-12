@@ -3,7 +3,6 @@ import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_templet_project/extension/buildContext_extension.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:styled_widget/styled_widget.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 
 
@@ -39,9 +38,6 @@ class _ThirdPageState extends State<ThirdPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // leading: Icon(Icons.backspace_outlined)
-        // // .gestures(onTap: ()=> ddlog("back")
-        //     .gestures(onTap: (){ Navigator.pop(context); }),
         title: Text(widget.title ?? "$widget"),
       ),
           // body: buildListView(context),

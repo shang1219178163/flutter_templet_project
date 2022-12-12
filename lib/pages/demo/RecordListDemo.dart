@@ -10,7 +10,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:intl/intl.dart';
-import 'package:styled_widget/styled_widget.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 
@@ -139,7 +138,8 @@ class _RecordListDemoState extends State<RecordListDemo> {
                   fontWeight: FontWeight.bold,
                   fontSize: 16.0,
                 ),
-              ).padding(bottom: 24),
+              ),
+              SizedBox(height: 12),
               TextField(
                 controller: editingController,
                 keyboardType: TextInputType.number,
@@ -158,7 +158,8 @@ class _RecordListDemoState extends State<RecordListDemo> {
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
                     ),
-                  ).expanded(),
+                  ),
+                  Spacer(),
                   Container(
                       padding: EdgeInsets.symmetric(horizontal: 4),
                       margin: EdgeInsets.symmetric(vertical: 8.0),
@@ -187,7 +188,7 @@ class _RecordListDemoState extends State<RecordListDemo> {
                         },
                       )),
                 ],
-              ).padding(top: 8, bottom: 8),
+              ),
               Expanded(child: Container()),
               ButtonBar(
                 children: [

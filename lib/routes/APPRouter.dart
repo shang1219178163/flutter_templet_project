@@ -39,7 +39,7 @@ import 'package:flutter_templet_project/pages/demo/TransformDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ValueListenableBuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/WrapDemo.dart';
 import 'package:flutter_templet_project/pages/demo/drawImageNineDemo.dart';
-import 'package:flutter_templet_project/pages/demo/flutter_smart_dialog_demo.dart';
+import 'package:flutter_templet_project/pages/demo/smart_dialog_demo.dart';
 import 'package:flutter_templet_project/pages/demo/isolateDemo.dart';
 import 'package:flutter_templet_project/pages/demo/merge_images_demo.dart';
 import 'package:flutter_templet_project/pages/demo/merge_network_images_demo.dart';
@@ -363,12 +363,10 @@ class APPRouter {
 class AppPage {
   static const INITIAL = APPRouter.homePage;
 
-  static final unknownRoute = GetPage(
-    name: APPRouter.notFound,
-    page: () => APPNotFoundPage(),
-  );
+  static final unknownRoute = GetPage(name: APPRouter.notFound, page: () => APPNotFoundPage(),);
 
   static final List<GetPage> routes = [
+    unknownRoute,
     GetPage(name: APPRouter.homePage, page: () => MyHomePage(),),
     GetPage(name: APPRouter.tabBarTabBarViewDemo, page: () => TabBarTabBarViewDemo(),),
     GetPage(name: APPRouter.tabBarPageViewDemo, page: () => TabBarPageViewDemo(),),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/APPThemeSettings.dart';
 import 'package:get/get.dart';
-import 'package:styled_widget/styled_widget.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
+
 
 class FirstPage extends StatefulWidget {
 
@@ -40,23 +40,20 @@ class _FirstPageState extends State<FirstPage> {
                 Text('_counter',
                   style: Theme.of(context).textTheme.headline4,
                 ),
-                Icon(_hiddenAppBar == false ? Icons.bedtime : Icons.beach_access,
-                    color: _hiddenAppBar == false ? Colors.yellow : Colors.black)
-                    .card(
-                      elevation: 10,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                    )
-                    .alignment(Alignment.center)
-                    .backgroundColor(Color(0xffEBECF1))
-                // .gestures(onTap: () => print('${this}_${DateTime.now()} RaisedButton pressed'))
-                // .gestures(onTap: () => logger.info('${this}_${DateTime.now()} RaisedButton pressed'))
-                // .gestures(onTap: () => print('${DateTime.now()} RaisedButton pressed'))
-                //  .gestures(onTap: () => ddlog('RaisedButton pressed'))
-                //  .gestures(onTap: () => ddlog('RaisedButton pressed'))
-                    .gestures(onTap: _changeAppBarState)
-
+                InkWell(
+                  onTap: _changeAppBarState,
+                  child: Container(
+                    width: 100,
+                    height: 100,
+                    decoration: BoxDecoration(
+                      color: Color(0xffEBECF1),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Icon(_hiddenAppBar == false ? Icons.bedtime : Icons.beach_access,
+                        color: _hiddenAppBar == false ? Colors.yellow : Colors.black
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
@@ -69,4 +66,5 @@ class _FirstPageState extends State<FirstPage> {
       ),
     );
   }
+  
 }

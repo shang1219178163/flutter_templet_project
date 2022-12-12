@@ -1,24 +1,22 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
-import 'package:styled_widget/styled_widget.dart';
 
-///
-/// des:app升级提示控件
-///
+
+/// app升级提示控件
 class AppUpgradeView extends StatefulWidget {
-  const AppUpgradeView(
-      {required this.title,
-        this.titleStyle,
-        required this.content,
-        this.contentStyle,
-        this.cancelText = "取消",
-        this.cancelTextStyle,
-        this.okText = "确定",
-        this.okTextStyle,
-        this.borderRadius = 15,
-        this.force = false,
-      });
+  const AppUpgradeView({
+    required this.title,
+    this.titleStyle,
+    required this.content,
+    this.contentStyle,
+    this.cancelText = "取消",
+    this.cancelTextStyle,
+    this.okText = "确定",
+    this.okTextStyle,
+    this.borderRadius = 15,
+    this.force = false,
+  });
 
   ///
   /// 升级标题
@@ -76,10 +74,8 @@ class AppUpgradeView extends StatefulWidget {
 
 class _AppUpgradeWidget extends State<AppUpgradeView> {
   static final String _downloadApkName = 'temp.apk';
-
-  ///
+  
   /// 下载进度
-  ///
   double _downloadProgress = 0.0;
 
   // DownloadStatus _downloadStatus = DownloadStatus.none;
@@ -99,10 +95,8 @@ class _AppUpgradeWidget extends State<AppUpgradeView> {
       ),
     );
   }
-
-  ///
+  
   /// 信息展示widget
-  ///
   Widget _buildInfoWidget(BuildContext context) {
     return Container(
       child: Column(
@@ -110,46 +104,37 @@ class _AppUpgradeWidget extends State<AppUpgradeView> {
         // mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          //标题
           _buildTitle(),
-          //更新信息
           _buildAppInfo(),
-          //操作按钮
           _buildAction()
         ],
       ),
     );
   }
 
-  ///
   /// 构建标题
-  ///
   _buildTitle() {
     return Padding(
-        padding: EdgeInsets.only(top: 20),
-        child: Text(widget.title ?? '',
-            style: widget.titleStyle ?? TextStyle(fontSize: 22))
-    ).backgroundColor(Colors.white);
+      padding: EdgeInsets.only(top: 20),
+      child: Text(widget.title ?? '',
+        style: widget.titleStyle ?? TextStyle(fontSize: 22)
+      )
+    );
   }
-
-  ///
+  
   /// 构建版本更新信息
-  ///
   _buildAppInfo() {
     return Container(
       padding: EdgeInsets.only(left: 15, right: 15, bottom: 8),
       // height: 200,
-      child:
-          Text(
-            widget.content,
-            style: widget.contentStyle ?? TextStyle(fontSize: 15),
-          ).backgroundColor(Colors.white),
+      child: Text(
+        widget.content,
+        style: widget.contentStyle ?? TextStyle(fontSize: 15),
+      ),
     );
   }
-
-  ///
+  
   /// 构建取消或者升级按钮
-  ///
   _buildAction() {
     return Column(
       children: <Widget>[
@@ -162,49 +147,49 @@ class _AppUpgradeWidget extends State<AppUpgradeView> {
             widget.force
                 ? Container()
                 : Expanded(
-              child: _buildCancelActionButton(),
+              child: _buildCancelButton(),
             ),
             Expanded(
-              child: _buildOkActionButton(),
+              child: _buildConfirmButton(),
             ),
           ],
         ),
       ],
     );
   }
-
-  ///
+  
   /// 取消按钮
-  ///
-  _buildCancelActionButton() {
+  _buildCancelButton() {
     return Material(
-        child: Ink(
-          decoration: BoxDecoration(
-          borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(widget.borderRadius))),
-
-          child: InkWell(
-            borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(widget.borderRadius)),
-            child: Container(
-              height: 45,
-              alignment: Alignment.center,
-              child: Text(widget.cancelText ?? '以后再说',
-                  style: widget.cancelTextStyle ?? TextStyle()),
-            ),
-            onTap: () {
-              // widget.onCancel?.call();
-              Navigator.of(context).pop();
-            }
-          ),
+      child: Ink(
+        decoration: BoxDecoration(
+        borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(widget.borderRadius)
+          )
         ),
+
+        child: InkWell(
+          borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(widget.borderRadius)
+          ),
+          child: Container(
+            height: 45,
+            alignment: Alignment.center,
+            child: Text(widget.cancelText ?? '以后再说',
+                style: widget.cancelTextStyle ?? TextStyle()
+            ),
+          ),
+          onTap: () {
+            // widget.onCancel?.call();
+            Navigator.of(context).pop();
+          }
+        ),
+      ),
     );
   }
-
-  ///
+  
   /// 确定按钮
-  ///
-  _buildOkActionButton() {
+  _buildConfirmButton() {
     var borderRadius =
     BorderRadius.only(bottomRight: Radius.circular(widget.borderRadius));
     if (widget.force) {
@@ -220,12 +205,12 @@ class _AppUpgradeWidget extends State<AppUpgradeView> {
     return Material(
         child: Ink(
           decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [_okBackgroundColors[0], _okBackgroundColors[1]]),
-              borderRadius: borderRadius),
-
+            gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [_okBackgroundColors[0], _okBackgroundColors[1]]),
+            borderRadius: borderRadius
+          ),
           child: InkWell(
             borderRadius: borderRadius,
             child: Container(
@@ -236,25 +221,22 @@ class _AppUpgradeWidget extends State<AppUpgradeView> {
             ),
             onTap: () {
               ddlog(widget.okText ?? '立即体验');
-              // _clickOk();
+              // onConfirm();
             },
           ),
         ),
     );
   }
-
-  ///
+  
   /// 点击确定按钮
-  ///
-  _clickOk() async {
-    // widget.onOk?.call();
-    // if (Platform.isIOS) {
-    //   //ios 需要跳转到app store更新，原生实现
-    //   return;
-    // }
-    // if (widget.downloadUrl == null || widget.downloadUrl.isEmpty) {
-    //   //没有下载地址，跳转到第三方渠道更新，原生实现
-    //   return;
-    // }
-  }
+  // onConfirm() async {
+  // if (Platform.isIOS) {
+  //   //ios 需要跳转到app store更新，原生实现
+  //   return;
+  // }
+  // if (widget.downloadUrl == null || widget.downloadUrl.isEmpty) {
+  //   //没有下载地址，跳转到第三方渠道更新，原生实现
+  //   return;
+  // }
+  // }
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/APPThemeSettings.dart';
 import 'package:get/get.dart';
-import 'package:styled_widget/styled_widget.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 
 class FourthPage extends StatelessWidget {
@@ -13,9 +12,7 @@ class FourthPage extends StatelessWidget {
         length: 4,
         child: Scaffold(
           appBar: AppBar(
-            leading: Icon(Icons.arrow_back)
-            // .gestures(onTap: ()=> ddlog("back")
-                .gestures(onTap: (){ Navigator.pop(context); }),
+            leading: Icon(Icons.arrow_back),
             title: Text("$this"),
           ),
           body: Center(
@@ -30,19 +27,6 @@ class FourthPage extends StatelessWidget {
                   style: Theme.of(context).textTheme.headline4,
                 ),
                 Icon(Icons.beach_access, color: Colors.orange)
-                    .card(
-                  elevation: 10,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                )
-                    .alignment(Alignment.center)
-                    .backgroundColor(Color(0xffEBECF1))
-                // .gestures(onTap: () => print('${this}_${DateTime.now()} RaisedButton pressed'))
-                // .gestures(onTap: () => logger.info('${this}_${DateTime.now()} RaisedButton pressed'))
-                // .gestures(onTap: () => print('${DateTime.now()} RaisedButton pressed'))
-                 .gestures(onTap: () => ddlog('RaisedButton pressed'))
-
               ],
             ),
           ),

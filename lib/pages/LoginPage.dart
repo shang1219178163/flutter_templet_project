@@ -9,7 +9,6 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
 
 class LoginPage extends StatefulWidget {
 
@@ -29,7 +28,6 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.title ?? "$widget"),
@@ -47,7 +45,6 @@ class _LoginPageState extends State<LoginPage> {
     // FocusScope.of(context).requestFocus(focusNode2);
     if (!focusNode1.hasFocus) {
       focusScopeNode.requestFocus(focusNode1);
-
     } else {
       focusScopeNode.requestFocus(focusNode2);
     }

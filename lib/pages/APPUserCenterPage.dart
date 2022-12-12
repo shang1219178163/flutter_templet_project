@@ -16,7 +16,6 @@ import 'package:flutter_templet_project/extension/alertDialog_extension.dart';
 import 'package:flutter_templet_project/routes/APPRouter.dart';
 
 import 'package:get/get.dart';
-import 'package:styled_widget/styled_widget.dart';
 import 'APPDrawerMenuPage.dart';
 import 'package:tuple/tuple.dart';
 
@@ -29,6 +28,17 @@ class APPUserCenterPage extends StatefulWidget{
 class _APPUserCenterPageState extends State<APPUserCenterPage>{
 
 
+  final items = [
+    Tuple2("我的消息", Icons.mail),
+    Tuple2("分享应用", Icons.share),
+    Tuple2("我的收藏", Icons.save),
+    Tuple2("我的点评", Icons.date_range),
+    Tuple2("我的书架", Icons.scanner),
+    Tuple2("设置主题", Icons.table_chart),
+    Tuple2("语言切换", Icons.language),
+    Tuple2("历史记录", Icons.history),
+  ];
+
   @override
   Widget build(BuildContext context){
     return Scaffold(
@@ -40,7 +50,6 @@ class _APPUserCenterPageState extends State<APPUserCenterPage>{
             return IconButton(
               icon: Icon(Icons.menu, color: Colors.white), //自定义图标
               onPressed: () {
-                // 打开抽屉菜单
                 // Scaffold.of(context).openDrawer();
                 kScaffoldKey.currentState?.openDrawer();
               },
@@ -52,7 +61,6 @@ class _APPUserCenterPageState extends State<APPUserCenterPage>{
               onPressed: (){
                 // Get.changeTheme(Get.isDarkMode? ThemeData.light(): ThemeData.dark());
                 APPThemeSettings.instance.changeTheme();
-
               },
             ),
             IconButton(icon: Icon(Icons.settings),
@@ -66,15 +74,13 @@ class _APPUserCenterPageState extends State<APPUserCenterPage>{
           shadowColor: Colors.transparent,
         ),
       // drawer: APPDrawerMenuPage(),
-
       body: Center(
           child: ListView(
             children: <Widget>[
-              buildTop(context),
-              buildMid(context),
+              buildTop(),
+              buildMid(),
               Container(height: 15, color: Get.isDarkMode ? Colors.black45 : Color(0xfff2f2f2)),
-              // Container(height: 15, color: Colors.red),
-              buildBom(context)
+              buildBom()
             ],
           ),
         ),
@@ -82,7 +88,7 @@ class _APPUserCenterPageState extends State<APPUserCenterPage>{
   }
 
   // 头部
-  Widget buildTop(BuildContext context) {
+  Widget buildTop() {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: 160.0,
@@ -125,7 +131,7 @@ class _APPUserCenterPageState extends State<APPUserCenterPage>{
   }
 
   // 中间
-  Widget buildMid(BuildContext context) {
+  Widget buildMid() {
     return Container(
       height: 100.0,
       alignment: Alignment.center,
@@ -136,7 +142,7 @@ class _APPUserCenterPageState extends State<APPUserCenterPage>{
         children: serviceList.map((e) => TextButtonExt.build(
             text: e.item1,
             // image: (e.item2 as Icon).copyWith(color: Theme.of(context).iconTheme.color),
-            image: (e.item2 as Icon).copyWith(color: Theme.of(context).accentColor),
+            image: (e.item2 as Icon),
             imageAlignment: ImageAlignment.top,
             callback: (value, tag){
           ddlog(value);
@@ -145,80 +151,22 @@ class _APPUserCenterPageState extends State<APPUserCenterPage>{
     );
   }
 
-  Widget buildBom(BuildContext context) {
+  Widget buildBom() {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal:10, vertical:8),
       child: Column(
-        children: <Widget>[
-          ListTile(
-            leading: Icon(Icons.mail, color: Theme.of(context).accentColor,),
-            title: Text("我的消息",style: TextStyle(fontSize: 16.0)),
+        children: items.map((e) => ListTile(
+            leading: Icon(e.item2, color: Theme.of(context).primaryColor,),
+            title: Text(e.item1, style: TextStyle(fontSize: 16.0)),
             trailing: Icon(Icons.chevron_right),
             dense:true,
-            onTap: (){},
-          ),
-          Divider(),
-          ListTile(
-            leading: Icon(Icons.share, color: Theme.of(context).accentColor,),
-            title: Text("分享应用", style: TextStyle(fontSize: 16.0)),
-            trailing: Icon(Icons.chevron_right),
-            dense:true,
-            onTap: (){},
-          ),
-          Divider(),
-          ListTile(
-            leading: Icon(Icons.save, color: Theme.of(context).accentColor,),
-            title: Text("我的收藏", style: TextStyle(fontSize: 16.0)),
-            trailing: Icon(Icons.chevron_right),
-            dense:true,
-            onTap: (){},
-          ),
-          Divider(),
-          ListTile(
-            leading: Icon(Icons.date_range, color: Theme.of(context).accentColor,),
-            title: Text("我的点评", style: TextStyle(fontSize: 16.0)),
-            trailing: Icon(Icons.chevron_right),
-            dense:true,
-            onTap: (){},
-          ),
-          Divider(),
-          ListTile(
-            leading: Icon(Icons.scanner, color: Theme.of(context).accentColor,),
-            title: Text("我的书架", style: TextStyle(fontSize: 16.0)),
-            trailing: Icon(Icons.chevron_right),
-            dense:true,
-            onTap: (){},
-          ),
-          Divider(),
-          ListTile(
-            leading: Icon(Icons.table_chart, color: Theme.of(context).accentColor,),
-            title: Text("设置主题", style: TextStyle(fontSize: 16.0)),
-            trailing: Icon(Icons.chevron_right),
-            dense:true,
-            onTap: (){},
-          ),
-          Divider(),
-          ListTile(
-            leading: Icon(Icons.language, color: Theme.of(context).accentColor,),
-            title: Text("语言切换", style: TextStyle(fontSize: 16.0)),
-            trailing: Icon(Icons.chevron_right),
-            dense:true,
-            onTap: (){},
-          ),
-          Divider(),
-          ListTile(
-            leading: Icon(Icons.history, color: Theme.of(context).accentColor,),
-            title: Text("历史记录", style: TextStyle(fontSize: 16.0)),
-            trailing: Icon(Icons.chevron_right),
-            dense:true,
-            onTap: (){},
-          ),
-        ],
+            onTap: (){ print(e.item1); },
+          )
+        ).toList(),
       ),
     );
   }
 }
-
 
 // 我的 列表菜单
 const List<Tuple2> serviceList = [

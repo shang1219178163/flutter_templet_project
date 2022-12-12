@@ -7,10 +7,8 @@
 //
 
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
-import 'package:styled_widget/styled_widget.dart';
 
 class APPNotFoundPage extends StatelessWidget {
 
@@ -29,23 +27,31 @@ class APPNotFoundPage extends StatelessWidget {
       appBar: AppBar(
         title: Text("404"),
       ),
+      body: _buildBody(),
+    );
+  }
 
-      body: Column(
-        children: <Widget>[
-          Hero(
-            tag: 'avatar',
-            child: Image.asset('images/avatar.png', width:90),
-          ),
-          SizedBox(height: 10),
-          Text('哎呀, 你的页面跑路了!', style: TextStyle(fontSize: 17.0, color: Colors.black)),
-          TextButton(
-            child: Text('立即捉它回家!', style: TextStyle(fontSize: 17.0)),
-            onPressed: (){
-              ddlog('哎呀, 你的页面跑路了!');
-            },
-          ),
-        ],
-      ).center().padding(top: 100),
+  _buildBody() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 100.0),
+      child: Center(
+        child: Column(
+          children: <Widget>[
+            Hero(
+              tag: 'avatar',
+              child: Image.asset('images/avatar.png', width:90),
+            ),
+            SizedBox(height: 10),
+            Text('哎呀, 你的页面跑路了!', style: TextStyle(fontSize: 17.0, color: Colors.black)),
+            TextButton(
+              child: Text('立即捉它回家!', style: TextStyle(fontSize: 17.0)),
+              onPressed: (){
+                ddlog('哎呀, 你的页面跑路了!');
+              },
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

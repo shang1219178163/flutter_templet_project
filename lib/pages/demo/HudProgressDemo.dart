@@ -9,9 +9,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
-import 'package:styled_widget/styled_widget.dart';
 import 'package:flutter_templet_project/basicWidget/hud/ToastDialog.dart';
 import 'package:flutter_templet_project/basicWidget/hud/CirclePulseLoadingWidget.dart';
+
 
 class HudProgressDemo extends StatelessWidget {
 
@@ -62,19 +62,15 @@ class HudProgressDemo extends StatelessWidget {
       //宽高比
       childAspectRatio: 3 / 4,
       children: list.map((e) => GridTile(
+        child: InkWell(
+          onTap: (){  _onPressed(context: context, e: e); },
           child: Container(
+            color: Theme.of(context).primaryColor,
             child: Center(
               child: Text("$e"),
             )
+          ),
         )
-            .decorated(color: Theme.of(context).primaryColor)
-              // .gestures( onTap: () => ddlog(e)
-            .gestures(onTap: (){
-              ddlog(e);
-              // showToast(context);
-            _onPressed(context: context, e: e);
-            }
-          )
       )).toList()
     );
   }

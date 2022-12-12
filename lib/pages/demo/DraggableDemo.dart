@@ -10,7 +10,6 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:styled_widget/styled_widget.dart';
 
 class DraggableDemo extends StatefulWidget {
 
@@ -35,17 +34,16 @@ class _DraggableDemoState extends State<DraggableDemo> {
         appBar: AppBar(
           title: Text(widget.title ?? "$widget"),
         ),
-        body: buildBody(context),
+        body: buildBody(),
     );
   }
 
 
-  Widget buildBody(BuildContext context) {
+  Widget buildBody() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
         Draggable<int>(
-          // Data is the value this Draggable stores.
           data: 10,
           child: Container(
             height: 100.0,
@@ -81,7 +79,6 @@ class _DraggableDemoState extends State<DraggableDemo> {
               ),
             );
           },
-
           // onAccept: (int data) {
           //   setState(() {
           //     acceptedData += data;
@@ -90,10 +87,10 @@ class _DraggableDemoState extends State<DraggableDemo> {
           onAccept: handleOnAccept,
         ),
       ],
-    ).padding(top: 20);
+    );
   }
 
-  void handleOnAccept(int data) {
+  handleOnAccept(int data) {
     setState(() {
       acceptedData += data;
     });

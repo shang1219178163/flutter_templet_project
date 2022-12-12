@@ -13,7 +13,6 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
-import 'package:styled_widget/styled_widget.dart';
 
 const double kCupertinoButtonHeight = 56.0;
 
@@ -128,9 +127,9 @@ extension ListTileExt on ListTile {
       margin: margin,
       padding: padding,
       decoration: BoxDecoration(
-          border: Border(
-            bottom: BorderSide(width: height, color: color),
-          )
+        border: Border(
+          bottom: BorderSide(width: height, color: color),
+        )
       ),
       child: this,
     );

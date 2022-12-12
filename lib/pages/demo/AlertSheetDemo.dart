@@ -3,17 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/routes/APPRouter.dart';
 import 'package:get/get.dart';
 
-import 'package:styled_widget/styled_widget.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 
 import 'package:flutter_templet_project/basicWidget/chioce_list.dart';
 import 'package:flutter_templet_project/basicWidget/chioce_wrap.dart';
 import 'package:flutter_templet_project/extension/actionSheet_extension.dart';
 import 'package:flutter_templet_project/extension/buildContext_extension.dart';
-
-import 'package:flutter_templet_project/extension/widget_extension.dart';
-import 'package:tuple/tuple.dart';
-import 'ShowSearchDemo.dart';
 
 
 class AlertSheetDemo extends StatefulWidget {

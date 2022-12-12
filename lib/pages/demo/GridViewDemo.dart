@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
-import 'package:styled_widget/styled_widget.dart';
+
 
 class GridViewDemo extends StatefulWidget {
 
@@ -93,15 +93,12 @@ class _GridViewDemoState extends State<GridViewDemo> {
               fit: BoxFit.cover
           ),
         ),
-
         Container(
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.lightBlue,),
+          ),
           child: FlutterLogo(),
-        )
-            .border(all: 1, color: Colors.lightBlue,)
-            .gestures(onTap: () => {
-          ddlog("item")
-        }),
-
+        ),
         Card(
           color: Theme.of(context).primaryColor,
           //z轴的高度，设置card的阴影

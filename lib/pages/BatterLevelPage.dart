@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:styled_widget/styled_widget.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
+
 
 class BatterLevelPage extends StatefulWidget {
   BatterLevelPage({Key? key, this.title}) : super(key: key);

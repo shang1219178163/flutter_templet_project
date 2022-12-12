@@ -455,6 +455,7 @@ var _customs = [
   Tuple2(APPRouter.numberFormatDemo, "numberFormatDemo", ),
   Tuple2(APPRouter.steperConnectorDemo, "steperConnectorDemo", ),
   Tuple2(APPRouter.customSwipperDemo, "自定义轮播", ),
+  Tuple2(APPRouter.carouselSliderDemo, "自定义轮播", ),
 
 ];
 
@@ -478,6 +479,13 @@ var _vendors = [
 ];
 
 var _others = [
+  Tuple2(APPRouter.notFound, "notFound", ),
+  Tuple2(APPRouter.firstPage, "firstPage", ),
+  Tuple2(APPRouter.fourthPage, "fourthPage", ),
+  Tuple2(APPRouter.loginPage, "LoginPage", ),
+  Tuple2(APPRouter.loginPage2, "LoginPage2", ),
+
+
   Tuple2(APPRouter.borderDemo, "buttonBorderDemo", ),
   Tuple2(APPRouter.clipDemo, "clipDemo", ),
 

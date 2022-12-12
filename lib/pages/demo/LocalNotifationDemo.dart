@@ -10,7 +10,6 @@
 // import 'package:flutter/cupertino.dart';
 // import 'package:flutter/material.dart';
 // import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-// import 'package:styled_widget/styled_widget.dart';
 //
 // import 'package:flutter_templet_project/extension/ddlog.dart';
 //
@@ -101,10 +100,6 @@
 //             ],
 //           ),
 //         )
-//             .border(all: 1, color: Colors.lightBlue,)
-//             .gestures(onTap: () => {
-//           // ddlog("$e")
-//           _onPressed(list.indexOf(e))
 //         }),
 //       );
 //     }
@@ -174,20 +169,14 @@ class LocalNotifationDemo extends StatefulWidget {
 class _LocalNotifationDemoState extends State<LocalNotifationDemo> {
 
 
-
-
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute
-        .of(context)!
-        .settings
-        .arguments;
 
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.title ?? "$widget"),
         ),
-        body: Text(arguments.toString())
+        body: Text('11111')
     );
   }
 
