@@ -5,7 +5,6 @@ import 'package:flutter_templet_project/basicWidget/dash_line.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/buildContext_extension.dart';
 
-import 'package:styled_widget/styled_widget.dart';
 import 'package:tuple/tuple.dart';
 
 final kUpdateContent = """

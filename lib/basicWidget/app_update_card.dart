@@ -1,22 +1,26 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
-import 'package:styled_widget/styled_widget.dart';
+// import 'package:styled_widget/styled_widget.dart';
 import 'package:flutter_templet_project/Model/app_update_model.dart';
 
 class AppUpdateCard extends StatefulWidget {
-  final AppUpdateItemModel data;
-
-  late bool isExpand;
-
-  final bool showExpand;
 
   AppUpdateCard({
     Key? key,
     required this.data,
     this.isExpand = false,
     this.showExpand = true,
+    this.padding = const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
   }) : super(key: key);
+
+  final AppUpdateItemModel data;
+
+  late bool isExpand;
+
+  final bool showExpand;
+
+  EdgeInsets padding;
 
   @override
   _AppUpdateCardState createState() => _AppUpdateCardState();
@@ -24,24 +28,31 @@ class AppUpdateCard extends StatefulWidget {
 
 class _AppUpdateCardState extends State<AppUpdateCard> {
 
-  void _changeState() {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: widget.padding,
+      decoration: BoxDecoration(
+        // color: Colors.green,
+        // border: Border.all(color: Colors.blue, width: 1),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          buildTopSection(),
+          buildBottomSection(),
+        ]
+      ),
+    );
+  }
+
+  _changeState() {
     setState(() {
       widget.isExpand = !widget.isExpand;
     });
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Column( //用Column将上下两部分合体
-        crossAxisAlignment: CrossAxisAlignment.start, //水平方向距左对⻬
-        children: <Widget>[
-          buildTopRow(), //上半部分
-          buildBottomRowNew(),//下半部分
-        ]
-    );
-  }
-
-  Widget buildTopRow() {
+  Widget buildTopSection() {
     return Row( //Row控件，用来水平摆放子Widget
         children: <Widget>[
           ClipRRect( //圆⻆矩形裁剪控件
@@ -57,92 +68,69 @@ class _AppUpdateCardState extends State<AppUpdateCard> {
                 Text(widget.data.appName, maxLines: 1, overflow: TextOverflow.ellipsis), //App名字
                 Text(widget.data.appDate, maxLines: 1), //App更新日期
               ],
-            )
-            // .backgroundColor(Colors.greenAccent)
-            ,
-          )
-          ,
+            ),
+          ),
           ElevatedButton(
             onPressed: () => ddlog('Make a Note'),
             child: Row(
               children: [
                 Text("更新"),
-                // SizedBox(width: 5),
-                // Icon(Icons.send),
               ],
             ),
-          )
-              .padding(right: 10)
-          ,
-        ]
-    );
-  }
-
-  Widget buildBottomRow() {
-    return Padding( //Padding控件用来设置整体边距
-        padding: EdgeInsets.fromLTRB(15, 0, 15, 0), //左边距和右边距为15
-        child: Column( //Column控件用来垂直摆放子Widget
-            crossAxisAlignment: CrossAxisAlignment.start, //水平方向距左对⻬
-            children: <Widget>[
-              Container(
-                child: Builder(
-                    builder: (BuildContext context) {
-                      return Stack(
-                        alignment:Alignment.center , //指定未定位或部分定位widget的对齐方式
-                        children: <Widget>[
-                          Text(widget.data.appDescription, maxLines: widget.isExpand ? null : 2,)
-                          // .padding(right: 20)
-                              .width(MediaQuery.of(context).size.width - 30)
-                          ,
-                          if (widget.showExpand) InkWell(
-                            child: Text(widget.isExpand ? '收起' : "展开",
-                              style: TextStyle(color: Theme.of(context).accentColor),
-                            )
-                            // .backgroundColor(Colors.white60)
-                            ,
-                            onTap: _changeState,
-                          ).positioned(right: 0, bottom: 0),
-                        ],
-                      );
-                    }
-                ),
-              ),
-              Text("${widget.data.appVersion} • ${widget.data.appSize} MB")
-                  .positioned(top: 10, bottom: 5),
-            ]
-        )
-      // .backgroundColor(Colors.greenAccent)
-    );
-  }
-
-  Widget buildBottomRowNew() {
-    return Column( //Column控件用来垂直摆放子Widget
-        crossAxisAlignment: CrossAxisAlignment.start, //水平方向距左对⻬
-        children: <Widget>[
-          Stack(
-            alignment: Alignment.center, //指定未定位或部分定位widget的对齐方式
-            children: <Widget>[
-              Text(widget.data.appDescription, maxLines: widget.isExpand ? null : 2,)
-                  .padding(right: 15)
-                  .width(MediaQuery.of(context).size.width - 30)
-              ,
-              if (widget.showExpand) InkWell(
-                child: Text(widget.isExpand ? '收起' : "展开",
-                  style: TextStyle(color: Theme.of(context).accentColor),
-                ),
-                onTap: _changeState,
-              )
-                  .positioned(right: 0, bottom: 0)
-              ,
-            ],
           ),
-          Text("${widget.data.appVersion} • ${widget.data.appSize} MB")
-              .padding(top: 10, bottom: 5)
-          ,
         ]
-    ).padding(left: 15, right: 15);
+    );
   }
 
+  Widget buildBottomSection() {
+    return Container(
+      // margin: EdgeInsets.symmetric(vertical: 8),
+      child: Column( //Column控件用来垂直摆放子Widget
+          crossAxisAlignment: CrossAxisAlignment.start, //水平方向距左对⻬
+          children: <Widget>[
+            Stack(
+              // alignment: Alignment.center,
+              children: <Widget>[
+                Container(
+                  padding: EdgeInsets.symmetric(vertical: 5),
+                  alignment: Alignment.topLeft,
+                  decoration: BoxDecoration(
+                    // color: Colors.greenAccent,
+                    // border: Border.all(color: Colors.red, width: 1),
+                  ),
+                  child: Text(widget.data.appDescription, maxLines: widget.isExpand ? null : 2,)
+                ),
+                if (widget.showExpand) Positioned(
+                  right: 0,
+                  bottom: 0,
+                  child: Container(
+                    margin: EdgeInsets.zero,
+                    padding: EdgeInsets.zero,
+                    alignment: Alignment.bottomRight,
+                    decoration: BoxDecoration(
+                      // color: Colors.green,
+                      // border: Border.all(color: Colors.blue, width: 2),
+                    ),
+                    child: TextButton(
+                      // style: TextButton.styleFrom(
+                      //   minimumSize: Size.zero,
+                      //   padding: EdgeInsets.zero,
+                      //   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      // ),
+                      onPressed: _changeState,
+                      child: Text(widget.isExpand ? '收起' : "展开",
+                        style: TextStyle(color: Theme.of(context).primaryColor),
+                      ),
+                    ),
+                  )
+                ),
+              ],
+            ),
+            Text("${widget.data.appVersion} • ${widget.data.appSize} MB"),
+          ]
+      ),
+    );
+  }
 }
 
 

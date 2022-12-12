@@ -5,7 +5,6 @@ import 'package:flutter_templet_project/APPThemeSettings.dart';
 import 'package:flutter_templet_project/basicWidget/SectionHeader.dart';
 import 'package:flutter_templet_project/extension/buildContext_extension.dart';
 import 'package:flutter_templet_project/extension/decoration_extension.dart';
-import 'package:flutter_templet_project/extension/textStyle_extension.dart';
 import 'package:flutter_templet_project/pages/demo/MyPainter.dart';
 import 'package:flutter_templet_project/basicWidget/NNPopupRoute.dart';
 import 'package:flutter_templet_project/basicWidget/gesture_detector_container.dart';
@@ -13,12 +12,6 @@ import 'package:flutter_templet_project/basicWidget/upload_button.dart';
 import 'package:flutter_templet_project/extension/button_extension.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 
-import 'package:flutter_templet_project/extension/navigator_extension.dart';
-
-import 'package:flutter_templet_project/network/fileManager.dart';
-import 'package:flutter_templet_project/basicWidget/hud/progresshud.dart';
-
-import 'package:styled_widget/styled_widget.dart';
 import 'package:tuple/tuple.dart';
 
 class SecondPage extends StatefulWidget {
@@ -38,11 +31,6 @@ class _SecondPageState extends State<SecondPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        // leading: BackButton(
-        //           color: Colors.white,
-        //           onPressed: (){ NavigatorExt.popPage(context); }
-        //           ),
-        // // .gestures(onTap: ()=> ddlog("back")
         actions: [
           IconButton(
             icon: Icon(Icons.change_circle_outlined),
@@ -58,14 +46,6 @@ class _SecondPageState extends State<SecondPage> {
       body: Center(
         child: _isList ? buildListView() : buildGridView(),
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () {
-      //     APPThemeSettings.instance.changeTheme();
-      //   },
-      //   tooltip: 'Increment',
-      //   child: Icon(Icons.add),
-      // ),
-      // floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
     );
   }
 
@@ -96,7 +76,6 @@ class _SecondPageState extends State<SecondPage> {
               onPressed: () => print("BackButton"),
               color: Colors.red,
             ),
-
             Divider(),
             SectionHeader.h5(title: "MaterialButton"),
             ElevatedButton.icon(
@@ -162,12 +141,11 @@ class _SecondPageState extends State<SecondPage> {
                     children: <Widget>[
                       Text(
                         'TextButton',
-                      ).padding(right: 5),
+                      ),
                       // SizedBox(width: 30),
                       Icon(Icons.call),
                     ],
-                  ).decorated(
-                      borderRadius: BorderRadius.all(Radius.circular(0))),
+                  ),
                 ),
                 TextButton(
                   onPressed: () => ddlog('TextButton'),
@@ -449,7 +427,7 @@ class _SecondPageState extends State<SecondPage> {
             children: <Widget>[
               Text(
                 'TextButton',
-              ).padding(right: 5),
+              ),
               // SizedBox(width: 30),
               Icon(Icons.call),
             ],

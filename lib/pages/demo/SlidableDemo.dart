@@ -10,7 +10,6 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:styled_widget/styled_widget.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 
@@ -146,7 +145,7 @@ class _SlidableDemoState extends State<SlidableDemo> {
         Container(
           height: 800,
           color: Colors.green,
-          child: Text('a').center(),
+          child: Text('a'),
         ),
         IconSlideAction(
           caption: 'More',

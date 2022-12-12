@@ -11,7 +11,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
-import 'package:styled_widget/styled_widget.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 class CarouselSliderDemo extends StatelessWidget {
@@ -48,44 +47,49 @@ final List<String> imgList = [
 ];
 
 
-final List<Widget> imageSliders = imgList.map((item) => Container(
-    margin: EdgeInsets.all(5.0),
-    child: ClipRRect(
-        borderRadius: BorderRadius.all(Radius.circular(5.0)),
-        child: Stack(
-          children: [
-            // Image.network(item, fit: BoxFit.cover, width: double.infinity),
-            FadeInImage(image: NetworkImage(item), placeholder: AssetImage('assets/img_404.png'), fit: BoxFit.cover),
-            Positioned(
-              bottom: 0.0,
-              left: 0.0,
-              right: 0.0,
-              child: Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      Color.fromARGB(200, 0, 0, 0),
-                      Color.fromARGB(0, 0, 0, 0)
-                    ],
-                    begin: Alignment.bottomCenter,
-                    end: Alignment.topCenter,
+final List<Widget> imageSliders = imgList.map((item) => InkWell(
+  onTap: () { ddlog("No. ${imgList.indexOf(item)} image"); },
+  child: Container(
+      margin: EdgeInsets.all(5.0),
+      child: ClipRRect(
+          borderRadius: BorderRadius.all(Radius.circular(5.0)),
+          child: Stack(
+            children: [
+              // Image.network(item, fit: BoxFit.cover, width: double.infinity),
+              FadeInImage(
+                image: NetworkImage(item),
+                placeholder: AssetImage('images/img_404.png'),
+                fit: BoxFit.cover
+              ),
+              Positioned(
+                bottom: 0.0,
+                left: 0.0,
+                right: 0.0,
+                child: Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        Color.fromARGB(200, 0, 0, 0),
+                        Color.fromARGB(0, 0, 0, 0)
+                      ],
+                      begin: Alignment.bottomCenter,
+                      end: Alignment.topCenter,
+                    ),
                   ),
-                ),
-                padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
-                child: Text(
-                  'No. ${imgList.indexOf(item)} image',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.bold,
+                  padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                  child: Text(
+                    'No. ${imgList.indexOf(item)} image',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
-        )
+            ],
+          )
+      ),
     ),
-  )
-      .gestures(onTap: () => ddlog("No. ${imgList.indexOf(item)} image"))
-    ,
+),
 ).toList();

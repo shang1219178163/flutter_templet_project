@@ -11,7 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/routes/APPRouter.dart';
 
 import 'package:get/get.dart';
-import 'package:styled_widget/styled_widget.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:flutter_templet_project/extension/ddlog.dart';
@@ -34,7 +33,6 @@ class _ProgressHudDemoNewState extends State<ProgressHudDemoNew> {
     "3", "4", "5", "6", "7", "8"];
 
 
-
   @override
   Widget build(BuildContext context) {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
@@ -44,13 +42,13 @@ class _ProgressHudDemoNewState extends State<ProgressHudDemoNew> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
       ),
-      // body: buildGridView(titles, context)
+      // body: buildGridView(titles)
       // body: buildProgressHUD(context),
-      body: buildColumn(context),
+      body: buildColumn(),
     );
   }
 
-  Widget buildGridView(List<String> list, BuildContext context) {
+  Widget buildGridView(List<String> list,) {
     return GridView.count(
       padding: EdgeInsets.all(15.0),
       //一行多少个
@@ -64,33 +62,34 @@ class _ProgressHudDemoNewState extends State<ProgressHudDemoNew> {
       //宽高比
       childAspectRatio: 1 / 0.3,
 
-      children: initListWidget(list, context),
+      children: initListWidget(list,),
     );
   }
 
-  List<Widget> initListWidget(List<String> list, BuildContext context) {
+  List<Widget> initListWidget(List<String> list) {
     List<Widget> lists = [];
     for (var e in list) {
       lists.add(
-        Container(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text("${e}", style: TextStyle(fontSize: 12),),
-            ],
+        InkWell(
+          onTap: (){ _onPressed(list.indexOf(e)); },
+          child: Container(
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.lightBlue,),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("${e}", style: TextStyle(fontSize: 12),),
+              ],
+            ),
           ),
-        )
-            .border(all: 1, color: Colors.lightBlue,)
-            .gestures(onTap: () => {
-          // ddlog("$e")
-          _onPressed(list.indexOf(e), context)
-        }),
+        ),
       );
     }
     return lists;
   }
 
-  void _onPressed(int e, BuildContext context) {
+  void _onPressed(int e) {
     ddlog(e);
 
     switch (e) {
@@ -113,7 +112,7 @@ class _ProgressHudDemoNewState extends State<ProgressHudDemoNew> {
     }
   }
 
-  Widget buildColumn(BuildContext context) {
+  Widget buildColumn() {
     return
       Column(
         mainAxisAlignment: MainAxisAlignment.center,

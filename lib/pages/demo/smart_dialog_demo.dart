@@ -14,6 +14,14 @@ class SmartDialogPageDemo extends StatelessWidget {
 }
 
 class SmartDialogPage extends StatelessWidget {
+  
+  List<Tuple2> get items => [
+    Tuple2('showToast', _showToast()),
+    Tuple2('showLoading', _showLoading()),
+    Tuple2('_show', _show()),
+    Tuple2('_showAttach', _showAttach()),
+  ];
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,37 +29,12 @@ class SmartDialogPage extends StatelessWidget {
       appBar: AppBar(title: Text('SmartDialog-EasyDemo')),
       body: Container(
         margin: EdgeInsets.all(30),
-        child: Wrap(spacing: 20, children: [
-          //toast
-          ElevatedButton(
-            onPressed: () => _showToast(),
-            child: Text('showToast'),
-          ),
-
-          //loading
-          ElevatedButton(
-            onPressed: () => _showLoading(),
-            child: Text('showLoading'),
-          ),
-
-          //dialog
-          ElevatedButton(
-            onPressed: () => _show(),
-            child: Text('show'),
-          ),
-
-          //attach
-          ElevatedButton(
-            onPressed: () => _showAttach(),
-            child: Text('showAttach'),
-          ),
-
-          //attach
-          ElevatedButton(
-            onPressed: () => _bindPage(context),
-            child: Text('bindPage'),
-          ),
-        ]),
+        child: Wrap(spacing: 20,
+            children: items.map((e) => ElevatedButton(
+              onPressed: () => e.item2,
+              child: Text(e.item1),
+            )).toList()
+        ),
       ),
     );
   }
@@ -65,7 +48,7 @@ class SmartDialogPage extends StatelessWidget {
     print('SmartDialog.showToast');
   }
 
-  void _show() async {
+  _show() async {
     SmartDialog.show(
         maskColor: Colors.transparent,
         animationType: SmartAnimationType.fade,
@@ -91,7 +74,7 @@ class SmartDialogPage extends StatelessWidget {
     SmartDialog.dismiss();
   }
 
-  void _showAttach() {
+  _showAttach() {
     var attachDialog = (BuildContext context) {
       SmartDialog.showAttach(
         targetContext: context,
@@ -127,7 +110,7 @@ class SmartDialogPage extends StatelessWidget {
     );
   }
 
-  void _bindPage(BuildContext ctx) {
+  _bindPage(BuildContext ctx) {
     //target widget
     SmartDialog.show(
       bindPage: true,
@@ -158,7 +141,7 @@ class SmartDialogPage extends StatelessWidget {
     );
   }
 
-  void _showLoading() async {
+  _showLoading() async {
     SmartDialog.showLoading();
     await Future.delayed(Duration(seconds: 2));
     SmartDialog.dismiss();

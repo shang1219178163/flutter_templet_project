@@ -14,11 +14,9 @@ import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/richText_extension.dart';
 import 'package:flutter_templet_project/extension/widget_extension.dart';
 import 'package:flutter_templet_project/extension/alertDialog_extension.dart';
-import 'package:get/get.dart';
 
 import 'package:popover/popover.dart';
 
-import 'package:styled_widget/styled_widget.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import 'AlertSheetDemo.dart';
@@ -149,11 +147,14 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
         {
           CupertinoAlertDialog(
             title: Text(title),
-            content: LinearProgressIndicator(
-              backgroundColor: Colors.grey[200],
-              valueColor: AlwaysStoppedAnimation(Colors.blue),
-              value: .5,
-            ).padding(top: 15),
+            content: Padding(
+              padding: const EdgeInsets.only(top: 12.0),
+              child: LinearProgressIndicator(
+                backgroundColor: Colors.grey[200],
+                valueColor: AlwaysStoppedAnimation(Colors.blue),
+                value: .5,
+              ),
+            ),
             actions: ["确定",].map((e) => _buildButton(e, () => Navigator.pop(context),)).toList(),
           ).toShowCupertinoDialog(context: context);
           // .toShowDialog(context);
@@ -495,7 +496,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
   void showAlertDialog() {
     AlertDialog(
       title: Text(title),
-      content: Text(message).textAlignment(TextAlign.start),
+      content: Text(message, textAlign: TextAlign.start),
       actions: ["取消", "确定"].map((e) => TextButton(
         onPressed: () {
           ddlog(e);

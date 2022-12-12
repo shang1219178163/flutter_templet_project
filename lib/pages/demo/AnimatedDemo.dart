@@ -9,7 +9,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
-import 'package:styled_widget/styled_widget.dart';
 
 import 'AnimatedSwitcherDemo.dart';
 
@@ -65,26 +64,17 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
         _buildAnimatedSlideTransitionX(),
         _buildAnimatedLineSlideTransition(),
         Container(
-          child: Text('第0页')
-              .center()
-          ,
-        )
-            .decorated(color: Colors.red)
-        ,
+          color: Colors.red,
+          child: Center(child: Text('第0页')),
+        ),
         Container(
-          child: Text('第1页')
-              .center()
-          ,
-        )
-            .decorated(color: Colors.yellow)
-        ,
+          color: Colors.yellow,
+          child: Center(child: Text('第1页')),
+        ),
         Container(
-          child: Text('第2页')
-              .center()
-          ,
-        )
-            .decorated(color: Theme.of(context).primaryColor)
-        ,
+          color: Theme.of(context).primaryColor,
+          child: Center(child: Text('第2页')),
+        ),
       ],
     );
   }

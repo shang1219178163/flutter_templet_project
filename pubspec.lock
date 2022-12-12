@@ -508,13 +508,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "6.3.1"
-  lint:
-    dependency: transitive
-    description:
-      name: lint
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "1.8.2"
   logging:
     dependency: transitive
     description:
@@ -828,13 +821,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.1.0"
-  styled_widget:
-    dependency: "direct main"
-    description:
-      name: styled_widget
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "0.3.1+2"
   table_calendar:
     dependency: "direct main"
     description:

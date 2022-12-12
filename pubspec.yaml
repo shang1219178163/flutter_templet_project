@@ -96,7 +96,6 @@ dependencies:
 #  tutorial_coach_mark: ^0.6.0+1
   popover: ^0.2.6+3
 
-  styled_widget: ^0.3.1
   pull_to_refresh: ^1.6.5
   flutter_easyrefresh: 2.2.2
 #  easy_refresh: ^3.0.4+2

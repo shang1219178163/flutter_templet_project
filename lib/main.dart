@@ -18,7 +18,6 @@ import 'package:flutter_templet_project/routes/APPRouter.dart';
 
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:styled_widget/styled_widget.dart';
 import 'package:tuple/tuple.dart';
 
 import 'Pages/APPDrawerMenuPage.dart';
@@ -276,22 +275,9 @@ class _MyHomePageState extends State<MyHomePage> {
   ///创建导航栏
   AppBar buildAppBar(){
     return AppBar(
-      // Here we take the value from the MyHomePage object that was created by
-      // the App.build method, and use it to set our appbar title.
       title: Text(widget.title ?? "标题"),
-      //导航条左边的组件
-      leading: Icon(Icons.arrow_back)
-          .opacity(0)
-          .gestures(onTap: () => ddlog("back")),
-      //导航条右边的一组组件
+      leading: Icon(Icons.arrow_back),
       actions: [
-        // Icon(Icons.settings)
-        //     .padding(right: 8)
-        //     .gestures(onTap: ()=> ddlog("settings")),
-        // Icon(Icons.search)
-        //     // .padding(right: 8)
-        //     .gestures(onTap: ()=> ddlog("search")),
-
         PopupMenuButtonExt.fromEntryFromJson(
             json: {"aa": "0",
               "bb": "1",
@@ -322,43 +308,45 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget buildUpdateAlert(BuildContext context) {
+    final title = "新版本v ${2.0}";
+    final message = """
+      1、支持立体声蓝牙耳机，同时改善配对性能
+      2、提供屏幕虚拟键盘
+      3、更简洁更流畅，使用起来更快
+      4、修复一些软件在使用时自动退出bug5、新增加了分类查看功能
+      """;
+
     return Container(
+      padding: EdgeInsets.only(top: 100, left: 15, bottom: 100, right: 15),
       child: Column( //Column控件用来垂直摆放子Widget
         // crossAxisAlignment: CrossAxisAlignment.start, //水平方向距左对⻬
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Text("新版本v ${2.0}").fontSize(20)
-            // .padding(right: 20)
-            //     .width(MediaQuery.of(context).size.width - 30)
-            ,
-            Text("""
-          1、支持立体声蓝牙耳机，同时改善配对性能
-          2、提供屏幕虚拟键盘
-          3、更简洁更流畅，使用起来更快
-          4、修复一些软件在使用时自动退出bug5、新增加了分类查看功能
-          """).fontSize(14)
-                .width(MediaQuery.of(context).size.width - 30),
+            Text(title, style: TextStyle(fontSize: 20),),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal:15),
+              child: Text(message, style: TextStyle(fontSize: 14),),
+            ),
             Row(
               children: [
                 TextButton(
                   onPressed: () {
                     ddlog("以后再说");
                   },
-                  child: Text("以后再说").fontSize(14),
+                  child: Text("以后再说", style: TextStyle(fontSize: 14),),
                 ),
                 TextButton(
                   onPressed: () {
                     ddlog("立即升级");
                   },
-                  child: Text("立即升级").fontSize(14)
-                      .textColor(Colors.white)
-                      .backgroundColor(Colors.blue),
+                  child: Text("立即升级",
+                    style: TextStyle(fontSize: 14, color: Colors.white),
+                  ),
                 ),
               ],
             ),
           ]
-      )
-          .padding(top: 100, left: 15, bottom: 100, right: 15),
+      ),
     );
   }
 }

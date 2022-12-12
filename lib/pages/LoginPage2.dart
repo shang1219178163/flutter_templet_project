@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/routes/APPRouter.dart';
 import 'package:get/get.dart';
 
-import 'package:styled_widget/styled_widget.dart';
-
 
 class LoginPage2 extends StatefulWidget {
 
@@ -111,9 +109,10 @@ class _LoginPage2State extends State<LoginPage2> {
               child: CircleAvatar(
                 backgroundColor: Colors.transparent,
                 radius: 50.0,
-                child: Image.asset('assets/images/avatar.png'),
+                child: Image.asset('images/avatar.png'),
               ),
-          ).padding(bottom: 40),
+          ),
+          SizedBox(height: 40),
           Form(
             key: _formKey,
             autovalidateMode: AutovalidateMode.always,
@@ -198,18 +197,18 @@ class _LoginPage2State extends State<LoginPage2> {
               ],
             ),
           ),
-          // SizedBox(height: 15,),
-          Padding(
-            padding: EdgeInsets.only(top:25, bottom: 0),
-            child: ElevatedButton(
-              child: Text('登录',style: TextStyle(fontSize: 18.0, color: Colors.white)),
-              style: ElevatedButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(3)
-                ),
+          SizedBox(height: 25),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(3)
               ),
-                onPressed: !isBtnEnabled?null:loginSub,
-            ).constrained(height: 45),
+            ),
+            child: Container(
+                padding: EdgeInsets.symmetric(vertical: 10),
+                child: Text('登录',style: TextStyle(fontSize: 18.0, color: Colors.white))
+            ),
+            onPressed: !isBtnEnabled? null : loginSub,
           ),
           TextButton(
             child: Text('忘记密码?', style: TextStyle(color: Colors.black54,fontSize: 15.0)),

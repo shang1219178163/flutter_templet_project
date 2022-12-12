@@ -14,7 +14,7 @@ import 'package:flutter_templet_project/basicWidget/line_segment_view.dart';
 import 'package:flutter_templet_project/basicWidget/list_view_segment_control.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/color_extension.dart';
-import 'package:styled_widget/styled_widget.dart';
+
 
 class SegmentControlDemo extends StatefulWidget {
 
@@ -40,15 +40,15 @@ class _SegmentControlDemoState extends State<SegmentControlDemo> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        bottom: buildPreferredSize(context),
+        bottom: buildPreferredSize(),
       ),
-      body: buildListView(context),
+      body: buildListView(),
 
     );
   }
 
 
-  PreferredSizeWidget buildPreferredSize(BuildContext context) {
+  PreferredSizeWidget buildPreferredSize() {
     return
       PreferredSize(
           child: Padding(
@@ -95,20 +95,20 @@ class _SegmentControlDemoState extends State<SegmentControlDemo> {
           preferredSize: Size(double.infinity, 48));
   }
 
-  Widget buildListView(BuildContext context) {
+  Widget buildListView() {
     return ListView(
       children: [
         SizedBox(height: 15),
-        buildSegmentedControl(context),
+        buildSegmentedControl(),
 
         SizedBox(height: 15),
-        buildSlidingSegmentedControl(context).padding(left: 15, right: 15),
+        buildSlidingSegmentedControl(),
 
         SizedBox(height: 15),
-        buildSlidingSegmentedControl2(context).padding(left: 15, right: 15),
+        buildSlidingSegmentedControl2(),
 
         SizedBox(height: 15),
-        buildSlidingSegmentedControl3(context).padding(left: 15, right: 15),
+        buildSlidingSegmentedControl3(),
 
         SizedBox(height: 15),
         buildLineSegmentControl(null, lineColor: Theme.of(context).primaryColor),
@@ -152,7 +152,7 @@ class _SegmentControlDemoState extends State<SegmentControlDemo> {
 
 
 
-  Widget buildSegmentedControl(BuildContext context) {
+  Widget buildSegmentedControl() {
     return CupertinoSegmentedControl<int>(
       children: children,
       onValueChanged: (int newValue) {
@@ -166,7 +166,7 @@ class _SegmentControlDemoState extends State<SegmentControlDemo> {
     );
   }
 
-  Widget buildSlidingSegmentedControl(BuildContext context) {
+  Widget buildSlidingSegmentedControl() {
     final Map<int, Widget> children = const <int, Widget>{
       0: Text("Item 1", style: TextStyle(fontSize: 15),),
       1: Text("Item 2", style: TextStyle(fontSize: 15),),
@@ -188,7 +188,7 @@ class _SegmentControlDemoState extends State<SegmentControlDemo> {
   }
 
 
-  Widget buildSlidingSegmentedControl2(BuildContext context) {
+  Widget buildSlidingSegmentedControl2() {
     final Map<int, Widget> children = const <int, Widget>{
       0: Text("Item 1", style: TextStyle(fontSize: 15),),
       1: Text("Item 2", style: TextStyle(fontSize: 15),),
@@ -209,7 +209,7 @@ class _SegmentControlDemoState extends State<SegmentControlDemo> {
     );
   }
 
-  Widget buildSlidingSegmentedControl3(BuildContext context) {
+  Widget buildSlidingSegmentedControl3() {
     final Map<int, Widget> children = const <int, Widget>{
       0: Text("Item 1", style: TextStyle(fontSize: 15),),
       1: Text("Item 2", style: TextStyle(fontSize: 15),),
