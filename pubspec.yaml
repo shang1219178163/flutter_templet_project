@@ -64,7 +64,7 @@ dependencies:
   qr_flutter: ^4.0.0
   qr_code_scanner: ^0.7.0
   webview_flutter: ^2.0.8
-  carousel_slider: ^4.0.0-nullsafety.0
+  carousel_slider: 4.0.0
   #    git:
   #      url: 'git@github.com:Fliggy-Mobile/fcommon.git'
   #      ref: 'master'
@@ -121,6 +121,7 @@ dependencies:
   desktop_drop: ^0.3.3
   badges: ^2.0.3
   flutter_swiper_null_safety: ^1.0.0
+  visibility_detector: ^0.2.2
 
 #  merge_images: ^1.0.3
 
