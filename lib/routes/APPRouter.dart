@@ -49,6 +49,7 @@ import 'package:flutter_templet_project/provider/ProxyProvider_demo.dart';
 import 'package:flutter_templet_project/vendor/ScribbleDemo.dart';
 import 'package:flutter_templet_project/vendor/SkeletonDemo.dart';
 import 'package:flutter_templet_project/vendor/TextlessDemo.dart';
+import 'package:flutter_templet_project/vendor/VisibilityDetectorDemo.dart';
 import 'package:flutter_templet_project/vendor/aesthetic_dialogs_demo.dart';
 import 'package:flutter_templet_project/vendor/badges_demo.dart';
 import 'package:flutter_templet_project/vendor/custom_timer_demo.dart';
@@ -332,6 +333,7 @@ class APPRouter {
   static const gradientDemo = '/gradientDemo';
   static const imageBlendModeDemo = '/imageBlendModeDemo';
   static const customSwipperDemo = '/customSwipperDemo';
+  static const visibilityDetectorDemo = '/visibilityDetectorDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -523,6 +525,8 @@ class AppPage {
     GetPage(name: APPRouter.gradientDemo, page: () => GradientDemo(),),
     GetPage(name: APPRouter.imageBlendModeDemo, page: () => ImageBlendModeDemo(),),
     GetPage(name: APPRouter.customSwipperDemo, page: () => CustomSwipperDemo(),),
+    GetPage(name: APPRouter.visibilityDetectorDemo, page: () => VisibilityDetectorDemo(),),
+
 
   ];
 }
