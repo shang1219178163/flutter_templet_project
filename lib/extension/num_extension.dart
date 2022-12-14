@@ -8,18 +8,27 @@
 
 import 'dart:math';
 
-import 'package:flutter/cupertino.dart';
+// import 'package:flutter/cupertino.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 int randomInt({required int min, required int max}) {
   return min + Random().nextInt(max - min);
 }
 
-
 extension NumExt on num {
-  /// empty padding height
-  SizedBox get ph => SizedBox(height: toDouble(),);
+  ///[ScreenUtil.setWidth]
+  double get w => ScreenUtil().setWidth(this);
 
-  /// empty padding width
-  SizedBox get pw => SizedBox(width: toDouble(),);
+  ///[ScreenUtil.setHeight]
+  double get h => ScreenUtil().setHeight(this);
+
+  ///[ScreenUtil.setSp]
+  double get sp => ScreenUtil().setSp(this);
+
+  ///屏幕宽度的倍数
+  double get sw => ScreenUtil().screenWidth * this;
+
+  ///屏幕高度的倍数
+  double get sh => ScreenUtil().screenHeight * this;
 }
 

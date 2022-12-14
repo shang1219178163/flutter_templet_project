@@ -8,7 +8,7 @@ import 'package:flutter_templet_project/APPThemeSettings.dart';
 import 'package:flutter_templet_project/extension/button_extension.dart';
 import 'package:flutter_templet_project/pages/demo/TabBarDemo.dart';
 import 'package:flutter_templet_project/pages/tabBar_tabBarView_demo.dart';
-import 'package:flutter_templet_project/provider/ProxyProvider_demo.dart';
+import 'package:flutter_templet_project/provider/provider_demo.dart';
 import 'package:flutter_templet_project/provider/color_filtered_provider.dart';
 import 'package:flutter_templet_project/provider/rxDart_provider_demo.dart';
 import 'package:flutter_templet_project/Pages/APPUserCenterPage.dart';
@@ -61,11 +61,12 @@ Future<void> main() async {
         ChangeNotifierProvider.value(value: ColorFilteredProvider()),
 
         ChangeNotifierProvider(create: (context) => CartModel()),
-        Provider(create: (context) => CounterBloc()),
         ChangeNotifierProvider<Person>(create: (ctx) => Person(),),
+        ChangeNotifierProvider<Foo>(create: (ctx) => Foo(),),
+        Provider(create: (context) => CounterBloc()),
         ProxyProvider<Person, EatModel>(
           update: (ctx, person, eatModel) => EatModel(name: person.name),
-        )
+        ),
       ],
       child: MyApp(),
     ),

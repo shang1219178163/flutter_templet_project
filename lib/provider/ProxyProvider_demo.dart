@@ -14,7 +14,10 @@
 * */
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/extension/num_extension.dart';
+import 'package:flutter_templet_project/provider/provider_demo.dart';
 import 'package:provider/provider.dart';
+import 'package:tuple/tuple.dart';
 
 class ProxyProviderDemo extends StatelessWidget {
   const ProxyProviderDemo({Key? key}) : super(key: key);
@@ -25,44 +28,76 @@ class ProxyProviderDemo extends StatelessWidget {
       appBar: AppBar(
         title: Text("ProxyProvider"),
       ),
-      // body: Text(arguments.toString())
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Consumer<EatModel>(builder: (ctx,eatModel,child) => Text(eatModel.whoEat)),
-            Consumer<Person>( // 拿到person对象，调用方法
-              builder: (ctx,person,child){
-                return ElevatedButton( /// 点击按钮更新Person的name，eatModel.whoEat会同步更新
-                  onPressed: () => person.changName(),
-                  child: const Text("点击修改"),
-                );
-              },
-            ),
-          ],
-        ),
-      ),
+      body: Column(
+        children: [
+          _buildConsumer(),
+          Divider(),
+          _buildSelector(),
+        ],
+      )
     );
   }
-}
-
-
-class Person extends ChangeNotifier{
-  String _initail = "小虎牙";
-  String _changed = "更新的小虎牙";
-
-  String name = "小虎牙";
-
-  void changName(){
-    name = name == _initail ? _changed : _initail;
-    notifyListeners();
+  
+  _buildConsumer() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        Consumer<EatModel>(builder: (ctx, model, child) => Text(model.whoEat)),
+        Consumer<Person>( // 拿到person对象，调用方法
+          builder: (ctx, model, child){
+            return Column(
+              children: [
+                ElevatedButton(
+                  onPressed: () => model.changName(),
+                  child: const Text("点击修改"),
+                ),
+                child!
+              ],
+            );
+          },
+          child: Column(
+            children: [
+              Text("其他更多组件"),
+              Text("其他更多组件"),
+              Text("其他更多组件"),
+            ],
+          ),
+        ),
+      ],
+    );
   }
-}
 
-class EatModel{
-  EatModel({required this.name});
+  _buildSelector() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        Selector<EatModel, String>(
+          selector: (ctx, person) => person.name,
+          builder: (ctx, value, child) => Text(value),
+        ),
+        Selector<Person, Person>(
+          selector: (ctx, person) => person,
+          builder: (ctx, model, child){
+            return Column(
+              children: [
+                ElevatedButton(
+                  onPressed: () => model.changName(),
+                  child: const Text("点击修改1"),
+                ),
+                child!
+              ],
+            );
+          },
+          child: Column(
+            children: [
+              Text("其他更多组件"),
+              Text("其他更多组件"),
+              Text("其他更多组件"),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
 
-  final String name;
-
-  String get whoEat => "$name正在吃饭";
 }

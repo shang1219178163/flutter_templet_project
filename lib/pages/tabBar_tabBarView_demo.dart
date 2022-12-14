@@ -70,10 +70,14 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
           );
         }),
         actions: [
-          TextButton(onPressed: (){
-            ddlog("provider");
-            Get.toNamed(APPRouter.stateManagerDemo, arguments: "状态管理");
-          }, child: Text("状态管理", style: TextStyle(color: Colors.white),),
+          TextButton(
+            onPressed: (){
+              ddlog("provider");
+              Get.toNamed(APPRouter.stateManagerDemo, arguments: "状态管理");
+            },
+            child: Text("状态管理",
+              style: TextStyle(color: Colors.white),
+            ),
           ),
         ],
         bottom: TabBar(
@@ -476,6 +480,8 @@ var _vendors = [
   Tuple2(APPRouter.badgesDemo, "badgesDemo", ),
   Tuple2(APPRouter.flutterSwiperDemo, "flutterSwiperDemo", ),
   Tuple2(APPRouter.visibilityDetectorDemo, "visibilityDetector 曝光检测", ),
+  Tuple2(APPRouter.svgaImageDemo, "svgaImageDemo", ),
+  Tuple2(APPRouter.providerDemo, "状态管理 - provider", ),
 
 ];
 
