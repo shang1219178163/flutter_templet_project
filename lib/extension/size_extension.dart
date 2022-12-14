@@ -9,6 +9,26 @@
 
 import 'dart:ui';
 
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+extension SizeExtension on num {
+  ///[ScreenUtil.setWidth]
+  double get w => ScreenUtil().setWidth(this);
+
+  ///[ScreenUtil.setHeight]
+  double get h => ScreenUtil().setHeight(this);
+
+  ///[ScreenUtil.setSp]
+  double get sp => ScreenUtil().setSp(this);
+
+  ///屏幕宽度的倍数
+  double get sw => ScreenUtil().screenWidth * this;
+
+  ///屏幕高度的倍数
+  double get sh => ScreenUtil().screenHeight * this;
+}
+
+
 extension SizeExt on Size {
   /// 等比缩放大小
   Size adjustToWidth(double width) {
@@ -27,4 +47,6 @@ extension SizeExt on Size {
 }
 
 
+
+wrapBaseWidget
 
