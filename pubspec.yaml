@@ -122,8 +122,10 @@ dependencies:
   badges: ^2.0.3
   flutter_swiper_null_safety: ^1.0.0
   visibility_detector: ^0.2.2
+  svgaplayer_flutter: ^2.0.0
+  sliver_tools: 0.2.7
 
-#  merge_images: ^1.0.3
+  #  merge_images: ^1.0.3
 
   html: ^0.15.0
   http: ^0.13.3

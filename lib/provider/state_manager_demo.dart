@@ -18,7 +18,6 @@ class StateManagerDemo extends StatefulWidget {
 
   StateManagerDemo({ Key? key, this.title}) : super(key: key);
 
-
   @override
   _StateManagerDemoState createState() => _StateManagerDemoState();
 }
@@ -30,18 +29,17 @@ class _StateManagerDemoState extends State<StateManagerDemo> {
     Tuple2("RxDart+Provider", APPRouter.rxDartProviderDemo),
     Tuple2("getx", APPRouter.getxStateDemo),
     Tuple2("proxyProviderDemo", APPRouter.proxyProviderDemo),
+    Tuple2("providerDemo", APPRouter.providerDemo),
+
   ];
 
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title ?? "$widget"),
-        ),
-        // body: Text(arguments.toString())
-        body: _buildBody(),
+      appBar: AppBar(
+        title: Text(widget.title ?? "$widget"),
+      ),
+      body: _buildBody(),
     );
   }
 
