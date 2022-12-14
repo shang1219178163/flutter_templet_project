@@ -46,6 +46,7 @@ import 'package:flutter_templet_project/pages/demo/merge_network_images_demo.dar
 import 'package:flutter_templet_project/pages/system_color_page.dart';
 import 'package:flutter_templet_project/pages/system_icons_page.dart';
 import 'package:flutter_templet_project/provider/ProxyProvider_demo.dart';
+import 'package:flutter_templet_project/vendor/SVGAImageDemo.dart';
 import 'package:flutter_templet_project/vendor/ScribbleDemo.dart';
 import 'package:flutter_templet_project/vendor/SkeletonDemo.dart';
 import 'package:flutter_templet_project/vendor/TextlessDemo.dart';
@@ -334,6 +335,8 @@ class APPRouter {
   static const imageBlendModeDemo = '/imageBlendModeDemo';
   static const customSwipperDemo = '/customSwipperDemo';
   static const visibilityDetectorDemo = '/visibilityDetectorDemo';
+  static const svgaImageDemo = '/svgaImageDemo';
+
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -526,7 +529,8 @@ class AppPage {
     GetPage(name: APPRouter.imageBlendModeDemo, page: () => ImageBlendModeDemo(),),
     GetPage(name: APPRouter.customSwipperDemo, page: () => CustomSwipperDemo(),),
     GetPage(name: APPRouter.visibilityDetectorDemo, page: () => VisibilityDetectorDemo(),),
+    GetPage(name: APPRouter.svgaImageDemo, page: () => SvgaImageDemo(),),
 
-
+    
   ];
 }

@@ -30,7 +30,8 @@ class _SvgaImageDemoState extends State<SvgaImageDemo> {
   Widget buildBody() {
     return Container(
       child: SVGASimpleImage(
-          resUrl: "https://github.com/yyued/SVGA-Samples/blob/master/angel.svga?raw=true"),
+          resUrl: "https://github.com/yyued/SVGA-Samples/blob/master/angel.svga?raw=true"
+      ),
     );
   }
 }

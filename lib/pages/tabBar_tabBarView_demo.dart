@@ -476,6 +476,8 @@ var _vendors = [
   Tuple2(APPRouter.badgesDemo, "badgesDemo", ),
   Tuple2(APPRouter.flutterSwiperDemo, "flutterSwiperDemo", ),
   Tuple2(APPRouter.visibilityDetectorDemo, "visibilityDetector 曝光检测", ),
+  Tuple2(APPRouter.svgaImageDemo, "svgaImageDemo", ),
+
 
 ];
 
