@@ -29,21 +29,21 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
   List<MaterialDetailConfig> detailList = <MaterialDetailConfig>[
     MaterialDetailConfig(
       id: 1,
-      message: 'https://fastly.jsdelivr.net/npm/@vant/assets/apple-1.jpeg',
+      message: 'https://cdn.pixabay.com/photo/2022/09/01/09/31/sunset-glow-7425170_1280.jpg',
       materialWidth: '400',
       materialHeight: '300',
       // globalKey: GlobalKey(),
     ),
     MaterialDetailConfig(
       id: 2,
-      message: 'https://fastly.jsdelivr.net/npm/@vant/assets/apple-2.jpeg',
+      message: 'https://pic.616pic.com/bg_w1180/00/04/08/G5Bftx5ZDI.jpg!/fw/1120',
       materialWidth: '400',
       materialHeight: '300',
       // globalKey: GlobalKey(),
     ),
     MaterialDetailConfig(
       id: 3,
-      message: 'https://cdn.pixabay.com/photo/2018/02/01/21/00/tree-3124103_1280.jpg',
+      message: 'https://pic.616pic.com/bg_w1180/00/07/20/2gfqq0N3qX.jpg!/fw/1120',
       materialWidth: '400',
       materialHeight: '300',
       // globalKey: GlobalKey(),
@@ -63,18 +63,7 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
           actions: [
             TextButton(
               onPressed: () async {
-                // final currentWidget = _globalKey.currentWidget as MergeImagesWidget;
-                // final currentState = _globalKey.currentState as MergeImagesWidgetState;
-                // print("${_globalKey}, ${currentWidget}, ${currentState}");
-                //
-                // currentState.toCompositePics().then((pngBytes) {
-                //   // print(pngBytes);
-                //   imageMerged = Image.memory(pngBytes!, width: 400, height: 600);
-                //   setState(() {});
-                // });
-
                 _globalKey.currentState?.toCompositePics().then((pngBytes) {
-                  // print(pngBytes);
                   imageMerged = Image.memory(pngBytes, width: screenSize.width, height: 600);
                   setState(() {});
                 });
@@ -83,14 +72,7 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
             ),
             TextButton(
               onPressed: () {
-                // List<GlobalKey?> keys = detailList.map((e) => e.globalKey).toList();
-                // print("keys:${keys}");
-                // _compositePics(keys).then((pngBytes) {
-                //   imageMerged = Image.memory(pngBytes!, width: 400, height: 600);
-                //   setState(() {});
-                // });
                 _globalKey.currentState?.toCompositePics().then((pngBytes) {
-                  // print(pngBytes);
                   return ImageGallerySaver.saveImage(pngBytes, quality: 100,);
                 }).then((result) {
                   ddlog("result:${result.isSuccess}");
