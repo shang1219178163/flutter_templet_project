@@ -38,16 +38,16 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
       id: 2,
       message: 'https://fastly.jsdelivr.net/npm/@vant/assets/apple-2.jpeg',
       materialWidth: '400',
-      materialHeight: '700',
+      materialHeight: '300',
       // globalKey: GlobalKey(),
     ),
-    // MaterialDetailConfig(
-    //   id: 3,
-    //   message: 'https://fastly.jsdelivr.net/npm/@vant/assets/apple-3.jpeg',
-    //   materialWidth: '400',
-    //   materialHeight: '700',
-    //   // globalKey: GlobalKey(),
-    // ),
+    MaterialDetailConfig(
+      id: 3,
+      message: 'https://cdn.pixabay.com/photo/2018/02/01/21/00/tree-3124103_1280.jpg',
+      materialWidth: '400',
+      materialHeight: '300',
+      // globalKey: GlobalKey(),
+    ),
   ]; // 素材详情列表
 
 

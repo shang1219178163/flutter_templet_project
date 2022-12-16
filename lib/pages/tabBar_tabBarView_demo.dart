@@ -409,7 +409,12 @@ var _list = [
   Tuple2(APPRouter.builderDemo, "各种回调 builder", ),
   Tuple2(APPRouter.stackDemo, "StackDemo", ),
   Tuple2(APPRouter.wrapDemo, "流水自动换行", ),
-  Tuple2(APPRouter.wrapDemo, "流水自动换行", ),
+  Tuple2(APPRouter.inheritedWidgetDemo, "inheritedWidgetDemo 数据共享", ),
+  Tuple2(APPRouter.notificationListenerDemo, "notificationListenerDemo 数据共享", ),
+  Tuple2(APPRouter.notificationCustomDemo, "notificationCustomDemo 自定义通知", ),
+  Tuple2(APPRouter.scrollbarDemo, "scrollbarDemo 滚动指示器监听", ),
+
+
 ];
 
 var _specials = [
@@ -436,6 +441,8 @@ var _specials = [
   Tuple2(APPRouter.gradientDemo, "渐变色", ),
   Tuple2(APPRouter.imageBlendModeDemo, "图片渲染模式", ),
   Tuple2(APPRouter.containerDemo, "containerDemo", ),
+  Tuple2(APPRouter.scrollControllerDemo, "滚动行为", ),
+
 
 ];
 
