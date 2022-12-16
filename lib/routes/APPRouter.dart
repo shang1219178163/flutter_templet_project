@@ -19,16 +19,20 @@ import 'package:flutter_templet_project/pages/demo/DragAndDropDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FittedBoxDemo.dart';
 import 'package:flutter_templet_project/pages/demo/GradientDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ImageBlendModeDemo.dart';
+import 'package:flutter_templet_project/pages/demo/InheritedWidgetDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ListViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MaterialBannerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ModalBarrierDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NavigationToolbarDemo.dart';
+import 'package:flutter_templet_project/pages/demo/NotificationListenerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/OverflowBarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/OverlayDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PositionedDirectionalDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PromptBuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/RatingBarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/RotatedBoxDemo.dart';
+import 'package:flutter_templet_project/pages/demo/ScrollControllerDemo.dart';
+import 'package:flutter_templet_project/pages/demo/ScrollbarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/SelectableTextDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ShortcutsDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ShortcutsDemoOne.dart';
@@ -338,6 +342,11 @@ class APPRouter {
   static const visibilityDetectorDemo = '/visibilityDetectorDemo';
   static const svgaImageDemo = '/svgaImageDemo';
   static const providerDemo = '/providerDemo';
+  static const inheritedWidgetDemo = '/inheritedWidgetDemo';
+  static const notificationListenerDemo = '/notificationListenerDemo';
+  static const scrollbarDemo = '/scrollbarDemo';
+  static const notificationCustomDemo = '/notificationCustomDemo';
+  static const scrollControllerDemo = '/scrollControllerDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -532,6 +541,13 @@ class AppPage {
     GetPage(name: APPRouter.visibilityDetectorDemo, page: () => VisibilityDetectorDemo(),),
     GetPage(name: APPRouter.svgaImageDemo, page: () => SvgaImageDemo(),),
     GetPage(name: APPRouter.providerDemo, page: () => ProviderDemo(),),
+    GetPage(name: APPRouter.inheritedWidgetDemo, page: () => InheritedWidgetDemo(),),
+    GetPage(name: APPRouter.notificationListenerDemo, page: () => NotificationListenerDemo(),),
+    GetPage(name: APPRouter.scrollbarDemo, page: () => ScrollbarDemo(),),
+    GetPage(name: APPRouter.notificationCustomDemo, page: () => NotificationCustomDemo(),),
+    GetPage(name: APPRouter.scrollControllerDemo, page: () => ScrollControllerDemo(),),
+
+
 
   ];
 }

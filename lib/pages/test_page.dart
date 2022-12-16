@@ -304,6 +304,10 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
     double? z1 = null;
     final list = [z, z1];
     print('z1:${list}');
+
+    List<String>? items = null;
+    final zz = items?[0];
+    print('zz:${zz}');
   }
 
   getUrlParams({Map<String, dynamic> map = const {}}) {

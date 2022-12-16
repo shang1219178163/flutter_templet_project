@@ -28,7 +28,7 @@ class _IndexedStackDemoState extends State<IndexedStackDemo> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text("Flutter IndexedStack Example")
+        title: Text(widget.title ?? "$widget"),
       ),
       body: SizedBox (
         width: double.infinity,
