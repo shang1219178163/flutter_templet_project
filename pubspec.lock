@@ -169,6 +169,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.15.0"
+  color_converter:
+    dependency: "direct main"
+    description:
+      name: color_converter
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.2.1"
   convert:
     dependency: transitive
     description:

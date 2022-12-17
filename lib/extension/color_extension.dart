@@ -14,14 +14,25 @@ import 'package:flutter/material.dart';
 
 extension ColorExt on Color{
 
-  Gradient? toGradient() => LinearGradient(colors:[this, this,], stops:[0.0, 1]);
-
+  /// 十六进制转颜色
+  /// alpha, 透明度 [0.0,1.0]
+  static Color fromHex(String val, {double alpha = 1, Color defaultValue = Colors.transparent}) {
+    val = val.toUpperCase().replaceAll("#", '');
+    final result = int.tryParse(val, radix: 16);
+    if (result == null) {
+      return defaultValue;
+    }
+    return Color(result).withOpacity(alpha);
+  }
+  ///随机颜色
   static Color random() {
     return Color.fromRGBO(
         Random().nextInt(256),
         Random().nextInt(256),
         Random().nextInt(256), 1);
   }
+  ///转渐进色
+  Gradient? toGradient() => LinearGradient(colors:[this, this,], stops:[0.0, 1]);
 
   Color randomOpacity() {
     return this.withOpacity(Random().nextInt(100)/100);
