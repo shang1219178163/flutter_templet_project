@@ -139,4 +139,16 @@ extension ColorExt on Color{
     return this.toString();
   }
 
+
+  /// 十六进制颜色，
+  /// hex, 十六进制值，例如：0xffffff,
+  /// alpha, 透明度 [0.0,1.0]
+  static Color fromHex(String val, {double alpha = 1, Color defaultValue = Colors.transparent}) {
+    val = val.toUpperCase().replaceAll("#", '');
+    final result = int.tryParse(val, radix: 16);
+    if (result == null) {
+      return defaultValue;
+    }
+    return Color(result).withOpacity(alpha);
+  }
 }

@@ -58,6 +58,7 @@ import 'package:flutter_templet_project/vendor/TextlessDemo.dart';
 import 'package:flutter_templet_project/vendor/VisibilityDetectorDemo.dart';
 import 'package:flutter_templet_project/vendor/aesthetic_dialogs_demo.dart';
 import 'package:flutter_templet_project/vendor/badges_demo.dart';
+import 'package:flutter_templet_project/vendor/color_converter_demo.dart';
 import 'package:flutter_templet_project/vendor/custom_timer_demo.dart';
 import 'package:flutter_templet_project/vendor/flutter_swiper_demo.dart';
 import 'package:flutter_templet_project/vendor/qr/qr_code_scanner_demo.dart';
@@ -347,6 +348,7 @@ class APPRouter {
   static const scrollbarDemo = '/scrollbarDemo';
   static const notificationCustomDemo = '/notificationCustomDemo';
   static const scrollControllerDemo = '/scrollControllerDemo';
+  static const colorConverterDemo = '/colorConverterDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -546,6 +548,7 @@ class AppPage {
     GetPage(name: APPRouter.scrollbarDemo, page: () => ScrollbarDemo(),),
     GetPage(name: APPRouter.notificationCustomDemo, page: () => NotificationCustomDemo(),),
     GetPage(name: APPRouter.scrollControllerDemo, page: () => ScrollControllerDemo(),),
+    GetPage(name: APPRouter.colorConverterDemo, page: () => ColorConverterDemo(),),
 
 
 

@@ -489,6 +489,8 @@ var _vendors = [
   Tuple2(APPRouter.visibilityDetectorDemo, "visibilityDetector 曝光检测", ),
   Tuple2(APPRouter.svgaImageDemo, "svgaImageDemo", ),
   Tuple2(APPRouter.providerDemo, "状态管理 - provider", ),
+  Tuple2(APPRouter.colorConverterDemo, "颜色转换", ),
+
 
 ];
 
