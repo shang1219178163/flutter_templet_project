@@ -24,13 +24,15 @@ extension ColorExt on Color{
     }
     return Color(result).withOpacity(alpha);
   }
+
   ///随机颜色
-  static Color random() {
+  static Color get random {
     return Color.fromRGBO(
         Random().nextInt(256),
         Random().nextInt(256),
         Random().nextInt(256), 1);
   }
+
   ///转渐进色
   Gradient? toGradient() => LinearGradient(colors:[this, this,], stops:[0.0, 1]);
 

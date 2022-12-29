@@ -237,7 +237,7 @@ class _GradientDemoState extends State<GradientDemo> {
           decoration: BoxDecoration(
             gradient: SweepGradient(
                 tileMode: this.tileMode,
-                // center: AlignmentDirectional(1, -1),
+                center: Alignment.topCenter,
                 // startAngle: 1.7,
                 // endAngle: 3,
                 colors: const <Color>[
@@ -248,6 +248,23 @@ class _GradientDemoState extends State<GradientDemo> {
                 stops: const <double>[0.0, 0.5, 0.8]
             ),
           ),
+      ),
+      _buildBox(
+        text: '两种颜色 设置起始位置与终止位置',
+        decoration: BoxDecoration(
+          gradient: SweepGradient(
+              tileMode: this.tileMode,
+              // center: AlignmentDirectional(1, -1),
+              // startAngle: 1.7,
+              // endAngle: 3,
+              colors: const <Color>[
+                Colors.red, // blue
+                Colors.blue,
+                Colors.yellow,
+              ],
+              stops: const <double>[0.0, 0.5, 0.8]
+          ),
+        ),
       ),
       _buildBox(
         text: 'SweepGradient',

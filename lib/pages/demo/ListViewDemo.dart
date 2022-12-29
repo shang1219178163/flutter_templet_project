@@ -83,14 +83,14 @@ class _ListViewDemoState extends State<ListViewDemo> {
         ],
       ),
       // body: _buildSection(),
-      // body: _buildListViewSeparated(),
-      body: Column(
-        children: [
-          // _buildListViewSeparated(),
-          // _buildSection(),
-          _buildListViewSeparatedNew(),
-        ],
-      ),
+      body: _buildListViewSeparated(),
+      // body: Column(
+      //   children: [
+      //     // _buildListViewSeparated(),
+      //     // _buildSection(),
+      //     _buildListViewSeparatedNew(),
+      //   ],
+      // ),
     );
   }
 
@@ -98,20 +98,24 @@ class _ListViewDemoState extends State<ListViewDemo> {
     // final items = List.generate(3, (index) => "${index}");
 
     return Container(
-      height: 200,
-      child: ListView(
-        // controller: _scrollController1,
-        children: List.generate(9, (index) => Column(
-          children: [
-            ListTile(
-              leading: Text('Index: $index'),
+        height: 200,
+        child: Scrollbar(
+          child: ListView(
+            scrollDirection: Axis.horizontal,
+            // controller: _scrollController1,
+            children: List.generate(9, (index) => Column(
+              children: [
+                ListTile(
+                  leading: Text('Index: $index'),
+                ),
+                Divider(),
+              ],
+            )
             ),
-            Divider(),
-          ],
-        )
+            itemExtent: 75,
+          ),
         ),
-        itemExtent: 75,
-      ),
+
     );
   }
 
@@ -124,51 +128,54 @@ class _ListViewDemoState extends State<ListViewDemo> {
 
     final child = Container(
       height: height,
-      child: ListView.separated(
-        controller: _scrollController,
-        scrollDirection: Axis.horizontal,
-        padding: EdgeInsets.all(0),
-        itemCount: items.length,
-        // cacheExtent: 10,
-        itemBuilder: itemBuilder != null ? itemBuilder : (context, index) {
-          final e = items[index];
+      child: Scrollbar(
+        isAlwaysShown: true,
+        child: ListView.separated(
+          controller: _scrollController,
+          scrollDirection: Axis.horizontal,
+          padding: EdgeInsets.all(0),
+          itemCount: items.length,
+          // cacheExtent: 10,
+          itemBuilder: itemBuilder != null ? itemBuilder : (context, index) {
+            final e = items[index];
 
-          final tabKey = GlobalKey(debugLabel: e.item1);
-          return InkWell(
-            key: tabKey,
-            onTap: () {
-              print(e);
-              _scrollController.JumToHorizontal(
-                  key: tabKey,
-                  offsetX: (MediaQuery.of(context).size.width / 2)
-              );
-            },
-            child: Padding(
-              padding: padding,
-              child: Container(
-                color: Colors.green,
-                // width: 200,
-                child: e.item1.startsWith('http') ? FadeInImage(
-                    placeholder: AssetImage('images/img_placeholder.png') ,
-                    image: NetworkImage(e.item1),
-                    fit: BoxFit.cover,
-                    height: double.infinity
-                ) : Center(child: Text('Index:${e.item1}')),
+            final tabKey = GlobalKey(debugLabel: e.item1);
+            return InkWell(
+              key: tabKey,
+              onTap: () {
+                print(e);
+                _scrollController.JumToHorizontal(
+                    key: tabKey,
+                    offsetX: (MediaQuery.of(context).size.width / 2)
+                );
+              },
+              child: Padding(
+                padding: padding,
+                child: Container(
+                  color: Colors.green,
+                  // width: 200,
+                  child: e.item1.startsWith('http') ? FadeInImage(
+                      placeholder: AssetImage('images/img_placeholder.png') ,
+                      image: NetworkImage(e.item1),
+                      fit: BoxFit.cover,
+                      height: double.infinity
+                  ) : Center(child: Text('Index:${e.item1}')),
+                ),
               ),
-            ),
-          );
-        },
-        separatorBuilder: (context, index) {
-          // return Container(
-          //   width: gap,
-          //   color: Colors.blue,
-          // );
-          return Divider(
-            // height: 8,
-            indent: gap,
-            // color: Colors.blue,
-          );
-        },
+            );
+          },
+          separatorBuilder: (context, index) {
+            // return Container(
+            //   width: gap,
+            //   color: Colors.blue,
+            // );
+            return Divider(
+              // height: 8,
+              indent: gap,
+              // color: Colors.blue,
+            );
+          },
+        ),
       ),
     );
 
