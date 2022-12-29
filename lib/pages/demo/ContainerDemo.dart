@@ -42,8 +42,25 @@ class _ContainerDemoState extends State<ContainerDemo> {
         body: buildBodyColumn(
           children: [
             buildSection(),
+            // Container(
+            //   decoration: BoxDecoration(
+            //     image: DecorationImage(
+            //       image: AssetImage('images/img_update.png'),
+            //       repeat: ImageRepeat.repeat,
+            //       alignment: Alignment.topLeft,
+            //     )
+            //   ),
+            //   child: Container(
+            //     constraints: BoxConstraints.expand(),
+            //     child: OutlinedButton(
+            //       onPressed: () { print("ImageRepeat.repeat"); },
+            //       child: Text('ImageRepeat.repeat',
+            //         style: TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
+            //       ),
+            //     ),
+            //   ),
+            // ),
             Container(
-              // height: 300,
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage('images/img_update.png'),
@@ -51,25 +68,23 @@ class _ContainerDemoState extends State<ContainerDemo> {
                   alignment: Alignment.topLeft,
                 )
               ),
-              child: Container(
-                constraints: BoxConstraints.expand(),
-                child: TextButton(
-                  onPressed: () { print("ImageRepeat.repeat"); },
-                  child: Text('ImageRepeat.repeat',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ),
+              transform: Matrix4.rotationZ(.2),
+              alignment: Alignment.centerRight, //卡片内文字居中
+              child: Text(
+                //卡片文字
+                "5.20", style: TextStyle(color: Colors.red, fontSize: 40.0),
               ),
             ),
-            Container(
-              color: Colors.green,
-              child: Text('Container'),
-            ),
-            Container(
-              constraints: BoxConstraints.expand(),
-              color: Colors.yellow,
-              child: Text('Container1'),
-            ),
+
+            // Container(
+            //   color: Colors.green,
+            //   child: Text('Container'),
+            // ),
+            // Container(
+            //   constraints: BoxConstraints.expand(),
+            //   color: Colors.yellow,
+            //   child: Text('Container1'),
+            // ),
 
           ],
         )

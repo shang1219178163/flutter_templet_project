@@ -1,3 +1,4 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
@@ -10,6 +11,9 @@ import 'package:get/get.dart';
 
 import 'package:flutter_templet_project/extension/actionSheet_extension.dart';
 import 'package:flutter_templet_project/extension/widget_extension.dart';
+import 'package:flutter_templet_project/extension/color_extension.dart';
+import 'package:flutter_templet_project/extension/buildContext_extension.dart';
+
 import 'package:tuple/tuple.dart';
 
 
@@ -20,6 +24,8 @@ class PageViewDemo extends StatefulWidget {
 }
 
 class _PageViewDemoState extends State<PageViewDemo> {
+  ValueNotifier<double> scrollerKey = new ValueNotifier(0.0);
+  PageController? controller;
 
   var titles = ["PageViewTabBarWidget", "2", "3"];
 
@@ -33,15 +39,23 @@ class _PageViewDemoState extends State<PageViewDemo> {
 
   final rightTitles = ["默认", "done"];
 
+  @override
+  void initState() {
+    // TODO: implement initState
 
+    controller = PageController();
+    controller?.addListener(() {
+      scrollerKey.value = controller!.offset;
+    });
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
       appBar: AppBar(
-        title: Text("$widget"),
+        title: pageIndicator(pageCount: 3),
         actions: rightTitles.map((e) => TextButton(
           onPressed: (){
             _actionTap(value: e);
@@ -51,39 +65,56 @@ class _PageViewDemoState extends State<PageViewDemo> {
           ),
         )).toList(),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: buildPageView(),
-      ),
+      body: Container(
+        padding: EdgeInsets.all(20),
+        child: buildPageView()
+      )
     );
   }
 
   Widget buildPageView() {
     return PageView(
       scrollDirection: Axis.horizontal,
+      controller: controller,
       pageSnapping: true,
       onPageChanged: (index){
         print('当前为第$index页');
       },
+      children: List.generate(3, (index) => Container(
+        decoration: BoxDecoration(
+          color: ColorExt.random,
+        ),
+        child: Center(child: Text('第${index}页')),
+      )).toList(),
+    );
+  }
+
+  Widget pageIndicator({required int pageCount, double itemWidth = 20}) {
+    double width = screenSize.width;
+    return Stack(
       children: <Widget>[
-        Container(
-          decoration: BoxDecoration(
-            color: Colors.red,
+        ClipRRect(
+          borderRadius: BorderRadius.all(Radius.circular(1)),
+          child: Container(
+            height: 2,
+            width: itemWidth * pageCount,
+            color: Colors.black.withOpacity(0.08),
           ),
-          child: Center(child: Text('第0页')),
         ),
-        Container(
-          decoration: BoxDecoration(
-            color: Colors.yellow,
-          ),
-          child: Center(child: Text('第1页')),
-        ),
-        Container(
-          decoration: BoxDecoration(
-            color: Theme.of(context).primaryColor,
-          ),
-          child: Center(child: Text('第2页')),
-        ),
+        ValueListenableBuilder(
+          valueListenable: scrollerKey,
+          builder: (context, value, child) {
+            return Positioned(
+              left: ((value as double) / width) * itemWidth,
+              child: Container(
+                height: 2,
+                width: itemWidth,
+                decoration: BoxDecoration(
+                  color: Color(0xFFBE965A),
+                  borderRadius: BorderRadius.circular(1),
+                ),
+              ));
+          }),
       ],
     );
   }

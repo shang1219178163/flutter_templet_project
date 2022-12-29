@@ -33,7 +33,7 @@ class LocationPopView extends StatelessWidget {
               "bb": "1",
               "cc": "2"},
             checkedString: "aa",
-            child: Icon(Icons.security, color: ColorExt.random(),),
+            child: Icon(Icons.security, color: ColorExt.random,),
             offset: Offset(0, 30),
             callback: (value) {
               ddlog(value);

@@ -181,7 +181,7 @@ class _SliverAppBarDemoState extends State<SliverAppBarDemo> with SingleTickerPr
 
   Widget _buildMenuItem(BuildContext context, {required Widget top, required Widget bottom}) {
     return Container(
-      color: ColorExt.random(),
+      color: ColorExt.random,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
