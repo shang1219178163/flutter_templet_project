@@ -20,7 +20,7 @@ class SliverFillViewportDemo extends StatelessWidget {
           delegate: SliverChildBuilderDelegate((context, index) {
               return Container(
                 color: colors[index],
-                child: Text('$index'),
+                child: Center(child: Text('$index')),
               );
             },
               childCount: colors.length,

@@ -306,6 +306,7 @@ var _tuples = [
   Tuple2("特殊功能", _specials),
   Tuple2("动画相关", _animateds),
   Tuple2("系统组件demo", _list),
+  Tuple2("系统组件 - sliver", _slivers),
   Tuple2("自定义组件", _customs),
   Tuple2("第三方组件", _vendors),
   Tuple2("其它", _others)
@@ -354,10 +355,7 @@ var _list = [
   Tuple2(APPRouter.sliderDemo, "sliderDemo", ),
   Tuple2(APPRouter.stepperDemo, "stepperDemo", ),
   Tuple2(APPRouter.slidableDemo, "SlidableDemo", ),
-  Tuple2(APPRouter.sliverAppBarDemo, "SliverAppBarDemo", ),
   Tuple2(APPRouter.sliverFamilyDemo, "SliverFamilyDemo", ),
-  Tuple2(APPRouter.sliverFamilyPageViewDemo, "sliverFamilyPageViewDemo", ),
-  Tuple2(APPRouter.sliverPersistentHeaderDemo, "sliverPersistentHeaderDemo", ),
 
   Tuple2(APPRouter.tabBarDemo, "tabBarDemo", ),
   Tuple2(APPRouter.textlessDemo, "textlessDemo", ),
@@ -413,6 +411,11 @@ var _list = [
   Tuple2(APPRouter.notificationListenerDemo, "notificationListenerDemo 数据共享", ),
   Tuple2(APPRouter.notificationCustomDemo, "notificationCustomDemo 自定义通知", ),
   Tuple2(APPRouter.scrollbarDemo, "scrollbarDemo 滚动指示器监听", ),
+
+];
+
+var _slivers = [
+  Tuple2(APPRouter.sliverFamilyDemo, "SliverFamilyDemo", ),
 
 
 ];

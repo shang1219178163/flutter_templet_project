@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/SectionHeader.dart';
 import 'package:flutter_templet_project/extension/buildContext_extension.dart';
@@ -182,7 +184,6 @@ class _GradientDemoState extends State<GradientDemo> {
                   tileMode: this.tileMode,
                   begin: Alignment(-1.0, 0.0),
                   end: Alignment(0.0, 0.0),
-                  // tileMode: TileMode.repeated,
                   colors: [Color(0xFFFFC125), Color(0xFFFF7F24)]
               )
           )
@@ -202,7 +203,7 @@ class _GradientDemoState extends State<GradientDemo> {
       ),
 
       _buildBox(
-          text: '两种颜色 设置起始位置与终止位置 repeated',
+          text: '两种颜色 设置起始位置与终止位置',
           decoration: BoxDecoration(
               gradient: LinearGradient(
                   tileMode: this.tileMode,
@@ -215,7 +216,7 @@ class _GradientDemoState extends State<GradientDemo> {
       ),
 
       _buildBox(
-          text: '两种颜色 设置起始位置与终止位置 repeated',
+          text: '三种颜色 设置起始位置与终止位置',
           decoration: BoxDecoration(
               gradient: LinearGradient(
                 tileMode: this.tileMode,
@@ -233,7 +234,7 @@ class _GradientDemoState extends State<GradientDemo> {
       Divider(),
       SectionHeader.h4(title: 'SweepGradient',),
       _buildBox(
-          text: '两种颜色 设置起始位置与终止位置',
+          text: '三种颜色 设置起始位置与终止位置',
           decoration: BoxDecoration(
             gradient: SweepGradient(
                 tileMode: this.tileMode,
@@ -250,13 +251,12 @@ class _GradientDemoState extends State<GradientDemo> {
           ),
       ),
       _buildBox(
-        text: '两种颜色 设置起始位置与终止位置',
+        text: '三种颜色 设置起始位置与终止位置',
         decoration: BoxDecoration(
           gradient: SweepGradient(
               tileMode: this.tileMode,
-              // center: AlignmentDirectional(1, -1),
-              // startAngle: 1.7,
-              // endAngle: 3,
+              startAngle: 0,
+              endAngle: math.pi * 2,
               colors: const <Color>[
                 Colors.red, // blue
                 Colors.blue,
@@ -272,8 +272,8 @@ class _GradientDemoState extends State<GradientDemo> {
           gradient: SweepGradient(
             tileMode: this.tileMode,
             // center: FractionalOffset.topRight,
-            startAngle: 2,
-            endAngle: 5,
+            startAngle: 0,
+            endAngle: math.pi,
             colors: const <Color>[
               Colors.red, // blue
               Colors.blue,

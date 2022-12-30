@@ -80,7 +80,7 @@ class _APPUserCenterPageState extends State<APPUserCenterPage>{
               buildTop(),
               buildMid(),
               Container(height: 15, color: Get.isDarkMode ? Colors.black45 : Color(0xfff2f2f2)),
-              buildBom()
+              buildBom(),
             ],
           ),
         ),
@@ -151,17 +151,24 @@ class _APPUserCenterPageState extends State<APPUserCenterPage>{
     );
   }
 
+
   Widget buildBom() {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal:10, vertical:8),
       child: Column(
-        children: items.map((e) => ListTile(
+        children: items.map((e) => Container(
+          decoration: BoxDecoration(
+            border: Border(
+              bottom: BorderSide(color: Colors.grey.withOpacity(0.2)),
+            )
+          ),
+          child: ListTile(
             leading: Icon(e.item2, color: Theme.of(context).primaryColor,),
             title: Text(e.item1, style: TextStyle(fontSize: 16.0)),
             trailing: Icon(Icons.chevron_right),
-            dense:true,
             onTap: (){ print(e.item1); },
-          )
+          ),
+        )
         ).toList(),
       ),
     );
