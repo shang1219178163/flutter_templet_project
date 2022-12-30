@@ -489,11 +489,11 @@ var _vendors = [
   Tuple2(APPRouter.popoverDemo, "popoverDemo", ),
   Tuple2(APPRouter.badgesDemo, "badgesDemo", ),
   Tuple2(APPRouter.flutterSwiperDemo, "flutterSwiperDemo", ),
+  Tuple2(APPRouter.flutterSwiperIndicatorDemo, "flutterSwiperIndicatorDemo", ),
   Tuple2(APPRouter.visibilityDetectorDemo, "visibilityDetector 曝光检测", ),
   Tuple2(APPRouter.svgaImageDemo, "svgaImageDemo", ),
   Tuple2(APPRouter.providerDemo, "状态管理 - provider", ),
   Tuple2(APPRouter.colorConverterDemo, "颜色转换", ),
-
 
 ];
 

@@ -47,6 +47,8 @@ import 'package:flutter_templet_project/pages/demo/smart_dialog_demo.dart';
 import 'package:flutter_templet_project/pages/demo/isolateDemo.dart';
 import 'package:flutter_templet_project/pages/demo/merge_images_demo.dart';
 import 'package:flutter_templet_project/pages/demo/merge_network_images_demo.dart';
+import 'package:flutter_templet_project/pages/sliver_demo/SliverAppBarDemo.dart';
+import 'package:flutter_templet_project/pages/sliver_demo/SliverPersistentHeaderDemo.dart';
 import 'package:flutter_templet_project/pages/system_color_page.dart';
 import 'package:flutter_templet_project/pages/system_icons_page.dart';
 import 'package:flutter_templet_project/provider/ProxyProvider_demo.dart';
@@ -61,6 +63,7 @@ import 'package:flutter_templet_project/vendor/badges_demo.dart';
 import 'package:flutter_templet_project/vendor/color_converter_demo.dart';
 import 'package:flutter_templet_project/vendor/custom_timer_demo.dart';
 import 'package:flutter_templet_project/vendor/flutter_swiper_demo.dart';
+import 'package:flutter_templet_project/vendor/flutter_swiper_indicator_demo.dart';
 import 'package:flutter_templet_project/vendor/qr/qr_code_scanner_demo.dart';
 import 'package:flutter_templet_project/vendor/qr/qr_flutter_demo.dart';
 import 'package:flutter_templet_project/vendor/timeline/timeline_demo.dart';
@@ -101,7 +104,6 @@ import 'package:flutter_templet_project/pages/demo/RecordListDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ReorderableListViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/RichTextDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ShaderMaskDemo.dart';
-import 'package:flutter_templet_project/pages/demo/SliverAppBarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NavigationBarDemo.dart';
 
 import 'package:flutter_templet_project/Pages/APPNotFoundPage.dart';
@@ -139,7 +141,6 @@ import 'package:flutter_templet_project/pages/demo/DraggableScrollableSheetDemo.
 import 'package:flutter_templet_project/pages/demo/ProgressIndicatorDemo.dart';
 import 'package:flutter_templet_project/pages/demo/SliderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/SegmentControlDemo.dart';
-import 'package:flutter_templet_project/pages/demo/SliverPersistentHeaderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/StepperDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TabBarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TableDemo.dart';
@@ -333,6 +334,7 @@ class APPRouter {
   static const stackDemo = '/stackDemo';
   static const badgesDemo = '/badgesDemo';
   static const flutterSwiperDemo = '/flutterSwiperDemo';
+  static const flutterSwiperIndicatorDemo = '/flutterSwiperIndicatorDemo';
   static const synHomeSrollDemo = '/synHomeSrollDemo';
   static const synHomeNavDemo = '/synHomeNavDemo';
   static const wrapDemo = '/wrapDemo';
@@ -533,6 +535,7 @@ class AppPage {
     GetPage(name: APPRouter.stackDemo, page: () => StackDemo(),),
     GetPage(name: APPRouter.badgesDemo, page: () => BadgesDemo(),),
     GetPage(name: APPRouter.flutterSwiperDemo, page: () => FlutterSwiperDemo(),),
+    GetPage(name: APPRouter.flutterSwiperIndicatorDemo, page: () => FlutterSwiperIndicatorDemo(),),
     GetPage(name: APPRouter.synHomeSrollDemo, page: () => SynHomeSrollDemo(),),
     GetPage(name: APPRouter.synHomeNavDemo, page: () => SynHomeNavDemo(),),
     GetPage(name: APPRouter.wrapDemo, page: () => WrapDemo(),),
@@ -549,7 +552,6 @@ class AppPage {
     GetPage(name: APPRouter.notificationCustomDemo, page: () => NotificationCustomDemo(),),
     GetPage(name: APPRouter.scrollControllerDemo, page: () => ScrollControllerDemo(),),
     GetPage(name: APPRouter.colorConverterDemo, page: () => ColorConverterDemo(),),
-
 
 
   ];

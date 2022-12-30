@@ -14,23 +14,43 @@ import 'package:flutter/material.dart';
 
 extension ColorExt on Color{
 
-  /// 十六进制转颜色
-  /// alpha, 透明度 [0.0,1.0]
-  static Color fromHex(String val, {double alpha = 1, Color defaultValue = Colors.transparent}) {
-    val = val.toUpperCase().replaceAll("#", '');
-    final result = int.tryParse(val, radix: 16);
-    if (result == null) {
-      return defaultValue;
-    }
-    return Color(result).withOpacity(alpha);
-  }
-
   ///随机颜色
   static Color get random {
     return Color.fromRGBO(
         Random().nextInt(256),
         Random().nextInt(256),
         Random().nextInt(256), 1);
+  }
+
+  /// 十六进制转颜色
+  /// alpha, 透明度 [0.0,1.0]
+  static Color? fromHex(String val, {double alpha = 1}) {
+    val = val.toUpperCase().replaceAll("#", '');
+    val = val.toUpperCase().replaceAll("0x", '');
+    final result = int.tryParse(val, radix: 16);
+    if (result == null) {
+      return null;
+    }
+    return Color(result).withOpacity(alpha);
+  }
+  
+  ///rgba 颜色字符串转 Color
+  static Color? fromRGBA(String? val) {
+    if (val == null || val == "") {
+      return null;
+    }
+    val = val.replaceAll(")", "");
+    val = val.replaceAll("rgba(", "");
+    List<String> list = val.split(",");
+    if (list.length != 4) {
+      return null;
+    }
+    return Color.fromRGBO(
+      int.parse(list[0]),
+      int.parse(list[1]),
+      int.parse(list[2]),
+      double.parse(list[3]),
+    );
   }
 
   ///转渐进色
