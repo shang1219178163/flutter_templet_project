@@ -86,8 +86,8 @@ class _FlutterSwiperIndicatorDemoState extends State<FlutterSwiperIndicatorDemo>
                 }
               ),
               // if (this.items.length > 1) buildPageIndicator(),
-              if (this.items.length > 1) PageIndicatorWidget(
-                currentIndex: currentIndex,
+              if (this.items.length >= 1) PageIndicatorWidget(
+                currentPage: currentIndex,
                 itemCount: this.items.length,
                 itemSize: Size(context.screenSize.width/ 4 / this.items.length, 2),
                 // itemBuilder: (isSelected, itemSize) {
@@ -104,16 +104,4 @@ class _FlutterSwiperIndicatorDemoState extends State<FlutterSwiperIndicatorDemo>
     );
   }
 
-  //分割区间
-  _buildSeparator(context, index) {
-    // return Container(
-    //   width: gap,
-    //   color: Colors.blue,
-    // );
-    return Divider(
-      // height: 8,
-      indent: 8,
-      // color: Colors.blue,
-    );
-  }
 }

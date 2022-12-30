@@ -9,27 +9,38 @@ class PageIndicatorWidget extends StatelessWidget {
   PageIndicatorWidget({ 
     Key? key, 
     this.margin = const EdgeInsets.only(bottom: 10),
-    required this.currentIndex,
+    required this.currentPage,
     required this.itemCount,
     this.normalColor = const Color(0x25ffffff), 
     this.selectedColor = Colors.white,
     this.itemSize = const Size(8, 2),
     this.itemBuilder,
+    this.hidesForSinglePage = true
   }) : super(key: key);
 
-  ValueNotifier<int> currentIndex;
+  /// 当前页面索引
+  ValueNotifier<int> currentPage;
 
   EdgeInsetsGeometry? margin;
 
+  /// item数量
   int itemCount;
+  /// 每个item尺寸(最好用固定宽度除以个数,避免总宽度溢出)
   Size itemSize;
+  /// 自定义每个 item
   PageIndicatorItemWidgetBuilder? itemBuilder;
-
+  /// 默认颜色
   Color? normalColor;
+  /// 选中颜色
   Color? selectedColor;
+  /// 单页隐藏
+  bool hidesForSinglePage;
 
   @override
   Widget build(BuildContext context) {
+    if (this.hidesForSinglePage && this.itemCount == 1) {
+      return SizedBox();
+    }
     return buildPageIndicator();
   }
 
@@ -39,13 +50,13 @@ class PageIndicatorWidget extends StatelessWidget {
       child: Align(
         alignment: Alignment.bottomCenter,
         child: ValueListenableBuilder(
-          valueListenable: currentIndex,
+          valueListenable: this.currentPage,
           builder: (BuildContext context, dynamic value, Widget? child) {
             return Row(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.start,
               children: buildPageIndicatorItem(
-                currentIndex: this.currentIndex.value,
+                currentIndex: this.currentPage.value,
                 normalColor: this.normalColor,
                 selectedColor: this.selectedColor,
               ),
