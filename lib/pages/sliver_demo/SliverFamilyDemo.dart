@@ -65,6 +65,7 @@ class _SliverFamilyDemoState extends State<SliverFamilyDemo> {
             ));
           },
           child: ListTile(
+            dense: true,
             title: Text(e.item1),
             subtitle: Text(e.item2),
             trailing: Icon(Icons.arrow_forward_ios_rounded, color: Colors.grey.withOpacity(0.5)),
