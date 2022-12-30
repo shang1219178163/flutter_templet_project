@@ -7,8 +7,10 @@
 //
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/pages/sliver_demo/SliverAppBarDemoOne.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/SliverGridDemo.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/SliverListDemo.dart';
+import 'package:flutter_templet_project/pages/sliver_demo/SliverPersistentHeaderDemoOne.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/StaggeredGridViewDemo.dart';
 import 'package:tuple/tuple.dart';
 
@@ -65,6 +67,7 @@ class _SliverFamilyDemoState extends State<SliverFamilyDemo> {
           child: ListTile(
             title: Text(e.item1),
             subtitle: Text(e.item2),
+            trailing: Icon(Icons.arrow_forward_ios_rounded, color: Colors.grey.withOpacity(0.5)),
           ),
         );
       });
@@ -126,6 +129,12 @@ List<Tuple3<String, String, Widget>> _list = [
     SliverAppBarDemo(),
   ),
   Tuple3(
+    'SliverAppBarDemoOne',
+    '可变的导航栏',
+    SliverAppBarDemoOne(),
+  ),
+
+  Tuple3(
     'SliverList、SliverFixedExtentList',
     '常用的组合方式',
     SliverListDemo(title:
@@ -144,6 +153,12 @@ List<Tuple3<String, String, Widget>> _list = [
     '吸顶效果',
     SliverPersistentHeaderDemo(),
   ),
+  Tuple3(
+    'SliverPersistentHeaderDemoOne',
+    '吸顶效果',
+    SliverPersistentHeaderDemoOne(),
+  ),
+
   Tuple3(
     'SliverAnimatedList',
     '带动画的SliverList组件',
