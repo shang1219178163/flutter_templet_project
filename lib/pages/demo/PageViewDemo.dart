@@ -55,7 +55,7 @@ class _PageViewDemoState extends State<PageViewDemo> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: pageIndicator(pageCount: 3),
+        title: Text("$widget"),
         actions: rightTitles.map((e) => TextButton(
           onPressed: (){
             _actionTap(value: e);
@@ -65,19 +65,31 @@ class _PageViewDemoState extends State<PageViewDemo> {
           ),
         )).toList(),
       ),
-      body: Container(
-        padding: EdgeInsets.all(20),
+      body: _buildBody(),
+    );
+  }
+
+  _buildBody({
+    margin = const EdgeInsets.all(10),
+    padding = const EdgeInsets.all(20),
+  }) {
+    final pageViewWidth = screenSize.width - margin.left - margin.right - padding.left - padding.right;
+    return Container(
+        margin: margin,
+        padding: padding,
         child: Column(
           children: [
             Expanded(child: buildPageView()),
             SizedBox(height: 10),
             Container(
               height: 50,
-              child: pageIndicator(pageCount: 3),
+              child: pageIndicator(
+                pageViewWidth: pageViewWidth,
+                pageCount: 3
+              ),
             )
           ],
         )
-      )
     );
   }
 
@@ -98,8 +110,12 @@ class _PageViewDemoState extends State<PageViewDemo> {
     );
   }
 
-  Widget pageIndicator({required int pageCount, double factor = 0.3}) {
-    double width = (screenSize.width - 40) * factor;
+  Widget pageIndicator({
+    required int pageCount,
+    required double pageViewWidth,
+    double factor = 0.3
+  }) {
+    double width = pageViewWidth * factor;
     double itemWidth = width / pageCount;
     return Stack(
       children: <Widget>[
