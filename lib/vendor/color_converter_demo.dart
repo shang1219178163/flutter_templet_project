@@ -24,9 +24,9 @@ class _ColorConverterDemoState extends State<ColorConverterDemo> {
       color,
       HSVColor.fromColor(color).toColor(),
       HSLColor.fromColor(color).toColor(),
-      ColorExt.fromHex('#8e88e8'),
-      ColorExt.fromHex('#8e88e8', alpha: 0.66),
-      ColorExt.fromHex('#8e88e8', alpha: 0.3),
+      ColorExt.fromHex('#8e88e8') ?? Colors.red,
+      ColorExt.fromHex('#8e88e8', alpha: 0.66) ?? Colors.red,
+      ColorExt.fromHex('#8e88e8', alpha: 0.3) ?? Colors.red,
 
       // rgbColor.toCmyk(),
     ];
