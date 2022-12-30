@@ -67,7 +67,16 @@ class _PageViewDemoState extends State<PageViewDemo> {
       ),
       body: Container(
         padding: EdgeInsets.all(20),
-        child: buildPageView()
+        child: Column(
+          children: [
+            Expanded(child: buildPageView()),
+            SizedBox(height: 10),
+            Container(
+              height: 50,
+              child: pageIndicator(pageCount: 3),
+            )
+          ],
+        )
       )
     );
   }
@@ -89,15 +98,16 @@ class _PageViewDemoState extends State<PageViewDemo> {
     );
   }
 
-  Widget pageIndicator({required int pageCount, double itemWidth = 20}) {
-    double width = screenSize.width;
+  Widget pageIndicator({required int pageCount, double factor = 0.3}) {
+    double width = (screenSize.width - 40) * factor;
+    double itemWidth = width / pageCount;
     return Stack(
       children: <Widget>[
         ClipRRect(
           borderRadius: BorderRadius.all(Radius.circular(1)),
           child: Container(
-            height: 2,
-            width: itemWidth * pageCount,
+            height: 4,
+            width: width,
             color: Colors.black.withOpacity(0.08),
           ),
         ),
@@ -105,9 +115,9 @@ class _PageViewDemoState extends State<PageViewDemo> {
           valueListenable: scrollerKey,
           builder: (context, value, child) {
             return Positioned(
-              left: ((value as double) / width) * itemWidth,
+              left: ((value as double) * factor / width) * itemWidth,
               child: Container(
-                height: 2,
+                height: 4,
                 width: itemWidth,
                 decoration: BoxDecoration(
                   color: Color(0xFFBE965A),
