@@ -50,12 +50,13 @@ class BottomSheetDemo extends StatelessWidget {
                           top: -30,
                           right: 15,
                           child: FloatingActionButton(
-                              foregroundColor: Colors.blue,
-                              backgroundColor: Colors.white,
-                              child: Icon(Icons.directions_bike),
-                              onPressed: () {
-                                ddlog("directions_bike");
-                              }),
+                            foregroundColor: Colors.blue,
+                            backgroundColor: Colors.white,
+                            child: Icon(Icons.directions_bike),
+                            onPressed: () {
+                              ddlog("directions_bike");
+                            }
+                          ),
                         ),
                       ],
                     ),

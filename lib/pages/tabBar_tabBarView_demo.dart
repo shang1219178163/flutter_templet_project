@@ -370,7 +370,6 @@ var _list = [
 
   Tuple2(APPRouter.futureBuilderDemo, "futureBuilderDemo", ),
   Tuple2(APPRouter.streamBuilderDemo, "streamBuilderDemo", ),
-  Tuple2(APPRouter.bannerDemo, "bannerDemo", ),
 
   Tuple2(APPRouter.indexedStackDemo, "indexedStackDemo", ),
   Tuple2(APPRouter.responsiveColumnDemo, "responsiveColumnDemo", ),
