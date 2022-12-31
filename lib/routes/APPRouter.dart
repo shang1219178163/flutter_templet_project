@@ -3,6 +3,7 @@
 import 'package:flutter_templet_project/Provider/provider_list_demo.dart';
 import 'package:flutter_templet_project/basicWidget/DragDestinationView.dart';
 import 'package:flutter_templet_project/basicWidget/responsive_column.dart';
+import 'package:flutter_templet_project/pages/demo/AnimatedBuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/BoxConstraintsDemo.dart';
 import 'package:flutter_templet_project/pages/FlutterFFiTest.dart';
 import 'package:flutter_templet_project/pages/LocalImagePage.dart';
@@ -351,6 +352,7 @@ class APPRouter {
   static const notificationCustomDemo = '/notificationCustomDemo';
   static const scrollControllerDemo = '/scrollControllerDemo';
   static const colorConverterDemo = '/colorConverterDemo';
+  static const animatedBuilderDemo = '/animatedBuilderDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -552,6 +554,7 @@ class AppPage {
     GetPage(name: APPRouter.notificationCustomDemo, page: () => NotificationCustomDemo(),),
     GetPage(name: APPRouter.scrollControllerDemo, page: () => ScrollControllerDemo(),),
     GetPage(name: APPRouter.colorConverterDemo, page: () => ColorConverterDemo(),),
+    GetPage(name: APPRouter.animatedBuilderDemo, page: () => AnimatedBuilderDemo(),),
 
 
   ];
