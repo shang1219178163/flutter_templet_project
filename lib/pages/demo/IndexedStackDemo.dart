@@ -38,18 +38,18 @@ class _IndexedStackDemoState extends State<IndexedStackDemo> {
             index: this.selectedIndex,
             children: <Widget>[
               Container(
-                width: 290,
-                height: 210,
+                width: 200,
+                height: 200,
                 color: Colors.green,
               ),
               Container(
                 width: 250,
-                height: 170,
+                height: 250,
                 color: Colors.red,
               ),
               Container(
-                width: 220,
-                height: 150,
+                width: 300,
+                height: 300,
                 color: Colors.yellow,
               ),
             ]
