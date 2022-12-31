@@ -28,19 +28,41 @@ class _NestedScrollViewDemoState extends State<NestedScrollViewDemo> {
   @override
   Widget build(BuildContext context) {
     return NestedScrollView(
-        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-          return <Widget>[SliverAppBar(title: Text("hello title"))];
-        },
-        body: ListView.builder(
-            itemCount: 50,
-            itemBuilder: (BuildContext context, int index) {
-              return Container(
-                height: 100,
-                color: Colors.green,
-                child: Center(
-                  child: Text("hello world $index"),
-                ),
-              );
-            }));
+      headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+        return <Widget>[
+          // SliverAppBar(title: Text("hello title")),
+          SliverAppBar(
+            floating: true,
+            snap: true,
+            pinned: true,
+            expandedHeight: 200,
+            forceElevated: innerBoxIsScrolled,
+            flexibleSpace: FlexibleSpaceBar(
+              background: Image.asset(
+                "images/bg.png",
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+        ];
+      },
+      body: ListView.builder(
+        itemCount: 50,
+        itemBuilder: (BuildContext context, int index) {
+          return Material(
+            child: Container(
+                height: 60,
+                decoration: BoxDecoration(
+                border: Border(bottom: BorderSide(color: Colors.red))
+              ),
+              child: ListTile(
+                title: Text("row_$index"),
+                trailing: Icon(Icons.arrow_forward_ios_outlined),
+              )
+            )
+          );
+        }
+      )
+    );
   }
 }

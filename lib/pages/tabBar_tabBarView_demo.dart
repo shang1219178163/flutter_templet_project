@@ -456,6 +456,8 @@ var _animateds = [
   Tuple2(APPRouter.animatedSwitcherDemo, "animatedSwitcherDemo", ),
   Tuple2(APPRouter.animatedWidgetDemo, "animatedWidgetDemo", ),
   Tuple2(APPRouter.animatedGroupDemo, "animatedGroupDemo", ),
+  Tuple2(APPRouter.animatedBuilderDemo, "animatedBuilderDemo", ),
+
 
 ];
 
