@@ -24,7 +24,7 @@ class PageViewDemo extends StatefulWidget {
 }
 
 class _PageViewDemoState extends State<PageViewDemo> {
-  ValueNotifier<double> scrollerKey = new ValueNotifier(0.0);
+  ValueNotifier<double> scrollerOffset = new ValueNotifier(0.0);
   PageController? controller;
 
   var titles = ["PageViewTabBarWidget", "2", "3"];
@@ -45,7 +45,7 @@ class _PageViewDemoState extends State<PageViewDemo> {
 
     controller = PageController();
     controller?.addListener(() {
-      scrollerKey.value = controller!.offset;
+      scrollerOffset.value = controller!.offset;
     });
 
     super.initState();
@@ -128,7 +128,7 @@ class _PageViewDemoState extends State<PageViewDemo> {
           ),
         ),
         ValueListenableBuilder(
-          valueListenable: scrollerKey,
+          valueListenable: scrollerOffset,
           builder: (context, value, child) {
             return Positioned(
               left: ((value as double) * factor / width) * itemWidth,
