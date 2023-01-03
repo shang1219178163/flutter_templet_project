@@ -39,10 +39,6 @@ class _TabBarReusePageDemoState extends State<TabBarReusePageDemo> {
 
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute
-        .of(context)!
-        .settings
-        .arguments;
 
     var val = isTabBarTop ? "底部" : "顶部";
     return Scaffold(
