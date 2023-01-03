@@ -30,6 +30,7 @@ class _FlexDemoState extends State<FlexDemo> {
           SectionHeader.h4(title: 'Flex.Vertical',),
           _buildFlexVertical(),
           _buildSection(),
+          _buildSection2(),
         ]
       )
     );
@@ -49,7 +50,7 @@ class _FlexDemoState extends State<FlexDemo> {
             ),
           ),
           Expanded(
-            flex :2,
+            flex: 2,
             child: Column(
               children: <Widget>[
                 Text("This is a long text this is a long test this is This is a long text this is a long test this is This is a long text this is a long test this is This is a long text this is a long test this is This is a long text this is a long test this is This is a long text this is a long test this is ")
@@ -91,6 +92,66 @@ class _FlexDemoState extends State<FlexDemo> {
         width: 50,
         height: 50,
       )).toList()
+    );
+  }
+  
+  
+  _buildSection2() {
+    return Column(
+      children:[
+        Row(
+          children:[
+            buildExpanded(),
+            buildFlexible(),
+          ],
+        ),
+        Row(
+          children:[
+            buildExpanded(),
+            buildExpanded(),
+          ],
+        ),
+        Row(
+          children:[
+            buildFlexible(),
+            buildFlexible(),
+          ],
+        ),
+        Row(
+          children:[
+            buildExpanded(),
+            buildFlexibleTight(),
+          ],
+        ),
+      ],
+    );
+  }
+
+  buildExpanded() {
+    return Expanded(
+      child: Container(
+        color: Colors.greenAccent,
+        child: Text("Expanded"),
+      ),
+    );
+  }
+
+  buildFlexible() {
+    return Flexible(
+      child: Container(
+        color: Colors.yellowAccent,
+        child: Text("Flexible"),
+      ),
+    );
+  }
+
+  buildFlexibleTight() {
+    return Flexible(
+      fit: FlexFit.tight,
+      child: Container(
+        color: Colors.yellowAccent,
+        child: Text("Flexible - FlexFit.tight"),
+      ),
     );
   }
 }
