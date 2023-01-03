@@ -410,6 +410,9 @@ var _list = [
   Tuple2(APPRouter.notificationListenerDemo, "notificationListenerDemo 数据共享", ),
   Tuple2(APPRouter.notificationCustomDemo, "notificationCustomDemo 自定义通知", ),
   Tuple2(APPRouter.scrollbarDemo, "scrollbarDemo 滚动指示器监听", ),
+  Tuple2(APPRouter.intrinsicHeightDemo, "intrinsicHeightDemo", ),
+  Tuple2(APPRouter.flexDemo, "flex 布局", ),
+
 
 ];
 

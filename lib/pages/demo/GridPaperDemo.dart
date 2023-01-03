@@ -10,6 +10,8 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/R.dart';
+
 
 class GridPaperDemo extends StatelessWidget {
   @override
@@ -23,10 +25,13 @@ class GridPaperDemo extends StatelessWidget {
   }
 
   Widget _contentWidget() {
+    final items = R.imgUrls.map((e) => Image.network(
+        e,
+        scale: 1,
+        fit: BoxFit.cover)).toList();
+
     return Container(
-//      height: 400.0,
-//      width: 300.0,
-      color: Colors.grey,
+//       color: Colors.grey,
       child: GridView.count(
         crossAxisCount: 2,
         mainAxisSpacing: 10.0,
@@ -41,39 +46,25 @@ class GridPaperDemo extends StatelessWidget {
               leading: Icon(Icons.add),
               trailing: Text("trailing"),
             ),
-            child: Container(),
-            footer: Text('footer'),
-          ),
-          GridPaper(
-            interval:1.0,
-            divisions: 1,
-            subdivisions: 1,
-            color: Colors.transparent,
             child: Image.network(
-                'https://flutter.io/assets/homepage/news-2-599aefd56e8aa903ded69500ef4102cdd8f988dab8d9e4d570de18bdb702ffd4.png',
-                scale: 1,
-                fit: BoxFit.cover),
+              R.imgUrls[6],
+              scale: 1,
+              fit: BoxFit.cover
+            ),
+            footer: Center(child: Text('footer')),
           ),
-          Image.network(
-              'https://flutter.io/assets/homepage/news-2-599aefd56e8aa903ded69500ef4102cdd8f988dab8d9e4d570de18bdb702ffd4.png',
+          GridPaper(//绘制一个像素宽度的直线网格
+            interval: 3,//参数表示2条线之间的间隔
+            divisions: 3,//分割数
+            subdivisions: 3,//测网格分割数,包含自身
+            // color: Colors.transparent,
+            child: Image.network(
+              R.imgUrls[0],
               scale: 1,
-              fit: BoxFit.cover),
-          Image.network(
-              'https://flutter.io/assets/homepage/news-2-599aefd56e8aa903ded69500ef4102cdd8f988dab8d9e4d570de18bdb702ffd4.png',
-              scale: 1,
-              fit: BoxFit.cover),
-          Image.network(
-              'https://flutter.io/assets/homepage/news-2-599aefd56e8aa903ded69500ef4102cdd8f988dab8d9e4d570de18bdb702ffd4.png',
-              scale: 1,
-              fit: BoxFit.cover),
-          Image.network(
-              'https://flutter.io/assets/homepage/news-2-599aefd56e8aa903ded69500ef4102cdd8f988dab8d9e4d570de18bdb702ffd4.png',
-              scale: 1,
-              fit: BoxFit.cover),
-          Image.network(
-              'https://flutter.io/assets/homepage/news-2-599aefd56e8aa903ded69500ef4102cdd8f988dab8d9e4d570de18bdb702ffd4.png',
-              scale: 1,
-              fit: BoxFit.cover),
+              fit: BoxFit.cover
+            ),
+          ),
+          ...items,
         ],
       ),
     );

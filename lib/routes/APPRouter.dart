@@ -18,9 +18,11 @@ import 'package:flutter_templet_project/pages/demo/DecorationDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DismissibleDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DragAndDropDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FittedBoxDemo.dart';
+import 'package:flutter_templet_project/pages/demo/FlexDemo.dart';
 import 'package:flutter_templet_project/pages/demo/GradientDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ImageBlendModeDemo.dart';
 import 'package:flutter_templet_project/pages/demo/InheritedWidgetDemo.dart';
+import 'package:flutter_templet_project/pages/demo/IntrinsicHeightDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ListViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MaterialBannerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ModalBarrierDemo.dart';
@@ -353,6 +355,9 @@ class APPRouter {
   static const scrollControllerDemo = '/scrollControllerDemo';
   static const colorConverterDemo = '/colorConverterDemo';
   static const animatedBuilderDemo = '/animatedBuilderDemo';
+  static const intrinsicHeightDemo = '/intrinsicHeightDemo';
+  static const flexDemo = '/flexDemo';
+
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -555,6 +560,8 @@ class AppPage {
     GetPage(name: APPRouter.scrollControllerDemo, page: () => ScrollControllerDemo(),),
     GetPage(name: APPRouter.colorConverterDemo, page: () => ColorConverterDemo(),),
     GetPage(name: APPRouter.animatedBuilderDemo, page: () => AnimatedBuilderDemo(),),
+    GetPage(name: APPRouter.intrinsicHeightDemo, page: () => IntrinsicHeightDemo(),),
+    GetPage(name: APPRouter.flexDemo, page: () => FlexDemo(),),
 
 
   ];
