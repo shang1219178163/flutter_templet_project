@@ -19,6 +19,7 @@ import 'package:flutter_templet_project/pages/demo/DismissibleDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DragAndDropDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FittedBoxDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FlexDemo.dart';
+import 'package:flutter_templet_project/pages/demo/FlexibleDemo.dart';
 import 'package:flutter_templet_project/pages/demo/GradientDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ImageBlendModeDemo.dart';
 import 'package:flutter_templet_project/pages/demo/InheritedWidgetDemo.dart';
@@ -30,6 +31,7 @@ import 'package:flutter_templet_project/pages/demo/NavigationToolbarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NotificationListenerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/OverflowBarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/OverlayDemo.dart';
+import 'package:flutter_templet_project/pages/demo/PhysicalModelDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PositionedDirectionalDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PromptBuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/RatingBarDemo.dart';
@@ -357,7 +359,9 @@ class APPRouter {
   static const animatedBuilderDemo = '/animatedBuilderDemo';
   static const intrinsicHeightDemo = '/intrinsicHeightDemo';
   static const flexDemo = '/flexDemo';
+  static const flexibleDemo = '/flexibleDemo';
 
+  static const physicalModelDemo = '/physicalModelDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -562,6 +566,8 @@ class AppPage {
     GetPage(name: APPRouter.animatedBuilderDemo, page: () => AnimatedBuilderDemo(),),
     GetPage(name: APPRouter.intrinsicHeightDemo, page: () => IntrinsicHeightDemo(),),
     GetPage(name: APPRouter.flexDemo, page: () => FlexDemo(),),
+    GetPage(name: APPRouter.flexibleDemo, page: () => FlexibleDemo(),),
+    GetPage(name: APPRouter.physicalModelDemo, page: () => PhysicalModelDemo(),),
 
 
   ];
