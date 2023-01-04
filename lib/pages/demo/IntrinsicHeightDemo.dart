@@ -69,18 +69,24 @@ class _IntrinsicHeightDemoState extends State<IntrinsicHeightDemo> {
             Container(
               width: 100,
               decoration: BoxDecoration(
+                border: Border.all(color: Colors.blue),
                 image: DecorationImage(
                   image: NetworkImage('https://tenfei02.cfp.cn/creative/vcg/800/new/VCG21409037867.jpg'),
                   fit: BoxFit.cover,
                 ),
               ),
             ),
+            Spacer(),
             Container(
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.blue),
+              ),
               child: Column(
                 children: [
                   Text('title', style: TextStyle(fontWeight: FontWeight.w600),),
                   Text('subtitle', style: TextStyle(fontWeight: FontWeight.w400),),
                   Text('description', style: TextStyle(fontWeight: FontWeight.w400),),
+                  Text('remark', style: TextStyle(fontWeight: FontWeight.w400),),
                 ],
               ),
             )
