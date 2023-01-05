@@ -267,6 +267,9 @@ class _SecondPageState extends State<SecondPage> {
             SectionHeader.h5(title: "_buildDropdownButton1"),
             _buildDropdownButton1(),
 
+            SectionHeader.h5(title: "_buildPopupMenuButtonExt"),
+            _buildPopupMenuButtonExt(),
+
             Divider(),
             SectionHeader.h5(title: "UploadButton"),
             UploadButton(
@@ -368,19 +371,19 @@ class _SecondPageState extends State<SecondPage> {
       crossAxisSpacing: 8,
       mainAxisSpacing: 8,
       childAspectRatio: 4 / 3,
-      children: _tuples
-          .map((e) => GridTile(
-                footer: Container(
-                    color: Colors.green,
-                    height: 25,
-                    child: Center(child: Text(e.item1))),
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      e.item2,
-                    ]),
-              ))
-          .toList(),
+      children: _tuples.map((e) => GridTile(
+        footer: Container(
+          color: Colors.green,
+          height: 25,
+          child: Center(child: Text(e.item1))
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            e.item2,
+          ]
+        ),
+      )).toList(),
     );
   }
 
@@ -581,14 +584,11 @@ class _SecondPageState extends State<SecondPage> {
     var list = ['语文', '数学', '英语'];
     return DropdownButton(
       value: _dropValue,
-      items: list
-          .map(
-            (e) => DropdownMenuItem(
-              child: Text(e),
-              value: e,
-            ),
-          )
-          .toList(),
+      items: list.map((e) => DropdownMenuItem(
+          child: Text(e),
+          value: e,
+        ),
+      ).toList(),
       onChanged: (value) {
         ddlog(value);
         if (value == null) return;
@@ -610,10 +610,9 @@ class _SecondPageState extends State<SecondPage> {
       'Item 5',
     ];
 
-    //Drop-Down
     return Container(
       padding: const EdgeInsets.all(5.0),
-      decoration: BoxDecoration(color: Colors.yellowAccent, border: Border.all()),
+      decoration: BoxDecoration(color: Colors.greenAccent, border: Border.all()),
       child: DropdownButton(
         // Initial
         value: dropdownvalue,
@@ -634,6 +633,42 @@ class _SecondPageState extends State<SecondPage> {
           });
         },
       ),
+    );
+  }
+
+  _buildPopupMenuButtonExt() {
+    return Column(
+        children: [
+          PopupMenuButtonExt.fromEntryFromJson(
+              child: Container(
+                  padding: EdgeInsets.all(8),
+                  decoration: BoxDecoration(color: Colors.greenAccent, border: Border.all()),
+                  child: Text('PopupMenuButtonExt.fromEntryFromJson')
+              ),
+              json: {
+                "aa": "0",
+                "bb": "1",
+                "cc": "2"
+              },
+              checkedString: "aa",
+              callback: (value) {
+                setState(() => ddlog(value));
+              }
+          ),
+
+          PopupMenuButtonExt.fromCheckList(
+              child: Container(
+                  padding: EdgeInsets.all(8),
+                  decoration: BoxDecoration(color: Colors.greenAccent, border: Border.all()),
+                  child: Text('PopupMenuButtonExt.fromCheckList')
+              ),
+              list: ["a", "b", "c"],
+              checkedIdx: 1,
+              callback: (value) {
+                setState(() => ddlog(value));
+              }
+          ),
+        ]
     );
   }
 
@@ -678,19 +713,8 @@ class _SecondPageState extends State<SecondPage> {
     );
   }
 
-
-
-  Widget _buildLine(bool visible) {
-    return Container(
-      width: visible ? 10.0 : 0.0,
-      height: 16.0,
-      color: Colors.grey.shade400,
-    );
-  }
-
   _showCustomPopView() {
-    Navigator.push(
-      context,
+    Navigator.push(context,
       NNPopupRoute(
         child: Container(
           color: Colors.red,
@@ -881,6 +905,8 @@ class _SecondPageState extends State<SecondPage> {
         ]
     );
   }
+
+
 
 }
 

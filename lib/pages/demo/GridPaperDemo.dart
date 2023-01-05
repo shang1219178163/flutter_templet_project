@@ -31,9 +31,10 @@ class GridPaperDemo extends StatelessWidget {
         fit: BoxFit.cover)).toList();
 
     return Container(
+      key: GlobalKey(),
 //       color: Colors.grey,
       child: GridView.count(
-        crossAxisCount: 2,
+        crossAxisCount: 3,
         mainAxisSpacing: 10.0,
         crossAxisSpacing: 4.0,
         padding: const EdgeInsets.all(10.0),

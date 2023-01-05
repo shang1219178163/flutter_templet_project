@@ -122,4 +122,8 @@ extension IterableExt<T> on Iterable<T> {
     }
     return result;
   }
+
+  Iterable<T> filter() {
+    return this.whereType<T>();
+  }
 }

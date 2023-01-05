@@ -83,7 +83,10 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
         bottom: TabBar(
           controller: _tabController,
           isScrollable: true,
-          tabs: _pages.map((e) => Tab(text: e.item1)).toList(),
+          tabs: _pages.map((e) => Tab(
+              key: PageStorageKey<String>(e.item1),
+              text: e.item1
+          )).toList(),
           // indicatorSize: TabBarIndicatorSize.label,
           // indicatorPadding: EdgeInsets.only(left: 6, right: 6),
         ),
@@ -448,6 +451,7 @@ var _specials = [
   Tuple2(APPRouter.gradientDemo, "渐变色", ),
   Tuple2(APPRouter.imageBlendModeDemo, "图片渲染模式", ),
   Tuple2(APPRouter.containerDemo, "containerDemo", ),
+  Tuple2(APPRouter.scrollControllerDemo, "滚动行为", ),
   Tuple2(APPRouter.scrollControllerDemo, "滚动行为", ),
 
 
