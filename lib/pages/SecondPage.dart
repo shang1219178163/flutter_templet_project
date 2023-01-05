@@ -889,23 +889,14 @@ class _SecondPageState extends State<SecondPage> {
 
   _buildButtonBar() {
     return ButtonBar(
-        children: <Widget>[
-          ElevatedButton(
-            child: const Text ( 'Ok') ,
-            onPressed: () {
-              // To do
-            },
-          ),
-          ElevatedButton(
-            child: const Text ('Cancel') ,
-            onPressed: () {
-              // To do
-            },
-          ),
-        ]
+      children: ['Ok', 'Cancel', ].map((e) => ElevatedButton(
+        child: Text(e),
+        onPressed: () {
+          // To do
+        },
+      )).toList(),
     );
   }
-
 
 
 }
