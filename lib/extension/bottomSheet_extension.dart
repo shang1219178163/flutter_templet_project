@@ -4,37 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/widget_extension.dart';
 
-extension ActionSheetExt on BottomSheet{
-  ///showModalBottomSheet
-  // toShowModalBottomSheet({
-  //   required BuildContext context,
-  //   Color? backgroundColor,
-  //   double? elevation,
-  //   ShapeBorder? shape,
-  //   Clip? clipBehavior,
-  //   Color? barrierColor,
-  //   bool isScrollControlled = false,
-  //   bool useRootNavigator = false,
-  //   bool isDismissible = true,
-  //   bool enableDrag = true,
-  //   RouteSettings? routeSettings,
-  //   AnimationController? transitionAnimationController,
-  // }) => showModalBottomSheet(
-  //   context: context,
-  //   builder: (context) => this,
-  //   backgroundColor: backgroundColor,
-  //   elevation: elevation,
-  //   shape: shape,
-  //   clipBehavior: clipBehavior,
-  //   barrierColor: barrierColor,
-  //   isScrollControlled: isScrollControlled,
-  //   useRootNavigator: useRootNavigator,
-  //   isDismissible: isDismissible,
-  //   enableDrag: enableDrag,
-  //   routeSettings: routeSettings,
-  //   transitionAnimationController: transitionAnimationController,
-  // );
-
+extension BottomSheetExt on BottomSheet{
 
   ///自定义sheet弹窗方法
   static void showModalSheet({
@@ -116,47 +86,4 @@ extension ActionSheetExt on BottomSheet{
       },
     );
   }
-}
-
-extension CupertinoActionSheetExt on CupertinoActionSheet{
-  // ///showCupertinoModalPopup
-  // toShowCupertinoModalPopup({
-  //   required BuildContext context,
-  //   ImageFilter? filter,
-  //   Color barrierColor = kCupertinoModalBarrierColor,
-  //   bool barrierDismissible = true,
-  //   bool useRootNavigator = true,
-  //   bool? semanticsDismissible,
-  //   RouteSettings? routeSettings,
-  // }) => showCupertinoModalPopup(
-  //   context: context,
-  //   builder: (context) => this,
-  //   filter: filter,
-  //   barrierColor: barrierColor,
-  //   barrierDismissible: barrierDismissible,
-  //   semanticsDismissible: semanticsDismissible,
-  //   routeSettings: routeSettings,
-  // );
-}
-
-
-extension CupertinoDatePickerExt on CupertinoDatePicker{
-  ///showCupertinoModalPopup
-  // toShowCupertinoModalPopup({
-  //   required BuildContext context,
-  //   ImageFilter? filter,
-  //   Color barrierColor = kCupertinoModalBarrierColor,
-  //   bool barrierDismissible = true,
-  //   bool useRootNavigator = true,
-  //   bool? semanticsDismissible,
-  //   RouteSettings? routeSettings,
-  // }) => showCupertinoModalPopup(
-  //   context: context,
-  //   builder: (context) => this,
-  //   filter: filter,
-  //   barrierColor: barrierColor,
-  //   barrierDismissible: barrierDismissible,
-  //   semanticsDismissible: semanticsDismissible,
-  //   routeSettings: routeSettings,
-  // );
 }

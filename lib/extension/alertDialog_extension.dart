@@ -15,25 +15,6 @@ import 'package:flutter_templet_project/extension/widget_extension.dart';
 
 extension AlertDialogExt on AlertDialog{
 
-  // ///showDialog
-  // toShowDialog({
-  //   required BuildContext context,
-  //   bool barrierDismissible = true,
-  //   Color? barrierColor = Colors.black54,
-  //   String? barrierLabel,
-  //   bool useSafeArea = true,
-  //   bool useRootNavigator = true,
-  //   RouteSettings? routeSettings,
-  // }) => showDialog(
-  //   context: context,
-  //   builder: (context) => this,
-  //   barrierColor: barrierColor,
-  //   barrierDismissible: barrierDismissible,
-  //   barrierLabel: barrierLabel,
-  //   useSafeArea: useSafeArea,
-  //   routeSettings: routeSettings,
-  // );
-
   ///按平台弹出不同样式
   static void toShowAlert({
     required BuildContext context,
@@ -69,29 +50,4 @@ extension AlertDialogExt on AlertDialog{
     }
   }
 }
-
-extension CupertinoAlertDialogExt on CupertinoAlertDialog{
-
-  // ///showDialog
-  // toShowDialog({
-  //   required BuildContext context,
-  //   bool barrierDismissible = true,
-  //   Color? barrierColor = Colors.black54,
-  //   String? barrierLabel,
-  //   bool useSafeArea = true,
-  //   bool useRootNavigator = true,
-  //   RouteSettings? routeSettings,
-  // }) => showDialog(
-  //     context: context,
-  //     barrierDismissible: barrierDismissible,
-  //     barrierColor: barrierColor,
-  //     barrierLabel: barrierLabel,
-  //     useRootNavigator: useRootNavigator,
-  //     routeSettings: routeSettings,
-  //     builder: (BuildContext context) {
-  //       return this;
-  //     },
-  //   );
-  }
-
 
