@@ -41,6 +41,44 @@ extension WidgetExt on Widget {
     routeSettings: routeSettings,
   );
 
+  ///showCupertinoModalPopup
+  toShowCupertinoModalPopup({
+    required BuildContext context,
+    ImageFilter? filter,
+    Color barrierColor = kCupertinoModalBarrierColor,
+    bool barrierDismissible = true,
+    bool useRootNavigator = true,
+    bool? semanticsDismissible,
+    RouteSettings? routeSettings,
+  }) => showCupertinoModalPopup(
+    context: context,
+    builder: (context) => this,
+    filter: filter,
+    barrierColor: barrierColor,
+    barrierDismissible: barrierDismissible,
+    semanticsDismissible: semanticsDismissible,
+    routeSettings: routeSettings,
+  );
+
+  ///正面弹窗
+  toShowDialog({
+    required BuildContext context,
+    bool barrierDismissible = true,
+    Color? barrierColor = Colors.black54,
+    String? barrierLabel,
+    bool useSafeArea = true,
+    bool useRootNavigator = true,
+    RouteSettings? routeSettings,
+  }) => showDialog(
+    context: context,
+    builder: (context) => this,
+    barrierColor: barrierColor,
+    barrierDismissible: barrierDismissible,
+    barrierLabel: barrierLabel,
+    useSafeArea: useSafeArea,
+    routeSettings: routeSettings,
+  );
+
   ///底部弹窗
   toShowModalBottomSheet({
     required BuildContext context,
@@ -70,44 +108,7 @@ extension WidgetExt on Widget {
     routeSettings: routeSettings,
     transitionAnimationController: transitionAnimationController,
   );
-
-  ///正面弹窗
-  toShowDialog({
-    required BuildContext context,
-    bool barrierDismissible = true,
-    Color? barrierColor = Colors.black54,
-    String? barrierLabel,
-    bool useSafeArea = true,
-    bool useRootNavigator = true,
-    RouteSettings? routeSettings,
-  }) => showDialog(
-    context: context,
-    builder: (context) => this,
-    barrierColor: barrierColor,
-    barrierDismissible: barrierDismissible,
-    barrierLabel: barrierLabel,
-    useSafeArea: useSafeArea,
-    routeSettings: routeSettings,
-  );
-
-  ///showCupertinoModalPopup
-  toShowCupertinoModalPopup({
-    required BuildContext context,
-    ImageFilter? filter,
-    Color barrierColor = kCupertinoModalBarrierColor,
-    bool barrierDismissible = true,
-    bool useRootNavigator = true,
-    bool? semanticsDismissible,
-    RouteSettings? routeSettings,
-  }) => showCupertinoModalPopup(
-    context: context,
-    builder: (context) => this,
-    filter: filter,
-    barrierColor: barrierColor,
-    barrierDismissible: barrierDismissible,
-    semanticsDismissible: semanticsDismissible,
-    routeSettings: routeSettings,
-  );
+  
 }
 
 extension ScrollViewExt on ScrollView {
