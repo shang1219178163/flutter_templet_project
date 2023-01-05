@@ -7,7 +7,6 @@
 //
 
 
-import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
@@ -90,6 +89,25 @@ extension WidgetExt on Widget {
     useSafeArea: useSafeArea,
     routeSettings: routeSettings,
   );
+
+  ///showCupertinoModalPopup
+  toShowCupertinoModalPopup({
+    required BuildContext context,
+    ImageFilter? filter,
+    Color barrierColor = kCupertinoModalBarrierColor,
+    bool barrierDismissible = true,
+    bool useRootNavigator = true,
+    bool? semanticsDismissible,
+    RouteSettings? routeSettings,
+  }) => showCupertinoModalPopup(
+    context: context,
+    builder: (context) => this,
+    filter: filter,
+    barrierColor: barrierColor,
+    barrierDismissible: barrierDismissible,
+    semanticsDismissible: semanticsDismissible,
+    routeSettings: routeSettings,
+  );
 }
 
 extension ScrollViewExt on ScrollView {
@@ -102,16 +120,15 @@ extension ScrollViewExt on ScrollView {
     Radius radius = CupertinoScrollbar.defaultRadius,
     radiusWhileDragging = CupertinoScrollbar.defaultRadiusWhileDragging,
     ScrollNotificationPredicate? notificationPredicate,
-  }) =>
-      CupertinoScrollbar(
-        key: key,
-        child: this,
-        controller: controller,
-        isAlwaysShown: isAlwaysShown,
-        thickness: thickness,
-        radius: radius,
-        notificationPredicate: notificationPredicate ?? defaultScrollNotificationPredicate,
-      );
+  }) => CupertinoScrollbar(
+    key: key,
+    child: this,
+    controller: controller,
+    isAlwaysShown: isAlwaysShown,
+    thickness: thickness,
+    radius: radius,
+    notificationPredicate: notificationPredicate ?? defaultScrollNotificationPredicate,
+  );
 }
 
 extension ListTileExt on ListTile {

@@ -46,8 +46,7 @@ extension RichTextExt on RichText{
         ..onTap = () {
           onTap("$prefix$e$suffix", linkMap?["$prefix$e$suffix"]);
         },
-    ))
-        .toList();
+    )).toList();
     return textSpans;
   }
 

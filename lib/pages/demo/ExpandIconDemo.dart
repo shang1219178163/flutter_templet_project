@@ -92,7 +92,7 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
               Tuple2(List.generate(8, (index) => "item3_$index"), 3),
               Tuple2(List.generate(8, (index) => "item4_$index"), 4),
             ],
-            foldCount: 2,
+            foldCount: 13,
             isVisible: _isVisible,
             onValueChanged: (row, index, indexs){
               ddlog("${row}, ${index}, ${indexs}");
@@ -166,11 +166,11 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
             child:
               Column(
                 children: [
-                  SizedBox(height:5),
+                  SizedBox(height: 5),
                   buildListViewHorizontal(titles: List.generate(8, (index) => "item4_$index")),
-                  SizedBox(height:5),
+                  SizedBox(height: 5),
                   buildListViewHorizontal(titles: List.generate(8, (index) => "item5_$index")),
-                  SizedBox(height:5),
+                  SizedBox(height: 5),
                 ]
               ),
           ),
@@ -207,7 +207,7 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
         //     });
         //   }
         // ),
-        top: Container(
+        header: Container(
           color: Colors.orange,
           // height: 50,
           child: Column(

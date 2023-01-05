@@ -15,13 +15,13 @@ class VisibleContainer extends StatefulWidget {
   VisibleContainer({
     Key? key,
     required this.isVisible,
-    this.top,
+    this.header,
     required this.body,
     this.indicator}) : super(key: key);
 
   late bool isVisible;
 
-  final Widget? top;
+  final Widget? header;
 
   final Widget body;
 
@@ -39,7 +39,7 @@ class _VisibleContainerState extends State<VisibleContainer> {
       // color: Colors.green,
       child: Column(
         children: [
-          if (widget.top != null) widget.top!,
+          if (widget.header != null) widget.header!,
           Visibility(
             visible: widget.isVisible,
             child: widget.body,

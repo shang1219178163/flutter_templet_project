@@ -10,28 +10,10 @@
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/extension/widget_extension.dart';
 
 
 extension AlertDialogExt on AlertDialog{
-
-  ///showDialog
-  void toShowCupertinoDialog({
-    required BuildContext context,
-    bool barrierDismissible = true,
-    Color? barrierColor = Colors.black54,
-    String? barrierLabel,
-    bool useSafeArea = true,
-    bool useRootNavigator = true,
-    RouteSettings? routeSettings,
-  }) => showDialog(
-    context: context,
-    builder: (context) => this,
-    barrierColor: barrierColor,
-    barrierDismissible: barrierDismissible,
-    barrierLabel: barrierLabel,
-    useSafeArea: useSafeArea,
-    routeSettings: routeSettings,
-  );
 
   ///按平台弹出不同样式
   static void toShowAlert({
@@ -50,8 +32,7 @@ extension AlertDialogExt on AlertDialog{
             callback(e);
           }, child: Text(e),)).toList()
           ,
-        )
-        .toShowCupertinoDialog(context: context);
+        ).toShowDialog(context: context);
 
         break;
       default:
@@ -59,28 +40,14 @@ extension AlertDialogExt on AlertDialog{
         CupertinoAlertDialog(
           title: title,
           content: content,
-          actions: actionTitles.map((e) => TextButton(onPressed: (){
-            callback(e);
-          }, child: Text(e),)).toList()
-          ,
-        )
-            .toShowCupertinoDialog(context: context);
+          actions: actionTitles.map((e) => TextButton(
+            onPressed: (){
+              callback(e);
+            },
+            child: Text(e),)).toList(),
+        ).toShowDialog(context: context);
         break;
     }
-  }
-}
-
-extension CupertinoAlertDialogExt on CupertinoAlertDialog{
-
-  ///showDialog
-  void toShowCupertinoDialog({required BuildContext context}){
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-        return this;
-      },
-    );
   }
 }
 

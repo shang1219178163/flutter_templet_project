@@ -141,7 +141,9 @@ class FoldMenu extends StatefulWidget {
     required this.onValueChanged,
     this.itemWidth = 100,
     this.foldCount = 0,
-    this.indicator}) : super(key: key);
+    this.indicator
+  }) : assert(children.length > foldCount, 'children 个数必须大于 foldCount'),
+        super(key: key);
 
   late bool isVisible;
 

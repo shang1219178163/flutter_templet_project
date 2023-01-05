@@ -119,8 +119,8 @@ class RenderExpandedHitTestArea extends RenderBox with RenderObjectWithChildMixi
 
   @override
   void paint(PaintingContext context, Offset offset) {
-    if (child != null) {
-      final BoxParentData childParentData = child!.parentData as BoxParentData;
+    if (child?.parentData is BoxParentData) {
+      BoxParentData childParentData = child?.parentData as BoxParentData;
       context.paintChild(child!, childParentData.offset + offset);
     }
   }

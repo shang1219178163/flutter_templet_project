@@ -10,7 +10,7 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/NNPickerTooBar.dart';
-import 'package:flutter_templet_project/extension/actionSheet_extension.dart';
+import 'package:flutter_templet_project/extension/bottomSheet_extension.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 
 extension BuildContextExt on BuildContext {
@@ -81,7 +81,7 @@ extension BuildContextExt on BuildContext {
   get devicePixelRatio => mediaQuery.devicePixelRatio;
 
   // 有刘海的屏幕:44 没有刘海的屏幕为20
-  get statusBarHeight => mediaQuery.padding.top;
+  get statusBarHeight => mediaQuery.padding.header;
   // 有刘海的屏幕:34 没有刘海的屏幕0
   get bottomHeight => mediaQuery.padding.bottom;
 
@@ -226,22 +226,21 @@ extension BuildContextExt on BuildContext {
             height: 216,
             color: Colors.white,
             child: CupertinoDatePicker(
-                mode: mode ?? CupertinoDatePickerMode.date,
-                initialDateTime: initialDateTime,
-                onDateTimeChanged: (val) {
-                  dateTime = val;
-                  // ddlog(val);
-                }),
+              mode: mode ?? CupertinoDatePickerMode.date,
+              initialDateTime: initialDateTime,
+              onDateTimeChanged: (val) {
+                dateTime = val;
+              }),
           ),
         ],
       ),
     );
 
     return showModalBottomSheet(
-        context: this,
-        builder: (BuildContext context) {
-          return widget;
-        }
+      context: this,
+      builder: (BuildContext context) {
+        return widget;
+      }
     );
   }
 
