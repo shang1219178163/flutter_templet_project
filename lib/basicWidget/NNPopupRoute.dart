@@ -10,6 +10,14 @@
 import 'package:flutter/material.dart';
 
 class NNPopupRoute<T> extends PopupRoute<T> {
+
+  NNPopupRoute({
+    this.backgroudColor,
+    this.alignment = Alignment.center,
+    required this.onClick,
+    required this.child
+  });
+
   @override
   Color? get barrierColor => null;
 
@@ -22,16 +30,18 @@ class NNPopupRoute<T> extends PopupRoute<T> {
   @override
   Duration get transitionDuration => Duration(seconds: 0);
 
-  /// backgroudView Color
-  final Color? backgroudViewColor;
+  /// backgroudColor
+  final Color? backgroudColor;
+
   /// child'alignment, default value: [Alignment.center]
   final Alignment alignment;
+
   /// child
   final Widget child;
+
   /// backgroudView action
   final Function onClick;
 
-  NNPopupRoute({this.backgroudViewColor, this.alignment = Alignment.center, required this.onClick, required this.child});
 
   @override
   Widget buildPage(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
@@ -43,9 +53,9 @@ class NNPopupRoute<T> extends PopupRoute<T> {
         child: Stack(
           children: [
             Container(
-              width: screenSize.width,
-              height: screenSize.height,
-              color: backgroudViewColor ?? Colors.black.withOpacity(0.3),
+              // width: screenSize.width,
+              // height: screenSize.height,
+              color: backgroudColor ?? Colors.black.withOpacity(0.3),
             ),
             SafeArea(
               child: Align(

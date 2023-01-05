@@ -9,6 +9,7 @@ import 'package:flutter_templet_project/basicWidget/NNUserPrivacy.dart';
 import 'package:flutter_templet_project/basicWidget/NNWebView.dart';
 import 'package:flutter_templet_project/basicWidget/NNPopupRoute.dart';
 import 'package:flutter_templet_project/basicWidget/NNAlertDialog.dart';
+import 'package:flutter_templet_project/extension/buildContext_extension.dart';
 
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/richText_extension.dart';
@@ -58,7 +59,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
 3、更简洁更流畅，使用起来更快;
 4、修复一些软件在使用时自动退出bug;
 5、新增加了分类查看功能;
-          """;
+""";
 
   final title1 = "曼德拉《漫漫人生路》";
   final message1 = """
@@ -68,15 +69,33 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
 不要为自己的苟且而得意洋洋;
 不要嘲讽那些比自己更勇敢、更有热量的人们。
 我们可以卑微如尘土，不可扭曲如蛆虫。
-——曼德拉《漫漫人生路》
-""";
+——曼德拉《漫漫人生路》""";
 
   Object? sex = 1;
+
+  List<Alignment> alignments = [
+    Alignment.topLeft,
+    Alignment.topCenter,
+    Alignment.topRight,
+    Alignment.centerLeft,
+    Alignment.center,
+    Alignment.centerRight,
+    Alignment.bottomLeft,
+    Alignment.bottomCenter,
+    Alignment.bottomRight,
+  ];
+
 
   Map<String, Widget> map = {
     'topCenter': Text("topCenter"),
     'Center': Text("Center"),
     'bottomCenter': Text("bottomCenter"),
+  };
+
+  Map<String, Alignment> alignmentMap = {
+    'topCenter': Alignment.topCenter,
+    'Center': Alignment.center,
+    'bottomCenter': Alignment.bottomCenter,
   };
 
   var alignment = Alignment.center;
@@ -89,41 +108,28 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
 
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
         appBar: AppBar(
           title: Text("$widget"),
           actions: [
             TextButton(
-                onPressed: () {
-                  ddlog(Icons.extension);
-                },
-                child: Icon(
-                  Icons.extension,
-                  color: Colors.white,
-                )
+              onPressed: () {
+                ddlog(Icons.extension);
+              },
+              child: Icon(
+                Icons.extension,
+                color: Colors.white,
+              )
             )
           ],
-          bottom: PreferredSize(
-            preferredSize: Size.fromHeight(45),
-            child: CupertinoSegmentedControl(
-              unselectedColor: Colors.blue,
-              selectedColor: Colors.white,
-              borderColor: Colors.transparent,
-              pressedColor: Colors.green,
-              onValueChanged: (Object value) {
-                print('onValueChanged:$value');
-              },
-              children: map,
-            ),
-          ),
+          bottom: _buildAppbarBottom(),
         ),
         body: Flow(
           delegate: TestFlowDelegate(
-              margin: EdgeInsets.all(10.0),
-              spacing: 5,
-              flowHeight: double.infinity),
+            margin: EdgeInsets.all(10.0),
+            spacing: 5,
+            flowHeight: double.infinity
+          ),
           children: titles.map((e) => OutlinedButton(
             onPressed: () {
               // ddlog(e);
@@ -132,6 +138,57 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
             child: Text('${e}_${titles.indexOf(e)}')))
           .toList(),
         ));
+  }
+
+  _buildAppbarBottom() {
+
+    return PreferredSize(
+      preferredSize: Size.fromHeight(45),
+      child: Container(
+        // color: Colors.red,
+        height: 45,
+        width: double.infinity,
+        child: ListView.separated(
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (BuildContext context, int index) {
+            Alignment e = alignments[index];
+            String name = e.toString().split('.')[1];
+
+            return Container(
+              padding: EdgeInsets.symmetric(horizontal: 5),
+              // color: index %2 == 0 ? Colors.yellow : Colors.green,
+              // child: Center(child: Text(name)),
+              child: TextButton(
+                onPressed: () {
+                  alignment = e;
+                  context.showSnackBar(SnackBar(content: Text(name)), true);
+                },
+                child: Text(name, style: TextStyle(color: Colors.white),)
+              ),
+            );
+          },
+          separatorBuilder: (BuildContext context, int index) {
+            return Divider(height: 8);
+          },
+          itemCount: alignments.length,
+        ),
+      ),
+    );
+    //
+    // return PreferredSize(
+    //   preferredSize: Size.fromHeight(45),
+    //   child: CupertinoSegmentedControl(
+    //     unselectedColor: Colors.blue,
+    //     selectedColor: Colors.white,
+    //     borderColor: Colors.transparent,
+    //     pressedColor: Colors.green,
+    //     onValueChanged: (String value) {
+    //       print('onValueChanged:$value');
+    //       alignment = alignmentMap[value] ?? Alignment.center;
+    //     },
+    //     children: map,
+    //   ),
+    // );
   }
 
   void _onPressed(int e) {
@@ -287,7 +344,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
             context: context,
             transitionDuration: Duration(milliseconds: 150),
             bodyBuilder: (context) => Container(
-              height: 50,
+              height: 150,
               width: 100,
               color: Colors.green,
               child: TextButton(
@@ -338,7 +395,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
       case 14:
         {
           Size screenSize = MediaQuery.of(context).size;
-          Size size = Size(screenSize.width - 30, 300);
+          Size size = Size(screenSize.width - 40, 300);
           Navigator.push(context,
             NNPopupRoute(
               alignment: alignment,
@@ -351,12 +408,12 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
                 // color: Colors.white,
                 // width: size.width,
                 // height: size.height,
-                // padding: EdgeInsets.only(top: 8, left: 58, bottom: 0, right: 58),
-                child: buildAlertColumn(context),
+                margin: EdgeInsets.symmetric(horizontal: 30),
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.circular((10.0)), // 圆角度
+                  borderRadius: BorderRadius.circular(10), // 圆角度
                 ),
+                child: buildAlertColumn(),
               ),
             ),
           );
@@ -377,7 +434,6 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
               },
               // child: buildAlertColumn(context, marginHor: 15),
               child: NNAlertDialog(
-                marginHor: 10,
                 title: Text(
                   title1,
                   style: TextStyle(fontWeight: FontWeight.w500),
@@ -584,36 +640,37 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
     ).toShowCupertinoDialog(context: context);
   }
   ///自约束
-  Widget buildAlertColumn(BuildContext context) {
-    Size screenSize = MediaQuery.of(context).size;
+  Widget buildAlertColumn() {
+    // Size screenSize = MediaQuery.of(context).size;
+    // double width = screenSize.width - spacingHor * 2;
 
     double spacingVer = 8;
     double spacingHor = 15;
-    double width = screenSize.width - spacingHor * 2;
 
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         Padding(
-          padding: EdgeInsets.only(
-            top: spacingVer,
-            left: spacingHor,
-            bottom: spacingVer,
-            right: spacingHor),
-          child: Text(title1),
+          padding: EdgeInsets.symmetric(
+            horizontal: spacingHor,
+            vertical: spacingVer,
+          ),
+          child: Text(title1, style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16)),
         ),
-        Padding(
+        Container(
+          // color: Colors.green,
           padding: EdgeInsets.only(
-              left: spacingHor, bottom: spacingVer, right: spacingHor),
+            left: spacingHor,
+            right: spacingHor,
+            bottom: spacingVer
+          ),
           child: Text(message1),
         ),
         Container(
-          width: MediaQuery.of(context).size.width - spacingHor * 2,
           height: 0.5,
           color: Colors.grey[400],
         ),
         Container(
-          width: MediaQuery.of(context).size.width - 60,
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -628,7 +685,9 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
                 ),
               ),
               Container(
-                  height: 55, child: VerticalDivider(color: Colors.grey[400])),
+                height: 55,
+                child: VerticalDivider(color: Colors.grey[400])
+              ),
               Expanded(
                 child: TextButton.icon(
                   onPressed: () {
@@ -702,36 +761,33 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
           leadingWidth: 100,
           leading: Container(
             child: Row(
-              children: [Icons.chevron_left, Icons.close]
-                  .map(
-                    (e) => IconButton(
-                      icon: Icon(e),
-                      iconSize: 30,
-                      // color: Theme.of(context).accentColor,
-                      onPressed: () {
-                        if (e == Icons.chevron_left) {
-                          Navigator.of(context).pop();
-                        } else if (e == Icons.close) {
-                          Navigator.of(context).pop();
-                        }
-                      },
-                    ),
-                  )
-                  .toList(),
+              children: [
+                Icons.chevron_left,
+                Icons.close
+              ].map((e) => IconButton(
+                icon: Icon(e),
+                iconSize: 30,
+                // color: Theme.of(context).accentColor,
+                onPressed: () {
+                  if (e == Icons.chevron_left) {
+                    Navigator.of(context).pop();
+                  } else if (e == Icons.close) {
+                    Navigator.of(context).pop();
+                  }
+                },
+              ),
+            ).toList(),
             ),
           ),
           actions: [
             Icons.refresh,
-          ]
-              .map(
-                (e) => IconButton(
-                  icon: Icon(e),
-                  iconSize: 30,
-                  // color: Theme.of(context).accentColor,
-                  onPressed: () {},
-                ),
-              )
-              .toList(),
+          ].map((e) => IconButton(
+              icon: Icon(e),
+              iconSize: 30,
+              // color: Theme.of(context).accentColor,
+              onPressed: () {},
+            ),
+          ).toList(),
         ),
         body: WebView(initialUrl: initialUrl));
   }
@@ -793,12 +849,18 @@ xxxx十分重视用户权利及隐私政策并严格按照相关法律法规的�
 }
 
 class TestFlowDelegate extends FlowDelegate {
-  EdgeInsets margin = EdgeInsets.zero;
-  double spacing = 8.0;
-  double flowHeight = double.infinity;
 
-  TestFlowDelegate(
-      {required this.margin, required this.spacing, required this.flowHeight});
+  TestFlowDelegate({
+    this.margin = const EdgeInsets.all(0),
+    this.spacing = 8.0,
+    this.flowHeight = double.infinity
+  });
+
+  EdgeInsets margin;
+
+  double spacing;
+
+  double flowHeight;
 
   @override
   void paintChildren(FlowPaintingContext context) {
