@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/APPThemeSettings.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:get/get.dart';
+import 'package:tuple/tuple.dart';
+
+import 'package:flutter_templet_project/APPThemeSettings.dart';
 import 'package:flutter_templet_project/pages/FirstPage.dart';
 import 'package:flutter_templet_project/pages/SecondPage.dart';
 import 'package:flutter_templet_project/pages/ThirdPage.dart';
 import 'package:flutter_templet_project/pages/FourthPage.dart';
 import 'package:flutter_templet_project/pages/BatterLevelPage.dart';
 
-
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:tuple/tuple.dart';
 
 class TabBarDemo extends StatefulWidget {
 

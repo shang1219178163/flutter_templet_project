@@ -41,7 +41,12 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
   void initState() {
     super.initState();
 
-    _tabController = TabController(length: items.length, vsync: this);
+    _tabController = TabController(length: items.length, vsync: this)
+    ..addListener(() {
+      if(!_tabController.indexIsChanging){
+        print("_tabController:${_tabController.index}");
+      }
+    });
   }
 
   @override
@@ -316,6 +321,16 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
     List<String>? items = null;
     final zz = items?[0];
     print('zz:${zz}');
+
+    final map1 = {
+      'a': 1,
+      'b': 11,
+      'c': 111
+    };
+
+    print('map: $map1');
+    print('map1: $map1');
+    print('map2: $map1');
   }
 
   getUrlParams({Map<String, dynamic> map = const {}}) {

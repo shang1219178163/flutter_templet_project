@@ -6,6 +6,7 @@ import 'package:flutter_templet_project/extension/ddlog.dart';
 /// app升级提示控件
 class AppUpgradeView extends StatefulWidget {
   const AppUpgradeView({
+    Key? key,
     required this.title,
     this.titleStyle,
     required this.content,
@@ -16,7 +17,7 @@ class AppUpgradeView extends StatefulWidget {
     this.okTextStyle,
     this.borderRadius = 15,
     this.force = false,
-  });
+  }) : super(key: key);
 
   ///
   /// 升级标题

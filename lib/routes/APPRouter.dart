@@ -28,6 +28,7 @@ import 'package:flutter_templet_project/pages/demo/ListViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MaterialBannerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ModalBarrierDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NavigationToolbarDemo.dart';
+import 'package:flutter_templet_project/pages/demo/NeumorphismDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NotificationListenerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/OverflowBarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/OverlayDemo.dart';
@@ -43,6 +44,8 @@ import 'package:flutter_templet_project/pages/demo/ShortcutsDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ShortcutsDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/StackDemo.dart';
 import 'package:flutter_templet_project/pages/demo/StatefulBuilderDemo.dart';
+import 'package:flutter_templet_project/pages/demo/TabBarDemoNew.dart';
+import 'package:flutter_templet_project/pages/demo/TabBarOnlyDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TabBarViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TransformDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ValueListenableBuilderDemo.dart';
@@ -186,6 +189,8 @@ class APPRouter {
   static const thirdPage = '/ThirdPage';
   static const fourthPage = '/FourthPage';
   static const tabBarDemo = '/TabBarDemo';
+  static const tabBarDemoNew = '/TabBarDemoNew';
+  static const tabBarOnlyDemo = '/tabBarOnlyDemo';
   static const widgetListPage = '/WidgetListPage';
   static const animatedDemo = '/AnimatedDemo';
   static const animatedWidgetDemo = '/AnimatedWidgetDemo';
@@ -362,6 +367,7 @@ class APPRouter {
   static const flexibleDemo = '/flexibleDemo';
 
   static const physicalModelDemo = '/physicalModelDemo';
+  static const neumorphismDemo = '/neumorphismDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -412,6 +418,8 @@ class AppPage {
     GetPage(name: APPRouter.thirdPage, page: () => ThirdPage(),),
     GetPage(name: APPRouter.fourthPage, page: () => FourthPage(),),
     GetPage(name: APPRouter.tabBarDemo, page: () => TabBarDemo(),),
+    GetPage(name: APPRouter.tabBarDemoNew, page: () => TabBarDemoNew(),),
+    GetPage(name: APPRouter.tabBarOnlyDemo, page: () => TabBarOnlyDemo(),),
     GetPage(name: APPRouter.textlessDemo, page: () => TextlessDemo(),),
     GetPage(name: APPRouter.alertDialogDemo, page: () => AlertDialogDemo(),),
     GetPage(name: APPRouter.alertSheetDemo, page: () => AlertSheetDemo(),),
@@ -569,6 +577,7 @@ class AppPage {
     GetPage(name: APPRouter.flexDemo, page: () => FlexDemo(),),
     GetPage(name: APPRouter.flexibleDemo, page: () => FlexibleDemo(),),
     GetPage(name: APPRouter.physicalModelDemo, page: () => PhysicalModelDemo(),),
+    GetPage(name: APPRouter.neumorphismDemo, page: () => NeumorphismDemo(),),
 
 
   ];
