@@ -86,7 +86,7 @@ class _TabBarOnlyDemoState extends State<TabBarOnlyDemo> with SingleTickerProvid
     );
   }
 
-   Widget buildItem(String e) {
+  Widget buildItem(String e) {
     if (titles.indexOf(e) != 1){
       return Tab(text: e);
     }
@@ -104,4 +104,5 @@ class _TabBarOnlyDemoState extends State<TabBarOnlyDemo> with SingleTickerProvid
     _tabController.index = initialIndex;
   }
 }
+
 

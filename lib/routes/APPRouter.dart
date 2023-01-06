@@ -44,6 +44,7 @@ import 'package:flutter_templet_project/pages/demo/ShortcutsDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ShortcutsDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/StackDemo.dart';
 import 'package:flutter_templet_project/pages/demo/StatefulBuilderDemo.dart';
+import 'package:flutter_templet_project/pages/demo/TabBarCustomDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TabBarDemoNew.dart';
 import 'package:flutter_templet_project/pages/demo/TabBarOnlyDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TabBarViewDemo.dart';
@@ -191,6 +192,7 @@ class APPRouter {
   static const tabBarDemo = '/TabBarDemo';
   static const tabBarDemoNew = '/TabBarDemoNew';
   static const tabBarOnlyDemo = '/tabBarOnlyDemo';
+  static const tabBarCustomDemo = '/tabBarCustomDemo';
   static const widgetListPage = '/WidgetListPage';
   static const animatedDemo = '/AnimatedDemo';
   static const animatedWidgetDemo = '/AnimatedWidgetDemo';
@@ -420,6 +422,7 @@ class AppPage {
     GetPage(name: APPRouter.tabBarDemo, page: () => TabBarDemo(),),
     GetPage(name: APPRouter.tabBarDemoNew, page: () => TabBarDemoNew(),),
     GetPage(name: APPRouter.tabBarOnlyDemo, page: () => TabBarOnlyDemo(),),
+    GetPage(name: APPRouter.tabBarCustomDemo, page: () => TabBarCustomDemo(),),
     GetPage(name: APPRouter.textlessDemo, page: () => TextlessDemo(),),
     GetPage(name: APPRouter.alertDialogDemo, page: () => AlertDialogDemo(),),
     GetPage(name: APPRouter.alertSheetDemo, page: () => AlertSheetDemo(),),
