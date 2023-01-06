@@ -218,7 +218,7 @@ class APPRouter {
   static const draggableDemo = '/DraggableDemo';
   // static const animatedIconDemo = '/AnimatedIconDemo';
   static const forgetPasswordPage = '/ForgetPasswordPage';
-  static const dateTableDemo = '/DateTableDemo';
+  static const dataTableDemo = '/DataTableDemo';
   static const dataTableDemoNew = '/DataTableDemoNew';
   static const segmentControlDemo = '/SegmentControlDemo';
   static const sliderDemo = '/sliderDemo';
@@ -297,7 +297,7 @@ class APPRouter {
   static const borderDemo = '/borderDemo';
   static const clipDemo = '/clipDemo';
   static const steperConnectorDemo = '/steperConnectorDemo';
-  static const constrainedBoxDemo = '/constrainedBoxDemo';
+  static const textViewDemo = '/textViewDemo';
   static const navigationBarDemo = '/navigationBarDemo';
   static const qrCodeScannerDemo = '/qrCodeScannerDemo';
   static const qrFlutterDemo = '/qrFlutterDemo';
@@ -433,6 +433,7 @@ class AppPage {
     GetPage(name: APPRouter.settingsPage, page: () => AppSettingsPage(),),
     GetPage(name: APPRouter.draggableDemo, page: () => DraggableDemo(),),
     GetPage(name: APPRouter.containerDemo, page: () => ContainerDemo(),),
+    GetPage(name: APPRouter.dataTableDemo, page: () => DataTableDemo(),),
     GetPage(name: APPRouter.dataTableDemoNew, page: () => DataTableDemoNew(),),
     GetPage(name: APPRouter.segmentControlDemo, page: () => SegmentControlDemo(),),
     GetPage(name: APPRouter.sliderDemo, page: () => SliderDemo(),),
@@ -505,7 +506,7 @@ class AppPage {
     GetPage(name: APPRouter.borderDemo, page: () => BorderDemo(),),
     GetPage(name: APPRouter.clipDemo, page: () => ClipDemo(),),
     GetPage(name: APPRouter.steperConnectorDemo, page: () => SteperConnectorDemo(),),
-    GetPage(name: APPRouter.constrainedBoxDemo, page: () => TextViewDemo(),),
+    GetPage(name: APPRouter.textViewDemo, page: () => TextViewDemo(),),
     GetPage(name: APPRouter.navigationBarDemo, page: () => NavigationBarDemo(),),
     GetPage(name: APPRouter.qrCodeScannerDemo, page: () => QrCodeScannerDemo(),),
     GetPage(name: APPRouter.qrFlutterDemo, page: () => QrFlutterDemo(),),

@@ -96,7 +96,7 @@ var _list = [
   Tuple2(APPRouter.cupertinoFormDemo, "cupertinoFormDemo", ),
   Tuple2(APPRouter.contextMenuActionDemo, "cupertinoFormDemo", ),
 
-  Tuple2(APPRouter.dateTableDemo, "dateTableDemo", ),
+  Tuple2(APPRouter.dataTableDemo, "dateTableDemo", ),
   Tuple2(APPRouter.dataTableDemoNew, "dataTableDemoNew", ),
   Tuple2(APPRouter.draggableDemo, "draggableDemo", ),
   Tuple2(APPRouter.draggableScrollableSheetDemo, "draggableScrollableSheetDemo", ),
@@ -133,6 +133,7 @@ var _list = [
   Tuple2(APPRouter.tabBarDemo, "tabBarDemo", ),
   Tuple2(APPRouter.textlessDemo, "textlessDemo", ),
   Tuple2(APPRouter.textFieldDemo, "textFieldDemo", ),
+  Tuple2(APPRouter.textViewDemo, "textViewDemo", ),
 
   Tuple2(APPRouter.layoutBuilderDemo, "layoutBuilderDemo", ),
   Tuple2(APPRouter.tableDemo, "tableDemo", ),
@@ -173,6 +174,7 @@ var _list = [
   Tuple2(APPRouter.selectableTextDemo, "文字选择", ),
   Tuple2(APPRouter.materialBannerDemo, "一个 Banner", ),
   Tuple2(APPRouter.autocompleteDemo, "自动填写", ),
+  Tuple2(APPRouter.flutterFFiTest, "ffi", ),
 
 
 ];
@@ -189,7 +191,7 @@ var _specials = [
 
   Tuple2(APPRouter.githubRepoDemo, "githubRepoDemo", ),
   Tuple2(APPRouter.hitTest, "hitTest", ),
-  Tuple2(APPRouter.constrainedBoxDemo, "constrainedBoxDemo", ),
+  Tuple2(APPRouter.textViewDemo, "textViewDemo", ),
   Tuple2(APPRouter.flutterFFiTest, "ffi", ),
   Tuple2(APPRouter.mergeImagesDemo, "图像合并", ),
   Tuple2(APPRouter.mergeNetworkImagesDemo, "网络图像合并", ),

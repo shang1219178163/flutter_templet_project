@@ -10,6 +10,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/list_extension.dart';
+import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:tuple/tuple.dart';
 
 class DataTableDemo extends StatefulWidget {
@@ -67,33 +68,30 @@ class _DataTableDemoState extends State<DataTableDemo> {
     return Scaffold(
       appBar: AppBar(
         // title: Text(widget.title ?? "$widget"),
-        title: buildSegmentedControl(context),
+        title: buildSegmentedControl(),
       ),
-      body: buildExcel(context),
+      body: buildExcel(),
     );
   }
 
   final Map<int, Widget> children = <int, Widget>{
     0: Container(
       padding: EdgeInsets.all(8),
-      child:
-          Text("Item 1", style: TextStyle(fontSize: 15, color: Colors.black)),
+      child: Text("Item 1", style: TextStyle(fontSize: 15, color: Colors.black)),
     ),
     1: Container(
       padding: EdgeInsets.all(8),
-      child:
-          Text("Item 2", style: TextStyle(fontSize: 15, color: Colors.black)),
+      child: Text("Item 2", style: TextStyle(fontSize: 15, color: Colors.black)),
     ),
     2: Container(
       padding: EdgeInsets.all(8),
-      child:
-          Text("Item 3", style: TextStyle(fontSize: 15, color: Colors.black)),
+      child: Text("Item 3", style: TextStyle(fontSize: 15, color: Colors.black)),
     ),
   };
 
   int groupValue = 0;
 
-  Widget buildSegmentedControl(BuildContext context) {
+  Widget buildSegmentedControl() {
     return CupertinoSegmentedControl<int>(
       children: children,
       borderColor: Colors.white,
@@ -107,47 +105,46 @@ class _DataTableDemoState extends State<DataTableDemo> {
     );
   }
 
-  Widget buildExcel(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.vertical,
+  Widget buildExcel() {
+    return Container(
+      // color: Colors.green,
+      padding: EdgeInsets.all(8),
       child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: DataTable(
-          sortColumnIndex: _sortColumnIndex,
-          sortAscending: _sortAscending,
-          showBottomBorder: true,
-          showCheckboxColumn: true,
-          columns: titles
-              .map((e) => DataColumn(
-                    label: Text(e.item1),
-                    onSort: (int columnIndex, bool ascending) {
-                      _changeSort(
-                          columnIndex: columnIndex, ascending: ascending);
-                    },
-                  ))
-              .toList(),
-          rows: models
-              .map((e) => DataRow(
-                    cells: [
-                      DataCell(Text('${e.name}')),
-                      DataCell(Text('${e.age}')),
-                      DataCell(Text('${e.sex}')),
-                      DataCell(Text('${e.birdthYear}')),
-                      DataCell(Text('${e.birdthMonth}')),
-                    ],
-                    selected: e.isSelected,
-                    onSelectChanged: (bool? value) {
-                      if (value == null) return;
-                      setState(() {
-                        e.isSelected = value;
-                      });
-                      ddlog(models
-                          .where((e) => e.isSelected == true)
-                          .map((e) => "${e.name}_${e.isSelected}")
-                          .toList());
-                    },
-                  ))
-              .toList(),
+        scrollDirection: Axis.vertical,
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: DataTable(
+            sortColumnIndex: _sortColumnIndex,
+            sortAscending: _sortAscending,
+            showBottomBorder: true,
+            showCheckboxColumn: true,
+            columns: titles.map((e) => DataColumn(
+              label: Text(e.item1),
+              onSort: (int columnIndex, bool ascending) {
+                _changeSort(columnIndex: columnIndex, ascending: ascending);
+              },
+            )).toList(),
+            rows: models.map((e) => DataRow(
+              cells: [
+                DataCell(Text('${e.name}')),
+                DataCell(Text('${e.age}')),
+                DataCell(Text('${e.sex}')),
+                DataCell(Text('${e.birdthYear}')),
+                DataCell(Text('${e.birdthMonth}')),
+              ],
+              selected: e.isSelected,
+              onSelectChanged: (bool? value) {
+                if (value == null) return;
+                setState(() {
+                  e.isSelected = value;
+                });
+                ddlog(models
+                    .where((e) => e.isSelected == true)
+                    .map((e) => "${e.name}_${e.isSelected}")
+                    .toList());
+              },
+            )).toList(),
+          ),
         ),
       ),
     );
@@ -227,11 +224,9 @@ class DataTableDemoNew extends StatelessWidget {
           PaginatedDataTable(
             header: Text('Header Text'),
             rowsPerPage: 3,
-            columns: titles
-                .map((e) => DataColumn(
-                      label: Text(e.item1),
-                    ))
-                .toList(),
+            columns: titles.map((e) => DataColumn(
+              label: Text(e.item1),
+            )).toList(),
             source: _DataSource(context),
           ),
         ],
