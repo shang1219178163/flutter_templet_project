@@ -8,6 +8,8 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:tuple/tuple.dart';
+
 import 'package:flutter_templet_project/Language/Property.dart';
 import 'package:flutter_templet_project/basicWidget/RadiusWidget.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
@@ -16,9 +18,7 @@ import 'package:flutter_templet_project/extension/map_extension.dart';
 
 import 'package:flutter_templet_project/extension/buildContext_extension.dart';
 import 'package:flutter_templet_project/uti/Singleton.dart';
-import 'package:tuple/tuple.dart';
-
-import '../R.dart';
+import 'package:flutter_templet_project/uti/R.dart';
 
 
 class TestPage extends StatefulWidget {
@@ -56,7 +56,7 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
           flexibleSpace: Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: NetworkImage(R.imgUrls[5]),
+                image: NetworkImage(R.image.imgUrls[5]),
                 fit: BoxFit.cover,
               ),
             ),

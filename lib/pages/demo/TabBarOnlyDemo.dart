@@ -28,15 +28,13 @@ class _TabBarOnlyDemoState extends State<TabBarOnlyDemo> with SingleTickerProvid
   /// 当前索引
   int currentIndex = 0;
 
-  List<String> items = List.generate(6, (index) => 'item_$index').toList();
-
-  var titles = ["splitMapJoin", "1", "2", "3", "4", "5", "6", "7"];
+  List<String> titles = List.generate(9, (index) => 'item_$index').toList();
 
   @override
   void initState() {
     super.initState();
 
-    _tabController = TabController(length: items.length, vsync: this)
+    _tabController = TabController(length: titles.length, vsync: this)
       ..addListener(() {
         if(!_tabController.indexIsChanging){
           print("_tabController:${_tabController.index}");
@@ -69,7 +67,8 @@ class _TabBarOnlyDemoState extends State<TabBarOnlyDemo> with SingleTickerProvid
           bottom: TabBar(
             controller: _tabController,
             isScrollable: true,
-            tabs: List.generate(6, (index) => Tab(text: 'item_$index')).toList(),
+            // tabs: titles.map((e) => Tab(text: e,)).toList(),
+            tabs: titles.map((e) => buildItem(e)).toList(),
             // indicatorSize: TabBarIndicatorSize.label,
             // indicatorPadding: EdgeInsets.only(left: 6, right: 6),
             indicator: UnderlineTabIndicator(
@@ -87,6 +86,18 @@ class _TabBarOnlyDemoState extends State<TabBarOnlyDemo> with SingleTickerProvid
     );
   }
 
+   Widget buildItem(String e) {
+    if (titles.indexOf(e) != 1){
+      return Tab(text: e);
+    }
+    final url = currentIndex == _tabController.index ? R.image.imgUrls[1] : R.image.imgUrls[0];
+    return Tab(
+      child: FadeInImage(
+        image: NetworkImage(url),
+        placeholder: AssetImage("images/flutter_logo.png"),
+      ),
+    );
+  }
 
   onDone() {
     print("onDone");

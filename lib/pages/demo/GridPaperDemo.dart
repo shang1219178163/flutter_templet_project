@@ -10,7 +10,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/R.dart';
+import 'package:flutter_templet_project/uti/R.dart';
 
 
 class GridPaperDemo extends StatelessWidget {
@@ -25,7 +25,7 @@ class GridPaperDemo extends StatelessWidget {
   }
 
   Widget _contentWidget() {
-    final items = R.imgUrls.map((e) => Image.network(
+    final items = R.image.imgUrls.map((e) => Image.network(
         e,
         scale: 1,
         fit: BoxFit.cover)).toList();
@@ -48,7 +48,7 @@ class GridPaperDemo extends StatelessWidget {
               trailing: Text("trailing"),
             ),
             child: Image.network(
-              R.imgUrls[6],
+              R.image.imgUrls[6],
               scale: 1,
               fit: BoxFit.cover
             ),
@@ -60,7 +60,7 @@ class GridPaperDemo extends StatelessWidget {
             subdivisions: 3,//测网格分割数,包含自身
             // color: Colors.transparent,
             child: Image.network(
-              R.imgUrls[0],
+              R.image.imgUrls[0],
               scale: 1,
               fit: BoxFit.cover
             ),

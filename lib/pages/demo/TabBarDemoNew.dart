@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:tuple/tuple.dart';
 
 import 'package:flutter_templet_project/APPThemeSettings.dart';
