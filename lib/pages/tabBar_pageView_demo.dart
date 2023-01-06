@@ -288,7 +288,7 @@ var _list = [
   Tuple2(APPRouter.cupertinoFormDemo, "cupertinoFormDemo", ),
   Tuple2(APPRouter.contextMenuActionDemo, "cupertinoFormDemo", ),
 
-  Tuple2(APPRouter.dateTableDemo, "dateTableDemo", ),
+  Tuple2(APPRouter.dataTableDemo, "dateTableDemo", ),
   Tuple2(APPRouter.draggableDemo, "draggableDemo", ),
   Tuple2(APPRouter.draggableScrollableSheetDemo, "draggableScrollableSheetDemo", ),
 

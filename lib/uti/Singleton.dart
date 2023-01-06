@@ -20,3 +20,24 @@ class Singleton {
   static Singleton getInstance() => _instance;
 
 }
+
+
+class SharedInstance {
+  // 私有构造函数
+  SharedInstance._();
+
+  // 静态私有成员，没有初始化
+  static SharedInstance? _instance;
+
+  // 静态、同步、私有访问点
+  static SharedInstance _sharedInstance() {
+    _instance ??= SharedInstance._();
+    return _instance!;
+  }
+
+  // 单例公开访问点
+  factory SharedInstance() => _sharedInstance();
+
+  static SharedInstance? get instance => _sharedInstance();
+
+}

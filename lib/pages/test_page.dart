@@ -15,6 +15,7 @@ import 'package:flutter_templet_project/extension/string_extension.dart';
 import 'package:flutter_templet_project/extension/map_extension.dart';
 
 import 'package:flutter_templet_project/extension/buildContext_extension.dart';
+import 'package:flutter_templet_project/uti/Singleton.dart';
 import 'package:tuple/tuple.dart';
 
 import '../R.dart';
@@ -138,10 +139,17 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
     final a = true;
     final b = "nested ${a ? "strings" : "can"} be wrapped by a double quote";
 
-    final list = 'final'.split('');
-    for (final char in list) {
-      debugPrint("e: $char");
-    }
+    final shard = Singleton();
+    final shard1 = Singleton.instance;
+    final shard2 = Singleton.getInstance();
+
+    print(shard.toString());
+    print(shard1.toString());
+    print(shard2.toString());
+    print(shard == shard1);
+    print(shard1 == shard2);
+    print(shard == shard2);
+
   }
 
   Wrap buildWrap() {

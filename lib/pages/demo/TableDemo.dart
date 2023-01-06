@@ -31,13 +31,12 @@ class _TableDemoState extends State<TableDemo> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
       ),
-      body: buildBody(context),
+      body: buildBody(),
     );
   }
 
-  Widget buildBody(BuildContext context) {
-    return
-    Table(
+  Widget buildBody() {
+    return Table(
       columnWidths: <int, TableColumnWidth>{
         0: IntrinsicColumnWidth(),
         1: FlexColumnWidth(80),
@@ -54,24 +53,24 @@ class _TableDemoState extends State<TableDemo> {
   }
 
   List<TableRow> _renderList() {
-    List titleList = ['aaaaaaaa', 'bbbb', 'ccccccccc', 'ddd', 'ee'];
-    List<TableRow> list = [];
-    for (var i = 0; i < titleList.length; i++) {
-      list.add(
-          TableRow(
-              children: [
-                Container(
-                  padding: EdgeInsets.all(12),
-                  child: Text(titleList[i]),
-                ),
-                Container(
-                  padding: EdgeInsets.all(12),
-                  child: Text(i % 2 == 0 ? 'content' : 'contentcontentcontentcontentcontentcontentcontentcontent'),
-                )
-              ]
-          )
-      );
-    }
-    return list;
+    List titles = ['a', 'b'*2, 'c'*4, 'd'*8, 'e'*16];
+
+    return titles.map((e) => TableRow(
+      children: [
+        Container(
+          padding: EdgeInsets.all(8),
+          child: Text(e),
+        ),
+        Container(
+          padding: EdgeInsets.all(8),
+          child: Text(titles.indexOf(e) % 2 == 0 ? 'content' : 'content'*13),
+        ),
+        Container(
+          padding: EdgeInsets.all(8),
+          child: Text(titles.indexOf(e) % 2 == 0 ? 'three' : 'three'*13),
+        ),
+      ]
+    )).toList();
+
   }
 }

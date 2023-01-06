@@ -12,6 +12,15 @@ import 'package:flutter_templet_project/extension/ddlog.dart';
 
 extension StringExt on String{
 
+  ///运算符重载
+  String operator *(int value) {
+    var result = '';
+    for (var i = 0; i < value; i++) {
+      result += this;
+    }
+    return result;
+  }
+
   int get parseInt => int.parse(this);
   int? get tryParseInt => int.tryParse(this);
   double get parseDouble => double.parse(this);
