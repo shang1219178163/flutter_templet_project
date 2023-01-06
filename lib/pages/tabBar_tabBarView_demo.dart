@@ -361,6 +361,8 @@ var _list = [
   Tuple2(APPRouter.sliverFamilyDemo, "SliverFamilyDemo", ),
 
   Tuple2(APPRouter.tabBarDemo, "tabBarDemo", ),
+  Tuple2(APPRouter.tabBarDemoNew, "tabBarDemoNew", ),
+  Tuple2(APPRouter.tabBarOnlyDemo, "tabBarOnlyDemo", ),
   Tuple2(APPRouter.textlessDemo, "textlessDemo", ),
   Tuple2(APPRouter.textFieldDemo, "textFieldDemo", ),
 
@@ -475,11 +477,12 @@ var _customs = [
   Tuple2(APPRouter.hudProgressDemo, "HudProgressDemo", ),
   Tuple2(APPRouter.localNotifationDemo, "localNotifationDemo", ),
   Tuple2(APPRouter.locationPopView, "locationPopView", ),
-  Tuple2(APPRouter.numberStepperDemo, "NumberStepperDemo", ),
-  Tuple2(APPRouter.numberFormatDemo, "numberFormatDemo", ),
+  Tuple2(APPRouter.numberStepperDemo, "商品计数器", ),
+  Tuple2(APPRouter.numberFormatDemo, "数字格式化", ),
   Tuple2(APPRouter.steperConnectorDemo, "steperConnectorDemo", ),
   Tuple2(APPRouter.customSwipperDemo, "自定义轮播", ),
   Tuple2(APPRouter.carouselSliderDemo, "自定义轮播", ),
+  Tuple2(APPRouter.neumorphismDemo, "拟物按钮", ),
 
 ];
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
-import 'package:flutter_templet_project/R.dart';
+import 'package:flutter_templet_project/uti/R.dart';
 import 'package:flutter_templet_project/basicWidget/page_indicator_widget.dart';
 import 'package:flutter_templet_project/extension/buildContext_extension.dart';
 
@@ -21,7 +21,7 @@ class _FlutterSwiperIndicatorDemoState extends State<FlutterSwiperIndicatorDemo>
 
   BorderRadius borderRadius = BorderRadius.all(Radius.circular(8));
 
-  final items = R.imgUrls;
+  final items = R.image.imgUrls;
 
   @override
   Widget build(BuildContext context) {

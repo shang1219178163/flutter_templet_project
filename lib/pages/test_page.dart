@@ -8,6 +8,8 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:tuple/tuple.dart';
+
 import 'package:flutter_templet_project/Language/Property.dart';
 import 'package:flutter_templet_project/basicWidget/RadiusWidget.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
@@ -16,9 +18,7 @@ import 'package:flutter_templet_project/extension/map_extension.dart';
 
 import 'package:flutter_templet_project/extension/buildContext_extension.dart';
 import 'package:flutter_templet_project/uti/Singleton.dart';
-import 'package:tuple/tuple.dart';
-
-import '../R.dart';
+import 'package:flutter_templet_project/uti/R.dart';
 
 
 class TestPage extends StatefulWidget {
@@ -41,7 +41,12 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
   void initState() {
     super.initState();
 
-    _tabController = TabController(length: items.length, vsync: this);
+    _tabController = TabController(length: items.length, vsync: this)
+    ..addListener(() {
+      if(!_tabController.indexIsChanging){
+        print("_tabController:${_tabController.index}");
+      }
+    });
   }
 
   @override
@@ -51,7 +56,7 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
           flexibleSpace: Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: NetworkImage(R.imgUrls[5]),
+                image: NetworkImage(R.image.imgUrls[5]),
                 fit: BoxFit.cover,
               ),
             ),
@@ -316,6 +321,16 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
     List<String>? items = null;
     final zz = items?[0];
     print('zz:${zz}');
+
+    final map1 = {
+      'a': 1,
+      'b': 11,
+      'c': 111
+    };
+
+    print('map: $map1');
+    print('map1: $map1');
+    print('map2: $map1');
   }
 
   getUrlParams({Map<String, dynamic> map = const {}}) {

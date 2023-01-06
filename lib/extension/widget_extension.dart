@@ -108,7 +108,34 @@ extension WidgetExt on Widget {
     routeSettings: routeSettings,
     transitionAnimationController: transitionAnimationController,
   );
-  
+
+  /// 加拟物风格
+  addNeumorphism({
+    double borderRadius = 10.0,
+    Offset offset = const Offset(5, 5),
+    double blurRadius = 10,
+    Color topShadowColor = Colors.white60,
+    Color bottomShadowColor = const Color(0x26234395),
+  }) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
+        boxShadow: [
+          BoxShadow(
+            offset: offset,
+            blurRadius: blurRadius,
+            color: bottomShadowColor,
+          ),
+          BoxShadow(
+            offset: Offset(-offset.dx, -offset.dy),
+            blurRadius: blurRadius,
+            color: topShadowColor,
+          ),
+        ],
+      ),
+      child: this,
+    );
+  }
 }
 
 extension ScrollViewExt on ScrollView {

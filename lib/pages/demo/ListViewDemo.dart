@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/extension/scrollController_extension.dart';
 import 'package:tuple/tuple.dart';
 
+typedef onKeyCallback = void Function(BuildContext context, int index, GlobalKey key);
+
 class ListViewDemo extends StatefulWidget {
 
   final String? title;
@@ -18,6 +20,7 @@ class _ListViewDemoState extends State<ListViewDemo> {
   final _scrollController = ScrollController();
   final _scrollController1 = ScrollController();
 
+  final _globalKey = GlobalKey();
   final _globalKey2 = GlobalKey();
   final _scrollController2 = ScrollController();
 
@@ -82,42 +85,112 @@ class _ListViewDemoState extends State<ListViewDemo> {
           ),
         ],
       ),
-      // body: _buildSection(),
-      body: _buildListViewSeparated(),
-      // body: Column(
-      //   children: [
-      //     // _buildListViewSeparated(),
-      //     // _buildSection(),
-      //     _buildListViewSeparatedNew(),
-      //   ],
-      // ),
-    );
-  }
-
-  _buildSection() {
-    // final items = List.generate(3, (index) => "${index}");
-
-    return Container(
-        height: 200,
-        child: Scrollbar(
-          child: ListView(
-            scrollDirection: Axis.horizontal,
-            // controller: _scrollController1,
-            children: List.generate(9, (index) => Column(
-              children: [
-                ListTile(
-                  leading: Text('Index: $index'),
-                ),
-                Divider(),
-              ],
-            )
-            ),
-            itemExtent: 75,
+      // body: _buildListViewSeparated(),
+      body: Column(
+        children: [
+          // _buildListViewSeparated(),
+          // _buildListViewSeparatedNew(),
+          _buildListView(
+            height: 100,
+            key: _globalKey,
+            controller: _scrollController,
+              scrollDirection: Axis.horizontal,
+              onKeyCallback: (context, index, itemKey) {
+              _scrollController.JumToHorizontal(
+                key: itemKey,
+                offsetX: (MediaQuery.of(context).size.width / 2)
+              );
+            }
           ),
-        ),
+          _buildListView(
+            height: 600,
+            key: _globalKey2,
+            controller: _scrollController2,
+            scrollDirection: Axis.vertical,
+            onKeyCallback: (context, index, itemKey) {
+              // _scrollController2.scrollToItem(
+              //   itemKey: itemKey,
+              //   scrollKey: _globalKey2,
+              // );
 
+              _scrollController2.scrollToItemNew(
+                itemKey: itemKey,
+                scrollKey: _globalKey2,
+                scrollDirection: Axis.vertical,
+              );
+
+              _scrollController2.printInfo();
+            }
+          ),
+        ],
+      ),
     );
   }
+
+
+  _buildListView({
+    required GlobalKey key,
+    required ScrollController? controller,
+    required onKeyCallback onKeyCallback,
+    Axis scrollDirection = Axis.vertical,
+    bool addToSliverBox = false,
+    IndexedWidgetBuilder? itemBuilder,
+    required double height,
+    double gap = 8,
+  }) {
+
+    final child = Container(
+      height: height,
+      padding: EdgeInsets.all(8),
+      child: Scrollbar(
+        isAlwaysShown: true,
+        child: ListView.separated(
+            key: key,
+            controller: controller,
+            scrollDirection: scrollDirection,
+            padding: EdgeInsets.all(0),
+            itemCount: items.length,
+            // cacheExtent: 10,
+            itemBuilder: itemBuilder != null ? itemBuilder : (context, index) {
+              final e = items[index];
+
+              GlobalKey itemKey = GlobalKey(debugLabel: e.item1);
+              return InkWell(
+                key: itemKey,
+                onTap: () {
+                  onKeyCallback(context, index, itemKey);
+                },
+                child: Container(
+                  color: Colors.green,
+                  child: e.item1.startsWith('http') ? FadeInImage(
+                      placeholder: AssetImage('images/img_placeholder.png') ,
+                      image: NetworkImage(e.item1),
+                      fit: BoxFit.cover,
+                      height: 60,
+                  ) : Container(
+                    height: 60,
+                    child: Text('Index:${e.item1}')
+                  ),
+                ),
+              );
+            },
+            separatorBuilder: (context, index) => Divider(
+              indent: gap,
+              // color: Colors.blue,
+            )
+        ),
+      ),
+    );
+
+
+    if (addToSliverBox) {
+      return SliverToBoxAdapter(
+        child: child,
+      );
+    }
+    return child;
+  }
+
 
   _buildListViewSeparated({
     bool addToSliverBox = false,
@@ -128,9 +201,11 @@ class _ListViewDemoState extends State<ListViewDemo> {
 
     final child = Container(
       height: height,
+      padding: EdgeInsets.all(8),
       child: Scrollbar(
         isAlwaysShown: true,
         child: ListView.separated(
+          key: _globalKey,
           controller: _scrollController,
           scrollDirection: Axis.horizontal,
           padding: EdgeInsets.all(0),
@@ -139,42 +214,37 @@ class _ListViewDemoState extends State<ListViewDemo> {
           itemBuilder: itemBuilder != null ? itemBuilder : (context, index) {
             final e = items[index];
 
-            final tabKey = GlobalKey(debugLabel: e.item1);
+            final itemKey = GlobalKey(debugLabel: e.item1);
             return InkWell(
-              key: tabKey,
+              key: itemKey,
               onTap: () {
                 print(e);
                 _scrollController.JumToHorizontal(
-                    key: tabKey,
+                    key: itemKey,
                     offsetX: (MediaQuery.of(context).size.width / 2)
                 );
+
+                // _scrollController.scrollToItem(
+                //   itemKey: itemKey,
+                //   scrollKey: _globalKey,
+                // );
               },
-              child: Padding(
+              child: Container(
                 padding: padding,
-                child: Container(
-                  color: Colors.green,
-                  // width: 200,
-                  child: e.item1.startsWith('http') ? FadeInImage(
-                      placeholder: AssetImage('images/img_placeholder.png') ,
-                      image: NetworkImage(e.item1),
-                      fit: BoxFit.cover,
-                      height: double.infinity
-                  ) : Center(child: Text('Index:${e.item1}')),
-                ),
+                color: Colors.green,
+                // width: 200,
+                child: e.item1.startsWith('http') ? FadeInImage(
+                    placeholder: AssetImage('images/img_placeholder.png') ,
+                    image: NetworkImage(e.item1),
+                    fit: BoxFit.cover,
+                ) : Center(child: Text('Index:${e.item1}')),
               ),
             );
           },
-          separatorBuilder: (context, index) {
-            // return Container(
-            //   width: gap,
-            //   color: Colors.blue,
-            // );
-            return Divider(
-              // height: 8,
-              indent: gap,
-              // color: Colors.blue,
-            );
-          },
+          separatorBuilder: (context, index) => Divider(
+            indent: gap,
+            // color: Colors.blue,
+          )
         ),
       ),
     );
@@ -198,6 +268,7 @@ class _ListViewDemoState extends State<ListViewDemo> {
 
     final child = Container(
       height: 600,
+      padding: EdgeInsets.all(8),
       child: ListView.separated(
         key: _globalKey2,
         controller: _scrollController2,
@@ -208,16 +279,20 @@ class _ListViewDemoState extends State<ListViewDemo> {
         itemBuilder: itemBuilder != null ? itemBuilder : (context, index) {
           final e = items[index];
 
-          final tabKey = GlobalKey(debugLabel: e.item1);
+          final itemKey = GlobalKey(debugLabel: e.item1);
           return InkWell(
-            key: tabKey,
+            key: itemKey,
             onTap: () {
               print(e);
-              _scrollController2.scrollToItem(
-                  itemKey: tabKey,
-                  scrollKey: _globalKey2,
+              // _scrollController2.scrollToItem(
+              //     itemKey: itemKey,
+              //     scrollKey: _globalKey2,
+              // );
+              _scrollController2.scrollToItemNew(
+                scrollDirection: Axis.vertical,
+                itemKey: itemKey,
+                scrollKey: _globalKey2,
               );
-
               _scrollController2.printInfo();
             },
             child: Padding(
@@ -240,20 +315,12 @@ class _ListViewDemoState extends State<ListViewDemo> {
             ),
           );
         },
-        separatorBuilder: (context, index) {
-          // return Container(
-          //   width: gap,
-          //   color: Colors.blue,
-          // );
-          return Divider(
-            // height: 8,
-            indent: gap,
-            // color: Colors.blue,
-          );
-        },
+        separatorBuilder: (context, index) => Divider(
+          indent: gap,
+          // color: Colors.blue,
+        )
       ),
     );
-
 
     if (addToSliverBox) {
       return SliverToBoxAdapter(
@@ -316,18 +383,10 @@ class ScrollWidget extends StatelessWidget {
           ),
         );
       },
-      separatorBuilder: (context, index) {
-        // return Container(
-        //   width: 8,
-        //   color: Colors.blue,
-        // );
-        return Divider(
-          // height: 8,
-          indent: 8,
-          // endIndent: 15,
-          color: Colors.blue,
-        );
-      },
+      separatorBuilder: (context, index) => Divider(
+        indent: 8,
+        // color: Colors.blue,
+      )
     );
   }
 }
