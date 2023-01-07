@@ -508,6 +508,9 @@ var _vendors = [
   Tuple2(APPRouter.svgaImageDemo, "svgaImageDemo", ),
   Tuple2(APPRouter.providerDemo, "状态管理 - provider", ),
   Tuple2(APPRouter.colorConverterDemo, "颜色转换", ),
+  Tuple2(APPRouter.wechatAssetsPickerDemo, "微信相册选择器", ),
+  Tuple2(APPRouter.wechatPhotoPickerDemo, "微信相册选择器组件封装", ),
+
 
 ];
 
