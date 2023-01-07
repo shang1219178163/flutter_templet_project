@@ -171,6 +171,7 @@ import 'package:flutter_templet_project/provider/rxDart_provider_demo.dart';
 import 'package:flutter_templet_project/provider/state_manager_demo.dart';
 
 import 'package:flutter_templet_project/vendor/popover_demo.dart';
+import 'package:flutter_templet_project/vendor/wechat_assets_picker_demo.dart';
 
 import 'package:get/get.dart';
 import 'package:flutter_templet_project/main.dart';
@@ -370,7 +371,8 @@ class APPRouter {
 
   static const physicalModelDemo = '/physicalModelDemo';
   static const neumorphismDemo = '/neumorphismDemo';
-
+  static const wechatAssetsPickerDemo = '/wechatAssetsPickerDemo';
+  static const wechatPhotoPickerDemo = '/wechatPhotoPickerDemo';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -581,6 +583,8 @@ class AppPage {
     GetPage(name: APPRouter.flexibleDemo, page: () => FlexibleDemo(),),
     GetPage(name: APPRouter.physicalModelDemo, page: () => PhysicalModelDemo(),),
     GetPage(name: APPRouter.neumorphismDemo, page: () => NeumorphismDemo(),),
+    GetPage(name: APPRouter.wechatAssetsPickerDemo, page: () => WechatAssetsPickerDemo(),),
+    GetPage(name: APPRouter.wechatPhotoPickerDemo, page: () => WechatPhotoPickerDemo(),),
 
 
   ];
