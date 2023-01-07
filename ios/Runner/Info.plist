@@ -22,6 +22,13 @@
 	<string>202111231509</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>需要您的相册权限</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
