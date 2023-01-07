@@ -218,7 +218,8 @@ class WechatPhotoPickerState extends State<WechatPhotoPicker> {
       spacing: widget.spacing,
     );
   }
-
+  
+  /// 图片区域
   photoSection({
     List<AssetEntity> selectedAssets = const [],
     int maxCount = 9,
@@ -226,53 +227,54 @@ class WechatPhotoPickerState extends State<WechatPhotoPicker> {
     double spacing = 10,
   }) {
     return LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints){
-          double itemWidth = ((constraints.maxWidth - spacing * (rowCount - 1))/rowCount).truncateToDouble();
-          // print("itemWidth: $itemWidth");
-          return Wrap(
-              spacing: spacing,
-              runSpacing: spacing,
-              children: [
-                ...selectedAssets.map((e) => Container(
-                  clipBehavior: Clip.antiAlias,
-                  decoration: widget.decoration ?? BoxDecoration(
-                    // border: Border.all(width: 2),
+      builder: (BuildContext context, BoxConstraints constraints){
+        double itemWidth = ((constraints.maxWidth - spacing * (rowCount - 1))/rowCount).truncateToDouble();
+        // print("itemWidth: $itemWidth");
+        return Wrap(
+          spacing: spacing,
+          runSpacing: spacing,
+          children: [
+            ...selectedAssets.map((e) => Container(
+              clipBehavior: Clip.antiAlias,
+              decoration: widget.decoration ?? BoxDecoration(
+                // border: Border.all(width: 2),
+                borderRadius: BorderRadius.all(Radius.circular(4)),
+              ),
+              child: FadeInImage(
+                width: itemWidth,
+                height: itemWidth,
+                placeholder: widget.placeholder,
+                image: AssetEntityImageProvider(e, isOriginal: false),
+                fit: BoxFit.cover,
+              ),
+            )).toList(),
+            if (selectedAssets.length < maxCount)
+              InkWell(
+                onTap: () {
+                  onPicker();
+                },
+                child: Container(
+                  width: itemWidth,
+                  height: itemWidth,
+                  decoration: BoxDecoration(
+                    color: Colors.black.withOpacity(0.1),
+                    // border: Border.all(width: 10),
                     borderRadius: BorderRadius.all(Radius.circular(4)),
                   ),
-                  child: FadeInImage(
-                    width: itemWidth,
-                    height: itemWidth,
-                    placeholder: widget.placeholder,
-                    image: AssetEntityImageProvider(e, isOriginal: false),
-                    fit: BoxFit.cover,
+                  child: widget.addBuilder != null ? widget.addBuilder!(context, itemWidth) : Icon(
+                    Icons.add,
+                    size: itemWidth/3,
+                    color: Colors.black.withOpacity(0.3),
                   ),
-                )).toList(),
-                if (selectedAssets.length < maxCount)
-                  InkWell(
-                    onTap: () {
-                      onPicker();
-                    },
-                    child: Container(
-                      width: itemWidth,
-                      height: itemWidth,
-                      decoration: BoxDecoration(
-                        color: Colors.black.withOpacity(0.1),
-                        // border: Border.all(width: 10),
-                        borderRadius: BorderRadius.all(Radius.circular(4)),
-                      ),
-                      child: widget.addBuilder != null ? widget.addBuilder!(context, itemWidth) : Icon(
-                        Icons.add,
-                        size: itemWidth/3,
-                        color: Colors.black.withOpacity(0.3),
-                      ),
-                    ),
-                  )
-              ]
-          );
-        }
+                ),
+              )
+          ]
+        );
+      }
     );
   }
 
+  /// 打开相册,选择媒体素材
   onPicker() async {
     List<AssetEntity>? result = widget.onPicker != null ? await widget.onPicker!() :
     await AssetPicker.pickAssets(
