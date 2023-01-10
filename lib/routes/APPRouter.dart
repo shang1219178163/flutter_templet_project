@@ -50,6 +50,7 @@ import 'package:flutter_templet_project/pages/demo/TabBarOnlyDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TabBarViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TransformDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ValueListenableBuilderDemo.dart';
+import 'package:flutter_templet_project/pages/demo/VisibilityDemo.dart';
 import 'package:flutter_templet_project/pages/demo/WrapDemo.dart';
 import 'package:flutter_templet_project/pages/demo/drawImageNineDemo.dart';
 import 'package:flutter_templet_project/pages/demo/smart_dialog_demo.dart';
@@ -375,6 +376,7 @@ class APPRouter {
   static const neumorphismDemo = '/neumorphismDemo';
   static const wechatAssetsPickerDemo = '/wechatAssetsPickerDemo';
   static const wechatPhotoPickerDemo = '/wechatPhotoPickerDemo';
+  static const visibilityDemo = '/visibilityDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -591,6 +593,7 @@ class AppPage {
     GetPage(name: APPRouter.neumorphismDemo, page: () => NeumorphismDemo(),),
     GetPage(name: APPRouter.wechatAssetsPickerDemo, page: () => WechatAssetsPickerDemo(),),
     GetPage(name: APPRouter.wechatPhotoPickerDemo, page: () => WechatPhotoPickerDemo(),),
+    GetPage(name: APPRouter.visibilityDemo, page: () => VisibilityDemo(),),
 
 
   ];

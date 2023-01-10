@@ -420,6 +420,7 @@ var _list = [
   Tuple2(APPRouter.flexDemo, "flex 布局", ),
   Tuple2(APPRouter.flexibleDemo, "flexible 布局", ),
   Tuple2(APPRouter.physicalModelDemo, "physicalModelDemo", ),
+  Tuple2(APPRouter.visibilityDemo, "visibilityDemo", ),
 
 
 ];
