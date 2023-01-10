@@ -27,6 +27,15 @@ extension ScrollControllerExt on ScrollController{
     // print('extentInside: ${scrollController.position.extentInside}');
   }
 
+  /// 滚动到
+  Future<void> scrollTo(
+      double offset, {
+        Duration duration = const Duration(milliseconds: 200),
+        Curve curve = Curves.ease,
+      }) async {
+    await this.animateTo(0, duration: duration, curve: curve, );
+  }
+
   ///水平移动
   JumToHorizontal({
     required GlobalKey key,

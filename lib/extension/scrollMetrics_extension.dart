@@ -35,7 +35,10 @@ extension ScrollMetricsExt on ScrollMetrics{
   bool get isStart => this.atEdge && this.extentBefore <= 0;
   //底部
   bool get isEnd => this.atEdge && this.extentAfter <= 0;
-
+  //滚动进度
+  double get progress => this.pixels/this.maxScrollExtent;
+  //滚动进度
+  String get progressPerecent => "${(progress*100).toInt()}%";
 }
 
 

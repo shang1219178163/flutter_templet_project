@@ -60,6 +60,7 @@ import 'package:flutter_templet_project/pages/sliver_demo/SliverAppBarDemo.dart'
 import 'package:flutter_templet_project/pages/sliver_demo/SliverPersistentHeaderDemo.dart';
 import 'package:flutter_templet_project/pages/system_color_page.dart';
 import 'package:flutter_templet_project/pages/system_icons_page.dart';
+import 'package:flutter_templet_project/pages/test_page_one.dart';
 import 'package:flutter_templet_project/provider/ProxyProvider_demo.dart';
 import 'package:flutter_templet_project/provider/provider_demo.dart';
 import 'package:flutter_templet_project/vendor/SVGAImageDemo.dart';
@@ -285,6 +286,7 @@ class APPRouter {
   static const getxStateDemo = '/getxStateDemo';
   static const responsiveColumnDemo = '/responsiveColumnDemo';
   static const testPage = '/testPage';
+  static const testPageOne = '/testPageOne';
   static const offstageDemo = '/OffstageDemo';
   static const animatedGroupDemo = '/animatedGroupDemo';
   static const bottomAppBarDemo = '/bottomAppBarDemo';
@@ -374,6 +376,7 @@ class APPRouter {
   static const wechatAssetsPickerDemo = '/wechatAssetsPickerDemo';
   static const wechatPhotoPickerDemo = '/wechatPhotoPickerDemo';
 
+
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
   // };
@@ -410,6 +413,8 @@ class AppPage {
     GetPage(name: APPRouter.homePage, page: () => MyHomePage(),),
     GetPage(name: APPRouter.tabBarTabBarViewDemo, page: () => TabBarTabBarViewDemo(),),
     GetPage(name: APPRouter.tabBarPageViewDemo, page: () => TabBarPageViewDemo(),),
+    GetPage(name: APPRouter.testPage, page: () => TestPage(),),
+    GetPage(name: APPRouter.testPageOne, page: () => TestPageOne(),),
     GetPage(name: APPRouter.loginPage, page: () => LoginPage(),
       // transition: Transition.downToUp,
     ),
@@ -497,7 +502,8 @@ class AppPage {
     GetPage(name: APPRouter.stateManagerDemo, page: () => StateManagerDemo(),),
     GetPage(name: APPRouter.getxStateDemo, page: () => GetxStateDemo(),),
     GetPage(name: APPRouter.responsiveColumnDemo, page: () => ResponsiveColumnDemo(),),
-    GetPage(name: APPRouter.testPage, page: () => TestPage(),),
+
+
     GetPage(name: APPRouter.offstageDemo, page: () => OffstageDemo(),),
     GetPage(name: APPRouter.animatedGroupDemo, page: () => AnimatedGroupDemo(),),
     GetPage(name: APPRouter.bottomAppBarDemo, page: () => BottomAppBarDemo(),),
