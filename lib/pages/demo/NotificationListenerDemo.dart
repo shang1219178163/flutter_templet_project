@@ -144,10 +144,6 @@ class NotificationCustomDemoState extends State<NotificationCustomDemo> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-  //           ElevatedButton(
-  //           onPressed: () => MyNotification("Hi").dispatch(context),
-  //           child: Text("Send Notification"),
-  //          ),
               Builder(
                 builder: (context) {
                   return ElevatedButton(

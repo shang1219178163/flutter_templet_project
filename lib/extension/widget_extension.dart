@@ -110,7 +110,7 @@ extension WidgetExt on Widget {
   );
 
   /// 加拟物风格
-  addNeumorphism({
+  toNeumorphism({
     double borderRadius = 10.0,
     Offset offset = const Offset(5, 5),
     double blurRadius = 10,

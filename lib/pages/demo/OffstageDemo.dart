@@ -40,12 +40,6 @@ class _OffstageDemoState extends State<OffstageDemo> {
       // mainAxisAlignment: MainAxisAlignment.center,
       // crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
-        Offstage(
-          offstage: _offstage,
-          child: FlutterLogo(
-            size: 150.0,
-          ),
-        ),
         Text('Flutter logo is offstage: $_offstage'),
         ElevatedButton(
           child: const Text('Toggle Offstage Value'),
@@ -54,6 +48,12 @@ class _OffstageDemoState extends State<OffstageDemo> {
               _offstage = !_offstage;
             });
           },
+        ),
+        Offstage(
+          offstage: _offstage,
+          child: FlutterLogo(
+            size: 150.0,
+          ),
         ),
         if (_offstage) ElevatedButton(
             child: const Text('Get Flutter Logo size'),
