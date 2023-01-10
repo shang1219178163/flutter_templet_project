@@ -60,8 +60,9 @@ class _OverflowBarDemoState extends State<OverflowBarDemo> {
                     children: <Widget>[
                       TextButton(child: const Text('Cancel'), onPressed: () {}),
                       TextButton(
-                          child: const Text('Really Really Cancel'),
-                          onPressed: () {}),
+                        child: const Text('Really Really Cancel'),
+                        onPressed: () {}
+                      ),
                       OutlinedButton(child: const Text('OK'), onPressed: () {}),
                     ],
                   ),

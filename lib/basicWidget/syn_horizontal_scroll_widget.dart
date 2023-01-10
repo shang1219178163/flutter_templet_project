@@ -357,20 +357,20 @@ class HorizontalScrollWidget extends StatelessWidget {
   }) : super(key: key);
 
 
-  final String? title;
-  final List<Tuple4<String, String, String, bool>> items;
+  String? title;
+  List<Tuple4<String, String, String, bool>> items;
 
-  final double width;
-  final double height;
+  double width;
+  double height;
 
-  final double gap;
+  double gap;
 
-  final bool isSwiper;
-  final double showCount;
+  bool isSwiper;
+  double showCount;
 
-  final Radius radius;
+  Radius radius;
 
-  final bool isVideo;
+  bool isVideo;
   /// 获取 item 宽
   // double get itemWidth => itemMap['${this.showCount}'] ?? 225;
   double get itemWidth{

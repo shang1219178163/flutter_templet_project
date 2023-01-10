@@ -147,7 +147,7 @@ class _NeumorphismDemoState extends State<NeumorphismDemo> {
           Text("Share")
         ]
       ),
-    ).addNeumorphism(
+    ).toNeumorphism(
         bottomShadowColor: const Color(0xFFA3B1C6),
         topShadowColor: Colors.white
     );

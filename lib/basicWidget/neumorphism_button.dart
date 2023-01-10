@@ -63,7 +63,7 @@ class NeumorphismButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(borderRadius),
         ),
         child: child,
-      ).addNeumorphism(
+      ).toNeumorphism(
           bottomShadowColor: const Color(0xFFA3B1C6),
           borderRadius: borderRadius,
           topShadowColor: Colors.white
