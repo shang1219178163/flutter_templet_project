@@ -30,6 +30,7 @@ class _ThirdPageState extends State<ThirdPage> {
   @override
   void initState() {
     super.initState();
+
     _controller = EasyRefreshController();
     _scrollController = ScrollController();
   }
@@ -39,12 +40,27 @@ class _ThirdPageState extends State<ThirdPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
+        actions: ['done',].map((e) => TextButton(
+          child: Text(e,
+            style: TextStyle(color: Colors.white),
+          ),
+          onPressed: onDone,)
+        ).toList(),
       ),
-          // body: buildListView(context),
       body: EasyRefresh(
-        child: buildListView(context),
+        controller: _controller,
+        child: buildListView(),
         onRefresh: () async {
           ddlog("onRefresh");
+          await Future.delayed(Duration(seconds: 1), () {
+            if (!mounted) {
+              return;
+            }
+            setState(() {
+              items = List<String>.generate(3, (i) => 'Item ${items.length + i}');
+            });
+            _controller.finishRefresh();
+          });
         },
         onLoad: () async {
           ddlog("onLoad");
@@ -63,29 +79,34 @@ class _ThirdPageState extends State<ThirdPage> {
     );
   }
 
+  onDone() {
+    print("onDone");
+    _controller.callRefresh();
+  }
 
-  Widget buildListView(BuildContext context) {
+  Widget buildListView({canDelete: false}) {
     return ListView.separated(
       itemCount: items.length,
       itemBuilder: (context, index) {
         final item = items[index];
 
+        final child = ListTile(
+          title: Text("$item"),
+          selected: (selectedIndex == index),
+          // trailing: selectedIndex == index ? Icon(Icons.check) : null,
+          trailing: selectedIndex == index ? Icon(Icons.check) : null,
+          onTap: (){
+            setState(() {
+              selectedIndex = index;
+            });
+            ddlog([selectedIndex, index,]);
+            ddlog([_globalKey(index).position(), _globalKey(index).size]);
+          },
+        );
+
         return Dismissible(
           key: Key(item),
-          child: ListTile(
-            title: Text("$item"),
-            selected: (selectedIndex == index),
-            // trailing: selectedIndex == index ? Icon(Icons.check) : null,
-            trailing: selectedIndex == index ? Icon(Icons.check) : null,
-
-            onTap: (){
-              setState(() {
-                selectedIndex = index;
-              });
-              ddlog([selectedIndex, index,]);
-              ddlog([_globalKey(index).position(), _globalKey(index).size]);
-            },
-          ),
+          child: child,
           onDismissed: (direction) {
             setState(() {
               items.removeAt(index);
@@ -114,7 +135,6 @@ class _ThirdPageState extends State<ThirdPage> {
       },
     );
   }
-
 
   Widget buildFavorite(BuildContext context) {
     return

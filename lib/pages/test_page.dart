@@ -51,6 +51,9 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
 
   @override
   Widget build(BuildContext context) {
+    print("_TestPageState this:${this}");
+    print("_TestPageState widget:${widget}");
+
     return Scaffold(
         appBar: AppBar(
           flexibleSpace: Container(

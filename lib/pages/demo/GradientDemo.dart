@@ -128,10 +128,11 @@ class _GradientDemoState extends State<GradientDemo> {
       _buildBox(
         text: '两种颜色 均分',
         decoration: BoxDecoration(
-            gradient: LinearGradient(
-                tileMode: this.tileMode,
-                colors: [Color(0xFFFFC125), Color(0xFFFF7F24)]
-            )
+          color: Colors.red,
+          gradient: LinearGradient(
+              tileMode: this.tileMode,
+              colors: [Color(0xFFFFC125), Color(0xFFFF7F24)]
+          )
         ),
       ),
       _buildBox(

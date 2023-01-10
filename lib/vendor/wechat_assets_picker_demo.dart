@@ -14,8 +14,9 @@ class WechatAssetsPickerDemo extends StatefulWidget {
 
 class _WechatAssetsPickerDemoState extends State<WechatAssetsPickerDemo> {
 
+  List<AssetEntity> selectedAssets = [];
+
   int maxCount = 9;
-  List<AssetEntity> entitys = [];
 
   @override
   void initState() {
@@ -31,31 +32,27 @@ class _WechatAssetsPickerDemoState extends State<WechatAssetsPickerDemo> {
             child: Text(e,
               style: TextStyle(color: Colors.white),
             ),
-            onPressed: onChoose,
+            onPressed: onPicker,
           )).toList(),
         ),
         body: Column(
           children: [
-            photoSection(entitys, rowCount: 4),
+            photoSection(items: selectedAssets, rowCount: 4),
           ],
         )
     );
   }
 
-  photoSection(List<AssetEntity>? items, {
+  photoSection({
+    List<AssetEntity> items = const [],
     int maxCount = 9,
     int rowCount = 3,
     double spacing = 10,
   }) {
-    if (items == null || items.length == 0) {
-      return SizedBox();
-    }
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints){
-        // double spacing = 10;
-        // int rowCount = 3;
         double itemWidth = ((constraints.maxWidth - spacing * (rowCount - 1))/rowCount).truncateToDouble();
-        print("itemWidth: $itemWidth");
+        // print("itemWidth: $itemWidth");
         return Wrap(
           spacing: spacing,
           runSpacing: spacing,
@@ -77,7 +74,7 @@ class _WechatAssetsPickerDemoState extends State<WechatAssetsPickerDemo> {
             if (items.length < 9)
               InkWell(
                 onTap: () {
-                  onChoose();
+                  onPicker();
                 },
                 child: Container(
                   width: itemWidth,
@@ -96,14 +93,14 @@ class _WechatAssetsPickerDemoState extends State<WechatAssetsPickerDemo> {
     );
   }
 
-  onChoose() async {
+  onPicker() async {
     final List<AssetEntity>? result = await AssetPicker.pickAssets(
         context,
         maxAssets: maxCount,
-        selectedAssets: entitys,
+        selectedAssets: selectedAssets,
     );
     print(result);
-    entitys = result ?? [];
+    selectedAssets = result ?? [];
     setState(() { });
   }
 
