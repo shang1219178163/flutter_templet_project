@@ -25,6 +25,17 @@ const Divider kDivider = Divider(
 
 
 extension WidgetExt on Widget {
+  /// 展示边框线
+  Widget toContainer({
+    Color? color,
+    Color borderColor = Colors.blue,
+  }) => Container(
+    decoration: BoxDecoration(
+      color: color,
+      border: Border.all(color: borderColor),
+    ),
+    child: this,
+  );
 
   toShowCupertinoDialog({
     required BuildContext context,
