@@ -45,7 +45,6 @@ class _BadgesDemoState extends State<BadgesDemo> {
             _directionalBadge(),
             _elevatedButtonBadge(),
             _chipWithZeroPadding(),
-            expandedBadge(),
             _badgeWithZeroPadding(),
             _badgesWithBorder(),
             _listView(),
@@ -143,17 +142,6 @@ class _BadgesDemoState extends State<BadgesDemo> {
         child: badgeChild
       ),
       child: child,
-    );
-  }
-
-  Widget expandedBadge() {
-    return Expanded(
-      child: Center(
-        child: Badge(
-          badgeContent: Text('99+'),
-          child: Icon(Icons.person, size: 30),
-        ),
-      ),
     );
   }
 
@@ -335,13 +323,16 @@ class _BadgesDemoState extends State<BadgesDemo> {
   }
 
   Widget _chipWithZeroPadding() {
-    return Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-      Text('Chip with zero padding:'),
-      Chip(
-        label: Text('Hello'),
-        padding: EdgeInsets.all(0),
-      ),
-    ]);
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Text('Chip with zero padding:'),
+        Chip(
+          label: Text('Hello'),
+          padding: EdgeInsets.all(0),
+        ),
+      ]
+    );
   }
 
   Widget _badgeWithZeroPadding() {
@@ -357,7 +348,7 @@ class _BadgesDemoState extends State<BadgesDemo> {
 
   Widget _getExampleBadge({double? padding}) {
     return Padding(
-      padding: const EdgeInsets.all(4),
+      padding: EdgeInsets.all(4),
       child: Badge(
         badgeColor: Colors.lightBlueAccent,
         borderRadius: BorderRadius.circular(20),
@@ -378,6 +369,10 @@ class _BadgesDemoState extends State<BadgesDemo> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Text('Badges with borders:'),
+          Badge(
+            badgeContent: Text('99+'),
+            child: Icon(Icons.person, size: 30),
+          ),
           Badge(
             position: BadgePosition.topEnd(top: 0, end: 2),
             elevation: 0,
@@ -452,7 +447,7 @@ class _BadgesDemoState extends State<BadgesDemo> {
   Widget _listView() {
     return Expanded(
       child: ListView.separated(
-        itemCount: 4,
+        itemCount: 3,
         separatorBuilder: (BuildContext context, int index) => Divider(),
         itemBuilder: (BuildContext context, int index) {
           switch (index) {
@@ -461,7 +456,7 @@ class _BadgesDemoState extends State<BadgesDemo> {
             case 1:
               return _listTile(title: 'Friends', badgeValue: '你我他', shape: BadgeShape.square);
             default:
-              return _listTile(title: 'Events', badgeValue: '!', shape: BadgeShape.square);
+              return _listTile(title: 'Events', badgeValue: '!', shape: BadgeShape.circle);
           }
         },
       ),
