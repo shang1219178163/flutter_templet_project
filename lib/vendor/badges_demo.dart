@@ -1,5 +1,8 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/HorizontalCell.dart';
+import 'package:flutter_templet_project/extension/color_extension.dart';
+import 'package:flutter_templet_project/extension/widget_extension.dart';
 
 class BadgesDemo extends StatefulWidget {
 
@@ -44,33 +47,60 @@ class _BadgesDemoState extends State<BadgesDemo> {
             _textBadge(),
             _directionalBadge(),
             _elevatedButtonBadge(),
-            _chipWithZeroPadding(),
-            _badgeWithZeroPadding(),
+            _chipBadge(),
+            _badgeOnly(),
             _badgesWithBorder(),
             _listView(),
+            HorizontalCell(
+              padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              title: _buildText("title"),
+              titleRight: _buildText("titleRight"),
+              subtitle: _buildText("subtitle"),
+              subtitleRight: _buildText("subtitleRight"),
+              // titleSpace: Container(
+              //   height: 20,
+              //   color: Colors.green,
+              // ),
+              right: Container(
+                width: 60,
+                height: 60,
+                color: Colors.yellow,
+              ),
+              arrow: Container(
+                padding: EdgeInsets.all(8),
+                child: Icon(
+                    Icons.arrow_forward_ios,
+                    size: 20,
+                    color: Colors.grey
+                ),
+              )
+            )
           ],
         ),
       ),
     );
   }
-
+  /// 透明度滑动组件
   _buildSlider() {
     return Row(
       children: [
         Expanded(
-          child: Slider(
-            inactiveColor: Color(0xffC0C0C0),
-            activeColor: Color(0xff21BA45),
-            divisions: 100,
-            //label: 'Admitida',
-            value: sliderVN.value,
-            min: 0.0,
-            max: 100.0,
-            onChanged: (double value) {
-              setState(() {
-                sliderVN.value = value;
-              });
-            },
+          child: StatefulBuilder(
+            builder: (context, setState) {
+              return Slider(
+                inactiveColor: Color(0xffC0C0C0),
+                activeColor: Color(0xff21BA45),
+                divisions: 100,
+                //label: 'Admitida',
+                value: sliderVN.value,
+                min: 0.0,
+                max: 100.0,
+                onChanged: (double value) {
+                  sliderVN.value = value;
+                  setState(() {});
+                },
+              );
+            }
           ),
         ),
         ValueListenableBuilder(
@@ -248,7 +278,7 @@ class _BadgesDemoState extends State<BadgesDemo> {
       ],
     );
   }
-
+  /// 购物车动作
   Widget _addRemoveCartButtons() {
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -301,7 +331,7 @@ class _BadgesDemoState extends State<BadgesDemo> {
       ),
     );
   }
-
+  /// ElevatedButton 按钮角标
   Widget _elevatedButtonBadge() {
     return Badge(
       showBadge: showElevatedButtonBadge,
@@ -317,25 +347,31 @@ class _BadgesDemoState extends State<BadgesDemo> {
             showElevatedButtonBadge = !showElevatedButtonBadge;
           });
         },
-        child: Text('Raised Button'),
+        child: Text('ElevatedButton Button'),
       ),
     );
   }
-
-  Widget _chipWithZeroPadding() {
+  /// Chip 角标
+  Widget _chipBadge() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Text('Chip with zero padding:'),
-        Chip(
-          label: Text('Hello'),
-          padding: EdgeInsets.all(0),
+        Badge(
+          badgeContent: Text(
+            '!',
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          ),
+          child: Chip(
+            label: Text('Hello'),
+            padding: EdgeInsets.all(0),
+          ),
         ),
       ]
     );
   }
 
-  Widget _badgeWithZeroPadding() {
+  Widget _badgeOnly() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
@@ -361,7 +397,7 @@ class _BadgesDemoState extends State<BadgesDemo> {
       ),
     );
   }
-
+  /// badge 带边框
   Widget _badgesWithBorder() {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 24),
@@ -370,6 +406,9 @@ class _BadgesDemoState extends State<BadgesDemo> {
         children: [
           Text('Badges with borders:'),
           Badge(
+            shape: BadgeShape.square,
+            padding: EdgeInsets.all(2),
+            borderRadius: BorderRadius.circular(8),
             badgeContent: Text('99+'),
             child: Icon(Icons.person, size: 30),
           ),
@@ -406,6 +445,27 @@ class _BadgesDemoState extends State<BadgesDemo> {
       ),
     );
   }
+
+  Widget _listView() {
+    return Expanded(
+      child: ListView.separated(
+        itemCount: 3,
+        separatorBuilder: (BuildContext context, int index) => Divider(),
+        itemBuilder: (BuildContext context, int index) {
+          switch (index) {
+            case 0:
+              return _listTile(title: 'Messages', badgeValue: '2', shape: BadgeShape.square);
+            case 1:
+              return _listTile(title: 'Friends', badgeValue: '你我他', shape: BadgeShape.square);
+            default:
+              return _listTile(title: 'Events', badgeValue: '!', shape: BadgeShape.circle);
+          }
+        },
+      ),
+    );
+  }
+
+
 
   Widget _listTile({
     required String title,
@@ -444,23 +504,8 @@ class _BadgesDemoState extends State<BadgesDemo> {
     );
   }
 
-  Widget _listView() {
-    return Expanded(
-      child: ListView.separated(
-        itemCount: 3,
-        separatorBuilder: (BuildContext context, int index) => Divider(),
-        itemBuilder: (BuildContext context, int index) {
-          switch (index) {
-            case 0:
-              return _listTile(title: 'Messages', badgeValue: '2', shape: BadgeShape.square);
-            case 1:
-              return _listTile(title: 'Friends', badgeValue: '你我他', shape: BadgeShape.square);
-            default:
-              return _listTile(title: 'Events', badgeValue: '!', shape: BadgeShape.circle);
-          }
-        },
-      ),
-    );
+  Text _buildText(String text) {
+    return Text(text, style: TextStyle(fontSize: 16));
   }
 
   Widget _directionalBadge() {
