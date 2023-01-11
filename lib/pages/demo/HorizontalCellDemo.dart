@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/HorizontalCell.dart';
+import 'package:flutter_templet_project/uti/R.dart';
 
 
 
@@ -30,29 +31,38 @@ class _HorizontalCellDemoState extends State<HorizontalCellDemo> {
           children: <Widget>[
             _buildSlider(),
             HorizontalCell(
-              padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-              title: _buildText("title"),
-              titleRight: _buildText("titleRight"),
-              subtitle: _buildText("subtitle"),
-              subtitleRight: _buildText("subtitleRight"),
-              // titleSpace: Container(
-              //   height: 20,
-              //   color: Colors.green,
-              // ),
-              right: Container(
-                width: 60,
-                height: 60,
-                color: Colors.yellow,
-              ),
-              arrow: Container(
-                padding: EdgeInsets.all(8),
-                child: Icon(
-                  Icons.arrow_forward_ios,
-                  size: 20,
-                  color: Colors.grey
+                padding: EdgeInsets.symmetric(horizontal: 12, vertical: 0),
+                // decoration: BoxDecoration(
+                //   border: Border.all(color: Colors.red),
+                //   color: Colors.green,
+                // ),
+                title: _buildText("title"),
+                titleRight: _buildText("titleRight"),
+                subtitle: _buildText("subtitle"),
+                subtitleRight: _buildText("subtitleRight"),
+                // titleSpace: Container(
+                //   height: 20,
+                //   color: Colors.green,
+                // ),
+                icon: FadeInImage(
+                  height: 60,
+                  image: NetworkImage(R.image.imgUrls[4]),
+                  placeholder: AssetImage("images/img_placeholder.png"),
                 ),
-              )
-            )
+                right: Container(
+                  width: 60,
+                  height: 60,
+                  color: Colors.yellow,
+                ),
+                arrow: Container(
+                  padding: EdgeInsets.all(8),
+                  child: Icon(
+                      Icons.arrow_forward_ios,
+                      size: 20,
+                      color: Colors.grey
+                  ),
+                )
+            ),
           ],
         ),
     );

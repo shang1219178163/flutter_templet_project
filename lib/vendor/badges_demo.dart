@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/HorizontalCell.dart';
 import 'package:flutter_templet_project/extension/color_extension.dart';
 import 'package:flutter_templet_project/extension/widget_extension.dart';
+import 'package:flutter_templet_project/uti/R.dart';
 
 class BadgesDemo extends StatefulWidget {
 
@@ -52,7 +53,11 @@ class _BadgesDemoState extends State<BadgesDemo> {
             _badgesWithBorder(),
             _listView(),
             HorizontalCell(
-              padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              padding: EdgeInsets.symmetric(horizontal: 12, vertical: 0),
+              // decoration: BoxDecoration(
+              //   border: Border.all(color: Colors.red),
+              //   color: Colors.green,
+              // ),
               title: _buildText("title"),
               titleRight: _buildText("titleRight"),
               subtitle: _buildText("subtitle"),
@@ -61,6 +66,11 @@ class _BadgesDemoState extends State<BadgesDemo> {
               //   height: 20,
               //   color: Colors.green,
               // ),
+             icon: FadeInImage(
+               height: 60,
+               image: NetworkImage(R.image.imgUrls[4]),
+               placeholder: AssetImage("images/img_placeholder.png"),
+             ),
               right: Container(
                 width: 60,
                 height: 60,
@@ -74,7 +84,8 @@ class _BadgesDemoState extends State<BadgesDemo> {
                     color: Colors.grey
                 ),
               )
-            )
+            ),
+            SizedBox(height: 8,),
           ],
         ),
       ),

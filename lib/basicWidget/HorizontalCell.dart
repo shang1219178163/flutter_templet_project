@@ -19,68 +19,92 @@ class HorizontalCell extends StatelessWidget {
     this.subtitle,
     this.subtitleRight,
     this.titleSpace = const SizedBox(height: 8),
+    this.icon,
     this.right,
     this.arrow,
     this.height,
     this.margin,
     this.padding,
     this.decoration,
+    this.separator
   }) : super(key: key);
+
 
   Text title;
   Text? titleRight;
   Text? subtitle;
   Text? subtitleRight;
   Widget titleSpace;
+
+  Widget? icon;
   Widget? right;
   Widget? arrow;
   double? height;
   EdgeInsetsGeometry? margin;
   EdgeInsetsGeometry? padding;
   Decoration? decoration;
+  Widget? separator;
+
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: height,
-      margin: margin,
-      padding: padding,
-      decoration: decoration,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Expanded(
-            child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      title,
-                      if(titleRight != null) titleRight!,
-                    ].map((e) => e.toContainer(color: ColorExt.random)).toList(),
-                  ),
-                  if (subtitle != null || subtitleRight != null) titleSpace,
-                  if (subtitle != null || subtitleRight != null) Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      if(subtitle != null) subtitle!,
-                      if(subtitleRight != null) subtitleRight!,
-                    ].map((e) => e.toContainer(color: ColorExt.random)).toList(),
-                  ),
-                ]
-            ).toContainer(color: ColorExt.random),
+    return Column(
+      children: [
+        Container(
+          height: height,
+          margin: margin,
+          padding: padding,
+          decoration: decoration,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              if(icon != null) icon!,
+              Expanded(
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        title,
+                        if(titleRight != null) titleRight!,
+                      ]
+                          // .map((e) => e.toContainer(color: ColorExt.random)).toList()
+                      ,
+                    ),
+                    if (subtitle != null || subtitleRight != null) titleSpace,
+                    if (subtitle != null || subtitleRight != null) Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        if(subtitle != null) subtitle!,
+                        if(subtitleRight != null) subtitleRight!,
+                      ]
+                          // .map((e) => e.toContainer(color: ColorExt.random)).toList()
+                      ,
+                    ),
+                  ]
+                )
+                    // .toContainer(color: ColorExt.random)
+                ,
+              ),
+              if (right != null) right!,
+              arrow ?? Container(
+                padding: const EdgeInsets.only(left: 20),
+                child: Icon(
+                    Icons.arrow_forward_ios,
+                    size: 20,
+                    color: Colors.grey
+                ),
+              ),
+            ],
           ),
-          if (right != null) right!,
-          arrow ?? Container(
-            padding: const EdgeInsets.only(left: 20),
-            child: Icon(
-                Icons.arrow_forward_ios,
-                size: 20,
-                color: Colors.grey
-            ),
-          ),
-        ],
-      ),
+        ),
+        if (separator != null) separator!,
+        // separator ?? Divider(
+        //   color: Colors.blue,
+        //   height: 1,
+        //   // indent: 10,
+        // ),
+      ],
     );
   }
 
