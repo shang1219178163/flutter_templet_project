@@ -486,6 +486,7 @@ var _customs = [
   Tuple2(APPRouter.customSwipperDemo, "自定义轮播", ),
   Tuple2(APPRouter.carouselSliderDemo, "自定义轮播", ),
   Tuple2(APPRouter.neumorphismDemo, "拟物按钮", ),
+  Tuple2(APPRouter.horizontalCellDemo, "水平 cell 布局", ),
 
 ];
 
