@@ -23,7 +23,11 @@ class SlidableDemo extends StatefulWidget {
 }
 
 class _SlidableDemoState extends State<SlidableDemo> {
-  late final SlidableController slidableController;
+  late SlidableController slidableController;
+
+  Animation<double>? _rotationAnimation;
+  Color _fabColor = Colors.blue;
+
   final List<_HomeItem> items = List.generate(20, (i) => _HomeItem(
       i,
       'Tile n°$i',
@@ -41,16 +45,13 @@ class _SlidableDemoState extends State<SlidableDemo> {
     super.initState();
   }
 
-  Animation<double>? _rotationAnimation;
-  Color _fabColor = Colors.blue;
-
-  void handleSlideAnimationChanged(Animation<double>? slideAnimation) {
+  handleSlideAnimationChanged(Animation<double>? slideAnimation) {
     setState(() {
       _rotationAnimation = slideAnimation;
     });
   }
 
-  void handleSlideIsOpenChanged(bool? isOpen) {
+  handleSlideIsOpenChanged(bool? isOpen) {
     setState(() {
       _fabColor = isOpen! ? Colors.green : Colors.blue;
     });
