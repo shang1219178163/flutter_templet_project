@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 
 class BadgesDemo extends StatefulWidget {
 
-  final String? title;
-
   BadgesDemo({ Key? key, this.title}) : super(key: key);
 
-  
+  final String? title;
+
   @override
   _BadgesDemoState createState() => _BadgesDemoState();
 }
 
 class _BadgesDemoState extends State<BadgesDemo> {
+  var sliderVN = ValueNotifier(100.0);
 
   int _counter = 0;
   bool showElevatedButtonBadge = true;
@@ -20,15 +20,13 @@ class _BadgesDemoState extends State<BadgesDemo> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 2,
+      length: 4,
       child: Scaffold(
         bottomNavigationBar: _bottomNavigationBar(),
         appBar: AppBar(
-          leading: Badge(
-            position: BadgePosition.topEnd(top: 10, end: 10),
-            badgeContent: null,
+          leading: _buildBadgeRedPoint(
             child: IconButton(
-              icon: Icon(Icons.menu),
+              icon: Icon(Icons.menu, color: Colors.black),
               onPressed: () {},
             ),
           ),
@@ -41,12 +39,12 @@ class _BadgesDemoState extends State<BadgesDemo> {
         ),
         body: Column(
           children: <Widget>[
+            _buildSlider(),
             _addRemoveCartButtons(),
             _textBadge(),
             _directionalBadge(),
             _elevatedButtonBadge(),
             _chipWithZeroPadding(),
-            expandedBadge(),
             _badgeWithZeroPadding(),
             _badgesWithBorder(),
             _listView(),
@@ -56,14 +54,94 @@ class _BadgesDemoState extends State<BadgesDemo> {
     );
   }
 
-  Widget expandedBadge() {
-    return Expanded(
-      child: Center(
-        child: Badge(
-          badgeContent: Text('99+'),
-          child: Icon(Icons.person, size: 30),
+  _buildSlider() {
+    return Row(
+      children: [
+        Expanded(
+          child: Slider(
+            inactiveColor: Color(0xffC0C0C0),
+            activeColor: Color(0xff21BA45),
+            divisions: 100,
+            //label: 'Admitida',
+            value: sliderVN.value,
+            min: 0.0,
+            max: 100.0,
+            onChanged: (double value) {
+              setState(() {
+                sliderVN.value = value;
+              });
+            },
+          ),
         ),
+        ValueListenableBuilder(
+          valueListenable: sliderVN,
+          builder: (BuildContext context, double value, Widget? child) {
+            final result = (value/100).toStringAsFixed(2);
+            return TextButton(
+              onPressed: () { print(result); },
+              child: Text(result),
+            );
+          }
+        ),
+      ],
+    );
+  }
+
+  _buildGraint({
+    double opacity = 1.0,
+  }) {
+    return LinearGradient(
+      colors: [
+        Colors.red.withOpacity(opacity),
+        Colors.green.withOpacity(opacity),
+      ],
+      begin: Alignment.topCenter,
+      end: Alignment.bottomCenter,
+    );
+  }
+
+  /// 右上角点
+  _buildBadgeRedPoint({
+    required Widget child,
+    Color badgeColor = Colors.red,
+  }) {
+    return Badge(
+      badgeColor: badgeColor,
+      position: BadgePosition.topEnd(top: 10, end: 10),
+      badgeContent: null,
+      child: child,
+    );
+  }
+
+  _buildBadgeText({
+    required Widget child,
+    Widget? badgeContent,
+    double badgeContentOpacity = 1,
+    String? badgeValue,
+    Color badgeColor = Colors.white,
+    BadgeShape shape = BadgeShape.square,
+    Gradient? gradient,
+  }) {
+    final badgeChild = badgeValue != null ? Text(badgeValue,
+      style: TextStyle(
+          color: badgeColor,
+          fontSize: 10,
+          fontWeight: FontWeight.bold
       ),
+    ) : badgeContent;
+
+    return Badge(
+      shape: shape,
+      elevation: 0,
+      borderRadius: BorderRadius.circular(5),
+      position: BadgePosition.topEnd(top: -12, end: -20),
+      padding: EdgeInsets.all(2),
+      gradient: gradient,
+      badgeContent: Opacity(
+        opacity: badgeContentOpacity,
+        child: badgeChild
+      ),
+      child: child,
     );
   }
 
@@ -76,7 +154,10 @@ class _BadgesDemoState extends State<BadgesDemo> {
         _counter.toString(),
         style: TextStyle(color: Colors.white),
       ),
-      child: IconButton(icon: Icon(Icons.shopping_cart), onPressed: () {}),
+      child: IconButton(
+        icon: Icon(Icons.shopping_cart, color: Colors.black),
+        onPressed: () {}
+      ),
     );
   }
 
@@ -85,30 +166,56 @@ class _BadgesDemoState extends State<BadgesDemo> {
       Tab(
         icon: Badge(
           badgeColor: Colors.blue,
-          badgeContent: Text(
-            '3',
+          badgeContent: Text('3',
             style: TextStyle(color: Colors.white),
           ),
           child: Icon(Icons.account_balance_wallet, color: Colors.grey),
         ),
       ),
       Tab(
-        icon: Badge(
-          shape: BadgeShape.square,
-          borderRadius: BorderRadius.circular(5),
-          position: BadgePosition.topEnd(top: -12, end: -20),
-          padding: EdgeInsets.all(2),
-          badgeContent: Text(
-            'NEW',
-            style: TextStyle(
-                color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold),
-          ),
-          child: Text(
-            'MUSIC',
+        icon: _buildBadgeText(
+          badgeValue: 'NEW',
+          child: Text('MUSIC',
             style: TextStyle(color: Colors.grey[600]),
           ),
         ),
       ),
+      Tab(
+        icon: ValueListenableBuilder(
+          valueListenable: sliderVN,
+          builder: (BuildContext context, double value, Widget? child) {
+            final result = (value/100);
+            return _buildBadgeText(
+              shape: BadgeShape.square,
+              gradient: _buildGraint(opacity: result),
+              badgeValue: '你我他',
+              badgeColor: Colors.black,
+              // badgeContentOpacity: result,
+              child: Text('Video',
+                style: TextStyle(color: Colors.black),
+              ),
+            );
+          }
+        ),
+      ),
+      Tab(
+        icon: ValueListenableBuilder(
+          valueListenable: sliderVN,
+          builder: (BuildContext context, double value, Widget? child) {
+            final result = (value/100);
+            return _buildBadgeText(
+              shape: BadgeShape.square,
+              gradient: _buildGraint(opacity: result),
+              badgeValue: '你我他',
+              badgeColor: Colors.black,
+              badgeContentOpacity: result,
+              child: Text('Game',
+                style: TextStyle(color: Colors.black),
+              ),
+            );
+          }
+        ),
+      )
     ]);
   }
 
@@ -149,23 +256,25 @@ class _BadgesDemoState extends State<BadgesDemo> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           ElevatedButton.icon(
-              onPressed: () {
-                setState(() {
-                  _counter++;
-                });
-              },
-              icon: Icon(Icons.add),
-              label: Text('Add to cart')),
+            onPressed: () {
+              setState(() {
+                _counter++;
+              });
+            },
+            icon: Icon(Icons.add),
+            label: Text('Add to cart')
+          ),
           ElevatedButton.icon(
-              onPressed: () {
-                if (_counter > 0) {
-                  setState(() {
-                    _counter--;
-                  });
-                }
-              },
-              icon: Icon(Icons.remove),
-              label: Text('Remove from cart')),
+            onPressed: () {
+              if (_counter > 0) {
+                setState(() {
+                  _counter--;
+                });
+              }
+            },
+            icon: Icon(Icons.remove),
+            label: Text('Remove from cart')
+          ),
         ],
       ),
     );
@@ -214,13 +323,16 @@ class _BadgesDemoState extends State<BadgesDemo> {
   }
 
   Widget _chipWithZeroPadding() {
-    return Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-      Text('Chip with zero padding:'),
-      Chip(
-        label: Text('Hello'),
-        padding: EdgeInsets.all(0),
-      ),
-    ]);
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Text('Chip with zero padding:'),
+        Chip(
+          label: Text('Hello'),
+          padding: EdgeInsets.all(0),
+        ),
+      ]
+    );
   }
 
   Widget _badgeWithZeroPadding() {
@@ -236,7 +348,7 @@ class _BadgesDemoState extends State<BadgesDemo> {
 
   Widget _getExampleBadge({double? padding}) {
     return Padding(
-      padding: const EdgeInsets.all(4),
+      padding: EdgeInsets.all(4),
       child: Badge(
         badgeColor: Colors.lightBlueAccent,
         borderRadius: BorderRadius.circular(20),
@@ -257,6 +369,10 @@ class _BadgesDemoState extends State<BadgesDemo> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Text('Badges with borders:'),
+          Badge(
+            badgeContent: Text('99+'),
+            child: Icon(Icons.person, size: 30),
+          ),
           Badge(
             position: BadgePosition.topEnd(top: 0, end: 2),
             elevation: 0,
@@ -291,38 +407,44 @@ class _BadgesDemoState extends State<BadgesDemo> {
     );
   }
 
-  Widget _listView() {
-    Widget _listTile(String title, String value) {
-      return ListTile(
-        dense: true,
-        title: Text(title, style: TextStyle(fontSize: 16)),
-        trailing: SizedBox(
-          width: 100,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: <Widget>[
-              Badge(
-                elevation: 0,
-                shape: BadgeShape.circle,
-                padding: EdgeInsets.all(7),
-                badgeContent: Text(
-                  value,
-                  style: TextStyle(color: Colors.white),
-                ),
+  Widget _listTile({
+    required String title,
+    required String badgeValue,
+    BadgeShape shape = BadgeShape.circle,
+    double radius = 8,
+  }) {
+    return ListTile(
+      dense: true,
+      title: Text(title, style: TextStyle(fontSize: 16)),
+      trailing: SizedBox(
+        width: 100,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: <Widget>[
+            Badge(
+              elevation: 0,
+              shape: shape,
+              padding: EdgeInsets.all(7),
+              borderRadius: BorderRadius.circular(radius),
+              badgeContent: Text(
+                badgeValue,
+                style: TextStyle(color: Colors.white),
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 20),
-                child: Icon(
-                  Icons.arrow_forward_ios,
-                  size: 14,
-                ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 20),
+              child: Icon(
+                Icons.arrow_forward_ios,
+                size: 14,
               ),
-            ],
-          ),
+            ),
+          ],
         ),
-      );
-    }
+      ),
+    );
+  }
 
+  Widget _listView() {
     return Expanded(
       child: ListView.separated(
         itemCount: 3,
@@ -330,12 +452,11 @@ class _BadgesDemoState extends State<BadgesDemo> {
         itemBuilder: (BuildContext context, int index) {
           switch (index) {
             case 0:
-              return _listTile('Messages', '2');
+              return _listTile(title: 'Messages', badgeValue: '2', shape: BadgeShape.square);
             case 1:
-              return _listTile('Friends', '7');
-            case 2:
+              return _listTile(title: 'Friends', badgeValue: '你我他', shape: BadgeShape.square);
             default:
-              return _listTile('Events', '!');
+              return _listTile(title: 'Events', badgeValue: '!', shape: BadgeShape.circle);
           }
         },
       ),
