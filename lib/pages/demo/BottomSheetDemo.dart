@@ -7,9 +7,9 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/button_extension.dart';
+import 'package:flutter_templet_project/extension/button_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
-import 'package:flutter_templet_project/extension/navigator_extension.dart';
+import 'package:flutter_templet_project/extension/navigator_ext.dart';
 
 class BottomSheetDemo extends StatelessWidget {
   final String? title;

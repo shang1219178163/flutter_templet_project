@@ -3,7 +3,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:color_converter/color_converter.dart';
-import 'package:flutter_templet_project/extension/color_extension.dart';
+import 'package:flutter_templet_project/extension/color_ext.dart';
 
 class ColorConverterDemo extends StatefulWidget {
 

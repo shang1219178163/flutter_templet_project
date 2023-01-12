@@ -1,8 +1,8 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/HorizontalCell.dart';
-import 'package:flutter_templet_project/extension/color_extension.dart';
-import 'package:flutter_templet_project/extension/widget_extension.dart';
+import 'package:flutter_templet_project/extension/color_ext.dart';
+import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/uti/R.dart';
 
 class BadgesDemo extends StatefulWidget {

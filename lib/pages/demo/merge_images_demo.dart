@@ -6,8 +6,8 @@ import 'dart:typed_data';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_templet_project/extension/image_extension.dart';
-import 'package:flutter_templet_project/extension/list_extension.dart';
+import 'package:flutter_templet_project/extension/image_ext.dart';
+import 'package:flutter_templet_project/extension/list_ext.dart';
 
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

@@ -10,8 +10,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:flutter_templet_project/extension/color_extension.dart';
-import 'package:flutter_templet_project/extension/num_extension.dart';
+import 'package:flutter_templet_project/extension/color_ext.dart';
+import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
 class StaggeredGridViewDemo extends StatefulWidget {

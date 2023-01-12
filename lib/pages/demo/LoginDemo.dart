@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/model/user_model.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_templet_project/extension/string_extension.dart';
+import 'package:flutter_templet_project/extension/string_ext.dart';
 
 class LoginRoute extends StatefulWidget {
   @override

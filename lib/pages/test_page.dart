@@ -13,10 +13,10 @@ import 'package:tuple/tuple.dart';
 import 'package:flutter_templet_project/Language/Property.dart';
 import 'package:flutter_templet_project/basicWidget/RadiusWidget.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
-import 'package:flutter_templet_project/extension/string_extension.dart';
-import 'package:flutter_templet_project/extension/map_extension.dart';
+import 'package:flutter_templet_project/extension/string_ext.dart';
+import 'package:flutter_templet_project/extension/map_ext.dart';
 
-import 'package:flutter_templet_project/extension/buildContext_extension.dart';
+import 'package:flutter_templet_project/extension/buildContext_ext.dart';
 import 'package:flutter_templet_project/uti/Singleton.dart';
 import 'package:flutter_templet_project/uti/R.dart';
 

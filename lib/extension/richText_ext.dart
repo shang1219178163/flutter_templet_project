@@ -1,5 +1,5 @@
 //
-//  richText_extension.dart
+//  richText_ext.dart
 //  flutter_templet_project
 //
 //  Created by shang on 7/31/21 1:48 PM.

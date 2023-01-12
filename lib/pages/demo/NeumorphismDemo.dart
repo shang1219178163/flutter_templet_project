@@ -1,8 +1,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/neumorphism_button.dart';
-import 'package:flutter_templet_project/extension/color_extension.dart';
-import 'package:flutter_templet_project/extension/widget_extension.dart';
+import 'package:flutter_templet_project/extension/color_ext.dart';
+import 'package:flutter_templet_project/extension/widget_ext.dart';
 
 
 class NeumorphismDemo extends StatefulWidget {
