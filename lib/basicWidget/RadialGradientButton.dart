@@ -20,7 +20,7 @@ class RadialGradientButton extends StatefulWidget {
     // required this.colors,
     // required this.stops,
     this.margin = const EdgeInsets.symmetric(horizontal: 3, vertical: 12),
-    this.padding = const EdgeInsets.symmetric(horizontal: 3, vertical: 1),
+    this.padding = const EdgeInsets.all(2),
     this.center = Alignment.center,
     this.onClick,
   }) : super(key: key);
