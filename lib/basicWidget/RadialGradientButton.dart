@@ -42,9 +42,12 @@ class _RadialGradientButtonState extends State<RadialGradientButton> {
 
   var _scale = 0.5;
 
+  Size? _currentSize;
+
   @override
   void initState() {
     SchedulerBinding.instance?.addPostFrameCallback((timeStamp) {
+      _currentSize = context.size;
       _scale = radiusOfRadialGradient(
           width: context.size?.width,
           height: context.size?.height,
@@ -64,7 +67,7 @@ class _RadialGradientButtonState extends State<RadialGradientButton> {
         margin: widget.margin,
         padding: widget.padding,
         decoration: BoxDecoration(
-          gradient: RadialGradient(
+          gradient: _currentSize == null ? null : RadialGradient(
             // tileMode: TileMode.mirror,
             radius: _scale,
             center: widget.center,
