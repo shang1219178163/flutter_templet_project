@@ -37,11 +37,11 @@ class _AnimatedWidgetDemoState extends State<AnimatedWidgetDemo> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
       ),
-      body: buildBody(context),
+      body: buildBody(),
     );
   }
 
-  Widget buildBody(BuildContext context) {
+  Widget buildBody() {
     var duration = Duration(seconds: 2);
     return SingleChildScrollView(
       child: Column(

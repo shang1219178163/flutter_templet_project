@@ -35,11 +35,11 @@ class _StreamBuilderDemoState extends State<StreamBuilderDemo> {
         appBar: AppBar(
           title: Text(widget.title ?? "$widget"),
         ),
-        body: buildBody(context),
+        body: buildBody(),
     );
   }
 
-  Widget buildBody(BuildContext context) {
+  Widget buildBody() {
     return StreamBuilder<int>(
       stream: counter(), //
       //initialData: ,// a Stream<int> or null

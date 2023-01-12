@@ -26,11 +26,11 @@ class _DismissibleDemoState extends State<DismissibleDemo> {
         appBar: AppBar(
           title: Text(widget.title ?? "$widget"),
         ),
-        body: _buildBody(context),
+        body: _buildBody(),
     );
   }
 
-  Widget _buildBody(BuildContext context) {
+  Widget _buildBody() {
     return ListView.builder(
       itemCount: _list.length,
       itemBuilder: (BuildContext context, int index) {

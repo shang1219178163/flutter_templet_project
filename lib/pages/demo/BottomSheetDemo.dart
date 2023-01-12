@@ -27,11 +27,11 @@ class BottomSheetDemo extends StatelessWidget {
       appBar: AppBar(
         title: Text("$this"),
       ),
-      body: buildBody(context),
+      body: buildBody(),
     );
   }
 
-  Widget buildBody(BuildContext context) {
+  Widget buildBody() {
     return Builder(
       builder: (context) {
         return Center(

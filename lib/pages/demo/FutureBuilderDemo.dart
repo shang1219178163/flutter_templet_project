@@ -30,11 +30,11 @@ class _FutureBuilderDemoState extends State<FutureBuilderDemo> {
         appBar: AppBar(
           title: Text(widget.title ?? "$widget"),
         ),
-        body: buildBody(context),
+        body: buildBody(),
     );
   }
 
-  Widget buildBody(BuildContext context) {
+  Widget buildBody() {
     return Center(
       child: FutureBuilder<String>(
         future: mockNetworkData(),

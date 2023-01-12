@@ -6,81 +6,107 @@
 //  Copyright © 10/14/21 shang. All rights reserved.
 //
 
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/uti/R.dart';
+import 'package:flutter_templet_project/extension/imageChunkEvent_extension.dart';
+import 'package:flutter_templet_project/extension/num_extension.dart';
+
 
 class LayoutBuilderDemo extends StatefulWidget {
+  
+  LayoutBuilderDemo({ Key? key, this.title}) : super(key: key);
 
   final String? title;
 
-  LayoutBuilderDemo({ Key? key, this.title}) : super(key: key);
-
-  
   @override
   _LayoutBuilderDemoState createState() => _LayoutBuilderDemoState();
 }
 
 class _LayoutBuilderDemoState extends State<LayoutBuilderDemo> {
 
-  final imageUrl = "https://item.jd.com/12673329.html";
-
-
 
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title ?? "$widget"),
-        ),
-        body: Column(
-          children: [
-            buildBody(context),
-            buildBody1(context),
-          ],
-        ),
-    );
-  }
-
-  Widget buildBody(BuildContext context) {
-    return
-    Center(
-      child: Container(
-        child: Column(
-          children: <Widget>[
-            Image.network(
-              "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1563774129262&di=a62f1daccb204945eafcfd5082b4ce98&imgtype=0&src=http%3A%2F%2Fimages.ali213.net%2Fpicfile%2Fpic%2F2012-11-27%2F927_one_piece18.jpg",
-              fit: BoxFit.fill,
-              height: 100,
-            ),
-            Text("图片"),
-          ],
-        ),
+      appBar: AppBar(
+        title: Text(widget.title ?? "$widget"),
+        actions: ['done',].map((e) => TextButton(
+            child: Text(e,
+            style: TextStyle(color: Colors.white),
+          ),
+          onPressed: onPressed,)
+        ).toList(),
+      ),
+      body: Column(
+        children: [
+          buildItem(),
+          buildItem(hasConstraints: true),
+        ],
       ),
     );
   }
 
-  Widget buildBody1(BuildContext context) {
-    return
-      LayoutBuilder(
-        builder: (context, constraints) {
-          return Center(
-            child: Container(
-              child: Column(
-                children: <Widget>[
-                  Image.network(
-                    "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1563774129262&di=a62f1daccb204945eafcfd5082b4ce98&imgtype=0&src=http%3A%2F%2Fimages.ali213.net%2Fpicfile%2Fpic%2F2012-11-27%2F927_one_piece18.jpg",
-                    fit: BoxFit.fill,
-                    height: 100,
-                    width: constraints.maxWidth,
-                  ),
-                  Text("图片"),
-                ],
-              ),
-            ),
-          );
-        },
-      );
+  onPressed(){
+    setState(() {});
   }
+
+  Widget buildItem({bool hasConstraints = false}) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return Center(
+          child: Container(
+            child: Column(
+              children: <Widget>[
+                _buildImage(constraints: hasConstraints ? constraints : null),
+                Text("图片"),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  _buildImage({BoxConstraints? constraints}) {
+    // return FadeInImage(
+    //   // placeholder: AssetImage("images/img_placeholder.png"),
+    //   placeholder: R.image.placeholder(),
+    //   image: NetworkImage(R.image.imgUrls[0]),
+    //   fit: BoxFit.fill,
+    //   width: constraints?.maxWidth,
+    //   height: 100,
+    // );
+    final index = Random().nextInt(R.image.imgUrls.length);
+    return Image(
+      image: NetworkImage(R.image.imgUrls[index]),
+      fit: BoxFit.fill,
+      width: constraints?.maxWidth,
+      height: 100,
+      loadingBuilder: _buildLoadingBuilder,
+    );
+  }
+
+   /// 占位
+   Widget _buildLoadingBuilder(BuildContext context, Widget child, ImageChunkEvent? loadingProgress,) {
+     if (loadingProgress == null) {
+       return child;
+     }
+     final text = loadingProgress.current?.toStringAsPercent(2) ?? '';
+     return Container(
+       // color: Colors.green,
+       width: 100,
+       height: 100,
+       child: Center(
+         child: Text(text)
+       )
+     );
+     return Center(
+       child: CircularProgressIndicator(
+         value: loadingProgress.current,
+       ),
+     );
+   }
 
 }
