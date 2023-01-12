@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_templet_project/APPThemeSettings.dart';
+import 'package:flutter_templet_project/basicWidget/RadialGradientButton.dart';
 import 'package:flutter_templet_project/basicWidget/SectionHeader.dart';
 import 'package:flutter_templet_project/extension/buildContext_ext.dart';
 import 'package:flutter_templet_project/extension/decoration_ext.dart';
@@ -58,6 +59,22 @@ class _SecondPageState extends State<SecondPage> {
         Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
+            SectionHeader.h5(title: "RadialGradientButton"),
+            RadialGradientButton(
+              text: Text('一二'),
+            ),
+            RadialGradientButton(
+              text: Text('一二三'),
+              center: Alignment.topRight,
+            ),
+            RadialGradientButton(
+              text: Text('一二三四'),
+              center: Alignment.centerRight,
+            ),
+            RadialGradientButton(
+              text: Text('一二三四五六'),
+              center: Alignment.bottomRight,
+            ),
             SectionHeader.h5(title: "GradientButton"),
             _buildClipRRectGradientButton(),
 
