@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_templet_project/APPThemeSettings.dart';
+import 'package:flutter_templet_project/basicWidget/after_layout_builder.dart';
 import 'package:flutter_templet_project/basicWidget/RadialGradientButton.dart';
 import 'package:flutter_templet_project/basicWidget/SectionHeader.dart';
 import 'package:flutter_templet_project/extension/buildContext_ext.dart';
@@ -74,6 +75,19 @@ class _SecondPageState extends State<SecondPage> {
             RadialGradientButton(
               text: Text('一二三四五六'),
               center: Alignment.bottomRight,
+            ),
+            AfterLayoutBuilder(
+              child: Text("离离原上草, 一岁一枯荣"),
+              builder: (BuildContext context, Widget? child, Size size) {
+                print("size:${size}");
+                if (size == Size.zero) {
+                  return child ?? SizedBox();
+                }
+                return Container(
+                  color: Colors.greenAccent,
+                  child: child,
+                );
+              },
             ),
             SectionHeader.h5(title: "GradientButton"),
             _buildClipRRectGradientButton(),
