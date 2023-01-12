@@ -6,16 +6,20 @@
 //  Copyright © 10/14/21 shang. All rights reserved.
 //
 
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/uti/R.dart';
+import 'package:flutter_templet_project/extension/imageChunkEvent_extension.dart';
+import 'package:flutter_templet_project/extension/num_extension.dart';
+
 
 class LayoutBuilderDemo extends StatefulWidget {
+  
+  LayoutBuilderDemo({ Key? key, this.title}) : super(key: key);
 
   final String? title;
 
-  LayoutBuilderDemo({ Key? key, this.title}) : super(key: key);
-
-  
   @override
   _LayoutBuilderDemoState createState() => _LayoutBuilderDemoState();
 }
@@ -28,38 +32,34 @@ class _LayoutBuilderDemoState extends State<LayoutBuilderDemo> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
+        actions: ['done',].map((e) => TextButton(
+            child: Text(e,
+            style: TextStyle(color: Colors.white),
+          ),
+          onPressed: onPressed,)
+        ).toList(),
       ),
       body: Column(
         children: [
-          buildBody(),
-          buildBody(hasConstraints: true),
+          buildItem(),
+          buildItem(hasConstraints: true),
         ],
       ),
     );
   }
 
+  onPressed(){
+    setState(() {});
+  }
 
-  Widget buildBody({bool hasConstraints = false}) {
-    if (!hasConstraints) {
-      return Center(
-        child: Container(
-          child: Column(
-            children: <Widget>[
-              _buildImage(),
-              Text("图片"),
-            ],
-          ),
-        ),
-      );
-    }
-
+  Widget buildItem({bool hasConstraints = false}) {
     return LayoutBuilder(
       builder: (context, constraints) {
         return Center(
           child: Container(
             child: Column(
               children: <Widget>[
-                _buildImage(width: constraints.maxWidth),
+                _buildImage(constraints: hasConstraints ? constraints : null),
                 Text("图片"),
               ],
             ),
@@ -69,36 +69,44 @@ class _LayoutBuilderDemoState extends State<LayoutBuilderDemo> {
     );
   }
 
-  _buildImage({double? width}) {
-    return FadeInImage(
-      // placeholder: AssetImage("images/img_placeholder.png"),
-      placeholder: R.image.placeholder(),
-      image: NetworkImage(R.image.imgUrls[0]),
-      fit: BoxFit.fill,
-      width: width,
-      height: 100,
-    );
+  _buildImage({BoxConstraints? constraints}) {
+    // return FadeInImage(
+    //   // placeholder: AssetImage("images/img_placeholder.png"),
+    //   placeholder: R.image.placeholder(),
+    //   image: NetworkImage(R.image.imgUrls[0]),
+    //   fit: BoxFit.fill,
+    //   width: constraints?.maxWidth,
+    //   height: 100,
+    // );
+    final index = Random().nextInt(R.image.imgUrls.length);
     return Image(
-      image: NetworkImage(R.image.imgUrls[0]),
+      image: NetworkImage(R.image.imgUrls[index]),
       fit: BoxFit.fill,
-      width: width,
+      width: constraints?.maxWidth,
       height: 100,
       loadingBuilder: _buildLoadingBuilder,
     );
   }
 
+   /// 占位
    Widget _buildLoadingBuilder(BuildContext context, Widget child, ImageChunkEvent? loadingProgress,) {
-     print("loadingProgress:${loadingProgress}");
-     return Image.asset("images/img_placeholder.png", height: 100,);
      if (loadingProgress == null) {
-       return SizedBox();
+       return child;
      }
+     final text = loadingProgress.current?.toStringAsPercent(2) ?? '';
+     return Container(
+       // color: Colors.green,
+       width: 100,
+       height: 100,
+       child: Center(
+         child: Text(text)
+       )
+     );
      return Center(
        child: CircularProgressIndicator(
-         value: loadingProgress.expectedTotalBytes != null
-             ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes!
-             : null,
+         value: loadingProgress.current,
        ),
      );
    }
+
 }

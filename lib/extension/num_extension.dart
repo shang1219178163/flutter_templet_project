@@ -32,3 +32,13 @@ extension NumExt on num {
   double get sh => ScreenUtil().screenHeight * this;
 }
 
+extension DoubleExt on double{
+  /// 转为百分比描述
+  String toStringAsPercent(int fractionDigits) {
+    if (this >= 1.0) {
+      return "100%";
+    }
+    final result = this.toStringAsFixed(fractionDigits);
+    return "${result.replaceAll("0.", "")}%";
+  }
+}
