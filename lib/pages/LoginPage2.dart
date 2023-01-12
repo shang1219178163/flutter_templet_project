@@ -93,12 +93,12 @@ class _LoginPage2State extends State<LoginPage2> {
         centerTitle: true,
         title: Text('登录', style: TextStyle(color: Colors.white)),
       ),
-      body: buildBody(context),
+      body: buildBody(),
     );
 
   }
 
-  Widget buildBody(BuildContext context) {
+  Widget buildBody() {
     List<Widget> childrens = [];
     final _main = Center(
       child: ListView(

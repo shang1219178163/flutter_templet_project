@@ -25,11 +25,11 @@ class BlurViewDemo extends StatelessWidget {
       appBar: AppBar(
         title: Text(title ?? "$this"),
       ),
-      body: buildBody(context),
+      body: buildBody(),
     );
   }
 
-  Widget buildBody(BuildContext context) {
+  Widget buildBody() {
     final title = 'BackdropFilter class';
     final message = 'A widget that applies a filter to the existing painted content and then paints child.'
         'The filter will be applied to all the area within its parent or ancestor widget\'s clip. If there\'s no clip, the filter will be applied to the full screen.';

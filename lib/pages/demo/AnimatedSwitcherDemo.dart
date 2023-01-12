@@ -30,11 +30,11 @@ class _AnimatedSwitcherDemoState extends State<AnimatedSwitcherDemo> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
       ),
-      body: buildBody(context),
+      body: buildBody(),
     );
   }
 
-  Widget buildBody(BuildContext context) {
+  Widget buildBody() {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

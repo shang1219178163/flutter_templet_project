@@ -19,7 +19,8 @@ class HorizontalCell extends StatelessWidget {
     this.subtitle,
     this.subtitleRight,
     this.titleSpace = const SizedBox(height: 8),
-    this.icon,
+    this.left,
+    this.mid,
     this.right,
     this.arrow,
     this.height,
@@ -36,7 +37,8 @@ class HorizontalCell extends StatelessWidget {
   Text? subtitleRight;
   Widget titleSpace;
 
-  Widget? icon;
+  Widget? left;
+  Widget? mid;
   Widget? right;
   Widget? arrow;
   double? height;
@@ -58,9 +60,10 @@ class HorizontalCell extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              if(icon != null) icon!,
-              Expanded(
+              if(left != null) left!,
+              mid ?? Expanded(
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -68,22 +71,22 @@ class HorizontalCell extends StatelessWidget {
                         title,
                         if(titleRight != null) titleRight!,
                       ]
-                          // .map((e) => e.toContainer(color: ColorExt.random)).toList()
+                          .map((e) => e.toContainer(color: ColorExt.random)).toList()
                       ,
                     ),
-                    if (subtitle != null || subtitleRight != null) titleSpace,
+                    // if (subtitle != null || subtitleRight != null) titleSpace,
                     if (subtitle != null || subtitleRight != null) Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         if(subtitle != null) subtitle!,
                         if(subtitleRight != null) subtitleRight!,
                       ]
-                          // .map((e) => e.toContainer(color: ColorExt.random)).toList()
+                          .map((e) => e.toContainer(color: ColorExt.random)).toList()
                       ,
                     ),
                   ]
                 )
-                    // .toContainer(color: ColorExt.random)
+                    .toContainer(color: ColorExt.random)
                 ,
               ),
               if (right != null) right!,

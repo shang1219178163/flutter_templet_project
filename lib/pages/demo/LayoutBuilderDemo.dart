@@ -7,6 +7,7 @@
 //
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/uti/R.dart';
 
 class LayoutBuilderDemo extends StatefulWidget {
 
@@ -21,66 +22,83 @@ class LayoutBuilderDemo extends StatefulWidget {
 
 class _LayoutBuilderDemoState extends State<LayoutBuilderDemo> {
 
-  final imageUrl = "https://item.jd.com/12673329.html";
-
-
 
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title ?? "$widget"),
-        ),
-        body: Column(
-          children: [
-            buildBody(context),
-            buildBody1(context),
-          ],
-        ),
-    );
-  }
-
-  Widget buildBody(BuildContext context) {
-    return
-    Center(
-      child: Container(
-        child: Column(
-          children: <Widget>[
-            Image.network(
-              "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1563774129262&di=a62f1daccb204945eafcfd5082b4ce98&imgtype=0&src=http%3A%2F%2Fimages.ali213.net%2Fpicfile%2Fpic%2F2012-11-27%2F927_one_piece18.jpg",
-              fit: BoxFit.fill,
-              height: 100,
-            ),
-            Text("图片"),
-          ],
-        ),
+      appBar: AppBar(
+        title: Text(widget.title ?? "$widget"),
+      ),
+      body: Column(
+        children: [
+          buildBody(),
+          buildBody(hasConstraints: true),
+        ],
       ),
     );
   }
 
-  Widget buildBody1(BuildContext context) {
-    return
-      LayoutBuilder(
-        builder: (context, constraints) {
-          return Center(
-            child: Container(
-              child: Column(
-                children: <Widget>[
-                  Image.network(
-                    "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1563774129262&di=a62f1daccb204945eafcfd5082b4ce98&imgtype=0&src=http%3A%2F%2Fimages.ali213.net%2Fpicfile%2Fpic%2F2012-11-27%2F927_one_piece18.jpg",
-                    fit: BoxFit.fill,
-                    height: 100,
-                    width: constraints.maxWidth,
-                  ),
-                  Text("图片"),
-                ],
-              ),
-            ),
-          );
-        },
+
+  Widget buildBody({bool hasConstraints = false}) {
+    if (!hasConstraints) {
+      return Center(
+        child: Container(
+          child: Column(
+            children: <Widget>[
+              _buildImage(),
+              Text("图片"),
+            ],
+          ),
+        ),
       );
+    }
+
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return Center(
+          child: Container(
+            child: Column(
+              children: <Widget>[
+                _buildImage(width: constraints.maxWidth),
+                Text("图片"),
+              ],
+            ),
+          ),
+        );
+      },
+    );
   }
 
+  _buildImage({double? width}) {
+    return FadeInImage(
+      // placeholder: AssetImage("images/img_placeholder.png"),
+      placeholder: R.image.placeholder(),
+      image: NetworkImage(R.image.imgUrls[0]),
+      fit: BoxFit.fill,
+      width: width,
+      height: 100,
+    );
+    return Image(
+      image: NetworkImage(R.image.imgUrls[0]),
+      fit: BoxFit.fill,
+      width: width,
+      height: 100,
+      loadingBuilder: _buildLoadingBuilder,
+    );
+  }
+
+   Widget _buildLoadingBuilder(BuildContext context, Widget child, ImageChunkEvent? loadingProgress,) {
+     print("loadingProgress:${loadingProgress}");
+     return Image.asset("images/img_placeholder.png", height: 100,);
+     if (loadingProgress == null) {
+       return SizedBox();
+     }
+     return Center(
+       child: CircularProgressIndicator(
+         value: loadingProgress.expectedTotalBytes != null
+             ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes!
+             : null,
+       ),
+     );
+   }
 }

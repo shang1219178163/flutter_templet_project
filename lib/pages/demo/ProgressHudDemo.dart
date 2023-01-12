@@ -39,11 +39,11 @@ class _ProgressHudDemoState extends State<ProgressHudDemo> {
           ),
         ],
       ),
-      body: buildBody(context),
+      body: buildBody(),
     );
   }
 
-  Widget buildBody(BuildContext context) {
+  Widget buildBody() {
     return Container(
       padding: EdgeInsets.only(top: 80),
       alignment: Alignment.center,

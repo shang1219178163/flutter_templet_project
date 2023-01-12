@@ -30,39 +30,7 @@ class _HorizontalCellDemoState extends State<HorizontalCellDemo> {
       body: Column(
           children: <Widget>[
             _buildSlider(),
-            HorizontalCell(
-                padding: EdgeInsets.symmetric(horizontal: 12, vertical: 0),
-                // decoration: BoxDecoration(
-                //   border: Border.all(color: Colors.red),
-                //   color: Colors.green,
-                // ),
-                title: _buildText("title"),
-                titleRight: _buildText("titleRight"),
-                subtitle: _buildText("subtitle"),
-                subtitleRight: _buildText("subtitleRight"),
-                // titleSpace: Container(
-                //   height: 20,
-                //   color: Colors.green,
-                // ),
-                icon: FadeInImage(
-                  height: 60,
-                  image: NetworkImage(R.image.imgUrls[4]),
-                  placeholder: AssetImage("images/img_placeholder.png"),
-                ),
-                right: Container(
-                  width: 60,
-                  height: 60,
-                  color: Colors.yellow,
-                ),
-                arrow: Container(
-                  padding: EdgeInsets.all(8),
-                  child: Icon(
-                      Icons.arrow_forward_ios,
-                      size: 20,
-                      color: Colors.grey
-                  ),
-                )
-            ),
+            _buildCell(),
           ],
         ),
     );
@@ -107,5 +75,48 @@ class _HorizontalCellDemoState extends State<HorizontalCellDemo> {
 
   Text _buildText(String text) {
     return Text(text, style: TextStyle(fontSize: 16));
+  }
+
+  _buildCell() {
+    return HorizontalCell(
+        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 0),
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.red),
+          color: Colors.green,
+        ),
+        title: _buildText("title"),
+        titleRight: _buildText("titleRight"),
+        subtitle: _buildText("subtitle"),
+        subtitleRight: _buildText("subtitleRight"),
+        // titleSpace: Spacer(),
+        // titleSpace: Container(
+        //   height: 20,
+        //   color: Colors.green,
+        // ),
+        left: FadeInImage(
+          height: 60,
+          image: NetworkImage(R.image.imgUrls[4]),
+          placeholder: AssetImage("images/img_placeholder.png"),
+        ),
+        // mid: Container(
+        //   width: 60,
+        //   height: 60,
+        //   color: Colors.blue,
+        // ),
+        right: Container(
+          width: 60,
+          height: 120,
+          color: Colors.yellow,
+        ),
+        arrow: Container(
+          // color: Colors.green,
+          // padding: EdgeInsets.all(8),
+          child: Icon(
+              Icons.arrow_forward_ios,
+              size: 20,
+              color: Colors.grey
+          ),
+        )
+    );
   }
 }

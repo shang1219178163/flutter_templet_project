@@ -32,7 +32,7 @@ class _LoginPageState extends State<LoginPage> {
         appBar: AppBar(
           title: Text(widget.title ?? "$widget"),
         ),
-        body: buildBody(context),
+        body: buildBody(),
     );
   }
 
@@ -58,7 +58,7 @@ class _LoginPageState extends State<LoginPage> {
     focusNode2.unfocus();
   }
 
-  Widget buildBody(BuildContext context) {
+  Widget buildBody() {
     return Padding(
       padding: EdgeInsets.all(16.0),
       child: Column(

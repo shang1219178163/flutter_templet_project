@@ -27,11 +27,11 @@ class _ListTileDemoState extends State<ListTileDemo> {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
 
     return Scaffold(
-      body: buildBody(context),
+      body: buildBody(),
     );
   }
 
-  Widget buildBody(BuildContext context) {
+  Widget buildBody() {
     return Material(
       child: Container(
         child: Column(

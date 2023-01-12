@@ -33,12 +33,12 @@ class _PopoverDemoState extends State<PopoverDemo> {
         ],
       ),
       body: SafeArea(
-        child: isListStyle ? buildList(context) : buildbody(context),
+        child: isListStyle ? buildList() : buildBody(),
       ),
     );
   }
 
-  Widget buildbody(BuildContext context) {
+  Widget buildBody() {
     final items = List.generate(3, (index) => PopoverButton(text: Text("title_$index"),));
     return Padding(
       padding: const EdgeInsets.all(16),
@@ -66,7 +66,7 @@ class _PopoverDemoState extends State<PopoverDemo> {
     );
   }
 
-  Widget buildList(BuildContext context) {
+  Widget buildList() {
     final list = List.generate(9, (index) => index.toString());
     return Scrollbar(
       child: Padding(

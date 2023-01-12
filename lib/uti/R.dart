@@ -33,6 +33,8 @@ class _R_Event {
 
 class _R_Image {
   static final _R_Image _OB = _R_Image();
+  /// 占位图
+  ImageProvider placeholder({String? package}) => AssetImage("images/img_placeholder.png", package: package);
 
   /// 网图数组
   final List<String> imgUrls = [
