@@ -93,6 +93,7 @@ class _HorizontalCellDemoState extends State<HorizontalCellDemo> {
         //   height: 20,
         //   color: Colors.green,
         // ),
+        // useIntrinsicHeight: false,
         left: FadeInImage(
           height: 60,
           image: NetworkImage(R.image.imgUrls[4]),

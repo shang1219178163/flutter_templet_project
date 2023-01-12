@@ -512,6 +512,7 @@ class _BadgesDemoState extends State<BadgesDemo> {
         titleRight: _buildText("titleRight"),
         subtitle: _buildText("subtitle"),
         subtitleRight: _buildText("subtitleRight"),
+        // useIntrinsicHeight: false,
         // titleSpace: Spacer(),
         // titleSpace: Container(
         //   height: 20,
@@ -529,7 +530,7 @@ class _BadgesDemoState extends State<BadgesDemo> {
         // ),
         right: Container(
           width: 60,
-          height: 120,
+          height: 100,
           color: Colors.yellow,
         ),
         arrow: Container(
