@@ -149,16 +149,14 @@ class _GradientDemoState extends State<GradientDemo> {
       ).toList(),
       onChanged: (value) {
         if (value == null) return;
-        print("_dropValue:${value}");
-        setState(() {
-          _dropValue = value;
-          _scale = radiusOfRadialGradient(
-              width: screenSize.width,
-              height: 50,
-              alignment: _dropValue
-          );
-          print("scale:${_scale}");
-        });
+        _dropValue = value;
+        _scale = radiusOfRadialGradient(
+          width: 400,
+          height: 100,
+          alignment: _dropValue
+        );
+        print("_dropValue:${value} scale:${_scale}");
+        setState(() {});
       },
     );
   }
@@ -330,7 +328,7 @@ class _GradientDemoState extends State<GradientDemo> {
       _buildDropdownButton(),
       SectionHeader.h4(title: 'RadialGradient',),
       _buildBox(
-        height: 50,
+        height: 100,
         text: 'RadialGradient',
         decoration: BoxDecoration(
           gradient: RadialGradient(
@@ -342,8 +340,9 @@ class _GradientDemoState extends State<GradientDemo> {
               Colors.red, // blue
               Colors.blue,
               Colors.yellow,
+              Colors.green,
             ],
-            stops: const <double>[0.1, 0.5, 0.9],
+            stops: const <double>[0.1, 0.3, 0.6, 1],
           ),
         ),
       ),
