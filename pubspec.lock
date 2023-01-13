@@ -260,6 +260,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.8.8"
+  dotted_border:
+    dependency: "direct main"
+    description:
+      name: dotted_border
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.0.0+3"
   enhance_expansion_panel:
     dependency: "direct main"
     description:
@@ -445,6 +452,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.0.3"
+  getwidget:
+    dependency: "direct main"
+    description:
+      name: getwidget
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.0.1"
   glob:
     dependency: transitive
     description:

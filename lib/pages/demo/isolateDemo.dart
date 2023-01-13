@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/intl_extension.dart';
+import 'package:flutter_templet_project/extension/intl_ext.dart';
 
 class IsolateDemo extends StatefulWidget {
 

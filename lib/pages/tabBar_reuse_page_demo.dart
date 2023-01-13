@@ -12,7 +12,7 @@ import 'package:flutter_templet_project/basicWidget/list_subtitle_cell.dart';
 import 'package:flutter_templet_project/basicWidget/tabBar_pageView.dart';
 import 'package:flutter_templet_project/basicWidget/tabBar_tabBarView.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
-import 'package:flutter_templet_project/extension/divider_extension.dart';
+import 'package:flutter_templet_project/extension/divider_ext.dart';
 import 'package:flutter_templet_project/mockData/mock_data.dart';
 import 'package:flutter_templet_project/pages/tabBar_tabBarView_demo.dart';
 import 'package:tuple/tuple.dart';

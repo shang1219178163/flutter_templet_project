@@ -54,6 +54,7 @@ import 'package:flutter_templet_project/pages/demo/TransformDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ValueListenableBuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/VisibilityDemo.dart';
 import 'package:flutter_templet_project/pages/demo/WrapDemo.dart';
+import 'package:flutter_templet_project/pages/demo/box_shadow_demo.dart';
 import 'package:flutter_templet_project/pages/demo/drawImageNineDemo.dart';
 import 'package:flutter_templet_project/pages/demo/smart_dialog_demo.dart';
 import 'package:flutter_templet_project/pages/demo/isolateDemo.dart';
@@ -75,8 +76,10 @@ import 'package:flutter_templet_project/vendor/aesthetic_dialogs_demo.dart';
 import 'package:flutter_templet_project/vendor/badges_demo.dart';
 import 'package:flutter_templet_project/vendor/color_converter_demo.dart';
 import 'package:flutter_templet_project/vendor/custom_timer_demo.dart';
+import 'package:flutter_templet_project/vendor/dotted_border_demo.dart';
 import 'package:flutter_templet_project/vendor/flutter_swiper_demo.dart';
 import 'package:flutter_templet_project/vendor/flutter_swiper_indicator_demo.dart';
+import 'package:flutter_templet_project/vendor/getwidgetDemo.dart';
 import 'package:flutter_templet_project/vendor/qr/qr_code_scanner_demo.dart';
 import 'package:flutter_templet_project/vendor/qr/qr_flutter_demo.dart';
 import 'package:flutter_templet_project/vendor/timeline/timeline_demo.dart';
@@ -381,6 +384,9 @@ class APPRouter {
   static const visibilityDemo = '/visibilityDemo';
   static const ignorePointerDemo = '/ignorePointerDemo';
   static const horizontalCellDemo = '/horizontalCellDemo';
+  static const getWidgetDemo = '/getWidgetDemo';
+  static const dottedBorderDemo = '/dottedBorderDemo';
+  static const boxShadowDemo = '/boxShadowDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -600,7 +606,9 @@ class AppPage {
     GetPage(name: APPRouter.visibilityDemo, page: () => VisibilityDemo(),),
     GetPage(name: APPRouter.ignorePointerDemo, page: () => IgnorePointerDemo(),),
     GetPage(name: APPRouter.horizontalCellDemo, page: () => HorizontalCellDemo(),),
-
+    GetPage(name: APPRouter.getWidgetDemo, page: () => GetWidgetDemo(),),
+    GetPage(name: APPRouter.dottedBorderDemo, page: () => DottedBorderDemo(),),
+    GetPage(name: APPRouter.boxShadowDemo, page: () => BoxShadowDemo(),),
 
   ];
 }

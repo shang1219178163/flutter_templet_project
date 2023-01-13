@@ -9,9 +9,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
-import 'package:flutter_templet_project/extension/widget_extension.dart';
-import 'package:flutter_templet_project/extension/button_extension.dart';
-import 'package:flutter_templet_project/extension/color_extension.dart';
+import 'package:flutter_templet_project/extension/widget_ext.dart';
+import 'package:flutter_templet_project/extension/button_ext.dart';
+import 'package:flutter_templet_project/extension/color_ext.dart';
 
 import 'package:tuple/tuple.dart';
 import '../../basicWidget/enhance_stepper.dart';

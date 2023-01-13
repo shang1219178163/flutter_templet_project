@@ -2,15 +2,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_templet_project/APPThemeSettings.dart';
+import 'package:flutter_templet_project/basicWidget/after_layout_builder.dart';
+import 'package:flutter_templet_project/basicWidget/RadialGradientButton.dart';
 import 'package:flutter_templet_project/basicWidget/SectionHeader.dart';
-import 'package:flutter_templet_project/extension/buildContext_extension.dart';
-import 'package:flutter_templet_project/extension/decoration_extension.dart';
+import 'package:flutter_templet_project/extension/buildContext_ext.dart';
+import 'package:flutter_templet_project/extension/decoration_ext.dart';
 import 'package:flutter_templet_project/pages/demo/MyPainter.dart';
 import 'package:flutter_templet_project/basicWidget/NNPopupRoute.dart';
 import 'package:flutter_templet_project/basicWidget/gesture_detector_container.dart';
 import 'package:flutter_templet_project/basicWidget/upload_button.dart';
-import 'package:flutter_templet_project/extension/button_extension.dart';
+import 'package:flutter_templet_project/extension/button_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:getwidget/components/border/gf_border.dart';
+import 'package:getwidget/getwidget.dart';
 
 import 'package:tuple/tuple.dart';
 
@@ -58,6 +62,60 @@ class _SecondPageState extends State<SecondPage> {
         Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
+            SectionHeader.h5(title: "color"),
+            Container(
+              width: 100,
+              height: 100,
+              decoration: BoxDecoration(
+                  color: Color(0xfff44336),
+                  borderRadius: BorderRadius.all(Radius.circular(18))
+              ),
+            ),
+            SectionHeader.h5(title: "RadialGradientButton"),
+            RadialGradientButton(
+              text: Text('一二'),
+              center: Alignment.topRight,
+            ),
+            RadialGradientButton(
+              text: Text('一二'),
+              center: Alignment.centerRight,
+            ),
+            RadialGradientButton(
+              text: Text('一二'),
+              center: Alignment.bottomRight,
+            ),
+            RadialGradientButton(
+              text: Text('一二'),
+            ),
+            RadialGradientButton(
+              text: Text('一二三'),
+              center: Alignment.topRight,
+            ),
+            RadialGradientButton(
+              text: Text('一二三四'),
+              center: Alignment.centerRight,
+            ),
+            RadialGradientButton(
+              text: Text('一二三四五六'),
+              center: Alignment.bottomRight,
+            ),
+            AfterLayoutBuilder(
+              child: Container(
+                margin: EdgeInsets.all(10),
+                padding: EdgeInsets.all(10),
+                child: Text("离离原上草, 一岁一枯荣")
+              ),
+              builder: (BuildContext context, Widget? child, Size? size) {
+                print("AfterLayoutBuilder size:${size}");
+                if (size == null) {
+                  return child ?? SizedBox();
+                }
+                return Container(
+                  color: Colors.greenAccent,
+                  child: child,
+                );
+              },
+            ),
             SectionHeader.h5(title: "GradientButton"),
             _buildClipRRectGradientButton(),
 

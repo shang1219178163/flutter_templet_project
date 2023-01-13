@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/syn_decoration_widget.dart';
 import 'package:flutter_templet_project/basicWidget/syn_decoration_widget.dart';
 import 'package:flutter_templet_project/basicWidget/syn_horizontal_scroll_widget.dart';
-import 'package:flutter_templet_project/extension/buildContext_extension.dart';
+import 'package:flutter_templet_project/extension/buildContext_ext.dart';
 import 'package:tuple/tuple.dart';
 
 class SynHomeSrollDemo extends StatefulWidget {

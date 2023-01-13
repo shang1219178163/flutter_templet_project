@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/SectionHeader.dart';
-import 'package:flutter_templet_project/extension/color_extension.dart';
+import 'package:flutter_templet_project/extension/color_ext.dart';
 
 class FlexDemo extends StatefulWidget {
 

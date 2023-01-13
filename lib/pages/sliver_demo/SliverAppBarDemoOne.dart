@@ -9,7 +9,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/color_extension.dart';
+import 'package:flutter_templet_project/extension/color_ext.dart';
 
 class SliverAppBarDemoOne extends StatefulWidget {
 

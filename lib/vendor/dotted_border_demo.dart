@@ -1,0 +1,113 @@
+import 'package:flutter/material.dart';
+import 'package:dotted_border/dotted_border.dart';
+import 'package:flutter_templet_project/basicWidget/SectionHeader.dart';
+
+class DottedBorderDemo extends StatefulWidget {
+
+  DottedBorderDemo({ Key? key, this.title}) : super(key: key);
+
+  final String? title;
+
+  @override
+  _DottedBorderDemoState createState() => _DottedBorderDemoState();
+}
+
+class _DottedBorderDemoState extends State<DottedBorderDemo> {
+
+
+
+  @override
+  Widget build(BuildContext context) {
+
+    return Scaffold(
+        appBar: AppBar(
+          title: Text(widget.title ?? "$widget"),
+          actions: ['done',].map((e) => TextButton(
+            child: Text(e,
+              style: TextStyle(color: Colors.white),
+            ),
+            onPressed: () => print(e),)
+          ).toList(),
+        ),
+      body: Center(
+        child: buildListView(),
+      ),
+    );
+  }
+
+  GlobalKey _globalKey = GlobalKey();
+  GlobalKey _globalKey1 = GlobalKey();
+
+  buildListView() {
+    return ListView(
+      children: [
+        Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            SectionHeader.h5(title: "DottedBorder"),
+            Container(
+              height: 100,
+              // padding: EdgeInsets.all(20),
+              child: DottedBorder(
+                color: Colors.black,//color of dotted/dash line
+                strokeWidth: 13, //thickness of dash/dots
+                dashPattern: [10,0],
+                //dash patterns, 10 is dash width, 6 is space width
+                child: Container(  //inner container
+                  color: Colors.green,
+                ),
+              )
+            ),
+
+            SectionHeader.h5(title: "DottedBorder"),
+            Container(
+              height: 100,
+              // padding: EdgeInsets.all(20),
+              child: DottedBorder(
+                color: Colors.black,//color of dotted/dash line
+                strokeWidth: 13, //thickness of dash/dots
+                // dashPattern: [10, 6],
+                //dash patterns, 10 is dash width, 6 is space width
+                child: Container(  //inner container
+                  color: Colors.green,
+                ),
+              )
+            ),
+
+            SectionHeader.h5(title: "DottedBorder"),
+            Container(
+              height: 100,
+              // padding: EdgeInsets.all(20),
+              child: DottedBorder(
+                color: Colors.black,//color of dotted/dash line
+                strokeWidth: 13, //thickness of dash/dots
+                dashPattern: [10, 6],
+                //dash patterns, 10 is dash width, 6 is space width
+                child: Container(  //inner container
+                  color: Colors.green,
+                ),
+              )
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  _buildBody() {
+    return Container(
+        padding: EdgeInsets.all(20), //padding of outer Container
+        child: DottedBorder(
+          color: Colors.black,//color of dotted/dash line
+          strokeWidth: 3, //thickness of dash/dots
+          dashPattern: [10,6],
+          //dash patterns, 10 is dash width, 6 is space width
+          child: Container(  //inner container
+              height:180, //height of inner container
+              width: double.infinity, //width to 100% match to parent container.
+              color:Colors.yellow //background color of inner container
+          ),
+        )
+    );
+  }
+}

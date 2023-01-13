@@ -7,7 +7,7 @@
 //
 
 
-import 'package:flutter_templet_project/extension/string_extension.dart';
+import 'package:flutter_templet_project/extension/string_ext.dart';
 
 extension ListExt<T,E> on List<E> {
   ///运算符重载

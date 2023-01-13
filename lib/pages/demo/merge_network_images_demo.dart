@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_templet_project/basicWidget/merge_images_widget.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
-import 'package:flutter_templet_project/extension/image_extension.dart';
-import 'package:flutter_templet_project/extension/list_extension.dart';
+import 'package:flutter_templet_project/extension/image_ext.dart';
+import 'package:flutter_templet_project/extension/list_ext.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 
 class MergeNetworkImagesDemo extends StatefulWidget {

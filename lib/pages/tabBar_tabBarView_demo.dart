@@ -13,12 +13,12 @@ import 'package:flutter_templet_project/basicWidget/list_subtitle_cell.dart';
 import 'package:flutter_templet_project/basicWidget/app_update_card.dart';
 import 'package:flutter_templet_project/basicWidget/section_list_view.dart';
 
-import 'package:flutter_templet_project/extension/color_extension.dart';
-import 'package:flutter_templet_project/extension/divider_extension.dart';
-import 'package:flutter_templet_project/extension/list_extension.dart';
-import 'package:flutter_templet_project/extension/string_extension.dart';
+import 'package:flutter_templet_project/extension/color_ext.dart';
+import 'package:flutter_templet_project/extension/divider_ext.dart';
+import 'package:flutter_templet_project/extension/list_ext.dart';
+import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
-import 'package:flutter_templet_project/extension/object_extension.dart';
+import 'package:flutter_templet_project/extension/object_ext.dart';
 
 import 'package:flutter_templet_project/main.dart';
 import 'package:flutter_templet_project/mockData/mock_data.dart';
@@ -422,6 +422,7 @@ var _list = [
   Tuple2(APPRouter.physicalModelDemo, "physicalModelDemo", ),
   Tuple2(APPRouter.visibilityDemo, "visibilityDemo", ),
   Tuple2(APPRouter.ignorePointerDemo, "ignorePointerDemo", ),
+  Tuple2(APPRouter.boxShadowDemo, "阴影", ),
 
 
 ];
@@ -513,7 +514,8 @@ var _vendors = [
   Tuple2(APPRouter.colorConverterDemo, "颜色转换", ),
   Tuple2(APPRouter.wechatAssetsPickerDemo, "微信相册选择器", ),
   Tuple2(APPRouter.wechatPhotoPickerDemo, "微信相册选择器组件封装", ),
-
+  Tuple2(APPRouter.getWidgetDemo, "getWidget边框线", ),
+  Tuple2(APPRouter.dottedBorderDemo, "dottedBorder边框线", ),
 
 ];
 

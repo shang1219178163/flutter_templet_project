@@ -2,7 +2,8 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/SectionHeader.dart';
-import 'package:flutter_templet_project/extension/buildContext_extension.dart';
+import 'package:flutter_templet_project/extension/buildContext_ext.dart';
+import 'package:flutter_templet_project/extension/alignment_ext.dart';
 
 class GradientDemo extends StatefulWidget {
   final String? title;
@@ -20,8 +21,6 @@ class _GradientDemoState extends State<GradientDemo> {
 
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.title ?? "$widget"),
@@ -44,6 +43,20 @@ class _GradientDemoState extends State<GradientDemo> {
     );
   }
 
+  /// 获取雷达渐进色 radius
+  radiusOfRadialGradient({
+    required double width,
+    required double height,
+    required Alignment alignment,
+  }) {
+    final max = math.max(width, height);
+    final min = math.min(width, height);
+    double scale = max/min;
+    if (alignment.x != 0) {
+      scale *= 2.0;
+    }
+    return scale;
+  }
 
   showSheetTileMode() {
     final tileModes = [
@@ -121,6 +134,33 @@ class _GradientDemoState extends State<GradientDemo> {
       onSelect: onSelect,
     );
   }
+
+
+  var _dropValue = AlignmentExt.allCases[0];
+  var _scale = 0.5;
+
+  _buildDropdownButton() {
+    return DropdownButton<Alignment>(
+      value: _dropValue,
+      items: AlignmentExt.allCases.map((e) => DropdownMenuItem(
+        child: Text(e.toString()),
+        value: e,
+      ),
+      ).toList(),
+      onChanged: (value) {
+        if (value == null) return;
+        _dropValue = value;
+        _scale = radiusOfRadialGradient(
+          width: 400,
+          height: 100,
+          alignment: _dropValue
+        );
+        print("_dropValue:${value} scale:${_scale}");
+        setState(() {});
+      },
+    );
+  }
+
 
   _buildBody() {
     return ListView(children: <Widget>[
@@ -285,6 +325,27 @@ class _GradientDemoState extends State<GradientDemo> {
         ),
       ),
       Divider(),
+      _buildDropdownButton(),
+      SectionHeader.h4(title: 'RadialGradient',),
+      _buildBox(
+        height: 100,
+        text: 'RadialGradient',
+        decoration: BoxDecoration(
+          gradient: RadialGradient(
+            tileMode: this.tileMode,
+            // tileMode: TileMode.mirror,
+            radius: _scale,
+            center: _dropValue,
+            colors: <Color>[
+              Colors.red, // blue
+              Colors.blue,
+              Colors.yellow,
+              Colors.green,
+            ],
+            stops: const <double>[0.1, 0.3, 0.6, 1],
+          ),
+        ),
+      ),
       SectionHeader.h4(title: 'RadialGradient',),
       _buildBox(
         height: 300,
@@ -339,8 +400,10 @@ class _GradientDemoState extends State<GradientDemo> {
     required String text,
     required Decoration decoration,
     double height: 100,
+    double? width,
   }) {
     return Container(
+      width: width,
       height: height,
       alignment: Alignment.center,
       child: Text(text, style: TextStyle(color: Colors.white, fontSize: 16.0)),
