@@ -36,11 +36,11 @@ extension ListExt<T,E> on List<E> {
     return result;
   }
 
-  static bool isNotEmpty(List l) {
+  static bool isNotEmpty(List? l) {
     return l != null && l.isNotEmpty;
   }
 
-  /// 扩展方法
+  /// 同 sorted
   List<E> sorted([int compare(E a, E b)?]) {
     this.sort(compare);
     return this;
@@ -48,7 +48,6 @@ extension ListExt<T,E> on List<E> {
 
   List<E> exchange(int fromIdx, int toIdx) {
     if (fromIdx >= this.length || toIdx >= this.length) {
-      // throw Exception('Error: fromIdx, toIdx < length');
       return this;
     }
     E e = this[fromIdx];

@@ -50,7 +50,7 @@ class _DottedBorderDemoState extends State<DottedBorderDemo> {
               // padding: EdgeInsets.all(20),
               child: DottedBorder(
                 color: Colors.black,//color of dotted/dash line
-                strokeWidth: 13, //thickness of dash/dots
+                strokeWidth: 3, //thickness of dash/dots
                 dashPattern: [10,0],
                 //dash patterns, 10 is dash width, 6 is space width
                 child: Container(  //inner container
@@ -65,7 +65,7 @@ class _DottedBorderDemoState extends State<DottedBorderDemo> {
               // padding: EdgeInsets.all(20),
               child: DottedBorder(
                 color: Colors.black,//color of dotted/dash line
-                strokeWidth: 13, //thickness of dash/dots
+                strokeWidth: 3, //thickness of dash/dots
                 // dashPattern: [10, 6],
                 //dash patterns, 10 is dash width, 6 is space width
                 child: Container(  //inner container
@@ -80,13 +80,31 @@ class _DottedBorderDemoState extends State<DottedBorderDemo> {
               // padding: EdgeInsets.all(20),
               child: DottedBorder(
                 color: Colors.black,//color of dotted/dash line
-                strokeWidth: 13, //thickness of dash/dots
+                strokeWidth: 3, //thickness of dash/dots
                 dashPattern: [10, 6],
                 //dash patterns, 10 is dash width, 6 is space width
                 child: Container(  //inner container
                   color: Colors.green,
                 ),
               )
+            ),
+            Divider(),
+            Container(
+                height: 30,
+                // padding: EdgeInsets.all(20),
+                child: DottedBorder(
+                  borderType: BorderType.RRect,
+                  radius: Radius.circular(22),
+                  padding: EdgeInsets.all(0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.all(Radius.circular(22)),
+                    child: Container(
+                      height: 30,
+                      width: 120,
+                      color: Colors.amber,
+                    ),
+                  ),
+                )
             ),
           ],
         ),
