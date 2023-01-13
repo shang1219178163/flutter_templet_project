@@ -13,6 +13,8 @@ import 'package:flutter_templet_project/basicWidget/gesture_detector_container.d
 import 'package:flutter_templet_project/basicWidget/upload_button.dart';
 import 'package:flutter_templet_project/extension/button_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:getwidget/components/border/gf_border.dart';
+import 'package:getwidget/getwidget.dart';
 
 import 'package:tuple/tuple.dart';
 
@@ -60,7 +62,28 @@ class _SecondPageState extends State<SecondPage> {
         Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
+            SectionHeader.h5(title: "color"),
+            Container(
+              width: 100,
+              height: 100,
+              decoration: BoxDecoration(
+                  color: Color(0xfff44336),
+                  borderRadius: BorderRadius.all(Radius.circular(18))
+              ),
+            ),
             SectionHeader.h5(title: "RadialGradientButton"),
+            RadialGradientButton(
+              text: Text('一二'),
+              center: Alignment.topRight,
+            ),
+            RadialGradientButton(
+              text: Text('一二'),
+              center: Alignment.centerRight,
+            ),
+            RadialGradientButton(
+              text: Text('一二'),
+              center: Alignment.bottomRight,
+            ),
             RadialGradientButton(
               text: Text('一二'),
             ),

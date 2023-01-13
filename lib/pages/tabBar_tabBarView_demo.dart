@@ -422,6 +422,7 @@ var _list = [
   Tuple2(APPRouter.physicalModelDemo, "physicalModelDemo", ),
   Tuple2(APPRouter.visibilityDemo, "visibilityDemo", ),
   Tuple2(APPRouter.ignorePointerDemo, "ignorePointerDemo", ),
+  Tuple2(APPRouter.boxShadowDemo, "阴影", ),
 
 
 ];
@@ -513,7 +514,8 @@ var _vendors = [
   Tuple2(APPRouter.colorConverterDemo, "颜色转换", ),
   Tuple2(APPRouter.wechatAssetsPickerDemo, "微信相册选择器", ),
   Tuple2(APPRouter.wechatPhotoPickerDemo, "微信相册选择器组件封装", ),
-
+  Tuple2(APPRouter.getWidgetDemo, "getWidget边框线", ),
+  Tuple2(APPRouter.dottedBorderDemo, "dottedBorder边框线", ),
 
 ];
 

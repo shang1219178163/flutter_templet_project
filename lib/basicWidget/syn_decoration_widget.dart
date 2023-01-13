@@ -248,18 +248,16 @@ class SynDecorationWidget extends StatelessWidget {
             bg,
             ClipRRect(
               borderRadius: borderRadius,
-              child: ClipRect(
-                child: BackdropFilter(
-                  filter: ui.ImageFilter.blur(
-                    sigmaX: blur,
-                    sigmaY: blur,
-                  ),
-                  child: Container(
-                    margin: margin,
-                    padding: padding,
-                    // decoration: decorationInner,
-                    child: child,
-                  ),
+              child: BackdropFilter(
+                filter: ui.ImageFilter.blur(
+                  sigmaX: blur,
+                  sigmaY: blur,
+                ),
+                child: Container(
+                  margin: margin,
+                  padding: padding,
+                  // decoration: decorationInner,
+                  child: child,
                 ),
               ),
             ),

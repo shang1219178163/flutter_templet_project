@@ -25,21 +25,21 @@ extension AlignmentExt on Alignment{
   ];
 
   /// 获取雷达渐进色 radius
-  radiusOfRadialGradient({
+  double? radiusOfRadialGradient({
     double? width = 0,
     double? height = 0,
   }) {
     if(width == null || height == null
         || width == 0 || height == 0) {
-      return 0.5;
+      return null;
     }
 
     final max = math.max(width, height);
     final min = math.min(width, height);
-    double scale = max/min;
+    double result = max/min;
     if (this.x != 0) {
-      scale *= 2.0;
+      result *= 2.0;
     }
-    return scale;
+    return result;
   }
 }

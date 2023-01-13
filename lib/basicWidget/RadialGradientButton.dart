@@ -20,8 +20,8 @@ class RadialGradientButton extends StatefulWidget {
     required this.text,
     // required this.colors,
     // required this.stops,
-    this.margin = const EdgeInsets.symmetric(horizontal: 3, vertical: 12),
-    this.padding = const EdgeInsets.all(2),
+    this.margin = const EdgeInsets.symmetric(horizontal: 3, vertical: 2),
+    this.padding = const EdgeInsets.symmetric(horizontal: 3, vertical: 2),
     this.center = Alignment.center,
     this.onClick,
   }) : super(key: key);
@@ -30,8 +30,8 @@ class RadialGradientButton extends StatefulWidget {
   // List<Color> colors;
   // List<double>? stops;
 
-  EdgeInsetsGeometry? margin;
-  EdgeInsetsGeometry? padding;
+  EdgeInsets? margin;
+  EdgeInsets? padding;
   Alignment center;
   GestureTapCallback? onClick;
 
@@ -48,10 +48,20 @@ class _RadialGradientButtonState extends State<RadialGradientButton> {
   @override
   void initState() {
     SchedulerBinding.instance?.addPostFrameCallback((timeStamp) {
+      if (context.size?.width == null || context.size?.height == null) {
+        return;
+      }
       _currentSize = context.size;
+
+      // double horizontal = (widget.margin?.left ?? 0.0) + (widget.margin?.right ?? 0.0);
+      // double vertical = (widget.margin?.top ?? 0.0) + (widget.margin?.bottom ?? 0.0);
+      // double width = context.size!.width > horizontal ? context.size!.width - horizontal : 0;
+      // double height = context.size!.height > vertical ? context.size!.height - vertical : 0;
+      double w = context.size!.width;
+      double h = context.size!.height;
       _scale = radiusOfRadialGradient(
-          width: context.size?.width,
-          height: context.size?.height,
+          width: w,
+          height: h,
           alignment: widget.center,
       );
       print("context.size:${context.size} ${_scale}");
@@ -86,23 +96,24 @@ class _RadialGradientButtonState extends State<RadialGradientButton> {
   }
 
   /// 获取雷达渐进色 radius
-  radiusOfRadialGradient({
+  double radiusOfRadialGradient({
     double? width = 0,
     double? height = 0,
     Alignment alignment = Alignment.center,
+    double defaultValue = 0.5,
   }) {
     if(width == null || height == null
-        || width == 0 || height == 0) {
-      return 0.5;
+        || width <= 0 || height <= 0) {
+      return defaultValue;
     }
 
     final max = math.max(width, height);
     final min = math.min(width, height);
-    double scale = max/min;
+    double result = max/min;
     if (alignment.x != 0) {
-      scale *= 2.0;
+      result *= 2.0;
     }
-    return scale;
+    return result;
   }
 }
 
