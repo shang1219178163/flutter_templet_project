@@ -514,7 +514,6 @@ var _vendors = [
   Tuple2(APPRouter.colorConverterDemo, "颜色转换", ),
   Tuple2(APPRouter.wechatAssetsPickerDemo, "微信相册选择器", ),
   Tuple2(APPRouter.wechatPhotoPickerDemo, "微信相册选择器组件封装", ),
-  Tuple2(APPRouter.getWidgetDemo, "getWidget边框线", ),
   Tuple2(APPRouter.dottedBorderDemo, "dottedBorder边框线", ),
 
 ];
@@ -525,8 +524,6 @@ var _others = [
   Tuple2(APPRouter.fourthPage, "fourthPage", ),
   Tuple2(APPRouter.loginPage, "LoginPage", ),
   Tuple2(APPRouter.loginPage2, "LoginPage2", ),
-
-
   Tuple2(APPRouter.borderDemo, "buttonBorderDemo", ),
   Tuple2(APPRouter.clipDemo, "clipDemo", ),
 

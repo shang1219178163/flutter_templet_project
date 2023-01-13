@@ -111,9 +111,7 @@ dependencies:
   color_converter: ^0.2.1
   horizontal_data_table: ^4.1.4
   wechat_assets_picker: ^6.2.2
-  getwidget: ^3.0.1
   dotted_border: ^2.0.0+3
-
   #  merge_images: ^1.0.3
 
   html: ^0.15.0

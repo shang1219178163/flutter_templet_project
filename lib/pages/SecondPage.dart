@@ -13,8 +13,6 @@ import 'package:flutter_templet_project/basicWidget/gesture_detector_container.d
 import 'package:flutter_templet_project/basicWidget/upload_button.dart';
 import 'package:flutter_templet_project/extension/button_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
-import 'package:getwidget/components/border/gf_border.dart';
-import 'package:getwidget/getwidget.dart';
 
 import 'package:tuple/tuple.dart';
 

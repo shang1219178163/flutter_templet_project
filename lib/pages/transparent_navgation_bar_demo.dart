@@ -37,9 +37,11 @@ class _TransparentNavgationBarDemoState extends State<TransparentNavgationBarDem
                 // padding: EdgeInsets.only(left: 8, right: 8, top: 0, bottom: 0),
                 child: Column(
                   children: [
-                    Image.asset(
-                      'images/bg.jpg',
-                      fit: BoxFit.fill,
+                    Expanded(
+                      child: Image.asset(
+                        'images/bg.jpg',
+                        fit: BoxFit.fill,
+                      ),
                     ),
                   ],
                 ),
