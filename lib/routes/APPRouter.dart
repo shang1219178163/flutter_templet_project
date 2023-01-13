@@ -79,7 +79,6 @@ import 'package:flutter_templet_project/vendor/custom_timer_demo.dart';
 import 'package:flutter_templet_project/vendor/dotted_border_demo.dart';
 import 'package:flutter_templet_project/vendor/flutter_swiper_demo.dart';
 import 'package:flutter_templet_project/vendor/flutter_swiper_indicator_demo.dart';
-import 'package:flutter_templet_project/vendor/getwidgetDemo.dart';
 import 'package:flutter_templet_project/vendor/qr/qr_code_scanner_demo.dart';
 import 'package:flutter_templet_project/vendor/qr/qr_flutter_demo.dart';
 import 'package:flutter_templet_project/vendor/timeline/timeline_demo.dart';
@@ -384,7 +383,6 @@ class APPRouter {
   static const visibilityDemo = '/visibilityDemo';
   static const ignorePointerDemo = '/ignorePointerDemo';
   static const horizontalCellDemo = '/horizontalCellDemo';
-  static const getWidgetDemo = '/getWidgetDemo';
   static const dottedBorderDemo = '/dottedBorderDemo';
   static const boxShadowDemo = '/boxShadowDemo';
 
@@ -606,7 +604,6 @@ class AppPage {
     GetPage(name: APPRouter.visibilityDemo, page: () => VisibilityDemo(),),
     GetPage(name: APPRouter.ignorePointerDemo, page: () => IgnorePointerDemo(),),
     GetPage(name: APPRouter.horizontalCellDemo, page: () => HorizontalCellDemo(),),
-    GetPage(name: APPRouter.getWidgetDemo, page: () => GetWidgetDemo(),),
     GetPage(name: APPRouter.dottedBorderDemo, page: () => DottedBorderDemo(),),
     GetPage(name: APPRouter.boxShadowDemo, page: () => BoxShadowDemo(),),
 
