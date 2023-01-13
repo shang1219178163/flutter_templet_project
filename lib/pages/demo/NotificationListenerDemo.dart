@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/scrollController_ext.dart';
-import 'package:flutter_templet_project/extension/scrollMetrics_ext.dart';
+import 'package:flutter_templet_project/extension/scroll_controller_ext.dart';
+import 'package:flutter_templet_project/extension/scroll_metrics_ext.dart';
 
 class NotificationListenerDemo extends StatefulWidget {
 

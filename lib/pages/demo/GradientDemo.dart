@@ -2,7 +2,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/SectionHeader.dart';
-import 'package:flutter_templet_project/extension/buildContext_ext.dart';
+import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/alignment_ext.dart';
 
 class GradientDemo extends StatefulWidget {

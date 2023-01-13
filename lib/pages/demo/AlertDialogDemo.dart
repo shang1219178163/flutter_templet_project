@@ -9,12 +9,12 @@ import 'package:flutter_templet_project/basicWidget/NNUserPrivacy.dart';
 import 'package:flutter_templet_project/basicWidget/NNWebView.dart';
 import 'package:flutter_templet_project/basicWidget/NNPopupRoute.dart';
 import 'package:flutter_templet_project/basicWidget/NNAlertDialog.dart';
-import 'package:flutter_templet_project/extension/buildContext_ext.dart';
+import 'package:flutter_templet_project/extension/build_context_ext.dart';
 
 import 'package:flutter_templet_project/extension/ddlog.dart';
-import 'package:flutter_templet_project/extension/richText_ext.dart';
+import 'package:flutter_templet_project/extension/rich_text_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
-import 'package:flutter_templet_project/extension/alertDialog_ext.dart';
+import 'package:flutter_templet_project/extension/dialog_ext.dart';
 
 import 'package:popover/popover.dart';
 

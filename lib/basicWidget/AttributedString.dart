@@ -9,7 +9,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/richText_ext.dart';
+import 'package:flutter_templet_project/extension/rich_text_ext.dart';
 
 
 ///富文本处理

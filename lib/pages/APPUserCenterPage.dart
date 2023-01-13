@@ -12,7 +12,7 @@ import 'package:flutter_templet_project/extension/button_ext.dart';
 import 'package:flutter_templet_project/main.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/navigator_ext.dart';
-import 'package:flutter_templet_project/extension/alertDialog_ext.dart';
+import 'package:flutter_templet_project/extension/dialog_ext.dart';
 import 'package:flutter_templet_project/routes/APPRouter.dart';
 
 import 'package:get/get.dart';
