@@ -69,7 +69,7 @@ extension ListExt<T,E> on List<E> {
   }
 
   /// 转为 Map<String, dynamic>
-  Map<String, E> toJson() {
+  Map<String, E> toMap() {
     final Map<String, E> map = {};
     for (var item in this) {
       map["${item}"] = item;
