@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/SectionHeader.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/alignment_ext.dart';
+import 'package:flutter_templet_project/extension/painting_ext.dart';
 
 class GradientDemo extends StatefulWidget {
   final String? title;
@@ -59,12 +60,7 @@ class _GradientDemoState extends State<GradientDemo> {
   }
 
   showSheetTileMode() {
-    final tileModes = [
-      TileMode.clamp,
-      TileMode.repeated,
-      TileMode.mirror,
-      TileMode.decal,
-    ];
+    final tileModes = TileModeExt.allCases;
 
     final items = tileModes.map((e) => Text('$e')).toList();
 
@@ -78,37 +74,7 @@ class _GradientDemoState extends State<GradientDemo> {
     );
   }
   showSheetBlendMode() {
-    final blendModes = [
-      BlendMode.clear,
-      BlendMode.src,
-      BlendMode.dst,
-      BlendMode.srcOver,
-      BlendMode.dstOver,
-      BlendMode.srcIn,
-      BlendMode.dstIn,
-      BlendMode.srcOut,
-      BlendMode.dstOut,
-      BlendMode.srcATop,
-      BlendMode.dstATop,
-      BlendMode.xor,
-      BlendMode.plus,
-      BlendMode.modulate,
-      BlendMode.screen,
-      BlendMode.overlay,
-      BlendMode.darken,
-      BlendMode.lighten,
-      BlendMode.colorDodge,
-      BlendMode.colorBurn,
-      BlendMode.hardLight,
-      BlendMode.softLight,
-      BlendMode.difference,
-      BlendMode.exclusion,
-      BlendMode.multiply,
-      BlendMode.hue,
-      BlendMode.saturation,
-      BlendMode.color,
-      BlendMode.luminosity,
-    ];
+    final blendModes = BlendModeExt.allCases;;
 
     final items = blendModes.map((e) => Text('$e')).toList();
 
