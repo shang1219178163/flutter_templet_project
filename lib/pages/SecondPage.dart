@@ -77,10 +77,14 @@ class _SecondPageState extends State<SecondPage> {
               center: Alignment.bottomRight,
             ),
             AfterLayoutBuilder(
-              child: Text("离离原上草, 一岁一枯荣"),
-              builder: (BuildContext context, Widget? child, Size size) {
-                print("size:${size}");
-                if (size == Size.zero) {
+              child: Container(
+                margin: EdgeInsets.all(10),
+                padding: EdgeInsets.all(10),
+                child: Text("离离原上草, 一岁一枯荣")
+              ),
+              builder: (BuildContext context, Widget? child, Size? size) {
+                print("AfterLayoutBuilder size:${size}");
+                if (size == null) {
                   return child ?? SizedBox();
                 }
                 return Container(

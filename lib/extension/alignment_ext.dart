@@ -5,8 +5,10 @@
 //  Created by shang on 2023/1/12 20:57.
 //  Copyright © 2023/1/12 shang. All rights reserved.
 //
+import 'dart:math' as math;
 
 import 'package:flutter/cupertino.dart';
+
 
 extension AlignmentExt on Alignment{
   /// 九个方位变量集合
@@ -22,4 +24,22 @@ extension AlignmentExt on Alignment{
     Alignment.bottomRight,
   ];
 
+  /// 获取雷达渐进色 radius
+  radiusOfRadialGradient({
+    double? width = 0,
+    double? height = 0,
+  }) {
+    if(width == null || height == null
+        || width == 0 || height == 0) {
+      return 0.5;
+    }
+
+    final max = math.max(width, height);
+    final min = math.min(width, height);
+    double scale = max/min;
+    if (this.x != 0) {
+      scale *= 2.0;
+    }
+    return scale;
+  }
 }
