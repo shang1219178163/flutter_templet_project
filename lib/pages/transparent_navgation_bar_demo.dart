@@ -30,56 +30,45 @@ class _TransparentNavgationBarDemoState extends State<TransparentNavgationBarDem
       extendBodyBehindAppBar: true,
       // backgroundColor: Colors.blue,
       body: Stack(
-          children: [
-            SafeArea(
-              child: Container(
-                color: Colors.white,
-                // padding: EdgeInsets.only(left: 8, right: 8, top: 0, bottom: 0),
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: Image.asset(
-                        'images/bg.jpg',
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                  ],
+        children: [
+          SafeArea(
+            child: Container(
+              color: Colors.red,
+              // padding: EdgeInsets.only(left: 8, right: 8, top: 0, bottom: 0),
+              child: Center(
+                child: Image.asset(
+                  'images/bg.jpg',
+                  fit: BoxFit.fill,
                 ),
               ),
             ),
-            Positioned(
-              child: Container(
-                  height: 102,
-                  child: AppBar(
-                    title: Text("title"),
-                    actions: [
-                      IconButton(
-                        onPressed: (){
-                          ddlog("share");
-                        },
-                        icon: Icon(Icons.share)
-                      ),
-                    ],
-                    backgroundColor: Colors.transparent,
-                    elevation: 0,
-                    foregroundColor: Colors.black,
-                  ),
-                ),
-              ),
-          ]
+          ),
+          Positioned(
+            child: Container(
+              height: 102,
+              child: _buildAppBar(),
+            ),
+          ),
+        ]
       ),
-    );
-
-    return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title ?? "$widget"),
-        ),
-        body: Text(arguments.toString())
     );
   }
 
-  _buildTopBar() {
-  
+  _buildAppBar() {
+    return AppBar(
+      title: Text("title"),
+      actions: [
+        IconButton(
+            onPressed: (){
+              ddlog("share");
+            },
+            icon: Icon(Icons.share)
+        ),
+      ],
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      foregroundColor: Colors.black,
+    );
   }
 
 }
