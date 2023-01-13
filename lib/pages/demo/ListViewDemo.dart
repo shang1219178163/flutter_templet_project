@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_templet_project/extension/scrollController_ext.dart';
+import 'package:flutter_templet_project/extension/scroll_controller_ext.dart';
 import 'package:tuple/tuple.dart';
 
 typedef onKeyCallback = void Function(BuildContext context, int index, GlobalKey key);

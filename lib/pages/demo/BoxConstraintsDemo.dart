@@ -39,24 +39,18 @@ class _BoxConstraintsDemoState extends State<BoxConstraintsDemo> {
               ConstrainedBox(
                 // BoxConstraints 构造
                 constraints: BoxConstraints(
-                  // 最小高度 40
                   minHeight: 40,
-                  // 最大高度 100
                   maxHeight: 100,
-                  // 最小宽度 40
                   minWidth: 40,
-                  // 最小宽度 300
                   maxWidth: 300,
                 ),
                 child: _buildBox(),
               ),
-
               SectionHeader.h4(title: 'ConstrainedBox.expand（展开约束）',),
               ConstrainedBox(
                 constraints: BoxConstraints.expand(width: 300, height: 100),
                 child: _buildBox(),
               ),
-
               SectionHeader.h4(title: 'ConstrainedBox.loose（松约束）',),
               ConstrainedBox(
                 constraints: BoxConstraints.loose(Size(300, 100)),

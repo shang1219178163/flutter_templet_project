@@ -9,18 +9,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 
-class TransparentNavgationBarDemo extends StatefulWidget {
+class navgationBarDemo extends StatefulWidget {
 
   final String? title;
 
-  TransparentNavgationBarDemo({ Key? key, this.title}) : super(key: key);
+  navgationBarDemo({ Key? key, this.title}) : super(key: key);
 
 
   @override
-  _TransparentNavgationBarDemoState createState() => _TransparentNavgationBarDemoState();
+  _navgationBarDemoState createState() => _navgationBarDemoState();
 }
 
-class _TransparentNavgationBarDemoState extends State<TransparentNavgationBarDemo> {
+class _navgationBarDemoState extends State<navgationBarDemo> {
 
 
   @override

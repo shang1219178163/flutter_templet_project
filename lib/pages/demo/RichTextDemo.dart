@@ -9,7 +9,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/AttributedString.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
-import 'package:flutter_templet_project/extension/richText_ext.dart';
+import 'package:flutter_templet_project/extension/rich_text_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 
 class RichTextDemo extends StatefulWidget {

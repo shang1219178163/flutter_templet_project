@@ -171,7 +171,7 @@ import 'package:flutter_templet_project/pages/demo/StreamBuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedSwitcherDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedWidgetDemo.dart';
 import 'package:flutter_templet_project/pages/test_page.dart';
-import 'package:flutter_templet_project/pages/transparent_navgation_bar_demo.dart';
+import 'package:flutter_templet_project/pages/navgation_bar_demo.dart';
 import 'package:flutter_templet_project/provider/getx_state_demo.dart';
 import 'package:flutter_templet_project/provider/rxDart_provider_demo.dart';
 import 'package:flutter_templet_project/provider/state_manager_demo.dart';
@@ -308,7 +308,7 @@ class APPRouter {
   static const timelineDemo = '/timelineDemo';
   static const timelinesDemo = '/timelinesDemo';
   static const hitTest = '/hitTest';
-  static const transparentNavgationBarDemo = '/transparentNavgationBarDemo';
+  static const navgationBarDemo = '/transparentNavgationBarDemo';
   static const borderDemo = '/borderDemo';
   static const clipDemo = '/clipDemo';
   static const steperConnectorDemo = '/steperConnectorDemo';
@@ -531,7 +531,7 @@ class AppPage {
     GetPage(name: APPRouter.timelineDemo, page: () => TimelineDemo(),),
     GetPage(name: APPRouter.timelinesDemo, page: () => TimelinesDemo(),),
     GetPage(name: APPRouter.hitTest, page: () => HitTest(),),
-    GetPage(name: APPRouter.transparentNavgationBarDemo, page: () => TransparentNavgationBarDemo(),),
+    GetPage(name: APPRouter.navgationBarDemo, page: () => navgationBarDemo(),),
     GetPage(name: APPRouter.borderDemo, page: () => BorderDemo(),),
     GetPage(name: APPRouter.clipDemo, page: () => ClipDemo(),),
     GetPage(name: APPRouter.steperConnectorDemo, page: () => SteperConnectorDemo(),),
