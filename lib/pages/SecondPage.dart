@@ -68,7 +68,7 @@ class _SecondPageState extends State<SecondPage> {
               height: 100,
               decoration: BoxDecoration(
                   color: Color(0xfff44336),
-                  borderRadius: BorderRadius.all(Radius.circular(18))
+                  borderRadius: BorderRadius.all(Radius.circular(18)),
               ),
             ),
             SectionHeader.h5(title: "RadialGradientButton"),
