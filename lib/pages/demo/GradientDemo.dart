@@ -28,28 +28,32 @@ class _GradientDemoState extends State<GradientDemo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title ?? "$widget"),
-          actions: [
-            TextButton(
-              onPressed: () {
-                showSheetTileMode();
-              },
-              child: Text("$tileMode", style: TextStyle(color: Colors.white),)
-            ),
-            TextButton(
-              onPressed: () {
-                showSheetBlendMode();
-              },
-              child: Text("$blendMode", style: TextStyle(color: Colors.white),)
-            ),
-          ],
-          bottom: PreferredSize(
-            preferredSize: Size(double.infinity, 50),
-            child: _buildDropdownButton(),
-          )
-        ),
-        body: _buildBody()
+      appBar: AppBar(
+        title: Text(widget.title ?? "$widget"),
+        actions: [
+          TextButton(
+            onPressed: () {
+              showSheetTileMode();
+            },
+            child: Text("$tileMode", style: TextStyle(color: Colors.white),)
+          ),
+          TextButton(
+            onPressed: () {
+              showSheetBlendMode();
+            },
+            child: Text("$blendMode", style: TextStyle(color: Colors.white),)
+          ),
+        ],
+        bottom: PreferredSize(
+          preferredSize: Size(double.infinity, 50),
+          child: Row(
+            children: [
+              _buildDropdownButton(),
+            ],
+          ),
+        )
+      ),
+      body: _buildBody()
     );
   }
   
@@ -122,161 +126,186 @@ class _GradientDemoState extends State<GradientDemo> {
 
   _buildBody() {
     return ListView(children: <Widget>[
-      TextButton(
-        onPressed: () {
-          push(page: GradientTwoDemo());
-        },
-        child: Text("more",)
-      ),
-      
+      buildTop(),
       SectionHeader.h4(title: 'LinearGradient',),
       _buildBox(
         text: '两种颜色 均分',
         decoration: BoxDecoration(
           color: Colors.red,
           gradient: LinearGradient(
-              tileMode: this.tileMode,
-              colors: [Color(0xFFFFC125), Color(0xFFFF7F24)]
+            tileMode: this.tileMode,
+            colors: [
+              Color(0xFFFFC125),
+              Color(0xFFFF7F24)
+            ]
           )
         ),
       ),
       _buildBox(
-          text: '多种颜色 均分',
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  tileMode: this.tileMode,
-                  colors: [Color(0xFFFFC125), Color(0xFFFF7F24), Color(0xFFFF4040)]
-              )
-          ),
+        text: '多种颜色 均分',
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            tileMode: this.tileMode,
+            colors: [
+              Color(0xFFFFC125),
+              Color(0xFFFF7F24),
+              Color(0xFFFF4040)
+            ]
+          )
+        ),
       ),
       _buildBox(
-          text: '两种颜色 1:3',
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  tileMode: this.tileMode,
-                  colors: [Color(0xFFFFC125), Color(0xFFFF7F24), Color(0xFFFF7F24), Color(0xFFFF7F24)]
-              )
-          ),
+        text: '两种颜色 1:3',
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            tileMode: this.tileMode,
+            colors: [
+              Color(0xFFFFC125),
+              Color(0xFFFF7F24),
+              Color(0xFFFF7F24),
+              Color(0xFFFF7F24)
+            ]
+          )
+        ),
       ),
 
       _buildBox(
-          text: '两种颜色 垂直均分 topRight',
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  tileMode: this.tileMode,
-                  begin: Alignment.topRight,
-                  colors: [Color(0xFFFFC125), Color(0xFFFF7F24)]
-              )
+        text: '两种颜色 垂直均分 topRight',
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            tileMode: this.tileMode,
+            begin: Alignment.topRight,
+            colors: [
+              Color(0xFFFFC125),
+              Color(0xFFFF7F24)
+            ]
           )
+        )
       ),
 
       _buildBox(
-          text: '两种颜色 前半部均分 延伸',
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  tileMode: this.tileMode,
-                  begin: Alignment(-1.0, 0.0),
-                  end: Alignment(0.0, 0.0),
-                  // tileMode: TileMode.clamp,
-                  colors: [Color(0xFFFFC125), Color(0xFFFF7F24)]
-              )
+        text: '两种颜色 前半部均分 延伸',
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            tileMode: this.tileMode,
+            begin: Alignment(-1.0, 0.0),
+            end: Alignment(0.0, 0.0),
+            // tileMode: TileMode.clamp,
+            colors: [
+              Color(0xFFFFC125),
+              Color(0xFFFF7F24)
+            ]
           )
+        )
       ),
 
       _buildBox(
-          text: '两种颜色 均分 重复 repeated',
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  tileMode: this.tileMode,
-                  begin: Alignment(-1.0, 0.0),
-                  end: Alignment(0.0, 0.0),
-                  colors: [Color(0xFFFFC125), Color(0xFFFF7F24)]
-              )
+        text: '两种颜色 均分 重复 repeated',
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            tileMode: this.tileMode,
+            begin: Alignment(-1.0, 0.0),
+            end: Alignment(0.0, 0.0),
+            colors: [
+              Color(0xFFFFC125),
+              Color(0xFFFF7F24)
+            ]
           )
+        )
       ),
 
       _buildBox(
-          text: '两种颜色 均分 mirror',
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  tileMode: this.tileMode,
-                  begin: Alignment(-1.0, 0.0),
-                  end: Alignment(0.0, 0.0),
-                  // tileMode: TileMode.mirror,
-                  colors: [Color(0xFFFFC125), Color(0xFFFF7F24)]
-              )
+        text: '两种颜色 均分 mirror',
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            tileMode: this.tileMode,
+            begin: Alignment(-1.0, 0.0),
+            end: Alignment(0.0, 0.0),
+            // tileMode: TileMode.mirror,
+            colors: [
+              Color(0xFFFFC125),
+              Color(0xFFFF7F24)
+            ]
           )
+        )
       ),
 
       _buildBox(
-          text: '两种颜色 设置起始位置与终止位置',
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  tileMode: this.tileMode,
-                  begin: Alignment.topLeft,
-                  end: Alignment(0.5, 0.0),
-                  // tileMode: TileMode.repeated,
-                  colors: [Color(0xFFFFC125), Color(0xFFFF7F24)],
-              )
+        text: '两种颜色 设置起始位置与终止位置',
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            tileMode: this.tileMode,
+            begin: Alignment.topLeft,
+            end: Alignment(0.5, 0.0),
+            // tileMode: TileMode.repeated,
+            colors: [
+              Color(0xFFFFC125),
+              Color(0xFFFF7F24)
+            ],
           )
+        )
       ),
 
       _buildBox(
-          text: '三种颜色 设置起始位置与终止位置',
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                tileMode: this.tileMode,
-                // begin: Alignment.topLeft,
-                // end: Alignment(0.5, 0.0),
-                colors: const <Color>[
-                  Colors.red, // blue
-                  Colors.blue,
-                  Colors.yellow,
-                ],
-                stops: const <double>[0.0, 0.5, 0.8]
-              )
+        text: '三种颜色 设置起始位置与终止位置',
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            tileMode: this.tileMode,
+            // begin: Alignment.topLeft,
+            // end: Alignment(0.5, 0.0),
+            colors: const <Color>[
+              Colors.red, // blue
+              Colors.blue,
+              Colors.yellow,
+            ],
+            stops: [0.0, 0.5, 0.8]
           )
+        )
       ),
       Divider(),
       SectionHeader.h4(title: 'SweepGradient',),
       _buildBox(
-          text: '三种颜色 设置起始位置与终止位置',
-          decoration: BoxDecoration(
-            gradient: SweepGradient(
-                tileMode: this.tileMode,
-                center: Alignment.topCenter,
-                // startAngle: 1.7,
-                // endAngle: 3,
-                colors: const <Color>[
-                  Colors.red, // blue
-                  Colors.blue,
-                  Colors.yellow,
-                ],
-                stops: const <double>[0.0, 0.5, 0.8]
-            ),
-          ),
-      ),
-      _buildBox(
-        text: '三种颜色 设置起始位置与终止位置',
+        text: '四色 无 stops, 平均分布',
         decoration: BoxDecoration(
           gradient: SweepGradient(
-              tileMode: this.tileMode,
-              startAngle: 0,
-              endAngle: math.pi * 2,
-              colors: const <Color>[
-                Colors.red, // blue
-                Colors.blue,
-                Colors.yellow,
-              ],
-              stops: const <double>[0.0, 0.5, 0.8]
+            tileMode: this.tileMode,
+            center: this._dropValue,
+            startAngle: 0,
+            endAngle: math.pi * 2,
+            colors: const <Color>[
+              Colors.red, // blue
+              Colors.blue,
+              Colors.yellow,
+              Colors.green
+            ],
+            // stops: [0.0, 0.5, 0.8, 1]
           ),
         ),
       ),
       _buildBox(
-        text: 'SweepGradient',
+        text: '四色 无 stops, stops: [0.25, 0.5, 0.75, 1]',
         decoration: BoxDecoration(
           gradient: SweepGradient(
             tileMode: this.tileMode,
+            center: this._dropValue,
+            startAngle: 0,
+            endAngle: math.pi * 2,
+            colors: const <Color>[
+              Colors.red, // blue
+              Colors.blue,
+              Colors.yellow,
+              Colors.green
+            ],
+            stops: [0.25, 0.5, 0.75, 1]
+          ),
+        ),
+      ),
+      _buildBox(
+        text: '四色 startAngle: 0, endAngle: math.pi',
+        decoration: BoxDecoration(
+          gradient: SweepGradient(
+            tileMode: this.tileMode,
+            center: this._dropValue,
             // center: FractionalOffset.topRight,
             startAngle: 0,
             endAngle: math.pi,
@@ -284,13 +313,13 @@ class _GradientDemoState extends State<GradientDemo> {
               Colors.red, // blue
               Colors.blue,
               Colors.yellow,
+              Colors.green
             ],
-            stops: const <double>[0.0, 0.5, 0.8],
+            stops: [0.25, 0.5, 0.75, 1]
           ),
         ),
       ),
       Divider(),
-      _buildDropdownButton(),
       SectionHeader.h4(title: 'RadialGradient',),
       _buildBox(
         height: 100,
@@ -301,13 +330,13 @@ class _GradientDemoState extends State<GradientDemo> {
             // tileMode: TileMode.mirror,
             radius: _radius,
             center: _dropValue,
-            colors: <Color>[
+            colors: [
               Colors.red, // blue
               Colors.blue,
               Colors.yellow,
               Colors.green,
             ],
-            stops: const <double>[0.1, 0.3, 0.6, 1],
+            stops: [0.1, 0.3, 0.6, 1],
           ),
         ),
       ),
@@ -321,12 +350,12 @@ class _GradientDemoState extends State<GradientDemo> {
             // tileMode: TileMode.mirror,
             // radius: 0.5,
             // center: Alignment.center,
-            colors: <Color>[
+            colors: [
               Colors.red, // blue
               Colors.blue,
               Colors.yellow,
             ],
-            stops: const <double>[0.0, 0.5, 0.8],
+            stops: [0.0, 0.5, 0.8],
           ),
         ),
       ),
@@ -338,7 +367,7 @@ class _GradientDemoState extends State<GradientDemo> {
           return RadialGradient(
             tileMode: this.tileMode,
             radius: 0.5,
-            colors: <Color>[Colors.red, Colors.blue],
+            colors: [Colors.red, Colors.blue],
           ).createShader(bounds);
         },
       ),
@@ -348,7 +377,7 @@ class _GradientDemoState extends State<GradientDemo> {
           return RadialGradient(
             tileMode: this.tileMode,
             radius: .6,
-            colors: <Color>[
+            colors: [
               Colors.transparent,
               Colors.transparent,
               Colors.grey.withOpacity(.7),
@@ -391,6 +420,22 @@ class _GradientDemoState extends State<GradientDemo> {
           height: 400,
         ),
       );
+  }
+
+  buildTop() {
+    return Row(
+      children: [
+        TextButton(
+            onPressed: () {
+              push(page: GradientTwoDemo());
+            },
+            child: Container(
+                padding: EdgeInsets.all(8),
+                child: Text("雷达渐进色深入研究",)
+            )
+        ),
+      ],
+    );
   }
 
   push({required Widget page}) {
