@@ -39,6 +39,7 @@ extension AlignmentExt on Alignment{
     final min = math.min(width, height);
     double result = 0.5;
 
+    //贪婪模式用大半径,否则小半径
     if([
       Alignment.center,
     ].contains(this)){
@@ -57,7 +58,7 @@ extension AlignmentExt on Alignment{
       Alignment.bottomRight
     ].contains(this)) {
       final tmp = math.sqrt(math.pow(max, 2) + math.pow(min, 2)).ceil();
-      print("tmp:$tmp");
+      // print("tmp:$tmp");
       result = tmp/min;
 
     } else if ([
