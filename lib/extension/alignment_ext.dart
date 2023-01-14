@@ -25,13 +25,16 @@ extension AlignmentExt on Alignment{
   ];
 
   /// 获取雷达渐进色 radius
+  /// isGreed 是否贪婪模式(贪婪模式用大半径,否则小半径)
+  /// isDiagonal 四角是否使用对角线(为 true 则 isGreed 参数无效)
   double? radiusOfRadialGradient({
     required double? width,
     required double? height,
     bool isGreed = true,
+    bool isDiagonal = true,
   }) {
     if(width == null || height == null
-        || width == 0 || height == 0) {
+        || width <= 0 || height <= 0) {
       return null;
     }
 
@@ -39,7 +42,6 @@ extension AlignmentExt on Alignment{
     final min = math.min(width, height);
     double result = 0.5;
 
-    //贪婪模式用大半径,否则小半径
     if([
       Alignment.center,
     ].contains(this)){
@@ -57,15 +59,19 @@ extension AlignmentExt on Alignment{
       Alignment.bottomLeft,
       Alignment.bottomRight
     ].contains(this)) {
-      final tmp = math.sqrt(math.pow(max, 2) + math.pow(min, 2)).ceil();
-      // print("tmp:$tmp");
-      result = tmp/min;
-
+      if (isDiagonal) {
+        final tmp = math.sqrt(math.pow(max, 2) + math.pow(min, 2)).ceil();
+        // result = isGreed == true ? tmp/min : max/min;
+        result = tmp/min;
+      } else {
+        result = isGreed == true ? max/min : 1;
+      }
     } else if ([
       Alignment.centerLeft,
       Alignment.centerRight,
     ].contains(this)) {
       result = isGreed == true ? 1 : max/min * 0.5;
+
     }
     return result;
   }
