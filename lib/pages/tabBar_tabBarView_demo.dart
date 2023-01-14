@@ -363,7 +363,7 @@ var _list = [
   Tuple2(APPRouter.tabBarDemo, "tabBarDemo", ),
   Tuple2(APPRouter.tabBarDemoNew, "tabBarDemoNew", ),
   Tuple2(APPRouter.tabBarOnlyDemo, "tabBarOnlyDemo", ),
-  Tuple2(APPRouter.tabBarCustomDemo, "tabBarCustomDemo", ),
+  Tuple2(APPRouter.tabBarSegmentDemo, "tabBarSegmentDemo", ),
   Tuple2(APPRouter.textlessDemo, "textlessDemo", ),
   Tuple2(APPRouter.textFieldDemo, "textFieldDemo", ),
 

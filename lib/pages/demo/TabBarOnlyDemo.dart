@@ -8,6 +8,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/tab_bar_segment.dart';
 import 'package:flutter_templet_project/uti/R.dart';
 
 class TabBarOnlyDemo extends StatefulWidget {
@@ -65,7 +66,8 @@ class _TabBarOnlyDemoState extends State<TabBarOnlyDemo> with SingleTickerProvid
             onPressed: onDone,
           )).toList(),
           bottom: TabBar(
-            controller: _tabController,
+            // controller: _tabController,
+            onTap: (index) => print("onTap $index"),
             isScrollable: true,
             // tabs: titles.map((e) => Tab(text: e,)).toList(),
             tabs: titles.map((e) => buildItem(e)).toList(),
@@ -81,7 +83,26 @@ class _TabBarOnlyDemoState extends State<TabBarOnlyDemo> with SingleTickerProvid
           ),
         ),
         body: Center(
-          child: Text("${currentIndex}"),
+          child: ListView(
+            children: [
+              Text("${currentIndex}"),
+
+              Container(
+                color: Colors.green,
+                // width: 200,
+                height: 100,
+                child: BottomTabBar(
+                  tabCount: titles.length,
+                  onClick: (BuildContext context, int index) {
+                    print("BottomTabBar ${index}");
+                  },
+                  itembuilder: (BuildContext context, int index) {
+                    return Tab(text: titles[index]);
+                  },
+                ),
+              )
+            ],
+          ),
         )
     );
   }
@@ -106,3 +127,72 @@ class _TabBarOnlyDemoState extends State<TabBarOnlyDemo> with SingleTickerProvid
 }
 
 
+
+class BottomTabBar extends StatefulWidget {
+
+  BottomTabBar({
+    Key? key,
+    this.title,
+    required this.tabCount,
+    required this.itembuilder,
+    required this.onClick,
+    this.controller,
+  }) : super(key: key);
+
+  String? title;
+
+  int tabCount;
+
+  IndexedWidgetBuilder itembuilder;
+
+  TabController? controller;
+
+  IndexedCallback onClick;
+
+  @override
+  _BottomTabBarState createState() => _BottomTabBarState();
+}
+
+class _BottomTabBarState extends State<BottomTabBar> with SingleTickerProviderStateMixin {
+
+  late TabController _tabController;
+  /// 初始索引
+  int initialIndex = 1;
+  /// 当前索引
+  int currentIndex = 0;
+
+
+  @override
+  void initState() {
+    super.initState();
+
+    _tabController = widget.controller ?? TabController(length: widget.tabCount, vsync: this)
+      ..addListener(() {
+        if(!_tabController.indexIsChanging){
+          print("_tabController:${_tabController.index}");
+          setState(() {
+            currentIndex = _tabController.index;
+            widget.onClick(context, currentIndex);
+          });
+        }
+      });
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final tabs = List.generate(widget.tabCount, (index) => widget.itembuilder(context, index)).toList();
+
+    return TabBar(
+      controller: _tabController,
+      isScrollable: true,
+      tabs: tabs,
+    );
+  }
+
+}
