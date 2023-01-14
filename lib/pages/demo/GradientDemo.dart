@@ -5,7 +5,7 @@ import 'package:flutter_templet_project/basicWidget/SectionHeader.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/alignment_ext.dart';
 import 'package:flutter_templet_project/extension/painting_ext.dart';
-import 'package:flutter_templet_project/pages/demo/GradientTwoDemo.dart';
+import 'package:flutter_templet_project/pages/demo/GradientOfRadialDemo.dart';
 import 'package:tuple/tuple.dart';
 
 class GradientDemo extends StatefulWidget {
@@ -427,7 +427,7 @@ class _GradientDemoState extends State<GradientDemo> {
       children: [
         TextButton(
             onPressed: () {
-              push(page: GradientTwoDemo());
+              push(page: GradientOfRadialDemo());
             },
             child: Container(
                 padding: EdgeInsets.all(8),
