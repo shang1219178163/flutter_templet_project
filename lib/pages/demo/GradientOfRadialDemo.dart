@@ -3,17 +3,18 @@ import 'package:flutter_templet_project/basicWidget/SectionHeader.dart';
 import 'package:flutter_templet_project/extension/alignment_ext.dart';
 import 'package:tuple/tuple.dart';
 
-class GradientTwoDemo extends StatefulWidget {
 
-  GradientTwoDemo({ Key? key, this.title}) : super(key: key);
+class GradientOfRadialDemo extends StatefulWidget {
+
+  GradientOfRadialDemo({ Key? key, this.title}) : super(key: key);
 
   final String? title;
 
   @override
-  _GradientTwoDemoState createState() => _GradientTwoDemoState();
+  _GradientOfRadialDemoState createState() => _GradientOfRadialDemoState();
 }
 
-class _GradientTwoDemoState extends State<GradientTwoDemo> {
+class _GradientOfRadialDemoState extends State<GradientOfRadialDemo> {
 
   var maxWidth = double.infinity;
   var maxHeight = double.infinity;
@@ -25,9 +26,6 @@ class _GradientTwoDemoState extends State<GradientTwoDemo> {
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.title ?? "$widget"),
-            actions: [
-              _buildDropdownButton(),
-            ],
           bottom: buildAppBottom(),
         ),
         body: Container(
@@ -45,19 +43,24 @@ class _GradientTwoDemoState extends State<GradientTwoDemo> {
 
   buildAppBottom() {
     return PreferredSize(
-        preferredSize: Size(double.infinity, 50),
-        child: TextButton(
-          onPressed: () {
-            this.isGreed = !this.isGreed;
-            setState(() {});
-          },
-          child: Center(
+      preferredSize: Size(double.infinity, 50),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          _buildDropdownButton(),
+          TextButton(
+            onPressed: () {
+              this.isGreed = !this.isGreed;
+              setState(() {});
+            },
+            child: Center(
               child: Text("isGreed: ${isGreed.toString()}",
-                style: TextStyle(
-                    color: Colors.white),
+                style: TextStyle(color: Colors.white),
               )
+            ),
           ),
-        )
+        ],
+      )
     );
   }
 
@@ -75,12 +78,6 @@ class _GradientTwoDemoState extends State<GradientTwoDemo> {
       onChanged: (Alignment? value) {
         if (value == null) return;
         _dropValue = value;
-        _radius = value.radiusOfRadialGradient(
-          width: this.maxWidth,
-          height: this.maxHeight,
-          isGreed: this.isGreed
-        ) ?? 0.5;
-        print("_dropValue:${value} _radius:${_radius} maxWidth:${maxWidth} maxHeight:${maxHeight}");
         setState(() {});
       },
     );
@@ -116,6 +113,13 @@ class _GradientTwoDemoState extends State<GradientTwoDemo> {
       Tuple2(Colors.green, 1),
     ];
 
+    _radius = _dropValue.radiusOfRadialGradient(
+        width: this.maxWidth,
+        height: this.maxHeight,
+        isGreed: this.isGreed
+    ) ?? 0.5;
+    print("_dropValue:${_dropValue} _radius:${_radius} maxWidth:${maxWidth} maxHeight:${maxHeight}");
+
     print("_radius: $_radius");
     return _buildBox(
       height: 100,
@@ -126,7 +130,6 @@ class _GradientTwoDemoState extends State<GradientTwoDemo> {
           // tileMode: this.tileMode,
           // tileMode: TileMode.mirror,
           radius: _radius,
-          // radius: 1.0,
           tileMode: TileMode.decal,
           center: _dropValue,
           // focal: Alignment.bottomCenter,
