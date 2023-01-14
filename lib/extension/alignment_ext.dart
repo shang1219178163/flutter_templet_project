@@ -28,7 +28,7 @@ extension AlignmentExt on Alignment{
   double? radiusOfRadialGradient({
     required double? width,
     required double? height,
-    bool isGreed = false,
+    bool isGreed = true,
   }) {
     if(width == null || height == null
         || width == 0 || height == 0) {
