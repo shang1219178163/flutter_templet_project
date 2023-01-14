@@ -19,7 +19,10 @@ class _GradientOfRadialDemoState extends State<GradientOfRadialDemo> {
   var maxWidth = double.infinity;
   var maxHeight = double.infinity;
 
+  /// 是否是贪婪模式
   var isGreed = true;
+  /// 是否使用对角线做半径
+  bool isDiagonal = true;
 
   @override
   Widget build(BuildContext context) {
@@ -48,16 +51,19 @@ class _GradientOfRadialDemoState extends State<GradientOfRadialDemo> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           _buildDropdownButton(),
-          TextButton(
+          _buildButton(
+            text: "isGreed: ${isGreed.toString()}",
             onPressed: () {
               this.isGreed = !this.isGreed;
               setState(() {});
             },
-            child: Center(
-              child: Text("isGreed: ${isGreed.toString()}",
-                style: TextStyle(color: Colors.white),
-              )
-            ),
+          ),
+          _buildButton(
+            text: "isDiagonal: ${isDiagonal.toString()}",
+            onPressed: () {
+              this.isDiagonal = !this.isDiagonal;
+              setState(() {});
+            },
           ),
         ],
       )
@@ -80,6 +86,20 @@ class _GradientOfRadialDemoState extends State<GradientOfRadialDemo> {
         _dropValue = value;
         setState(() {});
       },
+    );
+  }
+
+  _buildButton({
+    required String text,
+    required VoidCallback onPressed
+  }) {
+    return TextButton(
+      onPressed: onPressed,
+      child: Center(
+          child: Text(text,
+            style: TextStyle(color: Colors.white),
+          )
+      ),
     );
   }
 
@@ -114,9 +134,10 @@ class _GradientOfRadialDemoState extends State<GradientOfRadialDemo> {
     ];
 
     _radius = _dropValue.radiusOfRadialGradient(
-        width: this.maxWidth,
-        height: this.maxHeight,
-        isGreed: this.isGreed
+      width: this.maxWidth,
+      height: this.maxHeight,
+      isGreed: this.isGreed,
+      isDiagonal: this.isDiagonal
     ) ?? 0.5;
     print("_dropValue:${_dropValue} _radius:${_radius} maxWidth:${maxWidth} maxHeight:${maxHeight}");
 
