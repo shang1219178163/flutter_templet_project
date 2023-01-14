@@ -140,8 +140,6 @@ class _GradientOfRadialDemoState extends State<GradientOfRadialDemo> {
       isDiagonal: this.isDiagonal
     ) ?? 0.5;
     print("_dropValue:${_dropValue} _radius:${_radius} maxWidth:${maxWidth} maxHeight:${maxHeight}");
-
-    print("_radius: $_radius");
     return _buildBox(
       height: 100,
       text: 'RadialGradient',
