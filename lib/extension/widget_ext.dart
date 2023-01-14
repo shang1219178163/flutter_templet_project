@@ -147,6 +147,15 @@ extension WidgetExt on Widget {
       child: this,
     );
   }
+
+  /// 转为 SliverToBoxAdapter
+  toSliverToBoxAdapter(Key? key,) {
+    return SliverToBoxAdapter(
+      key: key,
+      child: this,
+    );
+  }
+
 }
 
 extension ScrollViewExt on ScrollView {

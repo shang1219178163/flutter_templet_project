@@ -14,6 +14,18 @@ import 'package:flutter_templet_project/extension/bottom_sheet_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 
 extension BuildContextExt on BuildContext {
+  // final state = (context as StatefulElement).state as CustomeTabBarState;
+  /// 通过 context 获取 state, builder 里使用
+  T? getStatefulElementState<T>() {
+    if (!(this is StatefulElement)) {
+      return null;
+    }
+    if (!((this as StatefulElement).state is T)) {
+      return null;
+    }
+    return (this as StatefulElement).state as T;
+  }
+
   /// 获取当前组件的 RenderBox
   RenderBox? get renderBox {
     RenderObject? renderObj = this.findRenderObject();
