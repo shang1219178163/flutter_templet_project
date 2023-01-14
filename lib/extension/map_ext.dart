@@ -6,6 +6,7 @@
 //  Copyright © 2022/11/24 shang. All rights reserved.
 //
 
+
 extension MapExt on Map<String, dynamic>{
   // 拼接键值成字符串
   String join({String char = '&'}) {

@@ -9,7 +9,6 @@
 
 import 'package:intl/intl.dart';
 
-
 extension IntExt<T,E> on int {
 
   /// 数字格式化

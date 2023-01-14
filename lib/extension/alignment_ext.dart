@@ -26,8 +26,9 @@ extension AlignmentExt on Alignment{
 
   /// 获取雷达渐进色 radius
   double? radiusOfRadialGradient({
-    double? width = 0,
-    double? height = 0,
+    required double? width,
+    required double? height,
+    bool isGreed = false,
   }) {
     if(width == null || height == null
         || width == 0 || height == 0) {
@@ -36,9 +37,34 @@ extension AlignmentExt on Alignment{
 
     final max = math.max(width, height);
     final min = math.min(width, height);
-    double result = max/min;
-    if (this.x != 0) {
-      result *= 2.0;
+    double result = 0.5;
+
+    if([
+      Alignment.center,
+    ].contains(this)){
+      result = isGreed == true ? max/min * 0.5 : 0.5;
+
+    } else if ([
+      Alignment.topCenter,
+      Alignment.bottomCenter,
+    ].contains(this)) {
+      result = isGreed == true ? max/min : 0.5;
+
+    } else if ([
+      Alignment.topLeft,
+      Alignment.topRight,
+      Alignment.bottomLeft,
+      Alignment.bottomRight
+    ].contains(this)) {
+      final tmp = math.sqrt(math.pow(max, 2) + math.pow(min, 2)).ceil();
+      print("tmp:$tmp");
+      result = tmp/min;
+
+    } else if ([
+      Alignment.centerLeft,
+      Alignment.centerRight,
+    ].contains(this)) {
+      result = isGreed == true ? 1 : max/min * 0.5;
     }
     return result;
   }

@@ -5,6 +5,8 @@ import 'package:flutter_templet_project/basicWidget/SectionHeader.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/alignment_ext.dart';
 import 'package:flutter_templet_project/extension/painting_ext.dart';
+import 'package:flutter_templet_project/pages/demo/GradientTwoDemo.dart';
+import 'package:tuple/tuple.dart';
 
 class GradientDemo extends StatefulWidget {
   final String? title;
@@ -16,10 +18,13 @@ class GradientDemo extends StatefulWidget {
 }
 
 class _GradientDemoState extends State<GradientDemo> {
-
+  
+  // var blendModes = BlendMode.color;
+  // var tileModes = TileMode.clamp;
+  
   var blendMode = BlendMode.color;
   var tileMode = TileMode.clamp;
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,29 +44,17 @@ class _GradientDemoState extends State<GradientDemo> {
               child: Text("$blendMode", style: TextStyle(color: Colors.white),)
             ),
           ],
+          bottom: PreferredSize(
+            preferredSize: Size(double.infinity, 50),
+            child: _buildDropdownButton(),
+          )
         ),
         body: _buildBody()
     );
   }
-
-  /// 获取雷达渐进色 radius
-  radiusOfRadialGradient({
-    required double width,
-    required double height,
-    required Alignment alignment,
-  }) {
-    final max = math.max(width, height);
-    final min = math.min(width, height);
-    double scale = max/min;
-    if (alignment.x != 0) {
-      scale *= 2.0;
-    }
-    return scale;
-  }
-
+  
   showSheetTileMode() {
     final tileModes = TileModeExt.allCases;
-
     final items = tileModes.map((e) => Text('$e')).toList();
 
     showSheet(
@@ -103,7 +96,7 @@ class _GradientDemoState extends State<GradientDemo> {
 
 
   var _dropValue = AlignmentExt.allCases[0];
-  var _scale = 0.5;
+  var _radius = 0.5;
 
   _buildDropdownButton() {
     return DropdownButton<Alignment>(
@@ -113,15 +106,14 @@ class _GradientDemoState extends State<GradientDemo> {
         value: e,
       ),
       ).toList(),
-      onChanged: (value) {
+      onChanged: (Alignment? value) {
         if (value == null) return;
         _dropValue = value;
-        _scale = radiusOfRadialGradient(
+        _radius = value.radiusOfRadialGradient(
           width: 400,
           height: 100,
-          alignment: _dropValue
-        );
-        print("_dropValue:${value} scale:${_scale}");
+        ) ?? 0.5;
+        print("_dropValue:${value} scale:${_radius}");
         setState(() {});
       },
     );
@@ -130,6 +122,13 @@ class _GradientDemoState extends State<GradientDemo> {
 
   _buildBody() {
     return ListView(children: <Widget>[
+      TextButton(
+        onPressed: () {
+          push(page: GradientTwoDemo());
+        },
+        child: Text("more",)
+      ),
+      
       SectionHeader.h4(title: 'LinearGradient',),
       _buildBox(
         text: '两种颜色 均分',
@@ -300,7 +299,7 @@ class _GradientDemoState extends State<GradientDemo> {
           gradient: RadialGradient(
             tileMode: this.tileMode,
             // tileMode: TileMode.mirror,
-            radius: _scale,
+            radius: _radius,
             center: _dropValue,
             colors: <Color>[
               Colors.red, // blue
@@ -392,5 +391,13 @@ class _GradientDemoState extends State<GradientDemo> {
           height: 400,
         ),
       );
+  }
+
+  push({required Widget page}) {
+    Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) {
+          return page;
+        }
+    ));
   }
 }

@@ -16,6 +16,7 @@ typedef IndexedCallback = void Function(BuildContext context, int index);
 /// 分段选择器 builder
 typedef SegmentWidgetBuilder = Widget Function(BuildContext context, int index, bool isSelect);
 
+/// TabBar 通用性封装
 class TabBarSegment extends StatefulWidget implements PreferredSizeWidget {
 
   TabBarSegment({
