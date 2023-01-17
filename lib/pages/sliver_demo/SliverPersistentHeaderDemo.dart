@@ -36,17 +36,17 @@ class SliverPersistentHeaderDemo extends StatelessWidget {
       pinned: pinned,
       delegate: SliverPersistentHeaderBuilder(
         min: 60.0,
-        max: 60.0,
+        max: 80.0,
         builder: (ctx, offset) => SizedBox.expand(
           child: Container(
-            // color: Colors.white,
             decoration: BoxDecoration(
-              color: Colors.greenAccent,
-              borderRadius: BorderRadius.all(Radius.circular(16)),
-            ),
-            child: Center(
-              child: text,
-            ),
+              // color: Colors.white,
+              color: Colors.lightBlue,
+                borderRadius: BorderRadius.all(Radius.circular(16)),
+              ),
+              child: Center(
+                child: text,
+              ),
           ),
         ),
       ),
