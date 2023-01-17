@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
+///自定义轮播
 class CustomSwipper extends StatefulWidget {
   final List<String> images;
   final double height;
@@ -10,12 +11,13 @@ class CustomSwipper extends StatefulWidget {
   final IndexedWidgetBuilder? itemBuilder;
 
   CustomSwipper({
+    Key? key,
     required this.images,
     required this.onTap,
     this.itemBuilder,
     this.height = 200,
     this.curve = Curves.linear,
-  }) : assert(images != null);
+  }) : super(key: key);
 
   @override
   _CustomSwipperState createState() => _CustomSwipperState();

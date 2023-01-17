@@ -27,6 +27,7 @@ import 'package:flutter_templet_project/pages/demo/ImageBlendModeDemo.dart';
 import 'package:flutter_templet_project/pages/demo/InheritedWidgetDemo.dart';
 import 'package:flutter_templet_project/pages/demo/IntrinsicHeightDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ListViewDemo.dart';
+import 'package:flutter_templet_project/pages/demo/ListViewOneDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MaterialBannerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ModalBarrierDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NavigationToolbarDemo.dart';
@@ -385,6 +386,7 @@ class APPRouter {
   static const horizontalCellDemo = '/horizontalCellDemo';
   static const dottedBorderDemo = '/dottedBorderDemo';
   static const boxShadowDemo = '/boxShadowDemo';
+  static const listViewOneDemo = '/listViewOneDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -606,6 +608,9 @@ class AppPage {
     GetPage(name: APPRouter.horizontalCellDemo, page: () => HorizontalCellDemo(),),
     GetPage(name: APPRouter.dottedBorderDemo, page: () => DottedBorderDemo(),),
     GetPage(name: APPRouter.boxShadowDemo, page: () => BoxShadowDemo(),),
+    GetPage(name: APPRouter.listViewOneDemo, page: () => ListViewOneDemo(),),
+
+
 
   ];
 }
