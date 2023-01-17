@@ -9,7 +9,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/SliverPersistentHeaderBuilder.dart';
+import 'package:flutter_templet_project/basicWidget/sliver_persistent_header_builder.dart';
 
 class SliverPersistentHeaderDemoOne extends StatelessWidget {
   // 色彩数据

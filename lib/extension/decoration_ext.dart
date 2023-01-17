@@ -32,6 +32,19 @@ enum IndicatorStyle{
   box
 }
 
+extension on BoxDecoration{
+
+  // lineDecoration() {
+  //   return BoxDecoration(
+  //     // color: Colors.green,
+  //     border: Border.all(
+  //       color: Colors.red,
+  //     ),
+  //   );
+  // }
+
+}
+
 extension BorderExt on Border{
 
   /// 扩展方法
@@ -39,7 +52,8 @@ extension BorderExt on Border{
     required IndicatorStyle indicatorStyle,
     Color color = Colors.blue,
     double width = 2,
-    BorderStyle style = BorderStyle.solid}) {
+    BorderStyle style = BorderStyle.solid
+  }) {
 
     final borderSide = BorderSide(
       color: color,
@@ -76,22 +90,10 @@ extension BorderExt on Border{
   }
 }
 
-extension on BoxDecoration{
-
-  // lineDecoration() {
-  //   return BoxDecoration(
-  //     // color: Colors.green,
-  //     border: Border.all(
-  //       color: Colors.red,
-  //     ),
-  //   );
-  // }
-
-}
-
 extension BorderRadiusExt on BorderRadius{
 
-  static BorderRadius from({
+  //doule 转 BorderRadius
+  static BorderRadius fromRadius({
     double topLeft = 0,
     double topRight = 0,
     double bottomLeft = 0,
@@ -104,6 +106,5 @@ extension BorderRadiusExt on BorderRadius{
       bottomRight: Radius.circular(bottomRight),
     );
   }
-
 }
 

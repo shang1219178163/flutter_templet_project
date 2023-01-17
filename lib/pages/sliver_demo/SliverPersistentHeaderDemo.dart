@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'dart:math' as math;
 
-import 'package:flutter_templet_project/basicWidget/SliverPersistentHeaderBuilder.dart';
+import 'package:flutter_templet_project/basicWidget/sliver_persistent_header_builder.dart';
 
 class SliverPersistentHeaderDemo extends StatelessWidget {
 
@@ -16,57 +16,44 @@ class SliverPersistentHeaderDemo extends StatelessWidget {
       ),
       body: CustomScrollView(
         slivers: <Widget>[
-          sectionHeader('Header Section 1'),
+          sectionHeader(text: Text('Header Section 1'), pinned: false),
           SliverGrid.count(
             crossAxisCount: 4,
               children: list.map((e) => Container(color: e)).toList(),
             // children: Colors.accents.map((e) => Container(color: e)).toList(),
           ),
-          sectionHeader('Header Section 2'),
-          SliverGrid(
-            gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: 200.0,
-              mainAxisSpacing: 10.0,
-              crossAxisSpacing: 10.0,
-              childAspectRatio: 4.0,
-            ),
-            delegate: SliverChildBuilderDelegate((context, index) {
-                return Container(
-                  alignment: Alignment.center,
-                  color: Colors.teal[100 * (index % 9)],
-                  child: Text('grid item $index'),
-                );
-              },
-              childCount: 100,
-            ),
-          ),
-          sectionHeader('Header Section 3'),
-          buildSliverGrid()
+          sectionHeader(text: Text('Header Section 2'), pinned: true),
+          buildSliverGrid(count: 100),
+          sectionHeader(text: Text('Header Section 3'), pinned: false),
+          buildSliverGrid(count: 101),
         ],
       ),
     );
   }
 
-  SliverPersistentHeader sectionHeader(String headerText) {
+  SliverPersistentHeader sectionHeader({required Text text, bool pinned = false}) {
     return SliverPersistentHeader(
-      pinned: true,
+      pinned: pinned,
       delegate: SliverPersistentHeaderBuilder(
         min: 60.0,
         max: 60.0,
         builder: (ctx, offset) => SizedBox.expand(
           child: Container(
-            color: Colors.white,
+            // color: Colors.white,
+            decoration: BoxDecoration(
+              color: Colors.greenAccent,
+              borderRadius: BorderRadius.all(Radius.circular(16)),
+            ),
             child: Center(
-              child: Text(headerText),
+              child: text,
             ),
           ),
         ),
       ),
     );
   }
-  
-  
-  buildSliverGrid() {
+
+  buildSliverGrid({int count = 100}) {
     return SliverGrid(
       gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
         maxCrossAxisExtent: 200.0,
@@ -75,13 +62,13 @@ class SliverPersistentHeaderDemo extends StatelessWidget {
         childAspectRatio: 4.0,
       ),
       delegate: SliverChildBuilderDelegate((context, index) {
-        return Container(
-          alignment: Alignment.center,
-          color: Colors.teal[100 * (index % 9)],
-          child: Text('grid item $index'),
-        );
-      },
-        childCount: 100,
+          return Container(
+            alignment: Alignment.center,
+            color: Colors.teal[100 * (index % 9)],
+            child: Text('grid item $index'),
+          );
+        },
+        childCount: count,
       ),
     );
   }

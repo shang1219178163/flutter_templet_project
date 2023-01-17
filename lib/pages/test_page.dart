@@ -11,7 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:tuple/tuple.dart';
 
 import 'package:flutter_templet_project/Language/Property.dart';
-import 'package:flutter_templet_project/basicWidget/RadiusWidget.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/map_ext.dart';
@@ -91,15 +90,12 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
               RepaintBoundary(child: buildSection3(),),
               Container(
                 margin: const EdgeInsets.all(8),
-                child: RadiusWidget(
-                  radius: 8,
-                  child: Container(
-                      width: 200,
-                      height: 40,
-                      child: Text('widget.title')
-                  ),
-                  color: Colors.green,
+                child: Container(
+                    width: 200,
+                    height: 40,
+                    child: Text('widget.title')
                 ),
+                color: Colors.green,
               ),
               TextField(
                 cursorColor: Colors.purple,
