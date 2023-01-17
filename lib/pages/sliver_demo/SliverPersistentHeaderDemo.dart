@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'dart:math' as math;
 
-import 'package:flutter_templet_project/basicWidget/SliverPersistentHeaderBuilder.dart';
+import 'package:flutter_templet_project/basicWidget/sliver_persistent_header_builder.dart';
 
 class SliverPersistentHeaderDemo extends StatelessWidget {
 

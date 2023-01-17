@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/HorizontalCell.dart';
+import 'package:flutter_templet_project/basicWidget/horizontal_cell.dart';
 import 'package:flutter_templet_project/uti/R.dart';
 
 

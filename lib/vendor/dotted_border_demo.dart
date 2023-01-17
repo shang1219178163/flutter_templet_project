@@ -47,6 +47,7 @@ class _DottedBorderDemoState extends State<DottedBorderDemo> {
             SectionHeader.h5(title: "DottedBorder"),
             Container(
               height: 100,
+              // margin: EdgeInsets.all(20),
               // padding: EdgeInsets.all(20),
               child: DottedBorder(
                 color: Colors.black,//color of dotted/dash line
@@ -54,6 +55,7 @@ class _DottedBorderDemoState extends State<DottedBorderDemo> {
                 dashPattern: [10,0],
                 //dash patterns, 10 is dash width, 6 is space width
                 child: Container(  //inner container
+                  margin: EdgeInsets.all(10),
                   color: Colors.green,
                 ),
               )

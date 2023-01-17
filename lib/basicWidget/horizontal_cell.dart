@@ -1,5 +1,5 @@
 //
-//  HorizontalCell.dart
+//  horizontal_cell.dart
 //  flutter_templet_project
 //
 //  Created by shang on 1/11/23 4:33 PM.

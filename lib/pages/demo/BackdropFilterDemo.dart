@@ -9,6 +9,7 @@
 
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/extension/stack_ext.dart';
 
 class BackdropFilterDemo extends StatefulWidget {
 
@@ -29,7 +30,7 @@ class _BackdropFilterDemoState extends State<BackdropFilterDemo> {
         appBar: AppBar(
           title: Text(widget.title ?? "$widget"),
         ),
-        body: _buildBody(),
+        body: _buildBody1(),
     );
   }
 
@@ -42,7 +43,7 @@ class _BackdropFilterDemoState extends State<BackdropFilterDemo> {
           fit: BoxFit.cover,
         ),
         Center(
-          child: ClipRect(  // <-- clips to the 200x200 [Container] below
+          child: ClipRRect(
             child: BackdropFilter(
               filter: ImageFilter.blur(
                 sigmaX: 5.0,
@@ -59,6 +60,16 @@ class _BackdropFilterDemoState extends State<BackdropFilterDemo> {
           ),
         ),
       ],
+    );
+  }
+
+  _buildBody1() {
+    return StackExt.createBlurView(
+      blur: 5,
+      child: Image.asset(
+        'images/bg.jpg',
+        fit: BoxFit.cover,
+      )
     );
   }
 }
