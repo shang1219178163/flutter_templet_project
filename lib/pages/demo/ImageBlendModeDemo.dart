@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/extension/painting_ext.dart';
 
 
 class ImageBlendModeDemo extends StatefulWidget {
@@ -13,6 +14,8 @@ class ImageBlendModeDemo extends StatefulWidget {
 }
 
 class _ImageBlendModeDemoState extends State<ImageBlendModeDemo> {
+
+  final blendModes = BlendModeExt.allCases;
 
   bool flag = false;
 
@@ -60,37 +63,6 @@ class _ImageBlendModeDemoState extends State<ImageBlendModeDemo> {
 }
 
 
-final blendModes = [
-  BlendMode.clear,
-  BlendMode.src,
-  BlendMode.dst,
-  BlendMode.srcOver,
-  BlendMode.dstOver,
-  BlendMode.srcIn,
-  BlendMode.dstIn,
-  BlendMode.srcOut,
-  BlendMode.dstOut,
-  BlendMode.srcATop,
-  BlendMode.dstATop,
-  BlendMode.xor,
-  BlendMode.plus,
-  BlendMode.modulate,
-  BlendMode.screen,
-  BlendMode.overlay,
-  BlendMode.darken,
-  BlendMode.lighten,
-  BlendMode.colorDodge,
-  BlendMode.colorBurn,
-  BlendMode.hardLight,
-  BlendMode.softLight,
-  BlendMode.difference,
-  BlendMode.exclusion,
-  BlendMode.multiply,
-  BlendMode.hue,
-  BlendMode.saturation,
-  BlendMode.color,
-  BlendMode.luminosity,
-];
 
 //
 // enum BlendMode {
