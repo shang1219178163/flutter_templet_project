@@ -8,6 +8,8 @@
 
 import 'package:flutter/material.dart';
 
+import 'package:flutter_templet_project/extension/box_fit_ext.dart';
+
 class FittedBoxDemo extends StatefulWidget {
 
   final String? title;
@@ -24,8 +26,6 @@ class _FittedBoxDemoState extends State<FittedBoxDemo> {
 
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.title ?? "$widget"),
@@ -35,6 +35,17 @@ class _FittedBoxDemoState extends State<FittedBoxDemo> {
   }
 
   _buildBody() {
+    return Center(
+      child: Column(
+        children: [
+          wImage(),
+          ...BoxFitExt.allCases.map((e) => wContainer(e)).toList(),
+        ],
+      ),
+    );
+  }
+
+  wImage() {
     return Container(
       width: 100,
       height: 100,
@@ -42,11 +53,35 @@ class _FittedBoxDemoState extends State<FittedBoxDemo> {
       child: FittedBox(
         fit: BoxFit.contain,
         alignment: Alignment.centerLeft,
-        child: Image.asset("images/avatar.png", width: 200, height: 100),
+        child: Container(
+            color: Colors.yellow,
+            child: Image.asset("images/avatar.png", width: 200, height: 100)
+        ),
       ),
     );
   }
 
+  Widget wContainer(BoxFit boxFit) {
+    return Container(
+      width: 150,
+      height: 50,
+      margin: EdgeInsets.symmetric(vertical: 15),
+      decoration: BoxDecoration(
+        color: Colors.red,
+        border: Border.all(color: Colors.black, width: 3),
+      ),
+      child: FittedBox(
+        fit: boxFit,
+        // 子容器超过父容器大小
+        child: Container(
+          width: 200,
+          height: 70,
+          color: Colors.blue,
+          child: Text(boxFit.toString()),
+        ),
+      ),
+    );
+  }
 }
 
 
