@@ -19,14 +19,21 @@ class AnimatedGroupWidget extends StatelessWidget {
   	Key? key,
   	required this.controller,
   }) : super(key: key){
-    aHeight = Tween<double>(begin: 0.0, end: 300.0).animate(_buildCurvedAnimation(0, 0.6));
-    aPadding = Tween<EdgeInsets>(begin: EdgeInsets.only(left: .0), end: EdgeInsets.only(left: 100.0)).animate(_buildCurvedAnimation(0.6, 1.0));
+    aHeight = Tween<double>(
+        begin: 0.0,
+        end: 300.0
+    ).animate(_buildCurvedAnimation(0, 0.6));
+
+    aPadding = Tween<EdgeInsets>(
+        begin: EdgeInsets.only(left: .0),
+        end: EdgeInsets.only(left: 100.0)
+    ).animate(_buildCurvedAnimation(0.6, 1.0));
+
     aColor = ColorTween(begin: Colors.green, end: Colors.red);
   }
 
   _buildCurvedAnimation(double begin, double end) {
-    return
-    CurvedAnimation(
+    return CurvedAnimation(
       parent: controller,
       curve: Interval(
         begin, end, //间隔，前60%的动画时间

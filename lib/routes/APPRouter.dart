@@ -4,6 +4,8 @@ import 'package:flutter_templet_project/Provider/provider_list_demo.dart';
 import 'package:flutter_templet_project/basicWidget/DragDestinationView.dart';
 import 'package:flutter_templet_project/basicWidget/responsive_column.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedBuilderDemo.dart';
+import 'package:flutter_templet_project/pages/demo/AnimatedListDemo.dart';
+import 'package:flutter_templet_project/pages/demo/AnimatedListSample.dart';
 import 'package:flutter_templet_project/pages/demo/BoxConstraintsDemo.dart';
 import 'package:flutter_templet_project/pages/FlutterFFiTest.dart';
 import 'package:flutter_templet_project/pages/LocalImagePage.dart';
@@ -206,6 +208,11 @@ class APPRouter {
   static const animatedDemo = '/AnimatedDemo';
   static const animatedWidgetDemo = '/AnimatedWidgetDemo';
   static const animatedSwitcherDemo = '/AnimatedSwitcherDemo';
+  static const animatedListDemo = '/animatedListDemo';
+  static const animatedGroupDemo = '/animatedGroupDemo';
+  static const animatedBuilderDemo = '/animatedBuilderDemo';
+  static const animatedListSample = '/animatedListSample';
+
 
   static const textlessDemo = '/textlessDemo';
   static const alertDialogDemo = '/AlertDialogDemo';
@@ -232,7 +239,6 @@ class APPRouter {
   static const settingsPage = '/AppSettingsPage';
   static const containerDemo = '/containerDemo';
   static const draggableDemo = '/DraggableDemo';
-  // static const animatedIconDemo = '/AnimatedIconDemo';
   static const forgetPasswordPage = '/ForgetPasswordPage';
   static const dataTableDemo = '/DataTableDemo';
   static const dataTableDemoNew = '/DataTableDemoNew';
@@ -295,7 +301,6 @@ class APPRouter {
   static const testPage = '/testPage';
   static const testPageOne = '/testPageOne';
   static const offstageDemo = '/OffstageDemo';
-  static const animatedGroupDemo = '/animatedGroupDemo';
   static const bottomAppBarDemo = '/bottomAppBarDemo';
   static const calendarDatePickerDemo = '/CalendarDatePickerDemo';
   static const chipDemo = '/ChipDemo';
@@ -373,7 +378,6 @@ class APPRouter {
   static const notificationCustomDemo = '/notificationCustomDemo';
   static const scrollControllerDemo = '/scrollControllerDemo';
   static const colorConverterDemo = '/colorConverterDemo';
-  static const animatedBuilderDemo = '/animatedBuilderDemo';
   static const intrinsicHeightDemo = '/intrinsicHeightDemo';
   static const flexDemo = '/flexDemo';
   static const flexibleDemo = '/flexibleDemo';
@@ -484,6 +488,11 @@ class AppPage {
     GetPage(name: APPRouter.animatedDemo, page: () => AnimatedDemo(),),
     GetPage(name: APPRouter.animatedSwitcherDemo, page: () => AnimatedSwitcherDemo(),),
     GetPage(name: APPRouter.animatedWidgetDemo, page: () => AnimatedWidgetDemo(),),
+    GetPage(name: APPRouter.animatedGroupDemo, page: () => AnimatedGroupDemo(),),
+    GetPage(name: APPRouter.animatedBuilderDemo, page: () => AnimatedBuilderDemo(),),
+    GetPage(name: APPRouter.animatedListDemo, page: () => AnimatedListDemo(),),
+    GetPage(name: APPRouter.animatedListSample, page: () => AnimatedListSample(),),
+
     GetPage(name: APPRouter.futureBuilderDemo, page: () => FutureBuilderDemo(),),
     GetPage(name: APPRouter.streamBuilderDemo, page: () => StreamBuilderDemo(),),
     GetPage(name: APPRouter.githubRepoDemo, page: () => GithubRepoDemo(),),
@@ -519,7 +528,6 @@ class AppPage {
 
 
     GetPage(name: APPRouter.offstageDemo, page: () => OffstageDemo(),),
-    GetPage(name: APPRouter.animatedGroupDemo, page: () => AnimatedGroupDemo(),),
     GetPage(name: APPRouter.bottomAppBarDemo, page: () => BottomAppBarDemo(),),
     GetPage(name: APPRouter.calendarDatePickerDemo, page: () => CalendarDatePickerDemo(),),
 
@@ -597,7 +605,6 @@ class AppPage {
     GetPage(name: APPRouter.notificationCustomDemo, page: () => NotificationCustomDemo(),),
     GetPage(name: APPRouter.scrollControllerDemo, page: () => ScrollControllerDemo(),),
     GetPage(name: APPRouter.colorConverterDemo, page: () => ColorConverterDemo(),),
-    GetPage(name: APPRouter.animatedBuilderDemo, page: () => AnimatedBuilderDemo(),),
     GetPage(name: APPRouter.intrinsicHeightDemo, page: () => IntrinsicHeightDemo(),),
     GetPage(name: APPRouter.flexDemo, page: () => FlexDemo(),),
     GetPage(name: APPRouter.flexibleDemo, page: () => FlexibleDemo(),),

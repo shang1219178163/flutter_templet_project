@@ -89,21 +89,25 @@ class _AnimatedSwitcherDemoState extends State<AnimatedSwitcherDemo> {
 
 ///非对称滑动
 class MySlideTransition extends AnimatedWidget {
-  MySlideTransition({
+  MySlideTransition( {
     Key? key,
-    required Animation<Offset> position,
+    required this.position,
     this.transformHitTests = true,
     required this.child,
-  })
-      : assert(position != null),
-        super(key: key, listenable: position) ;
+  }) : super(key: key, listenable: position) ;
 
-  Animation<Offset> get position => listenable as Animation<Offset>;
+  // Animation<Offset> get position => listenable as Animation<Offset>;
+
+  final Animation<Offset> position;
+
   final bool transformHitTests;
+
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
+    // Animation<Offset> _position = listenable as Animation<Offset>;
+
     Offset offset = position.value;
     //动画反向执行时，调整x偏移，实现“从左边滑出隐藏”
     if (position.status == AnimationStatus.reverse) {
