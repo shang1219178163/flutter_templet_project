@@ -30,11 +30,8 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
 
   double size = 100;
 
-
-
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
 
     return Scaffold(
         appBar: AppBar(
@@ -58,7 +55,7 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
         _buildPausePlayIcon(),
         _buildAnimatedSizeIcon(),
         _buildAnimatedCrossFade(),
-        _buildAnimatedScaleTransition(),
+        _buildAnimatedScale(),
         _buildAnimatedMySlideTransition(),
         _buildAnimatedSlideTransition(),
         _buildAnimatedSlideTransitionX(),
@@ -83,10 +80,16 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
   Widget _buildPausePlayIcon() {
     return Center(
       child: InkWell(
-        child: AnimatedIcon(
-          icon: AnimatedIcons.pause_play,
-          progress: _controller,
-          size: 35,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            AnimatedIcon(
+              icon: AnimatedIcons.pause_play,
+              progress: _controller,
+              size: 35,
+            ),
+            Text("AnimatedIcon"),
+          ],
         ),
         onTap: () {
           ddlog("AnimatedIcon");
@@ -112,10 +115,15 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
       },
       child: Center(
         child: Container(
-          color: Colors.green,
-          child: AnimatedSize(
-            duration: Duration(milliseconds: 350),
-            child: FlutterLogo(size: size,),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              AnimatedSize(
+                duration: Duration(milliseconds: 350),
+                child: FlutterLogo(size: size,),
+              ),
+              Text("AnimatedSize"),
+            ],
           ),
         ),
       ),
@@ -127,11 +135,20 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
   Widget _buildAnimatedCrossFade() {
     return Center(
       child: InkWell(
-        child: AnimatedCrossFade(
-          crossFadeState: _crossFadeState,
-          duration: const Duration(seconds: 2),
-          firstChild: const Icon(Icons.text_rotate_up, size: 150, color: Colors.green,),
-          secondChild: const Icon(Icons.text_rotate_vertical, size: 150),
+        child: Container(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              AnimatedCrossFade(
+                crossFadeState: _crossFadeState,
+                duration: Duration(seconds: 2),
+                firstChild: Icon(Icons.text_rotate_up, size: 150, color: Colors.green,),
+                secondChild: Icon(Icons.text_rotate_vertical, size: 150),
+              ),
+              Text("AnimatedCrossFade"),
+              Text("${_crossFadeState}"),
+            ],
+          ),
         ),
         onTap: () {
           ddlog("AnimatedCrossFade");
@@ -146,14 +163,14 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
 
   int _count = 0;
 
-  Widget _buildAnimatedScaleTransition() {
+  Widget _buildAnimatedScale() {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text("ScaleTransition"),
           AnimatedSwitcher(
-            duration: const Duration(milliseconds: 500),
+            duration: Duration(milliseconds: 500),
             transitionBuilder: (Widget child, Animation<double> animation) {
               //执行缩放动画
               return ScaleTransition(child: child, scale: animation);
@@ -166,7 +183,7 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
             ),
           ),
           OutlinedButton(
-            child: const Text('+1',),
+            child: Text('+1',),
             onPressed: () {
               ddlog("AnimatedSwitcher");
 
@@ -181,7 +198,6 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
   }
 
   Widget _buildAnimatedMySlideTransition() {
-    ddlog( this.context == context );
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -189,7 +205,7 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
           Text("MySlideTransition"),
 
           AnimatedSwitcher(
-            duration: const Duration(milliseconds: 500),
+            duration: Duration(milliseconds: 500),
             transitionBuilder: (Widget child, Animation<double> animation) {
               //执行缩放动画
               // return ScaleTransition(child: child, scale: animation);
@@ -207,7 +223,7 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
             ),
           ),
           OutlinedButton(
-            child: const Text('+1',),
+            child: Text('+1',),
             onPressed: () {
               ddlog("AnimatedSwitcher");
 
@@ -229,7 +245,7 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
           Text("SlideTransition"),
 
           AnimatedSwitcher(
-            duration: const Duration(milliseconds: 500),
+            duration: Duration(milliseconds: 500),
             transitionBuilder: (Widget child, Animation<double> animation) {
               final tween = Tween(begin: Offset(0.0, 1.0), end: Offset.zero);
               return SlideTransition(
@@ -245,7 +261,7 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
           ),
 
           OutlinedButton(
-            child: const Text('+1',),
+            child: Text('+1',),
             onPressed: () {
               ddlog("AnimatedSwitcher");
 
@@ -267,7 +283,7 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
           Text("SlideTransitionX"),
 
           AnimatedSwitcher(
-            duration: const Duration(milliseconds: 500),
+            duration: Duration(milliseconds: 500),
             transitionBuilder: (Widget child, Animation<double> animation) {
               return SlideTransitionX(
                 child: child,
@@ -284,7 +300,7 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
           ),
 
           OutlinedButton(
-            child: const Text('+1',),
+            child: Text('+1',),
             onPressed: () {
               ddlog("AnimatedSwitcher");
 
@@ -306,7 +322,7 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
           Text("LineSlideTransition"),
 
           AnimatedSwitcher(
-            duration: const Duration(milliseconds: 500),
+            duration: Duration(milliseconds: 500),
             transitionBuilder: (Widget child, Animation<double> animation) {
               final tween = Tween<Offset>(begin: Offset(0, 1), end: Offset(0, 0));
               return LineSlideTransition(
@@ -322,7 +338,7 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
           ),
 
           OutlinedButton(
-            child: const Text('+1',),
+            child: Text('+1',),
             onPressed: () {
               ddlog("AnimatedSwitcher");
 

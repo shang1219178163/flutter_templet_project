@@ -37,7 +37,7 @@ class _AnimatedBuilderDemoState extends State<AnimatedBuilderDemo> with SingleTi
           buildAnimatedBuilder(),
           buildTweenAnimatedWidget(),
 
-        ],
+        ].map((e) => Expanded(child: e,),).toList(),
       )
     );
   }
@@ -48,10 +48,13 @@ class _AnimatedBuilderDemoState extends State<AnimatedBuilderDemo> with SingleTi
       child: Image.asset("images/bg.png"),
       builder: (BuildContext ctx, child) {
         return Center(
-          child: SizedBox(
-            height: animation.value,
-            width: animation.value,
-            child: child,
+          child: Container(
+            color: Colors.green,
+            child: SizedBox(
+              height: animation.value,
+              width: animation.value,
+              child: child,
+            ),
           ),
         );
       },
@@ -64,10 +67,13 @@ class _AnimatedBuilderDemoState extends State<AnimatedBuilderDemo> with SingleTi
       child: Image.asset("images/bg.png"),
       builder: (BuildContext ctx, child, animation) {
         return Center(
-          child: SizedBox(
-            height: animation.value,
-            width: animation.value,
-            child: child,
+          child: Container(
+            color: Colors.yellow,
+            child: SizedBox(
+              height: animation.value,
+              width: animation.value,
+              child: child,
+            ),
           ),
         );
       },

@@ -83,12 +83,12 @@ class _MarqueeWidgetDemoState extends State<MarqueeWidgetDemo> {
         children: [
           Container(
             height: 30,
-            padding: EdgeInsets.symmetric(horizontal:16),
+            padding: EdgeInsets.symmetric(horizontal: 16),
             child: MarqueeWidget(
               itemCount: itemWidgets.length,
               itemBuilder: (BuildContext context, int index, BoxConstraints constraints) {
                 return Container(
-                  color: Colors.green,
+                  // color: Colors.green,
                   // child: itemWidgets[index],
                   child: Text("itemBuilder: $index"),
                 );
@@ -96,22 +96,22 @@ class _MarqueeWidgetDemoState extends State<MarqueeWidgetDemo> {
               separatorBuilder: (BuildContext context, int index, BoxConstraints constraints) {
                 return Container(
                   width: 100,
-                  decoration: BoxDecoration(
-                    color: Colors.blue,
-                    border: Border.all(color: Colors.red),
-                  ),
-                  child: Text("$index"),
+                  // decoration: BoxDecoration(
+                  //   color: Colors.blue,
+                  //   border: Border.all(color: Colors.red),
+                  // ),
+                  // child: Text("$index"),
                 );
               },
               edgeBuilder: (BuildContext context, int index, BoxConstraints constraints) {
                 // print("MarqueeWidget edgeBuilder: $index ${index % 2 == 0}");
                 return Container(
                   width: constraints.maxWidth,
-                  decoration: BoxDecoration(
-                    color: Colors.yellow,
-                    border: Border.all(color: Colors.red),
-                  ),
-                  child: Text("$index"),
+                  // decoration: BoxDecoration(
+                  //   color: Colors.yellow,
+                  //   border: Border.all(color: Colors.red),
+                  // ),
+                  // child: Text("$index"),
                 );
               },
             ),

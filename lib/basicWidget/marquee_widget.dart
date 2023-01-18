@@ -16,7 +16,7 @@ typedef MarqueeWidgetBuilder = Widget Function(BuildContext context, int index, 
 
 /// 跑马灯
 class MarqueeWidget extends StatefulWidget {
-
+  /// 跑马灯
   MarqueeWidget({
     Key? key,
     this.title,
@@ -124,7 +124,7 @@ class _MarqueeWidgetState extends State<MarqueeWidget>{
         final val = _scrollController!.offset + 30;
         _scrollController!.animateTo(val, duration: duration, curve: Curves.linear);
         if(_scrollController!.position.outOfRange){
-          print("atEdge:到边界了");
+          // print("atEdge:到边界了");
           _scrollController!.jumpTo(0);
         }
       });
