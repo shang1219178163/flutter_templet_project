@@ -20,10 +20,11 @@ class MarqueeWidget extends StatefulWidget {
   MarqueeWidget({
     Key? key,
     this.title,
+    this.controller,
     required this.itemCount,
-    required this.edgeBuilder,
     required this.itemBuilder,
     required this.separatorBuilder,
+    required this.edgeBuilder,
   }) : super(key: key);
 
   String? title;
@@ -35,22 +36,25 @@ class MarqueeWidget extends StatefulWidget {
   MarqueeWidgetBuilder edgeBuilder;
   /// item 间距 builder
   MarqueeWidgetBuilder separatorBuilder;
+  /// 控制器
+  ScrollController? controller;
 
   @override
   _MarqueeWidgetState createState() => _MarqueeWidgetState();
 }
 
 class _MarqueeWidgetState extends State<MarqueeWidget>{
-  final _scrollController = ScrollController();
+  ScrollController? _scrollController;
 
   final _globalKey = GlobalKey();
 
-  final offset = ValueNotifier(0.0);
+  // final offset = ValueNotifier(0.0);
 
   Timer? _timer;
 
   @override
   void initState() {
+    _scrollController = widget.controller ?? ScrollController();
     _initTimer();
     super.initState();
   }
@@ -58,6 +62,7 @@ class _MarqueeWidgetState extends State<MarqueeWidget>{
   @override
   void dispose() {
     _cancelTimer();
+    _scrollController?.dispose();
     super.dispose();
   }
 
@@ -111,12 +116,16 @@ class _MarqueeWidgetState extends State<MarqueeWidget>{
   /// 初始化定时任务
   _initTimer() {
     if (_timer == null) {
-      _timer = Timer.periodic(Duration(milliseconds: 350), (t) {
-        final val = _scrollController.offset + 30;
-        _scrollController.animateTo(val, duration: Duration(milliseconds: 350), curve: Curves.linear);
-        if(_scrollController.position.outOfRange){
+      final duration = Duration(milliseconds: 350);
+      _timer = Timer.periodic(duration, (t) {
+        if (_scrollController == null) {
+          return;
+        }
+        final val = _scrollController!.offset + 30;
+        _scrollController!.animateTo(val, duration: duration, curve: Curves.linear);
+        if(_scrollController!.position.outOfRange){
           print("atEdge:到边界了");
-          _scrollController.jumpTo(0);
+          _scrollController!.jumpTo(0);
         }
       });
     }
