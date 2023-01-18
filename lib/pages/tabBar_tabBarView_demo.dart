@@ -458,7 +458,6 @@ var _specials = [
   Tuple2(APPRouter.imageBlendModeDemo, "图片渲染模式", ),
   Tuple2(APPRouter.containerDemo, "containerDemo", ),
   Tuple2(APPRouter.scrollControllerDemo, "滚动行为", ),
-  Tuple2(APPRouter.scrollControllerDemo, "滚动行为", ),
 
 
 ];
@@ -485,9 +484,11 @@ var _customs = [
   Tuple2(APPRouter.numberFormatDemo, "数字格式化", ),
   Tuple2(APPRouter.steperConnectorDemo, "steperConnectorDemo", ),
   Tuple2(APPRouter.customSwipperDemo, "自定义轮播", ),
-  Tuple2(APPRouter.carouselSliderDemo, "自定义轮播", ),
   Tuple2(APPRouter.neumorphismDemo, "拟物按钮", ),
   Tuple2(APPRouter.horizontalCellDemo, "水平 cell 布局", ),
+  Tuple2(APPRouter.listViewOneDemo, "listViewOneDemo", ),
+  Tuple2(APPRouter.marqueeWidgetDemo, "listViewTwoDemo", ),
+
 
 ];
 

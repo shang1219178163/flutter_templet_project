@@ -18,7 +18,7 @@ class CarouselSliderDemo extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      appBar: AppBar(title: Text('Complicated image slider demo')),
+      appBar: AppBar(title: Text('CarouselSliderDemo')),
       body: Container(
           child: Column(children: <Widget>[
             CarouselSlider(
