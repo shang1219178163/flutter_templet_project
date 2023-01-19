@@ -184,7 +184,7 @@ class _MyHomePageState extends State<MyHomePage> {
         icon: Icon(Icons.message),
         label: "消息",
       ),
-      TabBarDemo(),
+      TabBarDemo(initialIndex: 3,),
     ),
     Tuple2(
       BottomNavigationBarItem(

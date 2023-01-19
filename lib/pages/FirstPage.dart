@@ -30,7 +30,7 @@ class _FirstPageState extends State<FirstPage> {
         length: 4,
         child: Scaffold(
           appBar: _hiddenAppBar ? null : AppBar(
-            title: Text("$this"),
+            title: Text('$widget'),
           ),
           body: Center(
             child: Column(

@@ -10,7 +10,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter_templet_project/pages/demo/LayoutBuilderDemo.dart';
+import 'package:flutter_templet_project/extension/alignment_ext.dart';
 
 /// 雷达渐进色按钮
 class RadialButton extends StatefulWidget {
@@ -18,12 +18,12 @@ class RadialButton extends StatefulWidget {
   RadialButton({
     Key? key,
     required this.text,
+    required this.onTap,
     // required this.colors,
     // required this.stops,
     this.margin = const EdgeInsets.symmetric(horizontal: 3, vertical: 2),
     this.padding = const EdgeInsets.symmetric(horizontal: 3, vertical: 2),
     this.center = Alignment.center,
-    this.onClick,
   }) : super(key: key);
 
   Text text;
@@ -33,7 +33,7 @@ class RadialButton extends StatefulWidget {
   EdgeInsets? margin;
   EdgeInsets? padding;
   Alignment center;
-  GestureTapCallback? onClick;
+  GestureTapCallback? onTap;
 
   @override
   _RadialButtonState createState() => _RadialButtonState();
@@ -53,17 +53,18 @@ class _RadialButtonState extends State<RadialButton> {
       }
       _currentSize = context.size;
 
-      // double horizontal = (widget.margin?.left ?? 0.0) + (widget.margin?.right ?? 0.0);
-      // double vertical = (widget.margin?.top ?? 0.0) + (widget.margin?.bottom ?? 0.0);
-      // double width = context.size!.width > horizontal ? context.size!.width - horizontal : 0;
-      // double height = context.size!.height > vertical ? context.size!.height - vertical : 0;
       double w = context.size!.width;
       double h = context.size!.height;
-      _scale = radiusOfRadialGradient(
-          width: w,
-          height: h,
-          alignment: widget.center,
-      );
+      // _scale = radiusOfRadialGradient(
+      //     width: w,
+      //     height: h,
+      //     alignment: widget.center,
+      // );
+      _scale = widget.center.radiusOfRadialGradient(
+        width: w,
+        height: h,
+        isGreed: true,
+      ) ?? 0.5;
       print("context.size:${context.size} ${_scale}");
       setState(() {});
     });
@@ -73,7 +74,7 @@ class _RadialButtonState extends State<RadialButton> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: widget.onClick,
+      onTap: widget.onTap,
       child: Container(
         margin: widget.margin,
         padding: widget.padding,
@@ -100,6 +101,7 @@ class _RadialButtonState extends State<RadialButton> {
     double? width = 0,
     double? height = 0,
     Alignment alignment = Alignment.center,
+    bool isGreed = true,
     double defaultValue = 0.5,
   }) {
     if(width == null || height == null

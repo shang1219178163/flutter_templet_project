@@ -1,42 +1,101 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/APPThemeSettings.dart';
+import 'package:flutter_templet_project/basicWidget/section_header.dart';
+import 'package:flutter_templet_project/extension/decoration_ext.dart';
 import 'package:get/get.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 
 class FourthPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: Get.isDarkMode ? APPThemeSettings.instance.darkThemeData : APPThemeSettings.instance.themeData,
-      home: DefaultTabController(
-        length: 4,
-        child: Scaffold(
-          appBar: AppBar(
-            leading: Icon(Icons.arrow_back),
-            title: Text("$this"),
-          ),
-          body: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'You have pushed the button this many times:',
-                ),
-                Text(
-                  '_counter',
-                  style: Theme.of(context).textTheme.headline4,
-                ),
-                Icon(Icons.beach_access, color: Colors.orange)
-              ],
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("$this"),
+      ),
+      body: _buildBody(),
+    );
+  }
+
+  _buildBody() {
+    return ListView(
+      children: [
+        Column(
+          children: [
+            _buildOrderCell(),
+
+            _buildTextShadow()
+          ],
+        )
+      ],
+    );
+  }
+
+  _buildOrderCell() {
+    return Column(
+      children: [
+        SectionHeader.h4(title: "_buildOrderCell"),
+        IntrinsicHeight(
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              // width: 100,
+              color: Colors.green,
+              child: Column(
+                  children: [
+                    Text("07-08"),
+                    Text("13:20"),
+                  ]
+              ),
             ),
-          ),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () => ddlog('floatingActionButton'),
-            tooltip: 'Increment',
-            child: Icon(Icons.add),
-          ), // This trailing comma makes auto-formatting nicer for build methods.
+            // _buildTimeLineIndicator(0),
+            Icon(Icons.add_circle, color: Colors.green),
+            Expanded(
+              child: Container(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      "新建工单",
+                      style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
+                      maxLines: 2,
+                    ),
+                    SizedBox(height: 3, ),
+                    Text(
+                      "备注：降价1000客户可考虑，辛苦再撮合;备注：降价1000客户可考虑，辛苦再撮合备注：降价1000客户可考虑",
+                      maxLines: 3,
+                      overflow: TextOverflow.ellipsis,
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
       ),
+        Divider(),
+      ],
+    );
+  }
+
+  _buildTextShadow() {
+    return Column(
+      children: [
+        SectionHeader.h4(title: "设置文字 3D效果"),
+        Center(
+          child: Text(
+            'Hello, world!',
+            style: TextStyle(
+              fontSize: 42,
+              color: Colors.pink,
+              fontWeight: FontWeight.w900,
+              shadows: shadow3D,
+            ),
+          ),
+        ),
+        Divider(),
+      ],
     );
   }
 }
