@@ -1,5 +1,5 @@
 //
-//  AttributedString.dart
+//  nn_attributed_string.dart
 //  flutter_templet_project
 //
 //  Created by shang on 7/31/21 12:08 PM.
@@ -13,7 +13,18 @@ import 'package:flutter_templet_project/extension/rich_text_ext.dart';
 
 
 ///富文本处理
-class AttributedString{
+class NNAttributedString{
+
+  NNAttributedString({
+    required this.context,
+    required this.text,
+    this.linkMap,
+    this.prefix = "《",
+    this.suffix = "》",
+    this.style,
+    this.linkStyle,
+    required this.onTap
+  });
 
   final BuildContext context;
 
@@ -32,24 +43,14 @@ class AttributedString{
   final void Function(String key, String? value) onTap;
   /// List<TextSpan> by [String text], [Map<String, String> linkMap]
   List<TextSpan>? get textSpans => _createTextSpans(context,
-      text: text,
-      linkMap: linkMap,
-      style: style,
-      linkStyle: linkStyle,
-      prefix: prefix,
-      suffix: suffix,
-      onTap: onTap);
-
-  AttributedString({
-    required this.context,
-    required this.text,
-    this.linkMap,
-    this.prefix = "《",
-    this.suffix = "》",
-    this.style,
-    this.linkStyle,
-    required this.onTap
-  });
+    text: text,
+    linkMap: linkMap,
+    style: style,
+    linkStyle: linkStyle,
+    prefix: prefix,
+    suffix: suffix,
+    onTap: onTap
+  );
 
   /// List<TextSpan> by [String text], [Map<String, String> linkMap]
   List<TextSpan> _createTextSpans(BuildContext context, {
@@ -61,10 +62,11 @@ class AttributedString{
     TextStyle? linkStyle,
     required void onTap(String key, String? value)}) {
     return RichTextExt.createTextSpans(context,
-        text: text,
-        linkMap: linkMap,
-        prefix: prefix,
-        suffix: suffix,
-        onTap: onTap);
+      text: text,
+      linkMap: linkMap,
+      prefix: prefix,
+      suffix: suffix,
+      onTap: onTap
+    );
   }
 }

@@ -7,7 +7,7 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/AttributedString.dart';
+import 'package:flutter_templet_project/basicWidget/nn_attributed_string.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/rich_text_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
@@ -62,27 +62,27 @@ xxxx十分重视用户权利及隐私政策并严格按照相关法律法规的�
 
     final textRich = Text.rich(
       TextSpan(
-        // children: AttributedString(
-        //     context: context,
-        //     text: text,
-        //     linkMap: linkMap,
-        //     // style: TextStyle(
-        //     //     fontSize: 13,
-        //     // ),
-        //     // linkStyle: TextStyle(fontSize: 15),
-        //     onTap: (key, value){
-        //       ddlog(key);
-        //       ddlog(value);
-        //     }
-        // ).textSpans,
-          children: RichTextExt.createTextSpans(context,
-              text: text,
-              linkMap: linkMap,
-              onTap: (key, value){
-                ddlog(key);
-                ddlog(value);
-              }
-          )
+        children: NNAttributedString(
+            context: context,
+            text: text,
+            linkMap: linkMap,
+            // style: TextStyle(
+            //     fontSize: 13,
+            // ),
+            // linkStyle: TextStyle(fontSize: 15),
+            onTap: (key, value){
+              ddlog(key);
+              ddlog(value);
+            }
+          ).textSpans,
+          // children: RichTextExt.createTextSpans(context,
+          //     text: text,
+          //     linkMap: linkMap,
+          //     onTap: (key, value){
+          //       ddlog(key);
+          //       ddlog(value);
+          //     }
+          // )
       ),
       // style: TextStyle(
       //   wordSpacing: 12
