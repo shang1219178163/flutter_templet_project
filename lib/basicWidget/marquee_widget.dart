@@ -21,6 +21,8 @@ class MarqueeWidget extends StatefulWidget {
     Key? key,
     this.title,
     this.controller,
+    this.duration = const Duration(milliseconds: 350),
+    this.durationOffset = 30,
     required this.itemCount,
     required this.itemBuilder,
     required this.separatorBuilder,
@@ -38,6 +40,10 @@ class MarqueeWidget extends StatefulWidget {
   MarqueeWidgetBuilder separatorBuilder;
   /// 控制器
   ScrollController? controller;
+  /// 定时器运行间隔
+  Duration? duration;
+  /// 定时器运行间隔移动偏移量
+  double? durationOffset;
 
   @override
   _MarqueeWidgetState createState() => _MarqueeWidgetState();
@@ -116,12 +122,12 @@ class _MarqueeWidgetState extends State<MarqueeWidget>{
   /// 初始化定时任务
   _initTimer() {
     if (_timer == null) {
-      final duration = Duration(milliseconds: 350);
+      final duration = widget.duration ?? Duration(milliseconds: 350);
       _timer = Timer.periodic(duration, (t) {
         if (_scrollController == null) {
           return;
         }
-        final val = _scrollController!.offset + 30;
+        final val = _scrollController!.offset + (widget.durationOffset ?? 30);
         _scrollController!.animateTo(val, duration: duration, curve: Curves.linear);
         if(_scrollController!.position.outOfRange){
           // print("atEdge:到边界了");

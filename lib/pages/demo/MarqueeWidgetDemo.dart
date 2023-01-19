@@ -1,15 +1,12 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_templet_project/basicWidget/marquee_widget.dart';
-import 'package:flutter_templet_project/extension/scroll_controller_ext.dart';
-import 'package:flutter_templet_project/extension/build_context_ext.dart';
-
 import 'package:tuple/tuple.dart';
 
+import 'package:flutter_templet_project/basicWidget/marquee_widget.dart';
 
-typedef onKeyCallback = void Function(BuildContext context, int index, GlobalKey key);
+
+// typedef onKeyCallback = void Function(BuildContext context, int index, GlobalKey key);
 
 class MarqueeWidgetDemo extends StatefulWidget {
 
@@ -65,12 +62,6 @@ class _MarqueeWidgetDemoState extends State<MarqueeWidgetDemo> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: [
-          TextButton(
-            onPressed: () {
-
-            },
-              child: Text('done', style: TextStyle(color: Colors.white),)
-          ),
           IconButton(
             onPressed: () {
               setState(() {});
@@ -84,6 +75,9 @@ class _MarqueeWidgetDemoState extends State<MarqueeWidgetDemo> {
           Container(
             height: 30,
             padding: EdgeInsets.symmetric(horizontal: 16),
+            decoration: BoxDecoration(
+              border: Border.all(),
+            ),
             child: MarqueeWidget(
               itemCount: itemWidgets.length,
               itemBuilder: (BuildContext context, int index, BoxConstraints constraints) {
