@@ -1,5 +1,5 @@
 //
-//  RadialGradientButton.dart
+//  radial_button.dart
 //  flutter_templet_project
 //
 //  Created by shang on 2023/1/12 22:03.
@@ -13,9 +13,9 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_templet_project/pages/demo/LayoutBuilderDemo.dart';
 
 /// 雷达渐进色按钮
-class RadialGradientButton extends StatefulWidget {
+class RadialButton extends StatefulWidget {
 
-  RadialGradientButton({
+  RadialButton({
     Key? key,
     required this.text,
     // required this.colors,
@@ -36,10 +36,10 @@ class RadialGradientButton extends StatefulWidget {
   GestureTapCallback? onClick;
 
   @override
-  _RadialGradientButtonState createState() => _RadialGradientButtonState();
+  _RadialButtonState createState() => _RadialButtonState();
 }
 
-class _RadialGradientButtonState extends State<RadialGradientButton> {
+class _RadialButtonState extends State<RadialButton> {
 
   var _scale = 0.5;
 

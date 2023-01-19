@@ -8,7 +8,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/NNPickerTooBar.dart';
+import 'package:flutter_templet_project/basicWidget/nn_picker_tool_bar.dart';
 
 class NavigationToolbarDemo extends StatefulWidget {
 
@@ -37,7 +37,7 @@ class _NavigationToolbarDemoState extends State<NavigationToolbarDemo> {
             _buildBody(),
             Divider(),
 
-            NNPickerTooBar(
+            NNPickerToolBar(
               onCancel: (){
                 print("Cancel");
               },

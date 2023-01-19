@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dotted_border/dotted_border.dart';
-import 'package:flutter_templet_project/basicWidget/SectionHeader.dart';
+import 'package:flutter_templet_project/basicWidget/section_header.dart';
 
 class DottedBorderDemo extends StatefulWidget {
 

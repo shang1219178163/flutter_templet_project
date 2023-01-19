@@ -1,5 +1,5 @@
 //
-//  NNUserPrivacy.dart
+//  nn_user_privacy.dart
 //  flutter_templet_project
 //
 //  Created by shang on 7/30/21 9:32 PM.
@@ -8,7 +8,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/NNWebView.dart';
+import 'package:flutter_templet_project/basicWidget/nn_webview.dart';
 
 class NNUserPrivacy extends StatefulWidget {
 

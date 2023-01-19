@@ -7,7 +7,7 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/DragDestinationView.dart';
+import 'package:flutter_templet_project/basicWidget/drag_destination_view.dart';
 
 class DragAndDropDemo extends StatefulWidget {
 

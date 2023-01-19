@@ -23,7 +23,7 @@ import 'package:tuple/tuple.dart';
 import 'Pages/APPDrawerMenuPage.dart';
 import 'Pages/APPUserCenterPage.dart';
 
-import 'basicWidget/ErrorCustomWidget.dart';
+import 'basicWidget/error_custom_widget.dart';
 import 'pages/FirstPage.dart';
 import 'pages/SecondPage.dart';
 import 'pages/ThirdPage.dart';

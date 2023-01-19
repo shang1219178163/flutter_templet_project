@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/SectionHeader.dart';
+import 'package:flutter_templet_project/basicWidget/section_header.dart';
 
 class BoxConstraintsDemo extends StatefulWidget {
 

@@ -9,7 +9,7 @@
 // import 'dart:ffi';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/preferredSize_segmented_control.dart';
+import 'package:flutter_templet_project/basicWidget/preferred_size_segmented_control.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:timelines/timelines.dart';
 

@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_templet_project/basicWidget/chioce_list.dart';
 import 'package:flutter_templet_project/basicWidget/chioce_wrap.dart';
-import 'package:flutter_templet_project/basicWidget/NNUserPrivacy.dart';
-import 'package:flutter_templet_project/basicWidget/NNWebView.dart';
-import 'package:flutter_templet_project/basicWidget/NNPopupRoute.dart';
-import 'package:flutter_templet_project/basicWidget/NNAlertDialog.dart';
+import 'package:flutter_templet_project/basicWidget/nn_user_privacy.dart';
+import 'package:flutter_templet_project/basicWidget/nn_webview.dart';
+import 'package:flutter_templet_project/basicWidget/nn_popup_route.dart';
+import 'package:flutter_templet_project/basicWidget/nn_alert_dialog.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 
 import 'package:flutter_templet_project/extension/ddlog.dart';

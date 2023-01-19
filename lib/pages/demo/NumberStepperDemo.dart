@@ -7,7 +7,7 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/NumberStepper.dart';
+import 'package:flutter_templet_project/basicWidget/number_stepper.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 
 class NumberStepperDemo extends StatelessWidget {

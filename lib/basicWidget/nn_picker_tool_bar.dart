@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class NNPickerTooBar extends StatelessWidget {
+class NNPickerToolBar extends StatelessWidget {
 
-  const NNPickerTooBar({
+  const NNPickerToolBar({
   	Key? key,
     this.height = 45,
     this.width = double.infinity,
