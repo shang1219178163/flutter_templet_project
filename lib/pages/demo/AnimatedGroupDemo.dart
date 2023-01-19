@@ -65,7 +65,7 @@ class _AnimatedGroupDemoState extends State<AnimatedGroupDemo> {
                 key: _globalKey,
                 duration: Duration(milliseconds: 2000),
                 animations: _animations,
-                child: Text("AnimatedGroupWidget 混合动画", style: TextStyle(color: Colors.white, backgroundColor: Colors.green),),
+                child: Text("AnimatedGroup 混合动画", style: TextStyle(color: Colors.white, backgroundColor: Colors.green),),
                 builder: (BuildContext context, Widget? child, List<Animation<dynamic>> animations) {
                   final aHeight = animations[0];
                   final aColor = animations[1];
