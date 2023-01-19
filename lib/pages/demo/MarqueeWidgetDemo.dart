@@ -28,19 +28,19 @@ class _MarqueeWidgetDemoState extends State<MarqueeWidgetDemo> {
   var items = [
     Tuple4(
       'https://avatar.csdn.net/8/9/A/3_chenlove1.jpg',
-      '海尔｜无边界厨房',
+      '标题｜无边界厨房',
       '跳转url',
       true,
     ),
     Tuple4(
       'https://pic.616pic.com/bg_w1180/00/04/08/G5Bftx5ZDI.jpg!/fw/1120',
-      '海尔｜无边界客厅',
+      '标题｜无边界客厅',
       '跳转url',
       false,
     ),
     Tuple4(
       'https://cdn.pixabay.com/photo/2018/02/01/21/00/tree-3124103_1280.jpg',
-      '海尔｜无边界厨房',
+      '标题｜无边界厨房',
       '跳转url',
       false,
     ),
