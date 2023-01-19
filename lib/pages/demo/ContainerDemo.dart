@@ -1,6 +1,7 @@
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/extension/string_ext.dart';
 
 class ContainerDemo extends StatefulWidget {
 
@@ -18,6 +19,7 @@ class _ContainerDemoState extends State<ContainerDemo> {
   @override
   void initState() {
     super.initState();
+
   }
 
   @override
@@ -63,7 +65,8 @@ class _ContainerDemoState extends State<ContainerDemo> {
             Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('images/img_update.png'),
+                  // image: AssetImage('images/img_update.png'),
+                  image: "img_update".toPngAssetImage(),
                   repeat: ImageRepeat.repeat,
                   alignment: Alignment.topLeft,
                 )

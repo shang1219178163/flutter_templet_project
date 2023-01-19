@@ -107,6 +107,7 @@ dependencies:
   flutter_swiper_null_safety: ^1.0.0
   visibility_detector: ^0.2.2
   svgaplayer_flutter: ^2.0.0
+#  flutter_svg: ^1.1.6
   sliver_tools: 0.2.7
   color_converter: ^0.2.1
   horizontal_data_table: ^4.1.4

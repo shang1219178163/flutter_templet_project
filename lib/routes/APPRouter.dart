@@ -13,6 +13,7 @@ import 'package:flutter_templet_project/pages/SynHomeNavDemo.dart';
 import 'package:flutter_templet_project/pages/SynHomeSrollDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AutocompleteDemo.dart';
 import 'package:flutter_templet_project/pages/demo/BuilderDemo.dart';
+import 'package:flutter_templet_project/pages/demo/ButtonStyleDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ColoredBoxDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ContainerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/CustomSwipperDemo.dart';
@@ -395,6 +396,8 @@ class APPRouter {
   static const listViewOneDemo = '/listViewOneDemo';
   static const marqueeWidgetDemo = '/marqueeWidgetDemo';
   static const animatedStaggerDemo = '/animatedStaggerDemo';
+  static const buttonStyleDemo = '/buttonStyleDemo';
+
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -621,6 +624,7 @@ class AppPage {
     GetPage(name: APPRouter.listViewOneDemo, page: () => ListViewOneDemo(),),
     GetPage(name: APPRouter.marqueeWidgetDemo, page: () => MarqueeWidgetDemo(),),
     GetPage(name: APPRouter.animatedStaggerDemo, page: () => AnimatedStaggerDemo(),),
+    GetPage(name: APPRouter.buttonStyleDemo, page: () => ButtonStyleDemo(),),
 
 
 
