@@ -104,7 +104,7 @@ Future<void> initDebugInfo() async {
 }
 
 ///全局
-final GlobalKey<NavigatorState> navigatorState = GlobalKey();
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey();
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your aptplication.
@@ -112,7 +112,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final app = GetMaterialApp(
-      key: navigatorState,
+      key: navigatorKey,
       title: 'Flutter Templet',
       debugShowCheckedModeBanner: false,
       theme: APPThemeSettings.instance.themeData,
@@ -147,7 +147,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
-final GlobalKey<ScaffoldState> kScaffoldKey = GlobalKey<ScaffoldState>();
+final kScaffoldKey = GlobalKey<ScaffoldState>();
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({ Key? key, this.title}) : super(key: key);
@@ -215,18 +215,8 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-  // void openDrawer() {
-  //   scaffoldKey.currentState!.openDrawer();
-  // }
-  //
-  // void closeDrawer() {
-  //   Navigator.of(context).pop();
-  // }
-
-  //lifecycle
   @override
   void initState() {
-    // TODO: implement initState
     SystemChannels.textInput.invokeMethod('TextInput.hide');
     super.initState();
   }
@@ -237,6 +227,7 @@ class _MyHomePageState extends State<MyHomePage> {
       key: kScaffoldKey,
       // drawer: MyDrawer(),
       drawer: APPDrawerMenuPage(),
+      endDrawer: APPDrawerMenuPage(),
       // appBar: buildAppBar(),
       bottomNavigationBar: BottomNavigationBar(
         items: items.map((e) => e.item1).toList(),
@@ -287,7 +278,6 @@ class _MyHomePageState extends State<MyHomePage> {
             callback: (value) {
               setState(() => ddlog(value));
             }),
-
         PopupMenuButtonExt.fromCheckList(
             list: ["a", "b", "c"],
             checkedIdx: 1,

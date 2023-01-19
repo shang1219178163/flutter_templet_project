@@ -63,16 +63,14 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
           return IconButton(
             icon: Icon(Icons.menu, color: Colors.white), //自定义图标
             onPressed: () {
-              // 打开抽屉菜单
               // Scaffold.of(context).openDrawer();
-              kScaffoldKey.currentState!.openDrawer();
+              kScaffoldKey.currentState!.openDrawer();// 打开抽屉菜单
             },
           );
         }),
         actions: [
           TextButton(
             onPressed: (){
-              ddlog("provider");
               Get.toNamed(APPRouter.stateManagerDemo, arguments: "状态管理");
             },
             child: Text("状态管理",
@@ -90,23 +88,6 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
           // indicatorSize: TabBarIndicatorSize.label,
           // indicatorPadding: EdgeInsets.only(left: 6, right: 6),
         ),
-        //自定义导航栏
-        // bottom: PreferredSize(
-        //     child: Theme(
-        //       data: Theme.of(context).copyWith(accentColor: Colors.white),
-        //       child: Container(
-        //         height: 40,
-        //         alignment: Alignment.center, //圆点居中
-        //         //给自定义导航栏设置圆点控制器
-        //         child: TabPageSelector(
-        //           color: Colors.grey,
-        //           selectedColor: Colors.white,
-        //           controller: _tabController,
-        //         ),
-        //       ),
-        //     ),
-        //     preferredSize: Size.fromHeight(48)),
-
       ),
       body: TabBarView(
         controller: _tabController,
@@ -116,8 +97,7 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
         tooltip: 'Increment',
         child: Icon(Icons.add),
         onPressed: () {
-          // ddlog(["a", 18, null, true, ["1", "2", "3"], {"a": "aa", "b": "bb"}]);
-          // ddlog(_list);
+          kScaffoldKey.currentState!.openEndDrawer();
           // testData();
           getTitles(tuples: _tuples);
         },
