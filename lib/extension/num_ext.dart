@@ -18,20 +18,20 @@ int randomInt({required int min, required int max}) {
 }
 
 extension NumExt on num {
-  /// [ScreenUtil.setWidth]
-  double get w => ScreenUtil().setWidth(this);
-
-  /// [ScreenUtil.setHeight]
-  double get h => ScreenUtil().setHeight(this);
-
-  /// [ScreenUtil.setSp]
-  double get sp => ScreenUtil().setSp(this);
-
-  /// 屏幕宽度的倍数
-  double get sw => ScreenUtil().screenWidth * this;
-
-  /// 屏幕高度的倍数
-  double get sh => ScreenUtil().screenHeight * this;
+  // /// [ScreenUtil.setWidth]
+  // double get w => ScreenUtil().setWidth(this);
+  //
+  // /// [ScreenUtil.setHeight]
+  // double get h => ScreenUtil().setHeight(this);
+  //
+  // /// [ScreenUtil.setSp]
+  // double get sp => ScreenUtil().setSp(this);
+  //
+  // /// 屏幕宽度的倍数
+  // double get sw => ScreenUtil().screenWidth * this;
+  //
+  // /// 屏幕高度的倍数
+  // double get sh => ScreenUtil().screenHeight * this;
 
   /// SizedBox 垂直间距
   SizedBox get ph => SizedBox(height: this.toDouble());

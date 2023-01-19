@@ -56,6 +56,7 @@ import 'package:flutter_templet_project/pages/demo/TabBarSegmentDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TabBarDemoNew.dart';
 import 'package:flutter_templet_project/pages/demo/TabBarOnlyDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TabBarViewDemo.dart';
+import 'package:flutter_templet_project/pages/demo/TicketUiDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TransformDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ValueListenableBuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/VisibilityDemo.dart';
@@ -397,6 +398,7 @@ class APPRouter {
   static const marqueeWidgetDemo = '/marqueeWidgetDemo';
   static const animatedStaggerDemo = '/animatedStaggerDemo';
   static const buttonStyleDemo = '/buttonStyleDemo';
+  static const ticketDemo = '/ticketDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -625,6 +627,7 @@ class AppPage {
     GetPage(name: APPRouter.marqueeWidgetDemo, page: () => MarqueeWidgetDemo(),),
     GetPage(name: APPRouter.animatedStaggerDemo, page: () => AnimatedStaggerDemo(),),
     GetPage(name: APPRouter.buttonStyleDemo, page: () => ButtonStyleDemo(),),
+    GetPage(name: APPRouter.ticketDemo, page: () => TicketUiDemo(),),
 
 
 
