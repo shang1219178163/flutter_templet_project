@@ -49,6 +49,7 @@ import 'package:flutter_templet_project/pages/demo/SelectableTextDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ShortcutsDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ShortcutsDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/StackDemo.dart';
+import 'package:flutter_templet_project/pages/demo/AnimatedStaggerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/StatefulBuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TabBarSegmentDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TabBarDemoNew.dart';
@@ -393,7 +394,7 @@ class APPRouter {
   static const boxShadowDemo = '/boxShadowDemo';
   static const listViewOneDemo = '/listViewOneDemo';
   static const marqueeWidgetDemo = '/marqueeWidgetDemo';
-
+  static const animatedStaggerDemo = '/animatedStaggerDemo';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -619,6 +620,7 @@ class AppPage {
     GetPage(name: APPRouter.boxShadowDemo, page: () => BoxShadowDemo(),),
     GetPage(name: APPRouter.listViewOneDemo, page: () => ListViewOneDemo(),),
     GetPage(name: APPRouter.marqueeWidgetDemo, page: () => MarqueeWidgetDemo(),),
+    GetPage(name: APPRouter.animatedStaggerDemo, page: () => AnimatedStaggerDemo(),),
 
 
 
