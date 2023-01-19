@@ -12,7 +12,7 @@ import 'package:flutter/cupertino.dart';
 
 extension BoxFitExt on BoxFit{
   /// BoxFit 枚举集合
-  static const List<BoxFit> allCases = [
+  static const allCases = <BoxFit>[
     BoxFit.contain,
     BoxFit.cover,
     BoxFit.fitWidth,

@@ -8,9 +8,14 @@
 
 
 import 'dart:convert';
-import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter/cupertino.dart';
+
 
 extension StringExt on String{
+
+  static bool isNotEmpty(String? s) {
+    return s != null && s.isNotEmpty;
+  }
 
   ///运算符重载
   String operator *(int value) {
@@ -21,16 +26,28 @@ extension StringExt on String{
     return result;
   }
 
+  /// 本地图片路径
+  String get toPng => "images/$this.png";
+  /// 本地图片路径
+  String get toJpg => "images/$this.jpg";
+  /// 本地图片路径
+  String get toSvg => "images/$this.svg";
+
+  /// 返回 png 图片的 AssetImage
+  AssetImage toPngAssetImage({String? package}) => AssetImage('images/$this.png', package: package);
+  /// 返回 jpg 图片的 AssetImage
+  AssetImage toJpgAssetImage({String? package}) => AssetImage('images/$this.jpg', package: package);
+  /// 返回 svg 图片的 AssetImage
+  AssetImage toSvgAssetImage({String? package}) => AssetImage('images/$this.svg', package: package);
+
+  /// 同 int.parse(this)
   int get parseInt => int.parse(this);
+  /// 同 int.tryParse(this)
   int? get tryParseInt => int.tryParse(this);
+  /// 同 double.parse(this)
   double get parseDouble => double.parse(this);
+  /// 同 double.tryParse(this)
   double? get tryParseDouble => double.tryParse(this);
-
-  String get toPath => 'images/$this';
-
-  static bool isNotEmpty(String s) {
-    return s != null && s.isNotEmpty;
-  }
 
   /// 获取匹配到的元素数组
   List<String> allMatchesByReg(RegExp regExp) {

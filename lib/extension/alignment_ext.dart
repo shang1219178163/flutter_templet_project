@@ -12,7 +12,7 @@ import 'package:flutter/cupertino.dart';
 
 extension AlignmentExt on Alignment{
   /// 九个方位变量集合
-  static const List<Alignment> allCases = [
+  static const allCases = <Alignment>[
     Alignment.centerLeft,
     Alignment.center,
     Alignment.centerRight,

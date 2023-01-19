@@ -7,6 +7,7 @@
 //
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/extension/floating_action_button_location_ext.dart';
 
 class BottomAppBarDemo extends StatefulWidget {
   const BottomAppBarDemo({Key? key}) : super(key: key);
@@ -20,17 +21,7 @@ class _BottomAppBarDemoState extends State<BottomAppBarDemo> {
   bool _showNotch = true;
   FloatingActionButtonLocation _fabLocation = FloatingActionButtonLocation.endDocked;
 
-  final locations = <FloatingActionButtonLocation>[
-    FloatingActionButtonLocation.startTop,
-    FloatingActionButtonLocation.centerTop,
-    FloatingActionButtonLocation.endTop,
-    FloatingActionButtonLocation.startFloat,
-    FloatingActionButtonLocation.centerFloat,
-    FloatingActionButtonLocation.endFloat,
-    FloatingActionButtonLocation.startDocked,
-    FloatingActionButtonLocation.centerDocked,
-    FloatingActionButtonLocation.endDocked,
-  ];
+  final locations = FloatingActionButtonLocationExt.allCases;
 
   void _onShowFabChanged(bool value) {
     setState(() {
