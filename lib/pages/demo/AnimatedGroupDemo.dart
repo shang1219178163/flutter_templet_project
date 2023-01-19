@@ -24,17 +24,20 @@ class _AnimatedGroupDemoState extends State<AnimatedGroupDemo> {
 
   final _animations = <AnimatedGroupItemModel>[
     AnimatedGroupItemModel(
+      data: "Tween<double> 动画",
       tween: Tween<double>(begin: .0, end: 300.0,),
       begin: 0.0,
-      end: 0.6
+      end: 0.6,
     ),
     AnimatedGroupItemModel(
+      data: "ColorTween 动画",
       tween: ColorTween(begin: Colors.green, end: Colors.red,),
       begin: 0.0,
       end: 0.6
     ),
     AnimatedGroupItemModel(
-      tween: Tween<EdgeInsets>(
+        data: "Tween<EdgeInsets> 动画",
+        tween: Tween<EdgeInsets>(
         begin: const EdgeInsets.only(left: .0),
         end: const EdgeInsets.only(left: 100.0),
       ),

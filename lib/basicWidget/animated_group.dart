@@ -16,12 +16,16 @@ class AnimatedGroup extends StatefulWidget {
   /// 混合动画
   AnimatedGroup({
     Key? key,
+    this.data,
     required this.animations,
     required this.builder,
     this.controller,
     this.duration = const Duration(milliseconds: 2000),
     this.child,
   }) : super(key: key);
+
+  /// 扩展字段(比如字符串可方便断点调试)
+  dynamic data;
 
   /// 混合动画数组
   List<AnimatedGroupItemModel> animations;
@@ -118,17 +122,24 @@ class AnimatedGroupState extends State<AnimatedGroup> with TickerProviderStateMi
 class AnimatedGroupItemModel{
   /// 混合动画单个动画模型
   AnimatedGroupItemModel({
+    this.data,
     required this.tween,
     required this.begin,
     required this.end,
   });
 
+  /// 扩展字段(比如字符串可方便断点调试)
+  dynamic data;
+
   /// 动画 Tween
   Tween tween;
+
   /// 动画开始时间 (0 - 1.0)
   double begin;
+
   /// 动画结束时间 (0 - 1.0)
   double end;
+
 }
 
 // example
