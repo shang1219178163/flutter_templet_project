@@ -403,6 +403,7 @@ var _list = [
   Tuple2(APPRouter.visibilityDemo, "visibilityDemo", ),
   Tuple2(APPRouter.ignorePointerDemo, "ignorePointerDemo", ),
   Tuple2(APPRouter.boxShadowDemo, "阴影", ),
+  Tuple2(APPRouter.borderDemo, "buttonBorderDemo", ),
 
 
 ];
@@ -511,7 +512,6 @@ var _others = [
   Tuple2(APPRouter.fourthPage, "fourthPage", ),
   Tuple2(APPRouter.loginPage, "LoginPage", ),
   Tuple2(APPRouter.loginPage2, "LoginPage2", ),
-  Tuple2(APPRouter.borderDemo, "buttonBorderDemo", ),
   Tuple2(APPRouter.clipDemo, "clipDemo", ),
 
   Tuple2(APPRouter.navgationBarDemo, "navgationBarDemo", ),

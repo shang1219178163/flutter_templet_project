@@ -9,6 +9,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
+import 'package:svgaplayer_flutter/proto/svga.pb.dart';
 
 class MyPopverDemo extends StatefulWidget {
 
@@ -139,5 +140,31 @@ class _MyPopverDemoState extends State<MyPopverDemo> {
       width: 1.0,
     ),
   );
+
+  _build() {
+    return Column(
+      children: [
+
+        LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints constraints){
+
+            return SizedBox();
+          }
+        ),
+        Builder(
+          builder: (context) {
+
+            return SizedBox();
+          }
+        ),
+        StatefulBuilder(
+          builder: (BuildContext context, StateSetter setState) {
+
+            return SizedBox();
+          }
+        ),
+      ]
+    );
+  }
 
 }

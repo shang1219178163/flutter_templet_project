@@ -7,6 +7,7 @@
 //
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/section_header.dart';
 import 'package:flutter_templet_project/basicWidget/triangle_path.dart';
 
 class ClipDemo extends StatefulWidget {
@@ -36,58 +37,46 @@ class _ClipDemoState extends State<ClipDemo> {
   }
 
   _buildBody() {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(20),
-            child: Container(
-              height: 150,
-              width: 150,
-              child: Image.asset(
-                'images/bg.jpg',
-                fit: BoxFit.cover,
-              ),
+    return ListView(
+      children: [
+        Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            SectionHeader.h4(title: 'ClipRRect'),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: _buildBox(),
             ),
-          ),
 
-          ClipOval(
-            child: Container(
-              height: 150,
-              width: 250,
-              child: Image.asset(
-                'images/bg.jpg',
-                fit: BoxFit.cover,
-              ),
+            SectionHeader.h4(title: 'ClipOval'),
+            ClipOval(
+              child: _buildBox(),
             ),
-          ),
 
-          ClipPath.shape(
-            shape: StadiumBorder(),
-            child: Container(
-              height: 150,
-              width: 250,
-              child: Image.asset(
-                'images/bg.jpg',
-                fit: BoxFit.cover,
-              ),
+            SectionHeader.h4(title: 'ClipPath.shape'),
+            ClipPath.shape(
+              shape: StadiumBorder(),
+              child: _buildBox(),
             ),
-          ),
 
-          ClipPath(
-            clipper: TrianglePath(),
-            child: Container(
-              height: 150,
-              width: 250,
-              child: Image.asset(
-                'images/bg.jpg',
-                fit: BoxFit.cover,
-              ),
+            SectionHeader.h4(title: 'ClipPath'),
+            ClipPath(
+              clipper: TrianglePath(),
+              child: _buildBox(),
             ),
-          ),
+          ],
+        ),
+      ],
+    );
+  }
 
-        ],
+  _buildBox() {
+    return Container(
+      height: 150,
+      width: 250,
+      child: Image.asset(
+        'images/bg.jpg',
+        fit: BoxFit.cover,
       ),
     );
   }
