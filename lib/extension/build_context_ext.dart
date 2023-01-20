@@ -34,20 +34,20 @@ extension BuildContextExt on BuildContext {
     return renderObj is RenderBox ? renderObj : null;
   }
 
-  /// 获取当前组件的 position
-  Offset? position({Offset offset = Offset.zero}) {
+  /// 获取当前组件的坐标点
+  Offset? origin({Offset offset = Offset.zero}) {
     return this.renderBox?.localToGlobal(offset); //组件坐标
   }
 
   /// 获取当前组件的 Size
-  Size? get size => this.renderBox?.size;
+  Size? get renderBoxSize => this.renderBox?.size;
 
   double? minX({Offset offset = Offset.zero}) {
-    return this.position(offset: offset)?.dx;
+    return this.origin(offset: offset)?.dx;
   }
 
   double? minY({Offset offset = Offset.zero}) {
-    return this.position(offset: offset)?.dy;
+    return this.origin(offset: offset)?.dy;
   }
 
   double? maxX({Offset offset = Offset.zero}) {
@@ -68,19 +68,19 @@ extension BuildContextExt on BuildContext {
     if (this.minX(offset: offset) == null || this.size == null) {
       return null;
     }
-    return this.position()!.dx + this.size!.width * 0.5;
+    return this.origin()!.dx + this.size!.width * 0.5;
   }
 
   double? midY({Offset offset = Offset.zero}) {
     if (this.minX(offset: offset) == null || this.size == null) {
       return null;
     }
-    return this.position()!.dy + this.size!.height * 0.5;
+    return this.origin()!.dy + this.size!.height * 0.5;
   }
 
   ///扩展方法
   void logRendBoxInfo() {
-    print([DateTime.now(), this.position(), this.size]);
+    print([DateTime.now(), this.origin(), this.size]);
   }
 
   /// 扩展属性 Theme.of(this.context)
@@ -305,7 +305,7 @@ extension GlobalKeyExt on GlobalKey{
   /// 获取当前组件的 RenderBox
   RenderBox? get renderBox => this.currentContext?.renderBox;
   /// 获取当前组件的 position
-  Offset? position({Offset offset = Offset.zero}) => this.currentContext?.position(offset: offset);
+  Offset? position({Offset offset = Offset.zero}) => this.currentContext?.origin(offset: offset);
   /// 获取当前组件的 Size
   Size? get size => this.currentContext?.size;
 

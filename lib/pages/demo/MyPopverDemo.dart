@@ -49,14 +49,13 @@ class _MyPopverDemoState extends State<MyPopverDemo> {
     return Stack(
       key: _globalKey,
       clipBehavior: Clip.none,
-      // fit: StackFit.expand,
       children: [
         _buildMenu(),
         if (isVisible)
         Positioned(
           // left: 0,
           right: 0.0,
-          top: 30 * 0.9,
+          top: _globalKey.currentContext?.renderBoxSize?.height ?? 30,
           width: context.screenSize.width,
           height: 300.0,
           child: _buildDropBox(),
@@ -65,18 +64,19 @@ class _MyPopverDemoState extends State<MyPopverDemo> {
     );
   }
 
-  _buildMenu() {
+  _buildMenu({int count = 3}) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: List.generate(3, (index) => ElevatedButton(
-          onPressed: () {
-            print("菜单$index");
-            btnIdx = index;
-            isVisible = !isVisible;
-            setState(() {});
-          },
-          child: Text("菜单$index"),
-        )).map((e) => Expanded(child: e)).toList(),
+      children: List.generate(count, (index) => ElevatedButton(
+        onPressed: () {
+          final val = _globalKey.currentContext?.origin();
+          print("菜单${index}_${val}");
+          btnIdx = index;
+          isVisible = !isVisible;
+          setState(() {});
+        },
+        child: Text("菜单$index"),
+      )).map((e) => Expanded(child: e)).toList(),
     );
   }
 
