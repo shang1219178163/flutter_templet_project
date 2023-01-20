@@ -493,6 +493,7 @@ var _customs = [
   Tuple2(APPRouter.listViewOneDemo, "listViewOneDemo", ),
   Tuple2(APPRouter.marqueeWidgetDemo, "跑马灯效果", ),
   Tuple2(APPRouter.ticketDemo, "券", ),
+  Tuple2(APPRouter.myPopverDemo, "弹窗测试", ),
 
 
 ];
