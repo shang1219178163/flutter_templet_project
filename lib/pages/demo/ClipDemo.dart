@@ -42,23 +42,28 @@ class _ClipDemoState extends State<ClipDemo> {
         Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
+            SectionHeader.h4(title: 'ClipRect //将溢出部分剪裁'),
+            ClipRect(
+              child: Align(
+                alignment: Alignment.topCenter,
+                heightFactor: 0.5,
+                child: _buildBox(),
+              ),
+            ),
             SectionHeader.h4(title: 'ClipRRect'),
             ClipRRect(
               borderRadius: BorderRadius.circular(20),
               child: _buildBox(),
             ),
-
             SectionHeader.h4(title: 'ClipOval'),
             ClipOval(
               child: _buildBox(),
             ),
-
             SectionHeader.h4(title: 'ClipPath.shape'),
             ClipPath.shape(
               shape: StadiumBorder(),
               child: _buildBox(),
             ),
-
             SectionHeader.h4(title: 'ClipPath'),
             ClipPath(
               clipper: TrianglePath(),
