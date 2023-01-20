@@ -72,8 +72,8 @@ class _ClipDemoState extends State<ClipDemo> {
 
   _buildBox() {
     return Container(
-      height: 150,
-      width: 250,
+      height: 100,
+      width: 150,
       child: Image.asset(
         'images/bg.jpg',
         fit: BoxFit.cover,
