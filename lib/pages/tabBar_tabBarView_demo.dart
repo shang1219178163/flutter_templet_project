@@ -470,7 +470,7 @@ var _customs = [
   Tuple2(APPRouter.customSwipperDemo, "自定义轮播", ),
   Tuple2(APPRouter.neumorphismDemo, "拟物按钮", ),
   Tuple2(APPRouter.horizontalCellDemo, "水平 cell 布局", ),
-  Tuple2(APPRouter.listViewOneDemo, "listViewOneDemo", ),
+  Tuple2(APPRouter.listViewOneDemo, "跑马灯效果", ),
   Tuple2(APPRouter.marqueeWidgetDemo, "跑马灯效果", ),
   Tuple2(APPRouter.ticketDemo, "券", ),
 
