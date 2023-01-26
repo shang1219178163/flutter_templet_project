@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/SliverAppBarDemoOne.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/SliverGridDemo.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/SliverListDemo.dart';
+import 'package:flutter_templet_project/pages/sliver_demo/SliverListPopverDemo.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/SliverPersistentHeaderDemoOne.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/StaggeredGridViewDemo.dart';
 import 'package:tuple/tuple.dart';
@@ -186,5 +187,11 @@ List<Tuple3<String, String, Widget>> _list = [
     '瀑布流',
     StaggeredGridViewDemo(),
   ),
+  Tuple3(
+    'SliverListPopverDemo',
+    'Popver弹窗',
+    SliverListPopverDemo(),
+  ),
+
 
 ];

@@ -149,12 +149,12 @@ extension WidgetExt on Widget {
   }
 
   /// 转为 SliverToBoxAdapter
-  toSliverToBoxAdapter(Key? key,) {
-    return SliverToBoxAdapter(
+  SliverToBoxAdapter toSliverToBoxAdapter({
+    Key? key,
+    }) => SliverToBoxAdapter(
       key: key,
       child: this,
     );
-  }
 
 }
 
