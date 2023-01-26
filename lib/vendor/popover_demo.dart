@@ -118,26 +118,25 @@ class PopoverButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return
-      GestureDetector(
-          child: Container(
-            width: 80,
-            height: 40,
-            decoration: const BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.all(Radius.circular(5)),
-              boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 5)],
-            ),
-            child: Center(
-                child: this.text ?? Text('${this.runtimeType.toString()}'),
-            ),
-          ),
-          onTap: () {
-            // _handleShowPopover(context);
-            _handleShowPopover1(context);
-            context.logRendBoxInfo();
-          }
-      );
+    return GestureDetector(
+      child: Container(
+        width: 80,
+        height: 40,
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.all(Radius.circular(5)),
+          boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 5)],
+        ),
+        child: Center(
+            child: this.text ?? Text('${this.runtimeType.toString()}'),
+        ),
+      ),
+      onTap: () {
+        // _handleShowPopover(context);
+        _handleShowPopover1(context);
+        context.logRendBoxInfo();
+      }
+    );
   }
 
 
@@ -166,7 +165,7 @@ class PopoverButton extends StatelessWidget {
       ),
       onPop: () => print('Popover was popped!'),
       direction: PopoverDirection.bottom,
-      width: 200,
+      // width: 200,
       height: 60,
       arrowHeight: 10,
       arrowWidth: 15,

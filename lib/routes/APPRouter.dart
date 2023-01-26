@@ -34,6 +34,7 @@ import 'package:flutter_templet_project/pages/demo/ListViewOneDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MarqueeWidgetDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MaterialBannerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ModalBarrierDemo.dart';
+import 'package:flutter_templet_project/pages/demo/MyPopverDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NavigationToolbarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NeumorphismDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NotificationListenerDemo.dart';
@@ -399,6 +400,7 @@ class APPRouter {
   static const animatedStaggerDemo = '/animatedStaggerDemo';
   static const buttonStyleDemo = '/buttonStyleDemo';
   static const ticketDemo = '/ticketDemo';
+  static const myPopverDemo = '/myPopverDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -628,6 +630,7 @@ class AppPage {
     GetPage(name: APPRouter.animatedStaggerDemo, page: () => AnimatedStaggerDemo(),),
     GetPage(name: APPRouter.buttonStyleDemo, page: () => ButtonStyleDemo(),),
     GetPage(name: APPRouter.ticketDemo, page: () => TicketUiDemo(),),
+    GetPage(name: APPRouter.myPopverDemo, page: () => MyPopverDemo(),),
 
 
 

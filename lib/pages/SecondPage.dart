@@ -147,7 +147,7 @@ class _SecondPageState extends State<SecondPage> {
               key: _globalKey,
               onPressed: () {
                 // _showCustomPopView();
-                ddlog([_globalKey.currentContext?.position(), _globalKey.currentContext?.size]);
+                ddlog([_globalKey.currentContext?.origin(), _globalKey.currentContext?.size]);
                 // test();
               },
             ),

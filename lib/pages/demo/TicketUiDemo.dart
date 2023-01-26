@@ -34,7 +34,7 @@ class _TicketUiDemoState extends State<TicketUiDemo> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("$this"),
+        title: Text("$widget"),
         actions: ['done',].map((e) => TextButton(
           child: Text(e,
             style: TextStyle(color: Colors.white),
