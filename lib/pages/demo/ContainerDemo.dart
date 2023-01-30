@@ -27,70 +27,28 @@ class _ContainerDemoState extends State<ContainerDemo> {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
 
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title ?? "$widget"),
-          actions: [
-            TextButton(
-              onPressed: () {
-                print('TextButton');
-                setState(() {});
-              },
-              child: Text('done',
-                style: TextStyle(color: Colors.white),
-              ),
+      appBar: AppBar(
+        title: Text(widget.title ?? "$widget"),
+        actions: [
+          TextButton(
+            onPressed: () {
+              print('TextButton');
+              setState(() {});
+            },
+            child: Text('done',
+              style: TextStyle(color: Colors.white),
             ),
-          ],
-        ),
-        body: buildBodyColumn(
-          children: [
-            buildSection(),
-            // Container(
-            //   decoration: BoxDecoration(
-            //     image: DecorationImage(
-            //       image: AssetImage('images/img_update.png'),
-            //       repeat: ImageRepeat.repeat,
-            //       alignment: Alignment.topLeft,
-            //     )
-            //   ),
-            //   child: Container(
-            //     constraints: BoxConstraints.expand(),
-            //     child: OutlinedButton(
-            //       onPressed: () { print("ImageRepeat.repeat"); },
-            //       child: Text('ImageRepeat.repeat',
-            //         style: TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
-            //       ),
-            //     ),
-            //   ),
-            // ),
-            Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  // image: AssetImage('images/img_update.png'),
-                  image: "img_update".toPngAssetImage(),
-                  repeat: ImageRepeat.repeat,
-                  alignment: Alignment.topLeft,
-                )
-              ),
-              transform: Matrix4.rotationZ(.2),
-              alignment: Alignment.centerRight, //卡片内文字居中
-              child: Text(
-                //卡片文字
-                "5.20", style: TextStyle(color: Colors.red, fontSize: 40.0),
-              ),
-            ),
-
-            // Container(
-            //   color: Colors.green,
-            //   child: Text('Container'),
-            // ),
-            // Container(
-            //   constraints: BoxConstraints.expand(),
-            //   color: Colors.yellow,
-            //   child: Text('Container1'),
-            // ),
-
-          ],
-        )
+          ),
+        ],
+      ),
+      body: buildBodyColumn(
+        children: [
+          // ...testContainer(),
+          buildSection(),
+          buildSection1(),
+          buildSection2(),
+        ],
+      )
     );
   }
 
@@ -113,7 +71,6 @@ class _ContainerDemoState extends State<ContainerDemo> {
       slivers: children.map((e) => SliverToBoxAdapter(child: e,)).toList(),
     );
   }
-
 
   buildSection() {
     return Opacity(
@@ -163,5 +120,70 @@ class _ContainerDemoState extends State<ContainerDemo> {
         ),
       ),
     );
+  }
+
+  buildSection1() {
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          // image: AssetImage('images/img_update.png'),
+          image: "img_update".toPngAssetImage(),
+          repeat: ImageRepeat.repeat,
+          alignment: Alignment.topLeft,
+        )
+      ),
+      transform: Matrix4.rotationZ(.2),
+      alignment: Alignment.centerRight, //卡片内文字居中
+      child: Text(
+        //卡片文字
+        "5.20", style: TextStyle(color: Colors.red, fontSize: 40.0),
+      ),
+    );
+  }
+
+  buildSection2() {
+    final msg = "静夜思 * 李白 • 床前明月光, 疑是地上霜, 举头望明月, 低头思故乡.";
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.yellow,
+        border: Border.all(width: 10, color: Colors.blue),
+      ),
+      child: Text(
+        msg,
+        style: TextStyle(fontSize: 20, color: Colors.deepPurple),
+      ),
+    );
+  }
+
+  List<Widget> testContainer() {
+    return [
+      Container(
+        decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('images/img_update.png'),
+              repeat: ImageRepeat.repeat,
+              alignment: Alignment.topLeft,
+            )
+        ),
+        child: Container(
+          constraints: BoxConstraints.expand(),
+          child: OutlinedButton(
+            onPressed: () { print("ImageRepeat.repeat"); },
+            child: Text('ImageRepeat.repeat',
+              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
+            ),
+          ),
+        ),
+      ),
+      Container(
+        color: Colors.green,
+        child: Text('Container'),
+      ),
+      Container(
+        constraints: BoxConstraints.expand(),
+        color: Colors.yellow,
+        child: Text('Container1'),
+      ),
+    ];
   }
 }
