@@ -88,14 +88,15 @@ class _NotificationListenerDemoState extends State<NotificationListenerDemo> {
 
   bool onNotification(ScrollNotification n) {
     // ScrollMetrics metrics = n.metrics;
-    var info = "atEdge:${n.metrics.atEdge},pixels:${n.metrics.pixels}";
-    info = "isStart:${n.metrics.isStart},isEnd:${n.metrics.isEnd}";
-    switch (n.runtimeType) {
-      case ScrollStartNotification: print("开始滚动,$info"); break;
-      case ScrollUpdateNotification: print("正在滚动,$info"); break;
-      case ScrollEndNotification: print("滚动停止,$info"); break;
-      case OverscrollNotification: print("滚动到边界,$info"); break;
-    }
+    // var info = "atEdge: ${n.metrics.atEdge}, pixels: ${n.metrics.pixels}";
+    // info = "isStart: ${n.metrics.isStart}, isEnd: ${n.metrics.isEnd}";
+    // switch (n.runtimeType) {
+    //   case ScrollStartNotification: print("开始滚动, $info"); break;
+    //   case ScrollUpdateNotification: print("正在滚动, $info"); break;
+    //   case ScrollEndNotification: print("滚动停止, $info"); break;
+    //   case OverscrollNotification: print("滚动到边界, $info"); break;
+    // }
+    print("onNotification：${n.runtimeType}");
 
     if(n is ScrollUpdateNotification){
       //当前滚动的位置和总长度
