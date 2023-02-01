@@ -170,11 +170,13 @@ class WrapWidget extends StatelessWidget {
       alignment: alignment,
       child: Padding(
         padding: padding,
-        child: Text(
-          text,
-          overflow: TextOverflow.ellipsis,
-          maxLines: maxLines,
-          style: style,
+        child: FittedBox(
+          child: Text(
+            text,
+            overflow: TextOverflow.ellipsis,
+            maxLines: maxLines,
+            style: style,
+          ),
         ),
       ),
     );

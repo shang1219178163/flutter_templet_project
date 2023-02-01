@@ -4,11 +4,6 @@ import 'package:flutter/material.dart';
 
 ///自定义轮播
 class CustomSwipper extends StatefulWidget {
-  final List<String> images;
-  final double height;
-  final ValueChanged<int> onTap;
-  final Curve curve;
-  final IndexedWidgetBuilder? itemBuilder;
 
   CustomSwipper({
     Key? key,
@@ -17,17 +12,31 @@ class CustomSwipper extends StatefulWidget {
     this.itemBuilder,
     this.height = 200,
     this.curve = Curves.linear,
+    this.duration = const Duration(seconds: 3),
   }) : super(key: key);
+
+  final List<String> images;
+  final double height;
+  final ValueChanged<int> onTap;
+  final Curve curve;
+  final IndexedWidgetBuilder? itemBuilder;
+  final Duration? duration;
 
   @override
   _CustomSwipperState createState() => _CustomSwipperState();
 }
 
 class _CustomSwipperState extends State<CustomSwipper> {
-   int _curIndex = 0;
-   PageController _pageController = PageController(initialPage: 0);
+  int _curIndex = 0;
+  PageController _pageController = PageController(initialPage: 0);
 
-   Timer? _timer;
+  Timer? _timer;
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
 
   @override
   void initState() {
@@ -144,11 +153,11 @@ class _CustomSwipperState extends State<CustomSwipper> {
   /// 初始化定时任务
   _initTimer() {
     if (_timer == null) {
-      _timer = Timer.periodic(Duration(seconds: 3), (t) {
+      _timer = Timer.periodic(widget.duration ?? Duration(seconds: 3), (t) {
         _curIndex++;
         _pageController.animateToPage(
           _curIndex,
-          duration: Duration(milliseconds: 300),
+          duration: Duration(milliseconds: 350),
           curve: Curves.linear,
         );
       });

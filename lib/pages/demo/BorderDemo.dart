@@ -219,15 +219,6 @@ class _BorderDemoState extends State<BorderDemo> {
         Container(
           margin: EdgeInsets.all(8),
           decoration: ShapeDecoration(
-            color: Colors.yellowAccent,
-              shape: UnderlineInputBorder(borderSide: BorderSide(color: Colors.red, width: 2))
-          ),
-          child: TextButton(child: Text('ShapeDecoration - UnderlineInputBorder'), onPressed: () {  },),
-        ),
-
-        Container(
-          margin: EdgeInsets.all(8),
-          decoration: ShapeDecoration(
               color: Colors.yellowAccent,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -251,16 +242,32 @@ class _BorderDemoState extends State<BorderDemo> {
             color: Colors.yellowAccent,
             shape: BeveledRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(10)),
-              side: BorderSide(color: Colors.red, width: 2))
+              side: BorderSide(color: Colors.red, width: 2)
+            )
           ),
           child: TextButton(child: Text('ShapeDecoration - BeveledRectangleBorder'), onPressed: () {  },),
         ),
 
         Container(
           margin: EdgeInsets.all(8),
+          decoration: ShapeDecoration(
+            // color: Colors.yellowAccent,
+            gradient: LinearGradient(
+              colors: [
+                Colors.yellow,
+                Colors.green,
+              ],
+            ),
+            shape: UnderlineInputBorder(borderSide: BorderSide(color: Colors.red, width: 2))
+          ),
+          child: TextButton(child: Text('ShapeDecoration - UnderlineInputBorder'), onPressed: () {  },),
+        ),
+
+        Container(
+          margin: EdgeInsets.all(8),
           decoration: new UnderlineTabIndicator(
-              borderSide: BorderSide(width: 2.0, color: Colors.red),
-              insets: EdgeInsets.fromLTRB(0, 0, 0, 10)
+            borderSide: BorderSide(width: 2.0, color: Colors.red),
+            insets: EdgeInsets.fromLTRB(0, 0, 0, 10)
           ),
           child: TextButton(child: Text('UnderlineTabIndicator - borderSide'), onPressed: () {  },),
         ),

@@ -2,6 +2,7 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
+import 'package:flutter_templet_project/extension/widget_ext.dart';
 
 class ContainerDemo extends StatefulWidget {
 
@@ -15,6 +16,7 @@ class ContainerDemo extends StatefulWidget {
 
 class _ContainerDemoState extends State<ContainerDemo> {
 
+  bool isSliver = true;
 
   @override
   void initState() {
@@ -24,8 +26,6 @@ class _ContainerDemoState extends State<ContainerDemo> {
 
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
@@ -33,6 +33,7 @@ class _ContainerDemoState extends State<ContainerDemo> {
           TextButton(
             onPressed: () {
               print('TextButton');
+              isSliver = !isSliver;
               setState(() {});
             },
             child: Text('done',
@@ -41,20 +42,26 @@ class _ContainerDemoState extends State<ContainerDemo> {
           ),
         ],
       ),
-      body: buildBodyColumn(
-        children: [
-          // ...testContainer(),
+      // body: isSliver ? buildBodyCustom() : buildBodyColumn(),
+      body: CustomScrollView(
+        slivers: [
           buildSection(),
           buildSection1(),
-          buildSection2(),
-        ],
+          // buildSection2(),
+          buildGradientBorder(),
+        ].map((e) => e.toSliverToBoxAdapter()).toList(),
       )
     );
   }
 
-  buildBodyColumn({
-    List<Widget> children = const <Widget>[],
-  }) {
+  buildBodyColumn() {
+    List<Widget> children = [
+      // ...testContainer(),
+      buildSection(),
+      buildSection1(),
+      buildSection2(),
+    ];
+
     return Column(
       children: children.map((e) => Builder(
         builder: (context) {
@@ -64,65 +71,73 @@ class _ContainerDemoState extends State<ContainerDemo> {
     );
   }
 
-  buildBodyCustom({
-    List<Widget> children = const <Widget>[],
-  }) {
+  buildBodyCustom() {
+    List<Widget> children = [
+      // ...testContainer(),
+      buildSection(),
+      buildSection1(),
+      buildSection2(),
+    ];
+
     return CustomScrollView(
       slivers: children.map((e) => SliverToBoxAdapter(child: e,)).toList(),
     );
   }
 
-  buildSection() {
-    return Opacity(
-      opacity: 1,
-      child: Container(
-        margin: EdgeInsets.all(20),
-        padding: EdgeInsets.all(20),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(20)),
-          gradient: LinearGradient(
-            colors: [Colors.green, Colors.yellow],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.red.withOpacity(0.5),
-              spreadRadius: 5,
-              blurRadius: 7,
-              offset: Offset(0, 3), // changes position of shadow
+  Widget buildSection() {
+    double bgBlur = 10;
+    return ClipRRect(
+      borderRadius: BorderRadius.all(Radius.circular(10)),
+      child: Opacity(
+        opacity: 1,
+        child: Container(
+          margin: EdgeInsets.all(20),
+          padding: EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(20)),
+            gradient: LinearGradient(
+              colors: [Colors.green, Colors.yellow],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
             ),
-          ],
-          image: DecorationImage(
-            image: NetworkImage('https://tenfei02.cfp.cn/creative/vcg/800/new/VCG21409037867.jpg'),
-            fit: BoxFit.cover,
-          ),
-        ),
-        foregroundDecoration: BoxDecoration(
-          color: Colors.yellow,
-          border: Border.all(color: Colors.green, width: 5),
-          borderRadius: BorderRadius.all(Radius.circular(400)),
-          image: DecorationImage(
-            image: NetworkImage('https://pic.616pic.com/bg_w1180/00/04/08/G5Bftx5ZDI.jpg'),
-            fit: BoxFit.cover,
-          ),
-        ),
-        child: BackdropFilter(
-          filter: ui.ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-          child: Container(
-            constraints: BoxConstraints.expand(),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(20)),
-              color: Colors.red,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.red.withOpacity(0.5),
+                spreadRadius: 5,
+                blurRadius: 7,
+                offset: Offset(0, 3), // changes position of shadow
+              ),
+            ],
+            image: DecorationImage(
+              image: NetworkImage('https://tenfei02.cfp.cn/creative/vcg/800/new/VCG21409037867.jpg'),
+              fit: BoxFit.cover,
             ),
-            child: Text('VCG21409037867'),
+          ),
+          // foregroundDecoration: BoxDecoration(
+          //   color: Colors.yellow,
+          //   border: Border.all(color: Colors.green, width: 5),
+          //   borderRadius: BorderRadius.all(Radius.circular(400)),
+          //   image: DecorationImage(
+          //     image: NetworkImage('https://pic.616pic.com/bg_w1180/00/04/08/G5Bftx5ZDI.jpg'),
+          //     fit: BoxFit.cover,
+          //   ),
+          // ),
+          child: BackdropFilter(
+            filter: ui.ImageFilter.blur(sigmaX: bgBlur, sigmaY: bgBlur),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(20)),
+                color: Colors.red,
+              ),
+              child: Text('VCG21409037867'),
+            ),
           ),
         ),
       ),
     );
   }
 
-  buildSection1() {
+  Widget buildSection1() {
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
@@ -141,7 +156,7 @@ class _ContainerDemoState extends State<ContainerDemo> {
     );
   }
 
-  buildSection2() {
+  Widget buildSection2() {
     final msg = "静夜思 * 李白 • 床前明月光, 疑是地上霜, 举头望明月, 低头思故乡.";
     return Container(
       decoration: BoxDecoration(
@@ -185,5 +200,34 @@ class _ContainerDemoState extends State<ContainerDemo> {
         child: Text('Container1'),
       ),
     ];
+  }
+
+  Widget buildGradientBorder() {
+    BorderRadius borderRadius = BorderRadius.circular(15);
+
+    return Container(
+      height: 100,
+      decoration: BoxDecoration(
+        borderRadius: borderRadius,
+        gradient: LinearGradient(
+          colors: [
+            Colors.red,
+            Colors.green,
+          ],
+        ),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(1.5),
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: borderRadius,
+            color: Colors.white,
+          ),
+          child: Center(
+            child: Text('Enter further widgets here'),
+          ),
+        ),
+      ),
+    );
   }
 }
