@@ -223,6 +223,57 @@ extension ListViewExt on ListView {
 }
 
 
+extension CustomScrollViewExt on CustomScrollView {
+
+  /// 转为 ListView
+  ListView toListView() {
+    final children = this.slivers.map((e) => (e as SliverToBoxAdapter).child!).toList();
+    return ListView(
+      key: this.key,
+      children: children,
+      scrollDirection: this.scrollDirection,
+      reverse: this.reverse,
+      controller: this.controller,
+      primary: this.primary,
+      physics: this.physics,
+      shrinkWrap: this.shrinkWrap,
+      cacheExtent: this.cacheExtent,
+      semanticChildCount: this.semanticChildCount,
+      dragStartBehavior: this.dragStartBehavior,
+      keyboardDismissBehavior: this.keyboardDismissBehavior,
+      restorationId: this.restorationId,
+      clipBehavior: this.clipBehavior,
+    );
+  }
+
+  /// 转为 Flex
+  Flex toFlex({
+    direction = Axis.vertical,
+    mainAxisAlignment = MainAxisAlignment.start,
+    mainAxisSize = MainAxisSize.max,
+    crossAxisAlignment = CrossAxisAlignment.center,
+    TextBaseline? textBaseline,
+    verticalDirection = VerticalDirection.down,
+    TextDirection? textDirection,
+    clipBehavior = Clip.none,
+  }) {
+    final children = this.slivers.map((e) => (e is SliverToBoxAdapter ? e.child ?? SizedBox() : e)).toList();
+    return Flex(
+      key: this.key,
+      direction: direction,
+      mainAxisAlignment: mainAxisAlignment,
+      mainAxisSize: mainAxisSize,
+      crossAxisAlignment: crossAxisAlignment,
+      textBaseline: textBaseline,
+      verticalDirection: verticalDirection,
+      textDirection: textDirection,
+      clipBehavior: clipBehavior,
+      children: children,
+    );
+  }
+}
+
+
 extension ListTileExt on ListTile {
 
   ///添加分割符
