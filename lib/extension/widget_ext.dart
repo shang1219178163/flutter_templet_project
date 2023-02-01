@@ -227,7 +227,7 @@ extension CustomScrollViewExt on CustomScrollView {
 
   /// 转为 ListView
   ListView toListView() {
-    final children = this.slivers.map((e) => (e as SliverToBoxAdapter).child!).toList();
+    final children = this.slivers.map((e) => (e is SliverToBoxAdapter ? e.child ?? SizedBox() : e)).toList();
     return ListView(
       key: this.key,
       children: children,
