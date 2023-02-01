@@ -16,6 +16,7 @@ import 'package:flutter_templet_project/pages/demo/BuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ButtonStyleDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ColoredBoxDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ContainerDemo.dart';
+import 'package:flutter_templet_project/pages/demo/CustomScrollBarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/CustomSwipperDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DecorationDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DismissibleDemo.dart';
@@ -29,6 +30,7 @@ import 'package:flutter_templet_project/pages/demo/IgnorePointerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ImageBlendModeDemo.dart';
 import 'package:flutter_templet_project/pages/demo/InheritedWidgetDemo.dart';
 import 'package:flutter_templet_project/pages/demo/IntrinsicHeightDemo.dart';
+import 'package:flutter_templet_project/pages/demo/KeyDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ListViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ListViewOneDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MarqueeWidgetDemo.dart';
@@ -401,6 +403,8 @@ class APPRouter {
   static const buttonStyleDemo = '/buttonStyleDemo';
   static const ticketDemo = '/ticketDemo';
   static const myPopverDemo = '/myPopverDemo';
+  static const keyDemo = '/keyDemo';
+  static const customScrollBarDemo = '/customScrollBarDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -631,6 +635,8 @@ class AppPage {
     GetPage(name: APPRouter.buttonStyleDemo, page: () => ButtonStyleDemo(),),
     GetPage(name: APPRouter.ticketDemo, page: () => TicketUiDemo(),),
     GetPage(name: APPRouter.myPopverDemo, page: () => MyPopverDemo(),),
+    GetPage(name: APPRouter.keyDemo, page: () => KeyDemo(),),
+    GetPage(name: APPRouter.customScrollBarDemo, page: () => CustomScrollBarDemo(),),
 
 
 

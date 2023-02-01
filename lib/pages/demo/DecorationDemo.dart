@@ -54,13 +54,13 @@ class _DecorationDemoState extends State<DecorationDemo> {
       bottomLeftRadius: 45,
       bottomRightRadius: 85,
       bgUrl: 'https://tenfei02.cfp.cn/creative/vcg/800/new/VCG21409037867.jpg',
-      // bgChild: FadeInImage.assetNetwork(
-      //   placeholder: 'images/img_placeholder.png',
-      //   image: 'https://tenfei02.cfp.cn/creative/vcg/800/new/VCG21409037867.jpg',
-      //   fit: BoxFit.fill,
-      //   width: 400,
-      //   height: 400,
-      // ),
+      bgChild: FadeInImage(
+        placeholder: AssetImage('images/img_placeholder.png'),
+        image: NetworkImage('https://tenfei02.cfp.cn/creative/vcg/800/new/VCG21409037867.jpg'),
+        fit: BoxFit.fill,
+        width: 400,
+        height: 400,
+      ),
       bgColor: Colors.yellow,
       bgGradient: LinearGradient(
         colors: [Colors.green, Colors.yellow],

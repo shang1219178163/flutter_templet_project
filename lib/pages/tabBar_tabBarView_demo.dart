@@ -440,7 +440,7 @@ var _specials = [
   Tuple2(APPRouter.containerDemo, "containerDemo", ),
   Tuple2(APPRouter.scrollControllerDemo, "滚动行为", ),
   Tuple2(APPRouter.buttonStyleDemo, "按钮样式研究", ),
-
+  Tuple2(APPRouter.keyDemo, "key研究", ),
 
 ];
 
@@ -475,7 +475,7 @@ var _customs = [
   Tuple2(APPRouter.marqueeWidgetDemo, "跑马灯效果", ),
   Tuple2(APPRouter.ticketDemo, "券", ),
   Tuple2(APPRouter.myPopverDemo, "弹窗测试", ),
-
+  Tuple2(APPRouter.customScrollBarDemo, "自定义 ScrollBar", ),
 
 ];
 

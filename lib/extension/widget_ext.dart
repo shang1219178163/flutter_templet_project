@@ -158,7 +158,9 @@ extension WidgetExt on Widget {
 
 }
 
+
 extension ScrollViewExt on ScrollView {
+
   CupertinoScrollbar addCupertinoScrollbar({
     Key? key,
     ScrollController? controller,
@@ -178,6 +180,48 @@ extension ScrollViewExt on ScrollView {
     notificationPredicate: notificationPredicate ?? defaultScrollNotificationPredicate,
   );
 }
+
+
+extension FlexExt on Flex {
+
+  /// 转为 SliverToBoxAdapter
+  CustomScrollView toCustomScrollView({
+    Key? key,
+  }) => CustomScrollView(
+    key: key,
+    slivers: this.children.map((e) => e.toSliverToBoxAdapter()).toList(),
+    clipBehavior: this.clipBehavior,
+  );
+}
+
+
+extension ListViewExt on ListView {
+
+  /// 转为 CustomScrollView
+  CustomScrollView toCustomScrollView() {
+    final slivers = (this.childrenDelegate as SliverChildListDelegate).children.map((e) => e.toSliverToBoxAdapter()).toList();
+    return CustomScrollView(
+      key: this.key,
+      slivers: slivers,
+      scrollDirection: this.scrollDirection,
+      reverse: this.reverse,
+      controller: this.controller,
+      primary: this.primary,
+      physics: this.physics,
+      scrollBehavior: this.scrollBehavior,
+      shrinkWrap: this.shrinkWrap,
+      center: this.center,
+      anchor: this.anchor,
+      cacheExtent: this.cacheExtent,
+      semanticChildCount: this.semanticChildCount,
+      dragStartBehavior: this.dragStartBehavior,
+      keyboardDismissBehavior: this.keyboardDismissBehavior,
+      restorationId: this.restorationId,
+      clipBehavior: this.clipBehavior,
+    );
+  }
+}
+
 
 extension ListTileExt on ListTile {
 
