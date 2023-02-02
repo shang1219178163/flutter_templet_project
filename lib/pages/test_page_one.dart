@@ -13,19 +13,17 @@ class TestPageOne extends StatelessWidget {
   Widget build(BuildContext context) {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
 
-    print("$this:$context");
-
     return Scaffold(
-        appBar: AppBar(
-          title: Text(title ?? "$this"),
-          actions: ['done',].map((e) => TextButton(
-            child: Text(e,
-              style: TextStyle(color: Colors.white),
-            ),
-            onPressed: onDone,)
-          ).toList(),
-        ),
-        body: Text(arguments.toString())
+      appBar: AppBar(
+        title: Text(title ?? "$this"),
+        actions: ['done',].map((e) => TextButton(
+          child: Text(e,
+            style: TextStyle(color: Colors.white),
+          ),
+          onPressed: onDone,)
+        ).toList(),
+      ),
+      body: Text(arguments.toString())
     );
   }
 

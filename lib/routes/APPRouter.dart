@@ -171,9 +171,9 @@ import 'package:flutter_templet_project/pages/demo/TabBarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TableDemo.dart';
 
 import 'package:flutter_templet_project/pages/AppWebViewDemo.dart';
-import 'package:flutter_templet_project/pages/ForgetPasswordPage.dart';
-import 'package:flutter_templet_project/pages/LoginPage.dart';
-import 'package:flutter_templet_project/pages/LoginPage2.dart';
+import 'package:flutter_templet_project/pages/APPForgetPwdPage.dart';
+import 'package:flutter_templet_project/pages/APPLoginPage.dart';
+import 'package:flutter_templet_project/pages/APPLoginPage2.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/SliverFamilyDemo.dart';
 
 import 'package:flutter_templet_project/pages/demo/FutureBuilderDemo.dart';
@@ -445,13 +445,13 @@ class AppPage {
     GetPage(name: APPRouter.tabBarPageViewDemo, page: () => TabBarPageViewDemo(),),
     GetPage(name: APPRouter.testPage, page: () => TestPage(),),
     GetPage(name: APPRouter.testPageOne, page: () => TestPageOne(),),
-    GetPage(name: APPRouter.loginPage, page: () => LoginPage(),
+    GetPage(name: APPRouter.loginPage, page: () => APPLoginPage(),
       // transition: Transition.downToUp,
     ),
-    GetPage(name: APPRouter.loginPage2, page: () => LoginPage2(),
+    GetPage(name: APPRouter.loginPage2, page: () => APPLoginPage2(),
       // transition: Transition.downToUp,),
     ),
-    GetPage(name: APPRouter.forgetPasswordPage, page: () => ForgetPasswordPage(),),
+    GetPage(name: APPRouter.forgetPasswordPage, page: () => APPForgetPwdPage(),),
     GetPage(name: APPRouter.firstPage, page: () => FirstPage(),),
     GetPage(name: APPRouter.secondPage, page: () => SecondPage(),),
     GetPage(name: APPRouter.thirdPage, page: () => ThirdPage(),),

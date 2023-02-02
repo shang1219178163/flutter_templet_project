@@ -47,9 +47,9 @@ class _APPDrawerMenuPageState extends State<APPDrawerMenuPage> {
                   decoration: BoxDecoration(color: Theme.of(context).primaryColor),
                   child: UnconstrainedBox( //解除父级的大小限制
                     child: CircleAvatar(
-                        radius: 48,
-                        // backgroundColor: Colors.transparent,
-                        backgroundImage: AssetImage('images/avatar.png')
+                      radius: 48,
+                      // backgroundColor: Colors.transparent,
+                      backgroundImage: AssetImage('images/avatar.png')
                     ),
                   ),
                 ),

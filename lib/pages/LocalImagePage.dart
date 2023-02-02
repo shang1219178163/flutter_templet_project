@@ -22,10 +22,10 @@ class LocalImagePage extends StatelessWidget {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
 
     return Scaffold(
-        appBar: AppBar(
-          title: Text(title ?? "$this"),
-        ),
-        body: buildGridView(),
+      appBar: AppBar(
+        title: Text(title ?? "$this"),
+      ),
+      body: buildGridView(),
     );
   }
 
@@ -39,20 +39,21 @@ class LocalImagePage extends StatelessWidget {
       childAspectRatio: 4 / 3,
       children: imageNames.map((e) => GridTile(
         footer: Container(
-            color: Colors.green,
-            height: 25,
-            child: Center(
-              child: FittedBox(
-                  fit: BoxFit.fitWidth,
-                  child: Text(e.split("/").last)
-              ),
-            )
+          color: Colors.green,
+          height: 25,
+          child: Center(
+            child: FittedBox(
+              fit: BoxFit.fitWidth,
+              child: Text(e.split("/").last)
+            ),
+          )
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(e, fit: BoxFit.contain),
-          ]),
+          ]
+        ),
       )).toList(),
     );
   }

@@ -1,5 +1,5 @@
 //
-//  ForgetPasswordPage.dart
+//  APPForgetPwdPage.dart
 //  flutter_templet_project
 //
 //  Created by shang on 6/3/21 10:48 AM.
@@ -9,20 +9,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class ForgetPasswordPage extends StatefulWidget {
+class APPForgetPwdPage extends StatefulWidget {
 
   final String? title;
 
-  ForgetPasswordPage({ Key? key, this.title}) : super(key: key);
+  APPForgetPwdPage({ Key? key, this.title}) : super(key: key);
 
   
   @override
-  _ForgetPasswordPageState createState() => _ForgetPasswordPageState();
+  _APPForgetPwdPageState createState() => _APPForgetPwdPageState();
 }
 
-class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
-
-
+class _APPForgetPwdPageState extends State<APPForgetPwdPage> {
 
 
   @override

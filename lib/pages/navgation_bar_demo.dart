@@ -59,10 +59,10 @@ class _navgationBarDemoState extends State<navgationBarDemo> {
       title: Text("title"),
       actions: [
         IconButton(
-            onPressed: (){
-              ddlog("share");
-            },
-            icon: Icon(Icons.share)
+          onPressed: (){
+            ddlog("share");
+          },
+          icon: Icon(Icons.share)
         ),
       ],
       backgroundColor: Colors.transparent,

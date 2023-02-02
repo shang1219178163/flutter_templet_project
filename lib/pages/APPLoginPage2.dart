@@ -6,17 +6,17 @@ import 'package:flutter_templet_project/routes/APPRouter.dart';
 import 'package:get/get.dart';
 
 
-class LoginPage2 extends StatefulWidget {
+class APPLoginPage2 extends StatefulWidget {
 
-  LoginPage2({ Key? key, this.title}) : super(key: key);
+  APPLoginPage2({ Key? key, this.title}) : super(key: key);
 
   final String? title;
 
   @override
-  _LoginPage2State createState() => _LoginPage2State();
+  _APPLoginPage2State createState() => _APPLoginPage2State();
 }
 
-class _LoginPage2State extends State<LoginPage2> {
+class _APPLoginPage2State extends State<APPLoginPage2> {
 
   // 控制器
   final _unameController =  TextEditingController();
@@ -33,57 +33,6 @@ class _LoginPage2State extends State<LoginPage2> {
   final _unameExp = RegExp(r'^(?![0-9]+$)(?![a-z]+$)[0-9a-z]{6,12}$'); //用户名正则
   final _pwdExp = RegExp(r'^(?![0-9]+$)(?![a-z]+$)[0-9a-z]{6,12}$'); //密码正则
 
-  // 登录按钮是否可点击
-  void checkLoginText(){
-    if(_unameExp.hasMatch(_unameController.text)&&_pwdExp.hasMatch(_pwdController.text)){
-      this.isBtnEnabled = true;
-    }else{
-      this.isBtnEnabled = false;
-    }
-  }
-
-  // 登录提交
-  void loginSub(){
-    FocusScope.of(context).requestFocus(FocusNode()); //收起键盘
-    setState((){
-      this.showLoading = true;
-    });
-    loginRequest().then((v) => {
-      setState((){
-        this.showLoading = false;
-      }),
-      // toast提示
-      // 模拟登录跳转首页
-      // ToastCom.show('登录成功', context),
-      // Navigator.pushNamed(context, '/')
-
-      Get.toNamed(APPRouter.homePage)
-      // showDialog(
-      //     context: context,
-      //     builder: (context){
-      //         String alertText = "登录成功!!!"+"\n用户名:"+_unameController.text+"\n密码:"+_pwdController.text;
-      //         return AlertDialog(content: Text(alertText));
-      //     }
-      // )
-    });
-  }
-
-  @override
-  void initState(){
-    super.initState();
-  }
-
-  @override
-  void dispose(){
-    super.dispose();
-  }
-
-  // 异步操作
-  Future loginRequest() async {
-    return Future.delayed(Duration(seconds: 3),(){
-      print('login success');
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +44,6 @@ class _LoginPage2State extends State<LoginPage2> {
       ),
       body: buildBody(),
     );
-
   }
 
   Widget buildBody() {
@@ -221,11 +169,52 @@ class _LoginPage2State extends State<LoginPage2> {
       ),
     );
 
-
     childrens.add(_main);
     // if(this.showLoading){
     //   childrens.add(Loadding());
     // }
     return Stack(children: childrens);
+  }
+
+  // 异步操作
+  Future loginRequest() async {
+    return Future.delayed(Duration(seconds: 3),(){
+      print('login success');
+    });
+  }
+
+  // 登录按钮是否可点击
+  void checkLoginText(){
+    if(_unameExp.hasMatch(_unameController.text)&&_pwdExp.hasMatch(_pwdController.text)){
+      this.isBtnEnabled = true;
+    }else{
+      this.isBtnEnabled = false;
+    }
+  }
+
+  // 登录提交
+  void loginSub(){
+    FocusScope.of(context).requestFocus(FocusNode()); //收起键盘
+    setState((){
+      this.showLoading = true;
+    });
+    loginRequest().then((v) => {
+      setState((){
+        this.showLoading = false;
+      }),
+      // toast提示
+      // 模拟登录跳转首页
+      // ToastCom.show('登录成功', context),
+      // Navigator.pushNamed(context, '/')
+
+      Get.toNamed(APPRouter.homePage)
+      // showDialog(
+      //     context: context,
+      //     builder: (context){
+      //         String alertText = "登录成功!!!"+"\n用户名:"+_unameController.text+"\n密码:"+_pwdController.text;
+      //         return AlertDialog(content: Text(alertText));
+      //     }
+      // )
+    });
   }
 }

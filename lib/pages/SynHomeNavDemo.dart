@@ -7,10 +7,9 @@ import 'package:flutter_templet_project/vendor/flutter_swiper_demo.dart';
 
 class SynHomeNavDemo extends StatefulWidget {
 
-  final String? title;
-
   SynHomeNavDemo({ Key? key, this.title}) : super(key: key);
 
+  final String? title;
 
   @override
   _SynHomeNavDemoState createState() => _SynHomeNavDemoState();
@@ -18,16 +17,15 @@ class SynHomeNavDemo extends StatefulWidget {
 
 class _SynHomeNavDemoState extends State<SynHomeNavDemo> {
 
-
   @override
   Widget build(BuildContext context) {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
 
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title ?? "$widget"),
-        ),
-        body: _buildBody(),
+      appBar: AppBar(
+        title: Text(widget.title ?? "$widget"),
+      ),
+      body: _buildBody(),
     );
   }
 
@@ -37,9 +35,9 @@ class _SynHomeNavDemoState extends State<SynHomeNavDemo> {
         Column(
           children: [
             _buildNav(
-                child: SynCollectionNavWidget(
-                  width: screenSize.width - 24,
-                  rowCount: 3,
+              child: SynCollectionNavWidget(
+                width: screenSize.width - 24,
+                rowCount: 3,
               )
             ),
             Divider(),
