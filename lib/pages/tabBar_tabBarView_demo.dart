@@ -203,12 +203,15 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
         arrowPosition: EnhanceExpansionPanelArrowPosition.none,
         // backgroundColor: Color(0xFFDDDDDD),
         headerBuilder: (contenx, isExpand) {
+          final trailing = isExpand ? Icon(Icons.keyboard_arrow_up, color: Colors.blue) :
+            Icon(Icons.keyboard_arrow_down, color: Colors.blue,);
           return Container(
             // color: Colors.green,
             color: isExpand ? Colors.black12 : null,
             child: ListTile(
               title: Text("${e.item1}", style: TextStyle(fontWeight: FontWeight.bold),),
               // subtitle: Text("subtitle"),
+              trailing: trailing,
             ),
           );
         },
@@ -402,7 +405,7 @@ var _list = [
   Tuple2(APPRouter.physicalModelDemo, "physicalModelDemo", ),
   Tuple2(APPRouter.visibilityDemo, "visibilityDemo", ),
   Tuple2(APPRouter.ignorePointerDemo, "ignorePointerDemo", ),
-  Tuple2(APPRouter.boxShadowDemo, "阴影", ),
+  Tuple2(APPRouter.boxShadowDemo, "BoxShadow 阴影", ),
   Tuple2(APPRouter.borderDemo, "buttonBorderDemo", ),
 
 

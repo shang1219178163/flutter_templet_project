@@ -638,7 +638,5 @@ class AppPage {
     GetPage(name: APPRouter.keyDemo, page: () => KeyDemo(),),
     GetPage(name: APPRouter.customScrollBarDemo, page: () => CustomScrollBarDemo(),),
 
-
-
   ];
 }
