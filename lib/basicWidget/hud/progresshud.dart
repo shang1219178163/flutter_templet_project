@@ -135,20 +135,25 @@ class ProgressHUD<T> extends PopupRoute<T> {
           valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
         );
         break;
+      case NNProgressHUDType.toast:
+        icon = SizedBox();
+        break;
     }
 
     if (this.progressType == NNProgressHUDType.toast) {
       assert(message != null);
       return Padding(
         padding: EdgeInsets.only(top: 5, left: 5, bottom: 5, right: 5),
-        child: Text(this.message!,
-            textAlign: TextAlign.center,
-            maxLines: 2,
-            style: TextStyle(
-              fontSize: 15,
-              color: Colors.white,
-              fontWeight: FontWeight.normal,
-              decoration: TextDecoration.none)
+        child: Text(
+          this.message!,
+          textAlign: TextAlign.center,
+          maxLines: 2,
+          style: TextStyle(
+            fontSize: 15,
+            color: Colors.white,
+            fontWeight: FontWeight.normal,
+            decoration: TextDecoration.none
+          )
         )
       );
     }
@@ -160,13 +165,16 @@ class ProgressHUD<T> extends PopupRoute<T> {
         if (message != null) Padding(
           padding: EdgeInsets.only(left: 5.0, right: 5.0),
           child: Text(this.message!,
-              textAlign: TextAlign.center,
-              maxLines: 2,
-              style: TextStyle(
-                fontSize: 15,
-                color: Colors.white,
-                fontWeight: FontWeight.normal,
-                decoration: TextDecoration.none)))
+            textAlign: TextAlign.center,
+            maxLines: 2,
+            style: TextStyle(
+              fontSize: 15,
+              color: Colors.white,
+              fontWeight: FontWeight.normal,
+              decoration: TextDecoration.none
+            )
+          )
+        )
       ],
     );
   }

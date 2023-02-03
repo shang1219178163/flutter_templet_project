@@ -23,6 +23,13 @@ class ProgressHudDemo extends StatefulWidget {
 class _ProgressHudDemoState extends State<ProgressHudDemo> {
 
 
+  ButtonStyle get buttonStyle => TextButton.styleFrom(
+    minimumSize: Size(100, 30),
+    backgroundColor: Colors.blue,
+    primary: Colors.white,
+    padding: EdgeInsets.symmetric(horizontal: 5, vertical: 2),
+  );
+
   @override
   Widget build(BuildContext context) {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
@@ -51,50 +58,61 @@ class _ProgressHudDemoState extends State<ProgressHudDemo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          FlatButton(
-              onPressed: () {
-                NNProgressHUD.showLoading(context);
-              },
-              child: Text("showLoading"),
-              color: Colors.blue),
-          FlatButton(
-              onPressed: () {
-                NNProgressHUD.showLoading(context, message: "loading");
-              },
-              child: Text("showLoadingMessage"),
-              color: Colors.blue),
-          FlatButton(
-              onPressed: () {
-                NNProgressHUD.showSuccess(context);
-              },
-              child: Text("showSuccess"),
-              color: Colors.blue),
-          FlatButton(
-              onPressed: () {
-                NNProgressHUD.showSuccess(context, message: "success");
-              },
-              child: Text("showSuccessMessage"),
-              color: Colors.blue),
-          FlatButton(
-              onPressed: () {
-                NNProgressHUD.showError(context);
-              },
-              child: Text("showError"),
-              color: Colors.blue),
-          FlatButton(
-              onPressed: () {
-                NNProgressHUD.showError(context, message: "error");
-              },
-              child: Text("showErrorMessage"),
-              color: Colors.blue),
-          FlatButton(
-              onPressed: () {
-                NNProgressHUD.showToast(context, message: "这是一个 NNProgressHUD.toast 类型的文字提示 toast.");
-              },
-              child: Text("showToast"),
-              color: Colors.blue),
-        ],
+          TextButton(
+            style: buttonStyle,
+            onPressed: () {
+              NNProgressHUD.showLoading(context);
+            },
+            child: Text("showLoading"),
+          ),
+          TextButton(
+            style: buttonStyle,
+            onPressed: () {
+              NNProgressHUD.showLoading(context, message: "loading");
+            },
+            child: Text("showLoadingMessage"),
+          ),
+          TextButton(
+            style: buttonStyle,
+            onPressed: () {
+              NNProgressHUD.showSuccess(context);
+            },
+            child: Text("showSuccess"),
+          ),
+          TextButton(
+            style: buttonStyle,
+            onPressed: () {
+              NNProgressHUD.showSuccess(context, message: "success");
+            },
+            child: Text("showSuccessMessage"),
+          ),
+          TextButton(
+            style: buttonStyle,
+            onPressed: () {
+              NNProgressHUD.showError(context);
+            },
+            child: Text("showError"),
+          ),
+          TextButton(
+            style: buttonStyle,
+            onPressed: () {
+              NNProgressHUD.showError(context, message: "error");
+            },
+            child: Text("showErrorMessage"),
+          ),
+          TextButton(
+            style: buttonStyle,
+            onPressed: () {
+              NNProgressHUD.showToast(context, message: "这是一个 NNProgressHUD.toast 类型的文字提示 toast.");
+            },
+            child: Text("showToast"),
+          ),
+        ].map((e) => Padding(
+          padding: EdgeInsets.symmetric(vertical: 5),
+          child: e,
+        )).toList(),
       ),
     );
   }
+
 }
