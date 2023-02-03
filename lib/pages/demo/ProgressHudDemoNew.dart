@@ -14,6 +14,7 @@ import 'package:get/get.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:tuple/tuple.dart';
 
 final GlobalKey _globalKey = GlobalKey();
 
@@ -359,8 +360,42 @@ class ToastNoContext extends StatefulWidget {
 }
 
 class _ToastNoContextState extends State<ToastNoContext> {
+
+  var list = <Tuple2<String, VoidCallback>>[];
+
   @override
   void initState() {
+    list = [
+      Tuple2(
+        'Show Long Toast',
+        showLongToast,
+      ),
+      Tuple2(
+        'Show Short Toast',
+        showShortToast,
+      ),
+      Tuple2(
+        'Show Center Short Toast',
+        showCenterShortToast,
+      ),
+      Tuple2(
+        'Show Top Short Toast',
+        showTopShortToast,
+      ),
+      Tuple2(
+        'Show Colored Toast',
+        showColoredToast,
+      ),
+      Tuple2(
+        'Show  Web Colored Toast',
+        showWebColoredToast,
+      ),
+      Tuple2(
+        'Cancel Toasts',
+        cancelToast,
+      ),
+    ];
+
     super.initState();
   }
 
@@ -368,67 +403,33 @@ class _ToastNoContextState extends State<ToastNoContext> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Flutter Toast'),
+        title: Text('ToastNoContext'),
       ),
       body: Center(
         child: Column(
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: ElevatedButton(
-                  child: Text('Show Long Toast'),
-                  onPressed: showLongToast),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: ElevatedButton(
-                  child: Text('Show Short Toast'),
-                  onPressed: showShortToast),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: ElevatedButton(
-                  child: Text('Show Center Short Toast'),
-                  onPressed: showCenterShortToast),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: ElevatedButton(
-                  child: Text('Show Top Short Toast'),
-                  onPressed: showTopShortToast),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: ElevatedButton(
-                  child: Text('Show Colored Toast'),
-                  onPressed: showColoredToast),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: ElevatedButton(
-                  child: Text('Show  Web Colored Toast'),
-                  onPressed: showWebColoredToast),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: ElevatedButton(
-                child: Text('Cancel Toasts'),
-                onPressed: cancelToast,
+          children: list.map((e) => Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ElevatedButton(
+              child: Padding(
+                padding: const EdgeInsets.all(5),
+                child: Text(e.item1),
               ),
+              onPressed: e.item2,
             ),
-          ],
+          ),).toList(),
         ),
       ),
     );
   }
 
   void showLongToast() {
-    Fluttertoast.showToast(
-      msg: "This is Long Toast",
-      toastLength: Toast.LENGTH_LONG,
-      backgroundColor: Colors.black54,
-      fontSize: 18.0,
-    );
+    print("showLongToast");
+    // Fluttertoast.showToast(
+    //   msg: "This is Long Toast",
+    //   toastLength: Toast.LENGTH_LONG,
+    //   backgroundColor: Colors.black54,
+    //   fontSize: 18.0,
+    // );
   }
 
   void showWebColoredToast() {
