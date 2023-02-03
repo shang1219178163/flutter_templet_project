@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/syn_decoration_widget.dart';
 import 'package:flutter_templet_project/basicWidget/syn_decoration_widget_one.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
+import 'package:flutter_templet_project/extension/decoration_ext.dart';
 
 
 class DecorationDemo extends StatefulWidget {
@@ -49,18 +50,20 @@ class _DecorationDemoState extends State<DecorationDemo> {
       blur: 10,
       margin: const EdgeInsets.all(20),
       padding: const EdgeInsets.all(30),
-      topLeftRadius: 0,
-      topRightRadius: 25,
-      bottomLeftRadius: 45,
-      bottomRightRadius: 85,
-      bgUrl: 'https://tenfei02.cfp.cn/creative/vcg/800/new/VCG21409037867.jpg',
-      bgChild: FadeInImage(
-        placeholder: AssetImage('images/img_placeholder.png'),
-        image: NetworkImage('https://tenfei02.cfp.cn/creative/vcg/800/new/VCG21409037867.jpg'),
-        fit: BoxFit.fill,
-        width: 400,
-        height: 400,
+      borderRadius: BorderRadiusExt.fromRadius(
+        topLeft: 0,
+        topRight: 25,
+        bottomLeft: 45,
+        bottomRight: 85,
       ),
+      bgUrl: 'https://tenfei02.cfp.cn/creative/vcg/800/new/VCG21409037867.jpg',
+      // bgChild: FadeInImage(
+      //   placeholder: AssetImage('images/img_placeholder.png'),
+      //   image: NetworkImage('https://tenfei02.cfp.cn/creative/vcg/800/new/VCG21409037867.jpg'),
+      //   fit: BoxFit.fill,
+      //   width: 400,
+      //   height: 400,
+      // ),
       bgColor: Colors.yellow,
       bgGradient: LinearGradient(
         colors: [Colors.green, Colors.yellow],

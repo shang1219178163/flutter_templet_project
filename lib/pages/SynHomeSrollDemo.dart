@@ -3,6 +3,7 @@ import 'package:flutter_templet_project/basicWidget/syn_decoration_widget.dart';
 import 'package:flutter_templet_project/basicWidget/syn_decoration_widget.dart';
 import 'package:flutter_templet_project/basicWidget/syn_horizontal_scroll_widget.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
+import 'package:flutter_templet_project/extension/decoration_ext.dart';
 import 'package:tuple/tuple.dart';
 
 class SynHomeSrollDemo extends StatefulWidget {
@@ -112,14 +113,12 @@ class _SynHomeSrollDemoState extends State<SynHomeSrollDemo> {
       blur: 5,
       // margin: const EdgeInsets.all(50),
       padding: const EdgeInsets.all(10),
-      topLeftRadius: 15,
-      topRightRadius: 15,
-      bottomLeftRadius: 15,
-      bottomRightRadius: 15,
-      // topLeftRadius: 0,
-      // topRightRadius: 25,
-      // bottomLeftRadius: 45,
-      // bottomRightRadius: 85,
+      borderRadius: BorderRadiusExt.fromRadius(
+        topLeft: 15,
+        topRight: 15,
+        bottomLeft: 15,
+        bottomRight: 15,
+      ),
       bgUrl: 'https://tenfei02.cfp.cn/creative/vcg/800/new/VCG21409037867.jpg',
       // bgChild: FadeInImage.assetNetwork(
       //   placeholder: 'images/img_placeholder.png',

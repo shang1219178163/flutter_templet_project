@@ -11,6 +11,26 @@ import 'package:flutter/cupertino.dart';
 
 extension EdgeInsetsExt on EdgeInsets{
 
+  /// 负值转 0
+  EdgeInsets get positive {
+    return EdgeInsets.only(
+      top: this.top >= 0 ? this.top : 0,
+      right: this.right >= 0 ? this.right : 0,
+      bottom: this.bottom >= 0 ? this.bottom : 0,
+      left: this.left >= 0 ? this.left : 0,
+    );
+  }
+
+  /// 根据函数转化
+  EdgeInsets change(double Function(double value) cb) {
+    return EdgeInsets.only(
+      top: cb(this.top),
+      right: cb(this.right),
+      bottom: cb(this.bottom),
+      left: cb(this.left),
+    );
+  }
+
   /// 合并阴影 BoxShadow
   EdgeInsets mergeShadow({BoxShadow? shadow}) {
     if (shadow == null) {

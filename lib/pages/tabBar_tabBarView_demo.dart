@@ -407,6 +407,7 @@ var _list = [
   Tuple2(APPRouter.ignorePointerDemo, "ignorePointerDemo", ),
   Tuple2(APPRouter.boxShadowDemo, "BoxShadow 阴影", ),
   Tuple2(APPRouter.borderDemo, "buttonBorderDemo", ),
+  Tuple2(APPRouter.overflowDemo, "overflowDemo", ),
 
 
 ];

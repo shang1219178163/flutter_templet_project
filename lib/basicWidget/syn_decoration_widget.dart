@@ -1,58 +1,59 @@
 import 'dart:ui' as ui;
+
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/extension/edge_insets_ext.dart';
 
 
 /// 组件通用外观设置
 class SynDecorationWidget extends StatelessWidget {
-
   SynDecorationWidget({
     Key? key,
     this.title,
-    this.addToSliverBox = false,
-    this.width = double.infinity,
-    this.height = double.infinity,
+    required this.child,
+    this.width,
+    this.height,
     this.opacity = 1.0,
     this.blur = 0,
+    this.bgBlur = 0,
     this.margin = const EdgeInsets.all(0),
     this.padding = const EdgeInsets.all(0),
-    this.topLeftRadius = 0,
-    this.topRightRadius = 0,
-    this.bottomLeftRadius = 0,
-    this.bottomRightRadius = 0,
-    this.border = const Border.fromBorderSide(BorderSide(color: Colors.transparent, width: 0)),
-    this.bgColor,
+    this.borderRadius = const BorderRadius.all(Radius.circular(0)),
+    this.border = const Border(),
+    this.bgColor = Colors.transparent,
     this.bgGradient,
     this.bgUrl,
-    this.bgChild,
+    this.imageFit = BoxFit.cover,
     this.boxShadow,
-    required this.child
+    this.addToSliverBox = false,
+    this.hideBlur = false,
   }) : super(key: key);
 
   /// 标题
   String? title;
 
-  bool addToSliverBox;
-
   /// 高斯模糊
   double? width;
+
   /// 高斯模糊
   double? height;
 
   /// 透明度 0 - 1
-  double opacity;
+  double? opacity;
+
   /// 高斯模糊
   double blur;
 
+  /// 背景高斯模糊
+  double bgBlur;
+
   /// 外间距
-  EdgeInsetsGeometry margin;
+  EdgeInsets margin;
+
   /// 内间距
-  EdgeInsetsGeometry padding;
+  EdgeInsets padding;
 
   ///四个位置圆角
-  double topLeftRadius;
-  double topRightRadius;
-  double bottomLeftRadius;
-  double bottomRightRadius;
+  BorderRadius? borderRadius;
 
   /// 描边
   BoxBorder? border;
@@ -60,14 +61,17 @@ class SynDecorationWidget extends StatelessWidget {
   /// 组件背景
   String? bgUrl;
 
+  /// 组件背景 fit 模式,默认 BoxFit.cover
+  BoxFit? imageFit;
+
   /// 组件背景颜色
   Color? bgColor;
 
   /// 渐变色背景色
   Gradient? bgGradient;
 
-  /// 组件背景自定义
-  Widget? bgChild;
+  /// 是否添加到 SliverBox
+  bool addToSliverBox;
 
   /// 组件子组件
   Widget child;
@@ -75,47 +79,28 @@ class SynDecorationWidget extends StatelessWidget {
   /// 阴影
   List<BoxShadow>? boxShadow;
 
-  // 模型传参
-  // SynDecorationWidgetNew.model({
-  //   Key? key,
-  //   Object? model,
-  // }): this(
-  //     blur: model.blur,
-  //     opacity: model.opacity,
-  //     margin: model.margin,
-  //     padding: model.padding,
-  //     border: model.border,
-  //     topLeftRadius: model.topLeftRadius,
-  //     topRightRadius: model.topRightRadius,
-  //     bottomLeftRadius: model.bottomLeftRadius,
-  //     bottomRightRadius: model.bottomRightRadius,
-  //     child: model.child,
-  //     bgChild: model.bgChild,
-  //   );
-  // };
-
+  /// 隐藏高斯模糊(测试属性)
+  bool? hideBlur;
 
   @override
   Widget build(BuildContext context) {
-    final child = buildBody(
-      width: this.width,
-      height: this.height,
-      blur: this.blur,
-      opacity: this.opacity,
-      margin: this.margin,
-      padding: this.padding,
-      border: this.border,
-      topLeftRadius: this.topLeftRadius,
-      topRightRadius: this.topRightRadius,
-      bottomLeftRadius: this.bottomLeftRadius,
-      bottomRightRadius: this.bottomRightRadius,
-      bgUrl: this.bgUrl,
-      bgColor: this.bgColor,
-      bgGradient: this.bgGradient,
-      boxShadow: this.boxShadow,
-      child: this.child,
-      bgChild: this.bgChild,
-    );
+    final child = _buildBody(
+        width: this.width,
+        height: this.height,
+        blur: this.blur,
+        bgBlur: this.bgBlur,
+        opacity: this.opacity,
+        margin: this.margin,
+        padding: this.padding,
+        border: this.border,
+        borderRadius: this.borderRadius,
+        bgUrl: this.bgUrl,
+        bgColor: this.bgColor,
+        bgGradient: this.bgGradient,
+        boxShadow: this.boxShadow,
+        child: this.child,
+        imageFit: this.imageFit,
+        hideBlur: this.hideBlur);
 
     if (this.addToSliverBox) {
       return SliverToBoxAdapter(
@@ -125,128 +110,114 @@ class SynDecorationWidget extends StatelessWidget {
     return child;
   }
 
-  buildBorderRadius({
-    double topLeftRadius = 0,
-    double topRightRadius = 0,
-    double bottomLeftRadius = 0,
-    double bottomRightRadius = 0,
-  }) {
-    return BorderRadius.only(
-      topLeft: Radius.circular(topLeftRadius),
-      topRight: Radius.circular(topRightRadius),
-      bottomLeft: Radius.circular(bottomLeftRadius),
-      bottomRight: Radius.circular(bottomRightRadius),
-    );
-  }
+  _buildBody(
+      {double? width,
+        double? height,
+        double blur = 0,
+        double bgBlur = 0,
+        double? opacity = 1.0,
+        EdgeInsets margin = const EdgeInsets.all(0),
+        EdgeInsets padding = const EdgeInsets.all(0),
+        BoxBorder? border,
+        BorderRadius? borderRadius,
+        Color? bgColor,
+        Gradient? bgGradient,
+        String? bgUrl,
+        BoxFit? imageFit,
+        List<BoxShadow>? boxShadow,
+        required Widget child,
+        bool? hideBlur = false}) {
+    // add test
+    // bgGradient = LinearGradient(
+    //     colors: [Colors.red, Colors.green],
+    //     begin: Alignment.topCenter,
+    //     end: Alignment.bottomCenter,
+    //   );
+    // add test
+    // bgUrl = 'https://i.zgjm.org/top/20190526/3264-1.jpg';
+    //bgUrl 不为空则为背景图片
+    var decorationImage = bgUrl != null && bgUrl.startsWith('http')
+        ? DecorationImage(
+      image: NetworkImage(bgUrl),
+      fit: imageFit,
+    )
+        : null;
 
-  buildBoxDecoration({
-    Color? color,
-    Gradient? gradient,
-    BoxBorder? border = const Border.fromBorderSide(BorderSide(color: Colors.transparent, width: 0)),
-    BorderRadius? borderRadius,
-    List<BoxShadow>? boxShadow,
-  }) {
-    return BoxDecoration(
-      gradient: gradient,
-      color: color,
-      border: border,
+    if (boxShadow != null &&
+        boxShadow.length > 0 &&
+        width != null &&
+        height != null) {
+      BoxShadow shadow = boxShadow[0];
+
+      /// 留出阴影空间
+      margin = margin.mergeShadow(shadow: shadow);
+    }
+    double left = margin.isNonNegative == false ? 0 : margin.left;
+    double right = margin.isNonNegative == false ? 0 : margin.right;
+    double top = margin.isNonNegative == false ? 0 : margin.top;
+    double bottom = margin.isNonNegative == false ? 0 : margin.bottom;
+    // if (this.title != null && this.title!.contains('图文导航')) {
+    //   bgBlur = 5;//add test
+    // }
+    // bgBlur = 10;//add test
+    // blur = 10;//add test
+
+    final decoration = BoxDecoration(
+        borderRadius: borderRadius,
+        gradient: bgGradient,
+        boxShadow: boxShadow,
+        image: decorationImage,
+        border: border,
+        color: bgColor);
+
+    if (hideBlur == true) {
+      return Container(
+          width: width,
+          height: height,
+          margin: margin.isNonNegative ? margin : EdgeInsets.zero,
+          padding: padding,
+          decoration: decoration,
+          child: child);
+    }
+
+    final opacityNew = opacity?.clamp(0, 1.0).toDouble() ?? 1.0;
+    var opacity2 = ClipRRect(
       borderRadius: borderRadius,
-      // image: DecorationImage(
-      //   image: NetworkImage(imgUrl),
-      //     fit: BoxFit.cover,
-      // ),
-      boxShadow: boxShadow,
-      // boxShadow: [
-      //   BoxShadow(
-      //     color: Colors.red.withOpacity(0.5),
-      //     // spreadRadius: 5,
-      //     blurRadius: 7,
-      //     offset: Offset(0, 3), // changes position of shadow
-      //   ),
-      // ],
-    );
-  }
-
-  buildBody({
-    double? width,
-    double? height,
-    double blur = 0,
-    double opacity = 1.0,
-    EdgeInsetsGeometry margin = const EdgeInsets.all(0),
-    EdgeInsetsGeometry padding = const EdgeInsets.all(0),
-    BoxBorder? border,
-    double topLeftRadius = 0,
-    double topRightRadius = 0,
-    double bottomLeftRadius = 0,
-    double bottomRightRadius = 0,
-    Color? bgColor,
-    Gradient? bgGradient,
-    String? bgUrl,
-    Widget? bgChild,
-    List<BoxShadow>? boxShadow,
-    required Widget child,
-  }) {
-
-    final borderRadius = buildBorderRadius(
-      topLeftRadius: topLeftRadius,
-      topRightRadius: topRightRadius,
-      bottomLeftRadius: bottomLeftRadius,
-      bottomRightRadius: bottomRightRadius,
+      child: Opacity(
+        opacity: opacityNew,
+        child: Container(
+            width: width,
+            height: height,
+            margin: margin.isNonNegative ? margin : EdgeInsets.zero,
+            decoration: decoration,
+            child: ClipRRect(
+              borderRadius: borderRadius,
+              child: BackdropFilter(
+                filter: ui.ImageFilter.blur(sigmaX: bgBlur, sigmaY: bgBlur),
+                child: Container(
+                  constraints: BoxConstraints.expand(),
+                  decoration: BoxDecoration(
+                    borderRadius: borderRadius,
+                  ),
+                  child: Container(padding: padding, child: child),
+                ),
+              ),
+            )),
+      ),
     );
 
-    final decoration = buildBoxDecoration(
-      border: border,
-      borderRadius: borderRadius,
-      color: bgColor,
-      gradient: bgGradient,
-      boxShadow: boxShadow,
-    );
-
-    final decorationInner = buildBoxDecoration(
-      color: bgColor,
-      gradient: bgGradient,
-    );
-
-    // bgUrl 不为空则为背景图片
-    // final refreshImage = bgUrl != null && bgUrl != '' ? AutoRefreshImage(
-    //   bgUrl,
-    //   BoxFit.fitWidth,
-    //   width: width,
-    //   height: height,
-    // ) : Container(
-    //   width: width,
-    //   height: height,
-    //   decoration: decoration,
-    // );
-
-    final refreshImage = bgUrl != null && bgUrl != '' ? FadeInImage.assetNetwork(
-      placeholder: 'images/img_placeholder.png',
-      image: bgUrl,
-      fit: BoxFit.fill,
-      width: width,
-      height: height,
-    ) : Container(
-      width: width,
-      height: height,
-      decoration: decoration,
-    );
-
-    final bg = ClipRRect(
-      borderRadius: borderRadius,
-      child: bgChild ?? refreshImage,
-    );
-
-    return Opacity(
-      opacity: opacity,
-      child: Container(
-        width: width,
-        height: height,
-        decoration: decoration,
-        child: Stack(
-          fit: StackFit.expand,
-          children: [
-            bg,
-            ClipRRect(
+    if (blur <= 0) {
+      return opacity2;
+    }
+    final stackWidget = Stack(
+      children: [
+        opacity2,
+        Positioned(
+            left: left,
+            top: top,
+            right: right,
+            bottom: bottom,
+            child: ClipRRect(
               borderRadius: borderRadius,
               child: BackdropFilter(
                 filter: ui.ImageFilter.blur(
@@ -254,16 +225,12 @@ class SynDecorationWidget extends StatelessWidget {
                   sigmaY: blur,
                 ),
                 child: Container(
-                  margin: margin,
-                  padding: padding,
-                  // decoration: decorationInner,
-                  child: child,
+                  color: Colors.black.withOpacity(0),
                 ),
               ),
-            ),
-          ],
-        ),
-      ),
+            ))
+      ],
     );
+    return stackWidget;
   }
 }

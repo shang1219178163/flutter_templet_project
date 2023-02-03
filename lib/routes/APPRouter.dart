@@ -41,6 +41,7 @@ import 'package:flutter_templet_project/pages/demo/NavigationToolbarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NeumorphismDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NotificationListenerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/OverflowBarDemo.dart';
+import 'package:flutter_templet_project/pages/demo/OverflowDemo.dart';
 import 'package:flutter_templet_project/pages/demo/OverlayDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PhysicalModelDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PositionedDirectionalDemo.dart';
@@ -405,6 +406,7 @@ class APPRouter {
   static const myPopverDemo = '/myPopverDemo';
   static const keyDemo = '/keyDemo';
   static const customScrollBarDemo = '/customScrollBarDemo';
+  static const overflowDemo = '/overflowDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -637,6 +639,8 @@ class AppPage {
     GetPage(name: APPRouter.myPopverDemo, page: () => MyPopverDemo(),),
     GetPage(name: APPRouter.keyDemo, page: () => KeyDemo(),),
     GetPage(name: APPRouter.customScrollBarDemo, page: () => CustomScrollBarDemo(),),
+    GetPage(name: APPRouter.overflowDemo, page: () => OverflowDemo(),),
+
 
   ];
 }
