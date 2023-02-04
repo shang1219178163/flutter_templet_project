@@ -37,14 +37,12 @@ class _ProgressHudDemoState extends State<ProgressHudDemo> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: [
-          FlatButton(
-            onPressed: () {
-              ddlog("done");
-            },
-            child: Text("done"),
-          ),
-        ],
+        actions: ['done',].map((e) => TextButton(
+          child: Text(e,),
+          onPressed: () {
+            setState(() {});
+          },)
+        ).toList(),
       ),
       body: buildBody(),
     );

@@ -58,6 +58,10 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        // titleTextStyle: TextStyle(color: Colors.red),
+        // toolbarTextStyle: TextStyle(color: Colors.orange),
+        // iconTheme: IconThemeData(color: Colors.green),
+        actionsIconTheme: IconThemeData(color: Colors.yellow),
         title: Text('基础组件列表'),
         leading: Builder(builder: (context) {
           return IconButton(
@@ -77,6 +81,7 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
               style: TextStyle(color: Colors.white),
             ),
           ),
+          IconButton(onPressed: () => print("aa"), icon: Icon(Icons.ac_unit))
         ],
         bottom: TabBar(
           controller: _tabController,
@@ -176,7 +181,11 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
       itemList: _tuples.map((e) => e.item2).toList()
           .map((e) => e.sorted((a, b) => a.item1.toLowerCase().compareTo(b.item1.toLowerCase()))).toList(),
       headerBuilder: (e) {
-        return Text(e, style: TextStyle(fontWeight: FontWeight.w600),);
+        return Container(
+          // color: Colors.red,
+          padding: EdgeInsets.only(top: 10, bottom: 8, left: 10, right: 15),
+          child: Text(e, style: TextStyle(fontWeight: FontWeight.w600),),
+        );
       },
       itemBuilder: (section, row, e) {
         return ListTile(

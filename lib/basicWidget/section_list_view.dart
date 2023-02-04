@@ -14,10 +14,14 @@ import 'package:flutter/material.dart';
 ///抽象封装
 class SectionListView<H, E> extends StatefulWidget {
 
-  /// 表头背景色
-  final Color? headerColor;
-  /// 内边距
-  final EdgeInsetsGeometry? headerPadding;
+  SectionListView({
+    Key? key,
+    this.headerList = const [],
+    required this.headerBuilder,
+    this.itemList = const [],
+    required this.itemBuilder,
+  }) :  assert(itemList.length == headerList.length),
+        super(key: key);
 
   final List<H> headerList;
 
@@ -27,16 +31,6 @@ class SectionListView<H, E> extends StatefulWidget {
 
   final Widget Function(int section, int row, E e) itemBuilder;
 
-  SectionListView({
-    Key? key,
-    this.headerColor,
-    this.headerPadding = const EdgeInsets.only(top: 10, bottom: 8, left: 15, right: 15),
-    this.headerList = const [],
-    required this.headerBuilder,
-    this.itemList = const [],
-    required this.itemBuilder,
-  }) :  assert(itemList.length == headerList.length),
-        super(key: key);
 
   @override
   _SectionListViewState createState() => _SectionListViewState<H,E>();
@@ -72,14 +66,12 @@ class _SectionListViewState<H, E> extends State<SectionListView<H,E>> {
   }
 
   Widget _buildHeader({required int section, required Widget child}) {
-    return
-      SliverToBoxAdapter(
-        child: Container(
-          color: Color(0xFFDDDDDD),
-          padding: widget.headerPadding,
-          child: child,
-        ),
-      );
+    if(child is SliverToBoxAdapter) {
+      return child;
+    }
+    return SliverToBoxAdapter(
+      child: child,
+    );
   }
 
   Widget _buildSliverList({required int section, required List<E> list}) {
@@ -95,8 +87,7 @@ class _SectionListViewState<H, E> extends State<SectionListView<H,E>> {
     for(int i = 0; i < widget.headerList.length; i++) {
       var headerItem = widget.headerList[i];
       var items = widget.itemList[i];
-      slivers.add(_buildHeader(section: i, child: widget.headerBuilder(headerItem),
-      ));
+      slivers.add(_buildHeader(section: i, child: widget.headerBuilder(headerItem),));
       slivers.add(_buildSliverList(section: i, list: items.whereType<E>().toList()));
     }
     // ddlog([widget.sectionTitles.length, slivers.length]);
