@@ -135,6 +135,11 @@ class ToastContext extends StatefulWidget {
 
 class _ToastContextState extends State<ToastContext> {
 
+  ButtonStyle get buttonStyle => ElevatedButton.styleFrom(
+    minimumSize: Size(100, 36),
+    padding: EdgeInsets.symmetric(horizontal: 5, vertical: 2),
+  );
+
   FToast fToast = FToast();
 
   Widget toast = Container(
@@ -155,6 +160,9 @@ class _ToastContextState extends State<ToastContext> {
     ),
   );
 
+  var list = <Tuple2<String, VoidCallback>>[];
+
+
   @override
   void initState() {
     super.initState();
@@ -164,6 +172,14 @@ class _ToastContextState extends State<ToastContext> {
       fToast.init(_globalKey.currentState!.context);
     });
 
+    list = [
+      Tuple2('Show Custom Toast', _showToast, ),
+      Tuple2('Show Custom Toast by PositionedToastBuilder', _showBuilderToast, ),
+      Tuple2('Custom Toast With Close', _showToastCancel, ),
+      Tuple2('Queue Toasts', _queueToasts, ),
+      Tuple2('Cancel Toast', _removeToast, ),
+      Tuple2('Remove Queued Toasts', _removeAllQueuedToasts,),
+    ];
   }
 
   @override
@@ -173,59 +189,14 @@ class _ToastContextState extends State<ToastContext> {
         title: Text("ToastContext"),
       ),
       body: Column(
-        children: [
-          SizedBox(
-            height: 24.0,
+        children: list.map((e) => Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: ElevatedButton(
+            // style: buttonStyle,
+            child: Text(e.item1),
+            onPressed: e.item2,
           ),
-          ElevatedButton(
-            child: Text("Show Custom Toast"),
-            onPressed: () {
-              _showToast();
-            },
-          ),
-          ElevatedButton(
-            child: Text("Show Custom Toast via PositionedToastBuilder"),
-            onPressed: () {
-              _showBuilderToast();
-            },
-          ),
-          SizedBox(
-            height: 24.0,
-          ),
-          ElevatedButton(
-            child: Text("Custom Toast With Close Button"),
-            onPressed: () {
-              _showToastCancel();
-            },
-          ),
-          SizedBox(
-            height: 24.0,
-          ),
-          ElevatedButton(
-            child: Text("Queue Toasts"),
-            onPressed: () {
-              _queueToasts();
-            },
-          ),
-          SizedBox(
-            height: 24.0,
-          ),
-          ElevatedButton(
-            child: Text("Cancel Toast"),
-            onPressed: () {
-              _removeToast();
-            },
-          ),
-          SizedBox(
-            height: 24.0,
-          ),
-          ElevatedButton(
-            child: Text("Remove Queued Toasts"),
-            onPressed: () {
-              _removeAllQueuedToasts();
-            },
-          ),
-        ],
+        ),).toList(),
       ),
     );
   }
@@ -240,16 +211,17 @@ class _ToastContextState extends State<ToastContext> {
 
   _showBuilderToast() {
     fToast.showToast(
-        child: toast,
-        gravity: ToastGravity.BOTTOM,
-        toastDuration: Duration(seconds: 2),
-        positionedToastBuilder: (context, child) {
-          return Positioned(
-            child: child,
-            top: 16.0,
-            left: 16.0,
-          );
-        });
+      child: toast,
+      gravity: ToastGravity.BOTTOM,
+      toastDuration: Duration(seconds: 2),
+      positionedToastBuilder: (context, child) {
+        return Positioned(
+          child: child,
+          top: 16.0,
+          left: 16.0,
+        );
+      }
+    );
   }
 
   _showToastCancel() {
