@@ -9,6 +9,7 @@ import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/provider/color_filtered_provider.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+import 'package:tuple/tuple.dart';
 
 class APPDrawerMenuPage extends StatefulWidget {
 
@@ -22,9 +23,20 @@ class APPDrawerMenuPage extends StatefulWidget {
 
 class _APPDrawerMenuPageState extends State<APPDrawerMenuPage> {
 
+  final items = <Tuple3<IconData, String, String>>[
+    Tuple3(Icons.person, "我的", "mine"),
+    Tuple3(Icons.volume_up, "消息", "notice"),
+    Tuple3(Icons.settings, "设置", "setting"),
+    Tuple3(Icons.share, "分享", "share"),
+    Tuple3(Icons.open_in_new, "退出", "exit"),
+
+  ];
+
   bool isGrey = false;
 
   get textStyle => TextStyle(color: Theme.of(context).primaryColor);
+
+  get changeThemeTitle => Get.isDarkMode ? "默认主题" : "暗黑主题";
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +44,6 @@ class _APPDrawerMenuPageState extends State<APPDrawerMenuPage> {
   }
   
   Drawer buildDrawerMenu(BuildContext context) {
-    var filteredProvider = Provider.of<ColorFilteredProvider>(context);
 
     return Drawer(
       child: Container(
@@ -43,142 +54,117 @@ class _APPDrawerMenuPageState extends State<APPDrawerMenuPage> {
               shrinkWrap: true,
               padding: EdgeInsets.zero, //去掉顶部灰色部分
               children: <Widget>[
-                DrawerHeader(
-                  decoration: BoxDecoration(color: Theme.of(context).primaryColor),
-                  child: UnconstrainedBox( //解除父级的大小限制
-                    child: CircleAvatar(
-                      radius: 48,
-                      // backgroundColor: Colors.transparent,
-                      backgroundImage: AssetImage('images/avatar.png')
+                ...buildHeader(),
+                ...items.map((e) => Column(
+                  children: [
+                    ListTile(
+                      leading: Icon(e.item1, color: Theme.of(context).primaryColor),
+                      title: Text(e.item2, style: TextStyle(fontSize: 16.0)),
+                      trailing: Icon(Icons.chevron_right),
+                      dense: true,
+                      // horizontalTitleGap: 0,
+                      minLeadingWidth: 0,
+                      minVerticalPadding: 0,
+                      onTap: (){
+                        Navigator.pop(context);
+                        Get.toNamed(e.item3);
+                      },
                     ),
-                  ),
-                ),
-                Text('设置在主页面,否则底部按钮无法挡住!',
-                  style: TextStyle(fontSize: 12.0,
-                      // color: Theme.of(context).primaryColor
-                  ),
-                  textAlign: TextAlign.center,),
-                ListTile(
-                  leading: Icon(Icons.person, color: Theme.of(context).accentColor),
-                  // leading: Icon(Icons.person, color: Theme.of(context).iconTheme.color),
-                  title: Text("我的", style: TextStyle(fontSize: 16.0)),
-                  trailing: Icon(Icons.chevron_right),
-                  dense: true,
-                  // horizontalTitleGap: 0,
-                  minLeadingWidth: 0,
-                  minVerticalPadding: 0,
-                  onTap: (){
-                    Navigator.pop(context);
-                    setState(() {
-                      ddlog("我的");
-                    });
-                  },
-                ),
+                    Divider(),
+                  ],
+                )).toList(),
+                buildGrayRow(),
                 Divider(),
-                ListTile(
-                  leading: Icon(Icons.volume_up, color: Theme.of(context).accentColor),
-                  title: Text("消息",style: TextStyle(fontSize: 16.0)),
-                  trailing: Icon(Icons.chevron_right),
-                  dense: true,
-                  // horizontalTitleGap: 0,
-                  minLeadingWidth: 0,
-                  minVerticalPadding: 0,
-                  onTap: (){
-                    Navigator.pop(context);
-                    Get.toNamed('notice');
-                  },
-                ),
-                Divider(),
-                ListTile(
-                  leading: Icon(Icons.settings, color: Theme.of(context).accentColor),
-                  title: Text("设置",style: TextStyle(fontSize: 16.0)),
-                  trailing: Icon(Icons.chevron_right),
-                  dense: true,
-                  // horizontalTitleGap: 0,
-                  minLeadingWidth: 0,
-                  minVerticalPadding: 0,
-                  onTap: (){
-                    Navigator.pop(context);
-                    Get.toNamed('setting');
-                  },
-                ),
-                Divider(),
-                ListTile(
-                  leading: Icon(Icons.share, color: Theme.of(context).accentColor),
-                  title: Text("分享",style: TextStyle(fontSize: 16.0)),
-                  trailing: Icon(Icons.chevron_right),
-                  dense: true,
-                  // horizontalTitleGap: 0,
-                  minLeadingWidth: 0,
-                  minVerticalPadding: 0,
-                  onTap: (){
-                    ddlog("分享");
-                  },
-                ),
-                Divider(),
-                ListTile(
-                  leading: Icon(Icons.open_in_new, color: Theme.of(context).accentColor),
-                  title: Text("退出",style: TextStyle(fontSize: 16.0)),
-                  trailing: Icon(Icons.chevron_right),
-                  dense: true,
-                  // horizontalTitleGap: 0,
-                  minLeadingWidth: 0,
-                  minVerticalPadding: 0,
-                  onTap: (){
-                    ddlog("退出");
-                  },
-                ),
-                Divider(),
-                ListTile(
-                  leading: Icon(Icons.change_circle_outlined, color: Theme.of(context).accentColor),
-                  title: Text("灰色滤镜",style: TextStyle(fontSize: 16.0)),
-                  trailing: Switch(
-                    onChanged: (bool value) {
-                      isGrey = !isGrey;
-                      print("isGrey:${isGrey}");
-                      final color = value ? Colors.grey : Colors.transparent;
-                      filteredProvider.setColor(color);
-                    },
-                    value: isGrey,
-                  ),
-                  dense: true,
-                  // horizontalTitleGap: 0,
-                  minLeadingWidth: 0,
-                  minVerticalPadding: 0,
-                  onTap: (){
-                    ddlog("退出");
-                  },
-                ),
               ],
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                TextButton(
-                  onPressed: (){
-                    setState(() {
-                      APPThemeSettings.instance.changeTheme();
-                    });
-                  },
-                  child: Text("主题切换", style: textStyle,)
-                ),
-                TextButton(
-                  onPressed: (){
-                    APPThemeSettings.instance.showThemePicker(
-                      context: context,
-                      callback: (){
-                        Navigator.of(context).pop();
-                      }
-                    );
-                  },
-                  child: Text("light主题切换", style: textStyle,)
-                ),
-              ],
-            ),
-            SizedBox(height: 15,)
+            ...buildFooter(),
+            // SizedBox(height: 15,)
           ],
         ),
       ),
+    );
+  }
+
+  List<Widget> buildHeader() {
+    return [
+      DrawerHeader(
+        decoration: BoxDecoration(color: Theme.of(context).primaryColor),
+        child: UnconstrainedBox( //解除父级的大小限制
+          child: CircleAvatar(
+            radius: 48,
+            // backgroundColor: Colors.transparent,
+            backgroundImage: AssetImage('images/avatar.png')
+          ),
+        ),
+      ),
+      Text('设置在主页面,否则底部按钮无法挡住!',
+        style: TextStyle(fontSize: 12.0,
+          // color: Theme.of(context).primaryColor
+        ),
+        textAlign: TextAlign.center,
+      ),
+    ];
+  }
+
+
+  buildFooter() {
+    return [
+      Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        TextButton(
+          onPressed: (){
+            setState(() {
+              APPThemeSettings.instance.changeTheme();
+            });
+          },
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Icon(Icons.change_circle_outlined),
+              SizedBox(width: 3,),
+              Text(changeThemeTitle,)
+            ],
+          ),
+        ),
+        TextButton(
+            onPressed: (){
+              APPThemeSettings.instance.showThemePicker(
+                  context: context,
+                  callback: (){
+                    Navigator.of(context).pop();
+                  }
+              );
+            },
+            child: Text("Light主题切换",)
+        ),
+      ],
+    ),
+    ];
+  }
+
+  buildGrayRow() {
+    var filteredProvider = Provider.of<ColorFilteredProvider>(context);
+
+    return ListTile(
+      leading: Icon(Icons.change_circle_outlined, color: Theme.of(context).primaryColor),
+      title: Text("灰色滤镜",style: TextStyle(fontSize: 16.0)),
+      trailing: Switch(
+        onChanged: (bool value) {
+          isGrey = !isGrey;
+          print("isGrey:${isGrey}");
+          final color = value ? Colors.grey : Colors.transparent;
+          filteredProvider.setColor(color);
+        },
+        value: isGrey,
+      ),
+      dense: true,
+      // horizontalTitleGap: 0,
+      minLeadingWidth: 0,
+      minVerticalPadding: 0,
+      onTap: (){
+        ddlog("退出");
+      },
     );
   }
 }
