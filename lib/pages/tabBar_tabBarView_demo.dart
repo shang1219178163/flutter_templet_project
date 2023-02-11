@@ -356,6 +356,8 @@ var _list = [
   Tuple2(APPRouter.tabBarDemoNew, "tabBarDemoNew", ),
   Tuple2(APPRouter.tabBarOnlyDemo, "tabBarOnlyDemo", ),
   Tuple2(APPRouter.tabBarSegmentDemo, "tabBarSegmentDemo", ),
+  Tuple2(APPRouter.tabBarSegmentNewDemo, "tabBarSegmentNewDemo", ),
+
   Tuple2(APPRouter.textlessDemo, "textlessDemo", ),
   Tuple2(APPRouter.textFieldDemo, "textFieldDemo", ),
 

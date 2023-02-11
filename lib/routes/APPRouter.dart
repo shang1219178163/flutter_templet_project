@@ -211,6 +211,7 @@ class APPRouter {
   static const tabBarDemoNew = '/TabBarDemoNew';
   static const tabBarOnlyDemo = '/tabBarOnlyDemo';
   static const tabBarSegmentDemo = '/tabBarSegmentDemo';
+  static const tabBarSegmentNewDemo = '/tabBarSegmentNewDemo';
   static const widgetListPage = '/WidgetListPage';
   static const animatedDemo = '/AnimatedDemo';
   static const animatedWidgetDemo = '/AnimatedWidgetDemo';
@@ -407,6 +408,7 @@ class APPRouter {
   static const keyDemo = '/keyDemo';
   static const customScrollBarDemo = '/customScrollBarDemo';
   static const overflowDemo = '/overflowDemo';
+  static const segmentTabBarNewDemo = '/segmentTabBarNewDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -462,6 +464,7 @@ class AppPage {
     GetPage(name: APPRouter.tabBarDemoNew, page: () => TabBarDemoNew(),),
     GetPage(name: APPRouter.tabBarOnlyDemo, page: () => TabBarOnlyDemo(),),
     GetPage(name: APPRouter.tabBarSegmentDemo, page: () => SegmentTabBarDemo(),),
+    GetPage(name: APPRouter.tabBarSegmentNewDemo, page: () => SegmentTabBarNewDemo(),),
     GetPage(name: APPRouter.textlessDemo, page: () => TextlessDemo(),),
     GetPage(name: APPRouter.alertDialogDemo, page: () => AlertDialogDemo(),),
     GetPage(name: APPRouter.alertSheetDemo, page: () => AlertSheetDemo(),),

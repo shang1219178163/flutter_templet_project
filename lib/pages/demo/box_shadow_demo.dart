@@ -101,6 +101,22 @@ class _BoxShadowDemoState extends State<BoxShadowDemo> {
               ],
             ),
           ),
+
+          _buildBox(
+            text: "spreadRadius: 0, blurRadius: 0, offset: Offset(0, 0)",
+            decoration: BoxDecoration(
+              color: Color(0xffffffff),
+              boxShadow: [
+                BoxShadow(
+                  // color: Color(0xffff0000),
+                  color: Color(0xff000000),
+                  spreadRadius: 0,
+                  blurRadius: 0,
+                  offset: Offset(0, 0),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );

@@ -154,7 +154,18 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
     print(shard1 == shard2);
     print(shard == shard2);
 
+    final aa = "我是谁";
+    final bb = "9999";
+    final cc = "https://stackoverflow.com/questions/26107125/cannot-read-property-addeventlistener-of-null";
+
+    final map = {
+      r"a": aa,
+      r"b": bb,
+      r"c": cc,
+    };
+    print("map:${map}");
   }
+
 
   Wrap buildWrap() {
     return Wrap(

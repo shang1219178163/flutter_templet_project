@@ -53,3 +53,28 @@ class EventBus {
     }
   }
 }
+
+
+mixin ListenerEventBus<T extends StatefulWidget> on State<T> {
+  StreamSubscription? subscription;
+
+  listenOnEvent<E>(
+    void Function(E)? onData,
+  {
+    Function? onError, 
+    void Function()? onDone, 
+    bool? cancelOnError
+  }) {
+    subscription = EventBus.instance.on<E>().listen(
+      onData, 
+      onError: onError, 
+      onDone: onDone
+    );
+  }
+
+  @override
+  void dispose() {
+    subscription?.cancel();
+    super.dispose();
+  }
+}
