@@ -115,14 +115,27 @@ class TabBarSegment extends StatefulWidget implements PreferredSizeWidget {
 class TabBarSegmentState extends State<TabBarSegment> with SingleTickerProviderStateMixin {
   TabController? _tabController;
 
+
+  @override
+  void dispose() {
+    // _tabController?.dispose();
+    super.dispose();
+  }
+
   @override
   void initState() {
     super.initState();
 
     widget.currentIndex = widget.initialIndex;
-
     _tabController = widget.controller ?? TabController(length: widget.tabCount, vsync: this);
-    _tabController?.index = widget.currentIndex;
+    print("_tabController:${_tabController == widget.controller}");
+    if (_tabController == null) {
+      return;
+    }
+    _tabController!.index = widget.currentIndex;
+    // if (_tabController != null) {
+    //   _tabController!.index = widget.currentIndex;
+    // }
     // _tabController?.addListener(() {
     //   if(!_tabController!.indexIsChanging){
     //     setState(() {
@@ -135,11 +148,6 @@ class TabBarSegmentState extends State<TabBarSegment> with SingleTickerProviderS
     // print("widget.tabController${_tabController?.index}");
   }
 
-  @override
-  void dispose() {
-    _tabController?.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -154,6 +162,7 @@ class TabBarSegmentState extends State<TabBarSegment> with SingleTickerProviderS
       onTap: (index){
         widget.currentIndex = index;
         widget.onTap?.call(index);
+        _tabController?.index = index;
         setState(() {});
       },
       isScrollable: widget.isScrollable,
@@ -179,6 +188,9 @@ class TabBarSegmentState extends State<TabBarSegment> with SingleTickerProviderS
 
   reset() {
     _tabController!.index = widget.initialIndex;
+    // if (_tabController != null) {
+    //   _tabController!.index = widget.currentIndex;
+    // }
   }
 
 }
