@@ -13,8 +13,8 @@ import 'package:flutter/material.dart';
 const double _kTabHeight = 46.0;
 
 typedef IndexedCallback = void Function(BuildContext context, int index);
-/// 分段选择器 builder
-typedef SegmentWidgetBuilder = Widget Function(BuildContext context, int index, bool isSelect);
+// /// 分段选择器 builder
+// typedef SegmentWidgetBuilder = Widget Function(BuildContext context, int index, bool isSelect);
 
 /// TabBar 通用性封装
 class TabBarSegment extends StatefulWidget implements PreferredSizeWidget {
@@ -57,7 +57,7 @@ class TabBarSegment extends StatefulWidget implements PreferredSizeWidget {
   /// 总数
   int tabCount;
   /// item builder
-  SegmentWidgetBuilder itemBuilder;
+  IndexedWidgetBuilder itemBuilder;
   /// 点击回调
   ValueChanged<int>? onTap;
   // /// 点击回调
@@ -115,6 +115,7 @@ class TabBarSegment extends StatefulWidget implements PreferredSizeWidget {
 class TabBarSegmentState extends State<TabBarSegment> with SingleTickerProviderStateMixin {
   TabController? _tabController;
 
+  var _items = <Widget>[];
 
   @override
   void dispose() {
@@ -133,9 +134,6 @@ class TabBarSegmentState extends State<TabBarSegment> with SingleTickerProviderS
       return;
     }
     _tabController!.index = widget.currentIndex;
-    // if (_tabController != null) {
-    //   _tabController!.index = widget.currentIndex;
-    // }
     // _tabController?.addListener(() {
     //   if(!_tabController!.indexIsChanging){
     //     setState(() {
@@ -146,16 +144,19 @@ class TabBarSegmentState extends State<TabBarSegment> with SingleTickerProviderS
     //   }
     // });
     // print("widget.tabController${_tabController?.index}");
+    if (_items.isEmpty) {
+      _items = List.generate(widget.tabCount, (index) => widget.itemBuilder(
+          context,
+          index,
+      ));
+      print("_itemBuilders.isEmpty");
+    }
   }
-
 
   @override
   Widget build(BuildContext context) {
-    final items = List.generate(widget.tabCount, (index) => widget.itemBuilder(
-        context,
-        index,
-        widget.currentIndex == index
-    ));
+    final items = _items;
+    
     return TabBar(
       controller: _tabController,
       tabs: items,
@@ -186,11 +187,12 @@ class TabBarSegmentState extends State<TabBarSegment> with SingleTickerProviderS
     );
   }
 
+  /// 重置
   reset() {
+    if (_tabController == null) {
+      return;
+    }
     _tabController!.index = widget.initialIndex;
-    // if (_tabController != null) {
-    //   _tabController!.index = widget.currentIndex;
-    // }
   }
 
 }

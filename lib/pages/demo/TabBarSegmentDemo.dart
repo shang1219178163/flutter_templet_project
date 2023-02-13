@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/tab_bar_segment.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
+import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/uti/R.dart';
+import 'package:tuple/tuple.dart';
 
 class SegmentTabBarDemo extends StatefulWidget {
 
@@ -37,8 +39,8 @@ class _SegmentTabBarDemoState extends State<SegmentTabBarDemo> with SingleTicker
     _tabController?.addListener(() {
       print(_tabController?.index);
       indexVN.value = _tabController!.index;
+      print(_tabController);
     });
-    print(_tabController);
   }
 
   @override
@@ -53,13 +55,6 @@ class _SegmentTabBarDemoState extends State<SegmentTabBarDemo> with SingleTicker
           onPressed: onDone,
         )).toList(),
         bottom: buildAppBottom(),
-        // bottom: PreferredSize(
-        //   preferredSize: Size(double.infinity, 60),
-        //   child: TabBarCustome(
-        //     controller: _tabController,
-        //     titles: titles,
-        //   ),
-        // ),
       ),
       body: TabBarView( //构建
         controller: _tabController,
@@ -94,9 +89,9 @@ class _SegmentTabBarDemoState extends State<SegmentTabBarDemo> with SingleTicker
       initialIndex: 1,
       currentIndex: selectedIndex,
       tabCount: titles.length,
-      itemBuilder: (ctx, index, isSelect) {
+      itemBuilder: (ctx, index) {
         final e = titles[index];
-        return buildItem(e: e, index: index, isSelect: isSelect, height: height);
+        return buildItem(e: e, index: index, height: height);
       },
       // onTap: (index) {
       //   indexVN.value = index;
@@ -121,8 +116,9 @@ class _SegmentTabBarDemoState extends State<SegmentTabBarDemo> with SingleTicker
           print("onTap: $index");
           selectedIndex = index;
         },
-        itemBuilder: (context, index, isSelect) {
+        itemBuilder: (context, index) {
           final e = titles[index];
+          bool isSelect = (index == indexVN.value);
           // print("itemBuilder: $index, $isSelect");
           return Tab(
             // height: 60,
@@ -151,9 +147,10 @@ class _SegmentTabBarDemoState extends State<SegmentTabBarDemo> with SingleTicker
   Widget buildItem({
     required String e,
     required int index,
-    required bool isSelect,
     double height = 46
   }) {
+    bool isSelect = (index == indexVN.value);
+
     if (index != 1){
       return Tab(height: height, text: e);
     }
@@ -202,20 +199,23 @@ class _SegmentTabBarNewDemoState extends State<SegmentTabBarNewDemo> with Single
 
   ValueNotifier<int> indexVN = ValueNotifier<int>(0);
 
-  // @override
-  // void dispose() {
-  //   _tabController?.dispose();
-  //   super.dispose();
-  // }
+  @override
+  void dispose() {
+    _tabController?.dispose();
+    super.dispose();
+  }
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: titles.length, vsync: this);
     _tabController?.addListener(() {
-      print(_tabController?.index);
-      indexVN.value = _tabController!.index;
+      if(!_tabController!.indexIsChanging){
+        indexVN.value = _tabController!.index;
+        print("indexVN:${indexVN.value}_${_tabController?.index}");
+      }
     });
+
   }
 
   @override
@@ -223,6 +223,7 @@ class _SegmentTabBarNewDemoState extends State<SegmentTabBarNewDemo> with Single
     // return buildPage();
     // return buildPageOne();
     return buildPageTwo();
+    return buildPageThree();
   }
 
   buildAppBottom({double height = 60}) {
@@ -233,9 +234,9 @@ class _SegmentTabBarNewDemoState extends State<SegmentTabBarNewDemo> with Single
       initialIndex: 1,
       currentIndex: selectedIndex,
       tabCount: titles.length,
-      itemBuilder: (ctx, index, isSelect) {
+      itemBuilder: (ctx, index) {
         final e = titles[index];
-        return buildItem(e: e, index: index, isSelect: isSelect, height: height);
+        return buildItem(e: e, index: index, height: height);
       },
       onTap: (index) {
         indexVN.value = index;
@@ -251,9 +252,10 @@ class _SegmentTabBarNewDemoState extends State<SegmentTabBarNewDemo> with Single
   Widget buildItem({
     required String e,
     required int index,
-    required bool isSelect,
     double height = 46
   }) {
+    bool isSelect = (index == indexVN.value);
+
     if (index != 1){
       return Tab(height: height, text: e);
     }
@@ -353,11 +355,12 @@ class _SegmentTabBarNewDemoState extends State<SegmentTabBarNewDemo> with Single
 
   Widget buildPageTwo() {
     return Scaffold(
-        appBar: AppBar(
-          title: Text("buildPageTwo"),
-        ),
-        body: CustomScrollView(
+      appBar: AppBar(
+        title: Text("buildPageTwo"),
+      ),
+      body: CustomScrollView(
           slivers: [
+            SizedBox(height: 50),
             ColoredBox(
               color: Theme.of(context).primaryColor,
               child: TabBarSegment(
@@ -370,18 +373,26 @@ class _SegmentTabBarNewDemoState extends State<SegmentTabBarNewDemo> with Single
                   print("onTap: $index");
                   selectedIndex = index;
                 },
-                itemBuilder: (context, index, isSelect) {
+                itemBuilder: (context, index) {
                   final e = titles[index];
-                  // print("itemBuilder: $index, $isSelect");
-                  return Tab(
-                    // height: 60,
-                      child: Text(e,
-                        style: TextStyle(
-                          color: isSelect ? Colors.red : Colors.yellow,
-                          fontSize: isSelect ? 20 : 15,
-                          // backgroundColor: Colors.greenAccent
+                  print("TabBarSegment itemBuilder: $index");
+
+                  return ValueListenableBuilder<int>(
+                    valueListenable: indexVN,
+                    builder: (BuildContext context, int value, Widget? child) {
+                      print("ValueListenableBuilder111 indexVN: $index");
+                      final isSelected = (index == indexVN.value);
+
+                      return Tab(
+                        child: Text(e,
+                          style: TextStyle(
+                            color: isSelected ? Colors.red : Colors.yellow,
+                            fontSize: isSelected ? 20 : 15,
+                            // backgroundColor: Colors.greenAccent
+                          ),
                         ),
-                      )
+                      );
+                    }
                   );
                 },
               ),
@@ -392,6 +403,7 @@ class _SegmentTabBarNewDemoState extends State<SegmentTabBarNewDemo> with Single
                 controller: _tabController,
                 children: titles.map((e) {
                   return Container(
+                    // color: ColorExt.random,
                     alignment: Alignment.center,
                     child: Text(e, style: TextStyle(color: Colors.red),),
                   );
@@ -402,37 +414,67 @@ class _SegmentTabBarNewDemoState extends State<SegmentTabBarNewDemo> with Single
         )
     );
   }
-}
 
+  Widget buildPageThree() {
+    return Scaffold(
+        appBar: AppBar(
+          title: Text("buildPageTwo"),
+        ),
+        body: CustomScrollView(
+          slivers: [
+            ValueListenableBuilder<int>(
+              valueListenable: indexVN,
+              builder: (BuildContext context, int value, Widget? child) {
+                print("ValueListenableBuilder111 indexVN: $value");
+                final isSelected = (value == indexVN.value);
 
+                return ColoredBox(
+                  color: Theme.of(context).primaryColor,
+                  child: TabBarSegment(
+                    isScrollable: true,
+                    controller: _tabController,
+                    initialIndex: 2,
+                    currentIndex: currentIndex,
+                    tabCount: titles.length,
+                    onTap: (index){
+                      print("onTap: $index");
+                      selectedIndex = index;
+                    },
+                    itemBuilder: (context, index) {
+                      final e = titles[index];
+                      print("TabBarSegment itemBuilder: $index");
 
-
-class TabBarCustome extends StatefulWidget {
-
-  TabBarCustome({
-    Key? key,
-    this.controller,
-    required this.titles,
-  }) : super(key: key);
-
-  TabController? controller;
-
-  List<String> titles;
-
-  @override
-  _TabBarCustomeState createState() => _TabBarCustomeState();
-}
-
-class _TabBarCustomeState extends State<TabBarCustome> {
-
-
-  @override
-  Widget build(BuildContext context) {
-    return TabBar(
-      isScrollable: true,
-      controller: widget.controller,
-      tabs: widget.titles.map((e) => Tab(text: e)).toList(),
+                      return Tab(
+                        child: Text(e,
+                          style: TextStyle(
+                            color: isSelected ? Colors.red : Colors.yellow,
+                            fontSize: isSelected ? 20 : 15,
+                            // backgroundColor: Colors.greenAccent
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                );
+              }
+            ),
+            SizedBox(
+              height: 500,
+              child: TabBarView( //构建
+                controller: _tabController,
+                children: titles.map((e) {
+                  return Container(
+                    // color: ColorExt.random,
+                    alignment: Alignment.center,
+                    child: Text(e, style: TextStyle(color: Colors.red),),
+                  );
+                }).toList(),
+              ),
+            ),
+          ].map((e) => SliverToBoxAdapter(child: e,)).toList(),
+        )
     );
   }
 
 }
+

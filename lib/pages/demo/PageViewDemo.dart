@@ -70,11 +70,12 @@ class _PageViewDemoState extends State<PageViewDemo> {
   }
 
   _buildBody({
-    margin = const EdgeInsets.all(10),
-    padding = const EdgeInsets.all(20),
+    margin = const EdgeInsets.all(15),
+    padding = const EdgeInsets.all(15),
   }) {
-    final pageViewWidth = screenSize.width - margin.left - margin.right - padding.left - padding.right;
-    return Container(
+    return LayoutBuilder(builder: (context, constraints) {
+      final pageViewWidth = constraints.maxWidth - margin.left - margin.right - padding.left - padding.right;
+      return Container(
         margin: margin,
         padding: padding,
         child: Column(
@@ -82,15 +83,16 @@ class _PageViewDemoState extends State<PageViewDemo> {
             Expanded(child: buildPageView()),
             SizedBox(height: 10),
             Container(
-              height: 50,
+              // height: 50,
               child: pageIndicator(
                 pageViewWidth: pageViewWidth,
                 pageCount: 3
               ),
             )
           ],
-        )
-    );
+        ),
+      );
+    });
   }
 
   Widget buildPageView() {
@@ -120,18 +122,18 @@ class _PageViewDemoState extends State<PageViewDemo> {
     return Stack(
       children: <Widget>[
         ClipRRect(
-          borderRadius: BorderRadius.all(Radius.circular(1)),
+          borderRadius: BorderRadius.all(Radius.circular(4)),
           child: Container(
             height: 4,
             width: width,
-            color: Colors.black.withOpacity(0.08),
+            color: Colors.black.withOpacity(0.05),
           ),
         ),
-        ValueListenableBuilder(
+        ValueListenableBuilder<double>(
           valueListenable: scrollerOffset,
           builder: (context, value, child) {
             return Positioned(
-              left: ((value as double) * factor / width) * itemWidth,
+              left: (value * factor / width) * itemWidth,
               child: Container(
                 height: 4,
                 width: itemWidth,
