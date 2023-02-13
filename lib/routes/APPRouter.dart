@@ -1,6 +1,7 @@
 // import 'package:flutter/cupertino.dart';
 // import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/Provider/provider_list_demo.dart';
+import 'package:flutter_templet_project/basicWidget/EnhanceTab/enhance_tab_bar_demo.dart';
 import 'package:flutter_templet_project/basicWidget/drag_destination_view.dart';
 import 'package:flutter_templet_project/basicWidget/responsive_column.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedBuilderDemo.dart';
@@ -409,6 +410,7 @@ class APPRouter {
   static const customScrollBarDemo = '/customScrollBarDemo';
   static const overflowDemo = '/overflowDemo';
   static const segmentTabBarNewDemo = '/segmentTabBarNewDemo';
+  static const enhanceTabBarDemo = '/enhanceTabBarDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -643,6 +645,7 @@ class AppPage {
     GetPage(name: APPRouter.keyDemo, page: () => KeyDemo(),),
     GetPage(name: APPRouter.customScrollBarDemo, page: () => CustomScrollBarDemo(),),
     GetPage(name: APPRouter.overflowDemo, page: () => OverflowDemo(),),
+    GetPage(name: APPRouter.enhanceTabBarDemo, page: () => EnhanceTabBarDemo(),),
 
 
   ];
