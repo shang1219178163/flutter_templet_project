@@ -105,8 +105,8 @@ class _NumberStepperState extends State<NumberStepper> {
 
           ),
         ),
-
         Container(
+          margin: EdgeInsets.symmetric(horizontal: 8),
           width: widget.value.toString().length*18*widget.iconSize/30,
           // width: widget.iconSize + 20,
           child: Text('${widget.value}',
@@ -116,7 +116,6 @@ class _NumberStepperState extends State<NumberStepper> {
             textAlign: TextAlign.center,
           ),
         ),
-
         Container(
           width: widget.iconSize,
           height: widget.iconSize,
@@ -164,8 +163,8 @@ class _NumberStepperState extends State<NumberStepper> {
             },
           ),
         ),
-
         Container(
+          margin: EdgeInsets.symmetric(horizontal: 8),
           width: widget.value.toString().length*18*widget.iconSize/30,
           // width: widget.iconSize + 20,
           child: Text('${widget.value}',
@@ -175,7 +174,6 @@ class _NumberStepperState extends State<NumberStepper> {
             textAlign: TextAlign.center,
           ),
         ),
-
         Container(
           width: widget.iconSize,
           height: widget.iconSize,
@@ -259,21 +257,20 @@ class _NumberStepperState extends State<NumberStepper> {
   }
 
   void go(int stepValue) {
-    setState(() {
-      if (stepValue < 0 && (widget.value == widget.minValue || widget.value + stepValue < widget.minValue)) {
-        ddlog("it's minValue!");
-        if (widget.wraps) widget.value = widget.maxValue;
-        widget.block(widget.value);
-        return;
-      }
-      if (stepValue > 0 && (widget.value == widget.maxValue || widget.value + stepValue > widget.maxValue)) {
-        ddlog("it's maxValue!");
-        if (widget.wraps) widget.value = widget.minValue;
-        widget.block(widget.value);
-        return;
-      }
-      widget.value += stepValue;
-    });
+    if (stepValue < 0 && (widget.value == widget.minValue || widget.value + stepValue < widget.minValue)) {
+      ddlog("it's minValue!");
+      if (widget.wraps) widget.value = widget.maxValue;
+      widget.block(widget.value);
+      return;
+    }
+    if (stepValue > 0 && (widget.value == widget.maxValue || widget.value + stepValue > widget.maxValue)) {
+      ddlog("it's maxValue!");
+      if (widget.wraps) widget.value = widget.minValue;
+      widget.block(widget.value);
+      return;
+    }
+    widget.value += stepValue;
+    setState(() {});
     widget.block(widget.value);
   }
 }

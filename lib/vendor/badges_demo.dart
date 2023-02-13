@@ -92,6 +92,8 @@ class _BadgesDemoState extends State<BadgesDemo> {
             );
           }
         ),
+
+
       ],
     );
   }
