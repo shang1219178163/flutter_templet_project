@@ -491,6 +491,7 @@ var _customs = [
   Tuple2(APPRouter.ticketDemo, "券", ),
   Tuple2(APPRouter.myPopverDemo, "弹窗测试", ),
   Tuple2(APPRouter.customScrollBarDemo, "自定义 ScrollBar", ),
+  Tuple2(APPRouter.enhanceTabBarDemo, "Tab 指示器支持固定宽度", ),
 
 ];
 
