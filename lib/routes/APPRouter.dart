@@ -68,6 +68,7 @@ import 'package:flutter_templet_project/pages/demo/VisibilityDemo.dart';
 import 'package:flutter_templet_project/pages/demo/WrapDemo.dart';
 import 'package:flutter_templet_project/pages/demo/box_shadow_demo.dart';
 import 'package:flutter_templet_project/pages/demo/drawImageNineDemo.dart';
+import 'package:flutter_templet_project/pages/demo/nn_collection_nav_widget_demo.dart';
 import 'package:flutter_templet_project/pages/demo/smart_dialog_demo.dart';
 import 'package:flutter_templet_project/pages/demo/isolateDemo.dart';
 import 'package:flutter_templet_project/pages/demo/merge_images_demo.dart';
@@ -411,6 +412,7 @@ class APPRouter {
   static const overflowDemo = '/overflowDemo';
   static const segmentTabBarNewDemo = '/segmentTabBarNewDemo';
   static const enhanceTabBarDemo = '/enhanceTabBarDemo';
+  static const nnCollectionNavWidgetDemo = '/nnCollectionNavWidgetDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -646,6 +648,7 @@ class AppPage {
     GetPage(name: APPRouter.customScrollBarDemo, page: () => CustomScrollBarDemo(),),
     GetPage(name: APPRouter.overflowDemo, page: () => OverflowDemo(),),
     GetPage(name: APPRouter.enhanceTabBarDemo, page: () => EnhanceTabBarDemo(),),
+    GetPage(name: APPRouter.nnCollectionNavWidgetDemo, page: () => NNCollectionNavWidgetDemo(),),
 
 
   ];
