@@ -92,22 +92,7 @@ class _NNCollectionNavWidgetDemoState extends State<NNCollectionNavWidgetDemo> {
           Column(
             children: [
               ..._buildHeader(),
-
-              AnimatedBuilder(
-                animation: _collectionNavModel,
-                builder: (context, child) {
-                  print("AnimatedBuilder");
-                  return NNCollectionNavWidget(
-                    isDebug: true,
-                    items: _items,
-                    iconSize: 68,
-                    textGap: 5,
-                    pageColumnNum: _collectionNavModel.pageColumnNum,
-                    pageRowNum: _collectionNavModel.pageRowNum,
-                    scrollType: _collectionNavModel.scrollType,
-                  );
-                }
-              ),
+              _buildAnimatedBuilder(),
             ],
           )
         ]
