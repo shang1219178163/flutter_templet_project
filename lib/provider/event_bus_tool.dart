@@ -1,5 +1,5 @@
 //
-//  event_bus.dart
+//  event_bus_tool.dart
 //  flutter_templet_project
 //
 //  Created by shang on 10/14/21 4:46 PM.
@@ -8,19 +8,23 @@
 
 
 //订阅者回调签名
+import 'dart:async';
+import 'package:flutter/material.dart';
+
 typedef void EventCallback(arg);
 
-class EventBus {
+/// 自定义时间总线
+class EventBusTool {
   //私有构造函数
-  EventBus._internal();
+  EventBusTool._internal();
 
   //保存单例
-  static EventBus _instance = EventBus._internal();
+  static EventBusTool _instance = EventBusTool._internal();
 
   //工厂构造函数
-  factory EventBus() => _instance;
+  factory EventBusTool() => _instance;
 
-  static EventBus get instance => _instance;
+  static EventBusTool get instance => _instance;
 
   //保存事件订阅者队列，key:事件名(id)，value: 对应事件的订阅者队列
   final _emap = Map<Object, List<EventCallback>?>();
@@ -51,30 +55,5 @@ class EventBus {
     for (var i = len; i > -1; --i) {
       list[i](arg);
     }
-  }
-}
-
-
-mixin ListenerEventBus<T extends StatefulWidget> on State<T> {
-  StreamSubscription? subscription;
-
-  listenOnEvent<E>(
-    void Function(E)? onData,
-  {
-    Function? onError, 
-    void Function()? onDone, 
-    bool? cancelOnError
-  }) {
-    subscription = EventBus.instance.on<E>().listen(
-      onData, 
-      onError: onError, 
-      onDone: onDone
-    );
-  }
-
-  @override
-  void dispose() {
-    subscription?.cancel();
-    super.dispose();
   }
 }

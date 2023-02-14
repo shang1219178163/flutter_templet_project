@@ -98,3 +98,30 @@ extension ImageChunkEventExt on ImageChunkEvent {
     return percent;
   }
 }
+
+
+extension ImageCacheExt on ImageCache {
+
+  /// PaintingBinding.instance?.imageCache?.clear();
+  static clear() {
+    PaintingBinding.instance?.imageCache?.clear();
+  }
+
+  /// PaintingBinding.instance?.imageCache?.clearLiveImages();
+  static clearLiveImages() {
+    PaintingBinding.instance?.imageCache?.clearLiveImages();
+  }
+
+  /// evict
+  static bool evict(Object key, { bool includeLive = true }) {
+    return (PaintingBinding.instance?.imageCache?.evict(key, includeLive: includeLive) == true);
+  }
+
+  /// evict images
+  static evictImages(List<String> urls) {
+    urls.forEach((e) {
+      Object key = NetworkImage(e, scale: 1.0,);
+      PaintingBinding.instance?.imageCache?.evict(key, includeLive: true);
+    });
+  }
+}
