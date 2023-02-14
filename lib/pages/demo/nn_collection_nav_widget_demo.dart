@@ -64,8 +64,8 @@ class _NNCollectionNavWidgetDemoState extends State<NNCollectionNavWidgetDemo> {
     );
 
     tuples = [
-      Tuple4("列数 row", 1, 5, _collectionNavModel.changePageColumnNum),
-      Tuple4("行数 column", 1, 2, _collectionNavModel.changePageRowNum),
+      Tuple4("列数 row", 1, 5, _collectionNavModel.changePageRowNum),
+      Tuple4("行数 column", 1, 5, _collectionNavModel.changePageColumnNum),
       Tuple4("划动方式", 0, 2, _collectionNavModel.changeScrollTypeIndex),
       // Tuple4("行数", 1, 2, ValueNotifier(2)),
     ];
