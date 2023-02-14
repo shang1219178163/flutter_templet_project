@@ -62,7 +62,6 @@ class NNCollectionNavWidget extends StatefulWidget {
   int pageRowNum;
   ///金刚区每页列数
   int pageColumnNum;
-
   /// 图标默认高度
   double iconSize;
   /// 子项标题高度
@@ -83,7 +82,7 @@ class NNCollectionNavWidget extends StatefulWidget {
   double indicatorItemWidth;
   /// 指示器与最后一样的标题间距
   double indicatorGap;
-
+  /// 阴影
   List<BoxShadow>? boxShadows;
 
   /// 提示模式会展示颜色
@@ -107,13 +106,16 @@ class _NNCollectionNavWidgetState extends State<NNCollectionNavWidget> {
   PageController? controller;
   /// 监听滚动偏移量
   var scrollOffset = new ValueNotifier(0.0);
+  /// 子项高度
+  double get itemHeight => widget.iconSize + widget.textGap + widget.textHeight;
+  /// 传入的每页最大数量
+  int get pageNum => widget.pageRowNum * widget.pageColumnNum;
 
-  /// 整个视图总高度
-  double get totalHeight {
-    var itemHeight = widget.iconSize + widget.textGap + widget.textHeight;
-    var height = itemHeight * widget.pageRowNum + widget.columnSpacing * (widget.pageRowNum - 1) + widget.indicatorGap + widget.indicatorItemHeight;
-    return height;
-  }
+  // /// 整个视图总高度
+  // double get totalHeight {
+  //   var height = itemHeight * widget.pageRowNum + widget.columnSpacing * (widget.pageRowNum - 1) + widget.indicatorGap + widget.indicatorItemHeight;
+  //   return height;
+  // }
 
   ///是否支持整屏滑动
   bool get pageSnap {
@@ -168,9 +170,16 @@ class _NNCollectionNavWidgetState extends State<NNCollectionNavWidget> {
 
     if (widget.scrollType == PageViewScrollType.none) {
       pageCount = 1;
-      totalCount = min(totalCount, widget.pageRowNum * widget.pageColumnNum);
+      totalCount = min(totalCount, pageNum);
     } else {
-      pageCount = (totalCount / (widget.pageRowNum * widget.pageColumnNum)).ceil();
+      pageCount = (totalCount / pageNum).ceil();
+    }
+    // 整个视图总高度
+    var totalHeight = itemHeight * widget.pageRowNum + widget.columnSpacing * (widget.pageRowNum - 1) + widget.indicatorGap + widget.indicatorItemHeight;
+    if (pageNum >= _items.length) {
+      /// 实际 pageRowNum
+      final num = (totalCount % widget.pageColumnNum) == 0 ? totalCount ~/ widget.pageColumnNum : totalCount ~/ widget.pageColumnNum + 1;
+      totalHeight = itemHeight * num + widget.columnSpacing * (num - 1) + widget.indicatorGap + widget.indicatorItemHeight;
     }
 
     var margin = EdgeInsets.zero;
