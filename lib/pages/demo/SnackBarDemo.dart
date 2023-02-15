@@ -43,7 +43,7 @@ class SnackBarDemoState extends State<SnackBarDemo> {
             },
             child: Text(e))
         ).toList(),
-        bottomSheet: Container(color: Colors.green, height: 200,),
+        bottomSheet: Container(color: Colors.green, height: 100,),
         appBar: AppBar(
           title: Text('SnackBar'),
           actions: [

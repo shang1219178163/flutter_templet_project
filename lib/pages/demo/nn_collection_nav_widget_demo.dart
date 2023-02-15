@@ -101,8 +101,9 @@ class _NNCollectionNavWidgetDemoState extends State<NNCollectionNavWidgetDemo> {
   }
 
   onPressed(){
-    print("PageViewScrollType.full.index:${PageViewScrollType.drag.index}");
-    print("PageViewScrollType.full:${PageViewScrollType.drag.toString()}");
+    print("PageViewScrollType.index:${PageViewScrollType.full.index}");
+    print("PageViewScrollType.toString:${PageViewScrollType.drag.toString()}");
+    print("PageViewScrollType.values:${PageViewScrollType.values}");
 
   }
 
@@ -135,19 +136,19 @@ class _NNCollectionNavWidgetDemoState extends State<NNCollectionNavWidgetDemo> {
   /// 多值监听
   Widget _buildAnimatedBuilder() {
     return AnimatedBuilder(
-        animation: _collectionNavModel,
-        builder: (context, child) {
-          print("AnimatedBuilder");
-          return NNCollectionNavWidget(
-            isDebug: true,
-            items: _items,
-            iconSize: 68,
-            textGap: 5,
-            pageColumnNum: _collectionNavModel.pageColumnNum,
-            pageRowNum: _collectionNavModel.pageRowNum,
-            scrollType: _collectionNavModel.scrollType,
-          );
-        }
+      animation: _collectionNavModel,
+      builder: (context, child) {
+        print("AnimatedBuilder");
+        return NNCollectionNavWidget(
+          isDebug: true,
+          items: _items,
+          iconSize: 68,
+          textGap: 5,
+          pageColumnNum: _collectionNavModel.pageColumnNum,
+          pageRowNum: _collectionNavModel.pageRowNum,
+          scrollType: _collectionNavModel.scrollType,
+        );
+      }
     );
   }
 
@@ -166,7 +167,7 @@ class NNCollectionNavNotify extends ChangeNotifier {
   ///金刚区每页列数
   int scrollTypeIndex = 0;
 
-  PageViewScrollType get scrollType => PageViewScrollTypeExt.allCases[scrollTypeIndex];
+  PageViewScrollType get scrollType => PageViewScrollType.values[scrollTypeIndex];
 
   void changePageRowNum(int value) {
     pageRowNum = value;
