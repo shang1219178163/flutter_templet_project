@@ -37,6 +37,13 @@ class SnackBarDemoState extends State<SnackBarDemo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        persistentFooterButtons: ["one", "two"].map((e) => TextButton(
+            onPressed: () {
+              print(e);
+            },
+            child: Text(e))
+        ).toList(),
+        bottomSheet: Container(color: Colors.green, height: 200,),
         appBar: AppBar(
           title: Text('SnackBar'),
           actions: [
@@ -176,6 +183,11 @@ class SnackBarDemoState extends State<SnackBarDemo> {
       actions: [
         TextButton(
           child: const Text('Dismiss'),
+          onPressed: () => ScaffoldMessenger.of(context).hideCurrentMaterialBanner(),
+          // onPressed: () => context.hideMaterialBanner(isClear: false),
+        ),
+        TextButton(
+          child: const Text('Dismiss1'),
           onPressed: () => ScaffoldMessenger.of(context).hideCurrentMaterialBanner(),
           // onPressed: () => context.hideMaterialBanner(isClear: false),
         ),
