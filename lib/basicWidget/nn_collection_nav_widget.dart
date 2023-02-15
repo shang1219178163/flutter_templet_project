@@ -469,11 +469,11 @@ class AttrNavItem {
 /// PageView 滚动方式
 enum PageViewScrollType {
   /// 整屏滑动
-  full, // 0
+  full,
   /// 拖拽滑动
-  drag, // 1
+  drag,
   /// 禁用滑动
-  none, // 2
+  none,
 }
 
 extension PageViewScrollType_IntExt on int{
