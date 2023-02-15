@@ -39,7 +39,7 @@ class _FittedBoxDemoState extends State<FittedBoxDemo> {
       child: Column(
         children: [
           wImage(),
-          ...BoxFitExt.allCases.map((e) => wContainer(e)).toList(),
+          ...BoxFit.values.map((e) => wContainer(e)).toList(),
         ],
       ),
     );

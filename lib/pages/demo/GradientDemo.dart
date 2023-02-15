@@ -58,7 +58,7 @@ class _GradientDemoState extends State<GradientDemo> {
   }
   
   showSheetTileMode() {
-    final tileModes = TileModeExt.allCases;
+    final tileModes = TileMode.values;
     final items = tileModes.map((e) => Text('$e')).toList();
 
     showSheet(
@@ -71,7 +71,7 @@ class _GradientDemoState extends State<GradientDemo> {
     );
   }
   showSheetBlendMode() {
-    final blendModes = BlendModeExt.allCases;;
+    final blendModes = BlendMode.values;
 
     final items = blendModes.map((e) => Text('$e')).toList();
 

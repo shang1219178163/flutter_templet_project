@@ -15,7 +15,7 @@ class ImageBlendModeDemo extends StatefulWidget {
 
 class _ImageBlendModeDemoState extends State<ImageBlendModeDemo> {
 
-  final blendModes = BlendModeExt.allCases;
+  final blendModes = BlendMode.values;
 
   bool flag = false;
 

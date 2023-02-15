@@ -476,19 +476,10 @@ enum PageViewScrollType {
   none, // 2
 }
 
-extension PageViewScrollTypeExt on PageViewScrollType{
-  /// 变量集合
-  static const allCases = <PageViewScrollType>[
-    PageViewScrollType.full,
-    PageViewScrollType.drag,
-    PageViewScrollType.none,
-  ];
-}
-
 extension PageViewScrollType_IntExt on int{
   /// int 转枚举
   PageViewScrollType? toPageViewScrollType([bool isClamp = true]){
-    final allCases = PageViewScrollTypeExt.allCases;
+    final allCases = PageViewScrollType.values;
     if (!isClamp) {
       if (this < 0 || this > allCases.length - 1) {
         return null;
@@ -501,7 +492,7 @@ extension PageViewScrollType_IntExt on int{
 
   /// int 转枚举
   PageViewScrollType get pageViewScrollType{
-    final allCases = PageViewScrollTypeExt.allCases;
+    final allCases = PageViewScrollType.values;
     // final index = this.clamp(0, allCases.length - 1);
     // return allCases[index];
     return this.toPageViewScrollType(true) ?? allCases.first;
