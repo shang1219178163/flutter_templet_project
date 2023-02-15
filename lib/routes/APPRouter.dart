@@ -25,6 +25,7 @@ import 'package:flutter_templet_project/pages/demo/DragAndDropDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FittedBoxDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FlexDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FlexibleDemo.dart';
+import 'package:flutter_templet_project/pages/demo/FlexibleSpaceDemo.dart';
 import 'package:flutter_templet_project/pages/demo/GradientDemo.dart';
 import 'package:flutter_templet_project/pages/demo/HorizontalCellDemo.dart';
 import 'package:flutter_templet_project/pages/demo/IgnorePointerDemo.dart';
@@ -36,6 +37,7 @@ import 'package:flutter_templet_project/pages/demo/ListViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ListViewOneDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MarqueeWidgetDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MaterialBannerDemo.dart';
+import 'package:flutter_templet_project/pages/demo/MaterialDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ModalBarrierDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MyPopverDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NavigationToolbarDemo.dart';
@@ -413,6 +415,8 @@ class APPRouter {
   static const segmentTabBarNewDemo = '/segmentTabBarNewDemo';
   static const enhanceTabBarDemo = '/enhanceTabBarDemo';
   static const nnCollectionNavWidgetDemo = '/nnCollectionNavWidgetDemo';
+  static const materialDemo = '/materialDemo';
+  static const flexibleSpaceDemo = '/flexibleSpaceDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -649,6 +653,8 @@ class AppPage {
     GetPage(name: APPRouter.overflowDemo, page: () => OverflowDemo(),),
     GetPage(name: APPRouter.enhanceTabBarDemo, page: () => EnhanceTabBarDemo(),),
     GetPage(name: APPRouter.nnCollectionNavWidgetDemo, page: () => NNCollectionNavWidgetDemo(),),
+    GetPage(name: APPRouter.materialDemo, page: () => MaterialDemo(),),
+    GetPage(name: APPRouter.flexibleSpaceDemo, page: () => FlexibleSpaceDemo(),),
 
 
   ];

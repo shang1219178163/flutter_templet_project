@@ -101,12 +101,45 @@ extension BuildContextExt on BuildContext {
 
   get scaffoldMessenger => ScaffoldMessenger.of(this);
 
-  showSnackBar(SnackBar snackBar, [bool isReplace = false]) {
-    if (isReplace) {
-      // scaffoldMessenger.hideCurrentSnackBar();
+  /// 隐藏 SnackBar
+  hideSnackBar({bool isClear = false}) {
+    if (isClear) {
+      scaffoldMessenger.clearSnackBars();
+    } else {
+      scaffoldMessenger.hideCurrentSnackBar();
+    }
+  }
+
+  /// 展示 SnackBar
+  showSnackBar(SnackBar snackBar, {bool isClear = false, bool isReplace = false}) {
+    if (isClear) {
       scaffoldMessenger.clearSnackBars();
     }
-    this.scaffoldMessenger.showSnackBar(snackBar);
+    if (isReplace) {
+      scaffoldMessenger.hideCurrentSnackBar();
+    }
+    hideSnackBar(isClear: isClear);
+    scaffoldMessenger.showSnackBar(snackBar);
+  }
+
+  /// 隐藏 MaterialBanner
+  hideMaterialBanner({bool isClear = false}) {
+    if (isClear) {
+      scaffoldMessenger.clearMaterialBanners();
+    } else {
+      scaffoldMessenger.hideCurrentMaterialBanner();
+    }
+  }
+
+  /// 展示 MaterialBanner
+  showMaterialBanner(MaterialBanner banner, {bool isClear = false, bool isReplace = false}) {
+    if (isClear) {
+      scaffoldMessenger.clearMaterialBanners();
+    }
+    if (isReplace) {
+      scaffoldMessenger.hideCurrentMaterialBanner();
+    }
+    scaffoldMessenger.showMaterialBanner(banner);
   }
 
   ///alert弹窗
@@ -296,7 +329,7 @@ extension StatefulWidgetExt<T extends StatefulWidget> on State<T> {
   /// 扩展属性 ScaffoldMessenger.of(this.context);
   get scaffoldMessenger => this.context.scaffoldMessenger;
   /// 扩展方法
-  showSnackBar(SnackBar snackBar, [bool isReplace = false]) => this.context.showSnackBar(snackBar, isReplace);
+  showSnackBar(SnackBar snackBar, {bool isClear = false}) => this.context.showSnackBar(snackBar, isClear: isClear);
 }
 
 

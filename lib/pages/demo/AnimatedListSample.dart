@@ -100,7 +100,7 @@ class _AnimatedListSampleState extends State<AnimatedListSample> {
 
   showToast(String msg) {
     final snack = SnackBar(content: Text(msg));
-    context.showSnackBar(snack, true);
+    context.showSnackBar(snack);
   }
 }
 

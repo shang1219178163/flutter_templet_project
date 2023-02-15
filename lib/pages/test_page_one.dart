@@ -29,5 +29,38 @@ class TestPageOne extends StatelessWidget {
 
   onDone() {
     print("onDone");
+
+    final nums = [1,3,5,6];
+    final result = searchInsert(nums, 5);
+    print("onDone $result");
+    // print("onDone ${nums.reversed}");
+    // for (int i = 0; i < nums.length; i++) {
+    //   print("onDone ${i}_${nums[i]}");
+    // }
+    //
+    // for(int i = nums.length - 1; i >= 0; i--) {
+    //   print("onDone_ ${i}_${nums[i]}");
+    // }
+  }
+
+  int searchInsert(List<int> nums, int target) {
+    for(int i = nums.length - 1; i >= 0; i--) {
+      int curr = nums[i];
+      if(curr == target) {
+        return i;
+      } else if(curr < target ) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  int ? searchInsertNew(List<int> nums, int target) {
+    for(int i = 0; i<nums.length; i++) {
+      if(nums[i] == target || nums[i] > target) {
+        return i;
+      }
+    }
+    return nums.length;
   }
 }

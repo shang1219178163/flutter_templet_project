@@ -5,29 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/edge_insets_ext.dart';
 
+/// 默认图标大小
 const double DEFALUT_ICON_SIZE = 44;
-const int TEXT_AREA_HEIGHT = 31;
-const double CROSS_AXIS_SP = 10;
-const double TEXT_HEIGHT = 18;
+/// 默认间距
+const double SPACING = 10;
 
-/// PageView 滚动方式
-enum PageViewScrollType {
-  /// 整屏滑动
-  full, // 0
-  /// 拖拽滑动
-  drag, // 1
-  /// 禁用滑动
-  none, // 2
-}
-
-extension PageViewScrollTypeExt on PageViewScrollType{
-  /// 变量集合
-  static const allCases = <PageViewScrollType>[
-    PageViewScrollType.full,
-    PageViewScrollType.drag,
-    PageViewScrollType.none,
-  ];
-}
 
 /// 图文导航
 class NNCollectionNavWidget extends StatefulWidget {
@@ -42,7 +24,7 @@ class NNCollectionNavWidget extends StatefulWidget {
     this.textHeight = 16,
     this.textGap = 0,
     this.columnSpacing = 16,
-    this.rowSpacing = CROSS_AXIS_SP,
+    this.rowSpacing = SPACING,
     this.autoAdjustHeight = true,
     this.indicatorItemHeight = 2,
     this.indicatorItemWidth = 12,
@@ -449,7 +431,6 @@ class _NNCollectionNavWidgetState extends State<NNCollectionNavWidget> {
 }
 
 
-
 class AttrNavItem {
   // 唯一标识
   int? id;
@@ -485,4 +466,45 @@ class AttrNavItem {
 }
 
 
+/// PageView 滚动方式
+enum PageViewScrollType {
+  /// 整屏滑动
+  full, // 0
+  /// 拖拽滑动
+  drag, // 1
+  /// 禁用滑动
+  none, // 2
+}
 
+extension PageViewScrollTypeExt on PageViewScrollType{
+  /// 变量集合
+  static const allCases = <PageViewScrollType>[
+    PageViewScrollType.full,
+    PageViewScrollType.drag,
+    PageViewScrollType.none,
+  ];
+}
+
+extension PageViewScrollType_IntExt on int{
+  /// int 转枚举
+  PageViewScrollType? toPageViewScrollType([bool isClamp = true]){
+    final allCases = PageViewScrollTypeExt.allCases;
+    if (!isClamp) {
+      if (this < 0 || this > allCases.length - 1) {
+        return null;
+      }
+      return allCases[this];
+    }
+    final index = this.clamp(0, allCases.length - 1);
+    return allCases[index];
+  }
+
+  /// int 转枚举
+  PageViewScrollType get pageViewScrollType{
+    final allCases = PageViewScrollTypeExt.allCases;
+    // final index = this.clamp(0, allCases.length - 1);
+    // return allCases[index];
+    return this.toPageViewScrollType(true) ?? allCases.first;
+  }
+
+}

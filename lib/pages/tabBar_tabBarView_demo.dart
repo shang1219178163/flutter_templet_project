@@ -310,6 +310,7 @@ var _tuples = [
 
 
 var _list = [
+  Tuple2(APPRouter.materialDemo, "materialDemo", ),
   Tuple2(APPRouter.alertDialogDemo, "AlertDialog", ),
   Tuple2(APPRouter.alertSheetDemo, "AlertSheet", ),
   Tuple2(APPRouter.appWebViewDemo, "appWebViewDemo", ),
@@ -419,6 +420,7 @@ var _list = [
   Tuple2(APPRouter.boxShadowDemo, "BoxShadow 阴影", ),
   Tuple2(APPRouter.borderDemo, "buttonBorderDemo", ),
   Tuple2(APPRouter.overflowDemo, "overflowDemo", ),
+  Tuple2(APPRouter.flexibleSpaceDemo, "flexibleSpaceDemo", ),
 
 
 ];

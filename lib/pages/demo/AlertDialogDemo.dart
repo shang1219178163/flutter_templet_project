@@ -161,7 +161,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
               child: TextButton(
                 onPressed: () {
                   alignment = e;
-                  context.showSnackBar(SnackBar(content: Text(name)), true);
+                  context.showSnackBar(SnackBar(content: Text(name)),);
                 },
                 child: Text(name, style: TextStyle(color: Colors.white),)
               ),

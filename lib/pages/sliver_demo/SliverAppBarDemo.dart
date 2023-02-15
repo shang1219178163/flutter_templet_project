@@ -32,7 +32,11 @@ class _SliverAppBarDemoState extends State<SliverAppBarDemo>
               fit: BoxFit.cover,
               height: 250,
             ),
-            // stretchModes: [StretchMode.zoomBackground],   // 默认就是StretchMode.zoomBackground
+            stretchModes: [
+              StretchMode.fadeTitle,
+              // StretchMode.blurBackground,
+              // StretchMode.zoomBackground
+            ],
           ),
         ),
         SliverList(

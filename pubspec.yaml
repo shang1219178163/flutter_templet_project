@@ -34,7 +34,7 @@ dependencies:
 
   flutter_slidable: ^0.6.0
   fluttertoast: ^8.0.7
-  event_bus: '>=2.0.0'
+  event_bus: ^2.0.0
 
 #  flutter_local_notifications: ^5.0.0+4
   url_launcher: ^6.0.4
@@ -85,6 +85,7 @@ dependencies:
   pull_to_refresh: ^1.6.5
   flutter_easyrefresh: 2.2.2
 #  easy_refresh: ^3.0.4+2
+  visibility_detector: ^0.2.2
 
   auto_size_text: ^2.1.0
   table_calendar: ^2.3.3
@@ -102,12 +103,11 @@ dependencies:
   shimmer_animation: ^2.1.0+1
   image_gallery_saver: ^1.7.1
 
+  flutter_swiper_null_safety: ^1.0.0
   flutter_smart_dialog: ^4.2.1
   flutter_rating_bar: ^4.0.0
   desktop_drop: ^0.3.3
   badges: ^2.0.3
-  flutter_swiper_null_safety: ^1.0.0
-  visibility_detector: ^0.2.2
   svgaplayer_flutter: ^2.0.0
 #  flutter_svg: ^1.1.6
   sliver_tools: 0.2.7

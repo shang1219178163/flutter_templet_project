@@ -47,6 +47,13 @@ class SnackBarDemoState extends State<SnackBarDemo> {
               },
               icon: Icon(Icons.all_inclusive),
             ),
+            IconButton(
+              onPressed: () {
+                showMaterialBanner();
+                showMaterialBanner();
+              },
+              icon: Icon(Icons.change_circle),
+            ),
           ],
         ),
         body: Builder(builder: (BuildContext context) {
@@ -67,15 +74,15 @@ class SnackBarDemoState extends State<SnackBarDemo> {
                     DashLine(color: Colors.red,),
 
                     _buildItem(text: '显示SnackBar, 覆盖 isCenter', onPressed: () {
-                      showSnackBar(buildSnackBar(behavior: behavior, isCenter: true), true);
+                      showSnackBar(buildSnackBar(behavior: behavior, isCenter: true),);
                     }),
 
                     _buildItem(text: '显示SnackBar, 覆盖', onPressed: () {
-                      showSnackBar(buildSnackBar(behavior: behavior), true);
+                      showSnackBar(buildSnackBar(behavior: behavior), );
                     }),
 
                     _buildItem(text: '显示断网SnackBar, 覆盖', onPressed: () {
-                      showSnackBar(buildSnackBar2(), true);
+                      showSnackBar(buildSnackBar2(), );
                     }),
                     Spacer(),
                   ],
@@ -158,6 +165,24 @@ class SnackBarDemoState extends State<SnackBarDemo> {
       //     right: 20,
       //     left: 20),
     );
+  }
+
+  /// 顶部 MaterialBanner
+  showMaterialBanner() {
+    final banner = MaterialBanner(
+      content: Text('Hello, I am a Material Banner ${DateTime.now()}'),
+      leading: const Icon(Icons.info),
+      backgroundColor: Colors.yellow,
+      actions: [
+        TextButton(
+          child: const Text('Dismiss'),
+          onPressed: () => ScaffoldMessenger.of(context).hideCurrentMaterialBanner(),
+          // onPressed: () => context.hideMaterialBanner(isClear: false),
+        ),
+      ],
+    );
+    // ScaffoldMessenger.of(context).showMaterialBanner(banner);
+    context.showMaterialBanner(banner, isClear: false,);
   }
 
 }

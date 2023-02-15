@@ -216,7 +216,7 @@ class _ProviderListDemoState extends State<ProviderListDemo> {
   }
 
   void update() {
-    showSnackBar(SnackBar(content: Text("数据变化监听回调, 刷新重建界面",)), true);
+    showSnackBar(SnackBar(content: Text("数据变化监听回调, 刷新重建界面",)));
     // ddlog("数据变化监听回调, 刷新重建界面");
     setState(() {});
   }
@@ -339,7 +339,7 @@ class _ProviderListDemoState extends State<ProviderListDemo> {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('CartModel num\'s +1')));
 
     } else {
-      showSnackBar(SnackBar(content: Text('CartModel num\'s -1')), true);
+      showSnackBar(SnackBar(content: Text('CartModel num\'s -1')));
     }
 
   }

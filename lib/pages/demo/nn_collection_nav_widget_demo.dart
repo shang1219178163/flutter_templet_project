@@ -45,7 +45,7 @@ class _NNCollectionNavWidgetDemoState extends State<NNCollectionNavWidgetDemo> {
   /// 垂直间距
   double columnSpacing = 16;
   /// 水平间距
-  double rowSpacing = CROSS_AXIS_SP;
+  double rowSpacing = SPACING;
   /// 文字间距
   double textOffset = 5;
 
@@ -84,7 +84,7 @@ class _NNCollectionNavWidgetDemoState extends State<NNCollectionNavWidgetDemo> {
           child: Text(e,
             style: TextStyle(color: Colors.white),
           ),
-          onPressed: () => print(e),)
+          onPressed: onPressed,)
         ).toList(),
       ),
       body: ListView(
@@ -98,6 +98,12 @@ class _NNCollectionNavWidgetDemoState extends State<NNCollectionNavWidgetDemo> {
         ]
       ),
     );
+  }
+
+  onPressed(){
+    print("PageViewScrollType.full.index:${PageViewScrollType.drag.index}");
+    print("PageViewScrollType.full:${PageViewScrollType.drag.toString()}");
+
   }
 
   /// 多值变化

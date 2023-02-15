@@ -18,7 +18,7 @@ class ConnectivityService {
         }
       });
     } catch (e, trace) {
-      Log.error('ConnectivityService', e, trace);
+      // Log.error('ConnectivityService', e, trace);
     }
   }
 
@@ -57,15 +57,9 @@ class ConnectivityService {
 mixin AutoListenerConnection<T extends StatefulWidget> on State<T> {
   @override
   void initState() {
-    try {
-      if (connectivityListener != null) {
-        ConnectivityService.instance.removeListener(connectivityListener!);
-      }
-    } catch (e) {
-      log("remove error occur on init state auto listener connect!");
-    }
     if (connectivityListener != null) {
-      ConnectivityService.instance.addListener(connectivityListener!);
+      ConnectivityService.instance.removeListener(connectivityListener);
+      ConnectivityService.instance.addListener(connectivityListener);
     }
     super.initState();
   }
