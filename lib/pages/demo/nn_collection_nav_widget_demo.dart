@@ -101,9 +101,10 @@ class _NNCollectionNavWidgetDemoState extends State<NNCollectionNavWidgetDemo> {
   }
 
   onPressed(){
-    print("PageViewScrollType.index:${PageViewScrollType.full.index}");
-    print("PageViewScrollType.toString:${PageViewScrollType.drag.toString()}");
-    print("PageViewScrollType.values:${PageViewScrollType.values}");
+    print("枚举值索引: ${PageViewScrollType.full.index}");
+    print("枚举值字符串: ${PageViewScrollType.drag.toString()}");
+    print("枚举值集合: ${PageViewScrollType.values}");
+    print("int 转枚举: ${0.toPageViewScrollType()}");
 
   }
 

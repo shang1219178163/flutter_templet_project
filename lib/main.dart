@@ -77,6 +77,10 @@ Future<void> main() async {
 }
 
 void setCustomErrorPage(){
+  // FlutterError.onError = (details) {
+  //   FlutterError.presentError(details);
+  // };
+
   ErrorWidget.builder = (FlutterErrorDetails details){
     print("flutterErrorDetails:${details.toString()}");
     return ErrorCustomWidget(details: details);
