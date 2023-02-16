@@ -55,34 +55,34 @@ class _NotificationListenerDemoState extends State<NotificationListenerDemo> {
 
   _buildFloatingActionButton() {
     return ValueListenableBuilder(
-        valueListenable: isScrolling,
-        builder: (context, bool value, child) {
-          print('Offstage value:${value}');
-          return Offstage(
-            offstage: value,
-            child: FloatingActionButton(
-              tooltip: 'Increment',
-              child: ValueListenableBuilder(
-                  valueListenable: progress,
-                  builder: (context, double value, child) {
-                    // print('isScrolling:${isScrolling.value} value: ${value.toString()}');
-                    final progressInfo = (value*100).toInt();
-                    if (value >= 1.0) {
-                      return Icon(Icons.arrow_upward);
-                    }
-                    return Text("${progressInfo}%");
-                  }
-              ),
-              onPressed: () {
-                if (progress.value >= 1.0) {
-                  _scrollController.jumpTo(0);
-                } else {
-                  print('progress.value: ${progress.value.toStringAsFixed(2)}');
+      valueListenable: isScrolling,
+      builder: (context, bool value, child) {
+        print('Offstage value:${value}');
+        return Offstage(
+          offstage: value,
+          child: FloatingActionButton(
+            tooltip: 'Increment',
+            child: ValueListenableBuilder(
+              valueListenable: progress,
+              builder: (context, double value, child) {
+                // print('isScrolling:${isScrolling.value} value: ${value.toString()}');
+                final progressInfo = (value*100).toInt();
+                if (value >= 1.0) {
+                  return Icon(Icons.arrow_upward);
                 }
-              },
+                return Text("${progressInfo}%");
+              }
             ),
-          );
-        }
+            onPressed: () {
+              if (progress.value >= 1.0) {
+                _scrollController.jumpTo(0);
+              } else {
+                print('progress.value: ${progress.value.toStringAsFixed(2)}');
+              }
+            },
+          ),
+        );
+      }
     );
   }
 
@@ -113,6 +113,22 @@ class _NotificationListenerDemoState extends State<NotificationListenerDemo> {
     return false;//为 true，则事件会阻止向上冒泡，不推荐(除非有必要)
   }
 
+  /// 监听尺寸改变
+  _buildSizeChangedLayoutNotifier() {
+    return NotificationListener<SizeChangedLayoutNotification>(
+      onNotification: _onNotification,
+      child: SizeChangedLayoutNotifier(
+        // key: _filterBarChangeKey,
+        child: Wrap(),
+      )
+    );
+  }
+
+  bool _onNotification(SizeChangedLayoutNotification notification) {
+    // change height here
+    // _filterBarChangeKey = GlobalKey();
+    return false;
+  }
 }
 
 

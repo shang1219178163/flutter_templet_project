@@ -1,4 +1,4 @@
-// import 'package:flutter/foundation.dart';
+//
 // import 'package:flutter/material.dart';
 // import 'package:flutter/services.dart';
 //
@@ -7,25 +7,15 @@
 //   showMessage,
 // }
 //
-// class SampleApp extends StatelessWidget {
-//   const SampleApp({Key? key}) : super(key: key);
+//
+// class PlatformMenuBarDemo extends StatefulWidget {
+//   const PlatformMenuBarDemo({Key? key}) : super(key: key);
 //
 //   @override
-//   Widget build(BuildContext context) {
-//     return const MaterialApp(
-//       home: Scaffold(body: MyMenuBarApp()),
-//     );
-//   }
+//   State<PlatformMenuBarDemo> createState() => _PlatformMenuBarDemoState();
 // }
 //
-// class MyMenuBarApp extends StatefulWidget {
-//   const MyMenuBarApp({Key? key}) : super(key: key);
-//
-//   @override
-//   State<MyMenuBarApp> createState() => _MyMenuBarAppState();
-// }
-//
-// class _MyMenuBarAppState extends State<MyMenuBarApp> {
+// class _PlatformMenuBarDemoState extends State<PlatformMenuBarDemo> {
 //   String _message = 'Hello';
 //   bool _showMessage = false;
 //

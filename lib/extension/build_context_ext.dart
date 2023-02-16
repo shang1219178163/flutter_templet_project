@@ -98,6 +98,11 @@ extension BuildContextExt on BuildContext {
 
   get scaffoldMessenger => ScaffoldMessenger.of(this);
 
+  /// 清除 SnackBar
+  clearSnackBars() {
+    scaffoldMessenger.clearSnackBars();
+  }
+
   /// 隐藏 SnackBar
   hideSnackBar({bool isClear = false}) {
     if (isClear) {
@@ -126,6 +131,11 @@ extension BuildContextExt on BuildContext {
     } else {
       scaffoldMessenger.hideCurrentMaterialBanner();
     }
+  }
+
+  /// 清除 MaterialBanner
+  clearMaterialBanners() {
+    scaffoldMessenger.clearMaterialBanners();
   }
 
   /// 展示 MaterialBanner

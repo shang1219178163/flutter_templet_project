@@ -21,8 +21,9 @@ class ValueListenableBuilderDemo extends StatefulWidget {
 
 class _ValueListenableBuilderDemoState extends State<ValueListenableBuilderDemo> {
 
-  final ValueNotifier<int> _counter = ValueNotifier<int>(0);
+  var _counter = ValueNotifier<int>(0);
   final Widget goodJob = const Text('Good job!');
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,6 +36,8 @@ class _ValueListenableBuilderDemoState extends State<ValueListenableBuilderDemo>
           children: <Widget>[
             const Text('You have pushed the button this many times:'),
             ValueListenableBuilder<int>(
+              valueListenable: _counter,
+              child: goodJob,
               builder: (BuildContext context, int value, Widget? child) {
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -44,8 +47,6 @@ class _ValueListenableBuilderDemoState extends State<ValueListenableBuilderDemo>
                   ],
                 );
               },
-              valueListenable: _counter,
-              child: goodJob,
             )
           ],
         ),
