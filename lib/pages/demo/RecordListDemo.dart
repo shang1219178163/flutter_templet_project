@@ -43,23 +43,20 @@ class _RecordListDemoState extends State<RecordListDemo> {
   void dispose() {
     super.dispose();
 
-    FocusScope.of(context).requestFocus(FocusNode());
+    // FocusScope.of(context).requestFocus(FocusNode());
   }
 
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title ?? "$widget"),
-        ),
-        body: buildListView(context, list),
-        floatingActionButton: FloatingActionButton(
-          onPressed: addWeight,
-          child: Icon(Icons.add),
+      appBar: AppBar(
+        title: Text(widget.title ?? "$widget"),
       ),
-        
+      body: buildListView(context, list),
+      floatingActionButton: FloatingActionButton(
+        onPressed: addWeight,
+        child: Icon(Icons.add),
+      ),
     );
   }
 
@@ -69,9 +66,7 @@ class _RecordListDemoState extends State<RecordListDemo> {
       itemBuilder: (context, index) {
         final item = Text(list[index]);
         // return ListTile(leading: Text(index.toString()), trailing: item,);
-        // return buildDismissible(context, index);
-        return ListTile(leading: Text(index.toString()), trailing: item,);
-
+        return buildListTile(index: index, addDismissible: true);
       },
       separatorBuilder: (context, index) {
         return Divider(
@@ -84,32 +79,37 @@ class _RecordListDemoState extends State<RecordListDemo> {
     );
   }
   
-  Widget buildDismissible(BuildContext context, int index) {
+  Widget buildListTile({required int index, bool addDismissible = false}) {
     String item = list[index];
 
+    final child = ListTile(leading: Text(item.toString()), trailing: Text("滑动删除"),);
+    if (!addDismissible) {
+      return child;
+    }
     return Dismissible(
+      key: Key("$item"),
+      movementDuration: Duration(milliseconds: 100),
       onDismissed: (direction) {
-        //参数暂时没有用到，则用下划线表示
         print("--removeAt---" + item.toString());
         list.removeAt(index);
 
+        ScaffoldMessenger.of(context).hideCurrentSnackBar();
         ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('删除了${index}'),
-            ));
+            SnackBar(content: Text('删除了${item.toString()}'),
+         ));
+        setState(() {});
       },
-      // 监听
-      movementDuration: Duration(milliseconds: 100),
-      key: Key("$item"),
-      child: ListTile(leading: Text(item.toString()), trailing: Text(item),),
       background: Container(
         color: Color(0xffff0000),
         // child: Text("删除"),
       ),
+      child: child,
     );
   }
 
   void addWeight() {
     final datetimeStr = DateFormat.yMMMd().format(selectedDate);
+    final bottom = MediaQuery.of(context).viewInsets.bottom;
 
     showModalBottomSheet(
       isScrollControlled: true,
@@ -122,9 +122,7 @@ class _RecordListDemoState extends State<RecordListDemo> {
       builder: (context) {
         return Container(
           height: 360,
-          width: MediaQuery.of(context).size.width,
-          margin:
-          EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+          margin: EdgeInsets.only(bottom: bottom),
           padding: EdgeInsets.all(16.0),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
@@ -134,7 +132,7 @@ class _RecordListDemoState extends State<RecordListDemo> {
             children: [
               Text(
                 'Register Weight',
-                style:TextStyle(
+                style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 16.0,
                 ),
@@ -161,53 +159,55 @@ class _RecordListDemoState extends State<RecordListDemo> {
                   ),
                   Spacer(),
                   Container(
-                      padding: EdgeInsets.symmetric(horizontal: 4),
-                      margin: EdgeInsets.symmetric(vertical: 8.0),
-                      height: 36,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(6),
-                      ),
-                      child: StatefulBuilder(
-                        builder: (context, setState) {
-                          return OutlinedButton(
-                            onPressed: () async {
-                              datePickerSelect(context);
-                            },
-                            child: Row(
-                              mainAxisAlignment:
-                              MainAxisAlignment.spaceBetween,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.only(right: 16.0),
-                                  child: Text('${datetimeStr}'),
-                                ),
-                                Icon(Icons.calendar_today_outlined),
-                              ],
-                            ),
-                          );
-                        },
-                      )),
+                    padding: EdgeInsets.symmetric(horizontal: 4),
+                    margin: EdgeInsets.symmetric(vertical: 8.0),
+                    height: 36,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                    child: StatefulBuilder(
+                      builder: (context, setState) {
+                        return OutlinedButton(
+                          onPressed: () async {
+                            datePickerSelect(context);
+                          },
+                          child: Row(
+                            mainAxisAlignment:
+                            MainAxisAlignment.spaceBetween,
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(right: 16.0),
+                                child: Text('${datetimeStr}'),
+                              ),
+                              Icon(Icons.calendar_today_outlined),
+                            ],
+                          ),
+                        );
+                      },
+                    )
+                  ),
                 ],
               ),
-              Expanded(child: Container()),
+              Spacer(),
               ButtonBar(
                 children: [
                   ElevatedButton(
                     onPressed: () => Navigator.pop(context),
                     child: Text('Cancel',
-                        style: TextStyle(
-                          color: Theme.of(context).primaryColor,
-                        )),
+                      style: TextStyle(
+                        color: Theme.of(context).primaryColor,
+                      )
+                    ),
                     style: ElevatedButton.styleFrom(
                       primary: Colors.white,
                       // minimumSize: Size(96, 48),
                     ),
                   ),
                   ElevatedButton(
-                      child: Text('Register'),
-                  onPressed: () {
-                        actionRegister(context);
-                      },
+                    child: Text('Register'),
+                    onPressed: () {
+                      actionRegister();
+                    },
                   ),
                 ],
               ),
@@ -220,24 +220,23 @@ class _RecordListDemoState extends State<RecordListDemo> {
 
   ///时间选择
   datePickerSelect(BuildContext context) async {
-
     final now = DateTime.now();
 
     final result = await showDatePicker(
-        context: context,
-        initialDate: now,
-        firstDate: now.subtract( Duration(days: 90,),),
-        lastDate: now);
+      context: context,
+      initialDate: now,
+      firstDate: now.subtract( Duration(days: 90,),),
+      lastDate: now
+    );
 
     if (result != null) {
         setState(() {
           selectedDate = result;
       });
     }
-
   }
 
-  actionRegister(BuildContext context) {
+  actionRegister() {
     final datetimeStr = DateFormat.yMMMd().format(selectedDate);
     setState(() {
       // list.insert(0, datetimeStr);
@@ -246,7 +245,7 @@ class _RecordListDemoState extends State<RecordListDemo> {
     Navigator.pop(context);
   }
 
-  void _showSnackBar(BuildContext context, String message) {
+  void _showSnackBar(String message) {
     ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(message)),
     );

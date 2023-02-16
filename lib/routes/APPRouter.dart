@@ -71,6 +71,7 @@ import 'package:flutter_templet_project/pages/demo/WrapDemo.dart';
 import 'package:flutter_templet_project/pages/demo/box_shadow_demo.dart';
 import 'package:flutter_templet_project/pages/demo/drawImageNineDemo.dart';
 import 'package:flutter_templet_project/pages/demo/nn_collection_nav_widget_demo.dart';
+import 'package:flutter_templet_project/pages/demo/nn_horizontal_scroll_widget_demo.dart';
 import 'package:flutter_templet_project/pages/demo/smart_dialog_demo.dart';
 import 'package:flutter_templet_project/pages/demo/isolateDemo.dart';
 import 'package:flutter_templet_project/pages/demo/merge_images_demo.dart';
