@@ -105,7 +105,11 @@ class _NNCollectionNavWidgetDemoState extends State<NNCollectionNavWidgetDemo> {
     print("枚举值字符串: ${PageViewScrollType.drag.toString()}");
     print("枚举值集合: ${PageViewScrollType.values}");
     print("int 转枚举: ${0.toPageViewScrollType()}");
+    final result = [1,7,3,6,5,6].sublist(1).reduce((value, element) => value + element);
+    print("result: ${result}");
 
+    print("result: ${[1,7,3,6,5,6].sublist(0, 1)}");
+    print("result: ${[1,7,3,6,5,6].sublist(1 + 1)}");
   }
 
   /// 多值变化

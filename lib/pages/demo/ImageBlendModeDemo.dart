@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/painting_ext.dart';
 
 
 class ImageBlendModeDemo extends StatefulWidget {

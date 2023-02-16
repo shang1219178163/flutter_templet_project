@@ -75,6 +75,7 @@ import 'package:flutter_templet_project/pages/demo/smart_dialog_demo.dart';
 import 'package:flutter_templet_project/pages/demo/isolateDemo.dart';
 import 'package:flutter_templet_project/pages/demo/merge_images_demo.dart';
 import 'package:flutter_templet_project/pages/demo/merge_network_images_demo.dart';
+import 'package:flutter_templet_project/pages/operator_demo.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/SliverAppBarDemo.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/SliverPersistentHeaderDemo.dart';
 import 'package:flutter_templet_project/pages/system_color_page.dart';
@@ -417,6 +418,8 @@ class APPRouter {
   static const nnCollectionNavWidgetDemo = '/nnCollectionNavWidgetDemo';
   static const materialDemo = '/materialDemo';
   static const flexibleSpaceDemo = '/flexibleSpaceDemo';
+  static const operatorDemo = '/operatorDemo';
+  static const nnHorizontalScrollWidgetDemo = '/nnHorizontalScrollWidgetDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -653,8 +656,12 @@ class AppPage {
     GetPage(name: APPRouter.overflowDemo, page: () => OverflowDemo(),),
     GetPage(name: APPRouter.enhanceTabBarDemo, page: () => EnhanceTabBarDemo(),),
     GetPage(name: APPRouter.nnCollectionNavWidgetDemo, page: () => NNCollectionNavWidgetDemo(),),
+    GetPage(name: APPRouter.nnHorizontalScrollWidgetDemo, page: () => NNHorizontalScrollWidgetDemo(),),
+
+
     GetPage(name: APPRouter.materialDemo, page: () => MaterialDemo(),),
     GetPage(name: APPRouter.flexibleSpaceDemo, page: () => FlexibleSpaceDemo(),),
+    GetPage(name: APPRouter.operatorDemo, page: () => OperatorDemo(),),
 
 
   ];

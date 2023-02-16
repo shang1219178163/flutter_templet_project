@@ -421,6 +421,7 @@ var _list = [
   Tuple2(APPRouter.borderDemo, "buttonBorderDemo", ),
   Tuple2(APPRouter.overflowDemo, "overflowDemo", ),
   Tuple2(APPRouter.flexibleSpaceDemo, "flexibleSpaceDemo", ),
+  Tuple2(APPRouter.nnHorizontalScrollWidgetDemo, "nnHorizontalScrollWidgetDemo", ),
 
 
 ];
@@ -458,6 +459,7 @@ var _specials = [
   Tuple2(APPRouter.scrollControllerDemo, "滚动行为", ),
   Tuple2(APPRouter.buttonStyleDemo, "按钮样式研究", ),
   Tuple2(APPRouter.keyDemo, "key研究", ),
+  Tuple2(APPRouter.operatorDemo, "特殊操作符", ),
 
 ];
 
