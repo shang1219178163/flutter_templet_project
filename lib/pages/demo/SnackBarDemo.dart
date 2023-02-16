@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_boost/flutter_boost.dart';
 import 'package:flutter_templet_project/basicWidget/dash_line.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
@@ -32,7 +33,7 @@ class SnackBarDemoState extends State<SnackBarDemo> {
   @override
   void dispose() {
     // TODO: implement dispose
-    clearMaterialBars();
+    print("dispose");
     super.dispose();
   }
 
@@ -45,9 +46,10 @@ class SnackBarDemoState extends State<SnackBarDemo> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        // Future.delayed(Duration(milliseconds: 300), () async {
-        //   clearMaterialBars();
-        // });
+        Future.delayed(Duration(milliseconds: 300), () async {
+          clearMaterialBars();
+        });
+        print("WillPopScope");
        return true;
       },
       child: Scaffold(
@@ -212,8 +214,8 @@ class SnackBarDemoState extends State<SnackBarDemo> {
       actions: [
         TextButton(
           child: const Text('Dismiss'),
-          onPressed: () => ScaffoldMessenger.of(context).hideCurrentMaterialBanner(),
-          // onPressed: () => context.hideMaterialBanner(isClear: false),
+          // onPressed: () => ScaffoldMessenger.of(context).hideCurrentMaterialBanner(),
+          onPressed: () => context.hideMaterialBanner(isClear: false),
         ),
         // TextButton(
         //   child: const Text('Dismiss1'),
@@ -222,11 +224,13 @@ class SnackBarDemoState extends State<SnackBarDemo> {
         // ),
       ],
     );
-    // ScaffoldMessenger.of(context).showMaterialBanner(banner);
+    ScaffoldMessenger.of(context).showMaterialBanner(banner);
     context.showMaterialBanner(banner, isClear: false,);
   }
 
   clearMaterialBars() {
-    ScaffoldMessenger.of(context).clearMaterialBanners();
+    // ScaffoldMessenger.of(context).clearMaterialBanners();
+    context.clearMaterialBanners();
+    // context.hideMaterialBanner(isClear: false);
   }
 }
