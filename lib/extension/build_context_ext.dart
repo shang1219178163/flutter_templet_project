@@ -98,6 +98,7 @@ extension BuildContextExt on BuildContext {
 
   get scaffoldMessenger => ScaffoldMessenger.of(this);
 
+
   /// 清除 SnackBar
   clearSnackBars() {
     scaffoldMessenger.clearSnackBars();

@@ -348,6 +348,7 @@ var _list = [
 
   Tuple2(APPRouter.segmentControlDemo, "segmentControlDemo", ),
   Tuple2(APPRouter.snackBarDemo, "SnackBar", ),
+  Tuple2(APPRouter.snackBarDemoOne, "SnackBar封装", ),
   Tuple2(APPRouter.sliderDemo, "sliderDemo", ),
   Tuple2(APPRouter.stepperDemo, "stepperDemo", ),
   Tuple2(APPRouter.slidableDemo, "SlidableDemo", ),

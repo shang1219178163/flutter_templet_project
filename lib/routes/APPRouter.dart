@@ -56,6 +56,7 @@ import 'package:flutter_templet_project/pages/demo/ScrollbarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/SelectableTextDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ShortcutsDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ShortcutsDemoOne.dart';
+import 'package:flutter_templet_project/pages/demo/SnackBarDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/StackDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedStaggerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/StatefulBuilderDemo.dart';
@@ -239,6 +240,7 @@ class APPRouter {
   static const pageViewDemo = '/PageViewDemo';
   static const pageViewTabBarWidget = '/PageViewTabBarWidget';
   static const snackBarDemo = '/SnackBarDemo';
+  static const snackBarDemoOne = '/SnackBarDemoOne';
   static const cupertinoTabScaffoldDemo = '/CupertinoTabScaffoldDemo';
   static const pickerDemo = '/PickerDemo';
   static const datePickerDemo = '/datePickerDemo';
@@ -486,6 +488,7 @@ class AppPage {
     GetPage(name: APPRouter.pageViewDemo, page: () => PageViewDemo(),),
     GetPage(name: APPRouter.pageViewTabBarWidget, page: () => PageViewTabBarWidget(),),
     GetPage(name: APPRouter.snackBarDemo, page: () => SnackBarDemo(),),
+    GetPage(name: APPRouter.snackBarDemoOne, page: () => SnackBarDemoOne(),),
     GetPage(name: APPRouter.cupertinoTabScaffoldDemo, page: () => CupertinoTabScaffoldDemo(),),
     GetPage(name: APPRouter.pickerDemo, page: () => PickerDemo(),),
     GetPage(name: APPRouter.datePickerDemo, page: () => DatePickerDemo(),),

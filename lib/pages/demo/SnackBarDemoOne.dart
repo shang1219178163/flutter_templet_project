@@ -17,13 +17,13 @@ final kUpdateContent = """
 5、新增加了分类查看功能;
 """;
 
-class SnackBarDemo extends StatefulWidget {
+class SnackBarDemoOne extends StatefulWidget {
   
   @override
-  State<StatefulWidget> createState() => SnackBarDemoState();
+  State<StatefulWidget> createState() => SnackBarDemoOneState();
 }
 
-class SnackBarDemoState extends State<SnackBarDemo> {
+class SnackBarDemoOneState extends State<SnackBarDemoOne> with ScaffoldMessengerMixin {
 
   GlobalKey globalKey = GlobalKey();
 
@@ -47,12 +47,14 @@ class SnackBarDemoState extends State<SnackBarDemo> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        // await Future.delayed(new Duration(seconds: 1));
-        await Future.delayed(Duration(milliseconds: 1300), () async {
-          clearMaterialBars();
-        });
+        if (isShowingMaterial) {
+          showSnackBar(buildSnackBarTip());
+        }
+        // await Future.delayed(Duration(milliseconds: 1300), () async {
+        //   clearMaterialBanners();
+        // });
         print("WillPopScope");
-       return true;
+        return !isShowingMaterial;
       },
       child: Scaffold(
         persistentFooterButtons: ["one", "two"].map((e) => TextButton(
@@ -74,8 +76,7 @@ class SnackBarDemoState extends State<SnackBarDemo> {
             ),
             IconButton(
               onPressed: () {
-                showMaterialBanner();
-                showMaterialBanner();
+                showMyMaterialBanner();
               },
               icon: Icon(Icons.change_circle),
             ),
@@ -91,34 +92,34 @@ class SnackBarDemoState extends State<SnackBarDemo> {
       return RepaintBoundary(
         key: globalKey,
         child: Center(
-            child: Container(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Spacer(),
-                  _buildItem(text: '显示SnackBar, 不覆盖', onPressed: () {
-                    // final snackBar = buildSnackBar();
-                    // ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                    showSnackBar(buildSnackBar(behavior: behavior));
-                  }),
+          child: Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Spacer(),
+                _buildItem(text: '显示SnackBar, 不覆盖', onPressed: () {
+                  // final snackBar = buildSnackBar();
+                  // ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                  showSnackBar(buildSnackBar(behavior: behavior));
+                }),
 
-                  DashLine(color: Colors.red,),
+                DashLine(color: Colors.red,),
 
-                  _buildItem(text: '显示SnackBar, 覆盖 isCenter', onPressed: () {
-                    showSnackBar(buildSnackBar(behavior: behavior, isCenter: true),);
-                  }),
+                _buildItem(text: '显示SnackBar, 覆盖 isCenter', onPressed: () {
+                  showSnackBar(buildSnackBar(behavior: behavior, isCenter: true),);
+                }),
 
-                  _buildItem(text: '显示SnackBar, 覆盖', onPressed: () {
-                    showSnackBar(buildSnackBar(behavior: behavior), );
-                  }),
+                _buildItem(text: '显示SnackBar, 覆盖', onPressed: () {
+                  showSnackBar(buildSnackBar(behavior: behavior), );
+                }),
 
-                  _buildItem(text: '显示断网SnackBar, 覆盖', onPressed: () {
-                    showSnackBar(buildSnackBar2(), );
-                  }),
-                  Spacer(),
-                ],
-              ),
-            )
+                _buildItem(text: '显示断网SnackBar, 覆盖', onPressed: () {
+                  showSnackBar(buildSnackBar2(), );
+                }),
+                Spacer(),
+              ],
+            ),
+          )
         ),
       );
     });
@@ -130,15 +131,6 @@ class SnackBarDemoState extends State<SnackBarDemo> {
       child: Text(text),
     );
   }
-
-  // SnackBar buildFlushbar(BuildContext context) {
-  //   return Flushbar(
-  //     flushbarPosition: FlushbarPosition.TOP,
-  //     message:
-  //     "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
-  //     duration: Duration(seconds: 3),
-  //   )..show(context);
-  // }
 
   SnackBar buildSnackBar({
     bool isCenter = false,
@@ -199,15 +191,32 @@ class SnackBarDemoState extends State<SnackBarDemo> {
     );
   }
 
+  SnackBar buildSnackBarTip() {
+    return SnackBar(
+      onVisible: () {
+        print("显示SnackBar");
+      },
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(50))
+      ),
+      behavior: SnackBarBehavior.floating,
+      backgroundColor: Colors.orange,
+      content: Text('您有弹窗尚未关闭, 请退出后再退出页面'),
+    );
+  }
+
   /// 顶部 MaterialBanner
-  showMaterialBanner() {
+  showMyMaterialBanner() {
     final nowStr = "${DateTime.now()}".split(".").first;
 
     final banner = MaterialBanner(
       // padding: EdgeInsets.zero,
       // leadingPadding: EdgeInsets.zero,
       content: InkWell(
-        onTap: () => context.hideMaterialBanner(isClear: false),
+        onTap: () {
+          clearMaterialBanners();
+          print("isShowingMaterial:${isShowingMaterial}");
+        },
           child: Text('Hello, I am a Material Banner ${nowStr}' * 3)
       ),
       leading: const Icon(Icons.info),
@@ -217,22 +226,59 @@ class SnackBarDemoState extends State<SnackBarDemo> {
         TextButton(
           child: const Text('Dismiss'),
           // onPressed: () => ScaffoldMessenger.of(context).hideCurrentMaterialBanner(),
-          onPressed: () => context.hideMaterialBanner(isClear: false),
+          onPressed: () {
+            clearMaterialBanners();
+            print("isShowingMaterial:${isShowingMaterial}");
+          },
         ),
-        // TextButton(
-        //   child: const Text('Dismiss1'),
-        //   onPressed: () => ScaffoldMessenger.of(context).hideCurrentMaterialBanner(),
-        //   // onPressed: () => context.hideMaterialBanner(isClear: false),
-        // ),
       ],
     );
-    ScaffoldMessenger.of(context).showMaterialBanner(banner);
-    context.showMaterialBanner(banner, isClear: false,);
+
+    showMaterialBanner(banner, isClear: false,);
+    print("isShowingMaterial:${isShowingMaterial}");
+  }
+}
+
+
+mixin ScaffoldMessengerMixin<T extends StatefulWidget> on State<T>{
+  bool _isShowing = false;
+
+  /// ScaffoldMessengerMixin: 是否有 SnackBar 正在展示
+  bool get isShowing => _isShowing;
+
+  bool _isShowingMaterial = false;
+
+  /// ScaffoldMessengerMixin: 是否有 MaterialBanner 正在展示
+  bool get isShowingMaterial => _isShowingMaterial;
+
+
+  /// ScaffoldMessengerMixin: 展示 SnackBar
+  showSnackBar(SnackBar snackBar, {bool isClear = true}) {
+    if (isClear) {
+      ScaffoldMessenger.of(context).clearSnackBars();
+    }
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    _isShowing = true;
   }
 
-  clearMaterialBars() {
-    // ScaffoldMessenger.of(context).clearMaterialBanners();
-    context.clearMaterialBanners();
-    // context.hideMaterialBanner(isClear: false);
+  /// ScaffoldMessengerMixin: 清除 SnackBar
+  clearSnackBars() {
+    ScaffoldMessenger.of(context).clearSnackBars();
+    _isShowing = false;
+  }
+
+  /// ScaffoldMessengerMixin: 展示 MaterialBanner
+  showMaterialBanner(MaterialBanner snackBar, {bool isClear = true}) {
+    if (isClear) {
+      ScaffoldMessenger.of(context).clearMaterialBanners();
+    }
+    ScaffoldMessenger.of(context).showMaterialBanner(snackBar);
+    _isShowingMaterial = true;
+  }
+
+  /// ScaffoldMessengerMixin: 清除 MaterialBanner
+  clearMaterialBanners() {
+    ScaffoldMessenger.of(context).clearMaterialBanners();
+    _isShowingMaterial = false;
   }
 }
