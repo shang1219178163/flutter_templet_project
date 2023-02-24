@@ -8,24 +8,25 @@
 
 import 'package:flutter/material.dart';
 
+typedef NNSliverPersistentHeaderBuilder = Widget Function(BuildContext context, double shrinkOffset, bool overlapsContent);
+
 class NNSliverPersistentHeaderDelegate extends SliverPersistentHeaderDelegate {
+  const NNSliverPersistentHeaderDelegate({
+    Key? key,
+    required this.min,
+    required this.max,
+    required this.builder,
+  });
 
   final double min;
   final double max;
 
-  final Widget child;
+  final NNSliverPersistentHeaderBuilder builder;
 
-  const NNSliverPersistentHeaderDelegate({
-  	Key? key,
-    required this.min,
-    required this.max,
-    required this.child,
-  });
-
-
+  
   @override
   Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return child;
+    return builder(context, shrinkOffset, overlapsContent);
   }
 
   //SliverPersistentHeader最大高度
@@ -38,6 +39,6 @@ class NNSliverPersistentHeaderDelegate extends SliverPersistentHeaderDelegate {
 
   @override
   bool shouldRebuild(covariant NNSliverPersistentHeaderDelegate oldDelegate) {
-    return true;
+    return this.builder != oldDelegate.builder || this.min != oldDelegate.min || this.max != oldDelegate.max;
   }
 }
