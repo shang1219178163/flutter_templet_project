@@ -156,7 +156,36 @@ class TabBarSegmentState extends State<TabBarSegment> with SingleTickerProviderS
   @override
   Widget build(BuildContext context) {
     final items = _items;
-    
+
+    return TabBar(
+      controller: _tabController,
+      tabs: items,
+      onTap: (index){
+        widget.currentIndex = index;
+        widget.onTap?.call(index);
+        _tabController?.index = index;
+        setState(() {});
+      },
+      isScrollable: widget.isScrollable,
+      padding: widget.padding,
+      indicatorColor: widget.indicatorColor,
+      automaticIndicatorColorAdjustment: widget.automaticIndicatorColorAdjustment,
+      indicatorWeight: widget.indicatorWeight,
+      indicatorPadding: widget.indicatorPadding,
+      indicator: widget.indicator,
+      indicatorSize: widget.indicatorSize,
+      labelColor: widget.labelColor,
+      labelStyle: widget.labelStyle,
+      labelPadding: widget.labelPadding,
+      unselectedLabelColor: widget.unselectedLabelColor,
+      unselectedLabelStyle: widget.unselectedLabelStyle,
+      dragStartBehavior: widget.dragStartBehavior,
+      overlayColor: widget.overlayColor,
+      mouseCursor: widget.mouseCursor,
+      enableFeedback: widget.enableFeedback,
+      physics: widget.physics,
+    );
+
     return TabBar(
       controller: _tabController,
       tabs: items,

@@ -72,15 +72,18 @@ class SliverPersistentHeaderDemoOne extends StatelessWidget {
       "#${color.value.toRadixString(16).toUpperCase()}";
 
   Widget _buildPersistentHeader(String title) => SliverPersistentHeader(
-      pinned: true,
-      floating: true,
-      delegate: SliverPersistentHeaderBuilder(builder: (ctx, offset) => Container(
+    pinned: true,
+    floating: true,
+    delegate: SliverPersistentHeaderBuilder(
+      builder: (ctx, offset, overlapsContent) => Container(
         alignment: Alignment.center,
         color: Colors.orangeAccent,
         child: Text(
           "$title shrinkOffset:${offset.toStringAsFixed(1)}",
           style: TextStyle(fontSize: 20, color: Colors.white),
         ),
-      )));
+      )
+    )
+  );
 
 }

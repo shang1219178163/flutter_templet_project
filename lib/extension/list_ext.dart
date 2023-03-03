@@ -20,7 +20,7 @@ extension ListExt<T,E> on List<E> {
   }
   /// 带索引的map
   List<T> mapWithIdx<T>(T Function(E, int i) action) {
-    List<T> result = [];
+    var result = <T>[];
     for (int i = 0; i < this.length; i++) {
       result.add(action(this[i], i));
     }
@@ -29,7 +29,7 @@ extension ListExt<T,E> on List<E> {
 
   /// 数组降维
   List<T> flatMap(List<T> action(E e)) {
-    List<T> result = [];
+    var result = <T>[];
     this.forEach((e) {
       result.addAll(action(e));
     });
@@ -70,7 +70,7 @@ extension ListExt<T,E> on List<E> {
 
   /// 转为 Map<String, dynamic>
   Map<String, E> toMap() {
-    final Map<String, E> map = {};
+    var map = <String, E>{};
     for (var item in this) {
       map["${item}"] = item;
     }

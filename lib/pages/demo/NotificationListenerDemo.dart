@@ -150,31 +150,38 @@ class NotificationCustomDemoState extends State<NotificationCustomDemo> {
       appBar: AppBar(
         title: Text("$widget"),
     ),
-      body: NotificationListener<MyNotification>(
-        onNotification: (n) {
-          setState(() {
-            _msg += n.msg;
-          });
-          return true;
-        },
-        child: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Builder(
-                builder: (context) {
-                  return ElevatedButton(
-                    //按钮点击时分发通知
-                    onPressed: () => MyNotification("Hi").dispatch(context),
-                    child: Text("Send Notification"),
-                  );
-                },
+      body: StatefulBuilder(
+          builder: (context, setStates) {
+          return NotificationListener<MyNotification>(
+            onNotification: (n) {
+              _msg += n.msg;
+
+              // setState(() {});
+              Future.delayed(Duration(milliseconds: 100), () {
+                setStates(() {});
+              });//如果太过频繁会被冲掉,需要延迟才会触发 StatefulBuilder的builder
+              return true;
+            },
+            child: Center(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Builder(
+                    builder: (context) {
+                      return ElevatedButton(
+                        //按钮点击时分发通知
+                        onPressed: () => MyNotification("Hi").dispatch(context),
+                        child: Text("Send Notification"),
+                      );
+                    },
+                  ),
+                  Text(_msg),
+                  Material()
+                ],
               ),
-              Text(_msg),
-              Material()
-            ],
-          ),
-        ),
+            ),
+          );
+        }
       ),
     );
   }

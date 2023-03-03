@@ -106,5 +106,15 @@ extension BorderRadiusExt on BorderRadius{
       bottomRight: Radius.circular(bottomRight),
     );
   }
+
+  /// 根据函数转化
+  BorderRadius convert(Radius Function(Radius value) cb) {
+    return BorderRadius.only(
+      topLeft: cb(this.topLeft),
+      topRight: cb(this.topRight),
+      bottomLeft: cb(this.bottomLeft),
+      bottomRight: cb(this.bottomRight),
+    );
+  }
 }
 

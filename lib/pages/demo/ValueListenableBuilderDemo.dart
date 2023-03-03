@@ -22,6 +22,8 @@ class ValueListenableBuilderDemo extends StatefulWidget {
 class _ValueListenableBuilderDemoState extends State<ValueListenableBuilderDemo> {
 
   var _counter = ValueNotifier<int>(0);
+  final netState = ValueNotifier<MyResult>(MyResult.mobile);
+
   final Widget goodJob = const Text('Good job!');
 
   @override
@@ -47,6 +49,26 @@ class _ValueListenableBuilderDemoState extends State<ValueListenableBuilderDemo>
                   ],
                 );
               },
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children:MyResult.values.map((e) => FloatingActionButton(
+                child: Text("$e".split(".")[1]),
+                onPressed: () => netState.value = e,
+              )).toList(),
+            ),
+            ValueListenableBuilder<MyResult>(
+              valueListenable: netState,
+              child: const Text("child"),
+              builder: (context, value,  child) {
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    Text('$value'),
+                    child!,
+                  ],
+                );
+              },
             )
           ],
         ),
@@ -60,4 +82,13 @@ class _ValueListenableBuilderDemoState extends State<ValueListenableBuilderDemo>
 }
 
 
+enum MyResult {
+  /// WiFi: Device connected via Wi-Fi
+  wifi,
 
+  /// Mobile: Device connected to cellular network
+  mobile,
+
+  /// None: Device not connected to any network
+  none
+}

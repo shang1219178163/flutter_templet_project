@@ -37,7 +37,7 @@ class SliverPersistentHeaderDemo extends StatelessWidget {
       delegate: SliverPersistentHeaderBuilder(
         min: 60.0,
         max: 80.0,
-        builder: (ctx, offset) => SizedBox.expand(
+        builder: (ctx, offset, overlapsContent) => SizedBox.expand(
           child: Container(
             decoration: BoxDecoration(
               // color: Colors.white,

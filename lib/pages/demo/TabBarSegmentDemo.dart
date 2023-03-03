@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/EnhanceTab/enhance_tab_bar.dart';
 import 'package:flutter_templet_project/basicWidget/tab_bar_segment.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
@@ -27,8 +28,8 @@ class _SegmentTabBarDemoState extends State<SegmentTabBarDemo> with SingleTicker
 
   List<String> titles = List.generate(9, (index) => 'item_$index').toList();
 
-  GlobalKey<TabBarSegmentState> _globalKey = GlobalKey(debugLabel: "CustomeTabBar");
-  GlobalKey<TabBarSegmentState> _globalKey1 = GlobalKey();
+  final _globalKey = GlobalKey<TabBarSegmentState>(debugLabel: "CustomeTabBar");
+  // final _globalKey1 = GlobalKey<TabBarSegmentState>(debugLabel: "1");
 
   ValueNotifier<int> indexVN = ValueNotifier<int>(0);
 
@@ -108,7 +109,7 @@ class _SegmentTabBarDemoState extends State<SegmentTabBarDemo> with SingleTicker
     return ColoredBox(
       color: Theme.of(context).primaryColor,
       child: TabBarSegment(
-        key: _globalKey1,
+        // key: _globalKey1,
         initialIndex: 2,
         currentIndex: currentIndex,
         tabCount: titles.length,
@@ -166,7 +167,7 @@ class _SegmentTabBarDemoState extends State<SegmentTabBarDemo> with SingleTicker
   onDone() {
     print("onDone");
     _globalKey.currentState?.reset();
-    _globalKey1.currentState?.reset();
+    // _globalKey1.currentState?.reset();
   }
 }
 
@@ -195,7 +196,7 @@ class _SegmentTabBarNewDemoState extends State<SegmentTabBarNewDemo> with Single
   TabController? _tabController;
 
   GlobalKey<TabBarSegmentState> _globalKey = GlobalKey(debugLabel: "CustomeTabBar");
-  GlobalKey<TabBarSegmentState> _globalKey1 = GlobalKey();
+  // GlobalKey<TabBarSegmentState> _globalKey1 = GlobalKey();
 
   ValueNotifier<int> indexVN = ValueNotifier<int>(0);
 
@@ -222,8 +223,8 @@ class _SegmentTabBarNewDemoState extends State<SegmentTabBarNewDemo> with Single
   Widget build(BuildContext context) {
     // return buildPage();
     // return buildPageOne();
+    // return buildPageOneNew();
     return buildPageTwo();
-    return buildPageThree();
   }
 
   buildAppBottom({double height = 60}) {
@@ -271,7 +272,7 @@ class _SegmentTabBarNewDemoState extends State<SegmentTabBarNewDemo> with Single
   onDone() {
     print("onDone");
     _globalKey.currentState?.reset();
-    _globalKey1.currentState?.reset();
+    // _globalKey1.currentState?.reset();
   }
 
   Widget buildPage() {
@@ -359,122 +360,117 @@ class _SegmentTabBarNewDemoState extends State<SegmentTabBarNewDemo> with Single
         title: Text("buildPageTwo"),
       ),
       body: CustomScrollView(
-          slivers: [
-            SizedBox(height: 50),
-            ColoredBox(
-              color: Theme.of(context).primaryColor,
-              child: TabBarSegment(
-                isScrollable: true,
-                controller: _tabController,
-                initialIndex: 2,
-                currentIndex: currentIndex,
-                tabCount: titles.length,
-                onTap: (index){
-                  print("onTap: $index");
-                  selectedIndex = index;
-                },
-                itemBuilder: (context, index) {
-                  final e = titles[index];
-                  print("TabBarSegment itemBuilder: $index");
+        slivers: [
+          SizedBox(height: 50),
+          ColoredBox(
+            color: Theme.of(context).primaryColor,
+            child: TabBarSegment(
+              isScrollable: true,
+              controller: _tabController,
+              initialIndex: 2,
+              currentIndex: currentIndex,
+              tabCount: titles.length,
+              onTap: (index){
+                print("onTap: $index");
+                selectedIndex = index;
+              },
+              itemBuilder: (context, index) {
+                final e = titles[index];
+                print("TabBarSegment itemBuilder: $index");
 
-                  return ValueListenableBuilder<int>(
-                    valueListenable: indexVN,
-                    builder: (BuildContext context, int value, Widget? child) {
-                      print("ValueListenableBuilder111 indexVN: $index");
-                      final isSelected = (index == indexVN.value);
+                return ValueListenableBuilder<int>(
+                  valueListenable: indexVN,
+                  builder: (BuildContext context, int value, Widget? child) {
+                    print("ValueListenableBuilder111 indexVN: $index");
+                    final isSelected = (index == indexVN.value);
 
-                      return Tab(
-                        child: Text(e,
-                          style: TextStyle(
-                            color: isSelected ? Colors.red : Colors.yellow,
-                            fontSize: isSelected ? 20 : 15,
-                            // backgroundColor: Colors.greenAccent
-                          ),
+                    return Tab(
+                      child: Text(e,
+                        style: TextStyle(
+                          color: isSelected ? Colors.red : Colors.yellow,
+                          fontSize: isSelected ? 20 : 15,
+                          // backgroundColor: Colors.greenAccent
                         ),
-                      );
-                    }
-                  );
-                },
-              ),
-            ),
-            SizedBox(
-              height: 500,
-              child: TabBarView( //构建
-                controller: _tabController,
-                children: titles.map((e) {
-                  return Container(
-                    // color: ColorExt.random,
-                    alignment: Alignment.center,
-                    child: Text(e, style: TextStyle(color: Colors.red),),
-                  );
-                }).toList(),
-              ),
-            ),
-          ].map((e) => SliverToBoxAdapter(child: e,)).toList(),
-        )
-    );
-  }
-
-  Widget buildPageThree() {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text("buildPageTwo"),
-        ),
-        body: CustomScrollView(
-          slivers: [
-            ValueListenableBuilder<int>(
-              valueListenable: indexVN,
-              builder: (BuildContext context, int value, Widget? child) {
-                print("ValueListenableBuilder111 indexVN: $value");
-                final isSelected = (value == indexVN.value);
-
-                return ColoredBox(
-                  color: Theme.of(context).primaryColor,
-                  child: TabBarSegment(
-                    isScrollable: true,
-                    controller: _tabController,
-                    initialIndex: 2,
-                    currentIndex: currentIndex,
-                    tabCount: titles.length,
-                    onTap: (index){
-                      print("onTap: $index");
-                      selectedIndex = index;
-                    },
-                    itemBuilder: (context, index) {
-                      final e = titles[index];
-                      print("TabBarSegment itemBuilder: $index");
-
-                      return Tab(
-                        child: Text(e,
-                          style: TextStyle(
-                            color: isSelected ? Colors.red : Colors.yellow,
-                            fontSize: isSelected ? 20 : 15,
-                            // backgroundColor: Colors.greenAccent
-                          ),
-                        ),
-                      );
-                    },
-                  ),
+                      ),
+                    );
+                  }
                 );
-              }
+              },
             ),
-            SizedBox(
-              height: 500,
-              child: TabBarView( //构建
-                controller: _tabController,
-                children: titles.map((e) {
-                  return Container(
-                    // color: ColorExt.random,
-                    alignment: Alignment.center,
-                    child: Text(e, style: TextStyle(color: Colors.red),),
-                  );
-                }).toList(),
-              ),
+          ),
+          SizedBox(
+            height: 500,
+            child: TabBarView( //构建
+              controller: _tabController,
+              children: titles.map((e) {
+                return Container(
+                  color: ColorExt.random,
+                  alignment: Alignment.center,
+                  child: Text(e, style: TextStyle(color: Colors.red),),
+                );
+              }).toList(),
             ),
-          ].map((e) => SliverToBoxAdapter(child: e,)).toList(),
-        )
+          ),
+        ].map((e) => SliverToBoxAdapter(child: e,)).toList(),
+      )
     );
   }
 
+  Widget buildPageOneNew() {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title ?? "$widget"),
+        bottom: EnhanceTabBar(
+          isScrollable: true,
+          controller: _tabController,
+          // indicatorSize: TabBarIndicatorSize.label,
+          // indicatorSize: EnhanceTabBarIndicatorSize.tab,
+          indicatorSize: EnhanceTabBarIndicatorSize.fixedWidth,
+          labelPadding: EdgeInsets.symmetric(horizontal: 12),
+          // indicatorPadding: EdgeInsets.only(left: 16, right: 16),
+          indicator: UnderlineTabIndicator(
+              borderSide: BorderSide(
+                style: BorderStyle.solid,
+                width: 4,
+                color: Colors.red,
+              )
+          ),
+          tabs: titles.map((e) => Tab(
+            child: ValueListenableBuilder<int>(
+                valueListenable: indexVN,
+                builder: (BuildContext context, int value, Widget? child) {
+                  final index = titles.indexOf(e);
+                  if (index != 1){
+                    if (index == 2){
+                      return Tab(child: Text(e + e,),);
+                    }
+                    if (index == 3){
+                      return Tab(child: Text(e + e, style: TextStyle(fontSize: 20)),);
+                    }
+                    return Tab(text: e);
+                  }
+
+                  final url = (value == index) ? R.image.imgUrls[1] : R.image.imgUrls[0];
+                  return Tab(
+                    child: FadeInImage(
+                      image: NetworkImage(url),
+                      placeholder: AssetImage("images/flutter_logo.png"),
+                    ),
+                  );
+                }),
+          )).toList(),
+        ),
+      ),
+      body: TabBarView( //构建
+        controller: _tabController,
+        children: titles.map((e) {
+          return Container(
+            alignment: Alignment.center,
+            child: Text(e, style: TextStyle(color: Colors.red),),
+          );
+        }).toList(),
+      ),
+    );
+  }
 }
 

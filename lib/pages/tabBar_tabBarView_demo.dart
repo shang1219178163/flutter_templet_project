@@ -8,7 +8,7 @@
 
 import 'package:enhance_expansion_panel/enhance_expansion_panel.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/list_subtitle_cell.dart';
 import 'package:flutter_templet_project/basicWidget/app_update_card.dart';
 import 'package:flutter_templet_project/basicWidget/section_list_view.dart';
@@ -58,6 +58,14 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        systemOverlayStyle: SystemUiOverlayStyle(
+          // Status bar color
+          statusBarColor: Colors.red,
+
+          // Status bar brightness (optional)
+          // statusBarIconBrightness: Brightness.dark, // For Android (dark icons)
+          // statusBarBrightness: Brightness.light, // For iOS (dark icons)
+        ),
         // titleTextStyle: TextStyle(color: Colors.red),
         // toolbarTextStyle: TextStyle(color: Colors.orange),
         // iconTheme: IconThemeData(color: Colors.green),

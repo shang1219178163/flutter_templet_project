@@ -22,7 +22,7 @@ extension EdgeInsetsExt on EdgeInsets{
   }
 
   /// 根据函数转化
-  EdgeInsets change(double Function(double value) cb) {
+  EdgeInsets convert(double Function(double value) cb) {
     return EdgeInsets.only(
       top: cb(this.top),
       right: cb(this.right),
