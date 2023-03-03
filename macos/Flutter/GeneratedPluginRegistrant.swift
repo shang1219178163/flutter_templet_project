@@ -5,6 +5,7 @@
 import FlutterMacOS
 import Foundation
 
+import connectivity_macos
 import desktop_drop
 import path_provider_macos
 import photo_manager
@@ -12,6 +13,7 @@ import shared_preferences_macos
 import url_launcher_macos
 
 func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
+  ConnectivityPlugin.register(with: registry.registrar(forPlugin: "ConnectivityPlugin"))
   DesktopDropPlugin.register(with: registry.registrar(forPlugin: "DesktopDropPlugin"))
   PathProviderPlugin.register(with: registry.registrar(forPlugin: "PathProviderPlugin"))
   ImageScannerPlugin.register(with: registry.registrar(forPlugin: "ImageScannerPlugin"))

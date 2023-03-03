@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:connectivity/connectivity.dart';
 
 abstract class ConnectivityListener {
   void onNetStateChaneged(ConnectivityResult result);
@@ -43,7 +44,7 @@ class ConnectivityService {
   }
 
   removeListener(ConnectivityListener? listener) {
-    if (listener != null) {
+    if (listener != null && listeners.contains(listener)) {
       listeners.remove(listener);
     }
   }
