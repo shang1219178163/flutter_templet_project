@@ -81,23 +81,29 @@ extension BuildContextExt on BuildContext {
   }
 
   /// 扩展属性 Theme.of(this.context)
-  get theme => Theme.of(this);
+  ThemeData get theme => Theme.of(this);
   /// 扩展属性 Theme.of(this.context).primaryColor
-  get primaryColor => Theme.of(this).primaryColor;
+  Color get primaryColor => theme.primaryColor;
   /// 扩展属性 MediaQuery.of(this.context)
-  get mediaQuery => MediaQuery.of(this);
+  MediaQueryData get mediaQuery => MediaQuery.of(this);
   /// 扩展属性 MediaQuery.of(this.context).size
-  get screenSize => mediaQuery.size;
+  Size get screenSize => mediaQuery.size;
   /// 扩展属性 MediaQuery.of(this).devicePixelRatio
-  get devicePixelRatio => mediaQuery.devicePixelRatio;
+  double get devicePixelRatio => mediaQuery.devicePixelRatio;
 
-  // 有刘海的屏幕:44 没有刘海的屏幕为20
-  get statusBarHeight => mediaQuery.padding.header;
-  // 有刘海的屏幕:34 没有刘海的屏幕0
-  get bottomHeight => mediaQuery.padding.bottom;
+  /// 弹出键盘时键盘顶部高度
+  double get keyboardBottom => mediaQuery.viewInsets.bottom;
+
+  /// 安全区域距离顶部高度(电池栏高度:有刘海的屏幕:44 没有刘海的屏幕为20)
+  double get safeAreaTop => mediaQuery.viewPadding.top;
+
+  /// 没有弹出键盘时底部高度(有刘海的屏幕:34 没有刘海的屏幕0)
+  double get safeAreaBottom => mediaQuery.viewPadding.bottom;
+
+  /// 弹出键盘为0,不弹为 34
+  double get paddingBottom => mediaQuery.padding.bottom;
 
   get scaffoldMessenger => ScaffoldMessenger.of(this);
-
 
   /// 清除 SnackBar
   clearSnackBars() {
@@ -326,9 +332,23 @@ extension BuildContextExt on BuildContext {
 
 extension StatefulWidgetExt<T extends StatefulWidget> on State<T> {
   /// 扩展属性 Theme.of(this.context)
-  get theme => this.context.theme;
+  ThemeData get theme => this.context.theme;
   /// 扩展属性 MediaQuery.of(this.context)
-  get mediaQuery => this.context.mediaQuery;
+  MediaQueryData get mediaQuery => this.context.mediaQuery;
+
+  /// 弹出键盘时键盘顶部高度
+  double get keyboardBottom => this.context.keyboardBottom;
+
+  /// 安全区域距离顶部高度(电池栏高度:有刘海的屏幕:44 没有刘海的屏幕为20)
+  double get safeAreaTop => this.context.safeAreaTop;
+
+  /// 没有弹出键盘时底部高度(有刘海的屏幕:34 没有刘海的屏幕0)
+  double get safeAreaBottom => this.context.safeAreaBottom;
+
+  /// 弹出键盘为0,不弹为 34
+  double get paddingBottom => this.context.paddingBottom;
+
+
   /// 扩展属性 MediaQuery.of(this.context).size
   get screenSize => this.context.screenSize;
   /// 扩展属性 MediaQuery.of(this).devicePixelRatio

@@ -14,6 +14,8 @@ class ConnectivityService {
   ConnectivityService._() {
     try {
       _connectivity.onConnectivityChanged.listen((event) {
+        netState.value = event;
+        onLine.value = (event != ConnectivityResult.none);
         for (final listener in listeners) {
           listener.onNetStateChaneged(event);
         }
@@ -32,6 +34,10 @@ class ConnectivityService {
 
   final Connectivity _connectivity = Connectivity();
   final List<ConnectivityListener> listeners = [];
+  /// 网络当前状态(wifi, mobile, none); 可通过 ValueListenableBuilder 监听网络状态改变
+  final netState = ValueNotifier<ConnectivityResult>(ConnectivityResult.mobile);
+  /// 是否联网; 可通过 ValueListenableBuilder 监听网络状态改变
+  final onLine = ValueNotifier<bool>(true);
 
   Future<ConnectivityResult> checkConnectivity() async {
     return await _connectivity.checkConnectivity();
@@ -44,7 +50,7 @@ class ConnectivityService {
   }
 
   removeListener(ConnectivityListener? listener) {
-    if (listener != null && listeners.contains(listener)) {
+    if (listener != null) {
       listeners.remove(listener);
     }
   }
@@ -58,10 +64,9 @@ class ConnectivityService {
 mixin AutoListenerConnection<T extends StatefulWidget> on State<T> {
   @override
   void initState() {
-    if (connectivityListener != null) {
-      ConnectivityService.instance.removeListener(connectivityListener);
-      ConnectivityService.instance.addListener(connectivityListener);
-    }
+    ConnectivityService.instance.removeListener(connectivityListener);
+    ConnectivityService.instance.addListener(connectivityListener);
+
     super.initState();
   }
 
@@ -69,13 +74,8 @@ mixin AutoListenerConnection<T extends StatefulWidget> on State<T> {
 
   @override
   void dispose() {
-    try {
-      if (connectivityListener != null) {
-        ConnectivityService.instance.removeListener(connectivityListener!);
-      }
-    } catch (e) {
-      log("remove error occur on dispose state auto listener connect!");
-    }
+    ConnectivityService.instance.removeListener(connectivityListener);
+
     super.dispose();
   }
 
