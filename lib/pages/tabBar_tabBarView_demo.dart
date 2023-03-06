@@ -352,7 +352,7 @@ var _list = [
   Tuple2(APPRouter.progressIndicatorDemo, "ProgressIndicatorDemo", ),
 
   Tuple2(APPRouter.reorderableListViewDemo, "reorderableListViewDemo", ),
-  Tuple2(APPRouter.recordListDemo, "textFieldDemo", ),
+  Tuple2(APPRouter.recordListDemo, "recordListDemo", ),
 
   Tuple2(APPRouter.segmentControlDemo, "segmentControlDemo", ),
   Tuple2(APPRouter.snackBarDemo, "SnackBar", ),
@@ -370,6 +370,7 @@ var _list = [
 
   Tuple2(APPRouter.textlessDemo, "textlessDemo", ),
   Tuple2(APPRouter.textFieldDemo, "textFieldDemo", ),
+  Tuple2(APPRouter.textFieldDemoOne, "textFieldDemoOne", ),
 
   Tuple2(APPRouter.layoutBuilderDemo, "layoutBuilderDemo", ),
   Tuple2(APPRouter.tableDemo, "tableDemo", ),
@@ -469,6 +470,7 @@ var _specials = [
   Tuple2(APPRouter.buttonStyleDemo, "按钮样式研究", ),
   Tuple2(APPRouter.keyDemo, "key研究", ),
   Tuple2(APPRouter.operatorDemo, "特殊操作符", ),
+  Tuple2(APPRouter.mediaQueryDemo, "mediaQuery", ),
 
 ];
 

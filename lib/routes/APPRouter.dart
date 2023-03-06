@@ -38,6 +38,7 @@ import 'package:flutter_templet_project/pages/demo/ListViewOneDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MarqueeWidgetDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MaterialBannerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MaterialDemo.dart';
+import 'package:flutter_templet_project/pages/demo/MediaQueryDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ModalBarrierDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MyPopverDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NavigationToolbarDemo.dart';
@@ -64,6 +65,7 @@ import 'package:flutter_templet_project/pages/demo/TabBarSegmentDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TabBarDemoNew.dart';
 import 'package:flutter_templet_project/pages/demo/TabBarOnlyDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TabBarViewDemo.dart';
+import 'package:flutter_templet_project/pages/demo/TextFieldDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/TicketUiDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TransformDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ValueListenableBuilderDemo.dart';
@@ -214,6 +216,7 @@ class APPRouter {
   static const secondPage = '/SecondPage';
   static const thirdPage = '/ThirdPage';
   static const fourthPage = '/FourthPage';
+  static const mediaQueryDemo = '/mediaQueryDemo';
   static const tabBarDemo = '/TabBarDemo';
   static const tabBarDemoNew = '/TabBarDemoNew';
   static const tabBarOnlyDemo = '/tabBarOnlyDemo';
@@ -283,6 +286,7 @@ class APPRouter {
   static const numberFormatDemo = '/NumberFormatDemo';
   static const dateTimeDemo = '/DateTimeDemo';
   static const textFieldDemo = '/TextFieldDemo';
+  static const textFieldDemoOne = '/TextFieldDemoOne';
   static const cupertinoFormDemo = '/CupertinoFormDemo';
   static const contextMenuActionDemo = '/ContextMenuActionDemo';
   static const menuDemo = '/MenuDemo';
@@ -474,6 +478,7 @@ class AppPage {
     GetPage(name: APPRouter.secondPage, page: () => SecondPage(),),
     GetPage(name: APPRouter.thirdPage, page: () => ThirdPage(),),
     GetPage(name: APPRouter.fourthPage, page: () => FourthPage(),),
+    GetPage(name: APPRouter.mediaQueryDemo, page: () => MediaQueryDemo(),),
     GetPage(name: APPRouter.tabBarDemo, page: () => TabBarDemo(),),
     GetPage(name: APPRouter.tabBarDemoNew, page: () => TabBarDemoNew(),),
     GetPage(name: APPRouter.tabBarOnlyDemo, page: () => TabBarOnlyDemo(),),
@@ -535,6 +540,7 @@ class AppPage {
     GetPage(name: APPRouter.numberFormatDemo, page: () => NumberFormatDemo(),),
     GetPage(name: APPRouter.dateTimeDemo, page: () => DateTimeDemo(),),
     GetPage(name: APPRouter.textFieldDemo, page: () => TextFieldDemo(),),
+    GetPage(name: APPRouter.textFieldDemoOne, page: () => TextFieldDemoOne(),),
     GetPage(name: APPRouter.cupertinoFormDemo, page: () => CupertinoFormDemo(),),
     GetPage(name: APPRouter.contextMenuActionDemo, page: () => ContextMenuActionDemo(),),
     GetPage(name: APPRouter.menuDemo, page: () => MenuDemo(),),
