@@ -89,13 +89,13 @@ extension ByteDataExt on ByteData {
 }
 
 extension ImageChunkEventExt on ImageChunkEvent {
-  /// 百分比进度
-  double get progress {
+  // 当前百分比进度(0 - 1)
+  double? get current {
     if (this.expectedTotalBytes == null) {
-      return 0.0;
+      return null;
     }
-    double percent = this.cumulativeBytesLoaded / (this.expectedTotalBytes ?? 0);
-    return percent;
+    final double result = this.cumulativeBytesLoaded / this.expectedTotalBytes!;
+    return result;
   }
 }
 

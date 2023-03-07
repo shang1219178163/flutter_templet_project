@@ -9,15 +9,4 @@
 
 import 'package:flutter/cupertino.dart';
 
-extension ImageChunkEventExt on ImageChunkEvent{
-  // 当前百分比进度(0 - 1)
-  double? get current {
-    if (this.expectedTotalBytes == null) {
-      return null;
-    }
-    final double result = this.cumulativeBytesLoaded / this.expectedTotalBytes!;
-    return result;
-  }
-
-}
 

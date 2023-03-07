@@ -37,9 +37,7 @@ class EventBusTool {
 
   //移除订阅者
   void off(eventName, [EventCallback? f]) {
-    var list = _map[eventName];
-    if (list == null) return;
-
+    var list = _map[eventName] ?? [];
     if (f == null) {
       _map[eventName] = null;
     } else {
@@ -49,11 +47,10 @@ class EventBusTool {
 
   //触发事件，事件触发后该事件所有订阅者会被调用
   void emit(eventName, [arg]) {
-    var list = _map[eventName];
-    if (list == null) return;
-    int len = list.length - 1;
+    var list = _map[eventName] ?? [];
+    int length = list.length - 1;
     //反向遍历，防止订阅者在回调中移除自身带来的下标错位
-    for (var i = len; i > -1; --i) {
+    for (var i = length; i > -1; --i) {
       list[i](arg);
     }
   }

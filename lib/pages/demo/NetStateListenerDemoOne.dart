@@ -38,7 +38,7 @@ class _NetStateListenerDemoOneState extends State<NetStateListenerDemoOne> with 
           child: Text(e,
             style: TextStyle(color: Colors.white),
           ),
-          onPressed: () => print(e),)
+          onPressed: onPressed,)
         ).toList(),
       ),
       body: Column(
@@ -63,6 +63,11 @@ class _NetStateListenerDemoOneState extends State<NetStateListenerDemoOne> with 
     );
   }
 
+  onPressed(){
+    final list = [];
+    list.remove("1");
+    print(list);
+  }
 
   @override
   NetConnectivityListener get connectivityListener => this;
