@@ -1,15 +1,13 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:connectivity/connectivity.dart';
 
-abstract class ConnectivityListener {
+abstract class NetConnectivityListener {
   void onNetStateChaneged(ConnectivityResult result);
 }
 
 class ConnectivityService {
-  static ConnectivityService? _instance;
 
   ConnectivityService._() {
     try {
@@ -25,15 +23,16 @@ class ConnectivityService {
     }
   }
 
-  static ConnectivityService get instance => _shareInstance();
+  static final ConnectivityService _instance = ConnectivityService._();
 
-  static ConnectivityService _shareInstance() {
-    _instance ??= ConnectivityService._();
-    return _instance!;
-  }
+  factory ConnectivityService() => _instance;
+
+  static ConnectivityService get instance => _instance;
+
 
   final Connectivity _connectivity = Connectivity();
-  final List<ConnectivityListener> listeners = [];
+
+  final List<NetConnectivityListener> listeners = [];
   /// 网络当前状态(wifi, mobile, none); 可通过 ValueListenableBuilder 监听网络状态改变
   final netState = ValueNotifier<ConnectivityResult>(ConnectivityResult.mobile);
   /// 是否联网; 可通过 ValueListenableBuilder 监听网络状态改变
@@ -43,25 +42,25 @@ class ConnectivityService {
     return await _connectivity.checkConnectivity();
   }
 
-  addListener(ConnectivityListener? listener) {
+  addListener(NetConnectivityListener? listener) {
     if (listener != null) {
       listeners.add(listener);
     }
   }
 
-  removeListener(ConnectivityListener? listener) {
+  removeListener(NetConnectivityListener? listener) {
     if (listener != null) {
       listeners.remove(listener);
     }
   }
 
-  clearListener() {
+  clearListeners() {
     listeners.clear();
   }
 }
 
 
-mixin AutoListenerConnection<T extends StatefulWidget> on State<T> {
+mixin NetConnectivityMixin<T extends StatefulWidget> on State<T> {
   @override
   void initState() {
     ConnectivityService.instance.removeListener(connectivityListener);
@@ -79,5 +78,5 @@ mixin AutoListenerConnection<T extends StatefulWidget> on State<T> {
     super.dispose();
   }
 
-  ConnectivityListener? get connectivityListener;
+  NetConnectivityListener get connectivityListener;
 }

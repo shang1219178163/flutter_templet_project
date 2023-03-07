@@ -9,15 +9,11 @@ class EventBusService {
 
   static EventBusService _instance = EventBusService._();
 
-  factory EventBusService() => _instance;
-
   static EventBusService get instance => _instance;
 
-  // static EventBusService _shareInstance() {
-  //   _instance ??= EventBusService._();
-  //   return _instance!;
-  // }
+  factory EventBusService() => _instance;
 
+  
   final EventBus _eventBus = EventBus();
 
   /// 触发事件
