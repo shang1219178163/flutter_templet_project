@@ -471,6 +471,8 @@ var _specials = [
   Tuple2(APPRouter.keyDemo, "key研究", ),
   Tuple2(APPRouter.operatorDemo, "特殊操作符", ),
   Tuple2(APPRouter.mediaQueryDemo, "mediaQuery", ),
+  Tuple2(APPRouter.netStateListenerDemo, "netStateListenerDemo", ),
+  Tuple2(APPRouter.netStateListenerDemoOne, "mixin监听网络", ),
 
 ];
 

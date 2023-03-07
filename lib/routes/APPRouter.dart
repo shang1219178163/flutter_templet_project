@@ -42,6 +42,8 @@ import 'package:flutter_templet_project/pages/demo/MediaQueryDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ModalBarrierDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MyPopverDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NavigationToolbarDemo.dart';
+import 'package:flutter_templet_project/pages/demo/NetStateListenerDemo.dart';
+import 'package:flutter_templet_project/pages/demo/NetStateListenerDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/NeumorphismDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NotificationListenerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/OverflowBarDemo.dart';
@@ -427,6 +429,8 @@ class APPRouter {
   static const flexibleSpaceDemo = '/flexibleSpaceDemo';
   static const operatorDemo = '/operatorDemo';
   static const nnHorizontalScrollWidgetDemo = '/nnHorizontalScrollWidgetDemo';
+  static const netStateListenerDemo = '/netStateListenerDemo';
+  static const netStateListenerDemoOne = '/netStateListenerDemoOne';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -672,6 +676,8 @@ class AppPage {
     GetPage(name: APPRouter.materialDemo, page: () => MaterialDemo(),),
     GetPage(name: APPRouter.flexibleSpaceDemo, page: () => FlexibleSpaceDemo(),),
     GetPage(name: APPRouter.operatorDemo, page: () => OperatorDemo(),),
+    GetPage(name: APPRouter.netStateListenerDemo, page: () => NetStateListenerDemo(),),
+    GetPage(name: APPRouter.netStateListenerDemoOne, page: () => NetStateListenerDemoOne(),),
 
 
   ];
