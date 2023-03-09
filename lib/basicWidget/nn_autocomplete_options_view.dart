@@ -7,11 +7,10 @@
 //
 
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-typedef OptionWidgetBuilder<T extends Object> = Widget Function(T option);
+// typedef OptionWidgetBuilder<T extends Object> = Widget Function(T option);
 
 /// Autocomplete 组件的 optionsViewBuilder 返回视图
 class NNAutocompleteOptionsView<T extends Object> extends StatelessWidget {
@@ -32,7 +31,8 @@ class NNAutocompleteOptionsView<T extends Object> extends StatelessWidget {
 
   final double maxOptionsHeight;
 
-  final OptionWidgetBuilder<T>? cellBuilder;
+  // final OptionWidgetBuilder<T>? cellBuilder;
+  final IndexedWidgetBuilder? cellBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -48,11 +48,11 @@ class NNAutocompleteOptionsView<T extends Object> extends StatelessWidget {
             itemCount: options.length,
             itemBuilder: (BuildContext context, int index) {
               final T option = options.elementAt(index);
-              return InkWell(
+              return cellBuilder?.call(context, index) ?? InkWell(
                 onTap: () {
                   onSelected(option);
                 },
-                child: cellBuilder != null ? cellBuilder?.call(option) : Builder(
+                child: Builder(
                     builder: (BuildContext context) {
                       final bool highlight = AutocompleteHighlightedOption.of(context) == index;
                       if (highlight) {
