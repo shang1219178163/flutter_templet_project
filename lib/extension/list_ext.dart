@@ -27,14 +27,14 @@ extension ListExt<T,E> on List<E> {
     return result;
   }
 
-  /// 数组降维
-  List<T> flatMap(List<T> action(E e)) {
-    var result = <T>[];
-    this.forEach((e) {
-      result.addAll(action(e));
-    });
-    return result;
-  }
+  /// 数组降维() expand
+  // List<T> flatMap(List<T> action(E e)) {
+    // var result = <T>[];
+    // this.forEach((e) {
+    //   result.addAll(action(e));
+    // });
+    // return result;
+  // }
 
   static bool isNotEmpty(List? l) {
     return l != null && l.isNotEmpty;

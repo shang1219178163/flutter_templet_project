@@ -125,4 +125,40 @@ extension StringExt on String{
     }
     return a.compareTo(b);
   }
+
+  /// 以 pattern 分割字符串为3元素数组
+  List<String> seperator(String pattern) {
+    final regexp = RegExp(pattern, caseSensitive: false);
+    final match = regexp.firstMatch(this);
+    final matchedText = match?.group(0);
+    if (matchedText == null || !this.contains(matchedText)) {
+      return [this];
+    }
+
+    int index = this.indexOf(matchedText);
+    int endIndex = index + matchedText.length;
+
+    final leftStr = this.substring(0, index);
+    final sub = this.substring(index, endIndex);
+    final rightStr = this.substring(endIndex);
+    return [leftStr, sub, rightStr];
+  }
+
+  InlineSpan formSpan(String pattern, {TextStyle? nomalStyle, TextStyle? highlightStyle}) {
+    List<String> strs = this.seperator(pattern);
+    if (strs.length <= 1) {
+      final items = strs.map((e) => TextSpan(
+          text: e,
+          style: nomalStyle
+      )).toList();
+      return TextSpan(children: items);
+    }
+
+    List<TextSpan> spans = strs.map((e) => TextSpan(
+        text: e,
+        style: strs.indexOf(e) == 1 ? highlightStyle : nomalStyle
+    )).toList();
+
+    return TextSpan(children: spans);
+  }
 }
