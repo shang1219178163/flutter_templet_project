@@ -4,9 +4,13 @@ import 'package:flutter_templet_project/Provider/provider_list_demo.dart';
 import 'package:flutter_templet_project/basicWidget/EnhanceTab/enhance_tab_bar_demo.dart';
 import 'package:flutter_templet_project/basicWidget/drag_destination_view.dart';
 import 'package:flutter_templet_project/basicWidget/responsive_column.dart';
+import 'package:flutter_templet_project/pages/DataTypeDemo.dart';
+import 'package:flutter_templet_project/pages/PageLifecycleObserverDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedBuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedListDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedListSample.dart';
+import 'package:flutter_templet_project/pages/demo/AutocompleteDemo.dart';
+import 'package:flutter_templet_project/pages/demo/AutofillGroupDemo.dart';
 import 'package:flutter_templet_project/pages/demo/BoxConstraintsDemo.dart';
 import 'package:flutter_templet_project/pages/FlutterFFiTest.dart';
 import 'package:flutter_templet_project/pages/LocalImagePage.dart';
@@ -31,6 +35,7 @@ import 'package:flutter_templet_project/pages/demo/HorizontalCellDemo.dart';
 import 'package:flutter_templet_project/pages/demo/IgnorePointerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ImageBlendModeDemo.dart';
 import 'package:flutter_templet_project/pages/demo/InheritedWidgetDemo.dart';
+import 'package:flutter_templet_project/pages/demo/InteractiveViewerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/IntrinsicHeightDemo.dart';
 import 'package:flutter_templet_project/pages/demo/KeyDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ListViewDemo.dart';
@@ -218,6 +223,8 @@ class APPRouter {
   static const secondPage = '/SecondPage';
   static const thirdPage = '/ThirdPage';
   static const fourthPage = '/FourthPage';
+
+  static const pageLifecycleObserverDemo = '/pageLifecycleObserverDemo';
   static const mediaQueryDemo = '/mediaQueryDemo';
   static const tabBarDemo = '/TabBarDemo';
   static const tabBarDemoNew = '/TabBarDemoNew';
@@ -371,6 +378,8 @@ class APPRouter {
   static const selectableTextDemo = '/SelectableTextDemo';
   static const materialBannerDemo = '/materialBannerDemo';
   static const autocompleteDemo = '/autocompleteDemo';
+
+  static const autofillGroupDemo = '/autofillGroupDemo';
   static const promptBuilderDemo = '/promptBuilderDemo';
   static const rotatedBoxDemo = '/rotatedBoxDemo';
   static const dismissibleDemo = '/dismissibleDemo';
@@ -431,6 +440,8 @@ class APPRouter {
   static const nnHorizontalScrollWidgetDemo = '/nnHorizontalScrollWidgetDemo';
   static const netStateListenerDemo = '/netStateListenerDemo';
   static const netStateListenerDemoOne = '/netStateListenerDemoOne';
+  static const interactiveViewerDemo = '/interactiveViewerDemo';
+  static const dataTypeDemo = '/dataTypeDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -482,6 +493,10 @@ class AppPage {
     GetPage(name: APPRouter.secondPage, page: () => SecondPage(),),
     GetPage(name: APPRouter.thirdPage, page: () => ThirdPage(),),
     GetPage(name: APPRouter.fourthPage, page: () => FourthPage(),),
+
+
+    GetPage(name: APPRouter.pageLifecycleObserverDemo, page: () => PageLifecycleObserverDemo(),),
+
     GetPage(name: APPRouter.mediaQueryDemo, page: () => MediaQueryDemo(),),
     GetPage(name: APPRouter.tabBarDemo, page: () => TabBarDemo(),),
     GetPage(name: APPRouter.tabBarDemoNew, page: () => TabBarDemoNew(),),
@@ -618,6 +633,8 @@ class AppPage {
     GetPage(name: APPRouter.selectableTextDemo, page: () => SelectableTextDemo(),),
     GetPage(name: APPRouter.materialBannerDemo, page: () => MaterialBannerDemo(),),
     GetPage(name: APPRouter.autocompleteDemo, page: () => AutocompleteDemo(),),
+
+    GetPage(name: APPRouter.autofillGroupDemo, page: () => AutofillGroupDemo(),),
     GetPage(name: APPRouter.promptBuilderDemo, page: () => PromptBuilderDemo(),),
     GetPage(name: APPRouter.rotatedBoxDemo, page: () => RotatedBoxDemo(),),
     GetPage(name: APPRouter.dismissibleDemo, page: () => DismissibleDemo(),),
@@ -672,13 +689,13 @@ class AppPage {
     GetPage(name: APPRouter.nnCollectionNavWidgetDemo, page: () => NNCollectionNavWidgetDemo(),),
     GetPage(name: APPRouter.nnHorizontalScrollWidgetDemo, page: () => NNHorizontalScrollWidgetDemo(),),
 
-
     GetPage(name: APPRouter.materialDemo, page: () => MaterialDemo(),),
     GetPage(name: APPRouter.flexibleSpaceDemo, page: () => FlexibleSpaceDemo(),),
     GetPage(name: APPRouter.operatorDemo, page: () => OperatorDemo(),),
     GetPage(name: APPRouter.netStateListenerDemo, page: () => NetStateListenerDemo(),),
     GetPage(name: APPRouter.netStateListenerDemoOne, page: () => NetStateListenerDemoOne(),),
-
+    GetPage(name: APPRouter.interactiveViewerDemo, page: () => InteractiveViewerDemo(),),
+    GetPage(name: APPRouter.dataTypeDemo, page: () => DataTypeDemo(),),
 
   ];
 }

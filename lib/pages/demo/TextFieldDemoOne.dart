@@ -22,9 +22,10 @@ class TextFieldDemoOne extends StatefulWidget {
 }
 
 class _TextFieldDemoOneState extends State<TextFieldDemoOne> {
+  final textEditingController = TextEditingController();
 
   ///用来控制  TextField 焦点的获取与关闭
-  FocusNode focusNode = new FocusNode();
+  FocusNode focusNode = FocusNode();
   ///文本输入框是否可编辑
   bool isEnable = true;
 
@@ -55,7 +56,7 @@ class _TextFieldDemoOneState extends State<TextFieldDemoOne> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
       ),
-      body:  Column(
+      body: Column(
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -103,7 +104,7 @@ class _TextFieldDemoOneState extends State<TextFieldDemoOne> {
           alignment: Alignment(0, 0),
           ///文本输入框
           child: TextField(
-
+            controller: textEditingController,
             ///是否可编辑
             enabled: isEnable,
             ///焦点获取
@@ -128,7 +129,7 @@ class _TextFieldDemoOneState extends State<TextFieldDemoOne> {
               errorStyle: TextStyle(color: Colors.red),
 
               ///输入框获取焦点时才会显示出来 输入文本的前面
-              prefixText: "prefix",
+              prefixText: "prefix  ",
               prefixStyle: TextStyle(color: Colors.deepPurple),
               ///输入框获取焦点时才会显示出来 输入文本的后面
               suffixText: "suf ",
@@ -142,7 +143,10 @@ class _TextFieldDemoOneState extends State<TextFieldDemoOne> {
               ///输入文字前的小图标
               prefixIcon: Icon(Icons.phone),
               ///输入文字后面的小图标
-              suffixIcon: Icon(Icons.close),
+              suffixIcon: textEditingController.text.length == 0 ? null : IconButton(
+                  onPressed: () => textEditingController.clear(),
+                  icon: Icon(Icons.close),
+              ),
 
               ///与 prefixText 不能同时设置
 //                prefix: Text("A") ,

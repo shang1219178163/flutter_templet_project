@@ -226,7 +226,7 @@ class SnackBarDemoState extends State<SnackBarDemo> {
         // ),
       ],
     );
-    ScaffoldMessenger.of(context).showMaterialBanner(banner);
+    // ScaffoldMessenger.of(context).showMaterialBanner(banner);
     context.showMaterialBanner(banner, isClear: false,);
   }
 

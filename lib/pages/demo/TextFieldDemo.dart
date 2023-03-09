@@ -116,10 +116,11 @@ class _TextFieldDemoState extends State<TextFieldDemo> {
                       color: Color(0xff666666),
                     ),
                     onPressed: (){
-                      setState(() {
-                        _unameController.text = '';
-                        // checkLoginText();
-                      });
+                      _unameController.clear();
+                      // setState(() {
+                      //   _unameController.text = '';
+                      //   // checkLoginText();
+                      // });
                     },
                   ):null
               ),

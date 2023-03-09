@@ -112,7 +112,7 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
         onPressed: () {
           kScaffoldKey.currentState!.openEndDrawer();
           // testData();
-          getTitles(tuples: _tuples);
+          getTitles(tuples: tuples);
         },
       ),
     );
@@ -185,8 +185,8 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
     )),
 
     Tuple2('列表(泛型)', SectionListView<String, Tuple2<String, String>>(
-      headerList: _tuples.map((e) => e.item1).toList(),
-      itemList: _tuples.map((e) => e.item2).toList()
+      headerList: tuples.map((e) => e.item1).toList(),
+      itemList: tuples.map((e) => e.item2).toList()
           .map((e) => e.sorted((a, b) => a.item1.toLowerCase().compareTo(b.item1.toLowerCase()))).toList(),
       headerBuilder: (e) {
         return Container(
@@ -214,7 +214,7 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
     ),),
 
     Tuple2('列表(折叠)', EnhanceExpandListView(
-      children: _tuples.map<ExpandPanelModel<Tuple2<String, String>>>((e) => ExpandPanelModel(
+      children: tuples.map<ExpandPanelModel<Tuple2<String, String>>>((e) => ExpandPanelModel(
         canTapOnHeader: true,
         isExpanded: false,
         arrowPosition: EnhanceExpansionPanelArrowPosition.none,
@@ -254,18 +254,11 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
   ];
 
   List<String> getTitles({required List<Tuple2<String, List<Tuple2<String, String>>>> tuples}) {
-    // List<String> arr = [];
-    // tuples.forEach((element) {
-    //   final tmp = element.item2.map((e) => e.item1);
-    //   arr.addAll(tmp);
-    // });
-    // print('runtimeType:${arr.runtimeType},${arr is List},${arr}');
-
-    final titles = _tuples.flatMap((e) => e.item2.map((e) => e.item1).toList());
-    final titlesNew = List<String>.from(titles);
+    final titles = tuples.expand((e) => e.item2.map((e) => e.item1)).toList();
+    final result = List<String>.from(titles);
     // print('titles runtimeType:${titles.runtimeType},${titles.every((element) => element is String)},');
-    print('titlesNew runtimeType:${titlesNew.runtimeType}');
-    return titlesNew;
+    print('result runtimeType:${result.runtimeType}');
+    return result;
   }
 
   testData() {
@@ -305,19 +298,21 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
   }
 }
 
-var _tuples = [
-  Tuple2("特殊功能", _specials),
-  Tuple2("动画相关", _animateds),
-  Tuple2("系统组件demo", _list),
-  Tuple2("系统组件 - sliver", _slivers),
-  Tuple2("自定义组件", _customs),
-  Tuple2("第三方组件", _vendors),
-  Tuple2("其它", _others)
+var tuples = [
+  Tuple2("数据类型", dataTypes),
+  Tuple2("特殊功能", specials),
+  Tuple2("动画相关", animateds),
+  Tuple2("系统组件demo", list),
+  Tuple2("系统组件 - sliver", slivers),
+  Tuple2("自定义组件", customs),
+  Tuple2("第三方组件", vendors),
+  Tuple2("表单", forms),
+  Tuple2("其它", others)
 
 ];
 
 
-var _list = [
+var list = [
   Tuple2(APPRouter.materialDemo, "materialDemo", ),
   Tuple2(APPRouter.alertDialogDemo, "AlertDialog", ),
   Tuple2(APPRouter.alertSheetDemo, "AlertSheet", ),
@@ -432,17 +427,21 @@ var _list = [
   Tuple2(APPRouter.overflowDemo, "overflowDemo", ),
   Tuple2(APPRouter.flexibleSpaceDemo, "flexibleSpaceDemo", ),
   Tuple2(APPRouter.nnHorizontalScrollWidgetDemo, "nnHorizontalScrollWidgetDemo", ),
+  Tuple2(APPRouter.interactiveViewerDemo, "图片缩放", ),
 
 
 ];
 
-var _slivers = [
+var slivers = [
   Tuple2(APPRouter.sliverFamilyDemo, "SliverFamilyDemo", ),
 
 
 ];
 
-var _specials = [
+var specials = [
+  Tuple2(APPRouter.operatorDemo, "特殊操作符", ),
+  Tuple2(APPRouter.mediaQueryDemo, "mediaQuery", ),
+  Tuple2(APPRouter.pageLifecycleObserverDemo, "页面生命周期监听", ),
   Tuple2(APPRouter.systemIconsPage, "flutter 系统 Icons", ),
   Tuple2(APPRouter.systemColorPage, "flutter 系统 颜色", ),
   Tuple2(APPRouter.localImagePage, "本地图片", ),
@@ -469,14 +468,14 @@ var _specials = [
   Tuple2(APPRouter.scrollControllerDemo, "滚动行为", ),
   Tuple2(APPRouter.buttonStyleDemo, "按钮样式研究", ),
   Tuple2(APPRouter.keyDemo, "key研究", ),
-  Tuple2(APPRouter.operatorDemo, "特殊操作符", ),
-  Tuple2(APPRouter.mediaQueryDemo, "mediaQuery", ),
+
+
   Tuple2(APPRouter.netStateListenerDemo, "netStateListenerDemo", ),
   Tuple2(APPRouter.netStateListenerDemoOne, "mixin监听网络", ),
 
 ];
 
-var _animateds = [
+var animateds = [
   // Tuple2(APPRouter.animatedIconDemo, "AnimatedIconDemo", ),
   Tuple2(APPRouter.animatedDemo, "animatedDemo", ),
 
@@ -491,7 +490,7 @@ var _animateds = [
 
 ];
 
-var _customs = [
+var customs = [
   Tuple2(APPRouter.datePickerPage, "DatePickerPage", ),
   Tuple2(APPRouter.dateTimeDemo, "dateTimeDemo", ),
   Tuple2(APPRouter.hudProgressDemo, "HudProgressDemo", ),
@@ -514,7 +513,7 @@ var _customs = [
 
 ];
 
-var _vendors = [
+var vendors = [
   Tuple2(APPRouter.carouselSliderDemo, "carouselSliderDemo", ),
   Tuple2(APPRouter.timelinesDemo, "timelinesDemo", ),
   Tuple2(APPRouter.timelineDemo, "timelineDemo", ),
@@ -541,7 +540,7 @@ var _vendors = [
 
 ];
 
-var _others = [
+var others = [
   Tuple2(APPRouter.notFound, "notFound", ),
   Tuple2(APPRouter.firstPage, "firstPage", ),
   Tuple2(APPRouter.fourthPage, "fourthPage", ),
@@ -556,5 +555,16 @@ var _others = [
   Tuple2(APPRouter.decorationDemo, "decorationDemo", ),
   Tuple2(APPRouter.synHomeSrollDemo, "SynHomeSrollDemo", ),
   Tuple2(APPRouter.synHomeNavDemo, "synHomeNavDemo", ),
+
+];
+
+var forms = [
+  Tuple2(APPRouter.autocompleteDemo, "autocompleteDemo", ),
+  Tuple2(APPRouter.autofillGroupDemo, "autofillGroupDemo", ),
+
+];
+
+var dataTypes = [
+  Tuple2(APPRouter.dataTypeDemo, "数据类型", ),
 
 ];
