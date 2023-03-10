@@ -10,6 +10,7 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 
+typedef TransformCallback<E> = E Function(E e);
 
 extension StringExt on String{
 
@@ -126,11 +127,54 @@ extension StringExt on String{
     return a.compareTo(b);
   }
 
-  /// 以 pattern 分割字符串为3元素数组
-  List<String> seperator(String pattern) {
-    final regexp = RegExp(pattern, caseSensitive: false);
+  /// 用字符切分字符串
+  seperatorByChars({
+    required TransformCallback<String> cb,
+    String source = '[A-Z]',
+    bool multiLine = false,
+    bool caseSensitive = true,
+    bool unicode = false,
+    bool dotAll = false
+  }) {
+    final reg = RegExp(source,
+      multiLine: multiLine,
+      caseSensitive: caseSensitive,
+      unicode: unicode,
+      dotAll: dotAll,
+    );
+
+    final matchs = reg.allMatches(this);
+    // for (final Match m in matchs) {
+    //   String match = m[0]!;
+    //   print(match);
+    // }
+    final seperators = matchs.map((e) => e[0] ?? "").where((e) => e.isNotEmpty).toList();
+
+    var result = this;
+    seperators.forEach((e) => result = result.replaceAll(e, cb(e)));
+    return result;
+  }
+
+  /// 获取 pattern 的大小写变种(模糊化)
+  String? blurred({
+    bool multiLine = false,
+    bool unicode = false,
+    bool dotAll = false,
+  }) {
+    final regexp = RegExp(this,
+      caseSensitive: false,
+      multiLine: multiLine,
+      unicode: unicode,
+      dotAll: dotAll
+    );
     final match = regexp.firstMatch(this);
     final matchedText = match?.group(0);
+    return matchedText;
+  }
+
+  /// 以 pattern 分割字符串为3元素数组
+  List<String> seperator(String pattern) {
+    final matchedText = pattern.blurred();
     if (matchedText == null || !this.contains(matchedText)) {
       return [this];
     }
@@ -144,21 +188,21 @@ extension StringExt on String{
     return [leftStr, sub, rightStr];
   }
 
+  /// 获取掺杂高亮的富文本
   InlineSpan formSpan(String pattern, {TextStyle? nomalStyle, TextStyle? highlightStyle}) {
     List<String> strs = this.seperator(pattern);
     if (strs.length <= 1) {
       final items = strs.map((e) => TextSpan(
-          text: e,
-          style: nomalStyle
+        text: e,
+        style: highlightStyle
       )).toList();
       return TextSpan(children: items);
     }
 
     List<TextSpan> spans = strs.map((e) => TextSpan(
-        text: e,
-        style: strs.indexOf(e) == 1 ? highlightStyle : nomalStyle
+      text: e,
+      style: strs.indexOf(e) == 1 ? highlightStyle : nomalStyle
     )).toList();
-
     return TextSpan(children: spans);
   }
 }

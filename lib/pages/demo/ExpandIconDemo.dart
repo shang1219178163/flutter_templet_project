@@ -104,38 +104,41 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
     );
   }
 
-
-
+  /// 颜色扩展菜单
   Widget buildExpandColorMenu() {
-    return ExpansionTile(
-      leading: Icon(Icons.color_lens, color: selectedColor.value,),
-      title: Text('颜色主题', style: TextStyle(color: selectedColor.value),),
-      initiallyExpanded: false,
-      children: <Widget>[
-        Padding(
-          padding: EdgeInsets.only(left: 10, right: 10, bottom: 10),
-          child: Wrap(
-            spacing: 8,
-            runSpacing: 8,
-            children: colors.map((e) {
-              return InkWell(
-                onTap: () {
-                  setState(() {
+    return Theme(
+        data: ThemeData(
+        dividerColor: Colors.transparent,
+      ),
+      child: ExpansionTile(
+        leading: Icon(Icons.color_lens, color: selectedColor.value,),
+        title: Text('颜色主题', style: TextStyle(color: selectedColor.value),),
+        initiallyExpanded: false,
+        children: <Widget>[
+          Padding(
+            padding: EdgeInsets.only(left: 10, right: 10, bottom: 10),
+            child: Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: colors.map((e) {
+                return InkWell(
+                  onTap: () {
                     selectedColor.value = e;
-                  });
-                  ddlog(e.nameDes,);
-                },
-                child: Container(
-                  width: 40,
-                  height: 40,
-                  color: e,
-                  child: selectedColor.value == e ? Icon(Icons.done, color: Colors.white,) : null,
-                ),
-              );
-            }).toList(),
-          ),
-        )
-      ],
+                    ddlog(e.nameDes,);
+                    setState(() {});
+                  },
+                  child: Container(
+                    width: 40,
+                    height: 40,
+                    color: e,
+                    child: selectedColor.value == e ? Icon(Icons.done, color: Colors.white,) : null,
+                  ),
+                );
+              }).toList(),
+            ),
+          )
+        ],
+      ),
     );
   }
 

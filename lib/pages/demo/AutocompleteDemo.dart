@@ -104,7 +104,7 @@ class _AutocompleteDemoState extends State<AutocompleteDemo>{
     return [
       // buildExpandColor(),
       buildExpandMenu(),
-      Divider(),
+      // Divider(),
     ];
   }
 
@@ -344,25 +344,30 @@ class _AutocompleteDemoState extends State<AutocompleteDemo>{
   }
 
   Widget buildExpandMenu() {
-    return ExpansionTile(
-      tilePadding: EdgeInsets.symmetric(horizontal: 10),
-      leading: Icon(Icons.ac_unit, color: selectedColor.value,),
-      title: Text('配置', style: TextStyle(color: selectedColor.value),),
-      initiallyExpanded: false,
-      children: <Widget>[
-        Column(
-          children: _params.map((e) => ListTile(
-            title: Text(e.name),
-            trailing: Switch(
-              onChanged: (bool value) {
-                e.isOpen = value;
-                setState(() {});
-              },
-              value: e.isOpen,
-            ),
-          )).toList(),
-        ),
-      ],
+    return Theme(
+      data: ThemeData(
+          dividerColor: Colors.transparent,
+      ),
+      child: ExpansionTile(
+        tilePadding: EdgeInsets.symmetric(horizontal: 10),
+        leading: Icon(Icons.ac_unit, color: selectedColor.value,),
+        title: Text('配置', style: TextStyle(color: selectedColor.value),),
+        initiallyExpanded: false,
+        children: <Widget>[
+          Column(
+            children: _params.map((e) => ListTile(
+              title: Text(e.name),
+              trailing: Switch(
+                onChanged: (bool value) {
+                  e.isOpen = value;
+                  setState(() {});
+                },
+                value: e.isOpen,
+              ),
+            )).toList(),
+          ),
+        ],
+      ),
     );
   }
 }
