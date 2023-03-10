@@ -27,6 +27,8 @@ import 'package:flutter_templet_project/routes/APPRouter.dart';
 import 'package:get/get.dart';
 import 'package:tuple/tuple.dart';
 
+import 'demo/AutocompleteDemo.dart';
+
 
 class TabBarTabBarViewDemo extends StatefulWidget {
 
@@ -37,13 +39,25 @@ class TabBarTabBarViewDemo extends StatefulWidget {
 class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with SingleTickerProviderStateMixin {
   late TabController _tabController = TabController(length: _pages.length, vsync: this);
 
+  final textEditingController = TextEditingController();
+
   // late PageController _pageController = PageController(initialPage: 0, keepPage: true);
 
   // late List<String> _titles = getTitlesOfTuples();
 
+  List<Tuple2<String, Widget>> _pages = [];
+
   @override
   void initState() {
     super.initState();
+
+    _pages = [
+      Tuple2('功能列表', _buildPage1()),
+      Tuple2('升级列表', _buildPage2()),
+      Tuple2('列表(泛型)', _buildPage3()),
+      Tuple2('列表(折叠)', _buildPage4()),
+    ];
+
     _tabController.index = _pages.length - 1;
     // testData();
   }
@@ -117,9 +131,9 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
       ),
     );
   }
-
-  List<Tuple2<String, Widget>> _pages = [
-    Tuple2('功能列表', ListView.separated(
+  
+  _buildPage1() {
+    return ListView.separated(
       cacheExtent: 180,
       itemCount: kAliPayList.length,
       itemBuilder: (context, index) {
@@ -167,9 +181,11 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
       separatorBuilder: (BuildContext context, int index) {
         return DividerExt.custome();
       },
-    )),
+    );
+  }
 
-    Tuple2('升级列表', ListView.separated(
+  _buildPage2() {
+    return ListView.separated(
       cacheExtent: 180,
       itemCount: kUpdateAppList.length,
       itemBuilder: (context, index) {
@@ -182,9 +198,12 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
       separatorBuilder: (context, index) {
         return Divider();
       },
-    )),
+    );
+  }
 
-    Tuple2('列表(泛型)', SectionListView<String, Tuple2<String, String>>(
+  _buildPage3() {
+    return AutocompleteDemo(hideAppBar: true,);
+    return SectionListView<String, Tuple2<String, String>>(
       headerList: tuples.map((e) => e.item1).toList(),
       itemList: tuples.map((e) => e.item2).toList()
           .map((e) => e.sorted((a, b) => a.item1.toLowerCase().compareTo(b.item1.toLowerCase()))).toList(),
@@ -211,9 +230,11 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
           },
         );
       },
-    ),),
+    );
+  }
 
-    Tuple2('列表(折叠)', EnhanceExpandListView(
+  _buildPage4() {
+    return EnhanceExpandListView(
       children: tuples.map<ExpandPanelModel<Tuple2<String, String>>>((e) => ExpandPanelModel(
         canTapOnHeader: true,
         isExpanded: false,
@@ -221,7 +242,7 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
         // backgroundColor: Color(0xFFDDDDDD),
         headerBuilder: (contenx, isExpand) {
           final trailing = isExpand ? Icon(Icons.keyboard_arrow_up, color: Colors.blue) :
-            Icon(Icons.keyboard_arrow_down, color: Colors.blue,);
+          Icon(Icons.keyboard_arrow_down, color: Colors.blue,);
           return Container(
             // color: Colors.green,
             color: isExpand ? Colors.black12 : null,
@@ -235,24 +256,24 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
         bodyChildren: e.item2,
         bodyItemBuilder: (context, e) {
           return ListTile(
-            title: Text(e.item1, style: TextStyle(fontSize: 14),),
-            subtitle: Text(e.item2, style: TextStyle(fontSize: 12),),
-            trailing: Icon(Icons.chevron_right),
-            dense: true,
-            // contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
-            onTap: () {
-              ddlog("section_");
-              if (e.item1.toLowerCase().contains("loginPage".toLowerCase())){
-                Get.offNamed(e.item1, arguments: e.item1);
-              } else {
-                Get.toNamed(e.item1, arguments: e.item1);
-              }
-            });
+              title: Text(e.item1, style: TextStyle(fontSize: 14),),
+              subtitle: Text(e.item2, style: TextStyle(fontSize: 12),),
+              trailing: Icon(Icons.chevron_right),
+              dense: true,
+              // contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
+              onTap: () {
+                ddlog("section_");
+                if (e.item1.toLowerCase().contains("loginPage".toLowerCase())){
+                  Get.offNamed(e.item1, arguments: e.item1);
+                } else {
+                  Get.toNamed(e.item1, arguments: e.item1);
+                }
+              });
         },
-      )).toList(),),
-    ),
-  ];
-
+      )).toList(),
+    );
+  }
+  
   List<String> getTitles({required List<Tuple2<String, List<Tuple2<String, String>>>> tuples}) {
     final titles = tuples.expand((e) => e.item2.map((e) => e.item1)).toList();
     final result = List<String>.from(titles);
@@ -295,6 +316,44 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
     final map = {"a": "aa", "b": "bb", "c": "cc",} ;
     final value = map["d"] ?? "-";
     ddlog(value);
+  }
+
+  _buildTextField() {
+    return Container(
+      ///SizedBox 用来限制一个固定 width height 的空间
+      child: SizedBox(
+        width: 400,
+        height: 130,
+        child: Container(
+          color: Colors.white24,
+          ///距离顶部
+          margin: EdgeInsets.only(top: 30),
+          padding: EdgeInsets.all(10),
+          ///Alignment 用来对齐 Widget
+          alignment: Alignment(0, 0),
+          ///文本输入框
+          child: TextField(
+            controller: textEditingController,
+            ///用来配置 TextField 的样式风格
+            decoration: InputDecoration(
+              ///设置输入文本框的提示文字
+              ///输入框获取焦点时 并且没有输入文字时
+              hintText: "请输入关键字搜索",
+              ///设置输入文本框的提示文字的样式
+              hintStyle: TextStyle(color: Colors.grey, textBaseline: TextBaseline.ideographic,),
+              
+              ///输入文字前的小图标
+              prefixIcon: Icon(Icons.search),
+              ///输入文字后面的小图标
+              suffixIcon: textEditingController.text.length == 0 ? null : IconButton(
+                onPressed: () => textEditingController.clear(),
+                icon: Icon(Icons.close),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
 
@@ -409,6 +468,7 @@ var list = [
   Tuple2(APPRouter.modalBarrierDemo, "静态蒙版", ),
   Tuple2(APPRouter.bannerDemo, "角落价格标签", ),
   Tuple2(APPRouter.listViewDemo, "listView", ),
+  Tuple2(APPRouter.listViewStyleDemo, "listViewStyleDemo", ),
   Tuple2(APPRouter.builderDemo, "各种回调 builder", ),
   Tuple2(APPRouter.stackDemo, "StackDemo", ),
   Tuple2(APPRouter.wrapDemo, "流水自动换行", ),

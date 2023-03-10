@@ -53,19 +53,19 @@ class NNAutocompleteOptionsView<T extends Object> extends StatelessWidget {
                   onSelected(option);
                 },
                 child: Builder(
-                    builder: (BuildContext context) {
-                      final bool highlight = AutocompleteHighlightedOption.of(context) == index;
-                      if (highlight) {
-                        SchedulerBinding.instance?.addPostFrameCallback((Duration timeStamp) {
-                          Scrollable.ensureVisible(context, alignment: 0.5);
-                        });
-                      }
-                      return Container(
-                        color: highlight ? Theme.of(context).focusColor : null,
-                        padding: const EdgeInsets.all(16.0),
-                        child: Text(displayStringForOption(option)),
-                      );
+                  builder: (BuildContext context) {
+                    final bool highlight = AutocompleteHighlightedOption.of(context) == index;
+                    if (highlight) {
+                      SchedulerBinding.instance?.addPostFrameCallback((Duration timeStamp) {
+                        Scrollable.ensureVisible(context, alignment: 0.5);
+                      });
                     }
+                    return Container(
+                      color: highlight ? Theme.of(context).focusColor : null,
+                      padding: const EdgeInsets.all(16.0),
+                      child: Text(displayStringForOption(option)),
+                    );
+                  }
                 ),
               );
             },

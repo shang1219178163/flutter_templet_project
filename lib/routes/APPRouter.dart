@@ -40,6 +40,7 @@ import 'package:flutter_templet_project/pages/demo/IntrinsicHeightDemo.dart';
 import 'package:flutter_templet_project/pages/demo/KeyDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ListViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ListViewOneDemo.dart';
+import 'package:flutter_templet_project/pages/demo/ListViewStyleDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MarqueeWidgetDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MaterialBannerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MaterialDemo.dart';
@@ -386,6 +387,7 @@ class APPRouter {
   static const modalBarrierDemo = '/modalBarrierDemo';
   static const isolateDemo = '/isolateDemo';
   static const listViewDemo = '/listViewDemo';
+  static const listViewStyleDemo = '/listViewStyleDemo';
   static const builderDemo = '/builderDemo';
   static const overlayDemo = '/overlayDemo';
   static const decorationDemo = '/decorationDemo';
@@ -641,6 +643,7 @@ class AppPage {
     GetPage(name: APPRouter.modalBarrierDemo, page: () => ModalBarrierDemo(),),
     GetPage(name: APPRouter.isolateDemo, page: () => IsolateDemo(),),
     GetPage(name: APPRouter.listViewDemo, page: () => ListViewDemo(),),
+    GetPage(name: APPRouter.listViewStyleDemo, page: () => ListViewStyleDemo(),),
     GetPage(name: APPRouter.builderDemo, page: () => BuilderDemo(),),
     GetPage(name: APPRouter.overlayDemo, page: () => OverlayDemo(),),
     GetPage(name: APPRouter.decorationDemo, page: () => DecorationDemo(),),

@@ -12,17 +12,23 @@ import 'package:flutter_templet_project/pages/tabBar_tabBarView_demo.dart';
 
 class AutocompleteDemo extends StatefulWidget {
 
-  final String? title;
+  AutocompleteDemo({
+    Key? key,
+    this.title,
+    this.hideAppBar = false,
+  }) : super(key: key);
 
-  AutocompleteDemo({ Key? key, this.title}) : super(key: key);
-  
+  String? title;
+
+  bool hideAppBar;
+
   @override
   _AutocompleteDemoState createState() => _AutocompleteDemoState();
 }
 
 class _AutocompleteDemoState extends State<AutocompleteDemo>{
 
-  final _textEditingController = TextEditingController();
+  // final _textEditingController = TextEditingController();
   var _textEditingValue = TextEditingValue();
 
   var _params = <ParamModel>[
@@ -48,10 +54,9 @@ class _AutocompleteDemoState extends State<AutocompleteDemo>{
 
   @override
   Widget build(BuildContext context) {
-    print("_AutocompleteDemoState build");
 
     return Scaffold(
-      appBar: AppBar(
+      appBar: widget.hideAppBar ? null : AppBar(
         title: Text(widget.title ?? "$widget"),
       ),
       body: CustomScrollView(
@@ -145,43 +150,26 @@ class _AutocompleteDemoState extends State<AutocompleteDemo>{
         child: Container(
           padding: EdgeInsets.symmetric(vertical: 8),
           constraints: BoxConstraints(maxHeight: 200),
-            child: ListView.builder(
-              itemCount: items.length,
-                itemBuilder: ( _ , index) {
+          child: ListView.builder(
+            itemCount: items.length,
+            itemBuilder: ( _ , index) {
 
-                  final option = options.elementAt(index);
-                  final str = option.name;
+              final option = options.elementAt(index);
+              final str = option.name;
 
-                  var textWidget = Text.rich(str.formSpan(
-                      _textEditingValue.text,
-                      highlightStyle: lightTextStyle
-                    ),
-                  );
-                  textWidget = Text.rich(formSpan(str, _textEditingValue.text,));
-                  return _buildItem(
-                    onTap: () => onSelected(option),
-                    text: textWidget,
-                  );
-
-                  return InkWell(
-                    onTap: () => onSelected(option),
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                      decoration: BoxDecoration(
-                        // color: index % 2 == 0 ? Colors.green : Colors.yellow,
-                      ),
-                      child: Row(
-                        children: [
-                          Icon(Icons.search, color: Colors.grey, size: 22),
-                          SizedBox(width: 5,),
-                          textWidget
-                        ],
-                      ),
-                    ),
-                  );
-                }
-            ),
+              var textWidget = Text.rich(str.formSpan(
+                  _textEditingValue.text,
+                  highlightStyle: lightTextStyle
+                ),
+              );
+              textWidget = Text.rich(formSpan(str, _textEditingValue.text,));
+              return _buildItem(
+                onTap: () => onSelected(option),
+                text: textWidget,
+              );
+            }
           ),
+        ),
       ),
     );
   }
@@ -260,7 +248,7 @@ class _AutocompleteDemoState extends State<AutocompleteDemo>{
       contentPadding: const EdgeInsets.all(10),
       ///设置输入文本框的提示文字
       ///输入框获取焦点时 并且没有输入文字时
-      hintText: "请输入用户名",
+      hintText: "请输入关键词",
       ///设置输入文本框的提示文字的样式
       hintStyle: TextStyle(color: Colors.grey,textBaseline: TextBaseline.ideographic,),
       ///输入文字前的小图标

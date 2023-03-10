@@ -169,12 +169,11 @@ class _ListViewOneDemoState extends State<ListViewOneDemo> {
     required ScrollController? controller,
     required onKeyCallback onKeyCallback,
     Axis scrollDirection = Axis.vertical,
-    bool addToSliverBox = false,
     IndexedWidgetBuilder? itemBuilder,
     required double height,
     double gap = 8,
   }) {
-    final child = Container(
+    return Container(
       height: height,
       padding: EdgeInsets.all(8),
       child: ListView.separated(
@@ -216,13 +215,6 @@ class _ListViewOneDemoState extends State<ListViewOneDemo> {
             )
       ),
     );
-
-    if (addToSliverBox) {
-      return SliverToBoxAdapter(
-        child: child,
-      );
-    }
-    return child;
   }
 
   _cancelTimer({bool isContinue = false}) {

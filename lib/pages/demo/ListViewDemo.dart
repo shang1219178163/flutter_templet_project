@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_templet_project/basicWidget/list_subtitle_cell.dart';
+import 'package:flutter_templet_project/extension/divider_ext.dart';
 import 'package:flutter_templet_project/extension/scroll_controller_ext.dart';
+import 'package:flutter_templet_project/mockData/mock_data.dart';
 import 'package:tuple/tuple.dart';
 
 typedef onKeyCallback = void Function(BuildContext context, int index, GlobalKey key);
@@ -193,13 +196,11 @@ class _ListViewDemoState extends State<ListViewDemo> {
 
 
   _buildListViewSeparated({
-    bool addToSliverBox = false,
     IndexedWidgetBuilder? itemBuilder,
     EdgeInsets padding = const EdgeInsets.all(0),
     double gap = 8,
   }) {
-
-    final child = Container(
+    return Container(
       height: height,
       padding: EdgeInsets.all(8),
       child: Scrollbar(
@@ -248,25 +249,14 @@ class _ListViewDemoState extends State<ListViewDemo> {
         ),
       ),
     );
-
-
-    if (addToSliverBox) {
-      return SliverToBoxAdapter(
-        child: child,
-      );
-    }
-    return child;
   }
 
-  _buildListViewSeparatedNew({
-    bool addToSliverBox = false,
+  _buildListViewSeparatedOne({
     IndexedWidgetBuilder? itemBuilder,
     EdgeInsets padding = const EdgeInsets.all(0),
     double gap = 8,
   }) {
-    // final items = List.generate(20, (index) => "${index}");
-
-    final child = Container(
+    return Container(
       height: 600,
       padding: EdgeInsets.all(8),
       child: ListView.separated(
@@ -322,12 +312,63 @@ class _ListViewDemoState extends State<ListViewDemo> {
       ),
     );
 
-    if (addToSliverBox) {
-      return SliverToBoxAdapter(
-        child: child,
-      );
-    }
-    return child;
+  }
+
+  _buildListViewSeparatedTwo({
+    IndexedWidgetBuilder? itemBuilder,
+    EdgeInsets padding = const EdgeInsets.all(0),
+    double gap = 8,
+  }) {
+    return ListView.separated(
+      cacheExtent: 180,
+      itemCount: kAliPayList.length,
+      itemBuilder: (context, index) {
+        final data = kAliPayList[index];
+        return ListSubtitleCell(
+          padding: EdgeInsets.all(10),
+          leading: ClipRRect(
+            borderRadius: BorderRadius.circular(4),
+            child: Image.network(
+              data.imageUrl,
+              width: 40,
+              height: 40,
+            ),
+          ),
+          title: Text(
+            data.title,
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w500,
+              color: Color(0xFF333333),
+            ),
+          ),
+          subtitle: Text(data.content,
+            // maxLines: 1,
+            // overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+              fontSize: 15,
+              color: Color(0xFF999999),
+            ),
+          ),
+          trailing: Text(data.time,
+            style: TextStyle(
+              fontSize: 13,
+              color: Color(0xFF999999),
+            ),
+          ),
+          subtrailing: Text("已完成",
+            style: TextStyle(
+              fontSize: 13,
+              color: Colors.blue,
+            ),
+          ),
+        );
+      },
+      separatorBuilder: (BuildContext context, int index) {
+        return DividerExt.custome();
+      },
+    );
+
   }
 
   test() {
