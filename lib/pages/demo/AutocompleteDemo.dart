@@ -7,6 +7,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:flutter_templet_project/extension/list_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
+import 'package:flutter_templet_project/extension/change_notifier_ext.dart';
 
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:flutter_templet_project/pages/tabBar_tabBarView_demo.dart';
@@ -288,7 +289,10 @@ class _AutocompleteDemoState extends State<AutocompleteDemo>{
     ]);
   }
 
-  _buildItem({required VoidCallback onTap, required Text text}) {
+  _buildItem({
+    required VoidCallback onTap,
+    required Text text
+  }) {
     return InkWell(
       onTap: onTap,
       child: Container(
@@ -309,8 +313,8 @@ class _AutocompleteDemoState extends State<AutocompleteDemo>{
 
 
   var colors = Colors.primaries;
-
-  var selectedColor = ValueNotifier(Colors.lightBlue);
+  // final selectedColor = ValueNotifier(Colors.lightBlue);
+  final selectedColor = Colors.lightBlue.vn;
 
   Widget buildExpandColor() {
     return ExpansionTile(

@@ -200,7 +200,7 @@ class _AutofillGroupDemoState extends State<AutofillGroupDemo> {
       ///输入框获取焦点时 并且没有输入文字时
       hintText: hintText,
       ///设置输入文本框的提示文字的样式
-      hintStyle: TextStyle(color: Colors.grey,textBaseline: TextBaseline.ideographic,),
+      hintStyle: TextStyle(color: Colors.grey, textBaseline: TextBaseline.ideographic,),
       ///输入文字前的小图标
       prefixIcon: Icon(Icons.search),
       ///输入文字后面的小图标
