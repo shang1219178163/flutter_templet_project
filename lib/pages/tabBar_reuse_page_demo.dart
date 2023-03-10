@@ -31,32 +31,30 @@ class TabBarReusePageDemo extends StatefulWidget {
 
 class _TabBarReusePageDemoState extends State<TabBarReusePageDemo> {
 
-
   bool isPageView = true;
-  bool isTabBarTop = true;
 
-
+  bool isTop = true;
 
   @override
   Widget build(BuildContext context) {
 
-    var val = isTabBarTop ? "底部" : "顶部";
     return Scaffold(
       appBar: AppBar(
         title: Text(isPageView ? "TabBarPageView" : "TabBarTabBarView"),
         actions: [
-          TextButton(onPressed: () {
-            ddlog("change");
-            setState(() {
+          TextButton(
+            onPressed: () {
               isPageView = !isPageView;
-            });
-          }, child: Icon(Icons.change_circle_outlined, color: Colors.white,)),
+              setState(() {});
+            },
+            child: Icon(Icons.change_circle_outlined, color: Colors.white,)
+          ),
           TextButton(onPressed: () {
-            ddlog("change");
-            setState(() {
-              isTabBarTop = !isTabBarTop;
-            });
-          }, child: Text(val, style: TextStyle(color: Colors.white),)),
+            isTop = !isTop;
+            setState(() {});
+          },
+            child: Text(isTop ? "底部" : "顶部", style: TextStyle(color: Colors.white),)
+          ),
         ],
       ),
       body: isPageView ? _buildTabBarPageView() : _buildTabBarTabBarView(),
@@ -64,31 +62,29 @@ class _TabBarReusePageDemoState extends State<TabBarReusePageDemo> {
   }
 
   Widget _buildTabBarPageView() {
-    return
-      TabBarPageView(
-          isTabBarTop: isTabBarTop,
-          items: _items,
-          canPageChanged: (index) {
-            return (index != 1);
-          },
-          onPageChanged: (index) {
-            ddlog(index);
-          }
-      );
+    return TabBarPageView(
+      isTabBarTop: isTop,
+      items: _items,
+      canPageChanged: (index) {
+        return (index != 1);
+      },
+      onPageChanged: (index) {
+        ddlog(index);
+      }
+    );
   }
 
   Widget _buildTabBarTabBarView() {
-    return
-      TabBarTabBarView(
-          isTabBarTop: isTabBarTop,
-          items: _items,
-          // canPageChanged: (index) {
-          //   return (index != 1);
-          // },
-          onPageChanged: (index) {
-            ddlog(index);
-          }
-      );
+    return TabBarTabBarView(
+      isTabBarTop: isTop,
+      items: _items,
+      // canPageChanged: (index) {
+      //   return (index != 1);
+      // },
+      onPageChanged: (index) {
+        ddlog(index);
+      }
+    );
   }
 
   List<Tuple2<String, Widget>> _items = [
@@ -169,4 +165,5 @@ class _TabBarReusePageDemoState extends State<TabBarReusePageDemo> {
       },
     )),
   ];
+
 }

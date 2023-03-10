@@ -111,8 +111,7 @@ class _TabBarPageViewDemoState extends State<TabBarPageViewDemo> with SingleTick
       // indicatorPadding: EdgeInsets.only(left: 6, right: 6),
       onTap: (index){
         setState(() {
-          _tabController.animateTo(index);
-          ddlog(index);
+          _pageController.jumpToPage(index);
         });
       },
     );

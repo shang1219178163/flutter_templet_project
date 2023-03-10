@@ -460,7 +460,6 @@ var list = [
   Tuple2(APPRouter.flexibleSpaceDemo, "flexibleSpaceDemo", ),
   Tuple2(APPRouter.nnHorizontalScrollWidgetDemo, "nnHorizontalScrollWidgetDemo", ),
   Tuple2(APPRouter.interactiveViewerDemo, "图片缩放", ),
-  Tuple2(APPRouter.tabBarPageViewDemo, "tabBarPageViewDemo页面封装", ),
 
 ];
 
