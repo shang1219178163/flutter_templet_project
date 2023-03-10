@@ -43,6 +43,8 @@ class _TabBarPageViewDemoState extends State<TabBarPageViewDemo> with SingleTick
 
   late PageController _pageController = PageController(initialPage: 0, keepPage: true);
 
+  var isTabBar = ValueNotifier(false);
+
   @override
   void initState() {
     super.initState();
@@ -59,19 +61,21 @@ class _TabBarPageViewDemoState extends State<TabBarPageViewDemo> with SingleTick
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('基础组件列表'),
+        title: Text('页面封装'),
         actions: [
           TextButton(
             onPressed: (){
               print("done");
+              isTabBar.value = !isTabBar.value;
+              setState(() {});
             },
-            child: Text("done", style: TextStyle(color: Colors.white),),
+            child: Text(isTabBar.value ? "top" : "bottom", style: TextStyle(color: Colors.white),),
           ),
         ],
-        // bottom: _buildTabBar(),
+        bottom: isTabBar.value ? null : _buildTabBar(),
       ),
       body: _buildPageView(),
-      bottomNavigationBar: _buildBottomNavigationBar(),
+      bottomNavigationBar: !isTabBar.value ? null : _buildBottomNavigationBar(),
       floatingActionButton: FloatingActionButton(
         tooltip: 'Increment',
         child: Icon(Icons.add),
