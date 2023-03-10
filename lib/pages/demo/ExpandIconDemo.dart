@@ -9,6 +9,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/list_view_segment_control.dart';
+import 'package:flutter_templet_project/basicWidget/section_header.dart';
 import 'package:flutter_templet_project/basicWidget/visible_container.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
@@ -51,13 +52,14 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
     Colors.blueGrey,
   ];
 
+  var selectedColor = ValueNotifier(Colors.black);
+
   List<int> _foldIndexs = List.generate(5, (index) => index);
 
   // List<Tuple2<List<String>, int>> foldList = _foldIndexs.map((e){
   //   final i = _foldIndexs.indexOf(e);
   //   return Tuple2(List.generate(8, (index) => "item${i}_$index"), i);
   // }).toList();
-
 
 
   @override
@@ -70,21 +72,20 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
       ),
       body: ListView(
         children: [
-          Text("ExpansionTile", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-          buildExpandIconColors(context),
-          Divider(),
-          Text("ListViewSegmentControl", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+          SectionHeader.h4(title: "ExpansionTile",),
+          buildExpandColorMenu(),
+          // Divider(),
+          SectionHeader.h4(title: "ListViewSegmentControl"),
           buildListViewHorizontal(),
           Divider(),
-          Text("Visibility", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+          SectionHeader.h4(title: "Visibility", ),
           _buildVisbility(),
           Divider(),
-          Text("自定义 VisibleContainer", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+          SectionHeader.h4(title: "自定义 VisibleContainer",),
           _buildVisibleContainer(),
           Divider(),
-          Text("自定义 FoldMenu", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+          SectionHeader.h4(title: "自定义 FoldMenu", ),
           FoldMenu(
-            // children: foldList,
             children: [
               Tuple2(List.generate(8, (index) => "item0_$index"), 0),
               Tuple2(List.generate(8, (index) => "item1_$index"), 1),
@@ -92,7 +93,7 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
               Tuple2(List.generate(8, (index) => "item3_$index"), 3),
               Tuple2(List.generate(8, (index) => "item4_$index"), 4),
             ],
-            foldCount: 13,
+            foldCount: 3,
             isVisible: _isVisible,
             onValueChanged: (row, index, indexs){
               ddlog("${row}, ${index}, ${indexs}");
@@ -103,13 +104,12 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
     );
   }
 
-  var chooseColor = Colors.black;
 
-  Widget buildExpandIconColors(BuildContext context) {
-    return
-    ExpansionTile(
-      leading: Icon(Icons.color_lens, color: chooseColor,),
-      title: Text('颜色主题', style: TextStyle(color: chooseColor),),
+
+  Widget buildExpandColorMenu() {
+    return ExpansionTile(
+      leading: Icon(Icons.color_lens, color: selectedColor.value,),
+      title: Text('颜色主题', style: TextStyle(color: selectedColor.value),),
       initiallyExpanded: false,
       children: <Widget>[
         Padding(
@@ -121,7 +121,7 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
               return InkWell(
                 onTap: () {
                   setState(() {
-                    chooseColor = e;
+                    selectedColor.value = e;
                   });
                   ddlog(e.nameDes,);
                 },
@@ -129,7 +129,7 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
                   width: 40,
                   height: 40,
                   color: e,
-                  child: chooseColor == e ? Icon(Icons.done, color: Colors.white,) : null,
+                  child: selectedColor.value == e ? Icon(Icons.done, color: Colors.white,) : null,
                 ),
               );
             }).toList(),

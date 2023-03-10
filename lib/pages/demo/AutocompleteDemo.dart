@@ -6,6 +6,8 @@ import 'package:get/get_core/src/get_main.dart';
 
 import 'package:flutter_templet_project/extension/list_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
+import 'package:flutter_templet_project/extension/build_context_ext.dart';
+
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:flutter_templet_project/pages/tabBar_tabBarView_demo.dart';
 
@@ -100,18 +102,8 @@ class _AutocompleteDemoState extends State<AutocompleteDemo>{
 
   _buildHeader() {
     return [
-      Column(
-        children: _params.map((e) => ListTile(
-          title: Text(e.name),
-          trailing: Switch(
-            onChanged: (bool value) {
-              e.isOpen = value;
-              setState(() {});
-            },
-            value: e.isOpen,
-          ),
-        )).toList(),
-      ),
+      // buildExpandColor(),
+      buildExpandMenu(),
       Divider(),
     ];
   }
@@ -315,6 +307,64 @@ class _AutocompleteDemoState extends State<AutocompleteDemo>{
     );
   }
 
+
+  var colors = Colors.primaries;
+
+  var selectedColor = ValueNotifier(Colors.lightBlue);
+
+  Widget buildExpandColor() {
+    return ExpansionTile(
+      leading: Icon(Icons.color_lens, color: selectedColor.value,),
+      title: Text('颜色', style: TextStyle(color: selectedColor.value),),
+      initiallyExpanded: false,
+      children: <Widget>[
+        Padding(
+          padding: EdgeInsets.only(left: 10, right: 10, bottom: 10),
+          child: Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: colors.map((e) {
+              return InkWell(
+                onTap: () {
+                  selectedColor.value = e;
+                  setState(() {});
+                },
+                child: Container(
+                  width: 40,
+                  height: 40,
+                  color: e,
+                  child: selectedColor.value == e ? Icon(Icons.done, color: Colors.white,) : null,
+                ),
+              );
+            }).toList(),
+          ),
+        )
+      ],
+    );
+  }
+
+  Widget buildExpandMenu() {
+    return ExpansionTile(
+      tilePadding: EdgeInsets.symmetric(horizontal: 10),
+      leading: Icon(Icons.ac_unit, color: selectedColor.value,),
+      title: Text('配置', style: TextStyle(color: selectedColor.value),),
+      initiallyExpanded: false,
+      children: <Widget>[
+        Column(
+          children: _params.map((e) => ListTile(
+            title: Text(e.name),
+            trailing: Switch(
+              onChanged: (bool value) {
+                e.isOpen = value;
+                setState(() {});
+              },
+              value: e.isOpen,
+            ),
+          )).toList(),
+        ),
+      ],
+    );
+  }
 }
 
 class OptionModel {

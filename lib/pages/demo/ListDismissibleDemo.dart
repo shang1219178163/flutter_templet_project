@@ -1,5 +1,5 @@
 //
-//  RecordListDemo.dart
+//  ListDismissibleDemo.dart
 //  flutter_templet_project
 //
 //  Created by shang on 5/19/21 6:32 PM.
@@ -13,18 +13,18 @@ import 'package:intl/intl.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 
-class RecordListDemo extends StatefulWidget {
+class ListDismissibleDemo extends StatefulWidget {
 
   final String? title;
 
-  RecordListDemo({ Key? key, this.title}) : super(key: key);
+  ListDismissibleDemo({ Key? key, this.title}) : super(key: key);
 
   
   @override
-  _RecordListDemoState createState() => _RecordListDemoState();
+  _ListDismissibleDemoState createState() => _ListDismissibleDemoState();
 }
 
-class _RecordListDemoState extends State<RecordListDemo> {
+class _ListDismissibleDemoState extends State<ListDismissibleDemo> {
   final editingController = TextEditingController();
   var selectedDate = DateTime.now();
 

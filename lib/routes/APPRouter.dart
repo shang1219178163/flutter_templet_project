@@ -143,7 +143,7 @@ import 'package:flutter_templet_project/pages/demo/NumberFormatDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NumberStepperDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PickerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ProgressHudDemo.dart';
-import 'package:flutter_templet_project/pages/demo/RecordListDemo.dart';
+import 'package:flutter_templet_project/pages/demo/ListDismissibleDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ReorderableListViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/RichTextDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ShaderMaskDemo.dart';
@@ -263,7 +263,7 @@ class APPRouter {
   static const progressHudDemoNew = '/ProgressHudDemoNew';
   static const toastContext = '/ToastContext';
   static const toastNoContext = '/ToastNoContext';
-  static const recordListDemo = '/RecordListDemo';
+  static const listDismissibleDemo = '/listDismissibleDemo';
   static const slidableDemo = '/SlidaableDemo';
   static const settingsPage = '/AppSettingsPage';
   static const containerDemo = '/containerDemo';
@@ -522,7 +522,7 @@ class AppPage {
     GetPage(name: APPRouter.progressHudDemoNew, page: () => ProgressHudDemoNew(),),
     GetPage(name: APPRouter.toastContext, page: () => ToastContext(),),
     GetPage(name: APPRouter.toastNoContext, page: () => ToastNoContext(),),
-    GetPage(name: APPRouter.recordListDemo, page: () => RecordListDemo(),),
+    GetPage(name: APPRouter.listDismissibleDemo, page: () => ListDismissibleDemo(),),
     GetPage(name: APPRouter.slidableDemo, page: () => SlidableDemo(),),
     GetPage(name: APPRouter.settingsPage, page: () => AppSettingsPage(),),
     GetPage(name: APPRouter.draggableDemo, page: () => DraggableDemo(),),

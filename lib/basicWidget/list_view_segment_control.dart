@@ -200,17 +200,19 @@ class _FoldMenuState extends State<FoldMenu> {
 
   Widget buildListViewHorizontal({
     required Tuple2<List<String>, int> e,
-    required int row}) {
+    required int row
+  }) {
     return ListViewSegmentControl(
-        items: e.item1,
-        itemWidth: widget.itemWidth,
-        selectedIndex: e.item2,
-        onValueChanged: (index){
-          // ddlog("${e.item2}, ${index}");
-          _indexs[row] = index;
-          // ddlog("${row}, ${index}, ${_indexs}");
-          widget.onValueChanged(row, index, _indexs);
-        });
+      items: e.item1,
+      itemWidth: widget.itemWidth,
+      selectedIndex: e.item2,
+      onValueChanged: (index){
+        // ddlog("${e.item2}, ${index}");
+        _indexs[row] = index;
+        // ddlog("${row}, ${index}, ${_indexs}");
+        widget.onValueChanged(row, index, _indexs);
+      }
+    );
   }
 
 }

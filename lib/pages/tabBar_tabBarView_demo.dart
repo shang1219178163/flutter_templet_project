@@ -54,7 +54,7 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
     _pages = [
       Tuple2('功能列表', _buildPage1()),
       Tuple2('升级列表', _buildPage2()),
-      Tuple2('列表(泛型)', _buildPage3()),
+      Tuple2('列表搜索', _buildPage3()),
       Tuple2('列表(折叠)', _buildPage4()),
     ];
 
@@ -203,34 +203,6 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
 
   _buildPage3() {
     return AutocompleteDemo(hideAppBar: true,);
-    return SectionListView<String, Tuple2<String, String>>(
-      headerList: tuples.map((e) => e.item1).toList(),
-      itemList: tuples.map((e) => e.item2).toList()
-          .map((e) => e.sorted((a, b) => a.item1.toLowerCase().compareTo(b.item1.toLowerCase()))).toList(),
-      headerBuilder: (e) {
-        return Container(
-          // color: Colors.red,
-          padding: EdgeInsets.only(top: 10, bottom: 8, left: 10, right: 15),
-          child: Text(e, style: TextStyle(fontWeight: FontWeight.w600),),
-        );
-      },
-      itemBuilder: (section, row, e) {
-        return ListTile(
-          title: Text(e.item2),
-          subtitle: Text(e.item2.toCapitalize()),
-          trailing: Icon(Icons.keyboard_arrow_right_rounded),
-          dense: true,
-          onTap: (){
-            // Get.toNamed(e.item1, arguments: e);
-            if (e.item1.toLowerCase().contains("loginPage".toLowerCase())){
-              Get.offNamed(e.item1, arguments: e.item1);
-            } else {
-              Get.toNamed(e.item1, arguments: e.item1);
-            }
-          },
-        );
-      },
-    );
   }
 
   _buildPage4() {
@@ -406,7 +378,7 @@ var list = [
   Tuple2(APPRouter.progressIndicatorDemo, "ProgressIndicatorDemo", ),
 
   Tuple2(APPRouter.reorderableListViewDemo, "reorderableListViewDemo", ),
-  Tuple2(APPRouter.recordListDemo, "recordListDemo", ),
+  Tuple2(APPRouter.listDismissibleDemo, "recordListDemo", ),
 
   Tuple2(APPRouter.segmentControlDemo, "segmentControlDemo", ),
   Tuple2(APPRouter.snackBarDemo, "SnackBar", ),
@@ -488,13 +460,12 @@ var list = [
   Tuple2(APPRouter.flexibleSpaceDemo, "flexibleSpaceDemo", ),
   Tuple2(APPRouter.nnHorizontalScrollWidgetDemo, "nnHorizontalScrollWidgetDemo", ),
   Tuple2(APPRouter.interactiveViewerDemo, "图片缩放", ),
-
+  Tuple2(APPRouter.tabBarPageViewDemo, "tabBarPageViewDemo页面封装", ),
 
 ];
 
 var slivers = [
   Tuple2(APPRouter.sliverFamilyDemo, "SliverFamilyDemo", ),
-
 
 ];
 
