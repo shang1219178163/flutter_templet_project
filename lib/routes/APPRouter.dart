@@ -6,6 +6,7 @@ import 'package:flutter_templet_project/basicWidget/drag_destination_view.dart';
 import 'package:flutter_templet_project/basicWidget/responsive_column.dart';
 import 'package:flutter_templet_project/pages/DataTypeDemo.dart';
 import 'package:flutter_templet_project/pages/PageLifecycleObserverDemo.dart';
+import 'package:flutter_templet_project/pages/RegExpDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedBuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedListDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedListSample.dart';
@@ -444,7 +445,7 @@ class APPRouter {
   static const netStateListenerDemoOne = '/netStateListenerDemoOne';
   static const interactiveViewerDemo = '/interactiveViewerDemo';
   static const dataTypeDemo = '/dataTypeDemo';
-
+  static const regExpDemo = '/regExpDemo';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -699,6 +700,8 @@ class AppPage {
     GetPage(name: APPRouter.netStateListenerDemoOne, page: () => NetStateListenerDemoOne(),),
     GetPage(name: APPRouter.interactiveViewerDemo, page: () => InteractiveViewerDemo(),),
     GetPage(name: APPRouter.dataTypeDemo, page: () => DataTypeDemo(),),
+    GetPage(name: APPRouter.regExpDemo, page: () => RegExpDemo(),),
+
 
   ];
 }

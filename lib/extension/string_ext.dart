@@ -129,7 +129,7 @@ extension StringExt on String{
 
   /// 用字符切分字符串
   seperatorByChars({
-    required TransformCallback<String> cb,
+    TransformCallback<String>? cb,
     String source = '[A-Z]',
     bool multiLine = false,
     bool caseSensitive = true,
@@ -151,7 +151,7 @@ extension StringExt on String{
     final seperators = matchs.map((e) => e[0] ?? "").where((e) => e.isNotEmpty).toList();
 
     var result = this;
-    seperators.forEach((e) => result = result.replaceAll(e, cb(e)));
+    seperators.forEach((e) => result = result.replaceAll(e, cb?.call(e) ?? e));
     return result;
   }
 

@@ -596,5 +596,7 @@ var forms = [
 
 var dataTypes = [
   Tuple2(APPRouter.dataTypeDemo, "数据类型", ),
+  Tuple2(APPRouter.regExpDemo, "正则匹配", ),
+
 
 ];
