@@ -499,9 +499,9 @@ var specials = [
   Tuple2(APPRouter.buttonStyleDemo, "按钮样式研究", ),
   Tuple2(APPRouter.keyDemo, "key研究", ),
 
-
   Tuple2(APPRouter.netStateListenerDemo, "netStateListenerDemo", ),
   Tuple2(APPRouter.netStateListenerDemoOne, "mixin监听网络", ),
+  Tuple2(APPRouter.ReflectDemo, "模型属性动态化赋值", ),
 
 ];
 
@@ -591,6 +591,7 @@ var others = [
 var forms = [
   Tuple2(APPRouter.autocompleteDemo, "autocompleteDemo", ),
   Tuple2(APPRouter.autofillGroupDemo, "autofillGroupDemo", ),
+  Tuple2(APPRouter.inputDatePickerFormFieldDemo, "inputDatePickerFormFieldDemo", ),
 
 ];
 

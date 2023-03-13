@@ -5,6 +5,7 @@ import 'package:flutter_templet_project/basicWidget/EnhanceTab/enhance_tab_bar_d
 import 'package:flutter_templet_project/basicWidget/drag_destination_view.dart';
 import 'package:flutter_templet_project/basicWidget/responsive_column.dart';
 import 'package:flutter_templet_project/pages/DataTypeDemo.dart';
+import 'package:flutter_templet_project/pages/ReflectDemo.dart';
 import 'package:flutter_templet_project/pages/PageLifecycleObserverDemo.dart';
 import 'package:flutter_templet_project/pages/RegExpDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedBuilderDemo.dart';
@@ -36,6 +37,7 @@ import 'package:flutter_templet_project/pages/demo/HorizontalCellDemo.dart';
 import 'package:flutter_templet_project/pages/demo/IgnorePointerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ImageBlendModeDemo.dart';
 import 'package:flutter_templet_project/pages/demo/InheritedWidgetDemo.dart';
+import 'package:flutter_templet_project/pages/demo/InputDatePickerFormFieldDemo.dart';
 import 'package:flutter_templet_project/pages/demo/InteractiveViewerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/IntrinsicHeightDemo.dart';
 import 'package:flutter_templet_project/pages/demo/KeyDemo.dart';
@@ -226,6 +228,7 @@ class APPRouter {
   static const thirdPage = '/ThirdPage';
   static const fourthPage = '/FourthPage';
 
+  static const ReflectDemo = '/moldelReflectDemo';
   static const pageLifecycleObserverDemo = '/pageLifecycleObserverDemo';
   static const mediaQueryDemo = '/mediaQueryDemo';
   static const tabBarDemo = '/TabBarDemo';
@@ -446,6 +449,8 @@ class APPRouter {
   static const interactiveViewerDemo = '/interactiveViewerDemo';
   static const dataTypeDemo = '/dataTypeDemo';
   static const regExpDemo = '/regExpDemo';
+  static const inputDatePickerFormFieldDemo = '/inputDatePickerFormFieldDemo';
+
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -497,7 +502,7 @@ class AppPage {
     GetPage(name: APPRouter.thirdPage, page: () => ThirdPage(),),
     GetPage(name: APPRouter.fourthPage, page: () => FourthPage(),),
 
-
+    GetPage(name: APPRouter.ReflectDemo, page: () => ReflectDemo(),),
     GetPage(name: APPRouter.pageLifecycleObserverDemo, page: () => PageLifecycleObserverDemo(),),
 
     GetPage(name: APPRouter.mediaQueryDemo, page: () => MediaQueryDemo(),),
@@ -701,6 +706,7 @@ class AppPage {
     GetPage(name: APPRouter.interactiveViewerDemo, page: () => InteractiveViewerDemo(),),
     GetPage(name: APPRouter.dataTypeDemo, page: () => DataTypeDemo(),),
     GetPage(name: APPRouter.regExpDemo, page: () => RegExpDemo(),),
+    GetPage(name: APPRouter.inputDatePickerFormFieldDemo, page: () => InputDatePickerFormFieldDemo(),),
 
 
   ];
