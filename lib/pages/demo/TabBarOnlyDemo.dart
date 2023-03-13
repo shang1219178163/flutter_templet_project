@@ -9,7 +9,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/tab_bar_segment.dart';
+import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/uti/R.dart';
+import 'package:tuple/tuple.dart';
+
+import 'TabBarDemo.dart';
 
 class TabBarOnlyDemo extends StatefulWidget {
 
@@ -21,9 +25,11 @@ class TabBarOnlyDemo extends StatefulWidget {
   _TabBarOnlyDemoState createState() => _TabBarOnlyDemoState();
 }
 
-class _TabBarOnlyDemoState extends State<TabBarOnlyDemo> with SingleTickerProviderStateMixin {
+class _TabBarOnlyDemoState extends State<TabBarOnlyDemo> with TickerProviderStateMixin {
 
   late TabController _tabController;
+  late TabController _tabController1;
+
   /// 初始索引
   int initialIndex = 1;
   /// 当前索引
@@ -44,66 +50,92 @@ class _TabBarOnlyDemoState extends State<TabBarOnlyDemo> with SingleTickerProvid
           });
         }
       });
+
+    _tabController1 = TabController(length: tabItems.length, vsync: this);
+
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          flexibleSpace: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: NetworkImage(R.image.imgUrls[5]),
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          title: Text(widget.title ?? "$widget"),
-          actions: ['reset',].map((e) => TextButton(
-            child: Text(e,
-              style: TextStyle(color: Colors.white),
-            ),
-            onPressed: onDone,
-          )).toList(),
-          bottom: TabBar(
-            // controller: _tabController,
-            onTap: (index) => print("onTap $index"),
-            isScrollable: true,
-            // tabs: titles.map((e) => Tab(text: e,)).toList(),
-            tabs: titles.map((e) => buildItem(e)).toList(),
-            // indicatorSize: TabBarIndicatorSize.label,
-            // indicatorPadding: EdgeInsets.only(left: 6, right: 6),
-            indicator: UnderlineTabIndicator(
-              borderSide: BorderSide(
-                style: BorderStyle.solid,
-                width: 3,
-                color: Colors.red,
-              )
+      appBar: AppBar(
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: NetworkImage(R.image.imgUrls[5]),
+              fit: BoxFit.cover,
             ),
           ),
         ),
-        body: Center(
-          child: ListView(
-            children: [
-              Text("${currentIndex}"),
-
-              Container(
-                color: Colors.green,
-                // width: 200,
-                height: 100,
-                child: BottomTabBar(
-                  tabCount: titles.length,
-                  onClick: (BuildContext context, int index) {
-                    print("BottomTabBar ${index}");
-                  },
-                  itembuilder: (BuildContext context, int index) {
-                    return Tab(text: titles[index]);
-                  },
-                ),
-              )
-            ],
+        title: Text(widget.title ?? "$widget"),
+        actions: ['reset',].map((e) => TextButton(
+          child: Text(e,
+            style: TextStyle(color: Colors.white),
           ),
-        )
+          onPressed: onDone,
+        )).toList(),
+        bottom: TabBar(
+          controller: _tabController,
+          onTap: (index) => print("onTap $index"),
+          isScrollable: true,
+          // tabs: titles.map((e) => Tab(text: e,)).toList(),
+          tabs: titles.map((e) => buildItem(e)).toList(),
+          // indicatorSize: TabBarIndicatorSize.label,
+          // indicatorPadding: EdgeInsets.only(left: 6, right: 6),
+          indicator: UnderlineTabIndicator(
+            borderSide: BorderSide(
+              style: BorderStyle.solid,
+              width: 3,
+              color: Colors.red,
+            )
+          ),
+        ),
+      ),
+      // body: _buildBody(),
+      body: _buildTabBarPage(controller: _tabController1),
+    );
+  }
+
+  _buildBody() {
+    return Column(
+      children: [
+        Text(currentIndex.toString()),
+      ],
+    );
+  }
+
+  /// TabBar 脱离 AppBar
+  Widget _buildTabBarPage({
+    TabController? controller,
+    double barHeight = 50,
+  }) {
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints){
+
+        return Column(
+          children: [
+            Container(
+              color: Colors.blue,
+              height: barHeight,
+              child: TabBar(
+                controller: controller,
+                isScrollable: true,
+                // padding: EdgeInsets.symmetric(horizontal: 42),
+                // indicatorPadding: EdgeInsets.symmetric(horizontal: 42),
+                labelPadding: EdgeInsets.symmetric(horizontal: 30),
+                tabs: tabItems.map((e) => Tab(icon: e.item1)).toList(),
+              ),
+            ),
+            Container(
+              height: constraints.maxHeight - barHeight,
+              child: TabBarView(
+                controller: controller,
+                children: tabItems.map((e) => e.item2).toList(),
+              ),
+            ),
+          ],
+        );
+      }
     );
   }
 
@@ -124,6 +156,7 @@ class _TabBarOnlyDemoState extends State<TabBarOnlyDemo> with SingleTickerProvid
     print("onDone");
     _tabController.index = initialIndex;
   }
+
 }
 
 

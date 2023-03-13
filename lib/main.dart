@@ -1,6 +1,14 @@
-import 'package:flutter/cupertino.dart';
+//
+//  Main.dart
+//  flutter_templet_project
+//
+//  Created by shang on 3/13/23 4:07 PM.
+//  Copyright © 3/13/23 shang. All rights reserved.
+//
+
+
+
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';

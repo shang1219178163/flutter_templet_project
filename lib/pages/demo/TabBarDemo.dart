@@ -29,55 +29,60 @@ class TabBarDemo extends StatefulWidget {
 
 class _TabBarDemoState extends State<TabBarDemo> with AutomaticKeepAliveClientMixin{
 
-  final items = <Tuple2<Tab, Widget>>[
-    Tuple2(
-      Tab(icon: Icon(Icons.directions_railway)),
-      FirstPage(),
-    ),
-    Tuple2(
-      Tab(icon: Icon(Icons.directions_car)),
-      SecondPage(),
-    ),
-    Tuple2(
-      Tab(icon: Icon(Icons.directions_bus)),
-      ThirdPage(),
-    ),
-    Tuple2(
-      Tab(icon: Icon(Icons.directions_bike)),
-      FourthPage(),
-    ),
-    Tuple2(
-      Tab(icon: Icon(Icons.directions_boat)),
-      BatterLevelPage(),
-    ),
-  ];
 
-
-  @override
-  bool get wantKeepAlive => true;
+  // theme: Get.isDarkMode ? ThemeData.dark(): ThemeData.light(),
+  /// 当前主题
+  ThemeData get themeData => Get.isDarkMode ? APPThemeSettings.instance.darkThemeData : APPThemeSettings.instance.themeData;
 
   @override
   Widget build(BuildContext context) {
     super.build(context);//必须添加
 
     return MaterialApp(
-      // theme: Get.isDarkMode ? ThemeData.dark(): ThemeData.light(),
-      theme: Get.isDarkMode ? APPThemeSettings.instance.darkThemeData : APPThemeSettings.instance.themeData,
+      theme: themeData,
       home: DefaultTabController(
         initialIndex: widget.initialIndex,
-        length: items.length,
+        length: tabItems.length,
         child: Scaffold(
           appBar: AppBar(
             bottom: TabBar(
-              tabs: items.map((e) => e.item1).toList(),
+              tabs: tabItems.map((e) => Tab(icon: e.item1)).toList(),
             ),
             title: Text('$widget'),
           ),
           body: TabBarView(
-            children: items.map((e) => e.item2).toList(),
+            children: tabItems.map((e) => e.item2).toList(),
           ),
         ),
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
+
 }
+
+/// Tab 数组
+final tabItems = <Tuple2<Icon, Widget>>[
+  Tuple2(
+    Icon(Icons.directions_railway),
+    FirstPage(),
+  ),
+  Tuple2(
+    Icon(Icons.directions_car),
+    SecondPage(),
+  ),
+  Tuple2(
+    Icon(Icons.directions_bus),
+    ThirdPage(),
+  ),
+  Tuple2(
+    Icon(Icons.directions_bike),
+    FourthPage(),
+  ),
+  Tuple2(
+    Icon(Icons.directions_boat),
+    BatterLevelPage(),
+  ),
+];

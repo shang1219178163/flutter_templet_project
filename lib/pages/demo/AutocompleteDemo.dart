@@ -1,6 +1,5 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_templet_project/basicWidget/nn_autocomplete_options_view.dart';
 import 'package:get/get_core/src/get_main.dart';
 

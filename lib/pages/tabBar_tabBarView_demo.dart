@@ -126,7 +126,8 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
         onPressed: () {
           kScaffoldKey.currentState!.openEndDrawer();
           // testData();
-          getTitles(tuples: tuples);
+          // final titles = getTitles(tuples: tuples);
+          // print("titles: ${titles}");
         },
       ),
     );
@@ -137,6 +138,7 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
       cacheExtent: 180,
       itemCount: kAliPayList.length,
       itemBuilder: (context, index) {
+
         final data = kAliPayList[index];
         return ListSubtitleCell(
           padding: EdgeInsets.all(10),
@@ -225,22 +227,23 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
             ),
           );
         },
-        bodyChildren: e.item2,
+        bodyChildren: e.item2.sorted((a, b) => a.item1.toLowerCase().compareTo(b.item1.toLowerCase())),
         bodyItemBuilder: (context, e) {
           return ListTile(
-              title: Text(e.item1, style: TextStyle(fontSize: 14),),
-              subtitle: Text(e.item2, style: TextStyle(fontSize: 12),),
-              trailing: Icon(Icons.chevron_right),
-              dense: true,
-              // contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
-              onTap: () {
-                ddlog("section_");
-                if (e.item1.toLowerCase().contains("loginPage".toLowerCase())){
-                  Get.offNamed(e.item1, arguments: e.item1);
-                } else {
-                  Get.toNamed(e.item1, arguments: e.item1);
-                }
-              });
+            title: Text(e.item1, style: TextStyle(fontSize: 14),),
+            subtitle: Text(e.item2, style: TextStyle(fontSize: 12),),
+            trailing: Icon(Icons.chevron_right),
+            dense: true,
+            // contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
+            onTap: () {
+              ddlog("section_");
+              if (e.item1.toLowerCase().contains("loginPage".toLowerCase())){
+                Get.offNamed(e.item1, arguments: e.item1);
+              } else {
+                Get.toNamed(e.item1, arguments: e.item1);
+              }
+            }
+          );
         },
       )).toList(),
     );
@@ -248,7 +251,7 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
   
   List<String> getTitles({required List<Tuple2<String, List<Tuple2<String, String>>>> tuples}) {
     final titles = tuples.expand((e) => e.item2.map((e) => e.item1)).toList();
-    final result = List<String>.from(titles);
+    final result = List<String>.from(titles.sorted());
     // print('titles runtimeType:${titles.runtimeType},${titles.every((element) => element is String)},');
     print('result runtimeType:${result.runtimeType}');
     return result;
@@ -290,45 +293,9 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
     ddlog(value);
   }
 
-  _buildTextField() {
-    return Container(
-      ///SizedBox 用来限制一个固定 width height 的空间
-      child: SizedBox(
-        width: 400,
-        height: 130,
-        child: Container(
-          color: Colors.white24,
-          ///距离顶部
-          margin: EdgeInsets.only(top: 30),
-          padding: EdgeInsets.all(10),
-          ///Alignment 用来对齐 Widget
-          alignment: Alignment(0, 0),
-          ///文本输入框
-          child: TextField(
-            controller: textEditingController,
-            ///用来配置 TextField 的样式风格
-            decoration: InputDecoration(
-              ///设置输入文本框的提示文字
-              ///输入框获取焦点时 并且没有输入文字时
-              hintText: "请输入关键字搜索",
-              ///设置输入文本框的提示文字的样式
-              hintStyle: TextStyle(color: Colors.grey, textBaseline: TextBaseline.ideographic,),
-              
-              ///输入文字前的小图标
-              prefixIcon: Icon(Icons.search),
-              ///输入文字后面的小图标
-              suffixIcon: textEditingController.text.length == 0 ? null : IconButton(
-                onPressed: () => textEditingController.clear(),
-                icon: Icon(Icons.close),
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
 }
 
+/// 元祖总数组
 var tuples = [
   Tuple2("数据类型", dataTypes),
   Tuple2("特殊功能", specials),

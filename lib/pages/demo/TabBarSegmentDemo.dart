@@ -4,19 +4,18 @@ import 'package:flutter_templet_project/basicWidget/tab_bar_segment.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/uti/R.dart';
-import 'package:tuple/tuple.dart';
 
-class SegmentTabBarDemo extends StatefulWidget {
+class TabBarSegmentDemo extends StatefulWidget {
 
-  SegmentTabBarDemo({ Key? key, this.title}) : super(key: key);
+  TabBarSegmentDemo({ Key? key, this.title}) : super(key: key);
 
   final String? title;
 
   @override
-  _SegmentTabBarDemoState createState() => _SegmentTabBarDemoState();
+  _TabBarSegmentDemoState createState() => _TabBarSegmentDemoState();
 }
 
-class _SegmentTabBarDemoState extends State<SegmentTabBarDemo> with SingleTickerProviderStateMixin {
+class _TabBarSegmentDemoState extends State<TabBarSegmentDemo> with SingleTickerProviderStateMixin {
   TabController? _tabController;
 
   // /// 初始索引
@@ -40,7 +39,6 @@ class _SegmentTabBarDemoState extends State<SegmentTabBarDemo> with SingleTicker
     _tabController?.addListener(() {
       print(_tabController?.index);
       indexVN.value = _tabController!.index;
-      print(_tabController);
     });
   }
 
@@ -172,17 +170,17 @@ class _SegmentTabBarDemoState extends State<SegmentTabBarDemo> with SingleTicker
 }
 
 
-class SegmentTabBarNewDemo extends StatefulWidget {
+class TabBarSegmentNewDemo extends StatefulWidget {
 
-  SegmentTabBarNewDemo({ Key? key, this.title}) : super(key: key);
+  TabBarSegmentNewDemo({ Key? key, this.title}) : super(key: key);
 
   final String? title;
 
   @override
-  _SegmentTabBarNewDemoState createState() => _SegmentTabBarNewDemoState();
+  _TabBarSegmentNewDemoState createState() => _TabBarSegmentNewDemoState();
 }
 
-class _SegmentTabBarNewDemoState extends State<SegmentTabBarNewDemo> with SingleTickerProviderStateMixin {
+class _TabBarSegmentNewDemoState extends State<TabBarSegmentNewDemo> with SingleTickerProviderStateMixin {
 
   // /// 初始索引
   // int initialIndex = 1;
@@ -195,10 +193,10 @@ class _SegmentTabBarNewDemoState extends State<SegmentTabBarNewDemo> with Single
 
   TabController? _tabController;
 
-  GlobalKey<TabBarSegmentState> _globalKey = GlobalKey(debugLabel: "CustomeTabBar");
+  final _globalKey = GlobalKey<TabBarSegmentState>(debugLabel: "CustomeTabBar");
   // GlobalKey<TabBarSegmentState> _globalKey1 = GlobalKey();
 
-  ValueNotifier<int> indexVN = ValueNotifier<int>(0);
+  final indexVN = ValueNotifier<int>(0);
 
   @override
   void dispose() {
