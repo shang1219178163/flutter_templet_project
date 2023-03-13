@@ -17,15 +17,11 @@ class EnhanceTabBarDemo extends StatefulWidget {
 
 class _EnhanceTabBarDemoState extends State<EnhanceTabBarDemo> with SingleTickerProviderStateMixin {
 
-  final indicatorSizes = <EnhanceTabBarIndicatorSize>[
-    EnhanceTabBarIndicatorSize.label,
-    EnhanceTabBarIndicatorSize.tab,
-    EnhanceTabBarIndicatorSize.fixedWidth,
-  ];
+  final indicatorSizes = EnhanceTabBarIndicatorSize.values;
 
   // List<String> get indicatorTypes => indicatorSizes.map((e) => e.toString().split(".").last).toList();
 
-  EnhanceTabBarIndicatorSize? dropValue;
+  EnhanceTabBarIndicatorSize? dropValue = EnhanceTabBarIndicatorSize.tab;
 
   // /// 初始索引
   // int initialIndex = 1;
@@ -38,7 +34,7 @@ class _EnhanceTabBarDemoState extends State<EnhanceTabBarDemo> with SingleTicker
 
   TabController? _tabController;
 
-  ValueNotifier<int> indexVN = ValueNotifier<int>(0);
+  final indexVN = ValueNotifier<int>(0);
 
   @override
   void dispose() {
@@ -177,7 +173,9 @@ class _EnhanceTabBarDemoState extends State<EnhanceTabBarDemo> with SingleTicker
     return DropdownButton<EnhanceTabBarIndicatorSize>(
       value: dropValue,
       items: indicatorSizes.map((e) => DropdownMenuItem(
-        child: Text(e.toString().split(".").last),
+        child: Center(
+          child: Text(e.toString().split(".").last)
+        ),
         value: e,
       ),).toList(),
       onChanged: (value) {
