@@ -427,6 +427,9 @@ var list = [
   Tuple2(APPRouter.flexibleSpaceDemo, "flexibleSpaceDemo", ),
   Tuple2(APPRouter.nnHorizontalScrollWidgetDemo, "nnHorizontalScrollWidgetDemo", ),
   Tuple2(APPRouter.interactiveViewerDemo, "图片缩放", ),
+  Tuple2(APPRouter.dateRangePickerDialogDemo, "日期范围组件", ),
+  Tuple2(APPRouter.mergeableMaterialDemo, "mergeableMaterialDemo", ),
+
 
 ];
 

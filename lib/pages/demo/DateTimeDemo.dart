@@ -29,16 +29,20 @@ class _DateTimeDemoState extends State<DateTimeDemo> {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
 
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title ?? "$widget"),
-          actions: [
-            TextButton(onPressed: (){
+      appBar: AppBar(
+        title: Text(widget.title ?? "$widget"),
+        actions: [
+          TextButton(
+            onPressed: (){
               _handleDateTime();
-
-            }, child: Text("done", style: TextStyle(color: Colors.white),)),
-          ],
-        ),
-        body: _buildInputDatePickerFormField(),
+            },
+            child: Text("done",
+              style: TextStyle(color: Colors.white),
+            )
+          ),
+        ],
+      ),
+      body: _buildInputDatePickerFormField(),
     );
   }
 
@@ -69,16 +73,12 @@ class _DateTimeDemoState extends State<DateTimeDemo> {
         errorFormatText: 'errorFormatText',
         errorInvalidText: 'errorInvalidText',
         onDateSubmitted: (date) {
-          print(date);
-          setState(() {
-            selectedDate = date;
-          });
+          selectedDate = date;
+          setState(() {});
         },
         onDateSaved: (date) {
-          print(date);
-          setState(() {
-            selectedDate = date;
-          });
+          selectedDate = date;
+          setState(() {});
         },
       ),
     );

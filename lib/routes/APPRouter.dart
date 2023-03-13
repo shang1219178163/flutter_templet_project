@@ -25,6 +25,7 @@ import 'package:flutter_templet_project/pages/demo/ColoredBoxDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ContainerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/CustomScrollBarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/CustomSwipperDemo.dart';
+import 'package:flutter_templet_project/pages/demo/DateRangePickerDialogDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DecorationDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DismissibleDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DragAndDropDemo.dart';
@@ -48,6 +49,7 @@ import 'package:flutter_templet_project/pages/demo/MarqueeWidgetDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MaterialBannerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MaterialDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MediaQueryDemo.dart';
+import 'package:flutter_templet_project/pages/demo/MergeableMaterialDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ModalBarrierDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MyPopverDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NavigationToolbarDemo.dart';
@@ -450,6 +452,8 @@ class APPRouter {
   static const dataTypeDemo = '/dataTypeDemo';
   static const regExpDemo = '/regExpDemo';
   static const inputDatePickerFormFieldDemo = '/inputDatePickerFormFieldDemo';
+  static const dateRangePickerDialogDemo = '/dateRangePickerDialogDemo';
+  static const mergeableMaterialDemo = '/mergeableMaterialDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -707,6 +711,8 @@ class AppPage {
     GetPage(name: APPRouter.dataTypeDemo, page: () => DataTypeDemo(),),
     GetPage(name: APPRouter.regExpDemo, page: () => RegExpDemo(),),
     GetPage(name: APPRouter.inputDatePickerFormFieldDemo, page: () => InputDatePickerFormFieldDemo(),),
+    GetPage(name: APPRouter.dateRangePickerDialogDemo, page: () => DateRangePickerDialogDemo(),),
+    GetPage(name: APPRouter.mergeableMaterialDemo, page: () => MergeableMaterialDemo(),),
 
 
   ];

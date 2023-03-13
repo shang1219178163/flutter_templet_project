@@ -29,7 +29,7 @@ class _MaterialBannerDemoState extends State<MaterialBannerDemo> {
         )
     );
   }
-  
+
   _buildMaterialBanner() {
     return MaterialBanner(
       content: Text('Your account has been deleted.'),
@@ -52,5 +52,4 @@ class _MaterialBannerDemoState extends State<MaterialBannerDemo> {
       ],
     );
   }
-
 }
