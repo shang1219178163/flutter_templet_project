@@ -88,7 +88,7 @@ class _MergeableMaterialDemoState extends State<MergeableMaterialDemo> {
 
     return Column(
       children: <Widget>[
-        MergeableMaterial(hasDividers: true, children: items),
+        MergeableMaterial(hasDividers: false, children: items),
         ElevatedButton(
           child: Text("点击添加"),
           onPressed: () {

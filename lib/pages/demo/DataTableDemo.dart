@@ -74,7 +74,7 @@ class _DataTableDemoState extends State<DataTableDemo> {
     );
   }
 
-  final Map<int, Widget> children = <int, Widget>{
+  final children = <int, Widget>{
     0: Container(
       padding: EdgeInsets.all(8),
       child: Text("Item 1", style: TextStyle(fontSize: 15, color: Colors.black)),
@@ -204,7 +204,7 @@ class User {
   bool isSelected = false;
 }
 
-class DataTableDemoNew extends StatelessWidget {
+class PaginatedDataTableDemo extends StatelessWidget {
   List<Tuple2> titles = [
     Tuple2("姓名", "name", ),
     Tuple2("性别", "sex", ),

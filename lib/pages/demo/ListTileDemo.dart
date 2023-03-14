@@ -8,6 +8,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/section_header.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 
 class ListTileDemo extends StatefulWidget {
@@ -20,13 +21,37 @@ class ListTileDemo extends StatefulWidget {
 }
 
 class _ListTileDemoState extends State<ListTileDemo> {
-  bool _value = false;
+  bool _isSelected = false;
+  
+  // final items = <String>[
+  //   "男", "女",
+  // ];
+  //
+  // String groupValue = "";
+
+  String sexValue = "";
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    // groupValue = items[0];
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title ?? "$widget"),
+        actions: ['done',].map((e) => TextButton(
+          child: Text(e,
+            style: TextStyle(color: Colors.white),
+          ),
+          onPressed: () => print(e),)
+        ).toList(),
+      ),
       body: buildBody(),
     );
   }
@@ -47,41 +72,80 @@ class _ListTileDemoState extends State<ListTileDemo> {
             CheckboxListTile(
               title: Text("CheckboxListTile"),
               subtitle: Text("subtitle"),
-              value: _value,
+              value: _isSelected,
               onChanged: (value) {
                 ddlog(["CheckboxListTile", value]);
                 if (value == null) {
                   return;
                 }
-                setState(() {
-                  _value = value;
-                });
+                _isSelected = value;
+                setState(() {});
               }),
             SwitchListTile(
               title: Text("SwitchListTile"),
               subtitle: Text("subtitle"),
-              value: _value,
+              value: _isSelected,
               onChanged: (value) {
                 ddlog(["SwitchListTile", value]);
                 setState(() {
-                  _value = value;
+                  _isSelected = value;
                 });
-              }),
-            RadioListTile(
-              title: Text("RadioListTile"),
-              subtitle: Text("subtitle"),
-              groupValue: _value,
-              value: _value,
+              }
+            ),
+            _buildRadioGroup(
+              header: Container(
+                color: Colors.lightBlue,
+                child: SectionHeader.h5(title: "RadioGroup 性别选择",),
+              ),
+              footer: Container(
+                color: Colors.lightGreen,
+                child: SectionHeader.h6(title: "RadioGroup 备注信息")
+              ),
+              cb: (value) {
+                sexValue = value;
+                print(["_buildRadioGroup", sexValue]);
+              }
+            ),
+          ],
+      )),
+    );
+  }
+
+  /// 一组选项
+  _buildRadioGroup({
+    List items = const <String>["男", "女",],
+    String groupValue = "男",
+    ValueChanged<String>? cb,
+    Widget? header,
+    Widget? footer
+  }) {
+    return StatefulBuilder(
+      builder: (BuildContext context, StateSetter setState) {
+
+        return Column(
+          children: [
+           if (header != null) header,
+            ...items.map((e) => RadioListTile<String>(
               controlAffinity: ListTileControlAffinity.trailing,
+              title: Text(e),
+              subtitle: Text("subtitle"),
+              value: e,
+              groupValue: groupValue,
+              selected: e == groupValue,
               toggleable: true,
               onChanged: (value) {
-                ddlog(["RadioListTile", value]);
                 if (value == null) {
                   return;
                 }
-              }),
+                groupValue = value;
+                cb?.call(groupValue);
+                setState(() {});
+              }
+            )).toList(),
+            if (footer != null) footer,
           ],
-      )),
+        );
+      }
     );
   }
 }
