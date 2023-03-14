@@ -42,6 +42,7 @@ import 'package:flutter_templet_project/pages/demo/InputDatePickerFormFieldDemo.
 import 'package:flutter_templet_project/pages/demo/InteractiveViewerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/IntrinsicHeightDemo.dart';
 import 'package:flutter_templet_project/pages/demo/KeyDemo.dart';
+import 'package:flutter_templet_project/pages/demo/ListTileDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ListViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ListViewOneDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ListViewStyleDemo.dart';
@@ -52,6 +53,7 @@ import 'package:flutter_templet_project/pages/demo/MediaQueryDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MergeableMaterialDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ModalBarrierDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MyPopverDemo.dart';
+import 'package:flutter_templet_project/pages/demo/NavigationRailDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NavigationToolbarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NetStateListenerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NetStateListenerDemoOne.dart';
@@ -276,7 +278,7 @@ class APPRouter {
   static const draggableDemo = '/DraggableDemo';
   static const forgetPasswordPage = '/ForgetPasswordPage';
   static const dataTableDemo = '/DataTableDemo';
-  static const dataTableDemoNew = '/DataTableDemoNew';
+  static const dataTableByPaginatedDemo = '/DataTableDemoNew';
   static const segmentControlDemo = '/SegmentControlDemo';
   static const sliderDemo = '/sliderDemo';
   static const draggableScrollableSheetDemo = '/DraggableScrollableSheetDemo';
@@ -454,6 +456,8 @@ class APPRouter {
   static const inputDatePickerFormFieldDemo = '/inputDatePickerFormFieldDemo';
   static const dateRangePickerDialogDemo = '/dateRangePickerDialogDemo';
   static const mergeableMaterialDemo = '/mergeableMaterialDemo';
+  static const navigationRailDemo = '/navigationRailDemo';
+  static const listTileDemo = '/listTileDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -538,7 +542,7 @@ class AppPage {
     GetPage(name: APPRouter.draggableDemo, page: () => DraggableDemo(),),
     GetPage(name: APPRouter.containerDemo, page: () => ContainerDemo(),),
     GetPage(name: APPRouter.dataTableDemo, page: () => DataTableDemo(),),
-    GetPage(name: APPRouter.dataTableDemoNew, page: () => DataTableDemoNew(),),
+    GetPage(name: APPRouter.dataTableByPaginatedDemo, page: () => PaginatedDataTableDemo(),),
     GetPage(name: APPRouter.segmentControlDemo, page: () => SegmentControlDemo(),),
     GetPage(name: APPRouter.sliderDemo, page: () => SliderDemo(),),
     GetPage(name: APPRouter.draggableScrollableSheetDemo, page: () => DraggableScrollableSheetDemo(),),
@@ -713,6 +717,8 @@ class AppPage {
     GetPage(name: APPRouter.inputDatePickerFormFieldDemo, page: () => InputDatePickerFormFieldDemo(),),
     GetPage(name: APPRouter.dateRangePickerDialogDemo, page: () => DateRangePickerDialogDemo(),),
     GetPage(name: APPRouter.mergeableMaterialDemo, page: () => MergeableMaterialDemo(),),
+    GetPage(name: APPRouter.navigationRailDemo, page: () => NavigationRailDemo(),),
+    GetPage(name: APPRouter.listTileDemo, page: () => ListTileDemo(),),
 
 
   ];

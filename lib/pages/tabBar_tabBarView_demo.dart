@@ -58,7 +58,7 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
       Tuple2('列表(折叠)', _buildPage4()),
     ];
 
-    _tabController.index = _pages.length - 1;
+    _tabController.index = _pages.length - 2;
     // testData();
   }
 
@@ -324,7 +324,7 @@ var list = [
   Tuple2(APPRouter.contextMenuActionDemo, "cupertinoFormDemo", ),
 
   Tuple2(APPRouter.dataTableDemo, "dateTableDemo", ),
-  Tuple2(APPRouter.dataTableDemoNew, "dataTableDemoNew", ),
+  Tuple2(APPRouter.dataTableByPaginatedDemo, "dataTableDemoNew", ),
   Tuple2(APPRouter.draggableDemo, "draggableDemo", ),
   Tuple2(APPRouter.draggableScrollableSheetDemo, "draggableScrollableSheetDemo", ),
 
@@ -429,6 +429,8 @@ var list = [
   Tuple2(APPRouter.interactiveViewerDemo, "图片缩放", ),
   Tuple2(APPRouter.dateRangePickerDialogDemo, "日期范围组件", ),
   Tuple2(APPRouter.mergeableMaterialDemo, "mergeableMaterialDemo", ),
+  Tuple2(APPRouter.navigationRailDemo, "navigationRailDemo", ),
+  Tuple2(APPRouter.listTileDemo, "listTileDemo", ),
 
 
 ];
