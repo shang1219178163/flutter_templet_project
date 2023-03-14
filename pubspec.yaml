@@ -26,6 +26,7 @@ dependencies:
   tuple: ^2.0.0
   flutter_hooks: ^0.18.3
   flutter_screenutil: ^5.0.1
+  cached_network_image: ^3.2.0
 
 #  flutter_boost: ^1.17.1
   flutter_boost:

@@ -1,6 +1,8 @@
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+
 import 'package:flutter_templet_project/extension/edge_insets_ext.dart';
 
 
@@ -24,7 +26,6 @@ class SynDecorationWidget extends StatelessWidget {
     this.bgUrl,
     this.imageFit = BoxFit.cover,
     this.boxShadow,
-    this.addToSliverBox = false,
     this.hideBlur = false,
   }) : super(key: key);
 
@@ -70,9 +71,6 @@ class SynDecorationWidget extends StatelessWidget {
   /// 渐变色背景色
   Gradient? bgGradient;
 
-  /// 是否添加到 SliverBox
-  bool addToSliverBox;
-
   /// 组件子组件
   Widget child;
 
@@ -84,49 +82,44 @@ class SynDecorationWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final child = _buildBody(
-        width: this.width,
-        height: this.height,
-        blur: this.blur,
-        bgBlur: this.bgBlur,
-        opacity: this.opacity,
-        margin: this.margin,
-        padding: this.padding,
-        border: this.border,
-        borderRadius: this.borderRadius,
-        bgUrl: this.bgUrl,
-        bgColor: this.bgColor,
-        bgGradient: this.bgGradient,
-        boxShadow: this.boxShadow,
-        child: this.child,
-        imageFit: this.imageFit,
-        hideBlur: this.hideBlur);
-
-    if (this.addToSliverBox) {
-      return SliverToBoxAdapter(
-        child: child,
-      );
-    }
-    return child;
+    return _buildBody(
+      width: this.width,
+      height: this.height,
+      blur: this.blur,
+      bgBlur: this.bgBlur,
+      opacity: this.opacity,
+      margin: this.margin,
+      padding: this.padding,
+      border: this.border,
+      borderRadius: this.borderRadius,
+      bgUrl: this.bgUrl,
+      bgColor: this.bgColor,
+      bgGradient: this.bgGradient,
+      boxShadow: this.boxShadow,
+      child: this.child,
+      imageFit: this.imageFit,
+      hideBlur: this.hideBlur
+    );
   }
 
-  _buildBody(
-      {double? width,
-        double? height,
-        double blur = 0,
-        double bgBlur = 0,
-        double? opacity = 1.0,
-        EdgeInsets margin = const EdgeInsets.all(0),
-        EdgeInsets padding = const EdgeInsets.all(0),
-        BoxBorder? border,
-        BorderRadius? borderRadius,
-        Color? bgColor,
-        Gradient? bgGradient,
-        String? bgUrl,
-        BoxFit? imageFit,
-        List<BoxShadow>? boxShadow,
-        required Widget child,
-        bool? hideBlur = false}) {
+  _buildBody({
+    double? width,
+    double? height,
+    double blur = 0,
+    double bgBlur = 0,
+    double? opacity = 1.0,
+    EdgeInsets margin = const EdgeInsets.all(0),
+    EdgeInsets padding = const EdgeInsets.all(0),
+    BoxBorder? border,
+    BorderRadius? borderRadius,
+    Color? bgColor,
+    Gradient? bgGradient,
+    String? bgUrl,
+    BoxFit? imageFit,
+    List<BoxShadow>? boxShadow,
+    required Widget child,
+    bool? hideBlur = false
+  }) {
     // add test
     // bgGradient = LinearGradient(
     //     colors: [Colors.red, Colors.green],
@@ -138,10 +131,10 @@ class SynDecorationWidget extends StatelessWidget {
     //bgUrl 不为空则为背景图片
     var decorationImage = bgUrl != null && bgUrl.startsWith('http')
         ? DecorationImage(
-      image: NetworkImage(bgUrl),
-      fit: imageFit,
-    )
-        : null;
+//         image: NetworkImage(bgUrl),
+          image: CachedNetworkImageProvider(bgUrl),
+          fit: imageFit,
+    ) : null;
 
     if (boxShadow != null &&
         boxShadow.length > 0 &&
@@ -163,21 +156,23 @@ class SynDecorationWidget extends StatelessWidget {
     // blur = 10;//add test
 
     final decoration = BoxDecoration(
-        borderRadius: borderRadius,
-        gradient: bgGradient,
-        boxShadow: boxShadow,
-        image: decorationImage,
-        border: border,
-        color: bgColor);
+      borderRadius: borderRadius,
+      gradient: bgGradient,
+      boxShadow: boxShadow,
+      image: decorationImage,
+      border: border,
+      color: bgColor
+    );
 
     if (hideBlur == true) {
       return Container(
-          width: width,
-          height: height,
-          margin: margin.isNonNegative ? margin : EdgeInsets.zero,
-          padding: padding,
-          decoration: decoration,
-          child: child);
+        width: width,
+        height: height,
+        margin: margin.isNonNegative ? margin : EdgeInsets.zero,
+        padding: padding,
+        decoration: decoration,
+        child: child
+      );
     }
 
     final opacityNew = opacity?.clamp(0, 1.0).toDouble() ?? 1.0;
@@ -186,49 +181,52 @@ class SynDecorationWidget extends StatelessWidget {
       child: Opacity(
         opacity: opacityNew,
         child: Container(
-            width: width,
-            height: height,
-            margin: margin.isNonNegative ? margin : EdgeInsets.zero,
-            decoration: decoration,
-            child: ClipRRect(
-              borderRadius: borderRadius,
-              child: BackdropFilter(
-                filter: ui.ImageFilter.blur(sigmaX: bgBlur, sigmaY: bgBlur),
-                child: Container(
-                  constraints: BoxConstraints.expand(),
-                  decoration: BoxDecoration(
-                    borderRadius: borderRadius,
-                  ),
-                  child: Container(padding: padding, child: child),
+          width: width,
+          height: height,
+          margin: margin.isNonNegative ? margin : EdgeInsets.zero,
+          decoration: decoration,
+          child: ClipRRect(
+            borderRadius: borderRadius,
+            child: BackdropFilter(
+              filter: ui.ImageFilter.blur(sigmaX: bgBlur, sigmaY: bgBlur),
+              child: Container(
+                constraints: BoxConstraints.expand(),
+                decoration: BoxDecoration(
+                  borderRadius: borderRadius,
                 ),
+                child: Container(padding: padding, child: child),
               ),
-            )),
+            ),
+          )
+        ),
       ),
     );
 
     if (blur <= 0) {
       return opacity2;
     }
+
     final stackWidget = Stack(
       children: [
         opacity2,
         Positioned(
-            left: left,
-            top: top,
-            right: right,
-            bottom: bottom,
-            child: ClipRRect(
-              borderRadius: borderRadius,
-              child: BackdropFilter(
-                filter: ui.ImageFilter.blur(
-                  sigmaX: blur,
-                  sigmaY: blur,
-                ),
-                child: Container(
-                  color: Colors.black.withOpacity(0),
-                ),
+          left: left,
+          top: top,
+          right: right,
+          bottom: bottom,
+          child: ClipRRect(
+            borderRadius: borderRadius,
+            child: BackdropFilter(
+              filter: ui.ImageFilter.blur(
+                sigmaX: blur,
+                sigmaY: blur,
               ),
-            ))
+              child: Container(
+                color: Colors.black.withOpacity(0),
+              ),
+            ),
+          )
+        )
       ],
     );
     return stackWidget;
