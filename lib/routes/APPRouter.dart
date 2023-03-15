@@ -29,7 +29,7 @@ import 'package:flutter_templet_project/pages/demo/DateRangePickerDialogDemo.dar
 import 'package:flutter_templet_project/pages/demo/DecorationDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DismissibleDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DragAndDropDemo.dart';
-import 'package:flutter_templet_project/pages/demo/filterDemo.dart';
+import 'package:flutter_templet_project/pages/demo/FilterDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FittedBoxDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FlexDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FlexibleDemo.dart';
