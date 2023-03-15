@@ -104,7 +104,7 @@ class CustomSearchDelegate extends SearchDelegate<String> {
       icon: Icon(Icons.arrow_back),
       onPressed: () {
         callback(query);
-        close(context, '');
+        close(context, query);
       },
     );
   }
@@ -114,24 +114,18 @@ class CustomSearchDelegate extends SearchDelegate<String> {
   Widget buildResults(BuildContext context) {
     var filterList = list.where((String s) => s.contains(query.trim()));
     return ListView(
-      children: <Widget>[
-        for (String item in filterList)
-          ListTile(
-            leading: Icon(
-              Icons.message,
-              color: Theme.of(context).primaryColor,
-            ),
-            title: Text(
-              item,
-              style: Theme.of(context).textTheme.headline6,
-            ),
-            onTap: () {
-              query = item;
-              callback(item);
-              close(context, item);
-            },
-          ),
-      ],
+      children: filterList.map((e) => ListTile(
+        leading: Icon(Icons.message),
+        title: Text(
+          e,
+          style: Theme.of(context).textTheme.headline6,
+        ),
+        onTap: () {
+          query = e;
+          callback(e);
+          close(context, e);
+        },
+      )).toList(),
     );
   }
 
@@ -140,21 +134,18 @@ class CustomSearchDelegate extends SearchDelegate<String> {
   Widget buildSuggestions(BuildContext context) {
     var filterList = list.where((String s) => s.contains(query.trim()));
     return ListView(
-      children: <Widget>[
-        for (String item in filterList)
-          ListTile(
-            leading: Icon(Icons.message),
-            title: Text(
-              item,
-              style: Theme.of(context).textTheme.headline6,
-            ),
-            onTap: () {
-              query = item;
-              callback(item);
-              close(context, item);
-            },
-          ),
-      ],
+      children: filterList.map((e) => ListTile(
+        leading: Icon(Icons.message),
+        title: Text(
+          e,
+          style: Theme.of(context).textTheme.headline6,
+        ),
+        onTap: () {
+          query = e;
+          callback(e);
+          close(context, e);
+        },
+      )).toList(),
     );
   }
 }

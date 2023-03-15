@@ -207,7 +207,7 @@ class ChipFilterDemo extends StatefulWidget {
 }
 
 class ChipFilterDemoState extends State<ChipFilterDemo> {
-  final List<ActorFilterEntry> _cast = [
+  final List<ActorFilterEntry> _entrys = [
     const ActorFilterEntry('Aaron Burr', 'AB'),
     const ActorFilterEntry('Alexander Hamilton', 'AH'),
     const ActorFilterEntry('Eliza Hamilton', 'EH'),
@@ -216,7 +216,7 @@ class ChipFilterDemoState extends State<ChipFilterDemo> {
   final List<String> _filters = <String>[];
 
   Iterable<Widget> get actorWidgets sync* {
-    for (final ActorFilterEntry actor in _cast) {
+    for (final ActorFilterEntry actor in _entrys) {
       yield Padding(
         padding: const EdgeInsets.all(4.0),
         child: FilterChip(
@@ -224,15 +224,14 @@ class ChipFilterDemoState extends State<ChipFilterDemo> {
           label: Text(actor.name),
           selected: _filters.contains(actor.name),
           onSelected: (bool value) {
-            setState(() {
-              if (value) {
-                _filters.add(actor.name);
-              } else {
-                _filters.removeWhere((String name) {
-                  return name == actor.name;
-                });
-              }
-            });
+            if (value) {
+              _filters.add(actor.name);
+            } else {
+              _filters.removeWhere((String name) {
+                return name == actor.name;
+              });
+            }
+            setState(() {});
           },
         ),
       );
@@ -245,15 +244,18 @@ class ChipFilterDemoState extends State<ChipFilterDemo> {
       appBar: AppBar(
         title: Text('FilterChip'),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          Wrap(
-            children: actorWidgets.toList(),
-          ),
-          Text('Look for: ${_filters.join(', ')}'),
-        ],
+      body: ColoredBox(
+        color: Colors.lightGreen,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Wrap(
+              children: actorWidgets.toList(),
+            ),
+            Text('Look for: ${_filters.join(', ')}'),
+          ],
+        ),
       ),
     );
   }

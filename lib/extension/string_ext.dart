@@ -205,4 +205,27 @@ extension StringExt on String{
     )).toList();
     return TextSpan(children: spans);
   }
+  
+  /// url 阿里云存储处理
+  processAliOSS({
+    int? cacheWidth,
+    int? cacheHeight,
+  }) {
+    String url = this;
+    bool isOSS = (url.indexOf('x-oss-process=image/resize') > 0);
+
+    bool specialImg = (url.indexOf('.gif') >= 0) && cacheWidth != null;
+    if (specialImg && !isOSS) {
+      return url;
+    }
+
+    final extra = url.endsWith('?') ? "" : "?";
+    url = '$url$extra&x-oss-process=image/resize,w_$cacheWidth';
+
+    if (!url.contains(".aliyuncs.com")){ // 如果不是阿里OSS的图片直接返回
+      return url;
+    }
+    return url;
+  }
+
 }

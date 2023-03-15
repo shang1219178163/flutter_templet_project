@@ -140,7 +140,16 @@ class _SecondPageState extends State<SecondPage> {
               color: Colors.red,
             ),
             Divider(),
-            SectionHeader.h5(title: "MaterialButton"),
+
+            SectionHeader.h5(title: "NoSplash"),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                splashFactory: NoSplash.splashFactory,
+               ),
+              onPressed: () { print("NoSplash.splashFactory"); },
+               child: Text('No Splash'),
+            ),
+            SectionHeader.h5(title: "ElevatedButton"),
             ElevatedButton.icon(
               icon: Icon(Icons.send),
               label: Text("ElevatedButton"),
@@ -593,9 +602,9 @@ class _SecondPageState extends State<SecondPage> {
         Icon(Icons.format_align_left),
       ],
       onPressed: (index) {
-        setState(() {
-          _selecteds[index] = !_selecteds[index];
-        });
+        _selecteds[index] = !_selecteds[index];
+        setState(() {});
+        print("ToggleButtons _selecteds: ${_selecteds}");
       },
     );
   }

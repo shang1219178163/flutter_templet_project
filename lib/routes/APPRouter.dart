@@ -29,6 +29,7 @@ import 'package:flutter_templet_project/pages/demo/DateRangePickerDialogDemo.dar
 import 'package:flutter_templet_project/pages/demo/DecorationDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DismissibleDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DragAndDropDemo.dart';
+import 'package:flutter_templet_project/pages/demo/FilteredDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FittedBoxDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FlexDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FlexibleDemo.dart';
@@ -66,12 +67,14 @@ import 'package:flutter_templet_project/pages/demo/PhysicalModelDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PositionedDirectionalDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PromptBuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/RatingBarDemo.dart';
+import 'package:flutter_templet_project/pages/demo/RefreshIndicatorDemo.dart';
 import 'package:flutter_templet_project/pages/demo/RotatedBoxDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ScrollControllerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ScrollbarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/SelectableTextDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ShortcutsDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ShortcutsDemoOne.dart';
+import 'package:flutter_templet_project/pages/demo/ShowSearchDemo.dart';
 import 'package:flutter_templet_project/pages/demo/SnackBarDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/StackDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedStaggerDemo.dart';
@@ -82,6 +85,7 @@ import 'package:flutter_templet_project/pages/demo/TabBarOnlyDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TabBarViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TextFieldDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/TicketUiDemo.dart';
+import 'package:flutter_templet_project/pages/demo/TooltipDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TransformDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ValueListenableBuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/VisibilityDemo.dart';
@@ -458,6 +462,10 @@ class APPRouter {
   static const mergeableMaterialDemo = '/mergeableMaterialDemo';
   static const navigationRailDemo = '/navigationRailDemo';
   static const listTileDemo = '/listTileDemo';
+  static const refreshIndicatorDemo = '/refreshIndicatorDemo';
+  static const tooltipDemo = '/tooltipDemo';
+  static const filteredDemo = '/filteredDemo';
+
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -719,6 +727,10 @@ class AppPage {
     GetPage(name: APPRouter.mergeableMaterialDemo, page: () => MergeableMaterialDemo(),),
     GetPage(name: APPRouter.navigationRailDemo, page: () => NavigationRailDemo(),),
     GetPage(name: APPRouter.listTileDemo, page: () => ListTileDemo(),),
+    GetPage(name: APPRouter.refreshIndicatorDemo, page: () => RefreshIndicatorDemo(),),
+    GetPage(name: APPRouter.showSearchDemo, page: () => ShowSearchDemo(),),
+    GetPage(name: APPRouter.tooltipDemo, page: () => TooltipDemo(),),
+    GetPage(name: APPRouter.filteredDemo, page: () => FilteredDemo(),),
 
 
   ];
