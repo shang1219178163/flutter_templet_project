@@ -31,9 +31,9 @@ class NNFilter extends StatelessWidget {
   CustomClipper<RRect>? clipper;
 
   Clip clipBehavior ;
-
+  /// 前景滤镜
   ui.ImageFilter? foregroundFilter;
-
+  /// 背景滤镜
   ui.ImageFilter? filter;
 
   Widget? child;
@@ -41,7 +41,7 @@ class NNFilter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (foregroundFilter == null && filter == null) {
+    if ([foregroundFilter, filter].every((e) => e == null)) {
       return child ?? SizedBox();
     }
 
