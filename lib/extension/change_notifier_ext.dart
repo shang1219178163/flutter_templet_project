@@ -9,7 +9,17 @@
 
 import 'package:flutter/cupertino.dart';
 
-extension ObjectExt<T> on Object{
+extension ObjectVN on Object{
   /// 获取
   ValueNotifier get vn => ValueNotifier(this);
+}
+
+extension numVN on num{
+  /// 获取
+  ValueNotifier get vn => ValueNotifier<num>(this);
+}
+
+extension StringVN on String{
+  /// 获取
+  ValueNotifier get vn => ValueNotifier<String>(this);
 }

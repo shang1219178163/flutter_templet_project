@@ -471,6 +471,7 @@ var specials = [
   Tuple2(APPRouter.gradientDemo, "渐变色", ),
   Tuple2(APPRouter.imageBlendModeDemo, "图片渲染模式", ),
   Tuple2(APPRouter.containerDemo, "containerDemo", ),
+  Tuple2(APPRouter.animatedContainerDemo, "animatedContainerDemo", ),
   Tuple2(APPRouter.scrollControllerDemo, "滚动行为", ),
   Tuple2(APPRouter.buttonStyleDemo, "按钮样式研究", ),
   Tuple2(APPRouter.keyDemo, "key研究", ),

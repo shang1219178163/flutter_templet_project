@@ -9,6 +9,7 @@ import 'package:flutter_templet_project/pages/ReflectDemo.dart';
 import 'package:flutter_templet_project/pages/PageLifecycleObserverDemo.dart';
 import 'package:flutter_templet_project/pages/RegExpDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedBuilderDemo.dart';
+import 'package:flutter_templet_project/pages/demo/AnimatedContainerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedListDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedListSample.dart';
 import 'package:flutter_templet_project/pages/demo/AutocompleteDemo.dart';
@@ -279,6 +280,7 @@ class APPRouter {
   static const slidableDemo = '/SlidaableDemo';
   static const settingsPage = '/AppSettingsPage';
   static const containerDemo = '/containerDemo';
+  static const animatedContainerDemo = '/animatedContainerDemo';
   static const draggableDemo = '/DraggableDemo';
   static const forgetPasswordPage = '/ForgetPasswordPage';
   static const dataTableDemo = '/DataTableDemo';
@@ -547,8 +549,9 @@ class AppPage {
     GetPage(name: APPRouter.listDismissibleDemo, page: () => ListDismissibleDemo(),),
     GetPage(name: APPRouter.slidableDemo, page: () => SlidableDemo(),),
     GetPage(name: APPRouter.settingsPage, page: () => AppSettingsPage(),),
-    GetPage(name: APPRouter.draggableDemo, page: () => DraggableDemo(),),
     GetPage(name: APPRouter.containerDemo, page: () => ContainerDemo(),),
+    GetPage(name: APPRouter.animatedContainerDemo, page: () => AnimatedContainerDemo(),),
+    GetPage(name: APPRouter.draggableDemo, page: () => DraggableDemo(),),
     GetPage(name: APPRouter.dataTableDemo, page: () => DataTableDemo(),),
     GetPage(name: APPRouter.dataTableByPaginatedDemo, page: () => PaginatedDataTableDemo(),),
     GetPage(name: APPRouter.segmentControlDemo, page: () => SegmentControlDemo(),),
