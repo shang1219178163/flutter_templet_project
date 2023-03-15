@@ -9,12 +9,12 @@
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/FilterWidget.dart';
+import 'package:flutter_templet_project/basicWidget/nn_filter.dart';
 
 
-class FilteredDemo extends StatefulWidget {
+class FilterDemo extends StatefulWidget {
 
-  FilteredDemo({
+  FilterDemo({
     Key? key, 
     this.title
   }) : super(key: key);
@@ -22,10 +22,10 @@ class FilteredDemo extends StatefulWidget {
   final String? title;
 
   @override
-  _FilteredDemoState createState() => _FilteredDemoState();
+  _FilterDemoState createState() => _FilterDemoState();
 }
 
-class _FilteredDemoState extends State<FilteredDemo> {
+class _FilterDemoState extends State<FilterDemo> {
 
 
   @override
@@ -62,7 +62,7 @@ class _FilteredDemoState extends State<FilteredDemo> {
                 buildImageFilter(),
                 buildBackdropFilter(),
                 buildCombin(),
-                FilterWidget(
+                NNFilter(
                   foregroundFilter: ui.ImageFilter.blur(
                     sigmaX: 2,
                     sigmaY: 2,

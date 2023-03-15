@@ -29,7 +29,7 @@ import 'package:flutter_templet_project/pages/demo/DateRangePickerDialogDemo.dar
 import 'package:flutter_templet_project/pages/demo/DecorationDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DismissibleDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DragAndDropDemo.dart';
-import 'package:flutter_templet_project/pages/demo/FilteredDemo.dart';
+import 'package:flutter_templet_project/pages/demo/filterDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FittedBoxDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FlexDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FlexibleDemo.dart';
@@ -464,7 +464,7 @@ class APPRouter {
   static const listTileDemo = '/listTileDemo';
   static const refreshIndicatorDemo = '/refreshIndicatorDemo';
   static const tooltipDemo = '/tooltipDemo';
-  static const filteredDemo = '/filteredDemo';
+  static const filterDemo = '/filterDemo';
 
 
 
@@ -730,7 +730,7 @@ class AppPage {
     GetPage(name: APPRouter.refreshIndicatorDemo, page: () => RefreshIndicatorDemo(),),
     GetPage(name: APPRouter.showSearchDemo, page: () => ShowSearchDemo(),),
     GetPage(name: APPRouter.tooltipDemo, page: () => TooltipDemo(),),
-    GetPage(name: APPRouter.filteredDemo, page: () => FilteredDemo(),),
+    GetPage(name: APPRouter.filterDemo, page: () => FilterDemo(),),
 
 
   ];

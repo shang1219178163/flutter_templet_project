@@ -434,7 +434,7 @@ var list = [
   Tuple2(APPRouter.refreshIndicatorDemo, "refreshIndicatorDemo", ),
   Tuple2(APPRouter.showSearchDemo, "showSearchDemo", ),
   Tuple2(APPRouter.tooltipDemo, "tooltipDemo", ),
-  Tuple2(APPRouter.filteredDemo, "filteredDemo", ),
+  Tuple2(APPRouter.filterDemo, "filteredDemo", ),
 
 
 ];
