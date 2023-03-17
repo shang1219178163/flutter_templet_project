@@ -358,6 +358,9 @@ extension StatefulWidgetExt<T extends StatefulWidget> on State<T> {
   ScaffoldMessengerState get scaffoldMessenger => this.context.scaffoldMessenger;
   /// 扩展方法
   showSnackBar(SnackBar snackBar, {bool isClear = false}) => this.context.showSnackBar(snackBar, isClear: isClear);
+  /// 扩展方法
+  showMaterialBanner(MaterialBanner banner, {bool isClear = false, bool isReplace = false}) =>
+      this.context.showMaterialBanner(banner, isClear: isClear, isReplace: isReplace);
 }
 
 
