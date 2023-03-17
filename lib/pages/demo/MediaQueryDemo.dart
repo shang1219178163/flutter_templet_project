@@ -9,6 +9,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
+import 'package:flutter_templet_project/service/keyboard_change_mixin.dart';
 import 'package:tuple/tuple.dart';
 
 
@@ -25,10 +26,12 @@ class MediaQueryDemo extends StatefulWidget {
   _MediaQueryDemoState createState() => _MediaQueryDemoState();
 }
 
-class _MediaQueryDemoState extends State<MediaQueryDemo> {
+class _MediaQueryDemoState extends State<MediaQueryDemo> with WidgetsBindingObserver, KeyboardChangeMixin {
   final _textcontroller  = TextEditingController();
 
   var labelText = "";
+
+  final isVisibleVN = ValueNotifier(false);
 
   @override
   Widget build(BuildContext context) {
@@ -83,9 +86,28 @@ class _MediaQueryDemoState extends State<MediaQueryDemo> {
 
   }
 
+  @override
+  void onKeyboardChanged(bool visible) {
+    // TODO deal with keyboard visibility change.
+    print("onKeyboardChanged:${visible ? "展开键盘" : "收起键盘"} ${context.viewBottom}");
+    isVisibleVN.value = visible;
+  }
+
+
   Widget _buildItems() {
     return Column(
       children: [
+        TextButton(
+          onPressed: () => print("viewInsets: ${mediaQuery.viewInsets}"),
+          child: ValueListenableBuilder<bool>(
+            valueListenable: isVisibleVN,
+            builder: (context, value, child) {
+              // print("ValueListenableBuilder:${context.viewBottom} ${MediaQuery.of(context).viewInsets.bottom}");
+
+              return Text(value ? "展示键盘" : "隐藏键盘");
+            }
+          ),
+        ),
         TextButton(
           onPressed: () => print("viewInsets: ${mediaQuery.viewInsets}"),
           child: Text("viewInsets: ${mediaQuery.viewInsets}"),
