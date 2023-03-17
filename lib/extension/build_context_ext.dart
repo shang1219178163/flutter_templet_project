@@ -103,7 +103,7 @@ extension BuildContextExt on BuildContext {
   /// 弹出键盘为0,不弹为 34
   double get paddingBottom => mediaQuery.padding.bottom;
 
-  get scaffoldMessenger => ScaffoldMessenger.of(this);
+  ScaffoldMessengerState get scaffoldMessenger => ScaffoldMessenger.of(this);
 
   /// 清除 SnackBar
   clearSnackBars() {
@@ -350,12 +350,12 @@ extension StatefulWidgetExt<T extends StatefulWidget> on State<T> {
 
 
   /// 扩展属性 MediaQuery.of(this.context).size
-  get screenSize => this.context.screenSize;
+  Size get screenSize => this.context.screenSize;
   /// 扩展属性 MediaQuery.of(this).devicePixelRatio
-  get devicePixelRatio => this.context.devicePixelRatio;
+  double get devicePixelRatio => this.context.devicePixelRatio;
 
   /// 扩展属性 ScaffoldMessenger.of(this.context);
-  get scaffoldMessenger => this.context.scaffoldMessenger;
+  ScaffoldMessengerState get scaffoldMessenger => this.context.scaffoldMessenger;
   /// 扩展方法
   showSnackBar(SnackBar snackBar, {bool isClear = false}) => this.context.showSnackBar(snackBar, isClear: isClear);
 }
@@ -378,46 +378,3 @@ extension GlobalKeyExt on GlobalKey{
   double? maxY({Offset offset = Offset.zero}) => this.currentContext?.maxY(offset: offset);
 
 }
-
-
-// extension StatefulWidgetExt<T extends StatefulWidget> on State<T> {
-//   /// 扩展属性 ScaffoldMessenger.of(this.context);
-//   get scaffoldMessenger => ScaffoldMessenger.of(this.context);
-//   /// 扩展方法
-//   void showSnackBar(SnackBar snackBar, [bool isReplace = false]) {
-//     if (isReplace) {
-//       // scaffoldMessenger.hideCurrentSnackBar();
-//       scaffoldMessenger.clearSnackBars();
-//     }
-//     scaffoldMessenger.showSnackBar(snackBar);
-//   }
-//
-//   /// 扩展属性 Theme.of(this.context)
-//   get theme => Theme.of(this.context);
-//   /// 扩展属性 MediaQuery.of(this.context)
-//   get mediaQuery => MediaQuery.of(this.context);
-//   /// 扩展属性 MediaQuery.of(this.context).size
-//   get screenSize => MediaQuery.of(this.context).size;
-// }
-
-// extension SnackBarExt on SnackBar {
-//
-//   void showBy(BuildContext context, [bool isReplace = false]) {
-//     if (isReplace) {
-//       context.scaffoldMessenger.hideCurrentSnackBar();
-//     }
-//     context.scaffoldMessenger.showSnackBar(this);
-//   }
-// }
-
-
-// extension SmartIterable<T> on Iterable<T> {
-//   void doTheSmartThing(void Function(T) smart) {
-//     for (var e in this) smart(e);
-//   }
-// }
-// extension SmartList<T> on List<T> {
-//   void doTheSmartThing(void Function(T) smart) {
-//     for (int i = 0; i < length; i++) smart(this[i]);
-//   }
-// }
