@@ -91,18 +91,22 @@ extension BuildContextExt on BuildContext {
   /// 扩展属性 MediaQuery.of(this).devicePixelRatio
   double get devicePixelRatio => mediaQuery.devicePixelRatio;
 
-  /// 弹出键盘时键盘顶部高度
-  double get keyboardBottom => mediaQuery.viewInsets.bottom;
-
-  /// 安全区域距离顶部高度(电池栏高度:有刘海的屏幕:44 没有刘海的屏幕为20)
+  /// 安全区域距离顶部高度(电池栏高度:有刘海的屏幕:47 没有刘海的屏幕为20)
   double get safeAreaTop => mediaQuery.viewPadding.top;
 
-  /// 没有弹出键盘时底部高度(有刘海的屏幕:34 没有刘海的屏幕0)
+  /// 安全区域底部高度(有刘海的屏幕:34 没有刘海的屏幕0)
   double get safeAreaBottom => mediaQuery.viewPadding.bottom;
 
   /// 弹出键盘为0,不弹为 34
   double get paddingBottom => mediaQuery.padding.bottom;
 
+  /// 键盘顶部距离屏幕下边的距离(有键盘:键盘高度 + 34, 无键盘为 0)
+  double get viewBottomShowKeyboard => mediaQuery.viewInsets.bottom;
+
+  /// 视图距离底边的高度(有键盘:键盘高度 + 34, 无键盘 0)
+  double get viewBottom => mediaQuery.viewInsets.bottom;
+
+  /// ScaffoldMessengerState
   ScaffoldMessengerState get scaffoldMessenger => ScaffoldMessenger.of(this);
 
   /// 清除 SnackBar
@@ -337,7 +341,7 @@ extension StatefulWidgetExt<T extends StatefulWidget> on State<T> {
   MediaQueryData get mediaQuery => this.context.mediaQuery;
 
   /// 弹出键盘时键盘顶部高度
-  double get keyboardBottom => this.context.keyboardBottom;
+  double get keyboardBottom => this.context.viewBottomShowKeyboard;
 
   /// 安全区域距离顶部高度(电池栏高度:有刘海的屏幕:44 没有刘海的屏幕为20)
   double get safeAreaTop => this.context.safeAreaTop;
