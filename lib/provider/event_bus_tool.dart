@@ -16,10 +16,10 @@ typedef void EventCallback(arg);
 /// 自定义时间总线
 class EventBusTool {
   //私有构造函数
-  EventBusTool._internal();
+  EventBusTool._();
 
   //保存单例
-  static EventBusTool _instance = EventBusTool._internal();
+  static EventBusTool _instance = EventBusTool._();
 
   //工厂构造函数
   factory EventBusTool() => _instance;
