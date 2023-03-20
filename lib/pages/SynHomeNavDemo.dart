@@ -37,7 +37,7 @@ class _SynHomeNavDemoState extends State<SynHomeNavDemo> {
             _buildNav(
               child: SynCollectionNavWidget(
                 width: screenSize.width - 24,
-                rowCount: 3,
+                rowCount: 5,
               )
             ),
             Divider(),
@@ -59,9 +59,9 @@ class _SynHomeNavDemoState extends State<SynHomeNavDemo> {
     return Container(
       // height: 200,
       // width: 400,
-      constraints: BoxConstraints(
-        maxHeight: 700,
-      ),
+      // constraints: BoxConstraints(
+      //   maxHeight: 700,
+      // ),
       margin: EdgeInsets.all(12),
       padding: EdgeInsets.all(0),
       child: child,

@@ -54,8 +54,6 @@ class NNCollectionNavWidget extends StatefulWidget {
   double columnSpacing;
   /// 水平间距
   double rowSpacing;
-  /// 边界
-  // EdgeInsets padding;
   /// 是否自适应高度
   bool autoAdjustHeight;
   /// 指示器高度
@@ -253,9 +251,9 @@ class _NNCollectionNavWidgetState extends State<NNCollectionNavWidget> {
       // color: i % 2 == 0 ? Colors.green : Colors.yellow,
       constraints: BoxConstraints(maxWidth: width),
       child: _getItem(
-          ctx: context,
-          index: pageTotal * pageIndex + i,
-          imgWidth: width
+        ctx: context,
+        index: pageTotal * pageIndex + i,
+        imgWidth: width,
       ),
     )).toList();
   }
@@ -311,21 +309,6 @@ class _NNCollectionNavWidgetState extends State<NNCollectionNavWidget> {
               ),
             )
           ),
-          // Container(
-          //   height: 16,
-          //   margin: EdgeInsets.only(top: textOffset),
-          //   color: Colors.blue,//add test
-          //   child: OverflowBox(
-          //     alignment: Alignment.center,
-          //     maxWidth: imgWidth + 18,
-          //     maxHeight: 16,
-          //     child: _getItemTitle(
-          //       model: model,
-          //       imgWidth: imgWidth,
-          //       index: index,
-          //     )
-          //   ),
-          // ),
         ],
       ),
     );
@@ -364,7 +347,7 @@ class _NNCollectionNavWidgetState extends State<NNCollectionNavWidget> {
       overflow: TextOverflow.visible,
       style: TextStyle(
         color: Colors.black,
-        fontSize: 12,
+        fontSize: 13,
       ),
     );
 

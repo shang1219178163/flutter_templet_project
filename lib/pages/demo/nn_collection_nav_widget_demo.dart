@@ -59,7 +59,8 @@ class _NNCollectionNavWidgetDemoState extends State<NNCollectionNavWidgetDemo> {
   void initState() {
     _items = List.generate(imgUrls.length, (index) => AttrNavItem(
         icon: imgUrls[index],
-        name: "标题_${index}"
+        // name: "标题_${index}",
+        name: "测试标题啊",
       )
     );
 
@@ -92,7 +93,10 @@ class _NNCollectionNavWidgetDemoState extends State<NNCollectionNavWidgetDemo> {
           Column(
             children: [
               ..._buildHeader(),
-              _buildAnimatedBuilder(),
+              Container(
+                margin: EdgeInsets.all(12),
+                child: _buildAnimatedBuilder(),
+              ),
             ],
           )
         ]

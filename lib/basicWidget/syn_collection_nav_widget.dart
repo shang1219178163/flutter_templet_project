@@ -34,17 +34,17 @@ class SynCollectionNavWidget extends StatelessWidget {
 
   final int rowCount;
 
-  itemWidth() {
-    double contentWidth = this.width - this.padding.left - this.padding.right - this.margin.left - this.margin.right;
-    double w = (contentWidth - (this.rowCount - 1) * this.spacing)/this.rowCount;
-    return w;
-  }
+  // itemWidth() {
+  //   double edgeHorizontal = this.spacing*0.5;
+  //
+  //   double contentWidth = this.width - this.padding.left - this.padding.right - this.margin.left - this.margin.right;
+  //   double w = (contentWidth - (this.rowCount - 1) * this.spacing - edgeHorizontal*2)/this.rowCount;
+  //   return w;
+  // }
 
   @override
   Widget build(BuildContext context) {
     // return _buildSwiper();
-
-    print("this.width:${this.width}");
     return _buildBody();
   }
 
@@ -67,50 +67,58 @@ class SynCollectionNavWidget extends StatelessWidget {
   }
 
   _buildBody() {
-    return ColoredBox(
-      color: Colors.lightGreen,
-      child: Wrap(
-        direction: this.direction,
-        spacing: this.direction == Axis.horizontal ? this.spacing : this.runSpacing,
-        // 主轴(水平)方向间距
-        runSpacing: this.direction == Axis.horizontal ? this.runSpacing : this.spacing,
-        // 纵轴（垂直）方向间距
-        alignment: WrapAlignment.start,
-        //沿主轴方向居中
-        runAlignment: WrapAlignment.start,
-        // children: images.map((e) => _buildItem(url: e, text: "装修灵感啊", onPressed: (){
-        //   print(e);
-        // })).toList(),
-        children: Colors.primaries.take(10).map((e) => _buildItemNew(color: e)
-        ).toList(),
-      ),
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints){
+
+        double edgeHorizontal = this.spacing*0.5;
+        var itemWidth = (constraints.maxWidth - this.spacing * (this.rowCount - 1) - edgeHorizontal*2) / this.rowCount;
+        // var itemWidthNew = 48;
+
+        return ColoredBox(
+          color: Colors.lightGreen,
+          child: Wrap(
+            direction: this.direction,
+            // 主轴(水平)方向间距
+            spacing: this.direction == Axis.horizontal ? this.spacing : this.runSpacing,
+            // 纵轴（垂直）方向间距
+            runSpacing: this.direction == Axis.horizontal ? this.runSpacing : this.spacing,
+            alignment: WrapAlignment.start,
+            runAlignment: WrapAlignment.start,
+            // children: images.map((e) => _buildItem(url: e, text: "装修灵感啊", onPressed: (){
+            //   print(e);
+            // })).toList(),
+            children: Colors.primaries.take(10).map((e) => _buildItemNew(color: e, width: itemWidth),
+            ).toList(),
+          ),
+        );
+      }
     );
   }
 
-  Widget _buildItemNew({Color? color}) {
+  Widget _buildItemNew({Color? color, double width = double.infinity}) {
     return GestureDetector(
       onTap: () => print(color),
       child: Container(
         // width: itemWidth(),
         // height: 70,
         constraints: BoxConstraints(
-          maxWidth: itemWidth(),
+          maxWidth: width,
           minWidth: 40,
         ),
         color: color,
         child: Column(
           children: [
             FittedBox(
-              child: FadeInImage.assetNetwork(
-                placeholder: 'images/img_placeholder.png',
-                image: 'https://pic.616pic.com/bg_w1180/00/07/20/2gfqq0N3qX.jpg!/fw/1120',
+              child: FadeInImage(
+                placeholder: AssetImage('images/img_placeholder.png'),
+                image: NetworkImage('https://pic.616pic.com/bg_w1180/00/07/20/2gfqq0N3qX.jpg!/fw/1120'),
                 fit: BoxFit.fill,
                 width: 44,
                 height: 44,
               ),
             ),
             SizedBox(height: 6,),
-            _buildText(text: '免费设计免'),
+            _buildText(text: '免费设计啊'),
           ],
         ),
       ),
