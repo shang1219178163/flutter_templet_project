@@ -151,6 +151,7 @@ class _NNCollectionNavWidgetDemoState extends State<NNCollectionNavWidgetDemo> {
         return NNCollectionNavWidget(
           isDebug: true,
           items: _items,
+          onItem: (e) => print(e),
           iconSize: 68,
           textGap: 5,
           pageColumnNum: _collectionNavModel.pageColumnNum,

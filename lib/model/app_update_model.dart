@@ -66,7 +66,7 @@ class AppUpdateItemModel {
     bool isShowAll;
 
 
-    static AppModel? fromJson(Map<String, Object?>? map) {
+    static AppModel? fromJson(Map<String, dynamic>? map) {
     if (map == null) {
       return null;
     }
@@ -82,7 +82,7 @@ class AppUpdateItemModel {
     }
 
 
-    Map<String, Object?>toJson() {
+    Map<String, dynamic>toJson() {
       return {
         "appIcon": this.appIcon,
         "appSize": this.appSize,

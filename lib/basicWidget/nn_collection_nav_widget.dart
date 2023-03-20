@@ -17,6 +17,7 @@ class NNCollectionNavWidget extends StatefulWidget {
     Key? key,
     this.title,
     required this.items,
+    required this.onItem,
     this.scrollType = PageViewScrollType.full,
     this.pageRowNum = 2,
     this.pageColumnNum = 5,
@@ -37,6 +38,9 @@ class NNCollectionNavWidget extends StatefulWidget {
 
   /// 当前页面数据
   List<AttrNavItem> items;
+
+  void Function(AttrNavItem e) onItem;
+
   /// 滚动方式
   PageViewScrollType scrollType;
 
@@ -316,7 +320,8 @@ class _NNCollectionNavWidgetState extends State<NNCollectionNavWidget> {
     return InkWell(
       child: child,
       onTap: (){
-        print("InkWell: ${model.name}");
+        // print("InkWell: ${model.name}");
+        widget.onItem(model);
       },
     );
   }
@@ -372,7 +377,6 @@ class _NNCollectionNavWidgetState extends State<NNCollectionNavWidget> {
     required double width,
     double indicatorItemHeight = 2,
     double indicatorItemWidth = 120,
-
   }) {
     if (pageCount < 2) {
       return Container();
@@ -435,7 +439,7 @@ class AttrNavItem {
   });
 
   static AttrNavItem? fromJson(json) {
-    if (!(json is Map)) {
+    if (json is! Map) {
       return null;
     }
     return AttrNavItem(
@@ -445,6 +449,21 @@ class AttrNavItem {
       url: json['url'] as String?,
       cornerMarker: json['cornerMarker'] as int?,
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      "icon": this.icon,
+      "id": this.id,
+      "name": this.name,
+      "url": this.url,
+      "cornerMarker": this.cornerMarker,
+    };
+  }
+
+  @override
+  String toString() {
+    return this.toJson().toString();
   }
 }
 
