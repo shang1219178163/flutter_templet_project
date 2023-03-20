@@ -67,17 +67,17 @@ class AppUpdateItemModel {
 
 
     static AppModel? fromJson(Map<String, dynamic>? map) {
-    if (map == null) {
-      return null;
-    }
-    return AppModel(
-      appIcon: map["appIcon"].toString(),
-      appSize: map["appSize"].toString(),
-      appName: map["appName"].toString(),
-      appDate: map["appDate"].toString(),
-      appDescription: map["appDescription"].toString(),
-      appVersion: map["appVersion"].toString(),
-      isShowAll: map["isShowAll"] as bool,
+      if (map == null) {
+        return null;
+      }
+      return AppModel(
+        appIcon: map["appIcon"].toString(),
+        appSize: map["appSize"].toString(),
+        appName: map["appName"].toString(),
+        appDate: map["appDate"].toString(),
+        appDescription: map["appDescription"].toString(),
+        appVersion: map["appVersion"].toString(),
+        isShowAll: map["isShowAll"] as bool,
       );
     }
 
