@@ -7,6 +7,8 @@
 //
 
 
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 
 extension EdgeInsetsExt on EdgeInsets{
@@ -38,11 +40,24 @@ extension EdgeInsetsExt on EdgeInsets{
     }
 
     final shadowRadius = shadow.spreadRadius + shadow.blurRadius;
+    
+    final topOffset = shadowRadius - shadow.offset.dy;
+    final bottomOffset = shadowRadius + shadow.offset.dy;
+    final rightOffset = shadowRadius + shadow.offset.dx;
+    final leftOffset = shadowRadius - shadow.offset.dx;
+
+    // final marginNew = EdgeInsets.only(
+    //   top: this.top + topOffset,
+    //   bottom: this.bottom + bottomOffset,
+    //   right: this.right + rightOffset,
+    //   left: this.left + leftOffset,
+    // );
+
     final marginNew = EdgeInsets.only(
-      top: this.top + shadowRadius - shadow.offset.dy,
-      bottom: this.bottom + shadowRadius + shadow.offset.dy,
-      right: this.right + shadowRadius + shadow.offset.dx,
-      left: this.left + shadowRadius - shadow.offset.dx,
+      top: max(this.top, topOffset),
+      bottom: max(this.bottom, bottomOffset),
+      right: max(this.right, rightOffset),
+      left: max(this.left, leftOffset),
     );
     return marginNew;
   }
