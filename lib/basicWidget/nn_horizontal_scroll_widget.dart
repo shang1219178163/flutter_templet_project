@@ -9,9 +9,8 @@ import 'package:visibility_detector/visibility_detector.dart';
 // import 'package:tuple/tuple.dart';
 
 
-typedef HomeSwiperBGWidgetBuilder = Widget Function(
-    double itemWidth, int index);
-typedef HomeSwiperItemWidgetBuilder = Widget Function(int index);
+// typedef HomeSwiperBGWidgetBuilder = Widget Function(double itemWidth, int index);
+// typedef HomeSwiperItemWidgetBuilder = Widget Function(int index);
 
 /// 轮播样式2(3.2.4)
 // ignore: must_be_immutable
