@@ -69,6 +69,7 @@ import 'package:flutter_templet_project/pages/demo/PositionedDirectionalDemo.dar
 import 'package:flutter_templet_project/pages/demo/PromptBuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/RatingBarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/RefreshIndicatorDemo.dart';
+import 'package:flutter_templet_project/pages/demo/RefreshIndicatorDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/RotatedBoxDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ScrollControllerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ScrollbarDemo.dart';
@@ -465,6 +466,7 @@ class APPRouter {
   static const navigationRailDemo = '/navigationRailDemo';
   static const listTileDemo = '/listTileDemo';
   static const refreshIndicatorDemo = '/refreshIndicatorDemo';
+  static const refreshIndicatorDemoOne = '/refreshIndicatorDemoOne';
   static const tooltipDemo = '/tooltipDemo';
   static const filterDemo = '/filterDemo';
 
@@ -731,6 +733,7 @@ class AppPage {
     GetPage(name: APPRouter.navigationRailDemo, page: () => NavigationRailDemo(),),
     GetPage(name: APPRouter.listTileDemo, page: () => ListTileDemo(),),
     GetPage(name: APPRouter.refreshIndicatorDemo, page: () => RefreshIndicatorDemo(),),
+    GetPage(name: APPRouter.refreshIndicatorDemoOne, page: () => RefreshIndicatorDemoOne(),),
     GetPage(name: APPRouter.showSearchDemo, page: () => ShowSearchDemo(),),
     GetPage(name: APPRouter.tooltipDemo, page: () => TooltipDemo(),),
     GetPage(name: APPRouter.filterDemo, page: () => FilterDemo(),),

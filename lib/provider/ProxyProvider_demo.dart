@@ -42,7 +42,10 @@ class ProxyProviderDemo extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        Consumer<EatModel>(builder: (ctx, model, child) => Text(model.whoEat)),
+        Consumer<EatModel>(
+          builder: (ctx, model, child) {
+            return Text(model.whoEat);
+        }),
         Consumer<Person>( // 拿到person对象，调用方法
           builder: (ctx, model, child){
             return Column(

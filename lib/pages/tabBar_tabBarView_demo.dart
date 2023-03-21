@@ -432,6 +432,7 @@ var list = [
   Tuple2(APPRouter.navigationRailDemo, "navigationRailDemo", ),
   Tuple2(APPRouter.listTileDemo, "listTileDemo", ),
   Tuple2(APPRouter.refreshIndicatorDemo, "refreshIndicatorDemo", ),
+  Tuple2(APPRouter.refreshIndicatorDemoOne, "refreshIndicatorDemoOne", ),
   Tuple2(APPRouter.showSearchDemo, "showSearchDemo", ),
   Tuple2(APPRouter.tooltipDemo, "tooltipDemo", ),
   Tuple2(APPRouter.filterDemo, "filteredDemo", ),
