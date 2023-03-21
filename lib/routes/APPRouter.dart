@@ -90,6 +90,7 @@ import 'package:flutter_templet_project/pages/demo/TicketUiDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TooltipDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TransformDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ValueListenableBuilderDemo.dart';
+import 'package:flutter_templet_project/pages/demo/VideoPlayerScreenDemo.dart';
 import 'package:flutter_templet_project/pages/demo/VisibilityDemo.dart';
 import 'package:flutter_templet_project/pages/demo/WrapDemo.dart';
 import 'package:flutter_templet_project/pages/demo/box_shadow_demo.dart';
@@ -471,7 +472,7 @@ class APPRouter {
   static const refreshIndicatorDemoOne = '/refreshIndicatorDemoOne';
   static const tooltipDemo = '/tooltipDemo';
   static const filterDemo = '/filterDemo';
-
+  static const videoPlayerScreenDemo = '/videoPlayerScreenDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -740,6 +741,7 @@ class AppPage {
     GetPage(name: APPRouter.showSearchDemo, page: () => ShowSearchDemo(),),
     GetPage(name: APPRouter.tooltipDemo, page: () => TooltipDemo(),),
     GetPage(name: APPRouter.filterDemo, page: () => FilterDemo(),),
+    GetPage(name: APPRouter.videoPlayerScreenDemo, page: () => VideoPlayerScreenDemo(),),
 
 
   ];

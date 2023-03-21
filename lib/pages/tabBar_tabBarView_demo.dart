@@ -564,6 +564,7 @@ var others = [
   Tuple2(APPRouter.decorationDemo, "decorationDemo", ),
   Tuple2(APPRouter.synHomeSrollDemo, "SynHomeSrollDemo", ),
   Tuple2(APPRouter.synHomeNavDemo, "synHomeNavDemo", ),
+  Tuple2(APPRouter.videoPlayerScreenDemo, "videoPlayerScreenDemo", ),
 
 ];
 
