@@ -70,7 +70,7 @@ class ProviderDemoOne extends StatelessWidget {
           },
           child: Column(
             children: [
-              Text("Selector 监听 person 的 name (String)属性"),
+              Text("Selector 监听 ToggleNotifier 的 current (String)属性"),
             ],
           ),
         ),
