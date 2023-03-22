@@ -10,7 +10,7 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 
-/// 组件前后滤镜
+/// 自定义滤镜组件, 支持前后滤镜
 class NNFilter extends StatelessWidget {
 
   NNFilter({

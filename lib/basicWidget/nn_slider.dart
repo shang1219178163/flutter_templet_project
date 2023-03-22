@@ -1,5 +1,5 @@
 //
-//  NnSlider.dart
+//  NNSlider.dart
 //  flutter_templet_project
 //
 //  Created by shang on 3/22/23 11:09 AM.
@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 
 typedef ValueChangedWidgetBuilder<T> = Widget Function(BuildContext context, T value);
 
-/// 自定义封装 Slider
+/// 自定义 Slider 组件封住，增加首尾组件，尾部组件实时显示当前数值；
 class NNSlider extends StatefulWidget {
 
   NNSlider({
