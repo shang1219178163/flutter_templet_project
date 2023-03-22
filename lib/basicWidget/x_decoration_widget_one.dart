@@ -2,8 +2,8 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 
 /// 组件通用外观设置
-class SynDecorationWidgetOne extends StatelessWidget {
-  SynDecorationWidgetOne({
+class XDecorationWidgetOne extends StatelessWidget {
+  XDecorationWidgetOne({
     Key? key,
     this.title,
     this.width,

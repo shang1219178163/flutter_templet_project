@@ -4,9 +4,9 @@ import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
 import 'package:flutter_templet_project/vendor/flutter_swiper_demo.dart';
 
 
-class SynCollectionNavWidget extends StatelessWidget {
+class XCollectionNavWidget extends StatelessWidget {
 
-  const SynCollectionNavWidget({
+  const XCollectionNavWidget({
   	Key? key,
   	this.title,
     this.width = double.infinity,

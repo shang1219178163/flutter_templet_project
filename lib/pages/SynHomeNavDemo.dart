@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
-import 'package:flutter_templet_project/basicWidget/syn_collection_nav_widget.dart';
+import 'package:flutter_templet_project/basicWidget/x_collection_nav_widget.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/vendor/flutter_swiper_demo.dart';
 
@@ -34,7 +34,7 @@ class _SynHomeNavDemoState extends State<SynHomeNavDemo> {
         Column(
           children: [
             _buildNav(
-              child: SynCollectionNavWidget(
+              child: XCollectionNavWidget(
                 width: screenSize.width - 24,
                 rowCount: 5,
               )
@@ -71,7 +71,7 @@ class _SynHomeNavDemoState extends State<SynHomeNavDemo> {
       child: Swiper(
         itemBuilder: (BuildContext context, int index) {
           return _buildNav(
-              child: SynCollectionNavWidget(
+              child: XCollectionNavWidget(
                 width: screenSize.width - 24,
                 rowCount: 3,
               )

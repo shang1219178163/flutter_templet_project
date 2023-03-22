@@ -1,8 +1,8 @@
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/syn_decoration_widget.dart';
-import 'package:flutter_templet_project/basicWidget/syn_decoration_widget_one.dart';
+import 'package:flutter_templet_project/basicWidget/x_decoration_widget.dart';
+import 'package:flutter_templet_project/basicWidget/x_decoration_widget_one.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/decoration_ext.dart';
 
@@ -43,7 +43,7 @@ class _DecorationDemoState extends State<DecorationDemo> {
   }
 
   buildSection1() {
-    final child = SynDecorationWidget(
+    final child = XDecorationWidget(
       width: 300,
       height: 200,
       opacity: 1,
@@ -90,7 +90,7 @@ class _DecorationDemoState extends State<DecorationDemo> {
   }
 
   buildSection2() {
-    final child = SynDecorationWidgetOne(
+    final child = XDecorationWidgetOne(
       width: 300,
       height: 200,
       opacity: 1,

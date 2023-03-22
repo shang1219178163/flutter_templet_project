@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
 import 'package:tuple/tuple.dart';
 
-typedef SynHomeSwiperBGWidgetBuilder = Widget Function(double itemWidth, int index);
-typedef SynHomeSwiperItemWidgetBuilder = Widget Function(int index);
+typedef XHomeSwiperBGWidgetBuilder = Widget Function(double itemWidth, int index);
+typedef XHomeSwiperItemWidgetBuilder = Widget Function(int index);
 
 
-class SynHorizontalScrollWidget extends StatelessWidget {
+class XHorizontalScrollWidget extends StatelessWidget {
 
   final String? title;
   final List<Tuple4<String, String, String, bool>> items;
@@ -20,8 +20,8 @@ class SynHorizontalScrollWidget extends StatelessWidget {
   final EdgeInsets margin;
 
   final ImageProvider? bg;
-  final SynHomeSwiperItemWidgetBuilder? itemBuilder;
-  final SynHomeSwiperBGWidgetBuilder? bgBuilder;
+  final XHomeSwiperItemWidgetBuilder? itemBuilder;
+  final XHomeSwiperBGWidgetBuilder? bgBuilder;
 
   final double showCount;
   final double startLeft;
@@ -33,7 +33,7 @@ class SynHorizontalScrollWidget extends StatelessWidget {
 
   final void Function(Tuple4<String, String, String, bool> e) onTap;
 
-   SynHorizontalScrollWidget({
+   XHorizontalScrollWidget({
   	Key? key,
   	this.title,
     required this.width,

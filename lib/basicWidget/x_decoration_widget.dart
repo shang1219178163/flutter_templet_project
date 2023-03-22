@@ -7,8 +7,8 @@ import 'package:flutter_templet_project/extension/edge_insets_ext.dart';
 
 
 /// 组件通用外观设置
-class SynDecorationWidget extends StatelessWidget {
-  SynDecorationWidget({
+class XDecorationWidget extends StatelessWidget {
+  XDecorationWidget({
     Key? key,
     this.title,
     required this.child,

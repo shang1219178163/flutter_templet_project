@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/syn_decoration_widget.dart';
-import 'package:flutter_templet_project/basicWidget/syn_decoration_widget.dart';
-import 'package:flutter_templet_project/basicWidget/syn_horizontal_scroll_widget.dart';
+import 'package:flutter_templet_project/basicWidget/x_decoration_widget.dart';
+import 'package:flutter_templet_project/basicWidget/x_decoration_widget.dart';
+import 'package:flutter_templet_project/basicWidget/x_horizontal_scroll_widget.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/decoration_ext.dart';
 import 'package:tuple/tuple.dart';
@@ -77,7 +77,7 @@ class _SynHomeSrollDemoState extends State<SynHomeSrollDemo> {
     double paddingRight = showCount == 2.5 ? 0.0 : 12;
     double paddingLeft = isSwiper ? 12 : 0;
 
-    return SynHorizontalScrollWidget(
+    return XHorizontalScrollWidget(
       isSwiper: isSwiper,
       items: items,
       margin: EdgeInsets.all(12),
@@ -106,7 +106,7 @@ class _SynHomeSrollDemoState extends State<SynHomeSrollDemo> {
       return child;
     }
 
-    return SynDecorationWidget(
+    return XDecorationWidget(
       width: 400,
       height: 150,
       opacity: 1.0,
