@@ -66,7 +66,8 @@ Future<void> main() async {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider.value(value: ColorFilteredProvider()),
+        // ChangeNotifierProvider.value(value: ColorFilteredProvider()),
+        ChangeNotifierProvider(create: (context) => ColorFilteredProvider()),
 
         ChangeNotifierProvider(create: (context) => CartModel()),
         ChangeNotifierProvider<Person>(create: (ctx) => Person(),),

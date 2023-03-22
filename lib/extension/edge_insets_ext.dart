@@ -33,6 +33,14 @@ extension EdgeInsetsExt on EdgeInsets{
     );
   }
 
+  /// 合并阴影 BoxShadows
+  EdgeInsets mergeShadows({List<BoxShadow>? shadows}) {
+    if (shadows == null || shadows.length == 0) {
+      return this;
+    }
+    return this.mergeShadow(shadow: shadows[0]);
+  }
+
   /// 合并阴影 BoxShadow
   EdgeInsets mergeShadow({BoxShadow? shadow}) {
     if (shadow == null) {

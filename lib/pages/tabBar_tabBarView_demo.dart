@@ -436,6 +436,7 @@ var list = [
   Tuple2(APPRouter.showSearchDemo, "showSearchDemo", ),
   Tuple2(APPRouter.tooltipDemo, "tooltipDemo", ),
   Tuple2(APPRouter.filterDemo, "filteredDemo", ),
+  Tuple2(APPRouter.filterDemoOne, "NNFilterDemoOne", ),
 
 
 ];
@@ -516,8 +517,8 @@ var customs = [
   Tuple2(APPRouter.myPopverDemo, "弹窗测试", ),
   Tuple2(APPRouter.customScrollBarDemo, "自定义 ScrollBar", ),
   Tuple2(APPRouter.enhanceTabBarDemo, "Tab 指示器支持固定宽度", ),
-  Tuple2(APPRouter.nnCollectionNavWidgetDemo, "图文导航", ),
-
+  Tuple2(APPRouter.collectionNavWidgetDemo, "图文导航", ),
+  Tuple2(APPRouter.boxWidgetDemo, "boxWidgetDemo", ),
 
 ];
 

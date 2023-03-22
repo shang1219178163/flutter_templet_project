@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/x_decoration_widget.dart';
-import 'package:flutter_templet_project/basicWidget/x_decoration_widget.dart';
+import 'package:flutter_templet_project/basicWidget/nn_box_widget.dart';
+import 'package:flutter_templet_project/basicWidget/nn_box_widget.dart';
 import 'package:flutter_templet_project/basicWidget/x_horizontal_scroll_widget.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/decoration_ext.dart';
@@ -106,7 +106,7 @@ class _SynHomeSrollDemoState extends State<SynHomeSrollDemo> {
       return child;
     }
 
-    return XDecorationWidget(
+    return NNBoxWidget(
       width: 400,
       height: 150,
       opacity: 1.0,
@@ -133,7 +133,7 @@ class _SynHomeSrollDemoState extends State<SynHomeSrollDemo> {
       //   begin: Alignment.topCenter,
       //   end: Alignment.bottomCenter,
       // ),
-      boxShadow: [
+      boxShadows: [
         BoxShadow(
           color: Colors.red.withOpacity(0.5),
           // spreadRadius: 5,

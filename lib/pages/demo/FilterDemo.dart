@@ -10,6 +10,7 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/nn_filter.dart';
+import 'package:flutter_templet_project/basicWidget/nn_slider.dart';
 
 
 class FilterDemo extends StatefulWidget {
@@ -59,9 +60,9 @@ class _FilterDemoState extends State<FilterDemo> {
                     child: Text("ImageFilter 显示在组件上边, \nBackdropFilter 显示在组件下边"),
                   ),
                 ),
-                buildImageFilter(),
-                buildBackdropFilter(),
-                buildCombin(),
+                // buildImageFilter(),
+                // buildBackdropFilter(),
+                // buildCombin(),
                 NNFilter(
                   foregroundFilter: ui.ImageFilter.blur(
                     sigmaX: 2,
@@ -151,6 +152,31 @@ class _FilterDemoState extends State<FilterDemo> {
     );
   }
 
+  _buildNNSlider() {
+    return NNSlider(
+      max: 100,
+      leading: IconButton(
+        icon: Icon(Icons.download),
+        onPressed: () {
+          print("Downloading");
+        },
+      ),
+      onChangeEnd: (double value) {
+        print('NNSlider onChangeEnd: ${value}');
+      },
+      trailingBuilder: (context, value) {
+        // final result = (value/100).toStringAsFixed(2);
+        final result = "${value.toStringAsFixed(0)}%";
+
+        return TextButton(
+          onPressed: () {
+            print("Downloading");
+          },
+          child: Text(result),
+        );
+      },
+    );
+  }
 }
 
 

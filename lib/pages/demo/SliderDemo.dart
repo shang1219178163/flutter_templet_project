@@ -9,6 +9,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/nn_slider.dart';
 import 'package:flutter_templet_project/provider/notifier_demo.dart';
 
 
@@ -46,6 +47,8 @@ class _SliderDemoState extends State<SliderDemo> {
         _buildSlider(),
         Text('RangeSlider'),
         _buildRangeSlider(),
+
+        _buildNNSlider()
       ],
     );
   }
@@ -104,6 +107,32 @@ class _SliderDemoState extends State<SliderDemo> {
         setState(() {
           _rangeValues = values;
         });
+      },
+    );
+  }
+
+  _buildNNSlider() {
+    return NNSlider(
+      max: 100,
+      leading: IconButton(
+        icon: Icon(Icons.download),
+        onPressed: () {
+          print("Downloading");
+        },
+      ),
+      onChangeEnd: (double value) {
+        print('NNSlider onChangeEnd: ${value}');
+      },
+      trailingBuilder: (context, value) {
+        // final result = (value/100).toStringAsFixed(2);
+        final result = "${value.toStringAsFixed(0)}%";
+
+        return TextButton(
+          onPressed: () {
+            print("Downloading");
+          },
+          child: Text(result),
+        );
       },
     );
   }

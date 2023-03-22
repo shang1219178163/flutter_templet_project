@@ -7,8 +7,8 @@ import 'package:flutter_templet_project/extension/edge_insets_ext.dart';
 
 
 /// 组件通用外观设置
-class XDecorationWidget extends StatelessWidget {
-  XDecorationWidget({
+class NNBoxWidgetBackup extends StatelessWidget {
+  NNBoxWidget({
     Key? key,
     this.title,
     required this.child,
@@ -164,16 +164,16 @@ class XDecorationWidget extends StatelessWidget {
       color: bgColor
     );
 
-    if (hideBlur == true) {
-      return Container(
-        width: width,
-        height: height,
-        margin: margin.isNonNegative ? margin : EdgeInsets.zero,
-        padding: padding,
-        decoration: decoration,
-        child: child
-      );
-    }
+    // if (hideBlur == true) {
+    //   return Container(
+    //     width: width,
+    //     height: height,
+    //     margin: margin.isNonNegative ? margin : EdgeInsets.zero,
+    //     padding: padding,
+    //     decoration: decoration,
+    //     child: child
+    //   );
+    // }
 
     final opacityNew = opacity?.clamp(0, 1.0).toDouble() ?? 1.0;
     var opacity2 = ClipRRect(

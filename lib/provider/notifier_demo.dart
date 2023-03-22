@@ -27,7 +27,7 @@ class CartModel extends ChangeNotifier {
       return 0;
     }
     return _items.map((e) => e.pirce)
-        .reduce((value, element) => value + element)
+        .reduce((value, e) => value + e)
         .roundToDouble();
   }
 

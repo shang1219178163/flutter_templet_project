@@ -182,6 +182,12 @@ class _ChipDemoState extends State<ChipDemo> {
             print('onPressed: InputChip');
           }
         ),
+        FilterChip(
+          label: Text('FilterChip'),
+          onSelected: (val){
+            print('onSelected: ${val}');
+          }
+        ),
       ],
     );
   }
@@ -213,7 +219,8 @@ class ChipFilterDemoState extends State<ChipFilterDemo> {
     const ActorFilterEntry('Eliza Hamilton', 'EH'),
     const ActorFilterEntry('James Madison', 'JM'),
   ];
-  final List<String> _filters = <String>[];
+
+  final _filters = <ActorFilterEntry>[];
 
   Iterable<Widget> get actorWidgets sync* {
     for (final ActorFilterEntry actor in _entrys) {
@@ -225,12 +232,11 @@ class ChipFilterDemoState extends State<ChipFilterDemo> {
           selected: _filters.contains(actor.name),
           onSelected: (bool value) {
             if (value) {
-              _filters.add(actor.name);
+              _filters.add(actor);
             } else {
-              _filters.removeWhere((String name) {
-                return name == actor.name;
-              });
+              _filters.removeWhere((e) => e.name == actor.name);
             }
+            print("_filters: ${_filters.map((e) => e.name)}");
             setState(() {});
           },
         ),

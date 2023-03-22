@@ -1,8 +1,8 @@
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/x_decoration_widget.dart';
-import 'package:flutter_templet_project/basicWidget/x_decoration_widget_one.dart';
+import 'package:flutter_templet_project/basicWidget/nn_box_widget.dart';
+import 'package:flutter_templet_project/basicWidget/nn_box_widget_one.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/decoration_ext.dart';
 
@@ -43,7 +43,7 @@ class _DecorationDemoState extends State<DecorationDemo> {
   }
 
   buildSection1() {
-    final child = XDecorationWidget(
+    final child = NNBoxWidget(
       width: 300,
       height: 200,
       opacity: 1,
@@ -70,7 +70,7 @@ class _DecorationDemoState extends State<DecorationDemo> {
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
       ),
-      boxShadow: [
+      boxShadows: [
         BoxShadow(
           color: Colors.red.withOpacity(0.5),
           spreadRadius: 5,
@@ -81,51 +81,6 @@ class _DecorationDemoState extends State<DecorationDemo> {
       child: ElevatedButton.icon(
         icon: Icon(Icons.send),
         label: Text("ElevatedButton"),
-        onPressed: () {
-          print('ElevatedButton');
-        },
-      ),
-    );
-    return child;
-  }
-
-  buildSection2() {
-    final child = XDecorationWidgetOne(
-      width: 300,
-      height: 200,
-      opacity: 1,
-      blur: 20,
-      margin: const EdgeInsets.all(20),
-      padding: const EdgeInsets.all(30),
-      topLeftRadius: 0,
-      topRightRadius: 25,
-      bottomLeftRadius: 45,
-      bottomRightRadius: 85,
-      bgUrl: 'https://tenfei02.cfp.cn/creative/vcg/800/new/VCG21409037867.jpg',
-      // bgChild: FadeInImage.assetNetwork(
-      //   placeholder: 'images/img_placeholder.png',
-      //   image: 'https://tenfei02.cfp.cn/creative/vcg/800/new/VCG21409037867.jpg',
-      //   fit: BoxFit.fill,
-      //   width: 400,
-      //   height: 400,
-      // ),
-      bgColor: Colors.yellow,
-      bgGradient: LinearGradient(
-        colors: [Colors.green, Colors.yellow],
-        begin: Alignment.topCenter,
-        end: Alignment.bottomCenter,
-      ),
-      boxShadow: [
-        BoxShadow(
-          color: Colors.red.withOpacity(0.5),
-          spreadRadius: 5,
-          blurRadius: 7,
-          offset: Offset(0, 3), // changes position of shadow
-        ),
-      ],
-      child: ElevatedButton.icon(
-        icon: Icon(Icons.send),
-        label: Text("ElevatedButton2"),
         onPressed: () {
           print('ElevatedButton');
         },

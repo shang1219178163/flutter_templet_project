@@ -55,6 +55,8 @@ import 'package:flutter_templet_project/pages/demo/MediaQueryDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MergeableMaterialDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ModalBarrierDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MyPopverDemo.dart';
+import 'package:flutter_templet_project/pages/demo/FilterDemoOne.dart';
+import 'package:flutter_templet_project/pages/demo/NNBoxWidgetDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NavigationRailDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NavigationToolbarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NetStateListenerDemo.dart';
@@ -453,7 +455,7 @@ class APPRouter {
   static const overflowDemo = '/overflowDemo';
   static const segmentTabBarNewDemo = '/segmentTabBarNewDemo';
   static const enhanceTabBarDemo = '/enhanceTabBarDemo';
-  static const nnCollectionNavWidgetDemo = '/nnCollectionNavWidgetDemo';
+  static const collectionNavWidgetDemo = '/collectionNavWidgetDemo';
   static const materialDemo = '/materialDemo';
   static const flexibleSpaceDemo = '/flexibleSpaceDemo';
   static const operatorDemo = '/operatorDemo';
@@ -472,7 +474,9 @@ class APPRouter {
   static const refreshIndicatorDemoOne = '/refreshIndicatorDemoOne';
   static const tooltipDemo = '/tooltipDemo';
   static const filterDemo = '/filterDemo';
+  static const filterDemoOne = '/filterDemoOne';
   static const videoPlayerScreenDemo = '/videoPlayerScreenDemo';
+  static const boxWidgetDemo = '/boxWidgetDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -720,7 +724,7 @@ class AppPage {
     GetPage(name: APPRouter.customScrollBarDemo, page: () => CustomScrollBarDemo(),),
     GetPage(name: APPRouter.overflowDemo, page: () => OverflowDemo(),),
     GetPage(name: APPRouter.enhanceTabBarDemo, page: () => EnhanceTabBarDemo(),),
-    GetPage(name: APPRouter.nnCollectionNavWidgetDemo, page: () => NNCollectionNavWidgetDemo(),),
+    GetPage(name: APPRouter.collectionNavWidgetDemo, page: () => NNCollectionNavWidgetDemo(),),
     GetPage(name: APPRouter.nnHorizontalScrollWidgetDemo, page: () => NNHorizontalScrollWidgetDemo(),),
 
     GetPage(name: APPRouter.materialDemo, page: () => MaterialDemo(),),
@@ -741,7 +745,9 @@ class AppPage {
     GetPage(name: APPRouter.showSearchDemo, page: () => ShowSearchDemo(),),
     GetPage(name: APPRouter.tooltipDemo, page: () => TooltipDemo(),),
     GetPage(name: APPRouter.filterDemo, page: () => FilterDemo(),),
+    GetPage(name: APPRouter.filterDemoOne, page: () => FilterDemoOne(),),
     GetPage(name: APPRouter.videoPlayerScreenDemo, page: () => VideoPlayerScreenDemo(),),
+    GetPage(name: APPRouter.boxWidgetDemo, page: () => NNBoxWidgetDemo(),),
 
 
   ];
