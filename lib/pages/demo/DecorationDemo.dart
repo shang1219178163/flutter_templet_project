@@ -2,7 +2,6 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/nn_box_widget.dart';
-import 'package:flutter_templet_project/basicWidget/nn_box_widget_one.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/decoration_ext.dart';
 

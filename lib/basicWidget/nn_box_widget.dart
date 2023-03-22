@@ -21,7 +21,7 @@ class NNBoxWidget extends StatelessWidget {
     this.padding = const EdgeInsets.all(0),
     this.borderRadius = const BorderRadius.all(Radius.circular(0)),
     this.border = const Border(),
-    this.bgColor,
+    this.bgColor = Colors.transparent,
     this.bgGradient,
     this.bgUrl,
     this.imageFit = BoxFit.cover,
@@ -139,6 +139,7 @@ class NNBoxWidget extends StatelessWidget {
     if (width != null && height != null) {
       /// 留出阴影空间
       margin = margin.mergeShadows(shadows: boxShadows);
+      // print("margin: ${margin}");
     }
 
     // if (this.title != null && this.title!.contains('图文导航')) {
@@ -153,7 +154,8 @@ class NNBoxWidget extends StatelessWidget {
       boxShadow: boxShadows,
       image: decorationImage,
       border: border,
-      color: bgGradient != null ? Colors.white : bgColor,
+      // color: bgGradient != null ? Colors.white : bgColor,
+      color: bgColor,
     );
 
     final opacityNew = opacity?.clamp(0, 1.0).toDouble() ?? 1.0;

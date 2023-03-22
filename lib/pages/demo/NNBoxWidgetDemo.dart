@@ -25,15 +25,15 @@ class NNBoxWidgetDemo extends StatefulWidget {
 
 class _NNBoxWidgetDemoState extends State<NNBoxWidgetDemo> {
 
-  final bgGradient = LinearGradient(
-      tileMode: TileMode.clamp,
-      colors: [
-        Colors.yellow,
-        Colors.blue,
-      ]
+  var bgGradient = LinearGradient(
+    tileMode: TileMode.clamp,
+    colors: [
+      Colors.yellow,
+      Colors.blue,
+    ]
   );
 
-  final boxShadows = <BoxShadow>[
+  var boxShadows = <BoxShadow>[
      BoxShadow(//add test
       color: Colors.red,
       blurRadius: 3,
@@ -42,16 +42,39 @@ class _NNBoxWidgetDemoState extends State<NNBoxWidgetDemo> {
     ),
   ];
 
-  final border = Border.all(
-      color: Colors.red,
-      width: 3.3,
-      style: BorderStyle.solid
+  var border = Border.all(
+    color: Colors.red,
+    width: 3.3,
+    style: BorderStyle.solid
   );
 
 
   @override
   Widget build(BuildContext context) {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
+
+    bgGradient = LinearGradient(
+        tileMode: TileMode.clamp,
+        colors: [
+          Colors.yellow,
+          Colors.blue,
+        ]
+    );
+
+    boxShadows = <BoxShadow>[
+      BoxShadow(//add test
+          color: Colors.red,
+          blurRadius: 3,
+          spreadRadius: 3,
+          offset: Offset(3, 3)
+      ),
+    ];
+
+    border = Border.all(
+        color: Colors.red,
+        width: 3.3,
+        style: BorderStyle.solid
+    );
 
     return Scaffold(
       appBar: AppBar(
@@ -105,8 +128,8 @@ class _NNBoxWidgetDemoState extends State<NNBoxWidgetDemo> {
       margin: const EdgeInsets.all(0),
       padding: const EdgeInsets.all(0),
       borderRadius: const BorderRadius.all(Radius.circular(18)),
-      border: border,
-      bgColor: Colors.white,
+      // border: border,
+      bgColor: Colors.transparent,
       bgGradient: bgGradient,
       bgUrl: R.image.imgUrls[5],
       imageFit: BoxFit.cover,
