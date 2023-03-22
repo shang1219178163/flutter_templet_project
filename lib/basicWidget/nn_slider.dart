@@ -95,26 +95,30 @@ class _NNSliderState extends State<NNSlider> {
       children: [
         if (widget.leading != null) widget.leading!,
         Expanded(
-          child: Slider(
-            value: sliderVN.value,
-            onChanged: (double value) {
-              sliderVN.value = value;
-              widget.onChanged?.call(value);
-              setState(() {});
-            },
-            onChangeStart: widget.onChangeStart,
-            onChangeEnd: widget.onChangeEnd,
-            min: widget.min,
-            max: widget.max,
-            divisions: widget.divisions,
-            label: widget.label,
-            activeColor: widget.activeColor,
-            inactiveColor: widget.inactiveColor,
-            thumbColor: widget.thumbColor,
-            mouseCursor: widget.mouseCursor,
-            semanticFormatterCallback: widget.semanticFormatterCallback,
-            focusNode: widget.focusNode,
-            autofocus: widget.autofocus,
+          child: StatefulBuilder(
+            builder: (context, setState) {
+              return Slider(
+                value: sliderVN.value,
+                onChanged: (double value) {
+                  sliderVN.value = value;
+                  widget.onChanged?.call(value);
+                  setState(() {});
+                },
+                onChangeStart: widget.onChangeStart,
+                onChangeEnd: widget.onChangeEnd,
+                min: widget.min,
+                max: widget.max,
+                divisions: widget.divisions,
+                label: widget.label,
+                activeColor: widget.activeColor,
+                inactiveColor: widget.inactiveColor,
+                thumbColor: widget.thumbColor,
+                mouseCursor: widget.mouseCursor,
+                semanticFormatterCallback: widget.semanticFormatterCallback,
+                focusNode: widget.focusNode,
+                autofocus: widget.autofocus,
+              );
+            }
           ),
         ),
         ValueListenableBuilder<double>(
