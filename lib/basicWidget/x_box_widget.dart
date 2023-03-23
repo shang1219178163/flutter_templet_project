@@ -7,8 +7,8 @@ import 'package:flutter_templet_project/extension/edge_insets_ext.dart';
 
 
 /// 组件通用外观设置
-class NNBoxWidgetBackup extends StatelessWidget {
-  NNBoxWidget({
+class XBoxWidget extends StatelessWidget {
+  XBoxWidget({
     Key? key,
     this.title,
     required this.child,

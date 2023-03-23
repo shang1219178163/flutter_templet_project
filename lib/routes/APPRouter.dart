@@ -92,7 +92,7 @@ import 'package:flutter_templet_project/pages/demo/TicketUiDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TooltipDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TransformDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ValueListenableBuilderDemo.dart';
-import 'package:flutter_templet_project/pages/demo/VideoPlayerScreenDemo.dart';
+import 'package:flutter_templet_project/pages/demo/VideoPlayerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/VisibilityDemo.dart';
 import 'package:flutter_templet_project/pages/demo/WrapDemo.dart';
 import 'package:flutter_templet_project/pages/demo/box_shadow_demo.dart';
@@ -746,7 +746,7 @@ class AppPage {
     GetPage(name: APPRouter.tooltipDemo, page: () => TooltipDemo(),),
     GetPage(name: APPRouter.filterDemo, page: () => FilterDemo(),),
     GetPage(name: APPRouter.filterDemoOne, page: () => FilterDemoOne(),),
-    GetPage(name: APPRouter.videoPlayerScreenDemo, page: () => VideoPlayerScreenDemo(),),
+    GetPage(name: APPRouter.videoPlayerScreenDemo, page: () => VideoPlayerDemo(),),
     GetPage(name: APPRouter.boxWidgetDemo, page: () => NNBoxWidgetDemo(),),
 
 

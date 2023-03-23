@@ -1,5 +1,5 @@
 //
-//  VideoPlayerScreenDemo.dart
+//  VideoPlayerDemo.dart
 //  flutter_templet_project
 //
 //  Created by shang on 3/21/23 6:04 PM.
@@ -13,18 +13,37 @@ import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
 
-class VideoPlayerScreenDemo extends StatefulWidget {
+class VideoPlayerDemo extends StatefulWidget {
 
-  VideoPlayerScreenDemo({ Key? key, this.title}) : super(key: key);
+  VideoPlayerDemo({ Key? key, this.title}) : super(key: key);
   final String? title;
 
   @override
-  State<VideoPlayerScreenDemo> createState() => _VideoPlayerScreenDemoState();
+  State<VideoPlayerDemo> createState() => _VideoPlayerDemoState();
 }
 
-class _VideoPlayerScreenDemoState extends State<VideoPlayerScreenDemo> {
+class _VideoPlayerDemoState extends State<VideoPlayerDemo> {
   late VideoPlayerController _controller;
   late Future<void> _initializeVideoPlayerFuture;
+
+  //获取当前视频播放的信息
+  VideoPlayerValue get videoPlayerValue => _controller.value;
+
+  //是否初始化完成
+  bool get isInitialized => videoPlayerValue.isInitialized;
+  //是否正在播放
+  bool get isPlaying => videoPlayerValue.isPlaying;
+  //当前播放的视频的宽高比例
+  double get aspectRatio => videoPlayerValue.aspectRatio;
+  //当前视频是否缓存
+  bool get isBuffer => videoPlayerValue.isBuffering;
+  //当前视频是否循环
+  bool get isLoop => videoPlayerValue.isLooping;
+  //当前播放视频的总时长
+  Duration get totalDuration => videoPlayerValue.duration;
+  //当前播放视频的位置
+  Duration get currentDuration => videoPlayerValue.position;
+
 
   @override
   void initState() {
@@ -33,9 +52,9 @@ class _VideoPlayerScreenDemoState extends State<VideoPlayerScreenDemo> {
     // Create and store the VideoPlayerController. The VideoPlayerController
     // offers several different constructors to play videos from assets, files,
     // or the internet.
-    _controller = VideoPlayerController.network(
-      'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
-    );
+    var url = 'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4';
+    _controller = VideoPlayerController.network(url,);
+    //_controller = VideoPlayerController.file(File(url));
 
     // Initialize the controller and store the Future for later use.
     _initializeVideoPlayerFuture = _controller.initialize();
@@ -58,22 +77,16 @@ class _VideoPlayerScreenDemoState extends State<VideoPlayerScreenDemo> {
       appBar: AppBar(
         title: const Text('Butterfly Video'),
       ),
-      // Use a FutureBuilder to display a loading spinner while waiting for the
-      // VideoPlayerController to finish initializing.
       body: FutureBuilder(
         future: _initializeVideoPlayerFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
-            // If the VideoPlayerController has finished initialization, use
-            // the data it provides to limit the aspect ratio of the video.
             return AspectRatio(
+              //设置视频的大小 宽高比。长宽比表示为宽高比。例如，16:9宽高比的值为16.0/9.0
               aspectRatio: _controller.value.aspectRatio,
-              // Use the VideoPlayer widget to display the video.
               child: VideoPlayer(_controller),
             );
           } else {
-            // If the VideoPlayerController is still initializing, show a
-            // loading spinner.
             return const Center(
               child: CircularProgressIndicator(),
             );
@@ -82,23 +95,21 @@ class _VideoPlayerScreenDemoState extends State<VideoPlayerScreenDemo> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // Wrap the play or pause in a call to `setState`. This ensures the
-          // correct icon is shown.
-          setState(() {
-            // If the video is playing, pause it.
-            if (_controller.value.isPlaying) {
-              _controller.pause();
-            } else {
-              // If the video is paused, play it.
-              _controller.play();
-            }
-          });
+          playOrPause();
+          setState(() {});
         },
-        // Display the correct icon depending on the state of the player.
-        child: Icon(
-          _controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
-        ),
+        child: playOrPauseWidget(),
       ),
     );
   }
+
+  playOrPause() {
+    _controller.value.isPlaying ? _controller.pause() : _controller.play();
+  }
+
+  playOrPauseWidget() {
+    IconData? icon = _controller.value.isPlaying ? Icons.pause : Icons.play_arrow;
+    return Icon(icon);
+  }
+
 }
