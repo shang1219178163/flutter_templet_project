@@ -437,6 +437,8 @@ var list = [
   Tuple2(APPRouter.tooltipDemo, "tooltipDemo", ),
   Tuple2(APPRouter.filterDemo, "filteredDemo", ),
   Tuple2(APPRouter.filterDemoOne, "NNFilterDemoOne", ),
+  Tuple2(APPRouter.fractionallySizedBoxDemo, "fractionallySizedBoxDemo", ),
+  Tuple2(APPRouter.listWheelScrollViewDemo, "listWheelScrollViewDemo", ),
 
 
 ];

@@ -57,26 +57,36 @@ class _SliderDemoState extends State<SliderDemo> {
     return Row(
       children: [
         Expanded(
-          child: Slider(
-            inactiveColor: Color(0xffC0C0C0),
-            activeColor: Color(0xff21BA45),
-            onChangeStart: (double value) {
-              print('Start value is ' + value.toString());
-            },
-            onChangeEnd: (double value) {
-              print('Finish value is ' + value.toString());
-            },
-            //onChanged: (double value) {},
-            divisions: 100,
-            //label: 'Admitida',
-            value: sliderVN.value,
-            min: 0.0,
-            max: 100.0,
-            onChanged: (double value) {
-              setState(() {
-                sliderVN.value = value;
-              });
-            },
+          child: StatefulBuilder(
+            builder: (BuildContext context, StateSetter setState) {
+              return SliderTheme(
+                  data: SliderTheme.of(context).copyWith(
+                    valueIndicatorColor: Colors.red,
+                  ),
+                  child: Slider(
+                    inactiveColor: Color(0xffC0C0C0),
+                    activeColor: Color(0xff21BA45),
+                    onChangeStart: (double value) {
+                      print('Start value is ' + value.toString());
+                    },
+                    onChangeEnd: (double value) {
+                      print('Finish value is ' + value.toString());
+                    },
+                    //onChanged: (double value) {},
+                    divisions: 100,
+                    //label: 'Admitida',
+                    value: sliderVN.value,
+                    min: 0.0,
+                    max: 100.0,
+                    label: '${(sliderVN.value/100).toStringAsFixed(2)}',
+
+                    onChanged: (double value) {
+                      sliderVN.value = value;
+                      setState(() {});
+                    },
+                  )
+              );
+            }
           ),
         ),
         ValueListenableBuilder(

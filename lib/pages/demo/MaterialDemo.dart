@@ -21,14 +21,17 @@ class _MaterialDemoState extends State<MaterialDemo> with SingleTickerProviderSt
   var type = MaterialType.values[0];
 
   final indexVN = ValueNotifier(0);
+  final typeVN = ValueNotifier(MaterialType.values[0]);
 
   @override
   void initState() {
     super.initState();
     _tabController ??= TabController(length: types.length, vsync: this);
     _tabController?.addListener(() {
-      indexVN.value = _tabController!.index;
-      print("indexVN:${indexVN.value}_${_tabController?.index}");
+      final idx = _tabController!.index;
+      indexVN.value = idx;
+      typeVN.value = types[idx];
+      print("indexVN:${indexVN.value}_${typeVN.value}");
     });
   }
 
@@ -68,13 +71,35 @@ class _MaterialDemoState extends State<MaterialDemo> with SingleTickerProviderSt
                 padding: EdgeInsets.all(8),
                 child: Wrap(
                   children: [
-                    ElevatedButton(onPressed: onPressed, child: Text("button")),
-                    ValueListenableBuilder(
-                      valueListenable: indexVN,
+                    // ElevatedButton(onPressed: onPressed, child: Text("button")),
+                    ...types.map((e) => Padding(
+                      padding: EdgeInsets.all(10),
+                      child: Material(
+                        type: e,
+                        color: Colors.red,
+                        elevation: 10,
+                        shadowColor: Colors.blue,
+                        child: Container(
+                          alignment: Alignment.center,
+                          height: 60,
+                          width: 70,
+                          decoration: BoxDecoration(
+                            border: Border.all()
+                          ),
+                          child: InkWell(
+                            child: Text(e.toString().split(".")[1]),
+                            onTap: () {
+                              print("Press: ${e.toString().split(".")[1]}");
+                            }
+                          ),
+                        ),),
+                    )).toList(),
+                    ValueListenableBuilder<MaterialType>(
+                      valueListenable: typeVN,
                       builder: (context, value, child) {
-                        print("ValueListenableBuilder:${indexVN.value}");
+                        print("ValueListenableBuilder:${value}");
 
-                        return _buildMaterialDemo();
+                        return _buildMaterialDemo(type: value);
                       }
                     ),
                   ],
@@ -91,7 +116,7 @@ class _MaterialDemoState extends State<MaterialDemo> with SingleTickerProviderSt
 
   }
 
-  _buildMaterialDemo() {
+  _buildMaterialDemo({MaterialType type = MaterialType.button}) {
     return Center(
       child: Material(
         type: type,
@@ -99,7 +124,7 @@ class _MaterialDemoState extends State<MaterialDemo> with SingleTickerProviderSt
         color: Colors.green,
         child: Opacity(
           opacity: 1,
-          child: ElevatedButton(
+          child: TextButton(
             onPressed: (){
               print("ElevatedButton");
             },

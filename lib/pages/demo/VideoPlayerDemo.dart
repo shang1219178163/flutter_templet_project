@@ -57,7 +57,7 @@ class _VideoPlayerDemoState extends State<VideoPlayerDemo> {
     //_controller = VideoPlayerController.file(File(url));
 
     // Initialize the controller and store the Future for later use.
-    _initializeVideoPlayerFuture = _controller.initialize();
+    _initializeVideoPlayerFuture = _controller.initialize().then((value) => setState(() {}) );
 
     // Use the controller to loop the video.
     _controller.setLooping(true);
@@ -104,6 +104,9 @@ class _VideoPlayerDemoState extends State<VideoPlayerDemo> {
   }
 
   playOrPause() {
+    if (!_controller.value.isInitialized) {
+      return;
+    }
     _controller.value.isPlaying ? _controller.pause() : _controller.play();
   }
 

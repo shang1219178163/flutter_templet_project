@@ -38,6 +38,8 @@ class _BottomAppBarDemoState extends State<BottomAppBarDemo> {
   
   @override
   Widget build(BuildContext context) {
+    return _buildPage1();//非圆形
+
     return Scaffold(
         appBar: AppBar(
           // automaticallyImplyLeading: false,
@@ -82,6 +84,43 @@ class _BottomAppBarDemoState extends State<BottomAppBarDemo> {
         ),
       );
   }
+  
+  _buildPage1() {
+    ShapeBorder? buttonShape = BeveledRectangleBorder(
+      borderRadius: BorderRadius.circular(10)
+    );
+    buttonShape = StadiumBorder(side: BorderSide(color: Colors.transparent));
+    return Scaffold(
+      appBar: AppBar(
+        // automaticallyImplyLeading: false,
+        title: const Text('Bottom App Bar Demo'),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        shape: AutomaticNotchedShape(
+          RoundedRectangleBorder(),
+            buttonShape
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+            IconButton(
+              icon: Icon(Icons.home), onPressed: () {  },
+            ),
+            IconButton(
+              icon: Icon(Icons.people), onPressed: () {  },
+            )
+          ],
+        ),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: FloatingActionButton.extended(
+          onPressed: () {},
+          shape: buttonShape,
+          icon: new Icon(Icons.add),
+          label: const Text("label"),
+        ),
+      );
+    }
 }
 
 class _DemoBottomAppBar extends StatelessWidget {

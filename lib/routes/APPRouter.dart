@@ -35,6 +35,7 @@ import 'package:flutter_templet_project/pages/demo/FittedBoxDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FlexDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FlexibleDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FlexibleSpaceDemo.dart';
+import 'package:flutter_templet_project/pages/demo/FractionallySizedBoxDemo.dart';
 import 'package:flutter_templet_project/pages/demo/GradientDemo.dart';
 import 'package:flutter_templet_project/pages/demo/HorizontalCellDemo.dart';
 import 'package:flutter_templet_project/pages/demo/IgnorePointerDemo.dart';
@@ -48,6 +49,7 @@ import 'package:flutter_templet_project/pages/demo/ListTileDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ListViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ListViewOneDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ListViewStyleDemo.dart';
+import 'package:flutter_templet_project/pages/demo/ListWheelScrollViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MarqueeWidgetDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MaterialBannerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MaterialDemo.dart';
@@ -477,6 +479,8 @@ class APPRouter {
   static const filterDemoOne = '/filterDemoOne';
   static const videoPlayerScreenDemo = '/videoPlayerScreenDemo';
   static const boxWidgetDemo = '/boxWidgetDemo';
+  static const fractionallySizedBoxDemo = '/fractionallySizedBoxDemo';
+  static const listWheelScrollViewDemo = '/listWheelScrollViewDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -748,6 +752,8 @@ class AppPage {
     GetPage(name: APPRouter.filterDemoOne, page: () => FilterDemoOne(),),
     GetPage(name: APPRouter.videoPlayerScreenDemo, page: () => VideoPlayerDemo(),),
     GetPage(name: APPRouter.boxWidgetDemo, page: () => NNBoxWidgetDemo(),),
+    GetPage(name: APPRouter.fractionallySizedBoxDemo, page: () => FractionallySizedBoxDemo(),),
+    GetPage(name: APPRouter.listWheelScrollViewDemo, page: () => ListWheelScrollViewDemo(),),
 
 
   ];

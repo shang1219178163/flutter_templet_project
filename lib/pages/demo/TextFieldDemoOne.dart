@@ -82,9 +82,9 @@ class _TextFieldDemoOneState extends State<TextFieldDemoOne> {
         });
       },),
       TextButton(child: Text("不可编辑"),onPressed: (){
-        setState(() {
-          isEnable = false;
-        });
+        isEnable = false;
+
+        setState(() {});
       },),
     ];
   }

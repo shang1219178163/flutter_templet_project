@@ -163,6 +163,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
                 onPressed: () {
                   alignment = e;
                   context.showSnackBar(SnackBar(content: Text(name)),);
+                  print("alignment:${alignment} ${alignment.x} ${alignment.y}");
                 },
                 child: Text(name, style: TextStyle(color: Colors.white),)
               ),

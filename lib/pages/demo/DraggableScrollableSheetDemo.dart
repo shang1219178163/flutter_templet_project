@@ -6,9 +6,12 @@
 //  Copyright © 6/7/21 shang. All rights reserved.
 //
 
+// mac不支持
+
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/uti/R.dart';
 
 class DraggableScrollableSheetDemo extends StatefulWidget {
 
@@ -53,7 +56,7 @@ class _DraggableScrollableSheetDemoState extends State<DraggableScrollableSheetD
             child: Container(
               color: Color.fromARGB(100, 100, 100, 100),
               child: Image.network(
-                'https://fastly.jsdelivr.net/npm/@vant/assets/apple-1.jpeg',
+                R.image.imgUrls[6],
                 fit: BoxFit.contain,
               ),
             ),
@@ -66,11 +69,12 @@ class _DraggableScrollableSheetDemoState extends State<DraggableScrollableSheetD
               return Container(
                 color: Colors.white,
                 child: ListView.builder(
-                    controller: scrollController,
-                    itemCount: 20,
-                    itemBuilder: (BuildContext context, int index){
-                      return ListTile(title : Text('Item $index'),);
-                    }),
+                  controller: scrollController,
+                  itemCount: 20,
+                  itemBuilder: (BuildContext context, int index){
+                    return ListTile(title : Text('Item $index'),);
+                  }
+                ),
               );
             },
           )

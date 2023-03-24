@@ -28,6 +28,7 @@ dependencies:
   flutter_screenutil: ^5.0.1
   cached_network_image: ^3.2.0
   video_player: ^2.2.3
+#  chewie: ^1.4.0
 
 #  flutter_boost: ^1.17.1
   flutter_boost:
