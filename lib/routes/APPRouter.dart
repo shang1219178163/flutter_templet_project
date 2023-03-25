@@ -87,7 +87,7 @@ import 'package:flutter_templet_project/pages/demo/SnackBarDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/StackDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedStaggerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/StatefulBuilderDemo.dart';
-import 'package:flutter_templet_project/pages/demo/NestedScrollViewTwoDemo.dart';
+import 'package:flutter_templet_project/pages/demo/NestedScrollViewDemoTwo.dart';
 import 'package:flutter_templet_project/pages/demo/TabBarSegmentDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TabBarDemoNew.dart';
 import 'package:flutter_templet_project/pages/demo/TabBarOnlyDemo.dart';
@@ -486,7 +486,7 @@ class APPRouter {
   static const listWheelScrollViewDemo = '/listWheelScrollViewDemo';
   static const nnsliverPersistentHeaderDemo = '/nnsliverPersistentHeaderDemo';
   static const nestedScrollViewDemoOne = '/nestedScrollViewDemoOne';
-  static const nestedScrollViewTwoDemo = '/nestedScrollViewTwoDemo';
+  static const nestedScrollViewDemoTwo = '/nestedScrollViewDemoTwo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -762,7 +762,7 @@ class AppPage {
     GetPage(name: APPRouter.listWheelScrollViewDemo, page: () => ListWheelScrollViewDemo(),),
     GetPage(name: APPRouter.nnsliverPersistentHeaderDemo, page: () => NNSliverPersistentHeaderDemo(),),
     GetPage(name: APPRouter.nestedScrollViewDemoOne, page: () => NestedScrollViewDemoOne(),),
-    GetPage(name: APPRouter.nestedScrollViewTwoDemo, page: () => NestedScrollViewTwoDemo(),),
+    GetPage(name: APPRouter.nestedScrollViewDemoTwo, page: () => NestedScrollViewDemoTwo(),),
 
 
   ];

@@ -439,10 +439,9 @@ var list = [
   Tuple2(APPRouter.filterDemoOne, "NNFilterDemoOne", ),
   Tuple2(APPRouter.fractionallySizedBoxDemo, "fractionallySizedBoxDemo", ),
   Tuple2(APPRouter.listWheelScrollViewDemo, "listWheelScrollViewDemo", ),
-  Tuple2(APPRouter.nestedScrollViewTwoDemo, "tabBarCustomScrollViewDemo", ),
   Tuple2(APPRouter.nnsliverPersistentHeaderDemo, "nnsliverPersistentHeaderDemo", ),
   Tuple2(APPRouter.nestedScrollViewDemoOne, "nestedScrollViewDemoOne", ),
-
+  Tuple2(APPRouter.nestedScrollViewDemoTwo, "nestedScrollViewDemoTwo", ),
 
 ];
 

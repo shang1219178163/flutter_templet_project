@@ -1,5 +1,5 @@
 //
-//  NestedScrollViewTwoDemo.dart
+//  NestedScrollViewDemoTwo.dart
 //  flutter_templet_project
 //
 //  Created by shang on 2023/3/25 08:43.
@@ -13,17 +13,17 @@ import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/uti/R.dart';
 
-class NestedScrollViewTwoDemo extends StatefulWidget {
+class NestedScrollViewDemoTwo extends StatefulWidget {
 
-  NestedScrollViewTwoDemo({ Key? key, this.title}) : super(key: key);
+  NestedScrollViewDemoTwo({ Key? key, this.title}) : super(key: key);
 
   final String? title;
 
   @override
-  _NestedScrollViewTwoDemoState createState() => _NestedScrollViewTwoDemoState();
+  _NestedScrollViewDemoTwoState createState() => _NestedScrollViewDemoTwoState();
 }
 
-class _NestedScrollViewTwoDemoState extends State<NestedScrollViewTwoDemo> with SingleTickerProviderStateMixin {
+class _NestedScrollViewDemoTwoState extends State<NestedScrollViewDemoTwo> with SingleTickerProviderStateMixin {
   TabController? _tabController;
   ScrollController? _scrollController;
 
@@ -139,7 +139,6 @@ class _NestedScrollViewTwoDemoState extends State<NestedScrollViewTwoDemo> with 
     required List<String> items,
   }) {
     return SafeArea(
-      // bottom: false,
       child: NestedScrollView(
         controller: scrollController,
         headerSliverBuilder: (context, _) => [
@@ -333,7 +332,7 @@ class _NestedScrollViewTwoDemoState extends State<NestedScrollViewTwoDemo> with 
   buildList() {
     final items = Colors.primaries;
     return ListView.builder(
-      controller: _scrollController,
+      // controller: _scrollController,
       itemCount: items.length,
       itemBuilder: (BuildContext context, int index){
         final color = items[index];
