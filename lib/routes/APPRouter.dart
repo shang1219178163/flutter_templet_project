@@ -62,6 +62,7 @@ import 'package:flutter_templet_project/pages/demo/NNBoxWidgetDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NNSliverPersistentHeaderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NavigationRailDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NavigationToolbarDemo.dart';
+import 'package:flutter_templet_project/pages/demo/NestedScrollViewDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/NetStateListenerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NetStateListenerDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/NeumorphismDemo.dart';
@@ -86,7 +87,7 @@ import 'package:flutter_templet_project/pages/demo/SnackBarDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/StackDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedStaggerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/StatefulBuilderDemo.dart';
-import 'package:flutter_templet_project/pages/demo/TabBarCustomScrollViewDemo.dart';
+import 'package:flutter_templet_project/pages/demo/NestedScrollViewTwoDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TabBarSegmentDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TabBarDemoNew.dart';
 import 'package:flutter_templet_project/pages/demo/TabBarOnlyDemo.dart';
@@ -483,8 +484,9 @@ class APPRouter {
   static const boxWidgetDemo = '/boxWidgetDemo';
   static const fractionallySizedBoxDemo = '/fractionallySizedBoxDemo';
   static const listWheelScrollViewDemo = '/listWheelScrollViewDemo';
-  static const tabBarCustomScrollViewDemo = '/tabBarCustomScrollViewDemo';
   static const nnsliverPersistentHeaderDemo = '/nnsliverPersistentHeaderDemo';
+  static const nestedScrollViewDemoOne = '/nestedScrollViewDemoOne';
+  static const nestedScrollViewTwoDemo = '/nestedScrollViewTwoDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -758,8 +760,9 @@ class AppPage {
     GetPage(name: APPRouter.boxWidgetDemo, page: () => NNBoxWidgetDemo(),),
     GetPage(name: APPRouter.fractionallySizedBoxDemo, page: () => FractionallySizedBoxDemo(),),
     GetPage(name: APPRouter.listWheelScrollViewDemo, page: () => ListWheelScrollViewDemo(),),
-    GetPage(name: APPRouter.tabBarCustomScrollViewDemo, page: () => TabBarCustomScrollViewDemo(),),
     GetPage(name: APPRouter.nnsliverPersistentHeaderDemo, page: () => NNSliverPersistentHeaderDemo(),),
+    GetPage(name: APPRouter.nestedScrollViewDemoOne, page: () => NestedScrollViewDemoOne(),),
+    GetPage(name: APPRouter.nestedScrollViewTwoDemo, page: () => NestedScrollViewTwoDemo(),),
 
 
   ];
