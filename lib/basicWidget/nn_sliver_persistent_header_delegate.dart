@@ -10,17 +10,17 @@ import 'package:flutter/material.dart';
 
 
 class NNSliverPersistentHeaderDelegate extends SliverPersistentHeaderDelegate {
-  const NNSliverPersistentHeaderDelegate({
+  NNSliverPersistentHeaderDelegate({
     Key? key,
-    this.min = 60,
+    this.min = 48,
     this.max = 80,
     required this.builder,
   });
+  /// 默认 48 是 TabBar 的默认高度
+   double min;
+   double max;
 
-  final double min;
-  final double max;
-
-  final Widget Function(BuildContext context, double offset, bool overlapsContent) builder;
+   Widget Function(BuildContext context, double offset, bool overlapsContent) builder;
 
   
   @override
@@ -50,7 +50,7 @@ class NNSliverPersistentHeader extends StatelessWidget {
   	this.title,
     this.pinned = true,
     this.floating = false,
-    this.min = 60,
+    this.min = 48,
     this.max = 80,
     required this.builder,
   }) : super(key: key);

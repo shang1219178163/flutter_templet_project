@@ -11,18 +11,15 @@ import 'package:flutter/material.dart';
 
 class NestedScrollViewDemo extends StatefulWidget {
 
-  final String? title;
-
   NestedScrollViewDemo({ Key? key, this.title}) : super(key: key);
 
-  
+  final String? title;
+
   @override
   _NestedScrollViewDemoState createState() => _NestedScrollViewDemoState();
 }
 
 class _NestedScrollViewDemoState extends State<NestedScrollViewDemo> {
-
-
 
 
   @override
@@ -51,9 +48,9 @@ class _NestedScrollViewDemoState extends State<NestedScrollViewDemo> {
         itemBuilder: (BuildContext context, int index) {
           return Material(
             child: Container(
-                height: 60,
-                decoration: BoxDecoration(
-                border: Border(bottom: BorderSide(color: Colors.red))
+              height: 60,
+              decoration: BoxDecoration(
+                  border: Border(bottom: BorderSide(color: Colors.red))
               ),
               child: ListTile(
                 title: Text("row_$index"),
