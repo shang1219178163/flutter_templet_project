@@ -8,20 +8,19 @@
 
 import 'package:flutter/material.dart';
 
-typedef NNSliverPersistentHeaderBuilder = Widget Function(BuildContext context, double shrinkOffset, bool overlapsContent);
 
 class NNSliverPersistentHeaderDelegate extends SliverPersistentHeaderDelegate {
   const NNSliverPersistentHeaderDelegate({
     Key? key,
-    required this.min,
-    required this.max,
+    this.min = 60,
+    this.max = 80,
     required this.builder,
   });
 
   final double min;
   final double max;
 
-  final NNSliverPersistentHeaderBuilder builder;
+  final Widget Function(BuildContext context, double offset, bool overlapsContent) builder;
 
   
   @override
@@ -39,6 +38,47 @@ class NNSliverPersistentHeaderDelegate extends SliverPersistentHeaderDelegate {
 
   @override
   bool shouldRebuild(covariant NNSliverPersistentHeaderDelegate oldDelegate) {
-    return this.builder != oldDelegate.builder || this.min != oldDelegate.min || this.max != oldDelegate.max;
+    return this.min != oldDelegate.min || this.max != oldDelegate.max || this.builder != oldDelegate.builder;
   }
 }
+
+/// SliverPersistentHeader
+class NNSliverPersistentHeader extends StatelessWidget {
+
+  const NNSliverPersistentHeader({
+  	Key? key,
+  	this.title,
+    this.pinned = false,
+    this.floating = false,
+    this.min = 60,
+    this.max = 80,
+    required this.builder,
+  }) : super(key: key);
+
+  final String? title;
+
+  final bool pinned;
+
+  final bool floating;
+
+  final double min;
+
+  final double max;
+
+  final Widget Function(BuildContext context, double offset, bool overlapsContent) builder;
+
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverPersistentHeader(
+      pinned: pinned,
+      floating: floating,
+      delegate: NNSliverPersistentHeaderDelegate(
+        min: min,
+        max: max,
+        builder: builder,
+      ),
+    );
+  }
+}
+

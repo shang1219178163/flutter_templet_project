@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'dart:math' as math;
 
-import 'package:flutter_templet_project/basicWidget/sliver_persistent_header_builder.dart';
+import 'package:flutter_templet_project/basicWidget/nn_sliver_persistent_header_delegate.dart';
 
 class SliverPersistentHeaderDemo extends StatelessWidget {
 
@@ -34,7 +34,7 @@ class SliverPersistentHeaderDemo extends StatelessWidget {
   SliverPersistentHeader sectionHeader({required Text text, bool pinned = false}) {
     return SliverPersistentHeader(
       pinned: pinned,
-      delegate: SliverPersistentHeaderBuilder(
+      delegate: NNSliverPersistentHeaderDelegate(
         min: 60.0,
         max: 80.0,
         builder: (ctx, offset, overlapsContent) => SizedBox.expand(
