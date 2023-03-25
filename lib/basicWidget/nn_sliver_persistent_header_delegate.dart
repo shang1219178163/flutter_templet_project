@@ -48,7 +48,7 @@ class NNSliverPersistentHeader extends StatelessWidget {
   const NNSliverPersistentHeader({
   	Key? key,
   	this.title,
-    this.pinned = false,
+    this.pinned = true,
     this.floating = false,
     this.min = 60,
     this.max = 80,
