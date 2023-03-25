@@ -204,7 +204,7 @@ class _EnhanceTabBarDemoState extends State<EnhanceTabBarDemo> with SingleTicker
         slivers: [
           Container(
             height: 60,
-            color: Colors.green,
+            color: Colors.lightBlue,
             child: buildEnhanceTabBar(
               controller: _tabController,
               indexVN: indexVN,
