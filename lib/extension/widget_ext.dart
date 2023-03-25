@@ -10,6 +10,7 @@
 import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 
@@ -156,6 +157,17 @@ extension WidgetExt on Widget {
       child: this,
     );
 
+  /// 转为 SliverFillRemaining
+  SliverFillRemaining toSliverFillRemaining({
+    Key? key,
+    bool hasScrollBody = true,
+    bool fillOverscroll = false,
+  }) => SliverFillRemaining(
+    key: key,
+    child: this,
+    hasScrollBody: hasScrollBody,
+    fillOverscroll: fillOverscroll,
+  );
 }
 
 
@@ -187,9 +199,10 @@ extension FlexExt on Flex {
   /// 转为 SliverToBoxAdapter
   CustomScrollView toCustomScrollView({
     Key? key,
+    Widget Function(Widget e)? itemBuilder,
   }) => CustomScrollView(
     key: key,
-    slivers: this.children.map((e) => e.toSliverToBoxAdapter()).toList(),
+    slivers: this.children.map((e) => itemBuilder?.call(e) ?? e.toSliverToBoxAdapter()).toList(),
     clipBehavior: this.clipBehavior,
   );
 }
@@ -198,8 +211,10 @@ extension FlexExt on Flex {
 extension ListViewExt on ListView {
 
   /// 转为 CustomScrollView
-  CustomScrollView toCustomScrollView() {
-    final slivers = (this.childrenDelegate as SliverChildListDelegate).children.map((e) => e.toSliverToBoxAdapter()).toList();
+  CustomScrollView toCustomScrollView({
+    Widget Function(Widget e)? itemBuilder,
+  }) {
+    final slivers = (this.childrenDelegate as SliverChildListDelegate).children.map((e) => itemBuilder?.call(e) ?? e.toSliverToBoxAdapter()).toList();
     return CustomScrollView(
       key: this.key,
       slivers: slivers,

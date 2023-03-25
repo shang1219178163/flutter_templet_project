@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/extension/color_ext.dart';
+import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/uti/R.dart';
 import 'enhance_tab_bar.dart';
 
@@ -21,7 +23,7 @@ class _EnhanceTabBarDemoState extends State<EnhanceTabBarDemo> with SingleTicker
 
   // List<String> get indicatorTypes => indicatorSizes.map((e) => e.toString().split(".").last).toList();
 
-  EnhanceTabBarIndicatorSize? dropValue = EnhanceTabBarIndicatorSize.tab;
+  var dropValue = EnhanceTabBarIndicatorSize.tab;
 
   // /// 初始索引
   // int initialIndex = 1;
@@ -55,7 +57,8 @@ class _EnhanceTabBarDemoState extends State<EnhanceTabBarDemo> with SingleTicker
   @override
   Widget build(BuildContext context) {
     // return buildPage();
-    return buildPageOne();
+    // return buildPageOne();
+    return buildPageTwo();
   }
 
   Widget buildItem({
@@ -103,6 +106,72 @@ class _EnhanceTabBarDemoState extends State<EnhanceTabBarDemo> with SingleTicker
     );
   }
 
+
+  buildEnhanceTabBar({
+    required TabController? controller,
+    required ValueNotifier<int> indexVN,
+    required List<String> items,
+    EnhanceTabBarIndicatorSize? indicatorSize = EnhanceTabBarIndicatorSize.fixedWidth,
+  }) {
+    return EnhanceTabBar(
+      isScrollable: true,
+      controller: controller,
+      // indicatorSize: EnhanceTabBarIndicatorSize.label,
+      // indicatorSize: EnhanceTabBarIndicatorSize.fixedWidth,
+      indicatorSize: indicatorSize,
+      indicatorWidth: 30,
+      // labelPadding: EdgeInsets.symmetric(horizontal: 12),
+      // indicatorPadding: EdgeInsets.only(left: 8, right: 8),
+      indicator: UnderlineTabIndicator(
+          borderSide: BorderSide(
+            style: BorderStyle.solid,
+            width: 4,
+            color: Colors.red,
+          )
+      ),
+      tabs: items.map((e) => Tab(
+        child: ValueListenableBuilder<int>(
+            valueListenable: indexVN,
+            builder: (BuildContext context, int value, Widget? child) {
+              final index = items.indexOf(e);
+              if (index != 1){
+                if (index == 2){
+                  return Tab(child: Text(e + e,),);
+                }
+                if (index == 3){
+                  return Tab(child: Text(e + e, style: TextStyle(fontSize: 20)),);
+                }
+                return Tab(text: e);
+              }
+
+              final url = (value == index) ? R.image.imgUrls[1] : R.image.imgUrls[0];
+              return Tab(
+                child: FadeInImage(
+                  image: NetworkImage(url),
+                  placeholder: AssetImage("images/flutter_logo.png"),
+                ),
+              );
+            }),
+      )).toList(),
+    );
+  }
+
+  buildTabBarView({
+    required TabController? controller,
+    required List<String> items,
+  }) {
+    return TabBarView( //构建
+      controller: controller,
+      children: items.map((e) {
+        return Container(
+          color: ColorExt.random,
+          alignment: Alignment.center,
+          child: Text(e, style: TextStyle(color: Colors.red),),
+        );
+      }).toList(),
+    );
+  }
+
   Widget buildPageOne() {
     return Scaffold(
       appBar: AppBar(
@@ -110,61 +179,58 @@ class _EnhanceTabBarDemoState extends State<EnhanceTabBarDemo> with SingleTicker
         actions: [
           _buildDropdownButton(),
         ],
-        bottom: EnhanceTabBar(
-          isScrollable: true,
+        bottom: buildEnhanceTabBar(
           controller: _tabController,
-          // indicatorSize: EnhanceTabBarIndicatorSize.label,
-          // indicatorSize: EnhanceTabBarIndicatorSize.fixedWidth,
-          indicatorSize: dropValue,
-          indicatorWidth: 30,
-          // labelPadding: EdgeInsets.symmetric(horizontal: 12),
-          // indicatorPadding: EdgeInsets.only(left: 8, right: 8),
-          indicator: UnderlineTabIndicator(
-            borderSide: BorderSide(
-              style: BorderStyle.solid,
-              width: 4,
-              color: Colors.red,
-            )
-          ),
-          tabs: titles.map((e) => Tab(
-            child: ValueListenableBuilder<int>(
-              valueListenable: indexVN,
-              builder: (BuildContext context, int value, Widget? child) {
-                final index = titles.indexOf(e);
-                if (index != 1){
-                  if (index == 2){
-                    return Tab(child: Text(e + e,),);
-                  }
-                  if (index == 3){
-                    return Tab(child: Text(e + e, style: TextStyle(fontSize: 20)),);
-                  }
-                  return Tab(text: e);
-                }
-
-                final url = (value == index) ? R.image.imgUrls[1] : R.image.imgUrls[0];
-                return Tab(
-                  child: FadeInImage(
-                    image: NetworkImage(url),
-                    placeholder: AssetImage("images/flutter_logo.png"),
-                  ),
-                );
-              }),
-          )).toList(),
+          indexVN: indexVN,
+          items: titles
         ),
       ),
-      body: TabBarView( //构建
+      body: buildTabBarView(
         controller: _tabController,
-        children: titles.map((e) {
-          return Container(
-            alignment: Alignment.center,
-            child: Text(e, style: TextStyle(color: Colors.red),),
-          );
-        }).toList(),
+        items: titles
       ),
     );
   }
 
-
+  Widget buildPageTwo() {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title ?? "$widget"),
+        actions: [
+          _buildDropdownButton(),
+        ],
+      ),
+      body: CustomScrollView(
+        slivers: [
+          Container(
+            height: 60,
+            color: Colors.green,
+            child: buildEnhanceTabBar(
+              controller: _tabController,
+              indexVN: indexVN,
+              items: titles
+            ),
+          ).toSliverToBoxAdapter(),
+          SliverFillRemaining(
+            child: buildTabBarView(
+                controller: _tabController,
+                items: titles
+            ),
+          ),
+          // Container(
+          //   height: 400,
+          //   color: ColorExt.random,
+          //   child: buildTabBarView(
+          //     controller: _tabController,
+          //     items: titles
+          //   ),
+          // ),
+        ]
+            // .map((e) => SliverToBoxAdapter(child: e,)).toList()
+        ,
+      )
+    );
+  }
 
   Widget _buildDropdownButton() {
     // var dropValue = '语文';
