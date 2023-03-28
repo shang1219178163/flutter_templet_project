@@ -17,8 +17,8 @@ import 'package:flutter_templet_project/pages/demo/AutofillGroupDemo.dart';
 import 'package:flutter_templet_project/pages/demo/BoxConstraintsDemo.dart';
 import 'package:flutter_templet_project/pages/FlutterFFiTest.dart';
 import 'package:flutter_templet_project/pages/LocalImagePage.dart';
-import 'package:flutter_templet_project/pages/SynHomeNavDemo.dart';
-import 'package:flutter_templet_project/pages/SynHomeSrollDemo.dart';
+import 'package:flutter_templet_project/pages/HomeNavDemo.dart';
+import 'package:flutter_templet_project/pages/homeSrollDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AutocompleteDemo.dart';
 import 'package:flutter_templet_project/pages/demo/BuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ButtonStyleDemo.dart';
@@ -92,6 +92,7 @@ import 'package:flutter_templet_project/pages/demo/TabBarSegmentDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TabBarDemoNew.dart';
 import 'package:flutter_templet_project/pages/demo/TabBarOnlyDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TabBarViewDemo.dart';
+import 'package:flutter_templet_project/pages/demo/TestFunction.dart';
 import 'package:flutter_templet_project/pages/demo/TextFieldDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/TicketUiDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TooltipDemo.dart';
@@ -419,8 +420,8 @@ class APPRouter {
   static const badgesDemo = '/badgesDemo';
   static const flutterSwiperDemo = '/flutterSwiperDemo';
   static const flutterSwiperIndicatorDemo = '/flutterSwiperIndicatorDemo';
-  static const synHomeSrollDemo = '/synHomeSrollDemo';
-  static const synHomeNavDemo = '/synHomeNavDemo';
+  static const homeSrollDemo = '/synHomeSrollDemo';
+  static const homeNavDemo = '/synHomeNavDemo';
   static const wrapDemo = '/wrapDemo';
   static const boxConstraintsDemo = '/boxConstraintsDemo';
   static const gradientDemo = '/gradientDemo';
@@ -487,6 +488,7 @@ class APPRouter {
   static const nnsliverPersistentHeaderDemo = '/nnsliverPersistentHeaderDemo';
   static const nestedScrollViewDemoOne = '/nestedScrollViewDemoOne';
   static const nestedScrollViewDemoTwo = '/nestedScrollViewDemoTwo';
+  static const testFunction = '/testFunction';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -695,8 +697,8 @@ class AppPage {
     GetPage(name: APPRouter.badgesDemo, page: () => BadgesDemo(),),
     GetPage(name: APPRouter.flutterSwiperDemo, page: () => FlutterSwiperDemo(),),
     GetPage(name: APPRouter.flutterSwiperIndicatorDemo, page: () => FlutterSwiperIndicatorDemo(),),
-    GetPage(name: APPRouter.synHomeSrollDemo, page: () => SynHomeSrollDemo(),),
-    GetPage(name: APPRouter.synHomeNavDemo, page: () => SynHomeNavDemo(),),
+    GetPage(name: APPRouter.homeSrollDemo, page: () => homeSrollDemo(),),
+    GetPage(name: APPRouter.homeNavDemo, page: () => HomeNavDemo(),),
     GetPage(name: APPRouter.wrapDemo, page: () => WrapDemo(),),
     GetPage(name: APPRouter.boxConstraintsDemo, page: () => BoxConstraintsDemo(),),
     GetPage(name: APPRouter.gradientDemo, page: () => GradientDemo(),),
@@ -763,6 +765,7 @@ class AppPage {
     GetPage(name: APPRouter.nnsliverPersistentHeaderDemo, page: () => NNSliverPersistentHeaderDemo(),),
     GetPage(name: APPRouter.nestedScrollViewDemoOne, page: () => NestedScrollViewDemoOne(),),
     GetPage(name: APPRouter.nestedScrollViewDemoTwo, page: () => NestedScrollViewDemoTwo(),),
+    GetPage(name: APPRouter.testFunction, page: () => TestFunction(),),
 
 
   ];

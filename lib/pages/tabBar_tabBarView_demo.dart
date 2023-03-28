@@ -485,6 +485,8 @@ var specials = [
   Tuple2(APPRouter.netStateListenerDemo, "netStateListenerDemo", ),
   Tuple2(APPRouter.netStateListenerDemoOne, "mixin监听网络", ),
   Tuple2(APPRouter.ReflectDemo, "模型属性动态化赋值", ),
+  Tuple2(APPRouter.testFunction, "方法动态化", ),
+
 
 ];
 
@@ -567,8 +569,8 @@ var others = [
   Tuple2(APPRouter.testPage, "testPage", ),
   Tuple2(APPRouter.testPageOne, "testPageOne", ),
   Tuple2(APPRouter.decorationDemo, "decorationDemo", ),
-  Tuple2(APPRouter.synHomeSrollDemo, "SynHomeSrollDemo", ),
-  Tuple2(APPRouter.synHomeNavDemo, "synHomeNavDemo", ),
+  Tuple2(APPRouter.homeSrollDemo, "HomeSrollDemo", ),
+  Tuple2(APPRouter.homeNavDemo, "HomeNavDemo", ),
   Tuple2(APPRouter.videoPlayerScreenDemo, "videoPlayerScreenDemo", ),
 
 ];

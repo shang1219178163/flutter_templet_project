@@ -6,18 +6,18 @@ import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/decoration_ext.dart';
 import 'package:tuple/tuple.dart';
 
-class SynHomeSrollDemo extends StatefulWidget {
+class homeSrollDemo extends StatefulWidget {
 
   final String? title;
 
-  SynHomeSrollDemo({ Key? key, this.title}) : super(key: key);
+  homeSrollDemo({ Key? key, this.title}) : super(key: key);
 
 
   @override
-  _SynHomeSrollDemoState createState() => _SynHomeSrollDemoState();
+  _homeSrollDemoState createState() => _homeSrollDemoState();
 }
 
-class _SynHomeSrollDemoState extends State<SynHomeSrollDemo> {
+class _homeSrollDemoState extends State<homeSrollDemo> {
 
 
   bool isList = true;

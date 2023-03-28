@@ -4,17 +4,17 @@ import 'package:flutter_templet_project/basicWidget/x_collection_nav_widget.dart
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/vendor/flutter_swiper_demo.dart';
 
-class SynHomeNavDemo extends StatefulWidget {
+class HomeNavDemo extends StatefulWidget {
 
-  SynHomeNavDemo({ Key? key, this.title}) : super(key: key);
+  HomeNavDemo({ Key? key, this.title}) : super(key: key);
 
   final String? title;
 
   @override
-  _SynHomeNavDemoState createState() => _SynHomeNavDemoState();
+  _HomeNavDemoState createState() => _HomeNavDemoState();
 }
 
-class _SynHomeNavDemoState extends State<SynHomeNavDemo> {
+class _HomeNavDemoState extends State<HomeNavDemo> {
 
   @override
   Widget build(BuildContext context) {
