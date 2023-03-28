@@ -18,6 +18,8 @@ class VisibilityDetectorDemo extends StatefulWidget {
 class _VisibilityDetectorDemoState extends State<VisibilityDetectorDemo> {
 
 
+  final percentVN = ValueNotifier(0.0);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,6 +31,17 @@ class _VisibilityDetectorDemoState extends State<VisibilityDetectorDemo> {
   }
 
   Widget _buildBody() {
+    return VisibilityDetector(
+      key: Key("page"),
+      onVisibilityChanged: (visibilityInfo) {
+        percentVN.value = visibilityInfo.visibleFraction;
+
+        var visiblePercentage = visibilityInfo.visibleFraction * 100;
+        debugPrint('Widget ${visibilityInfo.key} is ${visiblePercentage.toInt()}% visible');
+      },
+      child: _buildPage1(),
+    );
+
     // return _buildPage();
     return _buildPage1();
   }
