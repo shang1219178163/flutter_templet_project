@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
+import '../uti/R.dart';
+
 /// 曝光检测
 class VisibilityDetectorDemo extends StatefulWidget {
 
@@ -27,40 +29,83 @@ class _VisibilityDetectorDemoState extends State<VisibilityDetectorDemo> {
   }
 
   Widget _buildBody() {
+    // return _buildPage();
+    return _buildPage1();
+  }
+
+  Widget _buildPage() {
     return ListView.builder(
       itemBuilder: (context, i) {
-        return _buildRow(i);
+        return SizedBox(
+          height: 180,
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (_, j) {
+
+              String key = '$i - $j';
+              return Container(
+                width: 200,
+                // height: 180,
+                margin: EdgeInsets.all(3.0),
+                decoration: BoxDecoration(
+                    border: Border.all(width: 1)
+                ),
+                child: VisibilityDetector(
+                  key: Key(key),
+                  onVisibilityChanged: (visibilityInfo) {
+                    var visiblePercentage = visibilityInfo.visibleFraction * 100;
+                    debugPrint('Widget ${visibilityInfo.key} is ${visiblePercentage.toInt()}% visible');
+                  },
+                  child: Center(
+                    child: Text(key, style: TextStyle(fontSize: 18.0)),
+                  ),
+                ),
+              );
+            },
+          ),
+        );
       }
     );
   }
 
-  Widget _buildRow(int i) {
-    return SizedBox(
-      height: 180,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (_, j) {
-          String key = '$i - $j';
-          return Container(
-            width: 200,
-            height: 180,
-            margin: EdgeInsets.all(3.0),
-            decoration: BoxDecoration(
-                border: Border.all(width: 1)
+  Widget _buildPage1() {
+    final imgUrls = R.image.imgUrls;
+    return ListView.builder(
+      itemCount: imgUrls.length,
+      itemBuilder: (context, i) {
+
+        String key = '$i';
+        String url = imgUrls[i];
+
+        return Container(
+          // width: 200,
+          height: 180,
+          margin: EdgeInsets.all(3.0),
+          decoration: BoxDecoration(
+            border: Border.all(width: 1),
+            image: DecorationImage(
+              image: NetworkImage(url),
+              fit: BoxFit.cover,
+            )
+          ),
+          child: VisibilityDetector(
+            key: Key(key),
+            onVisibilityChanged: (visibilityInfo) {
+
+              var visiblePercentage = visibilityInfo.visibleFraction * 100;
+              debugPrint('Widget ${visibilityInfo.key} is ${visiblePercentage.toInt()}% visible');
+            },
+            child: Container(
+              alignment: Alignment.center,
+              child: Text(key, style: TextStyle(
+                fontSize: 28.0,
+                fontWeight: FontWeight.w600,
+                color: Colors.red
+              )),
             ),
-            child: VisibilityDetector(
-              key: Key(key),
-              onVisibilityChanged: (visibilityInfo) {
-                var visiblePercentage = visibilityInfo.visibleFraction * 100;
-                debugPrint('Widget ${visibilityInfo.key} is ${visiblePercentage.toInt()}% visible');
-              },
-              child: Center(
-                child: Text(key, style: TextStyle(fontSize: 18.0)),
-              ),
-            ),
-          );
-        },
-      ),
+          ),
+        );
+      }
     );
   }
 }
