@@ -18,14 +18,14 @@ class _PageLifecycleObserverDemoState extends State<PageLifecycleObserverDemo> w
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance?.addObserver(this); //添加观察者
+    WidgetsBinding.instance.addObserver(this); //添加观察者
   }
 
   @override
   void dispose() {
     super.dispose();
     print('YM--------dispose');
-    WidgetsBinding.instance?.removeObserver(this); //添加观察者
+    WidgetsBinding.instance.removeObserver(this); //添加观察者
   }
 
 
@@ -98,7 +98,7 @@ class _PageLifecycleObserverDemoState extends State<PageLifecycleObserverDemo> w
   @override
   void didChangeMetrics() {
     super.didChangeMetrics();
-    Size size = WidgetsBinding.instance?.window.physicalSize ?? Size(0, 0);
+    Size size = WidgetsBinding.instance.window.physicalSize;
     print("YM-----@@@@@@@@@ didChangeMetrics  ：宽：${size.width} 高：${size.height}");
   }
 
@@ -124,13 +124,13 @@ class _PageLifecycleObserverDemoState extends State<PageLifecycleObserverDemo> w
   //文字大小改变时候的监听
   @override
   void didChangeTextScaleFactor() {
-    print("YM--------@@@@@@@@@ didChangeTextScaleFactor  ：${WidgetsBinding.instance?.window.textScaleFactor}");
+    print("YM--------@@@@@@@@@ didChangeTextScaleFactor  ：${WidgetsBinding.instance.window.textScaleFactor}");
   }
 
   @override
   void didChangePlatformBrightness() {
-    final window = WidgetsBinding.instance?.window;
-    final brightness = window?.platformBrightness;
+    final window = WidgetsBinding.instance.window;
+    final brightness = window.platformBrightness;
     // Brightness.light 亮色
     // Brightness.dark 暗色
     print('YM----平台主题改变----didChangePlatformBrightness$brightness');

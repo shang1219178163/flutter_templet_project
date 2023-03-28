@@ -35,7 +35,7 @@ class _AfterLayoutBuilderState extends State<AfterLayoutBuilder> {
   @override
   void initState() {
     // WidgetsBinding.instance?.addPostFrameCallback((timeStamp) { });
-    SchedulerBinding.instance?.addPostFrameCallback((timeStamp) {
+    SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
       if (context.size == null) {
         return;
       }

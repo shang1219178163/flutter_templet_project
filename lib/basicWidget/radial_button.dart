@@ -47,7 +47,7 @@ class _RadialButtonState extends State<RadialButton> {
 
   @override
   void initState() {
-    SchedulerBinding.instance?.addPostFrameCallback((timeStamp) {
+    SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
       if (context.size?.width == null || context.size?.height == null) {
         return;
       }

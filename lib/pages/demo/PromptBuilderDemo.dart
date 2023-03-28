@@ -27,8 +27,8 @@ class _PromptBuilderDemoState extends State<PromptBuilderDemo> with WidgetsBindi
   void initState() {
     super.initState();
     // 页面展示时进行prompt绘制，在此添加observer监听等待渲染完成后挂载prompt
-    WidgetsBinding.instance?.addObserver(this);
-    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+    WidgetsBinding.instance.addObserver(this);
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       List<PromptItem> prompts = [];
       prompts.add(PromptItem(centerWidgetKey, "这是中心Widget"));
       prompts.add(PromptItem(bottomWidgetKey, "这是底部Button"));

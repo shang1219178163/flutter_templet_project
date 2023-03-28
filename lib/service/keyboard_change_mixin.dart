@@ -28,7 +28,7 @@ mixin KeyboardChangeMixin<T extends StatefulWidget> on State<T>, WidgetsBindingO
   @override
   void dispose() {
     /// 销毁
-    WidgetsBinding.instance?.removeObserver(this);
+    WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
 
@@ -36,7 +36,7 @@ mixin KeyboardChangeMixin<T extends StatefulWidget> on State<T>, WidgetsBindingO
   void initState() {
     super.initState();
     /// 初始化
-    WidgetsBinding.instance?.addObserver(this);
+    WidgetsBinding.instance.addObserver(this);
   }
 
   @override
