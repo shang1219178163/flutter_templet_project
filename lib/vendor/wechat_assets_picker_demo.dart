@@ -246,25 +246,23 @@ class WechatPhotoPickerState extends State<WechatPhotoPicker> {
               ),
             )).toList(),
             if (selectedAssets.length < maxCount)
-              InkWell(
-                onTap: () {
-                  onPicker();
-                },
-                child: Container(
-                  width: itemWidth,
-                  height: itemWidth,
-                  decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.1),
-                    // border: Border.all(width: 10),
-                    borderRadius: BorderRadius.all(Radius.circular(4)),
-                  ),
-                  child: widget.addBuilder != null ? widget.addBuilder!(context, itemWidth) : Icon(
-                    Icons.add,
-                    size: itemWidth/3,
-                    color: Colors.black.withOpacity(0.3),
-                  ),
+            InkWell(
+              onTap: onPicker,
+              child: Container(
+                width: itemWidth,
+                height: itemWidth,
+                decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.1),
+                  // border: Border.all(width: 10),
+                  borderRadius: BorderRadius.all(Radius.circular(4)),
                 ),
-              )
+                child: widget.addBuilder?.call(context, itemWidth) ?? Icon(
+                  Icons.add,
+                  size: itemWidth/3,
+                  color: Colors.black.withOpacity(0.3),
+                ),
+              ),
+            )
           ]
         );
       }
@@ -273,8 +271,7 @@ class WechatPhotoPickerState extends State<WechatPhotoPicker> {
 
   /// 打开相册,选择媒体素材
   onPicker() async {
-    List<AssetEntity>? result = widget.onPicker != null ? await widget.onPicker!() :
-    await AssetPicker.pickAssets(
+    List<AssetEntity>? result = await widget.onPicker?.call() ?? await AssetPicker.pickAssets(
       context,
       maxAssets: widget.maxCount,
       selectedAssets: selectedAssets,

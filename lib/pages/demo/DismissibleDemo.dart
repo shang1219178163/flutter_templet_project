@@ -47,10 +47,9 @@ class _DismissibleDemoState extends State<DismissibleDemo> {
             subtitle: Text(item['subTitle']),
           ),
           onDismissed: (direction) {
-            setState(() {
-              _list.removeAt(index);
-              print(_list.length);
-            });
+            _list.removeAt(index);
+            print(_list.length);
+            setState(() {});
             ScaffoldMessenger.of(context).hideCurrentSnackBar();
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               content: Text('删除成功...'),

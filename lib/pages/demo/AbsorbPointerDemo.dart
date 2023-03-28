@@ -37,9 +37,8 @@ class _AbsorbPointerDemoState extends State<AbsorbPointerDemo> {
               Switch(
                 value: _disable,
                 onChanged: (bool val) {
-                  setState(() {
-                    _disable = val;
-                  });
+                  _disable = val;
+                  setState(() {});
                 },
               )
             ],
@@ -52,18 +51,18 @@ class _AbsorbPointerDemoState extends State<AbsorbPointerDemo> {
                   Switch(
                     value: _switchValue,
                     onChanged: (bool val) {
-                      setState(() {
-                        _switchValue = val;
-                      });
+                      _switchValue = val;
+                      setState(() {});
                     },
                   ),
                   MaterialButton(
                     color: Colors.green,
                     child: Text('我是按钮'),
-                    onPressed: handleAction,
+                    onPressed: () => onClick('我是按钮'),
                   ),
                   buildBody1(),
                   Divider(),
+                  _buildAbsorbPointer(),
                 ],
               ),
             ),
@@ -71,8 +70,8 @@ class _AbsorbPointerDemoState extends State<AbsorbPointerDemo> {
           MaterialButton(
             color: Colors.lightBlue,
             child: Text('我是外面的按钮，不受影响'),
-            onPressed: handleAction1,
-          )
+            onPressed: () => onClick('我是外面的按钮，不受影响'),
+          ),
         ],
       ),
     );
@@ -87,7 +86,7 @@ class _AbsorbPointerDemoState extends State<AbsorbPointerDemo> {
         children: <Widget>[
           Listener(
             onPointerDown: (v) {
-              print('click red');
+              onClick('click red');
             },
             child: Container(
               color: Colors.red,
@@ -95,14 +94,12 @@ class _AbsorbPointerDemoState extends State<AbsorbPointerDemo> {
           ),
           Listener(
             onPointerDown: (v) {
-              print('click blue self');
+              onClick('click blue self');
             },
             child: AbsorbPointer(
               absorbing: true,
-              child: Listener(
-                onPointerDown: (v) {
-                  print('click blue child');
-                },
+              child: InkWell(
+                onTap: () => onClick('Colors.blue'),
                 child: Container(
                   color: Colors.blue,
                   width: 100,
@@ -116,12 +113,26 @@ class _AbsorbPointerDemoState extends State<AbsorbPointerDemo> {
     );
   }
 
-  void handleAction() {
-    ddlog("obj");
+  /// 默认允许穿透
+  _buildAbsorbPointer({bool absorbing = true}) {
+    return Listener(
+      onPointerDown: (e) => onClick("up"),
+      child: AbsorbPointer(
+        absorbing: absorbing,
+        child: Listener(
+          onPointerDown: (e) => onClick("in"),
+          child: Container(
+            color: Colors.yellow,
+            width: 200.0,
+            height: 100.0,
+          ),
+        ),
+      ),
+    );
   }
 
-  void handleAction1() {
-    ddlog('我是外面的按钮，不受影响');
+  onClick(String msg) {
+    ddlog(msg);
   }
 }
 
