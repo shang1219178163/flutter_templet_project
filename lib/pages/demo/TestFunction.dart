@@ -7,6 +7,7 @@
 //
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/extension/function_ext.dart';
 
 class TestFunction extends StatefulWidget {
 
@@ -49,11 +50,33 @@ class _TestFunctionState extends State<TestFunction> {
     return n - m;
   }
 
+  fcOne(int vintage, {String? country, String? name}) {
+    print('Name: $name, Country: $country, Vintage: $vintage');
+  }
+
   onPressed() {
     int a = Function.apply(fc, [10, 3]);
     print("a: ${a}");//a: 13
     int b = Function.apply(fc, [10, 3], {new Symbol("operation"): "subtract"});
     print("b: ${b}");//b: 7
+
+    Function.apply(fcOne, [2018], {#country: 'USA', #name: 'Dominus Estate'});
+    final map = {
+      "country": 'USA',
+      "name": 'Dominus Estate'
+    };
+    final mapNew = {
+      "country": 'USA1',
+      "name": 'Dominus Estate1'
+    }.mapSymbolKey();
+
+    Function.apply(fcOne, [2018], mapNew);
+    FunctionExt.apply(fcOne, [2019], map);
   }
 }
 
+extension MapExt on Map{
+  Map<Symbol, dynamic> mapSymbolKey() {
+    return this.map((key, value) => MapEntry(new Symbol("${key}"), value));
+  }
+}
