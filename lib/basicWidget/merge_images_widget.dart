@@ -52,33 +52,36 @@ class MergeImagesWidgetState extends State<MergeImagesWidget> {
   Widget build(BuildContext context) {
     return _buildBody();
   }
-
+  
   _buildBody(){
     final screenSize = MediaQuery.of(this.context).size;
+    final devicePixelRatio = MediaQuery.of(this.context).devicePixelRatio;
 
     List<Widget> children = widget.models.map((e) {
       int idx = widget.models.indexOf(e);
       return Stack(
         children: [
           _buildTool(
-              hideUp: idx == 0,
-              hideDown: idx == widget.models.length - 1,
-              repaintBoundary: RepaintBoundary(
-                key: e.globalKey,
-                child: widget.imageBuilder != null ? widget.imageBuilder!(e) : FadeInImage.assetNetwork(
-                  placeholder: 'images/img_placeholder.png',
-                  image: e.url ?? '',
-                  fit: BoxFit.cover,
-                  width: double.parse(e.width ?? "${screenSize.width}"),
-                  height: double.parse(e.height ?? "${screenSize.height}"),
-                ),
+            hideUp: idx == 0,
+            hideDown: idx == widget.models.length - 1,
+            repaintBoundary: RepaintBoundary(
+              key: e.globalKey,
+              child: widget.imageBuilder != null ? widget.imageBuilder!(e) : FadeInImage.assetNetwork(
+                placeholder: 'images/img_placeholder.png',
+                image: e.url ?? '',
+                fit: BoxFit.cover,
+                width: double.tryParse(e.width ?? "${screenSize.width}") ?? screenSize.width,
+                height: double.tryParse(e.height ?? "${screenSize.height}") ?? screenSize.height,
+                imageCacheWidth: ((double.tryParse(e.width ?? "${screenSize.width}") ?? screenSize.width) * devicePixelRatio).toInt(),
+                imageCacheHeight: ((double.tryParse(e.height ?? "${screenSize.height}") ?? screenSize.height) * devicePixelRatio).toInt(),
               ),
-              callback: (step){
-                print("callback:${step}");
-                widget.models.exchange(idx, idx + step);
-                setState(() {});
-              }),
-
+            ),
+            callback: (step){
+              print("callback:${step}");
+              widget.models.exchange(idx, idx + step);
+              setState(() {});
+            }
+          ),
           if (widget.QRCodeBuilder != null) Positioned(
             right: widget.QRCodeRight.toDouble(),
             bottom: widget.QRCodeBottom.toDouble(),
