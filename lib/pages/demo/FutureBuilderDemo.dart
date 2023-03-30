@@ -6,7 +6,13 @@
 //  Copyright © 10/19/21 shang. All rights reserved.
 //
 
+import 'dart:convert';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/model/git_repo_model.dart';
+import 'package:flutter_templet_project/model/user_model.dart';
+
 
 class FutureBuilderDemo extends StatefulWidget {
 
@@ -21,16 +27,23 @@ class FutureBuilderDemo extends StatefulWidget {
 
 class _FutureBuilderDemoState extends State<FutureBuilderDemo> {
 
+  final _dio = new Dio();
 
   @override
   Widget build(BuildContext context) {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
 
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title ?? "$widget"),
-        ),
-        body: buildBody(),
+      appBar: AppBar(
+        title: Text(widget.title ?? "$widget"),
+        actions: ['done',].map((e) => TextButton(
+          child: Text(e,
+            style: TextStyle(color: Colors.white),
+          ),
+          onPressed: onPressed,)
+        ).toList(),
+      ),
+      body: buildBody(),
     );
   }
 
@@ -59,5 +72,35 @@ class _FutureBuilderDemoState extends State<FutureBuilderDemo> {
 
   Future<String> mockNetworkData() async {
     return Future.delayed(Duration(seconds: 2), () => "我是从互联网上获取的数据");
+  }
+
+  onPressed() async {
+    // _dio.get("https://api.github.com/orgs/flutterchina/repos")
+    //     .then((response) => response.json())
+    //     .then((json) => json.json());
+
+    var url = "https://api.github.com/orgs/flutterchina/repos";
+    url = "https://api.github.com/users/shang1219178163/repos";
+    // url = "https://jsonplaceholder.typicode.com/users";
+    final response = await _dio.get<List<dynamic>>(url,);
+    List<GitRepoModel> items = (response.data ?? []).map((e) => GitRepoModel.fromJson(e)).toList();
+    print("users: ${items.first.runtimeType}");
+
+    // testUrl();
+  }
+
+  testUrl() async {
+    var url = "https://api.github.com/orgs/flutterchina/repos";
+    final response = await _dio.get<List<dynamic>>(url,);
+    // final jsonStr = jsonEncode(response);
+    // print("${jsonStr}");
+    // final list = jsonDecode(jsonStr);
+    // print("list:${list.runtimeType.toString()}");
+
+    print("list: ${response.data.runtimeType.toString()}");
+    // List<dynamic>? users = response.data;
+
+    List<UserModel> users = (response.data ?? []).map((e) => UserModel.fromJson(e)).toList();
+    print("users: ${users.first.runtimeType}");
   }
 }

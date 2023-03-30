@@ -78,8 +78,9 @@ class HttpManager{
         // baseUrl: api.requestURI.contains(BASE_URL) ? api.requestURI : BASE_URL + api.requestURI,
         headers: api.requestHeaders,
         queryParameters: api.requestParams,
-        connectTimeout: 20000,
-        receiveTimeout: 5000);
+        connectTimeout: Duration(milliseconds: 20000),
+        receiveTimeout: Duration(milliseconds: 5000)
+    );
 
     FileManager.getDocumentsDirPath().then((value) {
       var cookieJar = PersistCookieJar(storage: FileStorage(value + "/.cookies/"));
@@ -183,8 +184,9 @@ abstract class BaseHttpRequestAPI {
         baseUrl: requestURI,
         headers: requestHeaders,
         queryParameters: requestParams,
-        connectTimeout: 20000,
-        receiveTimeout: 5000);
+        connectTimeout: Duration(milliseconds: 20000),
+        receiveTimeout: Duration(milliseconds: 5000)
+    );
 
     return options;
   }

@@ -1,5 +1,5 @@
 //
-//  FSkeleton.dart
+//  NSkeleton.dart
 //  flutter_templet_project
 //
 //  Created by shang on 3/30/23 8:06 AM.
@@ -15,13 +15,21 @@ class NSkeleton extends StatelessWidget {
   const NSkeleton({
   	Key? key,
   	this.title,
+    this.color = const Color(0xFFf3f3f3),
     this.child,
+    this.itemCount = 12,
+    this.itemBuilder,
 
   }) : super(key: key);
 
   final String? title;
 
+  final Color? color;
+
   final Widget? child;
+
+  final int? itemCount;
+  final IndexedWidgetBuilder? itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -51,19 +59,15 @@ class NSkeleton extends StatelessWidget {
   }
 
   _buildList() {
-    final List<String> _items = <String>[
-      'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
-    ];
+    final _items = List.generate(15, (index) => "${index}");
 
-    const bgColor = Color(0xFFf3f3f3);
+    final bgColor = this.color ?? const Color(0xFFf3f3f3);
 
     return Scrollbar(
       child: ListView.builder(
         // padding: kMaterialListPadding,
-        itemCount: _items.length,
-        itemBuilder: (BuildContext context, int index) {
-          final String item = _items[index];
-
+        itemCount: itemCount,
+        itemBuilder: itemBuilder ?? (context, index) {
           final screenSize = MediaQuery.of(context).size;
           // print('screenSize:${screenSize}');
           return Column(

@@ -95,9 +95,11 @@ class _WechatAssetsPickerDemoState extends State<WechatAssetsPickerDemo> {
 
   onPicker() async {
     final List<AssetEntity>? result = await AssetPicker.pickAssets(
-        context,
+      context,
+      pickerConfig: AssetPickerConfig(
         maxAssets: maxCount,
         selectedAssets: selectedAssets,
+      )
     );
     print(result);
     selectedAssets = result ?? [];
@@ -147,9 +149,11 @@ class _WechatPhotoPickerDemoState extends State<WechatPhotoPickerDemo> {
                 selectedAssets = assets;
               },
               onPicker: () => AssetPicker.pickAssets(
-                  context,
-                  maxAssets: 8,
+                context,
+                pickerConfig: AssetPickerConfig(
+                  maxAssets: maxCount,
                   selectedAssets: selectedAssets,
+                )
               ),
             )
           ],
@@ -273,8 +277,10 @@ class WechatPhotoPickerState extends State<WechatPhotoPicker> {
   onPicker() async {
     List<AssetEntity>? result = await widget.onPicker?.call() ?? await AssetPicker.pickAssets(
       context,
-      maxAssets: widget.maxCount,
-      selectedAssets: selectedAssets,
+      pickerConfig: AssetPickerConfig(
+        maxAssets: widget.maxCount,
+        selectedAssets: selectedAssets,
+      )
     );
     selectedAssets = result ?? [];
     widget.onChanged(selectedAssets);

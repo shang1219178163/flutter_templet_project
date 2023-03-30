@@ -9,7 +9,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:easy_refresh/easy_refresh.dart';
-import 'package:flutter_templet_project/basicWidget/NNetContainer.dart';
+import 'package:flutter_templet_project/basicWidget/NNet/NNetContainer.dart';
 
 
 typedef ValueIndexedWidgetBuilder<T> = Widget Function(BuildContext context, int index, T? data);

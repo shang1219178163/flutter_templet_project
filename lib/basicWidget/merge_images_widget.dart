@@ -52,7 +52,7 @@ class MergeImagesWidgetState extends State<MergeImagesWidget> {
   Widget build(BuildContext context) {
     return _buildBody();
   }
-  
+
   _buildBody(){
     final screenSize = MediaQuery.of(this.context).size;
     final devicePixelRatio = MediaQuery.of(this.context).devicePixelRatio;

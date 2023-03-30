@@ -18,6 +18,7 @@ import 'package:flutter_templet_project/pages/demo/BoxConstraintsDemo.dart';
 import 'package:flutter_templet_project/pages/FlutterFFiTest.dart';
 import 'package:flutter_templet_project/pages/LocalImagePage.dart';
 import 'package:flutter_templet_project/pages/HomeNavDemo.dart';
+import 'package:flutter_templet_project/pages/demo/NSkeletonDemo.dart';
 import 'package:flutter_templet_project/pages/homeSrollDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AutocompleteDemo.dart';
 import 'package:flutter_templet_project/pages/demo/BuilderDemo.dart';
@@ -489,6 +490,7 @@ class APPRouter {
   static const nestedScrollViewDemoOne = '/nestedScrollViewDemoOne';
   static const nestedScrollViewDemoTwo = '/nestedScrollViewDemoTwo';
   static const testFunction = '/testFunction';
+  static const nSkeletonDemo = '/nSkeletonDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -766,6 +768,7 @@ class AppPage {
     GetPage(name: APPRouter.nestedScrollViewDemoOne, page: () => NestedScrollViewDemoOne(),),
     GetPage(name: APPRouter.nestedScrollViewDemoTwo, page: () => NestedScrollViewDemoTwo(),),
     GetPage(name: APPRouter.testFunction, page: () => TestFunction(),),
+    GetPage(name: APPRouter.nSkeletonDemo, page: () => NSkeletonDemo(),),
 
 
   ];

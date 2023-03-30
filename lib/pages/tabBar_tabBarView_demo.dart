@@ -525,6 +525,7 @@ var customs = [
   Tuple2(APPRouter.enhanceTabBarDemo, "Tab 指示器支持固定宽度", ),
   Tuple2(APPRouter.collectionNavWidgetDemo, "图文导航", ),
   Tuple2(APPRouter.boxWidgetDemo, "boxWidgetDemo", ),
+  Tuple2(APPRouter.nSkeletonDemo, "骨架图", ),
 
 ];
 

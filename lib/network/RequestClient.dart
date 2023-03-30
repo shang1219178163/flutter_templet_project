@@ -42,11 +42,12 @@ class RequestClient{
     }
 
     final options = BaseOptions(
-        baseUrl: api.requestURI,
-        headers: api.requestHeaders,
-        queryParameters: api.requestParams,
-        connectTimeout: 20000,
-        receiveTimeout: 5000);
+      baseUrl: api.requestURI,
+      headers: api.requestHeaders,
+      queryParameters: api.requestParams,
+      connectTimeout: Duration(milliseconds: 20000),
+      receiveTimeout: Duration(milliseconds: 5000)
+    );
 
     Dio _dio = Dio(api.requestBaseOptions ?? options);
 
@@ -128,8 +129,9 @@ class RequestClient{
     final options = BaseOptions(
         baseUrl: url,
         queryParameters: params,
-        connectTimeout: 20000,
-        receiveTimeout: 5000);
+        connectTimeout: Duration(milliseconds: 20000),
+        receiveTimeout: Duration(milliseconds: 5000)
+    );
 
     Dio dio = Dio(options);
 
@@ -154,8 +156,8 @@ class RequestClient{
     final options = BaseOptions(
         baseUrl: url,
         queryParameters: queryParameters,
-        connectTimeout: 20000,
-        receiveTimeout: 5000);
+        connectTimeout: Duration(milliseconds: 20000),
+        receiveTimeout: Duration(milliseconds: 5000));
 
     Dio _dio = Dio(options);
 
@@ -177,7 +179,7 @@ class RequestClient{
   ///error统一处理
   static void handleError(DioError e) {
     switch (e.type) {
-      case DioErrorType.connectTimeout:
+      case DioErrorType.connectionTimeout:
         print("连接超时");
         break;
       case DioErrorType.sendTimeout:
@@ -186,7 +188,7 @@ class RequestClient{
       case DioErrorType.receiveTimeout:
         print("响应超时");
         break;
-      case DioErrorType.response:
+      case DioErrorType.badResponse:
         print("出现异常");
         break;
       case DioErrorType.cancel:
@@ -234,8 +236,9 @@ abstract class BaseRequestAPI {
         baseUrl: requestURI,
         headers: requestHeaders,
         queryParameters: requestParams,
-        connectTimeout: 20000,
-        receiveTimeout: 5000);
+        connectTimeout: Duration(milliseconds: 20000),
+        receiveTimeout: Duration(milliseconds: 5000)
+    );
 
     return options;
   }

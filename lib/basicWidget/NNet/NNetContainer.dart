@@ -9,7 +9,7 @@
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/NNet.dart';
+import 'package:flutter_templet_project/basicWidget/NNet/NNet.dart';
 
 class NNetContainer<T> extends StatefulWidget {
 

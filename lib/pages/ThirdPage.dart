@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_easyrefresh/easy_refresh.dart';
+import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:flutter_easyrefresh/easy_refresh.dart';
 
 
 class ThirdPage extends StatefulWidget {
@@ -31,7 +30,10 @@ class _ThirdPageState extends State<ThirdPage> {
   void initState() {
     super.initState();
 
-    _controller = EasyRefreshController();
+    _controller = EasyRefreshController(
+      controlFinishRefresh: true,
+      controlFinishLoad: true,
+    );
     _scrollController = ScrollController();
   }
 
@@ -56,23 +58,21 @@ class _ThirdPageState extends State<ThirdPage> {
             if (!mounted) {
               return;
             }
-            setState(() {
-              items = List<String>.generate(3, (i) => 'Item ${items.length + i}');
-            });
+            items = List<String>.generate(3, (i) => 'Item ${items.length + i}');
+
+            setState(() {});
             _controller.finishRefresh();
           });
         },
         onLoad: () async {
           ddlog("onLoad");
           await Future.delayed(Duration(seconds: 1), () {
-            if (!mounted) {
-              return;
-            }
-            setState(() {
-              items.addAll(List<String>.generate(
-                  20, (i) => 'Item ${items.length + i}'));
-            });
-            _controller.finishLoad(noMore: (items.length >= 80));
+            if (!mounted) { return; }
+            items.addAll(List<String>.generate(
+                20, (i) => 'Item ${items.length + i}')
+            );
+            _controller.finishLoad(items.length >= 80 ? IndicatorResult.noMore : IndicatorResult.success);
+            setState(() {});
           });
         },
       ),
@@ -96,9 +96,8 @@ class _ThirdPageState extends State<ThirdPage> {
           // trailing: selectedIndex == index ? Icon(Icons.check) : null,
           trailing: selectedIndex == index ? Icon(Icons.check) : null,
           onTap: (){
-            setState(() {
-              selectedIndex = index;
-            });
+            selectedIndex = index;
+            setState(() {});
             ddlog([selectedIndex, index,]);
             ddlog([_globalKey(index).position(), _globalKey(index).size]);
           },
