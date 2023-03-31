@@ -11,9 +11,10 @@ import 'package:flutter_templet_project/basicWidget/chioce_list.dart';
 import 'package:flutter_templet_project/extension/list_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 
-import 'ListTileDemo.dart';
+import 'package:flutter_templet_project/pages/demo/ListTileDemo.dart';
 
 class PickerDemo extends StatefulWidget {
+  const PickerDemo({Key? key}) : super(key: key);
 
   @override
   _PickerDemoState createState() => _PickerDemoState();
@@ -290,7 +291,7 @@ class _PickerDemoState extends State<PickerDemo> {
         showPickerItems(
             ctx: context,
             onChanged: (index){
-              print('onChanged: $index');
+              debugPrint('onChanged: $index');
             }
          );
       }
@@ -301,10 +302,10 @@ class _PickerDemoState extends State<PickerDemo> {
           showPickerItemsNew(
               ctx: context,
               onChanged: (index){
-                print('onChanged: $index');
+                debugPrint('onChanged: $index');
               },
               onConfirm: () {
-                print('onConfirm:');
+                debugPrint('onConfirm:');
                 Navigator.of(context).pop();
               },
               onCancel: () {
@@ -369,7 +370,7 @@ class _PickerDemoState extends State<PickerDemo> {
 
   showPickerItems({
     required BuildContext ctx,
-    required void onChanged(int)
+    required void Function(int) onChanged,
   }) {
     // int _selectedValue = 0;
 
@@ -398,7 +399,7 @@ class _PickerDemoState extends State<PickerDemo> {
 
   showPickerItemsNew({
     required BuildContext ctx,
-    required void onChanged(int),
+    required void Function(int) onChanged,
     required VoidCallback onCancel,
     required VoidCallback onConfirm,
 
@@ -446,13 +447,16 @@ class _PickerDemoState extends State<PickerDemo> {
 
 
 class DatePickerDemo extends StatefulWidget {
-  DateTime? dateTime = DateTime.now();
-  void Function(DateTime dateTime)? callback;
 
   DatePickerDemo({
+    Key? key,
     this.dateTime,
     this.callback,
-  });
+  }) : super(key: key);
+
+  DateTime? dateTime = DateTime.now();
+
+  void Function(DateTime dateTime)? callback;
 
   @override
   _DatePickerDemoState createState() => _DatePickerDemoState();

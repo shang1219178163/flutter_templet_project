@@ -68,11 +68,17 @@ class _CustomTimerDemoState extends State<CustomTimerDemo> {
 }
 
 class RoundedButton extends StatelessWidget {
+
+  RoundedButton({
+    Key? key,
+    required this.text,
+    required this.color,
+    this.onPressed
+  }) : super(key: key);
+
   final String text;
   final Color color;
   final void Function()? onPressed;
-
-  const RoundedButton({required this.text, required this.color, this.onPressed});
 
   @override
   Widget build(BuildContext context) {

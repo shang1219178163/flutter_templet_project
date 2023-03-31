@@ -17,12 +17,12 @@ class MergeImagesWidget extends StatefulWidget {
   // double width;
   /// 二维码图片
   // Container Function()? QRCodeBuiler;
-  Widget? Function(String QRCodeUrl)? QRCodeBuilder;
-  String QRCodeUrl;
+  Widget? Function(String qrCodeUrl)? qrCodeBuilder;
+  String qrCodeUrl;
   // double? QRCodeWidth;
   // double? QRCodeHeight;
-  int QRCodeRight;
-  int QRCodeBottom;
+  int qrCodeRight;
+  int qrCodeBottom;
   // void Function()? QRCodeTap;
 
   MergeImagesWidget({
@@ -31,12 +31,12 @@ class MergeImagesWidget extends StatefulWidget {
     this.imageBuilder,
     // required this.width,
     // this.QRCodeBuiler,
-    this.QRCodeBuilder,
-    required this.QRCodeUrl,
+    this.qrCodeBuilder,
+    required this.qrCodeUrl,
     // this.QRCodeWidth = 84,
     // this.QRCodeHeight = 84,
-    this.QRCodeRight = 28,
-    this.QRCodeBottom = 24,
+    this.qrCodeRight = 28,
+    this.qrCodeBottom = 24,
     // this.QRCodeTap,
   }) : super(key: key);
 
@@ -77,17 +77,17 @@ class MergeImagesWidgetState extends State<MergeImagesWidget> {
               ),
             ),
             callback: (step){
-              print("callback:$step");
+              debugPrint("callback:$step");
               widget.models.exchange(idx, idx + step);
               setState(() {});
             }
           ),
-          if (widget.QRCodeBuilder != null) Positioned(
-            right: widget.QRCodeRight.toDouble(),
-            bottom: widget.QRCodeBottom.toDouble(),
+          if (widget.qrCodeBuilder != null) Positioned(
+            right: widget.qrCodeRight.toDouble(),
+            bottom: widget.qrCodeBottom.toDouble(),
             child: idx != (widget.models.length - 1) ? Container() : RepaintBoundary(
               key: minCodeGlobalKey,
-              child: widget.QRCodeBuilder?.call(widget.QRCodeUrl),
+              child: widget.qrCodeBuilder?.call(widget.qrCodeUrl),
             ),
           ),
         ],
@@ -154,10 +154,9 @@ class MergeImagesWidgetState extends State<MergeImagesWidget> {
     );
   }
 
-  FutureOr<ui.Image> _capturePic(GlobalKey key) async {
-    var buildContext = key.currentContext!;
-    var boundary = buildContext.findRenderObject() as RenderRepaintBoundary;
-    var image = await boundary.toImage(pixelRatio: ui.window.devicePixelRatio);
+  FutureOr<ui.Image?> _capturePic(GlobalKey key) async {
+    var boundary = key.currentContext?.findRenderObject() as RenderRepaintBoundary?;
+    var image = await boundary?.toImage(pixelRatio: ui.window.devicePixelRatio);
 
     // ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
     // Uint8List? pngBytes = byteData?.buffer.asUint8List() ?? Uint8List(10);
@@ -271,7 +270,7 @@ class MergeImagesWidgetState extends State<MergeImagesWidget> {
     // print("imageHeights:${imageHeights}");
 
     images.sort((a, b) => a.width.compareTo(b.width));
-    images.forEach((e) => print("image:${e.width}_${e.height}"));
+    // images.forEach((e) => print("image:${e.width}_${e.height}"));
 
     var totalWidth = images[0].width;
     var totalHeight = imageHeights.reduce((a, b) => a + b);
@@ -316,7 +315,7 @@ class MergeImagesWidgetState extends State<MergeImagesWidget> {
         throw Exception('生成图片失败!');
       }
       //图片大小
-      print("图片大小:${await image.fileSize() ?? "null"}");
+      debugPrint("图片大小:${await image.fileSize() ?? "null"}");
 
       return pngBytes;
     } catch (e) {
@@ -330,7 +329,7 @@ class MergeImagesWidgetState extends State<MergeImagesWidget> {
     // List<GlobalKey?> keys = widget.models.map((e) => e.globalKey).toList();
     // return _compositePics(keys);
     var urls = widget.models.map((e) => e.url ?? "").toList();
-    final miniCodeBytes = await ImageExt.imageDataFromUrl(imageUrl: widget.QRCodeUrl);
+    final miniCodeBytes = await ImageExt.imageDataFromUrl(imageUrl: widget.qrCodeUrl);
     return toCompositeImageUrls(imageUrls: urls, miniCode: miniCodeBytes);
   }
 }

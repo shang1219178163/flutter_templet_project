@@ -129,6 +129,8 @@ class _ProgressHudDemoNewState extends State<ProgressHudDemoNew> {
 
 
 class ToastContext extends StatefulWidget {
+  const ToastContext({Key? key}) : super(key: key);
+
   @override
   _ToastContextState createState() => _ToastContextState();
 }
@@ -301,6 +303,8 @@ class _ToastContextState extends State<ToastContext> {
 
 
 class ToastNoContext extends StatefulWidget {
+  const ToastNoContext({Key? key}) : super(key: key);
+
   @override
   _ToastNoContextState createState() => _ToastNoContextState();
 }
@@ -399,7 +403,7 @@ class _ToastNoContextState extends State<ToastNoContext> {
   }
 
   void showLongToast() {
-    print("showLongToast");
+    debugPrint("showLongToast");
     Fluttertoast.showToast(
       msg: "This is Long Toast",
       toastLength: Toast.LENGTH_LONG,

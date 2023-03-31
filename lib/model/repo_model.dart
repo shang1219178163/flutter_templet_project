@@ -20,164 +20,163 @@ class RepoModel {
 @JsonSerializable(explicitToJson: true)
 class RepoModelData {
   int? id;
-  String? node_id;
+  String? nodeId;
   String? name;
-  String? full_name;
+  String? fullName;
   bool? private;
   OwnerData? owner;
-  String? html_url;
+  String? htmlUrl;
   String? description;
   bool? fork;
   String? url;
-  String? forks_url;
-  String? keys_url;
-  String? collaborators_url;
-  String? teams_url;
-  String? hooks_url;
-  String? issue_events_url;
-  String? events_url;
-  String? assignees_url;
-  String? branches_url;
-  String? tags_url;
-  String? blobs_url;
-  String? git_tags_url;
-  String? git_refs_url;
-  String? trees_url;
-  String? statuses_url;
-  String? languages_url;
-  String? stargazers_url;
-  String? contributors_url;
-  String? subscribers_url;
-  String? subscription_url;
-  String? commits_url;
-  String? git_commits_url;
-  String? comments_url;
-  String? issue_comment_url;
-  String? contents_url;
-  String? compare_url;
-  String? merges_url;
-  String? archive_url;
-  String? downloads_url;
-  String? issues_url;
-  String? pulls_url;
-  String? milestones_url;
-  String? notifications_url;
-  String? labels_url;
-  String? releases_url;
-  String? deployments_url;
-  String? created_at;
-  String? updated_at;
-  String? pushed_at;
-  String? git_url;
-  String? ssh_url;
-  String? clone_url;
-  String? svn_url;
+  String? forksUrl;
+  String? keysUrl;
+  String? collaboratorsUrl;
+  String? teamsUrl;
+  String? hooksUrl;
+  String? issueEventsUrl;
+  String? eventsUrl;
+  String? assigneesUrl;
+  String? branchesUrl;
+  String? tagsUrl;
+  String? blobsUrl;
+  String? gitTagsUrl;
+  String? gitRefsUrl;
+  String? treesUrl;
+  String? statusesUrl;
+  String? languagesUrl;
+  String? stargazersUrl;
+  String? contributorsUrl;
+  String? subscribersUrl;
+  String? subscriptionUrl;
+  String? commitsUrl;
+  String? gitCommitsUrl;
+  String? commentsUrl;
+  String? issueCommentUrl;
+  String? contentsUrl;
+  String? compareUrl;
+  String? mergesUrl;
+  String? archiveUrl;
+  String? downloadsUrl;
+  String? issuesUrl;
+  String? pullsUrl;
+  String? milestonesUrl;
+  String? notificationsUrl;
+  String? labelsUrl;
+  String? releasesUrl;
+  String? deploymentsUrl;
+  String? createdAt;
+  String? updatedAt;
+  String? pushedAt;
+  String? gitUrl;
+  String? sshUrl;
+  String? cloneUrl;
+  String? svnUrl;
   String? homepage;
   int? size;
-  int? stargazers_count;
-  int? watchers_count;
+  int? stargazersCount;
+  int? watchersCount;
   String? language;
-  bool? has_issues;
-  bool? has_projects;
-  bool? has_downloads;
-  bool? has_wiki;
-  bool? has_pages;
-  int? forks_count;
-  var mirror_url;
+  bool? hasIssues;
+  bool? hasProjects;
+  bool? hasDownloads;
+  bool? hasWiki;
+  bool? hasPages;
+  int? forksCount;
+  String? mirrorUrl;
   bool? archived;
   bool? disabled;
-  int? open_issues_count;
+  int? openIssuesCount;
   LicenseData? license;
-  bool? allow_forking;
-  bool? is_template;
+  bool? allowForking;
+  bool? isTemplate;
   List<String> topics;
   String? visibility;
   int? forks;
-  int? open_issues;
+  int? openIssues;
   int? watchers;
-  String? default_branch;
+  String? defaultBranch;
   PermissionsData? permissions;
 
   RepoModelData({
     this.id,
-    this.node_id,
+    this.nodeId,
     this.name,
-    this.full_name,
+    this.fullName,
     this.private,
     this.owner,
-    this.html_url,
+    this.htmlUrl,
     this.description,
     this.fork,
     this.url,
-    this.forks_url,
-    this.keys_url,
-    this.collaborators_url,
-    this.teams_url,
-    this.hooks_url,
-    this.issue_events_url,
-    this.events_url,
-    this.assignees_url,
-    this.branches_url,
-    this.tags_url,
-    this.blobs_url,
-    this.git_tags_url,
-    this.git_refs_url,
-    this.trees_url,
-    this.statuses_url,
-    this.languages_url,
-    this.stargazers_url,
-    this.contributors_url,
-    this.subscribers_url,
-    this.subscription_url,
-    this.commits_url,
-    this.git_commits_url,
-    this.comments_url,
-    this.issue_comment_url,
-    this.contents_url,
-    this.compare_url,
-    this.merges_url,
-    this.archive_url,
-    this.downloads_url,
-    this.issues_url,
-    this.pulls_url,
-    this.milestones_url,
-    this.notifications_url,
-    this.labels_url,
-    this.releases_url,
-    this.deployments_url,
-    this.created_at,
-    this.updated_at,
-    this.pushed_at,
-    this.git_url,
-    this.ssh_url,
-    this.clone_url,
-    this.svn_url,
+    this.forksUrl,
+    this.keysUrl,
+    this.collaboratorsUrl,
+    this.teamsUrl,
+    this.hooksUrl,
+    this.issueEventsUrl,
+    this.eventsUrl,
+    this.assigneesUrl,
+    this.branchesUrl,
+    this.tagsUrl,
+    this.blobsUrl,
+    this.gitTagsUrl,
+    this.gitRefsUrl,
+    this.treesUrl,
+    this.statusesUrl,
+    this.languagesUrl,
+    this.stargazersUrl,
+    this.contributorsUrl,
+    this.subscribersUrl,
+    this.subscriptionUrl,
+    this.commitsUrl,
+    this.gitCommitsUrl,
+    this.commentsUrl,
+    this.issueCommentUrl,
+    this.contentsUrl,
+    this.compareUrl,
+    this.mergesUrl,
+    this.archiveUrl,
+    this.downloadsUrl,
+    this.issuesUrl,
+    this.pullsUrl,
+    this.milestonesUrl,
+    this.notificationsUrl,
+    this.labelsUrl,
+    this.releasesUrl,
+    this.deploymentsUrl,
+    this.createdAt,
+    this.updatedAt,
+    this.pushedAt,
+    this.gitUrl,
+    this.sshUrl,
+    this.cloneUrl,
+    this.svnUrl,
     this.homepage,
     this.size,
-    this.stargazers_count,
-    this.watchers_count,
+    this.stargazersCount,
+    this.watchersCount,
     this.language,
-    this.has_issues,
-    this.has_projects,
-    this.has_downloads,
-    this.has_wiki,
-    this.has_pages,
-    this.forks_count,
-    this.mirror_url,
+    this.hasIssues,
+    this.hasProjects,
+    this.hasDownloads,
+    this.hasWiki,
+    this.hasPages,
+    this.forksCount,
+    this.mirrorUrl,
     this.archived,
     this.disabled,
-    this.open_issues_count,
+    this.openIssuesCount,
     this.license,
-    this.allow_forking,
-    this.is_template,
+    this.allowForking,
+    this.isTemplate,
     this.topics = const [],
     this.visibility,
     this.forks,
-    this.open_issues,
+    this.openIssues,
     this.watchers,
-    this.default_branch,
+    this.defaultBranch,
     this.permissions,
-
   });
 
   factory RepoModelData.fromJson(Map<String, dynamic> json) => _$RepoModelDataFromJson(json);
@@ -209,16 +208,16 @@ class PermissionsData{
 class LicenseData{
   String? key;
   String? name;
-  String? spdx_id;
+  String? spdxId;
   String? url;
-  String? node_id;
+  String? nodeId;
 
   LicenseData({
     this.key,
     this.name,
-    this.spdx_id,
+    this.spdxId,
     this.url,
-    this.node_id,
+    this.nodeId,
   });
 
   factory LicenseData.fromJson(Map<String, dynamic> json) => _$LicenseDataFromJson(json);
@@ -230,42 +229,42 @@ class LicenseData{
 class OwnerData{
   String? login;
   int id;
-  String? node_id;
-  String? avatar_url;
-  String? gravatar_id;
+  String? nodeId;
+  String? avatarUrl;
+  String? gravatarId;
   String? url;
-  String? html_url;
-  String? followers_url;
-  String? following_url;
-  String? gists_url;
-  String? starred_url;
-  String? subscriptions_url;
-  String? organizations_url;
-  String? repos_url;
-  String? events_url;
-  String? received_events_url;
+  String? htmlUrl;
+  String? followersUrl;
+  String? followingUrl;
+  String? gistsUrl;
+  String? starredUrl;
+  String? subscriptionsUrl;
+  String? organizationsUrl;
+  String? reposUrl;
+  String? eventsUrl;
+  String? receivedEventsUrl;
   String? type;
-  bool? site_admin;
+  bool? siteAdmin;
 
   OwnerData({
     this.login,
     required this.id,
-    this.node_id = "",
-    this.avatar_url,
-    this.gravatar_id,
+    this.nodeId,
+    this.avatarUrl,
+    this.gravatarId,
     this.url,
-    this.html_url,
-    this.followers_url,
-    this.following_url,
-    this.gists_url,
-    this.starred_url,
-    this.subscriptions_url,
-    this.organizations_url,
-    this.repos_url,
-    this.events_url,
-    this.received_events_url,
+    this.htmlUrl,
+    this.followersUrl,
+    this.followingUrl,
+    this.gistsUrl,
+    this.starredUrl,
+    this.subscriptionsUrl,
+    this.organizationsUrl,
+    this.reposUrl,
+    this.eventsUrl,
+    this.receivedEventsUrl,
     this.type,
-    this.site_admin,
+    this.siteAdmin,
   });
 
   factory OwnerData.fromJson(Map<String, dynamic> json) => _$OwnerDataFromJson(json);

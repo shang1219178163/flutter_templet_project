@@ -6,6 +6,8 @@ import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:tuple/tuple.dart';
 
 class CupertinoTabScaffoldDemo extends StatefulWidget {
+  const CupertinoTabScaffoldDemo({Key? key}) : super(key: key);
+
 
   @override
   _CupertinoTabScaffoldDemoState createState() => _CupertinoTabScaffoldDemoState();
@@ -58,8 +60,10 @@ class _CupertinoTabScaffoldDemoState extends State {
 
 
 class OnePage extends StatelessWidget {
-@override
-Widget build(BuildContext context) {
+  const OnePage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
   return CupertinoPageScaffold(
     backgroundColor: Colors.red,
     navigationBar: CupertinoNavigationBar(
@@ -70,43 +74,48 @@ Widget build(BuildContext context) {
         style: Theme.of(context).textTheme.button,
       ),
     ), );
-} }
+}
+}
 
 class TwoPage extends StatelessWidget {
+  const TwoPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return CupertinoPageScaffold(
-      backgroundColor: Colors.lightBlue,
-      navigationBar: CupertinoNavigationBar(
-        leading: Icon(CupertinoIcons.back),
-        trailing: Icon(CupertinoIcons.add),
-        middle: Text("聊天面板"),
+      return CupertinoPageScaffold(
+        backgroundColor: Colors.lightBlue,
+        navigationBar: CupertinoNavigationBar(
+          leading: Icon(CupertinoIcons.back),
+          trailing: Icon(CupertinoIcons.add),
+          middle: Text("聊天面板"),
 
-      ),
-      child: Center(
-        child: Text(
-          'This is 聊天面板 layout',
-          style: Theme.of(context).textTheme.button,
-        ), ),
-    ); }
+        ),
+        child: Center(
+          child: Text(
+            'This is 聊天面板 layout',
+            style: Theme.of(context).textTheme.button,
+          ), ),
+      ); }
 }
 
 
 class ThreePage extends StatelessWidget {
+  const ThreePage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return CupertinoPageScaffold(
-      backgroundColor: Colors.lightGreen,
-      navigationBar: CupertinoNavigationBar(
-        leading: Icon(CupertinoIcons.back),
-        trailing: Icon(CupertinoIcons.add),
-        middle: Text("聊天面板"),
+      return CupertinoPageScaffold(
+        backgroundColor: Colors.lightGreen,
+        navigationBar: CupertinoNavigationBar(
+          leading: Icon(CupertinoIcons.back),
+          trailing: Icon(CupertinoIcons.add),
+          middle: Text("聊天面板"),
 
-      ),
-      child: Center(
-        child: Text(
-          'This is 聊天面板 layout',
-          style: Theme.of(context).textTheme.button,
-        ), ),
-    ); }
+        ),
+        child: Center(
+          child: Text(
+            'This is 聊天面板 layout',
+            style: Theme.of(context).textTheme.button,
+          ), ),
+      ); }
 }

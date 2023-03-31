@@ -64,7 +64,9 @@ class _HorizontalCellDemoState extends State<HorizontalCellDemo> {
             builder: (BuildContext context, double value, Widget? child) {
               final result = (value/100).toStringAsFixed(2);
               return TextButton(
-                onPressed: () { print(result); },
+                onPressed: () {
+                  debugPrint(result);
+                },
                 child: Text(result),
               );
             }

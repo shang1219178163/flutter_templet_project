@@ -40,7 +40,7 @@ class _FlutterSwiperIndicatorDemoState extends State<FlutterSwiperIndicatorDemo>
     final imgUrl = items[index];
 
     return InkWell(
-      onTap: () => print(index),
+      onTap: () => debugPrint(index),
       child: Container(
         // color: Colors.green,
         // width: this.itemWidth,

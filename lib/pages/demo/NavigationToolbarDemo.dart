@@ -39,10 +39,10 @@ class _NavigationToolbarDemoState extends State<NavigationToolbarDemo> {
 
             NNPickerToolBar(
               onCancel: (){
-                print("Cancel");
+                debugPrint("Cancel");
               },
               onConfirm: (){
-                print("onConfirm");
+                debugPrint("onConfirm");
               },
             ),
             Divider(),
@@ -60,15 +60,15 @@ class _NavigationToolbarDemoState extends State<NavigationToolbarDemo> {
       child: NavigationToolbar(
         leading: IconButton(
           icon: Icon(Icons.add),
-          onPressed: () { print("leading"); },
+          onPressed: () { debugPrint("leading"); },
         ),
         middle: IconButton(
           icon: Icon(Icons.clear),
-          onPressed: () { print("middle"); },
+          onPressed: () { debugPrint("middle"); },
         ),
         trailing: IconButton(
           icon: Icon(Icons.home),
-          onPressed: () { print("trailing"); },
+          onPressed: () { debugPrint("trailing"); },
         ),
       ),
     );

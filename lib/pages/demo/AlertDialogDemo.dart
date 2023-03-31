@@ -20,9 +20,11 @@ import 'package:popover/popover.dart';
 
 import 'package:webview_flutter/webview_flutter.dart';
 
-import 'AlertSheetDemo.dart';
+import 'package:flutter_templet_project/pages/demo/AlertSheetDemo.dart';
 
 class AlertDialogDemo extends StatefulWidget {
+  const AlertDialogDemo({Key? key}) : super(key: key);
+
   @override
   _AlertDialogDemoState createState() => _AlertDialogDemoState();
 }
@@ -163,7 +165,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
                 onPressed: () {
                   alignment = e;
                   context.showSnackBar(SnackBar(content: Text(name)),);
-                  print("alignment:$alignment ${alignment.x} ${alignment.y}");
+                  debugPrint("alignment:$alignment ${alignment.x} ${alignment.y}");
                 },
                 child: Text(name, style: TextStyle(color: Colors.white),)
               ),
@@ -358,7 +360,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
                 child: Text("Button"),
               ),
             ),
-            onPop: () => print('Popover was popped!'),
+            onPop: () => debugPrint('Popover was popped!'),
             // direction: PopoverDirection.bottom,
             // width: 200,
             // height: 400,
@@ -375,7 +377,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
             context,
             NNPopupRoute(
               onClick: () {
-                print("exit");
+                debugPrint("exit");
               },
               child: Container(
                 color: Colors.red,

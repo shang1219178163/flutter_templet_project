@@ -26,7 +26,7 @@ class _LeetCodeState extends State<LeetCode> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: ['done',].map((e) => TextButton(
-          onPressed: () => print(e),
+          onPressed: () => debugPrint(e.toString()),
           child: Text(e,
             style: TextStyle(color: Colors.white),
           ),)

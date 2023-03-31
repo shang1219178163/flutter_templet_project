@@ -2,20 +2,21 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 
-import 'chioce_wrap.dart';
+import 'package:flutter_templet_project/basicWidget/chioce_wrap.dart';
 
 
 ///多选列表
 class ChioceList extends StatefulWidget {
 
   ChioceList({
+    Key? key,
     this.isMutiple = false,
     required this.children,
     required this.indexs,
     required this.canScroll,
     required this.callback,
     this.backgroudColor,
-  });
+  }) : super(key: key);
 
   List<int> indexs = <int>[];
 

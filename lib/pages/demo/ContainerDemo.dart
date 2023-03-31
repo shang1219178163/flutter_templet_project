@@ -32,7 +32,7 @@ class _ContainerDemoState extends State<ContainerDemo> {
         actions: [
           TextButton(
             onPressed: () {
-              print('TextButton');
+              debugPrint('TextButton');
               isSliver = !isSliver;
               setState(() {});
             },
@@ -183,7 +183,7 @@ class _ContainerDemoState extends State<ContainerDemo> {
         child: Container(
           constraints: BoxConstraints.expand(),
           child: OutlinedButton(
-            onPressed: () { print("ImageRepeat.repeat"); },
+            onPressed: () { debugPrint("ImageRepeat.repeat"); },
             child: Text('ImageRepeat.repeat',
               style: TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
             ),

@@ -58,10 +58,10 @@ class _RegExpDemoState extends State<RegExpDemo> {
     final matchs = reg.allMatches(str);
     for (final Match m in matchs) {
       var match = m[0]!;
-      print("m: ${m.description}");
+      debugPrint("m: ${m.description}");
     }
     final seperators = matchs.map((e) => e[0] ?? "").toList();
-    print("seperators: $seperators");
+    debugPrint("seperators: $seperators");
   }
 
 }

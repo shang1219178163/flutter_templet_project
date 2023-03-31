@@ -46,7 +46,7 @@ class _NetStateListenerDemoOneState extends State<NetStateListenerDemoOne> with 
           ValueListenableBuilder<ConnectivityResult>(
             valueListenable: netConnectResult,
             builder: (context, value, child) {
-              print('ValueListenableBuilder: netConnectResult:$value');
+              debugPrint('ValueListenableBuilder: netConnectResult:$value');
 
               return Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -66,7 +66,7 @@ class _NetStateListenerDemoOneState extends State<NetStateListenerDemoOne> with 
   onPressed(){
     final list = [];
     list.remove("1");
-    print(list);
+    debugPrint(list.toString());
   }
 
   @override
@@ -74,7 +74,7 @@ class _NetStateListenerDemoOneState extends State<NetStateListenerDemoOne> with 
 
   @override
   void onNetStateChaneged(ConnectivityResult result) {
-    print("onNetStateChaneged $result ${result != ConnectivityResult.none}");
+    debugPrint("onNetStateChaneged $result ${result != ConnectivityResult.none}");
     netConnectResult.value = result;
     if (result == ConnectivityResult.none) {
       return;

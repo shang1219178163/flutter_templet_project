@@ -13,7 +13,7 @@ import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/uti/R.dart';
 import 'package:tuple/tuple.dart';
 
-import 'TabBarDemo.dart';
+import 'package:flutter_templet_project/pages/demo/TabBarDemo.dart';
 
 class TabBarOnlyDemo extends StatefulWidget {
 
@@ -44,7 +44,7 @@ class _TabBarOnlyDemoState extends State<TabBarOnlyDemo> with TickerProviderStat
     _tabController = TabController(length: titles.length, vsync: this)
       ..addListener(() {
         if(!_tabController.indexIsChanging){
-          print("_tabController:${_tabController.index}");
+          debugPrint("_tabController:${_tabController.index}");
           setState(() {
             currentIndex = _tabController.index;
           });
@@ -76,7 +76,7 @@ class _TabBarOnlyDemoState extends State<TabBarOnlyDemo> with TickerProviderStat
         )).toList(),
         bottom: TabBar(
           controller: _tabController,
-          onTap: (index) => print("onTap $index"),
+          onTap: (index) => debugPrint("onTap $index"),
           isScrollable: true,
           // tabs: titles.map((e) => Tab(text: e,)).toList(),
           tabs: titles.map((e) => buildItem(e)).toList(),
@@ -153,7 +153,7 @@ class _TabBarOnlyDemoState extends State<TabBarOnlyDemo> with TickerProviderStat
   }
 
   onDone() {
-    print("onDone");
+    debugPrint("onDone");
     _tabController.index = initialIndex;
   }
 
@@ -202,7 +202,7 @@ class _BottomTabBarState extends State<BottomTabBar> with SingleTickerProviderSt
     _tabController = widget.controller ?? TabController(length: widget.tabCount, vsync: this)
       ..addListener(() {
         if(!_tabController.indexIsChanging){
-          print("_tabController:${_tabController.index}");
+          debugPrint("_tabController:${_tabController.index}");
           setState(() {
             currentIndex = _tabController.index;
             widget.onClick(context, currentIndex);

@@ -15,6 +15,8 @@ import 'package:flutter_templet_project/extension/widget_ext.dart';
 
 
 class AppSettingsPage extends StatefulWidget{
+  const AppSettingsPage({Key? key}) : super(key: key);
+
   @override
   _AppSettingsPageState createState() => _AppSettingsPageState();
 }
@@ -93,7 +95,8 @@ class _AppSettingsPageState extends State<AppSettingsPage>{
           ),
         ),
         trailing: Icon(Icons.chevron_right),
-        onTap: (){ print(title);
+        onTap: (){
+          debugPrint(title);
         },
       )
           .addBottomSeparator(height: 1, color: Colors.black.withAlpha(10)),

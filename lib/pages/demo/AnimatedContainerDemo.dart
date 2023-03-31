@@ -96,7 +96,7 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
           alignment: _alignment.value,
           onEnd: onEnd,
           child: TextButton(
-            onPressed: () { print("AnimatedContainer"); },
+            onPressed: () { debugPrint("AnimatedContainer"); },
             child: Text("AnimatedContainer", style: TextStyle(color: Colors.white),),
           ),
         );
@@ -105,7 +105,7 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
   }
 
   void onEnd() {
-    print('End');
+    debugPrint('End');
   }
 
   onPressed(){

@@ -80,7 +80,7 @@ class _PopoverDemoState extends State<PopoverDemo> {
                 trailing: const PopoverButton(text: Text("点击"),),
                 dense: true,
                 onTap: (){
-                  print([DateTime.now(), e]);
+                  debugPrint([DateTime.now(), e].toString());
                 },
               );
             },
@@ -102,7 +102,7 @@ class _PopoverDemoState extends State<PopoverDemo> {
       context: context,
       transitionDuration: const Duration(milliseconds: 150),
       bodyBuilder: (context) => const ListItems(),
-      onPop: () => print('Popover was popped!'),
+      onPop: () => debugPrint('Popover was popped!'),
       direction: PopoverDirection.bottom,
       width: 200,
       height: 400,
@@ -141,29 +141,22 @@ class PopoverButton extends StatelessWidget {
 
 
   void _handleShowPopover1(BuildContext context) {
+    final items = List.generate(3, (index) => "按钮$index");
     showPopover(
       context: context,
       transitionDuration: const Duration(milliseconds: 150),
       bodyBuilder: (context) => Container(
         // color: Colors.green,
         child: Row(
-          children: [
-            TextButton(onPressed: (){
-              print([DateTime.now(), "按钮1"]);
-
-            }, child: const Text("按钮1")),
-            TextButton(onPressed: (){
-              print([DateTime.now(), "按钮2"]);
-
-            }, child: const Text("按钮2")),
-            TextButton(onPressed: (){
-              print([DateTime.now(), "按钮3"]);
-
-            }, child: const Text("按钮3")),
-          ],
+          children: items.map((e) => TextButton(
+            onPressed: (){
+              debugPrint([DateTime.now(), "按钮1"].toString());
+            },
+            child: const Text("按钮1"))
+          ).toList(),
         ),
       ),
-      onPop: () => print('Popover was popped!'),
+      onPop: () => debugPrint('Popover was popped!'),
       direction: PopoverDirection.bottom,
       // width: 200,
       height: 60,
@@ -242,6 +235,8 @@ class ListItems extends StatelessWidget {
 }
 
 class SecondRoute extends StatelessWidget {
+  const SecondRoute({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

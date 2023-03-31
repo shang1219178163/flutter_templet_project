@@ -18,6 +18,8 @@ const kUpdateContent = """
 """;
 
 class SnackBarDemoOne extends StatefulWidget {
+  const SnackBarDemoOne({Key? key}) : super(key: key);
+
   
   @override
   State<StatefulWidget> createState() => SnackBarDemoOneState();
@@ -34,7 +36,7 @@ class SnackBarDemoOneState extends State<SnackBarDemoOne> with ScaffoldMessenger
   @override
   void dispose() {
     // TODO: implement dispose
-    print("dispose");
+    debugPrint("dispose");
     super.dispose();
   }
 
@@ -53,13 +55,13 @@ class SnackBarDemoOneState extends State<SnackBarDemoOne> with ScaffoldMessenger
         // await Future.delayed(Duration(milliseconds: 1300), () async {
         //   clearMaterialBanners();
         // });
-        print("WillPopScope");
+        debugPrint("WillPopScope");
         return !isShowingMaterial;
       },
       child: Scaffold(
         persistentFooterButtons: ["one", "two"].map((e) => TextButton(
           onPressed: () {
-            print(e);
+            debugPrint(e);
           },
           child: Text(e))
         ).toList(),
@@ -167,7 +169,7 @@ class SnackBarDemoOneState extends State<SnackBarDemoOne> with ScaffoldMessenger
   SnackBar buildSnackBar2() {
     return SnackBar(
       onVisible: () {
-        print("显示SnackBar");
+        debugPrint("显示SnackBar");
       },
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(50))
@@ -181,7 +183,7 @@ class SnackBarDemoOneState extends State<SnackBarDemoOne> with ScaffoldMessenger
         label: '点击重试',
         onPressed: () {
           //执行相关逻辑
-          print('点击重试');
+          debugPrint('点击重试');
         },
       ),
       // margin: EdgeInsets.only(
@@ -194,7 +196,7 @@ class SnackBarDemoOneState extends State<SnackBarDemoOne> with ScaffoldMessenger
   SnackBar buildSnackBarTip() {
     return SnackBar(
       onVisible: () {
-        print("显示SnackBar");
+        debugPrint("显示SnackBar");
       },
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(50))
@@ -215,7 +217,7 @@ class SnackBarDemoOneState extends State<SnackBarDemoOne> with ScaffoldMessenger
       content: InkWell(
         onTap: () {
           clearMaterialBanners();
-          print("isShowingMaterial:$isShowingMaterial");
+          debugPrint("isShowingMaterial:$isShowingMaterial");
         },
           child: Text('Hello, I am a Material Banner $nowStr' * 3)
       ),
@@ -227,7 +229,7 @@ class SnackBarDemoOneState extends State<SnackBarDemoOne> with ScaffoldMessenger
           // onPressed: () => ScaffoldMessenger.of(context).hideCurrentMaterialBanner(),
           onPressed: () {
             clearMaterialBanners();
-            print("isShowingMaterial:$isShowingMaterial");
+            debugPrint("isShowingMaterial:$isShowingMaterial");
           },
           child: const Text('Dismiss'),
         ),
@@ -235,7 +237,7 @@ class SnackBarDemoOneState extends State<SnackBarDemoOne> with ScaffoldMessenger
     );
 
     showMaterialBanner(banner, isClear: false,);
-    print("isShowingMaterial:$isShowingMaterial");
+    debugPrint("isShowingMaterial:$isShowingMaterial");
   }
 }
 

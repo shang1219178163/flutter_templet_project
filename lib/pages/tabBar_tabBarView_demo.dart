@@ -27,10 +27,11 @@ import 'package:flutter_templet_project/routes/APPRouter.dart';
 import 'package:get/get.dart';
 import 'package:tuple/tuple.dart';
 
-import 'demo/AutocompleteDemo.dart';
+import 'package:flutter_templet_project/pages/demo/AutocompleteDemo.dart';
 
 
 class TabBarTabBarViewDemo extends StatefulWidget {
+  const TabBarTabBarViewDemo({Key? key}) : super(key: key);
 
   @override
   _TabBarTabBarViewDemoState createState() => _TabBarTabBarViewDemoState();
@@ -103,7 +104,7 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
               style: TextStyle(color: Colors.white),
             ),
           ),
-          IconButton(onPressed: () => print("aa"), icon: Icon(Icons.ac_unit))
+          IconButton(onPressed: () => debugPrint("aa"), icon: Icon(Icons.ac_unit))
         ],
         bottom: TabBar(
           controller: _tabController,
@@ -253,7 +254,7 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
     final titles = tuples.expand((e) => e.item2.map((e) => e.item1)).toList();
     final result = List<String>.from(titles.sorted());
     // print('titles runtimeType:${titles.runtimeType},${titles.every((element) => element is String)},');
-    print('result runtimeType:${result.runtimeType}');
+    debugPrint('result runtimeType:${result.runtimeType}');
     return result;
   }
 

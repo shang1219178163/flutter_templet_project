@@ -205,6 +205,8 @@ class User {
 }
 
 class PaginatedDataTableDemo extends StatelessWidget {
+  PaginatedDataTableDemo({Key? key}) : super(key: key);
+
   List<Tuple2> titles = [
     Tuple2("姓名", "name", ),
     Tuple2("性别", "sex", ),

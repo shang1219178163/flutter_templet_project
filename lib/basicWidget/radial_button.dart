@@ -65,7 +65,7 @@ class _RadialButtonState extends State<RadialButton> {
         height: h,
         isGreed: true,
       ) ?? 0.5;
-      print("context.size:${context.size} $_scale");
+      debugPrint("context.size:${context.size} $_scale");
       setState(() {});
     });
     super.initState();

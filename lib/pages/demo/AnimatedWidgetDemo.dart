@@ -171,14 +171,11 @@ class AnimatedDecoratedBox extends ImplicitlyAnimatedWidget {
   final Widget child;
 
   @override
-  _AnimatedDecoratedBoxState createState() {
-    return _AnimatedDecoratedBoxState();
-  }
+  _AnimatedDecoratedBoxState createState() => _AnimatedDecoratedBoxState();
 }
 
-class _AnimatedDecoratedBoxState
-    extends AnimatedWidgetBaseState<AnimatedDecoratedBox> {
-  var _decoration; //定义一个Tween
+class _AnimatedDecoratedBoxState extends AnimatedWidgetBaseState<AnimatedDecoratedBox> {
+  late DecorationTween _decoration; //定义一个Tween
 
   @override
   Widget build(BuildContext context) {
@@ -189,12 +186,13 @@ class _AnimatedDecoratedBoxState
   }
 
   @override
-  void forEachTween(visitor) {
+  void forEachTween(TweenVisitor<dynamic> visitor) {
     // 在需要更新Tween时，基类会调用此方法
+    // ignore: cast_nullable_to_non_nullable
     _decoration = visitor(
       _decoration,
       widget.decoration,
-          (value) => DecorationTween(begin: value),
-    );
+      (value) => DecorationTween(begin: value),
+    ) as DecorationTween;
   }
 }

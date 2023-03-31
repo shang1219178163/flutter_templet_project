@@ -20,6 +20,7 @@ textfield,
 ///自定义数值增减 Stepper
 class NumberStepper extends StatefulWidget {
   NumberStepper({
+    Key? key,
     required this.minValue,
     required this.maxValue,
     required this.stepValue,
@@ -30,7 +31,7 @@ class NumberStepper extends StatefulWidget {
     this.radius = 5.0,
     this.wraps = true,
     required this.block,
-  });
+  }) : super(key: key);
 
   final int minValue;
   final int maxValue;

@@ -28,20 +28,20 @@ class _PhysicalModelDemoState extends State<PhysicalModelDemo> {
             Column(
               children: [
                 PhysicalModel(
-                  child: BlueBox(title: '1'),
+                  child: buildBlueBox(title: '1'),
                   color: Colors.black,
                 ),
                 SizedBox(height: 15,),
 
                 PhysicalModel(
-                  child: BlueBox(title: '2'),
+                  child: buildBlueBox(title: '2'),
                   color: Colors.black,
                   elevation: 8.0,
                 ),
                 SizedBox(height: 15,),
 
                 PhysicalModel(
-                  child: BlueBox(title: '3'),
+                  child: buildBlueBox(title: '3'),
                   color: Colors.black,
                   shadowColor: Colors.red,
                   elevation: 8.0,
@@ -49,7 +49,7 @@ class _PhysicalModelDemoState extends State<PhysicalModelDemo> {
                 SizedBox(height: 15,),
 
                 PhysicalModel(
-                  child: BlueBox(title: '4'),
+                  child: buildBlueBox(title: '4'),
                   color: Colors.black,
                   shadowColor: Colors.pink,
                   elevation: 8.0,
@@ -58,7 +58,7 @@ class _PhysicalModelDemoState extends State<PhysicalModelDemo> {
                 SizedBox(height: 15,),
 
                 PhysicalModel(
-                  child: BlueBox(title: '5'),
+                  child: buildBlueBox(title: '5'),
                   color: Colors.black,
                   shadowColor: Colors.pink,
                   elevation: 8.0,
@@ -67,7 +67,7 @@ class _PhysicalModelDemoState extends State<PhysicalModelDemo> {
                 SizedBox(height: 15,),
 
                 PhysicalModel(
-                  child: BlueBox(title: '6', opacity: 1.0),
+                  child: buildBlueBox(title: '6', opacity: 1.0),
                   color: Colors.black,
                   shadowColor: Colors.pink,
                   elevation: 8.0,
@@ -76,7 +76,7 @@ class _PhysicalModelDemoState extends State<PhysicalModelDemo> {
                 SizedBox(height: 15,),
 
                 PhysicalModel(
-                  child: BlueBox(title: '7', opacity: 0.0),
+                  child: buildBlueBox(title: '7', opacity: 0.0),
                   color: Colors.black,
                   shadowColor: Colors.pink,
                   elevation: 8.0,
@@ -99,7 +99,7 @@ class _PhysicalModelDemoState extends State<PhysicalModelDemo> {
   }
 
 
-  BlueBox({required String title, opacity = 1.0}) {
+  buildBlueBox({required String title, opacity = 1.0}) {
     return Container(
       width: 100,
       height: 100,

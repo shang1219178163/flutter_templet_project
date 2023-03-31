@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 
 class SystemIconsPage extends StatefulWidget {
+  const SystemIconsPage({Key? key}) : super(key: key);
 
   @override
   _SystemIconsPageState createState() => _SystemIconsPageState();

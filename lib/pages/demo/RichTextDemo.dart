@@ -121,7 +121,7 @@ xxxx十分重视用户权利及隐私政策并严格按照相关法律法规的�
         RegExp(r'^', multiLine: true), // Matches the beginning of the line
         onMatch: (m) => '** ${m.group(0)}', // Adds asterisk to match
         onNonMatch: (n) => n); // Just return non-matches
-    print(result1);
+    debugPrint(result1);
 
     var s = 'bezkoder';
     ddlog(s.padLeft(10));       // '  bezkoder'

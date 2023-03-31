@@ -1,23 +1,25 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import 'package:get/get.dart';
+import 'package:tuple/tuple.dart';
+
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/pages/FirstPage.dart';
 import 'package:flutter_templet_project/pages/SecondPage.dart';
 import 'package:flutter_templet_project/pages/ThirdPage.dart';
 import 'package:flutter_templet_project/routes/APPRouter.dart';
 
-import 'package:get/get.dart';
-
 import 'package:flutter_templet_project/extension/bottom_sheet_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 
-import 'package:tuple/tuple.dart';
 
 
 class PageViewDemo extends StatefulWidget {
+  const PageViewDemo({Key? key}) : super(key: key);
 
   @override
   _PageViewDemoState createState() => _PageViewDemoState();
@@ -101,7 +103,7 @@ class _PageViewDemoState extends State<PageViewDemo> {
       controller: controller,
       pageSnapping: true,
       onPageChanged: (index){
-        print('当前为第$index页');
+        debugPrint('当前为第$index页');
       },
       children: List.generate(3, (index) => Container(
         decoration: BoxDecoration(
@@ -186,28 +188,38 @@ class _PageViewDemoState extends State<PageViewDemo> {
 /*--------------------------------------------------------------------------------------------------*/
 
 class PageViewTabBarWidget extends StatefulWidget {
+  const PageViewTabBarWidget({Key? key, this.title, }) : super(key: key);
+
+  final String? title;
+
+  @override
+  _PageViewTabBarWidgetState createState() => _PageViewTabBarWidgetState();
+}
+
+class _PageViewTabBarWidgetState extends State<PageViewTabBarWidget> {
+  final PageController _pageController = PageController();
 
   final List<Tuple2<BottomNavigationBarItem, Widget>> items = [
     Tuple2(
-      BottomNavigationBarItem(
-        icon: Icon(Icons.home),
-        label: '首页',
-      ),
-      FirstPage()
+        BottomNavigationBarItem(
+          icon: Icon(Icons.home),
+          label: '首页',
+        ),
+        FirstPage()
     ),
     Tuple2(
-      BottomNavigationBarItem(
-        icon: Icon(Icons.mail),
-        label: '邮件',
-      ),
-      SecondPage()
+        BottomNavigationBarItem(
+          icon: Icon(Icons.mail),
+          label: '邮件',
+        ),
+        SecondPage()
     ),
     Tuple2(
-      BottomNavigationBarItem(
-        icon: Icon(Icons.people),
-        label: '我的',
-      ),
-      ThirdPage()
+        BottomNavigationBarItem(
+          icon: Icon(Icons.people),
+          label: '我的',
+        ),
+        ThirdPage()
     ),
   ];
 
@@ -216,12 +228,6 @@ class PageViewTabBarWidget extends StatefulWidget {
   var isAnimateToPage = false;
   // PageViewTabBarWidget({this.title, this.barItems, required this.pageWidgetList, this.index, this.isAnimateToPage});
 
-  @override
-  _PageViewTabBarWidgetState createState() => _PageViewTabBarWidgetState();
-}
-
-class _PageViewTabBarWidgetState extends State<PageViewTabBarWidget> {
-  late final PageController _pageController = PageController();
 
   @override
   void dispose() {
@@ -238,7 +244,7 @@ class _PageViewTabBarWidgetState extends State<PageViewTabBarWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text("${widget.title} ?? $this"),
       ),
       bottomNavigationBar: buildBottomNavigationBar(context),
       body: buildPageView(context),
@@ -247,9 +253,9 @@ class _PageViewTabBarWidgetState extends State<PageViewTabBarWidget> {
 
   BottomNavigationBar buildBottomNavigationBar(BuildContext context) {
     return BottomNavigationBar(
-      items: widget.items.map((e) => e.item1).toList(),
+      items: items.map((e) => e.item1).toList(),
       type: BottomNavigationBarType.fixed,
-      currentIndex: widget.index,
+      currentIndex: index,
       selectedFontSize: 14,
       selectedItemColor: Theme.of(context).primaryColor,
       selectedIconTheme: IconThemeData(color: Theme.of(context).primaryColor, size: 28),
@@ -261,12 +267,12 @@ class _PageViewTabBarWidgetState extends State<PageViewTabBarWidget> {
       elevation: 10,
       onTap: (index) {
         ddlog('onTap: $index');
-        widget.index = index;
+        index = index;
         setState(() {
-          if (widget.isAnimateToPage) {
-            _pageController.animateToPage(widget.index, duration: Duration(milliseconds: 500), curve: Curves.easeInOut);
+          if (isAnimateToPage) {
+            _pageController.animateToPage(index, duration: Duration(milliseconds: 500), curve: Curves.easeInOut);
           } else {
-            _pageController.jumpToPage(widget.index);
+            _pageController.jumpToPage(index);
           }
         });
       },
@@ -279,12 +285,12 @@ class _PageViewTabBarWidgetState extends State<PageViewTabBarWidget> {
       controller: _pageController,
       onPageChanged: (index) {
         ddlog('onPageChanged: $index');
-        widget.index = index;
+        index = index;
         setState(() {});
       },
       pageSnapping: true,
       physics: PageScrollPhysics(parent: BouncingScrollPhysics()),
-      children: widget.items.map((e) => e.item2).toList(),
+      children: items.map((e) => e.item2).toList(),
     );
   }
 }

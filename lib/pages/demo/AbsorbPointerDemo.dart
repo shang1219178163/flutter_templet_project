@@ -12,6 +12,8 @@ import "package:flutter/material.dart";
 import 'package:flutter_templet_project/extension/ddlog.dart';
 
 class AbsorbPointerDemo extends StatefulWidget {
+  const AbsorbPointerDemo({Key? key}) : super(key: key);
+
   @override
   _AbsorbPointerDemoState createState() => _AbsorbPointerDemoState();
 }

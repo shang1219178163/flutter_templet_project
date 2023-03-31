@@ -90,7 +90,7 @@ class _ListDismissibleDemoState extends State<ListDismissibleDemo> {
       key: Key(item),
       movementDuration: Duration(milliseconds: 100),
       onDismissed: (direction) {
-        print("--removeAt---" + item.toString());
+        debugPrint("--removeAt---$item");
         list.removeAt(index);
 
         ScaffoldMessenger.of(context).hideCurrentSnackBar();

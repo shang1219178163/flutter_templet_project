@@ -25,8 +25,8 @@ class _SelectableTextDemoState extends State<SelectableTextDemo> {
         body: SelectableText('Hello world! This is selectable Text',
           style: const TextStyle(fontSize: 22),
           onSelectionChanged: (selection, cause) {
-            print(selection);
-            print(cause);
+            debugPrint(selection.toString());
+            debugPrint(cause.toString());
           },
         ),
     );

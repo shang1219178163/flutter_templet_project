@@ -31,7 +31,7 @@ class _MaterialDemoState extends State<MaterialDemo> with SingleTickerProviderSt
       final idx = _tabController!.index;
       indexVN.value = idx;
       typeVN.value = types[idx];
-      print("indexVN:${indexVN.value}_${typeVN.value}");
+      debugPrint("indexVN:${indexVN.value}_${typeVN.value}");
     });
   }
 
@@ -43,7 +43,7 @@ class _MaterialDemoState extends State<MaterialDemo> with SingleTickerProviderSt
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: ['done',].map((e) => TextButton(
-          onPressed: () => print("done"),
+          onPressed: () => debugPrint("done"),
           child: Text(e,
             style: TextStyle(color: Colors.white),
           ),
@@ -96,7 +96,7 @@ class _MaterialDemoState extends State<MaterialDemo> with SingleTickerProviderSt
                     ValueListenableBuilder<MaterialType>(
                       valueListenable: typeVN,
                       builder: (context, value, child) {
-                        print("ValueListenableBuilder:$value");
+                        debugPrint("ValueListenableBuilder:$value");
 
                         return _buildMaterialDemo(type: value);
                       }
@@ -125,7 +125,7 @@ class _MaterialDemoState extends State<MaterialDemo> with SingleTickerProviderSt
           opacity: 1,
           child: TextButton(
             onPressed: (){
-              print("ElevatedButton");
+              debugPrint("ElevatedButton");
             },
             child: Text("ElevatedButton"),
           ),

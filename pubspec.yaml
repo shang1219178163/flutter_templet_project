@@ -98,7 +98,7 @@ dependencies:
   font_awesome_flutter: ^9.0.0
   timelines: ^0.1.0
 
-  enhance_stepper: ^0.0.8
+  enhance_stepper: ^0.1.1
   enhance_expansion_panel: ^0.0.3
 
   custom_timer: ^0.1.1

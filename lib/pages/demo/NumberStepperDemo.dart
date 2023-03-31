@@ -11,6 +11,8 @@ import 'package:flutter_templet_project/basicWidget/number_stepper.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 
 class NumberStepperDemo extends StatelessWidget {
+  const NumberStepperDemo({Key? key}) : super(key: key);
+
   
   @override
   Widget build(BuildContext context) {

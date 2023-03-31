@@ -84,7 +84,7 @@ class _FutureBuilderDemoState extends State<FutureBuilderDemo> {
     // url = "https://jsonplaceholder.typicode.com/users";
     final response = await _dio.get<List<dynamic>>(url,);
     var items = (response.data ?? []).map((e) => GitRepoModel.fromJson(e)).toList();
-    print("users: ${items.first.runtimeType}");
+    debugPrint("users: ${items.first.runtimeType}");
 
     // testUrl();
   }
@@ -97,10 +97,10 @@ class _FutureBuilderDemoState extends State<FutureBuilderDemo> {
     // final list = jsonDecode(jsonStr);
     // print("list:${list.runtimeType.toString()}");
 
-    print("list: ${response.data.runtimeType.toString()}");
+    debugPrint("list: ${response.data.runtimeType.toString()}");
     // List<dynamic>? users = response.data;
 
     var users = (response.data ?? []).map((e) => UserModel.fromJson(e)).toList();
-    print("users: ${users.first.runtimeType}");
+    debugPrint("users: ${users.first.runtimeType}");
   }
 }

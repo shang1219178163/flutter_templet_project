@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 // import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:timelines/timelines.dart';
 
-import '../timelines_widgets.dart';
+import 'package:flutter_templet_project/vendor/timelines_demo/timelines_widgets.dart';
 
 const kTileHeight = 50.0;
 
@@ -14,6 +14,8 @@ const inProgressColor = Color(0xff5ec792);
 const todoColor = Color(0xffd1d2d7);
 
 class ProcessTimelinePage extends StatefulWidget {
+  const ProcessTimelinePage({Key? key}) : super(key: key);
+
   @override
   _ProcessTimelinePageState createState() => _ProcessTimelinePageState();
 }
@@ -71,8 +73,8 @@ class _ProcessTimelinePageState extends State<ProcessTimelinePage> {
             );
           },
           indicatorBuilder: (_, index) {
-            var color;
-            var child;
+            Color color;
+            Widget child = SizedBox();
             if (index == _processIndex) {
               color = inProgressColor;
               child = Padding(
@@ -203,11 +205,11 @@ class _BezierPainter extends CustomPainter {
 
     final radius = size.width / 2;
 
-    var angle;
-    var offset1;
-    var offset2;
+    var angle = 0.0;
+    var offset1 = Offset.zero;
+    var offset2 = Offset.zero;
 
-    var path;
+    Path path;
 
     if (drawStart) {
       angle = 3 * pi / 4;

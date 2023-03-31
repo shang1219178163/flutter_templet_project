@@ -45,7 +45,7 @@ class _KeyDemoState extends State<KeyDemo> {
         title: Text(widget.title ?? "$widget"),
         actions: ['done',].map((e) => TextButton(
           onPressed: (){
-            print("${DateTime.now()}: $e");
+            debugPrint("${DateTime.now()}: $e");
             setState(() {});
           },
           child: Text(e,

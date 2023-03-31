@@ -29,7 +29,7 @@ class _ScrollbarDemoState extends State<ScrollbarDemo> {
     return NotificationListener<OverscrollIndicatorNotification>(
       onNotification: (notification) {
         //滑动指示器是否在头部 true在前端，false在末端
-        print('notification:${notification.leading}');
+        debugPrint('notification:${notification.leading}');
         return true;
       },
       child: Scrollbar(

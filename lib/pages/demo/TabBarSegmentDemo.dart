@@ -37,7 +37,7 @@ class _TabBarSegmentDemoState extends State<TabBarSegmentDemo> with SingleTicker
     super.initState();
     _tabController = TabController(length: titles.length, vsync: this);
     _tabController?.addListener(() {
-      print(_tabController?.index);
+      debugPrint(_tabController?.index.toString());
       indexVN.value = _tabController!.index;
     });
   }
@@ -112,7 +112,7 @@ class _TabBarSegmentDemoState extends State<TabBarSegmentDemo> with SingleTicker
         currentIndex: currentIndex,
         tabCount: titles.length,
         onTap: (index){
-          print("onTap: $index");
+          debugPrint("onTap: $index");
           selectedIndex = index;
         },
         itemBuilder: (context, index) {
@@ -140,7 +140,7 @@ class _TabBarSegmentDemoState extends State<TabBarSegmentDemo> with SingleTicker
     }
     final state = (context as StatefulElement).state as TabBarSegmentState;
     final stateNew = context.getStatefulElementState<TabBarSegmentState>();
-    print("state $state ${state == stateNew}");
+    debugPrint("state $state ${state == stateNew}");
   }
 
   Widget buildItem({
@@ -163,7 +163,7 @@ class _TabBarSegmentDemoState extends State<TabBarSegmentDemo> with SingleTicker
   }
 
   onDone() {
-    print("onDone");
+    debugPrint("onDone");
     _globalKey.currentState?.reset();
     // _globalKey1.currentState?.reset();
   }
@@ -211,7 +211,7 @@ class _TabBarSegmentNewDemoState extends State<TabBarSegmentNewDemo> with Single
     _tabController?.addListener(() {
       if(!_tabController!.indexIsChanging){
         indexVN.value = _tabController!.index;
-        print("indexVN:${indexVN.value}_${_tabController?.index}");
+        debugPrint("indexVN:${indexVN.value}_${_tabController?.index}");
       }
     });
 
@@ -239,7 +239,7 @@ class _TabBarSegmentNewDemoState extends State<TabBarSegmentNewDemo> with Single
       },
       onTap: (index) {
         indexVN.value = index;
-        print("onTap $index");
+        debugPrint("onTap $index");
       },
       // onClick: (BuildContext context, int index) {
       //   print("onClick $index");
@@ -268,7 +268,7 @@ class _TabBarSegmentNewDemoState extends State<TabBarSegmentNewDemo> with Single
   }
 
   onDone() {
-    print("onDone");
+    debugPrint("onDone");
     _globalKey.currentState?.reset();
     // _globalKey1.currentState?.reset();
   }
@@ -369,17 +369,17 @@ class _TabBarSegmentNewDemoState extends State<TabBarSegmentNewDemo> with Single
               currentIndex: currentIndex,
               tabCount: titles.length,
               onTap: (index){
-                print("onTap: $index");
+                debugPrint("onTap: $index");
                 selectedIndex = index;
               },
               itemBuilder: (context, index) {
                 final e = titles[index];
-                print("TabBarSegment itemBuilder: $index");
+                debugPrint("TabBarSegment itemBuilder: $index");
 
                 return ValueListenableBuilder<int>(
                   valueListenable: indexVN,
                   builder: (BuildContext context, int value, Widget? child) {
-                    print("ValueListenableBuilder111 indexVN: $index");
+                    debugPrint("ValueListenableBuilder111 indexVN: $index");
                     final isSelected = (index == indexVN.value);
 
                     return Tab(

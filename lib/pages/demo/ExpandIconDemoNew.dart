@@ -6,16 +6,14 @@
 //	Copyright © 2021 Bin Shang. All rights reserved.
 //
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 
 
 class ExpandIconDemoNew extends StatefulWidget {
+  const ExpandIconDemoNew({Key? key}) : super(key: key);
+
   @override
   ExpandIconDemoNewState createState() => ExpandIconDemoNewState();
 }
@@ -205,6 +203,8 @@ class ExpandedItem<E> {
 
 ///自定义视图
 class CustomExpansionTile extends StatefulWidget {
+  const CustomExpansionTile({Key? key}) : super(key: key);
+
   @override
   State createState() => CustomExpansionTileState();
 }

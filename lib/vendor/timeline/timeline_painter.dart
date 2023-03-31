@@ -1,18 +1,10 @@
 import 'dart:async';
-import 'dart:ui' as UI;
+import 'dart:ui' as ui;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 ///自定义视图展示
 class TimelinePainter extends CustomPainter {
-
-  final Color lineColor;
-  final Color backgroundColor;
-  final bool firstElement;
-  final bool lastElement;
-  final Animation<double> controller;
-  final Animation<double> height;
-  final double topPadding;
 
   TimelinePainter({
     this.topPadding = 16,
@@ -26,9 +18,16 @@ class TimelinePainter extends CustomPainter {
     curve: Interval(
         0.45, 1.0,
         curve: Curves.ease),
-  ),
-  ),
-        super(repaint: controller);
+    ),
+  ), super(repaint: controller);
+
+  final Color lineColor;
+  final Color backgroundColor;
+  final bool firstElement;
+  final bool lastElement;
+  final Animation<double> controller;
+  final Animation<double> height;
+  final double topPadding;
 
   @override
   void paint(Canvas canvas, Size size) {

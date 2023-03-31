@@ -6,6 +6,7 @@
 //	Copyright © 2021 Bin Shang. All rights reserved.
 //
 
+import 'package:enhance_stepper/enhance_stepper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
@@ -14,7 +15,6 @@ import 'package:flutter_templet_project/extension/button_ext.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 
 import 'package:tuple/tuple.dart';
-import '../../basicWidget/enhance_stepper.dart';
 
 
 ///步骤一二三

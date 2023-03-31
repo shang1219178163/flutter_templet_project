@@ -51,7 +51,7 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
   ]; // 素材详情列表
 
 
-  final QRCodeUrl = "https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web/img/article.9d13ff7.png";
+  final qrCodeUrl = "https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web/img/article.9d13ff7.png";
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +78,7 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
                 }).then((result) {
                   ddlog("result:${result.isSuccess}");
                 }).catchError((e){
-                  print("error:${e.message}");
+                  debugPrint("error:${e.message}");
                 });
               },
               child: Text('保存', style: TextStyle(color: Colors.white),)
@@ -108,8 +108,8 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
               width: e.materialWidth,
               height: e.materialHeight,
             )).toList(),
-            QRCodeBuilder: (url) => Image.asset('images/QRCode.png', width:90, height: 90),
-            QRCodeUrl: QRCodeUrl,
+            qrCodeBuilder: (url) => Image.asset('images/QRCode.png', width:90, height: 90),
+            qrCodeUrl: qrCodeUrl,
           ),
         ],
       ),
@@ -135,7 +135,7 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
           ),
         ),
         callback: (step){
-          print("callback:$step");
+          debugPrint("callback:$step");
           detailList.exchange(idx, idx + step);
           setState(() {});
         });
@@ -269,14 +269,16 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
   /// keys: 根据 GlobalKey 获取 Image 数组
   Future<Uint8List?> _compositePics([List<GlobalKey?> keys = const [],]) async {
     //根据 GlobalKey 获取 Image 数组
-    var images = await Future.wait(
+    //根据 GlobalKey 获取 Image 数组
+    var imgs = await Future.wait(
       keys.map((key) async {
-        var buildContext = key?.currentContext!;
-        var boundary = buildContext?.findRenderObject() as RenderRepaintBoundary;
-        var image = await boundary.toImage(pixelRatio: ui.window.devicePixelRatio);
+        var boundary = key?.currentContext?.findRenderObject() as RenderRepaintBoundary?;
+        var image = await boundary?.toImage(pixelRatio: ui.window.devicePixelRatio);
         return image;
       }
     ).toList());
+
+    var images = imgs.where((e) => e != null).cast<ui.Image>().toList();
     // print("images:${images}");
     if (images.isEmpty) {
       throw Exception('没有获取到任何图片!');
@@ -296,7 +298,7 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
       //画图
       for (var i = 0; i < images.length; i++) {
         final e = images[i];
-        final offsetY = i == 0 ? 0 : imageHeights.sublist(0, i).reduce((a,b) => a + b);
+        final offsetY = i == 0 ? 0 : imageHeights.sublist(0, i).reduce((a, b) => a + b);
         // print("offset:${i}_${e.height}_${offsetY}");
         canvas.drawRect(Rect.fromLTWH(
             0,
@@ -311,11 +313,11 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
       var byteData = await image.toByteData(format: ui.ImageByteFormat.png);
       var pngBytes = byteData?.buffer.asUint8List();
       //图片大小
-      print("图片大小:${await image.fileSize() ?? "null"}");
+      debugPrint("图片大小:${await image.fileSize() ?? "null"}");
 
       return Future.value(pngBytes);
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
       return Future.error(e);
     }
     return null;

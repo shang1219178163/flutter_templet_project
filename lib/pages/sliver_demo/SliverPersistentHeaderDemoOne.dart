@@ -12,6 +12,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/nn_sliver_persistent_header_delegate.dart';
 
 class SliverPersistentHeaderDemoOne extends StatelessWidget {
+  SliverPersistentHeaderDemoOne({Key? key}) : super(key: key);
+
   // 色彩数据
   // final List<Color> data = List.generate(24, (i) => Color(0xFFFF00FF - 24*i));
   final List<Color> data = Colors.primaries.sublist(5, 10);

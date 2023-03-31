@@ -6,7 +6,7 @@ import 'package:flutter_templet_project/extension/scroll_controller_ext.dart';
 import 'package:flutter_templet_project/mockData/mock_data.dart';
 import 'package:tuple/tuple.dart';
 
-typedef onKeyCallback = void Function(BuildContext context, int index, GlobalKey key);
+typedef KeyCallback = void Function(BuildContext context, int index, GlobalKey key);
 
 class ListViewDemo extends StatefulWidget {
 
@@ -134,7 +134,7 @@ class _ListViewDemoState extends State<ListViewDemo> {
   _buildListView({
     required GlobalKey key,
     required ScrollController? controller,
-    required onKeyCallback onKeyCallback,
+    required KeyCallback onKeyCallback,
     Axis scrollDirection = Axis.vertical,
     bool addToSliverBox = false,
     IndexedWidgetBuilder? itemBuilder,

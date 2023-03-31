@@ -40,7 +40,7 @@ class _TextFieldDemoOneState extends State<TextFieldDemoOne> {
       ///当前 focusNode 是否添加了兼听
       var hasListeners = focusNode.hasListeners;
 
-      print("focusNode 兼听 hasFocus:$hasFocus  hasListeners:$hasListeners");
+      debugPrint("focusNode 兼听 hasFocus:$hasFocus  hasListeners:$hasListeners");
     });
 
     /// WidgetsBinding 它能监听到第一帧绘制完成，第一帧绘制完成标志着已经Build完成
@@ -70,22 +70,32 @@ class _TextFieldDemoOneState extends State<TextFieldDemoOne> {
 
   List<Widget> _buildButtons() {
     return [
-      TextButton(onPressed: (){
-        FocusScope.of(context).requestFocus(focusNode);
-      },child: Text("获取焦点"),),
-      TextButton(onPressed: (){
-        focusNode.unfocus();
-      },child: Text("失去焦点"),),
-      TextButton(onPressed: (){
-        setState(() {
-          isEnable = true;
-        });
-      },child: Text("编辑"),),
-      TextButton(onPressed: (){
-        isEnable = false;
-
+      TextButton(
+        onPressed: (){
+          FocusScope.of(context).requestFocus(focusNode);
+        },
+        child: Text("获取焦点"),
+      ),
+      TextButton(
+        onPressed: (){
+          focusNode.unfocus();
+        },
+        child: Text("失去焦点"),
+      ),
+      TextButton(
+        onPressed: (){
+        isEnable = true;
         setState(() {});
-      },child: Text("不可编辑"),),
+      },
+        child: Text("编辑"),
+      ),
+      TextButton(
+        onPressed: (){
+          isEnable = false;
+          setState(() {});
+        },
+        child: Text("不可编辑"),
+      ),
     ];
   }
 

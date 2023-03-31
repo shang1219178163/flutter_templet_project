@@ -290,7 +290,7 @@ class NNTimelineTile extends StatelessWidget {
         ),
     ];
 
-    var result;
+    Widget result = SizedBox();
     switch (direction) {
       case Axis.vertical:
         result = Row(

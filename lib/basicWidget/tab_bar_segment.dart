@@ -129,7 +129,7 @@ class TabBarSegmentState extends State<TabBarSegment> with SingleTickerProviderS
 
     widget.currentIndex = widget.initialIndex;
     _tabController = widget.controller ?? TabController(length: widget.tabCount, vsync: this);
-    print("_tabController:${_tabController == widget.controller}");
+    debugPrint("_tabController:${_tabController == widget.controller}");
     if (_tabController == null) {
       return;
     }
@@ -149,7 +149,7 @@ class TabBarSegmentState extends State<TabBarSegment> with SingleTickerProviderS
           context,
           index,
       ));
-      print("_itemBuilders.isEmpty");
+      debugPrint("_itemBuilders.isEmpty");
     }
   }
 

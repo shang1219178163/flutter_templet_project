@@ -5,6 +5,8 @@ import 'package:flutter_templet_project/extension/build_context_ext.dart';
 
 
 class AnimatedListSample extends StatefulWidget {
+  const AnimatedListSample({Key? key}) : super(key: key);
+
   @override
   _AnimatedListSampleState createState() => _AnimatedListSampleState();
 }

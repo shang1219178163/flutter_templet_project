@@ -5,6 +5,7 @@ import 'dart:math' as math;
 import 'package:flutter_templet_project/basicWidget/nn_sliver_persistent_header_delegate.dart';
 
 class SliverPersistentHeaderDemo extends StatelessWidget {
+  SliverPersistentHeaderDemo({Key? key}) : super(key: key);
 
   final list = Colors.primaries.take(8).toList();
 

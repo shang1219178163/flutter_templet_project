@@ -44,7 +44,7 @@ class _DismissibleDemoState extends State<DismissibleDemo> {
           background: Container(color: Colors.red),
           onDismissed: (direction) {
             _list.removeAt(index);
-            print(_list.length);
+            debugPrint(_list.length.toString());
             setState(() {});
             ScaffoldMessenger.of(context).hideCurrentSnackBar();
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -52,7 +52,7 @@ class _DismissibleDemoState extends State<DismissibleDemo> {
             ));
           },
           confirmDismiss: (direction) async {
-            print(direction);
+            debugPrint(direction.toString());
             return true;
           },
           child: ListTile(

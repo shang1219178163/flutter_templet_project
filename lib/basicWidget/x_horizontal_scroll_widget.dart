@@ -430,7 +430,7 @@ class HorizontalScrollWidget extends StatelessWidget {
     final e = items[index];
 
     return InkWell(
-      onTap: () => print(e),
+      onTap: () => debugPrint(e.toString()),
       child: Container(
         // color: Colors.green,
         width: itemWidth,

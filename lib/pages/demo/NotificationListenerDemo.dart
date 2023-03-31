@@ -57,7 +57,7 @@ class _NotificationListenerDemoState extends State<NotificationListenerDemo> {
     return ValueListenableBuilder(
       valueListenable: isScrolling,
       builder: (context, bool value, child) {
-        print('Offstage value:$value');
+        debugPrint('Offstage value:$value');
         return Offstage(
           offstage: value,
           child: FloatingActionButton(
@@ -66,7 +66,7 @@ class _NotificationListenerDemoState extends State<NotificationListenerDemo> {
               if (progress.value >= 1.0) {
                 _scrollController.jumpTo(0);
               } else {
-                print('progress.value: ${progress.value.toStringAsFixed(2)}');
+                debugPrint('progress.value: ${progress.value.toStringAsFixed(2)}');
               }
             },
             child: ValueListenableBuilder(
@@ -96,7 +96,7 @@ class _NotificationListenerDemoState extends State<NotificationListenerDemo> {
     //   case ScrollEndNotification: print("滚动停止, $info"); break;
     //   case OverscrollNotification: print("滚动到边界, $info"); break;
     // }
-    print("onNotification：${n.runtimeType}");
+    debugPrint("onNotification：${n.runtimeType}");
 
     if(n is ScrollUpdateNotification){
       //当前滚动的位置和总长度
@@ -134,6 +134,8 @@ class _NotificationListenerDemoState extends State<NotificationListenerDemo> {
 
 
 class NotificationCustomDemo extends StatefulWidget {
+  const NotificationCustomDemo({Key? key}) : super(key: key);
+
   @override
   NotificationCustomDemoState createState() {
     return NotificationCustomDemoState();

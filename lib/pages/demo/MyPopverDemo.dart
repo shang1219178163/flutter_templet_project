@@ -69,7 +69,7 @@ class _MyPopverDemoState extends State<MyPopverDemo> {
       children: List.generate(count, (index) => ElevatedButton(
         onPressed: () {
           final val = _globalKey.currentContext?.origin();
-          print("菜单${index}_$val");
+          debugPrint("菜单${index}_$val");
           btnIdx = index;
           isVisible = !isVisible;
           setState(() {});
@@ -142,22 +142,18 @@ class _MyPopverDemoState extends State<MyPopverDemo> {
   _build() {
     return Column(
       children: [
-
         LayoutBuilder(
           builder: (BuildContext context, BoxConstraints constraints){
-
             return SizedBox();
           }
         ),
         Builder(
           builder: (context) {
-
             return SizedBox();
           }
         ),
         StatefulBuilder(
           builder: (BuildContext context, StateSetter setState) {
-
             return SizedBox();
           }
         ),

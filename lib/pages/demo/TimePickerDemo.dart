@@ -23,7 +23,7 @@ class TimePickerDemo extends StatefulWidget {
 class _TimePickerDemoState extends State<TimePickerDemo> {
   TimeOfDay _time = TimeOfDay(hour: 7, minute: 15);
 
-  void _selectTime() async {
+  Future<void> _selectTime() async {
     final newTime = await showTimePicker(
       context: context,
       initialTime: _time,

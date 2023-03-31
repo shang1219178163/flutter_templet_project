@@ -15,6 +15,8 @@ import 'package:flutter_templet_project/extension/color_ext.dart';
 
 
 class LocationPopView extends StatelessWidget {
+  const LocationPopView({Key? key}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {

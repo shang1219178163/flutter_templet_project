@@ -39,13 +39,13 @@ class _MaterialBannerDemoState extends State<MaterialBannerDemo> {
       actions: <Widget>[
         TextButton(
           onPressed: () {
-            print('NO');
+            debugPrint('NO');
           },
           child: Text('NO'),
         ),
         TextButton(
           onPressed: () {
-            print('YES');
+            debugPrint('YES');
           },
           child: Text('YES'),
         ),

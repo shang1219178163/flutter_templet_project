@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class SliverAnimatedListDemo extends StatefulWidget {
+  const SliverAnimatedListDemo({Key? key}) : super(key: key);
+
   @override
   _SliverAnimatedListDemoState createState() => _SliverAnimatedListDemoState();
 }

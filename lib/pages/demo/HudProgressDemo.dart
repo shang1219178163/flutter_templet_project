@@ -35,7 +35,7 @@ class HudProgressDemo extends StatelessWidget {
             IconButton(
               icon: Icon(Icons.more_horiz),
               onPressed: () {
-                print("更多");
+                debugPrint("更多");
                 showToast(context);
               },
             ),

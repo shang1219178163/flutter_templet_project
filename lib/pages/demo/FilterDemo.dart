@@ -37,7 +37,7 @@ class _FilterDemoState extends State<FilterDemo> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: ['done',].map((e) => TextButton(
-          onPressed: () => print(e),
+          onPressed: () => debugPrint(e),
           child: Text(e,
             style: TextStyle(color: Colors.white),
           ),)
@@ -53,7 +53,7 @@ class _FilterDemoState extends State<FilterDemo> {
               children: [
                 ElevatedButton(
                   onPressed: (){
-                    print("ElevatedButton");
+                    debugPrint("ElevatedButton");
                   },
                   child: Container(
                     padding: EdgeInsets.symmetric(vertical: 6),
@@ -158,11 +158,11 @@ class _FilterDemoState extends State<FilterDemo> {
       leading: IconButton(
         icon: Icon(Icons.download),
         onPressed: () {
-          print("Downloading");
+          debugPrint("Downloading");
         },
       ),
       onChangeEnd: (double value) {
-        print('NNSlider onChangeEnd: $value');
+        debugPrint('NNSlider onChangeEnd: $value');
       },
       trailingBuilder: (context, value) {
         // final result = (value/100).toStringAsFixed(2);
@@ -170,7 +170,7 @@ class _FilterDemoState extends State<FilterDemo> {
 
         return TextButton(
           onPressed: () {
-            print("Downloading");
+            debugPrint("Downloading");
           },
           child: Text(result),
         );

@@ -346,8 +346,11 @@ class _SlidableDemoState extends State<SlidableDemo> {
 }
 
 class HorizontalListItem extends StatelessWidget {
-  const HorizontalListItem(this.item);
+
+  HorizontalListItem(this.item, {Key? key}) : super(key: key);
+
   final _HomeItem item;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -377,7 +380,7 @@ class HorizontalListItem extends StatelessWidget {
 }
 
 class VerticalListItem extends StatelessWidget {
-  const VerticalListItem(this.item);
+  VerticalListItem(this.item, {Key? key}) : super(key: key);
   final _HomeItem item;
 
   @override

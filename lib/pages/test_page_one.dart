@@ -22,7 +22,7 @@ class _TestPageOneState extends State<TestPageOne> {
   @override
   Widget build(BuildContext context) {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-    print("$this, build");
+    debugPrint("$this, build");
 
     return Scaffold(
       appBar: AppBar(

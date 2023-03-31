@@ -40,7 +40,7 @@ class _DrawImageNineDemoState extends State<DrawImageNineDemo> {
     );
   }
 
-  Future <Null> init() async {
+  init() async {
     try {
       final data = await rootBundle.load('images/weiqi.png');
       var bytes = Uint8List.view(data.buffer);
@@ -50,6 +50,7 @@ class _DrawImageNineDemoState extends State<DrawImageNineDemo> {
       });
     }
     catch (e) {
+      debugPrint(e.toString());
     }
 
   }
@@ -89,9 +90,9 @@ class ImageEditor extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
 
-    print('paint');
-    print('paint size $size');
-    print('paint center ${size.center(Offset.zero)}');
+    debugPrint('paint');
+    debugPrint('paint size $size');
+    debugPrint('paint center ${size.center(Offset.zero)}');
 
     // Paint paint = Paint();
     // canvas.drawImage(image, Offset.zero, Paint());
@@ -105,7 +106,7 @@ class ImageEditor extends CustomPainter {
         width: 50,
         height: 50
     );
-    print('paint center $center');
+    debugPrint('paint center $center');
 
     var dst = Rect.fromCenter(
       center: size.center(Offset.zero),

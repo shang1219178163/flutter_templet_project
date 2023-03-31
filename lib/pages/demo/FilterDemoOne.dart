@@ -39,7 +39,7 @@ class _FilterDemoOneState extends State<FilterDemoOne> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: ['done',].map((e) => TextButton(
-          onPressed: () => print(e),
+          onPressed: () => debugPrint(e),
           child: Text(e,
             style: TextStyle(color: Colors.white),
           ),)
@@ -58,7 +58,7 @@ class _FilterDemoOneState extends State<FilterDemoOne> {
           children: [
             TextButton(
               onPressed: (){
-                print("ElevatedButton");
+                debugPrint("ElevatedButton");
               },
               child: Container(
                 padding: EdgeInsets.symmetric(vertical: 6),
@@ -131,7 +131,7 @@ class _FilterDemoOneState extends State<FilterDemoOne> {
 
         return TextButton(
           onPressed: () {
-            print(result);
+            debugPrint(result);
           },
           child: Text(result),
         );

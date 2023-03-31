@@ -69,7 +69,9 @@ class _ThirdPageState extends State<ThirdPage> {
         onLoad: () async {
           ddlog("onLoad");
           await Future.delayed(Duration(seconds: 1), () {
-            if (!mounted) { return; }
+            if (!mounted) {
+              return;
+            }
             items.addAll(List<String>.generate(
                 20, (i) => 'Item ${items.length + i}')
             );
@@ -172,7 +174,7 @@ class _ThirdPageState extends State<ThirdPage> {
   }
 
   Future<bool?> buildConfirmDismiss(BuildContext context) async {
-    return await showDialog(
+    return showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(

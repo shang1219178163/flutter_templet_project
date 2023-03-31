@@ -1,26 +1,17 @@
-import 'common/colors.dart';
-import 'common/font_const.dart';
-import 'triangle_painter.dart';
+
 import 'package:flutter/material.dart';
 
+import 'package:flutter_templet_project/vendor/timeline/common/colors.dart';
+import 'package:flutter_templet_project/vendor/timeline/common/font_const.dart';
+import 'package:flutter_templet_project/vendor/timeline/triangle_painter.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'timeline_painter.dart';
+import 'package:flutter_templet_project/vendor/timeline/timeline_painter.dart';
+
 ///构建timeline 组件Widget   
 class TimelineElement extends StatelessWidget {
-
-  final Color lineColor;
-  final Color backgroundColor;
-  final  model;
-  final bool firstElement;
-  final bool lastElement;
-  final Animation<double> controller;
-  final TextStyle? titleStyle;
-  final TextStyle? subtitleStyle;
-  final TextStyle? descriptionStyle;
-  final bool? leftContent;
-  final double? height;
-
-  const TimelineElement({
+  TimelineElement({
+    Key? key,
     required this.lineColor,
     required this.backgroundColor,
     required this.model,
@@ -32,7 +23,20 @@ class TimelineElement extends StatelessWidget {
     this.descriptionStyle,
     this.leftContent = true,
     this.height = 80.0
-  });
+  }) : super(key: key);
+
+  final Color lineColor;
+  final Color backgroundColor;
+  final dynamic model;
+  final bool firstElement;
+  final bool lastElement;
+  final Animation<double> controller;
+  final TextStyle? titleStyle;
+  final TextStyle? subtitleStyle;
+  final TextStyle? descriptionStyle;
+  final bool? leftContent;
+  final double? height;
+
   ///构建时间线Widget
   Widget _buildLine(BuildContext context, Widget? child) {
     return Container(

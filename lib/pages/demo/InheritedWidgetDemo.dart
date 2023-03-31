@@ -27,13 +27,15 @@ class ShareDataWidget extends InheritedWidget {
 
   //该回调决定当data发生变化时，是否通知子树中依赖data的Widget重新build
   @override
-  bool updateShouldNotify(ShareDataWidget old) {
-    return old.data != data;
+  bool updateShouldNotify(ShareDataWidget oldWidget) {
+    return oldWidget.data != data;
   }
 }
 
 
 class TestWidget extends StatefulWidget {
+  const TestWidget({Key? key}) : super(key: key);
+
   @override
   _TestWidgetState createState() => _TestWidgetState();
 }
@@ -50,12 +52,14 @@ class _TestWidgetState extends State<TestWidget> {
     super.didChangeDependencies();
     //父或祖先widget中的InheritedWidget改变(updateShouldNotify返回true)时会被调用。
     //如果build中没有依赖InheritedWidget，则此回调不会被调用。
-    print("${DateTime.now()}:TestWidget didChangeDependencies");
+    debugPrint("${DateTime.now()}:TestWidget didChangeDependencies");
   }
 }
 
 
 class InheritedWidgetDemo extends StatefulWidget {
+  const InheritedWidgetDemo({Key? key}) : super(key: key);
+
   @override
   _InheritedWidgetDemoState createState() => _InheritedWidgetDemoState();
 }

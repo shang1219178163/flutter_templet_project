@@ -698,7 +698,7 @@ class AppPage {
     GetPage(name: APPRouter.badgesDemo, page: () => BadgesDemo(),),
     GetPage(name: APPRouter.flutterSwiperDemo, page: () => FlutterSwiperDemo(),),
     GetPage(name: APPRouter.flutterSwiperIndicatorDemo, page: () => FlutterSwiperIndicatorDemo(),),
-    GetPage(name: APPRouter.homeSrollDemo, page: () => homeSrollDemo(),),
+    GetPage(name: APPRouter.homeSrollDemo, page: () => HomeSrollDemo(),),
     GetPage(name: APPRouter.homeNavDemo, page: () => HomeNavDemo(),),
     GetPage(name: APPRouter.wrapDemo, page: () => WrapDemo(),),
     GetPage(name: APPRouter.boxConstraintsDemo, page: () => BoxConstraintsDemo(),),

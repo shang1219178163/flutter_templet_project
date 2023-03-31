@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
@@ -145,10 +146,8 @@ class XBoxWidget extends StatelessWidget {
       /// 留出阴影空间
       margin = margin.mergeShadow(shadow: shadow);
     }
-    var left = margin.isNonNegative == false ? 0 : margin.left;
-    var right = margin.isNonNegative == false ? 0 : margin.right;
-    var top = margin.isNonNegative == false ? 0 : margin.top;
-    var bottom = margin.isNonNegative == false ? 0 : margin.bottom;
+    margin = margin.positive;
+
     // if (this.title != null && this.title!.contains('图文导航')) {
     //   bgBlur = 5;//add test
     // }
@@ -210,10 +209,10 @@ class XBoxWidget extends StatelessWidget {
       children: [
         opacity2,
         Positioned(
-          left: left,
-          top: top,
-          right: right,
-          bottom: bottom,
+          left: margin.left,
+          top: margin.top,
+          right: margin.right,
+          bottom: margin.bottom,
           child: ClipRRect(
             borderRadius: borderRadius,
             child: BackdropFilter(

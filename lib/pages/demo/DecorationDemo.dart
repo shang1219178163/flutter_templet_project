@@ -81,7 +81,7 @@ class _DecorationDemoState extends State<DecorationDemo> {
         icon: Icon(Icons.send),
         label: Text("ElevatedButton"),
         onPressed: () {
-          print('ElevatedButton');
+          debugPrint('ElevatedButton');
         },
       ),
     );

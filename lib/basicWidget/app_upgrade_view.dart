@@ -176,8 +176,7 @@ class _AppUpgradeWidget extends State<AppUpgradeView> {
           onTap: () {
             // widget.onCancel?.call();
             Navigator.of(context).pop();
-          }
-
+          },
           child: Container(
             height: 45,
             alignment: Alignment.center,

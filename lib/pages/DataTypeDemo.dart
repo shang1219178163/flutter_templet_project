@@ -178,8 +178,8 @@ class _DataTypeDemoState extends State<DataTypeDemo> with AutomaticKeepAliveClie
 
     final join = nums.fold("", (prev, int e) => "$prev $e" );
 
-    print("sum: $sum");
-    print("join: $join");
+    debugPrint("sum: $sum");
+    debugPrint("join: $join");
 
   }
 

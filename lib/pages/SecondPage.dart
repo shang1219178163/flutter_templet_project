@@ -73,40 +73,40 @@ class _SecondPageState extends State<SecondPage> {
             RadialButton(
               text: Text('一二'),
               center: Alignment.topRight,
-              onTap: () => print("RadialButton"),
+              onTap: () => debugPrint("RadialButton"),
             ),
             RadialButton(
               text: Text('一二'),
               center: Alignment.centerRight,
-              onTap: () => print("RadialButton"),
+              onTap: () => debugPrint("RadialButton"),
             ),
             RadialButton(
               text: Text('一二'),
               center: Alignment.bottomRight,
-              onTap: () => print("RadialButton"),
+              onTap: () => debugPrint("RadialButton"),
             ),
             RadialButton(
               text: Text('一二'),
-              onTap: () => print("RadialButton"),
+              onTap: () => debugPrint("RadialButton"),
             ),
             RadialButton(
               text: Text('一二三'),
               center: Alignment.topRight,
-              onTap: () => print("RadialButton"),
+              onTap: () => debugPrint("RadialButton"),
             ),
             RadialButton(
               text: Text('一二三四'),
               center: Alignment.centerRight,
-              onTap: () => print("RadialButton"),
+              onTap: () => debugPrint("RadialButton"),
             ),
             RadialButton(
               text: Text('一二三四五六'),
               center: Alignment.bottomRight,
-              onTap: () => print("RadialButton"),
+              onTap: () => debugPrint("RadialButton"),
             ),
             AfterLayoutBuilder(
               builder: (BuildContext context, Widget? child, Size? size) {
-                print("AfterLayoutBuilder size:$size");
+                debugPrint("AfterLayoutBuilder size:$size");
                 if (size == null) {
                   return child ?? SizedBox();
                 }
@@ -129,14 +129,14 @@ class _SecondPageState extends State<SecondPage> {
             MaterialButton(
               color: Colors.blue.shade400,
               textColor: Colors.white,
-              onPressed: () => print("MaterialButton"),
+              onPressed: () => debugPrint("MaterialButton"),
               child: Text("MaterialButton"),
             ),
 
             Divider(),
             SectionHeader.h5(title: "BackButton"),
             BackButton(
-              onPressed: () => print("BackButton"),
+              onPressed: () => debugPrint("BackButton"),
               color: Colors.red,
             ),
             Divider(),
@@ -146,7 +146,7 @@ class _SecondPageState extends State<SecondPage> {
               style: ElevatedButton.styleFrom(
                 splashFactory: NoSplash.splashFactory,
                ),
-              onPressed: () { print("NoSplash.splashFactory"); },
+              onPressed: () { debugPrint("NoSplash.splashFactory"); },
                child: Text('No Splash'),
             ),
             SectionHeader.h5(title: "ElevatedButton"),
@@ -166,7 +166,7 @@ class _SecondPageState extends State<SecondPage> {
             Directionality(
               textDirection: TextDirection.rtl,
               child: ElevatedButton.icon(
-                onPressed: () { print("ElevatedButton"); },
+                onPressed: () { debugPrint("ElevatedButton"); },
                 icon: Icon(Icons.arrow_back,),
                 label: Text("ElevatedButton"),
               )
@@ -196,7 +196,7 @@ class _SecondPageState extends State<SecondPage> {
             TextSelectionToolbarTextButton(
                 padding: EdgeInsets.all(8),
               onPressed: (){
-                  print("TextSelectionToolbarTextButton");
+                  debugPrint("TextSelectionToolbarTextButton");
               },
                 child: Text("TextSelectionToolbarTextButton"),
             ),
@@ -285,7 +285,7 @@ class _SecondPageState extends State<SecondPage> {
                 side: BorderSide(width: 1, color: Colors.grey),
                 borderRadius: BorderRadius.circular(4),
               ),
-              onPressed: () { print("Press"); },
+              onPressed: () { debugPrint("Press"); },
               child: TextButtonExt.buildTextAndImage(
                 text: Text("bottom"),
                 image: Icon(Icons.info),
@@ -599,7 +599,7 @@ class _SecondPageState extends State<SecondPage> {
       onPressed: (index) {
         _selecteds[index] = !_selecteds[index];
         setState(() {});
-        print("ToggleButtons _selecteds: $_selecteds");
+        debugPrint("ToggleButtons _selecteds: $_selecteds");
       },
       children: <Widget>[
         Icon(Icons.format_align_right),
@@ -761,7 +761,7 @@ class _SecondPageState extends State<SecondPage> {
           ),
         ),
         onClick: () {
-          print("exit");
+          debugPrint("exit");
         },
       ),
     );
@@ -856,7 +856,7 @@ class _SecondPageState extends State<SecondPage> {
           height: 45,
           width: 200,
           onPressed: () {
-            print("Elevated");
+            debugPrint("Elevated");
           },
           child: Text('Elevated Button'),
         ),
@@ -868,7 +868,7 @@ class _SecondPageState extends State<SecondPage> {
               shape: const CircleBorder(),
           ),
           onPressed: () {
-            print("Elevated");
+            debugPrint("Elevated");
           },
           child: const Center(child: Icon(Icons.add)),
         ),

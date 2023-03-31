@@ -38,7 +38,7 @@ class _NetStateListenerDemoState extends State<NetStateListenerDemo> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: ['done',].map((e) => TextButton(
-          onPressed: () => print(e),
+          onPressed: () => debugPrint(e),
           child: Text(e,
             style: const TextStyle(color: Colors.white),
           ),)
@@ -95,7 +95,7 @@ class _NetStateListenerDemoState extends State<NetStateListenerDemo> {
     return ValueListenableBuilder<ConnectivityResult>(
       valueListenable: ConnectivityService().netState,
       builder: (context, value, child) {
-        print('ValueListenableBuilder: netState:$value');
+        debugPrint('ValueListenableBuilder: netState:$value');
 
         return Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -113,7 +113,7 @@ class _NetStateListenerDemoState extends State<NetStateListenerDemo> {
     return ValueListenableBuilder<bool>(
       valueListenable: ConnectivityService().onLine,
       builder: (context, value, child) {
-        print('ValueListenableBuilder: onLine:$value');
+        debugPrint('ValueListenableBuilder: onLine:$value');
 
         // netState.value = value == false ? NNetState.offline : NNetState.normal;
 
@@ -135,13 +135,13 @@ class _NetStateListenerDemoState extends State<NetStateListenerDemo> {
       // state: netState,
       childBuilder: (ctx, child) {
         return ElevatedButton(
-            onPressed: () => print("ElevatedButton"),
+            onPressed: () => debugPrint("ElevatedButton"),
             child: Text("ElevatedButton"),
         );
       },
       errorBuilder: (ctx, child) {
         return TextButton(
-          onPressed: () => print("offlineBuilder"),
+          onPressed: () => debugPrint("offlineBuilder"),
           child: Text("offlineBuilder"),
         );
       },

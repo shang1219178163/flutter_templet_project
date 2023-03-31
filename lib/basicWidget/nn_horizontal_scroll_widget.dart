@@ -337,7 +337,7 @@ class _HorizontalScrollWidgetState extends State<NNHorizontalScrollWidget> {
 
   /// 点击事件
   _onClick(AttrCarouseItem model, int index) {
-    print(model.detailName ?? "");
+    debugPrint(model.detailName ?? "");
   }
   
 }

@@ -101,7 +101,7 @@ class _WechatAssetsPickerDemoState extends State<WechatAssetsPickerDemo> {
         selectedAssets: selectedAssets,
       )
     );
-    print(result);
+    debugPrint(result.toString());
     selectedAssets = result ?? [];
     setState(() { });
   }
@@ -145,7 +145,7 @@ class _WechatPhotoPickerDemoState extends State<WechatPhotoPickerDemo> {
               key: _globalKey,
               rowCount: 4,
               onChanged: (List<AssetEntity> assets) {
-                print("onChanged assets: ${assets.length}");
+                debugPrint("onChanged assets: ${assets.length}");
                 selectedAssets = assets;
               },
               onPicker: () => AssetPicker.pickAssets(
@@ -163,7 +163,7 @@ class _WechatPhotoPickerDemoState extends State<WechatPhotoPickerDemo> {
 
   onPicker() async {
     _globalKey.currentState?.onPicker();
-    print("onPicker:${selectedAssets.length}");
+    debugPrint("onPicker:${selectedAssets.length}");
   }
 
 }

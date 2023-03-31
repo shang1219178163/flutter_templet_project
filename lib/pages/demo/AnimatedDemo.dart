@@ -10,7 +10,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 
-import 'AnimatedSwitcherDemo.dart';
+import 'package:flutter_templet_project/pages/demo/AnimatedSwitcherDemo.dart';
 
 
 class AnimatedDemo extends StatefulWidget {
@@ -46,7 +46,7 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
       scrollDirection: Axis.horizontal,
       pageSnapping: true,
       onPageChanged: (index){
-        print('当前为第$index页');
+        debugPrint('当前为第$index页');
         setState(() {
           widget.title ='当前为第$index页';
         });

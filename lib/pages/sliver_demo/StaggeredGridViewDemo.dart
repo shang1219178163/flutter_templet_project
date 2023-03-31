@@ -74,7 +74,6 @@ class _StaggeredGridViewDemoState extends State<StaggeredGridViewDemo> {
   }
 
   Widget _buildCustomScrollView() {
-    print('_buildCustomScrollView');
     return CustomScrollView(
       primary: false,
       slivers: <Widget>[

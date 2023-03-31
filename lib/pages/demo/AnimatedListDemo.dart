@@ -33,7 +33,7 @@ class _AnimatedListDemoState extends State<AnimatedListDemo> {
         appBar: AppBar(
           title: Text(widget.title ?? "$widget"),
           actions: ['done',].map((e) => TextButton(
-            onPressed: () => print(e),
+            onPressed: () => debugPrint(e.toString()),
             child: Text(e,
               style: TextStyle(color: Colors.white),
             ),)
@@ -84,7 +84,7 @@ class _AnimatedListDemoState extends State<AnimatedListDemo> {
           data.add('${++counter}');
           // 告诉列表项有新添加的列表项
           globalKey.currentState!.insertItem(data.length - 1);
-          print('添加 $counter');
+          debugPrint('添加 $counter');
         },
         child: Icon(Icons.add),
       ),
@@ -97,7 +97,7 @@ class _AnimatedListDemoState extends State<AnimatedListDemo> {
   // 构建列表项
   Widget buildItem(context, index) {
     var char = data[index];
-    print("buildItem: ${data.length}, $index");
+    debugPrint("buildItem: ${data.length}, $index");
     return ListTile(
       //数字不会重复，所以作为Key
       key: ValueKey(char),
@@ -116,7 +116,7 @@ class _AnimatedListDemoState extends State<AnimatedListDemo> {
       globalKey.currentState!.removeItem(index, (context, animation) {
           // 删除过程执行的是反向动画，animation.value 会从1变为0
           var item = buildItem(context, index);
-          print('删除 ${data[index]}');
+          debugPrint('删除 ${data[index]}');
           data.removeAt(index);
           // 删除动画是一个合成动画：渐隐 + 缩小列表项告诉
           return FadeTransition(

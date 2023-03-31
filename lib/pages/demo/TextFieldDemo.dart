@@ -77,10 +77,10 @@ class _TextFieldDemoState extends State<TextFieldDemo> {
             Spacer(),
             CupertinoSearchTextField(
               onChanged: (String value) {
-                print('The text has changed to: $value');
+                debugPrint('The text has changed to: $value');
               },
               onSubmitted: (String value) {
-                print('Submitted text: $value');
+                debugPrint('Submitted text: $value');
               },
             ),
             Spacer(),

@@ -36,7 +36,7 @@ class _RefreshIndicatorDemoOneState extends State<RefreshIndicatorDemoOne> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: ['done',].map((e) => TextButton(
-          onPressed: () => print(e),
+          onPressed: () => debugPrint(e.toString()),
           child: Text(e,
             style: TextStyle(color: Colors.white),
           ),)
@@ -105,7 +105,7 @@ class _RefreshIndicatorDemoOneState extends State<RefreshIndicatorDemoOne> {
       context.showSnackBar(SnackBar(content: Text("${list.length} items",)));
       setState(() {});
     } catch (e) {
-      print(e.toString());
+      debugPrint(e.toString());
     } finally {
 
     }

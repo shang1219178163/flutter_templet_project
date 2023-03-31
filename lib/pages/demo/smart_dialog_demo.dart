@@ -3,6 +3,8 @@ import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:tuple/tuple.dart';
 
 class SmartDialogPageDemo extends StatelessWidget {
+  const SmartDialogPageDemo({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -14,7 +16,8 @@ class SmartDialogPageDemo extends StatelessWidget {
 }
 
 class SmartDialogPage extends StatelessWidget {
-  
+  const SmartDialogPage({Key? key}) : super(key: key);
+
   List<Tuple2> get items => [
     Tuple2('showToast', _showToast()),
     Tuple2('showLoading', _showLoading()),
@@ -45,7 +48,7 @@ class SmartDialogPage extends StatelessWidget {
     SmartDialog.showToast('the toast at the center', alignment: Alignment.center);
     SmartDialog.showToast('the toast at the bottomCenter', alignment: Alignment.bottomCenter);
 
-    print('SmartDialog.showToast');
+    debugPrint('SmartDialog.showToast');
   }
 
   _show() async {
@@ -75,18 +78,6 @@ class SmartDialogPage extends StatelessWidget {
   }
 
   _showAttach() {
-    var attachDialog = (BuildContext context) {
-      SmartDialog.showAttach(
-        targetContext: context,
-        alignment: Alignment.bottomCenter,
-        animationType: SmartAnimationType.scale,
-        scalePointBuilder: (selfSize) => Offset(selfSize.width, 0),
-        builder: (_) {
-          return Container(height: 50, width: 30, color: Colors.red);
-        },
-      );
-    };
-
     //target widget
     SmartDialog.show(
       useSystem: true,
@@ -106,6 +97,18 @@ class SmartDialogPage extends StatelessWidget {
             );
           }),
         );
+      },
+    );
+  }
+
+  attachDialog(BuildContext context) {
+    return SmartDialog.showAttach(
+      targetContext: context,
+      alignment: Alignment.bottomCenter,
+      animationType: SmartAnimationType.scale,
+      scalePointBuilder: (selfSize) => Offset(selfSize.width, 0),
+      builder: (_) {
+        return Container(height: 50, width: 30, color: Colors.red);
       },
     );
   }

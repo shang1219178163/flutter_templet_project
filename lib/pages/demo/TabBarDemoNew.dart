@@ -9,7 +9,7 @@ import 'package:flutter_templet_project/pages/FourthPage.dart';
 import 'package:flutter_templet_project/pages/BatterLevelPage.dart';
 import 'package:flutter_templet_project/uti/R.dart';
 
-import 'TabBarDemo.dart';
+import 'package:flutter_templet_project/pages/demo/TabBarDemo.dart';
 
 
 class TabBarDemoNew extends StatefulWidget {
@@ -35,14 +35,14 @@ class _TabBarDemoNewState extends State<TabBarDemoNew> with TickerProviderStateM
     _tabController = TabController(length: tabItems.length, vsync: this)
       ..addListener(() {
         if(!_tabController.indexIsChanging){
-          print("_tabController:${_tabController.index}");
+          debugPrint("_tabController:${_tabController.index}");
         }
       });
 
     _tabController1 = TabController(length: list.length, vsync: this)
       ..addListener(() {
         if(!_tabController1.indexIsChanging){
-          print("_tabController:${_tabController1.index}");
+          debugPrint("_tabController:${_tabController1.index}");
         }
       });
   }

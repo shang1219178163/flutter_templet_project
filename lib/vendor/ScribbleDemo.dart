@@ -32,10 +32,11 @@ class _ScribbleDemoState extends State<ScribbleDemo> {
         title: Text(widget.title ?? "-"),
           actions:[
           IconButton(
-          icon: const Icon(Icons.save),
-          tooltip: "Save to Image",
-          onPressed: () => _saveImage(context),
-        ),]
+            icon: const Icon(Icons.save),
+            tooltip: "Save to Image",
+            onPressed: () => _saveImage(context),
+          ),
+        ]
       ),
       body: SingleChildScrollView(
         child: SizedBox(
@@ -171,8 +172,7 @@ class _ScribbleDemoState extends State<ScribbleDemo> {
       onPressed: () => notifier.setAllowedPointersMode(
         penMode ? ScribblePointerMode.all : ScribblePointerMode.penOnly,
       ),
-      tooltip:
-      "Switch drawing mode to " + (penMode ? "all pointers" : "pen only"),
+      tooltip: "Switch drawing mode to ${penMode ? "all pointers" : "pen only"}",
       child: AnimatedSwitcher(
         duration: kThemeAnimationDuration,
         child: !penMode

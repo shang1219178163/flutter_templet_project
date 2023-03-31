@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class SliverBaseDemo extends StatelessWidget {
+  const SliverBaseDemo({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

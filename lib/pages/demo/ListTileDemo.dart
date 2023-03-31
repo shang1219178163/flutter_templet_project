@@ -46,7 +46,7 @@ class _ListTileDemoState extends State<ListTileDemo> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: ['done',].map((e) => TextButton(
-          onPressed: () => print(e),
+          onPressed: () => debugPrint(e),
           child: Text(e,
             style: TextStyle(color: Colors.white),
           ),)
@@ -103,7 +103,7 @@ class _ListTileDemoState extends State<ListTileDemo> {
               ),
               cb: (value) {
                 sexValue = value;
-                print(["_buildRadioGroup", sexValue]);
+                debugPrint(["_buildRadioGroup", sexValue].toString());
               }
             ),
           ],

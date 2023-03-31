@@ -36,6 +36,7 @@ import 'package:flutter_templet_project/extension/widget_ext.dart';
 // var list = [...others, ...Colors.primaries, ...Colors.accents];
 
 class SystemColorPage extends StatefulWidget {
+  const SystemColorPage({Key? key}) : super(key: key);
 
   @override
   _SystemColorPageState createState() => _SystemColorPageState();
@@ -73,7 +74,7 @@ class _SystemColorPageState extends State<SystemColorPage> {
           height: 50,
         ),
         tap: (obj) {
-          print("obj:$obj");
+          debugPrint("obj:$obj");
         },
         itemBuilder: (context, index, searchResults) => _buildCell(context, index, searchResults),
       ),
@@ -101,8 +102,8 @@ class _SystemColorPageState extends State<SystemColorPage> {
 
         final ctx = _globalKey.currentContext;
         final cs = _globalKey.currentState;
-        final cw = _globalKey.currentWidget as SearchResultsListView;
-        cw.searchCallback?.call(value);
+        final cw = _globalKey.currentWidget as SearchResultsListView?;
+        cw?.searchCallback?.call(value);
       },
     );
   }

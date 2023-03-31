@@ -1,5 +1,5 @@
 
-import 'package:flutter/cupertino.dart';
+// import 'package:flutter/cupertino.dart';
 
 // void _init() async {
 //   await ViewUtil.initFinish();
@@ -7,7 +7,7 @@ import 'package:flutter/cupertino.dart';
 // }
 
 
-class ViewUtil {
+// class ViewUtil {
   ///界面初始化完成
   // static Future<Void> initFinish() async {
   //   var completer = Completer<Void>();
@@ -18,4 +18,4 @@ class ViewUtil {
   //
   //   return completer.future;
   // }
-}
+// }

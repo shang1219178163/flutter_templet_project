@@ -48,15 +48,6 @@ class _OperatorDemoState extends State<OperatorDemo> {
   }
 
   onPressed(){
-    var a;
-    if (a is! int) {
-      print("a is! int");
-    }
-
-    if (a is! int) {
-      print("!(a is int)");
-    }
-
 
   }
 

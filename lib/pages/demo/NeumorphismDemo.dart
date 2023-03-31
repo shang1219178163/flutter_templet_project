@@ -53,7 +53,7 @@ class _NeumorphismDemoState extends State<NeumorphismDemo> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: icons.map((e) => NeumorphismButton.icon(
-                    onClick: () => print('${e.icon}'),
+                    onClick: () => debugPrint('${e.icon}'),
                     child: Icon(e.icon ?? Icons.check, color: Colors.blue),
                   )).toList(),
                 ),
@@ -66,12 +66,12 @@ class _NeumorphismDemoState extends State<NeumorphismDemo> {
                     _buildBtn(),
                     NeumorphismButton.icon(
                       borderRadius: 12,
-                      onClick: () => print('bookmark'),
+                      onClick: () => debugPrint('bookmark'),
                       child: Icon(Icons.bookmark, color: Color(0XFF5081ff)),
                     ),
                     NeumorphismButton.icon(
                       borderRadius: 12,
-                      onClick: () => print('favorite'),
+                      onClick: () => debugPrint('favorite'),
                       child: Icon(Icons.favorite, color: Color(0XFFec7cda)),
                     ),
                   ],
@@ -82,7 +82,7 @@ class _NeumorphismDemoState extends State<NeumorphismDemo> {
                   children: icons.map((e) => NeumorphismButton(
                     width: 50,
                     height: 50,
-                    onClick: () => print('${e.icon}'),
+                    onClick: () => debugPrint('${e.icon}'),
                     child: e,
                   )).toList(),
                 ),
@@ -93,7 +93,7 @@ class _NeumorphismDemoState extends State<NeumorphismDemo> {
                     NeumorphismButton(
                       height: 50,
                       padding: const EdgeInsets.symmetric(horizontal: 20),
-                      onClick: () => print('Share'),
+                      onClick: () => debugPrint('Share'),
                       // borderRadius: 12,
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
@@ -109,14 +109,14 @@ class _NeumorphismDemoState extends State<NeumorphismDemo> {
                       height: 50,
                       width: 50,
                       borderRadius: 12,
-                      onClick: () => print('bookmark'),
+                      onClick: () => debugPrint('bookmark'),
                       child: Icon(Icons.bookmark, color: Colors.blue),
                     ),
                     NeumorphismButton(
                       height: 50,
                       width: 50,
                       borderRadius: 12,
-                      onClick: () => print('NeumorphismButton'),
+                      onClick: () => debugPrint('NeumorphismButton'),
                       child: Icon(Icons.favorite, color: Colors.red),
                     ),
                   ],

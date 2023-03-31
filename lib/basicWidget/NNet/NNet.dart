@@ -57,7 +57,7 @@ class _NNetState extends State<NNet> {
     return ValueListenableBuilder<bool>(
       valueListenable: ConnectivityService().onLine,
       builder: (context, value, child) {
-        print('ValueListenableBuilder: $value');
+        debugPrint('ValueListenableBuilder: $value');
         if (!value) {
           return widget.errorBuilder(context, child);
         }

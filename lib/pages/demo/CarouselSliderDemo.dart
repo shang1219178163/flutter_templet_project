@@ -14,6 +14,8 @@ import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 class CarouselSliderDemo extends StatelessWidget {
+  const CarouselSliderDemo({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
 

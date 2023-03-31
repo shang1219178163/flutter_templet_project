@@ -124,7 +124,7 @@ class _AutocompleteDemoState extends State<AutocompleteDemo>{
   }
 
   void onChoosed(OptionModel val) {
-    print('onChoosed: ${val.name}');
+    debugPrint('onChoosed: ${val.name}');
     Get.toNamed(val.name, arguments: val.desc);
   }
 
@@ -178,15 +178,15 @@ class _AutocompleteDemoState extends State<AutocompleteDemo>{
       controller: textEditingController,
       focusNode: focusNode,
       onFieldSubmitted: (String value) {
-        print("Field: " + value);
+        debugPrint("Field: $value");
         onFieldSubmitted();
       },
       onChanged: (val){
-        print("onChanged: " + val);
+        debugPrint("onChanged: $val");
         textFieldVN.value = val;
       },
       onEditingComplete: (){
-        print("onEditingComplete: " + textEditingController.text);
+        debugPrint("onEditingComplete: ${textEditingController.text}");
       },
       decoration: _buildInputDecoration(
         textEditingController: textEditingController,
@@ -206,7 +206,7 @@ class _AutocompleteDemoState extends State<AutocompleteDemo>{
       controller: textEditingController,
       focusNode: focusNode,
       onFieldSubmitted: (String value) {
-        print("Field: " + value);
+        debugPrint("Field: $value");
         onFieldSubmitted();
       },
       validator: (String? value) {

@@ -110,7 +110,7 @@ class _SliverFamilyPageViewDemoState extends State<SliverFamilyPageViewDemo> {
       scrollDirection: Axis.horizontal,
       pageSnapping: true,
       onPageChanged: (index){
-        print('当前为第$index页');
+        debugPrint('当前为第$index页');
       },
       children: _list.map((e) => Container(
         child: e.item3,

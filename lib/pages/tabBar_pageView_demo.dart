@@ -65,7 +65,6 @@ class _TabBarPageViewDemoState extends State<TabBarPageViewDemo> with SingleTick
         actions: [
           TextButton(
             onPressed: (){
-              print("done");
               isTabBar.value = !isTabBar.value;
               setState(() {});
             },
@@ -169,18 +168,18 @@ class _TabBarPageViewDemoState extends State<TabBarPageViewDemo> with SingleTick
   List<Widget> persistentFooterButtons() {
     return [
       TextButton(
-        onPressed: () => setState(() => print('button1 tapped')),
+        onPressed: () => setState(() => debugPrint('button1 tapped')),
         child: Text(
           'Button 1',
         ),
       ),
       IconButton(
         icon: Icon(Icons.map),
-        onPressed: () => setState(() => print('button1 tapped')),
+        onPressed: () => setState(() => debugPrint('button1 tapped')),
       ),
       IconButton(
         icon: Icon(Icons.mail),
-        onPressed: () => setState(() => print('button1 tapped')),
+        onPressed: () => setState(() => debugPrint('button1 tapped')),
       ),
     ];
   }

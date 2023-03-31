@@ -38,7 +38,7 @@ class _CustomSwipperDemoState extends State<CustomSwipperDemo> {
     return CustomSwipper(
         images: images,
         onTap: (int index) {
-          print('CustomBanner 当前 page 为 $index');
+          debugPrint('CustomBanner 当前 page 为 $index');
         },
         // itemBuilder: (BuildContext context, int index) {
         //

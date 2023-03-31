@@ -30,7 +30,7 @@ class _IgnorePointerDemoState extends State<IgnorePointerDemo> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: ['done',].map((e) => TextButton(
-          onPressed: () => print(e),
+          onPressed: () => debugPrint(e),
           child: Text(e,
             style: TextStyle(color: Colors.white),
           ),)
@@ -45,7 +45,7 @@ class _IgnorePointerDemoState extends State<IgnorePointerDemo> {
       children: [
         InkWell(
           onTap: () {
-            print("${DateTime.now()}点击A");
+            debugPrint("${DateTime.now()}点击A");
           },
           child: Container(
             width: 200,
@@ -59,7 +59,7 @@ class _IgnorePointerDemoState extends State<IgnorePointerDemo> {
           // ignoring: false,
           child: InkWell(
             onTap: () {
-              print("${DateTime.now()}点击B");
+              debugPrint("${DateTime.now()}点击B");
             },
             child: Container(
               width: 50,

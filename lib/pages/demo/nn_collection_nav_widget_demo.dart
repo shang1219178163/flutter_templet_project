@@ -105,15 +105,15 @@ class _NNCollectionNavWidgetDemoState extends State<NNCollectionNavWidgetDemo> {
   }
 
   onPressed(){
-    print("枚举值索引: ${PageViewScrollType.full.index}");
-    print("枚举值字符串: ${PageViewScrollType.drag.toString()}");
-    print("枚举值集合: ${PageViewScrollType.values}");
-    print("int 转枚举: ${0.toPageViewScrollType()}");
+    debugPrint("枚举值索引: ${PageViewScrollType.full.index}");
+    debugPrint("枚举值字符串: ${PageViewScrollType.drag.toString()}");
+    debugPrint("枚举值集合: ${PageViewScrollType.values}");
+    debugPrint("int 转枚举: ${0.toPageViewScrollType()}");
     final result = [1,7,3,6,5,6].sublist(1).reduce((value, element) => value + element);
-    print("result: $result");
+    debugPrint("result: $result");
 
-    print("result: ${[1,7,3,6,5,6].sublist(0, 1)}");
-    print("result: ${[1,7,3,6,5,6].sublist(1 + 1)}");
+    debugPrint("result: ${[1,7,3,6,5,6].sublist(0, 1)}");
+    debugPrint("result: ${[1,7,3,6,5,6].sublist(1 + 1)}");
   }
 
   /// 多值变化
@@ -147,11 +147,11 @@ class _NNCollectionNavWidgetDemoState extends State<NNCollectionNavWidgetDemo> {
     return AnimatedBuilder(
       animation: _collectionNavModel,
       builder: (context, child) {
-        print("AnimatedBuilder");
+        debugPrint("AnimatedBuilder");
         return NNCollectionNavWidget(
           isDebug: true,
           items: _items,
-          onItem: (e) => print(e),
+          onItem: (e) => debugPrint(e.toString()),
           iconSize: 68,
           textGap: 5,
           pageColumnNum: _collectionNavModel.pageColumnNum,

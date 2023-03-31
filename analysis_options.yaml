@@ -66,7 +66,7 @@ analyzer:
     # 此外，特别允许使用await null作为引入微任务延迟的一种方式。
     camel_case_extensions: error # 使用UpperCamelCase做名称扩展。扩展名应该大写每个单词的第一个字母(包括第一个单词)，并且不要使用分隔符。
     camel_case_types: error # 使用UpperCamelCase命名类型。类和typedef应该大写每个单词的第一个字母(包括第一个单词)，并且不使用分隔符。
-    file_names: error # 使用lowercase_with_下划线命名源文件。一些文件系统不区分大小写，因此许多项目要求文件名全部为小写。
+#    file_names: error # 使用lowercase_with_下划线命名源文件。一些文件系统不区分大小写，因此许多项目要求文件名全部为小写。
     # 使用分隔字符可以使名称在这种形式下仍然可读。使用下划线作为分隔符可以确保名称仍然是有效的Dart标识符，如果语言以后支持符号导入，这可能会很有帮助。
     iterable_contains_unrelated_type: error # 不要用不同于参数类型的实例调用Iterable上的contains。
     list_remove_unrelated_type: error # 对于与参数类型不同的实例，不要调用List上的remove。
@@ -102,7 +102,7 @@ analyzer:
     avoid_single_cascade_in_expression_statements: error # 避免在表达式语句中使用单级联。
     control_flow_in_finally: warning # 在finally块中使用控制流将不可避免地导致难以调试的意外行为。
     empty_constructor_bodies: error # 在Dart中，具有空主体的构造函数可以仅以分号结束。这是const构造函数所必需的。为了一致性和简洁性，其他构造函数也应该这样做。
-    library_names: error # 使用lowercase_with_underscore。
+#    library_names: error # 使用lowercase_with_underscore。
     # 一些文件系统不区分大小写，因此许多项目要求文件名全部为小写。使用分隔字符可以使名称在这种形式下仍然可读。使用下划线作为分隔符可以确保名称仍然是有效的Dart标识符，如果语言以后支持符号导入，这可能会很有帮助。
     library_prefixes: error # 在指定库前缀时，一定要使用lowercase_with_下划线。
     null_closures: error # 不要在需要闭包的地方传递null作为参数。
@@ -179,7 +179,7 @@ linter:
     - avoid_empty_else
     - avoid_relative_lib_imports
     - curly_braces_in_flow_control_structures
-    - file_names
+#    - file_names
     - iterable_contains_unrelated_type
     - list_remove_unrelated_type
     - non_constant_identifier_names

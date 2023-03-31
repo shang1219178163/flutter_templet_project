@@ -116,7 +116,7 @@ class _CustomSwipperState extends State<CustomSwipper> {
               _curIndex = length;
               _changePage();
             }
-            print("_curIndex:$_curIndex");
+            debugPrint("_curIndex:$_curIndex");
           });
         },
         itemBuilder: (context, index) {
@@ -126,7 +126,7 @@ class _CustomSwipperState extends State<CustomSwipper> {
             },
             onTap: () {
               final currIdx = index % length;
-              print('onTap 当前 page 为 $index,$length,$currIdx');
+              debugPrint('onTap 当前 page 为 $index,$length,$currIdx');
 
               widget.onTap(currIdx);
             },
@@ -164,7 +164,7 @@ class _CustomSwipperState extends State<CustomSwipper> {
 
   /// 切换页面，并刷新小圆点
   _changePage() {
-    print("_changePage:$_curIndex");
+    debugPrint("_changePage:$_curIndex");
 
     Timer(Duration(milliseconds: 350), () {
       _pageController.jumpToPage(_curIndex);

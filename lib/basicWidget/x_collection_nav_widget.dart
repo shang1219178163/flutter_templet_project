@@ -97,7 +97,7 @@ class XCollectionNavWidget extends StatelessWidget {
 
   Widget _buildItemNew({Color? color, double width = double.infinity}) {
     return GestureDetector(
-      onTap: () => print(color),
+      onTap: () => debugPrint(color.toString()),
       child: Container(
         // width: itemWidth(),
         // height: 70,

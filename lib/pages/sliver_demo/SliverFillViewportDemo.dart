@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class SliverFillViewportDemo extends StatelessWidget {
+  const SliverFillViewportDemo({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class SliverFillRemainingDemo extends StatelessWidget {
+  const SliverFillRemainingDemo({Key? key}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {

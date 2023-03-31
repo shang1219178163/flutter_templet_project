@@ -7,11 +7,13 @@ import 'package:flutter/material.dart';
 
 ///绘制自定义view，其中画笔 paint ，画布 canvas，而 CustomPainter 负责具体的绘制逻辑处理
 class WheelPainter extends CustomPainter {
+
+  WheelPainter(this.list, this.listColor);
+
   List<double> list;
   List<Color> listColor;
   double total = 0; //总份数
 
-  WheelPainter(this.list, this.listColor);
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -21,10 +23,10 @@ class WheelPainter extends CustomPainter {
         center: Offset(wheelSize, wheelSize), radius: wheelSize);
     //求出数组中所有数值的和
     total = list.reduce((value, element) => value + element);
-    print("总份额是：$total");
+    debugPrint("总份额是：$total");
     //求出每一份所占的角度
     var radius = (2 * pi) / total; //求出每一份的弧度
-    print("总角度是${2 * pi},每份额角度是:$radius");
+    debugPrint("总角度是${2 * pi},每份额角度是:$radius");
     //循环绘制每一份扇形
     for (var i = 0; i < list.length; i++) {
       // 求出初始角度
@@ -38,7 +40,7 @@ class WheelPainter extends CustomPainter {
       }
       //求出滑过角度，即当前份额乘以每份所占角度
       var sweepRadius = radius * list[i];
-      print("起始角度：$startRadius,划过角度：$sweepRadius");
+      debugPrint("起始角度：$startRadius,划过角度：$sweepRadius");
 
       /// 绘制扇形，第一个参数是绘制矩形所在的矩形，第二个参数是起始角度，第三个参数是矩形划过的角度
       /// 第三个参数代表扇形是否是实心，否则就只是绘制边框是空心的，最后一个参数是画笔

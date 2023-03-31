@@ -118,7 +118,6 @@ class _SliverListPopverDemoState extends State<SliverListPopverDemo> {
       children: List.generate(count, (index) => ElevatedButton(
         onPressed: () {
           final val = _globalKey.currentContext?.origin();
-          print("菜单${index}_$val");
           btnIdx = index;
           isVisible = !isVisible;
           setState(() {});

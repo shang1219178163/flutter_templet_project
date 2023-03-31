@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:timelines/timelines.dart';
 
-import 'logistics_time_line.dart';
-import 'timelines_widgets.dart';
+import 'package:flutter_templet_project/vendor/timelines_demo/logistics_time_line.dart';
+import 'package:flutter_templet_project/vendor/timelines_demo/timelines_widgets.dart';
 
 class ComponentPage extends StatelessWidget {
+  const ComponentPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
 

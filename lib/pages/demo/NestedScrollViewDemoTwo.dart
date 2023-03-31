@@ -320,7 +320,7 @@ class _NestedScrollViewDemoTwoState extends State<NestedScrollViewDemoTwo> with 
       children: items.map((e) {
         return RefreshIndicator(
           onRefresh: () {
-            print(('onRefresh'));
+            debugPrint(('onRefresh'));
             return Future.delayed(Duration(microseconds: 1500));
           },
           child: buildList(),

@@ -5,6 +5,8 @@ import 'package:provider/provider.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 
 class LoginRoute extends StatefulWidget {
+  const LoginRoute({Key? key}) : super(key: key);
+
   @override
   _LoginRouteState createState() => _LoginRouteState();
 }

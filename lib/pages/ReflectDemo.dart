@@ -83,9 +83,9 @@ class _ReflectDemoState extends State<ReflectDemo> {
         isShowAll: false
     );
 
-    print("appName before: ${model["appName"]}");//flutter: appName before: QQ音乐 - 让生活充满音乐
+    debugPrint("appName before: ${model["appName"]}");//flutter: appName before: QQ音乐 - 让生活充满音乐
     model["appName"] = "哈哈哈哈";
-    print("appName after: ${model["appName"]}");//flutter: appName1: 哈哈哈哈
+    debugPrint("appName after: ${model["appName"]}");//flutter: appName1: 哈哈哈哈
 
   }
 }

@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/extension/scroll_controller_ext.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
+import 'package:flutter_templet_project/pages/demo/ListViewDemo.dart';
 
 import 'package:tuple/tuple.dart';
 
-typedef onKeyCallback = void Function(BuildContext context, int index, GlobalKey key);
 
 class ListViewOneDemo extends StatefulWidget {
 
@@ -92,7 +92,7 @@ class _ListViewOneDemoState extends State<ListViewOneDemo> {
         actions: [
           TextButton(
             onPressed: () {
-              print(_scrollController);
+              debugPrint(_scrollController.toString());
               // _scrollController.jumpTo(200);
             },
               child: Text('done', style: TextStyle(color: Colors.white),)
@@ -149,7 +149,7 @@ class _ListViewOneDemoState extends State<ListViewOneDemo> {
                   );
                 }
                 var indexNew = (index - 1) / 2;
-                print("MarqueeWidget indexNew: $index $indexNew");
+                debugPrint("MarqueeWidget indexNew: $index $indexNew");
                 final e = Text("${index}_${indexNew}_中国人口近61年来首次负增长");
                 return Container(
                   color: Colors.green,
@@ -167,7 +167,7 @@ class _ListViewOneDemoState extends State<ListViewOneDemo> {
   _buildListView({
     required GlobalKey key,
     required ScrollController? controller,
-    required onKeyCallback onKeyCallback,
+    required KeyCallback onKeyCallback,
     Axis scrollDirection = Axis.vertical,
     IndexedWidgetBuilder? itemBuilder,
     required double height,
@@ -233,7 +233,7 @@ class _ListViewOneDemoState extends State<ListViewOneDemo> {
         final val = _scrollController.offset + 30;
         _scrollController.animateTo(val, duration: Duration(milliseconds: 350), curve: Curves.linear);
         if(_scrollController.position.outOfRange){
-          print("atEdge:到边界了");
+          debugPrint("atEdge:到边界了");
           _scrollController.jumpTo(0);
         }
       });
@@ -272,7 +272,7 @@ class MarqueeSimpleWidget extends StatelessWidget {
     return MarqueeWidget(
       itemCount: totalCount,
       itemBuilder: (BuildContext context, int index, BoxConstraints constraints) {
-        print("MarqueeWidget: $index ${index % 2 == 0}");
+        debugPrint("MarqueeWidget: $index ${index % 2 == 0}");
         final isEdge = (index == 0 || index == totalCount - 1);
         if (isEdge) {
           return edgeBuilder != null ? edgeBuilder!(context, index, constraints) : Container(
@@ -299,7 +299,7 @@ class MarqueeSimpleWidget extends StatelessWidget {
 
         // double indexNew = ((index - 1) / 2);
         var indexNew = (index - 1) ~/ 2;
-        print("MarqueeWidget indexNew: $index $indexNew");
+        debugPrint("MarqueeWidget indexNew: $index $indexNew");
         final e = Text("真实索引:${index}_item索引:${indexNew}_AAAAAAAAAAAAAAAAAAAAA");
         return itemBuilder(context, indexNew, constraints);
         return  Container(
@@ -423,7 +423,7 @@ class _MarqueeWidgetState extends State<MarqueeWidget> {
         final val = _scrollController.offset + 30;
         _scrollController.animateTo(val, duration: Duration(milliseconds: 350), curve: Curves.linear);
         if(_scrollController.position.outOfRange){
-          print("atEdge:到边界了");
+          debugPrint("atEdge:到边界了");
           _scrollController.jumpTo(0);
         }
       });

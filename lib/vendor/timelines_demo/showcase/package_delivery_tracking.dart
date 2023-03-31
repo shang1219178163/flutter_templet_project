@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:timelines/timelines.dart';
 
-import '../timelines_widgets.dart';
+import 'package:flutter_templet_project/vendor/timelines_demo/timelines_widgets.dart';
 
 const kTileHeight = 50.0;
 
 class PackageDeliveryTrackingPage extends StatelessWidget {
+  const PackageDeliveryTrackingPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

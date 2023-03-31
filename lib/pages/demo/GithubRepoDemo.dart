@@ -176,7 +176,7 @@ class _GithubRepoDemoState extends State<GithubRepoDemo> {
   
    requestRepos() async {
     final api = ReposAPI();
-    print("api: ${api.toString()}");
+    debugPrint("api: ${api.toString()}");
 
     HttpManager(api).request<List>(onSuccess: (data){
       ddlog(data);
@@ -185,7 +185,7 @@ class _GithubRepoDemoState extends State<GithubRepoDemo> {
     });
 
     var response = await _dio.get("https://api.github.com/orgs/flutterchina/repos");
-    print("requestRepos: ${response.data.toString()}");
+    debugPrint("requestRepos: ${response.data.toString()}");
    }
 }
 

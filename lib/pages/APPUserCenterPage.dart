@@ -16,11 +16,13 @@ import 'package:flutter_templet_project/extension/dialog_ext.dart';
 import 'package:flutter_templet_project/routes/APPRouter.dart';
 
 import 'package:get/get.dart';
-import 'APPDrawerMenuPage.dart';
+import 'package:flutter_templet_project/pages/APPDrawerMenuPage.dart';
 import 'package:tuple/tuple.dart';
 
 
 class APPUserCenterPage extends StatefulWidget{
+  const APPUserCenterPage({Key? key}) : super(key: key);
+
   @override
   _APPUserCenterPageState createState() => _APPUserCenterPageState();
 }
@@ -166,7 +168,7 @@ class _APPUserCenterPageState extends State<APPUserCenterPage>{
             leading: Icon(e.item2, color: Theme.of(context).primaryColor,),
             title: Text(e.item1, style: TextStyle(fontSize: 16.0)),
             trailing: Icon(Icons.chevron_right),
-            onTap: (){ print(e.item1); },
+            onTap: (){ debugPrint("${e.item1}"); },
           ),
         )
         ).toList(),

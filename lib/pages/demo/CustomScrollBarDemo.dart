@@ -170,10 +170,10 @@ class _CustomScrollBarDemoState extends State<CustomScrollBarDemo> {
         var offset = (itemWidth + gap)*index;
         _scrollController.position.printInfo();
         var position = _scrollController.position;
-        print("${index}_${itemWidth}_${offset}_");
+        debugPrint("${index}_${itemWidth}_${offset}_");
 
         if (index > (items.length - showCount.ceil())) {
-          print("$index");
+          debugPrint("$index");
           offset = position.maxScrollExtent;
         }
         _scrollController.animateTo(offset,

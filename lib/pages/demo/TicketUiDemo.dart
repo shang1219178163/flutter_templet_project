@@ -36,7 +36,7 @@ class _TicketUiDemoState extends State<TicketUiDemo> {
       appBar: AppBar(
         title: Text("$widget"),
         actions: ['done',].map((e) => TextButton(
-          onPressed: () => print("done"),
+          onPressed: () => debugPrint("done"),
           child: Text(e,
             style: TextStyle(color: Colors.white),
           ),),

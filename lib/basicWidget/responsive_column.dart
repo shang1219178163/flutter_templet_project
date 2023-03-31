@@ -9,7 +9,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-import 'layout_log_print.dart';
+import 'package:flutter_templet_project/basicWidget/layout_log_print.dart';
 
 class ResponsiveColumn extends StatelessWidget {
 

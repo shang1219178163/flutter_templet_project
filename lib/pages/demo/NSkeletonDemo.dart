@@ -43,7 +43,7 @@ class _NSkeletonDemoState extends State<NSkeletonDemo> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: ['done',].map((e) => TextButton(
-          onPressed: () => print(e),
+          onPressed: () => debugPrint(e.toString()),
           child: Text(e,
             style: const TextStyle(color: Colors.white),
           ),)

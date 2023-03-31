@@ -51,14 +51,14 @@ class _TestFunctionState extends State<TestFunction> {
   }
 
   fcOne(int vintage, {String? country, String? name}) {
-    print('Name: $name, Country: $country, Vintage: $vintage');
+    debugPrint('Name: $name, Country: $country, Vintage: $vintage');
   }
 
   onPressed() {
     int a = Function.apply(fc, [10, 3]);
-    print("a: $a");//a: 13
+    debugPrint("a: $a");//a: 13
     int b = Function.apply(fc, [10, 3], {Symbol("operation"): "subtract"});
-    print("b: $b");//b: 7
+    debugPrint("b: $b");//b: 7
 
     Function.apply(fcOne, [2018], {#country: 'USA', #name: 'Dominus Estate'});
     final map = {

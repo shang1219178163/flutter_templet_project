@@ -1,7 +1,7 @@
 
 
 import 'package:flutter/material.dart';
-import 'timeline_element.dart';
+import 'package:flutter_templet_project/vendor/timeline/timeline_element.dart';
 
 class TimelineComponent extends StatefulWidget {
   ///timeline 数据实体list

@@ -15,18 +15,15 @@ class ToastDialog extends Dialog {
 
   //圆角大小
   final double? radius;
-  //背景颜色
-  @override
-  final Color? backgroundColor;
 
-  const ToastDialog(
-      {Key? key,
-      this.loadingView,
-      this.message = "加载中...",
-      this.messageMargin = const EdgeInsets.only(left: 20, right: 20),
-      this.radius = 10,
-      this.backgroundColor = Colors.black54})
-      : assert((loadingView != null || message != null)),
+
+  const ToastDialog({
+    Key? key,
+    this.loadingView,
+    this.message = "加载中...",
+    this.messageMargin = const EdgeInsets.only(left: 20, right: 20),
+    this.radius = 10,
+   }) : assert((loadingView != null || message != null)),
         super(key: key);
 
   ///展示
@@ -39,18 +36,19 @@ class ToastDialog extends Dialog {
     Color? backgroundColor,
   }) {
     showDialog(
-        context: context,
-        barrierDismissible: false,
-        barrierColor: Colors.transparent,
-        builder: (BuildContext context) {
-          return ToastDialog(
-            loadingView: loadingView,
-            message: message,
-            messageMargin: messageMargin,
-            radius: radius,
-            backgroundColor: backgroundColor,
-          );
-        });
+      context: context,
+      barrierDismissible: false,
+      barrierColor: Colors.transparent,
+      builder: (BuildContext context) {
+        return ToastDialog(
+          loadingView: loadingView,
+          message: message,
+          messageMargin: messageMargin,
+          radius: radius,
+          // backgroundColor: backgroundColor,
+        );
+      }
+    );
   }
 
   ///退出
@@ -63,28 +61,31 @@ class ToastDialog extends Dialog {
 
     if (loadingView != null && message != null) {
       return buildProgressIndicatorAndText(
-          loadingView: loadingView,
-          message: message ?? "异常提示",
-          backgroundColor: backgroundColor ?? Colors.black54,
-          radius: radius ?? 10
+        loadingView: loadingView,
+        message: message ?? "异常提示",
+        backgroundColor: backgroundColor ?? Colors.black54,
+        radius: radius ?? 10
       );
     }
 
     if (loadingView != null) {
       return buildProgressIndicator(
-          loadingView: loadingView,
-          backgroundColor: backgroundColor ?? Colors.black54,
-          radius: radius ?? 10
+        loadingView: loadingView,
+        backgroundColor: backgroundColor ?? Colors.black54,
+        radius: radius ?? 10
       );
     }
 
     return buildMessage(
-        message: message ?? "异常提示",
-        backgroundColor: backgroundColor ?? Colors.black54,
+      message: message ?? "异常提示",
+      backgroundColor: backgroundColor ?? Colors.black54,
     );
   }
 
-  Decoration buildDecoration({Color? backgroundColor, required double radius}) {
+  Decoration buildDecoration({
+    Color? backgroundColor,
+    required double radius
+  }) {
     return ShapeDecoration(
       color: backgroundColor,
       shape: RoundedRectangleBorder(
@@ -96,22 +97,29 @@ class ToastDialog extends Dialog {
   }
 
 
-  Widget buildProgressIndicator({Widget? loadingView, required Color backgroundColor, required double radius}) {
+  Widget buildProgressIndicator({
+    Widget? loadingView,
+    required Color backgroundColor,
+    required double radius
+  }) {
     return Center(
-        child: Container(
-          height: 90,
-          width: 90,
-          // color: Colors.black,
-          decoration: buildDecoration(backgroundColor: backgroundColor, radius: radius),
-          child: loadingView ?? Container(
-            padding: EdgeInsets.all(12),
-            child: CircularProgressIndicator(),
-          ),
-        )
+      child: Container(
+        height: 90,
+        width: 90,
+        // color: Colors.black,
+        decoration: buildDecoration(backgroundColor: backgroundColor, radius: radius),
+        child: loadingView ?? Container(
+          padding: EdgeInsets.all(12),
+          child: CircularProgressIndicator(),
+        ),
+      )
     );
   }
 
-  Widget buildMessage({required String message, required Color backgroundColor}) {
+  Widget buildMessage({
+    required String message,
+    required Color backgroundColor
+  }) {
     return Center(
       widthFactor: 1,
       heightFactor: 1,
@@ -131,7 +139,12 @@ class ToastDialog extends Dialog {
     );
   }
 
-  Widget buildProgressIndicatorAndText({Widget? loadingView, required String message, required Color backgroundColor, required double radius}) {
+  Widget buildProgressIndicatorAndText({
+    Widget? loadingView,
+    required String message,
+    required Color backgroundColor,
+    required double radius
+  }) {
     return Center(
       // widthFactor: 1,
       // heightFactor: 1,
@@ -172,7 +185,7 @@ class ToastDialog extends Dialog {
 
 
 class Toast extends StatelessWidget {
-
+  const Toast({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -30,6 +30,8 @@ The navigation delegate is set to block navigation to the youtube website.
 ''';
 
 class AppWebViewDemo extends StatefulWidget {
+  const AppWebViewDemo({Key? key}) : super(key: key);
+
   @override
   _AppWebViewDemoState createState() => _AppWebViewDemoState();
 }
@@ -79,17 +81,17 @@ class _AppWebViewDemoState extends State<AppWebViewDemo> {
               },
               navigationDelegate: (NavigationRequest request) {
                 if (request.url.startsWith('https://www.youtube.com/')) {
-                  print('blocking navigation to $request}');
+                  debugPrint('blocking navigation to $request}');
                   return NavigationDecision.prevent;
                 }
-                print('allowing navigation to $request');
+                debugPrint('allowing navigation to $request');
                 return NavigationDecision.navigate;
               },
               onPageStarted: (String url) {
-                print('Page started loading: $url');
+                debugPrint('Page started loading: $url');
               },
               onPageFinished: (String url) {
-                print('Page finished loading: $url');
+                debugPrint('Page finished loading: $url');
                 setState(() {
                   // (await controller.data!.currentUrl())!
                   _controller.future.then((value) => value.getTitle()).then((value) {
@@ -217,7 +219,7 @@ enum MenuOptions {
 }
 
 class SampleMenu extends StatelessWidget {
-  SampleMenu(this.controller);
+  SampleMenu(this.controller, {Key? key}) : super(key: key);
 
   final Future<WebViewController> controller;
   final CookieManager cookieManager = CookieManager();
@@ -289,14 +291,14 @@ class SampleMenu extends StatelessWidget {
     );
   }
 
-  void _onShowUserAgent(WebViewController controller, BuildContext context) async {
+  Future<void> _onShowUserAgent(WebViewController controller, BuildContext context) async {
     // Send a message with the user agent string to the Toaster JavaScript channel we registered
     // with the WebView.
     await controller.evaluateJavascript(
         'Toaster.postMessage("User Agent: " + navigator.userAgent);');
   }
 
-  void _onListCookies(WebViewController controller, BuildContext context) async {
+  Future<void> _onListCookies(WebViewController controller, BuildContext context) async {
     final cookies = await controller.evaluateJavascript('document.cookie');
     // ignore: deprecated_member_use
     Scaffold.of(context).showSnackBar(SnackBar(
@@ -311,7 +313,7 @@ class SampleMenu extends StatelessWidget {
     ));
   }
 
-  void _onAddToCache(WebViewController controller, BuildContext context) async {
+  Future<void> _onAddToCache(WebViewController controller, BuildContext context) async {
     await controller.evaluateJavascript(
         'caches.open("test_caches_entry"); localStorage["test_localStorage"] = "dummy_entry";');
     // ignore: deprecated_member_use
@@ -320,13 +322,13 @@ class SampleMenu extends StatelessWidget {
     ));
   }
 
-  void _onListCache(WebViewController controller, BuildContext context) async {
+  Future<void> _onListCache(WebViewController controller, BuildContext context) async {
     await controller.evaluateJavascript('caches.keys()'
         '.then((cacheKeys) => JSON.stringify({"cacheKeys" : cacheKeys, "localStorage" : localStorage}))'
         '.then((caches) => Toaster.postMessage(caches))');
   }
 
-  void _onClearCache(WebViewController controller, BuildContext context) async {
+  Future<void> _onClearCache(WebViewController controller, BuildContext context) async {
     await controller.clearCache();
     // ignore: deprecated_member_use
     Scaffold.of(context).showSnackBar(SnackBar(
@@ -334,7 +336,7 @@ class SampleMenu extends StatelessWidget {
     ));
   }
 
-  void _onClearCookies(BuildContext context) async {
+  Future<void> _onClearCookies(BuildContext context) async {
     final hadCookies = await cookieManager.clearCookies();
     var message = 'There were cookies. Now, they are gone!';
     if (!hadCookies) {
@@ -346,7 +348,7 @@ class SampleMenu extends StatelessWidget {
     ));
   }
 
-  void _onNavigationDelegateExample(WebViewController controller, BuildContext context) async {
+  Future<void> _onNavigationDelegateExample(WebViewController controller, BuildContext context) async {
     final contentBase64 = base64Encode(Utf8Encoder().convert(kNavigationExamplePage));
     await controller.loadUrl('data:text/html;base64,$contentBase64');
   }
@@ -367,14 +369,14 @@ class SampleMenu extends StatelessWidget {
 }
 
 class NavigationControls extends StatelessWidget {
-  final Future<WebViewController> _webViewControllerFuture;
+  final Future<WebViewController> webViewControllerFuture;
 
-  const NavigationControls(this._webViewControllerFuture) : assert(_webViewControllerFuture != null);
+  const NavigationControls({Key? key, required this.webViewControllerFuture}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<WebViewController>(
-      future: _webViewControllerFuture,
+      future: webViewControllerFuture,
       builder: (BuildContext context, AsyncSnapshot<WebViewController> snapshot) {
         final webViewReady = snapshot.connectionState == ConnectionState.done;
         final controller = snapshot.data!;

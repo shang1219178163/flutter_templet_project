@@ -27,7 +27,7 @@ class _ButtonStyleDemoState extends State<ButtonStyleDemo> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: ['done',].map((e) => TextButton(
-          onPressed: () => print(e),
+          onPressed: () => debugPrint(e.toString()),
           child: Text(e,
             style: TextStyle(color: Colors.white),
           ),)
@@ -46,7 +46,7 @@ class _ButtonStyleDemoState extends State<ButtonStyleDemo> {
       onPressed: () {},
       style: ButtonStyle(
         foregroundColor: MaterialStateProperty.resolveWith<Color>((Set<MaterialState> states) {
-          print("states:$states");
+          debugPrint("states:$states");
           if (states.contains(MaterialState.pressed)) {
             return Colors.pink;
           }

@@ -14,6 +14,8 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 
 class HitTest extends StatelessWidget {
+  const HitTest({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -120,8 +122,8 @@ class RenderExpandedHitTestArea extends RenderBox with RenderObjectWithChildMixi
   @override
   void paint(PaintingContext context, Offset offset) {
     if (child?.parentData is BoxParentData) {
-      var childParentData = child?.parentData as BoxParentData;
-      context.paintChild(child!, childParentData.offset + offset);
+      var childParentData = child?.parentData as BoxParentData?;
+      context.paintChild(child!, childParentData?.offset ?? Offset.zero + offset);
     }
   }
 

@@ -56,7 +56,7 @@ class _OverlayDemoState extends State<OverlayDemo> {
 
 //
 class ToastWidget extends StatefulWidget {
-  const ToastWidget({
+  ToastWidget({
     Key? key,
     required this.text,
     this.alignment = Alignment.center,
@@ -65,7 +65,8 @@ class ToastWidget extends StatefulWidget {
     this.builder,
     this.duration = const Duration(milliseconds: 2000),
     this.transitionDuration = const Duration(milliseconds: 250),
-  });
+  }) : super(key: key);
+
   final String text;
   final Alignment alignment;
   final EdgeInsets margin;

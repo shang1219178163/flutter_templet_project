@@ -2,9 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:timelines/timelines.dart';
 
-import 'timelines_widgets.dart';
+import 'package:flutter_templet_project/vendor/timelines_demo/timelines_widgets.dart';
 
 class ThemePage extends StatefulWidget {
+  const ThemePage({Key? key}) : super(key: key);
+
   @override
   _ThemePageState createState() => _ThemePageState();
 }
@@ -336,7 +338,7 @@ class _ThemeSlider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var label;
+    var label = '';
     if (value == null) {
       label = '';
     } else if (value! > 1) {

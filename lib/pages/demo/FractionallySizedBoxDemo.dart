@@ -34,7 +34,7 @@ class _FractionallySizedBoxDemoState extends State<FractionallySizedBoxDemo> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: ['done',].map((e) => TextButton(
-          onPressed: () => print(e),
+          onPressed: () => debugPrint(e),
           child: Text(e,
             style: TextStyle(color: Colors.white),
           ),)
@@ -46,7 +46,7 @@ class _FractionallySizedBoxDemoState extends State<FractionallySizedBoxDemo> {
           widthFactor: .5,
           heightFactor: .5,
           child: ElevatedButton(
-            onPressed: () { print("button"); },
+            onPressed: () { debugPrint("button"); },
             child: Text('button'),
           ),
         ),

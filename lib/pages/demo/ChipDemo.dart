@@ -179,13 +179,13 @@ class _ChipDemoState extends State<ChipDemo> {
           ),
           label: const Text('InputChip'),
           onPressed: () {
-            print('onPressed: InputChip');
+            debugPrint('onPressed: InputChip');
           }
         ),
         FilterChip(
           label: Text('FilterChip'),
           onSelected: (val){
-            print('onSelected: $val');
+            debugPrint('onSelected: $val');
           }
         ),
       ],
@@ -229,14 +229,14 @@ class ChipFilterDemoState extends State<ChipFilterDemo> {
         child: FilterChip(
           avatar: CircleAvatar(child: Text(actor.initials)),
           label: Text(actor.name),
-          selected: _filters.contains(actor.name),
+          selected: _filters.map((e) => e.name).contains(actor.name),
           onSelected: (bool value) {
             if (value) {
               _filters.add(actor);
             } else {
               _filters.removeWhere((e) => e.name == actor.name);
             }
-            print("_filters: ${_filters.map((e) => e.name)}");
+            debugPrint("_filters: ${_filters.map((e) => e.name)}");
             setState(() {});
           },
         ),

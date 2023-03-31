@@ -19,7 +19,7 @@ import 'package:flutter_templet_project/extension/ddlog.dart';
 
 import 'package:get_storage/get_storage.dart';
 
-import 'fileManager.dart';
+import 'package:flutter_templet_project/network/fileManager.dart';
 
 
 enum RequestMethod { GET, POST, PUT, DELETE, DOWNLOAD }
@@ -72,7 +72,7 @@ class RequestClient{
       return handler.next(response);
     },
     onError: (DioError e, handler) {
-      print("错误之前");
+      debugPrint("错误之前");
       handleError(e);
       return handler.next(e);
     });
@@ -140,7 +140,7 @@ class RequestClient{
     try {
         response = await dio.get(url, queryParameters: params, onReceiveProgress: onReceiveProgress);
     } on DioError catch (exception) {
-      print(exception.toString());
+      debugPrint(exception.toString());
     }
     ddlog(response.requestOptions.toString());
     return response;

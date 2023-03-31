@@ -67,10 +67,10 @@ class _SliderDemoState extends State<SliderDemo> {
                     inactiveColor: Color(0xffC0C0C0),
                     activeColor: Color(0xff21BA45),
                     onChangeStart: (double value) {
-                      print('Start value is ' + value.toString());
+                      debugPrint('Start value is $value');
                     },
                     onChangeEnd: (double value) {
-                      print('Finish value is ' + value.toString());
+                      debugPrint('Finish value is $value');
                     },
                     //onChanged: (double value) {},
                     divisions: 100,
@@ -94,7 +94,7 @@ class _SliderDemoState extends State<SliderDemo> {
           builder: (BuildContext context, double value, Widget? child) {
             final result = (value/100).toStringAsFixed(2);
             return TextButton(
-              onPressed: () { print(result); },
+              onPressed: () { debugPrint(result); },
               child: Text(result),
             );
           }
@@ -127,11 +127,11 @@ class _SliderDemoState extends State<SliderDemo> {
       leading: IconButton(
         icon: Icon(Icons.download),
         onPressed: () {
-          print("Downloading");
+          debugPrint("Downloading");
         },
       ),
       onChangeEnd: (double value) {
-        print('NNSlider onChangeEnd: $value');
+        debugPrint('NNSlider onChangeEnd: $value');
       },
       trailingBuilder: (context, value) {
         // final result = (value/100).toStringAsFixed(2);
@@ -139,7 +139,7 @@ class _SliderDemoState extends State<SliderDemo> {
 
         return TextButton(
           onPressed: () {
-            print("Downloading");
+            debugPrint("Downloading");
           },
           child: Text(result),
         );

@@ -50,7 +50,7 @@ class _RatingBarDemoState extends State<RatingBarDemo> {
         color: Colors.amber,
       ),
       onRatingUpdate: (rating) {
-        print(rating);
+        debugPrint(rating.toString());
       },
     );
   }
@@ -68,7 +68,7 @@ class _RatingBarDemoState extends State<RatingBarDemo> {
       ),
       itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
       onRatingUpdate: (rating) {
-        print(rating);
+        debugPrint(rating.toString());
       },
     );
   }
@@ -78,7 +78,7 @@ class _RatingBarDemoState extends State<RatingBarDemo> {
       itemCount: 5,
       itemBuilder: (context, index) => itemMap['$index'],
       onRatingUpdate: (rating) {
-        print(rating);
+        debugPrint(rating.toString());
       },
     );
   }

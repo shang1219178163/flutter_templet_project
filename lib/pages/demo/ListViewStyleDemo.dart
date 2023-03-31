@@ -1,7 +1,8 @@
+import 'package:enhance_expansion_panel/enhance_expansion_panel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/pages/tabBar_tabBarView_demo.dart';
 import 'package:tuple/tuple.dart';
 
-import 'package:enhance_expansion_panel/enhance_expansion_panel.dart';
 
 import 'package:flutter_templet_project/basicWidget/app_update_card.dart';
 import 'package:flutter_templet_project/basicWidget/list_subtitle_cell.dart';
@@ -18,8 +19,6 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 
 import 'package:flutter_templet_project/main.dart';
-
-import '../tabBar_tabBarView_demo.dart';
 
 
 class ListViewStyleDemo extends StatefulWidget {
@@ -235,11 +234,13 @@ class _ListViewStyleDemoState extends State<ListViewStyleDemo> with SingleTicker
     );
   }
 
-  List<String> getTitles({required List<Tuple2<String, List<Tuple2<String, String>>>> tuples}) {
+  List<String> getTitles({
+    required List<Tuple2<String, List<Tuple2<String, String>>>> tuples
+  }) {
     final titles = tuples.expand((e) => e.item2.map((e) => e.item1)).toList();
     final result = List<String>.from(titles);
     // print('titles runtimeType:${titles.runtimeType},${titles.every((element) => element is String)},');
-    print('result runtimeType:${result.runtimeType}');
+    debugPrint('result runtimeType:${result.runtimeType}');
     return result;
   }
 

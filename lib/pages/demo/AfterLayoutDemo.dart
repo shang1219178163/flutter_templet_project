@@ -34,7 +34,7 @@ class _AfterLayoutDemoState extends State<AfterLayoutDemo> {
           child: Builder(
             builder: (context) {
               return GestureDetector(
-                onTap: () => print('Text1: ${context.size}'),
+                onTap: () => debugPrint('Text1: ${context.size}'),
                 child: Text(
                   'Text1: 点我获取我的大小',
                   textAlign: TextAlign.center,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/uti/R.dart';
-import 'enhance_tab_bar.dart';
+import 'package:flutter_templet_project/basicWidget/EnhanceTab/enhance_tab_bar.dart';
 
 class EnhanceTabBarDemo extends StatefulWidget {
 
@@ -80,7 +80,7 @@ class _EnhanceTabBarDemoState extends State<EnhanceTabBarDemo> with SingleTicker
   }
 
   onDone() {
-    print("onDone");
+    debugPrint("onDone");
   }
 
   Widget buildPage() {
@@ -245,9 +245,11 @@ class _EnhanceTabBarDemoState extends State<EnhanceTabBarDemo> with SingleTicker
         ),
       ),).toList(),
       onChanged: (value) {
-        if (value == null) return;
+        if (value == null) {
+          return;
+        }
         dropValue = value;
-        print(dropValue);
+        debugPrint(dropValue.toString());
         setState(() {});
       },
     );

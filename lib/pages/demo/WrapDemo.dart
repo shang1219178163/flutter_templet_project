@@ -130,7 +130,7 @@ class WrapWidget extends StatelessWidget {
 
   Widget _buildItemNew({Color? color}) {
     return GestureDetector(
-      onTap: () => print(color),
+      onTap: () => debugPrint(color.toString()),
       child: Container(
         width: itemWidth(),
         height: 70,

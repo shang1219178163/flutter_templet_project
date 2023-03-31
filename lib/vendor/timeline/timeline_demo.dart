@@ -10,7 +10,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/vendor/timeline/timeline.dart';
 
-import 'common/colors.dart';
+import 'package:flutter_templet_project/vendor/timeline/common/colors.dart';
 
 class TimelineDemo extends StatefulWidget {
 

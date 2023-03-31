@@ -4,6 +4,7 @@ import 'package:flutter_templet_project/extension/ddlog.dart';
 
 
 class GridViewDemo extends StatefulWidget {
+  const GridViewDemo({Key? key}) : super(key: key);
 
   @override
   _GridViewDemoState createState() => _GridViewDemoState();

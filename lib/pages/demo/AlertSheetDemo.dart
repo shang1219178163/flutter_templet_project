@@ -13,6 +13,8 @@ import 'package:flutter_templet_project/extension/build_context_ext.dart';
 
 
 class AlertSheetDemo extends StatefulWidget {
+  const AlertSheetDemo({Key? key}) : super(key: key);
+
 
   @override
   _AlertSheetDemoState createState() => _AlertSheetDemoState();
@@ -131,10 +133,10 @@ class _AlertSheetDemoState extends State<AlertSheetDemo> {
             items: List.generate(5, (index) => Text("item_$index")).toList(),
             cancel: Text('取消'),
             onSelect: (BuildContext context, int index) {
-              print(index);
+              debugPrint(index.toString());
             },
             onCancell: (BuildContext context) {
-              print('onCancell');
+              debugPrint('onCancell');
               Navigator.pop(context);
             },
           );
@@ -274,6 +276,8 @@ class _AlertSheetDemoState extends State<AlertSheetDemo> {
 
 ///单选列表
 class RadioListChooseNewWidget extends StatefulWidget {
+  RadioListChooseNewWidget({Key? key}) : super(key: key);
+
   Object? selectedIndex = 0;
 
   @override
@@ -329,9 +333,9 @@ class _RadioListChooseNewWidgetState extends State<RadioListChooseNewWidget> {
 class RadioTileSexWidget extends StatefulWidget {
   Object selectedIndex = 0;
 
-  RadioTileSexWidget({
+  RadioTileSexWidget({Key? key,
     required this.selectedIndex,
-  });
+  }) : super(key: key);
 
   @override
   _RadioTileSexWidgetState createState() => _RadioTileSexWidgetState();

@@ -42,7 +42,7 @@ class _DateRangePickerDialogDemoState extends State<DateRangePickerDialogDemo> w
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: ['done',].map((e) => TextButton(
-          onPressed: () => print("done"),
+          onPressed: () => debugPrint("done"),
           child: Text(e,
             style: TextStyle(color: Colors.white),
           ),
@@ -100,7 +100,7 @@ class _DateRangePickerDialogDemoState extends State<DateRangePickerDialogDemo> w
       ),
       currentDate: DateTime(2022, 10, 8),
     );
-    print(range);
+    debugPrint(range.toString());
 
   }
 

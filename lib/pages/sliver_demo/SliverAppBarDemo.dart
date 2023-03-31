@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class SliverAppBarDemo extends StatefulWidget {
+  const SliverAppBarDemo({Key? key}) : super(key: key);
+
   @override
   _SliverAppBarDemoState createState() => _SliverAppBarDemoState();
 }

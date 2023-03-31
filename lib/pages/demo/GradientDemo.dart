@@ -64,7 +64,7 @@ class _GradientDemoState extends State<GradientDemo> {
       items: items,
       onSelect: (BuildContext context, int index) {
         tileMode = tileModes[index];
-        print("$index, $tileMode");
+        debugPrint("$index, $tileMode");
         setState(() {});
       },
     );
@@ -78,7 +78,7 @@ class _GradientDemoState extends State<GradientDemo> {
       items: items,
       onSelect: (BuildContext context, int index) {
         blendMode = blendModes[index];
-        print("$index, $blendMode");
+        debugPrint("$index, $blendMode");
         setState(() {});
       },
     );
@@ -116,7 +116,7 @@ class _GradientDemoState extends State<GradientDemo> {
           width: 400,
           height: 100,
         ) ?? 0.5;
-        print("_dropValue:$value scale:$_radius");
+        debugPrint("_dropValue:$value scale:$_radius");
         setState(() {});
       },
     );

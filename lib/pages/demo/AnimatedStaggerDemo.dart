@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 
 class AnimatedStaggerDemo extends StatefulWidget {
+  const AnimatedStaggerDemo({Key? key}) : super(key: key);
+
   @override
   _AnimatedStaggerDemoState createState() => _AnimatedStaggerDemoState();
 }

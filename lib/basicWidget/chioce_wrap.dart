@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 class ChioceWrap extends StatefulWidget {
 
   ChioceWrap({
+    Key? key,
     this.isMutiple = false,
     this.icon = const Icon(Icons.check_box_outline_blank),
     this.seletedIcon = const Icon(Icons.check_box_outlined),
@@ -20,7 +21,7 @@ class ChioceWrap extends StatefulWidget {
     required this.children,
     required this.indexs,
     required this.callback,
-  });
+  }) : super(key: key);
 
   bool isMutiple;
 

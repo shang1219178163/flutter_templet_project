@@ -9,7 +9,6 @@
 
 import 'dart:math';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class MyPainter extends CustomPainter {
@@ -23,11 +22,11 @@ class MyPainter extends CustomPainter {
   final Color color;
 
   @override
-  bool hitTest(Offset point) => true;
+  bool hitTest(Offset position) => true;
 
   @override
-  bool shouldRepaint(MyPainter oldPainter) {
-    return oldPainter.padding != padding && oldPainter.color != color;
+  bool shouldRepaint(MyPainter oldDelegate) {
+    return oldDelegate.padding != padding && oldDelegate.color != color;
   }
 
   @override

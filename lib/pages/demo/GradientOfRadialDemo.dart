@@ -139,7 +139,7 @@ class _GradientOfRadialDemoState extends State<GradientOfRadialDemo> {
       isGreed: isGreed,
       isDiagonal: isDiagonal
     ) ?? 0.5;
-    print("_dropValue:$_dropValue _radius:$_radius maxWidth:$maxWidth maxHeight:$maxHeight");
+    debugPrint("_dropValue:$_dropValue _radius:$_radius maxWidth:$maxWidth maxHeight:$maxHeight");
     return _buildBox(
       height: 100,
       text: 'RadialGradient',

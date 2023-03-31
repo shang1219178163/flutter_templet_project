@@ -18,6 +18,8 @@ const kUpdateContent = """
 """;
 
 class SnackBarDemo extends StatefulWidget {
+  const SnackBarDemo({Key? key}) : super(key: key);
+
   
   @override
   State<StatefulWidget> createState() => SnackBarDemoState();
@@ -34,7 +36,7 @@ class SnackBarDemoState extends State<SnackBarDemo> {
   @override
   void dispose() {
     // TODO: implement dispose
-    print("dispose");
+    debugPrint("dispose");
     super.dispose();
   }
 
@@ -51,13 +53,13 @@ class SnackBarDemoState extends State<SnackBarDemo> {
         await Future.delayed(Duration(milliseconds: 1300), () async {
           clearMaterialBars();
         });
-        print("WillPopScope");
+        debugPrint("WillPopScope");
        return true;
       },
       child: Scaffold(
         persistentFooterButtons: ["one", "two"].map((e) => TextButton(
           onPressed: () {
-            print(e);
+            debugPrint(e);
           },
           child: Text(e))
         ).toList(),
@@ -175,7 +177,7 @@ class SnackBarDemoState extends State<SnackBarDemo> {
   SnackBar buildSnackBar2() {
     return SnackBar(
       onVisible: () {
-        print("显示SnackBar");
+        debugPrint("显示SnackBar");
       },
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(50))
@@ -189,7 +191,7 @@ class SnackBarDemoState extends State<SnackBarDemo> {
         label: '点击重试',
         onPressed: () {
           //执行相关逻辑
-          print('点击重试');
+          debugPrint('点击重试');
         },
       ),
       // margin: EdgeInsets.only(

@@ -127,7 +127,7 @@ class _NNSliderState extends State<NNSlider> {
 
             final result = widget.max > 1 ? value.toStringAsFixed(0) : value.toStringAsFixed(2);
             return widget.trailingBuilder?.call(context, value) ?? TextButton(
-              onPressed: () { print(result); },
+              onPressed: () { debugPrint(result); },
               child: Text(result),
             );
           }

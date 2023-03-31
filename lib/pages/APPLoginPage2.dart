@@ -179,7 +179,7 @@ class _APPLoginPage2State extends State<APPLoginPage2> {
   // 异步操作
   Future loginRequest() async {
     return Future.delayed(Duration(seconds: 3),(){
-      print('login success');
+      debugPrint('login success');
     });
   }
 

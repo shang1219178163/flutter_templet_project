@@ -59,23 +59,23 @@ class _AutofillGroupDemoState extends State<AutofillGroupDemo> {
     final matchs = reg.allMatches(str);
     for (final Match m in matchs) {
       var match = m[0]!;
-      print(match);
+      debugPrint(match);
     }
     final seperators = matchs.map((e) => e[0] ?? "").toList();
-    print("seperators: $seperators");
+    debugPrint("seperators: $seperators");
 
     var str1 = "streetAddressLine2";
     seperators.forEach((e) => str1 = str1.replaceAll(e, "_$e") );
-    print("str1: $str1");
+    debugPrint("str1: $str1");
 
     const original = 'Hello World';
     const find = 'World';
     const replaceWith = 'Home';
     final newString = original.replaceAll(find, replaceWith);
-    print("newString: $newString");
+    debugPrint("newString: $newString");
 
     final result = str.seperatorByChars(cb: (String e) => " $e");
-    print("result: $result");
+    debugPrint("result: $result");
   }
 
   Widget buildListView() {

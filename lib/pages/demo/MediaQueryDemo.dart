@@ -89,7 +89,7 @@ class _MediaQueryDemoState extends State<MediaQueryDemo> with WidgetsBindingObse
   @override
   void onKeyboardChanged(bool visible) {
     // TODO deal with keyboard visibility change.
-    print("onKeyboardChanged:${visible ? "展开键盘" : "收起键盘"} ${context.viewBottom}");
+    debugPrint("onKeyboardChanged:${visible ? "展开键盘" : "收起键盘"} ${context.viewBottom}");
     isVisibleVN.value = visible;
   }
 
@@ -98,7 +98,7 @@ class _MediaQueryDemoState extends State<MediaQueryDemo> with WidgetsBindingObse
     return Column(
       children: [
         TextButton(
-          onPressed: () => print("viewInsets: ${mediaQuery.viewInsets}"),
+          onPressed: () => debugPrint("viewInsets: ${mediaQuery.viewInsets}"),
           child: ValueListenableBuilder<bool>(
             valueListenable: isVisibleVN,
             builder: (context, value, child) {
@@ -109,15 +109,15 @@ class _MediaQueryDemoState extends State<MediaQueryDemo> with WidgetsBindingObse
           ),
         ),
         TextButton(
-          onPressed: () => print("viewInsets: ${mediaQuery.viewInsets}"),
+          onPressed: () => debugPrint("viewInsets: ${mediaQuery.viewInsets}"),
           child: Text("viewInsets: ${mediaQuery.viewInsets}"),
         ),
         TextButton(
-          onPressed: () => print("viewPadding: ${mediaQuery.viewPadding}"),
+          onPressed: () => debugPrint("viewPadding: ${mediaQuery.viewPadding}"),
           child: Text("viewPadding: ${mediaQuery.viewPadding}"),
         ),
         TextButton(
-          onPressed: () => print("padding: ${mediaQuery.padding}"),
+          onPressed: () => debugPrint("padding: ${mediaQuery.padding}"),
           child: Text("padding: ${mediaQuery.padding}"),
         ),
       ],
