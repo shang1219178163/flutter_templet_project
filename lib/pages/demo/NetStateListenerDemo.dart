@@ -9,7 +9,7 @@
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/NNet/NNet.dart';
-import 'package:flutter_templet_project/basicWidget/NNetContainerListView.dart';
+import 'package:flutter_templet_project/basicWidget/NNet/NNetContainerListView.dart';
 import 'package:flutter_templet_project/provider/notifier_demo.dart';
 import 'package:flutter_templet_project/service/connectivity_service.dart';
 
@@ -20,7 +20,7 @@ class NetStateListenerDemo extends StatefulWidget {
     this.title
   }) : super(key: key);
 
-  final String? title;
+  String? title;
 
   @override
   _NetStateListenerDemoState createState() => _NetStateListenerDemoState();
@@ -39,7 +39,7 @@ class _NetStateListenerDemoState extends State<NetStateListenerDemo> {
         title: Text(widget.title ?? "$widget"),
         actions: ['done',].map((e) => TextButton(
           child: Text(e,
-            style: TextStyle(color: Colors.white),
+            style: const TextStyle(color: Colors.white),
           ),
           onPressed: () => print(e),)
         ).toList(),
@@ -72,7 +72,7 @@ class _NetStateListenerDemoState extends State<NetStateListenerDemo> {
             child: NNetContainerListView<String>(
               key: _refreshKey,
               onRequest: (bool isRefesh, int page, int pageSize, last) async {
-                return await Future.delayed(Duration(milliseconds: 1500), () {
+                return await Future.delayed(const Duration(milliseconds: 1500), () {
                   final result = List<String>.generate(3, (i) => 'page_${page}_pageSize_${pageSize}_Item_${i}');
                   return Future.value(result);
                 });

@@ -1,29 +1,277 @@
-# This file configures the analyzer, which statically analyzes Dart code to
-# check for errors, warnings, and lints.
-#
-# The issues identified by the analyzer are surfaced in the UI of Dart-enabled
-# IDEs (https://dart.dev/tools#ides-and-editors). The analyzer can also be
-# invoked from the command line by running `flutter analyze`.
 
-# The following line activates a set of recommended lints for Flutter apps,
-# packages, and plugins designed to encourage good coding practices.
-include: package:flutter_lints/flutter.yaml
+# 使用 dart fix --apply命令，自动修复可以修复的代码。不能自动修复的代码，需要手动去修复
+# 遇到不会解决的规则，可以在该网站找到解决方式：https://dart-lang.github.io/linter/lints/
 
+analyzer:
+  exclude:
+    - lib/pages/material_tab/widgets/extended_scaffold.dart
+
+  errors:
+    sort_constructors_first: ignore # 将构造函数声明排序在其他成员之前。
+    constant_identifier_names: ignore # 常量名更倾向于使用lowerCamelCase。
+    diagnostic_describe_all_properties: ignore # 可诊断性的实现者应该在debugFillProperties(…)
+    # 或debugDescribeChildren(…)方法实现中引用所有公共属性，以提高运行时的可调试性。
+    avoid_types_on_closure_parameters: ignore # 为函数表达式参数注释类型通常是不必要的，因为参数类型几乎总是可以从上下文推断出来，因此这种做法是多余的。
+    use_late_for_private_fields_and_variables: ignore # 对于具有非空类型的私有成员使用late，这些成员总是被期望为非空。因此，很明显，字段不期望为空，并避免了空检查。
+    avoid_function_literals_in_foreach_calls: ignore # 避免将forEach与字面函数一起使用。
+    # for循环使开发人员能够清楚明确地表达他们的意图。for循环体中的返回从函数体返回，而forEach闭包体中的返回只返回forEach迭代的值。for循环的体可以包含await，而forEach的闭包体则不能。
+    type_annotate_public_apis: ignore # 注明函数的参数和返回类型有助于用户理解方法期望什么类型的参数以及它会返回什么什么类型的结果。
+    invalid_dependency: ignore
+
+    close_sinks: error # 关闭Sink实例可以防止内存泄漏和意外行为。
+    missing_required_param: error # 缺少必传参数。
+    missing_return: error # 丢失的返回值。
+#    prefer_const_constructors: error # 如果构造函数可以作为const调用来生成规范化实例，那么最好这样做。
+    prefer_const_constructors_in_immutables: error # 如果类是不可变的，将其构造函数设置为const构造函数通常是个好主意。
+    prefer_const_declarations: error # 变量声明，能用const修饰的，最好用const修饰，可以优化性能（比如静态字符串）。
+    prefer_final_fields: error # 变量声明，如果只会被赋值一次的，就用final修饰，可以减少不必要的理解成本，最大限度避免变量状态的隐形改变，也可优化性能。
+    annotate_overrides: error # 一个变量或者方法如果重写了，请明确加上override注解
+    prefer_const_literals_to_create_immutables: error # 在不可变类实例化中使用const实例化list、map和set字面值作为参数。
+    prefer_collection_literals: ignore # 尽可能使用集合字面量来定义集合。
+
+    always_use_package_imports: error # 当混合使用相对导入和绝对导入时，如果相同名称的成员以两种不同的方式导入，
+    # 可能会造成混淆。避免这种情况的一种方法是确保始终对lib/目录中的文件使用绝对导入。
+    avoid_relative_lib_imports: error # 当混合使用相对导入和绝对导入时，如果相同的成员以两种不同的方式导入，可能会造成混淆。避免这种情况的一个简单方法是确保在路径中没有包含lib/的相对导入。
+    # 你也可以使用'always_use_package_imports'来禁止lib/中文件之间的相对导入。
+    avoid_print: error # 不使用print
+    avoid_slow_async_io: error # 避免使用以下异步文件I/O方法，因为它们比同步方法慢得多。
+      # Directory.exists
+      # Directory.stat
+      # File.lastModified
+      # File.exists
+      # File.stat
+      # FileSystemEntity.isDirectory
+    # FileSystemEntity.isFile
+    # FileSystemEntity.isLink
+    # FileSystemEntity.type
+    avoid_type_to_string: error # 务必避免在生产代码中调用. toString()，因为它不会返回Type(或底层类)的用户定义名称。
+    # 代码大小不是问题的开发模式编译器使用全称，但发布模式编译器通常选择缩小这些符号。
+    avoid_types_as_parameter_names: error # 避免使用与现有类型相同的参数名。
+    avoid_web_libraries_in_flutter: error # 避免在非web插件的Flutter包中使用web库、dart:html、dart:js和dart:js_util。
+    # 这些库在web上下文之外不受支持;依赖于它们的功能将在Flutter移动运行时失败，在Flutter web中通常不鼓励使用它们。
+    cancel_subscriptions: error # 取消StreamSubscription实例可以防止内存泄漏和意外行为。
+    empty_statements: error # 避免使用空洞的if判断语句。https://dart-lang.github.io/linter/lints/empty_statements.html
+    literal_only_boolean_expressions: error
+    hash_and_equals: error # 如果重写hashCode，则重写hashCode;如果重写hashCode，则优先使用重写==。
+    no_duplicate_case_values: error # 不要使用多个相同值的case。
+    no_logic_in_create_state: error # createState()的实现应该返回一个State对象的新实例，而不做其他任何事情。由于通过小部件字段访问状态是首选的，
+    # 因此应该避免使用自定义构造函数参数将数据传递给state对象，因此，state构造函数不需要传递任何参数。
+    prefer_void_to_null: error # 在可以使用void的地方不要使用Null类型。
+    test_types_in_equals: error # 重写==时，不测试类型可能会导致意想不到的空指针异常。
+    throw_in_finally: error # 在finally块中抛出异常将不可避免地导致难以调试的意外行为。
+    use_key_in_widget_constructors: error # 在创建公共UI小组件时，公开提供key的能力是一种很好的实践。
+    valid_regexps: error # 使用无效语法创建的正则表达式将在运行时抛出FormatException，因此应避免使用。
+    avoid_empty_else: error # 避免空的else语句。
+    await_only_futures: error # 允许在以下类型上使用await:Future<X>， FutureOr<X>， Future<X>?, FutureOr < X >?和dynamic。
+    # 此外，特别允许使用await null作为引入微任务延迟的一种方式。
+    camel_case_extensions: error # 使用UpperCamelCase做名称扩展。扩展名应该大写每个单词的第一个字母(包括第一个单词)，并且不要使用分隔符。
+    camel_case_types: error # 使用UpperCamelCase命名类型。类和typedef应该大写每个单词的第一个字母(包括第一个单词)，并且不使用分隔符。
+    file_names: error # 使用lowercase_with_下划线命名源文件。一些文件系统不区分大小写，因此许多项目要求文件名全部为小写。
+    # 使用分隔字符可以使名称在这种形式下仍然可读。使用下划线作为分隔符可以确保名称仍然是有效的Dart标识符，如果语言以后支持符号导入，这可能会很有帮助。
+    iterable_contains_unrelated_type: error # 不要用不同于参数类型的实例调用Iterable上的contains。
+    list_remove_unrelated_type: error # 对于与参数类型不同的实例，不要调用List上的remove。
+    non_constant_identifier_names: error # 使用lowerCamelCase命名非常量标识符。
+    # 类成员、顶级定义、变量、形参、命名形参和命名构造函数应该将每个单词的第一个字母大写(第一个单词除外)，并且不使用分隔符。
+    prefer_generic_function_type_aliases: error # 随着泛型函数的引入，函数类型别名(typedef void F())无法表达用户可能想要表达的所有可能类型的参数化。
+    # 泛型函数类型别名(typedef F = void function())修复了这个问题。
+    # 出于一致性和可读性的考虑，最好只使用一种语法，因此更希望使用泛型函数类型别名。
+    prefer_is_empty: error # 不要用长度来判断一个集合是否为空。
+    # Iterable契约不要求集合知道它的长度或能够在常数时间内提供它。仅为了查看集合是否包含任何内容而调用length可能会非常慢。
+    # 相反，有更快更可读的getter: isEmpty和isNotEmpty。
+    prefer_is_not_empty: error # 首选x.s isNotEmpty而不是!x.isEmpty用于Iterable和Map实例。
+    # 在测试可迭代对象或映射对象是否为空时，最好使用isNotEmpty而不是!isEmpty来提高代码的可读性。
+    prefer_iterable_whereType: error # list使用iterable.whereType<T>()优于iterable.where((e) => e is T)。
+    prefer_typing_uninitialized_variables: error # 最好为未初始化的变量和字段指定类型注释。
+    # 放弃对未初始化变量的类型注释是一种糟糕的做法，因为您可能会意外地将它们分配给您最初不打算分配的类型。
+    provide_deprecation_message: error # 在deprecation构造函数中指定弃用消息(带有迁移信息和/或删除计划)。
+    unnecessary_overrides: error # 不做没有必要的重写，比如，重写之后，并没有自己的逻辑代码，只是简单的调用了超方法。
+    unrelated_type_equality_checks: error # 不要比较不相关类型的引用是否相等。
+    # 比较一个类型的引用，如果两者都不是另一个类型的子类型，则很可能返回false，并且可能不反映程序员的意图。
+    # 来自package:fixnum的Int64和Int32允许与int进行比较，前提是int在右边。规则允许这作为一个特殊的情况。
+    void_checks: error # 不要赋值给void。
+    avoid_init_to_null: error #不要显式地将变量初始化为null。
+    #如果一个变量的类型是非空的或者是final的，如果你在它被明确初始化之前尝试使用它，Dart会报告一个编译错误。
+    # 如果变量是可空的，而不是const或final，那么它将隐式初始化为null。在Dart中没有“未初始化内存”的概念，也不需要显式地将变量初始化为null来“安全”。add = null是多余的，不需要的。
+    avoid_null_checks_in_equality_operators: error # 不要在自定义==操作符中检查null。
+    # 由于null是一个特殊值，任何类的实例(除了null)都不能与它等价。因此，检查另一个实例是否为空是多余的。
+    avoid_renaming_method_parameters: error # 不要重命名被重写方法的参数。
+    # 覆盖另一个方法但没有自己的文档注释的方法，将在dart doc生成文档时继承被覆盖方法的注释。如果继承的方法包含参数的名称(在方括号中)，那么dart doc不能正确地链接它。
+    avoid_return_types_on_setters: error # 避免在setter上返回类型。
+    avoid_returning_null_for_void: error # 避免void类型方法返回null。
+    # 在许多语言中，void作为返回类型用于表示函数不返回任何东西。Dart允许在具有void返回类型的函数中返回null，但它也允许使用return;没有指定任何值。为了有一个一致的方式，你不应该返回null，只使用空返回。
+    avoid_single_cascade_in_expression_statements: error # 避免在表达式语句中使用单级联。
+    control_flow_in_finally: warning # 在finally块中使用控制流将不可避免地导致难以调试的意外行为。
+    empty_constructor_bodies: error # 在Dart中，具有空主体的构造函数可以仅以分号结束。这是const构造函数所必需的。为了一致性和简洁性，其他构造函数也应该这样做。
+    library_names: error # 使用lowercase_with_underscore。
+    # 一些文件系统不区分大小写，因此许多项目要求文件名全部为小写。使用分隔字符可以使名称在这种形式下仍然可读。使用下划线作为分隔符可以确保名称仍然是有效的Dart标识符，如果语言以后支持符号导入，这可能会很有帮助。
+    library_prefixes: error # 在指定库前缀时，一定要使用lowercase_with_下划线。
+    null_closures: error # 不要在需要闭包的地方传递null作为参数。
+    overridden_fields: error # 不要重写字段。覆盖字段几乎总是无意中完成的。无论如何，这样做是一种不好的做法。
+    package_names: error # 使用lowercase_with_下划线命名库。
+    prefer_adjacent_string_concatenation: error # 使用相邻的字符串来连接字符串字面量。
+    prefer_conditional_assignment: warning # 因为dart有??= operator，建议在适用的情况下使用它来提高代码的简便性。
+    prefer_for_elements_to_map_fromIterable: error # 从可迭代对象构建Map时，最好使用“for”元素。
+      # 使用for元素可以带来以下好处:
+      # 性能
+      # 灵活性
+    # 可读性
+    # 改进的类型推断
+    # 改进了与零安全的交互
+    prefer_function_declarations_over_variables: error # 使用函数声明将函数绑定到名称。由于Dart允许局部函数声明，因此在函数字面量中使用它们是一个很好的实践。
+    prefer_initializing_formals: error # 尽可能使用初始化形式。尽可能使用初始化形式可以使代码更简洁。
+    prefer_inlined_adds: error # 在列表文字中内联声明元素，而不是尽可能使用add和addAll方法。
+    prefer_interpolation_to_compose_strings: error # 更希望使用插值来组合字符串和值。在组合字符串和值时使用插值通常比连接更容易写入和读取。
+    prefer_is_not_operator: error # 当检查一个对象是否不是指定类型时，最好使用'is!'操作符。
+    prefer_null_aware_operators: error # 更希望在条件表达式中使用支持空的操作符代替空检查。
+    prefer_spread_collections: error # 尽可能使用扩展集合操作符'...'。当现有项已经存储在另一个集合中时，扩展集合语法会使代码更简单。
+    recursive_getters: error # 不要创建递归getter。递归getter是将自身作为值返回的getter。这通常是打字错误。
+    type_init_formals: error # 不要键入注释初始化形式。如果构造函数参数使用this。X初始化一个字段，那么参数的类型被理解为与字段的类型相同。
+    # 如果构造函数参数使用super。将X转发给超级构造函数，则该形参的类型应理解为与超级构造函数形参相同。
+    unnecessary_const: error # 避免在const上下文中重复const关键字。
+    unnecessary_getters_setters: error # 避免写没有必要的setter和getter
+    unnecessary_new: error # 避免写没有必要的new关键字
+    unnecessary_null_in_if_null_operators: error # 避免在if空操作符中使用null作为操作数。在if null操作符中使用null是多余的，无论在哪一侧使用null。
+    unnecessary_string_escapes: error # 删除字符串中不必要的反斜杠。
+    avoid_unnecessary_containers: warning # 避免将小部件包装在不必要的Container中。在没有设置其他参数的情况下将小部件包装在Container中没有任何效果，只会使代码不必要地更加复杂。
+    always_declare_return_types: error # 必须声明方法返回类型。当声明一个方法或函数时，一定要指定一个返回类型。
+    # 声明函数的返回类型有助于改进代码库，允许分析程序更充分地检查代码中可能在运行时发生的错误。
+    avoid_void_async: error # 将异步函数标记为返回Future。当声明一个不返回值的异步方法或函数时，声明它返回Future<void>而不是void。
+    cast_nullable_to_non_nullable: error # 不要将可空值转换为非可空类型。这隐藏了一个空检查，大多数时候它不是预期的。
+    directives_ordering: warning # 将dart: imports 放在其他imports之前
+    exhaustive_cases: error # 使用switch case时，必须列举出所有的enum类型或者所有的enum like类型
+    null_check_on_nullable_type_parameter: error # 不要对可能为空的类型参数使用空检查。
+    # 给定一个泛型类型参数T，它有一个可空的界限(例如Object?的默认界限)，当使用类型为T?的变量时，很容易引入错误的空检查。
+    # 具体来说，T?x;并且希望断言x已被设置为类型t的有效值。一个常见的错误是使用x!这几乎总是不正确的，因为如果T是可空类型，x可以有效地将null作为类型T的值。
 linter:
-  # The lint rules applied to this project can be customized in the
-  # section below to disable rules from the `package:flutter_lints/flutter.yaml`
-  # included above or to enable additional rules. A list of all available lints
-  # and their documentation is published at
-  # https://dart-lang.github.io/linter/lints/index.html.
-  #
-  # Instead of disabling a lint rule for the entire project in the
-  # section below, it can also be suppressed for a single line of code
-  # or a specific dart file by using the `// ignore: name_of_lint` and
-  # `// ignore_for_file: name_of_lint` syntax on the line or in the file
-  # producing the lint.
   rules:
-    # avoid_print: false  # Uncomment to disable the `avoid_print` rule
-    # prefer_single_quotes: true  # Uncomment to enable the `prefer_single_quotes` rule
-
-# Additional information about this file can be found at
-# https://dart.dev/guides/language/analysis-options
+    - avoid_shadowing_type_parameters # 避免隐藏类型参数。
+    - empty_catches # 避免catch代码块，是空的。
+    - package_prefixed_library_names # 用包名和点分隔的路径前缀库名。
+      # 这条指导原则有助于避免在两个库具有相同的名称时出现警告。以下是我们推荐的规则:
+      # 在所有库名称前加上包名。
+    # 使条目库具有与包相同的名称。
+    # 对于包中的所有其他库，在包名之后将点分隔的路径添加到库的Dart文件中。
+    # 对于lib下的库，省略顶部目录名。
+    - constant_identifier_names # 对常量名首选使用lowerCamelCase。
+    # 在新代码中，对常量变量使用lowerCamelCase，包括enum值。
+    # 在使用ALL_CAPS_WITH_UNDERSCORES作为常量的现有代码中，您可以继续使用所有大写以保持一致。
+    - close_sinks
+    - empty_constructor_bodies
+    - always_use_package_imports
+    - empty_statements
+    - avoid_dynamic_calls
+    - avoid_returning_null_for_future
+    - avoid_slow_async_io
+    - avoid_type_to_string
+    - avoid_types_as_parameter_names
+    - cancel_subscriptions
+    #    - collection_methods_unrelated_type
+    - diagnostic_describe_all_properties
+    #    - discarded_futures
+    - hash_and_equals
+    - literal_only_boolean_expressions
+    - no_duplicate_case_values
+    - test_types_in_equals
+    - throw_in_finally
+    - unsafe_html
+    #    - use_build_context_synchronously
+    - valid_regexps
+    - avoid_empty_else
+    - avoid_relative_lib_imports
+    - curly_braces_in_flow_control_structures
+    - file_names
+    - iterable_contains_unrelated_type
+    - list_remove_unrelated_type
+    - non_constant_identifier_names
+    - prefer_generic_function_type_aliases
+    - prefer_is_empty
+    - prefer_is_not_empty
+    - prefer_iterable_whereType
+    - prefer_typing_uninitialized_variables
+    - provide_deprecation_message
+    - unnecessary_overrides
+    - unrelated_type_equality_checks
+    - void_checks
+    - always_require_non_null_named_parameters
+    - annotate_overrides
+    - avoid_function_literals_in_foreach_calls
+    - avoid_init_to_null
+    - avoid_null_checks_in_equality_operators
+    - avoid_renaming_method_parameters
+    - avoid_return_types_on_setters
+    - avoid_returning_null_for_void
+    - avoid_single_cascade_in_expression_statements
+    - control_flow_in_finally
+    - implementation_imports
+    - library_names
+    - library_prefixes
+    - null_closures
+    - overridden_fields
+    - package_names
+    - prefer_adjacent_string_concatenation
+    - prefer_conditional_assignment
+    - prefer_contains
+    - prefer_equal_for_default_values
+    - prefer_final_fields
+    - prefer_for_elements_to_map_fromIterable
+    - prefer_function_declarations_over_variables
+    - prefer_if_null_operators
+    - prefer_initializing_formals
+    - prefer_inlined_adds
+    - prefer_interpolation_to_compose_strings
+    - prefer_is_not_operator
+    - prefer_null_aware_operators
+    - prefer_spread_collections
+    - prefer_void_to_null
+    - recursive_getters
+    - slash_for_doc_comments
+    - type_init_formals
+    - unnecessary_brace_in_string_interps
+    - unnecessary_const
+    - unnecessary_getters_setters
+    - unnecessary_new
+    - unnecessary_null_aware_assignments
+    - unnecessary_null_in_if_null_operators
+    - unnecessary_string_escapes
+    - unnecessary_string_interpolations
+    - unnecessary_this
+    - use_function_type_syntax_for_parameters
+    - use_rethrow_when_possible
+    - avoid_print
+    - avoid_unnecessary_containers
+    - avoid_web_libraries_in_flutter
+    - no_logic_in_create_state
+    - prefer_const_constructors
+    - prefer_const_constructors_in_immutables
+    - prefer_const_declarations
+    - prefer_const_literals_to_create_immutables
+    - sort_child_properties_last
+    - use_full_hex_values_for_flutter_colors
+    - use_key_in_widget_constructors
+    - always_declare_return_types
+    - always_put_control_body_on_new_line
+    - avoid_bool_literals_in_conditional_expressions
+    #    - avoid_final_parameters
+    - avoid_js_rounded_ints
+    - avoid_types_on_closure_parameters
+    - avoid_unused_constructor_parameters
+    - avoid_void_async
+    - await_only_futures
+    - camel_case_types
+    - camel_case_extensions
+    - cast_nullable_to_non_nullable
+    - directives_ordering
+    - do_not_use_environment
+    - exhaustive_cases
+    #    - library_annotations
+    #    - library_private_types_in_public_api
+    #    - no_leading_underscores_for_library_prefixes
+    #    - no_leading_underscores_for_local_identifiers
+    - null_check_on_nullable_type_parameter
+    - omit_local_variable_types
+    - prefer_final_in_for_each
+    - sort_constructors_first
+    - type_annotate_public_apis
+    - unnecessary_await_in_return
+    - use_late_for_private_fields_and_variables
+    - use_setters_to_change_properties

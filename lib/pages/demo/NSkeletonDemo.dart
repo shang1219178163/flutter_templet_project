@@ -10,15 +10,13 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/NNet/NNet.dart';
-import 'package:flutter_templet_project/basicWidget/NNetContainer.dart';
+import 'package:flutter_templet_project/basicWidget/NNet/NNetContainer.dart';
 import 'package:flutter_templet_project/basicWidget/NSkeleton.dart';
 
-import 'package:connectivity/connectivity.dart';
 import 'package:flutter_templet_project/basicWidget/nn_slider.dart';
 import 'package:flutter_templet_project/pages/demo/ValueListenableBuilderDemo.dart';
 import 'package:flutter_templet_project/provider/notifier_demo.dart';
 import 'package:flutter_templet_project/service/connectivity_service.dart';
-import 'package:easy_refresh/easy_refresh.dart';
 
 
 class NSkeletonDemo extends StatefulWidget {
@@ -46,7 +44,7 @@ class _NSkeletonDemoState extends State<NSkeletonDemo> {
         title: Text(widget.title ?? "$widget"),
         actions: ['done',].map((e) => TextButton(
           child: Text(e,
-            style: TextStyle(color: Colors.white),
+            style: const TextStyle(color: Colors.white),
           ),
           onPressed: () => print(e),)
         ).toList(),

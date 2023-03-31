@@ -11,6 +11,7 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 
@@ -168,6 +169,18 @@ extension WidgetExt on Widget {
     hasScrollBody: hasScrollBody,
     fillOverscroll: fillOverscroll,
   );
+
+  /// 转为 ValueListenableBuilder
+  ValueListenableBuilder toValueListenableBuilder<T>({
+    Key? key,
+    required ValueListenable<T> valueListenable,
+  }) => ValueListenableBuilder<T>(
+    valueListenable: valueListenable,
+    builder: (context, value, child) {
+      return this;
+    },
+  );
+
 }
 
 
