@@ -14,7 +14,7 @@ import 'package:flutter/material.dart';
 ///抽象封装
 class SectionListView<H, E> extends StatefulWidget {
 
-  SectionListView({
+  const SectionListView({
     Key? key,
     this.headerList = const [],
     required this.headerBuilder,
@@ -84,7 +84,7 @@ class _SectionListViewState<H, E> extends State<SectionListView<H,E>> {
   }
 
   _updateSlivers() {
-    for(int i = 0; i < widget.headerList.length; i++) {
+    for(var i = 0; i < widget.headerList.length; i++) {
       var headerItem = widget.headerList[i];
       var items = widget.itemList[i];
       slivers.add(_buildHeader(section: i, child: widget.headerBuilder(headerItem),));

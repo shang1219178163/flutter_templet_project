@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 
 class TooltipDemo extends StatefulWidget {
 
-  TooltipDemo({
+  const TooltipDemo({
     Key? key,
     this.title
   }) : super(key: key);
@@ -33,10 +33,10 @@ class _TooltipDemoState extends State<TooltipDemo> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: ['done',].map((e) => TextButton(
+          onPressed: () => print(e),
           child: Text(e,
             style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () => print(e),)
+          ),)
         ).toList(),
       ),
       body: Center(

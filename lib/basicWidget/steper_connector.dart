@@ -108,7 +108,7 @@ class SteperNode extends StatelessWidget {
           height: 30,
         );
 
-    var startConnector = this.direction == Axis.vertical
+    var startConnector = direction == Axis.vertical
         ? this.startConnector ??
             Container(
               color: color,
@@ -118,11 +118,11 @@ class SteperNode extends StatelessWidget {
             color: color,
             height: 2,
           );
-    if (this.drawStartConnector == false) {
+    if (drawStartConnector == false) {
       startConnector = Container();
     }
 
-    var endConnector = this.direction == Axis.vertical
+    var endConnector = direction == Axis.vertical
         ? this.endConnector ??
             Container(
               color: color,
@@ -133,14 +133,14 @@ class SteperNode extends StatelessWidget {
             height: 2,
           );
 
-    if (this.drawEndConnector == false) {
+    if (drawEndConnector == false) {
       endConnector = Container();
     }
 
-    final kFlexMultiplier = 1000;
-    final indicatorFlex = 0.5;
+    const kFlexMultiplier = 1000;
+    const indicatorFlex = 0.5;
 
-    Widget result = indicator;
+    var result = indicator;
     final items = [
       if (indicatorFlex > 0)
         Flexible(
@@ -252,7 +252,7 @@ class NNTimelineTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final kFlexMultiplier = 1000;
+    const kFlexMultiplier = 1000;
     // TODO: reduce direction check
     final direction = this.direction;
     final nodeFlex = 0.5 * kFlexMultiplier;

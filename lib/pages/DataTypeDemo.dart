@@ -4,7 +4,7 @@ import 'package:flutter_templet_project/extension/color_ext.dart';
 
 class DataTypeDemo extends StatefulWidget {
 
-  DataTypeDemo({
+  const DataTypeDemo({
     Key? key, 
     this.title
   }) : super(key: key);
@@ -173,13 +173,13 @@ class _DataTypeDemoState extends State<DataTypeDemo> with AutomaticKeepAliveClie
   }
 
   onPressed() {
-    List<int> nums = [1, 2, 3, 4, 5];
+    var nums = <int>[1, 2, 3, 4, 5];
     final sum = nums.reduce((pre, e) => pre + e);
 
     final join = nums.fold("", (prev, int e) => "$prev $e" );
 
-    print("sum: ${sum}");
-    print("join: ${join}");
+    print("sum: $sum");
+    print("join: $join");
 
   }
 

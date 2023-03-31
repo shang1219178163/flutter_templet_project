@@ -15,7 +15,7 @@ class APPLoginPage extends StatefulWidget {
 
   final String? title;
 
-  APPLoginPage({ Key? key, this.title}) : super(key: key);
+  const APPLoginPage({ Key? key, this.title}) : super(key: key);
 
 
   @override
@@ -26,6 +26,13 @@ class _APPLoginPageState extends State<APPLoginPage> {
   FocusNode focusNode1 = FocusNode();
   FocusNode focusNode2 = FocusNode();
   late FocusScopeNode focusScopeNode;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    focusScopeNode = FocusScope.of(context);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,16 +66,16 @@ class _APPLoginPageState extends State<APPLoginPage> {
             return Column(
               children: <Widget>[
                 TextButton(
-                  child: Text("移动焦点"),
                   onPressed: () {
                     _changeFocusNode(context);
                   },
+                  child: Text("移动焦点"),
                 ),
                 TextButton(
-                  child: Text("隐藏键盘"),
                   onPressed: () {
                     _unfocusNodes();
                   },
+                  child: Text("隐藏键盘"),
                 ),
               ],
             );
@@ -80,9 +87,6 @@ class _APPLoginPageState extends State<APPLoginPage> {
   }
   
   _changeFocusNode(BuildContext context){
-    if (focusScopeNode == null){
-      focusScopeNode = FocusScope.of(context);
-    }
     //将焦点从第一个TextField移到第二个TextField
     // 这是一种写法
     // FocusScope.of(context).requestFocus(focusNode2);
@@ -108,13 +112,13 @@ class _APPLoginPageState extends State<APPLoginPage> {
 
     SystemChannels.textInput.invokeMethod('TextInput.hide');
   }
-  
+
 
 }
 
 
 extension MethodChannelExt on MethodChannel{
 
-  hideKeyboard() => this.invokeMethod('TextInput.hide');
+  hideKeyboard() => invokeMethod('TextInput.hide');
 
 }

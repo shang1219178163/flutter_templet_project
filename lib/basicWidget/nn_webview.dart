@@ -36,7 +36,7 @@ class NNWebView extends StatefulWidget {
   /// Whether Javascript execution is enabled.
   final JavascriptMode javascriptMode;
 
-  NNWebView({this.initialUrl = 'https://flutter.dev', this.javascriptMode = JavascriptMode.unrestricted});
+  const NNWebView({this.initialUrl = 'https://flutter.dev', this.javascriptMode = JavascriptMode.unrestricted});
 
   @override
   _NNWebViewState createState() => _NNWebViewState();
@@ -140,7 +140,7 @@ class _NNWebViewState extends State<NNWebView> {
           if (controller.hasData) {
             return FloatingActionButton(
               onPressed: () async {
-                final String url = (await controller.data!.currentUrl())!;
+                final url = (await controller.data!.currentUrl())!;
                 // ignore: deprecated_member_use
                 Scaffold.of(context).showSnackBar(
                   SnackBar(content: Text('Favorited $url')),
@@ -157,8 +157,8 @@ class _NNWebViewState extends State<NNWebView> {
     return FutureBuilder<WebViewController>(
         future: _controller.future,
         builder: (BuildContext context, AsyncSnapshot<WebViewController> snapshot) {
-          final bool webViewReady = snapshot.connectionState == ConnectionState.done;
-          final WebViewController controller = snapshot.data!;
+          final webViewReady = snapshot.connectionState == ConnectionState.done;
+          final controller = snapshot.data!;
           if (snapshot.hasData) {
             return IconButton(
               icon: const Icon(Icons.replay),
@@ -180,8 +180,8 @@ class _NNWebViewState extends State<NNWebView> {
     return FutureBuilder<WebViewController>(
       future: _controller.future,
       builder: (BuildContext context, AsyncSnapshot<WebViewController> snapshot) {
-        final bool webViewReady = snapshot.connectionState == ConnectionState.done;
-        final WebViewController controller = snapshot.data!;
+        final webViewReady = snapshot.connectionState == ConnectionState.done;
+        final controller = snapshot.data!;
         return Row(
           children: <Widget>[
             SizedBox(width: 10,),
@@ -263,8 +263,8 @@ class SampleMenu extends StatelessWidget {
           itemBuilder: (BuildContext context) => <PopupMenuItem<MenuOptions>>[
             PopupMenuItem<MenuOptions>(
               value: MenuOptions.showUserAgent,
-              child: Text('Show user agent'),
               enabled: controller.hasData,
+              child: Text('Show user agent'),
             ),
             PopupMenuItem<MenuOptions>(
               value: MenuOptions.listCookies,
@@ -304,7 +304,7 @@ class SampleMenu extends StatelessWidget {
   }
 
   void _onListCookies(WebViewController controller, BuildContext context) async {
-    final String cookies = await controller.evaluateJavascript('document.cookie');
+    final cookies = await controller.evaluateJavascript('document.cookie');
     // ignore: deprecated_member_use
     Scaffold.of(context).showSnackBar(SnackBar(
       content: Column(
@@ -342,8 +342,8 @@ class SampleMenu extends StatelessWidget {
   }
 
   void _onClearCookies(BuildContext context) async {
-    final bool hadCookies = await cookieManager.clearCookies();
-    String message = 'There were cookies. Now, they are gone!';
+    final hadCookies = await cookieManager.clearCookies();
+    var message = 'There were cookies. Now, they are gone!';
     if (!hadCookies) {
       message = 'There are no cookies.';
     }
@@ -354,7 +354,7 @@ class SampleMenu extends StatelessWidget {
   }
 
   void _onNavigationDelegateExample(WebViewController controller, BuildContext context) async {
-    final String contentBase64 = base64Encode(Utf8Encoder().convert(kNavigationExamplePage));
+    final contentBase64 = base64Encode(Utf8Encoder().convert(kNavigationExamplePage));
     await controller.loadUrl('data:text/html;base64,$contentBase64');
   }
 
@@ -362,8 +362,8 @@ class SampleMenu extends StatelessWidget {
     if (cookies == null || cookies == '""') {
       return Container();
     }
-    final List<String> cookieList = cookies.split(';');
-    final Iterable<Text> cookieWidgets =
+    final cookieList = cookies.split(';');
+    final cookieWidgets =
     cookieList.map((String cookie) => Text(cookie));
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
@@ -376,15 +376,15 @@ class SampleMenu extends StatelessWidget {
 class NavigationControls extends StatelessWidget {
   final Future<WebViewController> _webViewControllerFuture;
 
-  NavigationControls(this._webViewControllerFuture) : assert(_webViewControllerFuture != null);
+  const NavigationControls(this._webViewControllerFuture) : assert(_webViewControllerFuture != null);
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<WebViewController>(
       future: _webViewControllerFuture,
       builder: (BuildContext context, AsyncSnapshot<WebViewController> snapshot) {
-        final bool webViewReady = snapshot.connectionState == ConnectionState.done;
-        final WebViewController controller = snapshot.data!;
+        final webViewReady = snapshot.connectionState == ConnectionState.done;
+        final controller = snapshot.data!;
         return Row(
           children: <Widget>[
             SizedBox(width: 10,),

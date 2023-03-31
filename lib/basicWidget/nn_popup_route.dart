@@ -50,6 +50,9 @@ class NNPopupRoute<T> extends PopupRoute<T> {
     return Material(
       color: Colors.transparent,
       child: GestureDetector(
+        onTap: () {
+          onClick();
+        },
         child: Stack(
           children: [
             Container(
@@ -65,9 +68,6 @@ class NNPopupRoute<T> extends PopupRoute<T> {
             ),
           ],
         ),
-        onTap: () {
-          onClick();
-        },
       ),
     );
   }

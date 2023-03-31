@@ -47,14 +47,14 @@ class NNAutocompleteOptionsView<T extends Object> extends StatelessWidget {
             shrinkWrap: true,
             itemCount: options.length,
             itemBuilder: (BuildContext context, int index) {
-              final T option = options.elementAt(index);
+              final option = options.elementAt(index);
               return cellBuilder?.call(context, index) ?? InkWell(
                 onTap: () {
                   onSelected(option);
                 },
                 child: Builder(
                   builder: (BuildContext context) {
-                    final bool highlight = AutocompleteHighlightedOption.of(context) == index;
+                    final highlight = AutocompleteHighlightedOption.of(context) == index;
                     if (highlight) {
                       SchedulerBinding.instance.addPostFrameCallback((Duration timeStamp) {
                         Scrollable.ensureVisible(context, alignment: 0.5);

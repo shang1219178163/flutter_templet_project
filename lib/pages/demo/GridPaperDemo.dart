@@ -25,7 +25,7 @@ class GridPaperDemo extends StatelessWidget {
   }
 
   Widget _contentWidget() {
-    final items = R.image.imgUrls.map((e) => Image.network(
+    final items = R.image.urls.map((e) => Image.network(
         e,
         scale: 1,
         fit: BoxFit.cover)).toList();
@@ -47,12 +47,12 @@ class GridPaperDemo extends StatelessWidget {
               leading: Icon(Icons.add),
               trailing: Text("trailing"),
             ),
+            footer: Center(child: Text('footer')),
             child: Image.network(
-              R.image.imgUrls[6],
+              R.image.urls[6],
               scale: 1,
               fit: BoxFit.cover
             ),
-            footer: Center(child: Text('footer')),
           ),
           GridPaper(//绘制一个像素宽度的直线网格
             interval: 3,//参数表示2条线之间的间隔
@@ -60,7 +60,7 @@ class GridPaperDemo extends StatelessWidget {
             subdivisions: 3,//测网格分割数,包含自身
             // color: Colors.transparent,
             child: Image.network(
-              R.image.imgUrls[0],
+              R.image.urls[0],
               scale: 1,
               fit: BoxFit.cover
             ),

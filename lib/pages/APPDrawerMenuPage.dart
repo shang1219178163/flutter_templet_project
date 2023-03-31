@@ -2,8 +2,6 @@
 
 import 'package:flutter/material.dart';
 
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/APPThemeSettings.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/provider/color_filtered_provider.dart';
@@ -13,7 +11,7 @@ import 'package:tuple/tuple.dart';
 
 class APPDrawerMenuPage extends StatefulWidget {
 
-  APPDrawerMenuPage({ Key? key, this.title}) : super(key: key);
+  const APPDrawerMenuPage({ Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -152,7 +150,7 @@ class _APPDrawerMenuPageState extends State<APPDrawerMenuPage> {
       trailing: Switch(
         onChanged: (bool value) {
           isGrey = !isGrey;
-          print("isGrey:${isGrey}");
+          debugPrint("isGrey:$isGrey");
           final color = value ? Colors.grey : Colors.transparent;
           filteredProvider.setColor(color);
         },

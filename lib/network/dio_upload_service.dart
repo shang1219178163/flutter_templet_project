@@ -10,6 +10,7 @@
 
 import 'dart:async';
 import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:mime/mime.dart';
 
 import 'package:dio/dio.dart';
@@ -30,7 +31,7 @@ const policy = "{\"expiration\": \"2120-01-01T12:00:00.000Z\",\"conditions\": [[
 
 ///这里yourBucketName替换成你们的BucketName
 ///oss-cn-hangzhou： Endpoint以杭州为例，其它Region请按实际情况填写
-final String url = 'https://yourBucketName.oss-cn-hangzhou.aliyuncs.com';
+const String url = 'https://yourBucketName.oss-cn-hangzhou.aliyuncs.com';
 
 class UploadSevice{
   static final UploadSevice _instance = UploadSevice._();
@@ -41,13 +42,13 @@ class UploadSevice{
   ///上传图片到阿里云OSS
   FutureOr<String?> uploadImage(File imgFile) async{
     //查询mime type
-    String? mimeType = lookupMimeType(imgFile.path); // 'image/jpeg'
+    var mimeType = lookupMimeType(imgFile.path); // 'image/jpeg'
     // 将Policy进行Base64编码
-    String encodePolicy = base64Encode(utf8.encode(policy));
+    var encodePolicy = base64Encode(utf8.encode(policy));
     // 生成签名
-    String signature = getSignature(encodePolicy);
+    var signature = getSignature(encodePolicy);
     // 用 package:path/path.dart 库获取图片名称
-    String fileName = basename(imgFile.path);
+    var fileName = basename(imgFile.path);
     // 让阿里云创建一个flutter的文件夹
     fileName = 'flutter/$fileName';
     var formData = FormData.fromMap({
@@ -60,7 +61,7 @@ class UploadSevice{
       'file': await MultipartFile.fromFile(imgFile.path),
     });
 
-    Dio dio = Dio();
+    var dio = Dio();
     var response = await dio.post(url, data: formData,onSendProgress: (int sent, int total){
       printLog('$sent $total');///打印 上传数据的进度
     });
@@ -70,7 +71,7 @@ class UploadSevice{
       return null;
     }
     ///上传图片成功后，该图片的url
-    String imageUrl = '$url/$fileName';
+    var imageUrl = '$url/$fileName';
     return imageUrl;
   }
 
@@ -79,16 +80,18 @@ class UploadSevice{
     var key = utf8.encode(accessKeySecret);
     var bytes = utf8.encode(encodePolicy);
 
-    var hmacSha1 = new Hmac(sha1, key);
-    Digest sha1Result = hmacSha1.convert(bytes);
+    var hmacSha1 = Hmac(sha1, key);
+    var sha1Result = hmacSha1.convert(bytes);
     printLog("sha1Result:$sha1Result");
 
-    String signature = base64Encode(sha1Result.bytes);
+    var signature = base64Encode(sha1Result.bytes);
     printLog("signature:$signature");
     return signature;
   }
 
   printLog(Object? object){
-    print("${this}: ${object}");
+    if (kDebugMode) {
+      print("${this}: $object");
+    }
   }
 }

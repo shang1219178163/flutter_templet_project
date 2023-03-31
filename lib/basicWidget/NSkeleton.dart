@@ -59,9 +59,9 @@ class NSkeleton extends StatelessWidget {
   }
 
   _buildList() {
-    final _items = List.generate(15, (index) => "${index}");
+    final _items = List.generate(15, (index) => "$index");
 
-    final bgColor = this.color ?? const Color(0xFFf3f3f3);
+    final bgColor = color ?? const Color(0xFFf3f3f3);
 
     return Scrollbar(
       child: ListView.builder(

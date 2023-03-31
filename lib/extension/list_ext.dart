@@ -19,9 +19,9 @@ extension ListExt<T,E> on List<E> {
     return l;
   }
   /// 带索引的map
-  List<T> mapWithIdx<T>(T Function(E, int i) action) {
+  List<T> mapWithIdx(T Function(E, int i) action) {
     var result = <T>[];
-    for (int i = 0; i < this.length; i++) {
+    for (var i = 0; i < length; i++) {
       result.add(action(this[i], i));
     }
     return result;
@@ -41,17 +41,17 @@ extension ListExt<T,E> on List<E> {
   }
 
   /// 同 sorted
-  List<E> sorted([int compare(E a, E b)?]) {
-    this.sort(compare);
+  List<E> sorted([int Function(E a, E b)? compare]) {
+    sort(compare);
     return this;
   }
 
   List<E> exchange(int fromIdx, int toIdx) {
-    if (fromIdx >= this.length || toIdx >= this.length) {
+    if (fromIdx >= length || toIdx >= length) {
       return this;
     }
-    E e = this[fromIdx];
-    E toE = this[toIdx];
+    var e = this[fromIdx];
+    var toE = this[toIdx];
     //exchange
     this[fromIdx] = toE;
     this[toIdx] = e;
@@ -59,8 +59,8 @@ extension ListExt<T,E> on List<E> {
   }
 
   /// 是否全部满足某个条件
-  bool every(bool action(E e)) {
-    for (int i = 0; i < this.length; i++) {
+  bool every(bool Function(E e) action) {
+    for (var i = 0; i < length; i++) {
       if (!action(this[i])) {
         return false;
       }
@@ -71,8 +71,8 @@ extension ListExt<T,E> on List<E> {
   /// 转为 Map<String, dynamic>
   Map<String, E> toMap() {
     var map = <String, E>{};
-    for (var item in this) {
-      map["${item}"] = item;
+    for (final item in this) {
+      map["$item"] = item;
     }
     return map;
   }
@@ -94,10 +94,10 @@ extension ListExtObject<E extends Object> on List<E> {
   List<E> sortedByValue({bool ascending = true, required dynamic Function(E obj) cb}) {
     if (ascending) {
       // this.sort((a, b) => cb(a).compareTo(cb(b)));
-      this.sort((a, b) => _customeCompare(cb(a), cb(b)));
+      sort((a, b) => _customeCompare(cb(a), cb(b)));
     } else {
       // this.sort((a, b) => cb(b).compareTo(cb(a)));
-      this.sort((a, b) => _customeCompare(cb(b), cb(a)));
+      sort((a, b) => _customeCompare(cb(b), cb(a)));
     }
     return this;
   }
@@ -115,14 +115,14 @@ extension ListExtObject<E extends Object> on List<E> {
 extension IterableExt<T> on Iterable<T> {
 
   double sum(double Function(T) extract) {
-    double result = 0.0;
-    for (T element in this) {
-      result += extract(element);
+    var result = 0.0;
+    for (final e in this) {
+      result += extract(e);
     }
     return result;
   }
 
   Iterable<T> filter() {
-    return this.whereType<T>();
+    return whereType<T>();
   }
 }

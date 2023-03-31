@@ -4,7 +4,7 @@ class MaterialBannerDemo extends StatefulWidget {
 
   final String? title;
 
-  MaterialBannerDemo({ Key? key, this.title}) : super(key: key);
+  const MaterialBannerDemo({ Key? key, this.title}) : super(key: key);
 
   
   @override
@@ -38,16 +38,16 @@ class _MaterialBannerDemoState extends State<MaterialBannerDemo> {
       ),
       actions: <Widget>[
         TextButton(
-          child: Text('NO'),
           onPressed: () {
             print('NO');
           },
+          child: Text('NO'),
         ),
         TextButton(
-          child: Text('YES'),
           onPressed: () {
             print('YES');
           },
+          child: Text('YES'),
         ),
       ],
     );

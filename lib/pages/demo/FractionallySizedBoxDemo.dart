@@ -12,7 +12,7 @@ import 'package:flutter/material.dart';
 
 class FractionallySizedBoxDemo extends StatefulWidget {
 
-  FractionallySizedBoxDemo({
+  const FractionallySizedBoxDemo({
     Key? key, 
     this.title
   }) : super(key: key);
@@ -34,10 +34,10 @@ class _FractionallySizedBoxDemoState extends State<FractionallySizedBoxDemo> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: ['done',].map((e) => TextButton(
+          onPressed: () => print(e),
           child: Text(e,
             style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () => print(e),)
+          ),)
         ).toList(),
       ),
       body: Align(

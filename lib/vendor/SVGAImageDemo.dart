@@ -5,7 +5,7 @@ class SvgaImageDemo extends StatefulWidget {
 
   final String? title;
 
-  SvgaImageDemo({ Key? key, this.title}) : super(key: key);
+  const SvgaImageDemo({ Key? key, this.title}) : super(key: key);
 
   
   @override

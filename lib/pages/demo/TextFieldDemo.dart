@@ -14,7 +14,7 @@ class TextFieldDemo extends StatefulWidget {
 
   final String? title;
 
-  TextFieldDemo({ Key? key, this.title}) : super(key: key);
+  const TextFieldDemo({ Key? key, this.title}) : super(key: key);
 
   
   @override
@@ -23,7 +23,7 @@ class TextFieldDemo extends StatefulWidget {
 
 class _TextFieldDemoState extends State<TextFieldDemo> {
 
-  late TextEditingController _textController = TextEditingController(text: 'initial text');
+  late final TextEditingController _textController = TextEditingController(text: 'initial text');
   late TextEditingController editingController = TextEditingController(text: 'initial text');
 
   // 控制器
@@ -57,8 +57,8 @@ class _TextFieldDemoState extends State<TextFieldDemo> {
           children: <Widget>[
             Expanded(child: TextField()),
             ElevatedButton(
-              child: Text('发送'),
               onPressed: () {},
+              child: Text('发送'),
             ),
           ],
         ),
@@ -109,7 +109,7 @@ class _TextFieldDemoState extends State<TextFieldDemo> {
                   // border: OutlineInputBorder(
                   //     borderRadius: BorderRadius.circular(4.0) //圆角大小
                   // ),
-                  suffixIcon: _unameController.text.length > 0 ? IconButton(
+                  suffixIcon: _unameController.text.isNotEmpty ? IconButton(
                     icon: Icon(
                       Icons.clear,
                       size: 21,

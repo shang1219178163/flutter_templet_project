@@ -13,7 +13,7 @@ class APPForgetPwdPage extends StatefulWidget {
 
   final String? title;
 
-  APPForgetPwdPage({ Key? key, this.title}) : super(key: key);
+  const APPForgetPwdPage({ Key? key, this.title}) : super(key: key);
 
   
   @override

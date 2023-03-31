@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 
 class DateRangePickerDialogDemo extends StatefulWidget {
 
-  DateRangePickerDialogDemo({
+  const DateRangePickerDialogDemo({
     Key? key, 
     this.title
   }) : super(key: key);
@@ -42,10 +42,10 @@ class _DateRangePickerDialogDemoState extends State<DateRangePickerDialogDemo> w
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: ['done',].map((e) => TextButton(
+          onPressed: () => print("done"),
           child: Text(e,
             style: TextStyle(color: Colors.white),
           ),
-          onPressed: () => print("done"),
         )).toList(),
         bottom: TabBar(
           isScrollable: true,
@@ -86,8 +86,8 @@ class _DateRangePickerDialogDemoState extends State<DateRangePickerDialogDemo> w
   }
 
   _showDateRange() async {
-    DateTime firstDate = DateTime(2021, 1, 1);
-    DateTime lastDate = DateTime.now();
+    var firstDate = DateTime(2021, 1, 1);
+    var lastDate = DateTime.now();
 
     var range = await showDateRangePicker(
       context: context,

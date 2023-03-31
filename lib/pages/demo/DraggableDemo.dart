@@ -15,7 +15,7 @@ class DraggableDemo extends StatefulWidget {
 
   final String? title;
 
-  DraggableDemo({ Key? key, this.title}) : super(key: key);
+  const DraggableDemo({ Key? key, this.title}) : super(key: key);
 
   
   @override
@@ -28,6 +28,7 @@ class _DraggableDemoState extends State<DraggableDemo> {
 
 
 
+  @override
   Widget build(BuildContext context) {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
     return Scaffold(
@@ -45,14 +46,6 @@ class _DraggableDemoState extends State<DraggableDemo> {
       children: <Widget>[
         Draggable<int>(
           data: 10,
-          child: Container(
-            height: 100.0,
-            width: 100.0,
-            color: Colors.lightGreenAccent,
-            child: const Center(
-              child: Text('Draggable'),
-            ),
-          ),
           feedback: Container(
             color: Colors.deepOrange,
             height: 100,
@@ -65,6 +58,14 @@ class _DraggableDemoState extends State<DraggableDemo> {
             color: Colors.pinkAccent,
             child: const Center(
               child: Text('Child When Dragging'),
+            ),
+          ),
+          child: Container(
+            height: 100.0,
+            width: 100.0,
+            color: Colors.lightGreenAccent,
+            child: const Center(
+              child: Text('Draggable'),
             ),
           ),
         ),

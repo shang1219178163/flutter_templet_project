@@ -12,7 +12,7 @@ import 'package:flutter/material.dart';
 
 class BoxShadowDemo extends StatefulWidget {
 
-  BoxShadowDemo({ Key? key, this.title}) : super(key: key);
+  const BoxShadowDemo({ Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -41,10 +41,10 @@ class _BoxShadowDemoState extends State<BoxShadowDemo> {
         appBar: AppBar(
           title: Text(widget.title ?? "$widget"),
           actions: ['done',].map((e) => TextButton(
+            onPressed: () => print(e),
             child: Text(e,
               style: TextStyle(color: Colors.white),
-            ),
-            onPressed: () => print(e),)
+            ),)
           ).toList(),
         ),
       body: ListView(

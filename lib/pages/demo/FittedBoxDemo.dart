@@ -12,7 +12,7 @@ class FittedBoxDemo extends StatefulWidget {
 
   final String? title;
 
-  FittedBoxDemo({ Key? key, this.title}) : super(key: key);
+  const FittedBoxDemo({ Key? key, this.title}) : super(key: key);
 
 
   @override

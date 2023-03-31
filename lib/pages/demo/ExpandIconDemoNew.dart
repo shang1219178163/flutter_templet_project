@@ -16,6 +16,7 @@ import 'package:flutter_templet_project/extension/ddlog.dart';
 
 
 class ExpandIconDemoNew extends StatefulWidget {
+  @override
   ExpandIconDemoNewState createState() => ExpandIconDemoNewState();
 }
 
@@ -27,7 +28,7 @@ class ExpandIconDemoNewState extends State<ExpandIconDemoNew> {
 
   @override
   void initState() {
-    _data = this._generateItems(20);
+    _data = _generateItems(20);
 
     super.initState();
   }
@@ -148,7 +149,7 @@ class ExpandIconDemoNewState extends State<ExpandIconDemoNew> {
             subtitle: Text('To delete this panel, tap the trash can icon'),
             trailing: Icon(Icons.delete),
             onTap: () {
-              ddlog("section_${section}_${e}");
+              ddlog("section_${section}_$e");
               setState(() {});
             }),
           Divider(color: Colors.blue,),
@@ -219,20 +220,20 @@ class CustomExpansionTileState extends State<CustomExpansionTile> {
         size: 36.0,
       ),
       title: Container(
+        // Change header (which is a Container widget in this case) background colour here.
+        color: isExpanded ? Colors.orange : Colors.green,
         child: Text("HEADER HERE",
           style: TextStyle(
             color: isExpanded ? Colors.black : Colors.black,
           ),
         ),
-        // Change header (which is a Container widget in this case) background colour here.
-        color: isExpanded ? Colors.orange : Colors.green,
       ),
       subtitle: Text("subtitle"),
+      onExpansionChanged: (bool expanding) => setState(() => isExpanded = expanding),
       children: <Widget>[
         Text("Child Widget One"),
         Text("Child Widget Two"),
       ],
-      onExpansionChanged: (bool expanding) => setState(() => this.isExpanded = expanding),
     );
   }
 }

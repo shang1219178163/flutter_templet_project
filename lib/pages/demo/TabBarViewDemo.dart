@@ -32,7 +32,7 @@ class TabBarViewDemo extends StatelessWidget {
             ),
           ),
         ),
-        title: Text(this.title),
+        title: Text(title),
         leading: Builder(builder: (context) {
           return IconButton(
             icon: Icon(Icons.menu, color: Colors.white), //自定义图标
@@ -55,14 +55,14 @@ class TabBarViewDemo extends StatelessWidget {
           ),
         ],
         bottom: TabBar(
-          controller: this.tabController,
-          isScrollable: this.tabScrollable,
-          tabs: this.pages.map((e) => Tab(text: e.item1)).toList(),
+          controller: tabController,
+          isScrollable: tabScrollable,
+          tabs: pages.map((e) => Tab(text: e.item1)).toList(),
         ),
       ),
       body: TabBarView(
-        controller: this.tabController,
-        children: this.pages.map((e) => e.item2).toList(),
+        controller: tabController,
+        children: pages.map((e) => e.item2).toList(),
       ),
     );
   }

@@ -6,14 +6,14 @@ import 'package:flutter_templet_project/extension/ddlog.dart';
 class CupertinoFormDemo extends StatefulWidget {
   final String? title;
 
-  CupertinoFormDemo({Key? key, this.title}) : super(key: key);
+  const CupertinoFormDemo({Key? key, this.title}) : super(key: key);
 
   @override
   _CupertinoFormDemoState createState() => _CupertinoFormDemoState();
 }
 
 class _CupertinoFormDemoState extends State<CupertinoFormDemo> {
-  late TextEditingController _textController =
+  late final TextEditingController _textController =
       TextEditingController(text: 'initial text');
 
   bool isSwitch = true;
@@ -46,34 +46,34 @@ class _CupertinoFormDemoState extends State<CupertinoFormDemo> {
                     CupertinoFormRow(
                       padding: EdgeInsets.all(15),
                       child: InkWell(
-                        child: buildSubtitleRow(context),
                         onTap: () {
                           ddlog("buildSubtitleRow");
                         },
+                        child: buildSubtitleRow(context),
                       ),
                     ),
                     CupertinoFormRow(
                       child: InkWell(
-                        child: buildRightButtonRow(context),
                         onTap: () {
                           ddlog("buildRightButtonRow");
                         },
+                        child: buildRightButtonRow(context),
                       ),
                     ),
                     CupertinoFormRow(
                       child: InkWell(
-                        child: buildSwitchRow(context),
                         onTap: () {
                           ddlog("buildSwitchRow");
                         },
+                        child: buildSwitchRow(context),
                       ),
                     ),
                     CupertinoFormRow(
                       child: InkWell(
-                        child: buildDatePickerRow(context),
                         onTap: () {
                           showDatePicker(context);
                         },
+                        child: buildDatePickerRow(context),
                       ),
                     ),
                     CupertinoTextFormFieldRow(

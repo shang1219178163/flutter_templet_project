@@ -8,12 +8,15 @@
 
 
 import 'package:flutter/foundation.dart'
-    show TargetPlatform, defaultTargetPlatform;
+    show TargetPlatform, defaultTargetPlatform, kReleaseMode;
 import 'package:flutter/material.dart';
 
 // ignore: non_constant_identifier_names, unnecessary_question_mark
 void ddlog(dynamic? obj) {
-  DDTraceModel model = DDTraceModel(StackTrace.current);
+  if (kReleaseMode) {
+    return;
+  }
+  var model = DDTraceModel(StackTrace.current);
 
   var items = [
     DateTime.now().toString(),
@@ -22,7 +25,7 @@ void ddlog(dynamic? obj) {
     model.selectorName,
     "[${model.lineNumber}:${model.columnNumber}]"
   ].where((element) => element != "");
-  print("${items.join(" ")}: $obj");
+  debugPrint("${items.join(" ")}: $obj");
 }
 
 /// TraceModel
@@ -49,12 +52,11 @@ class DDTraceModel {
           var traceString2 = _trace.toString().split("\n")[2];
           // print(traceString2);
 
-          List<String> list = traceString2
+          var list = traceString2
               .split(" ")
               .where((element) => element != "")
               .toList();
-          this.selectorName =
-              list.last.replaceAll("[", "").replaceAll("]", "()").trim();
+          selectorName = list.last.replaceAll("[", "").replaceAll("]", "()").trim();
 
           _parseClassName(path: list.first);
           _parseLineAndcolumn(location: list[1]);
@@ -62,10 +64,10 @@ class DDTraceModel {
         break;
       default:
         {
-          var traceString1 = this._trace.toString().split("\n")[1];
+          var traceString1 = _trace.toString().split("\n")[1];
           // print(traceString1);
 
-          List<String> list = traceString1
+          var list = traceString1
               .replaceAll("#1", "")
               .replaceAll(".<anonymous closure>", "")
               .replaceAll(")", "")
@@ -76,8 +78,8 @@ class DDTraceModel {
               .toList();
 
           var fileInfo = list.first.split(".").toList();
-          this.className = fileInfo.first;
-          this.selectorName = fileInfo.last + "()";
+          className = fileInfo.first;
+          selectorName = "${fileInfo.last}()";
 
           _parseClassName(path: list[1]);
           _parseLineAndcolumn(location: list.last);
@@ -89,25 +91,25 @@ class DDTraceModel {
   /// parse className
   void _parseClassName({required String path}) {
     if (path.contains("/") == false) {
-      print([DateTime.now(), path]);
+      debugPrint("[DateTime.now(), path]");
       return;
     }
     assert(path.contains("/"));
-    List<String> list = path
+    var list = path
         .split("/")
         .last
         .split(" ")
         .where((element) => element != "")
         .toList();
-    this.fileName = list.first.trim();
+    fileName = list.first.trim();
   }
 
   /// parse Line and column
   void _parseLineAndcolumn({required String location}) {
     if (location.contains(":")) {
-      List<String> list = location.split(":");
-      this.lineNumber = int.parse(list.first.trim());
-      this.columnNumber = int.parse(list.last.trim());
+      var list = location.split(":");
+      lineNumber = int.parse(list.first.trim());
+      columnNumber = int.parse(list.last.trim());
     }
   }
 }

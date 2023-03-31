@@ -4,7 +4,7 @@ import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 
 class WechatAssetsPickerDemo extends StatefulWidget {
 
-  WechatAssetsPickerDemo({ Key? key, this.title}) : super(key: key);
+  const WechatAssetsPickerDemo({ Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -29,10 +29,10 @@ class _WechatAssetsPickerDemoState extends State<WechatAssetsPickerDemo> {
         appBar: AppBar(
           title: Text(widget.title ?? "$widget"),
           actions: ['选择',].map((e) => TextButton(
+            onPressed: onPicker,
             child: Text(e,
               style: TextStyle(color: Colors.white),
             ),
-            onPressed: onPicker,
           )).toList(),
         ),
         body: Column(
@@ -51,7 +51,7 @@ class _WechatAssetsPickerDemoState extends State<WechatAssetsPickerDemo> {
   }) {
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints){
-        double itemWidth = ((constraints.maxWidth - spacing * (rowCount - 1))/rowCount).truncateToDouble();
+        var itemWidth = ((constraints.maxWidth - spacing * (rowCount - 1))/rowCount).truncateToDouble();
         // print("itemWidth: $itemWidth");
         return Wrap(
           spacing: spacing,
@@ -94,7 +94,7 @@ class _WechatAssetsPickerDemoState extends State<WechatAssetsPickerDemo> {
   }
 
   onPicker() async {
-    final List<AssetEntity>? result = await AssetPicker.pickAssets(
+    final result = await AssetPicker.pickAssets(
       context,
       pickerConfig: AssetPickerConfig(
         maxAssets: maxCount,
@@ -112,7 +112,7 @@ class _WechatAssetsPickerDemoState extends State<WechatAssetsPickerDemo> {
 
 class WechatPhotoPickerDemo extends StatefulWidget {
 
-  WechatPhotoPickerDemo({ Key? key, this.title}) : super(key: key);
+  const WechatPhotoPickerDemo({ Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -125,7 +125,7 @@ class _WechatPhotoPickerDemoState extends State<WechatPhotoPickerDemo> {
   int maxCount = 9;
   List<AssetEntity> selectedAssets = [];
 
-  GlobalKey<WechatPhotoPickerState> _globalKey = GlobalKey(debugLabel: 'WechatPhotoPickerState');
+  final GlobalKey<WechatPhotoPickerState> _globalKey = GlobalKey(debugLabel: 'WechatPhotoPickerState');
 
   @override
   Widget build(BuildContext context) {
@@ -133,10 +133,10 @@ class _WechatPhotoPickerDemoState extends State<WechatPhotoPickerDemo> {
         appBar: AppBar(
           title: Text(widget.title ?? "$widget"),
           actions: ['选择',].map((e) => TextButton(
+            onPressed: onPicker,
             child: Text(e,
               style: TextStyle(color: Colors.white),
             ),
-            onPressed: onPicker,
           )).toList(),
         ),
         body: Column(
@@ -229,7 +229,7 @@ class WechatPhotoPickerState extends State<WechatPhotoPicker> {
   }) {
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints){
-        double itemWidth = ((constraints.maxWidth - spacing * (rowCount - 1))/rowCount).truncateToDouble();
+        var itemWidth = ((constraints.maxWidth - spacing * (rowCount - 1))/rowCount).truncateToDouble();
         // print("itemWidth: $itemWidth");
         return Wrap(
           spacing: spacing,
@@ -275,7 +275,7 @@ class WechatPhotoPickerState extends State<WechatPhotoPicker> {
 
   /// 打开相册,选择媒体素材
   onPicker() async {
-    List<AssetEntity>? result = await widget.onPicker?.call() ?? await AssetPicker.pickAssets(
+    var result = await widget.onPicker?.call() ?? await AssetPicker.pickAssets(
       context,
       pickerConfig: AssetPickerConfig(
         maxAssets: widget.maxCount,

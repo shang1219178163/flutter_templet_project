@@ -7,7 +7,7 @@ import 'package:event_bus/event_bus.dart';
 class EventBusService {
   EventBusService._();
 
-  static EventBusService _instance = EventBusService._();
+  static final EventBusService _instance = EventBusService._();
 
   static EventBusService get instance => _instance;
 

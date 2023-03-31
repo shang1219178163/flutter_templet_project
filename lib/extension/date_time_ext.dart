@@ -16,7 +16,7 @@ extension DateTimeExt on DateTime {
     return seconds;
   }
 
-  String toString19() => this.toString().split(".").first;
+  String toString19() => toString().split(".").first;
 
 }
 

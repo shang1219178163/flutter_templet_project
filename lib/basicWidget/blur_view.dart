@@ -37,8 +37,8 @@ class BlurView extends StatelessWidget {
         borderRadius: BorderRadius.all(Radius.circular(radius!)),
         child: backdropFilter ?? BackdropFilter(
           filter: ui.ImageFilter.blur(
-            sigmaX: this.blur ?? 20,
-            sigmaY: this.blur ?? 20,
+            sigmaX: blur ?? 20,
+            sigmaY: blur ?? 20,
           ),
           child: child,
         ),

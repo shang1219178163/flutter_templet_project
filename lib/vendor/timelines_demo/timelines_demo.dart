@@ -22,7 +22,7 @@ class TimelinesDemo extends StatelessWidget {
       theme: ThemeData.light(),
       darkTheme: ThemeData.dark(),
       onGenerateRoute: (settings) {
-        String? path = Uri.tryParse(settings.name!)?.path;
+        var path = Uri.tryParse(settings.name!)?.path;
         Widget child;
         switch (path) {
           case '/theme':
@@ -49,7 +49,7 @@ class TimelinesDemo extends StatelessWidget {
 }
 
 class HomePage extends StatefulWidget {
-  HomePage({
+  const HomePage({
     Key? key,
     required this.child,
   }) : super(key: key);

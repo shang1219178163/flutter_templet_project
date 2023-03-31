@@ -7,7 +7,7 @@ import 'package:flutter_templet_project/extension/ddlog.dart';
 class FirstPage extends StatefulWidget {
 
   final String? title;
-  FirstPage({Key? key, this.title}) : super(key: key);
+  const FirstPage({Key? key, this.title}) : super(key: key);
 
   @override
   _FirstPageState createState() => _FirstPageState();
@@ -59,8 +59,8 @@ class _FirstPageState extends State<FirstPage> {
           ),
           floatingActionButton: FloatingActionButton(
             tooltip: 'Increment',
-            child: Icon(Icons.add),
             onPressed: () => ddlog('floatingActionButton'),
+            child: Icon(Icons.add),
           ), // This trailing comma makes auto-formatting nicer for build methods.
         ),
       ),

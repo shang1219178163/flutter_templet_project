@@ -1,3 +1,9 @@
+//  Property.dart
+//  flutter_templet_project
+//
+//  Created by shang on 3/31/23 9:41 AM.
+//  Copyright © 3/31/23 shang. All rights reserved.
+//
 
 
 enum VariableType {
@@ -13,8 +19,8 @@ enum VariableType {
 
 class PropertyInfo {
 
-  static getVariableType({required String name, dynamic value = null}) {
-    VariableType type = VariableType.nil;
+  static getVariableType({required String name, dynamic value}) {
+    var type = VariableType.nil;
 
     if (value is Map) {
       type = VariableType.object;
@@ -23,7 +29,7 @@ class PropertyInfo {
     } else if (value is String) {
       type = VariableType.string;
     } else if (value is num) {
-      num n = value;
+      var n = value;
       if (n.toInt() == n) {
         type = VariableType.int;
       } else {

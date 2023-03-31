@@ -119,12 +119,12 @@ class RenderSliverDecoratedBox extends RenderProxySliver {
 
   @override
   void paint(PaintingContext context, Offset offset) {
-    Size size = getAbsoluteSize();
+    var size = getAbsoluteSize();
     if (decoration is BoxDecoration) {
-      BorderRadiusGeometry? borderRadius =
+      var borderRadius =
           (decoration as BoxDecoration).borderRadius;
       if (borderRadius != null) {
-        RRect clipRect = borderRadius
+        var clipRect = borderRadius
             .resolve(configuration.textDirection)
             .toRRect(Rect.fromLTRB(
             0, 0, constraints.crossAxisExtent, geometry!.maxPaintExtent));
@@ -138,7 +138,7 @@ class RenderSliverDecoratedBox extends RenderProxySliver {
       }
     }
     _painter ??= _decoration.createBoxPainter(markNeedsPaint);
-    final ImageConfiguration filledConfiguration =
+    final filledConfiguration =
     configuration.copyWith(size: size);
     if (position == DecorationPosition.background) {
       int? debugSaveCount;

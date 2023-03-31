@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 
 class ButtonStyleDemo extends StatefulWidget {
 
-  ButtonStyleDemo({ Key? key, this.title}) : super(key: key);
+  const ButtonStyleDemo({ Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -27,10 +27,10 @@ class _ButtonStyleDemoState extends State<ButtonStyleDemo> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: ['done',].map((e) => TextButton(
+          onPressed: () => print(e),
           child: Text(e,
             style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () => print(e),)
+          ),)
         ).toList(),
       ),
       body: Column(
@@ -47,8 +47,9 @@ class _ButtonStyleDemoState extends State<ButtonStyleDemo> {
       style: ButtonStyle(
         foregroundColor: MaterialStateProperty.resolveWith<Color>((Set<MaterialState> states) {
           print("states:$states");
-          if (states.contains(MaterialState.pressed))
+          if (states.contains(MaterialState.pressed)) {
             return Colors.pink;
+          }
           return Colors.black87;
         }),
       ),

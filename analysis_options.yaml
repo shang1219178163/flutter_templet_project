@@ -133,7 +133,7 @@ analyzer:
     unnecessary_null_in_if_null_operators: error # 避免在if空操作符中使用null作为操作数。在if null操作符中使用null是多余的，无论在哪一侧使用null。
     unnecessary_string_escapes: error # 删除字符串中不必要的反斜杠。
     avoid_unnecessary_containers: warning # 避免将小部件包装在不必要的Container中。在没有设置其他参数的情况下将小部件包装在Container中没有任何效果，只会使代码不必要地更加复杂。
-    always_declare_return_types: error # 必须声明方法返回类型。当声明一个方法或函数时，一定要指定一个返回类型。
+#    always_declare_return_types: error # 必须声明方法返回类型。当声明一个方法或函数时，一定要指定一个返回类型。
     # 声明函数的返回类型有助于改进代码库，允许分析程序更充分地检查代码中可能在运行时发生的错误。
     avoid_void_async: error # 将异步函数标记为返回Future。当声明一个不返回值的异步方法或函数时，声明它返回Future<void>而不是void。
     cast_nullable_to_non_nullable: error # 不要将可空值转换为非可空类型。这隐藏了一个空检查，大多数时候它不是预期的。
@@ -241,14 +241,14 @@ linter:
     - avoid_unnecessary_containers
     - avoid_web_libraries_in_flutter
     - no_logic_in_create_state
-    - prefer_const_constructors
-    - prefer_const_constructors_in_immutables
-    - prefer_const_declarations
-    - prefer_const_literals_to_create_immutables
+#    - prefer_const_constructors
+#    - prefer_const_constructors_in_immutables
+#    - prefer_const_declarations
+#    - prefer_const_literals_to_create_immutables
     - sort_child_properties_last
     - use_full_hex_values_for_flutter_colors
     - use_key_in_widget_constructors
-    - always_declare_return_types
+#    - always_declare_return_types
     - always_put_control_body_on_new_line
     - avoid_bool_literals_in_conditional_expressions
     #    - avoid_final_parameters
@@ -271,7 +271,7 @@ linter:
     - omit_local_variable_types
     - prefer_final_in_for_each
     - sort_constructors_first
-    - type_annotate_public_apis
+#    - type_annotate_public_apis
     - unnecessary_await_in_return
     - use_late_for_private_fields_and_variables
     - use_setters_to_change_properties

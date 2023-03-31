@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class ScrollControllerDemo extends StatefulWidget {
 
-  ScrollControllerDemo({ Key? key, this.title}) : super(key: key);
+  const ScrollControllerDemo({ Key? key, this.title}) : super(key: key);
 
   final String? title;
 

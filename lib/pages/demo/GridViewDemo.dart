@@ -67,6 +67,12 @@ class _GridViewDemoState extends State<GridViewDemo> {
               trailing: Text("trailing", style: TextStyle(color: Colors.black),),
             ),
           ),
+          footer: DecoratedBox(
+            decoration: BoxDecoration(
+              color: Colors.green,
+            ),
+            child: Text('footer', textAlign: TextAlign.center,),
+          ),
           child: Container(
             decoration: BoxDecoration(
               color: primaryColor,
@@ -74,12 +80,6 @@ class _GridViewDemoState extends State<GridViewDemo> {
             child: Center(
               child: Text("GridTileBar"),
             )
-          ),
-          footer: DecoratedBox(
-            decoration: BoxDecoration(
-              color: Colors.green,
-            ),
-            child: Text('footer', textAlign: TextAlign.center,),
           ),
         ),
         GridPaper(
@@ -145,13 +145,13 @@ class _GridViewDemoState extends State<GridViewDemo> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
                 TextButton(
-                  child: Text('YES'),
                   onPressed: () { ddlog('YES'); },
+                  child: Text('YES'),
                 ),
                 SizedBox(width: 8),
                 TextButton(
-                  child: Text('NO'),
                   onPressed: () { ddlog('NO'); },
+                  child: Text('NO'),
                 ),
                 SizedBox(width: 8),
               ],

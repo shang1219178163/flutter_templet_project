@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class RefreshIndicatorDemo extends StatefulWidget {
 
-  RefreshIndicatorDemo({
+  const RefreshIndicatorDemo({
     Key? key, 
     this.title
   }) : super(key: key);
@@ -24,10 +24,10 @@ class _RefreshIndicatorDemoState extends State<RefreshIndicatorDemo> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: ['done',].map((e) => TextButton(
+          onPressed: () => print(e),
           child: Text(e,
             style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () => print(e),)
+          ),)
         ).toList(),
       ),
       floatingActionButton: FloatingActionButton.extended(

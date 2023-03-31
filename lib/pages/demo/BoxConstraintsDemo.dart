@@ -6,7 +6,7 @@ class BoxConstraintsDemo extends StatefulWidget {
 
   final String? title;
 
-  BoxConstraintsDemo({ Key? key, this.title}) : super(key: key);
+  const BoxConstraintsDemo({ Key? key, this.title}) : super(key: key);
 
 
   @override

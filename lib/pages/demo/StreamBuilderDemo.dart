@@ -12,7 +12,7 @@ class StreamBuilderDemo extends StatefulWidget {
 
   final String? title;
 
-  StreamBuilderDemo({ Key? key, this.title}) : super(key: key);
+  const StreamBuilderDemo({ Key? key, this.title}) : super(key: key);
 
   
   @override
@@ -44,8 +44,9 @@ class _StreamBuilderDemoState extends State<StreamBuilderDemo> {
       stream: counter(), //
       //initialData: ,// a Stream<int> or null
       builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
-        if (snapshot.hasError)
+        if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
+        }
         switch (snapshot.connectionState) {
           case ConnectionState.none:
             return Text('没有Stream');

@@ -90,14 +90,14 @@ class APPThemeSettings {
         context: context,
         builder: (context) => CupertinoActionSheet(
               actionScrollController: actionScrollController,
-              title: Text("请选择主题色"),
+              title: const Text("请选择主题色"),
               // message: Text(message),
               actions: _buildActions(context: context, callback: callback),
               cancelButton: CupertinoActionSheetAction(
-                child: Text('取消'),
                 onPressed: () {
                   Navigator.pop(context);
                 },
+                child: const Text('取消'),
               ),
             ));
   }
@@ -107,7 +107,7 @@ class APPThemeSettings {
     required void Function() callback,
   }) {
     return colors.map((e) {
-      final text = "${e.toString()}"
+      final text = e.toString()
           .replaceAll('MaterialColor(primary value:', '')
           .replaceAll('MaterialAccentColor(primary value:', '')
           .replaceAll('))', ')');
@@ -116,10 +116,13 @@ class APPThemeSettings {
           color: e,
           child: Column(
             children: [
-              SizedBox(
-                height: 18,
-              ),
+              const SizedBox(height: 18,),
               GestureDetector(
+                onTap: () {
+                  changeThemeLight(e);
+                  Navigator.pop(context);
+                  callback();
+                },
                 child: Text(
                   text,
                   style: TextStyle(
@@ -129,15 +132,8 @@ class APPThemeSettings {
                     decoration: TextDecoration.none,
                   ),
                 ),
-                onTap: () {
-                  changeThemeLight(e);
-                  Navigator.pop(context);
-                  callback();
-                },
               ),
-              SizedBox(
-                height: 18,
-              ),
+              const SizedBox(height: 18,),
             ],
           ));
     }).toList();
@@ -154,12 +150,8 @@ class APPThemeSettings {
       splashColor: Colors.transparent,
       // 点击时的高亮效果设置为透明
       highlightColor: Colors.transparent,
-      // 长按时的扩散效果设置为透明
-      accentColor: e,
-      buttonColor: e,
       // scaffoldBackgroundColor: e,
       appBarTheme: ThemeData.light().appBarTheme.copyWith(color: e),
-      colorScheme: ThemeData.light().colorScheme.copyWith(secondary: e),
       indicatorColor: Colors.white,
       iconTheme: ThemeData.light().iconTheme.copyWith(
             color: e,
@@ -193,8 +185,8 @@ class APPThemeSettings {
                 type: BottomNavigationBarType.fixed,
                 selectedItemColor: e,
                 selectedIconTheme: IconThemeData(color: e),
-                selectedLabelStyle: TextStyle(fontSize: 12),
-                unselectedLabelStyle: TextStyle(fontSize: 12),
+                selectedLabelStyle: const TextStyle(fontSize: 12),
+                unselectedLabelStyle: const TextStyle(fontSize: 12),
               ),
       cupertinoOverrideTheme: CupertinoThemeData(
         primaryColor: e,
@@ -202,7 +194,7 @@ class APPThemeSettings {
         // primaryContrastingColor: Colors.red,
         // barBackgroundColor: Colors.red,
         // scaffoldBackgroundColor: Colors.red,
-      ),
+      ), colorScheme: ThemeData.light().colorScheme.copyWith(secondary: e).copyWith(secondary: e),
     );
     Get.changeTheme(themeData);
   }

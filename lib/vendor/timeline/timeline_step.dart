@@ -13,7 +13,7 @@ class TimelineStep extends StatefulWidget {
 
   final String? title;
 
-  TimelineStep({ Key? key, this.title}) : super(key: key);
+  const TimelineStep({ Key? key, this.title}) : super(key: key);
 
 
   @override

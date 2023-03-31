@@ -14,7 +14,7 @@ import 'package:flutter_templet_project/extension/ddlog.dart';
 class DateTimeDemo extends StatefulWidget {
 
   final String? title;
-  DateTimeDemo({ Key? key, this.title}) : super(key: key);
+  const DateTimeDemo({ Key? key, this.title}) : super(key: key);
 
 
   @override
@@ -47,7 +47,7 @@ class _DateTimeDemoState extends State<DateTimeDemo> {
   }
 
   void _handleDateTime() {
-    String _time = "2012-02-27 13:27:00";
+    var _time = "2012-02-27 13:27:00";
     var dateTime = DateTime.parse(_time);//字符串转时间
     var interval = dateTime.millisecondsSinceEpoch;//时间转毫秒时间戳
     var intendtime = DateTime.fromMillisecondsSinceEpoch(interval);//毫秒时间戳转时间

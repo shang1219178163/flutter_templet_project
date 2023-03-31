@@ -15,7 +15,7 @@ import 'package:flutter_templet_project/uti/R.dart';
 
 class NestedScrollViewDemoTwo extends StatefulWidget {
 
-  NestedScrollViewDemoTwo({ Key? key, this.title}) : super(key: key);
+  const NestedScrollViewDemoTwo({ Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -57,10 +57,10 @@ class _NestedScrollViewDemoTwoState extends State<NestedScrollViewDemoTwo> with 
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: ['done',].map((e) => TextButton(
+          onPressed: onPressed,
           child: Text(e,
             style: TextStyle(color: Colors.white),
-          ),
-          onPressed: onPressed,)
+          ),)
         ).toList(),
       ),
       body: _buildBody(),
@@ -227,7 +227,7 @@ class _NestedScrollViewDemoTwoState extends State<NestedScrollViewDemoTwo> with 
               return Tab(text: e);
             }
 
-            final url = (value == index) ? R.image.imgUrls[1] : R.image.imgUrls[0];
+            final url = (value == index) ? R.image.urls[1] : R.image.urls[0];
             return Tab(
               child: FadeInImage(
                 image: NetworkImage(url),
@@ -330,7 +330,7 @@ class _NestedScrollViewDemoTwoState extends State<NestedScrollViewDemoTwo> with 
   }
 
   buildList() {
-    final items = Colors.primaries;
+    const items = Colors.primaries;
     return ListView.builder(
       // controller: _scrollController,
       itemCount: items.length,

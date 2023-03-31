@@ -23,7 +23,7 @@ class CartModel extends ChangeNotifier {
 
   // double get totalPrice => _items.map((e) => e.pirce).reduce((value, element) => value + element); // 当前购物车总价的getter(假设每件都是42块)
   double get totalPrice {
-    if (_items.length == 0) {
+    if (_items.isEmpty) {
       return 0;
     }
     return _items.map((e) => e.pirce)
@@ -48,7 +48,7 @@ class CartModel extends ChangeNotifier {
 
   /// 删除最后商品
   void removeLast() {
-    if (_items.length == 0) {
+    if (_items.isEmpty) {
       return;
     }
     _items.removeLast();
@@ -63,7 +63,7 @@ class CartModel extends ChangeNotifier {
 
   @override
   String toString() {
-    return "${this.runtimeType} 共 ${_items.length} 件商品,总价: ¥${totalPrice.toString()}";
+    return "${runtimeType} 共 ${_items.length} 件商品,总价: ¥${totalPrice.toString()}";
   }
 }
 
@@ -75,7 +75,7 @@ class ValueNotifierOrderModels extends ValueNotifier<List<OrderModel>> {
 
   // double get totalPrice => value.map((e) => e.pirce).reduce((value, element) => value + element); // 当前购物车总价的getter(假设每件都是42块)
   double get totalPrice {
-    if (value.length == 0) {
+    if (value.isEmpty) {
       return 0;
     }
     return value.map((e) => e.pirce).reduce((value, element) => value + element).roundToDouble();
@@ -97,7 +97,7 @@ class ValueNotifierOrderModels extends ValueNotifier<List<OrderModel>> {
 
   /// 删除最后商品
   void removeLast() {
-    if (value.length == 0) {
+    if (value.isEmpty) {
       return;
     }
     value.removeLast();
@@ -116,7 +116,7 @@ class ValueNotifierOrderModels extends ValueNotifier<List<OrderModel>> {
 
   @override
   String toString() {
-    return "${this.runtimeType} 共 ${value.length} 件商品,总价: ¥${totalPrice.toString()}";
+    return "${runtimeType} 共 ${value.length} 件商品,总价: ¥${totalPrice.toString()}";
   }
 }
 
@@ -141,7 +141,7 @@ class ValueNotifierList<T> extends ValueNotifier<List<T>> {
 
   /// 删除最后
   void removeLast() {
-    if (value.length == 0) {
+    if (value.isEmpty) {
       return;
     }
     value.removeLast();
@@ -159,7 +159,7 @@ class ValueNotifierList<T> extends ValueNotifier<List<T>> {
 
   @override
   String toString() {
-    return "${this.runtimeType} total: ${value.length} count}";
+    return "${runtimeType} total: ${value.length} count}";
   }
 }
 
@@ -198,7 +198,7 @@ class ValueNotifierNum extends ValueNotifier<num> {
 
   @override
   String toString() {
-    return "${this.runtimeType} 当前值 ${value.toString()}";
+    return "${runtimeType} 当前值 ${value.toString()}";
   }
 }
 
@@ -214,7 +214,7 @@ class CartModelNew extends ValueNotifierList<OrderModel>{
   CartModelNew(List<OrderModel> value) : super(value);
 
   double get totalPrice {
-    if (value.length == 0) {
+    if (value.isEmpty) {
       return 0;
     }
     return value.map((e) => e.pirce).reduce((value, element) => value + element).roundToDouble();

@@ -22,7 +22,7 @@ class ProgressHudDemoNew extends StatefulWidget {
 
   final String? title;
 
-  ProgressHudDemoNew({ Key? key, this.title}) : super(key: key);
+  const ProgressHudDemoNew({ Key? key, this.title}) : super(key: key);
 
   @override
   _ProgressHudDemoNewState createState() => _ProgressHudDemoNewState();
@@ -48,13 +48,13 @@ class _ProgressHudDemoNewState extends State<ProgressHudDemoNew> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: ['done',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
           onPressed: () {
             isFlag = !isFlag;
             setState(() {});
-          },)
+          },
+          child: Text(e,
+            style: TextStyle(color: Colors.white),
+          ),)
         ).toList(),
       ),
       // body: buildGridView(titles)
@@ -82,7 +82,7 @@ class _ProgressHudDemoNewState extends State<ProgressHudDemoNew> {
   }
 
   List<Widget> initListWidget(List<String> list) {
-    List<Widget> lists = [];
+    var lists = <Widget>[];
     for (var e in list) {
       lists.add(
         InkWell(
@@ -94,7 +94,7 @@ class _ProgressHudDemoNewState extends State<ProgressHudDemoNew> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("${e}", style: TextStyle(fontSize: 12),),
+                Text("$e", style: TextStyle(fontSize: 12),),
               ],
             ),
           ),
@@ -192,9 +192,9 @@ class _ToastContextState extends State<ToastContext> {
         children: list.map((e) => Padding(
           padding: const EdgeInsets.all(8.0),
           child: ElevatedButton(
+            onPressed: e.item2,
             // style: buttonStyle,
             child: Text(e.item1),
-            onPressed: e.item2,
           ),
         ),).toList(),
       ),
@@ -216,9 +216,9 @@ class _ToastContextState extends State<ToastContext> {
       toastDuration: Duration(seconds: 2),
       positionedToastBuilder: (context, child) {
         return Positioned(
-          child: child,
           top: 16.0,
           left: 16.0,
+          child: child,
         );
       }
     );
@@ -332,13 +332,13 @@ class _ToastNoContextState extends State<ToastNoContext> {
       appBar: AppBar(
         title: Text('ToastNoContext'),
         actions: ['done',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
           onPressed: () {
             isFlag = !isFlag;
             setState(() {});
-          },)
+          },
+          child: Text(e,
+            style: TextStyle(color: Colors.white),
+          ),)
         ).toList(),
       ),
       body: isFlag ? buildBody() : buildBody2(),
@@ -350,11 +350,11 @@ class _ToastNoContextState extends State<ToastNoContext> {
       children: list.map((e) => Padding(
         padding: const EdgeInsets.all(8.0),
         child: ElevatedButton(
+          onPressed: e.item2,
           child: Padding(
             padding: const EdgeInsets.all(5),
             child: Text(e.item1),
           ),
-          onPressed: e.item2,
         ),
       ),).toList(),
     );
@@ -364,32 +364,32 @@ class _ToastNoContextState extends State<ToastNoContext> {
     return Column(
       children: <Widget>[
         ElevatedButton(
-          child: Text('Show Long Toast'),
           onPressed: showLongToast,
+          child: Text('Show Long Toast'),
         ),
         ElevatedButton(
-          child: Text('Show Short Toast'),
           onPressed: showShortToast,
+          child: Text('Show Short Toast'),
         ),
         ElevatedButton(
-          child: Text('Show Center Short Toast'),
           onPressed: showCenterShortToast,
+          child: Text('Show Center Short Toast'),
         ),
         ElevatedButton(
-          child: Text('Show Top Short Toast'),
           onPressed: showTopShortToast,
+          child: Text('Show Top Short Toast'),
         ),
         ElevatedButton(
-          child: Text('Show Colored Toast'),
           onPressed: showColoredToast,
+          child: Text('Show Colored Toast'),
         ),
         ElevatedButton(
-          child: Text('Show  Web Colored Toast'),
           onPressed: showWebColoredToast,
+          child: Text('Show  Web Colored Toast'),
         ),
         ElevatedButton(
-          child: Text('Cancel Toasts'),
           onPressed: cancelToast,
+          child: Text('Cancel Toasts'),
         ),
       ].map((e) => Padding(
         padding: const EdgeInsets.all(10.0),

@@ -6,7 +6,7 @@ class CustomSwipperDemo extends StatefulWidget {
 
   final String? title;
 
-  CustomSwipperDemo({ Key? key, this.title}) : super(key: key);
+  const CustomSwipperDemo({ Key? key, this.title}) : super(key: key);
 
 
   @override
@@ -15,7 +15,7 @@ class CustomSwipperDemo extends StatefulWidget {
 
 class _CustomSwipperDemoState extends State<CustomSwipperDemo> {
 
-  final List<String> images = R.image.imgUrls;
+  final List<String> images = R.image.urls;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +38,7 @@ class _CustomSwipperDemoState extends State<CustomSwipperDemo> {
     return CustomSwipper(
         images: images,
         onTap: (int index) {
-          print('CustomBanner 当前 page 为 ${index}');
+          print('CustomBanner 当前 page 为 $index');
         },
         // itemBuilder: (BuildContext context, int index) {
         //

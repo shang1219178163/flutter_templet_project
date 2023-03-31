@@ -21,7 +21,7 @@ import 'package:flutter_templet_project/service/connectivity_service.dart';
 
 class NSkeletonDemo extends StatefulWidget {
 
-  NSkeletonDemo({
+  const NSkeletonDemo({
     Key? key, 
     this.title
   }) : super(key: key);
@@ -43,10 +43,10 @@ class _NSkeletonDemoState extends State<NSkeletonDemo> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: ['done',].map((e) => TextButton(
+          onPressed: () => print(e),
           child: Text(e,
             style: const TextStyle(color: Colors.white),
-          ),
-          onPressed: () => print(e),)
+          ),)
         ).toList(),
       ),
       body: _buildPage()

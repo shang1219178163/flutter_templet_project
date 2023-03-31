@@ -8,6 +8,7 @@
 
 
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -28,17 +29,15 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:tuple/tuple.dart';
 
-import 'Pages/APPDrawerMenuPage.dart';
-import 'Pages/APPUserCenterPage.dart';
+import 'package:flutter_templet_project/Pages/APPDrawerMenuPage.dart';
+import 'package:flutter_templet_project/Pages/APPUserCenterPage.dart';
 
-import 'basicWidget/error_custom_widget.dart';
-import 'pages/FirstPage.dart';
-import 'pages/SecondPage.dart';
-import 'pages/ThirdPage.dart';
-import 'pages/FourthPage.dart';
-import 'vendor/TextlessDemo.dart';
+import 'package:flutter_templet_project/basicWidget/error_custom_widget.dart';
+import 'package:flutter_templet_project/pages/FirstPage.dart';
+import 'package:flutter_templet_project/pages/SecondPage.dart';
+import 'package:flutter_templet_project/pages/ThirdPage.dart';
 
-import 'provider/notifier_demo.dart';
+import 'package:flutter_templet_project/provider/notifier_demo.dart';
 
 // void main() {
 //   runZonedGuarded(() async {
@@ -57,6 +56,11 @@ import 'provider/notifier_demo.dart';
 // }
 
 Future<void> main() async {
+  if (kReleaseMode) {
+    debugPrint = (String? message, {int? wrapWidth}) {
+      // empty debugPrint implementation in the release mode
+    };
+  }
   await ScreenUtil.ensureScreenSize();
 
   setCustomErrorPage();
@@ -81,7 +85,7 @@ Future<void> main() async {
     ),
   );
 
-  SystemUiOverlayStyle systemUiOverlayStyle = SystemUiOverlayStyle(statusBarColor: Colors.transparent);
+  var systemUiOverlayStyle = SystemUiOverlayStyle(statusBarColor: Colors.transparent);
   SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
 }
 
@@ -91,16 +95,16 @@ void setCustomErrorPage(){
   // };
 
   ErrorWidget.builder = (FlutterErrorDetails details){
-    print("flutterErrorDetails:${details.toString()}");
+    debugPrint("flutterErrorDetails:${details.toString()}");
     return ErrorCustomWidget(details: details);
   };
 }
 
 Future<void> initServices() async {
-  print('starting services ...');
+  debugPrint('starting services ...');
   // await Get.putAsync(() => GlobalConfigService().init());
   // await Get.putAsync(SettingsService()).init();
-  print('All services started...');
+  debugPrint('All services started...');
 }
 
 Future<void> initDebugInfo() async {
@@ -120,6 +124,8 @@ Future<void> initDebugInfo() async {
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey();
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   // This widget is the root of your aptplication.
 
   @override
@@ -163,7 +169,7 @@ class MyApp extends StatelessWidget {
 final kScaffoldKey = GlobalKey<ScaffoldState>();
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({ Key? key, this.title}) : super(key: key);
+  const MyHomePage({ Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -312,8 +318,8 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget buildUpdateAlert(BuildContext context) {
-    final title = "新版本v ${2.0}";
-    final message = """
+    const title = "新版本v ${2.0}";
+    const message = """
       1、支持立体声蓝牙耳机，同时改善配对性能
       2、提供屏幕虚拟键盘
       3、更简洁更流畅，使用起来更快

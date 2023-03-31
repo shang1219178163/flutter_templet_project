@@ -30,7 +30,7 @@ class TabBarPageView extends StatefulWidget {
 
   final bool isTabBarTop;
 
-  TabBarPageView({
+  const TabBarPageView({
     Key? key,
     this.isTabBarTop = true,
     required this.items,
@@ -104,13 +104,13 @@ class _TabBarPageViewState extends State<TabBarPageView> with SingleTickerProvid
       width: 2.0,
     );
 
-    BoxDecoration decorationTop = BoxDecoration(
+    var decorationTop = BoxDecoration(
       border: Border(
         top: borderSide,
       ),
     );
 
-    BoxDecoration decorationBom = BoxDecoration(
+    var decorationBom = BoxDecoration(
       border: Border(
         bottom: borderSide,
       ),
@@ -152,13 +152,13 @@ class _TabBarPageViewState extends State<TabBarPageView> with SingleTickerProvid
       child: PageView(
         controller: _pageController,
         physics: canScrollable ? BouncingScrollPhysics() : NeverScrollableScrollPhysics(),
-        children: widget.items.map((e) => e.item2).toList(),
         onPageChanged: (index) {
           widget.onPageChanged(index);
           setState(() {
             _tabController.animateTo(index);
           });
         },
+        children: widget.items.map((e) => e.item2).toList(),
       ));
   }
 }

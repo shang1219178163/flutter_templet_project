@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 
 class AnimatedListDemo extends StatefulWidget {
 
-  AnimatedListDemo({ Key? key, this.title}) : super(key: key);
+  const AnimatedListDemo({ Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -33,10 +33,10 @@ class _AnimatedListDemoState extends State<AnimatedListDemo> {
         appBar: AppBar(
           title: Text(widget.title ?? "$widget"),
           actions: ['done',].map((e) => TextButton(
+            onPressed: () => print(e),
             child: Text(e,
               style: TextStyle(color: Colors.white),
-            ),
-            onPressed: () => print(e),)
+            ),)
           ).toList(),
         ),
         body: _buildAnimatedList(),
@@ -44,7 +44,7 @@ class _AnimatedListDemoState extends State<AnimatedListDemo> {
   }
 
   _buildAnimatedList() {
-    if (data.length == 0) {
+    if (data.isEmpty) {
       return Center(
         child: Container(
           child: Column(
@@ -79,7 +79,6 @@ class _AnimatedListDemoState extends State<AnimatedListDemo> {
   Widget buildAddBtn() {
     return Positioned(
       child: FloatingActionButton(
-        child: Icon(Icons.add),
         onPressed: () {
           // 添加一个列表项
           data.add('${++counter}');
@@ -87,6 +86,7 @@ class _AnimatedListDemoState extends State<AnimatedListDemo> {
           globalKey.currentState!.insertItem(data.length - 1);
           print('添加 $counter');
         },
+        child: Icon(Icons.add),
       ),
       bottom: 30,
       // left: 0,
@@ -96,7 +96,7 @@ class _AnimatedListDemoState extends State<AnimatedListDemo> {
 
   // 构建列表项
   Widget buildItem(context, index) {
-    String char = data[index];
+    var char = data[index];
     print("buildItem: ${data.length}, $index");
     return ListTile(
       //数字不会重复，所以作为Key

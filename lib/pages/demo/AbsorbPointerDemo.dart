@@ -57,8 +57,8 @@ class _AbsorbPointerDemoState extends State<AbsorbPointerDemo> {
                   ),
                   MaterialButton(
                     color: Colors.green,
-                    child: Text('我是按钮'),
                     onPressed: () => onClick('我是按钮'),
+                    child: Text('我是按钮'),
                   ),
                   buildBody1(),
                   Divider(),
@@ -69,8 +69,8 @@ class _AbsorbPointerDemoState extends State<AbsorbPointerDemo> {
           ),
           MaterialButton(
             color: Colors.lightBlue,
-            child: Text('我是外面的按钮，不受影响'),
             onPressed: () => onClick('我是外面的按钮，不受影响'),
+            child: Text('我是外面的按钮，不受影响'),
           ),
         ],
       ),

@@ -12,12 +12,12 @@ import 'package:flutter/material.dart';
 
 ///默认 3D 阴影
 const shadow3D = [
-  const Shadow(
+  Shadow(
     offset: Offset(4.0, 4.0),
     blurRadius: 3.0,
     color: Color.fromARGB(99, 64, 64, 64),
   ),
-  const Shadow(
+  Shadow(
     offset: Offset(1.0, 1.0),
     blurRadius: 8.0,
     color: Colors.grey,
@@ -110,10 +110,10 @@ extension BorderRadiusExt on BorderRadius{
   /// 根据函数转化
   BorderRadius convert(Radius Function(Radius value) cb) {
     return BorderRadius.only(
-      topLeft: cb(this.topLeft),
-      topRight: cb(this.topRight),
-      bottomLeft: cb(this.bottomLeft),
-      bottomRight: cb(this.bottomRight),
+      topLeft: cb(topLeft),
+      topRight: cb(topRight),
+      bottomLeft: cb(bottomLeft),
+      bottomRight: cb(bottomRight),
     );
   }
 }

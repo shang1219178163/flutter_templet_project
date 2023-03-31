@@ -13,7 +13,7 @@ class IndexedStackDemo extends StatefulWidget {
 
   final String? title;
 
-  IndexedStackDemo({ Key? key, this.title}) : super(key: key);
+  const IndexedStackDemo({ Key? key, this.title}) : super(key: key);
 
   
   @override
@@ -35,7 +35,7 @@ class _IndexedStackDemoState extends State<IndexedStackDemo> {
         height: double.infinity,
         child: IndexedStack (
             alignment: Alignment.center,
-            index: this.selectedIndex,
+            index: selectedIndex,
             children: <Widget>[
               Container(
                 width: 200,
@@ -56,16 +56,16 @@ class _IndexedStackDemoState extends State<IndexedStackDemo> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        child: Text("Next"),
         onPressed: () {
           setState(() {
-            if(this.selectedIndex < 2)  {
-              this.selectedIndex++;
+            if(selectedIndex < 2)  {
+              selectedIndex++;
             } else {
-              this.selectedIndex = 0;
+              selectedIndex = 0;
             }
           });
         },
+        child: Text("Next"),
       ),
     );
   }

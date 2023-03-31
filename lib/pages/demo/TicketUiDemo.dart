@@ -17,7 +17,7 @@ import 'package:flutter/material.dart';
 
 class TicketUiDemo extends StatefulWidget {
 
-  TicketUiDemo({ Key? key, this.title}) : super(key: key);
+  const TicketUiDemo({ Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -27,8 +27,8 @@ class TicketUiDemo extends StatefulWidget {
 
 class _TicketUiDemoState extends State<TicketUiDemo> {
 
-  int _count = 6;
-  double _spacing = 12;
+  final int _count = 6;
+  final double _spacing = 12;
 
   @override
   Widget build(BuildContext context) {
@@ -36,10 +36,10 @@ class _TicketUiDemoState extends State<TicketUiDemo> {
       appBar: AppBar(
         title: Text("$widget"),
         actions: ['done',].map((e) => TextButton(
+          onPressed: () => print("done"),
           child: Text(e,
             style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () => print("done"),),
+          ),),
         ).toList(),
       ),
       body: SafeArea(

@@ -52,11 +52,11 @@ class NNHorizontalScrollWidget extends StatefulWidget {
 }
 
 class _HorizontalScrollWidgetState extends State<NNHorizontalScrollWidget> {
-  List<AttrCarouseItem> _items = [];
+  final List<AttrCarouseItem> _items = [];
 
   /// 根据 maxWidth 计算 item 宽度
   double getItemWidth(double maxWidth) {
-    double result = (maxWidth - widget.gap * (widget.showCount.ceil() - 1)) /
+    var result = (maxWidth - widget.gap * (widget.showCount.ceil() - 1)) /
         widget.showCount;
     return result;
   }
@@ -85,9 +85,9 @@ class _HorizontalScrollWidgetState extends State<NNHorizontalScrollWidget> {
   @override
   void initState() {
     _scrollController.addListener(() {
-      ScrollPosition position = _scrollController.position;
+      var position = _scrollController.position;
       //滚动进度
-      double progress = position.pixels/position.maxScrollExtent;
+      var progress = position.pixels/position.maxScrollExtent;
       scrollerOffset.value = progress;
       // print("scrollerOffset.value:${scrollerOffset.value}_${progress}");
     });
@@ -113,8 +113,8 @@ class _HorizontalScrollWidgetState extends State<NNHorizontalScrollWidget> {
               height: constraints.maxHeight,
               child: NotificationListener<ScrollNotification>(
                 onNotification: (ScrollNotification n) {
-                  if (!(n is UserScrollNotification)) {
-                    isScrolling.value = !(n is ScrollEndNotification);
+                  if (n is! UserScrollNotification) {
+                    isScrolling.value = n is! ScrollEndNotification;
                   }
                   return false; //为 true，则事件会阻止向上冒泡，不推荐(除非有必要)
                 },
@@ -157,13 +157,13 @@ class _HorizontalScrollWidgetState extends State<NNHorizontalScrollWidget> {
 
   ///创建子项
   Widget _buildItem(BuildContext context, int index, double maxWidth) {
-    AttrCarouseItem model = _items[index];
+    var model = _items[index];
     var blur = 0.0;
 
     var margin = EdgeInsets.zero;
-    List<BoxShadow>? boxShadows = widget.boxShadows;
-    if (boxShadows != null && boxShadows.length > 0) {
-      BoxShadow shadow = boxShadows[0];
+    var boxShadows = widget.boxShadows;
+    if (boxShadows != null && boxShadows.isNotEmpty) {
+      var shadow = boxShadows[0];
       /// 留出阴影空间
       margin = margin.mergeShadow(shadow: shadow);
 
@@ -316,8 +316,8 @@ class _HorizontalScrollWidgetState extends State<NNHorizontalScrollWidget> {
             valueListenable: scrollerOffset,
             builder: (context, value, child) {
               // print("value:$value");
-              double indicatorWidth = 80;
-              double left = value * (maxWidth - indicatorWidth);
+              var indicatorWidth = 80.0;
+              var left = value * (maxWidth - indicatorWidth);
               return Positioned(
                   left: left,
                   child: Container(

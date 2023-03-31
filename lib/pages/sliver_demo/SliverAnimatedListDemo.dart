@@ -6,8 +6,8 @@ class SliverAnimatedListDemo extends StatefulWidget {
 }
 
 class _SliverAnimatedListDemoState extends State<SliverAnimatedListDemo> {
-  var _listKey = GlobalKey<SliverAnimatedListState>();
-  List<int> _list = [0, 1, 2];
+  final _listKey = GlobalKey<SliverAnimatedListState>();
+  final List<int> _list = [0, 1, 2];
 
   @override
   Widget build(BuildContext context) {
@@ -55,17 +55,17 @@ class _SliverAnimatedListDemoState extends State<SliverAnimatedListDemo> {
 
   // 新增item
   _insert() {
-    final int _index = _list.length;
+    final _index = _list.length;
     _list.insert(_index, _index);
     _listKey.currentState!.insertItem(_index);
   }
 
   // 移除最后一个item
   _remove() {
-    if (_list.length == 0) {
+    if (_list.isEmpty) {
       return;
     }
-    final int _index = _list.length - 1;
+    final _index = _list.length - 1;
     var item = _list[_index];
     _listKey.currentState!.removeItem(_index,
             (context, animation) => _buildItem(context, item, animation));

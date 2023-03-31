@@ -15,7 +15,7 @@ import 'package:tuple/tuple.dart';
 
 class TabBarTabBarView extends StatefulWidget {
 
-  TabBarTabBarView({
+  const TabBarTabBarView({
     Key? key,
     this.isTabBarTop = true,
     required this.items,
@@ -99,13 +99,13 @@ class _TabBarTabBarViewState extends State<TabBarTabBarView> with SingleTickerPr
       width: 2.0,
     );
 
-    BoxDecoration decorationTop = BoxDecoration(
+    var decorationTop = BoxDecoration(
       border: Border(
         top: borderSide,
       ),
     );
 
-    BoxDecoration decorationBom = BoxDecoration(
+    var decorationBom = BoxDecoration(
       border: Border(
         bottom: borderSide,
       ),

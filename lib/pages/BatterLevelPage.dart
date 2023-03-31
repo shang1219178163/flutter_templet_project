@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 
 
 class BatterLevelPage extends StatefulWidget {
-  BatterLevelPage({Key? key, this.title}) : super(key: key);
+  const BatterLevelPage({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -13,7 +13,7 @@ class BatterLevelPage extends StatefulWidget {
 
 class _BatterLevelPageState extends State<BatterLevelPage> {
 
-  static const platform = const MethodChannel('samples.flutter.io/battery');
+  static const platform = MethodChannel('samples.flutter.io/battery');
   String _batteryLevel = "Unknown battery level.";
 
   @override

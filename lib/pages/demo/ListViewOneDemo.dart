@@ -11,7 +11,7 @@ typedef onKeyCallback = void Function(BuildContext context, int index, GlobalKey
 
 class ListViewOneDemo extends StatefulWidget {
 
-  ListViewOneDemo({ Key? key, this.title}) : super(key: key);
+  const ListViewOneDemo({ Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -113,7 +113,7 @@ class _ListViewOneDemoState extends State<ListViewOneDemo> {
             controller: _scrollController,
               scrollDirection: Axis.horizontal,
               onKeyCallback: (context, index, itemKey) {
-              _scrollController.JumToHorizontal(
+              _scrollController.jumToHorizontal(
                 key: itemKey,
                 offsetX: (MediaQuery.of(context).size.width / 2)
               );
@@ -148,7 +148,7 @@ class _ListViewOneDemoState extends State<ListViewOneDemo> {
                     child: Text("$index"),
                   );
                 }
-                double indexNew = (index - 1) / 2;
+                var indexNew = (index - 1) / 2;
                 print("MarqueeWidget indexNew: $index $indexNew");
                 final e = Text("${index}_${indexNew}_中国人口近61年来首次负增长");
                 return Container(
@@ -183,7 +183,7 @@ class _ListViewOneDemoState extends State<ListViewOneDemo> {
         padding: EdgeInsets.all(0),
         itemCount: items.length,
         // cacheExtent: 10,
-        itemBuilder: itemBuilder != null ? itemBuilder : (context, index) {
+        itemBuilder: itemBuilder ?? (context, index) {
           final e = items[index];
 
           final width = this.context.screenSize.width;
@@ -229,8 +229,7 @@ class _ListViewOneDemoState extends State<ListViewOneDemo> {
 
   /// 初始化定时任务
   _initTimer() {
-    if (_timer == null) {
-      _timer = Timer.periodic(Duration(milliseconds: 350), (t) {
+    _timer ??= Timer.periodic(Duration(milliseconds: 350), (t) {
         final val = _scrollController.offset + 30;
         _scrollController.animateTo(val, duration: Duration(milliseconds: 350), curve: Curves.linear);
         if(_scrollController.position.outOfRange){
@@ -238,7 +237,6 @@ class _ListViewOneDemoState extends State<ListViewOneDemo> {
           _scrollController.jumpTo(0);
         }
       });
-    }
   }
 }
 
@@ -300,7 +298,7 @@ class MarqueeSimpleWidget extends StatelessWidget {
         }
 
         // double indexNew = ((index - 1) / 2);
-        int indexNew = (index - 1) ~/ 2;
+        var indexNew = (index - 1) ~/ 2;
         print("MarqueeWidget indexNew: $index $indexNew");
         final e = Text("真实索引:${index}_item索引:${indexNew}_AAAAAAAAAAAAAAAAAAAAA");
         return itemBuilder(context, indexNew, constraints);
@@ -389,7 +387,7 @@ class _MarqueeWidgetState extends State<MarqueeWidget> {
           padding: EdgeInsets.all(0),
           itemCount: widget.itemCount,
           // cacheExtent: 10,
-          itemBuilder: itemBuilder != null ? itemBuilder : (context, index) {
+          itemBuilder: itemBuilder ?? (context, index) {
             // final isEdge = (index == 0 || index == widget.itemCount - 1);
             return widget.itemBuilder(context, index, constraints);
           },
@@ -421,8 +419,7 @@ class _MarqueeWidgetState extends State<MarqueeWidget> {
 
   /// 初始化定时任务
   _initTimer() {
-    if (_timer == null) {
-      _timer = Timer.periodic(Duration(milliseconds: 350), (t) {
+    _timer ??= Timer.periodic(Duration(milliseconds: 350), (t) {
         final val = _scrollController.offset + 30;
         _scrollController.animateTo(val, duration: Duration(milliseconds: 350), curve: Curves.linear);
         if(_scrollController.position.outOfRange){
@@ -430,7 +427,6 @@ class _MarqueeWidgetState extends State<MarqueeWidget> {
           _scrollController.jumpTo(0);
         }
       });
-    }
   }
 }
 

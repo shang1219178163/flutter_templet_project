@@ -6,7 +6,7 @@ class NotificationListenerDemo extends StatefulWidget {
 
   final String? title;
 
-  NotificationListenerDemo({ Key? key, this.title}) : super(key: key);
+  const NotificationListenerDemo({ Key? key, this.title}) : super(key: key);
 
   
   @override
@@ -57,11 +57,18 @@ class _NotificationListenerDemoState extends State<NotificationListenerDemo> {
     return ValueListenableBuilder(
       valueListenable: isScrolling,
       builder: (context, bool value, child) {
-        print('Offstage value:${value}');
+        print('Offstage value:$value');
         return Offstage(
           offstage: value,
           child: FloatingActionButton(
             tooltip: 'Increment',
+            onPressed: () {
+              if (progress.value >= 1.0) {
+                _scrollController.jumpTo(0);
+              } else {
+                print('progress.value: ${progress.value.toStringAsFixed(2)}');
+              }
+            },
             child: ValueListenableBuilder(
               valueListenable: progress,
               builder: (context, double value, child) {
@@ -73,13 +80,6 @@ class _NotificationListenerDemoState extends State<NotificationListenerDemo> {
                 return Text("${progressInfo}%");
               }
             ),
-            onPressed: () {
-              if (progress.value >= 1.0) {
-                _scrollController.jumpTo(0);
-              } else {
-                print('progress.value: ${progress.value.toStringAsFixed(2)}');
-              }
-            },
           ),
         );
       }
@@ -106,8 +106,8 @@ class _NotificationListenerDemoState extends State<NotificationListenerDemo> {
       // print("正在滚动：${currentPixel} - ${totalPixel}");
     }
 
-    if (!(n is UserScrollNotification)) {
-      isScrolling.value = !(n is ScrollEndNotification);
+    if (n is! UserScrollNotification) {
+      isScrolling.value = n is! ScrollEndNotification;
       // print("onNotification：${isScrolling.value} - ${n.runtimeType}");
     }
     return false;//为 true，则事件会阻止向上冒泡，不推荐(除非有必要)

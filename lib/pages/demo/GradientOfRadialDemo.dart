@@ -6,7 +6,7 @@ import 'package:tuple/tuple.dart';
 
 class GradientOfRadialDemo extends StatefulWidget {
 
-  GradientOfRadialDemo({ Key? key, this.title}) : super(key: key);
+  const GradientOfRadialDemo({ Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -54,14 +54,14 @@ class _GradientOfRadialDemoState extends State<GradientOfRadialDemo> {
           _buildButton(
             text: "isGreed: ${isGreed.toString()}",
             onPressed: () {
-              this.isGreed = !this.isGreed;
+              isGreed = !isGreed;
               setState(() {});
             },
           ),
           _buildButton(
             text: "isDiagonal: ${isDiagonal.toString()}",
             onPressed: () {
-              this.isDiagonal = !this.isDiagonal;
+              isDiagonal = !isDiagonal;
               setState(() {});
             },
           ),
@@ -77,8 +77,8 @@ class _GradientOfRadialDemoState extends State<GradientOfRadialDemo> {
     return DropdownButton<Alignment>(
       value: _dropValue,
       items: AlignmentExt.allCases.map((e) => DropdownMenuItem(
-        child: Text(e.toString().split('.')[1]),
         value: e,
+        child: Text(e.toString().split('.')[1]),
       ),
       ).toList(),
       onChanged: (Alignment? value) {
@@ -106,13 +106,13 @@ class _GradientOfRadialDemoState extends State<GradientOfRadialDemo> {
   Widget _buildBox({
     required String text,
     required Decoration decoration,
-    double height: 100,
+    double height = 100,
     double? width,
   }) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        this.maxWidth = constraints.maxWidth;
-        this.maxHeight = constraints.maxHeight;
+        maxWidth = constraints.maxWidth;
+        maxHeight = constraints.maxHeight;
         return Container(
           // width: width,
           // height: height,
@@ -134,12 +134,12 @@ class _GradientOfRadialDemoState extends State<GradientOfRadialDemo> {
     ];
 
     _radius = _dropValue.radiusOfRadialGradient(
-      width: this.maxWidth,
-      height: this.maxHeight,
-      isGreed: this.isGreed,
-      isDiagonal: this.isDiagonal
+      width: maxWidth,
+      height: maxHeight,
+      isGreed: isGreed,
+      isDiagonal: isDiagonal
     ) ?? 0.5;
-    print("_dropValue:${_dropValue} _radius:${_radius} maxWidth:${maxWidth} maxHeight:${maxHeight}");
+    print("_dropValue:$_dropValue _radius:$_radius maxWidth:$maxWidth maxHeight:$maxHeight");
     return _buildBox(
       height: 100,
       text: 'RadialGradient',

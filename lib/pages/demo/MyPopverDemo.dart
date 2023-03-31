@@ -13,7 +13,7 @@ import 'package:svgaplayer_flutter/proto/svga.pb.dart';
 
 class MyPopverDemo extends StatefulWidget {
 
-  MyPopverDemo({ Key? key, this.title}) : super(key: key);
+  const MyPopverDemo({ Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -69,7 +69,7 @@ class _MyPopverDemoState extends State<MyPopverDemo> {
       children: List.generate(count, (index) => ElevatedButton(
         onPressed: () {
           final val = _globalKey.currentContext?.origin();
-          print("菜单${index}_${val}");
+          print("菜单${index}_$val");
           btnIdx = index;
           isVisible = !isVisible;
           setState(() {});

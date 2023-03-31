@@ -86,10 +86,10 @@ class HitTest extends StatelessWidget {
           color: Colors.yellow,
           padding: EdgeInsets.symmetric(horizontal: 25),
           child: OutlinedButton(
-            child: Text("OutlinedButton"),
             onPressed: (){
             ddlog("onPressed");
-          },),
+          },
+            child: Text("OutlinedButton"),),
         ),
       ),
     );
@@ -120,7 +120,7 @@ class RenderExpandedHitTestArea extends RenderBox with RenderObjectWithChildMixi
   @override
   void paint(PaintingContext context, Offset offset) {
     if (child?.parentData is BoxParentData) {
-      BoxParentData childParentData = child?.parentData as BoxParentData;
+      var childParentData = child?.parentData as BoxParentData;
       context.paintChild(child!, childParentData.offset + offset);
     }
   }

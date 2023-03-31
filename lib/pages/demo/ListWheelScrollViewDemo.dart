@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 
 class ListWheelScrollViewDemo extends StatefulWidget {
 
-  ListWheelScrollViewDemo({
+  const ListWheelScrollViewDemo({
     Key? key, 
     this.title
   }) : super(key: key);
@@ -32,10 +32,10 @@ class _ListWheelScrollViewDemoState extends State<ListWheelScrollViewDemo> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: ['done',].map((e) => TextButton(
+          onPressed: () => print(e),
           child: Text(e,
             style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () => print(e),)
+          ),)
         ).toList(),
       ),
       body: _buildListWheelScrollView(),

@@ -79,11 +79,11 @@ class TicketPainter extends CustomPainter {
     final leftCutoutStartY = cutoutStartPos;
     final rightCutoutStartY = cutoutStartPos - _cutoutDiameter;
     final dottedLineY = cutoutStartPos - cutoutRadius;
-    double dottedLineStartX = cutoutRadius;
+    var dottedLineStartX = cutoutRadius;
 
     // const double dashWidth = 8.5;
     // const double dashSpace = 4;
-    final double dottedLineEndX = maxWidth - cutoutRadius - dottedSpace;
+    final dottedLineEndX = maxWidth - cutoutRadius - dottedSpace;
 
     final paintBg = Paint()
       ..style = PaintingStyle.fill

@@ -8,7 +8,7 @@ class VisibilityDetectorDemo extends StatefulWidget {
 
   final String? title;
 
-  VisibilityDetectorDemo({ Key? key, this.title}) : super(key: key);
+  const VisibilityDetectorDemo({ Key? key, this.title}) : super(key: key);
 
   
   @override
@@ -55,7 +55,7 @@ class _VisibilityDetectorDemoState extends State<VisibilityDetectorDemo> {
             scrollDirection: Axis.horizontal,
             itemBuilder: (_, j) {
 
-              String key = '$i - $j';
+              var key = '$i - $j';
               return Container(
                 width: 200,
                 // height: 180,
@@ -82,13 +82,13 @@ class _VisibilityDetectorDemoState extends State<VisibilityDetectorDemo> {
   }
 
   Widget _buildPage1() {
-    final imgUrls = R.image.imgUrls;
+    final imgUrls = R.image.urls;
     return ListView.builder(
       itemCount: imgUrls.length,
       itemBuilder: (context, i) {
 
-        String key = '$i';
-        String url = imgUrls[i];
+        var key = '$i';
+        var url = imgUrls[i];
 
         return Container(
           // width: 200,

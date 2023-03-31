@@ -13,7 +13,7 @@ class AfterLayoutDemo extends StatefulWidget {
 
   final String? title;
 
-  AfterLayoutDemo({ Key? key, this.title}) : super(key: key);
+  const AfterLayoutDemo({ Key? key, this.title}) : super(key: key);
 
   
   @override
@@ -22,7 +22,7 @@ class AfterLayoutDemo extends StatefulWidget {
 
 class _AfterLayoutDemoState extends State<AfterLayoutDemo> {
   String _text = 'flutter 实战 ';
-  Size _size = Size.zero;
+  final Size _size = Size.zero;
 
   @override
   Widget build(BuildContext context) {
@@ -34,12 +34,12 @@ class _AfterLayoutDemoState extends State<AfterLayoutDemo> {
           child: Builder(
             builder: (context) {
               return GestureDetector(
+                onTap: () => print('Text1: ${context.size}'),
                 child: Text(
                   'Text1: 点我获取我的大小',
                   textAlign: TextAlign.center,
                   style: TextStyle(color: Colors.blue),
                 ),
-                onTap: () => print('Text1: ${context.size}'),
               );
             },
           ),

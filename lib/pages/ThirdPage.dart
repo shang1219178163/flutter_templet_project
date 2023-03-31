@@ -1,14 +1,17 @@
+
+
 import 'package:flutter/material.dart';
+
 import 'package:easy_refresh/easy_refresh.dart';
+
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
 
 
 class ThirdPage extends StatefulWidget {
 
   final String? title;
-  ThirdPage({ Key? key, this.title}) : super(key: key);
+  const ThirdPage({ Key? key, this.title}) : super(key: key);
 
   @override
   _ThirdPageState createState() => _ThirdPageState();
@@ -18,7 +21,7 @@ class _ThirdPageState extends State<ThirdPage> {
   late EasyRefreshController _controller;
   late ScrollController _scrollController;
 
-  var items = List<String>.generate(20, (i) => 'Item ${i}');
+  var items = List<String>.generate(20, (i) => 'Item $i');
 
   var selectedIndex = 0;
 
@@ -43,15 +46,14 @@ class _ThirdPageState extends State<ThirdPage> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: ['done',].map((e) => TextButton(
+          onPressed: onDone,
           child: Text(e,
             style: TextStyle(color: Colors.white),
-          ),
-          onPressed: onDone,)
+          ),)
         ).toList(),
       ),
       body: EasyRefresh(
         controller: _controller,
-        child: buildListView(),
         onRefresh: () async {
           ddlog("onRefresh");
           await Future.delayed(Duration(seconds: 1), () {
@@ -75,23 +77,23 @@ class _ThirdPageState extends State<ThirdPage> {
             setState(() {});
           });
         },
+        child: buildListView(),
       ),
     );
   }
 
   onDone() {
-    print("onDone");
     _controller.callRefresh();
   }
 
-  Widget buildListView({canDelete: false}) {
+  Widget buildListView({canDelete = false}) {
     return ListView.separated(
       itemCount: items.length,
       itemBuilder: (context, index) {
         final item = items[index];
 
         final child = ListTile(
-          title: Text("$item"),
+          title: Text(item),
           selected: (selectedIndex == index),
           // trailing: selectedIndex == index ? Icon(Icons.check) : null,
           trailing: selectedIndex == index ? Icon(Icons.check) : null,
@@ -105,7 +107,6 @@ class _ThirdPageState extends State<ThirdPage> {
 
         return Dismissible(
           key: Key(item),
-          child: child,
           onDismissed: (direction) {
             setState(() {
               items.removeAt(index);
@@ -122,6 +123,7 @@ class _ThirdPageState extends State<ThirdPage> {
           confirmDismiss: (DismissDirection direction) async {
             return buildConfirmDismiss(context);
           },
+          child: child,
         );
       },
       separatorBuilder: (context, index) {

@@ -17,7 +17,7 @@ import 'package:flutter_templet_project/provider/notifier_demo.dart';
 class SliderDemo extends StatefulWidget {
 
   final String? title;
-  SliderDemo({ Key? key, this.title}) : super(key: key);
+  const SliderDemo({ Key? key, this.title}) : super(key: key);
 
   @override
   _SliderDemoState createState() => _SliderDemoState();
@@ -78,7 +78,7 @@ class _SliderDemoState extends State<SliderDemo> {
                     value: sliderVN.value,
                     min: 0.0,
                     max: 100.0,
-                    label: '${(sliderVN.value/100).toStringAsFixed(2)}',
+                    label: (sliderVN.value/100).toStringAsFixed(2),
 
                     onChanged: (double value) {
                       sliderVN.value = value;
@@ -131,7 +131,7 @@ class _SliderDemoState extends State<SliderDemo> {
         },
       ),
       onChangeEnd: (double value) {
-        print('NNSlider onChangeEnd: ${value}');
+        print('NNSlider onChangeEnd: $value');
       },
       trailingBuilder: (context, value) {
         // final result = (value/100).toStringAsFixed(2);

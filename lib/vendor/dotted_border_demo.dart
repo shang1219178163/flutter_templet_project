@@ -4,7 +4,7 @@ import 'package:flutter_templet_project/basicWidget/section_header.dart';
 
 class DottedBorderDemo extends StatefulWidget {
 
-  DottedBorderDemo({ Key? key, this.title}) : super(key: key);
+  const DottedBorderDemo({ Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -23,10 +23,10 @@ class _DottedBorderDemoState extends State<DottedBorderDemo> {
         appBar: AppBar(
           title: Text(widget.title ?? "$widget"),
           actions: ['done',].map((e) => TextButton(
+            onPressed: () => print(e),
             child: Text(e,
               style: TextStyle(color: Colors.white),
-            ),
-            onPressed: () => print(e),)
+            ),)
           ).toList(),
         ),
       body: Center(
@@ -35,8 +35,8 @@ class _DottedBorderDemoState extends State<DottedBorderDemo> {
     );
   }
 
-  GlobalKey _globalKey = GlobalKey();
-  GlobalKey _globalKey1 = GlobalKey();
+  final GlobalKey _globalKey = GlobalKey();
+  final GlobalKey _globalKey1 = GlobalKey();
 
   buildListView() {
     return ListView(

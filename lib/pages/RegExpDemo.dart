@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class RegExpDemo extends StatefulWidget {
 
-  RegExpDemo({ Key? key, this.title}) : super(key: key);
+  const RegExpDemo({ Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -27,10 +27,10 @@ class _RegExpDemoState extends State<RegExpDemo> {
         appBar: AppBar(
           title: Text(widget.title ?? "$widget"),
           actions: ['done',].map((e) => TextButton(
+            onPressed: onPressed,
             child: Text(e,
               style: TextStyle(color: Colors.white),
-            ),
-            onPressed: onPressed,)
+            ),)
           ).toList(),
         ),
         body: _buildBody(),
@@ -53,15 +53,15 @@ class _RegExpDemoState extends State<RegExpDemo> {
   }
 
   testRegExpMatch(){
-    final str = "streetAddressLine2";
+    const str = "streetAddressLine2";
     final reg = RegExp('[A-Z]');
     final matchs = reg.allMatches(str);
     for (final Match m in matchs) {
-      String match = m[0]!;
+      var match = m[0]!;
       print("m: ${m.description}");
     }
     final seperators = matchs.map((e) => e[0] ?? "").toList();
-    print("seperators: ${seperators}");
+    print("seperators: $seperators");
   }
 
 }
@@ -72,11 +72,11 @@ extension MatchExt on Match{
   String get description {
     return """
    
-      start ${this.start}
-      end ${this.end}
-      input ${this.input}
-      pattern ${this.pattern}
-      groupCount ${this.groupCount}
+      start ${start}
+      end ${end}
+      input ${input}
+      pattern ${pattern}
+      groupCount ${groupCount}
       """;
   }
 }

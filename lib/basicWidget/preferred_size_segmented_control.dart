@@ -33,10 +33,10 @@ class PreferredSizeSegmentedControl extends StatelessWidget implements Preferred
   Widget build(BuildContext context) {
 
     final map = <int, Widget>{};
-    for (int i = 0; i < titles.length; i++) {
+    for (var i = 0; i < titles.length; i++) {
       map[i] = Padding(
           padding: EdgeInsets.all(8.0),
-          child: Text('${titles[i]}', style: TextStyle(fontSize: 15))
+          child: Text(titles[i], style: TextStyle(fontSize: 15))
       );
     }
 
@@ -62,7 +62,7 @@ class PreferredSizeSegmentedControl extends StatelessWidget implements Preferred
           ],
         ),
       ),
-    );;
+    );
   }
 }
 

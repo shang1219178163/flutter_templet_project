@@ -152,8 +152,8 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
         child: ListView.separated(
           scrollDirection: Axis.horizontal,
           itemBuilder: (BuildContext context, int index) {
-            Alignment e = alignments[index];
-            String name = e.toString().split('.')[1];
+            var e = alignments[index];
+            var name = e.toString().split('.')[1];
 
             return Container(
               padding: EdgeInsets.symmetric(horizontal: 5),
@@ -163,7 +163,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
                 onPressed: () {
                   alignment = e;
                   context.showSnackBar(SnackBar(content: Text(name)),);
-                  print("alignment:${alignment} ${alignment.x} ${alignment.y}");
+                  print("alignment:$alignment ${alignment.x} ${alignment.y}");
                 },
                 child: Text(name, style: TextStyle(color: Colors.white),)
               ),
@@ -304,11 +304,11 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
                   width: 250,
                   color: Colors.white,
                   child: ChioceWrap(
-                    children: titles.map((e) => Text(e)).toList(),
                     indexs: [0],
                     callback: (indexs) {
                       ddlog(indexs);
                     },
+                    children: titles.map((e) => Text(e)).toList(),
                   )
                 )
               );
@@ -350,12 +350,12 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
               width: 100,
               color: Colors.green,
               child: TextButton(
-                child: Text("Button"),
                 onPressed: () {
                   ddlog("Button");
                   ddlog(widget);
                   ddlog(this);
                 },
+                child: Text("Button"),
               ),
             ),
             onPop: () => print('Popover was popped!'),
@@ -370,7 +370,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
 
       case 13:
         {
-          Size size = Size(120, 120);
+          var size = Size(120, 120);
           Navigator.push(
             context,
             NNPopupRoute(
@@ -396,8 +396,8 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
         break;
       case 14:
         {
-          Size screenSize = MediaQuery.of(context).size;
-          Size size = Size(screenSize.width - 40, 300);
+          var screenSize = MediaQuery.of(context).size;
+          var size = Size(screenSize.width - 40, 300);
           Navigator.push(context,
             NNPopupRoute(
               alignment: alignment,
@@ -469,8 +469,8 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
         break;
       case 16:
         {
-          double spacingVer = 8;
-          double spacingHor = 15;
+          var spacingVer = 8;
+          var spacingHor = 15;
 
           Navigator.push(
             context,
@@ -634,11 +634,11 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
       title: Text("ChioceWrap ${isMutiple ? '多选' : '单选'}"),
       content: ChioceWrap(
         isMutiple: isMutiple,
-        children: titles.map((e) => Text(e)).toList(),
         indexs:[0],
         callback: (indexs) {
           ddlog(indexs);
         },
+        children: titles.map((e) => Text(e)).toList(),
       ),
       actions: ["确定",].map((e) => _buildButton(e, () => Navigator.pop(context),)).toList(),
     ).toShowCupertinoDialog(context: context);
@@ -648,8 +648,8 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
     // Size screenSize = MediaQuery.of(context).size;
     // double width = screenSize.width - spacingHor * 2;
 
-    double spacingVer = 8;
-    double spacingHor = 15;
+    var spacingVer = 8.0;
+    var spacingHor = 15.0;
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -710,9 +710,9 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
   }
 
   Widget buildNoticationView(BuildContext context) {
-    Size screenSize = MediaQuery.of(context).size;
-    double spacingVer = 8;
-    double spacingHor = 15;
+    var screenSize = MediaQuery.of(context).size;
+    var spacingVer = 8.0;
+    var spacingHor = 15.0;
 
     return GestureDetector(
       onTap: () {
@@ -802,7 +802,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
       '《隐私政策》': 'https://flutter.dev',
     };
 
-    String text = """
+    var text = """
 亲爱的xxxx用户，感谢您信任并使用xxxxAPP！
 xxxx十分重视用户权利及隐私政策并严格按照相关法律法规的要求，对《用户协议》和《隐私政策》进行了更新,特向您说明如下：
 1.为向您提供更优质的服务，我们会收集、使用必要的信息，并会采取业界先进的安全措施保护您的信息安全；
@@ -871,7 +871,7 @@ class TestFlowDelegate extends FlowDelegate {
     var x = margin.left;
     var y = margin.top;
     //计算每一个子widget的位置
-    for (int i = 0; i < context.childCount; i++) {
+    for (var i = 0; i < context.childCount; i++) {
       var w = context.getChildSize(i)!.width + x + margin.right;
       if (w < context.size.width) {
         context.paintChild(i, transform: Matrix4.translationValues(x, y, 0.0));

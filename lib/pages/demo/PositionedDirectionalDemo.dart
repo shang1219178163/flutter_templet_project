@@ -12,7 +12,7 @@ class PositionedDirectionalDemo extends StatefulWidget {
 
   final String? title;
 
-  PositionedDirectionalDemo({ Key? key, this.title}) : super(key: key);
+  const PositionedDirectionalDemo({ Key? key, this.title}) : super(key: key);
 
   
   @override

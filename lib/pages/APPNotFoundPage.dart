@@ -44,10 +44,10 @@ class APPNotFoundPage extends StatelessWidget {
             SizedBox(height: 10),
             Text('哎呀, 你的页面跑路了!', style: TextStyle(fontSize: 17.0, color: Colors.black)),
             TextButton(
-              child: Text('立即捉它回家!', style: TextStyle(fontSize: 17.0)),
               onPressed: (){
                 ddlog('哎呀, 你的页面跑路了!');
               },
+              child: Text('立即捉它回家!', style: TextStyle(fontSize: 17.0)),
             ),
           ],
         ),

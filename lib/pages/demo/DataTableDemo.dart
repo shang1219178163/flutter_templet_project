@@ -16,7 +16,7 @@ import 'package:tuple/tuple.dart';
 class DataTableDemo extends StatefulWidget {
   final String? title;
 
-  DataTableDemo({Key? key, this.title}) : super(key: key);
+  const DataTableDemo({Key? key, this.title}) : super(key: key);
 
   @override
   _DataTableDemoState createState() => _DataTableDemoState();
@@ -126,9 +126,9 @@ class _DataTableDemoState extends State<DataTableDemo> {
             )).toList(),
             rows: models.map((e) => DataRow(
               cells: [
-                DataCell(Text('${e.name}')),
+                DataCell(Text(e.name)),
                 DataCell(Text('${e.age}')),
-                DataCell(Text('${e.sex}')),
+                DataCell(Text(e.sex)),
                 DataCell(Text('${e.birdthYear}')),
                 DataCell(Text('${e.birdthMonth}')),
               ],
@@ -213,6 +213,7 @@ class PaginatedDataTableDemo extends StatelessWidget {
     Tuple2('出生月份', "birdthMonth", ),
   ];
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -267,9 +268,9 @@ class _DataSource extends DataTableSource {
         }
       },
       cells: [
-        DataCell(Text('${e.name}')),
+        DataCell(Text(e.name)),
         DataCell(Text('${e.age}')),
-        DataCell(Text('${e.sex}')),
+        DataCell(Text(e.sex)),
         DataCell(Text('${e.birdthYear}')),
         DataCell(Text('${e.birdthMonth}')),
       ],

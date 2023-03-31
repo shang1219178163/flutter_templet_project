@@ -14,7 +14,7 @@ import 'package:flutter_templet_project/extension/ddlog.dart';
 class ProgressHudDemo extends StatefulWidget {
   final String? title;
 
-  ProgressHudDemo({Key? key, this.title}) : super(key: key);
+  const ProgressHudDemo({Key? key, this.title}) : super(key: key);
 
   @override
   _ProgressHudDemoState createState() => _ProgressHudDemoState();
@@ -38,10 +38,10 @@ class _ProgressHudDemoState extends State<ProgressHudDemo> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: ['done',].map((e) => TextButton(
-          child: Text(e,),
           onPressed: () {
             setState(() {});
-          },)
+          },
+          child: Text(e,),)
         ).toList(),
       ),
       body: buildBody(),

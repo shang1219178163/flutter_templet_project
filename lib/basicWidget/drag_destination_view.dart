@@ -12,7 +12,7 @@ import 'package:cross_file/cross_file.dart';
 
 class DragDestinationView extends StatefulWidget {
 
-  DragDestinationView({ Key? key,}) : super(key: key);
+  const DragDestinationView({ Key? key,}) : super(key: key);
 
   @override
   _DragDestinationViewState createState() => _DragDestinationViewState();
@@ -88,7 +88,7 @@ class _DragDestinationViewState extends State<DragDestinationView> {
           if (files.isEmpty) return;
           // 读取第一个文件
           file = files.first;
-          print("file: ${file?.path}_${file?.name}");
+          debugPrint("file: ${file?.path}_${file?.name}");
 
           setState(() {});
         },
@@ -107,11 +107,11 @@ class _DragDestinationViewState extends State<DragDestinationView> {
   }
 
   _buildDraggingShow(bool existFile) {
-    double iconSize = 75;
-    double textWidth = 100;
+    var iconSize = 75.0;
+    var textWidth = 100.0;
 
-    Widget icon = existFile ? Image.asset('images/icon_json_file.png', width: iconSize, height: iconSize) : Icon(Icons.undo, size: iconSize,);
-    String text = existFile ? file?.name ?? "" : '拖拽文件';
+    var icon = existFile ? Image.asset('images/icon_json_file.png', width: iconSize, height: iconSize) : Icon(Icons.undo, size: iconSize,);
+    var text = existFile ? file?.name ?? "" : '拖拽文件';
 
     return Container(
       padding: EdgeInsets.all(8),

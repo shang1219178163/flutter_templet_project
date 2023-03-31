@@ -59,39 +59,42 @@ extension StringExt on String{
 
   ///首字母大写
   String toCapitalize() {
-    if (this.length == 0) return this;
-    return "${this.substring(0, 1).toUpperCase()}${this.substring(1)}";
+    if (length == 0) return this;
+    return "${substring(0, 1).toUpperCase()}${substring(1)}";
   }
 
   ///驼峰命名法, ["_", "-"].contains(separator)
   String camlCase(String separator, {bool isUpper = true}) {
     assert(["_", "-"].contains(separator));
-    if (!this.contains(separator)) return this;
-    return this.split(separator).map((e) {
+    if (!contains(separator)) {
+      return this;
+    }
+
+    return split(separator).map((e) {
       final index = e.indexOf(this);
       return index == 0 && isUpper == false ? e : e.toCapitalize();
     }).join("");
   }
   ///反驼峰命名法
   String uncamlCase(String separator) {
-    RegExp reg = new RegExp(r'[A-Z]');
+    var reg = RegExp(r'[A-Z]');
     if (!reg.hasMatch(separator)) {
       return this;
     }
-    return this.split("").map((e) {
-      final index = this.indexOf(e);
+    return split("").map((e) {
+      final index = indexOf(e);
       // ddlog([e, index, reg.hasMatch(e) && index != 0]);
-      return reg.hasMatch(e) && index != 0 ? "${separator}${e.toLowerCase()}" : e.toLowerCase();
+      return reg.hasMatch(e) && index != 0 ? "$separator${e.toLowerCase()}" : e.toLowerCase();
     }).join("");
   }
 
   /// 转为 int
   int? toInt() {
-    RegExp regInt = new RegExp(r"[0-9]");
-    RegExp regIntNon = new RegExp(r"[^0-9]");
+    final regInt = RegExp(r"[0-9]");
+    final regIntNon = RegExp(r"[^0-9]");
 
-    if (this.contains(regInt)) {
-      final result = this.replaceAll(regIntNon, '');
+    if (contains(regInt)) {
+      final result = replaceAll(regIntNon, '');
       return int.tryParse(result);
     }
     return int.tryParse(this);
@@ -99,7 +102,7 @@ extension StringExt on String{
 
   ///解析
   static parseResponse(dynamic data) {
-    String result = "";
+    var result = "";
     if (data is Map) {
       result += json.encode(data);
     } else if (data is List) {
@@ -114,10 +117,10 @@ extension StringExt on String{
 
   /// 处理字符串中包含数字排序异常的问题
   int compareCustom(String b) {
-    String a = this;
+    var a = this;
 
-    RegExp regInt = new RegExp(r"[0-9]");
-    RegExp regIntNon = new RegExp(r"[^0-9]");
+    var regInt = RegExp(r"[0-9]");
+    var regIntNon = RegExp(r"[^0-9]");
 
     if (a.contains(regInt) && b.contains(regInt)) {
       final one = int.parse(a.replaceAll(regIntNon, ''));
@@ -175,22 +178,22 @@ extension StringExt on String{
   /// 以 pattern 分割字符串为3元素数组
   List<String> seperator(String pattern) {
     final matchedText = pattern.blurred();
-    if (matchedText == null || !this.contains(matchedText)) {
+    if (matchedText == null || !contains(matchedText)) {
       return [this];
     }
 
-    int index = this.indexOf(matchedText);
-    int endIndex = index + matchedText.length;
+    var index = indexOf(matchedText);
+    var endIndex = index + matchedText.length;
 
-    final leftStr = this.substring(0, index);
-    final sub = this.substring(index, endIndex);
-    final rightStr = this.substring(endIndex);
+    final leftStr = substring(0, index);
+    final sub = substring(index, endIndex);
+    final rightStr = substring(endIndex);
     return [leftStr, sub, rightStr];
   }
 
   /// 获取掺杂高亮的富文本
   InlineSpan formSpan(String pattern, {TextStyle? nomalStyle, TextStyle? highlightStyle}) {
-    List<String> strs = this.seperator(pattern);
+    var strs = seperator(pattern);
     if (strs.length <= 1) {
       final items = strs.map((e) => TextSpan(
         text: e,
@@ -199,7 +202,7 @@ extension StringExt on String{
       return TextSpan(children: items);
     }
 
-    List<TextSpan> spans = strs.map((e) => TextSpan(
+    var spans = strs.map((e) => TextSpan(
       text: e,
       style: strs.indexOf(e) == 1 ? highlightStyle : nomalStyle
     )).toList();
@@ -211,10 +214,10 @@ extension StringExt on String{
     int? cacheWidth,
     int? cacheHeight,
   }) {
-    String url = this;
-    bool isOSS = (url.indexOf('x-oss-process=image/resize') > 0);
+    var url = this;
+    var isOSS = (url.indexOf('x-oss-process=image/resize') > 0);
 
-    bool specialImg = (url.indexOf('.gif') >= 0) && cacheWidth != null;
+    var specialImg = (url.contains('.gif')) && cacheWidth != null;
     if (specialImg && !isOSS) {
       return url;
     }

@@ -3,7 +3,7 @@ import 'package:flutter_templet_project/extension/color_ext.dart';
 
 class VisibilityDemo extends StatefulWidget {
 
-  VisibilityDemo({ Key? key, this.title}) : super(key: key);
+  const VisibilityDemo({ Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -23,10 +23,10 @@ class _VisibilityDemoState extends State<VisibilityDemo> {
         appBar: AppBar(
           title: Text(widget.title ?? "$widget"),
           actions: ['done',].map((e) => TextButton(
+            onPressed: onDone,
             child: Text(e,
               style: TextStyle(color: Colors.white),
-            ),
-            onPressed: onDone,)
+            ),)
           ).toList(),
         ),
         body: _buildBody()

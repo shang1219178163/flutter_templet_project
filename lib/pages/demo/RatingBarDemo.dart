@@ -7,7 +7,7 @@ class RatingBarDemo extends StatefulWidget {
 
   final String? title;
 
-  RatingBarDemo({ Key? key, this.title}) : super(key: key);
+  const RatingBarDemo({ Key? key, this.title}) : super(key: key);
 
   
   @override
@@ -76,7 +76,7 @@ class _RatingBarDemoState extends State<RatingBarDemo> {
     return RatingBar.builder(
       initialRating: 3,
       itemCount: 5,
-      itemBuilder: (context, index) => itemMap['${index}'],
+      itemBuilder: (context, index) => itemMap['$index'],
       onRatingUpdate: (rating) {
         print(rating);
       },

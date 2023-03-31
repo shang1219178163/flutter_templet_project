@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 ///自定义轮播
 class CustomSwipper extends StatefulWidget {
 
-  CustomSwipper({
+  const CustomSwipper({
     Key? key,
     required this.images,
     required this.onTap,
@@ -116,7 +116,7 @@ class _CustomSwipperState extends State<CustomSwipper> {
               _curIndex = length;
               _changePage();
             }
-            print("_curIndex:${_curIndex}");
+            print("_curIndex:$_curIndex");
           });
         },
         itemBuilder: (context, index) {
@@ -126,7 +126,7 @@ class _CustomSwipperState extends State<CustomSwipper> {
             },
             onTap: () {
               final currIdx = index % length;
-              print('onTap 当前 page 为 ${index},${length},${currIdx}');
+              print('onTap 当前 page 为 $index,$length,$currIdx');
 
               widget.onTap(currIdx);
             },
@@ -152,8 +152,7 @@ class _CustomSwipperState extends State<CustomSwipper> {
 
   /// 初始化定时任务
   _initTimer() {
-    if (_timer == null) {
-      _timer = Timer.periodic(widget.duration ?? Duration(seconds: 3), (t) {
+    _timer ??= Timer.periodic(widget.duration ?? Duration(seconds: 3), (t) {
         _curIndex++;
         _pageController.animateToPage(
           _curIndex,
@@ -161,12 +160,11 @@ class _CustomSwipperState extends State<CustomSwipper> {
           curve: Curves.linear,
         );
       });
-    }
   }
 
   /// 切换页面，并刷新小圆点
   _changePage() {
-    print("_changePage:${_curIndex}");
+    print("_changePage:$_curIndex");
 
     Timer(Duration(milliseconds: 350), () {
       _pageController.jumpToPage(_curIndex);

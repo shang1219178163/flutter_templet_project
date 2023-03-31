@@ -6,21 +6,14 @@
 //  Copyright © 10/26/21 shang. All rights reserved.
 //
 
-
-
-import 'dart:convert';
-import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
-import 'package:cookie_jar/cookie_jar.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/network/RequestClient.dart';
 
 import 'package:get_storage/get_storage.dart';
 
-import 'fileManager.dart';
-
+import 'package:flutter_templet_project/network/FileManager.dart';
 
 // enum RequestMethod { GET, POST, PUT, DELETE, DOWNLOAD }
 
@@ -48,11 +41,10 @@ class HttpManager{
         return handler.next(response);
       },
       onError: (DioError e, handler) {
-        print("错误之前");
         return handler.next(e);
       });
 
-    Dio dio = Dio();
+    var dio = Dio();
     dio.interceptors.add(interceptorsWrapper);
     return dio;
   }
@@ -78,14 +70,14 @@ class HttpManager{
         // baseUrl: api.requestURI.contains(BASE_URL) ? api.requestURI : BASE_URL + api.requestURI,
         headers: api.requestHeaders,
         queryParameters: api.requestParams,
-        connectTimeout: Duration(milliseconds: 20000),
-        receiveTimeout: Duration(milliseconds: 5000)
+        connectTimeout: const Duration(milliseconds: 20000),
+        receiveTimeout: const Duration(milliseconds: 5000)
     );
 
-    FileManager.getDocumentsDirPath().then((value) {
-      var cookieJar = PersistCookieJar(storage: FileStorage(value + "/.cookies/"));
-      _dio.interceptors.add(CookieManager(cookieJar));
-    });
+    // FileManager.getDocumentsDirPath().then((value) {
+    //   var cookieJar = PersistCookieJar(storage: FileStorage("$value/.cookies/"));
+    //   _dio.interceptors.add(CookieManager(cookieJar));
+    // });
 
     // final interceptorsWrapper = InterceptorsWrapper(
     // onRequest: (RequestOptions options, handler) {
@@ -166,8 +158,8 @@ abstract class BaseHttpRequestAPI {
     var timestamp = DateTime.now().millisecondsSinceEpoch;
     return {
       'Content-Type': 'application/json;charset=utf-8',
-      'timestamp': '${timestamp}',
-      'accountToken': '${""}',
+      'timestamp': '$timestamp',
+      'accountToken': "",
       // 'useid': id,
       // 'appVersion': '6.3.0',
     };
@@ -184,8 +176,8 @@ abstract class BaseHttpRequestAPI {
         baseUrl: requestURI,
         headers: requestHeaders,
         queryParameters: requestParams,
-        connectTimeout: Duration(milliseconds: 20000),
-        receiveTimeout: Duration(milliseconds: 5000)
+        connectTimeout: const Duration(milliseconds: 20000),
+        receiveTimeout: const Duration(milliseconds: 5000)
     );
 
     return options;

@@ -65,6 +65,7 @@ class TimelineComponentState extends State<TimelineComponent> with SingleTickerP
   @override
   Widget build(BuildContext context) {
     return Container(
+      clipBehavior: Clip.none,
       child: ListView.builder(
         ///ListView嵌套使用时shrinkWrap必须设置为true 否则页面白屏
         shrinkWrap: true,
@@ -73,8 +74,8 @@ class TimelineComponentState extends State<TimelineComponent> with SingleTickerP
         itemCount: widget.timelineList.length,
         itemBuilder: (_, index) {
           return TimelineElement(
-            lineColor: widget.lineColor == null ? Theme.of(context).accentColor:widget.lineColor,
-            backgroundColor: widget.backgroundColor == null ? Colors.white:widget.backgroundColor,
+            lineColor: widget.lineColor,
+            backgroundColor: widget.backgroundColor,
             model: widget.timelineList[index],
             firstElement: index == 0,
             lastElement: widget.timelineList.length == index+1,

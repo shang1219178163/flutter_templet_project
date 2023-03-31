@@ -31,7 +31,7 @@ class TabBarPageViewDemo extends StatefulWidget {
 
   final String? title;
 
-  TabBarPageViewDemo({ Key? key, this.title}) : super(key: key);
+  const TabBarPageViewDemo({ Key? key, this.title}) : super(key: key);
 
   
   @override
@@ -39,9 +39,9 @@ class TabBarPageViewDemo extends StatefulWidget {
 }
 
 class _TabBarPageViewDemoState extends State<TabBarPageViewDemo> with SingleTickerProviderStateMixin {
-  late TabController _tabController = TabController(length: items.length, vsync: this);
+  late final TabController _tabController = TabController(length: items.length, vsync: this);
 
-  late PageController _pageController = PageController(initialPage: 0, keepPage: true);
+  late final PageController _pageController = PageController(initialPage: 0, keepPage: true);
 
   var isTabBar = ValueNotifier(false);
 
@@ -78,10 +78,10 @@ class _TabBarPageViewDemoState extends State<TabBarPageViewDemo> with SingleTick
       bottomNavigationBar: !isTabBar.value ? null : _buildBottomNavigationBar(),
       floatingActionButton: FloatingActionButton(
         tooltip: 'Increment',
-        child: Icon(Icons.add),
         onPressed: () {
           ddlog(["a", 18, null, true, ["1", "2", "3"], {"a": "aa", "b": "bb"}]);
         },
+        child: Icon(Icons.add),
       ),
       // persistentFooterButtons: persistentFooterButtons(),
     );
@@ -91,7 +91,7 @@ class _TabBarPageViewDemoState extends State<TabBarPageViewDemo> with SingleTick
     return PreferredSize(
       preferredSize: Size.fromHeight(48),
       child: Theme(
-        data: Theme.of(context).copyWith(accentColor: Colors.white),
+        data: Theme.of(context).copyWith(colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.white)),
         child: Container(
           height: 40,
           alignment: Alignment.center, //圆点居中
@@ -118,7 +118,7 @@ class _TabBarPageViewDemoState extends State<TabBarPageViewDemo> with SingleTick
   }
   Material _buildBottomNavigationBar() {
     final textColor = Theme.of(context).colorScheme.secondary;
-    final bgColor = Colors.white;
+    const bgColor = Colors.white;
 
     // final bgColor = Theme.of(context).colorScheme.secondary;
     // final textColor = Colors.white;
@@ -155,13 +155,13 @@ class _TabBarPageViewDemoState extends State<TabBarPageViewDemo> with SingleTick
   Widget _buildPageView() {
     return PageView(
       controller: _pageController,
-      // children: _pages.map((e) => Tab(text: e.item1)).toList(),
-      children: items.map((e) => e.item2).toList(),
       onPageChanged: (index) {
         setState(() {
           _tabController.animateTo(index);
         });
       },
+      // children: _pages.map((e) => Tab(text: e.item1)).toList(),
+      children: items.map((e) => e.item2).toList(),
     );
   }
 
@@ -169,10 +169,10 @@ class _TabBarPageViewDemoState extends State<TabBarPageViewDemo> with SingleTick
   List<Widget> persistentFooterButtons() {
     return [
       TextButton(
+        onPressed: () => setState(() => print('button1 tapped')),
         child: Text(
           'Button 1',
         ),
-        onPressed: () => setState(() => print('button1 tapped')),
       ),
       IconButton(
         icon: Icon(Icons.map),

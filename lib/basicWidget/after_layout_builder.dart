@@ -14,7 +14,7 @@ typedef AfterLayoutWidgetBuilder = Widget Function(BuildContext context, Widget?
 /// 获取布局尺寸
 class AfterLayoutBuilder extends StatefulWidget {
 
-  AfterLayoutBuilder({
+  const AfterLayoutBuilder({
     Key? key,
     this.child,
     required this.builder,

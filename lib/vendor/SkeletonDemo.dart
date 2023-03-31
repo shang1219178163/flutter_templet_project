@@ -7,7 +7,7 @@ class SkeletonDemo extends StatefulWidget {
 
   final String? title;
 
-  SkeletonDemo({ Key? key, this.title}) : super(key: key);
+  const SkeletonDemo({ Key? key, this.title}) : super(key: key);
 
   
   @override
@@ -31,11 +31,6 @@ class _SkeletonDemoState extends State<SkeletonDemo> {
   
   _buildSkeleton(Widget? child) {
     return Shimmer(
-      // This is the ONLY required parameter
-      child: child ?? Container(
-        color: Colors.lightBlue,
-        // marigin: EdgeInsets.only(top: 8),
-      ),
       // This is the default value
       duration: Duration(seconds: 1),
       // This is NOT the default value. Default value: Duration(seconds: 0)
@@ -48,11 +43,16 @@ class _SkeletonDemoState extends State<SkeletonDemo> {
       enabled: true,
       // This is the default value
       direction: ShimmerDirection.fromLTRB(),
+      // This is the ONLY required parameter
+      child: child ?? Container(
+        color: Colors.lightBlue,
+        // marigin: EdgeInsets.only(top: 8),
+      ),
     );
   }
 
   _buildSkeletonList() {
-    final List<String> _items = <String>[
+    final _items = <String>[
       'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
     ];
 
@@ -63,7 +63,7 @@ class _SkeletonDemoState extends State<SkeletonDemo> {
         // padding: kMaterialListPadding,
         itemCount: _items.length,
         itemBuilder: (BuildContext context, int index) {
-          final String item = _items[index];
+          final item = _items[index];
 
           final screenSize = MediaQuery.of(context).size;
           // print('screenSize:${screenSize}');
@@ -105,7 +105,7 @@ class _SkeletonDemoState extends State<SkeletonDemo> {
   }
 
   _buildSkeletonListOne() {
-    final List<String> _items = <String>[
+    final _items = <String>[
       'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',
     ];
     return Scrollbar(
@@ -113,12 +113,12 @@ class _SkeletonDemoState extends State<SkeletonDemo> {
         padding: kMaterialListPadding,
         itemCount: _items.length,
         itemBuilder: (BuildContext context, int index) {
-          final String item = _items[index];
+          final item = _items[index];
           return ListTile(
             isThreeLine: true,
             leading: CircleAvatar(
-                child: Text(item),
-                backgroundColor: Color(0xFFf3f3f3)
+              backgroundColor: Color(0xFFf3f3f3),
+              child: Text(item),
             ),
             title: Text('This item represents $item.'),
             subtitle: const Text('Even more additional list item information appears on line three.'),

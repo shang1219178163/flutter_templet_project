@@ -14,7 +14,7 @@ class NavigationToolbarDemo extends StatefulWidget {
 
   final String? title;
 
-  NavigationToolbarDemo({ Key? key, this.title}) : super(key: key);
+  const NavigationToolbarDemo({ Key? key, this.title}) : super(key: key);
 
   
   @override

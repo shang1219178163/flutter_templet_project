@@ -4,7 +4,7 @@ class ModalBarrierDemo extends StatefulWidget {
 
   final String? title;
 
-  ModalBarrierDemo({ Key? key, this.title}) : super(key: key);
+  const ModalBarrierDemo({ Key? key, this.title}) : super(key: key);
 
   
   @override

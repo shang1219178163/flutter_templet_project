@@ -18,7 +18,7 @@ class LogisticsTimeLine extends StatefulWidget {
 
   final String? title;
 
-  LogisticsTimeLine({ Key? key, this.title}) : super(key: key);
+  const LogisticsTimeLine({ Key? key, this.title}) : super(key: key);
 
 
   @override
@@ -29,11 +29,11 @@ class _LogisticsTimeLineState extends State<LogisticsTimeLine> {
 
   int groupValue = 0;
 
-  late TimelineThemeData _theme = TimelineThemeData(
+  late final TimelineThemeData _theme = TimelineThemeData(
       nodePosition: 0.20,
   );
 
-  late TimelineThemeData _theme1 = TimelineThemeData(
+  late final TimelineThemeData _theme1 = TimelineThemeData(
       nodePosition: 0,
       connectorTheme: ConnectorThemeData(color: Colors.red),
       indicatorTheme: IndicatorThemeData(color: Colors.red, size: 10));
@@ -51,7 +51,7 @@ class _LogisticsTimeLineState extends State<LogisticsTimeLine> {
   }
 
   PreferredSizeWidget buildPreferredSize() {
-    final titles = List.generate(3, (index) => '样式${index}',).toList();
+    final titles = List.generate(3, (index) => '样式$index',).toList();
     // ddlog(titles);
     return PreferredSizeSegmentedControl(
       titles: titles,
@@ -110,7 +110,7 @@ class _LogisticsTimeLineState extends State<LogisticsTimeLine> {
                 );
               },
               oppositeContentsBuilder: (context, index) {
-                PlainDataModel model = PlainDataModel.fromJson(listData[index]);
+                var model = PlainDataModel.fromJson(listData[index]);
                 return Container(
                   // color: Colors.yellow,
                   child: Padding(
@@ -120,7 +120,7 @@ class _LogisticsTimeLineState extends State<LogisticsTimeLine> {
                 );
               },
               contentsBuilder: (context, index) {
-                PlainDataModel model = PlainDataModel.fromJson(listData[index]);
+                var model = PlainDataModel.fromJson(listData[index]);
                 return Card(
                   // color: Colors.yellow,
                   // elevation: 0,
@@ -131,7 +131,7 @@ class _LogisticsTimeLineState extends State<LogisticsTimeLine> {
                       children: [
                         // Text('${model.title}'),
                         Text('${model.day} ${model.time}'),
-                        Text('${model.description}'),
+                        Text(model.description),
                       ],
                     ),
                   ),
@@ -162,7 +162,7 @@ class _LogisticsTimeLineState extends State<LogisticsTimeLine> {
               firstConnectorStyle: ConnectorStyle.transparent,
               lastConnectorStyle: ConnectorStyle.transparent,
               oppositeContentsBuilder: (context, index) {
-                PlainDataModel model = PlainDataModel.fromJson(listData[index]);
+                var model = PlainDataModel.fromJson(listData[index]);
                 return Container(
                   // color: Colors.yellow,
                   child: Padding(
@@ -172,7 +172,7 @@ class _LogisticsTimeLineState extends State<LogisticsTimeLine> {
                 );
               },
               contentsBuilder: (context, index) {
-                PlainDataModel model = PlainDataModel.fromJson(listData[index]);
+                var model = PlainDataModel.fromJson(listData[index]);
                 return Card(
                   // color: Colors.yellow,
                   child: Padding(
@@ -182,7 +182,7 @@ class _LogisticsTimeLineState extends State<LogisticsTimeLine> {
                       children: [
                         // Text('${model.title}'),
                         Text('${model.day} ${model.time}'),
-                        Text('${model.description}'),
+                        Text(model.description),
                       ],
                     ),
                   ),
@@ -234,7 +234,7 @@ class _LogisticsTimeLineState extends State<LogisticsTimeLine> {
                 );
               },
               oppositeContentsBuilder: (context, index) {
-                PlainDataModel model = PlainDataModel.fromJson(listData[index]);
+                var model = PlainDataModel.fromJson(listData[index]);
                 return Container(
                   // color: Colors.yellow,
                   child: Padding(
@@ -244,7 +244,7 @@ class _LogisticsTimeLineState extends State<LogisticsTimeLine> {
                 );
               },
               contentsBuilder: (context, index) {
-                PlainDataModel model = PlainDataModel.fromJson(listData[index]);
+                var model = PlainDataModel.fromJson(listData[index]);
                 return Card(
                   // color: Colors.yellow,
                   elevation: 0,
@@ -273,7 +273,7 @@ class _LogisticsTimeLineState extends State<LogisticsTimeLine> {
                             ),
                           ],
                         ),
-                        Text('${model.description}'),
+                        Text(model.description),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -335,20 +335,20 @@ class PlainDataModel {
     if (json is! Map) {
       return;
     }
-    this.id = json['id'] ?? "-";
-    this.title = json['title'] ?? "-";
-    this.description = json['description'] ?? "-";
-    this.day = json['day'] ?? "-";
-    this.time = json['time'] ?? "-";
+    id = json['id'] ?? "-";
+    title = json['title'] ?? "-";
+    description = json['description'] ?? "-";
+    day = json['day'] ?? "-";
+    time = json['time'] ?? "-";
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['title'] = this.title;
-    data['description'] = this.description;
-    data['day'] = this.day;
-    data['time'] = this.time;
+    final data = Map<String, dynamic>();
+    data['id'] = id;
+    data['title'] = title;
+    data['description'] = description;
+    data['day'] = day;
+    data['time'] = time;
     return data;
   }
 }

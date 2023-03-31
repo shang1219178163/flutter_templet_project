@@ -64,7 +64,7 @@ class ListViewSegmentControl extends StatefulWidget {
 
 class _ListViewSegmentControlState extends State<ListViewSegmentControl> {
 
-  late ScrollController _scrollController = ScrollController();
+  late final ScrollController _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -105,7 +105,7 @@ class _ListViewSegmentControlState extends State<ListViewSegmentControl> {
                 return;
               }
               final offsetX = widget.selectedIndex*(widget.itemWidth + widget.itemPadding.horizontal) - widget.itemWidth;
-              _scrollController.animateTo(offsetX, duration: new Duration(seconds: 1), curve: Curves.ease);
+              _scrollController.animateTo(offsetX, duration: Duration(seconds: 1), curve: Curves.ease);
             },
             child: Container(
               width: widget.itemWidths != null ? widget.itemWidths![index] : widget.itemWidth,
@@ -169,14 +169,14 @@ class _FoldMenuState extends State<FoldMenu> {
   Widget build(BuildContext context) {
     _indexs = widget.children.map((e) => e.item2).toList();
 
-    List<Tuple2<List<String>, int>> topChildren = widget.children.sublist(0, widget.children.length - widget.foldCount);
-    List<Tuple2<List<String>, int>> foldChildren = widget.children.sublist(widget.children.length - 1 - widget.foldCount, widget.children.length - 1);
+    var topChildren = widget.children.sublist(0, widget.children.length - widget.foldCount);
+    var foldChildren = widget.children.sublist(widget.children.length - 1 - widget.foldCount, widget.children.length - 1);
 
     return Container(
       // color: Colors.green,
       child: Column(
         children: [
-          if (topChildren.length > 0) Column(
+          if (topChildren.isNotEmpty) Column(
             children: topChildren.map((e) => buildListViewHorizontal(e: e, row: widget.children.indexOf(e))).toList(),
           ),
           Visibility(

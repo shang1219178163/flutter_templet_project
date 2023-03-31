@@ -33,8 +33,8 @@ class NNAlertDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double spacingVer = 8;
-    double spacingHor = 15;
+    var spacingVer = 8.0;
+    var spacingHor = 15.0;
 
     return Container(
       margin: margin,

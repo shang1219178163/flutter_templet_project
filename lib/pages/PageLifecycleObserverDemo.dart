@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class PageLifecycleObserverDemo extends StatefulWidget {
 
-  PageLifecycleObserverDemo({
+  const PageLifecycleObserverDemo({
     Key? key, 
     this.title
   }) : super(key: key);
@@ -37,10 +37,10 @@ class _PageLifecycleObserverDemoState extends State<PageLifecycleObserverDemo> w
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: ['done',].map((e) => TextButton(
+          onPressed: () => print(e),
           child: Text(e,
             style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () => print(e),)
+          ),)
         ).toList(),
       ),
       body: Text(arguments.toString())
@@ -98,7 +98,7 @@ class _PageLifecycleObserverDemoState extends State<PageLifecycleObserverDemo> w
   @override
   void didChangeMetrics() {
     super.didChangeMetrics();
-    Size size = WidgetsBinding.instance.window.physicalSize;
+    var size = WidgetsBinding.instance.window.physicalSize;
     print("YM-----@@@@@@@@@ didChangeMetrics  ：宽：${size.width} 高：${size.height}");
   }
 

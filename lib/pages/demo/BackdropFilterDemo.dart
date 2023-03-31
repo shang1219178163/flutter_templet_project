@@ -15,7 +15,7 @@ class BackdropFilterDemo extends StatefulWidget {
 
   final String? title;
 
-  BackdropFilterDemo({ Key? key, this.title}) : super(key: key);
+  const BackdropFilterDemo({ Key? key, this.title}) : super(key: key);
   
   @override
   _BackdropFilterDemoState createState() => _BackdropFilterDemoState();

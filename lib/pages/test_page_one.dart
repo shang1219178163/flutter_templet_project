@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 class TestPageOne extends StatefulWidget {
 
-  TestPageOne({
+  const TestPageOne({
     Key? key,
     this.title
   }) : super(key: key);
@@ -28,10 +28,10 @@ class _TestPageOneState extends State<TestPageOne> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: ['done',].map((e) => TextButton(
+          onPressed: () => onDone(),
           child: Text(e,
             style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () => onDone(),)
+          ),)
         ).toList(),
       ),
       body: B(),
@@ -40,16 +40,16 @@ class _TestPageOneState extends State<TestPageOne> {
 
   @override
   void didUpdateWidget(TestPageOne oldWidget) {
-    print("$this, didUpdateWidget");
+    debugPrint("$this, didUpdateWidget");
     super.didUpdateWidget(oldWidget);
   }
 
   onDone() {
-    print("$this, onDone");
+    debugPrint("$this, onDone");
 
     final nums = [1,3,5,6];
     final result = searchInsert(nums, 5);
-    print("onDone $result");
+    debugPrint("onDone $result");
     // print("onDone ${nums.reversed}");
     // for (int i = 0; i < nums.length; i++) {
     //   print("onDone ${i}_${nums[i]}");
@@ -63,8 +63,8 @@ class _TestPageOneState extends State<TestPageOne> {
   }
 
   int searchInsert(List<int> nums, int target) {
-    for(int i = nums.length - 1; i >= 0; i--) {
-      int curr = nums[i];
+    for(var i = nums.length - 1; i >= 0; i--) {
+      var curr = nums[i];
       if(curr == target) {
         return i;
       } else if(curr < target ) {
@@ -75,7 +75,7 @@ class _TestPageOneState extends State<TestPageOne> {
   }
 
   int ? searchInsertNew(List<int> nums, int target) {
-    for(int i = 0; i<nums.length; i++) {
+    for(var i = 0; i<nums.length; i++) {
       if(nums[i] == target || nums[i] > target) {
         return i;
       }
@@ -85,6 +85,8 @@ class _TestPageOneState extends State<TestPageOne> {
 }
 
 class B extends StatefulWidget {
+  const B({Key? key}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() => BState();
 }
@@ -93,16 +95,16 @@ class BState extends State {
   @override
   Widget build(BuildContext context) {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-    print("$this, build");
+    debugPrint("$this, build");
 
     return Scaffold(
         appBar: AppBar(
           title: Text("$this"),
           actions: ['done',].map((e) => TextButton(
+            onPressed: () => debugPrint("$e"),
             child: Text(e,
               style: TextStyle(color: Colors.white),
-            ),
-            onPressed: () => print(e),)
+            ),)
           ).toList(),
         ),
         body: Text(arguments.toString())
@@ -112,7 +114,7 @@ class BState extends State {
   /// AState调用[AState.reload]后，[AState.didUpdateWidget]不会调用, [BState.didUpdateWidget]会调用
   @override
   void didUpdateWidget(StatefulWidget oldWidget) {
-    print("$this, didUpdateWidget");
+    debugPrint("$this, didUpdateWidget");
     super.didUpdateWidget(oldWidget);
   }
 }

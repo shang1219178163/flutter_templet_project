@@ -24,7 +24,7 @@ class PageViewDemo extends StatefulWidget {
 }
 
 class _PageViewDemoState extends State<PageViewDemo> {
-  ValueNotifier<double> scrollerOffset = new ValueNotifier(0.0);
+  ValueNotifier<double> scrollerOffset = ValueNotifier(0.0);
   PageController? controller;
 
   var titles = ["PageViewTabBarWidget", "2", "3"];
@@ -107,7 +107,7 @@ class _PageViewDemoState extends State<PageViewDemo> {
         decoration: BoxDecoration(
           color: ColorExt.random,
         ),
-        child: Center(child: Text('第${index}页')),
+        child: Center(child: Text('第$index页')),
       )).toList(),
     );
   }
@@ -117,8 +117,8 @@ class _PageViewDemoState extends State<PageViewDemo> {
     required double pageViewWidth,
     double factor = 0.3
   }) {
-    double width = pageViewWidth * factor;
-    double itemWidth = width / pageCount;
+    var width = pageViewWidth * factor;
+    var itemWidth = width / pageCount;
     return Stack(
       children: <Widget>[
         ClipRRect(
@@ -160,18 +160,18 @@ class _PageViewDemoState extends State<PageViewDemo> {
             title: Text(title),
             message: Text(message),
             actions: titles.map((e) => CupertinoActionSheetAction(
-              child: Text(e),
               onPressed: () {
                 ddlog(e);
                 Navigator.pop(context);
                 Get.toNamed(APPRouter.pageViewTabBarWidget);
               },
+              child: Text(e),
             ),).toList(),
             cancelButton: CupertinoActionSheetAction(
-              child: Text('取消'),
               onPressed: () {
                 Navigator.pop(context);
               },
+              child: Text('取消'),
             ),
           )
               .toShowCupertinoModalPopup(context: context)
@@ -221,7 +221,7 @@ class PageViewTabBarWidget extends StatefulWidget {
 }
 
 class _PageViewTabBarWidgetState extends State<PageViewTabBarWidget> {
-  late PageController _pageController = PageController();
+  late final PageController _pageController = PageController();
 
   @override
   void dispose() {
@@ -276,7 +276,6 @@ class _PageViewTabBarWidgetState extends State<PageViewTabBarWidget> {
   PageView buildPageView(BuildContext context) {
     return PageView(
       scrollDirection: Axis.horizontal,
-      children: widget.items.map((e) => e.item2).toList(),
       controller: _pageController,
       onPageChanged: (index) {
         ddlog('onPageChanged: $index');
@@ -285,6 +284,7 @@ class _PageViewTabBarWidgetState extends State<PageViewTabBarWidget> {
       },
       pageSnapping: true,
       physics: PageScrollPhysics(parent: BouncingScrollPhysics()),
+      children: widget.items.map((e) => e.item2).toList(),
     );
   }
 }

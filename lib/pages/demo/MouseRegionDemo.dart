@@ -77,13 +77,13 @@ class _MouseRegionDemoState extends State<MouseRegionDemo> {
                 margin: EdgeInsets.only(right: 15),
                 // color: Colors.green,
                 child: TextButton(
-                  child: Center(
-                      child: Text("鼠标悬浮菜单", style: TextStyle(fontSize: 15, color: Colors.white),)
-                  ),
                   onPressed: (){
                     setState(() => ddlog("鼠标悬浮菜单"));
                     _isVisible = !_isVisible;
                   },
+                  child: Center(
+                      child: Text("鼠标悬浮菜单", style: TextStyle(fontSize: 15, color: Colors.white),)
+                  ),
                 ),
               ))
           ],

@@ -14,7 +14,7 @@ class SliverListPopverDemo extends StatefulWidget {
 
   final String? title;
 
-  SliverListPopverDemo({ Key? key, this.title}) : super(key: key);
+  const SliverListPopverDemo({ Key? key, this.title}) : super(key: key);
 
 
   @override
@@ -60,7 +60,7 @@ class _SliverListPopverDemoState extends State<SliverListPopverDemo> {
 
   createExample() {
     List<Color> colors = Colors.primaries.sublist(5, 10);
-    List<Widget> list = colors.map((e) => _buildItem(color: e)).toList();
+    var list = colors.map((e) => _buildItem(color: e)).toList();
 
     return CustomScrollView(
       slivers: <Widget>[
@@ -118,7 +118,7 @@ class _SliverListPopverDemoState extends State<SliverListPopverDemo> {
       children: List.generate(count, (index) => ElevatedButton(
         onPressed: () {
           final val = _globalKey.currentContext?.origin();
-          print("菜单${index}_${val}");
+          print("菜单${index}_$val");
           btnIdx = index;
           isVisible = !isVisible;
           setState(() {});

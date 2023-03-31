@@ -17,7 +17,7 @@ import 'package:flutter_templet_project/extension/num_ext.dart';
 
 class LayoutBuilderDemo extends StatefulWidget {
   
-  LayoutBuilderDemo({ Key? key, this.title}) : super(key: key);
+  const LayoutBuilderDemo({ Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -34,10 +34,10 @@ class _LayoutBuilderDemoState extends State<LayoutBuilderDemo> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: ['done',].map((e) => TextButton(
+          onPressed: onPressed,
             child: Text(e,
             style: TextStyle(color: Colors.white),
-          ),
-          onPressed: onPressed,)
+          ),)
         ).toList(),
       ),
       body: Column(
@@ -79,9 +79,9 @@ class _LayoutBuilderDemoState extends State<LayoutBuilderDemo> {
     //   width: constraints?.maxWidth,
     //   height: 100,
     // );
-    final index = Random().nextInt(R.image.imgUrls.length);
+    final index = Random().nextInt(R.image.urls.length);
     return Image(
-      image: NetworkImage(R.image.imgUrls[index]),
+      image: NetworkImage(R.image.urls[index]),
       fit: BoxFit.fill,
       width: constraints?.maxWidth,
       height: 100,

@@ -34,16 +34,16 @@ class _ReorderableListViewDemoState extends State<ReorderableListViewDemo> {
   }
 
   Widget _buildList() {
-    final ColorScheme colorScheme = Theme.of(context).colorScheme;
-    final Color oddItemColor = colorScheme.primary.withOpacity(0.05);
-    final Color evenItemColor = colorScheme.primary.withOpacity(0.15);
+    final colorScheme = Theme.of(context).colorScheme;
+    final oddItemColor = colorScheme.primary.withOpacity(0.05);
+    final evenItemColor = colorScheme.primary.withOpacity(0.15);
 
     return ReorderableListView(
       // padding: EdgeInsets.symmetric(horizontal: 40),
       children: _items.map((e) => ListTile(
         key: Key('$e'),
         tileColor: e.isOdd ? oddItemColor : evenItemColor,
-        title: Text('Item ${e}'),
+        title: Text('Item $e'),
         trailing: Icon(Icons.drag_handle),
       )).toList(),
       onReorder: (int oldIndex, int newIndex) {
@@ -51,7 +51,7 @@ class _ReorderableListViewDemoState extends State<ReorderableListViewDemo> {
           if (oldIndex < newIndex) {
             newIndex -= 1;
           }
-          final int item = _items.removeAt(oldIndex);
+          final item = _items.removeAt(oldIndex);
           _items.insert(newIndex, item);
         });
       },

@@ -321,8 +321,9 @@ class _EnhanceStepperState extends State<EnhanceStepper>
           (int i) => GlobalKey(),
     );
 
-    for (int i = 0; i < widget.steps.length; i += 1)
+    for (var i = 0; i < widget.steps.length; i += 1) {
       _oldStates[i] = widget.steps[i].state;
+    }
   }
 
   @override
@@ -330,8 +331,9 @@ class _EnhanceStepperState extends State<EnhanceStepper>
     super.didUpdateWidget(oldWidget);
     assert(widget.steps.length == oldWidget.steps.length);
 
-    for (int i = 0; i < oldWidget.steps.length; i += 1)
+    for (var i = 0; i < oldWidget.steps.length; i += 1) {
       _oldStates[i] = oldWidget.steps[i].state;
+    }
   }
 
   bool _isFirst(int index) => index == 0;
@@ -352,9 +354,9 @@ class _EnhanceStepperState extends State<EnhanceStepper>
   }
 
   Widget _buildicon(int index, bool oldState) {
-    final StepState state =
+    final state =
     oldState ? _oldStates[index]! : widget.steps[index].state;
-    final bool isDarkActive = _isDark() && widget.steps[index].isActive;
+    final isDarkActive = _isDark() && widget.steps[index].isActive;
 
     if (widget.steps[index].icon != null && state != StepState.error) {
       return widget.steps[index].icon!;
@@ -387,7 +389,7 @@ class _EnhanceStepperState extends State<EnhanceStepper>
   }
 
   Color _circleColor(int index) {
-    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final colorScheme = Theme.of(context).colorScheme;
     if (!_isDark()) {
       return widget.steps[index].isActive
           ? colorScheme.primary
@@ -400,7 +402,7 @@ class _EnhanceStepperState extends State<EnhanceStepper>
   }
 
   Widget _buildCircle(int index, bool oldState) {
-    EnhanceStep step = widget.steps[index];
+    var step = widget.steps[index];
 
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8.0),
@@ -460,15 +462,16 @@ class _EnhanceStepperState extends State<EnhanceStepper>
         duration: kThemeAnimationDuration,
       );
     } else {
-      if (widget.steps[index].state != StepState.error)
+      if (widget.steps[index].state != StepState.error) {
         return _buildCircle(index, false);
-      else
+      } else {
         return _buildTriangle(index, false);
+      }
     }
   }
 
   Widget _buildVerticalControls(int stepIndex) {
-    if (widget.controlsBuilder != null)
+    if (widget.controlsBuilder != null) {
       return widget.controlsBuilder!(
         context,
         ControlsDetails(
@@ -478,6 +481,7 @@ class _EnhanceStepperState extends State<EnhanceStepper>
           stepIndex: stepIndex,
         ),
       );
+    }
 
     final Color cancelColor;
     switch (Theme.of(context).brightness) {
@@ -489,14 +493,14 @@ class _EnhanceStepperState extends State<EnhanceStepper>
         break;
     }
 
-    final ThemeData themeData = Theme.of(context);
-    final ColorScheme colorScheme = themeData.colorScheme;
-    final MaterialLocalizations localizations =
+    final themeData = Theme.of(context);
+    final colorScheme = themeData.colorScheme;
+    final localizations =
     MaterialLocalizations.of(context);
 
     const OutlinedBorder buttonShape = RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(2)));
-    const EdgeInsets buttonPadding = EdgeInsets.symmetric(horizontal: 16.0);
+    const buttonPadding = EdgeInsets.symmetric(horizontal: 16.0);
 
     return Container(
       margin: const EdgeInsets.only(top: 16.0),
@@ -549,8 +553,8 @@ class _EnhanceStepperState extends State<EnhanceStepper>
   }
 
   TextStyle _titleStyle(int index) {
-    final ThemeData themeData = Theme.of(context);
-    final TextTheme textTheme = themeData.textTheme;
+    final themeData = Theme.of(context);
+    final textTheme = themeData.textTheme;
 
     switch (widget.steps[index].state) {
       case StepState.indexed:
@@ -570,8 +574,8 @@ class _EnhanceStepperState extends State<EnhanceStepper>
   }
 
   TextStyle _subtitleStyle(int index) {
-    final ThemeData themeData = Theme.of(context);
-    final TextTheme textTheme = themeData.textTheme;
+    final themeData = Theme.of(context);
+    final textTheme = themeData.textTheme;
 
     switch (widget.steps[index].state) {
       case StepState.indexed:
@@ -742,7 +746,7 @@ class _EnhanceStepperState extends State<EnhanceStepper>
   }
 
   Widget _buildHorizontal() {
-    final List<Widget> children = <Widget>[
+    final children = <Widget>[
       for (int i = 0; i < widget.steps.length; i += 1) ...<Widget>[
         InkResponse(
           onTap: widget.steps[i].state != StepState.disabled
@@ -812,8 +816,8 @@ class _EnhanceStepperState extends State<EnhanceStepper>
               AnimatedSize(
                 curve: Curves.fastOutSlowIn,
                 duration: kThemeAnimationDuration,
-                child: widget.steps[widget.currentStep].content,
                 vsync: this,
+                child: widget.steps[widget.currentStep].content,
               ),
               _buildVerticalControls(widget.currentStep),
             ],
@@ -828,13 +832,14 @@ class _EnhanceStepperState extends State<EnhanceStepper>
     assert(debugCheckHasMaterial(context));
     assert(debugCheckHasMaterialLocalizations(context));
     assert(() {
-      if (context.findAncestorWidgetOfExactType<Stepper>() != null)
+      if (context.findAncestorWidgetOfExactType<Stepper>() != null) {
         throw FlutterError(
           'Steppers must not be nested.\n'
               'The material specification advises that one should avoid embedding '
               'steppers within steppers. '
               'https://material.io/archive/guidelines/components/steppers.html#steppers-usage',
         );
+      }
       return true;
     }());
 
@@ -866,10 +871,10 @@ class _TrianglePainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final double base = size.width;
-    final double halfBase = size.width / 2.0;
-    final double height = size.height;
-    final List<Offset> points = <Offset>[
+    final base = size.width;
+    final halfBase = size.width / 2.0;
+    final height = size.height;
+    final points = <Offset>[
       Offset(0.0, height),
       Offset(base, height),
       Offset(halfBase, 0.0),

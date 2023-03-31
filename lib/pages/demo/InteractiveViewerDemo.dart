@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class InteractiveViewerDemo extends StatefulWidget {
 
-  InteractiveViewerDemo({
+  const InteractiveViewerDemo({
     Key? key,
     this.title
   }) : super(key: key);
@@ -24,10 +24,10 @@ class _InteractiveViewerDemoState extends State<InteractiveViewerDemo> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: ['done',].map((e) => TextButton(
+          onPressed: () => print(e),
           child: Text(e,
             style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () => print(e),)
+          ),)
         ).toList(),
       ),
       body: buildInteractiveViewer(),

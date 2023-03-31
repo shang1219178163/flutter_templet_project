@@ -15,14 +15,14 @@ extension SizeExt on Size {
   /// 等比缩放大小
   Size adjustToWidth(double width) {
     final scale = width / this.width;
-    final heightNew = scale * this.height;
+    final heightNew = scale * height;
     // print("SizeExt:${heightNew}");
     return Size(width, heightNew);
   }
   /// 等比缩放大小
   Size adjustToHeight(double height) {
     final scale = height / this.height;
-    final widthNew = scale * this.width;
+    final widthNew = scale * width;
     // print("SizeExt:${widthNew}");
     return Size(widthNew, height);
   }

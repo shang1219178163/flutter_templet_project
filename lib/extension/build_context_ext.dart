@@ -27,66 +27,66 @@ extension BuildContextExt on BuildContext {
 
   /// 获取当前组件的 RenderBox
   RenderBox? get renderBox {
-    RenderObject? renderObj = this.findRenderObject();
+    var renderObj = findRenderObject();
     return renderObj is RenderBox ? renderObj : null;
   }
 
   /// 获取当前组件的坐标点
   Offset? origin({Offset offset = Offset.zero}) {
-    return this.renderBox?.localToGlobal(offset); //组件坐标
+    return renderBox?.localToGlobal(offset); //组件坐标
   }
 
   /// 获取当前组件的 Size
-  Size? get renderBoxSize => this.renderBox?.size;
+  Size? get renderBoxSize => renderBox?.size;
 
   double? minX({Offset offset = Offset.zero}) {
-    return this.origin(offset: offset)?.dx;
+    return origin(offset: offset)?.dx;
   }
 
   double? minY({Offset offset = Offset.zero}) {
-    return this.origin(offset: offset)?.dy;
+    return origin(offset: offset)?.dy;
   }
 
   double? maxX({Offset offset = Offset.zero}) {
-    if (this.minX(offset: offset) == null || this.size == null) {
+    if (minX(offset: offset) == null || size == null) {
       return null;
     }
-    return this.minX(offset: offset)! + this.size!.width;
+    return minX(offset: offset)! + size!.width;
   }
 
   double? maxY({Offset offset = Offset.zero}) {
-    if (this.minX(offset: offset) == null || this.size == null) {
+    if (minX(offset: offset) == null || size == null) {
       return null;
     }
-    return this.minX(offset: offset)! + this.size!.height;
+    return minX(offset: offset)! + size!.height;
   }
 
   double? midX({Offset offset = Offset.zero}) {
-    if (this.minX(offset: offset) == null || this.size == null) {
+    if (minX(offset: offset) == null || size == null) {
       return null;
     }
-    return this.origin()!.dx + this.size!.width * 0.5;
+    return origin()!.dx + size!.width * 0.5;
   }
 
   double? midY({Offset offset = Offset.zero}) {
-    if (this.minX(offset: offset) == null || this.size == null) {
+    if (minX(offset: offset) == null || size == null) {
       return null;
     }
-    return this.origin()!.dy + this.size!.height * 0.5;
+    return origin()!.dy + size!.height * 0.5;
   }
 
   ///扩展方法
   void logRendBoxInfo() {
-    print([DateTime.now(), this.origin(), this.size]);
+    debugPrint("${[DateTime.now(), origin(), size]}");
   }
 
-  /// 扩展属性 Theme.of(this.context)
+  /// 扩展属性 Theme.of(context)
   ThemeData get theme => Theme.of(this);
-  /// 扩展属性 Theme.of(this.context).primaryColor
+  /// 扩展属性 Theme.of(context).primaryColor
   Color get primaryColor => theme.primaryColor;
-  /// 扩展属性 MediaQuery.of(this.context)
+  /// 扩展属性 MediaQuery.of(context)
   MediaQueryData get mediaQuery => MediaQuery.of(this);
-  /// 扩展属性 MediaQuery.of(this.context).size
+  /// 扩展属性 MediaQuery.of(context).size
   Size get screenSize => mediaQuery.size;
   /// 扩展属性 MediaQuery.of(this).devicePixelRatio
   double get devicePixelRatio => mediaQuery.devicePixelRatio;
@@ -182,20 +182,20 @@ extension BuildContextExt on BuildContext {
       title: title,
       message: message,
       actions: items.map((e) => CupertinoActionSheetAction(
-        child: e,
         onPressed: () {
           if (onSelect != null) {
             onSelect(this, items.indexOf(e));
           }
           Navigator.pop(this);
         },
+        child: e,
       ),).toList(),
       cancelButton: CupertinoActionSheetAction(
-        child: cancel,
         isDestructiveAction: true,
         onPressed: onCancell != null ? onCancell(this) : () {
           Navigator.pop(this);
         },
+        child: cancel,
       ),
     );
 
@@ -214,10 +214,10 @@ extension BuildContextExt on BuildContext {
   showBottomPicker({
     double? height = 300,
     required Widget child,
-    required void callback(String title)
+    required void Function(String title) callback,
   }) {
 
-    final title = "请选择";
+    const title = "请选择";
     final actionTitles = ['取消', '确定'];
 
     final widget =
@@ -261,12 +261,11 @@ extension BuildContextExt on BuildContext {
   showDatePicker({
     DateTime? initialDateTime,
     CupertinoDatePickerMode? mode,
-    // required void Function(DateTime dateTime, String title) callback}) {
-    required void callback(DateTime dateTime, String title)}) {
+    required void Function(DateTime dateTime, String title) callback
+  }) {
+    var dateTime = initialDateTime ?? DateTime.now();
 
-    DateTime dateTime = initialDateTime ?? DateTime.now();
-
-    final title = "请选择";
+    const title = "请选择";
     final actionTitles = ['取消', '确定'];
 
     final widget =
@@ -313,19 +312,20 @@ extension BuildContextExt on BuildContext {
   /// 列表选择器
   showPickerList({
     required List<Widget> children,
-    required void callback(int index, String title)}) {
+    required void Function(int index, String title) callback
+  }) {
 
-    int selectedIndex = 0;
+    var selectedIndex = 0;
 
     return showBottomPicker(
       child: CupertinoPicker(
         backgroundColor: Colors.white,
         itemExtent: 30,
         scrollController: FixedExtentScrollController(initialItem: 1),
-        children: children,
         onSelectedItemChanged: (value) {
           selectedIndex = value;
         },
+        children: children,
       ),
       callback: (title){
         callback(selectedIndex, title);
@@ -335,53 +335,53 @@ extension BuildContextExt on BuildContext {
 }
 
 extension StatefulWidgetExt<T extends StatefulWidget> on State<T> {
-  /// 扩展属性 Theme.of(this.context)
-  ThemeData get theme => this.context.theme;
-  /// 扩展属性 MediaQuery.of(this.context)
-  MediaQueryData get mediaQuery => this.context.mediaQuery;
+  /// 扩展属性 Theme.of(context)
+  ThemeData get theme => context.theme;
+  /// 扩展属性 MediaQuery.of(context)
+  MediaQueryData get mediaQuery => context.mediaQuery;
 
   /// 弹出键盘时键盘顶部高度
-  double get keyboardBottom => this.context.viewBottomShowKeyboard;
+  double get keyboardBottom => context.viewBottomShowKeyboard;
 
   /// 安全区域距离顶部高度(电池栏高度:有刘海的屏幕:44 没有刘海的屏幕为20)
-  double get safeAreaTop => this.context.safeAreaTop;
+  double get safeAreaTop => context.safeAreaTop;
 
   /// 没有弹出键盘时底部高度(有刘海的屏幕:34 没有刘海的屏幕0)
-  double get safeAreaBottom => this.context.safeAreaBottom;
+  double get safeAreaBottom => context.safeAreaBottom;
 
   /// 弹出键盘为0,不弹为 34
-  double get paddingBottom => this.context.paddingBottom;
+  double get paddingBottom => context.paddingBottom;
 
 
-  /// 扩展属性 MediaQuery.of(this.context).size
-  Size get screenSize => this.context.screenSize;
-  /// 扩展属性 MediaQuery.of(this).devicePixelRatio
-  double get devicePixelRatio => this.context.devicePixelRatio;
+  /// 扩展属性 MediaQuery.of(context).size
+  Size get screenSize => context.screenSize;
+  /// 扩展属性 MediaQuery.of(.devicePixelRatio
+  double get devicePixelRatio => context.devicePixelRatio;
 
-  /// 扩展属性 ScaffoldMessenger.of(this.context);
-  ScaffoldMessengerState get scaffoldMessenger => this.context.scaffoldMessenger;
+  /// 扩展属性 ScaffoldMessenger.of(context);
+  ScaffoldMessengerState get scaffoldMessenger => context.scaffoldMessenger;
   /// 扩展方法
-  showSnackBar(SnackBar snackBar, {bool isClear = false}) => this.context.showSnackBar(snackBar, isClear: isClear);
+  showSnackBar(SnackBar snackBar, {bool isClear = false}) => context.showSnackBar(snackBar, isClear: isClear);
   /// 扩展方法
   showMaterialBanner(MaterialBanner banner, {bool isClear = false, bool isReplace = false}) =>
-      this.context.showMaterialBanner(banner, isClear: isClear, isReplace: isReplace);
+      context.showMaterialBanner(banner, isClear: isClear, isReplace: isReplace);
 }
 
 
 extension GlobalKeyExt on GlobalKey{
 
   /// 获取当前组件的 RenderBox
-  RenderBox? get renderBox => this.currentContext?.renderBox;
+  RenderBox? get renderBox => currentContext?.renderBox;
   /// 获取当前组件的 position
-  Offset? position({Offset offset = Offset.zero}) => this.currentContext?.origin(offset: offset);
+  Offset? position({Offset offset = Offset.zero}) => currentContext?.origin(offset: offset);
   /// 获取当前组件的 Size
-  Size? get size => this.currentContext?.size;
+  Size? get size => currentContext?.size;
 
-  double? minX({Offset offset = Offset.zero}) => this.currentContext?.minX(offset: offset);
-  double? minY({Offset offset = Offset.zero}) => this.currentContext?.minY(offset: offset);
-  double? midX({Offset offset = Offset.zero}) => this.currentContext?.midX(offset: offset);
-  double? midY({Offset offset = Offset.zero}) => this.currentContext?.midY(offset: offset);
-  double? maxX({Offset offset = Offset.zero}) => this.currentContext?.maxX(offset: offset);
-  double? maxY({Offset offset = Offset.zero}) => this.currentContext?.maxY(offset: offset);
+  double? minX({Offset offset = Offset.zero}) => currentContext?.minX(offset: offset);
+  double? minY({Offset offset = Offset.zero}) => currentContext?.minY(offset: offset);
+  double? midX({Offset offset = Offset.zero}) => currentContext?.midX(offset: offset);
+  double? midY({Offset offset = Offset.zero}) => currentContext?.midY(offset: offset);
+  double? maxX({Offset offset = Offset.zero}) => currentContext?.maxX(offset: offset);
+  double? maxY({Offset offset = Offset.zero}) => currentContext?.maxY(offset: offset);
 
 }

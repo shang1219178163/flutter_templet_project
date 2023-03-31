@@ -16,29 +16,29 @@ extension EdgeInsetsExt on EdgeInsets{
   /// 负值转 0
   EdgeInsets get positive {
     return EdgeInsets.only(
-      top: this.top >= 0 ? this.top : 0,
-      right: this.right >= 0 ? this.right : 0,
-      bottom: this.bottom >= 0 ? this.bottom : 0,
-      left: this.left >= 0 ? this.left : 0,
+      top: top >= 0 ? top : 0,
+      right: right >= 0 ? right : 0,
+      bottom: bottom >= 0 ? bottom : 0,
+      left: left >= 0 ? left : 0,
     );
   }
 
   /// 根据函数转化
   EdgeInsets convert(double Function(double value) cb) {
     return EdgeInsets.only(
-      top: cb(this.top),
-      right: cb(this.right),
-      bottom: cb(this.bottom),
-      left: cb(this.left),
+      top: cb(top),
+      right: cb(right),
+      bottom: cb(bottom),
+      left: cb(left),
     );
   }
 
   /// 合并阴影 BoxShadows
   EdgeInsets mergeShadows({List<BoxShadow>? shadows}) {
-    if (shadows == null || shadows.length == 0) {
+    if (shadows == null || shadows.isEmpty) {
       return this;
     }
-    return this.mergeShadow(shadow: shadows[0]);
+    return mergeShadow(shadow: shadows[0]);
   }
 
   /// 合并阴影 BoxShadow
@@ -55,17 +55,17 @@ extension EdgeInsetsExt on EdgeInsets{
     final leftOffset = shadowRadius - shadow.offset.dx;
 
     // final marginNew = EdgeInsets.only(
-    //   top: this.top + topOffset,
-    //   bottom: this.bottom + bottomOffset,
-    //   right: this.right + rightOffset,
-    //   left: this.left + leftOffset,
+    //   top: top + topOffset,
+    //   bottom: bottom + bottomOffset,
+    //   right: right + rightOffset,
+    //   left: left + leftOffset,
     // );
 
     final marginNew = EdgeInsets.only(
-      top: max(this.top, topOffset),
-      bottom: max(this.bottom, bottomOffset),
-      right: max(this.right, rightOffset),
-      left: max(this.left, leftOffset),
+      top: max(top, topOffset),
+      bottom: max(bottom, bottomOffset),
+      right: max(right, rightOffset),
+      left: max(left, leftOffset),
     );
     return marginNew;
   }

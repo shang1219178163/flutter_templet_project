@@ -7,7 +7,7 @@ import 'package:flutter_templet_project/uti/R.dart';
 
 class HorizontalCellDemo extends StatefulWidget {
 
-  HorizontalCellDemo({ Key? key, this.title}) : super(key: key);
+  const HorizontalCellDemo({ Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -96,7 +96,7 @@ class _HorizontalCellDemoState extends State<HorizontalCellDemo> {
         // useIntrinsicHeight: false,
         left: FadeInImage(
           height: 60,
-          image: NetworkImage(R.image.imgUrls[4]),
+          image: NetworkImage(R.image.urls[4]),
           placeholder: AssetImage("images/img_placeholder.png"),
         ),
         // mid: Container(

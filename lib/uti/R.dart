@@ -3,41 +3,41 @@ import 'package:flutter/material.dart';
 
 ///资源整合
 class R {
-  static final _R_String string = _R_String._OB;
-  static final _R_Color color = _R_Color._OB;
-  static final _R_Event event = _R_Event._OB;
-  static final _R_Image image = _R_Image._OB;
+  static final _RString string = _RString._instance;
+  static final _RColor color = _RColor._instance;
+  static final _REvent event = _REvent._instance;
+  static final _RImage image = _RImage._instance;
 
 }
 
-class _R_String {
-  static final _R_String _OB = _R_String();
+class _RString {
+  static final _RString _instance = _RString();
 
   final share = "分享";
 
 }
 
-class _R_Color {
-  static final _R_Color _OB = _R_Color();
+class _RColor {
+  static final _RColor _instance = _RColor();
 
   final theme = Colors.blue;
 
 }
 
-class _R_Event {
-  static final _R_Event _OB = _R_Event();
+class _REvent {
+  static final _REvent _instance = _REvent();
 
   final eventID = 6000;
 
 }
 
-class _R_Image {
-  static final _R_Image _OB = _R_Image();
+class _RImage {
+  static final _RImage _instance = _RImage();
   /// 占位图
   ImageProvider placeholder({String? package}) => AssetImage("images/img_placeholder.png", package: package);
 
   /// 网图数组
-  final List<String> imgUrls = [
+  final List<String> urls = [
     "https://cdn.pixabay.com/photo/2016/09/04/08/13/harbour-crane-1643476_1280.jpg",
     "https://cdn.pixabay.com/photo/2022/09/01/09/31/sunset-glow-7425170_1280.jpg",
     "https://cdn.pixabay.com/photo/2018/02/01/21/00/tree-3124103_1280.jpg",

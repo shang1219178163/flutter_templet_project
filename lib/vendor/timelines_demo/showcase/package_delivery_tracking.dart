@@ -306,8 +306,8 @@ class _DeliveryProcess {
   });
 
   const _DeliveryProcess.complete()
-      : this.name = 'Done',
-        this.messages = const [];
+      : name = 'Done',
+        messages = const [];
 
   final String name;
   final List<_DeliveryMessage> messages;

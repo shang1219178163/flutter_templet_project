@@ -108,20 +108,20 @@ class _APPUserCenterPageState extends State<APPUserCenterPage>{
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
               TextButton(
-                child: Text('登录', style: TextStyle(fontSize: 20.0, color: Colors.white)),
                 onPressed: (){
                   // APPRouter.push(context, 'login');
                   // Get.toNamed(APPRouter.loginPage, arguments: "login");
                   Get.toNamed(APPRouter.loginPage2, arguments: "login");
                 },
+                child: Text('登录', style: TextStyle(fontSize: 20.0, color: Colors.white)),
               ),
               Text('/', style: TextStyle(fontSize: 20.0, color: Colors.white)),
               TextButton(
-                child: Text('注册', style: TextStyle(fontSize: 20.0, color: Colors.white)),
                 onPressed: (){
                   // APPRouter.push(context, 'register');
                   Get.toNamed(APPRouter.signinPage, arguments: "signin");
                 },
+                child: Text('注册', style: TextStyle(fontSize: 20.0, color: Colors.white)),
               )
             ],
           )

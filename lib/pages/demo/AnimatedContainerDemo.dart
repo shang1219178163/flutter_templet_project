@@ -12,7 +12,7 @@ import 'package:flutter_templet_project/extension/change_notifier_ext.dart';
 
 class AnimatedContainerDemo extends StatefulWidget {
 
-  AnimatedContainerDemo({
+  const AnimatedContainerDemo({
     Key? key, 
     this.title
   }) : super(key: key);
@@ -50,10 +50,10 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: ['done',].map((e) => TextButton(
+          onPressed: onPressed,
           child: Text(e,
             style: TextStyle(color: Colors.white),
           ),
-          onPressed: onPressed,
         )).toList(),
       ),
       body: buildBody()
@@ -67,8 +67,8 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
         crossAxisAlignment: WrapCrossAlignment.center,
         children: <Widget>[
           ElevatedButton(
-            child: const Text('更新宽高'),
             onPressed: _changeSize,
+            child: const Text('更新宽高'),
           ),
           const SizedBox(height: 10,),
           buildAnimatedContainer(),

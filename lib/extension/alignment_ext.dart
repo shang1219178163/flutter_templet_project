@@ -40,7 +40,7 @@ extension AlignmentExt on Alignment{
 
     final max = math.max(width, height);
     final min = math.min(width, height);
-    double result = 0.5;
+    var result = 0.5;
 
     if([
       Alignment.center,

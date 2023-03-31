@@ -18,7 +18,7 @@ class NNDatePicker extends StatelessWidget {
   final double? datePickerHeight;
 
   ///时间选择器
-  NNDatePicker({
+  const NNDatePicker({
   	Key? key,
   	this.title = "请选择",
     this.datePickerHeight = 216,
@@ -45,23 +45,23 @@ class NNDatePicker extends StatelessWidget {
         children: [
           Row(children: [
             CupertinoButton(
-              child: cancellChild ?? Text("取消"),
               // onPressed: () => Navigator.of(ctx).pop(),
               onPressed: cancellOnPressed,
+              child: cancellChild ?? Text("取消"),
             ),
             Expanded(child: Text(title ?? "请选择",
               style: TextStyle(fontSize: 17,
-                  fontWeight: FontWeight.normal,
-                  color: Colors.black,
-                  backgroundColor: Colors.white,
-                  decoration: TextDecoration.none),
-              textAlign: TextAlign.center,)
+                fontWeight: FontWeight.normal,
+                color: Colors.black,
+                backgroundColor: Colors.white,
+                decoration: TextDecoration.none),
+                textAlign: TextAlign.center,
+              )
             ),
-
             CupertinoButton(
-              child: confirmChild ?? Text("确定"),
               // onPressed: () => Navigator.of(ctx).pop(),
-              onPressed: confirmOnPressed
+              onPressed: confirmOnPressed,
+              child: confirmChild ?? Text("确定"),
             ),
           ],),
           Container(

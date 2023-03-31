@@ -6,7 +6,7 @@ class WrapDemo extends StatefulWidget {
 
   final String? title;
 
-  WrapDemo({ Key? key, this.title}) : super(key: key);
+  const WrapDemo({ Key? key, this.title}) : super(key: key);
 
 
   @override
@@ -97,8 +97,8 @@ class WrapWidget extends StatelessWidget {
   final int rowCount;
 
   itemWidth() {
-    double contentWidth = this.width - this.padding.left - this.padding.right - this.margin.left - this.margin.right;
-    double w = (contentWidth - (this.rowCount - 1) * this.spacing)/this.rowCount;
+    var contentWidth = width - padding.left - padding.right - margin.left - margin.right;
+    var w = (contentWidth - (rowCount - 1) * spacing)/rowCount;
     return w;
   }
 
@@ -111,10 +111,10 @@ class WrapWidget extends StatelessWidget {
     return ColoredBox(
       color: Colors.lightGreen,
       child: Wrap(
-        direction: this.direction,
-        spacing: this.direction == Axis.horizontal ? this.spacing : this.runSpacing,
+        direction: direction,
+        spacing: direction == Axis.horizontal ? spacing : runSpacing,
         // 主轴(水平)方向间距
-        runSpacing: this.direction == Axis.horizontal ? this.runSpacing : this.spacing,
+        runSpacing: direction == Axis.horizontal ? runSpacing : spacing,
         // 纵轴（垂直）方向间距
         alignment: WrapAlignment.start,
         //沿主轴方向居中

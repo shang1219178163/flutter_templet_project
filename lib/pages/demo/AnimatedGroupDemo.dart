@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/animated_group.dart';
 
 class AnimatedGroupDemo extends StatefulWidget {
-  AnimatedGroupDemo({ Key? key, this.title}) : super(key: key);
+  const AnimatedGroupDemo({ Key? key, this.title}) : super(key: key);
   final String? title;
 
   @override
@@ -20,7 +20,7 @@ class AnimatedGroupDemo extends StatefulWidget {
 
 class _AnimatedGroupDemoState extends State<AnimatedGroupDemo> {
 
-  GlobalKey<AnimatedGroupState> _globalKey = GlobalKey();
+  final GlobalKey<AnimatedGroupState> _globalKey = GlobalKey();
 
   final _animations = <AnimatedGroupItemModel>[
     AnimatedGroupItemModel(
@@ -56,10 +56,10 @@ class _AnimatedGroupDemoState extends State<AnimatedGroupDemo> {
         child: Column(
           children: [
             ElevatedButton(
-              child: Text("start animation"),
               onPressed: (){
                 _globalKey.currentState?.palyeAnimations(isRemovedOnCompletion: false);
               },
+              child: Text("start animation"),
             ),
             Container(
               width: 300,
@@ -68,7 +68,6 @@ class _AnimatedGroupDemoState extends State<AnimatedGroupDemo> {
                 key: _globalKey,
                 duration: Duration(milliseconds: 2000),
                 animations: _animations,
-                child: Text("AnimatedGroup 混合动画", style: TextStyle(color: Colors.white, backgroundColor: Colors.green),),
                 builder: (BuildContext context, Widget? child, List<Animation<dynamic>> animations) {
                   final aHeight = animations[0];
                   final aColor = animations[1];
@@ -89,6 +88,7 @@ class _AnimatedGroupDemoState extends State<AnimatedGroupDemo> {
                     ],
                   );
                 },
+                child: Text("AnimatedGroup 混合动画", style: TextStyle(color: Colors.white, backgroundColor: Colors.green),),
               ),
               decoration: BoxDecoration(
                 color: Colors.black.withOpacity(0.1),

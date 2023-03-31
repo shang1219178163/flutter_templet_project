@@ -10,7 +10,7 @@ import 'package:flutter_templet_project/basicWidget/marquee_widget.dart';
 
 class MarqueeWidgetDemo extends StatefulWidget {
 
-  MarqueeWidgetDemo({ Key? key, this.title}) : super(key: key);
+  const MarqueeWidgetDemo({ Key? key, this.title}) : super(key: key);
 
   final String? title;
 

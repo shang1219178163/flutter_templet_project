@@ -36,7 +36,6 @@ class BottomSheetDemo extends StatelessWidget {
       builder: (context) {
         return Center(
           child: TextButton(
-            child: Text('SHOW BOTTOM SHEET'),
             onPressed: () {
               showModalBottomSheet(
                 context: context,
@@ -52,10 +51,10 @@ class BottomSheetDemo extends StatelessWidget {
                           child: FloatingActionButton(
                             foregroundColor: Colors.blue,
                             backgroundColor: Colors.white,
-                            child: Icon(Icons.directions_bike),
                             onPressed: () {
                               ddlog("directions_bike");
-                            }
+                            },
+                            child: Icon(Icons.directions_bike),
                           ),
                         ),
                       ],
@@ -64,6 +63,7 @@ class BottomSheetDemo extends StatelessWidget {
                 },
               );
             },
+            child: Text('SHOW BOTTOM SHEET'),
           ),
         );
       },

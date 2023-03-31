@@ -11,7 +11,7 @@ import 'package:flutter_templet_project/extension/function_ext.dart';
 
 class TestFunction extends StatefulWidget {
 
-  TestFunction({
+  const TestFunction({
     Key? key, 
     this.title
   }) : super(key: key);
@@ -33,17 +33,17 @@ class _TestFunctionState extends State<TestFunction> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: ['done',].map((e) => TextButton(
+          onPressed: onPressed,
           child: Text(e,
             style: TextStyle(color: Colors.white),
-          ),
-          onPressed: onPressed,)
+          ),)
         ).toList(),
       ),
       body: Text(arguments.toString())
     );
   }
 
-  fc(int n, int m, {operation: "add"}) {
+  fc(int n, int m, {operation = "add"}) {
     if (operation == "add") {
       return n + m;
     }
@@ -56,9 +56,9 @@ class _TestFunctionState extends State<TestFunction> {
 
   onPressed() {
     int a = Function.apply(fc, [10, 3]);
-    print("a: ${a}");//a: 13
-    int b = Function.apply(fc, [10, 3], {new Symbol("operation"): "subtract"});
-    print("b: ${b}");//b: 7
+    print("a: $a");//a: 13
+    int b = Function.apply(fc, [10, 3], {Symbol("operation"): "subtract"});
+    print("b: $b");//b: 7
 
     Function.apply(fcOne, [2018], {#country: 'USA', #name: 'Dominus Estate'});
     final map = {
@@ -77,6 +77,6 @@ class _TestFunctionState extends State<TestFunction> {
 
 extension MapExt on Map{
   Map<Symbol, dynamic> mapSymbolKey() {
-    return this.map((key, value) => MapEntry(new Symbol("${key}"), value));
+    return map((key, value) => MapEntry(Symbol("$key"), value));
   }
 }

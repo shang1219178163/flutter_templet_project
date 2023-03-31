@@ -37,47 +37,47 @@ class TimelinePainter extends CustomPainter {
 
   void _centerElementPaint(Canvas canvas, Size size) {
     // final topPadding = 16.0;
-    Paint lineStroke = Paint()
+    var lineStroke = Paint()
       ..color = lineColor
       ..strokeCap = StrokeCap.round
       ..strokeWidth = 0.5
       ..style = PaintingStyle.stroke;
     if(firstElement && lastElement) {
-      Offset offsetCenter = size.topCenter(Offset(0.0, topPadding));
-      Offset offsetBottom = size.bottomCenter(Offset(0.0, 0.0));
-      Offset renderOffset = Offset(offsetBottom.dx, offsetBottom.dy*(0.5+(controller.value/2)));
+      var offsetCenter = size.topCenter(Offset(0.0, topPadding));
+      var offsetBottom = size.bottomCenter(Offset(0.0, 0.0));
+      var renderOffset = Offset(offsetBottom.dx, offsetBottom.dy*(0.5+(controller.value/2)));
       canvas.drawLine(
           offsetCenter,
           renderOffset,
           lineStroke);
     } else if(firstElement) {
       ///偏移量从顶部开始计算
-      Offset offsetTop  = size.topCenter(Offset(0.0, topPadding));
-      Offset offsetBottom = size.bottomCenter(Offset(0.0, 0.0));
-      Offset renderOffset = Offset(offsetBottom.dx, offsetBottom.dy*(0.5+(controller.value/2)));
+      var offsetTop  = size.topCenter(Offset(0.0, topPadding));
+      var offsetBottom = size.bottomCenter(Offset(0.0, 0.0));
+      var renderOffset = Offset(offsetBottom.dx, offsetBottom.dy*(0.5+(controller.value/2)));
       canvas.drawLine(
           offsetTop,
           renderOffset,
           lineStroke);
     } else if(lastElement) {
-      Offset offsetTopCenter = size.topCenter(Offset(0.0, -topPadding));
-      Offset offsetCenter = size.center(Offset(0.0, 20.0));
-      Offset renderOffset = Offset(offsetCenter.dx, offsetCenter.dy*controller.value);
+      var offsetTopCenter = size.topCenter(Offset(0.0, -topPadding));
+      var offsetCenter = size.center(Offset(0.0, 20.0));
+      var renderOffset = Offset(offsetCenter.dx, offsetCenter.dy*controller.value);
       canvas.drawLine(
           offsetTopCenter,
           renderOffset,
           lineStroke);
     } else {
-      Offset offsetTopCenter = size.topCenter(Offset(0.0, -topPadding));
-      Offset offsetBottom = size.bottomCenter(Offset(0.0, 0.0));
-      Offset renderOffset = Offset(offsetBottom.dx, offsetBottom.dy*controller.value);
+      var offsetTopCenter = size.topCenter(Offset(0.0, -topPadding));
+      var offsetBottom = size.bottomCenter(Offset(0.0, 0.0));
+      var renderOffset = Offset(offsetBottom.dx, offsetBottom.dy*controller.value);
       canvas.drawLine(
           offsetTopCenter,
           renderOffset,
           lineStroke);
     }
 
-    Paint circleFill = Paint()
+    var circleFill = Paint()
       ..color = lineColor
       ..style = PaintingStyle.fill;
     // canvas.drawImage(_image, Offset(0.0, -8.0), circleFill);

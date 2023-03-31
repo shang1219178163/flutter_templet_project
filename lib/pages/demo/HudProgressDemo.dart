@@ -67,7 +67,7 @@ class HudProgressDemo extends StatelessWidget {
           child: Container(
             color: Theme.of(context).primaryColor,
             child: Center(
-              child: Text("$e"),
+              child: Text(e),
             )
           ),
         )
@@ -180,7 +180,7 @@ class HudProgressDemo extends StatelessWidget {
     //       );
     //     });
 
-    final message = "经查，涉事两名攻击者非法获取某互联网公司客户信息共计 11.8 亿条，在 8 个月的时间里利用该信息经营共获利 34 万余元。"
+    const message = "经查，涉事两名攻击者非法获取某互联网公司客户信息共计 11.8 亿条，在 8 个月的时间里利用该信息经营共获利 34 万余元。"
         "最终，二人因侵犯公民个人信息罪，分别被判处有期徒刑三年六个月，有期徒刑三年三个月。";
 
 

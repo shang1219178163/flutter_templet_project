@@ -8,7 +8,7 @@ class ContainerDemo extends StatefulWidget {
 
   final String? title;
 
-  ContainerDemo({ Key? key, this.title}) : super(key: key);
+  const ContainerDemo({ Key? key, this.title}) : super(key: key);
 
   @override
   _ContainerDemoState createState() => _ContainerDemoState();
@@ -55,7 +55,7 @@ class _ContainerDemoState extends State<ContainerDemo> {
   }
 
   buildBodyColumn() {
-    List<Widget> children = [
+    var children = <Widget>[
       // ...testContainer(),
       buildSection(),
       buildSection1(),
@@ -72,7 +72,7 @@ class _ContainerDemoState extends State<ContainerDemo> {
   }
 
   buildBodyCustom() {
-    List<Widget> children = [
+    var children = <Widget>[
       // ...testContainer(),
       buildSection(),
       buildSection1(),
@@ -85,7 +85,7 @@ class _ContainerDemoState extends State<ContainerDemo> {
   }
 
   Widget buildSection() {
-    double bgBlur = 10;
+    var bgBlur = 10.0;
     return ClipRRect(
       borderRadius: BorderRadius.all(Radius.circular(10)),
       child: Opacity(
@@ -157,7 +157,7 @@ class _ContainerDemoState extends State<ContainerDemo> {
   }
 
   Widget buildSection2() {
-    final msg = "静夜思 * 李白 • 床前明月光, 疑是地上霜, 举头望明月, 低头思故乡.";
+    const msg = "静夜思 * 李白 • 床前明月光, 疑是地上霜, 举头望明月, 低头思故乡.";
     return Container(
       decoration: BoxDecoration(
         color: Colors.yellow,
@@ -203,7 +203,7 @@ class _ContainerDemoState extends State<ContainerDemo> {
   }
 
   Widget buildGradientBorder() {
-    BorderRadius borderRadius = BorderRadius.circular(15);
+    var borderRadius = BorderRadius.circular(15);
 
     return Container(
       height: 100,

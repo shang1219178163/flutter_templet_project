@@ -7,7 +7,7 @@ class FlutterSwiperDemo extends StatefulWidget {
 
   final String? title;
 
-  FlutterSwiperDemo({ Key? key, this.title}) : super(key: key);
+  const FlutterSwiperDemo({ Key? key, this.title}) : super(key: key);
 
   
   @override
@@ -102,12 +102,14 @@ const List<String> titles = [
 ];
 
 class ExampleHorizontal extends StatelessWidget {
+  const ExampleHorizontal({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     /// 扩展属性 MediaQuery.of(this.context).size
     final screenSize = MediaQuery.of(context).size;
 
-    return new Scaffold(
+    return Scaffold(
         appBar: AppBar(
           title: Text("ExampleHorizontal"),
         ),
@@ -131,6 +133,8 @@ class ExampleHorizontal extends StatelessWidget {
 }
 
 class ExampleVertical extends StatelessWidget {
+  const ExampleVertical({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -154,6 +158,8 @@ class ExampleVertical extends StatelessWidget {
 }
 
 class ExampleFraction extends StatelessWidget {
+  const ExampleFraction({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
@@ -194,7 +200,7 @@ class ExampleFraction extends StatelessWidget {
           control: SwiperControl(),
           viewportFraction: 0.8,
           scale: 0.9,
-          onTap: (index) => print(index),
+          onTap: (index) => debugPrint("$index"),
         )
     );
   }
@@ -203,11 +209,11 @@ class ExampleFraction extends StatelessWidget {
     return  Expanded(
         child: Swiper(
           itemBuilder: (BuildContext context, int index) {
-            double left = index == 0 ? 20 : 0;
-            double right = index == (images.length - 1) ? 20 : 0;
+            var left = index == 0 ? 20.0 : 0.0;
+            var right = index == (images.length - 1) ? 20.0 : 0.0;
 
-            EdgeInsets padding = EdgeInsets.only(left: left, right: right, top: 0, bottom: 0);
-            EdgeInsets margin = EdgeInsets.only(left: 0, right: 0, top: 0, bottom: 0);
+            var padding = EdgeInsets.only(left: left, right: right, top: 0, bottom: 0);
+            var margin = EdgeInsets.only(left: 0, right: 0, top: 0, bottom: 0);
             if (![0, images.length - 1].contains(index)) {
               margin = EdgeInsets.only(left: 10, right: 10, top: 0, bottom: 0);
             }
@@ -225,7 +231,7 @@ class ExampleFraction extends StatelessWidget {
           pagination: SwiperPagination(builder: SwiperPagination.fraction),
           control: SwiperControl(),
           viewportFraction: 1,
-          onTap: (index) => print(index),
+          onTap: (index) => debugPrint("$index"),
         )
     );
   }
@@ -334,7 +340,7 @@ class ExampleFraction extends StatelessWidget {
       child: CustomSwipper(
         images: images,
         onTap: (int index) {
-          print('CustomBanner 当前 page 为 ${index}');
+          debugPrint('CustomBanner 当前 page 为 $index');
         },
         // itemBuilder: (BuildContext context, int index) {
         //
@@ -345,6 +351,8 @@ class ExampleFraction extends StatelessWidget {
 }
 
 class ExampleCustomPagination extends StatelessWidget {
+  const ExampleCustomPagination({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -368,13 +376,13 @@ class ExampleCustomPagination extends StatelessWidget {
                     builder: SwiperCustomPagination(builder:
                         (BuildContext context, SwiperPluginConfig config) {
                       return ConstrainedBox(
+                        constraints: BoxConstraints.expand(height: 50.0),
                         child: Container(
                             color: Colors.white,
                             child: Text(
                               "${titles[config.activeIndex]} ${config.activeIndex + 1}/${config.itemCount}",
                               style: TextStyle(fontSize: 20.0),
                             )),
-                        constraints: BoxConstraints.expand(height: 50.0),
                       );
                     })),
                 control: SwiperControl(),
@@ -395,6 +403,7 @@ class ExampleCustomPagination extends StatelessWidget {
                     builder: SwiperCustomPagination(builder:
                         (BuildContext context, SwiperPluginConfig config) {
                       return ConstrainedBox(
+                        constraints: BoxConstraints.expand(height: 50.0),
                         child: Row(
                           children: <Widget>[
                             Text(
@@ -414,7 +423,6 @@ class ExampleCustomPagination extends StatelessWidget {
                             )
                           ],
                         ),
-                        constraints: BoxConstraints.expand(height: 50.0),
                       );
                     })),
                 control: SwiperControl(color: Colors.redAccent),
@@ -426,6 +434,8 @@ class ExampleCustomPagination extends StatelessWidget {
 }
 
 class ExamplePhone extends StatelessWidget {
+  const ExamplePhone({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -469,11 +479,12 @@ class ExamplePhone extends StatelessWidget {
 }
 
 class ScaffoldWidget extends StatelessWidget {
+
+  const ScaffoldWidget({Key? key, this.child, this.title, this.actions}) : super(key: key);
+
   final Widget? child;
   final String? title;
   final List<Widget>? actions;
-
-  ScaffoldWidget({this.child, this.title, this.actions});
 
   @override
   Widget build(BuildContext context) {
@@ -507,12 +518,12 @@ class CustomSwiperItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: this.color,
-      padding: this.padding,
-      margin: this.margin,
+      color: color,
+      padding: padding,
+      margin: margin,
       child: FadeInImage.assetNetwork(
         placeholder: 'images/img_placeholder.png',
-        image: this.url,
+        image: url,
         fit: BoxFit.fill,
       ),
     );

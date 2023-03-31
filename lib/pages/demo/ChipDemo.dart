@@ -13,7 +13,7 @@ import 'package:get/get_rx/src/rx_types/rx_types.dart';
 class ChipDemo extends StatefulWidget {
   final String? title;
 
-  ChipDemo({Key? key, this.title}) : super(key: key);
+  const ChipDemo({Key? key, this.title}) : super(key: key);
 
   @override
   _ChipDemoState createState() => _ChipDemoState();
@@ -35,7 +35,7 @@ class _ChipDemoState extends State<ChipDemo> {
   int? _value = 1;
 
   Wrap buildWrap() {
-    List<int> titles = List.generate(3, (index) => index);
+    var titles = List<int>.generate(3, (index) => index);
     return Wrap(
       spacing: 8.0, // 主轴(水平)方向间距
       runSpacing: -8.0, // 纵轴（垂直）方向间距
@@ -112,7 +112,7 @@ class _ChipDemoState extends State<ChipDemo> {
           children: titles.map((e) => ActionChip(
             avatar: CircleAvatar(
                 backgroundColor: Theme.of(context).primaryColor,
-                child: Text("${e.toString().characters.first.toUpperCase()}")
+                child: Text(e.toString().characters.first.toUpperCase())
             ),
             label: Text("Action_$e"),
             onPressed: (){
@@ -185,7 +185,7 @@ class _ChipDemoState extends State<ChipDemo> {
         FilterChip(
           label: Text('FilterChip'),
           onSelected: (val){
-            print('onSelected: ${val}');
+            print('onSelected: $val');
           }
         ),
       ],
@@ -223,7 +223,7 @@ class ChipFilterDemoState extends State<ChipFilterDemo> {
   final _filters = <ActorFilterEntry>[];
 
   Iterable<Widget> get actorWidgets sync* {
-    for (final ActorFilterEntry actor in _entrys) {
+    for (final actor in _entrys) {
       yield Padding(
         padding: const EdgeInsets.all(4.0),
         child: FilterChip(

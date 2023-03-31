@@ -27,7 +27,7 @@ class TrianglePainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    Paint painter = Paint()
+    var painter = Paint()
         ..strokeWidth = 1.0 //线宽
         ..color = color
         ..isAntiAlias = true;

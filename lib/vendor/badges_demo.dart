@@ -7,7 +7,7 @@ import 'package:flutter_templet_project/uti/R.dart';
 
 class BadgesDemo extends StatefulWidget {
 
-  BadgesDemo({ Key? key, this.title}) : super(key: key);
+  const BadgesDemo({ Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -247,13 +247,13 @@ class _BadgesDemoState extends State<BadgesDemo> {
             shape: BadgeShape.circle,
             position: BadgePosition.center(),
             borderRadius: BorderRadius.circular(100),
-            child: Icon(Icons.settings),
             badgeContent: Container(
               height: 5,
               width: 5,
               decoration:
               BoxDecoration(shape: BoxShape.circle, color: Colors.white),
             ),
+            child: Icon(Icons.settings),
           ),
         ),
       ],
@@ -522,7 +522,7 @@ class _BadgesDemoState extends State<BadgesDemo> {
         // ),
         left: FadeInImage(
           height: 60,
-          image: NetworkImage(R.image.imgUrls[4]),
+          image: NetworkImage(R.image.urls[4]),
           placeholder: AssetImage("images/img_placeholder.png"),
         ),
         // mid: Container(

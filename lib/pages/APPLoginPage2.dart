@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 
 class APPLoginPage2 extends StatefulWidget {
 
-  APPLoginPage2({ Key? key, this.title}) : super(key: key);
+  const APPLoginPage2({ Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -47,7 +47,7 @@ class _APPLoginPage2State extends State<APPLoginPage2> {
   }
 
   Widget buildBody() {
-    List<Widget> childrens = [];
+    var childrens = <Widget>[];
     final _main = Center(
       child: ListView(
         padding: EdgeInsets.only(left: 30.0, right: 30.0,top: 60.0),
@@ -80,7 +80,7 @@ class _APPLoginPage2State extends State<APPLoginPage2> {
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(4.0) //圆角大小
                       ),
-                      suffixIcon: _unameController.text.length > 0 ? IconButton(
+                      suffixIcon: _unameController.text.isNotEmpty ? IconButton(
                         icon: Icon(
                           Icons.clear,
                           size: 21,
@@ -152,18 +152,18 @@ class _APPLoginPage2State extends State<APPLoginPage2> {
                   borderRadius: BorderRadius.circular(3)
               ),
             ),
+            onPressed: !isBtnEnabled? null : loginSub,
             child: Container(
                 padding: EdgeInsets.symmetric(vertical: 10),
                 child: Text('登录',style: TextStyle(fontSize: 18.0, color: Colors.white))
             ),
-            onPressed: !isBtnEnabled? null : loginSub,
           ),
           TextButton(
-            child: Text('忘记密码?', style: TextStyle(color: Colors.black54,fontSize: 15.0)),
             onPressed: () {
               // Navigator.pushNamed(context, 'forget');
               Get.toNamed(APPRouter.forgetPasswordPage, arguments: "forget");
             },
+            child: Text('忘记密码?', style: TextStyle(color: Colors.black54,fontSize: 15.0)),
           ),
         ],
       ),
@@ -186,9 +186,9 @@ class _APPLoginPage2State extends State<APPLoginPage2> {
   // 登录按钮是否可点击
   void checkLoginText(){
     if(_unameExp.hasMatch(_unameController.text)&&_pwdExp.hasMatch(_pwdController.text)){
-      this.isBtnEnabled = true;
+      isBtnEnabled = true;
     }else{
-      this.isBtnEnabled = false;
+      isBtnEnabled = false;
     }
   }
 
@@ -196,11 +196,11 @@ class _APPLoginPage2State extends State<APPLoginPage2> {
   void loginSub(){
     FocusScope.of(context).requestFocus(FocusNode()); //收起键盘
     setState((){
-      this.showLoading = true;
+      showLoading = true;
     });
     loginRequest().then((v) => {
       setState((){
-        this.showLoading = false;
+        showLoading = false;
       }),
       // toast提示
       // 模拟登录跳转首页

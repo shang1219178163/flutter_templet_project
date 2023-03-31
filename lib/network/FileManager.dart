@@ -6,7 +6,6 @@
 //  Copyright © 7/26/21 shang. All rights reserved.
 //
 
-import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 
 class FileManager {
@@ -17,19 +16,19 @@ class FileManager {
 
   ///获取缓存目录路径
   static Future<String> getCacheDirPath() async {
-    Directory directory = await getTemporaryDirectory();
+    var directory = await getTemporaryDirectory();
     return directory.path;
   }
 
   ///获取文件缓存目录路径
   static Future<String> getFilesDirPath() async {
-    Directory directory = await getApplicationSupportDirectory();
+    var directory = await getApplicationSupportDirectory();
     return directory.path;
   }
 
   ///获取文档存储目录路径
   static Future<String> getDocumentsDirPath() async {
-    Directory directory = await getApplicationDocumentsDirectory();
+    var directory = await getApplicationDocumentsDirectory();
     return directory.path;
   }
 }

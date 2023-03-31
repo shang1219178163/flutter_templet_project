@@ -10,7 +10,7 @@ import 'package:tuple/tuple.dart';
 class GradientDemo extends StatefulWidget {
   final String? title;
 
-  GradientDemo({Key? key, this.title}) : super(key: key);
+  const GradientDemo({Key? key, this.title}) : super(key: key);
 
   @override
   _GradientDemoState createState() => _GradientDemoState();
@@ -57,7 +57,7 @@ class _GradientDemoState extends State<GradientDemo> {
   }
   
   showSheetTileMode() {
-    final tileModes = TileMode.values;
+    const tileModes = TileMode.values;
     final items = tileModes.map((e) => Text('$e')).toList();
 
     showSheet(
@@ -70,7 +70,7 @@ class _GradientDemoState extends State<GradientDemo> {
     );
   }
   showSheetBlendMode() {
-    final blendModes = BlendMode.values;
+    const blendModes = BlendMode.values;
 
     final items = blendModes.map((e) => Text('$e')).toList();
 
@@ -105,8 +105,8 @@ class _GradientDemoState extends State<GradientDemo> {
     return DropdownButton<Alignment>(
       value: _dropValue,
       items: AlignmentExt.allCases.map((e) => DropdownMenuItem(
-        child: Text(e.toString()),
         value: e,
+        child: Text(e.toString()),
       ),
       ).toList(),
       onChanged: (Alignment? value) {
@@ -116,7 +116,7 @@ class _GradientDemoState extends State<GradientDemo> {
           width: 400,
           height: 100,
         ) ?? 0.5;
-        print("_dropValue:${value} scale:${_radius}");
+        print("_dropValue:$value scale:$_radius");
         setState(() {});
       },
     );
@@ -132,7 +132,7 @@ class _GradientDemoState extends State<GradientDemo> {
         decoration: BoxDecoration(
           color: Colors.red,
           gradient: LinearGradient(
-            tileMode: this.tileMode,
+            tileMode: tileMode,
             colors: [
               Color(0xFFFFC125),
               Color(0xFFFF7F24)
@@ -144,7 +144,7 @@ class _GradientDemoState extends State<GradientDemo> {
         text: '多种颜色 均分',
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            tileMode: this.tileMode,
+            tileMode: tileMode,
             colors: [
               Color(0xFFFFC125),
               Color(0xFFFF7F24),
@@ -157,7 +157,7 @@ class _GradientDemoState extends State<GradientDemo> {
         text: '两种颜色 1:3',
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            tileMode: this.tileMode,
+            tileMode: tileMode,
             colors: [
               Color(0xFFFFC125),
               Color(0xFFFF7F24),
@@ -172,7 +172,7 @@ class _GradientDemoState extends State<GradientDemo> {
         text: '两种颜色 垂直均分 topRight',
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            tileMode: this.tileMode,
+            tileMode: tileMode,
             begin: Alignment.topRight,
             colors: [
               Color(0xFFFFC125),
@@ -186,7 +186,7 @@ class _GradientDemoState extends State<GradientDemo> {
         text: '两种颜色 前半部均分 延伸',
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            tileMode: this.tileMode,
+            tileMode: tileMode,
             begin: Alignment(-1.0, 0.0),
             end: Alignment(0.0, 0.0),
             // tileMode: TileMode.clamp,
@@ -202,7 +202,7 @@ class _GradientDemoState extends State<GradientDemo> {
         text: '两种颜色 均分 重复 repeated',
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            tileMode: this.tileMode,
+            tileMode: tileMode,
             begin: Alignment(-1.0, 0.0),
             end: Alignment(0.0, 0.0),
             colors: [
@@ -217,7 +217,7 @@ class _GradientDemoState extends State<GradientDemo> {
         text: '两种颜色 均分 mirror',
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            tileMode: this.tileMode,
+            tileMode: tileMode,
             begin: Alignment(-1.0, 0.0),
             end: Alignment(0.0, 0.0),
             // tileMode: TileMode.mirror,
@@ -233,7 +233,7 @@ class _GradientDemoState extends State<GradientDemo> {
         text: '两种颜色 设置起始位置与终止位置',
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            tileMode: this.tileMode,
+            tileMode: tileMode,
             begin: Alignment.topLeft,
             end: Alignment(0.5, 0.0),
             // tileMode: TileMode.repeated,
@@ -249,7 +249,7 @@ class _GradientDemoState extends State<GradientDemo> {
         text: '三种颜色 设置起始位置与终止位置',
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            tileMode: this.tileMode,
+            tileMode: tileMode,
             // begin: Alignment.topLeft,
             // end: Alignment(0.5, 0.0),
             colors: const <Color>[
@@ -267,8 +267,8 @@ class _GradientDemoState extends State<GradientDemo> {
         text: '四色 无 stops, 平均分布',
         decoration: BoxDecoration(
           gradient: SweepGradient(
-            tileMode: this.tileMode,
-            center: this._dropValue,
+            tileMode: tileMode,
+            center: _dropValue,
             startAngle: 0,
             endAngle: math.pi * 2,
             colors: const <Color>[
@@ -285,8 +285,8 @@ class _GradientDemoState extends State<GradientDemo> {
         text: '四色 无 stops, stops: [0.25, 0.5, 0.75, 1]',
         decoration: BoxDecoration(
           gradient: SweepGradient(
-            tileMode: this.tileMode,
-            center: this._dropValue,
+            tileMode: tileMode,
+            center: _dropValue,
             startAngle: 0,
             endAngle: math.pi * 2,
             colors: const <Color>[
@@ -303,8 +303,8 @@ class _GradientDemoState extends State<GradientDemo> {
         text: '四色 startAngle: 0, endAngle: math.pi',
         decoration: BoxDecoration(
           gradient: SweepGradient(
-            tileMode: this.tileMode,
-            center: this._dropValue,
+            tileMode: tileMode,
+            center: _dropValue,
             // center: FractionalOffset.topRight,
             startAngle: 0,
             endAngle: math.pi,
@@ -325,7 +325,7 @@ class _GradientDemoState extends State<GradientDemo> {
         text: 'RadialGradient',
         decoration: BoxDecoration(
           gradient: RadialGradient(
-            tileMode: this.tileMode,
+            tileMode: tileMode,
             // tileMode: TileMode.mirror,
             radius: _radius,
             center: _dropValue,
@@ -345,7 +345,7 @@ class _GradientDemoState extends State<GradientDemo> {
         text: 'RadialGradient',
         decoration: BoxDecoration(
           gradient: RadialGradient(
-            tileMode: this.tileMode,
+            tileMode: tileMode,
             // tileMode: TileMode.mirror,
             // radius: 0.5,
             // center: Alignment.center,
@@ -364,7 +364,7 @@ class _GradientDemoState extends State<GradientDemo> {
         blendMode: BlendMode.color,
         shaderCallback: (Rect bounds) {
           return RadialGradient(
-            tileMode: this.tileMode,
+            tileMode: tileMode,
             radius: 0.5,
             colors: [Colors.red, Colors.blue],
           ).createShader(bounds);
@@ -374,7 +374,7 @@ class _GradientDemoState extends State<GradientDemo> {
         blendMode: BlendMode.srcATop,
         shaderCallback: (Rect bounds) {
           return RadialGradient(
-            tileMode: this.tileMode,
+            tileMode: tileMode,
             radius: .6,
             colors: [
               Colors.transparent,
@@ -392,16 +392,16 @@ class _GradientDemoState extends State<GradientDemo> {
   Widget _buildBox({
     required String text,
     required Decoration decoration,
-    double height: 100,
+    double height = 100,
     double? width,
   }) {
     return Container(
       width: width,
       height: height,
       alignment: Alignment.center,
-      child: Text(text, style: TextStyle(color: Colors.white, fontSize: 16.0)),
       margin: const EdgeInsets.fromLTRB(8.0, 3.0, 8.0, 3.0),
-      decoration: decoration
+      decoration: decoration,
+      child: Text(text, style: TextStyle(color: Colors.white, fontSize: 16.0)),
     );
   }
 

@@ -13,7 +13,7 @@ class StatefulBuilderDemo extends StatefulWidget {
 
   final String? title;
 
-  StatefulBuilderDemo({ Key? key, this.title}) : super(key: key);
+  const StatefulBuilderDemo({ Key? key, this.title}) : super(key: key);
 
   
   @override

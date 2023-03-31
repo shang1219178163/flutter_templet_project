@@ -16,7 +16,7 @@ class ProgressIndicatorDemo extends StatefulWidget {
 
   final String? title;
 
-  ProgressIndicatorDemo({ Key? key, this.title}) : super(key: key);
+  const ProgressIndicatorDemo({ Key? key, this.title}) : super(key: key);
 
   
   @override

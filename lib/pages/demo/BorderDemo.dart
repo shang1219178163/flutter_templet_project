@@ -12,7 +12,7 @@ class BorderDemo extends StatefulWidget {
 
   final String? title;
 
-  BorderDemo({ Key? key, this.title}) : super(key: key);
+  const BorderDemo({ Key? key, this.title}) : super(key: key);
 
 
   @override
@@ -60,10 +60,10 @@ class _BorderDemoState extends State<BorderDemo> {
               style: OutlinedButton.styleFrom(
                 side: BorderSide(color: Colors.red, width: 1),
               ),
-              child: Text('BeveledRectangleBorder'),
               onPressed: () {
 
               },
+              child: Text('BeveledRectangleBorder'),
             ),
 
             _buildHeaderText("TextButton - ButtonStyle - BorderSide"),
@@ -82,30 +82,30 @@ class _BorderDemoState extends State<BorderDemo> {
               style: ElevatedButton.styleFrom(
                 shape: _buildBeveledRectangleBorder(radius: 0),
               ),
-              child: Text('BeveledRectangleBorder'),
               onPressed: () {
 
               },
+              child: Text('BeveledRectangleBorder'),
             ),
 
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 shape: _buildBeveledRectangleBorder(radius: 10),
               ),
-              child: Text('BeveledRectangleBorder'),
               onPressed: () {
 
               },
+              child: Text('BeveledRectangleBorder'),
             ),
 
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 shape: _buildBeveledRectangleBorder(radius: 100),
               ),
-              child: Text('BeveledRectangleBorder'),
               onPressed: () {
 
               },
+              child: Text('BeveledRectangleBorder'),
             ),
 
             ElevatedButton(
@@ -113,47 +113,46 @@ class _BorderDemoState extends State<BorderDemo> {
                 shape: _buildCircleBorder(),
                 minimumSize: Size(100, 100),
               ),
-              child: Text('CircleBorder'),
               onPressed: () {
 
               },
+              child: Text('CircleBorder'),
             ),
 
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 shape: _buildContinuousRectangleBorder(radius: 20),
               ),
-              child: Text('ContinuousRectangleBorder'),
               onPressed: () {
 
               },
+              child: Text('ContinuousRectangleBorder'),
             ),
 
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 shape: _buildRoundedRectangleBorder(radius: 8),
               ),
-              child: Text('RoundedRectangleBorder'),
               onPressed: () {
 
               },
+              child: Text('RoundedRectangleBorder'),
             ),
 
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 shape: _buildStadiumBorder(radius: 20),
               ),
-              child: Text('StadiumBorder'),
               onPressed: () {
 
               },
+              child: Text('StadiumBorder'),
             ),
 
 
             _buildHeaderText("Container - BoxDecoration - BoxBorder"),
 
             Container(
-              child: Icon(Icons.pool, size: 32, color: Colors.white,),
               padding: EdgeInsets.all(16),
               margin: EdgeInsets.all(8),
               width: 60,
@@ -164,6 +163,7 @@ class _BorderDemoState extends State<BorderDemo> {
                       top: BorderSide(color: Colors.red, width: 3,)
                   )
               ),
+              child: Icon(Icons.pool, size: 32, color: Colors.white,),
             ),
 
             Container(
@@ -200,7 +200,7 @@ class _BorderDemoState extends State<BorderDemo> {
             // color: Colors.green,
             shape: Border.all(color: Colors.green, width: 2)
           ),
-          child: TextButton(child: Text("ShapeDecoration - Border.all"), onPressed: () {  },),
+          child: TextButton( onPressed: () {  },child: Text("ShapeDecoration - Border.all"),),
         ),
 
         Container(
@@ -213,7 +213,7 @@ class _BorderDemoState extends State<BorderDemo> {
               left: BorderSide(color: Colors.green, width: 5)
             )
           ),
-          child: TextButton(child: Text('ShapeDecoration - Border.top,bottom,right,left'), onPressed: () {  },),
+          child: TextButton( onPressed: () {  },child: Text('ShapeDecoration - Border.top,bottom,right,left'),),
         ),
 
         Container(
@@ -224,7 +224,7 @@ class _BorderDemoState extends State<BorderDemo> {
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                   side: BorderSide(color: Colors.red, width: 2))
           ),
-          child: TextButton(child: Text('ShapeDecoration - RoundedRectangleBorder'), onPressed: () {  },),
+          child: TextButton( onPressed: () {  },child: Text('ShapeDecoration - RoundedRectangleBorder'),),
         ),
 
         Container(
@@ -233,7 +233,7 @@ class _BorderDemoState extends State<BorderDemo> {
               color: Colors.yellowAccent,
               shape: CircleBorder(side: BorderSide(color: Colors.red, width: 2))
           ),
-          child: TextButton(child: Text('ShapeDecoration - CircleBorder'), onPressed: () {  },),
+          child: TextButton( onPressed: () {  },child: Text('ShapeDecoration - CircleBorder'),),
         ),
 
         Container(
@@ -245,7 +245,7 @@ class _BorderDemoState extends State<BorderDemo> {
               side: BorderSide(color: Colors.red, width: 2)
             )
           ),
-          child: TextButton(child: Text('ShapeDecoration - BeveledRectangleBorder'), onPressed: () {  },),
+          child: TextButton( onPressed: () {  },child: Text('ShapeDecoration - BeveledRectangleBorder'),),
         ),
 
         Container(
@@ -260,16 +260,16 @@ class _BorderDemoState extends State<BorderDemo> {
             ),
             shape: UnderlineInputBorder(borderSide: BorderSide(color: Colors.red, width: 2))
           ),
-          child: TextButton(child: Text('ShapeDecoration - UnderlineInputBorder'), onPressed: () {  },),
+          child: TextButton( onPressed: () {  },child: Text('ShapeDecoration - UnderlineInputBorder'),),
         ),
 
         Container(
           margin: EdgeInsets.all(8),
-          decoration: new UnderlineTabIndicator(
+          decoration: UnderlineTabIndicator(
             borderSide: BorderSide(width: 2.0, color: Colors.red),
             insets: EdgeInsets.fromLTRB(0, 0, 0, 10)
           ),
-          child: TextButton(child: Text('UnderlineTabIndicator - borderSide'), onPressed: () {  },),
+          child: TextButton( onPressed: () {  },child: Text('UnderlineTabIndicator - borderSide'),),
         ),
       ]);
 

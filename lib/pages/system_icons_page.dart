@@ -35,11 +35,11 @@ class _SystemIconsPageState extends State<SystemIconsPage> {
         title: Text("fluttefr 系统 Icons"),
         actions: [
           TextButton(
-            child: Text(actionTitle, style: TextStyle(color: Colors.white),),
             onPressed: (){
               isGrid = !isGrid;
               setState(() {});
             },
+            child: Text(actionTitle, style: TextStyle(color: Colors.white),),
           ),
         ],
       ),
@@ -48,12 +48,12 @@ class _SystemIconsPageState extends State<SystemIconsPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Padding(
-              child: _buildTextField(),
               padding: EdgeInsets.all(10),
+              child: _buildTextField(),
             ),
             Padding(
-              child: Text("找到 ${searchResults.length} 条数据"),
               padding: EdgeInsets.only(left: 10, right: 10),
+              child: Text("找到 ${searchResults.length} 条数据"),
             ),
             Expanded(
               child: isGrid ? _buildGridView() : _buildListView(),
@@ -87,7 +87,7 @@ class _SystemIconsPageState extends State<SystemIconsPage> {
   _buildListView() {
     searchResults.sort((a, b) => a.compareTo(b));
     return CupertinoScrollbar(
-      isAlwaysShown: false,
+      thumbVisibility: false,
       child: ListView.separated(
           itemCount: searchResults.length,
           itemBuilder: (context, index) {
@@ -133,8 +133,8 @@ class _SystemIconsPageState extends State<SystemIconsPage> {
             ),
           ),
           child: GridTile(
-            child: Icon(kIConDic[item]),
             footer: Text("$item",),
+            child: Icon(kIConDic[item]),
           ),
         );
       },

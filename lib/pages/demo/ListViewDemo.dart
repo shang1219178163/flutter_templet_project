@@ -12,7 +12,7 @@ class ListViewDemo extends StatefulWidget {
 
   final String? title;
 
-  ListViewDemo({ Key? key, this.title}) : super(key: key);
+  const ListViewDemo({ Key? key, this.title}) : super(key: key);
 
 
   @override
@@ -56,7 +56,7 @@ class _ListViewDemoState extends State<ListViewDemo> {
        false
     ),
     ...List.generate(19, (index) => Tuple4(
-        'item_$index' + 'z'*index,
+        'item_$index${'z'*index}',
         '海尔｜无边界其他',
         '跳转url',
         false
@@ -74,7 +74,7 @@ class _ListViewDemoState extends State<ListViewDemo> {
           TextButton(
             onPressed: () {
               test();
-              print(_scrollController);
+              debugPrint("$_scrollController");
               // _scrollController.jumpTo(200);
             },
               child: Text('done', style: TextStyle(color: Colors.white),)
@@ -99,7 +99,7 @@ class _ListViewDemoState extends State<ListViewDemo> {
             controller: _scrollController,
               scrollDirection: Axis.horizontal,
               onKeyCallback: (context, index, itemKey) {
-              _scrollController.JumToHorizontal(
+              _scrollController.jumToHorizontal(
                 key: itemKey,
                 offsetX: (MediaQuery.of(context).size.width / 2)
               );
@@ -146,7 +146,7 @@ class _ListViewDemoState extends State<ListViewDemo> {
       height: height,
       padding: EdgeInsets.all(8),
       child: Scrollbar(
-        isAlwaysShown: true,
+        thumbVisibility: true,
         child: ListView.separated(
             key: key,
             controller: controller,
@@ -154,7 +154,7 @@ class _ListViewDemoState extends State<ListViewDemo> {
             padding: EdgeInsets.all(0),
             itemCount: items.length,
             // cacheExtent: 10,
-            itemBuilder: itemBuilder != null ? itemBuilder : (context, index) {
+            itemBuilder: itemBuilder ?? (context, index) {
               final e = items[index];
 
               GlobalKey itemKey = GlobalKey(debugLabel: e.item1);
@@ -204,7 +204,7 @@ class _ListViewDemoState extends State<ListViewDemo> {
       height: height,
       padding: EdgeInsets.all(8),
       child: Scrollbar(
-        isAlwaysShown: true,
+        thumbVisibility: true,
         child: ListView.separated(
           key: _globalKey,
           controller: _scrollController,
@@ -212,15 +212,15 @@ class _ListViewDemoState extends State<ListViewDemo> {
           padding: EdgeInsets.all(0),
           itemCount: items.length,
           // cacheExtent: 10,
-          itemBuilder: itemBuilder != null ? itemBuilder : (context, index) {
+          itemBuilder: itemBuilder ?? (context, index) {
             final e = items[index];
 
             final itemKey = GlobalKey(debugLabel: e.item1);
             return InkWell(
               key: itemKey,
               onTap: () {
-                print(e);
-                _scrollController.JumToHorizontal(
+                debugPrint("$e");
+                _scrollController.jumToHorizontal(
                     key: itemKey,
                     offsetX: (MediaQuery.of(context).size.width / 2)
                 );
@@ -266,14 +266,13 @@ class _ListViewDemoState extends State<ListViewDemo> {
         padding: EdgeInsets.all(0),
         itemCount: items.length,
         // cacheExtent: 10,
-        itemBuilder: itemBuilder != null ? itemBuilder : (context, index) {
+        itemBuilder: itemBuilder ?? (context, index) {
           final e = items[index];
 
           final itemKey = GlobalKey(debugLabel: e.item1);
           return InkWell(
             key: itemKey,
             onTap: () {
-              print(e);
               // _scrollController2.scrollToItem(
               //     itemKey: itemKey,
               //     scrollKey: _globalKey2,
@@ -372,7 +371,7 @@ class _ListViewDemoState extends State<ListViewDemo> {
   }
 
   test() {
-    print("Testing:${[GlobalKey(),GlobalKey(),]}");
+    debugPrint("Testing:${[GlobalKey(),GlobalKey(),]}");
   }
 }
 
@@ -398,7 +397,7 @@ class ScrollWidget extends StatelessWidget {
   final double showCount;
 
   /// 获取 item 宽
-  double? get itemWidth => itemMap[this.showCount] ?? itemMap['1'];
+  double? get itemWidth => itemMap[showCount] ?? itemMap['1'];
 
   @override
   Widget build(BuildContext context) {
@@ -406,7 +405,7 @@ class ScrollWidget extends StatelessWidget {
   }
 
   _buildbody() {
-    final items = List.generate(3, (index) => "${index}");
+    final items = List.generate(3, (index) => "$index");
 
     return ListView.separated(
       scrollDirection: Axis.horizontal,
@@ -416,11 +415,11 @@ class ScrollWidget extends StatelessWidget {
       itemBuilder: (context, index) {
         final e = items[index];
         return InkWell(
-          onTap: () => print(e),
+          onTap: () => debugPrint("$e"),
           child: Container(
             color: Colors.green,
             width: 200,
-            child: Text('Index:${index}'),
+            child: Text('Index:$index'),
           ),
         );
       },

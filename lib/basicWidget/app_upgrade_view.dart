@@ -74,10 +74,10 @@ class AppUpgradeView extends StatefulWidget {
 }
 
 class _AppUpgradeWidget extends State<AppUpgradeView> {
-  static final String _downloadApkName = 'temp.apk';
+  static const String _downloadApkName = 'temp.apk';
   
   /// 下载进度
-  double _downloadProgress = 0.0;
+  final double _downloadProgress = 0.0;
 
   // DownloadStatus _downloadStatus = DownloadStatus.none;
 
@@ -173,18 +173,18 @@ class _AppUpgradeWidget extends State<AppUpgradeView> {
           borderRadius: BorderRadius.only(
               bottomLeft: Radius.circular(widget.borderRadius)
           ),
+          onTap: () {
+            // widget.onCancel?.call();
+            Navigator.of(context).pop();
+          }
+
           child: Container(
             height: 45,
             alignment: Alignment.center,
             child: Text(widget.cancelText ?? '以后再说',
                 style: widget.cancelTextStyle ?? TextStyle()
             ),
-          ),
-          onTap: () {
-            // widget.onCancel?.call();
-            Navigator.of(context).pop();
-          }
-        ),
+          ),        ),
       ),
     );
   }
@@ -214,16 +214,16 @@ class _AppUpgradeWidget extends State<AppUpgradeView> {
           ),
           child: InkWell(
             borderRadius: borderRadius,
+            onTap: () {
+              ddlog(widget.okText ?? '立即体验');
+              // onConfirm();
+            },
             child: Container(
               height: 45,
               alignment: Alignment.center,
               child: Text(widget.okText ?? '立即体验',
                   style: widget.okTextStyle ?? TextStyle(color: Colors.white)),
             ),
-            onTap: () {
-              ddlog(widget.okText ?? '立即体验');
-              // onConfirm();
-            },
           ),
         ),
     );

@@ -5,7 +5,7 @@ class ImageBlendModeDemo extends StatefulWidget {
 
   final String? title;
 
-  ImageBlendModeDemo({ Key? key, this.title}) : super(key: key);
+  const ImageBlendModeDemo({ Key? key, this.title}) : super(key: key);
 
 
   @override
@@ -68,7 +68,7 @@ class _ImageBlendModeDemoState extends State<ImageBlendModeDemo> {
                         ),
                         FittedBox(
                           fit: BoxFit.none,
-                          child: Text("${e}".split('.')[1]),
+                          child: Text("$e".split('.')[1]),
                         ),
                       ],
                     ),

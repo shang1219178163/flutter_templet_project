@@ -5,9 +5,7 @@
 //  Created by shang on 3/14/23 8:56 AM.
 //  Copyright © 3/14/23 shang. All rights reserved.
 //
-/**
- * TrackingScrollController 在2.0.6 mac 平台无效,后续观察
- */
+/// TrackingScrollController 在2.0.6 mac 平台无效,后续观察
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/change_notifier_ext.dart';
@@ -15,7 +13,7 @@ import 'package:flutter_templet_project/extension/color_ext.dart';
 
 class NavigationRailDemo extends StatefulWidget {
 
-  NavigationRailDemo({
+  const NavigationRailDemo({
     Key? key,
     this.title
   }) : super(key: key);
@@ -58,10 +56,10 @@ class _NavigationRailDemoState extends State<NavigationRailDemo> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: ['done',].map((e) => TextButton(
+          onPressed: onPressed,
           child: Text(e,
             style: TextStyle(color: Colors.white),
           ),
-          onPressed: onPressed,
         )).toList(),
       ),
       body: Row(
@@ -142,7 +140,7 @@ class _NavigationRailDemoState extends State<NavigationRailDemo> {
           color: ColorExt.random,
           child: ListView(
             controller: _trackingScrollController,
-            children: List.generate(199, (index) => Text("data_${index}")),
+            children: List.generate(199, (index) => Text("data_$index")),
             // children: List.generate(299, (index) => TextButton(
             //   onPressed: () { print("data_${index}"); },
             //   child: Text("data_${index}"),

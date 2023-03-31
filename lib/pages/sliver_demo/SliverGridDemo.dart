@@ -4,7 +4,7 @@ class SliverGridDemo extends StatefulWidget {
 
   final String? title;
 
-  SliverGridDemo({ Key? key, this.title}) : super(key: key);
+  const SliverGridDemo({ Key? key, this.title}) : super(key: key);
 
   
   @override
@@ -48,7 +48,7 @@ class _SliverGridDemoState extends State<SliverGridDemo> {
 
   createExample() {
     List<Color> colors = Colors.primaries.sublist(5, );
-    List<Widget> list = colors.map((e) => _buildItem(color: e)).toList();
+    var list = colors.map((e) => _buildItem(color: e)).toList();
 
     return CustomScrollView(
       slivers: <Widget>[

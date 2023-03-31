@@ -77,10 +77,10 @@ class _AppSettingsPageState extends State<AppSettingsPage>{
     if (title.isEmpty) {
       return Container(
         height: 10,
-        child: Text(title),
         decoration: BoxDecoration(
           color: Colors.black.withAlpha(10),
         ),
+        child: Text(title),
       );
     }
 

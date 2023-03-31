@@ -4,7 +4,7 @@ class SelectableTextDemo extends StatefulWidget {
 
   final String? title;
 
-  SelectableTextDemo({ Key? key, this.title}) : super(key: key);
+  const SelectableTextDemo({ Key? key, this.title}) : super(key: key);
 
   
   @override

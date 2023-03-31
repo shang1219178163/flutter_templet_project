@@ -14,7 +14,7 @@ import "package:intl/intl.dart";
 class NumberFormatDemo extends StatefulWidget {
 
   final String? title;
-  NumberFormatDemo({ Key? key, this.title}) : super(key: key);
+  const NumberFormatDemo({ Key? key, this.title}) : super(key: key);
 
 
   @override

@@ -22,7 +22,7 @@ import 'package:flutter_templet_project/uti/R.dart';
 
 
 class TestPage extends StatefulWidget {
-  TestPage({ Key? key, this.title}) : super(key: key);
+  const TestPage({ Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -44,32 +44,32 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
     _tabController = TabController(length: items.length, vsync: this)
     ..addListener(() {
       if(!_tabController.indexIsChanging){
-        print("_tabController:${_tabController.index}");
+        debugPrint("_tabController:${_tabController.index}");
       }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    print("_TestPageState this:${this}");
-    print("_TestPageState widget:${widget}");
+    debugPrint("_TestPageState this:${this}");
+    debugPrint("_TestPageState widget:$widget");
 
     return Scaffold(
         appBar: AppBar(
           flexibleSpace: Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: NetworkImage(R.image.imgUrls[5]),
+                image: NetworkImage(R.image.urls[5]),
                 fit: BoxFit.cover,
               ),
             ),
           ),
           title: Text(widget.title ?? "$widget"),
           actions: ['done',].map((e) => TextButton(
+            onPressed: onDone,
             child: Text(e,
                 style: TextStyle(color: Colors.white),
-              ),
-            onPressed: onDone,)
+              ),)
           ).toList(),
           // bottom: buildAppBarBottom(),
           bottom: TabBar(
@@ -91,12 +91,12 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
               RepaintBoundary(child: buildSection3(),),
               Container(
                 margin: const EdgeInsets.all(8),
+                color: Colors.green,
                 child: Container(
                     width: 200,
                     height: 40,
                     child: Text('widget.title')
                 ),
-                color: Colors.green,
               ),
               TextField(
                 cursorColor: Colors.purple,
@@ -123,10 +123,8 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
     )).toList();
     return PreferredSize(
       preferredSize: Size.fromHeight(60),
-      child: Container(
-        child: Row(
-          children: items,
-        ),
+      child: Row(
+        children: items,
       ),
     );
 
@@ -141,30 +139,30 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
   }
 
   onDone() {
-    final a = true;
+    const a = true;
     final b = "nested ${a ? "strings" : "can"} be wrapped by a double quote";
 
     final shard = Singleton();
     final shard1 = Singleton.instance;
     final shard2 = Singleton.getInstance();
 
-    print(shard.toString());
-    print(shard1.toString());
-    print(shard2.toString());
-    print(shard == shard1);
-    print(shard1 == shard2);
-    print(shard == shard2);
+    debugPrint(shard.toString());
+    debugPrint(shard1.toString());
+    debugPrint(shard2.toString());
+    debugPrint("${shard == shard1}");
+    debugPrint("${shard1 == shard2}");
+    debugPrint("${shard == shard2}");
 
-    final aa = "我是谁";
-    final bb = "9999";
-    final cc = "https://stackoverflow.com/questions/26107125/cannot-read-property-addeventlistener-of-null";
+    const aa = "我是谁";
+    const bb = "9999";
+    const cc = "https://stackoverflow.com/questions/26107125/cannot-read-property-addeventlistener-of-null";
 
     final map = {
       r"a": aa,
       r"b": bb,
       r"c": cc,
     };
-    print("map:${map}");
+    debugPrint("map:$map");
   }
 
 
@@ -175,7 +173,7 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
       alignment: WrapAlignment.start, //沿主轴方向居中
       children: titles.map((e) => ActionChip(
         avatar: CircleAvatar(backgroundColor: Theme.of(context).primaryColor,
-            child: Text("${e.characters.first.toUpperCase()}")
+            child: Text(e.characters.first.toUpperCase())
         ),
         label: Text(e),
         onPressed: (){
@@ -266,7 +264,7 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
               margin: EdgeInsets.only(left: 16, right: 8),
               color: e.item2,
             ),
-            Text('${e.item1}'),
+            Text(e.item1),
           ]
       )).toList(),
     );
@@ -275,7 +273,7 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
   buildSection5() {
     return Listener(
       onPointerDown: (e){
-        print("onPointerDown:${e}");
+        debugPrint("onPointerDown:$e");
       },
       child: Container(
         height: 400,
@@ -286,7 +284,7 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
               height: 60,
               child: ColoredBox(
                 color: ColorExt.random,
-                child: Text('Row_${index}')
+                child: Text('Row_$index')
               ),
             );
           }
@@ -301,8 +299,9 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
       onPressed: () {},
       style: ButtonStyle(
         foregroundColor: MaterialStateProperty.resolveWith<Color>((Set<MaterialState> states) {
-          if (states.contains(MaterialState.pressed))
+          if (states.contains(MaterialState.pressed)) {
             return Colors.green;
+          }
           return Colors.black87; // Defer to the widget's default.
         }),
       ),
@@ -313,7 +312,7 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
 
   void _onPressed(int e) {
     final a = 'Eats shoots leaves'.splitMapJoin((RegExp(r'shoots')),
-         onMatch:    (m) => '${m[0]}',  // (or no onMatch at all)
+         onMatch:    (m) => m[0] ?? "",  // (or no onMatch at all)
          onNonMatch: (n) => '*'); // Result: "*shoots*"
     ddlog(a);
 
@@ -338,7 +337,7 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
 
     showSnackBar(SnackBar(content: Text(d2)));
 
-    Map<String, dynamic> map = {
+    var map = <String, dynamic>{
       'msgType': '5',
       'msgTag': '官方号',
       'msgUnreadNum': 3,
@@ -348,13 +347,13 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
     ddlog('map.join():${map.join()}' );
 
     double? z;
-    double? z1 = null;
+    double? z1;
     final list = [z, z1];
-    print('z1:${list}');
+    debugPrint('z1:$list');
 
-    List<String>? items = null;
+    List<String>? items;
     final zz = items?[0];
-    print('zz:${zz}');
+    debugPrint('zz:$zz');
 
     final map1 = {
       'a': 1,
@@ -362,20 +361,20 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
       'c': 111
     };
 
-    print('map: $map1');
-    print('map1: $map1');
-    print('map2: $map1');
+    debugPrint('map: $map1');
+    debugPrint('map1: $map1');
+    debugPrint('map2: $map1');
   }
 
   getUrlParams({Map<String, dynamic> map = const {}}) {
-    if (map.keys.length == 0) {
+    if (map.keys.isEmpty) {
       return '';
     }
-    String paramStr = '';
+    var paramStr = '';
     map.forEach((key, value) {
-      paramStr += '${key}=${value}&';
+      paramStr += '$key=$value&';
     });
-    String result = paramStr.substring(0, paramStr.length - 1);
+    var result = paramStr.substring(0, paramStr.length - 1);
     return result;
   }
 

@@ -5,7 +5,7 @@ import 'package:flutter_templet_project/uti/R.dart';
 
 class NNHorizontalScrollWidgetDemo extends StatefulWidget {
 
-  NNHorizontalScrollWidgetDemo({
+  const NNHorizontalScrollWidgetDemo({
     Key? key,
     this.title
   }) : super(key: key);
@@ -17,7 +17,7 @@ class NNHorizontalScrollWidgetDemo extends StatefulWidget {
 }
 
 class _NNHorizontalScrollWidgetDemoState extends State<NNHorizontalScrollWidgetDemo> {
-  List<String> imgUrls = R.image.imgUrls;
+  List<String> imgUrls = R.image.urls;
 
   var _items = <AttrCarouseItem>[];
 
@@ -26,7 +26,7 @@ class _NNHorizontalScrollWidgetDemoState extends State<NNHorizontalScrollWidgetD
     // TODO: implement initState
     _items = List.generate(imgUrls.length, (index) => AttrCarouseItem(
         icon: imgUrls[index],
-        title: "标题_${index}"
+        title: "标题_$index"
     ));
 
     super.initState();
@@ -40,10 +40,10 @@ class _NNHorizontalScrollWidgetDemoState extends State<NNHorizontalScrollWidgetD
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: ['done',].map((e) => TextButton(
+          onPressed: () => print(e),
           child: Text(e,
             style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () => print(e),)
+          ),)
         ).toList(),
       ),
       body: ListView(

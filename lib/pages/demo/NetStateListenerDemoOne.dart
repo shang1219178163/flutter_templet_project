@@ -12,7 +12,7 @@ import 'package:flutter_templet_project/service/connectivity_service.dart';
 
 class NetStateListenerDemoOne extends StatefulWidget {
 
-  NetStateListenerDemoOne({
+  const NetStateListenerDemoOne({
     Key? key,
     this.title
   }) : super(key: key);
@@ -35,19 +35,18 @@ class _NetStateListenerDemoOneState extends State<NetStateListenerDemoOne> with 
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: ['done',].map((e) => TextButton(
+          onPressed: onPressed,
           child: Text(e,
             style: TextStyle(color: Colors.white),
-          ),
-          onPressed: onPressed,)
+          ),)
         ).toList(),
       ),
       body: Column(
         children: [
           ValueListenableBuilder<ConnectivityResult>(
             valueListenable: netConnectResult,
-            child: Text("监听 netConnectResult"),
             builder: (context, value, child) {
-              print('ValueListenableBuilder: netConnectResult:${value}');
+              print('ValueListenableBuilder: netConnectResult:$value');
 
               return Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -57,6 +56,7 @@ class _NetStateListenerDemoOneState extends State<NetStateListenerDemoOne> with 
                 ],
               );
             },
+            child: Text("监听 netConnectResult"),
           ),
         ],
       ),

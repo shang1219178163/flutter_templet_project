@@ -44,7 +44,3 @@ class StudentClassroom{
       this.id,
     });
 }
-
-extension de on String{
-  
-}

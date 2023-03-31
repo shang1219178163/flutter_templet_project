@@ -7,7 +7,7 @@ import 'package:flutter_templet_project/extension/widget_ext.dart';
 
 class NeumorphismDemo extends StatefulWidget {
 
-  NeumorphismDemo({ Key? key, this.title}) : super(key: key);
+  const NeumorphismDemo({ Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -65,14 +65,14 @@ class _NeumorphismDemoState extends State<NeumorphismDemo> {
                   children: [
                     _buildBtn(),
                     NeumorphismButton.icon(
-                      child: Icon(Icons.bookmark, color: Color(0XFF5081ff)),
                       borderRadius: 12,
                       onClick: () => print('bookmark'),
+                      child: Icon(Icons.bookmark, color: Color(0XFF5081ff)),
                     ),
                     NeumorphismButton.icon(
-                      child: Icon(Icons.favorite, color: Color(0XFFec7cda)),
                       borderRadius: 12,
                       onClick: () => print('favorite'),
+                      child: Icon(Icons.favorite, color: Color(0XFFec7cda)),
                     ),
                   ],
                 ),
@@ -82,8 +82,8 @@ class _NeumorphismDemoState extends State<NeumorphismDemo> {
                   children: icons.map((e) => NeumorphismButton(
                     width: 50,
                     height: 50,
-                    child: e,
                     onClick: () => print('${e.icon}'),
+                    child: e,
                   )).toList(),
                 ),
                 const SizedBox(height: 30,),
@@ -93,6 +93,7 @@ class _NeumorphismDemoState extends State<NeumorphismDemo> {
                     NeumorphismButton(
                       height: 50,
                       padding: const EdgeInsets.symmetric(horizontal: 20),
+                      onClick: () => print('Share'),
                       // borderRadius: 12,
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
@@ -103,21 +104,20 @@ class _NeumorphismDemoState extends State<NeumorphismDemo> {
                           Text("Share"),
                         ]
                       ),
-                      onClick: () => print('Share'),
                     ),
                     NeumorphismButton(
                       height: 50,
                       width: 50,
                       borderRadius: 12,
-                      child: Icon(Icons.bookmark, color: Colors.blue),
                       onClick: () => print('bookmark'),
+                      child: Icon(Icons.bookmark, color: Colors.blue),
                     ),
                     NeumorphismButton(
                       height: 50,
                       width: 50,
                       borderRadius: 12,
-                      child: Icon(Icons.favorite, color: Colors.red),
                       onClick: () => print('NeumorphismButton'),
+                      child: Icon(Icons.favorite, color: Colors.red),
                     ),
                   ],
                 ),

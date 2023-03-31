@@ -14,7 +14,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 
 
 class SlidableDemo extends StatefulWidget {
-  SlidableDemo({Key? key, this.title}) : super(key: key);
+  const SlidableDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -36,6 +36,7 @@ class _SlidableDemoState extends State<SlidableDemo> {
     ),
   );
 
+  @override
   @protected
   void initState() {
     slidableController = SlidableController(
@@ -89,7 +90,7 @@ class _SlidableDemoState extends State<SlidableDemo> {
     return ListView.builder(
       scrollDirection: direction,
       itemBuilder: (context, index) {
-        final Axis slidableDirection =
+        final slidableDirection =
         direction == Axis.horizontal ? Axis.vertical : Axis.horizontal;
         var item = items[index];
         if (item.index < 8) {
@@ -104,14 +105,13 @@ class _SlidableDemoState extends State<SlidableDemo> {
 
   Widget _getSlidableWithLists(
       BuildContext context, int index, Axis direction) {
-    final _HomeItem item = items[index];
+    final item = items[index];
     //final int t = index;
     return Slidable(
       key: Key(item.title),
       controller: slidableController,
       direction: direction,
       dismissal: SlidableDismissal(
-        child: SlidableDrawerDismissal(),
         onDismissed: (actionType) {
           _showSnackBar(
               context,
@@ -122,12 +122,10 @@ class _SlidableDemoState extends State<SlidableDemo> {
             items.removeAt(index);
           });
         },
+        child: SlidableDrawerDismissal(),
       ),
       actionPane: _getActionPane(item.index)!,
       actionExtentRatio: 0.25,
-      child: direction == Axis.horizontal
-          ? VerticalListItem(items[index])
-          : HorizontalListItem(items[index]),
       actions: <Widget>[
         IconSlideAction(
           caption: 'Archive',
@@ -162,19 +160,21 @@ class _SlidableDemoState extends State<SlidableDemo> {
           onTap: () => _showSnackBar(context, 'Delete'),
         ),
       ],
+      child: direction == Axis.horizontal
+          ? VerticalListItem(items[index])
+          : HorizontalListItem(items[index]),
     );
   }
 
   Widget _getSlidableWithDelegates(
       BuildContext context, int index, Axis direction) {
-    final _HomeItem item = items[index];
+    final item = items[index];
 
     return Slidable.builder(
       key: Key(item.title),
       controller: slidableController,
       direction: direction,
       dismissal: SlidableDismissal(
-        child: SlidableDrawerDismissal(),
         closeOnCanceled: true,
         onWillDismiss: (item.index != 10)
             ? null
@@ -187,12 +187,12 @@ class _SlidableDemoState extends State<SlidableDemo> {
                 content: Text('Item will be deleted'),
                 actions: <Widget>[
                   TextButton(
-                    child: Text('Cancel'),
                     onPressed: () => Navigator.of(context).pop(false),
+                    child: Text('Cancel'),
                   ),
                   TextButton(
-                    child: Text('Ok'),
                     onPressed: () => Navigator.of(context).pop(true),
+                    child: Text('Ok'),
                   ),
                 ],
               );
@@ -209,12 +209,10 @@ class _SlidableDemoState extends State<SlidableDemo> {
             items.removeAt(index);
           });
         },
+        child: SlidableDrawerDismissal(),
       ),
       actionPane: _getActionPane(item.index)!,
       actionExtentRatio: 0.25,
-      child: direction == Axis.horizontal
-          ? VerticalListItem(items[index])
-          : HorizontalListItem(items[index]),
       actionDelegate: SlideActionBuilderDelegate(
           actionCount: 2,
           builder: (context, index, animation, renderingMode) {
@@ -237,12 +235,12 @@ class _SlidableDemoState extends State<SlidableDemo> {
                         content: Text('Item will be archive'),
                         actions: <Widget>[
                           TextButton(
-                            child: Text('Cancel'),
                             onPressed: () => Navigator.of(context).pop(false),
+                            child: Text('Cancel'),
                           ),
                           TextButton(
-                            child: Text('Ok'),
                             onPressed: () => Navigator.of(context).pop(true),
+                            child: Text('Ok'),
                           ),
                         ],
                       );
@@ -289,6 +287,9 @@ class _SlidableDemoState extends State<SlidableDemo> {
               );
             }
           }),
+      child: direction == Axis.horizontal
+          ? VerticalListItem(items[index])
+          : HorizontalListItem(items[index]),
     );
   }
 
@@ -345,7 +346,7 @@ class _SlidableDemoState extends State<SlidableDemo> {
 }
 
 class HorizontalListItem extends StatelessWidget {
-  HorizontalListItem(this.item);
+  const HorizontalListItem(this.item);
   final _HomeItem item;
   @override
   Widget build(BuildContext context) {
@@ -358,8 +359,8 @@ class HorizontalListItem extends StatelessWidget {
           Expanded(
             child: CircleAvatar(
               backgroundColor: item.color,
-              child: Text('${item.index}'),
               foregroundColor: Colors.white,
+              child: Text('${item.index}'),
             ),
           ),
           Expanded(
@@ -376,7 +377,7 @@ class HorizontalListItem extends StatelessWidget {
 }
 
 class VerticalListItem extends StatelessWidget {
-  VerticalListItem(this.item);
+  const VerticalListItem(this.item);
   final _HomeItem item;
 
   @override
@@ -391,8 +392,8 @@ class VerticalListItem extends StatelessWidget {
         child: ListTile(
           leading: CircleAvatar(
             backgroundColor: item.color,
-            child: Text('${item.index}'),
             foregroundColor: Colors.white,
+            child: Text('${item.index}'),
           ),
           title: Text(item.title),
           subtitle: Text(item.subtitle!),
@@ -436,7 +437,6 @@ extension on ListTile{
     double? fastThreshold,
   }) => Slidable.builder(
     key: key,
-    child: this,
     actionPane: actionPane,
     actionDelegate: SlideActionListDelegate(actions: actions),
     secondaryActionDelegate:
@@ -450,6 +450,7 @@ extension on ListTile{
     dismissal: dismissal,
     controller: controller,
     fastThreshold: fastThreshold,
+    child: this,
   );
 
   Slidable toSlidable({
@@ -468,7 +469,6 @@ extension on ListTile{
     double? fastThreshold,
   }) => Slidable.builder(
     key: key,
-    child: this,
     actionPane: actionPane,
     actionDelegate: SlideActionListDelegate(actions: actions),
     secondaryActionDelegate:
@@ -482,5 +482,6 @@ extension on ListTile{
     dismissal: dismissal,
     controller: controller,
     fastThreshold: fastThreshold,
+    child: this,
   );
 }

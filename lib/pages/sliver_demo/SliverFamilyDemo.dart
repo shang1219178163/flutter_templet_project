@@ -27,7 +27,7 @@ class SliverFamilyDemo extends StatefulWidget {
 
   final String? title;
 
-  SliverFamilyDemo({ Key? key, this.title}) : super(key: key);
+  const SliverFamilyDemo({ Key? key, this.title}) : super(key: key);
 
   
   @override
@@ -84,7 +84,7 @@ class SliverFamilyPageViewDemo extends StatefulWidget {
 
   final String? title;
 
-  SliverFamilyPageViewDemo({ Key? key, this.title}) : super(key: key);
+  const SliverFamilyPageViewDemo({ Key? key, this.title}) : super(key: key);
 
 
   @override

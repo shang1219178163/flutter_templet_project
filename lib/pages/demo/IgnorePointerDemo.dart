@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 
 class IgnorePointerDemo extends StatefulWidget {
 
-  IgnorePointerDemo({ Key? key, this.title}) : super(key: key);
+  const IgnorePointerDemo({ Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -30,10 +30,10 @@ class _IgnorePointerDemoState extends State<IgnorePointerDemo> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: ['done',].map((e) => TextButton(
+          onPressed: () => print(e),
           child: Text(e,
             style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () => print(e),)
+          ),)
         ).toList(),
       ),
       body: buildBody()

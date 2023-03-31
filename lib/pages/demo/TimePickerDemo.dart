@@ -13,7 +13,7 @@ class TimePickerDemo extends StatefulWidget {
 
   final String? title;
 
-  TimePickerDemo({ Key? key, this.title}) : super(key: key);
+  const TimePickerDemo({ Key? key, this.title}) : super(key: key);
 
   
   @override
@@ -24,7 +24,7 @@ class _TimePickerDemoState extends State<TimePickerDemo> {
   TimeOfDay _time = TimeOfDay(hour: 7, minute: 15);
 
   void _selectTime() async {
-    final TimeOfDay? newTime = await showTimePicker(
+    final newTime = await showTimePicker(
       context: context,
       initialTime: _time,
     );

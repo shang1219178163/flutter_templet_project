@@ -3,7 +3,7 @@ import 'package:flutter_templet_project/extension/build_context_ext.dart';
 
 class RefreshIndicatorDemoOne extends StatefulWidget {
 
-  RefreshIndicatorDemoOne({
+  const RefreshIndicatorDemoOne({
     Key? key, 
     this.title
   }) : super(key: key);
@@ -36,10 +36,10 @@ class _RefreshIndicatorDemoOneState extends State<RefreshIndicatorDemoOne> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: ['done',].map((e) => TextButton(
+          onPressed: () => print(e),
           child: Text(e,
             style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () => print(e),)
+          ),)
         ).toList(),
       ),
       floatingActionButton: FloatingActionButton.extended(

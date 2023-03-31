@@ -7,19 +7,18 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/dash_line.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 
 import 'package:flutter_templet_project/model/order_model.dart';
 import 'package:tuple/tuple.dart';
-import 'notifier_demo.dart';
+import 'package:flutter_templet_project/provider/notifier_demo.dart';
 
 class ProviderListDemo extends StatefulWidget {
 
   final String? title;
 
-  ProviderListDemo({ Key? key, this.title}) : super(key: key);
+  const ProviderListDemo({ Key? key, this.title}) : super(key: key);
 
   @override
   _ProviderListDemoState createState() => _ProviderListDemoState();
@@ -40,11 +39,11 @@ class _ProviderListDemoState extends State<ProviderListDemo> {
 
   /// ValueNotifier
   static ValueNotifierNum valueNotifierInt = ValueNotifierNum(initValue: 6, minValue: 0, maxValue: 9, block:(num minValue, num maxValue){
-    ddlog("数值必须在${minValue} - ${maxValue} 之间");
+    ddlog("数值必须在$minValue - $maxValue 之间");
   });
 
   static ValueNotifierNum valueNotifierDouble = ValueNotifierNum(initValue: 6, minValue: 0, maxValue: 9, block:(num minValue, num maxValue){
-    ddlog("数值必须在${minValue} - ${maxValue} 之间");
+    ddlog("数值必须在$minValue - $maxValue 之间");
   });
   // static ValueNotifierInt valueNotifierInt = ValueNotifierInt(initValue: 6, minValue: 0, maxValue: 9);
 
@@ -97,7 +96,6 @@ class _ProviderListDemoState extends State<ProviderListDemo> {
 
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
 
     return Scaffold(
         appBar: AppBar(
@@ -191,7 +189,7 @@ class _ProviderListDemoState extends State<ProviderListDemo> {
               // SizedBox(width: 8,),
               // Text("${e.name}当前值: ${e.notifier?.value}"),
               Expanded(
-                child: Text("${e.notifier.toString()}",
+                child: Text(e.notifier.toString(),
                   overflow: TextOverflow.ellipsis,
                   softWrap: true,
                 )

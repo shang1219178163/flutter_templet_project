@@ -8,7 +8,7 @@ import 'package:flutter_templet_project/extension/decoration_ext.dart';
 
 class DecorationDemo extends StatefulWidget {
 
-  DecorationDemo({ Key? key, this.title}) : super(key: key);
+  const DecorationDemo({ Key? key, this.title}) : super(key: key);
 
   final String? title;
 

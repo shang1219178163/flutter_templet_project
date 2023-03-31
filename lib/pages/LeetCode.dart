@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class LeetCode extends StatefulWidget {
 
-  LeetCode({
+  const LeetCode({
     Key? key, 
     this.title
   }) : super(key: key);
@@ -26,10 +26,10 @@ class _LeetCodeState extends State<LeetCode> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: ['done',].map((e) => TextButton(
+          onPressed: () => print(e),
           child: Text(e,
             style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () => print(e),)
+          ),)
         ).toList(),
       ),
       body: Text(arguments.toString())
@@ -55,7 +55,7 @@ class _LeetCodeState extends State<LeetCode> {
   /// 搜索插入位置
   /// 给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。
   int ? searchInsert(List<int> nums, int target) {
-    for(int i = 0; i < nums.length; i++) {
+    for(var i = 0; i < nums.length; i++) {
       if(nums[i] == target) {
         return i;
       }

@@ -47,7 +47,7 @@ class _SystemColorPageState extends State<SystemColorPage> {
   var keys = List.from(kColorDic.keys);
   var searchResults = List.from(kColorDic.keys);
 
-  GlobalKey _globalKey = GlobalKey();
+  final GlobalKey _globalKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -57,10 +57,10 @@ class _SystemColorPageState extends State<SystemColorPage> {
         title: Text("flutter 系统颜色"),
         actions: [
           TextButton(
-            child: Text("Done", style: TextStyle(color: Colors.white),),
             onPressed: () {
-              ddlog("${widget}");
-            }
+              ddlog("$widget");
+            },
+            child: Text("Done", style: TextStyle(color: Colors.white),),
           )
         ],
       ),
@@ -73,7 +73,7 @@ class _SystemColorPageState extends State<SystemColorPage> {
           height: 50,
         ),
         tap: (obj) {
-          print("obj:${obj}");
+          print("obj:$obj");
         },
         itemBuilder: (context, index, searchResults) => _buildCell(context, index, searchResults),
       ),
@@ -82,7 +82,7 @@ class _SystemColorPageState extends State<SystemColorPage> {
 
   _buildCell(BuildContext context, int index, List searchResults) {
     final str = searchResults[index];
-    var subtitle = "${kColorDic[str].toString()}"
+    var subtitle = kColorDic[str].toString()
         .replaceAll('MaterialColor(primary value:', '')
         .replaceAll('MaterialAccentColor(primary value:', '')
         .replaceAll('))', ')');

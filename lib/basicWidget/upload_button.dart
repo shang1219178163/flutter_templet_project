@@ -40,14 +40,12 @@ class UploadButton extends StatefulWidget {
 class _UploadButtonState extends State<UploadButton> {
   @override
   void initState() {
-    if (widget.deteleImage == null) {
-      widget.deteleImage = Image.asset(
+    widget.deteleImage ??= Image.asset(
         "images/icon_delete.png",
         fit: BoxFit.fill,
         width: 30,
         height: 30,
       );
-    }
     super.initState();
   }
 

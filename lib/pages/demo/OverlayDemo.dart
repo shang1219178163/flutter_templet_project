@@ -4,7 +4,7 @@ class OverlayDemo extends StatefulWidget {
 
   final String? title;
 
-  OverlayDemo({ Key? key, this.title}) : super(key: key);
+  const OverlayDemo({ Key? key, this.title}) : super(key: key);
 
   
   @override
@@ -56,7 +56,7 @@ class _OverlayDemoState extends State<OverlayDemo> {
 
 //
 class ToastWidget extends StatefulWidget {
-  ToastWidget({
+  const ToastWidget({
     Key? key,
     required this.text,
     this.alignment = Alignment.center,

@@ -14,7 +14,7 @@ import 'package:flutter_templet_project/extension/color_ext.dart';
 
 class KeyDemo extends StatefulWidget {
 
-  KeyDemo({ Key? key, this.title}) : super(key: key);
+  const KeyDemo({ Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -44,13 +44,13 @@ class _KeyDemoState extends State<KeyDemo> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: ['done',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
           onPressed: (){
             print("${DateTime.now()}: $e");
             setState(() {});
-          },)
+          },
+          child: Text(e,
+            style: TextStyle(color: Colors.white),
+          ),)
         ).toList(),
       ),
       body: Center(
@@ -75,7 +75,7 @@ class _KeyDemoState extends State<KeyDemo> {
 
 
 class ColorBox extends StatefulWidget {
-  ColorBox({Key? key}) : super(key: key);
+  const ColorBox({Key? key}) : super(key: key);
 
   @override
   _ColorBoxState createState() => _ColorBoxState();

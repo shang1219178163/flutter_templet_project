@@ -5,7 +5,7 @@ import 'package:flutter_templet_project/extension/color_ext.dart';
 
 class PhysicalModelDemo extends StatefulWidget {
 
-  PhysicalModelDemo({ Key? key, this.title}) : super(key: key);
+  const PhysicalModelDemo({ Key? key, this.title}) : super(key: key);
 
   final String? title;
 

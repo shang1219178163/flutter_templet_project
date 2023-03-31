@@ -17,7 +17,7 @@ import 'package:get/get_rx/src/rx_types/rx_types.dart';
 class StaggeredGridViewDemo extends StatefulWidget {
   final String? title;
 
-  StaggeredGridViewDemo({Key? key, this.title}) : super(key: key);
+  const StaggeredGridViewDemo({Key? key, this.title}) : super(key: key);
 
   @override
   _StaggeredGridViewDemoState createState() => _StaggeredGridViewDemoState();
@@ -85,9 +85,9 @@ class _StaggeredGridViewDemoState extends State<StaggeredGridViewDemo> {
   }
 
   _buildGrid() {
-    List<Widget> list = List.generate(9, (index) => Container(
-      child: Text('$index'),
+    var list = List<Widget>.generate(9, (index) => Container(
       color: Colors.primaries[index],
+      child: Text('$index'),
     ));
 
     return SliverPadding(

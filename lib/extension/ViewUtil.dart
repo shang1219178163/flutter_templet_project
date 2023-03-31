@@ -1,8 +1,5 @@
-import 'dart:async';
-import 'dart:ffi';
 
 import 'package:flutter/cupertino.dart';
-
 
 // void _init() async {
 //   await ViewUtil.initFinish();
@@ -12,13 +9,13 @@ import 'package:flutter/cupertino.dart';
 
 class ViewUtil {
   ///界面初始化完成
-  static Future<Void> initFinish() async {
-    Completer<Void> completer = Completer();
-
-    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
-      completer.complete();
-    });
-
-    return completer.future;
-  }
+  // static Future<Void> initFinish() async {
+  //   var completer = Completer<Void>();
+  //
+  //   WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+  //     completer.complete();
+  //   });
+  //
+  //   return completer.future;
+  // }
 }

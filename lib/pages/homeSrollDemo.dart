@@ -10,7 +10,7 @@ class homeSrollDemo extends StatefulWidget {
 
   final String? title;
 
-  homeSrollDemo({ Key? key, this.title}) : super(key: key);
+  const homeSrollDemo({ Key? key, this.title}) : super(key: key);
 
 
   @override
@@ -74,8 +74,8 @@ class _homeSrollDemoState extends State<homeSrollDemo> {
   }
 
   buildHorizontalScrollWidget({double showCount = 1.0, bool isSwiper = false, Color? color}) {
-    double paddingRight = showCount == 2.5 ? 0.0 : 12;
-    double paddingLeft = isSwiper ? 12 : 0;
+    var paddingRight = showCount == 2.5 ? 0.0 : 12.0;
+    var paddingLeft = isSwiper ? 12.0 : 0.0;
 
     return XHorizontalScrollWidget(
       isSwiper: isSwiper,
@@ -95,13 +95,13 @@ class _homeSrollDemoState extends State<homeSrollDemo> {
       padding: EdgeInsets.only(left: paddingLeft, top: 57, right: paddingRight, bottom: 16, ),
       showCount: showCount,
       onTap: (Tuple4<String, String, String, bool> e) {
-        print("onTap:${e}");
+        debugPrint("onTap:$e");
       },
     );
   }
 
   /// 外观设置
-  buildDecoration({required Widget child, hasShell: true}) {
+  buildDecoration({required Widget child, hasShell = true}) {
     if (!hasShell) {
       return child;
     }

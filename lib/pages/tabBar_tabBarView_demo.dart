@@ -37,7 +37,7 @@ class TabBarTabBarViewDemo extends StatefulWidget {
 }
 
 class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with SingleTickerProviderStateMixin {
-  late TabController _tabController = TabController(length: _pages.length, vsync: this);
+  late final TabController _tabController = TabController(length: _pages.length, vsync: this);
 
   final textEditingController = TextEditingController();
 
@@ -122,13 +122,13 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
       ),
       floatingActionButton: FloatingActionButton(
         tooltip: 'Increment',
-        child: Icon(Icons.add),
         onPressed: () {
           kScaffoldKey.currentState!.openEndDrawer();
           // testData();
           // final titles = getTitles(tuples: tuples);
           // print("titles: ${titles}");
         },
+        child: Icon(Icons.add),
       ),
     );
   }
@@ -221,7 +221,7 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
             // color: Colors.green,
             color: isExpand ? Colors.black12 : null,
             child: ListTile(
-              title: Text("${e.item1}", style: TextStyle(fontWeight: FontWeight.bold),),
+              title: Text(e.item1, style: TextStyle(fontWeight: FontWeight.bold),),
               // subtitle: Text("subtitle"),
               trailing: trailing,
             ),
@@ -258,13 +258,13 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
   }
 
   testData() {
-    final String? a = null;
+    const String? a = null;
     ddlog(a.runtimeType);
 
-    final String? a1 = "a1";
+    const String? a1 = "a1";
     ddlog(a1.runtimeType);
 
-    final List<String>? array = null;
+    const List<String>? array = null;
     ddlog(array.runtimeType);
 
     ddlog(a.isBlank);

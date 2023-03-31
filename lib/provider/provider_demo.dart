@@ -144,8 +144,8 @@ class Person extends ChangeNotifier{
   String name;
   int age;
 
-  String _initail = "小虎牙";
-  String _changed = "更新的小虎牙";
+  final String _initail = "小虎牙";
+  final String _changed = "更新的小虎牙";
 
   void changName(){
     name = name == _initail ? _changed : _initail;
@@ -153,7 +153,7 @@ class Person extends ChangeNotifier{
   }
 
   void increaseAge() {
-    this.age++;
+    age++;
     notifyListeners();
   }
 }
@@ -182,7 +182,7 @@ class Foo with ChangeNotifier {
   void change() {
     bar = Bar(name: randomInt(min: 10, max: 99).toString());
     baz = Baz(name: randomInt(min: 10, max: 99).toString());
-    print("change ${bar.name} ${baz.name}");
+    debugPrint("change ${bar.name} ${baz.name}");
     notifyListeners();
   }
 }

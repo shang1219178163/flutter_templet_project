@@ -7,7 +7,7 @@ import 'package:flutter_templet_project/extension/color_ext.dart';
 
 class ColorConverterDemo extends StatefulWidget {
 
-  ColorConverterDemo({ Key? key, this.title}) : super(key: key);
+  const ColorConverterDemo({ Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -19,7 +19,7 @@ class _ColorConverterDemoState extends State<ColorConverterDemo> {
 
   List<Color> get colors {
     // final color = Color.fromRGBO(234, 35, 20, 1);
-    final color = Colors.greenAccent;
+    const color = Colors.greenAccent;
     return [
       color,
       HSVColor.fromColor(color).toColor(),

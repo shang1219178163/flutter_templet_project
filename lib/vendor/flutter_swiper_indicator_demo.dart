@@ -7,7 +7,7 @@ import 'package:flutter_templet_project/extension/build_context_ext.dart';
 
 class FlutterSwiperIndicatorDemo extends StatefulWidget {
 
-  FlutterSwiperIndicatorDemo({ Key? key, this.title}) : super(key: key);
+  const FlutterSwiperIndicatorDemo({ Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -21,7 +21,7 @@ class _FlutterSwiperIndicatorDemoState extends State<FlutterSwiperIndicatorDemo>
 
   BorderRadius borderRadius = BorderRadius.all(Radius.circular(8));
 
-  final items = R.image.imgUrls;
+  final items = R.image.urls;
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +46,7 @@ class _FlutterSwiperIndicatorDemoState extends State<FlutterSwiperIndicatorDemo>
         // width: this.itemWidth,
         padding: EdgeInsets.only(bottom: 0), //为了显示阴影
         child: ClipRRect(
-          borderRadius: this.borderRadius,
+          borderRadius: borderRadius,
           child: Stack(
             alignment: Alignment.center,
             fit: StackFit.expand,
@@ -68,15 +68,15 @@ class _FlutterSwiperIndicatorDemoState extends State<FlutterSwiperIndicatorDemo>
     return Container(
       height: 200,
       child: ClipRRect(
-          borderRadius: this.borderRadius,
+          borderRadius: borderRadius,
           child: Stack(
             children: [
               Swiper(
                 itemBuilder: (context, index) => _buildItem(context, index),
                 // indicatorLayout: PageIndicatorLayout.COLOR,
-                autoplay: this.items.length > 1,
-                loop: this.items.length > 1,
-                itemCount: this.items.length,
+                autoplay: items.length > 1,
+                loop: items.length > 1,
+                itemCount: items.length,
                 // pagination: this.items.length <= 1 ? null : SwiperPagination(),
                 // control: SwiperControl(),
                 // itemWidth: 200,
@@ -86,10 +86,10 @@ class _FlutterSwiperIndicatorDemoState extends State<FlutterSwiperIndicatorDemo>
                 }
               ),
               // if (this.items.length > 1) buildPageIndicator(),
-              if (this.items.length >= 1) PageIndicatorWidget(
+              if (this.items.isNotEmpty) PageIndicatorWidget(
                 currentPage: currentIndex,
-                itemCount: this.items.length,
-                itemSize: Size(context.screenSize.width/ 4 / this.items.length, 2),
+                itemCount: items.length,
+                itemSize: Size(context.screenSize.width/ 4 / items.length, 2),
                 // itemBuilder: (isSelected, itemSize) {
                 //   return Container(
                 //     width: itemSize.width,

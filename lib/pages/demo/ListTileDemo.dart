@@ -14,7 +14,7 @@ import 'package:flutter_templet_project/extension/ddlog.dart';
 class ListTileDemo extends StatefulWidget {
   final String? title;
 
-  ListTileDemo({Key? key, this.title}) : super(key: key);
+  const ListTileDemo({Key? key, this.title}) : super(key: key);
 
   @override
   _ListTileDemoState createState() => _ListTileDemoState();
@@ -46,10 +46,10 @@ class _ListTileDemoState extends State<ListTileDemo> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: ['done',].map((e) => TextButton(
+          onPressed: () => print(e),
           child: Text(e,
             style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () => print(e),)
+          ),)
         ).toList(),
       ),
       body: buildBody(),

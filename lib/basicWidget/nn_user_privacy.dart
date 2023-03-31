@@ -12,7 +12,7 @@ import 'package:flutter_templet_project/basicWidget/nn_webview.dart';
 
 class NNUserPrivacy extends StatefulWidget {
 
-  NNUserPrivacy(
+  const NNUserPrivacy(
       {Key? key,
       this.title,
       this.content,
@@ -41,7 +41,7 @@ class NNUserPrivacy extends StatefulWidget {
 }
 
 class _NNUserPrivacyState extends State<NNUserPrivacy> {
-  ScrollController _scrollController = ScrollController();
+  final ScrollController _scrollController = ScrollController();
 
   bool isScrollBottom = false;
 

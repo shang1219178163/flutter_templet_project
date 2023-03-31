@@ -22,7 +22,7 @@ class TabBarReusePageDemo extends StatefulWidget {
 
   final String? title;
 
-  TabBarReusePageDemo({ Key? key, this.title}) : super(key: key);
+  const TabBarReusePageDemo({ Key? key, this.title}) : super(key: key);
 
 
   @override
@@ -87,7 +87,7 @@ class _TabBarReusePageDemoState extends State<TabBarReusePageDemo> {
     );
   }
 
-  List<Tuple2<String, Widget>> _items = [
+  final List<Tuple2<String, Widget>> _items = [
     Tuple2('功能列表', ListView.separated(
       cacheExtent: 180,
       itemCount: kAliPayList.length,

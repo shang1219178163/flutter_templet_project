@@ -12,7 +12,7 @@ import 'package:flutter/cupertino.dart';
 extension ScrollMetricsExt on ScrollMetrics{
 
   printInfo() {
-    ScrollMetrics metrics = this;
+    var metrics = this;
     final info = """
     ScrollMetrics####################
     atEdge: ${metrics.atEdge}
@@ -28,15 +28,15 @@ extension ScrollMetricsExt on ScrollMetrics{
     pixels: ${metrics.pixels}
     viewportDimension: ${metrics.viewportDimension}
     """;
-    print(info);
+    debugPrint(info);
   }
 
   //顶部
-  bool get isStart => this.atEdge && this.extentBefore <= 0;
+  bool get isStart => atEdge && extentBefore <= 0;
   //底部
-  bool get isEnd => this.atEdge && this.extentAfter <= 0;
+  bool get isEnd => atEdge && extentAfter <= 0;
   //滚动进度
-  double get progress => this.pixels/this.maxScrollExtent;
+  double get progress => pixels/maxScrollExtent;
   //滚动进度
   String get progressPerecent => "${(progress*100).toInt()}%";
 }

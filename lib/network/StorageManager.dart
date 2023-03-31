@@ -1,5 +1,4 @@
 
-
 class StorageManager {
 
   static final StorageManager _instance = StorageManager._();

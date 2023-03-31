@@ -90,9 +90,9 @@ class _CircleFlow extends FlowDelegate {
 
   @override
   void paintChildren(FlowPaintingContext context) {
-    double x = 0; //开始(0,0)在父组件的中心
-    double y = 0;
-    for (int i = 0; i < context.childCount; i++) {
+    var x = 0.0; //开始(0,0)在父组件的中心
+    var y = 0.0;
+    for (var i = 0; i < context.childCount; i++) {
       x = radius * cos(i * 2 * pi / (context.childCount - 1)); //根据数学得出坐标
       y = radius * sin(i * 2 * pi / (context.childCount - 1)); //根据数学得出坐标
       context.paintChild(i, transform: Matrix4.translationValues(x, y, 0));

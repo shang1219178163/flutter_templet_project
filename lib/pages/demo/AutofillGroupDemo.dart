@@ -11,7 +11,7 @@ import 'package:flutter_templet_project/extension/string_ext.dart';
 
 class AutofillGroupDemo extends StatefulWidget {
 
-  AutofillGroupDemo({
+  const AutofillGroupDemo({
     Key? key, 
     this.title
   }) : super(key: key);
@@ -43,10 +43,10 @@ class _AutofillGroupDemoState extends State<AutofillGroupDemo> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: ['done',].map((e) => TextButton(
+          onPressed: onPressed,
           child: Text(e,
             style: TextStyle(color: Colors.white),
-          ),
-          onPressed: onPressed,)
+          ),)
         ).toList(),
       ),
       body: buildListView(),
@@ -54,28 +54,28 @@ class _AutofillGroupDemoState extends State<AutofillGroupDemo> {
   }
 
   onPressed(){
-    final str = "streetAddressLine2";
+    const str = "streetAddressLine2";
     final reg = RegExp('[A-Z]');
     final matchs = reg.allMatches(str);
     for (final Match m in matchs) {
-      String match = m[0]!;
+      var match = m[0]!;
       print(match);
     }
     final seperators = matchs.map((e) => e[0] ?? "").toList();
-    print("seperators: ${seperators}");
+    print("seperators: $seperators");
 
     var str1 = "streetAddressLine2";
     seperators.forEach((e) => str1 = str1.replaceAll(e, "_$e") );
-    print("str1: ${str1}");
+    print("str1: $str1");
 
-    final original = 'Hello World';
-    final find = 'World';
-    final replaceWith = 'Home';
+    const original = 'Hello World';
+    const find = 'World';
+    const replaceWith = 'Home';
     final newString = original.replaceAll(find, replaceWith);
-    print("newString: ${newString}");
+    print("newString: $newString");
 
     final result = str.seperatorByChars(cb: (String e) => " $e");
-    print("result: ${result}");
+    print("result: $result");
   }
 
   Widget buildListView() {
@@ -184,7 +184,7 @@ class _AutofillGroupDemoState extends State<AutofillGroupDemo> {
     required TextEditingController textEditingController,
     String hintText = "请输入",
     bool hasEnabledBorder = false,
-    InputBorder? enabledBorder = null
+    InputBorder? enabledBorder
   }) {
     final enabledBorderWidget = enabledBorder ?? (!hasEnabledBorder ? null : OutlineInputBorder(
       borderRadius: BorderRadius.circular(15),

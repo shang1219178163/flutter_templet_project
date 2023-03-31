@@ -12,7 +12,7 @@ class OffstageDemo extends StatefulWidget {
 
   final String? title;
 
-  OffstageDemo({ Key? key, this.title}) : super(key: key);
+  const OffstageDemo({ Key? key, this.title}) : super(key: key);
 
 
   @override
@@ -42,12 +42,12 @@ class _OffstageDemoState extends State<OffstageDemo> {
       children: <Widget>[
         Text('Flutter logo is offstage: $_offstage'),
         ElevatedButton(
-          child: const Text('Toggle Offstage Value'),
           onPressed: () {
             setState(() {
               _offstage = !_offstage;
             });
           },
+          child: const Text('Toggle Offstage Value'),
         ),
         Offstage(
           offstage: _offstage,
@@ -56,14 +56,14 @@ class _OffstageDemoState extends State<OffstageDemo> {
           ),
         ),
         if (_offstage) ElevatedButton(
-            child: const Text('Get Flutter Logo size'),
             onPressed: () {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text('Flutter Logo'),
                 ),
               );
-            }
+            },
+            child: const Text('Get Flutter Logo size'),
         ),
       ],
     );

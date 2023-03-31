@@ -5,7 +5,7 @@ class ShortcutsDemo extends StatefulWidget {
 
   final String? title;
 
-  ShortcutsDemo({ Key? key, this.title}) : super(key: key);
+  const ShortcutsDemo({ Key? key, this.title}) : super(key: key);
 
 
   @override

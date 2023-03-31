@@ -17,7 +17,7 @@ import 'TabBarDemo.dart';
 
 class TabBarOnlyDemo extends StatefulWidget {
 
-  TabBarOnlyDemo({ Key? key, this.title}) : super(key: key);
+  const TabBarOnlyDemo({ Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -62,17 +62,17 @@ class _TabBarOnlyDemoState extends State<TabBarOnlyDemo> with TickerProviderStat
         flexibleSpace: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: NetworkImage(R.image.imgUrls[5]),
+              image: NetworkImage(R.image.urls[5]),
               fit: BoxFit.cover,
             ),
           ),
         ),
         title: Text(widget.title ?? "$widget"),
         actions: ['reset',].map((e) => TextButton(
+          onPressed: onDone,
           child: Text(e,
             style: TextStyle(color: Colors.white),
           ),
-          onPressed: onDone,
         )).toList(),
         bottom: TabBar(
           controller: _tabController,
@@ -143,7 +143,7 @@ class _TabBarOnlyDemoState extends State<TabBarOnlyDemo> with TickerProviderStat
     if (titles.indexOf(e) != 1){
       return Tab(text: e);
     }
-    final url = currentIndex == _tabController.index ? R.image.imgUrls[1] : R.image.imgUrls[0];
+    final url = currentIndex == _tabController.index ? R.image.urls[1] : R.image.urls[0];
     return Tab(
       child: FadeInImage(
         image: NetworkImage(url),

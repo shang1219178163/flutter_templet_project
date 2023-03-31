@@ -14,7 +14,7 @@ import 'package:timelines/timelines.dart';
 class SteperConnectorDemo extends StatefulWidget {
   final String? title;
 
-  SteperConnectorDemo({Key? key, this.title}) : super(key: key);
+  const SteperConnectorDemo({Key? key, this.title}) : super(key: key);
 
   @override
   _SteperConnectorDemoState createState() => _SteperConnectorDemoState();
@@ -224,8 +224,8 @@ class _SteperConnectorDemoState extends State<SteperConnectorDemo> {
       height: 30,
     );
 
-    final kFlexMultiplier = 1000;
-    final indicatorFlex = 0.5;
+    const kFlexMultiplier = 1000;
+    const indicatorFlex = 0.5;
 
     Widget line = indicator;
     final lineItems = [

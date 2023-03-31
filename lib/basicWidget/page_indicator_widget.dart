@@ -38,7 +38,7 @@ class PageIndicatorWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (this.hidesForSinglePage && this.itemCount == 1) {
+    if (hidesForSinglePage && itemCount == 1) {
       return SizedBox();
     }
     return buildPageIndicator();
@@ -46,19 +46,19 @@ class PageIndicatorWidget extends StatelessWidget {
 
   Widget buildPageIndicator() {
     return Container(
-      margin: this.margin,
+      margin: margin,
       child: Align(
         alignment: Alignment.bottomCenter,
         child: ValueListenableBuilder(
-          valueListenable: this.currentPage,
+          valueListenable: currentPage,
           builder: (BuildContext context, dynamic value, Widget? child) {
             return Row(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.start,
               children: buildPageIndicatorItem(
-                currentIndex: this.currentPage.value,
-                normalColor: this.normalColor,
-                selectedColor: this.selectedColor,
+                currentIndex: currentPage.value,
+                normalColor: normalColor,
+                selectedColor: selectedColor,
               ),
             );
           },
@@ -68,16 +68,16 @@ class PageIndicatorWidget extends StatelessWidget {
   }
 
   List<Widget> buildPageIndicatorItem({
-    currentIndex: 0,
-    normalColor: const Color(0x25ffffff), 
-    selectedColor: Colors.white,
+    currentIndex = 0,
+    normalColor = const Color(0x25ffffff), 
+    selectedColor = Colors.white,
   }) {
-    List<Widget> list = List.generate(this.itemCount, (index) {
-      return this.itemBuilder != null ? this.itemBuilder!(currentIndex == index, this.itemSize) : ClipRRect(
+    var list = List<Widget>.generate(itemCount, (index) {
+      return itemBuilder != null ? itemBuilder!(currentIndex == index, itemSize) : ClipRRect(
         borderRadius: BorderRadius.all(Radius.circular(1)),
         child: Container(
-          width: this.itemSize.width,
-          height: this.itemSize.height,
+          width: itemSize.width,
+          height: itemSize.height,
           color: currentIndex == index ? selectedColor : normalColor,
         ),
       );

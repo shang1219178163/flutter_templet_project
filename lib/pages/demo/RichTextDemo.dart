@@ -16,7 +16,7 @@ class RichTextDemo extends StatefulWidget {
 
   final String? title;
 
-  RichTextDemo({ Key? key, this.title}) : super(key: key);
+  const RichTextDemo({ Key? key, this.title}) : super(key: key);
 
 
   @override
@@ -106,8 +106,8 @@ xxxx十分重视用户权利及隐私政策并严格按照相关法律法规的�
     final result = text.allMatchesByReg(RegExp(r'《[^《》]+》', multiLine: true));
     ddlog(result);
 
-    String prefix = "《";
-    String suffix = "》";
+    var prefix = "《";
+    var suffix = "》";
     final origin = '$prefix[^$prefix$suffix]+$suffix';
     ddlog(text.allMatchesByReg(RegExp(origin)));
 
@@ -123,7 +123,7 @@ xxxx十分重视用户权利及隐私政策并严格按照相关法律法规的�
         onNonMatch: (n) => n); // Just return non-matches
     print(result1);
 
-    String s = 'bezkoder';
+    var s = 'bezkoder';
     ddlog(s.padLeft(10));       // '  bezkoder'
     ddlog(s.padLeft(10, ' '));  // '==bezkoder'
 

@@ -100,7 +100,7 @@ class ProgressHUD<T> extends PopupRoute<T> {
 
   @override
   Widget buildPage(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
-    Size size = this.progressType == NNProgressHUDType.toast ? Size(MediaQuery.of(context).size.width - 60, 60) : Size(120, 120);
+    var size = progressType == NNProgressHUDType.toast ? Size(MediaQuery.of(context).size.width - 60, 60) : Size(120, 120);
     return Center(
       child: Container(
         width: size.width,
@@ -121,9 +121,9 @@ class ProgressHUD<T> extends PopupRoute<T> {
   }
 
   Widget getProgressHUDWidget() {
-    double iconSize = 50;
+    var iconSize = 50.0;
     Widget? icon;
-    switch (this.progressType) {
+    switch (progressType) {
       case NNProgressHUDType.success:
         icon = Icon(Icons.check, color: Colors.white, size: iconSize);
         break;
@@ -140,12 +140,12 @@ class ProgressHUD<T> extends PopupRoute<T> {
         break;
     }
 
-    if (this.progressType == NNProgressHUDType.toast) {
+    if (progressType == NNProgressHUDType.toast) {
       assert(message != null);
       return Padding(
         padding: EdgeInsets.only(top: 5, left: 5, bottom: 5, right: 5),
         child: Text(
-          this.message!,
+          message!,
           textAlign: TextAlign.center,
           maxLines: 2,
           style: TextStyle(
@@ -164,7 +164,7 @@ class ProgressHUD<T> extends PopupRoute<T> {
         if (icon != null) icon,
         if (message != null) Padding(
           padding: EdgeInsets.only(left: 5.0, right: 5.0),
-          child: Text(this.message!,
+          child: Text(message!,
             textAlign: TextAlign.center,
             maxLines: 2,
             style: TextStyle(

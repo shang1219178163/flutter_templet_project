@@ -8,10 +8,8 @@
 
 
 //订阅者回调签名
-import 'dart:async';
-import 'package:flutter/material.dart';
 
-typedef void EventCallback(arg);
+typedef EventCallback = void Function(dynamic arg);
 
 /// 自定义时间总线
 class EventBusTool {
@@ -19,7 +17,7 @@ class EventBusTool {
   EventBusTool._();
 
   //保存单例
-  static EventBusTool _instance = EventBusTool._();
+  static final EventBusTool _instance = EventBusTool._();
 
   //工厂构造函数
   factory EventBusTool() => _instance;
@@ -48,7 +46,7 @@ class EventBusTool {
   //触发事件，事件触发后该事件所有订阅者会被调用
   void emit(eventName, [arg]) {
     var list = _map[eventName] ?? [];
-    int length = list.length - 1;
+    var length = list.length - 1;
     //反向遍历，防止订阅者在回调中移除自身带来的下标错位
     for (var i = length; i > -1; --i) {
       list[i](arg);

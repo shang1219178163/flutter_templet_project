@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class IntrinsicHeightDemo extends StatefulWidget {
 
-  IntrinsicHeightDemo({ Key? key, this.title}) : super(key: key);
+  const IntrinsicHeightDemo({ Key? key, this.title}) : super(key: key);
 
   final String? title;
 

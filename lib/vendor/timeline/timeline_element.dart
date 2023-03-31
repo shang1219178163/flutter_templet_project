@@ -20,7 +20,7 @@ class TimelineElement extends StatelessWidget {
   final bool? leftContent;
   final double? height;
 
-  TimelineElement({
+  const TimelineElement({
     required this.lineColor,
     required this.backgroundColor,
     required this.model,
@@ -102,7 +102,7 @@ class TimelineElement extends StatelessWidget {
               children: <Widget>[
                 Text(
                   model['title'].length>47?model['title'].substring(0,47)+"...":model['title'],
-                  style: titleStyle !=null ? titleStyle: TextStyle(
+                  style: titleStyle ?? TextStyle(
                       fontFamily: FontConst.pingFangSC_Medium,
                       color: WBColors.color_333333,
                       fontWeight: FontWeight.w500,
@@ -111,7 +111,7 @@ class TimelineElement extends StatelessWidget {
                 ),
                 model['subtitle'] != null ? Text(
                   model['subtitle'],
-                  style: subtitleStyle !=null?subtitleStyle: TextStyle(
+                  style: subtitleStyle ?? TextStyle(
                       fontFamily: FontConst.pingFangSC_Regular,
                       color: WBColors.color_999999,
                       fontSize: 12
@@ -126,7 +126,7 @@ class TimelineElement extends StatelessWidget {
                   padding: EdgeInsets.only(top: 6),
                   child: Text(
                     model['description']!=null? model['description'].length>50 ?model['description'].substring(0, 47)+'...': model['description']:"", // To prevent overflowing of text to the next element, the text is truncated if greater than 75 characters
-                    style: descriptionStyle != null ?descriptionStyle: TextStyle(
+                    style: descriptionStyle ?? TextStyle(
                         fontSize: 12,
                         fontFamily: FontConst.pingFangSC_Regular,
                         color: WBColors.color_666666

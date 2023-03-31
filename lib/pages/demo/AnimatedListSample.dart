@@ -125,7 +125,7 @@ class ListModel<E> {
   }
   ///
   E removeAt(int index) {
-    final E removedItem = _items.removeAt(index);
+    final removedItem = _items.removeAt(index);
     if (removedItem != null) {
       _animatedList?.removeItem(index, (BuildContext context, Animation<double> animation) {
           return removedItemBuilder(removedItem, context, animation);
@@ -148,7 +148,7 @@ class CardItem extends StatelessWidget {
     required this.animation,
     this.onTap,
     required this.item,
-    this.selected: false
+    this.selected = false
   }) : assert(animation != null),
         assert(item != null && item >= 0),
         assert(selected != null),
@@ -161,9 +161,10 @@ class CardItem extends StatelessWidget {
   ///
   @override
   Widget build(BuildContext context) {
-    TextStyle? textStyle = Theme.of(context).textTheme.button;
-    if (selected)
+    var textStyle = Theme.of(context).textTheme.button;
+    if (selected) {
       textStyle = textStyle?.copyWith(color: Colors.lightGreenAccent[400]);
+    }
     return Padding(
       padding: EdgeInsets.all(2.0),
       child: SizeTransition(

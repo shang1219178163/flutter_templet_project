@@ -14,7 +14,7 @@ class MergeNetworkImagesDemo extends StatefulWidget {
 
   final String? title;
 
-  MergeNetworkImagesDemo({ Key? key, this.title}) : super(key: key);
+  const MergeNetworkImagesDemo({ Key? key, this.title}) : super(key: key);
 
   @override
   _MergeNetworkImagesDemoState createState() => _MergeNetworkImagesDemoState();
@@ -53,6 +53,7 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
 
   final QRCodeUrl = "https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web/img/article.9d13ff7.png";
 
+  @override
   Widget build(BuildContext context) {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
     final screenSize = MediaQuery.of(this.context).size;
@@ -90,7 +91,7 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
   }
 
   _buildBodyNew(){
-    final screenSize = MediaQuery.of(this.context).size;
+    final screenSize = MediaQuery.of(context).size;
 
     return SingleChildScrollView(
       child: Column(
@@ -116,10 +117,10 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
   }
 
   _buildBody(){
-    final screenSize = MediaQuery.of(this.context).size;
+    final screenSize = MediaQuery.of(context).size;
 
-    List children = detailList.map((e) {
-      int idx = detailList.indexOf(e);
+    var children = detailList.map((e) {
+      var idx = detailList.indexOf(e);
       return _buildToolNew(
         hideUp: idx == 0,
         hideDown: idx == detailList.length - 1,
@@ -134,7 +135,7 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
           ),
         ),
         callback: (step){
-          print("callback:${step}");
+          print("callback:$step");
           detailList.exchange(idx, idx + step);
           setState(() {});
         });
@@ -268,32 +269,32 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
   /// keys: 根据 GlobalKey 获取 Image 数组
   Future<Uint8List?> _compositePics([List<GlobalKey?> keys = const [],]) async {
     //根据 GlobalKey 获取 Image 数组
-    List<ui.Image> images = await Future.wait(
+    var images = await Future.wait(
       keys.map((key) async {
-        BuildContext? buildContext = key?.currentContext!;
-        RenderRepaintBoundary boundary = buildContext?.findRenderObject() as RenderRepaintBoundary;
-        ui.Image image = await boundary.toImage(pixelRatio: ui.window.devicePixelRatio);
+        var buildContext = key?.currentContext!;
+        var boundary = buildContext?.findRenderObject() as RenderRepaintBoundary;
+        var image = await boundary.toImage(pixelRatio: ui.window.devicePixelRatio);
         return image;
       }
     ).toList());
     // print("images:${images}");
-    if (images.length == 0) {
-      throw new Exception('没有获取到任何图片!');
+    if (images.isEmpty) {
+      throw Exception('没有获取到任何图片!');
     }
 
-    final List<int> imageHeights = images.map((e) => e.height).toList();
+    final imageHeights = images.map((e) => e.height).toList();
     // print("imageHeights:${imageHeights}");
 
     try {
-      int totalWidth = images[0].width;
-      int totalHeight = imageHeights.reduce((a,b) => a + b);
+      var totalWidth = images[0].width;
+      var totalHeight = imageHeights.reduce((a,b) => a + b);
       //初始化画布
-      ui.PictureRecorder recorder = ui.PictureRecorder();
-      Canvas canvas = Canvas(recorder);
+      var recorder = ui.PictureRecorder();
+      var canvas = Canvas(recorder);
       final paint = Paint();
 
       //画图
-      for (int i = 0; i < images.length; i++) {
+      for (var i = 0; i < images.length; i++) {
         final e = images[i];
         final offsetY = i == 0 ? 0 : imageHeights.sublist(0, i).reduce((a,b) => a + b);
         // print("offset:${i}_${e.height}_${offsetY}");
@@ -306,9 +307,9 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
       }
 
       //获取合成的图片
-      ui.Image image = await recorder.endRecording().toImage(totalWidth, totalHeight);
-      ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
-      Uint8List? pngBytes = byteData?.buffer.asUint8List();
+      var image = await recorder.endRecording().toImage(totalWidth, totalHeight);
+      var byteData = await image.toByteData(format: ui.ImageByteFormat.png);
+      var pngBytes = byteData?.buffer.asUint8List();
       //图片大小
       print("图片大小:${await image.fileSize() ?? "null"}");
 
@@ -348,6 +349,6 @@ class MaterialDetailConfig {
     this.score,
     this.deletedFlag,
   }): super() {
-    this.globalKey =  GlobalKey();
+    globalKey =  GlobalKey();
   }
 }

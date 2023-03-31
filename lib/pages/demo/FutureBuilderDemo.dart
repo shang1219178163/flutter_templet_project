@@ -18,7 +18,7 @@ class FutureBuilderDemo extends StatefulWidget {
 
   final String? title;
 
-  FutureBuilderDemo({ Key? key, this.title}) : super(key: key);
+  const FutureBuilderDemo({ Key? key, this.title}) : super(key: key);
 
   
   @override
@@ -27,7 +27,7 @@ class FutureBuilderDemo extends StatefulWidget {
 
 class _FutureBuilderDemoState extends State<FutureBuilderDemo> {
 
-  final _dio = new Dio();
+  final _dio = Dio();
 
   @override
   Widget build(BuildContext context) {
@@ -37,10 +37,10 @@ class _FutureBuilderDemoState extends State<FutureBuilderDemo> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: ['done',].map((e) => TextButton(
+          onPressed: onPressed,
           child: Text(e,
             style: TextStyle(color: Colors.white),
-          ),
-          onPressed: onPressed,)
+          ),)
         ).toList(),
       ),
       body: buildBody(),
@@ -83,7 +83,7 @@ class _FutureBuilderDemoState extends State<FutureBuilderDemo> {
     url = "https://api.github.com/users/shang1219178163/repos";
     // url = "https://jsonplaceholder.typicode.com/users";
     final response = await _dio.get<List<dynamic>>(url,);
-    List<GitRepoModel> items = (response.data ?? []).map((e) => GitRepoModel.fromJson(e)).toList();
+    var items = (response.data ?? []).map((e) => GitRepoModel.fromJson(e)).toList();
     print("users: ${items.first.runtimeType}");
 
     // testUrl();
@@ -100,7 +100,7 @@ class _FutureBuilderDemoState extends State<FutureBuilderDemo> {
     print("list: ${response.data.runtimeType.toString()}");
     // List<dynamic>? users = response.data;
 
-    List<UserModel> users = (response.data ?? []).map((e) => UserModel.fromJson(e)).toList();
+    var users = (response.data ?? []).map((e) => UserModel.fromJson(e)).toList();
     print("users: ${users.first.runtimeType}");
   }
 }

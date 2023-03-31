@@ -5,7 +5,7 @@ class DismissibleDemo extends StatefulWidget {
 
   final String? title;
 
-  DismissibleDemo({ Key? key, this.title}) : super(key: key);
+  const DismissibleDemo({ Key? key, this.title}) : super(key: key);
 
   
   @override
@@ -14,7 +14,7 @@ class DismissibleDemo extends StatefulWidget {
 
 class _DismissibleDemoState extends State<DismissibleDemo> {
 
-  List<Map> _list = List<Map>.generate(
+  final List<Map> _list = List<Map>.generate(
     20,(i) => {'title': '标题$i', 'subTitle': '二级标题$i'},
   );
 
@@ -42,10 +42,6 @@ class _DismissibleDemoState extends State<DismissibleDemo> {
           dragStartBehavior: DragStartBehavior.down,
           direction: DismissDirection.endToStart,
           background: Container(color: Colors.red),
-          child: ListTile(
-            title: Text(item['title']),
-            subtitle: Text(item['subTitle']),
-          ),
           onDismissed: (direction) {
             _list.removeAt(index);
             print(_list.length);
@@ -59,6 +55,10 @@ class _DismissibleDemoState extends State<DismissibleDemo> {
             print(direction);
             return true;
           },
+          child: ListTile(
+            title: Text(item['title']),
+            subtitle: Text(item['subTitle']),
+          ),
         );
       },
     );

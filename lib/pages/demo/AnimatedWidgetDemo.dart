@@ -12,7 +12,7 @@ class AnimatedWidgetDemo extends StatefulWidget {
 
   final String? title;
 
-  AnimatedWidgetDemo({ Key? key, this.title}) : super(key: key);
+  const AnimatedWidgetDemo({ Key? key, this.title}) : super(key: key);
 
   
   @override
@@ -113,7 +113,6 @@ class _AnimatedWidgetDemoState extends State<AnimatedWidgetDemo> {
           ),
           AnimatedDefaultTextStyle(
             child: GestureDetector(
-              child: Text("hello world"),
               onTap: () {
                 setState(() {
                   _style = TextStyle(
@@ -123,6 +122,7 @@ class _AnimatedWidgetDemoState extends State<AnimatedWidgetDemo> {
                   );
                 });
               },
+              child: Text("hello world"),
             ),
             style: _style,
             duration: duration,
@@ -156,7 +156,7 @@ class _AnimatedWidgetDemoState extends State<AnimatedWidgetDemo> {
 
 
 class AnimatedDecoratedBox extends ImplicitlyAnimatedWidget {
-  AnimatedDecoratedBox({
+  const AnimatedDecoratedBox({
     Key? key,
     required this.decoration,
     required this.child,

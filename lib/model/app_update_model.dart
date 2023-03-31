@@ -84,19 +84,19 @@ class AppUpdateItemModel {
 
     Map<String, dynamic>toJson() {
       return {
-        "appIcon": this.appIcon,
-        "appSize": this.appSize,
-        "appName": this.appName,
-        "appDate": this.appDate,
-        "appDescription": this.appDescription,
-        "appVersion": this.appVersion,
-        "isShowAll": this.isShowAll,
+        "appIcon": appIcon,
+        "appSize": appSize,
+        "appName": appName,
+        "appDate": appDate,
+        "appDescription": appDescription,
+        "appVersion": appVersion,
+        "isShowAll": isShowAll,
       };
     }
 
 
     Object? operator [](String key){
-      final map = this.toJson();
+      final map = toJson();
       final result = map[key];
       return result;
     }
@@ -105,28 +105,25 @@ class AppUpdateItemModel {
     void operator []=(String key, dynamic value){
       switch (key) {
         case "appName":
-          this.appName = value;
+          appName = value;
           break;
         case "appIcon":
-          this.appIcon = value;
+          appIcon = value;
           break;
         case "appSize":
-          this.appSize = value;
-          break;
-        case "appName":
-          this.appName = value;
+          appSize = value;
           break;
         case "appDate":
-          this.appDate = value;
+          appDate = value;
           break;
         case "appDescription":
-          this.appDescription = value;
+          appDescription = value;
           break;
         case "appVersion":
-          this.appVersion = value;
+          appVersion = value;
           break;
         case "isShowAll":
-          this.isShowAll = value;
+          isShowAll = value;
           break;
         default:
           break;

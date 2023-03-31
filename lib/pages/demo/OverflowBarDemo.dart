@@ -12,7 +12,7 @@ class OverflowBarDemo extends StatefulWidget {
 
   final String? title;
 
-  OverflowBarDemo({ Key? key, this.title}) : super(key: key);
+  const OverflowBarDemo({ Key? key, this.title}) : super(key: key);
 
   
   @override
@@ -23,8 +23,6 @@ class _OverflowBarDemoState extends State<OverflowBarDemo> {
 
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
@@ -58,12 +56,18 @@ class _OverflowBarDemoState extends State<OverflowBarDemo> {
                     spacing: 8,
                     overflowAlignment: OverflowBarAlignment.end,
                     children: <Widget>[
-                      TextButton(child: const Text('Cancel'), onPressed: () {}),
                       TextButton(
-                        child: const Text('Really Really Cancel'),
-                        onPressed: () {}
+                        onPressed: () {},
+                          child: const Text('Cancel'),
                       ),
-                      OutlinedButton(child: const Text('OK'), onPressed: () {}),
+                      TextButton(
+                        onPressed: () {},
+                        child: const Text('Really Really Cancel'),
+                      ),
+                      OutlinedButton(
+                        onPressed: () {},
+                        child: const Text('OK'),
+                      )
                     ],
                   ),
                 ),

@@ -38,7 +38,7 @@ class NNSliverPersistentHeaderDelegate extends SliverPersistentHeaderDelegate {
 
   @override
   bool shouldRebuild(covariant NNSliverPersistentHeaderDelegate oldDelegate) {
-    return this.min != oldDelegate.min || this.max != oldDelegate.max || this.builder != oldDelegate.builder;
+    return min != oldDelegate.min || max != oldDelegate.max || builder != oldDelegate.builder;
   }
 }
 

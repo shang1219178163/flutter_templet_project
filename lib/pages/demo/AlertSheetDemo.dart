@@ -50,7 +50,7 @@ class _AlertSheetDemoState extends State<AlertSheetDemo> {
       alignment: WrapAlignment.start, //沿主轴方向居中
         children: titles.map((e) => ActionChip(
           avatar: CircleAvatar(backgroundColor: Theme.of(context).primaryColor,
-              child: Text("${e.characters.first.toUpperCase()}")
+              child: Text(e.characters.first.toUpperCase())
           ),
           label: Text(e),
           onPressed: (){
@@ -78,10 +78,10 @@ class _AlertSheetDemoState extends State<AlertSheetDemo> {
               ),
             ],
             cancelButton: CupertinoActionSheetAction(
-              child: Text('取消'),
               onPressed: () {
                 Navigator.pop(context);
               },
+              child: Text('取消'),
             ),
           )
               .toShowCupertinoModalPopup(context: context)
@@ -158,18 +158,18 @@ class _AlertSheetDemoState extends State<AlertSheetDemo> {
       title: Text(title),
       message: Text(message),
       actions: ["选择 1", "选择 2", "选择 3",].map((e) => CupertinoActionSheetAction(
-        child: Text(e),
         onPressed: () {
           ddlog(e);
           Navigator.pop(context);
         },
+        child: Text(e),
       ),).toList(),
       cancelButton: CupertinoActionSheetAction(
-        child: Text('取消'),
         isDestructiveAction: true,
         onPressed: () {
           Navigator.pop(context);
         },
+        child: Text('取消'),
       ),
     ).toShowCupertinoModalPopup(context: context);
   }
@@ -225,10 +225,10 @@ class _AlertSheetDemoState extends State<AlertSheetDemo> {
           ),
         ],
         cancelButton: CupertinoActionSheetAction(
-          child: Text('取消'),
           onPressed: () {
             Navigator.pop(context);
           },
+          child: Text('取消'),
         ),
       )
           .toShowCupertinoModalPopup(context: context)
@@ -259,10 +259,10 @@ class _AlertSheetDemoState extends State<AlertSheetDemo> {
           ),
         ],
         cancelButton: CupertinoActionSheetAction(
-          child: Text('取消'),
           onPressed: () {
             Navigator.pop(context);
           },
+          child: Text('取消'),
         ),
       )
           .toShowCupertinoModalPopup(context: context)

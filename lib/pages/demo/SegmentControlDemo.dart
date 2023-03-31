@@ -20,7 +20,7 @@ class SegmentControlDemo extends StatefulWidget {
 
   final String? title;
 
-  SegmentControlDemo({ Key? key, this.title}) : super(key: key);
+  const SegmentControlDemo({ Key? key, this.title}) : super(key: key);
 
 
   @override
@@ -49,50 +49,50 @@ class _SegmentControlDemoState extends State<SegmentControlDemo> {
 
 
   PreferredSizeWidget buildPreferredSize() {
-    return
-      PreferredSize(
-          child: Padding(
-            padding: const EdgeInsets.only(top: 8, bottom: 12),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                SizedBox(width: 24),
-                Expanded(
-                  child: CupertinoSegmentedControl(
-                    children: const <int, Widget>{
-                      0: Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text(
-                              'Midnight', style: TextStyle(fontSize: 15))),
-                      1: Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text(
-                              'Viridian', style: TextStyle(fontSize: 15))),
-                      2: Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text(
-                              'Cerulean', style: TextStyle(fontSize: 15)))
-                    },
-                    groupValue: groupValue,
-                    onValueChanged: (value) {
-                      // TODO: - fix it
-                      ddlog(value.runtimeType);
-                      ddlog(value.toString());
-                      setState(() {
-                        groupValue = int.parse("$value");
-                      });
-                    },
-                    borderColor: Colors.white,
+    return PreferredSize(
+      preferredSize: Size(double.infinity, 48),
+      child: Padding(
+        padding: const EdgeInsets.only(top: 8, bottom: 12),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            SizedBox(width: 24),
+            Expanded(
+              child: CupertinoSegmentedControl(
+                children: const <int, Widget>{
+                  0: Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                          'Midnight', style: TextStyle(fontSize: 15))),
+                  1: Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                          'Viridian', style: TextStyle(fontSize: 15))),
+                  2: Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                          'Cerulean', style: TextStyle(fontSize: 15)))
+                },
+                groupValue: groupValue,
+                onValueChanged: (value) {
+                  // TODO: - fix it
+                  ddlog(value.runtimeType);
+                  ddlog(value.toString());
+                  setState(() {
+                    groupValue = int.parse("$value");
+                  });
+                },
+                borderColor: Colors.white,
 
-                    //   selectedColor: Colors.redAccent,
-                    // unselectedColor: Colors.green,
-                  ),
-                ),
-                SizedBox(width: 24)
-              ],
+                //   selectedColor: Colors.redAccent,
+                // unselectedColor: Colors.green,
+              ),
             ),
-          ),
-          preferredSize: Size(double.infinity, 48));
+            SizedBox(width: 24)
+          ],
+        ),
+      ),
+    );
   }
 
   Widget buildListView() {
@@ -167,7 +167,7 @@ class _SegmentControlDemoState extends State<SegmentControlDemo> {
   }
 
   Widget buildSlidingSegmentedControl() {
-    final Map<int, Widget> children = const <int, Widget>{
+    const children = <int, Widget>{
       0: Text("Item 1", style: TextStyle(fontSize: 15),),
       1: Text("Item 2", style: TextStyle(fontSize: 15),),
       2: Text("Item 3", style: TextStyle(fontSize: 15),),
@@ -189,7 +189,7 @@ class _SegmentControlDemoState extends State<SegmentControlDemo> {
 
 
   Widget buildSlidingSegmentedControl2() {
-    final Map<int, Widget> children = const <int, Widget>{
+    const children = <int, Widget>{
       0: Text("Item 1", style: TextStyle(fontSize: 15),),
       1: Text("Item 2", style: TextStyle(fontSize: 15),),
       2: Text("Item 3", style: TextStyle(fontSize: 15),),
@@ -210,7 +210,7 @@ class _SegmentControlDemoState extends State<SegmentControlDemo> {
   }
 
   Widget buildSlidingSegmentedControl3() {
-    final Map<int, Widget> children = const <int, Widget>{
+    const children = <int, Widget>{
       0: Text("Item 1", style: TextStyle(fontSize: 15),),
       1: Text("Item 2", style: TextStyle(fontSize: 15),),
       2: Text("Item 3", style: TextStyle(fontSize: 15),),
@@ -231,7 +231,7 @@ class _SegmentControlDemoState extends State<SegmentControlDemo> {
   }
 
   Widget buildLineSegmentControl(Color? backgroundColor, {required Color lineColor}) {
-    final Map<int, Widget> children = const <int, Widget>{
+    const children = <int, Widget>{
       0: Text("Item 111", style: TextStyle(fontSize: 15), textAlign: TextAlign.center,),
       1: Text("Item 222", style: TextStyle(fontSize: 15), textAlign: TextAlign.center,),
       2: Text("Item 333", style: TextStyle(fontSize: 15), textAlign: TextAlign.center,),
@@ -268,12 +268,12 @@ class _SegmentControlDemoState extends State<SegmentControlDemo> {
     );
   }
 
-  late ScrollController _scrollController = ScrollController();
+  late final ScrollController _scrollController = ScrollController();
 
   ///设置单个宽度
   Widget buildListViewHorizontal() {
     var items = List.generate(8, (index) => "item_$index");
-    List<double> itemWiths = [60, 70, 80, 90, 100, 110, 120, 130];
+    var itemWiths = <double>[60, 70, 80, 90, 100, 110, 120, 130];
 
     return ListViewSegmentControl(
         items: items,

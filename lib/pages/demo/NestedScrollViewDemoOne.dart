@@ -14,7 +14,7 @@ import 'package:flutter_templet_project/uti/R.dart';
 
 class NestedScrollViewDemoOne extends StatefulWidget {
 
-  NestedScrollViewDemoOne({ Key? key, this.title}) : super(key: key);
+  const NestedScrollViewDemoOne({ Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -24,7 +24,7 @@ class NestedScrollViewDemoOne extends StatefulWidget {
 
 class _NestedScrollViewDemoOneState extends State<NestedScrollViewDemoOne> with SingleTickerProviderStateMixin {
   TabController? _tabController;
-  ScrollController? _scrollController = ScrollController(initialScrollOffset: 0.0);
+  final ScrollController? _scrollController = ScrollController(initialScrollOffset: 0.0);
 
   List<String> items = List.generate(9, (index) => 'item_$index').toList();
 
@@ -57,10 +57,10 @@ class _NestedScrollViewDemoOneState extends State<NestedScrollViewDemoOne> with 
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: ['done',].map((e) => TextButton(
+          onPressed: onPressed,
           child: Text(e,
             style: TextStyle(color: Colors.white),
-          ),
-          onPressed: onPressed,)
+          ),)
         ).toList(),
       ),
       body: buildPage(),
@@ -178,7 +178,7 @@ class _NestedScrollViewDemoOneState extends State<NestedScrollViewDemoOne> with 
               return Tab(text: e);
             }
 
-            final url = (value == index) ? R.image.imgUrls[1] : R.image.imgUrls[0];
+            final url = (value == index) ? R.image.urls[1] : R.image.urls[0];
             return Tab(
               child: FadeInImage(
                 image: NetworkImage(url),
@@ -209,7 +209,7 @@ class _NestedScrollViewDemoOneState extends State<NestedScrollViewDemoOne> with 
   }
 
   buildList() {
-    final items = Colors.primaries;
+    const items = Colors.primaries;
     return ListView.builder(
       itemCount: items.length,
       itemBuilder: (BuildContext context, int index){

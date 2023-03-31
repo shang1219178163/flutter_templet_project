@@ -19,7 +19,7 @@ import 'package:tuple/tuple.dart';
 class SecondPage extends StatefulWidget {
   final String? title;
 
-  SecondPage({Key? key, this.title}) : super(key: key);
+  const SecondPage({Key? key, this.title}) : super(key: key);
 
   @override
   _SecondPageState createState() => _SecondPageState();
@@ -51,8 +51,8 @@ class _SecondPageState extends State<SecondPage> {
     );
   }
 
-  GlobalKey _globalKey = GlobalKey();
-  GlobalKey _globalKey1 = GlobalKey();
+  final GlobalKey _globalKey = GlobalKey();
+  final GlobalKey _globalKey1 = GlobalKey();
 
   buildListView() {
     return ListView(
@@ -105,13 +105,8 @@ class _SecondPageState extends State<SecondPage> {
               onTap: () => print("RadialButton"),
             ),
             AfterLayoutBuilder(
-              child: Container(
-                margin: EdgeInsets.all(10),
-                padding: EdgeInsets.all(10),
-                child: Text("离离原上草, 一岁一枯荣")
-              ),
               builder: (BuildContext context, Widget? child, Size? size) {
-                print("AfterLayoutBuilder size:${size}");
+                print("AfterLayoutBuilder size:$size");
                 if (size == null) {
                   return child ?? SizedBox();
                 }
@@ -120,6 +115,11 @@ class _SecondPageState extends State<SecondPage> {
                   child: child,
                 );
               },
+              child: Container(
+                margin: EdgeInsets.all(10),
+                padding: EdgeInsets.all(10),
+                child: Text("离离原上草, 一岁一枯荣")
+              ),
             ),
             SectionHeader.h5(title: "GradientButton"),
             _buildClipRRectGradientButton(),
@@ -129,8 +129,8 @@ class _SecondPageState extends State<SecondPage> {
             MaterialButton(
               color: Colors.blue.shade400,
               textColor: Colors.white,
-              child: Text("MaterialButton"),
               onPressed: () => print("MaterialButton"),
+              child: Text("MaterialButton"),
             ),
 
             Divider(),
@@ -194,11 +194,11 @@ class _SecondPageState extends State<SecondPage> {
             Divider(),
             SectionHeader.h5(title: "TextSelectionToolbarTextButton"),
             TextSelectionToolbarTextButton(
-                child: Text("TextSelectionToolbarTextButton"),
                 padding: EdgeInsets.all(8),
               onPressed: (){
                   print("TextSelectionToolbarTextButton");
               },
+                child: Text("TextSelectionToolbarTextButton"),
             ),
 
             Divider(),
@@ -374,10 +374,10 @@ class _SecondPageState extends State<SecondPage> {
                 ddlog("onTap");
               },
               child: OutlinedButton(
-                child: Text("OutlinedButton"),
                 onPressed: (){
                   ddlog("onPressed");
                 },
+                child: Text("OutlinedButton"),
               ),
             ),
 
@@ -591,21 +591,21 @@ class _SecondPageState extends State<SecondPage> {
     ];
   }
 
-  List<bool> _selecteds = [false, false, true];
+  final List<bool> _selecteds = [false, false, true];
 
   buildToggleButtons() {
     return ToggleButtons(
       isSelected: _selecteds,
+      onPressed: (index) {
+        _selecteds[index] = !_selecteds[index];
+        setState(() {});
+        print("ToggleButtons _selecteds: $_selecteds");
+      },
       children: <Widget>[
         Icon(Icons.format_align_right),
         Icon(Icons.format_align_center),
         Icon(Icons.format_align_left),
       ],
-      onPressed: (index) {
-        _selecteds[index] = !_selecteds[index];
-        setState(() {});
-        print("ToggleButtons _selecteds: ${_selecteds}");
-      },
     );
   }
 
@@ -616,8 +616,8 @@ class _SecondPageState extends State<SecondPage> {
     return DropdownButton(
       value: _dropValue,
       items: list.map((e) => DropdownMenuItem(
-          child: Text(e),
           value: e,
+          child: Text(e),
         ),
       ).toList(),
       onChanged: (value) {
@@ -855,10 +855,10 @@ class _SecondPageState extends State<SecondPage> {
         UIElevatedButton(
           height: 45,
           width: 200,
-          child: Text('Elevated Button'),
           onPressed: () {
             print("Elevated");
           },
+          child: Text('Elevated Button'),
         ),
         UIElevatedButton(
           height: 45,
@@ -867,10 +867,10 @@ class _SecondPageState extends State<SecondPage> {
               elevation: 4,
               shape: const CircleBorder(),
           ),
-          child: const Center(child: Icon(Icons.add)),
           onPressed: () {
             print("Elevated");
           },
+          child: const Center(child: Icon(Icons.add)),
         ),
 
         Divider(),
@@ -893,10 +893,10 @@ class _SecondPageState extends State<SecondPage> {
           InkWell(
             splashColor: Colors.green,
             highlightColor: Colors.blue,
-            child: Icon(Icons.ring_volume, size: 30),
             onTap: () {
               setState(() {_volume += 2;});
             },
+            child: Icon(Icons.ring_volume, size: 30),
           ),
           Text(_volume.toString(), style: TextStyle(fontSize: 20)),
         ],
@@ -907,10 +907,10 @@ class _SecondPageState extends State<SecondPage> {
   _buildButtonBar() {
     return ButtonBar(
       children: ['Ok', 'Cancel', ].map((e) => ElevatedButton(
-        child: Text(e),
         onPressed: () {
           // To do
         },
+        child: Text(e),
       )).toList(),
     );
   }
@@ -947,8 +947,8 @@ class UIElevatedButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: this.height,
-      width: this.width,
+      height: height,
+      width: width,
       child: ElevatedButton(
         onPressed: onPressed,
         style: style ?? ElevatedButton.styleFrom(

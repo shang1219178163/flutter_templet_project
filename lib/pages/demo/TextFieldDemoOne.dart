@@ -14,7 +14,7 @@ class TextFieldDemoOne extends StatefulWidget {
 
   final String? title;
 
-  TextFieldDemoOne({ Key? key, this.title}) : super(key: key);
+  const TextFieldDemoOne({ Key? key, this.title}) : super(key: key);
 
   
   @override
@@ -36,9 +36,9 @@ class _TextFieldDemoOneState extends State<TextFieldDemoOne> {
     ///添加获取焦点与失去焦点的兼听
     focusNode.addListener((){
       ///当前兼听的 TextFeild 是否获取了输入焦点
-      bool hasFocus = focusNode.hasFocus;
+      var hasFocus = focusNode.hasFocus;
       ///当前 focusNode 是否添加了兼听
-      bool hasListeners = focusNode.hasListeners;
+      var hasListeners = focusNode.hasListeners;
 
       print("focusNode 兼听 hasFocus:$hasFocus  hasListeners:$hasListeners");
     });
@@ -70,22 +70,22 @@ class _TextFieldDemoOneState extends State<TextFieldDemoOne> {
 
   List<Widget> _buildButtons() {
     return [
-      TextButton(child: Text("获取焦点"),onPressed: (){
+      TextButton(onPressed: (){
         FocusScope.of(context).requestFocus(focusNode);
-      },),
-      TextButton(child: Text("失去焦点"),onPressed: (){
+      },child: Text("获取焦点"),),
+      TextButton(onPressed: (){
         focusNode.unfocus();
-      },),
-      TextButton(child: Text("编辑"),onPressed: (){
+      },child: Text("失去焦点"),),
+      TextButton(onPressed: (){
         setState(() {
           isEnable = true;
         });
-      },),
-      TextButton(child: Text("不可编辑"),onPressed: (){
+      },child: Text("编辑"),),
+      TextButton(onPressed: (){
         isEnable = false;
 
         setState(() {});
-      },),
+      },child: Text("不可编辑"),),
     ];
   }
 
@@ -143,7 +143,7 @@ class _TextFieldDemoOneState extends State<TextFieldDemoOne> {
               ///输入文字前的小图标
               prefixIcon: Icon(Icons.phone),
               ///输入文字后面的小图标
-              suffixIcon: textEditingController.text.length == 0 ? null : IconButton(
+              suffixIcon: textEditingController.text.isEmpty ? null : IconButton(
                   onPressed: () => textEditingController.clear(),
                   icon: Icon(Icons.close),
               ),

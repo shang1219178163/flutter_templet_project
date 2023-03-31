@@ -9,7 +9,7 @@ import 'package:flutter_templet_project/extension/build_context_ext.dart';
 
 import 'package:tuple/tuple.dart';
 
-final kUpdateContent = """
+const kUpdateContent = """
 1、支持立体声蓝牙耳机，同时改善配对性能;
 2、提供屏幕虚拟键盘;
 3、更简洁更流畅，使用起来更快;
@@ -215,27 +215,27 @@ class SnackBarDemoOneState extends State<SnackBarDemoOne> with ScaffoldMessenger
       content: InkWell(
         onTap: () {
           clearMaterialBanners();
-          print("isShowingMaterial:${isShowingMaterial}");
+          print("isShowingMaterial:$isShowingMaterial");
         },
-          child: Text('Hello, I am a Material Banner ${nowStr}' * 3)
+          child: Text('Hello, I am a Material Banner $nowStr' * 3)
       ),
       leading: const Icon(Icons.info),
       backgroundColor: Colors.yellow,
       // actions: [ SizedBox() ],
       actions: [
         TextButton(
-          child: const Text('Dismiss'),
           // onPressed: () => ScaffoldMessenger.of(context).hideCurrentMaterialBanner(),
           onPressed: () {
             clearMaterialBanners();
-            print("isShowingMaterial:${isShowingMaterial}");
+            print("isShowingMaterial:$isShowingMaterial");
           },
+          child: const Text('Dismiss'),
         ),
       ],
     );
 
     showMaterialBanner(banner, isClear: false,);
-    print("isShowingMaterial:${isShowingMaterial}");
+    print("isShowingMaterial:$isShowingMaterial");
   }
 }
 

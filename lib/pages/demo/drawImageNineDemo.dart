@@ -9,7 +9,7 @@ class DrawImageNineDemo extends StatefulWidget {
 
   final String? title;
 
-  DrawImageNineDemo({ Key? key, this.title}) : super(key: key);
+  const DrawImageNineDemo({ Key? key, this.title}) : super(key: key);
 
 
   @override
@@ -19,6 +19,7 @@ class DrawImageNineDemo extends StatefulWidget {
 class _DrawImageNineDemoState extends State<DrawImageNineDemo> {
   late ui.Image image;
   bool isImageloaded = false;
+  @override
   void initState() {
     super.initState();
     init();
@@ -32,7 +33,7 @@ class _DrawImageNineDemoState extends State<DrawImageNineDemo> {
         appBar: AppBar(
           title: Text(widget.title ?? "$widget"),
         ),
-        body: new Container(
+        body: Container(
           padding: EdgeInsets.all(10),
           child: _buildImage(),
         )
@@ -41,8 +42,8 @@ class _DrawImageNineDemoState extends State<DrawImageNineDemo> {
 
   Future <Null> init() async {
     try {
-      final ByteData data = await rootBundle.load('images/weiqi.png');
-      Uint8List bytes = new Uint8List.view(data.buffer);
+      final data = await rootBundle.load('images/weiqi.png');
+      var bytes = Uint8List.view(data.buffer);
       image = await loadImage(bytes);
       setState(() {
         isImageloaded = true;
@@ -54,7 +55,7 @@ class _DrawImageNineDemoState extends State<DrawImageNineDemo> {
   }
 
   Future<ui.Image> loadImage(Uint8List bytes) async {
-    final Completer<ui.Image> completer = new Completer();
+    final completer = Completer<ui.Image>();
     ui.decodeImageFromList(bytes, (ui.Image img) {
       return completer.complete(img);
     });
@@ -62,8 +63,8 @@ class _DrawImageNineDemoState extends State<DrawImageNineDemo> {
   }
 
   Widget _buildImage() {
-    final screenSize = MediaQuery.of(this.context).size;
-    if (this.isImageloaded) {
+    final screenSize = MediaQuery.of(context).size;
+    if (isImageloaded) {
       return CustomPaint(
         // size: screenSize,
         size: Size(screenSize.width, screenSize.width),
@@ -89,7 +90,7 @@ class ImageEditor extends CustomPainter {
   void paint(Canvas canvas, Size size) {
 
     print('paint');
-    print('paint size ${size}');
+    print('paint size $size');
     print('paint center ${size.center(Offset.zero)}');
 
     // Paint paint = Paint();
@@ -99,14 +100,14 @@ class ImageEditor extends CustomPainter {
     // Rect dst = Rect.fromLTWH(0, 0, 300, 300);
     // canvas.drawImageRect(image, src, dst, Paint());
 
-    Rect center = Rect.fromCenter(
+    var center = Rect.fromCenter(
         center: size.center(Offset.zero),
         width: 50,
         height: 50
     );
-    print('paint center ${center}');
+    print('paint center $center');
 
-    Rect dst = Rect.fromCenter(
+    var dst = Rect.fromCenter(
       center: size.center(Offset.zero),
       width: size.width.toDouble() *1,
       height: size.height.toDouble() *1,
@@ -114,7 +115,7 @@ class ImageEditor extends CustomPainter {
     canvas.drawImageNine(image, center, dst, Paint());
 
     // Rect rect = Rect.fromCenter(center: Offset(200,200), width: 200, height: 200);
-    Paint paint = Paint()
+    var paint = Paint()
       ..color = Colors.blue
       ..style = PaintingStyle.stroke
       ..strokeWidth=2;

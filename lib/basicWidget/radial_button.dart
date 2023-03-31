@@ -53,8 +53,8 @@ class _RadialButtonState extends State<RadialButton> {
       }
       _currentSize = context.size;
 
-      double w = context.size!.width;
-      double h = context.size!.height;
+      var w = context.size!.width;
+      var h = context.size!.height;
       // _scale = radiusOfRadialGradient(
       //     width: w,
       //     height: h,
@@ -65,7 +65,7 @@ class _RadialButtonState extends State<RadialButton> {
         height: h,
         isGreed: true,
       ) ?? 0.5;
-      print("context.size:${context.size} ${_scale}");
+      print("context.size:${context.size} $_scale");
       setState(() {});
     });
     super.initState();
@@ -111,7 +111,7 @@ class _RadialButtonState extends State<RadialButton> {
 
     final max = math.max(width, height);
     final min = math.min(width, height);
-    double result = max/min;
+    var result = max/min;
     if (alignment.x != 0) {
       result *= 2.0;
     }

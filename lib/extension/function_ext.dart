@@ -14,7 +14,7 @@ extension FunctionExt on Function{
       List<dynamic>? positionalArguments,
       [Map<String, dynamic>? namedArguments]
   ) {
-    final arguments = namedArguments?.map((key, value) => MapEntry(new Symbol("${key}"), value));
+    final arguments = namedArguments?.map((key, value) => MapEntry(Symbol(key), value));
     return Function.apply(function, positionalArguments, arguments);
   }
 

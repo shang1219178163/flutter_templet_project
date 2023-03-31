@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 /// https://pub.dev/packages/horizontal_data_table
 class HorizontalDataTableDemo extends StatefulWidget {
 
-  HorizontalDataTableDemo({ Key? key, this.title}) : super(key: key);
+  const HorizontalDataTableDemo({ Key? key, this.title}) : super(key: key);
 
   final String? title;
 

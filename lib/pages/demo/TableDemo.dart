@@ -13,7 +13,7 @@ class TableDemo extends StatefulWidget {
 
   final String? title;
 
-  TableDemo({ Key? key, this.title}) : super(key: key);
+  const TableDemo({ Key? key, this.title}) : super(key: key);
 
   
   @override
@@ -53,7 +53,7 @@ class _TableDemoState extends State<TableDemo> {
   }
 
   List<TableRow> _renderList() {
-    List titles = ['a', 'b'*2, 'c'*4, 'd'*8, 'e'*16];
+    var titles = ['a', 'b'*2, 'c'*4, 'd'*8, 'e'*16];
 
     return titles.map((e) => TableRow(
       children: [

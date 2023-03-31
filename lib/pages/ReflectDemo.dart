@@ -13,7 +13,7 @@ import 'package:flutter_templet_project/model/app_update_model.dart';
 
 class ReflectDemo extends StatefulWidget {
 
-  ReflectDemo({
+  const ReflectDemo({
     Key? key,
     this.title
   }) : super(key: key);
@@ -35,10 +35,10 @@ class _ReflectDemoState extends State<ReflectDemo> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: ['done',].map((e) => TextButton(
+          onPressed: onPressed,
           child: Text(e,
             style: TextStyle(color: Colors.white),
           ),
-          onPressed: onPressed,
         )).toList(),
       ),
       body: _buildBody(),

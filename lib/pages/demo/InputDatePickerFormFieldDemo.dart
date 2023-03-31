@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class InputDatePickerFormFieldDemo extends StatefulWidget {
 
-  InputDatePickerFormFieldDemo({
+  const InputDatePickerFormFieldDemo({
     Key? key, 
     this.title
   }) : super(key: key);
@@ -32,10 +32,10 @@ class _InputDatePickerFormFieldDemoState extends State<InputDatePickerFormFieldD
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: ['done',].map((e) => TextButton(
+          onPressed: () => print(e),
           child: Text(e,
             style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () => print(e),)
+          ),)
         ).toList(),
       ),
       body: buildBody()

@@ -84,21 +84,21 @@ class GestureDetectorContainer extends StatelessWidget {
     return GestureDetector(
       ///这里设置behavior
       behavior: HitTestBehavior.translucent,
-      onTap: this.onTap,
+      onTap: onTap,
       child: Container(
-        color: this.color,
-        alignment: this.alignment,
-        padding: this.edge,
-        child: this.child,
-        decoration: this.decoration,
-        foregroundDecoration: this.foregroundDecoration,
-        width: this.width,
-        height: this.height,
-        constraints: this.constraints,
-        margin: this.margin,
-        transform: this.transform,
-        transformAlignment: this.transformAlignment,
-        clipBehavior: this.clipBehavior
+        color: color,
+        alignment: alignment,
+        padding: edge,
+        decoration: decoration,
+        foregroundDecoration: foregroundDecoration,
+        width: width,
+        height: height,
+        constraints: constraints,
+        margin: margin,
+        transform: transform,
+        transformAlignment: transformAlignment,
+        clipBehavior: clipBehavior,
+        child: child,
       ),
     );
   }

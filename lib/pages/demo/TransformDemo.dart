@@ -5,7 +5,7 @@ class TransformDemo extends StatefulWidget {
 
   final String? title;
 
-  TransformDemo({ Key? key, this.title}) : super(key: key);
+  const TransformDemo({ Key? key, this.title}) : super(key: key);
 
   
   @override

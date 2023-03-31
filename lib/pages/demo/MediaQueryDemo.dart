@@ -15,7 +15,7 @@ import 'package:tuple/tuple.dart';
 
 class MediaQueryDemo extends StatefulWidget {
 
-  MediaQueryDemo({
+  const MediaQueryDemo({
     Key? key, 
     this.title
   }) : super(key: key);
@@ -41,12 +41,12 @@ class _MediaQueryDemoState extends State<MediaQueryDemo> with WidgetsBindingObse
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: ['done',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
           onPressed: () {
             FocusScope.of(context).requestFocus(FocusNode());
-          },)
+          },
+          child: Text(e,
+            style: TextStyle(color: Colors.white),
+          ),)
         ).toList(),
       ),
       body: SafeArea(
@@ -164,7 +164,7 @@ class _MediaQueryDemoState extends State<MediaQueryDemo> with WidgetsBindingObse
 
 
   List<TableRow> _renderTuples({List items = const []}) {
-    if (items.length == 0 || !isTuple(items[0])) {
+    if (items.isEmpty || !isTuple(items[0])) {
       return [];
     }
 

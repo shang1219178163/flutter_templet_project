@@ -22,18 +22,18 @@ class PromptBuilder {
     if (toPromptWidgetKeys.isEmpty) {
       return;
     }
-    PromptItem promptItem = toPromptWidgetKeys.removeAt(0);
+    var promptItem = toPromptWidgetKeys.removeAt(0);
 
-    RenderObject? promptRenderObject =
+    var promptRenderObject =
     promptItem.promptWidgetKey.currentContext?.findRenderObject();
-    double widgetHeight = promptRenderObject?.paintBounds.height ?? 0;
-    double widgetWidth = promptRenderObject?.paintBounds.width ?? 0;
+    var widgetHeight = promptRenderObject?.paintBounds.height ?? 0;
+    var widgetWidth = promptRenderObject?.paintBounds.width ?? 0;
 
-    double widgetTop = 0;
-    double widgetLeft = 0;
+    var widgetTop = 0.0;
+    var widgetLeft = 0.0;
 
     if (promptRenderObject is RenderBox) {
-      Offset offset = promptRenderObject.localToGlobal(Offset.zero);
+      var offset = promptRenderObject.localToGlobal(Offset.zero);
       widgetTop = offset.dy;
       widgetLeft = offset.dx;
     }

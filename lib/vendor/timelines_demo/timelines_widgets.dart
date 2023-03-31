@@ -34,6 +34,7 @@ class NavigationCard extends StatelessWidget with NavigateMixin {
   final EdgeInsetsGeometry? margin;
   final BorderRadius? borderRadius;
   final Widget child;
+  @override
   final NavigateWidgetBuilder? navigationBuilder;
 
   @override

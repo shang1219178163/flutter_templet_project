@@ -16,7 +16,7 @@ class MergeImagesDemo extends StatefulWidget {
 
   final String? title;
 
-  MergeImagesDemo({ Key? key, this.title}) : super(key: key);
+  const MergeImagesDemo({ Key? key, this.title}) : super(key: key);
 
   @override
   _MergeImagesDemoState createState() => _MergeImagesDemoState();
@@ -24,7 +24,7 @@ class MergeImagesDemo extends StatefulWidget {
 
 class _MergeImagesDemoState extends State<MergeImagesDemo> {
 
-  GlobalKey _globalKey = GlobalKey();
+  final GlobalKey _globalKey = GlobalKey();
   // GlobalKey repaintBoundaryKey = GlobalKey(debugLabel: 'gk');
 
   GlobalKey repaintBoundaryKey1 = GlobalKey(debugLabel: 'gk1');
@@ -34,6 +34,7 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
   Widget? imageMerged;
   ImageProvider? _imageProvider;
 
+  @override
   Widget build(BuildContext context) {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
 
@@ -83,7 +84,7 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
   }
 
   _buildBodyNew(){
-    final screenSize = MediaQuery.of(this.context).size;
+    final screenSize = MediaQuery.of(context).size;
 
     return SingleChildScrollView(
       key: _globalKey,
@@ -102,16 +103,16 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
                 ),
               ),
             callback: (step){
-              print("callback:${step}");
+              print("callback:$step");
 
               var items = ['a', 'b', 'c', 'd'];
               final itemsNew = items.exchange(1, 2);
-              print("exchange:${itemsNew}");
+              print("exchange:$itemsNew");
 
 
               var list = [1, 2, 3, 4, 5];
               // list.replaceRange(1, 1, [6]);
-              print("${list.join(', ')}");
+              print(list.join(', '));
               list[1] = list[2];
               list[2] = list[1];
               print("2_${list.join(', ')}");
@@ -128,7 +129,7 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
               ),
             ),
             callback: (step){
-              print("callback:${step}");
+              print("callback:$step");
             },
           ),
           _buildItem(
@@ -142,7 +143,7 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
               ),
             ),
             callback: (step){
-              print("callback:${step}");
+              print("callback:$step");
             },
           ),
         ],
@@ -154,9 +155,9 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
     required RepaintBoundary repaintBoundary,
     void Function(int step)? callback,
   }) {
-    final screenSize = MediaQuery.of(this.context).size;
-    final moveBtnSize = 40.0;
-    final radius = 8.0;
+    final screenSize = MediaQuery.of(context).size;
+    const moveBtnSize = 40.0;
+    const radius = 8.0;
     return Stack(
       children: [
         repaintBoundary,
@@ -200,10 +201,10 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
   }
 
   Future<ui.Image> _capturePic(GlobalKey key) async {
-    BuildContext buildContext = key.currentContext!;
-    print("key:${key}:${buildContext}");
-    RenderRepaintBoundary boundary = buildContext.findRenderObject() as RenderRepaintBoundary;
-    ui.Image image = await boundary.toImage(pixelRatio: ui.window.devicePixelRatio);
+    var buildContext = key.currentContext!;
+    print("key:$key:$buildContext");
+    var boundary = buildContext.findRenderObject() as RenderRepaintBoundary;
+    var image = await boundary.toImage(pixelRatio: ui.window.devicePixelRatio);
 
     // ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
     // Uint8List? pngBytes = byteData?.buffer.asUint8List() ?? Uint8List(10);
@@ -214,18 +215,18 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
   /// 合成截图
   Future<Uint8List?> _compositePicNew() async {
     try {
-      ui.Image one = await _capturePic(repaintBoundaryKey1);
-      ui.Image two = await _capturePic(repaintBoundaryKey2);
-      ui.Image three = await _capturePic(repaintBoundaryKey3);
+      var one = await _capturePic(repaintBoundaryKey1);
+      var two = await _capturePic(repaintBoundaryKey2);
+      var three = await _capturePic(repaintBoundaryKey3);
 
       print("three: ${three.width} ${three.height}");
-      int totalWidth = one.width > two.width ? one.width : two.width;
+      var totalWidth = one.width > two.width ? one.width : two.width;
       // int totalHeight = one.height + two.height + 20.h.toInt();
       // int totalHeight = one.height + two.height;
       //初始化画布
-      ui.PictureRecorder recorder = ui.PictureRecorder();
+      var recorder = ui.PictureRecorder();
       final paint = Paint();
-      Canvas canvas = Canvas(recorder);
+      var canvas = Canvas(recorder);
       //画第一张图
       canvas.drawRect(Rect.fromLTWH(
           0,
@@ -250,10 +251,10 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
           two.height * 1.0), paint);
       canvas.drawImage(three, Offset((totalWidth - two.width) / 2, one.height + two.height + 12), paint);
 
-      ui.Image image = await recorder.endRecording().toImage(totalWidth, one.height + two.height + three.height + 24);
+      var image = await recorder.endRecording().toImage(totalWidth, one.height + two.height + three.height + 24);
       //获取合成的图片
-      ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
-      Uint8List? pngBytes = byteData?.buffer.asUint8List();
+      var byteData = await image.toByteData(format: ui.ImageByteFormat.png);
+      var pngBytes = byteData?.buffer.asUint8List();
 
       return Future.value(pngBytes);
     } catch (e) {
@@ -268,12 +269,12 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
       ui.Image? one = await _capturePic(repaintBoundaryKey1);
       ui.Image? two = await _capturePic(repaintBoundaryKey2);
       print("two: ${two.width} ${two.height}");
-      int totalWidth = one.width > two.width ? one.width : two.width;
+      var totalWidth = one.width > two.width ? one.width : two.width;
       // int totalHeight = one.height + two.height + 20.h.toInt();
-      int totalHeight = one.height + two.height;
+      var totalHeight = one.height + two.height;
       //初始化画布
-      ui.PictureRecorder recorder = ui.PictureRecorder();
-      Canvas canvas = Canvas(recorder);
+      var recorder = ui.PictureRecorder();
+      var canvas = Canvas(recorder);
       final paint = Paint();
       //画第一张图
       canvas.drawRect(Rect.fromLTWH(
@@ -292,9 +293,9 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
           (totalHeight - one.height)*1.0), paint);
       canvas.drawImage(two, Offset((totalWidth - two.width) / 2, one.height + 12), paint);
       //获取合成的图片
-      ui.Image image = await recorder.endRecording().toImage(totalWidth, totalHeight);
-      ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
-      Uint8List? pngBytes = byteData?.buffer.asUint8List();
+      var image = await recorder.endRecording().toImage(totalWidth, totalHeight);
+      var byteData = await image.toByteData(format: ui.ImageByteFormat.png);
+      var pngBytes = byteData?.buffer.asUint8List();
 
       return Future.value(pngBytes);
     } catch (e) {
@@ -308,32 +309,32 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
   /// keys: 根据 GlobalKey 获取 Image 数组
   Future<Uint8List?> _compositePics([List<GlobalKey> keys = const [],]) async {
     //根据 GlobalKey 获取 Image 数组
-    List<ui.Image> images = await Future.wait(
+    var images = await Future.wait(
       keys.map((key) async {
-        BuildContext buildContext = key.currentContext!;
-        RenderRepaintBoundary boundary = buildContext.findRenderObject() as RenderRepaintBoundary;
-        ui.Image image = await boundary.toImage(pixelRatio: ui.window.devicePixelRatio);
+        var buildContext = key.currentContext!;
+        var boundary = buildContext.findRenderObject() as RenderRepaintBoundary;
+        var image = await boundary.toImage(pixelRatio: ui.window.devicePixelRatio);
         return image;
       }
     ).toList());
     // print("images:${images}");
-    if (images.length == 0) {
-      throw new Exception('没有获取到任何图片!');
+    if (images.isEmpty) {
+      throw Exception('没有获取到任何图片!');
     }
 
-    final List<int> imageHeights = images.map((e) => e.height).toList();
+    final imageHeights = images.map((e) => e.height).toList();
     // print("imageHeights:${imageHeights}");
 
     try {
-      int totalWidth = images[0].width;
-      int totalHeight = imageHeights.reduce((a,b) => a + b);
+      var totalWidth = images[0].width;
+      var totalHeight = imageHeights.reduce((a,b) => a + b);
       //初始化画布
-      ui.PictureRecorder recorder = ui.PictureRecorder();
-      Canvas canvas = Canvas(recorder);
+      var recorder = ui.PictureRecorder();
+      var canvas = Canvas(recorder);
       final paint = Paint();
 
       //画图
-      for (int i = 0; i < images.length; i++) {
+      for (var i = 0; i < images.length; i++) {
         final e = images[i];
         final offsetY = i == 0 ? 0 : imageHeights.sublist(0, i).reduce((a,b) => a + b);
         // print("offset:${i}_${e.height}_${offsetY}");
@@ -346,9 +347,9 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
       }
 
       //获取合成的图片
-      ui.Image image = await recorder.endRecording().toImage(totalWidth, totalHeight);
-      ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
-      Uint8List? pngBytes = byteData?.buffer.asUint8List();
+      var image = await recorder.endRecording().toImage(totalWidth, totalHeight);
+      var byteData = await image.toByteData(format: ui.ImageByteFormat.png);
+      var pngBytes = byteData?.buffer.asUint8List();
       //图片大小
       print("图片大小:${await image.fileSize() ?? "null"}");
 

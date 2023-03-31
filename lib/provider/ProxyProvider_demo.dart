@@ -14,10 +14,8 @@
 * */
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/provider/provider_demo.dart';
 import 'package:provider/provider.dart';
-import 'package:tuple/tuple.dart';
 
 class ProxyProviderDemo extends StatelessWidget {
   const ProxyProviderDemo({Key? key}) : super(key: key);

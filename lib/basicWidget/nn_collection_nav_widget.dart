@@ -89,7 +89,7 @@ class _NNCollectionNavWidgetState extends State<NNCollectionNavWidget> {
   /// 滑动控制器
   PageController? controller;
   /// 监听滚动偏移量
-  var scrollOffset = new ValueNotifier(0.0);
+  var scrollOffset = ValueNotifier(0.0);
   /// 子项高度
   double get itemHeight => widget.iconSize + widget.textGap + widget.textHeight;
   /// 传入的每页最大数量
@@ -110,8 +110,8 @@ class _NNCollectionNavWidgetState extends State<NNCollectionNavWidget> {
   EdgeInsets get marginTotal {
     var edge = EdgeInsets.zero;
 
-    if (widget.boxShadows != null && widget.boxShadows!.length > 0) {
-      BoxShadow shadow = widget.boxShadows![0];
+    if (widget.boxShadows != null && widget.boxShadows!.isNotEmpty) {
+      var shadow = widget.boxShadows![0];
       /// 留出阴影空间
       edge = edge.mergeShadow(shadow: shadow);
     }
@@ -150,7 +150,7 @@ class _NNCollectionNavWidgetState extends State<NNCollectionNavWidget> {
 
   @override
   Widget build(BuildContext context) {
-    int totalCount = _items.length; //展示总数
+    var totalCount = _items.length; //展示总数
 
     if (widget.scrollType == PageViewScrollType.none) {
       pageCount = 1;
@@ -213,7 +213,7 @@ class _NNCollectionNavWidgetState extends State<NNCollectionNavWidget> {
     return LayoutBuilder(
       builder: (context, constraints) {
 
-        double edgeHorizontal = widget.rowSpacing*0.5;
+        var edgeHorizontal = widget.rowSpacing*0.5;
         var itemWidth = (constraints.maxWidth - widget.rowSpacing * (widget.pageColumnNum - 1) - edgeHorizontal*2) / widget.pageColumnNum;
 
         return PageView.builder(
@@ -272,9 +272,9 @@ class _NNCollectionNavWidgetState extends State<NNCollectionNavWidget> {
       return SizedBox();
     }
 
-    AttrNavItem model = _items[index];
+    var model = _items[index];
 
-    String iconUrl = model.icon ?? '';
+    var iconUrl = model.icon ?? '';
 
     var imgBorderRadius = BorderRadius.all(Radius.circular(10));//add test
 
@@ -318,11 +318,11 @@ class _NNCollectionNavWidgetState extends State<NNCollectionNavWidget> {
     );
 
     return InkWell(
-      child: child,
       onTap: (){
         // print("InkWell: ${model.name}");
         widget.onItem(model);
       },
+      child: child,
     );
   }
 
@@ -333,12 +333,12 @@ class _NNCollectionNavWidgetState extends State<NNCollectionNavWidget> {
     required int index,
     bool addFittedBox = false,
   }) {
-    String name = model.name ?? '';
+    var name = model.name ?? '';
     if (name.isEmpty) {
       return Container();
     }
 
-    int textLimit = 5.toInt();
+    var textLimit = 5.toInt();
     if (textLimit < name.length) {
       name = name.substring(0, textLimit);
     }
@@ -453,17 +453,17 @@ class AttrNavItem {
 
   Map<String, dynamic> toJson() {
     return {
-      "icon": this.icon,
-      "id": this.id,
-      "name": this.name,
-      "url": this.url,
-      "cornerMarker": this.cornerMarker,
+      "icon": icon,
+      "id": id,
+      "name": name,
+      "url": url,
+      "cornerMarker": cornerMarker,
     };
   }
 
   @override
   String toString() {
-    return this.toJson().toString();
+    return toJson().toString();
   }
 }
 
@@ -481,23 +481,23 @@ enum PageViewScrollType {
 extension PageViewScrollType_IntExt on int{
   /// int 转枚举
   PageViewScrollType? toPageViewScrollType([bool isClamp = true]){
-    final allCases = PageViewScrollType.values;
+    const allCases = PageViewScrollType.values;
     if (!isClamp) {
       if (this < 0 || this > allCases.length - 1) {
         return null;
       }
       return allCases[this];
     }
-    final index = this.clamp(0, allCases.length - 1);
+    final index = clamp(0, allCases.length - 1);
     return allCases[index];
   }
 
   /// int 转枚举
   PageViewScrollType get pageViewScrollType{
-    final allCases = PageViewScrollType.values;
+    const allCases = PageViewScrollType.values;
     // final index = this.clamp(0, allCases.length - 1);
     // return allCases[index];
-    return this.toPageViewScrollType(true) ?? allCases.first;
+    return toPageViewScrollType(true) ?? allCases.first;
   }
 
 }

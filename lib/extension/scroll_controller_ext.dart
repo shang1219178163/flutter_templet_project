@@ -15,8 +15,8 @@ import 'package:flutter/material.dart';
 extension ScrollControllerExt on ScrollController{
 
   printInfo(){
-    ScrollController scrollController = this;
-    this.position.printInfo();
+    var scrollController = this;
+    position.printInfo();
 
     // print('/***********************ScrollController***********************/');
     // print('minScrollExtent: ${scrollController.position.minScrollExtent}');
@@ -30,34 +30,34 @@ extension ScrollControllerExt on ScrollController{
 
   /// 滚动到
   Future<void> scrollTo(
-      double offset, {
-        Duration duration = const Duration(milliseconds: 200),
-        Curve curve = Curves.ease,
-      }) async {
-    await this.animateTo(0, duration: duration, curve: curve, );
+    double offset, {
+      Duration duration = const Duration(milliseconds: 200),
+      Curve curve = Curves.ease,
+    }) async {
+    await animateTo(0, duration: duration, curve: curve, );
   }
 
   ///水平移动
-  JumToHorizontal({
+  jumToHorizontal({
     required GlobalKey key,
     required double offsetX,
     Duration? duration = const Duration(milliseconds: 200),
   }) {
     try {
-      ScrollController scrollController = this;
+      var scrollController = this;
       final position = offsetX;
       // final position = (ScreenUtil().screenWidth / 2 - 12.w);
       // final position = (MediaQuery.of(context).size.width / 2);
 
-      double animateToOffset = 0;
-      RenderBox? renderBox = key.currentContext?.findRenderObject() as RenderBox?;
+      var animateToOffset = 0.0;
+      var renderBox = key.currentContext?.findRenderObject() as RenderBox?;
       if (renderBox == null) {
         return;
       }
 
       final size = renderBox.paintBounds.size;
       final vector3 = renderBox.getTransformTo(null).getTranslation();
-      print("scrollToItemNew vector3:${vector3}");
+      debugPrint("scrollToItemNew vector3:$vector3");
 
       final offset = scrollController.offset;
       final extentAfter = scrollController.position.extentAfter;
@@ -67,7 +67,9 @@ extension ScrollControllerExt on ScrollController{
       } else {
         animateToOffset = offset + extentAfter;
       }
-      if (animateToOffset < 0) animateToOffset = 0;
+      if (animateToOffset < 0) {
+        animateToOffset = 0;
+      }
       if (scrollController.hasClients) {
         scrollController.animateTo(animateToOffset,
           duration: duration ?? const Duration(milliseconds: 200),
@@ -75,7 +77,7 @@ extension ScrollControllerExt on ScrollController{
         );
       }
     } catch (e) {
-      print('JumToHorizontal->$e');
+      debugPrint('JumToHorizontal->$e');
     }
   }
 
@@ -86,30 +88,30 @@ extension ScrollControllerExt on ScrollController{
     Axis scrollDirection = Axis.vertical,
     Duration? duration = const Duration(milliseconds: 200),
   }) {
-    ScrollController scrollController = this;
+    var scrollController = this;
 
-    RenderBox? renderBox = itemKey.currentContext?.findRenderObject() as RenderBox?;
+    var renderBox = itemKey.currentContext?.findRenderObject() as RenderBox?;
     if (renderBox == null) {
-      print("Please bind the key to the widget!!!");
+      debugPrint("Please bind the key to the widget!!!");
       return;
     }
 
-    Offset local = renderBox.localToGlobal(Offset.zero, ancestor: scrollKey.currentContext?.findRenderObject());
-    Size size = renderBox.size;
+    var local = renderBox.localToGlobal(Offset.zero, ancestor: scrollKey.currentContext?.findRenderObject());
+    var size = renderBox.size;
 
-    double value = scrollDirection == Axis.horizontal ? local.dx : local.dy;
+    var value = scrollDirection == Axis.horizontal ? local.dx : local.dy;
 
     var offset = value + scrollController.offset;
-    print("scrollToItemNew local:${local}, size:${size}, offset: ${scrollController.offset}, offset: ${offset}");
+    debugPrint("scrollToItemNew local:$local, size:$size, offset: ${scrollController.offset}, offset: $offset");
 
-    EdgeInsets padding = MediaQueryData.fromWindow(ui.window).padding;
-    double paddingStart = scrollDirection == Axis.horizontal ? padding.left : padding.top;
+    var padding = MediaQueryData.fromWindow(ui.window).padding;
+    var paddingStart = scrollDirection == Axis.horizontal ? padding.left : padding.top;
 
     final extentAfter = scrollController.position.extentAfter;
     if (extentAfter <= local.dy) {
-      print("scrollToItemNew extentAfter:${extentAfter} local.dy:${local.dy}");
+      debugPrint("scrollToItemNew extentAfter:$extentAfter local.dy:${local.dy}");
       scrollController.animateTo(scrollController.position.maxScrollExtent,
-          duration: duration ?? Duration(milliseconds: 200),
+          duration: duration ?? const Duration(milliseconds: 200),
           curve: Curves.linear
       );
       return;
@@ -117,7 +119,7 @@ extension ScrollControllerExt on ScrollController{
 
     if (scrollController.hasClients) {
       scrollController.animateTo(offset - paddingStart,
-          duration: duration ?? Duration(milliseconds: 200),
+          duration: duration ?? const Duration(milliseconds: 200),
           curve: Curves.linear
       );
     }
@@ -128,17 +130,17 @@ extension ScrollControllerExt on ScrollController{
     required GlobalKey scrollKey,
     Duration? duration = const Duration(milliseconds: 200),
   }) {
-    ScrollController scrollController = this;
+    var scrollController = this;
 
-    RenderBox? renderBox = itemKey.currentContext?.findRenderObject() as RenderBox?;
+    var renderBox = itemKey.currentContext?.findRenderObject() as RenderBox?;
     if (renderBox == null) {
-      print("Please bind the key to the widget!!!");
+      debugPrint("Please bind the key to the widget!!!");
       return;
     }
 
-    double dy = renderBox.localToGlobal(Offset.zero, ancestor: scrollKey.currentContext?.findRenderObject()).dy;
+    var dy = renderBox.localToGlobal(Offset.zero, ancestor: scrollKey.currentContext?.findRenderObject()).dy;
     var offset = dy + scrollController.offset;
-    double stateTopH = MediaQueryData.fromWindow(ui.window).padding.top;
+    var stateTopH = MediaQueryData.fromWindow(ui.window).padding.top;
 
     final extentAfter = scrollController.position.extentAfter;
     if (extentAfter <= 0.0) {
@@ -146,7 +148,7 @@ extension ScrollControllerExt on ScrollController{
     }
     if (scrollController.hasClients) {
       scrollController.animateTo(offset - stateTopH,
-          duration: duration ?? Duration(milliseconds: 200),
+          duration: duration ?? const Duration(milliseconds: 200),
           curve: Curves.linear
       );
     }
@@ -163,22 +165,22 @@ extension ListViewExt on ListView{
     required double offsetX,
     Duration? duration = const Duration(milliseconds: 200),
   }) {
-    RenderBox? renderBox = globalKey.currentContext?.findRenderObject() as RenderBox?;
+    var renderBox = globalKey.currentContext?.findRenderObject() as RenderBox?;
     if (renderBox == null) {
-      print("Please bind the key to the widget!!!");
+      debugPrint("Please bind the key to the widget!!!");
       return;
     }
 
-    double dy = renderBox.localToGlobal(Offset.zero).dy;
+    var dy = renderBox.localToGlobal(Offset.zero).dy;
     var offset = dy + scrollController.offset;
-    double stateTopH = MediaQueryData.fromWindow(ui.window).padding.top;
+    var stateTopH = MediaQueryData.fromWindow(ui.window).padding.top;
     scrollController.animateTo(offset - stateTopH,
-        duration: duration ?? Duration(milliseconds: 200),
+        duration: duration ?? const Duration(milliseconds: 200),
         curve: Curves.linear
     );
 
     final extentAfter = scrollController.position.extentAfter;
-    print('scrollController:${scrollController.position}');
+    debugPrint('scrollController:${scrollController.position}');
   }
 }
 
@@ -186,17 +188,17 @@ extension ScrollPositionExt on ScrollPosition{
   printInfo(){
     final result = """
   /*********************** ScrollPosition ***********************/
-  minScrollExtent: ${this.minScrollExtent}
-  maxScrollExtent: ${this.maxScrollExtent}
-  pixels: ${this.pixels}
-  viewportDimension: ${this.viewportDimension}
-  extentAfter: ${this.extentAfter}
-  extentBefore: ${this.extentBefore}
-  extentInside: ${this.extentInside}
-  outOfRange: ${this.outOfRange}
-  atEdge: ${this.atEdge}
+  minScrollExtent: $minScrollExtent
+  maxScrollExtent: $maxScrollExtent
+  pixels: $pixels
+  viewportDimension: $viewportDimension
+  extentAfter: $extentAfter
+  extentBefore: $extentBefore
+  extentInside: $extentInside
+  outOfRange: $outOfRange
+  atEdge: $atEdge
 """;
-    print(result);
+    debugPrint(result);
   }
 }
 

@@ -8,7 +8,7 @@ class RxDartProviderDemo extends StatefulWidget {
 
   final String? title;
 
-  RxDartProviderDemo({ Key? key, this.title}) : super(key: key);
+  const RxDartProviderDemo({ Key? key, this.title}) : super(key: key);
 
   
   @override

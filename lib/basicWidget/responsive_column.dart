@@ -28,8 +28,8 @@ class ResponsiveColumn extends StatelessWidget {
     return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
       if (constraints.maxWidth < scrennize.width*0.5) {
         return Column(
-          children: children,
           mainAxisSize: MainAxisSize.min,
+          children: children,
         );
       }
 
@@ -37,16 +37,16 @@ class ResponsiveColumn extends StatelessWidget {
       for (var i = 0; i < children.length; i++) {
         if (i + 1 < children.length) {
           list.add(Row(
-            children: [children[i], children[i+1]],
-            mainAxisSize: MainAxisSize.min,)
+            mainAxisSize: MainAxisSize.min,
+            children: [children[i], children[i+1]],)
           );
         } else {
           list.add(children[i]);
         }
       }
       return Column(
-        children: list,
         mainAxisSize: MainAxisSize.min,
+        children: list,
       );
     });
   }
@@ -62,7 +62,7 @@ class ResponsiveColumnDemo extends StatelessWidget {
     // Column在本示例中在水平方向的最大宽度为屏幕的宽度
     return Scaffold(
         appBar: AppBar(
-          title: Text("${this.toString()}"),
+          title: Text(toString()),
         ),
         body: Column(
           children: [

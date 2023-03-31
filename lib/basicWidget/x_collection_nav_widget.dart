@@ -59,7 +59,7 @@ class XCollectionNavWidget extends StatelessWidget {
       indicatorLayout: PageIndicatorLayout.COLOR,
       autoplay: true,
       itemCount: images.length,
-      pagination: new SwiperPagination(),
+      pagination: SwiperPagination(),
       // control: new SwiperControl(color: Colors.transparent),
       // itemWidth: screenSize.width * 0.5,
       // viewportFraction: 0.6,
@@ -70,18 +70,18 @@ class XCollectionNavWidget extends StatelessWidget {
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints){
 
-        double edgeHorizontal = this.spacing*0.5;
-        var itemWidth = (constraints.maxWidth - this.spacing * (this.rowCount - 1) - edgeHorizontal*2) / this.rowCount;
+        var edgeHorizontal = spacing*0.5;
+        var itemWidth = (constraints.maxWidth - spacing * (rowCount - 1) - edgeHorizontal*2) / rowCount;
         // var itemWidthNew = 48;
 
         return ColoredBox(
           color: Colors.lightGreen,
           child: Wrap(
-            direction: this.direction,
+            direction: direction,
             // 主轴(水平)方向间距
-            spacing: this.direction == Axis.horizontal ? this.spacing : this.runSpacing,
+            spacing: direction == Axis.horizontal ? spacing : runSpacing,
             // 纵轴（垂直）方向间距
-            runSpacing: this.direction == Axis.horizontal ? this.runSpacing : this.spacing,
+            runSpacing: direction == Axis.horizontal ? runSpacing : spacing,
             alignment: WrapAlignment.start,
             runAlignment: WrapAlignment.start,
             // children: images.map((e) => _buildItem(url: e, text: "装修灵感啊", onPressed: (){

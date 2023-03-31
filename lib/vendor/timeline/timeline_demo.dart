@@ -16,7 +16,7 @@ class TimelineDemo extends StatefulWidget {
 
   final String? title;
 
-  TimelineDemo({ Key? key, this.title}) : super(key: key);
+  const TimelineDemo({ Key? key, this.title}) : super(key: key);
 
 
   @override

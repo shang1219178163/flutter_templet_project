@@ -6,7 +6,7 @@ class IsolateDemo extends StatefulWidget {
 
   final String? title;
 
-  IsolateDemo({ Key? key, this.title}) : super(key: key);
+  const IsolateDemo({ Key? key, this.title}) : super(key: key);
 
   
   @override
@@ -38,14 +38,14 @@ class _IsolateDemoState extends State<IsolateDemo> {
               child: Text(content)
             ),
             TextButton(
-              child: Text('计算'),
               onPressed: () async {
                 //flutter中创建isolate---compute()方法, 函数只能是顶级函数
-                num result = await compute(sum, 1000000);
+                var result = await compute(sum, 1000000);
                 final fmtValue = int.parse('$result').numFormat('0,000.00');
                 content = "计算结果$fmtValue";
                 setState(() {});
               },
+              child: Text('计算'),
             )
           ],
         ),
@@ -57,7 +57,7 @@ class _IsolateDemoState extends State<IsolateDemo> {
 
 //计算0到 num 数值的总和
 int sum(int num) {
-  int count = 0;
+  var count = 0;
   while (num > 0) {
     count = count + num;
     num--;

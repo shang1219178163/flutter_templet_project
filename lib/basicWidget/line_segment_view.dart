@@ -68,10 +68,10 @@ class _LineSegmentViewState extends State<LineSegmentView> {
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
+    var screenWidth = MediaQuery.of(context).size.width;
 
-    double contentWidth = screenWidth - widget.margin.horizontal - widget.padding.horizontal;
-    double itemWidth = contentWidth / widget.children.values.length;
+    var contentWidth = screenWidth - widget.margin.horizontal - widget.padding.horizontal;
+    var itemWidth = contentWidth / widget.children.values.length;
 
     return Container(
       margin: widget.margin,
@@ -91,7 +91,6 @@ class _LineSegmentViewState extends State<LineSegmentView> {
                   height: widget.height,
                   width: itemWidth,
                   child: TextButton(
-                    child: e,
                     onPressed: (){
                       // ddlog(e);
                       setState(() {
@@ -99,6 +98,7 @@ class _LineSegmentViewState extends State<LineSegmentView> {
                       });
                       widget.onValueChanged(widget.groupValue);
                     },
+                    child: e,
                   ),
                 ),
               ],

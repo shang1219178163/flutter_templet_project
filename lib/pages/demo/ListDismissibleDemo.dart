@@ -17,7 +17,7 @@ class ListDismissibleDemo extends StatefulWidget {
 
   final String? title;
 
-  ListDismissibleDemo({ Key? key, this.title}) : super(key: key);
+  const ListDismissibleDemo({ Key? key, this.title}) : super(key: key);
 
   
   @override
@@ -80,14 +80,14 @@ class _ListDismissibleDemoState extends State<ListDismissibleDemo> {
   }
   
   Widget buildListTile({required int index, bool addDismissible = false}) {
-    String item = list[index];
+    var item = list[index];
 
     final child = ListTile(leading: Text(item.toString()), trailing: Text("滑动删除"),);
     if (!addDismissible) {
       return child;
     }
     return Dismissible(
-      key: Key("$item"),
+      key: Key(item),
       movementDuration: Duration(milliseconds: 100),
       onDismissed: (direction) {
         print("--removeAt---" + item.toString());
@@ -177,7 +177,7 @@ class _ListDismissibleDemoState extends State<ListDismissibleDemo> {
                             children: [
                               Padding(
                                 padding: EdgeInsets.only(right: 16.0),
-                                child: Text('${datetimeStr}'),
+                                child: Text(datetimeStr),
                               ),
                               Icon(Icons.calendar_today_outlined),
                             ],
@@ -193,21 +193,21 @@ class _ListDismissibleDemoState extends State<ListDismissibleDemo> {
                 children: [
                   ElevatedButton(
                     onPressed: () => Navigator.pop(context),
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.white,
+                      // minimumSize: Size(96, 48),
+                    ),
                     child: Text('Cancel',
                       style: TextStyle(
                         color: Theme.of(context).primaryColor,
                       )
                     ),
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.white,
-                      // minimumSize: Size(96, 48),
-                    ),
                   ),
                   ElevatedButton(
-                    child: Text('Register'),
                     onPressed: () {
                       actionRegister();
                     },
+                    child: Text('Register'),
                   ),
                 ],
               ),

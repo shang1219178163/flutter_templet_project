@@ -26,7 +26,7 @@ class AnimatedDemo extends StatefulWidget {
 
 class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMixin{
 
-  late AnimationController _controller = AnimationController(duration: const Duration(milliseconds: 350), vsync: this);
+  late final AnimationController _controller = AnimationController(duration: const Duration(milliseconds: 350), vsync: this);
 
   double size = 100;
 
@@ -80,6 +80,14 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
   Widget _buildPausePlayIcon() {
     return Center(
       child: InkWell(
+        onTap: () {
+          ddlog("AnimatedIcon");
+          if (_controller.status == AnimationStatus.completed) {
+            _controller.reverse();
+          } else if (_controller.status == AnimationStatus.dismissed) {
+            _controller.forward();
+          }
+        },
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -91,14 +99,6 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
             Text("AnimatedIcon"),
           ],
         ),
-        onTap: () {
-          ddlog("AnimatedIcon");
-          if (_controller.status == AnimationStatus.completed) {
-            _controller.reverse();
-          } else if (_controller.status == AnimationStatus.dismissed) {
-            _controller.forward();
-          }
-        },
       ),
     );
   }
@@ -146,7 +146,7 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
                 secondChild: Icon(Icons.text_rotate_vertical, size: 150),
               ),
               Text("AnimatedCrossFade"),
-              Text("${_crossFadeState}"),
+              Text("$_crossFadeState"),
             ],
           ),
         ),
@@ -173,7 +173,7 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
             duration: Duration(milliseconds: 500),
             transitionBuilder: (Widget child, Animation<double> animation) {
               //执行缩放动画
-              return ScaleTransition(child: child, scale: animation);
+              return ScaleTransition( scale: animation, child: child,);
             },
             child: Text(
               '$_count',
@@ -183,7 +183,6 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
             ),
           ),
           OutlinedButton(
-            child: Text('+1',),
             onPressed: () {
               ddlog("AnimatedSwitcher");
 
@@ -191,6 +190,7 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
                 _count += 1;
               });
             },
+            child: Text('+1',),
           ),
         ],
       ),
@@ -211,8 +211,8 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
               // return ScaleTransition(child: child, scale: animation);
               var tween = Tween<Offset>(begin: Offset(1, 0), end: Offset(0, 0));
               return MySlideTransition(
-                child: child,
                 position: tween.animate(animation),
+                child: child,
               );
             },
             child: Text(
@@ -223,7 +223,6 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
             ),
           ),
           OutlinedButton(
-            child: Text('+1',),
             onPressed: () {
               ddlog("AnimatedSwitcher");
 
@@ -231,6 +230,7 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
                 _count += 1;
               });
             },
+            child: Text('+1',),
           ),
         ],
       ),
@@ -261,7 +261,6 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
           ),
 
           OutlinedButton(
-            child: Text('+1',),
             onPressed: () {
               ddlog("AnimatedSwitcher");
 
@@ -269,6 +268,7 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
                 _count += 1;
               });
             },
+            child: Text('+1',),
           ),
         ],
       ),
@@ -286,9 +286,9 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
             duration: Duration(milliseconds: 500),
             transitionBuilder: (Widget child, Animation<double> animation) {
               return SlideTransitionX(
-                child: child,
                 direction: AxisDirection.up, //上入下出
                 position: animation,
+                child: child,
               );
             },
             child: Text(
@@ -300,7 +300,6 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
           ),
 
           OutlinedButton(
-            child: Text('+1',),
             onPressed: () {
               ddlog("AnimatedSwitcher");
 
@@ -308,6 +307,7 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
                 _count += 1;
               });
             },
+            child: Text('+1',),
           ),
         ],
       ),
@@ -338,7 +338,6 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
           ),
 
           OutlinedButton(
-            child: Text('+1',),
             onPressed: () {
               ddlog("AnimatedSwitcher");
 
@@ -346,6 +345,7 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
                 _count += 1;
               });
             },
+            child: Text('+1',),
           ),
         ],
       ),

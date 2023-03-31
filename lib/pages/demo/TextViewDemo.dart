@@ -13,7 +13,7 @@ class TextViewDemo extends StatefulWidget {
 
   final String? title;
 
-  TextViewDemo({ Key? key, this.title}) : super(key: key);
+  const TextViewDemo({ Key? key, this.title}) : super(key: key);
 
   
   @override

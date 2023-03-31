@@ -24,7 +24,7 @@ import '../tabBar_tabBarView_demo.dart';
 
 class ListViewStyleDemo extends StatefulWidget {
 
-  ListViewStyleDemo({
+  const ListViewStyleDemo({
     Key? key,
     this.title
   }) : super(key: key);
@@ -36,7 +36,7 @@ class ListViewStyleDemo extends StatefulWidget {
 }
 
 class _ListViewStyleDemoState extends State<ListViewStyleDemo> with SingleTickerProviderStateMixin {
-  late TabController _tabController = TabController(length: _pages.length, vsync: this);
+  late final TabController _tabController = TabController(length: _pages.length, vsync: this);
 
   List<Tuple2<String, Widget>> _pages = [];
 
@@ -85,12 +85,12 @@ class _ListViewStyleDemoState extends State<ListViewStyleDemo> with SingleTicker
       ),
       floatingActionButton: FloatingActionButton(
         tooltip: 'Increment',
-        child: Icon(Icons.add),
         onPressed: () {
           kScaffoldKey.currentState!.openEndDrawer();
           // testData();
           getTitles(tuples: tuples);
         },
+        child: Icon(Icons.add),
       ),
     );
   }
@@ -209,7 +209,7 @@ class _ListViewStyleDemoState extends State<ListViewStyleDemo> with SingleTicker
             // color: Colors.green,
             color: isExpand ? Colors.black12 : null,
             child: ListTile(
-              title: Text("${e.item1}", style: TextStyle(fontWeight: FontWeight.bold),),
+              title: Text(e.item1, style: TextStyle(fontWeight: FontWeight.bold),),
               // subtitle: Text("subtitle"),
               trailing: trailing,
             ),

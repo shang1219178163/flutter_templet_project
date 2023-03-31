@@ -54,9 +54,9 @@ class NeumorphismButton extends StatelessWidget {
     return InkWell(
       onTap: onClick,
       child: Container(
-        height: this.height,
-        width: this.width,
-        padding: this.padding,
+        height: height,
+        width: width,
+        padding: padding,
         decoration: BoxDecoration(
           color: const Color(0xFFE0E5EC),
           // color: Colors.green,

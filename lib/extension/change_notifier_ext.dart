@@ -14,7 +14,7 @@ extension ObjectVN on Object{
   ValueNotifier get vn => ValueNotifier(this);
 }
 
-extension numVN on num{
+extension NumVN on num{
   /// 获取
   ValueNotifier get vn => ValueNotifier<num>(this);
 }

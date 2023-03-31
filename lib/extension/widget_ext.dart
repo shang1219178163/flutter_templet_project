@@ -165,9 +165,9 @@ extension WidgetExt on Widget {
     bool fillOverscroll = false,
   }) => SliverFillRemaining(
     key: key,
-    child: this,
     hasScrollBody: hasScrollBody,
     fillOverscroll: fillOverscroll,
+    child: this,
   );
 
   /// 转为 ValueListenableBuilder
@@ -197,12 +197,12 @@ extension ScrollViewExt on ScrollView {
     ScrollNotificationPredicate? notificationPredicate,
   }) => CupertinoScrollbar(
     key: key,
-    child: this,
     controller: controller,
-    isAlwaysShown: isAlwaysShown,
+    thumbVisibility: isAlwaysShown,
     thickness: thickness,
     radius: radius,
     notificationPredicate: notificationPredicate ?? defaultScrollNotificationPredicate,
+    child: this,
   );
 }
 
@@ -215,8 +215,8 @@ extension FlexExt on Flex {
     Widget Function(Widget e)? itemBuilder,
   }) => CustomScrollView(
     key: key,
-    slivers: this.children.map((e) => itemBuilder?.call(e) ?? e.toSliverToBoxAdapter()).toList(),
-    clipBehavior: this.clipBehavior,
+    slivers: children.map((e) => itemBuilder?.call(e) ?? e.toSliverToBoxAdapter()).toList(),
+    clipBehavior: clipBehavior,
   );
 }
 
@@ -227,25 +227,25 @@ extension ListViewExt on ListView {
   CustomScrollView toCustomScrollView({
     Widget Function(Widget e)? itemBuilder,
   }) {
-    final slivers = (this.childrenDelegate as SliverChildListDelegate).children.map((e) => itemBuilder?.call(e) ?? e.toSliverToBoxAdapter()).toList();
+    final slivers = (childrenDelegate as SliverChildListDelegate).children.map((e) => itemBuilder?.call(e) ?? e.toSliverToBoxAdapter()).toList();
     return CustomScrollView(
-      key: this.key,
+      key: key,
       slivers: slivers,
-      scrollDirection: this.scrollDirection,
-      reverse: this.reverse,
-      controller: this.controller,
-      primary: this.primary,
-      physics: this.physics,
-      scrollBehavior: this.scrollBehavior,
-      shrinkWrap: this.shrinkWrap,
-      center: this.center,
-      anchor: this.anchor,
-      cacheExtent: this.cacheExtent,
-      semanticChildCount: this.semanticChildCount,
-      dragStartBehavior: this.dragStartBehavior,
-      keyboardDismissBehavior: this.keyboardDismissBehavior,
-      restorationId: this.restorationId,
-      clipBehavior: this.clipBehavior,
+      scrollDirection: scrollDirection,
+      reverse: reverse,
+      controller: controller,
+      primary: primary,
+      physics: physics,
+      scrollBehavior: scrollBehavior,
+      shrinkWrap: shrinkWrap,
+      center: center,
+      anchor: anchor,
+      cacheExtent: cacheExtent,
+      semanticChildCount: semanticChildCount,
+      dragStartBehavior: dragStartBehavior,
+      keyboardDismissBehavior: keyboardDismissBehavior,
+      restorationId: restorationId,
+      clipBehavior: clipBehavior,
     );
   }
 }
@@ -255,22 +255,22 @@ extension CustomScrollViewExt on CustomScrollView {
 
   /// 转为 ListView
   ListView toListView() {
-    final children = this.slivers.map((e) => (e is SliverToBoxAdapter ? e.child ?? SizedBox() : e)).toList();
+    final children = slivers.map((e) => (e is SliverToBoxAdapter ? e.child ?? SizedBox() : e)).toList();
     return ListView(
-      key: this.key,
+      key: key,
+      scrollDirection: scrollDirection,
+      reverse: reverse,
+      controller: controller,
+      primary: primary,
+      physics: physics,
+      shrinkWrap: shrinkWrap,
+      cacheExtent: cacheExtent,
+      semanticChildCount: semanticChildCount,
+      dragStartBehavior: dragStartBehavior,
+      keyboardDismissBehavior: keyboardDismissBehavior,
+      restorationId: restorationId,
+      clipBehavior: clipBehavior,
       children: children,
-      scrollDirection: this.scrollDirection,
-      reverse: this.reverse,
-      controller: this.controller,
-      primary: this.primary,
-      physics: this.physics,
-      shrinkWrap: this.shrinkWrap,
-      cacheExtent: this.cacheExtent,
-      semanticChildCount: this.semanticChildCount,
-      dragStartBehavior: this.dragStartBehavior,
-      keyboardDismissBehavior: this.keyboardDismissBehavior,
-      restorationId: this.restorationId,
-      clipBehavior: this.clipBehavior,
     );
   }
 
@@ -285,9 +285,9 @@ extension CustomScrollViewExt on CustomScrollView {
     TextDirection? textDirection,
     clipBehavior = Clip.none,
   }) {
-    final children = this.slivers.map((e) => (e is SliverToBoxAdapter ? e.child ?? SizedBox() : e)).toList();
+    final children = slivers.map((e) => (e is SliverToBoxAdapter ? e.child ?? SizedBox() : e)).toList();
     return Flex(
-      key: this.key,
+      key: key,
       direction: direction,
       mainAxisAlignment: mainAxisAlignment,
       mainAxisSize: mainAxisSize,

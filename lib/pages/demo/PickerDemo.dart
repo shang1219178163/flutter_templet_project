@@ -42,7 +42,7 @@ class _PickerDemoState extends State<PickerDemo> {
 
     return Scaffold(
         appBar: AppBar(
-          title: Text("$title"),
+          title: Text(title),
         ),
         body: buildGridView(titles)
     );
@@ -71,11 +71,11 @@ class _PickerDemoState extends State<PickerDemo> {
         onPressed: (){
           _onPressed(list.indexOf(e));
         },
-        child: Text('${e}_${list.indexOf(e)}', style: TextStyle(fontSize: 12, color: Colors.black87)),
         style: OutlinedButton.styleFrom(
           side: BorderSide(width: 1.0, color: Colors.blue),
           padding: EdgeInsets.all(0),
         ),
+        child: Text('${e}_${list.indexOf(e)}', style: TextStyle(fontSize: 12, color: Colors.black87)),
     )).toList();
   }
 
@@ -92,7 +92,7 @@ class _PickerDemoState extends State<PickerDemo> {
         break;
       case 1:
        {
-         DateTime dateTime = DateTime.now();
+         var dateTime = DateTime.now();
 
          context.showBottomPicker(
             child: CupertinoDatePicker(
@@ -123,7 +123,7 @@ class _PickerDemoState extends State<PickerDemo> {
 
       case 3:
         {
-          int _selectedValue = 0;
+          var _selectedValue = 0;
 
           context.showBottomPicker(
             child: SafeArea(
@@ -131,15 +131,15 @@ class _PickerDemoState extends State<PickerDemo> {
                 backgroundColor: Colors.white,
                 itemExtent: 30,
                 scrollController: FixedExtentScrollController(initialItem: 1),
-                children: List.generate(10, (index) =>
-                    Text('选择_$index',
-                  style: TextStyle(fontSize: 16),)
-                ),
                 onSelectedItemChanged: (value) {
                   setState(() {
                     _selectedValue = value;
                   });
                 },
+                children: List.generate(10, (index) =>
+                    Text('选择_$index',
+                  style: TextStyle(fontSize: 16),)
+                ),
               ),
             ),
             callback: (title){
@@ -167,10 +167,10 @@ class _PickerDemoState extends State<PickerDemo> {
               child: Container(
                 color: Colors.green,
                 // height: 500,
-                child: TextButton(child: Text("Button"),
+                child: TextButton(
                   onPressed: (){
                     ddlog("Button");
-                  },
+                  },child: Text("Button"),
                 ),
               ), callback: (String title) {
                 ddlog(title);
@@ -254,7 +254,7 @@ class _PickerDemoState extends State<PickerDemo> {
 
       case 9:
         {
-          final DateTime? newDate = await showDatePicker(
+          final newDate = await showDatePicker(
             context: context,
             initialDate: DateTime(2020, 11, 17),
             firstDate: DateTime(2017, 1),
@@ -269,7 +269,7 @@ class _PickerDemoState extends State<PickerDemo> {
 
       case 10:
         {
-          final DateTimeRange? dateRange = await showDateRangePicker(
+          final dateRange = await showDateRangePicker(
             context: context,
             initialDateRange: DateTimeRange(
               start: DateTime(2020, 11, 17),
@@ -322,11 +322,12 @@ class _PickerDemoState extends State<PickerDemo> {
     required BuildContext context,
     DateTime? initialDateTime,
     CupertinoDatePickerMode? mode,
-    required void callback(DateTime dateTime, String title)}) {
+    required void Function(DateTime dateTime, String title) callback
+  }) {
 
-    DateTime dateTime = initialDateTime ?? DateTime.now();
+    var dateTime = initialDateTime ?? DateTime.now();
 
-    final title = "请选择";
+    const title = "请选择";
     final actionTitles = ['取消', '确定'];
 
     showCupertinoModalPopup(
@@ -383,13 +384,13 @@ class _PickerDemoState extends State<PickerDemo> {
           backgroundColor: Colors.white,
           itemExtent: 30,
           scrollController: FixedExtentScrollController(initialItem: 1),
-          children: items,
           onSelectedItemChanged: (value) {
             setState(() {
               // _selectedValue = value;
               onChanged(value);
             });
           },
+          children: items,
         ),
       )
     );
@@ -424,13 +425,13 @@ class _PickerDemoState extends State<PickerDemo> {
                     backgroundColor: Colors.white,
                     itemExtent: 50,
                     scrollController: FixedExtentScrollController(initialItem: 1),
-                    children: items,
                     onSelectedItemChanged: (value) {
                       setState(() {
                         // _selectedValue = value;
                         onChanged(value);
                       });
                     },
+                    children: items,
                   ),
                 ),
               ],
@@ -470,21 +471,21 @@ class _DatePickerDemoState extends State<DatePickerDemo> {
         trailing: Container(child:
         CupertinoButton(
           padding: EdgeInsetsDirectional.zero,
-          child: Text('Show Picker'),
           onPressed: () {
             // _showDatePicker(context);
             _datePickerValueChange();
           },
+          child: Text('Show Picker'),
         ),),
       ),
       child: SafeArea(
         child: Center(
           child: TextButton(
-            child: Text(time),
             onPressed: (){
             // _showDatePicker(context);
               _datePickerValueChange();
             },
+            child: Text(time),
           )
         ),
       ),

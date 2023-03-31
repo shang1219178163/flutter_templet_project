@@ -12,7 +12,7 @@ class BannerDemo extends StatefulWidget {
 
   final String? title;
 
-  BannerDemo({ Key? key, this.title}) : super(key: key);
+  const BannerDemo({ Key? key, this.title}) : super(key: key);
 
   
   @override

@@ -20,21 +20,21 @@ class ComponentPage extends StatelessWidget {
                 firstConnectorStyle: ConnectorStyle.transparent,
                 lastConnectorStyle: ConnectorStyle.transparent,
                 oppositeContentsBuilder: (context, index) {
-                  PlainDataModel model = PlainDataModel.fromJson(listData[index]);
+                  var model = PlainDataModel.fromJson(listData[index]);
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text('${model.day}\n${model.time}'),
                   );
                 },
                 contentsBuilder: (context, index) {
-                  PlainDataModel model = PlainDataModel.fromJson(listData[index]);
+                  var model = PlainDataModel.fromJson(listData[index]);
                   return Card(
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Column(
                         children: [
-                          Text('${model.title}'),
-                          Text('${model.description}'),
+                          Text(model.title),
+                          Text(model.description),
 
                         ],
                       ),

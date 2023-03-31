@@ -5,7 +5,7 @@ class PromptBuilderDemo extends StatefulWidget {
 
   final String? title;
 
-  PromptBuilderDemo({ Key? key, this.title}) : super(key: key);
+  const PromptBuilderDemo({ Key? key, this.title}) : super(key: key);
 
   @override
   _PromptBuilderDemoState createState() => _PromptBuilderDemoState();
@@ -29,7 +29,7 @@ class _PromptBuilderDemoState extends State<PromptBuilderDemo> with WidgetsBindi
     // 页面展示时进行prompt绘制，在此添加observer监听等待渲染完成后挂载prompt
     WidgetsBinding.instance.addObserver(this);
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      List<PromptItem> prompts = [];
+      var prompts = <PromptItem>[];
       prompts.add(PromptItem(centerWidgetKey, "这是中心Widget"));
       prompts.add(PromptItem(bottomWidgetKey, "这是底部Button"));
 

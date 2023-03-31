@@ -20,7 +20,6 @@ import 'package:flutter_templet_project/pages/LocalImagePage.dart';
 import 'package:flutter_templet_project/pages/HomeNavDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NSkeletonDemo.dart';
 import 'package:flutter_templet_project/pages/homeSrollDemo.dart';
-import 'package:flutter_templet_project/pages/demo/AutocompleteDemo.dart';
 import 'package:flutter_templet_project/pages/demo/BuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ButtonStyleDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ColoredBoxDemo.dart';
@@ -650,7 +649,7 @@ class AppPage {
     GetPage(name: APPRouter.timelineDemo, page: () => TimelineDemo(),),
     GetPage(name: APPRouter.timelinesDemo, page: () => TimelinesDemo(),),
     GetPage(name: APPRouter.hitTest, page: () => HitTest(),),
-    GetPage(name: APPRouter.navgationBarDemo, page: () => navgationBarDemo(),),
+    GetPage(name: APPRouter.navgationBarDemo, page: () => NavgationBarDemo(),),
     GetPage(name: APPRouter.borderDemo, page: () => BorderDemo(),),
     GetPage(name: APPRouter.clipDemo, page: () => ClipDemo(),),
     GetPage(name: APPRouter.steperConnectorDemo, page: () => SteperConnectorDemo(),),

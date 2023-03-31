@@ -32,25 +32,25 @@ class ContextMenuActionDemo extends StatelessWidget {
             width: 100,
             height: 100,
             child: CupertinoContextMenu(
+              actions: <Widget>[
+                CupertinoContextMenuAction(
+                  trailingIcon: Icons.chevron_right,
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text('Action one'),
+                ),
+                CupertinoContextMenuAction(
+                  trailingIcon: Icons.chevron_right,
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text('Action two'),
+                ),
+              ],
               child: Container(
                 color: Colors.red,
               ),
-              actions: <Widget>[
-                CupertinoContextMenuAction(
-                  child: const Text('Action one'),
-                  trailingIcon: Icons.chevron_right,
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
-                CupertinoContextMenuAction(
-                  child: const Text('Action two'),
-                  trailingIcon: Icons.chevron_right,
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
-              ],
             ),
           ),
         ),

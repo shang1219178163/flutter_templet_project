@@ -4,7 +4,7 @@ class RotatedBoxDemo extends StatefulWidget {
 
   final String? title;
 
-  RotatedBoxDemo({ Key? key, this.title}) : super(key: key);
+  const RotatedBoxDemo({ Key? key, this.title}) : super(key: key);
 
   
   @override

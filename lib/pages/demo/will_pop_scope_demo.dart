@@ -13,7 +13,7 @@ class WillPopScopeDemo extends StatefulWidget {
 
   final String? title;
 
-  WillPopScopeDemo({ Key? key, this.title}) : super(key: key);
+  const WillPopScopeDemo({ Key? key, this.title}) : super(key: key);
 
 
   @override
@@ -27,10 +27,11 @@ class _WillPopScopeDemoState extends State<WillPopScopeDemo> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-        child: buildPage(context),
-        onWillPop: () async {
-          return !_disable;
-        });
+      onWillPop: () async {
+        return !_disable;
+      },
+      child: buildPage(context),
+    );
   }
 
   Widget buildPage(BuildContext context) {

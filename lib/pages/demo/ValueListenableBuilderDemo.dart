@@ -12,7 +12,7 @@ class ValueListenableBuilderDemo extends StatefulWidget {
 
   final String? title;
 
-  ValueListenableBuilderDemo({ Key? key, this.title}) : super(key: key);
+  const ValueListenableBuilderDemo({ Key? key, this.title}) : super(key: key);
 
   
   @override
@@ -21,7 +21,7 @@ class ValueListenableBuilderDemo extends StatefulWidget {
 
 class _ValueListenableBuilderDemoState extends State<ValueListenableBuilderDemo> {
 
-  var _counter = ValueNotifier<int>(0);
+  final _counter = ValueNotifier<int>(0);
   final netState = ValueNotifier<MyResult>(MyResult.mobile);
 
   final Widget goodJob = const Text('Good job!');
@@ -39,7 +39,6 @@ class _ValueListenableBuilderDemoState extends State<ValueListenableBuilderDemo>
             const Text('You have pushed the button this many times:'),
             ValueListenableBuilder<int>(
               valueListenable: _counter,
-              child: goodJob,
               builder: (BuildContext context, int value, Widget? child) {
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -49,17 +48,17 @@ class _ValueListenableBuilderDemoState extends State<ValueListenableBuilderDemo>
                   ],
                 );
               },
+              child: goodJob,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children:MyResult.values.map((e) => FloatingActionButton(
-                child: Text("$e".split(".")[1]),
                 onPressed: () => netState.value = e,
+                child: Text("$e".split(".")[1]),
               )).toList(),
             ),
             ValueListenableBuilder<MyResult>(
               valueListenable: netState,
-              child: const Text("child"),
               builder: (context, value,  child) {
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -69,13 +68,14 @@ class _ValueListenableBuilderDemoState extends State<ValueListenableBuilderDemo>
                   ],
                 );
               },
+              child: const Text("child"),
             )
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.plus_one),
         onPressed: () => _counter.value += 1,
+        child: const Icon(Icons.plus_one),
       ),
     );
   }

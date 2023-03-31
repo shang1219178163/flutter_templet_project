@@ -17,7 +17,7 @@ class DraggableScrollableSheetDemo extends StatefulWidget {
 
   final String? title;
 
-  DraggableScrollableSheetDemo({ Key? key, this.title}) : super(key: key);
+  const DraggableScrollableSheetDemo({ Key? key, this.title}) : super(key: key);
 
   
   @override
@@ -56,7 +56,7 @@ class _DraggableScrollableSheetDemoState extends State<DraggableScrollableSheetD
             child: Container(
               color: Color.fromARGB(100, 100, 100, 100),
               child: Image.network(
-                R.image.imgUrls[6],
+                R.image.urls[6],
                 fit: BoxFit.contain,
               ),
             ),

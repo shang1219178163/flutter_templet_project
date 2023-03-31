@@ -15,18 +15,18 @@ class WheelPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    double wheelSize = min(size.width, size.height) / 2; //饼图的尺寸
+    var wheelSize = min(size.width, size.height) / 2; //饼图的尺寸
     //用一个矩形框来包裹饼图
-    Rect boundingRect = Rect.fromCircle(
+    var boundingRect = Rect.fromCircle(
         center: Offset(wheelSize, wheelSize), radius: wheelSize);
     //求出数组中所有数值的和
     total = list.reduce((value, element) => value + element);
     print("总份额是：$total");
     //求出每一份所占的角度
-    double radius = (2 * pi) / total; //求出每一份的弧度
+    var radius = (2 * pi) / total; //求出每一份的弧度
     print("总角度是${2 * pi},每份额角度是:$radius");
     //循环绘制每一份扇形
-    for (int i = 0; i < list.length; i++) {
+    for (var i = 0; i < list.length; i++) {
       // 求出初始角度
       double startRadius;
       if (i == 0) {
@@ -37,7 +37,7 @@ class WheelPainter extends CustomPainter {
                 radius;
       }
       //求出滑过角度，即当前份额乘以每份所占角度
-      double sweepRadius = radius * list[i];
+      var sweepRadius = radius * list[i];
       print("起始角度：$startRadius,划过角度：$sweepRadius");
 
       /// 绘制扇形，第一个参数是绘制矩形所在的矩形，第二个参数是起始角度，第三个参数是矩形划过的角度
@@ -49,7 +49,7 @@ class WheelPainter extends CustomPainter {
 
   //根据不同的 color 来获取对应的画笔
   Paint getPaintByColor(Color color) {
-    Paint paint = Paint();
+    var paint = Paint();
     paint.color = color;
     return paint;
   }

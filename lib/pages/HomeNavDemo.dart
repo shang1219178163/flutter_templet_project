@@ -6,7 +6,7 @@ import 'package:flutter_templet_project/vendor/flutter_swiper_demo.dart';
 
 class HomeNavDemo extends StatefulWidget {
 
-  HomeNavDemo({ Key? key, this.title}) : super(key: key);
+  const HomeNavDemo({ Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -85,7 +85,7 @@ class _HomeNavDemoState extends State<HomeNavDemo> {
         autoplay: true,
         loop: true,
         itemCount: images.length,
-        pagination: new SwiperPagination(),
+        pagination: SwiperPagination(),
         // control: new SwiperControl(color: Colors.transparent),
         // itemWidth: screenSize.width * 0.5,
         // viewportFraction: 0.6,

@@ -4,7 +4,7 @@ class SliverToolsDemo extends StatefulWidget {
 
   final String? title;
 
-  SliverToolsDemo({ Key? key, this.title}) : super(key: key);
+  const SliverToolsDemo({ Key? key, this.title}) : super(key: key);
 
   
   @override

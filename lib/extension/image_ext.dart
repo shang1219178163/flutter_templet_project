@@ -20,7 +20,7 @@ extension UIImageExt on ui.Image {
     ui.ImageByteFormat format = ui.ImageByteFormat.png,
     // Exception? exception
   }) async {
-    ByteData? byteData = await this.toByteData(format: format);
+    var byteData = await toByteData(format: format);
     // if (byteData == null) throw exception ?? Exception('toByteData 数据为空');
     final bytes = byteData?.buffer.asUint8List();
     return bytes;
@@ -29,7 +29,7 @@ extension UIImageExt on ui.Image {
   /// 获取文件在内存中的大小
   FutureOr<String?> fileSize(
       {ui.ImageByteFormat format = ui.ImageByteFormat.png}) async {
-    ByteData? byteData = await this.toByteData(format: format);
+    var byteData = await toByteData(format: format);
     final result = byteData?.fileSize();
     // print("imageSize: ${result}");
     return result;
@@ -41,11 +41,11 @@ extension ImageExt on Image {
     required String imageUrl,
     ui.ImageByteFormat format = ui.ImageByteFormat.png,
   }) async {
-    Image img = Image.network(imageUrl);
+    var img = Image.network(imageUrl);
 
-    ImageInfo imgInfo = await img.image.getImageInfo();
+    var imgInfo = await img.image.getImageInfo();
 
-    Uint8List? uint8List = await imgInfo.image.toUint8List();
+    var uint8List = await imgInfo.image.toUint8List();
     return uint8List;
   }
 }
@@ -56,14 +56,14 @@ extension ImageProviderExt on ImageProvider {
     ImageConfiguration configuration = const ImageConfiguration(),
   }) async {
     final completer = Completer<ImageInfo>();
-    this.resolve(configuration).addListener(
+    resolve(configuration).addListener(
       ImageStreamListener((ImageInfo info, bool _) async {
           completer.complete(info);
-          this.evict();
+          evict();
         },
         onError: (Object exception, StackTrace? stackTrace) {
           completer.completeError(exception, stackTrace);
-          this.evict();
+          evict();
         },
       ),
     );
@@ -74,7 +74,7 @@ extension ImageProviderExt on ImageProvider {
 extension ByteDataExt on ByteData {
   /// 获取文件在内存中的大小
   String fileSize() {
-    final bytes = this.buffer.lengthInBytes;
+    final bytes = buffer.lengthInBytes;
     if (bytes == 0) {
       throw Exception("获取文件字节失败");
     }
@@ -82,7 +82,7 @@ extension ByteDataExt on ByteData {
     final kb = bytes / 1024;
     final mb = kb / 1024;
 
-    final result = kb > 1024 ? mb.toStringAsFixed(2) + 'MB' : kb.toStringAsFixed(0) + "kb";
+    final result = kb > 1024 ? '${mb.toStringAsFixed(2)}MB' : "${kb.toStringAsFixed(0)}kb";
     // print("imageSize: ${result}");
     return result;
   }
@@ -91,10 +91,10 @@ extension ByteDataExt on ByteData {
 extension ImageChunkEventExt on ImageChunkEvent {
   // 当前百分比进度(0 - 1)
   double? get current {
-    if (this.expectedTotalBytes == null) {
+    if (expectedTotalBytes == null) {
       return null;
     }
-    final double result = this.cumulativeBytesLoaded / this.expectedTotalBytes!;
+    final result = cumulativeBytesLoaded / expectedTotalBytes!;
     return result;
   }
 }

@@ -82,7 +82,7 @@ extension ColorExt on Color{
     }
     val = val.replaceAll(")", "");
     val = val.replaceAll("rgba(", "");
-    List<String> list = val.split(",");
+    var list = val.split(",");
     if (list.length != 4) {
       return null;
     }
@@ -95,10 +95,10 @@ extension ColorExt on Color{
   }
 
   ///转渐进色
-  Gradient? toGradient() => LinearGradient(colors:[this, this,], stops:[0.0, 1]);
+  Gradient? toGradient() => LinearGradient(colors:[this, this,], stops: const [0.0, 1]);
 
   Color randomOpacity() {
-    return this.withOpacity(Random().nextInt(100)/100);
+    return withOpacity(Random().nextInt(100)/100);
   }
   
   /// 颜色名称描述
@@ -106,7 +106,7 @@ extension ColorExt on Color{
     if (colorsMap.keys.contains(this)) {
       return colorsMap[this] ?? "";
     }
-    return this.toString();
+    return toString();
   }
 
 }

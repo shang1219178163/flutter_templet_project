@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class MaterialDemo extends StatefulWidget {
 
-  MaterialDemo({
+  const MaterialDemo({
     Key? key, 
     this.title
   }) : super(key: key);
@@ -43,10 +43,10 @@ class _MaterialDemoState extends State<MaterialDemo> with SingleTickerProviderSt
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: ['done',].map((e) => TextButton(
+          onPressed: () => print("done"),
           child: Text(e,
             style: TextStyle(color: Colors.white),
           ),
-          onPressed: () => print("done"),
         )).toList(),
         bottom: TabBar(
           isScrollable: true,
@@ -87,17 +87,16 @@ class _MaterialDemoState extends State<MaterialDemo> with SingleTickerProviderSt
                             border: Border.all()
                           ),
                           child: InkWell(
-                            child: Text(e.toString().split(".")[1]),
                             onTap: () {
-                              print("Press: ${e.toString().split(".")[1]}");
-                            }
-                          ),
+                              debugPrint("Press: ${e.toString().split(".")[1]}");
+                            },
+                            child: Text(e.toString().split(".")[1]),                          ),
                         ),),
                     )).toList(),
                     ValueListenableBuilder<MaterialType>(
                       valueListenable: typeVN,
                       builder: (context, value, child) {
-                        print("ValueListenableBuilder:${value}");
+                        print("ValueListenableBuilder:$value");
 
                         return _buildMaterialDemo(type: value);
                       }

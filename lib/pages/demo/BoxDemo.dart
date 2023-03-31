@@ -18,7 +18,7 @@ class BoxDemo extends StatefulWidget {
 
   final String? title;
 
-  BoxDemo({ Key? key, this.title}) : super(key: key);
+  const BoxDemo({ Key? key, this.title}) : super(key: key);
 
 
   @override
@@ -108,11 +108,11 @@ class _BoxDemoState extends State<BoxDemo> {
       width: 300,
       color: Colors.green,
       child: FittedBox(
+        fit: BoxFit.contain,
         // child: Image.network('https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg'),
         child: Image.asset('images/bg.jpg',
           fit: BoxFit.cover,
         ),
-        fit: BoxFit.contain,
       ),
     );
   }
@@ -136,9 +136,9 @@ class _BoxDemoState extends State<BoxDemo> {
 
 
   _buildOverflowBox({
-    width: 70.0,
-    height: 70.0,
-    padding: const EdgeInsets.all(5.0),
+    width = 70.0,
+    height = 70.0,
+    padding = const EdgeInsets.all(5.0),
   }) {
     return Container(
       color: Colors.green,
@@ -157,9 +157,9 @@ class _BoxDemoState extends State<BoxDemo> {
   }
 
   _buildOverflowBox1({
-    width: 70.0,
-    height: 70.0,
-    padding: const EdgeInsets.all(5.0),
+    width = 70.0,
+    height = 70.0,
+    padding = const EdgeInsets.all(5.0),
   }) {
     return Container(
       color: Colors.green,
@@ -178,9 +178,9 @@ class _BoxDemoState extends State<BoxDemo> {
   }
 
   _buildOverflowBox2({
-    width: 70.0,
-    height: 70.0,
-    padding: const EdgeInsets.all(5.0),
+    width = 70.0,
+    height = 70.0,
+    padding = const EdgeInsets.all(5.0),
   }) {
     return Container(
       color: Colors.green,

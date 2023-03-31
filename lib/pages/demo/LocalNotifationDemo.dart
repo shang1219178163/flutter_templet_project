@@ -159,7 +159,7 @@ class LocalNotifationDemo extends StatefulWidget {
 
   final String? title;
 
-  LocalNotifationDemo({ Key? key, this.title}) : super(key: key);
+  const LocalNotifationDemo({ Key? key, this.title}) : super(key: key);
 
   
   @override

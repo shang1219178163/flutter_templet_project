@@ -52,8 +52,8 @@ class _NNetContainerState<T> extends State<NNetContainer<T>> {
 
         return ValueListenableBuilder<T>(
           valueListenable: widget.valueListenable,
-          child: child,
           builder: widget.builder,
+          child: child,
         );
       },
       errorBuilder: widget.errorBuilder,

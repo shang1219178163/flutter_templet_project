@@ -11,7 +11,7 @@ import 'package:get/get.dart';
 
 
 class GetxStateDemo extends StatelessWidget {
-  GetxStateDemo({Key? key}) : super(key: key);
+  const GetxStateDemo({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

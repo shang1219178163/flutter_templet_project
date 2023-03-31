@@ -13,7 +13,7 @@ class MenuDemo extends StatefulWidget {
 
   final String? title;
 
-  MenuDemo({ Key? key, this.title}) : super(key: key);
+  const MenuDemo({ Key? key, this.title}) : super(key: key);
 
 
   @override
@@ -42,9 +42,9 @@ class _MenuDemoState extends State<MenuDemo> {
 
 
   final items = [
-    DropdownMenuItem(child: Text('语文'), value: 0,),
-    DropdownMenuItem(child: Text('数学'),value: 1),
-    DropdownMenuItem(child: Text('英语'),value: 2),
+    DropdownMenuItem(value: 0,child: Text('语文'),),
+    DropdownMenuItem(value: 1, child: Text('数学'),),
+    DropdownMenuItem(value: 2, child: Text('英语'),),
   ];
 
   Object? _dropValue = 0;

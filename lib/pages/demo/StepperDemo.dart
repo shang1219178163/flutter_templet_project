@@ -19,7 +19,7 @@ import '../../basicWidget/enhance_stepper.dart';
 
 ///步骤一二三
 class StepperDemo extends StatefulWidget {
-  StepperDemo({Key? key}) : super(key: key);
+  const StepperDemo({Key? key}) : super(key: key);
 
   @override
   _StepperDemoState createState() => _StepperDemoState();
@@ -75,42 +75,42 @@ class _StepperDemoState extends State<StepperDemo> {
   }
 
   PreferredSizeWidget buildPreferredSize(BuildContext context) {
-    return
-      PreferredSize(
-          child: Padding(
-            padding: const EdgeInsets.only(top: 8, bottom: 12),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                SizedBox(width: 24),
-                Expanded(
-                  child: CupertinoSegmentedControl(
-                    children: const <int, Widget>{
-                      0: Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text('Stepper', style: TextStyle(fontSize: 15))),
-                      1: Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text('enhance_stepper', style: TextStyle(fontSize: 15))),
-                    },
-                    groupValue: groupValue,
-                    onValueChanged: (value) {
-                      // TODO: - fix it
-                      ddlog(value.toString());
-                      setState(() {
-                        groupValue = int.parse("$value");
-                      });
-                    },
-                    borderColor: Colors.white,
-                    unselectedColor: Theme.of(context).primaryColor,
-                    selectedColor: Colors.white,
-                  ),
-                ),
-                SizedBox(width: 24)
-              ],
+    return PreferredSize(
+      preferredSize: Size(double.infinity, 48),
+      child: Padding(
+        padding: const EdgeInsets.only(top: 8, bottom: 12),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            SizedBox(width: 24),
+            Expanded(
+              child: CupertinoSegmentedControl(
+                children: const <int, Widget>{
+                  0: Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text('Stepper', style: TextStyle(fontSize: 15))),
+                  1: Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text('enhance_stepper', style: TextStyle(fontSize: 15))),
+                },
+                groupValue: groupValue,
+                onValueChanged: (value) {
+                  // TODO: - fix it
+                  ddlog(value.toString());
+                  setState(() {
+                    groupValue = int.parse("$value");
+                  });
+                },
+                borderColor: Colors.white,
+                unselectedColor: Theme.of(context).primaryColor,
+                selectedColor: Colors.white,
+              ),
             ),
-          ),
-          preferredSize: Size(double.infinity, 48));
+            SizedBox(width: 24)
+          ],
+        ),
+      ),
+    );
   }
 
   void go(int index) {
@@ -138,7 +138,7 @@ class _StepperDemoState extends State<StepperDemo> {
           state: StepState.values[tuples.indexOf(e)],
           isActive: _index == tuples.indexOf(e),
           title: Text("step ${tuples.indexOf(e)}"),
-          subtitle: Text("${e.item2.toString().split(".").last}",),
+          subtitle: Text(e.item2.toString().split(".").last,),
           content: Text("Content for Step ${tuples.indexOf(e)}"),
       )).toList(),
       onStepCancel: () {
@@ -159,14 +159,14 @@ class _StepperDemoState extends State<StepperDemo> {
             SizedBox(height: 30,),
             if (_index != tuples.length - 1) ElevatedButton(
               onPressed: details.onStepContinue,
-              child: Text("Continue"),
               style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Theme.of(context).primaryColor)),
+              child: Text("Continue"),
             ),
             SizedBox(width: 8,),
             if (_index != 0)  ElevatedButton(
               onPressed: details.onStepCancel,
-              child: Text("Cancel"),
               style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Theme.of(context).primaryColor)),
+              child: Text("Cancel"),
             ),
           ],
         );
@@ -187,14 +187,14 @@ class _StepperDemoState extends State<StepperDemo> {
           state: StepState.values[tuples.indexOf(e)],
           isActive: _index == tuples.indexOf(e),
           title: Text("step ${tuples.indexOf(e)}"),
-          subtitle: Text("${e.item2.toString().split(".").last}",),
+          subtitle: Text(e.item2.toString().split(".").last,),
           // content: Text("Content for Step ${tuples.indexOf(e)}"),
           content: Container(
             width: MediaQuery.of(context).size.width,
             // height: MediaQuery.of(context).size.height/tuples.length,
             height: MediaQuery.of(context).size.height*0.55,
-            child: Text("Content for Step ${tuples.indexOf(e)}"),
             color: Colors.green.randomOpacity(),
+            child: Text("Content for Step ${tuples.indexOf(e)}"),
           ),
           
         )).toList(),
@@ -216,14 +216,14 @@ class _StepperDemoState extends State<StepperDemo> {
               SizedBox(height: 30,),
               ElevatedButton(
                 onPressed: details.onStepContinue,
-                child: Text("Next"),
                 style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Theme.of(context).primaryColor)),
+                child: Text("Next"),
               ),
               SizedBox(width: 8,),
               TextButton(
                 onPressed: details.onStepCancel,
-                child: Text("Back"),
                 style: ButtonStyle(foregroundColor: MaterialStateProperty.all(Theme.of(context).primaryColor)),
+                child: Text("Back"),
               ),
             ],
           );

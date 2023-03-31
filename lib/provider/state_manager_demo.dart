@@ -16,7 +16,7 @@ class StateManagerDemo extends StatefulWidget {
 
   final String? title;
 
-  StateManagerDemo({ Key? key, this.title}) : super(key: key);
+  const StateManagerDemo({ Key? key, this.title}) : super(key: key);
 
   @override
   _StateManagerDemoState createState() => _StateManagerDemoState();

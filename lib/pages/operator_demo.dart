@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class OperatorDemo extends StatefulWidget {
 
-  OperatorDemo({
+  const OperatorDemo({
     Key? key,
     this.title
   }) : super(key: key);
@@ -26,10 +26,10 @@ class _OperatorDemoState extends State<OperatorDemo> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: ['done',].map((e) => TextButton(
+          onPressed: onPressed,
           child: Text(e,
             style: TextStyle(color: Colors.white),
-          ),
-          onPressed: onPressed,)
+          ),)
         ).toList(),
       ),
       body: ListView(
@@ -38,8 +38,8 @@ class _OperatorDemoState extends State<OperatorDemo> {
             children: [
               'if (a is! int) {',
             ].map((e) => TextButton(
-              child: Text(e,),
-              onPressed: onPressed,)
+              onPressed: onPressed,
+              child: Text(e,),)
             ).toList(),
           )
         ],
@@ -53,7 +53,7 @@ class _OperatorDemoState extends State<OperatorDemo> {
       print("a is! int");
     }
 
-    if (!(a is int)) {
+    if (a is! int) {
       print("!(a is int)");
     }
 

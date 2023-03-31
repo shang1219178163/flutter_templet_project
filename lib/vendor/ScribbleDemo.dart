@@ -8,7 +8,7 @@ class ScribbleDemo extends StatefulWidget {
 
   final String? title;
 
-  ScribbleDemo({ Key? key, this.title}) : super(key: key);
+  const ScribbleDemo({ Key? key, this.title}) : super(key: key);
 
 
   @override
@@ -200,8 +200,8 @@ class _ScribbleDemoState extends State<ScribbleDemo> {
             : RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
         ),
-        child: const Icon(Icons.remove, color: Colors.blueGrey),
         onPressed: notifier.setEraser,
+        child: const Icon(Icons.remove, color: Colors.blueGrey),
       ),
     );
   }
@@ -222,8 +222,9 @@ class _ScribbleDemoState extends State<ScribbleDemo> {
               : RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
           ),
+          onPressed: () => notifier.setColor(color),
           child: Container(),
-          onPressed: () => notifier.setColor(color)),
+      ),
     );
   }
 

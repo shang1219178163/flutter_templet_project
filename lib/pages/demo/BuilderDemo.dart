@@ -6,7 +6,7 @@ class BuilderDemo extends StatefulWidget {
 
   final String? title;
 
-  BuilderDemo({ Key? key, this.title}) : super(key: key);
+  const BuilderDemo({ Key? key, this.title}) : super(key: key);
 
   
   @override

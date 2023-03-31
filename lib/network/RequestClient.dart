@@ -14,6 +14,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:cookie_jar/cookie_jar.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 
 import 'package:get_storage/get_storage.dart';
@@ -49,7 +50,7 @@ class RequestClient{
       receiveTimeout: Duration(milliseconds: 5000)
     );
 
-    Dio _dio = Dio(api.requestBaseOptions ?? options);
+    var _dio = Dio(api.requestBaseOptions ?? options);
 
     // Directory directory = await getApplicationDocumentsDirectory();
     // var cookieJar = PersistCookieJar(storage: FileStorage(directory.path + "/.cookies/"));
@@ -57,17 +58,17 @@ class RequestClient{
     // dio.interceptors.add(cookieManager);
 
     FileManager.getDocumentsDirPath().then((value) {
-      var cookieJar = PersistCookieJar(storage: FileStorage(value + "/.cookies/"));
+      var cookieJar = PersistCookieJar(storage: FileStorage("$value/.cookies/"));
       _dio.interceptors.add(CookieManager(cookieJar));
     });
 
     final interceptorsWrapper = InterceptorsWrapper(
     onRequest: (RequestOptions options, handler) {
-      print("请求之前");
+      debugPrint("请求之前");
       return handler.next(options);
     },
     onResponse: (Response response, handler) {
-      print("响应之前");
+      debugPrint("响应之前");
       return handler.next(response);
     },
     onError: (DioError e, handler) {
@@ -129,11 +130,11 @@ class RequestClient{
     final options = BaseOptions(
         baseUrl: url,
         queryParameters: params,
-        connectTimeout: Duration(milliseconds: 20000),
-        receiveTimeout: Duration(milliseconds: 5000)
+        connectTimeout: const Duration(milliseconds: 20000),
+        receiveTimeout: const Duration(milliseconds: 5000)
     );
 
-    Dio dio = Dio(options);
+    var dio = Dio(options);
 
     late Response response;
     try {
@@ -156,10 +157,10 @@ class RequestClient{
     final options = BaseOptions(
         baseUrl: url,
         queryParameters: queryParameters,
-        connectTimeout: Duration(milliseconds: 20000),
-        receiveTimeout: Duration(milliseconds: 5000));
+        connectTimeout: const Duration(milliseconds: 20000),
+        receiveTimeout: const Duration(milliseconds: 5000));
 
-    Dio _dio = Dio(options);
+    var _dio = Dio(options);
 
     late Response response;
     try {
@@ -178,26 +179,28 @@ class RequestClient{
 
   ///error统一处理
   static void handleError(DioError e) {
+    var message = "";
     switch (e.type) {
       case DioErrorType.connectionTimeout:
-        print("连接超时");
+        message = "连接超时";
         break;
       case DioErrorType.sendTimeout:
-        print("请求超时");
+        message = "请求超时";
         break;
       case DioErrorType.receiveTimeout:
-        print("响应超时");
+        message = "响应超时";
         break;
       case DioErrorType.badResponse:
-        print("出现异常");
+        message = "出现异常";
         break;
       case DioErrorType.cancel:
-        print("请求取消");
+        message = "请求取消";
         break;
       default:
-        print("未知错误");
+        message = "未知错误";
         break;
     }
+    debugPrint(message);
   }
 }
 
@@ -211,11 +214,11 @@ abstract class BaseRequestAPI {
   Map<String, dynamic> get requestParams => {};
 
   Map<String, dynamic>? get requestHeaders {
-    var timestamp = new DateTime.now().millisecondsSinceEpoch;
+    var timestamp = DateTime.now().millisecondsSinceEpoch;
     return {
-      'timestamp': '${timestamp}',
+      'timestamp': '$timestamp',
       'Content-Type': 'application/json;charset=utf-8',
-      'accountToken': '${""}',
+      'accountToken': "",
     // 'useid': id,
     // 'appVersion': '6.3.0',
     };
@@ -254,8 +257,8 @@ class LoginApi extends BaseRequestAPI{
   // TODO: implement requestURI
   String get requestURI => throw UnimplementedError();
 
-  @override
-  // TODO: implement validateParams
-  bool get validateParams => super.validateParams;
+  // @override
+  // // TODO: implement validateParams
+  // bool get validateParams => super.validateParams;
 
 }

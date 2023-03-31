@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class SharePreferenceService {
   SharePreferenceService._();
 
-  static SharePreferenceService _instance = SharePreferenceService._();
+  static final SharePreferenceService _instance = SharePreferenceService._();
 
   factory SharePreferenceService() => _instance;
 
@@ -20,7 +20,7 @@ class SharePreferenceService {
 
   /// 存储数据
   save<T>(String key, T value) async {
-    SharedPreferences sp = await SharedPreferences.getInstance();
+    var sp = await SharedPreferences.getInstance();
     switch (T) {
       case String:
         sp.setString(key, value as String);
@@ -48,7 +48,7 @@ class SharePreferenceService {
 
   /// 获取数据
   Future<T?> get<T>(String key) async {
-    SharedPreferences sp = await SharedPreferences.getInstance();
+    var sp = await SharedPreferences.getInstance();
     switch (T) {
       case int:
       case bool:
@@ -57,7 +57,7 @@ class SharePreferenceService {
         return sp.get(key) as T?;
       case Map:
       case List:
-        String? jsonStr = sp.get(key) as String?;
+        var jsonStr = sp.get(key) as String?;
         if (jsonStr != null) {
           var value = const JsonDecoder().convert(jsonStr);
           return Future.value(value as T);

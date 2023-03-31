@@ -4,7 +4,7 @@ import 'package:textless/textless.dart';
 class TextlessDemo extends StatefulWidget {
 
   final String? title;
-  TextlessDemo({Key? key, this.title}) : super(key: key);
+  const TextlessDemo({Key? key, this.title}) : super(key: key);
 
   @override
   _TextlessDemoState createState() => _TextlessDemoState();

@@ -62,12 +62,12 @@ class _SearchResultsListViewState extends State<SearchResultsListView> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Padding(
-            child: _buildTextField(context),
             padding: EdgeInsets.all(10),
+            child: _buildTextField(context),
           ),
           Padding(
-            child: Text("找到 ${searchResults.length} 条数据"),
             padding: EdgeInsets.only(left: 10, right: 10),
+            child: Text("找到 ${searchResults.length} 条数据"),
           ),
           Expanded(
             child: _buildListView(context),
@@ -99,11 +99,11 @@ class _SearchResultsListViewState extends State<SearchResultsListView> {
 
   _buildListView(BuildContext context) {
     if (widget.isSort != null && widget.isSort == true) {
-      searchResults.sort((a, b) => "${a}".compareTo("${b}"));
+      searchResults.sort((a, b) => "$a".compareTo("$b"));
     }
 
     return CupertinoScrollbar(
-      isAlwaysShown: false,
+      thumbVisibility: false,
       child: ListView.separated(
         itemCount: searchResults.length,
         itemBuilder: (context, index) => widget.itemBuilder != null ? widget.itemBuilder!(context, index, searchResults) : _buildCell(context, index, searchResults),
@@ -147,7 +147,7 @@ class _SearchResultsListViewState extends State<SearchResultsListView> {
       if (value.isEmpty) {
         searchResults = keys;
       } else {
-        searchResults = keys.where((e) => "${e}".contains(value)).toList();
+        searchResults = keys.where((e) => "$e".contains(value)).toList();
       }
       // ddlog("_changeValue:${value} searchResults:${searchResults}");
     });

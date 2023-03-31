@@ -31,7 +31,7 @@ class TimelineStatusPage extends StatelessWidget {
 class _Timeline1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final data = _TimelineStatus.values;
+    const data = _TimelineStatus.values;
     return Flexible(
       child: Timeline.tileBuilder(
         theme: TimelineThemeData(
@@ -99,7 +99,7 @@ class _Timeline1 extends StatelessWidget {
 class _Timeline2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    List<_TimelineStatus> data = [
+    var data = <_TimelineStatus>[
       _TimelineStatus.done,
       _TimelineStatus.inProgress,
       _TimelineStatus.inProgress,
@@ -149,7 +149,7 @@ class _Timeline2 extends StatelessWidget {
 class _Timeline3 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    List<_TimelineStatus> data = [
+    var data = <_TimelineStatus>[
       _TimelineStatus.done,
       _TimelineStatus.inProgress,
       _TimelineStatus.inProgress,

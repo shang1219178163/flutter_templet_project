@@ -8,7 +8,7 @@ class AestheticDialogsDemo extends StatefulWidget {
 
   final String? title;
 
-  AestheticDialogsDemo({ Key? key, this.title}) : super(key: key);
+  const AestheticDialogsDemo({ Key? key, this.title}) : super(key: key);
 
   
   @override

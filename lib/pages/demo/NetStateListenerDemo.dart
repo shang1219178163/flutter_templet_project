@@ -38,10 +38,10 @@ class _NetStateListenerDemoState extends State<NetStateListenerDemo> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: ['done',].map((e) => TextButton(
+          onPressed: () => print(e),
           child: Text(e,
             style: const TextStyle(color: Colors.white),
-          ),
-          onPressed: () => print(e),)
+          ),)
         ).toList(),
       ),
       body: Column(
@@ -73,14 +73,14 @@ class _NetStateListenerDemoState extends State<NetStateListenerDemo> {
               key: _refreshKey,
               onRequest: (bool isRefesh, int page, int pageSize, last) async {
                 return await Future.delayed(const Duration(milliseconds: 1500), () {
-                  final result = List<String>.generate(3, (i) => 'page_${page}_pageSize_${pageSize}_Item_${i}');
+                  final result = List<String>.generate(3, (i) => 'page_${page}_pageSize_${pageSize}_Item_$i');
                   return Future.value(result);
                 });
               },
               itemBuilder: (BuildContext context, int index, data) {
                 return ListTile(
                   leading: Icon(Icons.ac_unit),
-                  title: Text("${data}"),
+                  title: Text("$data"),
                 );
               },
             ),
@@ -94,9 +94,8 @@ class _NetStateListenerDemoState extends State<NetStateListenerDemo> {
   _buildNetState() {
     return ValueListenableBuilder<ConnectivityResult>(
       valueListenable: ConnectivityService().netState,
-      child: Text("监听 ConnectivityService().netState"),
       builder: (context, value, child) {
-        print('ValueListenableBuilder: netState:${value}');
+        print('ValueListenableBuilder: netState:$value');
 
         return Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -106,15 +105,15 @@ class _NetStateListenerDemoState extends State<NetStateListenerDemo> {
           ],
         );
       },
+      child: Text("监听 ConnectivityService().netState"),
     );
   }
 
   _buildNetOnline() {
     return ValueListenableBuilder<bool>(
       valueListenable: ConnectivityService().onLine,
-      child: Text("监听 ConnectivityService().onLine"),
       builder: (context, value, child) {
-        print('ValueListenableBuilder: onLine:${value}');
+        print('ValueListenableBuilder: onLine:$value');
 
         // netState.value = value == false ? NNetState.offline : NNetState.normal;
 
@@ -126,6 +125,7 @@ class _NetStateListenerDemoState extends State<NetStateListenerDemo> {
           ],
         );
       },
+      child: Text("监听 ConnectivityService().onLine"),
     );
   }
 

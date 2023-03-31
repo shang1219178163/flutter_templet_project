@@ -6,7 +6,7 @@ import 'enhance_tab_bar.dart';
 
 class EnhanceTabBarDemo extends StatefulWidget {
 
-  EnhanceTabBarDemo({
+  const EnhanceTabBarDemo({
     Key? key,
     this.title
   }) : super(key: key);
@@ -70,7 +70,7 @@ class _EnhanceTabBarDemoState extends State<EnhanceTabBarDemo> with SingleTicker
     if (index != 1){
       return Tab(height: height, text: e);
     }
-    final url = isSelect ? R.image.imgUrls[1] : R.image.imgUrls[0];
+    final url = isSelect ? R.image.urls[1] : R.image.urls[0];
     return Tab(
       child: FadeInImage(
         image: NetworkImage(url),
@@ -144,7 +144,7 @@ class _EnhanceTabBarDemoState extends State<EnhanceTabBarDemo> with SingleTicker
                 return Tab(text: e);
               }
 
-              final url = (value == index) ? R.image.imgUrls[1] : R.image.imgUrls[0];
+              final url = (value == index) ? R.image.urls[1] : R.image.urls[0];
               return Tab(
                 child: FadeInImage(
                   image: NetworkImage(url),
@@ -239,10 +239,10 @@ class _EnhanceTabBarDemoState extends State<EnhanceTabBarDemo> with SingleTicker
     return DropdownButton<EnhanceTabBarIndicatorSize>(
       value: dropValue,
       items: indicatorSizes.map((e) => DropdownMenuItem(
+        value: e,
         child: Center(
           child: Text(e.toString().split(".").last)
         ),
-        value: e,
       ),).toList(),
       onChanged: (value) {
         if (value == null) return;

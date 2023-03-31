@@ -14,7 +14,7 @@ import 'package:flutter_templet_project/extension/widget_ext.dart';
 
 class NNSliverPersistentHeaderDemo extends StatefulWidget {
 
-  NNSliverPersistentHeaderDemo({ Key? key, this.title}) : super(key: key);
+  const NNSliverPersistentHeaderDemo({ Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -37,10 +37,10 @@ class _NNSliverPersistentHeaderDemoState extends State<NNSliverPersistentHeaderD
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: ['done',].map((e) => TextButton(
+          onPressed: onPressed,
           child: Text(e,
             style: TextStyle(color: Colors.white),
-          ),
-          onPressed: onPressed,)
+          ),)
         ).toList(),
       ),
       body: _buildBody(),

@@ -20,7 +20,7 @@ class ExpandIconDemo extends StatefulWidget {
 
   final String? title;
 
-  ExpandIconDemo({ Key? key, this.title}) : super(key: key);
+  const ExpandIconDemo({ Key? key, this.title}) : super(key: key);
 
 
   @override
@@ -29,7 +29,7 @@ class ExpandIconDemo extends StatefulWidget {
 
 class _ExpandIconDemoState extends State<ExpandIconDemo> {
 
-  late bool _isExpanded = false;
+  late final bool _isExpanded = false;
 
   List<Color> colors = [
     Colors.black,
@@ -54,7 +54,7 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
 
   var selectedColor = ValueNotifier(Colors.black);
 
-  List<int> _foldIndexs = List.generate(5, (index) => index);
+  final List<int> _foldIndexs = List.generate(5, (index) => index);
 
   // List<Tuple2<List<String>, int>> foldList = _foldIndexs.map((e){
   //   final i = _foldIndexs.indexOf(e);
@@ -96,7 +96,7 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
             foldCount: 3,
             isVisible: _isVisible,
             onValueChanged: (row, index, indexs){
-              ddlog("${row}, ${index}, ${indexs}");
+              ddlog("$row, $index, $indexs");
             },
           )
         ],
@@ -145,7 +145,7 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
   ///设置单个宽度
   Widget buildListViewHorizontal({List<String>? titles}) {
     var items = titles ?? List.generate(8, (index) => "item_$index");
-    List<double> itemWiths = [60, 70, 80, 90, 100, 110, 120, 130];
+    var itemWiths = <double>[60, 70, 80, 90, 100, 110, 120, 130];
 
     return ListViewSegmentControl(
       items: items,
@@ -191,7 +191,7 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
   }
 
 
-  bool _isVisible = true;
+  final bool _isVisible = true;
   _buildVisibleContainer() {
     return VisibleContainer(
         isVisible: _isVisible,

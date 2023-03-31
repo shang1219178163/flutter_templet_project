@@ -14,7 +14,7 @@ class CalendarDatePickerDemo extends StatefulWidget {
 
   final String? title;
 
-  CalendarDatePickerDemo({ Key? key, this.title}) : super(key: key);
+  const CalendarDatePickerDemo({ Key? key, this.title}) : super(key: key);
 
 
   @override

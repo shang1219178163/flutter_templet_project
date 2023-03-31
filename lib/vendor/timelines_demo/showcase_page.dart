@@ -112,6 +112,9 @@ class _ShowcaseCard extends StatelessWidget {
                     padding: EdgeInsets.all(12.0),
                     alignment: Alignment.centerRight,
                     child: InkWell(
+                      onTap: () async {
+                        if (await canLaunch(url)) await launch(url);
+                      },
                       child: Container(
                         padding: EdgeInsets.all(8.0),
                         child: Row(
@@ -138,9 +141,6 @@ class _ShowcaseCard extends StatelessWidget {
                           ],
                         ),
                       ),
-                      onTap: () async {
-                        if (await canLaunch(url)) await launch(url);
-                      },
                     ),
                   ),
                 ],

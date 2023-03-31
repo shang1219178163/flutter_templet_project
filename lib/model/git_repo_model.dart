@@ -177,7 +177,7 @@ class GitRepoModel {
     name = json['name'];
     fullName = json['full_name'];
     private = json['private'];
-    owner = json['owner'] != null ? new Owner.fromJson(json['owner']) : null;
+    owner = json['owner'] != null ? Owner.fromJson(json['owner']) : null;
     htmlUrl = json['html_url'];
     description = json['description'];
     fork = json['fork'];
@@ -242,7 +242,7 @@ class GitRepoModel {
     disabled = json['disabled'];
     openIssuesCount = json['open_issues_count'];
     license =
-    json['license'] != null ? new License.fromJson(json['license']) : null;
+    json['license'] != null ? License.fromJson(json['license']) : null;
     allowForking = json['allow_forking'];
     isTemplate = json['is_template'];
     webCommitSignoffRequired = json['web_commit_signoff_required'];
@@ -252,96 +252,96 @@ class GitRepoModel {
     watchers = json['watchers'];
     defaultBranch = json['default_branch'];
     permissions = json['permissions'] != null
-        ? new Permissions.fromJson(json['permissions'])
+        ? Permissions.fromJson(json['permissions'])
         : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['node_id'] = this.nodeId;
-    data['name'] = this.name;
-    data['full_name'] = this.fullName;
-    data['private'] = this.private;
-    if (this.owner != null) {
-      data['owner'] = this.owner!.toJson();
+    var data = Map<String, dynamic>();
+    data['id'] = id;
+    data['node_id'] = nodeId;
+    data['name'] = name;
+    data['full_name'] = fullName;
+    data['private'] = private;
+    if (owner != null) {
+      data['owner'] = owner!.toJson();
     }
-    data['html_url'] = this.htmlUrl;
-    data['description'] = this.description;
-    data['fork'] = this.fork;
-    data['url'] = this.url;
-    data['forks_url'] = this.forksUrl;
-    data['keys_url'] = this.keysUrl;
-    data['collaborators_url'] = this.collaboratorsUrl;
-    data['teams_url'] = this.teamsUrl;
-    data['hooks_url'] = this.hooksUrl;
-    data['issue_events_url'] = this.issueEventsUrl;
-    data['events_url'] = this.eventsUrl;
-    data['assignees_url'] = this.assigneesUrl;
-    data['branches_url'] = this.branchesUrl;
-    data['tags_url'] = this.tagsUrl;
-    data['blobs_url'] = this.blobsUrl;
-    data['git_tags_url'] = this.gitTagsUrl;
-    data['git_refs_url'] = this.gitRefsUrl;
-    data['trees_url'] = this.treesUrl;
-    data['statuses_url'] = this.statusesUrl;
-    data['languages_url'] = this.languagesUrl;
-    data['stargazers_url'] = this.stargazersUrl;
-    data['contributors_url'] = this.contributorsUrl;
-    data['subscribers_url'] = this.subscribersUrl;
-    data['subscription_url'] = this.subscriptionUrl;
-    data['commits_url'] = this.commitsUrl;
-    data['git_commits_url'] = this.gitCommitsUrl;
-    data['comments_url'] = this.commentsUrl;
-    data['issue_comment_url'] = this.issueCommentUrl;
-    data['contents_url'] = this.contentsUrl;
-    data['compare_url'] = this.compareUrl;
-    data['merges_url'] = this.mergesUrl;
-    data['archive_url'] = this.archiveUrl;
-    data['downloads_url'] = this.downloadsUrl;
-    data['issues_url'] = this.issuesUrl;
-    data['pulls_url'] = this.pullsUrl;
-    data['milestones_url'] = this.milestonesUrl;
-    data['notifications_url'] = this.notificationsUrl;
-    data['labels_url'] = this.labelsUrl;
-    data['releases_url'] = this.releasesUrl;
-    data['deployments_url'] = this.deploymentsUrl;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
-    data['pushed_at'] = this.pushedAt;
-    data['git_url'] = this.gitUrl;
-    data['ssh_url'] = this.sshUrl;
-    data['clone_url'] = this.cloneUrl;
-    data['svn_url'] = this.svnUrl;
-    data['homepage'] = this.homepage;
-    data['size'] = this.size;
-    data['stargazers_count'] = this.stargazersCount;
-    data['watchers_count'] = this.watchersCount;
-    data['language'] = this.language;
-    data['has_issues'] = this.hasIssues;
-    data['has_projects'] = this.hasProjects;
-    data['has_downloads'] = this.hasDownloads;
-    data['has_wiki'] = this.hasWiki;
-    data['has_pages'] = this.hasPages;
-    data['has_discussions'] = this.hasDiscussions;
-    data['forks_count'] = this.forksCount;
-    data['mirror_url'] = this.mirrorUrl;
-    data['archived'] = this.archived;
-    data['disabled'] = this.disabled;
-    data['open_issues_count'] = this.openIssuesCount;
-    if (this.license != null) {
-      data['license'] = this.license!.toJson();
+    data['html_url'] = htmlUrl;
+    data['description'] = description;
+    data['fork'] = fork;
+    data['url'] = url;
+    data['forks_url'] = forksUrl;
+    data['keys_url'] = keysUrl;
+    data['collaborators_url'] = collaboratorsUrl;
+    data['teams_url'] = teamsUrl;
+    data['hooks_url'] = hooksUrl;
+    data['issue_events_url'] = issueEventsUrl;
+    data['events_url'] = eventsUrl;
+    data['assignees_url'] = assigneesUrl;
+    data['branches_url'] = branchesUrl;
+    data['tags_url'] = tagsUrl;
+    data['blobs_url'] = blobsUrl;
+    data['git_tags_url'] = gitTagsUrl;
+    data['git_refs_url'] = gitRefsUrl;
+    data['trees_url'] = treesUrl;
+    data['statuses_url'] = statusesUrl;
+    data['languages_url'] = languagesUrl;
+    data['stargazers_url'] = stargazersUrl;
+    data['contributors_url'] = contributorsUrl;
+    data['subscribers_url'] = subscribersUrl;
+    data['subscription_url'] = subscriptionUrl;
+    data['commits_url'] = commitsUrl;
+    data['git_commits_url'] = gitCommitsUrl;
+    data['comments_url'] = commentsUrl;
+    data['issue_comment_url'] = issueCommentUrl;
+    data['contents_url'] = contentsUrl;
+    data['compare_url'] = compareUrl;
+    data['merges_url'] = mergesUrl;
+    data['archive_url'] = archiveUrl;
+    data['downloads_url'] = downloadsUrl;
+    data['issues_url'] = issuesUrl;
+    data['pulls_url'] = pullsUrl;
+    data['milestones_url'] = milestonesUrl;
+    data['notifications_url'] = notificationsUrl;
+    data['labels_url'] = labelsUrl;
+    data['releases_url'] = releasesUrl;
+    data['deployments_url'] = deploymentsUrl;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    data['pushed_at'] = pushedAt;
+    data['git_url'] = gitUrl;
+    data['ssh_url'] = sshUrl;
+    data['clone_url'] = cloneUrl;
+    data['svn_url'] = svnUrl;
+    data['homepage'] = homepage;
+    data['size'] = size;
+    data['stargazers_count'] = stargazersCount;
+    data['watchers_count'] = watchersCount;
+    data['language'] = language;
+    data['has_issues'] = hasIssues;
+    data['has_projects'] = hasProjects;
+    data['has_downloads'] = hasDownloads;
+    data['has_wiki'] = hasWiki;
+    data['has_pages'] = hasPages;
+    data['has_discussions'] = hasDiscussions;
+    data['forks_count'] = forksCount;
+    data['mirror_url'] = mirrorUrl;
+    data['archived'] = archived;
+    data['disabled'] = disabled;
+    data['open_issues_count'] = openIssuesCount;
+    if (license != null) {
+      data['license'] = license!.toJson();
     }
-    data['allow_forking'] = this.allowForking;
-    data['is_template'] = this.isTemplate;
-    data['web_commit_signoff_required'] = this.webCommitSignoffRequired;
-    data['visibility'] = this.visibility;
-    data['forks'] = this.forks;
-    data['open_issues'] = this.openIssues;
-    data['watchers'] = this.watchers;
-    data['default_branch'] = this.defaultBranch;
-    if (this.permissions != null) {
-      data['permissions'] = this.permissions!.toJson();
+    data['allow_forking'] = allowForking;
+    data['is_template'] = isTemplate;
+    data['web_commit_signoff_required'] = webCommitSignoffRequired;
+    data['visibility'] = visibility;
+    data['forks'] = forks;
+    data['open_issues'] = openIssues;
+    data['watchers'] = watchers;
+    data['default_branch'] = defaultBranch;
+    if (permissions != null) {
+      data['permissions'] = permissions!.toJson();
     }
     return data;
   }
@@ -409,25 +409,25 @@ class Owner {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['login'] = this.login;
-    data['id'] = this.id;
-    data['node_id'] = this.nodeId;
-    data['avatar_url'] = this.avatarUrl;
-    data['gravatar_id'] = this.gravatarId;
-    data['url'] = this.url;
-    data['html_url'] = this.htmlUrl;
-    data['followers_url'] = this.followersUrl;
-    data['following_url'] = this.followingUrl;
-    data['gists_url'] = this.gistsUrl;
-    data['starred_url'] = this.starredUrl;
-    data['subscriptions_url'] = this.subscriptionsUrl;
-    data['organizations_url'] = this.organizationsUrl;
-    data['repos_url'] = this.reposUrl;
-    data['events_url'] = this.eventsUrl;
-    data['received_events_url'] = this.receivedEventsUrl;
-    data['type'] = this.type;
-    data['site_admin'] = this.siteAdmin;
+    var data = Map<String, dynamic>();
+    data['login'] = login;
+    data['id'] = id;
+    data['node_id'] = nodeId;
+    data['avatar_url'] = avatarUrl;
+    data['gravatar_id'] = gravatarId;
+    data['url'] = url;
+    data['html_url'] = htmlUrl;
+    data['followers_url'] = followersUrl;
+    data['following_url'] = followingUrl;
+    data['gists_url'] = gistsUrl;
+    data['starred_url'] = starredUrl;
+    data['subscriptions_url'] = subscriptionsUrl;
+    data['organizations_url'] = organizationsUrl;
+    data['repos_url'] = reposUrl;
+    data['events_url'] = eventsUrl;
+    data['received_events_url'] = receivedEventsUrl;
+    data['type'] = type;
+    data['site_admin'] = siteAdmin;
     return data;
   }
 }
@@ -450,12 +450,12 @@ class License {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['key'] = this.key;
-    data['name'] = this.name;
-    data['spdx_id'] = this.spdxId;
-    data['url'] = this.url;
-    data['node_id'] = this.nodeId;
+    var data = Map<String, dynamic>();
+    data['key'] = key;
+    data['name'] = name;
+    data['spdx_id'] = spdxId;
+    data['url'] = url;
+    data['node_id'] = nodeId;
     return data;
   }
 }
@@ -478,12 +478,12 @@ class Permissions {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['admin'] = this.admin;
-    data['maintain'] = this.maintain;
-    data['push'] = this.push;
-    data['triage'] = this.triage;
-    data['pull'] = this.pull;
+    final data = Map<String, dynamic>();
+    data['admin'] = admin;
+    data['maintain'] = maintain;
+    data['push'] = push;
+    data['triage'] = triage;
+    data['pull'] = pull;
     return data;
   }
 }

@@ -16,7 +16,7 @@ class TabBarDemoNew extends StatefulWidget {
 
   final String? title;
 
-  TabBarDemoNew({ Key? key, this.title}) : super(key: key);
+  const TabBarDemoNew({ Key? key, this.title}) : super(key: key);
 
   @override
   _TabBarDemoNewState createState() => _TabBarDemoNewState();
@@ -59,11 +59,11 @@ class _TabBarDemoNewState extends State<TabBarDemoNew> with TickerProviderStateM
   }) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("${widget.title ?? "$widget"}"),
+        title: Text(widget.title ?? "$widget"),
         flexibleSpace: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: NetworkImage(R.image.imgUrls[5]),
+              image: NetworkImage(R.image.urls[5]),
               fit: BoxFit.cover,
             ),
           ),
@@ -86,11 +86,11 @@ class _TabBarDemoNewState extends State<TabBarDemoNew> with TickerProviderStateM
   }) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("${widget.title ?? "$widget"}"),
+        title: Text(widget.title ?? "$widget"),
         flexibleSpace: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: NetworkImage(R.image.imgUrls[5]),
+              image: NetworkImage(R.image.urls[5]),
               fit: BoxFit.cover,
             ),
           ),

@@ -12,7 +12,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ShareDataWidget extends InheritedWidget {
-  ShareDataWidget({
+  const ShareDataWidget({
     Key? key,
     required this.data,
     required Widget child,
@@ -80,9 +80,9 @@ class _InheritedWidgetDemoState extends State<InheritedWidgetDemo> {
                 child: TestWidget(),//子widget中依赖ShareDataWidget
               ),
               ElevatedButton(
-                child: Text("Increment"),
                 //每点击一次，将count自增，然后重新build,ShareDataWidget的data将被更新
                 onPressed: () => setState(() => ++count),
+                child: Text("Increment"),
               )
             ],
           ),

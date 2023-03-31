@@ -62,7 +62,7 @@ class _BottomAppBarDemoState extends State<BottomAppBarDemo> {
 
             Column(
               children: locations.map((e) => RadioListTile<FloatingActionButtonLocation>(
-                title: Text('${e.toString().split(".").last}'),
+                title: Text(e.toString().split(".").last),
                 value: e,
                 groupValue: _fabLocation,
                 onChanged: _onFabLocationChanged,
@@ -73,8 +73,8 @@ class _BottomAppBarDemoState extends State<BottomAppBarDemo> {
         floatingActionButton: _showFab
             ? FloatingActionButton(
                 onPressed: () {},
-                child: const Icon(Icons.add),
                 tooltip: 'Create',
+                child: const Icon(Icons.add),
               )
             : null,
         floatingActionButtonLocation: _fabLocation,
@@ -116,7 +116,7 @@ class _BottomAppBarDemoState extends State<BottomAppBarDemo> {
         floatingActionButton: FloatingActionButton.extended(
           onPressed: () {},
           shape: buttonShape,
-          icon: new Icon(Icons.add),
+          icon: Icon(Icons.add),
           label: const Text("label"),
         ),
       );

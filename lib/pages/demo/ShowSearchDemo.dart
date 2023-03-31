@@ -17,7 +17,7 @@ class ShowSearchDemo extends StatefulWidget {
 
   final String? title;
 
-  ShowSearchDemo({ Key? key, this.title}) : super(key: key);
+  const ShowSearchDemo({ Key? key, this.title}) : super(key: key);
 
 
   @override
@@ -207,7 +207,7 @@ class SearchBarViewDelegate extends SearchDelegate<String>{
   @override
   Widget buildResults(BuildContext context) {
 
-    List<String> result = [];
+    var result = <String>[];
 
     ///模拟搜索过程
     for (var str in sourceList){
@@ -229,11 +229,17 @@ class SearchBarViewDelegate extends SearchDelegate<String>{
   @override
   Widget buildSuggestions(BuildContext context) {
 
-    List<String> suggest = query.isEmpty ? suggestList : sourceList.where((input)=>input.startsWith(query)).toList();
+    var suggest = query.isEmpty ? suggestList : sourceList.where((input)=>input.startsWith(query)).toList();
     return ListView.builder(
       itemCount: suggest.length,
       itemBuilder: (BuildContext context, int index)=>
           InkWell(
+            onTap: (){
+              //  query.replaceAll("", suggest[index].toString());
+              searchHint = "";
+              query =  suggest[index].toString();
+              showResults(context);
+            },
             child:         ListTile(
               title: RichText(
                 text: TextSpan(
@@ -248,12 +254,6 @@ class SearchBarViewDelegate extends SearchDelegate<String>{
                 ),
               ),
             ),
-            onTap: (){
-              //  query.replaceAll("", suggest[index].toString());
-              searchHint = "";
-              query =  suggest[index].toString();
-              showResults(context);
-            },
           ),
     );
   }

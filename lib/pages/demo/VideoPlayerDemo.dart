@@ -15,7 +15,7 @@ import 'package:video_player/video_player.dart';
 
 class VideoPlayerDemo extends StatefulWidget {
 
-  VideoPlayerDemo({ Key? key, this.title}) : super(key: key);
+  const VideoPlayerDemo({ Key? key, this.title}) : super(key: key);
   final String? title;
 
   @override

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class FlexibleDemo extends StatefulWidget {
 
-  FlexibleDemo({ Key? key, this.title}) : super(key: key);
+  const FlexibleDemo({ Key? key, this.title}) : super(key: key);
 
   final String? title;
 

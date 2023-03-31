@@ -15,7 +15,7 @@ class SliverAppBarDemoOne extends StatefulWidget {
 
   final String? title;
 
-  SliverAppBarDemoOne({ Key? key, this.title}) : super(key: key);
+  const SliverAppBarDemoOne({ Key? key, this.title}) : super(key: key);
 
 
   @override
@@ -101,7 +101,7 @@ class _SliverAppBarDemoOneState extends State<SliverAppBarDemoOne> with SingleTi
                 ),
                 bottom: TabBar(
                   tabs: pages.map((String name) => Tab(text: name)).toList(),
-                  controller: this._tabController,
+                  controller: _tabController,
                   isScrollable: true,
                   indicatorColor: Colors.white,
                 ),
@@ -117,7 +117,7 @@ class _SliverAppBarDemoOneState extends State<SliverAppBarDemoOne> with SingleTi
   Widget buildTabBarView(BuildContext context) {
     return
     TabBarView(
-      controller: this._tabController,
+      controller: _tabController,
       // These are the contents of the tab views, below the tabs.
       children: pages.map((String name) {
         //SafeArea 适配刘海屏的一个widget

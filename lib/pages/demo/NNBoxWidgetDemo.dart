@@ -12,7 +12,7 @@ import 'package:flutter_templet_project/uti/R.dart';
 
 class NNBoxWidgetDemo extends StatefulWidget {
 
-  NNBoxWidgetDemo({
+  const NNBoxWidgetDemo({
     Key? key, 
     this.title
   }) : super(key: key);
@@ -80,10 +80,10 @@ class _NNBoxWidgetDemoState extends State<NNBoxWidgetDemo> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: ['done',].map((e) => TextButton(
+          onPressed: () => print(e),
           child: Text(e,
             style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () => print(e),)
+          ),)
         ).toList(),
       ),
       body: Container(
@@ -131,7 +131,7 @@ class _NNBoxWidgetDemoState extends State<NNBoxWidgetDemo> {
       // border: border,
       bgColor: Colors.transparent,
       bgGradient: bgGradient,
-      bgUrl: R.image.imgUrls[5],
+      bgUrl: R.image.urls[5],
       imageFit: BoxFit.cover,
       boxShadows: boxShadows,
       child: Image.asset(

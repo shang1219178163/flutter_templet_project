@@ -18,7 +18,7 @@ import 'package:tuple/tuple.dart';
 
 class NNCollectionNavWidgetDemo extends StatefulWidget {
 
-  NNCollectionNavWidgetDemo({
+  const NNCollectionNavWidgetDemo({
     Key? key,
     this.title
   }) : super(key: key);
@@ -31,7 +31,7 @@ class NNCollectionNavWidgetDemo extends StatefulWidget {
 
 class _NNCollectionNavWidgetDemoState extends State<NNCollectionNavWidgetDemo> {
 
-  List<String> imgUrls = R.image.imgUrls;
+  List<String> imgUrls = R.image.urls;
 
   var _items = <AttrNavItem>[];
 
@@ -53,7 +53,7 @@ class _NNCollectionNavWidgetDemoState extends State<NNCollectionNavWidgetDemo> {
 
   // List<Function> get notifiers => tuples.map((e) => e.item4).toList();
   /// viewModel
-  var _collectionNavModel = NNCollectionNavNotify();
+  final _collectionNavModel = NNCollectionNavNotify();
 
   @override
   void initState() {
@@ -82,10 +82,10 @@ class _NNCollectionNavWidgetDemoState extends State<NNCollectionNavWidgetDemo> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: ['done',].map((e) => TextButton(
+          onPressed: onPressed,
           child: Text(e,
             style: TextStyle(color: Colors.white),
-          ),
-          onPressed: onPressed,)
+          ),)
         ).toList(),
       ),
       body: ListView(
@@ -110,7 +110,7 @@ class _NNCollectionNavWidgetDemoState extends State<NNCollectionNavWidgetDemo> {
     print("枚举值集合: ${PageViewScrollType.values}");
     print("int 转枚举: ${0.toPageViewScrollType()}");
     final result = [1,7,3,6,5,6].sublist(1).reduce((value, element) => value + element);
-    print("result: ${result}");
+    print("result: $result");
 
     print("result: ${[1,7,3,6,5,6].sublist(0, 1)}");
     print("result: ${[1,7,3,6,5,6].sublist(1 + 1)}");
@@ -196,6 +196,6 @@ class NNCollectionNavNotify extends ChangeNotifier {
 
   @override
   String toString() {
-    return "${this.runtimeType}_pageRowNum:${pageRowNum}_pageColumnNum:${pageColumnNum}_scrollType:${scrollType}";
+    return "${runtimeType}_pageRowNum:${pageRowNum}_pageColumnNum:${pageColumnNum}_scrollType:$scrollType";
   }
 }

@@ -16,9 +16,10 @@ class ToastDialog extends Dialog {
   //圆角大小
   final double? radius;
   //背景颜色
+  @override
   final Color? backgroundColor;
 
-  ToastDialog(
+  const ToastDialog(
       {Key? key,
       this.loadingView,
       this.message = "加载中...",
@@ -103,8 +104,8 @@ class ToastDialog extends Dialog {
           // color: Colors.black,
           decoration: buildDecoration(backgroundColor: backgroundColor, radius: radius),
           child: loadingView ?? Container(
-            child: CircularProgressIndicator(),
             padding: EdgeInsets.all(12),
+            child: CircularProgressIndicator(),
           ),
         )
     );
@@ -148,8 +149,8 @@ class ToastDialog extends Dialog {
               height: 90,
               width: 90,
               child: loadingView ?? Container(
-                child: CircularProgressIndicator(),
                 padding: EdgeInsets.all(12),
+                child: CircularProgressIndicator(),
               ),
             ),
             Text(message,

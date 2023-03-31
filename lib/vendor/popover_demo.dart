@@ -8,7 +8,7 @@ import 'package:popover/popover.dart';
 class PopoverDemo extends StatefulWidget {
 
   final String? title;
-  PopoverDemo({ Key? key, this.title}) : super(key: key);
+  const PopoverDemo({ Key? key, this.title}) : super(key: key);
 
   @override
   _PopoverDemoState createState() => _PopoverDemoState();
@@ -128,7 +128,7 @@ class PopoverButton extends StatelessWidget {
           boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 5)],
         ),
         child: Center(
-            child: this.text ?? Text('${this.runtimeType.toString()}'),
+            child: text ?? Text(runtimeType.toString()),
         ),
       ),
       onTap: () {

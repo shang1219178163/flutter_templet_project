@@ -32,8 +32,8 @@ class MyPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    Paint paint = Paint()
-      ..color = this.color
+    var paint = Paint()
+      ..color = color
       ..style = PaintingStyle.fill;
 
     final point = Offset(size.width * 0.5 + (padding.left - padding.right) * 0.5, size.height * 0.5 + (padding.top - padding.bottom) * 0.5);

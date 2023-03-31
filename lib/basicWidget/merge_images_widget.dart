@@ -54,11 +54,11 @@ class MergeImagesWidgetState extends State<MergeImagesWidget> {
   }
 
   _buildBody(){
-    final screenSize = MediaQuery.of(this.context).size;
-    final devicePixelRatio = MediaQuery.of(this.context).devicePixelRatio;
+    final screenSize = MediaQuery.of(context).size;
+    final devicePixelRatio = MediaQuery.of(context).devicePixelRatio;
 
     List<Widget> children = widget.models.map((e) {
-      int idx = widget.models.indexOf(e);
+      var idx = widget.models.indexOf(e);
       return Stack(
         children: [
           _buildTool(
@@ -77,7 +77,7 @@ class MergeImagesWidgetState extends State<MergeImagesWidget> {
               ),
             ),
             callback: (step){
-              print("callback:${step}");
+              print("callback:$step");
               widget.models.exchange(idx, idx + step);
               setState(() {});
             }
@@ -155,9 +155,9 @@ class MergeImagesWidgetState extends State<MergeImagesWidget> {
   }
 
   FutureOr<ui.Image> _capturePic(GlobalKey key) async {
-    BuildContext buildContext = key.currentContext!;
-    RenderRepaintBoundary boundary = buildContext.findRenderObject() as RenderRepaintBoundary;
-    ui.Image image = await boundary.toImage(pixelRatio: ui.window.devicePixelRatio);
+    var buildContext = key.currentContext!;
+    var boundary = buildContext.findRenderObject() as RenderRepaintBoundary;
+    var image = await boundary.toImage(pixelRatio: ui.window.devicePixelRatio);
 
     // ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
     // Uint8List? pngBytes = byteData?.buffer.asUint8List() ?? Uint8List(10);
@@ -237,11 +237,11 @@ class MergeImagesWidgetState extends State<MergeImagesWidget> {
     int bottom = 16,
   }) async {
 
-    List<ui.Image> images = await Future.wait(
+    var images = await Future.wait(
         imageUrls.map((imageUrl) async {
           final imageUint8List = await ImageExt.imageDataFromUrl(imageUrl: imageUrl);
           if (imageUint8List == null) {
-            throw new Exception('图片数据异常');
+            throw Exception('图片数据异常');
           }
           final image = await decodeImageFromList(imageUint8List);
           return image;
@@ -263,18 +263,18 @@ class MergeImagesWidgetState extends State<MergeImagesWidget> {
     int right = 16,
     int bottom = 16,
   }) async {
-    if (images.length == 0) {
-      throw new Exception('没有获取到任何图片!');
+    if (images.isEmpty) {
+      throw Exception('没有获取到任何图片!');
     }
 
-    List<int> imageHeights = images.map((e) => e.height).toList();
+    var imageHeights = images.map((e) => e.height).toList();
     // print("imageHeights:${imageHeights}");
 
     images.sort((a, b) => a.width.compareTo(b.width));
     images.forEach((e) => print("image:${e.width}_${e.height}"));
 
-    int totalWidth = images[0].width;
-    int totalHeight = imageHeights.reduce((a, b) => a + b);
+    var totalWidth = images[0].width;
+    var totalHeight = imageHeights.reduce((a, b) => a + b);
 
     try {
       //初始化画布
@@ -283,7 +283,7 @@ class MergeImagesWidgetState extends State<MergeImagesWidget> {
       final paint = Paint();
 
       //画图
-      for (int i = 0; i < images.length; i++) {
+      for (var i = 0; i < images.length; i++) {
         final e = images[i];
         final offsetY = i == 0 ? 0 : imageHeights.sublist(0, i).reduce((a,b) => a + b);
         // print("offset:${i}_${e.height}_${offsetY}");
@@ -309,11 +309,11 @@ class MergeImagesWidgetState extends State<MergeImagesWidget> {
       }
 
       //获取合成的图片
-      ui.Image image = await recorder.endRecording().toImage(totalWidth.toInt(), totalHeight.toInt());
-      ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
-      Uint8List? pngBytes = byteData?.buffer.asUint8List();
+      var image = await recorder.endRecording().toImage(totalWidth.toInt(), totalHeight.toInt());
+      var byteData = await image.toByteData(format: ui.ImageByteFormat.png);
+      var pngBytes = byteData?.buffer.asUint8List();
       if (pngBytes == null) {
-        throw new Exception('生成图片失败!');
+        throw Exception('生成图片失败!');
       }
       //图片大小
       print("图片大小:${await image.fileSize() ?? "null"}");
@@ -329,7 +329,7 @@ class MergeImagesWidgetState extends State<MergeImagesWidget> {
   Future<Uint8List> toCompositePics() async {
     // List<GlobalKey?> keys = widget.models.map((e) => e.globalKey).toList();
     // return _compositePics(keys);
-    List<String> urls = widget.models.map((e) => e.url ?? "").toList();
+    var urls = widget.models.map((e) => e.url ?? "").toList();
     final miniCodeBytes = await ImageExt.imageDataFromUrl(imageUrl: widget.QRCodeUrl);
     return toCompositeImageUrls(imageUrls: urls, miniCode: miniCodeBytes);
   }
@@ -351,7 +351,7 @@ class MergeImageModel {
     this.width,
     this.height,
   }): super() {
-    this.globalKey =  GlobalKey();
+    globalKey =  GlobalKey();
   }
 }
 

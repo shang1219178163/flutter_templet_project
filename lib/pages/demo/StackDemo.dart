@@ -4,7 +4,7 @@ class StackDemo extends StatefulWidget {
 
   final String? title;
 
-  StackDemo({ Key? key, this.title}) : super(key: key);
+  const StackDemo({ Key? key, this.title}) : super(key: key);
 
 
   @override
@@ -50,9 +50,9 @@ class _StackDemoState extends State<StackDemo> {
               //   borderRadius: BorderRadius.circular(10),
               // ),
               child: Material(
-                child: Text('99+',),
                 color: Colors.red,
                 borderRadius: BorderRadius.circular(10),
+                child: Text('99+',),
               ),
             ),
           ),

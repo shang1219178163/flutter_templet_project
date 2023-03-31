@@ -12,7 +12,7 @@ class AnimatedSwitcherDemo extends StatefulWidget {
 
   final String? title;
 
-  AnimatedSwitcherDemo({ Key? key, this.title}) : super(key: key);
+  const AnimatedSwitcherDemo({ Key? key, this.title}) : super(key: key);
 
   
   @override
@@ -24,7 +24,6 @@ class _AnimatedSwitcherDemoState extends State<AnimatedSwitcherDemo> {
 
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
 
     return Scaffold(
       appBar: AppBar(
@@ -41,7 +40,7 @@ class _AnimatedSwitcherDemoState extends State<AnimatedSwitcherDemo> {
           duration: const Duration(milliseconds: 500),
           transitionBuilder: (Widget child, Animation<double> animation) {
             //执行缩放动画
-            return ScaleTransition(child: child, scale: animation);
+            return ScaleTransition(scale: animation, child: child,);
           },
           child: Text(
             '$_count',
@@ -72,11 +71,11 @@ class _AnimatedSwitcherDemoState extends State<AnimatedSwitcherDemo> {
         //   },
         // ),
         OutlinedButton(
-          child: const Text('+1',),
           onPressed: () {
             _count += 1;
             setState(() {});
           },
+          child: const Text('+1',),
         ),
       ],
     );
@@ -85,7 +84,7 @@ class _AnimatedSwitcherDemoState extends State<AnimatedSwitcherDemo> {
 
 ///非对称滑动
 class MySlideTransition extends AnimatedWidget {
-  MySlideTransition( {
+  const MySlideTransition( {
     Key? key,
     required this.position,
     this.transformHitTests = true,
@@ -104,7 +103,7 @@ class MySlideTransition extends AnimatedWidget {
   Widget build(BuildContext context) {
     // Animation<Offset> _position = listenable as Animation<Offset>;
 
-    Offset offset = position.value;
+    var offset = position.value;
     //动画反向执行时，调整x偏移，实现“从左边滑出隐藏”
     if (position.status == AnimationStatus.reverse) {
       offset = Offset(-offset.dx, offset.dy);
@@ -128,8 +127,7 @@ class SlideTransitionX extends AnimatedWidget {
     this.direction = AxisDirection.down,
     required this.child,
   })
-      : assert(position != null),
-        super(key: key, listenable: position) {
+      : super(key: key, listenable: position) {
     // 偏移在内部处理
     switch (direction) {
       case AxisDirection.up:
@@ -161,7 +159,7 @@ class SlideTransitionX extends AnimatedWidget {
 
   @override
   Widget build(BuildContext context) {
-    Offset offset = _tween.evaluate(position);
+    var offset = _tween.evaluate(position);
     if (position.status == AnimationStatus.reverse) {
       offset = Offset(-offset.dx, -offset.dy);
     }
@@ -177,15 +175,14 @@ class SlideTransitionX extends AnimatedWidget {
 
 ///移动动画
 class LineSlideTransition extends AnimatedWidget {
-  LineSlideTransition({
+  const LineSlideTransition({
     Key? key,
     required Animation<Offset> position,
     this.transformHitTests = true,
     this.direction = AxisDirection.down,
     required this.child,
   })
-      : assert(position != null),
-        super(key: key, listenable: position);
+      : super(key: key, listenable: position);
 
   Animation<Offset> get position => listenable as Animation<Offset>;
 
@@ -196,11 +193,11 @@ class LineSlideTransition extends AnimatedWidget {
   //退场（出）方向
   final AxisDirection direction;
 
-  late final Tween<Offset> _tween;
+  // final Tween<Offset> _tween;
 
   @override
   Widget build(BuildContext context) {
-    Offset offset = position.value;
+    var offset = position.value;
     if (position.status == AnimationStatus.reverse) {
       offset = Offset(-offset.dx, -offset.dy);
     }

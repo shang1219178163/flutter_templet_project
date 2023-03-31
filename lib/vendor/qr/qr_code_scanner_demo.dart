@@ -9,7 +9,7 @@ class QrCodeScannerDemo extends StatefulWidget {
 
   final String? title;
 
-  QrCodeScannerDemo({ Key? key, this.title}) : super(key: key);
+  const QrCodeScannerDemo({ Key? key, this.title}) : super(key: key);
 
   
   @override

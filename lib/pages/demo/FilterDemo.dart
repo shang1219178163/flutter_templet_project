@@ -15,7 +15,7 @@ import 'package:flutter_templet_project/basicWidget/nn_slider.dart';
 
 class FilterDemo extends StatefulWidget {
 
-  FilterDemo({
+  const FilterDemo({
     Key? key, 
     this.title
   }) : super(key: key);
@@ -37,10 +37,10 @@ class _FilterDemoState extends State<FilterDemo> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: ['done',].map((e) => TextButton(
+          onPressed: () => print(e),
           child: Text(e,
             style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () => print(e),)
+          ),)
         ).toList(),
       ),
       body: Stack(
@@ -162,7 +162,7 @@ class _FilterDemoState extends State<FilterDemo> {
         },
       ),
       onChangeEnd: (double value) {
-        print('NNSlider onChangeEnd: ${value}');
+        print('NNSlider onChangeEnd: $value');
       },
       trailingBuilder: (context, value) {
         // final result = (value/100).toStringAsFixed(2);

@@ -61,7 +61,7 @@ class NNetContainerListViewState<T> extends State<NNetContainerListView<T>> {
 
   var page = 0;
   // var _items = <T>[];
-  var _items = ValueNotifier(<T>[]);
+  final _items = ValueNotifier(<T>[]);
 
   @override
   void initState() {
@@ -119,7 +119,6 @@ class NNetContainerListViewState<T> extends State<NNetContainerListView<T>> {
   _buildRefresh({Widget? child}) {
     return EasyRefresh(
       controller: _controller,
-      child: child,
       onRefresh: () async {
         _items.value = await widget.onRequest(true, page, widget.pageSize, null);
         // setState(() {});
@@ -135,6 +134,7 @@ class NNetContainerListViewState<T> extends State<NNetContainerListView<T>> {
         final result = models.length >= widget.pageSize ? IndicatorResult.noMore : IndicatorResult.success;
         _controller?.finishLoad(result);
       },
+      child: child,
     );
   }
 

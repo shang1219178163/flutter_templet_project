@@ -55,13 +55,13 @@ class XHorizontalScrollWidget extends StatelessWidget {
   }) : super(key: key);
 
   double getItemWidth() {
-    double w = this.width - this.padding.left - this.padding.right;
-    if (this.showCount == 2.5) {
-      w = (w - 2 * this.gap - this.startLeft)/2.7;
-    } else if ([1, 2, 3].contains(this.showCount)) {
-      w = (w - this.startLeft - this.endRight - (this.showCount - 1) * this.gap - 16)/this.showCount;
-      if (this.showCount == 1 && this.isSwiper) {
-        w = this.width - this.padding.left - this.padding.right - 12;
+    var w = width - padding.left - padding.right;
+    if (showCount == 2.5) {
+      w = (w - 2 * gap - startLeft)/2.7;
+    } else if ([1, 2, 3].contains(showCount)) {
+      w = (w - startLeft - endRight - (showCount - 1) * gap - 16)/showCount;
+      if (showCount == 1 && isSwiper) {
+        w = width - padding.left - padding.right - 12;
       }
     }
     return w;
@@ -77,19 +77,19 @@ class XHorizontalScrollWidget extends StatelessWidget {
 
   _buildBody() {
     return Container(
-      width: this.width,
-      height: this.height,
-      padding: this.padding,
-      margin: this.margin,
+      width: width,
+      height: height,
+      padding: padding,
+      margin: margin,
       decoration: BoxDecoration(
         // color: Colors.green,
         // border: Border.all(width: 3, color: Colors.red),
         // borderRadius:const BorderRadius.all(Radius.circular(8)),
-        image: this.bg == null ? null : DecorationImage(
-          image: this.bg!,
+        image: bg == null ? null : DecorationImage(
+          image: bg!,
           fit: BoxFit.fill
         ),
-        boxShadow: this.boxShadow,
+        boxShadow: boxShadow,
       //  boxShadow: [
       //     BoxShadow(
       //       color: Colors.grey.withOpacity(0.5),
@@ -101,7 +101,7 @@ class XHorizontalScrollWidget extends StatelessWidget {
       ),
       child: ListView(
         scrollDirection: Axis.horizontal,
-        children: this.items.map((e) => _buildChildrenItem(e: e)).toList(),
+        children: items.map((e) => _buildChildrenItem(e: e)).toList(),
       )
     );
   }
@@ -110,51 +110,51 @@ class XHorizontalScrollWidget extends StatelessWidget {
   Widget _buildChildrenItem({
     required Tuple4<String, String, String, bool> e,
   }) {
-      double itemWidth = getItemWidth();
+      var itemWidth = getItemWidth();
       // double width = 150;
       final url = e.item1;
       final text = e.item2;
       final isVideo = e.item4;
 
-      int index = this.items.indexOf(e);
+      var index = items.indexOf(e);
       var padding = EdgeInsets.zero;
 
-      if (this.showCount == 2.5) {
+      if (showCount == 2.5) {
         if (index == 0) {
-          padding = EdgeInsets.only(left: this.startLeft, right: this.gap);
+          padding = EdgeInsets.only(left: startLeft, right: gap);
         } else if (index == items.length - 1) {
-          padding = EdgeInsets.only(left: 0, right: this.endRight);
+          padding = EdgeInsets.only(left: 0, right: endRight);
         } else {
-          padding = EdgeInsets.only(left: 0, right: this.gap);
+          padding = EdgeInsets.only(left: 0, right: gap);
         }
       }
       else {
         var itemLeft = 0.0;
-        var itemRight = this.gap;
+        var itemRight = gap;
         if (index == 0) {
-          itemLeft = this.startLeft;
+          itemLeft = startLeft;
         }
         if (index == items.length - 1) {
           itemRight = 0;
         }
         padding = EdgeInsets.only(left: itemLeft, right: itemRight);
-        if (this.showCount == 1) {
+        if (showCount == 1) {
           padding = EdgeInsets.only(left: 0, right: 0);
         }
       }
 
       return InkWell(
-        onTap: (){ this.onTap(e); },
+        onTap: (){ onTap(e); },
         child: Padding(
           padding: padding,
-          child: this.itemBuilder != null ? this.itemBuilder!(index) : _buildItem(
+          child: itemBuilder != null ? itemBuilder!(index) : _buildItem(
             isVideo: isVideo,
             itemWidth: itemWidth,
             text: text,
             padding: EdgeInsets.symmetric(horizontal: 6, vertical: 4,),
             bg: ClipRRect(
-              borderRadius: BorderRadius.all(this.radius),
-              child: this.bgBuilder != null ? this.bgBuilder!(itemWidth, index) : FadeInImage.assetNetwork(
+              borderRadius: BorderRadius.all(radius),
+              child: bgBuilder != null ? bgBuilder!(itemWidth, index) : FadeInImage.assetNetwork(
                 placeholder: 'images/img_placeholder.png',
                 image: url,
                 fit: BoxFit.cover,
@@ -187,7 +187,7 @@ class XHorizontalScrollWidget extends StatelessWidget {
         width: itemWidth,
         // constraints: BoxConstraints(maxWidth: itemWidth),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.only(bottomLeft: this.radius, bottomRight: this.radius),
+          borderRadius: BorderRadius.only(bottomLeft: radius, bottomRight: radius),
           gradient: _buildLinearGradient(isVertical: true),
         ),
         child: Text(
@@ -224,8 +224,8 @@ class XHorizontalScrollWidget extends StatelessWidget {
     bool isVertical = false,
     List<Color> colors = const [Color(0x19000000), Color(0x7f000000), ],
   }) {
-    Alignment begin = isVertical ? Alignment.topCenter : Alignment.centerLeft;
-    Alignment end = isVertical ? Alignment.bottomCenter : Alignment.centerRight;
+    var begin = isVertical ? Alignment.topCenter : Alignment.centerLeft;
+    var end = isVertical ? Alignment.bottomCenter : Alignment.centerRight;
     return LinearGradient(
       begin: begin,
       end: end,
@@ -236,30 +236,30 @@ class XHorizontalScrollWidget extends StatelessWidget {
 
   _buildBodySwiper() {
     return Container(
-      width: this.width,
-      height: this.height,
-      padding: this.padding,
-      margin: this.margin,
+      width: width,
+      height: height,
+      padding: padding,
+      margin: margin,
       decoration: BoxDecoration(
         color: Colors.green,
         // border: Border.all(width: 3, color: Colors.red),
         // borderRadius:const BorderRadius.all(Radius.circular(8)),
-        image: this.bg == null ? null : DecorationImage(
-          image: this.bg!,
+        image: bg == null ? null : DecorationImage(
+          image: bg!,
           fit: BoxFit.fill
         ), //设置图片
       ),
       child: ClipRRect(
-        borderRadius: BorderRadius.all(this.radius),
+        borderRadius: BorderRadius.all(radius),
         child: Swiper(
           itemBuilder: (BuildContext context, int index) {
-            final e = this.items[index];
+            final e = items[index];
             return _buildChildrenItem(e: e,);
           },
           indicatorLayout: PageIndicatorLayout.COLOR,
           autoplay: true,
           loop: false,
-          itemCount: this.items.length,
+          itemCount: items.length,
           // pagination: SwiperPagination(),
           // control: SwiperControl(),
           // itemWidth: screenSize.width * 0.5,
@@ -294,16 +294,16 @@ class _SynHomeSwiperTitleWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return _buildText(
-      text: this.text,
-      maxLines: this.text,
-      style: this.style ?? const TextStyle(
+      text: text,
+      maxLines: text,
+      style: style ?? const TextStyle(
         fontSize: 12.0,
         fontWeight: FontWeight.w400,
         fontFamily: 'PingFangSC-Regular,PingFang SC',
         color: Color(0xFFFFFFFF),
       ),
-      padding: this.padding ?? const EdgeInsets.all(0),
-      alignment: this.alignment ?? Alignment.centerLeft,
+      padding: padding ?? const EdgeInsets.all(0),
+      alignment: alignment ?? Alignment.centerLeft,
     );
   }
 
@@ -374,16 +374,16 @@ class HorizontalScrollWidget extends StatelessWidget {
   /// 获取 item 宽
   // double get itemWidth => itemMap['${this.showCount}'] ?? 225;
   double get itemWidth{
-    if (this.showCount == 1) {
+    if (showCount == 1) {
       return 327;
     }
-    if (this.showCount == 2) {
+    if (showCount == 2) {
       return 160;
     }
-    if (this.showCount == 2.5) {
+    if (showCount == 2.5) {
       return 125;
     }
-    if (this.showCount == 3) {
+    if (showCount == 3) {
       return 104;
     }
     return 125;
@@ -405,14 +405,14 @@ class HorizontalScrollWidget extends StatelessWidget {
     // final items = List.generate(3, (index) => "${index}");
 
     final child = Container(
-      width: this.width,
-      height: this.height,
+      width: width,
+      height: height,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         padding: EdgeInsets.all(0),
         itemCount: items.length,
         // cacheExtent: 10,
-        itemBuilder: itemBuilder != null ? itemBuilder : (context, index) => _buildItem(context, index),
+        itemBuilder: itemBuilder ?? (context, index) => _buildItem(context, index),
         separatorBuilder: (context, index) => _buildSeparator(context, index),
       ),
     );
@@ -433,11 +433,11 @@ class HorizontalScrollWidget extends StatelessWidget {
       onTap: () => print(e),
       child: Container(
         // color: Colors.green,
-        width: this.itemWidth,
+        width: itemWidth,
         padding: EdgeInsets.only(bottom: 5),//为了显示阴影
         decoration: _buildDecoration(),
         child: ClipRRect(
-          borderRadius: BorderRadius.all(this.radius),
+          borderRadius: BorderRadius.all(radius),
           child: e.item1.startsWith('http') ? Stack(
             alignment: Alignment.center,
             fit: StackFit.expand,
@@ -462,8 +462,8 @@ class HorizontalScrollWidget extends StatelessWidget {
 
   _buildSwiper() {
     return Container(
-      width: this.width,
-      height: this.height,
+      width: width,
+      height: height,
       // decoration: BoxDecoration(
       //   color: Colors.green,
       //   // border: Border.all(width: 3, color: Colors.red),
@@ -474,16 +474,16 @@ class HorizontalScrollWidget extends StatelessWidget {
       //   ), //设置图片
       // ),
       child: ClipRRect(
-        borderRadius: BorderRadius.all(this.radius),
+        borderRadius: BorderRadius.all(radius),
         child: Swiper(
           itemBuilder: (context, index) => _buildItem(context, index),
           indicatorLayout: PageIndicatorLayout.COLOR,
-          autoplay: this.items.length > 1,
-          loop: this.items.length > 1,
-          itemCount: this.items.length,
-          pagination: this.items.length <= 1 ? null : SwiperPagination(),
+          autoplay: items.length > 1,
+          loop: items.length > 1,
+          itemCount: items.length,
+          pagination: items.length <= 1 ? null : SwiperPagination(),
           // control: SwiperControl(),
-          itemWidth: this.itemWidth,
+          itemWidth: itemWidth,
           // viewportFraction: 0.6,
         ),
       ),
@@ -498,7 +498,7 @@ class HorizontalScrollWidget extends StatelessWidget {
     // );
     return Divider(
       // height: 8,
-      indent: this.gap,
+      indent: gap,
       // color: Colors.blue,
     );
   }

@@ -3,7 +3,7 @@ import 'package:flutter_templet_project/basicWidget/tween_animated_widget.dart';
 
 class AnimatedBuilderDemo extends StatefulWidget {
 
-  AnimatedBuilderDemo({ Key? key, this.title}) : super(key: key);
+  const AnimatedBuilderDemo({ Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -45,7 +45,6 @@ class _AnimatedBuilderDemoState extends State<AnimatedBuilderDemo> with SingleTi
   buildAnimatedBuilder() {
     return AnimatedBuilder(
       animation: animation,
-      child: Image.asset("images/bg.png"),
       builder: (BuildContext ctx, child) {
         return Center(
           child: Container(
@@ -58,13 +57,13 @@ class _AnimatedBuilderDemoState extends State<AnimatedBuilderDemo> with SingleTi
           ),
         );
       },
+      child: Image.asset("images/bg.png"),
     );
   }
 
   buildTweenAnimatedWidget() {
     return TweenAnimatedWidget<double>(
       tween: Tween(begin: 0, end: 300),
-      child: Image.asset("images/bg.png"),
       builder: (BuildContext ctx, child, animation) {
         return Center(
           child: Container(
@@ -77,6 +76,7 @@ class _AnimatedBuilderDemoState extends State<AnimatedBuilderDemo> with SingleTi
           ),
         );
       },
+      child: Image.asset("images/bg.png"),
     );
   }
 

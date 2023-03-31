@@ -7,7 +7,7 @@ import 'package:flutter_templet_project/uti/R.dart';
 
 class TabBarSegmentDemo extends StatefulWidget {
 
-  TabBarSegmentDemo({ Key? key, this.title}) : super(key: key);
+  const TabBarSegmentDemo({ Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -48,10 +48,10 @@ class _TabBarSegmentDemoState extends State<TabBarSegmentDemo> with SingleTicker
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: ['reset',].map((e) => TextButton(
+          onPressed: onDone,
           child: Text(e,
             style: TextStyle(color: Colors.white),
           ),
-          onPressed: onDone,
         )).toList(),
         bottom: buildAppBottom(),
       ),
@@ -117,7 +117,7 @@ class _TabBarSegmentDemoState extends State<TabBarSegmentDemo> with SingleTicker
         },
         itemBuilder: (context, index) {
           final e = titles[index];
-          bool isSelect = (index == indexVN.value);
+          var isSelect = (index == indexVN.value);
           // print("itemBuilder: $index, $isSelect");
           return Tab(
             // height: 60,
@@ -140,7 +140,7 @@ class _TabBarSegmentDemoState extends State<TabBarSegmentDemo> with SingleTicker
     }
     final state = (context as StatefulElement).state as TabBarSegmentState;
     final stateNew = context.getStatefulElementState<TabBarSegmentState>();
-    print("state ${state} ${state == stateNew}");
+    print("state $state ${state == stateNew}");
   }
 
   Widget buildItem({
@@ -148,12 +148,12 @@ class _TabBarSegmentDemoState extends State<TabBarSegmentDemo> with SingleTicker
     required int index,
     double height = 46
   }) {
-    bool isSelect = (index == indexVN.value);
+    var isSelect = (index == indexVN.value);
 
     if (index != 1){
       return Tab(height: height, text: e);
     }
-    final url = isSelect ? R.image.imgUrls[1] : R.image.imgUrls[0];
+    final url = isSelect ? R.image.urls[1] : R.image.urls[0];
     return Tab(
       child: FadeInImage(
         image: NetworkImage(url),
@@ -172,7 +172,7 @@ class _TabBarSegmentDemoState extends State<TabBarSegmentDemo> with SingleTicker
 
 class TabBarSegmentNewDemo extends StatefulWidget {
 
-  TabBarSegmentNewDemo({ Key? key, this.title}) : super(key: key);
+  const TabBarSegmentNewDemo({ Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -253,12 +253,12 @@ class _TabBarSegmentNewDemoState extends State<TabBarSegmentNewDemo> with Single
     required int index,
     double height = 46
   }) {
-    bool isSelect = (index == indexVN.value);
+    var isSelect = (index == indexVN.value);
 
     if (index != 1){
       return Tab(height: height, text: e);
     }
-    final url = isSelect ? R.image.imgUrls[1] : R.image.imgUrls[0];
+    final url = isSelect ? R.image.urls[1] : R.image.urls[0];
     return Tab(
       child: FadeInImage(
         image: NetworkImage(url),
@@ -329,7 +329,7 @@ class _TabBarSegmentNewDemoState extends State<TabBarSegmentNewDemo> with Single
                   return Tab(text: e);
                 }
 
-                final url = (value == index) ? R.image.imgUrls[1] : R.image.imgUrls[0];
+                final url = (value == index) ? R.image.urls[1] : R.image.urls[0];
                 return Tab(
                   child: FadeInImage(
                     image: NetworkImage(url),
@@ -448,7 +448,7 @@ class _TabBarSegmentNewDemoState extends State<TabBarSegmentNewDemo> with Single
                     return Tab(text: e);
                   }
 
-                  final url = (value == index) ? R.image.imgUrls[1] : R.image.imgUrls[0];
+                  final url = (value == index) ? R.image.urls[1] : R.image.urls[0];
                   return Tab(
                     child: FadeInImage(
                       image: NetworkImage(url),

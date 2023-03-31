@@ -33,7 +33,7 @@ class _AutocompleteDemoState extends State<AutocompleteDemo>{
   // final _textEditingController = TextEditingController();
   var _textEditingValue = TextEditingValue();
 
-  var _params = <ParamModel>[
+  final _params = <ParamModel>[
     ParamModel(name: "fieldViewBuilder", isOpen: false),
   ];
 
@@ -226,7 +226,7 @@ class _AutocompleteDemoState extends State<AutocompleteDemo>{
   _buildInputDecoration({
     required TextEditingController textEditingController,
     bool hasEnabledBorder = false,
-    InputBorder? enabledBorder = null
+    InputBorder? enabledBorder
   }) {
     final enabledBorderWidget = enabledBorder ?? (!hasEnabledBorder ? null : OutlineInputBorder(
       borderRadius: BorderRadius.circular(15),
@@ -249,7 +249,7 @@ class _AutocompleteDemoState extends State<AutocompleteDemo>{
       suffixIcon: ValueListenableBuilder<String>(
         valueListenable: textFieldVN,
         builder: (context, value, child) {
-          return value.length == 0 ? SizedBox() : IconButton(
+          return value.isEmpty ? SizedBox() : IconButton(
               onPressed: () => textEditingController.clear(),
               icon: Icon(Icons.close, color: Colors.grey)
           );
@@ -274,8 +274,8 @@ class _AutocompleteDemoState extends State<AutocompleteDemo>{
       return TextSpan(children: [ TextSpan(text: str) ]);
     }
 
-    int index = str.indexOf(matchedText);
-    int endIndex = index + matchedText.length;
+    var index = str.indexOf(matchedText);
+    var endIndex = index + matchedText.length;
 
     final sub = str.substring(index, endIndex);
     final leftStr = str.substring(0, index);

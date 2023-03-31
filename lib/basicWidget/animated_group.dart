@@ -74,10 +74,10 @@ class AnimatedGroupState extends State<AnimatedGroup> with TickerProviderStateMi
   Widget build(BuildContext context) {
     return AnimatedBuilder(
       animation: _controller!,
-      child: widget.child,
       builder: (BuildContext context, Widget? child){
         return widget.builder(context, child, _animations);
-      }
+      },
+      child: widget.child,
     );
   }
 
@@ -101,7 +101,7 @@ class AnimatedGroupState extends State<AnimatedGroup> with TickerProviderStateMi
       }
     } on TickerCanceled {
       // the animation got canceled, probably because we were disposed
-    };
+    }
   }
 
   /// 创建动画对象

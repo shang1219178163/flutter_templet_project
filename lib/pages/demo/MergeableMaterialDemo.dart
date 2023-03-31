@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 
 class MergeableMaterialDemo extends StatefulWidget {
 
-  MergeableMaterialDemo({
+  const MergeableMaterialDemo({
     Key? key, 
     this.title
   }) : super(key: key);
@@ -33,10 +33,10 @@ class _MergeableMaterialDemoState extends State<MergeableMaterialDemo> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: ['done',].map((e) => TextButton(
+          onPressed: () => print("done"),
           child: Text(e,
             style: TextStyle(color: Colors.white),
           ),
-          onPressed: () => print("done"),
         )).toList(),
       ),
       body: _buildBody(),
@@ -90,10 +90,10 @@ class _MergeableMaterialDemoState extends State<MergeableMaterialDemo> {
       children: <Widget>[
         MergeableMaterial(hasDividers: false, children: items),
         ElevatedButton(
-          child: Text("点击添加"),
           onPressed: () {
             _isChildExpanded();
           },
+          child: Text("点击添加"),
         )
       ],
     );

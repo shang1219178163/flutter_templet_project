@@ -10,7 +10,7 @@ class QrFlutterDemo extends StatefulWidget {
 
   final String? title;
 
-  QrFlutterDemo({ Key? key, this.title}) : super(key: key);
+  const QrFlutterDemo({ Key? key, this.title}) : super(key: key);
 
   
   @override
@@ -20,14 +20,14 @@ class QrFlutterDemo extends StatefulWidget {
 class _QrFlutterDemoState extends State<QrFlutterDemo> {
   @override
   Widget build(BuildContext context) {
-    final message =
+    const message =
     // ignore: lines_longer_than_80_chars
         'Hey this is a QR code. Change this value in the main_screen.dart file.';
 
     final qrFutureBuilder = FutureBuilder<ui.Image>(
       future: _loadOverlayImage(),
       builder: (ctx, snapshot) {
-        final size = 280.0;
+        const size = 280.0;
         if (!snapshot.hasData) {
           return Container(width: size, height: size);
         }

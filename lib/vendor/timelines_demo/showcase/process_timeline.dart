@@ -163,13 +163,13 @@ class _ProcessTimelinePageState extends State<ProcessTimelinePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.chevron_right),
         onPressed: () {
           setState(() {
             _processIndex = (_processIndex + 1) % _processes.length;
           });
         },
         backgroundColor: inProgressColor,
+        child: Icon(Icons.chevron_right),
       ),
     );
   }

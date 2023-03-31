@@ -84,21 +84,21 @@ class NNBoxWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return _buildBody(
-      width: this.width,
-      height: this.height,
-      blur: this.blur,
-      bgBlur: this.bgBlur,
-      opacity: this.opacity,
-      margin: this.margin,
-      padding: this.padding,
-      border: this.border,
-      borderRadius: this.borderRadius,
-      bgUrl: this.bgUrl,
-      bgColor: this.bgColor,
-      bgGradient: this.bgGradient,
-      boxShadows: this.boxShadows,
-      child: this.child,
-      imageFit: this.imageFit,
+      width: width,
+      height: height,
+      blur: blur,
+      bgBlur: bgBlur,
+      opacity: opacity,
+      margin: margin,
+      padding: padding,
+      border: border,
+      borderRadius: borderRadius,
+      bgUrl: bgUrl,
+      bgColor: bgColor,
+      bgGradient: bgGradient,
+      boxShadows: boxShadows,
+      child: child,
+      imageFit: imageFit,
     );
   }
 

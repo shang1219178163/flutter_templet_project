@@ -9,7 +9,7 @@ import 'package:flutter_templet_project/extension/build_context_ext.dart';
 /// 自定义 ScrollBar
 class CustomScrollBarDemo extends StatefulWidget {
 
-  CustomScrollBarDemo({ Key? key, this.title}) : super(key: key);
+  const CustomScrollBarDemo({ Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -26,7 +26,7 @@ class _CustomScrollBarDemoState extends State<CustomScrollBarDemo> {
   ///滚动中监听
   ValueNotifier<bool> isScrolling = ValueNotifier(false);
 
-  final items = R.image.imgUrls;
+  final items = R.image.urls;
 
   double screenWidth = 0;
 
@@ -38,7 +38,7 @@ class _CustomScrollBarDemoState extends State<CustomScrollBarDemo> {
 
   /// 展示个数
   double get showCount {
-    double result = 2.5;
+    var result = 2.5;
     // result = 2; //add test
     return result;
   }
@@ -62,9 +62,9 @@ class _CustomScrollBarDemoState extends State<CustomScrollBarDemo> {
     _scrollController.addListener(() {
       // scrollerOffset.value = _scrollController.offset;
       // print("scrollerOffset.value:${scrollerOffset.value}");
-      ScrollPosition position = _scrollController.position;
+      var position = _scrollController.position;
       //滚动进度
-      double progress = position.pixels/position.maxScrollExtent;
+      var progress = position.pixels/position.maxScrollExtent;
       scrollerOffset.value = progress;
       // print("scrollerOffset.value:${scrollerOffset.value}_${progress}");
     });
@@ -77,13 +77,13 @@ class _CustomScrollBarDemoState extends State<CustomScrollBarDemo> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: ['done',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
           onPressed: () {
             isCustomScrollView = !isCustomScrollView;
             setState(() {});
-          },)
+          },
+          child: Text(e,
+            style: TextStyle(color: Colors.white),
+          ),)
         ).toList(),
       ),
       body: _buildBody(isCustomScrollView: isCustomScrollView),
@@ -91,7 +91,7 @@ class _CustomScrollBarDemoState extends State<CustomScrollBarDemo> {
   }
 
   _buildBody({isCustomScrollView = false}) {
-    final ListView child = ListView(
+    final child = ListView(
       children: [
         SectionHeader.h4(title: isCustomScrollView ? "CustomScrollView" : "ListView",),
         SectionHeader.h4(title: "自定义滚动条/ScrollerBar",),
@@ -113,7 +113,7 @@ class _CustomScrollBarDemoState extends State<CustomScrollBarDemo> {
   }) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        double itemWidth = (constraints.maxWidth - gap * (showCount.ceil() - 1)) / showCount;
+        var itemWidth = (constraints.maxWidth - gap * (showCount.ceil() - 1)) / showCount;
 
         return Stack(
           children: [
@@ -122,8 +122,8 @@ class _CustomScrollBarDemoState extends State<CustomScrollBarDemo> {
               height: constraints.maxHeight,
               child: NotificationListener<ScrollNotification>(
                 onNotification: (ScrollNotification n) {
-                  if (!(n is UserScrollNotification)) {
-                    isScrolling.value = !(n is ScrollEndNotification);
+                  if (n is! UserScrollNotification) {
+                    isScrolling.value = n is! ScrollEndNotification;
                   }
                   // print(n.runtimeType);
                   return false; //为 true，则事件会阻止向上冒泡，不推荐(除非有必要)
@@ -167,9 +167,9 @@ class _CustomScrollBarDemoState extends State<CustomScrollBarDemo> {
     final url = items[index];
     return InkWell(
       onTap: (){
-        double offset = (itemWidth + gap)*index;
+        var offset = (itemWidth + gap)*index;
         _scrollController.position.printInfo();
-        ScrollPosition position = _scrollController.position;
+        var position = _scrollController.position;
         print("${index}_${itemWidth}_${offset}_");
 
         if (index > (items.length - showCount.ceil())) {
@@ -262,8 +262,8 @@ class _CustomScrollBarDemoState extends State<CustomScrollBarDemo> {
           valueListenable: scrollerOffset,
           builder: (context, value, child) {
             // print("value:$value");
-            double indicatorWidth = 80;
-            double left = value * (maxWidth - indicatorWidth);
+            var indicatorWidth = 80.0;
+            var left = value * (maxWidth - indicatorWidth);
             return Positioned(
               left: left,
               child: Container(

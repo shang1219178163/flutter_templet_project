@@ -83,22 +83,22 @@ class XBoxWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return _buildBody(
-      width: this.width,
-      height: this.height,
-      blur: this.blur,
-      bgBlur: this.bgBlur,
-      opacity: this.opacity,
-      margin: this.margin,
-      padding: this.padding,
-      border: this.border,
-      borderRadius: this.borderRadius,
-      bgUrl: this.bgUrl,
-      bgColor: this.bgColor,
-      bgGradient: this.bgGradient,
-      boxShadow: this.boxShadow,
-      child: this.child,
-      imageFit: this.imageFit,
-      hideBlur: this.hideBlur
+      width: width,
+      height: height,
+      blur: blur,
+      bgBlur: bgBlur,
+      opacity: opacity,
+      margin: margin,
+      padding: padding,
+      border: border,
+      borderRadius: borderRadius,
+      bgUrl: bgUrl,
+      bgColor: bgColor,
+      bgGradient: bgGradient,
+      boxShadow: boxShadow,
+      child: child,
+      imageFit: imageFit,
+      hideBlur: hideBlur
     );
   }
 
@@ -137,18 +137,18 @@ class XBoxWidget extends StatelessWidget {
     ) : null;
 
     if (boxShadow != null &&
-        boxShadow.length > 0 &&
+        boxShadow.isNotEmpty &&
         width != null &&
         height != null) {
-      BoxShadow shadow = boxShadow[0];
+      var shadow = boxShadow[0];
 
       /// 留出阴影空间
       margin = margin.mergeShadow(shadow: shadow);
     }
-    double left = margin.isNonNegative == false ? 0 : margin.left;
-    double right = margin.isNonNegative == false ? 0 : margin.right;
-    double top = margin.isNonNegative == false ? 0 : margin.top;
-    double bottom = margin.isNonNegative == false ? 0 : margin.bottom;
+    var left = margin.isNonNegative == false ? 0 : margin.left;
+    var right = margin.isNonNegative == false ? 0 : margin.right;
+    var top = margin.isNonNegative == false ? 0 : margin.top;
+    var bottom = margin.isNonNegative == false ? 0 : margin.bottom;
     // if (this.title != null && this.title!.contains('图文导航')) {
     //   bgBlur = 5;//add test
     // }

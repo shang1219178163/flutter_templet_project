@@ -24,7 +24,7 @@ class GithubRepoDemo extends StatefulWidget {
 
   final String? title;
 
-  GithubRepoDemo({ Key? key, this.title}) : super(key: key);
+  const GithubRepoDemo({ Key? key, this.title}) : super(key: key);
 
 
   @override
@@ -32,7 +32,7 @@ class GithubRepoDemo extends StatefulWidget {
 }
 
 class _GithubRepoDemoState extends State<GithubRepoDemo> {
-  Dio _dio = new Dio();
+  final Dio _dio = Dio();
 
   bool _isModel = false;
 
@@ -121,13 +121,13 @@ class _GithubRepoDemoState extends State<GithubRepoDemo> {
               ///字符串转json
               List<dynamic> list = json.decode(response.data);
               ///json转模型
-              List<Repository> models = list.map<Repository>((e) => Repository.fromJson(e)).toList();
+              var models = list.map<Repository>((e) => Repository.fromJson(e)).toList();
               ///界面显示
               return ListView(
                 children: models.map<Widget>((e) =>
                     ListTile(
-                      title: Text("${e.name ?? "_"}"),
-                      subtitle: Text("${e.url ?? "_"}"),
+                      title: Text(e.name ?? "_"),
+                      subtitle: Text(e.url ?? "_"),
                     )
                 ).toList(),
               );
@@ -161,8 +161,8 @@ class _GithubRepoDemoState extends State<GithubRepoDemo> {
               return ListView(
                 children: models.map<Widget>((e) =>
                     ListTile(
-                      title: Text("${e.name ?? "_"}"),
-                      subtitle: Text("${e.url ?? "_"}"),
+                      title: Text(e.name ?? "_"),
+                      subtitle: Text(e.url ?? "_"),
                     )
                 ).toList(),
               );
@@ -175,7 +175,7 @@ class _GithubRepoDemoState extends State<GithubRepoDemo> {
   }
   
    requestRepos() async {
-    final api = new ReposAPI();
+    final api = ReposAPI();
     print("api: ${api.toString()}");
 
     HttpManager(api).request<List>(onSuccess: (data){
@@ -184,7 +184,7 @@ class _GithubRepoDemoState extends State<GithubRepoDemo> {
       ddlog(error);
     });
 
-    Response response = await _dio.get("https://api.github.com/orgs/flutterchina/repos");
+    var response = await _dio.get("https://api.github.com/orgs/flutterchina/repos");
     print("requestRepos: ${response.data.toString()}");
    }
 }
