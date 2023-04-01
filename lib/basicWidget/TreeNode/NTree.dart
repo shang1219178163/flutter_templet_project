@@ -77,11 +77,12 @@ class _NTreeState extends State<NTree> {
             leading: IconButton(
               onPressed: () {
                 e.isSelected = !e.isSelected;
+                recursion(e: e, cb: (item) => item.isSelected = e.isSelected,);
+                // e.recursion((item) { item.isSelected = e.isSelected; });
                 if(e.isSelected) {
-                  recursion(e: e, cb: (item) => item.isSelected = e.isSelected,);
-                  // e.recursion((item) { item.isSelected = e.isSelected; });
-                } else {
 
+                } else {
+                  
                 }
                 setState((){});
               },
