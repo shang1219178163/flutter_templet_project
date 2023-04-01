@@ -20,4 +20,12 @@ extension MapExt on Map<String, dynamic>{
     final result = paramStr.substring(0, paramStr.length - 1);
     return result;
   }
+
+  /// 递归遍历
+  recursion(void Function(String key, dynamic value)? cb) {
+    forEach((key, value) {
+      cb?.call(key, value);
+      recursion(cb);
+    });
+  }
 }

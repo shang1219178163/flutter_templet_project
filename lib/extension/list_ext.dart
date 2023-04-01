@@ -68,6 +68,14 @@ extension ListExt<T,E> on List<E> {
     return true;
   }
 
+  /// 递归遍历
+  recursion(void Function(E e)? cb) {
+    forEach((item) {
+      cb?.call(item);
+      recursion(cb);
+    });
+  }
+
   /// 转为 Map<String, dynamic>
   Map<String, E> toMap() {
     var map = <String, E>{};
