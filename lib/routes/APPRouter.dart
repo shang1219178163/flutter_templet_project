@@ -2,7 +2,7 @@
 // import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/Provider/provider_list_demo.dart';
 import 'package:flutter_templet_project/basicWidget/EnhanceTab/enhance_tab_bar_demo.dart';
-import 'package:flutter_templet_project/basicWidget/TreeNode/NTreeNodeDemo.dart';
+import 'package:flutter_templet_project/basicWidget/TreeNode/NTreeDemo.dart';
 import 'package:flutter_templet_project/basicWidget/drag_destination_view.dart';
 import 'package:flutter_templet_project/basicWidget/responsive_column.dart';
 import 'package:flutter_templet_project/pages/DataTypeDemo.dart';
@@ -491,7 +491,7 @@ class APPRouter {
   static const nestedScrollViewDemoTwo = '/nestedScrollViewDemoTwo';
   static const testFunction = '/testFunction';
   static const nSkeletonDemo = '/nSkeletonDemo';
-  static const nTreeNodeDemo = '/nTreeNodeDemo';
+  static const nTreeDemo = '/nTreeDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -770,7 +770,7 @@ class AppPage {
     GetPage(name: APPRouter.nestedScrollViewDemoTwo, page: () => NestedScrollViewDemoTwo(),),
     GetPage(name: APPRouter.testFunction, page: () => TestFunction(),),
     GetPage(name: APPRouter.nSkeletonDemo, page: () => NSkeletonDemo(),),
-    GetPage(name: APPRouter.nTreeNodeDemo, page: () => NTreeNodeDemo(),),
+    GetPage(name: APPRouter.nTreeDemo, page: () => NTreeDemo(),),
 
 
   ];

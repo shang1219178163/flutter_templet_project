@@ -1,5 +1,5 @@
 //
-//  NTreeNode.dart
+//  NTree.dart
 //  flutter_templet_project
 //
 //  Created by shang on 2023/4/1 07:30.
@@ -11,9 +11,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/nn_slider.dart';
 
-class NTreeNode extends StatefulWidget {
+class NTree extends StatefulWidget {
 
-  NTreeNode({
+  NTree({
     Key? key,
     this.title,
     required this.list,
@@ -32,10 +32,10 @@ class NTreeNode extends StatefulWidget {
   int level;
 
   @override
-  _NTreeNodeState createState() => _NTreeNodeState();
+  _NTreeState createState() => _NTreeState();
 }
 
-class _NTreeNodeState extends State<NTreeNode> {
+class _NTreeState extends State<NTree> {
   var _level = 0;
 
   @override

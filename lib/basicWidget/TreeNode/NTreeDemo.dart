@@ -1,5 +1,5 @@
 //
-//  NTreeNodeDemo.dart
+//  NTreeDemo.dart
 //  flutter_templet_project
 //
 //  Created by shang on 2023/4/1 07:38.
@@ -8,19 +8,19 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/TreeNode/NTreeNode.dart';
+import 'package:flutter_templet_project/basicWidget/TreeNode/NTree.dart';
 
-class NTreeNodeDemo extends StatefulWidget {
+class NTreeDemo extends StatefulWidget {
 
-  NTreeNodeDemo({ Key? key, this.title}) : super(key: key);
+  NTreeDemo({ Key? key, this.title}) : super(key: key);
 
   final String? title;
 
   @override
-  _NTreeNodeDemoState createState() => _NTreeNodeDemoState();
+  _NTreeDemoState createState() => _NTreeDemoState();
 }
 
-class _NTreeNodeDemoState extends State<NTreeNodeDemo> {
+class _NTreeDemoState extends State<NTreeDemo> {
 
 
   final _list = [
@@ -96,7 +96,7 @@ class _NTreeNodeDemoState extends State<NTreeNodeDemo> {
     return CustomScrollView(
       slivers: [
         Text(arguments.toString()),
-        NTreeNode(list: _list),
+        NTree(list: _list),
 
       ].map((e) => SliverToBoxAdapter(child: e,)).toList(),
     );

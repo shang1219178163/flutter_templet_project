@@ -527,7 +527,7 @@ var customs = [
   Tuple2(APPRouter.collectionNavWidgetDemo, "图文导航", ),
   Tuple2(APPRouter.boxWidgetDemo, "boxWidgetDemo", ),
   Tuple2(APPRouter.nSkeletonDemo, "骨架图", ),
-  Tuple2(APPRouter.nTreeNodeDemo, "树形组件", ),
+  Tuple2(APPRouter.nTreeDemo, "树形组件", ),
 
 
 ];
