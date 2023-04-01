@@ -30,7 +30,7 @@ class NTree extends StatefulWidget {
 
   ValueChangedWidgetBuilder<NTreeNodeModel>? nodeBuilder;
 
-  Widget Function(BuildContext context, int level, NTreeNodeModel model)? prefixBuilder;
+  Widget Function(BuildContext context, int level, NTreeNodeModel model)? titleBuilder;
 
   @override
   _NTreeState createState() => _NTreeState();
@@ -53,14 +53,13 @@ class _NTreeState extends State<NTree> {
     int level = 0,
   }) {
     return Column(
-      children: widget.list.map((e) => _buildNode(e: e, level: level++, isRoot: true)).toList(),
+      children: widget.list.map((e) => _buildNode(e: e, level: level)).toList(),
     );
   }
 
-  Widget _buildNode({required NTreeNodeModel e, int level = 0, bool isRoot = true}){
+  Widget _buildNode({required NTreeNodeModel e, int level = 0}){
     return StatefulBuilder(
       builder: (ctx, setState) {
-
         final leading = e.isSelected ? Icon(Icons.check_box_outline_blank, ) : Icon(Icons.check_box, );
         final trailing = e.child.isEmpty ? SizedBox() :
           (e.isExpand ? Icon(Icons.keyboard_arrow_down, ) : Icon(Icons.keyboard_arrow_right, ));
@@ -72,17 +71,15 @@ class _NTreeState extends State<NTree> {
             tilePadding: EdgeInsets.symmetric(horizontal: 10),
             leading: leading,
             trailing: trailing,
-            title: Text("${"_"*level}${e.name}"),
+            title: widget.titleBuilder?.call(context, level, e) ?? Text("${"_"*level}${e.name}"),
             initiallyExpanded: e.isExpand,
             onExpansionChanged: (val){
               if (val == null) return;
               e.isExpand = val;
-              if(isRoot) {
-                level = 0;
-              }
+              level = 0;
               setState((){});
             },
-            children: e.child.map((e) => _buildNode(e: e, level: ++level, isRoot: false)).toList(),
+            children: e.child.map((e) => _buildNode(e: e, level: ++level)).toList() ,
           ),
         );
       }
