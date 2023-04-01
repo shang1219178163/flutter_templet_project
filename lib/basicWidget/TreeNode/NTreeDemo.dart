@@ -28,38 +28,53 @@ class _NTreeDemoState extends State<NTreeDemo> {
       name:'1 一级菜单',
       isExpand: true,//是否展开子项
       enabled: false,//是否可以响应事件
+      level: 0,
       child:[
         NTreeNodeModel(
           name:'1.1 二级菜单',
           isExpand: true,
+          level: 1,
           child:[
             NTreeNodeModel(
               name:'1.1.1 三级菜单',
               isExpand: true,
+              level: 2,
+              child: [
+                NTreeNodeModel(
+                  name:'1.1.1.1 三级菜单',
+                  isExpand: true,
+                  level: 3,
+                ),
+              ]
             ),
           ]
         ),
         NTreeNodeModel(
           name:'1.2 二级菜单',
           isExpand: true,
+          level: 1,
         ),
       ]
     ),
     NTreeNodeModel(
       name:'2 一级菜单',
       // isExpand: true,
-      child:[
+        level: 0,
+        child:[
         NTreeNodeModel(
           name:'2.1 二级菜单',
           // isExpand: true,
+          level: 1,
         ),
         NTreeNodeModel(
           name:'2.2 二级菜单',
           isExpand: false,
+          level: 1,
           child:[
             NTreeNodeModel(
               name:'2.2.1 三级菜单',
               // isExpand: true,
+              level: 2,
             ),
           ]
         ),
