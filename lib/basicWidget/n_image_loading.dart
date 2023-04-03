@@ -9,9 +9,9 @@
 
 import 'package:flutter/material.dart';
 
-class NNImageLoading extends StatelessWidget {
+class NImageLoading extends StatelessWidget {
 
-  const NNImageLoading({
+  const NImageLoading({
   	Key? key,
   	this.title,
     required this.image,

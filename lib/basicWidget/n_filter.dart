@@ -1,5 +1,5 @@
 //
-//  nn_filter.dart
+//  n_filter.dart
 //  flutter_templet_project
 //
 //  Created by shang on 3/15/23 10:48 AM.
@@ -11,9 +11,9 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 
 /// 自定义滤镜组件, 支持前后滤镜
-class NNFilter extends StatelessWidget {
+class NFilter extends StatelessWidget {
 
-  NNFilter({
+  NFilter({
     Key? key,
     this.title,
     this.borderRadius = BorderRadius.zero,

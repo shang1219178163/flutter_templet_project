@@ -12,8 +12,8 @@ const double SPACING = 10;
 
 
 /// 图文导航
-class NNCollectionNavWidget extends StatefulWidget {
-  NNCollectionNavWidget({
+class NCollectionNavWidget extends StatefulWidget {
+  NCollectionNavWidget({
     Key? key,
     this.title,
     required this.items,
@@ -73,10 +73,10 @@ class NNCollectionNavWidget extends StatefulWidget {
   bool isDebug;
 
   @override
-  _NNCollectionNavWidgetState createState() => _NNCollectionNavWidgetState();
+  _NCollectionNavWidgetState createState() => _NCollectionNavWidgetState();
 }
 
-class _NNCollectionNavWidgetState extends State<NNCollectionNavWidget> {
+class _NCollectionNavWidgetState extends State<NCollectionNavWidget> {
   
   // /// 初始传值数据
   // List<AttrNavItem> _initilItems = [];

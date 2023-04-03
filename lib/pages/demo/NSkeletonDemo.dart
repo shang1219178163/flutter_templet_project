@@ -13,7 +13,7 @@ import 'package:flutter_templet_project/basicWidget/NNet/NNet.dart';
 import 'package:flutter_templet_project/basicWidget/NNet/NNetContainer.dart';
 import 'package:flutter_templet_project/basicWidget/NSkeleton.dart';
 
-import 'package:flutter_templet_project/basicWidget/nn_slider.dart';
+import 'package:flutter_templet_project/basicWidget/n_slider.dart';
 import 'package:flutter_templet_project/pages/demo/ValueListenableBuilderDemo.dart';
 import 'package:flutter_templet_project/provider/notifier_demo.dart';
 import 'package:flutter_templet_project/service/connectivity_service.dart';

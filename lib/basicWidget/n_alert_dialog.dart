@@ -1,5 +1,5 @@
 //
-//  nn_alert_dialog.dart
+//  n_alert_dialog.dart
 //  flutter_templet_project
 //
 //  Created by shang on 7/30/21 11:03 AM.
@@ -8,9 +8,9 @@
 
 import 'package:flutter/material.dart';
 
-class NNAlertDialog extends StatelessWidget {
+class NAlertDialog extends StatelessWidget {
 
-  NNAlertDialog({
+  NAlertDialog({
     Key? key,
     this.title,
     this.content,

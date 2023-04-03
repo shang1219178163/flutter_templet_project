@@ -14,8 +14,8 @@ import 'package:visibility_detector/visibility_detector.dart';
 
 /// 轮播样式2(3.2.4)
 // ignore: must_be_immutable
-class NNHorizontalScrollWidget extends StatefulWidget {
-  NNHorizontalScrollWidget({
+class NHorizontalScrollWidget extends StatefulWidget {
+  NHorizontalScrollWidget({
     Key? key,
     this.title,
     required this.items,
@@ -51,7 +51,7 @@ class NNHorizontalScrollWidget extends StatefulWidget {
       _HorizontalScrollWidgetState();
 }
 
-class _HorizontalScrollWidgetState extends State<NNHorizontalScrollWidget> {
+class _HorizontalScrollWidgetState extends State<NHorizontalScrollWidget> {
   final List<AttrCarouseItem> _items = [];
 
   /// 根据 maxWidth 计算 item 宽度

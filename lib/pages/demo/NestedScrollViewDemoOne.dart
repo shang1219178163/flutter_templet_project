@@ -8,7 +8,7 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/nn_sliver_persistent_header_delegate.dart';
+import 'package:flutter_templet_project/basicWidget/n_sliver_persistent_header_delegate.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/uti/R.dart';
 
@@ -100,7 +100,7 @@ class _NestedScrollViewDemoOneState extends State<NestedScrollViewDemoOne> with 
   buildSliverPersistentHeader() {
     return SliverPersistentHeader(
       pinned: true,
-      delegate: NNSliverPersistentHeaderDelegate(
+      delegate: NSliverPersistentHeaderDelegate(
         builder: (ctx, offset, overlapsContent) {
           return ColoredBox(
             color: Colors.yellow,

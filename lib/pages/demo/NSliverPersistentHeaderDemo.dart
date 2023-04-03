@@ -8,21 +8,21 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/nn_sliver_persistent_header_delegate.dart';
+import 'package:flutter_templet_project/basicWidget/n_sliver_persistent_header_delegate.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 
-class NNSliverPersistentHeaderDemo extends StatefulWidget {
+class NSliverPersistentHeaderDemo extends StatefulWidget {
 
-  const NNSliverPersistentHeaderDemo({ Key? key, this.title}) : super(key: key);
+  const NSliverPersistentHeaderDemo({ Key? key, this.title}) : super(key: key);
 
   final String? title;
 
   @override
-  _NNSliverPersistentHeaderDemoState createState() => _NNSliverPersistentHeaderDemoState();
+  _NSliverPersistentHeaderDemoState createState() => _NSliverPersistentHeaderDemoState();
 }
 
-class _NNSliverPersistentHeaderDemoState extends State<NNSliverPersistentHeaderDemo> {
+class _NSliverPersistentHeaderDemoState extends State<NSliverPersistentHeaderDemo> {
 
 
   @override
@@ -82,7 +82,7 @@ class _NNSliverPersistentHeaderDemoState extends State<NNSliverPersistentHeaderD
   SliverPersistentHeader buildSliverHeader({required Text text, bool pinned = true}) {
     return SliverPersistentHeader(
       pinned: pinned,
-      delegate: NNSliverPersistentHeaderDelegate(
+      delegate: NSliverPersistentHeaderDelegate(
         min: 60.0,
         max: 80.0,
         builder: (ctx, offset, overlapsContent) => SizedBox.expand(

@@ -1,5 +1,5 @@
 //
-//  nn_attributed_string.dart
+//  n_attributed_string.dart
 //  flutter_templet_project
 //
 //  Created by shang on 7/31/21 12:08 PM.
@@ -13,9 +13,9 @@ import 'package:flutter_templet_project/extension/rich_text_ext.dart';
 
 
 ///富文本处理
-class NNAttributedString{
+class NAttributedString{
 
-  NNAttributedString({
+  NAttributedString({
     required this.context,
     required this.text,
     this.linkMap,

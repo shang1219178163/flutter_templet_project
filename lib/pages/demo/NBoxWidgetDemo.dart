@@ -7,12 +7,12 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/nn_box_widget.dart';
+import 'package:flutter_templet_project/basicWidget/n_box_widget.dart';
 import 'package:flutter_templet_project/uti/R.dart';
 
-class NNBoxWidgetDemo extends StatefulWidget {
+class NBoxWidgetDemo extends StatefulWidget {
 
-  const NNBoxWidgetDemo({
+  const NBoxWidgetDemo({
     Key? key, 
     this.title
   }) : super(key: key);
@@ -20,10 +20,10 @@ class NNBoxWidgetDemo extends StatefulWidget {
   final String? title;
 
   @override
-  _NNBoxWidgetDemoState createState() => _NNBoxWidgetDemoState();
+  _NBoxWidgetDemoState createState() => _NBoxWidgetDemoState();
 }
 
-class _NNBoxWidgetDemoState extends State<NNBoxWidgetDemo> {
+class _NBoxWidgetDemoState extends State<NBoxWidgetDemo> {
 
   var bgGradient = LinearGradient(
     tileMode: TileMode.clamp,
@@ -119,7 +119,7 @@ class _NNBoxWidgetDemoState extends State<NNBoxWidgetDemo> {
   }
 
   buildBox() {
-    return NNBoxWidget(
+    return NBoxWidget(
       // width: 300,
       height: 200,
       opacity: 1,

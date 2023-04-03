@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/nn_autocomplete_options_view.dart';
+import 'package:flutter_templet_project/basicWidget/n_autocomplete_options_view.dart';
 import 'package:get/get_core/src/get_main.dart';
 
 import 'package:flutter_templet_project/extension/list_ext.dart';
@@ -72,7 +72,7 @@ class _AutocompleteDemoState extends State<AutocompleteDemo>{
             // optionsViewBuilder: _buildOptionsView,
             optionsViewBuilder: (context,  onSelected, options) {
 
-              return NNAutocompleteOptionsView<OptionModel>(
+              return NAutocompleteOptionsView<OptionModel>(
                 displayStringForOption: (option) => option.name,
                 onSelected: onSelected,
                 options: options,

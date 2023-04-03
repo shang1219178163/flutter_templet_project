@@ -1,5 +1,5 @@
 //
-//  nn_user_privacy.dart
+//  n_user_privacy.dart
 //  flutter_templet_project
 //
 //  Created by shang on 7/30/21 9:32 PM.
@@ -8,11 +8,11 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/nn_webview.dart';
+import 'package:flutter_templet_project/basicWidget/n_webview.dart';
 
-class NNUserPrivacy extends StatefulWidget {
+class NUserPrivacy extends StatefulWidget {
 
-  const NNUserPrivacy(
+  const NUserPrivacy(
       {Key? key,
       this.title,
       this.content,
@@ -37,10 +37,10 @@ class NNUserPrivacy extends StatefulWidget {
   final WidgetBuilder? bottomBuilder;
 
   @override
-  _NNUserPrivacyState createState() => _NNUserPrivacyState();
+  _NUserPrivacyState createState() => _NUserPrivacyState();
 }
 
-class _NNUserPrivacyState extends State<NNUserPrivacy> {
+class _NUserPrivacyState extends State<NUserPrivacy> {
   final ScrollController _scrollController = ScrollController();
 
   bool isScrollBottom = false;

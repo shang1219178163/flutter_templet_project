@@ -8,7 +8,7 @@ import 'package:flutter_templet_project/basicWidget/section_header.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/decoration_ext.dart';
 import 'package:flutter_templet_project/pages/demo/MyPainter.dart';
-import 'package:flutter_templet_project/basicWidget/nn_popup_route.dart';
+import 'package:flutter_templet_project/basicWidget/n_popup_route.dart';
 import 'package:flutter_templet_project/basicWidget/gesture_detector_container.dart';
 import 'package:flutter_templet_project/basicWidget/upload_button.dart';
 import 'package:flutter_templet_project/extension/button_ext.dart';
@@ -746,7 +746,7 @@ class _SecondPageState extends State<SecondPage> {
 
   _showCustomPopView() {
     Navigator.push(context,
-      NNPopupRoute(
+      NPopupRoute(
         child: Container(
           color: Colors.red,
           width: 91,
@@ -917,7 +917,6 @@ class _SecondPageState extends State<SecondPage> {
 
 
 }
-
 
 /// 自定义按钮
 class UIElevatedButton extends StatelessWidget {

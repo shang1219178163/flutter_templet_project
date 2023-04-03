@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_templet_project/basicWidget/chioce_list.dart';
 import 'package:flutter_templet_project/basicWidget/chioce_wrap.dart';
-import 'package:flutter_templet_project/basicWidget/nn_user_privacy.dart';
-import 'package:flutter_templet_project/basicWidget/nn_webview.dart';
-import 'package:flutter_templet_project/basicWidget/nn_popup_route.dart';
-import 'package:flutter_templet_project/basicWidget/nn_alert_dialog.dart';
+import 'package:flutter_templet_project/basicWidget/n_user_privacy.dart';
+import 'package:flutter_templet_project/basicWidget/n_webview.dart';
+import 'package:flutter_templet_project/basicWidget/n_popup_route.dart';
+import 'package:flutter_templet_project/basicWidget/n_alert_dialog.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 
 import 'package:flutter_templet_project/extension/ddlog.dart';
@@ -375,7 +375,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
           var size = Size(120, 120);
           Navigator.push(
             context,
-            NNPopupRoute(
+            NPopupRoute(
               onClick: () {
                 debugPrint("exit");
               },
@@ -401,7 +401,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
           var screenSize = MediaQuery.of(context).size;
           var size = Size(screenSize.width - 40, 300);
           Navigator.push(context,
-            NNPopupRoute(
+            NPopupRoute(
               alignment: alignment,
               onClick: () {
                 ddlog("exit");
@@ -429,7 +429,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
           // ddlog(list);
 
           Navigator.push(context,
-            NNPopupRoute(
+            NPopupRoute(
               alignment: alignment,
               onClick: () {
                 ddlog("exit");
@@ -437,7 +437,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
                 Navigator.of(context).pop();
               },
               // child: buildAlertColumn(context, marginHor: 15),
-              child: NNAlertDialog(
+              child: NAlertDialog(
                 title: Text(
                   title1,
                   style: TextStyle(fontWeight: FontWeight.w500),
@@ -476,7 +476,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
 
           Navigator.push(
             context,
-            NNPopupRoute(
+            NPopupRoute(
               alignment: alignment,
               onClick: () {
                 ddlog("exit");
@@ -838,8 +838,10 @@ xxxx十分重视用户权利及隐私政策并严格按照相关法律法规的�
         context: context,
         pageBuilder: (BuildContext context, Animation<double> animation,
             Animation<double> secondaryAnimation) {
-          return NNUserPrivacy(
-            title: Text('用户隐私及协议', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+          return NUserPrivacy(
+            title: Text('用户隐私及协议',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
             content: textRich,
             onCancel: () {
               ddlog("Cancel");

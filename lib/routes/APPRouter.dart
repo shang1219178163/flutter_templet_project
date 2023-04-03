@@ -59,8 +59,8 @@ import 'package:flutter_templet_project/pages/demo/MergeableMaterialDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ModalBarrierDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MyPopverDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FilterDemoOne.dart';
-import 'package:flutter_templet_project/pages/demo/NNBoxWidgetDemo.dart';
-import 'package:flutter_templet_project/pages/demo/NNSliverPersistentHeaderDemo.dart';
+import 'package:flutter_templet_project/pages/demo/NBoxWidgetDemo.dart';
+import 'package:flutter_templet_project/pages/demo/NSliverPersistentHeaderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NavigationRailDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NavigationToolbarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NestedScrollViewDemoOne.dart';
@@ -104,8 +104,8 @@ import 'package:flutter_templet_project/pages/demo/VisibilityDemo.dart';
 import 'package:flutter_templet_project/pages/demo/WrapDemo.dart';
 import 'package:flutter_templet_project/pages/demo/box_shadow_demo.dart';
 import 'package:flutter_templet_project/pages/demo/drawImageNineDemo.dart';
-import 'package:flutter_templet_project/pages/demo/nn_collection_nav_widget_demo.dart';
-import 'package:flutter_templet_project/pages/demo/nn_horizontal_scroll_widget_demo.dart';
+import 'package:flutter_templet_project/pages/demo/n_collection_nav_widget_demo.dart';
+import 'package:flutter_templet_project/pages/demo/n_horizontal_scroll_widget_demo.dart';
 import 'package:flutter_templet_project/pages/demo/smart_dialog_demo.dart';
 import 'package:flutter_templet_project/pages/demo/isolateDemo.dart';
 import 'package:flutter_templet_project/pages/demo/merge_images_demo.dart';
@@ -739,8 +739,8 @@ class AppPage {
     GetPage(name: APPRouter.customScrollBarDemo, page: () => CustomScrollBarDemo(),),
     GetPage(name: APPRouter.overflowDemo, page: () => OverflowDemo(),),
     GetPage(name: APPRouter.enhanceTabBarDemo, page: () => EnhanceTabBarDemo(),),
-    GetPage(name: APPRouter.collectionNavWidgetDemo, page: () => NNCollectionNavWidgetDemo(),),
-    GetPage(name: APPRouter.nnHorizontalScrollWidgetDemo, page: () => NNHorizontalScrollWidgetDemo(),),
+    GetPage(name: APPRouter.collectionNavWidgetDemo, page: () => NCollectionNavWidgetDemo(),),
+    GetPage(name: APPRouter.nnHorizontalScrollWidgetDemo, page: () => NHorizontalScrollWidgetDemo(),),
 
     GetPage(name: APPRouter.materialDemo, page: () => MaterialDemo(),),
     GetPage(name: APPRouter.flexibleSpaceDemo, page: () => FlexibleSpaceDemo(),),
@@ -762,10 +762,10 @@ class AppPage {
     GetPage(name: APPRouter.filterDemo, page: () => FilterDemo(),),
     GetPage(name: APPRouter.filterDemoOne, page: () => FilterDemoOne(),),
     GetPage(name: APPRouter.videoPlayerScreenDemo, page: () => VideoPlayerDemo(),),
-    GetPage(name: APPRouter.boxWidgetDemo, page: () => NNBoxWidgetDemo(),),
+    GetPage(name: APPRouter.boxWidgetDemo, page: () => NBoxWidgetDemo(),),
     GetPage(name: APPRouter.fractionallySizedBoxDemo, page: () => FractionallySizedBoxDemo(),),
     GetPage(name: APPRouter.listWheelScrollViewDemo, page: () => ListWheelScrollViewDemo(),),
-    GetPage(name: APPRouter.nnsliverPersistentHeaderDemo, page: () => NNSliverPersistentHeaderDemo(),),
+    GetPage(name: APPRouter.nnsliverPersistentHeaderDemo, page: () => NSliverPersistentHeaderDemo(),),
     GetPage(name: APPRouter.nestedScrollViewDemoOne, page: () => NestedScrollViewDemoOne(),),
     GetPage(name: APPRouter.nestedScrollViewDemoTwo, page: () => NestedScrollViewDemoTwo(),),
     GetPage(name: APPRouter.testFunction, page: () => TestFunction(),),

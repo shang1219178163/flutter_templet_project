@@ -9,7 +9,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/nn_sliver_persistent_header_delegate.dart';
+import 'package:flutter_templet_project/basicWidget/n_sliver_persistent_header_delegate.dart';
 
 class SliverPersistentHeaderDemoOne extends StatelessWidget {
   SliverPersistentHeaderDemoOne({Key? key}) : super(key: key);
@@ -76,7 +76,7 @@ class SliverPersistentHeaderDemoOne extends StatelessWidget {
   Widget _buildPersistentHeader(String title) => SliverPersistentHeader(
     pinned: true,
     floating: true,
-    delegate: NNSliverPersistentHeaderDelegate(
+    delegate: NSliverPersistentHeaderDelegate(
       builder: (ctx, offset, overlapsContent) => Container(
         alignment: Alignment.center,
         color: Colors.orangeAccent,

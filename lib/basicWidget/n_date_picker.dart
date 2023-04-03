@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 ///时间选择器
-class NNDatePicker extends StatelessWidget {
+class NDatePicker extends StatelessWidget {
 
   final String? title;
   final CupertinoDatePickerMode? mode;
@@ -18,7 +18,7 @@ class NNDatePicker extends StatelessWidget {
   final double? datePickerHeight;
 
   ///时间选择器
-  const NNDatePicker({
+  const NDatePicker({
   	Key? key,
   	this.title = "请选择",
     this.datePickerHeight = 216,

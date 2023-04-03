@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/nn_horizontal_scroll_widget.dart';
+import 'package:flutter_templet_project/basicWidget/n_horizontal_scroll_widget.dart';
 import 'package:flutter_templet_project/uti/R.dart';
 
 
-class NNHorizontalScrollWidgetDemo extends StatefulWidget {
+class NHorizontalScrollWidgetDemo extends StatefulWidget {
 
-  const NNHorizontalScrollWidgetDemo({
+  const NHorizontalScrollWidgetDemo({
     Key? key,
     this.title
   }) : super(key: key);
@@ -13,10 +13,10 @@ class NNHorizontalScrollWidgetDemo extends StatefulWidget {
   final String? title;
 
   @override
-  _NNHorizontalScrollWidgetDemoState createState() => _NNHorizontalScrollWidgetDemoState();
+  _NHorizontalScrollWidgetDemoState createState() => _NHorizontalScrollWidgetDemoState();
 }
 
-class _NNHorizontalScrollWidgetDemoState extends State<NNHorizontalScrollWidgetDemo> {
+class _NHorizontalScrollWidgetDemoState extends State<NHorizontalScrollWidgetDemo> {
   List<String> imgUrls = R.image.urls;
 
   var _items = <AttrCarouseItem>[];
@@ -59,7 +59,7 @@ class _NNHorizontalScrollWidgetDemoState extends State<NNHorizontalScrollWidgetD
   }
   /// 多值监听
   Widget _buildAnimatedBuilder() {
-    return NNHorizontalScrollWidget(
+    return NHorizontalScrollWidget(
       items: _items,
     );
   }

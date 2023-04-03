@@ -11,9 +11,9 @@ import 'package:flutter/material.dart';
 typedef ValueChangedWidgetBuilder<T> = Widget Function(BuildContext context, T value);
 
 /// 自定义 Slider 组件封住，增加首尾组件，尾部组件实时显示当前数值；
-class NNSlider extends StatefulWidget {
+class NSlider extends StatefulWidget {
 
-  NNSlider({
+  NSlider({
     Key? key, 
     this.title,
     this.leading,
@@ -71,10 +71,10 @@ class NNSlider extends StatefulWidget {
   bool autofocus;
 
   @override
-  _NNSliderState createState() => _NNSliderState();
+  _NSliderState createState() => _NSliderState();
 }
 
-class _NNSliderState extends State<NNSlider> {
+class _NSliderState extends State<NSlider> {
 
   var sliderVN = ValueNotifier(0.0);
 

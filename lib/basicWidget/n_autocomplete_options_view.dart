@@ -13,8 +13,8 @@ import 'package:flutter/scheduler.dart';
 // typedef OptionWidgetBuilder<T extends Object> = Widget Function(T option);
 
 /// Autocomplete 组件的 optionsViewBuilder 返回视图
-class NNAutocompleteOptionsView<T extends Object> extends StatelessWidget {
-  const NNAutocompleteOptionsView({
+class NAutocompleteOptionsView<T extends Object> extends StatelessWidget {
+  const NAutocompleteOptionsView({
     Key? key,
     required this.displayStringForOption,
     required this.onSelected,

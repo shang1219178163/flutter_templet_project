@@ -9,8 +9,8 @@
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/nn_filter.dart';
-import 'package:flutter_templet_project/basicWidget/nn_slider.dart';
+import 'package:flutter_templet_project/basicWidget/n_filter.dart';
+import 'package:flutter_templet_project/basicWidget/n_slider.dart';
 
 
 class FilterDemoOne extends StatefulWidget {
@@ -90,7 +90,7 @@ class _FilterDemoOneState extends State<FilterDemoOne> {
                   alignment: AlignmentDirectional.center,
                   children: [
                     Text("01" * 399),
-                    NNFilter(
+                    NFilter(
                       foregroundFilter: ui.ImageFilter.blur(
                         sigmaX: imageFilteredVN.value,
                         sigmaY: imageFilteredVN.value,
@@ -121,7 +121,7 @@ class _FilterDemoOneState extends State<FilterDemoOne> {
     Widget? leading,
     ValueChanged<double>? onChanged
   }) {
-    return NNSlider(
+    return NSlider(
       leading: leading,
       max: max,
       onChanged: onChanged,

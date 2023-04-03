@@ -28,9 +28,9 @@ The navigation delegate is set to block navigation to the youtube website.
 </html>
 ''';
 
-class NNWebView extends StatefulWidget {
+class NWebView extends StatefulWidget {
   
-  NNWebView({
+  NWebView({
     Key? key, 
     this.initialUrl = 'https://flutter.dev',
     this.javascriptMode = JavascriptMode.unrestricted
@@ -44,10 +44,10 @@ class NNWebView extends StatefulWidget {
   
 
   @override
-  _NNWebViewState createState() => _NNWebViewState();
+  _NWebViewState createState() => _NWebViewState();
 }
 
-class _NNWebViewState extends State<NNWebView> {
+class _NWebViewState extends State<NWebView> {
   final Completer<WebViewController> _controller = Completer<WebViewController>();
 
   String _currentTitle = "";

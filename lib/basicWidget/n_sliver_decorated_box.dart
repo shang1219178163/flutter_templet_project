@@ -21,8 +21,8 @@ import 'package:flutter/rendering.dart';
 //       color: Color(0xffcc3322),
 //       borderRadius: BorderRadius.all(Radius.circular(20))),
 // )
-class NNSliverDecoratedBox extends SingleChildRenderObjectWidget {
-  const NNSliverDecoratedBox({
+class NSliverDecoratedBox extends SingleChildRenderObjectWidget {
+  const NSliverDecoratedBox({
     Key? key,
     required this.decoration,
     this.position = DecorationPosition.background,

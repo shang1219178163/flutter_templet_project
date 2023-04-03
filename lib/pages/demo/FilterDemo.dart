@@ -9,8 +9,8 @@
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/nn_filter.dart';
-import 'package:flutter_templet_project/basicWidget/nn_slider.dart';
+import 'package:flutter_templet_project/basicWidget/n_filter.dart';
+import 'package:flutter_templet_project/basicWidget/n_slider.dart';
 
 
 class FilterDemo extends StatefulWidget {
@@ -63,7 +63,7 @@ class _FilterDemoState extends State<FilterDemo> {
                 // buildImageFilter(),
                 // buildBackdropFilter(),
                 // buildCombin(),
-                NNFilter(
+                NFilter(
                   foregroundFilter: ui.ImageFilter.blur(
                     sigmaX: 2,
                     sigmaY: 2,
@@ -153,7 +153,7 @@ class _FilterDemoState extends State<FilterDemo> {
   }
 
   _buildNNSlider() {
-    return NNSlider(
+    return NSlider(
       max: 100,
       leading: IconButton(
         icon: Icon(Icons.download),

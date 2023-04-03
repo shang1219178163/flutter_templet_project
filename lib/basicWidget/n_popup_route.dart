@@ -1,5 +1,5 @@
 //
-//  nn_popup_route.dart
+//  n_popup_route.dart
 //  flutter_templet_project
 //
 //  Created by shang on 7/29/21 4:22 PM.
@@ -9,9 +9,9 @@
 
 import 'package:flutter/material.dart';
 
-class NNPopupRoute<T> extends PopupRoute<T> {
+class NPopupRoute<T> extends PopupRoute<T> {
 
-  NNPopupRoute({
+  NPopupRoute({
     this.backgroudColor,
     this.alignment = Alignment.center,
     required this.onClick,

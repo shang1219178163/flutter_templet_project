@@ -10,15 +10,15 @@
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/nn_collection_nav_widget.dart';
+import 'package:flutter_templet_project/basicWidget/n_collection_nav_widget.dart';
 import 'package:flutter_templet_project/basicWidget/number_stepper.dart';
 import 'package:flutter_templet_project/uti/R.dart';
 import 'package:provider/provider.dart';
 import 'package:tuple/tuple.dart';
 
-class NNCollectionNavWidgetDemo extends StatefulWidget {
+class NCollectionNavWidgetDemo extends StatefulWidget {
 
-  const NNCollectionNavWidgetDemo({
+  const NCollectionNavWidgetDemo({
     Key? key,
     this.title
   }) : super(key: key);
@@ -26,10 +26,10 @@ class NNCollectionNavWidgetDemo extends StatefulWidget {
   final String? title;
 
   @override
-  _NNCollectionNavWidgetDemoState createState() => _NNCollectionNavWidgetDemoState();
+  _NCollectionNavWidgetDemoState createState() => _NCollectionNavWidgetDemoState();
 }
 
-class _NNCollectionNavWidgetDemoState extends State<NNCollectionNavWidgetDemo> {
+class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
 
   List<String> imgUrls = R.image.urls;
 
@@ -148,7 +148,7 @@ class _NNCollectionNavWidgetDemoState extends State<NNCollectionNavWidgetDemo> {
       animation: _collectionNavModel,
       builder: (context, child) {
         debugPrint("AnimatedBuilder");
-        return NNCollectionNavWidget(
+        return NCollectionNavWidget(
           isDebug: true,
           items: _items,
           onItem: (e) => debugPrint(e.toString()),

@@ -9,7 +9,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/nn_slider.dart';
+import 'package:flutter_templet_project/basicWidget/n_slider.dart';
 import 'package:flutter_templet_project/provider/notifier_demo.dart';
 
 
@@ -122,7 +122,7 @@ class _SliderDemoState extends State<SliderDemo> {
   }
 
   _buildNNSlider() {
-    return NNSlider(
+    return NSlider(
       max: 100,
       leading: IconButton(
         icon: Icon(Icons.download),
