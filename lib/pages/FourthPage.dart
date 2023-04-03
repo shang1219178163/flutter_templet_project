@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/APPThemeSettings.dart';
-import 'package:flutter_templet_project/basicWidget/section_header.dart';
+import 'package:flutter_templet_project/basicWidget/header.dart';
 import 'package:flutter_templet_project/extension/decoration_ext.dart';
 import 'package:get/get.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
@@ -35,7 +35,7 @@ class FourthPage extends StatelessWidget {
   _buildOrderCell() {
     return Column(
       children: [
-        SectionHeader.h4(title: "_buildOrderCell"),
+        Header.h4(title: "_buildOrderCell"),
         IntrinsicHeight(
         child: Row(
           mainAxisSize: MainAxisSize.min,
@@ -84,7 +84,7 @@ class FourthPage extends StatelessWidget {
   _buildTextShadow() {
     return Column(
       children: [
-        SectionHeader.h4(title: "设置文字 3D效果"),
+        Header.h4(title: "设置文字 3D效果"),
         Center(
           child: Text(
             'Hello, world!',

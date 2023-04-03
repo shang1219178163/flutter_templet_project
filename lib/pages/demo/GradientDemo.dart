@@ -1,7 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/section_header.dart';
+import 'package:flutter_templet_project/basicWidget/header.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/alignment_ext.dart';
 import 'package:flutter_templet_project/pages/demo/GradientOfRadialDemo.dart';
@@ -126,7 +126,7 @@ class _GradientDemoState extends State<GradientDemo> {
   _buildBody() {
     return ListView(children: <Widget>[
       buildTop(),
-      SectionHeader.h4(title: 'LinearGradient',),
+      Header.h4(title: 'LinearGradient',),
       _buildBox(
         text: '两种颜色 均分',
         decoration: BoxDecoration(
@@ -262,7 +262,7 @@ class _GradientDemoState extends State<GradientDemo> {
         )
       ),
       Divider(),
-      SectionHeader.h4(title: 'SweepGradient',),
+      Header.h4(title: 'SweepGradient',),
       _buildBox(
         text: '四色 无 stops, 平均分布',
         decoration: BoxDecoration(
@@ -319,7 +319,7 @@ class _GradientDemoState extends State<GradientDemo> {
         ),
       ),
       Divider(),
-      SectionHeader.h4(title: 'RadialGradient',),
+      Header.h4(title: 'RadialGradient',),
       _buildBox(
         height: 100,
         text: 'RadialGradient',
@@ -339,7 +339,7 @@ class _GradientDemoState extends State<GradientDemo> {
           ),
         ),
       ),
-      SectionHeader.h4(title: 'RadialGradient',),
+      Header.h4(title: 'RadialGradient',),
       _buildBox(
         height: 300,
         text: 'RadialGradient',
@@ -359,7 +359,7 @@ class _GradientDemoState extends State<GradientDemo> {
         ),
       ),
       Divider(),
-      SectionHeader.h4(title: 'ShaderMask - RadialGradient',),
+      Header.h4(title: 'ShaderMask - RadialGradient',),
       _buildShaderMask(
         blendMode: BlendMode.color,
         shaderCallback: (Rect bounds) {

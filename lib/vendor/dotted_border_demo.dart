@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dotted_border/dotted_border.dart';
-import 'package:flutter_templet_project/basicWidget/section_header.dart';
+import 'package:flutter_templet_project/basicWidget/header.dart';
 
 class DottedBorderDemo extends StatefulWidget {
 
@@ -44,7 +44,7 @@ class _DottedBorderDemoState extends State<DottedBorderDemo> {
         Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            SectionHeader.h5(title: "DottedBorder"),
+            Header.h5(title: "DottedBorder"),
             Container(
               height: 100,
               // margin: EdgeInsets.all(20),
@@ -61,7 +61,7 @@ class _DottedBorderDemoState extends State<DottedBorderDemo> {
               )
             ),
 
-            SectionHeader.h5(title: "DottedBorder"),
+            Header.h5(title: "DottedBorder"),
             Container(
               height: 100,
               // padding: EdgeInsets.all(20),
@@ -76,7 +76,7 @@ class _DottedBorderDemoState extends State<DottedBorderDemo> {
               )
             ),
 
-            SectionHeader.h5(title: "DottedBorder"),
+            Header.h5(title: "DottedBorder"),
             Container(
               height: 100,
               // padding: EdgeInsets.all(20),

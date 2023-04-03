@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/APPThemeSettings.dart';
 import 'package:flutter_templet_project/basicWidget/after_layout_builder.dart';
 import 'package:flutter_templet_project/basicWidget/radial_button.dart';
-import 'package:flutter_templet_project/basicWidget/section_header.dart';
+import 'package:flutter_templet_project/basicWidget/header.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/decoration_ext.dart';
 import 'package:flutter_templet_project/pages/demo/MyPainter.dart';
@@ -60,7 +60,7 @@ class _SecondPageState extends State<SecondPage> {
         Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            SectionHeader.h5(title: "color"),
+            Header.h5(title: "color"),
             Container(
               width: 100,
               height: 100,
@@ -69,7 +69,7 @@ class _SecondPageState extends State<SecondPage> {
                   borderRadius: BorderRadius.all(Radius.circular(18)),
               ),
             ),
-            SectionHeader.h5(title: "RadialButton"),
+            Header.h5(title: "RadialButton"),
             RadialButton(
               text: Text('一二'),
               center: Alignment.topRight,
@@ -121,11 +121,11 @@ class _SecondPageState extends State<SecondPage> {
                 child: Text("离离原上草, 一岁一枯荣")
               ),
             ),
-            SectionHeader.h5(title: "GradientButton"),
+            Header.h5(title: "GradientButton"),
             _buildClipRRectGradientButton(),
 
             Divider(),
-            SectionHeader.h5(title:"MaterialButton"),
+            Header.h5(title:"MaterialButton"),
             MaterialButton(
               color: Colors.blue.shade400,
               textColor: Colors.white,
@@ -134,14 +134,14 @@ class _SecondPageState extends State<SecondPage> {
             ),
 
             Divider(),
-            SectionHeader.h5(title: "BackButton"),
+            Header.h5(title: "BackButton"),
             BackButton(
               onPressed: () => debugPrint("BackButton"),
               color: Colors.red,
             ),
             Divider(),
 
-            SectionHeader.h5(title: "NoSplash"),
+            Header.h5(title: "NoSplash"),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 splashFactory: NoSplash.splashFactory,
@@ -149,7 +149,7 @@ class _SecondPageState extends State<SecondPage> {
               onPressed: () { debugPrint("NoSplash.splashFactory"); },
                child: Text('No Splash'),
             ),
-            SectionHeader.h5(title: "ElevatedButton"),
+            Header.h5(title: "ElevatedButton"),
             ElevatedButton.icon(
               icon: Icon(Icons.send),
               label: Text("ElevatedButton"),
@@ -162,7 +162,7 @@ class _SecondPageState extends State<SecondPage> {
             ),
 
             Divider(),
-            SectionHeader.h5(title: "Directionality ElevatedButton"),
+            Header.h5(title: "Directionality ElevatedButton"),
             Directionality(
               textDirection: TextDirection.rtl,
               child: ElevatedButton.icon(
@@ -173,7 +173,7 @@ class _SecondPageState extends State<SecondPage> {
             ),
 
             Divider(),
-            SectionHeader.h5(title: "OutlinedButton"),
+            Header.h5(title: "OutlinedButton"),
             OutlinedButton.icon(
               icon: Icon(Icons.add),
               label: Text("OutlinedButton"),
@@ -192,7 +192,7 @@ class _SecondPageState extends State<SecondPage> {
             ),
 
             Divider(),
-            SectionHeader.h5(title: "TextSelectionToolbarTextButton"),
+            Header.h5(title: "TextSelectionToolbarTextButton"),
             TextSelectionToolbarTextButton(
                 padding: EdgeInsets.all(8),
               onPressed: (){
@@ -202,7 +202,7 @@ class _SecondPageState extends State<SecondPage> {
             ),
 
             Divider(),
-            SectionHeader.h5(title: "TextButton"),
+            Header.h5(title: "TextButton"),
             Row(
               children: [
                 TextButton(
@@ -236,7 +236,7 @@ class _SecondPageState extends State<SecondPage> {
             ),
 
             Divider(),
-            SectionHeader.h5(title: "TextButtonExt"),
+            Header.h5(title: "TextButtonExt"),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -276,7 +276,7 @@ class _SecondPageState extends State<SecondPage> {
             ),
 
             Divider(),
-            SectionHeader.h5(title: "MaterialButton"),
+            Header.h5(title: "MaterialButton"),
             MaterialButton(
               padding: EdgeInsets.all(18),
               minWidth: 0,
@@ -294,7 +294,7 @@ class _SecondPageState extends State<SecondPage> {
             ),
 
             Divider(),
-            SectionHeader.h5(title: "IconButton"),
+            Header.h5(title: "IconButton"),
             IconButton(
               tooltip: '这是一个图标按钮',
               icon: Icon(Icons.person),
@@ -306,11 +306,11 @@ class _SecondPageState extends State<SecondPage> {
             ),
 
             Divider(),
-            SectionHeader.h5(title: "ToggleButtons"),
+            Header.h5(title: "ToggleButtons"),
             buildToggleButtons(),
 
             Divider(),
-            SectionHeader.h5(title: "FloatingActionButton"),
+            Header.h5(title: "FloatingActionButton"),
             FloatingActionButton(
               mini: true,
               backgroundColor: const Color(0xff03dac6),
@@ -333,17 +333,17 @@ class _SecondPageState extends State<SecondPage> {
             ),
 
             Divider(),
-            SectionHeader.h5(title: "DropdownButton"),
+            Header.h5(title: "DropdownButton"),
             _buildDropdownButton(),
 
-            SectionHeader.h5(title: "_buildDropdownButton1"),
+            Header.h5(title: "_buildDropdownButton1"),
             _buildDropdownButton1(),
 
-            SectionHeader.h5(title: "_buildPopupMenuButtonExt"),
+            Header.h5(title: "_buildPopupMenuButtonExt"),
             _buildPopupMenuButtonExt(),
 
             Divider(),
-            SectionHeader.h5(title: "UploadButton"),
+            Header.h5(title: "UploadButton"),
             UploadButton(
               image: Image.asset("images/img_update.png", fit: BoxFit.fill, width: 100, height: 100,),
               deteleImage: Image.asset("images/icon_delete.png", fit: BoxFit.fill, width: 25, height: 25,),
@@ -356,7 +356,7 @@ class _SecondPageState extends State<SecondPage> {
             ),
 
             Divider(),
-            SectionHeader.h5(title: "SpreadArea"),
+            Header.h5(title: "SpreadArea"),
             OutlinedButton(
                 onPressed: () {
                   ddlog("OutlinedButton");
@@ -366,7 +366,7 @@ class _SecondPageState extends State<SecondPage> {
             _buildSpreadArea(),
 
             Divider(),
-            SectionHeader.h5(title: "GestureDetectorContainer"),
+            Header.h5(title: "GestureDetectorContainer"),
             GestureDetectorContainer(
               // edge: EdgeInsets.all(10),
               color: Colors.orange,
@@ -382,11 +382,11 @@ class _SecondPageState extends State<SecondPage> {
             ),
 
             Divider(),
-            SectionHeader.h5(title: "_buildCustomPaint"),
+            Header.h5(title: "_buildCustomPaint"),
             _buildCustomPaint(),
 
             Divider(),
-            SectionHeader.h5(title: "buildCustome"),
+            Header.h5(title: "buildCustome"),
             _buildCustome(),
           ],
         ),
@@ -851,7 +851,7 @@ class _SecondPageState extends State<SecondPage> {
         ),
 
         Divider(),
-        SectionHeader.h5(title: "UIElevatedButton"),
+        Header.h5(title: "UIElevatedButton"),
         UIElevatedButton(
           height: 45,
           width: 200,
@@ -874,11 +874,11 @@ class _SecondPageState extends State<SecondPage> {
         ),
 
         Divider(),
-        SectionHeader.h5(title: "_buildInkWell"),
+        Header.h5(title: "_buildInkWell"),
         _buildInkWell(),
 
         Divider(),
-        SectionHeader.h5(title: "_buildButtonBar"),
+        Header.h5(title: "_buildButtonBar"),
         _buildButtonBar(),
       ],
     );

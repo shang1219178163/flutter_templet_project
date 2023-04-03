@@ -28,8 +28,8 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
   final sizeStart = Size(200, 200);
   final sizeEnd = Size(400, 400);
 
-  final _width = 0.vn;
-  final _height = 0.vn;
+  final _width = 0.0.vn;
+  final _height = 0.0.vn;
   final _alignment = Alignment.topLeft.vn;
   final _color = Colors.lightBlue.vn;
 
@@ -90,8 +90,8 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
         return AnimatedContainer(
           duration: const Duration(seconds: 1),
           curve: Curves.fastOutSlowIn,
-          width: _width.value.toDouble(),
-          height: _height.value.toDouble(),
+          width: _width.value,
+          height: _height.value,
           color: _color.value,
           alignment: _alignment.value,
           onEnd: onEnd,

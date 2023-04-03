@@ -1,7 +1,7 @@
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_box_widget.dart';
+import 'package:flutter_templet_project/basicWidget/n_box.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/decoration_ext.dart';
 
@@ -42,7 +42,7 @@ class _DecorationDemoState extends State<DecorationDemo> {
   }
 
   buildSection1() {
-    final child = NBoxWidget(
+    final child = NBox(
       width: 300,
       height: 200,
       opacity: 1,

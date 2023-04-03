@@ -7,7 +7,7 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_box_widget.dart';
+import 'package:flutter_templet_project/basicWidget/n_box.dart';
 import 'package:flutter_templet_project/uti/R.dart';
 
 class NBoxWidgetDemo extends StatefulWidget {
@@ -119,7 +119,7 @@ class _NBoxWidgetDemoState extends State<NBoxWidgetDemo> {
   }
 
   buildBox() {
-    return NBoxWidget(
+    return NBox(
       // width: 300,
       height: 200,
       opacity: 1,

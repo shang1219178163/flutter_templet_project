@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/section_header.dart';
+import 'package:flutter_templet_project/basicWidget/header.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 
 class FlexDemo extends StatefulWidget {
@@ -25,9 +25,9 @@ class _FlexDemoState extends State<FlexDemo> {
       ),
       body: ListView(
         children: [
-          SectionHeader.h4(title: 'Flex.Horizontal',),
+          Header.h4(title: 'Flex.Horizontal',),
           _buildFlexHorizontal(),
-          SectionHeader.h4(title: 'Flex.Vertical',),
+          Header.h4(title: 'Flex.Vertical',),
           _buildFlexVertical(),
           _buildSection(),
           _buildSection2(),

@@ -1,8 +1,17 @@
+//
+//  SectionHeader.dart
+//  flutter_templet_project
+//
+//  Created by shang on 4/3/23 2:18 PM.
+//  Copyright © 4/3/23 shang. All rights reserved.
+//
+
+
 import 'package:flutter/material.dart';
 
-class SectionHeader extends StatelessWidget{
+class Header extends StatelessWidget{
 
-  const SectionHeader({
+  const Header({
     Key? key,
     this.title = '',
     this.text,
@@ -17,7 +26,7 @@ class SectionHeader extends StatelessWidget{
   final EdgeInsets padding;
   final Alignment alignment;
 
-  SectionHeader.h1({
+  Header.h1({
     Key? key,
     String title = '',
     Text? text,
@@ -33,7 +42,7 @@ class SectionHeader extends StatelessWidget{
       style: style
     );
 
-  SectionHeader.h2({
+  Header.h2({
     Key? key,
     String title = '',
     Text? text,
@@ -49,7 +58,7 @@ class SectionHeader extends StatelessWidget{
     style: style
   );
 
-  SectionHeader.h3({
+  Header.h3({
     Key? key,
     String title = '',
     Text? text,
@@ -65,7 +74,7 @@ class SectionHeader extends StatelessWidget{
     style: style
   );
 
-  SectionHeader.h4({
+  Header.h4({
     Key? key,
     String title = '',
     Text? text,
@@ -81,7 +90,7 @@ class SectionHeader extends StatelessWidget{
     style: style
   );
 
-  SectionHeader.h5({
+  Header.h5({
     Key? key,
     String title = '',
     Text? text,
@@ -97,7 +106,7 @@ class SectionHeader extends StatelessWidget{
     style: style
   );
 
-  SectionHeader.h6({
+  Header.h6({
     Key? key,
     String title = '',
     Text? text,

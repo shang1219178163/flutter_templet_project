@@ -8,7 +8,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/section_header.dart';
+import 'package:flutter_templet_project/basicWidget/header.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 
 class ListTileDemo extends StatefulWidget {
@@ -95,11 +95,11 @@ class _ListTileDemoState extends State<ListTileDemo> {
             _buildRadioGroup(
               header: Container(
                 color: Colors.lightBlue,
-                child: SectionHeader.h5(title: "RadioGroup 性别选择",),
+                child: Header.h5(title: "RadioGroup 性别选择",),
               ),
               footer: Container(
                 color: Colors.lightGreen,
-                child: SectionHeader.h6(title: "RadioGroup 备注信息")
+                child: Header.h6(title: "RadioGroup 备注信息")
               ),
               cb: (value) {
                 sexValue = value;

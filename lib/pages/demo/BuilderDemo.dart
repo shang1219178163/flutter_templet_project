@@ -1,6 +1,6 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/section_header.dart';
+import 'package:flutter_templet_project/basicWidget/header.dart';
 
 class BuilderDemo extends StatefulWidget {
 
@@ -52,7 +52,7 @@ class _BuilderDemoState extends State<BuilderDemo> with TickerProviderStateMixin
   _buildBody() {
     return Column(
       children: [
-        SectionHeader.h5(title: 'AnimatedBuilder'),
+        Header.h5(title: 'AnimatedBuilder'),
         AnimatedBuilder(
           animation: _controller,
           child: _buildBox('AnimatedBuilder'),
@@ -65,13 +65,13 @@ class _BuilderDemoState extends State<BuilderDemo> with TickerProviderStateMixin
         ),
 
         Divider(),
-        SectionHeader.h5(title: 'Builder/约等于 StatelessWidget'),
+        Header.h5(title: 'Builder/约等于 StatelessWidget'),
         Builder(builder: (BuildContext context) {
           return _buildBox('Builder');
         }),
 
         Divider(),
-        SectionHeader.h5(title: 'StatefulBuilder/约等于 StatefulWidget'),
+        Header.h5(title: 'StatefulBuilder/约等于 StatefulWidget'),
         StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
           return _buildBox('StatefulBuilder');
         }),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/section_header.dart';
+import 'package:flutter_templet_project/basicWidget/header.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 
 class WrapDemo extends StatefulWidget {
@@ -31,7 +31,7 @@ class _WrapDemoState extends State<WrapDemo> {
   _buildBody() {
     return Column(
       children: [
-        SectionHeader(title: 'Axis.horizontal'),
+        Header(title: 'Axis.horizontal'),
         Container(
           // height: 200,
           // width: 400,
@@ -47,7 +47,7 @@ class _WrapDemoState extends State<WrapDemo> {
         ),
         
         Divider(),
-        SectionHeader(title: 'Axis.vertical'),
+        Header(title: 'Axis.vertical'),
         Container(
           // height: 200,
           // width: 400,

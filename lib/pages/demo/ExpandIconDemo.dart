@@ -9,7 +9,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/list_view_segment_control.dart';
-import 'package:flutter_templet_project/basicWidget/section_header.dart';
+import 'package:flutter_templet_project/basicWidget/header.dart';
 import 'package:flutter_templet_project/basicWidget/visible_container.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
@@ -72,19 +72,19 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
       ),
       body: ListView(
         children: [
-          SectionHeader.h4(title: "ExpansionTile",),
+          Header.h4(title: "ExpansionTile",),
           buildExpandColorMenu(),
           // Divider(),
-          SectionHeader.h4(title: "ListViewSegmentControl"),
+          Header.h4(title: "ListViewSegmentControl"),
           buildListViewHorizontal(),
           Divider(),
-          SectionHeader.h4(title: "Visibility", ),
+          Header.h4(title: "Visibility", ),
           _buildVisbility(),
           Divider(),
-          SectionHeader.h4(title: "自定义 VisibleContainer",),
+          Header.h4(title: "自定义 VisibleContainer",),
           _buildVisibleContainer(),
           Divider(),
-          SectionHeader.h4(title: "自定义 FoldMenu", ),
+          Header.h4(title: "自定义 FoldMenu", ),
           FoldMenu(
             children: [
               Tuple2(List.generate(8, (index) => "item0_$index"), 0),

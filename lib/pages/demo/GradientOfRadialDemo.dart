@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/section_header.dart';
+import 'package:flutter_templet_project/basicWidget/header.dart';
 import 'package:flutter_templet_project/extension/alignment_ext.dart';
 import 'package:tuple/tuple.dart';
 
@@ -37,7 +37,7 @@ class _GradientOfRadialDemoState extends State<GradientOfRadialDemo> {
         ),
         // body: ListView(
         //   children: [
-        //     SectionHeader.h4(title: 'RadialGradient',),
+        //     Header.h4(title: 'RadialGradient',),
         //     buildRadial(),
         //   ],
         // )

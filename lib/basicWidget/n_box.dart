@@ -7,8 +7,8 @@ import 'package:flutter_templet_project/extension/edge_insets_ext.dart';
 
 
 /// 组件通用外观设置
-class NBoxWidget extends StatelessWidget {
-  NBoxWidget({
+class NBox extends StatelessWidget {
+  NBox({
     Key? key,
     this.title,
     required this.child,
