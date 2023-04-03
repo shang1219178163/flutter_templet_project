@@ -127,8 +127,8 @@ class _SecondPageState extends State<SecondPage> {
             Divider(),
             Header.h5(title:"MaterialButton"),
             MaterialButton(
-              color: Colors.blue.shade400,
-              textColor: Colors.white,
+              // color: Colors.blue.shade400,
+              // textColor: Colors.white,
               onPressed: () => debugPrint("MaterialButton"),
               child: Text("MaterialButton"),
             ),
