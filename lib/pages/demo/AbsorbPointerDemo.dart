@@ -9,7 +9,7 @@
 
 
 import "package:flutter/material.dart";
-import 'package:flutter_templet_project/extension/ddlog.dart';
+
 
 class AbsorbPointerDemo extends StatefulWidget {
   const AbsorbPointerDemo({Key? key}) : super(key: key);
@@ -33,41 +33,8 @@ class _AbsorbPointerDemoState extends State<AbsorbPointerDemo> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          Row(
-            children: <Widget>[
-              Text('不可点击：absorbing: ${_disable}'),
-              Switch(
-                value: _disable,
-                onChanged: (bool val) {
-                  _disable = val;
-                  setState(() {});
-                },
-              )
-            ],
-          ),
-          // Container(
-          //   child: AbsorbPointer(
-          //     absorbing: _disable,
-          //     child: Column(
-          //       children: <Widget>[
-          //         Switch(
-          //           value: _switchValue,
-          //           onChanged: (bool val) {
-          //             _switchValue = val;
-          //             setState(() {});
-          //           },
-          //         ),
-          //         MaterialButton(
-          //           color: Colors.green,
-          //           onPressed: () => onClick('我是按钮'),
-          //           child: Text('我是按钮'),
-          //         ),
-          //         // buildBody1(),
-          //
-          //       ],
-          //     ),
-          //   ),
-          // ),
+          _buildSection1(),
+          // _buildSection2(),
           Divider(),
           _buildAbsorbPointerNew(absorbing: _disable),
           MaterialButton(
@@ -80,7 +47,47 @@ class _AbsorbPointerDemoState extends State<AbsorbPointerDemo> {
     );
   }
 
-  Widget buildBody1() {
+  _buildSection1() {
+    return Row(
+      children: <Widget>[
+        Text('不可点击：absorbing: ${_disable}'),
+        Switch(
+          value: _disable,
+          onChanged: (bool val) {
+            _disable = val;
+            setState(() {});
+          },
+        )
+      ],
+    );
+  }
+
+  _buildSection2() {
+    return Container(
+      child: AbsorbPointer(
+        absorbing: _disable,
+        child: Column(
+          children: <Widget>[
+            Switch(
+              value: _switchValue,
+              onChanged: (bool val) {
+                _switchValue = val;
+                setState(() {});
+              },
+            ),
+            MaterialButton(
+              color: Colors.green,
+              onPressed: () => onClick('我是按钮'),
+              child: Text('我是按钮'),
+            ),
+            _buildSection3(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSection3() {
     return Container(
       height: 200,
       width: 200,
@@ -139,6 +146,7 @@ class _AbsorbPointerDemoState extends State<AbsorbPointerDemo> {
       ),
     );
   }
+
   /// 默认吸收事件，拦截事件
   _buildAbsorbPointer({bool absorbing = true}) {
     return Listener(
