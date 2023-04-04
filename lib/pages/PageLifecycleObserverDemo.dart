@@ -4,7 +4,7 @@ class PageLifecycleObserverDemo extends StatefulWidget {
 
   const PageLifecycleObserverDemo({
     Key? key, 
-    this.title
+    this.title,
   }) : super(key: key);
 
   final String? title;
@@ -16,22 +16,30 @@ class PageLifecycleObserverDemo extends StatefulWidget {
 class _PageLifecycleObserverDemoState extends State<PageLifecycleObserverDemo> with WidgetsBindingObserver{
 
   @override
+  void dispose() {
+    super.dispose();
+    debugPrint('$widget dispose');
+    WidgetsBinding.instance.removeObserver(this); //添加观察者
+  }
+
+  @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this); //添加观察者
   }
 
+  //可以获取 widget 最新属性值和之前的属性值
   @override
-  void dispose() {
-    super.dispose();
-    debugPrint('YM--------dispose');
-    WidgetsBinding.instance.removeObserver(this); //添加观察者
+  void didUpdateWidget(PageLifecycleObserverDemo oldWidget){
+    super.didUpdateWidget(oldWidget);
+    debugPrint("$widget didUpdateWidget:${widget.title}");
   }
 
 
   @override
   Widget build(BuildContext context) {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
+    debugPrint("$widget build");
 
     return Scaffold(
       appBar: AppBar(
@@ -43,7 +51,7 @@ class _PageLifecycleObserverDemoState extends State<PageLifecycleObserverDemo> w
           ),)
         ).toList(),
       ),
-      body: Text(arguments.toString())
+      body: Text(arguments.toString(),)
     );
   }
 
@@ -77,21 +85,21 @@ class _PageLifecycleObserverDemoState extends State<PageLifecycleObserverDemo> w
   @override
   void didChangeAccessibilityFeatures() {
     super.didChangeAccessibilityFeatures();
-    debugPrint("YM-----@@@@@@@@@ didChangeAccessibilityFeatures");
+    debugPrint("$widget didChangeAccessibilityFeatures");
   }
 
   ///低内存回调
   @override
   void didHaveMemoryPressure() {
     super.didHaveMemoryPressure();
-    debugPrint("YM-----@@@@@@@@@ didHaveMemoryPressure");
+    debugPrint("$widget didHaveMemoryPressure");
   }
 
   ///用户本地设置变化时调用，如系统语言改变
   @override
   void didChangeLocales(List<Locale>? locales) {
     super.didChangeLocales(locales);
-    debugPrint("YM-----@@@@@@@@@ didChangeLocales");
+    debugPrint("$widget didChangeLocales");
   }
 
   ///应用尺寸改变时回调，例如旋转
@@ -99,32 +107,32 @@ class _PageLifecycleObserverDemoState extends State<PageLifecycleObserverDemo> w
   void didChangeMetrics() {
     super.didChangeMetrics();
     var size = WidgetsBinding.instance.window.physicalSize;
-    debugPrint("YM-----@@@@@@@@@ didChangeMetrics  ：宽：${size.width} 高：${size.height}");
+    debugPrint("$widget didChangeMetrics  ：宽：${size.width} 高：${size.height}");
   }
 
 
   @override
   Future<bool> didPopRoute() {
-    debugPrint('YM--------didPopRoute');//页面弹出
+    debugPrint('$widget didPopRoute');//页面弹出
     return Future.value(false);//true为拦截，false不拦截
   }
 
   @override
   Future<bool> didPushRoute(String route) {
-    debugPrint('YM--------PushRoute');
+    debugPrint('$widget PushRoute');
     return Future.value(true);
   }
 
   @override
   Future<bool> didPushRouteInformation(RouteInformation routeInformation) {
-    debugPrint('YM--------didPushRouteInformation');
+    debugPrint('$widget didPushRouteInformation');
     return Future.value(true);
   }
 
   //文字大小改变时候的监听
   @override
   void didChangeTextScaleFactor() {
-    debugPrint("YM--------@@@@@@@@@ didChangeTextScaleFactor  ：${WidgetsBinding.instance.window.textScaleFactor}");
+    debugPrint("$widget didChangeTextScaleFactor：${WidgetsBinding.instance.window.textScaleFactor}");
   }
 
   @override
@@ -133,7 +141,7 @@ class _PageLifecycleObserverDemoState extends State<PageLifecycleObserverDemo> w
     final brightness = window.platformBrightness;
     // Brightness.light 亮色
     // Brightness.dark 暗色
-    debugPrint('YM----平台主题改变----didChangePlatformBrightness$brightness');
+    debugPrint('$widget didChangePlatformBrightness$brightness');
     // window.onPlatformBrightnessChanged = () {
     //   // This callback gets invoked every time brightness changes
     //   final brightness = window.platformBrightness;

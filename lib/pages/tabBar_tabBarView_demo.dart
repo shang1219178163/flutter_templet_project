@@ -455,6 +455,7 @@ var specials = [
   Tuple2(APPRouter.operatorDemo, "特殊操作符", ),
   Tuple2(APPRouter.mediaQueryDemo, "mediaQuery", ),
   Tuple2(APPRouter.pageLifecycleObserverDemo, "页面生命周期监听", ),
+  Tuple2(APPRouter.pageLifecycleFuncTest, "页面生命方法测试", ),
   Tuple2(APPRouter.systemIconsPage, "flutter 系统 Icons", ),
   Tuple2(APPRouter.systemColorPage, "flutter 系统 颜色", ),
   Tuple2(APPRouter.localImagePage, "本地图片", ),

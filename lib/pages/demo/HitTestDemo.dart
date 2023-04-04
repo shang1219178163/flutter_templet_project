@@ -22,7 +22,7 @@ class HitTest extends StatelessWidget {
       appBar: AppBar(
         title: Text('Hit Test'),
       ),
-      body: _buildBody1(),
+      body: _buildBody(),
     );
   }
 
@@ -41,9 +41,13 @@ class HitTest extends StatelessWidget {
               height: 100,
               width: 100,
               child: GestureDetector(
-                onTap: () => ddlog("I'm hit! I'm hit!"),
+                onTap: () => debugPrint("I'm hit! I'm hit!"),
                 child: ExpandedHitTestArea(
-                  child: Container(width: 60, height: 40, color: Colors.red),
+                  child: Container(
+                    width: 120,
+                    height: 110,
+                    color: Colors.red
+                  ),
                 ),
               ),
             ),
@@ -57,13 +61,11 @@ class HitTest extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   GestureDetector(
-                    onTap: () => ddlog("Tapped"),
+                    onTap: () => debugPrint("Tapped"),
                     child: ExpandedHitTestArea(child: Text("<")),
                   ),
                   SizedBox(height: 20),
                   Text("Title"),
-
-
                 ],
               ),
             ),
@@ -84,7 +86,7 @@ class HitTest extends StatelessWidget {
         },
         child: Container(
           height: 50,
-          width: 100,
+          width: 200,
           color: Colors.yellow,
           padding: EdgeInsets.symmetric(horizontal: 25),
           child: OutlinedButton(

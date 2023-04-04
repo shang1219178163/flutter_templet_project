@@ -6,6 +6,7 @@ import 'package:flutter_templet_project/basicWidget/TreeNode/NTreeDemo.dart';
 import 'package:flutter_templet_project/basicWidget/drag_destination_view.dart';
 import 'package:flutter_templet_project/basicWidget/responsive_column.dart';
 import 'package:flutter_templet_project/pages/DataTypeDemo.dart';
+import 'package:flutter_templet_project/pages/PageLifecycleFuncTest.dart';
 import 'package:flutter_templet_project/pages/ReflectDemo.dart';
 import 'package:flutter_templet_project/pages/PageLifecycleObserverDemo.dart';
 import 'package:flutter_templet_project/pages/RegExpDemo.dart';
@@ -251,6 +252,7 @@ class APPRouter {
 
   static const ReflectDemo = '/moldelReflectDemo';
   static const pageLifecycleObserverDemo = '/pageLifecycleObserverDemo';
+  static const pageLifecycleFuncTest = '/pageLifecycleFuncTest';
   static const mediaQueryDemo = '/mediaQueryDemo';
   static const tabBarDemo = '/TabBarDemo';
   static const tabBarDemoNew = '/TabBarDemoNew';
@@ -546,6 +548,8 @@ class AppPage {
 
     GetPage(name: APPRouter.ReflectDemo, page: () => ReflectDemo(),),
     GetPage(name: APPRouter.pageLifecycleObserverDemo, page: () => PageLifecycleObserverDemo(),),
+    GetPage(name: APPRouter.pageLifecycleFuncTest, page: () => PageLifecycleFuncTest(),),
+
 
     GetPage(name: APPRouter.mediaQueryDemo, page: () => MediaQueryDemo(),),
     GetPage(name: APPRouter.tabBarDemo, page: () => TabBarDemo(),),
