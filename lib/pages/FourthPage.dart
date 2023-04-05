@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/APPThemeSettings.dart';
 import 'package:flutter_templet_project/basicWidget/header.dart';
 import 'package:flutter_templet_project/extension/decoration_ext.dart';
-import 'package:get/get.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
 
 class FourthPage extends StatelessWidget {
   const FourthPage({Key? key}) : super(key: key);

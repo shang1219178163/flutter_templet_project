@@ -14,9 +14,8 @@ class WechatAssetsPickerDemo extends StatefulWidget {
 
 class _WechatAssetsPickerDemoState extends State<WechatAssetsPickerDemo> {
 
-  List<AssetEntity> selectedAssets = [];
-
   int maxCount = 9;
+  var selectedAssets = <AssetEntity>[];
 
   @override
   void initState() {
@@ -123,9 +122,9 @@ class WechatPhotoPickerDemo extends StatefulWidget {
 class _WechatPhotoPickerDemoState extends State<WechatPhotoPickerDemo> {
 
   int maxCount = 9;
-  List<AssetEntity> selectedAssets = [];
+  var selectedAssets = <AssetEntity>[];
 
-  final GlobalKey<WechatPhotoPickerState> _globalKey = GlobalKey(debugLabel: 'WechatPhotoPickerState');
+  final _globalKey = GlobalKey<WechatPhotoPickerState>(debugLabel: 'WechatPhotoPickerState');
 
   @override
   Widget build(BuildContext context) {
