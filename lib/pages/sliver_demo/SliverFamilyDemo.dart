@@ -65,7 +65,8 @@ class _SliverFamilyDemoState extends State<SliverFamilyDemo> {
             subtitle: Text(e.item2),
             trailing: Icon(Icons.arrow_forward_ios_rounded, color: Colors.grey.withOpacity(0.5)),
             onTap: (){
-              Navigator.of(context).push(MaterialPageRoute(
+              Navigator.of(context).push(
+                MaterialPageRoute(
                   builder: (context) {
                     return e.item3;
                   }
