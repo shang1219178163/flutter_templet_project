@@ -27,12 +27,11 @@ class ConnectivityService {
 
   factory ConnectivityService() => _instance;
 
-  static ConnectivityService get instance => _instance;
-
+  // static ConnectivityService get instance => _instance;
 
   final Connectivity _connectivity = Connectivity();
 
-  final List<NetConnectivityListener> listeners = [];
+  final listeners = <NetConnectivityListener>[];
   /// 网络当前状态(wifi, mobile, none); 可通过 ValueListenableBuilder 监听网络状态改变
   final netState = ValueNotifier<ConnectivityResult>(ConnectivityResult.mobile);
   /// 是否联网; 可通过 ValueListenableBuilder 监听网络状态改变
@@ -63,8 +62,8 @@ class ConnectivityService {
 mixin NetConnectivityMixin<T extends StatefulWidget> on State<T> {
   @override
   void initState() {
-    ConnectivityService.instance.removeListener(connectivityListener);
-    ConnectivityService.instance.addListener(connectivityListener);
+    ConnectivityService().removeListener(connectivityListener);
+    ConnectivityService().addListener(connectivityListener);
 
     super.initState();
   }
@@ -73,7 +72,7 @@ mixin NetConnectivityMixin<T extends StatefulWidget> on State<T> {
 
   @override
   void dispose() {
-    ConnectivityService.instance.removeListener(connectivityListener);
+    ConnectivityService().removeListener(connectivityListener);
 
     super.dispose();
   }
