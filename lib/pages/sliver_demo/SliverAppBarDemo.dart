@@ -13,6 +13,15 @@ class _SliverAppBarDemoState extends State<SliverAppBarDemo>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // appBar: AppBar(
+      //   title: Text("$widget"),
+      //   actions: ['done',].map((e) => TextButton(
+      //     onPressed: () => debugPrint(e.toString()),
+      //     child: Text(e,
+      //       style: TextStyle(color: Colors.white),
+      //     ),
+      //   )).toList(),
+      // ),
       body: createExample2(),
     );
   }
@@ -40,6 +49,12 @@ class _SliverAppBarDemoState extends State<SliverAppBarDemo>
               // StretchMode.zoomBackground
             ],
           ),
+          actions: ['done',].map((e) => TextButton(
+            onPressed: () => debugPrint(e.toString()),
+            child: Text(e,
+              style: TextStyle(color: Colors.white),
+            ),
+          )).toList(),
         ),
         SliverList(
           delegate: SliverChildBuilderDelegate((context, index) {

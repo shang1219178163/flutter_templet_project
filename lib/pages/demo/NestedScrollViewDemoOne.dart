@@ -9,6 +9,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_sliver_persistent_header_delegate.dart';
+import 'package:flutter_templet_project/basicWidget/tab_bar_indicator_fixed.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/uti/R.dart';
 
@@ -55,6 +56,7 @@ class _NestedScrollViewDemoOneState extends State<NestedScrollViewDemoOne> with 
 
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         title: Text(widget.title ?? "$widget"),
         actions: ['done',].map((e) => TextButton(
           onPressed: onPressed,
@@ -77,7 +79,7 @@ class _NestedScrollViewDemoOneState extends State<NestedScrollViewDemoOne> with 
       headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
         return <Widget>[
           // buildSliverAppBar(),
-          buildNNSliverPersistentHeader(),
+          buildNSliverPersistentHeader(),
           // buildSliverPersistentHeader(),
         ];
       },
@@ -121,8 +123,8 @@ class _NestedScrollViewDemoOneState extends State<NestedScrollViewDemoOne> with 
     );
   }
 
-  buildNNSliverPersistentHeader() {
-    return NNSliverPersistentHeader(
+  buildNSliverPersistentHeader() {
+    return NSliverPersistentHeader(
       pinned: true,
       builder: (ctx, offset, overlapsContent) {
         return ColoredBox(
@@ -156,13 +158,14 @@ class _NestedScrollViewDemoOneState extends State<NestedScrollViewDemoOne> with 
       indicatorSize: indicatorSize,
       // labelPadding: EdgeInsets.symmetric(horizontal: 12),
       // indicatorPadding: EdgeInsets.only(left: 8, right: 8),
-      indicator: UnderlineTabIndicator(
-        borderSide: BorderSide(
-          style: BorderStyle.solid,
-          width: 4,
-          color: Colors.red,
-        )
-      ),
+      // indicator: UnderlineTabIndicator(
+      //   borderSide: BorderSide(
+      //     style: BorderStyle.solid,
+      //     width: 4,
+      //     color: Colors.red,
+      //   )
+      // ),
+      indicator: TabBarIndicatorFixed(),
       tabs: items.map((e) => Tab(
         child: ValueListenableBuilder<int>(
           valueListenable: indexVN,

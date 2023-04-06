@@ -53,7 +53,7 @@ class _NSliverPersistentHeaderDemoState extends State<NSliverPersistentHeaderDem
         Container(
           child: Text("arguments.toString()")
         ).toSliverToBoxAdapter(),
-        NNSliverPersistentHeader(
+        NSliverPersistentHeader(
           builder: (context, offset, overlapsContent){
             return Container(
               decoration: BoxDecoration(

@@ -76,17 +76,13 @@ class _SliverAppBarDemoOneState extends State<SliverAppBarDemoOne> with SingleTi
                 snap: false,
                 primary: true,
                 expandedHeight: 300,
-
                 elevation: 10,
                 //是否显示阴影，直接取值innerBoxIsScrolled，展开不显示阴影，合并后会显示
                 forceElevated: innerBoxIsScrolled,
-
                 actions: <Widget>[
                   IconButton(
                     icon: Icon(Icons.more_horiz),
-                    onPressed: () {
-                      debugPrint("更多");
-                    },
+                    onPressed: () => debugPrint("更多"),
                   ),
                 ],
 

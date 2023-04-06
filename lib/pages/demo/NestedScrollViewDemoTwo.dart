@@ -55,6 +55,7 @@ class _NestedScrollViewDemoTwoState extends State<NestedScrollViewDemoTwo> with 
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         title: Text(widget.title ?? "$widget"),
         actions: ['done',].map((e) => TextButton(
           onPressed: onPressed,

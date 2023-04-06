@@ -43,9 +43,9 @@ class NSliverPersistentHeaderDelegate extends SliverPersistentHeaderDelegate {
 }
 
 /// SliverPersistentHeader
-class NNSliverPersistentHeader extends StatelessWidget {
+class NSliverPersistentHeader extends StatelessWidget {
 
-  const NNSliverPersistentHeader({
+  const NSliverPersistentHeader({
   	Key? key,
   	this.title,
     this.pinned = true,
