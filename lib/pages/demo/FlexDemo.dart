@@ -1,3 +1,5 @@
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/header.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
@@ -29,8 +31,12 @@ class _FlexDemoState extends State<FlexDemo> {
           _buildFlexHorizontal(),
           Header.h4(title: 'Flex.Vertical',),
           _buildFlexVertical(),
+          Header.h4(title: '_buildSection',),
           _buildSection(),
+          Header.h4(title: '_buildSection2',),
           _buildSection2(),
+          Header.h4(title: '_buildSection3',),
+          _buildSection3(),
         ]
       )
     );
@@ -53,7 +59,7 @@ class _FlexDemoState extends State<FlexDemo> {
             flex: 2,
             child: Column(
               children: <Widget>[
-                Text("This is a long text this is a long test this is This is a long text this is a long test this is This is a long text this is a long test this is This is a long text this is a long test this is This is a long text this is a long test this is This is a long text this is a long test this is ")
+                Text("This is a long text this is a long test"*5)
               ],
             ),
           )
@@ -114,16 +120,47 @@ class _FlexDemoState extends State<FlexDemo> {
         Row(
           children:[
             buildFlexible(),
+            SizedBox(width: 18,),
             buildFlexible(),
           ],
         ),
         Row(
           children:[
             buildExpanded(),
-            buildFlexibleTight(),
+            buildFlexible(fit: FlexFit.tight),
           ],
         ),
       ],
+    );
+  }
+
+
+  _buildSection3() {
+    return Container(
+      color: Colors.greenAccent,
+      child: Row(
+        children: <Widget>[
+          Column(
+            children: <Widget>[
+              Text("Hello World"),
+              ElevatedButton(
+                onPressed: () => debugPrint("OutlinedButton"),
+                child: Text("OutlinedButton")
+              ),
+            ],
+          ),
+          Expanded(
+            child: Container(
+              color: Colors.red,
+              child: Column(
+                children: <Widget>[
+                  Text("占满剩余可用空间"),
+                ],
+              ),
+            ),
+          )
+        ],
+      ),
     );
   }
 
@@ -136,21 +173,12 @@ class _FlexDemoState extends State<FlexDemo> {
     );
   }
 
-  buildFlexible() {
+  buildFlexible({fit = FlexFit.loose}) {
     return Flexible(
+      fit: fit,
       child: Container(
         color: Colors.yellowAccent,
-        child: Text("Flexible"),
-      ),
-    );
-  }
-
-  buildFlexibleTight() {
-    return Flexible(
-      fit: FlexFit.tight,
-      child: Container(
-        color: Colors.yellowAccent,
-        child: Text("Flexible - FlexFit.tight"),
+        child: Text("Flexible - ${fit.toString().split(".").last}"),
       ),
     );
   }
