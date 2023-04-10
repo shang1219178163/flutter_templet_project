@@ -7,6 +7,8 @@
 //
 
 
+// import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter_templet_project/basicWidget/NNet/NNetContainer.dart';
@@ -20,24 +22,31 @@ class NNetContainerListView<T> extends StatefulWidget {
     Key? key,
     this.title,
     required this.onRequest,
+    required this.onRequestError,
     this.pageSize = 30,
     this.pageInitial = 1,
     required this.itemBuilder,
     this.separatorBuilder,
     this.emptyBuilder,
     this.errorBuilder,
+    this.cachedChild,
   }) : super(key: key);
 
 
   String? title;
+  /// 子视图
   Widget? child;
+  /// 刷新页面不变的部分,
   Widget? cachedChild;
-
+  /// 每页数量
   int pageSize;
-
+  /// 页面初始索引
   int pageInitial;
 
-  Future<List<T>> Function(bool isRefesh, int page, int pageSize, T? last) onRequest;
+  /// 请求方法
+  Future<List<T>> Function(bool isRefesh, int page, int pageSize, T? last,) onRequest;
+  /// 请求错误方法
+  Function(Object error, StackTrace stack) onRequestError;
 
   TransitionBuilder? emptyBuilder;
 
@@ -76,6 +85,9 @@ class NNetContainerListViewState<T> extends State<NNetContainerListView<T>> {
     widget.onRequest(true, page, widget.pageSize, null).then((value) {
       _items.value = value;
       // setState(() {});
+    }).catchError((error, stackTrace) {
+      // although `throw SecondError()` has the same effect.
+      widget.onRequestError;
     });
 
     super.initState();
