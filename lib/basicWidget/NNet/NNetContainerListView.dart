@@ -83,11 +83,10 @@ class NNetContainerListViewState<T> extends State<NNetContainerListView<T>> {
 
   @override
   Widget build(BuildContext context) {
-    // return _buildNetListen();
-    return _buildNetListenOne();
+    return _buildNetListen();
   }
 
-  _buildNetListenOne() {
+  _buildNetListen() {
     return NNetContainer<List<T>>(
       valueListenable: _items,
       builder: (context, value, child) {
@@ -125,7 +124,9 @@ class NNetContainerListViewState<T> extends State<NNetContainerListView<T>> {
         _controller?.finishRefresh();
       },
       onLoad: () async {
-        if (!mounted) { return; }
+        if (!mounted) {
+          return;
+        }
         page += 1;
         final models = await widget.onRequest(false, page, widget.pageSize, _items.value.last);
         _items.value = [..._items.value, ...models];
@@ -142,7 +143,7 @@ class NNetContainerListViewState<T> extends State<NNetContainerListView<T>> {
     return ListView.separated(
       itemCount: items.length,
       itemBuilder: (context, index) => widget.itemBuilder(context, index, items[index]),
-      separatorBuilder: (context, index) {
+      separatorBuilder: widget.separatorBuilder ?? (context, index) {
         return Divider(color: Colors.red,);
       },
     );

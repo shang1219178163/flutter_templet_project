@@ -56,6 +56,7 @@ class _NNetState extends State<NNet> {
   Widget build(BuildContext context) {
     return ValueListenableBuilder<bool>(
       valueListenable: ConnectivityService().onLine,
+      child: widget.cachedChild,
       builder: (context, value, child) {
         debugPrint('ValueListenableBuilder: $value');
         if (!value) {
@@ -63,7 +64,6 @@ class _NNetState extends State<NNet> {
         }
         return widget.childBuilder(context, child);
       },
-      child: widget.cachedChild,
     );
   }
 
