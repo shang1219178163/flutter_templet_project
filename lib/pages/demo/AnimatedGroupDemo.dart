@@ -64,6 +64,12 @@ class _AnimatedGroupDemoState extends State<AnimatedGroupDemo> {
             Container(
               width: 300,
               height: 300,
+              decoration: BoxDecoration(
+                color: Colors.black.withOpacity(0.1),
+                border: Border.all(
+                  color: Colors.black.withOpacity(0.5),
+                )
+              ),
               child: AnimatedGroup(
                 key: _globalKey,
                 duration: Duration(milliseconds: 2000),
@@ -88,13 +94,12 @@ class _AnimatedGroupDemoState extends State<AnimatedGroupDemo> {
                     ],
                   );
                 },
-                child: Text("AnimatedGroup 混合动画", style: TextStyle(color: Colors.white, backgroundColor: Colors.green),),
-              ),
-              decoration: BoxDecoration(
-                color: Colors.black.withOpacity(0.1),
-                border: Border.all(
-                  color: Colors.black.withOpacity(0.5),
-                )
+                child: Text("AnimatedGroup 混合动画",
+                  style: TextStyle(
+                    color: Colors.white,
+                    backgroundColor: Colors.green
+                  ),
+                ),
               ),
             )
           ],

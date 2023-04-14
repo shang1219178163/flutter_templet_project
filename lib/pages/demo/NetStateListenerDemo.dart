@@ -7,6 +7,7 @@
 //
 
 import 'package:connectivity/connectivity.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/NNet/NNet.dart';
 import 'package:flutter_templet_project/basicWidget/NNet/NNetContainerListView.dart';
@@ -76,6 +77,9 @@ class _NetStateListenerDemoState extends State<NetStateListenerDemo> {
                   final result = List<String>.generate(3, (i) => 'page_${page}_pageSize_${pageSize}_Item_$i');
                   return Future.value(result);
                 });
+              },
+              onRequestError: (error, stackTree) {
+                debugPrint(error.toString());
               },
               itemBuilder: (BuildContext context, int index, data) {
                 return ListTile(

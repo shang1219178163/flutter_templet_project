@@ -3,8 +3,8 @@
 # 遇到不会解决的规则，可以在该网站找到解决方式：https://dart-lang.github.io/linter/lints/
 
 analyzer:
-  exclude:
-    - lib/pages/material_tab/widgets/extended_scaffold.dart
+#  exclude:
+#    - lib/pages/material_tab/widgets/extended_scaffold.dart
 
   errors:
     sort_constructors_first: ignore # 将构造函数声明排序在其他成员之前。

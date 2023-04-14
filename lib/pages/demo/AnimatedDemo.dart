@@ -262,11 +262,8 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
 
           OutlinedButton(
             onPressed: () {
-              ddlog("AnimatedSwitcher");
-
-              setState(() {
-                _count += 1;
-              });
+              _count += 1;
+              setState(() {});
             },
             child: Text('+1',),
           ),
