@@ -39,6 +39,10 @@ extension WidgetExt on Widget {
     child: this,
   );
 
+  ColoredBox toColoredBox({
+    Color color = Colors.green,
+  }) => ColoredBox(color: color, child: this,);
+
   toShowCupertinoDialog({
     required BuildContext context,
     String? barrierLabel,

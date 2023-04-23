@@ -443,6 +443,9 @@ var list = [
   Tuple2(APPRouter.nnsliverPersistentHeaderDemo, "nnsliverPersistentHeaderDemo", ),
   Tuple2(APPRouter.nestedScrollViewDemoOne, "nestedScrollViewDemoOne", ),
   Tuple2(APPRouter.nestedScrollViewDemoTwo, "nestedScrollViewDemoTwo", ),
+  Tuple2(APPRouter.expansionTileCard, "expansionTileCard", ),
+
+
 
 ];
 
@@ -558,6 +561,7 @@ var vendors = [
   Tuple2(APPRouter.wechatAssetsPickerDemo, "微信相册选择器", ),
   Tuple2(APPRouter.wechatPhotoPickerDemo, "微信相册选择器组件封装", ),
   Tuple2(APPRouter.dottedBorderDemo, "dottedBorder边框线", ),
+  Tuple2(APPRouter.azlistviewDemo, "分组列表", ),
 
 ];
 

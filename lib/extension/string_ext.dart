@@ -34,6 +34,12 @@ extension StringExt on String{
   /// 本地图片路径
   String get toSvg => "images/$this.svg";
 
+  /// 图片名称转 AssetImage
+  AssetImage toAssetImage({AssetBundle? bundle, String? package,}) => AssetImage("images/$this",
+      bundle: bundle,
+      package: package
+  );
+
   /// 返回 png 图片的 AssetImage
   AssetImage toPngAssetImage({String? package}) => AssetImage('images/$this.png', package: package);
   /// 返回 jpg 图片的 AssetImage

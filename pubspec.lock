@@ -50,6 +50,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.1.0"
+  azlistview:
+    dependency: "direct main"
+    description:
+      name: azlistview
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.0.0"
   badges:
     dependency: "direct main"
     description:
@@ -197,6 +204,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.2.1"
+  common_utils:
+    dependency: "direct main"
+    description:
+      name: common_utils
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.1.0"
   connectivity:
     dependency: "direct main"
     description:
@@ -281,6 +295,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.2.5"
+  decimal:
+    dependency: transitive
+    description:
+      name: decimal
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.3.2"
   desktop_drop:
     dependency: "direct main"
     description:
@@ -529,6 +550,15 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.1.1"
+  github_language_colors:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: b4f88207ebc0c5dcc8baa1676a0fd7796974173a
+      url: "git@github.com:Sky24n/github_language_colors.git"
+    source: git
+    version: "2.0.0"
   glob:
     dependency: transitive
     description:
@@ -648,6 +678,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.1.0"
+  lpinyin:
+    dependency: "direct main"
+    description:
+      name: lpinyin
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.0.3"
   matcher:
     dependency: transitive
     description:
@@ -886,6 +923,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "4.0.0"
+  rational:
+    dependency: transitive
+    description:
+      name: rational
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.2.2"
   rxdart:
     dependency: "direct main"
     description:
@@ -900,6 +944,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.9.1"
+  scrollable_positioned_list:
+    dependency: transitive
+    description:
+      name: scrollable_positioned_list
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.2.3"
   share:
     dependency: "direct main"
     description:

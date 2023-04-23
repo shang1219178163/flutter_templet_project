@@ -126,6 +126,7 @@ import 'package:flutter_templet_project/vendor/SkeletonDemo.dart';
 import 'package:flutter_templet_project/vendor/TextlessDemo.dart';
 import 'package:flutter_templet_project/vendor/VisibilityDetectorDemo.dart';
 import 'package:flutter_templet_project/vendor/aesthetic_dialogs_demo.dart';
+import 'package:flutter_templet_project/vendor/azlistview/azlistview_demo.dart';
 import 'package:flutter_templet_project/vendor/badges_demo.dart';
 import 'package:flutter_templet_project/vendor/color_converter_demo.dart';
 import 'package:flutter_templet_project/vendor/custom_timer_demo.dart';
@@ -494,6 +495,8 @@ class APPRouter {
   static const testFunction = '/testFunction';
   static const nSkeletonDemo = '/nSkeletonDemo';
   static const nTreeDemo = '/nTreeDemo';
+  static const azlistviewDemo = '/azlistviewDemo';
+  static const expansionTileCard = '/expansionTileCard';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -775,6 +778,8 @@ class AppPage {
     GetPage(name: APPRouter.testFunction, page: () => TestFunction(),),
     GetPage(name: APPRouter.nSkeletonDemo, page: () => NSkeletonDemo(),),
     GetPage(name: APPRouter.nTreeDemo, page: () => NTreeDemo(),),
+    GetPage(name: APPRouter.azlistviewDemo, page: () => AzlistviewDemo(),),
+    GetPage(name: APPRouter.expansionTileCard, page: () => ExpansionTileCard(),),
 
 
   ];

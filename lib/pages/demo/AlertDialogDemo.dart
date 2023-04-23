@@ -298,8 +298,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
             barrierDismissible: true,
             barrierLabel: 'barrierLabel',
             transitionDuration: Duration(milliseconds: 200),
-            pageBuilder: (BuildContext context, Animation<double> animation,
-                Animation<double> secondaryAnimation) {
+            pageBuilder: (context, animation, secondaryAnimation) {
               return Center(
                 child: Container(
                   height: 300,

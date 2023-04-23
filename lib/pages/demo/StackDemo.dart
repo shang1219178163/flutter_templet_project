@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/extension/widget_ext.dart';
 
 class StackDemo extends StatefulWidget {
 
@@ -22,7 +23,12 @@ class _StackDemoState extends State<StackDemo> {
         appBar: AppBar(
           title: Text(widget.title ?? "$widget"),
         ),
-        body: _buildSection(),
+        body: Column(
+          children: [
+            _buildSection(),
+            buildSection1(),
+          ],
+        ),
     );
   }
 
@@ -59,5 +65,31 @@ class _StackDemoState extends State<StackDemo> {
         ],
       ),
     );
+  }
+
+  buildSection1() {
+    return Stack(
+      children: [
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(width: 150, height: 150, color: Colors.yellow),
+            Container(width: 150, height: 28, color: Colors.transparent),
+          ],
+        ),
+        Positioned(
+          right: 0,
+          left: 0,
+          bottom: 0,
+          child: FloatingActionButton(
+            child: Icon(Icons.add),
+            onPressed: () {
+              debugPrint('FAB tapped!');
+            },
+            backgroundColor: Colors.blueGrey,
+          ),
+        ),
+      ],
+    ).toColoredBox();
   }
 }

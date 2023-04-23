@@ -10,9 +10,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/list_view_segment_control.dart';
 import 'package:flutter_templet_project/basicWidget/header.dart';
+import 'package:flutter_templet_project/basicWidget/n_expansion_tile.dart';
 import 'package:flutter_templet_project/basicWidget/visible_container.dart';
+import 'package:flutter_templet_project/extension/change_notifier_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
+import 'package:flutter_templet_project/extension/widget_ext.dart';
+import 'package:flutter_templet_project/extension/change_notifier_ext.dart';
+
 
 import 'package:tuple/tuple.dart';
 
@@ -64,7 +69,10 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
 
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
+    dynamic arguments = ModalRoute
+        .of(context)!
+        .settings
+        .arguments;
 
     return Scaffold(
       appBar: AppBar(
@@ -78,13 +86,13 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
           Header.h4(title: "ListViewSegmentControl"),
           buildListViewHorizontal(),
           Divider(),
-          Header.h4(title: "Visibility", ),
+          Header.h4(title: "Visibility",),
           _buildVisbility(),
           Divider(),
           Header.h4(title: "自定义 VisibleContainer",),
           _buildVisibleContainer(),
           Divider(),
-          Header.h4(title: "自定义 FoldMenu", ),
+          Header.h4(title: "自定义 FoldMenu",),
           FoldMenu(
             children: [
               Tuple2(List.generate(8, (index) => "item0_$index"), 0),
@@ -95,7 +103,7 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
             ],
             foldCount: 3,
             isVisible: _isVisible,
-            onValueChanged: (row, index, indexs){
+            onValueChanged: (row, index, indexs) {
               ddlog("$row, $index, $indexs");
             },
           )
@@ -107,7 +115,7 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
   /// 颜色扩展菜单
   Widget buildExpandColorMenu() {
     return Theme(
-        data: ThemeData(
+      data: ThemeData(
         dividerColor: Colors.transparent,
       ),
       child: ExpansionTile(
@@ -131,7 +139,8 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
                     width: 40,
                     height: 40,
                     color: e,
-                    child: selectedColor.value == e ? Icon(Icons.done, color: Colors.white,) : null,
+                    child: selectedColor.value == e ? Icon(
+                      Icons.done, color: Colors.white,) : null,
                   ),
                 );
               }).toList(),
@@ -148,86 +157,93 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
     var itemWiths = <double>[60, 70, 80, 90, 100, 110, 120, 130];
 
     return ListViewSegmentControl(
-      items: items,
-      // itemWidths: itemWiths,
-      selectedIndex: 0,
-      onValueChanged: (index){
-        ddlog(index);
-      });
+        items: items,
+        // itemWidths: itemWiths,
+        selectedIndex: 0,
+        onValueChanged: (index) {
+          ddlog(index);
+        });
   }
 
   bool _isShowing = true;
+
   _buildVisbility() {
     return Container(
       color: Colors.green,
       child: Column(
-        children: [
-          SizedBox(height:5),
-          buildListViewHorizontal(),
-          Visibility(
-            visible: _isShowing,
-            child:
+          children: [
+            SizedBox(height: 5),
+            buildListViewHorizontal(),
+            Visibility(
+              visible: _isShowing,
+              child:
               Column(
-                children: [
-                  SizedBox(height: 5),
-                  buildListViewHorizontal(titles: List.generate(8, (index) => "item4_$index")),
-                  SizedBox(height: 5),
-                  buildListViewHorizontal(titles: List.generate(8, (index) => "item5_$index")),
-                  SizedBox(height: 5),
-                ]
+                  children: [
+                    SizedBox(height: 5),
+                    buildListViewHorizontal(
+                        titles: List.generate(8, (index) => "item4_$index")),
+                    SizedBox(height: 5),
+                    buildListViewHorizontal(
+                        titles: List.generate(8, (index) => "item5_$index")),
+                    SizedBox(height: 5),
+                  ]
               ),
-          ),
-          IconButton(
-            icon: _isShowing ? Icon(Icons.keyboard_arrow_up) : Icon(
-                Icons.keyboard_arrow_down),
-            onPressed: () {
-              setState(() {
-                _isShowing = !_isShowing;
-              });
-          },)
-        ]
+            ),
+            IconButton(
+              icon: _isShowing ? Icon(Icons.keyboard_arrow_up) : Icon(
+                  Icons.keyboard_arrow_down),
+              onPressed: () {
+                setState(() {
+                  _isShowing = !_isShowing;
+                });
+              },)
+          ]
       ),
     );
   }
 
 
   final bool _isVisible = true;
+
   _buildVisibleContainer() {
     return VisibleContainer(
-        isVisible: _isVisible,
-        // indicator: ListTile(
-        //   leading: Icon(Icons.fourteen_mp),
-        //   title: Text("title"),
-        //   subtitle: Text("subtitle"),
-        //   trailing: RotatedBox(
-        //     quarterTurns: _isVisible == true ? 2 : 0,
-        //     child: Icon(Icons.keyboard_arrow_down),
-        //   ),
-        // //   trailing: Icon(Icons.chevron_right),
-        //   onTap: () {
-        //     setState(() {
-        //       _isVisible = !_isVisible;
-        //     });
-        //   }
-        // ),
-        header: Container(
-          color: Colors.orange,
-          // height: 50,
-          child: Column(
+      isVisible: _isVisible,
+      // indicator: ListTile(
+      //   leading: Icon(Icons.fourteen_mp),
+      //   title: Text("title"),
+      //   subtitle: Text("subtitle"),
+      //   trailing: RotatedBox(
+      //     quarterTurns: _isVisible == true ? 2 : 0,
+      //     child: Icon(Icons.keyboard_arrow_down),
+      //   ),
+      // //   trailing: Icon(Icons.chevron_right),
+      //   onTap: () {
+      //     setState(() {
+      //       _isVisible = !_isVisible;
+      //     });
+      //   }
+      // ),
+      header: Container(
+        color: Colors.orange,
+        // height: 50,
+        child: Column(
             children: [
-              SizedBox(height:5),
-              buildListViewHorizontal(titles: List.generate(8, (index) => "item1_$index")),
-              SizedBox(height:5),
+              SizedBox(height: 5),
+              buildListViewHorizontal(
+                  titles: List.generate(8, (index) => "item1_$index")),
+              SizedBox(height: 5),
             ]
-          ),
         ),
-        body: Column(
+      ),
+      body: Column(
           children: [
-            SizedBox(height:5),
-            buildListViewHorizontal(titles: List.generate(8, (index) => "item4_$index")),
-            SizedBox(height:5),
-            buildListViewHorizontal(titles: List.generate(8, (index) => "item5_$index")),
-            SizedBox(height:5),
+            SizedBox(height: 5),
+            buildListViewHorizontal(
+                titles: List.generate(8, (index) => "item4_$index")),
+            SizedBox(height: 5),
+            buildListViewHorizontal(
+                titles: List.generate(8, (index) => "item5_$index")),
+            SizedBox(height: 5),
           ]
       ),
     );
@@ -235,3 +251,133 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
 
 }
 
+
+class ExpansionTileCard extends StatefulWidget {
+
+  ExpansionTileCard({
+    Key? key,
+    this.title
+  }) : super(key: key);
+
+  final String? title;
+
+  @override
+  _ExpansionTileCardState createState() => _ExpansionTileCardState();
+}
+
+class _ExpansionTileCardState extends State<ExpansionTileCard> {
+  final _isExpanded = false.vn;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: Text(widget.title ?? "$widget"),
+          actions: ['done',].map((e) => TextButton(
+            child: Text(e,
+              style: TextStyle(color: Colors.white),
+            ),
+            onPressed: () => debugPrint(e),)
+          ).toList(),
+        ),
+        body: _buildBody()
+    );
+
+  }
+
+  _buildBody() {
+    return Column(
+      children: [
+        ExpansionTile(
+            onExpansionChanged: (value) {
+              _isExpanded.value = value;
+            },
+            title: Text(
+              "ExpansionTile",
+              style: TextStyle(
+                color: Colors.black,
+                letterSpacing: -1,
+                fontSize: 19,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            childrenPadding: EdgeInsets.fromLTRB(0, 0, 0, 20),
+            // iconColor: Colors.green,
+            trailing: ValueListenableBuilder<bool>(
+              valueListenable: _isExpanded,
+              builder:  ( context, value,  child) {
+                return _buildTrailing1(isExpand: value);
+              }
+            ),
+            children: [
+              Column(
+                children: [
+                  Container(
+                    height: 300,
+                    color: ColorExt.random,
+                  )
+                ],
+              )
+            ],
+        ),
+
+        NExpansionTile(
+          children: [
+            Column(
+              children: [
+                Container(
+                  height: 300,
+                  color: ColorExt.random,
+                )
+              ],
+            )
+          ],
+        ),
+      ],
+    );
+  }
+
+  _buildTrailing() {
+    return AnimatedRotation(
+      turns: _isExpanded.value ? .5 : 0,
+      duration: Duration(seconds: 1),
+      child: Icon(Icons.abc_sharp, size: 40,),
+    );
+  }
+
+  Widget _buildTrailing1({Color? color, bool isExpand = true,}) {
+    return _buildCustomBtn(isExpand: isExpand, color: Colors.green);
+  }
+
+  _buildCustomBtn({
+    bool isExpand = true,
+    Color color = Colors.blueAccent,
+    VoidCallback? cb,
+  }) {
+    final title = isExpand ? "收起" : "展开";
+    final icon = isExpand ? Icon(Icons.expand_less, size: 24, color: color,) :
+    Icon(Icons.expand_more, size: 24, color: color,);
+
+    return Container(
+      width: 66,
+      height: 30,
+      // color: Colors.red,
+      padding: EdgeInsets.only(left: 8, right: 4, top: 2, bottom: 2),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(15)),
+        border: Border.all(color: color),
+      ),
+      child: Row(
+        children: [
+          Text(title,
+            style: TextStyle(
+                color: color
+            ),
+          ),
+          SizedBox(width: 0,),
+          icon,
+        ],
+      ),
+    );
+  }
+}

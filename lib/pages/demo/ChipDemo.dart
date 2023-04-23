@@ -35,7 +35,7 @@ class _ChipDemoState extends State<ChipDemo> {
   int? _value = 1;
 
   Wrap buildWrap() {
-    var titles = List<int>.generate(3, (index) => index);
+    var titles = List<int>.generate(4, (index) => index);
     return Wrap(
       spacing: 8.0, // 主轴(水平)方向间距
       runSpacing: -8.0, // 纵轴（垂直）方向间距

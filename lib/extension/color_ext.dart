@@ -65,9 +65,13 @@ extension ColorExt on Color{
 
   /// 十六进制转颜色
   /// alpha, 透明度 [0.0,1.0]
-  static Color? fromHex(String val, {double alpha = 1}) {
-    val = val.toUpperCase().replaceAll("#", '');
-    val = val.toUpperCase().replaceAll("0x", '');
+  static Color? fromHex(String? val, {double alpha = 1}) {
+    if (val == null || val.isEmpty == true) {
+      return null;
+    }
+    val = val.toUpperCase();
+    val = val.replaceAll("#", '');
+    val = val.replaceAll("0x", '');
     final result = int.tryParse(val, radix: 16);
     if (result == null) {
       return null;
