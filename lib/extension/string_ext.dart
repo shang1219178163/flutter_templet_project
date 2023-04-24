@@ -26,26 +26,40 @@ extension StringExt on String{
     }
     return result;
   }
+  
+  /// 本地图片路径
+  String toPng() => "assets/images/$this.png";
+  /// 本地图片路径
+  String toJpg() => "assets/images/$this.jpg";
+  /// 本地图片路径
+  String toSvg() => "assets/images/$this.svg";
 
-  /// 本地图片路径
-  String get toPng => "images/$this.png";
-  /// 本地图片路径
-  String get toJpg => "images/$this.jpg";
-  /// 本地图片路径
-  String get toSvg => "images/$this.svg";
-
-  /// 图片名称转 AssetImage
-  AssetImage toAssetImage({AssetBundle? bundle, String? package,}) => AssetImage("images/$this",
-      bundle: bundle,
-      package: package
+  /// 图片名称转 AssetImage(带类型)
+  AssetImage toAssetImage({
+    AssetBundle? bundle,
+    String? package,
+  }) => AssetImage("assets/images/$this",
+    bundle: bundle,
+    package: package
   );
 
   /// 返回 png 图片的 AssetImage
-  AssetImage toPngAssetImage({String? package}) => AssetImage('images/$this.png', package: package);
+  AssetImage toPngAssetImage({
+    String? package,
+    AssetBundle? bundle,
+  }) => toPng().toAssetImage(package: package, bundle: bundle);
+
   /// 返回 jpg 图片的 AssetImage
-  AssetImage toJpgAssetImage({String? package}) => AssetImage('images/$this.jpg', package: package);
+  AssetImage toJpgAssetImage({
+    String? package,
+    AssetBundle? bundle,
+  }) => toJpg().toAssetImage(package: package, bundle: bundle);
+
   /// 返回 svg 图片的 AssetImage
-  AssetImage toSvgAssetImage({String? package}) => AssetImage('images/$this.svg', package: package);
+  AssetImage toSvgAssetImage({
+    String? package,
+    AssetBundle? bundle,
+  }) => toSvg().toAssetImage(package: package, bundle: bundle);
 
   /// 同 int.parse(this)
   int get parseInt => int.parse(this);

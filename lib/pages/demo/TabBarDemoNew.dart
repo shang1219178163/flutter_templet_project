@@ -50,7 +50,7 @@ class _TabBarDemoNewState extends State<TabBarDemoNew> with TickerProviderStateM
   @override
   Widget build(BuildContext context) {
     // return buildPage(controller: _tabController, items: tabItems);
-    return buildPage1(controller: _tabController1, items: tabItems);
+    return buildPage1(controller: _tabController1, items: list);
   }
 
   Widget buildPage({

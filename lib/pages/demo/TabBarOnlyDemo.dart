@@ -10,6 +10,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/tab_bar_segment.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
+import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/uti/R.dart';
 import 'package:tuple/tuple.dart';
 
@@ -147,7 +148,7 @@ class _TabBarOnlyDemoState extends State<TabBarOnlyDemo> with TickerProviderStat
     return Tab(
       child: FadeInImage(
         image: NetworkImage(url),
-        placeholder: AssetImage("images/flutter_logo.png"),
+        placeholder: "flutter_logo.png".toAssetImage(),
       ),
     );
   }

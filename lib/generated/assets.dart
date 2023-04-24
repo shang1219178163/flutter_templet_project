@@ -2,19 +2,18 @@
 class Assets {
   Assets._();
 
-  static const String dataCarModels = 'assets/images/data/car_models.json';
-  static const String dataChina = 'assets/images/data/china.json';
-  static const String dataContacts = 'assets/images/data/contacts.json';
-  static const String flutterTempletProjectImagesBg = 'assets/images/bg.png';
+  static const String dataCarModels = 'assets/data/car_models.json';
+  static const String dataChina = 'assets/data/china.json';
+  static const String dataContacts = 'assets/data/contacts.json';
   static const String images404 = 'assets/images/404.png';
   static const String imagesAvatar = 'assets/images/avatar.png';
-  static const String imagesBg = 'assets/images/bg.jpg';
+  static const String imagesBg = 'assets/images/bg.png';
   static const String imagesBgAlp = 'assets/images/bg_alp.png';
   static const String imagesBgGlassmophism = 'assets/images/bg_glassmophism.png';
   static const String imagesBgHorizontalScroll = 'assets/images/bg_horizontal_scroll.png';
   static const String imagesBgJiguang = 'assets/images/bg_jiguang.png';
   static const String imagesBgOcean = 'assets/images/bg_ocean.png';
-  static const String imagesFloating = 'assets/images/floating.PNG';
+  static const String imagesFloating = 'assets/images/floating.png';
   static const String imagesFlutterLogo = 'assets/images/flutter_logo.png';
   static const String imagesIconAppbarBack = 'assets/images/icon_appbar_back.png';
   static const String imagesIconAppbarBackWhite = 'assets/images/icon_appbar_back_white.png';
@@ -41,7 +40,7 @@ class Assets {
   static const String imagesPubDevLogo = 'assets/images/pub_dev_logo.png';
   static const String imagesQRCode = 'assets/images/QRCode.png';
   static const String imagesShaQiu = 'assets/images/sha_qiu.png';
-  static const String imagesShan = 'assets/images/shan.JPG';
+  static const String imagesShan = 'assets/images/shan.jpg';
   static const String imagesWeiqi = 'assets/images/weiqi.png';
 
 }

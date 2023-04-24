@@ -141,7 +141,6 @@ class _ContainerDemoState extends State<ContainerDemo> {
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
-          // image: AssetImage('images/img_update.png'),
           image: "img_update".toPngAssetImage(),
           repeat: ImageRepeat.repeat,
           alignment: Alignment.topLeft,
