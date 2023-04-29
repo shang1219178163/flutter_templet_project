@@ -16,8 +16,8 @@ import 'package:flutter_boost/flutter_boost.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/model/repo_model.dart';
 import 'package:flutter_templet_project/model/repository.dart';
-import 'package:flutter_templet_project/network/HttpManager.dart';
-import 'package:flutter_templet_project/network/RequestClient.dart';
+import 'package:flutter_templet_project/network/RequestManager.dart';
+import 'package:flutter_templet_project/network/base_request_api.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 class GithubRepoDemo extends StatefulWidget {
@@ -178,11 +178,8 @@ class _GithubRepoDemoState extends State<GithubRepoDemo> {
     final api = ReposAPI();
     debugPrint("api: ${api.toString()}");
 
-    HttpManager(api).request<List>(onSuccess: (data){
-      ddlog(data);
-    }, onError: (error){
-      ddlog(error);
-    });
+
+    final map = await RequestManager().request(api);
 
     var response = await _dio.get("https://api.github.com/orgs/flutterchina/repos");
     debugPrint("requestRepos: ${response.data.toString()}");
@@ -190,13 +187,11 @@ class _GithubRepoDemoState extends State<GithubRepoDemo> {
 }
 
 
-class ReposAPI extends BaseHttpRequestAPI{
+class ReposAPI extends BaseRequestAPI{
   @override
-  // TODO: implement requestType
-  RequestMethod get requestType => RequestMethod.GET;
+  HttpMethod get requestType => HttpMethod.GET;
 
   @override
-  // TODO: implement requestURI
   String get requestURI => "https://api.github.com/orgs/flutterchina/repos";
 
   // @override

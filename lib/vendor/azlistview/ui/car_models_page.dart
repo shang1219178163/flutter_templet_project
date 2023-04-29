@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:azlistview/azlistview.dart';
+import 'package:flutter_templet_project/extension/color_ext.dart';
+import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/vendor/azlistview/common/index.dart';
 
 class CarModelsPage extends StatefulWidget {
@@ -15,7 +17,7 @@ class CarModelsPage extends StatefulWidget {
 class _CarModelsPageState extends State<CarModelsPage> {
   List<ContactInfo> contactList = [];
 
-  double susItemHeight = 24;
+  double susItemHeight = 45;
 
   @override
   void initState() {
@@ -54,27 +56,20 @@ class _CarModelsPageState extends State<CarModelsPage> {
     SuspensionUtil.setShowSuspensionStatus(contactList);
 
     // add header.
-    contactList.insert(0, ContactInfo(name: 'header', tagIndex: '选'));
+    // contactList.insert(0, ContactInfo(name: 'header', tagIndex: '选'));
 
     setState(() {});
   }
 
   Widget customHeader() {
+    return Container(height: susItemHeight, color: Colors.green,);
     return Column(
       children: <Widget>[
         Container(
           color: Colors.white,
           padding: EdgeInsets.only(left: 32, top: 20, right: 32, bottom: 16),
           child: Image.asset(
-            Utils.getImgPath('ic_car_models_header1'),
-            fit: BoxFit.contain,
-          ),
-        ),
-        Container(
-          color: Colors.white,
-          padding: EdgeInsets.only(left: 32, top: 0, right: 32, bottom: 16),
-          child: Image.asset(
-            Utils.getImgPath('ic_car_models_header2'),
+            Utils.getImgPath('bg_jiguang'),
             fit: BoxFit.contain,
           ),
         ),
@@ -96,7 +91,7 @@ class _CarModelsPageState extends State<CarModelsPage> {
         data: contactList,
         itemCount: contactList.length,
         itemBuilder: (BuildContext context, int index) {
-          if (index == 0) return customHeader();
+          // if (index == 0) return customHeader();
           ContactInfo model = contactList[index];
           return Utils.getWeChatListItem(context, model,
               susHeight: susItemHeight);
@@ -107,10 +102,17 @@ class _CarModelsPageState extends State<CarModelsPage> {
           if ('选' == model.getSuspensionTag()) {
             return Container();
           }
-          return Utils.getSusItem(context, model.getSuspensionTag(),
-              susHeight: susItemHeight);
+          return Utils.getSusItem(
+            context, model.getSuspensionTag(),
+            susHeight: susItemHeight,
+            // color: ColorExt.random,
+          );
         },
-        indexBarData: ['选', ...kIndexBarData],
+        // indexBarData: ['选', ...kIndexBarData],
+        indexBarData: [...SuspensionUtil.getTagIndexList(contactList)],
+        indexHintBuilder: (BuildContext context, String tag){
+          return SizedBox();
+        },
         indexBarOptions: IndexBarOptions(
           needRebuild: true,
           selectTextStyle: TextStyle(
@@ -121,7 +123,7 @@ class _CarModelsPageState extends State<CarModelsPage> {
           indexHintHeight: 97,
           indexHintDecoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage(Utils.getImgPath('ic_index_bar_bubble_white')),
+              image: 'avatar.png'.toAssetImage(),
               fit: BoxFit.contain,
             ),
           ),

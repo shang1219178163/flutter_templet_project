@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
+import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/uti/R.dart';
 import 'package:flutter_templet_project/basicWidget/EnhanceTab/enhance_tab_bar.dart';
@@ -74,7 +75,7 @@ class _EnhanceTabBarDemoState extends State<EnhanceTabBarDemo> with SingleTicker
     return Tab(
       child: FadeInImage(
         image: NetworkImage(url),
-        placeholder: AssetImage("images/flutter_logo.png"),
+        placeholder: "flutter_logo.png".toAssetImage(),
       ),
     );
   }
@@ -148,7 +149,7 @@ class _EnhanceTabBarDemoState extends State<EnhanceTabBarDemo> with SingleTicker
               return Tab(
                 child: FadeInImage(
                   image: NetworkImage(url),
-                  placeholder: AssetImage("images/flutter_logo.png"),
+                  placeholder: "flutter_logo.png".toAssetImage(),
                 ),
               );
             }),

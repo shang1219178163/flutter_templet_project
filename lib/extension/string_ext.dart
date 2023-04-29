@@ -8,6 +8,7 @@
 
 
 import 'dart:convert';
+import 'dart:typed_data';
 import 'package:flutter/cupertino.dart';
 
 typedef TransformCallback<E> = E Function(E e);
@@ -26,7 +27,7 @@ extension StringExt on String{
     }
     return result;
   }
-  
+
   /// 本地图片路径
   String toPng() => "assets/images/$this.png";
   /// 本地图片路径
@@ -252,3 +253,11 @@ extension StringExt on String{
   }
 
 }
+
+// extension StringCryptExt on String{
+//   toMd5() {
+//     Uint8List content = const Utf8Encoder().convert(this);
+//     Digest digest = md5.convert(content);
+//     return digest.toString();
+//   }
+// }

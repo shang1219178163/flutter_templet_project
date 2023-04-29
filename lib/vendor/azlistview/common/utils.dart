@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/vendor/azlistview/common/index.dart';
 
 class Utils {
   static String getImgPath(String name, {String format: 'png'}) {
+    if (name.contains(".")) {
+      return 'assets/images/$name';
+    }
     return 'assets/images/$name.$format';
   }
 
@@ -15,8 +19,12 @@ class Utils {
     );
   }
 
-  static Widget getSusItem(BuildContext context, String tag,
-      {double susHeight = 40}) {
+  static Widget getSusItem(
+      BuildContext context,
+      String tag,
+      {double susHeight = 40, Color
+      color = const Color(0xFFF3F4F5)
+  }) {
     if (tag == '★') {
       tag = '★ 热门城市';
     }
@@ -24,7 +32,7 @@ class Utils {
       height: susHeight,
       width: MediaQuery.of(context).size.width,
       padding: EdgeInsets.only(left: 16.0),
-      color: Color(0xFFF3F4F5),
+      color: color,
       alignment: Alignment.centerLeft,
       child: Text(
         '$tag',
@@ -97,29 +105,45 @@ class Utils {
 //        fit: BoxFit.contain,
 //      );
 //    }
-    return ListTile(
-      leading: Container(
-        width: 36,
-        height: 36,
+    return Container(
         decoration: BoxDecoration(
-          shape: BoxShape.rectangle,
-          borderRadius: BorderRadius.circular(4.0),
-          color: model.bgColor ?? defHeaderBgColor,
-          image: image,
+        border: Border(
+          bottom: BorderSide(
+            width: 1,
+              color: Color(0xfff4f4f4)
+          )
         ),
-        child: model.iconData == null
-            ? null
-            : Icon(
-                model.iconData,
-                color: Colors.white,
-                size: 20,
-              ),
       ),
-      title: Text(model.name),
-      onTap: () {
-        LogUtil.e("onItemClick : $model");
-        Utils.showSnackBar(context, 'onItemClick : ${model.name}');
-      },
+      child: ListTile(
+        leading: Container(
+          width: 36,
+          height: 36,
+          decoration: BoxDecoration(
+            shape: BoxShape.rectangle,
+            borderRadius: BorderRadius.circular(4.0),
+            color: model.bgColor ?? defHeaderBgColor,
+            image: image,
+            border: Border.all(
+                width: 1.0
+            ),
+          ),
+          child: model.iconData == null
+              ? null
+              : Icon(
+                  model.iconData,
+                  color: Colors.white,
+                  size: 20,
+                ),
+        ),
+        title: Text(model.name*3,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
+        onTap: () {
+          LogUtil.e("onItemClick : $model");
+          Utils.showSnackBar(context, 'onItemClick : ${model.name}');
+        },
+      ),
     );
   }
 }

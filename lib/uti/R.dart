@@ -34,7 +34,7 @@ class _REvent {
 class _RImage {
   static final _RImage _instance = _RImage();
   /// 占位图
-  ImageProvider placeholder({String? package}) => AssetImage("images/img_placeholder.png", package: package);
+  ImageProvider placeholder({String? package}) => AssetImage("assets/images/img_placeholder.png", package: package);
 
   /// 网图数组
   final List<String> urls = [

@@ -7,7 +7,15 @@
 //
 
 
+import 'dart:convert';
+
 extension MapExt on Map<String, dynamic>{
+  /// 转为 json 字符串
+  String get jsonStr {
+    final jsonStr = jsonEncode(this);
+    return jsonStr;
+  }
+
   // 拼接键值成字符串
   String join({String char = '&'}) {
     if (keys.isEmpty) {
@@ -28,4 +36,7 @@ extension MapExt on Map<String, dynamic>{
       recursion(cb);
     });
   }
+
+
+
 }

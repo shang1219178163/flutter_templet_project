@@ -72,7 +72,7 @@ class _LayoutBuilderDemoState extends State<LayoutBuilderDemo> {
 
   _buildImage({BoxConstraints? constraints}) {
     // return FadeInImage(
-    //   // placeholder: AssetImage("images/img_placeholder.png"),
+    //   // placeholder: "img_placeholder.png"),
     //   placeholder: R.image.placeholder(),
     //   image: NetworkImage(R.image.imgUrls[0]),
     //   fit: BoxFit.fill,

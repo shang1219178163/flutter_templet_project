@@ -17,21 +17,21 @@ class _ContactsPageState extends State<ContactsPage> {
   @override
   void initState() {
     super.initState();
-    topList.add(ContactInfo(
-        name: '新的朋友',
-        tagIndex: '↑',
-        bgColor: Colors.orange,
-        iconData: Icons.person_add));
-    topList.add(ContactInfo(
-        name: '群聊',
-        tagIndex: '↑',
-        bgColor: Colors.green,
-        iconData: Icons.people));
-    topList.add(ContactInfo(
-        name: '标签',
-        tagIndex: '↑',
-        bgColor: Colors.blue,
-        iconData: Icons.local_offer));
+    // topList.add(ContactInfo(
+    //     name: '新的朋友',
+    //     tagIndex: '↑',
+    //     bgColor: Colors.orange,
+    //     iconData: Icons.person_add));
+    // topList.add(ContactInfo(
+    //     name: '群聊',
+    //     tagIndex: '↑',
+    //     bgColor: Colors.green,
+    //     iconData: Icons.people));
+    // topList.add(ContactInfo(
+    //     name: '标签',
+    //     tagIndex: '↑',
+    //     bgColor: Colors.blue,
+    //     iconData: Icons.local_offer));
     topList.add(ContactInfo(
         name: '公众号',
         tagIndex: '↑',
@@ -64,10 +64,10 @@ class _ContactsPageState extends State<ContactsPage> {
       }
     }
     // A-Z sort.
-    SuspensionUtil.sortListBySuspensionTag(contactList);
+    // SuspensionUtil.sortListBySuspensionTag(contactList);
 
     // show sus tag.
-    SuspensionUtil.setShowSuspensionStatus(contactList);
+    // SuspensionUtil.setShowSuspensionStatus(contactList);
 
     // add topList.
     contactList.insertAll(0, topList);
@@ -114,12 +114,12 @@ class _ContactsPageState extends State<ContactsPage> {
               BoxDecoration(shape: BoxShape.circle, color: Colors.green),
           indexHintWidth: 120 / 2,
           indexHintHeight: 100 / 2,
-          indexHintDecoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(Utils.getImgPath('ic_index_bar_bubble_gray')),
-              fit: BoxFit.contain,
-            ),
-          ),
+          // indexHintDecoration: BoxDecoration(
+          //   image: DecorationImage(
+          //     image: AssetImage(Utils.getImgPath('ic_index_bar_bubble_gray')),
+          //     fit: BoxFit.contain,
+          //   ),
+          // ),
           indexHintAlignment: Alignment.centerRight,
           indexHintChildAlignment: Alignment(-0.25, 0.0),
           indexHintOffset: Offset(-20, 0),

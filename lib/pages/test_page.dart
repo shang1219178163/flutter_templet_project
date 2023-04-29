@@ -163,6 +163,9 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
       r"c": cc,
     };
     debugPrint("map:$map");
+    debugPrint("c:${map["c"]}");
+    debugPrint("d:${map["d"]}");
+
   }
 
 

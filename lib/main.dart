@@ -24,8 +24,10 @@ import 'package:flutter_templet_project/Pages/APPUserCenterPage.dart';
 
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/routes/APPRouter.dart';
+import 'package:flutter_templet_project/service/cache_service.dart';
 
 import 'package:get/get.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
 import 'package:tuple/tuple.dart';
 
@@ -56,12 +58,14 @@ import 'package:flutter_templet_project/provider/notifier_demo.dart';
 // }
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   if (kReleaseMode) {
     debugPrint = (String? message, {int? wrapWidth}) {
       // empty debugPrint implementation in the release mode
     };
   }
   await ScreenUtil.ensureScreenSize();
+  await CacheService().init();
 
   setCustomErrorPage();
   await initServices();
@@ -237,6 +241,12 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     SystemChannels.textInput.invokeMethod('TextInput.hide');
+
+    getPackageInfo().then((value){
+      CacheService().setString(CACHE_APP_NAME, value.appName);
+      CacheService().setString(CACHE_APP_PACKAGE_NAME, value.packageName);
+      CacheService().setString(CACHE_APP_VERSION, value.version);
+    });
     super.initState();
   }
 
@@ -305,6 +315,16 @@ class _MyHomePageState extends State<MyHomePage> {
             }),
       ],
     );
+  }
+
+  Future<PackageInfo> getPackageInfo() async {
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    // String appName = packageInfo.appName;// 医链健康执业版
+    // String packageName = packageInfo.packageName;// com.yilian.ylHealthApp
+    // String version = packageInfo.version;// 1.0.0
+    // String buildNumber = packageInfo.buildNumber;//1
+    // debugPrint("packageInfo: ${packageInfo.toString()}");
+    return Future.value(packageInfo);
   }
 
   test() {

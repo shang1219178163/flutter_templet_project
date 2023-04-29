@@ -2,6 +2,7 @@ import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/horizontal_cell.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
+import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/uti/R.dart';
 
@@ -521,7 +522,7 @@ class _BadgesDemoState extends State<BadgesDemo> {
         left: FadeInImage(
           height: 60,
           image: NetworkImage(R.image.urls[4]),
-          placeholder: AssetImage("images/img_placeholder.png"),
+          placeholder: "img_placeholder.png".toAssetImage(),
         ),
         // mid: Container(
         //   width: 60,

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:azlistview/azlistview.dart';
+import 'package:flutter_templet_project/extension/color_ext.dart';
+import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/vendor/azlistview/common/index.dart';
 
 
@@ -46,13 +48,13 @@ class _ContactListPageState extends State<ContactListPage> {
       }
     }
     // A-Z sort.
-    SuspensionUtil.sortListBySuspensionTag(_contacts);
+    // SuspensionUtil.sortListBySuspensionTag(_contacts);
 
     // show sus tag.
     SuspensionUtil.setShowSuspensionStatus(_contacts);
 
     // add header.
-    _contacts.insert(0, ContactInfo(name: 'header', tagIndex: '↑'));
+    // _contacts.insert(0, ContactInfo(name: 'header', tagIndex: '↑'));
 
     setState(() {});
   }
@@ -88,6 +90,7 @@ class _ContactListPageState extends State<ContactListPage> {
       height: susItemHeight,
       width: double.infinity,
       alignment: Alignment.centerLeft,
+      color: Colors.red,
       child: Row(
         children: <Widget>[
           Text(
@@ -106,27 +109,31 @@ class _ContactListPageState extends State<ContactListPage> {
 
   Widget _buildListItem(ContactInfo model) {
     String susTag = model.getSuspensionTag();
-    return Column(
-      children: <Widget>[
-        Offstage(
-          offstage: model.isShowSuspension != true,
-          child: _buildSusWidget(susTag),
-        ),
-        ListTile(
-          leading: CircleAvatar(
-            backgroundColor: Colors.blue[700],
-            child: Text(
-              model.name[0],
-              style: TextStyle(color: Colors.white),
+    debugPrint("_buildListItem:${model.name}_${model.isShowSuspension}");
+    return Container(
+      height: 90,
+      child: Column(
+        children: <Widget>[
+          // Offstage(
+          //   offstage: model.isShowSuspension != true,
+          //   child: _buildSusWidget(susTag),
+          // ).toColoredBox(),
+          ListTile(
+            leading: CircleAvatar(
+              backgroundColor: Colors.blue[700],
+              child: Text(
+                model.name[0],
+                style: TextStyle(color: Colors.white),
+              ),
             ),
-          ),
-          title: Text(model.name),
-          onTap: () {
-            debugPrint("OnItemClick: $model");
-            Navigator.pop(context, model);
-          },
-        )
-      ],
+            title: Text(model.name),
+            onTap: () {
+              debugPrint("OnItemClick: $model");
+              Navigator.pop(context, model);
+            },
+          )
+        ],
+      ),
     );
   }
 
@@ -140,14 +147,29 @@ class _ContactListPageState extends State<ContactListPage> {
   @override
   Widget build(BuildContext context) {
     return AzListView(
+      physics: AlwaysScrollableScrollPhysics(),
       data: _contacts,
       itemCount: _contacts.length,
       itemBuilder: (BuildContext context, int index) {
-        if (index == 0) return _buildHeader();
+        // if (index == 0) return _buildHeader();
         ContactInfo model = _contacts[index];
         return _buildListItem(model);
       },
-      physics: BouncingScrollPhysics(),
+      susItemBuilder: (BuildContext context, int index) {
+        ContactInfo model = _contacts[index];
+        final str = "section${model.getSuspensionTag()}";
+        return Container(
+          height: 40,
+          padding: EdgeInsets.only(left: 30),
+          width: double.maxFinite,
+          color: Colors.grey,
+          child: Row(
+            children: [
+              Text(str),
+            ],
+          ),
+        );
+      },
       indexBarData: SuspensionUtil.getTagIndexList(_contacts),
       indexHintBuilder: (context, hint) {
         return Container(
@@ -159,7 +181,7 @@ class _ContactListPageState extends State<ContactListPage> {
             shape: BoxShape.circle,
           ),
           child:
-              Text(hint, style: TextStyle(color: Colors.white, fontSize: 30.0)),
+              Text(hint, style: TextStyle(color: Colors.red, fontSize: 30.0)),
         );
       },
       indexBarMargin: EdgeInsets.all(10),

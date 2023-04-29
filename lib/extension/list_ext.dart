@@ -7,9 +7,17 @@
 //
 
 
+import 'dart:convert';
+
 import 'package:flutter_templet_project/extension/string_ext.dart';
 
 extension ListExt<T,E> on List<E> {
+  /// 转为 json 字符串
+  String get jsonStr {
+    final jsonStr = jsonEncode(this);
+    return jsonStr;
+  }
+
   ///运算符重载
   List<E> operator *(int value) {
     var l = <E>[];
