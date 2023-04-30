@@ -90,6 +90,7 @@ class _TextFieldDemoState extends State<TextFieldDemo> {
             CupertinoTextField(controller: _textController),
             Spacer(),
             CupertinoSearchTextField(
+              padding: EdgeInsets.only(left: 3, top: 15, bottom: 15, right: 5),
               placeholder: "请输入",
               onChanged: (String value) {
                 // debugPrint('onChanged: $value');
