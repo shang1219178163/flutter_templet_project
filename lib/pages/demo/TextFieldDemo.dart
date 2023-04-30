@@ -9,6 +9,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/uti/Debounce.dart';
+import 'package:flutter_templet_project/uti/Throttle.dart';
+import 'package:get/get_rx/src/rx_workers/utils/debouncer.dart';
+
 
 class TextFieldDemo extends StatefulWidget {
 
@@ -23,8 +27,8 @@ class TextFieldDemo extends StatefulWidget {
 
 class _TextFieldDemoState extends State<TextFieldDemo> {
 
-  late final TextEditingController _textController = TextEditingController(text: 'initial text');
-  late TextEditingController editingController = TextEditingController(text: 'initial text');
+  late final _textController = TextEditingController(text: 'initial text');
+  late final editingController = TextEditingController(text: 'initial text');
 
   // 控制器
   final _unameController =  TextEditingController();
@@ -41,6 +45,10 @@ class _TextFieldDemoState extends State<TextFieldDemo> {
   final _unameExp = RegExp(r'^(?![0-9]+$)(?![a-z]+$)[0-9a-z]{6,12}$'); //用户名正则
   final _pwdExp = RegExp(r'^(?![0-9]+$)(?![a-z]+$)[0-9a-z]{6,12}$'); //密码正则
 
+  final delayed = Debouncer(delay: Duration(milliseconds: 1000));
+  final _debounce = Debounce(milliseconds: 1000);
+
+  final _throttle = Throttle(milliseconds: 500);
 
 
   @override
@@ -50,6 +58,12 @@ class _TextFieldDemoState extends State<TextFieldDemo> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
+        actions: ['done',].map((e) => TextButton(
+          child: Text(e,
+            style: TextStyle(color: Colors.white),
+          ),
+          onPressed: onPressed,
+        )).toList(),
       ),
       body: buildColumn(context),
       bottomSheet: Container(
@@ -76,11 +90,13 @@ class _TextFieldDemoState extends State<TextFieldDemo> {
             CupertinoTextField(controller: _textController),
             Spacer(),
             CupertinoSearchTextField(
+              placeholder: "请输入",
               onChanged: (String value) {
-                debugPrint('The text has changed to: $value');
+                // debugPrint('onChanged: $value');
+                delayed( () => debugPrint( 'delayed: $value' ));
               },
               onSubmitted: (String value) {
-                debugPrint('Submitted text: $value');
+                debugPrint('onSubmitted: $value');
               },
             ),
             Spacer(),
@@ -178,5 +194,9 @@ class _TextFieldDemoState extends State<TextFieldDemo> {
         ),
       ),
     );
+  }
+
+  onPressed(){
+    _throttle(() => debugPrint("${DateTime.now()}: onPressed"));
   }
 }
