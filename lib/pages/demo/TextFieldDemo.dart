@@ -93,7 +93,8 @@ class _TextFieldDemoState extends State<TextFieldDemo> {
               placeholder: "请输入",
               onChanged: (String value) {
                 // debugPrint('onChanged: $value');
-                delayed( () => debugPrint( 'delayed: $value' ));
+                delayed(() => debugPrint( 'delayed: $value' ));
+                // _debounce(() => debugPrint( 'delayed: $value' ));
               },
               onSubmitted: (String value) {
                 debugPrint('onSubmitted: $value');
