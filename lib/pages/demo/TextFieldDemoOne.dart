@@ -9,6 +9,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/string_ext.dart';
 
 class TextFieldDemoOne extends StatefulWidget {
 
@@ -23,6 +24,9 @@ class TextFieldDemoOne extends StatefulWidget {
 
 class _TextFieldDemoOneState extends State<TextFieldDemoOne> {
   final textEditingController = TextEditingController();
+
+ final current = ValueNotifier("");
+
 
   ///用来控制  TextField 焦点的获取与关闭
   FocusNode focusNode = FocusNode();
@@ -99,7 +103,9 @@ class _TextFieldDemoOneState extends State<TextFieldDemoOne> {
     ];
   }
 
-  _buildTextField() {
+  _buildTextField({
+    ValueChanged<String>? onChanged,
+  }) {
     return Container(
       ///SizedBox 用来限制一个固定 width height 的空间
       child: SizedBox(
@@ -115,12 +121,18 @@ class _TextFieldDemoOneState extends State<TextFieldDemoOne> {
           ///文本输入框
           child: TextField(
             controller: textEditingController,
+            onChanged: (val) {
+              current.value = val;
+              onChanged?.call(val);
+            },
             ///是否可编辑
             enabled: isEnable,
             ///焦点获取
             focusNode: focusNode,
             ///用来配置 TextField 的样式风格
             decoration: InputDecoration(
+              filled: true,
+              fillColor: Color(0xffF3F3F3),
               ///设置输入文本框的提示文字
               ///输入框获取焦点时 并且没有输入文字时
               hintText: "请输入用户名",
@@ -148,16 +160,34 @@ class _TextFieldDemoOneState extends State<TextFieldDemoOne> {
               ///文本输入框右下角显示的文本
               ///文字计数器默认使用
               counterText: "count",
-              counterStyle:TextStyle(color: Colors.deepPurple[800]),
+              counterStyle: TextStyle(color: Colors.deepPurple[800]),
 
               ///输入文字前的小图标
               prefixIcon: Icon(Icons.phone),
               ///输入文字后面的小图标
-              suffixIcon: textEditingController.text.isEmpty ? null : IconButton(
-                  onPressed: () => textEditingController.clear(),
-                  icon: Icon(Icons.close),
-              ),
-
+              suffixIcon: ValueListenableBuilder<String>(
+                 valueListenable: current,
+                 builder: (context, value, child){
+                  if (value.isEmpty) {
+                    return SizedBox();
+                  }
+                  return IconButton(
+                    onPressed: () {
+                      textEditingController.clear();
+                      current.value = "";
+                    },
+                    // icon: Icon(Icons.clear),
+                    icon: Image(
+                      image:"icon_clear.png".toAssetImage(),
+                      width: 16,
+                      height: 16,
+                    ),
+                  );
+                }),
+              // suffixIcon: textEditingController.text.isEmpty ? null : IconButton(
+              //     onPressed: () => textEditingController.clear(),
+              //     icon: Icon(Icons.close),
+              // ),
               ///与 prefixText 不能同时设置
 //                prefix: Text("A") ,
               /// 与 suffixText 不能同时设置
