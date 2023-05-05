@@ -16,6 +16,7 @@ class ChioceList extends StatefulWidget {
     required this.canScroll,
     required this.callback,
     this.backgroudColor,
+    this.rowHeight = 65,
   }) : super(key: key);
 
   List<int> indexs = <int>[];
@@ -29,6 +30,8 @@ class ChioceList extends StatefulWidget {
   bool canScroll = false;
 
   bool isMutiple;
+
+  double rowHeight;
 
   @override
   _ChioceListState createState() => _ChioceListState();
@@ -45,10 +48,10 @@ class _ChioceListState extends State<ChioceList> {
     return Material(
       child: Container(
         color: widget.backgroudColor,
-        height: 65 * widget.children.length.toDouble(),
+        height: widget.rowHeight * widget.children.length.toDouble(),
         child: ListView.builder(
           physics: NeverScrollableScrollPhysics(),//禁止滑动
-          itemExtent: 65,
+          itemExtent: widget.rowHeight,
           itemCount: widget.children.length,
           itemBuilder: (BuildContext context, int index) {
             final e = widget.children[index];
