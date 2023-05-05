@@ -251,7 +251,7 @@ class _AlertSheetDemoState extends State<AlertSheetDemo> {
         actions: [
           ChioceList(
             isMutiple: isMutiple,
-            backgroudColor: Colors.red.withAlpha(10),
+            backgroudColor: Colors.black.withAlpha(5),
             children: list,
             indexs: [1],
             canScroll: false,

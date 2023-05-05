@@ -64,7 +64,7 @@ class _ContactsPageState extends State<ContactsPage> {
       }
     }
     // A-Z sort.
-    // SuspensionUtil.sortListBySuspensionTag(contactList);
+    SuspensionUtil.sortListBySuspensionTag(contactList);
 
     // show sus tag.
     // SuspensionUtil.setShowSuspensionStatus(contactList);

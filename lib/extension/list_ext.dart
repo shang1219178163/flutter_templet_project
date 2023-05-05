@@ -44,8 +44,12 @@ extension ListExt<T,E> on List<E> {
     // return result;
   // }
 
-  static bool isNotEmpty(List? l) {
-    return l != null && l.isNotEmpty;
+  static bool isEmpty(List? val) {
+    return val == null || val.isEmpty;
+  }
+
+  static bool isNotEmpty(List? val) {
+    return val != null && val.isNotEmpty;
   }
 
   /// 同 sorted
@@ -138,7 +142,7 @@ extension IterableExt<T> on Iterable<T> {
     return result;
   }
 
-  Iterable<T> filter() {
-    return whereType<T>();
-  }
+  // Iterable<T> filter() {
+  //   return whereType<T>();
+  // }
 }

@@ -10,6 +10,14 @@
 import 'dart:convert';
 
 extension MapExt on Map<String, dynamic>{
+  static bool isEmpty(Map? val) {
+    return val == null || val.isEmpty;
+  }
+
+  static bool isNotEmpty(Map? val) {
+    return val != null && val.isNotEmpty;
+  }
+
   /// 转为 json 字符串
   String get jsonStr {
     final jsonStr = jsonEncode(this);

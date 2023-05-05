@@ -15,8 +15,12 @@ typedef TransformCallback<E> = E Function(E e);
 
 extension StringExt on String{
 
-  static bool isNotEmpty(String? s) {
-    return s != null && s.isNotEmpty;
+  static bool isEmpty(String? val) {
+    return val == null || val.isEmpty;
+  }
+
+  static bool isNotEmpty(String? val) {
+    return val != null && val.isNotEmpty;
   }
 
   ///运算符重载
