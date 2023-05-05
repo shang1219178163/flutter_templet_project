@@ -38,10 +38,10 @@ class _ChioceListState extends State<ChioceList> {
 
   @override
   Widget build(BuildContext context) {
-    return widget.canScroll ? _buildListViewSeparated(context) : _buildListView(context);
+    return widget.canScroll ? _buildListViewSeparated() : _buildListView();
   }
 
-  Widget _buildListView(BuildContext context) {
+  Widget _buildListView() {
     return Material(
       child: Container(
         color: widget.backgroudColor,
@@ -73,7 +73,7 @@ class _ChioceListState extends State<ChioceList> {
     );
   }
 
-  Widget _buildListViewSeparated(BuildContext context) {
+  Widget _buildListViewSeparated() {
     return Material(
       // color: Colors.transparent,
       color: widget.backgroudColor,
@@ -98,7 +98,7 @@ class _ChioceListState extends State<ChioceList> {
             height: .5,
             indent: 15,
             endIndent: 15,
-            color: Color(0xFFDDDDDD),
+            color: Color(0xFFe4e4e4),
           );
         },
       ).addCupertinoScrollbar(),
