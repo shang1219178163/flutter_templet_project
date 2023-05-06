@@ -411,7 +411,7 @@ final payTypes = <Tuple4<String, String, Widget, bool>>[
   Tuple4("微信支付", "微信支付，不止支付", Icon(Icons.camera), false),
   Tuple4("阿里支付", "支付就用支付宝", Icon(Icons.palette), false),
   Tuple4("银联支付", "不打开APP就支付", Icon(Icons.payment), false),
-].map((e) => ChioceModel(
+].map((e) => ChioceDataModel(
     title: Text(e.item1),
     subtitle: Text(e.item2),
     secondary: e.item3,

@@ -94,9 +94,9 @@ class _ChioceWrapState extends State<ChioceWrap> {
 }
 
 
-class ChioceModel{
+class ChioceDataModel{
 
-  ChioceModel({
+  ChioceDataModel({
     required this.title,
     this.subtitle,
     this.secondary,

@@ -2,9 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_templet_project/basicWidget/chioce_wrap.dart';
 import 'package:flutter_templet_project/basicWidget/n_cancell_and_confirm_bar.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
+import 'package:flutter_templet_project/model/selected_model.dart';
 import 'package:flutter_templet_project/uti/color_uti.dart';
 import 'package:tuple/tuple.dart';
 
@@ -123,7 +123,9 @@ class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
             spacing: 16,
             alignment: alignment,
             children: diseaseTypes.map((e) => Material(
+            color: Colors.transparent,
             child: ChoiceChip(
+              side: BorderSide(color: Color(0xfff3f3f3)),
               label: Text(e.name ?? "-"),
               labelStyle: TextStyle(
                 color: e.isSelected == true ? Colors.white : fontColor,
@@ -179,17 +181,19 @@ class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
               alignment: WrapAlignment.spaceBetween,
               children: titles.map((e) => Material(
                 child: ChoiceChip(
-                label: Text('Choice_$e'),
-                // padding: EdgeInsets.only(left: 15, right: 15),
-                selected: _value == e,
-                selectedColor: primary,
-                backgroundColor: bgColor.withOpacity(0.1),
-                onSelected: (bool selected) {
-                  _value = selected ? e : null;
-                  setState(() {});
-                  debugPrint("$_value");
-                },
-              )),).toList(),
+                  side: BorderSide(color: Colors.red),
+                  label: Text('Choice_$e'),
+                  // padding: EdgeInsets.only(left: 15, right: 15),
+                  selected: _value == e,
+                  selectedColor: primary,
+                  backgroundColor: bgColor.withOpacity(0.1),
+                  onSelected: (bool selected) {
+                    _value = selected ? e : null;
+                    setState(() {});
+                    debugPrint("$_value");
+                  },
+                )),
+              ).toList(),
             ),
           );
           // return content;
@@ -299,20 +303,6 @@ class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
       element.isSelected = ids.contains(element.data.id);
     }
   }
-}
-
-
-class SelectedModel<T> {
-  String? name;
-  bool? isSelected;
-
-  T data;
-
-  SelectedModel({
-    this.name,
-    required this.data,
-    this.isSelected = false,
-  });
 }
 
 class FakeDataModel {

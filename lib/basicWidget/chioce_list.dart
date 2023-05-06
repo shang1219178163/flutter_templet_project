@@ -21,7 +21,7 @@ class ChioceList extends StatefulWidget {
 
   List<int> indexs = <int>[];
 
-  var children = <ChioceModel>[];
+  var children = <ChioceDataModel>[];
 
   void Function(List<int> indexs) callback;
 
