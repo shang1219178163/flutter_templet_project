@@ -155,11 +155,20 @@ class _AlertSheetDemoState extends State<AlertSheetDemo> {
     // ddlog(e);
   }
 
-  void showAlertSheet() {
+  /// ios 弹窗
+  void showAlertSheet({
+    Widget title = const Text("请选择"),
+    Widget? message,
+    List<Widget>? actions,
+    ScrollController? messageScrollController,
+    ScrollController? actionScrollController,
+  }) {
     CupertinoActionSheet(
-      title: Text(title),
-      message: Text(message),
-      actions: ["选择 1", "选择 2", "选择 3",].map((e) => CupertinoActionSheetAction(
+      messageScrollController: messageScrollController,
+      actionScrollController: actionScrollController,
+      title: title,
+      message: message,
+      actions: actions ?? ["选择 1", "选择 2", "选择 3",].map((e) => CupertinoActionSheetAction(
         onPressed: () {
           ddlog(e);
           Navigator.pop(context);

@@ -366,7 +366,11 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
 
     debugPrint('map: $map1');
     debugPrint('map1: $map1');
-    debugPrint('map2: $map1');
+
+    List<String>? strs;
+    if (strs == null || strs.isEmpty == true) {
+      debugPrint('strs: isEmpty');
+    }
   }
 
   getUrlParams({Map<String, dynamic> map = const {}}) {

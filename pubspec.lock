@@ -987,12 +987,12 @@ packages:
     source: hosted
     version: "0.9.1"
   scrollable_positioned_list:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       name: scrollable_positioned_list
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.2.3"
+    version: "0.3.7"
   share:
     dependency: "direct main"
     description:

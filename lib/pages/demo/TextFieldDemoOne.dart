@@ -37,6 +37,8 @@ class _TextFieldDemoOneState extends State<TextFieldDemoOne> {
   void initState() {
     super.initState();
 
+    textEditingController.value = TextEditingValue(text: "widget.value") ;
+
     ///添加获取焦点与失去焦点的兼听
     focusNode.addListener((){
       ///当前兼听的 TextFeild 是否获取了输入焦点

@@ -98,35 +98,20 @@ class ChioceModel{
 
   ChioceModel({
     required this.title,
-    required this.subtitle,
-    required this.secondary,
-    required this.selected,
+    this.subtitle,
+    this.secondary,
+    this.selected = false,
+    this.data,
   });
 
-  /// The primary content of the list tile.
-  ///
-  /// Typically a [Text] widget.
-  final Widget? title;
+  Widget? title;
 
-  /// Additional content displayed below the title.
-  ///
-  /// Typically a [Text] widget.
-  final Widget? subtitle;
+  Widget? subtitle;
 
-  /// A widget to display on the opposite side of the tile from the radio button.
-  ///
-  /// Typically an [Icon] widget.
-  final Widget? secondary;
+  Widget? secondary;
 
-  /// Whether to render icons and text in the [activeColor].
-  ///
-  /// No effort is made to automatically coordinate the [selected] state and the
-  /// [checked] state. To have the list tile appear selected when the radio
-  /// button is the selected radio button, set [selected] to true when [value]
-  /// matches [groupValue].
-  ///
-  /// Normally, this property is left to its default value, false.
-  late bool selected;
+  bool selected;
 
+  dynamic data;
 
 }

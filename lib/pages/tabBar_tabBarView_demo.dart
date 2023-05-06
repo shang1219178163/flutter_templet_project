@@ -532,7 +532,7 @@ var customs = [
   Tuple2(APPRouter.boxWidgetDemo, "boxWidgetDemo", ),
   Tuple2(APPRouter.nSkeletonDemo, "骨架图", ),
   Tuple2(APPRouter.nTreeDemo, "树形组件", ),
-
+  Tuple2(APPRouter.popViewChoiceChipDemo, "选择弹窗", ),
 
 ];
 

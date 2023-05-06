@@ -12,6 +12,7 @@ class Assets {
   static const String imagesBgGlassmophism = 'assets/images/bg_glassmophism.png';
   static const String imagesBgHorizontalScroll = 'assets/images/bg_horizontal_scroll.png';
   static const String imagesBgJiguang = 'assets/images/bg_jiguang.png';
+  static const String imagesBgMountain = 'assets/images/bg_mountain.png';
   static const String imagesBgOcean = 'assets/images/bg_ocean.png';
   static const String imagesFloating = 'assets/images/floating.png';
   static const String imagesFlutterLogo = 'assets/images/flutter_logo.png';
@@ -19,6 +20,8 @@ class Assets {
   static const String imagesIconAppbarBackWhite = 'assets/images/icon_appbar_back_white.png';
   static const String imagesIconArrowDown = 'assets/images/icon_arrow_down.png';
   static const String imagesIconArrowUp = 'assets/images/icon_arrow_up.png';
+  static const String imagesIconClear = 'assets/images/icon_clear.png';
+  static const String imagesIconClose60 = 'assets/images/icon_close_60.png';
   static const String imagesIconDelete = 'assets/images/icon_delete.png';
   static const String imagesIconDowload = 'assets/images/icon_dowload.png';
   static const String imagesIconHeart = 'assets/images/icon_heart.png';
@@ -35,12 +38,12 @@ class Assets {
   static const String imagesImgPlaceholderSearch = 'assets/images/img_placeholder_search.png';
   static const String imagesImgUpdate = 'assets/images/img_update.png';
   static const String imagesImgUploadPlaceholder = 'assets/images/img_upload_placeholder.png';
-  static const String imagesJsCover = 'assets/images/js_cover.jpg';
+  static const String imagesJsCover = 'assets/images/js_cover.png';
   static const String imagesLogoGlassmophism = 'assets/images/logo_glassmophism.png';
   static const String imagesPubDevLogo = 'assets/images/pub_dev_logo.png';
   static const String imagesQRCode = 'assets/images/QRCode.png';
   static const String imagesShaQiu = 'assets/images/sha_qiu.png';
-  static const String imagesShan = 'assets/images/shan.jpg';
+  static const String imagesShan = 'assets/images/shan.png';
   static const String imagesWeiqi = 'assets/images/weiqi.png';
 
 }

@@ -109,7 +109,7 @@ dependencies:
   shimmer_animation: ^2.1.0+1
   image_gallery_saver: ^1.7.1
 
-  flutter_swiper_null_safety: ^1.0.0
+  flutter_swiper_null_safety: ^1.0.2
   flutter_smart_dialog: ^4.2.1
   flutter_rating_bar: ^4.0.0
   desktop_drop: ^0.4.1
@@ -150,6 +150,8 @@ dependencies:
 #  ansicolor: ^2.0.1
 
 dependency_overrides:
+  scrollable_positioned_list: ^0.3.2
+
 # User:
 #   path: ../User
 

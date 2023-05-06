@@ -25,6 +25,7 @@ import 'package:flutter_templet_project/Pages/APPUserCenterPage.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/routes/APPRouter.dart';
 import 'package:flutter_templet_project/service/cache_service.dart';
+import 'package:flutter_templet_project/uti/app_uti.dart';
 
 import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -124,9 +125,6 @@ Future<void> initDebugInfo() async {
   // debugPrintLayouts = true;
 }
 
-///全局
-final GlobalKey<NavigatorState> navigatorKey = GlobalKey();
-
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -135,7 +133,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final app = GetMaterialApp(
-      key: navigatorKey,
+      key: AppUti.navigatorKey,
       title: 'Flutter Templet',
       debugShowCheckedModeBanner: false,
       theme: APPThemeSettings.instance.themeData,
@@ -157,7 +155,14 @@ class MyApp extends StatelessWidget {
     //   },
     );
 
-    return app;
+    return ScreenUtilInit(
+      designSize: const Size(375, 812),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (context, child) {
+        return app;
+      }
+    );
     //全局置灰
     // return Consumer<ColorFilteredProvider>(
     //   builder: (BuildContext context, provider, Widget? child) {
