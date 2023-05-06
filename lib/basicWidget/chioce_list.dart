@@ -61,7 +61,9 @@ class _ChioceListState extends State<ChioceList> {
                 border: Border.all(color: Colors.transparent),
               ),
               child: ListTile(
+                dense: true,
                 // tileColor: Colors.white,
+                leading: e.secondary,
                 title: e.title,
                 subtitle: e.subtitle,
                 trailing: widget.indexs.contains(index) ? Icon(Icons.check) : null,

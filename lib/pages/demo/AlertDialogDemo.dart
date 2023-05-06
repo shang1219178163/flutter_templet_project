@@ -595,30 +595,13 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
 
   //多选/单选
   showChioceListAlertDialog({bool isMutiple = false}) {
-    final list = [
-      ChioceModel(
-          title: Text("微信支付"),
-          subtitle: Text("微信支付，不止支付"),
-          secondary: Icon(Icons.camera),
-          selected: false),
-      ChioceModel(
-          title: Text("阿里支付"),
-          subtitle: Text("支付就用支付宝"),
-          secondary: Icon(Icons.palette),
-          selected: false),
-      ChioceModel(
-          title: Text("银联支付"),
-          subtitle: Text("不打开APP就支付"),
-          secondary: Icon(Icons.payment),
-          selected: false),
-    ];
 
     CupertinoAlertDialog(
       title: Text("ChioceList ${isMutiple ? '多选' : '单选'}"),
       content: ChioceList(
         isMutiple: isMutiple,
         backgroudColor: Colors.black.withAlpha(10),
-        children: list,
+        children: payTypes,
         indexs: [0],
         canScroll: false,
         callback: (indexs) {

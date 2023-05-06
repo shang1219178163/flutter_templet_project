@@ -10,6 +10,7 @@ import 'package:flutter_templet_project/basicWidget/chioce_list.dart';
 import 'package:flutter_templet_project/basicWidget/chioce_wrap.dart';
 import 'package:flutter_templet_project/extension/bottom_sheet_ext.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
+import 'package:tuple/tuple.dart';
 
 
 class AlertSheetDemo extends StatefulWidget {
@@ -248,11 +249,6 @@ class _AlertSheetDemoState extends State<AlertSheetDemo> {
     }
 
   void _showChioceList({required bool isMutiple}){
-      final list = [
-        ChioceModel(title: Text("微信支付"), subtitle: Text("微信支付，不止支付"), secondary: Icon(Icons.camera), selected: true),
-        ChioceModel(title: Text("阿里支付"), subtitle: Text("支付就用支付宝"), secondary: Icon(Icons.palette), selected: true),
-        ChioceModel(title: Text("银联支付"), subtitle: Text("不打开APP就支付"), secondary: Icon(Icons.payment), selected: true),
-      ];
 
       CupertinoActionSheet(
         title: Text(title, style: TextStyle(fontSize: 18, color: Colors.black)),
@@ -261,7 +257,7 @@ class _AlertSheetDemoState extends State<AlertSheetDemo> {
           ChioceList(
             isMutiple: isMutiple,
             backgroudColor: Colors.black.withAlpha(5),
-            children: list,
+            children: payTypes,
             indexs: [1],
             canScroll: false,
             callback: (indexs) {
@@ -410,4 +406,14 @@ class _RadioTileSexWidgetState extends State<RadioTileSexWidget> {
   }
 }
 
-
+///支付方式
+final payTypes = <Tuple4<String, String, Widget, bool>>[
+  Tuple4("微信支付", "微信支付，不止支付", Icon(Icons.camera), false),
+  Tuple4("阿里支付", "支付就用支付宝", Icon(Icons.palette), false),
+  Tuple4("银联支付", "不打开APP就支付", Icon(Icons.payment), false),
+].map((e) => ChioceModel(
+    title: Text(e.item1),
+    subtitle: Text(e.item2),
+    secondary: e.item3,
+    selected: e.item4
+)).toList();

@@ -46,6 +46,7 @@ class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
   }).toList();
 
 
+
   /// 已选择的列表(多选)
   List<SelectedModel<FakeDataModel>> selectedItems = [];
   /// 临时已选择的列表(多选)

@@ -10,6 +10,7 @@ import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/basicWidget/chioce_list.dart';
 import 'package:flutter_templet_project/extension/list_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
+import 'package:flutter_templet_project/pages/demo/AlertSheetDemo.dart';
 
 import 'package:flutter_templet_project/pages/demo/ListTileDemo.dart';
 
@@ -182,11 +183,6 @@ class _PickerDemoState extends State<PickerDemo> {
 
       case 6:
         {
-          final list = [
-            ChioceModel(title: Text("微信支付"), subtitle: Text("微信支付，不止支付"), secondary: Icon(Icons.camera), selected: true),
-            ChioceModel(title: Text("阿里支付"), subtitle: Text("支付就用支付宝"), secondary: Icon(Icons.palette), selected: true),
-            ChioceModel(title: Text("银联支付"), subtitle: Text("不打开APP就支付"), secondary: Icon(Icons.payment), selected: true),
-          ];
 
           context.showBottomPicker(
             height: 500,
@@ -195,7 +191,7 @@ class _PickerDemoState extends State<PickerDemo> {
                 // color: Colors.green,
                 child: ChioceList(
                   // isMutiple: true,
-                  children: list*5,
+                  children: payTypes*5,
                   indexs: [0],
                   canScroll: true,
                   callback: (Object index) {
@@ -213,12 +209,6 @@ class _PickerDemoState extends State<PickerDemo> {
 
       case 7:
         {
-          final list = [
-            ChioceModel(title: Text("微信支付"), subtitle: Text("微信支付，不止支付"), secondary: Icon(Icons.camera), selected: true),
-            ChioceModel(title: Text("阿里支付"), subtitle: Text("支付就用支付宝"), secondary: Icon(Icons.palette), selected: true),
-            ChioceModel(title: Text("银联支付"), subtitle: Text("不打开APP就支付"), secondary: Icon(Icons.payment), selected: true),
-          ];
-
           context.showBottomPicker(
             height: 600,
             child: Container(
@@ -226,7 +216,7 @@ class _PickerDemoState extends State<PickerDemo> {
               // height: 500,
               child: ChioceList(
                 isMutiple: true,
-                children: list*5,
+                children: payTypes*5,
                 indexs: [0],
                 canScroll: true,
                 callback: (Object index) {
