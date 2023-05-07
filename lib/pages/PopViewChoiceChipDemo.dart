@@ -32,14 +32,14 @@ class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
   };
 
   late var items = <Tuple3<String, String, String>>[
-    Tuple3("icon_section.png", "分组", "userDiseaseTypesDesc"),
+    Tuple3("icon_section.png", "分组", "userTypesDesc"),
     Tuple3("icon_remark.png", "标签", "tagsDesc"),
     Tuple3("icon_tag.png", "备注", "remark",),
   ];
 
 
   /// 分组疾病列表
-  late List<SelectedModel<FakeDataModel>> diseaseTypes = nums.map((e){
+  late List<SelectedModel<FakeDataModel>> allTypes = nums.map((e){
     return SelectedModel(
       name: "item_$e",
       isSelected: false,
@@ -122,7 +122,7 @@ class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
         color: Color(0xff333333),
       ),),
       onCancell: (){
-        handleDiseaseTypes(selectedItems: selectedItems);
+        handleItems(selectedItems: selectedItems);
         Navigator.of(context).pop();
       },
       onConfirm: () async {
@@ -148,7 +148,7 @@ class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
           runSpacing: 12,
           spacing: 16,
           alignment: WrapAlignment.start,
-          children: diseaseTypes.map((e) => Material(
+          children: allTypes.map((e) => Material(
             color: Colors.transparent,
             child: ChoiceChip(
               side: BorderSide(color: Color(0xfff3f3f3)),
@@ -162,7 +162,7 @@ class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
               selectedColor: Theme.of(context).primaryColor,
               backgroundColor: bgColor[10],
               onSelected: (bool selected) {
-                for (final element in diseaseTypes) {
+                for (final element in allTypes) {
                   if (element.data.id == e.data.id) {
                     element.isSelected = selected;
                   } else {
@@ -172,7 +172,7 @@ class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
                   }
                 }
 
-                selectedItemsTmp = diseaseTypes.where((e) => e.isSelected == true).toList();
+                selectedItemsTmp = allTypes.where((e) => e.isSelected == true).toList();
                 // selectDiseaseTypes = diseaseTypeshere((e) => e.isSelected == true).toList();
                 setState1(() {});
                 // debugPrint("${e.toString()}");
@@ -202,7 +202,7 @@ class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
     return showPopView(
         title: "选择",
         onCancell: (){
-          handleDiseaseTypes(selectedItems: selectedItems);
+          handleItems(selectedItems: selectedItems);
           Navigator.of(context).pop();
         },
         onConfirm: () async {
@@ -228,7 +228,7 @@ class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
             runSpacing: 12,
             spacing: 16,
             alignment: alignment,
-            children: diseaseTypes.map((e) => Material(
+            children: allTypes.map((e) => Material(
               color: Colors.transparent,
               child: ChoiceChip(
                 side: BorderSide(color: Color(0xfff3f3f3)),
@@ -242,7 +242,7 @@ class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
                 selectedColor: Theme.of(context).primaryColor,
                 backgroundColor: bgColor[10],
                 onSelected: (bool selected) {
-                  for (final element in diseaseTypes) {
+                  for (final element in allTypes) {
                     if (element.data.id == e.data.id) {
                       element.isSelected = selected;
                     } else {
@@ -252,7 +252,7 @@ class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
                     }
                   }
 
-                  selectedItemsTmp = diseaseTypes.where((e) => e.isSelected == true).toList();
+                  selectedItemsTmp = allTypes.where((e) => e.isSelected == true).toList();
                   // selectDiseaseTypes = diseaseTypeshere((e) => e.isSelected == true).toList();
                   setState1(() {});
                   // debugPrint("${e.toString()}");
@@ -299,8 +299,8 @@ class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
           padding: EdgeInsets.only(right: 4),
           child: Material(
             child: IconButton(
-              onPressed: (){
-                Navigator.pop(context);
+              onPressed: onCancell ?? (){
+                Navigator.of(context).pop();
               },
               icon: Icon(Icons.clear,
                 size: 20,
@@ -383,11 +383,11 @@ class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
   }
 
   /// 处理疾病分组选中数据
-  handleDiseaseTypes({
+  handleItems({
     required List<SelectedModel<FakeDataModel>> selectedItems,
   }) {
     final ids = selectedItems.map((e) => e.data.id).toList();
-    for (final element in diseaseTypes) {
+    for (final element in allTypes) {
       element.isSelected = ids.contains(element.data.id);
     }
   }

@@ -105,8 +105,8 @@ class _NChoicBoxState extends State<NChoicBox> {
           padding: EdgeInsets.only(right: 4),
           child: Material(
             child: IconButton(
-              onPressed: (){
-                Navigator.pop(context);
+              onPressed: onCancell ?? (){
+                Navigator.of(context).pop();
               },
               icon: Icon(Icons.clear,
                 size: 20,
