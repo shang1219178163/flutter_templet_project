@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/n_cancell_and_confirm_bar.dart';
+import 'package:flutter_templet_project/basicWidget/n_choic_box.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/model/selected_model.dart';
 import 'package:flutter_templet_project/uti/color_uti.dart';
@@ -25,14 +26,16 @@ class PopViewChoiceChipDemo extends StatefulWidget {
 class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
   List<int> nums = List<int>.generate(49, (index) => index);
 
+  late final funcMap = <String, Function>{
+    "NChoicBox 弹窗": showPopViewBox,
+    "方法 弹窗": clickUpdateTags,
+  };
+
   late var items = <Tuple3<String, String, String>>[
     Tuple3("icon_section.png", "分组", "userDiseaseTypesDesc"),
     Tuple3("icon_remark.png", "标签", "tagsDesc"),
     Tuple3("icon_tag.png", "备注", "remark",),
   ];
-
-  int? _value = 1;
-  final _values = <String>[];
 
 
   /// 分组疾病列表
@@ -44,7 +47,6 @@ class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
       id: e.toString(),
     ));
   }).toList();
-
 
 
   /// 已选择的列表(多选)
@@ -74,55 +76,79 @@ class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
           onPressed: onPressed,
         )).toList(),
       ),
-      body: ValueListenableBuilder<String>(
-         valueListenable: info,
-         builder: (context,  value, child){
+      body: ListView(
+        children: [
+          Column(
+            children: [
+              ValueListenableBuilder<String>(
+                valueListenable: info,
+                builder: (context,  value, child){
 
-            return Text(value);
-          }
-      ),
+                  return Container(
+                    padding: EdgeInsets.all(16),
+                    child: Text(value)
+                  );
+                }
+              ),
+              Wrap(
+                runSpacing: 12,
+                spacing: 16,
+                children: funcMap.keys.map((e) => TextButton(
+                  onPressed: () => funcMap[e]?.call(),
+                  child: Text(e),
+                )).toList(),
+              ),
+            ],
+          )
+        ],
+      )
     );
   }
 
   onPressed(){
-    clickUpdateSections(e: items[0]);
+    clickUpdateTags();
+    // showPopViewBox(e: items[0]);
   }
 
-  clickUpdateSections({
-    required Tuple3<String, String, String> e,
+  showPopViewBox({
     bool isSingle = false,
-    WrapAlignment alignment = WrapAlignment.start,
   }) {
-    return showPopViewSections(
-        title: e.item2,
-        onCancell: (){
-          handleDiseaseTypes(selectedItems: selectedItems);
-          Navigator.of(context).pop();
-        },
-        onConfirm: () async {
-          Navigator.of(context).pop();
+    final box = NChoicBox(
+      // alignment: Alignment.bottomCenter,
+      title: Text("选择",
+        style: TextStyle(
+        fontSize: 18,
+        fontWeight: FontWeight.bold,
+        color: Color(0xff333333),
+      ),),
+      onCancell: (){
+        handleDiseaseTypes(selectedItems: selectedItems);
+        Navigator.of(context).pop();
+      },
+      onConfirm: () async {
+        Navigator.of(context).pop();
 
-          selectedItems = selectedItemsTmp;
-          info.value = selectedItemsNames;
+        selectedItems = selectedItemsTmp;
+        info.value = selectedItemsNames;
 
-          // final response = await requestUpdateSections();
-          // if (response is! Map<String, dynamic> || response['code'] != 'OK' || response['result'] != true) {
-          //   BrunoUti.showInfoToast(RequestMsg.networkErrorMsg);
-          //   return;
-          // }
+        // final response = await requestUpdateSections();
+        // if (response is! Map<String, dynamic> || response['code'] != 'OK' || response['result'] != true) {
+        //   BrunoUti.showInfoToast(RequestMsg.networkErrorMsg);
+        //   return;
+        // }
 
-          // handleDiseaseTypes(selectedItems: selectDiseaseTypes);
-          // map[e.item3] = selectDiseaseTypesNames;
-          // debugPrint("selectDiseaseTypesNames: ${map[e.item3]}");
-          // debugPrint("map[e.item3]: ${map[e.item3]}");
-          setState(() {});
-        },
-        childBuilder: (context, setState1) {
-          return Wrap(
-            runSpacing: 12,
-            spacing: 16,
-            alignment: alignment,
-            children: diseaseTypes.map((e) => Material(
+        // handleDiseaseTypes(selectedItems: selectDiseaseTypes);
+        // map[e.item3] = selectDiseaseTypesNames;
+        // debugPrint("selectDiseaseTypesNames: ${map[e.item3]}");
+        // debugPrint("map[e.item3]: ${map[e.item3]}");
+        setState(() {});
+      },
+      contentChildBuilder: (context, setState1) {
+        return Wrap(
+          runSpacing: 12,
+          spacing: 16,
+          alignment: WrapAlignment.start,
+          children: diseaseTypes.map((e) => Material(
             color: Colors.transparent,
             child: ChoiceChip(
               side: BorderSide(color: Color(0xfff3f3f3)),
@@ -152,133 +178,191 @@ class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
                 // debugPrint("${e.toString()}");
               },
             ),)).toList(),
-          );
-        }
+        );
+      }
+    );
+
+    return showGeneralDialog(
+      context: context,
+      barrierDismissible: false,
+      barrierLabel: 'barrierLabel',
+      transitionDuration: Duration(milliseconds: 200),
+      pageBuilder: (context, animation, secondaryAnimation) {
+
+        return box;
+      }
     );
   }
 
-  showPopViewSections({
-    required String title,
-    VoidCallback? onCancell,
-    VoidCallback? onConfirm,
-    StatefulWidgetBuilder? childBuilder,
+  clickUpdateTags({
+    bool isSingle = false,
+    WrapAlignment alignment = WrapAlignment.start,
   }) {
-    var titles = List<int>.generate(24, (index) => index);
 
-    showPopView(
-      title: title,
-      buttonBarHeight: 48,
-      onCancell: onCancell,
-      onConfirm: onConfirm,
-      content: StatefulBuilder(
-        builder: (context, setState) {
+    return showPopView(
+        title: "选择",
+        onCancell: (){
+          handleDiseaseTypes(selectedItems: selectedItems);
+          Navigator.of(context).pop();
+        },
+        onConfirm: () async {
+          Navigator.of(context).pop();
 
-          final content = Padding(
-            padding: EdgeInsets.all(20),
-            child: childBuilder?.call(context, setState) ?? Wrap(
-              // runSpacing: 16,
-              spacing: 16,
-              alignment: WrapAlignment.spaceBetween,
-              children: titles.map((e) => Material(
-                child: ChoiceChip(
-                  side: BorderSide(color: Colors.red),
-                  label: Text('Choice_$e'),
-                  // padding: EdgeInsets.only(left: 15, right: 15),
-                  selected: _value == e,
-                  selectedColor: primary,
-                  backgroundColor: bgColor.withOpacity(0.1),
-                  onSelected: (bool selected) {
-                    _value = selected ? e : null;
-                    setState(() {});
-                    debugPrint("$_value");
-                  },
-                )),
-              ).toList(),
-            ),
-          );
-          // return content;
-          return Scrollbar(
-            child: ConstrainedBox(
-              constraints: BoxConstraints(
-                maxHeight: 400 - 48,
-                minHeight: 200,
-              ),
-              child: SingleChildScrollView(child: content),
-            ),
+          selectedItems = selectedItemsTmp;
+          info.value = selectedItemsNames;
+
+          // final response = await requestUpdateSections();
+          // if (response is! Map<String, dynamic> || response['code'] != 'OK' || response['result'] != true) {
+          //   BrunoUti.showInfoToast(RequestMsg.networkErrorMsg);
+          //   return;
+          // }
+
+          // handleDiseaseTypes(selectedItems: selectDiseaseTypes);
+          // map[e.item3] = selectDiseaseTypesNames;
+          // debugPrint("selectDiseaseTypesNames: ${map[e.item3]}");
+          // debugPrint("map[e.item3]: ${map[e.item3]}");
+          setState(() {});
+        },
+        contentChildBuilder: (context, setState1) {
+          return Wrap(
+            runSpacing: 12,
+            spacing: 16,
+            alignment: alignment,
+            children: diseaseTypes.map((e) => Material(
+              color: Colors.transparent,
+              child: ChoiceChip(
+                side: BorderSide(color: Color(0xfff3f3f3)),
+                label: Text(e.name ?? "-"),
+                labelStyle: TextStyle(
+                  color: e.isSelected == true ? Colors.white : fontColor,
+                ),
+                // padding: EdgeInsets.only(left: 15, right: 15),
+                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                selected: e.isSelected == true,
+                selectedColor: Theme.of(context).primaryColor,
+                backgroundColor: bgColor[10],
+                onSelected: (bool selected) {
+                  for (final element in diseaseTypes) {
+                    if (element.data.id == e.data.id) {
+                      element.isSelected = selected;
+                    } else {
+                      if (isSingle) {
+                        element.isSelected = false;//单选
+                      }
+                    }
+                  }
+
+                  selectedItemsTmp = diseaseTypes.where((e) => e.isSelected == true).toList();
+                  // selectDiseaseTypes = diseaseTypeshere((e) => e.isSelected == true).toList();
+                  setState1(() {});
+                  // debugPrint("${e.toString()}");
+                },
+              ),)).toList(),
           );
         }
-      )
     );
-
   }
 
+  /// 弹窗封装
   showPopView({
     required String title,
-    required Widget content,
-    double horizontal = 38,
-    double maxHeight = 500,
-    double minHeight = 200,
-    double buttonBarHeight = 48,
+    Widget? content,
+    Widget? header,
+    Widget? footer,
+    Color divderColor = const Color(0xffF3F3F3),
+    EdgeInsets margin = const EdgeInsets.symmetric(horizontal: 38),
+    Radius radius = const Radius.circular(8),
+    Alignment alignment = Alignment.center,
     VoidCallback? onCancell,
     VoidCallback? onConfirm,
-    Radius radius = const Radius.circular(8)
+    double contentMaxHeight = 500,
+    double contentMinHeight = 150,
+    double buttonBarHeight = 48,
+    EdgeInsets contentPadding = const EdgeInsets.all(20),
+    StatefulWidgetBuilder? contentChildBuilder,
   }) {
-    final widget = Container(
-      margin: EdgeInsets.symmetric(horizontal: horizontal),
+
+    final defaultHeader = Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Padding(
+          padding: EdgeInsets.only(left: 20,),
+          child: Text(title,
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: fontColor,
+            ),
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.only(right: 4),
+          child: Material(
+            child: IconButton(
+              onPressed: (){
+                Navigator.pop(context);
+              },
+              icon: Icon(Icons.clear,
+                size: 20,
+                color: Colors.black.withOpacity(0.5),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+
+    final defaultContent = StatefulBuilder(
+      builder: (context, setState) {
+
+        return Scrollbar(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              maxHeight: contentMaxHeight - buttonBarHeight,
+              minHeight: contentMinHeight,
+            ),
+            child: SingleChildScrollView(
+                child: Padding(
+                  padding: contentPadding,
+                  child: contentChildBuilder?.call(context, setState),
+                )
+            ),
+          ),
+        );
+      }
+    );
+
+    final defaultFooter = NCancellAndConfirmBar(
+      height: buttonBarHeight,
+      confirmBgColor: Theme.of(context).primaryColor,
+      bottomLeftRadius: radius,
+      bottomRightRadius: radius,
+      onCancell: onCancell ?? (){
+        Navigator.of(context).pop();
+      },
+      onConfirm: onConfirm ?? () {
+        Navigator.of(context).pop();
+      },
+    );
+
+    final child = Container(
+      margin: margin,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.all(radius),
       ),
-      constraints: BoxConstraints(
-        maxHeight: maxHeight,
-      ),
+      // constraints: BoxConstraints(
+      //   maxHeight: contentMaxHeight,
+      //   minHeight: contentMinHeight,
+      // ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Padding(
-                padding: EdgeInsets.only(left: 20,),
-                child: Text(title,
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: fontColor,
-                  ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(right: 4),
-                child: Material(
-                  child: IconButton(
-                    onPressed: (){
-                      Navigator.pop(context);
-                    },
-                    icon: Icon(Icons.clear,
-                      size: 20,
-                      color: Colors.black.withOpacity(0.5),
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          Divider(height: 1, color: lineColor,),
-          content,
-          NCancellAndConfirmBar(
-            height: buttonBarHeight,
-            confirmBgColor: Theme.of(context).primaryColor,
-            bottomLeftRadius: radius,
-            bottomRightRadius: radius,
-            onCancell: onCancell ?? (){
-              Navigator.of(context).pop();
-            },
-            onConfirm: onConfirm ?? () {
-              Navigator.of(context).pop();
-            },
-          ),
+          header ?? defaultHeader,
+          Divider(height: 1, color: divderColor,),
+          content ?? defaultContent,
+          footer ?? defaultFooter,
         ],
       ),
     );
@@ -289,7 +373,11 @@ class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
       barrierLabel: 'barrierLabel',
       transitionDuration: Duration(milliseconds: 200),
       pageBuilder: (context, animation, secondaryAnimation) {
-        return Center(child: widget);
+
+        return Align(
+          alignment: alignment,
+          child: child,
+        );
       }
     );
   }
