@@ -24,6 +24,7 @@ import 'package:flutter_templet_project/Pages/APPUserCenterPage.dart';
 
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/routes/APPRouter.dart';
+import 'package:flutter_templet_project/routes/AppRouteObserver.dart';
 import 'package:flutter_templet_project/service/cache_service.dart';
 import 'package:flutter_templet_project/uti/app_uti.dart';
 
@@ -144,7 +145,7 @@ class MyApp extends StatelessWidget {
       initialRoute: AppPage.INITIAL,
       getPages: AppPage.routes,
       unknownRoute: AppPage.unknownRoute,
-      routingCallback: (routing){
+      routingCallback: (routing) {
         // if (routing != null) {
         //   ddlog([routing.previous, routing.current]);
         // }

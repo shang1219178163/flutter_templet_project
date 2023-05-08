@@ -457,6 +457,7 @@ var slivers = [
 var specials = [
   Tuple2(APPRouter.operatorDemo, "特殊操作符", ),
   Tuple2(APPRouter.mediaQueryDemo, "mediaQuery", ),
+  Tuple2(APPRouter.appRouteObserverDemo, "页面路由监听", ),
   Tuple2(APPRouter.pageLifecycleObserverDemo, "页面生命周期监听", ),
   Tuple2(APPRouter.pageLifecycleFuncTest, "页面生命方法测试", ),
   Tuple2(APPRouter.systemIconsPage, "flutter 系统 Icons", ),
@@ -489,7 +490,7 @@ var specials = [
 
   Tuple2(APPRouter.netStateListenerDemo, "netStateListenerDemo", ),
   Tuple2(APPRouter.netStateListenerDemoOne, "mixin监听网络", ),
-  Tuple2(APPRouter.ReflectDemo, "模型属性动态化赋值", ),
+  Tuple2(APPRouter.reflectDemo, "模型属性动态化赋值", ),
   Tuple2(APPRouter.testFunction, "方法动态化", ),
 
 

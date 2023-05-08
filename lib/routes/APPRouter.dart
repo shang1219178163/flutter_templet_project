@@ -5,6 +5,7 @@ import 'package:flutter_templet_project/basicWidget/EnhanceTab/enhance_tab_bar_d
 import 'package:flutter_templet_project/basicWidget/TreeNode/NTreeDemo.dart';
 import 'package:flutter_templet_project/basicWidget/drag_destination_view.dart';
 import 'package:flutter_templet_project/basicWidget/responsive_column.dart';
+import 'package:flutter_templet_project/pages/APPRouteObserverDemo.dart';
 import 'package:flutter_templet_project/pages/DataTypeDemo.dart';
 import 'package:flutter_templet_project/pages/PageLifecycleFuncTest.dart';
 import 'package:flutter_templet_project/pages/PopViewChoiceChipDemo.dart';
@@ -252,7 +253,8 @@ class APPRouter {
   static const thirdPage = '/ThirdPage';
   static const fourthPage = '/FourthPage';
 
-  static const ReflectDemo = '/moldelReflectDemo';
+  static const reflectDemo = '/moldelReflectDemo';
+  static const appRouteObserverDemo = '/appRouteObserverDemo';
   static const pageLifecycleObserverDemo = '/pageLifecycleObserverDemo';
   static const pageLifecycleFuncTest = '/pageLifecycleFuncTest';
   static const mediaQueryDemo = '/mediaQueryDemo';
@@ -550,7 +552,8 @@ class AppPage {
     GetPage(name: APPRouter.thirdPage, page: () => ThirdPage(),),
     GetPage(name: APPRouter.fourthPage, page: () => FourthPage(),),
 
-    GetPage(name: APPRouter.ReflectDemo, page: () => ReflectDemo(),),
+    GetPage(name: APPRouter.reflectDemo, page: () => ReflectDemo(),),
+    GetPage(name: APPRouter.appRouteObserverDemo, page: () => AppRouteObserverDemo(),),
     GetPage(name: APPRouter.pageLifecycleObserverDemo, page: () => PageLifecycleObserverDemo(),),
     GetPage(name: APPRouter.pageLifecycleFuncTest, page: () => PageLifecycleFuncTest(),),
 

@@ -9,7 +9,6 @@ import 'package:flutter_templet_project/model/selected_model.dart';
 import 'package:flutter_templet_project/uti/color_uti.dart';
 import 'package:tuple/tuple.dart';
 
-
 class PopViewChoiceChipDemo extends StatefulWidget {
 
   PopViewChoiceChipDemo({
@@ -65,7 +64,7 @@ class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
 
   @override
   Widget build(BuildContext context) {
-
+    
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
