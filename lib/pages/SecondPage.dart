@@ -7,6 +7,7 @@ import 'package:flutter_templet_project/basicWidget/radial_button.dart';
 import 'package:flutter_templet_project/basicWidget/header.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/decoration_ext.dart';
+import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/pages/demo/MyPainter.dart';
 import 'package:flutter_templet_project/basicWidget/n_popup_route.dart';
 import 'package:flutter_templet_project/basicWidget/gesture_detector_container.dart';
@@ -345,8 +346,8 @@ class _SecondPageState extends State<SecondPage> {
             Divider(),
             Header.h5(title: "UploadButton"),
             UploadButton(
-              image: Image.asset("images/img_update.png", fit: BoxFit.fill, width: 100, height: 100,),
-              deteleImage: Image.asset("images/icon_delete.png", fit: BoxFit.fill, width: 25, height: 25,),
+              image: Image.asset("img_update.png".toPng(), fit: BoxFit.fill, width: 100, height: 100,),
+              deteleImage: Image.asset("icon_delete.png".toPng(), fit: BoxFit.fill, width: 25, height: 25,),
               onPressed: () {
                 ddlog("onPressed");
               },

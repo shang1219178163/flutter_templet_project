@@ -23,6 +23,7 @@ import 'package:flutter_templet_project/pages/FlutterFFiTest.dart';
 import 'package:flutter_templet_project/pages/LocalImagePage.dart';
 import 'package:flutter_templet_project/pages/HomeNavDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NSkeletonDemo.dart';
+import 'package:flutter_templet_project/pages/demo/TextFieldColorChangeDemo.dart';
 import 'package:flutter_templet_project/pages/homeSrollDemo.dart';
 import 'package:flutter_templet_project/pages/demo/BuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ButtonStyleDemo.dart';
@@ -501,6 +502,7 @@ class APPRouter {
   static const azlistviewDemo = '/azlistviewDemo';
   static const expansionTileCard = '/expansionTileCard';
   static const popViewChoiceChipDemo = '/popViewChoiceChipDemo';
+  static const textFieldColorChangeDemo = '/textFieldColorChangeDemo';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -785,6 +787,7 @@ class AppPage {
     GetPage(name: APPRouter.azlistviewDemo, page: () => AzlistviewDemo(),),
     GetPage(name: APPRouter.expansionTileCard, page: () => ExpansionTileCard(),),
     GetPage(name: APPRouter.popViewChoiceChipDemo, page: () => PopViewChoiceChipDemo(),),
+    GetPage(name: APPRouter.textFieldColorChangeDemo, page: () => TextFieldColorChangeDemo(),),
 
 
   ];

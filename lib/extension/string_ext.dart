@@ -33,11 +33,26 @@ extension StringExt on String{
   }
 
   /// 本地图片路径
-  String toPng() => "assets/images/$this.png";
+  String toPng() {
+    if (this.endsWith(".png")) {
+      return "assets/images/$this";
+    }
+    return "assets/images/$this.png";
+  }
   /// 本地图片路径
-  String toJpg() => "assets/images/$this.jpg";
+  String toJpg() {
+    if (this.endsWith(".jpg")) {
+      return "assets/images/$this";
+    }
+    return "assets/images/$this.jpg";
+  }
   /// 本地图片路径
-  String toSvg() => "assets/images/$this.svg";
+  String toSvg() {
+    if (this.endsWith(".svg")) {
+      return "assets/images/$this";
+    }
+    return "assets/images/$this.svg";
+  }
 
   /// 图片名称转 AssetImage(带类型)
   AssetImage toAssetImage({

@@ -500,13 +500,24 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
       case 18:
         {
           showGeneralDialog(
+            barrierDismissible: false,
               context: context,
-              pageBuilder: (BuildContext context, Animation<double> animation,
-                  Animation<double> secondaryAnimation) {
+              pageBuilder: (context, animation, secondaryAnimation) {
                 return Center(
-                  child: Text('showGeneralDialog'),
+                  child: Container(
+                    height: 400,
+                    color: Colors.red,
+                    margin: EdgeInsets.symmetric(horizontal: 10, vertical: 100),
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                        child: Text('showGeneralDialog弹窗', style: TextStyle(fontSize: 17),)
+                    )
+                  ),
                 );
-              });
+              }
+              );
         }
         break;
       case 19:

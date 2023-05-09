@@ -25,7 +25,7 @@ class APPThemeSettings {
     // primarySwatch: Colors.blue,
     // brightness: Brightness.dark,//设置明暗模式为暗色
     // accentColor: Colors.black,//(按钮）Widget前景色为黑色
-    primaryColor: Colors.lightBlue, //主色调为青色
+    primaryColor: Colors.blue, //主色调为青色
     indicatorColor: Colors.white,
     // splashColor: Colors.transparent, // 点击时的高亮效果设置为透明
     // highlightColor: Colors.transparent, // 长按时的扩散效果设置为透明
@@ -33,15 +33,23 @@ class APPThemeSettings {
     // textTheme: ThemeData.light().textTheme.copyWith(
     //     button: TextStyle(color: Colors.red)
     // ),//设置文本颜色为红色
-    // textButtonTheme: TextButtonThemeData(
-    //   style: ButtonStyle(),
-    // ),
-    // elevatedButtonTheme: ElevatedButtonThemeData(
-    //   // style: ButtonStyle()
-    // ),
-    // outlinedButtonTheme: OutlinedButtonThemeData(
-    //     style: ButtonStyle()
-    // ),
+    textButtonTheme: TextButtonThemeData(
+      style: TextButton.styleFrom(
+        primary: Colors.blue,
+      ),
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        // onPrimary: Colors.yellow,
+        primary: Colors.blue,
+      ),
+    ),
+    outlinedButtonTheme: OutlinedButtonThemeData(
+      style: OutlinedButton.styleFrom(
+        primary: Colors.blue,
+        // backgroundColor: Colors.green,
+      ),
+    ),
     // scaffoldBackgroundColor: Colors.red
   );
 

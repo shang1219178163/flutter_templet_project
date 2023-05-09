@@ -44,7 +44,7 @@ class LocalImagePage extends StatelessWidget {
           child: Center(
             child: FittedBox(
               fit: BoxFit.fitWidth,
-              child: Text(e.split("/").last)
+              child: Text(e)
             ),
           )
         ),
@@ -59,17 +59,17 @@ class LocalImagePage extends StatelessWidget {
   }
 
   var imageNames = [
-    "images/avatar.png",
-    "images/icon_appbar_back.png",
-    "images/icon_appbar_back_white.png",
-    "images/icon_home_delete.png",
-    "images/img_placeholder_empty.png",
-    "images/img_placeholder_empty_one.png",
-    "images/img_placeholder_offonline.png",
-    "images/img_placeholder_search.png",
-    "images/img_update.png",
-    "images/img_upload_placeholder.png",
-    "images/icon_delete.png",
+    "avatar.png",
+    "icon_appbar_back.png",
+    "icon_appbar_back_white.png",
+    "icon_home_delete.png",
+    "img_placeholder_empty.png",
+    "img_placeholder_empty_one.png",
+    "img_placeholder_offonline.png",
+    "img_placeholder_search.png",
+    "img_update.png",
+    "img_upload_placeholder.png",
+    "icon_delete.png",
   ];
   // var imageNames = [
   //   Image.asset("avatar.png", fit: BoxFit.fill),

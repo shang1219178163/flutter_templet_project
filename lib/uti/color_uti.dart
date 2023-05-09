@@ -18,13 +18,13 @@ const MaterialColor white = MaterialColor(
   },
 );
 
-///主色调
-const MaterialColor primary = MaterialColor(
-  0xFF37C2BC,
-  <int, Color>{
-    50: Color(0xFF9BE0DD), // 一般用于提交按钮的不可点击
-  },
-);
+// ///主色调
+// const MaterialColor primary = MaterialColor(
+//   Colors.blueAccent,
+//   <int, Color>{
+//     50:  Colors.blueAccent.withOpacity(0.5), // 一般用于提交按钮的不可点击
+//   },
+// );
 
 ///背景色 #F3F3F3
 const MaterialColor bgColor = MaterialColor(

@@ -18,7 +18,7 @@ class NCancellAndConfirmBar extends StatelessWidget {
     required this.onCancell,
     required this.onConfirm,
     this.cancellBgColor = bgColor,
-    this.confirmBgColor = primary,
+    this.confirmBgColor = Colors.blueAccent,
     this.cancellTextStyle,
     this.confirmTextStyle,
   }) : super(key: key);
@@ -33,7 +33,7 @@ class NCancellAndConfirmBar extends StatelessWidget {
   VoidCallback? onCancell;
   VoidCallback? onConfirm;
   Color cancellBgColor = bgColor;
-  Color confirmBgColor = primary;
+  Color confirmBgColor = Colors.blueAccent;
   TextStyle? cancellTextStyle;
   TextStyle? confirmTextStyle;
 

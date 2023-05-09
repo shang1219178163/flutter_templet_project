@@ -582,6 +582,8 @@ var others = [
   Tuple2(APPRouter.homeSrollDemo, "HomeSrollDemo", ),
   Tuple2(APPRouter.homeNavDemo, "HomeNavDemo", ),
   Tuple2(APPRouter.videoPlayerScreenDemo, "videoPlayerScreenDemo", ),
+  Tuple2(APPRouter.textFieldColorChangeDemo, "textFieldColorChangeDemo", ),
+
 
 ];
 
