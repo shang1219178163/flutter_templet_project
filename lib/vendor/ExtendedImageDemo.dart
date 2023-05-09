@@ -30,7 +30,7 @@ class _ExtendedImageDemoState extends State<ExtendedImageDemo> {
           child: Text(e,
             style: TextStyle(color: Colors.white),
           ),
-          onPressed: () => print(e),)
+          onPressed: () => debugPrint(e),)
         ).toList(),
       ),
       body: Text(arguments.toString())

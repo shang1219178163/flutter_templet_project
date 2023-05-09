@@ -23,6 +23,7 @@ import 'package:flutter_templet_project/pages/FlutterFFiTest.dart';
 import 'package:flutter_templet_project/pages/LocalImagePage.dart';
 import 'package:flutter_templet_project/pages/HomeNavDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NSkeletonDemo.dart';
+import 'package:flutter_templet_project/pages/demo/PageViewAndBarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TextFieldColorChangeDemo.dart';
 import 'package:flutter_templet_project/pages/homeSrollDemo.dart';
 import 'package:flutter_templet_project/pages/demo/BuilderDemo.dart';
@@ -503,6 +504,8 @@ class APPRouter {
   static const expansionTileCard = '/expansionTileCard';
   static const popViewChoiceChipDemo = '/popViewChoiceChipDemo';
   static const textFieldColorChangeDemo = '/textFieldColorChangeDemo';
+  static const pageViewAndBarDemo = '/pageViewAndBarDemo';
+
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -788,6 +791,7 @@ class AppPage {
     GetPage(name: APPRouter.expansionTileCard, page: () => ExpansionTileCard(),),
     GetPage(name: APPRouter.popViewChoiceChipDemo, page: () => PopViewChoiceChipDemo(),),
     GetPage(name: APPRouter.textFieldColorChangeDemo, page: () => TextFieldColorChangeDemo(),),
+    GetPage(name: APPRouter.pageViewAndBarDemo, page: () => PageViewAndBarDemo(),),
 
 
   ];

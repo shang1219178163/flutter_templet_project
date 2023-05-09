@@ -492,6 +492,7 @@ var specials = [
   Tuple2(APPRouter.netStateListenerDemoOne, "mixin监听网络", ),
   Tuple2(APPRouter.reflectDemo, "模型属性动态化赋值", ),
   Tuple2(APPRouter.testFunction, "方法动态化", ),
+  Tuple2(APPRouter.pageViewAndBarDemo, "pageViewAndBarDemo", ),
 
 
 ];
