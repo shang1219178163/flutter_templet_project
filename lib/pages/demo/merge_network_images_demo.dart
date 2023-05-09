@@ -8,6 +8,7 @@ import 'package:flutter_templet_project/basicWidget/merge_images_widget.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/image_ext.dart';
 import 'package:flutter_templet_project/extension/list_ext.dart';
+import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 
 class MergeNetworkImagesDemo extends StatefulWidget {
@@ -108,7 +109,7 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
               width: e.materialWidth,
               height: e.materialHeight,
             )).toList(),
-            qrCodeBuilder: (url) => Image.asset('images/QRCode.png', width:90, height: 90),
+            qrCodeBuilder: (url) => Image.asset('QRCode.png'.toPng(), width:90, height: 90),
             qrCodeUrl: qrCodeUrl,
           ),
         ],
@@ -168,12 +169,12 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
             children: [
               _buildBtn(
                 onTap: () => callback?.call(-1),
-                image: Image.asset('images/icon_arrow_up.png'),
+                image: Image.asset('icon_arrow_up.png'.toPng()),
                 hidden: hideUp,
               ),
               hideUp ? Container() : SizedBox(height: 6),
               _buildBtn(
-                image: Image.asset('images/icon_arrow_down.png'),
+                image: Image.asset('icon_arrow_down.png'.toPng()),
                 onTap: () => callback?.call(1),
                 hidden: hideDown,
               ),

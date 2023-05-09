@@ -8,6 +8,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/image_ext.dart';
 import 'package:flutter_templet_project/extension/list_ext.dart';
+import 'package:flutter_templet_project/extension/string_ext.dart';
 
 /// 合并多张图片为长图
 class MergeImagesWidget extends StatefulWidget {
@@ -117,12 +118,12 @@ class MergeImagesWidgetState extends State<MergeImagesWidget> {
             children: [
               _buildBtn(
                 onTap: () => callback?.call(-1),
-                image: Image.asset('images/icon_arrow_up.png'),
+                image: Image.asset('icon_arrow_up.png'.toPng()),
                 hidden: hideUp,
               ),
               hideUp ? Container() : SizedBox(height: 6),
               _buildBtn(
-                image: Image.asset('images/icon_arrow_down.png'),
+                image: Image.asset('icon_arrow_down.png'.toPng()),
                 onTap: () => callback?.call(1),
                 hidden: hideDown,
               ),

@@ -9,6 +9,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/string_ext.dart';
 
 class APPNotFoundPage extends StatelessWidget {
 
@@ -39,7 +40,7 @@ class APPNotFoundPage extends StatelessWidget {
           children: <Widget>[
             Hero(
               tag: 'avatar',
-              child: Image.asset('images/avatar.png', width:90),
+              child: Image.asset('avatar.png'.toPng(), width:90),
             ),
             SizedBox(height: 10),
             Text('哎呀, 你的页面跑路了!', style: TextStyle(fontSize: 17.0, color: Colors.black)),

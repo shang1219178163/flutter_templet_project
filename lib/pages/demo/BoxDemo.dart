@@ -13,6 +13,7 @@
 ///
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/extension/string_ext.dart';
 
 class BoxDemo extends StatefulWidget {
 
@@ -110,7 +111,7 @@ class _BoxDemoState extends State<BoxDemo> {
       child: FittedBox(
         fit: BoxFit.contain,
         // child: Image.network('https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg'),
-        child: Image.asset('images/bg.jpg',
+        child: Image.asset('bg.jpg'.toPng(),
           fit: BoxFit.cover,
         ),
       ),

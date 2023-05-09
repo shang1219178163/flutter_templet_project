@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:flutter_templet_project/basicWidget/header.dart';
 import 'package:flutter_templet_project/extension/scroll_controller_ext.dart';
+import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/uti/R.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
@@ -204,7 +205,7 @@ class _CustomScrollBarDemoState extends State<CustomScrollBarDemo> {
                 child: Container(
                   width: 24.w,
                   height: 24.w,
-                  child: Image.asset('images/icon_play.png',),
+                  child: Image.asset('icon_play.png'.toPng(),),
                 ),
               )
             ],

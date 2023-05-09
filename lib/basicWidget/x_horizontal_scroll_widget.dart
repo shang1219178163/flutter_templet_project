@@ -3,6 +3,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
+import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:tuple/tuple.dart';
 
 typedef XHomeSwiperBGWidgetBuilder = Widget Function(double itemWidth, int index);
@@ -214,7 +215,7 @@ class XHorizontalScrollWidget extends StatelessWidget {
         if (isVideo) SizedBox(
           width: 24,
           height: 24,
-          child: Image.asset('images/icon_play.png',),
+          child: Image.asset('icon_play.png'.toPng(),),
         ),
       ],
     );
@@ -451,7 +452,7 @@ class HorizontalScrollWidget extends StatelessWidget {
               if (isVideo) SizedBox(
                 width: 24,
                 height: 24,
-                child: Image.asset('images/icon_play.png'),
+                child: Image.asset('icon_play.png'.toPng()),
               ),
             ],
           ) : Center(child: Text('Index:${e.item1}')),
