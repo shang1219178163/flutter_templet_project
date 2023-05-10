@@ -77,6 +77,43 @@ extension WidgetExt on Widget {
     routeSettings: routeSettings,
   );
 
+  ///弹窗
+  toShowGeneralDialog({
+    required BuildContext context,
+    bool barrierDismissible = false,
+    String? barrierLabel,
+    Color barrierColor = const Color(0x80000000),
+    Duration transitionDuration = const Duration(milliseconds: 200),
+    RouteTransitionsBuilder? transitionBuilder,
+    bool useRootNavigator = true,
+    RouteSettings? routeSettings,
+    Offset? anchorPoint,
+    VoidCallback? barrierTap,
+    Alignment alignment = Alignment.center,
+  }) => showGeneralDialog(
+    context: context,
+    barrierDismissible: barrierDismissible,
+    barrierLabel: barrierLabel,
+    barrierColor: barrierColor,
+    transitionDuration: transitionDuration,
+    transitionBuilder: transitionBuilder,
+    useRootNavigator: useRootNavigator,
+    routeSettings: routeSettings,
+    pageBuilder: (context, animation, secondaryAnimation) {
+      return InkWell(
+        onTap: barrierTap,
+        child: Container(
+          color: barrierColor,
+          child: Align(
+            alignment: alignment,
+            child: this,
+          )
+        ),
+      );
+    },
+  );
+
+
   ///正面弹窗
   toShowDialog({
     required BuildContext context,
