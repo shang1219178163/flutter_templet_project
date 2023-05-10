@@ -32,8 +32,8 @@ class NCancellAndConfirmBar extends StatelessWidget {
   Radius bottomRightRadius;
   VoidCallback? onCancell;
   VoidCallback? onConfirm;
-  Color cancellBgColor = bgColor;
-  Color confirmBgColor = Colors.blueAccent;
+  Color? cancellBgColor;
+  Color? confirmBgColor;
   TextStyle? cancellTextStyle;
   TextStyle? confirmTextStyle;
 
