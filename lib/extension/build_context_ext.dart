@@ -337,6 +337,10 @@ extension BuildContextExt on BuildContext {
 extension StatefulWidgetExt<T extends StatefulWidget> on State<T> {
   /// 扩展属性 Theme.of(context)
   ThemeData get theme => context.theme;
+
+  /// 扩展属性 Theme.of(context)
+  Color get primaryColor => theme.primaryColor;
+
   /// 扩展属性 MediaQuery.of(context)
   MediaQueryData get mediaQuery => context.mediaQuery;
 
