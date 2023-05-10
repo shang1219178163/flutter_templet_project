@@ -24,6 +24,7 @@ mixin DialogMixin{
     Alignment alignment = Alignment.center,
     VoidCallback? onCancell,
     VoidCallback? onConfirm,
+    VerticalDivider? buttonBarDivider,
     VoidCallback? onBarrier,
     double contentMaxHeight = 400,
     double contentMinHeight = 150,
@@ -85,6 +86,7 @@ mixin DialogMixin{
       confirmBgColor: Theme.of(context).primaryColor,
       bottomLeftRadius: radius,
       bottomRightRadius: radius,
+      divider: buttonBarDivider,
       onCancell: onCancell ?? (){
         Navigator.of(context).pop();
       },
@@ -128,11 +130,11 @@ mixin DialogMixin{
               AppUti.removeInputFocus();
             },
             child: Container(
-                color: Colors.black.withOpacity(0.05),
-                child: Align(
-                  alignment: alignment,
-                  child: child,
-                )
+              color: Colors.black.withOpacity(0.05),
+              child: Align(
+                alignment: alignment,
+                child: child,
+              )
             ),
           );
         }
@@ -153,6 +155,7 @@ mixin DialogMixin{
     Color? confirmBgColor = Colors.blueAccent,
     TextStyle? cancellTextStyle,
     TextStyle? confirmTextStyle,
+    VerticalDivider? buttonBarDivider,
   }) {
     assert(title != null || header != null, "title 和 header 不能同时为空!");
     assert(message != null || content != null, "title 和 header 不能同时为空!");
@@ -189,6 +192,7 @@ mixin DialogMixin{
         },
         footer: NCancellAndConfirmBar(
           height: 45,
+          divider: buttonBarDivider,
           cancellBgColor: cancellBgColor,
           confirmBgColor: confirmBgColor,
           cancellTextStyle: cancellTextStyle,
