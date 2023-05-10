@@ -16,6 +16,7 @@ class Assets {
   static const String imagesBgOcean = 'assets/images/bg_ocean.png';
   static const String imagesFloating = 'assets/images/floating.png';
   static const String imagesFlutterLogo = 'assets/images/flutter_logo.png';
+  static const String imagesIconAccount = 'assets/images/icon_account.png';
   static const String imagesIconAppbarBack = 'assets/images/icon_appbar_back.png';
   static const String imagesIconAppbarBackWhite = 'assets/images/icon_appbar_back_white.png';
   static const String imagesIconArrowDown = 'assets/images/icon_arrow_down.png';
@@ -24,11 +25,14 @@ class Assets {
   static const String imagesIconClose60 = 'assets/images/icon_close_60.png';
   static const String imagesIconDelete = 'assets/images/icon_delete.png';
   static const String imagesIconDowload = 'assets/images/icon_dowload.png';
+  static const String imagesIconEyeClose = 'assets/images/icon_eye_close.png';
+  static const String imagesIconEyeOpen = 'assets/images/icon_eye_open.png';
   static const String imagesIconHeart = 'assets/images/icon_heart.png';
   static const String imagesIconHeartBorder = 'assets/images/icon_heart_border.png';
   static const String imagesIconHeartHalf = 'assets/images/icon_heart_half.png';
   static const String imagesIconHomeDelete = 'assets/images/icon_home_delete.png';
   static const String imagesIconJsonFile = 'assets/images/icon_json_file.png';
+  static const String imagesIconLock = 'assets/images/icon_lock.png';
   static const String imagesIconPlay = 'assets/images/icon_play.png';
   static const String imagesImg404 = 'assets/images/img_404.png';
   static const String imagesImgPlaceholder = 'assets/images/img_placeholder.png';
