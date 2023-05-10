@@ -3,10 +3,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_cancell_and_confirm_bar.dart';
 
-/// 选择 box
-class NChoicBox extends StatefulWidget {
+/// PopView 内容
+class NPopViewBox extends StatefulWidget {
 
-  NChoicBox({
+  NPopViewBox({
     Key? key,
     this.title,
     this.content,
@@ -42,10 +42,10 @@ class NChoicBox extends StatefulWidget {
   StatefulWidgetBuilder? contentChildBuilder;
 
   @override
-  _NChoicBoxState createState() => _NChoicBoxState();
+  _NPopViewBoxState createState() => _NPopViewBoxState();
 }
 
-class _NChoicBoxState extends State<NChoicBox> {
+class _NPopViewBoxState extends State<NPopViewBox> {
 
   @override
   Widget build(BuildContext context) {
@@ -151,27 +151,28 @@ class _NChoicBoxState extends State<NChoicBox> {
       },
     );
     return Align(
-      alignment: alignment,
-      child: Container(
-        margin: margin,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.all(radius),
-        ),
-        // constraints: BoxConstraints(
-        //   maxHeight: contentMaxHeight,
-        //   minHeight: contentMinHeight,
-        // ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            header ?? defaultHeader,
-            Divider(height: 1, color: divderColor,),
-            content ?? defaultContent,
-            footer ?? defaultFooter,
-          ],
-        ),
+        alignment: alignment,
+        child: Container(
+          margin: margin,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.all(radius),
+          ),
+          // constraints: BoxConstraints(
+          //   maxHeight: contentMaxHeight,
+          //   minHeight: contentMinHeight,
+          // ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              header ?? defaultHeader,
+              Divider(height: 1, color: divderColor,),
+              content ?? defaultContent,
+              footer ?? defaultFooter,
+            ],
+          ),
+
       ),
     );
   }
@@ -190,7 +191,9 @@ class _NChoicBoxState extends State<NChoicBox> {
       barrierLabel: 'barrierLabel',
       transitionDuration: transitionDuration,
       pageBuilder: (context, animation, secondaryAnimation) {
-
+        if (child is Align) {
+          return child;
+        }
         return Align(
           alignment: alignment,
           child: child,
