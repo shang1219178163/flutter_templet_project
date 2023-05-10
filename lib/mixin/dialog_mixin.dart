@@ -31,6 +31,8 @@ mixin DialogMixin{
     double buttonBarHeight = 48,
     EdgeInsets contentPadding = const EdgeInsets.all(20),
     StatefulWidgetBuilder? contentChildBuilder,
+    EdgeInsets contentOffset = EdgeInsets.zero,
+    Color? barrierColor,
   }) {
 
     final defaultHeader = Row(
@@ -118,30 +120,31 @@ mixin DialogMixin{
     );
 
     return showGeneralDialog(
-        context: context,
-        barrierDismissible: false,
-        barrierLabel: 'barrierLabel',
-        transitionDuration: Duration(milliseconds: 200),
-        pageBuilder: (context, animation, secondaryAnimation) {
+      context: context,
+      barrierDismissible: false,
+      barrierLabel: 'barrierLabel',
+      transitionDuration: Duration(milliseconds: 200),
+      pageBuilder: (context, animation, secondaryAnimation) {
 
-          return InkWell(
-            onTap: onBarrier ?? () {
-              // Navigator.of(context).pop();
-              AppUti.removeInputFocus();
-            },
-            child: Container(
-              color: Colors.black.withOpacity(0.05),
-              child: Align(
-                alignment: alignment,
-                child: child,
-              )
-            ),
-          );
-        }
+        return InkWell(
+          onTap: onBarrier ?? () {
+            // Navigator.of(context).pop();
+            AppUti.removeInputFocus();
+          },
+          child: Container(
+            padding: contentOffset,
+            color: barrierColor ?? Colors.black.withOpacity(0.05),
+            child: Align(
+              alignment: alignment,
+              child: child,
+            )
+          ),
+        );
+      }
     );
   }
 
-  /// 项目 alert
+  /// 项目通用 alert 弹窗封装
   presentDialogAlert({
     required BuildContext context,
     required VoidCallback? onCancell,
@@ -156,61 +159,63 @@ mixin DialogMixin{
     TextStyle? cancellTextStyle,
     TextStyle? confirmTextStyle,
     VerticalDivider? buttonBarDivider,
+    EdgeInsets contentOffset = EdgeInsets.zero,
   }) {
     assert(title != null || header != null, "title 和 header 不能同时为空!");
     assert(message != null || content != null, "title 和 header 不能同时为空!");
 
     presentDialog(
-        context: context,
-        radius: Radius.circular(12),
-        header: header ?? Padding(
-          padding: EdgeInsets.only(top: 24.w),
-          child: Text(title ?? "",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: fontColor,
-              fontSize: 20.sp,
-              fontWeight: FontWeight.bold,
-            ),
+      context: context,
+      radius: Radius.circular(12.w),
+      contentOffset: contentOffset,
+      header: header ?? Padding(
+        padding: EdgeInsets.only(top: 24.w),
+        child: Text(title ?? "",
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: fontColor,
+            fontSize: 20.sp,
+            fontWeight: FontWeight.bold,
           ),
         ),
-        contentMinHeight: 50.h,
-        contentChildBuilder: (context, setState){
+      ),
+      contentMinHeight: 50.h,
+      contentChildBuilder: (context, setState){
 
-          return Container(
-            // color: ColorExt.random,
-            alignment: Alignment.center,
-            child: Text(message ?? "",
-              textAlign: TextAlign.start,
-              style: TextStyle(
-                color: Color(0xff333333),
-                fontSize: 16.sp,
-                fontWeight: FontWeight.w500,
-              ),
+        return Container(
+          // color: ColorExt.random,
+          alignment: Alignment.center,
+          child: Text(message ?? "",
+            textAlign: TextAlign.start,
+            style: TextStyle(
+              color: Color(0xff333333),
+              fontSize: 16.sp,
+              fontWeight: FontWeight.w500,
             ),
-          );
+          ),
+        );
+      },
+      footer: NCancellAndConfirmBar(
+        height: 45.w,
+        divider: buttonBarDivider,
+        cancellBgColor: cancellBgColor,
+        confirmBgColor: confirmBgColor,
+        cancellTextStyle: cancellTextStyle,
+        confirmTextStyle: confirmTextStyle,
+        bottomLeftRadius: Radius.circular(12.w),
+        bottomRightRadius: Radius.circular(12.w),
+        onCancell: onCancell ?? (){
+          Navigator.of(context).pop();
         },
-        footer: NCancellAndConfirmBar(
-          height: 45,
-          divider: buttonBarDivider,
-          cancellBgColor: cancellBgColor,
-          confirmBgColor: confirmBgColor,
-          cancellTextStyle: cancellTextStyle,
-          confirmTextStyle: confirmTextStyle,
-          bottomLeftRadius: Radius.circular(12),
-          bottomRightRadius: Radius.circular(12),
-          onCancell: onCancell ?? (){
-            Navigator.of(context).pop();
-          },
-          onConfirm: onConfirm ?? () {
-            Navigator.of(context).pop();
-          },
-          // divider: VerticalDivider(
-          //   color: Colors.red,
-          //   width: 1,
-          //   thickness: 1,
-          // ),
-        )
+        onConfirm: onConfirm ?? () {
+          Navigator.of(context).pop();
+        },
+        // divider: VerticalDivider(
+        //   color: Colors.red,
+        //   width: 1,
+        //   thickness: 1,
+        // ),
+      )
     );
   }
 
