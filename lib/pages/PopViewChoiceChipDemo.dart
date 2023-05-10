@@ -3,9 +3,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/n_cancell_and_confirm_bar.dart';
-import 'package:flutter_templet_project/basicWidget/n_choic_box.dart';
+import 'package:flutter_templet_project/basicWidget/n_pop_view_box.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/model/selected_model.dart';
+import 'package:flutter_templet_project/uti/app_uti.dart';
 import 'package:flutter_templet_project/uti/color_uti.dart';
 import 'package:tuple/tuple.dart';
 
@@ -111,8 +112,9 @@ class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
 
   showPopViewBox({
     bool isSingle = false,
+    Alignment alignment = Alignment.center,
   }) {
-    final box = NChoicBox(
+    final box = NPopViewBox(
       // alignment: Alignment.bottomCenter,
       title: Text("选择",
         style: TextStyle(
@@ -187,7 +189,33 @@ class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
       barrierLabel: 'barrierLabel',
       transitionDuration: Duration(milliseconds: 200),
       pageBuilder: (context, animation, secondaryAnimation) {
-
+        // return Dialog(
+        //   backgroundColor: Colors.black.withOpacity(0.01),
+        //   insetPadding: EdgeInsets.zero,
+        //   child: InkWell(
+        //     onTap: () {
+        //       Navigator.of(context).pop();
+        //       // AppUti.removeInputFocus();
+        //     },
+        //     child: box,
+        //   ),
+        // );
+        return Material(
+          color: Colors.black.withOpacity(0.01),
+          child: InkWell(
+            onTap: () {
+              Navigator.of(context).pop();
+              // AppUti.removeInputFocus();
+            },
+            child: Container(
+              color: Colors.black.withOpacity(0.05),
+              child: Align(
+                alignment: alignment,
+                child: box,
+              )
+            ),
+          ),
+        );
         return box;
       }
     );
