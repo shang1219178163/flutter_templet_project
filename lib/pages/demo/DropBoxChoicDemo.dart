@@ -287,6 +287,7 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
                         height: 24.w,
                       ),
                       EnhanceExpansionChoic<FakeDataModel>(
+                        trailingColor: Colors.orange,
                         title: Text("EnhanceExpansionChoic",
                           style: TextStyle(
                             color: fontColor,

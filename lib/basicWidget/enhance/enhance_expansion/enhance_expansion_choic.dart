@@ -12,6 +12,7 @@ class EnhanceExpansionChoic<T> extends StatefulWidget {
   EnhanceExpansionChoic({
     Key? key,
     this.primryColor = Colors.blue,
+    this.trailingColor = Colors.blue,
     required this.title,
     this.trailingBuilder,
     required this.models,
@@ -24,25 +25,30 @@ class EnhanceExpansionChoic<T> extends StatefulWidget {
     required this.onChanged,
   }) : super(key: key);
 
+  /// chip 选择颜色
   Color primryColor;
-
+  /// 尾部颜色
+  Color? trailingColor;
+  /// 标题
   Text title;
 
   /// 标签组
   List<T> models;
-
+  /// 折叠时最小显示数量
   int collapseCount;
+  /// 单选
   bool isSingle;
+  /// 开始状态
   bool isExpand;
-
+  /// 唯一标识符回调函数
   String Function(T) cbID;
-
+  /// 标题回调函数
   String Function(T) cbTitle;
-
+  /// 选择回调函数
   bool Function(T) cbSelected;
-
+  /// 改变回调函数
   ValueChanged<List<ChoiceBoxModel<T>>> onChanged;
-
+  /// 尾部组件构造函数
   Widget Function(bool isExpand)? trailingBuilder;
 
 
@@ -58,6 +64,7 @@ class _EnhanceExpansionChoicState<T> extends State<EnhanceExpansionChoic<T>> {
 
     return buildBoxChoic(
       color: widget.primryColor,
+      trailingColor: widget.trailingColor,
       isSingle: widget.isSingle,
       title: widget.title,
       trailingBuilder: widget.trailingBuilder,
@@ -73,6 +80,7 @@ class _EnhanceExpansionChoicState<T> extends State<EnhanceExpansionChoic<T>> {
   /// 筛选弹窗 标签选择
   Widget buildBoxChoic({
     Color color = const Color(0xffFF7E6E),
+    Color? trailingColor = const Color(0xffFF7E6E),
     required Text title,
     Widget Function(bool isExpand)? trailingBuilder,
     required List<T> models,
@@ -93,6 +101,7 @@ class _EnhanceExpansionChoicState<T> extends State<EnhanceExpansionChoic<T>> {
 
         return buildExpandMenu(
           color: color,
+          trailingColor: trailingColor,
           title: title,
           trailingBuilder: trailingBuilder,
           disable: disable,
@@ -130,6 +139,7 @@ class _EnhanceExpansionChoicState<T> extends State<EnhanceExpansionChoic<T>> {
     bool isExpand = true,
     ValueChanged<bool>? onExpansionChanged,
     Color color = const Color(0xffFF7E6E),
+    Color? trailingColor = const Color(0xffFF7E6E),
     bool disable = false,
     Widget childrenHeader = const SizedBox(),
   }) {
@@ -157,8 +167,7 @@ class _EnhanceExpansionChoicState<T> extends State<EnhanceExpansionChoic<T>> {
         // ),
         trailing: disable ? const SizedBox() : trailingBuilder?.call(isExpand) ?? buildTrailing(
           isExpand: isExpand,
-          color: color,
-          boderColor: color.withOpacity(0.2),
+          color: trailingColor ?? color,
         ),
         collapsedTextColor: fontColor,
         textColor: fontColor,
@@ -175,12 +184,13 @@ class _EnhanceExpansionChoicState<T> extends State<EnhanceExpansionChoic<T>> {
   buildTrailing({
     bool isExpand = true,
     Color color = Colors.blueAccent,
-    Color boderColor = Colors.blueAccent,
   }) {
     final title = isExpand ? "收起" : "展开";
     final icon = isExpand
         ? Icon(Icons.expand_less, size: 24, color: color,)
         : Icon(Icons.expand_more, size: 24, color: color,);
+
+    var boderColor = color.withOpacity(0.2);
 
     return Container(
       width: 66.w,
