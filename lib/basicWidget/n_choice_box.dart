@@ -77,8 +77,12 @@ class _NChoiceBoxState extends State<NChoiceBox> {
           alignment: WrapAlignment.spaceBetween,
           children: widget.items.map((e) => Theme(
             // data: ThemeData(canvasColor: widget.itemColor),
-            data: ThemeData(canvasColor: Colors.transparent),
+            data: ThemeData(
+              canvasColor: Colors.transparent,
+              highlightColor: Colors.white,
+            ),
             child: ChoiceChip(
+              pressElevation: 0,
               label: Text(e.title,
                 style: TextStyle(
                   color: e.isSelected == true ? Colors.white : fontColor,

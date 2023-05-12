@@ -34,6 +34,9 @@ class APPThemeSettings {
     // textTheme: ThemeData.light().textTheme.copyWith(
     //     button: TextStyle(color: Colors.red)
     // ),//设置文本颜色为红色
+    chipTheme: ChipThemeData(
+      pressElevation: 0,//不明原因未生效
+    ),
     buttonTheme: ButtonThemeData(
       splashColor: Colors.red,
     ),
