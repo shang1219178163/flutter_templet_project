@@ -38,7 +38,10 @@ class _DropBoxDemoState extends State<DropBoxDemo> {
   // final _throttle = Throttle(milliseconds: 500);
 
   var isVisible = ValueNotifier(false);
+
   final _globalKey = GlobalKey();
+
+  ScrollController? dropBoxController = ScrollController();
 
   /// 标签组
   List<FakeDataModel> get tagModels => items.map((e) => FakeDataModel(id: "id_$e", name: "标签_$e")).toList();
@@ -89,7 +92,10 @@ class _DropBoxDemoState extends State<DropBoxDemo> {
                             bottom: 0,
                             width: context.screenSize.width,
                             // height: 600.h,
-                            child: buildDropBox(hasShadow: true),
+                            child: buildDropBox(
+                              controller: dropBoxController,
+                              hasShadow: true,
+                            ),
                           );
                         }
                     ),
@@ -223,6 +229,7 @@ class _DropBoxDemoState extends State<DropBoxDemo> {
 
   /// 筛选弹窗
   Widget buildDropBox({
+    required ScrollController? controller,
     bool hasShadow = false,
   }) {
     final child = Container(
@@ -248,7 +255,9 @@ class _DropBoxDemoState extends State<DropBoxDemo> {
           Divider(height: 1.h, color: lineColor,),
           Expanded(
             child: CupertinoScrollbar(
+              controller: controller,
               child: SingleChildScrollView(
+                controller: controller,
                 child: Container(
                   color: Colors.white,
                   padding: EdgeInsets.only(
