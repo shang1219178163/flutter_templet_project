@@ -46,7 +46,7 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
 
   ScrollController? dropBoxController = ScrollController();
 
-  /// 标签组
+  /// 选项组
   List<FakeDataModel> get models => items.map((e) => FakeDataModel(
     id: "id_$e",
     name: "选项_$e",
@@ -54,6 +54,7 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
   List<FakeDataModel> selectedModels = [];
   List<FakeDataModel> selectedModelsTmp = [];
 
+  /// 标签组
   List<FakeDataModel> get tagModels => items.map((e) => FakeDataModel(
     id: "id_$e",
     name: "标签_$e",
