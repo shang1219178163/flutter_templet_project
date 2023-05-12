@@ -444,6 +444,7 @@ var list = [
   Tuple2(APPRouter.nestedScrollViewDemoOne, "nestedScrollViewDemoOne", ),
   Tuple2(APPRouter.nestedScrollViewDemoTwo, "nestedScrollViewDemoTwo", ),
   Tuple2(APPRouter.expansionTileCard, "expansionTileCard", ),
+  Tuple2(APPRouter.dropBoxDemo, "下拉菜单", ),
 
 
 
@@ -457,6 +458,7 @@ var slivers = [
 var specials = [
   Tuple2(APPRouter.operatorDemo, "特殊操作符", ),
   Tuple2(APPRouter.mediaQueryDemo, "mediaQuery", ),
+  Tuple2(APPRouter.mediaQueryDemoOne, "mediaQuery键盘", ),
   Tuple2(APPRouter.appRouteObserverDemo, "页面路由监听", ),
   Tuple2(APPRouter.pageLifecycleObserverDemo, "页面生命周期监听", ),
   Tuple2(APPRouter.pageLifecycleFuncTest, "页面生命方法测试", ),

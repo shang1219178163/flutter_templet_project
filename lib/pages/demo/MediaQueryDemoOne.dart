@@ -12,9 +12,9 @@ import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:tuple/tuple.dart';
 
 
-class MediaQueryDemo extends StatefulWidget {
+class MediaQueryDemoOne extends StatefulWidget {
 
-  const MediaQueryDemo({
+  const MediaQueryDemoOne({
     Key? key, 
     this.title
   }) : super(key: key);
@@ -22,10 +22,10 @@ class MediaQueryDemo extends StatefulWidget {
   final String? title;
 
   @override
-  _MediaQueryDemoState createState() => _MediaQueryDemoState();
+  _MediaQueryDemoOneState createState() => _MediaQueryDemoOneState();
 }
 
-class _MediaQueryDemoState extends State<MediaQueryDemo> {
+class _MediaQueryDemoOneState extends State<MediaQueryDemoOne> {
   final _textcontroller  = TextEditingController();
 
   var labelText = "";
@@ -100,30 +100,9 @@ class _MediaQueryDemoState extends State<MediaQueryDemo> {
     Tuple2("devicePixelRatio", "单位逻辑像素的物理像素数量，即设备像素比。"),
     Tuple2("textScaleFactor", "单位逻辑像素字体像素数，如果设置为1.5则比指定的字体大50%。"),
   ];
+
 }
 
 bool isTuple(dynamic obj) {
   return obj is Tuple2 || obj is Tuple3 || obj is Tuple4 || obj is Tuple5 || obj is Tuple6 || obj is Tuple7;
 }
-//
-// int tupleLength(dynamic obj) {
-//   if (obj is Tuple2) {
-//     return 2;
-//   }
-//   if (obj is Tuple3) {
-//     return 3;
-//   }
-//   if (obj is Tuple4) {
-//     return 4;
-//   }
-//   if (obj is Tuple5) {
-//     return 5;
-//   }
-//   if (obj is Tuple6) {
-//     return 6;
-//   }
-//   if (obj is Tuple7) {
-//     return 7;
-//   }
-//   return 0;
-// }

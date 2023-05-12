@@ -43,6 +43,7 @@ class _MediaQueryDemoState extends State<MediaQueryDemo> with WidgetsBindingObse
         actions: ['done',].map((e) => TextButton(
           onPressed: () {
             FocusScope.of(context).requestFocus(FocusNode());
+            handleScreenHeight();
           },
           child: Text(e,
             style: TextStyle(color: Colors.white),
@@ -174,6 +175,41 @@ class _MediaQueryDemoState extends State<MediaQueryDemo> with WidgetsBindingObse
         child: Text(e.toList()[index]),
       )).toList(),
     )).toList();
+  }
+
+  handleScreenHeight() {
+    // /// AppBar 高度
+    // const double kToolbarHeight = 56.0;
+    //
+    // /// BottomNavigationBar 高度
+    // const double kBottomNavigationBarHeight = 56.0;
+
+    MediaQueryData mq = MediaQuery.of(context);
+    // 屏幕密度
+    final pixelRatio = mq.devicePixelRatio;
+    // 屏幕宽(注意是dp, 转换px 需要 screenWidth * pixelRatio)
+    final screenWidth = mq.size.width;
+    // 屏幕高(注意是dp)
+    final screenHeight = mq.size.height;
+    // 顶部状态栏, 随着刘海屏会增高
+    final statusBarHeight = mq.padding.top;
+    // 底部功能栏, 类似于iPhone XR 底部安全区域
+    final bottomBarHeight = mq.padding.bottom;
+    //
+    // /// 安全内容高度(包含 AppBar 和 BottomNavigationBar 高度)
+    // double get safeContentHeight => screenHeight - statusBarHeight - bottomBarHeight;
+    // /// 实际的安全高度
+    // double get safeHeight => safeContentHeight - kToolbarHeight - kBottomNavigationBarHeight;
+
+    /// 安全内容高度(包含 AppBar 和 BottomNavigationBar 高度)
+    var safeContentHeight = screenHeight - statusBarHeight - bottomBarHeight;
+    /// 实际的安全高度
+    var safeHeight = safeContentHeight - kToolbarHeight - kBottomNavigationBarHeight;
+    debugPrint("statusBarHeight:${statusBarHeight.toString()}");
+    debugPrint("bottomBarHeight:${bottomBarHeight.toString()}");
+    debugPrint("safeContentHeight:${safeContentHeight.toString()}");
+    debugPrint("safeHeight:${safeHeight.toString()}");
+
   }
 
   final tips = [
