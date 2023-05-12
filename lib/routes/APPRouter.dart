@@ -22,6 +22,8 @@ import 'package:flutter_templet_project/pages/demo/BoxConstraintsDemo.dart';
 import 'package:flutter_templet_project/pages/FlutterFFiTest.dart';
 import 'package:flutter_templet_project/pages/LocalImagePage.dart';
 import 'package:flutter_templet_project/pages/HomeNavDemo.dart';
+import 'package:flutter_templet_project/pages/demo/DropBoxDemo.dart';
+import 'package:flutter_templet_project/pages/demo/MediaQueryDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/NSkeletonDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PageViewAndBarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TextFieldColorChangeDemo.dart';
@@ -260,6 +262,8 @@ class APPRouter {
   static const pageLifecycleObserverDemo = '/pageLifecycleObserverDemo';
   static const pageLifecycleFuncTest = '/pageLifecycleFuncTest';
   static const mediaQueryDemo = '/mediaQueryDemo';
+  static const mediaQueryDemoOne = '/mediaQueryDemoOne';
+
   static const tabBarDemo = '/TabBarDemo';
   static const tabBarDemoNew = '/TabBarDemoNew';
   static const tabBarOnlyDemo = '/tabBarOnlyDemo';
@@ -505,6 +509,7 @@ class APPRouter {
   static const popViewChoiceChipDemo = '/popViewChoiceChipDemo';
   static const textFieldColorChangeDemo = '/textFieldColorChangeDemo';
   static const pageViewAndBarDemo = '/pageViewAndBarDemo';
+  static const dropBoxDemo = '/dropBoxDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -564,6 +569,9 @@ class AppPage {
 
 
     GetPage(name: APPRouter.mediaQueryDemo, page: () => MediaQueryDemo(),),
+    GetPage(name: APPRouter.mediaQueryDemoOne, page: () => MediaQueryDemoOne(),),
+
+
     GetPage(name: APPRouter.tabBarDemo, page: () => TabBarDemo(),),
     GetPage(name: APPRouter.tabBarDemoNew, page: () => TabBarDemoNew(),),
     GetPage(name: APPRouter.tabBarOnlyDemo, page: () => TabBarOnlyDemo(),),
@@ -792,6 +800,7 @@ class AppPage {
     GetPage(name: APPRouter.popViewChoiceChipDemo, page: () => PopViewChoiceChipDemo(),),
     GetPage(name: APPRouter.textFieldColorChangeDemo, page: () => TextFieldColorChangeDemo(),),
     GetPage(name: APPRouter.pageViewAndBarDemo, page: () => PageViewAndBarDemo(),),
+    GetPage(name: APPRouter.dropBoxDemo, page: () => DropBoxDemo(),),
 
 
   ];
