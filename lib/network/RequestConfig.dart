@@ -1,29 +1,28 @@
 
-
-enum APPChannel { dev, beta, test, pre, prod }
+/// app 接口环境
+enum APPEnvironment { dev, beta, test, pre, prod }
 
 ///request config
 class RequestConfig {
-  static APPChannel current = APPChannel.dev;
+  static APPEnvironment current = APPEnvironment.dev;
+
+  /// 环境集合
+  static Map<APPEnvironment, String> originMap = {
+    APPEnvironment.dev: 'https://*.cn',
+    APPEnvironment.beta: 'https://*.cn',
+    APPEnvironment.test: 'https://*.cn',
+    APPEnvironment.pre: 'https://*.cn',
+    APPEnvironment.prod: 'https://*.cn',
+  };
 
   static String get baseUrl {
-    switch (current) {
-      case APPChannel.beta:
-        return 'https://*.cn';
-      case APPChannel.test:
-        return 'https://*.cn';
-      case APPChannel.pre:
-        return 'https://*.cn';
-      case APPChannel.prod:
-        return 'https://*.cn';
-      default:
-        return 'https://*.cn';
-    }
+    final result = originMap[current] ?? originMap[APPEnvironment.dev]!;
+    return result;
   }
 
   static String get protocolUrl {
     switch (current) {
-      case APPChannel.prod:
+      case APPEnvironment.prod:
         return 'https://yljk.cn';
       default:
         return 'https://yljk.cn';
