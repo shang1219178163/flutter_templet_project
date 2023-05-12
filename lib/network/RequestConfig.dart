@@ -16,7 +16,7 @@ class RequestConfig {
   };
 
   static String get baseUrl {
-    final result = originMap[current] ?? originMap[APPEnvironment.dev]!;
+    final result = originMap[current]!;
     return result;
   }
 
