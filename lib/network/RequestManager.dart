@@ -151,17 +151,18 @@ class RequestManager{
   }
 
   _handleResponse(Response? response, {BaseRequestAPI? api}) {
-    if (response == null || response.data == null) return {};
+    final data = response?.data;
+    if (data == null) return {};
     // var jsonStr = jsonEncode(response.data);
     // debugPrint("jsonStr: ${jsonStr}");
 
     // var resMap = jsonDecode(response.data);
-    var resMap = response.data;
-    if (resMap['code'] == 'OK') {
-      if ((api?.shouldCache == true)) {
-        api?.saveJsonOfCache(resMap);
+    var resMap = data as Map<String, dynamic>;
+    if (data['code'] == 'OK') {
+      if (api?.shouldCache == true && api?.canUpdateCache(data) == true) {
+        api?.saveJsonOfCache(data);
       }
-      return resMap;
+      return data;
     }
 
     switch (resMap['code']) {

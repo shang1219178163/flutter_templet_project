@@ -38,6 +38,16 @@ class BaseRequestAPI {
 
   bool get shouldCache => false;
 
+  bool canUpdateCache(Map<String, dynamic>? map) {
+    if (map == null) {
+      return false;
+    }
+    if (jsonFromCache() != map) {
+      return true;
+    }
+    return false;
+  }
+
   bool saveJsonOfCache(Map<String, dynamic>? map) {
     // TODO: implement saveJsonOfCache
     // throw UnimplementedError();
