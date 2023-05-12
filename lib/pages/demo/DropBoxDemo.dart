@@ -204,6 +204,7 @@ class _DropBoxDemoState extends State<DropBoxDemo> {
 
     return TextButton(
       style: TextButton.styleFrom(
+        // splashFactory: NoSplash.splashFactory,
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
         shape: shape,
         // shape: StadiumBorder(
@@ -238,7 +239,7 @@ class _DropBoxDemoState extends State<DropBoxDemo> {
             offset: Offset(0, 8.w),
             blurRadius: 8.w,
             // spreadRadius: 4,
-            color: primaryColor.withOpacity(0.3),
+            color: context.primaryColor.withOpacity(0.3),
           ),
         ]
       ),

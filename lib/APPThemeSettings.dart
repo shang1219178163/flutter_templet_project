@@ -34,19 +34,25 @@ class APPThemeSettings {
     // textTheme: ThemeData.light().textTheme.copyWith(
     //     button: TextStyle(color: Colors.red)
     // ),//设置文本颜色为红色
+    buttonTheme: ButtonThemeData(
+      splashColor: Colors.red,
+    ),
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
+        splashFactory: NoSplash.splashFactory,
         primary: Colors.blue,
       ),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
+        splashFactory: NoSplash.splashFactory,
         // onPrimary: Colors.yellow,
         primary: Colors.blue,
       ),
     ),
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
+        splashFactory: NoSplash.splashFactory,
         primary: Colors.blue,
         // backgroundColor: Colors.green,
       ),
