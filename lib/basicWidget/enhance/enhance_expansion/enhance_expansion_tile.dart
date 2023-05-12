@@ -48,7 +48,8 @@ class EnhanceExpansionTile extends StatefulWidget {
     this.subtitle,
     this.onExpansionChanged,
     this.children = const <Widget>[],
-    this.alwaysExit = const SizedBox(),
+    this.childrenHeader = const SizedBox(),
+    this.childrenFooter = const SizedBox(),
     this.trailing,
     this.initiallyExpanded = false,
     this.maintainState = false,
@@ -102,7 +103,8 @@ class EnhanceExpansionTile extends StatefulWidget {
   /// Typically [ListTile] widgets.
   final List<Widget> children;
 
-  final Widget alwaysExit;
+  final Widget? childrenHeader;
+  final Widget? childrenFooter;
 
   /// The color to display behind the sublist when expanded.
   ///
@@ -379,7 +381,7 @@ class _EnhanceExpansionTileState extends State<EnhanceExpansionTile> with Single
               trailing: widget.trailing ?? _buildTrailingIcon(context),
             ),
           ),
-          widget.alwaysExit,
+          widget.childrenHeader ?? SizedBox(),
           ClipRect(
             child: Align(
               alignment: widget.expandedAlignment
@@ -389,6 +391,7 @@ class _EnhanceExpansionTileState extends State<EnhanceExpansionTile> with Single
               child: child,
             ),
           ),
+          widget.childrenFooter ?? SizedBox(),
         ],
       ),
     );

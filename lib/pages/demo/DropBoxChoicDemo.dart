@@ -4,7 +4,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_templet_project/basicWidget/enhance/enhance_expansion_tile.dart';
+import 'package:flutter_templet_project/basicWidget/enhance/enhance_expansion/enhance_expansion_choic.dart';
+import 'package:flutter_templet_project/basicWidget/enhance/enhance_expansion/enhance_expansion_tile.dart';
+
 import 'package:flutter_templet_project/basicWidget/n_cancell_and_confirm_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_choice_box.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
@@ -13,10 +15,11 @@ import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/uti/Debounce.dart';
 import 'package:flutter_templet_project/uti/color_uti.dart';
 import 'package:flutter_templet_project/model/fake_data_model.dart';
+import 'package:get_storage/get_storage.dart';
 
-class DropBoxDemo extends StatefulWidget {
+class DropBoxChoicDemo extends StatefulWidget {
 
-  DropBoxDemo({
+  DropBoxChoicDemo({
     Key? key, 
     this.title
   }) : super(key: key);
@@ -24,10 +27,10 @@ class DropBoxDemo extends StatefulWidget {
   final String? title;
 
   @override
-  _DropBoxDemoState createState() => _DropBoxDemoState();
+  _DropBoxChoicDemoState createState() => _DropBoxChoicDemoState();
 }
 
-class _DropBoxDemoState extends State<DropBoxDemo> {
+class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
   final items = List.generate(20, (i) => i).toList();
 
   var searchText = "";
@@ -44,9 +47,19 @@ class _DropBoxDemoState extends State<DropBoxDemo> {
   ScrollController? dropBoxController = ScrollController();
 
   /// 标签组
-  List<FakeDataModel> get tagModels => items.map((e) => FakeDataModel(id: "id_$e", name: "标签_$e")).toList();
-  FakeDataModel? selectedTagModel;
-  FakeDataModel? selectedTagModelTmp;
+  List<FakeDataModel> get models => items.map((e) => FakeDataModel(
+    id: "id_$e",
+    name: "选项_$e",
+  )).toList();
+  List<FakeDataModel> selectedModels = [];
+  List<FakeDataModel> selectedModelsTmp = [];
+
+  List<FakeDataModel> get tagModels => items.map((e) => FakeDataModel(
+    id: "id_$e",
+    name: "标签_$e",
+  )).toList();
+  List<FakeDataModel> selectedTagModels = [];
+  List<FakeDataModel> selectedTagModelsTmp = [];
 
   @override
   Widget build(BuildContext context) {
@@ -231,6 +244,7 @@ class _DropBoxDemoState extends State<DropBoxDemo> {
   Widget buildDropBox({
     required ScrollController? controller,
     bool hasShadow = false,
+    bool isSingle = false,
   }) {
     final child = Container(
       width: double.maxFinite,
@@ -267,10 +281,29 @@ class _DropBoxDemoState extends State<DropBoxDemo> {
                   ),
                   child: Column(
                     children: [
-                      buildDropBoxTagChoic(),
+                      buildDropBoxTagChoic(models: models),
                       SizedBox(
                         height: 24.w,
                       ),
+                      EnhanceExpansionChoic<FakeDataModel>(
+                        title: Text("EnhanceExpansionChoic",
+                          style: TextStyle(
+                            color: fontColor,
+                            fontSize: 18.sp,
+                            fontWeight: FontWeight.bold
+                          ),
+                        ),
+                        isSingle: isSingle,
+                        models: tagModels,
+                        cbID: (e) => e.id ?? "",
+                        cbTitle: (e) => e.name ?? "",
+                        cbSelected: (e) => selectedTagModelsTmp.map((e) => e.id ?? "").toList().contains(e.id),
+                        onChanged: (value) {
+                          // debugPrint("selectedModels: ${value.map((e) => e.title).toList()}");
+                          selectedTagModelsTmp = value.map((e) => e.data!).toList();
+                          debugPrint("selectedTagModelsTmp: ${selectedTagModelsTmp.map((e) => e.name).toList()}");
+                        },
+                      )
                     ],
                   ),
                 ),
@@ -290,68 +323,66 @@ class _DropBoxDemoState extends State<DropBoxDemo> {
 
   /// 筛选弹窗 标签选择
   Widget buildDropBoxTagChoic({
+    required List<FakeDataModel> models,
     bool isExpand = false,
     int collapseCount = 6,
   }) {
-    final models = tagModels;
     final disable = (models.length <= collapseCount);
 
     return StatefulBuilder(
-        builder: (context, setState) {
-          return buildExpandMenu(
-              disable: disable,
-              isExpand: isExpand,
-              onExpansionChanged: (val) {
-                isExpand = !isExpand;
-                setState(() {});
-              },
-              title: "标签",
-              alwaysExit: Column(
-                children: [
-                  buildDropBoxTagChoicPart(
-                      models: models.take(collapseCount).toList(),
-                      cb: (){
-                        setState(() {});
-                      }
-                  ),
-                ],
+      builder: (context, setState) {
+
+        final items = isExpand ? models : models.take(collapseCount).toList();
+        return buildExpandMenu(
+          disable: disable,
+          isExpand: isExpand,
+          onExpansionChanged: (val) {
+            isExpand = !isExpand;
+            setState(() {});
+          },
+          title: "标签",
+          childrenHeader: Column(
+            children: [
+              buildDropBoxChoicPart<FakeDataModel>(
+                models: items,
+                cbID: (e) => e.id ?? "",
+                cbName: (e) => e.name ?? "",
+                cbSelected: (e) => selectedModelsTmp.map((e) => e.id ?? "").toList().contains(e.id),
+                onChanged: (value) {
+                  // debugPrint("selectedModels: $value");
+                  selectedModelsTmp = value.map((e) => e.data!).toList();
+                  debugPrint("selectedTagModelsTmp: ${selectedModelsTmp.map((e) => e.name).toList()}");
+                },
               ),
-              children: [
-                buildDropBoxTagChoicPart(
-                    models: models.skip(collapseCount).toList(),
-                    cb: (){
-                      setState(() {});
-                    }
-                ),
-              ]
-          );
-        }
+            ],
+          ),
+          children: [],
+        );
+      }
     );
   }
 
-  /// 筛选弹窗 标签选择_子菜单
-  buildDropBoxTagChoicPart({
-    required List<FakeDataModel> models,
-    VoidCallback? cb,
+  /// 筛选弹窗 选择子菜单
+  buildDropBoxChoicPart<T>({
+    required List<T> models,
+    required String Function(T) cbID,
+    required String Function(T) cbName,
+    required bool Function(T) cbSelected,
+    ValueChanged<List<ChoiceBoxModel<T>>>? onChanged,
   }) {
-    return NChoiceBox(
+    return NChoiceBox<T>(
       isSingle: true,
       itemColor: Colors.transparent,
-      wrapAlignment: WrapAlignment.spaceBetween,
-      items: models.map((e) => ChoiceBoxModel<FakeDataModel>(
-        id: e.id ?? "",
-        title: e.name ?? "-",
-        isSelected: e.id == selectedTagModelTmp?.id,
+      // wrapAlignment: WrapAlignment.spaceBetween,
+      // wrapAlignment: WrapAlignment.start,
+      items: models.map((e) => ChoiceBoxModel<T>(
+        id: cbID(e),
+        title: cbName(e),
+        isSelected: cbSelected(e),
         data: e,
       )).toList(),
-      onChanged: (List<ChoiceBoxModel> value) {
+      onChanged: onChanged ?? (value) {
         debugPrint("selectedModels: $value");
-        if (value.isEmpty) {
-          selectedTagModelTmp = null;
-          return;
-        }
-        selectedTagModelTmp = value.first.data;
-        cb?.call();
       },
     );
   }
@@ -377,35 +408,43 @@ class _DropBoxDemoState extends State<DropBoxDemo> {
   handleResetFitler() {
     closeDropBox();
 
-    selectedTagModel = null;
-    selectedTagModelTmp = null;
+    selectedModelsTmp = [];
+    selectedModels = selectedModelsTmp;
+
+    selectedTagModelsTmp = [];
+    selectedTagModels = selectedTagModelsTmp;
+    debugPrint("重置 selectedModels: ${selectedModels.map((e) => e.name).toList()}");
+    debugPrint("重置 selectedTagModels: ${selectedTagModels.map((e) => e.name).toList()}");
     //请求
   }
   /// 确定过滤参数
   handleConfirmFitler() {
     closeDropBox();
 
-    selectedTagModel = selectedTagModelTmp;
+    selectedModels = selectedModelsTmp;
+    selectedTagModels = selectedTagModelsTmp;
+    debugPrint("重置 selectedModels: ${selectedModels.map((e) => e.name).toList()}");
+    debugPrint("确定 selectedTagModels: ${selectedTagModels.map((e) => e.name).toList()}");
     //请求
   }
 
 
   Widget buildExpandMenu({
     required String title,
-    List<Widget>? children,
+    List<Widget> children = const [],
     bool isExpand = true,
     ValueChanged<bool>? onExpansionChanged,
     Color color = const Color(0xffFF7E6E),
     bool disable = false,
-    Widget alwaysExit = const SizedBox(),
+    Widget childrenHeader = const SizedBox(),
   }) {
     return Theme(
       data: ThemeData(
         dividerColor: Colors.transparent,
       ),
       child: EnhanceExpansionTile(
-        alwaysExit: alwaysExit,
-        // alwaysExit: Container(
+        childrenHeader: childrenHeader,
+        // childrenFooter: Container(
         //   height: 30,
         //   color: Colors.blueAccent,
         // ),
@@ -440,14 +479,7 @@ class _DropBoxDemoState extends State<DropBoxDemo> {
         ),
         initiallyExpanded: disable ? false : isExpand,
         onExpansionChanged: onExpansionChanged,
-        children: children ?? [
-          ElevatedButton(
-              onPressed: () {
-                debugPrint("ElevatedButton");
-              },
-              child: const Text("ElevatedButton")
-          )
-        ],
+        children: children,
       ),
     );
   }

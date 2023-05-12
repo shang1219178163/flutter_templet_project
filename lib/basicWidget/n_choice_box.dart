@@ -6,7 +6,7 @@ import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/uti/color_uti.dart';
 
 ///选择盒子
-class NChoiceBox extends StatefulWidget {
+class NChoiceBox<T> extends StatefulWidget {
 
   NChoiceBox({
     Key? key,
@@ -23,9 +23,9 @@ class NChoiceBox extends StatefulWidget {
     this.isSingle = false,
   }) : super(key: key);
 
-  List<ChoiceBoxModel> items;
+  List<ChoiceBoxModel<T>> items;
 
-  ValueChanged<List<ChoiceBoxModel>> onChanged;
+  ValueChanged<List<ChoiceBoxModel<T>>> onChanged;
 
   String? title;
 
@@ -48,14 +48,13 @@ class NChoiceBox extends StatefulWidget {
 
 
   @override
-  _NChoiceBoxState createState() => _NChoiceBoxState();
+  _NChoiceBoxState<T> createState() => _NChoiceBoxState<T>();
 }
 
-class _NChoiceBoxState extends State<NChoiceBox> {
+class _NChoiceBoxState<T> extends State<NChoiceBox<T>> {
 
-  final _choicItems = <ChoiceBoxModel>[];
   /// 选中的 items
-  List<ChoiceBoxModel> get seletectedItems => widget.items.where((e) => e.isSelected == true).toList();
+  List<ChoiceBoxModel<T>> get seletectedItems => widget.items.where((e) => e.isSelected == true).toList();
 
   List<String> get seletectedItemNames => seletectedItems.map((e) => e.title).toList();
 
@@ -74,9 +73,8 @@ class _NChoiceBoxState extends State<NChoiceBox> {
         Wrap(
           spacing: widget.wrapSpacing,
           runSpacing: widget.wrapRunSpacing,
-          alignment: WrapAlignment.spaceBetween,
+          alignment: widget.wrapAlignment,
           children: widget.items.map((e) => Theme(
-            // data: ThemeData(canvasColor: widget.itemColor),
             data: ThemeData(
               canvasColor: Colors.transparent,
               highlightColor: Colors.white,
@@ -88,7 +86,8 @@ class _NChoiceBoxState extends State<NChoiceBox> {
                   color: e.isSelected == true ? Colors.white : fontColor,
                   fontSize: 16.sp,
                   fontWeight: FontWeight.w500,
-              ),),
+                ),
+              ),
               // padding: EdgeInsets.only(left: 15, right: 15),
               materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
               selected: e.isSelected == true,
@@ -106,8 +105,7 @@ class _NChoiceBoxState extends State<NChoiceBox> {
                 }
                 setState(() {});
                 widget.onChanged(seletectedItems);
-                // widget.onChanged(_choicItems);
-                debugPrint("seletectedItemNames: ${seletectedItemNames}");
+                // debugPrint("seletectedItemNames: ${seletectedItemNames}");
               },
             ),
           ),).toList(),

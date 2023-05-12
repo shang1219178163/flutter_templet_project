@@ -12,7 +12,7 @@ class FakeDataModel {
   bool? isSelected;
 
   FakeDataModel({
-    this.id,
+    required this.id,
     this.name,
     this.code,
     this.createBy,
@@ -23,9 +23,9 @@ class FakeDataModel {
     if (json == null) {
       return;
     }
-    id = json['id'] ?? json['diseaseTypeId'];
-    name = json['name'] ?? json['diseaseTypeName'];
-    code = json['code'] ?? json['diseaseTypeCode'];
+    id = json['id'];
+    name = json['name'];
+    code = json['code'];
     createBy = json['createBy'];
     isSelected = json['isSelected'];
   }
