@@ -20,9 +20,9 @@ import 'package:flutter_templet_project/uti/color_uti.dart';
 import 'package:flutter_templet_project/model/fake_data_model.dart';
 import 'package:get_storage/get_storage.dart';
 
-class DropBoxChoicDemo extends StatefulWidget {
+class DropBoxMutiRowChoicDemo extends StatefulWidget {
 
-  DropBoxChoicDemo({
+  DropBoxMutiRowChoicDemo({
     Key? key, 
     this.title
   }) : super(key: key);
@@ -30,10 +30,10 @@ class DropBoxChoicDemo extends StatefulWidget {
   final String? title;
 
   @override
-  _DropBoxChoicDemoState createState() => _DropBoxChoicDemoState();
+  _DropBoxMutiRowChoicDemoState createState() => _DropBoxMutiRowChoicDemoState();
 }
 
-class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
+class _DropBoxMutiRowChoicDemoState extends State<DropBoxMutiRowChoicDemo> {
   final items = List.generate(20, (i) => i).toList();
 
   var searchText = "";
@@ -57,13 +57,31 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
   List<FakeDataModel> selectedModels = [];
   List<FakeDataModel> selectedModelsTmp = [];
 
+
   /// 标签组
-  List<FakeDataModel> get tagModels => items.map((e) => FakeDataModel(
+  List<FakeDataModel> get item1Models => items.map((e) => FakeDataModel(
     id: "id_$e",
-    name: "标签_$e",
+    name: "选项1_$e",
   )).toList();
-  List<FakeDataModel> selectedTagModels = [];
-  List<FakeDataModel> selectedTagModelsTmp = [];
+  List<FakeDataModel> selectedItem1Models = [];
+  List<FakeDataModel> selectedItem1ModelsTmp = [];
+
+  /// 标签组
+  List<FakeDataModel> get item2Models => items.map((e) => FakeDataModel(
+    id: "id_$e",
+    name: "选项2_$e",
+  )).toList();
+  List<FakeDataModel> selectedItem2Models = [];
+  List<FakeDataModel> selectedItem2ModelsTmp = [];
+
+  /// 标签组
+  List<FakeDataModel> get item3Models => items.map((e) => FakeDataModel(
+    id: "id_$e",
+    name: "选项3_$e",
+  )).toList();
+  List<FakeDataModel> selectedItem3Models = [];
+  List<FakeDataModel> selectedItem3ModelsTmp = [];
+
 
   @override
   Widget build(BuildContext context) {
@@ -285,31 +303,6 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
                   ),
                   child: Column(
                     children: [
-                      buildDropBoxTagChoic(models: models),
-                      SizedBox(
-                        height: 24.w,
-                      ),
-                      EnhanceExpansionChoic<FakeDataModel>(
-                        trailingColor: Colors.orange,
-                        title: Text("EnhanceExpansionChoic",
-                          style: TextStyle(
-                            color: fontColor,
-                            fontSize: 18.sp,
-                            fontWeight: FontWeight.bold
-                          ),
-                        ),
-                        isSingle: isSingle,
-                        collapseCount: 9,
-                        models: tagModels,
-                        cbID: (e) => e.id ?? "",
-                        cbTitle: (e) => e.name ?? "",
-                        cbSelected: (e) => selectedTagModelsTmp.map((e) => e.id ?? "").toList().contains(e.id),
-                        onChanged: (value) {
-                          // debugPrint("selectedModels: ${value.map((e) => e.title).toList()}");
-                          selectedTagModelsTmp = value.map((e) => e.data!).toList();
-                          debugPrint("selectedTagModelsTmp: ${selectedTagModelsTmp.map((e) => e.name).toList()}");
-                        },
-                      ),
                       Column(
                         children: [
                           Text("多行水平选择菜单", style: TextStyle(fontWeight: FontWeight.bold),),
@@ -333,61 +326,19 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
     );
   }
 
-  /// 筛选弹窗 标签选择
-  Widget buildDropBoxTagChoic({
-    required List<FakeDataModel> models,
-    bool isExpand = false,
-    int collapseCount = 6,
-  }) {
-    final disable = (models.length <= collapseCount);
-
-    return StatefulBuilder(
-      builder: (context, setState) {
-
-        final items = isExpand ? models : models.take(collapseCount).toList();
-        return buildExpandMenu(
-          disable: disable,
-          isExpand: isExpand,
-          onExpansionChanged: (val) {
-            isExpand = !isExpand;
-            setState(() {});
-          },
-          title: "标签",
-          childrenHeader: (isOpen, onTap) => Column(
-            children: [
-              buildWrapChoicBox<FakeDataModel>(
-                models: items,
-                cbID: (e) => e.id ?? "",
-                cbName: (e) => e.name ?? "",
-                cbSelected: (e) => selectedModelsTmp.map((e) => e.id ?? "").toList().contains(e.id),
-                onChanged: (value) {
-                  // debugPrint("selectedModels: $value");
-                  selectedModelsTmp = value.map((e) => e.data!).toList();
-                  debugPrint("selectedTagModelsTmp: ${selectedModelsTmp.map((e) => e.name).toList()}");
-                },
-              ),
-            ],
-          ),
-          children: [],
-        );
-      }
-    );
-  }
-
   /// 多行标签选择
   Widget buildtMutiRowChoic({
     required List<FakeDataModel> models,
     bool isExpand = false,
     int collapseCount = 6,
   }) {
-    final disable = (models.length <= collapseCount);
 
     return StatefulBuilder(
       builder: (context, setState) {
 
         final items = isExpand ? models : models.take(collapseCount).toList();
         return buildExpandMenu(
-          disable: disable,
+          disable: false,
           isExpand: isExpand,
           onExpansionChanged: (val) {
             isExpand = !isExpand;
@@ -397,22 +348,60 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
           header: (isOpen, onTap) => Container(),
           childrenHeader: (isOpen, onTap) => Column(
             children: [
-              buildHorizontalChoicRow(title: "第一栏: ", models: items),
-              buildHorizontalChoicRow(title: "第二栏: ", models: items),
+              buildHorizontalChoicRow<FakeDataModel>(
+                  title: "第一栏: ",
+                  models: models,
+                  cbID: (e) => e.id ?? "",
+                  cbName: (e) => e.name ?? "",
+                  cbSelected: (e) => selectedModelsTmp.map((e) => e.id ?? "").toList().contains(e.id),
+                  onChanged: (value) {
+                    // debugPrint("selectedModels: $value");
+                    selectedModelsTmp = value.map((e) => e.data!).toList();
+                    debugPrint("selectedModelsTmp: ${selectedModelsTmp.map((e) => e.name).toList()}");
+                  },
+              ),
+              buildHorizontalChoicRow<FakeDataModel>(
+                title: "第二栏: ",
+                models: item1Models,
+                cbID: (e) => e.id ?? "",
+                cbName: (e) => e.name ?? "",
+                cbSelected: (e) => selectedItem1ModelsTmp.map((e) => e.id ?? "").toList().contains(e.id),
+                onChanged: (value) {
+                  // debugPrint("selectedModels: $value");
+                  selectedItem1ModelsTmp = value.map((e) => e.data!).toList();
+                  debugPrint("selectedItem1ModelsTmp: ${selectedItem1ModelsTmp.map((e) => e.name).toList()}");
+                },
+              ),
             ],
           ),
           children: [
             Column(
               children: [
-                buildHorizontalChoicRow(
+                buildHorizontalChoicRow<FakeDataModel>(
                   title: "第三栏: ",
-                  models: items,
                   isSingle: false,
+                  models: item2Models,
+                  cbID: (e) => e.id ?? "",
+                  cbName: (e) => e.name ?? "",
+                  cbSelected: (e) => selectedItem2ModelsTmp.map((e) => e.id ?? "").toList().contains(e.id),
+                  onChanged: (value) {
+                    // debugPrint("selectedModels: $value");
+                    selectedItem2ModelsTmp = value.map((e) => e.data!).toList();
+                    debugPrint("selectedItem2ModelsTmp: ${selectedItem2ModelsTmp.map((e) => e.name).toList()}");
+                  },
                 ),
-                buildHorizontalChoicRow(
+                buildHorizontalChoicRow<FakeDataModel>(
                   title: "第四栏: ",
-                  models: items,
                   isSingle: false,
+                  models: item3Models,
+                  cbID: (e) => e.id ?? "",
+                  cbName: (e) => e.name ?? "",
+                  cbSelected: (e) => selectedItem3ModelsTmp.map((e) => e.id ?? "").toList().contains(e.id),
+                  onChanged: (value) {
+                    // debugPrint("selectedModels: $value");
+                    selectedItem3ModelsTmp = value.map((e) => e.data!).toList();
+                    debugPrint("selectedItem3ModelsTmp: ${selectedItem3ModelsTmp.map((e) => e.name).toList()}");
+                  },
                 ),
               ],
             )
@@ -430,8 +419,12 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
   }
 
   /// 筛选弹窗 水平滑动标签选择
-  Widget buildDropBoxChoicHorizontal({
-    required List<FakeDataModel> models,
+  Widget buildDropBoxChoicHorizontal<T>({
+    required List<T> models,
+    required String Function(T) cbID,
+    required String Function(T) cbName,
+    required bool Function(T) cbSelected,
+    required ValueChanged<List<ChoiceBoxModel<T>>> onChanged,
     bool isExpand = false,
     int collapseCount = 6,
     double height = 50,
@@ -456,49 +449,40 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
             // color: ColorExt.random,
             height: height,
             width: double.maxFinite,
-            child: buildHorizontalChoiceMenu<FakeDataModel>(
+            child: NChoiceBoxHorizontal<T>(
               isSingle: isSingle,
-              models: items,
-              cbID: (e) => e.id ?? "",
-              cbName: (e) => e.name ?? "",
-              cbSelected: (e) => selectedModelsTmp.map((e) => e.id ?? "").toList().contains(e.id),
-              onChanged: (value) {
-                // debugPrint("selectedModels: $value");
-                selectedModelsTmp = value.map((e) => e.data!).toList();
-                debugPrint("selectedTagModelsTmp: ${selectedModelsTmp.map((e) => e.name).toList()}");
-              },
+              items: items.map((e) => ChoiceBoxModel<T>(
+                id: cbID(e),
+                title: cbName(e),
+                isSelected: cbSelected(e),
+                data: e,
+              )).toList(),
+              onChanged: onChanged,
             ),
           ),
+          // childrenHeader: (isOpen, onTap) => Container(
+          //   // color: ColorExt.random,
+          //   height: height,
+          //   width: double.maxFinite,
+          //   child: buildHorizontalChoiceMenu<FakeDataModel>(
+          //     isSingle: isSingle,
+          //     models: items,
+          //     cbID: (e) => e.id ?? "",
+          //     cbName: (e) => e.name ?? "",
+          //     cbSelected: (e) => selectedModelsTmp.map((e) => e.id ?? "").toList().contains(e.id),
+          //     onChanged: (value) {
+          //       // debugPrint("selectedModels: $value");
+          //       selectedModelsTmp = value.map((e) => e.data!).toList();
+          //       debugPrint("selectedTagModelsTmp: ${selectedModelsTmp.map((e) => e.name).toList()}");
+          //     },
+          //   ),
+          // ),
           children: [],
         );
       }
     );
   }
 
-  /// Wrap选择子菜单
-  buildWrapChoicBox<T>({
-    required List<T> models,
-    required String Function(T) cbID,
-    required String Function(T) cbName,
-    required bool Function(T) cbSelected,
-    ValueChanged<List<ChoiceBoxModel<T>>>? onChanged,
-  }) {
-    return NChoiceBox<T>(
-      isSingle: true,
-      itemColor: Colors.transparent,
-      // wrapAlignment: WrapAlignment.spaceBetween,
-      // wrapAlignment: WrapAlignment.start,
-      items: models.map((e) => ChoiceBoxModel<T>(
-        id: cbID(e),
-        title: cbName(e),
-        isSelected: cbSelected(e),
-        data: e,
-      )).toList(),
-      onChanged: onChanged ?? (value) {
-        debugPrint("selectedModels: $value");
-      },
-    );
-  }
 
   ///水平选择子菜单
   buildHorizontalChoiceMenu<T>({
@@ -527,9 +511,13 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
   }
 
 
-  buildHorizontalChoicRow({
+  buildHorizontalChoicRow<T>({
     String title = "标题",
-    required List<FakeDataModel> models,
+    required List<T> models,
+    required String Function(T) cbID,
+    required String Function(T) cbName,
+    required bool Function(T) cbSelected,
+    required ValueChanged<List<ChoiceBoxModel<T>>> onChanged,
     bool isSingle = true,
   }) {
     return Row(
@@ -537,10 +525,14 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
         Text(title, style: TextStyle(fontWeight: FontWeight.bold),),
         SizedBox(width: 8,),
         Expanded(
-          child: buildDropBoxChoicHorizontal(
+          child: buildDropBoxChoicHorizontal<T>(
             isSingle: isSingle,
             height: 35,
             models: models,
+            cbID: cbID,
+            cbName: cbName,
+            cbSelected: cbSelected,
+            onChanged: onChanged,
           ),
         ),
       ],
@@ -566,25 +558,28 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
 
   /// 重置过滤参数
   handleResetFitler() {
-    closeDropBox();
-
+    // closeDropBox();
     selectedModelsTmp = [];
-    selectedModels = selectedModelsTmp;
+    selectedItem1ModelsTmp = [];
+    selectedItem2ModelsTmp = [];
+    selectedItem3ModelsTmp = [];
 
-    selectedTagModelsTmp = [];
-    selectedTagModels = selectedTagModelsTmp;
-    debugPrint("重置 selectedModels: ${selectedModels.map((e) => e.name).toList()}");
-    debugPrint("重置 selectedTagModels: ${selectedTagModels.map((e) => e.name).toList()}");
-    //请求
+    handleConfirmFitler();
   }
   /// 确定过滤参数
   handleConfirmFitler() {
     closeDropBox();
 
     selectedModels = selectedModelsTmp;
-    selectedTagModels = selectedTagModelsTmp;
-    debugPrint("重置 selectedModels: ${selectedModels.map((e) => e.name).toList()}");
-    debugPrint("确定 selectedTagModels: ${selectedTagModels.map((e) => e.name).toList()}");
+    selectedItem1Models = selectedItem1ModelsTmp;
+    selectedItem2Models = selectedItem2ModelsTmp;
+    selectedItem3Models = selectedItem3ModelsTmp;
+
+    debugPrint("""-------------------------------------------
+selectedModels: ${selectedModels.map((e) => e.name).toList()},
+selectedItem1Models: ${selectedItem1Models.map((e) => e.name).toList()},
+selectedItem2Models: ${selectedItem2Models.map((e) => e.name).toList()},
+selectedItem3Models: ${selectedItem3Models.map((e) => e.name).toList()},""");
     //请求
   }
 

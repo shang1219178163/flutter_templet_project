@@ -23,6 +23,7 @@ import 'package:flutter_templet_project/pages/FlutterFFiTest.dart';
 import 'package:flutter_templet_project/pages/LocalImagePage.dart';
 import 'package:flutter_templet_project/pages/HomeNavDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DropBoxChoicDemo.dart';
+import 'package:flutter_templet_project/pages/demo/DropBoxMutiRowChoicDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MediaQueryDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/NSkeletonDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PageViewAndBarDemo.dart';
@@ -510,6 +511,7 @@ class APPRouter {
   static const textFieldColorChangeDemo = '/textFieldColorChangeDemo';
   static const pageViewAndBarDemo = '/pageViewAndBarDemo';
   static const dropBoxChoicDemo = '/dropBoxChoicDemo';
+  static const dropBoxMutiRowChoicDemo = '/dropBoxMutiRowChoicDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -801,6 +803,7 @@ class AppPage {
     GetPage(name: APPRouter.textFieldColorChangeDemo, page: () => TextFieldColorChangeDemo(),),
     GetPage(name: APPRouter.pageViewAndBarDemo, page: () => PageViewAndBarDemo(),),
     GetPage(name: APPRouter.dropBoxChoicDemo, page: () => DropBoxChoicDemo(),),
+    GetPage(name: APPRouter.dropBoxMutiRowChoicDemo, page: () => DropBoxMutiRowChoicDemo(),),
 
 
   ];
