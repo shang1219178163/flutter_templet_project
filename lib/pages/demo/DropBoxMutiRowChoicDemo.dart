@@ -366,8 +366,8 @@ class _DropBoxMutiRowChoicDemoState extends State<DropBoxMutiRowChoicDemo> {
             setState(() {});
           },
           title: "多行选择菜单",
-          header: (isOpen, onTap) => Container(),
-          childrenHeader: (isOpen, onTap) => Column(
+          header: (onTap) => Container(),
+          childrenHeader: (onTap) => Column(
             children: models.take(2).map((item) {
               return buildHorizontalChoicRow<FakeDataModel>(
                 title: "${item.title}: ",
@@ -403,11 +403,11 @@ class _DropBoxMutiRowChoicDemoState extends State<DropBoxMutiRowChoicDemo> {
               }).toList(),
             )
           ],
-          childrenFooter: (isOpen, onTap) => Container(
+          childrenFooter: (onTap) => Container(
             padding: EdgeInsets.symmetric(horizontal: 0, vertical: 1),
             child: GestureDetector(
               onTap: onTap,
-              child: Icon(isOpen ? Icons.arrow_drop_up : Icons.arrow_drop_down),
+              child: Icon(isExpand ? Icons.arrow_drop_up : Icons.arrow_drop_down),
             ),
           ),
         );
@@ -435,8 +435,8 @@ class _DropBoxMutiRowChoicDemoState extends State<DropBoxMutiRowChoicDemo> {
             setState(() {});
           },
           title: "多行选择菜单",
-          header: (isOpen, onTap) => Container(),
-          childrenHeader: (isOpen, onTap){
+          header: (onTap) => Container(),
+          childrenHeader: (onTap){
 
             return Column(
               children: items.map((item) {
@@ -457,7 +457,7 @@ class _DropBoxMutiRowChoicDemoState extends State<DropBoxMutiRowChoicDemo> {
             );
           },
           children: [],
-          childrenFooter: (isOpen, onTap) => Container(
+          childrenFooter: (onTap) => Container(
             padding: EdgeInsets.symmetric(horizontal: 0, vertical: 1),
             child: GestureDetector(
               onTap: onTap,
@@ -495,8 +495,8 @@ class _DropBoxMutiRowChoicDemoState extends State<DropBoxMutiRowChoicDemo> {
             setState(() {});
           },
           title: "标签",
-          header: (isOpen, onTap) => SizedBox(),
-          childrenHeader: (isOpen, onTap) => Container(
+          header: (onTap) => SizedBox(),
+          childrenHeader: (onTap) => Container(
             // color: ColorExt.random,
             height: height,
             width: double.maxFinite,

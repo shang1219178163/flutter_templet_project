@@ -110,7 +110,7 @@ class _EnhanceExpansionChoicState<T> extends State<EnhanceExpansionChoic<T>> {
             isExpand = !isExpand;
             setState(() {});
           },
-          childrenHeader: (isOpen, onTap) => Column(
+          childrenHeader: (onTap) => Column(
             children: [
               NChoiceBox(
                 isSingle: isSingle,

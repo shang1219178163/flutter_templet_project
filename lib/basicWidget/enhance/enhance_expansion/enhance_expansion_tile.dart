@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 
 const Duration _kExpand = Duration(milliseconds: 200);
 /// EnhanceExpansionTile 部分子组件构建类型
-typedef ExpansionWidgetBuilder = Widget Function(bool isOpen, VoidCallback onTap);
+typedef ExpansionWidgetBuilder = Widget Function(VoidCallback onTap);
 
 /// A single-line [ListTile] with an expansion arrow icon that expands or collapses
 /// the tile to reveal or hide the [children].
@@ -378,7 +378,7 @@ class _EnhanceExpansionTileState extends State<EnhanceExpansionTile> with Single
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          widget.header?.call(_isExpanded, _handleTap) ?? ListTileTheme.merge(
+          widget.header?.call(_handleTap) ?? ListTileTheme.merge(
             iconColor: _iconColor.value ?? expansionTileTheme.iconColor,
             textColor: _headerColor.value,
             child: ListTile(
@@ -390,7 +390,7 @@ class _EnhanceExpansionTileState extends State<EnhanceExpansionTile> with Single
               trailing: widget.trailing ?? _buildTrailingIcon(context),
             ),
           ),
-          widget.childrenHeader?.call(_isExpanded, _handleTap) ?? SizedBox(),
+          widget.childrenHeader?.call(_handleTap) ?? SizedBox(),
           ClipRect(
             child: Align(
               alignment: widget.expandedAlignment
@@ -400,7 +400,7 @@ class _EnhanceExpansionTileState extends State<EnhanceExpansionTile> with Single
               child: child,
             ),
           ),
-          widget.childrenFooter?.call(_isExpanded, _handleTap) ?? SizedBox(),
+          widget.childrenFooter?.call(_handleTap) ?? SizedBox(),
         ],
       ),
     );

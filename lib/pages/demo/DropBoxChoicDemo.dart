@@ -10,7 +10,6 @@ import 'package:flutter_templet_project/basicWidget/enhance/enhance_expansion/en
 
 import 'package:flutter_templet_project/basicWidget/n_cancell_and_confirm_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_choice_box.dart';
-import 'package:flutter_templet_project/basicWidget/n_choice_box_horizontal.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
@@ -310,12 +309,6 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
                           debugPrint("selectedTagModelsTmp: ${selectedTagModelsTmp.map((e) => e.name).toList()}");
                         },
                       ),
-                      Column(
-                        children: [
-                          Text("多行水平选择菜单", style: TextStyle(fontWeight: FontWeight.bold),),
-                          buildtMutiRowChoic(models: models,),
-                        ],
-                      ),
                     ],
                   ),
                 ),
@@ -353,7 +346,7 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
             setState(() {});
           },
           title: "标签",
-          childrenHeader: (isOpen, onTap) => Column(
+          childrenHeader: (onTap) => Column(
             children: [
               buildWrapChoicBox<FakeDataModel>(
                 models: items,
@@ -367,107 +360,6 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
                 },
               ),
             ],
-          ),
-          children: [],
-        );
-      }
-    );
-  }
-
-  /// 多行标签选择
-  Widget buildtMutiRowChoic({
-    required List<FakeDataModel> models,
-    bool isExpand = false,
-    int collapseCount = 6,
-  }) {
-    final disable = (models.length <= collapseCount);
-
-    return StatefulBuilder(
-      builder: (context, setState) {
-
-        final items = isExpand ? models : models.take(collapseCount).toList();
-        return buildExpandMenu(
-          disable: disable,
-          isExpand: isExpand,
-          onExpansionChanged: (val) {
-            isExpand = !isExpand;
-            setState(() {});
-          },
-          title: "多行选择菜单",
-          header: (isOpen, onTap) => Container(),
-          childrenHeader: (isOpen, onTap) => Column(
-            children: [
-              buildHorizontalChoicRow(title: "第一栏: ", models: items),
-              buildHorizontalChoicRow(title: "第二栏: ", models: items),
-            ],
-          ),
-          children: [
-            Column(
-              children: [
-                buildHorizontalChoicRow(
-                  title: "第三栏: ",
-                  models: items,
-                  isSingle: false,
-                ),
-                buildHorizontalChoicRow(
-                  title: "第四栏: ",
-                  models: items,
-                  isSingle: false,
-                ),
-              ],
-            )
-          ],
-          childrenFooter: (isOpen, onTap) => Container(
-            padding: EdgeInsets.symmetric(horizontal: 0, vertical: 1),
-            child: GestureDetector(
-              onTap: onTap,
-              child: Icon(isOpen ? Icons.arrow_drop_up : Icons.arrow_drop_down),
-            ),
-          ),
-        );
-      }
-    );
-  }
-
-  /// 筛选弹窗 水平滑动标签选择
-  Widget buildDropBoxChoicHorizontal({
-    required List<FakeDataModel> models,
-    bool isExpand = false,
-    int collapseCount = 6,
-    double height = 50,
-    bool isSingle = true,
-  }) {
-    final disable = (models.length <= collapseCount);
-
-    return StatefulBuilder(
-      builder: (context, setState) {
-
-        final items = isExpand ? models : models.take(collapseCount).toList();
-        return buildExpandMenu(
-          disable: disable,
-          isExpand: isExpand,
-          onExpansionChanged: (val) {
-            isExpand = !isExpand;
-            setState(() {});
-          },
-          title: "标签",
-          header: (isOpen, onTap) => SizedBox(),
-          childrenHeader: (isOpen, onTap) => Container(
-            // color: ColorExt.random,
-            height: height,
-            width: double.maxFinite,
-            child: buildHorizontalChoiceMenu<FakeDataModel>(
-              isSingle: isSingle,
-              models: items,
-              cbID: (e) => e.id ?? "",
-              cbName: (e) => e.name ?? "",
-              cbSelected: (e) => selectedModelsTmp.map((e) => e.id ?? "").toList().contains(e.id),
-              onChanged: (value) {
-                // debugPrint("selectedModels: $value");
-                selectedModelsTmp = value.map((e) => e.data!).toList();
-                debugPrint("selectedTagModelsTmp: ${selectedModelsTmp.map((e) => e.name).toList()}");
-              },
-            ),
           ),
           children: [],
         );
@@ -497,53 +389,6 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
       onChanged: onChanged ?? (value) {
         debugPrint("selectedModels: $value");
       },
-    );
-  }
-
-  ///水平选择子菜单
-  buildHorizontalChoiceMenu<T>({
-    required List<T> models,
-    required String Function(T) cbID,
-    required String Function(T) cbName,
-    required bool Function(T) cbSelected,
-    ValueChanged<List<ChoiceBoxModel<T>>>? onChanged,
-    bool isSingle = true,
-  }) {
-    return NChoiceBoxHorizontal<T>(
-      isSingle: isSingle,
-      // itemColor: Colors.transparent,
-      // wrapAlignment: WrapAlignment.spaceBetween,
-      // wrapAlignment: WrapAlignment.start,
-      items: models.map((e) => ChoiceBoxModel<T>(
-        id: cbID(e),
-        title: cbName(e),
-        isSelected: cbSelected(e),
-        data: e,
-      )).toList(),
-      onChanged: onChanged ?? (value) {
-        debugPrint("selectedModels: $value");
-      },
-    );
-  }
-
-
-  buildHorizontalChoicRow({
-    String title = "标题",
-    required List<FakeDataModel> models,
-    bool isSingle = true,
-  }) {
-    return Row(
-      children: [
-        Text(title, style: TextStyle(fontWeight: FontWeight.bold),),
-        SizedBox(width: 8,),
-        Expanded(
-          child: buildDropBoxChoicHorizontal(
-            isSingle: isSingle,
-            height: 35,
-            models: models,
-          ),
-        ),
-      ],
     );
   }
 
