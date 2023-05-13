@@ -110,7 +110,7 @@ class _EnhanceExpansionChoicState<T> extends State<EnhanceExpansionChoic<T>> {
             isExpand = !isExpand;
             setState(() {});
           },
-          childrenHeader: Column(
+          childrenHeader: (isOpen, onTap) => Column(
             children: [
               NChoiceBox(
                 isSingle: isSingle,
@@ -141,7 +141,8 @@ class _EnhanceExpansionChoicState<T> extends State<EnhanceExpansionChoic<T>> {
     Color color = const Color(0xffFF7E6E),
     Color? trailingColor = const Color(0xffFF7E6E),
     bool disable = false,
-    Widget childrenHeader = const SizedBox(),
+    ExpansionWidgetBuilder? childrenHeader,
+    ExpansionWidgetBuilder? childrenFooter,
   }) {
     return Theme(
       data: ThemeData(
@@ -149,7 +150,8 @@ class _EnhanceExpansionChoicState<T> extends State<EnhanceExpansionChoic<T>> {
       ),
       child: EnhanceExpansionTile(
         childrenHeader: childrenHeader,
-        // childrenFooter: Container(
+        // childrenFooter: childrenFooter,
+        // childrenFooter: (isOpen, onTap) => Container(
         //   height: 30,
         //   color: Colors.blueAccent,
         // ),

@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 
 
 const Duration _kExpand = Duration(milliseconds: 200);
+/// EnhanceExpansionTile 部分子组件构建类型
+typedef ExpansionWidgetBuilder = Widget Function(bool isOpen, VoidCallback onTap);
 
 /// A single-line [ListTile] with an expansion arrow icon that expands or collapses
 /// the tile to reveal or hide the [children].
@@ -48,8 +50,9 @@ class EnhanceExpansionTile extends StatefulWidget {
     this.subtitle,
     this.onExpansionChanged,
     this.children = const <Widget>[],
-    this.childrenHeader = const SizedBox(),
-    this.childrenFooter = const SizedBox(),
+    this.header,
+    this.childrenHeader,
+    this.childrenFooter,
     this.trailing,
     this.initiallyExpanded = false,
     this.maintainState = false,
@@ -103,8 +106,14 @@ class EnhanceExpansionTile extends StatefulWidget {
   /// Typically [ListTile] widgets.
   final List<Widget> children;
 
-  final Widget? childrenHeader;
-  final Widget? childrenFooter;
+  /// replace ListTile,
+  final ExpansionWidgetBuilder? header;
+
+  /// isExpand == false, visable,
+  final ExpansionWidgetBuilder? childrenHeader;
+
+  /// isExpand == false, visable,
+  final ExpansionWidgetBuilder? childrenFooter;
 
   /// The color to display behind the sublist when expanded.
   ///
@@ -369,7 +378,7 @@ class _EnhanceExpansionTileState extends State<EnhanceExpansionTile> with Single
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          ListTileTheme.merge(
+          widget.header?.call(_isExpanded, _handleTap) ?? ListTileTheme.merge(
             iconColor: _iconColor.value ?? expansionTileTheme.iconColor,
             textColor: _headerColor.value,
             child: ListTile(
@@ -381,7 +390,7 @@ class _EnhanceExpansionTileState extends State<EnhanceExpansionTile> with Single
               trailing: widget.trailing ?? _buildTrailingIcon(context),
             ),
           ),
-          widget.childrenHeader ?? SizedBox(),
+          widget.childrenHeader?.call(_isExpanded, _handleTap) ?? SizedBox(),
           ClipRect(
             child: Align(
               alignment: widget.expandedAlignment
@@ -391,7 +400,7 @@ class _EnhanceExpansionTileState extends State<EnhanceExpansionTile> with Single
               child: child,
             ),
           ),
-          widget.childrenFooter ?? SizedBox(),
+          widget.childrenFooter?.call(_isExpanded, _handleTap) ?? SizedBox(),
         ],
       ),
     );
