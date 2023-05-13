@@ -336,7 +336,7 @@ class _DropBoxMutiRowChoicDemoState extends State<DropBoxMutiRowChoicDemo> {
     return StatefulBuilder(
       builder: (context, setState) {
 
-        final items = isExpand ? models : models.take(collapseCount).toList();
+        // final items = isExpand ? models : models.take(collapseCount).toList();
         return buildExpandMenu(
           disable: false,
           isExpand: isExpand,
@@ -460,23 +460,6 @@ class _DropBoxMutiRowChoicDemoState extends State<DropBoxMutiRowChoicDemo> {
               onChanged: onChanged,
             ),
           ),
-          // childrenHeader: (isOpen, onTap) => Container(
-          //   // color: ColorExt.random,
-          //   height: height,
-          //   width: double.maxFinite,
-          //   child: buildHorizontalChoiceMenu<FakeDataModel>(
-          //     isSingle: isSingle,
-          //     models: items,
-          //     cbID: (e) => e.id ?? "",
-          //     cbName: (e) => e.name ?? "",
-          //     cbSelected: (e) => selectedModelsTmp.map((e) => e.id ?? "").toList().contains(e.id),
-          //     onChanged: (value) {
-          //       // debugPrint("selectedModels: $value");
-          //       selectedModelsTmp = value.map((e) => e.data!).toList();
-          //       debugPrint("selectedTagModelsTmp: ${selectedModelsTmp.map((e) => e.name).toList()}");
-          //     },
-          //   ),
-          // ),
           children: [],
         );
       }
