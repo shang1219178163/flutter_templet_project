@@ -19,6 +19,7 @@ import 'package:flutter_templet_project/uti/Debounce.dart';
 import 'package:flutter_templet_project/uti/color_uti.dart';
 import 'package:flutter_templet_project/model/fake_data_model.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:tuple/tuple.dart';
 
 class DropBoxMutiRowChoicDemo extends StatefulWidget {
 
@@ -49,38 +50,59 @@ class _DropBoxMutiRowChoicDemoState extends State<DropBoxMutiRowChoicDemo> {
 
   ScrollController? dropBoxController = ScrollController();
 
-  /// 选项组
+  /// 数据源
   List<FakeDataModel> get models => items.map((e) => FakeDataModel(
     id: "id_$e",
     name: "选项_$e",
   )).toList();
-  List<FakeDataModel> selectedModels = [];
-  List<FakeDataModel> selectedModelsTmp = [];
 
-
-  /// 标签组
+  /// 数据源
   List<FakeDataModel> get item1Models => items.map((e) => FakeDataModel(
     id: "id_$e",
     name: "选项1_$e",
   )).toList();
-  List<FakeDataModel> selectedItem1Models = [];
-  List<FakeDataModel> selectedItem1ModelsTmp = [];
 
-  /// 标签组
+  /// 数据源
   List<FakeDataModel> get item2Models => items.map((e) => FakeDataModel(
     id: "id_$e",
     name: "选项2_$e",
   )).toList();
-  List<FakeDataModel> selectedItem2Models = [];
-  List<FakeDataModel> selectedItem2ModelsTmp = [];
 
-  /// 标签组
+  /// 数据源
   List<FakeDataModel> get item3Models => items.map((e) => FakeDataModel(
     id: "id_$e",
     name: "选项3_$e",
   )).toList();
-  List<FakeDataModel> selectedItem3Models = [];
-  List<FakeDataModel> selectedItem3ModelsTmp = [];
+
+
+  late final mutiRowItems = <NChoiceBoxHorizontalModel<FakeDataModel>>[
+    NChoiceBoxHorizontalModel<FakeDataModel>(
+      title: "第一行",
+      models: models,
+      // selectedModelsTmp: [],
+      // selectedModels: [],
+      isSingle: true,
+    ),
+    NChoiceBoxHorizontalModel<FakeDataModel>(
+      title: "第二行",
+      models: item1Models,
+      // selectedModelsTmp: [],
+      // selectedModels: [],
+      isSingle: true,
+    ),
+    NChoiceBoxHorizontalModel<FakeDataModel>(
+      title: "第三行",
+      models: item2Models,
+      // selectedModelsTmp: [],
+      // selectedModels: [],
+    ),
+    NChoiceBoxHorizontalModel<FakeDataModel>(
+      title: "第四行",
+      models: item3Models,
+      // selectedModelsTmp: [],
+      // selectedModels: [],
+    ),
+  ];
 
 
   @override
@@ -303,12 +325,11 @@ class _DropBoxMutiRowChoicDemoState extends State<DropBoxMutiRowChoicDemo> {
                   ),
                   child: Column(
                     children: [
-                      Column(
-                        children: [
-                          Text("多行水平选择菜单", style: TextStyle(fontWeight: FontWeight.bold),),
-                          buildtMutiRowChoic(models: models,),
-                        ],
-                      ),
+                      Text("多行水平选择菜单", style: TextStyle(fontWeight: FontWeight.bold),),
+                      buildtMutiRowChoic(models: mutiRowItems,),
+                      Text("多行水平选择菜单(方式2)", style: TextStyle(fontWeight: FontWeight.bold),),
+                      buildtMutiRowChoicNew(models: mutiRowItems,),
+
                     ],
                   ),
                 ),
@@ -328,9 +349,9 @@ class _DropBoxMutiRowChoicDemoState extends State<DropBoxMutiRowChoicDemo> {
 
   /// 多行标签选择
   Widget buildtMutiRowChoic({
-    required List<FakeDataModel> models,
+    required List<NChoiceBoxHorizontalModel<FakeDataModel>> models,
     bool isExpand = false,
-    int collapseCount = 6,
+    int collapseCount = 2,
   }) {
 
     return StatefulBuilder(
@@ -347,63 +368,39 @@ class _DropBoxMutiRowChoicDemoState extends State<DropBoxMutiRowChoicDemo> {
           title: "多行选择菜单",
           header: (isOpen, onTap) => Container(),
           childrenHeader: (isOpen, onTap) => Column(
-            children: [
-              buildHorizontalChoicRow<FakeDataModel>(
-                  title: "第一栏: ",
-                  models: models,
-                  cbID: (e) => e.id ?? "",
-                  cbName: (e) => e.name ?? "",
-                  cbSelected: (e) => selectedModelsTmp.map((e) => e.id ?? "").toList().contains(e.id),
-                  onChanged: (value) {
-                    // debugPrint("selectedModels: $value");
-                    selectedModelsTmp = value.map((e) => e.data!).toList();
-                    debugPrint("selectedModelsTmp: ${selectedModelsTmp.map((e) => e.name).toList()}");
-                  },
-              ),
-              buildHorizontalChoicRow<FakeDataModel>(
-                title: "第二栏: ",
-                models: item1Models,
+            children: models.take(2).map((item) {
+              return buildHorizontalChoicRow<FakeDataModel>(
+                title: "${item.title}: ",
+                isSingle: item.isSingle,
+                models: item.models,
                 cbID: (e) => e.id ?? "",
                 cbName: (e) => e.name ?? "",
-                cbSelected: (e) => selectedItem1ModelsTmp.map((e) => e.id ?? "").toList().contains(e.id),
+                cbSelected: (e) => item.selectedModelsTmp.map((e) => e.id ?? "").toList().contains(e.id),
                 onChanged: (value) {
                   // debugPrint("selectedModels: $value");
-                  selectedItem1ModelsTmp = value.map((e) => e.data!).toList();
-                  debugPrint("selectedItem1ModelsTmp: ${selectedItem1ModelsTmp.map((e) => e.name).toList()}");
+                  item.selectedModelsTmp = value.map((e) => e.data!).toList();
+                  debugPrint("${item.title} selectedItem2ModelsTmp: ${item.selectedModelsTmp.map((e) => e.name).toList()}");
                 },
-              ),
-            ],
+              );
+            }).toList(),
           ),
           children: [
             Column(
-              children: [
-                buildHorizontalChoicRow<FakeDataModel>(
-                  title: "第三栏: ",
-                  isSingle: false,
-                  models: item2Models,
+              children: models.skip(2).map((item) {
+                return buildHorizontalChoicRow<FakeDataModel>(
+                  title: "${item.title}: ",
+                  isSingle: item.isSingle,
+                  models: item.models,
                   cbID: (e) => e.id ?? "",
                   cbName: (e) => e.name ?? "",
-                  cbSelected: (e) => selectedItem2ModelsTmp.map((e) => e.id ?? "").toList().contains(e.id),
+                  cbSelected: (e) => item.selectedModelsTmp.map((e) => e.id ?? "").toList().contains(e.id),
                   onChanged: (value) {
                     // debugPrint("selectedModels: $value");
-                    selectedItem2ModelsTmp = value.map((e) => e.data!).toList();
-                    debugPrint("selectedItem2ModelsTmp: ${selectedItem2ModelsTmp.map((e) => e.name).toList()}");
+                    item.selectedModelsTmp = value.map((e) => e.data!).toList();
+                    debugPrint("${item.title} selectedModelsTmp: ${item.selectedModelsTmp.map((e) => e.name).toList()}");
                   },
-                ),
-                buildHorizontalChoicRow<FakeDataModel>(
-                  title: "第四栏: ",
-                  isSingle: false,
-                  models: item3Models,
-                  cbID: (e) => e.id ?? "",
-                  cbName: (e) => e.name ?? "",
-                  cbSelected: (e) => selectedItem3ModelsTmp.map((e) => e.id ?? "").toList().contains(e.id),
-                  onChanged: (value) {
-                    // debugPrint("selectedModels: $value");
-                    selectedItem3ModelsTmp = value.map((e) => e.data!).toList();
-                    debugPrint("selectedItem3ModelsTmp: ${selectedItem3ModelsTmp.map((e) => e.name).toList()}");
-                  },
-                ),
-              ],
+                );
+              }).toList(),
             )
           ],
           childrenFooter: (isOpen, onTap) => Container(
@@ -411,6 +408,60 @@ class _DropBoxMutiRowChoicDemoState extends State<DropBoxMutiRowChoicDemo> {
             child: GestureDetector(
               onTap: onTap,
               child: Icon(isOpen ? Icons.arrow_drop_up : Icons.arrow_drop_down),
+            ),
+          ),
+        );
+      }
+    );
+  }
+
+  /// 多行标签选择
+  Widget buildtMutiRowChoicNew({
+    required List<NChoiceBoxHorizontalModel<FakeDataModel>> models,
+    bool isExpand = false,
+    int collapseCount = 2,
+  }) {
+
+    return StatefulBuilder(
+      builder: (context, setState) {
+
+        final items = isExpand ? models : models.take(collapseCount).toList();
+
+        return buildExpandMenu(
+          disable: false,
+          isExpand: isExpand,
+          onExpansionChanged: (val) {
+            isExpand = !isExpand;
+            setState(() {});
+          },
+          title: "多行选择菜单",
+          header: (isOpen, onTap) => Container(),
+          childrenHeader: (isOpen, onTap){
+
+            return Column(
+              children: items.map((item) {
+                return buildHorizontalChoicRow<FakeDataModel>(
+                  title: "${item.title}: ",
+                  isSingle: item.isSingle,
+                  models: item.models,
+                  cbID: (e) => e.id ?? "",
+                  cbName: (e) => e.name ?? "",
+                  cbSelected: (e) => item.selectedModelsTmp.map((e) => e.id ?? "").toList().contains(e.id),
+                  onChanged: (value) {
+                    // debugPrint("selectedModels: $value");
+                    item.selectedModelsTmp = value.map((e) => e.data!).toList();
+                    debugPrint("${item.title} selectedModelsTmp: ${item.selectedModelsTmp.map((e) => e.name).toList()}");
+                  },
+                );
+              }).toList(),
+            );
+          },
+          children: [],
+          childrenFooter: (isOpen, onTap) => Container(
+            padding: EdgeInsets.symmetric(horizontal: 0, vertical: 1),
+            child: GestureDetector(
+              onTap: onTap,
+              child: Icon(isExpand ? Icons.arrow_drop_up : Icons.arrow_drop_down),
             ),
           ),
         );
@@ -494,7 +545,7 @@ class _DropBoxMutiRowChoicDemoState extends State<DropBoxMutiRowChoicDemo> {
   }
 
 
-  buildHorizontalChoicRow<T>({
+  Widget buildHorizontalChoicRow<T>({
     String title = "标题",
     required List<T> models,
     required String Function(T) cbID,
@@ -542,10 +593,9 @@ class _DropBoxMutiRowChoicDemoState extends State<DropBoxMutiRowChoicDemo> {
   /// 重置过滤参数
   handleResetFitler() {
     // closeDropBox();
-    selectedModelsTmp = [];
-    selectedItem1ModelsTmp = [];
-    selectedItem2ModelsTmp = [];
-    selectedItem3ModelsTmp = [];
+    mutiRowItems.forEach((item) {
+      item.selectedModelsTmp = [];
+    });
 
     handleConfirmFitler();
   }
@@ -553,16 +603,16 @@ class _DropBoxMutiRowChoicDemoState extends State<DropBoxMutiRowChoicDemo> {
   handleConfirmFitler() {
     closeDropBox();
 
-    selectedModels = selectedModelsTmp;
-    selectedItem1Models = selectedItem1ModelsTmp;
-    selectedItem2Models = selectedItem2ModelsTmp;
-    selectedItem3Models = selectedItem3ModelsTmp;
+    mutiRowItems.forEach((item) {
+      item.selectedModels = item.selectedModelsTmp;
+    });
 
+  mutiRowItems.forEach((item) {
     debugPrint("""-------------------------------------------
-selectedModels: ${selectedModels.map((e) => e.name).toList()},
-selectedItem1Models: ${selectedItem1Models.map((e) => e.name).toList()},
-selectedItem2Models: ${selectedItem2Models.map((e) => e.name).toList()},
-selectedItem3Models: ${selectedItem3Models.map((e) => e.name).toList()},""");
+title: ${item.title},
+selectedModelsTmp: ${item.selectedModelsTmp.map((e) => e.name).toList()},
+selectedModels: ${item.selectedModels.map((e) => e.name).toList()},""");
+    });
     //请求
   }
 
@@ -693,3 +743,4 @@ selectedItem3Models: ${selectedItem3Models.map((e) => e.name).toList()},""");
     FocusManager.instance.primaryFocus?.unfocus();
   }
 }
+

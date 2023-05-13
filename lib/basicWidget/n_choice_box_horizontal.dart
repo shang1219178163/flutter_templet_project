@@ -104,3 +104,58 @@ class _NChoiceBoxHorizontalState<T> extends State<NChoiceBoxHorizontal<T>> {
     );
   }
 }
+
+
+/// 多选模型
+class NChoiceBoxHorizontalModel<T>{
+
+  NChoiceBoxHorizontalModel({
+    required this.models,
+    this.selectedModelsTmp = const [],
+    this.selectedModels = const [],
+    this.title = "",
+    this.isSingle = false,
+    this.data,
+  });
+
+  String title;
+  /// 是否单选
+  bool isSingle;
+  /// 模型数组
+  List<T> models;
+  /// 模型最终数组(可传入默认选择)
+  List<T> selectedModels = [];
+  /// 模型临时数组(可传入默认选择)
+  List<T> selectedModelsTmp = [];
+
+  /// 通用参数,挂载任何其他需要的参数
+  dynamic data;
+
+}
+
+/// 多选模型
+// class HorizontalChoicModel<T>{
+//
+//   HorizontalChoicModel({
+//     required this.models,
+//     this.selectedModelsTmp = const [],
+//     this.selectedModels = const [],
+//     this.title = "",
+//     this.isSingle = false,
+//     this.data,
+//   });
+//
+//   String title;
+//   /// 是否单选
+//   bool isSingle;
+//   /// 模型数组
+//   List<T> models;
+//   /// 模型最终数组(可传入默认选择)
+//   List<T> selectedModels = [];
+//   /// 模型临时数组(可传入默认选择)
+//   List<T> selectedModelsTmp = [];
+//
+//   /// 通用参数,挂载任何其他需要的参数
+//   dynamic data;
+//
+// }
