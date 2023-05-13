@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_templet_project/APPThemeSettings.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/provider/color_filtered_provider.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -86,12 +87,16 @@ class _APPDrawerMenuPageState extends State<APPDrawerMenuPage> {
   List<Widget> buildHeader() {
     return [
       DrawerHeader(
-        decoration: BoxDecoration(color: Theme.of(context).primaryColor),
+        decoration: BoxDecoration(
+          color: Theme.of(context).primaryColor.withOpacity(0.7),
+          // image: DecorationImage(
+          //   image: "img_flutter_3_10.webp".toAssetImage(),
+          // ),
+        ),
         child: UnconstrainedBox( //解除父级的大小限制
           child: CircleAvatar(
             radius: 48,
-            // backgroundColor: Colors.transparent,
-            backgroundImage: AssetImage('images/avatar.png')
+            backgroundImage: 'avatar.png'.toAssetImage(),
           ),
         ),
       ),

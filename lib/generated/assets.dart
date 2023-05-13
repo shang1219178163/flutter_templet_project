@@ -36,6 +36,7 @@ class Assets {
   static const String imagesIconPlay = 'assets/images/icon_play.png';
   static const String imagesIconSearch = 'assets/images/icon_search.png';
   static const String imagesImg404 = 'assets/images/img_404.png';
+  static const String imagesImgFlutter310 = 'assets/images/img_flutter_3_10.webp';
   static const String imagesImgPlaceholder = 'assets/images/img_placeholder.png';
   static const String imagesImgPlaceholderEmpty = 'assets/images/img_placeholder_empty.png';
   static const String imagesImgPlaceholderEmptyOne = 'assets/images/img_placeholder_empty_one.png';

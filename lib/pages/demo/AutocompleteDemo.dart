@@ -95,6 +95,9 @@ class _AutocompleteDemoState extends State<AutocompleteDemo>{
               );
             },
           ),
+          Image(
+            image: "img_flutter_3_10.webp".toAssetImage(),
+          ),
         ].map((e) => SliverToBoxAdapter(child: e,)).toList(),
       )
     );
