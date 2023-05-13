@@ -172,15 +172,15 @@ class _AutocompleteDemoState extends State<AutocompleteDemo>{
       FocusNode focusNode,
       VoidCallback onFieldSubmitted,
   ) {
-    return TextFormField(
+    return TextField(
       textInputAction: TextInputAction.next,
       // style: const TextStyle(color: Colors.white),
       controller: textEditingController,
       focusNode: focusNode,
-      onFieldSubmitted: (String value) {
-        debugPrint("Field: $value");
-        onFieldSubmitted();
-      },
+      // onFieldSubmitted: (String value) {
+      //   debugPrint("Field: $value");
+      //   onFieldSubmitted();
+      // },
       onChanged: (val){
         debugPrint("onChanged: $val");
         textFieldVN.value = val;
@@ -250,8 +250,11 @@ class _AutocompleteDemoState extends State<AutocompleteDemo>{
         valueListenable: textFieldVN,
         builder: (context, value, child) {
           return value.isEmpty ? SizedBox() : IconButton(
-              onPressed: () => textEditingController.clear(),
-              icon: Icon(Icons.close, color: Colors.grey)
+            onPressed: (){
+              textEditingController.clear();
+              textFieldVN.value = "";
+            } ,
+            icon: Icon(Icons.cancel, color: Colors.grey)
           );
         }
       ),

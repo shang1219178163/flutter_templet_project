@@ -87,10 +87,16 @@ class _TextFieldDemoState extends State<TextFieldDemo> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            CupertinoTextField(controller: _textController),
+            CupertinoTextField(
+              controller: _textController,
+              placeholder: "请输入",
+              padding: EdgeInsets.only(left: 8, top: 8, bottom: 8, right: 8),
+              suffixMode: OverlayVisibilityMode.editing,
+            ),
             Spacer(),
             CupertinoSearchTextField(
-              padding: EdgeInsets.only(left: 3, top: 15, bottom: 15, right: 5),
+              // prefixIcon: SizedBox(),
+              padding: EdgeInsets.only(left: 8, top: 8, bottom: 8, right: 8),
               placeholder: "请输入",
               onChanged: (String value) {
                 // debugPrint('onChanged: $value');
@@ -120,36 +126,30 @@ class _TextFieldDemoState extends State<TextFieldDemo> {
               maxLength: 12,
               textInputAction: TextInputAction.next,//显示'下一步'
               decoration: InputDecoration(
-                  hintText: '请输入账号',
-                  // labelText: "账号",
-                  // contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-                  prefixIcon:Icon(Icons.perm_identity),
-                  // border: OutlineInputBorder(
-                  //     borderRadius: BorderRadius.circular(4.0) //圆角大小
-                  // ),
-                  suffixIcon: _unameController.text.isNotEmpty ? IconButton(
-                    icon: Icon(
-                      Icons.clear,
-                      size: 21,
-                      color: Color(0xff666666),
-                    ),
-                    onPressed: (){
-                      _unameController.clear();
-                      // setState(() {
-                      //   _unameController.text = '';
-                      //   // checkLoginText();
-                      // });
-                    },
-                  ):null
+                hintText: '请输入账号',
+                // labelText: "账号",
+                // contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                prefixIcon:Icon(Icons.perm_identity),
+                // border: OutlineInputBorder(
+                //     borderRadius: BorderRadius.circular(4.0) //圆角大小
+                // ),
+                suffixIcon: _unameController.text.isNotEmpty ? IconButton(
+                  icon: Icon(Icons.cancel, color: Colors.grey,),
+                  onPressed: (){
+                    _unameController.clear();
+                    //   _unameController.text = '';
+                    //   // checkLoginText();
+                    setState(() {});
+                  },
+                ):null
               ),
               validator: (v) {
                 return !_unameExp.hasMatch(v!)?'账号由6到12位数字与小写字母组成':null;
               },
               onEditingComplete: ()=>FocusScope.of(context).requestFocus(focusNode2),
               onChanged: (v){
-                setState(() {
-                  // checkLoginText();
-                });
+                // checkLoginText();
+                setState(() {});
               },
             ),
             // SizedBox(height: 15.0),
@@ -160,33 +160,27 @@ class _TextFieldDemoState extends State<TextFieldDemo> {
               maxLength: 12,
               textInputAction: TextInputAction.done, //显示'完成'
               decoration: InputDecoration(
-                  hintText: '请输入密码',
-                  // labelText: '密码',
-                  // contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-                  prefixIcon:Icon(Icons.lock),
-                  // border: OutlineInputBorder(
-                  //     borderRadius: BorderRadius.circular(40.0)
-                  // ),
-                  suffixIcon: IconButton(
-                    icon: Icon(
-                      Icons.remove_red_eye,
-                      size: 21,
-                      color: Color(0xff666666),
-                    ),
-                    onPressed: (){
-                      setState(() {
-                        isEye = !isEye;
-                      });
-                    },
-                  )
+                hintText: '请输入密码',
+                // labelText: '密码',
+                // contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                prefixIcon:Icon(Icons.lock),
+                // border: OutlineInputBorder(
+                //     borderRadius: BorderRadius.circular(40.0)
+                // ),
+                suffixIcon: IconButton(
+                  icon: Icon(Icons.remove_red_eye,),
+                  onPressed: (){
+                    isEye = !isEye;
+                    setState(() {});
+                  },
+                )
               ),
               validator:(v){
                 return !_pwdExp.hasMatch(v!)?'密码由6到12位数字与小写字母组成':null;
               },
               onChanged: (v){
-                setState(() {
-                  // checkLoginText();
-                });
+                // checkLoginText();
+                setState(() {});
               },
               onEditingComplete: (){
                 ddlog("onEditingComplete");
