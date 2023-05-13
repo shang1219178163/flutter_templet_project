@@ -11,8 +11,8 @@ class NChoiceBoxHorizontal<T> extends StatefulWidget {
 
   NChoiceBoxHorizontal({
     Key? key,
-    required this.items,
     required this.onChanged,
+    required this.items,
     this.title,
     this.itemColor = bgColor,
     this.itemSelectedColor = Colors.blue,

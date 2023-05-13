@@ -419,7 +419,7 @@ class _DropBoxMutiRowChoicDemoState extends State<DropBoxMutiRowChoicDemo> {
   Widget buildtMutiRowChoicNew({
     required List<NChoiceBoxHorizontalModel<FakeDataModel>> models,
     bool isExpand = false,
-    int collapseCount = 2,
+    int collapseCount = 1,
   }) {
 
     return StatefulBuilder(
@@ -469,82 +469,7 @@ class _DropBoxMutiRowChoicDemoState extends State<DropBoxMutiRowChoicDemo> {
     );
   }
 
-  /// 筛选弹窗 水平滑动标签选择
-  Widget buildDropBoxChoicHorizontal<T>({
-    required List<T> models,
-    required String Function(T) cbID,
-    required String Function(T) cbName,
-    required bool Function(T) cbSelected,
-    required ValueChanged<List<ChoiceBoxModel<T>>> onChanged,
-    bool isExpand = false,
-    int collapseCount = 6,
-    double height = 50,
-    bool isSingle = true,
-  }) {
-    final disable = (models.length <= collapseCount);
-
-    return StatefulBuilder(
-      builder: (context, setState) {
-
-        final items = isExpand ? models : models.take(collapseCount).toList();
-        return buildExpandMenu(
-          disable: disable,
-          isExpand: isExpand,
-          onExpansionChanged: (val) {
-            isExpand = !isExpand;
-            setState(() {});
-          },
-          title: "标签",
-          header: (onTap) => SizedBox(),
-          childrenHeader: (onTap) => Container(
-            // color: ColorExt.random,
-            height: height,
-            width: double.maxFinite,
-            child: NChoiceBoxHorizontal<T>(
-              isSingle: isSingle,
-              items: items.map((e) => ChoiceBoxModel<T>(
-                id: cbID(e),
-                title: cbName(e),
-                isSelected: cbSelected(e),
-                data: e,
-              )).toList(),
-              onChanged: onChanged,
-            ),
-          ),
-          children: [],
-        );
-      }
-    );
-  }
-
-
-  ///水平选择子菜单
-  buildHorizontalChoiceMenu<T>({
-    required List<T> models,
-    required String Function(T) cbID,
-    required String Function(T) cbName,
-    required bool Function(T) cbSelected,
-    ValueChanged<List<ChoiceBoxModel<T>>>? onChanged,
-    bool isSingle = true,
-  }) {
-    return NChoiceBoxHorizontal<T>(
-      isSingle: isSingle,
-      // itemColor: Colors.transparent,
-      // wrapAlignment: WrapAlignment.spaceBetween,
-      // wrapAlignment: WrapAlignment.start,
-      items: models.map((e) => ChoiceBoxModel<T>(
-        id: cbID(e),
-        title: cbName(e),
-        isSelected: cbSelected(e),
-        data: e,
-      )).toList(),
-      onChanged: onChanged ?? (value) {
-        debugPrint("selectedModels: $value");
-      },
-    );
-  }
-
-
+  /// 水平选择菜单
   Widget buildHorizontalChoicRow<T>({
     String title = "标题",
     required List<T> models,
@@ -572,6 +497,44 @@ class _DropBoxMutiRowChoicDemoState extends State<DropBoxMutiRowChoicDemo> {
       ],
     );
   }
+
+
+  /// 筛选弹窗 水平滑动标签选择
+  Widget buildDropBoxChoicHorizontal<T>({
+    required List<T> models,
+    required String Function(T) cbID,
+    required String Function(T) cbName,
+    required bool Function(T) cbSelected,
+    required ValueChanged<List<ChoiceBoxModel<T>>> onChanged,
+    bool isExpand = false,
+    int collapseCount = 6,
+    double height = 50,
+    bool isSingle = true,
+  }) {
+    return StatefulBuilder(
+      builder: (context, setState){
+
+      final items = isExpand ? models : models.take(collapseCount).toList();
+
+      return Container(
+        // color: ColorExt.random,
+        height: height,
+        width: double.maxFinite,
+        child: NChoiceBoxHorizontal<T>(
+          isSingle: isSingle,
+          onChanged: onChanged,
+          items: items.map((e) =>
+              ChoiceBoxModel<T>(
+                id: cbID(e),
+                title: cbName(e),
+                isSelected: cbSelected(e),
+                data: e,
+              )).toList(),
+        ),
+      );
+    });
+  }
+
 
   /// 筛选弹窗 取消确认菜单
   Widget buildDropBoxButtonBar() {
