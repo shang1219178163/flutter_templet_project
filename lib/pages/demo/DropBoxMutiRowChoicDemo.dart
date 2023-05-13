@@ -415,7 +415,7 @@ class _DropBoxMutiRowChoicDemoState extends State<DropBoxMutiRowChoicDemo> {
     );
   }
 
-  /// 多行标签选择
+  /// 多行标签选择(方式2)
   Widget buildtMutiRowChoicNew({
     required List<NChoiceBoxHorizontalModel<FakeDataModel>> models,
     bool isExpand = false,
@@ -469,7 +469,7 @@ class _DropBoxMutiRowChoicDemoState extends State<DropBoxMutiRowChoicDemo> {
     );
   }
 
-  /// 水平选择菜单
+  /// 带标签水平选择菜单
   Widget buildHorizontalChoicRow<T>({
     String title = "标题",
     required List<T> models,
