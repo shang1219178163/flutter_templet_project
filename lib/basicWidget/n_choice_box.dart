@@ -13,7 +13,6 @@ class NChoiceBox<T> extends StatefulWidget {
     required this.items,
     required this.onChanged,
     this.title,
-    this.itemMargin = const EdgeInsets.symmetric(vertical: 4),
     this.itemColor = bgColor,
     this.itemSelectedColor = Colors.blue,
     this.crossAxisAlignment = CrossAxisAlignment.stretch,
@@ -37,7 +36,6 @@ class NChoiceBox<T> extends StatefulWidget {
 
   WrapAlignment wrapAlignment;
 
-  EdgeInsets itemMargin;
   /// 元素背景色
   Color itemColor;
   /// 选中元素背景色
