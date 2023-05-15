@@ -34,10 +34,6 @@ class _SliverAppBarDemoOneState extends State<SliverAppBarDemoOne> with SingleTi
     _tabController = TabController(length: pages.length, vsync: this);
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
