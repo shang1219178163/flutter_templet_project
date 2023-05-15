@@ -47,7 +47,7 @@ class _AnimatedWidgetDemoState extends State<AnimatedWidgetDemo> {
       child: Column(
         children: <Widget>[
 
-          RaisedButton(
+          ElevatedButton(
             onPressed: () {
               setState(() {
                 _padding += 10;
@@ -66,7 +66,7 @@ class _AnimatedWidgetDemoState extends State<AnimatedWidgetDemo> {
                 AnimatedPositioned(
                   duration: duration,
                   left: _left,
-                  child: RaisedButton(
+                  child: ElevatedButton(
                     onPressed: () {
                       setState(() {
                         _left = 100;
@@ -84,7 +84,7 @@ class _AnimatedWidgetDemoState extends State<AnimatedWidgetDemo> {
             child: AnimatedAlign(
               duration: duration,
               alignment: _align,
-              child: RaisedButton(
+              child: ElevatedButton(
                 onPressed: () {
                   setState(() {
                     _align = Alignment.center;

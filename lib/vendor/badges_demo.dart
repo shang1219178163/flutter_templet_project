@@ -1,4 +1,4 @@
-import 'package:badges/badges.dart';
+import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/horizontal_cell.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
@@ -115,9 +115,9 @@ class _BadgesDemoState extends State<BadgesDemo> {
     required Widget child,
     Color badgeColor = Colors.red,
   }) {
-    return Badge(
+    return badges.Badge(
       badgeColor: badgeColor,
-      position: BadgePosition.topEnd(top: 10, end: 10),
+      position: badges.BadgePosition.topEnd(top: 10, end: 10),
       badgeContent: null,
       child: child,
     );
@@ -129,7 +129,7 @@ class _BadgesDemoState extends State<BadgesDemo> {
     double badgeContentOpacity = 1,
     String? badgeValue,
     Color badgeColor = Colors.white,
-    BadgeShape shape = BadgeShape.square,
+    badges.BadgeShape shape = badges.BadgeShape.square,
     Gradient? gradient,
   }) {
     final badgeChild = badgeValue != null ? Text(badgeValue,
@@ -140,11 +140,11 @@ class _BadgesDemoState extends State<BadgesDemo> {
       ),
     ) : badgeContent;
 
-    return Badge(
+    return badges.Badge(
       shape: shape,
       elevation: 0,
       borderRadius: BorderRadius.circular(5),
-      position: BadgePosition.topEnd(top: -12, end: -20),
+      position: badges.BadgePosition.topEnd(top: -12, end: -20),
       padding: EdgeInsets.all(2),
       gradient: gradient,
       badgeContent: Opacity(
@@ -156,10 +156,10 @@ class _BadgesDemoState extends State<BadgesDemo> {
   }
 
   Widget _shoppingCartBadge() {
-    return Badge(
-      position: BadgePosition.topEnd(top: 0, end: 3),
+    return badges.Badge(
+      position: badges.BadgePosition.topEnd(top: 0, end: 3),
       animationDuration: Duration(milliseconds: 300),
-      animationType: BadgeAnimationType.slide,
+      animationType: badges.BadgeAnimationType.slide,
       badgeContent: Text(
         _counter.toString(),
         style: TextStyle(color: Colors.white),
@@ -174,7 +174,7 @@ class _BadgesDemoState extends State<BadgesDemo> {
   PreferredSizeWidget _tabBar() {
     return TabBar(tabs: [
       Tab(
-        icon: Badge(
+        icon: badges.Badge(
           badgeColor: Colors.blue,
           badgeContent: Text('3',
             style: TextStyle(color: Colors.white),
@@ -196,7 +196,7 @@ class _BadgesDemoState extends State<BadgesDemo> {
           builder: (BuildContext context, double value, Widget? child) {
             final result = (value/100);
             return _buildBadgeText(
-              shape: BadgeShape.square,
+              shape: badges.BadgeShape.square,
               gradient: _buildGraint(opacity: result),
               badgeValue: '你我他',
               badgeColor: Colors.black,
@@ -214,7 +214,7 @@ class _BadgesDemoState extends State<BadgesDemo> {
           builder: (BuildContext context, double value, Widget? child) {
             final result = (value/100);
             return _buildBadgeText(
-              shape: BadgeShape.square,
+              shape: badges.BadgeShape.square,
               gradient: _buildGraint(opacity: result),
               badgeValue: '你我他',
               badgeColor: Colors.black,
@@ -242,9 +242,9 @@ class _BadgesDemoState extends State<BadgesDemo> {
         ),
         BottomNavigationBarItem(
           label: 'Settings',
-          icon: Badge(
-            shape: BadgeShape.circle,
-            position: BadgePosition.center(),
+          icon: badges.Badge(
+            shape: badges.BadgeShape.circle,
+            position: badges.BadgePosition.center(),
             borderRadius: BorderRadius.circular(100),
             badgeContent: Container(
               height: 5,
@@ -293,7 +293,7 @@ class _BadgesDemoState extends State<BadgesDemo> {
   Widget _textBadge() {
     return Padding(
       padding: const EdgeInsets.all(20),
-      child: Badge(
+      child: badges.Badge(
         padding: EdgeInsets.all(6),
         gradient: LinearGradient(colors: [
           Colors.black,
@@ -306,14 +306,14 @@ class _BadgesDemoState extends State<BadgesDemo> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        position: BadgePosition.topStart(top: -15),
+        position: badges.BadgePosition.topStart(top: -15),
         child: Text('This is a text'),
       ),
     );
   }
   /// ElevatedButton 按钮角标
   Widget _elevatedButtonBadge() {
-    return Badge(
+    return badges.Badge(
       showBadge: showElevatedButtonBadge,
       padding: EdgeInsets.all(8),
       badgeColor: Colors.deepPurple,
@@ -337,7 +337,7 @@ class _BadgesDemoState extends State<BadgesDemo> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Text('Chip with zero padding:'),
-        Badge(
+        badges.Badge(
           badgeContent: Text(
             '!',
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
@@ -365,11 +365,11 @@ class _BadgesDemoState extends State<BadgesDemo> {
   Widget _getExampleBadge({double? padding}) {
     return Padding(
       padding: EdgeInsets.all(4),
-      child: Badge(
+      child: badges.Badge(
         badgeColor: Colors.lightBlueAccent,
         borderRadius: BorderRadius.circular(20),
         padding: EdgeInsets.all(padding ?? 4),
-        shape: BadgeShape.square,
+        shape: badges.BadgeShape.square,
         badgeContent: Text(
           'Hello',
           style: TextStyle(color: Colors.white),
@@ -385,17 +385,17 @@ class _BadgesDemoState extends State<BadgesDemo> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Text('Badges with borders:'),
-          Badge(
-            shape: BadgeShape.square,
+          badges.Badge(
+            shape: badges.BadgeShape.square,
             padding: EdgeInsets.all(2),
             borderRadius: BorderRadius.circular(8),
             badgeContent: Text('99+'),
             child: Icon(Icons.person, size: 30),
           ),
-          Badge(
-            position: BadgePosition.topEnd(top: 0, end: 2),
+          badges.Badge(
+            position: badges.BadgePosition.topEnd(top: 0, end: 2),
             elevation: 0,
-            shape: BadgeShape.circle,
+            shape: badges.BadgeShape.circle,
             badgeColor: Colors.red,
             borderSide: BorderSide(color: Colors.black),
             child: Icon(
@@ -403,9 +403,9 @@ class _BadgesDemoState extends State<BadgesDemo> {
               size: 30,
             ),
           ),
-          Badge(
-            position: BadgePosition.topEnd(top: -5, end: -5),
-            shape: BadgeShape.square,
+          badges.Badge(
+            position: badges.BadgePosition.topEnd(top: -5, end: -5),
+            shape: badges.BadgeShape.square,
             badgeColor: Colors.blue,
             badgeContent: SizedBox(
               height: 5,
@@ -434,11 +434,11 @@ class _BadgesDemoState extends State<BadgesDemo> {
         itemBuilder: (BuildContext context, int index) {
           switch (index) {
             case 0:
-              return _listTile(title: 'Messages', badgeValue: '2', shape: BadgeShape.square);
+              return _listTile(title: 'Messages', badgeValue: '2', shape: badges.BadgeShape.square);
             case 1:
-              return _listTile(title: 'Friends', badgeValue: '你我他', shape: BadgeShape.square);
+              return _listTile(title: 'Friends', badgeValue: '你我他', shape: badges.BadgeShape.square);
             default:
-              return _listTile(title: 'Events', badgeValue: '!', shape: BadgeShape.circle);
+              return _listTile(title: 'Events', badgeValue: '!', shape: badges.BadgeShape.circle);
           }
         },
       ),
@@ -450,7 +450,7 @@ class _BadgesDemoState extends State<BadgesDemo> {
   Widget _listTile({
     required String title,
     required String badgeValue,
-    BadgeShape shape = BadgeShape.circle,
+    badges.BadgeShape shape = badges.BadgeShape.circle,
     double radius = 8,
   }) {
     return ListTile(
@@ -461,7 +461,7 @@ class _BadgesDemoState extends State<BadgesDemo> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
-            Badge(
+            badges.Badge(
               elevation: 0,
               shape: shape,
               padding: EdgeInsets.all(7),
@@ -491,9 +491,9 @@ class _BadgesDemoState extends State<BadgesDemo> {
   Widget _directionalBadge() {
     return Padding(
       padding: const EdgeInsets.only(bottom: 12.0),
-      child: Badge(
+      child: badges.Badge(
         elevation: 0,
-        position: BadgePosition.topEnd(),
+        position: badges.BadgePosition.topEnd(),
         padding: EdgeInsetsDirectional.only(end: 4),
         badgeColor: Colors.transparent,
         badgeContent: Icon(Icons.error, size: 16.0, color: Colors.red),
