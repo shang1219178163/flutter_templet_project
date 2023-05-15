@@ -284,7 +284,18 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
                   ),
                   child: Column(
                     children: [
-                      buildDropBoxTagChoic(models: models),
+                      buildDropBoxTagChoic<FakeDataModel>(
+                        title: "标签",
+                        models: models,
+                        cbID: (e) => e.id ?? "",
+                        cbName: (e) => e.name ?? "",
+                        cbSelected: (e) => selectedModelsTmp.map((e) => e.id ?? "").toList().contains(e.id),
+                        onChanged: (value) {
+                          // debugPrint("selectedModels: $value");
+                          selectedModelsTmp = value.map((e) => e.data!).toList();
+                          debugPrint("selectedModelsTmp: ${selectedModelsTmp.map((e) => e.name).toList()}");
+                        },
+                      ),
                       SizedBox(
                         height: 24.w,
                       ),
@@ -327,8 +338,13 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
   }
 
   /// 筛选弹窗 标签选择
-  Widget buildDropBoxTagChoic({
-    required List<FakeDataModel> models,
+  Widget buildDropBoxTagChoic<T>({
+    required String title,
+    required List<T> models,
+    required String Function(T) cbID,
+    required String Function(T) cbName,
+    required bool Function(T) cbSelected,
+    ValueChanged<List<ChoiceBoxModel<T>>>? onChanged,
     bool isExpand = false,
     int collapseCount = 6,
   }) {
@@ -345,18 +361,22 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
             isExpand = !isExpand;
             setState(() {});
           },
-          title: "标签",
+          title: title,
           childrenHeader: (onTap) => Column(
             children: [
-              buildWrapChoicBox<FakeDataModel>(
-                models: items,
-                cbID: (e) => e.id ?? "",
-                cbName: (e) => e.name ?? "",
-                cbSelected: (e) => selectedModelsTmp.map((e) => e.id ?? "").toList().contains(e.id),
-                onChanged: (value) {
-                  // debugPrint("selectedModels: $value");
-                  selectedModelsTmp = value.map((e) => e.data!).toList();
-                  debugPrint("selectedTagModelsTmp: ${selectedModelsTmp.map((e) => e.name).toList()}");
+              NChoiceBox<T>(
+                isSingle: true,
+                itemColor: Colors.transparent,
+                // wrapAlignment: WrapAlignment.spaceBetween,
+                // wrapAlignment: WrapAlignment.start,
+                items: items.map((e) => ChoiceBoxModel<T>(
+                  id: cbID(e),
+                  title: cbName(e),
+                  isSelected: cbSelected(e),
+                  data: e,
+                )).toList(),
+                onChanged: onChanged ?? (value) {
+                  debugPrint("selectedModels: $value");
                 },
               ),
             ],
@@ -364,31 +384,6 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
           children: [],
         );
       }
-    );
-  }
-
-  /// Wrap选择子菜单
-  buildWrapChoicBox<T>({
-    required List<T> models,
-    required String Function(T) cbID,
-    required String Function(T) cbName,
-    required bool Function(T) cbSelected,
-    ValueChanged<List<ChoiceBoxModel<T>>>? onChanged,
-  }) {
-    return NChoiceBox<T>(
-      isSingle: true,
-      itemColor: Colors.transparent,
-      // wrapAlignment: WrapAlignment.spaceBetween,
-      // wrapAlignment: WrapAlignment.start,
-      items: models.map((e) => ChoiceBoxModel<T>(
-        id: cbID(e),
-        title: cbName(e),
-        isSelected: cbSelected(e),
-        data: e,
-      )).toList(),
-      onChanged: onChanged ?? (value) {
-        debugPrint("selectedModels: $value");
-      },
     );
   }
 
