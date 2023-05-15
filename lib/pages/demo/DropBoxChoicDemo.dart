@@ -296,9 +296,6 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
                           debugPrint("selectedModelsTmp: ${selectedModelsTmp.map((e) => e.name).toList()}");
                         },
                       ),
-                      SizedBox(
-                        height: 24.w,
-                      ),
                       EnhanceExpansionChoic<FakeDataModel>(
                         trailingColor: Colors.orange,
                         title: Text("EnhanceExpansionChoic",
