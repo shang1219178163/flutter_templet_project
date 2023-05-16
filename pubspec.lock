@@ -413,18 +413,18 @@ packages:
     dependency: "direct main"
     description:
       name: extended_image
-      sha256: a417f57e0434fc739c435e456ceace53753304157e85f77acaa680b266d4a7d8
+      sha256: "75e4b0ad0f8f63eed7935ff2506c809a670f5e6dd0f61304525879d53fc41a17"
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "6.2.2"
+    version: "7.0.2"
   extended_image_library:
     dependency: transitive
     description:
       name: extended_image_library
-      sha256: "83285a9286db7d96154dc427d9c56cf00fb5931a2ce369efb707804d7461a896"
+      sha256: "550743b43ab093aed35ef234500fcc7a304cbac1eca47b0cc991e07e88750758"
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "3.3.0"
+    version: "3.4.2"
   fake_async:
     dependency: transitive
     description:
@@ -1571,10 +1571,10 @@ packages:
     dependency: "direct main"
     description:
       name: wechat_assets_picker
-      sha256: "5e1c9d6582e0f1920a01951f7c61c87cac99a5f965a1a3ed3439e5dfd07a4c75"
+      sha256: "7f391e1f4a2bc7344445913206008c76c8378362888a5959901f037606159c33"
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "8.3.2"
+    version: "8.4.3"
   win32:
     dependency: transitive
     description:
@@ -1600,5 +1600,5 @@ packages:
     source: hosted
     version: "3.1.1"
 sdks:
-  dart: ">=2.18.0 <=3.10.0"
-  flutter: ">=3.0.0"
+  dart: ">=2.19.0 <=3.10.0"
+  flutter: ">=3.7.0"
