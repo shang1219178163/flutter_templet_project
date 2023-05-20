@@ -130,6 +130,7 @@ import 'package:flutter_templet_project/provider/provider_demo_one.dart';
 import 'package:flutter_templet_project/vendor/SVGAImageDemo.dart';
 import 'package:flutter_templet_project/vendor/ScribbleDemo.dart';
 import 'package:flutter_templet_project/vendor/SkeletonDemo.dart';
+import 'package:flutter_templet_project/vendor/SlidableDemoOne.dart';
 import 'package:flutter_templet_project/vendor/TextlessDemo.dart';
 import 'package:flutter_templet_project/vendor/VisibilityDetectorDemo.dart';
 import 'package:flutter_templet_project/vendor/aesthetic_dialogs_demo.dart';
@@ -512,6 +513,7 @@ class APPRouter {
   static const pageViewAndBarDemo = '/pageViewAndBarDemo';
   static const dropBoxChoicDemo = '/dropBoxChoicDemo';
   static const dropBoxMutiRowChoicDemo = '/dropBoxMutiRowChoicDemo';
+  static const slidableDemoOne = '/slidableDemoOne';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -597,7 +599,7 @@ class AppPage {
     GetPage(name: APPRouter.toastContext, page: () => ToastContext(),),
     GetPage(name: APPRouter.toastNoContext, page: () => ToastNoContext(),),
     GetPage(name: APPRouter.listDismissibleDemo, page: () => ListDismissibleDemo(),),
-    GetPage(name: APPRouter.slidableDemo, page: () => SlidableDemo(),),
+    // GetPage(name: APPRouter.slidableDemo, page: () => SlidableDemo(),),
     GetPage(name: APPRouter.settingsPage, page: () => AppSettingsPage(),),
     GetPage(name: APPRouter.containerDemo, page: () => ContainerDemo(),),
     GetPage(name: APPRouter.animatedContainerDemo, page: () => AnimatedContainerDemo(),),
@@ -804,6 +806,7 @@ class AppPage {
     GetPage(name: APPRouter.pageViewAndBarDemo, page: () => PageViewAndBarDemo(),),
     GetPage(name: APPRouter.dropBoxChoicDemo, page: () => DropBoxChoicDemo(),),
     GetPage(name: APPRouter.dropBoxMutiRowChoicDemo, page: () => DropBoxMutiRowChoicDemo(),),
+    GetPage(name: APPRouter.slidableDemoOne, page: () => SlidableDemoOne(),),
 
 
   ];

@@ -30,7 +30,7 @@ class _ListDismissibleDemoState extends State<ListDismissibleDemo> {
 
   var list = <String>[];
 
-  SlidableController slidableController = SlidableController();
+  // SlidableController slidableController = SlidableController();
 
   @override
   void initState() {

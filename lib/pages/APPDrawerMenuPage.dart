@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_templet_project/APPThemeSettings.dart';
+import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/provider/color_filtered_provider.dart';
@@ -124,22 +125,27 @@ class _APPDrawerMenuPageState extends State<APPDrawerMenuPage> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Icon(Icons.change_circle_outlined),
+              Icon(Icons.change_circle_outlined, color: context.primaryColor),
               SizedBox(width: 3,),
-              Text(changeThemeTitle,)
+              Text(changeThemeTitle,
+                style: TextStyle(color: context.primaryColor),
+              )
             ],
           ),
         ),
-        TextButton(
-            onPressed: (){
-              APPThemeSettings.instance.showThemePicker(
-                  context: context,
-                  callback: (){
-                    Navigator.of(context).pop();
-                  }
-              );
-            },
-            child: Text("Light主题切换",)
+        TextButton.icon(
+          onPressed: (){
+            APPThemeSettings.instance.showThemePicker(
+                context: context,
+                callback: (){
+                  Navigator.of(context).pop();
+                }
+            );
+          },
+          icon: Icon(Icons.color_lens, color: context.primaryColor),
+          label: Text("Light主题切换",
+            style: TextStyle(color: context.primaryColor),
+          )
         ),
       ],
     ),

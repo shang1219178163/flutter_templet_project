@@ -565,7 +565,8 @@ var vendors = [
   Tuple2(APPRouter.wechatPhotoPickerDemo, "微信相册选择器组件封装", ),
   Tuple2(APPRouter.dottedBorderDemo, "dottedBorder边框线", ),
   Tuple2(APPRouter.azlistviewDemo, "分组列表", ),
-
+  Tuple2(APPRouter.slidableDemoOne, "滑动菜单", ),
+  
 ];
 
 var others = [

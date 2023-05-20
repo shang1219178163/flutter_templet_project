@@ -523,10 +523,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_slidable
-      sha256: c7607eb808cdef19c8468246e95a133308aeaeb3971cdd9edfb9d5e31cedfbe9
+      sha256: "6c68e1fad129b4b807b2218ef4cf7f7f6f61c5ec8861c990dc2278d9d03cb09f"
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.6.0"
+    version: "2.0.0"
   flutter_smart_dialog:
     dependency: "direct main"
     description:

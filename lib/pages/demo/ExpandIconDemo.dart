@@ -69,10 +69,6 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
 
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute
-        .of(context)!
-        .settings
-        .arguments;
 
     return Scaffold(
       appBar: AppBar(
@@ -117,6 +113,10 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
     return Theme(
       data: ThemeData(
         dividerColor: Colors.transparent,
+        expansionTileTheme: ExpansionTileThemeData(
+          iconColor:selectedColor.value,
+          collapsedIconColor: selectedColor.value,
+        )
       ),
       child: ExpansionTile(
         leading: Icon(Icons.color_lens, color: selectedColor.value,),

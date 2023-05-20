@@ -10,6 +10,22 @@
 import 'dart:convert';
 
 extension MapExt on Map<String, dynamic>{
+  /// json字符串转字典
+  static Map<String, dynamic>? fromJsonStr(String? val, {Object? Function(Object? key, Object? value)? reviver}) {
+    if (val == null) {
+      return null;
+    }
+    final map = json.decode(val, reviver: reviver);
+    return map;
+  }
+
+  /// 字典转为 json 字符串
+  String toJson({Object? Function(dynamic object)? toEncodable}) {
+    // final jsonStr = jsonEncode(this);
+    final jsonStr = json.encode(this, toEncodable: toEncodable);
+    return jsonStr;
+  }
+
   static bool isEmpty(Map? val) {
     return val == null || val.isEmpty;
   }
@@ -18,11 +34,9 @@ extension MapExt on Map<String, dynamic>{
     return val != null && val.isNotEmpty;
   }
 
-  /// 转为 json 字符串
-  String get jsonStr {
-    final jsonStr = jsonEncode(this);
-    return jsonStr;
-  }
+  Map get reversed => {
+    for (var e in entries) e.value: e.key,
+  };
 
   // 拼接键值成字符串
   String join({String char = '&'}) {

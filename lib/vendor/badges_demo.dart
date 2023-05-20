@@ -521,6 +521,7 @@ class _BadgesDemoState extends State<BadgesDemo> {
         // ),
         left: FadeInImage(
           height: 60,
+          width: 60,
           image: NetworkImage(R.image.urls[4]),
           placeholder: "img_placeholder.png".toAssetImage(),
         ),

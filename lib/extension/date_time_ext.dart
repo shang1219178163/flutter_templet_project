@@ -16,6 +16,15 @@ extension DateTimeExt on DateTime {
     return seconds;
   }
 
+  // /// 打印代码执行时间
+  // bool isSameDay(DateTime date) {
+  //   // ignore hour,minute,second..
+  //   final dateFormat = DateFormat("yyyy-MM-dd");
+  //   final date1 = dateFormat.format(this);
+  //   final date2 = dateFormat.format(date);
+  //   return date1 == date2;
+  // }
+
   String toString19() => toString().split(".").first;
 
 }
