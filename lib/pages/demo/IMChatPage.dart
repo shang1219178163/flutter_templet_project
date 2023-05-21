@@ -242,7 +242,7 @@ class _IMChatPageState extends State<IMChatPage> with SingleTickerProviderStateM
                         ),
                         onPressed: () {
                           isExpand = !isExpand;
-                          if (_controller.value == 1) {
+                          if (_controller.value == _controller.upperBound) {
                             _controller.reverse().orCancel;
                           } else {
                             _controller.forward().orCancel;
@@ -261,15 +261,23 @@ class _IMChatPageState extends State<IMChatPage> with SingleTickerProviderStateM
                   ],
                 ),
               ),
+              // AnimatedBuilder(
+              //   animation: _controller.view,
+              //   builder: (context, Widget? child) {
+              //     final bool closed = !isExpand && _controller.isDismissed;
+              //
+              //     return Offstage(
+              //       offstage: closed,
+              //       child: footer ?? const SizedBox()
+              //     );
+              //   },
+              //   // child: shouldRemoveChildren ? null : result,
+              // ),
               AnimatedContainer(
                 duration: Duration(milliseconds: 350),
                 height: _heightFactor.value,
                 child: footer ?? const SizedBox(),
               ),
-              // Align(
-              //   heightFactor: _heightFactor.value,
-              //   child: footer ?? const SizedBox(),
-              // )
               // if (isExpand) footer ?? const SizedBox(),
             ],
           );
