@@ -37,9 +37,11 @@ class NTextfield extends StatefulWidget {
     required this.onChanged,
     required this.onSubmitted,
     this.hintText = "请输入",
+    this.minLines = 1,
+    this.maxLines = 1,
     this.keyboardType,
     this.obscureText,
-
+    this.contentPadding,
     this.fillColor = bgColor,
     this.focusColor = Colors.white,
     this.radius = 4,
@@ -59,7 +61,12 @@ class NTextfield extends StatefulWidget {
   final bool? obscureText;
 
   final String? hintText;
+  final int? minLines;
+  final int? maxLines;
+
   final TextInputType? keyboardType;
+
+  final EdgeInsetsGeometry? contentPadding;
 
   final Color? fillColor;
   final Color? focusColor;
@@ -118,6 +125,8 @@ class _NTextfieldState extends State<NTextfield> {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      minLines: widget.minLines,
+      maxLines: widget.maxLines,
       cursorColor: context.primaryColor,
       focusNode: _focusNode,
       controller: textEditingController,
@@ -135,7 +144,7 @@ class _NTextfieldState extends State<NTextfield> {
       decoration: InputDecoration(
         filled: true,
         fillColor: widget.focusColor,
-        contentPadding: const EdgeInsets.only(left: 20, right: 20),
+        contentPadding: widget.contentPadding ?? const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
         border: InputBorder.none,
         enabledBorder: widget.enabledBorder ?? buildEnabledBorder(radus: widget.radius),
         focusedBorder: widget.focusedBorder ?? buildFocusedBorder(radus: widget.radius),

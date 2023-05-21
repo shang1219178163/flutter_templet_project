@@ -74,54 +74,55 @@ class _IMChatPageState extends State<IMChatPage> with SingleTickerProviderStateM
 
   buildBody() {
     return SafeArea(
-        child: Column(
+      child: Column(
           // crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Expanded(
-              child: ValueListenableBuilder<List<String>>(
-                valueListenable: dataList,
-                builder: (context, list, child) {
-                  if (list.isEmpty) {
-                    return SizedBox();
-                  }
-
-                  return buildRefresh(
-                    child: ListView.separated(
-                      controller: _scrollController,
-                      // reverse: true,
-                      physics: ClampingScrollPhysics(),
-                      itemCount: list.length,
-                      itemBuilder: (context, index) {
-                        final e = list[index];
-
-                        return InkWell(
-                          onTap: (){
-                            debugPrint("index: ${index}");
-                          },
-                          child: ListTile(title: Text("index: ${index}"),),
-                        );
-                      },
-                      separatorBuilder: (context, index) {
-                        return Divider(color: Colors.red, height: 1,);
-                      },
-                    )
-                  );
+        children: [
+          Expanded(
+            child: ValueListenableBuilder<List<String>>(
+              valueListenable: dataList,
+              builder: (context, list, child) {
+                if (list.isEmpty) {
+                  return SizedBox();
                 }
-              ),
+
+                return buildRefresh(
+                  child: ListView.separated(
+                    controller: _scrollController,
+                    // reverse: true,
+                    physics: ClampingScrollPhysics(),
+                    itemCount: list.length,
+                    itemBuilder: (context, index) {
+                      final e = list[index];
+
+                      return InkWell(
+                        onTap: (){
+                          debugPrint("index: ${index}");
+                        },
+                        child: ListTile(title: Text("index: ${index}"),),
+                      );
+                    },
+                    separatorBuilder: (context, index) {
+                      return Divider(color: Colors.red, height: 1,);
+                    },
+                  )
+                );
+              }
             ),
-            buildIMInputBar(
-              heaer: Container(
-                color: Colors.green,
-                height: 50,
-              ),
-              footer: Container(
-                color: Colors.blue,
-                height: 300,
-              ),
-              // isExpand: isExpand,
+          ),
+          buildIMInputBar(
+            heaer: Container(
+              color: Colors.green,
+              height: 50,
             ),
-          ],
-        )
+            footer: Container(
+              color: Colors.blue,
+              height: 300,
+            ),
+            // isExpand: isExpand,
+          ),
+          buildTextField()
+        ],
+      )
     );
   }
 
@@ -163,14 +164,24 @@ class _IMChatPageState extends State<IMChatPage> with SingleTickerProviderStateM
     // bool isExpand = false,
   }) {
 
-    final textfield = NTextfield(
-      obscureText: false,
-      onChanged: (val) async {
-      },
-      onSubmitted: (val) async {
-        debugPrint("val:${val}");
-        dataList.value = [...dataList.value, val];
-      },
+    final textfield = Container(
+      constraints: BoxConstraints(
+        maxHeight: 144.0,
+        // maxWidth: _screenWidth(),
+        // minHeight: 48.0,
+        // minWidth: _screenWidth()
+      ),
+      child: NTextfield(
+        maxLines: 3,
+        keyboardType: TextInputType.multiline,
+        obscureText: false,
+        onChanged: (val) async {
+        },
+        onSubmitted: (val) async {
+          debugPrint("val:${val}");
+          dataList.value = [...dataList.value, val];
+        },
+      ),
     );
 
     final box = GestureDetector(
@@ -282,6 +293,27 @@ class _IMChatPageState extends State<IMChatPage> with SingleTickerProviderStateM
             ],
           );
         },
+      ),
+    );
+  }
+
+  buildTextField() {
+    return Container(
+      color: Colors.red,
+      constraints: BoxConstraints(
+          maxHeight: 144.0,
+          // maxWidth: _screenWidth(),
+          minHeight: 48.0,
+          // minWidth: _screenWidth()
+      ),
+      padding: EdgeInsets.only(
+          left: 16.0, right: 16.0, top: 8.0, bottom: 4.0),
+      child: TextField(
+        maxLines: null,
+        keyboardType: TextInputType.multiline,
+        decoration: InputDecoration.collapsed(
+          hintText: "Write a comment",
+        ),
       ),
     );
   }
