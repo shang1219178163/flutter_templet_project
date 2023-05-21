@@ -24,6 +24,7 @@ import 'package:flutter_templet_project/pages/LocalImagePage.dart';
 import 'package:flutter_templet_project/pages/HomeNavDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DropBoxChoicDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DropBoxMutiRowChoicDemo.dart';
+import 'package:flutter_templet_project/pages/demo/IMChatPage.dart';
 import 'package:flutter_templet_project/pages/demo/MediaQueryDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/NSkeletonDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PageViewAndBarDemo.dart';
@@ -514,6 +515,7 @@ class APPRouter {
   static const dropBoxChoicDemo = '/dropBoxChoicDemo';
   static const dropBoxMutiRowChoicDemo = '/dropBoxMutiRowChoicDemo';
   static const slidableDemoOne = '/slidableDemoOne';
+  static const imChatPage = '/imChatPage';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -807,6 +809,7 @@ class AppPage {
     GetPage(name: APPRouter.dropBoxChoicDemo, page: () => DropBoxChoicDemo(),),
     GetPage(name: APPRouter.dropBoxMutiRowChoicDemo, page: () => DropBoxMutiRowChoicDemo(),),
     GetPage(name: APPRouter.slidableDemoOne, page: () => SlidableDemoOne(),),
+    GetPage(name: APPRouter.imChatPage, page: () => IMChatPage(),),
 
 
   ];

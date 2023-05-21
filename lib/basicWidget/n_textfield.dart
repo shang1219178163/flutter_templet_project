@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/uti/color_uti.dart';
 
-// demo:
+
 // Padding(
 //   padding: EdgeInsets.all(16),
 //   child: NTextfield(
-//     value: "ddddddd",
+//     value: "NTextfield",
 //     obscureText: true,
 //     onChanged: (String value) {
 //       debugPrint("NTextfield: ${value.toString()}");
@@ -17,31 +17,32 @@ import 'package:flutter_templet_project/uti/color_uti.dart';
 //       final color = isFocus ? primary : null;
 //       return Icon(Icons.account_circle, color: color,);
 //     },
-//     // suffixIconBuilder: (isFocus, isCloseEye) => Image.asset(
-//     //   isCloseEye
-//     //       ? 'images/icon_eye_close.png'
-//     //       : 'images/icon_eye_open.png',
-//     //   width: 20,
-//     //   height: 20,
-//     //   color: isFocus ? primary : null,
-//     // ),
+//     suffixIconBuilder: (isFocus, isCloseEye) => Image.asset(
+//       isCloseEye
+//           ? 'images/icon_eye_close.png'
+//           : 'images/icon_eye_open.png',
+//       width: 20,
+//       height: 20,
+//       color: isFocus ? primary : null,
+//     ),
 //   ),
 // ),
 
 class NTextfield extends StatefulWidget {
 
   NTextfield({
-    Key? key, 
+    Key? key,
     this.title,
     this.value = "",
     required this.onChanged,
+    required this.onSubmitted,
     this.hintText = "请输入",
     this.keyboardType,
-    this.obscureText = false,
+    this.obscureText,
 
     this.fillColor = bgColor,
     this.focusColor = Colors.white,
-    this.radius = 30,
+    this.radius = 4,
     this.enabledBorder,
     this.focusedBorder,
     this.prefixIconBuilder,
@@ -53,8 +54,9 @@ class NTextfield extends StatefulWidget {
   final String? value;
 
   final ValueChanged<String> onChanged;
+  final ValueChanged<String>? onSubmitted;
 
-  final bool obscureText;
+  final bool? obscureText;
 
   final String? hintText;
   final TextInputType? keyboardType;
@@ -121,9 +123,10 @@ class _NTextfieldState extends State<NTextfield> {
       controller: textEditingController,
       // focusNode: focusChanged,
       onChanged: widget.onChanged,
-      obscureText: isCloseEye,
+      onSubmitted: widget.onSubmitted,
+      obscureText:  widget.obscureText != null ? widget.obscureText! : isCloseEye,
       keyboardType: widget.keyboardType,
-      autofocus: !widget.obscureText,
+      // autofocus: !widget.obscureText,
       style: const TextStyle(
         fontSize: 16,
         fontWeight: FontWeight.w400,
@@ -134,39 +137,39 @@ class _NTextfieldState extends State<NTextfield> {
         fillColor: widget.focusColor,
         contentPadding: const EdgeInsets.only(left: 20, right: 20),
         border: InputBorder.none,
-        enabledBorder: widget.enabledBorder ?? buildEnabledBorder(),
-        focusedBorder: widget.focusedBorder ?? buildFocusedBorder(),
+        enabledBorder: widget.enabledBorder ?? buildEnabledBorder(radus: widget.radius),
+        focusedBorder: widget.focusedBorder ?? buildFocusedBorder(radus: widget.radius),
         hintText: widget.hintText,
         hintStyle: TextStyle(fontSize: 16, color: fontColor[10]),
         prefixIcon: widget.prefixIconBuilder == null? null : ValueListenableBuilder<bool>(
-          valueListenable: hasFocusVN,
-          builder: (_, isFocus, child) {
+            valueListenable: hasFocusVN,
+            builder: (_, isFocus, child) {
 
-            return widget.prefixIconBuilder?.call(isFocus) ?? SizedBox();
-          }
+              return widget.prefixIconBuilder?.call(isFocus) ?? SizedBox();
+            }
         ),
         suffixIcon: widget.suffixIconBuilder == null? null : ValueListenableBuilder<bool>(
-          valueListenable: hasFocusVN,
-          builder: (_, isFocus, child) {
+            valueListenable: hasFocusVN,
+            builder: (_, isFocus, child) {
 
-            return IconButton(
-              focusColor: context.primaryColor,
-              icon: widget.suffixIconBuilder?.call(isFocus, isCloseEye,) ?? SizedBox(),
-              onPressed: () {
-                isCloseEye = !isCloseEye;
-                setState(() {});
-              },
-            );
-          }
+              return IconButton(
+                focusColor: context.primaryColor,
+                icon: widget.suffixIconBuilder?.call(isFocus, isCloseEye,) ?? SizedBox(),
+                onPressed: () {
+                  isCloseEye = !isCloseEye;
+                  setState(() {});
+                },
+              );
+            }
         ),
       ),
     );
   }
 
-  buildEnabledBorder() {
-    return const OutlineInputBorder(
+  buildEnabledBorder({double radus = 4}) {
+    return OutlineInputBorder(
       borderRadius: BorderRadius.all(
-        Radius.circular(30), //边角
+        Radius.circular(radus), //边角
       ),
       borderSide: BorderSide(
         color: lineColor, //边线颜色为白色
@@ -175,13 +178,12 @@ class _NTextfieldState extends State<NTextfield> {
     );
   }
 
-  buildFocusedBorder() {
+  buildFocusedBorder({double radus = 4}) {
     return OutlineInputBorder(
+      borderRadius: BorderRadius.all(Radius.circular(radus)), //边角
       borderSide: BorderSide(
         color: context.primaryColor, //边框颜色为白色
         width: 1, //宽度为1
-      ),
-      borderRadius: BorderRadius.all(Radius.circular(30), //边角
       ),
     );
   }

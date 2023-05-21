@@ -17,6 +17,7 @@ class Assets {
   static const String imagesFloating = 'assets/images/floating.png';
   static const String imagesFlutterLogo = 'assets/images/flutter_logo.png';
   static const String imagesIconAccount = 'assets/images/icon_account.png';
+  static const String imagesIconAddCircle = 'assets/images/icon_add_circle.png';
   static const String imagesIconAppbarBack = 'assets/images/icon_appbar_back.png';
   static const String imagesIconAppbarBackWhite = 'assets/images/icon_appbar_back_white.png';
   static const String imagesIconArrowDown = 'assets/images/icon_arrow_down.png';
@@ -35,6 +36,7 @@ class Assets {
   static const String imagesIconLock = 'assets/images/icon_lock.png';
   static const String imagesIconPlay = 'assets/images/icon_play.png';
   static const String imagesIconSearch = 'assets/images/icon_search.png';
+  static const String imagesIconVoice = 'assets/images/icon_voice.png';
   static const String imagesImg404 = 'assets/images/img_404.png';
   static const String imagesImgFlutter310 = 'assets/images/img_flutter_3_10.webp';
   static const String imagesImgPlaceholder = 'assets/images/img_placeholder.png';
