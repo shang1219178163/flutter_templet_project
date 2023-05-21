@@ -164,14 +164,7 @@ class _IMChatPageState extends State<IMChatPage> with SingleTickerProviderStateM
     // bool isExpand = false,
   }) {
 
-    final textfield = Container(
-      constraints: BoxConstraints(
-        maxHeight: 144.0,
-        // maxWidth: _screenWidth(),
-        // minHeight: 48.0,
-        // minWidth: _screenWidth()
-      ),
-      child: NTextfield(
+    final textfield = NTextfield(
         maxLines: 3,
         keyboardType: TextInputType.multiline,
         obscureText: false,
@@ -181,7 +174,6 @@ class _IMChatPageState extends State<IMChatPage> with SingleTickerProviderStateM
           debugPrint("val:${val}");
           dataList.value = [...dataList.value, val];
         },
-      ),
     );
 
     final box = GestureDetector(
