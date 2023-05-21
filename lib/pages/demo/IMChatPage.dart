@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/n_textfield.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
+import 'package:flutter_templet_project/im_textfield_bar.dart';
 import 'package:flutter_templet_project/uti/color_uti.dart';
 import 'package:tuple/tuple.dart';
 
@@ -36,6 +37,13 @@ class _IMChatPageState extends State<IMChatPage> with SingleTickerProviderStateM
   var isExpand = false;
 
   final heightVN = ValueNotifier(0.0);
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   void initState() {
@@ -109,7 +117,21 @@ class _IMChatPageState extends State<IMChatPage> with SingleTickerProviderStateM
               }
             ),
           ),
-          buildIMInputBar(
+          // buildIMInputBar(
+          //   heaer: Container(
+          //     color: Colors.green,
+          //     height: 50,
+          //   ),
+          //   footer: Container(
+          //     color: Colors.blue,
+          //     height: 300,
+          //   ),
+          //   // isExpand: isExpand,
+          // ),
+          IMTextfieldBar(
+            onSubmitted: (String value) {
+              debugPrint("onSubmitted:$value");
+            },
             heaer: Container(
               color: Colors.green,
               height: 50,
@@ -118,7 +140,6 @@ class _IMChatPageState extends State<IMChatPage> with SingleTickerProviderStateM
               color: Colors.blue,
               height: 300,
             ),
-            // isExpand: isExpand,
           ),
         ],
       )
@@ -219,12 +240,12 @@ class _IMChatPageState extends State<IMChatPage> with SingleTickerProviderStateM
                   children: [
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 8.w),
-                      child: IconButton(
-                        onPressed: () {
+                      child: InkWell(
+                        onTap: () {
                           isVoice = !isVoice;
                           setState(() {});
                         },
-                        icon: Image(
+                        child: Image(
                           image: "icon_voice.png".toAssetImage(),
                           width: 30.w,
                           height: 30.w,
@@ -237,12 +258,8 @@ class _IMChatPageState extends State<IMChatPage> with SingleTickerProviderStateM
                     ),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 6.w),
-                      child: IconButton(
-                        style: IconButton.styleFrom(
-                          padding: EdgeInsets.zero,
-                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                        ),
-                        onPressed: () {
+                      child: InkWell(
+                        onTap: () {
                           isExpand = !isExpand;
                           if (_controller.value == _controller.upperBound) {
                             _controller.reverse().orCancel;
@@ -251,7 +268,7 @@ class _IMChatPageState extends State<IMChatPage> with SingleTickerProviderStateM
                           }
                           setState(() {});
                         },
-                        icon: Image(
+                        child: Image(
                           image: "icon_add_circle.png".toAssetImage(),
                           width: 30.w,
                           height: 30.w,
