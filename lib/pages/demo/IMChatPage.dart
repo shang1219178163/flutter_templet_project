@@ -30,7 +30,7 @@ class _IMChatPageState extends State<IMChatPage> with SingleTickerProviderStateM
   late final AnimationController _controller = AnimationController(duration: Duration(milliseconds: 350), vsync: this);
   final Animatable<double> _easeInTween = CurveTween(curve: Curves.easeIn);
 
-  late final Animation<double> _heightFactor = Tween(begin: 0.0, end: 300.0).animate(_controller);
+  late final Animation<double> _heightFactor = Tween(begin: 0.0, end: 200.0).animate(_controller);
   late final Animation<double> _heightFactorNew = _controller.drive(_easeInTween);
 
   var isExpand = false;
@@ -120,7 +120,6 @@ class _IMChatPageState extends State<IMChatPage> with SingleTickerProviderStateM
             ),
             // isExpand: isExpand,
           ),
-          buildTextField()
         ],
       )
     );
@@ -285,27 +284,6 @@ class _IMChatPageState extends State<IMChatPage> with SingleTickerProviderStateM
             ],
           );
         },
-      ),
-    );
-  }
-
-  buildTextField() {
-    return Container(
-      color: Colors.red,
-      constraints: BoxConstraints(
-          maxHeight: 144.0,
-          // maxWidth: _screenWidth(),
-          minHeight: 48.0,
-          // minWidth: _screenWidth()
-      ),
-      padding: EdgeInsets.only(
-          left: 16.0, right: 16.0, top: 8.0, bottom: 4.0),
-      child: TextField(
-        maxLines: null,
-        keyboardType: TextInputType.multiline,
-        decoration: InputDecoration.collapsed(
-          hintText: "Write a comment",
-        ),
       ),
     );
   }
