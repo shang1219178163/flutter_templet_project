@@ -15,6 +15,8 @@ class IMTextfieldBar extends StatefulWidget {
     this.title,
     this.heaer,
     this.footer,
+    this.footerMaxHeight = 200,
+    this.footerMinHeight = 0,
     this.spacing = 6,
     this.runSpacing = 14,
     this.isVoice = false,
@@ -25,6 +27,9 @@ class IMTextfieldBar extends StatefulWidget {
 
   Widget? heaer;
   Widget? footer;
+  double? footerMinHeight;
+  double? footerMaxHeight;
+
   double spacing;
   double runSpacing;
   bool isVoice;
@@ -38,7 +43,9 @@ class _IMTextfieldBarState extends State<IMTextfieldBar> with SingleTickerProvid
   late final AnimationController _controller = AnimationController(duration: Duration(milliseconds: 350), vsync: this);
   final Animatable<double> _easeInTween = CurveTween(curve: Curves.easeIn);
 
-  late final Animation<double> _heightFactor = Tween(begin: 0.0, end: 260.0).animate(_controller);
+  late final Animation<double> _heightFactor = Tween(
+      begin: widget.footerMinHeight ?? 0.0,
+      end: widget.footerMaxHeight ?? 260.0).animate(_controller);
 
   var isExpand = false;
   late var isVoice = widget.isVoice ?? false;
