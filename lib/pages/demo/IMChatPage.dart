@@ -21,15 +21,37 @@ class IMChatPage extends StatefulWidget {
   _IMChatPageState createState() => _IMChatPageState();
 }
 
-class _IMChatPageState extends State<IMChatPage> {
+class _IMChatPageState extends State<IMChatPage> with SingleTickerProviderStateMixin {
 
   final _scrollController = ScrollController();
 
   var dataList = ValueNotifier(<String>[]);
 
+  late final AnimationController _controller = AnimationController(duration: Duration(milliseconds: 350), vsync: this);
+  final Animatable<double> _easeInTween = CurveTween(curve: Curves.easeIn);
+
+  late final Animation<double> _heightFactor = Tween(begin: 0.0, end: 300.0).animate(_controller);
+  late final Animation<double> _heightFactorNew = _controller.drive(_easeInTween);
+
+  var isExpand = false;
+
+  final heightVN = ValueNotifier(0.0);
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    if (isExpand) {
+      _controller.value = 1;
+    }
+
+    dataList.value = List.generate(20, (index) => "index_$index");
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
+    _controller.forward();
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
@@ -53,7 +75,7 @@ class _IMChatPageState extends State<IMChatPage> {
   buildBody() {
     return SafeArea(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          // crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Expanded(
               child: ValueListenableBuilder<List<String>>(
@@ -93,9 +115,10 @@ class _IMChatPageState extends State<IMChatPage> {
                 height: 50,
               ),
               footer: Container(
-                color: Colors.green,
+                color: Colors.blue,
                 height: 300,
               ),
+              // isExpand: isExpand,
             ),
           ],
         )
@@ -137,7 +160,7 @@ class _IMChatPageState extends State<IMChatPage> {
     double spacing = 6,
     double runSpacing = 14,
     bool isVoice = false,
-    bool isExpand = false,
+    // bool isExpand = false,
   }) {
 
     final textfield = NTextfield(
@@ -219,6 +242,11 @@ class _IMChatPageState extends State<IMChatPage> {
                         ),
                         onPressed: () {
                           isExpand = !isExpand;
+                          if (_controller.value == 1) {
+                            _controller.reverse().orCancel;
+                          } else {
+                            _controller.forward().orCancel;
+                          }
                           setState(() {});
                         },
                         icon: Image(
@@ -233,7 +261,16 @@ class _IMChatPageState extends State<IMChatPage> {
                   ],
                 ),
               ),
-              if (isExpand) footer ?? const SizedBox(),
+              AnimatedContainer(
+                duration: Duration(milliseconds: 350),
+                height: _heightFactor.value,
+                child: footer ?? const SizedBox(),
+              ),
+              // Align(
+              //   heightFactor: _heightFactor.value,
+              //   child: footer ?? const SizedBox(),
+              // )
+              // if (isExpand) footer ?? const SizedBox(),
             ],
           );
         },

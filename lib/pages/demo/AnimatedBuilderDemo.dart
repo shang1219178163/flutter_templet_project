@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/tween_animated_widget.dart';
+import 'package:flutter_templet_project/extension/object_ext.dart';
+import 'package:flutter_templet_project/extension/string_ext.dart';
 
 class AnimatedBuilderDemo extends StatefulWidget {
 
@@ -13,15 +15,13 @@ class AnimatedBuilderDemo extends StatefulWidget {
 
 class _AnimatedBuilderDemoState extends State<AnimatedBuilderDemo> with SingleTickerProviderStateMixin {
 
-  late Animation<double> animation;
-  late AnimationController controller;
+  late AnimationController controller = AnimationController(duration: Duration(seconds: 2), vsync: this);
+  //图片宽高从0变到400
+  late Animation<double> animation = Tween(begin: 0.0, end: 400.0).animate(controller);
 
   @override
   initState() {
     super.initState();
-    controller = AnimationController(duration: Duration(seconds: 2), vsync: this);
-    //图片宽高从0变到300
-    animation = Tween(begin: 0.0, end: 400.0).animate(controller);
     //启动动画
     controller.forward();
   }
@@ -31,6 +31,18 @@ class _AnimatedBuilderDemoState extends State<AnimatedBuilderDemo> with SingleTi
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
+        actions: ['done',].map((e) => TextButton(
+          child: Text(e,
+            style: TextStyle(color: Colors.white),
+          ),
+          onPressed: () {
+            if (controller.value == 1) {
+              controller.reverse().orCancel;
+            } else {
+              controller.forward().orCancel;
+            }
+          },)
+        ).toList(),
       ),
       body: Column(
         children: [
@@ -57,7 +69,9 @@ class _AnimatedBuilderDemoState extends State<AnimatedBuilderDemo> with SingleTi
           ),
         );
       },
-      child: Image.asset("images/bg.png"),
+      child: Image(
+          image: "bg.png".toAssetImage()
+      ),
     );
   }
 
@@ -76,7 +90,9 @@ class _AnimatedBuilderDemoState extends State<AnimatedBuilderDemo> with SingleTi
           ),
         );
       },
-      child: Image.asset("images/bg.png"),
+      child: Image(
+          image: "bg.png".toAssetImage()
+      ),
     );
   }
 
