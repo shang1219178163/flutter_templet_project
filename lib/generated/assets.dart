@@ -33,10 +33,14 @@ class Assets {
   static const String imagesIconHeartHalf = 'assets/images/icon_heart_half.png';
   static const String imagesIconHomeDelete = 'assets/images/icon_home_delete.png';
   static const String imagesIconJsonFile = 'assets/images/icon_json_file.png';
+  static const String imagesIconLeftVoice1 = 'assets/images/icon_left_voice_1.png';
+  static const String imagesIconLeftVoice2 = 'assets/images/icon_left_voice_2.png';
+  static const String imagesIconLeftVoice3 = 'assets/images/icon_left_voice_3.png';
   static const String imagesIconLock = 'assets/images/icon_lock.png';
   static const String imagesIconPlay = 'assets/images/icon_play.png';
   static const String imagesIconSearch = 'assets/images/icon_search.png';
-  static const String imagesIconVoice = 'assets/images/icon_voice.png';
+  static const String imagesIconVoiceCircle = 'assets/images/icon_voice_circle.png';
+  static const String imagesIconVoiceLeft = 'assets/images/icon_voice_left.png';
   static const String imagesImg404 = 'assets/images/img_404.png';
   static const String imagesImgFlutter310 = 'assets/images/img_flutter_3_10.webp';
   static const String imagesImgPlaceholder = 'assets/images/img_placeholder.png';
