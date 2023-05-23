@@ -111,59 +111,6 @@ extension BuildContextExt on BuildContext {
   /// 视图距离底边的高度(有键盘:键盘高度 + 34, 无键盘 0)
   double get viewBottom => mediaQuery.viewInsets.bottom;
 
-  /// ScaffoldMessengerState
-  ScaffoldMessengerState get scaffoldMessenger => ScaffoldMessenger.of(this);
-
-  /// 清除 SnackBar
-  clearSnackBars() {
-    scaffoldMessenger.clearSnackBars();
-  }
-
-  /// 隐藏 SnackBar
-  hideSnackBar({bool isClear = false}) {
-    if (isClear) {
-      scaffoldMessenger.clearSnackBars();
-    } else {
-      scaffoldMessenger.hideCurrentSnackBar();
-    }
-  }
-
-  /// 展示 SnackBar
-  showSnackBar(SnackBar snackBar, {bool isClear = false, bool isReplace = false}) {
-    if (isClear) {
-      scaffoldMessenger.clearSnackBars();
-    }
-    if (isReplace) {
-      scaffoldMessenger.hideCurrentSnackBar();
-    }
-    hideSnackBar(isClear: isClear);
-    scaffoldMessenger.showSnackBar(snackBar);
-  }
-
-  /// 隐藏 MaterialBanner
-  hideMaterialBanner({bool isClear = false}) {
-    if (isClear) {
-      scaffoldMessenger.clearMaterialBanners();
-    } else {
-      scaffoldMessenger.hideCurrentMaterialBanner();
-    }
-  }
-
-  /// 清除 MaterialBanner
-  clearMaterialBanners() {
-    scaffoldMessenger.clearMaterialBanners();
-  }
-
-  /// 展示 MaterialBanner
-  showMaterialBanner(MaterialBanner banner, {bool isClear = false, bool isReplace = false}) {
-    if (isClear) {
-      scaffoldMessenger.clearMaterialBanners();
-    }
-    if (isReplace) {
-      scaffoldMessenger.hideCurrentMaterialBanner();
-    }
-    scaffoldMessenger.showMaterialBanner(banner);
-  }
 
   ///alert弹窗
   showCupertinoSheet({
@@ -367,13 +314,6 @@ extension StatefulWidgetExt<T extends StatefulWidget> on State<T> {
   /// 扩展属性 MediaQuery.of(.devicePixelRatio
   double get devicePixelRatio => context.devicePixelRatio;
 
-  /// 扩展属性 ScaffoldMessenger.of(context);
-  ScaffoldMessengerState get scaffoldMessenger => context.scaffoldMessenger;
-  /// 扩展方法
-  showSnackBar(SnackBar snackBar, {bool isClear = false}) => context.showSnackBar(snackBar, isClear: isClear);
-  /// 扩展方法
-  showMaterialBanner(MaterialBanner banner, {bool isClear = false, bool isReplace = false}) =>
-      context.showMaterialBanner(banner, isClear: isClear, isReplace: isReplace);
 }
 
 

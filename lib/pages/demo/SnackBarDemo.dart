@@ -6,6 +6,7 @@ import 'package:flutter_boost/flutter_boost.dart';
 import 'package:flutter_templet_project/basicWidget/dash_line.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
+import 'package:flutter_templet_project/extension/snack_bar_state_ext.dart';
 
 import 'package:tuple/tuple.dart';
 
@@ -51,7 +52,7 @@ class SnackBarDemoState extends State<SnackBarDemo> {
       onWillPop: () async {
         // await Future.delayed(new Duration(seconds: 1));
         await Future.delayed(Duration(milliseconds: 1300), () async {
-          clearMaterialBars();
+          clearSnackBars();
         });
         debugPrint("WillPopScope");
        return true;
@@ -76,8 +77,7 @@ class SnackBarDemoState extends State<SnackBarDemo> {
             ),
             IconButton(
               onPressed: () {
-                showMaterialBanner();
-                showMaterialBanner();
+                showMaterialBannerNew();
               },
               icon: Icon(Icons.change_circle),
             ),
@@ -202,14 +202,14 @@ class SnackBarDemoState extends State<SnackBarDemo> {
   }
 
   /// 顶部 MaterialBanner
-  showMaterialBanner() {
+  showMaterialBannerNew() {
     final nowStr = "${DateTime.now()}".split(".").first;
 
     final banner = MaterialBanner(
       // padding: EdgeInsets.zero,
       // leadingPadding: EdgeInsets.zero,
       content: InkWell(
-        onTap: () => context.hideMaterialBanner(isClear: false),
+        onTap: () => hideMaterialBanner(isClear: false),
           child: Text('Hello, I am a Material Banner $nowStr' * 3)
       ),
       leading: const Icon(Icons.info),
@@ -218,7 +218,7 @@ class SnackBarDemoState extends State<SnackBarDemo> {
       actions: [
         TextButton(
           // onPressed: () => ScaffoldMessenger.of(context).hideCurrentMaterialBanner(),
-          onPressed: () => context.hideMaterialBanner(isClear: false),
+          onPressed: () => hideMaterialBanner(isClear: false),
           child: const Text('Dismiss'),
         ),
         // TextButton(
@@ -229,12 +229,8 @@ class SnackBarDemoState extends State<SnackBarDemo> {
       ],
     );
     // ScaffoldMessenger.of(context).showMaterialBanner(banner);
-    context.showMaterialBanner(banner, isClear: false,);
+    showMaterialBanner(banner, isClear: false,);
   }
 
-  clearMaterialBars() {
-    // ScaffoldMessenger.of(context).clearMaterialBanners();
-    context.clearMaterialBanners();
-    // context.hideMaterialBanner(isClear: false);
-  }
+
 }

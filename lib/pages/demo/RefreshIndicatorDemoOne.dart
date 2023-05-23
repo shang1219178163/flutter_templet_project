@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
+import 'package:flutter_templet_project/extension/snack_bar_state_ext.dart';
+
 
 class RefreshIndicatorDemoOne extends StatefulWidget {
 
@@ -102,7 +104,7 @@ class _RefreshIndicatorDemoOneState extends State<RefreshIndicatorDemoOne> {
       } else {
         list.addAll(items);
       }
-      context.showSnackBar(SnackBar(content: Text("${list.length} items",)));
+      showSnackBar(SnackBar(content: Text("${list.length} items",)));
       setState(() {});
     } catch (e) {
       debugPrint(e.toString());

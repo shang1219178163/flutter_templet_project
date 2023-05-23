@@ -10,6 +10,7 @@ import 'package:flutter_templet_project/basicWidget/n_webview.dart';
 import 'package:flutter_templet_project/basicWidget/n_popup_route.dart';
 import 'package:flutter_templet_project/basicWidget/n_alert_dialog.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
+import 'package:flutter_templet_project/extension/snack_bar_state_ext.dart';
 
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/rich_text_ext.dart';
@@ -164,7 +165,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
               child: TextButton(
                 onPressed: () {
                   alignment = e;
-                  context.showSnackBar(SnackBar(content: Text(name)),);
+                  showSnackBar(SnackBar(content: Text(name)),);
                   debugPrint("alignment:$alignment ${alignment.x} ${alignment.y}");
                 },
                 child: Text(name, style: TextStyle(color: Colors.white),)
