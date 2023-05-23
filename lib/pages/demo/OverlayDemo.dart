@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/extension/build_context_ext.dart';
+import 'package:flutter_templet_project/extension/overlay_state_ext.dart';
+import 'package:flutter_templet_project/extension/string_ext.dart';
+import 'package:flutter_templet_project/extension/widget_ext.dart';
 
 class OverlayDemo extends StatefulWidget {
 
@@ -13,6 +17,8 @@ class OverlayDemo extends StatefulWidget {
 
 class _OverlayDemoState extends State<OverlayDemo> {
 
+  OverlayState get overlayState => Overlay.of(context);
+  OverlayEntry? overlayEntry;
 
   @override
   Widget build(BuildContext context) {
@@ -23,9 +29,18 @@ class _OverlayDemoState extends State<OverlayDemo> {
           title: Text(widget.title ?? "$widget"),
         ),
         body: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            Row(
+              children: [
+                Image.asset(
+                  "icon_skipping.gif".toPath(),
+                  height: 200.0,
+                  width: 100.0,
+                ),
+              ],
+            ),
             ElevatedButton(
               onPressed: () => context.showToast('Flutter is awesome!',
                   isDismiss: true,
@@ -47,11 +62,62 @@ class _OverlayDemoState extends State<OverlayDemo> {
               ),
               child: const Text('Show Toast bottomCenter'),
             ),
+            ElevatedButton(
+              onPressed: () {
+                overlayEntry ??= OverlayEntry(
+                  builder: (context) {
+                    return buildEntryContent(
+                      onTap: (){
+                        overlayEntry?.remove();
+                      }
+                    );
+                });
+                overlayState.insert(overlayEntry!);
+              },
+              child: const Text('overlayState'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                final overlayStateNew = Overlay.of(context);
+                debugPrint("onPressed: ${overlayStateNew == overlayState}");
+
+                showOverlayEntry(
+                  child: buildEntryContent(
+                    onTap: (){
+                      debugPrint("onTap");
+                      dismissOverlayEntry();
+                    }
+                  ),
+                );
+              },
+              child: const Text('showOverlayEntry'),
+            ),
           ],
         ),
     );
   }
+
+  Widget buildEntryContent({
+    VoidCallback? onTap,
+  }) {
+    return Positioned(
+      child: GestureDetector(
+        onTap: onTap,
+        child: Container(
+          color: Colors.black.withOpacity(0.1),
+          child: Center(
+            child: Image(
+            image: "icon_skipping.gif".toAssetImage(),
+            width: 200,
+            height: 100,
+          ),
+          ),
+        ),
+      ),
+    );
+  }
 }
+
 
 
 //
@@ -142,8 +208,8 @@ class _ToastWidgetState extends State<ToastWidget> with SingleTickerProviderStat
   }
 }
 
-
 extension ToastExtension on BuildContext {
+
 
   void showToast(
       String text, {
@@ -165,9 +231,7 @@ extension ToastExtension on BuildContext {
     // then insert it to the overlay
     // this will show the toast widget on the screen
     final overlayState = Overlay.of(this);
-    if (overlayState != null) {
-      overlayState.insert(entry);
-    }
+    overlayState.insert(entry);
     // overlayState?.rearrange([entry]);
     // 3 secs later remove the toast from the stack
     // and this one will remove the toast from the screen

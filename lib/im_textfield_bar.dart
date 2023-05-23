@@ -128,7 +128,7 @@ class _IMTextfieldBarState extends State<IMTextfieldBar> with SingleTickerProvid
                           setState(() {});
                         },
                         child: Image(
-                          image: "icon_voice.png".toAssetImage(),
+                          image: "icon_voice_circle.png".toAssetImage(),
                           width: 30.w,
                           height: 30.w,
                           // color: color,

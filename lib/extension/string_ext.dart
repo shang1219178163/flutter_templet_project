@@ -33,8 +33,13 @@ extension StringExt on String{
   }
 
   /// 本地图片路径
+  String toPath() {
+    return "assets/images/$this";
+  }
+
+  /// 本地图片路径
   String toPng() {
-    if (this.endsWith(".png")) {
+    if (endsWith(".png")) {
       return "assets/images/$this";
     }
     return "assets/images/$this.png";

@@ -12,6 +12,10 @@ PODS:
     - Mantle
     - SDWebImage
     - SDWebImageWebPCoder
+  - flutter_sound (9.2.13):
+    - Flutter
+    - flutter_sound_core (= 9.2.13)
+  - flutter_sound_core (9.2.13)
   - fluttertoast (0.0.2):
     - Flutter
     - Toast
@@ -75,6 +79,7 @@ DEPENDENCIES:
   - Flutter (from `Flutter`)
   - flutter_boost (from `.symlinks/plugins/flutter_boost/ios`)
   - flutter_image_compress (from `.symlinks/plugins/flutter_image_compress/ios`)
+  - flutter_sound (from `.symlinks/plugins/flutter_sound/ios`)
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
   - image_gallery_saver (from `.symlinks/plugins/image_gallery_saver/ios`)
   - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
@@ -91,6 +96,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - flutter_sound_core
     - FMDB
     - libwebp
     - Mantle
@@ -111,6 +117,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_boost/ios"
   flutter_image_compress:
     :path: ".symlinks/plugins/flutter_image_compress/ios"
+  flutter_sound:
+    :path: ".symlinks/plugins/flutter_sound/ios"
   fluttertoast:
     :path: ".symlinks/plugins/fluttertoast/ios"
   image_gallery_saver:
@@ -141,9 +149,11 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   aesthetic_dialogs: a5f6a847f4820321f7d2eadf80f36d5d558777f8
   connectivity: c4130b2985d4ef6fd26f9702e886bd5260681467
-  Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
+  Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   flutter_boost: 3e8a6e28c86d24c83be5b2fab067746dc77a1ad6
   flutter_image_compress: 5a5e9aee05b6553048b8df1c3bc456d0afaac433
+  flutter_sound: c60effa2a350fb977885f0db2fbc4c1ad5160900
+  flutter_sound_core: 26c10e5832e76aaacfae252d8925232281c486ae
   fluttertoast: eb263d302cc92e04176c053d2385237e9f43fad0
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   image_gallery_saver: 259eab68fb271cfd57d599904f7acdc7832e7ef2
@@ -166,6 +176,6 @@ SPEC CHECKSUMS:
   video_player_avfoundation: 6d971a232d72e6ee25368378d48a079dea01f1cf
   webview_flutter_wkwebview: b7e70ef1ddded7e69c796c7390ee74180182971f
 
-PODFILE CHECKSUM: 7368163408c647b7eb699d0d788ba6718e18fb8d
+PODFILE CHECKSUM: 2a369052a4cd137134b7d250e96fe30ac22f83f0
 
 COCOAPODS: 1.12.0

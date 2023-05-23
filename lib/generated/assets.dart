@@ -39,8 +39,8 @@ class Assets {
   static const String imagesIconLock = 'assets/images/icon_lock.png';
   static const String imagesIconPlay = 'assets/images/icon_play.png';
   static const String imagesIconSearch = 'assets/images/icon_search.png';
+  static const String imagesIconSkipping = 'assets/images/icon_skipping.gif';
   static const String imagesIconVoiceCircle = 'assets/images/icon_voice_circle.png';
-  static const String imagesIconVoiceLeft = 'assets/images/icon_voice_left.png';
   static const String imagesImg404 = 'assets/images/img_404.png';
   static const String imagesImgFlutter310 = 'assets/images/img_flutter_3_10.webp';
   static const String imagesImgPlaceholder = 'assets/images/img_placeholder.png';

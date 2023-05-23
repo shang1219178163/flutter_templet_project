@@ -49,6 +49,10 @@ class _SystemIconsPageState extends State<SystemIconsPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Padding(
+              padding: EdgeInsets.only(left: 10, right: 10),
+              child: Text("https://fonts.google.com/icons"),
+            ),
+            Padding(
               padding: EdgeInsets.all(10),
               child: _buildTextField(),
             ),

@@ -151,25 +151,25 @@ class _NTextfieldState extends State<NTextfield> {
         hintText: widget.hintText,
         hintStyle: TextStyle(fontSize: 16, color: fontColor[10]),
         prefixIcon: widget.prefixIconBuilder == null? null : ValueListenableBuilder<bool>(
-            valueListenable: hasFocusVN,
-            builder: (_, isFocus, child) {
+          valueListenable: hasFocusVN,
+          builder: (_, isFocus, child) {
 
-              return widget.prefixIconBuilder?.call(isFocus) ?? SizedBox();
-            }
+            return widget.prefixIconBuilder?.call(isFocus) ?? SizedBox();
+          }
         ),
         suffixIcon: widget.suffixIconBuilder == null? null : ValueListenableBuilder<bool>(
-            valueListenable: hasFocusVN,
-            builder: (_, isFocus, child) {
+          valueListenable: hasFocusVN,
+          builder: (_, isFocus, child) {
 
-              return IconButton(
-                focusColor: context.primaryColor,
-                icon: widget.suffixIconBuilder?.call(isFocus, isCloseEye,) ?? SizedBox(),
-                onPressed: () {
-                  isCloseEye = !isCloseEye;
-                  setState(() {});
-                },
-              );
-            }
+            return IconButton(
+              focusColor: context.primaryColor,
+              icon: widget.suffixIconBuilder?.call(isFocus, isCloseEye,) ?? SizedBox(),
+              onPressed: () {
+                isCloseEye = !isCloseEye;
+                setState(() {});
+              },
+            );
+          }
         ),
       ),
     );

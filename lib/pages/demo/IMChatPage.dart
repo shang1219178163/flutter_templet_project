@@ -1,5 +1,7 @@
 
 
+import 'dart:async';
+
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -94,6 +96,7 @@ class _IMChatPageState extends State<IMChatPage> with SingleTickerProviderStateM
                 }
 
                 return buildRefresh(
+                  onRefresh: onLoad,
                   child: ListView.separated(
                     controller: _scrollController,
                     // reverse: true,
@@ -149,6 +152,8 @@ class _IMChatPageState extends State<IMChatPage> with SingleTickerProviderStateM
   Widget buildRefresh({
     required Widget? child,
     EasyRefreshController? controller,
+    FutureOr Function()? onRefresh,
+    FutureOr Function()? onLoad,
   }) {
     return EasyRefresh(
       refreshOnStart: true,
@@ -163,8 +168,8 @@ class _IMChatPageState extends State<IMChatPage> with SingleTickerProviderStateM
         noMoreText: "我可是有底线的 ~",
         failedText: "加载失败",
       ),
-      onRefresh: onLoad,
-      // onLoad: ,
+      onRefresh: onRefresh,
+      onLoad: onLoad,
       child: child,
     );
   }
@@ -246,7 +251,7 @@ class _IMChatPageState extends State<IMChatPage> with SingleTickerProviderStateM
                           setState(() {});
                         },
                         child: Image(
-                          image: "icon_voice.png".toAssetImage(),
+                          image: "icon_voice_circle.png".toAssetImage(),
                           width: 30.w,
                           height: 30.w,
                           // color: color,

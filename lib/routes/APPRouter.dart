@@ -144,6 +144,7 @@ import 'package:flutter_templet_project/vendor/flutter_swiper_demo.dart';
 import 'package:flutter_templet_project/vendor/flutter_swiper_indicator_demo.dart';
 import 'package:flutter_templet_project/vendor/qr/qr_code_scanner_demo.dart';
 import 'package:flutter_templet_project/vendor/qr/qr_flutter_demo.dart';
+import 'package:flutter_templet_project/vendor/soundAbount/SoundPlayDemo.dart';
 import 'package:flutter_templet_project/vendor/timeline/timeline_demo.dart';
 import 'package:flutter_templet_project/vendor/timelines_demo/timelines_demo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedGroupDemo.dart';
@@ -516,6 +517,7 @@ class APPRouter {
   static const dropBoxMutiRowChoicDemo = '/dropBoxMutiRowChoicDemo';
   static const slidableDemoOne = '/slidableDemoOne';
   static const imChatPage = '/imChatPage';
+  static const soundPlayDemo = '/soundPlayDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -810,6 +812,7 @@ class AppPage {
     GetPage(name: APPRouter.dropBoxMutiRowChoicDemo, page: () => DropBoxMutiRowChoicDemo(),),
     GetPage(name: APPRouter.slidableDemoOne, page: () => SlidableDemoOne(),),
     GetPage(name: APPRouter.imChatPage, page: () => IMChatPage(),),
+    GetPage(name: APPRouter.soundPlayDemo, page: () => SoundPlayDemo(),),
 
 
   ];

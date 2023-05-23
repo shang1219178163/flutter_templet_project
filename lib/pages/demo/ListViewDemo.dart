@@ -32,12 +32,6 @@ class _ListViewDemoState extends State<ListViewDemo> {
 
   var items = [
     Tuple4(
-      'https://avatar.csdn.net/8/9/A/3_chenlove1.jpg',
-      '海尔｜无边界厨房',
-      '跳转url',
-      true,
-    ),
-    Tuple4(
       'https://pic.616pic.com/bg_w1180/00/04/08/G5Bftx5ZDI.jpg!/fw/1120',
       '海尔｜无边界客厅',
       '跳转url',
@@ -105,25 +99,27 @@ class _ListViewDemoState extends State<ListViewDemo> {
               );
             }
           ),
-          _buildListView(
-            height: 600,
-            key: _globalKey2,
-            controller: _scrollController2,
-            scrollDirection: Axis.vertical,
-            onKeyCallback: (context, index, itemKey) {
-              // _scrollController2.scrollToItem(
-              //   itemKey: itemKey,
-              //   scrollKey: _globalKey2,
-              // );
+          Expanded(
+            child: _buildListView(
+              height: 600,
+              key: _globalKey2,
+              controller: _scrollController2,
+              scrollDirection: Axis.vertical,
+              onKeyCallback: (context, index, itemKey) {
+                // _scrollController2.scrollToItem(
+                //   itemKey: itemKey,
+                //   scrollKey: _globalKey2,
+                // );
 
-              _scrollController2.scrollToItemNew(
-                itemKey: itemKey,
-                scrollKey: _globalKey2,
-                scrollDirection: Axis.vertical,
-              );
+                _scrollController2.scrollToItemNew(
+                  itemKey: itemKey,
+                  scrollKey: _globalKey2,
+                  scrollDirection: Axis.vertical,
+                );
 
-              _scrollController2.printInfo();
-            }
+                _scrollController2.printInfo();
+              }
+            ),
           ),
         ],
       ),
@@ -131,7 +127,7 @@ class _ListViewDemoState extends State<ListViewDemo> {
   }
 
 
-  _buildListView({
+  Widget _buildListView({
     required GlobalKey key,
     required ScrollController? controller,
     required KeyCallback onKeyCallback,
@@ -146,6 +142,7 @@ class _ListViewDemoState extends State<ListViewDemo> {
       height: height,
       padding: EdgeInsets.all(8),
       child: Scrollbar(
+        controller: controller,
         thumbVisibility: true,
         child: ListView.separated(
             key: key,
