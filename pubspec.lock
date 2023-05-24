@@ -1559,6 +1559,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.3.3"
+  w_popup_menu:
+    dependency: "direct main"
+    description:
+      name: w_popup_menu
+      sha256: "396a8b317782810e8b9e1441acc3186683c425311ee1af49918948b47a605db2"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.0"
   watcher:
     dependency: transitive
     description:

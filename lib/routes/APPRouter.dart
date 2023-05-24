@@ -134,6 +134,7 @@ import 'package:flutter_templet_project/vendor/SkeletonDemo.dart';
 import 'package:flutter_templet_project/vendor/SlidableDemoOne.dart';
 import 'package:flutter_templet_project/vendor/TextlessDemo.dart';
 import 'package:flutter_templet_project/vendor/VisibilityDetectorDemo.dart';
+import 'package:flutter_templet_project/vendor/WPopupMenuDemo.dart';
 import 'package:flutter_templet_project/vendor/aesthetic_dialogs_demo.dart';
 import 'package:flutter_templet_project/vendor/azlistview/azlistview_demo.dart';
 import 'package:flutter_templet_project/vendor/badges_demo.dart';
@@ -518,6 +519,10 @@ class APPRouter {
   static const slidableDemoOne = '/slidableDemoOne';
   static const imChatPage = '/imChatPage';
   static const soundPlayDemo = '/soundPlayDemo';
+  static const wPopupMenuDemo = '/wPopupMenuDemo';
+
+
+
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -813,6 +818,7 @@ class AppPage {
     GetPage(name: APPRouter.slidableDemoOne, page: () => SlidableDemoOne(),),
     GetPage(name: APPRouter.imChatPage, page: () => IMChatPage(),),
     GetPage(name: APPRouter.soundPlayDemo, page: () => SoundPlayDemo(),),
+    GetPage(name: APPRouter.wPopupMenuDemo, page: () => WPopupMenuDemo(),),
 
 
   ];

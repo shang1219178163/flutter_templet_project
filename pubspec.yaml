@@ -128,6 +128,7 @@ dependencies:
 
   flutter_sound: ^9.2.13
 
+  w_popup_menu: ^1.0.0
 
   azlistview: ^2.0.0
   common_utils: ^2.0.0

@@ -570,6 +570,8 @@ var vendors = [
   Tuple2(APPRouter.azlistviewDemo, "分组列表", ),
   Tuple2(APPRouter.slidableDemoOne, "滑动菜单", ),
   Tuple2(APPRouter.soundPlayDemo, "声音播放", ),
+  Tuple2(APPRouter.wPopupMenuDemo, "微信聊天长按弹出框", ),
+
 
 ];
 
