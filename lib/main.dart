@@ -190,56 +190,40 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int currentIndex = 0;
 
-  final List<Tuple2<BottomNavigationBarItem, Widget>> items = [
+  final unreadVN = ValueNotifier(0);
+
+  final List<Tuple2<Tuple2<String, Icon>, Widget>> items = [
     Tuple2(
-      BottomNavigationBarItem(
-        // backgroundColor: Colors.white,
-        icon: Icon(Icons.home),
-        label: "首页",
-      ),
+      Tuple2("首页", Icon(Icons.home),),
       TabBarTabBarViewDemo(),
     ),
     Tuple2(
-      BottomNavigationBarItem(
-        // backgroundColor: Colors.white,
-        icon: Icon(Icons.merge_type_sharp),
-        label: "按钮",
-      ),
+      Tuple2("按钮", Icon(Icons.merge_type_sharp),),
       SecondPage(),
     ),
     Tuple2(
-      BottomNavigationBarItem(
-        // backgroundColor: Colors.white,
-        icon: Icon(Icons.message),
-        label: "消息",
-      ),
+      Tuple2("消息", Icon(Icons.message),),
       TabBarDemo(initialIndex: 3,),
     ),
     Tuple2(
-      BottomNavigationBarItem(
-        // backgroundColor: Colors.amber,
-        icon: Icon(Icons.shopping_cart),
-        label: "购物车",
-      ),
+      Tuple2("购物车", Icon(Icons.shopping_cart),),
       ThirdPage(),
     ),
     Tuple2(
-      BottomNavigationBarItem(
-        // backgroundColor: Colors.red,
-        icon: Icon(Icons.person),
-        label: "个人中心",
-      ),
+      Tuple2("个人中心", Icon(Icons.person),),
       APPUserCenterPage(),
     ),
   ];
 
   /*切换页面*/
-  void _changePage(int index) {
+  void _onBarTap(int index) {
     /*如果点击的导航项不是当前项  切换 */
     if (index != currentIndex) {
-      setState(() {
-        currentIndex = index;
-      });
+      currentIndex = index;
+      setState(() {});
+      if (index == tabItems.length - 1) {
+        unreadVN.value = 100;
+      }
       ddlog(currentIndex);
     }
   }
@@ -264,21 +248,24 @@ class _MyHomePageState extends State<MyHomePage> {
       drawer: APPDrawerMenuPage(),
       endDrawer: APPDrawerMenuPage(),
       // appBar: buildAppBar(),
-      bottomNavigationBar: BottomNavigationBar(
-        items: items.map((e) => e.item1).toList(),
-        currentIndex: currentIndex,
-        type: BottomNavigationBarType.fixed,
-        // selectedItemColor: Colors.lightBlue,
-        // unselectedItemColor: Colors.black45,
-        //
-        // selectedIconTheme: IconThemeData(color: Colors.lightBlue),
-        // unselectedIconTheme: IconThemeData(color: Colors.black45),
+      bottomNavigationBar: ValueListenableBuilder<int>(
+        valueListenable: unreadVN,
+        builder: (context,  value, child){
 
-        selectedLabelStyle: TextStyle(fontSize: 12),
-        unselectedLabelStyle: TextStyle(fontSize: 12),
-        onTap: (index) {
-          _changePage(index);
-        },
+          return BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            currentIndex: currentIndex,
+            selectedFontSize: 10.sp, // 选中字体大小
+            unselectedFontSize: 10.sp, // 未选中字体大小
+            onTap: (index) => _onBarTap(index),
+            items: items.map((e) => buildBarItem(
+              title: e.item1.item1,
+              icon: e.item1.item2,
+              badge: value,
+            ),
+            ).toList(),
+          );
+        }
       ),
       body: items.map((e) => e.item2).toList()[currentIndex],
       // body: PageView(onPageChanged: (index){
@@ -286,7 +273,6 @@ class _MyHomePageState extends State<MyHomePage> {
       //   },
       //     children: pages,
       // ),
-
     );
     return Consumer<ColorFilteredProvider>(
       builder: (BuildContext context, provider, Widget? child) {
@@ -320,6 +306,60 @@ class _MyHomePageState extends State<MyHomePage> {
               setState(() => ddlog(value));
             }),
       ],
+    );
+  }
+
+  BottomNavigationBarItem buildBarItem({
+    required String title,
+    required Icon icon,
+    int badge = 0,
+  }) {
+
+    if (badge > 99) {
+      badge = 99;
+    }
+
+    final badgeChild = title != "个人中心" || badge == 0 ? SizedBox() : Container(
+      padding: const EdgeInsets.symmetric(horizontal: 3, vertical: 1),
+      decoration: const ShapeDecoration(
+        color: Colors.red,
+        shape: StadiumBorder(),
+      ),
+      child: Text("$badge",
+        style: const TextStyle(
+          color: Colors.white,
+        ),),
+    );
+
+    final iconNormal = Stack(
+        clipBehavior: Clip.none,
+        children: <Widget>[
+          icon,
+          Positioned(  // draw a red marble
+            top: -10,
+            right: -10,
+            child: badgeChild,
+          )
+        ]
+    );
+
+    final iconActive = Stack(
+      clipBehavior: Clip.none,
+      children: <Widget>[
+        icon,
+        Positioned(  // draw a red marble
+          top: -10,
+          right: -10,
+          child: badgeChild,
+        )
+      ]
+    );
+
+    return BottomNavigationBarItem(
+        icon: iconNormal,
+        activeIcon: iconActive,
+        label: title,
+        tooltip: '' // 去除长按文字提示
     );
   }
 
