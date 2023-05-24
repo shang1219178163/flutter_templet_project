@@ -34,7 +34,11 @@ extension ScrollControllerExt on ScrollController{
       Duration duration = const Duration(milliseconds: 200),
       Curve curve = Curves.ease,
     }) async {
-    await animateTo(0, duration: duration, curve: curve, );
+    if (duration == Duration.zero) {
+      jumpTo(offset);
+      return;
+    }
+    await animateTo(offset, duration: duration, curve: curve, );
   }
 
   ///水平移动
