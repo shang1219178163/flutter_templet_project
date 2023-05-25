@@ -12,9 +12,18 @@ import 'dart:convert';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 
 extension ListExt<T,E> on List<E> {
+  /// json字符串转List
+  static List<dynamic>? fromJson(String? val) {
+    if (val == null) {
+      return null;
+    }
+    final result = json.decode(val);
+    return result;
+  }
+
   /// 转为 json 字符串
   String get jsonStr {
-    final jsonStr = jsonEncode(this);
+    final jsonStr = json.encode(this);
     return jsonStr;
   }
 
@@ -26,6 +35,7 @@ extension ListExt<T,E> on List<E> {
     }
     return l;
   }
+  
   /// 带索引的map
   List<T> mapWithIdx(T Function(E, int i) action) {
     var result = <T>[];
@@ -145,4 +155,16 @@ extension IterableExt<T> on Iterable<T> {
   // Iterable<T> filter() {
   //   return whereType<T>();
   // }
+}
+
+
+extension ListNullExt<E> on List<E?> {
+
+  /// 移除数组空值
+  List<E> removeNull() {
+    var val = this;
+    val.removeWhere((e) => e == null);
+    final result = val.whereType<E>().toList();
+    return result;
+  }
 }
