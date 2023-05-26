@@ -14,13 +14,13 @@ import 'package:flutter/services.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/APPThemeSettings.dart';
+import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/button_ext.dart';
 import 'package:flutter_templet_project/pages/demo/TabBarDemo.dart';
 import 'package:flutter_templet_project/pages/tabBar_tabBarView_demo.dart';
 import 'package:flutter_templet_project/provider/provider_demo.dart';
 import 'package:flutter_templet_project/provider/color_filtered_provider.dart';
 import 'package:flutter_templet_project/provider/rxDart_provider_demo.dart';
-import 'package:flutter_templet_project/Pages/APPUserCenterPage.dart';
 
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/routes/APPRouter.dart';
@@ -192,7 +192,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   final unreadVN = ValueNotifier(0);
 
-  final List<Tuple2<Tuple2<String, Icon>, Widget>> items = [
+  final List<Tuple2<Tuple2<String, Widget>, Widget>> items = [
     Tuple2(
       Tuple2("首页", Icon(Icons.home),),
       TabBarTabBarViewDemo(),
@@ -248,24 +248,30 @@ class _MyHomePageState extends State<MyHomePage> {
       drawer: APPDrawerMenuPage(),
       endDrawer: APPDrawerMenuPage(),
       // appBar: buildAppBar(),
-      bottomNavigationBar: ValueListenableBuilder<int>(
-        valueListenable: unreadVN,
-        builder: (context,  value, child){
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        currentIndex: currentIndex,
+        selectedFontSize: 10.sp, // 选中字体大小
+        unselectedFontSize: 10.sp, // 未选中字体大小
+        backgroundColor: Colors.white,
+        selectedItemColor: context.primaryColor,
+        onTap: (index) => _onBarTap(index),
+        items: items.map((e) => BottomNavigationBarItem(
+          tooltip: '', // 去除长按文字提示
+          label: e.item1.item1,
+          icon: ValueListenableBuilder<int>(
+            valueListenable: unreadVN,
+            builder: (context, badge, child){
 
-          return BottomNavigationBar(
-            type: BottomNavigationBarType.fixed,
-            currentIndex: currentIndex,
-            selectedFontSize: 10.sp, // 选中字体大小
-            unselectedFontSize: 10.sp, // 未选中字体大小
-            onTap: (index) => _onBarTap(index),
-            items: items.map((e) => buildBarItem(
-              title: e.item1.item1,
-              icon: e.item1.item2,
-              badge: value,
-            ),
-            ).toList(),
-          );
-        }
+              return buildIcon(
+                title: e.item1.item1,
+                normalIcon: e.item1.item2,
+                activeIcon: e.item1.item2,
+                badge: badge,
+              );
+            }
+          ),
+        ),).toList(),
       ),
       body: items.map((e) => e.item2).toList()[currentIndex],
       // body: PageView(onPageChanged: (index){
@@ -309,9 +315,10 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  BottomNavigationBarItem buildBarItem({
+  Widget buildIcon({
     required String title,
-    required Icon icon,
+    required Widget normalIcon,
+    required Widget activeIcon,
     int badge = 0,
   }) {
 
@@ -319,48 +326,31 @@ class _MyHomePageState extends State<MyHomePage> {
       badge = 99;
     }
 
-    final badgeChild = title != "个人中心" || badge == 0 ? SizedBox() : Container(
-      padding: const EdgeInsets.symmetric(horizontal: 3, vertical: 1),
+    final badgeChild = title != "消息" || badge == 0 ? SizedBox() : Container(
+      padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 2.w),
       decoration: const ShapeDecoration(
         color: Colors.red,
         shape: StadiumBorder(),
       ),
       child: Text("$badge",
-        style: const TextStyle(
+        style: TextStyle(
+          fontSize: 10.sp,
           color: Colors.white,
         ),),
     );
 
-    final iconNormal = Stack(
+    final icon = Stack(
         clipBehavior: Clip.none,
         children: <Widget>[
-          icon,
+          normalIcon,
           Positioned(  // draw a red marble
-            top: -10,
-            right: -10,
+            top: -5,
+            right: -5,
             child: badgeChild,
-          )
+          ),
         ]
     );
-
-    final iconActive = Stack(
-      clipBehavior: Clip.none,
-      children: <Widget>[
-        icon,
-        Positioned(  // draw a red marble
-          top: -10,
-          right: -10,
-          child: badgeChild,
-        )
-      ]
-    );
-
-    return BottomNavigationBarItem(
-        icon: iconNormal,
-        activeIcon: iconActive,
-        label: title,
-        tooltip: '' // 去除长按文字提示
-    );
+    return icon;
   }
 
   Future<PackageInfo> getPackageInfo() async {
