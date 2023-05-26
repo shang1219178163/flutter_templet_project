@@ -45,6 +45,16 @@ extension ListExt<T,E> on List<E> {
     return result;
   }
 
+  /// 任意一个元素符合要求则返回,没有符合的返回为空
+  E? some(bool Function(E) test) {
+    for (final element in this) {
+      if (test(element)) {
+        return element;
+      }
+    }
+    return null;
+  }
+
   /// 数组降维() expand
   // List<T> flatMap(List<T> action(E e)) {
     // var result = <T>[];
