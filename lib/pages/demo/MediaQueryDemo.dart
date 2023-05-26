@@ -27,7 +27,7 @@ class MediaQueryDemo extends StatefulWidget {
 }
 
 class _MediaQueryDemoState extends State<MediaQueryDemo> with WidgetsBindingObserver, KeyboardChangeMixin {
-  final _textcontroller  = TextEditingController();
+  final _textcontroller = TextEditingController();
 
   var labelText = "";
 

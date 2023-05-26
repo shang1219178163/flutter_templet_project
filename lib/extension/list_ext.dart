@@ -12,14 +12,6 @@ import 'dart:convert';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 
 extension ListExt<T,E> on List<E> {
-  /// json字符串转List
-  static List<dynamic>? fromJson(String? val) {
-    if (val == null) {
-      return null;
-    }
-    final result = json.decode(val);
-    return result;
-  }
 
   /// 转为 json 字符串
   String get jsonStr {
@@ -54,7 +46,7 @@ extension ListExt<T,E> on List<E> {
     }
     return null;
   }
-
+  
   /// 数组降维() expand
   // List<T> flatMap(List<T> action(E e)) {
     // var result = <T>[];
@@ -88,16 +80,6 @@ extension ListExt<T,E> on List<E> {
     this[fromIdx] = toE;
     this[toIdx] = e;
     return this;
-  }
-
-  /// 是否全部满足某个条件
-  bool every(bool Function(E e) action) {
-    for (var i = 0; i < length; i++) {
-      if (!action(this[i])) {
-        return false;
-      }
-    }
-    return true;
   }
 
   /// 递归遍历
