@@ -15,7 +15,6 @@ import 'package:flutter/material.dart';
 extension ScrollControllerExt on ScrollController{
 
   printInfo(){
-    var scrollController = this;
     position.printInfo();
 
     // print('/***********************ScrollController***********************/');
@@ -31,14 +30,13 @@ extension ScrollControllerExt on ScrollController{
   /// 滚动到
   Future<void> scrollTo(
     double offset, {
-      Duration duration = const Duration(milliseconds: 200),
+      Duration delay = const Duration(milliseconds: 100),
+      Duration duration = const Duration(milliseconds: 350),
       Curve curve = Curves.ease,
     }) async {
-    if (duration == Duration.zero) {
-      jumpTo(offset);
-      return;
-    }
-    await animateTo(offset, duration: duration, curve: curve, );
+    Future.delayed(delay, () {
+      animateTo(offset, duration: duration, curve: curve,);
+    },);
   }
 
   ///水平移动
