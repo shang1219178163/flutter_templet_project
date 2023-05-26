@@ -10,14 +10,6 @@
 import 'dart:convert';
 
 extension MapExt on Map<String, dynamic>{
-  /// json字符串转字典
-  static Map<String, dynamic>? fromJsonStr(String? val, {Object? Function(Object? key, Object? value)? reviver}) {
-    if (val == null) {
-      return null;
-    }
-    final map = json.decode(val, reviver: reviver);
-    return map;
-  }
 
   /// 字典转为 json 字符串
   String toJson({Object? Function(dynamic object)? toEncodable}) {
