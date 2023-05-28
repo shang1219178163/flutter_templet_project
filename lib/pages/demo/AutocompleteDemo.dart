@@ -127,7 +127,7 @@ class _AutocompleteDemoState extends State<AutocompleteDemo>{
   }
 
   void onChoosed(OptionModel val) {
-    debugPrint('onChoosed: ${val.name}');
+    // debugPrint('onChoosed: ${val.name}');
     Get.toNamed(val.name, arguments: val.desc);
   }
 
@@ -185,7 +185,7 @@ class _AutocompleteDemoState extends State<AutocompleteDemo>{
       //   onFieldSubmitted();
       // },
       onChanged: (val){
-        debugPrint("onChanged: $val");
+        // debugPrint("onChanged: $val");
         textFieldVN.value = val;
       },
       onEditingComplete: (){
