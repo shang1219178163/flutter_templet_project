@@ -1,10 +1,8 @@
 
-
-
-
-
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/routes/AppRouteObserver.dart';
+import 'package:flutter_templet_project/routes/APPRouteService.dart';
+import 'package:flutter_templet_project/routes/APPRouter.dart';
+import 'package:get/get.dart';
 
 /// 路由监听
 class AppRouteObserverDemo extends StatefulWidget {
@@ -22,11 +20,9 @@ class AppRouteObserverDemo extends StatefulWidget {
 
 class _AppRouteObserverDemoState extends State<AppRouteObserverDemo> with RouteAware {
 
-  final message = "用 getX管理路由时, RouteAware 会失效;请使用 routingCallback 拦截";
-
   @override
   void dispose() {
-    AppRouteObserver().routeObserver.unsubscribe(this); //取消订阅
+    APPRouteService.routeObserver.unsubscribe(this); //取消订阅
     super.dispose();
   }
 
@@ -37,7 +33,7 @@ class _AppRouteObserverDemoState extends State<AppRouteObserverDemo> with RouteA
 
   @override
   void didChangeDependencies() {
-    AppRouteObserver().routeObserver.subscribe(this, ModalRoute.of(context)!); //订阅
+    APPRouteService.routeObserver.subscribe(this, ModalRoute.of(context)!); //订阅
     super.didChangeDependencies();
   }
 
@@ -68,8 +64,6 @@ class _AppRouteObserverDemoState extends State<AppRouteObserverDemo> with RouteA
 
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
@@ -80,7 +74,18 @@ class _AppRouteObserverDemoState extends State<AppRouteObserverDemo> with RouteA
           onPressed: () => debugPrint(e),)
         ).toList(),
       ),
-      body: Text(message)
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                Get.toNamed(APPRouter.alertSheetDemo);
+              },
+              child: Text("next"),
+            ),
+          ],
+        )
+      )
     );
   }
 
