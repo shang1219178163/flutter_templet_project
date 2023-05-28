@@ -1,6 +1,7 @@
 
 
-// import 'package:flutter/cupertino.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_templet_project/routes/RouteService.dart';
 
 //https://www.cnblogs.com/mengqd/p/13683126.html
 
@@ -41,4 +42,44 @@
 //     super.didStopUserGesture();
 //     print('didStopUserGesture');
 //   }
+// }
+
+
+// abstract class RouteAwareState<T extends StatefulWidget> extends State<T>
+//     with RouteAware {
+//
+//   @override
+//   void dispose() {
+//     debugPrint("$widget dispose");
+//     RouteService.routeObserver.unsubscribe(this);
+//     super.dispose();
+//   }
+//
+//   @override
+//   void didChangeDependencies() {
+//     debugPrint("$widget didChangeDependencies");
+//     RouteService.routeObserver.subscribe(this, ModalRoute.of(context)!); //Subscribe it here
+//     super.didChangeDependencies();
+//   }
+//
+//   @override
+//   void didPush() {
+//     debugPrint('$widget didPush');
+//   }
+//
+//   @override
+//   void didPop() {
+//     debugPrint('$widget didPop');
+//   }
+//
+//   @override
+//   void didPopNext() {
+//     debugPrint('$widget didPopNext');
+//   }
+//
+//   @override
+//   void didPushNext() {
+//     debugPrint('$widget didPushNext');
+//   }
+//
 // }
