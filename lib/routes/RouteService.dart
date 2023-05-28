@@ -29,24 +29,5 @@ mixin RouteAwareMixin<T extends StatefulWidget> on State<T> {
     RouteService.routeObserver.subscribe(this as RouteAware, ModalRoute.of(context)!);
   }
 
-  @override
-  void didPush() {
-    debugPrint('$widget didPush');
-  }
-
-  @override
-  void didPop() {
-    debugPrint('$widget didPop');
-  }
-
-  @override
-  void didPopNext() {
-    debugPrint('$widget didPopNext');
-  }
-
-  @override
-  void didPushNext() {
-    debugPrint('$widget didPushNext');
-  }
 }
 
