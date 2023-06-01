@@ -12,7 +12,7 @@ class NFooter extends StatelessWidget {
     required this.onPressed,
     this.style,
     this.padding = const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
-    this.height = 45,
+    this.btnHeight = 45,
     this.radius = 22.5,
     this.color,
     this.btnColor,
@@ -25,7 +25,7 @@ class NFooter extends StatelessWidget {
   String title;
   TextStyle? style;
   EdgeInsets padding;
-  double height;
+  double btnHeight;
   double radius;
   VoidCallback? onPressed;
   Color? color;
@@ -65,7 +65,7 @@ class NFooter extends StatelessWidget {
         children: [
           if (header!= null) header!,
           MaterialButton(
-            height: height,
+            height: btnHeight,
             color: btnColor,
             disabledColor: btnColor?.withOpacity(0.5),
             elevation: btnElevation,
