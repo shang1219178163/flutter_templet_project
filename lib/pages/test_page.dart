@@ -6,20 +6,27 @@
 //  Copyright © 12/2/21 shang. All rights reserved.
 //
 
+import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_expand_text.dart';
+import 'package:flutter_templet_project/basicWidget/n_footer.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
+import 'package:flutter_templet_project/extension/widget_ext.dart';
+import 'package:flutter_templet_project/uti/color_uti.dart';
 import 'package:tuple/tuple.dart';
 
 import 'package:flutter_templet_project/Language/Property.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/map_ext.dart';
+import 'package:flutter_templet_project/extension/text_painter_ext.dart';
 
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/snack_bar_state_ext.dart';
 import 'package:flutter_templet_project/uti/Singleton.dart';
 import 'package:flutter_templet_project/uti/R.dart';
+
 
 
 class TestPage extends StatefulWidget {
@@ -38,6 +45,12 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
   var titles = ["splitMapJoin", "1", "2", "3", "4", "5", "6", "7"];
   int time = 60;
 
+
+  // final text = "稍后与您联系，一会儿把处方开给您。祝您保持好心情，早日康复。再见。"*3;
+  final text = "稍后与您联系，一会儿把处方开给您。"*5;
+  final textStyle = TextStyle(overflow: TextOverflow.ellipsis);
+
+
   @override
   void initState() {
     super.initState();
@@ -52,8 +65,6 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
 
   @override
   Widget build(BuildContext context) {
-    debugPrint("_TestPageState this:${this}");
-    debugPrint("_TestPageState widget:$widget");
 
     return Scaffold(
         appBar: AppBar(
@@ -104,6 +115,21 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
                 cursorRadius: Radius.circular(8.0),
                 cursorWidth: 8.0,
               ),
+              buildText(
+                text: text,
+                textStyle: textStyle,
+                expandTitleStyle: TextStyle(color: Colors.red)
+              ),
+              NExpandText(
+                text: text,
+                textStyle: textStyle,
+                expandTitleStyle: TextStyle(color: Colors.green)
+              ),
+              NExpandText(
+                text: "text",
+                textStyle: textStyle,
+                expandTitleStyle: TextStyle(color: Colors.green)
+              ),
               buildBtnColor(),
               buildSection4(),
               buildSection5(),
@@ -111,6 +137,7 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
               //   'images/img_update.png',
               //   repeat: ImageRepeat.repeat,
               // ),
+              SizedBox(height: 34,),
             ],
           ),
         )
@@ -140,6 +167,14 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
   }
 
   onDone() {
+    final items = List.generate(20, (i) => "item_$i"*20);
+    showTipsSheet(
+        items: items,
+        cb: (String val) {
+          debugPrint(val);
+        }
+    );
+    
     const a = true;
     final b = "nested ${a ? "strings" : "can"} be wrapped by a double quote";
 
@@ -166,7 +201,6 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
     debugPrint("map:$map");
     debugPrint("c:${map["c"]}");
     debugPrint("d:${map["d"]}");
-
   }
 
 
@@ -373,6 +407,134 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
       debugPrint('strs: isEmpty');
     }
   }
+  
+  buildText({
+    required String text,
+    required TextStyle textStyle,
+    bool isExpand = false,
+    int expandMaxLine = 10,
+    TextStyle? expandTitleStyle,
+  }) {
+
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints){
+
+        final textPainter = TextPainterExt.getTextPainter(
+            text: text,
+            textStyle: textStyle,
+            maxLine: 100,
+            maxWidth: constraints.maxWidth,
+        );
+        final numberOfLines = textPainter.computeLineMetrics().length;
+        // debugPrint("numberOfLines:${numberOfLines}");
+
+        return StatefulBuilder(
+          builder: (BuildContext context, StateSetter setState) {
+
+            final btnTitle = isExpand ? "收起" : "展开";
+            return Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Expanded(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(19))
+                    ),
+                    child: Container(
+                      // width: maxWidth,
+                      // color: Colors.green,
+                      child: Text(text,
+                        style: textStyle,
+                        maxLines: isExpand ? expandMaxLine : 1,
+                      ),
+                    ),
+                  ),
+                ),
+                if(numberOfLines > 1) TextButton(
+                  style: TextButton.styleFrom(
+                    padding: EdgeInsets.zero,
+                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    minimumSize: Size(50, 30),
+                  ),
+                  onPressed: (){
+                    isExpand = !isExpand;
+                    setState((){});
+                  },
+                  child: Text(btnTitle, style: expandTitleStyle,),
+                ),
+              ],
+            );
+          }
+        );
+      }
+    );
+
+  }
+
+  showTipsSheet({
+    required List<String> items,
+    required ValueChanged<String> cb,
+  }) {
+    final child = Container(
+      height: 400,
+      // padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+      decoration: BoxDecoration(
+        // color: Colors.green,
+        color: Color(0xffe6e6e6)
+      ),
+      child: Padding(
+        padding: EdgeInsets.symmetric(vertical: 16),
+        child: Column(
+          children: [
+            Expanded(
+              child: ListView.separated(
+                itemCount: items.length,
+                itemBuilder: (context, int i) {
+                  final e = items[i];
+
+                  return InkWell(
+                    onTap: (){
+                      cb.call(e);
+                       Navigator.of(context).pop();
+                    },
+                    child: Container(
+                      margin: EdgeInsets.symmetric(horizontal: 16),
+                      padding: EdgeInsets.symmetric(horizontal: 16),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(18)),
+                        border: Border.all(color: Color(0xFFe3e3e3), width: 1),
+                        // border: Border.all(color: Colors.red, width: 1),
+                      ),
+                      constraints: BoxConstraints(
+                        minHeight: 38,
+                      ),
+                      alignment: Alignment.centerLeft,
+                      child: NExpandText(
+                          text: e,
+                          textStyle: textStyle,
+                          expandTitleStyle: TextStyle(color: Colors.green)
+                      ),
+                    ),
+                  );
+                },
+                separatorBuilder: (context, int index) {
+                  return SizedBox(height: 8,);
+                },
+              ),
+            ),
+            NFooter(
+              title: "自定义常用语",
+              padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+              onPressed: (){
+              debugPrint("自定义常用语");
+            })
+          ],
+        ),
+      ),
+    );
+    child.toShowModalBottomSheet(context: context);
+  }
 
   getUrlParams({Map<String, dynamic> map = const {}}) {
     if (map.keys.isEmpty) {
@@ -389,4 +551,6 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
 }
 
 // typedef RadiusBuilder = Widget Function(BuildContext context, StateSetter setState);
+
+
 
