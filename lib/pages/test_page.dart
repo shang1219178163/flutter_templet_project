@@ -9,6 +9,7 @@
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/header.dart';
 import 'package:flutter_templet_project/basicWidget/n_expand_text.dart';
 import 'package:flutter_templet_project/basicWidget/n_footer.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
@@ -47,7 +48,7 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
 
 
   // final text = "稍后与您联系，一会儿把处方开给您。祝您保持好心情，早日康复。再见。"*3;
-  final text = "稍后与您联系，一会儿把处方开给您。"*5;
+  final text = "稍后与您联系，一会儿把处方开给您。";
   final textStyle = TextStyle(overflow: TextOverflow.ellipsis);
 
 
@@ -120,23 +121,41 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
                 textStyle: textStyle,
                 expandTitleStyle: TextStyle(color: Colors.red)
               ),
-              NExpandText(
-                text: text,
-                textStyle: textStyle,
-                expandTitleStyle: TextStyle(color: Colors.green)
+              SizedBox(height: 134,),
+
+              Header.h4(title: "字符串不够一行时"),
+              Container(
+                color: Colors.yellowAccent,
+                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                child: NExpandText(
+                  text: text.substring(0, 20),
+                  textStyle: textStyle,
+                  expandTitleStyle: TextStyle(color: Colors.green)
+                ),
               ),
-              NExpandText(
-                text: "text",
-                textStyle: textStyle,
-                expandTitleStyle: TextStyle(color: Colors.green)
+              Header.h4(title: "字符串超过一行时(折叠)"),
+              Container(
+                color: Colors.yellow,
+                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                child: NExpandText(
+                  text: text,
+                  textStyle: textStyle,
+                  expandTitleStyle: TextStyle(color: Colors.green)
+                ),
               ),
-              buildBtnColor(),
-              buildSection4(),
-              buildSection5(),
-              // Image.asset(
-              //   'images/img_update.png',
-              //   repeat: ImageRepeat.repeat,
-              // ),
+              Header.h4(title: "字符串超过一行时(展开)"),
+              Container(
+                color: Colors.yellow,
+                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                child: NExpandText(
+                    text: text,
+                    textStyle: textStyle,
+                    expandTitleStyle: TextStyle(color: Colors.green)
+                ),
+              ),
+              // buildBtnColor(),
+              // buildSection4(),
+              // buildSection5(),
               SizedBox(height: 34,),
             ],
           ),
@@ -167,7 +186,7 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
   }
 
   onDone() {
-    final items = List.generate(20, (i) => "item_$i"*20);
+    final items = List.generate(3, (i) => "我是可能很长的字符串_$i"*(i+1));
     showTipsSheet(
         items: items,
         cb: (String val) {
