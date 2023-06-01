@@ -47,8 +47,8 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
   int time = 60;
 
 
-  // final text = "稍后与您联系，一会儿把处方开给您。祝您保持好心情，早日康复。再见。"*3;
-  final text = "稍后与您联系，一会儿把处方开给您。";
+  // final text = "稍后与您联系，一会儿把把东西送过去。祝您保持好心情，早日康复。再见。"*3;
+  final text = "态度决定一切，有什么态度，就有什么样的未来;性格决定命运，有怎样的性格，就有怎样的人生。";
   final textStyle = TextStyle(overflow: TextOverflow.ellipsis);
 
 
