@@ -46,11 +46,7 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
   var titles = ["splitMapJoin", "1", "2", "3", "4", "5", "6", "7"];
   int time = 60;
 
-
-  // final text = "稍后与您联系，一会儿把把东西送过去。祝您保持好心情，早日康复。再见。"*3;
-  final text = "态度决定一切，有什么态度，就有什么样的未来;性格决定命运，有怎样的性格，就有怎样的人生。";
   final textStyle = TextStyle(overflow: TextOverflow.ellipsis);
-
 
   @override
   void initState() {
@@ -68,32 +64,32 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
   Widget build(BuildContext context) {
 
     return Scaffold(
-        appBar: AppBar(
-          flexibleSpace: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: NetworkImage(R.image.urls[5]),
-                fit: BoxFit.cover,
-              ),
+      appBar: AppBar(
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: NetworkImage(R.image.urls[5]),
+              fit: BoxFit.cover,
             ),
           ),
-          title: Text(widget.title ?? "$widget"),
-          actions: ['done',].map((e) => TextButton(
-            onPressed: onDone,
-            child: Text(e,
-                style: TextStyle(color: Colors.white),
-              ),)
-          ).toList(),
-          // bottom: buildAppBarBottom(),
-          bottom: TabBar(
-            controller: _tabController,
-            isScrollable: true,
-            tabs: List.generate(6, (index) => Tab(text: 'item_$index')).toList(),
-            // indicatorSize: TabBarIndicatorSize.label,
-            // indicatorPadding: EdgeInsets.only(left: 6, right: 6),
-          ),
         ),
-        body: SingleChildScrollView(
+        title: Text(widget.title ?? "$widget"),
+        actions: ['done',].map((e) => TextButton(
+          onPressed: onDone,
+          child: Text(e,
+              style: TextStyle(color: Colors.white),
+            ),)
+        ).toList(),
+        // bottom: buildAppBarBottom(),
+        bottom: TabBar(
+          controller: _tabController,
+          isScrollable: true,
+          tabs: List.generate(6, (index) => Tab(text: 'item_$index')).toList(),
+          // indicatorSize: TabBarIndicatorSize.label,
+          // indicatorPadding: EdgeInsets.only(left: 6, right: 6),
+        ),
+      ),
+      body: SingleChildScrollView(
           child: Column(
             children: [
               buildWrap(),
@@ -116,46 +112,10 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
                 cursorRadius: Radius.circular(8.0),
                 cursorWidth: 8.0,
               ),
-              buildText(
-                text: text,
-                textStyle: textStyle,
-                expandTitleStyle: TextStyle(color: Colors.red)
-              ),
-              SizedBox(height: 134,),
 
-              Header.h4(title: "字符串不够一行时"),
-              Container(
-                color: Colors.yellowAccent,
-                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                child: NExpandText(
-                  text: text.substring(0, 20),
-                  textStyle: textStyle,
-                  expandTitleStyle: TextStyle(color: Colors.green)
-                ),
-              ),
-              Header.h4(title: "字符串超过一行时(折叠)"),
-              Container(
-                color: Colors.yellow,
-                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                child: NExpandText(
-                  text: text,
-                  textStyle: textStyle,
-                  expandTitleStyle: TextStyle(color: Colors.green)
-                ),
-              ),
-              Header.h4(title: "字符串超过一行时(展开)"),
-              Container(
-                color: Colors.yellow,
-                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                child: NExpandText(
-                    text: text,
-                    textStyle: textStyle,
-                    expandTitleStyle: TextStyle(color: Colors.green)
-                ),
-              ),
-              // buildBtnColor(),
-              // buildSection4(),
-              // buildSection5(),
+              buildBtnColor(),
+              buildSection4(),
+              buildSection5(),
               SizedBox(height: 34,),
             ],
           ),
@@ -335,8 +295,9 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
       child: Container(
         height: 400,
         child: ListView.builder(
-          itemCount: 6,
+          itemCount: 3,
           itemBuilder: (ctx, index) {
+            
             return Container(
               height: 60,
               child: ColoredBox(

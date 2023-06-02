@@ -26,6 +26,7 @@ import 'package:flutter_templet_project/pages/demo/DropBoxChoicDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DropBoxMutiRowChoicDemo.dart';
 import 'package:flutter_templet_project/pages/demo/IMChatPage.dart';
 import 'package:flutter_templet_project/pages/demo/MediaQueryDemoOne.dart';
+import 'package:flutter_templet_project/pages/demo/NExpandTextDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NSkeletonDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PageViewAndBarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TextFieldColorChangeDemo.dart';
@@ -520,6 +521,7 @@ class APPRouter {
   static const imChatPage = '/imChatPage';
   static const soundPlayDemo = '/soundPlayDemo';
   static const wPopupMenuDemo = '/wPopupMenuDemo';
+  static const expandTextDemo = '/expandTextDemo';
 
 
 
@@ -819,6 +821,7 @@ class AppPage {
     GetPage(name: APPRouter.imChatPage, page: () => IMChatPage(),),
     GetPage(name: APPRouter.soundPlayDemo, page: () => SoundPlayDemo(),),
     GetPage(name: APPRouter.wPopupMenuDemo, page: () => WPopupMenuDemo(),),
+    GetPage(name: APPRouter.expandTextDemo, page: () => NExpandTextDemo(),),
 
 
   ];

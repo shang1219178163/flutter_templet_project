@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/text_painter_ext.dart';
+import 'package:flutter_templet_project/extension/widget_ext.dart';
 
 
 // Header.h4(title: "字符串超过一行时(折叠)"),
@@ -99,17 +100,20 @@ class _NExpandTextState extends State<NExpandText> {
                     ),
                   ),
                 ),
-                if(numberOfLines > 1) TextButton(
-                  style: TextButton.styleFrom(
-                    padding: EdgeInsets.zero,
-                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                    minimumSize: Size(50, 18),
+                if(numberOfLines > 1) Padding(
+                  padding: EdgeInsets.only(bottom: 8),
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      padding: EdgeInsets.zero,
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      minimumSize: Size(50, 18),
+                    ),
+                    onPressed: (){
+                      isExpand = !isExpand;
+                      setState((){});
+                    },
+                    child: Text(btnTitle, style: expandTitleStyle,),
                   ),
-                  onPressed: (){
-                    isExpand = !isExpand;
-                    setState((){});
-                  },
-                  child: Text(btnTitle, style: expandTitleStyle,),
                 ),
               ],
             );
