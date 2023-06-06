@@ -13,9 +13,10 @@ import 'package:flutter_templet_project/extension/string_ext.dart';
 
 extension ListExt<T,E> on List<E> {
 
-  /// 转为 json 字符串
-  String get jsonStr {
-    final jsonStr = json.encode(this);
+  /// 字典转为 json 字符串
+  String toJson({Object? Function(dynamic object)? toEncodable}) {
+    // final jsonStr = jsonEncode(this);
+    final jsonStr = json.encode(this, toEncodable: toEncodable);
     return jsonStr;
   }
 

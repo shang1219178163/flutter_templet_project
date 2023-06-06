@@ -32,7 +32,7 @@ class NExpandText extends StatefulWidget {
   /// 字符串
   String text;
   /// 字符串样式
-  TextStyle textStyle;
+  TextStyle? textStyle;
   /// 超过一行初始展开状态
   bool initiallyExpanded;
   /// 展开状态最大行
@@ -61,7 +61,7 @@ class _NExpandTextState extends State<NExpandText> {
 
   buildText({
     required String text,
-    required TextStyle textStyle,
+    TextStyle? textStyle,
     bool isExpand = false,
     int expandMaxLine = 10,
     TextStyle? expandTitleStyle,

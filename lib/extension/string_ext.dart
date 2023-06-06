@@ -72,19 +72,19 @@ extension StringExt on String{
   AssetImage toPngAssetImage({
     String? package,
     AssetBundle? bundle,
-  }) => toPng().toAssetImage(package: package, bundle: bundle);
+  }) => AssetImage(toPng(), bundle: bundle, package: package);
 
   /// 返回 jpg 图片的 AssetImage
   AssetImage toJpgAssetImage({
     String? package,
     AssetBundle? bundle,
-  }) => toJpg().toAssetImage(package: package, bundle: bundle);
+  }) => AssetImage(toJpg(), package: package, bundle: bundle);
 
   /// 返回 svg 图片的 AssetImage
   AssetImage toSvgAssetImage({
     String? package,
     AssetBundle? bundle,
-  }) => toSvg().toAssetImage(package: package, bundle: bundle);
+  }) => AssetImage(toSvg(), package: package, bundle: bundle);
 
   /// 同 int.parse(this)
   int get parseInt => int.parse(this);

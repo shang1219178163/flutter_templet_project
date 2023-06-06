@@ -49,6 +49,8 @@ class _ContainerDemoState extends State<ContainerDemo> {
           buildSection1(),
           // buildSection2(),
           buildGradientBorder(),
+          buildSection3(),
+
         ].map((e) => e.toSliverToBoxAdapter()).toList(),
       )
     );
@@ -77,6 +79,7 @@ class _ContainerDemoState extends State<ContainerDemo> {
       buildSection(),
       buildSection1(),
       buildSection2(),
+      buildSection3(),
     ];
 
     return CustomScrollView(
@@ -169,12 +172,34 @@ class _ContainerDemoState extends State<ContainerDemo> {
     );
   }
 
+  Widget buildSection3() {
+    return Container(
+      width: 150,
+      height: 150,
+      margin: const EdgeInsets.all(50),
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: Colors.blue,
+        // borderRadius: BorderRadius.only(
+        //   topLeft: Radius.circular(20.0),
+        //   topRight: Radius.circular(20.0),
+        //   bottomLeft: Radius.zero,
+        //   bottomRight: Radius.zero,
+        // ),
+      ),
+      child: Text(
+        "hello",
+      ),
+    );
+  }
+
   List<Widget> testContainer() {
     return [
       Container(
         decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('images/img_update.png'),
+              image: 'img_update.png'.toAssetImage(),
               repeat: ImageRepeat.repeat,
               alignment: Alignment.topLeft,
             )

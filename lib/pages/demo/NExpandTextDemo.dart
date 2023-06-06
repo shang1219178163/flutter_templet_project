@@ -3,7 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/header.dart';
 import 'package:flutter_templet_project/basicWidget/n_expand_text.dart';
+import 'package:flutter_templet_project/basicWidget/n_footer.dart';
 import 'package:flutter_templet_project/extension/text_painter_ext.dart';
+import 'package:flutter_templet_project/extension/widget_ext.dart';
 
 class NExpandTextDemo extends StatefulWidget {
 
@@ -36,7 +38,7 @@ class _NExpandTextDemoState extends State<NExpandTextDemo> {
           child: Text(e,
             style: TextStyle(color: Colors.white),
           ),
-          onPressed: () => debugPrint(e),)
+          onPressed: () => onPressed(e),)
         ).toList(),
       ),
         body: SingleChildScrollView(
@@ -89,8 +91,14 @@ class _NExpandTextDemoState extends State<NExpandTextDemo> {
     );
   }
 
-  void _onPressed(int e) {
-
+  void onPressed(String e) {
+    final items = List.generate(3, (i) => "我是可能很长的字符串_$i"*(i+1));
+    showTipsSheet(
+        items: items,
+        textStyle: TextStyle(overflow: TextOverflow.ellipsis),
+        cb: (String val) {
+      debugPrint(val);
+    });
   }
 
   buildText({
@@ -156,4 +164,70 @@ class _NExpandTextDemoState extends State<NExpandTextDemo> {
 
   }
 
+  showTipsSheet({
+    required List<String> items,
+    TextStyle? textStyle,
+    required ValueChanged<String> cb,
+  }) {
+    final child = Container(
+      height: 400,
+      // padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+      decoration: BoxDecoration(
+        // color: Colors.green,
+          color: Color(0xffe6e6e6)
+      ),
+      child: Padding(
+        padding: EdgeInsets.symmetric(vertical: 16),
+        child: Column(
+          children: [
+            Expanded(
+              child: ListView.separated(
+                itemCount: items.length,
+                itemBuilder: (context, int i) {
+                  final e = items[i];
+
+                  return InkWell(
+                    onTap: (){
+                      cb.call(e);
+                      Navigator.of(context).pop();
+                    },
+                    child: Container(
+                      margin: EdgeInsets.symmetric(horizontal: 16),
+                      padding: EdgeInsets.symmetric(horizontal: 16),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(18)),
+                        border: Border.all(color: Color(0xFFe3e3e3), width: 1),
+                        // border: Border.all(color: Colors.red, width: 1),
+                      ),
+                      constraints: BoxConstraints(
+                        minHeight: 38,
+                      ),
+                      alignment: Alignment.centerLeft,
+                      child: NExpandText(
+                          text: e,
+                          textStyle: textStyle,
+                          expandTitleStyle: TextStyle(color: Colors.green)
+                      ),
+                    ),
+                  );
+                },
+                separatorBuilder: (context, int index) {
+                  return SizedBox(height: 8,);
+                },
+              ),
+            ),
+            NFooter(
+              title: "自定义常用语",
+              padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+              onPressed: (){
+                debugPrint("自定义常用语");
+              }
+            )
+          ],
+        ),
+      ),
+    );
+    child.toShowModalBottomSheet(context: context);
+  }
 }

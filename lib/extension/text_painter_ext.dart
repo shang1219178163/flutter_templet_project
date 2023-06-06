@@ -6,7 +6,7 @@ extension TextPainterExt on TextPainter{
 
   static TextPainter getTextPainter({
     required String text,
-    required TextStyle textStyle,
+    TextStyle? textStyle,
     required int maxLine,
     required double maxWidth
   }) {

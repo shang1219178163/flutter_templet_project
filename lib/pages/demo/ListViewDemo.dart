@@ -57,6 +57,16 @@ class _ListViewDemoState extends State<ListViewDemo> {
     )),
   ];
 
+  final offsetY = ValueNotifier(0.0);
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    _scrollController2.addListener(() {
+      offsetY.value = _scrollController2.position.pixels;
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -122,6 +132,22 @@ class _ListViewDemoState extends State<ListViewDemo> {
             ),
           ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          debugPrint("${_scrollController2.position.printInfo()}");
+          scrollToBottom(controller: _scrollController2);
+
+        },
+        child: ValueListenableBuilder<double>(
+           valueListenable: offsetY,
+           builder: (context,  value, child){
+
+              return Container(
+                child: Text("${value.toStringAsFixed(1)}"),
+              );
+            }
+        ),
       ),
     );
   }
@@ -365,6 +391,23 @@ class _ListViewDemoState extends State<ListViewDemo> {
       },
     );
 
+  }
+
+  scrollToBottom({required ScrollController controller}) {
+    Future.delayed(
+      const Duration(milliseconds: 100),
+          () {
+        if (!controller.hasClients) {
+          return;
+        }
+        controller.jumpTo(controller.position.maxScrollExtent);
+        // controller.animateTo(
+        //   controller.position.maxScrollExtent,
+        //   duration: const Duration(milliseconds: 350),
+        //   curve: Curves.linear,
+        // );
+      },
+    );
   }
 
   test() {

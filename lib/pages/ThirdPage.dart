@@ -1,11 +1,16 @@
 
 
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 import 'package:easy_refresh/easy_refresh.dart';
 
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
+import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/mixin/BottomBouncingScrollPhysics.dart';
+import 'package:flutter_templet_project/mixin/MyScrollPhysics.dart';
 
 
 class ThirdPage extends StatefulWidget {
@@ -18,8 +23,13 @@ class ThirdPage extends StatefulWidget {
 }
 
 class _ThirdPageState extends State<ThirdPage> {
-  late EasyRefreshController _controller;
-  late ScrollController _scrollController;
+  late final _easyRefreshController = EasyRefreshController(
+    controlFinishRefresh: true,
+    controlFinishLoad: true,
+  );
+  late final _scrollController = ScrollController();
+
+  final offsetY = ValueNotifier(0.0);
 
   var items = List<String>.generate(20, (i) => 'Item $i');
 
@@ -29,15 +39,20 @@ class _ThirdPageState extends State<ThirdPage> {
     return GlobalKey(debugLabel: "$index");
   }
 
+
+  int randomInt({required int max, int min = 0}) {
+    var x = Random().nextInt(max) + min;
+    return x;
+  }
+
   @override
   void initState() {
     super.initState();
 
-    _controller = EasyRefreshController(
-      controlFinishRefresh: true,
-      controlFinishLoad: true,
-    );
-    _scrollController = ScrollController();
+
+    _scrollController.addListener(() {
+      offsetY.value = _scrollController.position.pixels;
+    });
   }
 
   @override
@@ -52,90 +67,131 @@ class _ThirdPageState extends State<ThirdPage> {
           ),)
         ).toList(),
       ),
-      body: EasyRefresh(
-        controller: _controller,
-        onRefresh: () async {
-          ddlog("onRefresh");
-          await Future.delayed(Duration(seconds: 1), () {
-            if (!mounted) {
-              return;
-            }
-            items = List<String>.generate(3, (i) => 'Item ${items.length + i}');
-
-            setState(() {});
-            _controller.finishRefresh();
-          });
+      body: buildRefresh(
+        child: buildListView(
+          controller: _scrollController,
+        ),
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: (){
+          _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
         },
-        onLoad: () async {
-          ddlog("onLoad");
-          await Future.delayed(Duration(seconds: 1), () {
-            if (!mounted) {
-              return;
+        label: ValueListenableBuilder<double>(
+           valueListenable: offsetY,
+           builder: (context,  value, child){
+              return Container(
+                child: Text("${value.toStringAsFixed(0)}/${_scrollController.position.maxScrollExtent.toStringAsFixed(0)}"),
+              );
             }
-            items.addAll(List<String>.generate(
-                20, (i) => 'Item ${items.length + i}')
-            );
-            _controller.finishLoad(items.length >= 80 ? IndicatorResult.noMore : IndicatorResult.success);
-            setState(() {});
-          });
-        },
-        child: buildListView(),
+        ),
       ),
     );
   }
 
   onDone() {
-    _controller.callRefresh();
+    _easyRefreshController.callRefresh();
   }
 
-  Widget buildListView({canDelete = false}) {
-    return ListView.separated(
-      itemCount: items.length,
-      itemBuilder: (context, index) {
-        final item = items[index];
+  Widget buildRefresh({
+   required Widget child,
+  }) {
+    return EasyRefresh(
+      controller: _easyRefreshController,
+      onRefresh: onRefresh,
+      onLoad: onLoad,
+      child: child,
+    );
+  }
 
-        final child = ListTile(
-          title: Text(item),
-          selected: (selectedIndex == index),
-          // trailing: selectedIndex == index ? Icon(Icons.check) : null,
-          trailing: selectedIndex == index ? Icon(Icons.check) : null,
-          onTap: (){
-            selectedIndex = index;
-            setState(() {});
-            ddlog([selectedIndex, index,]);
-            ddlog([_globalKey(index).position(), _globalKey(index).size]);
-          },
-        );
+  onRefresh() async {
+    ddlog("onRefresh");
+    await Future.delayed(Duration(seconds: 1), () {
+      if (!mounted) {
+        return;
+      }
+      items = List<String>.generate(3, (i) => 'Item ${items.length + i}');
 
-        return Dismissible(
-          key: Key(item),
-          onDismissed: (direction) {
-            setState(() {
-              items.removeAt(index);
-            });
+      setState(() {});
+      _easyRefreshController.finishRefresh();
+    });
+  }
 
-            if (direction == DismissDirection.startToEnd) {
-              ddlog("Add to favorite");
-            } else {
-              ddlog('Remove item');
-            }
-          },
-          background: buildFavorite(context),
-          secondaryBackground: buildDelete(context),
-          confirmDismiss: (DismissDirection direction) async {
-            return buildConfirmDismiss(context);
-          },
-          child: child,
-        );
-      },
-      separatorBuilder: (context, index) {
-        return Divider(
-          height: .5,
-          indent: 15,
-          endIndent: 15,
-          color: Color(0xFFDDDDDD),
-        );
-      },
+  onLoad() async {
+    ddlog("onLoad");
+    await Future.delayed(Duration(seconds: 1), () {
+      if (!mounted) {
+        return;
+      }
+      items.addAll(List<String>.generate(
+          20, (i) => 'Item ${items.length + i}')
+      );
+      _easyRefreshController.finishLoad(items.length >= 60 ? IndicatorResult.noMore : IndicatorResult.success);
+      setState(() {});
+    });
+  }
+
+  Widget buildListView({
+    ScrollController? controller,
+    canDelete = false,
+  }) {
+    return Scrollbar(
+      controller: controller,
+      child: ListView.builder(
+        controller: controller,
+        reverse: true,
+        // physics: BottomBouncingScrollPhysics(),
+        // physics: MyScrollPhysics(),
+        itemCount: items.length,
+        itemBuilder: (context, index) {
+          final item = items[index];
+
+          final child = ListTile(
+            title: Text(item),
+            selected: (selectedIndex == index),
+            // trailing: selectedIndex == index ? Icon(Icons.check) : null,
+            trailing: selectedIndex == index ? Icon(Icons.check) : null,
+            onTap: (){
+              selectedIndex = index;
+              setState(() {});
+              ddlog([selectedIndex, index,]);
+              ddlog([_globalKey(index).position(), _globalKey(index).size]);
+            },
+          );
+
+          return Dismissible(
+            key: Key(item),
+            onDismissed: (direction) {
+              setState(() {
+                items.removeAt(index);
+              });
+
+              if (direction == DismissDirection.startToEnd) {
+                ddlog("Add to favorite");
+              } else {
+                ddlog('Remove item');
+              }
+            },
+            background: buildFavorite(context),
+            secondaryBackground: buildDelete(context),
+            confirmDismiss: (DismissDirection direction) async {
+              return buildConfirmDismiss(context);
+            },
+            child: Container(
+              height: randomInt(max: 100, min: 45).toDouble(),
+              color: ColorExt.random,
+              child: child
+            ),
+          );
+        },
+        // separatorBuilder: (context, index) {
+        //   return Divider(
+        //     height: .5,
+        //     indent: 15,
+        //     endIndent: 15,
+        //     color: Color(0xFFDDDDDD),
+        //   );
+        // },
+      ),
     );
   }
 
