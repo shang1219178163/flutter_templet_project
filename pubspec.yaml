@@ -137,6 +137,8 @@ dependencies:
     git:
       url: git@github.com:Sky24n/github_language_colors.git
 
+  syncfusion_flutter_datepicker: ^21.2.9
+
 #  html: ^0.15.0
 #  http: ^0.13.3
 #  http: ^0.13.3

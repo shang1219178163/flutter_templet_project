@@ -7,6 +7,7 @@
 //
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/extension/string_ext.dart';
 
 class LocalImagePage extends StatelessWidget {
 
@@ -51,14 +52,14 @@ class LocalImagePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(e, fit: BoxFit.contain),
+            Image(image: e.toAssetImage(), fit: BoxFit.contain),
           ]
         ),
       )).toList(),
     );
   }
 
-  var imageNames = [
+  List<String> imageNames = <String>[
     "avatar.png",
     "icon_appbar_back.png",
     "icon_appbar_back_white.png",

@@ -53,6 +53,7 @@ class EnhanceExpansionTile extends StatefulWidget {
     this.header,
     this.childrenHeader,
     this.childrenFooter,
+    this.borderRadius,
     this.trailing,
     this.initiallyExpanded = false,
     this.maintainState = false,
@@ -68,13 +69,13 @@ class EnhanceExpansionTile extends StatefulWidget {
     this.collapsedIconColor,
     this.controlAffinity,
   }) : assert(initiallyExpanded != null),
-       assert(maintainState != null),
-       assert(
-       expandedCrossAxisAlignment != CrossAxisAlignment.baseline,
-       'CrossAxisAlignment.baseline is not supported since the expanded children '
-           'are aligned in a column, not a row. Try to use another constant.',
-       ),
-       super(key: key);
+        assert(maintainState != null),
+        assert(
+        expandedCrossAxisAlignment != CrossAxisAlignment.baseline,
+        'CrossAxisAlignment.baseline is not supported since the expanded children '
+            'are aligned in a column, not a row. Try to use another constant.',
+        ),
+        super(key: key);
 
   /// A widget to display before the title.
   ///
@@ -114,6 +115,9 @@ class EnhanceExpansionTile extends StatefulWidget {
 
   /// isExpand == false, visable,
   final ExpansionWidgetBuilder? childrenFooter;
+
+  /// borderRadius
+  final BorderRadiusGeometry? borderRadius;
 
   /// The color to display behind the sublist when expanded.
   ///
@@ -367,41 +371,45 @@ class _EnhanceExpansionTileState extends State<EnhanceExpansionTile> with Single
     final ExpansionTileThemeData expansionTileTheme = ExpansionTileTheme.of(context);
     final Color borderSideColor = _borderColor.value ?? Colors.transparent;
 
-    return Container(
-      decoration: BoxDecoration(
-        color: _backgroundColor.value ?? expansionTileTheme.backgroundColor ?? Colors.transparent,
-        border: Border(
-          top: BorderSide(color: borderSideColor),
-          bottom: BorderSide(color: borderSideColor),
+    return ClipRRect(
+      borderRadius: widget.borderRadius ?? BorderRadius.zero,
+      child: Container(
+        decoration: BoxDecoration(
+          color: _backgroundColor.value ?? expansionTileTheme.backgroundColor ?? Colors.transparent,
+          border: Border(
+            top: BorderSide(color: borderSideColor),
+            bottom: BorderSide(color: borderSideColor),
+          ),
         ),
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          widget.header?.call(_handleTap) ?? ListTileTheme.merge(
-            iconColor: _iconColor.value ?? expansionTileTheme.iconColor,
-            textColor: _headerColor.value,
-            child: ListTile(
-              onTap: _handleTap,
-              contentPadding: widget.tilePadding ?? expansionTileTheme.tilePadding,
-              leading: widget.leading ?? _buildLeadingIcon(context),
-              title: widget.title,
-              subtitle: widget.subtitle,
-              trailing: widget.trailing ?? _buildTrailingIcon(context),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            widget.header?.call(_handleTap) ?? ListTileTheme.merge(
+              iconColor: _iconColor.value ?? expansionTileTheme.iconColor,
+              textColor: _headerColor.value,
+              child: ListTile(
+                onTap: _handleTap,
+                contentPadding: widget.tilePadding ?? expansionTileTheme.tilePadding,
+                leading: widget.leading ?? _buildLeadingIcon(context),
+                title: widget.title,
+                subtitle: widget.subtitle,
+                trailing: widget.trailing ?? _buildTrailingIcon(context),
+                // horizontalTitleGap: 0,
+              ),
             ),
-          ),
-          widget.childrenHeader?.call(_handleTap) ?? SizedBox(),
-          ClipRect(
-            child: Align(
-              alignment: widget.expandedAlignment
-                ?? expansionTileTheme.expandedAlignment
-                ?? Alignment.center,
-              heightFactor: _heightFactor.value,
-              child: child,
+            widget.childrenHeader?.call(_handleTap) ?? SizedBox(),
+            ClipRect(
+              child: Align(
+                alignment: widget.expandedAlignment
+                    ?? expansionTileTheme.expandedAlignment
+                    ?? Alignment.center,
+                heightFactor: _heightFactor.value,
+                child: child,
+              ),
             ),
-          ),
-          widget.childrenFooter?.call(_handleTap) ?? SizedBox(),
-        ],
+            widget.childrenFooter?.call(_handleTap) ?? SizedBox(),
+          ],
+        ),
       ),
     );
   }

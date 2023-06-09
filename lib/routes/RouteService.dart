@@ -31,3 +31,15 @@ mixin RouteAwareMixin<T extends StatefulWidget> on State<T> {
 
 }
 
+
+// abstract class Coding {
+//
+//   Coding.fromJson(Map<String, dynamic> json){
+//     throw UnimplementedError();
+//   }
+//
+//   /// Called when the current route has been pushed.
+//   Map<String, dynamic> toJson() {
+//     throw UnimplementedError();
+//   }
+// }

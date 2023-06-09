@@ -146,14 +146,7 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
   }
 
   onDone() {
-    final items = List.generate(3, (i) => "我是可能很长的字符串_$i"*(i+1));
-    showTipsSheet(
-        items: items,
-        cb: (String val) {
-          debugPrint(val);
-        }
-    );
-    
+
     const a = true;
     final b = "nested ${a ? "strings" : "can"} be wrapped by a double quote";
 
@@ -451,70 +444,7 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
 
   }
 
-  showTipsSheet({
-    required List<String> items,
-    required ValueChanged<String> cb,
-  }) {
-    final child = Container(
-      height: 400,
-      // padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-      decoration: BoxDecoration(
-        // color: Colors.green,
-        color: Color(0xffe6e6e6)
-      ),
-      child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 16),
-        child: Column(
-          children: [
-            Expanded(
-              child: ListView.separated(
-                itemCount: items.length,
-                itemBuilder: (context, int i) {
-                  final e = items[i];
 
-                  return InkWell(
-                    onTap: (){
-                      cb.call(e);
-                       Navigator.of(context).pop();
-                    },
-                    child: Container(
-                      margin: EdgeInsets.symmetric(horizontal: 16),
-                      padding: EdgeInsets.symmetric(horizontal: 16),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(18)),
-                        border: Border.all(color: Color(0xFFe3e3e3), width: 1),
-                        // border: Border.all(color: Colors.red, width: 1),
-                      ),
-                      constraints: BoxConstraints(
-                        minHeight: 38,
-                      ),
-                      alignment: Alignment.centerLeft,
-                      child: NExpandText(
-                          text: e,
-                          textStyle: textStyle,
-                          expandTitleStyle: TextStyle(color: Colors.green)
-                      ),
-                    ),
-                  );
-                },
-                separatorBuilder: (context, int index) {
-                  return SizedBox(height: 8,);
-                },
-              ),
-            ),
-            NFooter(
-              title: "自定义常用语",
-              padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-              onPressed: (){
-              debugPrint("自定义常用语");
-            })
-          ],
-        ),
-      ),
-    );
-    child.toShowModalBottomSheet(context: context);
-  }
 
   getUrlParams({Map<String, dynamic> map = const {}}) {
     if (map.keys.isEmpty) {
