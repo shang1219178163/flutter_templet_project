@@ -43,7 +43,12 @@ class _CalendarDatePickerDemoState extends State<CalendarDatePickerDemo> {
   }
 
   _buildHeader(String str) {
-    return Text(str, style: TextStyle(fontSize: 20,), textAlign: TextAlign.left);
+    return Text(str,
+      textAlign: TextAlign.left,
+      style: TextStyle(
+        fontSize: 20,
+      ),
+    );
   }
 
   buildCupertinoDatePicker() {
@@ -62,13 +67,24 @@ class _CalendarDatePickerDemoState extends State<CalendarDatePickerDemo> {
   }
 
   buildCalendarDatePicker() {
+    final indexs = List.generate(9, (index) => index);
+    final dateTimes = indexs.map((e) => DateTime(2023, 6, e)).toList();
+
     return CalendarDatePicker(
       onDateChanged: (DateTime value) {
         debugPrint(value.toString());
       },
-      initialDate: DateTime.now(), // 初始化选中日期
       firstDate: DateTime(2020, 6, 0), // 开始日期
-      lastDate: DateTime(2023, 6, 0), // 结束日期
+      lastDate: DateTime(2023, 7, 0), // 结束日期
+      initialDate: DateTime.now(), // 初始化选中日期
+      selectableDayPredicate: (val) {
+        if (val.weekday == 5 || val.weekday == 6) {
+          return false;
+        } else {
+          return true;
+        }
+        return dateTimes.contains(val);
+      },
     );
   }
 
