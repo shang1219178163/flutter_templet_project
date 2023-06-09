@@ -66,7 +66,7 @@ class _StackDemoTwoState extends State<StackDemoTwo> with SingleTickerProviderSt
           controller: scrollController,
           children: [
             Container(
-              height: screenSize.height + (globalKey.currentContext?.minY() ?? 0.0) - MediaQuery.of(context).padding.top - kToolbarHeight,
+              height: screenSize.height + (globalKey.currentContext?.minY() ?? 0.0) - mediaQuery.viewPadding.top - mediaQuery.viewPadding.bottom - kToolbarHeight,
               color: Colors.green,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
