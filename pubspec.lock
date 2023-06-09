@@ -1359,6 +1359,22 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.2.0"
+  syncfusion_flutter_core:
+    dependency: transitive
+    description:
+      name: syncfusion_flutter_core
+      sha256: "4aa69e3541d38810533b1455aa38997a89755f9928e16ef813b62b2e8bcc398c"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "21.2.9"
+  syncfusion_flutter_datepicker:
+    dependency: "direct main"
+    description:
+      name: syncfusion_flutter_datepicker
+      sha256: "2d0b69106152be3cbabf97e43e03b414ff650eeb91f6b17e7d24b7fade0a9ce9"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "21.2.9"
   synchronized:
     dependency: transitive
     description:
@@ -1648,5 +1664,5 @@ packages:
     source: hosted
     version: "3.1.1"
 sdks:
-  dart: ">=2.19.0 <=3.10.0"
+  dart: ">=2.19.0 <3.0.0"
   flutter: ">=3.7.0"
