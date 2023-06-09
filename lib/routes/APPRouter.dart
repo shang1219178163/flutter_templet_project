@@ -25,6 +25,7 @@ import 'package:flutter_templet_project/pages/HomeNavDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DropBoxChoicDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DropBoxMutiRowChoicDemo.dart';
 import 'package:flutter_templet_project/pages/demo/IMChatPage.dart';
+import 'package:flutter_templet_project/pages/LoginPageTwo.dart';
 import 'package:flutter_templet_project/pages/demo/MediaQueryDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/NExpandTextDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NSkeletonDemo.dart';
@@ -258,6 +259,7 @@ class APPRouter {
   static const homePage = '/MyHomePage';
   static const loginPage = '/LoginPage';
   static const loginPageOne = '/loginPageOne';
+  static const loginPageTwo = '/loginPageTwo';
 
   static const signinPage = '/SigninPage';
 
@@ -572,6 +574,9 @@ class AppPage {
       // transition: Transition.downToUp,
     ),
     GetPage(name: APPRouter.loginPageOne, page: () => LoginPageOne(),
+      // transition: Transition.downToUp,),
+    ),
+    GetPage(name: APPRouter.loginPageTwo, page: () => LoginPageTwo(),
       // transition: Transition.downToUp,),
     ),
     GetPage(name: APPRouter.forgetPasswordPage, page: () => APPForgetPwdPage(),),

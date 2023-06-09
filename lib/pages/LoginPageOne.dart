@@ -127,7 +127,6 @@ class _LoginPageOneState extends State<LoginPageOne> {
                         icon: Icon(
                           Icons.remove_red_eye,
                           size: 21,
-                          color: Color(0xff666666),
                         ),
                         onPressed: (){
                           setState(() {

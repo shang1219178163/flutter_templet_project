@@ -572,7 +572,8 @@ var vendors = [
   Tuple2(APPRouter.slidableDemoOne, "滑动菜单", ),
   Tuple2(APPRouter.soundPlayDemo, "声音播放", ),
   Tuple2(APPRouter.wPopupMenuDemo, "微信聊天长按弹出框", ),
-
+  Tuple2(APPRouter.syncfusionFlutterDatepickerDemo, "日期多选", ),
+  Tuple2(APPRouter.tableCalenderMain, "日期", ),
 
 ];
 
@@ -581,7 +582,8 @@ var others = [
   Tuple2(APPRouter.firstPage, "firstPage", ),
   Tuple2(APPRouter.fourthPage, "fourthPage", ),
   Tuple2(APPRouter.loginPage, "LoginPage", ),
-  Tuple2(APPRouter.loginPage2, "LoginPage2", ),
+  Tuple2(APPRouter.loginPageOne, "LoginPage2", ),
+  Tuple2(APPRouter.loginPageTwo, "loginPageTwo", ),
   Tuple2(APPRouter.clipDemo, "clipDemo", ),
 
   Tuple2(APPRouter.navgationBarDemo, "navgationBarDemo", ),
