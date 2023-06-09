@@ -31,6 +31,7 @@ import 'package:flutter_templet_project/pages/demo/NExpandTextDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NSkeletonDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PageViewAndBarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/StackDemoOne.dart';
+import 'package:flutter_templet_project/pages/demo/StackDemoTwo.dart';
 import 'package:flutter_templet_project/pages/demo/TextFieldColorChangeDemo.dart';
 import 'package:flutter_templet_project/pages/homeSrollDemo.dart';
 import 'package:flutter_templet_project/pages/demo/BuilderDemo.dart';
@@ -443,6 +444,8 @@ class APPRouter {
   static const decorationDemo = '/decorationDemo';
   static const stackDemo = '/stackDemo';
   static const stackDemoOne = '/stackDemoOne';
+  static const stackDemoTwo = '/stackDemoTwo';
+
   static const badgesDemo = '/badgesDemo';
   static const flutterSwiperDemo = '/flutterSwiperDemo';
   static const flutterSwiperIndicatorDemo = '/flutterSwiperIndicatorDemo';
@@ -749,6 +752,7 @@ class AppPage {
     GetPage(name: APPRouter.decorationDemo, page: () => DecorationDemo(),),
     GetPage(name: APPRouter.stackDemo, page: () => StackDemo(),),
     GetPage(name: APPRouter.stackDemoOne, page: () => StackDemoOne(),),
+    GetPage(name: APPRouter.stackDemoTwo, page: () => StackDemoTwo(),),
 
 
     GetPage(name: APPRouter.badgesDemo, page: () => BadgesDemo(),),
