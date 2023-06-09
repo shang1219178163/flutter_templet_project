@@ -27,6 +27,16 @@ const Divider kDivider = Divider(
 
 
 extension WidgetExt on Widget {
+
+  ///运算符重载
+  List<Widget> operator *(int value) {
+    var l = <Widget>[];
+    for (var i = 0; i < value; i++) {
+      l.add(this);
+    }
+    return l;
+  }
+
   /// 展示边框线
   Widget toContainer({
     Color? color,

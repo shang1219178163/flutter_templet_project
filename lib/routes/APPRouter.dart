@@ -30,6 +30,7 @@ import 'package:flutter_templet_project/pages/demo/MediaQueryDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/NExpandTextDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NSkeletonDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PageViewAndBarDemo.dart';
+import 'package:flutter_templet_project/pages/demo/StackDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/TextFieldColorChangeDemo.dart';
 import 'package:flutter_templet_project/pages/homeSrollDemo.dart';
 import 'package:flutter_templet_project/pages/demo/BuilderDemo.dart';
@@ -441,6 +442,7 @@ class APPRouter {
   static const overlayDemo = '/overlayDemo';
   static const decorationDemo = '/decorationDemo';
   static const stackDemo = '/stackDemo';
+  static const stackDemoOne = '/stackDemoOne';
   static const badgesDemo = '/badgesDemo';
   static const flutterSwiperDemo = '/flutterSwiperDemo';
   static const flutterSwiperIndicatorDemo = '/flutterSwiperIndicatorDemo';
@@ -676,6 +678,8 @@ class AppPage {
     GetPage(name: APPRouter.willPopScopeDemo, page: () => WillPopScopeDemo(),),
     GetPage(name: APPRouter.bannerDemo, page: () => BannerDemo(),),
     GetPage(name: APPRouter.indexedStackDemo, page: () => IndexedStackDemo(),),
+
+
     GetPage(name: APPRouter.rxDartProviderDemo, page: () => RxDartProviderDemo(),),
     GetPage(name: APPRouter.stateManagerDemo, page: () => StateManagerDemo(),),
     GetPage(name: APPRouter.getxStateDemo, page: () => GetxStateDemo(),),
@@ -744,6 +748,9 @@ class AppPage {
     GetPage(name: APPRouter.overlayDemo, page: () => OverlayDemo(),),
     GetPage(name: APPRouter.decorationDemo, page: () => DecorationDemo(),),
     GetPage(name: APPRouter.stackDemo, page: () => StackDemo(),),
+    GetPage(name: APPRouter.stackDemoOne, page: () => StackDemoOne(),),
+
+
     GetPage(name: APPRouter.badgesDemo, page: () => BadgesDemo(),),
     GetPage(name: APPRouter.flutterSwiperDemo, page: () => FlutterSwiperDemo(),),
     GetPage(name: APPRouter.flutterSwiperIndicatorDemo, page: () => FlutterSwiperIndicatorDemo(),),

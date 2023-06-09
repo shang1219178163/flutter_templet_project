@@ -377,6 +377,7 @@ var list = [
   Tuple2(APPRouter.streamBuilderDemo, "streamBuilderDemo", ),
 
   Tuple2(APPRouter.indexedStackDemo, "indexedStackDemo", ),
+
   Tuple2(APPRouter.responsiveColumnDemo, "responsiveColumnDemo", ),
   Tuple2(APPRouter.offstageDemo, "offstageDemo", ),
   Tuple2(APPRouter.bottomAppBarDemo, "bottomAppBarDemo", ),
@@ -411,6 +412,7 @@ var list = [
   Tuple2(APPRouter.listViewStyleDemo, "listViewStyleDemo", ),
   Tuple2(APPRouter.builderDemo, "各种回调 builder", ),
   Tuple2(APPRouter.stackDemo, "StackDemo", ),
+  Tuple2(APPRouter.stackDemoOne, "stackDemoOne", ),
   Tuple2(APPRouter.wrapDemo, "流水自动换行", ),
   Tuple2(APPRouter.inheritedWidgetDemo, "inheritedWidgetDemo 数据共享", ),
   Tuple2(APPRouter.notificationListenerDemo, "notificationListenerDemo 数据共享", ),
