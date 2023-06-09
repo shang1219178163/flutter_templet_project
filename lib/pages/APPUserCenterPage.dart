@@ -114,7 +114,7 @@ class _APPUserCenterPageState extends State<APPUserCenterPage>{
                 onPressed: (){
                   // APPRouter.push(context, 'login');
                   // Get.toNamed(APPRouter.loginPage, arguments: "login");
-                  Get.toNamed(APPRouter.loginPage2, arguments: "login");
+                  Get.toNamed(APPRouter.loginPageOne, arguments: "login");
                 },
                 child: Text('登录', style: TextStyle(fontSize: 20.0, color: Colors.white)),
               ),

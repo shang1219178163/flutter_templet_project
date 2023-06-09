@@ -1,5 +1,5 @@
 //
-//  APPLoginPage.dart
+//  LoginPage.dart
 //  flutter_templet_project
 //
 //  Created by shang on 6/3/21 9:04 AM.
@@ -11,26 +11,25 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class APPLoginPage extends StatefulWidget {
+class LoginPage extends StatefulWidget {
 
   final String? title;
 
-  const APPLoginPage({ Key? key, this.title}) : super(key: key);
+  const LoginPage({ Key? key, this.title}) : super(key: key);
 
 
   @override
-  _APPLoginPageState createState() => _APPLoginPageState();
+  _LoginPageState createState() => _LoginPageState();
 }
 
-class _APPLoginPageState extends State<APPLoginPage> {
-  FocusNode focusNode1 = FocusNode();
-  FocusNode focusNode2 = FocusNode();
-  late FocusScopeNode focusScopeNode;
+class _LoginPageState extends State<LoginPage> {
+  final focusNode1 = FocusNode();
+  final focusNode2 = FocusNode();
+  late final focusScopeNode = FocusScope.of(context);
 
   @override
   void initState() {
     // TODO: implement initState
-    focusScopeNode = FocusScope.of(context);
     super.initState();
   }
 

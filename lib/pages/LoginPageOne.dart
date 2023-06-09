@@ -3,21 +3,24 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
+import 'package:flutter_templet_project/extension/widget_ext.dart';
+import 'package:flutter_templet_project/network/RequestConfig.dart';
 import 'package:flutter_templet_project/routes/APPRouter.dart';
 import 'package:get/get.dart';
+import 'package:tuple/tuple.dart';
 
 
-class APPLoginPage2 extends StatefulWidget {
+class LoginPageOne extends StatefulWidget {
 
-  const APPLoginPage2({ Key? key, this.title}) : super(key: key);
+  const LoginPageOne({ Key? key, this.title}) : super(key: key);
 
   final String? title;
 
   @override
-  _APPLoginPage2State createState() => _APPLoginPage2State();
+  _LoginPageOneState createState() => _LoginPageOneState();
 }
 
-class _APPLoginPage2State extends State<APPLoginPage2> {
+class _LoginPageOneState extends State<LoginPageOne> {
 
   // 控制器
   final _unameController =  TextEditingController();
@@ -166,6 +169,8 @@ class _APPLoginPage2State extends State<APPLoginPage2> {
             },
             child: Text('忘记密码?', style: TextStyle(color: Colors.black54,fontSize: 15.0)),
           ),
+
+          buildOriginSheet(),
         ],
       ),
     );
@@ -217,5 +222,82 @@ class _APPLoginPage2State extends State<APPLoginPage2> {
       //     }
       // )
     });
+  }
+
+
+  /// 域名选择
+  buildOriginSheet() {
+    // if (kReleaseMode) {
+    //   return const SizedBox();
+    // }
+
+    if (RequestConfig.current == APPEnvironment.prod) {
+      return const SizedBox();
+    }
+
+    late final list = APPEnvironment.values
+        .map((e) => Tuple3(e, RequestConfig.originMap[e]!, RequestConfig.originMap[e]!))
+        .toList();
+
+    final currentInfo = Column(
+      children: [
+        Text(
+          "当前环境: ${RequestConfig.current}",
+          style: const TextStyle(color: Colors.blueAccent),
+        ),
+        Text(
+          "当前域名: ${RequestConfig.baseUrl}",
+          style: const TextStyle(color: Colors.blueAccent),
+        ),
+      ],
+    );
+    return TextButton(
+      onPressed: () {
+        // debugPrint("aa");
+        showAlertSheet(
+          message: currentInfo,
+          actions: list.map((e) {
+            final array = [
+              e.item2.toString(),
+              "IM: ${e.item3.toString()}",
+            ];
+
+            return TextButton(
+              onPressed: () {
+                debugPrint(e.toString());
+                Navigator.of(context).pop();
+                RequestConfig.current = e.item1;
+                setState(() {});
+              },
+              child: ListTile(
+                dense: true,
+                title: Text(e.item1.toString()),
+                subtitle: Text(array.join("\n")),
+              ),
+            );
+          }).toList(),
+        );
+      },
+      child: currentInfo,
+    );
+  }
+
+  void showAlertSheet({
+    Widget title = const Text("请选择"),
+    Widget? message,
+    required List<Widget> actions,
+  }) {
+    CupertinoActionSheet(
+      title: title,
+      message: message,
+      actions: actions,
+      cancelButton: CupertinoActionSheetAction(
+        isDestructiveAction: true,
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        child: const Text('取消'),
+      ),
+    ).toShowCupertinoModalPopup(context: context);
   }
 }

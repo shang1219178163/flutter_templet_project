@@ -147,6 +147,7 @@ import 'package:flutter_templet_project/vendor/flutter_swiper_indicator_demo.dar
 import 'package:flutter_templet_project/vendor/qr/qr_code_scanner_demo.dart';
 import 'package:flutter_templet_project/vendor/qr/qr_flutter_demo.dart';
 import 'package:flutter_templet_project/vendor/soundAbount/SoundPlayDemo.dart';
+import 'package:flutter_templet_project/vendor/syncfusion_flutter_datepicker_demo.dart';
 import 'package:flutter_templet_project/vendor/timeline/timeline_demo.dart';
 import 'package:flutter_templet_project/vendor/timelines_demo/timelines_demo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedGroupDemo.dart';
@@ -228,8 +229,8 @@ import 'package:flutter_templet_project/pages/demo/TableDemo.dart';
 
 import 'package:flutter_templet_project/pages/AppWebViewDemo.dart';
 import 'package:flutter_templet_project/pages/APPForgetPwdPage.dart';
-import 'package:flutter_templet_project/pages/APPLoginPage.dart';
-import 'package:flutter_templet_project/pages/APPLoginPage2.dart';
+import 'package:flutter_templet_project/pages/LoginPage.dart';
+import 'package:flutter_templet_project/pages/LoginPageOne.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/SliverFamilyDemo.dart';
 
 import 'package:flutter_templet_project/pages/demo/FutureBuilderDemo.dart';
@@ -244,6 +245,8 @@ import 'package:flutter_templet_project/provider/state_manager_demo.dart';
 
 import 'package:flutter_templet_project/vendor/popover_demo.dart';
 import 'package:flutter_templet_project/vendor/wechat_assets_picker_demo.dart';
+import 'package:flutter_templet_project/vendor/table_calendar/table_calender_main.dart';
+
 
 import 'package:get/get.dart';
 import 'package:flutter_templet_project/main.dart';
@@ -254,7 +257,7 @@ class APPRouter {
 
   static const homePage = '/MyHomePage';
   static const loginPage = '/LoginPage';
-  static const loginPage2 = '/LoginPage2';
+  static const loginPageOne = '/loginPageOne';
 
   static const signinPage = '/SigninPage';
 
@@ -522,8 +525,8 @@ class APPRouter {
   static const soundPlayDemo = '/soundPlayDemo';
   static const wPopupMenuDemo = '/wPopupMenuDemo';
   static const expandTextDemo = '/expandTextDemo';
-
-
+  static const syncfusionFlutterDatepickerDemo = '/syncfusionFlutterDatepickerDemo';
+  static const tableCalenderMain = '/tableCalenderMain';
 
 
 
@@ -565,10 +568,10 @@ class AppPage {
     GetPage(name: APPRouter.tabBarPageViewDemo, page: () => TabBarPageViewDemo(),),
     GetPage(name: APPRouter.testPage, page: () => TestPage(),),
     GetPage(name: APPRouter.testPageOne, page: () => TestPageOne(),),
-    GetPage(name: APPRouter.loginPage, page: () => APPLoginPage(),
+    GetPage(name: APPRouter.loginPage, page: () => LoginPage(),
       // transition: Transition.downToUp,
     ),
-    GetPage(name: APPRouter.loginPage2, page: () => APPLoginPage2(),
+    GetPage(name: APPRouter.loginPageOne, page: () => LoginPageOne(),
       // transition: Transition.downToUp,),
     ),
     GetPage(name: APPRouter.forgetPasswordPage, page: () => APPForgetPwdPage(),),
@@ -822,6 +825,8 @@ class AppPage {
     GetPage(name: APPRouter.soundPlayDemo, page: () => SoundPlayDemo(),),
     GetPage(name: APPRouter.wPopupMenuDemo, page: () => WPopupMenuDemo(),),
     GetPage(name: APPRouter.expandTextDemo, page: () => NExpandTextDemo(),),
+    GetPage(name: APPRouter.syncfusionFlutterDatepickerDemo, page: () => SyncfusionFlutterDatepickerDemo(),),
+    GetPage(name: APPRouter.tableCalenderMain, page: () => TableCalenderMain(),),
 
 
   ];
