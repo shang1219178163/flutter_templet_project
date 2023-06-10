@@ -15,7 +15,7 @@ const List<TestModel> kAliPayList = [
   ),
   TestModel(
     title: '芝麻信用',
-    imageUrl: 'http://dl.django.t.taobao.com/rest/1.0/image?fileIds=3bFvYZLcSNy1TiMriy5WhAAAACMAAQED&zoom=2048w_1l',
+    imageUrl: 'http://alipay.dl.django.t.taobao.com/rest/1.0/image?fileIds=uYFc1rftQnOzQ6UIysboFQAAACMAAQQD&zoom=original',
     content: '本月你的芝麻分评估已完成',
     time: '07:17',
   ),
