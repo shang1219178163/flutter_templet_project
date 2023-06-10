@@ -4,6 +4,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/extension/date_time_ext.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:tuple/tuple.dart';
 
@@ -67,6 +68,7 @@ class _TableBasicsExampleState extends State<TableBasicsExample> {
       child: Column(
         children: [
           TableCalendar(
+            // locale: "zh-CN",
             headerStyle: HeaderStyle(
               titleCentered: true,
               formatButtonVisible: false,
@@ -77,25 +79,23 @@ class _TableBasicsExampleState extends State<TableBasicsExample> {
               rightChevronPadding: EdgeInsets.all(0),
             ),
             calendarBuilders: CalendarBuilders(
-              // defaultBuilder: (context, day, focusedDay){
-              //   // debugPrint("todayBuilder: $day, $focusedDay");
-              //   return Container(
-              //     margin: EdgeInsets.all(6),
-              //     // width: 30,
-              //     // height: 30,
-              //     alignment: Alignment.center,
-              //     decoration: BoxDecoration(
-              //       color: [Colors.green, Colors.blue, Colors.orange][Random().nextInt(3)],
-              //       shape: BoxShape.circle,
-              //     ),
-              //     child: Text("${day.day}",
-              //       style: TextStyle(
-              //         color: Colors.white,
-              //         fontSize: 16,
-              //       ),
-              //     ),
-              //   );
-              // },
+              defaultBuilder: (context, day, focusedDay){
+                // debugPrint("todayBuilder: $day, $focusedDay");
+                return Container(
+                  margin: EdgeInsets.all(6),
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: [Colors.green, Colors.blue, Colors.orange][Random().nextInt(3)],
+                    shape: BoxShape.circle,
+                  ),
+                  child: Text("${day.day}\n${day.weekday}",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                    ),
+                  ),
+                );
+              },
               todayBuilder: (context, day, focusedDay){
                 // debugPrint("todayBuilder: $day, $focusedDay");
                 return Container(
@@ -153,8 +153,11 @@ class _TableBasicsExampleState extends State<TableBasicsExample> {
               debugPrint("onPageChanged: $focusedDay");
               // No need to call `setState()` here
               _focusedDay = focusedDay;
-            },
 
+              final first = _focusedDay.calenderMonthPageFisrtDayStr(format: DATE_FORMAT_DAY);
+              final last = _focusedDay.calenderMonthPageLastDayStr(format: DATE_FORMAT_DAY);
+              debugPrint("onPageChanged: calenderMonthPage $first, $last");
+            },
           ),
           Container(
             height: 50,

@@ -34,30 +34,6 @@ class _TableCalenderMainState extends State<TableCalenderMain> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              String.fromCharCode(Icons.space_dashboard_outlined.codePoint),
-              style: TextStyle(
-                inherit: false,
-                color: Colors.red,
-                fontSize: 50,
-                fontWeight: FontWeight.w100,
-                fontFamily: Icons.space_dashboard_outlined.fontFamily,
-              ),
-            ),
-            Text(
-              String.fromCharCode(Icons.space_dashboard_outlined.codePoint),
-              style: TextStyle(
-                inherit: false,
-                color: Colors.red,
-                fontSize: 50,
-                fontWeight: FontWeight.bold,
-                fontFamily: Icons.space_dashboard_outlined.fontFamily,
-              ),
-            ),
-            Icon(Icons.arrow_forward_ios_sharp, size: 50, color: Colors.red, weight: 100, grade: -25,),
-            Icon(Icons.arrow_forward_ios_sharp, size: 50, color: Colors.red, weight: 1700, grade: 200,),
-            Icon(Icons.home, size: 50, color: Colors.red, weight: 100, grade: -25,),
-            Icon(Icons.home, size: 50, color: Colors.red, weight: 1700, grade: 200,),
             const SizedBox(height: 20.0),
             ElevatedButton(
               child: Text('Basics'),
