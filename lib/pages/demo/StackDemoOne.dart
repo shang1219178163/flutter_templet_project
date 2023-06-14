@@ -1,6 +1,9 @@
 
 
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/tab_bar_indicator_fixed.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
@@ -42,6 +45,7 @@ class _StackDemoOneState extends State<StackDemoOne> with SingleTickerProviderSt
       backgroundColor: bgColor,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
+        systemOverlayStyle: SystemUiOverlayStyle.light,
         backgroundColor: Colors.transparent,
         elevation: 0,
         titleTextStyle: TextStyle(
@@ -60,10 +64,11 @@ class _StackDemoOneState extends State<StackDemoOne> with SingleTickerProviderSt
   }
 
   buildBody() {
-    final paddingTop = MediaQuery.of(context).padding.top;
+    final paddingTop = MediaQuery.of(context).viewPadding.top;
     final cardSize = Size(343.w, (161 + 24 + 108).w);
-    return Column(
 
+    final height = max(16.w, MediaQuery.of(context).viewPadding.bottom);
+    return Column(
       children: [
         Expanded(
           child: Stack(
@@ -113,7 +118,7 @@ class _StackDemoOneState extends State<StackDemoOne> with SingleTickerProviderSt
         ),
         Container(
           color: ColorExt.random,
-          height: 70,
+          height: height,
         ),
       ],
     );

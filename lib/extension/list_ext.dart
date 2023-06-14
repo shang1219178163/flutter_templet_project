@@ -13,11 +13,13 @@ import 'package:flutter_templet_project/extension/string_ext.dart';
 
 extension ListExt<T,E> on List<E> {
 
-  /// 字典转为 json 字符串
-  String toJson({Object? Function(dynamic object)? toEncodable}) {
-    // final jsonStr = jsonEncode(this);
-    final jsonStr = json.encode(this, toEncodable: toEncodable);
-    return jsonStr;
+
+  static bool isEmpty(List? val) {
+    return val == null || val.isEmpty;
+  }
+
+  static bool isNotEmpty(List? val) {
+    return val != null && val.isNotEmpty;
   }
 
   ///运算符重载
@@ -47,6 +49,16 @@ extension ListExt<T,E> on List<E> {
     }
     return null;
   }
+
+  /// 所有元素都满足需求
+  bool every(bool Function(E) test) {
+    for (final element in this) {
+      if (!test(element)) {
+        return false;
+      }
+    }
+    return true;
+  }
   
   /// 数组降维() expand
   // List<T> flatMap(List<T> action(E e)) {
@@ -56,14 +68,6 @@ extension ListExt<T,E> on List<E> {
     // });
     // return result;
   // }
-
-  static bool isEmpty(List? val) {
-    return val == null || val.isEmpty;
-  }
-
-  static bool isNotEmpty(List? val) {
-    return val != null && val.isNotEmpty;
-  }
 
   /// 同 sorted
   List<E> sorted([int Function(E a, E b)? compare]) {
@@ -91,14 +95,14 @@ extension ListExt<T,E> on List<E> {
     });
   }
 
-  /// 转为 Map<String, dynamic>
-  Map<String, E> toMap() {
-    var map = <String, E>{};
-    for (final item in this) {
-      map["$item"] = item;
-    }
-    return map;
-  }
+  // /// 转为 Map<String, dynamic>
+  // Map<String, E> toMap() {
+  //   var map = <String, E>{};
+  //   for (final item in this) {
+  //     map["$item"] = item;
+  //   }
+  //   return map;
+  // }
 }
 
 extension ListExtObject<E extends Object> on List<E> {

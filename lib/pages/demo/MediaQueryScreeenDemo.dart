@@ -63,72 +63,77 @@ class _MediaQueryScreeenDemoState extends State<MediaQueryScreeenDemo> {
 
   buildBodyNew() {
     return Scaffold(
-        body: Container(
-          // color: ColorExt.random,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Container(
-                color: ColorExt.random,
-                height: statusBarHeight,
-                padding: EdgeInsets.only(top: 20, left: 20),
-                child: Text("statusBar $statusBarHeight"),
+      body: Container(
+        // color: ColorExt.random,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Container(
+              color: ColorExt.random,
+              height: mq.viewPadding.top,
+              padding: EdgeInsets.only(top: 20, left: 20),
+              child: Text("statusBar ${mq.viewPadding.top}"),
+            ),
+            Container(
+              color: ColorExt.random,
+              height: kToolbarHeight,
+              padding: EdgeInsets.only(left: 20),
+              child: TextButton(
+                onPressed: () {
+                  handleScreenHeight();
+                },
+                child: Text("kToolbarHeight $kToolbarHeight"),
               ),
-              Container(
-                color: ColorExt.random,
-                height: kToolbarHeight,
-                padding: EdgeInsets.only(top: 20, left: 20),
-                child: TextButton(
-                  onPressed: () {
-                    handleScreenHeight();
-                  },
-                  child: Text("kToolbarHeight $kToolbarHeight"),
+            ),
+            Container(
+              key: _globalKey,
+              color: ColorExt.random,
+              padding: EdgeInsets.only(left: 20),
+              // alignment: Alignment.topLeft,
+              // child: Text((_globalKey.currentState?.context.size.toString() ?? "-")),
+              //   child: Text((_globalKey.currentContext?.renderBox?.size.height.toString() ?? "-")),
+              child: InkWell(
+                onTap: (){
+                  final a = _globalKey.currentContext?.origin().toString() ?? "-";
+
+                  debugPrint("A: $a");
+                },
+                child: Container(
+                  color: Colors.red,
+                  child: Text("_globalKey"),
                 ),
               ),
-              // Container(
-              //   color: ColorExt.random,
-              //   height: safeHeight - 34,
-              //   padding: EdgeInsets.only(top: 20, left: 20),
-              //   child: Text("safeContentHeight: $safeHeight"),
-              // ),
-
-              Container(
-                key: _globalKey,
-                color: ColorExt.random,
-                // padding: EdgeInsets.only(top: 20, left: 20),
-                // alignment: Alignment.topLeft,
-                // child: Text((_globalKey.currentState?.context.size.toString() ?? "-")),
-                //   child: Text((_globalKey.currentContext?.renderBox?.size.height.toString() ?? "-")),
-                child: InkWell(
-                  onTap: (){
-                    final a = _globalKey.currentContext?.origin().toString() ?? "-";
-
-                    debugPrint("A: $a");
-                  },
-                  child: Container(
-                    color: Colors.red,
-                    child: Text("_globalKey"),
-                  ),
-                ),
-              ),
-              // Container(
-              //   color: ColorExt.random,
-              //   padding: EdgeInsets.only(top: 20, left: 20),
-              //   child: Text("viewPadding: ${mq.viewPadding.toString()}"),
-              // ),
-              Container(
-                color: ColorExt.random,
-                padding: EdgeInsets.only(top: 20, left: 20),
-                child: Text("padding: ${mq.padding.toString()}"),
-              ),
-              Container(
-                color: ColorExt.random,
-                padding: EdgeInsets.only(top: 20, left: 20),
-                child: Text("viewInsets: ${mq.viewInsets.toString()}"),
-              ),
-            ],
-          ),
-        )
+            ),
+            Container(
+              color: ColorExt.random,
+              padding: EdgeInsets.only(left: 20),
+              child: Text("size: ${mq.size.toString()}"),
+            ),
+            Container(
+              color: ColorExt.random,
+              padding: EdgeInsets.only(left: 20),
+              child: Text("viewInsets: ${mq.viewInsets.toString()}"),
+            ),
+            Container(
+              color: ColorExt.random,
+              padding: EdgeInsets.only(left: 20),
+              child: Text("viewPadding: ${mq.viewPadding.toString()}"),
+            ),
+            Container(
+              color: ColorExt.random,
+              padding: EdgeInsets.only(left: 20),
+              child: Text("padding: ${mq.padding.toString()}"),
+            ),
+            Spacer(),
+            Container(
+              color: ColorExt.random,
+              padding: EdgeInsets.only(left: 20),
+              height: mq.viewPadding.bottom,
+              child: Text("padding: ${mq.viewPadding.toString()}"),
+            ),
+          ],
+        ),
+      )
     );
   }
 

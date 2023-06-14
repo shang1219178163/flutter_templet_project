@@ -130,15 +130,15 @@ class _MediaQueryDemoState extends State<MediaQueryDemo> with WidgetsBindingObse
       children: [
         Divider(),
         Text("""
-无键盘: viewInsets: EdgeInsets.zero
-无键盘: viewPadding: EdgeInsets(0.0, 47.0, 0.0, 34.0)
-无键盘: padding: EdgeInsets(0.0, 47.0, 0.0, 34.0)
+无键盘: viewInsets: ${mediaQuery.viewInsets}
+无键盘: viewPadding: ${mediaQuery.viewPadding}
+无键盘: padding: ${mediaQuery.padding}
           """),
         Divider(),
         Text("""
-显示键盘: viewInsets: EdgeInsets(0.0, 0.0, 0.0, 336.0)
-显示键盘: viewPadding: EdgeInsets(0.0, 47.0, 0.0, 34.0)
-显示键盘: padding: EdgeInsets(0.0, 47.0, 0.0, 0.0)
+显示键盘: viewInsets: EdgeInsets(0.0, 0.0, 0.0, ${mediaQuery.viewInsets.bottom})
+显示键盘: viewPadding: EdgeInsets(0.0, ${mediaQuery.viewPadding.top}, 0.0, 34.0)
+显示键盘: padding: EdgeInsets(0.0, ${mediaQuery.padding.top}, 0.0, 0.0)
           """),
         Divider(),
       ],

@@ -24,26 +24,6 @@ const String DATE_FORMAT_H_M = 'HH:mm';
 
 
 extension DateTimeExt on DateTime {
-  /// 打印代码执行时间
-  static double logDifference(DateTime before) {
-    final now = DateTime.now();
-    final gap = now.difference(before).inMilliseconds;
-    final seconds = gap / 1000;
-    return seconds;
-  }
-
-  bool isSameDay(DateTime? date){
-    if (date == null) {
-      return false;
-    }
-    final result = year == date.year
-        && month == date.month
-        && day == date.day;
-    return result;
-  }
-
-  String toString19() => toString().split(".").first;
-
 
   /// 时间戳 转 DateTime
   static DateTime dateFromTimestamp({required int timeSamp, bool isMilliseconds = true}) {
@@ -113,6 +93,33 @@ extension DateTimeExt on DateTime {
       result = result~/1000;
     }
     return result;
+  }
+
+  /// 打印代码执行时间
+  static double logDifference(DateTime before) {
+    final now = DateTime.now();
+    final gap = now.difference(before).inMilliseconds;
+    final seconds = gap / 1000;
+    return seconds;
+  }
+
+  bool isSameDay(DateTime? date){
+    if (date == null) {
+      return false;
+    }
+    final result = year == date.year
+        && month == date.month
+        && day == date.day;
+    return result;
+  }
+
+  String toString19() => toString().split(".").first;
+
+
+  DateTime offsetDay({required int count}) {
+    final timstamp = DateTime.now().millisecondsSinceEpoch + count * 24 * 60 * 60 * 1000;
+    var dateTime = DateTime.fromMillisecondsSinceEpoch(timstamp);
+    return dateTime;
   }
 
   /// 当前月份第一天

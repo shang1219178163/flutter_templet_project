@@ -57,17 +57,26 @@ class _ScrollControllerDemoState extends State<ScrollControllerDemo> {
       children: <Widget>[
         ListView(
           controller: _trackingScrollController,
-          children: List<Widget>.generate(100, (int i) => Text('page 0 item $i')).toList(),
+          children: buildChildren(page: 0, count: 20),
         ),
         ListView(
           controller: _trackingScrollController,
-          children: List<Widget>.generate(200, (int i) => Text('page 1 item $i')).toList(),
+          children: buildChildren(page: 1, count: 20),
         ),
         ListView(
           controller: _trackingScrollController,
-          children: List<Widget>.generate(300, (int i) => Text('page 2 item $i')).toList(),
+          children: buildChildren(page: 2, count: 20),
         ),
       ],
     );
+  }
+
+  List<Widget> buildChildren({required int page, required int count,}) {
+    return List<Widget>.generate(count, (int i) {
+      return Container(
+        padding: EdgeInsets.symmetric(vertical: 12),
+        child: Text('page $page item $i'),
+      );
+    }).toList();
   }
 }

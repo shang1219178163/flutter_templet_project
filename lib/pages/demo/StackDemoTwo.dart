@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/tab_bar_indicator_fixed.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
@@ -47,12 +48,13 @@ class _StackDemoTwoState extends State<StackDemoTwo> with SingleTickerProviderSt
       backgroundColor: bgColor,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
+        systemOverlayStyle: SystemUiOverlayStyle.light,
+        title: Text(widget.title ?? "$widget"),
         backgroundColor: Colors.transparent,
         elevation: 0,
         titleTextStyle: TextStyle(
           color: Colors.white,
         ),
-        title: Text(widget.title ?? "$widget"),
         actions: ['done',].map((e) => TextButton(
           child: Text(e,
             style: TextStyle(color: Colors.white),
@@ -120,16 +122,17 @@ class _StackDemoTwoState extends State<StackDemoTwo> with SingleTickerProviderSt
                 top: (paddingTop + kToolbarHeight + 20).h,
                 bottom: 1.w,
                 child: SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        buildListBox(),
-                        Expanded(
-                          child: buildFooter(),
-                        ),
-                      ],
-                    )),
+                  width: MediaQuery.of(context).size.width,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      buildListBox(),
+                      Expanded(
+                        child: buildFooter(),
+                      ),
+                    ],
+                  )
+                ),
               ),
             ],
           ),
@@ -150,16 +153,17 @@ class _StackDemoTwoState extends State<StackDemoTwo> with SingleTickerProviderSt
         borderRadius: BorderRadius.all(Radius.circular(8.w)),
       ),
       child: Column(
-          children: [
-            Container(
-              height: 76.w,
-              color: ColorExt.random,
-            ),
-            ...Container(
-              height: 46.w,
-              color: ColorExt.random,
-            )*3,
-          ]),
+        children: [
+          Container(
+            height: 76.w,
+            color: ColorExt.random,
+          ),
+          ...Container(
+            height: 46.w,
+            color: ColorExt.random,
+          )*3,
+        ]
+      ),
     );
   }
 

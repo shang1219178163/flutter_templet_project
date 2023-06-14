@@ -16,6 +16,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/APPThemeSettings.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/button_ext.dart';
+import 'package:flutter_templet_project/pages/demo/CalendarDatePickerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TabBarDemo.dart';
 import 'package:flutter_templet_project/pages/tabBar_tabBarView_demo.dart';
 import 'package:flutter_templet_project/provider/provider_demo.dart';
@@ -27,6 +28,8 @@ import 'package:flutter_templet_project/routes/RouteService.dart';
 import 'package:flutter_templet_project/routes/APPRouter.dart';
 import 'package:flutter_templet_project/service/cache_service.dart';
 import 'package:flutter_templet_project/uti/app_uti.dart';
+import 'package:flutter_templet_project/uti/localizations/AppCupertinoLocalizations.dart';
+import 'package:flutter_templet_project/uti/localizations/ZhCupertinoLocalizations.dart';
 
 import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -42,6 +45,7 @@ import 'package:flutter_templet_project/pages/SecondPage.dart';
 import 'package:flutter_templet_project/pages/ThirdPage.dart';
 
 import 'package:flutter_templet_project/provider/notifier_demo.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 
 // void main() {
@@ -138,6 +142,16 @@ class MyApp extends StatelessWidget {
       key: AppUti.navigatorKey,
       title: 'Flutter Templet',
       debugShowCheckedModeBanner: false,
+      locale: const Locale('zh'),
+      localizationsDelegates: [
+        // AppCupertinoLocalizations.delegate,
+        ZhCupertinoLocalizations.delegate,
+
+        GlobalCupertinoLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: const [Locale('zh', 'CH')],
       theme: APPThemeSettings.instance.themeData,
       // darkTheme: APPThemeSettings.instance.darkThemeData,
       // home: MyHomePage(title: 'Flutter Demo Home Page'),

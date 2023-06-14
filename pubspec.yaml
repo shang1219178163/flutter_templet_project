@@ -10,15 +10,15 @@ analyzer:
 #    - non-nullable
 
 environment:
-  sdk: ">=2.12.0 <=3.10.0"
+  sdk: ">=2.17.0 <=3.10.0"
   flutter: ">=2.2.3"
 
 dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.3
-#  flutter_localizations:
-#    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
 
 #  splashscreen: ^1.3.5
 #  connectivity_plus: ^3.0.0
@@ -159,6 +159,7 @@ dependencies:
 dependency_overrides:
 #  scrollable_positioned_list: ^0.3.2
   scrollable_positioned_list: ^0.3.8
+  intl: 0.17.0
 
 # User:
 #   path: ../User

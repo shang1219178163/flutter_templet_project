@@ -11,6 +11,7 @@ import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/mixin/BottomBouncingScrollPhysics.dart';
 import 'package:flutter_templet_project/mixin/MyScrollPhysics.dart';
+import 'package:flutter_templet_project/routes/RouteService.dart';
 
 
 class ThirdPage extends StatefulWidget {
@@ -22,7 +23,7 @@ class ThirdPage extends StatefulWidget {
   _ThirdPageState createState() => _ThirdPageState();
 }
 
-class _ThirdPageState extends State<ThirdPage> {
+class _ThirdPageState extends State<ThirdPage> with RouteAware {
   late final _easyRefreshController = EasyRefreshController(
     controlFinishRefresh: true,
     controlFinishLoad: true,
@@ -53,6 +54,43 @@ class _ThirdPageState extends State<ThirdPage> {
     _scrollController.addListener(() {
       offsetY.value = _scrollController.position.pixels;
     });
+  }
+
+  @override
+  void dispose() {
+    RouteService.routeObserver.unsubscribe(this); //取消订阅
+    super.dispose();
+  }
+
+  @override
+  void didChangeDependencies() {
+    RouteService.routeObserver
+        .subscribe(this, ModalRoute.of(context)!); //订阅
+    super.didChangeDependencies();
+  }
+
+  @override
+  void didPush() {
+    debugPrint("------> $widget didPush");
+    super.didPush();
+  }
+
+  @override
+  void didPop() {
+    debugPrint("------> $widget didPop");
+    super.didPop();
+  }
+
+  @override
+  void didPushNext() {
+    debugPrint("------> $widget didPushNext");
+    super.didPushNext();
+  }
+
+  @override
+  void didPopNext() {
+    debugPrint("------> $widget didPopNext");
+    super.didPopNext();
   }
 
   @override

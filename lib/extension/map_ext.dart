@@ -11,13 +11,6 @@ import 'dart:convert';
 
 extension MapExt on Map<String, dynamic>{
 
-  /// 字典转为 json 字符串
-  String toJson({Object? Function(dynamic object)? toEncodable}) {
-    // final jsonStr = jsonEncode(this);
-    final jsonStr = json.encode(this, toEncodable: toEncodable);
-    return jsonStr;
-  }
-
   static bool isEmpty(Map? val) {
     return val == null || val.isEmpty;
   }

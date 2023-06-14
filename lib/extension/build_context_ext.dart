@@ -93,14 +93,13 @@ extension BuildContextExt on BuildContext {
 
   /// 安全区域距离顶部高度(电池栏高度:有刘海的屏幕:47 没有刘海的屏幕为20)
   double get safeAreaTop => mediaQuery.viewPadding.top;
+  /// 安全区域底部高度(有刘海的屏幕:34 没有刘海的屏幕0)
+  double get safeAreaBottom => mediaQuery.viewPadding.bottom;
 
   /// 状态栏高度
   double get statusBarHeight => mediaQuery.padding.top;
   /// appbar 高度
   double get appBarHeight => kToolbarHeight;
-
-  /// 安全区域底部高度(有刘海的屏幕:34 没有刘海的屏幕0)
-  double get safeAreaBottom => mediaQuery.viewPadding.bottom;
 
   /// 弹出键盘为0,不弹为 34(有 BottomNavigationBar为 0)
   double get paddingBottom => mediaQuery.padding.bottom;

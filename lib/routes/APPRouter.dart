@@ -27,6 +27,7 @@ import 'package:flutter_templet_project/pages/demo/DropBoxMutiRowChoicDemo.dart'
 import 'package:flutter_templet_project/pages/demo/IMChatPage.dart';
 import 'package:flutter_templet_project/pages/LoginPageTwo.dart';
 import 'package:flutter_templet_project/pages/demo/MediaQueryDemoOne.dart';
+import 'package:flutter_templet_project/pages/demo/MediaQueryScreeenDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NExpandTextDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NSkeletonDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PageViewAndBarDemo.dart';
@@ -259,6 +260,9 @@ class APPRouter {
   static const notFound = '/APPNotFoundPage';
 
   static const homePage = '/MyHomePage';
+  static const mediaQueryScreeenDemo = '/mediaQueryScreeenDemo';
+
+
   static const loginPage = '/LoginPage';
   static const loginPageOne = '/loginPageOne';
   static const loginPageTwo = '/loginPageTwo';
@@ -573,6 +577,10 @@ class AppPage {
     GetPage(name: APPRouter.homePage, page: () => MyHomePage(),),
     GetPage(name: APPRouter.tabBarTabBarViewDemo, page: () => TabBarTabBarViewDemo(),),
     GetPage(name: APPRouter.tabBarPageViewDemo, page: () => TabBarPageViewDemo(),),
+    GetPage(name: APPRouter.testPage, page: () => TestPage(),),
+    GetPage(name: APPRouter.testPage, page: () => TestPage(),),
+    GetPage(name: APPRouter.mediaQueryScreeenDemo, page: () => MediaQueryScreeenDemo(),),
+
     GetPage(name: APPRouter.testPage, page: () => TestPage(),),
     GetPage(name: APPRouter.testPageOne, page: () => TestPageOne(),),
     GetPage(name: APPRouter.loginPage, page: () => LoginPage(),

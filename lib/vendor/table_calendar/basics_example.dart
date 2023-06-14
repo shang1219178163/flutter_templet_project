@@ -68,7 +68,8 @@ class _TableBasicsExampleState extends State<TableBasicsExample> {
       child: Column(
         children: [
           TableCalendar(
-            // locale: "zh-CN",
+            locale: "zh-CN",
+            availableGestures: AvailableGestures.horizontalSwipe,
             headerStyle: HeaderStyle(
               titleCentered: true,
               formatButtonVisible: false,
@@ -155,7 +156,7 @@ class _TableBasicsExampleState extends State<TableBasicsExample> {
               _focusedDay = focusedDay;
 
               final first = _focusedDay.calenderMonthPageFisrtDayStr(format: DATE_FORMAT_DAY);
-              final last = _focusedDay.calenderMonthPageLastDayStr(format: DATE_FORMAT_DAY);
+              final last = _focusedDay.calenderMonthPageLastDayStr(format: DATE_FORMAT_DAY_END);
               debugPrint("onPageChanged: calenderMonthPage $first, $last");
             },
           ),

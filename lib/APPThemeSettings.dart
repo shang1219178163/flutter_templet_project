@@ -44,6 +44,13 @@ class APPThemeSettings {
       style: TextButton.styleFrom(
         splashFactory: NoSplash.splashFactory,
         primary: Colors.blue,
+      ).merge(
+        ButtonStyle(elevation: MaterialStateProperty.resolveWith<double>((states) {
+          if (states.contains(MaterialState.pressed)) {
+            return 0; // 点击时阴影隐藏
+          }
+          return 0; // 正常时阴影隐藏
+        })),
       ),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
@@ -51,6 +58,13 @@ class APPThemeSettings {
         splashFactory: NoSplash.splashFactory,
         // onPrimary: Colors.yellow,
         primary: Colors.blue,
+      ).merge(
+        ButtonStyle(elevation: MaterialStateProperty.resolveWith<double>((states) {
+          if (states.contains(MaterialState.pressed)) {
+            return 0; // 点击时阴影隐藏
+          }
+          return 0; // 正常时阴影隐藏
+        })),
       ),
     ),
     outlinedButtonTheme: OutlinedButtonThemeData(
@@ -58,6 +72,13 @@ class APPThemeSettings {
         splashFactory: NoSplash.splashFactory,
         primary: Colors.blue,
         // backgroundColor: Colors.green,
+      ).merge(
+        ButtonStyle(elevation: MaterialStateProperty.resolveWith<double>((states) {
+          if (states.contains(MaterialState.pressed)) {
+            return 0; // 点击时阴影隐藏
+          }
+          return 0; // 正常时阴影隐藏
+        })),
       ),
     ),
     // scaffoldBackgroundColor: Colors.red
