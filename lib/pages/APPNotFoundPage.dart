@@ -22,8 +22,6 @@ class APPNotFoundPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
       appBar: AppBar(
         title: Text("404"),
@@ -34,16 +32,26 @@ class APPNotFoundPage extends StatelessWidget {
 
   _buildBody() {
     return Padding(
-      padding: const EdgeInsets.only(top: 100.0),
+      padding: const EdgeInsets.only(top: 200.0),
       child: Center(
         child: Column(
           children: <Widget>[
-            Hero(
-              tag: 'avatar',
-              child: Image.asset('avatar.png'.toPng(), width:90),
+            FractionallySizedBox(
+              widthFactor: 0.66,
+              child: Hero(
+                tag: 'avatar',
+                child: Image.asset('404'.toPng(),),
+              ),
             ),
-            SizedBox(height: 10),
-            Text('哎呀, 你的页面跑路了!', style: TextStyle(fontSize: 17.0, color: Colors.black)),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 8),
+              child: Text('哎呀, 你的页面跑路了!',
+                style: TextStyle(
+                  fontSize: 17.0,
+                  color: Colors.black
+                )
+              ),
+            ),
             TextButton(
               onPressed: (){
                 ddlog('哎呀, 你的页面跑路了!');

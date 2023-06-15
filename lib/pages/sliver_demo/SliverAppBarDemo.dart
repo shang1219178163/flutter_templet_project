@@ -38,8 +38,8 @@ class _SliverAppBarDemoState extends State<SliverAppBarDemo>
           expandedHeight: 150,
           flexibleSpace: FlexibleSpaceBar(
             title: Text('SliverAppBar'),
-            background: Image.asset(
-              'images/bg.png',
+            background: Image(
+              image: 'bg.png'.toAssetImage(),
               fit: BoxFit.cover,
               height: 250,
             ),

@@ -1,7 +1,18 @@
 import 'dart:async';
 
-import 'package:flutter/widgets.dart';
 import 'package:event_bus/event_bus.dart';
+import 'package:flutter/widgets.dart';
+
+// example:
+// EventBusService().fire(UnreadMessageChangeEvent<List<V2TimConversation>>(<V2TimConversation>[]));
+
+// EventBusService().on<UnreadMessageChangeEvent>().listen((event) {
+//   debugPrint("listenEventOn:${event.data}");
+// });
+
+// listenEventOn<UnreadMessageChangeEvent>((event) {
+//   debugPrint("listenEventOn:${event.data}");
+// });
 
 
 class EventBusService {
@@ -9,11 +20,8 @@ class EventBusService {
 
   static final EventBusService _instance = EventBusService._();
 
-  static EventBusService get instance => _instance;
-
   factory EventBusService() => _instance;
 
-  
   final EventBus _eventBus = EventBus();
 
   /// 触发事件
@@ -32,7 +40,7 @@ class EventBusService {
 }
 
 /// 监听方法封装
-mixin EventBusServiceListener<T extends StatefulWidget> on State<T> {
+mixin EventBusServiceListenerMixin<T extends StatefulWidget> on State<T> {
   StreamSubscription? subscription;
 
   listenEventOn<E>(
@@ -42,7 +50,7 @@ mixin EventBusServiceListener<T extends StatefulWidget> on State<T> {
     void Function()? onDone,
     bool? cancelOnError
   }) {
-    subscription = EventBusService.instance.on<E>().listen(
+    subscription = EventBusService().on<E>().listen(
       onData,
       onError: onError,
       onDone: onDone,

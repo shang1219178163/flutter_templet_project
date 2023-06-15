@@ -96,9 +96,10 @@ class _BottomAppBarDemoState extends State<BottomAppBarDemo> {
         title: const Text('Bottom App Bar Demo'),
       ),
       bottomNavigationBar: BottomAppBar(
+        height: 80,
         shape: AutomaticNotchedShape(
           RoundedRectangleBorder(),
-            buttonShape
+          buttonShape
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -110,7 +111,7 @@ class _BottomAppBarDemoState extends State<BottomAppBarDemo> {
               icon: Icon(Icons.people), onPressed: () {  },
             )
           ],
-        ),
+          ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: FloatingActionButton.extended(
