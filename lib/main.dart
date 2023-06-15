@@ -177,7 +177,11 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
-        return app;
+
+        return TooltipVisibility(
+          visible: false,// 关闭返回按钮长按 tooltip
+          child: app,
+        );
       }
     );
     //全局置灰
