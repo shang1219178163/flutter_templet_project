@@ -29,11 +29,7 @@ class _AlertDialogTagSelectDemoState extends State<AlertDialogTagSelectDemo> {
   List<TagDetailModel> selectTagsTmp = [];
 
   /// 已选择的标签
-  String get selectTagNames {
-    List<String> result = selectTags.map((e) => e.name ?? "-").toList();
-    // debugPrint("selectDiseaseTypesNames: ${result}");
-    return result.join();
-  }
+  List<String> get selectTagNames => selectTags.map((e) => e.name ?? "-").toList();
 
 
   @override
@@ -56,7 +52,7 @@ class _AlertDialogTagSelectDemoState extends State<AlertDialogTagSelectDemo> {
           onPressed: onPressed,)
         ).toList(),
       ),
-      body: Text(arguments.toString())
+      body: Text(selectTagNames.toString())
     );
   }
 
@@ -68,14 +64,15 @@ class _AlertDialogTagSelectDemoState extends State<AlertDialogTagSelectDemo> {
       tags: tags,
       selectTagsTmp: selectTagsTmp,
       selectTags: selectTags,
-      isMuti: false,
+      // isMuti: false,
       onCancel: (){
 
       },
       onConfirm: (List<TagDetailModel> selectedItems){
         selectTags = selectedItems;
 
-        debugPrint(selectTags.map((e) => e.name ?? "").toList().toString());
+        debugPrint(selectTagNames.toString());
+        setState(() {});
       },
     );
   }
