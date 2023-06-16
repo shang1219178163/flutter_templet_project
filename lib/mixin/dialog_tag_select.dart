@@ -47,11 +47,11 @@ import 'package:flutter_templet_project/model/selected_model.dart';
 /// 标签选择弹窗工具类
 class DialogTagSelect with DialogMixin {
 
+  final _scrollController = ScrollController();
+
   /// 展示标签弹窗
   present<T>({
     required BuildContext context,
-    /// 病人id
-    required String? userId,
     /// 标题
     required String title,
     /// 标签列表
@@ -63,10 +63,13 @@ class DialogTagSelect with DialogMixin {
     /// 取消回调
     required VoidCallback onCancel,
     /// 确定回调
+    Future<bool> Function(List<SelectModel<T>>)? onRequestUpdate,
     required ValueChanged<List<SelectModel<T>>> onConfirm,
     bool isMuti = true,
+    ScrollController? scrollController,
   }) {
     return presentDialog(
+      scrollController: scrollController ?? _scrollController,
       context: context,
       title: title,
       onCancel: () {
@@ -83,16 +86,15 @@ class DialogTagSelect with DialogMixin {
         Navigator.of(context).pop();
 
         selectTags = selectTagsTmp;
-        // final response = await requestUpdateTag(
-        //     selectTags: selectTags,
-        //     uerId: userId,
-        // );
-        // if (response is! Map<String, dynamic> ||
-        //     response['code'] != 'OK' ||
-        //     response['result'] != true) {
-        //   // BrunoUtil.showInfoToast(RequestMsg.networkErrorMsg);
-        //   return;
-        // }
+
+        if (onRequestUpdate != null) {
+          final isSuccess = await onRequestUpdate(selectTags);
+          if (!isSuccess) {
+            // 如果网络请求失败,弹窗报错
+            // BrunoUtil.showInfoToast(RequestMsg.networkErrorMsg);
+            return;
+          }
+        }
 
         final ids = selectTags.map((e) => e.id).toList();
         for (var element in tags) {
@@ -142,13 +144,13 @@ class DialogTagSelect with DialogMixin {
   }
 
   /// 设置标签(新增或者更新)
-  Future<Map<String, dynamic>?> requestUpdateTag({
+  Future<bool> requestUpdateTag({
     required List<SelectModel> selectTags,
-    required String? uerId,
+    required String? userId,
   }) async {
     // 如果 选择为空走清除接口;选择不为空,更新;
 
-    return {};
+    return true;
   }
 }
 

@@ -14,6 +14,7 @@ mixin DialogMixin{
   /// 项目通用弹窗封装
   presentDialog({
     required BuildContext context,
+    required ScrollController? scrollController,
     String title = "标题",
     Widget? content,
     Widget? header,
@@ -67,16 +68,18 @@ mixin DialogMixin{
         builder: (context, setState) {
 
           return Scrollbar(
+            controller: scrollController,
             child: ConstrainedBox(
               constraints: BoxConstraints(
                 maxHeight: contentMaxHeight - buttonBarHeight,
                 minHeight: contentMinHeight,
               ),
               child: SingleChildScrollView(
-                  child: Padding(
-                    padding: contentPadding,
-                    child: contentChildBuilder?.call(context, setState),
-                  )
+                controller: scrollController,
+                child: Padding(
+                  padding: contentPadding,
+                  child: contentChildBuilder?.call(context, setState),
+                )
               ),
             ),
           );
@@ -150,6 +153,7 @@ mixin DialogMixin{
   /// 项目通用 alert 弹窗封装
   presentDialogAlert({
     required BuildContext context,
+    required ScrollController? scrollController,
     required VoidCallback? onCancel,
     required VoidCallback? onConfirm,
     String? title,
@@ -168,6 +172,7 @@ mixin DialogMixin{
     assert(message != null || content != null, "title 和 header 不能同时为空!");
 
     presentDialog(
+      scrollController: scrollController,
       context: context,
       radius: Radius.circular(12.w),
       contentOffset: contentOffset,
@@ -218,7 +223,7 @@ mixin DialogMixin{
         //   width: 1,
         //   thickness: 1,
         // ),
-      )
+      ),
     );
   }
 

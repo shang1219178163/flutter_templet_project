@@ -9,6 +9,7 @@ class NPopViewBox extends StatefulWidget {
   NPopViewBox({
     Key? key,
     this.title,
+    this.scrollController,
     this.content,
     this.header,
     this.footer,
@@ -40,12 +41,15 @@ class NPopViewBox extends StatefulWidget {
   double buttonBarHeight = 48;
   EdgeInsets contentPadding = const EdgeInsets.all(20);
   StatefulWidgetBuilder? contentChildBuilder;
+  ScrollController? scrollController;
 
   @override
   _NPopViewBoxState createState() => _NPopViewBoxState();
 }
 
 class _NPopViewBoxState extends State<NPopViewBox> {
+
+  final _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -65,6 +69,7 @@ class _NPopViewBoxState extends State<NPopViewBox> {
       buttonBarHeight: widget.buttonBarHeight,
       contentPadding: widget.contentPadding,
       contentChildBuilder: widget.contentChildBuilder,
+      scrollController: widget.scrollController ?? _scrollController,
     );
   }
 
@@ -85,6 +90,7 @@ class _NPopViewBoxState extends State<NPopViewBox> {
         double buttonBarHeight = 48,
         EdgeInsets contentPadding = const EdgeInsets.all(20),
         StatefulWidgetBuilder? contentChildBuilder,
+        required ScrollController scrollController,
       }
   ) {
 
@@ -122,16 +128,18 @@ class _NPopViewBoxState extends State<NPopViewBox> {
         builder: (context, setState) {
 
           return Scrollbar(
+            controller: scrollController,
             child: ConstrainedBox(
               constraints: BoxConstraints(
                 maxHeight: contentMaxHeight - buttonBarHeight,
                 minHeight: contentMinHeight,
               ),
               child: SingleChildScrollView(
-                  child: Padding(
-                    padding: contentPadding,
-                    child: contentChildBuilder?.call(context, setState),
-                  )
+                controller: scrollController,
+                child: Padding(
+                  padding: contentPadding,
+                  child: contentChildBuilder?.call(context, setState),
+                )
               ),
             ),
           );

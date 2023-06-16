@@ -58,7 +58,6 @@ class _AlertDialogTagSelectDemoState extends State<AlertDialogTagSelectDemo> {
   onPressed(){
     DialogTagSelect().present(
       context: context,
-      userId: "",
       title: "标签",
       tags: tags,
       selectTagsTmp: selectTagsTmp,
