@@ -128,8 +128,7 @@ extension BuildContextExt on BuildContext {
     bool? semanticsDismissible,
     RouteSettings? routeSettings,
   }) {
-    final child =
-    CupertinoActionSheet(
+    final child = CupertinoActionSheet(
       title: title,
       message: message,
       actions: items.map((e) => CupertinoActionSheetAction(
