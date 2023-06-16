@@ -44,10 +44,10 @@ class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
 
 
   /// 分组疾病列表
-  late List<SelectModel<FakeDataModel>> allItems = nums.map((e){
+  late List<SelectModel<FakeDataModel>> tags = nums.map((e){
     return SelectModel(
       id: e.toString(),
-      name: "item_$e",
+      name: "标签_$e",
       isSelected: false,
       data: FakeDataModel(
       id: e.toString(),
@@ -56,16 +56,13 @@ class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
 
 
   /// 已选择的列表(多选)
-  List<SelectModel<FakeDataModel>> selectedItems = [];
+  List<SelectModel<FakeDataModel>> selectedTags = [];
   /// 临时已选择的列表(多选)
-  List<SelectModel<FakeDataModel>> selectedItemsTmp = [];
+  List<SelectModel<FakeDataModel>> selectedTagsTmp = [];
 
   /// 已选择的列表名称
-  String get selectedItemsNames{
-    var result = selectedItems.map((e) => e.name ?? "-").toList();
-    // debugPrint("selectDiseaseTypesNames: ${result}");
-    return result.join(",");
-  }
+  List<String> get selectedTagsNames => selectedTags.map((e) => e.name ?? "-").toList();
+
 
   final info = ValueNotifier("");
 
@@ -129,14 +126,15 @@ class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
         color: Color(0xff333333),
       ),),
       onCancell: (){
-        handleItems(selectedItems: selectedItems);
+        selectedTagsTmp = selectedTags;
+        handleItems(selectedItems: selectedTags);
         Navigator.of(context).pop();
       },
       onConfirm: () async {
         Navigator.of(context).pop();
 
-        selectedItems = selectedItemsTmp;
-        info.value = selectedItemsNames;
+        selectedTags = selectedTagsTmp;
+        info.value = selectedTagsNames.join(",");
 
         // final response = await requestUpdateSections();
         // if (response is! Map<String, dynamic> || response['code'] != 'OK' || response['result'] != true) {
@@ -155,7 +153,7 @@ class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
           runSpacing: 12,
           spacing: 16,
           alignment: WrapAlignment.start,
-          children: allItems.map((e) => Material(
+          children: tags.map((e) => Material(
             color: Colors.transparent,
             child: ChoiceChip(
               side: BorderSide(color: Color(0xfff3f3f3)),
@@ -169,7 +167,7 @@ class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
               selectedColor: Theme.of(context).primaryColor,
               backgroundColor: bgColor[10],
               onSelected: (bool selected) {
-                for (final element in allItems) {
+                for (final element in tags) {
                   if (element.data?.id == e.data?.id) {
                     element.isSelected = selected;
                   } else {
@@ -179,7 +177,7 @@ class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
                   }
                 }
 
-                selectedItemsTmp = allItems.where((e) => e.isSelected == true).toList();
+                selectedTagsTmp = tags.where((e) => e.isSelected == true).toList();
                 setState1(() {});
                 // debugPrint("${e.toString()}");
               },
@@ -233,14 +231,14 @@ class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
     return showPopView(
       title: "选择",
       onCancell: (){
-        handleItems(selectedItems: selectedItems);
+        handleItems(selectedItems: selectedTags);
         Navigator.of(context).pop();
       },
       onConfirm: () async {
         Navigator.of(context).pop();
 
-        selectedItems = selectedItemsTmp;
-        info.value = selectedItemsNames;
+        selectedTags = selectedTagsTmp;
+        info.value = selectedTagsNames.join(",");
 
         // final response = await requestUpdateSections();
         // if (response is! Map<String, dynamic> || response['code'] != 'OK' || response['result'] != true) {
@@ -259,7 +257,7 @@ class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
           runSpacing: 12,
           spacing: 16,
           alignment: alignment,
-          children: allItems.map((e) => Material(
+          children: tags.map((e) => Material(
             color: Colors.transparent,
             child: ChoiceChip(
               side: BorderSide(color: Color(0xfff3f3f3)),
@@ -273,7 +271,7 @@ class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
               selectedColor: Theme.of(context).primaryColor,
               backgroundColor: bgColor[10],
               onSelected: (bool selected) {
-                for (final element in allItems) {
+                for (final element in tags) {
                   if (element.id == e.id) {
                     element.isSelected = selected;
                   } else {
@@ -283,7 +281,7 @@ class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
                   }
                 }
 
-                selectedItemsTmp = allItems.where((e) => e.isSelected == true).toList();
+                selectedTagsTmp = tags.where((e) => e.isSelected == true).toList();
                 // selectDiseaseTypes = diseaseTypeshere((e) => e.isSelected == true).toList();
                 setState1(() {});
                 // debugPrint("${e.toString()}");
@@ -320,11 +318,6 @@ class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
   clickAlertMaxHeight() {
     final isMuti = true;
 
-    final tags = List.generate(50, (i) => SelectModel(
-      id: "$i",
-      name: "标签_$i",
-    ));
-
     presentAlertMaxHeight(
       header: Container(
         // color: context.primaryColor,
@@ -348,12 +341,17 @@ class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
       ),
       footer: NCancellAndConfirmBar(
         onCancell: (){
-          debugPrint("${DateTime.now()} onCancell");
+          selectedTagsTmp = selectedTags;
+          handleItems(selectedItems: selectedTagsTmp);
           Navigator.of(context).pop();
+          debugPrint("${DateTime.now()} onCancell");
+
         },
         onConfirm: (){
-          debugPrint("${DateTime.now()} onConfirm");
           Navigator.of(context).pop();
+          selectedTags = selectedTagsTmp;
+          info.value = selectedTagsNames.join(",");
+          debugPrint("${DateTime.now()} ${info.value}");
         }
       ),
       contentBuilder: (context, setState) {
@@ -379,11 +377,7 @@ class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
                   }
                 }
               }
-
-              final tagNames = tags
-                  .where((e) => e.isSelected == true)
-                  .map((e) => e.name).toList();
-              debugPrint("tagNames: $tagNames");
+              selectedTagsTmp = tags.where((e) => e.isSelected == true).toList();
               setState((){});
             },
           )).toList(),
@@ -650,7 +644,7 @@ class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
     required List<SelectModel<FakeDataModel>> selectedItems,
   }) {
     final ids = selectedItems.map((e) => e.id).toList();
-    for (final element in allItems) {
+    for (final element in tags) {
       element.isSelected = ids.contains(element.id);
     }
   }
