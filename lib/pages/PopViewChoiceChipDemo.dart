@@ -7,6 +7,7 @@ import 'package:flutter_templet_project/basicWidget/n_pop_view_box.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
+import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/model/fake_data_model.dart';
 import 'package:flutter_templet_project/model/selected_model.dart';
 import 'package:flutter_templet_project/uti/app_uti.dart';
@@ -320,11 +321,10 @@ class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
 
     presentAlertMaxHeight(
       header: Container(
-        // color: context.primaryColor,
-        height: 50,
+        height: 45,
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          // color: Colors.transparent,
+          color: Colors.white,
           border: Border(
             bottom: BorderSide(
               width: 1,
@@ -356,31 +356,35 @@ class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
       ),
       contentBuilder: (context, setState) {
 
-        return Wrap(
-          runSpacing: 8.w,
-          spacing: 16.w,
-          children: tags.map((e) => ChoiceChip(
-            label: Text(e.name ?? ""),
-            labelStyle: TextStyle(
-              color: e.isSelected == true ? Colors.white : Color(0xff181818),
-            ),
-            // padding: EdgeInsets.only(left: 15, right: 15),
-            selected: e.isSelected == true,
-            selectedColor: context.primaryColor,
-            onSelected: (selected) {
-              for (var element in tags) {
-                if (element.id == e.id) {
-                  element.isSelected = selected;
-                } else {
-                  if (isMuti == false) {
-                    element.isSelected = false;
+        return Container(
+          color: Colors.white,
+          padding: EdgeInsets.all(20),
+          child: Wrap(
+            runSpacing: 8.w,
+            spacing: 16.w,
+            children: tags.map((e) => ChoiceChip(
+              label: Text(e.name ?? ""),
+              labelStyle: TextStyle(
+                color: e.isSelected == true ? Colors.white : Color(0xff181818),
+              ),
+              // padding: EdgeInsets.only(left: 15, right: 15),
+              selected: e.isSelected == true,
+              selectedColor: context.primaryColor,
+              onSelected: (selected) {
+                for (var element in tags) {
+                  if (element.id == e.id) {
+                    element.isSelected = selected;
+                  } else {
+                    if (isMuti == false) {
+                      element.isSelected = false;
+                    }
                   }
                 }
-              }
-              selectedTagsTmp = tags.where((e) => e.isSelected == true).toList();
-              setState((){});
-            },
-          )).toList(),
+                selectedTagsTmp = tags.where((e) => e.isSelected == true).toList();
+                setState((){});
+              },
+            )).toList(),
+          ),
         );
       }
     );
@@ -437,7 +441,7 @@ class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
   /// 内容自适应高度
   presentAlertMaxHeight({
     BorderRadius? borderRadius = const BorderRadius.all(Radius.circular(8)),
-    EdgeInsets contentPadding = const EdgeInsets.all(20),
+    EdgeInsets contentPadding = const EdgeInsets.all(0),
     required StatefulWidgetBuilder? contentBuilder,
     double maxHeight = 400,
     EdgeInsets margin = const EdgeInsets.symmetric(
@@ -455,12 +459,18 @@ class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
 
         return Scrollbar(
           controller: scrollController,
-          child: SingleChildScrollView(
-            controller: scrollController,
-            child: Padding(
-              padding: contentPadding,
-              child: contentBuilder?.call(context, setState),
-            )
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              maxHeight: maxHeight,
+              minHeight: 100,
+            ),
+            child: SingleChildScrollView(
+              controller: scrollController,
+              child: Padding(
+                padding: contentPadding,
+                child: contentBuilder?.call(context, setState),
+              )
+            ),
           ),
         );
       }
@@ -476,37 +486,24 @@ class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
 
         return Material(
           color: Colors.black.withOpacity(0.05),
-          child: InkWell(
-            onTap: onCancel ?? () {
-              debugPrint("${DateTime.now()} barrier dismiss");
-              // Navigator.of(context).pop();
-            },
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: borderRadius,
+          child: Container(
+            alignment: Alignment.center,
+            padding: EdgeInsets.symmetric(horizontal: 50),
+            // decoration: BoxDecoration(
+            //   color: Colors.transparent,
+            // ),
+            child: ClipRRect(
+              borderRadius: borderRadius,
+              child: Container(
                 color: Colors.white,
-              ),
-              alignment: Alignment.center,
-              margin: margin,
-              constraints: BoxConstraints(
-                maxHeight: maxHeight,
-                // minWidth: 200,
-              ),
-              child: InkWell(
-              onTap: () {
-                debugPrint("${DateTime.now()} InkWell");
-              },
-                child: ClipRRect(
-                  borderRadius: borderRadius,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      if (header != null) header,
-                      Flexible(child: defaultContent),
-                      if (footer != null) footer,
-                    ],
-                  ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    if (header != null) header,
+                    Flexible(child: defaultContent),
+                    if (footer != null) footer,
+                  ],
                 ),
               ),
             ),
