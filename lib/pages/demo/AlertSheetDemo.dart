@@ -86,21 +86,36 @@ class _AlertSheetDemoState extends State<AlertSheetDemo> {
               },
               child: Text('取消'),
             ),
-          )
-              .toShowCupertinoModalPopup(context: context)
-          ;
+          ).toShowCupertinoModalPopup(context: context);
         }
         break;
 
       case 3:
         {
-          BottomSheetExt.showModalSheet(context: context,
-              title: title,
-              message: message,
-              actionTitles: titles,
-              callback: (value){
-                ddlog(value);
-              }
+          BottomSheetExt.presentSheet(
+            context: context,
+            title: title,
+            onCancel: (){
+              debugPrint("取消");
+            },
+            onConfirm: (){
+              debugPrint("确定");
+            },
+            content: Container(
+              child: Column(
+                children: [
+                  Text(message),
+                  ...titles.map((e) {
+                    return Column(
+                      children: [
+                        ListTile(title: Text(e),),
+                        Divider(),
+                      ],
+                    );
+                  }).toList(),
+                ],
+              ),
+            )
           );
         }
         break;

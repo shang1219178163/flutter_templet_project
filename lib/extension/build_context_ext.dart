@@ -119,8 +119,8 @@ extension BuildContextExt on BuildContext {
     ScrollController? messageScrollController,
     ScrollController? actionScrollController,
     required Widget cancel,
-    required Function(BuildContext context, int index)? onSelect,
-    Function(BuildContext context)? onCancell,
+    required ValueChanged<int>? onSelected,
+    VoidCallback? onCancel,
     ImageFilter? filter,
     Color barrierColor = kCupertinoModalBarrierColor,
     bool barrierDismissible = true,
@@ -133,16 +133,14 @@ extension BuildContextExt on BuildContext {
       message: message,
       actions: items.map((e) => CupertinoActionSheetAction(
         onPressed: () {
-          if (onSelect != null) {
-            onSelect(this, items.indexOf(e));
-          }
+          onSelected?.call(items.indexOf(e));
           Navigator.pop(this);
         },
         child: e,
       ),).toList(),
       cancelButton: CupertinoActionSheetAction(
         isDestructiveAction: true,
-        onPressed: onCancell != null ? onCancell(this) : () {
+        onPressed: onCancel ?? () {
           Navigator.pop(this);
         },
         child: cancel,

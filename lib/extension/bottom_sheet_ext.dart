@@ -7,90 +7,97 @@
 //
 
 
+import 'dart:convert';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
-import 'package:flutter_templet_project/extension/widget_ext.dart';
+import 'package:flutter_templet_project/extension/build_context_ext.dart';
+
 
 extension BottomSheetExt on BottomSheet{
 
   ///自定义sheet弹窗方法
-  static void showModalSheet({
+  static presentSheet({
     required BuildContext context,
-    required String title,
-    String? message,
-    required List<String> actionTitles,
-    List<Widget>? actionWidgets,
-    required void Function(String value) callback}){
-
-    var listView = Container(
-      height: 300,
-      child: ListView.separated(
-        itemCount: actionTitles.length,
-        itemBuilder: (context, index) {
-          final e = actionTitles[index];
-          return ListTile(
-            title: Text(e),
-            subtitle: null,
-            onTap: (){
-              callback(e);
-              Navigator.pop(context);
-            },
-          );
-        },
-        separatorBuilder: (context, index) {
-          return Divider(
-            height: .5,
-            indent: 15,
-            endIndent: 15,
-            color: Color(0xFFDDDDDD),
-          );
-        },
-      ).addCupertinoScrollbar(),
-    );
-
-    var list = actionWidgets ?? [listView];
-    list.insertAll(0, [
-        // Text(title, style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600), textAlign: TextAlign.start,),
-        Text(message ?? "", textAlign: TextAlign.start,),
-      ],
-    );
-
+    String title = "请选择",
+    double maxHeight = 400,
+    required Widget content,
+    required VoidCallback? onCancel,
+    required VoidCallback? onConfirm,
+  }){
+    final scrollController = ScrollController();
     showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
-        return Column(
-          mainAxisSize: MainAxisSize.min, // 设置最小的弹出
-          children:[
-            Container(
-              height: 40,
-              child: Center(
-                child: Row(
-                  children: [
-                      TextButton(
-                        onPressed: (){
-                          ddlog("Done");
-                        },
-                        child: Text("取消", style: TextStyle(color: Colors.black87),)
-                      ),
-                      Expanded(
-                        child: Text(title,
-                          style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
-                          textAlign: TextAlign.center,),
-                      ),
-                      TextButton(
-                        onPressed: (){
-                          ddlog("Done");
-                        },
-                        child: Text("确定", style: TextStyle(color: Colors.black87,)),
+
+        return Material(
+          child: Column(
+            children: [
+              buildTitleBar(
+                context: context,
+                title: title,
+                onCancel: onCancel,
+                onConfirm: onConfirm,
+              ),
+              Expanded(
+                child: CupertinoScrollbar(
+                  controller: scrollController,
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(
+                      maxHeight: maxHeight,
+                      minHeight: 100,
                     ),
-                  ],
+                    child: SingleChildScrollView(
+                      controller: scrollController,
+                      child: content,
+                    ),
+                  ),
                 ),
               ),
+            ],
           ),
-          Divider(),
-          listView
-        ]);
+        );
       },
+    );
+  }
+
+  static  Widget buildTitleBar({
+    required BuildContext context,
+    String title = "请选择",
+    required VoidCallback? onCancel,
+    required VoidCallback? onConfirm,
+  }){
+    return Container(
+      height: kToolbarHeight,
+      decoration: BoxDecoration(
+        border: Border(bottom: BorderSide(width: 1, color: Color(0xffe4e4e4))),
+      ),
+      child: NavigationToolbar(
+        leading: TextButton(
+          onPressed: onCancel ?? (){
+            debugPrint("取消");
+          },
+          child: Text("取消",
+            style: TextStyle(
+              color: context.primaryColor
+            ),
+          )
+        ),
+        middle: Text(title,
+          style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
+          textAlign: TextAlign.center,
+        ),
+        trailing: TextButton(
+          onPressed: onConfirm ?? (){
+            debugPrint("确定");
+          },
+          child: Text("确定",
+            style: TextStyle(
+              color: context.primaryColor
+            ),
+          )
+        ),
+      ),
     );
   }
 }
