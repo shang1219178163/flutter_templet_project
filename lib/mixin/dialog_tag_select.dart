@@ -50,7 +50,7 @@ class DialogTagSelect with DialogMixin {
   present({
     required BuildContext context,
     /// 病人id
-    required String? uerId,
+    required String? userId,
     /// 标题
     required String title,
     /// 标签列表
@@ -63,6 +63,7 @@ class DialogTagSelect with DialogMixin {
     required VoidCallback onCancel,
     /// 确定回调
     required ValueChanged<List<TagDetailModel>> onConfirm,
+    bool isMuti = true,
   }) {
     return presentDialog(
       context: context,
@@ -81,16 +82,16 @@ class DialogTagSelect with DialogMixin {
         Navigator.of(context).pop();
 
         selectTags = selectTagsTmp;
-        final response = await requestUpdateTag(
-            selectTags: selectTags,
-            uerId: uerId,
-        );
-        if (response is! Map<String, dynamic> ||
-            response['code'] != 'OK' ||
-            response['result'] != true) {
-          // BrunoUtil.showInfoToast(RequestMsg.networkErrorMsg);
-          return;
-        }
+        // final response = await requestUpdateTag(
+        //     selectTags: selectTags,
+        //     uerId: userId,
+        // );
+        // if (response is! Map<String, dynamic> ||
+        //     response['code'] != 'OK' ||
+        //     response['result'] != true) {
+        //   // BrunoUtil.showInfoToast(RequestMsg.networkErrorMsg);
+        //   return;
+        // }
 
         final ids = selectTags.map((e) => e.id).toList();
         for (var element in tags) {
@@ -101,7 +102,7 @@ class DialogTagSelect with DialogMixin {
       },
       contentChildBuilder: (context, setState1) {
         return Wrap(
-          // runSpacing: 16.w,
+          runSpacing: 8.w,
           spacing: 16.w,
           children: tags
               .map(
@@ -123,12 +124,12 @@ class DialogTagSelect with DialogMixin {
                   if (element.id == e.id) {
                     element.isSelected = selected;
                   } else {
-                    element.isSelected = false;
+                    if (isMuti == false) {
+                      element.isSelected = false;
+                    }
                   }
                 }
-                // selectTags = tags.where((e) => e.isSelected == true).toList();
-                selectTagsTmp =
-                    tags.where((e) => e.isSelected == true).toList();
+                selectTagsTmp = tags.where((e) => e.isSelected == true).toList();
                 setState1(() {});
               },
             ),

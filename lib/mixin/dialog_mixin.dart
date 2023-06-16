@@ -126,18 +126,21 @@ mixin DialogMixin{
       transitionDuration: Duration(milliseconds: 200),
       pageBuilder: (context, animation, secondaryAnimation) {
 
-        return InkWell(
-          onTap: onBarrier ?? () {
-            // Navigator.of(context).pop();
-            AppUti.removeInputFocus();
-          },
-          child: Container(
-            padding: contentOffset,
-            color: barrierColor ?? Colors.black.withOpacity(0.05),
-            child: Align(
-              alignment: alignment,
-              child: child,
-            )
+        return Material(
+          color: barrierColor ?? Colors.black.withOpacity(0.05),
+          child: InkWell(
+            onTap: onBarrier ?? () {
+              // Navigator.of(context).pop();
+              AppUti.removeInputFocus();
+            },
+            child: Container(
+              padding: contentOffset,
+              color: barrierColor ?? Colors.black.withOpacity(0.05),
+              child: Align(
+                alignment: alignment,
+                child: child,
+              )
+            ),
           ),
         );
       }
@@ -147,7 +150,7 @@ mixin DialogMixin{
   /// 项目通用 alert 弹窗封装
   presentDialogAlert({
     required BuildContext context,
-    required VoidCallback? onCancell,
+    required VoidCallback? onCancel,
     required VoidCallback? onConfirm,
     String? title,
     String? message,
@@ -204,7 +207,7 @@ mixin DialogMixin{
         confirmTextStyle: confirmTextStyle,
         bottomLeftRadius: Radius.circular(12.w),
         bottomRightRadius: Radius.circular(12.w),
-        onCancell: onCancell ?? (){
+        onCancell: onCancel ?? (){
           Navigator.of(context).pop();
         },
         onConfirm: onConfirm ?? () {

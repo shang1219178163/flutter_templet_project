@@ -25,12 +25,12 @@ class AppUti{
 
   // 移除输入框焦点
   static void removeInputFocus() {
-    // FocusManager.instance.primaryFocus?.unfocus();
+    FocusManager.instance.primaryFocus?.unfocus();
 
-    // 延迟，保证获取到context
-    Future.delayed(Duration.zero, () {
-      FocusScope.of(getGlobalContext()).requestFocus(FocusNode());
-    });
+    // // 延迟，保证获取到context
+    // Future.delayed(Duration.zero, () {
+    //   FocusScope.of(getGlobalContext()).requestFocus(FocusNode());
+    // });
   }
 
 }

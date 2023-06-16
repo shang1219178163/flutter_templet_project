@@ -53,7 +53,8 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
     "NNPopupRoute 自定义",
     "NNPopupRoute 顶部消息",
     "隐私协议",
-    "Dialog"
+    "Dialog",
+    "DialogMixin",
   ];
 
   final title = "新版本 v${2.1}";
@@ -523,6 +524,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
         break;
       case 19:
         {
+
 
         }
         break;

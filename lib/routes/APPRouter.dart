@@ -13,6 +13,7 @@ import 'package:flutter_templet_project/pages/ReflectDemo.dart';
 import 'package:flutter_templet_project/pages/PageLifecycleObserverDemo.dart';
 import 'package:flutter_templet_project/pages/RegExpDemo.dart';
 import 'package:flutter_templet_project/pages/demo/%20AdaptiveSizeLayoutDemo.dart';
+import 'package:flutter_templet_project/pages/demo/AlertDialogTagSelectDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedBuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedContainerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedListDemo.dart';
@@ -300,6 +301,9 @@ class APPRouter {
 
   static const textlessDemo = '/textlessDemo';
   static const alertDialogDemo = '/AlertDialogDemo';
+  static const alertDialogTagSelectDemo = '/alertDialogTagSelectDemo';
+
+
   static const alertSheetDemo = '/AlertSheetDemo';
   static const systemIconsPage = '/systemIconsPage';
   static const systemColorPage = '/systemColorPage';
@@ -620,6 +624,9 @@ class AppPage {
     GetPage(name: APPRouter.tabBarSegmentNewDemo, page: () => TabBarSegmentNewDemo(),),
     GetPage(name: APPRouter.textlessDemo, page: () => TextlessDemo(),),
     GetPage(name: APPRouter.alertDialogDemo, page: () => AlertDialogDemo(),),
+    GetPage(name: APPRouter.alertDialogTagSelectDemo, page: () => AlertDialogTagSelectDemo(),),
+
+
     GetPage(name: APPRouter.alertSheetDemo, page: () => AlertSheetDemo(),),
     GetPage(name: APPRouter.systemIconsPage, page: () => SystemIconsPage(),),
     GetPage(name: APPRouter.systemColorPage, page: () => SystemColorPage(),),
