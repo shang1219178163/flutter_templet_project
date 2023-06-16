@@ -542,7 +542,7 @@ var customs = [
   Tuple2(APPRouter.boxWidgetDemo, "boxWidgetDemo", ),
   Tuple2(APPRouter.nSkeletonDemo, "骨架图", ),
   Tuple2(APPRouter.nTreeDemo, "树形组件", ),
-  Tuple2(APPRouter.popViewChoiceChipDemo, "选择弹窗", ),
+  Tuple2(APPRouter.dialogChoiceChipDemo, "选择弹窗", ),
   Tuple2(APPRouter.imChatPage, "聊天列表", ),
   Tuple2(APPRouter.expandTextDemo, "可折叠文字", ),
 

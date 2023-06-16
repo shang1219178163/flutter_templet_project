@@ -8,7 +8,7 @@ import 'package:flutter_templet_project/basicWidget/responsive_column.dart';
 import 'package:flutter_templet_project/pages/APPRouteObserverDemo.dart';
 import 'package:flutter_templet_project/pages/DataTypeDemo.dart';
 import 'package:flutter_templet_project/pages/PageLifecycleFuncTest.dart';
-import 'package:flutter_templet_project/pages/PopViewChoiceChipDemo.dart';
+import 'package:flutter_templet_project/pages/DialogChoiceChipDemo.dart';
 import 'package:flutter_templet_project/pages/ReflectDemo.dart';
 import 'package:flutter_templet_project/pages/PageLifecycleObserverDemo.dart';
 import 'package:flutter_templet_project/pages/RegExpDemo.dart';
@@ -532,7 +532,7 @@ class APPRouter {
   static const nTreeDemo = '/nTreeDemo';
   static const azlistviewDemo = '/azlistviewDemo';
   static const expansionTileCard = '/expansionTileCard';
-  static const popViewChoiceChipDemo = '/popViewChoiceChipDemo';
+  static const dialogChoiceChipDemo = '/dialogChoiceChipDemo';
   static const textFieldColorChangeDemo = '/textFieldColorChangeDemo';
   static const pageViewAndBarDemo = '/pageViewAndBarDemo';
   static const dropBoxChoicDemo = '/dropBoxChoicDemo';
@@ -851,7 +851,7 @@ class AppPage {
     GetPage(name: APPRouter.nTreeDemo, page: () => NTreeDemo(),),
     GetPage(name: APPRouter.azlistviewDemo, page: () => AzlistviewDemo(),),
     GetPage(name: APPRouter.expansionTileCard, page: () => ExpansionTileCard(),),
-    GetPage(name: APPRouter.popViewChoiceChipDemo, page: () => PopViewChoiceChipDemo(),),
+    GetPage(name: APPRouter.dialogChoiceChipDemo, page: () => DialogChoiceChipDemo(),),
     GetPage(name: APPRouter.textFieldColorChangeDemo, page: () => TextFieldColorChangeDemo(),),
     GetPage(name: APPRouter.pageViewAndBarDemo, page: () => PageViewAndBarDemo(),),
     GetPage(name: APPRouter.dropBoxChoicDemo, page: () => DropBoxChoicDemo(),),

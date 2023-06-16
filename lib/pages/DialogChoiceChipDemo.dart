@@ -14,9 +14,9 @@ import 'package:flutter_templet_project/uti/app_uti.dart';
 import 'package:flutter_templet_project/uti/color_uti.dart';
 import 'package:tuple/tuple.dart';
 
-class PopViewChoiceChipDemo extends StatefulWidget {
+class DialogChoiceChipDemo extends StatefulWidget {
 
-  PopViewChoiceChipDemo({
+  DialogChoiceChipDemo({
     Key? key,
     this.title
   }) : super(key: key);
@@ -24,10 +24,10 @@ class PopViewChoiceChipDemo extends StatefulWidget {
   final String? title;
 
   @override
-  _PopViewChoiceChipDemoState createState() => _PopViewChoiceChipDemoState();
+  _DialogChoiceChipDemoState createState() => _DialogChoiceChipDemoState();
 }
 
-class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
+class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
   List<int> nums = List<int>.generate(49, (index) => index);
 
   late final funcMap = <String, Function>{
