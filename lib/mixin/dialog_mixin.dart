@@ -22,7 +22,7 @@ mixin DialogMixin{
     EdgeInsets margin = const EdgeInsets.symmetric(horizontal: 38),
     Radius radius = const Radius.circular(8),
     Alignment alignment = Alignment.center,
-    VoidCallback? onCancell,
+    VoidCallback? onCancel,
     VoidCallback? onConfirm,
     VerticalDivider? buttonBarDivider,
     VoidCallback? onBarrier,
@@ -51,7 +51,7 @@ mixin DialogMixin{
         Padding(
           padding: EdgeInsets.only(right: 4.w),
           child: IconButton(
-            onPressed: onCancell ?? (){
+            onPressed: onCancel ?? (){
               Navigator.of(context).pop();
             },
             icon: Icon(Icons.clear,
@@ -89,7 +89,7 @@ mixin DialogMixin{
       bottomLeftRadius: radius,
       bottomRightRadius: radius,
       divider: buttonBarDivider,
-      onCancell: onCancell ?? (){
+      onCancell: onCancel ?? (){
         Navigator.of(context).pop();
       },
       onConfirm: onConfirm ?? () {
