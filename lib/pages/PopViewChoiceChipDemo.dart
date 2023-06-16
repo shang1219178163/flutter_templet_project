@@ -40,7 +40,7 @@ class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
 
 
   /// 分组疾病列表
-  late List<SelectModel<FakeDataModel>> allTypes = nums.map((e){
+  late List<SelectModel<FakeDataModel>> allItems = nums.map((e){
     return SelectModel(
       id: e.toString(),
       title: "item_$e",
@@ -113,7 +113,7 @@ class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
   }
 
   showPopViewBox({
-    bool isSingle = false,
+    bool isMuti = true,
     Alignment alignment = Alignment.center,
   }) {
     final box = NPopViewBox(
@@ -151,7 +151,7 @@ class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
           runSpacing: 12,
           spacing: 16,
           alignment: WrapAlignment.start,
-          children: allTypes.map((e) => Material(
+          children: allItems.map((e) => Material(
             color: Colors.transparent,
             child: ChoiceChip(
               side: BorderSide(color: Color(0xfff3f3f3)),
@@ -165,18 +165,17 @@ class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
               selectedColor: Theme.of(context).primaryColor,
               backgroundColor: bgColor[10],
               onSelected: (bool selected) {
-                for (final element in allTypes) {
+                for (final element in allItems) {
                   if (element.data?.id == e.data?.id) {
                     element.isSelected = selected;
                   } else {
-                    if (isSingle) {
+                    if (isMuti == false) {
                       element.isSelected = false;//单选
                     }
                   }
                 }
 
-                selectedItemsTmp = allTypes.where((e) => e.isSelected == true).toList();
-                // selectDiseaseTypes = diseaseTypeshere((e) => e.isSelected == true).toList();
+                selectedItemsTmp = allItems.where((e) => e.isSelected == true).toList();
                 setState1(() {});
                 // debugPrint("${e.toString()}");
               },
@@ -227,68 +226,67 @@ class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
     bool isSingle = false,
     WrapAlignment alignment = WrapAlignment.start,
   }) {
-
     return showPopView(
-        title: "选择",
-        onCancell: (){
-          handleItems(selectedItems: selectedItems);
-          Navigator.of(context).pop();
-        },
-        onConfirm: () async {
-          Navigator.of(context).pop();
+      title: "选择",
+      onCancell: (){
+        handleItems(selectedItems: selectedItems);
+        Navigator.of(context).pop();
+      },
+      onConfirm: () async {
+        Navigator.of(context).pop();
 
-          selectedItems = selectedItemsTmp;
-          info.value = selectedItemsNames;
+        selectedItems = selectedItemsTmp;
+        info.value = selectedItemsNames;
 
-          // final response = await requestUpdateSections();
-          // if (response is! Map<String, dynamic> || response['code'] != 'OK' || response['result'] != true) {
-          //   BrunoUti.showInfoToast(RequestMsg.networkErrorMsg);
-          //   return;
-          // }
+        // final response = await requestUpdateSections();
+        // if (response is! Map<String, dynamic> || response['code'] != 'OK' || response['result'] != true) {
+        //   BrunoUti.showInfoToast(RequestMsg.networkErrorMsg);
+        //   return;
+        // }
 
-          // handleDiseaseTypes(selectedItems: selectDiseaseTypes);
-          // map[e.item3] = selectDiseaseTypesNames;
-          // debugPrint("selectDiseaseTypesNames: ${map[e.item3]}");
-          // debugPrint("map[e.item3]: ${map[e.item3]}");
-          setState(() {});
-        },
-        contentChildBuilder: (context, setState1) {
-          return Wrap(
-            runSpacing: 12,
-            spacing: 16,
-            alignment: alignment,
-            children: allTypes.map((e) => Material(
-              color: Colors.transparent,
-              child: ChoiceChip(
-                side: BorderSide(color: Color(0xfff3f3f3)),
-                label: Text(e.title ?? "-"),
-                labelStyle: TextStyle(
-                  color: e.isSelected == true ? Colors.white : fontColor,
-                ),
-                // padding: EdgeInsets.only(left: 15, right: 15),
-                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                selected: e.isSelected == true,
-                selectedColor: Theme.of(context).primaryColor,
-                backgroundColor: bgColor[10],
-                onSelected: (bool selected) {
-                  for (final element in allTypes) {
-                    if (element.id == e.id) {
-                      element.isSelected = selected;
-                    } else {
-                      if (isSingle) {
-                        element.isSelected = false;//单选
-                      }
+        // handleDiseaseTypes(selectedItems: selectDiseaseTypes);
+        // map[e.item3] = selectDiseaseTypesNames;
+        // debugPrint("selectDiseaseTypesNames: ${map[e.item3]}");
+        // debugPrint("map[e.item3]: ${map[e.item3]}");
+        setState(() {});
+      },
+      contentChildBuilder: (context, setState1) {
+        return Wrap(
+          runSpacing: 12,
+          spacing: 16,
+          alignment: alignment,
+          children: allItems.map((e) => Material(
+            color: Colors.transparent,
+            child: ChoiceChip(
+              side: BorderSide(color: Color(0xfff3f3f3)),
+              label: Text(e.title ?? "-"),
+              labelStyle: TextStyle(
+                color: e.isSelected == true ? Colors.white : fontColor,
+              ),
+              // padding: EdgeInsets.only(left: 15, right: 15),
+              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              selected: e.isSelected == true,
+              selectedColor: Theme.of(context).primaryColor,
+              backgroundColor: bgColor[10],
+              onSelected: (bool selected) {
+                for (final element in allItems) {
+                  if (element.id == e.id) {
+                    element.isSelected = selected;
+                  } else {
+                    if (isSingle) {
+                      element.isSelected = false;//单选
                     }
                   }
+                }
 
-                  selectedItemsTmp = allTypes.where((e) => e.isSelected == true).toList();
-                  // selectDiseaseTypes = diseaseTypeshere((e) => e.isSelected == true).toList();
-                  setState1(() {});
-                  // debugPrint("${e.toString()}");
-                },
-              ),)).toList(),
-          );
-        }
+                selectedItemsTmp = allItems.where((e) => e.isSelected == true).toList();
+                // selectDiseaseTypes = diseaseTypeshere((e) => e.isSelected == true).toList();
+                setState1(() {});
+                // debugPrint("${e.toString()}");
+              },
+            ),)).toList(),
+        );
+      }
     );
   }
 
@@ -310,6 +308,8 @@ class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
     EdgeInsets contentPadding = const EdgeInsets.all(20),
     StatefulWidgetBuilder? contentChildBuilder,
   }) {
+
+    final scrollController = ScrollController();
 
     final defaultHeader = Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -345,16 +345,18 @@ class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
       builder: (context, setState) {
 
         return Scrollbar(
+          controller: scrollController,
           child: ConstrainedBox(
             constraints: BoxConstraints(
               maxHeight: contentMaxHeight - buttonBarHeight,
               minHeight: contentMinHeight,
             ),
             child: SingleChildScrollView(
-                child: Padding(
-                  padding: contentPadding,
-                  child: contentChildBuilder?.call(context, setState),
-                )
+              controller: scrollController,
+              child: Padding(
+                padding: contentPadding,
+                child: contentChildBuilder?.call(context, setState),
+              )
             ),
           ),
         );
@@ -416,7 +418,7 @@ class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
     required List<SelectModel<FakeDataModel>> selectedItems,
   }) {
     final ids = selectedItems.map((e) => e.id).toList();
-    for (final element in allTypes) {
+    for (final element in allItems) {
       element.isSelected = ids.contains(element.id);
     }
   }

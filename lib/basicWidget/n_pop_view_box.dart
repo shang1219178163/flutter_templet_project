@@ -125,25 +125,25 @@ class _NPopViewBoxState extends State<NPopViewBox> {
     );
 
     final defaultContent = StatefulBuilder(
-        builder: (context, setState) {
+      builder: (context, setState) {
 
-          return Scrollbar(
-            controller: scrollController,
-            child: ConstrainedBox(
-              constraints: BoxConstraints(
-                maxHeight: contentMaxHeight - buttonBarHeight,
-                minHeight: contentMinHeight,
-              ),
-              child: SingleChildScrollView(
-                controller: scrollController,
-                child: Padding(
-                  padding: contentPadding,
-                  child: contentChildBuilder?.call(context, setState),
-                )
-              ),
+        return Scrollbar(
+          controller: scrollController,
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              maxHeight: contentMaxHeight - buttonBarHeight,
+              minHeight: contentMinHeight,
             ),
-          );
-        }
+            child: SingleChildScrollView(
+              controller: scrollController,
+              child: Padding(
+                padding: contentPadding,
+                child: contentChildBuilder?.call(context, setState),
+              )
+            ),
+          ),
+        );
+      }
     );
 
     final defaultFooter = NCancellAndConfirmBar(
@@ -159,55 +159,54 @@ class _NPopViewBoxState extends State<NPopViewBox> {
       },
     );
     return Align(
-        alignment: alignment,
-        child: Container(
-          margin: margin,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.all(radius),
-          ),
-          // constraints: BoxConstraints(
-          //   maxHeight: contentMaxHeight,
-          //   minHeight: contentMinHeight,
-          // ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              header ?? defaultHeader,
-              Divider(height: 1, color: divderColor,),
-              content ?? defaultContent,
-              footer ?? defaultFooter,
-            ],
-          ),
-
+      alignment: alignment,
+      child: Container(
+        margin: margin,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.all(radius),
+        ),
+        // constraints: BoxConstraints(
+        //   maxHeight: contentMaxHeight,
+        //   minHeight: contentMinHeight,
+        // ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            header ?? defaultHeader,
+            Divider(height: 1, color: divderColor,),
+            content ?? defaultContent,
+            footer ?? defaultFooter,
+          ],
+        ),
       ),
     );
   }
 
 
-  toShowGeneralDialog({
-    required Widget child,
-    Alignment alignment = Alignment.center,
-    Duration transitionDuration = const Duration(milliseconds: 200),
-
-  }) {
-
-    return showGeneralDialog(
-      context: context,
-      barrierDismissible: false,
-      barrierLabel: 'barrierLabel',
-      transitionDuration: transitionDuration,
-      pageBuilder: (context, animation, secondaryAnimation) {
-        if (child is Align) {
-          return child;
-        }
-        return Align(
-          alignment: alignment,
-          child: child,
-        );
-      }
-    );
-  }
+  // toShowGeneralDialog({
+  //   required Widget child,
+  //   Alignment alignment = Alignment.center,
+  //   Duration transitionDuration = const Duration(milliseconds: 200),
+  //
+  // }) {
+  //
+  //   return showGeneralDialog(
+  //     context: context,
+  //     barrierDismissible: false,
+  //     barrierLabel: 'barrierLabel',
+  //     transitionDuration: transitionDuration,
+  //     pageBuilder: (context, animation, secondaryAnimation) {
+  //       if (child is Align) {
+  //         return child;
+  //       }
+  //       return Align(
+  //         alignment: alignment,
+  //         child: child,
+  //       );
+  //     }
+  //   );
+  // }
 
 }
