@@ -1,16 +1,37 @@
 
 ///选择通用模型
-class SelectedModel<T> {
+class SelectModel<T> {
 
-  SelectedModel({
-    required this.data,
-    this.name,
+  SelectModel({
+    required this.id,
+    required this.title,
+    this.data,
     this.isSelected = false,
   });
 
-  String? name;
+  String? id;
+
+  String? title;
 
   bool? isSelected;
+  /// 通用数据
+  T? data;
 
-  T data;
+
+  SelectModel.fromJson(Map<String, dynamic>? json) {
+    if (json == null) {
+      return;
+    }
+    id = json['id'];
+    title = json['title'];
+    isSelected = json['isSelected'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final data = Map<String, dynamic>();
+    data['id'] = id;
+    data['title'] = title;
+    data['isSelected'] = isSelected;
+    return data;
+  }
 }

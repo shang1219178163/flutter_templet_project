@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/mixin/dialog_tag_select.dart';
+import 'package:flutter_templet_project/model/selected_model.dart';
 
 class AlertDialogTagSelectDemo extends StatefulWidget {
 
@@ -18,29 +19,27 @@ class AlertDialogTagSelectDemo extends StatefulWidget {
 
 class _AlertDialogTagSelectDemoState extends State<AlertDialogTagSelectDemo> {
 
+  final items = List.generate(20, (index) => index);
 
   /// 标签列表
-  List<TagDetailModel> tags = [];
+  late List<SelectModel> tags = items.map((e) => SelectModel(
+    id: e.toString(),
+    title: "标签_${e}",
+  )).toList();
 
   /// 选择的标签
-  List<TagDetailModel> selectTags = [];
+  List<SelectModel> selectTags = [];
 
   /// 临时选择的标签病列表
-  List<TagDetailModel> selectTagsTmp = [];
+  List<SelectModel> selectTagsTmp = [];
 
   /// 已选择的标签
-  List<String> get selectTagNames => selectTags.map((e) => e.name ?? "-").toList();
+  List<String> get selectTagNames => selectTags.map((e) => e.title ?? "-").toList();
 
 
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-    final items = List.generate(20, (index) => index);
 
-    tags = items.map((e) => TagDetailModel(
-      id: e.toString(),
-      name: "标签_${e}"
-    )).toList();
 
     return Scaffold(
       appBar: AppBar(
@@ -68,7 +67,7 @@ class _AlertDialogTagSelectDemoState extends State<AlertDialogTagSelectDemo> {
       onCancel: (){
 
       },
-      onConfirm: (List<TagDetailModel> selectedItems){
+      onConfirm: (List<SelectModel> selectedItems){
         selectTags = selectedItems;
 
         debugPrint(selectTagNames.toString());

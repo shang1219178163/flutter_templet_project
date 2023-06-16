@@ -59,52 +59,58 @@ class NCancellAndConfirmBar extends StatelessWidget {
       //   TextStyle? confirmTextStyle,
       // }
       ) {
-    return SizedBox(
-      height: height,
-      child: Row(
-        children: [
-          Expanded(
-            child: InkWell(
-              onTap: onCancell,
-              child: Container(
-                decoration: BoxDecoration(
-                    color: cancellBgColor,
-                    borderRadius: BorderRadius.only(bottomLeft: bottomLeftRadius)
-                ),
-                child: Center(
-                  child: Text(cancellTitle,
-                    style: cancellTextStyle ?? TextStyle(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w500,
-                      color: fontColor[20],
+    return Material(
+      borderRadius: BorderRadius.only(
+        bottomLeft: bottomRightRadius,
+        bottomRight: bottomRightRadius,
+      ),
+      child: SizedBox(
+        height: height,
+        child: Row(
+          children: [
+            Expanded(
+              child: InkWell(
+                onTap: onCancell,
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: cancellBgColor,
+                      borderRadius: BorderRadius.only(bottomLeft: bottomLeftRadius)
+                  ),
+                  child: Center(
+                    child: Text(cancellTitle,
+                      style: cancellTextStyle ?? TextStyle(
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w500,
+                        color: fontColor[20],
+                      ),
                     ),
                   ),
                 ),
               ),
             ),
-          ),
-          if (divider != null) divider!,
-          Expanded(
-            child: InkWell(
-              onTap: onConfirm,
-              child: Container(
-                decoration: BoxDecoration(
-                    color: confirmBgColor,
-                    borderRadius: BorderRadius.only(bottomRight: bottomRightRadius)
-                ),
-                child: Center(
-                  child: Text(confirmTitle,
-                    style: confirmTextStyle ?? TextStyle(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.white,
+            if (divider != null) divider!,
+            Expanded(
+              child: InkWell(
+                onTap: onConfirm,
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: confirmBgColor,
+                      borderRadius: BorderRadius.only(bottomRight: bottomRightRadius)
+                  ),
+                  child: Center(
+                    child: Text(confirmTitle,
+                      style: confirmTextStyle ?? TextStyle(
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

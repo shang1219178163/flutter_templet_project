@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/mixin/dialog_mixin.dart';
+import 'package:flutter_templet_project/model/selected_model.dart';
 
 // 定义数据源
 // TagsRootModel? tagsRootModel = CacheService().tagsRootModel;
@@ -47,22 +48,22 @@ import 'package:flutter_templet_project/mixin/dialog_mixin.dart';
 class DialogTagSelect with DialogMixin {
 
   /// 展示标签弹窗
-  present({
+  present<T>({
     required BuildContext context,
     /// 病人id
     required String? userId,
     /// 标题
     required String title,
     /// 标签列表
-    required List<TagDetailModel> tags,
+    required List<SelectModel<T>> tags,
     /// 临时选择的标签病列表
-    required List<TagDetailModel> selectTagsTmp,
+    required List<SelectModel<T>> selectTagsTmp,
     /// 选择的标签
-    required List<TagDetailModel> selectTags,
+    required List<SelectModel<T>> selectTags,
     /// 取消回调
     required VoidCallback onCancel,
     /// 确定回调
-    required ValueChanged<List<TagDetailModel>> onConfirm,
+    required ValueChanged<List<SelectModel<T>>> onConfirm,
     bool isMuti = true,
   }) {
     return presentDialog(
@@ -110,7 +111,7 @@ class DialogTagSelect with DialogMixin {
               side: e.isSelected == true
                   ? const BorderSide(color: Colors.transparent)
                   : const BorderSide(color: Color(0xffF3F3F3)),
-              label: Text(e.name ?? "-"),
+              label: Text(e.title ?? "-"),
               labelStyle: TextStyle(
                 color: e.isSelected == true ? Colors.white : Color(0xff181818),
               ),
@@ -142,7 +143,7 @@ class DialogTagSelect with DialogMixin {
 
   /// 设置标签(新增或者更新)
   Future<Map<String, dynamic>?> requestUpdateTag({
-    required List<TagDetailModel> selectTags,
+    required List<SelectModel> selectTags,
     required String? uerId,
   }) async {
     // 如果 选择为空走清除接口;选择不为空,更新;
@@ -155,30 +156,14 @@ class DialogTagSelect with DialogMixin {
 class TagDetailModel {
   TagDetailModel({
     this.id,
-    this.createTime,
-    this.updateTime,
-    this.createBy,
-    this.updateBy,
-    this.remark,
-    this.agencyId,
-    this.agencyType,
     this.name,
     this.color,
-    this.deleteStatus,
     this.isSelected = false,
   });
 
   String? id;
-  int? createTime;
-  int? updateTime;
-  String? createBy;
-  String? updateBy;
-  String? remark;
-  String? agencyId;
-  String? agencyType;
   String? name;
   String? color;
-  String? deleteStatus;
   /// 非接口返回字段
   bool? isSelected = false;
 
@@ -187,32 +172,16 @@ class TagDetailModel {
       return;
     }
     id = json['id'] ?? json['tagsId'];
-    createTime = json['createTime'];
-    updateTime = json['updateTime'];
-    createBy = json['createBy'];
-    updateBy = json['updateBy'];
-    remark = json['remark'];
-    agencyId = json['agencyId'];
-    agencyType = json['agencyType'];
     name = json['name'] ?? json['tagsName'];
     color = json['color'] ?? json['tagsColor'];
-    deleteStatus = json['deleteStatus'];
     isSelected = json['isSelected'];
   }
 
   Map<String, dynamic> toJson() {
     final data = Map<String, dynamic>();
     data['id'] = id;
-    data['createTime'] = createTime;
-    data['updateTime'] = updateTime;
-    data['createBy'] = createBy;
-    data['updateBy'] = updateBy;
-    data['remark'] = remark;
-    data['agencyId'] = agencyId;
-    data['agencyType'] = agencyType;
     data['name'] = name;
     data['color'] = color;
-    data['deleteStatus'] = deleteStatus;
     data['isSelected'] = isSelected;
     return data;
   }

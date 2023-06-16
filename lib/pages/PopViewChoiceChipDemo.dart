@@ -40,9 +40,10 @@ class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
 
 
   /// 分组疾病列表
-  late List<SelectedModel<FakeDataModel>> allTypes = nums.map((e){
-    return SelectedModel(
-      name: "item_$e",
+  late List<SelectModel<FakeDataModel>> allTypes = nums.map((e){
+    return SelectModel(
+      id: e.toString(),
+      title: "item_$e",
       isSelected: false,
       data: FakeDataModel(
       id: e.toString(),
@@ -51,13 +52,13 @@ class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
 
 
   /// 已选择的列表(多选)
-  List<SelectedModel<FakeDataModel>> selectedItems = [];
+  List<SelectModel<FakeDataModel>> selectedItems = [];
   /// 临时已选择的列表(多选)
-  List<SelectedModel<FakeDataModel>> selectedItemsTmp = [];
+  List<SelectModel<FakeDataModel>> selectedItemsTmp = [];
 
   /// 已选择的列表名称
   String get selectedItemsNames{
-    var result = selectedItems.map((e) => e.name ?? "-").toList();
+    var result = selectedItems.map((e) => e.title ?? "-").toList();
     // debugPrint("selectDiseaseTypesNames: ${result}");
     return result.join(",");
   }
@@ -154,7 +155,7 @@ class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
             color: Colors.transparent,
             child: ChoiceChip(
               side: BorderSide(color: Color(0xfff3f3f3)),
-              label: Text(e.name ?? "-"),
+              label: Text(e.title ?? "-"),
               labelStyle: TextStyle(
                 color: e.isSelected == true ? Colors.white : fontColor,
               ),
@@ -165,7 +166,7 @@ class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
               backgroundColor: bgColor[10],
               onSelected: (bool selected) {
                 for (final element in allTypes) {
-                  if (element.data.id == e.data.id) {
+                  if (element.data?.id == e.data?.id) {
                     element.isSelected = selected;
                   } else {
                     if (isSingle) {
@@ -260,7 +261,7 @@ class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
               color: Colors.transparent,
               child: ChoiceChip(
                 side: BorderSide(color: Color(0xfff3f3f3)),
-                label: Text(e.name ?? "-"),
+                label: Text(e.title ?? "-"),
                 labelStyle: TextStyle(
                   color: e.isSelected == true ? Colors.white : fontColor,
                 ),
@@ -271,7 +272,7 @@ class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
                 backgroundColor: bgColor[10],
                 onSelected: (bool selected) {
                   for (final element in allTypes) {
-                    if (element.data.id == e.data.id) {
+                    if (element.id == e.id) {
                       element.isSelected = selected;
                     } else {
                       if (isSingle) {
@@ -412,11 +413,11 @@ class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
 
   /// 处理疾病分组选中数据
   handleItems({
-    required List<SelectedModel<FakeDataModel>> selectedItems,
+    required List<SelectModel<FakeDataModel>> selectedItems,
   }) {
-    final ids = selectedItems.map((e) => e.data.id).toList();
+    final ids = selectedItems.map((e) => e.id).toList();
     for (final element in allTypes) {
-      element.isSelected = ids.contains(element.data.id);
+      element.isSelected = ids.contains(element.id);
     }
   }
 }
