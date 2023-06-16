@@ -113,7 +113,7 @@ class DialogTagSelect with DialogMixin {
               side: e.isSelected == true
                   ? const BorderSide(color: Colors.transparent)
                   : const BorderSide(color: Color(0xffF3F3F3)),
-              label: Text(e.title ?? "-"),
+              label: Text(e.name ?? "-"),
               labelStyle: TextStyle(
                 color: e.isSelected == true ? Colors.white : Color(0xff181818),
               ),

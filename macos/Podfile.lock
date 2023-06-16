@@ -1,4 +1,6 @@
 PODS:
+  - audio_session (0.0.1):
+    - FlutterMacOS
   - connectivity_macos (0.0.1):
     - FlutterMacOS
     - Reachability
@@ -27,6 +29,7 @@ PODS:
     - FlutterMacOS
 
 DEPENDENCIES:
+  - audio_session (from `Flutter/ephemeral/.symlinks/plugins/audio_session/macos`)
   - connectivity_macos (from `Flutter/ephemeral/.symlinks/plugins/connectivity_macos/macos`)
   - desktop_drop (from `Flutter/ephemeral/.symlinks/plugins/desktop_drop/macos`)
   - FlutterMacOS (from `Flutter/ephemeral`)
@@ -43,6 +46,8 @@ SPEC REPOS:
     - Reachability
 
 EXTERNAL SOURCES:
+  audio_session:
+    :path: Flutter/ephemeral/.symlinks/plugins/audio_session/macos
   connectivity_macos:
     :path: Flutter/ephemeral/.symlinks/plugins/connectivity_macos/macos
   desktop_drop:
@@ -63,6 +68,7 @@ EXTERNAL SOURCES:
     :path: Flutter/ephemeral/.symlinks/plugins/url_launcher_macos/macos
 
 SPEC CHECKSUMS:
+  audio_session: dea1f41890dbf1718f04a56f1d6150fd50039b72
   connectivity_macos: 5dae6ee11d320fac7c05f0d08bd08fc32b5514d9
   desktop_drop: 69eeff437544aa619c8db7f4481b3a65f7696898
   FlutterMacOS: 8f6f14fa908a6fb3fba0cd85dbd81ec4b251fb24

@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/n_cancell_and_confirm_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_pop_view_box.dart';
+import 'package:flutter_templet_project/extension/build_context_ext.dart';
+import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/model/fake_data_model.dart';
 import 'package:flutter_templet_project/model/selected_model.dart';
@@ -29,7 +31,9 @@ class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
 
   late final funcMap = <String, Function>{
     "NChoicBox 弹窗": showPopViewBox,
-    "方法 弹窗": clickUpdateTags,
+    "方法弹窗": clickUpdateTags,
+    "弹窗高度固定": clickAlertInset,
+    "弹窗高度自适应": clickAlertMaxHeight,
   };
 
   late var items = <Tuple3<String, String, String>>[
@@ -43,7 +47,7 @@ class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
   late List<SelectModel<FakeDataModel>> allItems = nums.map((e){
     return SelectModel(
       id: e.toString(),
-      title: "item_$e",
+      name: "item_$e",
       isSelected: false,
       data: FakeDataModel(
       id: e.toString(),
@@ -58,7 +62,7 @@ class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
 
   /// 已选择的列表名称
   String get selectedItemsNames{
-    var result = selectedItems.map((e) => e.title ?? "-").toList();
+    var result = selectedItems.map((e) => e.name ?? "-").toList();
     // debugPrint("selectDiseaseTypesNames: ${result}");
     return result.join(",");
   }
@@ -155,7 +159,7 @@ class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
             color: Colors.transparent,
             child: ChoiceChip(
               side: BorderSide(color: Color(0xfff3f3f3)),
-              label: Text(e.title ?? "-"),
+              label: Text(e.name ?? "-"),
               labelStyle: TextStyle(
                 color: e.isSelected == true ? Colors.white : fontColor,
               ),
@@ -190,17 +194,17 @@ class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
       barrierLabel: 'barrierLabel',
       transitionDuration: Duration(milliseconds: 200),
       pageBuilder: (context, animation, secondaryAnimation) {
-        // return Dialog(
-        //   backgroundColor: Colors.black.withOpacity(0.01),
-        //   insetPadding: EdgeInsets.zero,
-        //   child: InkWell(
-        //     onTap: () {
-        //       Navigator.of(context).pop();
-        //       // AppUti.removeInputFocus();
-        //     },
-        //     child: box,
-        //   ),
-        // );
+        return Dialog(
+          backgroundColor: Colors.black.withOpacity(0.01),
+          insetPadding: EdgeInsets.zero,
+          child: InkWell(
+            onTap: () {
+              Navigator.of(context).pop();
+              // AppUti.removeInputFocus();
+            },
+            child: box,
+          ),
+        );
         return Material(
           color: Colors.black.withOpacity(0.01),
           child: InkWell(
@@ -259,7 +263,7 @@ class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
             color: Colors.transparent,
             child: ChoiceChip(
               side: BorderSide(color: Color(0xfff3f3f3)),
-              label: Text(e.title ?? "-"),
+              label: Text(e.name ?? "-"),
               labelStyle: TextStyle(
                 color: e.isSelected == true ? Colors.white : fontColor,
               ),
@@ -285,6 +289,234 @@ class _PopViewChoiceChipDemoState extends State<PopViewChoiceChipDemo> {
                 // debugPrint("${e.toString()}");
               },
             ),)).toList(),
+        );
+      }
+    );
+  }
+
+  clickAlertInset() {
+    presentAlertInset(
+      header: Container(
+        color: ColorExt.random,
+        height: 50,
+      ),
+      footer: Container(
+        color: ColorExt.random,
+        height: 50,
+      ),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Divider(height: 2, color: Colors.red,),
+          Container(
+            color: ColorExt.random,
+            height: 150,
+          ),
+        ],
+      ),
+    );
+  }
+
+  clickAlertMaxHeight() {
+    final isMuti = true;
+
+    final tags = List.generate(50, (i) => SelectModel(
+      id: "$i",
+      name: "标签_$i",
+    ));
+
+    presentAlertMaxHeight(
+      header: Container(
+        // color: context.primaryColor,
+        height: 50,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          // color: Colors.transparent,
+          border: Border(
+            bottom: BorderSide(
+              width: 1,
+              color: Color(0xffe4e4e4)
+            ),
+          ),
+        ),
+        child: Text("标题",
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+      footer: NCancellAndConfirmBar(
+        onCancell: (){
+          debugPrint("${DateTime.now()} onCancell");
+          Navigator.of(context).pop();
+        },
+        onConfirm: (){
+          debugPrint("${DateTime.now()} onConfirm");
+          Navigator.of(context).pop();
+        }
+      ),
+      contentBuilder: (context, setState) {
+
+        return Wrap(
+          runSpacing: 8.w,
+          spacing: 16.w,
+          children: tags.map((e) => ChoiceChip(
+            label: Text(e.name ?? ""),
+            labelStyle: TextStyle(
+              color: e.isSelected == true ? Colors.white : Color(0xff181818),
+            ),
+            // padding: EdgeInsets.only(left: 15, right: 15),
+            selected: e.isSelected == true,
+            selectedColor: context.primaryColor,
+            onSelected: (selected) {
+              for (var element in tags) {
+                if (element.id == e.id) {
+                  element.isSelected = selected;
+                } else {
+                  if (isMuti == false) {
+                    element.isSelected = false;
+                  }
+                }
+              }
+
+              final tagNames = tags
+                  .where((e) => e.isSelected == true)
+                  .map((e) => e.name).toList();
+              debugPrint("tagNames: $tagNames");
+              setState((){});
+            },
+          )).toList(),
+        );
+      }
+    );
+  }
+
+  /// 固定高度弹窗
+  presentAlertInset({
+    required Widget content,
+    Widget? header,
+    Widget? footer,
+  }) {
+    return showGeneralDialog(
+      context: context,
+      // barrierDismissible: true,
+      // barrierColor: Colors.yellowAccent,
+      barrierLabel: 'showGeneralDialog',
+      transitionDuration: Duration(milliseconds: 200),
+      pageBuilder: (context, animation, secondaryAnimation) {
+
+        return Material(
+          color: Colors.black.withOpacity(0.05),
+          child: InkWell(
+            onTap: () {
+              debugPrint("barrier dismiss");
+              Navigator.of(context).pop();
+            },
+            child: Dialog(
+              // backgroundColor: Colors.red,
+              insetPadding: EdgeInsets.symmetric(
+                horizontal: 50,
+                vertical: 100,
+              ),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+              clipBehavior: Clip.hardEdge,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  if (header != null) header,
+                  Expanded(
+                    child: content,
+                  ),
+                  if (footer != null) footer,
+                ],
+              ),
+            ),
+          ),
+        );
+      }
+    );
+  }
+
+  /// 内容自适应高度
+  presentAlertMaxHeight({
+    BorderRadius? borderRadius = const BorderRadius.all(Radius.circular(8)),
+    EdgeInsets contentPadding = const EdgeInsets.all(20),
+    required StatefulWidgetBuilder? contentBuilder,
+    double maxHeight = 400,
+    EdgeInsets margin = const EdgeInsets.symmetric(
+      horizontal: 50,
+      vertical: 100,
+    ),
+    Widget? header,
+    Widget? footer,
+    VoidCallback? onCancel,
+  }) {
+    final scrollController = ScrollController();
+
+    final defaultContent = StatefulBuilder(
+      builder: (context, setState) {
+
+        return Scrollbar(
+          controller: scrollController,
+          child: SingleChildScrollView(
+            controller: scrollController,
+            child: Padding(
+              padding: contentPadding,
+              child: contentBuilder?.call(context, setState),
+            )
+          ),
+        );
+      }
+    );
+
+    return showGeneralDialog(
+      context: context,
+      barrierDismissible: false,
+      // barrierColor: Colors.yellowAccent,
+      barrierLabel: 'showGeneralDialog',
+      transitionDuration: Duration(milliseconds: 200),
+      pageBuilder: (context, animation, secondaryAnimation) {
+
+        return Material(
+          color: Colors.black.withOpacity(0.05),
+          child: InkWell(
+            onTap: onCancel ?? () {
+              debugPrint("${DateTime.now()} barrier dismiss");
+              // Navigator.of(context).pop();
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: borderRadius,
+                color: Colors.white,
+              ),
+              alignment: Alignment.center,
+              margin: margin,
+              constraints: BoxConstraints(
+                maxHeight: maxHeight,
+                // minWidth: 200,
+              ),
+              child: InkWell(
+              onTap: () {
+                debugPrint("${DateTime.now()} InkWell");
+              },
+                child: ClipRRect(
+                  borderRadius: borderRadius,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      if (header != null) header,
+                      Flexible(child: defaultContent),
+                      if (footer != null) footer,
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
         );
       }
     );

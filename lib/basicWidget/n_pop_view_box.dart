@@ -166,10 +166,6 @@ class _NPopViewBoxState extends State<NPopViewBox> {
           color: Colors.white,
           borderRadius: BorderRadius.all(radius),
         ),
-        // constraints: BoxConstraints(
-        //   maxHeight: contentMaxHeight,
-        //   minHeight: contentMinHeight,
-        // ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisSize: MainAxisSize.min,

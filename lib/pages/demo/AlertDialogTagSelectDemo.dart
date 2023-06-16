@@ -24,7 +24,7 @@ class _AlertDialogTagSelectDemoState extends State<AlertDialogTagSelectDemo> {
   /// 标签列表
   late List<SelectModel> tags = items.map((e) => SelectModel(
     id: e.toString(),
-    title: "标签_${e}",
+    name: "标签_${e}",
   )).toList();
 
   /// 选择的标签
@@ -34,7 +34,7 @@ class _AlertDialogTagSelectDemoState extends State<AlertDialogTagSelectDemo> {
   List<SelectModel> selectTagsTmp = [];
 
   /// 已选择的标签
-  List<String> get selectTagNames => selectTags.map((e) => e.title ?? "-").toList();
+  List<String> get selectTagNames => selectTags.map((e) => e.name ?? "-").toList();
 
 
   @override

@@ -4,14 +4,14 @@ class SelectModel<T> {
 
   SelectModel({
     required this.id,
-    required this.title,
+    required this.name,
     this.data,
     this.isSelected = false,
   });
 
   String? id;
 
-  String? title;
+  String? name;
 
   bool? isSelected;
   /// 通用数据
@@ -23,14 +23,14 @@ class SelectModel<T> {
       return;
     }
     id = json['id'];
-    title = json['title'];
+    name = json['title'];
     isSelected = json['isSelected'];
   }
 
   Map<String, dynamic> toJson() {
     final data = Map<String, dynamic>();
     data['id'] = id;
-    data['title'] = title;
+    data['title'] = name;
     data['isSelected'] = isSelected;
     return data;
   }
