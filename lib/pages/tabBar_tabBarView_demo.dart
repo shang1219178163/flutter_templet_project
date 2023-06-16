@@ -599,6 +599,7 @@ var others = [
   Tuple2(APPRouter.homeNavDemo, "HomeNavDemo", ),
   Tuple2(APPRouter.videoPlayerScreenDemo, "videoPlayerScreenDemo", ),
   Tuple2(APPRouter.textFieldColorChangeDemo, "textFieldColorChangeDemo", ),
+  Tuple2(APPRouter.adaptiveSizeLayoutDemo, "自适应布局研究", ),
 
 
 ];

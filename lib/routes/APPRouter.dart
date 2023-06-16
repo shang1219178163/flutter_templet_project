@@ -12,6 +12,7 @@ import 'package:flutter_templet_project/pages/PopViewChoiceChipDemo.dart';
 import 'package:flutter_templet_project/pages/ReflectDemo.dart';
 import 'package:flutter_templet_project/pages/PageLifecycleObserverDemo.dart';
 import 'package:flutter_templet_project/pages/RegExpDemo.dart';
+import 'package:flutter_templet_project/pages/demo/%20AdaptiveSizeLayoutDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedBuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedContainerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedListDemo.dart';
@@ -261,6 +262,7 @@ class APPRouter {
 
   static const homePage = '/MyHomePage';
   static const mediaQueryScreeenDemo = '/mediaQueryScreeenDemo';
+  static const adaptiveSizeLayoutDemo = '/adaptiveSizeLayoutDemo';
 
 
   static const loginPage = '/LoginPage';
@@ -580,6 +582,9 @@ class AppPage {
     GetPage(name: APPRouter.testPage, page: () => TestPage(),),
     GetPage(name: APPRouter.testPage, page: () => TestPage(),),
     GetPage(name: APPRouter.mediaQueryScreeenDemo, page: () => MediaQueryScreeenDemo(),),
+    GetPage(name: APPRouter.adaptiveSizeLayoutDemo, page: () => AdaptiveSizeLayoutDemo(),),
+
+
 
     GetPage(name: APPRouter.testPage, page: () => TestPage(),),
     GetPage(name: APPRouter.testPageOne, page: () => TestPageOne(),),
