@@ -9,6 +9,7 @@
 
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 
 extension ListExt<T,E> on List<E> {
@@ -41,9 +42,10 @@ extension ListExt<T,E> on List<E> {
   }
 
   /// 任意一个元素符合要求则返回,没有符合的返回为空
-  E? some(bool Function(E) test) {
+  E? some(bool Function(E) test, ValueChanged<E>? cb) {
     for (final element in this) {
       if (test(element)) {
+        cb?.call(element);
         return element;
       }
     }
@@ -141,13 +143,13 @@ extension ListExtObject<E extends Object> on List<E> {
 
 extension IterableExt<T> on Iterable<T> {
 
-  double sum(double Function(T) extract) {
-    var result = 0.0;
-    for (final e in this) {
-      result += extract(e);
-    }
-    return result;
-  }
+  // double sum(double Function(T) cb) {
+  //   var result = 0.0;
+  //   for (final e in this) {
+  //     result += cb(e);
+  //   }
+  //   return result;
+  // }
 
   // Iterable<T> filter() {
   //   return whereType<T>();
