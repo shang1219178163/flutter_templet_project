@@ -62,7 +62,7 @@ class _GradientDemoState extends State<GradientDemo> {
 
     showSheet(
       items: items,
-      onSelect: (BuildContext context, int index) {
+      onSelected: (int index) {
         tileMode = tileModes[index];
         debugPrint("$index, $tileMode");
         setState(() {});
@@ -76,7 +76,7 @@ class _GradientDemoState extends State<GradientDemo> {
 
     showSheet(
       items: items,
-      onSelect: (BuildContext context, int index) {
+      onSelected: (int index) {
         blendMode = blendModes[index];
         debugPrint("$index, $blendMode");
         setState(() {});
@@ -86,14 +86,14 @@ class _GradientDemoState extends State<GradientDemo> {
 
   showSheet({
     required List<Widget> items,
-    required Function(BuildContext context, int index)? onSelect,
+    required ValueChanged<int>? onSelected,
   }) {
     context.showCupertinoSheet(
       title: Text('渲染模式'),
       // message: Text(message, textAlign: TextAlign.start),
       items: items,
       cancel: Text('取消'),
-      onSelect: onSelect,
+      onSelected: onSelected,
     );
   }
 

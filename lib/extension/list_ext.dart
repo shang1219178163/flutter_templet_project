@@ -15,13 +15,13 @@ import 'package:flutter_templet_project/extension/string_ext.dart';
 extension ListExt<T,E> on List<E> {
 
 
-  static bool isEmpty(List? val) {
-    return val == null || val.isEmpty;
-  }
-
-  static bool isNotEmpty(List? val) {
-    return val != null && val.isNotEmpty;
-  }
+  // static bool isEmpty(List? val) {
+  //   return val == null || val.isEmpty;
+  // }
+  //
+  // static bool isNotEmpty(List? val) {
+  //   return val != null && val.isNotEmpty;
+  // }
 
   ///运算符重载
   List<E> operator *(int value) {
@@ -32,14 +32,14 @@ extension ListExt<T,E> on List<E> {
     return l;
   }
   
-  /// 带索引的map
-  List<T> mapWithIdx(T Function(E, int i) action) {
-    var result = <T>[];
-    for (var i = 0; i < length; i++) {
-      result.add(action(this[i], i));
-    }
-    return result;
-  }
+  // /// 带索引的map
+  // List<T> mapWithIdx(T Function(E, int i) action) {
+  //   var result = <T>[];
+  //   for (var i = 0; i < length; i++) {
+  //     result.add(action(this[i], i));
+  //   }
+  //   return result;
+  // }
 
   /// 任意一个元素符合要求则返回,没有符合的返回为空
   E? some(bool Function(E) test, ValueChanged<E>? cb) {

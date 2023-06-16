@@ -148,10 +148,10 @@ class _AlertSheetDemoState extends State<AlertSheetDemo> {
             message: Text(message, textAlign: TextAlign.start),
             items: List.generate(5, (index) => Text("item_$index")).toList(),
             cancel: Text('取消'),
-            onSelect: (BuildContext context, int index) {
+            onSelected: (int index) {
               debugPrint(index.toString());
             },
-            onCancell: (BuildContext context) {
+            onCancel: () {
               debugPrint('onCancell');
               Navigator.pop(context);
             },

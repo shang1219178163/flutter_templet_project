@@ -11,13 +11,13 @@ import 'dart:convert';
 
 extension MapExt on Map<String, dynamic>{
 
-  static bool isEmpty(Map? val) {
-    return val == null || val.isEmpty;
-  }
-
-  static bool isNotEmpty(Map? val) {
-    return val != null && val.isNotEmpty;
-  }
+  // static bool isEmpty(Map? val) {
+  //   return val == null || val.isEmpty;
+  // }
+  //
+  // static bool isNotEmpty(Map? val) {
+  //   return val != null && val.isNotEmpty;
+  // }
 
   Map get reversed => {
     for (var e in entries) e.value: e.key,
