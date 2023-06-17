@@ -70,23 +70,22 @@ mixin BottomSheetMixin{
     required BuildContext context,
     DateTime? initialDateTime,
     CupertinoDatePickerMode mode = CupertinoDatePickerMode.date,
-    // required ValueChanged<DateTime> onDateTimeChanged,
     VoidCallback? onCancel,
-    // required VoidCallback onConfirm,
     required ValueChanged<DateTime> onDateTimeConfirm,
+    ImageFilter? filter,
+    Color barrierColor = kCupertinoModalBarrierColor,
+    bool barrierDismissible = true,
+    bool useRootNavigator = true,
+    bool? semanticsDismissible,
+    RouteSettings? routeSettings,
   }) {
 
     var dateTime = initialDateTime ?? DateTime.now();
 
-    final content =
-    showCupertinoModalPopup(
-      context: context,
-      builder: (_) {
+    final content = StatefulBuilder(
+        builder: (context, setState) {
 
-        return StatefulBuilder(
-          builder: (context, setState) {
-
-            return Container(
+          return Container(
             height: 300 + kToolbarHeight,
             color: Colors.white,
             child: Column(
@@ -104,13 +103,13 @@ mixin BottomSheetMixin{
                   child: Container(
                     color: Colors.white,
                     child: CupertinoDatePicker(
-                      mode: mode,
-                      initialDateTime: dateTime,
-                      dateOrder: DatePickerDateOrder.ymd,
-                      onDateTimeChanged: (val) {
-                        dateTime = val;
-                        setState(() {});
-                      }
+                        mode: mode,
+                        initialDateTime: dateTime,
+                        dateOrder: DatePickerDateOrder.ymd,
+                        onDateTimeChanged: (val) {
+                          dateTime = val;
+                          setState(() {});
+                        }
                     ),
                   ),
                 ),
@@ -118,7 +117,15 @@ mixin BottomSheetMixin{
             ),
           );
         });
-      }
+
+    showCupertinoModalPopup(
+      context: context,
+      builder: (context) => content,
+      filter: filter,
+      barrierColor: barrierColor,
+      barrierDismissible: barrierDismissible,
+      semanticsDismissible: semanticsDismissible,
+      routeSettings: routeSettings,
     );
   }
 
@@ -132,46 +139,49 @@ mixin BottomSheetMixin{
     required VoidCallback? onConfirm,
   }){
     final scrollController = ScrollController();
+
+    final content = Material(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          buildPickerTitleBar(
+            context: context,
+            title: title,
+            onCancel: onCancel,
+            onConfirm: onConfirm,
+          ),
+          Expanded(
+              child: Container(
+                color: Colors.white,
+                child: child,
+              )
+          ),
+
+          // Expanded(
+          //   child: CupertinoScrollbar(
+          //     controller: scrollController,
+          //     child: ConstrainedBox(
+          //       constraints: BoxConstraints(
+          //         maxHeight: maxHeight,
+          //         minHeight: 100,
+          //       ),
+          //       child: SingleChildScrollView(
+          //         controller: scrollController,
+          //         child: child,
+          //       ),
+          //     ),
+          //   ),
+          // ),
+        ],
+      ),
+    );
+
     showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
 
-        return Material(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              buildPickerTitleBar(
-                context: context,
-                title: title,
-                onCancel: onCancel,
-                onConfirm: onConfirm,
-              ),
-              Expanded(
-                child: Container(
-                  color: Colors.white,
-                  child: child,
-                )
-              ),
-
-              // Expanded(
-              //   child: CupertinoScrollbar(
-              //     controller: scrollController,
-              //     child: ConstrainedBox(
-              //       constraints: BoxConstraints(
-              //         maxHeight: maxHeight,
-              //         minHeight: 100,
-              //       ),
-              //       child: SingleChildScrollView(
-              //         controller: scrollController,
-              //         child: child,
-              //       ),
-              //     ),
-              //   ),
-              // ),
-            ],
-          ),
-        );
+        return content;
       },
     );
   }
