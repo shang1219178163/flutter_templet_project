@@ -1,13 +1,17 @@
 
 
 import 'dart:async';
+import 'dart:math';
 
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/n_textfield.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
+import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/im_textfield_bar.dart';
+import 'package:flutter_templet_project/mixin/bottom_sheet_phrases_mixin.dart';
+import 'package:flutter_templet_project/mixin/keyboard_change_mixin.dart';
 import 'package:flutter_templet_project/uti/color_uti.dart';
 import 'package:tuple/tuple.dart';
 
@@ -24,7 +28,12 @@ class IMChatPage extends StatefulWidget {
   _IMChatPageState createState() => _IMChatPageState();
 }
 
-class _IMChatPageState extends State<IMChatPage> with SingleTickerProviderStateMixin {
+class _IMChatPageState extends State<IMChatPage> with
+    SingleTickerProviderStateMixin,
+    RouteAware,
+    WidgetsBindingObserver,
+    KeyboardChangeMixin,
+    BottomSheetPhrasesMixin {
 
   final _scrollController = ScrollController();
 
@@ -39,6 +48,18 @@ class _IMChatPageState extends State<IMChatPage> with SingleTickerProviderStateM
   var isExpand = false;
 
   final heightVN = ValueNotifier(0.0);
+
+
+  final inputBarFooterItems = <Tuple3<String, IconData, String>>[
+    const Tuple3("照片", Icons.insert_photo, ""),
+    const Tuple3("拍摄", Icons.photo_camera, ""),
+    const Tuple3("常用语", Icons.notifications_active, ""),
+    const Tuple3("五个字标题", Icons.ac_unit, ""),
+    const Tuple3("位置", Icons.location_on_outlined, ""),
+    const Tuple3("其他1", Icons.access_alarm, ""),
+    const Tuple3("其他2", Icons.color_lens_outlined, ""),
+  ];
+
 
   @override
   void dispose() {
@@ -56,6 +77,18 @@ class _IMChatPageState extends State<IMChatPage> with SingleTickerProviderStateM
 
     dataList.value = List.generate(20, (index) => "index_$index");
     super.initState();
+  }
+
+  final isKeyboardVisibleVN = ValueNotifier(false);
+
+  @override
+  void onKeyboardChanged(bool visible) {
+    // TODO deal with keyboard visibility change.
+    debugPrint("onKeyboardChanged:${visible ? "展开键盘" : "收起键盘"}");
+    isKeyboardVisibleVN.value = visible;
+    if (isKeyboardVisibleVN.value) {
+      // isExpand.value = false;
+    }
   }
 
   @override
@@ -84,6 +117,7 @@ class _IMChatPageState extends State<IMChatPage> with SingleTickerProviderStateM
 
   buildBody() {
     return SafeArea(
+      bottom: false,
       child: Column(
           // crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -135,13 +169,19 @@ class _IMChatPageState extends State<IMChatPage> with SingleTickerProviderStateM
             onSubmitted: (String value) {
               debugPrint("onSubmitted:$value");
             },
-            heaer: Container(
+            header: Container(
               color: Colors.green,
               height: 50,
             ),
-            footer: Container(
-              color: Colors.blue,
-              height: 300,
+            footer: buildIMBarFooter(
+              cb: (index) {
+                debugPrint("cb:$index");
+                choosePhrases(
+                  cb: (val) {
+                    debugPrint(val.phrases ?? "-");
+                  }
+                );
+              }
             ),
           ),
         ],
@@ -303,10 +343,90 @@ class _IMChatPageState extends State<IMChatPage> with SingleTickerProviderStateM
                 child: footer ?? const SizedBox(),
               ),
               // if (isExpand) footer ?? const SizedBox(),
+              SizedBox(
+                height: max(runSpacing, MediaQuery.of(context).padding.bottom),
+              )
             ],
           );
         },
       ),
+    );
+  }
+
+  buildIMBarFooter({
+    int rowCount = 4,
+    required ValueChanged<int> cb,
+  }) {
+    return Container(
+      color: Color(0xe3e3e3),
+      padding: EdgeInsets.only(
+        top: 16.w,
+        left: 16.w,
+        right: 16.w,
+      ),
+      child: LayoutBuilder(
+        builder: (context, constraints){
+          final runSpacing = 16.w;
+
+          // final spacing = 16.w;
+          // final itemWidth = ((constraints.maxWidth - spacing * (rowCount - 1))/rowCount).truncateToDouble();
+
+          final itemWidth = 64.w;
+          final spacing = (constraints.maxWidth - itemWidth * rowCount) /(rowCount - 1).truncateToDouble();
+          return Wrap(
+            spacing: spacing,
+            runSpacing: runSpacing,
+            children: inputBarFooterItems.map((e) {
+
+              final i = inputBarFooterItems.indexOf(e);
+              return InkWell(
+                onTap: () => cb.call(i),
+                child: SizedBox(
+                  width: itemWidth,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Container(
+                        width: 54.w,
+                        height: 54.w,
+                        // padding: EdgeInsets.all(6.w),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.all(Radius.circular(14.w)),
+                        ),
+                        child: Icon(e.item2, size: 30,),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(top: 8.w),
+                        child: Text(e.item1,
+                          style: TextStyle(
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.w500,
+                            color: fontColor,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            }).toList(),
+          );
+        }
+      ),
+    );
+  }
+
+  buildPhrases() {
+    return OutlinedButton(
+      onPressed: (){
+        choosePhrases(
+          cb: (val) {
+            debugPrint(val.phrases ?? "-");
+          }
+        );
+      },
+      child: Text("常用语"),
     );
   }
 }

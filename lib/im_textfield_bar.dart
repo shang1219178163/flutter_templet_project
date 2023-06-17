@@ -1,10 +1,13 @@
 
 
 
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/n_textfield.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
+import 'package:flutter_templet_project/mixin/keyboard_change_mixin.dart';
 import 'package:flutter_templet_project/uti/color_uti.dart';
 
 class IMTextfieldBar extends StatefulWidget {
@@ -13,58 +16,76 @@ class IMTextfieldBar extends StatefulWidget {
     Key? key,
     required this.onSubmitted,
     this.title,
-    this.heaer,
-    this.footer,
-    this.footerMaxHeight = 200,
+    this.header = const SizedBox(),
+    this.footer = const SizedBox(),
+    this.footerMaxHeight = 260,
     this.footerMinHeight = 0,
     this.spacing = 6,
     this.runSpacing = 14,
     this.isVoice = false,
+    // required this.isKeyboardVisibleVN,
   }) : super(key: key);
 
   final String? title;
   final ValueChanged<String>? onSubmitted;
 
-  Widget? heaer;
-  Widget? footer;
-  double? footerMinHeight;
-  double? footerMaxHeight;
+  Widget header;
+  Widget footer;
+  double footerMinHeight;
+  double footerMaxHeight;
 
   double spacing;
   double runSpacing;
   bool isVoice;
 
+  // ValueNotifier isKeyboardVisibleVN;
+
   @override
   _IMTextfieldBarState createState() => _IMTextfieldBarState();
 }
 
-class _IMTextfieldBarState extends State<IMTextfieldBar> with SingleTickerProviderStateMixin {
+class _IMTextfieldBarState extends State<IMTextfieldBar> with WidgetsBindingObserver {
 
-  late final AnimationController _controller = AnimationController(duration: Duration(milliseconds: 350), vsync: this);
-  final Animatable<double> _easeInTween = CurveTween(curve: Curves.easeIn);
+  var isExpand = ValueNotifier(false);
 
-  late final Animation<double> _heightFactor = Tween(
-      begin: widget.footerMinHeight ?? 0.0,
-      end: widget.footerMaxHeight ?? 260.0).animate(_controller);
+  late var isVoice = widget.isVoice;
 
-  var isExpand = false;
-  late var isVoice = widget.isVoice ?? false;
+  final isKeyboardVisibleVN = ValueNotifier(false);
+
+  double get bottom {
+    return MediaQuery.of(context).padding.bottom;
+  }
 
   @override
   void dispose() {
-    _controller.dispose();
+    /// 销毁
+    WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
 
   @override
   void initState() {
-    if (isExpand) {
-      _controller.value = 1;
-    }
-    _controller.forward().orCancel;
     super.initState();
+    /// 初始化
+    WidgetsBinding.instance.addObserver(this);
   }
 
+  @override
+  void didChangeMetrics() {
+    super.didChangeMetrics();
+    if (!mounted) {
+      return;
+    }
+
+    final tmp = bottom > 0;
+    if (isKeyboardVisibleVN.value == tmp) {
+      return;
+    }
+    isKeyboardVisibleVN.value = tmp;
+    if (isKeyboardVisibleVN.value) {
+      isExpand.value = false;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -112,11 +133,12 @@ class _IMTextfieldBarState extends State<IMTextfieldBar> with SingleTickerProvid
         builder: (context, setState) {
           return Column(
             children: [
-              widget.heaer ?? const SizedBox(),
+              widget.header,
               Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: widget.spacing,
-                  vertical: widget.runSpacing,
+                padding: EdgeInsets.only(
+                  top: widget.runSpacing,
+                  left: widget.spacing,
+                  right: widget.spacing,
                 ),
                 child: Row(
                   children: [
@@ -142,11 +164,9 @@ class _IMTextfieldBarState extends State<IMTextfieldBar> with SingleTickerProvid
                       padding: EdgeInsets.symmetric(horizontal: 6.w),
                       child: InkWell(
                         onTap: () {
-                          // isExpand = !isExpand;
-                          if (_controller.value == _controller.lowerBound) {
-                            _controller.forward().orCancel;
-                          } else {
-                            _controller.reverse().orCancel;
+                          isExpand.value = !isExpand.value;
+                          if (isExpand.value) {
+                            FocusScope.of(context).unfocus();
                           }
                           setState(() {});
                         },
@@ -162,24 +182,21 @@ class _IMTextfieldBarState extends State<IMTextfieldBar> with SingleTickerProvid
                   ],
                 ),
               ),
-              // AnimatedBuilder(
-              //   animation: _controller.view,
-              //   builder: (context, Widget? child) {
-              //     final bool closed = !isExpand && _controller.isDismissed;
-              //
-              //     return Offstage(
-              //       offstage: closed,
-              //       child: footer ?? const SizedBox()
-              //     );
-              //   },
-              //   // child: shouldRemoveChildren ? null : result,
-              // ),
-              AnimatedContainer(
-                duration: Duration(milliseconds: 350),
-                height: _heightFactor.value,
-                child: widget.footer ?? const SizedBox(),
+              ValueListenableBuilder<bool>(
+                 valueListenable: isExpand,
+                 builder: (context,  value, child){
+                   if (!value) {
+                     return const SizedBox();
+                   }
+                   if (isKeyboardVisibleVN.value) {
+                     FocusScope.of(context).unfocus();
+                   }
+                   return widget.footer;
+                }
               ),
-              // if (isExpand) footer ?? const SizedBox(),
+              SizedBox(
+                height: max(widget.runSpacing, MediaQuery.of(context).padding.bottom),
+              ),
             ],
           );
         },

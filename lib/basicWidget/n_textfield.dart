@@ -42,6 +42,7 @@ class NTextfield extends StatefulWidget {
     this.keyboardType,
     this.obscureText,
     this.contentPadding,
+    this.focusNode,
     this.fillColor = bgColor,
     this.focusColor = Colors.white,
     this.radius = 4,
@@ -68,6 +69,8 @@ class NTextfield extends StatefulWidget {
 
   final EdgeInsetsGeometry? contentPadding;
 
+  final FocusNode? focusNode;
+
   final Color? fillColor;
   final Color? focusColor;
   final double radius;
@@ -87,7 +90,7 @@ class _NTextfieldState extends State<NTextfield> {
 
   final current = ValueNotifier("");
 
-  final _focusNode = FocusNode();
+  late final _focusNode = widget.focusNode ?? FocusNode();
 
   final hasFocusVN = ValueNotifier<bool>(false);
 
