@@ -1,7 +1,7 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_cancell_and_confirm_bar.dart';
+import 'package:flutter_templet_project/basicWidget/n_cancel_and_confirm_bar.dart';
 
 /// PopView 内容
 class NPopViewBox extends StatefulWidget {
@@ -146,12 +146,12 @@ class _NPopViewBoxState extends State<NPopViewBox> {
       }
     );
 
-    final defaultFooter = NCancellAndConfirmBar(
+    final defaultFooter = NCancelAndConfirmBar(
       height: buttonBarHeight,
       confirmBgColor: Theme.of(context).primaryColor,
       bottomLeftRadius: radius,
       bottomRightRadius: radius,
-      onCancell: onCancell ?? (){
+      onCancel: onCancell ?? (){
         Navigator.of(context).pop();
       },
       onConfirm: onConfirm ?? () {

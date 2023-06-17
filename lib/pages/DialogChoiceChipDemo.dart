@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_templet_project/basicWidget/n_cancell_and_confirm_bar.dart';
+import 'package:flutter_templet_project/basicWidget/n_cancel_and_confirm_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_pop_view_box.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
@@ -339,8 +339,8 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
           ),
         ),
       ),
-      footer: NCancellAndConfirmBar(
-        onCancell: (){
+      footer: NCancelAndConfirmBar(
+        onCancel: (){
           selectedTagsTmp = selectedTags;
           handleItems(selectedItems: selectedTagsTmp);
           Navigator.of(context).pop();
@@ -586,12 +586,12 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
       }
     );
 
-    final defaultFooter = NCancellAndConfirmBar(
+    final defaultFooter = NCancelAndConfirmBar(
       height: buttonBarHeight,
       confirmBgColor: Theme.of(context).primaryColor,
       bottomLeftRadius: radius,
       bottomRightRadius: radius,
-      onCancell: onCancell ?? (){
+      onCancel: onCancell ?? (){
         Navigator.of(context).pop();
       },
       onConfirm: onConfirm ?? () {

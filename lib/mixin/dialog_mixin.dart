@@ -4,7 +4,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_templet_project/basicWidget/n_cancell_and_confirm_bar.dart';
+import 'package:flutter_templet_project/basicWidget/n_cancel_and_confirm_bar.dart';
 import 'package:flutter_templet_project/uti/app_uti.dart';
 import 'package:flutter_templet_project/uti/color_uti.dart';
 
@@ -86,13 +86,13 @@ mixin DialogMixin{
         }
     );
 
-    final defaultFooter = NCancellAndConfirmBar(
+    final defaultFooter = NCancelAndConfirmBar(
       height: buttonBarHeight,
       confirmBgColor: Theme.of(context).primaryColor,
       bottomLeftRadius: radius,
       bottomRightRadius: radius,
       divider: buttonBarDivider,
-      onCancell: onCancel ?? (){
+      onCancel: onCancel ?? (){
         Navigator.of(context).pop();
       },
       onConfirm: onConfirm ?? () {
@@ -203,16 +203,16 @@ mixin DialogMixin{
           ),
         );
       },
-      footer: NCancellAndConfirmBar(
+      footer: NCancelAndConfirmBar(
         height: 45.w,
         divider: buttonBarDivider,
-        cancellBgColor: cancellBgColor,
+        cancelBgColor: cancellBgColor,
         confirmBgColor: confirmBgColor,
-        cancellTextStyle: cancellTextStyle,
+        cancelTextStyle: cancellTextStyle,
         confirmTextStyle: confirmTextStyle,
         bottomLeftRadius: Radius.circular(12.w),
         bottomRightRadius: Radius.circular(12.w),
-        onCancell: onCancel ?? (){
+        onCancel: onCancel ?? (){
           Navigator.of(context).pop();
         },
         onConfirm: onConfirm ?? () {

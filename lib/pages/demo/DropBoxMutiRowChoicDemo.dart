@@ -8,7 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/enhance/enhance_expansion/enhance_expansion_choic.dart';
 import 'package:flutter_templet_project/basicWidget/enhance/enhance_expansion/enhance_expansion_tile.dart';
 
-import 'package:flutter_templet_project/basicWidget/n_cancell_and_confirm_bar.dart';
+import 'package:flutter_templet_project/basicWidget/n_cancel_and_confirm_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_choice_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_choice_box_horizontal.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
@@ -538,11 +538,11 @@ class _DropBoxMutiRowChoicDemoState extends State<DropBoxMutiRowChoicDemo> {
 
   /// 筛选弹窗 取消确认菜单
   Widget buildDropBoxButtonBar() {
-    return NCancellAndConfirmBar(
-      cancellTitle: "重置",
+    return NCancelAndConfirmBar(
+      cancelTitle: "重置",
       bottomLeftRadius: Radius.circular(30.w),
       bottomRightRadius: Radius.circular(30.w),
-      onCancell: () {
+      onCancel: () {
         // Navigator.of(context).pop();
         handleResetFitler();
       },

@@ -5,36 +5,36 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/uti/color_uti.dart';
 
 
-class NCancellAndConfirmBar extends StatelessWidget {
+class NCancelAndConfirmBar extends StatelessWidget {
 
-  NCancellAndConfirmBar({
+  NCancelAndConfirmBar({
     Key? key,
     this.title,
     this.height = 45,
-    this.cancellTitle = "取消",
+    this.cancelTitle = "取消",
     this.confirmTitle = "确定",
     this.bottomLeftRadius = const Radius.circular(4),
     this.bottomRightRadius = const Radius.circular(4),
-    required this.onCancell,
+    required this.onCancel,
     required this.onConfirm,
-    this.cancellBgColor = bgColor,
+    this.cancelBgColor = bgColor,
     this.confirmBgColor = Colors.blueAccent,
-    this.cancellTextStyle,
+    this.cancelTextStyle,
     this.confirmTextStyle,
     this.divider,
   }) : super(key: key);
 
   String? title;
   double height;
-  String cancellTitle;
+  String cancelTitle;
   String confirmTitle;
   Radius bottomLeftRadius;
   Radius bottomRightRadius;
-  VoidCallback? onCancell;
+  VoidCallback? onCancel;
   VoidCallback? onConfirm;
-  Color? cancellBgColor = bgColor;
+  Color? cancelBgColor = bgColor;
   Color? confirmBgColor = Colors.blueAccent;
-  TextStyle? cancellTextStyle;
+  TextStyle? cancelTextStyle;
   TextStyle? confirmTextStyle;
 
   VerticalDivider? divider;
@@ -70,15 +70,15 @@ class NCancellAndConfirmBar extends StatelessWidget {
           children: [
             Expanded(
               child: InkWell(
-                onTap: onCancell,
+                onTap: onCancel,
                 child: Container(
                   decoration: BoxDecoration(
-                      color: cancellBgColor,
+                      color: cancelBgColor,
                       borderRadius: BorderRadius.only(bottomLeft: bottomLeftRadius)
                   ),
                   child: Center(
-                    child: Text(cancellTitle,
-                      style: cancellTextStyle ?? TextStyle(
+                    child: Text(cancelTitle,
+                      style: cancelTextStyle ?? TextStyle(
                         fontSize: 18.sp,
                         fontWeight: FontWeight.w500,
                         color: fontColor[20],
