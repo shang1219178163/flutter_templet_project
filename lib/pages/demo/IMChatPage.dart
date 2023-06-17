@@ -416,17 +416,4 @@ class _IMChatPageState extends State<IMChatPage> with
       ),
     );
   }
-
-  buildPhrases() {
-    return OutlinedButton(
-      onPressed: (){
-        choosePhrases(
-          cb: (val) {
-            debugPrint(val.phrases ?? "-");
-          }
-        );
-      },
-      child: Text("常用语"),
-    );
-  }
 }
