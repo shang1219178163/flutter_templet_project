@@ -34,13 +34,13 @@ import 'package:flutter_templet_project/extension/widget_ext.dart';
 
 /// 常用语封装 mixin
 mixin BottomSheetPhrasesMixin<T extends StatefulWidget> on State<T>  {
-  final ScrollController _controller = ScrollController();
+  final _scrollController = ScrollController();
 
   List<IMPhrasesDetailModel> _phrases = [];
 
   @override
   void dispose() {
-    _controller.dispose();
+    _scrollController.dispose();
     super.dispose();
   }
 
@@ -60,7 +60,7 @@ mixin BottomSheetPhrasesMixin<T extends StatefulWidget> on State<T>  {
     required VoidCallback? onAdd,
     ScrollController? controller,
   }) {
-    controller ??= _controller;
+    controller ??= _scrollController;
 
     final bottom = MediaQuery.of(context).padding.bottom;
 
