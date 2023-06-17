@@ -58,7 +58,8 @@ mixin BottomSheetPhrasesMixin<T extends StatefulWidget> on State<T>  {
     required String Function(E) titleCb,
     TextStyle? textStyle,
     required ValueChanged<E> cb,
-    required VoidCallback? onAdd,
+    required VoidCallback onCancel,
+    required VoidCallback onAdd,
     ScrollController? controller,
   }) {
     controller ??= _scrollController;
@@ -84,17 +85,12 @@ mixin BottomSheetPhrasesMixin<T extends StatefulWidget> on State<T>  {
               children: [
                 buildTextButton(
                   text: Text("取消",),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
+                  onPressed: onCancel,
                 ),
                 if(title != null) Expanded(child: title,),
                 buildTextButton(
                   text: Text("自定义",),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                    onAdd?.call();
-                  },
+                  onPressed: onAdd,
                 ),
               ],
             ),
@@ -182,6 +178,8 @@ mixin BottomSheetPhrasesMixin<T extends StatefulWidget> on State<T>  {
 
   /// 选择常用语
   choosePhrases({
+    required VoidCallback onCancel,
+    required VoidCallback onAdd,
     required ValueChanged<IMPhrasesDetailModel>? cb,
   }) {
     showPhrasesSheet<IMPhrasesDetailModel>(
@@ -191,9 +189,8 @@ mixin BottomSheetPhrasesMixin<T extends StatefulWidget> on State<T>  {
       cb: cb ?? (val) {
         debugPrint(val.phrases ?? "-");
       },
-      onAdd: () {
-        /// 跳转新增页面
-      },
+      onCancel: onCancel,
+      onAdd: onAdd,
     );
   }
 

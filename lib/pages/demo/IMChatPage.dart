@@ -179,6 +179,13 @@ class _IMChatPageState extends State<IMChatPage> with
                 choosePhrases(
                   cb: (val) {
                     debugPrint(val.phrases ?? "-");
+                  },
+                  onCancel: (){
+                    Navigator.of(context).pop();
+                  },
+                  onAdd: () {
+                    debugPrint("onAdd");
+                    Navigator.of(context).pop();
                   }
                 );
               }
