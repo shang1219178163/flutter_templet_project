@@ -157,7 +157,7 @@ mixin BottomSheetPhrasesMixin<T extends StatefulWidget> on State<T>  {
     );
   }
 
-  buildTextButton({
+  Widget buildTextButton({
     required Text text,
     required VoidCallback? onPressed
   }) {
