@@ -30,7 +30,7 @@ class LocationPopView extends StatelessWidget {
     return ListView.builder(itemBuilder: (BuildContext context, int index) {
       return Align(
         alignment: Alignment.centerRight,
-        child: PopupMenuButtonExt.fromEntryFromJson(
+        child: PopupMenuButtonExt.fromEntryJson(
             json: {"aa": "0",
               "bb": "1",
               "cc": "2"},

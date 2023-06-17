@@ -144,8 +144,7 @@ extension TextButtonExt on TextButton{
 
 extension PopupMenuButtonExt on PopupMenuButton{
 
-  /// itemBuilder: <PopupMenuItem<String>>[]
-  static from({
+  static fromList({
     Widget? child,
     required List<String> list,
     Offset offset = Offset.zero,
@@ -161,17 +160,21 @@ extension PopupMenuButtonExt on PopupMenuButton{
   );
 
   /// itemBuilder: <PopupMenuButton<String>>[]
-  static fromJson({
+  static fromJson<T>({
     Widget? child,
-    required Map<String, String> json,
+    required Map<String, T> json,
+    T? initialValue,
     Offset offset = Offset.zero,
-    void Function(String value)? callback
-  }) => PopupMenuButton<String>(
-    itemBuilder: (BuildContext context) => json.keys.map((key) => PopupMenuItem(
-      value: json[key],
-      child: Text(key),
-    )).toList(),
-    onSelected: callback,
+    PopupMenuItemSelected<T>? onSelected,
+  }) => PopupMenuButton<T>(
+    itemBuilder: (context) {
+      return json.keys.map((key) => PopupMenuItem<T>(
+        value: json[key],
+        child: Text(key),
+      )).toList();
+    },
+    initialValue: initialValue,
+    onSelected: onSelected,
     offset: offset,
     child: child,
   );
@@ -247,7 +250,7 @@ extension PopupMenuButtonExt on PopupMenuButton{
   }
 
   /// itemBuilder: <PopupMenuEntry<String>>[]
-  static fromEntryFromJson({
+  static fromEntryJson({
     Widget? child,
     required Map<String, String> json,
     required String checkedString,
@@ -261,7 +264,7 @@ extension PopupMenuButtonExt on PopupMenuButton{
     )).toList();
 
     return PopupMenuButton<String>(
-      itemBuilder: (BuildContext context) => items,
+      itemBuilder: (context) => items,
       onSelected: callback,
       offset: offset,
       shape: RoundedRectangleBorder(

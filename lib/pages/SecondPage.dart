@@ -669,38 +669,51 @@ class _SecondPageState extends State<SecondPage> {
   }
 
   _buildPopupMenuButtonExt() {
+    final json = {
+    "aa": "0",
+    "bb": "1",
+    "cc": "2"
+    };
     return Column(
-        children: [
-          PopupMenuButtonExt.fromEntryFromJson(
-              child: Container(
-                  padding: EdgeInsets.all(8),
-                  decoration: BoxDecoration(color: Colors.greenAccent, border: Border.all()),
-                  child: Text('PopupMenuButtonExt.fromEntryFromJson')
-              ),
-              json: {
-                "aa": "0",
-                "bb": "1",
-                "cc": "2"
-              },
-              checkedString: "aa",
-              callback: (value) {
-                setState(() => ddlog(value));
-              }
+      children: [
+        PopupMenuButtonExt.fromJson<String>(
+          child: Container(
+              padding: EdgeInsets.all(8),
+              decoration: BoxDecoration(color: Colors.greenAccent, border: Border.all()),
+              child: Text('PopupMenuButtonExt.fromJson')
           ),
+          json: json,
+          onSelected: (value) {
+            setState(() => ddlog(value));
+          }
+        ),
 
-          PopupMenuButtonExt.fromCheckList(
-              child: Container(
-                  padding: EdgeInsets.all(8),
-                  decoration: BoxDecoration(color: Colors.greenAccent, border: Border.all()),
-                  child: Text('PopupMenuButtonExt.fromCheckList')
-              ),
-              list: ["a", "b", "c"],
-              checkedIdx: 1,
-              callback: (value) {
-                setState(() => ddlog(value));
-              }
+        PopupMenuButtonExt.fromEntryJson(
+          child: Container(
+            padding: EdgeInsets.all(8),
+            decoration: BoxDecoration(color: Colors.greenAccent, border: Border.all()),
+            child: Text('PopupMenuButtonExt.fromEntryJson')
           ),
-        ]
+          json: json,
+          checkedString: "aa",
+          callback: (value) {
+            setState(() => ddlog(value));
+          }
+        ),
+
+        PopupMenuButtonExt.fromCheckList(
+          child: Container(
+            padding: EdgeInsets.all(8),
+            decoration: BoxDecoration(color: Colors.greenAccent, border: Border.all()),
+            child: Text('PopupMenuButtonExt.fromCheckList')
+          ),
+          list: ["a", "b", "c"],
+          checkedIdx: 1,
+          callback: (value) {
+            setState(() => ddlog(value));
+          }
+        ),
+      ]
     );
   }
 

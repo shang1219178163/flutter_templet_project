@@ -317,7 +317,7 @@ class _MyHomePageState extends State<MyHomePage> {
       title: Text(widget.title ?? "标题"),
       leading: Icon(Icons.arrow_back),
       actions: [
-        PopupMenuButtonExt.fromEntryFromJson(
+        PopupMenuButtonExt.fromEntryJson(
             json: {"aa": "0",
               "bb": "1",
               "cc": "2"},
