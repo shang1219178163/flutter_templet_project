@@ -39,8 +39,6 @@ class _AlertDialogTagSelectDemoState extends State<AlertDialogTagSelectDemo> {
 
   @override
   Widget build(BuildContext context) {
-
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
