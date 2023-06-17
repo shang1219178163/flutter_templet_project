@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/extension/scroll_controller_ext.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
+import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/pages/demo/ListViewDemo.dart';
 
 import 'package:tuple/tuple.dart';
@@ -198,7 +199,7 @@ class _ListViewOneDemoState extends State<ListViewOneDemo> {
               color: Colors.green,
               width: index != 1 ? width: null,
               child: index == 1 ? Text(e.item2) : e.item1.startsWith('http') ? FadeInImage(
-                  placeholder: AssetImage('images/img_placeholder.png') ,
+                  placeholder: 'img_placeholder.png'.toAssetImage() ,
                   image: NetworkImage(e.item1),
                   fit: BoxFit.cover,
                   height: 60,

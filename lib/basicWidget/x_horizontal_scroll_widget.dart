@@ -444,7 +444,7 @@ class HorizontalScrollWidget extends StatelessWidget {
             fit: StackFit.expand,
             children: [
               FadeInImage(
-                placeholder: AssetImage('images/img_placeholder.png'),
+                placeholder: 'img_placeholder.png'.toAssetImage(),
                 image: NetworkImage(e.item1),
                 fit: BoxFit.fill,
                 height: double.infinity,

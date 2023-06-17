@@ -193,7 +193,7 @@ class _CustomScrollBarDemoState extends State<CustomScrollBarDemo> {
             fit: StackFit.expand,
             children: [
               FadeInImage(
-                placeholder: AssetImage('images/img_placeholder.png'),
+                placeholder: 'img_placeholder.png'.toAssetImage(),
                 image: NetworkImage(url),
                 fit: BoxFit.fill,
                 // height: double.infinity,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
+import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/vendor/flutter_swiper_demo.dart';
 
 
@@ -110,7 +111,7 @@ class XCollectionNavWidget extends StatelessWidget {
           children: [
             FittedBox(
               child: FadeInImage(
-                placeholder: AssetImage('images/img_placeholder.png'),
+                placeholder: 'img_placeholder.png'.toAssetImage(),
                 image: NetworkImage('https://pic.616pic.com/bg_w1180/00/07/20/2gfqq0N3qX.jpg!/fw/1120'),
                 fit: BoxFit.fill,
                 width: 44,

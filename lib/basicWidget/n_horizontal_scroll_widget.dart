@@ -193,7 +193,7 @@ class _HorizontalScrollWidgetState extends State<NHorizontalScrollWidget> {
                   boxShadow: boxShadows,
                 ),
                 child: FadeInImage(
-                  placeholder: AssetImage('images/img_placeholder.png'),
+                  placeholder: 'img_placeholder.png'.toAssetImage(),
                   image: NetworkImage(model.icon ?? ''),
                   fit: BoxFit.cover,
                 ),

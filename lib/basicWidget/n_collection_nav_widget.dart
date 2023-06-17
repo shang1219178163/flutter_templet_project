@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/edge_insets_ext.dart';
+import 'package:flutter_templet_project/extension/string_ext.dart';
 
 /// 默认图标大小
 const double DEFALUT_ICON_SIZE = 44;
@@ -293,7 +294,7 @@ class _NCollectionNavWidgetState extends State<NCollectionNavWidget> {
             child: ClipRRect(
               borderRadius: imgBorderRadius,
               child: FadeInImage(
-                placeholder: AssetImage('images/img_placeholder.png'),
+                placeholder: 'img_placeholder.png'.toAssetImage(),
                 image: NetworkImage(iconUrl),
                 fit: BoxFit.fill,
                 width: widget.iconSize,

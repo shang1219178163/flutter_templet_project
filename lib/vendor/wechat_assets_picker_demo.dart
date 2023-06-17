@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
     // show AssetEntity, AssetEntityImageProvider;
 
@@ -65,7 +66,7 @@ class _WechatAssetsPickerDemoState extends State<WechatAssetsPickerDemo> {
               child: FadeInImage(
                 width: itemWidth,
                 height: itemWidth,
-                placeholder: AssetImage('images/img_placeholder.png'),
+                placeholder: 'img_placeholder.png'.toAssetImage(),
                 image: AssetEntityImageProvider(e, isOriginal: false),
                 fit: BoxFit.cover,
               ),
@@ -177,7 +178,7 @@ class WechatPhotoPicker extends StatefulWidget {
     this.rowCount = 3,
     this.spacing = 10,
     this.decoration,
-    this.placeholder = const AssetImage('images/img_placeholder.png'),
+    this.placeholder = const AssetImage('assets/images/img_placeholder.png'),
     this.addBuilder,
     required this.onChanged,
     this.onPicker,

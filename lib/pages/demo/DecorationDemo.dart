@@ -57,7 +57,7 @@ class _DecorationDemoState extends State<DecorationDemo> {
       ),
       bgUrl: 'https://tenfei02.cfp.cn/creative/vcg/800/new/VCG21409037867.jpg',
       // bgChild: FadeInImage(
-      //   placeholder: AssetImage('images/img_placeholder.png'),
+      //   placeholder: 'img_placeholder.png'.toAssetImage(),
       //   image: NetworkImage('https://tenfei02.cfp.cn/creative/vcg/800/new/VCG21409037867.jpg'),
       //   fit: BoxFit.fill,
       //   width: 400,

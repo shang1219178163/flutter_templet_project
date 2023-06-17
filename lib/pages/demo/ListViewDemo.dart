@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/list_subtitle_cell.dart';
 import 'package:flutter_templet_project/extension/divider_ext.dart';
 import 'package:flutter_templet_project/extension/scroll_controller_ext.dart';
+import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/mockData/mock_data.dart';
 import 'package:tuple/tuple.dart';
 
@@ -172,6 +173,7 @@ class _ListViewDemoState extends State<ListViewDemo> {
         thumbVisibility: true,
         child: ListView.separated(
             key: key,
+            // reverse: true,
             controller: controller,
             scrollDirection: scrollDirection,
             padding: EdgeInsets.all(0),
@@ -180,7 +182,7 @@ class _ListViewDemoState extends State<ListViewDemo> {
             itemBuilder: itemBuilder ?? (context, index) {
               final e = items[index];
 
-              GlobalKey itemKey = GlobalKey(debugLabel: e.item1);
+              final itemKey = GlobalKey(debugLabel: e.item1);
               return InkWell(
                 key: itemKey,
                 onTap: () {
@@ -189,10 +191,10 @@ class _ListViewDemoState extends State<ListViewDemo> {
                 child: Container(
                   color: Colors.green,
                   child: e.item1.startsWith('http') ? FadeInImage(
-                      placeholder: AssetImage('images/img_placeholder.png') ,
-                      image: NetworkImage(e.item1),
-                      fit: BoxFit.cover,
-                      height: 60,
+                    placeholder: 'img_placeholder.png'.toAssetImage(),
+                    image: NetworkImage(e.item1),
+                    fit: BoxFit.cover,
+                    height: 60,
                   ) : Container(
                     height: 60,
                     child: Text('Index:${e.item1}')
@@ -258,7 +260,7 @@ class _ListViewDemoState extends State<ListViewDemo> {
                 color: Colors.green,
                 // width: 200,
                 child: e.item1.startsWith('http') ? FadeInImage(
-                    placeholder: AssetImage('images/img_placeholder.png') ,
+                    placeholder: 'img_placeholder.png'.toAssetImage() ,
                     image: NetworkImage(e.item1),
                     fit: BoxFit.cover,
                 ) : Center(child: Text('Index:${e.item1}')),
@@ -313,7 +315,7 @@ class _ListViewDemoState extends State<ListViewDemo> {
                 color: Colors.green,
                 // width: 200,
                 child: e.item1.startsWith('http') ? FadeInImage(
-                    placeholder: AssetImage('images/img_placeholder.png') ,
+                    placeholder: 'img_placeholder.png'.toAssetImage() ,
                     image: NetworkImage(e.item1),
                     fit: BoxFit.cover,
                     height: 70
