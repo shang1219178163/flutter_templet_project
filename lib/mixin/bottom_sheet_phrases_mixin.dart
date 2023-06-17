@@ -53,6 +53,7 @@ mixin BottomSheetPhrasesMixin<T extends StatefulWidget> on State<T>  {
 
   /// 常用语弹窗源方法
   showPhrasesSheet<E>({
+    Text? title,
     required List<E> items,
     required String Function(E) titleCb,
     TextStyle? textStyle,
@@ -77,69 +78,28 @@ mixin BottomSheetPhrasesMixin<T extends StatefulWidget> on State<T>  {
         children: [
           Container(
             // color: Colors.green,
-            padding: EdgeInsets.symmetric(horizontal: 25.w, vertical: 16.w),
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.w),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                TextButton(
-                  style: TextButton.styleFrom(
-                    padding: EdgeInsets.zero,
-                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                    minimumSize: const Size(30, 18),
-                    textStyle: TextStyle(
-                      color: context.primaryColor,
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w500,
-                    )
-                  ),
+                buildTextButton(
+                  text: Text("取消",),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  child: Text("取消",
-                    // style: TextStyle(
-                    //   color: context.primaryColor,
-                    //   fontSize: 16.sp,
-                    //   fontWeight: FontWeight.w500,
-                    // ),
-                  ),
                 ),
-                // Expanded(
-                //   child: Text(
-                //     "请选择",
-                //     textAlign: TextAlign.center,
-                //     style: TextStyle(
-                //       color: fontColor,
-                //       fontSize: 18.sp,
-                //       fontWeight: FontWeight.w500,
-                //     ),
-                //   ),
-                // ),
-                TextButton(
-                  style: TextButton.styleFrom(
-                    padding: EdgeInsets.zero,
-                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                    minimumSize: Size(50, 18),
-                    textStyle: TextStyle(
-                      color: context.primaryColor,
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w500,
-                    )
-                  ),
+                if(title != null) Expanded(child: title,),
+                buildTextButton(
+                  text: Text("自定义",),
                   onPressed: () {
                     Navigator.of(context).pop();
                     onAdd?.call();
                   },
-                  child: Text("自定义",
-                    // style: TextStyle(
-                    //   color: context.primaryColor,
-                    //   fontSize: 16.sp,
-                    //   fontWeight: FontWeight.w500,
-                    // ),
-                  ),
                 ),
               ],
             ),
           ),
+          Divider(height: 1,),
           Expanded(
             child: Scrollbar(
               controller: controller,
@@ -155,10 +115,10 @@ mixin BottomSheetPhrasesMixin<T extends StatefulWidget> on State<T>  {
                       Navigator.of(context).pop();
                     },
                     child: Container(
-                      margin: EdgeInsets.symmetric(horizontal: 16.w),
+                      // margin: EdgeInsets.symmetric(horizontal: 16.w),
                       padding: EdgeInsets.symmetric(
-                        horizontal: 8.w,
-                        vertical: 8.h,
+                        horizontal: 16.w,
+                        // vertical: 8.h,
                       ),
                       // decoration: BoxDecoration(
                       //   color: Colors.white,
@@ -180,8 +140,8 @@ mixin BottomSheetPhrasesMixin<T extends StatefulWidget> on State<T>  {
                 separatorBuilder: (context, int index) {
                   return Divider(
                     height: 16.w,
-                    indent: 25.w,
-                    endIndent: 25.w,
+                    indent: 16.w,
+                    endIndent: 16.w,
                   );
                 },
               ),
@@ -194,6 +154,29 @@ mixin BottomSheetPhrasesMixin<T extends StatefulWidget> on State<T>  {
     child.toShowModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,
+    );
+  }
+
+  buildTextButton({
+    required Text text,
+    required VoidCallback? onPressed
+  }) {
+    return TextButton(
+      style: TextButton.styleFrom(
+        padding: EdgeInsets.zero,
+        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        minimumSize: Size(50, 18),
+        textStyle: TextStyle(
+          color: context.primaryColor,
+          fontSize: 16.sp,
+          fontWeight: FontWeight.w500,
+        )
+      ),
+      onPressed: () {
+        Navigator.of(context).pop();
+        onPressed?.call();
+      },
+      child: text,
     );
   }
 
