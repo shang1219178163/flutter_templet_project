@@ -11,7 +11,7 @@ import 'package:flutter_templet_project/pages/SecondPage.dart';
 import 'package:flutter_templet_project/pages/ThirdPage.dart';
 import 'package:flutter_templet_project/routes/APPRouter.dart';
 
-import 'package:flutter_templet_project/extension/bottom_sheet_ext.dart';
+import 'package:flutter_templet_project/mixin/bottom_sheet_mixin.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';

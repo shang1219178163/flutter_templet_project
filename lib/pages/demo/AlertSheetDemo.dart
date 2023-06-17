@@ -8,7 +8,7 @@ import 'package:flutter_templet_project/extension/ddlog.dart';
 
 import 'package:flutter_templet_project/basicWidget/chioce_list.dart';
 import 'package:flutter_templet_project/basicWidget/chioce_wrap.dart';
-import 'package:flutter_templet_project/extension/bottom_sheet_ext.dart';
+import 'package:flutter_templet_project/mixin/bottom_sheet_mixin.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:tuple/tuple.dart';
 
@@ -21,7 +21,7 @@ class AlertSheetDemo extends StatefulWidget {
   _AlertSheetDemoState createState() => _AlertSheetDemoState();
 }
 
-class _AlertSheetDemoState extends State<AlertSheetDemo> {
+class _AlertSheetDemoState extends State<AlertSheetDemo> with BottomSheetMixin {
 
   var titles = ["默认样式", "ListTile", "添加子视图", "自定义", "单选列表", "多选列表", "6", "7", "8"];
 
@@ -92,25 +92,33 @@ class _AlertSheetDemoState extends State<AlertSheetDemo> {
 
       case 3:
         {
-          BottomSheetExt.presentSheet(
+          presentBottomSheet(
             context: context,
             title: title,
-            onCancel: (){
-              debugPrint("取消");
-            },
             onConfirm: (){
               debugPrint("确定");
+              Navigator.of(context).pop();
             },
-            content: Container(
+            child: Container(
               child: Column(
                 children: [
-                  Text(message),
+                  Container(
+                    padding: EdgeInsets.all(16),
+                    child: Text(message),
+                  ),
                   ...titles.map((e) {
-                    return Column(
-                      children: [
-                        ListTile(title: Text(e),),
-                        Divider(),
-                      ],
+                    return InkWell(
+                      onTap: (){
+                        debugPrint("${DateTime.now()}: $e");
+                      },
+                      child: Container(
+                        child: Column(
+                          children: [
+                            ListTile(title: Text(e),),
+                            Divider(height: 1, indent: 15, endIndent: 15,),
+                          ],
+                        ),
+                      ),
                     );
                   }).toList(),
                 ],
@@ -143,7 +151,8 @@ class _AlertSheetDemoState extends State<AlertSheetDemo> {
         break;
       case 7:
         {
-          context.showCupertinoSheet(
+          presentCupertinoActionSheet(
+            context: context,
             title: Text(title),
             message: Text(message, textAlign: TextAlign.start),
             items: List.generate(5, (index) => Text("item_$index")).toList(),

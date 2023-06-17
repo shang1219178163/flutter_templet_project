@@ -58,7 +58,7 @@ class _ListTileDemoState extends State<ListTileDemo> {
 
   Widget buildBody() {
     return Material(
-      child: Container(
+      child: SingleChildScrollView(
         child: Column(
           children: [
             ListTile(

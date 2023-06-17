@@ -10,6 +10,7 @@ import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/basicWidget/chioce_list.dart';
 import 'package:flutter_templet_project/extension/list_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
+import 'package:flutter_templet_project/mixin/bottom_sheet_mixin.dart';
 import 'package:flutter_templet_project/pages/demo/AlertSheetDemo.dart';
 
 import 'package:flutter_templet_project/pages/demo/ListTileDemo.dart';
@@ -21,10 +22,10 @@ class PickerDemo extends StatefulWidget {
   _PickerDemoState createState() => _PickerDemoState();
 }
 
-class _PickerDemoState extends State<PickerDemo> {
+class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
 
   var titles = [
-    "datePicker", "datePicker浅封装", "datePicker封装",
+    "datePicker", "datePicker mixin封装", "datePicker封装",
     "Picker浅封装", "Picker封装", "自定义",
     "单选滚动列表", "多选滚动列表", "多种类按钮",
     "日期选择", "日期时段选择", "多项选择", "多项选择1"];
@@ -86,40 +87,31 @@ class _PickerDemoState extends State<PickerDemo> {
       case 0:
         {
           _showDatePicker(
-              context: context,
-              callback: (DateTime dateTime, String title) {
-                ddlog([dateTime, title]);
-              });
+            context: context,
+            onConfirm: () {
+              debugPrint("${DateTime.now()}");
+            },
+            onDateTimeChanged: (DateTime val) {
+              debugPrint("${val}");
+            },
+          );
         }
         break;
       case 1:
        {
-         var dateTime = DateTime.now();
-
-         context.showBottomPicker(
-            child: CupertinoDatePicker(
-              mode: CupertinoDatePickerMode.date,
-              initialDateTime: dateTime,
-              onDateTimeChanged: (DateTime newDateTime) {
-                setState(() => dateTime = newDateTime);
-                ddlog(dateTime);
-              },
-            ),
-            callback: (title){
-              ddlog(title);
-            }
-          );
-
+         presentCupertinoDatePicker(
+           context: context,
+           onDateTimeConfirm: (DateTime val) {
+             debugPrint("${val}");
+             Navigator.of(context).pop();
+           },
+         );
        }
         break;
 
       case 2:
         {
-          context.showDatePicker(
-            callback: (dateTime, title){
-              ddlog([dateTime, title]);
-            }
-          );
+
         }
         break;
 
@@ -127,65 +119,69 @@ class _PickerDemoState extends State<PickerDemo> {
         {
           var _selectedValue = 0;
 
-          context.showBottomPicker(
+          presentBottomSheet(
+            context: context,
+            onConfirm: () {
+              debugPrint("${DateTime.now()} ${_selectedValue}");
+              Navigator.of(context).pop();
+            },
             child: SafeArea(
               child: CupertinoPicker(
                 backgroundColor: Colors.white,
                 itemExtent: 30,
-                scrollController: FixedExtentScrollController(initialItem: 1),
-                onSelectedItemChanged: (value) {
-                  setState(() {
-                    _selectedValue = value;
-                  });
+                scrollController: FixedExtentScrollController(initialItem: _selectedValue),
+                onSelectedItemChanged: (val) {
+                  _selectedValue = val;
+                  // setState(() {});
                 },
-                children: List.generate(10, (index) =>
-                    Text('选择_$index',
-                  style: TextStyle(fontSize: 16),)
-                ),
+                children: List.generate(10, (index) {
+                  return Text('选择_$index',
+                    style: TextStyle(fontSize: 16),
+                  );
+                }),
               ),
             ),
-            callback: (title){
-              ddlog([_selectedValue, title]);
-            }
           );
         }
         break;
 
       case 4:
         {
-          context.showPickerList(
-            children: List.generate(10, (index) => Text('item_$index')),
-            callback: (index, title){
-              ddlog([index, title]);
-            }
-          );
+
         }
         break;
 
       case 5:
         {
-          context.showBottomPicker(
-              height: 600,
-              child: Container(
-                color: Colors.green,
-                // height: 500,
-                child: TextButton(
-                  onPressed: (){
-                    ddlog("Button");
-                  },child: Text("Button"),
-                ),
-              ), callback: (String title) {
-                ddlog(title);
+          presentBottomSheet(
+            context: context,
+            // height: 600,
+            onConfirm: () {
+              debugPrint("${DateTime.now()}");
+              Navigator.of(context).pop();
             },
+            child: Container(
+              color: Colors.green,
+              // height: 500,
+              child: TextButton(
+                onPressed: (){
+                  ddlog("Button");
+                },child: Text("Button"),
+              ),
+            ),
           );
         }
         break;
 
       case 6:
         {
-
-          context.showBottomPicker(
-            height: 500,
+          presentBottomSheet(
+            context: context,
+            // height: 500,
+            onConfirm: () {
+              debugPrint("${DateTime.now()}");
+              Navigator.of(context).pop();
+            },
             child: Material(
               child: Container(
                 // color: Colors.green,
@@ -200,17 +196,19 @@ class _PickerDemoState extends State<PickerDemo> {
                 ),
               ),
             ),
-            callback: (String title) {
-              ddlog(title);
-            },
           );
         }
         break;
 
       case 7:
         {
-          context.showBottomPicker(
-            height: 600,
+          presentBottomSheet(
+            context: context,
+            // height: 600,
+            onConfirm: () {
+              debugPrint("${DateTime.now()}");
+              Navigator.of(context).pop();
+            },
             child: Container(
               // color: Colors.green,
               // height: 500,
@@ -224,21 +222,23 @@ class _PickerDemoState extends State<PickerDemo> {
                   },
               ),
             ),
-            callback: (String title) {
-              ddlog(title);
-            },
           );
         }
         break;
 
       case 8:
         {
-          context.showBottomPicker(
-            height: 600,
-            child: ListTileDemo(),
-            callback: (String title) {
-              ddlog(title);
+          presentBottomSheet(
+            context: context,
+            // height: 600,
+            onConfirm: () {
+              debugPrint("${DateTime.now()}");
+              Navigator.of(context).pop();
             },
+            child: Container(
+              // height: 300,
+              child: ListTileDemo()
+            ),
           );
         }
         break;
@@ -252,9 +252,9 @@ class _PickerDemoState extends State<PickerDemo> {
             lastDate: DateTime(2022, 7),
             helpText: 'Select a date',
           );
-          setState(() {
-            title = newDate.toString();
-          });
+
+          title = newDate.toString();
+          setState(() {});
         }
         break;
 
@@ -270,38 +270,32 @@ class _PickerDemoState extends State<PickerDemo> {
             lastDate: DateTime(2022, 7),
             helpText: 'Select a date',
           );
-          setState(() {
-            title = dateRange.toString();
-          });
+
+          title = dateRange.toString();
+          setState(() {});
         }
         break;
 
       case 11:
       {
         showPickerItems(
-            ctx: context,
-            onChanged: (index){
-              debugPrint('onChanged: $index');
-            }
-         );
+          context: context,
+          onChanged: (index){
+            debugPrint('onChanged: $index');
+          },
+          onConfirm: () {
+            debugPrint('onConfirm:');
+            Navigator.of(context).pop();
+          },
+          onCancel: () {
+            Navigator.of(context).pop();
+          }
+       );
       }
         break;
-
       case 12:
       {
-          showPickerItemsNew(
-              ctx: context,
-              onChanged: (index){
-                debugPrint('onChanged: $index');
-              },
-              onConfirm: () {
-                debugPrint('onConfirm:');
-                Navigator.of(context).pop();
-              },
-              onCancel: () {
-                Navigator.of(context).pop();
-              }
-          );
+
        }
         break;
       default:
@@ -312,123 +306,99 @@ class _PickerDemoState extends State<PickerDemo> {
   void _showDatePicker({
     required BuildContext context,
     DateTime? initialDateTime,
-    CupertinoDatePickerMode? mode,
-    required void Function(DateTime dateTime, String title) callback
+    CupertinoDatePickerMode mode = CupertinoDatePickerMode.date,
+    required ValueChanged<DateTime> onDateTimeChanged,
+    VoidCallback? onCancel,
+    required VoidCallback onConfirm,
   }) {
 
     var dateTime = initialDateTime ?? DateTime.now();
 
-    const title = "请选择";
-    final actionTitles = ['取消', '确定'];
-
     showCupertinoModalPopup(
-        context: context,
-        builder: (_) => Container(
+      context: context,
+      builder: (_) {
+        return Container(
           height: 300,
           // color: Color.fromARGB(255, 255, 255, 255),
           color: Colors.white,
           child: Column(
             children: [
               NPickerToolBar(
-                onCancel: (){
-                  callback(dateTime, actionTitles[0]);
-                  Navigator.of(context).pop();
-                },
-                onConfirm: (){
-                  callback(dateTime, actionTitles[1]);
-                  Navigator.of(context).pop();
-                },
+                onCancel: onCancel,
+                onConfirm: onConfirm,
               ),
               Divider(height: 1.0),
               Container(
                 height: 216,
                 color: Colors.white,
                 child: CupertinoDatePicker(
-                  mode: mode ?? CupertinoDatePickerMode.date,
+                  mode: mode,
                   initialDateTime: dateTime,
+                  dateOrder: DatePickerDateOrder.ymd,
                   onDateTimeChanged: (val) {
-                    setState(() {
-                      dateTime = val;
-                      ddlog(val);
-                    });
-                  }),
+                    dateTime = val;
+                    onDateTimeChanged(val);
+                    setState(() {});
+                  }
+                ),
               ),
             ],
           ),
-        ));
-  }
-
-  showPickerItems({
-    required BuildContext ctx,
-    required void Function(int) onChanged,
-  }) {
-    // int _selectedValue = 0;
-
-    List<Widget> items = List.generate(9, (index) => Text('item_$index')).toList();
-
-    showCupertinoModalPopup(
-      context: ctx,
-      builder: (_) => Container(
-        width: 300,
-        height: 250,
-        child: CupertinoPicker(
-          backgroundColor: Colors.white,
-          itemExtent: 30,
-          scrollController: FixedExtentScrollController(initialItem: 1),
-          onSelectedItemChanged: (value) {
-            setState(() {
-              // _selectedValue = value;
-              onChanged(value);
-            });
-          },
-          children: items,
-        ),
-      )
+        );
+      }
     );
   }
 
-  showPickerItemsNew({
-    required BuildContext ctx,
-    required void Function(int) onChanged,
-    required VoidCallback onCancel,
-    required VoidCallback onConfirm,
 
+  showPickerItems({
+    required BuildContext context,
+    double width = double.maxFinite,
+    required void Function(int) onChanged,
+    VoidCallback? onCancel,
+    required VoidCallback onConfirm,
   }) {
     // int _selectedValue = 0;
     List<Widget> items = List.generate(9, (index) => Text('item_$index')).toList();
 
-    showCupertinoModalPopup(
-        context: ctx,
-        builder: (_) => Container(
-          width: 400,
-          height: 300,
-          child: Container(
-            color: Colors.white,
-            child: Column(
-              children: [
-                NPickerToolBar(
-                  onCancel: onCancel,
-                  onConfirm: onConfirm,
-                ),
-                Divider(),
-                Expanded(
-                  child: CupertinoPicker(
+    final content = Container(
+      width: width,
+      height: 300,
+      child: Container(
+        color: Colors.white,
+        child: Column(
+          children: [
+            NPickerToolBar(
+              onCancel: onCancel,
+              onConfirm: onConfirm,
+            ),
+            Divider(),
+            Expanded(
+              child: StatefulBuilder(
+                builder: (context, setState) {
+
+                  return CupertinoPicker(
                     backgroundColor: Colors.white,
                     itemExtent: 50,
                     scrollController: FixedExtentScrollController(initialItem: 1),
                     onSelectedItemChanged: (value) {
-                      setState(() {
-                        // _selectedValue = value;
-                        onChanged(value);
-                      });
+                      onChanged(value);
+                      setState(() {});
                     },
                     children: items,
-                  ),
-                ),
-              ],
+                  );
+                }
+              ),
             ),
-          ),
-        )
+          ],
+        ),
+      ),
+    );
+
+    showCupertinoModalPopup(
+      context: context,
+      builder: (_) {
+        return content;
+      }
     );
   }
 
@@ -467,7 +437,7 @@ class _DatePickerDemoState extends State<DatePickerDemo> {
           padding: EdgeInsetsDirectional.zero,
           onPressed: () {
             // _showDatePicker(context);
-            _datePickerValueChange();
+            // _datePickerValueChange();
           },
           child: Text('Show Picker'),
         ),),
@@ -477,7 +447,7 @@ class _DatePickerDemoState extends State<DatePickerDemo> {
           child: TextButton(
             onPressed: (){
             // _showDatePicker(context);
-              _datePickerValueChange();
+            //   _datePickerValueChange();
             },
             child: Text(time),
           )
@@ -487,22 +457,22 @@ class _DatePickerDemoState extends State<DatePickerDemo> {
   }
 
   ///时间变动
-  void _datePickerValueChange() {
-    context.showDatePicker(
-        mode: CupertinoDatePickerMode.date,
-        callback: (datetime, title){
-      ddlog("$datetime, $title");
-      if (title == "取消") {
-        return;
-      }
-      setState(() {
-        widget.dateTime = datetime;
-      });
-    });
+  // void _datePickerValueChange() {
+  //   context.showDatePicker(
+  //       mode: CupertinoDatePickerMode.date,
+  //       callback: (datetime, title){
+  //     ddlog("$datetime, $title");
+  //     if (title == "取消") {
+  //       return;
+  //     }
+  //     setState(() {
+  //       widget.dateTime = datetime;
+  //     });
+  //   });
 
     // groovyScript("def result = ''; _1.split().eachWithIndex { item, index -> result = result + index.next() + '. ' + item + System.lineSeparator() }; return result;", SELECTION);
     // groovyScript("return _editor.filePath().split('/').get(4)");
-  }
+  // }
 
 }
 

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/header.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/alignment_ext.dart';
+import 'package:flutter_templet_project/mixin/bottom_sheet_mixin.dart';
 import 'package:flutter_templet_project/pages/demo/GradientOfRadialDemo.dart';
 import 'package:tuple/tuple.dart';
 
@@ -16,7 +17,7 @@ class GradientDemo extends StatefulWidget {
   _GradientDemoState createState() => _GradientDemoState();
 }
 
-class _GradientDemoState extends State<GradientDemo> {
+class _GradientDemoState extends State<GradientDemo> with BottomSheetMixin {
   
   // var blendModes = BlendMode.color;
   // var tileModes = TileMode.clamp;
@@ -88,7 +89,8 @@ class _GradientDemoState extends State<GradientDemo> {
     required List<Widget> items,
     required ValueChanged<int>? onSelected,
   }) {
-    context.showCupertinoSheet(
+    presentCupertinoActionSheet(
+      context: context,
       title: Text('渲染模式'),
       // message: Text(message, textAlign: TextAlign.start),
       items: items,

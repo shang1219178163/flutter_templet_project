@@ -39,6 +39,8 @@ class ChioceList extends StatefulWidget {
 
 class _ChioceListState extends State<ChioceList> {
 
+  final scrollController = ScrollController();
+
   @override
   Widget build(BuildContext context) {
     return widget.canScroll ? _buildListViewSeparated() : _buildListView();
@@ -49,31 +51,35 @@ class _ChioceListState extends State<ChioceList> {
       child: Container(
         color: widget.backgroudColor,
         height: widget.rowHeight * widget.children.length.toDouble(),
-        child: ListView.builder(
-          physics: NeverScrollableScrollPhysics(),//禁止滑动
-          itemExtent: widget.rowHeight,
-          itemCount: widget.children.length,
-          itemBuilder: (BuildContext context, int index) {
-            final e = widget.children[index];
-            return Container(
-              decoration: BoxDecoration(
-                color: widget.backgroudColor,
-                border: Border.all(color: Colors.transparent),
-              ),
-              child: ListTile(
-                dense: true,
-                // tileColor: Colors.white,
-                leading: e.secondary,
-                title: e.title,
-                subtitle: e.subtitle,
-                trailing: widget.indexs.contains(index) ? Icon(Icons.check) : null,
-                selected: widget.indexs.contains(index),
-                onTap: (){
-                  _changeValue(widget.children.indexOf(e));
-                },
-              ),
-            );
-          }),
+        child: Scrollbar(
+          controller: scrollController,
+          child: ListView.builder(
+            controller: scrollController,
+            physics: NeverScrollableScrollPhysics(),//禁止滑动
+            itemExtent: widget.rowHeight,
+            itemCount: widget.children.length,
+            itemBuilder: (BuildContext context, int index) {
+              final e = widget.children[index];
+              return Container(
+                decoration: BoxDecoration(
+                  color: widget.backgroudColor,
+                  border: Border.all(color: Colors.transparent),
+                ),
+                child: ListTile(
+                  dense: true,
+                  // tileColor: Colors.white,
+                  leading: e.secondary,
+                  title: e.title,
+                  subtitle: e.subtitle,
+                  trailing: widget.indexs.contains(index) ? Icon(Icons.check) : null,
+                  selected: widget.indexs.contains(index),
+                  onTap: (){
+                    _changeValue(widget.children.indexOf(e));
+                  },
+                ),
+              );
+            }),
+        ),
       ),
     );
   }

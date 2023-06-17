@@ -9,8 +9,11 @@
 // mac不支持
 
 
+import 'package:extended_image/extended_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/extension/build_context_ext.dart';
+import 'package:flutter_templet_project/network/dio_upload_service.dart';
 import 'package:flutter_templet_project/uti/R.dart';
 
 class DraggableScrollableSheetDemo extends StatefulWidget {
@@ -34,40 +37,53 @@ class _DraggableScrollableSheetDemoState extends State<DraggableScrollableSheetD
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
 
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title ?? "$widget", style: TextStyle(fontSize: 15),),
-        ),
-        body: SizedBox.expand(
-          // child: buildDraggableScrollableSheet(),
-
-          child: buildBody(),
-        )
+      appBar: AppBar(
+        title: Text(widget.title ?? "$widget", style: TextStyle(fontSize: 15),),
+      ),
+      body: buildBody(),
+      // body: buildBody1(),
     );
   }
 
-    Widget buildBody() {
-    return Stack(
+  Widget buildBody({double minChildSize = 0.3}) {
+    final height = MediaQuery.of(context).size.height
+        - MediaQuery.of(context).viewPadding.top
+        - MediaQuery.of(context).viewPadding.bottom
+        - kToolbarHeight;
+
+    return SizedBox.expand(
+      child: Stack(
         children: <Widget>[
           Positioned(
             top: 0,
-            bottom: 0,
+            bottom: height * minChildSize,
             left: 0,
             right: 0,
             child: Container(
-              color: Color.fromARGB(100, 100, 100, 100),
-              child: Image.network(
-                R.image.urls[6],
-                fit: BoxFit.contain,
+              padding: EdgeInsets.all(30),
+              decoration: BoxDecoration(
+                color: Colors.green,
+                image: DecorationImage(
+                    image: ExtendedNetworkImageProvider(R.image.urls[6],
+                  ),
+                  fit: BoxFit.cover,
+                ),
+              ),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.yellowAccent,
+                ),
               ),
             ),
           ),
           DraggableScrollableSheet(
-            initialChildSize: 0.8,
-            minChildSize: 0.3,
+            initialChildSize: 0.5,
+            minChildSize: minChildSize,
             maxChildSize: 1,
-            builder: (BuildContext context, ScrollController scrollController){
+            builder: (context, scrollController){
+
               return Container(
-                color: Colors.white,
+                color: Colors.green,
                 child: ListView.builder(
                   controller: scrollController,
                   itemCount: 20,
@@ -79,44 +95,36 @@ class _DraggableScrollableSheetDemoState extends State<DraggableScrollableSheetD
             },
           )
         ],
-      );
-    }
+      ),
+    );
+  }
 
-    Widget buildDraggableScrollableSheet() {
-      return SizedBox.expand(
-          child: DraggableScrollableSheet(
-            builder: (BuildContext context, ScrollController scrollController) {
-              return Container(
-                color: Theme.of(context).primaryColor,
-                child: ListView.builder(
-                  controller: scrollController,
-                  itemCount: 25,
-                  itemBuilder: (BuildContext context, int index) {
-                    return ListTile(title: Text('Item $index'));
-                  },
-                ),
-              );
-            },
+  Widget buildBody1() {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.green,
+        image: DecorationImage(
+          image: ExtendedNetworkImageProvider(R.image.urls[6],
           ),
-      );
-    }
-
-  Widget buildDraggableScrollableSheetNew() {
-    return DraggableScrollableSheet(
-      builder: (BuildContext context, ScrollController scrollController) {
-        return SingleChildScrollView(
-          controller: scrollController,
-          child: Container(
-            color: Theme.of(context).primaryColor,
-            child: ListView.builder(
-              itemCount: 25,
-              itemBuilder: (BuildContext context, int index) {
-                return ListTile(title: Text('Item $index'));
-              },
-            ),
-          ),
-        );
-      },
+          fit: BoxFit.cover,
+        ),
+      ),
+      child: SizedBox.expand(
+        child: DraggableScrollableSheet(
+          builder: (BuildContext context, ScrollController scrollController) {
+            return Container(
+              color: Theme.of(context).primaryColor,
+              child: ListView.builder(
+                controller: scrollController,
+                itemCount: 25,
+                itemBuilder: (BuildContext context, int index) {
+                  return ListTile(title: Text('Item $index'));
+                },
+              ),
+            );
+          },
+        ),
+      ),
     );
   }
 

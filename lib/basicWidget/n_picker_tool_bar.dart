@@ -26,7 +26,7 @@ class NPickerToolBar extends StatelessWidget {
   final double? height;
   final String title;
   final List<String> actionTitles;
-  final VoidCallback onCancel;
+  final VoidCallback? onCancel;
   final VoidCallback onConfirm;
 
   @override
