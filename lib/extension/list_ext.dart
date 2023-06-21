@@ -41,8 +41,8 @@ extension ListExt<T,E> on List<E> {
   //   return result;
   // }
 
-  /// 任意一个元素符合要求则返回,没有符合的返回为空
-  E? some(bool Function(E) test, ValueChanged<E>? cb) {
+  /// 任意一个元素符合要求则返回(回调返回元素),没有符合的返回为空
+  E? some(bool Function(E) test, {ValueChanged<E>? cb}) {
     for (final element in this) {
       if (test(element)) {
         cb?.call(element);
@@ -52,10 +52,11 @@ extension ListExt<T,E> on List<E> {
     return null;
   }
 
-  /// 所有元素都满足需求
-  bool every(bool Function(E) test) {
+  /// 所有元素都满足需求(回调返回第一个不满足需求的元素)
+  bool every(bool Function(E) test, {ValueChanged<E>? cb}) {
     for (final element in this) {
       if (!test(element)) {
+        cb?.call(element);
         return false;
       }
     }
