@@ -11,6 +11,7 @@ import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/network/RequestConfig.dart';
 import 'package:flutter_templet_project/network/base_request_api.dart';
+import 'package:flutter_templet_project/network/proxy/dio_proxy.dart';
 import 'package:flutter_templet_project/service/cache_service.dart';
 
 import 'package:get_storage/get_storage.dart';
@@ -60,6 +61,7 @@ class RequestManager{
     dio.options = options;
 
     dio.interceptors.add(interceptorsWrapper);
+    DioProxy.setProxy(dio);/// 添加抓包代理
     return dio;
   }
 

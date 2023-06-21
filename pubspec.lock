@@ -743,6 +743,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "4.0.2"
+  http_proxy:
+    dependency: "direct main"
+    description:
+      name: http_proxy
+      sha256: "7d5bc7ad1b0c6d0cfb5da97c5bfe302082f93d32cf5c67d484d1a4085b3ffa58"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.2.1"
   image_gallery_saver:
     dependency: "direct main"
     description:

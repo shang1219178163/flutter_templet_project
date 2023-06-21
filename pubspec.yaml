@@ -79,6 +79,8 @@ dependencies:
   hive: ^2.0.4
 
 #  print_color: ^2.2.7
+  http_proxy: ^1.2.1
+
   dio: ^5.1.0
   dio_cookie_manager: ^2.1.3
 #  dio_http_cache: ^0.3.0
