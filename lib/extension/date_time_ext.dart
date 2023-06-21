@@ -60,9 +60,9 @@ extension DateTimeExt on DateTime {
   }
 
   /// DateTime 转 字符串
-  static String stringFromDate({required DateTime dateTime, String format = DATE_FORMAT, }) {
+  static String stringFromDate({required DateTime date, String format = DATE_FORMAT, }) {
     final dataFormat = DateFormat(format);
-    var result = dataFormat.format(dateTime);
+    var result = dataFormat.format(date);
     return result;
   }
 
@@ -76,7 +76,7 @@ extension DateTimeExt on DateTime {
       dateTime = DateTime.fromMillisecondsSinceEpoch(timeSamp*1000);
     }
 
-    var result = stringFromDate(dateTime: dateTime, format: format);
+    var result = stringFromDate(date: dateTime, format: format);
     return result;
   }
 
@@ -132,7 +132,7 @@ extension DateTimeExt on DateTime {
   String monthFisrtDayStr({String format = DATE_FORMAT}) {
     var dateTime = monthFisrtDay();
 
-    var result = DateTimeExt.stringFromDate(dateTime: dateTime, format: format);
+    var result = DateTimeExt.stringFromDate(date: dateTime, format: format);
     return result;
   }
 
@@ -149,7 +149,7 @@ extension DateTimeExt on DateTime {
   String monthLastDayStr({String format = DATE_FORMAT,}) {
     var dateTime = monthLastDay();
 
-    var result = DateTimeExt.stringFromDate(dateTime: dateTime, format: format);
+    var result = DateTimeExt.stringFromDate(date: dateTime, format: format);
     return result;
   }
 
@@ -162,7 +162,7 @@ extension DateTimeExt on DateTime {
       dateTime = DateTime.fromMillisecondsSinceEpoch(timestamp);
     }
 
-    var result = DateTimeExt.stringFromDate(dateTime: dateTime, format: format);
+    var result = DateTimeExt.stringFromDate(date: dateTime, format: format);
     return result;
   }
 
@@ -179,7 +179,7 @@ extension DateTimeExt on DateTime {
       dateTime = DateTime.fromMillisecondsSinceEpoch(timestamp);
     }
 
-    var result = DateTimeExt.stringFromDate(dateTime: dateTime, format: format);
+    var result = DateTimeExt.stringFromDate(date: dateTime, format: format);
     return result;
   }
 }
@@ -201,9 +201,3 @@ extension DurationExt on Duration {
   int get inMillisecondsRest => inMilliseconds - (inSeconds * 1000);
   int get inMicrosecondsRest => inMicroseconds - (inMilliseconds * 1000);
 }
-
-
-// String _formatTime(String dateTimeStr)
-//   DateTime dateTime = DateTime.parse(dateTimeStr);
-//   return DateFormat("MM-dd HH:mm").format(dateTime);
-// }

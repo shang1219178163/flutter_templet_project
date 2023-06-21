@@ -11,14 +11,6 @@ import 'package:flutter/material.dart';
 
 
 extension BuildContextExt on BuildContext {
-  // final state = (context as StatefulElement).state as CustomeTabBarState;
-  /// 通过 context 获取 state, builder 里使用
-  T? getStatefulElementState<T>() {
-    if (this is StatefulElement && (this as StatefulElement).state is T) {
-      return (this as StatefulElement).state as T;
-    }
-    return null;
-  }
 
   /// 获取当前组件的 RenderBox
   RenderBox? get renderBox {

@@ -31,7 +31,7 @@ class _TabBarSegmentDemoState extends State<TabBarSegmentDemo> with SingleTicker
   final _globalKey = GlobalKey<TabBarSegmentState>(debugLabel: "CustomeTabBar");
   // final _globalKey1 = GlobalKey<TabBarSegmentState>(debugLabel: "1");
 
-  ValueNotifier<int> indexVN = ValueNotifier<int>(0);
+  final indexVN = ValueNotifier<int>(0);
 
   @override
   void initState() {
@@ -140,8 +140,9 @@ class _TabBarSegmentDemoState extends State<TabBarSegmentDemo> with SingleTicker
         return;
     }
     final state = (context as StatefulElement).state as TabBarSegmentState;
-    final stateNew = context.getStatefulElementState<TabBarSegmentState>();
-    debugPrint("state $state ${state == stateNew}");
+
+    final stateNew = context.state;
+    debugPrint("stateNew1 $state ${state == stateNew}");
   }
 
   Widget buildItem({
