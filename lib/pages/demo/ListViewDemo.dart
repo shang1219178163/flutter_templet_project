@@ -4,7 +4,7 @@ import 'package:flutter_templet_project/basicWidget/list_subtitle_cell.dart';
 import 'package:flutter_templet_project/extension/divider_ext.dart';
 import 'package:flutter_templet_project/extension/scroll_controller_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
-import 'package:flutter_templet_project/mockData/mock_data.dart';
+import 'package:flutter_templet_project/model/mock_data.dart';
 import 'package:tuple/tuple.dart';
 
 typedef KeyCallback = void Function(BuildContext context, int index, GlobalKey key);

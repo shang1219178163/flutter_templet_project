@@ -11,6 +11,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+// import 'package:http_proxy/http_proxy.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/APPThemeSettings.dart';
@@ -66,6 +67,10 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  /// That's all done.You can use Charles or other proxy tools now.
+  // final httpProxy = await HttpProxy.createHttpProxy();
+  // HttpOverrides.global = httpProxy;
+
   if (kReleaseMode) {
     debugPrint = (String? message, {int? wrapWidth}) {
       // empty debugPrint implementation in the release mode

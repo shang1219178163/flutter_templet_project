@@ -1,5 +1,6 @@
 import 'package:enhance_expansion_panel/enhance_expansion_panel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/model/mock_data.dart';
 import 'package:flutter_templet_project/pages/tabBar_tabBarView_demo.dart';
 import 'package:tuple/tuple.dart';
 
@@ -13,7 +14,6 @@ import 'package:flutter_templet_project/extension/list_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 
-import 'package:flutter_templet_project/mockData/mock_data.dart';
 import 'package:flutter_templet_project/routes/APPRouter.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
