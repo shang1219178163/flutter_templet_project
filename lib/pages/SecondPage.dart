@@ -207,17 +207,37 @@ class _SecondPageState extends State<SecondPage> {
             Row(
               children: [
                 TextButton(
+                  style: TextButton.styleFrom(
+                    // padding: EdgeInsets.zero,
+                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 12),
+                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    minimumSize: Size(50, 18),
+                    backgroundColor: Colors.green.withOpacity(0.1),
+                    foregroundColor: Colors.green,
+                  ),
                   onPressed: () => ddlog('$this'),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        'TextButton',
-                      ),
-                      // SizedBox(width: 30),
-                      Icon(Icons.call),
-                    ],
+                  child: Container(
+                    constraints: BoxConstraints(
+                      minWidth: 100,
+                      maxWidth: 200,
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Padding(
+                          padding: EdgeInsets.only(right: 4),
+                          child: Icon(Icons.call, size: 20,),
+                        ),
+                        Flexible(
+                          child: Text(
+                            'TextButton'*1,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 TextButton(
