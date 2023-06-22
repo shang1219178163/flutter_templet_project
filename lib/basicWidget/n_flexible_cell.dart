@@ -16,6 +16,7 @@ class NFlexibleCell extends StatelessWidget {
     ),
     this.decoration,
     this.constraints = const BoxConstraints(
+      minWidth: 100,
       maxWidth: 300,
     ),
   }) : super(key: key);
