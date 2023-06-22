@@ -6,9 +6,9 @@ import 'package:flutter_templet_project/basicWidget/n_flexible_cell.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 
-class AdaptiveSizeLayoutDemo extends StatefulWidget {
+class AdaptSizeLayoutDemo extends StatefulWidget {
 
-  AdaptiveSizeLayoutDemo({
+  AdaptSizeLayoutDemo({
     Key? key,
     this.title
   }) : super(key: key);
@@ -16,10 +16,10 @@ class AdaptiveSizeLayoutDemo extends StatefulWidget {
   final String? title;
 
   @override
-  _AdaptiveSizeLayoutDemoState createState() => _AdaptiveSizeLayoutDemoState();
+  _AdaptSizeLayoutDemoState createState() => _AdaptSizeLayoutDemoState();
 }
 
-class _AdaptiveSizeLayoutDemoState extends State<AdaptiveSizeLayoutDemo> {
+class _AdaptSizeLayoutDemoState extends State<AdaptSizeLayoutDemo> {
 
 
   @override
@@ -75,11 +75,14 @@ class _AdaptiveSizeLayoutDemoState extends State<AdaptiveSizeLayoutDemo> {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            buildText(
-              text: '自适应横向布局'*1,
-              onTap: (){
-                debugPrint("onTap");
-              }
+            FlutterLogo(),
+            Flexible(
+              child: buildText(
+                text: '自适应横向布局'*10,
+                onTap: (){
+                  debugPrint("onTap");
+                }
+              ),
             )
           ],
         ),
@@ -87,7 +90,7 @@ class _AdaptiveSizeLayoutDemoState extends State<AdaptiveSizeLayoutDemo> {
     );
   }
 
-  buildText({
+  Widget buildText({
     required String text,
     Color color = Colors.green,
     VoidCallback? onTap,

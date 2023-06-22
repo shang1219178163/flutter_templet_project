@@ -12,7 +12,7 @@ import 'package:flutter_templet_project/pages/DialogChoiceChipDemo.dart';
 import 'package:flutter_templet_project/pages/ReflectDemo.dart';
 import 'package:flutter_templet_project/pages/PageLifecycleObserverDemo.dart';
 import 'package:flutter_templet_project/pages/RegExpDemo.dart';
-import 'package:flutter_templet_project/pages/demo/%20AdaptiveSizeLayoutDemo.dart';
+import 'package:flutter_templet_project/pages/demo/AdaptSizeLayoutDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AlertDialogTagSelectDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedBuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedContainerDemo.dart';
@@ -586,7 +586,7 @@ class AppPage {
     GetPage(name: APPRouter.testPage, page: () => TestPage(),),
     GetPage(name: APPRouter.testPage, page: () => TestPage(),),
     GetPage(name: APPRouter.mediaQueryScreeenDemo, page: () => MediaQueryScreeenDemo(),),
-    GetPage(name: APPRouter.adaptiveSizeLayoutDemo, page: () => AdaptiveSizeLayoutDemo(),),
+    GetPage(name: APPRouter.adaptiveSizeLayoutDemo, page: () => AdaptSizeLayoutDemo(),),
 
 
 
