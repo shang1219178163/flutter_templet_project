@@ -83,7 +83,13 @@ class _AdaptSizeLayoutDemoState extends State<AdaptSizeLayoutDemo> {
                   debugPrint("onTap");
                 }
               ),
-            )
+            ),
+            OutlinedButton(
+              onPressed: (){
+                debugPrint("OutlinedButton");
+              },
+              child: Text("OutlinedButton")
+            ),
           ],
         ),
       ],
@@ -136,9 +142,13 @@ class _AdaptSizeLayoutDemoState extends State<AdaptSizeLayoutDemo> {
           // border: Border.all(color: color),
           borderRadius: BorderRadius.all(Radius.circular(8.w)),
         ),
+        // constraints: BoxConstraints(
+        //   minWidth: 40,
+        //   maxWidth: MediaQuery.of(context).size.width,
+        // ),
         constraints: BoxConstraints(
-          minWidth: 40,
-          maxWidth: 250,
+          minWidth: 0,
+          maxWidth: double.infinity,
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
