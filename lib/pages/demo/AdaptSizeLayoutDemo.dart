@@ -42,7 +42,7 @@ class _AdaptSizeLayoutDemoState extends State<AdaptSizeLayoutDemo> {
   buildBody() {
     return ListView(
       children: [
-        for (var i = 1; i <= 4; i++) Padding(
+        for (var i = 1; i <= 3; i++) Padding(
           padding: EdgeInsets.symmetric(vertical: 4),
           child: NFlexibleCell(
             decoration: BoxDecoration(
@@ -64,7 +64,7 @@ class _AdaptSizeLayoutDemoState extends State<AdaptSizeLayoutDemo> {
             content: NText(
               data: "自适应横向布局"*i,
               textAlign: TextAlign.center,
-              fontSize: 12.sp,
+              fontSize: 16.sp,
               fontColor: Colors.white,
               fontWeight: FontWeight.w500,
               maxLines: 6,
