@@ -50,3 +50,12 @@ extension DoubleExt on double{
     return "${result.replaceAll("0.", "")}%";
   }
 }
+
+
+extension IntExt on int{
+  /// 转为百分比描述
+  static int random({required int max, int min = 0}) {
+    var result = Random().nextInt(max) + min;
+    return result;
+  }
+}
