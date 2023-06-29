@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/mixin/dialog_tag_select.dart';
 import 'package:flutter_templet_project/model/selected_model.dart';
+import 'package:get/get.dart';
 
 class AlertDialogTagSelectDemo extends StatefulWidget {
 
@@ -70,6 +71,13 @@ class _AlertDialogTagSelectDemoState extends State<AlertDialogTagSelectDemo> {
         debugPrint(selectTagNames.toString());
         setState(() {});
       },
+      max: 3,
+      onMax: (){
+        showAboutDialog(
+            context: context,
+            applicationName: "最多选择 3 个",
+        );
+      }
     );
   }
 

@@ -63,9 +63,14 @@ class DialogTagSelect with DialogMixin {
     /// 取消回调
     required VoidCallback onCancel,
     /// 确定回调
-    Future<bool> Function(List<SelectModel<T>>)? onRequestUpdate,
     required ValueChanged<List<SelectModel<T>>> onConfirm,
+    /// 确定请求回调
+    Future<bool> Function(List<SelectModel<T>>)? onRequestUpdate,
+    /// 是否多选
     bool isMuti = true,
+    /// 最多选择几个
+    int? max,
+    VoidCallback? onMax,
     ScrollController? scrollController,
   }) {
     return presentDialog(
@@ -123,8 +128,14 @@ class DialogTagSelect with DialogMixin {
               selectedColor: context.primaryColor,
               backgroundColor: Colors.white,
               onSelected: (bool selected) {
+                final chooseCount = tags.where((e) => e.isSelected == true).toList().length;
+
                 for (var element in tags) {
                   if (element.id == e.id) {
+                    if (selected && max != null && chooseCount == max) {
+                      onMax?.call();
+                      return;
+                    }
                     element.isSelected = selected;
                   } else {
                     if (isMuti == false) {
