@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 
+/// 悬浮组件
 class NSuspension extends StatefulWidget {
 
   NSuspension({
@@ -46,6 +47,7 @@ class _NSuspensionState extends State<NSuspension> {
 
     return LayoutBuilder(
       builder: (context, constraints){
+        
         return Stack(
           alignment: widget.alignment,
           textDirection: widget.textDirection,

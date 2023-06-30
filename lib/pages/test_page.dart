@@ -74,7 +74,7 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
           ),
         ),
         title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
+        actions: ['done1',].map((e) => TextButton(
           onPressed: onDone,
           child: Text(e,
               style: TextStyle(color: Colors.white),
@@ -164,16 +164,14 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
     debugPrint("${shard == shard2}");
 
     const aa = "我是谁";
-    const bb = "9999";
-    const cc = "https://stackoverflow.com/questions/26107125/cannot-read-property-addeventlistener-of-null";
+    const bb = "https://stackoverflow.com/questions/26107125/cannot-read-property-addeventlistener-of-null";
 
     final map = {
       r"a": aa,
       r"b": bb,
-      r"c": cc,
     };
     debugPrint("map:$map");
-    debugPrint("c:${map["c"]}");
+    debugPrint("a:${map["a"]}");
     debugPrint("d:${map["d"]}");
   }
 
@@ -346,8 +344,6 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
     final d2 = "easyRefreshPlugin".toCapitalize();
     ddlog(d2);
 
-    ddlog(screenSize);
-
     showSnackBar(SnackBar(content: Text(d2)));
 
     var map = <String, dynamic>{
@@ -377,10 +373,6 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
     debugPrint('map: $map1');
     debugPrint('map1: $map1');
 
-    List<String>? strs;
-    if (strs == null || strs.isEmpty == true) {
-      debugPrint('strs: isEmpty');
-    }
   }
   
   buildText({
