@@ -35,6 +35,7 @@ import 'package:flutter_templet_project/pages/demo/NSkeletonDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PageViewAndBarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/StackDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/StackDemoTwo.dart';
+import 'package:flutter_templet_project/pages/demo/SuspensionBurttonDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TextFieldColorChangeDemo.dart';
 import 'package:flutter_templet_project/pages/homeSrollDemo.dart';
 import 'package:flutter_templet_project/pages/demo/BuilderDemo.dart';
@@ -544,6 +545,7 @@ class APPRouter {
   static const expandTextDemo = '/expandTextDemo';
   static const syncfusionFlutterDatepickerDemo = '/syncfusionFlutterDatepickerDemo';
   static const tableCalenderMain = '/tableCalenderMain';
+  static const suspensionBurttonDemo = '/suspensionBurttonDemo';
 
 
 
@@ -863,6 +865,7 @@ class AppPage {
     GetPage(name: APPRouter.expandTextDemo, page: () => NExpandTextDemo(),),
     GetPage(name: APPRouter.syncfusionFlutterDatepickerDemo, page: () => SyncfusionFlutterDatepickerDemo(),),
     GetPage(name: APPRouter.tableCalenderMain, page: () => TableCalenderMain(),),
+    GetPage(name: APPRouter.suspensionBurttonDemo, page: () => SuspensionBurttonDemo(),),
 
 
   ];

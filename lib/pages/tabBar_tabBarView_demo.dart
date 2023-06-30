@@ -545,6 +545,7 @@ var customs = [
   Tuple2(APPRouter.dialogChoiceChipDemo, "选择弹窗", ),
   Tuple2(APPRouter.imChatPage, "聊天列表", ),
   Tuple2(APPRouter.expandTextDemo, "可折叠文字", ),
+  Tuple2(APPRouter.suspensionBurttonDemo, "悬浮按钮", ),
 
 
 ];
