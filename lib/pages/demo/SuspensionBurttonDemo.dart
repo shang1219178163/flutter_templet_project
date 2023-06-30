@@ -1,6 +1,8 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_templet_project/basicWidget/n_suspension.dart';
 
 class SuspensionBurttonDemo extends StatefulWidget {
 
@@ -28,33 +30,54 @@ class _SuspensionBurttonDemoState extends State<SuspensionBurttonDemo> {
   Widget build(BuildContext context) {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () => debugPrint(e),)
-        ).toList(),
-      ),
-      body: WillPopScope(
-        onWillPop: () async {
-          return true;
-        },
-        child: Stack(
-          // alignment: Alignment.topLeft,
-          // fit: StackFit.expand,
-          children: [
-            Container(
-              color: Color.fromRGBO(
-                  93, 91, 90, 1
-              ), //Color.fromRGBO(242, 243, 248, 1),
+    return WillPopScope(
+      onWillPop: () async {
+        return true;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(widget.title ?? "$widget"),
+          actions: ['done',].map((e) => TextButton(
+            child: Text(e,
+              style: TextStyle(color: Colors.white),
             ),
-            buildSuspension(),
-          ],
+            onPressed: () => debugPrint(e),)
+          ).toList(),
+        ),
+        body: buildBody(),
+      ),
+    );
+  }
+
+  buildBody() {
+    return NSuspension(
+      padding: EdgeInsets.only(left: 20, top: 30, right: 40, bottom: 50),
+      childSize: Size(80, 80),
+      child: Container(
+        width: 80,
+        height: 80,
+        decoration: BoxDecoration(
+          color: Colors.blue,
+          border: Border.all(color: Colors.blue),
+          borderRadius: BorderRadius.all(Radius.circular(8.w)),
         ),
       ),
+      bgChild: Container(
+        color: Colors.black.withOpacity(0.1), //Color.fromRGBO(242, 243, 248, 1),
+      ),
+    );
+
+    return Stack(
+      // alignment: Alignment.topLeft,
+      // fit: StackFit.expand,
+      children: [
+        Container(
+          color: Color.fromRGBO(
+              93, 91, 90, 1
+          ), //Color.fromRGBO(242, 243, 248, 1),
+        ),
+        buildSuspension(),
+      ],
     );
   }
 
