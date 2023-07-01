@@ -162,7 +162,7 @@ class MyApp extends StatelessWidget {
       // home: MyHomePage(title: 'Flutter Demo Home Page'),
       // initialRoute: "/MyHomePage",
       // routes: kRoutes,
-      initialRoute: AppPage.INITIAL,
+      initialRoute: APPRouter.homePage,
       getPages: AppPage.routes,
       unknownRoute: AppPage.unknownRoute,
       navigatorObservers: <NavigatorObserver>[RouteService.routeObserver],

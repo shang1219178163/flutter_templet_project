@@ -6,6 +6,7 @@ import 'package:flutter_templet_project/basicWidget/TreeNode/NTreeDemo.dart';
 import 'package:flutter_templet_project/basicWidget/drag_destination_view.dart';
 import 'package:flutter_templet_project/basicWidget/responsive_column.dart';
 import 'package:flutter_templet_project/pages/APPRouteObserverDemo.dart';
+import 'package:flutter_templet_project/pages/AppLaunchPage.dart';
 import 'package:flutter_templet_project/pages/DataTypeDemo.dart';
 import 'package:flutter_templet_project/pages/PageLifecycleFuncTest.dart';
 import 'package:flutter_templet_project/pages/DialogChoiceChipDemo.dart';
@@ -260,6 +261,8 @@ import 'package:flutter_templet_project/main.dart';
 
 ///https://www.jianshu.com/p/b9d6ec92926f
 class APPRouter {
+  static const launchPage = '/APPLaunchPage';
+
   static const notFound = '/APPNotFoundPage';
 
   static const homePage = '/MyHomePage';
@@ -582,6 +585,7 @@ class AppPage {
 
   static final List<GetPage> routes = [
     unknownRoute,
+    GetPage(name: APPRouter.launchPage, page: () => AppLaunchPage(),),
     GetPage(name: APPRouter.homePage, page: () => MyHomePage(),),
     GetPage(name: APPRouter.tabBarTabBarViewDemo, page: () => TabBarTabBarViewDemo(),),
     GetPage(name: APPRouter.tabBarPageViewDemo, page: () => TabBarPageViewDemo(),),
