@@ -15,6 +15,7 @@ import 'package:flutter_templet_project/basicWidget/n_footer.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/uti/color_uti.dart';
+import 'package:get/get.dart';
 import 'package:tuple/tuple.dart';
 
 import 'package:flutter_templet_project/Language/Property.dart';
@@ -372,6 +373,25 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
 
     debugPrint('map: $map1');
     debugPrint('map1: $map1');
+
+    try {
+      List<String>? listNew = [];
+      // debugPrint('first: ${listNew.first}');
+
+      listNew = ["a", "b", "c"];
+      for (var i = 0; i < listNew.length; i++) {
+        final e = listNew[i];
+        debugPrint('e: $e');
+      }
+      for (var i = listNew.length - 1; i >= 0; i--) {
+        final e = listNew[i];
+        debugPrint('倒叙e: $e');
+      }
+
+    } catch (exception) {
+      debugPrint(exception.toString());
+    }
+
 
   }
   

@@ -11,6 +11,7 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
+import 'package:get/get.dart';
 
 extension ListExt<T,E> on List<E> {
 
@@ -31,25 +32,90 @@ extension ListExt<T,E> on List<E> {
     }
     return l;
   }
-  
-  // /// 带索引的map
-  // List<T> mapWithIdx(T Function(E, int i) action) {
-  //   var result = <T>[];
-  //   for (var i = 0; i < length; i++) {
-  //     result.add(action(this[i], i));
-  //   }
-  //   return result;
-  // }
 
-  /// 任意一个元素符合要求则返回(回调返回元素),没有符合的返回为空
-  E? some(bool Function(E) test, {ValueChanged<E>? cb}) {
+  /// 重写属性
+  E? get first {
+    try {
+      return this.first;
+    } catch (exception) {
+      return null;
+    }
+  }
+
+  /// 重写属性
+  E? get last {
+    try {
+      return this.last;
+    } catch (exception) {
+      return null;
+    }
+  }
+
+  /// 查询符合条件元素,没有则返回为空
+  E? find(bool Function(E) test) {
     for (final element in this) {
       if (test(element)) {
-        cb?.call(element);
         return element;
       }
     }
     return null;
+  }
+  /// 倒叙查询符合条件元素
+  E? findLast(bool Function(E) test) {
+    for (var i = length - 1; i >= 0; i--) {
+      final element = this[i];
+      if (test(element)) {
+        return element;
+      }
+    }
+    return null;
+  }
+
+  /// 查询符合条件元素,没有则返回为空
+  E? firstWhere(bool Function(E) test) => find(test);
+  /// 倒叙查询符合条件元素
+  E? lastWhere(bool Function(E) test) => findLast(test);
+
+  /// 查询符合条件元素,没有则返回为空
+  int? findIndex(bool Function(E) test) {
+    for (var i = 0; i <= length - 1; i++) {
+      final element = this[i];
+      if (test(element)) {
+        return i;
+      }
+    }
+    return null;
+  }
+  /// 倒叙查询符合条件元素
+  int? findLastIndex(bool Function(E) test) {
+    for (var i = length - 1; i >= 0; i--) {
+      final element = this[i];
+      if (test(element)) {
+        return i;
+      }
+    }
+    return null;
+  }
+  /// 查询符合条件元素,没有则返回为空
+  int? indexWhere(bool Function(E) test) => findIndex(test);
+  /// 倒叙查询符合条件元素
+  int? lastIndexWhere(bool Function(E) test) => findLastIndex(test);
+
+  /// 查询元素索引,没有则返回为空
+  int? indexOf(E element) {
+    try {
+      return this.indexOf(element);
+    } catch (exception) {
+      return null;
+    }
+  }
+  /// 倒叙查询元素索引
+  int? lastIndexOf(E element) {
+    try {
+      return this.lastIndexOf(element);
+    } catch (exception) {
+      return null;
+    }
   }
 
   /// 所有元素都满足需求(回调返回第一个不满足需求的元素)
@@ -142,7 +208,28 @@ extension ListExtObject<E extends Object> on List<E> {
 }
 
 
-extension IterableExt<T> on Iterable<T> {
+extension IterableExt<E> on Iterable<E> {
+
+  // /// 重新
+  // E? get firstNBew {
+  //   var it = iterator;
+  //   if (!it.moveNext()) {
+  //     return null;
+  //   }
+  //   return it.current;
+  // }
+  //
+  // E? get last {
+  //   var it = iterator;
+  //   if (!it.moveNext()) {
+  //     return null;
+  //   }
+  //   E result;
+  //   do {
+  //     result = it.current;
+  //   } while (it.moveNext());
+  //   return result;
+  // }
 
   // double sum(double Function(T) cb) {
   //   var result = 0.0;
