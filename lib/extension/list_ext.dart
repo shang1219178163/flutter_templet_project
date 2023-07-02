@@ -51,6 +51,24 @@ extension ListExt<T,E> on List<E> {
     }
   }
 
+  /// 查询元素索引,没有则返回为空
+  int? indexOf(E element) {
+    try {
+      return this.indexOf(element);
+    } catch (exception) {
+      return null;
+    }
+  }
+
+  /// 倒叙查询元素索引
+  int? lastIndexOf(E element) {
+    try {
+      return this.lastIndexOf(element);
+    } catch (exception) {
+      return null;
+    }
+  }
+
   /// 查询符合条件元素,没有则返回为空
   E? find(bool Function(E) test) {
     for (final element in this) {
@@ -100,24 +118,7 @@ extension ListExt<T,E> on List<E> {
   int? indexWhere(bool Function(E) test) => findIndex(test);
   /// 倒叙查询符合条件元素
   int? lastIndexWhere(bool Function(E) test) => findLastIndex(test);
-
-  /// 查询元素索引,没有则返回为空
-  int? indexOf(E element) {
-    try {
-      return this.indexOf(element);
-    } catch (exception) {
-      return null;
-    }
-  }
-  /// 倒叙查询元素索引
-  int? lastIndexOf(E element) {
-    try {
-      return this.lastIndexOf(element);
-    } catch (exception) {
-      return null;
-    }
-  }
-
+  
   /// 所有元素都满足需求(回调返回第一个不满足需求的元素)
   bool every(bool Function(E) test, {ValueChanged<E>? cb}) {
     for (final element in this) {
