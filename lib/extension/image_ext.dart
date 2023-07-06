@@ -27,8 +27,9 @@ extension UIImageExt on ui.Image {
   }
 
   /// 获取文件在内存中的大小
-  FutureOr<String?> fileSize(
-      {ui.ImageByteFormat format = ui.ImageByteFormat.png}) async {
+  FutureOr<String?> fileSize({
+    ui.ImageByteFormat format = ui.ImageByteFormat.png
+  }) async {
     var byteData = await toByteData(format: format);
     final result = byteData?.fileSize();
     // print("imageSize: ${result}");
@@ -42,6 +43,7 @@ extension ImageExt on Image {
     ui.ImageByteFormat format = ui.ImageByteFormat.png,
   }) async {
     var img = Image.network(imageUrl);
+
 
     var imgInfo = await img.image.getImageInfo();
 

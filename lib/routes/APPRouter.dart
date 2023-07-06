@@ -38,6 +38,7 @@ import 'package:flutter_templet_project/pages/demo/StackDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/StackDemoTwo.dart';
 import 'package:flutter_templet_project/pages/demo/SuspensionButtonDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TextFieldColorChangeDemo.dart';
+import 'package:flutter_templet_project/pages/demo/enumDemo.dart';
 import 'package:flutter_templet_project/pages/homeSrollDemo.dart';
 import 'package:flutter_templet_project/pages/demo/BuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ButtonStyleDemo.dart';
@@ -128,6 +129,7 @@ import 'package:flutter_templet_project/pages/demo/smart_dialog_demo.dart';
 import 'package:flutter_templet_project/pages/demo/isolateDemo.dart';
 import 'package:flutter_templet_project/pages/demo/merge_images_demo.dart';
 import 'package:flutter_templet_project/pages/demo/merge_network_images_demo.dart';
+import 'package:flutter_templet_project/pages/neomorphism/neomorphism_home_page.dart';
 import 'package:flutter_templet_project/pages/operator_demo.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/SliverAppBarDemo.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/SliverPersistentHeaderDemo.dart';
@@ -281,6 +283,8 @@ class APPRouter {
   static const thirdPage = '/ThirdPage';
   static const fourthPage = '/FourthPage';
 
+
+  static const enumDemo = '/enumDemo';
   static const reflectDemo = '/moldelReflectDemo';
   static const appRouteObserverDemo = '/appRouteObserverDemo';
   static const pageLifecycleObserverDemo = '/pageLifecycleObserverDemo';
@@ -549,6 +553,7 @@ class APPRouter {
   static const syncfusionFlutterDatepickerDemo = '/syncfusionFlutterDatepickerDemo';
   static const tableCalenderMain = '/tableCalenderMain';
   static const suspensionButtonDemo = '/suspensionButtonDemo';
+  static const neomorphismHomePage = '/neomorphismHomePage';
 
 
 
@@ -609,6 +614,8 @@ class AppPage {
     GetPage(name: APPRouter.thirdPage, page: () => ThirdPage(),),
     GetPage(name: APPRouter.fourthPage, page: () => FourthPage(),),
 
+
+    GetPage(name: APPRouter.enumDemo, page: () => EnumDemo(),),
     GetPage(name: APPRouter.reflectDemo, page: () => ReflectDemo(),),
     GetPage(name: APPRouter.appRouteObserverDemo, page: () => AppRouteObserverDemo(),),
     GetPage(name: APPRouter.pageLifecycleObserverDemo, page: () => PageLifecycleObserverDemo(),),
@@ -866,6 +873,7 @@ class AppPage {
     GetPage(name: APPRouter.syncfusionFlutterDatepickerDemo, page: () => SyncfusionFlutterDatepickerDemo(),),
     GetPage(name: APPRouter.tableCalenderMain, page: () => TableCalenderMain(),),
     GetPage(name: APPRouter.suspensionButtonDemo, page: () => SuspensionButtonDemo(),),
+    GetPage(name: APPRouter.neomorphismHomePage, page: () => NeomorphismHomePage(),),
 
 
   ];

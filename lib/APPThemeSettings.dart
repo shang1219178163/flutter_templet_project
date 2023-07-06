@@ -21,15 +21,16 @@ class APPThemeSettings {
 
   static APPThemeSettings get instance => _instance;
 
-  ThemeData themeData = ThemeData.light().copyWith(
+  late ThemeData themeData = ThemeData.light().copyWith(
+    platform: TargetPlatform.iOS,
+    splashFactory: NoSplash.splashFactory,
+    splashColor: Colors.transparent, // 点击时的高亮效果设置为透明
+    highlightColor: Colors.transparent, // 长按时的扩散效果设置为透明
     // primarySwatch: Colors.blue,
     // brightness: Brightness.dark,//设置明暗模式为暗色
     // accentColor: Colors.black,//(按钮）Widget前景色为黑色
     primaryColor: Colors.blue, //主色调为青色
     indicatorColor: Colors.white,
-    splashFactory: NoSplash.splashFactory,
-    splashColor: Colors.transparent, // 点击时的高亮效果设置为透明
-    highlightColor: Colors.transparent, // 长按时的扩散效果设置为透明
     // iconTheme: IconThemeData(color: Colors.yellow),//设置icon主题色为黄色
     // textTheme: ThemeData.light().textTheme.copyWith(
     //     button: TextStyle(color: Colors.red)
@@ -44,42 +45,21 @@ class APPThemeSettings {
       style: TextButton.styleFrom(
         splashFactory: NoSplash.splashFactory,
         primary: Colors.blue,
-      ).merge(
-        ButtonStyle(elevation: MaterialStateProperty.resolveWith<double>((states) {
-          if (states.contains(MaterialState.pressed)) {
-            return 0; // 点击时阴影隐藏
-          }
-          return 0; // 正常时阴影隐藏
-        })),
-      ),
+      ).merge(buildButtonStyle()),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         splashFactory: NoSplash.splashFactory,
         // onPrimary: Colors.yellow,
         primary: Colors.blue,
-      ).merge(
-        ButtonStyle(elevation: MaterialStateProperty.resolveWith<double>((states) {
-          if (states.contains(MaterialState.pressed)) {
-            return 0; // 点击时阴影隐藏
-          }
-          return 0; // 正常时阴影隐藏
-        })),
-      ),
+      ).merge(buildButtonStyle()),
     ),
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
         splashFactory: NoSplash.splashFactory,
         primary: Colors.blue,
         // backgroundColor: Colors.green,
-      ).merge(
-        ButtonStyle(elevation: MaterialStateProperty.resolveWith<double>((states) {
-          if (states.contains(MaterialState.pressed)) {
-            return 0; // 点击时阴影隐藏
-          }
-          return 0; // 正常时阴影隐藏
-        })),
-      ),
+      ).merge(buildButtonStyle()),
     ),
     // scaffoldBackgroundColor: Colors.red
   );
@@ -118,6 +98,18 @@ class APPThemeSettings {
       //   ),
       // ),
       );
+
+  /// 自定义行为
+  ButtonStyle buildButtonStyle() {
+    return ButtonStyle(
+      elevation: MaterialStateProperty.resolveWith<double>((states) {
+        if (states.contains(MaterialState.pressed)) {
+          return 0; // 点击时阴影隐藏
+        }
+        return 0; // 正常时阴影隐藏
+      })
+    );
+  }
 
   late ScrollController? actionScrollController = ScrollController();
 

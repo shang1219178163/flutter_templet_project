@@ -501,6 +501,7 @@ var specials = [
   Tuple2(APPRouter.testFunction, "方法动态化", ),
   Tuple2(APPRouter.pageViewAndBarDemo, "pageViewAndBarDemo", ),
   Tuple2(APPRouter.mediaQueryScreeenDemo, "屏幕尺寸研究", ),
+  Tuple2(APPRouter.neomorphismHomePage, "拟物风格", ),
 
 
 ];
@@ -617,6 +618,7 @@ var forms = [
 var dataTypes = [
   Tuple2(APPRouter.dataTypeDemo, "数据类型", ),
   Tuple2(APPRouter.regExpDemo, "正则匹配", ),
+  Tuple2(APPRouter.enumDemo, "枚举研究", ),
 
 
 ];

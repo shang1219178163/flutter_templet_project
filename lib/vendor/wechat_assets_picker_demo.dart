@@ -57,20 +57,23 @@ class _WechatAssetsPickerDemoState extends State<WechatAssetsPickerDemo> {
           spacing: spacing,
           runSpacing: spacing,
           children: [
-            ...items.map((e) => Container(
-              clipBehavior: Clip.antiAlias,
-              decoration: BoxDecoration(
-                // border: Border.all(width: 2),
-                borderRadius: BorderRadius.all(Radius.circular(4)),
-              ),
-              child: FadeInImage(
-                width: itemWidth,
-                height: itemWidth,
-                placeholder: 'img_placeholder.png'.toAssetImage(),
-                image: AssetEntityImageProvider(e, isOriginal: false),
-                fit: BoxFit.cover,
-              ),
-            )).toList(),
+            ...items.map((e) {
+
+              return Container(
+                clipBehavior: Clip.antiAlias,
+                decoration: BoxDecoration(
+                  // border: Border.all(width: 2),
+                  borderRadius: BorderRadius.all(Radius.circular(4)),
+                ),
+                child: FadeInImage(
+                  width: itemWidth,
+                  height: itemWidth,
+                  placeholder: 'img_placeholder.png'.toAssetImage(),
+                  image: AssetEntityImageProvider(e, isOriginal: false),
+                  fit: BoxFit.cover,
+                ),
+              );
+            }).toList(),
             if (items.length < 9)
               InkWell(
                 onTap: () {
@@ -103,6 +106,11 @@ class _WechatAssetsPickerDemoState extends State<WechatAssetsPickerDemo> {
     );
     debugPrint(result.toString());
     selectedAssets = result ?? [];
+
+    for (final e in selectedAssets){
+      final path = await e.fileWithSubtype;
+      debugPrint(path.toString());
+    }
     setState(() { });
   }
 

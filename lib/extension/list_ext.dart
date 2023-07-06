@@ -118,7 +118,7 @@ extension ListExt<T,E> on List<E> {
   int? indexWhere(bool Function(E) test) => findIndex(test);
   /// 倒叙查询符合条件元素
   int? lastIndexWhere(bool Function(E) test) => findLastIndex(test);
-  
+
   /// 所有元素都满足需求(回调返回第一个不满足需求的元素)
   bool every(bool Function(E) test, {ValueChanged<E>? cb}) {
     for (final element in this) {

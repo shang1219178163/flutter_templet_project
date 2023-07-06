@@ -32,6 +32,37 @@ extension StringExt on String{
     return result;
   }
 
+
+  /// 转 Map<String, dynamic>
+  Map<String, dynamic>? decodeMap({Object? Function(Object? key, Object? value)? reviver}) {
+    if (this.isEmpty) {
+      return null;
+    }
+
+    try {
+      final result = jsonDecode(this, reviver: reviver) as Map<String, dynamic>?;
+      return result;
+    } catch (exception) {
+      debugPrint("decodeMap: exception: $exception");
+      return null;
+    }
+  }
+
+  /// 转 List<dynamic>
+  List<dynamic>? decodeList({Object? Function(Object? key, Object? value)? reviver}) {
+    if (this.isEmpty) {
+      return null;
+    }
+
+    try {
+      final result = jsonDecode(this, reviver: reviver) as List<dynamic>?;
+      return result;
+    } catch (exception) {
+      debugPrint("decodeList: exception: $exception");
+      return null;
+    }
+  }
+
   /// 本地图片路径
   String toPath() {
     return "assets/images/$this";

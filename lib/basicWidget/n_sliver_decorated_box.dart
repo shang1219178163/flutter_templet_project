@@ -83,8 +83,8 @@ class RenderSliverDecoratedBox extends RenderProxySliver {
 
   BoxPainter? _painter;
 
-  Decoration get decoration => _decoration;
   Decoration _decoration;
+  Decoration get decoration => _decoration;
   set decoration(Decoration value) {
     if (value == _decoration) return;
     _painter?.dispose();
@@ -93,16 +93,16 @@ class RenderSliverDecoratedBox extends RenderProxySliver {
     markNeedsPaint();
   }
 
-  DecorationPosition get position => _position;
   DecorationPosition _position;
+  DecorationPosition get position => _position;
   set position(DecorationPosition value) {
     if (value == _position) return;
     _position = value;
     markNeedsPaint();
   }
 
-  ImageConfiguration get configuration => _configuration;
   ImageConfiguration _configuration;
+  ImageConfiguration get configuration => _configuration;
   set configuration(ImageConfiguration value) {
     if (value == _configuration) return;
     _configuration = value;
