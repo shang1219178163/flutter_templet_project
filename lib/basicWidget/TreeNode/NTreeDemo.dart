@@ -28,22 +28,18 @@ class _NTreeDemoState extends State<NTreeDemo> {
       name:'1 一级菜单',
       isExpand: true,//是否展开子项
       enabled: false,//是否可以响应事件
-      level: 0,
-      child:[
+      items:[
         NTreeNodeModel(
           name:'1.1 二级菜单',
           isExpand: true,
-          level: 1,
-          child:[
+          items:[
             NTreeNodeModel(
               name:'1.1.1 三级菜单',
               isExpand: true,
-              level: 2,
-              child: [
+              items: [
                 NTreeNodeModel(
-                  name:'1.1.1.1 三级菜单',
+                  name:'1.1.1.1 四级菜单',
                   isExpand: true,
-                  level: 3,
                 ),
               ]
             ),
@@ -52,29 +48,24 @@ class _NTreeDemoState extends State<NTreeDemo> {
         NTreeNodeModel(
           name:'1.2 二级菜单',
           isExpand: true,
-          level: 1,
         ),
       ]
     ),
     NTreeNodeModel(
       name:'2 一级菜单',
       // isExpand: true,
-        level: 0,
-        child:[
+        items:[
         NTreeNodeModel(
           name:'2.1 二级菜单',
           // isExpand: true,
-          level: 1,
         ),
         NTreeNodeModel(
           name:'2.2 二级菜单',
           isExpand: false,
-          level: 1,
-          child:[
+          items:[
             NTreeNodeModel(
               name:'2.2.1 三级菜单',
               // isExpand: true,
-              level: 2,
             ),
           ]
         ),
@@ -92,16 +83,16 @@ class _NTreeDemoState extends State<NTreeDemo> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title ?? "$widget"),
-          actions: ['done',].map((e) => TextButton(
-            child: Text(e,
-              style: TextStyle(color: Colors.white),
-            ),
-            onPressed: onPressed,)
-          ).toList(),
-        ),
-        body: _buildBody(),
+      appBar: AppBar(
+        title: Text(widget.title ?? "$widget"),
+        actions: ['done',].map((e) => TextButton(
+          child: Text(e,
+            style: TextStyle(color: Colors.white),
+          ),
+          onPressed: onPressed,)
+        ).toList(),
+      ),
+      body: _buildBody(),
     );
   }
 

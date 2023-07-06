@@ -225,8 +225,10 @@ extension WidgetExt on Widget {
   ValueListenableBuilder toValueListenableBuilder<T>({
     Key? key,
     required ValueListenable<T> valueListenable,
+    Widget? child,
   }) => ValueListenableBuilder<T>(
     valueListenable: valueListenable,
+    child: child,
     builder: (context, value, child) {
       return this;
     },

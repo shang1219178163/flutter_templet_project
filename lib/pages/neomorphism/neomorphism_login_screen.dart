@@ -47,13 +47,19 @@ class _NeomorphismLoginScreenState extends State<NeomorphismLoginScreen> {
                 Row(
                   children: <Widget>[
                     Expanded(
-                      child: buildButton(FontAwesomeIcons.facebookF),
+                      child: buildButton(Icon(
+                        FontAwesomeIcons.facebookF,
+                        color: Color(0xFF4D70A6),
+                      )),
                     ),
                     SizedBox(
                       width: 60.w,
                     ),
                     Expanded(
-                      child: buildButton(FontAwesomeIcons.google),
+                      child: buildButton(Icon(
+                        FontAwesomeIcons.google,
+                        color: Color(0xFF4D70A6),
+                      )),
                     )
                   ],
                 ),
@@ -72,35 +78,32 @@ class _NeomorphismLoginScreenState extends State<NeomorphismLoginScreen> {
       ));
   }
 
-  Widget buildButton(IconData icon) {
+  Widget buildButton(Widget child) {
     return Container(
       height: 120.h,
       margin: EdgeInsets.symmetric(vertical: 30),
-      decoration: buildDecoration(),
-      child: Icon(
-        icon,
-        color: Color(0xFF4D70A6),
-      ),
+      decoration: buildShadowDecoration(),
+      child: child,
     );
   }
 
   /// 内外阴影
-  Decoration buildDecoration() {
+  Decoration buildShadowDecoration({double radius = 10}) {
     return BoxDecoration(
-      color: Color(0xFFF1F3F6),
-      borderRadius: BorderRadius.all(Radius.circular(10)),
-      boxShadow: [
-        BoxShadow(
-            offset: Offset(10, 10),
-            color: Color(0xFF4D70A6).withOpacity(0.2),
-            blurRadius: 16
-        ),
-        BoxShadow(
-            offset: Offset(-10, -10),
-            color: Color.fromARGB(170, 255, 255, 255),
-            blurRadius: 10
-        ),
-      ]
+        color: Color(0xFFF1F3F6),
+        borderRadius: BorderRadius.all(Radius.circular(radius)),
+        boxShadow: [
+          BoxShadow(
+              offset: Offset(10, 10),
+              color: Color(0xFF4D70A6).withOpacity(0.2),
+              blurRadius: 16
+          ),
+          BoxShadow(
+              offset: Offset(-10, -10),
+              color: Color.fromARGB(170, 255, 255, 255),
+              blurRadius: 10
+          ),
+        ]
     );
   }
 
@@ -130,7 +133,7 @@ class _NeomorphismLoginScreenState extends State<NeomorphismLoginScreen> {
             child: Container(
               height: 30,
               width: 30,
-              decoration: buildDecoration(),
+              decoration: buildShadowDecoration(),
               child: Icon(
                 Icons.check,
                 color: Color(0xFF4D70A6),
@@ -209,14 +212,15 @@ class _NeomorphismLoginScreenState extends State<NeomorphismLoginScreen> {
       GestureDetector(
         onTap: () {
           Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => NeomorphismCardsScreen()));
+              builder: (context) => NeomorphismCardsScreen())
+          );
         },
         child: Container(
           width: double.infinity,
           alignment: Alignment.center,
           height: 120.h,
           margin: EdgeInsets.symmetric(vertical: 15),
-          decoration: buildDecoration(),
+          decoration: buildShadowDecoration(),
           child: Text(
             "Login",
             style:
@@ -228,11 +232,17 @@ class _NeomorphismLoginScreenState extends State<NeomorphismLoginScreen> {
         child: RichText(
           text: TextSpan(children: <TextSpan>[
             TextSpan(
-                text: "Don't have an account?",
-                style: TextStyle(color: Colors.grey)),
+              text: "Don't have an account?",
+              style: TextStyle(
+                color: Colors.grey
+              )
+            ),
             TextSpan(
-                text: " Sign Up",
-                style: TextStyle(color: Color(0xFF4D70A6))),
+              text: " Sign Up",
+              style: TextStyle(
+                color: Color(0xFF4D70A6)
+              )
+            ),
           ]),
         ),
       ),
