@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
     // show AssetEntity, AssetEntityImageProvider;
@@ -102,6 +103,7 @@ class _WechatAssetsPickerDemoState extends State<WechatAssetsPickerDemo> {
       pickerConfig: AssetPickerConfig(
         maxAssets: maxCount,
         selectedAssets: selectedAssets,
+        themeColor: context.primaryColor,
       )
     );
     debugPrint(result.toString());
