@@ -102,8 +102,9 @@ class _NTreeDemoState extends State<NTreeDemo> {
     return CustomScrollView(
       slivers: [
         Text(arguments.toString()),
-        NTree(list: _list),
-
+        NTree(
+          list: _list,
+        ),
       ].map((e) => SliverToBoxAdapter(child: e,)).toList(),
     );
   }

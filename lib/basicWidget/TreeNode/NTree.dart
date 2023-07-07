@@ -15,22 +15,20 @@ class NTree extends StatefulWidget {
 
   NTree({
     Key? key,
-    this.title,
     required this.list,
     this.color = Colors.black87,
     this.iconColor = Colors.blueAccent,
-    this.prefixBuilder,
+    this.indent = 30,
   }) : super(key: key);
 
-  String? title;
   /// 数据源
   List<NTreeNodeModel> list;
   /// 标题颜色
   Color color;
   /// 文字颜色
   Color iconColor;
-
-  Widget Function(BuildContext context, NTreeNodeModel model)? prefixBuilder;
+  /// 层级缩进
+  double indent;
 
   @override
   _NTreeState createState() => _NTreeState();
@@ -55,7 +53,7 @@ class _NTreeState extends State<NTree> {
               iconColor: widget.iconColor,
             ),
             if(e.isExpand)Padding(
-              padding: EdgeInsets.only(left: 30),
+              padding: EdgeInsets.only(left: widget.indent),
               child: NTree(
                 color: widget.color,
                 list: e.items,
@@ -77,7 +75,6 @@ class _NTreeState extends State<NTree> {
     final trailing = e.items.isEmpty ? SizedBox() :
     (e.isExpand ? Icon(Icons.keyboard_arrow_down, color: iconColor,)
         : Icon(Icons.keyboard_arrow_right, color: iconColor,));
-    // final prefix = widget.prefixBuilder?.call(context, e) ?? widget.levelUnit*e.level;
 
     final leading = IconButton(
       onPressed: () {
