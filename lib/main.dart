@@ -150,7 +150,7 @@ class MyApp extends StatelessWidget {
       locale: const Locale('zh'),
       localizationsDelegates: [
         // AppCupertinoLocalizations.delegate,
-        ZhCupertinoLocalizations.delegate,
+        // ZhCupertinoLocalizations.delegate,
 
         GlobalCupertinoLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,

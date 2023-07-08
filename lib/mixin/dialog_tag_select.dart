@@ -110,15 +110,15 @@ class DialogTagSelect with DialogMixin {
       },
       contentChildBuilder: (context, setState1) {
         return Wrap(
-          runSpacing: 8.w,
           spacing: 16.w,
-          children: tags
-              .map(
+          runSpacing: 12.w,
+          children: tags.map(
                 (e) => ChoiceChip(
+              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
               side: e.isSelected == true
                   ? const BorderSide(color: Colors.transparent)
                   : const BorderSide(color: Color(0xffF3F3F3)),
-              label: Text(e.name ?? "-"),
+              label: Text(e.name ?? "-", maxLines: 2, softWrap: true),
               labelStyle: TextStyle(
                 color: e.isSelected == true ? Colors.white : Color(0xff181818),
               ),

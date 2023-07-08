@@ -72,7 +72,7 @@ class IMTipBellCell extends StatelessWidget {
                 data: text ?? "",
                 textAlign: TextAlign.center,
                 fontSize: 12.sp,
-                fontColor: Colors.white,
+                color: Colors.white,
                 fontWeight: FontWeight.w500,
                 maxLines: 2,
               ),

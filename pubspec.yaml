@@ -121,6 +121,7 @@ dependencies:
   sliver_tools: 0.2.7
   color_converter: ^0.2.1
   horizontal_data_table: ^4.1.4
+  image_picker: ^1.0.0
   wechat_assets_picker: ^8.4.3
   dotted_border: ^2.0.0+3
   #  merge_images: ^1.0.3

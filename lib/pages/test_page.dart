@@ -392,6 +392,13 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
       debugPrint(exception.toString());
     }
 
+    String? maxline;
+    // maxline = map["aa'a'a"];
+    final flag = (maxline?.isNotEmpty == true);
+    debugPrint('flag: $flag');
+    maxline = "1";
+    final flag1 = (maxline?.isNotEmpty == true);
+    debugPrint('flag1: $flag1');
 
   }
   

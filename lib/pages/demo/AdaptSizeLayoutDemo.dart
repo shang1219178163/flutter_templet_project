@@ -65,7 +65,7 @@ class _AdaptSizeLayoutDemoState extends State<AdaptSizeLayoutDemo> {
               data: "自适应横向布局"*i,
               textAlign: TextAlign.center,
               fontSize: 16.sp,
-              fontColor: Colors.white,
+              color: Colors.white,
               fontWeight: FontWeight.w500,
               maxLines: 6,
             ),
