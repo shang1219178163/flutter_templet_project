@@ -38,6 +38,7 @@ import 'package:flutter_templet_project/pages/demo/StackDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/StackDemoTwo.dart';
 import 'package:flutter_templet_project/pages/demo/SuspensionButtonDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TextFieldColorChangeDemo.dart';
+import 'package:flutter_templet_project/pages/demo/UploadFileDemo.dart';
 import 'package:flutter_templet_project/pages/demo/enumDemo.dart';
 import 'package:flutter_templet_project/pages/homeSrollDemo.dart';
 import 'package:flutter_templet_project/pages/demo/BuilderDemo.dart';
@@ -554,6 +555,7 @@ class APPRouter {
   static const tableCalenderMain = '/tableCalenderMain';
   static const suspensionButtonDemo = '/suspensionButtonDemo';
   static const neomorphismHomePage = '/neomorphismHomePage';
+  static const uploadFileDemo = '/uploadFileDemo';
 
 
 
@@ -874,6 +876,7 @@ class AppPage {
     GetPage(name: APPRouter.tableCalenderMain, page: () => TableCalenderMain(),),
     GetPage(name: APPRouter.suspensionButtonDemo, page: () => SuspensionButtonDemo(),),
     GetPage(name: APPRouter.neomorphismHomePage, page: () => NeomorphismHomePage(),),
+    GetPage(name: APPRouter.uploadFileDemo, page: () => UploadFileDemo(),),
 
 
   ];

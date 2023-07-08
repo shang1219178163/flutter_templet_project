@@ -8,6 +8,7 @@ enum HttpMethod {
   PATCH,
   DELETE,
   UPLOAD,
+  DOWNLOAD,
 }
 
 /// 请求基类

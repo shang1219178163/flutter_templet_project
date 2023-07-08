@@ -95,7 +95,10 @@ class RequestManager{
         dynamic queryParams,
         dynamic data,
         Options? options,
-        MultipartFile? file,
+        // MultipartFile? file,
+        String? filePath,
+        ProgressCallback? onSendProgress,
+        ProgressCallback? onReceiveProgress,
       }) async {
     final url = "${RequestConfig.baseUrl}/${apiPath}";
     // if (kDebugMode) {
@@ -111,9 +114,36 @@ class RequestManager{
           return await _dio.post(url, queryParameters: queryParams, data: data, options: options);
         case HttpMethod.DELETE:
           return await _dio.delete(url, queryParameters: queryParams, data: data, options: options);
-        // case HttpMethod.DOWNLOAD:
-        //   return await _dio.get(url, queryParameters: queryParams, data: data, options: options);
-        default:
+        case HttpMethod.UPLOAD:
+          {
+            assert(filePath?.isNotEmpty == true, "上传文件路径不能为空");
+            return await _dio.post(url,
+              queryParameters: queryParams,
+              data: data ?? FormData.fromMap({
+                'dirName': 'APP',
+                'files': await MultipartFile.fromFile(filePath!),
+              }),
+              options: options,
+              onSendProgress: onSendProgress,
+              onReceiveProgress: onReceiveProgress,
+            );
+          }
+        case HttpMethod.DOWNLOAD:
+          {
+            return await _dio.get(url,
+              queryParameters: queryParams,
+              data: FormData.fromMap({
+                'dirName': 'APP',
+                'files': await MultipartFile.fromFile(filePath!),
+              }),
+              options: options ?? Options(
+                responseType: ResponseType.bytes,
+                followRedirects: false,
+              ),
+              onReceiveProgress: onReceiveProgress,
+            );
+          }
+          default:
           // BrunoUti.showInfoToast('请求方式错误');
       }
     } on DioError catch (e) {
@@ -126,10 +156,14 @@ class RequestManager{
     return null;
   }
 
-  Future upload(String url, String file, {dynamic queryParams}) async {
+  Future<dynamic> upload(String url, String path, {
+    dynamic queryParams,
+    ProgressCallback? onSendProgress,
+    ProgressCallback? onReceiveProgress,
+  }) async {
     var formData = FormData.fromMap({
       'dirName': 'MY_APP',
-      'files': await MultipartFile.fromFile(file),
+      'files': await MultipartFile.fromFile(path),
     });
     var response = await sendRequest(
       url,
@@ -140,7 +174,11 @@ class RequestManager{
     return _handleResponse(response);
   }
 
-  Future download(String url) async {
+  Future<dynamic> download(String url, {
+    dynamic queryParams,
+    ProgressCallback? onSendProgress,
+    ProgressCallback? onReceiveProgress,
+  }) async {
     var response = await sendRequest(
       url,
       method: HttpMethod.GET,
