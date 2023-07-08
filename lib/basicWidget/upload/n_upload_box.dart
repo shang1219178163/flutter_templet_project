@@ -6,28 +6,26 @@ import 'package:flutter_templet_project/extension/widget_ext.dart';
 
 import 'package:image_picker/image_picker.dart';
 
-
-class NUploadFileModel{
-
-  NUploadFileModel(
-    this.path,
-    this.length,
-  );
-
-  String path;
-
-  String length;
-}
+// 未来可能替 XFile,兼容 文件 pdf 上传等
+// class NUploadFileModel{
+//
+//   NUploadFileModel(
+//     this.path,
+//     this.length,
+//   );
+//
+//   String path;
+//
+//   String length;
+// }
 
 class NUploadModel<T> {
 
   NUploadModel({
-    // required this.id,
     required this.data,
     this.url,
   });
-  // /// 唯一标识符,不能重复
-  // String id;
+
   /// 上传之后的文件 url
   String? url;
   /// 挂载数据,一般是模型
@@ -47,13 +45,13 @@ class NUploadBox extends StatefulWidget {
   }) : super(key: key);
 
   List<XFile> items;
-
+  /// 做大个数
   int maxCount;
-
+  /// 每行个数
   int rowCount;
 
   double spacing;
-
+  /// 显示文件大小
   bool showFileSize;
 
   @override
@@ -65,7 +63,6 @@ class _NUploadBoxState extends State<NUploadBox> {
   final ImagePicker _picker = ImagePicker();
 
   late final selectedAssets = widget.items ?? <XFile>[];
-  // var selectedModels = <NUploadModel<XFile>>[];
 
   @override
   Widget build(BuildContext context) {
@@ -131,7 +128,7 @@ class _NUploadBoxState extends State<NUploadBox> {
                         ),
                       ),
                     ),
-                    if(widget.showFileSize)buildLengthInfo(
+                    if(widget.showFileSize)buildFileSizeInfo(
                       length: e.data.length(),
                     ),
                   ],
@@ -160,7 +157,7 @@ class _NUploadBoxState extends State<NUploadBox> {
     );
   }
 
-  Widget buildLengthInfo({required Future<int> length}) {
+  Widget buildFileSizeInfo({required Future<int> length}) {
     return FutureBuilder<int>(
       future: length,
       builder: (BuildContext context, AsyncSnapshot snapshot) {

@@ -78,75 +78,81 @@ class _NUploadButtonState extends State<NUploadButton> {
           right: 0,
           bottom: 0,
           left: 0,
-          child: AnimatedBuilder(
-              animation: Listenable.merge([
-                _successVN,
-                _percentVN,
-              ]),
-              builder: (context, child) {
-                if (_successVN.value == false) {
-                  return Stack(
-                    children: [
-                      InkWell(
-                        onTap: (){
-                          debugPrint("onTap");
-                          onRefresh();
-                        },
-                        child: Container(
-                          color: Colors.black45,
-                          // margin: EdgeInsets.only(top: 12, right: 12),
-                          alignment: Alignment.center,
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Icon(Icons.refresh, color: Colors.red),
-                              NText(
-                                data: "点击重试",
-                                fontSize: 14,
-                                color: Colors.white,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        top: 0,
-                        right: 0,
-                        child: IconButton(
-                          padding: EdgeInsets.zero,
-                          constraints: BoxConstraints(),
-                          onPressed: widget.onDelete,
-                          icon: Icon(Icons.cancel, color: Colors.red,),
-                        ),
-                      ),
-                    ],
-                  );
-                }
+          child: buildUploading(),
+        ),
+      ],
+    );
+  }
 
-                final value = _percentVN.value;
-                if (value >= 1) {
-                  return SizedBox();
-                }
-                return Container(
-                  color: Colors.black45,
-                  alignment: Alignment.center,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      NText(
-                        data: value.toStringAsPercent(2),
-                        fontSize: 16,
-                        color: Colors.white,
-                      ),
-                      NText(
-                        data: "上传中",
-                        fontSize: 14,
-                        color: Colors.white,
-                      ),
-                    ],
-                  ),
-                );
-              }
+  Widget buildUploading() {
+    return AnimatedBuilder(
+      animation: Listenable.merge([
+        _successVN,
+        _percentVN,
+      ]),
+      builder: (context, child) {
+        if (_successVN.value == false) {
+          return buildUploadFail();
+        }
+        final value = _percentVN.value;
+        if (value >= 1) {
+          return SizedBox();
+        }
+        return Container(
+          color: Colors.black45,
+          alignment: Alignment.center,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              NText(
+                data: value.toStringAsPercent(2),
+                fontSize: 16,
+                color: Colors.white,
+              ),
+              NText(
+                data: "上传中",
+                fontSize: 14,
+                color: Colors.white,
+              ),
+            ],
+          ),
+        );
+      }
+    );
+  }
+
+  Widget buildUploadFail() {
+    return Stack(
+      children: [
+        InkWell(
+          onTap: (){
+            debugPrint("onTap");
+            onRefresh();
+          },
+          child: Container(
+            color: Colors.black45,
+            alignment: Alignment.center,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(Icons.refresh, color: Colors.red),
+                NText(
+                  data: "点击重试",
+                  fontSize: 14,
+                  color: Colors.white,
+                ),
+              ],
+            ),
+          ),
+        ),
+        Positioned(
+          top: 0,
+          right: 0,
+          child: IconButton(
+            padding: EdgeInsets.zero,
+            constraints: BoxConstraints(),
+            onPressed: widget.onDelete,
+            icon: Icon(Icons.cancel, color: Colors.red,),
           ),
         ),
       ],
