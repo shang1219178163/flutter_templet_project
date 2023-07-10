@@ -145,6 +145,37 @@ extension ListExt<T,E> on List<E> {
     return this;
   }
 
+  /// 根据值排序
+  void sortByValue({
+    bool ascending = true,
+    required num? Function(E e) cb,
+  }) {
+    sorted((a, b) {
+      final aValue = cb(a);
+      final bValue = cb(b);
+      if (ascending) {
+        if (aValue == null || bValue == null) {
+          return 1;
+        }
+        return aValue.compareTo(bValue);
+      }
+
+      if (aValue == null || bValue == null) {
+        return -1;
+      }
+      return bValue.compareTo(aValue);
+    });
+  }
+
+  /// 根据值排序
+  List<E> sortedByValue({
+    bool ascending = true,
+    required num? Function(E e) cb,
+  }) {
+    sortByValue(ascending: ascending, cb: cb);
+    return this;
+  }
+
   List<E> exchange(int fromIdx, int toIdx) {
     if (fromIdx >= length || toIdx >= length) {
       return this;

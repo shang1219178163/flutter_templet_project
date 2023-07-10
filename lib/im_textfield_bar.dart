@@ -132,6 +132,7 @@ class _IMTextfieldBarState extends State<IMTextfieldBar> with WidgetsBindingObse
       child: StatefulBuilder(
         builder: (context, setState) {
           return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               widget.header,
               Padding(
