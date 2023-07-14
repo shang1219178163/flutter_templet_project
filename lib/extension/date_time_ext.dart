@@ -18,24 +18,25 @@ const String DATE_FORMAT_DAY = 'yyyy-MM-dd';
 const String DATE_FORMAT_DAY_START = 'yyyy-MM-dd 00:00:00';
 /// yyyy-dd-MM 23:59:59
 const String DATE_FORMAT_DAY_END = 'yyyy-MM-dd 23:59:59';
-
-
+/// HH:mm:
 const String DATE_FORMAT_H_M = 'HH:mm';
+/// HH:mm:ss
+const String DATE_FORMAT_H_M_S = 'HH:mm:ss';
 
 
 extension DateTimeExt on DateTime {
 
   /// 时间戳 转 DateTime
-  static DateTime dateFromTimestamp({required int timeSamp, bool isMilliseconds = true}) {
-    var dateTime = DateTime.fromMillisecondsSinceEpoch(timeSamp);
-    if (!isMilliseconds) {
-      dateTime = DateTime.fromMillisecondsSinceEpoch(timeSamp*1000);
+  static DateTime dateFromTimestamp({required int timestamp}) {
+    var dateTime = DateTime.fromMillisecondsSinceEpoch(timestamp);
+    if ("$timestamp".length == 10) {
+      dateTime = DateTime.fromMillisecondsSinceEpoch(timestamp*1000);
     }
     return dateTime;
   }
 
-  /// DateTime 转 时间戳
-  static int timestampFromDate({required DateTime date, bool isMilliseconds = true}) {
+  /// DateTime 转 时间戳(默认秒)
+  static int timestampFromDate({required DateTime date, bool isMilliseconds = false}) {
     var result = date.millisecondsSinceEpoch;
     if (!isMilliseconds) {
       result = result~/1000;
@@ -70,12 +71,8 @@ extension DateTimeExt on DateTime {
   ///timeSamp:毫秒值
   ///format:"yyyy年MM月dd hh:mm:ss"  "yyy?MM?dd  hh?MM?dd" "yyyy:MM:dd"......
   ///结果： 2019?08?04  02?08?02
-  static String stringFromTimestamp({required int timeSamp, String format = DATE_FORMAT, bool isMilliseconds = true}) {
-    var dateTime = DateTime.fromMillisecondsSinceEpoch(timeSamp);
-    if (!isMilliseconds) {
-      dateTime = DateTime.fromMillisecondsSinceEpoch(timeSamp*1000);
-    }
-
+  static String stringFromTimestamp({required int timestamp, String format = DATE_FORMAT}) {
+    var dateTime = DateTimeExt.dateFromTimestamp(timestamp: timestamp);
     var result = stringFromDate(date: dateTime, format: format);
     return result;
   }
@@ -85,7 +82,7 @@ extension DateTimeExt on DateTime {
     required String dateStr,
     String format = DATE_FORMAT,
     bool isUtc = false,
-    bool isMilliseconds = true,
+    bool isMilliseconds = false,
   }) {
     final date = dateFromString(dateStr: dateStr, format: format, isUtc: isUtc);
     var result = date.millisecondsSinceEpoch;
@@ -99,8 +96,8 @@ extension DateTimeExt on DateTime {
   static double logDifference(DateTime before) {
     final now = DateTime.now();
     final gap = now.difference(before).inMilliseconds;
-    final seconds = gap / 1000;
-    return seconds;
+    final second = gap / 1000;
+    return second;
   }
 
   bool isSameDay(DateTime? date){

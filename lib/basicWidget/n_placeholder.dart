@@ -10,7 +10,7 @@ class NPlaceholder extends StatelessWidget {
 
   NPlaceholder({
   	Key? key,
-    required this.cb,
+    required this.onTap,
     this.imageName,
     this.message,
     this.imageAndTextSpacing = 10,
@@ -28,7 +28,7 @@ class NPlaceholder extends StatelessWidget {
 
   double imageAndTextSpacing;
 
-  VoidCallback? cb;
+  VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,7 @@ class NPlaceholder extends StatelessWidget {
         style: ButtonStyle(
           overlayColor: MaterialStateColor.resolveWith((states) => Colors.transparent),
         ),
-        onPressed: cb ?? () {
+        onPressed: onTap ?? () {
           debugPrint("$this");
         },
         child: Column(
