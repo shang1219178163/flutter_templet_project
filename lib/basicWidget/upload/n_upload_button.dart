@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/num_ext.dart';
+import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/network/RequestManager.dart';
 // import 'package:flutter_templet_project/network/RequestManager.dart';
 
@@ -14,6 +15,7 @@ class NUploadButton extends StatefulWidget {
     Key? key,
     // required this.id,
     required this.path,
+    this.url,
     this.urlBlock,
     this.onDelete,
     this.radius = 8,
@@ -22,6 +24,8 @@ class NUploadButton extends StatefulWidget {
 
   /// 文件本地路径
   final String path;
+  /// 文件网络路径
+  final String? url;
   /// 上传成功获取 url 回调
   final ValueChanged<String>? urlBlock;
   /// 返回删除元素的 id
@@ -58,20 +62,34 @@ class _NUploadButtonState extends State<NUploadButton> {
       return;
     }
 
+    if (widget.url?.isNotEmpty == true) {
+      // BrunoUtil.showInfoToast("url 不为空");
+      return;
+    }
     onRefresh();
   }
 
   @override
   Widget build(BuildContext context) {
+    final imgChild = ClipRRect(
+      borderRadius: BorderRadius.all(Radius.circular(widget.radius)),
+      child: Image.file(
+        File(widget.path),
+        fit: BoxFit.cover,
+      )
+    );
+
+    if (widget.url?.isNotEmpty == true) {
+      debugPrint("url 不为空");
+      return imgChild;
+    }
+
     return Stack(
       fit: StackFit.expand,
       children: [
-        ClipRRect(
-          borderRadius: BorderRadius.all(Radius.circular(widget.radius)),
-          child: Image.file(
-            File(widget.path),
-            fit: BoxFit.cover,
-          ),
+        Padding(
+          padding: EdgeInsets.only(top: 10, right: 10),
+          child: imgChild,
         ),
         Positioned(
           top: 0,
@@ -130,8 +148,12 @@ class _NUploadButtonState extends State<NUploadButton> {
             onRefresh();
           },
           child: Container(
-            color: Colors.black45,
             alignment: Alignment.center,
+            margin: EdgeInsets.only(top: 10, right: 10),
+            decoration: BoxDecoration(
+              color: Colors.black45,
+              borderRadius: BorderRadius.all(Radius.circular(widget.radius)),
+            ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -177,6 +199,10 @@ class _NUploadButtonState extends State<NUploadButton> {
   }
 
   onRefresh() {
+    if (widget.url?.isNotEmpty == true) {
+      debugPrint("url 不为空");
+      return;
+    }
     debugPrint("onRefresh");
     if (_isLoading) {
       debugPrint("_isLoading: $_isLoading");

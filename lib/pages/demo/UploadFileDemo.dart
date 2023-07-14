@@ -87,6 +87,9 @@ class _UploadFileDemoState extends State<UploadFileDemo> {
           NUploadBox(
             items: selectedAssets,
             showFileSize: true,
+            onChange: (items){
+              debugPrint("items.length: ${items.length}");
+            },
           ),
         ],
       ),

@@ -40,8 +40,10 @@ class NUploadBox extends StatefulWidget {
     required this.items,
     this.maxCount = 9,
     this.rowCount = 4,
-    this.spacing = 10,
+    this.spacing = 6,
+    this.runSpacing = 10,
     this.showFileSize = false,
+    required this.onChange,
   }) : super(key: key);
 
   List<XFile> items;
@@ -51,8 +53,13 @@ class NUploadBox extends StatefulWidget {
   int rowCount;
 
   double spacing;
+
+  double runSpacing;
+
   /// 显示文件大小
   bool showFileSize;
+
+  ValueChanged<List<XFile>> onChange;
 
   @override
   _NUploadBoxState createState() => _NUploadBoxState();
@@ -71,6 +78,7 @@ class _NUploadBoxState extends State<NUploadBox> {
       maxCount: widget.maxCount,
       rowCount: widget.rowCount,
       spacing: widget.spacing,
+      runSpacing: widget.runSpacing,
     );
   }
 
@@ -79,6 +87,7 @@ class _NUploadBoxState extends State<NUploadBox> {
     int maxCount = 9,
     int rowCount = 4,
     double spacing = 10,
+    double runSpacing = 10,
   }) {
     List<NUploadModel<XFile>> selectedModels = items.map((e){
       return NUploadModel(
@@ -93,7 +102,7 @@ class _NUploadBoxState extends State<NUploadBox> {
         // print("itemWidth: $itemWidth");
         return Wrap(
           spacing: spacing,
-          runSpacing: spacing,
+          runSpacing: runSpacing,
           children: [
             ...selectedModels.map((e) {
               // final size = await e.length()/(1024*1024);
@@ -124,6 +133,10 @@ class _NUploadBoxState extends State<NUploadBox> {
                           },
                           onDelete: (){
                             debugPrint("onDelete: $index");
+                            items.removeAt(index);
+                            setState(() {});
+                            // debugPrint("items.length: ${items.length}");
+                            widget.onChange(items);
                           },
                         ),
                       ),
