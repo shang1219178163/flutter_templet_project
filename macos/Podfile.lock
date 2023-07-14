@@ -6,6 +6,8 @@ PODS:
     - Reachability
   - desktop_drop (0.0.1):
     - FlutterMacOS
+  - file_selector_macos (0.0.1):
+    - FlutterMacOS
   - FlutterMacOS (1.0.0)
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
@@ -32,6 +34,7 @@ DEPENDENCIES:
   - audio_session (from `Flutter/ephemeral/.symlinks/plugins/audio_session/macos`)
   - connectivity_macos (from `Flutter/ephemeral/.symlinks/plugins/connectivity_macos/macos`)
   - desktop_drop (from `Flutter/ephemeral/.symlinks/plugins/desktop_drop/macos`)
+  - file_selector_macos (from `Flutter/ephemeral/.symlinks/plugins/file_selector_macos/macos`)
   - FlutterMacOS (from `Flutter/ephemeral`)
   - package_info_plus_macos (from `Flutter/ephemeral/.symlinks/plugins/package_info_plus_macos/macos`)
   - path_provider_foundation (from `Flutter/ephemeral/.symlinks/plugins/path_provider_foundation/macos`)
@@ -52,6 +55,8 @@ EXTERNAL SOURCES:
     :path: Flutter/ephemeral/.symlinks/plugins/connectivity_macos/macos
   desktop_drop:
     :path: Flutter/ephemeral/.symlinks/plugins/desktop_drop/macos
+  file_selector_macos:
+    :path: Flutter/ephemeral/.symlinks/plugins/file_selector_macos/macos
   FlutterMacOS:
     :path: Flutter/ephemeral
   package_info_plus_macos:
@@ -71,6 +76,7 @@ SPEC CHECKSUMS:
   audio_session: dea1f41890dbf1718f04a56f1d6150fd50039b72
   connectivity_macos: 5dae6ee11d320fac7c05f0d08bd08fc32b5514d9
   desktop_drop: 69eeff437544aa619c8db7f4481b3a65f7696898
+  file_selector_macos: 468fb6b81fac7c0e88d71317f3eec34c3b008ff9
   FlutterMacOS: 8f6f14fa908a6fb3fba0cd85dbd81ec4b251fb24
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   package_info_plus_macos: f010621b07802a241d96d01876d6705f15e77c1c
@@ -83,4 +89,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 59e158c3a898ba6183280e5883ec3bd3d740f111
 
-COCOAPODS: 1.12.0
+COCOAPODS: 1.12.1
