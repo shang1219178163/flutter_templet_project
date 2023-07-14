@@ -7,14 +7,10 @@
 //
 
 
-import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
-import 'package:get/get.dart';
 
 extension ListExt<T,E> on List<E> {
-
 
   // static bool isEmpty(List? val) {
   //   return val == null || val.isEmpty;
@@ -31,42 +27,6 @@ extension ListExt<T,E> on List<E> {
       l.addAll([...this]);
     }
     return l;
-  }
-
-  /// 重写属性
-  E? get first {
-    try {
-      return this.first;
-    } catch (exception) {
-      return null;
-    }
-  }
-
-  /// 重写属性
-  E? get last {
-    try {
-      return this.last;
-    } catch (exception) {
-      return null;
-    }
-  }
-
-  /// 查询元素索引,没有则返回为空
-  int? indexOf(E element) {
-    try {
-      return this.indexOf(element);
-    } catch (exception) {
-      return null;
-    }
-  }
-
-  /// 倒叙查询元素索引
-  int? lastIndexOf(E element) {
-    try {
-      return this.lastIndexOf(element);
-    } catch (exception) {
-      return null;
-    }
   }
 
   /// 查询符合条件元素,没有则返回为空
@@ -150,7 +110,7 @@ extension ListExt<T,E> on List<E> {
     bool ascending = true,
     required num? Function(E e) cb,
   }) {
-    sorted((a, b) {
+    sort((a, b) {
       final aValue = cb(a);
       final bValue = cb(b);
       if (ascending) {
