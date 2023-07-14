@@ -341,6 +341,7 @@ var list = [
   Tuple2(APPRouter.menuDemo, "MenuDemo", ),
 
   Tuple2(APPRouter.pageViewDemo, "PageViewDemo", ),
+  Tuple2(APPRouter.pageViewDemoOne, "pageViewDemoOne", ),
   Tuple2(APPRouter.pageViewTabBarWidget, "PageViewTabBarWidget", ),
 
   Tuple2(APPRouter.pickerDemo, "pickerDemo", ),
@@ -452,6 +453,9 @@ var list = [
   Tuple2(APPRouter.expansionTileCard, "expansionTileCard", ),
   Tuple2(APPRouter.dropBoxChoicDemo, "下拉菜单", ),
   Tuple2(APPRouter.dropBoxMutiRowChoicDemo, "下拉菜单多行选择", ),
+  Tuple2(APPRouter.customSingleChildLayoutDemo, "customSingleChildLayoutDemo", ),
+  Tuple2(APPRouter.customMultiChildLayoutDemo, "customMultiChildLayoutDemo", ),
+
 
 ];
 

@@ -2,7 +2,7 @@
 // import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/Provider/provider_list_demo.dart';
 import 'package:flutter_templet_project/basicWidget/EnhanceTab/enhance_tab_bar_demo.dart';
-import 'package:flutter_templet_project/basicWidget/TreeNode/NTreeDemo.dart';
+import 'package:flutter_templet_project/basicWidget/NTree/NTreeDemo.dart';
 import 'package:flutter_templet_project/basicWidget/drag_destination_view.dart';
 import 'package:flutter_templet_project/basicWidget/responsive_column.dart';
 import 'package:flutter_templet_project/pages/APPRouteObserverDemo.dart';
@@ -25,6 +25,8 @@ import 'package:flutter_templet_project/pages/demo/BoxConstraintsDemo.dart';
 import 'package:flutter_templet_project/pages/FlutterFFiTest.dart';
 import 'package:flutter_templet_project/pages/LocalImagePage.dart';
 import 'package:flutter_templet_project/pages/HomeNavDemo.dart';
+import 'package:flutter_templet_project/pages/demo/CustomMultiChildLayoutDemo.dart';
+import 'package:flutter_templet_project/pages/demo/CustomSingleChildLayoutDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DropBoxChoicDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DropBoxMutiRowChoicDemo.dart';
 import 'package:flutter_templet_project/pages/demo/IMChatPage.dart';
@@ -34,6 +36,7 @@ import 'package:flutter_templet_project/pages/demo/MediaQueryScreeenDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NExpandTextDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NSkeletonDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PageViewAndBarDemo.dart';
+import 'package:flutter_templet_project/pages/demo/PageViewDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/StackDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/StackDemoTwo.dart';
 import 'package:flutter_templet_project/pages/demo/SuspensionButtonDemo.dart';
@@ -544,6 +547,7 @@ class APPRouter {
   static const dialogChoiceChipDemo = '/dialogChoiceChipDemo';
   static const textFieldColorChangeDemo = '/textFieldColorChangeDemo';
   static const pageViewAndBarDemo = '/pageViewAndBarDemo';
+  static const pageViewDemoOne = '/pageViewDemoOne';
   static const dropBoxChoicDemo = '/dropBoxChoicDemo';
   static const dropBoxMutiRowChoicDemo = '/dropBoxMutiRowChoicDemo';
   static const slidableDemoOne = '/slidableDemoOne';
@@ -556,7 +560,8 @@ class APPRouter {
   static const suspensionButtonDemo = '/suspensionButtonDemo';
   static const neomorphismHomePage = '/neomorphismHomePage';
   static const uploadFileDemo = '/uploadFileDemo';
-
+  static const customSingleChildLayoutDemo = '/customSingleChildLayoutDemo';
+  static const customMultiChildLayoutDemo = '/customMultiChildLayoutDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -865,6 +870,9 @@ class AppPage {
     GetPage(name: APPRouter.dialogChoiceChipDemo, page: () => DialogChoiceChipDemo(),),
     GetPage(name: APPRouter.textFieldColorChangeDemo, page: () => TextFieldColorChangeDemo(),),
     GetPage(name: APPRouter.pageViewAndBarDemo, page: () => PageViewAndBarDemo(),),
+    GetPage(name: APPRouter.pageViewDemoOne, page: () => PageViewDemoOne(),),
+
+
     GetPage(name: APPRouter.dropBoxChoicDemo, page: () => DropBoxChoicDemo(),),
     GetPage(name: APPRouter.dropBoxMutiRowChoicDemo, page: () => DropBoxMutiRowChoicDemo(),),
     GetPage(name: APPRouter.slidableDemoOne, page: () => SlidableDemoOne(),),
@@ -877,6 +885,8 @@ class AppPage {
     GetPage(name: APPRouter.suspensionButtonDemo, page: () => SuspensionButtonDemo(),),
     GetPage(name: APPRouter.neomorphismHomePage, page: () => NeomorphismHomePage(),),
     GetPage(name: APPRouter.uploadFileDemo, page: () => UploadFileDemo(),),
+    GetPage(name: APPRouter.customSingleChildLayoutDemo, page: () => CustomSingleChildLayoutDemo(),),
+    GetPage(name: APPRouter.customMultiChildLayoutDemo, page: () => CustomMultiChildLayoutDemo(),),
 
 
   ];
