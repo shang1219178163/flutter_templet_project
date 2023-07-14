@@ -8,7 +8,7 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/TreeNode/NTree.dart';
+import 'package:flutter_templet_project/basicWidget/NTree/NTree.dart';
 
 class NTreeDemo extends StatefulWidget {
 
