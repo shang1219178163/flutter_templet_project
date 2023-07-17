@@ -35,8 +35,8 @@ class _PageViewDemoThreeState extends State<PageViewDemoThree> with SingleTicker
       Tuple3("自测筛查", "img_placehorder.png".toPath(), onTap),
       Tuple3("满意度调查", "img_placehorder.png".toPath(), onTap),
       Tuple3("健康宣教", "img_placehorder.png".toPath(), onTap),
-      Tuple3("语音通话", "img_placehorder.png".toPath(), onTap),
-      Tuple3("视频通话", "img_placehorder.png".toPath(), onTap),
+      // Tuple3("语音通话", "img_placehorder.png".toPath(), onTap),
+      // Tuple3("视频通话", "img_placehorder.png".toPath(), onTap),
       Tuple3("患者建档", "img_placehorder.png".toPath(), onTap),
     ];
   }
