@@ -72,8 +72,8 @@ class _NCollectionViewState extends State<NCollectionView> with SingleTickerProv
   }) {
     // debugPrint("rowNum: $rowNum, numPerRow: $numPerRow, numPerPage: $numPerPage");
 
-    final pageCount = items.length % numPerPage == 0 ? items.length/numPerPage
-        : items.length/numPerPage + 1;
+    final num = items.length~/numPerPage;
+    final pageCount = items.length % numPerPage == 0 ? num : num + 1;
     final array = List.generate(pageCount.toInt(), (index) => index).toList();
     // debugPrint("pageCount: $pageCount, array: $array");
 
@@ -81,11 +81,16 @@ class _NCollectionViewState extends State<NCollectionView> with SingleTickerProv
       children: [
         PageView.builder(
           controller: _pageController,
+          itemCount: pageCount,
+          pageSnapping: true,
+          physics: pageCount == 1 ? const NeverScrollableScrollPhysics() : null,
           onPageChanged: (index) {
             indexVN.value = index;
             // setState(() {});
           },
           itemBuilder: (BuildContext context, int pageIndex) {
+
+            debugPrint("pageIndex: $pageIndex");
 
             return Container(
               // height: 200.w,
@@ -164,7 +169,7 @@ class _NCollectionViewState extends State<NCollectionView> with SingleTickerProv
             );
           },
         ),
-        Positioned(
+        if(array.length > 1)Positioned(
           bottom: 8.w,
           left: 0,
           right: 0,
