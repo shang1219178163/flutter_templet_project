@@ -46,9 +46,9 @@ class _TextFieldDemoState extends State<TextFieldDemo> {
   final _pwdExp = RegExp(r'^(?![0-9]+$)(?![a-z]+$)[0-9a-z]{6,12}$'); //密码正则
 
   final delayed = Debouncer(delay: Duration(milliseconds: 1000));
-  final _debounce = Debounce(milliseconds: 1000);
+  final _debounce = Debounce();
 
-  final _throttle = Throttle(milliseconds: 500);
+  final _throttle = Throttle();
 
 
   @override

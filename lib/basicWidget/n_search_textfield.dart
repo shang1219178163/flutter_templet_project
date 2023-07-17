@@ -37,7 +37,7 @@ class NSearchTextfield extends StatefulWidget {
     this.placeholder = "请输入",
     this.backgroundColor,
     this.borderRadius = const BorderRadius.all(Radius.circular(4)),
-    this.milliseconds = 500,
+    this.delay = const Duration(milliseconds: 500),
     required this.cb,
   }) : super(key: key);
 
@@ -51,7 +51,8 @@ class NSearchTextfield extends StatefulWidget {
   /// 默认圆角 4px
   BorderRadius? borderRadius;
   /// 默认0.5秒延迟
-  int? milliseconds;
+  final Duration delay;
+
   /// 回调
   ValueChanged<String> cb;
 
@@ -61,7 +62,7 @@ class NSearchTextfield extends StatefulWidget {
 
 class _NSearchTextfieldState extends State<NSearchTextfield> {
 
-  late final _debounce = Debounce(milliseconds: widget.milliseconds ?? 500);
+  late final _debounce = Debounce(delay: widget.delay);
 
   @override
   Widget build(BuildContext context) {

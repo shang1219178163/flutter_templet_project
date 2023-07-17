@@ -7,16 +7,16 @@ import 'package:flutter/foundation.dart';
 /// 搜索框防抖
 class Debounce {
   Debounce({
-    this.milliseconds = 1000,
+    this.delay = const Duration(milliseconds: 500),
   });
 
-  int milliseconds;
+  final Duration delay;
 
   Timer? _timer;
 
   call(VoidCallback callback) {
     _timer?.cancel();
-    _timer = Timer(Duration(milliseconds: milliseconds), callback);
+    _timer = Timer(delay, callback);
   }
 
   bool get isRunning => _timer?.isActive ?? false;

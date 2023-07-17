@@ -38,7 +38,7 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
   var searchText = "";
   late final searchtEditingController = TextEditingController();
 
-  final _debounce = Debounce(milliseconds: 500);
+  final _debounce = Debounce(delay: Duration(milliseconds: 500));
 
   // final _throttle = Throttle(milliseconds: 500);
 
