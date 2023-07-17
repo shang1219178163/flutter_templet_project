@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_templet_project/uti/color_uti.dart';
+import 'package:flutter_templet_project/uti/color_util.dart';
 
 
 class NCancelAndConfirmBar extends StatelessWidget {

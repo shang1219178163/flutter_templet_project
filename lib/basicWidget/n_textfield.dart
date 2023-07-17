@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
-import 'package:flutter_templet_project/uti/color_uti.dart';
+import 'package:flutter_templet_project/uti/color_util.dart';
 
 
 // Padding(

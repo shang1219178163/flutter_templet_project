@@ -15,7 +15,7 @@ import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/uti/Debounce.dart';
-import 'package:flutter_templet_project/uti/color_uti.dart';
+import 'package:flutter_templet_project/uti/color_util.dart';
 import 'package:flutter_templet_project/model/fake_data_model.dart';
 import 'package:get_storage/get_storage.dart';
 

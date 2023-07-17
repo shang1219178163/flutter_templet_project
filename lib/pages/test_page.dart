@@ -14,7 +14,7 @@ import 'package:flutter_templet_project/basicWidget/n_expand_text.dart';
 import 'package:flutter_templet_project/basicWidget/n_footer.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
-import 'package:flutter_templet_project/uti/color_uti.dart';
+import 'package:flutter_templet_project/uti/color_util.dart';
 import 'package:get/get.dart';
 import 'package:tuple/tuple.dart';
 

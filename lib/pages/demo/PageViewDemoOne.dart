@@ -7,7 +7,7 @@ import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/tab_bar_indicator_fixed.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
-import 'package:flutter_templet_project/uti/color_uti.dart';
+import 'package:flutter_templet_project/uti/color_util.dart';
 import 'package:tuple/tuple.dart';
 
 class PageViewDemoOne extends StatefulWidget {

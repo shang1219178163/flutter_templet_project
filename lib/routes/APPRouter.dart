@@ -37,6 +37,7 @@ import 'package:flutter_templet_project/pages/demo/NExpandTextDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NSkeletonDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PageViewAndBarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PageViewDemoOne.dart';
+import 'package:flutter_templet_project/pages/demo/PageViewDemoThree.dart';
 import 'package:flutter_templet_project/pages/demo/StackDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/StackDemoTwo.dart';
 import 'package:flutter_templet_project/pages/demo/SuspensionButtonDemo.dart';
@@ -323,6 +324,8 @@ class APPRouter {
   static const gridPaperDemo = '/GridPaperDemo';
 
   static const pageViewDemo = '/PageViewDemo';
+  static const pageViewDemoThree = '/pageViewDemoThree';
+
   static const pageViewTabBarWidget = '/PageViewTabBarWidget';
   static const snackBarDemo = '/SnackBarDemo';
   static const snackBarDemoOne = '/SnackBarDemoOne';
@@ -648,6 +651,9 @@ class AppPage {
     GetPage(name: APPRouter.systemColorPage, page: () => SystemColorPage(),),
     GetPage(name: APPRouter.gridViewDemo, page: () => GridViewDemo(),),
     GetPage(name: APPRouter.pageViewDemo, page: () => PageViewDemo(),),
+    GetPage(name: APPRouter.pageViewDemoThree, page: () => PageViewDemoThree(),),
+
+
     GetPage(name: APPRouter.pageViewTabBarWidget, page: () => PageViewTabBarWidget(),),
     GetPage(name: APPRouter.snackBarDemo, page: () => SnackBarDemo(),),
     GetPage(name: APPRouter.snackBarDemoOne, page: () => SnackBarDemoOne(),),
