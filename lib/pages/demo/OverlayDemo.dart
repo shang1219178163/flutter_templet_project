@@ -42,7 +42,7 @@ class _OverlayDemoState extends State<OverlayDemo> {
               ],
             ),
             ElevatedButton(
-              onPressed: () => context.showToast('Flutter is awesome!',
+              onPressed: () => context.showToast('Flutter is awesome!'*5,
                   isDismiss: true,
                   alignment: Alignment.topCenter,
               ),
@@ -175,7 +175,7 @@ class _ToastWidgetState extends State<ToastWidget> with SingleTickerProviderStat
       opacity: opacity,
       child: Align(
         alignment: widget.alignment,
-        child: widget.builder != null ? widget.builder?.call(context, setState) : _buildDefaultContainer(widget.text,
+        child: widget.builder?.call(context, setState) ?? _buildDefaultContainer(widget.text,
             margin: widget.margin,
             padding: widget.padding
         ),
@@ -210,14 +210,42 @@ class _ToastWidgetState extends State<ToastWidget> with SingleTickerProviderStat
 
 extension ToastExtension on BuildContext {
 
+  showToastNew(
+    String text, {
+      Alignment alignment = Alignment.center,
+      Duration duration = const Duration(milliseconds: 2000),
+      Duration transitionDuration = const Duration(milliseconds: 250),
+      bool isDismiss = true,
+    }) {
 
-  void showToast(
-      String text, {
-        Alignment alignment = Alignment.center,
-        Duration duration = const Duration(milliseconds: 2000),
-        Duration transitionDuration = const Duration(milliseconds: 250),
-        bool isDismiss = true,
-      }) {
+    // Create an OverlayEntry with your custom widget
+    final entry = OverlayEntry(
+      builder: (_) => ToastWidget(
+        text: text,
+        alignment: alignment,
+        transitionDuration: transitionDuration,
+        duration: duration,
+      ),
+    );
+    // then insert it to the overlay
+    // this will show the toast widget on the screen
+    final overlayState = Overlay.of(this);
+    overlayState.insert(entry);
+    // overlayState?.rearrange([entry]);
+    // 3 secs later remove the toast from the stack
+    // and this one will remove the toast from the screen
+    if (isDismiss) {
+      Future.delayed(duration, entry.remove);
+    }
+  }
+
+  showToast(
+    String text, {
+      Alignment alignment = Alignment.center,
+      Duration duration = const Duration(milliseconds: 2000),
+      Duration transitionDuration = const Duration(milliseconds: 250),
+      bool isDismiss = true,
+    }) {
 
     // Create an OverlayEntry with your custom widget
     final entry = OverlayEntry(

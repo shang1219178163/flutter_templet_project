@@ -13,7 +13,7 @@ import 'package:flutter_templet_project/pages/DialogChoiceChipDemo.dart';
 import 'package:flutter_templet_project/pages/ReflectDemo.dart';
 import 'package:flutter_templet_project/pages/PageLifecycleObserverDemo.dart';
 import 'package:flutter_templet_project/pages/RegExpDemo.dart';
-import 'package:flutter_templet_project/pages/demo/AdaptSizeLayoutDemo.dart';
+import 'package:flutter_templet_project/pages/demo/AutoLayoutDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AlertDialogTagSelectDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedBuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedContainerDemo.dart';
@@ -274,7 +274,7 @@ class APPRouter {
 
   static const homePage = '/MyHomePage';
   static const mediaQueryScreeenDemo = '/mediaQueryScreeenDemo';
-  static const adaptiveSizeLayoutDemo = '/adaptiveSizeLayoutDemo';
+  static const autoLayoutDemo = '/AutoLayoutDemo';
 
 
   static const loginPage = '/LoginPage';
@@ -605,7 +605,7 @@ class AppPage {
     GetPage(name: APPRouter.tabBarTabBarViewDemo, page: () => TabBarTabBarViewDemo(),),
     GetPage(name: APPRouter.tabBarPageViewDemo, page: () => TabBarPageViewDemo(),),
     GetPage(name: APPRouter.mediaQueryScreeenDemo, page: () => MediaQueryScreeenDemo(),),
-    GetPage(name: APPRouter.adaptiveSizeLayoutDemo, page: () => AdaptSizeLayoutDemo(),),
+    GetPage(name: APPRouter.autoLayoutDemo, page: () => AutoLayoutDemo(),),
 
     GetPage(name: APPRouter.testPage, page: () => TestPage(),),
     GetPage(name: APPRouter.testPageOne, page: () => TestPageOne(),),

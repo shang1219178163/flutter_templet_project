@@ -6,9 +6,9 @@ import 'package:flutter_templet_project/basicWidget/n_flexible_cell.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 
-class AdaptSizeLayoutDemo extends StatefulWidget {
+class AutoLayoutDemo extends StatefulWidget {
 
-  AdaptSizeLayoutDemo({
+  AutoLayoutDemo({
     Key? key,
     this.title
   }) : super(key: key);
@@ -16,10 +16,10 @@ class AdaptSizeLayoutDemo extends StatefulWidget {
   final String? title;
 
   @override
-  _AdaptSizeLayoutDemoState createState() => _AdaptSizeLayoutDemoState();
+  _AutoLayoutDemoState createState() => _AutoLayoutDemoState();
 }
 
-class _AdaptSizeLayoutDemoState extends State<AdaptSizeLayoutDemo> {
+class _AutoLayoutDemoState extends State<AutoLayoutDemo> {
 
 
   @override
