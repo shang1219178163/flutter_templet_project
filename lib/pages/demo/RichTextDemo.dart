@@ -6,11 +6,13 @@
 //  Copyright © 7/31/21 shang. All rights reserved.
 //
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_attributed_string.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/rich_text_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
+import 'package:tuple/tuple.dart';
 
 class RichTextDemo extends StatefulWidget {
 
@@ -41,39 +43,74 @@ xxxx十分重视用户权利及隐私政策并严格按照相关法律法规的�
         请您仔细阅读并充分理解相关条款，其中重点条款已为您黑体加粗标识，方便您了解自己的权利。如您点击“同意”，即表示您已仔细阅读并同意本《用户协议》及《隐私政策》，将尽全力保障您的合法权益并继续为您提供优质的产品和服务。如您点击“不同意”，将可能导致您无法继续使用我们的产品和服务。
 """;
 
+
+  late final textSpans = <TextSpan>[
+    TextSpan(
+      text: '红色',
+      style: TextStyle(fontSize: 18.0, color: Colors.red),
+    ),
+    TextSpan(
+      text: '绿色',
+      style: TextStyle(fontSize: 18.0, color: Colors.green),
+    ),
+    TextSpan(
+      text: '蓝色',
+      style: TextStyle(fontSize: 18.0, color: Colors.blue),
+    ),
+    TextSpan(
+      text: '白色',
+      style: TextStyle(fontSize: 18.0, color: Colors.orange),
+    ),
+    TextSpan(
+      text: '紫色',
+      style: TextStyle(fontSize: 18.0, color: Colors.purple),
+    ),
+    TextSpan(
+      text: '黑色',
+      style: TextStyle(fontSize: 18.0, color: Colors.black),
+    )
+  ];
+
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title ?? "$widget"),
-          actions: [
-            TextButton(onPressed: (){
-              matchRegExp();
-            }, child: Text("done", style: TextStyle(color: Colors.white),)),
+      appBar: AppBar(
+        title: Text(widget.title ?? "$widget"),
+        actions: [
+          TextButton(onPressed: (){
+            matchRegExp();
+          }, child: Text("done", style: TextStyle(color: Colors.white),)),
+        ],
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            buildRichText(),
+            buildWidgetSpan(),
+            richTextWid04(),
           ],
-        ),
-        body: buildRichText(context),
+        )
+      ),
     );
   }
 
-  Widget buildRichText(BuildContext context) {
-
-    final textRich = Text.rich(
-      TextSpan(
-        children: NAttributedString(
-            context: context,
-            text: text,
-            linkMap: linkMap,
-            // style: TextStyle(
-            //     fontSize: 13,
-            // ),
-            // linkStyle: TextStyle(fontSize: 15),
-            onTap: (key, value){
-              ddlog(key);
-              ddlog(value);
-            }
+  Widget buildRichText() {
+    return Container(
+      padding: EdgeInsets.all(12),
+      child: Text.rich(
+        TextSpan(
+          children: NAttributedString(
+              context: context,
+              text: text,
+              linkMap: linkMap,
+              // style: TextStyle(
+              //     fontSize: 13,
+              // ),
+              // linkStyle: TextStyle(fontSize: 15),
+              onTap: (key, value){
+                ddlog(key);
+                ddlog(value);
+              }
           ).textSpans,
           // children: RichTextExt.createTextSpans(context,
           //     text: text,
@@ -83,18 +120,55 @@ xxxx十分重视用户权利及隐私政策并严格按照相关法律法规的�
           //       ddlog(value);
           //     }
           // )
-      ),
-      // style: TextStyle(
-      //   wordSpacing: 12
-      // ),
-      strutStyle: StrutStyle(
-        leading: 0.4,
+        ),
+        // style: TextStyle(
+        //   wordSpacing: 12
+        // ),
+        strutStyle: StrutStyle(
+          leading: 0.4,
+        ),
       ),
     );
+  }
 
-    return Container(
-      padding: EdgeInsets.all(12),
-      child: textRich,
+  /// 图文混排
+  Widget buildWidgetSpan(){
+    return Text.rich(TextSpan(
+      children: <InlineSpan>[
+        TextSpan(text: '图文混排\n'),
+        TextSpan(text: 'Flutter is'),
+        WidgetSpan(
+          alignment: PlaceholderAlignment.middle,
+          child: SizedBox(
+            width: 120,
+            height: 40,
+            child: Card(
+              color: Colors.blue,
+              child: Center(child: Text('Hello World!'))
+            ),
+          )
+        ),
+        WidgetSpan(
+          alignment: PlaceholderAlignment.middle,
+          child: SizedBox(
+            child: FlutterLogo(
+              size: 100,
+            ),
+          )
+        ),
+        TextSpan(text: 'the best!'),
+      ],
+    ));
+  }
+
+  Widget richTextWid04() {
+    return RichText(
+      text: TextSpan(
+        text: '多种样式，如：',
+        style: TextStyle(fontSize: 16.0, color: Colors.black),
+        children: textSpans.map((e) => e.copyWith(onTap: onTap,)).toList(),
+      ),
+      textAlign: TextAlign.center,
     );
   }
 
@@ -130,6 +204,11 @@ xxxx十分重视用户权利及隐私政策并严格按照相关法律法规的�
     ddlog(s.padRight(12));      // 'bezkoder  '
     ddlog(s.padRight(12, '=')); // 'bezkoder=='
   }
+
+  void onTap(String? text) {
+    debugPrint("onTap: $text");
+  }
+
 }
 
 

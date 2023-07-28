@@ -9,7 +9,9 @@
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:tuple/tuple.dart';
 
 extension RichTextExt on RichText{
 
@@ -49,6 +51,45 @@ extension RichTextExt on RichText{
         },
     )).toList();
     return textSpans;
+  }
+
+}
+
+
+extension TextSpanExt on TextSpan{
+
+  /// 二次赋值
+  TextSpan copyWith({
+    String? text,
+    List<InlineSpan>? children,
+    TextStyle? style,
+    GestureRecognizer? recognizer,
+    PointerEnterEventListener? onEnter,
+    PointerExitEventListener? onExit,
+    String? semanticsLabel,
+    Locale? locale,
+    bool? spellOut,
+    ValueChanged<String?>? onTap,
+  }) {
+    final content = text ?? this.text;
+
+    TapGestureRecognizer? reco;
+    if (onTap != null) {
+      reco = TapGestureRecognizer()
+        ..onTap = () => onTap.call(content);
+    }
+
+    return TextSpan(
+      text: content,
+      children: children ?? this.children,
+      style: style ?? this.style,
+      recognizer: reco ?? recognizer ?? this.recognizer,
+      onEnter: onEnter ?? this.onEnter,
+      onExit: onExit ?? this.onExit,
+      semanticsLabel: semanticsLabel ?? this.semanticsLabel,
+      locale: locale ?? this.locale,
+      spellOut: spellOut ?? this.spellOut,
+    );
   }
 
 }
