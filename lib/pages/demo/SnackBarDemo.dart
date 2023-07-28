@@ -50,7 +50,9 @@ class SnackBarDemoState extends State<SnackBarDemo> {
     return WillPopScope(
       onWillPop: () async {
         // await Future.delayed(new Duration(seconds: 1));
-        await Future.delayed(Duration(milliseconds: 1300), () async {
+        // scaffoldMessenger.removeCurrentMaterialBanner();
+
+        await Future.delayed(Duration(milliseconds: 100), () async {
           clearSnackBars();
         });
         debugPrint("WillPopScope");

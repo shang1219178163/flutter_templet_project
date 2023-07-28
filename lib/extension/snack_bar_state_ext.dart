@@ -49,6 +49,11 @@ extension SnackBarStateExt<T extends StatefulWidget> on State<T> {
     scaffoldMessenger.clearMaterialBanners();
   }
 
+  /// 清除 MaterialBanner 无动画
+  removeCurrentMaterialBanner() {
+    scaffoldMessenger.removeCurrentMaterialBanner();
+  }
+
   /// 展示 MaterialBanner
   showMaterialBanner(MaterialBanner banner, {bool isClear = false, bool isReplace = false}) {
     if (isClear) {

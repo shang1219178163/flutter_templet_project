@@ -71,14 +71,17 @@ class _NUploadButtonState extends State<NUploadButton> {
 
   @override
   Widget build(BuildContext context) {
+    // final imgChild = ClipRRect(
+    //   borderRadius: BorderRadius.all(Radius.circular(widget.radius)),
+    //   child: Image.file(
+    //     File(widget.path),
+    //     fit: BoxFit.cover,
+    //   )
+    // );
     final imgChild = ClipRRect(
-      borderRadius: BorderRadius.all(Radius.circular(widget.radius)),
-      child: Image.file(
-        File(widget.path),
-        fit: BoxFit.cover,
-      )
+        borderRadius: BorderRadius.all(Radius.circular(widget.radius)),
+        child: Image.memory(File(widget.path).readAsBytesSync())
     );
-
     if (widget.url?.isNotEmpty == true) {
       debugPrint("url 不为空");
       return imgChild;

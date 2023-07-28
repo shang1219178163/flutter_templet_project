@@ -60,7 +60,8 @@ class NAttributedString{
     String suffix = "》",
     TextStyle? style,
     TextStyle? linkStyle,
-    required void Function(String key, String? value) onTap}) {
+    required void Function(String key, String? value) onTap
+  }) {
     return RichTextExt.createTextSpans(context,
       text: text,
       linkMap: linkMap,

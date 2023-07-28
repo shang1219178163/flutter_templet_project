@@ -403,6 +403,10 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
     // final dateTime = DateTime(1970, 1, 1).add(duration);
     // debugPrint('1970: ${dateTime.millisecond}');
 
+    final arr = [];
+    final arrNew = arr.take(1);
+    debugPrint('arrNew: ${arrNew.isEmpty}');
+
   }
   
   buildText({
