@@ -43,10 +43,25 @@ class _NetStateListenerDemoOneState extends State<NetStateListenerDemoOne> with 
       ),
       body: Column(
         children: [
+          ValueListenableBuilder<bool>(
+            valueListenable: ConnectivityService().onLine,
+            builder: (context, value, child) {
+
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  child!,
+                  Text('$value'),
+                ],
+              );
+            },
+            child: Text("监听 ConnectivityService().onLine"),
+          ),
+          Divider(),
           ValueListenableBuilder<ConnectivityResult>(
             valueListenable: netConnectResult,
             builder: (context, value, child) {
-              debugPrint('ValueListenableBuilder: netConnectResult:$value');
+              debugPrint('netConnectResult: $value');
 
               return Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
