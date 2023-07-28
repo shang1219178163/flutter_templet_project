@@ -35,6 +35,7 @@ import 'package:flutter_templet_project/pages/demo/MediaQueryDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/MediaQueryScreeenDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NExpandTextDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NSkeletonDemo.dart';
+import 'package:flutter_templet_project/pages/demo/PageBuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PageViewAndBarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PageViewDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/PageViewDemoThree.dart';
@@ -288,7 +289,7 @@ class APPRouter {
   static const thirdPage = '/ThirdPage';
   static const fourthPage = '/FourthPage';
 
-
+  static const pageBuilderDemo = '/pageBuilderDemo';
   static const enumDemo = '/enumDemo';
   static const reflectDemo = '/moldelReflectDemo';
   static const appRouteObserverDemo = '/appRouteObserverDemo';
@@ -623,6 +624,8 @@ class AppPage {
     GetPage(name: APPRouter.secondPage, page: () => SecondPage(),),
     GetPage(name: APPRouter.thirdPage, page: () => ThirdPage(),),
     GetPage(name: APPRouter.fourthPage, page: () => FourthPage(),),
+    GetPage(name: APPRouter.pageBuilderDemo, page: () => PageBuilderDemo(),),
+
 
 
     GetPage(name: APPRouter.enumDemo, page: () => EnumDemo(),),
@@ -893,7 +896,6 @@ class AppPage {
     GetPage(name: APPRouter.uploadFileDemo, page: () => UploadFileDemo(),),
     GetPage(name: APPRouter.customSingleChildLayoutDemo, page: () => CustomSingleChildLayoutDemo(),),
     GetPage(name: APPRouter.customMultiChildLayoutDemo, page: () => CustomMultiChildLayoutDemo(),),
-
 
   ];
 }

@@ -457,6 +457,8 @@ var list = [
   Tuple2(APPRouter.dropBoxMutiRowChoicDemo, "下拉菜单多行选择", ),
   Tuple2(APPRouter.customSingleChildLayoutDemo, "customSingleChildLayoutDemo", ),
   Tuple2(APPRouter.customMultiChildLayoutDemo, "customMultiChildLayoutDemo", ),
+  Tuple2(APPRouter.pageBuilderDemo, "pageBuilderDemo", ),
+
 
 
 ];
