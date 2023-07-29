@@ -1,7 +1,8 @@
 
 import 'package:flutter/material.dart';
 
-extension OverlayStateExt<T extends StatefulWidget> on State<T> {
+
+extension OverlayExt<T extends StatefulWidget> on State<T> {
 
   OverlayState get _overlayState => Overlay.of(context);
   /// overlay 层集合
@@ -10,17 +11,17 @@ extension OverlayStateExt<T extends StatefulWidget> on State<T> {
   static OverlayEntry? _overlayEntry;
 
   /// 有 OverlayEntry 显示中
-  bool get isLoadingOverlayEntry => _entriesList.isNotEmpty;
+  bool get isLoading => _entriesList.isNotEmpty;
 
 
   /// OverlayEntry 弹窗展示
-  OverlayEntry? showOverlayEntry({
+  OverlayEntry? showEntry({
     required Widget child,
     bool removeOld = false,
     bool maintainState = false,
   }){
     if (removeOld) {
-      dismissOverlayEntry();
+      hideEntry();
     }
     _overlayEntry ??= OverlayEntry(
       maintainState: maintainState,
@@ -32,7 +33,7 @@ extension OverlayStateExt<T extends StatefulWidget> on State<T> {
   }
 
   /// OverlayEntry 弹窗移除
-  dismissOverlayEntry() {
+  hideEntry() {
     if (_overlayEntry == null) {
       return;
     }
@@ -42,7 +43,7 @@ extension OverlayStateExt<T extends StatefulWidget> on State<T> {
   }
 
   /// OverlayEntry 清除
-  clearOverlayEntry() {
+  clearEntry() {
     for (final entry in _entriesList) {
       entry.remove();
     }
@@ -50,8 +51,8 @@ extension OverlayStateExt<T extends StatefulWidget> on State<T> {
   }
 
   /// 展示 OverlayEntry 弹窗
-  showOverlayToast({
-    String text = "showOverlayToast",
+  showToast({
+    String text = "showToast",
     Widget? child,
     Alignment alignment = Alignment.center,
     Duration duration = const Duration(milliseconds: 2000),
@@ -77,16 +78,14 @@ extension OverlayStateExt<T extends StatefulWidget> on State<T> {
         ],
       );
     }
-    showOverlayEntry(child: content);
+    showEntry(child: content);
 
     if (isDismiss) {
-      Future.delayed(duration, dismissOverlayEntry);
+      Future.delayed(duration, hideEntry);
     }
   }
 
 }
-
-
 
 /// 自适应文本组件
 class NAdaptiveText extends StatelessWidget {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
-import 'package:flutter_templet_project/extension/overlay_state_ext.dart';
+import 'package:flutter_templet_project/extension/overlay_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 
@@ -78,19 +78,22 @@ class _OverlayDemoState extends State<OverlayDemo> {
             ),
             ElevatedButton(
               onPressed: () {
-                final overlayStateNew = Overlay.of(context);
-                debugPrint("onPressed: ${overlayStateNew == overlayState}");
-
-                showOverlayEntry(
+                showEntry(
                   child: buildEntryContent(
                     onTap: (){
                       debugPrint("onTap");
-                      dismissOverlayEntry();
+                      hideEntry();
                     }
                   ),
                 );
               },
-              child: const Text('showOverlayEntry'),
+              child: const Text('showEntry'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                showToast();
+              },
+              child: const Text('OverlayExt'),
             ),
           ],
         ),
