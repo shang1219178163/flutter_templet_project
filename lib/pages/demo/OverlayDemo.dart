@@ -109,7 +109,7 @@ class _OverlayDemoState extends State<OverlayDemo> {
                     alignment: e,
                   );
                 },
-                child: Text('BottomView ${e}'),
+                child: Text('PopupView ${e}'),
               );
             }).toList(),
 
