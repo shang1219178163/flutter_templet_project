@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_adaptive_text.dart';
 
 
 extension OverlayExt<T extends StatefulWidget> on State<T> {
@@ -59,19 +60,23 @@ extension OverlayExt<T extends StatefulWidget> on State<T> {
     bool isDismiss = true,
     bool barrierDismissible = true,
     Color? barrierColor = Colors.black54,
+    VoidCallback? onBarrier,
   }) {
-
     Widget content = NAdaptiveText(
       data: text,
       alignment: alignment,
       child: child,
     );
+
     if (barrierDismissible) {
       content = Stack(
         children: [
-          Container(
-            decoration: BoxDecoration(
-              color: barrierColor,
+          InkWell(
+            onTap: onBarrier,
+            child: Container(
+              decoration: BoxDecoration(
+                color: barrierColor,
+              ),
             ),
           ),
           content
@@ -87,52 +92,3 @@ extension OverlayExt<T extends StatefulWidget> on State<T> {
 
 }
 
-/// 自适应文本组件
-class NAdaptiveText extends StatelessWidget {
-
-  const NAdaptiveText({
-    Key? key,
-    this.data = "自适应文本组件",
-    this.child,
-    this.alignment = Alignment.center,
-    this.margin = const EdgeInsets.symmetric(horizontal: 30),
-    this.padding = const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-    this.decoration,
-  }) : super(key: key);
-
-  final String data;
-
-  final Widget? child;
-
-  final Alignment alignment;
-
-  final EdgeInsets margin;
-  final EdgeInsets padding;
-  final BoxDecoration? decoration;
-
-
-  @override
-  Widget build(BuildContext context) {
-
-    return Align(
-      alignment: alignment,
-      child: Container(
-        margin: margin ?? EdgeInsets.symmetric(horizontal: 30),
-        padding: padding ?? EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-        decoration: decoration ?? BoxDecoration(
-          color: const Color(0xFF222222),
-          borderRadius: const BorderRadius.all(Radius.circular(10)),
-        ),
-        child: child ?? Text(
-          data,
-          style: TextStyle(
-            fontSize: 14,
-            color: Colors.white,
-            decoration: TextDecoration.none,
-            fontWeight: FontWeight.normal,
-          ),
-        ),
-      ),
-    );
-  }
-}
