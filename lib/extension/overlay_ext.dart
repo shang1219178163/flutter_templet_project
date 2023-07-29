@@ -17,10 +17,10 @@ extension OverlayExt<T extends StatefulWidget> on State<T> {
   /// OverlayEntry 弹窗展示
   OverlayEntry? showEntry({
     required Widget child,
-    bool removeOld = false,
+    bool isReplace = false,
     bool maintainState = false,
   }){
-    if (removeOld) {
+    if (isReplace) {
       hideEntry();
     }
     _overlayEntry ??= OverlayEntry(
