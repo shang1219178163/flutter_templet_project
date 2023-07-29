@@ -75,6 +75,12 @@ class _BuilderDemoState extends State<BuilderDemo> with TickerProviderStateMixin
         StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
           return _buildBox('StatefulBuilder');
         }),
+
+        // FadeUpwardsPageTransitionsBuilder(),
+        // CupertinoPageTransitionsBuilder(),
+        // FadeUpwardsPageTransitionsBuilder(),
+        // CupertinoPageTransitionsBuilder(),
+        // FadeUpwardsPageTransitionsBuilder(),
       ],
     );
   }

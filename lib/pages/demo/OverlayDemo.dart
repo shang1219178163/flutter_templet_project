@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/slide_transition_builder.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/overlay_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
@@ -95,6 +96,23 @@ class _OverlayDemoState extends State<OverlayDemo> {
               },
               child: const Text('OverlayExt'),
             ),
+            ...[Alignment.topCenter,
+            Alignment.bottomCenter,
+            Alignment.centerLeft,
+            Alignment.centerRight,
+            Alignment.center,
+              Alignment.bottomLeft,
+            ].map((e) {
+              return ElevatedButton(
+                onPressed: () {
+                  showPopupView(
+                    alignment: e,
+                  );
+                },
+                child: Text('BottomView ${e}'),
+              );
+            }).toList(),
+
           ],
         ),
     );
@@ -118,6 +136,22 @@ class _OverlayDemoState extends State<OverlayDemo> {
         ),
       ),
     );
+  }
+
+  showPopupView({Alignment alignment = Alignment.bottomCenter}) {
+    showEntry(child: Material(
+      color: Colors.black.withOpacity(0.1),
+      child: InkWell(
+        onTap: (){
+          hideEntry();
+        },
+        child: SlideTransitionBuilder(
+          alignment: alignment,
+          hasFade: false,
+          // child: FlutterLogo(),
+        ),
+      ),
+    ));
   }
 }
 
@@ -271,3 +305,5 @@ extension ToastExtension on BuildContext {
     }
   }
 }
+
+

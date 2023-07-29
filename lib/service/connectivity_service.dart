@@ -12,6 +12,7 @@ class ConnectivityService {
   ConnectivityService._() {
     try {
       _connectivity.onConnectivityChanged.listen((event) {
+        debugPrint(">>> ConnectivityService: $event");
         netState.value = event;
         onLine.value = (event != ConnectivityResult.none);
         for (final listener in listeners) {
