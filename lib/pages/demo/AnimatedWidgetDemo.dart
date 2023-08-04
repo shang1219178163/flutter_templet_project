@@ -7,6 +7,7 @@
 //
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/extension/color_ext.dart';
 
 class AnimatedWidgetDemo extends StatefulWidget {
 
@@ -33,6 +34,8 @@ class _AnimatedWidgetDemoState extends State<AnimatedWidgetDemo> {
 
   double _size = 100.0;
 
+  late bool _first = false;
+
   @override
   Widget build(BuildContext context) {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
@@ -46,16 +49,15 @@ class _AnimatedWidgetDemoState extends State<AnimatedWidgetDemo> {
   }
 
   Widget buildBody() {
-    var duration = Duration(seconds: 2);
+    var duration = Duration(milliseconds: 350);
     return SingleChildScrollView(
       child: Column(
         children: <Widget>[
 
           ElevatedButton(
             onPressed: () {
-              setState(() {
-                _padding += 10;
-              });
+              _padding += 10;
+              setState(() {});
             },
             child: AnimatedPadding(
               duration: duration,
@@ -106,10 +108,10 @@ class _AnimatedWidgetDemoState extends State<AnimatedWidgetDemo> {
               ),
               ElevatedButton(
                 onPressed: (){
-                opacityLevel = opacityLevel == 0 ? 1.0 : 0.0;
-                setState((){});
-              },
-              child: const Text('Fade Logo'),
+                  opacityLevel = opacityLevel == 0 ? 1.0 : 0.0;
+                  setState((){});
+                },
+                child: const Text('AnimatedOpacity'),
               ),
             ],
           ),
@@ -133,13 +135,26 @@ class _AnimatedWidgetDemoState extends State<AnimatedWidgetDemo> {
               ),
             ),
           ),
+          InkWell(
+            onTap: () {
+              _first = !_first;
+              setState(() {});
+            },
+            child: AnimatedCrossFade(
+              duration: const Duration(seconds: 1),
+              firstChild: const FlutterLogo(style: FlutterLogoStyle.horizontal, size: 100.0),
+              secondChild: const FlutterLogo(style: FlutterLogoStyle.stacked, size: 100.0),
+              crossFadeState: _first ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+            ),
+          ),
           AnimatedContainer(
             duration: duration,
             height: _height,
             color: _color,
+            alignment: Alignment.topCenter,
             child: TextButton(
               onPressed: () {
-                _height = 150;
+                _height = _height == 50 ? 100 : 50;
                 _color = Colors.blue;
                 setState(() {});
               },
@@ -152,15 +167,14 @@ class _AnimatedWidgetDemoState extends State<AnimatedWidgetDemo> {
           AnimatedDefaultTextStyle(
             child: GestureDetector(
               onTap: () {
-                setState(() {
-                  _style = TextStyle(
-                    color: Colors.blue,
-                    decorationStyle: TextDecorationStyle.solid,
-                    decorationColor: Colors.blue,
-                  );
-                });
+                _style = TextStyle(
+                  color: ColorExt.random,
+                  decorationStyle: TextDecorationStyle.solid,
+                  decorationColor: Colors.blue,
+                );
+                setState(() {});
               },
-              child: Text("hello world"),
+              child: Text("AnimatedDefaultTextStyle"),
             ),
             style: _style,
             duration: duration,
@@ -182,7 +196,7 @@ class _AnimatedWidgetDemoState extends State<AnimatedWidgetDemo> {
           // )
         ].map((e) {
           return Padding(
-            padding: EdgeInsets.symmetric(vertical: 16),
+            padding: EdgeInsets.symmetric(vertical: 8),
             child: e,
           );
         }).toList(),
