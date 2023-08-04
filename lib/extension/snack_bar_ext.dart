@@ -4,7 +4,7 @@
 
 import 'package:flutter/material.dart';
 
-extension SnackBarStateExt<T extends StatefulWidget> on State<T> {
+extension SnackBarExt<T extends StatefulWidget> on State<T> {
 
   /// ScaffoldMessengerState
   ScaffoldMessengerState get scaffoldMessenger => ScaffoldMessenger.of(context);
