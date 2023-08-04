@@ -27,7 +27,11 @@ class _AnimatedWidgetDemoState extends State<AnimatedWidgetDemo> {
   double _left = 0;
   Color _color = Colors.red;
   TextStyle _style = TextStyle(color: Colors.black);
-  Color _decorationColor = Colors.blue;
+  // Color _decorationColor = Colors.blue;
+
+  double opacityLevel = 1.0;
+
+  double _size = 100.0;
 
   @override
   Widget build(BuildContext context) {
@@ -68,9 +72,8 @@ class _AnimatedWidgetDemoState extends State<AnimatedWidgetDemo> {
                   left: _left,
                   child: ElevatedButton(
                     onPressed: () {
-                      setState(() {
-                        _left = 100;
-                      });
+                      _left = 100;
+                      setState(() {});
                     },
                     child: Text("AnimatedPositioned"),
                   ),
@@ -86,11 +89,47 @@ class _AnimatedWidgetDemoState extends State<AnimatedWidgetDemo> {
               alignment: _align,
               child: ElevatedButton(
                 onPressed: () {
-                  setState(() {
-                    _align = Alignment.center;
-                  });
+                  _align = Alignment.center;
+                  setState(() {});
                 },
                 child: Text("AnimatedAlign"),
+              ),
+            ),
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              AnimatedOpacity(
+                opacity: opacityLevel,
+                duration: const Duration(seconds: 3),
+                child: const FlutterLogo(size: 80,),
+              ),
+              ElevatedButton(
+                onPressed: (){
+                opacityLevel = opacityLevel == 0 ? 1.0 : 0.0;
+                setState((){});
+              },
+              child: const Text('Fade Logo'),
+              ),
+            ],
+          ),
+          GestureDetector(
+            onTap: () {
+              _size = _size == 100 ? 200.0 : 100.0;
+              setState(() {});
+            },
+            child: ColoredBox(
+              color: Colors.amberAccent,
+              child: AnimatedSize(
+                curve: Curves.easeIn,
+                duration: const Duration(milliseconds: 350),
+                reverseDuration: const Duration(milliseconds: 350),
+                // child: FlutterLogo(size: _size),
+                child: Container(
+                  color: Colors.green,
+                  width: 200,
+                  height: _size,
+                ),
               ),
             ),
           ),
@@ -100,10 +139,9 @@ class _AnimatedWidgetDemoState extends State<AnimatedWidgetDemo> {
             color: _color,
             child: TextButton(
               onPressed: () {
-                setState(() {
-                  _height = 150;
-                  _color = Colors.blue;
-                });
+                _height = 150;
+                _color = Colors.blue;
+                setState(() {});
               },
               child: Text(
                 "AnimatedContainer",
@@ -127,21 +165,21 @@ class _AnimatedWidgetDemoState extends State<AnimatedWidgetDemo> {
             style: _style,
             duration: duration,
           ),
-          AnimatedDecoratedBox(
-            duration: duration,
-            decoration: BoxDecoration(color: _decorationColor),
-            child: TextButton(
-              onPressed: () {
-                setState(() {
-                  _decorationColor = Colors.red;
-                });
-              },
-              child: Text(
-                "AnimatedDecoratedBox",
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
-          )
+          // AnimatedDecoratedBox(
+          //   duration: duration,
+          //   decoration: BoxDecoration(color: _decorationColor),
+          //   child: TextButton(
+          //     onPressed: () {
+          //       setState(() {
+          //         _decorationColor = Colors.red;
+          //       });
+          //     },
+          //     child: Text(
+          //       "AnimatedDecoratedBox",
+          //       style: TextStyle(color: Colors.white),
+          //     ),
+          //   ),
+          // )
         ].map((e) {
           return Padding(
             padding: EdgeInsets.symmetric(vertical: 16),

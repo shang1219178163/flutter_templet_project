@@ -25,7 +25,7 @@ import 'package:flutter_templet_project/extension/map_ext.dart';
 import 'package:flutter_templet_project/extension/text_painter_ext.dart';
 
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
-import 'package:flutter_templet_project/extension/snack_bar_state_ext.dart';
+import 'package:flutter_templet_project/extension/snack_bar_ext.dart';
 import 'package:flutter_templet_project/uti/Singleton.dart';
 import 'package:flutter_templet_project/uti/R.dart';
 
@@ -406,8 +406,12 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
     final arr = [];
     final arrNew = arr.take(1);
     debugPrint('arrNew: ${arrNew.isEmpty}');
+  }
+
+  testBool({bool value = false}) {
 
   }
+
   
   buildText({
     required String text,

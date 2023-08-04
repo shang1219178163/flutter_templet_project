@@ -38,15 +38,13 @@ extension UIImageExt on ui.Image {
 }
 
 extension ImageExt on Image {
+
   static FutureOr<Uint8List?> imageDataFromUrl({
     required String imageUrl,
     ui.ImageByteFormat format = ui.ImageByteFormat.png,
   }) async {
     var img = Image.network(imageUrl);
-
-
     var imgInfo = await img.image.getImageInfo();
-
     var uint8List = await imgInfo.image.toUint8List();
     return uint8List;
   }

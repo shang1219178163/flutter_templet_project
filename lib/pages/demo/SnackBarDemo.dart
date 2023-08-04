@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/dash_line.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
-import 'package:flutter_templet_project/extension/snack_bar_state_ext.dart';
+import 'package:flutter_templet_project/extension/snack_bar_ext.dart';
 
 import 'package:tuple/tuple.dart';
 

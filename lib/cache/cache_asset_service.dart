@@ -1,17 +1,8 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:yl_health_app/http/model/disease_types_root_model.dart';
-import 'package:yl_health_app/http/model/doctor_list_root_model.dart';
-import 'package:yl_health_app/http/model/doctor_login_root_model.dart';
-import 'package:yl_health_app/http/model/doctor_team_list_root_model.dart';
-import 'package:yl_health_app/http/model/tags_root_model.dart';
-import 'package:yl_health_app/http/model/user_detail_model.dart';
-import 'package:yl_health_app/http/model/doctor_detail_root_model.dart';
 
 ///缓存媒体文件
 class CacheAssetService {
@@ -39,7 +30,7 @@ class CacheAssetService {
   }
 
   /// 清除缓存文件
-  void clearDirCache() async {
+  Future<void> clearDirCache() async {
     final dir = await getDir();
     await deleteDirectory(dir);
   }

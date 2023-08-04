@@ -10,6 +10,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 
+/// yyyyMMddHHmmss
+const String DATE_FORMAT_INT = 'yyyyMMddHHmmss';
+
 /// yyyy-dd-MM HH:mm:ss
 const String DATE_FORMAT = 'yyyy-MM-dd HH:mm:ss';
 /// yyyy-dd-MM
