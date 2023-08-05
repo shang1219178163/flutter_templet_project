@@ -283,8 +283,8 @@ class _SecondPageState extends State<SecondPage> {
             Header.h5(title: "NTextAndIcon + OutlinedButton copy"),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: iconDirectionItems().map((e) => OutlinedButton(
-                // style: OutlinedButton.styleFrom(
+              children: iconDirectionItems().map((e) => ElevatedButton(
+                // style: ElevatedButton.styleFrom(
                 //   padding: EdgeInsets.zero,
                 //   // padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                 //   side: BorderSide(color: ColorExt.random),
@@ -294,10 +294,10 @@ class _SecondPageState extends State<SecondPage> {
                 },
                 child: e,
               ).copy(
-                style: OutlinedButton.styleFrom(
+                style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.zero,
                   // padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                  side: BorderSide(color: ColorExt.random),
+                  // side: BorderSide(color: ColorExt.random),
                 ),
               )
               ).toList(),
@@ -306,7 +306,7 @@ class _SecondPageState extends State<SecondPage> {
             Divider(),
             Header.h5(title: "MaterialButton"),
             MaterialButton(
-              padding: EdgeInsets.all(18),
+              padding: EdgeInsets.all(8),
               minWidth: 0,
               // color: Colors.green,
               shape: RoundedRectangleBorder(
