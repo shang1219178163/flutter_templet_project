@@ -116,11 +116,17 @@ class _ThirdPageState extends State<ThirdPage> with RouteAware {
         },
         label: ValueListenableBuilder<double>(
            valueListenable: offsetY,
-           builder: (context,  value, child){
+           builder: (context, value, child){
+              if (value == 0) {
+                return Text("偏移量");
+              }
+             // return Text("datadata");
+             final maxScrollExtent = _scrollController.position.maxScrollExtent.toStringAsFixed(0);
+             debugPrint("maxScrollExtent: $maxScrollExtent");
               return Container(
-                child: Text("${value.toStringAsFixed(0)}/${_scrollController.position.maxScrollExtent.toStringAsFixed(0)}"),
+                child: Text("${value.toStringAsFixed(0)}/${maxScrollExtent}"),
               );
-            }
+          }
         ),
       ),
     );
