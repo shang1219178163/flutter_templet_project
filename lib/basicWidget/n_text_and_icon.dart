@@ -42,7 +42,7 @@ class NTextAndIcon<T> extends StatelessWidget {
     var children = <Widget>[
       if (icon != null)icon!,
       gap,
-      text,
+      Flexible(child: text),
     ];
 
     if (isReverse) {
