@@ -349,7 +349,6 @@ class _SecondPageState extends State<SecondPage> {
                 ]
             ),
 
-
             Divider(),
             Header.h5(title: "NTextAndIcon + OutlinedButton"),
             Row(
