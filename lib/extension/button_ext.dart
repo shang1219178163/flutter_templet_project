@@ -30,22 +30,6 @@ extension ButtonStyleExt on ButtonStyle {
 }
 
 
-
-enum ImageAlignment {
-  /// 文字左边
-  left,
-
-  /// 文字顶部
-  top,
-
-  /// 文字右边
-  right,
-
-  /// 文字底部
-  bottom,
-}
-
-
 // extension ButtonExt on ButtonStyleButton{
 //
 //   static OutlinedButton outlined({
