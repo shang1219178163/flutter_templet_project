@@ -7,6 +7,7 @@
 //
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_text_and_icon.dart';
 import 'package:flutter_templet_project/extension/button_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/navigator_ext.dart';
@@ -73,6 +74,8 @@ class BottomSheetDemo extends StatelessWidget {
   _buildList(BuildContext context) {
     final theme = Theme.of(context);
 
+    final titleMediumStyle = theme.textTheme.titleMedium?.copyWith(color: theme.colorScheme.onPrimary);
+
     return Wrap(
       children: [
         Container(
@@ -85,8 +88,7 @@ class BottomSheetDemo extends StatelessWidget {
                 padding: const EdgeInsets.all(10.0),
                 child: Text(
                   'Header',
-                  style: theme.textTheme.subtitle1!
-                      .copyWith(color: theme.colorScheme.onPrimary),
+                  style: titleMediumStyle,
                 ),
               ),
               Padding(
@@ -96,13 +98,11 @@ class BottomSheetDemo extends StatelessWidget {
                   children: [
                     Text(
                       'this is subtitle',
-                      style: theme.textTheme.subtitle1!
-                          .copyWith(color: theme.colorScheme.onPrimary),
+                      style: titleMediumStyle,
                     ),
                     Text(
                       "trailing",
-                      style: theme.textTheme.subtitle1!
-                          .copyWith(color: theme.colorScheme.onPrimary),
+                      style: titleMediumStyle,
                     ),
                   ],
                 ),
@@ -111,58 +111,87 @@ class BottomSheetDemo extends StatelessWidget {
             ],
           ),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            TextButtonExt.build(
-                text: Text("CALL"),
-                image: Icon(Icons.call),
-                imageAlignment: ImageAlignment.top,
-                callback: (value, tag) {
-                  ddlog(value.data);
-                }),
-            TextButtonExt.build(
-                text: Text("SHARE"),
-                image: Icon(Icons.open_in_new),
-                imageAlignment: ImageAlignment.top,
-                callback: (value, tag) {
-                  ddlog(value.data);
-                }),
-            TextButtonExt.build(
-                text: Text("SAVE"),
-                image: Icon(Icons.playlist_add),
-                imageAlignment: ImageAlignment.top,
-                callback: (value, tag) {
-                  ddlog(value.data);
-                }),
-          ],
+        buildMid(
+          cb: (i){
+            debugPrint("index: $i");
+          }
         ),
         Divider(),
-        ListTile(
-            leading: Icon(Icons.share, color: Theme.of(context).colorScheme.secondary),
-            title: Text('Share'),
-            onTap: () {
-              ddlog("share");
-            }),
-        ListTile(
-            leading: Icon(Icons.link, color: Theme.of(context).colorScheme.secondary),
-            title: Text('Get link'),
-            onTap: () {
-              ddlog("link");
-            }),
-        ListTile(
-            leading: Icon(Icons.edit, color: Theme.of(context).colorScheme.secondary),
-            title: Text('Edit name'),
-            onTap: () {
-              ddlog("name");
-            }),
-        ListTile(
-            leading: Icon(Icons.delete, color: Theme.of(context).colorScheme.secondary),
-            title: Text('Delete collection'),
-            onTap: () {
-              ddlog("collection");
-            }),
+        buildBottom(
+          cb: (i){
+            debugPrint("index: $i");
+          }
+        ),
       ],
+    );
+  }
+  
+  Widget buildMid({required ValueChanged<int?> cb}) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        NTextAndIcon<int>(
+          text: Text("CALL"),
+          icon: Icon(Icons.call),
+          direction: Axis.vertical,
+          data: 0,
+        ),
+        NTextAndIcon(
+          text: Text("SHARE"),
+          icon: Icon(Icons.open_in_new),
+          direction: Axis.vertical,
+          data: 1,
+        ),
+        NTextAndIcon(
+          text: Text("SAVE"),
+          icon: Icon(Icons.playlist_add),
+          direction: Axis.vertical,
+          data: 2,
+        ),
+      ].map((e) {
+        return TextButton(
+          onPressed: () {
+            cb(e.data);
+          },
+          child: e,
+        );
+      }).toList(),
+    );
+  }
+
+  Widget buildBottom({required ValueChanged<int?> cb}) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        NTextAndIcon<int>(
+          text: Text("Share"),
+          icon: Icon(Icons.share, color: Colors.blue,),
+          data: 0,
+        ),
+        NTextAndIcon(
+          text: Text("Get link"),
+          icon: Icon(Icons.link, color: Colors.blue,),
+          data: 1,
+        ),
+        NTextAndIcon(
+          text: Text("Edit name"),
+          icon: Icon(Icons.edit, color: Colors.blue,),
+          data: 2,
+        ),
+        NTextAndIcon(
+          text: Text('Delete collection'),
+          icon: Icon(Icons.delete, color: Colors.blue,),
+          data: 3,
+        ),
+      ].map((e) {
+        return ListTile(
+          leading: e.icon,
+          title: e.text,
+          onTap: () {
+            cb(e.data);
+          }
+        );
+      }).toList(),
     );
   }
 }

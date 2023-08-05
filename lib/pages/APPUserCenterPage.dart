@@ -8,8 +8,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/APPThemeSettings.dart';
+import 'package:flutter_templet_project/basicWidget/n_text_and_icon.dart';
 import 'package:flutter_templet_project/extension/button_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
+import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/main.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/navigator_ext.dart';
@@ -29,6 +31,14 @@ class APPUserCenterPage extends StatefulWidget{
 }
 
 class _APPUserCenterPageState extends State<APPUserCenterPage>{
+
+  // 我的 列表菜单
+  final services = <Tuple2<String, IconData>>[
+    Tuple2('京豆', Icons.adjust,),
+    Tuple2('白条', Icons.content_paste,),
+    Tuple2('优惠券', Icons.card_giftcard,),
+    Tuple2('购物车', Icons.shopping_cart,),
+  ];
 
 
   final items = [
@@ -142,14 +152,27 @@ class _APPUserCenterPageState extends State<APPUserCenterPage>{
       child: GridView.count(
         crossAxisCount: 4,
         childAspectRatio: 1.0,
-        children: serviceList.map((e) => TextButtonExt.build(
-            text: e.item1,
-            // image: (e.item2 as Icon).copyWith(color: Theme.of(context).iconTheme.color),
-            image: (e.item2 as Icon),
-            imageAlignment: ImageAlignment.top,
-            callback: (value, tag){
-          ddlog(value);
-        })).toList(),
+        children: services.map((e) => Container(
+          child: InkWell(
+            onTap: (){
+              debugPrint("value: $e");
+            },
+            child: NTextAndIcon(
+              text: Text(e.item1,
+                style: TextStyle(fontSize: 15,
+                fontWeight: FontWeight.w400,
+                color: Color(0xFF666666),
+                ),
+              ),
+              icon: Icon(
+                e.item2,
+                size: 25,
+                color: Colors.lightBlue,
+              ),
+              direction: Axis.vertical,
+           ),
+          ),
+        )).toList(),
       ),
     );
   }
@@ -178,42 +201,3 @@ class _APPUserCenterPageState extends State<APPUserCenterPage>{
   }
 }
 
-// 我的 列表菜单
-const List<Tuple2> serviceList = [
-  Tuple2(
-    Text('京豆', style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400, color: Color(0xFF666666),),
-    ),
-    Icon(
-      Icons.adjust,
-      size: 25,
-      color: Colors.lightBlue,
-    ),
-  ),
-  Tuple2(
-    Text('白条', style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400, color: Color(0xFF666666),),
-    ),
-    Icon(
-      Icons.content_paste,
-      size: 25,
-      color: Colors.lightBlue,
-    ),
-  ),
-  Tuple2(
-    Text('优惠券', style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400, color: Color(0xFF666666),),
-    ),
-    Icon(
-        Icons.card_giftcard,
-        size: 25,
-        color: Colors.lightBlue,
-      ),
-  ),
-  Tuple2(
-    Text('购物车', style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400, color: Color(0xFF666666),),
-    ),
-    Icon(
-      Icons.shopping_cart,
-      size: 25,
-      color: Colors.lightBlue,
-    ),
-  ),
-];

@@ -45,99 +45,114 @@ enum ImageAlignment {
 }
 
 
-extension TextButtonExt on TextButton{
+extension ButtonExt on ButtonStyleButton{
 
-  static TextButton build({
-    required Text text,
-    required Widget image,
-    ImageAlignment? imageAlignment = ImageAlignment.left,
-    EdgeInsets? padding = const EdgeInsets.all(5),
-    double? spacing = 3,
-    // BorderSide? side = const BorderSide(width: 1.0, color: Colors.black12),
-    BorderSide? side,
-    int tag = 0,
-    required void Function(Text text, int tag) callback
+  static OutlinedButton outlined({
+    /// 文字
+    required Widget text,
+    /// 图标
+    Widget? icon,
+    /// 标题图标方向
+    Axis direction = Axis.horizontal,
+    /// 图标标题间距
+    double iconTextGap = 6,
+    /// 标题图标翻转
+    bool isReverse = false,
+    /// 边距
+    EdgeInsets padding = const EdgeInsets.all(8),
+    BorderSide? side = const BorderSide(color: Color(0xffE4E4E4)),
+    Clip clipBehavior = Clip.none,
+    required VoidCallback onPressed,
   }) {
 
-    var child = TextButtonExt.buildTextAndImage(
-      text: text,
-      image: image,
-      imageAlignment: imageAlignment,
-      spacing: spacing,
-    );
-    return TextButton(
-      onPressed: () => callback(text, tag),
-      style: OutlinedButton.styleFrom(side: side,),
-      child: Container(
+    return OutlinedButton(
+      style: OutlinedButton.styleFrom(
+        padding: EdgeInsets.zero,
+        // padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+        side: side,
+      ),
+      clipBehavior: clipBehavior,
+      onPressed: onPressed,
+      child: textAndicon(
+        text: text,
+        icon: icon,
+        direction: direction,
+        isReverse: isReverse,
+        iconTextGap: iconTextGap,
         padding: padding,
-        child: child,
+      ),
+    );
+  }
+
+  static ElevatedButton elevated({
+    /// 文字
+    required Widget text,
+    /// 图标
+    Widget? icon,
+    /// 标题图标方向
+    Axis direction = Axis.horizontal,
+    /// 图标标题间距
+    double iconTextGap = 6,
+    /// 标题图标翻转
+    bool isReverse = false,
+    /// 边距
+    EdgeInsets padding = const EdgeInsets.all(8),
+    BorderSide? side = const BorderSide(color: Color(0xffE4E4E4)),
+    Clip clipBehavior = Clip.none,
+    required VoidCallback onPressed,
+  }) {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        padding: EdgeInsets.zero,
+        // padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+        side: side,
+      ),
+      clipBehavior: clipBehavior,
+      onPressed: onPressed,
+      child: textAndicon(
+        text: text,
+        icon: icon,
+        direction: direction,
+        isReverse: isReverse,
+        iconTextGap: iconTextGap,
+        padding: padding,
       ),
     );
   }
 
   /// 建立 TextAndImage
-  static Widget buildTextAndImage({
-    required Text text,
-    required Widget image,
-    ImageAlignment? imageAlignment = ImageAlignment.left,
-    double? spacing = 3,
+  static Widget textAndicon({
+    /// 文字
+    required Widget text,
+    /// 图标
+    Widget? icon,
+    /// 标题图标方向
+    Axis direction = Axis.horizontal,
+    /// 图标标题间距
+    double iconTextGap = 6,
+    /// 标题图标翻转
+    bool isReverse = false,
+    /// 边距
+    EdgeInsets padding = const EdgeInsets.all(8),
   }) {
+    var children = <Widget>[
+      if (icon != null)icon,
+      if (icon != null)SizedBox(width: iconTextGap,),
+      text,
+    ];
 
-    Widget child;
-
-    switch (imageAlignment) {
-      case ImageAlignment.top:
-        child = Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            image,
-            SizedBox(height: spacing),
-            text,
-          ],
-        );
-        break;
-
-      case ImageAlignment.right:
-        child = Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            text,
-            SizedBox(width: spacing),
-            image,
-          ],
-        );
-        break;
-
-      case ImageAlignment.bottom:
-        child = Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            text,
-            SizedBox(height: spacing),
-            image,
-          ],
-        );
-        break;
-
-      default:
-        child = Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            image,
-            SizedBox(width: spacing),
-            text,
-          ],
-        );
+    if (isReverse) {
+      children = children.reversed.toList();
     }
-    return child;
+
+    return Padding(
+      padding: padding,
+      child: Flex(
+        direction: direction,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: children,
+      ),
+    );
   }
 }
 

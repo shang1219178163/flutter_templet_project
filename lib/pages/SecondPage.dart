@@ -3,11 +3,15 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_templet_project/APPThemeSettings.dart';
 import 'package:flutter_templet_project/basicWidget/after_layout_builder.dart';
+import 'package:flutter_templet_project/basicWidget/n_text_and_icon.dart';
+import 'package:flutter_templet_project/basicWidget/n_text_button.dart';
 import 'package:flutter_templet_project/basicWidget/radial_button.dart';
 import 'package:flutter_templet_project/basicWidget/header.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
+import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/decoration_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
+import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/pages/demo/MyPainter.dart';
 import 'package:flutter_templet_project/basicWidget/n_popup_route.dart';
 import 'package:flutter_templet_project/basicWidget/gesture_detector_container.dart';
@@ -186,20 +190,21 @@ class _SecondPageState extends State<SecondPage> {
               },
               style: OutlinedButton.styleFrom(
                 side: BorderSide(
-                    width: 1.0,
-                    color: Theme.of(context).colorScheme.secondary,
-                    style: BorderStyle.solid),
+                  width: 1.0,
+                  color: Theme.of(context).colorScheme.secondary,
+                  style: BorderStyle.solid
+                ),
               ),
             ),
 
             Divider(),
             Header.h5(title: "TextSelectionToolbarTextButton"),
             TextSelectionToolbarTextButton(
-                padding: EdgeInsets.all(8),
+              padding: EdgeInsets.all(8),
               onPressed: (){
                   debugPrint("TextSelectionToolbarTextButton");
               },
-                child: Text("TextSelectionToolbarTextButton"),
+              child: Text("TextSelectionToolbarTextButton"),
             ),
 
             Divider(),
@@ -257,43 +262,110 @@ class _SecondPageState extends State<SecondPage> {
             ),
 
             Divider(),
-            Header.h5(title: "TextButtonExt"),
+            Header.h5(title: "ButtonExt.outlined"),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                TextButtonExt.build(
+                ButtonExt.outlined(
                   text: Text("left"),
-                  image: Icon(Icons.info),
-                  imageAlignment: ImageAlignment.left,
+                  icon: Icon(Icons.info),
                   side: BorderSide(width: 1.0, color: Colors.black12),
-                  callback: (value, tag) {
-                    ddlog([value.data, tag]);
-                  }),
-                TextButtonExt.build(
+                  onPressed: () {
+                    debugPrint("ButtonExt.outlined");
+                  }
+                ),
+                ButtonExt.outlined(
                   text: Text("right"),
-                  image: Icon(Icons.info),
-                  imageAlignment: ImageAlignment.right,
+                  icon: Icon(Icons.info),
+                  isReverse: true,
                   side: BorderSide(width: 1.0, color: Colors.blue),
-                  callback: (value, tag) {
-                    ddlog(value.data);
-                  }),
-                TextButtonExt.build(
+                  onPressed: () {
+                    debugPrint("ButtonExt.outlined");
+                  }
+                ),
+                ButtonExt.outlined(
                   text: Text("top"),
-                  image: Icon(Icons.info),
-                  imageAlignment: ImageAlignment.top,
-                  side: BorderSide(width: 1.0, color: Colors.red),
-                  callback: (value, tag) {
-                    ddlog(value.data);
-                  }),
-                TextButtonExt.build(
+                  icon: Icon(Icons.info),
+                  direction: Axis.vertical,
+                  side: BorderSide(width: 1.0, color: Colors.blue),
+                  onPressed: () {
+                    debugPrint("ButtonExt.outlined");
+                  }
+                ),
+                ButtonExt.outlined(
                   text: Text("bottom"),
-                  image: Icon(Icons.info),
-                  imageAlignment: ImageAlignment.bottom,
-                  side: BorderSide(width: 1.0, color: Colors.green),
-                  callback: (value, tag) {
-                    ddlog(value.data);
-                  }),
+                  icon: Icon(Icons.info),
+                  direction: Axis.vertical,
+                  isReverse: true,
+                  side: BorderSide(width: 1.0, color: Colors.blue),
+                  onPressed: () {
+                    debugPrint("ButtonExt.outlined");
+                  }
+                ),
               ]
+            ),
+
+            Divider(),
+            Header.h5(title: "ButtonExt.elevated"),
+            Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ButtonExt.elevated(
+                    text: Text("left"),
+                    icon: Icon(Icons.info),
+                    side: BorderSide(width: 1.0, color: Colors.black12),
+                    onPressed: () {
+                      debugPrint("ButtonExt.outlined");
+                    }
+                  ),
+                  ButtonExt.elevated(
+                    text: Text("right"),
+                    icon: Icon(Icons.info),
+                    isReverse: true,
+                    side: BorderSide(width: 1.0, color: Colors.blue),
+                    onPressed: () {
+                      debugPrint("ButtonExt.outlined");
+                    }
+                  ),
+                  ButtonExt.elevated(
+                    text: Text("top"),
+                    icon: Icon(Icons.info),
+                    direction: Axis.vertical,
+                    side: BorderSide(width: 1.0, color: Colors.blue),
+                    onPressed: () {
+                      debugPrint("ButtonExt.outlined");
+                    }
+                  ),
+                  ButtonExt.elevated(
+                    text: Text("bottom"),
+                    icon: Icon(Icons.info),
+                    direction: Axis.vertical,
+                    isReverse: true,
+                    side: BorderSide(width: 1.0, color: Colors.blue),
+                    onPressed: () {
+                      debugPrint("ButtonExt.outlined");
+                    }
+                  ),
+                ]
+            ),
+
+
+            Divider(),
+            Header.h5(title: "NTextAndIcon + OutlinedButton"),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: iconDirectionItems().map((e) => OutlinedButton(
+                  style: OutlinedButton.styleFrom(
+                   padding: EdgeInsets.zero,
+                    // padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                    side: BorderSide(color: ColorExt.random),
+                  ),
+                  onPressed: () {
+                    debugPrint("TextButton");
+                  },
+                  child: e,
+                )
+              ).toList(),
             ),
 
             Divider(),
@@ -307,10 +379,9 @@ class _SecondPageState extends State<SecondPage> {
                 borderRadius: BorderRadius.circular(4),
               ),
               onPressed: () { debugPrint("Press"); },
-              child: TextButtonExt.buildTextAndImage(
+              child: NTextAndIcon(
                 text: Text("bottom"),
-                image: Icon(Icons.info),
-                imageAlignment: ImageAlignment.top,
+                icon: Icon(Icons.info),
               ),
             ),
 
@@ -415,6 +486,32 @@ class _SecondPageState extends State<SecondPage> {
     );
   }
 
+  /// icon 上下左右
+  List<NTextAndIcon> iconDirectionItems() {
+    return [
+      NTextAndIcon(
+        text: Text("left"),
+        icon: Icon(Icons.info),
+      ),
+      NTextAndIcon(
+        text: Text("right"),
+        icon: Icon(Icons.info),
+        isReverse: true,
+      ),
+      NTextAndIcon(
+        text: Text("top"),
+        icon: Icon(Icons.info),
+        direction: Axis.vertical,
+      ),
+      NTextAndIcon(
+        text: Text("bottom"),
+        icon: Icon(Icons.info),
+        direction: Axis.vertical,
+        isReverse: true,
+      ),
+    ];
+  }
+
   buildGridView() {
     return GridView.count(
       padding: EdgeInsets.all(15.0),
@@ -506,61 +603,6 @@ class _SecondPageState extends State<SecondPage> {
           ),
         ),
       ),
-
-      // WidgetExt.buildBtn("菜单", Icon(Icons.send), ImageAlignment.right),
-      Tuple2(
-        "TextButtonExt",
-        TextButtonExt.build(
-            text: Text("个人信息"),
-            image: Icon(Icons.person),
-            imageAlignment: ImageAlignment.right,
-            callback: (value, tag) {
-              ddlog(value.data);
-            }),
-      ),
-
-      Tuple2(
-          "TextButtonExt",
-          TextButtonExt.build(
-              text: Text("菜单left"),
-              image: Icon(Icons.info),
-              imageAlignment: ImageAlignment.left,
-              callback: (value, tag) {
-                ddlog(value.data);
-              })),
-
-      Tuple2(
-        "TextButtonExt",
-        TextButtonExt.build(
-            text: Text("菜单right"),
-            image: Icon(Icons.info),
-            imageAlignment: ImageAlignment.right,
-            callback: (value, tag) {
-              ddlog(value.data);
-            }),
-      ),
-
-      Tuple2(
-          "TextButtonExt",
-          TextButtonExt.build(
-              text: Text("菜单top"),
-              image: Icon(Icons.info),
-              imageAlignment: ImageAlignment.top,
-              callback: (value, tag) {
-                ddlog(value.data);
-              })),
-
-      Tuple2(
-        "TextButtonExt",
-        TextButtonExt.build(
-            text: Text("菜单bottom"),
-            image: Icon(Icons.info),
-            imageAlignment: ImageAlignment.bottom,
-            callback: (value, tag) {
-              ddlog(value.data);
-            }),
-      ),
-
       Tuple2(
         "IconButton",
         IconButton(
@@ -573,7 +615,6 @@ class _SecondPageState extends State<SecondPage> {
           },
         ),
       ),
-
       Tuple2(
         "ToggleButtons",
         buildToggleButtons(),
@@ -832,31 +873,6 @@ class _SecondPageState extends State<SecondPage> {
       ),
     );
   }
-// testPageRouteBuilder(){
-// Navigator.of(context).push(
-//     PageRouteBuilder(
-//         barrierDismissible:true,
-//         opaque:false,
-//         barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
-//         barrierColor: Colors.black54,
-//         transitionDuration: const Duration(milliseconds: 150),
-//         pageBuilder: (p1, p2, p3) {
-//           return Container(
-//             padding: EdgeInsets.all(80),
-//             color: Colors.black.withOpacity(0.3),
-//             child: Container(
-//               color: Colors.green,
-//               child: TextButton(child: Text("button"),
-//               onPressed: (){
-//                   Navigator.of(context).pop();
-//                 },
-//               ),
-//             ),
-//           );
-//         }
-//     )
-// ),
-// }
 
   _buildCustome() {
     return Column(
