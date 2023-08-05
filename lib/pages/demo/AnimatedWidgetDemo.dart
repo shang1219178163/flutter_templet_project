@@ -53,10 +53,9 @@ class _AnimatedWidgetDemoState extends State<AnimatedWidgetDemo> {
     return SingleChildScrollView(
       child: Column(
         children: <Widget>[
-
           ElevatedButton(
             onPressed: () {
-              _padding += 10;
+              _padding = _padding == 10 ? 20: 10;
               setState(() {});
             },
             child: AnimatedPadding(
@@ -74,7 +73,7 @@ class _AnimatedWidgetDemoState extends State<AnimatedWidgetDemo> {
                   left: _left,
                   child: ElevatedButton(
                     onPressed: () {
-                      _left = 100;
+                      _left = _left == 100 ? 0 : 100;
                       setState(() {});
                     },
                     child: Text("AnimatedPositioned"),
@@ -91,7 +90,7 @@ class _AnimatedWidgetDemoState extends State<AnimatedWidgetDemo> {
               alignment: _align,
               child: ElevatedButton(
                 onPressed: () {
-                  _align = Alignment.center;
+                  _align = _align == Alignment.centerLeft ? Alignment.center : Alignment.centerLeft;
                   setState(() {});
                 },
                 child: Text("AnimatedAlign"),
@@ -117,11 +116,11 @@ class _AnimatedWidgetDemoState extends State<AnimatedWidgetDemo> {
           ),
           GestureDetector(
             onTap: () {
-              _size = _size == 100 ? 200.0 : 100.0;
+              _size = _size == 100 ? 200 : 100;
               setState(() {});
             },
             child: ColoredBox(
-              color: Colors.amberAccent,
+              color: Colors.yellow,
               child: AnimatedSize(
                 curve: Curves.easeIn,
                 duration: const Duration(milliseconds: 350),
@@ -129,8 +128,10 @@ class _AnimatedWidgetDemoState extends State<AnimatedWidgetDemo> {
                 // child: FlutterLogo(size: _size),
                 child: Container(
                   color: Colors.green,
-                  width: 200,
-                  height: _size,
+                  width: _size,
+                  height: 50,
+                  alignment: Alignment.center,
+                  child: Text("AnimatedSize"),
                 ),
               ),
             ),
