@@ -262,95 +262,6 @@ class _SecondPageState extends State<SecondPage> {
             ),
 
             Divider(),
-            Header.h5(title: "ButtonExt.outlined"),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                ButtonExt.outlined(
-                  text: Text("left"),
-                  icon: Icon(Icons.info),
-                  side: BorderSide(width: 1.0, color: Colors.black12),
-                  onPressed: () {
-                    debugPrint("ButtonExt.outlined");
-                  }
-                ),
-                ButtonExt.outlined(
-                  text: Text("right"),
-                  icon: Icon(Icons.info),
-                  isReverse: true,
-                  side: BorderSide(width: 1.0, color: Colors.blue),
-                  onPressed: () {
-                    debugPrint("ButtonExt.outlined");
-                  }
-                ),
-                ButtonExt.outlined(
-                  text: Text("top"),
-                  icon: Icon(Icons.info),
-                  direction: Axis.vertical,
-                  side: BorderSide(width: 1.0, color: Colors.blue),
-                  onPressed: () {
-                    debugPrint("ButtonExt.outlined");
-                  }
-                ),
-                ButtonExt.outlined(
-                  text: Text("bottom"),
-                  icon: Icon(Icons.info),
-                  direction: Axis.vertical,
-                  isReverse: true,
-                  side: BorderSide(width: 1.0, color: Colors.blue),
-                  onPressed: () {
-                    debugPrint("ButtonExt.outlined");
-                  }
-                ),
-              ]
-            ),
-
-            Divider(),
-            Header.h5(title: "ButtonExt.elevated"),
-            Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  ButtonExt.elevated(
-                    text: Text("left"),
-                    icon: Icon(Icons.info),
-                    side: BorderSide(width: 1.0, color: Colors.black12),
-                    onPressed: () {
-                      debugPrint("ButtonExt.outlined");
-                    }
-                  ),
-                  ButtonExt.elevated(
-                    text: Text("right"),
-                    icon: Icon(Icons.info),
-                    isReverse: true,
-                    side: BorderSide(width: 1.0, color: Colors.blue),
-                    onPressed: () {
-                      debugPrint("ButtonExt.outlined");
-                    }
-                  ),
-                  ButtonExt.elevated(
-                    text: Text("top"),
-                    icon: Icon(Icons.info),
-                    direction: Axis.vertical,
-                    side: BorderSide(width: 1.0, color: Colors.blue),
-                    onPressed: () {
-                      debugPrint("ButtonExt.outlined");
-                    }
-                  ),
-                  ButtonExt.elevated(
-                    text: Text("bottom"),
-                    icon: Icon(Icons.info),
-                    direction: Axis.vertical,
-                    isReverse: true,
-                    side: BorderSide(width: 1.0, color: Colors.blue),
-                    onPressed: () {
-                      debugPrint("ButtonExt.outlined");
-                    }
-                  ),
-                ]
-            ),
-
-
-            Divider(),
             Header.h5(title: "NTextAndIcon + OutlinedButton"),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -365,6 +276,30 @@ class _SecondPageState extends State<SecondPage> {
                   },
                   child: e,
                 )
+              ).toList(),
+            ),
+
+            Divider(),
+            Header.h5(title: "NTextAndIcon + OutlinedButton copy"),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: iconDirectionItems().map((e) => OutlinedButton(
+                // style: OutlinedButton.styleFrom(
+                //   padding: EdgeInsets.zero,
+                //   // padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                //   side: BorderSide(color: ColorExt.random),
+                // ),
+                onPressed: () {
+                  debugPrint("TextButton");
+                },
+                child: e,
+              ).copy(
+                style: OutlinedButton.styleFrom(
+                  padding: EdgeInsets.zero,
+                  // padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                  side: BorderSide(color: ColorExt.random),
+                ),
+              )
               ).toList(),
             ),
 

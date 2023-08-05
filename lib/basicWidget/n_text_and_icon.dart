@@ -10,8 +10,8 @@ class NTextAndIcon<T> extends StatelessWidget {
     required this.text,
     this.icon,
     this.direction = Axis.horizontal,
-    this.betweenGap = 6,
     this.isReverse = false,
+    this.betweenGap = 6,
     this.padding = const EdgeInsets.all(8),
     this.data,
   }) : super(key: key);
@@ -22,10 +22,10 @@ class NTextAndIcon<T> extends StatelessWidget {
   final Widget? icon;
   /// 标题图标方向
   final Axis direction;
-  /// 图标标题间距
-  final double betweenGap;
   /// 标题图标翻转
   final bool isReverse;
+  /// 图标标题间距
+  final double betweenGap;
 
   final EdgeInsets padding;
 
@@ -52,7 +52,7 @@ class NTextAndIcon<T> extends StatelessWidget {
     return Padding(
       padding: padding,
       child: Flex(
-        // mainAxisSize: MainAxisSize.min,
+        mainAxisSize: MainAxisSize.min,
         direction: direction,
         mainAxisAlignment: MainAxisAlignment.center,
         children: children,
