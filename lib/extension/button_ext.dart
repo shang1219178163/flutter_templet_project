@@ -16,94 +16,19 @@ extension ButtonStyleExt on ButtonStyle {
   ///边框线加圆角
   static outline({
     BorderRadius borderRadius = BorderRadius.zero,
-    required Color borderColor
+    required Color borderColor,
   }) {
     return ButtonStyle(
       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
         RoundedRectangleBorder(
           borderRadius: borderRadius,
           side: BorderSide(color: borderColor)
-        )
-      )
+        ),
+      ),
     );
   }
+  
 }
-
-
-// extension ButtonExt on ButtonStyleButton{
-//
-//   static OutlinedButton outlined({
-//     /// 文字
-//     required Widget text,
-//     /// 图标
-//     Widget? icon,
-//     /// 标题图标方向
-//     Axis direction = Axis.horizontal,
-//     /// 图标标题间距
-//     double betweenGap = 6,
-//     /// 标题图标翻转
-//     bool isReverse = false,
-//     /// 边距
-//     EdgeInsets padding = const EdgeInsets.all(8),
-//     BorderSide? side = const BorderSide(color: Color(0xffE4E4E4)),
-//     Clip clipBehavior = Clip.none,
-//     required VoidCallback onPressed,
-//   }) {
-//     return OutlinedButton(
-//       style: OutlinedButton.styleFrom(
-//         padding: EdgeInsets.zero,
-//         // padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-//         side: side,
-//       ),
-//       clipBehavior: clipBehavior,
-//       onPressed: onPressed,
-//       child: NTextAndIcon(
-//         text: text,
-//         icon: icon,
-//         direction: direction,
-//         isReverse: isReverse,
-//         betweenGap: betweenGap,
-//         padding: padding,
-//       ),
-//     );
-//   }
-//
-//   static ElevatedButton elevated({
-//     /// 文字
-//     required Widget text,
-//     /// 图标
-//     Widget? icon,
-//     /// 标题图标方向
-//     Axis direction = Axis.horizontal,
-//     /// 图标标题间距
-//     double betweenGap = 6,
-//     /// 标题图标翻转
-//     bool isReverse = false,
-//     /// 边距
-//     EdgeInsets padding = const EdgeInsets.all(8),
-//     BorderSide? side = const BorderSide(color: Color(0xffE4E4E4)),
-//     Clip clipBehavior = Clip.none,
-//     required VoidCallback onPressed,
-//   }) {
-//     return ElevatedButton(
-//       style: ElevatedButton.styleFrom(
-//         padding: EdgeInsets.zero,
-//         // padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-//         side: side,
-//       ),
-//       clipBehavior: clipBehavior,
-//       onPressed: onPressed,
-//       child: NTextAndIcon(
-//         text: text,
-//         icon: icon,
-//         direction: direction,
-//         isReverse: isReverse,
-//         betweenGap: betweenGap,
-//         padding: padding,
-//       ),
-//     );
-//   }
-// }
 
 
 
