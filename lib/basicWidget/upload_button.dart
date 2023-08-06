@@ -6,11 +6,8 @@
 //  Copyright © 12/10/21 shang. All rights reserved.
 //
 
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/gesture_detector_container.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
+
 
 class UploadButton extends StatefulWidget {
   UploadButton({
