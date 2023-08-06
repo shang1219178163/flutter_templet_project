@@ -804,30 +804,6 @@ class _SecondPageState extends State<SecondPage> {
   Widget _buildCustom() {
     return Column(
       children: [
-        ElevatedButton(
-          onPressed: () {},
-          style: ElevatedButton.styleFrom(
-            padding: EdgeInsets.all(18),
-            elevation: 10,
-            shape: const StadiumBorder(),
-            maximumSize: Size(160, 45),
-            minimumSize: Size(40, 20),
-          ),
-          child: const Center(
-              child: Text('Elevated Button')
-          ),
-        ),
-        ElevatedButton(
-          onPressed: () {},
-          style: ElevatedButton.styleFrom(
-            padding: EdgeInsets.all(18),
-            elevation: 10,
-            shape: const CircleBorder()
-          ),
-          child: const Center(
-            child: Icon(Icons.add)
-          ),
-        ),
         buildSection(
           title: "ElevatedButton",
           child: Column(
