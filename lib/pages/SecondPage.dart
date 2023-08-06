@@ -274,7 +274,10 @@ class _SecondPageState extends State<SecondPage> {
                     onPressed: () {
                       debugPrint("TextButton");
                     },
-                    child: e,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: e,
+                    ),
                   )
                 ).toList(),
               ),
@@ -292,7 +295,10 @@ class _SecondPageState extends State<SecondPage> {
                   onPressed: () {
                     debugPrint("ElevatedButton");
                   },
-                  child: e,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: e,
+                  ),
                 ).copy(
                   style: ElevatedButton.styleFrom(
                     padding: EdgeInsets.zero,
@@ -315,9 +321,12 @@ class _SecondPageState extends State<SecondPage> {
                   borderRadius: BorderRadius.circular(4),
                 ),
                 onPressed: () { debugPrint("MaterialButton"); },
-                child: NTextAndIcon(
-                  text: Text("MaterialButton"),
-                  icon: Icon(Icons.info),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: NTextAndIcon(
+                    text: Text("MaterialButton"),
+                    icon: Icon(Icons.info),
+                  ),
                 ),
               ),
             ),
