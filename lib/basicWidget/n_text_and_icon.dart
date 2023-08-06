@@ -9,10 +9,16 @@ class NTextAndIcon<T> extends StatelessWidget {
     Key? key,
     required this.text,
     this.icon,
-    this.direction = Axis.horizontal,
     this.isReverse = false,
     this.betweenGap = 6,
-    this.padding = const EdgeInsets.all(8),
+    this.direction = Axis.horizontal,
+    this.mainAxisAlignment = MainAxisAlignment.center,
+    this.mainAxisSize = MainAxisSize.min,
+    this.crossAxisAlignment = CrossAxisAlignment.center,
+    this.textDirection,
+    this.verticalDirection = VerticalDirection.down,
+    this.textBaseline, // NO DEFAULT: we don't know what the text's baseline should be
+    this.clipBehavior = Clip.none,
     this.data,
   }) : super(key: key);
 
@@ -20,14 +26,20 @@ class NTextAndIcon<T> extends StatelessWidget {
   final Widget text;
   /// 图标
   final Widget? icon;
-  /// 标题图标方向
-  final Axis direction;
   /// 标题图标翻转
   final bool isReverse;
   /// 图标标题间距
   final double betweenGap;
+  /// 标题图标方向
+  final Axis direction;
 
-  final EdgeInsets padding;
+  final MainAxisAlignment mainAxisAlignment;
+  final MainAxisSize mainAxisSize;
+  final CrossAxisAlignment crossAxisAlignment;
+  final TextDirection? textDirection;
+  final VerticalDirection verticalDirection;
+  final TextBaseline? textBaseline;
+  final Clip clipBehavior;
 
   final T? data;
 
@@ -49,14 +61,16 @@ class NTextAndIcon<T> extends StatelessWidget {
       children = children.reversed.toList();
     }
 
-    return Padding(
-      padding: padding,
-      child: Flex(
-        mainAxisSize: MainAxisSize.min,
-        direction: direction,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: children,
-      ),
+    return Flex(
+      direction: direction,
+      mainAxisSize: mainAxisSize,
+      mainAxisAlignment: mainAxisAlignment,
+      crossAxisAlignment: crossAxisAlignment,
+      textDirection: textDirection,
+      verticalDirection: verticalDirection,
+      textBaseline: textBaseline,
+      clipBehavior: clipBehavior,
+      children: children,
     );
   }
 }
