@@ -804,16 +804,17 @@ class _SecondPageState extends State<SecondPage> {
   Widget _buildCustom() {
     return Column(
       children: [
-        SizedBox(
-          height: 45,
-          width: 200,
-          child: ElevatedButton(
-            onPressed: () {},
-            style: ElevatedButton.styleFrom(
-                elevation: 10,
-                shape: const StadiumBorder(),
-            ),
-            child: const Center(child: Text('Elevated Button')),
+        ElevatedButton(
+          onPressed: () {},
+          style: ElevatedButton.styleFrom(
+            padding: EdgeInsets.all(18),
+            elevation: 10,
+            shape: const StadiumBorder(),
+            maximumSize: Size(160, 45),
+            minimumSize: Size(40, 20),
+          ),
+          child: const Center(
+              child: Text('Elevated Button')
           ),
         ),
         ElevatedButton(
@@ -828,21 +829,23 @@ class _SecondPageState extends State<SecondPage> {
           ),
         ),
         buildSection(
-          title: "UIElevatedButton",
+          title: "ElevatedButton",
           child: Column(
             children: [
-              UIElevatedButton(
-                height: 45,
-                width: 200,
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.all(16),
+                  elevation: 4,
+                  shape: const StadiumBorder(),
+                ),
                 onPressed: () {
                   debugPrint("Elevated");
                 },
                 child: Text('Elevated Button'),
               ),
-              UIElevatedButton(
-                height: 45,
-                width: 60,
+              ElevatedButton(
                 style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.all(16),
                   elevation: 4,
                   shape: const CircleBorder(),
                 ),
@@ -890,54 +893,11 @@ class _SecondPageState extends State<SecondPage> {
     return ButtonBar(
       children: ['Ok', 'Cancel', ].map((e) => ElevatedButton(
         onPressed: () {
-          // To do
+          debugPrint(e);
         },
         child: Text(e),
       )).toList(),
     );
   }
-
-
-}
-
-/// 自定义按钮
-class UIElevatedButton extends StatelessWidget {
-
-  const UIElevatedButton({
-  	Key? key,
-    this.width,
-    this.height,
-    this.child,
-    required this.onPressed,
-    this.style,
-  }) : super(key: key);
-
-  /// If non-null, requires the child to have exactly this width.
-  final double? width;
-
-  /// If non-null, requires the child to have exactly this height.
-  final double? height;
-
-  final Widget? child;
-
-  final VoidCallback onPressed;
-
-  final ButtonStyle? style;
-
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: height,
-      width: width,
-      child: ElevatedButton(
-        onPressed: onPressed,
-        style: style ?? ElevatedButton.styleFrom(
-          elevation: 4,
-          shape: const StadiumBorder(),
-        ),
-        child: child ?? const Center(child: Text('UIElevatedButton')),
-      ),
-    );
-  }
+  
 }
