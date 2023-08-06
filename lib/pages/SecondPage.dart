@@ -65,358 +65,387 @@ class _SecondPageState extends State<SecondPage> {
         Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            Header.h5(title: "color"),
-            Container(
-              width: 100,
-              height: 100,
-              decoration: BoxDecoration(
-                  color: Color(0xfff44336),
-                  borderRadius: BorderRadius.all(Radius.circular(18)),
-              ),
-            ),
-            Header.h5(title: "RadialButton"),
-            RadialButton(
-              text: Text('一二'),
-              center: Alignment.topRight,
-              onTap: () => debugPrint("RadialButton"),
-            ),
-            RadialButton(
-              text: Text('一二'),
-              center: Alignment.centerRight,
-              onTap: () => debugPrint("RadialButton"),
-            ),
-            RadialButton(
-              text: Text('一二'),
-              center: Alignment.bottomRight,
-              onTap: () => debugPrint("RadialButton"),
-            ),
-            RadialButton(
-              text: Text('一二'),
-              onTap: () => debugPrint("RadialButton"),
-            ),
-            RadialButton(
-              text: Text('一二三'),
-              center: Alignment.topRight,
-              onTap: () => debugPrint("RadialButton"),
-            ),
-            RadialButton(
-              text: Text('一二三四'),
-              center: Alignment.centerRight,
-              onTap: () => debugPrint("RadialButton"),
-            ),
-            RadialButton(
-              text: Text('一二三四五六'),
-              center: Alignment.bottomRight,
-              onTap: () => debugPrint("RadialButton"),
-            ),
-            AfterLayoutBuilder(
-              builder: (BuildContext context, Widget? child, Size? size) {
-                debugPrint("AfterLayoutBuilder size:$size");
-                if (size == null) {
-                  return child ?? SizedBox();
-                }
-                return Container(
-                  color: Colors.greenAccent,
-                  child: child,
-                );
-              },
+            buildSection(
+              title: "color",
               child: Container(
-                margin: EdgeInsets.all(10),
-                padding: EdgeInsets.all(10),
-                child: Text("离离原上草, 一岁一枯荣")
-              ),
-            ),
-            Header.h5(title: "GradientButton"),
-            _buildClipRRectGradientButton(),
-
-            Divider(),
-            Header.h5(title:"MaterialButton"),
-            MaterialButton(
-              // color: Colors.blue.shade400,
-              // textColor: Colors.white,
-              onPressed: () => debugPrint("MaterialButton"),
-              child: Text("MaterialButton"),
-            ),
-
-            Divider(),
-            Header.h5(title: "BackButton"),
-            BackButton(
-              onPressed: () => debugPrint("BackButton"),
-              color: Colors.red,
-            ),
-            Divider(),
-
-            Header.h5(title: "NoSplash"),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                splashFactory: NoSplash.splashFactory,
-               ),
-              onPressed: () { debugPrint("NoSplash.splashFactory"); },
-               child: Text('No Splash'),
-            ),
-            Header.h5(title: "ElevatedButton"),
-            ElevatedButton.icon(
-              icon: Icon(Icons.send),
-              label: Text("ElevatedButton"),
-              key: _globalKey,
-              onPressed: () {
-                // _showCustomPopView();
-                ddlog([_globalKey.currentContext?.origin(), _globalKey.currentContext?.size]);
-                // test();
-              },
-            ),
-
-            Divider(),
-            Header.h5(title: "Directionality ElevatedButton"),
-            Directionality(
-              textDirection: TextDirection.rtl,
-              child: ElevatedButton.icon(
-                onPressed: () { debugPrint("ElevatedButton"); },
-                icon: Icon(Icons.arrow_back,),
-                label: Text("ElevatedButton"),
-              )
-            ),
-
-            Divider(),
-            Header.h5(title: "OutlinedButton"),
-            OutlinedButton.icon(
-              icon: Icon(Icons.add),
-              label: Text("OutlinedButton"),
-              key: _globalKey1,
-              onPressed: () {
-                ddlog([_globalKey1.position(),
-                  _globalKey1.size]);
-                // test();
-              },
-              style: OutlinedButton.styleFrom(
-                side: BorderSide(
-                  width: 1.0,
-                  color: Theme.of(context).colorScheme.secondary,
-                  style: BorderStyle.solid
+                width: 50,
+                height: 50,
+                decoration: BoxDecoration(
+                  color: Color(0xfff44336),
+                  borderRadius: BorderRadius.all(Radius.circular(8)),
                 ),
               ),
             ),
-
-            Divider(),
-            Header.h5(title: "TextSelectionToolbarTextButton"),
-            TextSelectionToolbarTextButton(
-              padding: EdgeInsets.all(8),
-              onPressed: (){
-                  debugPrint("TextSelectionToolbarTextButton");
-              },
-              child: Text("TextSelectionToolbarTextButton"),
-            ),
-
-            Divider(),
-            Header.h5(title: "TextButton"),
-            Row(
-              children: [
-                TextButton(
-                  style: TextButton.styleFrom(
-                    // padding: EdgeInsets.zero,
-                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 12),
-                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                    minimumSize: Size(50, 18),
-                    backgroundColor: Colors.green.withOpacity(0.1),
-                    foregroundColor: Colors.green,
+            buildSection(
+              title: "RadialButton",
+              child: Column(
+                children: [
+                  RadialButton(
+                    text: Text('一二'),
+                    center: Alignment.topRight,
+                    onTap: () => debugPrint("RadialButton"),
                   ),
-                  onPressed: () => ddlog('$this'),
-                  child: Container(
-                    constraints: BoxConstraints(
-                      minWidth: 100,
-                      maxWidth: 200,
-                    ),
+                  RadialButton(
+                    text: Text('一二'),
+                    center: Alignment.centerRight,
+                    onTap: () => debugPrint("RadialButton"),
+                  ),
+                  RadialButton(
+                    text: Text('一二'),
+                    center: Alignment.bottomRight,
+                    onTap: () => debugPrint("RadialButton"),
+                  ),
+                  RadialButton(
+                    text: Text('一二'),
+                    onTap: () => debugPrint("RadialButton"),
+                  ),
+                  RadialButton(
+                    text: Text('一二三'),
+                    center: Alignment.topRight,
+                    onTap: () => debugPrint("RadialButton"),
+                  ),
+                  RadialButton(
+                    text: Text('一二三四'),
+                    center: Alignment.centerRight,
+                    onTap: () => debugPrint("RadialButton"),
+                  ),
+                  RadialButton(
+                    text: Text('一二三四五六'),
+                    center: Alignment.bottomRight,
+                    onTap: () => debugPrint("RadialButton"),
+                  ),
+                ],
+              ),
+            ),
+            buildSection(
+              title: "AfterLayoutBuilder",
+              child: AfterLayoutBuilder(
+                builder: (BuildContext context, Widget? child, Size? size) {
+                  debugPrint("AfterLayoutBuilder size:$size");
+                  if (size == null) {
+                    return child ?? SizedBox();
+                  }
+                  return Container(
+                    color: Colors.greenAccent,
+                    child: child,
+                  );
+                },
+                child: Container(
+                  margin: EdgeInsets.all(10),
+                  padding: EdgeInsets.all(10),
+                  child: Text("离离原上草, 一岁一枯荣")
+                ),
+              ),
+            ),
+            buildSection(
+              title: "GradientButton",
+              child: _buildGradientButton()
+            ),
+            buildSection(
+              title: "MaterialButton",
+              child: MaterialButton(
+                // color: Colors.blue.shade400,
+                // textColor: Colors.white,
+                onPressed: () => debugPrint("MaterialButton"),
+                child: Text("MaterialButton"),
+              ),
+            ),
+            buildSection(
+              title: "BackButton",
+              child: BackButton(
+                onPressed: () => debugPrint("BackButton"),
+                color: Colors.red,
+              ),
+            ),
+            buildSection(
+              title: "TextButton",
+              child: Row(
+                children: [
+                  TextButton(
+                    onPressed: () => ddlog('TextButton'),
                     child: Row(
-                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Padding(
-                          padding: EdgeInsets.only(right: 4),
-                          child: Icon(Icons.call, size: 20,),
-                        ),
-                        Flexible(
-                          child: Text(
-                            'TextButton'*1,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text("TextButton"),
+                        SizedBox(width: 5),
+                        Icon(Icons.send),
                       ],
                     ),
                   ),
-                ),
-                TextButton(
-                  onPressed: () => ddlog('TextButton'),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text("TextButton"),
-                      SizedBox(width: 5),
-                      Icon(Icons.send),
-                    ],
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      // padding: EdgeInsets.zero,
+                      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 12),
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      minimumSize: Size(50, 18),
+                      backgroundColor: Colors.green.withOpacity(0.1),
+                      foregroundColor: Colors.green,
+                    ),
+                    onPressed: () => ddlog('TextButton'),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text("TextButton"),
+                        SizedBox(width: 5),
+                        Icon(Icons.send),
+                      ].reversed.toList(),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-
-            Divider(),
-            Header.h5(title: "NTextAndIcon + OutlinedButton"),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: iconDirectionItems().map((e) => OutlinedButton(
-                  style: OutlinedButton.styleFrom(
-                   padding: EdgeInsets.zero,
-                    // padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                    side: BorderSide(color: ColorExt.random),
+            buildSection(
+              title: "OutlinedButton",
+              child: OutlinedButton.icon(
+                icon: Icon(Icons.add),
+                label: Text("OutlinedButton"),
+                key: _globalKey1,
+                onPressed: () {
+                  ddlog([_globalKey1.position(),
+                    _globalKey1.size]);
+                  // test();
+                },
+                style: OutlinedButton.styleFrom(
+                  side: BorderSide(
+                      width: 1.0,
+                      color: Theme.of(context).colorScheme.secondary,
+                      style: BorderStyle.solid
                   ),
+                ),
+              ),
+            ),
+            buildSection(
+              title: "NoSplash",
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  splashFactory: NoSplash.splashFactory,
+                 ),
+                onPressed: () { debugPrint("NoSplash.splashFactory"); },
+                 child: Text('No Splash'),
+              ),
+            ),
+            buildSection(
+              title: "ElevatedButton",
+              child: ElevatedButton.icon(
+                icon: Icon(Icons.send),
+                label: Text("ElevatedButton"),
+                key: _globalKey,
+                onPressed: () {
+                  // _showCustomPopView();
+                  ddlog([_globalKey.currentContext?.origin(), _globalKey.currentContext?.size]);
+                  // test();
+                },
+              ),
+            ),
+            buildSection(
+              title: "ElevatedButton Directionality",
+              child: Directionality(
+                textDirection: TextDirection.rtl,
+                child: ElevatedButton.icon(
+                  onPressed: () { debugPrint("ElevatedButton"); },
+                  icon: Icon(Icons.arrow_back,),
+                  label: Text("ElevatedButton"),
+                )
+              ),
+            ),
+            buildSection(
+              title: "TextSelectionToolbarTextButton",
+              child: TextSelectionToolbarTextButton(
+                padding: EdgeInsets.all(8),
+                onPressed: (){
+                    debugPrint("TextSelectionToolbarTextButton");
+                },
+                child: Text("TextSelectionToolbarTextButton"),
+              ),
+            ),
+            buildSection(
+              title: "NTextAndIcon + OutlinedButton",
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: iconDirectionItems().map((e) => OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                     padding: EdgeInsets.zero,
+                      // padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                      side: BorderSide(color: ColorExt.random),
+                    ),
+                    onPressed: () {
+                      debugPrint("TextButton");
+                    },
+                    child: e,
+                  )
+                ).toList(),
+              ),
+            ),
+            buildSection(
+              title: "NTextAndIcon + OutlinedButton copy",
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: iconDirectionItems().map((e) => ElevatedButton(
+                  // style: ElevatedButton.styleFrom(
+                  //   padding: EdgeInsets.zero,
+                  //   // padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                  //   side: BorderSide(color: ColorExt.random),
+                  // ),
                   onPressed: () {
-                    debugPrint("TextButton");
+                    debugPrint("ElevatedButton");
                   },
                   child: e,
+                ).copy(
+                  style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.zero,
+                    // padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                    // side: BorderSide(color: ColorExt.random),
+                  ),
                 )
-              ).toList(),
+                ).toList(),
+              ),
             ),
-
-            Divider(),
-            Header.h5(title: "NTextAndIcon + OutlinedButton copy"),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: iconDirectionItems().map((e) => ElevatedButton(
-                // style: ElevatedButton.styleFrom(
-                //   padding: EdgeInsets.zero,
-                //   // padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                //   side: BorderSide(color: ColorExt.random),
-                // ),
-                onPressed: () {
-                  debugPrint("TextButton");
-                },
-                child: e,
-              ).copy(
-                style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.zero,
-                  // padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                  // side: BorderSide(color: ColorExt.random),
+            buildSection(
+              title: "MaterialButton",
+              child: MaterialButton(
+                padding: EdgeInsets.all(8),
+                minWidth: 0,
+                textColor: Colors.red,
+                // color: Colors.green,
+                shape: RoundedRectangleBorder(
+                  side: BorderSide(width: 1, color: Colors.grey),
+                  borderRadius: BorderRadius.circular(4),
                 ),
-              )
-              ).toList(),
-            ),
-
-            Divider(),
-            Header.h5(title: "MaterialButton"),
-            MaterialButton(
-              padding: EdgeInsets.all(8),
-              minWidth: 0,
-              // color: Colors.green,
-              shape: RoundedRectangleBorder(
-                side: BorderSide(width: 1, color: Colors.grey),
-                borderRadius: BorderRadius.circular(4),
-              ),
-              onPressed: () { debugPrint("Press"); },
-              child: NTextAndIcon(
-                text: Text("bottom"),
-                icon: Icon(Icons.info),
+                onPressed: () { debugPrint("MaterialButton"); },
+                child: NTextAndIcon(
+                  text: Text("MaterialButton"),
+                  icon: Icon(Icons.info),
+                ),
               ),
             ),
-
-            Divider(),
-            Header.h5(title: "IconButton"),
-            IconButton(
-              tooltip: '这是一个图标按钮',
-              icon: Icon(Icons.person),
-              iconSize: 30,
-              color: Theme.of(context).accentColor,
-              onPressed: () {
-                ddlog("这是一个图标按钮");
-              },
-            ),
-
-            Divider(),
-            Header.h5(title: "ToggleButtons"),
-            buildToggleButtons(),
-
-            Divider(),
-            Header.h5(title: "FloatingActionButton"),
-            FloatingActionButton(
-              mini: true,
-              backgroundColor: const Color(0xff03dac6),
-              foregroundColor: Colors.black,
-              onPressed: () {
-                ddlog("FloatingActionButton");
-              },
-              child: Icon(Icons.open_with),
-            ),
-            SizedBox(height: 10,),
-
-            FloatingActionButton.extended(
-              backgroundColor: const Color(0xff03dac6),
-              foregroundColor: Colors.black,
-              onPressed: () {
-                ddlog("FloatingActionButton.extended");
-              },
-              icon: Icon(Icons.add),
-              label: Text('EXTENDED'),
-            ),
-
-            Divider(),
-            Header.h5(title: "DropdownButton"),
-            _buildDropdownButton(),
-
-            Header.h5(title: "_buildDropdownButton1"),
-            _buildDropdownButton1(),
-
-            Header.h5(title: "_buildPopupMenuButtonExt"),
-            _buildPopupMenuButtonExt(),
-
-            Divider(),
-            Header.h5(title: "UploadButton"),
-            UploadButton(
-              image: Image.asset("img_update.png".toPng(), fit: BoxFit.fill, width: 100, height: 100,),
-              deteleImage: Image.asset("icon_delete.png".toPng(), fit: BoxFit.fill, width: 25, height: 25,),
-              onPressed: () {
-                ddlog("onPressed");
-              },
-              onDetele: (){
-                ddlog("onDetele");
-              },
-            ),
-
-            Divider(),
-            Header.h5(title: "SpreadArea"),
-            OutlinedButton(
+            buildSection(
+              title: "IconButton",
+              child: IconButton(
+                style: TextButton.styleFrom(
+                  padding: EdgeInsets.zero,
+                  // padding: EdgeInsets.symmetric(horizontal: 8, vertical: 12),
+                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  minimumSize: Size(50, 18),
+                  // backgroundColor: Colors.green.withOpacity(0.1),
+                  // foregroundColor: Colors.green,
+                ),
+                tooltip: '这是一个图标按钮',
+                icon: Icon(Icons.arrow_back_ios_new),
+                iconSize: 30,
+                color: Theme.of(context).accentColor,
                 onPressed: () {
-                  ddlog("OutlinedButton");
+                  ddlog("这是一个图标按钮");
                 },
-                child:Text("OutlinedButton")
+              ),
             ),
-            _buildSpreadArea(),
-
-            Divider(),
-            Header.h5(title: "GestureDetectorContainer"),
-            GestureDetectorContainer(
-              // edge: EdgeInsets.all(10),
-              color: Colors.orange,
-              onTap: (){
-                ddlog("onTap");
-              },
-              child: OutlinedButton(
-                onPressed: (){
+            buildSection(
+              title: "ToggleButtons",
+              child: buildToggleButtons(),
+            ),
+            buildSection(
+              title: "FloatingActionButton",
+              child: Column(
+                children: [
+                  FloatingActionButton(
+                    mini: true,
+                    backgroundColor: const Color(0xff03dac6),
+                    foregroundColor: Colors.black,
+                    onPressed: () {
+                      ddlog("FloatingActionButton");
+                    },
+                    child: Icon(Icons.open_with),
+                  ),
+                  FloatingActionButton.extended(
+                    backgroundColor: const Color(0xff03dac6),
+                    foregroundColor: Colors.black,
+                    onPressed: () {
+                      ddlog("FloatingActionButton.extended");
+                    },
+                    icon: Icon(Icons.add),
+                    label: Text('EXTENDED'),
+                  ),
+                ],
+              ),
+            ),
+            buildSection(
+              title: "DropdownButton",
+              child: _buildDropdownButton()
+            ),
+            buildSection(
+              title: "_buildDropdownButton1",
+              child: _buildDropdownButton1()
+            ),
+            buildSection(
+              title: "_buildPopupMenuButtonExt",
+              child: _buildPopupMenuButtonExt()
+            ),
+            buildSection(
+              title: "UploadButton",
+              child: UploadButton(
+                image: Image.asset("img_update.png".toPng(), fit: BoxFit.fill, width: 100, height: 100,),
+                deteleImage: Image.asset("icon_delete.png".toPng(), fit: BoxFit.fill, width: 25, height: 25,),
+                onPressed: () {
                   ddlog("onPressed");
                 },
-                child: Text("OutlinedButton"),
+                onDetele: (){
+                  ddlog("onDetele");
+                },
               ),
             ),
-
-            Divider(),
-            Header.h5(title: "_buildCustomPaint"),
-            _buildCustomPaint(),
-
-            Divider(),
-            Header.h5(title: "buildCustome"),
-            _buildCustome(),
+            buildSection(
+              title: "SpreadArea",
+              child: Column(
+                children: [
+                  OutlinedButton(
+                    onPressed: () {
+                      ddlog("OutlinedButton");
+                    },
+                    child: Text("OutlinedButton")
+                  ),
+                  GestureDetector(
+                    ///这里设置behavior
+                    behavior: HitTestBehavior.translucent,
+                    onTap: (){
+                      ddlog("onTap");
+                    },
+                    child: Container(
+                      color: Colors.yellow,
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      child: OutlinedButton(
+                        onPressed: () {
+                          ddlog("OutlinedButton");
+                        },
+                        child: Text("OutlinedButton")
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            buildSection(
+              title: "_buildCustomPaint",
+              child: _buildCustomPaint()
+            ),
+            buildSection(
+              title: "buildCustome",
+              child: _buildCustom()
+            ),
           ],
         ),
+      ],
+    );
+  }
+
+  Widget buildSection({required String title, required Widget child}) {
+    return Column(
+      children: [
+        Divider(),
+        Header.h5(title: title),
+        child,
       ],
     );
   }
@@ -475,7 +504,7 @@ class _SecondPageState extends State<SecondPage> {
     return <Tuple2<String, Widget>>[
       Tuple2(
       "ClipRRectGradientButton",
-      _buildClipRRectGradientButton(),
+      _buildGradientButton(),
       ),
       Tuple2(
         "ElevatedButton",
@@ -544,7 +573,7 @@ class _SecondPageState extends State<SecondPage> {
           tooltip: '这是一个图标按钮',
           icon: Icon(Icons.person),
           iconSize: 30,
-          color: Theme.of(context).accentColor,
+          color: Theme.of(context).colorScheme.secondary,
           onPressed: () {
             ddlog("这是一个图标按钮");
           },
@@ -590,7 +619,7 @@ class _SecondPageState extends State<SecondPage> {
 
   final List<bool> _selecteds = [false, false, true];
 
-  buildToggleButtons() {
+  Widget buildToggleButtons() {
     return ToggleButtons(
       isSelected: _selecteds,
       onPressed: (index) {
@@ -608,7 +637,7 @@ class _SecondPageState extends State<SecondPage> {
 
   var _dropValue = '语文';
 
-  _buildDropdownButton() {
+  Widget _buildDropdownButton() {
     var list = ['语文', '数学', '英语'];
     return DropdownButton(
       value: _dropValue,
@@ -629,7 +658,7 @@ class _SecondPageState extends State<SecondPage> {
 
   var dropdownvalue = 'Item 1';
 
-  _buildDropdownButton1() {
+  Widget _buildDropdownButton1() {
     var items = [
       'Item 1',
       'Item 2',
@@ -664,7 +693,7 @@ class _SecondPageState extends State<SecondPage> {
     );
   }
 
-  _buildPopupMenuButtonExt() {
+  Widget _buildPopupMenuButtonExt() {
     final json = {
     "aa": "0",
     "bb": "1",
@@ -713,29 +742,7 @@ class _SecondPageState extends State<SecondPage> {
     );
   }
 
-  _buildSpreadArea({EdgeInsets padding = const EdgeInsets.symmetric(horizontal: 25)}) {
-    return GestureDetector(
-      ///这里设置behavior
-      behavior: HitTestBehavior.translucent,
-      onTap: (){
-        ddlog("onTap");
-      },
-      child: Container(
-        // height: 50,
-        // width: 100,
-        // color: Colors.transparent,
-        color: Colors.yellow,
-        padding: padding,
-        child: OutlinedButton(
-            onPressed: () {
-              ddlog("OutlinedButton");
-            },
-            child:Text("OutlinedButton")),
-      ),
-    );
-  }
-
-  _buildCustomPaint() {
+  Widget _buildCustomPaint() {
     return GestureDetector(
       onTap: (){
         ddlog("ontap");
@@ -754,30 +761,7 @@ class _SecondPageState extends State<SecondPage> {
     );
   }
 
-  _showCustomPopView() {
-    Navigator.push(context,
-      NPopupRoute(
-        child: Container(
-          color: Colors.red,
-          width: 91,
-          height: 36,
-          child: TextButton.icon(
-            onPressed: () {
-              ddlog("刷新");
-              Navigator.of(context).pop();
-            },
-            icon: Icon(Icons.refresh),
-            label: Text("刷新"),
-          ),
-        ),
-        onClick: () {
-          debugPrint("exit");
-        },
-      ),
-    );
-  }
-
-  _buildClipRRectGradientButton() {
+  Widget _buildGradientButton() {
     return ClipRRect(
       borderRadius: BorderRadius.circular(4),
       child: Stack(
@@ -797,8 +781,8 @@ class _SecondPageState extends State<SecondPage> {
           ),
           TextButton(
             style: TextButton.styleFrom(
+              foregroundColor: Colors.white,
               padding: const EdgeInsets.all(16.0),
-              primary: Colors.white,
               textStyle: const TextStyle(fontSize: 20),
             ),
             onPressed: () {},
@@ -809,7 +793,7 @@ class _SecondPageState extends State<SecondPage> {
     );
   }
 
-  _buildCustome() {
+  Widget _buildCustom() {
     return Column(
       children: [
         SizedBox(
@@ -818,61 +802,66 @@ class _SecondPageState extends State<SecondPage> {
           child: ElevatedButton(
             onPressed: () {},
             style: ElevatedButton.styleFrom(
-                elevation: 10, 
+                elevation: 10,
                 shape: const StadiumBorder(),
             ),
             child: const Center(child: Text('Elevated Button')),
           ),
         ),
-        SizedBox(
-          height: 45,
-          width: 60,
-          child: ElevatedButton(
-            onPressed: () {},
-            style: ElevatedButton.styleFrom(
-                elevation: 10, shape: const CircleBorder()),
-            child: const Center(child: Icon(Icons.add)),
-          ),
-        ),
-
-        Divider(),
-        Header.h5(title: "UIElevatedButton"),
-        UIElevatedButton(
-          height: 45,
-          width: 200,
-          onPressed: () {
-            debugPrint("Elevated");
-          },
-          child: Text('Elevated Button'),
-        ),
-        UIElevatedButton(
-          height: 45,
-          width: 60,
+        ElevatedButton(
+          onPressed: () {},
           style: ElevatedButton.styleFrom(
-              elevation: 4,
-              shape: const CircleBorder(),
+            padding: EdgeInsets.all(18),
+            elevation: 10,
+            shape: const CircleBorder()
           ),
-          onPressed: () {
-            debugPrint("Elevated");
-          },
-          child: const Center(child: Icon(Icons.add)),
+          child: const Center(
+            child: Icon(Icons.add)
+          ),
         ),
-
-        Divider(),
-        Header.h5(title: "_buildInkWell"),
-        _buildInkWell(),
-
-        Divider(),
-        Header.h5(title: "_buildButtonBar"),
-        _buildButtonBar(),
+        buildSection(
+          title: "UIElevatedButton",
+          child: Column(
+            children: [
+              UIElevatedButton(
+                height: 45,
+                width: 200,
+                onPressed: () {
+                  debugPrint("Elevated");
+                },
+                child: Text('Elevated Button'),
+              ),
+              UIElevatedButton(
+                height: 45,
+                width: 60,
+                style: ElevatedButton.styleFrom(
+                  elevation: 4,
+                  shape: const CircleBorder(),
+                ),
+                onPressed: () {
+                  debugPrint("Elevated");
+                },
+                child: const Center(child: Icon(Icons.add)),
+              ),
+            ],
+          ),
+        ),
+        buildSection(
+          title: "_buildInkWell",
+          child: _buildInkWell(),
+        ),
+        buildSection(
+          title: "_buildButtonBar",
+          child: _buildButtonBar(),
+        ),
       ],
     );
   }
 
 
   int _volume = 0;
-  _buildInkWell() {
-    return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
+  Widget _buildInkWell() {
+    return StatefulBuilder(builder: (context, setState) {
       return Column(
         children: [
           InkWell(
@@ -889,7 +878,7 @@ class _SecondPageState extends State<SecondPage> {
     });
   }
 
-  _buildButtonBar() {
+  Widget _buildButtonBar() {
     return ButtonBar(
       children: ['Ok', 'Cancel', ].map((e) => ElevatedButton(
         onPressed: () {
