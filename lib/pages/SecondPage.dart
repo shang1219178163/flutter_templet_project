@@ -439,8 +439,41 @@ class _SecondPageState extends State<SecondPage> {
               child: _buildCustomPaint()
             ),
             buildSection(
-              title: "buildCustome",
-              child: _buildCustom()
+              title: "ElevatedButton",
+              child: Column(
+                children: [
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.all(16),
+                      elevation: 4,
+                      shape: const StadiumBorder(),
+                    ),
+                    onPressed: () {
+                      debugPrint("Elevated");
+                    },
+                    child: Text('Elevated Button'),
+                  ),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.all(16),
+                      elevation: 4,
+                      shape: const CircleBorder(),
+                    ),
+                    onPressed: () {
+                      debugPrint("Elevated");
+                    },
+                    child: const Center(child: Icon(Icons.add)),
+                  ),
+                ],
+              ),
+            ),
+            buildSection(
+              title: "_buildInkWell",
+              child: _buildInkWell(),
+            ),
+            buildSection(
+              title: "_buildButtonBar",
+              child: _buildButtonBar(),
             ),
           ],
         ),
@@ -800,51 +833,6 @@ class _SecondPageState extends State<SecondPage> {
       ),
     );
   }
-
-  Widget _buildCustom() {
-    return Column(
-      children: [
-        buildSection(
-          title: "ElevatedButton",
-          child: Column(
-            children: [
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.all(16),
-                  elevation: 4,
-                  shape: const StadiumBorder(),
-                ),
-                onPressed: () {
-                  debugPrint("Elevated");
-                },
-                child: Text('Elevated Button'),
-              ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.all(16),
-                  elevation: 4,
-                  shape: const CircleBorder(),
-                ),
-                onPressed: () {
-                  debugPrint("Elevated");
-                },
-                child: const Center(child: Icon(Icons.add)),
-              ),
-            ],
-          ),
-        ),
-        buildSection(
-          title: "_buildInkWell",
-          child: _buildInkWell(),
-        ),
-        buildSection(
-          title: "_buildButtonBar",
-          child: _buildButtonBar(),
-        ),
-      ],
-    );
-  }
-
 
   int _volume = 0;
   Widget _buildInkWell() {
