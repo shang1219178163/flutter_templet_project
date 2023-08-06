@@ -14,7 +14,6 @@ import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/pages/demo/MyPainter.dart';
 import 'package:flutter_templet_project/basicWidget/n_popup_route.dart';
-import 'package:flutter_templet_project/basicWidget/gesture_detector_container.dart';
 import 'package:flutter_templet_project/basicWidget/upload_button.dart';
 import 'package:flutter_templet_project/extension/button_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
@@ -280,19 +279,6 @@ class _SecondPageState extends State<SecondPage> {
                 ).toList(),
               ),
             ),
-<<<<<<< HEAD
-
-            Divider(),
-            Header.h5(title: "NTextAndIcon + OutlinedButton"),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: iconDirectionItems().map((e) => OutlinedButton(
-                  style: OutlinedButton.styleFrom(
-                   padding: EdgeInsets.zero,
-                    // padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                    side: BorderSide(color: ColorExt.random),
-                  ),
-=======
             buildSection(
               title: "NTextAndIcon + OutlinedButton copy",
               child: Row(
@@ -303,7 +289,6 @@ class _SecondPageState extends State<SecondPage> {
                   //   // padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                   //   side: BorderSide(color: ColorExt.random),
                   // ),
->>>>>>> develop
                   onPressed: () {
                     debugPrint("ElevatedButton");
                   },
