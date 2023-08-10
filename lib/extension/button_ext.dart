@@ -9,7 +9,7 @@
 
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_text_and_icon.dart';
+import 'package:flutter_templet_project/basicWidget/n_label_and_icon.dart';
 
 extension ButtonStyleExt on ButtonStyle {
 

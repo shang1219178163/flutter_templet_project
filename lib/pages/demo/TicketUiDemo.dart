@@ -14,6 +14,8 @@ import 'package:flutter_templet_project/basicWidget/TicketUI.dart';
 
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_dash_line.dart';
+import 'package:flutter_templet_project/basicWidget/n_ticket_divider_painter.dart';
 
 class TicketUiDemo extends StatefulWidget {
 
@@ -27,7 +29,7 @@ class TicketUiDemo extends StatefulWidget {
 
 class _TicketUiDemoState extends State<TicketUiDemo> {
 
-  final int _count = 6;
+  final int _count = 3;
   final double _spacing = 12;
 
   @override
@@ -63,11 +65,10 @@ class _TicketUiDemoState extends State<TicketUiDemo> {
                   margin: margin,
                   width: constraints.maxWidth,
                   child: CustomPaint(
-                    painter: TicketPainter(
+                    painter: NTicketDividerPainter(
                       borderColor: Colors.black.withOpacity(0.5),
                       borderStrokeWidth: 1,
                       bgColor: Colors.blue.withOpacity(0.5),
-                      cornerRadius: 15,
                       cutoutRadius: 15,
                     ),
                     child: StatefulBuilder(
@@ -75,6 +76,18 @@ class _TicketUiDemoState extends State<TicketUiDemo> {
                         return Container(
                           padding: const EdgeInsets.all(16),
                           // color: Colors.green.withOpacity(0.7),
+                          decoration: BoxDecoration(
+                            // color: Colors.white,
+                            // border: Border.all(color: Colors.blue),
+                            borderRadius: BorderRadius.all(Radius.circular(16.r)),
+                            boxShadow: [
+                              BoxShadow(
+                                offset: Offset(0, 8.w),
+                                blurRadius: 8.w,
+                                color: Colors.black.withOpacity(0.3),
+                              )
+                            ],
+                          ),
                           child: Column(
                             children: [
                               _buildHeadder(),
@@ -103,9 +116,8 @@ class _TicketUiDemoState extends State<TicketUiDemo> {
     return Container(
       height: 3,
       margin: EdgeInsets.symmetric(horizontal: 4),
-      child: DashLine(
+      child: NDashLine(
         color: Colors.white,
-        dashHeight: 4,
         dashWidth: 6,
       ),
     );

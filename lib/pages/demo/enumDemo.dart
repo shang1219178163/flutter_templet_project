@@ -73,7 +73,7 @@ class _EnumDemoState extends State<EnumDemo> {
 
               return ListTile(
                 title: Text(e.name),
-                subtitle: Text("value:${e.value}, index:${e.index}"),
+                subtitle: Text("value:${e.value}, ${e.desc}, index:${e.index}"),
               );
             }).toList(),
           )

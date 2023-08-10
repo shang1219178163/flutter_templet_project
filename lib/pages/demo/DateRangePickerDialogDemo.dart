@@ -38,6 +38,7 @@ class _DateRangePickerDialogDemoState extends State<DateRangePickerDialogDemo> w
   Widget build(BuildContext context) {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
 
+    debugPrint("models: $models");
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),

@@ -458,6 +458,8 @@ var list = [
   Tuple2(APPRouter.customSingleChildLayoutDemo, "customSingleChildLayoutDemo", ),
   Tuple2(APPRouter.customMultiChildLayoutDemo, "customMultiChildLayoutDemo", ),
   Tuple2(APPRouter.pageBuilderDemo, "pageBuilderDemo", ),
+  Tuple2(APPRouter.npageViewDemo, "npageViewDemo", ),
+  Tuple2(APPRouter.boxShadowDemoOne, "shadowDemo", ),
 
 
 
@@ -510,6 +512,7 @@ var specials = [
   Tuple2(APPRouter.pageViewAndBarDemo, "pageViewAndBarDemo", ),
   Tuple2(APPRouter.mediaQueryScreeenDemo, "屏幕尺寸研究", ),
   Tuple2(APPRouter.neomorphismHomePage, "拟物风格", ),
+  Tuple2(APPRouter.refreshListView, "refreshListView", ),
 
 
 ];

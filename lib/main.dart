@@ -8,6 +8,7 @@
 
 
 
+import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -262,6 +263,8 @@ class _MyHomePageState extends State<MyHomePage> {
       CacheService().setString(CACHE_APP_PACKAGE_NAME, value.packageName);
       CacheService().setString(CACHE_APP_VERSION, value.version);
     });
+
+    configRefresh();
     super.initState();
   }
 
@@ -388,6 +391,39 @@ class _MyHomePageState extends State<MyHomePage> {
     return Future.value(packageInfo);
   }
 
+  /// 上拉刷新,下拉加载全局配置
+  configRefresh() {
+    EasyRefresh.defaultHeaderBuilder = () => const ClassicHeader(
+      triggerOffset: 50,
+      showMessage: false,
+      dragText: "下拉刷新",
+      armedText: "释放刷新",
+      readyText: "正在刷新...",
+      processingText: "正在刷新...",
+      processedText: "刷新完成",
+      noMoreText: "我可是有底线的 ~",
+      failedText: "刷新失败",
+      messageText: '更新时间 %T',
+    );
+
+    EasyRefresh.defaultFooterBuilder = () => const ClassicFooter(
+      triggerOffset: 50,
+      showMessage: false,
+      dragText: "上拉加载",
+      armedText: "释放加载",
+      readyText: "加载中...",
+      processingText: "加载中...",
+      processedText: "加载完成",
+      noMoreText: "我可是有底线的 ~",
+      failedText: "加载失败",
+      // messageBuilder: (context, state, text, dateTime) {
+      //   return SizedBox();
+      // },
+      noMoreIcon: SizedBox(),
+    );
+  }
+
+
   test() {
     var a = 85.99999;
     var b = 488.236;
@@ -442,82 +478,3 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-///左侧抽屉菜单
-class MyDrawer extends StatelessWidget {
-  const MyDrawer({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Drawer(
-      child: MediaQuery.removePadding(
-        context: context,
-        //移除抽屉菜单顶部默认留白
-        removeTop: true,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.only(top: 38.0),
-              child: Row(
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16.0),
-                    child: ClipOval(
-                      // child: Image.asset(
-                      //   "images/avatar.png",
-                      //   width: 80,
-                      // ),
-                      child: FlutterLogo(size: 60,),
-                    ),
-                  ),
-                  Text(
-                    "Wendux",
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  )
-                ],
-              ),
-            ),
-            Expanded(
-              child: ListView(
-                children: <Widget>[
-                  ListTile(
-                    leading: Icon(Icons.add),
-                    title: Text('Add account'),
-                    trailing: Icon(Icons.add_a_photo),
-                    onTap: (){
-                      ddlog(context);
-                    },
-                  ),
-                  Divider(
-                    indent: 15,
-                    endIndent: 15,
-                    height: 1,
-                    color: Colors.grey,
-                  ),
-                  ListTile(
-                    leading: Icon(Icons.settings),
-                    title: Text('Manage accounts'),
-                    onTap: (){
-                      ddlog(Icons.title);
-                    },
-                  ),
-                  ListTile(
-                    leading: Icon(Icons.person),
-                    title: Text(
-                      "Your Profile",
-                    ),
-                    onTap: (){
-                      debugPrint("Tapped Profile");
-                    },
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}

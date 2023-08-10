@@ -1,7 +1,7 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_text_and_icon.dart';
+import 'package:flutter_templet_project/basicWidget/n_label_and_icon.dart';
 
 /// 图标文字按钮,支持水平和垂直显示
 class NTextButton extends StatelessWidget {
@@ -56,8 +56,8 @@ class NTextButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final content = NTextAndIcon(
-      text: text,
+    final content = NLabelAndIcon(
+      label: text,
       icon: icon,
       direction: direction,
       isReverse: isReverse,

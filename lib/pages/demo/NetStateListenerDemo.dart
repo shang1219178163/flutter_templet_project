@@ -7,6 +7,7 @@
 //
 
 import 'package:connectivity/connectivity.dart';
+import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/NNet/NNet.dart';
@@ -29,12 +30,13 @@ class NetStateListenerDemo extends StatefulWidget {
 
 class _NetStateListenerDemoState extends State<NetStateListenerDemo> {
 
-  final _refreshKey = GlobalKey<NNetContainerListViewState>();
+  late final _easyRefreshController = EasyRefreshController(
+    controlFinishRefresh: true,
+    controlFinishLoad: true,
+  );
 
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
@@ -54,11 +56,11 @@ class _NetStateListenerDemoState extends State<NetStateListenerDemo> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               ElevatedButton(
-                onPressed: () => _refreshKey.currentState?.easyRefreshController.callRefresh(),
+                onPressed: () => _easyRefreshController.callRefresh(),
                 child: Text("callRefresh"),
               ),
               ElevatedButton(
-                onPressed: () => _refreshKey.currentState?.easyRefreshController.callLoad(),
+                onPressed: () => _easyRefreshController.callLoad(),
                 child: Text("callLoad"),
               ),
             ]
@@ -71,8 +73,9 @@ class _NetStateListenerDemoState extends State<NetStateListenerDemo> {
             height: 400,
             width: double.maxFinite,
             child: NNetContainerListView<String>(
-              key: _refreshKey,
+              refreshController: _easyRefreshController,
               onRequest: (bool isRefesh, int page, int pageSize, last) async {
+
                 return await Future.delayed(const Duration(milliseconds: 1500), () {
                   final result = List<String>.generate(3, (i) => 'page_${page}_pageSize_${pageSize}_Item_$i');
                   return Future.value(result);
@@ -82,6 +85,7 @@ class _NetStateListenerDemoState extends State<NetStateListenerDemo> {
                 debugPrint(error.toString());
               },
               itemBuilder: (BuildContext context, int index, data) {
+
                 return ListTile(
                   leading: Icon(Icons.ac_unit),
                   title: Text("$data"),

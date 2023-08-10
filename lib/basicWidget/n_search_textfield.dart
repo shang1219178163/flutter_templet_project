@@ -32,29 +32,33 @@ class NSearchTextfield extends StatefulWidget {
 
   NSearchTextfield({
     Key? key,
-    this.title,
-    required this.controller,
+    this.controller,
     this.placeholder = "请输入",
     this.backgroundColor,
     this.borderRadius = const BorderRadius.all(Radius.circular(4)),
+    this.padding = const EdgeInsetsDirectional.fromSTEB(3.8, 8, 5, 8),
     this.delay = const Duration(milliseconds: 500),
-    required this.cb,
+    required this.onChanged,
+    this.onSubmitted,
+    this.onSuffixTap,
   }) : super(key: key);
 
-  String? title;
-
-  TextEditingController controller;
+  TextEditingController? controller;
   /// 默认请输入
   String placeholder;
   /// 默认浅灰色
   Color? backgroundColor;
   /// 默认圆角 4px
   BorderRadius? borderRadius;
+
+  EdgeInsetsGeometry padding;
   /// 默认0.5秒延迟
   final Duration delay;
 
   /// 回调
-  ValueChanged<String> cb;
+  ValueChanged<String> onChanged;
+  ValueChanged<String>? onSubmitted;
+  VoidCallback? onSuffixTap;
 
   @override
   _NSearchTextfieldState createState() => _NSearchTextfieldState();
@@ -64,14 +68,18 @@ class _NSearchTextfieldState extends State<NSearchTextfield> {
 
   late final _debounce = Debounce(delay: widget.delay);
 
+  late final _controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return buildSearch(
-      controller: widget.controller,
+      controller: widget.controller ?? _controller,
       placeholder: widget.placeholder,
       backgroundColor: widget.backgroundColor,
       borderRadius: widget.borderRadius,
-      cb: widget.cb,
+      onChanged: widget.onChanged,
+      onSubmitted: widget.onSubmitted,
+      onSuffixTap: widget.onSuffixTap,
     );
   }
 
@@ -80,18 +88,21 @@ class _NSearchTextfieldState extends State<NSearchTextfield> {
     required String placeholder,
     Color? backgroundColor,
     BorderRadius? borderRadius,
-    required ValueChanged<String> cb,
+    required ValueChanged<String> onChanged,
+    ValueChanged<String>? onSubmitted,
+    VoidCallback? onSuffixTap,
+    EdgeInsetsGeometry? padding,
   }) {
     return CupertinoSearchTextField(
       controller: controller,
       placeholder: placeholder,
       backgroundColor: backgroundColor,
       borderRadius: borderRadius,
-      // padding: EdgeInsets.zero,
+      padding: padding ?? EdgeInsets.zero,
       prefixIcon: Image(
         image: "icon_search.png".toAssetImage(),
-        width: 20.h,
-        height: 20.h,
+        width: 14.h,
+        height: 14.h,
       ),
       prefixInsets: EdgeInsets.only(
         left: 12.w,
@@ -113,14 +124,18 @@ class _NSearchTextfieldState extends State<NSearchTextfield> {
       onChanged: (String value) {
         _debounce(() {
           // debugPrint('searchText: $value');
-          cb.call(value);
+          onChanged.call(value);
         });
       },
       onSubmitted: (String value) {
         _debounce(() {
           // debugPrint('onSubmitted: $value');
-          cb.call(value);
+          onChanged.call(value);
         });
+      },
+      onSuffixTap: onSuffixTap ?? (){
+        controller.clear();
+        onChanged.call("");
       },
     );
   }

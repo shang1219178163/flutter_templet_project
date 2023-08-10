@@ -7,7 +7,7 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_text_and_icon.dart';
+import 'package:flutter_templet_project/basicWidget/n_label_and_icon.dart';
 import 'package:flutter_templet_project/extension/button_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/navigator_ext.dart';
@@ -130,20 +130,20 @@ class BottomSheetDemo extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        NTextAndIcon<int>(
-          text: Text("CALL"),
+        NLabelAndIcon<int>(
+          label: Text("CALL"),
           icon: Icon(Icons.call),
           direction: Axis.vertical,
           data: 0,
         ),
-        NTextAndIcon(
-          text: Text("SHARE"),
+        NLabelAndIcon(
+          label: Text("SHARE"),
           icon: Icon(Icons.open_in_new),
           direction: Axis.vertical,
           data: 1,
         ),
-        NTextAndIcon(
-          text: Text("SAVE"),
+        NLabelAndIcon(
+          label: Text("SAVE"),
           icon: Icon(Icons.playlist_add),
           direction: Axis.vertical,
           data: 2,
@@ -163,30 +163,30 @@ class BottomSheetDemo extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        NTextAndIcon<int>(
-          text: Text("Share"),
+        NLabelAndIcon<int>(
+          label: Text("Share"),
           icon: Icon(Icons.share, color: Colors.blue,),
           data: 0,
         ),
-        NTextAndIcon(
-          text: Text("Get link"),
+        NLabelAndIcon(
+          label: Text("Get link"),
           icon: Icon(Icons.link, color: Colors.blue,),
           data: 1,
         ),
-        NTextAndIcon(
-          text: Text("Edit name"),
+        NLabelAndIcon(
+          label: Text("Edit name"),
           icon: Icon(Icons.edit, color: Colors.blue,),
           data: 2,
         ),
-        NTextAndIcon(
-          text: Text('Delete collection'),
+        NLabelAndIcon(
+          label: Text('Delete collection'),
           icon: Icon(Icons.delete, color: Colors.blue,),
           data: 3,
         ),
       ].map((e) {
         return ListTile(
           leading: e.icon,
-          title: e.text,
+          title: e.label,
           onTap: () {
             cb(e.data);
           }

@@ -34,17 +34,20 @@ import 'package:flutter_templet_project/pages/LoginPageTwo.dart';
 import 'package:flutter_templet_project/pages/demo/MediaQueryDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/MediaQueryScreeenDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NExpandTextDemo.dart';
+import 'package:flutter_templet_project/pages/demo/NPageViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NSkeletonDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PageBuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PageViewAndBarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PageViewDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/PageViewDemoThree.dart';
+import 'package:flutter_templet_project/pages/demo/RefreshListView.dart';
 import 'package:flutter_templet_project/pages/demo/StackDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/StackDemoTwo.dart';
 import 'package:flutter_templet_project/pages/demo/SuspensionButtonDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TextFieldColorChangeDemo.dart';
 import 'package:flutter_templet_project/pages/demo/UploadFileDemo.dart';
 import 'package:flutter_templet_project/pages/demo/enumDemo.dart';
+import 'package:flutter_templet_project/pages/demo/box_shadow_demo_one.dart';
 import 'package:flutter_templet_project/pages/homeSrollDemo.dart';
 import 'package:flutter_templet_project/pages/demo/BuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ButtonStyleDemo.dart';
@@ -566,7 +569,9 @@ class APPRouter {
   static const uploadFileDemo = '/uploadFileDemo';
   static const customSingleChildLayoutDemo = '/customSingleChildLayoutDemo';
   static const customMultiChildLayoutDemo = '/customMultiChildLayoutDemo';
-
+  static const refreshListView = '/refreshListView';
+  static const npageViewDemo = '/npageViewDemo';
+  static const boxShadowDemoOne = '/boxShadowDemoOne';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -896,6 +901,11 @@ class AppPage {
     GetPage(name: APPRouter.uploadFileDemo, page: () => UploadFileDemo(),),
     GetPage(name: APPRouter.customSingleChildLayoutDemo, page: () => CustomSingleChildLayoutDemo(),),
     GetPage(name: APPRouter.customMultiChildLayoutDemo, page: () => CustomMultiChildLayoutDemo(),),
+    GetPage(name: APPRouter.refreshListView, page: () => RefreshListView(),),
+    GetPage(name: APPRouter.npageViewDemo, page: () => NPageViewDemo(),),
+    GetPage(name: APPRouter.boxShadowDemoOne, page: () => BoxShadowDemoOne(),),
+
+
 
   ];
 }

@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_templet_project/APPThemeSettings.dart';
 import 'package:flutter_templet_project/basicWidget/after_layout_builder.dart';
-import 'package:flutter_templet_project/basicWidget/n_text_and_icon.dart';
+import 'package:flutter_templet_project/basicWidget/dash_decoration.dart';
+import 'package:flutter_templet_project/basicWidget/n_label_and_icon.dart';
+import 'package:flutter_templet_project/basicWidget/n_painter_arc.dart';
 import 'package:flutter_templet_project/basicWidget/n_text_button.dart';
 import 'package:flutter_templet_project/basicWidget/radial_button.dart';
 import 'package:flutter_templet_project/basicWidget/header.dart';
@@ -323,8 +325,8 @@ class _SecondPageState extends State<SecondPage> {
                 onPressed: () { debugPrint("MaterialButton"); },
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: NTextAndIcon(
-                    text: Text("MaterialButton"),
+                  child: NLabelAndIcon(
+                   label: Text("MaterialButton"),
                     icon: Icon(Icons.info),
                   ),
                 ),
@@ -439,6 +441,24 @@ class _SecondPageState extends State<SecondPage> {
               child: _buildCustomPaint()
             ),
             buildSection(
+              title: "MyPainterArc",
+              child: Container(
+                height: 100,
+                width: 120,
+                // color: Colors.green,
+                child: RotatedBox(
+                  quarterTurns: 3,
+                  child: CustomPaint(
+                    painter: NPainterArc(
+                      color: Colors.yellow,
+                      percent: 0.5,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+
+            buildSection(
               title: "ElevatedButton",
               child: Column(
                 children: [
@@ -475,6 +495,18 @@ class _SecondPageState extends State<SecondPage> {
               title: "_buildButtonBar",
               child: _buildButtonBar(),
             ),
+
+            Container(
+              width: 200,
+              height: 100,
+              decoration: DashedDecoration(
+                color: Colors.grey,
+                dashedColor: Colors.red,
+
+                borderRadius: BorderRadius.all(Radius.circular(30.0))
+              ),
+
+            )
           ],
         ),
       ],
@@ -492,24 +524,24 @@ class _SecondPageState extends State<SecondPage> {
   }
 
   /// icon 上下左右
-  List<NTextAndIcon> iconDirectionItems() {
+  List<NLabelAndIcon> iconDirectionItems() {
     return [
-      NTextAndIcon(
-        text: Text("left"),
+      NLabelAndIcon(
+        label: Text("left"),
         icon: Icon(Icons.info),
       ),
-      NTextAndIcon(
-        text: Text("right"),
+      NLabelAndIcon(
+        label: Text("right"),
         icon: Icon(Icons.info),
         isReverse: true,
       ),
-      NTextAndIcon(
-        text: Text("top"),
+      NLabelAndIcon(
+        label: Text("top"),
         icon: Icon(Icons.info),
         direction: Axis.vertical,
       ),
-      NTextAndIcon(
-        text: Text("bottom"),
+      NLabelAndIcon(
+        label: Text("bottom"),
         icon: Icon(Icons.info),
         direction: Axis.vertical,
         isReverse: true,
@@ -794,7 +826,6 @@ class _SecondPageState extends State<SecondPage> {
         color: Colors.green,
         child: CustomPaint(
           painter: MyPainter(
-            padding: EdgeInsets.only(top: 5, left: 10, bottom: 15, right: 20),
             color: Colors.yellow,
           ),
         ),

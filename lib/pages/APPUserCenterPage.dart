@@ -8,7 +8,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/APPThemeSettings.dart';
-import 'package:flutter_templet_project/basicWidget/n_text_and_icon.dart';
+import 'package:flutter_templet_project/basicWidget/n_label_and_icon.dart';
 import 'package:flutter_templet_project/extension/button_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
@@ -157,11 +157,11 @@ class _APPUserCenterPageState extends State<APPUserCenterPage>{
             onTap: (){
               debugPrint("value: $e");
             },
-            child: NTextAndIcon(
-              text: Text(e.item1,
+            child: NLabelAndIcon(
+              label: Text(e.item1,
                 style: TextStyle(fontSize: 15,
-                fontWeight: FontWeight.w400,
-                color: Color(0xFF666666),
+                  fontWeight: FontWeight.w400,
+                  color: Color(0xFF666666),
                 ),
               ),
               icon: Icon(

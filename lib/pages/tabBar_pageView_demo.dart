@@ -78,7 +78,7 @@ class _TabBarPageViewDemoState extends State<TabBarPageViewDemo> with SingleTick
       floatingActionButton: FloatingActionButton(
         tooltip: 'Increment',
         onPressed: () {
-          ddlog(["a", 18, null, true, ["1", "2", "3"], {"a": "aa", "b": "bb"}]);
+
         },
         child: Icon(Icons.add),
       ),
@@ -90,7 +90,10 @@ class _TabBarPageViewDemoState extends State<TabBarPageViewDemo> with SingleTick
     return PreferredSize(
       preferredSize: Size.fromHeight(48),
       child: Theme(
-        data: Theme.of(context).copyWith(colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.white)),
+        data: Theme.of(context).
+          copyWith(colorScheme: ColorScheme.fromSwatch().
+          copyWith(secondary: Colors.white)
+        ),
         child: Container(
           height: 40,
           alignment: Alignment.center, //圆点居中
@@ -155,9 +158,8 @@ class _TabBarPageViewDemoState extends State<TabBarPageViewDemo> with SingleTick
     return PageView(
       controller: _pageController,
       onPageChanged: (index) {
-        setState(() {
-          _tabController.animateTo(index);
-        });
+        _tabController.animateTo(index);
+        setState(() {});
       },
       // children: _pages.map((e) => Tab(text: e.item1)).toList(),
       children: items.map((e) => e.item2).toList(),
