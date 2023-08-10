@@ -6,8 +6,11 @@
 //  Copyright © 10/14/21 shang. All rights reserved.
 //
 
+import 'dart:typed_data';
+import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 
 extension BuildContextExt on BuildContext {
@@ -99,6 +102,40 @@ extension BuildContextExt on BuildContext {
   /// 视图距离底边的高度(有键盘:键盘高度 + 34, 无键盘 0)
   double get viewBottom => mediaQuery.viewInsets.bottom;
 
+  /// 截图(组件必须是 RepaintBoundary)
+  Future<ui.Image?> toImage({ double? pixelRatio }) async {
+    var boundary = findRenderObject() as RenderRepaintBoundary?;
+    var image = await boundary?.toImage(pixelRatio: pixelRatio ?? ui.window.devicePixelRatio);
+
+    // ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
+    // Uint8List? pngBytes = byteData?.buffer.asUint8List() ?? Uint8List(10);
+    // ui.Image img = ui.Image.memory(pngBytes);
+    return image;
+  }
+
+  /// 组件截图转 ByteData (组件必须是 RepaintBoundary)
+  Future<ByteData?> toImageByteData({ double? pixelRatio }) async {
+    final image = await toImage(pixelRatio: pixelRatio);
+    final byteData = await image?.toByteData(format: ui.ImageByteFormat.png);
+    return byteData;
+  }
+
+  /// 组件截图转 Uint8List (组件必须是 RepaintBoundary)
+  Future<Uint8List?> toImageUint8List({ double? pixelRatio }) async {
+    final byteData = await toImageByteData(pixelRatio: pixelRatio);
+    final uint8List = byteData?.buffer.asUint8List();
+    return uint8List;
+  }
+
+  /// 组件截图转 Image Widget(组件必须是 RepaintBoundary)
+  Future<Image?> toImageWidget({ double? pixelRatio }) async {
+    final pngBytes = await toImageUint8List(pixelRatio: pixelRatio);
+    if (pngBytes == null) {
+      return null;
+    }
+    final img = Image.memory(pngBytes);
+    return img;
+  }
 }
 
 extension StatefulWidgetExt<T extends StatefulWidget> on State<T> {
