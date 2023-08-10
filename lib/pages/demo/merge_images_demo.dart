@@ -201,16 +201,19 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
     );
   }
 
-  Future<ui.Image> _capturePic(GlobalKey key) async {
-    var buildContext = key.currentContext!;
-    debugPrint("key:$key:$buildContext");
+  Future<ui.Image?> _capturePic(GlobalKey key) async {
+    debugPrint("key:$key");
+    var buildContext = key.currentContext;
+    if (buildContext == null) {
+      return null;
+    }
     var boundary = buildContext.findRenderObject() as RenderRepaintBoundary?;
     var image = await boundary?.toImage(pixelRatio: ui.window.devicePixelRatio);
 
     // ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
     // Uint8List? pngBytes = byteData?.buffer.asUint8List() ?? Uint8List(10);
     // ui.Image img = ui.Image.memory(pngBytes);
-    return Future.value(image);
+    return image;
   }
 
   /// 合成截图
@@ -219,6 +222,9 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
       var one = await _capturePic(repaintBoundaryKey1);
       var two = await _capturePic(repaintBoundaryKey2);
       var three = await _capturePic(repaintBoundaryKey3);
+      if (one == null || two == null || three == null) {
+        return null;
+      }
 
       debugPrint("three: ${three.width} ${three.height}");
       var totalWidth = one.width > two.width ? one.width : two.width;
@@ -269,6 +275,9 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
     try {
       ui.Image? one = await _capturePic(repaintBoundaryKey1);
       ui.Image? two = await _capturePic(repaintBoundaryKey2);
+      if (one == null || two == null) {
+        return null;
+      }
       debugPrint("two: ${two.width} ${two.height}");
 
       var totalWidth = one.width > two.width ? one.width : two.width;

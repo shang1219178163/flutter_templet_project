@@ -89,7 +89,9 @@ class _BottomAppBarDemoState extends State<BottomAppBarDemo> {
     ShapeBorder? buttonShape = BeveledRectangleBorder(
       borderRadius: BorderRadius.circular(10)
     );
-    buttonShape = StadiumBorder(side: BorderSide(color: Colors.transparent));
+    buttonShape = StadiumBorder(
+        side: BorderSide(color: Colors.transparent)
+    );
     return Scaffold(
       appBar: AppBar(
         // automaticallyImplyLeading: false,
@@ -99,7 +101,7 @@ class _BottomAppBarDemoState extends State<BottomAppBarDemo> {
         height: 80,
         shape: AutomaticNotchedShape(
           RoundedRectangleBorder(),
-          buttonShape
+          buttonShape,
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
