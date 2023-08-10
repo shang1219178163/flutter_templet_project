@@ -3,11 +3,11 @@
 import 'package:flutter/material.dart';
 
 /// 图标文字,支持水平和垂直显示
-class NTextAndIcon<T> extends StatelessWidget {
+class NLabelAndIcon<T> extends StatelessWidget {
 
-  const NTextAndIcon({
+  const NLabelAndIcon({
     Key? key,
-    required this.text,
+    required this.label,
     this.icon,
     this.isReverse = false,
     this.betweenGap = 6,
@@ -23,7 +23,7 @@ class NTextAndIcon<T> extends StatelessWidget {
   }) : super(key: key);
 
   /// 文字
-  final Widget text;
+  final Widget label;
   /// 图标
   final Widget? icon;
   /// 标题图标翻转
@@ -54,7 +54,7 @@ class NTextAndIcon<T> extends StatelessWidget {
     var children = <Widget>[
       if (icon != null)icon!,
       gap,
-      Flexible(child: text),
+      Flexible(child: label),
     ];
 
     if (isReverse) {
