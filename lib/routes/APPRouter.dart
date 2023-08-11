@@ -163,6 +163,7 @@ import 'package:flutter_templet_project/vendor/custom_timer_demo.dart';
 import 'package:flutter_templet_project/vendor/dotted_border_demo.dart';
 import 'package:flutter_templet_project/vendor/flutter_swiper_demo.dart';
 import 'package:flutter_templet_project/vendor/flutter_swiper_indicator_demo.dart';
+import 'package:flutter_templet_project/vendor/getx/getx_demo.dart';
 import 'package:flutter_templet_project/vendor/qr/qr_code_scanner_demo.dart';
 import 'package:flutter_templet_project/vendor/qr/qr_flutter_demo.dart';
 import 'package:flutter_templet_project/vendor/soundAbount/SoundPlayDemo.dart';
@@ -572,6 +573,8 @@ class APPRouter {
   static const refreshListView = '/refreshListView';
   static const npageViewDemo = '/npageViewDemo';
   static const boxShadowDemoOne = '/boxShadowDemoOne';
+  static const getxDemo = '/getxDemo';
+
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -904,7 +907,7 @@ class AppPage {
     GetPage(name: APPRouter.refreshListView, page: () => RefreshListView(),),
     GetPage(name: APPRouter.npageViewDemo, page: () => NPageViewDemo(),),
     GetPage(name: APPRouter.boxShadowDemoOne, page: () => BoxShadowDemoOne(),),
-
+    GetPage(name: APPRouter.getxDemo, page: () => GetxDemo(),),
 
 
   ];

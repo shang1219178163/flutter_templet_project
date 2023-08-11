@@ -59,7 +59,8 @@ class NTicketDividerPainter extends CustomPainter {
       ..strokeWidth = borderStrokeWidth
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round
-      ..color = borderColor;
+      ..color = borderColor
+    ;
 
     final paintDottedLine = Paint()
       ..color = borderColor.withOpacity(0.5)
@@ -70,7 +71,8 @@ class NTicketDividerPainter extends CustomPainter {
     path.moveTo(maxWidth, rightCutoutStartY);//
     _drawCutout(path, maxWidth, rightCutoutStartY + _cutoutDiameter);
 
-    path.lineTo(0, leftCutoutStartY);
+    path.moveTo(0, leftCutoutStartY);
+    // path.lineTo(0, leftCutoutStartY);
     _drawCutout(path, 0.0, leftCutoutStartY - _cutoutDiameter);
 
     canvas.drawPath(path, paintBg);

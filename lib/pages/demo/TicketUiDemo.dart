@@ -35,6 +35,7 @@ class _TicketUiDemoState extends State<TicketUiDemo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // backgroundColor: Colors.black.withOpacity(0.1),
       appBar: AppBar(
         title: Text("$widget"),
         actions: ['done',].map((e) => TextButton(
@@ -47,6 +48,24 @@ class _TicketUiDemoState extends State<TicketUiDemo> {
       body: SafeArea(
         child: LayoutBuilder(
           builder: (context, constraints) {
+            return Column(
+              children: [
+                Container(
+                  width: 200,
+                  height: 200,
+                  color: Colors.black.withOpacity(0.1),
+                  child: CustomPaint(
+                    painter: NTicketDividerPainter(
+                    // borderColor: Colors.black.withOpacity(0.5),
+                    borderColor: Colors.blue,
+                      borderStrokeWidth: 1,
+                      bgColor: Colors.transparent,
+                      cutoutRadius: 15,
+                    ),
+                  ),
+                ),
+              ],
+            );
             return ListView.separated(
               itemCount: _count,
               separatorBuilder: (BuildContext context, int index) {
@@ -66,9 +85,10 @@ class _TicketUiDemoState extends State<TicketUiDemo> {
                   width: constraints.maxWidth,
                   child: CustomPaint(
                     painter: NTicketDividerPainter(
-                      borderColor: Colors.black.withOpacity(0.5),
+                      // borderColor: Colors.black.withOpacity(0.5),
+                      borderColor: Colors.blue,
                       borderStrokeWidth: 1,
-                      bgColor: Colors.blue.withOpacity(0.5),
+                      bgColor: Colors.red,
                       cutoutRadius: 15,
                     ),
                     child: StatefulBuilder(

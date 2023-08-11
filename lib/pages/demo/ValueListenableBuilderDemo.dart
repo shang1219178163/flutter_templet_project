@@ -52,9 +52,9 @@ class _ValueListenableBuilderDemoState extends State<ValueListenableBuilderDemo>
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children:MyResult.values.map((e) => FloatingActionButton(
+              children:MyResult.values.map((e) => FloatingActionButton.extended(
                 onPressed: () => netState.value = e,
-                child: Text("$e".split(".")[1]),
+                label: Text("$e".split(".")[1]),
               )).toList(),
             ),
             ValueListenableBuilder<MyResult>(
