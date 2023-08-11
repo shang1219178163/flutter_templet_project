@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_cancel_and_confirm_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_slide_transition_builder.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/overlay_ext.dart';
@@ -105,14 +106,35 @@ class _OverlayDemoState extends State<OverlayDemo> {
             ].map((e) {
               return ElevatedButton(
                 onPressed: () {
-                  showPopupView(
+
+                  presentModalView(
                     alignment: e,
+                    barrierDismissible: false,
+                    builder: (context, onHide) {
+
+                      return Container(
+                        height: 300,
+                        width: 300,
+                        color: Colors.yellow,
+                        child: Column(
+                          children: [
+                            FlutterLogo(size: 200,),
+                            NCancelAndConfirmBar(
+                              onCancel: (){
+                              },
+                              onConfirm: (){
+                                onHide();
+                              }
+                            ),
+                          ],
+                        ),
+                      );
+                    }
                   );
                 },
                 child: Text('PopupView ${e}'),
               );
             }).toList(),
-
           ],
         ),
     );
@@ -136,22 +158,6 @@ class _OverlayDemoState extends State<OverlayDemo> {
         ),
       ),
     );
-  }
-
-  showPopupView({Alignment alignment = Alignment.bottomCenter}) {
-    showEntry(child: Material(
-      color: Colors.black.withOpacity(0.1),
-      child: InkWell(
-        onTap: (){
-          hideEntry();
-        },
-        child: NSlideTransitionBuilder(
-          alignment: alignment,
-          hasFade: false,
-          // child: FlutterLogo(),
-        ),
-      ),
-    ));
   }
 }
 

@@ -1,6 +1,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_adaptive_text.dart';
+import 'package:flutter_templet_project/basicWidget/n_slide_transition_builder.dart';
+
+typedef OverlayWidgetBuilder = Widget Function(BuildContext context, VoidCallback onHide);
 
 
 extension OverlayExt<T extends StatefulWidget> on State<T> {
@@ -9,11 +12,15 @@ extension OverlayExt<T extends StatefulWidget> on State<T> {
   /// overlay 层集合
   static final List<OverlayEntry> _entriesList = [];
   /// 当前弹窗
-  static OverlayEntry? _overlayEntry;
+  static OverlayEntry? get currentOverlayEntry {
+    if (_entriesList.isEmpty) {
+      return null;
+    }
+    return _entriesList[_entriesList.length - 1];
+  }
 
   /// 有 OverlayEntry 显示中
   bool get isLoading => _entriesList.isNotEmpty;
-
 
   /// OverlayEntry 弹窗展示
   OverlayEntry? showEntry({
@@ -24,23 +31,25 @@ extension OverlayExt<T extends StatefulWidget> on State<T> {
     if (isReplace) {
       hideEntry();
     }
-    _overlayEntry ??= OverlayEntry(
+
+    final overlayEntry = OverlayEntry(
       maintainState: maintainState,
       builder: (_) => child,
     );
-    _overlayState.insert(_overlayEntry!);
-    _entriesList.add(_overlayEntry!);
-    return _overlayEntry;
+
+    _overlayState.insert(overlayEntry);
+    _entriesList.add(overlayEntry);
+    return overlayEntry;
   }
 
   /// OverlayEntry 弹窗移除
-  hideEntry() {
-    if (_overlayEntry == null) {
+  hideEntry({duration = const Duration(milliseconds: 350)}) {
+    if (currentOverlayEntry == null) {
       return;
     }
-    _overlayEntry?.remove();
-    _entriesList.remove(_overlayEntry!);
-    _overlayEntry = null;
+    Future.delayed(duration, () { });
+    currentOverlayEntry?.remove();
+    _entriesList.remove(currentOverlayEntry!);
   }
 
   /// OverlayEntry 清除
@@ -57,10 +66,10 @@ extension OverlayExt<T extends StatefulWidget> on State<T> {
     Widget? child,
     Alignment alignment = Alignment.center,
     Duration duration = const Duration(milliseconds: 2000),
-    bool isDismiss = true,
     bool barrierDismissible = true,
     Color? barrierColor = Colors.black54,
     VoidCallback? onBarrier,
+    bool isLast = false,
   }) {
     Widget content = NAdaptiveText(
       data: text,
@@ -68,26 +77,89 @@ extension OverlayExt<T extends StatefulWidget> on State<T> {
       child: child,
     );
 
-    if (barrierDismissible) {
+    if (barrierColor != null) {
       content = Stack(
         children: [
-          InkWell(
-            onTap: onBarrier,
-            child: Container(
-              decoration: BoxDecoration(
-                color: barrierColor,
+          Material(
+            color: Colors.black.withOpacity(0.1),
+            child: InkWell(
+              onTap: onBarrier,
+              child: Container(
+                decoration: BoxDecoration(
+                  color: barrierColor,
+                ),
               ),
             ),
           ),
-          content
+          content,
         ],
       );
     }
     showEntry(child: content);
 
-    if (isDismiss) {
+    if (barrierDismissible) {
       Future.delayed(duration, hideEntry);
     }
   }
 
+  /// 滑进滑出弹窗
+  presentModalView({
+    Alignment alignment = Alignment.bottomCenter,
+    duration = const Duration(milliseconds: 350),
+    bool barrierDismissible = true,
+    required OverlayWidgetBuilder builder,
+  }) {
+    final globalKey = GlobalKey<NSlideTransitionBuilderState>();
+
+    onHide() async {
+      await globalKey.currentState?.controller.reverse();
+      hideEntry();
+    }
+
+    showEntry(
+      child: Material(
+        color: Colors.black.withOpacity(0.1),
+        child: InkWell(
+          onTap: !barrierDismissible ? null : onHide,
+          child: NSlideTransitionBuilder(
+            key: globalKey,
+            alignment: alignment,
+            duration: duration,
+            hasFade: false,
+            child: builder(context, onHide),
+          ),
+        ),
+      )
+    );
+  }
+
+
+
+  presentPopupView({Alignment alignment = Alignment.bottomCenter,
+    duration = const Duration(milliseconds: 350)
+  }) {
+    final globalKey = GlobalKey<NSlideTransitionBuilderState>();
+
+    showEntry(
+      child: Material(
+        color: Colors.black.withOpacity(0.1),
+        child: InkWell(
+          onTap: () async {
+            // Future.delayed(duration, () {
+            //   hideEntry();
+            // });
+            await globalKey.currentState?.controller.reverse();
+            hideEntry();
+          },
+          child: NSlideTransitionBuilder(
+            key: globalKey,
+            alignment: alignment,
+            duration: duration,
+            hasFade: false,
+            // child: FlutterLogo(),
+          ),
+        ),
+      )
+    );
+  }
 }

@@ -23,14 +23,18 @@ class NSlideTransitionBuilder extends StatefulWidget {
   final Widget? child;
 
   @override
-  _NSlideTransitionBuilderState createState() => _NSlideTransitionBuilderState();
+  NSlideTransitionBuilderState createState() => NSlideTransitionBuilderState();
 }
 
-class _NSlideTransitionBuilderState extends State<NSlideTransitionBuilder> with SingleTickerProviderStateMixin {
+class NSlideTransitionBuilderState extends State<NSlideTransitionBuilder> with SingleTickerProviderStateMixin {
   late final _controller = AnimationController(
     duration: widget.duration,
+    reverseDuration: widget.duration,
     vsync: this,
   );
+
+  AnimationController get controller => _controller;
+
 
   late final Animation<Offset> _offsetAnimation;
 
@@ -68,6 +72,9 @@ class _NSlideTransitionBuilderState extends State<NSlideTransitionBuilder> with 
     _offsetAnimation = tween.animate(_controller);
 
     _controller.forward();
+    // Future.delayed(widget.duration, (){
+    //   _controller.reverse();
+    // });
   }
 
   @override
@@ -100,4 +107,8 @@ class _NSlideTransitionBuilderState extends State<NSlideTransitionBuilder> with 
     );
   }
 
+  /// 消失动画
+  onDismissAnimation() {
+    _controller.reverse();
+  }
 }
