@@ -27,19 +27,6 @@ extension SizeExt on Size {
     return Size(widthNew, height);
   }
 
-
-  // /// 获取雷达渐进色 radius
-  // radiusOfRadialGradient({
-  //   Alignment alignment = Alignment.center,
-  // }) {
-  //   final max = math.max(width, height);
-  //   final min = math.min(width, height);
-  //   double result = max/min;
-  //   if (alignment.x != 0) {
-  //     result *= 2.0;
-  //   }
-  //   return result;
-  // }
 }
 
 

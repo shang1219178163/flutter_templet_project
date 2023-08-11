@@ -14,40 +14,40 @@ import 'package:flutter_templet_project/extension/widget_ext.dart';
 
 
 extension AlertDialogExt on AlertDialog{
-
-  ///按平台弹出不同样式
-  static void toShowAlert({
-    required BuildContext context,
-    Widget? title,
-    Widget? content,
-    required List<String> actionTitles,
-    required void Function(String value) callback}) {
-
-    switch(Platform.operatingSystem) {
-      case "android":
-        AlertDialog(
-          title: title,
-          content: content,
-          actions: actionTitles.map((e) => TextButton(onPressed: (){
-            callback(e);
-          }, child: Text(e),)).toList()
-          ,
-        ).toShowDialog(context: context);
-
-        break;
-      default:
-
-        CupertinoAlertDialog(
-          title: title,
-          content: content,
-          actions: actionTitles.map((e) => TextButton(
-            onPressed: (){
-              callback(e);
-            },
-            child: Text(e),)).toList(),
-        ).toShowDialog(context: context);
-        break;
-    }
-  }
+  //
+  // ///按平台弹出不同样式
+  // static void toShowAlert({
+  //   required BuildContext context,
+  //   Widget? title,
+  //   Widget? content,
+  //   required List<String> actionTitles,
+  //   required void Function(String value) callback}) {
+  //
+  //   switch(Platform.operatingSystem) {
+  //     case "android":
+  //       AlertDialog(
+  //         title: title,
+  //         content: content,
+  //         actions: actionTitles.map((e) => TextButton(onPressed: (){
+  //           callback(e);
+  //         }, child: Text(e),)).toList()
+  //         ,
+  //       ).toShowDialog(context: context);
+  //
+  //       break;
+  //     default:
+  //
+  //       CupertinoAlertDialog(
+  //         title: title,
+  //         content: content,
+  //         actions: actionTitles.map((e) => TextButton(
+  //           onPressed: (){
+  //             callback(e);
+  //           },
+  //           child: Text(e),)).toList(),
+  //       ).toShowDialog(context: context);
+  //       break;
+  //   }
+  // }
 }
 
