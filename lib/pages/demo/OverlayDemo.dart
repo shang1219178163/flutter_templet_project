@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/slide_transition_builder.dart';
+import 'package:flutter_templet_project/basicWidget/n_slide_transition_builder.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/overlay_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
@@ -145,7 +145,7 @@ class _OverlayDemoState extends State<OverlayDemo> {
         onTap: (){
           hideEntry();
         },
-        child: SlideTransitionBuilder(
+        child: NSlideTransitionBuilder(
           alignment: alignment,
           hasFade: false,
           // child: FlutterLogo(),
@@ -185,15 +185,15 @@ class ToastWidget extends StatefulWidget {
 }
 
 class _ToastWidgetState extends State<ToastWidget> with SingleTickerProviderStateMixin {
-  late final AnimationController opacity;
+  late final opacityAnim = AnimationController(
+    vsync: this,
+    duration: widget.transitionDuration,
+  );
 
   @override
   void initState() {
     super.initState();
-    opacity = AnimationController(
-      vsync: this,
-      duration: widget.transitionDuration,
-    )..forward();
+    opacityAnim.forward();
 
     // final startFadeOutAt = widget.duration - widget.transitionDuration;
     // print('startFadeOutAt: $startFadeOutAt');
@@ -202,14 +202,14 @@ class _ToastWidgetState extends State<ToastWidget> with SingleTickerProviderStat
 
   @override
   void dispose() {
-    opacity.dispose();
+    opacityAnim.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return FadeTransition(
-      opacity: opacity,
+      opacity: opacityAnim,
       child: Align(
         alignment: widget.alignment,
         child: widget.builder?.call(context, setState) ?? _buildDefaultContainer(widget.text,

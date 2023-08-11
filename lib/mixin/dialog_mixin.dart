@@ -122,6 +122,24 @@ mixin DialogMixin{
       ),
     );
 
+    final page = Material(
+      color: barrierColor ?? Colors.black.withOpacity(0.05),
+      child: InkWell(
+        onTap: onBarrier ?? () {
+          // Navigator.of(context).pop();
+          AppUti.removeInputFocus();
+        },
+        child: Container(
+            padding: contentOffset,
+            color: barrierColor ?? Colors.black.withOpacity(0.05),
+            child: Align(
+              alignment: alignment,
+              child: child,
+            )
+        ),
+      ),
+    );
+
     return showGeneralDialog(
       context: context,
       barrierDismissible: false,
@@ -129,23 +147,7 @@ mixin DialogMixin{
       transitionDuration: Duration(milliseconds: 200),
       pageBuilder: (context, animation, secondaryAnimation) {
 
-        return Material(
-          color: barrierColor ?? Colors.black.withOpacity(0.05),
-          child: InkWell(
-            onTap: onBarrier ?? () {
-              // Navigator.of(context).pop();
-              AppUti.removeInputFocus();
-            },
-            child: Container(
-              padding: contentOffset,
-              color: barrierColor ?? Colors.black.withOpacity(0.05),
-              child: Align(
-                alignment: alignment,
-                child: child,
-              )
-            ),
-          ),
-        );
+        return page;
       }
     );
   }

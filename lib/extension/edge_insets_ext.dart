@@ -11,10 +11,12 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 
+
 extension EdgeInsetsExt on EdgeInsets{
 
   /// 负值转 0
   EdgeInsets get positive {
+    return convert((e) => max(0, e));
     return EdgeInsets.only(
       top: top >= 0 ? top : 0,
       right: right >= 0 ? right : 0,

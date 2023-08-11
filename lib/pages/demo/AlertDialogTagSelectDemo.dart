@@ -20,7 +20,7 @@ class AlertDialogTagSelectDemo extends StatefulWidget {
 
 class _AlertDialogTagSelectDemoState extends State<AlertDialogTagSelectDemo> {
 
-  final items = List.generate(20, (index) => index);
+  final items = List.generate(10, (i) => "$i");
 
   /// 标签列表
   late List<SelectModel> tags = items.map((e) => SelectModel(
@@ -50,8 +50,39 @@ class _AlertDialogTagSelectDemoState extends State<AlertDialogTagSelectDemo> {
           onPressed: onPressed,)
         ).toList(),
       ),
-      body: Text(selectTagNames.toString())
+      body: Column(
+        children: [
+          buildWrap(
+            onTap: onTap,
+          ),
+        ],
+      )
     );
+  }
+
+
+  Widget buildWrap({required ValueChanged<int> onTap,}) {
+    return Wrap(
+      spacing: 8.0,
+      runSpacing: 8.0,
+      alignment: WrapAlignment.start,
+      children: items.map((e) {
+
+        final i = items.indexOf(e);
+        return ActionChip(
+          avatar: CircleAvatar(
+            backgroundColor: Theme.of(context).primaryColor,
+            child: Text("$e"),
+          ),
+          label: Text(e),
+          onPressed: () => onTap.call(i),
+        );
+      }).toList(),
+    );
+  }
+
+  onTap(int i) {
+    debugPrint(i.toString());
   }
 
   onPressed(){
@@ -77,7 +108,8 @@ class _AlertDialogTagSelectDemoState extends State<AlertDialogTagSelectDemo> {
             context: context,
             applicationName: "最多选择 3 个",
         );
-      }
+      },
+
     );
   }
 
