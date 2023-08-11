@@ -176,7 +176,7 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
     re.$1.add("a");
     re.$2["a"] = "aa";
     debugPrint("re1:${re}");
-    
+
 
     ({int a, int b}) recordAB = (a: 1, b: 2);
 

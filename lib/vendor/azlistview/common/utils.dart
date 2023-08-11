@@ -3,7 +3,7 @@ import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/vendor/azlistview/common/index.dart';
 
 class Utils {
-  static String getImgPath(String name, {String format: 'png'}) {
+  static String getImgPath(String name, {String format = 'png'}) {
     if (name.contains(".")) {
       return 'assets/images/$name';
     }
