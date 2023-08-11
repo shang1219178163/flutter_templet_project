@@ -377,7 +377,7 @@ class ComponentPage extends StatelessWidget {
     ];
 
     return Scaffold(
-      appBar: TitleAppBar('Components'),
+      appBar: TitleAppBar(title: Text('Components')),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Table(

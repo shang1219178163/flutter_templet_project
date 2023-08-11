@@ -11,7 +11,7 @@ class TimelineStatusPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: TitleAppBar('Timeline Status'),
+      appBar: TitleAppBar(title: Text('Timeline Status')),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12.0),

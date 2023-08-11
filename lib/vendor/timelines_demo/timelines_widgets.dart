@@ -54,22 +54,15 @@ class NavigationCard extends StatelessWidget with NavigateMixin {
   }
 }
 
-class TitleAppBar extends StatelessWidget with PreferredSizeWidget {
-  TitleAppBar(
-    this.title, {
-    Key? key,
-  })  : preferredSize = Size.fromHeight(kToolbarHeight),
-        super(key: key);
+class TitleAppBar extends AppBar {
+  TitleAppBar({
+    super.key, 
+    super.title,
+  });
 
-  @override
-  final Size preferredSize;
-
-  final String title;
-
-  @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text(title),
+      title: title,
     );
   }
 }

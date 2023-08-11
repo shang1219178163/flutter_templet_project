@@ -38,35 +38,43 @@ class BottomSheetDemo extends StatelessWidget {
         return Center(
           child: TextButton(
             onPressed: () {
-              showModalBottomSheet(
-                context: context,
-                builder: (context) {
-                  return SafeArea(
-                    child: Stack(
-                      clipBehavior: Clip.none,
-                      children: [
-                        _buildList(context),
-                        Positioned(
-                          top: -30,
-                          right: 15,
-                          child: FloatingActionButton(
-                            foregroundColor: Colors.blue,
-                            backgroundColor: Colors.white,
-                            onPressed: () {
-                              ddlog("directions_bike");
-                            },
-                            child: Icon(Icons.directions_bike),
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              );
+              showSheet(context);
             },
             child: Text('SHOW BOTTOM SHEET'),
           ),
         );
+      },
+    );
+  }
+
+  showSheet(BuildContext context) {
+    final content = SafeArea(
+      child: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          _buildList(context),
+          Positioned(
+            top: -30,
+            right: 15,
+            child: FloatingActionButton(
+              foregroundColor: Colors.blue,
+              backgroundColor: Colors.white,
+              onPressed: () {
+                ddlog("directions_bike");
+              },
+              child: Icon(Icons.directions_bike),
+            ),
+          ),
+        ],
+      ),
+    );
+
+    showModalBottomSheet(
+      // showDragHandle: true,
+      context: context,
+      builder: (context) {
+
+        return content;
       },
     );
   }

@@ -32,7 +32,7 @@ mixin BottomSheetMixin{
     Color barrierColor = kCupertinoModalBarrierColor,
     bool barrierDismissible = true,
     bool useRootNavigator = true,
-    bool? semanticsDismissible,
+    bool semanticsDismissible = false,
     RouteSettings? routeSettings,
   }) {
     final child = CupertinoActionSheet(
@@ -76,7 +76,7 @@ mixin BottomSheetMixin{
     Color barrierColor = kCupertinoModalBarrierColor,
     bool barrierDismissible = true,
     bool useRootNavigator = true,
-    bool? semanticsDismissible,
+    bool semanticsDismissible = false,
     RouteSettings? routeSettings,
   }) {
 

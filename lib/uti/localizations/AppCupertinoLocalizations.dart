@@ -88,7 +88,7 @@ class AppCupertinoLocalizations extends CupertinoLocalizations {
   String datePickerMediumDate(DateTime date) => localizations.datePickerMediumDate(date);
 
   @override
-  String datePickerDayOfMonth(int dayIndex) => localizations.datePickerDayOfMonth(dayIndex);
+  String datePickerDayOfMonth(int dayIndex, [int? weekDay]) => localizations.datePickerDayOfMonth(dayIndex);
 
   @override
   String datePickerMonth(int monthIndex) => localizations.datePickerMonth(monthIndex);
@@ -104,6 +104,10 @@ class AppCupertinoLocalizations extends CupertinoLocalizations {
 
   @override
   List<String> get timerPickerSecondLabels => localizations.timerPickerSecondLabels;
+
+  @override
+  // TODO: implement noSpellCheckReplacementsLabel
+  String get noSpellCheckReplacementsLabel => throw UnimplementedError();
 
 }
 

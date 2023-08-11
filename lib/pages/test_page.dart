@@ -91,36 +91,38 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
         ),
       ),
       body: SingleChildScrollView(
-          child: Column(
-            children: [
-              buildWrap(),
-              buildSection1(),
-              StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
+        child: Column(
+          children: [
+            buildWrap(),
+            buildSection1(),
+            StatefulBuilder(
+              builder: (context, setState) {
                 return buildSection2();
-              }),
-              RepaintBoundary(child: buildSection3(),),
-              Container(
-                margin: const EdgeInsets.all(8),
-                color: Colors.green,
-                child: Container(
-                    width: 200,
-                    height: 40,
-                    child: Text('widget.title')
-                ),
+              }
+            ),
+            RepaintBoundary(child: buildSection3(),),
+            Container(
+              margin: const EdgeInsets.all(8),
+              color: Colors.green,
+              child: Container(
+                  width: 200,
+                  height: 40,
+                  child: Text('widget.title')
               ),
-              TextField(
-                cursorColor: Colors.purple,
-                cursorRadius: Radius.circular(8.0),
-                cursorWidth: 8.0,
-              ),
+            ),
+            TextField(
+              cursorColor: Colors.purple,
+              cursorRadius: Radius.circular(8.0),
+              cursorWidth: 8.0,
+            ),
 
-              buildBtnColor(),
-              buildSection4(),
-              buildSection5(),
-              SizedBox(height: 34,),
-            ],
-          ),
-        )
+            buildBtnColor(),
+            buildSection4(),
+            buildSection5(),
+            SizedBox(height: 34,),
+          ],
+        ),
+      )
     );
 
 
@@ -156,32 +158,40 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
     final shard = Singleton();
     final shard1 = Singleton.instance;
     final shard2 = Singleton.getInstance();
+    debugPrint("Singleton: ${shard == shard1 && shard1 == shard2}");
 
-    debugPrint(shard.toString());
-    debugPrint(shard1.toString());
-    debugPrint(shard2.toString());
-    debugPrint("${shard == shard1}");
-    debugPrint("${shard1 == shard2}");
-    debugPrint("${shard == shard2}");
+    var record1 = ('first', 2, true, 'last');
+    debugPrint("record1.1:${record1.$1}");
+    debugPrint("record1.2:${record1.$2}");
+    debugPrint("record1.3:${record1.$3}");
+    debugPrint("record1.4:${record1.$4}");
 
-    const aa = "我是谁";
-    const bb = "https://stackoverflow.com/questions/26107125/cannot-read-property-addeventlistener-of-null";
+    final list = <int>[];
 
-    final map = {
-      r"a": aa,
-      r"b": bb,
-    };
-    debugPrint("map:$map");
-    debugPrint("a:${map["a"]}");
-    debugPrint("d:${map["d"]}");
+    final lastElement = list.lastOrNull;
+
+    (List<String> a, Map<String, dynamic> b) re = ([], {});
+    debugPrint("re:${re}");
+
+    re.$1.add("a");
+    re.$2["a"] = "aa";
+    debugPrint("re1:${re}");
+    
+
+    ({int a, int b}) recordAB = (a: 1, b: 2);
+
+    (double lat, double lon) geoLocation(String name) =>
+        (231.23, 36.8219);
+
+
   }
 
 
   Wrap buildWrap() {
     return Wrap(
-      spacing: 8.0, // 主轴(水平)方向间距
-      runSpacing: 8.0, // 纵轴（垂直）方向间距
-      alignment: WrapAlignment.start, //沿主轴方向居中
+      spacing: 8.0,
+      runSpacing: 8.0,
+      alignment: WrapAlignment.start,
       children: titles.map((e) => ActionChip(
         avatar: CircleAvatar(backgroundColor: Theme.of(context).primaryColor,
             child: Text(e.characters.first.toUpperCase())
@@ -496,3 +506,7 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
 
 
 
+extension RecordExt on Record{
+
+
+}

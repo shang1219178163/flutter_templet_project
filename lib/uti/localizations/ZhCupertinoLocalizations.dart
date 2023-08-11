@@ -37,7 +37,7 @@ class ZhCupertinoLocalizations implements CupertinoLocalizations {
   String datePickerMonth(int monthIndex) => monthIndex.toString();
 
   @override
-  String datePickerDayOfMonth(int dayIndex) => dayIndex.toString();
+  String datePickerDayOfMonth(int dayIndex, [int? weekDay]) => dayIndex.toString();
 
   @override
   String datePickerHour(int hour) => hour.toString();
@@ -148,6 +148,10 @@ class ZhCupertinoLocalizations implements CupertinoLocalizations {
   @override
   // TODO: implement timerPickerSecondLabels
   List<String> get timerPickerSecondLabels => throw UnimplementedError();
+
+  @override
+  // TODO: implement noSpellCheckReplacementsLabel
+  String get noSpellCheckReplacementsLabel => throw UnimplementedError();
 }
 
 

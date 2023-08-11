@@ -346,7 +346,7 @@ class _SecondPageState extends State<SecondPage> {
                 tooltip: '这是一个图标按钮',
                 icon: Icon(Icons.arrow_back_ios_new),
                 iconSize: 30,
-                color: Theme.of(context).accentColor,
+                color: Theme.of(context).colorScheme.primary,
                 onPressed: () {
                   ddlog("这是一个图标按钮");
                 },

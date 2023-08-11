@@ -150,7 +150,8 @@ class DashedDecoration extends Decoration {
   final bool? dawDashed;
 
   @override
-  EdgeInsetsGeometry? get padding => border?.dimensions;
+  EdgeInsetsGeometry get padding => border?.dimensions ?? EdgeInsets.zero;
+
 
   @override
   Path getClipPath(Rect rect, TextDirection textDirection) {

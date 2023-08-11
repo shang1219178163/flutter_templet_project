@@ -9,7 +9,7 @@ import audio_session
 import connectivity_macos
 import desktop_drop
 import file_selector_macos
-import package_info_plus_macos
+import package_info_plus
 import path_provider_foundation
 import photo_manager
 import shared_preferences_foundation

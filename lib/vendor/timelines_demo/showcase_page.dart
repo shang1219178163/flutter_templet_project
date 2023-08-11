@@ -14,7 +14,7 @@ class ShowcasePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: TitleAppBar('Showcase'),
+      appBar: TitleAppBar(title: Text('Showcase')),
       body: LayoutBuilder(
         builder: (context, constraints) {
           final cards = [

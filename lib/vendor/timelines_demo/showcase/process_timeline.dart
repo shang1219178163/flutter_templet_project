@@ -37,7 +37,7 @@ class _ProcessTimelinePageState extends State<ProcessTimelinePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: TitleAppBar('Process Timeline'),
+      appBar: TitleAppBar(title: Text('Process Timeline')),
       body: Timeline.tileBuilder(
         theme: TimelineThemeData(
           direction: Axis.horizontal,

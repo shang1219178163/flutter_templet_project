@@ -75,7 +75,7 @@ extension WidgetExt on Widget {
     Color barrierColor = kCupertinoModalBarrierColor,
     bool barrierDismissible = true,
     bool useRootNavigator = true,
-    bool? semanticsDismissible,
+    bool semanticsDismissible = false,
     RouteSettings? routeSettings,
   }) => showCupertinoModalPopup(
     context: context,

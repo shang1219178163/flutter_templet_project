@@ -10,8 +10,7 @@ analyzer:
 #    - non-nullable
 
 environment:
-  sdk: ">=2.17.0 <=3.10.0"
-  flutter: ">=2.2.3"
+  sdk: ">=3.0.0 <=3.10.0"
 
 dependencies:
   flutter:
@@ -70,8 +69,7 @@ dependencies:
 
   shared_preferences: ^2.0.7
   #获取appName、packageName、version、buildNumber
-  package_info_plus: ^1.4.2
-
+  package_info_plus: ^4.1.0
   get: ^4.1.4
   get_storage: ^2.0.2
 
@@ -122,12 +120,12 @@ dependencies:
   color_converter: ^0.2.1
   horizontal_data_table: ^4.1.4
   image_picker: ^1.0.0
-  wechat_assets_picker: ^8.4.3
+  wechat_assets_picker: ^8.6.2
   dotted_border: ^2.0.0+3
   #  merge_images: ^1.0.3
 
   flutter_image_compress: ^2.0.3
-  extended_image: ^7.0.2
+  extended_image: ^8.0.2
 
   flutter_sound: ^9.2.13
   audio_session: ^0.1.6
