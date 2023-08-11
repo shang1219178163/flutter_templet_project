@@ -816,7 +816,6 @@ class _EnhanceStepperState extends State<EnhanceStepper>
               AnimatedSize(
                 curve: Curves.fastOutSlowIn,
                 duration: kThemeAnimationDuration,
-                vsync: this,
                 child: widget.steps[widget.currentStep].content,
               ),
               _buildVerticalControls(widget.currentStep),
