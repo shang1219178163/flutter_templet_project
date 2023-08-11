@@ -1,9 +1,9 @@
 
 import 'package:flutter/material.dart';
 
-class FadeTransitionBuilder extends StatefulWidget {
+class NFadeTransitionBuilder extends StatefulWidget {
 
-  FadeTransitionBuilder({
+  NFadeTransitionBuilder({
     Key? key,
     this.duration = const Duration(milliseconds: 250),
     required this.builder,
@@ -15,10 +15,10 @@ class FadeTransitionBuilder extends StatefulWidget {
 
 
   @override
-  _FadeTransitionBuilderState createState() => _FadeTransitionBuilderState();
+  _NFadeTransitionBuilderState createState() => _NFadeTransitionBuilderState();
 }
 
-class _FadeTransitionBuilderState extends State<FadeTransitionBuilder> with SingleTickerProviderStateMixin {
+class _NFadeTransitionBuilderState extends State<NFadeTransitionBuilder> with SingleTickerProviderStateMixin {
 
   late final AnimationController opacity;
 

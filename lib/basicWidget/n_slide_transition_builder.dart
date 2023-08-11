@@ -3,9 +3,9 @@
 import 'package:flutter/material.dart';
 
 /// 滑动动画构造器
-class SlideTransitionBuilder extends StatefulWidget {
+class NSlideTransitionBuilder extends StatefulWidget {
 
-  SlideTransitionBuilder({
+  NSlideTransitionBuilder({
     Key? key,
     this.duration = const Duration(milliseconds: 350),
     this.alignment = Alignment.bottomCenter,
@@ -23,10 +23,10 @@ class SlideTransitionBuilder extends StatefulWidget {
   final Widget? child;
 
   @override
-  _SlideTransitionBuilderState createState() => _SlideTransitionBuilderState();
+  _NSlideTransitionBuilderState createState() => _NSlideTransitionBuilderState();
 }
 
-class _SlideTransitionBuilderState extends State<SlideTransitionBuilder> with SingleTickerProviderStateMixin {
+class _NSlideTransitionBuilderState extends State<NSlideTransitionBuilder> with SingleTickerProviderStateMixin {
   late final _controller = AnimationController(
     duration: widget.duration,
     vsync: this,
