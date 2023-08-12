@@ -104,6 +104,8 @@ extension OverlayExt<T extends StatefulWidget> on State<T> {
 
   /// 滑进滑出弹窗
   presentModalView({
+    bool isReplace = false,
+    bool maintainState = false,
     Alignment alignment = Alignment.bottomCenter,
     duration = const Duration(milliseconds: 350),
     bool barrierDismissible = true,
@@ -117,6 +119,8 @@ extension OverlayExt<T extends StatefulWidget> on State<T> {
     }
 
     showEntry(
+      isReplace: isReplace,
+      maintainState: maintainState,
       child: Material(
         color: Colors.black.withOpacity(0.1),
         child: InkWell(
