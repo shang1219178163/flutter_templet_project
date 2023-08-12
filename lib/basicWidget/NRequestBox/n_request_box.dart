@@ -78,7 +78,7 @@ import 'package:flutter_templet_project/uti/color_util.dart';
 //   );
 // }
 
-typedef WidgetToggleBuilder = Widget Function(BuildContext context, VoidCallback onToggle);
+typedef ToggleWidgetBuilder = Widget Function(BuildContext context, VoidCallback onToggle);
 
 /// 列表请求组件
 /// 支持: 下拉刷新,上拉加载; 搜索框回调; dropbox
@@ -101,7 +101,7 @@ class NRequestBox extends StatefulWidget {
   /// 为空时,不显示搜索栏
   final ValueChanged<String>? onSearchChanged;
   /// 带翻转方法的构建方法
-  final WidgetToggleBuilder? btnBuilder;
+  final ToggleWidgetBuilder? btnBuilder;
   /// 为空时,不显示右边按钮
   final Widget? dropView;
   /// 重置按钮
@@ -196,7 +196,7 @@ class _NRequestBoxState extends State<NRequestBox> {
     required TextEditingController? controller,
     String placeholder = "请搜索",
     required ValueChanged<String> onChanged,
-    WidgetToggleBuilder? btnBulder,
+    ToggleWidgetBuilder? btnBulder,
     VoidCallback? onClick,
   }) {
     return Container(

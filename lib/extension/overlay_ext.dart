@@ -114,6 +114,10 @@ extension OverlayExt<T extends StatefulWidget> on State<T> {
     final globalKey = GlobalKey<NSlideTransitionBuilderState>();
 
     onHide() async {
+      if (alignment == Alignment.center) {
+        hideEntry();
+        return;
+      }
       await globalKey.currentState?.controller.reverse();
       hideEntry();
     }

@@ -37,34 +37,23 @@ class _OverlayDemoState extends State<OverlayDemo> {
               children: [
                 Image.asset(
                   "icon_skipping.gif".toPath(),
-                  height: 200.0,
+                  height: 100.0,
                   width: 100.0,
                 ),
               ],
             ),
-            ElevatedButton(
-              onPressed: () {
-                var script = Platform.script.toString();
-                debugPrint("script: $script");
-                // final dir = Directory(path)
-
-              },
-              child: const Text('Show Toast topCenter'),
-            ),
-            ElevatedButton(
-              onPressed: () => showToast(text: 'Flutter is awesome!',
-                  barrierDismissible: false,
-                  alignment: Alignment.center,
-              ),
-              child: const Text('Show Toast center'),
-            ),
-            ElevatedButton(
-              onPressed: () => showToast(text: 'Flutter is awesome!',
-                barrierDismissible: false,
-                  alignment: Alignment.bottomCenter,
-              ),
-              child: const Text('Show Toast bottomCenter'),
-            ),
+            ...[Alignment.topCenter,
+              Alignment.center,
+              Alignment.bottomCenter,
+            ].map((e) {
+              return ElevatedButton(
+                onPressed: () => showToast(text: 'Flutter is awesome!',
+                  // barrierDismissible: false,
+                  alignment: e,
+                ),
+                child: Text('Show Toast: ${e.toString().split(".").last}'),
+              );
+            }).toList(),
             ElevatedButton(
               onPressed: () {
                 overlayEntry ??= OverlayEntry(
@@ -92,17 +81,11 @@ class _OverlayDemoState extends State<OverlayDemo> {
               },
               child: const Text('showEntry'),
             ),
-            ElevatedButton(
-              onPressed: () {
-                showToast();
-              },
-              child: const Text('OverlayExt'),
-            ),
             ...[Alignment.topCenter,
-            Alignment.bottomCenter,
-            Alignment.centerLeft,
-            Alignment.centerRight,
-            Alignment.center,
+              Alignment.centerLeft,
+              Alignment.centerRight,
+              Alignment.center,
+              Alignment.bottomCenter,
               Alignment.bottomLeft,
             ].map((e) {
               return ElevatedButton(
@@ -133,7 +116,7 @@ class _OverlayDemoState extends State<OverlayDemo> {
                     }
                   );
                 },
-                child: Text('PopupView ${e}'),
+                child: Text('PopupView: ${e}'),
               );
             }).toList(),
           ],
