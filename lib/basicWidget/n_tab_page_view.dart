@@ -8,11 +8,25 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:tuple/tuple.dart';
 
-/// TabBar + PageViewW
-class TabBarPageView extends StatefulWidget {
+
+/// TabBar + PageView
+class NTabPageView extends StatefulWidget {
+
+  const NTabPageView({
+    Key? key,
+    required this.items,
+    this.indicatorColor,
+    this.labelColor,
+    this.pageController,
+    this.tabController,
+    this.initialIndex = 0,
+    required this.onPageChanged,
+    this.canPageChanged,
+    this.isReverse = false,
+  }) : super(key: key);
+
 
   final List<Tuple2<String, Widget>> items;
 
@@ -24,48 +38,38 @@ class TabBarPageView extends StatefulWidget {
 
   final TabController? tabController;
 
+  final int initialIndex;
+
   final ValueChanged<int> onPageChanged;
 
   final bool Function(int)? canPageChanged;
 
-  final bool isTabBarTop;
+  final bool isReverse;
 
-  const TabBarPageView({
-    Key? key,
-    this.isTabBarTop = true,
-    required this.items,
-    this.indicatorColor,
-    this.labelColor,
-    this.pageController,
-    this.tabController,
-    required this.onPageChanged,
-    this.canPageChanged,
-  }) : super(key: key);
 
   @override
-  _TabBarPageViewState createState() => _TabBarPageViewState();
+  _NTabPageViewState createState() => _NTabPageViewState();
 }
 
-class _TabBarPageViewState extends State<TabBarPageView> with SingleTickerProviderStateMixin {
+class _NTabPageViewState extends State<NTabPageView> with SingleTickerProviderStateMixin {
 
-  late TabController _tabController;
-  late PageController _pageController;
+  late final _tabController = widget.tabController ?? TabController(
+      initialIndex: widget.initialIndex, length: widget.items.length, vsync: this);
+  late final _pageController = widget.pageController ?? PageController(
+      initialPage: widget.initialIndex, keepPage: true);
 
   ///是否允许滚动
   bool get canScrollable {
-    if (widget.canPageChanged != null && widget.canPageChanged!(_tabController.index) == false) {
-      return false;
-    }
-    return true;
+    final disable = (widget.canPageChanged?.call(_tabController.index) == false);
+    return !disable;
   }
 
   @override
   void initState() {
-    _tabController = widget.tabController ?? TabController(length: widget.items.length, vsync: this);
-    _pageController = widget.pageController ?? PageController(initialPage: 0, keepPage: true);
+    // _tabController = widget.tabController ?? TabController(length: widget.items.length, vsync: this);
+    // _pageController = widget.pageController ?? PageController(initialPage: 0, keepPage: true);
     // ..addListener(() {
     //   ddlog(_pageController.page);
-    //
     // });
 
     super.initState();
@@ -81,13 +85,16 @@ class _TabBarPageViewState extends State<TabBarPageView> with SingleTickerProvid
 
   @override
   Widget build(BuildContext context) {
-    final list = [
+    var list = [
       _buildTabBar(),
       _buildPageView(),
     ];
+    if (widget.isReverse) {
+      list = list.reversed.toList();
+    }
     return Column(
       mainAxisSize: MainAxisSize.min,
-      children: widget.isTabBarTop ? list : list.reversed.toList(),
+      children: list,
     );
   }
 
@@ -120,12 +127,10 @@ class _TabBarPageViewState extends State<TabBarPageView> with SingleTickerProvid
       controller: _tabController,
       tabs: widget.items.map((e) => Tab(text: e.item1)).toList(),
       labelColor: textColor,
-      indicator: widget.isTabBarTop ? decorationBom : decorationTop,
+      indicator: widget.isReverse ? decorationTop : decorationBom,
       onTap: (index) {
-        // ddlog(index);
-        setState(() {
-          _pageController.jumpToPage(index);
-        });
+        _pageController.jumpToPage(index);
+        setState(() {});
       },
     );
 
@@ -135,15 +140,15 @@ class _TabBarPageViewState extends State<TabBarPageView> with SingleTickerProvid
       );
     }
 
-    if (widget.isTabBarTop) {
-      return tabBar;
-    }
+    // if (widget.isReverse) {
+    //   return tabBar;
+    // }
 
     return Material(
-        color: bgColor,
-        child: SafeArea(
-          child: tabBar,
-        )
+      color: bgColor,
+      child: SafeArea(
+        child: tabBar,
+      )
     );
   }
 
@@ -154,9 +159,8 @@ class _TabBarPageViewState extends State<TabBarPageView> with SingleTickerProvid
         physics: canScrollable ? BouncingScrollPhysics() : NeverScrollableScrollPhysics(),
         onPageChanged: (index) {
           widget.onPageChanged(index);
-          setState(() {
-            _tabController.animateTo(index);
-          });
+          _tabController.animateTo(index);
+          setState(() {});
         },
         children: widget.items.map((e) => e.item2).toList(),
       ));

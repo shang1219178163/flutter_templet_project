@@ -8,21 +8,19 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/decoration_ext.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:tuple/tuple.dart';
 
+/// TabBar + TabBarView
+class NTabBarView extends StatefulWidget {
 
-class TabBarTabBarView extends StatefulWidget {
-
-  const TabBarTabBarView({
+  const NTabBarView({
     Key? key,
-    this.isTabBarTop = true,
+    this.isReverse = false,
     required this.items,
     this.indicatorColor,
     this.labelColor,
-    this.pageController,
     this.tabController,
+    this.initialIndex = 0,
     required this.onPageChanged,
     this.canPageChanged,
   }) : super(key: key);
@@ -33,37 +31,35 @@ class TabBarTabBarView extends StatefulWidget {
 
   final Color? labelColor;
 
-  final PageController? pageController;
-
   final TabController? tabController;
+
+  final int initialIndex;
 
   final ValueChanged<int> onPageChanged;
 
   final bool Function(int)? canPageChanged;
 
-  final bool isTabBarTop;
+  final bool isReverse;
 
   @override
-  _TabBarTabBarViewState createState() => _TabBarTabBarViewState();
+  _NTabBarViewState createState() => _NTabBarViewState();
 }
 
-class _TabBarTabBarViewState extends State<TabBarTabBarView> with SingleTickerProviderStateMixin {
+class _NTabBarViewState extends State<NTabBarView> with SingleTickerProviderStateMixin {
 
-  late TabController _tabController;
-  // late PageController _pageController;
+  late final _tabController = widget.tabController ?? TabController(
+    initialIndex: widget.initialIndex,
+    length: widget.items.length, vsync: this
+  );
 
   ///是否允许滚动
   bool get canScrollable {
-    if (widget.canPageChanged != null && widget.canPageChanged!(_tabController.index) == false) {
-      return false;
-    }
-    return true;
+    final disable = (widget.canPageChanged?.call(_tabController.index) == false);
+    return !disable;
   }
 
   @override
   void initState() {
-    _tabController = widget.tabController ??  TabController(length: widget.items.length, vsync: this);
-
     super.initState();
   }
 
@@ -76,13 +72,16 @@ class _TabBarTabBarViewState extends State<TabBarTabBarView> with SingleTickerPr
 
   @override
   Widget build(BuildContext context) {
-    final list = [
+    var list = [
       _buildTabBar(),
-      _buildPageView(),
+      _buildTabBarView(),
     ];
+    if (widget.isReverse) {
+      list = list.reversed.toList();
+    }
     return Column(
       mainAxisSize: MainAxisSize.min,
-      children: widget.isTabBarTop ? list : list.reversed.toList(),
+      children: list,
     );
   }
 
@@ -116,7 +115,7 @@ class _TabBarTabBarViewState extends State<TabBarTabBarView> with SingleTickerPr
       controller: _tabController,
       tabs: widget.items.map((e) => Tab(text: e.item1)).toList(),
       labelColor: textColor,
-      indicator: widget.isTabBarTop ? decorationBom : decorationTop,
+      indicator: widget.isReverse ? decorationTop : decorationBom,
       onTap: (index) {
         // ddlog([index, _tabController.index]);
         setState(() { });
@@ -129,9 +128,9 @@ class _TabBarTabBarViewState extends State<TabBarTabBarView> with SingleTickerPr
       );
     }
 
-    if (widget.isTabBarTop) {
-      return tabBar;
-    }
+    // if (widget.isReverse) {
+    //   return tabBar;
+    // }
 
     return Material(
         color: bgColor,
@@ -141,13 +140,14 @@ class _TabBarTabBarViewState extends State<TabBarTabBarView> with SingleTickerPr
     );
   }
 
-  Widget _buildPageView() {
+  Widget _buildTabBarView() {
     return Expanded(
       child: TabBarView(
         physics: canScrollable ? BouncingScrollPhysics() : NeverScrollableScrollPhysics(),
         controller: _tabController,
         children: widget.items.map((e) => e.item2).toList(),
-      ),);
+      ),
+    );
   }
 
 }

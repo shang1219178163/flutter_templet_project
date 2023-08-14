@@ -9,8 +9,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/app_update_card.dart';
 import 'package:flutter_templet_project/basicWidget/list_subtitle_cell.dart';
-import 'package:flutter_templet_project/basicWidget/tabBar_pageView.dart';
-import 'package:flutter_templet_project/basicWidget/tabBar_tabBarView.dart';
+import 'package:flutter_templet_project/basicWidget/n_tab_page_view.dart';
+import 'package:flutter_templet_project/basicWidget/n_tab_bar_view.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/divider_ext.dart';
 import 'package:flutter_templet_project/model/mock_data.dart';
@@ -33,7 +33,7 @@ class _TabBarReusePageDemoState extends State<TabBarReusePageDemo> {
 
   bool isPageView = true;
 
-  bool isTop = true;
+  bool isBom = false;
 
   @override
   Widget build(BuildContext context) {
@@ -49,11 +49,12 @@ class _TabBarReusePageDemoState extends State<TabBarReusePageDemo> {
             },
             child: Icon(Icons.change_circle_outlined, color: Colors.white,)
           ),
-          TextButton(onPressed: () {
-            isTop = !isTop;
-            setState(() {});
-          },
-            child: Text(isTop ? "底部" : "顶部", style: TextStyle(color: Colors.white),)
+          TextButton(
+            onPressed: () {
+              isBom = !isBom;
+              setState(() {});
+            },
+            child: Text(!isBom ? "底部" : "顶部", style: TextStyle(color: Colors.white),)
           ),
         ],
       ),
@@ -62,8 +63,8 @@ class _TabBarReusePageDemoState extends State<TabBarReusePageDemo> {
   }
 
   Widget _buildTabBarPageView() {
-    return TabBarPageView(
-      isTabBarTop: isTop,
+    return NTabPageView(
+      isReverse: isBom,
       items: _items,
       canPageChanged: (index) {
         return (index != 1);
@@ -75,8 +76,8 @@ class _TabBarReusePageDemoState extends State<TabBarReusePageDemo> {
   }
 
   Widget _buildTabBarTabBarView() {
-    return TabBarTabBarView(
-      isTabBarTop: isTop,
+    return NTabBarView(
+      isReverse: isBom,
       items: _items,
       // canPageChanged: (index) {
       //   return (index != 1);
