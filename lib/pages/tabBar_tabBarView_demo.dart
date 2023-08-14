@@ -513,6 +513,7 @@ var specials = [
   Tuple2(APPRouter.neomorphismHomePage, "拟物风格", ),
   Tuple2(APPRouter.refreshListView, "refreshListView", ),
   Tuple2(APPRouter.globalIsolateDemo, "globalIsolateDemo", ),
+  Tuple2(APPRouter.longCaptureWidgetDemo, "widget长截图", ),
 
 ];
 

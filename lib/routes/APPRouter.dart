@@ -47,6 +47,7 @@ import 'package:flutter_templet_project/pages/demo/StackDemoTwo.dart';
 import 'package:flutter_templet_project/pages/demo/SuspensionButtonDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TextFieldColorChangeDemo.dart';
 import 'package:flutter_templet_project/pages/demo/UploadFileDemo.dart';
+import 'package:flutter_templet_project/pages/demo/LongCaptureWidgetDemo.dart';
 import 'package:flutter_templet_project/pages/demo/enumDemo.dart';
 import 'package:flutter_templet_project/pages/demo/box_shadow_demo_one.dart';
 import 'package:flutter_templet_project/pages/homeSrollDemo.dart';
@@ -576,6 +577,7 @@ class APPRouter {
   static const boxShadowDemoOne = '/boxShadowDemoOne';
   static const getxDemo = '/getxDemo';
   static const globalIsolateDemo = '/globalIsolateDemo';
+  static const longCaptureWidgetDemo = '/LongCaptureWidgetDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -911,6 +913,7 @@ class AppPage {
     GetPage(name: APPRouter.boxShadowDemoOne, page: () => BoxShadowDemoOne(),),
     GetPage(name: APPRouter.getxDemo, page: () => GetxDemo(),),
     GetPage(name: APPRouter.globalIsolateDemo, page: () => GlobalIsolateDemo(),),
+    GetPage(name: APPRouter.longCaptureWidgetDemo, page: () => LongCaptureWidgetDemo(),),
 
 
   ];
