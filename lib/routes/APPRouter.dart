@@ -29,6 +29,7 @@ import 'package:flutter_templet_project/pages/demo/CustomMultiChildLayoutDemo.da
 import 'package:flutter_templet_project/pages/demo/CustomSingleChildLayoutDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DropBoxChoicDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DropBoxMutiRowChoicDemo.dart';
+import 'package:flutter_templet_project/pages/demo/GlobalIsolateDemo.dart';
 import 'package:flutter_templet_project/pages/demo/IMChatPage.dart';
 import 'package:flutter_templet_project/pages/LoginPageTwo.dart';
 import 'package:flutter_templet_project/pages/demo/MediaQueryDemoOne.dart';
@@ -574,6 +575,7 @@ class APPRouter {
   static const npageViewDemo = '/npageViewDemo';
   static const boxShadowDemoOne = '/boxShadowDemoOne';
   static const getxDemo = '/getxDemo';
+  static const globalIsolateDemo = '/globalIsolateDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -908,6 +910,7 @@ class AppPage {
     GetPage(name: APPRouter.npageViewDemo, page: () => NPageViewDemo(),),
     GetPage(name: APPRouter.boxShadowDemoOne, page: () => BoxShadowDemoOne(),),
     GetPage(name: APPRouter.getxDemo, page: () => GetxDemo(),),
+    GetPage(name: APPRouter.globalIsolateDemo, page: () => GlobalIsolateDemo(),),
 
 
   ];

@@ -177,12 +177,15 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
     re.$2["a"] = "aa";
     debugPrint("re1:${re}");
 
-
     ({int a, int b}) recordAB = (a: 1, b: 2);
 
     (double lat, double lon) geoLocation(String name) =>
         (231.23, 36.8219);
 
+    var map = <(int, int), String>{};
+    map[(1, 2)] = "1,2";
+    map[(3, 4)] = "3,4";
+    debugPrint("map: ${map}");
 
   }
 
