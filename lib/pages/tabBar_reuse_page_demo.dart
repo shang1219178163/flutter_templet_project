@@ -19,11 +19,10 @@ import 'package:tuple/tuple.dart';
 
 
 class TabBarReusePageDemo extends StatefulWidget {
-
-  final String? title;
-
+  
   const TabBarReusePageDemo({ Key? key, this.title}) : super(key: key);
 
+  final String? title;
 
   @override
   _TabBarReusePageDemoState createState() => _TabBarReusePageDemoState();
@@ -40,7 +39,7 @@ class _TabBarReusePageDemoState extends State<TabBarReusePageDemo> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(isPageView ? "TabBarPageView" : "TabBarTabBarView"),
+        title: Text(isPageView ? "NTabPageView" : "NTabBarView"),
         actions: [
           TextButton(
             onPressed: () {
@@ -65,9 +64,9 @@ class _TabBarReusePageDemoState extends State<TabBarReusePageDemo> {
 
   Widget _buildTabBarPageView() {
     return NTabPageView(
-      // labelColor: Colors.white,
-      isTabBottom: isBom,
       items: _items,
+      isTabBottom: isBom,
+      // labelColor: Colors.white,
       // canPageChanged: (index) {
       //   return (index != 1);
       // },
@@ -79,10 +78,11 @@ class _TabBarReusePageDemoState extends State<TabBarReusePageDemo> {
 
   Widget _buildTabBarTabBarView() {
     return NTabBarView(
+      items: _items,
+      isTabBottom: isBom,
       labelColor: Colors.white,
       tabBgColor: Colors.blue,
-      isTabBottom: isBom,
-      items: _items,
+
       // canPageChanged: (index) {
       //   return (index != 1);
       // },
