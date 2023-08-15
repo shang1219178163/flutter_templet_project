@@ -9,8 +9,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/app_update_card.dart';
 import 'package:flutter_templet_project/basicWidget/list_subtitle_cell.dart';
-import 'package:flutter_templet_project/basicWidget/n_tab_page_view.dart';
 import 'package:flutter_templet_project/basicWidget/n_tab_bar_view.dart';
+import 'package:flutter_templet_project/basicWidget/n_tab_page_view.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/divider_ext.dart';
 import 'package:flutter_templet_project/model/mock_data.dart';
@@ -57,6 +57,7 @@ class _TabBarReusePageDemoState extends State<TabBarReusePageDemo> {
             child: Text(!isBom ? "底部" : "顶部", style: TextStyle(color: Colors.white),)
           ),
         ],
+        elevation: 0,
       ),
       body: isPageView ? _buildTabBarPageView() : _buildTabBarTabBarView(),
     );
@@ -64,11 +65,12 @@ class _TabBarReusePageDemoState extends State<TabBarReusePageDemo> {
 
   Widget _buildTabBarPageView() {
     return NTabPageView(
-      isReverse: isBom,
+      // labelColor: Colors.white,
+      isTabBottom: isBom,
       items: _items,
-      canPageChanged: (index) {
-        return (index != 1);
-      },
+      // canPageChanged: (index) {
+      //   return (index != 1);
+      // },
       onPageChanged: (index) {
         ddlog(index);
       }
@@ -77,7 +79,9 @@ class _TabBarReusePageDemoState extends State<TabBarReusePageDemo> {
 
   Widget _buildTabBarTabBarView() {
     return NTabBarView(
-      isReverse: isBom,
+      labelColor: Colors.white,
+      tabBgColor: Colors.blue,
+      isTabBottom: isBom,
       items: _items,
       // canPageChanged: (index) {
       //   return (index != 1);

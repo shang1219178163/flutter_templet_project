@@ -15,31 +15,36 @@ class NTabBarView extends StatefulWidget {
 
   const NTabBarView({
     Key? key,
-    this.isReverse = false,
+    this.isTabBottom = false,
     required this.items,
-    this.indicatorColor,
+    this.tabBgColor,
     this.labelColor,
+    this.labelStyle,
     this.tabController,
     this.initialIndex = 0,
     required this.onPageChanged,
     this.canPageChanged,
   }) : super(key: key);
 
+
   final List<Tuple2<String, Widget>> items;
-
-  final Color? indicatorColor;
-
+  /// tab背景颜色
+  final Color? tabBgColor;
+  /// 标题和指示器颜色
   final Color? labelColor;
-
+  /// 字体样式
+  final TextStyle? labelStyle;
+  /// Tab 控制器
   final TabController? tabController;
-
+  /// 初始索引
   final int initialIndex;
-
+  /// 左右滑动回调
   final ValueChanged<int> onPageChanged;
-
+  /// 范围 false 时,锁定不在滚动
   final bool Function(int)? canPageChanged;
+  /// tab 位置底部 false 顶部, true 底部
+  final bool isTabBottom;
 
-  final bool isReverse;
 
   @override
   _NTabBarViewState createState() => _NTabBarViewState();
@@ -76,7 +81,7 @@ class _NTabBarViewState extends State<NTabBarView> with SingleTickerProviderStat
       _buildTabBar(),
       _buildTabBarView(),
     ];
-    if (widget.isReverse) {
+    if (widget.isTabBottom) {
       list = list.reversed.toList();
     }
     return Column(
@@ -90,8 +95,6 @@ class _NTabBarViewState extends State<NTabBarView> with SingleTickerProviderStat
         .of(context)
         .colorScheme
         .primary;
-
-    final bgColor = widget.indicatorColor ?? Colors.white;
 
     final borderSide = BorderSide(
       color: textColor,
@@ -115,7 +118,8 @@ class _NTabBarViewState extends State<NTabBarView> with SingleTickerProviderStat
       controller: _tabController,
       tabs: widget.items.map((e) => Tab(text: e.item1)).toList(),
       labelColor: textColor,
-      indicator: widget.isReverse ? decorationTop : decorationBom,
+      labelStyle: widget.labelStyle,
+      indicator: widget.isTabBottom ? decorationTop : decorationBom,
       onTap: (index) {
         // ddlog([index, _tabController.index]);
         setState(() { });
@@ -133,10 +137,10 @@ class _NTabBarViewState extends State<NTabBarView> with SingleTickerProviderStat
     // }
 
     return Material(
-        color: bgColor,
-        child: SafeArea(
-          child: tabBar,
-        )
+      color: widget.tabBgColor,
+      child: SafeArea(
+        child: tabBar,
+      )
     );
   }
 

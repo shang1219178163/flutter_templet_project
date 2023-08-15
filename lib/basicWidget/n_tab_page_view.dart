@@ -17,34 +17,37 @@ class NTabPageView extends StatefulWidget {
   const NTabPageView({
     Key? key,
     required this.items,
-    this.indicatorColor,
     this.labelColor,
+    this.labelStyle,
     this.pageController,
+    this.tabBgColor = Colors.white,
     this.tabController,
     this.initialIndex = 0,
     required this.onPageChanged,
     this.canPageChanged,
-    this.isReverse = false,
+    this.isTabBottom = false,
   }) : super(key: key);
 
 
   final List<Tuple2<String, Widget>> items;
-
-  final Color? indicatorColor;
-
+  /// tab背景颜色
+  final Color? tabBgColor;
+  /// 标题和指示器颜色
   final Color? labelColor;
-
+  /// 字体样式
+  final TextStyle? labelStyle;
+  /// PageView 控制器
   final PageController? pageController;
-
+  /// Tab 控制器
   final TabController? tabController;
-
+  /// 初始索引
   final int initialIndex;
-
+  /// 左右滑动回调
   final ValueChanged<int> onPageChanged;
-
+  /// 范围 false 时,锁定不在滚动
   final bool Function(int)? canPageChanged;
-
-  final bool isReverse;
+  /// tab 位置底部 false 顶部, true 底部
+  final bool isTabBottom;
 
 
   @override
@@ -89,7 +92,7 @@ class _NTabPageViewState extends State<NTabPageView> with SingleTickerProviderSt
       _buildTabBar(),
       _buildPageView(),
     ];
-    if (widget.isReverse) {
+    if (widget.isTabBottom) {
       list = list.reversed.toList();
     }
     return Column(
@@ -103,8 +106,6 @@ class _NTabPageViewState extends State<NTabPageView> with SingleTickerProviderSt
         .of(context)
         .colorScheme
         .primary;
-
-    final bgColor = widget.indicatorColor ?? Colors.white;
 
     final borderSide = BorderSide(
       color: textColor,
@@ -127,7 +128,8 @@ class _NTabPageViewState extends State<NTabPageView> with SingleTickerProviderSt
       controller: _tabController,
       tabs: widget.items.map((e) => Tab(text: e.item1)).toList(),
       labelColor: textColor,
-      indicator: widget.isReverse ? decorationTop : decorationBom,
+      labelStyle: widget.labelStyle,
+      indicator: widget.isTabBottom ? decorationTop : decorationBom,
       onTap: (index) {
         _pageController.jumpToPage(index);
         setState(() {});
@@ -145,7 +147,7 @@ class _NTabPageViewState extends State<NTabPageView> with SingleTickerProviderSt
     // }
 
     return Material(
-      color: bgColor,
+      color: widget.tabBgColor,
       child: SafeArea(
         child: tabBar,
       )
