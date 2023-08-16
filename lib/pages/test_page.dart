@@ -349,10 +349,10 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
     final c = 'Eats shoots leaves'.split(RegExp(r's|o'));
     ddlog(c);
 
-    final d = "easy_refresh_plugin".camlCase("_");
+    final d = "easy_refresh_plugin".toCamlCase("_");
     ddlog(d);
 
-    final d1 = "easyRefreshPlugin".uncamlCase("_");
+    final d1 = "easyRefreshPlugin".toUncamlCase("_");
     ddlog(d1);
 
     final d2 = "easyRefreshPlugin".toCapitalize();

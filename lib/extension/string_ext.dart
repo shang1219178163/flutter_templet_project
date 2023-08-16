@@ -24,6 +24,11 @@ extension StringExt on String{
   }
 
   ///运算符重载
+  bool operator > (String val) {
+    return compareTo(val) == 1;
+  }
+
+  ///运算符重载
   String operator *(int value) {
     var result = '';
     for (var i = 0; i < value; i++) {
@@ -135,12 +140,14 @@ extension StringExt on String{
 
   ///首字母大写
   String toCapitalize() {
-    if (length == 0) return this;
+    if (length <= 1) {
+      return this;
+    }
     return "${substring(0, 1).toUpperCase()}${substring(1)}";
   }
 
   ///驼峰命名法, ["_", "-"].contains(separator)
-  String camlCase(String separator, {bool isUpper = true}) {
+  String toCamlCase(String separator, {bool isUpper = true}) {
     assert(["_", "-"].contains(separator));
     if (!contains(separator)) {
       return this;
@@ -152,15 +159,11 @@ extension StringExt on String{
     }).join("");
   }
   ///反驼峰命名法
-  String uncamlCase(String separator) {
+  String toUncamlCase([String separator = "_"]) {
     var reg = RegExp(r'[A-Z]');
-    if (!reg.hasMatch(separator)) {
-      return this;
-    }
     return split("").map((e) {
-      final index = indexOf(e);
-      // ddlog([e, index, reg.hasMatch(e) && index != 0]);
-      return reg.hasMatch(e) && index != 0 ? "$separator${e.toLowerCase()}" : e.toLowerCase();
+      final i = indexOf(e);
+      return e.contains(reg) ? "${i == 0 ? "" : separator}${e.toLowerCase()}" : e;
     }).join("");
   }
 

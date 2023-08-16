@@ -337,6 +337,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.2.5"
+  dash_painter:
+    dependency: "direct main"
+    description:
+      name: dash_painter
+      sha256: e0b24070aed0549f9139ef1276ca70c155fe78960ec624d6dec3cdb0502f9a2a
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.2"
   decimal:
     dependency: transitive
     description:
@@ -735,6 +743,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.1.1"
+  grapheme_splitter:
+    dependency: transitive
+    description:
+      name: grapheme_splitter
+      sha256: "5a1e352826609e0526f82c3bde82f502d210170f0a035ffa1c3ee74d9dee46bd"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.1"
   graphs:
     dependency: transitive
     description:
@@ -919,6 +935,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "4.7.0"
+  json_ast:
+    dependency: transitive
+    description:
+      name: json_ast
+      sha256: "063d54da7b2b0145163e4b0b033f57f02bac7d3cef734ed5afa11ff5bc6cc3d8"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.6"
   json_serializable:
     dependency: "direct main"
     description:
@@ -927,6 +951,15 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "6.5.4"
+  json_to_dart:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: master
+      resolved-ref: "99635dff6710d13c1ef8c0532a4003e4ae2587cd"
+      url: "git@github.com:shang1219178163/json_to_dart.git"
+    source: git
+    version: "1.0.5"
   logger:
     dependency: transitive
     description:

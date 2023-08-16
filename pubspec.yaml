@@ -141,7 +141,12 @@ dependencies:
 
   syncfusion_flutter_datepicker: ^21.2.9
 
+  dash_painter: ^1.0.2
 
+  json_to_dart:
+    git:
+      url: 'git@github.com:shang1219178163/json_to_dart.git'
+      ref: 'master'
 
 #  User:
 #    hosted:

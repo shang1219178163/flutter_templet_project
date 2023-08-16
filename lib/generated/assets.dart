@@ -2,6 +2,7 @@
 class Assets {
   Assets._();
 
+  static const String dataAppInfo = 'assets/data/appInfo.json';
   static const String dataCarModels = 'assets/data/car_models.json';
   static const String dataChina = 'assets/data/china.json';
   static const String dataContacts = 'assets/data/contacts.json';
@@ -12,6 +13,7 @@ class Assets {
   static const String imagesBgGlassmophism = 'assets/images/bg_glassmophism.png';
   static const String imagesBgHorizontalScroll = 'assets/images/bg_horizontal_scroll.png';
   static const String imagesBgJiguang = 'assets/images/bg_jiguang.png';
+  static const String imagesBgMine = 'assets/images/bg_mine.png';
   static const String imagesBgMountain = 'assets/images/bg_mountain.png';
   static const String imagesBgOcean = 'assets/images/bg_ocean.png';
   static const String imagesFloating = 'assets/images/floating.png';
@@ -48,6 +50,7 @@ class Assets {
   static const String imagesImgPlaceholderEmptyOne = 'assets/images/img_placeholder_empty_one.png';
   static const String imagesImgPlaceholderOffonline = 'assets/images/img_placeholder_offonline.png';
   static const String imagesImgPlaceholderSearch = 'assets/images/img_placeholder_search.png';
+  static const String imagesImgPlacehorder = 'assets/images/img_placehorder.png';
   static const String imagesImgUpdate = 'assets/images/img_update.png';
   static const String imagesImgUploadPlaceholder = 'assets/images/img_upload_placeholder.png';
   static const String imagesJsCover = 'assets/images/js_cover.png';

@@ -1,9 +1,10 @@
+import 'package:dash_painter/dash_decoration.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_templet_project/APPThemeSettings.dart';
 import 'package:flutter_templet_project/basicWidget/after_layout_builder.dart';
-import 'package:flutter_templet_project/basicWidget/dash_decoration.dart';
+import 'package:flutter_templet_project/basicWidget/n_dash_decoration.dart';
 import 'package:flutter_templet_project/basicWidget/n_label_and_icon.dart';
 import 'package:flutter_templet_project/basicWidget/n_painter_arc.dart';
 import 'package:flutter_templet_project/basicWidget/n_text_button.dart';
@@ -14,11 +15,12 @@ import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/decoration_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
-import 'package:flutter_templet_project/pages/demo/MyPainter.dart';
+import 'package:flutter_templet_project/pages/demo/CirclePainter.dart';
 import 'package:flutter_templet_project/basicWidget/n_popup_route.dart';
 import 'package:flutter_templet_project/basicWidget/upload_button.dart';
 import 'package:flutter_templet_project/extension/button_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/pages/demo/curve_painter.dart';
 
 import 'package:tuple/tuple.dart';
 
@@ -495,18 +497,51 @@ class _SecondPageState extends State<SecondPage> {
               title: "_buildButtonBar",
               child: _buildButtonBar(),
             ),
-
             Container(
-              width: 200,
               height: 100,
-              decoration: DashedDecoration(
-                color: Colors.grey,
-                dashedColor: Colors.red,
-
-                borderRadius: BorderRadius.all(Radius.circular(30.0))
+              width: 100,
+              child: CustomPaint(
+                painter: CurvePainter(
+                  color: Colors.yellow,
+                ),
               ),
-
-            )
+            ),
+            Container(
+              width: 160,
+              height: 60,
+              decoration: NDashDecoration(
+                step: 2,
+                pointWidth: 2,
+                pointCount: 1,
+                radius: Radius.circular(15),
+                strokeWidth: 3,
+                strokeColor: Colors.red,
+              ),
+              alignment: Alignment.center,
+              child: Text("自定义虚线\nNDashDecoration"),
+            ),
+            SizedBox(height: 8,),
+            Container(
+              width: 160,
+              height: 60,
+              decoration: DashDecoration(
+                pointWidth: 2,
+                step: 5,
+                pointCount: 1,
+                radius: Radius.circular(15),
+                gradient: SweepGradient(
+                  colors: [
+                    Colors.blue,
+                    Colors.red,
+                    Colors.yellow,
+                    Colors.green
+                  ],
+                ),
+              ),
+              alignment: Alignment.center,
+              child: Text("dash_painter"),
+            ),
+            SizedBox(height: 20,),
           ],
         ),
       ],
@@ -825,7 +860,7 @@ class _SecondPageState extends State<SecondPage> {
         width: 100,
         color: Colors.green,
         child: CustomPaint(
-          painter: MyPainter(
+          painter: CirclePainter(
             color: Colors.yellow,
           ),
         ),

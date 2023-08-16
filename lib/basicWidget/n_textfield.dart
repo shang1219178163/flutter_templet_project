@@ -45,7 +45,8 @@ class NTextfield extends StatefulWidget {
     this.focusNode,
     this.fillColor = bgColor,
     this.focusColor = Colors.white,
-    this.radius = 4,
+    this.radius = 8,
+    this.border,
     this.enabledBorder,
     this.focusedBorder,
     this.prefixIconBuilder,
@@ -75,8 +76,9 @@ class NTextfield extends StatefulWidget {
   final Color? focusColor;
   final double radius;
 
-  InputBorder? enabledBorder;
-  InputBorder? focusedBorder;
+  final InputBorder? border;
+  final InputBorder? enabledBorder;
+  final InputBorder? focusedBorder;
 
   Widget Function(bool isFocus)? prefixIconBuilder;
   Widget Function(bool isFocus, bool isCloseEye,)? suffixIconBuilder;
@@ -148,7 +150,7 @@ class _NTextfieldState extends State<NTextfield> {
         filled: true,
         fillColor: widget.focusColor,
         contentPadding: widget.contentPadding ?? const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-        border: InputBorder.none,
+        border: widget.border ?? InputBorder.none,
         enabledBorder: widget.enabledBorder ?? buildEnabledBorder(radus: widget.radius),
         focusedBorder: widget.focusedBorder ?? buildFocusedBorder(radus: widget.radius),
         hintText: widget.hintText,

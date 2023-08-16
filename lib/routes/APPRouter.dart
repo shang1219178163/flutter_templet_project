@@ -32,6 +32,7 @@ import 'package:flutter_templet_project/pages/demo/DropBoxMutiRowChoicDemo.dart'
 import 'package:flutter_templet_project/pages/demo/GlobalIsolateDemo.dart';
 import 'package:flutter_templet_project/pages/demo/IMChatPage.dart';
 import 'package:flutter_templet_project/pages/LoginPageTwo.dart';
+import 'package:flutter_templet_project/pages/demo/JsonToModelPage.dart';
 import 'package:flutter_templet_project/pages/demo/MediaQueryDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/MediaQueryScreeenDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NExpandTextDemo.dart';
@@ -578,6 +579,7 @@ class APPRouter {
   static const getxDemo = '/getxDemo';
   static const globalIsolateDemo = '/globalIsolateDemo';
   static const longCaptureWidgetDemo = '/LongCaptureWidgetDemo';
+  static const jsonToModelPage = '/jsonToModelPage';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -914,6 +916,7 @@ class AppPage {
     GetPage(name: APPRouter.getxDemo, page: () => GetxDemo(),),
     GetPage(name: APPRouter.globalIsolateDemo, page: () => GlobalIsolateDemo(),),
     GetPage(name: APPRouter.longCaptureWidgetDemo, page: () => LongCaptureWidgetDemo(),),
+    GetPage(name: APPRouter.jsonToModelPage, page: () => JsonToModelPage(),),
 
 
   ];
