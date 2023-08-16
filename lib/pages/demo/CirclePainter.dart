@@ -1,5 +1,5 @@
 //
-//  MyPainter.dart
+//  CirclePainter.dart
 //  flutter_templet_project
 //
 //  Created by shang on 12/14/21 11:04 AM.
@@ -11,8 +11,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-class MyPainter extends CustomPainter {
-  MyPainter({
+class CirclePainter extends CustomPainter {
+  CirclePainter({
     this.color = Colors.black,
   });
 
@@ -22,7 +22,7 @@ class MyPainter extends CustomPainter {
   bool hitTest(Offset position) => true;
 
   @override
-  bool shouldRepaint(MyPainter oldDelegate) {
+  bool shouldRepaint(CirclePainter oldDelegate) {
     return oldDelegate.color != color;
   }
 
