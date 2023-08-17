@@ -16,9 +16,9 @@ import 'package:json_to_dart/model_generator.dart';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 
-class JsonToModelPage extends StatefulWidget {
+class JsonToDartPage extends StatefulWidget {
 
-  JsonToModelPage({
+  JsonToDartPage({
     Key? key, 
     this.title
   }) : super(key: key);
@@ -26,10 +26,10 @@ class JsonToModelPage extends StatefulWidget {
   final String? title;
 
   @override
-  _JsonToModelPageState createState() => _JsonToModelPageState();
+  _JsonToDartPageState createState() => _JsonToDartPageState();
 }
 
-class _JsonToModelPageState extends State<JsonToModelPage> {
+class _JsonToDartPageState extends State<JsonToDartPage> {
 
   final _textEditingController = TextEditingController();
   final _focusNode = FocusNode();
@@ -54,15 +54,15 @@ class _JsonToModelPageState extends State<JsonToModelPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: onPressed)
-        ).toList(),
-      ),
+      // appBar: AppBar(
+      //   title: Text(widget.title ?? "$widget"),
+      //   // actions: ['done',].map((e) => TextButton(
+      //   //   child: Text(e,
+      //   //     style: TextStyle(color: Colors.white),
+      //   //   ),
+      //   //   onPressed: onPressed)
+      //   // ).toList(),
+      // ),
       body: buildBody(),
     );
   }

@@ -579,7 +579,7 @@ class APPRouter {
   static const getxDemo = '/getxDemo';
   static const globalIsolateDemo = '/globalIsolateDemo';
   static const longCaptureWidgetDemo = '/LongCaptureWidgetDemo';
-  static const jsonToModelPage = '/jsonToModelPage';
+  static const jsonToDartPage = '/jsonToDartPage';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -610,6 +610,7 @@ class APPRouter {
 
 class AppPage {
   static const INITIAL = APPRouter.homePage;
+  // static const INITIAL = APPRouter.jsonToDartPage;
 
   static final unknownRoute = GetPage(name: APPRouter.notFound, page: () => APPNotFoundPage(),);
 
@@ -916,7 +917,7 @@ class AppPage {
     GetPage(name: APPRouter.getxDemo, page: () => GetxDemo(),),
     GetPage(name: APPRouter.globalIsolateDemo, page: () => GlobalIsolateDemo(),),
     GetPage(name: APPRouter.longCaptureWidgetDemo, page: () => LongCaptureWidgetDemo(),),
-    GetPage(name: APPRouter.jsonToModelPage, page: () => JsonToModelPage(),),
+    GetPage(name: APPRouter.jsonToDartPage, page: () => JsonToDartPage(),),
 
 
   ];

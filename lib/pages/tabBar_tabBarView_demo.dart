@@ -559,7 +559,7 @@ var customs = [
   Tuple2(APPRouter.expandTextDemo, "可折叠文字", ),
   Tuple2(APPRouter.suspensionButtonDemo, "悬浮按钮", ),
   Tuple2(APPRouter.uploadFileDemo, "上传demo", ),
-  Tuple2(APPRouter.jsonToModelPage, "json转模型", ),
+  Tuple2(APPRouter.jsonToDartPage, "json转模型", ),
 
 
 ];
