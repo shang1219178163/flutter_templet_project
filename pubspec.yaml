@@ -10,7 +10,7 @@ analyzer:
 #    - non-nullable
 
 environment:
-  sdk: ">=3.0.0 <=3.10.0"
+  sdk: '>=3.0.0 <4.0.0'
 
 dependencies:
   flutter:
@@ -120,12 +120,20 @@ dependencies:
   color_converter: ^0.2.1
   horizontal_data_table: ^4.1.4
   image_picker: ^1.0.0
-  wechat_assets_picker: ^8.6.2
+
   dotted_border: ^2.0.0+3
   #  merge_images: ^1.0.3
 
-  flutter_image_compress: ^2.0.3
   extended_image: ^8.0.2
+  # 图片预览
+  photo_view: ^0.14.0
+  flutter_image_compress: ^2.0.3
+  wechat_camera_picker: ^3.6.0
+  wechat_assets_picker:
+    git:
+      url: 'git@github.com:shang1219178163/flutter_wechat_assets_picker.git'
+      ref: 'v8.6.2-change'
+
 
   flutter_sound: ^9.2.13
   audio_session: ^0.1.6
@@ -138,6 +146,7 @@ dependencies:
   github_language_colors:
     git:
       url: git@github.com:Sky24n/github_language_colors.git
+
 
   syncfusion_flutter_datepicker: ^21.2.9
 
@@ -184,3 +193,5 @@ flutter:
   assets:
     - assets/images/
     - assets/data/
+    - assets/images/3.0x/
+    - assets/images/2.0x/

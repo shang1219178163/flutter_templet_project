@@ -5,6 +5,7 @@ import 'package:flutter_templet_project/basicWidget/EnhanceTab/enhance_tab_bar_d
 import 'package:flutter_templet_project/basicWidget/NTree/NTreeDemo.dart';
 import 'package:flutter_templet_project/basicWidget/drag_destination_view.dart';
 import 'package:flutter_templet_project/basicWidget/responsive_column.dart';
+import 'package:flutter_templet_project/basicWidget/upload/asset_upload_box_demo.dart';
 import 'package:flutter_templet_project/pages/APPRouteObserverDemo.dart';
 import 'package:flutter_templet_project/pages/AppLaunchPage.dart';
 import 'package:flutter_templet_project/pages/DataTypeDemo.dart';
@@ -580,6 +581,7 @@ class APPRouter {
   static const globalIsolateDemo = '/globalIsolateDemo';
   static const longCaptureWidgetDemo = '/LongCaptureWidgetDemo';
   static const jsonToDartPage = '/jsonToDartPage';
+  static const assetUploadBoxDemo = '/assetUploadBoxDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -918,6 +920,7 @@ class AppPage {
     GetPage(name: APPRouter.globalIsolateDemo, page: () => GlobalIsolateDemo(),),
     GetPage(name: APPRouter.longCaptureWidgetDemo, page: () => LongCaptureWidgetDemo(),),
     GetPage(name: APPRouter.jsonToDartPage, page: () => JsonToDartPage(),),
+    GetPage(name: APPRouter.assetUploadBoxDemo, page: () => AssetUploadBoxDemo(),),
 
 
   ];

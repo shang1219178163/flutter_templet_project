@@ -1,7 +1,7 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/upload/n_upload_box.dart';
+import 'package:flutter_templet_project/basicWidget/upload/asset_upload_box.dart';
 import 'package:flutter_templet_project/uti/color_util.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -84,13 +84,7 @@ class _UploadFileDemoState extends State<UploadFileDemo> {
     return SingleChildScrollView(
       child: Column(
         children: [
-          NUploadBox(
-            items: selectedAssets,
-            showFileSize: true,
-            onChange: (items){
-              debugPrint("items.length: ${items.length}");
-            },
-          ),
+
         ],
       ),
     );

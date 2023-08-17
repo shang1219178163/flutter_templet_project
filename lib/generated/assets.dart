@@ -24,6 +24,7 @@ class Assets {
   static const String imagesIconAppbarBackWhite = 'assets/images/icon_appbar_back_white.png';
   static const String imagesIconArrowDown = 'assets/images/icon_arrow_down.png';
   static const String imagesIconArrowUp = 'assets/images/icon_arrow_up.png';
+  static const String imagesIconCamera = 'assets/images/icon_camera.png';
   static const String imagesIconClear = 'assets/images/icon_clear.png';
   static const String imagesIconClose60 = 'assets/images/icon_close_60.png';
   static const String imagesIconDelete = 'assets/images/icon_delete.png';
