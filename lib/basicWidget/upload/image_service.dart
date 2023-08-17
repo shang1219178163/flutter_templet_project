@@ -13,7 +13,7 @@ class ImageService{
   /// 图片压缩
    Future<File?> compressAndGetFile(File file, [String? targetPath]) async {
     try {
-      String fileName = file.absolute.path.split('/').last;
+      var fileName = file.absolute.path.split('/').last;
 
       // Directory tempDir = await getTemporaryDirectory();
       // Directory assetDir = Directory('${tempDir.path}/asset');
@@ -23,7 +23,7 @@ class ImageService{
       // }
 
       Directory? assetDir = await CacheAssetService().getDir();
-      var tmpPath = '${assetDir.path}/${fileName}';
+      var tmpPath = '${assetDir.path}/$fileName';
       targetPath ??= tmpPath;
       // debugPrint('fileName_${fileName}');
       // debugPrint('assetDir_${assetDir}');
@@ -46,10 +46,10 @@ class ImageService{
       final infos = [
         "图片名称: $fileName",
         "压缩前: ${file.lengthSync().fileSize}",
-        "压缩质量: ${compressQuality}",
+        "压缩质量: $compressQuality",
         "压缩后: ${lenth.fileSize}",
         "原路径: ${file.absolute.path}",
-        "压缩路径: ${targetPath}",
+        "压缩路径: $targetPath",
       ];
       debugPrint("图片压缩: ${infos.join("\n")}");
 
