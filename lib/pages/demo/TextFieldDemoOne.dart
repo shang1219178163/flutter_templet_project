@@ -273,4 +273,34 @@ class _TextFieldDemoOneState extends State<TextFieldDemoOne> {
 }
 
 
+// const TextField({
+// Key key,
+// this.controller,                    // 控制正在编辑文本
+// this.focusNode,                     // 获取键盘焦点
+// this.decoration = const InputDecoration(),              // 边框装饰
+// TextInputType keyboardType,         // 键盘类型
+// this.textInputAction,               // 键盘的操作按钮类型
+// this.textCapitalization = TextCapitalization.none,      // 配置大小写键盘
+// this.style,                         // 输入文本样式
+// this.textAlign = TextAlign.start,   // 对齐方式
+// this.textDirection,                 // 文本方向
+// this.autofocus = false,             // 是否自动对焦
+// this.obscureText = false,           // 是否隐藏内容，例如密码格式
+// this.autocorrect = true,            // 是否自动校正
+// this.maxLines = 1,                  // 最大行数
+// this.maxLength,                     // 允许输入的最大长度
+// this.maxLengthEnforced = true,      // 是否允许超过输入最大长度
+// this.onChanged,                     // 文本内容变更时回调
+// this.onEditingComplete,             // 提交内容时回调
+// this.onSubmitted,                   // 用户提示完成时回调
+// this.inputFormatters,               // 验证及格式
+// this.enabled,                       // 是否不可点击
+// this.cursorWidth = 2.0,             // 光标宽度
+// this.cursorRadius,                  // 光标圆角弧度
+// this.cursorColor,                   // 光标颜色
+// this.keyboardAppearance,            // 键盘亮度
+// this.scrollPadding = const EdgeInsets.all(20.0),        // 滚动到视图中时，填充边距
+// this.enableInteractiveSelection,    // 长按是否展示【剪切/复制/粘贴菜单LengthLimitingTextInputFormatter】
+// this.onTap,                         // 点击时回调
+// })
 
