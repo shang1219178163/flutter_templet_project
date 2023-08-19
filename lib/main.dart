@@ -179,6 +179,7 @@ class MyApp extends StatelessWidget {
     );
 
     return ScreenUtilInit(
+      useInheritedMediaQuery: true,
       designSize: const Size(375, 812),
       minTextAdapt: true,
       splitScreenMode: true,
