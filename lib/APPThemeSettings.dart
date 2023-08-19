@@ -40,10 +40,15 @@ class APPThemeSettings {
     ),
     buttonTheme: ButtonThemeData(
       splashColor: Colors.red,
-
     ),
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
+        splashFactory: NoSplash.splashFactory,
+        foregroundColor: Colors.blue,
+      ).merge(buildButtonStyle()),
+    ),
+    outlinedButtonTheme: OutlinedButtonThemeData(
+      style: OutlinedButton.styleFrom(
         splashFactory: NoSplash.splashFactory,
         foregroundColor: Colors.blue,
       ).merge(buildButtonStyle()),
@@ -52,12 +57,6 @@ class APPThemeSettings {
       style: ElevatedButton.styleFrom(
         splashFactory: NoSplash.splashFactory,
         backgroundColor: Colors.blue,
-      ).merge(buildButtonStyle()),
-    ),
-    outlinedButtonTheme: OutlinedButtonThemeData(
-      style: OutlinedButton.styleFrom(
-        splashFactory: NoSplash.splashFactory,
-        foregroundColor: Colors.blue,
       ).merge(buildButtonStyle()),
     ),
     // scaffoldBackgroundColor: Colors.red
