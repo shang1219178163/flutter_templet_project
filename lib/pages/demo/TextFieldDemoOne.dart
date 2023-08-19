@@ -6,10 +6,15 @@
 //  Copyright © 8/14/21 shang. All rights reserved.
 //
 
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_templet_project/basicWidget/text_input_formatter_decimal.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
+import 'package:tuple/tuple.dart';
 
 class TextFieldDemoOne extends StatefulWidget {
 
@@ -32,6 +37,13 @@ class _TextFieldDemoOneState extends State<TextFieldDemoOne> {
   FocusNode focusNode = FocusNode();
   ///文本输入框是否可编辑
   bool isEnable = true;
+
+  final inputFormatters = <Tuple2<String, TextInputFormatter>>[
+    Tuple2("长度限制", LengthLimitingTextInputFormatter(10),),
+    Tuple2("英文字母/汉字/数字", FilteringTextInputFormatter(RegExp("[a-zA-Z]|[\u4e00-\u9fa5]|[0-9]"), allow: true)),
+    Tuple2("FilteringTextInputFormatter.digitsOnly", FilteringTextInputFormatter.digitsOnly,),
+    Tuple2("FilteringTextInputFormatter.singleLineFormatter", FilteringTextInputFormatter.singleLineFormatter,),
+  ];
 
   @override
   void initState() {
@@ -69,6 +81,12 @@ class _TextFieldDemoOneState extends State<TextFieldDemoOne> {
             children: _buildButtons(),
           ),
           _buildTextField(),
+          Divider(),
+          Column(
+            children: inputFormatters.map((e){
+              return ListTile(title: Text(e.item1),);
+            }).toList(),
+          )
         ],
       ),
     );
@@ -131,6 +149,7 @@ class _TextFieldDemoOneState extends State<TextFieldDemoOne> {
             enabled: isEnable,
             ///焦点获取
             focusNode: focusNode,
+            inputFormatters: [TextInputFormatterDecimal()],
             ///用来配置 TextField 的样式风格
             decoration: InputDecoration(
               filled: true,
@@ -250,4 +269,8 @@ class _TextFieldDemoOneState extends State<TextFieldDemoOne> {
       ),
     );
   }
+
 }
+
+
+
