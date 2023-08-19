@@ -16,6 +16,7 @@ import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/rich_text_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/extension/dialog_ext.dart';
+import 'package:flutter_templet_project/mixin/dialog_mixin.dart';
 
 import 'package:popover/popover.dart';
 
@@ -31,7 +32,7 @@ class AlertDialogDemo extends StatefulWidget {
 }
 
 class _AlertDialogDemoState extends State<AlertDialogDemo>
-    with SingleTickerProviderStateMixin {
+    with SingleTickerProviderStateMixin, DialogMixin {
   var itemSize = Size(70, 70);
 
   var titles = [
@@ -54,7 +55,8 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
     "NNPopupRoute 顶部消息",
     "隐私协议",
     "Dialog",
-    "DialogMixin",
+    "DialogMixin - presentDialog",
+    "DialogMixin - presentDialogAlert",
   ];
 
   final title = "新版本 v${2.1}";
@@ -524,8 +526,43 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
         break;
       case 19:
         {
-
-
+          presentDialog(
+            context: context,
+            scrollController: ScrollController(),
+            buttonBarHeight: 60,
+            content: Container(
+              height: 400,
+              color: Colors.green,
+            ),
+            hasCancelButton: false,
+            onCancel: () {
+              Navigator.of(context).pop();
+            },
+            onConfirm: () {
+              Navigator.of(context).pop();
+            }
+          );
+        }
+        break;
+      case 20:
+        {
+          presentDialogAlert(
+            context: context,
+            scrollController: ScrollController(),
+            title: "标题",
+            message: "message",
+            content: Container(
+              height: 400,
+              color: Colors.green,
+            ),
+            hasCancelButton: false,
+            onCancel: () {
+              Navigator.of(context).pop();
+            },
+            onConfirm: () {
+              Navigator.of(context).pop();
+            }
+          );
         }
         break;
       default:

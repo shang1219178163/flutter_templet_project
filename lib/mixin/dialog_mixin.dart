@@ -27,6 +27,7 @@ mixin DialogMixin{
     VoidCallback? onConfirm,
     VerticalDivider? buttonBarDivider,
     VoidCallback? onBarrier,
+    bool hasCancelButton = true,
     double contentMaxHeight = 400,
     double contentMinHeight = 150,
     double buttonBarHeight = 48,
@@ -92,6 +93,7 @@ mixin DialogMixin{
       bottomLeftRadius: radius,
       bottomRightRadius: radius,
       divider: buttonBarDivider,
+      hasCancelButton: hasCancelButton,
       onCancel: onCancel ?? (){
         Navigator.of(context).pop();
       },
@@ -163,6 +165,7 @@ mixin DialogMixin{
     Widget? content,
     Widget? header,
     Widget? footer,
+    bool hasCancelButton = true,
     Color? cancellBgColor = bgColor,
     Color? confirmBgColor = Colors.blueAccent,
     TextStyle? cancellTextStyle,
@@ -208,6 +211,7 @@ mixin DialogMixin{
       footer: NCancelAndConfirmBar(
         height: 45.w,
         divider: buttonBarDivider,
+        hasCancelButton: hasCancelButton,
         cancelBgColor: cancellBgColor,
         confirmBgColor: confirmBgColor,
         cancelTextStyle: cancellTextStyle,
