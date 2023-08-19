@@ -32,9 +32,24 @@ class NImageLoading extends StatelessWidget {
           return child;
         }
 
-        return AnimatedSwitcher(
-          duration: const Duration(milliseconds: 300),
+        return AnimatedOpacity(
+          opacity: frame != null ? 1 : 0,
+          duration: Duration(milliseconds: 300),
           child: frame != null ? child : placeholder,
+        );
+      },
+      loadingBuilder: (context, child, ImageChunkEvent? loadingProgress){
+        var val = 0.0;
+        if (loadingProgress != null &&
+            loadingProgress.cumulativeBytesLoaded != 0 &&
+            loadingProgress.expectedTotalBytes != 0) {
+          val = loadingProgress.cumulativeBytesLoaded.toDouble()/loadingProgress.expectedTotalBytes!.toDouble();
+        }
+
+        return Center(
+          child: CircularProgressIndicator(
+            value: val,
+          ),
         );
       },
     );

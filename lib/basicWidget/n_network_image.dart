@@ -65,7 +65,7 @@ class NNetworkImage extends StatelessWidget {
           }
           // debugPrint("Image width ${state.extendedImageInfo?.image.width} height : ${state.extendedImageInfo?.image.height}");
           final image = state.extendedImageInfo?.image;
-          var widget = ExtendedRawImage(
+          var child = ExtendedRawImage(
             image: image,
             width: width ?? image?.width.toDouble(),
             height: height ?? image?.height.toDouble(),
@@ -73,7 +73,7 @@ class NNetworkImage extends StatelessWidget {
             // soucreRect: Rect.fromLTWH((state.extendedImageInfo?.image?.width-200)/2,(state.extendedImageInfo?.image?.height-200)/2, 200, 200),
           );
           // debugPrint("Source Rect width ${widget.width} height : ${widget.height}");
-          return widget;
+          return child;
         }
       ),
     );
