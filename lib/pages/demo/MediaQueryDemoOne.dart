@@ -79,12 +79,16 @@ class _MediaQueryDemoOneState extends State<MediaQueryDemoOne> {
       return [];
     }
 
-    return items.map((e) => TableRow(
-      children: List.generate(e.length, (index) => Container(
-        padding: EdgeInsets.all(8),
-        child: Text(e.toList()[index]),
-      )).toList(),
-    )).toList();
+    return items.map((e){
+      final array = e.toList();
+
+      return TableRow(
+        children: List.generate(array.length, (index) => Container(
+          padding: EdgeInsets.all(8),
+          child: Text(array.toList()[index]),
+        )).toList(),
+      );
+    }).toList();
   }
 
   final tips = [

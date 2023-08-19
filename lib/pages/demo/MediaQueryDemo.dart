@@ -16,7 +16,7 @@ import 'package:tuple/tuple.dart';
 class MediaQueryDemo extends StatefulWidget {
 
   const MediaQueryDemo({
-    Key? key, 
+    Key? key,
     this.title
   }) : super(key: key);
 
@@ -38,48 +38,48 @@ class _MediaQueryDemoState extends State<MediaQueryDemo> with WidgetsBindingObse
     var mediaQuery = MediaQuery.of(context);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          onPressed: () {
-            FocusScope.of(context).requestFocus(FocusNode());
-            handleScreenHeight();
-          },
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),)
-        ).toList(),
-      ),
-      body: SafeArea(
-        child: CustomScrollView(
-          slivers: [
-            TextField(
-              controller: _textcontroller,
-              decoration: InputDecoration(
-                hintText: 'Please enter',
-                labelText: labelText,
-                // border: InputBorder.none,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(5.0),
-                  borderSide: BorderSide()
-                ),
-                suffixIcon: IconButton(
-                  icon: Icon(Icons.close),
-                  onPressed: () {
-                    _textcontroller.clear();
-                    FocusScope.of(context).requestFocus(FocusNode());
-                  }
+        appBar: AppBar(
+          title: Text(widget.title ?? "$widget"),
+          actions: ['done',].map((e) => TextButton(
+            onPressed: () {
+              FocusScope.of(context).requestFocus(FocusNode());
+              handleScreenHeight();
+            },
+            child: Text(e,
+              style: TextStyle(color: Colors.white),
+            ),)
+          ).toList(),
+        ),
+        body: SafeArea(
+          child: CustomScrollView(
+            slivers: [
+              TextField(
+                controller: _textcontroller,
+                decoration: InputDecoration(
+                  hintText: 'Please enter',
+                  labelText: labelText,
+                  // border: InputBorder.none,
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5.0),
+                      borderSide: BorderSide()
+                  ),
+                  suffixIcon: IconButton(
+                      icon: Icon(Icons.close),
+                      onPressed: () {
+                        _textcontroller.clear();
+                        FocusScope.of(context).requestFocus(FocusNode());
+                      }
+                  ),
                 ),
               ),
-            ),
-            _buildItems(),
-            _buildTips(),
-            buildTable(rows: _renderTuples(items: tips)),
-            Divider(),
-            buildTable(rows: _renderTuples(items: items)),
-          ].map((e) => e.toSliverToBoxAdapter()).toList(),
-        ),
-      )
+              _buildItems(),
+              _buildTips(),
+              buildTable(rows: _renderTuples(items: tips)),
+              Divider(),
+              buildTable(rows: _renderTuples(items: items)),
+            ].map((e) => e.toSliverToBoxAdapter()).toList(),
+          ),
+        )
     );
   }
 
@@ -101,12 +101,12 @@ class _MediaQueryDemoState extends State<MediaQueryDemo> with WidgetsBindingObse
         TextButton(
           onPressed: () => debugPrint("viewInsets: ${mediaQuery.viewInsets}"),
           child: ValueListenableBuilder<bool>(
-            valueListenable: isVisibleVN,
-            builder: (context, value, child) {
-              // print("ValueListenableBuilder:${context.viewBottom} ${MediaQuery.of(context).viewInsets.bottom}");
+              valueListenable: isVisibleVN,
+              builder: (context, value, child) {
+                // print("ValueListenableBuilder:${context.viewBottom} ${MediaQuery.of(context).viewInsets.bottom}");
 
-              return Text(value ? "展示键盘" : "隐藏键盘");
-            }
+                return Text(value ? "展示键盘" : "隐藏键盘");
+              }
           ),
         ),
         TextButton(

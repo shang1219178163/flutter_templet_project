@@ -156,7 +156,6 @@ import 'package:flutter_templet_project/vendor/SVGAImageDemo.dart';
 import 'package:flutter_templet_project/vendor/ScribbleDemo.dart';
 import 'package:flutter_templet_project/vendor/SkeletonDemo.dart';
 import 'package:flutter_templet_project/vendor/SlidableDemoOne.dart';
-import 'package:flutter_templet_project/vendor/TextlessDemo.dart';
 import 'package:flutter_templet_project/vendor/VisibilityDetectorDemo.dart';
 import 'package:flutter_templet_project/vendor/WPopupMenuDemo.dart';
 import 'package:flutter_templet_project/vendor/aesthetic_dialogs_demo.dart';
@@ -168,6 +167,7 @@ import 'package:flutter_templet_project/vendor/dotted_border_demo.dart';
 import 'package:flutter_templet_project/vendor/flutter_swiper_demo.dart';
 import 'package:flutter_templet_project/vendor/flutter_swiper_indicator_demo.dart';
 import 'package:flutter_templet_project/vendor/getx/getx_demo.dart';
+import 'package:flutter_templet_project/pages/keyboard_attach_demo.dart';
 import 'package:flutter_templet_project/vendor/qr/qr_code_scanner_demo.dart';
 import 'package:flutter_templet_project/vendor/qr/qr_flutter_demo.dart';
 import 'package:flutter_templet_project/vendor/soundAbount/SoundPlayDemo.dart';
@@ -582,6 +582,7 @@ class APPRouter {
   static const longCaptureWidgetDemo = '/LongCaptureWidgetDemo';
   static const jsonToDartPage = '/jsonToDartPage';
   static const assetUploadBoxDemo = '/assetUploadBoxDemo';
+  static const keyboardAttachDemo = '/keyboardAttachDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -661,7 +662,6 @@ class AppPage {
     GetPage(name: APPRouter.tabBarOnlyDemo, page: () => TabBarOnlyDemo(),),
     GetPage(name: APPRouter.tabBarSegmentDemo, page: () => TabBarSegmentDemo(),),
     GetPage(name: APPRouter.tabBarSegmentNewDemo, page: () => TabBarSegmentNewDemo(),),
-    GetPage(name: APPRouter.textlessDemo, page: () => TextlessDemo(),),
     GetPage(name: APPRouter.alertDialogDemo, page: () => AlertDialogDemo(),),
     GetPage(name: APPRouter.alertDialogTagSelectDemo, page: () => AlertDialogTagSelectDemo(),),
 
@@ -921,6 +921,7 @@ class AppPage {
     GetPage(name: APPRouter.longCaptureWidgetDemo, page: () => LongCaptureWidgetDemo(),),
     GetPage(name: APPRouter.jsonToDartPage, page: () => JsonToDartPage(),),
     GetPage(name: APPRouter.assetUploadBoxDemo, page: () => AssetUploadBoxDemo(),),
+    GetPage(name: APPRouter.keyboardAttachDemo, page: () => KeyboardAttachDemo(),),
 
 
   ];

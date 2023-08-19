@@ -596,6 +596,7 @@ var vendors = [
   Tuple2(APPRouter.wPopupMenuDemo, "微信聊天长按弹出框", ),
   Tuple2(APPRouter.syncfusionFlutterDatepickerDemo, "日期多选", ),
   Tuple2(APPRouter.tableCalenderMain, "日期", ),
+  Tuple2(APPRouter.keyboardAttachDemo, "keyboardAttachableDemo", ),
 
 ];
 
