@@ -549,8 +549,8 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
           presentDialogAlert(
             context: context,
             scrollController: ScrollController(),
-            title: "标题",
-            message: "message",
+            title: title,
+            message: message,
             content: Container(
               height: 400,
               color: Colors.green,
