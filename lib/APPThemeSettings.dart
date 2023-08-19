@@ -40,25 +40,24 @@ class APPThemeSettings {
     ),
     buttonTheme: ButtonThemeData(
       splashColor: Colors.red,
+
     ),
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
         splashFactory: NoSplash.splashFactory,
-        primary: Colors.blue,
+        foregroundColor: Colors.blue,
       ).merge(buildButtonStyle()),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         splashFactory: NoSplash.splashFactory,
-        // onPrimary: Colors.yellow,
-        primary: Colors.blue,
+        backgroundColor: Colors.blue,
       ).merge(buildButtonStyle()),
     ),
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
         splashFactory: NoSplash.splashFactory,
-        primary: Colors.blue,
-        // backgroundColor: Colors.green,
+        foregroundColor: Colors.blue,
       ).merge(buildButtonStyle()),
     ),
     // scaffoldBackgroundColor: Colors.red
