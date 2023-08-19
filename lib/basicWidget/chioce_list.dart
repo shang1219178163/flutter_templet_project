@@ -48,8 +48,9 @@ class _ChioceListState extends State<ChioceList> {
 
   Widget _buildListView() {
     return Material(
+      color: Colors.transparent,
       child: Container(
-        color: widget.backgroudColor,
+        // color: widget.backgroudColor,
         height: widget.rowHeight * widget.children.length.toDouble(),
         child: Scrollbar(
           controller: scrollController,
@@ -59,10 +60,11 @@ class _ChioceListState extends State<ChioceList> {
             itemExtent: widget.rowHeight,
             itemCount: widget.children.length,
             itemBuilder: (BuildContext context, int index) {
+
               final e = widget.children[index];
               return Container(
                 decoration: BoxDecoration(
-                  color: widget.backgroudColor,
+                  // color: widget.backgroudColor,
                   border: Border.all(color: Colors.transparent),
                 ),
                 child: ListTile(

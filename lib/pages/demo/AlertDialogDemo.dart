@@ -651,7 +651,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
       title: Text("ChioceList ${isMutiple ? '多选' : '单选'}"),
       content: ChioceList(
         isMutiple: isMutiple,
-        backgroudColor: Colors.black.withAlpha(10),
+        // backgroudColor: Colors.black.withAlpha(10),
         children: payTypes,
         indexs: [0],
         canScroll: false,
