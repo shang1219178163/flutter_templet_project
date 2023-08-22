@@ -10,7 +10,7 @@
 import 'package:flutter/material.dart';
 import 'package:tuple/tuple.dart';
 
-
+/// 自定义虚线
 class NDashLine extends StatelessWidget {
 
   const NDashLine({
@@ -49,21 +49,36 @@ class NDashLine extends StatelessWidget {
             ? constraints.constrainWidth()
             : constraints.constrainHeight();
         final dashHeight = height;
-        final dashCount = (boxWidth / (2 * step)).floor();
+        final count = boxWidth / (2 * step);
+        final dashCount = count.floor();
+        /// 剩余宽度不够一组
+        final otherCount = ((count%1)*2).truncate();
+        // debugPrint("boxWidth:$boxWidth, dashWidth:$step");
+        // debugPrint("count:$count, dashCount:$dashCount, otherCount:$otherCount");
 
         return Flex(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           direction: direction,
-          children: List.generate(dashCount, (_) {
-
-            return SizedBox(
-              width: direction == Axis.horizontal ? step : dashHeight,
-              height: direction == Axis.horizontal ? dashHeight : step,
-              child: DecoratedBox(
-                decoration: BoxDecoration(color: color),
-              ),
-            );
-          }),
+          children: [
+            ...List.generate(dashCount, (_) {
+              return SizedBox(
+                width: direction == Axis.horizontal ? step : dashHeight,
+                height: direction == Axis.horizontal ? dashHeight : step,
+                child: DecoratedBox(
+                  decoration: BoxDecoration(color: color),
+                ),
+              );
+            }),
+            ...List.generate(otherCount, (_) {
+              return SizedBox(
+                width: direction == Axis.horizontal ? step : dashHeight,
+                height: direction == Axis.horizontal ? dashHeight : step,
+                child: DecoratedBox(
+                  decoration: BoxDecoration(color: color),
+                ),
+              );
+            }),
+          ]
         );
       },
     );
@@ -110,7 +125,7 @@ class NDashLineOfMutiColor extends StatelessWidget {
         /// 剩余宽度不够一组
         final otherCount = ((count%1)*steps.length).truncate();
         // debugPrint("boxWidth:$boxWidth, dashWidth:$step");
-        // debugPrint("count:$count, dashCount:$dashCount, otherItemCount:$otherItemCount");
+        // debugPrint("count:$count, dashCount:$dashCount, otherCount:$otherCount");
 
         return Flex(
           // mainAxisAlignment: MainAxisAlignment.spaceBetween,//剩余的间隙平分
