@@ -138,7 +138,7 @@ class _TicketUiDemoState extends State<TicketUiDemo> {
       margin: EdgeInsets.symmetric(horizontal: 4),
       child: NDashLine(
         color: Colors.white,
-        dashWidth: 6,
+        itemWidth: 6,
       ),
     );
   }

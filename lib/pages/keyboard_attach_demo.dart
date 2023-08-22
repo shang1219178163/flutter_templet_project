@@ -3,6 +3,9 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/mixin/keyboard_change_mixin.dart';
@@ -49,6 +52,22 @@ class _KeyboardAttachDemoState extends State<KeyboardAttachDemo> with
     // } else {
     //   Navigator.of(context).pop();
     // }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    SystemChannels.navigation.setMethodCallHandler((call) {
+      debugPrint('<SystemChannels.navigation> ${call.method} (${call.arguments})');
+      /*
+   popRoute
+   pushRoute
+   */
+      return Future<dynamic>.value();
+    });
+    SemanticsService.announce('Hello world', TextDirection.ltr);
+
+    super.initState();
   }
 
   @override

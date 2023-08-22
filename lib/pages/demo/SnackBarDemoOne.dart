@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/dash_line.dart';
+import 'package:flutter_templet_project/basicWidget/n_dash_line.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 
@@ -104,8 +104,18 @@ class SnackBarDemoOneState extends State<SnackBarDemoOne> with ScaffoldMessenger
                   showSnackBar(buildSnackBar(behavior: behavior));
                 }),
 
-                DashLine(color: Colors.red,),
-
+                NDashLine(color: Colors.red,),
+                SizedBox(height: 10,),
+                NDashLine(
+                  height: 2,
+                  itemWidth: 12,
+                  colors: [
+                    Colors.transparent,
+                    Colors.blue,
+                    Colors.transparent,
+                    Colors.red,
+                  ]
+                ),
                 _buildItem(text: '显示SnackBar, 覆盖 isCenter', onPressed: () {
                   showSnackBar(buildSnackBar(behavior: behavior, isCenter: true),);
                 }),
