@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/dash_line.dart';
+import 'package:flutter_templet_project/basicWidget/n_dash_line.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/snack_bar_ext.dart';
@@ -105,7 +105,7 @@ class SnackBarDemoState extends State<SnackBarDemo> {
                     showSnackBar(buildSnackBar(behavior: behavior));
                   }),
 
-                  DashLine(color: Colors.red,),
+                  NDashLine(color: Colors.red,),
 
                   _buildItem(text: '显示SnackBar, 覆盖 isCenter', onPressed: () {
                     showSnackBar(buildSnackBar(behavior: behavior, isCenter: true),);
