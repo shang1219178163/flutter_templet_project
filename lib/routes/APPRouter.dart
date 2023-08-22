@@ -28,6 +28,7 @@ import 'package:flutter_templet_project/pages/LocalImagePage.dart';
 import 'package:flutter_templet_project/pages/HomeNavDemo.dart';
 import 'package:flutter_templet_project/pages/demo/CustomMultiChildLayoutDemo.dart';
 import 'package:flutter_templet_project/pages/demo/CustomSingleChildLayoutDemo.dart';
+import 'package:flutter_templet_project/pages/demo/DashLineDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DropBoxChoicDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DropBoxMutiRowChoicDemo.dart';
 import 'package:flutter_templet_project/pages/demo/GlobalIsolateDemo.dart';
@@ -583,6 +584,7 @@ class APPRouter {
   static const jsonToDartPage = '/jsonToDartPage';
   static const assetUploadBoxDemo = '/assetUploadBoxDemo';
   static const keyboardAttachDemo = '/keyboardAttachDemo';
+  static const dashLineDemo = '/dashLineDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -922,6 +924,7 @@ class AppPage {
     GetPage(name: APPRouter.jsonToDartPage, page: () => JsonToDartPage(),),
     GetPage(name: APPRouter.assetUploadBoxDemo, page: () => AssetUploadBoxDemo(),),
     GetPage(name: APPRouter.keyboardAttachDemo, page: () => KeyboardAttachDemo(),),
+    GetPage(name: APPRouter.dashLineDemo, page: () => DashLineDemo(),),
 
 
   ];
