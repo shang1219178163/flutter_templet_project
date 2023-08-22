@@ -44,6 +44,8 @@ class _DashLineDemoState extends State<DashLineDemo> {
           SizedBox(height: 10,),
           NDashLine(color: Colors.red,),
           SizedBox(height: 10,),
+          NDashLine(color: Colors.blue,),
+          SizedBox(height: 10,),
           NDashLineOfMutiColor(
             height: 2,
             steps: <Tuple2<double, Color>>[
