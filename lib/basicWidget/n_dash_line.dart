@@ -8,6 +8,8 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:tuple/tuple.dart';
+
 
 class NDashLine extends StatelessWidget {
 
@@ -15,25 +17,29 @@ class NDashLine extends StatelessWidget {
     Key? key,
     this.direction = Axis.horizontal,
     this.color = Colors.black,
-    this.colors = const [],
+    this.steps = const [],
     this.height = 1,
-    this.itemWidth = 5,
+    this.step = 5,
   }) : super(key: key);
 
+  /// 单色虚线
   final Color color;
-  final List<Color> colors;
+  /// 彩色虚线
+  final List<Tuple2<double, Color>> steps;
+  /// 方向
   final Axis direction;
+  /// 线条高度
   final double height;
-  final double itemWidth;
+  /// 单色步长
+  final double step;
 
   @override
   Widget build(BuildContext context) {
-    if (colors.length > 1) {
-      return _NDashLineNew(
-        colors: colors,
+    if (steps.length > 1) {
+      return NDashLineOfMutiColor(
+        steps: steps,
         direction: direction,
         height: height,
-        itemWidth: itemWidth,
       );
     }
 
@@ -42,9 +48,8 @@ class NDashLine extends StatelessWidget {
         final boxWidth = direction == Axis.horizontal
             ? constraints.constrainWidth()
             : constraints.constrainHeight();
-        final dashWidth = itemWidth;
         final dashHeight = height;
-        final dashCount = (boxWidth / (2 * dashWidth)).floor();
+        final dashCount = (boxWidth / (2 * step)).floor();
 
         return Flex(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -52,8 +57,8 @@ class NDashLine extends StatelessWidget {
           children: List.generate(dashCount, (_) {
 
             return SizedBox(
-              width: direction == Axis.horizontal ? dashWidth : dashHeight,
-              height: direction == Axis.horizontal ? dashHeight : dashWidth,
+              width: direction == Axis.horizontal ? step : dashHeight,
+              height: direction == Axis.horizontal ? dashHeight : step,
               child: DecoratedBox(
                 decoration: BoxDecoration(color: color),
               ),
@@ -66,24 +71,28 @@ class NDashLine extends StatelessWidget {
 }
 
 
-class _NDashLineNew extends StatelessWidget {
+/// 多颜色虚线
+class NDashLineOfMutiColor extends StatelessWidget {
 
-  const _NDashLineNew({
+  const NDashLineOfMutiColor({
     Key? key,
     this.direction = Axis.horizontal,
-    this.colors = const [Colors.transparent,
-      Colors.red,
-      Colors.transparent,
-      Colors.blue,
+    this.steps = const <Tuple2<double, Color>>[
+      Tuple2(5, Colors.transparent),
+      Tuple2(5, Colors.red),
+      Tuple2(5, Colors.transparent),
+      Tuple2(5, Colors.blue),
     ],
     this.height = 1,
-    this.itemWidth = 5,
   }) : super(key: key);
 
-  final List<Color> colors;
+  /// 每种颜色及步长宽度
+  final List<Tuple2<double, Color>> steps;
+  /// 水平或者垂直
   final Axis direction;
+  /// 线条高度
   final double height;
-  final double itemWidth;
+
 
   @override
   Widget build(BuildContext context) {
@@ -92,33 +101,33 @@ class _NDashLineNew extends StatelessWidget {
         final boxWidth = direction == Axis.horizontal
             ? constraints.constrainWidth()
             : constraints.constrainHeight();
-        final dashWidth = itemWidth;
-        final dashHeight = height;
-        final count = (boxWidth / (colors.length * dashWidth));
-        final dashCount = count.floor();
-        final otherItemCount = (count%1 * colors.length).truncate();
 
-        debugPrint("count:$count, dashCount:$dashCount, otherItemCount:$otherItemCount");
+        final step = steps.map((e) => e.item1).reduce((v, e) => v + e);
+
+        final dashHeight = height;
+        final count = boxWidth / step;
+        final dashCount = count.floor();
+        /// 剩余宽度不够一组
+        final otherCount = ((count%1)*steps.length).truncate();
+        // debugPrint("boxWidth:$boxWidth, dashWidth:$step");
+        // debugPrint("count:$count, dashCount:$dashCount, otherItemCount:$otherItemCount");
 
         return Flex(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,//剩余的间隙平分
+          // mainAxisAlignment: MainAxisAlignment.spaceBetween,//剩余的间隙平分
           direction: direction,
           children: [
             ...List.generate(dashCount, (_) {
-
               return Flex(
                 mainAxisSize: MainAxisSize.min,
                 direction: direction,
                 children: buildItems(
-                  colors: colors,
-                  dashWidth: dashWidth,
+                  steps: steps,
                   dashHeight: dashHeight,
                 ),
               );
             }),
             ...buildItems(
-              colors: colors.take(otherItemCount).toList(),
-              dashWidth: dashWidth,
+              steps: steps.take(otherCount).toList(),
               dashHeight: dashHeight,
             ),
           ],
@@ -128,16 +137,15 @@ class _NDashLineNew extends StatelessWidget {
   }
 
   List<Widget> buildItems({
-    required List<Color> colors,
-    required double dashWidth,
+    required List<Tuple2<double, Color>> steps,
     required double dashHeight,
   }) {
-    return colors.map((e) {
+    return steps.map((e) {
       return SizedBox(
-        width: direction == Axis.horizontal ? dashWidth : dashHeight,
-        height: direction == Axis.horizontal ? dashHeight : dashWidth,
+        width: direction == Axis.horizontal ? e.item1 : dashHeight,
+        height: direction == Axis.horizontal ? dashHeight : e.item1,
         child: DecoratedBox(
-          decoration: BoxDecoration(color: e),
+          decoration: BoxDecoration(color: e.item2),
         ),
       );
     }).toList();

@@ -106,16 +106,7 @@ class SnackBarDemoOneState extends State<SnackBarDemoOne> with ScaffoldMessenger
 
                 NDashLine(color: Colors.red,),
                 SizedBox(height: 10,),
-                NDashLine(
-                  height: 2,
-                  itemWidth: 12,
-                  colors: [
-                    Colors.transparent,
-                    Colors.blue,
-                    Colors.transparent,
-                    Colors.red,
-                  ]
-                ),
+
                 _buildItem(text: '显示SnackBar, 覆盖 isCenter', onPressed: () {
                   showSnackBar(buildSnackBar(behavior: behavior, isCenter: true),);
                 }),
