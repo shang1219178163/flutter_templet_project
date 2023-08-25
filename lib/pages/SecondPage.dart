@@ -511,8 +511,8 @@ class _SecondPageState extends State<SecondPage> {
               height: 60,
               decoration: NDashDecoration(
                 step: 2,
-                pointWidth: 2,
-                pointCount: 1,
+                // pointWidth: 2,
+                // pointCount: 1,
                 radius: Radius.circular(15),
                 strokeWidth: 3,
                 strokeColor: Colors.red,
@@ -525,9 +525,10 @@ class _SecondPageState extends State<SecondPage> {
               width: 160,
               height: 60,
               decoration: DashDecoration(
-                pointWidth: 2,
                 step: 5,
-                pointCount: 1,
+                span: 5,
+                // pointCount: 0,
+                pointWidth: 1,
                 radius: Radius.circular(15),
                 gradient: SweepGradient(
                   colors: [
