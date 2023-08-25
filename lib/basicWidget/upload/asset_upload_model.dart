@@ -16,7 +16,7 @@ class AssetUploadModel {
     this.file,
   });
 
-  final AssetEntity entity;
+  final AssetEntity? entity;
   /// 上传之后的文件 url
   String? url;
   /// 压缩之后的文件

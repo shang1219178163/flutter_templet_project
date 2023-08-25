@@ -31,8 +31,13 @@ class _AssetUploadBoxDemoState extends State<AssetUploadBoxDemo> {
   /// 获取图片链接数组
   List<String> urls = [];
 
+  List<String> urlsNew = ["https://yl-prescription-share.oss-cn-beijing.aliyuncs.com/beta/Health_APP/20230825/fb013ec6b90a4c5bb1059b003dada9ee.jpg",
+    "https://yl-prescription-share.oss-cn-beijing.aliyuncs.com/beta/Health_APP/20230825/ce326143c5b84fd9b99ffca943353b05.jpg"];
+
   @override
   Widget build(BuildContext context) {
+    selectedModels = urlsNew.map((e) => AssetUploadModel(url: e, entity: null)).toList();
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -98,6 +103,7 @@ class _AssetUploadBoxDemoState extends State<AssetUploadBoxDemo> {
               maxCount: 8,
               // rowCount: 4,
               items: selectedModels,
+              canEdit: false,
               // showFileSize: true,
               onChanged: (items){
                 debugPrint("onChanged items.length: ${items.length}");
@@ -115,7 +121,7 @@ class _AssetUploadBoxDemoState extends State<AssetUploadBoxDemo> {
                 decoration: BoxDecoration(
                   border: Border(bottom: BorderSide()),
                 ),
-                child: NText(data: e, fontSize: 16.sp),
+                child: NText(data: e, fontSize: 16.sp, maxLines: 2,),
               );
             }).toList(),
           )

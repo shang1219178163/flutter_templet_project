@@ -25,6 +25,7 @@ class AssetUploadBox extends StatefulWidget {
     this.spacing = 3,
     this.runSpacing = 3,
     this.canCameraTakePhoto = false,
+    this.canEdit = true,
     this.showFileSize = false,
   }) : super(key: key);
 
@@ -42,6 +43,9 @@ class AssetUploadBox extends StatefulWidget {
   double runSpacing;
   /// 可以 拍摄图片
   bool canCameraTakePhoto;
+
+  /// 可以编辑
+  bool canEdit;
 
   /// 显示文件大小
   bool showFileSize;
@@ -69,6 +73,7 @@ class _AssetUploadBoxState extends State<AssetUploadBox> {
       rowCount: widget.rowCount,
       spacing: widget.spacing,
       runSpacing: widget.runSpacing,
+      canEdit: widget.canEdit,
     );
   }
 
@@ -78,6 +83,7 @@ class _AssetUploadBoxState extends State<AssetUploadBox> {
     int rowCount = 4,
     double spacing = 10,
     double runSpacing = 10,
+    bool canEdit = true,
   }) {
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints){
@@ -143,7 +149,7 @@ class _AssetUploadBoxState extends State<AssetUploadBox> {
                                 widget.onChanged(items);
                               }
                             },
-                            onDelete: (){
+                            onDelete: canEdit == false ? null : (){
                               debugPrint("onDelete: $index, lenth: ${items[index].file?.path}");
                               items.remove(e);
                               setState(() {});
@@ -158,7 +164,7 @@ class _AssetUploadBoxState extends State<AssetUploadBox> {
                 ),
               );
             }).toList(),
-            if (items.length < maxCount)
+            if (items.length < maxCount && canEdit)
               InkWell(
                 onTap: () {
                   onPicker(maxCount: maxCount);
@@ -193,14 +199,17 @@ class _AssetUploadBoxState extends State<AssetUploadBox> {
     // required Function(int length, String result) cb,
   }) async {
     try {
-      final selectedEntitys = selectedModels.map((e) => e.entity).toList();
+      final tmpUrls = selectedModels.map((e) => e.url).where((e) => e != null).toList();
+      final tmpEntitys = selectedModels.map((e) => e.entity).where((e) => e != null).toList();
+      final selectedEntitys = List<AssetEntity>.from(tmpEntitys);
+
       final result = await AssetPicker.pickAssets(
         context,
         pickerConfig: AssetPickerConfig(
           requestType: RequestType.image,
           specialPickerType: SpecialPickerType.noPreview,
           selectedAssets: selectedEntitys,
-          maxAssets: maxCount,
+          maxAssets: maxCount - tmpUrls.length,
           specialItemPosition: SpecialItemPosition.prepend,
           specialItemBuilder: (context, AssetPathEntity? path, int length,) {
             if (path?.isAll != true) {
