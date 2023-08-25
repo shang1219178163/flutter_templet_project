@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_templet_project/basicWidget/n_network_image.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/upload/asset_upload_config.dart';
 import 'package:flutter_templet_project/basicWidget/upload/asset_upload_model.dart';
@@ -63,7 +64,7 @@ class _AssetUploadButtonState extends State<AssetUploadButton> with AutomaticKee
   void didUpdateWidget(covariant AssetUploadButton oldWidget) {
     // TODO: implement didUpdateWidget
     super.didUpdateWidget(oldWidget);
-    if (widget.model.entity.id == oldWidget.model.entity.id) {
+    if (widget.model.entity?.id == oldWidget.model.entity?.id) {
       // BrunoUtil.showInfoToast("path相同");
       return;
     }
@@ -77,28 +78,24 @@ class _AssetUploadButtonState extends State<AssetUploadButton> with AutomaticKee
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    // final futureWidget = NFutureBuilder<File?>(
-    //   future: widget.entity.file,
-    //   builder: (file) {
-    //     return Image.file(
-    //       File(file?.path ?? ""),
-    //       fit: BoxFit.cover,
-    //     );
-    //   },
-    //   loadingBuilder: (){
-    //     return Image(image: "img_placehorder.png".toAssetImage());
-    //   },
-    // );
+
+    Widget img = Image(image: "img_placehorder.png".toAssetImage());
+    if (widget.model.url?.startsWith("http") == true) {
+      img = NNetworkImage(url: widget.model.url ?? "");
+    }
+
+    if (widget.model.file != null) {
+      img = Image.file(
+        File(widget.model.file?.path ?? ""),
+        fit: BoxFit.cover,
+      );
+    }
 
     var imgChild = ClipRRect(
       borderRadius: BorderRadius.all(Radius.circular(widget.radius)),
       child: Padding(
         padding: EdgeInsets.only(top: 0, right: 0),
-        child: widget.model.file != null ? Image.file(
-            File(widget.model.file?.path ?? ""),
-            fit: BoxFit.cover,
-          ) : Image(image: "img_placehorder.png".toAssetImage(),
-        ),
+        child: img,
       ),
     );
     
@@ -136,6 +133,9 @@ class _AssetUploadButtonState extends State<AssetUploadButton> with AutomaticKee
 
   /// 右上角删除按钮
   Widget buildDelete() {
+    if (widget.onDelete == null) {
+      return SizedBox();
+    }
     return Container(
       decoration: const BoxDecoration(
         color: Colors.white,
@@ -257,6 +257,11 @@ class _AssetUploadButtonState extends State<AssetUploadButton> with AutomaticKee
   
   onRefresh() {
     // debugPrint("onRefresh ${widget.entity}");
+    final entityFile = widget.model.entity?.file;
+    if (entityFile == null) {
+      return;
+    }
+
     if (_isLoading) {
       debugPrint("_isLoading: $_isLoading ${widget.model.entity}");
       return;
@@ -264,8 +269,6 @@ class _AssetUploadButtonState extends State<AssetUploadButton> with AutomaticKee
     _isLoading = true;
     _successVN.value = true;
 
-    // final entityFile = widget.isOriginFile ? widget.model.entity.originFile : widget.model.entity.file;
-    final entityFile = widget.model.entity.file;
     entityFile.then((file) {
       if (file == null) {
         throw "文件为空";
