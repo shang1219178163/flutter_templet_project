@@ -22,6 +22,8 @@ class AssetUploadButton extends StatefulWidget {
     this.urlBlock,
     this.onDelete,
     this.radius = 8,
+    this.imgBuilder,
+    this.urlConvert,
     // this.isFinished = false,
     this.showFileSize = false,
   }) : super(key: key);
@@ -34,6 +36,12 @@ class AssetUploadButton extends StatefulWidget {
   final VoidCallback? onDelete;
   /// 圆角 默认8
   final double radius;
+
+  /// 网络图片url转为组件
+  Widget Function(String url)? imgBuilder;
+
+  /// 上传网络返回值转为 url
+  String Function(Map<String, dynamic> res)? urlConvert;
 
   /// 显示文件大小
   final bool showFileSize;
@@ -81,7 +89,8 @@ class _AssetUploadButtonState extends State<AssetUploadButton> with AutomaticKee
 
     Widget img = Image(image: "img_placehorder.png".toAssetImage());
     if (widget.model.url?.startsWith("http") == true) {
-      img = NNetworkImage(url: widget.model.url ?? "");
+      final imgUrl = widget.model.url ?? "";
+      img = widget.imgBuilder?.call(imgUrl) ?? NNetworkImage(url: imgUrl);
     }
 
     if (widget.model.file != null) {
@@ -237,6 +246,7 @@ class _AssetUploadButtonState extends State<AssetUploadButton> with AutomaticKee
     required String filePath,
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
+    String Function(Map<String, dynamic> res)? urlConvert,
   }) async {
     final url = AssetUploadConfig.uploadUrl;
     assert(url.startsWith("http"), "请设置上传地址");
@@ -251,7 +261,7 @@ class _AssetUploadButtonState extends State<AssetUploadButton> with AutomaticKee
       onReceiveProgress: onReceiveProgress,
     );
     final res = response.data ?? {};
-    final result = res['result'];
+    final result = urlConvert?.call(res) ?? res['result'];
     return result;
   }
   
@@ -291,7 +301,9 @@ class _AssetUploadButtonState extends State<AssetUploadButton> with AutomaticKee
         onSendProgress: (int count, int total){
           _percentVN.value = (count/total);
           // debugPrint("${count}/${total}_${_percentVN.value}_${_percentVN.value.toStringAsPercent(2)}");
-      });
+        },
+        urlConvert: widget.urlConvert,
+      );
     }).then((value) {
       final url = value;
       if (url == null || url.isEmpty) {
