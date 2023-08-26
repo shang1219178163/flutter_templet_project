@@ -1,5 +1,7 @@
 
 
+import 'dart:ffi';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -26,6 +28,8 @@ class AssetUploadBox extends StatefulWidget {
     this.runSpacing = 3,
     this.canCameraTakePhoto = false,
     this.canEdit = true,
+    this.imgBuilder,
+    this.onTap,
     this.showFileSize = false,
   }) : super(key: key);
 
@@ -37,16 +41,18 @@ class AssetUploadBox extends StatefulWidget {
   int maxCount;
   /// 每行个数
   int rowCount;
-
+  /// 水平间距
   double spacing;
-
+  /// 垂直间距
   double runSpacing;
   /// 可以 拍摄图片
   bool canCameraTakePhoto;
-
   /// 可以编辑
   bool canEdit;
-
+  /// 网络图片url转为组件
+  Widget Function(String url)? imgBuilder;
+  /// 图片点击事件
+  Void Function(List<String> urls, int index)? onTap;
   /// 显示文件大小
   bool showFileSize;
 
@@ -116,6 +122,10 @@ class _AssetUploadBoxState extends State<AssetUploadBox> {
                             // debugPrint("urls: ${urls.length}, $index");
                             FocusScope.of(context).unfocus();
 
+                            if (widget.onTap != null) {
+                              widget.onTap?.call(urls, index);
+                              return;
+                            }
                             showEntry(
                               child: NImagePreview(
                                 urls: urls,
@@ -125,15 +135,6 @@ class _AssetUploadBoxState extends State<AssetUploadBox> {
                                 },
                               ),
                             );
-
-                            // Navigator.push(context, MaterialPageRoute(
-                            //   builder: (_) {
-                            //     return ImagePreview(
-                            //       urls: urls,
-                            //       index: index,
-                            //     );
-                            //   })
-                            // );
                           },
                           child: AssetUploadButton(
                             model: e,
@@ -266,28 +267,6 @@ class _AssetUploadBoxState extends State<AssetUploadBox> {
       // BrunoUtil.showToast('$err');
       showToast(message: '$err');
     }
-  }
-
-  Future<String?> uploadFile({
-    required String filePath,
-    ProgressCallback? onSendProgress,
-    ProgressCallback? onReceiveProgress,
-  }) async {
-    final url = AssetUploadConfig.uploadUrl;
-    assert(url.startsWith("http"), "请设置上传地址");
-
-    final formData = FormData.fromMap({
-      'files': await MultipartFile.fromFile(filePath),
-    });
-    final response = await Dio().post<Map<String, dynamic>>(
-      url,
-      data: formData,
-      onSendProgress: onSendProgress,
-      onReceiveProgress: onReceiveProgress,
-    );
-    final res = response.data ?? {};
-    final result = res['result'];
-    return result;
   }
 
   showToast({required String message}) {
