@@ -2,6 +2,29 @@
 # 图片上传选择器 - AssetUploadBox（基于 wechat_assets_picker）
 
 
+```涉及第三方库
+// 图片选择
+wechat_assets_picker
+
+// 图片压缩
+flutter_image_compress
+
+// 负责缓存文件清理
+path_provider
+
+// 图片上传
+dio
+
+// 网络图片显示
+extended_image
+
+// 网络图片预览
+photo_view
+
+// 网络图片保存到相册
+image_gallery_saver
+```
+
 ## 使用
 
 ```

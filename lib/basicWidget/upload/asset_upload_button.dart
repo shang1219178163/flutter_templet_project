@@ -245,7 +245,7 @@ class _AssetUploadButtonState extends State<AssetUploadButton> with AutomaticKee
     String Function(Map<String, dynamic> res)? urlConvert,
   }) async {
     final url = AssetUploadConfig.uploadUrl;
-    assert(url.startsWith("http"), "请设置上传地址");
+    assert(url.startsWith("http"), "error: 请设置上传地址");
 
     final formData = FormData.fromMap({
       'files': await MultipartFile.fromFile(filePath),
