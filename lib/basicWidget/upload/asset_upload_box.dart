@@ -269,28 +269,6 @@ class _AssetUploadBoxState extends State<AssetUploadBox> {
     }
   }
 
-  Future<String?> uploadFile({
-    required String filePath,
-    ProgressCallback? onSendProgress,
-    ProgressCallback? onReceiveProgress,
-  }) async {
-    final url = AssetUploadConfig.uploadUrl;
-    assert(url.startsWith("http"), "请设置上传地址");
-
-    final formData = FormData.fromMap({
-      'files': await MultipartFile.fromFile(filePath),
-    });
-    final response = await Dio().post<Map<String, dynamic>>(
-      url,
-      data: formData,
-      onSendProgress: onSendProgress,
-      onReceiveProgress: onReceiveProgress,
-    );
-    final res = response.data ?? {};
-    final result = res['result'];
-    return result;
-  }
-
   showToast({required String message}) {
     Text(message).toShowCupertinoDialog(context: context);
   }
