@@ -26,17 +26,20 @@ class AssetUploadBoxDemo extends StatefulWidget {
 }
 
 class _AssetUploadBoxDemoState extends State<AssetUploadBoxDemo> {
-  /// 初始化数据
-  var selectedModels = <AssetUploadModel>[];
+  /// 没有默认数据
+  // var selectedModels = <AssetUploadModel>[];
+
+  /// 有默认数据
+  var selectedModels = [
+    "https://yl-prescription-share.oss-cn-beijing.aliyuncs.com/beta/Health_APP/20230825/fb013ec6b90a4c5bb1059b003dada9ee.jpg",
+    "https://yl-prescription-share.oss-cn-beijing.aliyuncs.com/beta/Health_APP/20230825/ce326143c5b84fd9b99ffca943353b05.jpg",
+  ].map((e) => AssetUploadModel(url: e, entity: null)).toList();
+
   /// 获取图片链接数组
   List<String> urls = [];
 
-  List<String> urlsNew = ["https://yl-prescription-share.oss-cn-beijing.aliyuncs.com/beta/Health_APP/20230825/fb013ec6b90a4c5bb1059b003dada9ee.jpg",
-    "https://yl-prescription-share.oss-cn-beijing.aliyuncs.com/beta/Health_APP/20230825/ce326143c5b84fd9b99ffca943353b05.jpg"];
-
   @override
   Widget build(BuildContext context) {
-    selectedModels = urlsNew.map((e) => AssetUploadModel(url: e, entity: null)).toList();
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -96,14 +99,14 @@ class _AssetUploadBoxDemoState extends State<AssetUploadBoxDemo> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          NText(data: "NUploadBoxNew", fontSize: 16,),
+          NText(data: "AssetUploadBox", fontSize: 16,),
           Container(
             padding: EdgeInsets.symmetric(horizontal: 20),
             child: AssetUploadBox(
               maxCount: 8,
               // rowCount: 4,
               items: selectedModels,
-              canEdit: false,
+              // canEdit: false,
               // showFileSize: true,
               onChanged: (items){
                 debugPrint("onChanged items.length: ${items.length}");
