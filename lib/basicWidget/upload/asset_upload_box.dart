@@ -125,15 +125,6 @@ class _AssetUploadBoxState extends State<AssetUploadBox> {
                                 },
                               ),
                             );
-
-                            // Navigator.push(context, MaterialPageRoute(
-                            //   builder: (_) {
-                            //     return ImagePreview(
-                            //       urls: urls,
-                            //       index: index,
-                            //     );
-                            //   })
-                            // );
                           },
                           child: AssetUploadButton(
                             model: e,

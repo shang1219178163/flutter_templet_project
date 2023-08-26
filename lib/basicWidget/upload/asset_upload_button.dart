@@ -76,10 +76,6 @@ class _AssetUploadButtonState extends State<AssetUploadButton> with AutomaticKee
       // BrunoUtil.showInfoToast("path相同");
       return;
     }
-    // if (widget.model.url == "") {
-    //   // BrunoUtil.showInfoToast("path相同");
-    //   return;
-    // }
     // onRefresh();
   }
 
