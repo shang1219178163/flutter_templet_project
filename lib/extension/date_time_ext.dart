@@ -29,23 +29,23 @@ const String DATE_FORMAT_H_M_S = 'HH:mm:ss';
 
 extension DateTimeExt on DateTime {
 
+  /// 时间戳(秒)
+  int get secondsSinceEpoch => millisecondsSinceEpoch~/1000;
+
+
   /// 时间戳 转 DateTime
   static DateTime dateFromTimestamp({required int timestamp}) {
-    var dateTime = DateTime.fromMillisecondsSinceEpoch(timestamp);
-    if ("$timestamp".length == 10) {
-      dateTime = DateTime.fromMillisecondsSinceEpoch(timestamp*1000);
-    }
+    var isMilliseconds = ("$timestamp".length == 13);
+    var timeSampNew = isMilliseconds ? timestamp : timestamp*1000;
+    var dateTime = DateTime.fromMillisecondsSinceEpoch(timeSampNew);
     return dateTime;
   }
 
   /// DateTime 转 时间戳(默认秒)
-  static int timestampFromDate({required DateTime date, bool isMilliseconds = false}) {
-    var result = date.millisecondsSinceEpoch;
-    if (!isMilliseconds) {
-      result = result~/1000;
-    }
-    return result;
-  }
+  // static int timestampFromDate({required DateTime date}) {
+  //   var result = date.millisecondsSinceEpoch~/1000;
+  //   return result;
+  // }
 
 
   /// 字符串 转 DateTime
@@ -88,10 +88,7 @@ extension DateTimeExt on DateTime {
     bool isMilliseconds = false,
   }) {
     final date = dateFromString(dateStr: dateStr, format: format, isUtc: isUtc);
-    var result = date.millisecondsSinceEpoch;
-    if (!isMilliseconds) {
-      result = result~/1000;
-    }
+    var result = date.secondsSinceEpoch;
     return result;
   }
 

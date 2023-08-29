@@ -13,6 +13,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 
 const double kCupertinoButtonHeight = 56.0;
@@ -50,8 +51,8 @@ extension WidgetExt on Widget {
   );
 
   ColoredBox toColoredBox({
-    Color color = Colors.green,
-  }) => ColoredBox(color: color, child: this,);
+    Color? color,
+  }) => ColoredBox(color: color ?? ColorExt.random, child: this,);
 
   toShowCupertinoDialog({
     required BuildContext context,
@@ -110,6 +111,7 @@ extension WidgetExt on Widget {
     useRootNavigator: useRootNavigator,
     routeSettings: routeSettings,
     pageBuilder: (context, animation, secondaryAnimation) {
+
       return InkWell(
         onTap: barrierTap,
         child: Container(

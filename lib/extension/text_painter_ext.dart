@@ -1,3 +1,10 @@
+//
+//  TextPainterExt.dart
+//  flutter_templet_project
+//
+//  Created by shang on 2023/8/29 20:19.
+//  Copyright © 2023/8/29 shang. All rights reserved.
+//
 
 
 import 'package:flutter/cupertino.dart';

@@ -1,7 +1,10 @@
 //
+//  NavigatorExt.dart
+//  flutter_templet_project
 //
-// ignore: avoid_web_libraries_in_flutter
-// import 'package:flutter/cupertino.dart' show BuildContext, Navigator;
+//  Created by shang on 2023/8/29 20:18.
+//  Copyright © 2023/8/29 shang. All rights reserved.
+//
 
 
 import 'package:flutter/cupertino.dart';

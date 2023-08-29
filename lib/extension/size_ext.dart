@@ -1,9 +1,9 @@
 //
-//  SizeExtension.dart
-//  三翼鸟工作台
+//  SizeExt.dart
+//  flutter_templet_project
 //
-//  Created by shang on 9/23/22 12:48 PM.
-//
+//  Created by shang on 2023/8/29 20:16.
+//  Copyright © 2023/8/29 shang. All rights reserved.
 //
 
 

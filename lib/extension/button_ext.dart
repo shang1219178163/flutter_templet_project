@@ -11,24 +11,24 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_label_and_icon.dart';
 
-extension ButtonStyleExt on ButtonStyle {
-
-  ///边框线加圆角
-  static outline({
-    BorderRadius borderRadius = BorderRadius.zero,
-    required Color borderColor,
-  }) {
-    return ButtonStyle(
-      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-        RoundedRectangleBorder(
-          borderRadius: borderRadius,
-          side: BorderSide(color: borderColor)
-        ),
-      ),
-    );
-  }
-  
-}
+// extension ButtonStyleExt on ButtonStyle {
+//
+//   ///边框线加圆角
+//   static outline({
+//     BorderRadius borderRadius = BorderRadius.zero,
+//     required Color borderColor,
+//   }) {
+//     return ButtonStyle(
+//       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+//         RoundedRectangleBorder(
+//           borderRadius: borderRadius,
+//           side: BorderSide(color: borderColor)
+//         ),
+//       ),
+//     );
+//   }
+//
+// }
 
 
 

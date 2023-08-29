@@ -1,3 +1,10 @@
+//
+//  ListNullableExt.dart
+//  flutter_templet_project
+//
+//  Created by shang on 2023/8/29 20:18.
+//  Copyright © 2023/8/29 shang. All rights reserved.
+//
 
 
 extension ListNullableExt<T,E> on List<E> {

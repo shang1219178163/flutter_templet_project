@@ -1,10 +1,11 @@
 //
-//  TextStyleExt.dart
+//  StackExt.dart
 //  flutter_templet_project
 //
-//  Created by shang on 2023/1/14 14:49.
-//  Copyright © 2023/1/14 shang. All rights reserved.
+//  Created by shang on 2023/8/29 20:18.
+//  Copyright © 2023/8/29 shang. All rights reserved.
 //
+
 
 import 'dart:ui' as ui;
 
