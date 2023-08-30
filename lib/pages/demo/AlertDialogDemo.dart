@@ -116,35 +116,36 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text("$widget"),
-          actions: [
-            TextButton(
-              onPressed: () {
-                ddlog(Icons.extension);
-              },
-              child: Icon(
-                Icons.extension,
-                color: Colors.white,
-              )
-            )
-          ],
-          bottom: _buildAppbarBottom(),
-        ),
-        body: Flow(
-          delegate: TestFlowDelegate(
-            margin: EdgeInsets.all(10.0),
-            spacing: 5,
-            flowHeight: double.infinity
-          ),
-          children: titles.map((e) => OutlinedButton(
+      appBar: AppBar(
+        title: Text("$widget"),
+        actions: [
+          TextButton(
             onPressed: () {
-              // ddlog(e);
-              _onPressed(titles.indexOf(e));
+              ddlog(Icons.extension);
             },
-            child: Text('${e}_${titles.indexOf(e)}')))
-          .toList(),
-        ));
+            child: Icon(
+              Icons.extension,
+              color: Colors.white,
+            )
+          )
+        ],
+        bottom: _buildAppbarBottom(),
+      ),
+      body: Flow(
+        delegate: TestFlowDelegate(
+          margin: EdgeInsets.all(10.0),
+          spacing: 5,
+          flowHeight: double.infinity
+        ),
+        children: titles.map((e) => OutlinedButton(
+          onPressed: () {
+            // ddlog(e);
+            _onPressed(titles.indexOf(e));
+          },
+          child: Text('${e}_${titles.indexOf(e)}')))
+        .toList(),
+      )
+    );
   }
 
   _buildAppbarBottom() {
@@ -579,33 +580,23 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
         child: Center(child: Text(title)),
       ),
     );
-    return GestureDetector(
-      onTap: onPressed,
-      child: Container(
-        padding: EdgeInsets.only(top: 10, bottom: 10),
-        child: Center(
-          child: Text(title,
-            style: TextStyle(
-              decoration: TextDecoration.none,
-              fontSize: 18,
-              fontWeight: FontWeight.w600,
-              color: Colors.black87,
-            )),
-        ),
-      ),
-    );
   }
 
-  void showCupertinoAlertDialog() {
+  showCupertinoAlertDialog() {
     CupertinoAlertDialog(
       title: Text(title),
       content: Text(message, textAlign: TextAlign.start),
-      actions: ["取消", "确定"].map((e) => _buildButton(e, () => Navigator.pop(context),)).toList(),
+      actions: ["取消", "确定"].map((e) => TextButton(
+        onPressed: () => Navigator.pop(context),
+        child: Container(
+          height: 45,
+          child: Center(child: Text(e)),
+        ),
+      )).toList(),
     ).toShowCupertinoDialog(context: context);
-    // .toShowDialog(context);
   }
 
-  void showAlertDialog() {
+  showAlertDialog() {
     AlertDialog(
       title: Text(title),
       content: Text(message, textAlign: TextAlign.start),
