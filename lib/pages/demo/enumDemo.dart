@@ -93,24 +93,33 @@ enum ActivityTypeNew {
   unknown;
 }
 
-// extension ActivityTypeNewExt on ActivityTypeNew {
-//
-//   int get number {
-//     switch (this) {
-//       case ActivityTypeNew.running:
-//         return 1;
-//       case ActivityTypeNew.climbing:
-//         return 2;
-//       case ActivityTypeNew.hiking:
-//         return 5;
-//       case ActivityTypeNew.cycling:
-//         return 7;
-//       case ActivityTypeNew.Skiing:
-//         return 10;
-//     }
-//     return 0;
-//   }
-// }
+extension ActivityTypeNewExt on ActivityTypeNew {
+
+  static const map = {
+    ActivityTypeNew.running: "跑步",
+    ActivityTypeNew.climbing: "攀登",
+    ActivityTypeNew.hiking: "徒步旅行",
+    ActivityTypeNew.cycling: "骑行",
+    ActivityTypeNew.Skiing: "滑雪",
+    ActivityTypeNew.unknown: "未知",
+  };
+
+  String? get desc {
+    return map[this];
+  }
+
+  static ActivityTypeNew? getTypeWithIndex(int index) {
+    return ActivityTypeNew.values.firstWhere((e) => e.index == index,
+        orElse: () => ActivityTypeNew.unknown,
+    );
+  }
+
+  static ActivityTypeNew getTypeWithName(String name) {
+    return ActivityTypeNew.values.firstWhere((e) => e.name == name,
+        orElse: () => ActivityTypeNew.unknown,
+    );
+  }
+}
 
 enum ActivityType {
 

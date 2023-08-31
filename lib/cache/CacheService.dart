@@ -40,7 +40,7 @@ class CacheService {
   }
 
   /// 泛型获取值
-  void set<T>(String key, Object? value) {
+  void set<T>(String key, T? value) {
     if (value == null) {
       return;
     }

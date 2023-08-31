@@ -13,7 +13,9 @@ class NChoiceBox<T> extends StatefulWidget {
     required this.items,
     required this.onChanged,
     this.title,
+    this.itemMargin = const EdgeInsets.symmetric(vertical: 4),
     this.itemColor = bgColor,
+    this.itemRadius = 8,
     this.itemSelectedColor = Colors.blue,
     this.crossAxisAlignment = CrossAxisAlignment.stretch,
     this.wrapSpacing = 16,
@@ -36,6 +38,9 @@ class NChoiceBox<T> extends StatefulWidget {
 
   WrapAlignment wrapAlignment;
 
+  EdgeInsets itemMargin;
+  /// item 圆角
+  double itemRadius;
   /// 元素背景色
   Color itemColor;
   /// 选中元素背景色
@@ -91,6 +96,9 @@ class _NChoiceBoxState<T> extends State<NChoiceBox<T>> {
               selected: e.isSelected == true,
               selectedColor: widget.itemSelectedColor,
               backgroundColor: widget.itemColor,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(widget.itemRadius),)
+              ),
               onSelected: (bool selected) {
                 for (final element in widget.items) {
                   if (element.id == e.id) {
