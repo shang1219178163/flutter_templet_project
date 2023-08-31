@@ -1,7 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/header.dart';
 import 'package:flutter_templet_project/basicWidget/n_cancel_and_confirm_bar.dart';
+import 'package:flutter_templet_project/basicWidget/n_toast.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/overlay_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
@@ -117,6 +119,21 @@ class _OverlayDemoState extends State<OverlayDemo> {
                   );
                 },
                 child: Text('PopupView: ${e}'),
+              );
+            }).toList(),
+            Header.h5(title: "NToast"),
+            ...[Alignment.topCenter,
+              Alignment.center,
+              Alignment.bottomCenter,
+            ].map((e) {
+              return ElevatedButton(
+                onPressed: () => NToast.showToast(
+                  context: context,
+                  text: 'NToast is awesome!',
+                  // barrierDismissible: false,
+                  alignment: e,
+                ),
+                child: Text('Show Toast: ${e.toString().split(".").last}'),
               );
             }).toList(),
           ],

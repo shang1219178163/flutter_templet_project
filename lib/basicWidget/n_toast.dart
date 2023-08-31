@@ -1,22 +1,11 @@
-//
-//  OverlayExt.dart
-//  flutter_templet_project
-//
-//  Created by shang on 2023/8/29 20:16.
-//  Copyright © 2023/8/29 shang. All rights reserved.
-//
 
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_adaptive_text.dart';
 import 'package:flutter_templet_project/basicWidget/n_slide_transition_builder.dart';
+import 'package:flutter_templet_project/extension/overlay_ext.dart';
 
-typedef OverlayWidgetBuilder = Widget Function(BuildContext context, VoidCallback onHide);
-
-
-extension OverlayExt<T extends StatefulWidget> on State<T> {
-
-  OverlayState get _overlayState => Overlay.of(context);
+class NToast{
   /// overlay 层集合
   static final List<OverlayEntry> _entriesList = [];
   /// 当前弹窗
@@ -31,11 +20,17 @@ extension OverlayExt<T extends StatefulWidget> on State<T> {
   bool get isLoading => _entriesList.isNotEmpty;
 
   /// OverlayEntry 弹窗展示
-  OverlayEntry? showEntry({
+  static OverlayEntry? showEntry({
+    required BuildContext context,
     required Widget child,
     bool isReplace = false,
     bool maintainState = false,
   }){
+    final OverlayState? _overlayState = Overlay.of(context);
+    if (_overlayState == null) {
+      return null;
+    }
+
     if (isReplace) {
       hideEntry();
     }
@@ -51,7 +46,7 @@ extension OverlayExt<T extends StatefulWidget> on State<T> {
   }
 
   /// OverlayEntry 弹窗移除
-  hideEntry({duration = const Duration(milliseconds: 350)}) {
+  static hideEntry({duration = const Duration(milliseconds: 350)}) {
     if (currentOverlayEntry == null) {
       return;
     }
@@ -61,7 +56,7 @@ extension OverlayExt<T extends StatefulWidget> on State<T> {
   }
 
   /// OverlayEntry 清除
-  clearEntry() {
+  static clearEntry() {
     for (final entry in _entriesList) {
       entry.remove();
     }
@@ -69,7 +64,8 @@ extension OverlayExt<T extends StatefulWidget> on State<T> {
   }
 
   /// 展示 OverlayEntry 弹窗
-  showToast({
+  static showToast({
+    required BuildContext context,
     String text = "showToast",
     Widget? child,
     Alignment alignment = Alignment.center,
@@ -89,7 +85,7 @@ extension OverlayExt<T extends StatefulWidget> on State<T> {
       content = Stack(
         children: [
           Material(
-            color: barrierColor ?? Colors.black.withOpacity(0.1),
+            color: barrierColor,
             child: InkWell(
               onTap: onBarrier,
               child: Container(
@@ -103,7 +99,7 @@ extension OverlayExt<T extends StatefulWidget> on State<T> {
         ],
       );
     }
-    showEntry(child: content);
+    showEntry(context: context, child: content);
 
     if (barrierDismissible) {
       Future.delayed(duration, hideEntry);
@@ -111,7 +107,8 @@ extension OverlayExt<T extends StatefulWidget> on State<T> {
   }
 
   /// 滑进滑出弹窗
-  presentModalView({
+  static presentModalView({
+    required BuildContext context,
     bool isReplace = false,
     bool maintainState = false,
     Alignment alignment = Alignment.bottomCenter,
@@ -129,24 +126,23 @@ extension OverlayExt<T extends StatefulWidget> on State<T> {
     }
 
     showEntry(
-      isReplace: isReplace,
-      maintainState: maintainState,
-      child: Material(
-        color: Colors.black.withOpacity(0.1),
-        child: InkWell(
-          onTap: !barrierDismissible ? null : onHide,
-          child: NSlideTransitionBuilder(
-            key: globalKey,
-            alignment: alignment,
-            duration: duration,
-            hasFade: false,
-            child: builder(context, onHide),
+        context: context,
+        isReplace: isReplace,
+        maintainState: maintainState,
+        child: Material(
+          color: Colors.black.withOpacity(0.1),
+          child: InkWell(
+            onTap: !barrierDismissible ? null : onHide,
+            child: NSlideTransitionBuilder(
+              key: globalKey,
+              alignment: alignment,
+              duration: duration,
+              hasFade: false,
+              child: builder(context, onHide),
+            ),
           ),
-        ),
-      )
+        )
     );
   }
 
 }
-
-
