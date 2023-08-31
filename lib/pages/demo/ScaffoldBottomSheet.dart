@@ -48,6 +48,7 @@ class _ScaffoldBottomSheetState extends State<ScaffoldBottomSheet> {
       ),
       body: Column(
         children: [
+          buildInputBar(),
           Expanded(
             child: ListView(
               children: list.map((e) {
@@ -103,8 +104,12 @@ class _ScaffoldBottomSheetState extends State<ScaffoldBottomSheet> {
 
   buildInputView({
     required ValueChanged<String>? onChanged,
-}) {
+  }) {
     final bottom = MediaQuery.of(context).padding.bottom;
+
+    if (MediaQuery.of(context).viewInsets.bottom <= 300) {
+      return SizedBox();
+    }
 
     _inputController.text = "键盘辅助视图";
     return Container(
@@ -130,18 +135,94 @@ class _ScaffoldBottomSheetState extends State<ScaffoldBottomSheet> {
           filled: true,
           fillColor: Colors.white,
           // prefixIcon: const Icon(Icons.keyboard_alt_outlined),
-          suffixIcon: IconButton(
-            onPressed: () {
-              if (_inputController.text.isNotEmpty) {
-                onChanged?.call(_inputController.text.trim());
-              }
-            },
-            icon: Icon(Icons.send, color: Theme.of(context).primaryColor,),
+          suffixIcon: Container(
+            padding: EdgeInsets.all(8),
+            child: ElevatedButton(
+              // style: ElevatedButton.styleFrom(
+              //   padding: EdgeInsets.zero,
+              //   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              //   minimumSize: Size(50, 18),
+              // ),
+              style: ButtonStyle(
+                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                padding: MaterialStateProperty.all<EdgeInsets>(
+                    EdgeInsets.zero,
+                ),
+                minimumSize: MaterialStateProperty.all<Size>(
+                    Size(50, 18)
+                ),
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    // side: BorderSide(color: Colors.red),
+                  )
+                ),
+              ),
+              onPressed: () {
+                if (_inputController.text.isNotEmpty) {
+                  onChanged?.call(_inputController.text.trim());
+                }
+              },
+              child: Text("确定",
+                style: TextStyle(
+                  // color: Theme.of(context).primaryColor,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 16,
+                ),
+              ),
+            ),
           ),
         ),
         onSubmitted: (_) => onChanged?.call(_inputController.text.trim()),
       ),
     );
   }
+
+//   buildInputView({
+//     required ValueChanged<String>? onChanged,
+// }) {
+//     final bottom = MediaQuery.of(context).padding.bottom;
+//
+//     if (MediaQuery.of(context).viewInsets.bottom <= 300) {
+//       return SizedBox();
+//     }
+//
+//     _inputController.text = "键盘辅助视图";
+//     return Container(
+//       decoration: BoxDecoration(
+//         color: Colors.black12,
+//       ),
+//       padding: EdgeInsets.only(
+//         top: 12,
+//         left: 12,
+//         right: 12,
+//         bottom: max(12, bottom),
+//       ),
+//       child: TextField(
+//         controller: _inputController,
+//         minLines: 1,
+//         maxLines: 4,
+//         decoration: InputDecoration(
+//           contentPadding: EdgeInsets.all(8),
+//           border: OutlineInputBorder(
+//             borderRadius: BorderRadius.circular(12),
+//             borderSide: BorderSide.none,
+//           ),
+//           filled: true,
+//           fillColor: Colors.white,
+//           // prefixIcon: const Icon(Icons.keyboard_alt_outlined),
+//           suffixIcon: IconButton(
+//             onPressed: () {
+//               if (_inputController.text.isNotEmpty) {
+//                 onChanged?.call(_inputController.text.trim());
+//               }
+//             },
+//             icon: Icon(Icons.send, color: Theme.of(context).primaryColor,),
+//           ),
+//         ),
+//         onSubmitted: (_) => onChanged?.call(_inputController.text.trim()),
+//       ),
+//     );
+//   }
 
 }

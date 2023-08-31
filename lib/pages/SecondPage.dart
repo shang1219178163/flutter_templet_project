@@ -256,6 +256,68 @@ class _SecondPageState extends State<SecondPage> {
               ),
             ),
             buildSection(
+              title: "ElevatedButton ButtonStyle",
+              child: ElevatedButton(
+                // style: ElevatedButton.styleFrom(
+                //   padding: EdgeInsets.zero,
+                //   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                //   minimumSize: Size(50, 18),
+                // ),
+                style: ButtonStyle(
+                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  padding: MaterialStateProperty.all<EdgeInsets>(
+                    EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  ),
+                  minimumSize: MaterialStateProperty.all<Size>(
+                      Size(50, 30)
+                  ),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                      // side: BorderSide(color: Colors.red),
+                    )
+                  ),
+                ),
+                onPressed: () {
+                  debugPrint("ElevatedButton ButtonStyle");
+                },
+                child: Text("确定",
+                  style: TextStyle(
+                    // color: Theme.of(context).primaryColor,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16,
+                  ),
+                ),
+              ),
+            ),
+            buildSection(
+              title: "FloatingActionButton",
+              child: Column(
+                children: [
+                  FloatingActionButton(
+                    mini: true,
+                    elevation: 0,
+                    backgroundColor: const Color(0xff03dac6),
+                    foregroundColor: Colors.black,
+                    onPressed: () {
+                      ddlog("FloatingActionButton");
+                    },
+                    child: Icon(Icons.open_with),
+                  ),
+                  FloatingActionButton.extended(
+                    elevation: 0,
+                    backgroundColor: const Color(0xff03dac6),
+                    foregroundColor: Colors.black,
+                    onPressed: () {
+                      ddlog("FloatingActionButton.extended");
+                    },
+                    icon: Icon(Icons.add),
+                    label: Text('EXTENDED'),
+                  ),
+                ],
+              ),
+            ),
+            buildSection(
               title: "TextSelectionToolbarTextButton",
               child: TextSelectionToolbarTextButton(
                 padding: EdgeInsets.all(8),
@@ -357,31 +419,6 @@ class _SecondPageState extends State<SecondPage> {
             buildSection(
               title: "ToggleButtons",
               child: buildToggleButtons(),
-            ),
-            buildSection(
-              title: "FloatingActionButton",
-              child: Column(
-                children: [
-                  FloatingActionButton(
-                    mini: true,
-                    backgroundColor: const Color(0xff03dac6),
-                    foregroundColor: Colors.black,
-                    onPressed: () {
-                      ddlog("FloatingActionButton");
-                    },
-                    child: Icon(Icons.open_with),
-                  ),
-                  FloatingActionButton.extended(
-                    backgroundColor: const Color(0xff03dac6),
-                    foregroundColor: Colors.black,
-                    onPressed: () {
-                      ddlog("FloatingActionButton.extended");
-                    },
-                    icon: Icon(Icons.add),
-                    label: Text('EXTENDED'),
-                  ),
-                ],
-              ),
             ),
             buildSection(
               title: "DropdownButton",
