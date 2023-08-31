@@ -75,7 +75,7 @@ extension OverlayExt<T extends StatefulWidget> on State<T> {
     Alignment alignment = Alignment.center,
     Duration duration = const Duration(milliseconds: 2000),
     bool barrierDismissible = true,
-    Color? barrierColor = Colors.black54,
+    Color? barrierColor = Colors.transparent,
     VoidCallback? onBarrier,
     bool isLast = false,
   }) {
@@ -89,7 +89,7 @@ extension OverlayExt<T extends StatefulWidget> on State<T> {
       content = Stack(
         children: [
           Material(
-            color: Colors.black.withOpacity(0.1),
+            color: barrierColor ?? Colors.black.withOpacity(0.1),
             child: InkWell(
               onTap: onBarrier,
               child: Container(
