@@ -460,7 +460,8 @@ var list = [
   Tuple2(APPRouter.pageBuilderDemo, "pageBuilderDemo", ),
   Tuple2(APPRouter.npageViewDemo, "npageViewDemo", ),
   Tuple2(APPRouter.boxShadowDemoOne, "shadowDemo", ),
-  Tuple2(APPRouter.getxDemo, "getxDemo", ),
+  Tuple2(APPRouter.scaffoldBottomSheet, "scaffoldBottomSheet", ),
+
 
 ];
 
@@ -597,6 +598,7 @@ var vendors = [
   Tuple2(APPRouter.syncfusionFlutterDatepickerDemo, "日期多选", ),
   Tuple2(APPRouter.tableCalenderMain, "日期", ),
   Tuple2(APPRouter.keyboardAttachDemo, "keyboardAttachableDemo", ),
+  Tuple2(APPRouter.getxDemo, "getxDemo", ),
 
 ];
 

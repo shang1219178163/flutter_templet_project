@@ -45,6 +45,7 @@ import 'package:flutter_templet_project/pages/demo/PageViewAndBarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PageViewDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/PageViewDemoThree.dart';
 import 'package:flutter_templet_project/pages/demo/RefreshListView.dart';
+import 'package:flutter_templet_project/pages/demo/ScaffoldBottomSheet.dart';
 import 'package:flutter_templet_project/pages/demo/StackDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/StackDemoTwo.dart';
 import 'package:flutter_templet_project/pages/demo/SuspensionButtonDemo.dart';
@@ -585,6 +586,7 @@ class APPRouter {
   static const assetUploadBoxDemo = '/assetUploadBoxDemo';
   static const keyboardAttachDemo = '/keyboardAttachDemo';
   static const dashLineDemo = '/dashLineDemo';
+  static const scaffoldBottomSheet = '/scaffoldBottomSheet';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -925,6 +927,7 @@ class AppPage {
     GetPage(name: APPRouter.assetUploadBoxDemo, page: () => AssetUploadBoxDemo(),),
     GetPage(name: APPRouter.keyboardAttachDemo, page: () => KeyboardAttachDemo(),),
     GetPage(name: APPRouter.dashLineDemo, page: () => DashLineDemo(),),
+    GetPage(name: APPRouter.scaffoldBottomSheet, page: () => ScaffoldBottomSheet(),),
 
 
   ];
