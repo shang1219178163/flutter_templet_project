@@ -36,7 +36,7 @@ class _DismissibleDemoState extends State<DismissibleDemo> {
       itemBuilder: (BuildContext context, int index) {
         final item = _list[index];
         return Dismissible(
-          key: Key(item.toString()),
+          key: UniqueKey(),
           // crossAxisEndOffset: 1.0,
           // secondaryBackground: Container(color: Colors.pink),
           dragStartBehavior: DragStartBehavior.down,

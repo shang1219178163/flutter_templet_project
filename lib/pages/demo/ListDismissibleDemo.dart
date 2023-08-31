@@ -87,7 +87,7 @@ class _ListDismissibleDemoState extends State<ListDismissibleDemo> {
       return child;
     }
     return Dismissible(
-      key: Key(item),
+      key: UniqueKey(),
       movementDuration: Duration(milliseconds: 100),
       onDismissed: (direction) {
         debugPrint("--removeAt---$item");

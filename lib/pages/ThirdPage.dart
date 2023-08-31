@@ -203,7 +203,7 @@ class _ThirdPageState extends State<ThirdPage> with RouteAware {
           );
 
           return Dismissible(
-            key: Key(item),
+            key: UniqueKey(),
             onDismissed: (direction) {
               setState(() {
                 items.removeAt(index);
