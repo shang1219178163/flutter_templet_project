@@ -145,7 +145,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final app = GetMaterialApp(
-      key: AppUti.navigatorKey,
+      // key: AppUti.navigatorKey,
+      navigatorKey: AppUti.navigatorKey,
       title: 'Flutter Templet',
       debugShowCheckedModeBanner: false,
       locale: const Locale('zh'),

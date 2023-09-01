@@ -84,7 +84,7 @@ dependencies:
 #    url: https://github.com/hurshi/dio-http-cache.git
   #引导图
 #  tutorial_coach_mark: ^0.6.0+1
-  popover: ^0.2.6+3
+  popover: ^0.2.8+2
 
 #  pull_to_refresh: ^1.6.5
   easy_refresh: ^3.3.1

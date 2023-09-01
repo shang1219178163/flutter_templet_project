@@ -21,6 +21,7 @@ import 'package:flutter_templet_project/basicWidget/upload_button.dart';
 import 'package:flutter_templet_project/extension/button_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/pages/demo/curve_painter.dart';
+import 'package:flutter_templet_project/uti/app_uti.dart';
 
 import 'package:tuple/tuple.dart';
 
@@ -46,9 +47,10 @@ class _SecondPageState extends State<SecondPage> {
             icon: Icon(Icons.change_circle_outlined),
             color: Colors.white,
             onPressed: () {
-              setState(() {
-                _isList = !_isList;
-              });
+              debugPrint("AppUti.navigatorKey: ${AppUti.navigatorKey.currentWidget}");
+
+              _isList = !_isList;
+              setState(() {});
             },
           ),
         ],
@@ -142,7 +144,9 @@ class _SecondPageState extends State<SecondPage> {
                       side: BorderSide(width: 1, color: Colors.grey),
                       borderRadius: BorderRadius.circular(4),
                     ),
-                    onPressed: () { debugPrint("MaterialButton"); },
+                    onPressed: () {
+                      debugPrint("MaterialButton");
+                    },
                     child: NLabelAndIcon(
                       label: Text("MaterialButton"),
                       icon: Icon(Icons.info),

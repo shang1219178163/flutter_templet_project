@@ -1244,10 +1244,10 @@ packages:
     dependency: "direct main"
     description:
       name: popover
-      sha256: "586192140ed4413779a02e4e4e14ff1ad040346e15bdc5361a16178e9a01f933"
+      sha256: "59f4a55ebb484d012c8aaa273ad58eee571945231b71fb938c5a69f63b5a94d4"
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.2.6+3"
+    version: "0.2.8+2"
   process:
     dependency: transitive
     description:
