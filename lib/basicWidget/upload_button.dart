@@ -59,13 +59,15 @@ class _UploadButtonState extends State<UploadButton> {
           Container(
             padding: EdgeInsets.only(
               top: widget.deteleHeight * 0.5 - 3,
-              right: widget.deteleWidth * 0.5 - 3),
+              right: widget.deteleWidth * 0.5 - 3
+            ),
             color: widget.color,
             child: OutlinedButton(
               onPressed: widget.onPressed,
               child: widget.image ??
                   Image.asset("images/img_upload_placeholder.png",
-                      fit: BoxFit.fill),
+                      fit: BoxFit.fill
+                  ),
             ),
           ),
           if (widget.onDetele != null)

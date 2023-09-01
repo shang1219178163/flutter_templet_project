@@ -63,7 +63,7 @@ class _ScaffoldBottomSheetState extends State<ScaffoldBottomSheet> {
             )
           ),
         ]
-      )
+      ),
     );
   }
 
@@ -178,51 +178,5 @@ class _ScaffoldBottomSheetState extends State<ScaffoldBottomSheet> {
     );
   }
 
-//   buildInputView({
-//     required ValueChanged<String>? onChanged,
-// }) {
-//     final bottom = MediaQuery.of(context).padding.bottom;
-//
-//     if (MediaQuery.of(context).viewInsets.bottom <= 300) {
-//       return SizedBox();
-//     }
-//
-//     _inputController.text = "键盘辅助视图";
-//     return Container(
-//       decoration: BoxDecoration(
-//         color: Colors.black12,
-//       ),
-//       padding: EdgeInsets.only(
-//         top: 12,
-//         left: 12,
-//         right: 12,
-//         bottom: max(12, bottom),
-//       ),
-//       child: TextField(
-//         controller: _inputController,
-//         minLines: 1,
-//         maxLines: 4,
-//         decoration: InputDecoration(
-//           contentPadding: EdgeInsets.all(8),
-//           border: OutlineInputBorder(
-//             borderRadius: BorderRadius.circular(12),
-//             borderSide: BorderSide.none,
-//           ),
-//           filled: true,
-//           fillColor: Colors.white,
-//           // prefixIcon: const Icon(Icons.keyboard_alt_outlined),
-//           suffixIcon: IconButton(
-//             onPressed: () {
-//               if (_inputController.text.isNotEmpty) {
-//                 onChanged?.call(_inputController.text.trim());
-//               }
-//             },
-//             icon: Icon(Icons.send, color: Theme.of(context).primaryColor,),
-//           ),
-//         ),
-//         onSubmitted: (_) => onChanged?.call(_inputController.text.trim()),
-//       ),
-//     );
-//   }
 
 }
