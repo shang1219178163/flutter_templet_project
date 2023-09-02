@@ -205,7 +205,7 @@ class _HorizontalScrollWidgetState extends State<NHorizontalScrollWidget> {
                   child: Container(
                     width: 24,
                     height: 24,
-                    child: Image.asset('icon_play.png'.toPng(),),
+                    child: Image.asset('icon_play.png'.toPath(),),
                   ),
                 )
             ],

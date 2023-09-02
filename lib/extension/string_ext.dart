@@ -53,14 +53,14 @@ extension StringExt on String{
     }
   }
 
-  /// 转 List<dynamic>
-  List<dynamic>? decodeList({Object? Function(Object? key, Object? value)? reviver}) {
+  /// 转 List<T>
+  List<T>? decodeList<T>({Object? Function(Object? key, Object? value)? reviver}) {
     if (this.isEmpty) {
       return null;
     }
 
     try {
-      final result = jsonDecode(this, reviver: reviver) as List<dynamic>?;
+      final result = jsonDecode(this, reviver: reviver) as List<T>?;
       return result;
     } catch (exception) {
       debugPrint("decodeList: exception: $exception");
@@ -69,58 +69,16 @@ extension StringExt on String{
   }
 
   /// 本地图片路径
-  String toPath() {
-    return "assets/images/$this";
-  }
-
-  /// 本地图片路径
-  String toPng() {
-    if (endsWith(".png")) {
-      return "assets/images/$this";
-    }
-    return "assets/images/$this.png";
-  }
-  /// 本地图片路径
-  String toJpg() {
-    if (this.endsWith(".jpg")) {
-      return "assets/images/$this";
-    }
-    return "assets/images/$this.jpg";
-  }
-  /// 本地图片路径
-  String toSvg() {
-    if (this.endsWith(".svg")) {
-      return "assets/images/$this";
-    }
-    return "assets/images/$this.svg";
+  String toPath([String dir = "assets/images",]) {
+    return "$dir/$this";
   }
 
   /// 图片名称转 AssetImage(带类型)
   AssetImage toAssetImage({
+    String dir = "assets/images",
     AssetBundle? bundle,
     String? package,
-  }) => AssetImage("assets/images/$this",
-    bundle: bundle,
-    package: package
-  );
-
-  /// 返回 png 图片的 AssetImage
-  AssetImage toPngAssetImage({
-    String? package,
-    AssetBundle? bundle,
-  }) => AssetImage(toPng(), bundle: bundle, package: package);
-
-  /// 返回 jpg 图片的 AssetImage
-  AssetImage toJpgAssetImage({
-    String? package,
-    AssetBundle? bundle,
-  }) => AssetImage(toJpg(), package: package, bundle: bundle);
-
-  /// 返回 svg 图片的 AssetImage
-  AssetImage toSvgAssetImage({
-    String? package,
-    AssetBundle? bundle,
-  }) => AssetImage(toSvg(), package: package, bundle: bundle);
+  }) => AssetImage("$dir/$this", bundle: bundle, package: package);
 
   /// 同 int.parse(this)
   int get parseInt => int.parse(this);

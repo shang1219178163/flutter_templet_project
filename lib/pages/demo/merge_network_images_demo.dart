@@ -109,7 +109,7 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
               width: e.materialWidth,
               height: e.materialHeight,
             )).toList(),
-            qrCodeBuilder: (url) => Image.asset('QRCode.png'.toPng(), width:90, height: 90),
+            qrCodeBuilder: (url) => Image.asset('QRCode.png'.toPath(), width:90, height: 90),
             qrCodeUrl: qrCodeUrl,
           ),
         ],
@@ -169,12 +169,12 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
             children: [
               _buildBtn(
                 onTap: () => callback?.call(-1),
-                image: Image.asset('icon_arrow_up.png'.toPng()),
+                image: Image.asset('icon_arrow_up.png'.toPath()),
                 hidden: hideUp,
               ),
               hideUp ? Container() : SizedBox(height: 6),
               _buildBtn(
-                image: Image.asset('icon_arrow_down.png'.toPng()),
+                image: Image.asset('icon_arrow_down.png'.toPath()),
                 onTap: () => callback?.call(1),
                 hidden: hideDown,
               ),

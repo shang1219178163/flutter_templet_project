@@ -73,7 +73,7 @@ class _TextFieldColorChangeDemoState extends State<TextFieldColorChangeDemo> {
             children: [
               LoginInput(
                 textfieldKey: accountGlobalKey,
-                image: 'icon_account.png'.toPng(),
+                image: 'icon_account.png'.toPath(),
                 hint: '请输入手机号/账号',
                 // keyboardType: TextInputType.number,
                 value: loginId,
@@ -83,7 +83,7 @@ class _TextFieldColorChangeDemoState extends State<TextFieldColorChangeDemo> {
               ),
               LoginInput(
                 textfieldKey: pwdGlobalKey,
-                image: 'icon_lock.png'.toPng(),
+                image: 'icon_lock.png'.toPath(),
                 hint: '请输入密码',
                 obscureText: true,
                 isPwd: true,
@@ -349,8 +349,8 @@ class _LoginInputState extends State<LoginInput> {
                     focusColor: fontColor[10],
                     icon: Image.asset(
                       isEyeClose
-                          ? 'icon_eye_close.png'.toPng()
-                          : 'icon_eye_open.png'.toPng(),
+                          ? 'icon_eye_close.png'.toPath()
+                          : 'icon_eye_open.png'.toPath(),
                       width: 20,
                       height: 20,
                       color: isFocus ? primaryColor : null,
@@ -423,8 +423,8 @@ class _LoginInputState extends State<LoginInput> {
             focusColor: fontColor[10],
             icon: Image.asset(
               isEyeClose
-                  ? 'icon_eye_close.png'.toPng()
-                  : 'icon_eye_open.png'.toPng(),
+                  ? 'icon_eye_close.png'.toPath()
+                  : 'icon_eye_open.png'.toPath(),
               width: 20,
               height: 20,
               color: isFocus ? primaryColor : null,

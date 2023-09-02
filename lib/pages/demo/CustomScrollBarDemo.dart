@@ -205,7 +205,7 @@ class _CustomScrollBarDemoState extends State<CustomScrollBarDemo> {
                 child: Container(
                   width: 24.w,
                   height: 24.w,
-                  child: Image.asset('icon_play.png'.toPng(),),
+                  child: Image.asset('icon_play.png'.toPath(),),
                 ),
               )
             ],

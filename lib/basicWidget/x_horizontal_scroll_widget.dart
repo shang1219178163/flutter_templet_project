@@ -215,7 +215,7 @@ class XHorizontalScrollWidget extends StatelessWidget {
         if (isVideo) SizedBox(
           width: 24,
           height: 24,
-          child: Image.asset('icon_play.png'.toPng(),),
+          child: Image.asset('icon_play.png'.toPath(),),
         ),
       ],
     );
@@ -452,7 +452,7 @@ class HorizontalScrollWidget extends StatelessWidget {
               if (isVideo) SizedBox(
                 width: 24,
                 height: 24,
-                child: Image.asset('icon_play.png'.toPng()),
+                child: Image.asset('icon_play.png'.toPath()),
               ),
             ],
           ) : Center(child: Text('Index:${e.item1}')),

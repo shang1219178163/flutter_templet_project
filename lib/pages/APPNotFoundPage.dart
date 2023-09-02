@@ -40,7 +40,9 @@ class APPNotFoundPage extends StatelessWidget {
               widthFactor: 0.66,
               child: Hero(
                 tag: 'avatar',
-                child: Image.asset('404'.toPng(),),
+                child: Image(
+                  image: '404.png'.toAssetImage(),
+                ),
               ),
             ),
             Padding(

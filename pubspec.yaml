@@ -190,5 +190,5 @@ flutter:
   assets:
     - assets/images/
     - assets/data/
-    - assets/images/3.0x/
-    - assets/images/2.0x/
+#    - assets/images/3.0x/
+#    - assets/images/2.0x/

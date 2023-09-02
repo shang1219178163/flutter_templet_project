@@ -61,7 +61,7 @@ class _LoginPageOneState extends State<LoginPageOne> {
               child: CircleAvatar(
                 backgroundColor: Colors.transparent,
                 radius: 50.0,
-                child: Image.asset('avatar.png'.toPng()),
+                child: Image.asset('avatar.png'.toPath()),
               ),
           ),
           SizedBox(height: 40),

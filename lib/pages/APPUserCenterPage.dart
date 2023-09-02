@@ -111,7 +111,7 @@ class _APPUserCenterPageState extends State<APPUserCenterPage>{
           SizedBox(height: 10),
           Hero(
             tag: 'avatar',
-            child: Image.asset('avatar.png'.toPng(), width:90),
+            child: Image.asset('avatar.png'.toPath(), width:90),
             // child: Image.asset('bg.png'.toPng(), width:90),
           ),
           // Container(child: Image.asset('icon_appbar_back.png'.toPng(), width:90),),

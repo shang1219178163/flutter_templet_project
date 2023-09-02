@@ -439,12 +439,12 @@ class _SecondPageState extends State<SecondPage> {
             buildSection(
               title: "UploadButton",
               child: UploadButton(
-                image: Image.asset("img_update.png".toPng(),
+                image: Image.asset("img_update.png".toPath(),
                   fit: BoxFit.fill,
                   width: 100,
                   height: 100,
                 ),
-                deteleImage: Image.asset("icon_delete.png".toPng(),
+                deteleImage: Image.asset("icon_delete.png".toPath(),
                   fit: BoxFit.fill,
                   width: 25,
                   height: 25,
