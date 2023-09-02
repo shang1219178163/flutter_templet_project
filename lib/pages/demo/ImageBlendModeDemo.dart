@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/extension/string_ext.dart';
 
 
 class ImageBlendModeDemo extends StatefulWidget {
@@ -13,8 +14,6 @@ class ImageBlendModeDemo extends StatefulWidget {
 }
 
 class _ImageBlendModeDemoState extends State<ImageBlendModeDemo> {
-
-  final blendModes = BlendMode.values;
 
   bool flag = false;
 
@@ -42,7 +41,8 @@ class _ImageBlendModeDemoState extends State<ImageBlendModeDemo> {
     double spacing = 8,
     double runSpacing = 8,
   }) {
-    var name = flag ? 'images/img_update.png' : 'images/flutter_logo.png';
+    var name = flag ? 'img_update.png' : 'flutter_logo.png';
+
     return Container(
       // color: Colors.black,
       padding: EdgeInsets.all(8),
@@ -55,14 +55,14 @@ class _ImageBlendModeDemoState extends State<ImageBlendModeDemo> {
               Wrap(
                 spacing: spacing,
                 runSpacing: runSpacing,
-                children: blendModes.map((e) => Container(
+                children: BlendMode.values.map((e) => Container(
                   child: Container(
                     // color: Colors.red,
                     width: itemWidth,
                     child: Column(
                       children: [
                         Image.asset(
-                          name,
+                          name.toPath(),
                           color: Colors.grey,
                           colorBlendMode: e,
                         ),

@@ -270,6 +270,7 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
   }
 
+
   @override
   Widget build(BuildContext context) {
     final page = Scaffold(
@@ -278,30 +279,34 @@ class _MyHomePageState extends State<MyHomePage> {
       drawer: APPDrawerMenuPage(),
       endDrawer: APPDrawerMenuPage(),
       // appBar: buildAppBar(),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        currentIndex: currentIndex,
-        selectedFontSize: 10.sp, // 选中字体大小
-        unselectedFontSize: 10.sp, // 未选中字体大小
-        backgroundColor: Colors.white,
-        selectedItemColor: context.primaryColor,
-        onTap: (index) => _onBarTap(index),
-        items: items.map((e) => BottomNavigationBarItem(
-          tooltip: '', // 去除长按文字提示
-          label: e.item1.item1,
-          icon: ValueListenableBuilder<int>(
-            valueListenable: unreadVN,
-            builder: (context, badge, child){
+      bottomNavigationBar: Theme(
+        data: Theme.of(context).copyWith(
+          // canvasColor: Colors.red,
+        ),
+        child: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          currentIndex: currentIndex,
+          selectedFontSize: 10.sp, // 选中字体大小
+          unselectedFontSize: 10.sp, // 未选中字体大小
+          selectedItemColor: context.primaryColor,
+          onTap: (index) => _onBarTap(index),
+          items: items.map((e) => BottomNavigationBarItem(
+            tooltip: '', // 去除长按文字提示
+            label: e.item1.item1,
+            icon: ValueListenableBuilder<int>(
+              valueListenable: unreadVN,
+              builder: (context, badge, child){
 
-              return buildIcon(
-                title: e.item1.item1,
-                normalIcon: e.item1.item2,
-                activeIcon: e.item1.item2,
-                badge: badge,
-              );
-            }
-          ),
-        ),).toList(),
+                return buildIcon(
+                  title: e.item1.item1,
+                  normalIcon: e.item1.item2,
+                  activeIcon: e.item1.item2,
+                  badge: badge,
+                );
+              }
+            ),
+          ),).toList(),
+        ),
       ),
       body: items.map((e) => e.item2).toList()[currentIndex],
       // body: PageView(onPageChanged: (index){

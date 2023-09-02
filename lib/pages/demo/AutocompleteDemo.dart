@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_autocomplete_options_view.dart';
+import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:get/get_core/src/get_main.dart';
 
 import 'package:flutter_templet_project/extension/list_ext.dart';
@@ -63,7 +64,7 @@ class _AutocompleteDemoState extends State<AutocompleteDemo>{
       ),
       body: CustomScrollView(
         slivers: [
-          ..._buildHeader(),
+          ...buildHeader(),
           Autocomplete<OptionModel>(
             displayStringForOption: (option) => option.name,
             fieldViewBuilder: _params[0].isOpen ? _buildFieldView : _buildFieldViewDefault,
@@ -96,14 +97,16 @@ class _AutocompleteDemoState extends State<AutocompleteDemo>{
             },
           ),
           Image(
-            image: "img_flutter_3_10.webp".toAssetImage(),
+            image: "img_flutter_3_10.png".toAssetImage(),
+            colorBlendMode: BlendMode.dst,
+            color: context.primaryColor,
           ),
         ].map((e) => SliverToBoxAdapter(child: e,)).toList(),
       )
     );
   }
 
-  _buildHeader() {
+  buildHeader() {
     return [
       // buildExpandColor(),
       buildExpandMenu(),
