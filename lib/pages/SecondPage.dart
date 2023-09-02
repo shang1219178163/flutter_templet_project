@@ -319,7 +319,7 @@ class _SecondPageState extends State<SecondPage> {
                     // isExtended: false,
                     extendedPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 0),
                     backgroundColor: const Color(0xff03dac6),
-                    foregroundColor: Colors.black,
+                    // foregroundColor: Colors.black,
                     onPressed: () {
                       ddlog("FloatingActionButton.extended");
                     },
@@ -330,7 +330,7 @@ class _SecondPageState extends State<SecondPage> {
                     mini: true,
                     elevation: 0,
                     backgroundColor: const Color(0xff03dac6),
-                    foregroundColor: Colors.black,
+                    // foregroundColor: Colors.black,
                     onPressed: () {
                       ddlog("FloatingActionButton");
                     },
@@ -341,7 +341,7 @@ class _SecondPageState extends State<SecondPage> {
                     // isExtended: false,
                     extendedPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 0),
                     backgroundColor: const Color(0xff03dac6),
-                    foregroundColor: Colors.black,
+                    // foregroundColor: Colors.black,
                     onPressed: () {
                       ddlog("FloatingActionButton.extended");
                     },
