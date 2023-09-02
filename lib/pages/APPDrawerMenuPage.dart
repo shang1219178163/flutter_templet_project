@@ -36,7 +36,7 @@ class _APPDrawerMenuPageState extends State<APPDrawerMenuPage> {
 
   get textStyle => TextStyle(color: Theme.of(context).primaryColor);
 
-  get changeThemeTitle => Get.isDarkMode ? "默认主题" : "暗黑主题";
+  get themeTitle => Get.isDarkMode ? "默认主题" : "暗黑主题";
 
   @override
   Widget build(BuildContext context) {
@@ -114,41 +114,40 @@ class _APPDrawerMenuPageState extends State<APPDrawerMenuPage> {
   buildFooter() {
     return [
       Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        TextButton(
-          onPressed: (){
-            setState(() {
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          TextButton(
+            onPressed: (){
               APPThemeSettings.instance.changeTheme();
-            });
-          },
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Icon(Icons.change_circle_outlined, color: context.primaryColor),
-              SizedBox(width: 3,),
-              Text(changeThemeTitle,
-                style: TextStyle(color: context.primaryColor),
-              )
-            ],
+              setState(() {});
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Icon(Icons.change_circle_outlined, color: context.primaryColor),
+                SizedBox(width: 3,),
+                Text(themeTitle,
+                  style: TextStyle(color: context.primaryColor),
+                )
+              ],
+            ),
           ),
-        ),
-        TextButton.icon(
-          onPressed: (){
-            APPThemeSettings.instance.showThemePicker(
-                context: context,
-                callback: (){
-                  Navigator.of(context).pop();
-                }
-            );
-          },
-          icon: Icon(Icons.color_lens, color: context.primaryColor),
-          label: Text("Light主题切换",
-            style: TextStyle(color: context.primaryColor),
-          )
-        ),
-      ],
-    ),
+          TextButton.icon(
+            onPressed: (){
+              APPThemeSettings.instance.showThemePicker(
+                  context: context,
+                  callback: (){
+                    Navigator.of(context).pop();
+                  }
+              );
+            },
+            icon: Icon(Icons.color_lens, color: context.primaryColor),
+            label: Text("Light主题切换",
+              style: TextStyle(color: context.primaryColor),
+            )
+          ),
+        ],
+      ),
     ];
   }
 
