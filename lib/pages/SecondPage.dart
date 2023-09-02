@@ -229,10 +229,7 @@ class _SecondPageState extends State<SecondPage> {
               title: "ElevatedButton",
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  TextDirection.ltr,
-                  TextDirection.rtl,
-                ].map((e){
+                children: TextDirection.values.reversed.map((e){
                   return Directionality(
                     textDirection: e,
                     child: ElevatedButton.icon(
@@ -275,39 +272,40 @@ class _SecondPageState extends State<SecondPage> {
               ),
             ),
             buildSection(
-              title: "ElevatedButton ButtonStyle",
-              child: ElevatedButton(
-                // style: ElevatedButton.styleFrom(
-                //   padding: EdgeInsets.zero,
-                //   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                //   minimumSize: Size(50, 18),
-                // ),
-                style: ButtonStyle(
-                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  padding: MaterialStateProperty.all<EdgeInsets>(
-                    // EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                    EdgeInsets.symmetric(horizontal: 4, vertical: 4),
+              title: "ElevatedButton OutlinedBorder",
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    side: BorderSide(color: Colors.red),
                   ),
-                  minimumSize: MaterialStateProperty.all<Size>(
-                      Size(50, 20)
+                  StadiumBorder(
+                    side: BorderSide(width: 1, style: BorderStyle.solid),
                   ),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                      // side: BorderSide(color: Colors.red),
-                    )
+                  CircleBorder(
+                    // side: BorderSide(color: Colors.yellow, width: 2, style: BorderStyle.solid),
+                    // eccentricity: 0.0,
                   ),
-                ),
-                onPressed: () {
-                  debugPrint("ElevatedButton ButtonStyle");
-                },
-                child: Text("确定",
-                  style: TextStyle(
-                    // color: Theme.of(context).primaryColor,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 14,
-                  ),
-                ),
+                ].map((e){
+                  return ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      minimumSize: Size(50, 18),
+                      shape: e,
+                    ),
+                    onPressed: () {
+                      debugPrint("ElevatedButton ButtonStyle");
+                    },
+                    child: Text("确定",
+                      style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 14,
+                      ),
+                    ),
+                  );
+                }).toList(),
               ),
             ),
             buildSection(
@@ -381,7 +379,7 @@ class _SecondPageState extends State<SecondPage> {
               ),
             ),
             buildSection(
-              title: "NTextAndIcon + OutlinedButton copy",
+              title: "NTextAndIcon + ElevatedButton",
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: iconDirectionItems().map((e) => ElevatedButton(
