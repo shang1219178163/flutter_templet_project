@@ -37,11 +37,11 @@ class _ImageBlendModeDemoState extends State<ImageBlendModeDemo> {
   }
 
   _buildBody({
-    int rowCount = 5,
+    int rowCount = 4,
     double spacing = 8,
     double runSpacing = 8,
   }) {
-    var name = flag ? 'img_update.png' : 'flutter_logo.png';
+    var name = flag ? 'img_update.png' : 'img_flutter_3_10.png';
 
     return Container(
       // color: Colors.black,
