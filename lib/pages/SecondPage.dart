@@ -116,8 +116,10 @@ class _SecondPageState extends State<SecondPage> {
               ),
             ),
             buildSection(
-              title: "GradientButton",
-              child: _buildGradientButton(),
+              title: "LinearGradient",
+              child: _buildGradientButton(
+                onTap: () => debugPrint("LinearGradient"),
+              ),
             ),
             buildSection(
               title: "MaterialButton",
@@ -895,20 +897,27 @@ class _SecondPageState extends State<SecondPage> {
     );
   }
 
-  Widget _buildGradientButton() {
-    return Container(
-      padding: EdgeInsets.all(8),
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(8)),
-        gradient: LinearGradient(
-          colors: <Color>[
-            Color(0xFF0D47A1),
-            Color(0xFF42A5F5),
-          ],
+  Widget _buildGradientButton({
+    Gradient? gradient,
+    Widget? child,
+    VoidCallback? onTap,
+  }) {
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        padding: EdgeInsets.all(8),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(8)),
+          gradient: gradient ?? LinearGradient(
+            colors: <Color>[
+              Color(0xFF0D47A1),
+              Color(0xFF42A5F5),
+            ],
+          ),
         ),
-      ),
-      child: Text("LinearGradient",
-        style: TextStyle(color: Colors.white),
+        child: child ?? Text("LinearGradient",
+          style: TextStyle(color: Colors.white),
+        ),
       ),
     );
   }
