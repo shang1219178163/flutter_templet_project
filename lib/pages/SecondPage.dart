@@ -285,14 +285,15 @@ class _SecondPageState extends State<SecondPage> {
                 style: ButtonStyle(
                   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   padding: MaterialStateProperty.all<EdgeInsets>(
-                    EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    // EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    EdgeInsets.symmetric(horizontal: 4, vertical: 4),
                   ),
                   minimumSize: MaterialStateProperty.all<Size>(
-                      Size(50, 30)
+                      Size(50, 20)
                   ),
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
+                      borderRadius: BorderRadius.circular(20),
                       // side: BorderSide(color: Colors.red),
                     )
                   ),
