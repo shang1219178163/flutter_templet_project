@@ -129,7 +129,7 @@ class _SecondPageState extends State<SecondPage> {
                   MaterialButton(
                     padding: EdgeInsets.symmetric(horizontal: 8),
                     elevation: 0,
-                    color: Colors.blue,
+                    color: context.primaryColor,
                     textColor: Colors.white,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(8)),
@@ -140,10 +140,10 @@ class _SecondPageState extends State<SecondPage> {
                   MaterialButton(
                     padding: EdgeInsets.all(8),
                     minWidth: 0,
-                    textColor: Colors.red,
+                    textColor: context.primaryColor,
                     // color: Colors.green,
                     shape: RoundedRectangleBorder(
-                      side: BorderSide(width: 1, color: Colors.grey),
+                      side: BorderSide(width: 1, color: context.primaryColor,),
                       borderRadius: BorderRadius.circular(4),
                     ),
                     onPressed: () {
@@ -909,8 +909,8 @@ class _SecondPageState extends State<SecondPage> {
           borderRadius: BorderRadius.all(Radius.circular(8)),
           gradient: gradient ?? LinearGradient(
             colors: <Color>[
-              Color(0xFF0D47A1),
-              Color(0xFF42A5F5),
+              context.primaryColor,
+              context.primaryColor.withOpacity(0.5),
             ],
           ),
         ),
