@@ -3,8 +3,6 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/im_textfield_bar.dart';
-import 'package:flutter_templet_project/basicWidget/n_text.dart';
 
 /// 键盘辅助视图
 class ScaffoldBottomSheet extends StatefulWidget {
@@ -27,20 +25,28 @@ class _ScaffoldBottomSheetState extends State<ScaffoldBottomSheet> {
   final list = List.generate(20, (i) => "item_$i").toList();
 
   @override
+  void initState() {
+    _inputController.text = "键盘辅助视图";
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: ['done',].map((e) =>
-            TextButton(
-              child: Text(e,
-                style: TextStyle(color: Colors.white),
-              ),
-              onPressed: () => debugPrint(e),)
+          TextButton(
+            child: Text(e,
+              style: TextStyle(color: Colors.white),
+            ),
+            onPressed: () => debugPrint(e),
+          )
         ).toList(),
       ),
       // bottomSheet: buildInputBar(),
       bottomSheet: buildInputView(
+        controller: _inputController,
         onChanged: (String value) {
           list.insert(0, value);
           setState(() {});
@@ -92,7 +98,6 @@ class _ScaffoldBottomSheetState extends State<ScaffoldBottomSheet> {
 
   Widget buildInputBar() {
     return Container(
-      color: Colors.white,
       padding: EdgeInsets.all(10.0),
       child: TextField(
         decoration: InputDecoration(
@@ -103,15 +108,12 @@ class _ScaffoldBottomSheetState extends State<ScaffoldBottomSheet> {
   }
 
   buildInputView({
+    TextEditingController? controller,
     required ValueChanged<String>? onChanged,
   }) {
-    final bottom = MediaQuery.of(context).padding.bottom;
-
     if (MediaQuery.of(context).viewInsets.bottom <= 300) {
       return SizedBox();
     }
-
-    _inputController.text = "键盘辅助视图";
     return Container(
       decoration: BoxDecoration(
         color: Colors.black12,
@@ -120,16 +122,16 @@ class _ScaffoldBottomSheetState extends State<ScaffoldBottomSheet> {
         top: 12,
         left: 12,
         right: 12,
-        bottom: max(12, bottom),
+        bottom: max(12, MediaQuery.of(context).padding.bottom),
       ),
       child: TextField(
-        controller: _inputController,
+        controller: controller,
         minLines: 1,
         maxLines: 4,
         decoration: InputDecoration(
           contentPadding: EdgeInsets.all(8),
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(8),
             borderSide: BorderSide.none,
           ),
           filled: true,
@@ -138,30 +140,17 @@ class _ScaffoldBottomSheetState extends State<ScaffoldBottomSheet> {
           suffixIcon: Container(
             padding: EdgeInsets.all(8),
             child: ElevatedButton(
-              // style: ElevatedButton.styleFrom(
-              //   padding: EdgeInsets.zero,
-              //   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-              //   minimumSize: Size(50, 18),
-              // ),
-              style: ButtonStyle(
+              style: ElevatedButton.styleFrom(
+                padding: EdgeInsets.zero,
                 tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                padding: MaterialStateProperty.all<EdgeInsets>(
-                    EdgeInsets.zero,
-                ),
-                minimumSize: MaterialStateProperty.all<Size>(
-                    Size(50, 18)
-                ),
-                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                    // side: BorderSide(color: Colors.red),
-                  )
+                minimumSize: Size(50, 18),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  // side: BorderSide(color: Colors.red),
                 ),
               ),
               onPressed: () {
-                if (_inputController.text.isNotEmpty) {
-                  onChanged?.call(_inputController.text.trim());
-                }
+                onChanged?.call(controller?.text.trim() ?? "");
               },
               child: Text("确定",
                 style: TextStyle(
@@ -173,7 +162,7 @@ class _ScaffoldBottomSheetState extends State<ScaffoldBottomSheet> {
             ),
           ),
         ),
-        onSubmitted: (_) => onChanged?.call(_inputController.text.trim()),
+        onSubmitted: (_) => onChanged?.call(controller?.text.trim() ?? ""),
       ),
     );
   }
