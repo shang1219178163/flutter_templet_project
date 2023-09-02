@@ -72,7 +72,6 @@ class _APPUserCenterPageState extends State<APPUserCenterPage>{
             IconButton(icon: Icon(Icons.change_circle_outlined),
               color: Colors.white,
               onPressed: (){
-                // Get.changeTheme(Get.isDarkMode? ThemeData.light(): ThemeData.dark());
                 APPThemeSettings.instance.changeTheme();
               },
             ),

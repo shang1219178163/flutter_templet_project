@@ -145,7 +145,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final app = GetMaterialApp(
-      // key: AppUti.navigatorKey,
       navigatorKey: AppUti.navigatorKey,
       title: 'Flutter Templet',
       debugShowCheckedModeBanner: false,
@@ -204,7 +203,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
-// final kScaffoldKey = GlobalKey<ScaffoldState>();
+final kScaffoldKey = GlobalKey<ScaffoldState>();
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({ Key? key, this.title}) : super(key: key);
@@ -274,7 +273,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     final page = Scaffold(
-      // key: kScaffoldKey,
+      key: kScaffoldKey,
       // drawer: MyDrawer(),
       drawer: APPDrawerMenuPage(),
       endDrawer: APPDrawerMenuPage(),

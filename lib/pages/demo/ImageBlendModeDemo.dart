@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/APPThemeSettings.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 
 
@@ -33,6 +34,12 @@ class _ImageBlendModeDemoState extends State<ImageBlendModeDemo> {
         ],
       ),
       body: _buildBody(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          APPThemeSettings.instance.changeTheme();
+        },
+        child: Icon(Icons.change_circle_outlined),
+      ),
     );
   }
 
