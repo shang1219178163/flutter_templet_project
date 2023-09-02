@@ -64,6 +64,10 @@ class APPThemeSettings {
 
   // ThemeData? darkThemeData;
   ThemeData darkThemeData = ThemeData.dark().copyWith(
+    platform: TargetPlatform.iOS,
+    splashFactory: NoSplash.splashFactory,
+    splashColor: Colors.transparent, // 点击时的高亮效果设置为透明
+    highlightColor: Colors.transparent, // 长按时的扩散效果设置为透明
       // accentColor: Colors.tealAccent[200]!,
       // brightness: Brightness.dark,//设置明暗模式为暗色
       // accentColor: Colors.grey[900]!,//(按钮）Widget前景色为黑色
