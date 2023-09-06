@@ -9,6 +9,7 @@ import 'package:flutter_templet_project/basicWidget/upload/asset_upload_box_demo
 import 'package:flutter_templet_project/pages/APPRouteObserverDemo.dart';
 import 'package:flutter_templet_project/pages/AppLaunchPage.dart';
 import 'package:flutter_templet_project/pages/DataTypeDemo.dart';
+import 'package:flutter_templet_project/pages/EmojiPage.dart';
 import 'package:flutter_templet_project/pages/PageLifecycleFuncTest.dart';
 import 'package:flutter_templet_project/pages/DialogChoiceChipDemo.dart';
 import 'package:flutter_templet_project/pages/ReflectDemo.dart';
@@ -280,6 +281,7 @@ import 'package:flutter_templet_project/main.dart';
 ///https://www.jianshu.com/p/b9d6ec92926f
 class APPRouter {
   static const launchPage = '/APPLaunchPage';
+  static const emojiPage = '/emojiPage';
 
   static const notFound = '/APPNotFoundPage';
 
@@ -623,6 +625,9 @@ class AppPage {
 
   static final List<GetPage> routes = [
     unknownRoute,
+
+    GetPage(name: APPRouter.emojiPage, page: () => EmojiPage(),),
+
     GetPage(name: APPRouter.launchPage, page: () => AppLaunchPage(),),
     GetPage(name: APPRouter.homePage, page: () => MyHomePage(),),
     GetPage(name: APPRouter.tabBarTabBarViewDemo, page: () => TabBarTabBarViewDemo(),),

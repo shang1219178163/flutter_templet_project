@@ -471,6 +471,7 @@ var slivers = [
 ];
 
 var specials = [
+  Tuple2(APPRouter.emojiPage, "emoji", ),
   Tuple2(APPRouter.operatorDemo, "特殊操作符", ),
   Tuple2(APPRouter.mediaQueryDemo, "mediaQuery", ),
   Tuple2(APPRouter.mediaQueryDemoOne, "mediaQuery键盘", ),
@@ -515,6 +516,8 @@ var specials = [
   Tuple2(APPRouter.refreshListView, "refreshListView", ),
   Tuple2(APPRouter.globalIsolateDemo, "globalIsolateDemo", ),
   Tuple2(APPRouter.longCaptureWidgetDemo, "widget长截图", ),
+
+
 
 ];
 
