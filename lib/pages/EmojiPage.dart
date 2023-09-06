@@ -96,10 +96,19 @@ class _EmojiPageState extends State<EmojiPage> {
                               // border: Border.all(color: Colors.blue),
                               borderRadius: BorderRadius.all(Radius.circular(0)),
                             ),
-                            child: Text(e,
-                              style: TextStyle(
-                                fontSize: 30,
-                              ),
+                            child: Column(
+                              children: [
+                                Text(e,
+                                  style: TextStyle(
+                                    fontSize: 30,
+                                  ),
+                                ),
+                                // Text(e.runes.toList().toString(),
+                                //   style: TextStyle(
+                                //     fontSize: 12,
+                                //   ),
+                                // ),
+                              ],
                             ),
                           ),
                         );
@@ -151,6 +160,7 @@ class _EmojiPageState extends State<EmojiPage> {
                 }).toList(),
               )
             );
+
 
             return Text(content,
               style: TextStyle(
