@@ -165,9 +165,13 @@ class _AssetUploadBoxState extends State<AssetUploadBox> {
                 ),
               );
             }).toList(),
-            if (items.length < maxCount && canEdit)
+            if (items.length < maxCount)
               InkWell(
                 onTap: () {
+                  if (!canEdit) {
+                    debugPrint("无图片编辑权限");
+                    return;
+                  }
                   onPicker(maxCount: maxCount);
                 },
                 child: Container(
