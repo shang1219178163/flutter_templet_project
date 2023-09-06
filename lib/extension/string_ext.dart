@@ -73,12 +73,14 @@ extension StringExt on String{
     return "$dir/$this";
   }
 
-  /// 图片名称转 AssetImage(带类型)
-  AssetImage toAssetImage({
-    String dir = "assets/images",
-    AssetBundle? bundle,
-    String? package,
-  }) => AssetImage("$dir/$this", bundle: bundle, package: package);
+  /// 图片名称转 AssetImage
+  AssetImage toAssetImage({AssetBundle? bundle, String? package,}) {
+    final assetName = startsWith("assets/images/") ? this : "assets/images/$this";
+    return AssetImage(assetName,
+        bundle: bundle,
+        package: package
+    );
+  }
 
   /// 同 int.parse(this)
   int get parseInt => int.parse(this);
