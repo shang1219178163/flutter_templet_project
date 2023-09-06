@@ -84,21 +84,14 @@ class _TestPageOneState extends State<TestPageOne> {
     // final a4 = CacheService()["a4"];
     // debugPrint("a4 $a4");
 
+    String? userId;
+    // userId = "111";
 
-    final a = jsonEncode(99);
-    final a1 = jsonEncode("99");
-    final a2 = jsonEncode(true);
-    final a3 = jsonEncode([99]);
-    final a4 = jsonEncode({"99": 99});
-    debugPrint([a, a1, a2, a3, a4].join("\n"));
-
-    final b = jsonEncode(a);
-    final b1 = jsonEncode(a1);
-    final b2 = jsonEncode(a2);
-    final b3 = jsonEncode(a3);
-    final b4 = jsonEncode(a4);
-    debugPrint([b, b1, b2, b3, b4].join("\n"));
-
+    if (userId?.isNotEmpty == true) {
+      debugPrint("userId isNotEmpty");
+    } else {
+      debugPrint("userId isEmpty");
+    }
 
     setState(() {});
   }
