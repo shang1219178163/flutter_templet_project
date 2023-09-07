@@ -39,6 +39,10 @@ class _NPageViewState extends State<NPageView> with SingleTickerProviderStateMix
 
   late final _isTabBarVN = ValueNotifier(widget.isTabBar);
 
+  late final textColor = Theme.of(context).colorScheme.primary;
+
+  late final bgColor = Theme.of(context).colorScheme.onPrimary;
+
   @override
   void initState() {
     super.initState();
@@ -58,7 +62,7 @@ class _NPageViewState extends State<NPageView> with SingleTickerProviderStateMix
       return;
     }
     _isTabBarVN.value = widget.isTabBar;
-    debugPrint("didUpdateWidget isTabBarVN:${widget.isTabBar}, _isTabBarVN:${_isTabBarVN.value}");
+    // debugPrint("didUpdateWidget isTabBarVN:${widget.isTabBar}, _isTabBarVN:${_isTabBarVN.value}");
   }
 
   @override
@@ -80,12 +84,8 @@ class _NPageViewState extends State<NPageView> with SingleTickerProviderStateMix
     );
   }
 
-  Material _buildBottomNavigationBar({required List<Tuple2<String, Widget>> items,}) {
-    final textColor = Theme.of(context).colorScheme.secondary;
-    const bgColor = Colors.white;
-
+  Material _buildBottomBar({required List<Tuple2<String, Widget>> items,}) {
     return Material(
-      color: bgColor,
       child: SafeArea(
         child: TabBar(
           controller: _tabController,
@@ -145,7 +145,7 @@ class _NPageViewState extends State<NPageView> with SingleTickerProviderStateMix
               if (!value) {
                 return SizedBox();
               }
-              return _buildBottomNavigationBar(items: items);
+              return _buildBottomBar(items: items);
             }
         ),
       ],
