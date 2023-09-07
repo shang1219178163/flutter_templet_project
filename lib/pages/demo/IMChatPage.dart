@@ -238,6 +238,9 @@ class _IMChatPageState extends State<IMChatPage> with
                         },
                         onSend: (val){
                           debugPrint("onSend: ${val}");
+                          if (_inputController.text.trim().isEmpty) {
+                            return;
+                          }
 
                           dataList.value = [_inputController.text, ...dataList.value];
                           _inputController.clear();

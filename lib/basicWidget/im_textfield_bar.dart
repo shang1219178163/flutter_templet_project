@@ -103,14 +103,15 @@ class _IMTextfieldBarState extends State<IMTextfieldBar> with WidgetsBindingObse
       return;
     }
 
-    final tmp = bottom > 0;
-    if (isKeyboardVisibleVN.value == tmp) {
-      return;
-    }
-    isKeyboardVisibleVN.value = tmp;
-    if (isKeyboardVisibleVN.value) {
-      isExpand.value = false;
-    }
+    // final tmp = bottom > 0;
+    // if (isKeyboardVisibleVN.value == tmp) {
+    //   return;
+    // }
+    // isKeyboardVisibleVN.value = tmp;
+    // if (isKeyboardVisibleVN.value) {
+    //   isExpand.value = false;
+    //   isExpandEmoji.value = false;
+    // }
   }
 
   @override
@@ -168,6 +169,7 @@ class _IMTextfieldBarState extends State<IMTextfieldBar> with WidgetsBindingObse
       // padding: EdgeInsets.all(8),
       child: StatefulBuilder(
         builder: (context, setState) {
+
           return Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -206,7 +208,11 @@ class _IMTextfieldBarState extends State<IMTextfieldBar> with WidgetsBindingObse
                           if (isExpandEmoji.value) {
                             FocusScope.of(context).unfocus();
                           }
-                          setState(() {});
+
+                          if (isExpand.value) {
+                            isExpand.value = !isExpand.value;
+                          }
+                          // setState(() {});
                         },
                         child: Image(
                           image: "icon_add_circle.png".toAssetImage(),
@@ -224,7 +230,11 @@ class _IMTextfieldBarState extends State<IMTextfieldBar> with WidgetsBindingObse
                           if (isExpand.value) {
                             FocusScope.of(context).unfocus();
                           }
-                          setState(() {});
+
+                          if (isExpandEmoji.value) {
+                            isExpandEmoji.value = false;
+                          }
+                          // setState(() {});
                         },
                         child: Image(
                           image: "icon_add_circle.png".toAssetImage(),
