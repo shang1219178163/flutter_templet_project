@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/header.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
+import 'package:flutter_templet_project/extension/regexp_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:tuple/tuple.dart';
 
@@ -71,8 +72,8 @@ class _EmojiPageState extends State<EmojiPage> {
           child: Text(e,
             style: TextStyle(color: Colors.white),
           ),
-          onPressed: () => debugPrint(e),)
-        ).toList(),
+          onPressed: onPressed,
+        )).toList(),
       ),
       body: buildBody(
         hideSelected: widget.hideSelected,
@@ -228,6 +229,20 @@ class _EmojiPageState extends State<EmojiPage> {
     );
   }
 
+  onPressed() {
+    final input = "12🪭34🎉56😀78😃90🐬ab🐳cd💯ef";
+    final list = emojiReg.allMatchesOfString(input);
+    debugPrint("list: $list");
+
+    currentVN.value = list.join();
+  }
+
+  // allMatche(String text) {
+  //   final matches = emojiReg.allMatches(text);
+  //   final list = matches.map((e) => e.group(0)).where((e) => e != null).whereType<String>().toList();
+  //   debugPrint("onChanged list: ${list}");
+  //   return list;
+  // }
 }
 
 final smileys = """😀 😃 😄 😁 😆 😅 😂 🤣 🥲 🥹 ☺️ 😊 😇 🙂 🙃 😉 😌 😍 🥰 😘 😗 😙 😚 😋 😛 😝 😜 🤪 🤨 🧐 🤓 😎 🥸 🤩 🥳 😏 😒 😞 😔 😟 😕 🙁 ☹️ 😣 😖 😫 😩 🥺 😢 😭 😮‍💨 😤 😠 😡 🤬 🤯 😳 🥵 🥶 😱 😨 😰 😥 😓 🫣 🤗 🫡 🤔 🫢 🤭 🤫 🤥 😶 😶‍🌫️ 😐 😑 😬 🫨 🫠 🙄 😯 😦 😧 😮 😲 🥱 😴 🤤 😪 😵 😵‍💫 🫥 🤐 🥴 🤢 🤮 🤧 😷 🤒 🤕 🤑 🤠 😈 👿 👹 👺 🤡 💩 👻 💀 ☠️ 👽 👾 🤖 🎃 😺 😸 😹 😻 😼 😽 🙀 😿 😾""";

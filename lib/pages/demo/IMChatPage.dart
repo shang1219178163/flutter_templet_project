@@ -8,6 +8,7 @@ import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/n_textfield.dart';
+import 'package:flutter_templet_project/extension/editable_text_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/basicWidget/im_textfield_bar.dart';
@@ -40,7 +41,6 @@ class _IMChatPageState extends State<IMChatPage> with
   final _scrollController = ScrollController();
 
   final _inputController = TextEditingController();
-  final _inputChars = <String>[];
 
   var currentEmojiVN = ValueNotifier("");
 
@@ -222,49 +222,25 @@ class _IMChatPageState extends State<IMChatPage> with
                         hideSelected: true,
                         onChanged: (val) {
                           debugPrint("onChanged: ${val}");
-                          // debugPrint("selection: ${_inputController.selection}");
-                          // return;
-
                           _inputController.text += val;
-                          _inputChars.add(val);
                           debugPrint("onChanged _inputController.text: ${_inputController.text}");
 
-                          final matches = emojiReg.allMatches(_inputController.text);
-                          final list = matches.map((e) => e.group(0)).where((e) => e != null).toList();
-                          debugPrint("onChanged list: ${list}");
-                          // debugPrint("onChanged list runes: ${list.map((e) => e!.runes.toList().toString()).join("_")}");
-                          debugPrint("onChanged last length: ${list.last?.length}");
-
-                          final lastIndex = _inputController.text.indexOf("${list.last}");
-                          debugPrint("onChanged lastIndex: ${lastIndex}");
+                          _inputController.moveCursorEnd();
                         },
-                        onDelete: (){
+                        onDelete: () {
                           // debugPrint("onDelete: ${_inputController.text}");
-                          if (_inputController.text.isEmpty) {
-                            return;
-                          }
-                          if (!emojiReg.hasMatch(_inputController.text)) {
-                            _inputController.text = _inputController.text.substring(0, _inputController.text.length - 1);
-                            return;
-                          }
-                          final matches = emojiReg.allMatches(_inputController.text);
-                          final list = matches.map((e) => e.group(0)).where((e) => e != null).whereType<String>().toList();
-                          debugPrint("onChanged list: ${list}");
+                          // final baseOffset = _inputController.selection.baseOffset;
+                          // debugPrint("baseOffset: ${baseOffset}");
 
-                          if (list.isNotEmpty && _inputController.text.endsWith(list.last)) {
-                            _inputController.text = _inputController.text.substring(0, _inputController.text.length - list.last.length);
-                          } else {
-                            _inputController.text = _inputController.text.substring(0, _inputController.text.length - 1);
-                          }
+                          _inputController.deleteChar();
+
+                          debugPrint("_inputController.text: ${_inputController.text}");
                         },
                         onSend: (val){
                           debugPrint("onSend: ${val}");
 
                           dataList.value = [_inputController.text, ...dataList.value];
                           _inputController.clear();
-                          _inputChars.clear();
-
-
                         },
                       ),
                     );
