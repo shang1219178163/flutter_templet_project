@@ -38,7 +38,7 @@ class _BottomAppBarDemoState extends State<BottomAppBarDemo> {
   
   @override
   Widget build(BuildContext context) {
-    return _buildPage1();//非圆形
+    // return _buildPage1();//椭圆形
 
     return Scaffold(
         appBar: AppBar(
@@ -59,7 +59,6 @@ class _BottomAppBarDemoState extends State<BottomAppBarDemo> {
               padding: EdgeInsets.all(16),
               child: Text('Floating action button position:', style: TextStyle(fontSize: 18),),
             ),
-
             Column(
               children: locations.map((e) => RadioListTile<FloatingActionButtonLocation>(
                 title: Text(e.toString().split(".").last),

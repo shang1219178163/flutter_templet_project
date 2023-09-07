@@ -137,3 +137,40 @@ class Header extends StatelessWidget{
   }
 
 }
+
+
+class SectionHeader extends StatelessWidget{
+
+  const SectionHeader({
+    Key? key,
+    this.title = '',
+    this.text,
+    this.style = const TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
+    this.padding = const EdgeInsets.all(8),
+    this.alignment = Alignment.centerLeft,
+    this.divider,
+    required this.child,
+  }) : super(key: key);
+
+  final String title;
+  final Text? text;
+  final TextStyle? style;
+  final EdgeInsets padding;
+  final Alignment alignment;
+
+  final Widget? divider;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        divider ?? Divider(),
+        Header.h5(title: title, text: text, style: style, padding: padding, alignment: alignment,),
+        child,
+      ],
+    );
+  }
+
+}
+

@@ -2,6 +2,7 @@
 class Assets {
   Assets._();
 
+  static const String assetsImagesImgFlutter310 = 'assets/images/img_flutter_3_10.webp';
   static const String dataAppInfo = 'assets/data/appInfo.json';
   static const String dataCarModels = 'assets/data/car_models.json';
   static const String dataChina = 'assets/data/china.json';
@@ -45,7 +46,8 @@ class Assets {
   static const String imagesIconSkipping = 'assets/images/icon_skipping.gif';
   static const String imagesIconVoiceCircle = 'assets/images/icon_voice_circle.png';
   static const String imagesImg404 = 'assets/images/img_404.png';
-  static const String imagesImgFlutter310 = 'assets/images/img_flutter_3_10.webp';
+  static const String imagesImgChatEmoji = 'assets/images/img_chat_emoji.png';
+  static const String imagesImgFlutter310 = 'assets/images/img_flutter_3_10.png';
   static const String imagesImgPlaceholder = 'assets/images/img_placeholder.png';
   static const String imagesImgPlaceholderEmpty = 'assets/images/img_placeholder_empty.png';
   static const String imagesImgPlaceholderEmptyOne = 'assets/images/img_placeholder_empty_one.png';

@@ -23,6 +23,7 @@ class APPThemeSettings {
 
   late ThemeData themeData = ThemeData.light().copyWith(
     platform: TargetPlatform.iOS,
+    // scaffoldBackgroundColor: Colors.red
     splashFactory: NoSplash.splashFactory,
     splashColor: Colors.transparent, // 点击时的高亮效果设置为透明
     highlightColor: Colors.transparent, // 长按时的扩散效果设置为透明

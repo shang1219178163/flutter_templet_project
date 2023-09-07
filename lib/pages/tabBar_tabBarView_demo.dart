@@ -461,6 +461,7 @@ var list = [
   Tuple2(APPRouter.npageViewDemo, "npageViewDemo", ),
   Tuple2(APPRouter.boxShadowDemoOne, "shadowDemo", ),
   Tuple2(APPRouter.scaffoldBottomSheet, "scaffoldBottomSheet", ),
+  Tuple2(APPRouter.floatingActionButtonDemo, "floatingActionButtonDemo", ),
 
 
 ];
