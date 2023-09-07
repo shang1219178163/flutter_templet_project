@@ -126,7 +126,6 @@ class _EmojiPageState extends State<EmojiPage> {
 
   buildHeader() {
     return Container(
-      // height: 60,
       padding: EdgeInsets.all(8),
       alignment: Alignment.center,
       decoration: BoxDecoration(
@@ -141,36 +140,35 @@ class _EmojiPageState extends State<EmojiPage> {
           ]
       ),
       child: ValueListenableBuilder(
-          valueListenable: currentVN,
-          builder: (context,  value, child){
+        valueListenable: currentVN,
+        builder: (context,  value, child){
 
-            final content = "当前选择: $value";
-            return RichText(
-              text: TextSpan(
-                children: content.characters.map((e) {
+          final content = "当前选择: $value";
 
-                  return TextSpan(
-                    text: e,
-                    style: TextStyle(
-                      // fontSize: textReg.allMatches(e).isNotEmpty ? 16.0 : 36.0,
-                      fontSize: emojiReg.allMatches(e).isEmpty ? 16.0 : 20.0,
-                      color: Colors.black,
-                    )
-                  );
-                }).toList(),
-              )
-            );
-
-
+          final Iterable<Match> matches = emojiReg.allMatches(content);
+          if (matches.isEmpty) {
             return Text(content,
               style: TextStyle(
                 fontSize: 16,
               ),
-              strutStyle: StrutStyle(
-                forceStrutHeight: true,
-              ),
             );
           }
+
+          return RichText(
+            text: TextSpan(
+              children: content.characters.map((e) {
+
+                return TextSpan(
+                  text: e,
+                  style: TextStyle(
+                    fontSize: emojiReg.allMatches(e).isEmpty ? 16.0 : 30.0,
+                    color: Colors.black,
+                  )
+                );
+              }).toList(),
+            )
+          );
+        }
       ),
     );
   }
