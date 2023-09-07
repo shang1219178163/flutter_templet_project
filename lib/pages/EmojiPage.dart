@@ -77,6 +77,7 @@ class _EmojiPageState extends State<EmojiPage> {
         )).toList(),
       ),
       body: buildBody(
+        items: items,
         hideSelected: widget.hideSelected,
         onChanged: widget.onChanged ?? (val){
           currentVN.value = val;
@@ -91,9 +92,9 @@ class _EmojiPageState extends State<EmojiPage> {
         margin: EdgeInsets.only(
           top: 100,
         ),
-        decoration: BoxDecoration(
-          color: Colors.green,
-        ),
+        // decoration: BoxDecoration(
+        //   color: Colors.green,
+        // ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           mainAxisSize: MainAxisSize.min,
@@ -137,7 +138,11 @@ class _EmojiPageState extends State<EmojiPage> {
     );
   }
 
-  buildBody({bool hideSelected = false, ValueChanged<String>? onChanged}) {
+  buildBody({
+    required List<Tuple2<String, String>> items,
+    bool hideSelected = false,
+    ValueChanged<String>? onChanged,
+  }) {
     return SafeArea(
       child: Column(
         children: [
