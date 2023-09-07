@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/FloatingActionButtonLocationOffset.dart';
 import 'package:flutter_templet_project/basicWidget/header.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
@@ -82,9 +83,20 @@ class _EmojiPageState extends State<EmojiPage> {
           debugPrint("onChanged currentVN.value:${currentVN.value}");
         }
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocationOffset(
+        location: FloatingActionButtonLocation.endFloat,
+        offsetY: 40,
+      ),
       floatingActionButton: widget.onSend == null ? null : Container(
+        margin: EdgeInsets.only(
+          top: 100,
+        ),
+        decoration: BoxDecoration(
+          color: Colors.green,
+        ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
+          mainAxisSize: MainAxisSize.min,
           children: [
             SizedBox(
               height: 30,
@@ -126,57 +138,59 @@ class _EmojiPageState extends State<EmojiPage> {
   }
 
   buildBody({bool hideSelected = false, ValueChanged<String>? onChanged}) {
-    return Column(
-      children: [
-        if(!hideSelected)buildHeader(),
-        Expanded(
-          child: SingleChildScrollView(
-            child: Column(
-              children: items.map((e) {
+    return SafeArea(
+      child: Column(
+        children: [
+          if(!hideSelected)buildHeader(),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: items.map((e) {
 
-                final emojiTitle = e.item1.toUncamlCase(" ");
-                final emojiList = e.item2.split(" ");
-                return Column(
-                  children: [
-                    Header.h4(title: emojiTitle),
-                    Wrap(
-                      children: emojiList.map((e) {
-                        return InkWell(
-                          onTap: (){
-                            onChanged?.call(e);
-                          },
-                          child: Container(
-                            padding: EdgeInsets.all(6),
-                            decoration: BoxDecoration(
-                              // color: ColorExt.random,
-                              // border: Border.all(color: Colors.blue),
-                              borderRadius: BorderRadius.all(Radius.circular(0)),
-                            ),
-                            child: Column(
-                              children: [
-                                Text(e,
-                                  style: TextStyle(
-                                    fontSize: 30,
+                  final emojiTitle = e.item1.toUncamlCase(" ");
+                  final emojiList = e.item2.split(" ");
+                  return Column(
+                    children: [
+                      Header.h4(title: emojiTitle),
+                      Wrap(
+                        children: emojiList.map((e) {
+                          return InkWell(
+                            onTap: (){
+                              onChanged?.call(e);
+                            },
+                            child: Container(
+                              padding: EdgeInsets.all(6),
+                              decoration: BoxDecoration(
+                                // color: ColorExt.random,
+                                // border: Border.all(color: Colors.blue),
+                                borderRadius: BorderRadius.all(Radius.circular(0)),
+                              ),
+                              child: Column(
+                                children: [
+                                  Text(e,
+                                    style: TextStyle(
+                                      fontSize: 30,
+                                    ),
                                   ),
-                                ),
-                                // Text(e.runes.toList().toString(),
-                                //   style: TextStyle(
-                                //     fontSize: 12,
-                                //   ),
-                                // ),
-                              ],
+                                  // Text(e.runes.toList().toString(),
+                                  //   style: TextStyle(
+                                  //     fontSize: 12,
+                                  //   ),
+                                  // ),
+                                ],
+                              ),
                             ),
-                          ),
-                        );
-                      }).toList(),
-                    ),
-                  ],
-                );
-              }).toList(),
+                          );
+                        }).toList(),
+                      ),
+                    ],
+                  );
+                }).toList(),
+              ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
