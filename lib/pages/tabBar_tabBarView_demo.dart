@@ -459,7 +459,7 @@ var list = [
   Tuple2(APPRouter.customMultiChildLayoutDemo, "customMultiChildLayoutDemo", ),
   Tuple2(APPRouter.pageBuilderDemo, "pageBuilderDemo", ),
   Tuple2(APPRouter.npageViewDemo, "npageViewDemo", ),
-  Tuple2(APPRouter.boxShadowDemoOne, "shadowDemo", ),
+  Tuple2(APPRouter.boxShadowDemoOne, "boxShadowDemoOne", ),
   Tuple2(APPRouter.scaffoldBottomSheet, "scaffoldBottomSheet", ),
   Tuple2(APPRouter.floatingActionButtonDemo, "floatingActionButtonDemo", ),
 

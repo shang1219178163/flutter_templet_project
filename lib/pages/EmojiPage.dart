@@ -143,8 +143,7 @@ class _EmojiPageState extends State<EmojiPage> {
     bool hideSelected = false,
     ValueChanged<String>? onChanged,
   }) {
-    return SafeArea(
-      child: Column(
+    return Column(
         children: [
           if(!hideSelected)buildHeader(),
           Expanded(
@@ -195,8 +194,7 @@ class _EmojiPageState extends State<EmojiPage> {
             ),
           ),
         ],
-      ),
-    );
+      );
   }
 
   buildHeader() {
