@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:tuple/tuple.dart';
 
-
+/// 多页面左右滑动封装
 class NPageView extends StatefulWidget {
 
 
