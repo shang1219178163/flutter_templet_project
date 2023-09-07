@@ -32,6 +32,7 @@ import 'package:flutter_templet_project/pages/demo/CustomSingleChildLayoutDemo.d
 import 'package:flutter_templet_project/pages/demo/DashLineDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DropBoxChoicDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DropBoxMutiRowChoicDemo.dart';
+import 'package:flutter_templet_project/pages/demo/FloatingActionButtonDemo.dart';
 import 'package:flutter_templet_project/pages/demo/GlobalIsolateDemo.dart';
 import 'package:flutter_templet_project/pages/demo/IMChatPage.dart';
 import 'package:flutter_templet_project/pages/LoginPageTwo.dart';
@@ -589,6 +590,7 @@ class APPRouter {
   static const keyboardAttachDemo = '/keyboardAttachDemo';
   static const dashLineDemo = '/dashLineDemo';
   static const scaffoldBottomSheet = '/scaffoldBottomSheet';
+  static const floatingActionButtonDemo = '/floatingActionButtonDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -933,6 +935,7 @@ class AppPage {
     GetPage(name: APPRouter.keyboardAttachDemo, page: () => KeyboardAttachDemo(),),
     GetPage(name: APPRouter.dashLineDemo, page: () => DashLineDemo(),),
     GetPage(name: APPRouter.scaffoldBottomSheet, page: () => ScaffoldBottomSheet(),),
+    GetPage(name: APPRouter.floatingActionButtonDemo, page: () => FloatingActionButtonDemo(),),
 
 
   ];
