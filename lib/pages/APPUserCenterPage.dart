@@ -6,6 +6,8 @@
 //  Copyright © 5/20/21 shang. All rights reserved.
 //
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/APPThemeSettings.dart';
 import 'package:flutter_templet_project/basicWidget/n_label_and_icon.dart';
@@ -16,6 +18,7 @@ import 'package:flutter_templet_project/main.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/navigator_ext.dart';
 import 'package:flutter_templet_project/extension/dialog_ext.dart';
+import 'package:flutter_templet_project/mixin/bottom_sheet_avatar_mixin.dart';
 import 'package:flutter_templet_project/routes/APPRouter.dart';
 
 import 'package:get/get.dart';
@@ -30,7 +33,7 @@ class APPUserCenterPage extends StatefulWidget{
   _APPUserCenterPageState createState() => _APPUserCenterPageState();
 }
 
-class _APPUserCenterPageState extends State<APPUserCenterPage>{
+class _APPUserCenterPageState extends State<APPUserCenterPage> with BottomSheetAvatarMixin{
 
   // 我的 列表菜单
   final services = <Tuple2<String, IconData>>[
@@ -51,6 +54,9 @@ class _APPUserCenterPageState extends State<APPUserCenterPage>{
     Tuple2("语言切换", Icons.language),
     Tuple2("历史记录", Icons.history),
   ];
+
+  final avatarVN = ValueNotifier("");
+
 
   @override
   Widget build(BuildContext context){
@@ -108,10 +114,47 @@ class _APPUserCenterPageState extends State<APPUserCenterPage>{
       child: Column(
         children: <Widget>[
           SizedBox(height: 10),
-          Hero(
-            tag: 'avatar',
-            child: Image.asset('avatar.png'.toPath(), width:90),
-            // child: Image.asset('bg.png'.toPng(), width:90),
+          InkWell(
+            onTap: (){
+              updateAvatar(
+                cb: (val){
+                  if (val == null) {
+                    return;
+                  }
+                  debugPrint("updateAvatar: $val");
+                  avatarVN.value = val;
+                }
+              );
+            },
+            child: ValueListenableBuilder<String>(
+              valueListenable: avatarVN,
+              builder: (context,  value, child){
+
+                if (value.isEmpty) {
+                  return Hero(
+                    tag: 'avatar',
+                    child: Image.asset('avatar.png'.toPath(), width:90),
+                    // child: Image.asset('bg.png'.toPng(), width:90),
+                  );
+                }
+
+                return Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.white, width: 2),
+                    borderRadius: BorderRadius.all(Radius.circular(50)),
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.all(Radius.circular(50)),
+                    child: Image.file(
+                      File(value),
+                      fit: BoxFit.fill,
+                      width: 100,
+                      height: 100,
+                    ),
+                  ),
+                );
+              }
+            ),
           ),
           // Container(child: Image.asset('icon_appbar_back.png'.toPng(), width:90),),
           SizedBox(height: 10),

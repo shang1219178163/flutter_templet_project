@@ -15,6 +15,7 @@ class NText extends StatelessWidget {
     this.backgroundColor,
     this.letterSpacing,
     this.wordSpacing,
+    this.decoration = TextDecoration.none,
   }) : super(key: key);
 
   final String data;
@@ -29,6 +30,9 @@ class NText extends StatelessWidget {
   final Color? backgroundColor;
   final double? letterSpacing;
   final double? wordSpacing;
+
+  final TextDecoration? decoration;
+
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +50,7 @@ class NText extends StatelessWidget {
         backgroundColor: backgroundColor,
         letterSpacing: letterSpacing,
         wordSpacing: wordSpacing,
+        decoration: decoration,
       ),
     );
   }

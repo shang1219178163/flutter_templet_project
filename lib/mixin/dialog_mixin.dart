@@ -129,7 +129,7 @@ mixin DialogMixin{
       child: InkWell(
         onTap: onBarrier ?? () {
           // Navigator.of(context).pop();
-          AppUti.removeInputFocus();
+          AppUtil.removeInputFocus();
         },
         child: Container(
             padding: contentOffset,

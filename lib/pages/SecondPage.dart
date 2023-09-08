@@ -47,7 +47,7 @@ class _SecondPageState extends State<SecondPage> {
             icon: Icon(Icons.change_circle_outlined),
             color: Colors.white,
             onPressed: () {
-              debugPrint("AppUti.navigatorKey: ${AppUti.navigatorKey.currentWidget}");
+              debugPrint("AppUti.navigatorKey: ${AppUtil.navigatorKey.currentWidget}");
 
               _isList = !_isList;
               setState(() {});

@@ -31,8 +31,8 @@ class NAdaptiveText extends StatelessWidget {
     return Align(
       alignment: alignment,
       child: Container(
-        margin: margin ?? EdgeInsets.symmetric(horizontal: 30),
-        padding: padding ?? EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        margin: margin,
+        padding: padding,
         decoration: decoration ?? BoxDecoration(
           color: Colors.black.withOpacity(.65),
           borderRadius: const BorderRadius.all(Radius.circular(10)),

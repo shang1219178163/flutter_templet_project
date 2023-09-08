@@ -41,6 +41,8 @@ dependencies:
 #  flutter_local_notifications: ^5.0.0+4
   url_launcher: ^6.0.4
 
+  flutter_spinkit: ^5.2.0
+
   json_annotation: ^4.3.0
   json_serializable: ^6.0.1
 
@@ -124,7 +126,11 @@ dependencies:
   extended_image: ^8.0.2
   # 图片预览
   photo_view: ^0.14.0
+  # 图片压缩
   flutter_image_compress: ^2.0.3
+  # 图片裁剪
+  image_cropper: ^4.0.1
+  # 图片选择
   wechat_camera_picker: ^3.6.0
   wechat_assets_picker:
     git:
