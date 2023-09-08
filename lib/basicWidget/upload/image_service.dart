@@ -1,10 +1,11 @@
 import 'dart:io';
 
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:flutter_templet_project/cache/cache_asset_service.dart';
 import 'package:flutter_templet_project/extension/num_ext.dart';
 
+import 'package:image_cropper/image_cropper.dart';
 
 
 /// 图片处理工具类
@@ -29,12 +30,22 @@ class ImageService{
       // debugPrint('assetDir_${assetDir}');
       // debugPrint('targetPath_${targetPath}');
 
-      final compressQuality = file.lengthSync().compressQuality;
+      final filePath = file.absolute.path;
 
+      var format = CompressFormat.jpeg;
+      if (filePath.toLowerCase().endsWith(".png")) {
+        format = CompressFormat.png;
+      } else if (filePath.toLowerCase().endsWith(".webp")) {
+        format = CompressFormat.webp;
+      } else if (filePath.toLowerCase().endsWith(".heic")) {
+        format = CompressFormat.heic;
+      }
+
+      final compressQuality = file.lengthSync().compressQuality;
       var result = await FlutterImageCompress.compressAndGetFile(
-        file.absolute.path, targetPath,
+        filePath, targetPath,
         quality: compressQuality,
-        rotate: 0,
+        format: format,
       );
       final path = result?.path;
       if (result == null || path == null || path.isEmpty) {
@@ -73,4 +84,55 @@ class ImageService{
     return imagePath;
   }
 
+}
+
+
+/// 图片文件扩展方法
+extension ImageFileExt on File {
+
+  /// 图片压缩
+  Future<File> toCompressImage() async {
+    var compressFile = await ImageService().compressAndGetFile(this);
+    compressFile ??= this;// 压缩失败则使用原图
+    return compressFile;
+  }
+
+  /// 图像裁剪
+  Future<File> toCropImage({
+    int? maxWidth,
+    int? maxHeight,
+  }) async {
+
+    try {
+      final sourcePath = path;
+
+      var croppedFile = await ImageCropper().cropImage(
+        sourcePath: sourcePath,
+        maxWidth: maxWidth,
+        maxHeight: maxHeight,
+        aspectRatioPresets: [
+          CropAspectRatioPreset.square,
+        ],
+        uiSettings: [
+          AndroidUiSettings(
+            toolbarTitle: '',
+            toolbarColor: Colors.blue,
+            toolbarWidgetColor: Colors.white,
+            initAspectRatio: CropAspectRatioPreset.original,
+            lockAspectRatio: false,
+          ),
+          IOSUiSettings(
+            title: 'Cropper',
+          ),
+        ],
+      );
+      if (croppedFile == null) {
+        return this;
+      }
+      return File(croppedFile.path);
+    } catch (e) {
+      debugPrint("toCropImage: $e");
+      return this;
+    }
+  }
 }
