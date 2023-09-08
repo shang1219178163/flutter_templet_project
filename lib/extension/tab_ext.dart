@@ -65,4 +65,38 @@ extension TabBarExt on TabBar{
       splashBorderRadius: splashBorderRadius ?? this.splashBorderRadius,
     );
   }
+
+  /// 覆盖除了 tabs 和 controller 之外的所有属性
+  TabBar cover(TabBar? tabBar) {
+    if (tabBar == null) {
+      return this;
+    }
+
+    return TabBar(
+      tabs: tabs,
+      controller: controller,
+      isScrollable: tabBar.isScrollable,
+      padding: tabBar.padding ?? padding,
+      indicatorColor: tabBar.indicatorColor ?? indicatorColor,
+      automaticIndicatorColorAdjustment: tabBar.automaticIndicatorColorAdjustment,
+      indicatorWeight: tabBar.indicatorWeight,
+      indicatorPadding: tabBar.indicatorPadding,
+      indicator: tabBar.indicator ?? indicator,
+      indicatorSize: tabBar.indicatorSize ?? indicatorSize,
+      dividerColor: tabBar.dividerColor ?? dividerColor,
+      labelColor: tabBar.labelColor ?? labelColor,
+      labelStyle: tabBar.labelStyle ?? labelStyle,
+      labelPadding: tabBar.labelPadding ?? labelPadding,
+      unselectedLabelColor: tabBar.unselectedLabelColor ?? unselectedLabelColor,
+      unselectedLabelStyle: tabBar.unselectedLabelStyle ?? unselectedLabelStyle,
+      dragStartBehavior: tabBar.dragStartBehavior,
+      overlayColor: tabBar.overlayColor ?? overlayColor,
+      mouseCursor: tabBar.mouseCursor ?? mouseCursor,
+      enableFeedback: tabBar.enableFeedback ?? enableFeedback,
+      onTap: tabBar.onTap ?? onTap,
+      physics: tabBar.physics ?? physics,
+      splashFactory: tabBar.splashFactory ?? splashFactory,
+      splashBorderRadius: tabBar.splashBorderRadius ?? splashBorderRadius,
+    );
+  }
 }

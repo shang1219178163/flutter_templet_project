@@ -42,8 +42,8 @@ class _NPageViewDemoState extends State<NPageViewDemo> {
             style: TextStyle(color: Colors.white),
           ),
           onPressed: () {
-            isTabBarVN.value = !isTabBarVN.value;
-            debugPrint("isTabBarVN:${isTabBarVN.value}");
+
+
           },
         )
         ).toList(),
@@ -54,20 +54,17 @@ class _NPageViewDemoState extends State<NPageViewDemo> {
   }
 
   buildBody() {
-    return ValueListenableBuilder(
-       valueListenable: isTabBarVN,
-       builder: (context,  value, child){
+    return NPageView(
+      items: items,
+      // isScrollable: true,
+      // isThemeBg: true,
+      // isBottom: true,
+      tabBar: TabBar(
+        tabs: [],
 
-        return NPageView(
-          items: items,
-          // hideAppbar: true,
-          // isTabBar: isTabBarVN.value,
-          isTabBar: value,
-        );
-      }
+      ),
     );
   }
-
 
   List<Tuple2<String, Widget>> items = [
     Tuple2('功能列表', ListView.separated(

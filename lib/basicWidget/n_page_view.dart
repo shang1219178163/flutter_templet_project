@@ -8,6 +8,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
+import 'package:flutter_templet_project/extension/tab_ext.dart';
 import 'package:tuple/tuple.dart';
 
 /// 多页面左右滑动封装
@@ -17,15 +18,24 @@ class NPageView extends StatefulWidget {
   const NPageView({
     Key? key,
     required this.items,
-    this.hideAppbar = false,
-    this.isTabBar = false,
+    this.needSafeArea = true,
+    this.isThemeBg = false,
+    this.isScrollable = false,
+    this.isBottom = false,
+    this.tabBar,
   }) : super(key: key);
 
   final List<Tuple2<String, Widget>> items;
 
-  final bool hideAppbar;
+  final bool needSafeArea;
 
-  final bool isTabBar;
+  final bool isThemeBg;
+
+  final bool isScrollable;
+
+  final bool isBottom;
+  /// 样式设置
+  final TabBar? tabBar;
 
   @override
   _NPageViewState createState() => _NPageViewState();
@@ -36,8 +46,6 @@ class _NPageViewState extends State<NPageView> with SingleTickerProviderStateMix
   late final _tabController = TabController(length: widget.items.length, vsync: this);
 
   late final _pageController = PageController(initialPage: 0, keepPage: true);
-
-  late final _isTabBarVN = ValueNotifier(widget.isTabBar);
 
   late final textColor = Theme.of(context).colorScheme.primary;
 
@@ -56,101 +64,76 @@ class _NPageViewState extends State<NPageView> with SingleTickerProviderStateMix
   }
 
   @override
-  void didUpdateWidget(covariant NPageView oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (widget.isTabBar == oldWidget.isTabBar) {
-      return;
-    }
-    _isTabBarVN.value = widget.isTabBar;
-    // debugPrint("didUpdateWidget isTabBarVN:${widget.isTabBar}, _isTabBarVN:${_isTabBarVN.value}");
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return _buildPageView(items: widget.items);
+    var children = [
+      _buildBottomBar(
+        items: widget.items,
+        isScrollable: widget.isScrollable,
+        isBottom: widget.isBottom,
+        isThemeBg: widget.isThemeBg,
+      ),
+      Expanded(
+        child: PageView(
+          controller: _pageController,
+          onPageChanged: (index) {
+            _tabController.animateTo(index);
+            setState(() {});
+          },
+          children: widget.items.map((e) => e.item2).toList(),
+        ),
+      ),
+    ];
+
+    if (widget.isBottom) {
+      children = children.reversed.toList();
+    }
+
+    return SafeArea(
+      child: Column(
+        children: children,
+      ),
+    );
   }
 
-  TabBar _buildTabBar({required List<Tuple2<String, Widget>> items,}) {
-    return TabBar(
+  Widget _buildBottomBar({
+    required List<Tuple2<String, Widget>> items,
+    bool isScrollable = false,
+    bool isBottom = false,
+    bool isThemeBg = true,
+  }) {
+
+    final labelColor = !isThemeBg ? textColor : bgColor;
+
+    final tabBar = TabBar(
       controller: _tabController,
-      isScrollable: true,
+      isScrollable: isScrollable,
       tabs: items.map((e) => Tab(text: e.item1)).toList(),
-      indicatorSize: TabBarIndicatorSize.label,
-      // indicatorPadding: EdgeInsets.only(left: 6, right: 6),
+      // indicatorSize: TabBarIndicatorSize.label,
+      labelColor: labelColor,
+      indicator: BoxDecoration(
+        border: Border(
+          top: !isBottom ? BorderSide.none : BorderSide(
+              color: labelColor,
+              width: 3.0,
+          ),
+          bottom: isBottom ? BorderSide.none : BorderSide(
+              color: labelColor,
+              width: 3.0,
+          ),
+        ),
+      ),
       onTap: (index){
         _pageController.jumpToPage(index);
         setState(() {});
       },
-    );
-  }
+    )
+        // .cover(widget.tabBar)
+    ;
 
-  Material _buildBottomBar({required List<Tuple2<String, Widget>> items,}) {
     return Material(
-      child: SafeArea(
-        child: TabBar(
-          controller: _tabController,
-          tabs: items.map((e) => Tab(text: e.item1)).toList(),
-          labelColor: textColor,
-          indicator: BoxDecoration(
-            border: Border(
-              top: BorderSide(
-                  color: textColor,
-                  width: 3.0
-              ),
-            ),
-          ),
-          onTap: (index){
-            _pageController.jumpToPage(index);
-            setState(() {});
-          },
-        ),
-      )
+      color: isThemeBg ? primaryColor : null,
+      child: tabBar,
     );
   }
-
-  Widget _buildPageView({required List<Tuple2<String, Widget>> items,}) {
-    return Column(
-      children: [
-        ValueListenableBuilder(
-           valueListenable: _isTabBarVN,
-           builder: (context,  value, child){
-            if (value) {
-              return SizedBox();
-            }
-            return Container(
-              width: double.maxFinite,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: primaryColor,
-              ),
-              constraints: BoxConstraints(maxHeight: 48.0),
-              child: _buildTabBar(items: items),
-            );
-          }
-        ),
-        Expanded(
-          child: PageView(
-            controller: _pageController,
-            onPageChanged: (index) {
-              _tabController.animateTo(index);
-              setState(() {});
-            },
-            // children: _pages.map((e) => Tab(text: e.item1)).toList(),
-            children: items.map((e) => e.item2).toList(),
-          ),
-        ),
-        ValueListenableBuilder(
-            valueListenable: _isTabBarVN,
-            builder: (context,  value, child){
-              if (!value) {
-                return SizedBox();
-              }
-              return _buildBottomBar(items: items);
-            }
-        ),
-      ],
-    );
-  }
-
 
 }
