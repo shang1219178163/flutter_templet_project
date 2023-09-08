@@ -1,13 +1,18 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_templet_project/basicWidget/header.dart';
 import 'package:flutter_templet_project/basicWidget/n_cancel_and_confirm_bar.dart';
-import 'package:flutter_templet_project/basicWidget/n_toast.dart';
+import 'package:flutter_templet_project/basicWidget/n_text.dart';
+import 'package:flutter_templet_project/basicWidget/n_overlay.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/overlay_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
+import 'package:flutter_templet_project/uti/app_uti.dart';
+import 'package:get/get.dart';
+
 
 class OverlayDemo extends StatefulWidget {
 
@@ -30,6 +35,13 @@ class _OverlayDemoState extends State<OverlayDemo> {
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.title ?? "$widget"),
+          actions: ['done',].map((e) => TextButton(
+            child: Text(e,
+              style: TextStyle(color: Colors.white),
+            ),
+            onPressed: onPressed,
+          )
+          ).toList(),
         ),
         body: Column(
           // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -118,7 +130,7 @@ class _OverlayDemoState extends State<OverlayDemo> {
                     }
                   );
                 },
-                child: Text('PopupView: ${e}'),
+                child: Text('PopupView: $e'),
               );
             }).toList(),
             Header.h5(title: "NToast"),
@@ -127,19 +139,78 @@ class _OverlayDemoState extends State<OverlayDemo> {
               Alignment.bottomCenter,
             ].map((e) {
               return ElevatedButton(
-                onPressed: () => NToast.showToast(
+                onPressed: () => NOverlay.showToast(
                   context: context,
-                  text: 'NToast is awesome!',
+                  message: 'NToast is awesome!',
+                  onDismiss: (){
+                    debugPrint("onDismiss: ${DateTime.now()}");
+                  },
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(right: 8.0),
+                        child: Icon(Icons.error_outline, color: Colors.white,),
+                      ),
+                      NText(data: 'NToast is awesome!',
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.white,
+                      ),
+                    ],
+                  ),
                   // barrierDismissible: false,
                   alignment: e,
                 ),
                 child: Text('Show Toast: ${e.toString().split(".").last}'),
               );
             }).toList(),
+            Header.h5(title: "Loadding"),
+            ElevatedButton(
+              onPressed: () => NOverlay.showToast(
+                context: context,
+                message: 'NToast is awesome!',
+                onDismiss: (){
+                  debugPrint("onDismiss: ${DateTime.now()}");
+                },
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(right: 8.0),
+                      child: Icon(Icons.error_outline, color: Colors.white,),
+                    ),
+                    NText(data: 'NToast is awesome!',
+                      // fontSize: 16,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.white,
+                    ),
+                  ],
+                ),
+                // barrierDismissible: false,
+                alignment: Alignment.center,
+              ),
+              child: Text('Show Loadding'),
+            ),
+            ElevatedButton(
+              onPressed: () => NOverlay.showLoading(
+                context: context,
+                message: 'NToast is awesome!',
+              ),
+              child: Text('Show Loadding'),
+            ),
           ],
         ),
     );
   }
+
+  onPressed() {
+    final context = AppUtil.navigatorKey.currentState!.context;
+    final context1 = AppUtil.navigatorKey.currentState!.overlay!.context;
+    debugPrint("context: ${context == context1}");
+
+  }
+
 
   Widget buildEntryContent({
     VoidCallback? onTap,
@@ -160,4 +231,6 @@ class _OverlayDemoState extends State<OverlayDemo> {
       ),
     );
   }
+
+
 }
