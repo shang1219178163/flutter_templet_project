@@ -61,7 +61,7 @@ class _OverlayDemoState extends State<OverlayDemo> {
               Alignment.bottomCenter,
             ].map((e) {
               return ElevatedButton(
-                onPressed: () => showToast(text: 'Flutter is awesome!',
+                onPressed: () => showToast('Flutter is awesome!',
                   // barrierDismissible: false,
                   alignment: e,
                 ),
@@ -181,7 +181,7 @@ class _OverlayDemoState extends State<OverlayDemo> {
                       child: Icon(Icons.error_outline, color: Colors.white,),
                     ),
                     NText(data: 'NToast is awesome!',
-                      // fontSize: 16,
+                      fontSize: 16,
                       fontWeight: FontWeight.w400,
                       color: Colors.white,
                     ),

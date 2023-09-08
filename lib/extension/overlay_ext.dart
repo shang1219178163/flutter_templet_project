@@ -69,18 +69,17 @@ extension OverlayExt<T extends StatefulWidget> on State<T> {
   }
 
   /// 展示 OverlayEntry 弹窗
-  showToast({
-    String text = "showToast",
-    Widget? child,
+  showToast(String message,{
     Alignment alignment = Alignment.center,
     Duration duration = const Duration(milliseconds: 2000),
     bool barrierDismissible = true,
     Color? barrierColor = Colors.transparent,
     VoidCallback? onBarrier,
     bool isLast = false,
+    Widget? child,
   }) {
     Widget content = NAdaptiveText(
-      data: text,
+      data: message,
       alignment: alignment,
       child: child,
     );

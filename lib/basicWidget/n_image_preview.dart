@@ -155,7 +155,7 @@ class _NImagePreviewState extends State<NImagePreview> {
     final isSuccess = result["isSuccess"];
     if(isSuccess){
       final message = result["isSuccess"] ? "图片已保存到相册" : "操作失败";
-      showToast(text: message, barrierDismissible: false);
+      showToast(message, barrierDismissible: false);
     }
   }
 }
