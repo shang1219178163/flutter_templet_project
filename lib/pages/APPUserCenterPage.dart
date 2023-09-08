@@ -78,7 +78,7 @@ class _APPUserCenterPageState extends State<APPUserCenterPage> with BottomSheetA
             IconButton(icon: Icon(Icons.change_circle_outlined),
               color: Colors.white,
               onPressed: (){
-                APPThemeSettings.instance.changeTheme();
+                APPThemeService().changeTheme();
               },
             ),
             IconButton(icon: Icon(Icons.settings),

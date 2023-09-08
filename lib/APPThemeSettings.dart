@@ -12,14 +12,14 @@ import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/list_ext.dart';
 import 'package:get/get.dart';
 
-class APPThemeSettings {
-  static final APPThemeSettings _instance = APPThemeSettings._();
+class APPThemeService {
+  static final APPThemeService _instance = APPThemeService._();
 
-  APPThemeSettings._();
+  APPThemeService._();
 
-  factory APPThemeSettings() => _instance;
+  factory APPThemeService() => _instance;
 
-  static APPThemeSettings get instance => _instance;
+  // static APPThemeSettings get instance => _instance;
 
   late ThemeData themeData = ThemeData.light().copyWith(
     platform: TargetPlatform.iOS,

@@ -118,7 +118,7 @@ class _APPDrawerMenuPageState extends State<APPDrawerMenuPage> {
         children: [
           TextButton(
             onPressed: (){
-              APPThemeSettings.instance.changeTheme();
+              APPThemeService().changeTheme();
               setState(() {});
             },
             child: Row(
@@ -134,7 +134,7 @@ class _APPDrawerMenuPageState extends State<APPDrawerMenuPage> {
           ),
           TextButton.icon(
             onPressed: (){
-              APPThemeSettings.instance.showThemePicker(
+              APPThemeService().showThemePicker(
                   context: context,
                   callback: (){
                     Navigator.of(context).pop();

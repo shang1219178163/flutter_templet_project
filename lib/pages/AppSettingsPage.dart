@@ -39,7 +39,7 @@ class _AppSettingsPageState extends State<AppSettingsPage>{
           title: Text('设置', style: TextStyle(color: Colors.white)),
           actions: [
             TextButton(onPressed: (){
-                APPThemeSettings.instance.showThemePicker(context: context, callback: (){
+                APPThemeService().showThemePicker(context: context, callback: (){
                   Navigator.of(context).pop();
                 });
               },

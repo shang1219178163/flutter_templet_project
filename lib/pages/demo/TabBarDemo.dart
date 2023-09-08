@@ -32,7 +32,7 @@ class _TabBarDemoState extends State<TabBarDemo> with AutomaticKeepAliveClientMi
 
   // theme: Get.isDarkMode ? ThemeData.dark(): ThemeData.light(),
   /// 当前主题
-  ThemeData get themeData => Get.isDarkMode ? APPThemeSettings.instance.darkThemeData : APPThemeSettings.instance.themeData;
+  ThemeData get themeData => Get.isDarkMode ? APPThemeService().darkThemeData : APPThemeService().themeData;
 
   @override
   Widget build(BuildContext context) {
