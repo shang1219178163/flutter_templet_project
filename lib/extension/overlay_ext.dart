@@ -32,9 +32,9 @@ extension OverlayExt<T extends StatefulWidget> on State<T> {
 
   /// OverlayEntry 弹窗展示
   OverlayEntry? showEntry({
-    required Widget child,
     bool isReplace = false,
     bool maintainState = false,
+    required Widget child,
   }){
     if (isReplace) {
       hideEntry();
@@ -115,7 +115,7 @@ extension OverlayExt<T extends StatefulWidget> on State<T> {
     bool isReplace = false,
     bool maintainState = false,
     Alignment alignment = Alignment.bottomCenter,
-    duration = const Duration(milliseconds: 350),
+    Duration duration = const Duration(milliseconds: 350),
     bool barrierDismissible = true,
     required OverlayWidgetBuilder builder,
   }) {

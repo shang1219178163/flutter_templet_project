@@ -161,8 +161,7 @@ class NOverlay{
   }
 
   /// 滑进滑出弹窗
-  static presentModalView({
-    required BuildContext context,
+  static presentModalView(BuildContext context,{
     bool isReplace = false,
     bool maintainState = false,
     Alignment alignment = Alignment.bottomCenter,
