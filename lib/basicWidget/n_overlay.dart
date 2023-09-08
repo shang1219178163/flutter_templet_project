@@ -146,7 +146,7 @@ class NOverlay{
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                _SpinkitLoading(),
+                _SpinkitWidget(),
               ],
             ),
           ),
@@ -195,24 +195,22 @@ class NOverlay{
         ),
       )
     );
+
   }
 
 
 }
 
 
+class _SpinkitWidget extends StatefulWidget {
 
-class _SpinkitLoading extends StatefulWidget {
-
-  _SpinkitLoading({
-    Key? key,
-  }) : super(key: key);
+  _SpinkitWidget();
 
   @override
-  _SpinkitLoadingState createState() => _SpinkitLoadingState();
+  _SpinkitWidgetState createState() => _SpinkitWidgetState();
 }
 
-class _SpinkitLoadingState extends State<_SpinkitLoading> with SingleTickerProviderStateMixin {
+class _SpinkitWidgetState extends State<_SpinkitWidget> with SingleTickerProviderStateMixin {
 
   final spinkit = SpinKitFadingCircle(
     color: Colors.white,
