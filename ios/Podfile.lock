@@ -28,6 +28,9 @@ PODS:
   - FMDB/standard (2.7.5)
   - http_proxy (0.0.1):
     - Flutter
+  - image_cropper (0.0.4):
+    - Flutter
+    - TOCropViewController (~> 2.6.1)
   - image_gallery_saver (1.5.0):
     - Flutter
   - image_picker_ios (0.0.1):
@@ -74,6 +77,7 @@ PODS:
     - Flutter
     - FMDB (>= 2.7.5)
   - Toast (4.0.0)
+  - TOCropViewController (2.6.1)
   - url_launcher_ios (0.0.1):
     - Flutter
   - video_player_avfoundation (0.0.1):
@@ -92,6 +96,7 @@ DEPENDENCIES:
   - flutter_sound (from `.symlinks/plugins/flutter_sound/ios`)
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
   - http_proxy (from `.symlinks/plugins/http_proxy/ios`)
+  - image_cropper (from `.symlinks/plugins/image_cropper/ios`)
   - image_gallery_saver (from `.symlinks/plugins/image_gallery_saver/ios`)
   - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
   - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
@@ -117,6 +122,7 @@ SPEC REPOS:
     - SDWebImage
     - SDWebImageWebPCoder
     - Toast
+    - TOCropViewController
 
 EXTERNAL SOURCES:
   aesthetic_dialogs:
@@ -139,6 +145,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/fluttertoast/ios"
   http_proxy:
     :path: ".symlinks/plugins/http_proxy/ios"
+  image_cropper:
+    :path: ".symlinks/plugins/image_cropper/ios"
   image_gallery_saver:
     :path: ".symlinks/plugins/image_gallery_saver/ios"
   image_picker_ios:
@@ -179,6 +187,7 @@ SPEC CHECKSUMS:
   fluttertoast: eb263d302cc92e04176c053d2385237e9f43fad0
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   http_proxy: 20f129d3e1c70cfdef92530b374c619832027729
+  image_cropper: a3291c624a953049bc6a02e1f8c8ceb162a24b25
   image_gallery_saver: 259eab68fb271cfd57d599904f7acdc7832e7ef2
   image_picker_ios: 4a8aadfbb6dc30ad5141a2ce3832af9214a705b5
   libwebp: f62cb61d0a484ba548448a4bd52aabf150ff6eef
@@ -196,6 +205,7 @@ SPEC CHECKSUMS:
   shared_preferences_foundation: 986fc17f3d3251412d18b0265f9c64113a8c2472
   sqflite: 6d358c025f5b867b29ed92fc697fd34924e11904
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
+  TOCropViewController: edfd4f25713d56905ad1e0b9f5be3fbe0f59c863
   url_launcher_ios: ae1517e5e344f5544fb090b079e11f399dfbe4d2
   video_player_avfoundation: 6d971a232d72e6ee25368378d48a079dea01f1cf
   webview_flutter_wkwebview: b7e70ef1ddded7e69c796c7390ee74180182971f

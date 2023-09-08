@@ -86,7 +86,7 @@ class _EmojiPageState extends State<EmojiPage> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocationOffset(
         location: FloatingActionButtonLocation.endFloat,
-        offsetY: 40,
+        // offsetY: -40,
       ),
       floatingActionButton: widget.onSend == null ? null : Container(
         margin: EdgeInsets.only(

@@ -32,7 +32,7 @@ class _ThirdPageState extends State<ThirdPage> with RouteAware {
 
   final offsetY = ValueNotifier(0.0);
 
-  var items = List<String>.generate(20, (i) => 'Item $i');
+  var items = List<String>.generate(3, (i) => 'Item $i');
 
   var selectedIndex = 0;
 
