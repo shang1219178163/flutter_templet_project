@@ -472,6 +472,7 @@ var slivers = [
 ];
 
 var specials = [
+  Tuple2(APPRouter.themeColorDemo, "themeColor", ),
   Tuple2(APPRouter.emojiPage, "emoji", ),
   Tuple2(APPRouter.operatorDemo, "特殊操作符", ),
   Tuple2(APPRouter.mediaQueryDemo, "mediaQuery", ),

@@ -15,6 +15,7 @@ import 'package:flutter_templet_project/pages/DialogChoiceChipDemo.dart';
 import 'package:flutter_templet_project/pages/ReflectDemo.dart';
 import 'package:flutter_templet_project/pages/PageLifecycleObserverDemo.dart';
 import 'package:flutter_templet_project/pages/RegExpDemo.dart';
+import 'package:flutter_templet_project/pages/ThemeColorDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AutoLayoutDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AlertDialogTagSelectDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedBuilderDemo.dart';
@@ -281,6 +282,9 @@ import 'package:flutter_templet_project/main.dart';
 
 ///https://www.jianshu.com/p/b9d6ec92926f
 class APPRouter {
+
+  static const themeColorDemo = '/themeColorDemo';
+
   static const launchPage = '/APPLaunchPage';
   static const emojiPage = '/emojiPage';
 
@@ -628,6 +632,8 @@ class AppPage {
   static final List<GetPage> routes = [
     unknownRoute,
 
+
+    GetPage(name: APPRouter.themeColorDemo, page: () => ThemeColorDemo(),),
     GetPage(name: APPRouter.emojiPage, page: () => EmojiPage(),),
 
     GetPage(name: APPRouter.launchPage, page: () => AppLaunchPage(),),
