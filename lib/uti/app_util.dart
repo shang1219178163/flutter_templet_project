@@ -2,14 +2,12 @@
 
 import 'package:flutter/cupertino.dart';
 
-class AppUti{
-  // AppUti._() {
-  //   init();
-  // }
+class AppUtil{
+  // AppUtil._();
   //
-  // static final AppUti _instance = AppUti._();
+  // static final AppUtil _instance = AppUtil._();
   //
-  // factory AppUti() => _instance;
+  // factory AppUtil() => _instance;
   //
   // init() async {
   //   // debugPrint("init: $prefs");

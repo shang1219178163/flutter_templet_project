@@ -61,7 +61,7 @@ mixin BottomSheetAvatarMixin<T extends StatefulWidget> on State<T> {
   }) async {
     final file = await _takePhoto();
     if (file == null) {
-      NOverlay.showToast(message: '请重新拍摄', context: context,);
+      NOverlay.showToast(context, message: '请重新拍摄',);
       return null;
     }
 
@@ -86,7 +86,7 @@ mixin BottomSheetAvatarMixin<T extends StatefulWidget> on State<T> {
   }) async {
     final file = await _chooseAvatarByWechatPicker();
     if (file == null) {
-      NOverlay.showToast(message: '请重新选择', context: context,);
+      NOverlay.showToast(context, message: '请重新选择',);
       return null;
     }
     // EasyToast.showLoading("图片处理中...");

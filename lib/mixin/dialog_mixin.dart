@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/n_cancel_and_confirm_bar.dart';
-import 'package:flutter_templet_project/uti/app_uti.dart';
+import 'package:flutter_templet_project/uti/app_util.dart';
 import 'package:flutter_templet_project/uti/color_util.dart';
 
 

@@ -6,7 +6,6 @@ import 'package:flutter_templet_project/basicWidget/n_adaptive_text.dart';
 import 'package:flutter_templet_project/basicWidget/n_slide_transition_builder.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/overlay_ext.dart';
-import 'package:flutter_templet_project/uti/app_uti.dart';
 import 'package:get/get.dart';
 
 
@@ -31,8 +30,7 @@ class NOverlay{
   bool get isLoading => _entriesList.isNotEmpty;
 
   /// OverlayEntry 弹窗展示
-  static OverlayEntry? showEntry({
-    required BuildContext context,
+  static OverlayEntry? showEntry(BuildContext context,{
     bool isReplace = false,
     bool maintainState = false,
     required Widget child,
@@ -79,8 +77,7 @@ class NOverlay{
   }
 
   /// 展示 OverlayEntry 弹窗
-  static showToast({
-    required BuildContext context,
+  static showToast(BuildContext context,{
     String message = "showToast",
     Widget? child,
     Alignment alignment = Alignment.center,
@@ -115,8 +112,7 @@ class NOverlay{
         ],
       );
     }
-    showEntry(
-      context: context,
+    showEntry(context,
       child: content,
     );
 
@@ -129,13 +125,12 @@ class NOverlay{
   }
 
 
-  static showLoading({
-    required BuildContext context,
+  static showLoading(
+    BuildContext context,{
     String message = "showToast",
     Widget? child,
   }) {
-    NOverlay.showToast(
-      context: context,
+    NOverlay.showToast(context,
       duration: const Duration(milliseconds: 5000),
       autoDismiss: true,
       onDismiss: (){
@@ -184,8 +179,7 @@ class NOverlay{
       hideEntry();
     }
 
-    showEntry(
-      context: context,
+    showEntry(context,
       isReplace: isReplace,
       maintainState: maintainState,
       child: Material(
@@ -205,8 +199,6 @@ class NOverlay{
   }
 
 
-
-
 }
 
 
@@ -215,10 +207,7 @@ class _SpinkitLoading extends StatefulWidget {
 
   _SpinkitLoading({
     Key? key,
-    this.message = "",
   }) : super(key: key);
-
-  final String message;
 
   @override
   _SpinkitLoadingState createState() => _SpinkitLoadingState();

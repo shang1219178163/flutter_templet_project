@@ -29,7 +29,7 @@ import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/routes/RouteService.dart';
 import 'package:flutter_templet_project/routes/APPRouter.dart';
 import 'package:flutter_templet_project/service/cache_service.dart';
-import 'package:flutter_templet_project/uti/app_uti.dart';
+import 'package:flutter_templet_project/uti/app_util.dart';
 import 'package:flutter_templet_project/uti/localizations/AppCupertinoLocalizations.dart';
 import 'package:flutter_templet_project/uti/localizations/ZhCupertinoLocalizations.dart';
 
