@@ -66,19 +66,16 @@ mixin BottomSheetAvatarMixin<T extends StatefulWidget> on State<T> {
       return null;
     }
 
-    // EasyToast.showLoading("图片处理中...");
     NOverlay.showLoading(context, message: "图片处理中...");
 
     final compressImageFile = await file.toCompressImage();
     if (!needCropp) {
-      // EasyToast.hideLoading();
       NOverlay.hide();
       cb?.call(compressImageFile.path);
       return compressImageFile.path;
     }
 
     final cropImageFile = await compressImageFile.toCropImage();
-    // EasyToast.hideLoading();
     NOverlay.hide();
 
     cb?.call(cropImageFile.path);
@@ -95,19 +92,16 @@ mixin BottomSheetAvatarMixin<T extends StatefulWidget> on State<T> {
       NOverlay.showToast(context, message: '请重新选择',);
       return null;
     }
-    // EasyToast.showLoading("图片处理中...");
     NOverlay.showLoading(context, message: "图片处理中...");
 
     final compressImageFile = await file.toCompressImage();
     if (!needCropp) {
-      // EasyToast.hideLoading();
       NOverlay.hide();
       cb?.call(compressImageFile.path);
       return compressImageFile.path;
     }
 
     final cropImageFile = await compressImageFile.toCropImage();
-    // EasyToast.hideLoading();
     NOverlay.hide();
 
     cb?.call(cropImageFile.path);
