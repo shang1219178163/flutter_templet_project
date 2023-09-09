@@ -30,7 +30,7 @@ class NOverlay{
   bool get isLoading => _entriesList.isNotEmpty;
 
   /// OverlayEntry 弹窗展示
-  static OverlayEntry? showEntry(BuildContext context,{
+  static OverlayEntry? show(BuildContext context,{
     bool isReplace = false,
     bool maintainState = false,
     required Widget child,
@@ -45,7 +45,7 @@ class NOverlay{
     // final _overlayState = Overlay.of(_globalContext!);
 
     if (isReplace) {
-      hideEntry();
+      hide();
     }
 
     final overlayEntry = OverlayEntry(
@@ -59,7 +59,7 @@ class NOverlay{
   }
 
   /// OverlayEntry 弹窗移除
-  static hideEntry({duration = const Duration(milliseconds: 350)}) {
+  static hide({duration = const Duration(milliseconds: 350)}) {
     if (currentOverlayEntry == null) {
       return;
     }
@@ -69,7 +69,7 @@ class NOverlay{
   }
 
   /// OverlayEntry 清除
-  static clearEntry() {
+  static clear() {
     for (final entry in _entriesList) {
       entry.remove();
     }
@@ -112,13 +112,13 @@ class NOverlay{
         ],
       );
     }
-    showEntry(context,
+    show(context,
       child: content,
     );
 
     if (autoDismiss) {
       Future.delayed(duration, (){
-        hideEntry();
+        hide();
         onDismiss?.call();
       });
     }
@@ -150,7 +150,8 @@ class NOverlay{
               ],
             ),
           ),
-          child ?? NText(data: 'NToast is awesome!',
+          child ?? NText(
+            data: message,
             fontSize: 16,
             fontWeight: FontWeight.w400,
             color: Colors.white,
@@ -175,10 +176,10 @@ class NOverlay{
       if (alignment != Alignment.center) {
         await globalKey.currentState?.controller.reverse();
       }
-      hideEntry();
+      hide();
     }
 
-    showEntry(context,
+    show(context,
       isReplace: isReplace,
       maintainState: maintainState,
       child: Material(

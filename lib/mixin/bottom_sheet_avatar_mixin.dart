@@ -55,6 +55,7 @@ mixin BottomSheetAvatarMixin<T extends StatefulWidget> on State<T> {
     ).toShowCupertinoModalPopup(context: context);
   }
 
+  /// 拍照获取图像
   handleImageFromCamera({
     bool needCropp = true,
     required Function(String? path)? cb,
@@ -66,20 +67,24 @@ mixin BottomSheetAvatarMixin<T extends StatefulWidget> on State<T> {
     }
 
     // EasyToast.showLoading("图片处理中...");
+    NOverlay.showLoading(context, message: "图片处理中...");
 
     final compressImageFile = await file.toCompressImage();
     if (!needCropp) {
       // EasyToast.hideLoading();
+      NOverlay.hide();
       return compressImageFile;
     }
 
     final cropImageFile = await compressImageFile.toCropImage();
     // EasyToast.hideLoading();
+    NOverlay.hide();
 
     final path = cropImageFile.path;
     return path;
   }
 
+  /// 从相册获取图像
   handleImageFromXiangce({
     bool needCropp = true,
     required Function(String? path)? cb,
@@ -90,15 +95,19 @@ mixin BottomSheetAvatarMixin<T extends StatefulWidget> on State<T> {
       return null;
     }
     // EasyToast.showLoading("图片处理中...");
+    NOverlay.showLoading(context, message: "图片处理中...");
 
     final compressImageFile = await file.toCompressImage();
     if (!needCropp) {
       // EasyToast.hideLoading();
+      NOverlay.hide();
       return compressImageFile;
     }
 
     final cropImageFile = await compressImageFile.toCropImage();
     // EasyToast.hideLoading();
+    NOverlay.hide();
+
     if (!needCropp) {
       return compressImageFile;
     }

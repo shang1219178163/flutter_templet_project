@@ -113,49 +113,50 @@ class _APPUserCenterPageState extends State<APPUserCenterPage> with BottomSheetA
       child: Column(
         children: <Widget>[
           SizedBox(height: 10),
-          InkWell(
-            onTap: (){
-              updateAvatar(
-                cb: (val){
-                  if (val == null) {
-                    return;
+          Expanded(
+            child: InkWell(
+              onTap: (){
+                updateAvatar(
+                  cb: (val){
+                    if (val == null) {
+                      return;
+                    }
+                    debugPrint("updateAvatar: $val");
+                    avatarVN.value = val;
                   }
-                  debugPrint("updateAvatar: $val");
-                  avatarVN.value = val;
-                }
-              );
-            },
-            child: ValueListenableBuilder<String>(
-              valueListenable: avatarVN,
-              builder: (context,  value, child){
+                );
+              },
+              child: ValueListenableBuilder<String>(
+                valueListenable: avatarVN,
+                builder: (context,  value, child){
 
-                if (value.isEmpty) {
-                  return Hero(
-                    tag: 'avatar',
-                    child: Image.asset('avatar.png'.toPath(), width:90),
-                    // child: Image.asset('bg.png'.toPng(), width:90),
+                  if (value.isEmpty) {
+                    return Hero(
+                      tag: 'avatar',
+                      child: Image.asset('avatar.png'.toPath(), width:90),
+                      // child: Image.asset('bg.png'.toPng(), width:90),
+                    );
+                  }
+
+                  return Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.white, width: 2),
+                      borderRadius: BorderRadius.all(Radius.circular(50)),
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.all(Radius.circular(50)),
+                      child: Image.file(
+                        File(value),
+                        fit: BoxFit.fill,
+                        width: 100,
+                        height: 100,
+                      ),
+                    ),
                   );
                 }
-
-                return Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.white, width: 2),
-                    borderRadius: BorderRadius.all(Radius.circular(50)),
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.all(Radius.circular(50)),
-                    child: Image.file(
-                      File(value),
-                      fit: BoxFit.fill,
-                      width: 100,
-                      height: 100,
-                    ),
-                  ),
-                );
-              }
+              ),
             ),
           ),
-          SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.max,
