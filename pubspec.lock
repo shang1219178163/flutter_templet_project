@@ -1020,7 +1020,7 @@ packages:
     description:
       path: "."
       ref: master
-      resolved-ref: "99635dff6710d13c1ef8c0532a4003e4ae2587cd"
+      resolved-ref: "22436f09c34edb9b2adf49baa6308afd749bf5c7"
       url: "git@github.com:shang1219178163/json_to_dart.git"
     source: git
     version: "1.0.5"
