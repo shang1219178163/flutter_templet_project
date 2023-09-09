@@ -359,23 +359,23 @@ extension CustomScrollViewExt on CustomScrollView {
 
 extension ListTileExt on ListTile {
 
-  ///添加分割符
-  Widget addBottomSeparator({
-    EdgeInsets margin = const EdgeInsets.symmetric(horizontal:10),
-    EdgeInsets padding = const EdgeInsets.all(0),
-    double height = 0.5,
-    Color color = const Color(0xffeeeeee),
-  }) {
-    return Container(
-      margin: margin,
-      padding: padding,
-      decoration: BoxDecoration(
-        border: Border(
-          bottom: BorderSide(width: height, color: color),
-        )
-      ),
-      child: this,
-    );
-  }
+  // ///添加分割符
+  // Widget addBottomSeparator({
+  //   EdgeInsets margin = const EdgeInsets.symmetric(horizontal:10),
+  //   EdgeInsets padding = const EdgeInsets.all(0),
+  //   double height = 0.5,
+  //   Color color = const Color(0xffeeeeee),
+  // }) {
+  //   return Container(
+  //     margin: margin,
+  //     padding: padding,
+  //     decoration: BoxDecoration(
+  //       border: Border(
+  //         bottom: BorderSide(width: height, color: color),
+  //       )
+  //     ),
+  //     child: this,
+  //   );
+  // }
 }
 

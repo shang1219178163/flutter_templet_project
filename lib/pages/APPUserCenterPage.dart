@@ -62,7 +62,6 @@ class _APPUserCenterPageState extends State<APPUserCenterPage> with BottomSheetA
   @override
   Widget build(BuildContext context){
     return Scaffold(
-      backgroundColor: bgColor,
       appBar: AppBar(
           iconTheme: IconThemeData(color: Colors.white),//修改返回按钮颜色
           centerTitle: true,
@@ -94,16 +93,14 @@ class _APPUserCenterPageState extends State<APPUserCenterPage> with BottomSheetA
           shadowColor: Colors.transparent,
         ),
       // drawer: APPDrawerMenuPage(),
-      body: Center(
-        child: ListView(
-          children: <Widget>[
-            buildTop(),
-            buildMid(),
-            SizedBox(height: 15,),
-            // Container(height: 15, color: Get.isDarkMode ? Colors.black45 : Color(0xfff2f2f2)),
-            buildBom(),
-          ],
-        ),
+      body: ListView(
+        children: <Widget>[
+          buildTop(),
+          buildMid(),
+          SizedBox(height: 15,),
+          // Container(height: 15, color: Get.isDarkMode ? Colors.black45 : Color(0xfff2f2f2)),
+          buildBom(),
+        ],
       ),
     );
   }
@@ -191,7 +188,7 @@ class _APPUserCenterPageState extends State<APPUserCenterPage> with BottomSheetA
     return Container(
       height: 100.0,
       padding: EdgeInsets.only(top: 8),
-      color: Colors.white,
+      color: Theme.of(context).colorScheme.surface,
       alignment: Alignment.center,
       child: GridView.count(
         crossAxisCount: 4,
@@ -222,28 +219,31 @@ class _APPUserCenterPageState extends State<APPUserCenterPage> with BottomSheetA
     );
   }
 
-
   Widget buildBom() {
     return Container(
-      color: Colors.white,
+      color: Theme.of(context).colorScheme.surface,
       padding: EdgeInsets.symmetric(horizontal:10, vertical:8),
       child: Column(
         children: items.map((e) => Container(
           decoration: BoxDecoration(
-            border: e == items.last ? null : Border(
-              bottom: BorderSide(color: Colors.grey.withOpacity(0.2)),
-            )
           ),
-          child: ListTile(
-            leading: Icon(e.item2, color: Theme.of(context).primaryColor,),
-            title: Text(e.item1, style: TextStyle(fontSize: 16.0)),
-            trailing: Icon(Icons.chevron_right),
-            onTap: (){ debugPrint("${e.item1}"); },
+          child: Column(
+            children: [
+              ListTile(
+                leading: Icon(e.item2, color: Theme.of(context).primaryColor,),
+                title: Text(e.item1, style: TextStyle(fontSize: 16.0)),
+                trailing: Icon(Icons.chevron_right),
+                onTap: (){
+                  debugPrint("${e.item1}");
+                },
+              ),
+              if (e != items.last) Divider(height: 1, indent: 16, endIndent: 16,),
+            ],
           ),
-        )
-        ).toList(),
+        )).toList(),
       ),
     );
   }
+
 }
 

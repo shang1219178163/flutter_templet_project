@@ -12,6 +12,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/APPThemeSettings.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
+import 'package:tuple/tuple.dart';
 
 
 class AppSettingsPage extends StatefulWidget{
@@ -23,84 +24,69 @@ class AppSettingsPage extends StatefulWidget{
 
 class _AppSettingsPageState extends State<AppSettingsPage>{
 
-  final titles = [
-    '',
-    '用户信息', '手机号', '微信号', '会员等级',
-    '',
-    '应用信息', '清除缓存',
+  late final items = <Tuple3<String, IconData, VoidCallback>>[
+    Tuple3("用户信息", Icons.mail, onPressed),
+    Tuple3("手机号", Icons.share, onPressed),
+    Tuple3("微信号", Icons.save, onPressed),
+    Tuple3("应用信息", Icons.date_range, onPressed),
+    Tuple3("清除缓存", Icons.scanner, onPressed),
+    Tuple3("设置主题", Icons.table_chart, onPressed),
+    Tuple3("语言切换", Icons.language, onPressed),
+    Tuple3("历史记录", Icons.history, onPressed),
   ];
 
   @override
   Widget build(BuildContext context){
     return Scaffold(
-        appBar: AppBar(
-          iconTheme: IconThemeData(color: Colors.white),//修改返回按钮颜色
-          centerTitle: true,
-          title: Text('设置', style: TextStyle(color: Colors.white)),
-          actions: [
-            TextButton(onPressed: (){
-                APPThemeService().showThemePicker(context: context, callback: (){
+      appBar: AppBar(
+        title: Text('设置',),
+        actions: [
+          TextButton(
+            onPressed: (){
+              APPThemeService().showThemePicker(
+                context: context,
+                cb: (){
                   Navigator.of(context).pop();
-                });
-              },
-                child: Text("主题色", style: TextStyle(color: Colors.white))
-            ),
-          ],
-        ),
-        body: Container(
-          color: Colors.black.withAlpha(10),
-          child: Center(
-            child: ListView(
-                children:
-                titles.map((e) {
-                  return _settingCell(e);
-                }).toList()
-            ),
+              });
+            },
+            child: Text("主题色",)
           ),
-        )
-
+        ],
+      ),
+      body: ListView(
+        children: [
+          buildBom(),
+        ]
+      ),
     );
   }
 
-  // Widget _containerCell(String title){
-  //     return Container(
-  //         padding: EdgeInsets.symmetric(vertical: 15,horizontal: 15),
-  //         child: Text(title, style: TextStyle(color: Color(0xff666666), fontSize: 15, fontWeight: FontWeight.w600)),
-  //         decoration: BoxDecoration(
-  //             border: Border(
-  //                 top: BorderSide(width: 10, color: Color(0xfff2f2f2)),
-  //                 bottom: BorderSide(width: 10, color: Color(0xfff2f2f2))
-  //             )
-  //         ),
-  //     );
-  // }
-
-  Widget _settingCell(String title){
-    if (title.isEmpty) {
-      return Container(
-        height: 10,
-        decoration: BoxDecoration(
-          color: Colors.black.withAlpha(10),
-        ),
-        child: Text(title),
-      );
-    }
-
+  Widget buildBom() {
     return Container(
-      child: ListTile(
-        // contentPadding: EdgeInsets.only(left: 15,right: 15),
-        title: Text(title,
-          style: TextStyle(
-            fontSize: 15,
+      padding: EdgeInsets.symmetric(horizontal:10, vertical:8),
+      child: Column(
+        children: items.map((e) => Container(
+          child: Column(
+            children: [
+              ListTile(
+                leading: Icon(e.item2,),
+                title: Text(e.item1, style: TextStyle(fontSize: 16.0)),
+                trailing: Icon(Icons.chevron_right),
+                onTap: (){
+                  debugPrint("${e.item1}");
+                },
+              ),
+              if (e != items.last) Divider(height: 1, indent: 0, endIndent: 0,),
+            ],
           ),
-        ),
-        trailing: Icon(Icons.chevron_right),
-        onTap: (){
-          debugPrint(title);
-        },
-      )
-          .addBottomSeparator(height: 1, color: Colors.black.withAlpha(10)),
+        )).toList(),
+      ),
     );
   }
+
+  onPressed() {
+
+  }
+
 
 }

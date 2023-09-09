@@ -58,7 +58,7 @@ class _APPDrawerMenuPageState extends State<APPDrawerMenuPage> {
                 ...items.map((e) => Column(
                   children: [
                     ListTile(
-                      leading: Icon(e.item1, color: Theme.of(context).primaryColor),
+                      leading: Icon(e.item1),
                       title: Text(e.item2, style: TextStyle(fontSize: 16.0)),
                       trailing: Icon(Icons.chevron_right),
                       dense: true,
@@ -73,7 +73,7 @@ class _APPDrawerMenuPageState extends State<APPDrawerMenuPage> {
                     Divider(),
                   ],
                 )).toList(),
-                buildGrayRow(),
+                buildGrayMode(),
                 Divider(),
               ],
             ),
@@ -124,38 +124,34 @@ class _APPDrawerMenuPageState extends State<APPDrawerMenuPage> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Icon(Icons.change_circle_outlined, color: context.primaryColor),
+                Icon(Icons.change_circle_outlined,),
                 SizedBox(width: 3,),
-                Text(themeTitle,
-                  style: TextStyle(color: context.primaryColor),
-                )
+                Text(themeTitle,),
               ],
             ),
           ),
           TextButton.icon(
             onPressed: (){
               APPThemeService().showThemePicker(
-                  context: context,
-                  callback: (){
-                    Navigator.of(context).pop();
-                  }
+                context: context,
+                cb: (){
+                  Navigator.of(context).pop();
+                }
               );
             },
-            icon: Icon(Icons.color_lens, color: context.primaryColor),
-            label: Text("Light主题切换",
-              style: TextStyle(color: context.primaryColor),
-            )
+            icon: Icon(Icons.color_lens),
+            label: Text("Light主题切换",)
           ),
         ],
       ),
     ];
   }
 
-  buildGrayRow() {
+  buildGrayMode() {
     var filteredProvider = Provider.of<ColorFilteredProvider>(context);
 
     return ListTile(
-      leading: Icon(Icons.change_circle_outlined, color: Theme.of(context).primaryColor),
+      leading: Icon(Icons.change_circle_outlined,),
       title: Text("灰色滤镜",style: TextStyle(fontSize: 16.0)),
       trailing: Switch(
         onChanged: (bool value) {

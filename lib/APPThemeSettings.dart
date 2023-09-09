@@ -27,11 +27,8 @@ class APPThemeService {
     splashFactory: NoSplash.splashFactory,
     splashColor: Colors.transparent, // 点击时的高亮效果设置为透明
     highlightColor: Colors.transparent, // 长按时的扩散效果设置为透明
-    // primarySwatch: Colors.blue,
-    // brightness: Brightness.dark,//设置明暗模式为暗色
-    // accentColor: Colors.black,//(按钮）Widget前景色为黑色
-    primaryColor: Colors.blue, //主色调为青色
-    indicatorColor: Colors.white,
+    // primaryColor: Colors.blue, //主色调为青色
+    // indicatorColor: Colors.white,
     // iconTheme: IconThemeData(color: Colors.yellow),//设置icon主题色为黄色
     // textTheme: ThemeData.light().textTheme.copyWith(
     //     button: TextStyle(color: Colors.red)
@@ -69,6 +66,8 @@ class APPThemeService {
     splashFactory: NoSplash.splashFactory,
     splashColor: Colors.transparent, // 点击时的高亮效果设置为透明
     highlightColor: Colors.transparent, // 长按时的扩散效果设置为透明
+    // primaryColor: Colors.greenAccent, //主色调为青色
+    // indicatorColor: Colors.white,
       // accentColor: Colors.tealAccent[200]!,
       // brightness: Brightness.dark,//设置明暗模式为暗色
       // accentColor: Colors.grey[900]!,//(按钮）Widget前景色为黑色
@@ -118,27 +117,28 @@ class APPThemeService {
 
   void showThemePicker({
     required BuildContext context,
-    required void Function() callback,
+    required void Function() cb,
   }) {
     showCupertinoModalPopup(
-        context: context,
-        builder: (context) => CupertinoActionSheet(
-              actionScrollController: actionScrollController,
-              title: const Text("请选择主题色"),
-              // message: Text(message),
-              actions: _buildActions(context: context, callback: callback),
-              cancelButton: CupertinoActionSheetAction(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: const Text('取消'),
-              ),
-            ));
+      context: context,
+      builder: (context) => CupertinoActionSheet(
+        actionScrollController: actionScrollController,
+        title: const Text("请选择主题色"),
+        // message: Text(message),
+        actions: _buildActions(context: context, cb: cb),
+        cancelButton: CupertinoActionSheetAction(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: const Text('取消'),
+        ),
+      )
+    );
   }
   
   _buildActions({
     required BuildContext context,
-    required void Function() callback,
+    required void Function() cb,
   }) {
     return colors.map((e) {
       final text = e.toString()
@@ -155,7 +155,7 @@ class APPThemeService {
                 onTap: () {
                   changeThemeLight(e);
                   Navigator.pop(context);
-                  callback();
+                  cb();
                 },
                 child: Text(
                   text,
