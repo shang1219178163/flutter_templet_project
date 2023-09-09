@@ -1,5 +1,5 @@
 
-
+import 'dart:io';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -13,8 +13,8 @@ import 'package:flutter_templet_project/uti/color_util.dart';
 import 'package:get/get.dart';
 import 'package:json_to_dart/model_generator.dart';
 
-import 'dart:io';
 import 'package:path_provider/path_provider.dart';
+
 
 class JsonToDartPage extends StatefulWidget {
 
@@ -54,15 +54,15 @@ class _JsonToDartPageState extends State<JsonToDartPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text(widget.title ?? "$widget"),
-      //   // actions: ['done',].map((e) => TextButton(
-      //   //   child: Text(e,
-      //   //     style: TextStyle(color: Colors.white),
-      //   //   ),
-      //   //   onPressed: onPressed)
-      //   // ).toList(),
-      // ),
+      appBar: AppBar(
+        title: Text(widget.title ?? "$widget"),
+        // actions: ['done',].map((e) => TextButton(
+        //   child: Text(e,
+        //     style: TextStyle(color: Colors.white),
+        //   ),
+        //   onPressed: onPressed)
+        // ).toList(),
+      ),
       body: buildBody(),
     );
   }
