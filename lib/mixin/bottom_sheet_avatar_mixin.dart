@@ -39,7 +39,7 @@ mixin BottomSheetAvatarMixin<T extends StatefulWidget> on State<T> {
             if (e == titles[0]) {
               handleImageFromCamera(needCropp: needCropp, cb: cb);
             } else {
-              handleImageFromXiangce(needCropp: needCropp, cb: cb);
+              handleImageFromPhotoAlbum(needCropp: needCropp, cb: cb);
             }
           },
           child: Text(e),
@@ -73,19 +73,19 @@ mixin BottomSheetAvatarMixin<T extends StatefulWidget> on State<T> {
     if (!needCropp) {
       // EasyToast.hideLoading();
       NOverlay.hide();
-      return compressImageFile;
+      cb?.call(compressImageFile.path);
+      return;
     }
 
     final cropImageFile = await compressImageFile.toCropImage();
     // EasyToast.hideLoading();
     NOverlay.hide();
 
-    final path = cropImageFile.path;
-    return path;
+    cb?.call(cropImageFile.path);
   }
 
   /// 从相册获取图像
-  handleImageFromXiangce({
+  handleImageFromPhotoAlbum({
     bool needCropp = true,
     required Function(String? path)? cb,
   }) async {
@@ -101,19 +101,15 @@ mixin BottomSheetAvatarMixin<T extends StatefulWidget> on State<T> {
     if (!needCropp) {
       // EasyToast.hideLoading();
       NOverlay.hide();
-      return compressImageFile;
+      cb?.call(compressImageFile.path);
+      return;
     }
 
     final cropImageFile = await compressImageFile.toCropImage();
     // EasyToast.hideLoading();
     NOverlay.hide();
 
-    if (!needCropp) {
-      return compressImageFile;
-    }
-
-    final path = cropImageFile.path;
-    cb?.call(path);
+    cb?.call(cropImageFile.path);
   }
 
   /// 拍照
