@@ -3,10 +3,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/APPThemeSettings.dart';
 import 'package:flutter_templet_project/basicWidget/header.dart';
-import 'package:flutter_templet_project/extension/widget_ext.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:tuple/tuple.dart';
+
+/// scaffoldBackgroundColor 背景色
+/// dialogBackgroundColor 弹窗背景色
+/// surface 表面颜色(背景色), onSurface 文字颜色
+///
+///
+
 
 class ThemeColorDemo extends StatefulWidget {
 
@@ -26,54 +30,32 @@ class _ThemeColorDemoState extends State<ThemeColorDemo> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title ?? "$widget"),
-        actions: ['change',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () {
-            APPThemeService().changeTheme();
-          },
-        )).toList(),
-      ),
-      body: buildBody(),
-      floatingActionButton: FloatingActionButton(
-        tooltip: 'Increment',
-        onPressed: () {
-          APPThemeService().changeTheme();
-        },
-        child: Icon(Icons.change_circle_outlined),
-      ),
-    );
-  }
+    final themeData = Theme.of(context);
 
-  buildBody() {
-    final items = <Tuple2<String, Color>>[
-      Tuple2("canvasColor", Theme.of(context).canvasColor,),
-      Tuple2("cardColor", Theme.of(context).cardColor,),
-      Tuple2("dialogBackgroundColor", Theme.of(context).dialogBackgroundColor,),
-      Tuple2("disabledColor", Theme.of(context).disabledColor,),
-      Tuple2("dividerColor", Theme.of(context).dividerColor,),
-      Tuple2("focusColor", Theme.of(context).focusColor,),
-      Tuple2("highlightColor", Theme.of(context).highlightColor,),
-      Tuple2("hintColor", Theme.of(context).hintColor,),
-      Tuple2("hoverColor", Theme.of(context).hoverColor,),
-      Tuple2("indicatorColor", Theme.of(context).indicatorColor,),
-      Tuple2("primaryColor", Theme.of(context).primaryColor,),
-      Tuple2("primaryColorDark", Theme.of(context).primaryColorDark,),
-      Tuple2("primaryColorLight", Theme.of(context).primaryColorLight,),
-      Tuple2("scaffoldBackgroundColor", Theme.of(context).scaffoldBackgroundColor,),
-      Tuple2("secondaryHeaderColor", Theme.of(context).secondaryHeaderColor,),
-      Tuple2("shadowColor", Theme.of(context).shadowColor,),
-      Tuple2("splashColor", Theme.of(context).splashColor,),
-      Tuple2("unselectedWidgetColor", Theme.of(context).unselectedWidgetColor,),
+    late final items = <Tuple2<String, Color>>[
+      Tuple2("canvasColor", themeData.canvasColor,),
+      Tuple2("cardColor", themeData.cardColor,),
+      Tuple2("dialogBackgroundColor", themeData.dialogBackgroundColor,),
+      Tuple2("disabledColor", themeData.disabledColor,),
+      Tuple2("dividerColor", themeData.dividerColor,),
+      Tuple2("focusColor", themeData.focusColor,),
+      Tuple2("highlightColor", themeData.highlightColor,),
+      Tuple2("hintColor", themeData.hintColor,),
+      Tuple2("hoverColor", themeData.hoverColor,),
+      Tuple2("indicatorColor", themeData.indicatorColor,),
+      Tuple2("primaryColor", themeData.primaryColor,),
+      Tuple2("primaryColorDark", themeData.primaryColorDark,),
+      Tuple2("primaryColorLight", themeData.primaryColorLight,),
+      Tuple2("scaffoldBackgroundColor", themeData.scaffoldBackgroundColor,),
+      Tuple2("secondaryHeaderColor", themeData.secondaryHeaderColor,),
+      Tuple2("shadowColor", themeData.shadowColor,),
+      Tuple2("splashColor", themeData.splashColor,),
+      Tuple2("unselectedWidgetColor", themeData.unselectedWidgetColor,),
     ];
 
-    final colorScheme = Theme.of(context).colorScheme;
+    late final colorScheme = themeData.colorScheme;
 
-    final colorSchemeItems = <Tuple2<String, Color>>[
+    late final colorSchemeItems = <Tuple2<String, Color>>[
       Tuple2("primaryColor", colorScheme.primary,),
       Tuple2("onPrimary", colorScheme.onPrimary,),
       Tuple2("primaryContainer", colorScheme.primaryContainer,),
@@ -106,11 +88,45 @@ class _ThemeColorDemoState extends State<ThemeColorDemo> {
       Tuple2("surfaceTint", colorScheme.surfaceTint,),
     ];
 
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title ?? "$widget"),
+        actions: ['change',].map((e) => TextButton(
+          child: Text(e,
+            style: TextStyle(color: Colors.white),
+          ),
+          onPressed: () {
+            APPThemeService().changeTheme();
+          },
+        )).toList(),
+      ),
+      body: buildBody(items: items, colorSchemeItems: colorSchemeItems),
+      // floatingActionButton: FloatingActionButton(
+      //   tooltip: 'Increment',
+      //   onPressed: () {
+      //     APPThemeService().changeTheme();
+      //   },
+      //   child: Icon(Icons.change_circle_outlined),
+      // ),
+    );
+  }
+
+  buildBody({
+    required List<Tuple2<String, Color>> items,
+    required List<Tuple2<String, Color>> colorSchemeItems,
+  }) {
     return SafeArea(
       child: SingleChildScrollView(
         child: Column(
-          // crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            // Container(
+            //   padding: EdgeInsets.all(8),
+            //   color: Theme.of(context).scaffoldBackgroundColor,
+            //   child: Text("scaffoldBackgroundColor(${Theme.of(context).scaffoldBackgroundColor})",
+            //     style: TextStyle(color: Colors.green,),
+            //   )
+            // ),
             Header.h4(title: "Theme.of(context)",),
             buildBox(items),
             Divider(color: Colors.red, thickness: 3,),
@@ -129,12 +145,21 @@ class _ThemeColorDemoState extends State<ThemeColorDemo> {
         final itemW = constraints.maxWidth/2;
         return Wrap(
           children: items.map((e) {
+            final name = e.item2.toString()
+                .replaceAll('MaterialColor(primary value:', '')
+                .replaceAll('MaterialAccentColor(primary value:', '')
+                .replaceAll('))', ')');
 
             return Container(
-              width: itemW,
+              width: itemW.truncateToDouble(),
               padding: EdgeInsets.all(8),
               color: e.item2,
-              child: Text("${e.item1}"),
+              child: Text("${e.item1}\n(${name})",
+                style: TextStyle(color: Colors.green, fontSize: 14),
+              ),
+              // child: Text("${e.item1}\n(${e.item2.toString().replaceAll("MaterialAccentColor(primary Value:", "")})",
+              //   style: TextStyle(color: Colors.green, fontSize: 14),
+              // ),
             );
           }).toList(),
         );

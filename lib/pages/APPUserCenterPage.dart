@@ -20,6 +20,7 @@ import 'package:flutter_templet_project/extension/navigator_ext.dart';
 import 'package:flutter_templet_project/extension/dialog_ext.dart';
 import 'package:flutter_templet_project/mixin/bottom_sheet_avatar_mixin.dart';
 import 'package:flutter_templet_project/routes/APPRouter.dart';
+import 'package:flutter_templet_project/uti/color_util.dart';
 
 import 'package:get/get.dart';
 import 'package:flutter_templet_project/pages/APPDrawerMenuPage.dart';
@@ -61,7 +62,8 @@ class _APPUserCenterPageState extends State<APPUserCenterPage> with BottomSheetA
   @override
   Widget build(BuildContext context){
     return Scaffold(
-        appBar: AppBar(
+      backgroundColor: bgColor,
+      appBar: AppBar(
           iconTheme: IconThemeData(color: Colors.white),//修改返回按钮颜色
           centerTitle: true,
           title: Text('设置', style: TextStyle(color: Colors.white)),
@@ -93,23 +95,23 @@ class _APPUserCenterPageState extends State<APPUserCenterPage> with BottomSheetA
         ),
       // drawer: APPDrawerMenuPage(),
       body: Center(
-          child: ListView(
-            children: <Widget>[
-              buildTop(),
-              buildMid(),
-              Container(height: 15, color: Get.isDarkMode ? Colors.black45 : Color(0xfff2f2f2)),
-              buildBom(),
-            ],
-          ),
+        child: ListView(
+          children: <Widget>[
+            buildTop(),
+            buildMid(),
+            SizedBox(height: 15,),
+            // Container(height: 15, color: Get.isDarkMode ? Colors.black45 : Color(0xfff2f2f2)),
+            buildBom(),
+          ],
         ),
+      ),
     );
   }
 
   // 头部
   Widget buildTop() {
     return Container(
-      width: MediaQuery.of(context).size.width,
-      height: 160.0,
+      height: 160,
       color: Theme.of(context).primaryColor,
       child: Column(
         children: <Widget>[
@@ -156,7 +158,6 @@ class _APPUserCenterPageState extends State<APPUserCenterPage> with BottomSheetA
               }
             ),
           ),
-          // Container(child: Image.asset('icon_appbar_back.png'.toPng(), width:90),),
           SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -168,7 +169,7 @@ class _APPUserCenterPageState extends State<APPUserCenterPage> with BottomSheetA
                   // Get.toNamed(APPRouter.loginPage, arguments: "login");
                   Get.toNamed(APPRouter.loginPageOne, arguments: "login");
                 },
-                child: Text('登录', style: TextStyle(fontSize: 20.0, color: Colors.white)),
+                child: Text('登录', style: TextStyle(fontSize: 16.0, color: Colors.white)),
               ),
               Text('/', style: TextStyle(fontSize: 20.0, color: Colors.white)),
               TextButton(
@@ -176,7 +177,7 @@ class _APPUserCenterPageState extends State<APPUserCenterPage> with BottomSheetA
                   // APPRouter.push(context, 'register');
                   Get.toNamed(APPRouter.signinPage, arguments: "signin");
                 },
-                child: Text('注册', style: TextStyle(fontSize: 20.0, color: Colors.white)),
+                child: Text('注册', style: TextStyle(fontSize: 16.0, color: Colors.white)),
               )
             ],
           )
@@ -189,11 +190,13 @@ class _APPUserCenterPageState extends State<APPUserCenterPage> with BottomSheetA
   Widget buildMid() {
     return Container(
       height: 100.0,
-      alignment: Alignment.center,
       padding: EdgeInsets.only(top: 8),
+      color: Colors.white,
+      alignment: Alignment.center,
       child: GridView.count(
         crossAxisCount: 4,
         childAspectRatio: 1.0,
+        physics: NeverScrollableScrollPhysics(),
         children: services.map((e) => Container(
           child: InkWell(
             onTap: (){
@@ -221,12 +224,13 @@ class _APPUserCenterPageState extends State<APPUserCenterPage> with BottomSheetA
 
 
   Widget buildBom() {
-    return Padding(
+    return Container(
+      color: Colors.white,
       padding: EdgeInsets.symmetric(horizontal:10, vertical:8),
       child: Column(
         children: items.map((e) => Container(
           decoration: BoxDecoration(
-            border: Border(
+            border: e == items.last ? null : Border(
               bottom: BorderSide(color: Colors.grey.withOpacity(0.2)),
             )
           ),
