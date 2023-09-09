@@ -27,7 +27,7 @@ mixin BottomSheetAvatarMixin<T extends StatefulWidget> on State<T> {
   // 更新头像
   updateAvatar({
     bool needCropp = true,
-    required Function(String? path)? cb,
+    Function(String? path)? cb,
   }) {
     final titles = ['拍摄', '从相册选择'];
 
@@ -56,7 +56,7 @@ mixin BottomSheetAvatarMixin<T extends StatefulWidget> on State<T> {
   }
 
   /// 拍照获取图像
-  handleImageFromCamera({
+  Future<String?> handleImageFromCamera({
     bool needCropp = true,
     required Function(String? path)? cb,
   }) async {
@@ -74,7 +74,7 @@ mixin BottomSheetAvatarMixin<T extends StatefulWidget> on State<T> {
       // EasyToast.hideLoading();
       NOverlay.hide();
       cb?.call(compressImageFile.path);
-      return;
+      return compressImageFile.path;
     }
 
     final cropImageFile = await compressImageFile.toCropImage();
@@ -82,12 +82,13 @@ mixin BottomSheetAvatarMixin<T extends StatefulWidget> on State<T> {
     NOverlay.hide();
 
     cb?.call(cropImageFile.path);
+    return cropImageFile.path;
   }
 
   /// 从相册获取图像
-  handleImageFromPhotoAlbum({
+  Future<String?> handleImageFromPhotoAlbum({
     bool needCropp = true,
-    required Function(String? path)? cb,
+    Function(String? path)? cb,
   }) async {
     final file = await _chooseAvatarByWechatPicker();
     if (file == null) {
@@ -102,7 +103,7 @@ mixin BottomSheetAvatarMixin<T extends StatefulWidget> on State<T> {
       // EasyToast.hideLoading();
       NOverlay.hide();
       cb?.call(compressImageFile.path);
-      return;
+      return compressImageFile.path;
     }
 
     final cropImageFile = await compressImageFile.toCropImage();
@@ -110,6 +111,7 @@ mixin BottomSheetAvatarMixin<T extends StatefulWidget> on State<T> {
     NOverlay.hide();
 
     cb?.call(cropImageFile.path);
+    return cropImageFile.path;
   }
 
   /// 拍照

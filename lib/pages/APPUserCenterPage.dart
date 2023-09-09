@@ -115,16 +115,22 @@ class _APPUserCenterPageState extends State<APPUserCenterPage> with BottomSheetA
           SizedBox(height: 10),
           Expanded(
             child: InkWell(
-              onTap: (){
-                updateAvatar(
-                  cb: (val){
-                    if (val == null) {
-                      return;
-                    }
-                    debugPrint("updateAvatar: $val");
-                    avatarVN.value = val;
-                  }
-                );
+              onTap: () async {
+                final val = await handleImageFromPhotoAlbum();
+                if (val == null) {
+                  return;
+                }
+                debugPrint("updateAvatar: $val");
+                avatarVN.value = val;
+                // updateAvatar(
+                //   cb: (val){
+                //     if (val == null) {
+                //       return;
+                //     }
+                //     debugPrint("updateAvatar: $val");
+                //     avatarVN.value = val;
+                //   }
+                // );
               },
               child: ValueListenableBuilder<String>(
                 valueListenable: avatarVN,
