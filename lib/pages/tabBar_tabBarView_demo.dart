@@ -626,6 +626,7 @@ var others = [
   Tuple2(APPRouter.videoPlayerScreenDemo, "videoPlayerScreenDemo", ),
   Tuple2(APPRouter.textFieldColorChangeDemo, "textFieldColorChangeDemo", ),
   Tuple2(APPRouter.autoLayoutDemo, "自适应布局研究", ),
+  Tuple2(APPRouter.weatherInfoPage, "天气信息", ),
 
 
 ];

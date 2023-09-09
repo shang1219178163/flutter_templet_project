@@ -16,6 +16,7 @@ import 'package:flutter_templet_project/pages/ReflectDemo.dart';
 import 'package:flutter_templet_project/pages/PageLifecycleObserverDemo.dart';
 import 'package:flutter_templet_project/pages/RegExpDemo.dart';
 import 'package:flutter_templet_project/pages/ThemeColorDemo.dart';
+import 'package:flutter_templet_project/pages/WeatherInfoPage.dart';
 import 'package:flutter_templet_project/pages/demo/AutoLayoutDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AlertDialogTagSelectDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedBuilderDemo.dart';
@@ -595,6 +596,7 @@ class APPRouter {
   static const dashLineDemo = '/dashLineDemo';
   static const scaffoldBottomSheet = '/scaffoldBottomSheet';
   static const floatingActionButtonDemo = '/floatingActionButtonDemo';
+  static const weatherInfoPage = '/weatherInfoPage';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -942,6 +944,7 @@ class AppPage {
     GetPage(name: APPRouter.dashLineDemo, page: () => DashLineDemo(),),
     GetPage(name: APPRouter.scaffoldBottomSheet, page: () => ScaffoldBottomSheet(),),
     GetPage(name: APPRouter.floatingActionButtonDemo, page: () => FloatingActionButtonDemo(),),
+    GetPage(name: APPRouter.weatherInfoPage, page: () => WeatherInfoPage(),),
 
 
   ];
