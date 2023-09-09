@@ -68,38 +68,38 @@ class APPThemeService {
     highlightColor: Colors.transparent, // 长按时的扩散效果设置为透明
     // primaryColor: Colors.greenAccent, //主色调为青色
     // indicatorColor: Colors.white,
-      // accentColor: Colors.tealAccent[200]!,
-      // brightness: Brightness.dark,//设置明暗模式为暗色
-      // accentColor: Colors.grey[900]!,//(按钮）Widget前景色为黑色
-      // primaryColor: Colors.white,//主色调为青色
-      // splashColor: Colors.transparent, // 点击时的高亮效果设置为透明
-      // highlightColor: Colors.transparent, // 长按时的扩散效果设置为透明
-      // iconTheme: IconThemeData(color: Colors.white54),//设置icon主题色为黄色
-      // // textTheme: TextTheme(body1: TextStyle(color: Colors.red))//设置文本颜色为红色
-      // buttonColor: Colors.tealAccent[200]!,
-      // buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.accent),
-      // appBarTheme: ThemeData.dark().appBarTheme.copyWith(
-      //   color: Colors.black54,
-      // ),
-      // indicatorColor: Colors.white,
-      // textButtonTheme: TextButtonThemeData(
-      //   style: ButtonStyle(
-      //     foregroundColor: MaterialStateProperty.all(Colors.tealAccent[200]!),
-      //     textStyle: MaterialStateProperty.all(TextStyle(color: Colors.tealAccent[200]!)),
-      //   ),
-      // ),
-      // elevatedButtonTheme: ElevatedButtonThemeData(
-      //     style: ButtonStyle(
-      //       backgroundColor: MaterialStateProperty.all(Colors.tealAccent[200]!),
-      //     )
-      // ),
-      // outlinedButtonTheme: OutlinedButtonThemeData(
-      //   style: ButtonStyle(
-      //     foregroundColor: MaterialStateProperty.all(Colors.tealAccent[200]!),
-      //     // textStyle: MaterialStateProperty.all(TextStyle(color: e)),
-      //   ),
-      // ),
-      );
+    // accentColor: Colors.tealAccent[200]!,
+    // brightness: Brightness.dark,//设置明暗模式为暗色
+    // accentColor: Colors.grey[900]!,//(按钮）Widget前景色为黑色
+    // primaryColor: Colors.white,//主色调为青色
+    // splashColor: Colors.transparent, // 点击时的高亮效果设置为透明
+    // highlightColor: Colors.transparent, // 长按时的扩散效果设置为透明
+    // iconTheme: IconThemeData(color: Colors.white54),//设置icon主题色为黄色
+    // // textTheme: TextTheme(body1: TextStyle(color: Colors.red))//设置文本颜色为红色
+    // buttonColor: Colors.tealAccent[200]!,
+    // buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.accent),
+    // appBarTheme: ThemeData.dark().appBarTheme.copyWith(
+    //   color: Colors.black54,
+    // ),
+    // indicatorColor: Colors.white,
+    // textButtonTheme: TextButtonThemeData(
+    //   style: ButtonStyle(
+    //     foregroundColor: MaterialStateProperty.all(Colors.tealAccent[200]!),
+    //     textStyle: MaterialStateProperty.all(TextStyle(color: Colors.tealAccent[200]!)),
+    //   ),
+    // ),
+    // elevatedButtonTheme: ElevatedButtonThemeData(
+    //     style: ButtonStyle(
+    //       backgroundColor: MaterialStateProperty.all(Colors.tealAccent[200]!),
+    //     )
+    // ),
+    // outlinedButtonTheme: OutlinedButtonThemeData(
+    //   style: ButtonStyle(
+    //     foregroundColor: MaterialStateProperty.all(Colors.tealAccent[200]!),
+    //     // textStyle: MaterialStateProperty.all(TextStyle(color: e)),
+    //   ),
+    // ),
+  );
 
   /// 自定义行为
   ButtonStyle buildButtonStyle() {

@@ -16,12 +16,6 @@ class FirstPage extends StatefulWidget {
 class _FirstPageState extends State<FirstPage> {
   bool _hiddenAppBar = false;
 
-  void _changeAppBarState() {
-    setState(() {
-      _hiddenAppBar = !_hiddenAppBar;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -66,5 +60,10 @@ class _FirstPageState extends State<FirstPage> {
       ),
     );
   }
-  
+
+  void _changeAppBarState() {
+    _hiddenAppBar = !_hiddenAppBar;
+    setState(() {});
+  }
+
 }
