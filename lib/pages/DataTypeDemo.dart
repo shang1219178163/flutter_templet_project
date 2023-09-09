@@ -59,6 +59,7 @@ class _DataTypeDemoState extends State<DataTypeDemo> with AutomaticKeepAliveClie
         initialIndex: initialIndex,
         length: items.length,
         child: Scaffold(
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           appBar: AppBar(
             bottom: TabBar(
               tabs: items.map((e) => e.item1).toList(),

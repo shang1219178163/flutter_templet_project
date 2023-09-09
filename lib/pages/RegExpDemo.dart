@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/extension/regexp_ext.dart';
 
 class RegExpDemo extends StatefulWidget {
 
@@ -61,6 +62,8 @@ class _RegExpDemoState extends State<RegExpDemo> {
     }
     final seperators = matchs.map((e) => e[0] ?? "").toList();
     debugPrint("seperators: $seperators");
+
+    debugPrint("allMatchesOfString: ${reg.allMatchesOfString(str)}");
   }
 
 }
@@ -70,7 +73,6 @@ extension MatchExt on Match{
 
   String get description {
     return """
-   
       start ${start}
       end ${end}
       input ${input}

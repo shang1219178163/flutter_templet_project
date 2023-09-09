@@ -69,6 +69,7 @@ class _AppSettingsPageState extends State<AppSettingsPage>{
           child: Column(
             children: [
               ListTile(
+                dense: true,
                 leading: Icon(e.item2,),
                 title: Text(e.item1, style: TextStyle(fontSize: 16.0)),
                 trailing: Icon(Icons.chevron_right),
