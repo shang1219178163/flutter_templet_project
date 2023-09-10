@@ -6,6 +6,7 @@ import 'package:flutter_templet_project/basicWidget/app_update_card.dart';
 import 'package:flutter_templet_project/basicWidget/list_subtitle_cell.dart';
 import 'package:flutter_templet_project/basicWidget/n_page_view.dart';
 import 'package:flutter_templet_project/basicWidget/section_list_view.dart';
+import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/divider_ext.dart';
 import 'package:flutter_templet_project/extension/list_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
@@ -65,16 +66,27 @@ class _NPageViewDemoState extends State<NPageViewDemo> {
         )).toList(),
         elevation: 0,
       ),
-      body: buildBody()
+      body: buildBody(),
     );
   }
 
   buildBody() {
-    return NPageView(
-      items: items,
-      isScrollable: isScrollable,
-      isThemeBg: isThemeBg,
-      isBottom: isBottom,
+    return Column(
+      children: [
+        Expanded(
+          child: NPageView(
+            items: items,
+            isScrollable: isScrollable,
+            isThemeBg: isThemeBg,
+            isBottom: isBottom,
+            needSafeArea: false,
+          ),
+        ),
+        Container(
+          height: MediaQuery.of(context).viewPadding.bottom,
+          color: isThemeBg && isBottom ? primaryColor : null,
+        ),
+      ],
     );
   }
 

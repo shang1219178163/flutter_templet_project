@@ -88,11 +88,16 @@ class _NPageViewState extends State<NPageView> with SingleTickerProviderStateMix
       children = children.reversed.toList();
     }
 
+    final child = Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: children,
+    );
+    if (!widget.needSafeArea) {
+      return child;
+    }
+
     return SafeArea(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: children,
-      ),
+      child: child,
     );
   }
 
