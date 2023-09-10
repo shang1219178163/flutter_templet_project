@@ -90,6 +90,7 @@ class _NPageViewState extends State<NPageView> with SingleTickerProviderStateMix
 
     return SafeArea(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: children,
       ),
     );
@@ -132,7 +133,9 @@ class _NPageViewState extends State<NPageView> with SingleTickerProviderStateMix
 
     return Material(
       color: isThemeBg ? primaryColor : null,
-      child: tabBar,
+      child: Center(
+        child: tabBar,
+      ),
     );
   }
 

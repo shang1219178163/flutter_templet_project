@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/APPThemeSettings.dart';
 import 'package:flutter_templet_project/basicWidget/app_update_card.dart';
 import 'package:flutter_templet_project/basicWidget/list_subtitle_cell.dart';
 import 'package:flutter_templet_project/basicWidget/n_page_view.dart';
@@ -38,8 +39,9 @@ class _NPageViewDemoState extends State<NPageViewDemo> {
   bool isBottom = false;
 
   late final btns = <Tuple2<String, VoidCallback>>[
+    Tuple2('主题', onThemeChange),
     Tuple2('位置', onPosition),
-    Tuple2('主题色', onThemeBg),
+    Tuple2('颜色', onThemeBg),
     Tuple2('滑动', onScrollable),
   ];
 
@@ -74,6 +76,10 @@ class _NPageViewDemoState extends State<NPageViewDemo> {
       isThemeBg: isThemeBg,
       isBottom: isBottom,
     );
+  }
+
+  onThemeChange() {
+    APPThemeService().changeTheme();
   }
 
   onPosition() {
