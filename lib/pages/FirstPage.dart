@@ -18,9 +18,8 @@ class _FirstPageState extends State<FirstPage> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: Get.isDarkMode ? APPThemeService().darkThemeData : APPThemeService().themeData,
-      home: DefaultTabController(
+    return Scaffold(
+      body: DefaultTabController(
         length: 4,
         child: Scaffold(
           appBar: _hiddenAppBar ? null : AppBar(
