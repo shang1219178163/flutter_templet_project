@@ -31,22 +31,36 @@ class _NPageViewDemoState extends State<NPageViewDemo> {
 
   late var isTabBarVN = ValueNotifier(false);
 
+  bool isThemeBg = false;
+
+  bool isScrollable = false;
+
+  bool isBottom = false;
+
+  late final btns = <Tuple2<String, VoidCallback>>[
+    Tuple2('位置', onPosition),
+    Tuple2('主题色', onThemeBg),
+    Tuple2('滑动', onScrollable),
+  ];
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: ['change',].map((e) => TextButton(
-          child: Text(e,
+        iconTheme: IconThemeData(color: Colors.white),
+        actions: btns.map((e) => TextButton(
+          style: TextButton.styleFrom(
+            padding: EdgeInsets.zero,
+            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            minimumSize: Size(50, 18),
+          ),
+          onPressed: e.item2,
+          child: Text(e.item1,
             style: TextStyle(color: Colors.white),
           ),
-          onPressed: () {
-
-
-          },
-        )
-        ).toList(),
+        )).toList(),
         elevation: 0,
       ),
       body: buildBody()
@@ -56,14 +70,25 @@ class _NPageViewDemoState extends State<NPageViewDemo> {
   buildBody() {
     return NPageView(
       items: items,
-      // isScrollable: true,
-      // isThemeBg: true,
-      // isBottom: true,
-      tabBar: TabBar(
-        tabs: [],
-
-      ),
+      isScrollable: isScrollable,
+      isThemeBg: isThemeBg,
+      isBottom: isBottom,
     );
+  }
+
+  onPosition() {
+    isBottom = !isBottom;
+    setState(() {});
+  }
+
+  onThemeBg() {
+    isThemeBg = !isThemeBg;
+    setState(() {});
+  }
+
+  onScrollable() {
+    isScrollable = !isScrollable;
+    setState(() {});
   }
 
   List<Tuple2<String, Widget>> items = [
