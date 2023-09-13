@@ -6,7 +6,7 @@ import FlutterMacOS
 import Foundation
 
 import audio_session
-import connectivity_macos
+import connectivity_plus
 import desktop_drop
 import file_selector_macos
 import package_info_plus

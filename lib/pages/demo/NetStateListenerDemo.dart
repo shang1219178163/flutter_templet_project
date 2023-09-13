@@ -6,13 +6,11 @@
 //  Copyright © 10/11/22 shang. All rights reserved.
 //
 
-import 'package:connectivity/connectivity.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:easy_refresh/easy_refresh.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/NNet/NNet.dart';
 import 'package:flutter_templet_project/basicWidget/NNet/NNetContainerListView.dart';
-import 'package:flutter_templet_project/provider/notifier_demo.dart';
 import 'package:flutter_templet_project/service/connectivity_service.dart';
 
 class NetStateListenerDemo extends StatefulWidget {
