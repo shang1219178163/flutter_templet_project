@@ -170,6 +170,7 @@ import 'package:flutter_templet_project/vendor/badges_demo.dart';
 import 'package:flutter_templet_project/vendor/color_converter_demo.dart';
 import 'package:flutter_templet_project/vendor/custom_timer_demo.dart';
 import 'package:flutter_templet_project/vendor/dotted_border_demo.dart';
+import 'package:flutter_templet_project/vendor/flutter_pickers/flutter_pickers_demo.dart';
 import 'package:flutter_templet_project/vendor/flutter_swiper_demo.dart';
 import 'package:flutter_templet_project/vendor/flutter_swiper_indicator_demo.dart';
 import 'package:flutter_templet_project/vendor/getx/getx_demo.dart';
@@ -597,7 +598,7 @@ class APPRouter {
   static const scaffoldBottomSheet = '/scaffoldBottomSheet';
   static const floatingActionButtonDemo = '/floatingActionButtonDemo';
   static const weatherInfoPage = '/weatherInfoPage';
-
+  static const flutterPickersDemo = '/flutterPickersDemo';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -945,6 +946,8 @@ class AppPage {
     GetPage(name: APPRouter.scaffoldBottomSheet, page: () => ScaffoldBottomSheet(),),
     GetPage(name: APPRouter.floatingActionButtonDemo, page: () => FloatingActionButtonDemo(),),
     GetPage(name: APPRouter.weatherInfoPage, page: () => WeatherInfoPage(),),
+
+    GetPage(name: APPRouter.flutterPickersDemo, page: () => FlutterPickersDemo(),),
 
 
   ];

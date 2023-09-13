@@ -24,16 +24,14 @@ class _BottomAppBarDemoState extends State<BottomAppBarDemo> {
   final locations = FloatingActionButtonLocationExt.allCases;
 
   void _onShowFabChanged(bool value) {
-    setState(() {
-      _showFab = value;
-    });
+    _showFab = value;
+    setState(() {});
   }
 
   void _onFabLocationChanged(FloatingActionButtonLocation? value) {
-    setState(() {
-      _fabLocation = value ?? FloatingActionButtonLocation.endDocked;
-      _showNotch = _fabLocation.toString().contains("Docked");
-    });
+    _fabLocation = value ?? FloatingActionButtonLocation.endDocked;
+    _showNotch = _fabLocation.toString().contains("Docked");
+    setState(() {});
   }
   
   @override
@@ -70,11 +68,14 @@ class _BottomAppBarDemoState extends State<BottomAppBarDemo> {
           ],
         ),
         floatingActionButton: _showFab
-            ? FloatingActionButton(
-                onPressed: () {},
-                tooltip: 'Create',
-                child: const Icon(Icons.add),
-              )
+            ? Align(
+                alignment: Alignment(0.2, 0.1),
+                child: FloatingActionButton(
+                  onPressed: () {},
+                  tooltip: 'Create',
+                  child: const Icon(Icons.add),
+                ),
+            )
             : null,
         floatingActionButtonLocation: _fabLocation,
         bottomNavigationBar: _DemoBottomAppBar(
@@ -123,6 +124,7 @@ class _BottomAppBarDemoState extends State<BottomAppBarDemo> {
         ),
       );
     }
+
 }
 
 class _DemoBottomAppBar extends StatelessWidget {

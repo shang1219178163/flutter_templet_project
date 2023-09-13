@@ -3,6 +3,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/header.dart';
+import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:tuple/tuple.dart';
 
 class FloatingActionButtonDemo extends StatefulWidget {
@@ -44,6 +45,8 @@ class _FloatingActionButtonDemoState extends State<FloatingActionButtonDemo> {
       body: buildBody(
         items: items,
       ),
+      floatingActionButton: buildFloatingActionButton(),
+      floatingActionButtonLocation:  FloatingActionButtonLocation.centerTop,
     );
   }
 
@@ -175,6 +178,7 @@ class _FloatingActionButtonDemoState extends State<FloatingActionButtonDemo> {
     );
   }
 
+  /// FloatingActionButton 样式自定义
   Widget buildButtonExtendedCustom() {
     return SizedBox(
       height: 30,
@@ -194,4 +198,60 @@ class _FloatingActionButtonDemoState extends State<FloatingActionButtonDemo> {
     );
   }
 
+  /// FloatingActionButton 位置自定义
+  Widget buildFloatingActionButton() {
+    // return SizedBox();
+    Widget child = buildTopButtonBarToFloatingActionButton();
+
+    // child = FloatingActionButton(
+    //   onPressed: () {},
+    //   tooltip: 'Create',
+    //   child: const Icon(Icons.add),
+    // );
+
+    // child = Align(
+    //   alignment: Alignment(0, 1),
+    //   child: child,
+    // );
+
+    // child = Padding(
+    //   padding: EdgeInsets.only(top: kToolbarHeight),
+    //   child: child,
+    // );
+    return child;
+  }
+
+  Widget buildTopButtonBarToFloatingActionButton() {
+    final titles = List.generate(20, (i) => "选项_$i");
+
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      height: 46,
+      margin: EdgeInsets.only(top: 46),
+      decoration: BoxDecoration(
+        // color: Colors.transparent,
+        color: ColorExt.random,
+        border: Border.all(color: Colors.blue),
+        borderRadius: BorderRadius.all(Radius.circular(0)),
+      ),
+      child: ListView(
+        scrollDirection: Axis.horizontal,
+        children: titles.map((e) {
+
+          return TextButton(
+            style: TextButton.styleFrom(
+              padding: EdgeInsets.symmetric(horizontal: 8),
+              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              minimumSize: Size(50, 18),
+              // backgroundColor: ColorExt.random,
+            ),
+            onPressed: (){
+              debugPrint("$e");
+            },
+            child: Text("$e")
+          );
+        }).toList(),
+      ),
+    );
+  }
 }

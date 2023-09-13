@@ -5,7 +5,6 @@ class NText extends StatelessWidget {
 
   const NText(this.data,{
   	Key? key,
-  	// required this.data,
     this.textAlign,
     this.maxLines,
     this.overflow = TextOverflow.ellipsis,

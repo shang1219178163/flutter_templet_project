@@ -388,7 +388,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Future<PackageInfo> getPackageInfo() async {
-    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    var packageInfo = await PackageInfo.fromPlatform();
     // String appName = packageInfo.appName;// 医链健康执业版
     // String packageName = packageInfo.packageName;// com.yilian.ylHealthApp
     // String version = packageInfo.version;// 1.0.0

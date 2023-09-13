@@ -44,26 +44,25 @@ class _MediaQueryScreeenDemoState extends State<MediaQueryScreeenDemo> {
 
   @override
   Widget build(BuildContext context) {
-    return buildBodyNew();
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
+    // return buildBodyNew();
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title ?? "$widget"),
-          actions: ['done',].map((e) => TextButton(
-            child: Text(e,
-              style: TextStyle(color: Colors.white),
-            ),
-            onPressed: handleScreenHeight,
-          )).toList(),
-        ),
-        body: Text(arguments.toString())
+      // appBar: AppBar(
+      //   title: Text(widget.title ?? "$widget"),
+      //   actions: ['done',].map((e) => TextButton(
+      //     child: Text(e,
+      //       style: TextStyle(color: Colors.white),
+      //     ),
+      //     onPressed: handleScreenHeight,
+      //   )).toList(),
+      // ),
+      body: buildBodyNew(),
+      floatingActionButton: buildFloatingActionButton(),
+      floatingActionButtonLocation:  FloatingActionButtonLocation.centerTop,
     );
   }
 
   buildBodyNew() {
-    return Scaffold(
-      body: Container(
+    return Container(
         // color: ColorExt.random,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -133,8 +132,7 @@ class _MediaQueryScreeenDemoState extends State<MediaQueryScreeenDemo> {
             ),
           ],
         ),
-      )
-    );
+      );
   }
 
   buildBody() {
@@ -213,7 +211,43 @@ class _MediaQueryScreeenDemoState extends State<MediaQueryScreeenDemo> {
               ),
             ],
           ),
-        )
+        ),
+
+    );
+  }
+
+  Widget buildFloatingActionButton() {
+    // final child = FloatingActionButton(
+    //   onPressed: () {},
+    //   tooltip: 'Create',
+    //   child: const Icon(Icons.add),
+    // );
+
+    final mediaQuery = MediaQuery.of(context);
+    var appBarHeight = AppBar().preferredSize.height;
+
+    // final top = mediaQuery.viewPadding.top + kToolbarHeight + appBarHeight;
+    final paddingTop = MediaQuery.of(context).viewPadding.top;
+
+    final top = mediaQuery.viewPadding.top + 0 + kToolbarHeight;
+
+
+    // return SizedBox();
+    final child = Container(
+      width: MediaQuery.of(context).size.width,
+      height: 200,
+      color: Colors.blue,
+      // margin: EdgeInsets.only(top: paddingTop),
+    );
+
+    // return Align(
+    //   alignment: Alignment(0.2, 0.1),
+    //   child: child,
+    // );
+
+    return Padding(
+      padding: const EdgeInsets.only(top: 50.0),
+      child: child,
     );
   }
 

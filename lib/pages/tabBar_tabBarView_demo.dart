@@ -604,6 +604,8 @@ var vendors = [
   Tuple2(APPRouter.tableCalenderMain, "日期", ),
   Tuple2(APPRouter.keyboardAttachDemo, "keyboardAttachableDemo", ),
   Tuple2(APPRouter.getxDemo, "getxDemo", ),
+  Tuple2(APPRouter.flutterPickersDemo, "flutterPickersDemo", ),
+
 
 ];
 
