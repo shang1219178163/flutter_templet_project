@@ -99,7 +99,7 @@ class _AssetUploadBoxDemoState extends State<AssetUploadBoxDemo> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          NText(data: "AssetUploadBox", fontSize: 16,),
+          NText("AssetUploadBox", fontSize: 16,),
           Container(
             padding: EdgeInsets.symmetric(horizontal: 20),
             child: AssetUploadBox(
@@ -124,7 +124,7 @@ class _AssetUploadBoxDemoState extends State<AssetUploadBoxDemo> {
                 decoration: BoxDecoration(
                   border: Border(bottom: BorderSide()),
                 ),
-                child: NText(data: e, fontSize: 16.sp, maxLines: 2,),
+                child: NText(e, fontSize: 16.sp, maxLines: 2,),
               );
             }).toList(),
           )

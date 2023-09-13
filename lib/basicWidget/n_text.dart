@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 
 class NText extends StatelessWidget {
 
-  const NText({
+  const NText(this.data,{
   	Key? key,
-  	required this.data,
+  	// required this.data,
     this.textAlign,
     this.maxLines,
     this.overflow = TextOverflow.ellipsis,

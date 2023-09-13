@@ -62,8 +62,7 @@ class _WeatherInfoPageState extends State<WeatherInfoPage> {
              valueListenable: contentVN, 
              builder: (context,  value, child){
 
-                return NText(
-                  data: value,
+                return NText(value,
                   maxLines: 100,
                 );
               }

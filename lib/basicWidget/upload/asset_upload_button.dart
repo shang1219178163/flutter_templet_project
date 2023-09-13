@@ -185,12 +185,11 @@ class _AssetUploadButtonState extends State<AssetUploadButton> with AutomaticKee
               //   color: Colors.white,
               // ),
               if(widget.model.file != null && (widget.model.file!.lengthSync() > 2 * 1024 * 1024) == true)NText(
-                data: value.toStringAsPercent(2),
+                value.toStringAsPercent(2),
                 fontSize: 12.sp,
                 color: Colors.white,
               ),
-              NText(
-                data: "上传中",
+              NText("上传中",
                 fontSize: 12.sp,
                 color: Colors.white,
               ),
@@ -220,8 +219,7 @@ class _AssetUploadButtonState extends State<AssetUploadButton> with AutomaticKee
               mainAxisSize: MainAxisSize.min,
               children: [
                 Icon(Icons.refresh, color: Colors.red),
-                NText(
-                  data: "点击重试",
+                NText("点击重试",
                   fontSize: 14,
                   color: Colors.white,
                 ),

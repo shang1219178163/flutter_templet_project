@@ -100,8 +100,7 @@ class _NImagePreviewState extends State<NImagePreview> {
                 color: Colors.black.withOpacity(0.3),
                 shape: StadiumBorder(),
               ),
-              child: NText(
-                data: '${currentIndex + 1}/${widget.urls.length}',
+              child: NText('${currentIndex + 1}/${widget.urls.length}',
                 color: Colors.white,
               ),
             ),

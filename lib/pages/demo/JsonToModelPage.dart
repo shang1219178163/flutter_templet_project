@@ -137,13 +137,12 @@ class _JsonToDartPageState extends State<JsonToDartPage> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        NText(data: "JSON to Dart",
+        NText("JSON to Dart",
           fontSize: 24,
           fontWeight: FontWeight.w500,
         ),
         SizedBox(height: spacing,),
-        NText(
-          data: "Paste your JSON in the textarea below, click convert and get your Dart classes for free.",
+        NText("Paste your JSON in the textarea below, click convert and get your Dart classes for free.",
           maxLines: 3,
         ),
         SizedBox(height: spacing*2,),
@@ -230,7 +229,7 @@ class _JsonToDartPageState extends State<JsonToDartPage> {
           children: [
             ElevatedButton(
               onPressed: onGenerate,
-              child: NText(data: "Generate Dart"),
+              child: NText("Generate Dart"),
             ),
             OutlinedButton(
               style: OutlinedButton.styleFrom(
@@ -244,7 +243,7 @@ class _JsonToDartPageState extends State<JsonToDartPage> {
                 _textEditingController.text = jsonStr;
                 toCreateDartFile();
               },
-              child: NText(data: "try", color: Colors.black45,),
+              child: NText("try", color: Colors.black45,),
             ),
           ],
         ),
@@ -258,7 +257,7 @@ class _JsonToDartPageState extends State<JsonToDartPage> {
               debugPrint("copy");
               Clipboard.setData(ClipboardData(text: outVN.value));
             },
-            child: NText(data: "Copy Dart code to clipboard"),
+            child: NText("Copy Dart code to clipboard"),
           ),
         ),
       ],
@@ -278,8 +277,7 @@ class _JsonToDartPageState extends State<JsonToDartPage> {
         final child = selectable ?
         SelectableText(value,
           // maxLines: 1000,
-        ) : NText(
-          data: value,
+        ) : NText(value,
           // maxLines: 1000,
         );
 
@@ -321,8 +319,7 @@ class _JsonToDartPageState extends State<JsonToDartPage> {
     file.writeAsStringSync(outVN.value);
 
     showSnackBar(SnackBar(
-      content: NText(
-        data: "文件已生成(下载文件夹)",
+      content: NText("文件已生成(下载文件夹)",
         color: Colors.white,
         textAlign: TextAlign.center,
       ),
@@ -350,7 +347,7 @@ class _JsonToDartPageState extends State<JsonToDartPage> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            NText(data: e.toString(),),
+            NText(e.toString(),),
           ],
         ),
       ));

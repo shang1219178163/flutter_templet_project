@@ -61,8 +61,7 @@ class _AutoLayoutDemoState extends State<AutoLayoutDemo> {
                 size: 16,
               ),
             ),
-            content: NText(
-              data: "自适应横向布局"*i,
+            content: NText("自适应横向布局"*i,
               textAlign: TextAlign.center,
               fontSize: 16.sp,
               color: Colors.white,

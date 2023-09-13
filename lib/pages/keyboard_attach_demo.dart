@@ -101,7 +101,7 @@ class _KeyboardAttachDemoState extends State<KeyboardAttachDemo> with
           child: ListView(
             children: List.generate(20, (i){
               return ListTile(
-                title: NText(data: "item_$i",),
+                title: NText("item_$i",),
               );
             }).toList(),
           ),
@@ -126,8 +126,7 @@ class _KeyboardAttachDemoState extends State<KeyboardAttachDemo> with
           Expanded(
             child: Container(
               // color: Colors.yellow,
-              child: NText(
-                data: _textController.text,
+              child: NText(_textController.text,
                 maxLines: 100,
               ),
             ),

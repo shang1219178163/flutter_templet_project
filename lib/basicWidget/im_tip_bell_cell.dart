@@ -68,8 +68,7 @@ class IMTipBellCell extends StatelessWidget {
               ),
             ),
             Flexible(
-              child: content ?? NText(
-                data: text ?? "",
+              child: content ?? NText(text ?? "",
                 textAlign: TextAlign.center,
                 fontSize: 12.sp,
                 color: Colors.white,

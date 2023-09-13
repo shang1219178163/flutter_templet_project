@@ -150,8 +150,7 @@ class NOverlay{
               ],
             ),
           ),
-          child ?? NText(
-            data: message,
+          child ?? NText(message,
             fontSize: 16,
             fontWeight: FontWeight.w400,
             color: Colors.white,

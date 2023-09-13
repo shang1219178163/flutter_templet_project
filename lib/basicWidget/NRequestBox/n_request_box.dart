@@ -230,7 +230,7 @@ class _NRequestBoxState extends State<NRequestBox> {
               ),
               onPressed: onClick,
               child: NLabelAndIcon(
-                label: NText(data: "筛选", fontSize: 16.sp),
+                label: NText("筛选", fontSize: 16.sp),
                 icon: Image(
                   image: "icon_patient_filter.png".toAssetImage(),
                   width: 18.w,

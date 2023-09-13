@@ -58,8 +58,7 @@ class _GetxDemoState extends State<GetxDemo> {
                 runSpacing: 8,
                 children: items.map((e) => OutlinedButton(
                     onPressed: e.item2,
-                    child: NText(
-                      data: e.item1,
+                    child: NText(e.item1,
                     )
                 )).toList(),
               ),
@@ -136,13 +135,11 @@ class _GetxDemoState extends State<GetxDemo> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          NText(
-            data: "Welcome to Flutter Dev'S",
+          NText("Welcome to Flutter Dev'S",
             fontSize: 15,
           ),
           SizedBox(height: 20,),
-          NText(
-            data: "FlutterDevs is a protruding flutter app development company with "
+          NText("FlutterDevs is a protruding flutter app development company with "
                 "an extensive in-house team of 30+ seasoned professionals who know "
                 "exactly what you need to strengthen your business across various dimensions",
             fontSize: 15,

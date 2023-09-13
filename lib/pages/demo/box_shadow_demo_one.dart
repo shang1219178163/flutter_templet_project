@@ -42,19 +42,19 @@ class _BoxShadowDemoOneState extends State<BoxShadowDemoOne> {
             buildShadow(
               width: 60,
               height: 60,
-              child: NText(data: "内外阴影"),
+              child: NText("内外阴影"),
             ),
             SizedBox(height: 10,),
             buildShadow(
               width: 100,
               height: 100,
-              child: NText(data: "内外阴影"),
+              child: NText("内外阴影"),
             ),
             SizedBox(height: 10,),
             buildShadow(
               width: 100,
               height: 50,
-              child: NText(data: "内外阴影"),
+              child: NText("内外阴影"),
             ),
           ],
         ),
