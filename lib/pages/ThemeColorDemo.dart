@@ -128,22 +128,29 @@ class _ThemeColorDemoState extends State<ThemeColorDemo> {
             //   )
             // ),
             Header.h4(title: "Theme.of(context)",),
-            buildBox(items),
+            buildBox(items: items),
             Divider(color: Colors.red, thickness: 3,),
             Header.h4(title: "Theme.of(context).colorScheme",),
-            buildBox(colorSchemeItems),
+            buildBox(items: colorSchemeItems),
           ],
         ),
       ),
     );
   }
 
-  Widget buildBox(List<Tuple2<String, Color>> items) {
+  Widget buildBox({
+    required List<Tuple2<String, Color>> items,
+    int rowCount = 3,
+    double spacing = 8,
+    double runSpacing = 8,
+  }) {
     return LayoutBuilder(
-      builder: (context, constraints){
+      builder: (context, constraints) {
+        final itemWidth = ((constraints.maxWidth - spacing * (rowCount - 1)) / rowCount).truncateToDouble();
 
-        final itemW = constraints.maxWidth/2;
         return Wrap(
+          spacing: spacing,
+          runSpacing: runSpacing,
           children: items.map((e) {
             final name = e.item2.toString()
                 .replaceAll('MaterialColor(primary value:', '')
@@ -151,7 +158,7 @@ class _ThemeColorDemoState extends State<ThemeColorDemo> {
                 .replaceAll('))', ')');
 
             return Container(
-              width: itemW.truncateToDouble(),
+              width: itemWidth,
               padding: EdgeInsets.all(8),
               color: e.item2,
               child: Text("${e.item1}\n(${name})",
