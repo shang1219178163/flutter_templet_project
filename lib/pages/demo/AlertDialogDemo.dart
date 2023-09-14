@@ -281,7 +281,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
             alignment: Alignment.center,
             decoration: BoxDecoration(
               color: Theme.of(context).dialogBackgroundColor,
-              borderRadius: BorderRadius.all(Radius.circular(8)),
+              borderRadius: BorderRadius.all(Radius.circular(16)),
             ),
             child: Column(
               children: [
@@ -301,7 +301,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
                 ),
                 NCancelAndConfirmBar(
                   cancelBgColor: Theme.of(context).dialogBackgroundColor,
-                  confirmBgColor: Theme.of(context).colorScheme.primary,
+                  confirmBgColor: Theme.of(context).colorScheme.secondary,
                   bottomLeftRadius: const Radius.circular(16),
                   bottomRightRadius: const Radius.circular(16),
                   onCancel: (){
@@ -597,6 +597,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
         padding: EdgeInsets.all(8),
         child: Wrap(
           spacing: 8,
+          runSpacing: 8,
           children: titles.map((e) => OutlinedButton(
             onPressed: () {
               _onPressed(titles.indexOf(e));
