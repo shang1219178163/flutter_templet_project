@@ -12,17 +12,17 @@ import 'package:flutter_templet_project/basicWidget/n_webview.dart';
 
 class NUserPrivacy extends StatefulWidget {
 
-  const NUserPrivacy(
-      {Key? key,
-      this.title,
-      this.content,
-      required this.onCancel,
-      required this.onConfirm,
-      this.radius = 8,
-      this.cancellBuilder,
-      this.confirmBuilder,
-      this.bottomBuilder,
-      }) : assert(title != null || content != null),
+  const NUserPrivacy({
+    Key? key,
+    this.title,
+    this.content,
+    required this.onCancel,
+    required this.onConfirm,
+    this.radius = 8,
+    this.cancellBuilder,
+    this.confirmBuilder,
+    this.bottomBuilder,
+    }) : assert(title != null || content != null),
         super(key: key);
 
   final Text? title;
@@ -75,7 +75,7 @@ class _NUserPrivacyState extends State<NUserPrivacy> {
         borderRadius: BorderRadius.circular(widget.radius),
         child: Container(
           decoration: BoxDecoration(
-              color: Colors.white,
+              color: Theme.of(context).scaffoldBackgroundColor,
               borderRadius: BorderRadius.circular(widget.radius),
           ),
           width: screenSize.width * .8,
@@ -123,7 +123,7 @@ class _NUserPrivacyState extends State<NUserPrivacy> {
                 color: Colors.transparent,
                   alignment: Alignment.center,
                   child: widget.cancellBuilder != null ? widget.cancellBuilder?.call(context) : Text('不同意',
-                    style: TextStyle(fontWeight: FontWeight.w500, color: Colors.black87),
+                    style: TextStyle(fontWeight: FontWeight.w500),
                   ),
               ),
             ),
@@ -152,7 +152,7 @@ class _NUserPrivacyState extends State<NUserPrivacy> {
   }
 
   Color _getConfirmBtnBgColor() {
-    return !isScrollBottom ? Colors.grey : Theme.of(context).primaryColor;
+    return !isScrollBottom ? Colors.grey : Theme.of(context).colorScheme.primary;
   }
 
   Color _getConfirmBtnTextColor() {

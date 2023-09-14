@@ -12,71 +12,68 @@ class NAlertDialog extends StatelessWidget {
 
   NAlertDialog({
     Key? key,
-    this.title,
+    this.header,
     this.content,
+    this.footer,
     this.margin = const EdgeInsets.symmetric(horizontal: 30),
     this.actions,
-    this.actionCancell,
-    this.actionConfirm,
-  }) : assert(title != null || content != null),
-        assert((actions != null || actionCancell != null || actionConfirm != null)),
+    this.cancelButton,
+    this.confirmButton,
+    this.dividerColor,
+  }) : assert(header != null || content != null),
+        assert((actions != null || cancelButton != null || confirmButton != null)),
         super(key: key);
 
-  Widget? title;
+  Widget? header;
+
   Widget? content;
 
+  Widget? footer;
+
+
   EdgeInsets margin;
+
   List<Widget>? actions;
-  Widget? actionCancell;
-  Widget? actionConfirm;
+
+  Widget? cancelButton;
+
+  Widget? confirmButton;
+
+  Color? dividerColor;
 
 
   @override
   Widget build(BuildContext context) {
-    var spacingVer = 8.0;
-    var spacingHor = 15.0;
+    dividerColor ??= Theme.of(context).dividerColor;
 
     return Container(
       margin: margin,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).scaffoldBackgroundColor,
         borderRadius: BorderRadius.circular((10.0)), // 圆角度
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          if (title != null) Padding(
-            padding: EdgeInsets.only(
-              top: spacingVer,
-              left: spacingHor,
-              bottom: spacingVer,
-              right: spacingHor
-            ),
-            child: title,
-          ),
-          if (content != null) Container(
-            padding: EdgeInsets.only(
-              left: spacingHor,
-              bottom: spacingVer,
-              right: spacingHor
-            ),
-            child: content,
-          ),
+          if (header != null) header!,
+          if (content != null) content!,
+          if (footer != null) footer!,
           Container(
             height: 0.5,
-            color: Colors.grey[400],
+            color: dividerColor,
           ),
           Row(
             mainAxisSize: MainAxisSize.min,
-            children: actions != null ? actions!.map((e) => Expanded(child: e,),).toList()
-                : [
-              if (actionCancell != null) Expanded(child: actionCancell!,),
-              Container(height: 55, child: VerticalDivider(color: Colors.grey[400])),
-              if (actionConfirm != null) Expanded(child: actionConfirm!,),
+            children: actions?.map((e) => Expanded(child: e,),).toList()
+                ?? [
+              if (cancelButton != null) Expanded(child: cancelButton!,),
+              Container(height: 55, child: VerticalDivider(color: dividerColor)),
+              if (confirmButton != null) Expanded(child: confirmButton!,),
             ],
           ),
         ],
       ),
     );
   }
+
 }

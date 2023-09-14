@@ -8,6 +8,7 @@ import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/n_textfield.dart';
+import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/editable_text_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
@@ -103,7 +104,8 @@ class _IMChatPageState extends State<IMChatPage> with
 
   @override
   Widget build(BuildContext context) {
-    _controller.forward();
+    // _controller.forward();
+    dataList.value = List.generate(2, (index) => "index_$index");
 
     return Scaffold(
       appBar: AppBar(
@@ -114,8 +116,34 @@ class _IMChatPageState extends State<IMChatPage> with
           ),
           onPressed: () => debugPrint(e),)
         ).toList(),
+        elevation: 0,
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(48),
+          child: ValueListenableBuilder<List<String>>(
+             valueListenable: dataList,
+             builder: (context,  value, child){
+
+               // if (value.length < 3) {
+               //   return SizedBox();
+               // }
+                return Container(
+                  width: double.maxFinite,
+                  height: 48,
+                  decoration: BoxDecoration(
+                    color: context.scaffoldBackgroundColor,
+                    // border: Border.all(color: Colors.blue),
+                    borderRadius: BorderRadius.all(Radius.circular(0.w)),
+                  ),
+                  alignment: Alignment.center,
+                  child: Text("${value.length}条数据"),
+                );
+              }
+          ),
+        ),
       ),
       body: buildBody(),
+      // body: buildListView(),
+      // bottomSheet: buildInputBar(),
       // floatingActionButton: FloatingActionButton(
       //   onPressed: () {
       //     scrollToEdge(controller: _scrollController, isTop: false);
@@ -127,148 +155,160 @@ class _IMChatPageState extends State<IMChatPage> with
 
   buildBody() {
     return SafeArea(
-      bottom: false,
+      // bottom: false,
       child: Column(
-          // crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Expanded(
-            child: ValueListenableBuilder<List<String>>(
-              valueListenable: dataList,
-              builder: (context, list, child) {
-                if (list.isEmpty) {
-                  return SizedBox();
-                }
-
-                return buildRefresh(
-                  onRefresh: onLoad,
-                  child: ListView.separated(
-                    controller: _scrollController,
-                    // reverse: true,
-                    physics: ClampingScrollPhysics(),
-                    itemCount: list.length,
-                    itemBuilder: (context, index) {
-                      final e = list[index];
-
-                      return InkWell(
-                        onTap: (){
-                          debugPrint("index: ${index}, $e");
-                        },
-                        child: ListTile(title: Text(e),
-                          subtitle: Text("index: ${index}"),
-                        ),
-                      );
-                    },
-                    separatorBuilder: (context, index) {
-                      return Divider(color: Colors.red, height: 1,);
-                    },
-                  )
-                );
-              }
-            ),
+            // flex: 1,
+            child: buildListView(),
           ),
-          // buildIMInputBar(
-          //   heaer: Container(
-          //     color: Colors.green,
-          //     height: 50,
-          //   ),
-          //   footer: Container(
-          //     color: Colors.blue,
-          //     height: 300,
-          //   ),
-          //   // isExpand: isExpand,
-          // ),
-          IMTextfieldBar(
-            controller: _inputController,
-            onChanged: (String val) {
-              debugPrint("onChanged:$val");
-            },
-            onSubmitted: (String val) {
-              debugPrint("onSubmitted:$val");
-            },
-            header: Container(
-              color: Colors.green,
-              height: 50,
-            ),
-            footerBuilder: (context, event) {
-              Widget child = SizedBox();
-              switch (event) {
-                case IMTextfieldBarEvent.add:
-                  {
-                    child = buildIMBarFooter(
-                      cb: (index) {
-                        debugPrint("cb:$index");
-                          choosePhrases(
-                            cb: (val) {
-                              debugPrint(val.phrases ?? "-");
-                            },
-                            onCancel: (){
-                              Navigator.of(context).pop();
-                            },
-                            onAdd: () {
-                            debugPrint("onAdd");
-                            Navigator.of(context).pop();
-                          }
-                        );
-                      }
-                    );
-                  }
-                  break;
-                case IMTextfieldBarEvent.emoji:
-                  {
-                    child = Container(
-                      height: 200,
-                      child: EmojiPage(
-                        hideAppBar: true,
-                        hideSelected: true,
-                        onChanged: (val) {
-                          debugPrint("onChanged: ${val}");
-                          _inputController.text += val;
-                          debugPrint("onChanged _inputController.text: ${_inputController.text}");
-
-                          _inputController.moveCursorEnd();
-                        },
-                        onDelete: () {
-                          // debugPrint("onDelete: ${_inputController.text}");
-                          // final baseOffset = _inputController.selection.baseOffset;
-                          // debugPrint("baseOffset: ${baseOffset}");
-
-                          _inputController.deleteChar();
-
-                          debugPrint("_inputController.text: ${_inputController.text}");
-                        },
-                        onSend: (val){
-                          debugPrint("onSend: ${val}");
-                          if (_inputController.text.trim().isEmpty) {
-                            return;
-                          }
-
-                          dataList.value = [_inputController.text, ...dataList.value];
-                          _inputController.clear();
-                        },
-                      ),
-                    );
-                  }
-                  break;
-                default:
-                  break;
-              }
-              return child;
-            },
-          ),
+          buildInputBar(),
         ],
       )
     );
   }
 
+  Widget buildListView() {
+    return ValueListenableBuilder<List<String>>(
+      valueListenable: dataList,
+      builder: (context, list, child) {
+        if (list.isEmpty) {
+          return SizedBox();
+        }
+
+        return buildRefresh(
+          onRefresh: onLoad,
+          child: MediaQuery.removePadding(
+            removeTop: true,
+            removeBottom: true,
+            context: context,
+            child: GestureDetector(
+              behavior: HitTestBehavior.translucent,
+              onTap: () {
+                debugPrint("onTap");
+              },
+              child: Scrollbar(
+                controller: _scrollController,
+                child: ListView.builder(
+                  controller: _scrollController,
+                  reverse: true,
+                  // shrinkWrap: true,
+                  // physics: ClampingScrollPhysics(),
+                  // cacheExtent: 600,
+                  itemCount: list.length,
+                  itemBuilder: (context, index) {
+                    final e = list[index];
+
+                    return InkWell(
+                      onTap: (){
+                        debugPrint("index: ${index}, $e");
+                      },
+                      child: ListTile(title: Text(e),
+                        subtitle: Text("index: ${index}"),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ),
+          )
+        );
+      }
+    );
+  }
+
+  Widget buildInputBar() {
+    return IMTextfieldBar(
+      controller: _inputController,
+      onChanged: (String val) {
+        debugPrint("onChanged:$val");
+      },
+      onSubmitted: (String val) {
+        debugPrint("onSubmitted:$val");
+      },
+      // header: Container(
+      //   color: Colors.green,
+      //   height: 50,
+      // ),
+      footerBuilder: (context, event) {
+        Widget child = SizedBox();
+        switch (event) {
+          case IMTextfieldBarEvent.add:
+            {
+              child = buildIMBarFooter(
+                  cb: (index) {
+                    debugPrint("cb:$index");
+                    choosePhrases(
+                        cb: (val) {
+                          debugPrint(val.phrases ?? "-");
+                        },
+                        onCancel: (){
+                          Navigator.of(context).pop();
+                        },
+                        onAdd: () {
+                          debugPrint("onAdd");
+                          Navigator.of(context).pop();
+                        }
+                    );
+                  }
+              );
+            }
+            break;
+          case IMTextfieldBarEvent.emoji:
+            {
+              child = Container(
+                height: 200,
+                child: EmojiPage(
+                  hideAppBar: true,
+                  hideSelected: true,
+                  onChanged: (val) {
+                    debugPrint("onChanged: ${val}");
+                    _inputController.text += val;
+                    debugPrint("onChanged _inputController.text: ${_inputController.text}");
+
+                    _inputController.moveCursorEnd();
+                  },
+                  onDelete: () {
+                    // debugPrint("onDelete: ${_inputController.text}");
+                    // final baseOffset = _inputController.selection.baseOffset;
+                    // debugPrint("baseOffset: ${baseOffset}");
+
+                    _inputController.deleteChar();
+
+                    debugPrint("_inputController.text: ${_inputController.text}");
+                  },
+                  onSend: (val){
+                    debugPrint("onSend: ${val}");
+                    if (_inputController.text.trim().isEmpty) {
+                      return;
+                    }
+
+                    dataList.value = [_inputController.text, ...dataList.value];
+                    _inputController.clear();
+                  },
+                ),
+              );
+            }
+            break;
+          default:
+            break;
+        }
+        return child;
+      },
+    );
+  }
+
   Widget buildRefresh({
-    required Widget? child,
+    required Widget child,
     EasyRefreshController? controller,
     FutureOr Function()? onRefresh,
     FutureOr Function()? onLoad,
   }) {
+    // return child;
     return EasyRefresh(
       refreshOnStart: true,
       controller: controller,
+      clipBehavior: Clip.none,
       header: const ClassicHeader(
         showMessage: false,
         dragText: "下拉加载",

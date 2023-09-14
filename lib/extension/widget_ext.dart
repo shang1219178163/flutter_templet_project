@@ -92,14 +92,14 @@ extension WidgetExt on Widget {
   toShowGeneralDialog({
     required BuildContext context,
     bool barrierDismissible = false,
-    String? barrierLabel,
+    String? barrierLabel = 'barrierLabel',
     Color barrierColor = const Color(0x80000000),
     Duration transitionDuration = const Duration(milliseconds: 200),
     RouteTransitionsBuilder? transitionBuilder,
     bool useRootNavigator = true,
     RouteSettings? routeSettings,
     Offset? anchorPoint,
-    VoidCallback? barrierTap,
+    VoidCallback? onBarrier,
     Alignment alignment = Alignment.center,
   }) => showGeneralDialog(
     context: context,
@@ -112,14 +112,14 @@ extension WidgetExt on Widget {
     routeSettings: routeSettings,
     pageBuilder: (context, animation, secondaryAnimation) {
 
-      return InkWell(
-        onTap: barrierTap,
-        child: Container(
-          color: barrierColor,
+      return Material(
+        color: barrierColor,
+        child: InkWell(
+          onTap: onBarrier,
           child: Align(
             alignment: alignment,
             child: this,
-          )
+          ),
         ),
       );
     },

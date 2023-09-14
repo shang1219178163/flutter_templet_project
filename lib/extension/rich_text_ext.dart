@@ -44,7 +44,7 @@ extension RichTextExt on RichText{
         : TextSpan(
       text: "$prefix$e$suffix",
       style: linkStyle ??
-          TextStyle(color: Theme.of(context).primaryColor),
+          TextStyle(color: Theme.of(context).colorScheme.primary),
       recognizer: TapGestureRecognizer()
         ..onTap = () {
           onTap("$prefix$e$suffix", linkMap?["$prefix$e$suffix"]);

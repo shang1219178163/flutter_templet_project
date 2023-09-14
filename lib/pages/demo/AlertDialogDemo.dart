@@ -2,14 +2,17 @@ import 'dart:core';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/APPThemeSettings.dart';
 
 import 'package:flutter_templet_project/basicWidget/chioce_list.dart';
 import 'package:flutter_templet_project/basicWidget/chioce_wrap.dart';
+import 'package:flutter_templet_project/basicWidget/n_cancel_and_confirm_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_user_privacy.dart';
 import 'package:flutter_templet_project/basicWidget/n_webview.dart';
 import 'package:flutter_templet_project/basicWidget/n_popup_route.dart';
 import 'package:flutter_templet_project/basicWidget/n_alert_dialog.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
+import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/snack_bar_ext.dart';
 
 import 'package:flutter_templet_project/extension/ddlog.dart';
@@ -122,10 +125,9 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
         actions: [
           TextButton(
             onPressed: () {
-              ddlog(Icons.extension);
+              APPThemeService().changeTheme();
             },
-            child: Icon(
-              Icons.extension,
+            child: Icon(Icons.extension,
               color: Colors.white,
             )
           )
@@ -273,27 +275,51 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
         break;
       case 10:
         {
-          showGeneralDialog(
+          Container(
+            height: 300,
+            width: MediaQuery.of(context).size.width - 80,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: Theme.of(context).dialogBackgroundColor,
+              borderRadius: BorderRadius.all(Radius.circular(8)),
+            ),
+            child: Column(
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: SingleChildScrollView(
+                      child: ChioceWrap(
+                        indexs: [0],
+                        callback: (indexs) {
+                          ddlog(indexs);
+                        },
+                        children: titles.map((e) => Text(e)).toList(),
+                      ),
+                    ),
+                  ),
+                ),
+                NCancelAndConfirmBar(
+                  cancelBgColor: Theme.of(context).dialogBackgroundColor,
+                  confirmBgColor: Theme.of(context).colorScheme.primary,
+                  bottomLeftRadius: const Radius.circular(16),
+                  bottomRightRadius: const Radius.circular(16),
+                  onCancel: (){
+                    debugPrint("onCancel");
+                  },
+                  onConfirm: (){
+                    debugPrint("onConfirm");
+                  }
+                )
+              ],
+            )
+          ).toShowGeneralDialog(
             context: context,
             barrierDismissible: true,
-            barrierLabel: 'barrierLabel',
-            transitionDuration: Duration(milliseconds: 200),
-            pageBuilder: (context, animation, secondaryAnimation) {
-              return Center(
-                child: Container(
-                  height: 300,
-                  width: 250,
-                  color: Colors.white,
-                  child: ChioceWrap(
-                    indexs: [0],
-                    callback: (indexs) {
-                      ddlog(indexs);
-                    },
-                    children: titles.map((e) => Text(e)).toList(),
-                  )
-                )
-              );
-            });
+            onBarrier: (){
+              Navigator.of(context).pop();
+            }
+          );
         }
         break;
       case 11:
@@ -333,8 +359,6 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
               child: TextButton(
                 onPressed: () {
                   ddlog("Button");
-                  ddlog(widget);
-                  ddlog(this);
                 },
                 child: Text("Button"),
               ),
@@ -387,12 +411,11 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
                 Navigator.of(context).pop();
               },
               child: Container(
-                // color: Colors.white,
                 // width: size.width,
                 // height: size.height,
                 margin: EdgeInsets.symmetric(horizontal: 30),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Theme.of(context).dialogBackgroundColor,
                   borderRadius: BorderRadius.circular(10), // 圆角度
                 ),
                 child: buildAlertColumn(),
@@ -403,37 +426,36 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
         break;
       case 15:
         {
-          // final list = [null, "aaa"];
-          // ddlog(list);
-
           Navigator.push(context,
             NPopupRoute(
               alignment: alignment,
               onClick: () {
-                ddlog("exit");
-                //点击空白处
                 Navigator.of(context).pop();
               },
               // child: buildAlertColumn(context, marginHor: 15),
               child: NAlertDialog(
-                title: Text(
-                  title1,
-                  style: TextStyle(fontWeight: FontWeight.w500),
+                header: Container(
+                  padding: EdgeInsets.only(left: 16, right: 16, top: 12),
+                  child: Text(
+                    title1,
+                    style: TextStyle(fontWeight: FontWeight.w600),
+                  ),
                 ),
-                content: Text(
-                  message1,
-                  style: TextStyle(fontWeight: FontWeight.w300),
+                content: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                  child: Text(
+                    message1,
+                    style: TextStyle(fontWeight: FontWeight.w300),
+                  ),
                 ),
-                actionCancell: TextButton(
+                cancelButton: TextButton(
                   onPressed: () {
-                    ddlog("取消");
                     Navigator.of(context).pop();
                   },
                   child: Text("取消"),
                 ),
-                actionConfirm: TextButton(
+                confirmButton: TextButton(
                   onPressed: () {
-                    ddlog("确定");
                     Navigator.of(context).pop();
                   },
                   child: Text("确定"),
@@ -449,16 +471,11 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
         break;
       case 16:
         {
-          var spacingVer = 8;
-          var spacingHor = 15;
-
           Navigator.push(
             context,
             NPopupRoute(
               alignment: alignment,
               onClick: () {
-                ddlog("exit");
-                //点击空白处
                 Navigator.of(context).pop();
               },
               // child: buildAlertColumn(context, marginHor: 15),
@@ -767,7 +784,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
       child: Container(
         width: screenSize.width - 30,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Theme.of(context).dialogBackgroundColor,
           borderRadius: BorderRadius.circular((10.0)), // 圆角度
         ),
         child: Column(
@@ -872,10 +889,14 @@ xxxx十分重视用户权利及隐私政策并严格按照相关法律法规的�
           //     }
           // ).textSpans,
           children: RichTextExt.createTextSpans(context,
-              text: text, linkMap: linkMap, onTap: (key, value) {
+              text: text,
+              linkMap: linkMap,
+              onTap: (key, value) {
                 ddlog(key);
                 ddlog(value);
-              })),
+              }
+            )
+      ),
     );
 
     showGeneralDialog(
