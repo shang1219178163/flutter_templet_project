@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/n_cancel_and_confirm_bar.dart';
+import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/uti/app_util.dart';
 import 'package:flutter_templet_project/uti/color_util.dart';
 
@@ -105,7 +106,7 @@ mixin DialogMixin{
     final child = Container(
       margin: margin,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: context.dialogBackgroundColor,
         borderRadius: BorderRadius.all(radius),
       ),
       // constraints: BoxConstraints(
@@ -167,7 +168,7 @@ mixin DialogMixin{
     Widget? footer,
     bool hasCancelButton = true,
     Color? cancellBgColor = bgColor,
-    Color? confirmBgColor = Colors.blueAccent,
+    Color? confirmBgColor = Colors.blue,
     TextStyle? cancellTextStyle,
     TextStyle? confirmTextStyle,
     VerticalDivider? buttonBarDivider,
@@ -234,5 +235,44 @@ mixin DialogMixin{
       ),
     );
   }
+
+
+  presentCupertinoAlert(BuildContext context,{
+    Widget? title,
+    Widget? content,
+    VoidCallback? onCancel,
+    VoidCallback? onConfirm,
+  }) {
+    final dialog = CupertinoAlertDialog(
+      title: title,
+      content: content,
+      actions: [
+        TextButton(
+          onPressed: onCancel ?? () async {
+            Navigator.of(context, rootNavigator: true).pop();
+          },
+          child: Text("取消"),
+        ),
+        TextButton(
+          onPressed: onConfirm ?? () async {
+            Navigator.of(context, rootNavigator: true).pop();
+          },
+          child: Text("确定"),
+        ),
+      ],
+    );
+
+    return showGeneralDialog(
+      context: context,
+      barrierDismissible: false,
+      barrierLabel: 'barrierLabel',
+      transitionDuration: Duration(milliseconds: 200),
+      pageBuilder: (context, animation, secondaryAnimation) {
+
+        return dialog;
+      }
+    );
+  }
+
 
 }

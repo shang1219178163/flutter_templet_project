@@ -57,6 +57,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
     "Dialog",
     "DialogMixin - presentDialog",
     "DialogMixin - presentDialogAlert",
+    "DialogMixin - presentCupertinoAlert",
   ];
 
   final title = "新版本 v${2.1}";
@@ -131,25 +132,11 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
         ],
         bottom: _buildAppbarBottom(),
       ),
-      body: Flow(
-        delegate: TestFlowDelegate(
-          margin: EdgeInsets.all(10.0),
-          spacing: 5,
-          flowHeight: double.infinity
-        ),
-        children: titles.map((e) => OutlinedButton(
-          onPressed: () {
-            // ddlog(e);
-            _onPressed(titles.indexOf(e));
-          },
-          child: Text('${e}_${titles.indexOf(e)}')))
-        .toList(),
-      )
+      body: buildBody(),
     );
   }
 
   _buildAppbarBottom() {
-
     return PreferredSize(
       preferredSize: Size.fromHeight(45),
       child: Container(
@@ -201,14 +188,10 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
   }
 
   void _onPressed(int e) {
-    final screenSize = MediaQuery.of(context).size;
-
-    ddlog(screenSize);
     switch (e) {
       case 1:
         showAlertDialog();
         break;
-
       case 2:
         {
           CupertinoAlertDialog(
@@ -226,7 +209,6 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
           // .toShowDialog(context);
         }
         break;
-
       case 3:
         {
           CupertinoAlertDialog(
@@ -247,7 +229,6 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
           // .toShowDialog(context);
         }
         break;
-
       case 4:
         {
           CupertinoAlertDialog(
@@ -258,31 +239,26 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
           // .toShowDialog(context);
         }
         break;
-
       case 5:
         {
           showChioceListAlertDialog(isMutiple: false);
         }
         break;
-
       case 6:
         {
           showChioceListAlertDialog(isMutiple: true);
         }
         break;
-
       case 7:
         {
           showChioceWrapAlertDialog(isMutiple: false);
         }
         break;
-
       case 8:
         {
           showChioceWrapAlertDialog(isMutiple: true);
         }
         break;
-
       case 9:
         {
           CupertinoAlertDialog(
@@ -295,7 +271,6 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
           // .toShowDialog(context);
         }
         break;
-
       case 10:
         {
           showGeneralDialog(
@@ -373,7 +348,6 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
           );
         }
         break;
-
       case 13:
         {
           var size = Size(120, 120);
@@ -556,7 +530,9 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
               height: 400,
               color: Colors.green,
             ),
-            hasCancelButton: false,
+            // hasCancelButton: false,
+            cancellBgColor: context.dialogBackgroundColor,
+            confirmBgColor: context.primaryColor,
             onCancel: () {
               Navigator.of(context).pop();
             },
@@ -566,10 +542,54 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
           );
         }
         break;
+      case 21:
+        {
+          presentCupertinoAlert(context,
+            content: Text("presentCupertinoAlert"),
+            onConfirm: () async {
+              // Navigator.of(context).pop();
+            }
+          );
+        }
+        break;
       default:
         showCupertinoAlertDialog();
         break;
     }
+  }
+
+
+  buildBody() {
+    // return Flow(
+    //   delegate: TestFlowDelegate(
+    //     margin: EdgeInsets.all(10.0),
+    //     spacing: 5,
+    //     flowHeight: double.infinity
+    //   ),
+    //   children: titles.map((e) => OutlinedButton(
+    //       onPressed: () {
+    //         // ddlog(e);
+    //         _onPressed(titles.indexOf(e));
+    //       },
+    //       child: Text('${e}_${titles.indexOf(e)}')))
+    //       .toList(),
+    // );
+
+    return SingleChildScrollView( 
+      child: Container(
+        padding: EdgeInsets.all(8),
+        child: Wrap(
+          spacing: 8,
+          children: titles.map((e) => OutlinedButton(
+            onPressed: () {
+              _onPressed(titles.indexOf(e));
+            },
+            child: Text('${e}_${titles.indexOf(e)}')
+          ),
+          ).toList(),
+        ),
+      ),
+    );
   }
 
   Widget _buildButton(String title, VoidCallback onPressed) {

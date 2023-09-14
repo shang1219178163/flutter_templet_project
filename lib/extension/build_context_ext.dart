@@ -75,6 +75,10 @@ extension BuildContextExt on BuildContext {
   /// 扩展属性 Theme.of(context).primaryColor
   Color get primaryColor => theme.primaryColor;
 
+  Color get scaffoldBackgroundColor => theme.scaffoldBackgroundColor;
+
+  Color get dialogBackgroundColor => theme.dialogBackgroundColor;
+
   /// 扩展属性 MediaQuery.of(context)
   MediaQueryData get mediaQuery => MediaQuery.of(this);
 
