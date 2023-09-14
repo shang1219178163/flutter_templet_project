@@ -16,8 +16,9 @@ mixin KeyboardChangeMixin<T extends StatefulWidget> on State<T>, WidgetsBindingO
 
   bool _isVisible = false;
 
-  double get bottom {
-    return MediaQuery.of(context).viewInsets.bottom;
+  double get _bottom {
+    final result = MediaQuery.of(context).viewInsets.bottom;
+    return result;
     // return WidgetsBinding.instance?.window.viewInsets.bottom ?? 0;
     // return EdgeInsets.fromWindowPadding(
     //   WidgetsBinding.instance?.window.viewInsets ?? ui.WindowPadding.zero,
@@ -44,7 +45,7 @@ mixin KeyboardChangeMixin<T extends StatefulWidget> on State<T>, WidgetsBindingO
     super.didChangeMetrics();
     if (!mounted) return;
 
-    final temp = bottom > 0;
+    final temp = _bottom > 0;
     if (_isVisible == temp) return;
     _isVisible = temp;
     onKeyboardChanged(_isVisible);
