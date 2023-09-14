@@ -37,6 +37,7 @@ mixin DialogMixin{
     EdgeInsets contentOffset = EdgeInsets.zero,
     Color? barrierColor,
   }) {
+    Color? bColor = Theme.of(context).scaffoldBackgroundColor;
 
     final defaultHeader = Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -47,7 +48,7 @@ mixin DialogMixin{
             style: TextStyle(
               fontSize: 18.sp,
               fontWeight: FontWeight.bold,
-              color: fontColor,
+              // color: fontColor,
             ),
           ),
         ),
@@ -59,7 +60,7 @@ mixin DialogMixin{
             },
             icon: Icon(Icons.clear,
               size: 20.w,
-              color: Color(0xff231815),
+              // color: Color(0xff231815),
             ),
           ),
         ),
@@ -106,7 +107,7 @@ mixin DialogMixin{
     final child = Container(
       margin: margin,
       decoration: BoxDecoration(
-        color: context.dialogBackgroundColor,
+        color: bColor,
         borderRadius: BorderRadius.all(radius),
       ),
       // constraints: BoxConstraints(
@@ -133,12 +134,12 @@ mixin DialogMixin{
           AppUtil.removeInputFocus();
         },
         child: Container(
-            padding: contentOffset,
-            color: barrierColor ?? Colors.black.withOpacity(0.05),
-            child: Align(
-              alignment: alignment,
-              child: child,
-            )
+          padding: contentOffset,
+          color: barrierColor ?? Colors.black.withOpacity(0.05),
+          child: Align(
+            alignment: alignment,
+            child: child,
+          )
         ),
       ),
     );
@@ -167,8 +168,8 @@ mixin DialogMixin{
     Widget? header,
     Widget? footer,
     bool hasCancelButton = true,
-    Color? cancellBgColor = bgColor,
-    Color? confirmBgColor = Colors.blue,
+    Color? cancellBgColor,
+    Color? confirmBgColor,
     TextStyle? cancellTextStyle,
     TextStyle? confirmTextStyle,
     VerticalDivider? buttonBarDivider,
@@ -176,13 +177,16 @@ mixin DialogMixin{
   }) {
     assert(message != null || content != null, "message 和 content 不能同时为空!");
 
+    cancellBgColor ??= Theme.of(context).hoverColor;
+    confirmBgColor ??= Theme.of(context).primaryColor;
+    Color? bColor = Theme.of(context).scaffoldBackgroundColor;
+
     final titleWidget = title == null ? const SizedBox() : Padding(
       padding: EdgeInsets.only(top: 24.h, bottom: 8.h),
       child: Text(
         title ?? "",
         textAlign: TextAlign.center,
         style: TextStyle(
-          color: fontColor,
           fontSize: 20.sp,
           fontWeight: FontWeight.bold,
         ),
@@ -200,11 +204,11 @@ mixin DialogMixin{
 
         return Container(
           // color: ColorExt.random,
+          color: bColor,
           alignment: Alignment.center,
           child: Text(message ?? "",
             textAlign: TextAlign.start,
             style: TextStyle(
-              color: Color(0xff333333),
               fontSize: 16.sp,
               fontWeight: FontWeight.w500,
             ),

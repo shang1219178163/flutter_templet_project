@@ -531,7 +531,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
               color: Colors.green,
             ),
             // hasCancelButton: false,
-            cancellBgColor: context.dialogBackgroundColor,
+            // cancellBgColor: context.dialogBackgroundColor,
             confirmBgColor: context.primaryColor,
             onCancel: () {
               Navigator.of(context).pop();
