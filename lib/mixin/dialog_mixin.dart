@@ -173,25 +173,27 @@ mixin DialogMixin{
     VerticalDivider? buttonBarDivider,
     EdgeInsets contentOffset = EdgeInsets.zero,
   }) {
-    assert(title != null || header != null, "title 和 header 不能同时为空!");
-    assert(message != null || content != null, "title 和 header 不能同时为空!");
+    assert(message != null || content != null, "message 和 content 不能同时为空!");
+
+    final titleWidget = title == null ? const SizedBox() : Padding(
+      padding: EdgeInsets.only(top: 24.h, bottom: 8.h),
+      child: Text(
+        title ?? "",
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          color: fontColor,
+          fontSize: 20.sp,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    );
 
     presentDialog(
       scrollController: scrollController,
       context: context,
       radius: Radius.circular(12.w),
       contentOffset: contentOffset,
-      header: header ?? Padding(
-        padding: EdgeInsets.only(top: 24.w),
-        child: Text(title ?? "",
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            color: fontColor,
-            fontSize: 20.sp,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
+      header: header ?? titleWidget,
       contentMinHeight: 50.h,
       contentChildBuilder: (context, setState){
 
