@@ -518,6 +518,7 @@ var specials = [
   Tuple2(APPRouter.refreshListView, "refreshListView", ),
   Tuple2(APPRouter.globalIsolateDemo, "globalIsolateDemo", ),
   Tuple2(APPRouter.longCaptureWidgetDemo, "widget长截图", ),
+  Tuple2(APPRouter.imageStretchDemo, "图片拉伸", ),
 
 
 

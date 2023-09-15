@@ -12,9 +12,20 @@ import 'dart:typed_data';
 import 'dart:ui' as ui;
 
 // import 'package:flutter/painting.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 extension UIImageExt on ui.Image {
+  /// 获取本地图片图像
+  static Future<ui.Image> getImageFromAssets(String path) async {
+    final immutableBuffer = await rootBundle.loadBuffer(path);
+    final codec = await ui.instantiateImageCodecFromBuffer(
+      immutableBuffer,
+    );
+    final frameInfo = await codec.getNextFrame();
+    return frameInfo.image;
+  }
+
   /// ui.Image 类型转 Uint8List
   FutureOr<Uint8List?> toUint8List({
     ui.ImageByteFormat format = ui.ImageByteFormat.png,

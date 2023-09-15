@@ -11,12 +11,14 @@ class Assets {
   static const String imagesAvatar = 'assets/images/avatar.png';
   static const String imagesBg = 'assets/images/bg.png';
   static const String imagesBgAlp = 'assets/images/bg_alp.png';
+  static const String imagesBgChatBubble = 'assets/images/bg_chat_bubble.png';
   static const String imagesBgGlassmophism = 'assets/images/bg_glassmophism.png';
   static const String imagesBgHorizontalScroll = 'assets/images/bg_horizontal_scroll.png';
   static const String imagesBgJiguang = 'assets/images/bg_jiguang.png';
   static const String imagesBgMine = 'assets/images/bg_mine.png';
   static const String imagesBgMountain = 'assets/images/bg_mountain.png';
   static const String imagesBgOcean = 'assets/images/bg_ocean.png';
+  static const String imagesBgService = 'assets/images/bg_service.png';
   static const String imagesFloating = 'assets/images/floating.png';
   static const String imagesFlutterLogo = 'assets/images/flutter_logo.png';
   static const String imagesIconAccount = 'assets/images/icon_account.png';
@@ -28,6 +30,7 @@ class Assets {
   static const String imagesIconCamera = 'assets/images/icon_camera.png';
   static const String imagesIconClear = 'assets/images/icon_clear.png';
   static const String imagesIconClose60 = 'assets/images/icon_close_60.png';
+  static const String imagesIconDart3 = 'assets/images/icon_dart3.png';
   static const String imagesIconDelete = 'assets/images/icon_delete.png';
   static const String imagesIconDowload = 'assets/images/icon_dowload.png';
   static const String imagesIconEyeClose = 'assets/images/icon_eye_close.png';
@@ -46,7 +49,6 @@ class Assets {
   static const String imagesIconSkipping = 'assets/images/icon_skipping.gif';
   static const String imagesIconVoiceCircle = 'assets/images/icon_voice_circle.png';
   static const String imagesImg404 = 'assets/images/img_404.png';
-  static const String imagesImgChatEmoji = 'assets/images/img_chat_emoji.png';
   static const String imagesImgFlutter310 = 'assets/images/img_flutter_3_10.png';
   static const String imagesImgPlaceholder = 'assets/images/img_placeholder.png';
   static const String imagesImgPlaceholderEmpty = 'assets/images/img_placeholder_empty.png';

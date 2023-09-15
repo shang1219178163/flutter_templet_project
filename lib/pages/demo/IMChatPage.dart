@@ -192,7 +192,7 @@ class _IMChatPageState extends State<IMChatPage> with
                 child: ListView.builder(
                   controller: _scrollController,
                   reverse: true,
-                  // shrinkWrap: true,
+                  shrinkWrap: true,
                   // physics: ClampingScrollPhysics(),
                   // cacheExtent: 600,
                   itemCount: list.length,
@@ -208,7 +208,7 @@ class _IMChatPageState extends State<IMChatPage> with
                       ),
                     );
                   },
-                ),
+                ).toColoredBox(),
               ),
             ),
           )
