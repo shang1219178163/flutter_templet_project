@@ -28,7 +28,7 @@ class _CityListCustomHeaderPageState extends State<CityListCustomHeaderPage> {
     //加载城市列表
     rootBundle.loadString('assets/data/china.json').then((value) {
       cityList.clear();
-      Map countyMap = json.decode(value);
+      Map countyMap = jsonDecode(value);
       List list = countyMap['china'];
       list.forEach((v) {
         cityList.add(CityModel.fromJson(v));

@@ -27,7 +27,7 @@ class _ContactListPageState extends State<ContactListPage> {
   loadData() async {
     //加载联系人列表
     rootBundle.loadString('assets/data/contacts.json').then((value) {
-      List list = json.decode(value);
+      List list = jsonDecode(value);
       list.forEach((v) {
         _contacts.add(ContactInfo.fromJson(v));
       });

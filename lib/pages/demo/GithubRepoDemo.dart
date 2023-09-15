@@ -118,7 +118,7 @@ class _GithubRepoDemoState extends State<GithubRepoDemo> {
                 return Text(snapshot.error.toString());
               }
               ///字符串转json
-              List<dynamic> list = json.decode(response.data);
+              List<dynamic> list = jsonDecode(response.data);
               ///json转模型
               var models = list.map<Repository>((e) => Repository.fromJson(e)).toList();
               ///界面显示
@@ -153,7 +153,7 @@ class _GithubRepoDemoState extends State<GithubRepoDemo> {
                 return Text(snapshot.error.toString());
               }
               ///字符串转json
-              // List<dynamic> list = json.decode(response.data);
+              // List<dynamic> list = jsonDecode(response.data);
               ///json转模型
               List<Repository> models = response.data.map<Repository>((e) => Repository.fromJson(e)).toList();
               ///界面显示

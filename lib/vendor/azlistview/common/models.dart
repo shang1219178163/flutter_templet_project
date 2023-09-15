@@ -28,7 +28,7 @@ class CityModel extends ISuspensionBean {
   String getSuspensionTag() => tagIndex!;
 
   @override
-  String toString() => json.encode(this);
+  String toString() => jsonEncode(this);
 }
 
 class ContactInfo extends ISuspensionBean {
@@ -74,7 +74,7 @@ class ContactInfo extends ISuspensionBean {
   String getSuspensionTag() => tagIndex!;
 
   @override
-  String toString() => json.encode(this);
+  String toString() => jsonEncode(this);
 }
 
 class Languages extends GithubLanguage with ISuspensionBean {
@@ -104,6 +104,6 @@ class Languages extends GithubLanguage with ISuspensionBean {
 
   @override
   String toString() {
-    return json.encode(this);
+    return jsonEncode(this);
   }
 }

@@ -143,9 +143,9 @@ extension StringExt on String{
   static parseResponse(dynamic data) {
     var result = "";
     if (data is Map) {
-      result += json.encode(data);
+      result += jsonEncode(data);
     } else if (data is List) {
-      result += json.encode(data);
+      result += jsonEncode(data);
     } else if (data is bool || data is num) {
       result += data.toString();
     } else if (data is String) {
