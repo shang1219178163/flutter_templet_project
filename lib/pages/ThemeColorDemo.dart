@@ -164,9 +164,6 @@ class _ThemeColorDemoState extends State<ThemeColorDemo> {
               child: Text("${e.item1}\n(${name})",
                 style: TextStyle(color: Colors.green, fontSize: 14),
               ),
-              // child: Text("${e.item1}\n(${e.item2.toString().replaceAll("MaterialAccentColor(primary Value:", "")})",
-              //   style: TextStyle(color: Colors.green, fontSize: 14),
-              // ),
             );
           }).toList(),
         );
