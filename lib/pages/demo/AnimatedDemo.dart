@@ -141,7 +141,7 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
             children: [
               AnimatedCrossFade(
                 crossFadeState: _crossFadeState,
-                duration: Duration(seconds: 2),
+                duration: Duration(milliseconds: 2),
                 firstChild: Icon(Icons.text_rotate_up, size: 150, color: Colors.green,),
                 secondChild: Icon(Icons.text_rotate_vertical, size: 150),
               ),

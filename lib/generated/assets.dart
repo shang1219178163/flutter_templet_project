@@ -11,7 +11,8 @@ class Assets {
   static const String imagesAvatar = 'assets/images/avatar.png';
   static const String imagesBg = 'assets/images/bg.png';
   static const String imagesBgAlp = 'assets/images/bg_alp.png';
-  static const String imagesBgChatBubble = 'assets/images/bg_chat_bubble.png';
+  static const String imagesBgChatBubbleFrom = 'assets/images/bg_chat_bubble_from.png';
+  static const String imagesBgChatBubbleTo = 'assets/images/bg_chat_bubble_to.png';
   static const String imagesBgGlassmophism = 'assets/images/bg_glassmophism.png';
   static const String imagesBgHorizontalScroll = 'assets/images/bg_horizontal_scroll.png';
   static const String imagesBgJiguang = 'assets/images/bg_jiguang.png';
