@@ -67,11 +67,11 @@ class _ImageStretchDemoState extends State<ImageStretchDemo> {
               ),
             ),
           ),
-          constraints: BoxConstraints(minHeight: 20),
-          child: ConstrainedBox(
-            constraints: BoxConstraints(maxWidth: 250),
-            child: Text(message.substring(0, 50)).toColoredBox()
+          constraints: BoxConstraints(
+            minHeight: 20,
+            maxWidth: 250,
           ),
+          child: Text(message.substring(0, 50)).toColoredBox(),
         ),
 
         Container(
@@ -112,13 +112,11 @@ class _ImageStretchDemoState extends State<ImageStretchDemo> {
           ),
         )
       ),
-      constraints: BoxConstraints(minHeight: 50),
-      child: ConstrainedBox(
-        constraints: BoxConstraints(
-          maxWidth: 250,
-        ),
-        child: child,
+      constraints: BoxConstraints(
+        minHeight: 50,
+        maxWidth: 250,
       ),
+      child: child,
     );
   }
 
