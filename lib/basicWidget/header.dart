@@ -149,6 +149,9 @@ class SectionHeader extends StatelessWidget{
     this.padding = const EdgeInsets.all(8),
     this.alignment = Alignment.centerLeft,
     this.divider,
+    this.mainAxisAlignment = MainAxisAlignment.start,
+    this.mainAxisSize = MainAxisSize.max,
+    this.crossAxisAlignment = CrossAxisAlignment.start,
     required this.child,
   }) : super(key: key);
 
@@ -159,6 +162,11 @@ class SectionHeader extends StatelessWidget{
   final Alignment alignment;
 
   final Widget? divider;
+
+  final MainAxisAlignment? mainAxisAlignment;
+  final MainAxisSize? mainAxisSize;
+  final CrossAxisAlignment? crossAxisAlignment;
+
   final Widget child;
 
   @override

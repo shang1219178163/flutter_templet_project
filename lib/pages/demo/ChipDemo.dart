@@ -7,7 +7,9 @@
 //
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/header.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
 class ChipDemo extends StatefulWidget {
@@ -22,172 +24,214 @@ class ChipDemo extends StatefulWidget {
 class _ChipDemoState extends State<ChipDemo> {
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title ?? "$widget"),
-        ),
-        body: buildWrap(),
+      appBar: AppBar(
+        title: Text(widget.title ?? "$widget"),
+      ),
+      body: buildWrap(),
     );
   }
 
   int? _value = 1;
 
-  Wrap buildWrap() {
+  Widget buildWrap({double spacing = 8.0, double runSpacing = 8.0}) {
     var titles = List<int>.generate(4, (index) => index);
-    return Wrap(
-      spacing: 8.0, // 主轴(水平)方向间距
-      runSpacing: -8.0, // 纵轴（垂直）方向间距
-      alignment: WrapAlignment.start, //沿主轴方向居中
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Chip(
-          label: Text("Chip",),
-        ),
-        Chip(
-          label: Text("Chip",),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(2.0),
-            )
-        ),
-        Divider(),
-        Chip(
-          label: Text("带 deleteIcon的 Chip",),
-          deleteIcon: Icon( Icons.close, ),
-          onDeleted: () {setState(() {ddlog("onDeleted: 带 deleteIcon的 Chip");}); },
-          deleteButtonTooltipMessage: "弹出提示",
-        ),
-        Divider(),
-        Chip(
-          label: Text("带 avatar 和 deleteIcon的 Chip",),
-          avatar: Image.asset("images/avatar.png", fit: BoxFit.fill),
-          deleteIcon: Icon( Icons.close, ),
-          onDeleted: () {setState(() {ddlog("onDeleted:带 avatar 和 deleteIcon的 Chip");}); },
-        ),
-        Divider(),
-
-        Chip(
-          avatar: InkWell(
-            onTap: () { ddlog("onTap:Chip"); },
-            child: Icon(Icons.add_circle,),
+        SectionHeader(
+          title: "Chip",
+          crossAxisAlignment: CrossAxisAlignment.start,
+          child: Wrap(
+            spacing: spacing,
+            runSpacing: runSpacing,
+            alignment: WrapAlignment.start, //沿主轴方向居中
+            children: [
+              Chip(
+                label: Text("Chip",),
+              ),
+              Chip(
+                label: Text("Chip",),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                )
+              ),
+              Chip(
+                label: Text("带 deleteIcon的 Chip",),
+                deleteIcon: Icon( Icons.cancel, color: Colors.black45,),
+                onDeleted: () {
+                  ddlog("onDeleted: 带 deleteIcon的 Chip");
+                  setState(() {});
+                },
+                deleteButtonTooltipMessage: "弹出提示",
+              ),
+              Chip(
+                label: Text("带 avatar 和 deleteIcon的 Chip",),
+                avatar: Image.asset("avatar.png".toPath(), fit: BoxFit.fill),
+                deleteIcon: Icon(Icons.cancel,),
+                onDeleted: () {
+                  ddlog("onDeleted:带 avatar 和 deleteIcon的 Chip");
+                  setState(() {});
+                },
+              ),
+              Chip(
+                avatar: InkWell(
+                  onTap: () { ddlog("onTap:Chip"); },
+                  child: Icon(Icons.add_circle,),
+                ),
+                // avatar: IconButton(
+                //   onPressed: () { setState(() { ddlog("add"); } ); },
+                //   padding: EdgeInsets.all(0),
+                //   icon: Icon(Icons.add_circle)) ,
+                label: Text("Chip"),
+                // deleteIcon: Icon(Icons.remove_circle),
+                deleteIcon: Icon(Icons.remove_circle),
+                onDeleted: () {
+                  ddlog("onDeleted:Chip");
+                  setState(() {  } );
+                },
+              ),
+            ],
           ),
-          // avatar: IconButton(
-          //   onPressed: () { setState(() { ddlog("add"); } ); },
-          //   padding: EdgeInsets.all(0),
-          //   icon: Icon(Icons.add_circle)) ,
-          label: Text("Chip"),
-          // deleteIcon: Icon(Icons.remove_circle),
-          deleteIcon: Icon(Icons.remove_circle),
-          onDeleted: () { setState(() { ddlog("onDeleted:Chip"); } ); },
         ),
-        Divider(),
-        RawChip(
-          label: Text("RawChip",),
-          avatar: Image.asset("images/avatar.png", fit: BoxFit.fill),
-          padding: EdgeInsets.all(0),
-          onPressed: (){
-            ddlog("onPressed: RawChip");
-          },
-          deleteIcon: Icon( Icons.close, ),
-          onDeleted: (){
-            ddlog("onDeleted: RawChip");
-          },
-        ),
-        Divider(),
-        RawChip(
-          label: Text("RawChip",),
-          avatar: Icon( Icons.close, ),
-          padding: EdgeInsets.all(0),
-          onPressed: (){
-            ddlog("onPressed: RawChip");
-          },
-        ),
-        Divider(),
 
-
-        Wrap(
-          spacing: 8.0, // 主轴(水平)方向间距
-          runSpacing: -8.0, // 纵轴（垂直）方向间距
-          alignment: WrapAlignment.start, //沿主轴方向居中
-          children: titles.map((e) => ActionChip(
-            avatar: CircleAvatar(
-                backgroundColor: Theme.of(context).primaryColor,
-                child: Text(e.toString().characters.first.toUpperCase())
-            ),
-            label: Text("Action_$e"),
-            onPressed: (){
-              _onPressed(titles.indexOf(e));
-            },
-          )).toList(),
-        ),
-        Divider(),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: titles.map((e) => ChoiceChip(
-            label: Text('Choice_$e'),
-            padding: EdgeInsets.only(left: 15, right: 15),
-            selected: _value == e,
-            onSelected: (bool selected) {
-              ddlog(e);
-              setState(() {
-                _value = selected ? e : null;
-              });
-            },
-          ),).toList(),
-        ),
-        Divider(),
-        Column(
-          children: titles.map((e) => ChoiceChip(
-            label: Text('Choice_$e'),
-            padding: EdgeInsets.only(left: 15, right: 15),
-            selected: _value == e,
-            onSelected: (bool selected) {
-              ddlog(e);
-              setState(() {
-                _value = selected ? e : null;
-              });
-            },
-          ),).toList(),
-        ),
-        Divider(),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            ChoiceChip(
-              label: Text('Choice 1'),
-              selected: true,
-            ),
-            ChoiceChip(
-              label: Text('Choice 2'),
-              selected: false,
-            ),
-            ChoiceChip(
-              label: Text('Choice 3'),
-              selected: false,
-            ),
-            ChoiceChip(
-              label: Text('Choice 4'),
-              selected: false,
-            ),
-          ],
-        ),
-        Divider(),
-        InputChip(
-          avatar: CircleAvatar(
-            backgroundColor: Colors.grey.shade800,
-            child: const Text('IC'),
+        SectionHeader(
+          title: "RawChip",
+          crossAxisAlignment: CrossAxisAlignment.start,
+          child: Wrap(
+            spacing: spacing,
+            runSpacing: runSpacing,
+            alignment: WrapAlignment.start, //沿主轴方向居中
+            children: [
+              RawChip(
+                label: Text("RawChip",),
+                avatar: Image.asset("avatar.png".toPath(), fit: BoxFit.fill),
+                padding: EdgeInsets.all(0),
+                onPressed: (){
+                  ddlog("onPressed: RawChip");
+                },
+                deleteIcon: Icon( Icons.close, ),
+                onDeleted: (){
+                  ddlog("onDeleted: RawChip");
+                },
+              ),
+              RawChip(
+                label: Text("RawChip",),
+                avatar: Icon( Icons.close, ),
+                padding: EdgeInsets.all(0),
+                onPressed: (){
+                  ddlog("onPressed: RawChip");
+                },
+              ),
+            ],
           ),
-          label: const Text('InputChip'),
-          onPressed: () {
-            debugPrint('onPressed: InputChip');
-          }
         ),
+
+        SectionHeader(
+          title: "CircleAvatar",
+          crossAxisAlignment: CrossAxisAlignment.start,
+          child: Wrap(
+            spacing: spacing,
+            runSpacing: runSpacing,
+            alignment: WrapAlignment.start, //沿主轴方向居中
+            children: [
+              Wrap(
+                spacing: spacing,
+                runSpacing: runSpacing,
+                alignment: WrapAlignment.start, //沿主轴方向居中
+                children: titles.map((e) => ActionChip(
+                  avatar: CircleAvatar(
+                      backgroundColor: Theme.of(context).primaryColor,
+                      child: Text(e.toString().characters.first.toUpperCase())
+                  ),
+                  label: Text("Action_$e"),
+                  onPressed: (){
+                    _onPressed(titles.indexOf(e));
+                  },
+                )).toList(),
+              ),
+            ],
+          ),
+        ),
+
+        SectionHeader(
+          title: "ChoiceChip",
+          crossAxisAlignment: CrossAxisAlignment.start,
+          child: Wrap(
+            spacing: spacing,
+            runSpacing: runSpacing,
+            alignment: WrapAlignment.start, //沿主轴方向居中
+            children: [
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: titles.map((e) => ChoiceChip(
+                  label: Text('Choice_$e'),
+                  padding: EdgeInsets.only(left: 8, right: 8),
+                  selected: _value == e,
+                  onSelected: (bool selected) {
+                    ddlog(e);
+                    _value = selected ? e : null;
+                    setState(() {});
+                  },
+                ),).toList(),
+              ),
+              Divider(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ChoiceChip(
+                    label: Text('Choice 1'),
+                    selected: true,
+                  ),
+                  ChoiceChip(
+                    label: Text('Choice 2'),
+                    selected: false,
+                  ),
+                  ChoiceChip(
+                    label: Text('Choice 3'),
+                    selected: false,
+                  ),
+                  ChoiceChip(
+                    label: Text('Choice 4'),
+                    selected: false,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+
+        SectionHeader(
+          title: "InputChip",
+          crossAxisAlignment: CrossAxisAlignment.start,
+          child: Wrap(
+            spacing: spacing,
+            runSpacing: runSpacing,
+            alignment: WrapAlignment.start, //沿主轴方向居中
+            children: [
+              InputChip(
+                  avatar: CircleAvatar(
+                    backgroundColor: Colors.grey.shade800,
+                    child: const Text('IC'),
+                  ),
+                  label: const Text('InputChip'),
+                  onPressed: () {
+                    debugPrint('onPressed: InputChip');
+                  }
+              ),
+            ],
+          ),
+        ),
+
+
         FilterChip(
           label: Text('FilterChip'),
           onSelected: (val){
             debugPrint('onSelected: $val');
           }
         ),
+
       ],
     );
   }

@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/asset_image_stretch.dart';
+import 'package:flutter_templet_project/extension/text_painter_ext.dart';
 
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 
@@ -37,6 +38,12 @@ class _ImageStretchDemoState extends State<ImageStretchDemo> {
         ).toList(),
       ),
       body: buildBody(),
+      // floatingActionButton: FloatingActionButton.small(
+      //   onPressed: (){
+      //
+      //   },
+      //   child: Icon(Icons.search)
+      // ),
     );
   }
 
@@ -58,8 +65,9 @@ class _ImageStretchDemoState extends State<ImageStretchDemo> {
 
         Container(
           margin: EdgeInsets.fromLTRB(10, 10, 0, 10),
-          padding: EdgeInsets.fromLTRB(16, 10, 0, 10),
+          // padding: EdgeInsets.fromLTRB(8, 10, 10, 10),
           decoration: BoxDecoration(
+            border: Border.all(color: Colors.blue),
             image: DecorationImage(
               centerSlice: Rect.fromLTRB(20, 20, 20, 20),
               image: AssetImage(
@@ -68,10 +76,76 @@ class _ImageStretchDemoState extends State<ImageStretchDemo> {
             ),
           ),
           constraints: BoxConstraints(
-            minHeight: 20,
+            // minHeight: 18,
             maxWidth: 250,
           ),
-          child: Text(message.substring(0, 50)).toColoredBox(),
+          child: Text(
+            'Flutter 聊一会'*3,
+            maxLines: 3,
+            softWrap: true,
+            style: TextStyle(color: Colors.red),
+          ).toColoredBox(),
+        ),
+
+
+        Flexible(
+          child: Text('Very texttttttttttttt').toColoredBox(),
+        ),
+
+        LayoutBuilder(
+            builder: (BuildContext context, BoxConstraints constraints){
+
+              final text = 'Flutter 聊一会'*3;
+
+              final textStyle = TextStyle(color: Colors.red);
+              final textPainter = TextPainterExt.getTextPainter(
+                text: text,
+                textStyle: textStyle,
+                maxLine: 1,
+                maxWidth: constraints.maxWidth,
+              );
+              final numberOfLines = textPainter.computeLineMetrics().length;
+              final lineMetric = textPainter.computeLineMetrics()[0];
+              final textWidth = lineMetric.width;
+
+              debugPrint("textWidth:${textWidth}");
+
+              return Stack(
+                children: [
+
+                  Container(
+                    // margin: EdgeInsets.fromLTRB(10, 10, 0, 10),
+                  // padding: EdgeInsets.fromLTRB(8, 8, 8, 30),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.blue),
+                    ),
+                    constraints: BoxConstraints(
+                      minHeight: 14,
+                      // maxHeight: lineMetric.height*lineMetric.lineNumber,
+                      maxWidth: textWidth + 10 + 30,
+                    ).loosen(),
+                    child: Image(
+                      image: AssetImage(
+                        'assets/images/bg_service.png',
+                      ),
+                    )
+                  ),
+
+                  Positioned(
+                    top: 8,
+                    // bottom: 8,
+                    left: 10,
+                    right: 30,
+                    child: Text(text,
+                      maxLines: 1,
+                      // softWrap: true,
+                      overflow: TextOverflow.fade,
+                      style: textStyle,
+                    ).toColoredBox(),
+                  ),
+                ],
+              );
+            }
         ),
 
         Container(
