@@ -47,8 +47,12 @@ class _ChipDemoState extends State<ChipDemo> {
             runSpacing: runSpacing,
             alignment: WrapAlignment.start, //沿主轴方向居中
             children: [
-              Chip(
-                label: Text("Chip",),
+              Badge(
+                label: Text("99+"),
+                backgroundColor: Colors.red,
+                child: Chip(
+                  label: Text("Chip",),
+                ),
               ),
               Chip(
                 label: Text("Chip",),

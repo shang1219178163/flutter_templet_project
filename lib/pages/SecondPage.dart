@@ -127,7 +127,7 @@ class _SecondPageState extends State<SecondPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   MaterialButton(
-                    padding: EdgeInsets.symmetric(horizontal: 8),
+                    padding: EdgeInsets.symmetric(horizontal: 16),
                     elevation: 0,
                     color: context.primaryColor,
                     textColor: Colors.white,
@@ -138,7 +138,7 @@ class _SecondPageState extends State<SecondPage> {
                     child: Text("MaterialButton",),
                   ),
                   MaterialButton(
-                    padding: EdgeInsets.all(8),
+                    padding: EdgeInsets.symmetric(horizontal: 16),
                     minWidth: 0,
                     textColor: context.primaryColor,
                     // color: Colors.green,
@@ -165,9 +165,30 @@ class _SecondPageState extends State<SecondPage> {
               ),
             ),
             buildSection(
+              title: "FilledButton",
+              child: Row(
+                children: [
+                  FilledButton(
+                    onPressed: () => ddlog('TextButton'),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text("TextButton"),
+                        SizedBox(width: 5),
+                        Icon(Icons.send),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            buildSection(
               title: "TextButton",
               child: Row(
                 children: [
+
                   TextButton(
                     onPressed: () => ddlog('TextButton'),
                     child: Row(

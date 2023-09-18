@@ -16,7 +16,9 @@ import 'package:flutter_templet_project/pages/ReflectDemo.dart';
 import 'package:flutter_templet_project/pages/PageLifecycleObserverDemo.dart';
 import 'package:flutter_templet_project/pages/RegExpDemo.dart';
 import 'package:flutter_templet_project/pages/ThemeColorDemo.dart';
+import 'package:flutter_templet_project/pages/demo/DropdownMenuDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ImageStretchDemo.dart';
+import 'package:flutter_templet_project/pages/demo/SearchDemo.dart';
 import 'package:flutter_templet_project/pages/demo/WeatherInfoPage.dart';
 import 'package:flutter_templet_project/pages/demo/AutoLayoutDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AlertDialogTagSelectDemo.dart';
@@ -601,6 +603,8 @@ class APPRouter {
   static const weatherInfoPage = '/weatherInfoPage';
   static const flutterPickersDemo = '/flutterPickersDemo';
   static const imageStretchDemo = '/imageStretchDemo';
+  static const dropdownMenuDemo = '/dropdownMenuDemo';
+  static const searchDemo = '/searchDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -952,6 +956,8 @@ class AppPage {
 
     GetPage(name: APPRouter.flutterPickersDemo, page: () => FlutterPickersDemo(),),
     GetPage(name: APPRouter.imageStretchDemo, page: () => ImageStretchDemo(),),
+    GetPage(name: APPRouter.dropdownMenuDemo, page: () => DropdownMenuDemo(),),
+    GetPage(name: APPRouter.searchDemo, page: () => SearchDemo(),),
 
 
   ];

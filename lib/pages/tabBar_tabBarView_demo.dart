@@ -462,6 +462,8 @@ var list = [
   Tuple2(APPRouter.boxShadowDemoOne, "boxShadowDemoOne", ),
   Tuple2(APPRouter.scaffoldBottomSheet, "scaffoldBottomSheet", ),
   Tuple2(APPRouter.floatingActionButtonDemo, "floatingActionButtonDemo", ),
+  Tuple2(APPRouter.dropdownMenuDemo, "dropdownMenuDemo", ),
+  Tuple2(APPRouter.searchDemo, "searchDemo", ),
 
 
 ];

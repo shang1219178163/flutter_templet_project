@@ -80,7 +80,7 @@ class _BottomAppBarDemoState extends State<BottomAppBarDemo> {
         floatingActionButtonLocation: _fabLocation,
         bottomNavigationBar: _DemoBottomAppBar(
           fabLocation: _fabLocation,
-          shape: _showNotch ? const CircularNotchedRectangle() : null,
+          // shape: _showNotch ? const CircularNotchedRectangle() : null,
         ),
       );
   }
@@ -130,7 +130,7 @@ class _BottomAppBarDemoState extends State<BottomAppBarDemo> {
 class _DemoBottomAppBar extends StatelessWidget {
   const _DemoBottomAppBar({
     this.fabLocation = FloatingActionButtonLocation.endDocked,
-    this.shape = const CircularNotchedRectangle(),
+    this.shape,
   });
 
   final FloatingActionButtonLocation fabLocation;
@@ -161,7 +161,7 @@ class _DemoBottomAppBar extends StatelessWidget {
               icon: const Icon(Icons.photo),
               onPressed: () {},
             ),
-            if (centerLocations.contains(fabLocation)) const Spacer(),
+            // if (centerLocations.contains(fabLocation)) const Spacer(),
             IconButton(
               tooltip: 'Search',
               icon: const Icon(Icons.search),
