@@ -21,6 +21,16 @@ class _SwitchDemoState extends State<SwitchDemo> {
 
   bool value = false;
 
+
+  final thumbIcon = MaterialStateProperty.resolveWith<Icon?>(
+        (Set<MaterialState> states) {
+      if (states.contains(MaterialState.selected)) {
+        return const Icon(Icons.check);
+      }
+      return const Icon(Icons.close);
+    },
+  );
+
   @override
   Widget build(BuildContext context) {
 
@@ -58,6 +68,14 @@ class _SwitchDemoState extends State<SwitchDemo> {
             value = val;
             setState(() {});
           }
+        ),
+        Switch(
+          thumbIcon: thumbIcon,
+          value: value,
+          onChanged: (bool val) {
+            value = val;
+            setState(() {});
+          },
         ),
       ],
     );
