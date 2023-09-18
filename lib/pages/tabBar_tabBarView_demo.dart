@@ -466,6 +466,7 @@ var list = [
   Tuple2(APPRouter.floatingActionButtonDemo, "floatingActionButtonDemo", ),
   Tuple2(APPRouter.dropdownMenuDemo, "dropdownMenuDemo", ),
   Tuple2(APPRouter.searchDemo, "searchDemo", ),
+  Tuple2(APPRouter.switchDemo, "switchDemo", ),
 
 
 ];
