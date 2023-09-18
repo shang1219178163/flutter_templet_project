@@ -1,33 +1,28 @@
 
-//
-//  SegmentControlDemo.dart
-//  flutter_templet_project
-//
-//  Created by shang on 6/4/21 10:54 AM.
-//  Copyright © 6/4/21 shang. All rights reserved.
-//
-
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/header.dart';
 import 'package:flutter_templet_project/basicWidget/line_segment_view.dart';
 import 'package:flutter_templet_project/basicWidget/list_view_segment_control.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 
 
-class SegmentControlDemo extends StatefulWidget {
+class SegmentedControlDemo extends StatefulWidget {
+
+  SegmentedControlDemo({
+    Key? key,
+    this.title
+  }) : super(key: key);
 
   final String? title;
 
-  const SegmentControlDemo({ Key? key, this.title}) : super(key: key);
-
-
   @override
-  _SegmentControlDemoState createState() => _SegmentControlDemoState();
+  _SegmentedControlDemoState createState() => _SegmentedControlDemoState();
 }
 
-class _SegmentControlDemoState extends State<SegmentControlDemo> {
+class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
 
 
   int groupValue = 0;
@@ -35,15 +30,12 @@ class _SegmentControlDemoState extends State<SegmentControlDemo> {
 
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         bottom: buildPreferredSize(),
       ),
       body: buildListView(),
-
     );
   }
 
@@ -127,6 +119,7 @@ class _SegmentControlDemoState extends State<SegmentControlDemo> {
 
         SizedBox(height: 15),
         buildListViewHorizontal1(),
+
       ],
     );
   }

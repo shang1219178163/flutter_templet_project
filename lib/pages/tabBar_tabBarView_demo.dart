@@ -355,6 +355,8 @@ var list = [
   Tuple2(APPRouter.listDismissibleDemo, "recordListDemo", ),
 
   Tuple2(APPRouter.segmentControlDemo, "segmentControlDemo", ),
+  Tuple2(APPRouter.segmentedButtonDemo, "SegmentedButtonDemo", ),
+
   Tuple2(APPRouter.snackBarDemo, "SnackBar", ),
   Tuple2(APPRouter.snackBarDemoOne, "SnackBar封装", ),
   Tuple2(APPRouter.sliderDemo, "sliderDemo", ),

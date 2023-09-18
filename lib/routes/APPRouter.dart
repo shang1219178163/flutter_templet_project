@@ -19,6 +19,7 @@ import 'package:flutter_templet_project/pages/ThemeColorDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DropdownMenuDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ImageStretchDemo.dart';
 import 'package:flutter_templet_project/pages/demo/SearchDemo.dart';
+import 'package:flutter_templet_project/pages/demo/SegmentedControlDemo.dart';
 import 'package:flutter_templet_project/pages/demo/WeatherInfoPage.dart';
 import 'package:flutter_templet_project/pages/demo/AutoLayoutDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AlertDialogTagSelectDemo.dart';
@@ -256,7 +257,7 @@ import 'package:flutter_templet_project/pages/demo/DraggableDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DraggableScrollableSheetDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ProgressIndicatorDemo.dart';
 import 'package:flutter_templet_project/pages/demo/SliderDemo.dart';
-import 'package:flutter_templet_project/pages/demo/SegmentControlDemo.dart';
+import 'package:flutter_templet_project/pages/demo/SegmentedButtonDemo.dart';
 import 'package:flutter_templet_project/pages/demo/StepperDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TabBarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TableDemo.dart';
@@ -370,7 +371,10 @@ class APPRouter {
   static const forgetPasswordPage = '/ForgetPasswordPage';
   static const dataTableDemo = '/DataTableDemo';
   static const dataTableByPaginatedDemo = '/DataTableDemoNew';
-  static const segmentControlDemo = '/SegmentControlDemo';
+  static const segmentControlDemo = '/segmentControlDemo';
+  static const segmentedButtonDemo = '/SegmentedButtonDemo';
+
+
   static const sliderDemo = '/sliderDemo';
   static const draggableScrollableSheetDemo = '/DraggableScrollableSheetDemo';
   static const progressIndicatorDemo = '/ProgressIndicatorDemo';
@@ -719,7 +723,10 @@ class AppPage {
     GetPage(name: APPRouter.draggableDemo, page: () => DraggableDemo(),),
     GetPage(name: APPRouter.dataTableDemo, page: () => DataTableDemo(),),
     GetPage(name: APPRouter.dataTableByPaginatedDemo, page: () => PaginatedDataTableDemo(),),
-    GetPage(name: APPRouter.segmentControlDemo, page: () => SegmentControlDemo(),),
+    GetPage(name: APPRouter.segmentedButtonDemo, page: () => SegmentedButtonDemo(),),
+    GetPage(name: APPRouter.segmentControlDemo, page: () => SegmentedControlDemo(),),
+
+
     GetPage(name: APPRouter.sliderDemo, page: () => SliderDemo(),),
     GetPage(name: APPRouter.draggableScrollableSheetDemo, page: () => DraggableScrollableSheetDemo(),),
     GetPage(name: APPRouter.progressIndicatorDemo, page: () => ProgressIndicatorDemo(),),
