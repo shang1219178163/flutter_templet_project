@@ -37,6 +37,7 @@ dependencies:
 
   flutter_slidable: ^2.0.0
   fluttertoast: ^8.0.7
+  flutter_easyloading: ^3.0.5
   event_bus: ^2.0.0
 
 #  flutter_local_notifications: ^5.0.0+4
@@ -122,8 +123,15 @@ dependencies:
   image_picker: ^1.0.0
 
   dotted_border: ^2.0.0+3
-  #  merge_images: ^1.0.3
 
+  # 视频播放
+  chewie: ^1.7.1
+  # 视频压缩
+  video_compress: ^3.1.2
+
+  # 图片合并
+  #  merge_images: ^1.0.3
+  # 图片
   extended_image: ^8.0.2
   # 图片预览
   photo_view: ^0.14.0
@@ -138,6 +146,10 @@ dependencies:
       url: 'git@github.com:shang1219178163/flutter_wechat_assets_picker.git'
       ref: 'v8.6.2-change'
 
+
+  file_picker: ^5.5.0
+  file_preview: ^1.1.8
+  open_file: ^3.3.2
 
   flutter_sound: ^9.2.13
   audio_session: ^0.1.6

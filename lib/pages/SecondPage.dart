@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:dash_painter/dash_decoration.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -591,6 +593,12 @@ class _SecondPageState extends State<SecondPage> {
               child: Text("dash_painter"),
             ),
             SizedBox(height: 20,),
+
+            CustomPaint(
+              painter: NTrianglePainter(),
+              size: Size(130, 130),
+            ),
+            SizedBox(height: 100,),
           ],
         ),
       ],
@@ -965,4 +973,48 @@ class _SecondPageState extends State<SecondPage> {
     });
   }
   
+}
+
+
+class NTrianglePainter extends CustomPainter {
+  NTrianglePainter({
+    this.color = Colors.red,
+    this.quarterTurns = 0,
+    this.arrowRadius = 25,
+  });
+
+  int quarterTurns;
+
+  Color color;
+
+  double arrowRadius;
+
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    var paint = Paint()..color = Colors.red;
+    var path = Path();
+    // path.moveTo(size.width / 2, 0);
+    // path.lineTo(0, size.height);
+    // path.lineTo(size.width, size.height);
+
+    path.moveTo(0, 0);
+    path.lineTo(size.width, size.height/2);
+
+
+    path.arcTo(
+      Rect.fromCircle(center: Offset(size.width - arrowRadius, size.height/2), radius: arrowRadius),
+      -90.0 * (pi / 180.0), // 起始弧度
+      180.0 * (pi / 180.0), // 结束弧度
+      false,
+    );
+
+    path.lineTo(0, size.height,);
+
+    path.close();
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) => false;
 }

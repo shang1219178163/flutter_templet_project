@@ -9,8 +9,10 @@ import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/upload/asset_upload_config.dart';
 import 'package:flutter_templet_project/basicWidget/upload/asset_upload_model.dart';
 import 'package:flutter_templet_project/basicWidget/upload/image_service.dart';
+import 'package:flutter_templet_project/basicWidget/upload/video_service.dart';
 import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
+import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 
 
 /// 上传图片单元(基于 wechat_assets_picker)
@@ -277,7 +279,11 @@ class _AssetUploadButtonState extends State<AssetUploadButton> with AutomaticKee
       if (file == null) {
         throw "文件为空";
       }
-      return ImageService().compressAndGetFile(file);
+      final isImage = (widget.model.entity!.type == AssetType.image);
+
+      final fileNew = isImage ? ImageService().compressAndGetFile(file) : VideoService.compressVideo(file);
+      // return ImageService().compressAndGetFile(file);
+      return fileNew;
     }).then((file) {
       if (file == null) {
         throw "文件为空";

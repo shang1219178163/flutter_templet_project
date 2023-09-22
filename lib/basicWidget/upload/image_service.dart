@@ -56,9 +56,9 @@ class ImageService{
 
       final infos = [
         "图片名称: $fileName",
-        "压缩前: ${file.lengthSync().fileSize}",
+        "压缩前: ${file.lengthSync().fileSizeDesc}",
         "压缩质量: $compressQuality",
-        "压缩后: ${lenth.fileSize}",
+        "压缩后: ${lenth.fileSizeDesc}",
         "原路径: ${file.absolute.path}",
         "压缩路径: $targetPath",
       ];

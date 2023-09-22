@@ -54,7 +54,7 @@ extension IntExt on int{
 
 extension IntFileExt on int{
   /// length 转为 MB 描述
-  String get fileSize {
+  String get fileSizeDesc {
     final result = this/(1024 *1024);
     final desc = "${result.toStringAsFixed(2)}MB";
     return desc;
