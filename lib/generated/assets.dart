@@ -57,6 +57,12 @@ class Assets {
   static const String imagesImgPlaceholderOffonline = 'assets/images/img_placeholder_offonline.png';
   static const String imagesImgPlaceholderSearch = 'assets/images/img_placeholder_search.png';
   static const String imagesImgPlacehorder = 'assets/images/img_placehorder.png';
+  static const String imagesImgSoundOverlayBgRecording = 'assets/images/img_sound_overlay_bg_recording.png';
+  static const String imagesImgSoundOverlayBottom = 'assets/images/img_sound_overlay_bottom.png';
+  static const String imagesImgSoundOverlayBottomCancel = 'assets/images/img_sound_overlay_bottom_cancel.png';
+  static const String imagesImgSoundOverlayButton = 'assets/images/img_sound_overlay_button.png';
+  static const String imagesImgSoundOverlayButtonCancel = 'assets/images/img_sound_overlay_button_cancel.png';
+  static const String imagesImgSoundRecording = 'assets/images/img_sound_recording.gif';
   static const String imagesImgUpdate = 'assets/images/img_update.png';
   static const String imagesImgUploadPlaceholder = 'assets/images/img_upload_placeholder.png';
   static const String imagesJsCover = 'assets/images/js_cover.png';
