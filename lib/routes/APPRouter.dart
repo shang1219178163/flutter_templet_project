@@ -17,6 +17,7 @@ import 'package:flutter_templet_project/pages/PageLifecycleObserverDemo.dart';
 import 'package:flutter_templet_project/pages/RegExpDemo.dart';
 import 'package:flutter_templet_project/pages/ThemeColorDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DropdownMenuDemo.dart';
+import 'package:flutter_templet_project/pages/demo/GestureDetectorDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ImageStretchDemo.dart';
 import 'package:flutter_templet_project/pages/demo/SearchDemo.dart';
 import 'package:flutter_templet_project/pages/demo/SegmentedControlDemo.dart';
@@ -174,7 +175,6 @@ import 'package:flutter_templet_project/vendor/azlistview/azlistview_demo.dart';
 import 'package:flutter_templet_project/vendor/badges_demo.dart';
 import 'package:flutter_templet_project/vendor/color_converter_demo.dart';
 import 'package:flutter_templet_project/vendor/custom_timer_demo.dart';
-import 'package:flutter_templet_project/vendor/dotted_border_demo.dart';
 import 'package:flutter_templet_project/vendor/flutter_pickers/flutter_pickers_demo.dart';
 import 'package:flutter_templet_project/vendor/flutter_swiper_demo.dart';
 import 'package:flutter_templet_project/vendor/flutter_swiper_indicator_demo.dart';
@@ -530,7 +530,6 @@ class APPRouter {
   static const visibilityDemo = '/visibilityDemo';
   static const ignorePointerDemo = '/ignorePointerDemo';
   static const horizontalCellDemo = '/horizontalCellDemo';
-  static const dottedBorderDemo = '/dottedBorderDemo';
   static const boxShadowDemo = '/boxShadowDemo';
   static const listViewOneDemo = '/listViewOneDemo';
   static const marqueeWidgetDemo = '/marqueeWidgetDemo';
@@ -611,6 +610,7 @@ class APPRouter {
   static const dropdownMenuDemo = '/dropdownMenuDemo';
   static const searchDemo = '/searchDemo';
   static const switchDemo = '/switchDemo';
+  static const gestureDetectorDemo = '/gestureDetectorDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -883,7 +883,6 @@ class AppPage {
     GetPage(name: APPRouter.visibilityDemo, page: () => VisibilityDemo(),),
     GetPage(name: APPRouter.ignorePointerDemo, page: () => IgnorePointerDemo(),),
     GetPage(name: APPRouter.horizontalCellDemo, page: () => HorizontalCellDemo(),),
-    GetPage(name: APPRouter.dottedBorderDemo, page: () => DottedBorderDemo(),),
     GetPage(name: APPRouter.boxShadowDemo, page: () => BoxShadowDemo(),),
     GetPage(name: APPRouter.listViewOneDemo, page: () => ListViewOneDemo(),),
     GetPage(name: APPRouter.marqueeWidgetDemo, page: () => MarqueeWidgetDemo(),),
@@ -968,6 +967,7 @@ class AppPage {
     GetPage(name: APPRouter.dropdownMenuDemo, page: () => DropdownMenuDemo(),),
     GetPage(name: APPRouter.searchDemo, page: () => SearchDemo(),),
     GetPage(name: APPRouter.switchDemo, page: () => SwitchDemo(),),
+    GetPage(name: APPRouter.gestureDetectorDemo, page: () => GestureDetectorDemo(),),
 
 
   ];

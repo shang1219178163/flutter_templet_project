@@ -5,7 +5,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/cache/cache_asset_service.dart';
-import 'package:flutter_templet_project/vendor/EasyToast.dart';
+import 'package:flutter_templet_project/vendor/easy_toast.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 
 import 'package:video_compress/video_compress.dart';

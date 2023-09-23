@@ -50,6 +50,7 @@ class _ImageBlendModeDemoState extends State<ImageBlendModeDemo> {
   }) {
     var name = flag ? 'img_update.png' : 'img_flutter_3_10.png';
 
+    // name = "img_sound_overlay_bg_recording.png";
     return Container(
       // color: Colors.black,
       padding: EdgeInsets.all(8),
@@ -66,6 +67,14 @@ class _ImageBlendModeDemoState extends State<ImageBlendModeDemo> {
                   child: Container(
                     // color: Colors.red,
                     width: itemWidth,
+                    // height: itemWidth,
+                    // decoration: BoxDecoration(
+                    //   image: DecorationImage(
+                    //     image: name.toPath().toAssetImage(),
+                    //     fit: BoxFit.scaleDown,
+                    //     colorFilter: ColorFilter.mode(Colors.red, e),
+                    //   ),
+                    // ),
                     child: Column(
                       children: [
                         Image.asset(

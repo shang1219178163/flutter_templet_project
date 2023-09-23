@@ -1,14 +1,14 @@
 import 'dart:async';
 import 'dart:io';
+
 import 'package:audio_session/audio_session.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter_sound/flutter_sound.dart';
 import 'package:flutter_sound_platform_interface/flutter_sound_recorder_platform_interface.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:permission_handler/permission_handler.dart';
-// import 'package:tencent_cloud_chat_sdk/enum/log_level.dart';
+import 'package:flutter_templet_project/cache/cache_asset_service.dart';
 import 'package:logger/logger.dart' show Level, Logger;
+import 'package:permission_handler/permission_handler.dart';
 
 
 const theSource = AudioSource.microphone;
@@ -68,18 +68,20 @@ mixin SoundStateMixin<T extends StatefulWidget> on State<T> {
 
     soundLocalPath().then((value) {
       _mPath = value;
-      debugPrint("_mPath:${_mPath}");
+      debugPrint("_mPath:$_mPath");
     });
     super.initState();
   }
 
   Future<String> soundLocalPath() async {
     //用户允许使用麦克风之后开始录音
-    Directory tempDir = await getTemporaryDirectory();
-    // var time = DateTime.now().toIso8601String();
-    var time = DateTime.now().millisecondsSinceEpoch;
-    String path = '${tempDir.path}/tmp_sound_$time${ext[_codec.index]}';
-    File file = File(path);
+    // Directory tempDir = await getTemporaryDirectory();
+    var tempDir = await CacheAssetService().getDir();
+    // var time = DateTime.now();
+    // var timeStr = DateTimeExt.stringFromDate(date: time, format: DATE_FORMAT_INT);
+    // String path = '${tempDir.path}/tmp_sound_${timeStr}${ext[_codec.index]}';
+    var path = '${tempDir.path}/tmp_sound_record${ext[_codec.index]}';//音频录制替换旧的
+    var file = File(path);
     if (!file.existsSync()) {
       file.createSync();
       debugPrint('soundLocalPath 创建成功');
@@ -127,7 +129,7 @@ mixin SoundStateMixin<T extends StatefulWidget> on State<T> {
 
   // ----------------------  Here is the code for recording and playback -------
   /// 开始录音
-  record({String? toFile,}) async {
+  soundStartRecord({String? toFile,}) async {
     recordingStartTimestamp = DateTime.now().millisecondsSinceEpoch;
     return await _mRecorder!.startRecorder(
       toFile: toFile ?? _mPath,
@@ -136,20 +138,20 @@ mixin SoundStateMixin<T extends StatefulWidget> on State<T> {
     );
   }
   /// 停止录音
-  Future<String?> stopRecorder() async {
+  Future<String?> stopSoundRecorder() async {
     soundDuration = (DateTime.now().millisecondsSinceEpoch - recordingStartTimestamp)~/1000;
     debugPrint("soundDuration: $soundDuration");
-    return await _mRecorder!.stopRecorder();
+    return _mRecorder!.stopRecorder();
   }
 
   /// 播放音频
-  Future<Duration?> play({String? fromURI, VoidCallback? whenFinished}) async {
+  Future<Duration?> playSound({String? fromURI, VoidCallback? whenFinished}) async {
     // assert(_mPlayerIsInited &&
     //     _mplaybackReady &&
     //     _mRecorder!.isStopped &&
     //     _mPlayer!.isStopped);
     assert(_mPlayerIsInited && _mPlayer!.isStopped);
-    return await _mPlayer!.startPlayer(
+    return _mPlayer!.startPlayer(
       fromURI: fromURI ?? _mPath,
       codec: kIsWeb ? Codec.opusWebM : Codec.aacADTS,
       whenFinished: whenFinished ?? () async {
@@ -160,11 +162,11 @@ mixin SoundStateMixin<T extends StatefulWidget> on State<T> {
   }
 
   /// 停止播放音频
-  Future<void> stopPlayer() async {
+  Future<void> stopSoundPlayer() async {
     if (!_mPlayerIsInited) {
       return;
     }
-    return await _mPlayer!.stopPlayer();
+    return _mPlayer!.stopPlayer();
   }
 
 // ----------------------------- UI --------------------------------------------
@@ -173,30 +175,41 @@ mixin SoundStateMixin<T extends StatefulWidget> on State<T> {
     if (!_mRecorderIsInited) {
       return null;
     }
-    return _mRecorder!.isStopped ? record : stopRecorder;
+    return _mRecorder!.isStopped ? soundStartRecord : stopSoundRecorder;
   }
 
   VoidCallback? getPlaybackFn() {
     if (!_mPlayerIsInited) {
       return null;
     }
-    return _mPlayer!.isPlaying ? play : stopPlayer;
+    return _mPlayer!.isPlaying ? playSound : stopSoundPlayer;
   }
 
-  playback({String? fromURI, required VoidCallback cb}) async {
+  soundPlayback({String? fromURI, required VoidCallback cb}) async {
     if (!_mPlayerIsInited) {
       return null;
     }
     debugPrint("isPlaying:${_mPlayer!.isPlaying}_isPaused:${_mPlayer!.isPaused}_isStopped:${_mPlayer!.isStopped}");
     if (_mPlayer!.isStopped) {
-      await play(fromURI:fromURI, whenFinished: cb);
+      await playSound(fromURI:fromURI, whenFinished: cb);
       cb;
     } else {
-      await stopPlayer();
+      await stopSoundPlayer();
       cb;
     }
   }
 
+
+// @override
+// Widget build(BuildContext context) {
+//   return InkWell(
+//     onTap: () async {
+//       await playback();
+//     },
+//     // child: isRecording || !isStopped ? widget.doingChild : widget.child,
+//     child: _mPlayer!.isStopped ? widget.child : widget.doingChild,
+//   );
+// }
 }
 
 // class SoundModel<T>{

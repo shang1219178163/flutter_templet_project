@@ -467,6 +467,7 @@ var list = [
   Tuple2(APPRouter.dropdownMenuDemo, "dropdownMenuDemo", ),
   Tuple2(APPRouter.searchDemo, "searchDemo", ),
   Tuple2(APPRouter.switchDemo, "switchDemo", ),
+  Tuple2(APPRouter.gestureDetectorDemo, "gestureDetectorDemo", ),
 
 
 ];
@@ -601,7 +602,6 @@ var vendors = [
   Tuple2(APPRouter.colorConverterDemo, "颜色转换", ),
   Tuple2(APPRouter.wechatAssetsPickerDemo, "微信相册选择器", ),
   Tuple2(APPRouter.wechatPhotoPickerDemo, "微信相册选择器组件封装", ),
-  Tuple2(APPRouter.dottedBorderDemo, "dottedBorder边框线", ),
   Tuple2(APPRouter.azlistviewDemo, "分组列表", ),
   Tuple2(APPRouter.slidableDemoOne, "滑动菜单", ),
   Tuple2(APPRouter.soundPlayDemo, "声音播放", ),

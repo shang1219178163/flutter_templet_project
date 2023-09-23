@@ -43,9 +43,13 @@ const MaterialColor fontColor = MaterialColor(
   0xff181818, // 主色
   <int, Color>{
     10: Color(0xffBCBFC2),
+    15: Color(0xFFB3B3B3),
     20: Color(0xff777777), // 777
     30: Color(0xff999999), // placeHolder一类的字体色
+    40: Color(0xff333333), // 333
     50: Color(0xff5B626B), // 中间色
+    60: Color(0xff444444), // 444
+    70: Color(0xff111111), // 111
     100: Color(0xFF000000),
   },
 );

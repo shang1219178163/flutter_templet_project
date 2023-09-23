@@ -24,7 +24,7 @@ class EasyToast {
   }
 
   // toast - 错误
-  static void showInfoToast(
+  static void showInfo(
     String text, {
     int milliseconds = 1500,
     VoidCallback? cb,
@@ -35,9 +35,7 @@ class EasyToast {
       text,
       duration: duration,
     );
-    if (cb != null) {
-      Timer(duration, cb);
-    }
+    Future.delayed(duration, cb);
   }
 
   // toast - 成功
