@@ -1,5 +1,8 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/list_view_segment_control.dart';
+import 'package:flutter_templet_project/basicWidget/n_text.dart';
+import 'package:flutter_templet_project/extension/alignment_ext.dart';
 
 
 class CompositedTransformTargetDemo extends StatefulWidget {
@@ -23,6 +26,9 @@ class _CompositedTransformTargetDemoState extends State<CompositedTransformTarge
   Offset indicatorOffset = const Offset(0, 0);
 
 
+  Alignment followerAnchor = Alignment.centerLeft;
+  Alignment targetAnchor = Alignment.centerRight;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,23 +40,84 @@ class _CompositedTransformTargetDemoState extends State<CompositedTransformTarge
           ),
           onPressed: () => debugPrint(e),)
         ).toList(),
+        elevation: 0,
+        bottom: buildTab(),
       ),
-      body: GestureDetector(
-        onTap: _toggleOverlay,
-        // onPanStart: (e) => _showOverlay(),
-        // onPanEnd: (e) => _hideOverlay(),
-        // onPanUpdate: updateIndicator,
-        child: CompositedTransformTarget(
-          link: layerLink,
-          child: Image.asset(
-            "assets/images/avatar.png",
-            width: 80, height: 80,
+      body: SafeArea(
+        child: Center(
+          child: GestureDetector(
+            onTap: _toggleOverlay,
+            // onPanStart: (e) => _showOverlay(),
+            // onPanEnd: (e) => _hideOverlay(),
+            // onPanUpdate: updateIndicator,
+            child: CompositedTransformTarget(
+              link: layerLink,
+              child: Image.asset(
+                "assets/images/avatar.png",
+                width: 80, height: 80,
+              ),
+            ),
           ),
         ),
       ),
     );
   }
 
+  ///设置单个宽度
+  Widget buildListViewHorizontal({
+    String title = "",
+    required ValueChanged<int> onChanged,
+    int index = 0}) {
+    var items = AlignmentExt.allCases.map((e) => e.toString().split(".").last).toList();
+    return Row(
+      children: [
+        if(title.isNotEmpty)NText(title),
+        Expanded(
+          child: ListViewSegmentControl(
+            items: items,
+            // itemWidths: itemWiths,
+            selectedIndex: index,
+            onValueChanged: (val){
+              debugPrint(val.toString());
+              onChanged.call(val);
+            }
+          ),
+        ),
+      ],
+    );
+  }
+
+  PreferredSize buildTab() {
+    return PreferredSize(
+      preferredSize: Size.fromHeight(48),
+      child: Container(
+        decoration: BoxDecoration(
+          // color: Colors.greenAccent,
+          // border: Border.all(color: Colors.yellow),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            buildListViewHorizontal(
+              title: "Target:",
+              onChanged: (int value) {
+                targetAnchor = AlignmentExt.allCases[value];
+                _overlayEntry.markNeedsBuild();
+              }
+            ),
+            SizedBox(height: 8,),
+            buildListViewHorizontal(
+              title: "Follower:",
+              onChanged: (int value) {
+                followerAnchor = AlignmentExt.allCases[value];
+                _overlayEntry.markNeedsBuild();
+              }
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 
   void _toggleOverlay() {
     if (!show) {
@@ -83,8 +150,8 @@ class _CompositedTransformTargetDemoState extends State<CompositedTransformTarge
         child: CompositedTransformFollower(
           link: layerLink,
           // offset: indicatorOffset,
-          followerAnchor: Alignment.centerLeft,
-          targetAnchor: Alignment.centerRight,
+          followerAnchor: followerAnchor,
+          targetAnchor: targetAnchor,
           offset: Offset(5,0),
           child: Material(
             child: Container(
@@ -115,7 +182,7 @@ class _CustomSlideDemoState extends State {
   final double slideHeight = 200.0;
   final double slideWidth = 400.0;
   final LayerLink layerLink = LayerLink();
-  OverlayEntry? overlayEntry;
+  OverlayEntry? _overlayEntry;
 
   @override
   Widget build(BuildContext context) {
@@ -157,7 +224,7 @@ class _CustomSlideDemoState extends State {
 
   void showIndicator(DragStartDetails details) {
     indicatorOffset = getIndicatorOffset(details.localPosition);
-    overlayEntry = OverlayEntry(
+    _overlayEntry = OverlayEntry(
       builder: (BuildContext context) {
         return Positioned(
           top: 0.0,
@@ -176,16 +243,16 @@ class _CustomSlideDemoState extends State {
         );
       },
     );
-    Overlay.of(context)?.insert(overlayEntry!);
+    Overlay.of(context)?.insert(_overlayEntry!);
   }
 
   void updateIndicator(DragUpdateDetails details) {
     indicatorOffset = getIndicatorOffset(details.localPosition);
-    overlayEntry?.markNeedsBuild();
+    _overlayEntry?.markNeedsBuild();
   }
 
   void hideIndicator(DragEndDetails details) {
-    overlayEntry?.remove();
+    _overlayEntry?.remove();
   }
 
 
