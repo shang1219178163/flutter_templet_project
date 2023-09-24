@@ -468,6 +468,7 @@ var list = [
   Tuple2(APPRouter.searchDemo, "searchDemo", ),
   Tuple2(APPRouter.switchDemo, "switchDemo", ),
   Tuple2(APPRouter.gestureDetectorDemo, "gestureDetectorDemo", ),
+  Tuple2(APPRouter.compositedTransformTargetDemo, "compositedTransformTargetDemo", ),
 
 
 ];
