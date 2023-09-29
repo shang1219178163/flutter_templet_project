@@ -295,8 +295,8 @@ class _NRequestBoxState extends State<NRequestBox> {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(radius.w),
-            bottomRight: Radius.circular(radius.w),
+            bottomLeft: Radius.circular(radius.r),
+            bottomRight: Radius.circular(radius.r),
           ),
           boxShadow: [
             if(hasShadow)BoxShadow(
@@ -324,8 +324,7 @@ class _NRequestBoxState extends State<NRequestBox> {
             ),
             NCancelAndConfirmBar(
               cancelTitle: "重置",
-              bottomRadius: Radius.circular(radius.w),
-              bottomRightRadius: Radius.circular(radius.w),
+              bottomRadius: Radius.circular(radius.r),
               onCancel: onCancel,
               onConfirm: onConfirm,
             ),
@@ -354,8 +353,8 @@ class _NRequestBoxState extends State<NRequestBox> {
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(radius.w),
-              bottomRight: Radius.circular(radius.w),
+              bottomLeft: Radius.circular(radius.r),
+              bottomRight: Radius.circular(radius.r),
             ),
             boxShadow: [
               if(hasShadow)BoxShadow(
@@ -383,8 +382,7 @@ class _NRequestBoxState extends State<NRequestBox> {
               ),
               NCancelAndConfirmBar(
                 cancelTitle: "重置",
-                bottomRadius: Radius.circular(radius.w),
-                bottomRightRadius: Radius.circular(radius.w),
+                bottomRadius: Radius.circular(radius.r),
                 onCancel: onCancel,
                 onConfirm: onConfirm,
               ),
