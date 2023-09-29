@@ -67,7 +67,7 @@ class _AppBarDemoState extends State<AppBarDemo> with SingleTickerProviderStateM
             padding: EdgeInsets.only(top: 20, left: 20),
             child: Text("statusBar ${mq.viewPadding.top}"),
           ),
-          buildTab().toColoredBox(color: Theme.of(context).primaryColor),
+          buildTab(),
         ],
       )
     );
@@ -78,20 +78,25 @@ class _AppBarDemoState extends State<AppBarDemo> with SingleTickerProviderStateM
   }
 
   Widget buildTab() {
+    final theme = Theme.of(context);
+
     return PreferredSize(
       preferredSize: Size.fromHeight(48),
-      child: TabBar(
-        controller: _tabController,
-        isScrollable: true,
-        indicatorColor: Colors.white,
-        tabs: items.map((e) => Tab(text: e.item1)).toList(),
-        // labelColor: textColor,
-        // labelStyle: widget.labelStyle,
-        // indicator: widget.isTabBottom ? decorationTop : decorationBom,
-        onTap: (index) {
-          debugPrint("index: $index");
-          // setState(() { });
-        },
+      child: Container(
+        color: theme.primaryColor,
+        child: TabBar(
+          controller: _tabController,
+          isScrollable: true,
+          indicatorColor: theme.scaffoldBackgroundColor,
+          tabs: items.map((e) => Tab(text: e.item1)).toList(),
+          // labelColor: textColor,
+          // labelStyle: widget.labelStyle,
+          // indicator: widget.isTabBottom ? decorationTop : decorationBom,
+          onTap: (index) {
+            debugPrint("index: $index");
+            // setState(() { });
+          },
+        ),
       ),
     );
   }
