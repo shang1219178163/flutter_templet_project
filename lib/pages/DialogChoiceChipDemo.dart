@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/n_cancel_and_confirm_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_pop_view_box.dart';
+import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
@@ -33,6 +34,7 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
   late final funcMap = <String, Function>{
     "NChoicBox 弹窗": showPopViewBox,
     "方法弹窗": clickUpdateTags,
+    "方法弹窗1": clickUpdateTagsNew,
     "弹窗高度固定": clickAlertInset,
     "弹窗高度自适应": clickAlertMaxHeight,
   };
@@ -262,7 +264,11 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
             color: Colors.transparent,
             child: ChoiceChip(
               side: BorderSide(color: Color(0xfff3f3f3)),
-              label: Text(e.name ?? "-"),
+              label: Text((e.name ?? "-")*5 + '一二三四五六七八九十'.substring(0, 3),
+                maxLines: 2,
+                softWrap: true,
+                overflow: TextOverflow.ellipsis,
+              ),
               labelStyle: TextStyle(
                 color: e.isSelected == true ? Colors.white : fontColor,
               ),
@@ -290,6 +296,100 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
             ),)).toList(),
         );
       }
+    );
+  }
+
+  clickUpdateTagsNew({
+    bool isSingle = false,
+    WrapAlignment alignment = WrapAlignment.start,
+  }) {
+    return showPopView(
+        title: "选择",
+        onCancell: (){
+          handleItems(selectedItems: selectedTags);
+          Navigator.of(context).pop();
+        },
+        onConfirm: () async {
+          Navigator.of(context).pop();
+
+          selectedTags = selectedTagsTmp;
+          info.value = selectedTagsNames.join(",");
+
+          // final response = await requestUpdateSections();
+          // if (response is! Map<String, dynamic> || response['code'] != 'OK' || response['result'] != true) {
+          //   BrunoUti.showInfoToast(RequestMsg.networkErrorMsg);
+          //   return;
+          // }
+
+          // handleDiseaseTypes(selectedItems: selectDiseaseTypes);
+          // map[e.item3] = selectDiseaseTypesNames;
+          // debugPrint("selectDiseaseTypesNames: ${map[e.item3]}");
+          // debugPrint("map[e.item3]: ${map[e.item3]}");
+          setState(() {});
+        },
+        contentChildBuilder: (context, setState1) {
+          return Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.only(bottom: 8.0),
+                child: NText("解决 ChoiceChip显示不全的问题", fontSize: 14,),
+              ),
+              Wrap(
+                runSpacing: 12,
+                spacing: 16,
+                alignment: alignment,
+                children: tags.map((e) => Material(
+                  color: Colors.transparent,
+                  child: StatefulBuilder(
+                    builder: (BuildContext context, StateSetter setState) {
+
+                      return InkWell(
+                        onTap: (){
+                          e.isSelected = !e.isSelected!;
+
+                          for (final element in tags) {
+                            if (element.id == e.id) {
+                              element.isSelected = e.isSelected;
+                            } else {
+                              if (isSingle) {
+                                element.isSelected = false;//单选
+                              }
+                            }
+                          }
+
+                          selectedTagsTmp = tags.where((e) => e.isSelected == true).toList();
+                          // selectDiseaseTypes = diseaseTypeshere((e) => e.isSelected == true).toList();
+                          setState(() => {});
+                          debugPrint(selectedTagsTmp.map((e) => e.name ?? "").join(","));
+                        },
+                        child: Container(
+                          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                          // decoration: BoxDecoration(
+                          //   color: e.isSelected == true ? Theme.of(context).primaryColor : bgColor[10],
+                          //   border: Border.all(color: Color(0xfff3f3f3)),
+                          //   borderRadius: BorderRadius.all(Radius.circular(8.r)),
+                          //   shape: StadiumBorder(),
+                          // ),
+                          decoration: ShapeDecoration(
+                            color: e.isSelected == true ? Theme.of(context).primaryColor : bgColor[10],
+                            shape: StadiumBorder(side: BorderSide(color: Color(0xfff3f3f3))),
+                          ),
+                          child: Text((e.name ?? "-")*5 + '一二三四五六七八九十'.substring(0, 3),
+                            maxLines: 2,
+                            softWrap: true,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              color: e.isSelected == true ? Colors.white : fontColor,
+                            ),
+                          ),
+                        ),
+                      );
+                    }
+                  ),)).toList(),
+              ),
+            ],
+          );
+        }
     );
   }
 
@@ -589,8 +689,7 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
     final defaultFooter = NCancelAndConfirmBar(
       height: buttonBarHeight,
       confirmBgColor: Theme.of(context).primaryColor,
-      bottomLeftRadius: radius,
-      bottomRightRadius: radius,
+      bottomRadius: radius,
       onCancel: onCancell ?? (){
         Navigator.of(context).pop();
       },
