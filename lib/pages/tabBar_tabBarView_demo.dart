@@ -526,6 +526,7 @@ var specials = [
   Tuple2(APPRouter.globalIsolateDemo, "globalIsolateDemo", ),
   Tuple2(APPRouter.longCaptureWidgetDemo, "widget长截图", ),
   Tuple2(APPRouter.imageStretchDemo, "图片拉伸", ),
+  Tuple2(APPRouter.drawCanvasDemo, "drawCanvas", ),
 
 
 
