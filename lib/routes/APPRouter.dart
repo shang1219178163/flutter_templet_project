@@ -16,6 +16,7 @@ import 'package:flutter_templet_project/pages/ReflectDemo.dart';
 import 'package:flutter_templet_project/pages/PageLifecycleObserverDemo.dart';
 import 'package:flutter_templet_project/pages/RegExpDemo.dart';
 import 'package:flutter_templet_project/pages/ThemeColorDemo.dart';
+import 'package:flutter_templet_project/pages/demo/AppBarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/CompositedTransformTargetDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DrawCanvasDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DropdownMenuDemo.dart';
@@ -302,6 +303,7 @@ class APPRouter {
   static const homePage = '/MyHomePage';
   static const mediaQueryScreeenDemo = '/mediaQueryScreeenDemo';
   static const autoLayoutDemo = '/AutoLayoutDemo';
+  static const appBarDemo = '/appBarDemo';
 
 
   static const loginPage = '/LoginPage';
@@ -662,6 +664,10 @@ class AppPage {
     GetPage(name: APPRouter.tabBarPageViewDemo, page: () => TabBarPageViewDemo(),),
     GetPage(name: APPRouter.mediaQueryScreeenDemo, page: () => MediaQueryScreeenDemo(),),
     GetPage(name: APPRouter.autoLayoutDemo, page: () => AutoLayoutDemo(),),
+
+
+
+    GetPage(name: APPRouter.appBarDemo, page: () => AppBarDemo(),),
 
     GetPage(name: APPRouter.testPage, page: () => TestPage(),),
     GetPage(name: APPRouter.testPageOne, page: () => TestPageOne(),),
