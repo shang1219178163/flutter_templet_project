@@ -43,7 +43,6 @@ class _RImage {
     "https://cdn.pixabay.com/photo/2018/02/01/21/00/tree-3124103_1280.jpg",
     'https://pic.616pic.com/bg_w1180/00/04/08/G5Bftx5ZDI.jpg!/fw/1120',
     'https://pic.616pic.com/bg_w1180/00/07/20/2gfqq0N3qX.jpg!/fw/1120',
-    'https://desk-fd.zol-img.com.cn/t_s1920x1200c5/g5/M00/07/0E/ChMkJleEtCSIQ75fABQbWWxR5AcAATc2gJndzsAFBtx072.jpg',
     'https://tenfei02.cfp.cn/creative/vcg/800/new/VCG21409037867.jpg',
     'https://seopic.699pic.com/photo/50053/2696.jpg_wh1200.jpg',
     'https://www.10wallpaper.com/wallpaper/1366x768/1207/balls_3d-Abstract_design_wallpaper_1366x768.jpg',

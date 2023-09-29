@@ -19,41 +19,57 @@ class ContextMenuActionDemo extends StatelessWidget {
   	this.title,
   }) : super(key: key);
 
+
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
-    return Scaffold(
-        appBar: AppBar(
-          title: Text(arguments[1]),
-        ),
-        body: Center(
-          child: SizedBox(
-            width: 100,
-            height: 100,
-            child: CupertinoContextMenu(
-              actions: <Widget>[
-                CupertinoContextMenuAction(
-                  trailingIcon: Icons.chevron_right,
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: const Text('Action one'),
-                ),
-                CupertinoContextMenuAction(
-                  trailingIcon: Icons.chevron_right,
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: const Text('Action two'),
-                ),
-              ],
-              child: Container(
-                color: Colors.red,
+    return CupertinoPageScaffold(
+      navigationBar: const CupertinoNavigationBar(
+        middle: Text('CupertinoContextMenu Sample'),
+      ),
+      child: Center(
+        child: SizedBox(
+          width: 100,
+          height: 100,
+          child: CupertinoContextMenu(
+            actions: <Widget>[
+              CupertinoContextMenuAction(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                isDefaultAction: true,
+                trailingIcon: CupertinoIcons.doc_on_clipboard_fill,
+                child: const Text('Copy'),
               ),
+              CupertinoContextMenuAction(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                trailingIcon: CupertinoIcons.share,
+                child: const Text('Share'),
+              ),
+              CupertinoContextMenuAction(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                trailingIcon: CupertinoIcons.heart,
+                child: const Text('Favorite'),
+              ),
+              CupertinoContextMenuAction(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                isDestructiveAction: true,
+                trailingIcon: CupertinoIcons.delete,
+                child: const Text('Delete'),
+              ),
+            ],
+            child: const ColoredBox(
+              color: CupertinoColors.systemYellow,
+              child: FlutterLogo(size: 500.0),
             ),
           ),
         ),
+      ),
     );
   }
 }

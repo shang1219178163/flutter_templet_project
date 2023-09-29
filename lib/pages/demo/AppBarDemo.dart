@@ -62,7 +62,7 @@ class _AppBarDemoState extends State<AppBarDemo> with SingleTickerProviderStateM
         children: [
           // Text(arguments.toString()),
           Container(
-            color: ColorExt.random,
+            color: Theme.of(context).primaryColor,
             height: mq.viewPadding.top,
             padding: EdgeInsets.only(top: 20, left: 20),
             child: Text("statusBar ${mq.viewPadding.top}"),
