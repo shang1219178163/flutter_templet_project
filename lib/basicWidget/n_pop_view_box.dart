@@ -149,8 +149,7 @@ class _NPopViewBoxState extends State<NPopViewBox> {
     final defaultFooter = NCancelAndConfirmBar(
       height: buttonBarHeight,
       confirmBgColor: Theme.of(context).primaryColor,
-      bottomLeftRadius: radius,
-      bottomRightRadius: radius,
+      bottomRadius: radius,
       onCancel: onCancell ?? (){
         Navigator.of(context).pop();
       },

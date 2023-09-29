@@ -324,7 +324,7 @@ class _NRequestBoxState extends State<NRequestBox> {
             ),
             NCancelAndConfirmBar(
               cancelTitle: "重置",
-              bottomLeftRadius: Radius.circular(radius.w),
+              bottomRadius: Radius.circular(radius.w),
               bottomRightRadius: Radius.circular(radius.w),
               onCancel: onCancel,
               onConfirm: onConfirm,
@@ -383,7 +383,7 @@ class _NRequestBoxState extends State<NRequestBox> {
               ),
               NCancelAndConfirmBar(
                 cancelTitle: "重置",
-                bottomLeftRadius: Radius.circular(radius.w),
+                bottomRadius: Radius.circular(radius.w),
                 bottomRightRadius: Radius.circular(radius.w),
                 onCancel: onCancel,
                 onConfirm: onConfirm,

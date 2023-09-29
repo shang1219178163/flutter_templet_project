@@ -540,8 +540,7 @@ class _DropBoxMutiRowChoicDemoState extends State<DropBoxMutiRowChoicDemo> {
   Widget buildDropBoxButtonBar() {
     return NCancelAndConfirmBar(
       cancelTitle: "重置",
-      bottomLeftRadius: Radius.circular(30.w),
-      bottomRightRadius: Radius.circular(30.w),
+      bottomRadius: Radius.circular(30.w),
       onCancel: () {
         // Navigator.of(context).pop();
         handleResetFitler();

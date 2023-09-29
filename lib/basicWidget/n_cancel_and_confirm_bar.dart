@@ -9,8 +9,7 @@ class NCancelAndConfirmBar extends StatelessWidget {
     this.height = 48,
     this.cancelTitle = "取消",
     this.confirmTitle = "确定",
-    this.bottomLeftRadius = const Radius.circular(4),
-    this.bottomRightRadius = const Radius.circular(4),
+    this.bottomRadius = const Radius.circular(4),
     this.hasCancelButton = true,
     required this.onCancel,
     required this.onConfirm,
@@ -28,9 +27,7 @@ class NCancelAndConfirmBar extends StatelessWidget {
   /// 默认确定
   String confirmTitle;
   /// 默认 Radius.circular(4)
-  Radius bottomLeftRadius;
-  /// 默认 Radius.circular(4)
-  Radius bottomRightRadius;
+  Radius bottomRadius;
   /// 是否存在取消按钮
   bool hasCancelButton;
   /// 取消按钮事件
@@ -55,13 +52,18 @@ class NCancelAndConfirmBar extends StatelessWidget {
 
   buildCancelAndConfirmBar() {
     return Card(
+      margin: EdgeInsets.zero,
+      // color: Colors.transparent,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(bottomRadius,),
+      ),
       child: Container(
         height: height.h,
         clipBehavior: Clip.hardEdge,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.only(
-            bottomLeft: bottomLeftRadius.r,
-            bottomRight: bottomRightRadius.r,
+            bottomLeft: bottomRadius,
+            bottomRight: bottomRadius,
           ),
         ),
         child: Row(

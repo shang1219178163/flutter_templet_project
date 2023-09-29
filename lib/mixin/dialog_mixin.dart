@@ -92,8 +92,7 @@ mixin DialogMixin{
     final defaultFooter = NCancelAndConfirmBar(
       height: buttonBarHeight,
       confirmBgColor: Theme.of(context).primaryColor,
-      bottomLeftRadius: radius,
-      bottomRightRadius: radius,
+      bottomRadius: radius,
       divider: buttonBarDivider,
       hasCancelButton: hasCancelButton,
       onCancel: onCancel ?? (){
@@ -223,8 +222,7 @@ mixin DialogMixin{
         confirmBgColor: confirmBgColor,
         cancelTextStyle: cancellTextStyle,
         confirmTextStyle: confirmTextStyle,
-        bottomLeftRadius: Radius.circular(12.w),
-        bottomRightRadius: Radius.circular(12.w),
+        bottomRadius: Radius.circular(12.w),
         onCancel: onCancel ?? (){
           Navigator.of(context).pop();
         },

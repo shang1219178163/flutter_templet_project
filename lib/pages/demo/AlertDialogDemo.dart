@@ -302,8 +302,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
                 NCancelAndConfirmBar(
                   cancelBgColor: Theme.of(context).dialogBackgroundColor,
                   confirmBgColor: Theme.of(context).colorScheme.secondary,
-                  bottomLeftRadius: const Radius.circular(16),
-                  bottomRightRadius: const Radius.circular(16),
+                  bottomRadius: const Radius.circular(16),
                   onCancel: (){
                     debugPrint("onCancel");
                   },
