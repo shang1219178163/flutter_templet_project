@@ -120,7 +120,7 @@ class VideoService{
     }
 
     var cacheDir = await CacheAssetService().getDir();
-    String savePath = "${cacheDir.path}/$name";
+    var savePath = "${cacheDir.path}/$name";
     await Dio().download(url, savePath,
         onReceiveProgress: (received, total) {
           if (total != -1) {

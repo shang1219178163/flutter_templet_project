@@ -12,7 +12,7 @@ import 'package:image_cropper/image_cropper.dart';
 class ImageService{
 
   /// 图片压缩
-   Future<File?> compressAndGetFile(File file, [String? targetPath]) async {
+   Future<File> compressAndGetFile(File file, [String? targetPath]) async {
     try {
       var fileName = file.absolute.path.split('/').last;
 
@@ -68,7 +68,7 @@ class ImageService{
     } catch (e) {
       debugPrint("compressAndGetFile:${e.toString()}");
     }
-    return null;
+    return file;
   }
 
   /// 图片压缩
@@ -93,7 +93,6 @@ extension ImageFileExt on File {
   /// 图片压缩
   Future<File> toCompressImage() async {
     var compressFile = await ImageService().compressAndGetFile(this);
-    compressFile ??= this;// 压缩失败则使用原图
     return compressFile;
   }
 
