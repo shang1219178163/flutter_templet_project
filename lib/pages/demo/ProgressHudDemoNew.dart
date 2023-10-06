@@ -8,7 +8,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/routes/APPRouter.dart';
+import 'package:flutter_templet_project/routes/AppRouter.dart';
 
 import 'package:get/get.dart';
 import 'package:fluttertoast/fluttertoast.dart';

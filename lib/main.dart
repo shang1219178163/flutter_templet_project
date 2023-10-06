@@ -26,8 +26,8 @@ import 'package:flutter_templet_project/provider/color_filtered_provider.dart';
 import 'package:flutter_templet_project/provider/rxDart_provider_demo.dart';
 
 import 'package:flutter_templet_project/extension/ddlog.dart';
-import 'package:flutter_templet_project/routes/RouteService.dart';
-import 'package:flutter_templet_project/routes/APPRouter.dart';
+import 'package:flutter_templet_project/routes/AppRouter.dart';
+import 'package:flutter_templet_project/routes/AppRouteObserver.dart';
 import 'package:flutter_templet_project/service/cache_service.dart';
 import 'package:flutter_templet_project/uti/app_util.dart';
 import 'package:flutter_templet_project/uti/localizations/AppCupertinoLocalizations.dart';
@@ -166,8 +166,8 @@ class MyApp extends StatelessWidget {
       initialRoute: AppPage.INITIAL,
       getPages: AppPage.routes,
       unknownRoute: AppPage.unknownRoute,
-      navigatorObservers: <NavigatorObserver>[RouteService.routeObserver],
-      routingCallback: RouteService.routingCallback ?? (routing) {
+      navigatorObservers: [AppRouteObserver().routeObserver],
+      routingCallback: AppRouteObserver().routingCallback ?? (routing) {
         // if (routing != null) {
         //   ddlog([routing.previous, routing.current]);
         // }

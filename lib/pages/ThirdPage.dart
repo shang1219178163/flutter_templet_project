@@ -11,7 +11,7 @@ import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/mixin/BottomBouncingScrollPhysics.dart';
 import 'package:flutter_templet_project/mixin/MyScrollPhysics.dart';
-import 'package:flutter_templet_project/routes/RouteService.dart';
+import 'package:flutter_templet_project/routes/AppRouteObserver.dart';
 
 
 class ThirdPage extends StatefulWidget {
@@ -58,14 +58,13 @@ class _ThirdPageState extends State<ThirdPage> with RouteAware {
 
   @override
   void dispose() {
-    RouteService.routeObserver.unsubscribe(this); //取消订阅
+    AppRouteObserver().routeObserver.unsubscribe(this); //取消订阅
     super.dispose();
   }
 
   @override
   void didChangeDependencies() {
-    RouteService.routeObserver
-        .subscribe(this, ModalRoute.of(context)!); //订阅
+    AppRouteObserver().routeObserver.subscribe(this, ModalRoute.of(context)!); //订阅
     super.didChangeDependencies();
   }
 

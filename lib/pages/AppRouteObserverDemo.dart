@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/routes/RouteService.dart';
-import 'package:flutter_templet_project/routes/APPRouter.dart';
+import 'package:flutter_templet_project/routes/AppRouteObserver.dart';
+import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:get/get.dart';
 
 /// 路由监听
@@ -22,7 +22,7 @@ class _AppRouteObserverDemoState extends State<AppRouteObserverDemo> with RouteA
 
   @override
   void dispose() {
-    RouteService.routeObserver.unsubscribe(this); //取消订阅
+    AppRouteObserver().routeObserver.unsubscribe(this); //取消订阅
     super.dispose();
   }
 
@@ -33,7 +33,7 @@ class _AppRouteObserverDemoState extends State<AppRouteObserverDemo> with RouteA
 
   @override
   void didChangeDependencies() {
-    RouteService.routeObserver.subscribe(this, ModalRoute.of(context)!); //订阅
+    AppRouteObserver().routeObserver.subscribe(this, ModalRoute.of(context)!); //订阅
     super.didChangeDependencies();
   }
 
@@ -91,3 +91,6 @@ class _AppRouteObserverDemoState extends State<AppRouteObserverDemo> with RouteA
 
 
 }
+
+
+
