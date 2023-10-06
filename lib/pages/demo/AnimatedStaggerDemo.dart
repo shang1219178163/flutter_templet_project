@@ -11,16 +11,21 @@ class AnimatedStaggerDemo extends StatefulWidget {
 
 class _AnimatedStaggerDemoState extends State<AnimatedStaggerDemo>
     with TickerProviderStateMixin {
-  late AnimationController _controller;
+
+  late final _controller = AnimationController(
+    duration: const Duration(milliseconds: 2000),
+    vsync: this,
+  );
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   void initState() {
     super.initState();
-
-    _controller = AnimationController(
-      duration: const Duration(milliseconds: 2000),
-      vsync: this,
-    );
   }
 
   _playAnimation() async {
