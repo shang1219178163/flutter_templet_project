@@ -42,42 +42,34 @@ class _DashLineDemoState extends State<DashLineDemo> {
       child: Column(
         children: [
           SizedBox(height: 10,),
-          NDashLine(color: Colors.red,),
-          SizedBox(height: 10,),
           NDashLine(color: Colors.blue,),
           SizedBox(height: 10,),
-          NDashLineOfMutiColor(
-            height: 2,
-            steps: <Tuple2<double, Color>>[
-              Tuple2(8, Colors.transparent),
-              Tuple2(8, Colors.red),
-              Tuple2(8, Colors.transparent),
-              Tuple2(8, ColorExt.random),
-              Tuple2(8, Colors.transparent),
-              Tuple2(8, ColorExt.random),
-              Tuple2(8, Colors.transparent),
-              Tuple2(8, ColorExt.random),
-              Tuple2(8, Colors.transparent),
-              Tuple2(8, ColorExt.random),
-              Tuple2(8, Colors.transparent),
-              Tuple2(8, ColorExt.random),
-            ],
-          ),
+          buildDashLineOfMutiColor(),
           SizedBox(
-            height: 200,
-            child: NDashLineOfMutiColor(
+            height: 300,
+            child: buildDashLineOfMutiColor(
               direction: Axis.vertical,
-              height: 2,
-              steps: <Tuple2<double, Color>>[
-                Tuple2(8, Colors.transparent),
-                Tuple2(8, Colors.red),
-                Tuple2(8, Colors.transparent),
-                Tuple2(8, Colors.blue),
-              ],
             ),
           ),
         ],
       ),
+    );
+  }
+
+  buildDashLineOfMutiColor({direction = Axis.horizontal}) {
+    return NDashLineOfMutiColor(
+      direction: direction,
+      height: 2,
+      steps: <Tuple2<double, Color>>[
+        Tuple2(8, Colors.transparent),
+        Tuple2(8, Colors.red),
+        Tuple2(8, Colors.transparent),
+        Tuple2(8, Colors.yellow),
+        Tuple2(8, Colors.transparent),
+        Tuple2(8, Colors.blue),
+        Tuple2(8, Colors.transparent),
+        Tuple2(8, Colors.green),
+      ],
     );
   }
 

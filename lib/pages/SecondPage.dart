@@ -163,8 +163,36 @@ class _SecondPageState extends State<SecondPage> {
               title: "BackButton",
               child: BackButton(
                 color: Colors.red,
+                style: ButtonStyle(
+                  padding: MaterialStatePropertyAll(EdgeInsets.all(1)),
+                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  minimumSize: MaterialStatePropertyAll(Size(24, 24)),
+                  // fixedSize: MaterialStatePropertyAll(Size(24, 24)),
+                ),
                 onPressed: () => debugPrint("BackButton"),
-              ),
+              ).toColoredBox(),
+            ),
+            buildSection(
+              title: "IconButton",
+              child: IconButton(
+                style: TextButton.styleFrom(
+                  padding: EdgeInsets.zero,
+                  // padding: EdgeInsets.symmetric(horizontal: 8, vertical: 12),
+                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  minimumSize: Size(50, 18),
+                  // backgroundColor: Colors.green.withOpacity(0.1),
+                  // foregroundColor: Colors.green,
+                ),
+                tooltip: '这是一个图标按钮',
+                icon: Icon(Icons.arrow_back_ios_new),
+                iconSize: 30,
+                color: Theme.of(context).colorScheme.primary,
+                padding: EdgeInsets.zero,
+                constraints: BoxConstraints(),
+                onPressed: () {
+                  ddlog("这是一个图标按钮");
+                },
+              ).toColoredBox(),
             ),
             buildSection(
               title: "FilledButton",
@@ -425,26 +453,6 @@ class _SecondPageState extends State<SecondPage> {
               ),
             ),
             buildSection(
-              title: "IconButton",
-              child: IconButton(
-                style: TextButton.styleFrom(
-                  padding: EdgeInsets.zero,
-                  // padding: EdgeInsets.symmetric(horizontal: 8, vertical: 12),
-                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  minimumSize: Size(50, 18),
-                  // backgroundColor: Colors.green.withOpacity(0.1),
-                  // foregroundColor: Colors.green,
-                ),
-                tooltip: '这是一个图标按钮',
-                icon: Icon(Icons.arrow_back_ios_new),
-                iconSize: 30,
-                color: Theme.of(context).colorScheme.primary,
-                onPressed: () {
-                  ddlog("这是一个图标按钮");
-                },
-              ),
-            ),
-            buildSection(
               title: "ToggleButtons",
               child: buildToggleButtons(),
             ),
@@ -560,11 +568,11 @@ class _SecondPageState extends State<SecondPage> {
               width: 160,
               height: 60,
               decoration: NDashDecoration(
-                step: 2,
+                step: 4,
                 // pointWidth: 2,
                 // pointCount: 1,
                 radius: Radius.circular(15),
-                strokeWidth: 3,
+                strokeWidth: 1,
                 strokeColor: Colors.red,
               ),
               alignment: Alignment.center,

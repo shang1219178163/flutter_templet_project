@@ -61,13 +61,19 @@ class _ChipDemoState extends State<ChipDemo> {
                 )
               ),
               Chip(
-                label: Text("带 deleteIcon的 Chip",),
-                deleteIcon: Icon( Icons.cancel, color: Colors.black45,),
-                onDeleted: () {
-                  ddlog("onDeleted: 带 deleteIcon的 Chip");
-                  setState(() {});
-                },
-                deleteButtonTooltipMessage: "弹出提示",
+                labelPadding: EdgeInsets.symmetric(horizontal: 8),
+                label: Text(
+                  "带 deleteIcon的 Chip${'一二三四五六七八九十'.substring(0, 9)*2}",
+                  maxLines: 2,
+                  softWrap: true,
+                  // overflow: TextOverflow.ellipsis,
+                ),
+                // deleteIcon: Icon( Icons.cancel, color: Colors.black45,),
+                // onDeleted: () {
+                //   ddlog("onDeleted: 带 deleteIcon的 Chip");
+                //   setState(() {});
+                // },
+                // deleteButtonTooltipMessage: "弹出提示",
               ),
               Chip(
                 label: Text("带 avatar 和 deleteIcon的 Chip",),

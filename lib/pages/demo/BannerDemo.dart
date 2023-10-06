@@ -25,14 +25,14 @@ class _BannerDemoState extends State<BannerDemo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold (
-        appBar: AppBar(
-          title: Text("Banner Example"),
-        ),
-        body: Column(
-          children: [
-            _buildBody(),
-          ],
-        )
+      appBar: AppBar(
+        title: Text("Banner Example"),
+      ),
+      body: Column(
+        children: [
+          _buildBody(),
+        ],
+      ),
     );
   }
 
@@ -41,7 +41,7 @@ class _BannerDemoState extends State<BannerDemo> {
       padding: EdgeInsets.all(16),
       child: Align(
         alignment: Alignment.topCenter,
-        child: Banner (
+        child: Banner(
           message: 'Offer 20% off',
           location: BannerLocation.topEnd,
           color: Colors.red,

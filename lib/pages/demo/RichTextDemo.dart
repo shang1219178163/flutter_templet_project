@@ -71,15 +71,21 @@ xxxx十分重视用户权利及隐私政策并严格按照相关法律法规的�
     )
   ];
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: [
-          TextButton(onPressed: (){
-            matchRegExp();
-          }, child: Text("done", style: TextStyle(color: Colors.white),)),
+          TextButton(
+            onPressed: (){
+              matchRegExp();
+            },
+            child: Text("done",
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
         ],
       ),
       body: SingleChildScrollView(
