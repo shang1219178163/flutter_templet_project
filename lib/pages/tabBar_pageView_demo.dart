@@ -19,7 +19,7 @@ import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/basicWidget/section_list_view.dart';
 import 'package:flutter_templet_project/model/mock_data.dart';
 import 'package:flutter_templet_project/pages/tabBar_tabBarView_demo.dart';
-import 'package:flutter_templet_project/routes/APPRouter.dart';
+import 'package:flutter_templet_project/routes/AppRouter.dart';
 
 import 'package:get/get.dart';
 import 'package:tuple/tuple.dart';

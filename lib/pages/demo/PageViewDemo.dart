@@ -9,7 +9,7 @@ import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/pages/FirstPage.dart';
 import 'package:flutter_templet_project/pages/SecondPage.dart';
 import 'package:flutter_templet_project/pages/ThirdPage.dart';
-import 'package:flutter_templet_project/routes/APPRouter.dart';
+import 'package:flutter_templet_project/routes/AppRouter.dart';
 
 import 'package:flutter_templet_project/mixin/bottom_sheet_mixin.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';

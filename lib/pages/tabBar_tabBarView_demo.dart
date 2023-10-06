@@ -22,7 +22,7 @@ import 'package:flutter_templet_project/extension/object_ext.dart';
 
 import 'package:flutter_templet_project/main.dart';
 import 'package:flutter_templet_project/model/mock_data.dart';
-import 'package:flutter_templet_project/routes/APPRouter.dart';
+import 'package:flutter_templet_project/routes/AppRouter.dart';
 
 import 'package:get/get.dart';
 import 'package:tuple/tuple.dart';
@@ -485,6 +485,7 @@ var specials = [
   Tuple2(APPRouter.mediaQueryDemo, "mediaQuery", ),
   Tuple2(APPRouter.mediaQueryDemoOne, "mediaQuery键盘", ),
   Tuple2(APPRouter.appRouteObserverDemo, "页面路由监听", ),
+  Tuple2(APPRouter.appRouteObserverDemoOne, "页面路由监听1", ),
   Tuple2(APPRouter.pageLifecycleObserverDemo, "页面生命周期监听", ),
   Tuple2(APPRouter.pageLifecycleFuncTest, "页面生命方法测试", ),
   Tuple2(APPRouter.systemIconsPage, "flutter 系统 Icons", ),

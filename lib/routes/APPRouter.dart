@@ -7,6 +7,7 @@ import 'package:flutter_templet_project/basicWidget/drag_destination_view.dart';
 import 'package:flutter_templet_project/basicWidget/responsive_column.dart';
 import 'package:flutter_templet_project/basicWidget/upload/asset_upload_box_demo.dart';
 import 'package:flutter_templet_project/pages/APPRouteObserverDemo.dart';
+import 'package:flutter_templet_project/pages/APPRouteObserverDemoOne.dart';
 import 'package:flutter_templet_project/pages/AppLaunchPage.dart';
 import 'package:flutter_templet_project/pages/DataTypeDemo.dart';
 import 'package:flutter_templet_project/pages/EmojiPage.dart';
@@ -322,6 +323,7 @@ class APPRouter {
   static const enumDemo = '/enumDemo';
   static const reflectDemo = '/moldelReflectDemo';
   static const appRouteObserverDemo = '/appRouteObserverDemo';
+  static const appRouteObserverDemoOne = '/appRouteObserverDemoOne';
   static const pageLifecycleObserverDemo = '/pageLifecycleObserverDemo';
   static const pageLifecycleFuncTest = '/pageLifecycleFuncTest';
   static const mediaQueryDemo = '/mediaQueryDemo';
@@ -694,6 +696,7 @@ class AppPage {
     GetPage(name: APPRouter.enumDemo, page: () => EnumDemo(),),
     GetPage(name: APPRouter.reflectDemo, page: () => ReflectDemo(),),
     GetPage(name: APPRouter.appRouteObserverDemo, page: () => AppRouteObserverDemo(),),
+    GetPage(name: APPRouter.appRouteObserverDemoOne, page: () => AppRouteObserverDemoOne(),),
     GetPage(name: APPRouter.pageLifecycleObserverDemo, page: () => PageLifecycleObserverDemo(),),
     GetPage(name: APPRouter.pageLifecycleFuncTest, page: () => PageLifecycleFuncTest(),),
 
