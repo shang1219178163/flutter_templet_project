@@ -72,6 +72,40 @@ class _TestFunctionState extends State<TestFunction> {
 
     Function.apply(fcOne, [2018], mapNew);
     FunctionExt.apply(fcOne, [2019], map);
+
+    final func = closure();
+    debugPrint("b: ${func()}");
+    debugPrint("b: ${func()}");
+
+    final funcOne = repeat(onChanged: (val){
+      debugPrint("onChanged: ${val}");
+    });
+
+    funcOne();
+    funcOne();
+    funcOne();
+    funcOne();
+    funcOne();
+    funcOne();
+  }
+
+  Function closure() {
+    var i = 0;
+    return () {
+      return ++i;
+    };
+  }
+
+  Function repeat({int time = 3, required ValueChanged<int> onChanged}) {
+    var i = 0;
+    return () {
+      if (i > time - 1) {
+        return i;
+      }
+      onChanged.call(i);
+      ++i;
+      return i;
+    };
   }
 }
 
