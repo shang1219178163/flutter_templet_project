@@ -27,6 +27,7 @@ dependencies:
   event_bus: ^2.0.0
   flutter_hooks: ^0.18.3
   flutter_screenutil: ^5.0.1
+  flutter_isolate: ^2.0.4
   cached_network_image: ^3.2.0
 
   # 省市区选择
