@@ -1,29 +1,28 @@
 import 'package:flutter/material.dart';
 
 // https://stackoverflow.com/questions/46480221/flutter-floating-action-button-with-speed-dail
-class FabWithIcons extends StatefulWidget {
-  FabWithIcons({
+class ExpandIcons extends StatefulWidget {
+  ExpandIcons({
     super.key,
-    required this.icons,
+    required this.items,
     required this.onItem
   });
-  final List<IconData> icons;
-  ValueChanged<int> onItem;
+  final List<IconData> items;
+  final ValueChanged<int> onItem;
 
   @override
-  State createState() => FabWithIconsState();
+  State createState() => ExpandIconsState();
 }
 
-class FabWithIconsState extends State<FabWithIcons> with TickerProviderStateMixin {
-  late AnimationController _controller;
+class ExpandIconsState extends State<ExpandIcons> with TickerProviderStateMixin {
+  late final _controller = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 250),
+  );
 
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 250),
-    );
   }
 
   @override
@@ -31,7 +30,7 @@ class FabWithIconsState extends State<FabWithIcons> with TickerProviderStateMixi
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
-      children: List.generate(widget.icons.length, (int index) {
+      children: List.generate(widget.items.length, (int index) {
         return _buildChild(index);
       }).toList()..add(
         _buildFab(),
@@ -51,14 +50,14 @@ class FabWithIconsState extends State<FabWithIcons> with TickerProviderStateMixi
           parent: _controller,
           curve: Interval(
               0.0,
-              1.0 - index / widget.icons.length / 2.0,
+              1.0 - index / widget.items.length / 2.0,
               curve: Curves.easeOut
           ),
         ),
         child: FloatingActionButton(
           backgroundColor: backgroundColor,
           mini: true,
-          child: Icon(widget.icons[index], color: foregroundColor),
+          child: Icon(widget.items[index], color: foregroundColor),
           onPressed: () => _onTapped(index),
         ),
       ),

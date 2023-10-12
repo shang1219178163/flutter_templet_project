@@ -9,6 +9,8 @@
 import 'package:enhance_expansion_panel/enhance_expansion_panel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_templet_project/basicWidget/ExpandButtons/expand_icons.dart';
+import 'package:flutter_templet_project/basicWidget/ExpandButtons/expand_layout.dart';
 import 'package:flutter_templet_project/basicWidget/list_subtitle_cell.dart';
 import 'package:flutter_templet_project/basicWidget/app_update_card.dart';
 import 'package:flutter_templet_project/basicWidget/section_list_view.dart';
@@ -19,6 +21,7 @@ import 'package:flutter_templet_project/extension/divider_ext.dart';
 import 'package:flutter_templet_project/extension/list_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/object_ext.dart';
+import 'package:flutter_templet_project/extension/widget_ext.dart';
 
 import 'package:flutter_templet_project/main.dart';
 import 'package:flutter_templet_project/model/mock_data.dart';
@@ -124,12 +127,40 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
       floatingActionButton: FloatingActionButton(
         tooltip: 'Increment',
         onPressed: () {
-          kScaffoldKey.currentState!.openEndDrawer();
+          // kScaffoldKey.currentState!.openEndDrawer();
           // testData();
           // final titles = getTitles(tuples: tuples);
-          // print("titles: ${titles}");
+          // debugPrint("titles: ${titles}");
         },
         child: Icon(Icons.add),
+      ),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
+      // floatingActionButton: _buildFab(isTop: true),
+    );
+  }
+
+  Widget _buildFab({bool isTop = true}) {
+    final icons = [ Icons.sms, Icons.mail, Icons.phone ];
+    return AnchoredOverlay(
+      showOverlay: true,
+      overlayBuilder: (context, offset) {
+
+        final dy = isTop ? offset.dy - icons.length * 35.0 : offset.dy + icons.length * 35.0;
+        return CenterAbout(
+          position: Offset(offset.dx, dy),
+          child: ExpandIcons(
+            items: icons,
+            onItem: (i){
+              debugPrint("i: $i");
+            },
+          ),
+        );
+      },
+      child: FloatingActionButton(
+        onPressed: () { },
+        tooltip: 'Increment',
+        child: Icon(Icons.add),
+        elevation: 2.0,
       ),
     );
   }

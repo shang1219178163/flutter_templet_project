@@ -14,13 +14,18 @@ class ConnectivityService {
       _connectivity.onConnectivityChanged.listen((event) {
         debugPrint(">>> ConnectivityService: $event");
         netState.value = event;
-        onLine.value = (event != ConnectivityResult.none);
+        onLine.value = [
+          ConnectivityResult.wifi,
+          ConnectivityResult.ethernet,
+          ConnectivityResult.mobile,
+          ConnectivityResult.vpn,
+        ].contains(event);
         for (final listener in listeners) {
           listener.onNetStateChaneged(event);
         }
       });
     } catch (e, trace) {
-      // Log.error('ConnectivityService', e, trace);
+      debugPrint('❌ ConnectivityService: $e, $trace',);
     }
   }
 
@@ -39,7 +44,7 @@ class ConnectivityService {
   final onLine = ValueNotifier<bool>(true);
 
   Future<ConnectivityResult> checkConnectivity() async {
-    return await _connectivity.checkConnectivity();
+    return _connectivity.checkConnectivity();
   }
 
   addListener(NetConnectivityListener? listener) {

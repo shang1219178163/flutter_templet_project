@@ -1,11 +1,15 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_text.dart';
+import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/uti/color_util.dart';
+import 'package:tuple/tuple.dart';
 
-class NameTransform extends StatefulWidget {
+/// 字符串转换
+class StringTransformPage extends StatefulWidget {
 
-  NameTransform({
+  StringTransformPage({
     Key? key,
     this.title
   }) : super(key: key);
@@ -13,32 +17,67 @@ class NameTransform extends StatefulWidget {
   final String? title;
 
   @override
-  _NameTransformState createState() => _NameTransformState();
+  _StringTransformPageState createState() => _StringTransformPageState();
 }
 
-class _NameTransformState extends State<NameTransform> {
+class _StringTransformPageState extends State<StringTransformPage> {
 
+  late final _editingController = TextEditingController();
+
+  late final items = <Tuple2<String, VoidCallback>>[
+    Tuple2("驼峰转下换线", camelToUnderScoreCase),
+    Tuple2("下换线转驼峰", underScoreCaseToCamel),
+  ];
 
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () => debugPrint(e),)
-        ).toList(),
+        // actions: ['done',].map((e) => TextButton(
+        //   child: Text(e,
+        //     style: TextStyle(color: Colors.white),
+        //   ),
+        //   onPressed: () => debugPrint(e),)
+        // ).toList(),
       ),
-      body: Text(arguments.toString())
+      body: buildBody()
     );
   }
 
-  buildBoyd() {
-    return
+  buildBody() {
+    return Container(
+      padding: EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Container(
+            child: buildTextfield(
+              controller: _editingController,
+              hintText: "请输入",
+              maxLines: 5,
+            ),
+          ),
+          SizedBox(height: 16,),
+          Container(
+            child: LayoutBuilder(builder: (context, constraints) {
+              final spacing = 8.0;
+              final runSpacing = 8.0;
+
+              return Wrap(
+                spacing: spacing,
+                runSpacing: runSpacing,
+                // alignment: WrapAlignment.start,
+                children: items.map((e) => OutlinedButton(
+                  onPressed: e.item2,
+                  child: NText(e.item1),
+                )).toList(),
+              );
+            }),
+          ),
+        ],
+      ),
+    );
   }
 
   Widget buildTextfield({
@@ -87,4 +126,16 @@ class _NameTransformState extends State<NameTransform> {
       // },
     );
   }
+
+
+  camelToUnderScoreCase(){
+    final tmp = _editingController.text;
+    _editingController.text = tmp.toUncamlCase("_");
+  }
+
+  underScoreCaseToCamel(){
+    final tmp = _editingController.text;
+    _editingController.text = tmp.toCamlCase("_");
+  }
+
 }

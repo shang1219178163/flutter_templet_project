@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/n_textfield.dart';
@@ -74,15 +75,15 @@ class _JsonToDartPageState extends State<JsonToDartPage> {
 
           final direction = constraints.maxWidth > 500 ? Axis.horizontal : Axis.vertical;
           if (direction == Axis.horizontal) {
-            return buildBodyHorizontal();
+            return buildBodyHorizontal(constraints: constraints);
           }
-          return buildBodyVertical();
+          return buildBodyVertical(constraints: constraints);
         }
       ),
     );
   }
 
-  buildBodyVertical({double spacing = 10,}) {
+  buildBodyVertical({double spacing = 10, required BoxConstraints constraints}) {
     return Scrollbar(
       child: SingleChildScrollView(
         child: Container(
@@ -92,7 +93,7 @@ class _JsonToDartPageState extends State<JsonToDartPage> {
             children: [
               buildTop(),
               Container(
-                height: 500,
+                height: constraints.maxHeight * 0.7,
                 child: buildLeft(isVertical: true),
               ),
               SizedBox(height: spacing*3,),
@@ -106,7 +107,7 @@ class _JsonToDartPageState extends State<JsonToDartPage> {
     );
   }
 
-  buildBodyHorizontal({double spacing = 10,}) {
+  buildBodyHorizontal({double spacing = 10, required BoxConstraints constraints}) {
     return Container(
       padding: EdgeInsets.all(spacing*3),
       child: Column(
@@ -213,7 +214,7 @@ class _JsonToDartPageState extends State<JsonToDartPage> {
             child: buildTextfield(
               controller: _textEditingController,
               focusNode: _focusNode,
-              maxLines: 20,
+              maxLines: 200,
             ),
           ),
         ),
