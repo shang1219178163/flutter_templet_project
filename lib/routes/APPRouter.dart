@@ -10,12 +10,14 @@ import 'package:flutter_templet_project/pages/AppRouteObserverDemo.dart';
 import 'package:flutter_templet_project/pages/AppRouteObserverDemoOne.dart';
 import 'package:flutter_templet_project/pages/AppLaunchPage.dart';
 import 'package:flutter_templet_project/pages/DataTypeDemo.dart';
+import 'package:flutter_templet_project/pages/DevelopToolList.dart';
 import 'package:flutter_templet_project/pages/EmojiPage.dart';
 import 'package:flutter_templet_project/pages/PageLifecycleFuncTest.dart';
 import 'package:flutter_templet_project/pages/DialogChoiceChipDemo.dart';
 import 'package:flutter_templet_project/pages/ReflectDemo.dart';
 import 'package:flutter_templet_project/pages/PageLifecycleObserverDemo.dart';
 import 'package:flutter_templet_project/pages/RegExpDemo.dart';
+import 'package:flutter_templet_project/pages/StringTransformPage.dart';
 import 'package:flutter_templet_project/pages/ThemeColorDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AppBarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/CompositedTransformTargetDemo.dart';
@@ -299,6 +301,7 @@ class APPRouter {
 
   static const launchPage = '/APPLaunchPage';
   static const emojiPage = '/emojiPage';
+  static const developToolList = '/developToolList';
 
   static const notFound = '/APPNotFoundPage';
 
@@ -320,6 +323,9 @@ class APPRouter {
   static const fourthPage = '/FourthPage';
 
   static const pageBuilderDemo = '/pageBuilderDemo';
+
+  static const stringTransformPage = '/stringTransformPage';
+
   static const enumDemo = '/enumDemo';
   static const reflectDemo = '/moldelReflectDemo';
   static const appRouteObserverDemo = '/appRouteObserverDemo';
@@ -650,8 +656,8 @@ class APPRouter {
 }
 
 class AppPage {
-  static const INITIAL = APPRouter.homePage;
-  // static const INITIAL = APPRouter.jsonToDartPage;
+  // static const INITIAL = APPRouter.homePage;
+  static const INITIAL = APPRouter.developToolList;
 
   static final unknownRoute = GetPage(name: APPRouter.notFound, page: () => APPNotFoundPage(),);
 
@@ -661,6 +667,9 @@ class AppPage {
 
     GetPage(name: APPRouter.themeColorDemo, page: () => ThemeColorDemo(),),
     GetPage(name: APPRouter.emojiPage, page: () => EmojiPage(),),
+
+
+    GetPage(name: APPRouter.developToolList, page: () => DevelopToolList(),),
 
     GetPage(name: APPRouter.launchPage, page: () => AppLaunchPage(),),
     GetPage(name: APPRouter.homePage, page: () => MyHomePage(),),
@@ -692,6 +701,7 @@ class AppPage {
     GetPage(name: APPRouter.pageBuilderDemo, page: () => PageBuilderDemo(),),
 
 
+    GetPage(name: APPRouter.stringTransformPage, page: () => StringTransformPage(),),
 
     GetPage(name: APPRouter.enumDemo, page: () => EnumDemo(),),
     GetPage(name: APPRouter.reflectDemo, page: () => ReflectDemo(),),

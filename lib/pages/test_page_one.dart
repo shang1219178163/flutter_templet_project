@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 
 
 import 'package:flutter/material.dart';
@@ -92,6 +93,11 @@ class _TestPageOneState extends State<TestPageOne> {
     } else {
       debugPrint("userId isEmpty");
     }
+
+    var list1 = <int>[1, 2, 3];
+    var list2 = <int>[1, 2, 3];
+
+    assert(listEquals(list1, list2) == true);
 
     setState(() {});
   }

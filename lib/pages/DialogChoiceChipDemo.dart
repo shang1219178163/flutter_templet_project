@@ -34,7 +34,8 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
   late final funcMap = <String, Function>{
     "NChoicBox 弹窗": showPopViewBox,
     "方法弹窗": clickUpdateTags,
-    "方法弹窗1": clickUpdateTagsNew,
+    "方法弹窗(RichText)": clickUpdateTagsOne,
+    "方法弹窗(Container)": clickUpdateTagsNew,
     "弹窗高度固定": clickAlertInset,
     "弹窗高度自适应": clickAlertMaxHeight,
   };
@@ -264,7 +265,22 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
             color: Colors.transparent,
             child: ChoiceChip(
               side: BorderSide(color: Color(0xfff3f3f3)),
-              label: Text((e.name ?? "-")*5 + '一二三四五六七八九十'.substring(0, 3),
+              // label: Text((e.name ?? "-")*5 + '一二三四五六七八九十'.substring(0, 3),
+              //   maxLines: 2,
+              //   softWrap: true,
+              //   overflow: TextOverflow.ellipsis,
+              // ),
+              label: RichText(
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: (e.name ?? "-")*5 + '一二三四五六七八九十'.substring(0, 3),
+                      style: TextStyle(
+                        color: e.isSelected == true ? Colors.white : fontColor,
+                      ),
+                    ),
+                  ],
+                ),
                 maxLines: 2,
                 softWrap: true,
                 overflow: TextOverflow.ellipsis,
@@ -296,6 +312,93 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
             ),)).toList(),
         );
       }
+    );
+  }
+
+  clickUpdateTagsOne({
+    bool isSingle = false,
+    WrapAlignment alignment = WrapAlignment.start,
+  }) {
+    return showPopView(
+        title: "选择",
+        onCancell: (){
+          handleItems(selectedItems: selectedTags);
+          Navigator.of(context).pop();
+        },
+        onConfirm: () async {
+          Navigator.of(context).pop();
+
+          selectedTags = selectedTagsTmp;
+          info.value = selectedTagsNames.join(",");
+
+          // final response = await requestUpdateSections();
+          // if (response is! Map<String, dynamic> || response['code'] != 'OK' || response['result'] != true) {
+          //   BrunoUti.showInfoToast(RequestMsg.networkErrorMsg);
+          //   return;
+          // }
+
+          // handleDiseaseTypes(selectedItems: selectDiseaseTypes);
+          // map[e.item3] = selectDiseaseTypesNames;
+          // debugPrint("selectDiseaseTypesNames: ${map[e.item3]}");
+          // debugPrint("map[e.item3]: ${map[e.item3]}");
+          setState(() {});
+        },
+        contentChildBuilder: (context, setState1) {
+          return Wrap(
+            runSpacing: 12,
+            spacing: 16,
+            alignment: alignment,
+            children: tags.map((e) => Material(
+              color: Colors.transparent,
+              child: ChoiceChip(
+                side: BorderSide(color: Color(0xfff3f3f3)),
+                // label: Text((e.name ?? "-")*5 + '一二三四五六七八九十'.substring(0, 3),
+                //   maxLines: 2,
+                //   softWrap: true,
+                //   overflow: TextOverflow.ellipsis,
+                // ),
+                label: RichText(
+                  text: TextSpan(
+                    children: [
+                      TextSpan(
+                        text: (e.name ?? "-")*5 + '一二三四五六七八九十'.substring(0, 3),
+                        style: TextStyle(
+                          color: e.isSelected == true ? Colors.white : fontColor,
+                        ),
+                      ),
+                    ],
+                  ),
+                  maxLines: 2,
+                  softWrap: true,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                labelStyle: TextStyle(
+                  color: e.isSelected == true ? Colors.white : fontColor,
+                ),
+                // padding: EdgeInsets.only(left: 15, right: 15),
+                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                selected: e.isSelected == true,
+                selectedColor: Theme.of(context).primaryColor,
+                backgroundColor: bgColor[10],
+                onSelected: (bool selected) {
+                  for (final element in tags) {
+                    if (element.id == e.id) {
+                      element.isSelected = selected;
+                    } else {
+                      if (isSingle) {
+                        element.isSelected = false;//单选
+                      }
+                    }
+                  }
+
+                  selectedTagsTmp = tags.where((e) => e.isSelected == true).toList();
+                  // selectDiseaseTypes = diseaseTypeshere((e) => e.isSelected == true).toList();
+                  setState1(() {});
+                  // debugPrint("${e.toString()}");
+                },
+              ),)).toList(),
+          );
+        }
     );
   }
 

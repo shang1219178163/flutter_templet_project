@@ -1,0 +1,104 @@
+
+
+class RootModel<T> {
+
+  RootModel({
+    this.code,
+    this.result,
+    this.application,
+    this.traceId,
+    this.message,
+  });
+
+  String? code;
+  T? result;
+
+  String? application;
+  String? traceId;
+  String? message;
+
+
+  RootModel.fromJson(Map<String, dynamic>? json) {
+    if (json == null) {
+      return;
+    }
+    code = json['code'];
+
+    switch (result) {
+      case String:
+      case bool:
+      case int:
+      case double:
+        {
+          result = json['result'] as T?;
+        }
+        break;
+      case List:
+        {
+
+        }
+        break;
+      case Map:
+        {
+        }
+        break;
+      default:
+        break;
+    }
+    // result = json['result'] != null ? DoctorListResultModel.fromJson(json['result']) : null;
+
+    application = json['application'];
+    traceId = json['traceId'];
+    message = json['message'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final data = <String, dynamic>{};
+    data['code'] = code;
+
+    data['application'] = application;
+    data['traceId'] = traceId;
+    data['message'] = message;
+    return data;
+  }
+}
+
+
+// class RootDetailModel<T> {
+//
+//   RootDetailModel({
+//     this.code,
+//     this.result,
+//     this.application,
+//     this.traceId,
+//     this.message,
+//   });
+//
+//   String? code;
+//   String? message;
+//   String? application;
+//   String? traceId;
+//
+//   T? result;
+//
+//   RootDetailModel.fromJson(Map<String, dynamic>? json) {
+//     if (json == null) {
+//       return;
+//     }
+//     code = json['code'];
+//     result = json['result'] as T?;
+//
+//     application = json['application'];
+//     traceId = json['traceId'];
+//     message = json['message'];
+//   }
+//
+//   Map<String, dynamic> toJson() {
+//     final data = <String, dynamic>{};
+//     data['code'] = code;
+//     data['application'] = application;
+//     data['traceId'] = traceId;
+//     data['message'] = message;
+//     return data;
+//   }
+// }
