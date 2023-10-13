@@ -10,11 +10,14 @@
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_templet_project/basicWidget/n_overlay.dart';
+import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/upload/image_service.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
+import 'package:flutter_templet_project/vendor/GetUtil.dart';
+import 'package:flutter_templet_project/vendor/easy_toast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:tuple/tuple.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 
 
@@ -24,10 +27,46 @@ mixin BottomSheetAvatarMixin<T extends StatefulWidget> on State<T> {
   // 相册选择器
   final ImagePicker _picker = ImagePicker();
 
+  /// 展示图片选择菜单
+  /// needCropp 是否需要裁剪(仅在 maxCount == 1 时有效)
+  /// maxCount 最大张数
+  chooseImage({
+    int maxCount = 9,
+    bool needCropp = false,
+    required ValueChanged<File> onChanged,
+  }) {
+    GetUtil.showSheetActions(
+        actions: [
+          Tuple2(0, NText('拍摄', ),),
+          Tuple2(1, NText('从相册选择', ),),
+        ],
+        onItem: (tag) {
+          if (tag == 0) {
+            takePhoto(
+              needCropp: needCropp,
+              onChanged: onChanged,
+            );
+          } else {
+            // chooseImagesByImagePicker(
+            //   isFile: isFile,
+            //   onChanged: onChanged,
+            // );
+
+            chooseImagesByWechatPicker(
+              maxCount: maxCount,
+              needCropp: needCropp,
+              onChanged: onChanged,
+            );
+          }
+        }
+    );
+  }
+
   // 更新头像
   updateAvatar({
-    bool needCropp = true,
-    Function(String? path)? cb,
+    int maxCount = 1,
+    bool needCropp = false,
+    required ValueChanged<File> onChanged,
   }) {
     final titles = ['拍摄', '从相册选择'];
 
@@ -37,9 +76,9 @@ mixin BottomSheetAvatarMixin<T extends StatefulWidget> on State<T> {
           onPressed: () {
             Navigator.of(context).pop();
             if (e == titles[0]) {
-              handleImageFromCamera(needCropp: needCropp, cb: cb);
+              takePhoto(needCropp: needCropp, onChanged: onChanged);
             } else {
-              handleImageFromPhotoAlbum(needCropp: needCropp, cb: cb);
+              chooseImagesByWechatPicker(needCropp: needCropp, onChanged: onChanged, maxCount: 1);
             }
           },
           child: Text(e),
@@ -55,80 +94,119 @@ mixin BottomSheetAvatarMixin<T extends StatefulWidget> on State<T> {
     ).toShowCupertinoModalPopup(context: context);
   }
 
-  /// 拍照获取图像
-  Future<String?> handleImageFromCamera({
-    bool needCropp = true,
-    required Function(String? path)? cb,
-  }) async {
-    final file = await _takePhoto();
-    if (file == null) {
-      NOverlay.showToast(context, message: '请重新拍摄',);
-      return null;
-    }
-
-    NOverlay.showLoading(context, message: "图片处理中...");
-
-    final compressImageFile = await file.toCompressImage();
-    if (!needCropp) {
-      NOverlay.hide();
-      cb?.call(compressImageFile.path);
-      return compressImageFile.path;
-    }
-
-    final cropImageFile = await compressImageFile.toCropImage();
-    NOverlay.hide();
-
-    cb?.call(cropImageFile.path);
-    return cropImageFile.path;
-  }
-
-  /// 从相册获取图像
-  Future<String?> handleImageFromPhotoAlbum({
-    bool needCropp = true,
-    Function(String? path)? cb,
-  }) async {
-    final file = await _chooseAvatarByWechatPicker();
-    if (file == null) {
-      NOverlay.showToast(context, message: '请重新选择',);
-      return null;
-    }
-    NOverlay.showLoading(context, message: "图片处理中...");
-
-    final compressImageFile = await file.toCompressImage();
-    if (!needCropp) {
-      NOverlay.hide();
-      cb?.call(compressImageFile.path);
-      return compressImageFile.path;
-    }
-
-    final cropImageFile = await compressImageFile.toCropImage();
-    NOverlay.hide();
-
-    cb?.call(cropImageFile.path);
-    return cropImageFile.path;
-  }
 
   /// 拍照
-  Future<File?> _takePhoto() async {
+  /// needCropp 是否需要裁剪(仅在 maxCount == 1 时有效)
+  /// onChanged 回调
+  Future<File?> takePhoto({
+    bool needCropp = false,
+    required ValueChanged<File> onChanged,
+  }) async {
     try {
-      final file = await _picker.pickImage(
+      // bool isGranted = await PhonePermission.checkCamera();
+      // if (!isGranted) {
+      //   return null;
+      // }
+
+      // 打开相机
+      final xfile = await _picker.pickImage(
         source: ImageSource.camera,
         imageQuality: 50,
       );
-      if (file == null) {
+      if (xfile == null) {
+        // BrunoUtil.showToast('程序异常,请重新拍摄');
         return null;
       }
-      var fileNew = File(file.path);
-      return fileNew;
+
+      var file = File(xfile.path);
+      final compressFile = await file.toCompressImage();
+      if (!needCropp) {
+        // int length = await compressFile.length();
+        onChanged(compressFile);
+        return compressFile;
+      }
+
+      final cropFile = await compressFile.toCropImage();
+
+      // int length = await cropFile.length();
+      onChanged(cropFile);
+      return cropFile;
     } catch (err) {
       openAppSettings();
     }
     return null;
   }
 
-  /// 通过微信相册选择器选择头像
-  Future<File?> _chooseAvatarByWechatPicker() async {
-    var maxCount = 1;
+  // /// 通过 ImagePicker 库选择图片
+  // chooseImagesByImagePicker({
+  //   int maxCount = 9,
+  //   double limit = 5,
+  //   required ValueChanged<File> onChanged,
+  // }) async {
+  //   try {
+  //     bool isGranted = await PhonePermission.checkPhotoAlbum();
+  //     if (!isGranted) {
+  //       return;
+  //     }
+  //     List<XFile> images = [];
+  //     if (maxCount == 1) {
+  //       final XFile? xfile = await _picker.pickImage(
+  //         source: ImageSource.gallery,
+  //       );
+  //       if (xfile == null) {
+  //         return;
+  //       }
+  //       images.add(xfile);
+  //     } else {
+  //       images = await _picker.pickMultiImage(
+  //         imageQuality: 50,
+  //       );
+  //     }
+  //
+  //     if (images.isEmpty) return;
+  //     if (images.length > maxCount) {
+  //       BrunoUtil.showToast('最多上传$maxCount张图片');
+  //       return;
+  //     }
+  //
+  //     images.map((item) async {
+  //       File file = File(item.path);
+  //       final fileNew = await file.toCompressImage();
+  //       final imagePath = fileNew.path;
+  //
+  //       int length = await fileNew.length();
+  //       bool isLimit = length > limit * 1024 * 1024;
+  //       if (isLimit) {
+  //         final fileSizeInfo = (length/1024/1024).toStringAsFixed(2);
+  //         debugPrint("fileSizeInfo: $imagePath ${fileSizeInfo}M");
+  //         BrunoUtil.showToast('图片体积超出限制, 请重新选择');
+  //         return;
+  //       }
+  //       onChanged(file);
+  //     }).toList();
+  //   } catch (err) {
+  //     openAppSettings();
+  //   }
+  // }
+
+  /// 通过微信相册选择器选择图片
+  /// needCropp 是否需要裁剪(仅在 maxCount == 1 时有效)
+  /// maxCount 最大张数
+  /// limit 图片大小限制(MB)
+  chooseImagesByWechatPicker({
+    bool needCropp = false,
+    maxCount = 9,
+    limit = 5,
+    required ValueChanged<File> onChanged,
+  }) async {
+    // bool isGranted = await PhonePermission.checkPhotoAlbum();
+    // if (!isGranted) {
+    //   return;
+    // }
+
+    if (!mounted) {
+      return;
+    }
 
     final entitys = await AssetPicker.pickAssets(
       context,
@@ -141,14 +219,51 @@ mixin BottomSheetAvatarMixin<T extends StatefulWidget> on State<T> {
     ) ?? [];
 
     if (entitys.isEmpty) {
-      return null;
+      return;
     }
-    final item = entitys[0];
-    final file = await item.file;
-    if (file == null) {
-      return null;
+    if (entitys.length > maxCount) {
+      EasyToast.showToast('最多上传$maxCount张图片');
+      return;
     }
-    return file;
+
+    if (maxCount == 1 && needCropp) {
+      final file = await entitys[0].file;
+      if (file == null) {
+        EasyToast.showToast('图片路径为空');
+        return;
+      }
+      EasyToast.showLoading("图片处理中...");
+      final fileNew = await file.toCropImage();
+      EasyToast.hideLoading();
+
+      // int length = await fileNew.length();
+      //
+      // final imagePath = fileNew.path;
+      onChanged(fileNew);
+      return;
+    }
+
+    entitys.map((item) async {
+      final file = await item.file;
+      // final imagePath = file?.path;
+      if (file == null) {
+        EasyToast.showToast('图片路径为空');
+        return;
+      }
+      var fileNew = await ImageService().compressAndGetFile(file);
+      final imagePath = fileNew.path;
+
+      var length = await fileNew.length();
+      var isLimit = length > limit * 1024 * 1024;
+      if (isLimit) {
+        final fileSizeInfo = (length/1024/1024).toStringAsFixed(2);
+        debugPrint("fileSizeInfo: $imagePath ${fileSizeInfo}M");
+        EasyToast.showToast('图片体积超出限制, 请重新选择');
+        return;
+      }
+      onChanged(fileNew);
+    }).toList();
   }
+  
 
 }

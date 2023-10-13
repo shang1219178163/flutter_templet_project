@@ -116,12 +116,12 @@ class _APPUserCenterPageState extends State<APPUserCenterPage> with BottomSheetA
           Expanded(
             child: InkWell(
               onTap: () async {
-                final val = await handleImageFromPhotoAlbum();
-                if (val == null) {
-                  return;
-                }
-                debugPrint("updateAvatar: $val");
-                avatarVN.value = val;
+                chooseImagesByWechatPicker(
+                    onChanged: (File val) {
+                      debugPrint("value: $val");
+                      avatarVN.value = val.path;
+                    }
+                );
                 // updateAvatar(
                 //   cb: (val){
                 //     if (val == null) {
