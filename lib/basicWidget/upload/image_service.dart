@@ -1,11 +1,15 @@
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:flutter_templet_project/cache/cache_asset_service.dart';
 import 'package:flutter_templet_project/extension/num_ext.dart';
+import 'package:flutter_templet_project/uti/color_util.dart';
+import 'package:flutter_templet_project/vendor/easy_toast.dart';
 
 import 'package:image_cropper/image_cropper.dart';
+import 'package:image_gallery_saver/image_gallery_saver.dart';
 
 
 /// 图片处理工具类
@@ -71,19 +75,100 @@ class ImageService{
     return file;
   }
 
-  /// 图片压缩
-  Future<String> compressAndGetFilePath(String imagePath, [String? targetPath,]) async {
-    try {
-      final file = File(imagePath);
-      final fileNew = await compressAndGetFile(file, targetPath);
-      final result = fileNew?.path ?? imagePath;
-      return result;
-    } catch (e) {
-      debugPrint("compressAndGetFilePath:${e.toString()}");
-    }
-    return imagePath;
-  }
 
+   /// 图像裁剪
+   Future<File> toCropImage(File file, {
+     int? maxWidth,
+     int? maxHeight,
+     bool showLoading = true,
+   }) async {
+     final sourcePath = file.path;
+
+     if(showLoading)EasyToast.showLoading("图片处理中...");
+
+     var croppedFile = await ImageCropper().cropImage(
+       sourcePath: sourcePath,
+       maxWidth: maxWidth,
+       maxHeight: maxHeight,
+       aspectRatioPresets: [
+         CropAspectRatioPreset.square,
+       ],
+       uiSettings: [
+         AndroidUiSettings(
+           toolbarTitle: '',
+           toolbarColor: Colors.blue,
+           toolbarWidgetColor: white,
+           initAspectRatio: CropAspectRatioPreset.original,
+           lockAspectRatio: false,
+         ),
+         IOSUiSettings(
+           title: 'Cropper',
+         ),
+       ],
+     );
+
+     if(showLoading)EasyToast.hideLoading();
+
+     if (croppedFile == null) {
+       return file;
+     }
+     return File(croppedFile.path);
+   }
+
+
+   /// 保存到相册
+   Future<bool> saveImage({
+     required String url,
+     bool showToast = true,
+   }) async {
+     final percentVN = ValueNotifier(0.0);
+
+     EasyToast.showLoading(
+         "文件下载中",
+         indicator: ValueListenableBuilder<double>(
+             valueListenable: percentVN,
+             builder: (context,  value, child){
+
+               return CircularProgressIndicator(
+                 value: value,
+               );
+             }
+         )
+     );
+
+
+     String? name;
+     try {
+       name = url.split("?").first.split("/").last;
+     } catch (e) {
+       debugPrint("saveVideo name: ${e.toString()}");
+       name = "tmp.png";
+     }
+
+     var cacheDir = await CacheAssetService().getDir();
+     String savePath = "${cacheDir.path}/$name";
+     await Dio().download(url, savePath,
+         onReceiveProgress: (received, total) {
+           if (total != -1) {
+             final percent = (received / total);
+             final percentStr = "${(percent * 100).toStringAsFixed(0)}%";
+             percentVN.value = percent;
+             // debugPrint("percentStr: $percentStr");
+           }
+         }
+     );
+     // debugPrint("savePath: ${savePath}");
+     EasyToast.hideLoading();
+
+     final result = await ImageGallerySaver.saveFile(savePath);
+     debugPrint("saveFile: ${result} $url");
+     final isSuccess = result["isSuccess"];
+     final message = isSuccess ? "已保存到相册" : "操作失败";
+     if (isSuccess && showToast) {
+       EasyToast.showToast(message,);
+     }
+     return isSuccess;
+   }
 }
 
 
@@ -96,42 +181,17 @@ extension ImageFileExt on File {
     return compressFile;
   }
 
-  /// 图像裁剪
+  /// 图片压缩
   Future<File> toCropImage({
     int? maxWidth,
     int? maxHeight,
+    bool showLoading = true,
   }) async {
-
-    try {
-      final sourcePath = path;
-
-      var croppedFile = await ImageCropper().cropImage(
-        sourcePath: sourcePath,
-        maxWidth: maxWidth,
-        maxHeight: maxHeight,
-        aspectRatioPresets: [
-          CropAspectRatioPreset.square,
-        ],
-        uiSettings: [
-          AndroidUiSettings(
-            toolbarTitle: '',
-            toolbarColor: Colors.blue,
-            toolbarWidgetColor: Colors.white,
-            initAspectRatio: CropAspectRatioPreset.original,
-            lockAspectRatio: false,
-          ),
-          IOSUiSettings(
-            title: 'Cropper',
-          ),
-        ],
-      );
-      if (croppedFile == null) {
-        return this;
-      }
-      return File(croppedFile.path);
-    } catch (e) {
-      debugPrint("toCropImage: $e");
-      return this;
-    }
+    var compressFile = await ImageService().toCropImage(this,
+      maxWidth: maxWidth,
+      maxHeight: maxHeight,
+      showLoading: showLoading,
+    );
+    return compressFile;
   }
 }
