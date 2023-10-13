@@ -33,7 +33,7 @@ class _StringTransformPageState extends State<StringTransformPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title ?? "$widget"),
+        title: Text("字符串转换"),
         // actions: ['done',].map((e) => TextButton(
         //   child: Text(e,
         //     style: TextStyle(color: Colors.white),
