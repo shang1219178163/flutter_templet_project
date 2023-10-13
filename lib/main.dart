@@ -361,7 +361,7 @@ class _MyHomePageState extends State<MyHomePage> {
     }
 
     final badgeChild = title != "消息" || badge == 0 ? SizedBox() : Container(
-      padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 2.w),
+      padding: EdgeInsets.symmetric(horizontal: 3, vertical: 2),
       decoration: const ShapeDecoration(
         color: Colors.red,
         shape: StadiumBorder(),

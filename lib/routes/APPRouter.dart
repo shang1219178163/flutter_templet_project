@@ -656,8 +656,8 @@ class APPRouter {
 }
 
 class AppPage {
-  // static const INITIAL = APPRouter.homePage;
-  static const INITIAL = APPRouter.developToolList;
+  static const INITIAL = APPRouter.homePage;
+  // static const INITIAL = APPRouter.developToolList;
 
   static final unknownRoute = GetPage(name: APPRouter.notFound, page: () => APPNotFoundPage(),);
 
