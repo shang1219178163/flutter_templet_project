@@ -413,7 +413,7 @@ class _SecondPageState extends State<SecondPage> {
               ),
             ),
             buildSection(
-              title: "NTextAndIcon + OutlinedButton",
+              title: "NLabelAndIcon + OutlinedButton",
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: iconDirectionItems().map((e) => OutlinedButton(
@@ -430,7 +430,7 @@ class _SecondPageState extends State<SecondPage> {
               ),
             ),
             buildSection(
-              title: "NTextAndIcon + ElevatedButton",
+              title: "NLabelAndIcon + ElevatedButton",
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: iconDirectionItems().map((e) => ElevatedButton(
