@@ -1,6 +1,6 @@
 
 
-class RootModel<T> {
+class RootModel<T extends Coding> {
 
   RootModel({
     this.code,
@@ -40,6 +40,7 @@ class RootModel<T> {
         break;
       case Map:
         {
+
         }
         break;
       default:
@@ -64,41 +65,16 @@ class RootModel<T> {
 }
 
 
-// class RootDetailModel<T> {
-//
-//   RootDetailModel({
-//     this.code,
-//     this.result,
-//     this.application,
-//     this.traceId,
-//     this.message,
-//   });
-//
-//   String? code;
-//   String? message;
-//   String? application;
-//   String? traceId;
-//
-//   T? result;
-//
-//   RootDetailModel.fromJson(Map<String, dynamic>? json) {
-//     if (json == null) {
-//       return;
-//     }
-//     code = json['code'];
-//     result = json['result'] as T?;
-//
-//     application = json['application'];
-//     traceId = json['traceId'];
-//     message = json['message'];
-//   }
-//
-//   Map<String, dynamic> toJson() {
-//     final data = <String, dynamic>{};
-//     data['code'] = code;
-//     data['application'] = application;
-//     data['traceId'] = traceId;
-//     data['message'] = message;
-//     return data;
-//   }
-// }
+interface class Coding {
+  // factory Codable(Map<String, dynamic>? json) {
+  //   throw UnimplementedError();
+  // }
+
+  factory Coding.fromJson(Map<String, dynamic>? json) {
+    throw UnimplementedError();
+  }
+
+  Map<String, dynamic> toJson() {
+    throw UnimplementedError();
+  }
+}
