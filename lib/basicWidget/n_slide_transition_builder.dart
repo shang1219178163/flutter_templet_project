@@ -1,3 +1,10 @@
+//
+//  NSlideTransitionBuilder.dart
+//  flutter_templet_project
+//
+//  Created by shang on 2023/10/16 10:42.
+//  Copyright © 2023/10/16 shang. All rights reserved.
+//
 
 
 import 'package:flutter/material.dart';

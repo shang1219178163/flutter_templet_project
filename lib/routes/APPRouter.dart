@@ -19,6 +19,8 @@ import 'package:flutter_templet_project/pages/PageLifecycleObserverDemo.dart';
 import 'package:flutter_templet_project/pages/RegExpDemo.dart';
 import 'package:flutter_templet_project/pages/StringTransformPage.dart';
 import 'package:flutter_templet_project/pages/ThemeColorDemo.dart';
+import 'package:flutter_templet_project/pages/demo/AnimatedSizeDemo.dart';
+import 'package:flutter_templet_project/pages/demo/AnimatedSizeDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/AppBarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/CompositedTransformTargetDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ContextMenuDemo.dart';
@@ -166,6 +168,7 @@ import 'package:flutter_templet_project/pages/operator_demo.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/SliverAppBarDemo.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/SliverPersistentHeaderDemo.dart';
 import 'package:flutter_templet_project/pages/system_color_page.dart';
+import 'package:flutter_templet_project/pages/system_curves_page.dart';
 import 'package:flutter_templet_project/pages/system_icons_page.dart';
 import 'package:flutter_templet_project/pages/test_page_one.dart';
 import 'package:flutter_templet_project/provider/ProxyProvider_demo.dart';
@@ -348,6 +351,8 @@ class APPRouter {
   static const animatedGroupDemo = '/animatedGroupDemo';
   static const animatedBuilderDemo = '/animatedBuilderDemo';
   static const animatedListSample = '/animatedListSample';
+  static const animatedSizeDemo = '/animatedSizeDemo';
+  static const animatedSizeDemoOne = '/animatedSizeDemoOne';
 
 
   static const textlessDemo = '/textlessDemo';
@@ -358,6 +363,8 @@ class APPRouter {
   static const alertSheetDemo = '/AlertSheetDemo';
   static const systemIconsPage = '/systemIconsPage';
   static const systemColorPage = '/systemColorPage';
+  static const systemCurvesPage = '/systemCurvesPage';
+
   static const gridViewDemo = '/GridViewDemo';
   static const gridPaperDemo = '/GridPaperDemo';
 
@@ -727,6 +734,9 @@ class AppPage {
     GetPage(name: APPRouter.alertSheetDemo, page: () => AlertSheetDemo(),),
     GetPage(name: APPRouter.systemIconsPage, page: () => SystemIconsPage(),),
     GetPage(name: APPRouter.systemColorPage, page: () => SystemColorPage(),),
+    GetPage(name: APPRouter.systemCurvesPage, page: () => SystemCurvesPage(),),
+
+
     GetPage(name: APPRouter.gridViewDemo, page: () => GridViewDemo(),),
     GetPage(name: APPRouter.pageViewDemo, page: () => PageViewDemo(),),
     GetPage(name: APPRouter.pageViewDemoThree, page: () => PageViewDemoThree(),),
@@ -774,6 +784,11 @@ class AppPage {
     GetPage(name: APPRouter.animatedBuilderDemo, page: () => AnimatedBuilderDemo(),),
     GetPage(name: APPRouter.animatedListDemo, page: () => AnimatedListDemo(),),
     GetPage(name: APPRouter.animatedListSample, page: () => AnimatedListSample(),),
+    GetPage(name: APPRouter.animatedSizeDemo, page: () => AnimatedSizeDemo(),),
+    GetPage(name: APPRouter.animatedSizeDemoOne, page: () => AnimatedSizeDemoOne(),),
+
+
+
 
     GetPage(name: APPRouter.futureBuilderDemo, page: () => FutureBuilderDemo(),),
     GetPage(name: APPRouter.streamBuilderDemo, page: () => StreamBuilderDemo(),),

@@ -170,7 +170,7 @@ class _OverlayDemoState extends State<OverlayDemo> {
               onPressed: () => NOverlay.showToast(
                 context,
                 message: 'NToast is awesome!',
-                onDismiss: (){
+                onDismiss: () {
                   debugPrint("onDismiss: ${DateTime.now()}");
                 },
                 child: Row(

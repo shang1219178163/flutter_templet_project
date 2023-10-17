@@ -30,7 +30,7 @@ class _DevelopToolListState extends State<DevelopToolList> {
     Tuple2("系统图标", APPRouter.systemIconsPage),
     Tuple2("系统颜色", APPRouter.systemColorPage),
     Tuple2("字符串转换", APPRouter.stringTransformPage),
-    Tuple2("json 转 model", APPRouter.jsonToDartPage),
+    Tuple2("json转model", APPRouter.jsonToDartPage),
 
   ];
 

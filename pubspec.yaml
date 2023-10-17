@@ -216,7 +216,9 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/images/
     - assets/data/
+    - assets/images/
 #    - assets/images/3.0x/
 #    - assets/images/2.0x/
+    - assets/images/curve/
+

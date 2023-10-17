@@ -521,6 +521,8 @@ var specials = [
   Tuple2(APPRouter.pageLifecycleFuncTest, "页面生命方法测试", ),
   Tuple2(APPRouter.systemIconsPage, "flutter 系统 Icons", ),
   Tuple2(APPRouter.systemColorPage, "flutter 系统 颜色", ),
+  Tuple2(APPRouter.systemCurvesPage, "flutter Curves动画效果", ),
+
   Tuple2(APPRouter.localImagePage, "本地图片", ),
   Tuple2(APPRouter.providerRoute, "providerRoute", ),
   Tuple2(APPRouter.stateManagerDemo, "状态管理", ),
@@ -575,6 +577,8 @@ var animateds = [
   Tuple2(APPRouter.animatedListDemo, "animatedListDemo", ),
   Tuple2(APPRouter.animatedListSample, "animatedListSample", ),
   Tuple2(APPRouter.animatedStaggerDemo, "staggerDemo", ),
+  Tuple2(APPRouter.animatedSizeDemo, "animatedSizeDemo", ),
+  Tuple2(APPRouter.animatedSizeDemoOne, "animatedSizeDemoOne", ),
 
 
 ];

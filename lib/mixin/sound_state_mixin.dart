@@ -52,8 +52,8 @@ mixin SoundStateMixin<T extends StatefulWidget> on State<T> {
 
   @override
   void initState() {
-    _mPlayer?.setLogLevel(Level.warning);
-    _mRecorder?.setLogLevel(Level.warning);
+    _mPlayer?.setLogLevel(Level.error);
+    _mRecorder?.setLogLevel(Level.error);
     debugPrint("_mPlayer:${_mPlayer.runtimeType.toString()}");
     debugPrint("_mRecorder:${_mRecorder.runtimeType.toString()}");
     _mPlayer!.openPlayer().then((value) {
