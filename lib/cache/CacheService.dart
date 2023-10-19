@@ -83,4 +83,82 @@ class CacheService {
     }
   }
 
+
+  setStringList(String key, List<String>? value) {
+    if (value == null) {
+      return;
+    }
+    prefs?.setStringList(key, value);
+  }
+
+  List<String>? getStringList(String key) {
+    return prefs?.getStringList(key);
+  }
+
+  setString(String key, String? value) {
+    if (value == null) {
+      return;
+    }
+    prefs?.setString(key, value);
+  }
+
+  String? getString(String key) {
+    final result = prefs?.getString(key);
+    return result;
+  }
+
+  setDouble(String key, double? value) {
+    if (value == null) {
+      return;
+    }
+    prefs?.setDouble(key, value);
+  }
+
+  double? getDouble(String key) {
+    return prefs?.getDouble(key);
+  }
+
+  setInt(String key, int? value) {
+    if (value == null) {
+      return;
+    }
+    prefs?.setInt(key, value);
+  }
+
+  int? getInt(String key) {
+    return prefs?.getInt(key);
+  }
+
+  setBool(String key, bool? value) {
+    if (value == null) {
+      return;
+    }
+    prefs?.setBool(key, value);
+  }
+
+  bool? getBool(String key) {
+    return prefs?.getBool(key);
+  }
+
+  setMap(String key, Map<String, dynamic>? value) {
+    if (value == null) {
+      return;
+    }
+    final jsonStr = jsonEncode(value);
+    setString(key, jsonStr);
+  }
+
+  Map<String, dynamic>? getMap(String key) {
+    var value = prefs?.getString(key);
+    if (value == null) {
+      return null;
+    }
+    Map<String, dynamic>? map = <String, dynamic>{};
+    try {
+      map = jsonDecode(value) as Map<String, dynamic>?;
+    } catch (e) {
+      debugPrint("getMap${e.toString()}");
+    }
+    return map;
+  }
 }

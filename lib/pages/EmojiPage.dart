@@ -9,6 +9,8 @@ import 'package:flutter_templet_project/extension/regexp_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:tuple/tuple.dart';
 
+import 'package:flutter_templet_project/basicWidget/NTargetFollower.dart';
+
 //https://getemoji.com/
 //https://emoji-copy-paste.com/
 
@@ -177,9 +179,26 @@ class _EmojiPageState extends State<EmojiPage> {
                                 ),
                                 child: Column(
                                   children: [
-                                    Text(e,
-                                      style: TextStyle(
-                                        fontSize: 30,
+                                    NTargetFollower(
+                                      target: Text(e,
+                                        style: TextStyle(
+                                          fontSize: 30,
+                                        ),
+                                      ),
+                                      follower: Material(
+                                        child: Container(
+                                            alignment: Alignment.center,
+                                            decoration: BoxDecoration(
+                                                color: Colors.blue,
+                                                borderRadius: BorderRadius.circular(5)
+                                            ),
+                                            padding: const EdgeInsets.all(10),
+                                            width: 50,
+                                            height: 100,
+                                            child: Text(e.runes.toList().toString(),
+                                              style: TextStyle(color: Colors.white),
+                                            )
+                                        ),
                                       ),
                                     ),
                                     // Text(e.runes.toList().toString(),

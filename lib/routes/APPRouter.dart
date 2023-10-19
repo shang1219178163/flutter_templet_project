@@ -12,6 +12,7 @@ import 'package:flutter_templet_project/pages/AppLaunchPage.dart';
 import 'package:flutter_templet_project/pages/DataTypeDemo.dart';
 import 'package:flutter_templet_project/pages/DevelopToolList.dart';
 import 'package:flutter_templet_project/pages/EmojiPage.dart';
+import 'package:flutter_templet_project/pages/NTargetFollowerDemo.dart';
 import 'package:flutter_templet_project/pages/PageLifecycleFuncTest.dart';
 import 'package:flutter_templet_project/pages/DialogChoiceChipDemo.dart';
 import 'package:flutter_templet_project/pages/ReflectDemo.dart';
@@ -634,6 +635,7 @@ class APPRouter {
   static const compositedTransformTargetDemo = '/compositedTransformTargetDemo';
   static const drawCanvasDemo = '/drawCanvasDemo';
   static const contextMenuDemo = '/contextMenuDemo';
+  static const targetFollowerDemo = '/targetFollowerDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -1011,6 +1013,7 @@ class AppPage {
     GetPage(name: APPRouter.compositedTransformTargetDemo, page: () => CompositedTransformTargetDemo(),),
     GetPage(name: APPRouter.drawCanvasDemo, page: () => DrawCanvasDemo(),),
     GetPage(name: APPRouter.contextMenuDemo, page: () => ContextMenuDemo(),),
+    GetPage(name: APPRouter.targetFollowerDemo, page: () => NTargetFollowerDemo(),),
 
 
   ];

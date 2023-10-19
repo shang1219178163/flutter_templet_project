@@ -54,6 +54,8 @@ PODS:
     - Mantle
     - SDWebImage
     - SDWebImageWebPCoder
+  - flutter_isolate (0.0.1):
+    - Flutter
   - flutter_sound (9.2.13):
     - Flutter
     - flutter_sound_core (= 9.2.13)
@@ -143,6 +145,7 @@ DEPENDENCIES:
   - Flutter (from `Flutter`)
   - flutter_boost (from `.symlinks/plugins/flutter_boost/ios`)
   - flutter_image_compress_common (from `.symlinks/plugins/flutter_image_compress_common/ios`)
+  - flutter_isolate (from `.symlinks/plugins/flutter_isolate/ios`)
   - flutter_sound (from `.symlinks/plugins/flutter_sound/ios`)
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
   - http_proxy (from `.symlinks/plugins/http_proxy/ios`)
@@ -202,6 +205,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_boost/ios"
   flutter_image_compress_common:
     :path: ".symlinks/plugins/flutter_image_compress_common/ios"
+  flutter_isolate:
+    :path: ".symlinks/plugins/flutter_isolate/ios"
   flutter_sound:
     :path: ".symlinks/plugins/flutter_sound/ios"
   fluttertoast:
@@ -258,9 +263,10 @@ SPEC CHECKSUMS:
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   flutter_boost: 3e8a6e28c86d24c83be5b2fab067746dc77a1ad6
   flutter_image_compress_common: ec1d45c362c9d30a3f6a0426c297f47c52007e3e
+  flutter_isolate: 0edf5081826d071adf21759d1eb10ff5c24503b5
   flutter_sound: c60effa2a350fb977885f0db2fbc4c1ad5160900
   flutter_sound_core: 26c10e5832e76aaacfae252d8925232281c486ae
-  fluttertoast: eb263d302cc92e04176c053d2385237e9f43fad0
+  fluttertoast: 48c57db1b71b0ce9e6bba9f31c940ff4b001293c
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   http_proxy: 20f129d3e1c70cfdef92530b374c619832027729
   image_cropper: a3291c624a953049bc6a02e1f8c8ceb162a24b25
@@ -293,4 +299,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: bc4d661222d5878f32c2452cc85448fe230861dd
 
-COCOAPODS: 1.12.1
+COCOAPODS: 1.13.0

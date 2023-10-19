@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/list_view_segment_control.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/alignment_ext.dart';
+import 'package:flutter_templet_project/extension/widget_ext.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 
 class CompositedTransformTargetDemo extends StatefulWidget {
@@ -38,24 +41,35 @@ class _CompositedTransformTargetDemoState extends State<CompositedTransformTarge
           child: Text(e,
             style: TextStyle(color: Colors.white),
           ),
-          onPressed: () => debugPrint(e),)
+          onPressed: () {
+            Get.to(() => CustomSlideDemo());
+          },)
         ).toList(),
         elevation: 0,
         bottom: buildTab(),
       ),
       body: SafeArea(
-        child: Center(
+        child: Container(
+          decoration: BoxDecoration(
+            // color: Colors.yellow,
+            border: Border.all(color: Colors.blue),
+            borderRadius: BorderRadius.all(Radius.circular(0)),
+          ),
+          alignment: Alignment.center,
           child: GestureDetector(
-            onTap: _toggleOverlay,
+            // onTap: _toggleOverlay,
             // onPanStart: (e) => _showOverlay(),
             // onPanEnd: (e) => _hideOverlay(),
             // onPanUpdate: updateIndicator,
+            onLongPressStart: (e) => _showOverlay(),
+            onLongPressEnd: (e) => _hideOverlay(),
+            onLongPressMoveUpdate: updateIndicatorLongPress,
             child: CompositedTransformTarget(
               link: layerLink,
               child: Image.asset(
                 "assets/images/avatar.png",
                 width: 80, height: 80,
-              ),
+              ).toColoredBox(),
             ),
           ),
         ),
@@ -67,7 +81,8 @@ class _CompositedTransformTargetDemoState extends State<CompositedTransformTarge
   Widget buildListViewHorizontal({
     String title = "",
     required ValueChanged<int> onChanged,
-    int index = 0}) {
+    int index = 0
+  }) {
     var items = AlignmentExt.allCases.map((e) => e.toString().split(".").last).toList();
     return Row(
       children: [
@@ -102,6 +117,7 @@ class _CompositedTransformTargetDemoState extends State<CompositedTransformTarge
               title: "Target:",
               onChanged: (int value) {
                 targetAnchor = AlignmentExt.allCases[value];
+                debugPrint("targetAnchor: $targetAnchor");
                 _overlayEntry.markNeedsBuild();
               }
             ),
@@ -110,6 +126,7 @@ class _CompositedTransformTargetDemoState extends State<CompositedTransformTarge
               title: "Follower:",
               onChanged: (int value) {
                 followerAnchor = AlignmentExt.allCases[value];
+                debugPrint("followerAnchor: $followerAnchor");
                 _overlayEntry.markNeedsBuild();
               }
             ),
@@ -134,7 +151,7 @@ class _CompositedTransformTargetDemoState extends State<CompositedTransformTarge
   }
 
   void _hideOverlay() {
-    _overlayEntry?.remove();
+    _overlayEntry.remove();
   }
 
   void updateIndicator(DragUpdateDetails details) {
@@ -142,6 +159,11 @@ class _CompositedTransformTargetDemoState extends State<CompositedTransformTarge
     _overlayEntry.markNeedsBuild();
   }
 
+
+  void updateIndicatorLongPress(LongPressMoveUpdateDetails details) {
+    indicatorOffset = details.localPosition;
+    _overlayEntry?.markNeedsBuild();
+  }
 
   OverlayEntry _createOverlayEntry(Offset localPosition) {
     indicatorOffset = localPosition;
@@ -152,16 +174,19 @@ class _CompositedTransformTargetDemoState extends State<CompositedTransformTarge
           // offset: indicatorOffset,
           followerAnchor: followerAnchor,
           targetAnchor: targetAnchor,
-          offset: Offset(5,0),
+          // offset: Offset(5,0),
           child: Material(
             child: Container(
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                    color: Colors.blue,
-                    borderRadius: BorderRadius.circular(5)),
-                padding: const EdgeInsets.all(10),
-                width: 50,
-                child: const Text("toly",style: TextStyle(color: Colors.white),)),
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: Colors.blue,
+                borderRadius: BorderRadius.circular(5)
+              ),
+              padding: const EdgeInsets.all(10),
+              width: 50,
+              height: 100,
+              child: const Text("toly",style: TextStyle(color: Colors.white),)
+            ),
           ),
         ),
       ),

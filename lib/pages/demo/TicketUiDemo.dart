@@ -51,13 +51,13 @@ class _TicketUiDemoState extends State<TicketUiDemo> {
             return Column(
               children: [
                 Container(
-                  width: 200,
+                  width: 300,
                   height: 200,
                   color: Colors.black.withOpacity(0.1),
                   child: CustomPaint(
                     painter: NTicketDividerPainter(
                     // borderColor: Colors.black.withOpacity(0.5),
-                    borderColor: Colors.blue,
+                    borderColor: Colors.red,
                       borderStrokeWidth: 1,
                       bgColor: Colors.transparent,
                       cutoutRadius: 15,

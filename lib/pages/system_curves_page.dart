@@ -101,6 +101,7 @@ class _SystemCurvesPageState extends State<SystemCurvesPage> {
 
                 return Wrap(
                   runSpacing: 8,
+                  alignment: WrapAlignment.center,
                   children: items.map((e) {
 
                     return Container(

@@ -66,6 +66,8 @@ dependencies:
 
 
   permission_handler: ^7.2.0
+  #设备信息
+  device_info_plus: ^9.0.3
   share: ^2.0.1
 #  path_provider: ^2.0.1
   provider: ^6.0.1

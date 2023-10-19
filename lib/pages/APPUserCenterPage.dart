@@ -18,7 +18,7 @@ import 'package:flutter_templet_project/main.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/navigator_ext.dart';
 import 'package:flutter_templet_project/extension/dialog_ext.dart';
-import 'package:flutter_templet_project/mixin/bottom_sheet_avatar_mixin.dart';
+import 'package:flutter_templet_project/mixin/bottom_sheet_image_mixin.dart';
 import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:flutter_templet_project/uti/color_util.dart';
 
@@ -34,7 +34,7 @@ class APPUserCenterPage extends StatefulWidget{
   _APPUserCenterPageState createState() => _APPUserCenterPageState();
 }
 
-class _APPUserCenterPageState extends State<APPUserCenterPage> with BottomSheetAvatarMixin{
+class _APPUserCenterPageState extends State<APPUserCenterPage> with BottomSheetImageMixin{
 
   // 我的 列表菜单
   final services = <Tuple2<String, IconData>>[

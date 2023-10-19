@@ -105,7 +105,7 @@ class _IMChatPageState extends State<IMChatPage> with
   @override
   Widget build(BuildContext context) {
     // _controller.forward();
-    dataList.value = List.generate(2, (index) => "index_$index");
+    dataList.value = List.generate(20, (index) => "index_$index");
 
     return Scaffold(
       appBar: AppBar(
