@@ -13,7 +13,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/upload/image_service.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
-import 'package:flutter_templet_project/vendor/GetUtil.dart';
+import 'package:flutter_templet_project/uti/permission_util.dart';
+import 'package:flutter_templet_project/uti/get_util.dart';
 import 'package:flutter_templet_project/vendor/easy_toast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -23,10 +24,7 @@ import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 
 /// 头像更换(回调返回单张图片的路径)
 /// 默认图片压缩,图片裁剪
-mixin BottomSheetAvatarMixin<T extends StatefulWidget> on State<T> {
-  // 相册选择器
-  final ImagePicker _picker = ImagePicker();
-
+mixin BottomSheetImageMixin<T extends StatefulWidget> on State<T> {
   /// 展示图片选择菜单
   /// needCropp 是否需要裁剪(仅在 maxCount == 1 时有效)
   /// maxCount 最大张数
@@ -35,7 +33,7 @@ mixin BottomSheetAvatarMixin<T extends StatefulWidget> on State<T> {
     bool needCropp = false,
     required ValueChanged<File> onChanged,
   }) {
-    GetUtil.showSheetActions(
+    GetSheet.showSheetActions(
         actions: [
           Tuple2(0, NText('拍摄', ),),
           Tuple2(1, NText('从相册选择', ),),
@@ -103,12 +101,13 @@ mixin BottomSheetAvatarMixin<T extends StatefulWidget> on State<T> {
     required ValueChanged<File> onChanged,
   }) async {
     try {
-      // bool isGranted = await PhonePermission.checkCamera();
-      // if (!isGranted) {
-      //   return null;
-      // }
+      bool isGranted = await PermissionUtil.checkCamera();
+      if (!isGranted) {
+        return null;
+      }
 
       // 打开相机
+      final _picker = ImagePicker();
       final xfile = await _picker.pickImage(
         source: ImageSource.camera,
         imageQuality: 50,
@@ -199,10 +198,10 @@ mixin BottomSheetAvatarMixin<T extends StatefulWidget> on State<T> {
     limit = 5,
     required ValueChanged<File> onChanged,
   }) async {
-    // bool isGranted = await PhonePermission.checkPhotoAlbum();
-    // if (!isGranted) {
-    //   return;
-    // }
+    bool isGranted = await PermissionUtil.checkPhotoAlbum();
+    if (!isGranted) {
+      return;
+    }
 
     if (!mounted) {
       return;
@@ -232,9 +231,9 @@ mixin BottomSheetAvatarMixin<T extends StatefulWidget> on State<T> {
         EasyToast.showToast('图片路径为空');
         return;
       }
-      EasyToast.showLoading("图片处理中...");
+      // EasyToast.showLoading("图片处理中...");
       final fileNew = await file.toCropImage();
-      EasyToast.hideLoading();
+      // EasyToast.hideLoading();
 
       // int length = await fileNew.length();
       //
