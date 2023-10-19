@@ -12,6 +12,6 @@ import 'package:flutter/material.dart';
 
 typedef GenericWidgetBuilder<T> = Widget Function(BuildContext context, T generic);
 
-typedef VoidCallbackWidgetBuilder = Widget Function(BuildContext context, VoidCallback onCallback);
+typedef VoidCallbackWidgetBuilder = Widget Function(BuildContext context, VoidCallback cb);
 
-
+typedef ValueChangedWidgetBuilder = Widget Function<T>(BuildContext context, ValueChanged<T> onChanged);
