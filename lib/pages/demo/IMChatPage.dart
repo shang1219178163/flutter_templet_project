@@ -94,7 +94,9 @@ class _IMChatPageState extends State<IMChatPage> with
 
   @override
   void initState() {
-    // TODO: implement initState
+    _scrollController.addListener(() {
+      longPressMenuHide();
+    });
     if (isExpand) {
       _controller.value = 1;
     }
