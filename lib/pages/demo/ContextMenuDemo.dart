@@ -3,7 +3,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/ContextMenuRegion.dart';
+import 'package:flutter_templet_project/basicWidget/NContextMenu.dart';
+import 'package:flutter_templet_project/basicWidget/NContextMenuRegion.dart';
+import 'package:tuple/tuple.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ContextMenuDemo extends StatefulWidget {
@@ -26,13 +28,13 @@ class _ContextMenuDemoState extends State<ContextMenuDemo> {
 
   // final PlatformCallback onChangedPlatform;
 
-  final TextEditingController _materialController = TextEditingController(
+  final _materialController = TextEditingController(
     text: 'TextField shows the default menu still.',
   );
-  final TextEditingController _cupertinoController = TextEditingController(
+  final _cupertinoController = TextEditingController(
     text: 'CupertinoTextField shows the default menu still.',
   );
-  final TextEditingController _editableController = TextEditingController(
+  final _editableController = TextEditingController(
     text: 'EditableText has no default menu, so it shows the custom one.',
   );
 
@@ -55,7 +57,7 @@ class _ContextMenuDemoState extends State<ContextMenuDemo> {
           // ),
         ],
       ),
-      body: ContextMenuRegion(
+      body: NContextMenuRegion(
         contextMenuBuilder: (context, primaryAnchor, [secondaryAnchor]) {
           return AdaptiveTextSelectionToolbar.buttonItems(
             anchors: TextSelectionToolbarAnchors(
@@ -103,9 +105,27 @@ class _ContextMenuDemoState extends State<ContextMenuDemo> {
               backgroundCursorColor: Colors.white,
             ),
           ),
+          NContextMenu(
+            items: const [
+              '保存',
+              '分享',
+              '编辑'
+            ],
+            onItem: (val){
+              debugPrint(val);
+            },
+            child: Image.asset(
+              'assets/images/404.png',
+              height: 200,
+            )
+          ),
         ],
       ),
     );
   }
 
 }
+
+
+
+

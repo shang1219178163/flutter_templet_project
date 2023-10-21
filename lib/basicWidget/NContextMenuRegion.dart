@@ -10,9 +10,9 @@ typedef ContextMenuBuilder = Widget Function(BuildContext context, Offset offset
 /// Shows and hides the context menu based on user gestures.
 ///
 /// By default, shows the menu on right clicks and long presses.
-class ContextMenuRegion extends StatefulWidget {
-  /// Creates an instance of [ContextMenuRegion].
-  const ContextMenuRegion({
+class NContextMenuRegion extends StatefulWidget {
+  /// Creates an instance of [NContextMenuRegion].
+  const NContextMenuRegion({
     super.key,
     required this.child,
     required this.contextMenuBuilder,
@@ -25,13 +25,13 @@ class ContextMenuRegion extends StatefulWidget {
   final Widget child;
 
   @override
-  State<ContextMenuRegion> createState() => _ContextMenuRegionState();
+  State<NContextMenuRegion> createState() => _NContextMenuRegionState();
 }
 
-class _ContextMenuRegionState extends State<ContextMenuRegion> {
+class _NContextMenuRegionState extends State<NContextMenuRegion> {
   Offset? _longPressOffset;
 
-  final ContextMenuController _contextMenuController = ContextMenuController();
+  final _contextMenuController = ContextMenuController();
 
   static bool get _longPressEnabled {
     switch (defaultTargetPlatform) {
