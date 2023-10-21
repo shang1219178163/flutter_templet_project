@@ -501,6 +501,7 @@ var list = [
   Tuple2(APPRouter.compositedTransformTargetDemo, "compositedTransformTargetDemo", ),
   Tuple2(APPRouter.contextMenuDemo, "contextMenuDemo", ),
   Tuple2(APPRouter.targetFollowerDemo, "targetFollowerDemo", ),
+  Tuple2(APPRouter.tapRegionDemo, "tapRegionDemo", ),
 
 
 ];

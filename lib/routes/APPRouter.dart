@@ -32,6 +32,7 @@ import 'package:flutter_templet_project/pages/demo/ImageStretchDemo.dart';
 import 'package:flutter_templet_project/pages/demo/SearchDemo.dart';
 import 'package:flutter_templet_project/pages/demo/SegmentedControlDemo.dart';
 import 'package:flutter_templet_project/pages/demo/SwitchDemo.dart';
+import 'package:flutter_templet_project/pages/demo/TapRegionDemo.dart';
 import 'package:flutter_templet_project/pages/demo/WeatherInfoPage.dart';
 import 'package:flutter_templet_project/pages/demo/AutoLayoutDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AlertDialogTagSelectDemo.dart';
@@ -636,6 +637,7 @@ class APPRouter {
   static const drawCanvasDemo = '/drawCanvasDemo';
   static const contextMenuDemo = '/contextMenuDemo';
   static const targetFollowerDemo = '/targetFollowerDemo';
+  static const tapRegionDemo = '/tapRegionDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -1014,6 +1016,7 @@ class AppPage {
     GetPage(name: APPRouter.drawCanvasDemo, page: () => DrawCanvasDemo(),),
     GetPage(name: APPRouter.contextMenuDemo, page: () => ContextMenuDemo(),),
     GetPage(name: APPRouter.targetFollowerDemo, page: () => NTargetFollowerDemo(),),
+    GetPage(name: APPRouter.tapRegionDemo, page: () => TapRegionDemo(),),
 
 
   ];
