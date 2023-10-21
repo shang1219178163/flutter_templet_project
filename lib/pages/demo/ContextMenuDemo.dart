@@ -1,7 +1,10 @@
 
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/ContextMenuRegion.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ContextMenuDemo extends StatefulWidget {
 
@@ -52,26 +55,26 @@ class _ContextMenuDemoState extends State<ContextMenuDemo> {
           // ),
         ],
       ),
-      // body: ContextMenuRegion(
-      //   contextMenuBuilder: (context, primaryAnchor, [secondaryAnchor]) {
-      //     return AdaptiveTextSelectionToolbar.buttonItems(
-      //       anchors: TextSelectionToolbarAnchors(
-      //         primaryAnchor: primaryAnchor,
-      //         secondaryAnchor: secondaryAnchor as Offset?,
-      //       ),
-      //       buttonItems: <ContextMenuButtonItem>[
-      //         ContextMenuButtonItem(
-      //           onPressed: () {
-      //             ContextMenuController.removeAny();
-      //             Navigator.of(context).pop();
-      //           },
-      //           label: 'Back',
-      //         ),
-      //       ],
-      //     );
-      //   },
-      //   child: buildChild(),
-      // ),
+      body: ContextMenuRegion(
+        contextMenuBuilder: (context, primaryAnchor, [secondaryAnchor]) {
+          return AdaptiveTextSelectionToolbar.buttonItems(
+            anchors: TextSelectionToolbarAnchors(
+              primaryAnchor: primaryAnchor,
+              secondaryAnchor: secondaryAnchor as Offset?,
+            ),
+            buttonItems: <ContextMenuButtonItem>[
+              ContextMenuButtonItem(
+                onPressed: () {
+                  ContextMenuController.removeAny();
+                  Navigator.of(context).pop();
+                },
+                label: 'Back',
+              ),
+            ],
+          );
+        },
+        child: buildChild(),
+      ),
     );
   }
 

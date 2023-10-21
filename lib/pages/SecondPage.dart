@@ -113,7 +113,7 @@ class _SecondPageState extends State<SecondPage> {
                 },
                 child: Container(
                   padding: EdgeInsets.all(10),
-                  child: Text("离离原上草, 一岁一枯荣")
+                  child: SelectableText("离离原上草, 一岁一枯荣")
                 ),
               ),
             ),
