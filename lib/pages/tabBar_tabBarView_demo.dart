@@ -503,6 +503,7 @@ var list = [
   Tuple2(APPRouter.targetFollowerDemo, "targetFollowerDemo", ),
   Tuple2(APPRouter.tapRegionDemo, "tapRegionDemo", ),
   Tuple2(APPRouter.glowingOverscrollIndicatorDemo, "glowingOverscrollIndicatorDemo", ),
+  Tuple2(APPRouter.progressClipperDemo, "progressClipperDemo", ),
 
 
 ];
