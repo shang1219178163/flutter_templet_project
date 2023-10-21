@@ -215,7 +215,7 @@ class _IMTextfieldBarState extends State<IMTextfieldBar> with WidgetsBindingObse
                           // setState(() {});
                         },
                         child: Image(
-                          image: "icon_add_circle.png".toAssetImage(),
+                          image: "icon_emoji_circle.png".toAssetImage(),
                           width: 30.w,
                           height: 30.w,
                           // color: color,
