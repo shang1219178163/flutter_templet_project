@@ -179,6 +179,19 @@ extension DateTimeExt on DateTime {
     var result = DateTimeExt.stringFromDate(date: dateTime, format: format);
     return result;
   }
+
+
+  // void describe() {
+  //   var now = DateTime.now();
+  //   var diff = this.difference(DateTime(now.year, now.month, now.day));
+  //   var result = switch (diff) {
+  //     Duration(inDays: -1 ) => '昨天',
+  //     Duration(inDays: 0 ) => '今天',
+  //     Duration(inDays: 1 ) => '明天',
+  //     Duration(inDays: int d) => d < 0 ? '${d.abs()} 天前' : '$d 天后',
+  //   };
+  //   debugPrint("$year/$month/$day 是 $result");
+  // }
 }
 
 
