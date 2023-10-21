@@ -13,7 +13,7 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-int randomInt({required int min, required int max}) {
+int randomInt({int min = 0, required int max}) {
   return min + Random().nextInt(max - min);
 }
 

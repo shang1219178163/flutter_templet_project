@@ -7,16 +7,23 @@ import 'dart:math';
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_templet_project/basicWidget/n_long_press_menu.dart';
+import 'package:flutter_templet_project/basicWidget/n_network_image.dart';
+import 'package:flutter_templet_project/basicWidget/n_target_follower.dart';
+import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/n_textfield.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/editable_text_ext.dart';
+import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/basicWidget/im_textfield_bar.dart';
 import 'package:flutter_templet_project/mixin/bottom_sheet_phrases_mixin.dart';
 import 'package:flutter_templet_project/mixin/keyboard_change_mixin.dart';
 import 'package:flutter_templet_project/pages/EmojiPage.dart';
+import 'package:flutter_templet_project/uti/R.dart';
 import 'package:flutter_templet_project/uti/color_util.dart';
+import 'package:flutter_templet_project/vendor/easy_toast.dart';
 import 'package:tuple/tuple.dart';
 
 class IMChatPage extends StatefulWidget {
@@ -72,6 +79,12 @@ class _IMChatPageState extends State<IMChatPage> with
   static final RegExp emojiReg = RegExp(
       r'(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])');
 
+  /// 长按菜单专用
+  final List<OverlayEntry> longPressEntries = [];
+  /// 长按菜单专用
+  VoidCallback? longPressOnHide;
+
+
   @override
   void dispose() {
     // TODO: implement dispose
@@ -90,6 +103,29 @@ class _IMChatPageState extends State<IMChatPage> with
     super.initState();
   }
 
+  @override
+  void didPush() {
+    debugPrint("$this didPush");
+  }
+
+  @override
+  void didPop() {
+    debugPrint("$this didPop");
+    longPressMenuHide();
+  }
+
+  @override
+  void didPushNext() {
+    debugPrint("$this didPushNext");
+    longPressMenuHide();
+  }
+
+  @override
+  void didPopNext() {
+    debugPrint("$this didPopNext");
+  }
+
+
   final isKeyboardVisibleVN = ValueNotifier(false);
 
   @override
@@ -101,6 +137,7 @@ class _IMChatPageState extends State<IMChatPage> with
       // isExpand.value = false;
     }
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -117,29 +154,7 @@ class _IMChatPageState extends State<IMChatPage> with
           onPressed: () => debugPrint(e),)
         ).toList(),
         elevation: 0,
-        bottom: PreferredSize(
-          preferredSize: Size.fromHeight(48),
-          child: ValueListenableBuilder<List<String>>(
-             valueListenable: dataList,
-             builder: (context,  value, child){
-
-               // if (value.length < 3) {
-               //   return SizedBox();
-               // }
-                return Container(
-                  width: double.maxFinite,
-                  height: 48,
-                  decoration: BoxDecoration(
-                    color: context.scaffoldBackgroundColor,
-                    // border: Border.all(color: Colors.blue),
-                    borderRadius: BorderRadius.all(Radius.circular(0.w)),
-                  ),
-                  alignment: Alignment.center,
-                  child: Text("${value.length}条数据"),
-                );
-              }
-          ),
-        ),
+        // bottom: buildAppbarBottom(),
       ),
       body: buildBody(),
       // body: buildListView(),
@@ -150,6 +165,32 @@ class _IMChatPageState extends State<IMChatPage> with
       //   },
       //   child: Icon(Icons.vertical_align_top),
       // ),
+    );
+  }
+
+  PreferredSize buildAppbarBottom() {
+    return PreferredSize(
+      preferredSize: Size.fromHeight(48),
+      child: ValueListenableBuilder<List<String>>(
+          valueListenable: dataList,
+          builder: (context,  value, child){
+
+            // if (value.length < 3) {
+            //   return SizedBox();
+            // }
+            return Container(
+              width: double.maxFinite,
+              height: 48,
+              decoration: BoxDecoration(
+                color: context.scaffoldBackgroundColor,
+                // border: Border.all(color: Colors.blue),
+                borderRadius: BorderRadius.all(Radius.circular(0.w)),
+              ),
+              alignment: Alignment.center,
+              child: Text("${value.length}条数据"),
+            );
+          }
+      ),
     );
   }
 
@@ -199,21 +240,284 @@ class _IMChatPageState extends State<IMChatPage> with
                   itemBuilder: (context, index) {
                     final e = list[index];
 
+                    final isOwner = index %2 == 0;
                     return InkWell(
                       onTap: (){
                         debugPrint("index: ${index}, $e");
                       },
-                      child: ListTile(title: Text(e),
-                        subtitle: Text("index: ${index}"),
+                      child: buildChatCell(
+                        modelIndex: index,
+                        imgUrl: R.image.urls[randomInt(max: R.image.urls.length, )],
+                        isOwner: isOwner,
+                        name: "路人甲",
+                        title: "title",
+                        contentChild: buildContentChild(
+                          modelIndex: index,
+                          isOwner: isOwner,
+                          // text: "buildContentChild",
+                          text: "聊一会" * randomInt(min: 1, max: 6,),
+                        ),
                       ),
+                      // child: ListTile(title: Text(e),
+                      //   subtitle: Text("index: ${index}"),
+                      // ),
                     );
                   },
-                ).toColoredBox(),
+                ).toColoredBox(color: Colors.black12),
               ),
             ),
           )
         );
       }
+    );
+  }
+
+  Widget buildChatCell({
+    required int modelIndex,
+    required bool isOwner,
+    required String imgUrl,
+    required String name,
+    String title = "",
+    String extra = "",
+    String time = "",
+    double spacing = 16,
+    double runSpacing = 12,
+    double imgSize = 40,
+    double imgGap = 10,
+    Widget? contentChild,
+  }) {
+    // if (model.restructureMsgBody?.contains("inviteID") == true) {
+    //   final dataSignalModel = model.restructureMsgBodyFirst?.msgContent?.dataSignalModel;
+    //   final dataSignalDataModel = model.restructureMsgBodyFirst?.msgContent?.dataSignalDataModel;
+    //   debugPrint("$dataSignalModel$dataSignalDataModel");
+    // }
+    final contentBgColor = isOwner ? primaryColor : bgColor;
+    final contentFontColor = Colors.white;
+
+    var contentWidget = contentChild ??
+        Container(
+          color: contentBgColor,
+          padding: const EdgeInsets.only(left: 4, bottom: 4),
+          child: NText(
+            "--" * 3,
+            fontSize: 14,
+            color: contentFontColor,
+            maxLines: 100,
+          ),
+        );
+
+    return Container(
+      // color: ColorExt.random,
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+      child: Column(
+        children: [
+            Container(
+              padding: const EdgeInsets.only(left: 4, bottom: 12),
+              child: NText(
+                "${DateTime.now().toString().substring(0, 19)}",
+                fontSize: 13,
+              ),
+            ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            // mainAxisSize: MainAxisSize.min,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(
+                  right: 8,
+                ),
+                child: Opacity(
+                  opacity: !isOwner ? 1 : 0,
+                  child: InkWell(
+                    onTap: () {
+
+                    },
+                    child: NNetworkImage(
+                      url: imgUrl,
+                      width: imgSize,
+                      height: imgSize,
+                      radius: 5,
+                    ),
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: isOwner ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+                  children: [
+                    if (!isOwner)
+                      Container(
+                        padding: const EdgeInsets.only(left: 4, bottom: 4),
+                        child: NText(
+                          name,
+                          fontSize: 13,
+                          maxLines: 100,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    contentWidget,
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  left: 8,
+                ),
+                child: Opacity(
+                  opacity: isOwner ? 1 : 0,
+                  child: NNetworkImage(
+                    url: imgUrl,
+                    width: imgSize,
+                    height: imgSize,
+                    radius: 5,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  buildContentChild({
+    required int modelIndex,
+    required bool isOwner,
+    required String text,
+  }) {
+    final contentBgColor = Colors.green;
+    final contentFontColor = Colors.white;
+
+    double bottomRightRadius = isOwner != true ? 8 : 0;
+    double bottomLeftRadius = isOwner == true ? 8 : 0;
+
+    final borderRadius = BorderRadius.circular(4);
+
+    Widget child = buildTextChild(
+      text: text,
+      isOwner: true,
+      borderRadius: borderRadius,
+      contentBgColor: contentBgColor,
+      contentFontColor: contentFontColor,
+    );
+
+
+    late final menueItems = <Tuple2<String, String>>[
+      Tuple2("复制", "icon_copy.png",),
+      Tuple2("引用", "icon_quote.png",),
+      Tuple2("撤回", "icon_revoke.png",),
+    ];
+
+    if (menueItems.isEmpty) {
+      return child;
+    }
+
+    child = NTargetFollower(
+        targetAnchor: isOwner ? Alignment.topRight : Alignment.topLeft,
+        followerAnchor: isOwner ? Alignment.bottomRight : Alignment.bottomLeft,
+        // targetAnchor: isOwner ? Alignment.topCenter : Alignment.topCenter,
+        // followerAnchor: isOwner ? Alignment.bottomCenter : Alignment.bottomCenter,
+        entries: longPressEntries,
+        offset: Offset(0, -8),
+        onLongPressEnd: (e) {
+          // 勿删
+        },
+        target: child,
+        followerBuilder: (context, onHide) {
+          longPressOnHide = onHide;
+
+          // debugPrint("${DateTime.now()} followerBuilder:");
+          return NLongPressMenu(
+            items: menueItems.map((e) => Tuple2(e.item1, e.item2.toAssetImage())).toList(),
+            onItem: (Tuple2<String, AssetImage> t) {
+              onHide();
+              debugPrint("onChanged_$t");
+              EasyToast.showToast(t.item1);
+            }
+          );
+        }
+    );
+    return child;
+  }
+
+  /// 长按菜单隐藏
+  longPressMenuHide() {
+    longPressOnHide?.call();
+  }
+
+  Widget buildCellChild({
+    required bool? isOwner,
+    Widget? image,
+    required String? text,
+    Color? contentBgColor,
+    Color? contentFontColor,
+    BorderRadius? borderRadius,
+  }) {
+    // String? text = model.restructureMsgBodyFirst?.msgContent?.text;
+    // final contentBgColor = isOwner == true ? primary : bgColor;
+    // final contentFontColor = isOwner == true ? Colors.white : fontColor;
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 9),
+      constraints: const BoxConstraints(minHeight: 37),
+      margin: isOwner == true ? const EdgeInsets.only(right: 6) : const EdgeInsets.only(left: 6),
+      decoration: BoxDecoration(
+        color: contentBgColor,
+        borderRadius: borderRadius,
+      ),
+      // constraints: BoxConstraints().loosen(),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (isOwner != true && image != null) image,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: NText(
+                text ?? "",
+              // textAlign: TextAlign.right,
+                fontSize: 15,
+                color: contentFontColor,
+                maxLines: 100,
+                fontWeight: FontWeight.w500
+            ),
+          ),
+          if (isOwner == true && image != null) image,
+        ],
+      ),
+    );
+  }
+
+  Widget buildTextChild({
+    required String? text,
+    required bool isOwner,
+    Color? contentBgColor,
+    Color? contentFontColor,
+    BorderRadius? borderRadius,
+  }) {
+    // String? text = model.restructureMsgBodyFirst?.msgContent?.text;
+    if (text == null) {
+      return const SizedBox();
+    }
+    // final contentBgColor = isOwner == true ? primary : bgColor;
+    // final contentFontColor = isOwner == true ? Colors.white : fontColor;
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 9),
+      decoration: BoxDecoration(
+        color: contentBgColor,
+        borderRadius: borderRadius,
+      ),
+      margin: isOwner ? const EdgeInsets.only(right: 6) : const EdgeInsets.only(left: 6),
+      constraints: const BoxConstraints(minHeight: 37),
+      // constraints: BoxConstraints().loosen(),
+      child: NText(
+        text,
+        // textAlign: TextAlign.right,
+        fontSize: 16,
+        color: contentFontColor,
+        maxLines: 100,
+      ),
     );
   }
 

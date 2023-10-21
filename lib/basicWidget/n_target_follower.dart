@@ -1,5 +1,5 @@
 //
-//  NTargetFollower.dart
+//  n_target_follower.dart
 //  flutter_templet_project
 //
 //  Created by shang on 2023/10/18 14:05.
@@ -10,7 +10,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/custom_type_util.dart';
 
-
+/// 关联组件
 class NTargetFollower extends StatefulWidget {
 
   NTargetFollower({
@@ -22,30 +22,28 @@ class NTargetFollower extends StatefulWidget {
     this.onTap,
     this.onLongPressEnd,
     required this.target,
-    required this.follower,
-    this.followerBuilder,
-    this.entries = const [],
+    required this.followerBuilder,
+    this.entries,
   }) : super(key: key);
 
-
-  final Alignment followerAnchor;
   final Alignment targetAnchor;
+  final Alignment followerAnchor;
 
   final bool showWhenUnlinked;
+
   final Offset offset;
 
   final GestureTapCallback? onTap;
 
+  /// 实现此方法则弹窗不会自动关闭,需手动关闭
   final GestureLongPressEndCallback? onLongPressEnd;
 
-  VoidCallbackWidgetBuilder? followerBuilder;
-
-
-  final List<OverlayEntry> entries;
-
+  /// 传入此参数则页面仅显示一个
+  final List<OverlayEntry>? entries;
 
   final Widget target;
-  final Widget? follower;
+
+  VoidCallbackWidgetBuilder? followerBuilder;
 
 
   @override
@@ -64,7 +62,7 @@ class _NTargetFollowerState extends State<NTargetFollower> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.follower == null) {
+    if (widget.followerBuilder == null) {
       return widget.target;
     }
 
@@ -133,7 +131,7 @@ class _NTargetFollowerState extends State<NTargetFollower> {
           followerAnchor: widget.followerAnchor,
           offset: widget.offset,
           showWhenUnlinked: widget.showWhenUnlinked,
-          child: widget.followerBuilder?.call(context, _hideOverlay) ?? widget.follower,
+          child: widget.followerBuilder?.call(context, _hideOverlay),
         ),
       ),
     );

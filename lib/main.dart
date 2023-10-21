@@ -12,6 +12,7 @@ import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 // import 'package:http_proxy/http_proxy.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -176,6 +177,7 @@ class MyApp extends StatelessWidget {
     //     "/": (context) => MyHomePage(),
     //     "/TwoPage": (context) => TwoPage(),
     //   },
+      builder: EasyLoading.init(),
     );
 
     return ScreenUtilInit(
