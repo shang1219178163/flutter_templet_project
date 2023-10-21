@@ -3,7 +3,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 
-
+/// 环形进度指示器
 class CircleSectorProgressIndicator extends StatelessWidget {
 
   CircleSectorProgressIndicator({
