@@ -81,50 +81,23 @@ class _IMChatPageState extends State<IMChatPage> with
 
   /// 长按菜单专用
   final List<OverlayEntry> longPressEntries = [];
-  /// 长按菜单专用
-  VoidCallback? longPressOnHide;
 
 
   @override
   void dispose() {
     // TODO: implement dispose
-    _controller.dispose();
+    // _controller.dispose();
     super.dispose();
   }
 
   @override
   void initState() {
-    _scrollController.addListener(() {
-      longPressMenuHide();
-    });
     if (isExpand) {
       _controller.value = 1;
     }
 
     dataList.value = List.generate(20, (index) => "index_$index");
     super.initState();
-  }
-
-  @override
-  void didPush() {
-    debugPrint("$this didPush");
-  }
-
-  @override
-  void didPop() {
-    debugPrint("$this didPop");
-    longPressMenuHide();
-  }
-
-  @override
-  void didPushNext() {
-    debugPrint("$this didPushNext");
-    longPressMenuHide();
-  }
-
-  @override
-  void didPopNext() {
-    debugPrint("$this didPopNext");
   }
 
 
@@ -429,26 +402,29 @@ class _IMChatPageState extends State<IMChatPage> with
         },
         target: child,
         followerBuilder: (context, onHide) {
-          longPressOnHide = onHide;
-
           // debugPrint("${DateTime.now()} followerBuilder:");
-          return NLongPressMenu(
-            items: menueItems.map((e) => Tuple2(e.item1, e.item2.toAssetImage())).toList(),
-            onItem: (Tuple2<String, AssetImage> t) {
+          return TapRegion(
+            onTapInside: (tap) {
+              debugPrint('On Tap Inside!!');
+            },
+            onTapOutside: (tap) {
+              debugPrint('On Tap Outside!!');
               onHide();
-              debugPrint("onChanged_$t");
-              EasyToast.showToast(t.item1);
-            }
+            },
+            child: NLongPressMenu(
+              items: menueItems.map((e) => Tuple2(e.item1, e.item2.toAssetImage())).toList(),
+              onItem: (Tuple2<String, AssetImage> t) {
+                onHide();
+                debugPrint("onChanged_$t");
+                EasyToast.showToast(t.item1);
+              }
+            ),
           );
         }
     );
     return child;
   }
 
-  /// 长按菜单隐藏
-  longPressMenuHide() {
-    longPressOnHide?.call();
-  }
 
   Widget buildCellChild({
     required bool? isOwner,
