@@ -502,6 +502,7 @@ var list = [
   Tuple2(APPRouter.contextMenuDemo, "contextMenuDemo", ),
   Tuple2(APPRouter.targetFollowerDemo, "targetFollowerDemo", ),
   Tuple2(APPRouter.tapRegionDemo, "tapRegionDemo", ),
+  Tuple2(APPRouter.glowingOverscrollIndicatorDemo, "glowingOverscrollIndicatorDemo", ),
 
 
 ];
