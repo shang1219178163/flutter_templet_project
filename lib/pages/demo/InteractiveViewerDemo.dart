@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// 交互式放大缩小
 class InteractiveViewerDemo extends StatefulWidget {
 
   const InteractiveViewerDemo({

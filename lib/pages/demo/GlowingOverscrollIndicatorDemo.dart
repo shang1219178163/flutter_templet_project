@@ -17,8 +17,6 @@ class GlowingOverscrollIndicatorDemo extends StatefulWidget {
 
 class _GlowingOverscrollIndicatorDemoState extends State<GlowingOverscrollIndicatorDemo> {
 
-  final _scrollController = ScrollController();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
