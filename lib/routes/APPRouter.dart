@@ -29,6 +29,7 @@ import 'package:flutter_templet_project/pages/demo/DrawCanvasDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DropdownMenuDemo.dart';
 import 'package:flutter_templet_project/pages/demo/GestureDetectorDemo.dart';
 import 'package:flutter_templet_project/pages/demo/GlowingOverscrollIndicatorDemo.dart';
+import 'package:flutter_templet_project/pages/demo/HeroDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ImageStretchDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ProgressClipperDemo.dart';
 import 'package:flutter_templet_project/pages/demo/SearchDemo.dart';
@@ -642,6 +643,7 @@ class APPRouter {
   static const tapRegionDemo = '/tapRegionDemo';
   static const glowingOverscrollIndicatorDemo = '/glowingOverscrollIndicatorDemo';
   static const progressClipperDemo = '/progressClipperDemo';
+  static const heroDemo = '/heroDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -1023,6 +1025,7 @@ class AppPage {
     GetPage(name: APPRouter.tapRegionDemo, page: () => TapRegionDemo(),),
     GetPage(name: APPRouter.glowingOverscrollIndicatorDemo, page: () => GlowingOverscrollIndicatorDemo(),),
     GetPage(name: APPRouter.progressClipperDemo, page: () => ProgressClipperDemo(),),
+    GetPage(name: APPRouter.heroDemo, page: () => HeroDemo(),),
 
 
   ];

@@ -328,7 +328,7 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
 }
 
 /// 元祖总数组
-var tuples = [
+var tuples = <Tuple2<String, List<Tuple2<String, String>>>>[
   Tuple2("数据类型", dataTypes),
   Tuple2("特殊功能", specials),
   Tuple2("动画相关", animateds),
@@ -342,7 +342,7 @@ var tuples = [
 ];
 
 
-var list = [
+var list = <Tuple2<String, String>>[
   Tuple2(APPRouter.materialDemo, "materialDemo", ),
   Tuple2(APPRouter.alertDialogDemo, "AlertDialog", ),
   Tuple2(APPRouter.alertDialogTagSelectDemo, "alertDialogTagSelectDemo", ),
@@ -504,16 +504,17 @@ var list = [
   Tuple2(APPRouter.tapRegionDemo, "tapRegionDemo", ),
   Tuple2(APPRouter.glowingOverscrollIndicatorDemo, "glowingOverscrollIndicatorDemo", ),
   Tuple2(APPRouter.progressClipperDemo, "progressClipperDemo", ),
+  Tuple2(APPRouter.heroDemo, "heroDemo", ),
 
 
 ];
 
-var slivers = [
+var slivers = <Tuple2<String, String>>[
   Tuple2(APPRouter.sliverFamilyDemo, "SliverFamilyDemo", ),
 
 ];
 
-var specials = [
+var specials = <Tuple2<String, String>>[
   Tuple2(APPRouter.themeColorDemo, "themeColor", ),
   Tuple2(APPRouter.emojiPage, "emoji", ),
   Tuple2(APPRouter.operatorDemo, "特殊操作符", ),
@@ -570,7 +571,7 @@ var specials = [
 
 ];
 
-var animateds = [
+var animateds = <Tuple2<String, String>>[
   // Tuple2(APPRouter.animatedIconDemo, "AnimatedIconDemo", ),
   Tuple2(APPRouter.animatedDemo, "animatedDemo", ),
 
@@ -620,7 +621,7 @@ var customs = [
 
 ];
 
-var vendors = [
+var vendors = <Tuple2<String, String>>[
   Tuple2(APPRouter.carouselSliderDemo, "carouselSliderDemo", ),
   Tuple2(APPRouter.timelinesDemo, "timelinesDemo", ),
   Tuple2(APPRouter.timelineDemo, "timelineDemo", ),
@@ -657,7 +658,7 @@ var vendors = [
 
 ];
 
-var others = [
+var others = <Tuple2<String, String>>[
   Tuple2(APPRouter.notFound, "notFound", ),
   Tuple2(APPRouter.firstPage, "firstPage", ),
   Tuple2(APPRouter.fourthPage, "fourthPage", ),
@@ -681,14 +682,14 @@ var others = [
 
 ];
 
-var forms = [
+var forms = <Tuple2<String, String>>[
   Tuple2(APPRouter.autocompleteDemo, "autocompleteDemo", ),
   Tuple2(APPRouter.autofillGroupDemo, "autofillGroupDemo", ),
   Tuple2(APPRouter.inputDatePickerFormFieldDemo, "inputDatePickerFormFieldDemo", ),
 
 ];
 
-var dataTypes = [
+var dataTypes = <Tuple2<String, String>>[
   Tuple2(APPRouter.dataTypeDemo, "数据类型", ),
   Tuple2(APPRouter.regExpDemo, "正则匹配", ),
   Tuple2(APPRouter.enumDemo, "枚举研究", ),
