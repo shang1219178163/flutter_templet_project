@@ -25,6 +25,13 @@ class PermissionUtil {
     required String name,
     VoidCallback? onConfirm,
   }) async {
+    if ([
+      Platform.isIOS,
+      Platform.isAndroid
+    ].contains(true) == false) {
+      return true;
+    }
+
     var status = await permission.status;
 
     final isGranted = [
@@ -70,6 +77,13 @@ class PermissionUtil {
 
   /// 检查相册权限
   static Future<bool> checkPhotoAlbum({VoidCallback? onConfirm}) async {
+    if ([
+      Platform.isIOS,
+      Platform.isAndroid
+    ].contains(true) == false) {
+      return true;
+    }
+
     if (Platform.isIOS) {
       var permission = Permission.photos;
       return PermissionUtil.check(
