@@ -505,6 +505,8 @@ var list = <Tuple2<String, String>>[
   Tuple2(APPRouter.glowingOverscrollIndicatorDemo, "glowingOverscrollIndicatorDemo", ),
   Tuple2(APPRouter.progressClipperDemo, "progressClipperDemo", ),
   Tuple2(APPRouter.heroDemo, "heroDemo", ),
+  Tuple2(APPRouter.hitTestBehaviorDemo, "hitTestBehaviorDemo", ),
+  Tuple2(APPRouter.qrcodePage, "qrcodePage", ),
 
 
 ];

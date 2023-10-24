@@ -62,7 +62,7 @@ class HitTest extends StatelessWidget {
                 children: <Widget>[
                   GestureDetector(
                     onTap: () => debugPrint("Tapped"),
-                    child: ExpandedHitTestArea(child: Text("<")),
+                    child: ExpandedHitTestArea(child: Text("<aaaaa")),
                   ),
                   SizedBox(height: 20),
                   Text("Title"),

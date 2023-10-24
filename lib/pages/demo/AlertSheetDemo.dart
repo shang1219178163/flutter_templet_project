@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/im_reciple_bottom_sheet.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:get/get.dart';
@@ -23,7 +24,16 @@ class AlertSheetDemo extends StatefulWidget {
 
 class _AlertSheetDemoState extends State<AlertSheetDemo> with BottomSheetMixin {
 
-  var titles = ["默认样式", "ListTile", "添加子视图", "自定义", "单选列表", "多选列表", "6", "7", "8"];
+  var titles = [
+    "默认样式",
+    "ListTile",
+    "添加子视图",
+    "自定义",
+    "单选列表",
+    "多选列表",
+    "6",
+    "presentCupertinoActionSheet",
+    "8"];
 
   final title = "新版本 v${2.1}";
   final message = """
@@ -36,9 +46,8 @@ class _AlertSheetDemoState extends State<AlertSheetDemo> with BottomSheetMixin {
 
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
+      backgroundColor: Colors.black.withOpacity(0.05),
         appBar: AppBar(
           title: Text("$widget"),
         ),
@@ -167,11 +176,11 @@ class _AlertSheetDemoState extends State<AlertSheetDemo> with BottomSheetMixin {
           );
         }
         break;
-      // case 8:
-      //   {
-      //
-      //   }
-      //   break;
+      case 8:
+        {
+          onSendRecipel();
+        }
+        break;
 
       default:
           showAlertSheet();
@@ -272,7 +281,7 @@ class _AlertSheetDemoState extends State<AlertSheetDemo> with BottomSheetMixin {
       ;
     }
 
-  void _showChioceList({required bool isMutiple}){
+  _showChioceList({required bool isMutiple}){
 
       CupertinoActionSheet(
         title: Text(title, style: TextStyle(fontSize: 18, color: Colors.black)),
@@ -299,6 +308,29 @@ class _AlertSheetDemoState extends State<AlertSheetDemo> with BottomSheetMixin {
           .toShowCupertinoModalPopup(context: context)
       ;
     }
+
+  /// 开处方
+  onSendRecipel() {
+    onItem (){
+      debugPrint("onItem");
+    }
+    IMRecipleBottomSheet(
+      onWestMedicine: onItem,
+      onJC: onItem,
+      onMedicalAppliancee: onItem,
+      onChineseMedicinee: onItem,
+      onBefore: (index) {
+
+      },
+    ).toShowModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.white70,
+      barrierColor: Colors.transparent,
+    );
+  }
+
+
+
 }
 
 

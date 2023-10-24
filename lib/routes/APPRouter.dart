@@ -30,6 +30,7 @@ import 'package:flutter_templet_project/pages/demo/DropdownMenuDemo.dart';
 import 'package:flutter_templet_project/pages/demo/GestureDetectorDemo.dart';
 import 'package:flutter_templet_project/pages/demo/GlowingOverscrollIndicatorDemo.dart';
 import 'package:flutter_templet_project/pages/demo/HeroDemo.dart';
+import 'package:flutter_templet_project/pages/demo/HitTestBehaviorDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ImageStretchDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ProgressClipperDemo.dart';
 import 'package:flutter_templet_project/pages/demo/SearchDemo.dart';
@@ -78,6 +79,7 @@ import 'package:flutter_templet_project/pages/demo/UploadFileDemo.dart';
 import 'package:flutter_templet_project/pages/demo/LongCaptureWidgetDemo.dart';
 import 'package:flutter_templet_project/pages/demo/enumDemo.dart';
 import 'package:flutter_templet_project/pages/demo/box_shadow_demo_one.dart';
+import 'package:flutter_templet_project/pages/demo/rp_template_qrcode_page.dart';
 import 'package:flutter_templet_project/pages/homeSrollDemo.dart';
 import 'package:flutter_templet_project/pages/demo/BuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ButtonStyleDemo.dart';
@@ -644,6 +646,8 @@ class APPRouter {
   static const glowingOverscrollIndicatorDemo = '/glowingOverscrollIndicatorDemo';
   static const progressClipperDemo = '/progressClipperDemo';
   static const heroDemo = '/heroDemo';
+  static const hitTestBehaviorDemo = '/hitTestBehaviorDemo';
+  static const qrcodePage = '/qrcodePage';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -1026,6 +1030,8 @@ class AppPage {
     GetPage(name: APPRouter.glowingOverscrollIndicatorDemo, page: () => GlowingOverscrollIndicatorDemo(),),
     GetPage(name: APPRouter.progressClipperDemo, page: () => ProgressClipperDemo(),),
     GetPage(name: APPRouter.heroDemo, page: () => HeroDemo(),),
+    GetPage(name: APPRouter.hitTestBehaviorDemo, page: () => HitTestBehaviorDemo(),),
+    GetPage(name: APPRouter.qrcodePage, page: () => QrcodePage(),),
 
 
   ];
