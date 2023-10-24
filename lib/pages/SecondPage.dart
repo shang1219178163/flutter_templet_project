@@ -600,6 +600,10 @@ class _SecondPageState extends State<SecondPage> {
               alignment: Alignment.center,
               child: Text("dash_painter"),
             ),
+            // Container(
+            //   decoration: TriangleDecoration(color: Colors.red, size: 8.0),
+            //   child: NText("TriangleDecoration"),
+            // ),
             SizedBox(height: 20,),
 
           ],

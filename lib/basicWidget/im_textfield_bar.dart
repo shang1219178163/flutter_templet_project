@@ -5,6 +5,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_templet_project/basicWidget/im_sound_record_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_textfield.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
@@ -135,33 +136,26 @@ class _IMTextfieldBarState extends State<IMTextfieldBar> with WidgetsBindingObse
       onSubmitted: widget.onSubmitted,
     );
 
-    final box = GestureDetector(
-      onLongPressStart: (details){
-        debugPrint("onLongPressStart");
+    final box = IMSoundRecordBar(
+      height: 48,
+      onRecordStart: () async {
+        // debugPrint("${DateTime.now()} onRecordStart");
+        // await soundStartRecord();
       },
-      onLongPressEnd: (details){
-        debugPrint("onLongPressEnd");
+      onRecordEnd: (bool isCancel) async {
+        // debugPrint("${DateTime.now()} onRecordEnd");
+        // final fileURL = await stopSoundRecorder();
+        // debugPrint("${DateTime.now()} onRecordEnd fileURL: $fileURL");
+        // // play(fromURI: fileURL);//add test
+        // if (isCancel) {
+        //   return;
+        // }
+        // if (soundDuration <= 1) {
+        //   EasyToast.showToast("说话时间太短");
+        //   return;
+        // }
+
       },
-      onLongPressCancel: () {
-        debugPrint("onLongPressCancel");
-      },
-      child: Container(
-        height: 48,
-        alignment: Alignment.center,
-        // padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.w),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.all(Radius.circular(4.w)),
-        ),
-        child: Text("按住说话",
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 18.sp,
-            fontWeight: FontWeight.bold,
-            color: fontColor
-          ),
-        ),
-      ),
     );
 
     return Container(
