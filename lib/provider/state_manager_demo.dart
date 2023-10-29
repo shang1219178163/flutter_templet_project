@@ -28,6 +28,7 @@ class _StateManagerDemoState extends State<StateManagerDemo> {
     Tuple2("ValueNotifier<T>", APPRouter.providerListDemo),
     Tuple2("RxDart+Provider", APPRouter.rxDartProviderDemo),
     Tuple2("getx", APPRouter.getxStateDemo),
+    Tuple2("getxStateDemoNew", APPRouter.getxStateDemoNew),
     Tuple2("proxyProviderDemo", APPRouter.proxyProviderDemo),
     Tuple2("providerDemo", APPRouter.providerDemo),
 

@@ -179,6 +179,7 @@ import 'package:flutter_templet_project/pages/system_curves_page.dart';
 import 'package:flutter_templet_project/pages/system_icons_page.dart';
 import 'package:flutter_templet_project/pages/test_page_one.dart';
 import 'package:flutter_templet_project/provider/ProxyProvider_demo.dart';
+import 'package:flutter_templet_project/provider/getx_state_demo_new.dart';
 import 'package:flutter_templet_project/provider/provider_demo.dart';
 import 'package:flutter_templet_project/provider/provider_demo_one.dart';
 import 'package:flutter_templet_project/vendor/SVGAImageDemo.dart';
@@ -458,6 +459,8 @@ class APPRouter {
   static const stateManagerDemo = '/StateManagerDemo';
 
   static const getxStateDemo = '/getxStateDemo';
+  static const getxStateDemoNew = '/getxStateDemoNew';
+
   static const responsiveColumnDemo = '/responsiveColumnDemo';
   static const testPage = '/testPage';
   static const testPageOne = '/testPageOne';
@@ -838,6 +841,9 @@ class AppPage {
     GetPage(name: APPRouter.rxDartProviderDemo, page: () => RxDartProviderDemo(),),
     GetPage(name: APPRouter.stateManagerDemo, page: () => StateManagerDemo(),),
     GetPage(name: APPRouter.getxStateDemo, page: () => GetxStateDemo(),),
+    GetPage(name: APPRouter.getxStateDemoNew, page: () => GetxStateDemoNew(),),
+
+
     GetPage(name: APPRouter.responsiveColumnDemo, page: () => ResponsiveColumnDemo(),),
 
 

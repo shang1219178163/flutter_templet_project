@@ -13,10 +13,12 @@ import 'package:get/get.dart';
 class GetxStateDemo extends StatelessWidget {
   const GetxStateDemo({Key? key}) : super(key: key);
 
+
   @override
   Widget build(BuildContext context) {
     /// 通过依赖注入方式实例化的控制器
     final counter = Get.put(CounterController());
+
     return Scaffold(
       appBar: AppBar(title: const Text("GetX"),),
       body: Center(
@@ -40,9 +42,13 @@ class GetxStateDemo extends StatelessWidget {
 
             const SizedBox(height: 30,),
             ElevatedButton( // 按钮点击count值++
-              onPressed: () => counter.increase(),
+              onPressed: (){
+                counter.increase();
+              },
               child: const Text("点击count++"),
             ),
+
+
           ],
         ),
       ),
