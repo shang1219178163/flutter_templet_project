@@ -48,6 +48,7 @@ class NTextfield extends StatefulWidget {
     this.fillColor = bgColor,
     this.focusColor = Colors.white,
     this.radius = 4,
+    this.isCollapsed,
     this.enabledBorder,
     this.focusedBorder,
     this.prefixIconBuilder,
@@ -82,6 +83,9 @@ class NTextfield extends StatefulWidget {
   final Color? focusColor;
   /// 圆角
   final double radius;
+
+  // true代表取消textfield最小高度限制
+  final bool? isCollapsed;
 
   final InputBorder? enabledBorder;
   final InputBorder? focusedBorder;
@@ -151,6 +155,7 @@ class _NTextfieldState extends State<NTextfield> {
       ),
       decoration: InputDecoration(
         filled: true,
+        isCollapsed: widget.isCollapsed ?? false,
         fillColor: widget.focusColor,
         contentPadding: widget.contentPadding ?? const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
         border: InputBorder.none,
