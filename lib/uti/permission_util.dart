@@ -23,46 +23,37 @@ class PermissionUtil {
   static Future<bool> check({
     required Permission permission,
     required String name,
-    VoidCallback? onConfirm,
-  }) async {
-    if ([
-      Platform.isIOS,
-      Platform.isAndroid
-    ].contains(true) == false) {
-      return true;
-    }
-
-    var status = await permission.status;
-
-    final isGranted = [
+    List<PermissionStatus> statuses = const [
       PermissionStatus.granted,
       PermissionStatus.limited,
-    ].contains(status);
+    ],
+    /// 权限名称
+    VoidCallback? onConfirm,
+  }) async {
+    var status = await permission.status;
+
+    final isGranted = statuses.contains(status);
     if (isGranted) {
       return true;
     }
 
-    var statusMap = await [
+    Map<Permission, PermissionStatus> statusMap = await [
       permission,
     ].request();
 
-    if (statusMap[permission] == PermissionStatus.permanentlyDenied ||
-        statusMap[permission] == PermissionStatus.denied) {
+    if (!statuses.contains(statusMap[permission])) {
       // GetDialog.showConfirm(
       //     title: '提示',
       //     message: '$name权限被禁用，请到设置中打开',
       //     confirm: onConfirm ??
-      //         () {
+      //             () {
       //           Get.back();
       //           openAppSettings();
       //         });
       return false;
     }
 
-    final result = [
-      PermissionStatus.granted,
-      PermissionStatus.limited,
-    ].contains(statusMap[permission]);
+    final result = statuses.contains(statusMap[permission]);
     return result;
   }
 

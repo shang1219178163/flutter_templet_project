@@ -136,7 +136,7 @@ class _IMTextfieldBarState extends State<IMTextfieldBar> with WidgetsBindingObse
       onSubmitted: widget.onSubmitted,
     );
 
-    final box = IMSoundRecordBar(
+    final soundRecordBar = IMSoundRecordBar(
       height: 48,
       onRecordStart: () async {
         // debugPrint("${DateTime.now()} onRecordStart");
@@ -192,7 +192,7 @@ class _IMTextfieldBarState extends State<IMTextfieldBar> with WidgetsBindingObse
                       ),
                     ),
                     Expanded(
-                      child: isVoice ? box : textfield,
+                      child: isVoice ? soundRecordBar : textfield,
                     ),
                     Padding(
                       padding: EdgeInsets.only(left: widget.spacing),
