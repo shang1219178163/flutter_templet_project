@@ -32,6 +32,8 @@ import 'package:flutter_templet_project/pages/demo/GlowingOverscrollIndicatorDem
 import 'package:flutter_templet_project/pages/demo/HeroDemo.dart';
 import 'package:flutter_templet_project/pages/demo/HitTestBehaviorDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ImageStretchDemo.dart';
+import 'package:flutter_templet_project/pages/demo/MenuAnchorDemo.dart';
+import 'package:flutter_templet_project/pages/demo/MenuEntryDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ProgressClipperDemo.dart';
 import 'package:flutter_templet_project/pages/demo/SearchDemo.dart';
 import 'package:flutter_templet_project/pages/demo/SegmentedControlDemo.dart';
@@ -651,6 +653,8 @@ class APPRouter {
   static const heroDemo = '/heroDemo';
   static const hitTestBehaviorDemo = '/hitTestBehaviorDemo';
   static const qrcodePage = '/qrcodePage';
+  static const menuAnchorDemo = '/menuAnchorDemo';
+  static const myMenuBarDemo = '/myMenuBarDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -1038,6 +1042,8 @@ class AppPage {
     GetPage(name: APPRouter.heroDemo, page: () => HeroDemo(),),
     GetPage(name: APPRouter.hitTestBehaviorDemo, page: () => HitTestBehaviorDemo(),),
     GetPage(name: APPRouter.qrcodePage, page: () => QrcodePage(),),
+    GetPage(name: APPRouter.menuAnchorDemo, page: () => MenuAnchorDemo(),),
+    GetPage(name: APPRouter.myMenuBarDemo, page: () => MyMenuBarDemo(),),
 
 
   ];

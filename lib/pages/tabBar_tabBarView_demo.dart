@@ -507,6 +507,8 @@ var list = <Tuple2<String, String>>[
   Tuple2(APPRouter.heroDemo, "heroDemo", ),
   Tuple2(APPRouter.hitTestBehaviorDemo, "hitTestBehaviorDemo", ),
   Tuple2(APPRouter.qrcodePage, "qrcodePage", ),
+  Tuple2(APPRouter.menuAnchorDemo, "menuAnchorDemo", ),
+  Tuple2(APPRouter.myMenuBarDemo, "myMenuBarDemo", ),
 
 
 ];
