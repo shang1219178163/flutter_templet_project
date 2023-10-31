@@ -51,51 +51,97 @@ class _GestureDetectorDemoState extends State<GestureDetectorDemo> with SoundSta
       body: Container(
         color: Colors.greenAccent,
       ),
-      bottomSheet: GestureDetector(
-        onLongPressStart: (details){
-          debugPrint("onLongPressStart");
-          showEntry(
-            child: buildRecoring(),
-          );
-        },
-        onLongPressMoveUpdate:  (e) {
-          debugPrint("${DateTime.now()} bottomSheet onPanUpdate ${e.globalPosition}");
+      bottomSheet: buildBottomSheet(),
+    );
+  }
 
-          final temp = e.globalPosition.dy < screeenSize.height - bottomBarHeight;
-          if (cancelVN.value == temp) return;
-          cancelVN.value = temp;
-          setState(() {});
-        },
+  buildBottomSheet() {
+    return GestureDetector(
+      onPanStart: (e) {
+        debugPrint("onPanStart");
+        showEntry(
+          child: buildRecoring(),
+        );
+      },
+      onPanUpdate: (e) {
+        debugPrint("${DateTime.now()} bottomSheet onPanUpdate ${e.globalPosition}");
 
-        onLongPressEnd: (details){
-          debugPrint("onLongPressEnd");
-          hideEntry();
-        },
-        // onLongPressCancel: () {
-        //   debugPrint("onLongPressCancel");
-        //   hideEntry();
-        // },
-        child: Container(
-          height: 78,
-          alignment: Alignment.center,
-          // padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.w),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.all(Radius.circular(4.w)),
+        final temp = e.globalPosition.dy < screeenSize.height - bottomBarHeight;
+        if (cancelVN.value == temp) return;
+        cancelVN.value = temp;
+        setState(() {});
+      },
+
+      onPanEnd: (e) {
+        debugPrint("onPanEnd");
+        hideEntry();
+      },
+      // onLongPressCancel: () {
+      //   debugPrint("onLongPressCancel");
+      //   hideEntry();
+      // },
+      child: Container(
+        height: 78,
+        alignment: Alignment.center,
+        // padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.w),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.all(Radius.circular(4.w)),
+        ),
+        child: Text("按住说话",
+          textAlign: TextAlign.center,
+          style: TextStyle(
+              fontSize: 18.sp,
+              fontWeight: FontWeight.bold,
+              color: fontColor
           ),
-          child: Text("按住说话",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-                fontSize: 18.sp,
-                fontWeight: FontWeight.bold,
-                color: fontColor
-            ),
+        ),
+      ),
+    );
+
+    return GestureDetector(
+      onLongPressStart: (details){
+        debugPrint("onLongPressStart");
+        showEntry(
+          child: buildRecoring(),
+        );
+      },
+      onLongPressMoveUpdate:  (e) {
+        debugPrint("${DateTime.now()} bottomSheet onPanUpdate ${e.globalPosition}");
+
+        final temp = e.globalPosition.dy < screeenSize.height - bottomBarHeight;
+        if (cancelVN.value == temp) return;
+        cancelVN.value = temp;
+        setState(() {});
+      },
+
+      onLongPressEnd: (details){
+        debugPrint("onLongPressEnd");
+        hideEntry();
+      },
+      // onLongPressCancel: () {
+      //   debugPrint("onLongPressCancel");
+      //   hideEntry();
+      // },
+      child: Container(
+        height: 78,
+        alignment: Alignment.center,
+        // padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.w),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.all(Radius.circular(4.w)),
+        ),
+        child: Text("按住说话",
+          textAlign: TextAlign.center,
+          style: TextStyle(
+              fontSize: 18.sp,
+              fontWeight: FontWeight.bold,
+              color: fontColor
           ),
         ),
       ),
     );
   }
-  //
 
   buildSoundRecordBar() {
     return IMSoundRecordBar(

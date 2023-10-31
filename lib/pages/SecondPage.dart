@@ -9,9 +9,11 @@ import 'package:flutter_templet_project/basicWidget/after_layout_builder.dart';
 import 'package:flutter_templet_project/basicWidget/n_dash_decoration.dart';
 import 'package:flutter_templet_project/basicWidget/n_label_and_icon.dart';
 import 'package:flutter_templet_project/basicWidget/n_painter_arc.dart';
+import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/n_text_button.dart';
 import 'package:flutter_templet_project/basicWidget/radial_button.dart';
 import 'package:flutter_templet_project/basicWidget/header.dart';
+import 'package:flutter_templet_project/basicWidget/triangle_decoration.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/decoration_ext.dart';
@@ -600,10 +602,12 @@ class _SecondPageState extends State<SecondPage> {
               alignment: Alignment.center,
               child: Text("dash_painter"),
             ),
-            // Container(
-            //   decoration: TriangleDecoration(color: Colors.red, size: 8.0),
-            //   child: NText("TriangleDecoration"),
-            // ),
+            Container(
+              width: 100,
+              height: 100,
+              decoration: TriangleDecoration(color: Colors.red, size: 8.0),
+              child: NText("TriangleDecoration"),
+            ),
             SizedBox(height: 20,),
 
           ],
