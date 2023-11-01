@@ -25,9 +25,8 @@ class _MyMenuBarState extends State<MyMenuBar> {
   Color _backgroundColor = Colors.red;
   set backgroundColor(Color value) {
     if (_backgroundColor != value) {
-      setState(() {
-        _backgroundColor = value;
-      });
+      _backgroundColor = value;
+      setState(() {});
     }
   }
 
@@ -35,9 +34,8 @@ class _MyMenuBarState extends State<MyMenuBar> {
   bool _showMessage = false;
   set showingMessage(bool value) {
     if (_showMessage != value) {
-      setState(() {
-        _showMessage = value;
-      });
+      _showMessage = value;
+      setState(() {});
     }
   }
 

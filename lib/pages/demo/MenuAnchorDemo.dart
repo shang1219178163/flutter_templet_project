@@ -3,6 +3,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_enum_menu_anchor.dart';
+import 'package:flutter_templet_project/pages/demo/checkbox_menu_demo.dart';
 
 enum SampleItem { none, itemOne, itemTwo, itemThree }
 
@@ -20,38 +21,45 @@ class _MenuAnchorDemoState extends State<MenuAnchorDemo> {
 
   String defaultValue = "-";
 
+  static const String kMessage = '"Talk less. Smile more." - A. Burr';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('MenuAnchorButton')),
-      body: Column(
-        children: [
-          ValueListenableBuilder(
-             valueListenable: _selectedItemVN,
-             builder: (context, value, child){
+      body: buildBody(),
+      // body: CheckboxMenuDemo(message: kMessage,),
+    );
+  }
 
-                return Text(value?.name ?? defaultValue);
-              }
-          ),
-          buildMenuAnchor<SampleItem>(
-            values: SampleItem.values,
-            onChanged: (SampleItem e) {
-              debugPrint(e.name);
-              _selectedItemVN.value = e;
-            },
-          ),
+  buildBody() {
+    return Column(
+      children: [
+        ValueListenableBuilder(
+          valueListenable: _selectedItemVN,
+          builder: (context, value, child){
 
-          NEnumMenuAnchor<SampleItem>(
-            values: SampleItem.values,
-            initialItem: SampleItem.itemThree,
-            onChanged: (SampleItem e) {
-              debugPrint(e.name);
-              _selectedItemVN.value = e;
-            },
-          ),
-        ],
-      ),
+            return Text(value.name ?? defaultValue);
+          }
+        ),
+        buildMenuAnchor<SampleItem>(
+          values: SampleItem.values,
+          onChanged: (SampleItem e) {
+            debugPrint(e.name);
+            _selectedItemVN.value = e;
+          },
+        ),
+
+        NEnumMenuAnchor<SampleItem>(
+          values: SampleItem.values,
+          initialItem: SampleItem.itemThree,
+          onChanged: (SampleItem e) {
+            debugPrint(e.name);
+            _selectedItemVN.value = e;
+          },
+        ),
+
+      ],
     );
   }
 
