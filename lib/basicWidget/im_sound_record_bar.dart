@@ -15,6 +15,7 @@ import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/overlay_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/uti/color_util.dart';
+import 'package:flutter_templet_project/vendor/vibration_service.dart';
 
 
 /// 音频录制(按住说话)组件
@@ -52,8 +53,10 @@ class _IMSoundRecordBarState extends State<IMSoundRecordBar> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onLongPressStart: (details){
-        debugPrint("onLongPressStart");
+      onPanStart: (e) {
+        debugPrint("onPanStart");
+        // Vibration.vibrate(amplitude: 128, duration: 100);
+        VibrationService.vibrate(duration: 100, amplitude: 128,);
 
         cancelVN.value = false;
         showEntry(
@@ -64,18 +67,16 @@ class _IMSoundRecordBarState extends State<IMSoundRecordBar> {
         );
         widget.onRecordStart.call();
       },
-      onLongPressMoveUpdate:  (e) {
+      onPanUpdate: (e) {
         // debugPrint("${DateTime.now()} bottomSheet onPanUpdate ${e.globalPosition}");
 
-        final temp = e.globalPosition.dy < screeenSize.height - bottomBarHeight;
-        if (cancelVN.value == temp) {
-          return;
-        }
+        final temp = e.globalPosition.dy < screenSize.height - bottomBarHeight;
+        if (cancelVN.value == temp) return;
         cancelVN.value = temp;
         setState(() {});
       },
-      onLongPressEnd: (details){
-        debugPrint("onLongPressEnd");
+      onPanEnd: (details) {
+        debugPrint("onPanEnd");
         hideEntry();
         widget.onRecordEnd.call(cancelVN.value);
       },
@@ -86,21 +87,73 @@ class _IMSoundRecordBarState extends State<IMSoundRecordBar> {
       child: Container(
         height: widget.height,
         alignment: Alignment.center,
-        // padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.w),
-        decoration: BoxDecoration(
+        // padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        decoration: const BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.all(Radius.circular(4.w)),
+          borderRadius: BorderRadius.all(Radius.circular(4)),
         ),
-        child: Text("按住说话",
+        child: const Text(
+          "按住 说话",
           textAlign: TextAlign.center,
           style: TextStyle(
-            fontSize: 18.sp,
+            fontSize: 16,
             fontWeight: FontWeight.bold,
             color: fontColor,
           ),
         ),
       ),
     );
+
+    // return GestureDetector(
+    //   onLongPressStart: (details){
+    //     debugPrint("onLongPressStart");
+    //
+    //     cancelVN.value = false;
+    //     showEntry(
+    //       child: IMSoundRecordingPage(
+    //         cancelVN: cancelVN,
+    //         duration: const Duration(milliseconds: 100),
+    //       ),
+    //     );
+    //     widget.onRecordStart.call();
+    //   },
+    //   onLongPressMoveUpdate:  (e) {
+    //     // debugPrint("${DateTime.now()} bottomSheet onPanUpdate ${e.globalPosition}");
+    //
+    //     final temp = e.globalPosition.dy < screeenSize.height - bottomBarHeight;
+    //     if (cancelVN.value == temp) {
+    //       return;
+    //     }
+    //     cancelVN.value = temp;
+    //     setState(() {});
+    //   },
+    //   onLongPressEnd: (details){
+    //     debugPrint("onLongPressEnd");
+    //     hideEntry();
+    //     widget.onRecordEnd.call(cancelVN.value);
+    //   },
+    //   // onLongPressCancel: () {
+    //   //   debugPrint("onLongPressCancel");
+    //   //   hideEntry();
+    //   // },
+    //   child: Container(
+    //     height: widget.height,
+    //     alignment: Alignment.center,
+    //     // padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.w),
+    //     decoration: BoxDecoration(
+    //       color: Colors.white,
+    //       borderRadius: BorderRadius.all(Radius.circular(4.w)),
+    //     ),
+    //     child: Text("按住说话",
+    //       textAlign: TextAlign.center,
+    //       style: TextStyle(
+    //         fontSize: 18.sp,
+    //         fontWeight: FontWeight.bold,
+    //         color: fontColor,
+    //       ),
+    //     ),
+    //   ),
+    // );
   }
 
 }
