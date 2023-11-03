@@ -30,7 +30,6 @@ import 'package:flutter_templet_project/uti/color_util.dart';
 
 /// 封装输入框组件
 class NTextfield extends StatefulWidget {
-
   NTextfield({
     Key? key,
     this.title,
@@ -48,73 +47,91 @@ class NTextfield extends StatefulWidget {
     this.fillColor = bgColor,
     this.focusColor = Colors.white,
     this.radius = 4,
-    this.isCollapsed,
     this.enabledBorder,
     this.focusedBorder,
     this.prefixIconBuilder,
     this.suffixIconBuilder,
+    this.focusNode,
+    this.isCollapsed,
   }) : super(key: key);
 
   final String? title;
 
   /// 控制器
   final TextEditingController? controller;
+
   /// 改变回调
   final ValueChanged<String> onChanged;
+
   /// 一般是键盘回车键/确定回调
   final ValueChanged<String>? onSubmitted;
+
   /// 是否密文
   final bool? obscureText;
+
   /// 提示语
   final String? hintText;
+
   /// 最小行数
   final int? minLines;
+
   /// 最大行数
   final int? maxLines;
+
   /// 键盘类型
   final TextInputType? keyboardType;
 
   final TextInputAction? textInputAction;
+
   /// 内容边距
   final EdgeInsetsGeometry? contentPadding;
+
   /// 填充颜色
   final Color? fillColor;
+
   /// 聚焦颜色
   final Color? focusColor;
+
   /// 圆角
   final double radius;
 
+  /// 输入框焦点
+  final FocusNode? focusNode;
+
+  InputBorder? enabledBorder;
+  InputBorder? focusedBorder;
+
+  /// 左边组件构造器
+  Widget Function(bool isFocus)? prefixIconBuilder;
+
+  /// 右边组件构造器
+  Widget Function(
+      bool isFocus,
+      bool isCloseEye,
+      )? suffixIconBuilder;
+
   // true代表取消textfield最小高度限制
   final bool? isCollapsed;
-
-  final InputBorder? enabledBorder;
-  final InputBorder? focusedBorder;
-  /// 左边组件构造器
-  final Widget Function(bool isFocus)? prefixIconBuilder;
-  /// 右边组件构造器
-  final Widget Function(bool isFocus, bool isCloseEye,)? suffixIconBuilder;
 
   @override
   _NTextfieldState createState() => _NTextfieldState();
 }
 
 class _NTextfieldState extends State<NTextfield> {
-
   late final textEditingController = widget.controller ?? TextEditingController();
 
   final current = ValueNotifier("");
 
-  final _focusNode = FocusNode();
+  late final _focusNode = widget.focusNode ?? FocusNode();
 
   final hasFocusVN = ValueNotifier<bool>(false);
 
   bool isCloseEye = true;
 
-
   @override
   void dispose() {
     _focusNode.removeListener(_onFocusChange);
-    _focusNode.dispose();
+    // _focusNode.dispose();
 
     super.dispose();
   }
@@ -144,7 +161,7 @@ class _NTextfieldState extends State<NTextfield> {
         widget.onSubmitted?.call(val);
         textEditingController.clear();
       },
-      obscureText:  widget.obscureText != null ? widget.obscureText! : isCloseEye,
+      obscureText: widget.obscureText != null ? widget.obscureText! : isCloseEye,
       keyboardType: widget.keyboardType,
       textInputAction: widget.textInputAction,
       // autofocus: !widget.obscureText,
@@ -155,35 +172,39 @@ class _NTextfieldState extends State<NTextfield> {
       ),
       decoration: InputDecoration(
         filled: true,
-        isCollapsed: widget.isCollapsed ?? false,
         fillColor: widget.focusColor,
         contentPadding: widget.contentPadding ?? const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
         border: InputBorder.none,
         enabledBorder: widget.enabledBorder ?? buildEnabledBorder(radus: widget.radius),
         focusedBorder: widget.focusedBorder ?? buildFocusedBorder(radus: widget.radius),
         hintText: widget.hintText,
+        isCollapsed: widget.isCollapsed ?? false,
         hintStyle: TextStyle(fontSize: 16, color: fontColor[10]),
-        prefixIcon: widget.prefixIconBuilder == null? null : ValueListenableBuilder<bool>(
+        prefixIcon: widget.prefixIconBuilder == null
+            ? null
+            : ValueListenableBuilder<bool>(
             valueListenable: hasFocusVN,
             builder: (_, isFocus, child) {
-
               return widget.prefixIconBuilder?.call(isFocus) ?? SizedBox();
-            }
-        ),
-        suffixIcon: widget.suffixIconBuilder == null? null : ValueListenableBuilder<bool>(
+            }),
+        suffixIcon: widget.suffixIconBuilder == null
+            ? null
+            : ValueListenableBuilder<bool>(
             valueListenable: hasFocusVN,
             builder: (_, isFocus, child) {
-
               return IconButton(
                 focusColor: primaryColor,
-                icon: widget.suffixIconBuilder?.call(isFocus, isCloseEye,) ?? SizedBox(),
+                icon: widget.suffixIconBuilder?.call(
+                  isFocus,
+                  isCloseEye,
+                ) ??
+                    SizedBox(),
                 onPressed: () {
                   isCloseEye = !isCloseEye;
                   setState(() {});
                 },
               );
-            }
-        ),
+            }),
       ),
     );
   }

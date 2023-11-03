@@ -41,6 +41,15 @@ class NEnumMenuAnchor<E extends Enum> extends StatelessWidget {
             builder: (context, MenuController controller, Widget? child) {
 
               return itemBuilder?.call(controller, selectedItem) ?? OutlinedButton(
+                style: OutlinedButton.styleFrom(
+                  // backgroundColor: Color(0xff5690F4).withOpacity(0.1),
+                  // foregroundColor: Color(0xff5690F4),
+                  elevation: 0,
+                  // shape: StadiumBorder(),
+                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  // minimumSize: Size(64, 32),
+                  padding: EdgeInsets.only(left: 8, right: 2, top: 6, bottom: 6),
+                ),
                 onPressed: (){
                   if (controller.isOpen) {
                     controller.close();
@@ -48,7 +57,14 @@ class NEnumMenuAnchor<E extends Enum> extends StatelessWidget {
                     controller.open();
                   }
                 },
-                child: Text(selectedItem?.name ?? defaultValue),
+                // child: Text(selectedItem?.name ?? defaultValue),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(selectedItem?.name ?? defaultValue),
+                    Icon(Icons.arrow_drop_down),
+                  ],
+                ),
               );
             },
             menuChildren: values.map((e) {

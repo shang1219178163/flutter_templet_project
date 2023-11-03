@@ -35,6 +35,7 @@ class _MenuAnchorDemoState extends State<MenuAnchorDemo> {
   buildBody() {
     return Column(
       children: [
+        // Spacer(),
         ValueListenableBuilder(
           valueListenable: _selectedItemVN,
           builder: (context, value, child){
@@ -74,6 +75,7 @@ class _MenuAnchorDemoState extends State<MenuAnchorDemo> {
       builder: (BuildContext context, StateSetter setState) {
 
         return MenuAnchor(
+          alignmentOffset: Offset(0, 0),
           builder: (context, MenuController controller, Widget? child) {
 
             return itemBuilder?.call(controller, selectedItem) ?? OutlinedButton(
@@ -84,7 +86,13 @@ class _MenuAnchorDemoState extends State<MenuAnchorDemo> {
                   controller.open();
                 }
               },
-              child: Text(selectedItem?.name ?? defaultValue),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(selectedItem?.name ?? defaultValue),
+                  Icon(Icons.arrow_drop_down),
+                ],
+              ),
             );
           },
           menuChildren: values.map((e) {

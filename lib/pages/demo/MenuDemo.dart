@@ -22,25 +22,6 @@ class MenuDemo extends StatefulWidget {
 
 class _MenuDemoState extends State<MenuDemo> {
 
-
-
-
-  @override
-  Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
-    return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title ?? "$widget"),
-          actions: [
-            _buildDropdownButton(),
-          ],
-        ),
-        body: Text(arguments.toString())
-    );
-  }
-
-
   final items = [
     DropdownMenuItem(value: 0,child: Text('语文'),),
     DropdownMenuItem(value: 1, child: Text('数学'),),
@@ -48,6 +29,28 @@ class _MenuDemoState extends State<MenuDemo> {
   ];
 
   Object? _dropValue = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title ?? "$widget"),
+        actions: [
+          // _buildDropdownButton(),
+        ],
+      ),
+      body: buildBody(),
+    );
+  }
+
+  buildBody() {
+    return Container(
+      child: _buildDropdownButton(),
+    );
+  }
+
 
   _buildDropdownButton() {
     return DropdownButton(
@@ -59,9 +62,8 @@ class _MenuDemoState extends State<MenuDemo> {
       value: _dropValue,
       items: items,
       onChanged: (value){
-        setState(() {
-          _dropValue = value;
-        });
+        _dropValue = value;
+        setState(() {});
       },
     );
   }
