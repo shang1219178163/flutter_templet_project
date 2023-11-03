@@ -1893,6 +1893,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.1.4"
+  vibration:
+    dependency: "direct main"
+    description:
+      name: vibration
+      sha256: "2938d4bf4ecfdb1cdac6b8f20f40cd3e7b7783edd6ca551a46d144a134473626"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.7.7"
   video_compress:
     dependency: "direct main"
     description:
@@ -1949,14 +1957,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.3.3"
-  w_popup_menu:
-    dependency: "direct main"
-    description:
-      name: w_popup_menu
-      sha256: "396a8b317782810e8b9e1441acc3186683c425311ee1af49918948b47a605db2"
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "1.0.0"
   wakelock_plus:
     dependency: transitive
     description:
