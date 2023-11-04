@@ -3,9 +3,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_enum_menu_anchor.dart';
-import 'package:flutter_templet_project/pages/demo/checkbox_menu_demo.dart';
+import 'package:flutter_templet_project/basicWidget/n_menu_anchor.dart';
 
-enum SampleItem { none, itemOne, itemTwo, itemThree }
+enum SomeItemType { none, itemOne, itemTwo, itemThree }
 
 
 class MenuAnchorDemo extends StatefulWidget {
@@ -17,11 +17,9 @@ class MenuAnchorDemo extends StatefulWidget {
 
 class _MenuAnchorDemoState extends State<MenuAnchorDemo> {
 
-  final _selectedItemVN = ValueNotifier<SampleItem>(SampleItem.none);
+  final _selectedItemVN = ValueNotifier<SomeItemType>(SomeItemType.none);
 
   String defaultValue = "-";
-
-  static const String kMessage = '"Talk less. Smile more." - A. Burr';
 
   @override
   Widget build(BuildContext context) {
@@ -43,34 +41,49 @@ class _MenuAnchorDemoState extends State<MenuAnchorDemo> {
             return Text(value.name ?? defaultValue);
           }
         ),
-        buildMenuAnchor<SampleItem>(
-          values: SampleItem.values,
-          onChanged: (SampleItem e) {
+
+        buildMenuAnchor<SomeItemType>(
+          values: SomeItemType.values,
+          initialItem: SomeItemType.itemThree,
+          cbName: (e) => e.name,
+          onChanged: (SomeItemType e) {
             debugPrint(e.name);
             _selectedItemVN.value = e;
           },
         ),
 
-        NEnumMenuAnchor<SampleItem>(
-          values: SampleItem.values,
-          initialItem: SampleItem.itemThree,
-          onChanged: (SampleItem e) {
+        NMenuAnchor<SomeItemType>(
+          values: SomeItemType.values,
+          initialItem: SomeItemType.itemThree,
+          cbName: (e) => e.name,
+          onChanged: (SomeItemType e) {
             debugPrint(e.name);
             _selectedItemVN.value = e;
           },
         ),
+
+        // NEnumMenuAnchor<SomeItemType>(
+        //   values: SomeItemType.values,
+        //   initialItem: SomeItemType.itemThree,
+        //   onChanged: (SomeItemType e) {
+        //     debugPrint(e.name);
+        //     _selectedItemVN.value = e;
+        //   },
+        // ),
 
       ],
     );
   }
 
-  buildMenuAnchor<E extends Enum>({
+  buildMenuAnchor<E>({
     required List<E> values, 
-    E? selectedItem, 
-    String defaultValue = "-",
-    Widget Function(MenuController controller, E? selectedItem)? itemBuilder,
+    required E initialItem,
+    required String Function(E e) cbName,
     required ValueChanged<E> onChanged,
+    Widget Function(MenuController controller, E? selectedItem)? itemBuilder,
   }) {
+    var selectedItem = initialItem;
+
     return StatefulBuilder(
       builder: (BuildContext context, StateSetter setState) {
 
@@ -89,7 +102,7 @@ class _MenuAnchorDemoState extends State<MenuAnchorDemo> {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(selectedItem?.name ?? defaultValue),
+                  Text(cbName(selectedItem)),
                   Icon(Icons.arrow_drop_down),
                 ],
               ),
@@ -102,7 +115,7 @@ class _MenuAnchorDemoState extends State<MenuAnchorDemo> {
                 setState(() {});
                 onChanged.call(e);
               },
-              child: Text(e.name),
+              child: Text(cbName(e)),
             );
           }).toList(),
         );
