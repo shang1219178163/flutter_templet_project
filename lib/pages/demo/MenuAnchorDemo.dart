@@ -24,7 +24,7 @@ class _MenuAnchorDemoState extends State<MenuAnchorDemo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('MenuAnchorButton')),
+      appBar: AppBar(title: Text('$widget')),
       body: buildBody(),
       // body: CheckboxMenuDemo(message: kMessage,),
     );
@@ -42,15 +42,15 @@ class _MenuAnchorDemoState extends State<MenuAnchorDemo> {
           }
         ),
 
-        buildMenuAnchor<SomeItemType>(
-          values: SomeItemType.values,
-          initialItem: SomeItemType.itemThree,
-          cbName: (e) => e.name,
-          onChanged: (SomeItemType e) {
-            debugPrint(e.name);
-            _selectedItemVN.value = e;
-          },
-        ),
+        // buildMenuAnchor<SomeItemType>(
+        //   values: SomeItemType.values,
+        //   initialItem: SomeItemType.itemThree,
+        //   cbName: (e) => e.name,
+        //   onChanged: (SomeItemType e) {
+        //     debugPrint(e.name);
+        //     _selectedItemVN.value = e;
+        //   },
+        // ),
 
         NMenuAnchor<SomeItemType>(
           values: SomeItemType.values,
