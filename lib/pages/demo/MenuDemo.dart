@@ -11,60 +11,49 @@ import 'package:flutter/material.dart';
 
 class MenuDemo extends StatefulWidget {
 
+  MenuDemo({
+    Key? key, 
+    this.title
+  }) : super(key: key);
+
   final String? title;
 
-  const MenuDemo({ Key? key, this.title}) : super(key: key);
-
-
   @override
-  _MenuDemoState createState() => _MenuDemoState();
+  State<MenuDemo> createState() => _MenuDemoState();
 }
 
 class _MenuDemoState extends State<MenuDemo> {
 
-  final items = [
-    DropdownMenuItem(value: 0,child: Text('语文'),),
-    DropdownMenuItem(value: 1, child: Text('数学'),),
-    DropdownMenuItem(value: 2, child: Text('英语'),),
-  ];
-
-  Object? _dropValue = 0;
+  final _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: [
-          // _buildDropdownButton(),
-        ],
+        actions: ['done',].map((e) => TextButton(
+          child: Text(e,
+            style: TextStyle(color: Colors.white),
+          ),
+          onPressed: () => debugPrint(e),)
+        ).toList(),
       ),
       body: buildBody(),
     );
   }
 
   buildBody() {
-    return Container(
-      child: _buildDropdownButton(),
+    return Scrollbar(
+      controller: _scrollController,
+      child: SingleChildScrollView(
+        controller: _scrollController,
+        child: Column(
+          children: [
+            Text("$widget"),
+          ],
+        ),
+      ),
     );
   }
-
-
-  _buildDropdownButton() {
-    return DropdownButton(
-      disabledHint:Text("Disabled"),
-      elevation: 8,
-      // style:TextStyle(color:Colors.green, fontSize: 16),
-      // icon: Icon(Icons.arrow_drop_down_circle),
-      hint: Text('请选择'),
-      value: _dropValue,
-      items: items,
-      onChanged: (value){
-        _dropValue = value;
-        setState(() {});
-      },
-    );
-  }
+  
 }
