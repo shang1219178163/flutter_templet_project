@@ -15,7 +15,6 @@ class NMenuAnchor<E> extends StatelessWidget {
   NMenuAnchor({
     super.key,
     required this.values,
-    // this.selectedItem,
     required this.initialItem,
     this.itemBuilder,
     required this.onChanged,
@@ -23,7 +22,6 @@ class NMenuAnchor<E> extends StatelessWidget {
   });
   /// 数据源
   final List<E> values;
-  // E? selectedItem;
   /// 初始化数据
   final E initialItem;
   /// item 子视图构建器
