@@ -9,7 +9,7 @@
 
 import 'package:flutter/material.dart';
 
-
+/// MenuAnchor 简易封装,方便代码复用
 class NMenuAnchor<E> extends StatelessWidget {
 
   NMenuAnchor({
