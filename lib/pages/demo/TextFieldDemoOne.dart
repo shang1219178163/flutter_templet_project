@@ -38,11 +38,27 @@ class _TextFieldDemoOneState extends State<TextFieldDemoOne> {
   ///文本输入框是否可编辑
   bool isEnable = true;
 
-  final inputFormatters = <Tuple2<String, TextInputFormatter>>[
-    Tuple2("长度限制", LengthLimitingTextInputFormatter(10),),
-    Tuple2("英文字母/汉字/数字", FilteringTextInputFormatter(RegExp("[a-zA-Z]|[\u4e00-\u9fa5]|[0-9]"), allow: true)),
-    Tuple2("FilteringTextInputFormatter.digitsOnly", FilteringTextInputFormatter.digitsOnly,),
-    Tuple2("FilteringTextInputFormatter.singleLineFormatter", FilteringTextInputFormatter.singleLineFormatter,),
+  final inputFormatters = <Tuple3<String, TextInputFormatter, String>>[
+    Tuple3(
+      "长度限制",
+      LengthLimitingTextInputFormatter(10),
+      "LengthLimitingTextInputFormatter(10)"
+    ),
+    Tuple3(
+      "英文字母/汉字/数字",
+      FilteringTextInputFormatter(RegExp("[a-zA-Z]|[\u4e00-\u9fa5]|[0-9]"), allow: true),
+      "FilteringTextInputFormatter(RegExp('[a-zA-Z]|[\u4e00-\u9fa5]|[0-9]'), allow: true)"
+    ),
+    Tuple3(
+      "仅数字",
+      FilteringTextInputFormatter.digitsOnly,
+      "FilteringTextInputFormatter.digitsOnly"
+    ),
+    Tuple3(
+      "仅单行",
+      FilteringTextInputFormatter.singleLineFormatter,
+      "FilteringTextInputFormatter.singleLineFormatter,"
+    ),
   ];
 
   @override
@@ -83,9 +99,16 @@ class _TextFieldDemoOneState extends State<TextFieldDemoOne> {
           _buildTextField(),
           Divider(),
           Column(
-            children: inputFormatters.map((e){
-              return ListTile(title: Text(e.item1),);
-            }).toList(),
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ...inputFormatters.map((e){
+                return ListTile(
+                  title: Text("${e.item1}"),
+                  subtitle: Text("${e.item3}"),
+                );
+              }).toList()
+            ],
           )
         ],
       ),
