@@ -8,13 +8,17 @@
 
 import 'dart:ui' as ui;
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/header.dart';
 import 'package:flutter_templet_project/basicWidget/n_expand_text.dart';
 import 'package:flutter_templet_project/basicWidget/n_footer.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
+import 'package:flutter_templet_project/model/NPerson.dart';
+import 'package:flutter_templet_project/model/user_model.dart';
 import 'package:flutter_templet_project/uti/color_util.dart';
+import 'package:flutter_templet_project/vendor/amap_location/location_detail_model.dart';
 import 'package:get/get.dart';
 import 'package:tuple/tuple.dart';
 
@@ -63,7 +67,6 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         flexibleSpace: Container(
@@ -85,7 +88,13 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
         bottom: TabBar(
           controller: _tabController,
           isScrollable: true,
-          tabs: List.generate(6, (index) => Tab(text: 'item_$index')).toList(),
+          // labelColor: context.primaryColor,
+          // unselectedLabelColor: Theme.of(context).colorScheme.primary,
+          tabs: List.generate(6, (index) {
+            return Tab(
+              text: 'item_$index',
+            );
+          }).toList(),
           // indicatorSize: TabBarIndicatorSize.label,
           // indicatorPadding: EdgeInsets.only(left: 6, right: 6),
         ),
@@ -124,8 +133,6 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
         ),
       )
     );
-
-
   }
 
   buildAppBarBottom() {
@@ -187,6 +194,37 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
     map[(3, 4)] = "3,4";
     debugPrint("map: ${map}");
 
+    final list1 = ["aaa"];
+    final list2 = ["aaa"];
+    debugPrint("${DateTime.now()} list ==: ${list1 == list2}");
+    debugPrint("${DateTime.now()} list listEquals: ${listEquals(list1, list2)}");
+
+    final map1 = {"a": "aa"};
+    final map2 = {"a": "aa"};
+    debugPrint("${DateTime.now()} map ==: ${map1 == map2}");
+    debugPrint("${DateTime.now()} map mapEquals: ${mapEquals(map1, map2)}");
+
+    final set1 = {'a'};
+    final set2 = {'a'};
+    debugPrint("${DateTime.now()} set ==: ${set1 == set2}");
+    debugPrint("${DateTime.now()} set setEquals: ${setEquals(set1, set2)}");
+
+    final user = LocationDetailModel(description: "aaa");
+    final user1 = LocationDetailModel(description: "aaa");
+    debugPrint("user: ${user.toJson() == user1.toJson()}");
+
+    final sameUser = user == user1;
+    debugPrint("sameUser: ${sameUser}");
+
+    final result = identical(user, user1);//检查两个对象引用是否指向同一对象。
+    debugPrint("result: ${result}");
+
+    final bob = NPerson(name: "Bob", age: 40);
+    final bob1 = NPerson(name: "Bob", age: 40);
+    debugPrint("NPerson:${bob == bob1}"); // false
+    debugPrint("NPerson bob: ${bob.hashCode}"); // false
+    debugPrint("NPerson bob1: ${bob.hashCode1}"); // false
+
   }
 
 
@@ -220,9 +258,9 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
           icon: Icon(Icons.send),
           label: Text("ElevatedButton"),
           onPressed: () {
-            setState(() {
-              time++;
-            });
+            time++;
+            setState(() {});
+
           },
         ),
       ],
@@ -317,7 +355,6 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
       ),
     );
   }
-
 
   buildBtnColor() {
     return TextButton(
@@ -424,7 +461,6 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
   testBool({bool value = false}) {
 
   }
-
   
   buildText({
     required String text,
@@ -489,8 +525,6 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
 
   }
 
-
-
   getUrlParams({Map<String, dynamic> map = const {}}) {
     if (map.keys.isEmpty) {
       return '';
@@ -504,9 +538,6 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
   }
 
 }
-
-// typedef RadiusBuilder = Widget Function(BuildContext context, StateSetter setState);
-
 
 
 extension RecordExt on Record{

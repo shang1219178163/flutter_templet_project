@@ -9,6 +9,8 @@
 
 //文档 https://pub-web.flutter-io.cn/packages/amap_flutter_location
 
+import 'package:flutter/foundation.dart';
+
 /// 高德地图定位模型(省市区信息 android上只有通过[AMapLocationOption.needAddress]为true时才有可能返回值)
 class LocationDetailModel {
   LocationDetailModel({
@@ -135,6 +137,44 @@ class LocationDetailModel {
     data['description'] = description;
     return data;
   }
+
+  @override
+  String toString() => '${toJson()}';
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+
+    final isEqual = other is LocationDetailModel &&
+        runtimeType == other.runtimeType &&
+        mapEquals(toJson(), other.toJson());
+    return isEqual;
+  }
+
+  @override
+  int get hashCode => Object.hash(
+    callbackTime.hashCode,
+    locTime.hashCode,
+    locationType.hashCode,
+    accuracy.hashCode,
+    altitude.hashCode,
+    speed.hashCode,
+    bearing.hashCode,
+    latitude.hashCode,
+    longitude.hashCode,
+    province.hashCode,
+    country.hashCode,
+    district.hashCode,
+    city.hashCode,
+    cityCode.hashCode,
+    street.hashCode,
+    streetNumber.hashCode,
+    adCode.hashCode,
+    address.hashCode,
+    description.hashCode
+  );
 }
 
 //"{'locTime':'2023-08-08 17:33:37','province':'陕西省','callbackTime':'2023-08-08 17:33:37','district':'雁塔区','country':'中国','street':'雁南五路','speed':-1.0,'latitude':'34.192569','city':'西安市','streetNumber':'1958号','bearing':-1.0,'accuracy':59.8563551869,'adCode':'610113','altitude':438.782470703125,'locationType':1,'longitude':'108.953720','cityCode':'029','address':'陕西省西安市雁塔区雁南五路靠近华美达广场酒店','description':'陕西省西安市雁塔区雁南五路靠近华美达广场酒店'}"
