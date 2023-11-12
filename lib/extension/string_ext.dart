@@ -141,17 +141,21 @@ extension StringExt on String{
 
   ///解析
   static parseResponse(dynamic data) {
-    var result = "";
-    if (data is Map) {
-      result += jsonEncode(data);
-    } else if (data is List) {
-      result += jsonEncode(data);
-    } else if (data is bool || data is num) {
-      result += data.toString();
-    } else if (data is String) {
-      result += data;
+    try {
+      var result = "";
+      if (data is Map) {
+        result += jsonEncode(data);
+      } else if (data is List) {
+        result += jsonEncode(data);
+      } else if (data is bool || data is num) {
+        result += data.toString();
+      } else if (data is String) {
+        result += data;
+      }
+      return result;
+    } catch (e) {
+      debugPrint("parseResponse $e");
     }
-    return result;
   }
 
   /// 处理字符串中包含数字排序异常的问题

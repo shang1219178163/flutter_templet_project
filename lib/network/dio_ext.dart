@@ -6,9 +6,12 @@ import 'package:dio/dio.dart';
 extension ResponseExt on Response{
   /// 请求调试信息
   String toDescription() {
-    final jsonStr = jsonEncode(data);
-    // final jsonStr = "";
-    // debugPrint("jsonStr: ${jsonStr}");
+    var jsonStr = data;
+    try {
+      jsonStr = jsonEncode(data);
+    } catch (e) {
+      jsonStr = e.toString();
+    }
 
     return """----------------------------------
 requestUrl: ${requestOptions.path},

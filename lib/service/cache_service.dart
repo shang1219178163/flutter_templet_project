@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
@@ -120,8 +121,12 @@ class CacheService {
     if (value == null) {
       return;
     }
-    final jsonStr = jsonEncode(value);
-    setString(key, jsonStr);
+    try {
+      final jsonStr = jsonEncode(value);
+      setString(key, jsonStr);
+    } catch (e) {
+      debugPrint("$this $e");
+    }
   }
 
   Map<String, dynamic>? getMap(String key) {

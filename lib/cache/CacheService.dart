@@ -23,7 +23,10 @@ class CacheService {
     debugPrint("init prefs: $prefs");
   }
 
-
+  /// 清除数据
+  Future<bool>? remove(String key) {
+    return prefs?.remove(key);
+  }
 
   /// 动态值
   Object? operator [](String key){
@@ -59,8 +62,12 @@ class CacheService {
         break;
       case Map:
       case List:
-        var jsonStr = jsonEncode(value);
-        prefs?.setString(key, jsonStr);
+        try {
+          var jsonStr = jsonEncode(value);
+          prefs?.setString(key, jsonStr);
+        } catch (e) {
+          debugPrint("$this $e");
+        }
         break;
     }
   }
@@ -144,8 +151,12 @@ class CacheService {
     if (value == null) {
       return;
     }
-    final jsonStr = jsonEncode(value);
-    setString(key, jsonStr);
+    try {
+      final jsonStr = jsonEncode(value);
+      setString(key, jsonStr);
+    } catch (e) {
+      debugPrint("$this $e");
+    }
   }
 
   Map<String, dynamic>? getMap(String key) {

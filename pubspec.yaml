@@ -164,6 +164,11 @@ dependencies:
   # 视频压缩
   video_compress: ^3.1.2
 
+  #微信登录+支付+分享
+  fluwx: ^3.13.1
+  # 苹果登录
+  sign_in_with_apple: ^5.0.0
+
   azlistview: ^2.0.0
   common_utils: ^2.0.0
   lpinyin: ^2.0.0
