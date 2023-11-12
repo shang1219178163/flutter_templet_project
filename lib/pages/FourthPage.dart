@@ -33,7 +33,7 @@ class FourthPage extends StatelessWidget {
   _buildOrderCell() {
     return Column(
       children: [
-        Header.h4(title: "_buildOrderCell"),
+        NHeader.h4(title: "_buildOrderCell"),
         IntrinsicHeight(
         child: Row(
           mainAxisSize: MainAxisSize.min,
@@ -82,7 +82,7 @@ class FourthPage extends StatelessWidget {
   _buildTextShadow() {
     return Column(
       children: [
-        Header.h4(title: "设置文字 3D效果"),
+        NHeader.h4(title: "设置文字 3D效果"),
         Center(
           child: Text(
             'Hello, world!',

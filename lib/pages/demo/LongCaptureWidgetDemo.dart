@@ -54,13 +54,13 @@ class _LongCaptureWidgetDemoState extends State<LongCaptureWidgetDemo> {
           color: Colors.white,
           child: Column(
             children: [
-              Header.h1(title: "长截图", alignment: Alignment.center,),
+              NHeader.h1(title: "长截图", alignment: Alignment.center,),
               ...List.generate(19, (index) => Container(
                   color: ColorExt.random,
                   height: 90,
                 )
               ),
-              Header.h2(title: "长截图 Footer",),
+              NHeader.h2(title: "长截图 Footer",),
             ]
           ),
         ),

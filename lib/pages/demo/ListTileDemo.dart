@@ -95,11 +95,11 @@ class _ListTileDemoState extends State<ListTileDemo> {
             _buildRadioGroup(
               header: Container(
                 color: Colors.lightBlue,
-                child: Header.h5(title: "RadioGroup 性别选择",),
+                child: NHeader.h5(title: "RadioGroup 性别选择",),
               ),
               footer: Container(
                 color: Colors.lightGreen,
-                child: Header.h6(title: "RadioGroup 备注信息")
+                child: NHeader.h6(title: "RadioGroup 备注信息")
               ),
               cb: (value) {
                 sexValue = value;

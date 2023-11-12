@@ -127,10 +127,10 @@ class _ThemeColorDemoState extends State<ThemeColorDemo> {
             //     style: TextStyle(color: Colors.green,),
             //   )
             // ),
-            Header.h4(title: "Theme.of(context)",),
+            NHeader.h4(title: "Theme.of(context)",),
             buildBox(items: items),
             Divider(color: Colors.red, thickness: 3,),
-            Header.h4(title: "Theme.of(context).colorScheme",),
+            NHeader.h4(title: "Theme.of(context).colorScheme",),
             buildBox(items: colorSchemeItems),
           ],
         ),

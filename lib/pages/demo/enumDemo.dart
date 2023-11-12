@@ -43,13 +43,13 @@ class _EnumDemoState extends State<EnumDemo> {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Header.h4(title: "ActivityTypeNew",),
-            Header.h5(title: "1.ActivityTypeNew.values"),
+            NHeader.h4(title: "ActivityTypeNew",),
+            NHeader.h5(title: "1.ActivityTypeNew.values"),
             Container(
               child: Text(ActivityTypeNew.values.toString()),
             ),
             Divider(),
-            Header.h5(title: "2. ActivityTypeNew.values.map((e) => e.name)"),
+            NHeader.h5(title: "2. ActivityTypeNew.values.map((e) => e.name)"),
             Container(
               child: Text("${ActivityTypeNew.values.map((e) => e.name)}"),
             ),
@@ -58,7 +58,7 @@ class _EnumDemoState extends State<EnumDemo> {
         ),
         Column(
           children: [
-            Header.h4(title: "ActivityType",),
+            NHeader.h4(title: "ActivityType",),
             Container(
               child: Text("${ActivityType.values.map((e) => e.name)}"),
             ),

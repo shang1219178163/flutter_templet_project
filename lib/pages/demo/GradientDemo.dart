@@ -129,7 +129,7 @@ class _GradientDemoState extends State<GradientDemo> with BottomSheetMixin {
   _buildBody() {
     return ListView(children: <Widget>[
       buildTop(),
-      Header.h4(title: 'LinearGradient',),
+      NHeader.h4(title: 'LinearGradient',),
       _buildBox(
         text: '两种颜色 均分',
         decoration: BoxDecoration(
@@ -265,7 +265,7 @@ class _GradientDemoState extends State<GradientDemo> with BottomSheetMixin {
         )
       ),
       Divider(),
-      Header.h4(title: 'SweepGradient',),
+      NHeader.h4(title: 'SweepGradient',),
       _buildBox(
         text: '四色 无 stops, 平均分布',
         decoration: BoxDecoration(
@@ -322,7 +322,7 @@ class _GradientDemoState extends State<GradientDemo> with BottomSheetMixin {
         ),
       ),
       Divider(),
-      Header.h4(title: 'RadialGradient',),
+      NHeader.h4(title: 'RadialGradient',),
       _buildBox(
         height: 100,
         text: 'RadialGradient',
@@ -342,7 +342,7 @@ class _GradientDemoState extends State<GradientDemo> with BottomSheetMixin {
           ),
         ),
       ),
-      Header.h4(title: 'RadialGradient',),
+      NHeader.h4(title: 'RadialGradient',),
       _buildBox(
         height: 300,
         text: 'RadialGradient',
@@ -362,7 +362,7 @@ class _GradientDemoState extends State<GradientDemo> with BottomSheetMixin {
         ),
       ),
       Divider(),
-      Header.h4(title: 'ShaderMask - RadialGradient',),
+      NHeader.h4(title: 'ShaderMask - RadialGradient',),
       _buildShaderMask(
         blendMode: BlendMode.color,
         shaderCallback: (Rect bounds) {

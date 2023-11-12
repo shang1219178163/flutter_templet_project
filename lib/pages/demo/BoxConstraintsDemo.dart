@@ -35,7 +35,7 @@ class _BoxConstraintsDemoState extends State<BoxConstraintsDemo> {
         children: [
           Column(
             children: [
-              Header.h4(title: 'ConstrainedBox',),
+              NHeader.h4(title: 'ConstrainedBox',),
               ConstrainedBox(
                 // BoxConstraints 构造
                 constraints: BoxConstraints(
@@ -46,30 +46,30 @@ class _BoxConstraintsDemoState extends State<BoxConstraintsDemo> {
                 ),
                 child: _buildBox(),
               ),
-              Header.h4(title: 'ConstrainedBox.expand（展开约束）',),
+              NHeader.h4(title: 'ConstrainedBox.expand（展开约束）',),
               ConstrainedBox(
                 constraints: BoxConstraints.expand(width: 300, height: 100),
                 child: _buildBox(),
               ),
-              Header.h4(title: 'ConstrainedBox.loose（松约束）',),
+              NHeader.h4(title: 'ConstrainedBox.loose（松约束）',),
               ConstrainedBox(
                 constraints: BoxConstraints.loose(Size(300, 100)),
                 child: _buildBox(),
               ),
 
-              Header.h4(title: 'ConstrainedBox.tight（紧约束）',),
+              NHeader.h4(title: 'ConstrainedBox.tight（紧约束）',),
               ConstrainedBox(
                 constraints: BoxConstraints.tight(Size(300, 100)),
                 child: _buildBox(),
               ),
 
-              Header.h4(title: 'BoxConstraints.tightForFinite（有限紧约束）',),
+              NHeader.h4(title: 'BoxConstraints.tightForFinite（有限紧约束）',),
               ConstrainedBox(
                 constraints: BoxConstraints.tightForFinite(height: 100),
                 child: _buildBox(),
               ),
 
-              Header.h4(title: '.loosen()',),
+              NHeader.h4(title: '.loosen()',),
               ConstrainedBox(
                 // BoxConstraints 构造,转换为松约束
                 constraints: BoxConstraints(
@@ -83,11 +83,11 @@ class _BoxConstraintsDemoState extends State<BoxConstraintsDemo> {
 
               Divider(),
               Column(
-                children: list.map((e) => Header.h5(title: e)).toList(),
+                children: list.map((e) => NHeader.h5(title: e)).toList(),
               ),
 
               Divider(),
-              Header.h4(title: 'buildTextView',),
+              NHeader.h4(title: 'buildTextView',),
               buildTextView()
             ],
           )

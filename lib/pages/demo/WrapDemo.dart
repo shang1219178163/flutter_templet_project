@@ -31,7 +31,7 @@ class _WrapDemoState extends State<WrapDemo> {
   _buildBody() {
     return Column(
       children: [
-        Header(title: 'Axis.horizontal'),
+        NHeader(title: 'Axis.horizontal'),
         Container(
           // height: 200,
           // width: 400,
@@ -47,7 +47,7 @@ class _WrapDemoState extends State<WrapDemo> {
         ),
         
         Divider(),
-        Header(title: 'Axis.vertical'),
+        NHeader(title: 'Axis.vertical'),
         Container(
           // height: 200,
           // width: 400,

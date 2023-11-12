@@ -620,7 +620,7 @@ class _SecondPageState extends State<SecondPage> {
     return Column(
       children: [
         Divider(),
-        Header.h5(title: title),
+        NHeader.h5(title: title),
         child,
       ],
     );

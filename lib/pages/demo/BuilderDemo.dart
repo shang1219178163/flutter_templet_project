@@ -52,7 +52,7 @@ class _BuilderDemoState extends State<BuilderDemo> with TickerProviderStateMixin
   _buildBody() {
     return Column(
       children: [
-        Header.h5(title: 'AnimatedBuilder'),
+        NHeader.h5(title: 'AnimatedBuilder'),
         AnimatedBuilder(
           animation: _controller,
           child: _buildBox('AnimatedBuilder'),
@@ -65,13 +65,13 @@ class _BuilderDemoState extends State<BuilderDemo> with TickerProviderStateMixin
         ),
 
         Divider(),
-        Header.h5(title: 'Builder/约等于 StatelessWidget'),
+        NHeader.h5(title: 'Builder/约等于 StatelessWidget'),
         Builder(builder: (BuildContext context) {
           return _buildBox('Builder');
         }),
 
         Divider(),
-        Header.h5(title: 'StatefulBuilder/约等于 StatefulWidget'),
+        NHeader.h5(title: 'StatefulBuilder/约等于 StatefulWidget'),
         StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
           return _buildBox('StatefulBuilder');
         }),

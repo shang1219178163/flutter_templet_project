@@ -133,7 +133,7 @@ class _OverlayDemoState extends State<OverlayDemo> {
                 child: Text('PopupView: $e'),
               );
             }).toList(),
-            Header.h5(title: "NToast"),
+            NHeader.h5(title: "NToast"),
             ...[Alignment.topCenter,
               Alignment.center,
               Alignment.bottomCenter,
@@ -165,7 +165,7 @@ class _OverlayDemoState extends State<OverlayDemo> {
                 child: Text('Show Toast: ${e.toString().split(".").last}'),
               );
             }).toList(),
-            Header.h5(title: "Loadding"),
+            NHeader.h5(title: "Loadding"),
             ElevatedButton(
               onPressed: () => NOverlay.showToast(
                 context,

@@ -9,9 +9,9 @@
 
 import 'package:flutter/material.dart';
 
-class Header extends StatelessWidget{
+class NHeader extends StatelessWidget{
 
-  const Header({
+  const NHeader({
     Key? key,
     this.title = '',
     this.text,
@@ -26,7 +26,7 @@ class Header extends StatelessWidget{
   final EdgeInsets padding;
   final Alignment alignment;
 
-  Header.h1({
+  NHeader.h1({
     Key? key,
     String title = '',
     Text? text,
@@ -42,7 +42,7 @@ class Header extends StatelessWidget{
       style: style
     );
 
-  Header.h2({
+  NHeader.h2({
     Key? key,
     String title = '',
     Text? text,
@@ -58,7 +58,7 @@ class Header extends StatelessWidget{
     style: style
   );
 
-  Header.h3({
+  NHeader.h3({
     Key? key,
     String title = '',
     Text? text,
@@ -74,7 +74,7 @@ class Header extends StatelessWidget{
     style: style
   );
 
-  Header.h4({
+  NHeader.h4({
     Key? key,
     String title = '',
     Text? text,
@@ -90,7 +90,7 @@ class Header extends StatelessWidget{
     style: style
   );
 
-  Header.h5({
+  NHeader.h5({
     Key? key,
     String title = '',
     Text? text,
@@ -106,7 +106,7 @@ class Header extends StatelessWidget{
     style: style
   );
 
-  Header.h6({
+  NHeader.h6({
     Key? key,
     String title = '',
     Text? text,
@@ -174,7 +174,7 @@ class SectionHeader extends StatelessWidget{
     return Column(
       children: [
         divider ?? Divider(),
-        Header.h5(title: title, text: text, style: style, padding: padding, alignment: alignment,),
+        NHeader.h5(title: title, text: text, style: style, padding: padding, alignment: alignment,),
         child,
       ],
     );

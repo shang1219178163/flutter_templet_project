@@ -51,7 +51,7 @@ class _NExpandTextDemoState extends State<NExpandTextDemo> {
               ),
               SizedBox(height: 134,),
 
-              Header.h4(title: "字符串不够一行时"),
+              NHeader.h4(title: "字符串不够一行时"),
               Container(
                 color: Colors.yellowAccent,
                 padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
@@ -61,7 +61,7 @@ class _NExpandTextDemoState extends State<NExpandTextDemo> {
                     expandTitleStyle: TextStyle(color: Colors.green)
                 ),
               ),
-              Header.h4(title: "字符串超过一行时(折叠)"),
+              NHeader.h4(title: "字符串超过一行时(折叠)"),
               Container(
                 color: Colors.yellow,
                 padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
@@ -71,7 +71,7 @@ class _NExpandTextDemoState extends State<NExpandTextDemo> {
                     expandTitleStyle: TextStyle(color: Colors.green)
                 ),
               ),
-              Header.h4(title: "字符串超过一行时(展开)"),
+              NHeader.h4(title: "字符串超过一行时(展开)"),
               Container(
                 color: Colors.yellow,
                 padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),

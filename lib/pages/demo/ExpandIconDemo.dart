@@ -76,19 +76,19 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
       ),
       body: ListView(
         children: [
-          Header.h4(title: "ExpansionTile",),
+          NHeader.h4(title: "ExpansionTile",),
           buildExpandColorMenu(),
           // Divider(),
-          Header.h4(title: "ListViewSegmentControl"),
+          NHeader.h4(title: "ListViewSegmentControl"),
           buildListViewHorizontal(),
           Divider(),
-          Header.h4(title: "Visibility",),
+          NHeader.h4(title: "Visibility",),
           _buildVisbility(),
           Divider(),
-          Header.h4(title: "自定义 VisibleContainer",),
+          NHeader.h4(title: "自定义 VisibleContainer",),
           _buildVisibleContainer(),
           Divider(),
-          Header.h4(title: "自定义 FoldMenu",),
+          NHeader.h4(title: "自定义 FoldMenu",),
           FoldMenu(
             children: [
               Tuple2(List.generate(8, (index) => "item0_$index"), 0),

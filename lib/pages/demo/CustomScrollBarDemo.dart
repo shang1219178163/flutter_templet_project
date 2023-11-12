@@ -94,8 +94,8 @@ class _CustomScrollBarDemoState extends State<CustomScrollBarDemo> {
   _buildBody({isCustomScrollView = false}) {
     final child = ListView(
       children: [
-        Header.h4(title: isCustomScrollView ? "CustomScrollView" : "ListView",),
-        Header.h4(title: "自定义滚动条/ScrollerBar",),
+        NHeader.h4(title: isCustomScrollView ? "CustomScrollView" : "ListView",),
+        NHeader.h4(title: "自定义滚动条/ScrollerBar",),
         Container(
           height: 100,
           padding: padding,

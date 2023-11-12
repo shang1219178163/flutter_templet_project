@@ -27,15 +27,15 @@ class _FlexDemoState extends State<FlexDemo> {
       ),
       body: ListView(
         children: [
-          Header.h4(title: 'Flex.Horizontal',),
+          NHeader.h4(title: 'Flex.Horizontal',),
           _buildFlexHorizontal(),
-          Header.h4(title: 'Flex.Vertical',),
+          NHeader.h4(title: 'Flex.Vertical',),
           _buildFlexVertical(),
-          Header.h4(title: '_buildSection',),
+          NHeader.h4(title: '_buildSection',),
           _buildSection(),
-          Header.h4(title: '_buildSection2',),
+          NHeader.h4(title: '_buildSection2',),
           _buildSection2(),
-          Header.h4(title: '_buildSection3',),
+          NHeader.h4(title: '_buildSection3',),
           _buildSection3(),
         ]
       )
