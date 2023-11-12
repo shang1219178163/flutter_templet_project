@@ -68,6 +68,7 @@ class Assets {
   static const String imagesIconAddCircle = 'assets/images/icon_add_circle.png';
   static const String imagesIconAppbarBack = 'assets/images/icon_appbar_back.png';
   static const String imagesIconAppbarBackWhite = 'assets/images/icon_appbar_back_white.png';
+  static const String imagesIconAppleBgGrey = 'assets/images/icon_apple_bg_grey.png';
   static const String imagesIconArrowDown = 'assets/images/icon_arrow_down.png';
   static const String imagesIconArrowUp = 'assets/images/icon_arrow_up.png';
   static const String imagesIconCamera = 'assets/images/icon_camera.png';
@@ -101,6 +102,7 @@ class Assets {
   static const String imagesIconSkipping = 'assets/images/icon_skipping.gif';
   static const String imagesIconVoiceCircle = 'assets/images/icon_voice_circle.png';
   static const String imagesIconWechat = 'assets/images/icon_wechat.png';
+  static const String imagesIconWechatBgGreen = 'assets/images/icon_wechat_bg_green.png';
   static const String imagesImg404 = 'assets/images/img_404.png';
   static const String imagesImgFlutter310 = 'assets/images/img_flutter_3_10.png';
   static const String imagesImgPlaceholder = 'assets/images/img_placeholder.png';
@@ -111,6 +113,7 @@ class Assets {
   static const String imagesImgPlacehorder = 'assets/images/img_placehorder.png';
   static const String imagesImgSoundOverlayBgRecording = 'assets/images/img_sound_overlay_bg_recording.png';
   static const String imagesImgSoundOverlayBottom = 'assets/images/img_sound_overlay_bottom.png';
+  static const String imagesImgSoundOverlayBottom2 = 'assets/images/img_sound_overlay_bottom2.png';
   static const String imagesImgSoundOverlayBottomCancel = 'assets/images/img_sound_overlay_bottom_cancel.png';
   static const String imagesImgSoundOverlayButton = 'assets/images/img_sound_overlay_button.png';
   static const String imagesImgSoundOverlayButtonCancel = 'assets/images/img_sound_overlay_button_cancel.png';
