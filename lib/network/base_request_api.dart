@@ -1,6 +1,8 @@
 
 
 
+import 'package:flutter_templet_project/network/RequestError.dart';
+
 enum HttpMethod {
   GET,
   PUT,
@@ -33,9 +35,21 @@ class BaseRequestAPI {
     };
   }
 
-  bool get validateParams => true;
+  /// url 验证
+  (bool, String) get validateURL {
+    if (requestType == HttpMethod.GET) {
+      final isError = requestURI.endsWith("/") || requestURI.endsWith("undefined");
+      if (isError) {
+        return (false, RequestError.urlError.desc);
+      }
+    }
+    return (true, "");
+  }
 
-  bool get needLogin => true;
+  /// 传参验证
+  (bool, String) get validateParams => (true, "");
+
+  bool get needToken => true;
 
   bool get shouldCache => false;
 
@@ -69,45 +83,3 @@ class BaseRequestAPI {
 // parse(Map<dynamic, dynamic> data);
 }
 
-
-
-// ///请求基类
-// abstract class BaseHttpRequestAPI {
-//   ///url
-//   String get requestURI;
-//   /// get/post...
-//   HttpMethod get requestType;
-//
-//   Map<String, dynamic> get requestParams => {};
-//
-//   Map<String, dynamic>? get requestHeaders {
-//     var timestamp = DateTime.now().millisecondsSinceEpoch;
-//     return {
-//       'Content-Type': 'application/json;charset=utf-8',
-//       'timestamp': '$timestamp',
-//       'accountToken': "",
-//       // 'useid': id,
-//       // 'appVersion': '6.3.0',
-//     };
-//   }
-//
-//   bool get validateParams => true;
-//
-//   bool get needLogin => true;
-//
-//   bool get printLog => false;
-//
-//   BaseOptions? get requestBaseOptions {
-//     final options = BaseOptions(
-//         baseUrl: requestURI,
-//         headers: requestHeaders,
-//         queryParameters: requestParams,
-//         connectTimeout: const Duration(milliseconds: 20000),
-//         receiveTimeout: const Duration(milliseconds: 5000)
-//     );
-//
-//     return options;
-//   }
-//
-//   // parse(Map<dynamic, dynamic> data);
-// }

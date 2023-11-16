@@ -153,13 +153,21 @@ extension CacheServiceExt on CacheService{
     return CacheService().getString(CACHE_APP_PACKAGE_NAME);
   }
 
+  /// 设置 token
+  set token(String? val) {
+    if (val == null || val.isEmpty) {
+      return;
+    }
+    CacheService().setString(CACHE_TOKEN, val);
+  }
+
   /// 获取token
-  String? getToken(){
+  String? get token {
     return CacheService().getString(CACHE_TOKEN);
   }
 
   bool get isLogin{
-    final token = CacheService().getToken() ?? "";
+    final token = CacheService().token ?? "";
     final result = token.isNotEmpty;
     return result;
   }

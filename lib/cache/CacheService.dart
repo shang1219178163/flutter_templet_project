@@ -4,6 +4,22 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+/// 请求错误缓存
+const String CACHE_REQUEST_ERROR = "CACHE_REQUEST_ERROR";
+
+/// 缓存app 名称
+const String CACHE_APP_NAME = "CACHE_APP_NAME"; // 医链执业版
+/// 缓存app 版本号
+const String CACHE_APP_VERSION = "CACHE_APP_VERSION"; // 1.0.0
+/// 缓存app 包名 - com.yilian.ylHealthApp
+const String CACHE_APP_PACKAGE_NAME = "CACHE_APP_PACKAGE_NAME";
+
+const String CACHE_TOKEN = "CACHE_TOKEN";
+
+/// 用户信息 key
+const String CACHE_USER_ID = "CACHE_USER_ID";
+
+
 class CacheService {
 
   CacheService._() {
@@ -172,4 +188,48 @@ class CacheService {
     }
     return map;
   }
+}
+
+
+extension CacheServiceExt on CacheService {
+  /// 医链执业版
+  String? get appName {
+    return CacheService().getString(CACHE_APP_NAME);
+  }
+
+  /// 1.0.0
+  String? get appVersion {
+    return CacheService().getString(CACHE_APP_VERSION);
+  }
+
+  /// com.yilian.ylHealthApp
+  String? get packageName {
+    return CacheService().getString(CACHE_APP_PACKAGE_NAME);
+  }
+
+  /// 设置 token
+  set token(String? val) {
+    if (val == null || val.isEmpty) {
+      return;
+    }
+    CacheService().setString(CACHE_TOKEN, val);
+  }
+
+  /// 获取token
+  String? get token {
+    return CacheService().getString(CACHE_TOKEN);
+  }
+
+  /// 是否是登录状态
+  bool get isLogin {
+    final token = CacheService().token ?? "";
+    final result = token.isNotEmpty;
+    return result;
+  }
+
+  /// 获取用户id
+  String? get userID {
+    return CacheService().getString(CACHE_USER_ID);
+  }
+
 }

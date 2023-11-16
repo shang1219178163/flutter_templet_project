@@ -8,14 +8,15 @@
 
 import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/network/RequestConfig.dart';
+import 'package:flutter_templet_project/network/RequestError.dart';
 import 'package:flutter_templet_project/network/base_request_api.dart';
+import 'package:flutter_templet_project/network/dio_ext.dart';
 import 'package:flutter_templet_project/network/proxy/dio_proxy.dart';
 import 'package:flutter_templet_project/service/cache_service.dart';
-
-import 'package:get_storage/get_storage.dart';
-import 'package:flutter_templet_project/network/FileManager.dart';
+import 'package:flutter_templet_project/util/debug_log.dart';
 
 
 
@@ -31,9 +32,11 @@ class RequestManager{
   // 方案1：工厂构造方法获得实例变量
   factory RequestManager() => _instance;
 
+  String? get token => CacheService().token;
+
+
   // Dio _dio = Dio();
   Dio get _dio {
-
     final interceptorsWrapper = InterceptorsWrapper(
       onRequest: (RequestOptions options, handler) {
         // print("请求之前");
@@ -41,6 +44,7 @@ class RequestManager{
       },
       onResponse: (Response response, handler) {
         // print("响应之前");
+        DebugLog.d(response.toDescription());
         return handler.next(response);
       },
       onError: (DioError e, handler) {
@@ -50,11 +54,11 @@ class RequestManager{
     var dio = Dio();
     var options = BaseOptions();
     options.baseUrl = RequestConfig.baseUrl;
-    options.connectTimeout = Duration(milliseconds: 15000);
-    options.receiveTimeout = Duration(milliseconds: 10000);
+    options.connectTimeout = Duration(milliseconds: 30000);
+    options.receiveTimeout = Duration(milliseconds: 30000);
     options.responseType = ResponseType.json;
     options.headers = {
-      'token': CacheService().getToken(),
+      'token': token,
       'Content-Type': 'application/json',
       'terminal': '*',
     };
@@ -66,10 +70,28 @@ class RequestManager{
   }
 
   Future<dynamic> request(BaseRequestAPI api) async {
-    if (!api.validateParams) {
-      throw Exception("参数校验失败");
-      /// api中弹提示;
-      // return <String, dynamic>{};
+    if (api.needToken && token?.isNotEmpty != true) {
+      // debugPrint("❌ 无效请求: ${api.requestURI}\ntoken: $token");
+      return {
+        "code": RequestError.cancel,
+        "message": RequestError.cancel.desc,
+      };
+    }
+
+    final validateURLTuple = api.validateURL;
+    if (!validateURLTuple.$1) {
+      return {
+        "code": RequestError.urlError,
+        "message": validateURLTuple.$2,
+      };
+    }
+
+    final validateParamsTuple = api.validateParams;
+    if (!validateParamsTuple.$1) {
+      return {
+        "code": RequestError.paramsError,
+        "message": validateParamsTuple.$2,
+      };
     }
 
     if (api.shouldCache && api.jsonFromCache() != null) {
@@ -82,9 +104,6 @@ class RequestManager{
       queryParams: api.requestParams,
       data: api.requestParams,
     );
-    // if (api.shouldCache) {
-    //   api.saveJsonOfCache(response);
-    // }
     return _handleResponse(response, api: api);
   }
 
@@ -100,7 +119,7 @@ class RequestManager{
         ProgressCallback? onSendProgress,
         ProgressCallback? onReceiveProgress,
       }) async {
-    final url = "${RequestConfig.baseUrl}/${apiPath}";
+    final url = "${RequestConfig.baseUrl}/$apiPath";
     // if (kDebugMode) {
     //   debugPrint("url: $url, ${queryParams}");
     // }
@@ -147,8 +166,8 @@ class RequestManager{
           // BrunoUti.showInfoToast('请求方式错误');
       }
     } on DioError catch (e) {
-        final message = RequestMsg.statusCodeMap['${e.response?.statusCode}']
-            ?? RequestMsg.networkErrorSeverMsg;
+        // final message = RequestMsg.statusCodeMap['${e.response?.statusCode}']
+        //     ?? RequestMsg.networkErrorSeverMsg;
       // BrunoUti.showInfoToast(message);
     } on Exception catch (e) {
       // BrunoUti.showInfoToast(e.toString());
@@ -191,21 +210,22 @@ class RequestManager{
   }
 
   _handleResponse(Response? response, {BaseRequestAPI? api}) {
-    final data = response?.data;
-    if (data == null) return {};
-    // var jsonStr = jsonEncode(response.data);
-    // debugPrint("jsonStr: ${jsonStr}");
-
-    // var resMap = jsonDecode(response.data);
-    var resMap = data as Map<String, dynamic>;
-    if (data['code'] == 'OK') {
-      if (api?.shouldCache == true && api?.canUpdateCache(data) == true) {
-        api?.saveJsonOfCache(data);
-      }
-      return data;
+    final result = response?.data as Map<String, dynamic>?;
+    if (result == null || result.keys.contains("code") != true) {
+      return {
+        "code": RequestError.serverError,
+        "message": RequestError.serverError.desc,
+      };
     }
 
-    switch (resMap['code']) {
+    if (result['code'] == 'OK') {
+      if (api?.shouldCache == true && api?.canUpdateCache(result) == true) {
+        api?.saveJsonOfCache(result);
+      }
+      return result;
+    }
+
+    switch (result['code']) {
       case 'AUTH_TOKEN_NOT_FOUND':
       case 'AUTH_TOKENT_REQUIRED':
       case 'TOKEN_VALIDATE_ERROR':
@@ -235,6 +255,6 @@ class RequestManager{
         // BrunoUti.showInfoToast(resMap['message']);
         break;
     }
-    return resMap;
+    return result;
   }
 }
