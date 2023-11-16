@@ -9,7 +9,7 @@ import 'package:flutter_templet_project/cache/CacheService.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/routes/APPRouter.dart';
-import 'package:flutter_templet_project/uti/color_util.dart';
+import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:flutter_templet_project/vendor/apple_sigin_mixin.dart';
 import 'package:flutter_templet_project/vendor/easy_toast.dart';
 import 'package:flutter_templet_project/vendor/fluwx/fluwx_util.dart';

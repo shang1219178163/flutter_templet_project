@@ -30,9 +30,9 @@ import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:flutter_templet_project/routes/AppRouteObserver.dart';
 import 'package:flutter_templet_project/service/cache_service.dart';
-import 'package:flutter_templet_project/uti/app_util.dart';
-import 'package:flutter_templet_project/uti/localizations/AppCupertinoLocalizations.dart';
-import 'package:flutter_templet_project/uti/localizations/ZhCupertinoLocalizations.dart';
+import 'package:flutter_templet_project/util/app_util.dart';
+import 'package:flutter_templet_project/util/localizations/AppCupertinoLocalizations.dart';
+import 'package:flutter_templet_project/util/localizations/ZhCupertinoLocalizations.dart';
 
 import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -146,6 +146,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final app = GetMaterialApp(
+      popGesture: true,//swipe back
       navigatorKey: AppUtil.navigatorKey,
       title: 'Flutter Templet',
       debugShowCheckedModeBanner: false,

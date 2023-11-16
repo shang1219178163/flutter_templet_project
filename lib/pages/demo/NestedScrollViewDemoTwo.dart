@@ -12,7 +12,7 @@ import 'package:flutter_templet_project/basicWidget/n_sliver_persistent_header_d
 import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
-import 'package:flutter_templet_project/uti/R.dart';
+import 'package:flutter_templet_project/util/R.dart';
 
 class NestedScrollViewDemoTwo extends StatefulWidget {
 

@@ -4,7 +4,7 @@ import 'package:flutter_templet_project/basicWidget/tab_bar_segment.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
-import 'package:flutter_templet_project/uti/R.dart';
+import 'package:flutter_templet_project/util/R.dart';
 
 class TabBarSegmentDemo extends StatefulWidget {
 

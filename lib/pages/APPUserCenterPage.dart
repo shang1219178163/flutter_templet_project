@@ -20,7 +20,7 @@ import 'package:flutter_templet_project/extension/navigator_ext.dart';
 import 'package:flutter_templet_project/extension/dialog_ext.dart';
 import 'package:flutter_templet_project/mixin/bottom_sheet_image_mixin.dart';
 import 'package:flutter_templet_project/routes/AppRouter.dart';
-import 'package:flutter_templet_project/uti/color_util.dart';
+import 'package:flutter_templet_project/util/color_util.dart';
 
 import 'package:get/get.dart';
 import 'package:flutter_templet_project/pages/APPDrawerMenuPage.dart';

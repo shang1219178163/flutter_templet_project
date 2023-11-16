@@ -17,7 +17,7 @@ import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/model/NPerson.dart';
 import 'package:flutter_templet_project/model/user_model.dart';
-import 'package:flutter_templet_project/uti/color_util.dart';
+import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:flutter_templet_project/vendor/amap_location/location_detail_model.dart';
 import 'package:get/get.dart';
 import 'package:tuple/tuple.dart';
@@ -30,8 +30,8 @@ import 'package:flutter_templet_project/extension/text_painter_ext.dart';
 
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/snack_bar_ext.dart';
-import 'package:flutter_templet_project/uti/Singleton.dart';
-import 'package:flutter_templet_project/uti/R.dart';
+import 'package:flutter_templet_project/util/Singleton.dart';
+import 'package:flutter_templet_project/util/R.dart';
 
 
 

@@ -9,7 +9,7 @@ import 'package:flutter_templet_project/basicWidget/n_search_textfield.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/date_time_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
-import 'package:flutter_templet_project/uti/color_util.dart';
+import 'package:flutter_templet_project/util/color_util.dart';
 
 
 // buildBody2() {

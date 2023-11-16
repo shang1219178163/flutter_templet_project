@@ -14,7 +14,7 @@ import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
-import 'package:flutter_templet_project/uti/color_util.dart';
+import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:tuple/tuple.dart';
 

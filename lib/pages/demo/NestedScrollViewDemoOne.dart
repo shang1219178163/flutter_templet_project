@@ -13,7 +13,7 @@ import 'package:flutter_templet_project/basicWidget/tab_bar_indicator_fixed.dart
 import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/generated/assets.dart';
-import 'package:flutter_templet_project/uti/R.dart';
+import 'package:flutter_templet_project/util/R.dart';
 
 class NestedScrollViewDemoOne extends StatefulWidget {
 

@@ -21,8 +21,8 @@ import 'package:flutter_templet_project/basicWidget/im_textfield_bar.dart';
 import 'package:flutter_templet_project/mixin/bottom_sheet_phrases_mixin.dart';
 import 'package:flutter_templet_project/mixin/keyboard_change_mixin.dart';
 import 'package:flutter_templet_project/pages/EmojiPage.dart';
-import 'package:flutter_templet_project/uti/R.dart';
-import 'package:flutter_templet_project/uti/color_util.dart';
+import 'package:flutter_templet_project/util/R.dart';
+import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:flutter_templet_project/vendor/easy_toast.dart';
 import 'package:tuple/tuple.dart';
 

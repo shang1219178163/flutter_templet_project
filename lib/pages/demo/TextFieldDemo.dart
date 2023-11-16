@@ -13,8 +13,8 @@ import 'package:flutter_templet_project/basicWidget/header.dart';
 import 'package:flutter_templet_project/basicWidget/n_order_num_unit.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
-import 'package:flutter_templet_project/uti/Debounce.dart';
-import 'package:flutter_templet_project/uti/Throttle.dart';
+import 'package:flutter_templet_project/util/Debounce.dart';
+import 'package:flutter_templet_project/util/Throttle.dart';
 import 'package:get/get_rx/src/rx_workers/utils/debouncer.dart';
 
 

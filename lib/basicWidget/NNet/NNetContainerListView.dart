@@ -14,7 +14,7 @@ import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/NNet/NNetContainer.dart';
 import 'package:flutter_templet_project/basicWidget/n_placeholder.dart';
-import 'package:flutter_templet_project/uti/color_util.dart';
+import 'package:flutter_templet_project/util/color_util.dart';
 
 
 typedef ValueIndexedWidgetBuilder<T> = Widget Function(BuildContext context, int index, T data);

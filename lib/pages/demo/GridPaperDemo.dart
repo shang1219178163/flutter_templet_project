@@ -10,7 +10,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/uti/R.dart';
+import 'package:flutter_templet_project/util/R.dart';
 
 
 class GridPaperDemo extends StatelessWidget {

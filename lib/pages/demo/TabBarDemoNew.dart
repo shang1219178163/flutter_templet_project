@@ -7,7 +7,7 @@ import 'package:flutter_templet_project/pages/SecondPage.dart';
 import 'package:flutter_templet_project/pages/ThirdPage.dart';
 import 'package:flutter_templet_project/pages/FourthPage.dart';
 import 'package:flutter_templet_project/pages/BatterLevelPage.dart';
-import 'package:flutter_templet_project/uti/R.dart';
+import 'package:flutter_templet_project/util/R.dart';
 
 import 'package:flutter_templet_project/pages/demo/TabBarDemo.dart';
 

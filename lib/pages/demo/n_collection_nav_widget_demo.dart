@@ -12,7 +12,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_collection_nav_widget.dart';
 import 'package:flutter_templet_project/basicWidget/number_stepper.dart';
-import 'package:flutter_templet_project/uti/R.dart';
+import 'package:flutter_templet_project/util/R.dart';
 import 'package:provider/provider.dart';
 import 'package:tuple/tuple.dart';
 

@@ -4,7 +4,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/uti/global_isolate.dart';
+import 'package:flutter_templet_project/util/global_isolate.dart';
 
 class GlobalIsolateDemo extends StatefulWidget {
 

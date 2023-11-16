@@ -4,7 +4,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_templet_project/model/appstore_app_detail_root_model.dart';
-import 'package:flutter_templet_project/uti/Debounce.dart';
+import 'package:flutter_templet_project/util/Debounce.dart';
 
 class AppUpgradeUtil {
   static String appStoreId = "6447605232";
