@@ -9,7 +9,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/util/debug_log.dart';
 
 class SystemIconsPage extends StatefulWidget {
   const SystemIconsPage({Key? key}) : super(key: key);
@@ -102,7 +102,7 @@ class _SystemIconsPageState extends State<SystemIconsPage> {
               title: Text("$item"),
               // subtitle: Text(array[0]),
               onTap: (){
-                ddlog(item);
+                DebugLog.d(item);
                 // Clipboard.setData(ClipboardData(text: "$item"));
                 editingController.text = item.split('.').last;
                 _textfieldChanged(editingController.text);
@@ -157,7 +157,7 @@ class _SystemIconsPageState extends State<SystemIconsPage> {
         searchResults = list;
       } else {
         searchResults = list.where((element) => element.contains(value)).toList();
-        ddlog(searchResults.length);
+        DebugLog.d(searchResults.length);
       }
     });
   }
