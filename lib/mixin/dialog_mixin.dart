@@ -159,24 +159,28 @@ mixin DialogMixin{
   presentDialogAlert({
     required BuildContext context,
     required ScrollController? scrollController,
-    required VoidCallback? onCancel,
-    required VoidCallback? onConfirm,
+    VoidCallback? onCancel,
+    VoidCallback? onConfirm,
     String? title,
     String? message,
     Widget? content,
     Widget? header,
     Widget? footer,
     bool hasCancelButton = true,
-    Color? cancellBgColor,
+    Radius radius = const Radius.circular(4),
+    Color dividerColor = Colors.transparent,
+    String confirmTitle = '确定',
+    Color? cancelBgColor,
     Color? confirmBgColor,
     TextStyle? cancellTextStyle,
     TextStyle? confirmTextStyle,
     VerticalDivider? buttonBarDivider,
+    Divider? buttonBarDividerTop,
     EdgeInsets contentOffset = EdgeInsets.zero,
   }) {
     assert(message != null || content != null, "message 和 content 不能同时为空!");
 
-    cancellBgColor ??= Theme.of(context).hoverColor;
+    cancelBgColor ??= Theme.of(context).hoverColor;
     confirmBgColor ??= Theme.of(context).primaryColor;
     Color? bColor = Theme.of(context).scaffoldBackgroundColor;
 
@@ -218,7 +222,7 @@ mixin DialogMixin{
         height: 45.w,
         divider: buttonBarDivider,
         hasCancelButton: hasCancelButton,
-        cancelBgColor: cancellBgColor,
+        cancelBgColor: cancelBgColor,
         confirmBgColor: confirmBgColor,
         cancelTextStyle: cancellTextStyle,
         confirmTextStyle: confirmTextStyle,
@@ -277,4 +281,34 @@ mixin DialogMixin{
   }
 
 
+}
+
+
+/// 删除确认弹窗
+class DeleteAlert with DialogMixin{
+
+  void show(BuildContext context, {
+    required ScrollController? scrollController,
+    String? title,
+    String? message,
+    VoidCallback? onCancel,
+    VoidCallback? onConfirm,
+  }) {
+    presentDialogAlert(
+      context: context,
+      scrollController: scrollController,
+      title: title,
+      message: message,
+      radius: const Radius.circular(8),
+      confirmBgColor: white,
+      cancelBgColor: white,
+      confirmTextStyle: TextStyle(
+        color: Theme.of(context).colorScheme.primary,
+      ),
+      buttonBarDividerTop: const Divider(height: 1, color: lineColor,),
+      buttonBarDivider: const VerticalDivider(width: 1, color: lineColor,),
+      onCancel: onCancel,
+      onConfirm: onConfirm,
+    );
+  }
 }

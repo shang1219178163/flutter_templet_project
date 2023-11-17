@@ -11,39 +11,43 @@ class NCancelAndConfirmBar extends StatelessWidget {
     this.confirmTitle = "确定",
     this.bottomRadius = const Radius.circular(4),
     this.hasCancelButton = true,
-    required this.onCancel,
-    required this.onConfirm,
-    this.cancelBgColor = bgColor,
-    this.confirmBgColor = Colors.blueAccent,
+    this.divider,
+    this.dividerTop,
     this.cancelTextStyle,
     this.confirmTextStyle,
-    this.divider,
+    this.cancelBgColor = bgColor,
+    this.confirmBgColor = Colors.blueAccent,
+    required this.onCancel,
+    required this.onConfirm,
   }) : super(key: key);
 
 
-  double height;
-  /// 默认取消
-  String cancelTitle;
-  /// 默认确定
-  String confirmTitle;
+  final double height;
   /// 默认 Radius.circular(4)
-  Radius bottomRadius;
+  final Radius bottomRadius;
+  /// 顶部线
+  final Divider? dividerTop;
+  /// 垂直分割线
+  final VerticalDivider? divider;
   /// 是否存在取消按钮
-  bool hasCancelButton;
-  /// 取消按钮事件
-  VoidCallback? onCancel;
-  /// 确定按钮事件
-  VoidCallback? onConfirm;
-  /// 取消按钮背景色
-  Color? cancelBgColor;
-  /// 确定按钮背景色
-  Color? confirmBgColor;
+  final bool hasCancelButton;
+  /// 默认取消
+  final String cancelTitle;
+  /// 默认确定
+  final String confirmTitle;
   /// 取消按钮字体样式
-  TextStyle? cancelTextStyle;
+  final TextStyle? cancelTextStyle;
   /// 确定按钮字体样式
-  TextStyle? confirmTextStyle;
-  /// 取消按钮和确定之间竖线
-  VerticalDivider? divider;
+  final TextStyle? confirmTextStyle;
+  /// 取消按钮背景色
+  final Color? cancelBgColor;
+  /// 确定按钮背景色
+  final Color? confirmBgColor;
+  /// 取消按钮事件
+  final VoidCallback? onCancel;
+  /// 确定按钮事件
+  final VoidCallback? onConfirm;
+
 
   @override
   Widget build(BuildContext context) {
@@ -66,46 +70,53 @@ class NCancelAndConfirmBar extends StatelessWidget {
             bottomRight: bottomRadius,
           ),
         ),
-        child: Row(
+        child: Column(
           children: [
-            if (hasCancelButton)
-              Expanded(
-                child: InkWell(
-                  onTap: onCancel,
-                  child: Container(
-                    color: cancelBgColor,
-                    child: Center(
-                      child: Text(
-                        cancelTitle,
-                        style: cancelTextStyle ??
-                            TextStyle(
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.w500,
-                              color: fontColor[20],
+            dividerTop ?? const SizedBox(),
+            Expanded(
+              child: Row(
+                children: [
+                  if (hasCancelButton)
+                    Expanded(
+                      child: InkWell(
+                        onTap: onCancel,
+                        child: Container(
+                          color: cancelBgColor,
+                          child: Center(
+                            child: Text(
+                              cancelTitle,
+                              style: cancelTextStyle ??
+                                  TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                    color: fontColor[20],
+                                  ),
                             ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  if (divider != null) divider!,
+                  Expanded(
+                    child: InkWell(
+                      onTap: onConfirm,
+                      child: Container(
+                        color: confirmBgColor,
+                        child: Center(
+                          child: Text(
+                            confirmTitle,
+                            style: confirmTextStyle ??
+                                const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.white,
+                                ),
+                          ),
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ),
-            if (divider != null) divider!,
-            Expanded(
-              child: InkWell(
-                onTap: onConfirm,
-                child: Container(
-                  color: confirmBgColor,
-                  child: Center(
-                    child: Text(
-                      confirmTitle,
-                      style: confirmTextStyle ??
-                          TextStyle(
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.white,
-                          ),
-                    ),
-                  ),
-                ),
+                ],
               ),
             ),
           ],
