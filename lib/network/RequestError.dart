@@ -2,11 +2,12 @@
 //  RequestError.dart
 //  flutter_templet_project
 //
-//  Created by shang on 2023/11/16 11:10.
+//  Created by shang on 2023/11/16 16:14.
 //  Copyright © 2023/11/16 shang. All rights reserved.
 //
 
 
+/// 网络错误
 enum RequestError{
   unknown("未知错误"),
   jsonError("JSON解析错误"),

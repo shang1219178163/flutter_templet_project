@@ -10,6 +10,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_indicator_point.dart';
 
+typedef ChoiceSelectedType<T> = void Function(T e, bool selected);
+
+
 /// 带圆形指示器的单选组件
 /// T 重写相等运算符
 class NChoiceBoxOne<T> extends StatefulWidget {
@@ -43,6 +46,8 @@ class NChoiceBoxOne<T> extends StatefulWidget {
   EdgeInsets? contentPadding;
   // ValueChanged<T?> onChanged;// 会报错,后续观察
   Function(dynamic value) onChanged;
+  /// 向外部暴漏 onSelect 方法, 可以二次设置选择项
+  bool Function(dynamic value, ChoiceSelectedType<T>)? canChanged;
 
   Widget? avatar;
   Widget? avatarSeleted;
@@ -136,12 +141,11 @@ class _NChoiceBoxOneState<T> extends State<NChoiceBoxOne> {
                 selected: selected,
                 onSelected: (bool selected) {
                   debugPrint("e: $selected,  $e");
-
-                  if (selected) {
-                    _seletedValue = e;
+                  final canChange = widget.canChanged?.call(e, onSelect as ChoiceSelectedType) ?? true;
+                  if (!canChange) {
+                    return;
                   }
-                  widget.onChanged.call(_seletedValue);
-                  setState(() {});
+                  onSelect(e, selected);
                 },
               ),
             ),
@@ -149,5 +153,13 @@ class _NChoiceBoxOneState<T> extends State<NChoiceBoxOne> {
         },).toList(),
       );
     });
+  }
+
+  onSelect(T e, bool selected) {
+    if (selected) {
+      _seletedValue = e;
+    }
+    widget.onChanged?.call(_seletedValue);
+    setState(() {});
   }
 }

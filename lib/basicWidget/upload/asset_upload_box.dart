@@ -214,7 +214,7 @@ class _AssetUploadBoxState extends State<AssetUploadBox> {
           requestType: RequestType.image,
           specialPickerType: SpecialPickerType.noPreview,
           selectedAssets: selectedEntitys,
-          maxAssets: maxCount - tmpUrls.length,
+          maxAssets: maxCount,
           specialItemPosition: SpecialItemPosition.prepend,
           specialItemBuilder: (context, AssetPathEntity? path, int length,) {
             if (path?.isAll != true) {
