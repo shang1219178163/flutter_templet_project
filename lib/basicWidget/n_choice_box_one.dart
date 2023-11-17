@@ -25,7 +25,8 @@ class NChoiceBoxOne<T> extends StatefulWidget {
     this.spacing = 8,
     this.runSpacing = 0,
     this.contentPadding,
-    required this.onChanged,
+    this.onChanged,
+    required this.canChanged,
     this.primaryColor = Colors.blue,
     this.avatar,
     this.avatarSeleted,
@@ -45,7 +46,7 @@ class NChoiceBoxOne<T> extends StatefulWidget {
   double runSpacing;
   EdgeInsets? contentPadding;
   // ValueChanged<T?> onChanged;// 会报错,后续观察
-  Function(dynamic value) onChanged;
+  Function(dynamic value)? onChanged;
   /// 向外部暴漏 onSelect 方法, 可以二次设置选择项
   bool Function(dynamic value, ChoiceSelectedType<T>)? canChanged;
 

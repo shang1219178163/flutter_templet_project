@@ -34,6 +34,7 @@ import 'package:flutter_templet_project/pages/demo/HitTestBehaviorDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ImageStretchDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MenuAnchorDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MenuEntryDemo.dart';
+import 'package:flutter_templet_project/pages/demo/NChoiceBoxOneDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ProgressClipperDemo.dart';
 import 'package:flutter_templet_project/pages/demo/SearchDemo.dart';
 import 'package:flutter_templet_project/pages/demo/SegmentedControlDemo.dart';
@@ -654,6 +655,7 @@ class APPRouter {
   static const qrcodePage = '/qrcodePage';
   static const menuAnchorDemo = '/menuAnchorDemo';
   static const myMenuBarDemo = '/myMenuBarDemo';
+  static const choiceBoxOneDemo = '/choiceBoxOneDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -1042,6 +1044,7 @@ class AppPage {
     GetPage(name: APPRouter.qrcodePage, page: () => QrcodePage(),),
     GetPage(name: APPRouter.menuAnchorDemo, page: () => MenuAnchorDemo(),),
     GetPage(name: APPRouter.myMenuBarDemo, page: () => MyMenuBarDemo(),),
+    GetPage(name: APPRouter.choiceBoxOneDemo, page: () => NChoiceBoxOneDemo(),),
 
 
   ];

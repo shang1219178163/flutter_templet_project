@@ -193,6 +193,7 @@ class _ChipDemoState extends State<ChipDemo> {
             styleSeleted: TextStyle(
                 color: Colors.red,
             ),
+            canChanged: (e, onSelect) => true,
             onChanged: (e){
               debugPrint("NChoiceBoxOne e: $e");
             }
