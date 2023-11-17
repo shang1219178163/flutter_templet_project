@@ -45,7 +45,7 @@ class _GridViewDemoState extends State<GridViewDemo> {
     return GridView.count(
       padding: EdgeInsets.all(15.0),
       //一行多少个
-      crossAxisCount: 2,
+      crossAxisCount: 5,
       //滚动方向
       scrollDirection: Axis.vertical,
       // 左右间隔
