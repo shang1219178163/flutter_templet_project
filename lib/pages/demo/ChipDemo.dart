@@ -10,10 +10,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/header.dart';
 import 'package:flutter_templet_project/basicWidget/n_choice_box_one.dart';
 import 'package:flutter_templet_project/basicWidget/n_indicator_point.dart';
+import 'package:flutter_templet_project/basicWidget/n_tag_box.dart';
+import 'package:flutter_templet_project/basicWidget/n_tag_box_new.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
+import 'package:flutter_templet_project/mixin/cupertino_alert_dialog_mixin.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:tuple/tuple.dart';
@@ -27,7 +31,12 @@ class ChipDemo extends StatefulWidget {
   _ChipDemoState createState() => _ChipDemoState();
 }
 
-class _ChipDemoState extends State<ChipDemo> {
+class _ChipDemoState extends State<ChipDemo> with CupertinoAlertDialogMixin {
+
+  final tuples = List.generate(9, (i) => (i, "选择$i")).toList();
+
+  final tuplesNew = List.generate(9, (i) => Tuple2(i, "选择$i")).toList();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -122,7 +131,6 @@ class _ChipDemoState extends State<ChipDemo> {
               ],
             ),
           ),
-
           SectionHeader(
             title: "RawChip",
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -154,7 +162,6 @@ class _ChipDemoState extends State<ChipDemo> {
               ],
             ),
           ),
-
           SectionHeader(
             title: "CircleAvatar",
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -181,7 +188,6 @@ class _ChipDemoState extends State<ChipDemo> {
               ],
             ),
           ),
-
           NChoiceBoxOne<Tuple2<String, String>>(
             items: items,
             seletedItem: items[rpTypeIndex],
@@ -198,7 +204,8 @@ class _ChipDemoState extends State<ChipDemo> {
               debugPrint("NChoiceBoxOne e: $e");
             }
           ),
-          Divider(),
+          buildTagManager(),
+          buildTagManagerNew(),
           SectionHeader(
             title: "ChoiceChip",
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -245,7 +252,6 @@ class _ChipDemoState extends State<ChipDemo> {
               ],
             ),
           ),
-
           SectionHeader(
             title: "InputChip",
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -267,15 +273,12 @@ class _ChipDemoState extends State<ChipDemo> {
               ],
             ),
           ),
-
-
           FilterChip(
             label: Text('FilterChip'),
             onSelected: (val){
               debugPrint('onSelected: $val');
             }
           ),
-
         ],
       ),
     );
@@ -285,6 +288,71 @@ class _ChipDemoState extends State<ChipDemo> {
     ddlog(e);
   }
 
+  /// 标签管理器
+  buildTagManager() {
+    return SectionHeader(
+      title: "NTagBox",
+      crossAxisAlignment: CrossAxisAlignment.start,
+      child: StatefulBuilder(
+        builder: (BuildContext context, StateSetter setState) {
+
+          return NTagBox<(int, String)>(
+            keywords: "初步诊断",
+            items: tuples,
+            titleCb: (e) => e.$2,
+            onDelete: (e) {
+              tuples.remove(e);
+              setState((){});
+            },
+            onAdd: (){
+              final randomInt = IntExt.random(max: 100);
+              tuples.add((randomInt, "选择$randomInt"));
+              setState((){});
+            },
+            onChanged: (items){
+              final titles = items.map((e) => e.$2).toList();
+              debugPrint(titles.join(","));
+            }
+          );
+        }
+      ),
+    );
+  }
+
+  /// 标签管理器
+  buildTagManagerNew() {
+    return SectionHeader(
+      title: "NTagBoxNew",
+      crossAxisAlignment: CrossAxisAlignment.start,
+      child: NTagBoxNew<(int, String)>(
+        keywords: "初步诊断",
+        items: tuples,
+        titleCb: (e) => e.$2,
+        canDelete: (e, onDelete) {
+          final index = tuples.indexOf(e);
+          if (index % 2 != 0) {
+            presentAlert(
+              titleStr: "提示",
+              contentStr: "确定删除$e",
+              onConfirm: (){
+                onDelete(e);
+              }
+            );
+            return false;
+          }
+          return true;
+        },
+        onAdd: (){
+          final randomInt = IntExt.random(max: 100);
+          tuples.add((randomInt, "选择$randomInt"));
+        },
+        onChanged: (items){
+          final titles = items.map((e) => e.$2).toList();
+          debugPrint(titles.join(","));
+        }
+    ),
+    );
+  }
 }
 
 
