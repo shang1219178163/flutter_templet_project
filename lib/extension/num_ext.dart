@@ -13,10 +13,6 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-int randomInt({int min = 0, required int max}) {
-  return min + Random().nextInt(max - min);
-}
-
 extension NumExt on num {
 
 
@@ -45,9 +41,9 @@ extension DoubleExt on double{
 
 extension IntExt on int{
 
-  // static int random({int min = 0, required int max}) {
-  //   return min + Random().nextInt(max - min);
-  // }
+  static int random({int min = 0, required int max}) {
+    return min + Random().nextInt(max - min);
+  }
 
   // /// 数字格式化
   // String numFormat([String? newPattern = '0,000', String? locale]) {

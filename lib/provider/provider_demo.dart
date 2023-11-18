@@ -180,8 +180,8 @@ class Foo with ChangeNotifier {
   }
 
   void change() {
-    bar = Bar(name: randomInt(min: 10, max: 99).toString());
-    baz = Baz(name: randomInt(min: 10, max: 99).toString());
+    bar = Bar(name: IntExt.random(min: 10, max: 99).toString());
+    baz = Baz(name: IntExt.random(min: 10, max: 99).toString());
     debugPrint("change ${bar.name} ${baz.name}");
     notifyListeners();
   }

@@ -35,7 +35,10 @@ mixin CupertinoAlertDialogMixin <T extends StatefulWidget> on State<T> {
     CupertinoAlertDialog(
       title: title ?? (titleStr.isEmpty ? null : Text(titleStr)),
       content: content ?? Text(contentStr, textAlign: TextAlign.left,),
-      actions: [("取消", onCancel), ("确定", onConfirm)].map((e) {
+      actions: [
+        ("取消", onCancel),
+        ("确定", onConfirm)
+      ].map((e) {
 
         return TextButton(
           style: TextButton.styleFrom(

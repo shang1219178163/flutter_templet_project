@@ -58,7 +58,7 @@ class _StaggeredGridViewDemoState extends State<StaggeredGridViewDemo> {
         itemBuilder: (BuildContext context, int index) => Container(
             color: ColorExt.random,
             child: Container(
-              height: randomInt(min: 100, max: 200).toDouble(),
+              height: IntExt.random(min: 100, max: 200).toDouble(),
               child: Center(
                 child: CircleAvatar(
                   backgroundColor: Colors.white,

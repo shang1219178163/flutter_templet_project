@@ -222,7 +222,7 @@ class _IMChatPageState extends State<IMChatPage> with
                       },
                       child: buildChatCell(
                         modelIndex: index,
-                        imgUrl: R.image.urls[randomInt(max: R.image.urls.length, )],
+                        imgUrl: R.image.urls[IntExt.random(max: R.image.urls.length, )],
                         isOwner: isOwner,
                         name: "路人甲",
                         title: "title",
@@ -230,7 +230,7 @@ class _IMChatPageState extends State<IMChatPage> with
                           modelIndex: index,
                           isOwner: isOwner,
                           // text: "buildContentChild",
-                          text: "聊一会" * randomInt(min: 1, max: 6,),
+                          text: "聊一会" * IntExt.random(min: 1, max: 6,),
                         ),
                       ),
                       // child: ListTile(title: Text(e),

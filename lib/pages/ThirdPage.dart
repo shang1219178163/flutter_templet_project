@@ -9,6 +9,7 @@ import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/mixin/BottomBouncingScrollPhysics.dart';
 import 'package:flutter_templet_project/mixin/MyScrollPhysics.dart';
 import 'package:flutter_templet_project/routes/AppRouteObserver.dart';
@@ -38,12 +39,6 @@ class _ThirdPageState extends State<ThirdPage> with RouteAware {
 
   GlobalKey _globalKey(int index) {
     return GlobalKey(debugLabel: "$index");
-  }
-
-
-  int randomInt({required int max, int min = 0}) {
-    var x = Random().nextInt(max) + min;
-    return x;
   }
 
   @override
@@ -220,7 +215,7 @@ class _ThirdPageState extends State<ThirdPage> with RouteAware {
               return buildConfirmDismiss(context);
             },
             child: Container(
-              height: randomInt(max: 100, min: 45).toDouble(),
+              height: IntExt.random(max: 100, min: 45).toDouble(),
               color: ColorExt.random,
               child: child
             ),
