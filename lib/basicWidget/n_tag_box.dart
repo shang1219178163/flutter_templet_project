@@ -142,13 +142,19 @@ class NTagBox<E> extends StatelessWidget {
             top: 0,
             child: InkWell(
               onTap: () => onDelete.call(e),
-              child: Image(
-                image: "icon_delete.png".toAssetImage(),
-                width: 16,
-                height: 16,
+              child: Container(
+                decoration: ShapeDecoration(
+                    color: Colors.white,
+                    shape: CircleBorder()
+                ),
+                child: Image(
+                  image: "icon_delete.png".toAssetImage(),
+                  width: 16,
+                  height: 16,
+                ),
               ),
             ),
-          )
+          ),
         ],
       ),
     );

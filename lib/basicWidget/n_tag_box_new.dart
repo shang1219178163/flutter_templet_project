@@ -24,7 +24,6 @@ class NTagBoxNew<E> extends StatefulWidget {
     required this.items,
     required this.titleCb,
     this.canDelete,
-    // required this.onDelete,
     required this.onAdd,
     required this.onChanged,
     this.radius = const Radius.circular(8),
@@ -171,13 +170,19 @@ class _NTagBoxNewState<E> extends State<NTagBoxNew> {
             top: 0,
             child: InkWell(
               onTap: () => onDelete.call(e),
-              child: Image(
-                image: "icon_delete.png".toAssetImage(),
-                width: 16,
-                height: 16,
+              child: Container(
+                decoration: ShapeDecoration(
+                  color: Colors.white,
+                  shape: CircleBorder()
+                ),
+                child: Image(
+                  image: "icon_delete.png".toAssetImage(),
+                  width: 16,
+                  height: 16,
+                ),
               ),
             ),
-          )
+          ),
         ],
       ),
     );
