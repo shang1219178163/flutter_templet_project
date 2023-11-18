@@ -305,8 +305,7 @@ class _ChipDemoState extends State<ChipDemo> with CupertinoAlertDialogMixin {
               setState((){});
             },
             onAdd: (){
-              final randomInt = IntExt.random(max: 100);
-              tuples.add((randomInt, "选择$randomInt"));
+              tuples.add((randomInt(max: 100), "选择$randomInt"));
               setState((){});
             },
             onChanged: (items){
@@ -343,8 +342,7 @@ class _ChipDemoState extends State<ChipDemo> with CupertinoAlertDialogMixin {
           return true;
         },
         onAdd: (){
-          final randomInt = IntExt.random(max: 100);
-          tuples.add((randomInt, "选择$randomInt"));
+          tuples.add((randomInt(max: 100), "选择$randomInt"));
         },
         onChanged: (items){
           final titles = items.map((e) => e.$2).toList();
