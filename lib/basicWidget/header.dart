@@ -173,9 +173,9 @@ class SectionHeader extends StatelessWidget{
   Widget build(BuildContext context) {
     return Column(
       children: [
-        divider ?? Divider(),
         NHeader.h5(title: title, text: text, style: style, padding: padding, alignment: alignment,),
         child,
+        divider ?? Divider(),
       ],
     );
   }

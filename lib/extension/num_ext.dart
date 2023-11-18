@@ -45,6 +45,10 @@ extension DoubleExt on double{
 
 extension IntExt on int{
 
+  // static int random({int min = 0, required int max}) {
+  //   return min + Random().nextInt(max - min);
+  // }
+
   // /// 数字格式化
   // String numFormat([String? newPattern = '0,000', String? locale]) {
   //   final fmt = NumberFormat(newPattern, locale);

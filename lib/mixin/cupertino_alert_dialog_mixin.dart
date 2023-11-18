@@ -33,24 +33,23 @@ mixin CupertinoAlertDialogMixin <T extends StatefulWidget> on State<T> {
     }
 
     CupertinoAlertDialog(
-      title: title ?? Text(titleStr),
+      title: title ?? (titleStr.isEmpty ? null : Text(titleStr)),
       content: content ?? Text(contentStr, textAlign: TextAlign.left,),
-      actions: [
-        TextButton(
+      actions: [("取消", onCancel), ("确定", onConfirm)].map((e) {
+
+        return TextButton(
+          style: TextButton.styleFrom(
+            padding: EdgeInsets.symmetric(vertical: 20),
+            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            minimumSize: Size(50, 18),
+          ),
           onPressed: () {
-            onCancel?.call();
+            e.$2?.call();
             Navigator.of(context, rootNavigator: true).pop();
           },
-          child: Text("取消"),
-        ),
-        TextButton(
-          onPressed: () {
-            onConfirm?.call();
-            Navigator.of(context, rootNavigator: true).pop();
-          },
-          child: Text("确定"),
-        ),
-      ],
+          child: Text(e.$1),
+        );
+      }).toList(),
     ).toShowCupertinoDialog(context: context);
   }
 
