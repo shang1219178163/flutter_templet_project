@@ -57,12 +57,23 @@ class _JsonToDartPageState extends State<JsonToDartPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        // actions: ['done',].map((e) => TextButton(
-        //   child: Text(e,
-        //     style: TextStyle(color: Colors.white),
-        //   ),
-        //   onPressed: onPressed)
-        // ).toList(),
+        actions: [
+          IconButton(
+            onPressed: (){
+              Get.bottomSheet(Container(
+                color: Colors.white,
+                height: MediaQuery.of(context).size.height * 0.3,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    NText("1. 所有对象不能为空(零属性)",),
+                  ],
+                ),
+              ));
+            },
+            icon: Icon(Icons.warning_amber_rounded)
+          ),
+        ]
       ),
       body: buildBody(),
     );
@@ -318,29 +329,43 @@ class _JsonToDartPageState extends State<JsonToDartPage> {
 
   /// 生成模型文件
   toCreateDartFile() async {
-    _focusNode.unfocus();
-    outVN.value = convertModel(
-      val: _textEditingController.text,
-      rootClassName: _classEditingController.text,
-    );
+    try {
+      _focusNode.unfocus();
+      outVN.value = convertModel(
+        val: _textEditingController.text,
+        rootClassName: _classEditingController.text,
+      );
 
-    final fileName = _classEditingController.text.toUncamlCase();
-    // debugPrint("fileName: $fileName");
+      final fileName = _classEditingController.text.toUncamlCase();
+      // debugPrint("fileName: $fileName");
 
-    /// 生成本地文件
-    final tempDir = await getDownloadsDirectory();
-    var path = '${tempDir?.path}/$fileName.dart';
-    var file = File(path);
-    file.createSync();
-    file.writeAsStringSync(outVN.value);
+      /// 生成本地文件
+      final tempDir = await getDownloadsDirectory();
+      var path = '${tempDir?.path}/$fileName.dart';
+      var file = File(path);
+      file.createSync();
+      file.writeAsStringSync(outVN.value);
 
-    showSnackBar(SnackBar(
-      content: NText("文件已生成(下载文件夹)",
+      showSnackBar(SnackBar(
+        content: NText("文件已生成(下载文件夹)",
+          color: Colors.white,
+          textAlign: TextAlign.center,
+        ),
+        backgroundColor: Colors.green,
+      ));
+    } catch (e) {
+      debugPrint("catch: $e");
+      Get.bottomSheet(Container(
         color: Colors.white,
-        textAlign: TextAlign.center,
-      ),
-      backgroundColor: Colors.green,
-    ));
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            NText(e.toString(),),
+          ],
+        ),
+      ));
+    }
+
   }
 
   onGenerate() async {
