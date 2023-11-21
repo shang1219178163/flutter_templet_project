@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/enhance/enhance_expansion/enhance_expansion_tile.dart';
 import 'package:flutter_templet_project/basicWidget/n_choice_box.dart';
+import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 
 /// 新增折叠多选或单选菜单
@@ -192,30 +193,57 @@ class _EnhanceExpansionChoicState<T> extends State<EnhanceExpansionChoic<T>> {
         ? Icon(Icons.expand_less, size: 24, color: color,)
         : Icon(Icons.expand_more, size: 24, color: color,);
 
-    var boderColor = color.withOpacity(0.2);
+    // return Container(
+    //   width: 70,
+    //   height: 30,
+    //   padding: EdgeInsets.only(left: 8.w, right: 8.w,),
+    //   decoration: BoxDecoration(
+    //     borderRadius: BorderRadius.all(Radius.circular(15.w)),
+    //     border: Border.all(color: color.withOpacity(0.3)),
+    //   ),
+    //   child: Row(
+    //     mainAxisAlignment: MainAxisAlignment.center,
+    //     children: [
+    //       Text(
+    //         title,
+    //         style: TextStyle(color: color),
+    //       ),
+    //       const SizedBox(width: 4,),
+    //       icon,
+    //     ],
+    //   )
+    // );
 
-    return Container(
-      width: 66.w,
-      height: 29.w,
-      // color: Colors.red,
-      padding: EdgeInsets.only(left: 8.w, right: 4.w, top: 2.w, bottom: 2.w),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(15.w)),
-        border: Border.all(color: boderColor),
+
+    return OutlinedButton(
+      style: OutlinedButton.styleFrom(
+        padding: EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 16),
+        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        minimumSize: Size(50, 18),
+        maximumSize: Size(90, 35),
+        foregroundColor: color,
+        shape: StadiumBorder(),
+        side: BorderSide(color: color.withOpacity(0.3)),
+
       ),
+      onPressed: null,
       child: Row(
+        mainAxisSize: MainAxisSize.min,
         children: [
-          Text(
-            title,
-            style: TextStyle(color: color),
-          ),
-          const SizedBox(width: 0,),
+          Expanded(
+            child: Text(
+              title,
+              style: TextStyle(color: color),
+            ),
+          ) ,
           icon,
         ],
-      ),
+      )
     );
   }
+
 }
+
 
 // mixin ChoicMixin{
 //   String id;

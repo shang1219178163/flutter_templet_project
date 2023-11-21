@@ -450,7 +450,6 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
         trailing: disable ? const SizedBox() : buildExpandMenuTrailing(
           isExpand: isExpand,
           color: color,
-          boderColor: color.withOpacity(0.2),
         ),
         collapsedTextColor: fontColor,
         textColor: fontColor,
@@ -474,32 +473,27 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
   buildExpandMenuTrailing({
     bool isExpand = true,
     Color color = Colors.blueAccent,
-    Color boderColor = Colors.blueAccent,
   }) {
     final title = isExpand ? "收起" : "展开";
     final icon = isExpand
         ? Icon(Icons.expand_less, size: 24, color: color,)
         : Icon(Icons.expand_more, size: 24, color: color,);
 
-    return Container(
-      width: 66.w,
-      height: 29.w,
-      // color: Colors.red,
-      padding: EdgeInsets.only(left: 8.w, right: 4.w, top: 2.w, bottom: 2.w),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(15.w)),
-        border: Border.all(color: boderColor),
+    return OutlinedButton.icon(
+      style: OutlinedButton.styleFrom(
+        padding: EdgeInsets.only(left: 12, right: 8, top: 12, bottom: 12),
+        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        minimumSize: Size(50, 18),
+        foregroundColor: color,
+        shape: StadiumBorder(),
+        side: BorderSide(color: color.withOpacity(0.3))
       ),
-      child: Row(
-        children: [
-          Text(
-            title,
-            style: TextStyle(color: color),
-          ),
-          const SizedBox(width: 0,),
-          icon,
-        ],
-      ),
+      onPressed: null,
+      icon: Text(
+        title,
+        style: TextStyle(color: color),
+      ) ,
+      label: icon
     );
   }
 
