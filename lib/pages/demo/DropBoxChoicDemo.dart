@@ -10,6 +10,7 @@ import 'package:flutter_templet_project/basicWidget/enhance/enhance_expansion/en
 
 import 'package:flutter_templet_project/basicWidget/n_cancel_and_confirm_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_choice_box.dart';
+import 'package:flutter_templet_project/basicWidget/n_label_and_icon.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
@@ -79,41 +80,33 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
       body: SafeArea(
           child: Column(
             children: [
+              buildSearchAndFilterBar(),
               Expanded(
                 child: Stack(
                   clipBehavior: Clip.none,
                   children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        buildSearchAndFilterBar(),
-                        Expanded(
-                          child: buildList(
-                            items: items.map((e) => "item_$e").toList(),
-                          )
-                        ),
-                      ],
+                    Expanded(
+                        child: buildList(
+                          items: items.map((e) => "item_$e").toList(),
+                        )
                     ),
                     ValueListenableBuilder<bool>(
-                        valueListenable: isVisible,
-                        builder: (context, bool value, child) {
-                          if (value == false) {
-                            return const SizedBox();
-                          }
-
-                          final top = _globalKey.currentContext?.renderBoxSize?.height ??
-                              60.h;
-                          return Positioned(
-                            top: top,
-                            bottom: 0,
-                            width: context.screenSize.width,
-                            // height: 600.h,
-                            child: buildDropBox(
-                              controller: dropBoxController,
-                              hasShadow: true,
-                            ),
-                          );
+                      valueListenable: isVisible,
+                      builder: (context, bool value, child) {
+                        if (value == false) {
+                          return const SizedBox();
                         }
+
+                        return Positioned(
+                          top: 0,
+                          bottom: context.appBarHeight,
+                          width: context.screenSize.width,
+                          child: buildDropBox(
+                            controller: dropBoxController,
+                            hasShadow: true,
+                          ),
+                        );
+                      }
                     ),
                   ],
                 ),
@@ -136,9 +129,9 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
               //...
             }),
           ),
-          SizedBox(
-            width: 8.w,
-          ),
+          // SizedBox(
+          //   width: 8.w,
+          // ),
           buildTextBtn(
             padding: EdgeInsets.only(left: 16.w),
             icon: Icon(Icons.fitbit),
@@ -217,16 +210,17 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
       ),
     );
 
-    var child = <Widget>[label];
-    if (icon != null) {
-      child = isIconRight
-          ? [Flexible(child: label), SizedBox(width: labelIconPadding), icon]
-          : [icon, SizedBox(width: labelIconPadding), Flexible(child: label)];
-    }
+    final child = NLabelAndIcon(
+      label: label,
+      icon: icon,
+      betweenGap: labelIconPadding,
+      isReverse: isIconRight,
+    );
 
     return TextButton(
       style: TextButton.styleFrom(
         // splashFactory: NoSplash.splashFactory,
+        // padding: EdgeInsets.zero,
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
         shape: shape,
         // shape: StadiumBorder(
@@ -236,10 +230,7 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
       onPressed: cb ?? () {
         debugPrint(title);
       },
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: child,
-      ),
+      child: child,
     );
   }
 
@@ -255,8 +246,8 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(30.w),
-          bottomRight: Radius.circular(30.w),
+          bottomLeft: Radius.circular(20),
+          bottomRight: Radius.circular(20),
         ),
         boxShadow: !hasShadow ? null : [
           BoxShadow(
@@ -329,7 +320,7 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
     );
     return Container(
       color: Colors.black.withOpacity(0.1),
-      padding: EdgeInsets.only(bottom: context.appBarHeight.h),
+      // padding: EdgeInsets.only(bottom: context.appBarHeight.h),
       child: child,
     );
   }
@@ -388,7 +379,7 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
   Widget buildDropBoxButtonBar() {
     return NCancelAndConfirmBar(
       cancelTitle: "重置",
-      bottomRadius: Radius.circular(30.w),
+      bottomRadius: Radius.circular(20),
       onCancel: () {
         // Navigator.of(context).pop();
         handleResetFitler();
