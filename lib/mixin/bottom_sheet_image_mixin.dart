@@ -233,13 +233,11 @@ mixin BottomSheetImageMixin<T extends StatefulWidget> on State<T> {
         return;
       }
       // EasyToast.showLoading("图片处理中...");
-      final fileNew = await file.toCropImage();
+      final cropFile = await file.toCropImage() ?? file;
       // EasyToast.hideLoading();
-
-      // int length = await fileNew.length();
-      //
-      // final imagePath = fileNew.path;
-      onChanged(fileNew);
+      final compressFile = await cropFile.toCompressImage();
+      
+      onChanged(compressFile);
       return;
     }
 
