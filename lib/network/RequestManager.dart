@@ -37,21 +37,8 @@ class RequestManager{
 
   // Dio _dio = Dio();
   Dio get _dio {
-    final interceptorsWrapper = InterceptorsWrapper(
-      onRequest: (RequestOptions options, handler) {
-        // print("请求之前");
-        return handler.next(options);
-      },
-      onResponse: (Response response, handler) {
-        // print("响应之前");
-        DebugLog.d(response.toDescription());
-        return handler.next(response);
-      },
-      onError: (DioError e, handler) {
-        return handler.next(e);
-      });
-
     var dio = Dio();
+
     var options = BaseOptions();
     options.baseUrl = RequestConfig.baseUrl;
     options.connectTimeout = Duration(milliseconds: 30000);
@@ -64,12 +51,27 @@ class RequestManager{
     };
     dio.options = options;
 
-    dio.interceptors.add(interceptorsWrapper);
+
+    final interceptor = InterceptorsWrapper(
+      onRequest: (RequestOptions options, handler) {
+        // print("请求之前");
+        return handler.next(options);
+      },
+      onResponse: (Response response, handler) {
+        // print("响应之前");
+        DebugLog.d(response.toDescription());
+        return handler.next(response);
+      },
+      onError: (DioError e, handler) {
+        return handler.next(e);
+      }
+    );
+    dio.interceptors.add(interceptor);
     DioProxy.setProxy(dio);/// 添加抓包代理
     return dio;
   }
 
-  Future<dynamic> request(BaseRequestAPI api) async {
+  Future<Map<String, dynamic>> request(BaseRequestAPI api) async {
     if (api.needToken && token?.isNotEmpty != true) {
       // debugPrint("❌ 无效请求: ${api.requestURI}\ntoken: $token");
       return {
@@ -94,49 +96,68 @@ class RequestManager{
       };
     }
 
-    if (api.shouldCache && api.jsonFromCache() != null) {
-      return api.jsonFromCache();
+    if (api.shouldCache) {
+      final cache = api.jsonFromCache();
+      if (cache != null) {
+        return cache;
+      }
     }
 
     var response = await sendRequest(
-      api.requestURI,
+      url: api.requestURI,
       method: api.requestType,
       queryParams: api.requestParams,
       data: api.requestParams,
     );
-    return _handleResponse(response, api: api);
+    return _handleResponse(response: response, api: api);
   }
 
-  Future sendRequest(
-      String apiPath,
-      {
-        required HttpMethod method,
-        dynamic queryParams,
-        dynamic data,
-        Options? options,
-        // MultipartFile? file,
-        String? filePath,
-        ProgressCallback? onSendProgress,
-        ProgressCallback? onReceiveProgress,
-      }) async {
-    final url = "${RequestConfig.baseUrl}/$apiPath";
-    // if (kDebugMode) {
-    //   debugPrint("url: $url, ${queryParams}");
-    // }
+  Future<Response<Map<String, dynamic>>?> sendRequest({
+    required String url,
+    required HttpMethod method,
+    dynamic queryParams,
+    dynamic data,
+    Options? options,
+    // MultipartFile? file,
+    String? filePath,
+    ProgressCallback? onSendProgress,
+    ProgressCallback? onReceiveProgress,
+  }) async {
+    final seperator = url.startsWith("/") ? "" : "/";
+    var path = "${RequestConfig.baseUrl}$seperator$url";
+    if (url.startsWith("http")) {
+      path = url;
+    }
+
     try {
       switch (method) {
         case HttpMethod.GET:
-          return await _dio.get(url, queryParameters: queryParams, options: options);
+          return await _dio.get<Map<String, dynamic>>(path,
+              queryParameters: queryParams,
+              options: options,
+          );
         case HttpMethod.PUT:
-          return await _dio.put(url, queryParameters: queryParams, data: data, options: options);
+          return await _dio.put<Map<String, dynamic>>(path,
+              queryParameters: queryParams,
+              data: data,
+              options: options,
+          );
         case HttpMethod.POST:
-          return await _dio.post(url, queryParameters: queryParams, data: data, options: options);
+          return await _dio.post<Map<String, dynamic>>(path,
+              queryParameters: queryParams,
+              data: data,
+              options: options,
+          );
         case HttpMethod.DELETE:
-          return await _dio.delete(url, queryParameters: queryParams, data: data, options: options);
+          return await _dio.delete<Map<String, dynamic>>(path,
+              queryParameters: queryParams,
+              data: data,
+              options: options,
+          );
         case HttpMethod.UPLOAD:
           {
             assert(filePath?.isNotEmpty == true, "上传文件路径不能为空");
-            return await _dio.post(url,
+            return await _dio.post(path,
               queryParameters: queryParams,
               data: data ?? FormData.fromMap({
                 'dirName': 'APP',
@@ -149,7 +170,7 @@ class RequestManager{
           }
         case HttpMethod.DOWNLOAD:
           {
-            return await _dio.get(url,
+            return await _dio.get(path,
               queryParameters: queryParams,
               data: FormData.fromMap({
                 'dirName': 'APP',
@@ -175,41 +196,47 @@ class RequestManager{
     return null;
   }
 
-  Future<dynamic> upload(String url, String path, {
+  Future<Map<String, dynamic>> upload({
+    required String url,
+    required String filePath,
     dynamic queryParams,
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
     var formData = FormData.fromMap({
       'dirName': 'MY_APP',
-      'files': await MultipartFile.fromFile(path),
+      'files': await MultipartFile.fromFile(filePath),
     });
     var response = await sendRequest(
-      url,
+      url: url,
       method: HttpMethod.POST,
       queryParams: queryParams,
-        data: formData,
+      data: formData,
     );
-    return _handleResponse(response);
+    return _handleResponse(response: response);
   }
 
-  Future<dynamic> download(String url, {
+  Future<Map<String, dynamic>> download({
+    required String url,
     dynamic queryParams,
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
     var response = await sendRequest(
-      url,
+      url: url,
       method: HttpMethod.GET,
       options: Options(
         responseType: ResponseType.bytes,
         followRedirects: false,
       ),
     );
-    return _handleResponse(response);
+    return _handleResponse(response: response);
   }
 
-  _handleResponse(Response? response, {BaseRequestAPI? api}) {
+  Map<String, dynamic> _handleResponse({
+    required Response? response,
+    BaseRequestAPI? api,
+  }) {
     final result = response?.data as Map<String, dynamic>?;
     if (result == null || result.keys.contains("code") != true) {
       return {
