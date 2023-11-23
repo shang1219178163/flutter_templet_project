@@ -9,15 +9,14 @@
 import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_templet_project/cache/CacheService.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/network/RequestConfig.dart';
 import 'package:flutter_templet_project/network/RequestError.dart';
 import 'package:flutter_templet_project/network/base_request_api.dart';
 import 'package:flutter_templet_project/network/dio_ext.dart';
 import 'package:flutter_templet_project/network/proxy/dio_proxy.dart';
-import 'package:flutter_templet_project/service/cache_service.dart';
 import 'package:flutter_templet_project/util/debug_log.dart';
-
 
 
 class RequestManager{
