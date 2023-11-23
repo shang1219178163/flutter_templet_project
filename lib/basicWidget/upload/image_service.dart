@@ -77,14 +77,16 @@ class ImageService{
 
 
    /// 图像裁剪
-   Future<File> toCropImage(File file, {
+   Future<File?> toCropImage(File file, {
      int? maxWidth,
      int? maxHeight,
      bool showLoading = true,
    }) async {
      final sourcePath = file.path;
 
-     if(showLoading)EasyToast.showLoading("图片处理中...");
+     if(showLoading) {
+       EasyToast.showLoading("图片处理中...");
+     }
 
      var croppedFile = await ImageCropper().cropImage(
        sourcePath: sourcePath,
@@ -107,10 +109,12 @@ class ImageService{
        ],
      );
 
-     if(showLoading)EasyToast.hideLoading();
+     if(showLoading) {
+       EasyToast.hideLoading();
+     }
 
      if (croppedFile == null) {
-       return file;
+       return null;
      }
      return File(croppedFile.path);
    }
@@ -181,8 +185,8 @@ extension ImageFileExt on File {
     return compressFile;
   }
 
-  /// 图片压缩
-  Future<File> toCropImage({
+  /// 图片裁剪
+  Future<File?> toCropImage({
     int? maxWidth,
     int? maxHeight,
     bool showLoading = true,

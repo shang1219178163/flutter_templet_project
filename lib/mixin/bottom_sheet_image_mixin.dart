@@ -125,11 +125,12 @@ mixin BottomSheetImageMixin<T extends StatefulWidget> on State<T> {
         return compressFile;
       }
 
-      final cropFile = await compressFile.toCropImage();
+      final cropFile = await compressFile.toCropImage() ?? file;
+      final compressFileNew = await cropFile.toCompressImage();
 
       // int length = await cropFile.length();
-      onChanged(cropFile);
-      return cropFile;
+      onChanged(compressFileNew);
+      return compressFileNew;
     } catch (err) {
       openAppSettings();
     }
