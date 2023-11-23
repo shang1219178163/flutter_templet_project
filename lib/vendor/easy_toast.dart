@@ -24,6 +24,21 @@ class EasyToast {
   }
 
   // toast - 错误
+  static void showInfoToast(
+    String text, {
+      int milliseconds = 1500,
+      VoidCallback? cb,
+      bool needLogin = false,
+  }) {
+    final duration = Duration(milliseconds: milliseconds);
+    EasyLoading.showInfo(
+      text,
+      duration: duration,
+    );
+    Future.delayed(duration, cb);
+  }
+
+  // toast - 错误
   static void showInfo(
     String text, {
     int milliseconds = 1500,

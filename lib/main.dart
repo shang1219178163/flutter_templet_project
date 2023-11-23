@@ -17,6 +17,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/APPThemeSettings.dart';
+import 'package:flutter_templet_project/cache/CacheService.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/button_ext.dart';
 import 'package:flutter_templet_project/pages/demo/CalendarDatePickerDemo.dart';
@@ -29,7 +30,6 @@ import 'package:flutter_templet_project/provider/rxDart_provider_demo.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:flutter_templet_project/routes/AppRouteObserver.dart';
-import 'package:flutter_templet_project/service/cache_service.dart';
 import 'package:flutter_templet_project/util/app_util.dart';
 import 'package:flutter_templet_project/util/localizations/AppCupertinoLocalizations.dart';
 import 'package:flutter_templet_project/util/localizations/ZhCupertinoLocalizations.dart';
