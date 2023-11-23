@@ -39,6 +39,7 @@ class _NContextMenuRegionState extends State<NContextMenuRegion> {
       case TargetPlatform.iOS:
         return true;
       case TargetPlatform.macOS:
+        return true;
       case TargetPlatform.fuchsia:
       case TargetPlatform.linux:
       case TargetPlatform.windows:
