@@ -83,9 +83,7 @@ class HorizontalCell extends StatelessWidget {
                     children: <Widget>[
                       title,
                       if(titleRight != null) titleRight!,
-                    ]
-                        .map((e) => e.toContainer(color: ColorExt.random)).toList()
-                    ,
+                    ].map((e) => e.toDecoratedBox(color: ColorExt.random)).toList(),
                   ),
                   if (subtitle != null || subtitleRight != null) titleSpace,
                   if (subtitle != null || subtitleRight != null) Row(
@@ -94,12 +92,12 @@ class HorizontalCell extends StatelessWidget {
                       if(subtitle != null) subtitle!,
                       if(subtitleRight != null) subtitleRight!,
                     ]
-                        .map((e) => e.toContainer(color: ColorExt.random)).toList()
+                        .map((e) => e.toDecoratedBox(color: ColorExt.random)).toList()
                     ,
                   ),
                 ]
             )
-                .toContainer(color: ColorExt.random)
+                .toDecoratedBox(color: ColorExt.random)
             ,
           ),
           if (right != null) right!,

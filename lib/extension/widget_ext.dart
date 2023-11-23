@@ -39,7 +39,7 @@ extension WidgetExt on Widget {
   }
 
   /// 展示边框线
-  Widget toContainer({
+  Widget toBorder({
     Color? color,
     Color borderColor = Colors.blue,
   }) => Container(
@@ -53,6 +53,30 @@ extension WidgetExt on Widget {
   ColoredBox toColoredBox({
     Color? color,
   }) => ColoredBox(color: color ?? ColorExt.random, child: this,);
+
+  DecoratedBox toDecoratedBox({
+    Color color = Colors.blue,
+    DecorationImage? image,
+    BoxBorder? border,
+    BorderRadiusGeometry? borderRadius,
+    List<BoxShadow>? boxShadow,
+    Gradient? gradient,
+    BlendMode? backgroundBlendMode,
+    BoxShape shape = BoxShape.rectangle,
+  }) => DecoratedBox(
+    decoration: BoxDecoration(
+      color: color,
+      image: image,
+      border: border,
+      borderRadius: borderRadius,
+      boxShadow: boxShadow,
+      gradient: gradient,
+      backgroundBlendMode: backgroundBlendMode,
+      shape: shape,
+    ),
+    child: this,
+  );
+
 
   toShowCupertinoDialog({
     required BuildContext context,
