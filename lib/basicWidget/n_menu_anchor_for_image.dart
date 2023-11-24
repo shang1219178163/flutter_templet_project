@@ -52,14 +52,14 @@ class _NMenuAnchorForImageState extends State<NMenuAnchorForImage> {
           style: MenuStyle(
             backgroundColor: MaterialStateProperty.all(Colors.transparent),
             shadowColor: MaterialStateProperty.all(Colors.transparent),
-            surfaceTintColor: MaterialStateProperty.all(Colors.yellow),
+            // surfaceTintColor: MaterialStateProperty.all(Colors.yellow),
           )
         ),
-        menuButtonTheme: MenuButtonThemeData(
-          style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(Colors.red),
-          )
-        )
+        // menuButtonTheme: MenuButtonThemeData(
+        //   style: ButtonStyle(
+        //     backgroundColor: MaterialStateProperty.all(Colors.red),
+        //   )
+        // )
       ),
       child: MenuAnchor(
         controller: menuController,
