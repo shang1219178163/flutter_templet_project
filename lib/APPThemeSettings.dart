@@ -8,6 +8,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/list_ext.dart';
 import 'package:get/get.dart';
@@ -22,6 +23,7 @@ class APPThemeService {
   // static APPThemeSettings get instance => _instance;
 
   late ThemeData themeData = ThemeData.light().copyWith(
+    useMaterial3: false,
     platform: TargetPlatform.iOS,
     // scaffoldBackgroundColor: Colors.red
     splashFactory: NoSplash.splashFactory,
@@ -62,6 +64,7 @@ class APPThemeService {
 
   // ThemeData? darkThemeData;
   ThemeData darkThemeData = ThemeData.dark().copyWith(
+    useMaterial3: false,
     platform: TargetPlatform.iOS,
     splashFactory: NoSplash.splashFactory,
     splashColor: Colors.transparent, // 点击时的高亮效果设置为透明
@@ -256,4 +259,46 @@ class APPThemeService {
     ...Colors.accents,
   ];
 
+  
+  buildMaterial3Theme() {
+    final color = Colors.blue;
+    return ThemeData(
+      ///用来适配 Theme.of(context).primaryColorLight 和 primaryColorDark 的颜色变化，不设置可能会是默认蓝色
+      primarySwatch: color as MaterialColor,
+
+      /// Card 在 M3 下，会有 apply Overlay
+      colorScheme: ColorScheme.fromSeed(
+        seedColor: color,
+        primary: color,
+        brightness: Brightness.light,
+        ///影响 card 的表色，因为 M3 下是  applySurfaceTint ，在 Material 里
+        surfaceTint: Colors.transparent,
+      ),
+      appBarTheme: AppBarTheme(
+        iconTheme: IconThemeData(
+          color: Colors.white,
+          size: 24.0,
+        ),
+        backgroundColor: color,
+        titleTextStyle: Typography.dense2014.titleLarge,
+        systemOverlayStyle: SystemUiOverlayStyle.light,
+      ),
+      /// 受到 iconThemeData.isConcrete 的印象，需要全参数才不会进入 fallback
+      iconTheme: IconThemeData(
+        size: 24.0,
+        fill: 0.0,
+        weight: 400.0,
+        grade: 0.0,
+        opticalSize: 48.0,
+        color: Colors.white,
+        opacity: 0.8,
+      ),
+      ///修改 FloatingActionButton的默认主题行为
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+          foregroundColor: Colors.white,
+          backgroundColor: color,
+          shape: CircleBorder()
+        ),
+      );
+  }
 }
