@@ -3,6 +3,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_menu_anchor.dart';
+import 'package:flutter_templet_project/basicWidget/n_menu_anchor_for_image.dart';
 
 
 enum SomeItemType { none, itemOne, itemTwo, itemThree }
@@ -21,12 +22,33 @@ class _MenuAnchorDemoState extends State<MenuAnchorDemo> {
 
   String defaultValue = "-";
 
+  var selectedItem = SomeItemType.itemThree;
+
+  final MenuController controller = MenuController();
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('$widget')),
       body: buildBody(),
-      // body: CheckboxMenuDemo(message: kMessage,),
+      floatingActionButton: buildFloatingActionButton(),
+    );
+  }
+
+  buildFloatingActionButton() {
+    final values = [
+      "icon_heart_border.png",
+      "icon_heart_half.png",
+      "icon_heart.png",
+    ];
+
+    return NMenuAnchorForImage(
+      values: values,
+      initialItem: values[1],
+      onChanged: (e) {
+        debugPrint(e.toString());
+      },
     );
   }
 
@@ -122,6 +144,8 @@ class _MenuAnchorDemoState extends State<MenuAnchorDemo> {
       }
     );
   }
+
+
 }
 
 
