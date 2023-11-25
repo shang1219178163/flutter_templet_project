@@ -20,6 +20,7 @@ import 'package:flutter_templet_project/pages/PageLifecycleObserverDemo.dart';
 import 'package:flutter_templet_project/pages/RegExpDemo.dart';
 import 'package:flutter_templet_project/pages/StringTransformPage.dart';
 import 'package:flutter_templet_project/pages/ThemeColorDemo.dart';
+import 'package:flutter_templet_project/pages/demo/APIConvertPage.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedSizeDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedSizeDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/AppBarDemo.dart';
@@ -656,6 +657,7 @@ class APPRouter {
   static const menuAnchorDemo = '/menuAnchorDemo';
   static const myMenuBarDemo = '/myMenuBarDemo';
   static const choiceBoxOneDemo = '/choiceBoxOneDemo';
+  static const apiConvertPage = '/apiConvertPage';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -1045,6 +1047,7 @@ class AppPage {
     GetPage(name: APPRouter.menuAnchorDemo, page: () => MenuAnchorDemo(),),
     GetPage(name: APPRouter.myMenuBarDemo, page: () => MyMenuBarDemo(),),
     GetPage(name: APPRouter.choiceBoxOneDemo, page: () => NChoiceBoxOneDemo(),),
+    GetPage(name: APPRouter.apiConvertPage, page: () => APIConvertPage(),),
 
 
   ];

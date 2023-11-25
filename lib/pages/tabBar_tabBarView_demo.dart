@@ -623,6 +623,8 @@ var customs = [
   Tuple2(APPRouter.assetUploadBoxDemo, "assetUploadBoxDemo", ),
   Tuple2(APPRouter.dashLineDemo, "dashLineDemo", ),
   Tuple2(APPRouter.choiceBoxOneDemo, "choiceBoxOneDemo", ),
+  Tuple2(APPRouter.apiConvertPage, "APIConvertPage", ),
+
 
 ];
 
