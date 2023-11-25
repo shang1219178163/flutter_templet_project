@@ -145,11 +145,14 @@ extension StringExt on String{
       var result = "";
       if (data is Map) {
         result += jsonEncode(data);
-      } else if (data is List) {
+      }
+      else if (data is List) {
         result += jsonEncode(data);
-      } else if (data is bool || data is num) {
+      }
+      else if (data is bool || data is num) {
         result += data.toString();
-      } else if (data is String) {
+      }
+      else if (data is String) {
         result += data;
       }
       return result;

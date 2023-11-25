@@ -69,12 +69,6 @@ class TagSetApi extends BaseRequestAPI{
       return false;
     }
 
-
-      if (diseaseDepartmentId == null) {
-        EasyToast.showInfoToast('diseaseDepartmentId 不能为空',needLogin: true);
-        return false;
-      }
-
     return true;
   }
 

@@ -61,6 +61,11 @@ class TagGetApi extends BaseRequestAPI{
       return false;
     }
 
+    if (agencyId == null) {
+      EasyToast.showInfoToast('agencyId 不能为空', needLogin: true);
+      return false;
+    }
+
     return true;
   }
 
