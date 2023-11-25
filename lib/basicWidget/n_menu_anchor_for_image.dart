@@ -105,13 +105,20 @@ class _NMenuAnchorForImageState extends State<NMenuAnchorForImage> {
     VoidCallback? onPressed,
     padding = const EdgeInsets.all(16.0),
   }) {
-    return FloatingActionButton(
-      onPressed:onPressed,
-      child: Padding(
-        padding: padding,
-        child: Image(
-          image: imgName.toAssetImage(),
-          color: Colors.white,
+    return Theme(
+      data: ThemeData(
+        floatingActionButtonTheme: FloatingActionButtonThemeData(
+          backgroundColor: Theme.of(context).indicatorColor,
+        )
+      ),
+      child: FloatingActionButton(
+        onPressed:onPressed,
+        child: Padding(
+          padding: padding,
+          child: Image(
+            image: imgName.toAssetImage(),
+            color: Colors.white,
+          ),
         ),
       ),
     );

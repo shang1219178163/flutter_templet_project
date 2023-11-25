@@ -35,11 +35,35 @@ class APPThemeService {
     // textTheme: ThemeData.light().textTheme.copyWith(
     //     button: TextStyle(color: Colors.red)
     // ),//设置文本颜色为红色
+    appBarTheme: const AppBarTheme(
+      elevation: 0,
+    ),
+    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+    dividerTheme: const DividerThemeData(
+      color: Color(0xFFE4E4E4),
+      space: 1,
+      thickness: 1,
+    ),
+    badgeTheme: const BadgeThemeData(
+      offset: Offset(-1, -4),
+      largeSize: 20,
+      smallSize: 20,
+      textColor: Colors.white,
+      textStyle: TextStyle(
+        fontWeight: FontWeight.bold,
+        color: Colors.white,
+        fontSize: 11,
+      ),
+    ),
+    bottomAppBarTheme: const BottomAppBarTheme(
+      height: 60,
+    ),
     chipTheme: ChipThemeData(
       pressElevation: 0,//不明原因未生效
     ),
     buttonTheme: ButtonThemeData(
-      splashColor: Colors.red,
+      splashColor: Colors.transparent,
+      buttonColor: Colors.blue,
     ),
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
