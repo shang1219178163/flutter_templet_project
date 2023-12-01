@@ -371,7 +371,9 @@ class _JsonToDartPageState extends State<JsonToDartPage> {
         classSuffix: _suffixController.text,
       );
 
-      final fileName = _nameController.text.toUncamlCase();
+      final fileName = (_prefixController.text ?? "").toUpperCase() +
+        (_nameController.text.capitalizeFirst ?? "") +
+        (_suffixController.text.capitalizeFirst ?? "");
       // debugPrint("fileName: $fileName");
 
       /// 生成本地文件
