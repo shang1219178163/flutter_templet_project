@@ -42,6 +42,7 @@ class NTextfield extends StatefulWidget {
     this.maxLines = 1,
     this.keyboardType,
     this.textInputAction = TextInputAction.done,
+    this.textAlignVertical = TextAlignVertical.center,
     this.obscureText,
     this.contentPadding,
     this.fillColor = bgColor,
@@ -82,6 +83,8 @@ class NTextfield extends StatefulWidget {
   final TextInputType? keyboardType;
 
   final TextInputAction? textInputAction;
+
+  final TextAlignVertical textAlignVertical;
 
   /// 内容边距
   final EdgeInsetsGeometry? contentPadding;
@@ -165,6 +168,7 @@ class _NTextfieldState extends State<NTextfield> {
       keyboardType: widget.keyboardType,
       textInputAction: widget.textInputAction,
       // autofocus: !widget.obscureText,
+      textAlignVertical: widget.textAlignVertical,
       style: const TextStyle(
         fontSize: 16,
         fontWeight: FontWeight.w400,

@@ -16,7 +16,7 @@ import 'package:image_gallery_saver/image_gallery_saver.dart';
 class ImageService{
 
   /// 图片压缩
-   Future<File> compressAndGetFile(File file, [String? targetPath]) async {
+  Future<File> compressAndGetFile(File file, {String? targetPath, bool needLogInfo = true}) async {
     try {
       var fileName = file.absolute.path.split('/').last;
 
@@ -56,17 +56,19 @@ class ImageService{
         debugPrint("压缩文件路径获取失败");
         return file;
       }
-      final lenth = await result.length();
 
-      final infos = [
-        "图片名称: $fileName",
-        "压缩前: ${file.lengthSync().fileSizeDesc}",
-        "压缩质量: $compressQuality",
-        "压缩后: ${lenth.fileSizeDesc}",
-        "原路径: ${file.absolute.path}",
-        "压缩路径: $targetPath",
-      ];
-      debugPrint("图片压缩: ${infos.join("\n")}");
+      if (needLogInfo) {
+        final length = await result.length();
+        final infos = [
+          "图片名称: $fileName",
+          "压缩前: ${file.lengthSync().fileSizeDesc}",
+          "压缩质量: $compressQuality",
+          "压缩后: ${length.fileSizeDesc}",
+          "原路径: ${file.absolute.path}",
+          "压缩路径: $targetPath",
+        ];
+        debugPrint("图片压缩: ${infos.join("\n")}");
+      }
 
       return File(path);
     } catch (e) {

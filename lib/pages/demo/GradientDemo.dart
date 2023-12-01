@@ -1,4 +1,5 @@
 import 'dart:math' as math;
+import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/header.dart';
@@ -389,13 +390,33 @@ class _GradientDemoState extends State<GradientDemo> with BottomSheetMixin {
           ).createShader(bounds);
         },
       ),
+      Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: buildGradientText(
+          const Offset(0, 40),
+          const Offset(150, 40),
+          <Color>[
+            Colors.red,
+            Colors.yellow,
+          ])
+      ),
+      Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: buildGradientText(
+            const Offset(0, 40),
+            const Offset(40, 100),
+            <Color>[
+            Colors.red,
+            Colors.yellow,
+          ])
+        ),
     ]);
   }
 
   Widget _buildBox({
     required String text,
     required Decoration decoration,
-    double height = 100,
+    double height = 60,
     double? width,
   }) {
     return Container(
@@ -437,6 +458,33 @@ class _GradientDemoState extends State<GradientDemo> with BottomSheetMixin {
             )
         ),
       ],
+    );
+  }
+
+  buildGradientText(
+    Offset from,
+    Offset to,
+    List<Color> colors, [
+    List<double>? colorStops,
+    TileMode tileMode = TileMode.clamp,
+  ]
+  ) {
+    return Text(
+      '如果设置的比较多可以封装组件widget，根据组件context获取位置大小;'*16,
+      maxLines: 13,
+      overflow: TextOverflow.ellipsis,
+      softWrap: true,
+      style: TextStyle(
+          fontSize: 16,
+          foreground: Paint()
+            ..shader = ui.Gradient.linear(
+                from,
+                to,
+                colors,
+                colorStops,
+                tileMode,
+                )
+      ),
     );
   }
 

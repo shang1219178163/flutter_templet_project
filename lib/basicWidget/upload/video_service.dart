@@ -35,7 +35,7 @@ class VideoService{
       // if(showToast)EasyToast.showLoading("视频处理中...");
 
       final quality = needCompress ? VideoQuality.MediumQuality : VideoQuality.HighestQuality;
-      MediaInfo? compressVideoMediaInfo = await VideoCompress.compressVideo(
+      final compressVideoMediaInfo = await VideoCompress.compressVideo(
         file.path,
         quality: quality,
         deleteOrigin: deleteOrigin,

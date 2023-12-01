@@ -11,6 +11,7 @@ class NNetworkImage extends StatelessWidget {
   	Key? key,
   	this.title,
     required this.url,
+    this.placehorder = const AssetImage("images/img_placehorder.png"),
     this.fit = BoxFit.fill,
     this.width,
     this.height,
@@ -19,21 +20,23 @@ class NNetworkImage extends StatelessWidget {
     this.mode = ExtendedImageMode.none,
   }) : super(key: key);
 
-  String? title;
+  final String? title;
 
-  String url;
+  final String url;
+  /// 占位图
+  final AssetImage placehorder;
 
-  BoxFit? fit;
+  final BoxFit? fit;
 
-  double? width;
+  final double? width;
 
-  double? height;
+  final double? height;
 
-  double radius;
+  final double radius;
 
-  bool cache;
+  final bool cache;
 
-  ExtendedImageMode mode;
+  final ExtendedImageMode mode;
 
 
   @override
@@ -41,7 +44,7 @@ class NNetworkImage extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(radius),
       child: url.startsWith("http") == false ? Image(
-        image: "img_placehorder.png".toAssetImage(),
+        image: placehorder,
         width: width,
         height: height,
       ) : ExtendedImage.network(
