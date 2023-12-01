@@ -299,8 +299,16 @@ class _AssetUploadButtonState extends State<AssetUploadButton> with AutomaticKee
       return uploadFile(
         filePath: path,
         onSendProgress: (int count, int total){
-          _percentVN.value = (count/total);
-          // debugPrint("${count}/${total}_${_percentVN.value}_${_percentVN.value.toStringAsPercent(2)}");
+          // _percentVN.value = (count/total);
+          final percent = (count/total);
+          if(percent >= 0.99){
+            _percentVN.value = 0.99;// dio 上传进度和返回 url 有时间差
+          }
+        },
+        onReceiveProgress: (int count, int total){
+          final receiveProgress = (count/total);
+          _percentVN.value = 1;// dio 上传进度和返回 url 有时间差
+          // LogUtil.d("${fileName}__receiveProgress: ${_percentVN.value}");
         },
         urlConvert: widget.urlConvert,
       );
