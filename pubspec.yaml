@@ -185,7 +185,7 @@ dependencies:
   json_to_dart:
     git:
       url: 'git@github.com:shang1219178163/json_to_dart.git'
-      ref: 'master'
+      ref: 'v1.0.0'
 
 #  User:
 #    hosted:
