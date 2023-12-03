@@ -51,6 +51,8 @@ class NNetworkImage extends StatelessWidget {
         url,
         width: width,
         height: height,
+        cacheWidth: width?.toInt(),
+        cacheHeight: height?.toInt(),
         fit: fit,
         cache: cache,
         mode: mode,
@@ -61,7 +63,7 @@ class NNetworkImage extends StatelessWidget {
           if(state.extendedImageLoadState != LoadState.completed) {
             // return Icon(Icons.photo, color: Colors.teal.shade100, size: height,);
             return Image(
-              image: "img_placehorder.png".toAssetImage(),
+              image: placehorder,
               width: width,
               height: height,
             );
