@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_templet_project/APPThemeSettings.dart';
+import 'package:flutter_templet_project/basicWidget/GradientBoundPainter.dart';
 import 'package:flutter_templet_project/basicWidget/after_layout_builder.dart';
 import 'package:flutter_templet_project/basicWidget/n_dash_decoration.dart';
 import 'package:flutter_templet_project/basicWidget/n_label_and_icon.dart';
@@ -610,6 +611,8 @@ class _SecondPageState extends State<SecondPage> {
             ),
             SizedBox(height: 20,),
 
+            _buildGradientBound(),
+            SizedBox(height: 20,),
           ],
         ),
       ],
@@ -956,6 +959,32 @@ class _SecondPageState extends State<SecondPage> {
         ),
         child: child ?? Text("LinearGradient",
           style: TextStyle(color: Colors.white),
+        ),
+      ),
+    );
+  }
+
+
+  Widget _buildGradientBound({
+    Gradient? gradient,
+    Widget? child,
+    VoidCallback? onTap,
+  }) {
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        width: 200,
+        height: 48,
+        child: CustomPaint(
+          painter: GradientBoundPainter(
+            // width: constraints.maxWidth,
+            // height: constraints.maxHeight,
+              colors: [
+                const Color(0xFFFA709A),
+                const Color(0xFFFA709A).withOpacity(0.3),
+              ]
+          ),
+          child: Center(child: Text("GradientBoundPainter")),
         ),
       ),
     );
