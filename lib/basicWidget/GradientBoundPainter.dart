@@ -3,9 +3,9 @@
 import 'package:flutter/cupertino.dart';
 
 /// 渐进色边框
-class GradientBoundPainter extends CustomPainter {
+class GradientBorderPainter extends CustomPainter {
 
-  const GradientBoundPainter({
+  const GradientBorderPainter({
     this.strokeWidth = 1.0,
     this.topLeft = const Radius.circular(8),
     this.topRight = const Radius.circular(8),
@@ -52,7 +52,7 @@ class GradientBoundPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant GradientBoundPainter oldDelegate) {
+  bool shouldRepaint(covariant GradientBorderPainter oldDelegate) {
     return oldDelegate.colors != colors
         || oldDelegate.gradient != gradient
         || oldDelegate.strokeWidth != strokeWidth

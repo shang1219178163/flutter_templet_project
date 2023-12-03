@@ -613,6 +613,14 @@ class _SecondPageState extends State<SecondPage> {
 
             _buildGradientBound(),
             SizedBox(height: 20,),
+
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.transparent,
+                border: Border.all(color: Colors.blue),
+                borderRadius: BorderRadius.all(Radius.circular(0)),
+              ),
+            )
           ],
         ),
       ],
@@ -976,7 +984,7 @@ class _SecondPageState extends State<SecondPage> {
         width: 200,
         height: 48,
         child: CustomPaint(
-          painter: GradientBoundPainter(
+          painter: GradientBorderPainter(
             // width: constraints.maxWidth,
             // height: constraints.maxHeight,
               colors: [
