@@ -234,15 +234,15 @@ class TagGetApi extends BaseRequestAPI{
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        NText("JSON to Dart",
+        NText("api 验证方法转换",
           fontSize: 24,
           fontWeight: FontWeight.w500,
         ),
         SizedBox(height: spacing,),
-        NText("Paste your JSON in the textarea below, click convert and get your Dart classes for free.",
-          maxLines: 3,
-        ),
-        SizedBox(height: spacing*2,),
+        // NText("api 验证方法转换",
+        //   maxLines: 3,
+        // ),
+        // SizedBox(height: spacing*2,),
       ],
     );
   }
@@ -472,7 +472,7 @@ class TagGetApi extends BaseRequestAPI{
         tmp = tmp.replaceAll("EasyToast.showInfoToast(", "");
         tmp = tmp.replaceAll("EasyToast.showToast(", "");
 
-        return "return (false, $tmp)";
+        return "return (false, $tmp);";
       }).toList();
       debugPrint("messages: $messages");
 
@@ -481,13 +481,21 @@ class TagGetApi extends BaseRequestAPI{
       }
       contentNew = contentNew.replaceAll("return false;", "");
       contentNew = contentNew.replaceAll("return true;", "return (true, \"\");");
-      contentNew = contentNew.replaceAll("bool get validateParams", "(bool, String) get validateParams");
+      contentNew = contentNew.replaceAll("bool get validateParams", "(bool, String) get validateParamsTuple");
 
       debugPrint("content: $content");
       debugPrint("contentNew: $contentNew");
       // outVN.value = text.replaceAll(content, contentNew);
-      outVN.value = contentNew;
-
+      // outVN.value = contentNew;
+      outVN.value = """
+        /// 使用新的参数校验方法
+        @override
+        bool get useNewValidateParams => true;
+        /// 参数校验
+        @override
+        ${contentNew}
+      """;
+      await Clipboard.setData(ClipboardData(text: outVN.value));
     } catch (e) {
       debugPrint("catch: $e");
       Get.bottomSheet(Container(

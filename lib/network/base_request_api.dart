@@ -1,6 +1,7 @@
 
 
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_templet_project/network/RequestError.dart';
 
 enum HttpMethod {
@@ -57,7 +58,8 @@ class BaseRequestAPI {
     if (map == null) {
       return false;
     }
-    if (jsonFromCache() != map) {
+
+    if (!mapEquals(jsonFromCache(), map)) {
       return true;
     }
     return false;
