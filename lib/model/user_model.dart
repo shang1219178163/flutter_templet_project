@@ -8,30 +8,34 @@
 
 
 class UserModel {
+  UserModel({
+    this.id,
+    this.name,
+    this.nickName,
+    this.email,
+    this.address,
+    this.phone,
+    this.website,
+    this.company,
+    this.isSelected,
+  });
+  
   int? id;
   String? name;
-  String? username;
+  String? nickName;
   String? email;
   Address? address;
   String? phone;
   String? website;
   Company? company;
-
-  UserModel({
-    this.id,
-    this.name,
-    this.username,
-    this.email,
-    this.address,
-    this.phone,
-    this.website,
-    this.company
-  });
-
+  
+  bool? isSelected;
+  
+  
   UserModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
-    username = json['username'];
+    nickName = json['nickName'];
     email = json['email'];
     address =
     json['address'] != null ? Address.fromJson(json['address']) : null;
@@ -39,22 +43,27 @@ class UserModel {
     website = json['website'];
     company =
     json['company'] != null ? Company.fromJson(json['company']) : null;
+
+    isSelected = json['isSelected'];
   }
 
   Map<String, dynamic> toJson() {
     var data = Map<String, dynamic>();
     data['id'] = id;
     data['name'] = name;
-    data['username'] = username;
+    data['username'] = nickName;
     data['email'] = email;
     if (address != null) {
       data['address'] = address!.toJson();
     }
     data['phone'] = phone;
     data['website'] = website;
+
     if (company != null) {
       data['company'] = company!.toJson();
     }
+
+    data['isSelected'] = isSelected;
     return data;
   }
 }
@@ -64,7 +73,7 @@ class Address {
   String? suite;
   String? city;
   String? zipcode;
-  Geo? geo;
+  Coordinate? geo;
 
   Address({this.street, this.suite, this.city, this.zipcode, this.geo});
 
@@ -73,7 +82,7 @@ class Address {
     suite = json['suite'];
     city = json['city'];
     zipcode = json['zipcode'];
-    geo = json['geo'] != null ? Geo.fromJson(json['geo']) : null;
+    geo = json['geo'] != null ? Coordinate.fromJson(json['geo']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -89,13 +98,13 @@ class Address {
   }
 }
 
-class Geo {
+class Coordinate {
   String? lat;
   String? lng;
 
-  Geo({this.lat, this.lng});
+  Coordinate({this.lat, this.lng});
 
-  Geo.fromJson(Map<String, dynamic> json) {
+  Coordinate.fromJson(Map<String, dynamic> json) {
     lat = json['lat'];
     lng = json['lng'];
   }
