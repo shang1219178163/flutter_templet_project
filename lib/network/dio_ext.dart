@@ -18,7 +18,8 @@ requestUrl: ${requestOptions.path},
 method: ${requestOptions.method},
 header: ${jsonEncode(requestOptions.headers)},
 params: ${jsonEncode(requestOptions.data ?? requestOptions.queryParameters)},
-jsonStr: $jsonStr
+jsonStr: 
+$jsonStr
 """;
   }
 

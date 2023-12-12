@@ -187,11 +187,13 @@ class _GithubRepoDemoState extends State<GithubRepoDemo> {
 
 
 class ReposAPI extends BaseRequestAPI{
-  @override
-  HttpMethod get requestType => HttpMethod.GET;
 
   @override
   String get requestURI => "https://api.github.com/orgs/flutterchina/repos";
+
+  @override
+  HttpMethod get requestType => HttpMethod.GET;
+
 
   // @override
   // parse(Map data) {
