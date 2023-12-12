@@ -17,10 +17,11 @@ import 'package:flutter_templet_project/network/base_request_api.dart';
 import 'package:flutter_templet_project/network/dio_ext.dart';
 import 'package:flutter_templet_project/network/proxy/dio_proxy.dart';
 import 'package:flutter_templet_project/util/debug_log.dart';
+import 'package:flutter_templet_project/vendor/easy_toast.dart';
 
 
-class RequestManager{
-  static const BASE_URL = "";
+class RequestManager extends BaseRequestAPI{
+  // static const BASE_URL = "";
   static const CODE_SUCCESS = 200;
   static const CODE_TIME_OUT = -1;
 
@@ -35,17 +36,18 @@ class RequestManager{
 
 
   // Dio _dio = Dio();
-  Dio get _dio {
+  Dio getDio() {
     var dio = Dio();
 
     var options = BaseOptions();
     options.baseUrl = RequestConfig.baseUrl;
-    options.connectTimeout = Duration(milliseconds: 30000);
-    options.receiveTimeout = Duration(milliseconds: 30000);
+    options.connectTimeout = connectTimeout ?? Duration(milliseconds: 30000);
+    options.receiveTimeout = receiveTimeout ?? Duration(milliseconds: 30000);
     options.responseType = ResponseType.json;
     options.headers = {
       'token': token,
       'Content-Type': 'application/json',
+      'Connection':"keep-alive",
       'terminal': '*',
     };
     dio.options = options;
@@ -131,24 +133,24 @@ class RequestManager{
     try {
       switch (method) {
         case HttpMethod.GET:
-          return await _dio.get<Map<String, dynamic>>(path,
+          return await getDio().get<Map<String, dynamic>>(path,
               queryParameters: queryParams,
               options: options,
           );
         case HttpMethod.PUT:
-          return await _dio.put<Map<String, dynamic>>(path,
+          return await getDio().put<Map<String, dynamic>>(path,
               queryParameters: queryParams,
               data: data,
               options: options,
           );
         case HttpMethod.POST:
-          return await _dio.post<Map<String, dynamic>>(path,
+          return await getDio().post<Map<String, dynamic>>(path,
               queryParameters: queryParams,
               data: data,
               options: options,
           );
         case HttpMethod.DELETE:
-          return await _dio.delete<Map<String, dynamic>>(path,
+          return await getDio().delete<Map<String, dynamic>>(path,
               queryParameters: queryParams,
               data: data,
               options: options,
@@ -156,7 +158,7 @@ class RequestManager{
         case HttpMethod.UPLOAD:
           {
             assert(filePath?.isNotEmpty == true, "上传文件路径不能为空");
-            return await _dio.post(path,
+            return await getDio().post(path,
               queryParameters: queryParams,
               data: data ?? FormData.fromMap({
                 'dirName': 'APP',
@@ -169,7 +171,7 @@ class RequestManager{
           }
         case HttpMethod.DOWNLOAD:
           {
-            return await _dio.get(path,
+            return await getDio().get(path,
               queryParameters: queryParams,
               data: FormData.fromMap({
                 'dirName': 'APP',
@@ -271,14 +273,14 @@ class RequestManager{
         });
         break;
       case 'LOGIN_ID_FORBID_UPDATE':
-        // BrunoUti.showInfoToast('该手机号已被绑定');
+        EasyToast.showInfoToast('该手机号已被绑定');
         break;
     //  微信授权时手机号是否存在
       case 'USER_LOGIN_INFO_NOT_FOUND':
       case 'WX_GET_ACCESS_TOKEN_EXCEPTION':
         break;
       default:
-        // BrunoUti.showInfoToast(resMap['message']);
+        EasyToast.showInfoToast(result['message']);
         break;
     }
     return result;

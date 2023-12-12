@@ -20,15 +20,6 @@ class RequestConfig {
     return result;
   }
 
-  static String get protocolUrl {
-    switch (current) {
-      case APPEnvironment.prod:
-        return 'https://yljk.cn';
-      default:
-        return 'https://yljk.cn';
-    }
-  }
-
   static String apiTitle = '/api/crm';
   static String ossImageUrl = 'https://yl-oss.yljt.cn';
   static const connectTimeout = 15000;

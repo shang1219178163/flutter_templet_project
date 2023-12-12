@@ -4,6 +4,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_templet_project/network/RequestError.dart';
 
+
+
 enum HttpMethod {
   GET,
   PUT,
@@ -24,6 +26,12 @@ class BaseRequestAPI {
 
   /// get/post...
   HttpMethod get requestType => HttpMethod.GET;
+
+  /// 毫秒
+  Duration? get connectTimeout => null;
+
+  /// 毫秒
+  Duration? get receiveTimeout => null;
 
   Map<String, dynamic> get requestParams => {};
 
