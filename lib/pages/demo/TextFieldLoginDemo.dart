@@ -7,14 +7,10 @@ import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 
-final accountGlobalKey = GlobalKey(debugLabel: "accountGlobalKey");
 
-final pwdGlobalKey = GlobalKey(debugLabel: "pwdGlobalKey");
+class TextFieldLoginDemo extends StatefulWidget {
 
-
-class TextFieldColorChangeDemo extends StatefulWidget {
-
-  TextFieldColorChangeDemo({
+  TextFieldLoginDemo({
     Key? key, 
     this.title
   }) : super(key: key);
@@ -22,15 +18,16 @@ class TextFieldColorChangeDemo extends StatefulWidget {
   final String? title;
 
   @override
-  _TextFieldColorChangeDemoState createState() => _TextFieldColorChangeDemoState();
+  _TextFieldLoginDemoState createState() => _TextFieldLoginDemoState();
 }
 
-class _TextFieldColorChangeDemoState extends State<TextFieldColorChangeDemo> {
+class _TextFieldLoginDemoState extends State<TextFieldLoginDemo> {
     late final FocusNode _focusNode = FocusNode();
 
     String loginId = "";
     String password = "";
 
+    final loginEnable = ValueNotifier(false);
 
     @override
     void dispose() {
@@ -52,11 +49,12 @@ class _TextFieldColorChangeDemoState extends State<TextFieldColorChangeDemo> {
     Widget build(BuildContext context) {
       return Scaffold(
         appBar: AppBar(
-          title: Text('Changing Colors'),
+          title: Text('${widget}'),
         ),
         body: Container(
           padding: EdgeInsets.all(40.0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               buildLoginBox(),
             ],
@@ -65,44 +63,70 @@ class _TextFieldColorChangeDemoState extends State<TextFieldColorChangeDemo> {
       );
     }
     /// 登录盒子
-    buildLoginBox() {
-      return Center(
-        // heightFactor: 1.9,
-        child: Container(
-          margin: EdgeInsets.only(top: 25, left: 30, right: 30, bottom: 27),
-          child: Column(
-            children: [
-              LoginInput(
-                image: 'icon_account.png'.toPath(),
-                hint: '请输入手机号/账号',
-                // keyboardType: TextInputType.number,
-                inputFormatters: [
-                  LengthLimitingTextInputFormatter(10),
-                ],
-                value: loginId,
-                onChanged: (text) {
-                  loginId = text;
-                },
-              ),
-              SizedBox(height: 16,),
-              LoginInput(
-                image: 'icon_lock.png'.toPath(),
-                hint: '请输入密码',
-                // obscureText: true,
-                isPwd: true,
-                showEyeIcon: true,
-                inputFormatters: [
-                  LengthLimitingTextInputFormatter(10),
-                ],
-                value: password,
-                onChanged: (text) {
-                  password = text;
-                },
-              ),
-            ],
-          ),
+    Widget buildLoginBox() {
+      return Container(
+        margin: EdgeInsets.only(top: 25, left: 30, right: 30, bottom: 27),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            LoginInput(
+              image: 'icon_account.png'.toPath(),
+              hint: '请输入手机号/账号',
+              // keyboardType: TextInputType.number,
+              inputFormatters: [
+                LengthLimitingTextInputFormatter(10),
+              ],
+              value: loginId,
+              onChanged: (text) {
+                loginId = text.trim();
+                checkLoginEnable();
+              },
+            ),
+            SizedBox(height: 16,),
+            LoginInput(
+              image: 'icon_lock.png'.toPath(),
+              hint: '请输入密码',
+              // obscureText: true,
+              isPwd: true,
+              showEyeIcon: true,
+              inputFormatters: [
+                LengthLimitingTextInputFormatter(10),
+              ],
+              value: password,
+              onChanged: (text) {
+                password = text.trim();
+                checkLoginEnable();
+              },
+            ),
+            SizedBox(height: 32,),
+            ValueListenableBuilder(
+                valueListenable: loginEnable,
+                builder: (context,  value, child){
+
+                  return ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.symmetric(vertical: 18),
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      minimumSize: Size(50, 18),
+                      shape: const StadiumBorder(),
+                      disabledBackgroundColor: primaryColor.withOpacity(0.5),
+                      disabledForegroundColor: Colors.white,
+                    ),
+                    onPressed: !value ? null : (){
+
+                    },
+                    child: Text("登录"),
+                  );
+                }
+            )
+          ],
         ),
       );
+    }
+
+    checkLoginEnable() {
+      loginEnable.value = loginId.isNotEmpty && password.isNotEmpty;
+
     }
   }
 
