@@ -132,7 +132,7 @@ class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
             iconSize: 30,
             value: e.item3,
             color: Theme.of(context).primaryColor,
-            canEdit: false,
+            readOnly: false,
             onChanged: (value){
               e.item4.call(value);
             },

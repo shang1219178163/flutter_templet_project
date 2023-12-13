@@ -13,6 +13,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
+import 'package:get/get.dart';
+
+import 'package:flutter_templet_project/basicWidget/TextInputFormatter/MinMaxTextInputFormatter.dart';
 
 
 ///自定义数值增减 Stepper
@@ -25,7 +28,7 @@ class NumberStepper extends StatefulWidget {
     this.iconSize = 32,
     required this.value,
     this.color = Colors.blue,
-    this.canEdit = true,
+    this.readOnly = false,
     this.radius = 5.0,
     this.wraps = true,
     this.style = const TextStyle(
@@ -51,13 +54,11 @@ class NumberStepper extends StatefulWidget {
   /// icon 颜色
   final Color color;
   /// 是否可以编辑
-  final bool canEdit;
+  final bool readOnly;
   /// 圆角
   final double radius;
-
+  /// 字体样式
   final TextStyle? style;
-
-
   /// 回调
   final ValueChanged<int> onChanged;
 
@@ -97,45 +98,47 @@ class _NumberStepperState extends State<NumberStepper> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.canEdit) {
-      return buildTexfieldStyle();
-    }
-    return buildSystemStyle();
+    return buildTexfieldStyle();
+
+    // if (widget.canEdit) {
+    //   return buildTexfieldStyle();
+    // }
+    // return buildSystemStyle();
   }
 
-  Widget buildSystemStyle() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        buildIconButton(
-          onPressed: () {
-            go(-widget.step);
-          },
-          child: Icon(Icons.remove, size: widget.iconSize),
-        ),
-        Container(
-          width: widget.max.toString().length*16*widget.iconSize/30,
-          height: widget.iconSize,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            color: centerColor,
-          ),
-          child: Text('$current',
-            style: widget.style ?? TextStyle(
-              fontSize: widget.iconSize * 0.7,
-            ),
-            textAlign: TextAlign.center,
-          ),
-        ),
-        buildIconButton(
-          onPressed: () {
-            go(widget.step);
-          },
-          child: Icon(Icons.add, size: widget.iconSize),
-        ),
-      ],
-    );
-  }
+  // Widget buildSystemStyle() {
+  //   return Row(
+  //     mainAxisAlignment: MainAxisAlignment.center,
+  //     children: [
+  //       buildIconButton(
+  //         onPressed: () {
+  //           go(-widget.step);
+  //         },
+  //         child: Icon(Icons.remove, size: widget.iconSize),
+  //       ),
+  //       Container(
+  //         width: widget.max.toString().length*16*widget.iconSize/30,
+  //         height: widget.iconSize,
+  //         alignment: Alignment.center,
+  //         decoration: BoxDecoration(
+  //           color: centerColor,
+  //         ),
+  //         child: Text('$current',
+  //           style: widget.style ?? TextStyle(
+  //             fontSize: widget.iconSize * 0.7,
+  //           ),
+  //           textAlign: TextAlign.center,
+  //         ),
+  //       ),
+  //       buildIconButton(
+  //         onPressed: () {
+  //           go(widget.step);
+  //         },
+  //         child: Icon(Icons.add, size: widget.iconSize),
+  //       ),
+  //     ],
+  //   );
+  // }
 
   Widget buildTexfieldStyle() {
     return Row(
@@ -181,6 +184,7 @@ class _NumberStepperState extends State<NumberStepper> {
   Widget buildTexfield() {
     return TextField(
       controller: _textController,
+      readOnly: widget.readOnly,
       keyboardType: TextInputType.number,
       textAlign: TextAlign.center,
       textAlignVertical: TextAlignVertical.center,
@@ -207,7 +211,9 @@ class _NumberStepperState extends State<NumberStepper> {
       // helperText: "随便输入文字或数字", //输入框底部辅助性说明文字
       ),
       inputFormatters: [
+        FilteringTextInputFormatter.digitsOnly,
         LengthLimitingTextInputFormatter("${widget.max}".length),
+        MinMaxTextInputFormatter(max: widget.max, min: widget.min),
       ],
     );
   }

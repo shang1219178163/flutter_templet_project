@@ -27,34 +27,17 @@ class NumberStepperDemo extends StatelessWidget {
         child: Center(
           child: Column(
             children: [
-              Spacer(),
-              Container(
-                width: 44,
-                height: 44,
-                decoration: BoxDecoration(
-                  color: Theme.of(context).primaryColor,
-                  borderRadius: BorderRadius.circular(5.0),
-                  // border: Border.all(color: Theme.of(context).primaryColor, width: 1), // 边色与边宽度
-                ),
-                child: OutlinedButton(
-                  style: ButtonStyle(
-                    padding:  MaterialStateProperty.all(EdgeInsets.zero),
-                    minimumSize: MaterialStateProperty.all(Size(44, 44)),
-                  ),
-                  onPressed: () { ddlog("onPressed"); },
-                  child: Icon(Icons.security, color: Colors.white,),
-                ),
-              ),
+              // Spacer(),
               SizedBox(height: 20,),
               UnconstrainedBox(
                 child: NumberStepper(
-                  min: 1,
-                  max: 1000,
+                  min: 0,
+                  max: 8000,
                   step: 100,
                   iconSize: 60,
                   value: 1000,
                   color: Theme.of(context).primaryColor,
-                  canEdit: false,
+                  readOnly: false,
                   style: const TextStyle(
                     fontSize: 40,
                   ),
@@ -72,7 +55,7 @@ class NumberStepperDemo extends StatelessWidget {
                   iconSize: 40,
                   value: 99999,
                   color: Theme.of(context).primaryColor,
-                  canEdit: false,
+                  readOnly: false,
                   onChanged: (value){
                     ddlog(value);
                   },
