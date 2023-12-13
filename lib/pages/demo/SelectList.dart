@@ -31,14 +31,6 @@ class _SelectListPageState extends State<SelectListPage> {
     );
   }).toList();
 
-  late final dataList = ValueNotifier(models);
-  /// 当前选择个数
-  late final selectedCount = ValueNotifier(models.where((e) => e.isSelected == true).length);
-  /// 是否全选
-  bool get isAll => dataList.value.where((e) => e.isSelected != true).isEmpty;
-  /// 已选择
-  List<UserModel> get selectedItems => dataList.value.where((e) => e.isSelected == true).toList();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,13 +52,14 @@ class _SelectListPageState extends State<SelectListPage> {
 
   Widget buildBody() {
     return SelectList(
+      models: models,
       isMultiple: isMultiple,
       onSelected: (List<UserModel> items) {
         DebugLog.d(items.map((e) => (e.name,)));
       },
     );
   }
-  
+
   
 }
 
@@ -75,10 +68,13 @@ class SelectList extends StatefulWidget {
 
   SelectList({super.key,
     this.isMultiple = true,
+    required this.models,
     required this.onSelected,
   });
 
   bool isMultiple;
+
+  List<UserModel> models;
 
   ValueChanged<List<UserModel>> onSelected;
 
@@ -91,13 +87,7 @@ class _SelectListState extends State<SelectList> {
   final _scrollController = ScrollController();
 
 
-  late final List<UserModel> models = List.generate(20, (i) {
-    return UserModel(
-      id: i,
-      name: "选项_$i",
-      isSelected: false,
-    );
-  }).toList();
+  late final List<UserModel> models = widget.models;
 
   late final dataList = ValueNotifier(models);
   /// 当前选择个数
