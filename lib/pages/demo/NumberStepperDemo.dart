@@ -9,6 +9,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/number_stepper.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/widget_ext.dart';
 
 class NumberStepperDemo extends StatelessWidget {
   const NumberStepperDemo({Key? key}) : super(key: key);
@@ -19,7 +20,7 @@ class NumberStepperDemo extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         // backgroundColor: kPrimaryColor,
-        title: Text("Custom Stepper"),
+        title: Text("NumberStepperDemo"),
         centerTitle: false,
       ),
       body: SafeArea(
@@ -44,42 +45,45 @@ class NumberStepperDemo extends StatelessWidget {
                   child: Icon(Icons.security, color: Colors.white,),
                 ),
               ),
-              Spacer(),
-              NumberStepper(
-                minValue: 1,
-                maxValue: 1000,
-                stepValue: 100,
-                iconSize: 60,
-                value: 1000,
-                color: Theme.of(context).primaryColor,
-                style: NumberStepperStyle.system,
-                block: (value){
-                  ddlog(value);
-                },
+              SizedBox(height: 20,),
+              UnconstrainedBox(
+                child: NumberStepper(
+                  min: 1,
+                  max: 1000,
+                  step: 100,
+                  iconSize: 60,
+                  value: 1000,
+                  color: Theme.of(context).primaryColor,
+                  canEdit: false,
+                  onChanged: (value){
+                    ddlog(value);
+                  },
+                ).toColoredBox(),
+              ),
+              SizedBox(height: 20,),
+              UnconstrainedBox(
+                child: NumberStepper(
+                  min: 1,
+                  max: 99999,
+                  step: 100,
+                  iconSize: 40,
+                  value: 99999,
+                  color: Theme.of(context).primaryColor,
+                  canEdit: false,
+                  onChanged: (value){
+                    ddlog(value);
+                  },
+                ).toColoredBox(),
               ),
               SizedBox(height: 20,),
               NumberStepper(
-                minValue: 1,
-                maxValue: 1000,
-                stepValue: 100,
-                iconSize: 40,
-                value: 1000,
+                min: 1,
+                max: 99999,
+                step: 1,
+                iconSize: 36,
+                value: 999,
                 color: Theme.of(context).primaryColor,
-                style: NumberStepperStyle.outlined,
-                block: (value){
-                  ddlog(value);
-                },
-              ),
-              Spacer(),
-              NumberStepper(
-                minValue: 1,
-                maxValue: 1000,
-                stepValue: 100,
-                iconSize: 30,
-                value: 1000,
-                color: Theme.of(context).primaryColor,
-                style: NumberStepperStyle.textfield,
-                block: (value){
+                onChanged: (value){
                   ddlog(value);
                 },
               ),
@@ -146,13 +150,13 @@ class NumberStepperDemo extends StatelessWidget {
                   ),
                   Spacer(),
                   NumberStepper(
-                    minValue: 1,
-                    maxValue: 1000,
-                    stepValue: 100,
+                    min: 1,
+                    max: 1000,
+                    step: 100,
                     iconSize: 30,
                     value: 1000,
                     color: Colors.red,
-                    block: (value){
+                    onChanged: (value){
                       ddlog(value);
                     },
                   )

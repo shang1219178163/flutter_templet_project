@@ -9,42 +9,48 @@
 // ignore: must_be_immutable
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/widget_ext.dart';
 
-enum NumberStepperStyle {
-system,
-outlined,
-textfield,
-}
 
 ///自定义数值增减 Stepper
 class NumberStepper extends StatefulWidget {
   NumberStepper({
     Key? key,
-    required this.minValue,
-    required this.maxValue,
-    required this.stepValue,
-    this.iconSize = 24,
+    this.min = 1,
+    this.max = 9999,
+    required this.step,
+    this.iconSize = 32,
     required this.value,
     this.color = Colors.blue,
-    this.style = NumberStepperStyle.system,
+    this.canEdit = true,
     this.radius = 5.0,
     this.wraps = true,
-    required this.block,
+    required this.onChanged,
   }) : super(key: key);
 
-  final int minValue;
-  final int maxValue;
-  final int stepValue;
+  ///最小值
+  final int min;
+  /// 最大值
+  final int max;
+  /// 步长
+  final int step;
+  /// icon 尺寸
   final double iconSize;
-  int value;
-
+  /// 当前值
+  final int value;
+  /// 到达边界值是否继续
   final bool wraps;
-
+  /// icon 颜色
   final Color color;
-  final NumberStepperStyle style;
+  /// 是否可以编辑
+  final bool canEdit;
+  /// 圆角
   final double radius;
-  void Function(int value) block;
+  /// 回调
+  final ValueChanged<int> onChanged;
 
 
   @override
@@ -58,57 +64,48 @@ class _NumberStepperState extends State<NumberStepper> {
   // 焦点
   final focusNode1 = FocusNode();
 
+  // late int current = widget.value;
+  late int _current = widget.value;
+
+  set current(val){
+    _current = val;
+    _textController.text = "${_current}";
+  }
+
+  int get current{
+    return _current;
+  }
+
   @override
   void initState() {
     // TODO: implement initState
 
-    _textController.text = "${widget.value}";
-
-    ddlog(_textController.text);
+    _textController.text = "${current}";
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     // return buildOther(context);
-    switch (widget.style) {
-      case NumberStepperStyle.outlined:
-        return buildOutlinedStyle(context);
-        break;
-      case NumberStepperStyle.textfield:
-        return buildTexfieldStyle(context);
-      default:
-        break;
+    if (widget.canEdit) {
+      return buildTexfieldStyle();
     }
-    return buildSystemStyle(context);
+    return buildSystemStyle();
   }
 
-  Widget buildSystemStyle(BuildContext context) {
+  Widget buildSystemStyle() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Container(
-          width: widget.iconSize,
-          height: widget.iconSize,
-          decoration: BoxDecoration(
-            color: widget.color,
-            borderRadius: BorderRadius.circular(widget.radius),
-            border: Border.all(color: widget.color, width: 1), // 边色与边宽度
-          ),
-          child: IconButton(
-            icon: Icon(Icons.remove, size: widget.iconSize),
-            // iconSize: widget.iconSize,
-            padding: EdgeInsets.zero,
-            color: Colors.white,
-            onPressed: () {
-              go(-widget.stepValue);
-            },
-
-          ),
+        buildIconButton(
+          onPressed: () {
+            go(-widget.step);
+          },
+          child: Icon(Icons.remove, size: widget.iconSize),
         ),
         Container(
           margin: EdgeInsets.symmetric(horizontal: 8),
-          width: widget.value.toString().length*18*widget.iconSize/30,
+          width: widget.max.toString().length*16*widget.iconSize/30,
           // width: widget.iconSize + 20,
           child: Text('${widget.value}',
             style: TextStyle(
@@ -117,31 +114,17 @@ class _NumberStepperState extends State<NumberStepper> {
             textAlign: TextAlign.center,
           ),
         ),
-        Container(
-          width: widget.iconSize,
-          height: widget.iconSize,
-          decoration: BoxDecoration(
-            color: widget.color,
-            borderRadius: BorderRadius.circular(widget.radius),
-            border: Border.all(color: widget.color, width: 1), // 边色与边宽度
-          ),
-          child: IconButton(
-            icon: Icon(Icons.add, size: widget.iconSize,),
-            // iconSize: widget.iconSize,
-            padding: EdgeInsets.zero,
-            color: Colors.white,
-            onPressed: () {
-              setState(() {
-                go(widget.stepValue);
-              });
-            },
-          ),
+        buildIconButton(
+          onPressed: () {
+            go(widget.step);
+          },
+          child: Icon(Icons.add, size: widget.iconSize),
         ),
       ],
     );
   }
 
-  Widget buildOutlinedStyle(BuildContext context) {
+  Widget buildOutlinedStyle() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -160,13 +143,13 @@ class _NumberStepperState extends State<NumberStepper> {
             padding: EdgeInsets.zero,
             color: widget.color,
             onPressed: () {
-              go(-widget.stepValue);
+              go(-widget.step);
             },
           ),
         ),
         Container(
           margin: EdgeInsets.symmetric(horizontal: 8),
-          width: widget.value.toString().length*18*widget.iconSize/30,
+          width: widget.max.toString().length*16*widget.iconSize/30,
           // width: widget.iconSize + 20,
           child: Text('${widget.value}',
             style: TextStyle(
@@ -191,7 +174,7 @@ class _NumberStepperState extends State<NumberStepper> {
             color: widget.color,
             onPressed: () {
               setState(() {
-                go(widget.stepValue);
+                go(widget.step);
               });
             },
           ),
@@ -200,78 +183,98 @@ class _NumberStepperState extends State<NumberStepper> {
     );
   }
 
-  Widget buildTexfieldStyle(BuildContext context) {
+  Widget buildTexfieldStyle() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Expanded(
-          child: TextField(
-            enableInteractiveSelection: false,
-            toolbarOptions: ToolbarOptions(
-              copy:false,
-              paste: false,
-              cut: false,
-              selectAll: false,
-              //by default all are disabled 'false'
-            ),
-            controller: _textController,
-            decoration: InputDecoration(
-                // labelText: "请输入内容",//输入框内无文字时提示内容，有内容时会自动浮在内容上方
-                // helperText: "随便输入文字或数字", //输入框底部辅助性说明文字
-                prefixIcon:IconButton(
-                  icon: Icon(
-                    Icons.remove,
-                    size: widget.iconSize,
-                  ),
-                  onPressed: (){
-                    // go(-widget.stepValue);
-                    setState(() {
-                      go(-widget.stepValue);
-                      _textController.text = "${widget.value}";
-                    });
-                  },
-                ),
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(4.0) //圆角大小
-                ),
-                suffixIcon: IconButton(
-                  icon: Icon(
-                    Icons.add,
-                    size: widget.iconSize,
-                  ),
-                  onPressed: (){
-                    // go(widget.stepValue);
-                    setState(() {
-                      // FocusScope.of(context).requestFocus(FocusNode());
-                      go(widget.stepValue);
-                      _textController.text = "${widget.value}";
-                    });
-                  },
-                ),
-                contentPadding: const EdgeInsets.only(bottom:8)
-            ),
-            keyboardType: TextInputType.number,
-          ),
+        buildIconButton(
+          onPressed: () {
+            go(-widget.step);
+          },
+          child: Icon(Icons.remove, size: widget.iconSize),
         ),
-    ],
+        Container(
+          // margin: EdgeInsets.symmetric(horizontal: 4),
+          width: widget.max.toString().length*16*widget.iconSize/30,
+          // width: widget.iconSize + 20,
+          child: buildTexfield(),
+        ),
+        buildIconButton(
+          onPressed: () {
+            go(widget.step);
+          },
+          child: Icon(Icons.add, size: widget.iconSize),
+        ),
+      ],
+    );
+  }
+
+  Widget buildIconButton({
+    required VoidCallback? onPressed,
+    required Widget child,
+  }) {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        padding: EdgeInsets.zero,
+        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        minimumSize: Size(widget.iconSize, widget.iconSize),
+      ),
+      onPressed: onPressed,
+      child: child,
+    );
+  }
+
+  Widget buildTexfield() {
+    return TextField(
+      controller: _textController,
+      keyboardType: TextInputType.number,
+      textAlign: TextAlign.center,
+      textAlignVertical: TextAlignVertical.center,
+      enableInteractiveSelection: false,
+      // toolbarOptions: ToolbarOptions(
+      //   copy:false,
+      //   paste: false,
+      //   cut: false,
+      //   selectAll: false,
+      //   //by default all are disabled 'false'
+      // ),
+      style: const TextStyle(
+        fontSize: 20,
+        fontWeight: FontWeight.w400,
+      ),
+      decoration: InputDecoration(
+        hintText: "0",
+        isCollapsed: true,
+        contentPadding: const EdgeInsets.symmetric(horizontal: 0, vertical: 8),
+        border: InputBorder.none,
+      // labelText: "请输入内容",//输入框内无文字时提示内容，有内容时会自动浮在内容上方
+      // helperText: "随便输入文字或数字", //输入框底部辅助性说明文字
+      ),
+      inputFormatters: [
+        LengthLimitingTextInputFormatter("${widget.max}".length),
+      ],
     );
   }
 
   void go(int stepValue) {
-    if (stepValue < 0 && (widget.value == widget.minValue || widget.value + stepValue < widget.minValue)) {
+    if (stepValue < 0 && (current == widget.min || current + stepValue < widget.min)) {
       ddlog("it's minValue!");
-      if (widget.wraps) widget.value = widget.maxValue;
-      widget.block(widget.value);
+      if (widget.wraps) {
+        current = widget.max;
+      }
+      widget.onChanged(current);
       return;
     }
-    if (stepValue > 0 && (widget.value == widget.maxValue || widget.value + stepValue > widget.maxValue)) {
+    if (stepValue > 0 && (current == widget.max || current + stepValue > widget.max)) {
       ddlog("it's maxValue!");
-      if (widget.wraps) widget.value = widget.minValue;
-      widget.block(widget.value);
+      if (widget.wraps) {
+        current = widget.min;
+      }
+      widget.onChanged(current);
       return;
     }
-    widget.value += stepValue;
+    current += stepValue;
     setState(() {});
-    widget.block(widget.value);
+    widget.onChanged(current);
   }
 }

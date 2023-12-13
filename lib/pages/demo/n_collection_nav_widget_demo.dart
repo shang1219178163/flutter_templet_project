@@ -126,14 +126,14 @@ class _NCollectionNavWidgetDemoState extends State<NCollectionNavWidgetDemo> {
           Text(e.item1, style: TextStyle(fontSize: 20),),
           SizedBox(width: 10,),
           NumberStepper(
-            minValue: e.item2,
-            maxValue: e.item3,
-            stepValue: 1,
+            min: e.item2,
+            max: e.item3,
+            step: 1,
             iconSize: 30,
             value: e.item3,
             color: Theme.of(context).primaryColor,
-            style: NumberStepperStyle.outlined,
-            block: (value){
+            canEdit: false,
+            onChanged: (value){
               e.item4.call(value);
             },
           ),
