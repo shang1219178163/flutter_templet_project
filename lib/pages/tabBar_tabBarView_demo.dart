@@ -624,6 +624,7 @@ var customs = [
   Tuple2(APPRouter.dashLineDemo, "dashLineDemo", ),
   Tuple2(APPRouter.choiceBoxOneDemo, "choiceBoxOneDemo", ),
   Tuple2(APPRouter.apiConvertPage, "APIConvertPage", ),
+  Tuple2(APPRouter.selectListPage, "selectListPage", ),
 
 
 ];
@@ -682,7 +683,7 @@ var others = <Tuple2<String, String>>[
   Tuple2(APPRouter.homeSrollDemo, "HomeSrollDemo", ),
   Tuple2(APPRouter.homeNavDemo, "HomeNavDemo", ),
   Tuple2(APPRouter.videoPlayerScreenDemo, "videoPlayerScreenDemo", ),
-  Tuple2(APPRouter.textFieldColorChangeDemo, "textFieldColorChangeDemo", ),
+  Tuple2(APPRouter.textFieldLoginDemo, "textFieldLoginDemo", ),
   Tuple2(APPRouter.autoLayoutDemo, "自适应布局研究", ),
   Tuple2(APPRouter.weatherInfoPage, "天气信息", ),
 

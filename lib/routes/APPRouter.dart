@@ -39,6 +39,7 @@ import 'package:flutter_templet_project/pages/demo/NChoiceBoxOneDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ProgressClipperDemo.dart';
 import 'package:flutter_templet_project/pages/demo/SearchDemo.dart';
 import 'package:flutter_templet_project/pages/demo/SegmentedControlDemo.dart';
+import 'package:flutter_templet_project/pages/demo/SelectList.dart';
 import 'package:flutter_templet_project/pages/demo/SwitchDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TapRegionDemo.dart';
 import 'package:flutter_templet_project/pages/demo/WeatherInfoPage.dart';
@@ -78,7 +79,7 @@ import 'package:flutter_templet_project/pages/demo/ScaffoldBottomSheet.dart';
 import 'package:flutter_templet_project/pages/demo/StackDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/StackDemoTwo.dart';
 import 'package:flutter_templet_project/pages/demo/SuspensionButtonDemo.dart';
-import 'package:flutter_templet_project/pages/demo/TextFieldColorChangeDemo.dart';
+import 'package:flutter_templet_project/pages/demo/TextFieldLoginDemo.dart';
 import 'package:flutter_templet_project/pages/demo/UploadFileDemo.dart';
 import 'package:flutter_templet_project/pages/demo/LongCaptureWidgetDemo.dart';
 import 'package:flutter_templet_project/pages/demo/enumDemo.dart';
@@ -608,7 +609,7 @@ class APPRouter {
   static const azlistviewDemo = '/azlistviewDemo';
   static const expansionTileCard = '/expansionTileCard';
   static const dialogChoiceChipDemo = '/dialogChoiceChipDemo';
-  static const textFieldColorChangeDemo = '/textFieldColorChangeDemo';
+  static const textFieldLoginDemo = '/textFieldLoginDemo';
   static const pageViewAndBarDemo = '/pageViewAndBarDemo';
   static const pageViewDemoOne = '/pageViewDemoOne';
   static const dropBoxChoicDemo = '/dropBoxChoicDemo';
@@ -658,6 +659,7 @@ class APPRouter {
   static const myMenuBarDemo = '/myMenuBarDemo';
   static const choiceBoxOneDemo = '/choiceBoxOneDemo';
   static const apiConvertPage = '/apiConvertPage';
+  static const selectListPage = '/selectListPage';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -996,7 +998,7 @@ class AppPage {
     GetPage(name: APPRouter.azlistviewDemo, page: () => AzlistviewDemo(),),
     GetPage(name: APPRouter.expansionTileCard, page: () => ExpansionTileCard(),),
     GetPage(name: APPRouter.dialogChoiceChipDemo, page: () => DialogChoiceChipDemo(),),
-    GetPage(name: APPRouter.textFieldColorChangeDemo, page: () => TextFieldColorChangeDemo(),),
+    GetPage(name: APPRouter.textFieldLoginDemo, page: () => TextFieldLoginDemo(),),
     GetPage(name: APPRouter.pageViewAndBarDemo, page: () => PageViewAndBarDemo(),),
     GetPage(name: APPRouter.pageViewDemoOne, page: () => PageViewDemoOne(),),
 
@@ -1048,6 +1050,7 @@ class AppPage {
     GetPage(name: APPRouter.myMenuBarDemo, page: () => MyMenuBarDemo(),),
     GetPage(name: APPRouter.choiceBoxOneDemo, page: () => NChoiceBoxOneDemo(),),
     GetPage(name: APPRouter.apiConvertPage, page: () => APIConvertPage(),),
+    GetPage(name: APPRouter.selectListPage, page: () => SelectListPage(),),
 
 
   ];
