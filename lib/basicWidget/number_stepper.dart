@@ -28,8 +28,12 @@ class NumberStepper extends StatefulWidget {
     this.canEdit = true,
     this.radius = 5.0,
     this.wraps = true,
+    this.style = const TextStyle(
+      fontSize: 20,
+    ),
     required this.onChanged,
   }) : super(key: key);
+
 
   ///最小值
   final int min;
@@ -37,10 +41,11 @@ class NumberStepper extends StatefulWidget {
   final int max;
   /// 步长
   final int step;
-  /// icon 尺寸
-  final double iconSize;
   /// 当前值
   final int value;
+
+  /// icon 尺寸
+  final double iconSize;
   /// 到达边界值是否继续
   final bool wraps;
   /// icon 颜色
@@ -49,6 +54,10 @@ class NumberStepper extends StatefulWidget {
   final bool canEdit;
   /// 圆角
   final double radius;
+
+  final TextStyle? style;
+
+
   /// 回调
   final ValueChanged<int> onChanged;
 
@@ -76,6 +85,8 @@ class _NumberStepperState extends State<NumberStepper> {
     return _current;
   }
 
+  Color centerColor = Color(0xffEDEDED);
+
   @override
   void initState() {
     // TODO: implement initState
@@ -86,7 +97,6 @@ class _NumberStepperState extends State<NumberStepper> {
 
   @override
   Widget build(BuildContext context) {
-    // return buildOther(context);
     if (widget.canEdit) {
       return buildTexfieldStyle();
     }
@@ -104,12 +114,15 @@ class _NumberStepperState extends State<NumberStepper> {
           child: Icon(Icons.remove, size: widget.iconSize),
         ),
         Container(
-          margin: EdgeInsets.symmetric(horizontal: 8),
           width: widget.max.toString().length*16*widget.iconSize/30,
-          // width: widget.iconSize + 20,
-          child: Text('${widget.value}',
-            style: TextStyle(
-              fontSize: widget.iconSize * 0.8,
+          height: widget.iconSize,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: centerColor,
+          ),
+          child: Text('$current',
+            style: widget.style ?? TextStyle(
+              fontSize: widget.iconSize * 0.7,
             ),
             textAlign: TextAlign.center,
           ),
@@ -119,65 +132,6 @@ class _NumberStepperState extends State<NumberStepper> {
             go(widget.step);
           },
           child: Icon(Icons.add, size: widget.iconSize),
-        ),
-      ],
-    );
-  }
-
-  Widget buildOutlinedStyle() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Container(
-          width: widget.iconSize,
-          height: widget.iconSize,
-          // color: Theme.of(context).primaryColor,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(widget.radius),
-            border: Border.all(color: widget.color, width: 1), // 边色与边宽度
-          ),
-          child: IconButton(
-            icon: Icon(Icons.remove, size: widget.iconSize),
-            // iconSize: widget.iconSize,
-            padding: EdgeInsets.zero,
-            color: widget.color,
-            onPressed: () {
-              go(-widget.step);
-            },
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.symmetric(horizontal: 8),
-          width: widget.max.toString().length*16*widget.iconSize/30,
-          // width: widget.iconSize + 20,
-          child: Text('${widget.value}',
-            style: TextStyle(
-              fontSize: widget.iconSize * 0.8,
-            ),
-            textAlign: TextAlign.center,
-          ),
-        ),
-        Container(
-          width: widget.iconSize,
-          height: widget.iconSize,
-          // color: Theme.of(context).primaryColor,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(widget.radius),
-            border: Border.all(color: widget.color, width: 1), // 边色与边宽度
-          ),
-          child: IconButton(
-            icon: Icon(Icons.add, size: widget.iconSize),
-            // iconSize: widget.iconSize,
-            padding: EdgeInsets.zero,
-            color: widget.color,
-            onPressed: () {
-              setState(() {
-                go(widget.step);
-              });
-            },
-          ),
         ),
       ],
     );
@@ -238,15 +192,17 @@ class _NumberStepperState extends State<NumberStepper> {
       //   selectAll: false,
       //   //by default all are disabled 'false'
       // ),
-      style: const TextStyle(
+      style: widget.style ?? const TextStyle(
         fontSize: 20,
         fontWeight: FontWeight.w400,
       ),
       decoration: InputDecoration(
-        hintText: "0",
+        hintText: "",
         isCollapsed: true,
         contentPadding: const EdgeInsets.symmetric(horizontal: 0, vertical: 8),
         border: InputBorder.none,
+        filled: true,
+        fillColor: Color(0xffEDEDED),
       // labelText: "请输入内容",//输入框内无文字时提示内容，有内容时会自动浮在内容上方
       // helperText: "随便输入文字或数字", //输入框底部辅助性说明文字
       ),
