@@ -100,6 +100,8 @@ class _TextFieldDemoState extends State<TextFieldDemo> {
               NHeader.h5(title: "CupertinoSearchTextField"),
               CupertinoSearchTextField(
                 // prefixIcon: SizedBox(),
+                // prefixInsets: EdgeInsets.zero,
+                // backgroundColor: Colors.white,
                 padding: EdgeInsets.only(left: 8, top: 8, bottom: 8, right: 8),
                 placeholder: "请输入",
                 onChanged: (String value) {
