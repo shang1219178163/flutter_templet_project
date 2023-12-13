@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
@@ -75,6 +76,9 @@ class _TextFieldColorChangeDemoState extends State<TextFieldColorChangeDemo> {
                 image: 'icon_account.png'.toPath(),
                 hint: '请输入手机号/账号',
                 // keyboardType: TextInputType.number,
+                inputFormatters: [
+                  LengthLimitingTextInputFormatter(10),
+                ],
                 value: loginId,
                 onChanged: (text) {
                   loginId = text;
@@ -87,18 +91,9 @@ class _TextFieldColorChangeDemoState extends State<TextFieldColorChangeDemo> {
                 // obscureText: true,
                 isPwd: true,
                 showEyeIcon: true,
-                value: password,
-                onChanged: (text) {
-                  password = text;
-                },
-              ),
-              SizedBox(height: 16,),
-              LoginInput(
-                image: 'icon_account.png'.toPath(),
-                hint: '请输入密码',
-                // obscureText: true,
-                isPwd: false,
-                showEyeIcon: false,
+                inputFormatters: [
+                  LengthLimitingTextInputFormatter(10),
+                ],
                 value: password,
                 onChanged: (text) {
                   password = text;
@@ -123,8 +118,6 @@ class LoginInput extends StatefulWidget {
     this.hint = "请输入",
     this.value,
     this.onChanged,
-    this.focusChanged,
-    this.lineStretch = false,
     this.isPwd = false,
     this.isFocusClear = false,
     this.showEyeIcon = false,
@@ -132,6 +125,7 @@ class LoginInput extends StatefulWidget {
     this.fillColor = bgColor,
     this.focusColor = Colors.white,
     this.radius = 30,
+    this.inputFormatters,
     this.suffixIcon,
     this.suffix,
   }) : super(key: key);
@@ -142,12 +136,11 @@ class LoginInput extends StatefulWidget {
   final String? image;
   final String hint;
   final ValueChanged<String>? onChanged;
-  final ValueChanged<bool>? focusChanged;
-  final bool lineStretch;
   final bool isPwd;
   final bool isFocusClear;
   final bool showEyeIcon;
   final TextInputType? keyboardType;
+  final List<TextInputFormatter>? inputFormatters;
 
   final Color? fillColor;
   final Color? focusColor;
@@ -293,6 +286,7 @@ class _LoginInputState extends State<LoginInput> {
         fontWeight: FontWeight.w400,
         color: fontColor,
       ),
+      inputFormatters: widget.inputFormatters,
       decoration: InputDecoration(
         filled: true,
         fillColor: Colors.white,
