@@ -55,10 +55,13 @@ class NumberStepperDemo extends StatelessWidget {
                   value: 1000,
                   color: Theme.of(context).primaryColor,
                   canEdit: false,
+                  style: const TextStyle(
+                    fontSize: 40,
+                  ),
                   onChanged: (value){
                     ddlog(value);
                   },
-                ).toColoredBox(),
+                ),
               ),
               SizedBox(height: 20,),
               UnconstrainedBox(
@@ -73,14 +76,14 @@ class NumberStepperDemo extends StatelessWidget {
                   onChanged: (value){
                     ddlog(value);
                   },
-                ).toColoredBox(),
+                ),
               ),
               SizedBox(height: 20,),
               NumberStepper(
                 min: 1,
                 max: 99999,
                 step: 1,
-                iconSize: 36,
+                iconSize: 32,
                 value: 999,
                 color: Theme.of(context).primaryColor,
                 onChanged: (value){
