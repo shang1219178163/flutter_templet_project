@@ -10,7 +10,7 @@ import 'package:flutter_templet_project/util/debug_log.dart';
 
 class SelectListPage extends StatefulWidget {
 
-  SelectListPage({super.key,});
+  SelectListPage({super.key, });
 
 
   @override
@@ -59,6 +59,56 @@ class _SelectListPageState extends State<SelectListPage> {
   }
 
   Widget buildBody() {
+    return SelectList(
+      isMultiple: isMultiple,
+      onSelected: (List<UserModel> items) {
+        DebugLog.d(items.map((e) => (e.name,)));
+      },
+    );
+  }
+  
+  
+}
+
+
+class SelectList extends StatefulWidget {
+
+  SelectList({super.key,
+    this.isMultiple = true,
+    required this.onSelected,
+  });
+
+  bool isMultiple;
+
+  ValueChanged<List<UserModel>> onSelected;
+
+  @override
+  State<SelectList> createState() => _SelectListState();
+}
+
+class _SelectListState extends State<SelectList> {
+
+  final _scrollController = ScrollController();
+
+
+  late final List<UserModel> models = List.generate(20, (i) {
+    return UserModel(
+      id: i,
+      name: "选项_$i",
+      isSelected: false,
+    );
+  }).toList();
+
+  late final dataList = ValueNotifier(models);
+  /// 当前选择个数
+  late final selectedCount = ValueNotifier(models.where((e) => e.isSelected == true).length);
+  /// 是否全选
+  bool get isAll => dataList.value.where((e) => e.isSelected != true).isEmpty;
+  /// 已选择
+  List<UserModel> get selectedItems => dataList.value.where((e) => e.isSelected == true).toList();
+
+  @override
+  Widget build(BuildContext context) {
     return Column(
       children: [
         Expanded(child: buildList()),
@@ -80,10 +130,17 @@ class _SelectListPageState extends State<SelectListPage> {
 
             onTap(){
               e.isSelected = !(e.isSelected ?? false);
-              DebugLog.d(e.toJson());
+              // DebugLog.d(e.toJson());
               setState((){});
 
               updateSelectedCount();
+
+              if (!widget.isMultiple) {
+                dataList.value.forEach((item) {
+                  item.isSelected = (e == item);
+                });
+                widget.onSelected([e]);
+              }
             }
 
             return InkWell(
@@ -119,7 +176,7 @@ class _SelectListPageState extends State<SelectListPage> {
   }
 
   Widget buildBottomSheet() {
-    if (!isMultiple) {
+    if (!widget.isMultiple) {
       return SizedBox();
     }
 
@@ -149,19 +206,19 @@ class _SelectListPageState extends State<SelectListPage> {
               // backgroundColor: Colors.red
             ),
             onPressed: (){
-              DebugLog.d("isAll: $isAll");
-              DebugLog.d(dataList.value
-                  .where((e) => e.isSelected != true)
-                  .map((e) => (e.name, e.isSelected)).toList());
+              // DebugLog.d("isAll: $isAll");
+              // DebugLog.d(dataList.value
+              //     .where((e) => e.isSelected != true)
+              //     .map((e) => (e.name, e.isSelected)).toList());
 
               if (isAll) {
                 dataList.value.forEach((e) {
-                    e.isSelected = false;
+                  e.isSelected = false;
                   // e.isSelected = !isAll;
                 });
               } else {
                 dataList.value.forEach((e) {
-                    e.isSelected = true;
+                  e.isSelected = true;
                   // e.isSelected = !isAll;
                 });
               }
@@ -187,12 +244,12 @@ class _SelectListPageState extends State<SelectListPage> {
               builder: (context, child){
 
                 return Container(
-                  width: 80,
+                  width: 70,
                   padding: const EdgeInsets.symmetric(horizontal: 8),
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                     color: Colors.transparent,
-                    border: Border.all(color: Colors.blue),
+                    // border: Border.all(color: Colors.blue),
                     borderRadius: BorderRadius.all(Radius.circular(0)),
                   ),
                   child: NText("(${selectedCount.value}/${dataList.value.length})"),
@@ -203,7 +260,7 @@ class _SelectListPageState extends State<SelectListPage> {
           Expanded(
             child: ElevatedButton(
               onPressed: (){
-
+                widget.onSelected(selectedItems);
               },
               child: Text("确定"),
             ),
@@ -216,5 +273,5 @@ class _SelectListPageState extends State<SelectListPage> {
   updateSelectedCount() {
     selectedCount.value = selectedItems.length;
   }
-  
+
 }
