@@ -68,7 +68,7 @@ class _TextFieldColorChangeDemoState extends State<TextFieldColorChangeDemo> {
       return Center(
         // heightFactor: 1.9,
         child: Container(
-          margin: EdgeInsets.only(top: 25.w, left: 30, right: 30, bottom: 27),
+          margin: EdgeInsets.only(top: 25, left: 30, right: 30, bottom: 27),
           child: Column(
             children: [
               LoginInput(
@@ -81,12 +81,14 @@ class _TextFieldColorChangeDemoState extends State<TextFieldColorChangeDemo> {
                   loginId = text;
                 },
               ),
+              SizedBox(height: 16,),
               LoginInput(
                 textfieldKey: pwdGlobalKey,
                 image: 'icon_lock.png'.toPath(),
                 hint: '请输入密码',
                 obscureText: true,
                 isPwd: true,
+                showEyeIcon: true,
                 value: password,
                 onChanged: (text) {
                   password = text;
@@ -107,6 +109,7 @@ class LoginInput extends StatefulWidget {
   const LoginInput({
     Key? key,
     this.textfieldKey,
+    this.controller,
     this.image,
     this.hint = "请输入",
     this.value,
@@ -115,14 +118,19 @@ class LoginInput extends StatefulWidget {
     this.lineStretch = false,
     this.obscureText = false,
     this.isPwd = false,
-    this.isIcon = false,
+    this.isFocusClear = false,
+    this.showEyeIcon = false,
     this.keyboardType,
     this.fillColor = bgColor,
     this.focusColor = Colors.white,
     this.radius = 30,
+    this.suffixIcon,
+    this.suffix,
   }) : super(key: key);
 
   final Key? textfieldKey;
+  final TextEditingController? controller;
+
   final String? value;
   final String? image;
   final String hint;
@@ -131,12 +139,16 @@ class LoginInput extends StatefulWidget {
   final bool lineStretch;
   final bool obscureText;
   final bool isPwd;
+  final bool isFocusClear;
+  final bool showEyeIcon;
   final TextInputType? keyboardType;
-  final bool isIcon;
 
   final Color? fillColor;
   final Color? focusColor;
   final double radius;
+
+  final Widget? suffixIcon;
+  final Widget? suffix;
 
 
   @override
@@ -145,19 +157,19 @@ class LoginInput extends StatefulWidget {
 
 class _LoginInputState extends State<LoginInput> {
   final _focusNode = FocusNode();
-  final _focusNodePwd = FocusNode();
+  // final _focusNodePwd = FocusNode();
 
   final hasFocusVN = ValueNotifier<bool>(false);
 
-  bool isEyeClose = true;
+  bool isCloseEye = true;
 
-  final textEditingController = TextEditingController();
+  late final _textEditingController = widget.controller ?? TextEditingController();
 
   @override
   void initState() {
     super.initState();
 
-    textEditingController.value = TextEditingValue(
+    _textEditingController.value = TextEditingValue(
         text: widget.value ?? "",
         selection: TextSelection.fromPosition(
             TextPosition(
@@ -179,7 +191,11 @@ class _LoginInputState extends State<LoginInput> {
   }
 
   void _onFocusChange() {
-    // hasFocusVN.value = _focusNode.hasFocus;
+    hasFocusVN.value = _focusNode.hasFocus;
+    if (hasFocusVN.value && widget.isPwd && widget.isFocusClear) {
+      _textEditingController.clear();
+      widget.onChanged?.call("");
+    }
     // debugPrint("hasFocusVN: ${hasFocusVN.value}");
     // if (hasFocusVN.value) {
     //   FocusScope.of(context).requestFocus(_focusNode);
@@ -188,183 +204,157 @@ class _LoginInputState extends State<LoginInput> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          margin: const EdgeInsets.only(top: 18,),
-          child: Row(
-            children: [
-              widget.isPwd ? _passwordInput(textfieldKey: widget.textfieldKey) :
-              _input(textfieldKey: widget.textfieldKey),
-              buildInput(),
-            ],
-          ),
-        ),
-      ],
-    );
+    if (widget.isPwd) {
+      return _passwordInput(textfieldKey: widget.textfieldKey);
+    }
+    return _input(textfieldKey: widget.textfieldKey);
   }
 
   _input({Key? textfieldKey}) {
-    return Expanded(
-      child: ValueListenableBuilder<bool>(
-          valueListenable: hasFocusVN,
-          builder: (_, isFocus, child) {
-
-            return Container(
-              decoration: isFocus == false ? null : buidBoxDecoration(),
-              child: Theme(
-                data: Theme.of(context).copyWith(
-                  primaryColor: Colors.redAccent,
-                ),
-                child: TextField(
-                  autofocus: true,
-                  // key: textfieldKey,
-                  cursorColor: primaryColor,
-                  focusNode: _focusNode,
-                  controller: textEditingController,
-                  // focusNode: focusChanged,
-                  onChanged: widget.onChanged,
-                  // obscureText: widget.obscureText,
-                  keyboardType: widget.keyboardType,
-                  // autofocus: !widget.obscureText,
-                  style: TextStyle(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w400,
-                    color: fontColor,
-                  ),
-                  decoration: InputDecoration(
-                    // focusColor: Colors.blue,
-                    filled: true,
-                    // fillColor: isFocus ? widget.focusColor : widget.fillColor,
-                    fillColor: widget.focusColor,
-                    contentPadding: const EdgeInsets.only(left: 20, right: 20),
-                    border: InputBorder.none,
-                    hintText: widget.hint,
-                    hintStyle: TextStyle(fontSize: 16.sp, color: fontColor[10]),
-                    prefixIcon: IconButton(
-                      focusColor: primaryColor,
-                      icon: widget.image == null ? SizedBox() : Image.asset(
-                        widget.image!,
-                        width: 20,
-                        height: 20,
-                        color: isFocus ? primaryColor : null,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          isEyeClose = !isEyeClose;
-                        });
-                      },
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      /*边角*/
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(widget.radius), //边角
-                      ),
-                      borderSide: BorderSide(
-                        color: lineColor, //边线颜色为白色
-                        width: 1, //边线宽度为1
-                      ),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: primaryColor, //边框颜色为白色
-                        width: 1, //宽度为1
-                      ),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(widget.radius), //边角
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            );
-          }
+    return TextField(
+      autofocus: true,
+      // key: textfieldKey,
+      cursorColor: primaryColor,
+      focusNode: _focusNode,
+      controller: _textEditingController,
+      // focusNode: focusChanged,
+      onChanged: widget.onChanged,
+      // obscureText: widget.obscureText,
+      keyboardType: widget.keyboardType,
+      // autofocus: !widget.obscureText,
+      style: TextStyle(
+        fontSize: 16.sp,
+        fontWeight: FontWeight.w400,
+        color: fontColor,
+      ),
+      decoration: InputDecoration(
+        // focusColor: Colors.blue,
+        filled: true,
+        // fillColor: isFocus ? widget.focusColor : widget.fillColor,
+        fillColor: widget.focusColor,
+        contentPadding: const EdgeInsets.only(left: 20, right: 20),
+        border: InputBorder.none,
+        hintText: widget.hint,
+        hintStyle: TextStyle(fontSize: 16.sp, color: fontColor[10]),
+        prefixIcon: IconButton(
+          focusColor: primaryColor,
+          icon: widget.image == null ? SizedBox() : Image.asset(
+            widget.image!,
+            width: 20,
+            height: 20,
+            color: primaryColor,
+          ),
+          onPressed: () {
+            isCloseEye = !isCloseEye;
+            setState(() {});
+          },
+        ),
+        suffix: widget.suffix ?? buildClearButton(),
+        enabledBorder: OutlineInputBorder(
+          /*边角*/
+          borderRadius: BorderRadius.all(
+            Radius.circular(widget.radius), //边角
+          ),
+          borderSide: BorderSide(
+            color: lineColor, //边线颜色为白色
+            width: 1, //边线宽度为1
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: primaryColor, //边框颜色为白色
+            width: 1, //宽度为1
+          ),
+          borderRadius: BorderRadius.all(
+            Radius.circular(widget.radius), //边角
+          ),
+        ),
       ),
     );
   }
 
   _passwordInput({Key? textfieldKey}) {
-    return Expanded(
-      child: ValueListenableBuilder<bool>(
+    Widget? suffixIconTmp;
+    if (widget.showEyeIcon) {
+      suffixIconTmp = widget.suffixIcon ?? ValueListenableBuilder<bool>(
           valueListenable: hasFocusVN,
-          builder: (_, isFocus, child){
-
-            return Container(
-              decoration: isFocus == false ? null : buidBoxDecoration(),
-              child: TextField(
-                // key: textfieldKey,
-                focusNode: _focusNodePwd,
-                onChanged: widget.onChanged,
-                obscureText: isEyeClose,
-                keyboardType: TextInputType.visiblePassword,
-                autofocus: !isEyeClose,
-                cursorColor: primaryColor,
-                style: TextStyle(
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.w400,
-                  color: fontColor,
+          builder: (_, isFocus, child) {
+            return Padding(
+              padding: const EdgeInsets.only(right: 8),
+              child: IconButton(
+                focusColor: fontColor[10],
+                icon: Image.asset(
+                  isCloseEye
+                      ? 'assets/images/icon_eye_close.png'
+                      : 'assets/images/icon_eye_open.png',
+                  width: 20,
+                  height: 20,
+                  color: isFocus ? primaryColor : null,
                 ),
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: _focusNode.hasFocus ? Colors.red : Colors.green,
-                  // fillColor:  widget.focusColor,
-                  contentPadding: const EdgeInsets.only(left: 20, right: 20),
-                  border: InputBorder.none,
-                  enabledBorder: const OutlineInputBorder(
-                    /*边角*/
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(30), //边角
-                    ),
-                    borderSide: BorderSide(
-                      color: lineColor, //边线颜色为白色
-                      width: 1, //边线宽度为1
-                    ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: primaryColor, //边框颜色为白色
-                      width: 1, //宽度为1
-                    ),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(30), //边角
-                    ),
-                  ),
-                  hintText: widget.hint,
-                  hintStyle: TextStyle(fontSize: 16.sp, color: fontColor[10]),
-                  prefixIcon: IconButton(
-                    focusColor: primaryColor,
-                    icon: widget.image == null ? SizedBox() : Image.asset(
-                      widget.image!,
-                      width: 20,
-                      height: 20,
-                      color: isFocus ? primaryColor : null,
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        isEyeClose = !isEyeClose;
-                      });
-                    },
-                  ),
-                  suffixIcon: IconButton(
-                    focusColor: fontColor[10],
-                    icon: Image.asset(
-                      isEyeClose
-                          ? 'icon_eye_close.png'.toPath()
-                          : 'icon_eye_open.png'.toPath(),
-                      width: 20,
-                      height: 20,
-                      color: isFocus ? primaryColor : null,
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        isEyeClose = !isEyeClose;
-                      });
-                    },
-                  ),
-                ),
+                onPressed: () {
+                  isCloseEye = !isCloseEye;
+                  setState(() {});
+                },
               ),
             );
-          }),
+          });
+    }
+
+    return TextField(
+      key: textfieldKey,
+      focusNode: _focusNode,
+      onChanged: widget.onChanged,
+      obscureText: isCloseEye,
+      keyboardType: TextInputType.visiblePassword,
+      autofocus: !isCloseEye,
+      cursorColor: primaryColor,
+      style: TextStyle(
+        fontSize: 16.sp,
+        fontWeight: FontWeight.w400,
+        color: fontColor,
+      ),
+      decoration: InputDecoration(
+        filled: true,
+        fillColor: Colors.white,
+        // fillColor:  widget.focusColor,
+        contentPadding: const EdgeInsets.only(left: 20, right: 20),
+        border: InputBorder.none,
+        enabledBorder: const OutlineInputBorder(
+          /*边角*/
+          borderRadius: BorderRadius.all(
+            Radius.circular(30), //边角
+          ),
+          borderSide: BorderSide(
+            color: lineColor, //边线颜色为白色
+            width: 1, //边线宽度为1
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: primaryColor, //边框颜色为白色
+            width: 1, //宽度为1
+          ),
+          borderRadius: BorderRadius.all(
+            Radius.circular(30), //边角
+          ),
+        ),
+        hintText: widget.hint,
+        hintStyle: TextStyle(fontSize: 16.sp, color: fontColor[10]),
+        prefixIcon: IconButton(
+          focusColor: primaryColor,
+          icon: widget.image == null ? SizedBox() : Image.asset(
+            widget.image!,
+            width: 20,
+            height: 20,
+            color: primaryColor,
+          ),
+          onPressed: () {
+
+          },
+        ),
+        suffixIcon: suffixIconTmp,
+        suffix: widget.suffix ?? buildClearButton(),
+      ),
     );
   }
 
@@ -375,66 +365,61 @@ class _LoginInputState extends State<LoginInput> {
     Widget? suffixIcon,
     TextInputType keyboardType = TextInputType.text,
   }) {
-    return Container(
-      decoration: isFocus == false ? null : buidBoxDecoration(),
-      child: TextField(
-        // key: textfieldKey,
-        focusNode: _focusNode,
-        onChanged: widget.onChanged,
-        obscureText: isEyeClose,
-        // keyboardType: TextInputType.visiblePassword,
-        keyboardType: keyboardType,
-        autofocus: !isEyeClose,
-        cursorColor: primaryColor,
-        style: TextStyle(
-          fontSize: 16.sp,
-          fontWeight: FontWeight.w400,
-          color: fontColor,
-        ),
-        decoration: InputDecoration(
-          filled: true,
-          // fillColor: isFocus ? widget.focusColor : widget.fillColor,
-          fillColor: widget.focusColor,
-          contentPadding: const EdgeInsets.only(left: 20, right: 20),
-          border: InputBorder.none,
-          enabledBorder: const OutlineInputBorder(
-            /*边角*/
-            borderRadius: BorderRadius.all(
-              Radius.circular(30), //边角
-            ),
-            borderSide: BorderSide(
-              color: lineColor, //边线颜色为白色
-              width: 1, //边线宽度为1
-            ),
+    return TextField(
+      // key: textfieldKey,
+      focusNode: _focusNode,
+      onChanged: widget.onChanged,
+      // keyboardType: TextInputType.visiblePassword,
+      keyboardType: keyboardType,
+      cursorColor: primaryColor,
+      style: TextStyle(
+        fontSize: 16.sp,
+        fontWeight: FontWeight.w400,
+        color: fontColor,
+      ),
+      decoration: InputDecoration(
+        filled: true,
+        // fillColor: isFocus ? widget.focusColor : widget.fillColor,
+        fillColor: widget.focusColor,
+        contentPadding: const EdgeInsets.only(left: 20, right: 20),
+        border: InputBorder.none,
+        enabledBorder: const OutlineInputBorder(
+          /*边角*/
+          borderRadius: BorderRadius.all(
+            Radius.circular(30), //边角
           ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: primaryColor, //边框颜色为白色
-              width: 1, //宽度为1
-            ),
-            borderRadius: BorderRadius.all(
-              Radius.circular(30), //边角
-            ),
+          borderSide: BorderSide(
+            color: lineColor, //边线颜色为白色
+            width: 1, //边线宽度为1
           ),
-          hintText: widget.hint,
-          hintStyle: TextStyle(fontSize: 16.sp, color: fontColor[10]),
-          prefixIcon: prefixIcon,
-          suffixIcon: suffixIcon ?? (keyboardType == TextInputType.visiblePassword ? IconButton(
-            focusColor: fontColor[10],
-            icon: Image.asset(
-              isEyeClose
-                  ? 'icon_eye_close.png'.toPath()
-                  : 'icon_eye_open.png'.toPath(),
-              width: 20,
-              height: 20,
-              color: isFocus ? primaryColor : null,
-            ),
-            onPressed: () {
-              isEyeClose = !isEyeClose;
-              setState(() {});
-            },
-          ) : SizedBox()),
         ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: primaryColor, //边框颜色为白色
+            width: 1, //宽度为1
+          ),
+          borderRadius: BorderRadius.all(
+            Radius.circular(30), //边角
+          ),
+        ),
+        hintText: widget.hint,
+        hintStyle: TextStyle(fontSize: 16.sp, color: fontColor[10]),
+        prefixIcon: prefixIcon,
+        suffixIcon: suffixIcon ?? (keyboardType == TextInputType.visiblePassword ? IconButton(
+          focusColor: fontColor[10],
+          icon: Image.asset(
+            isCloseEye
+                ? 'icon_eye_close.png'.toPath()
+                : 'icon_eye_open.png'.toPath(),
+            width: 20,
+            height: 20,
+            color: isFocus ? primaryColor : null,
+          ),
+          onPressed: () {
+            isCloseEye = !isCloseEye;
+            setState(() {});
+          },
+        ) : SizedBox()),
       ),
     );
   }
@@ -450,6 +435,34 @@ class _LoginInputState extends State<LoginInput> {
           color: primaryColor.withOpacity(0.1),
         ),
       ],
+    );
+  }
+
+  /// 清除按钮
+  Widget buildClearButton() {
+    return ValueListenableBuilder(
+        valueListenable: hasFocusVN,
+        builder: (context, value, child){
+          if (!value) {
+            return SizedBox();
+          }
+          return InkWell(
+            onTap: (){
+              _textEditingController.clear();
+              widget.onChanged?.call("");
+            },
+            child: Container(
+              padding: const EdgeInsets.only(
+                left: 8.0,
+                top: 4,
+              ),
+              child: Icon(Icons.cancel,
+                color: Colors.black.withOpacity(0.3),
+                size: 16,
+              ),
+            ),
+          );
+        }
     );
   }
 }
