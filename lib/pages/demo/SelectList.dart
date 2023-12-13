@@ -8,6 +8,8 @@ import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/model/user_model.dart';
 import 'package:flutter_templet_project/util/debug_log.dart';
 
+
+/// 单选/多选模型
 class SelectListPage extends StatefulWidget {
 
   SelectListPage({super.key, });
