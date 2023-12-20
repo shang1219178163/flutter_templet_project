@@ -36,6 +36,7 @@ import 'package:flutter_templet_project/pages/demo/ImageStretchDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MenuAnchorDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MenuEntryDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NChoiceBoxOneDemo.dart';
+import 'package:flutter_templet_project/pages/demo/NIndexAvatarGroupDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ProgressClipperDemo.dart';
 import 'package:flutter_templet_project/pages/demo/SearchDemo.dart';
 import 'package:flutter_templet_project/pages/demo/SegmentedControlDemo.dart';
@@ -660,6 +661,7 @@ class APPRouter {
   static const choiceBoxOneDemo = '/choiceBoxOneDemo';
   static const apiConvertPage = '/apiConvertPage';
   static const selectListPage = '/selectListPage';
+  static const indexAvatarGroupDemo = '/indexAvatarGroupDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -1051,6 +1053,7 @@ class AppPage {
     GetPage(name: APPRouter.choiceBoxOneDemo, page: () => NChoiceBoxOneDemo(),),
     GetPage(name: APPRouter.apiConvertPage, page: () => APIConvertPage(),),
     GetPage(name: APPRouter.selectListPage, page: () => SelectListPage(),),
+    GetPage(name: APPRouter.indexAvatarGroupDemo, page: () => NIndexAvatarGroupDemo(),),
 
 
   ];

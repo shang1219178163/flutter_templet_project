@@ -95,6 +95,7 @@ class Assets {
   static const String imagesIconLeftVoice3 = 'assets/images/icon_left_voice_3.png';
   static const String imagesIconLock = 'assets/images/icon_lock.png';
   static const String imagesIconMedicalAppliance = 'assets/images/icon_medical_appliance.png';
+  static const String imagesIconOcrBar = 'assets/images/icon_ocr_bar.png';
   static const String imagesIconPlay = 'assets/images/icon_play.png';
   static const String imagesIconQuote = 'assets/images/icon_quote.png';
   static const String imagesIconRevoke = 'assets/images/icon_revoke.png';
@@ -106,9 +107,11 @@ class Assets {
   static const String imagesImg404 = 'assets/images/img_404.png';
   static const String imagesImgFlutter310 = 'assets/images/img_flutter_3_10.png';
   static const String imagesImgPlaceholder = 'assets/images/img_placeholder.png';
+  static const String imagesImgPlaceholderDoctor = 'assets/images/img_placeholder_doctor.png';
   static const String imagesImgPlaceholderEmpty = 'assets/images/img_placeholder_empty.png';
   static const String imagesImgPlaceholderEmptyOne = 'assets/images/img_placeholder_empty_one.png';
   static const String imagesImgPlaceholderOffonline = 'assets/images/img_placeholder_offonline.png';
+  static const String imagesImgPlaceholderPatient = 'assets/images/img_placeholder_patient.png';
   static const String imagesImgPlaceholderSearch = 'assets/images/img_placeholder_search.png';
   static const String imagesImgPlacehorder = 'assets/images/img_placehorder.png';
   static const String imagesImgSoundOverlayBgRecording = 'assets/images/img_sound_overlay_bg_recording.png';
