@@ -30,7 +30,7 @@ class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
     "datePicker", "datePicker mixin封装", "datePicker封装",
     "Picker浅封装", "Picker封装", "自定义",
     "单选滚动列表", "多选滚动列表", "多种类按钮",
-    "日期选择", "日期时段选择", "多项选择", "多项选择1"];
+    "日期选择", "日期时段选择", "单项选择", "多项选择"];
 
   late String title = "";
 
@@ -84,14 +84,18 @@ class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
 
   List<Widget> initListWidget(List<String> list) {
     return list.map((e) => OutlinedButton(
-        onPressed: (){
-          _onPressed(list.indexOf(e));
-        },
-        style: OutlinedButton.styleFrom(
-          side: BorderSide(width: 1.0, color: Colors.blue),
-          padding: EdgeInsets.all(0),
-        ),
-        child: Text('${e}_${list.indexOf(e)}', style: TextStyle(fontSize: 12, color: Colors.black87)),
+      onPressed: (){
+        _onPressed(list.indexOf(e));
+      },
+      style: OutlinedButton.styleFrom(
+        side: BorderSide(width: 1.0, color: Colors.blue),
+        padding: EdgeInsets.all(0),
+      ),
+      child: Text('${e}_${list.indexOf(e)}',
+        style: TextStyle(fontSize: 12,
+          color: Colors.black87,
+        )
+      ),
     )).toList();
   }
 
@@ -312,7 +316,7 @@ class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
         break;
       case 12:
         {
-          PickerUtil.showMutible(
+          PickerUtil.showMultiple(
             context: context,
             data: weightData,
             selectedData: weightSelectedData,

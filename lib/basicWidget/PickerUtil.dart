@@ -67,7 +67,7 @@ class PickerUtil{
     );
   }
 
-  static showMutible({
+  static showMultiple({
     required BuildContext context,
     required List<List<String>> data,
     required List<String> selectedData,

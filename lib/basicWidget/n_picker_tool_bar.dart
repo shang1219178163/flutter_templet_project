@@ -31,34 +31,36 @@ class NPickerToolBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final toolbar = NavigationToolbar(
+      leading: CupertinoButton(
+        padding: EdgeInsets.all(12),
+        onPressed: onCancel,
+        child: Text(actionTitles[0]),
+      ),
+      middle: Text(title,
+        style: TextStyle(
+          fontSize: 17,
+          fontWeight: FontWeight.normal,
+          color: Colors.black,
+          backgroundColor: Colors.white,
+          decoration: TextDecoration.none
+        ),
+        textAlign: TextAlign.center,
+      ),
+      trailing: CupertinoButton(
+        padding: EdgeInsets.all(12),
+        onPressed: onConfirm,
+        child: Text(actionTitles[1]),
+      ),
+    );
+
     return Container(
       height: height,
       width: width,
       // decoration: BoxDecoration(
       //     border: Border.all(color: Colors.blueAccent)
       // ),
-      child: NavigationToolbar(
-        leading: CupertinoButton(
-          padding: EdgeInsets.all(12),
-          onPressed: onCancel,
-          child: Text(actionTitles[0]),
-        ),
-        middle: Text(title,
-          style: TextStyle(
-              fontSize: 17,
-              fontWeight: FontWeight.normal,
-              color: Colors.black,
-              backgroundColor: Colors.white,
-              decoration: TextDecoration.none
-          ),
-          textAlign: TextAlign.center,
-        ),
-        trailing: CupertinoButton(
-          padding: EdgeInsets.all(12),
-          onPressed: onConfirm,
-          child: Text(actionTitles[1]),
-        ),
-      ),
+      child: toolbar,
     );
   }
 
