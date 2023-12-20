@@ -2,6 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/PickerUtil.dart';
 import 'package:flutter_templet_project/basicWidget/n_picker_tool_bar.dart';
 import 'package:flutter_templet_project/basicWidget/chioce_wrap.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
@@ -14,6 +15,7 @@ import 'package:flutter_templet_project/mixin/bottom_sheet_mixin.dart';
 import 'package:flutter_templet_project/pages/demo/AlertSheetDemo.dart';
 
 import 'package:flutter_templet_project/pages/demo/ListTileDemo.dart';
+import 'package:get_storage/get_storage.dart';
 
 class PickerDemo extends StatefulWidget {
   const PickerDemo({Key? key}) : super(key: key);
@@ -31,6 +33,17 @@ class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
     "日期选择", "日期时段选择", "多项选择", "多项选择1"];
 
   late String title = "";
+
+  /// 体重
+  final weightData = <List<String>>[
+    List<String>.generate(240, (index) => (index + 10).toString()).toList(),
+    List<String>.generate(10, (index) => '.$index').toList(),
+  ];
+
+  late final weightSelectedData = [
+    weightData[0][1],
+    weightData[1][1],
+  ];
 
   @override
   void initState() {
@@ -275,28 +288,49 @@ class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
           setState(() {});
         }
         break;
-
       case 11:
       {
-        showPickerItems(
-          context: context,
-          onChanged: (index){
-            debugPrint('onChanged: $index');
-          },
-          onConfirm: () {
-            debugPrint('onConfirm:');
-            Navigator.of(context).pop();
-          },
-          onCancel: () {
-            Navigator.of(context).pop();
-          }
-       );
-      }
+          PickerUtil.show(
+            context: context,
+            data: weightData[0],
+            selectedData: weightData[0][1],
+            onChanged: (val){
+              debugPrint('onChanged: $val');
+            },
+            onSelected: (val){
+              debugPrint('onSelected: $val');
+            },
+            onConfirm: (val){
+              debugPrint('onConfirm: $val');
+              Navigator.of(context).pop();
+            },
+            onCancel: () {
+              Navigator.of(context).pop();
+            }
+          );
+        }
         break;
       case 12:
-      {
-
-       }
+        {
+          PickerUtil.showMutible(
+            context: context,
+            data: weightData,
+            selectedData: weightSelectedData,
+            onChanged: (val){
+              debugPrint('onChanged: $val');
+            },
+            onSelected: (val){
+              // debugPrint('onSelected: $val');
+            },
+            onConfirm: (selectedItems) {
+              debugPrint('onConfirm: $selectedItems');
+              Navigator.of(context).pop();
+            },
+            onCancel: () {
+              Navigator.of(context).pop();
+            }
+          );
+        }
         break;
       default:
         break;
@@ -350,57 +384,6 @@ class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
   }
 
 
-  showPickerItems({
-    required BuildContext context,
-    double width = double.maxFinite,
-    required void Function(int) onChanged,
-    VoidCallback? onCancel,
-    required VoidCallback onConfirm,
-  }) {
-    // int _selectedValue = 0;
-    List<Widget> items = List.generate(9, (index) => Text('item_$index')).toList();
-
-    final content = Container(
-      width: width,
-      height: 300,
-      child: Container(
-        color: Colors.white,
-        child: Column(
-          children: [
-            NPickerToolBar(
-              onCancel: onCancel,
-              onConfirm: onConfirm,
-            ),
-            Divider(),
-            Expanded(
-              child: StatefulBuilder(
-                builder: (context, setState) {
-
-                  return CupertinoPicker(
-                    backgroundColor: Colors.white,
-                    itemExtent: 50,
-                    scrollController: FixedExtentScrollController(initialItem: 1),
-                    onSelectedItemChanged: (value) {
-                      onChanged(value);
-                      setState(() {});
-                    },
-                    children: items,
-                  );
-                }
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-
-    showCupertinoModalPopup(
-      context: context,
-      builder: (_) {
-        return content;
-      }
-    );
-  }
 
 }
 
