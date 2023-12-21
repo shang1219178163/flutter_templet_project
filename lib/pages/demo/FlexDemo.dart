@@ -2,6 +2,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/header.dart';
+import 'package:flutter_templet_project/basicWidget/n_text.dart';
+import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 
 class FlexDemo extends StatefulWidget {
@@ -16,28 +18,32 @@ class FlexDemo extends StatefulWidget {
 
 class _FlexDemoState extends State<FlexDemo> {
 
+  ValueNotifier<bool> showTips = ValueNotifier(true);
 
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
       ),
-      body: ListView(
-        children: [
-          NHeader.h4(title: 'Flex.Horizontal',),
-          _buildFlexHorizontal(),
-          NHeader.h4(title: 'Flex.Vertical',),
-          _buildFlexVertical(),
-          NHeader.h4(title: '_buildSection',),
-          _buildSection(),
-          NHeader.h4(title: '_buildSection2',),
-          _buildSection2(),
-          NHeader.h4(title: '_buildSection3',),
-          _buildSection3(),
-        ]
+      body: Padding(
+        padding: const EdgeInsets.only(bottom: 20),
+        child: ListView(
+          children: [
+            NHeader.h4(title: 'Flex.Horizontal',),
+            _buildFlexHorizontal(),
+            NHeader.h4(title: 'Flex.Vertical',),
+            _buildFlexVertical(),
+            NHeader.h4(title: '_buildSection',),
+            _buildSection(),
+            NHeader.h4(title: '_buildSection2',),
+            _buildSection2(),
+            NHeader.h4(title: '_buildSection3',),
+            _buildSection3(),
+            NHeader.h4(title: 'tips',),
+            buildTipsWidget(showTips: showTips, tips: "这是一个提示信息或者警告⚠️"),
+          ]
+        ),
       )
     );
   }
@@ -181,5 +187,71 @@ class _FlexDemoState extends State<FlexDemo> {
         child: Text("Flexible - ${fit.toString().split(".").last}"),
       ),
     );
+  }
+
+
+  /// 问诊倒计时显示器 Widget
+  Widget buildTipsWidget({
+    double? preferredSizeHeight,
+    required ValueNotifier<bool> showTips,
+    required String tips,
+  }) {
+    Widget child = Container(
+      height: 44,
+      alignment: Alignment.center,
+      padding: const EdgeInsets.only(left: 17, right: 7),
+      color: Color(0xffEDEDED).withOpacity(0.5),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Expanded(
+            child: Container(
+              height: 1,
+              color: const Color(0xffe5e5e5),
+            ),
+          ),
+          Container(
+            height: 32,
+            alignment: Alignment.center,
+            padding: const EdgeInsets.only(left: 17, right: 7),
+            decoration: BoxDecoration(
+              color: const Color(0xffEBF8F8),
+              borderRadius: BorderRadius.circular(18), //边角
+            ),
+            child: Flexible(
+              child: NText(tips,
+                fontSize: 13,
+                color: primaryColor,
+              ),
+            ),
+          ),
+          Expanded(
+            child: Container(
+              height: 1,
+              color: const Color(0xffe5e5e5),
+            ),
+          ),
+        ],
+      ),
+    );
+
+    child = ValueListenableBuilder<bool>(
+        valueListenable: showTips,
+        child: child,
+        builder: (context, value, child) {
+          if (!value) {
+            preferredSizeHeight = 0;
+            return const SizedBox();
+          }
+          return child!;
+        });
+
+    if (preferredSizeHeight != null) {
+      child = PreferredSize(
+        preferredSize: Size.fromHeight(preferredSizeHeight!),
+        child: child,
+      );
+    }
+    return child;
   }
 }
