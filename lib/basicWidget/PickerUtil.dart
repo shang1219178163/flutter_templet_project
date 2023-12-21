@@ -14,7 +14,7 @@ import 'package:flutter_templet_project/basicWidget/n_picker_tool_bar.dart';
 /// Picker 工具类
 class PickerUtil{
 
-  static show({
+  static void show({
     required BuildContext context,
     required List<String> data,
     required String selectedData,
@@ -67,7 +67,7 @@ class PickerUtil{
     );
   }
 
-  static showMultiple({
+  static void showMultiple({
     required BuildContext context,
     required List<List<String>> data,
     required List<String> selectedData,
