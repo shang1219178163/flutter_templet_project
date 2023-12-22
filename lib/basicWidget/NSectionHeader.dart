@@ -139,9 +139,9 @@ class NHeader extends StatelessWidget{
 }
 
 
-class SectionHeader extends StatelessWidget{
+class NSectionHeader extends StatelessWidget{
 
-  const SectionHeader({
+  const NSectionHeader({
     Key? key,
     this.title = '',
     this.text,
@@ -163,17 +163,26 @@ class SectionHeader extends StatelessWidget{
 
   final Widget? divider;
 
-  final MainAxisAlignment? mainAxisAlignment;
-  final MainAxisSize? mainAxisSize;
-  final CrossAxisAlignment? crossAxisAlignment;
+  final MainAxisAlignment mainAxisAlignment;
+  final MainAxisSize mainAxisSize;
+  final CrossAxisAlignment crossAxisAlignment;
 
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisSize: mainAxisSize,
+      mainAxisAlignment: mainAxisAlignment,
+      crossAxisAlignment: crossAxisAlignment,
       children: [
-        NHeader.h5(title: title, text: text, style: style, padding: padding, alignment: alignment,),
+        NHeader.h5(
+          title: title,
+          text: text,
+          style: style,
+          padding: padding,
+          alignment: alignment,
+        ),
         child,
         divider ?? Divider(),
       ],

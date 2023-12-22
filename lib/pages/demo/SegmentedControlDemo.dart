@@ -2,7 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/header.dart';
+import 'package:flutter_templet_project/basicWidget/NSectionHeader.dart';
 import 'package:flutter_templet_project/basicWidget/line_segment_view.dart';
 import 'package:flutter_templet_project/basicWidget/list_view_segment_control.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';

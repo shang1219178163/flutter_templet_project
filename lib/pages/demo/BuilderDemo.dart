@@ -1,6 +1,6 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/header.dart';
+import 'package:flutter_templet_project/basicWidget/NSectionHeader.dart';
 
 class BuilderDemo extends StatefulWidget {
 

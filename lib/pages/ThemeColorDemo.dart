@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/APPThemeSettings.dart';
-import 'package:flutter_templet_project/basicWidget/header.dart';
+import 'package:flutter_templet_project/basicWidget/NSectionHeader.dart';
 import 'package:tuple/tuple.dart';
 
 /// scaffoldBackgroundColor 背景色

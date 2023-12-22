@@ -13,7 +13,7 @@ import 'package:flutter_templet_project/basicWidget/n_painter_arc.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/n_text_button.dart';
 import 'package:flutter_templet_project/basicWidget/radial_button.dart';
-import 'package:flutter_templet_project/basicWidget/header.dart';
+import 'package:flutter_templet_project/basicWidget/NSectionHeader.dart';
 import 'package:flutter_templet_project/basicWidget/triangle_decoration.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
