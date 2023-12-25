@@ -205,10 +205,7 @@ class _FlexDemoState extends State<FlexDemo> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Expanded(
-            child: Container(
-              height: 1,
-              color: const Color(0xffe5e5e5),
-            ),
+            child: buildLine(color: Colors.red),
           ),
           Container(
             height: 32,
@@ -218,18 +215,13 @@ class _FlexDemoState extends State<FlexDemo> {
               color: const Color(0xffEBF8F8),
               borderRadius: BorderRadius.circular(18), //边角
             ),
-            child: Flexible(
-              child: NText(tips,
-                fontSize: 13,
-                color: primaryColor,
-              ),
+            child: NText(tips,
+              fontSize: 13,
+              color: primaryColor,
             ),
           ),
           Expanded(
-            child: Container(
-              height: 1,
-              color: const Color(0xffe5e5e5),
-            ),
+            child: buildLine(color: Colors.red),
           ),
         ],
       ),
@@ -253,5 +245,13 @@ class _FlexDemoState extends State<FlexDemo> {
       );
     }
     return child;
+  }
+
+
+  Widget buildLine({color = const Color(0xffe5e5e5), }) {
+    return Container(
+      height: 1,
+      color: color,
+    );
   }
 }
