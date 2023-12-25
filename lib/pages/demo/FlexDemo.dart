@@ -30,18 +30,39 @@ class _FlexDemoState extends State<FlexDemo> {
         padding: const EdgeInsets.only(bottom: 20),
         child: ListView(
           children: [
-            NHeader.h4(title: 'Flex.Horizontal',),
-            _buildFlexHorizontal(),
-            NHeader.h4(title: 'Flex.Vertical',),
-            _buildFlexVertical(),
-            NHeader.h4(title: '_buildSection',),
-            _buildSection(),
-            NHeader.h4(title: '_buildSection2',),
-            _buildSection2(),
-            NHeader.h4(title: '_buildSection3',),
-            _buildSection3(),
-            NHeader.h4(title: 'tips',),
-            buildTipsWidget(showTips: showTips, tips: "这是一个提示信息或者警告⚠️"),
+            NSectionHeader(
+              title: "Flex.Horizontal",
+              child: _buildFlexHorizontal()
+            ),
+            NSectionHeader(
+              title: "Flex.Vertical",
+              child: _buildFlexVertical()
+            ),
+            NSectionHeader(
+              title: "_buildSection",
+              child: _buildSection()
+            ),
+
+            NSectionHeader(
+              title: "_buildSection2",
+              child: _buildSection2()
+            ),
+            NSectionHeader(
+              title: "_buildSection3",
+              child: _buildSection3()
+            ),
+            NSectionHeader(
+              title: "buildMutipleExpanded",
+              child: buildMutipleExpanded()
+            ),
+            NSectionHeader(
+              title: "buildMutipleFlexible",
+              child: buildMutipleFlexible(),
+            ),
+            NSectionHeader(
+              title: "tips",
+              child: buildTipsWidget(showTips: showTips, tips: "这是一个提示信息或者警告⚠️"),
+            ),
           ]
         ),
       )
@@ -189,6 +210,63 @@ class _FlexDemoState extends State<FlexDemo> {
     );
   }
 
+
+  buildMutipleExpanded() {
+    return Row(
+      children: [
+        Expanded(
+          flex: 1,
+          child: Container(
+            color: Colors.red,
+            child: Text('Expanded 1/6'),
+          ),
+        ),
+        Expanded(
+          flex: 2,
+          child: Container(
+            color: Colors.green,
+            child: Text('Expanded 2/6'),
+          ),
+        ),
+        Expanded(
+          flex: 3,
+          child: Container(
+            color: Colors.blue,
+            child: Text('Expanded 3/6'),
+          ),
+        ),
+      ],
+    );
+  }
+
+  buildMutipleFlexible() {
+    return Row(
+      mainAxisSize: MainAxisSize.max,
+      children: [
+        Flexible(
+          flex: 1,
+          child: Container(
+            color: Colors.red,
+            child: Text('Flexible 1/6'),
+          ),
+        ),
+        Flexible(
+          flex: 2,
+          child: Container(
+            color: Colors.green,
+            child: Text('Flexible 2/6'),
+          ),
+        ),
+        Flexible(
+          flex: 3,
+          child: Container(
+            color: Colors.blue,
+            child: Text('Flexible 3/6'),
+          ),
+        ),
+      ],
+    );
+  }
 
   /// 问诊倒计时显示器 Widget
   Widget buildTipsWidget({
