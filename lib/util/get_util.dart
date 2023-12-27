@@ -10,6 +10,43 @@ import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:get/get.dart';
 import 'package:tuple/tuple.dart';
 
+/// 自定义路由函数封装
+extension GetRouteUtil on GetInterface {
+
+  /// 堆栈路由跳转
+  /// pageRoute 路由
+  /// onBefore 跳转前回调函数
+  /// onUntil 堆栈中查询到路由时回调方法
+  /// onJump 堆栈中没查询到路由时回调方法
+  /// 返回值 是否在堆栈中查询到路由
+  bool jump(String pageRoute, {
+    dynamic arguments,
+    VoidCallback? onBefore,
+    VoidCallback? onJump,
+    VoidCallback? onUntil,
+  }) {
+    final routes = Get.routeTree.routes.reversed;
+    for (final route in routes) {
+      if (route.name == pageRoute) {
+        onBefore?.call();
+        if (onUntil != null) {
+          onUntil.call();
+        } else {
+          Get.until((route) => route.settings.name == pageRoute);
+        }
+        return true;
+      }
+    }
+
+    onBefore?.call();
+    if (onJump != null) {
+      onJump.call();
+    } else {
+      Get.offNamed(pageRoute, arguments: arguments);
+    }
+    return false;
+  }
+}
 
 class GetSheet{
 
