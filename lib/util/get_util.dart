@@ -16,8 +16,8 @@ extension GetRouteUtil on GetInterface {
   /// 堆栈路由跳转
   /// pageRoute 路由
   /// onBefore 跳转前回调函数
-  /// onUntil 堆栈中查询到路由时回调方法
-  /// onJump 堆栈中没查询到路由时回调方法
+  /// onUntil 堆栈中查询到路由时回调方法, 为空执行 Get.until
+  /// onJump 堆栈中没查询到路由时回调方法, 为空执行 Get.offNamed
   /// 返回值 是否在堆栈中查询到路由
   bool jump(String pageRoute, {
     dynamic arguments,
