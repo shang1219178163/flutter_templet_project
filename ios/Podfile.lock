@@ -10,6 +10,8 @@ PODS:
   - connectivity_plus (0.0.1):
     - Flutter
     - ReachabilitySwift
+  - device_info_plus (0.0.1):
+    - Flutter
   - DKImagePickerController/Core (4.3.4):
     - DKImagePickerController/ImageDataManager
     - DKImagePickerController/Resource
@@ -63,6 +65,9 @@ PODS:
   - fluttertoast (0.0.2):
     - Flutter
     - Toast
+  - fluwx (0.0.1):
+    - Flutter
+    - WechatOpenSDK-XCFramework (~> 2.0.2)
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
@@ -117,6 +122,8 @@ PODS:
   - shared_preferences_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
+  - sign_in_with_apple (0.0.1):
+    - Flutter
   - sqflite (0.0.2):
     - Flutter
     - FMDB (>= 2.7.5)
@@ -124,6 +131,8 @@ PODS:
   - Toast (4.0.0)
   - TOCropViewController (2.6.1)
   - url_launcher_ios (0.0.1):
+    - Flutter
+  - vibration (1.7.5):
     - Flutter
   - video_compress (0.3.0):
     - Flutter
@@ -133,6 +142,7 @@ PODS:
     - Flutter
   - webview_flutter_wkwebview (0.0.1):
     - Flutter
+  - WechatOpenSDK-XCFramework (2.0.2)
 
 DEPENDENCIES:
   - aesthetic_dialogs (from `.symlinks/plugins/aesthetic_dialogs/ios`)
@@ -140,6 +150,7 @@ DEPENDENCIES:
   - audioplayers_darwin (from `.symlinks/plugins/audioplayers_darwin/ios`)
   - camera_avfoundation (from `.symlinks/plugins/camera_avfoundation/ios`)
   - connectivity_plus (from `.symlinks/plugins/connectivity_plus/ios`)
+  - device_info_plus (from `.symlinks/plugins/device_info_plus/ios`)
   - file_picker (from `.symlinks/plugins/file_picker/ios`)
   - file_preview (from `.symlinks/plugins/file_preview/ios`)
   - Flutter (from `Flutter`)
@@ -148,6 +159,7 @@ DEPENDENCIES:
   - flutter_isolate (from `.symlinks/plugins/flutter_isolate/ios`)
   - flutter_sound (from `.symlinks/plugins/flutter_sound/ios`)
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
+  - fluwx (from `.symlinks/plugins/fluwx/ios`)
   - http_proxy (from `.symlinks/plugins/http_proxy/ios`)
   - image_cropper (from `.symlinks/plugins/image_cropper/ios`)
   - image_gallery_saver (from `.symlinks/plugins/image_gallery_saver/ios`)
@@ -161,8 +173,10 @@ DEPENDENCIES:
   - share (from `.symlinks/plugins/share/ios`)
   - share_plus (from `.symlinks/plugins/share_plus/ios`)
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
+  - sign_in_with_apple (from `.symlinks/plugins/sign_in_with_apple/ios`)
   - sqflite (from `.symlinks/plugins/sqflite/ios`)
   - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
+  - vibration (from `.symlinks/plugins/vibration/ios`)
   - video_compress (from `.symlinks/plugins/video_compress/ios`)
   - video_player_avfoundation (from `.symlinks/plugins/video_player_avfoundation/ios`)
   - wakelock_plus (from `.symlinks/plugins/wakelock_plus/ios`)
@@ -183,6 +197,7 @@ SPEC REPOS:
     - SwiftyGif
     - Toast
     - TOCropViewController
+    - WechatOpenSDK-XCFramework
 
 EXTERNAL SOURCES:
   aesthetic_dialogs:
@@ -195,6 +210,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/camera_avfoundation/ios"
   connectivity_plus:
     :path: ".symlinks/plugins/connectivity_plus/ios"
+  device_info_plus:
+    :path: ".symlinks/plugins/device_info_plus/ios"
   file_picker:
     :path: ".symlinks/plugins/file_picker/ios"
   file_preview:
@@ -211,6 +228,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_sound/ios"
   fluttertoast:
     :path: ".symlinks/plugins/fluttertoast/ios"
+  fluwx:
+    :path: ".symlinks/plugins/fluwx/ios"
   http_proxy:
     :path: ".symlinks/plugins/http_proxy/ios"
   image_cropper:
@@ -237,10 +256,14 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/share_plus/ios"
   shared_preferences_foundation:
     :path: ".symlinks/plugins/shared_preferences_foundation/darwin"
+  sign_in_with_apple:
+    :path: ".symlinks/plugins/sign_in_with_apple/ios"
   sqflite:
     :path: ".symlinks/plugins/sqflite/ios"
   url_launcher_ios:
     :path: ".symlinks/plugins/url_launcher_ios/ios"
+  vibration:
+    :path: ".symlinks/plugins/vibration/ios"
   video_compress:
     :path: ".symlinks/plugins/video_compress/ios"
   video_player_avfoundation:
@@ -256,6 +279,7 @@ SPEC CHECKSUMS:
   audioplayers_darwin: 877d9a4d06331c5c374595e46e16453ac7eafa40
   camera_avfoundation: 3125e8cd1a4387f6f31c6c63abb8a55892a9eeeb
   connectivity_plus: 07c49e96d7fc92bc9920617b83238c4d178b446a
+  device_info_plus: c6fb39579d0f423935b0c9ce7ee2f44b71b9fce6
   DKImagePickerController: b512c28220a2b8ac7419f21c491fc8534b7601ac
   DKPhotoGallery: fdfad5125a9fdda9cc57df834d49df790dbb4179
   file_picker: ce3938a0df3cc1ef404671531facef740d03f920
@@ -267,6 +291,7 @@ SPEC CHECKSUMS:
   flutter_sound: c60effa2a350fb977885f0db2fbc4c1ad5160900
   flutter_sound_core: 26c10e5832e76aaacfae252d8925232281c486ae
   fluttertoast: 48c57db1b71b0ce9e6bba9f31c940ff4b001293c
+  fluwx: e9e728cfdb80e82dac5f4ff974b1901a7939dcd0
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   http_proxy: 20f129d3e1c70cfdef92530b374c619832027729
   image_cropper: a3291c624a953049bc6a02e1f8c8ceb162a24b25
@@ -287,16 +312,19 @@ SPEC CHECKSUMS:
   share: 0b2c3e82132f5888bccca3351c504d0003b3b410
   share_plus: 599aa54e4ea31d4b4c0e9c911bcc26c55e791028
   shared_preferences_foundation: 986fc17f3d3251412d18b0265f9c64113a8c2472
+  sign_in_with_apple: f3bf75217ea4c2c8b91823f225d70230119b8440
   sqflite: 6d358c025f5b867b29ed92fc697fd34924e11904
   SwiftyGif: 93a1cc87bf3a51916001cf8f3d63835fb64c819f
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
   TOCropViewController: edfd4f25713d56905ad1e0b9f5be3fbe0f59c863
   url_launcher_ios: ae1517e5e344f5544fb090b079e11f399dfbe4d2
+  vibration: 7d883d141656a1c1a6d8d238616b2042a51a1241
   video_compress: fce97e4fb1dfd88175aa07d2ffc8a2f297f87fbe
   video_player_avfoundation: 6d971a232d72e6ee25368378d48a079dea01f1cf
   wakelock_plus: 8b09852c8876491e4b6d179e17dfe2a0b5f60d47
   webview_flutter_wkwebview: b7e70ef1ddded7e69c796c7390ee74180182971f
+  WechatOpenSDK-XCFramework: acdeeda129efbef9532bca8a10c24e1b4b8c7d69
 
-PODFILE CHECKSUM: bc4d661222d5878f32c2452cc85448fe230861dd
+PODFILE CHECKSUM: 0cb26ce23d619cbd15161540cbfad967aec8d253
 
 COCOAPODS: 1.13.0
