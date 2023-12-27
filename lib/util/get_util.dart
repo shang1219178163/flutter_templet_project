@@ -46,6 +46,17 @@ extension GetRouteUtil on GetInterface {
     }
     return false;
   }
+
+  /// 当前路由堆栈是否包含此路由
+  bool hasRoute(String routeName) {
+    final routes = Get.routeTree.routes.reversed;
+    for (final route in routes) {
+      if (route.name == routeName) {
+        return true;
+      }
+    }
+    return false;
+  }
 }
 
 class GetSheet{
