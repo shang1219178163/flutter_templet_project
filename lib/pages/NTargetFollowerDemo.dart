@@ -54,6 +54,13 @@ class _NTargetFollowerDemoState extends State<NTargetFollowerDemo> {
   }
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    // _onHide?.call();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -104,30 +111,39 @@ class _NTargetFollowerDemoState extends State<NTargetFollowerDemo> {
                           _onHide = onHide;
 
                           debugPrint("${DateTime.now()} followerBuilder:");
-                          return NLongPressMenu(
-                            items: items.map((e) => Tuple2(e.item1, e.item2.toAssetImage())).toList(),
-                            onItem: (Tuple2<String, AssetImage> t) {
+                          return TapRegion(
+                            onTapInside: (tap) {
+                              debugPrint('On Tap Inside!!');
+                            },
+                            onTapOutside: (tap) {
+                              debugPrint('On Tap Outside!!');
                               onHide();
-                              debugPrint("onChanged_$t");
-                              EasyToast.showToast(t.item1);
-                              switch (t.item1) {
-                                case "复制":
-                                  {
-                                  }
-                                  break;
-                                case "引用":
-                                  {
+                            },
+                            child: NLongPressMenu(
+                              items: items.map((e) => Tuple2(e.item1, e.item2.toAssetImage())).toList(),
+                              onItem: (Tuple2<String, AssetImage> t) {
+                                onHide();
+                                debugPrint("onChanged_$t");
+                                EasyToast.showToast(t.item1);
+                                switch (t.item1) {
+                                  case "复制":
+                                    {
+                                    }
+                                    break;
+                                  case "引用":
+                                    {
 
-                                  }
-                                  break;
-                                case "撤回":
-                                  {
-                                  }
-                                  break;
-                                default:
-                                  break;
+                                    }
+                                    break;
+                                  case "撤回":
+                                    {
+                                    }
+                                    break;
+                                  default:
+                                    break;
+                                }
                               }
-                            }
+                            ),
                           );
                           return buildFollowerDefault(onHide: onHide, index: i);
                         }
