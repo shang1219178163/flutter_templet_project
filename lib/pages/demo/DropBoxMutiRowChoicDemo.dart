@@ -120,20 +120,13 @@ class _DropBoxMutiRowChoicDemoState extends State<DropBoxMutiRowChoicDemo> {
       body: SafeArea(
           child: Column(
             children: [
+              buildSearchAndFilterBar(),
               Expanded(
                 child: Stack(
                   clipBehavior: Clip.none,
                   children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        buildSearchAndFilterBar(),
-                        Expanded(
-                          child: buildList(
-                            items: items.map((e) => "item_$e").toList(),
-                          )
-                        ),
-                      ],
+                    buildList(
+                      items: items.map((e) => "item_$e").toList(),
                     ),
                     ValueListenableBuilder<bool>(
                         valueListenable: isVisible,
@@ -142,10 +135,8 @@ class _DropBoxMutiRowChoicDemoState extends State<DropBoxMutiRowChoicDemo> {
                             return const SizedBox();
                           }
 
-                          final top = _globalKey.currentContext?.renderBoxSize?.height ??
-                              60.h;
                           return Positioned(
-                            top: top,
+                            top: 0,
                             bottom: 0,
                             width: context.screenSize.width,
                             // height: 600.h,

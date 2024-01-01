@@ -85,10 +85,8 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
                 child: Stack(
                   clipBehavior: Clip.none,
                   children: [
-                    Expanded(
-                        child: buildList(
-                          items: items.map((e) => "item_$e").toList(),
-                        )
+                    buildList(
+                      items: items.map((e) => "item_$e").toList(),
                     ),
                     ValueListenableBuilder<bool>(
                       valueListenable: isVisible,
@@ -99,7 +97,7 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
 
                         return Positioned(
                           top: 0,
-                          bottom: context.appBarHeight,
+                          bottom: context.appBarHeight * 2,
                           width: context.screenSize.width,
                           child: buildDropBox(
                             controller: dropBoxController,
