@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:dash_painter/dash_decoration.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 import 'package:flutter_templet_project/APPThemeSettings.dart';
 import 'package:flutter_templet_project/basicWidget/GradientBoundPainter.dart';
@@ -75,7 +76,7 @@ class _SecondPageState extends State<SecondPage> {
         Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            buildSection(
+            NSectionHeader(
               title: "RadialButton",
               child: Column(
                 children: [
@@ -101,7 +102,7 @@ class _SecondPageState extends State<SecondPage> {
                 ],
               ),
             ),
-            buildSection(
+            NSectionHeader(
               title: "AfterLayoutBuilder",
               child: AfterLayoutBuilder(
                 builder: (BuildContext context, Widget? child, Size? size) {
@@ -120,13 +121,13 @@ class _SecondPageState extends State<SecondPage> {
                 ),
               ),
             ),
-            buildSection(
+            NSectionHeader(
               title: "LinearGradient",
               child: _buildGradientButton(
                 onTap: () => debugPrint("LinearGradient"),
               ),
             ),
-            buildSection(
+            NSectionHeader(
               title: "MaterialButton",
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -162,7 +163,7 @@ class _SecondPageState extends State<SecondPage> {
                 ],
               ),
             ),
-            buildSection(
+            NSectionHeader(
               title: "BackButton",
               child: BackButton(
                 color: Colors.red,
@@ -175,7 +176,7 @@ class _SecondPageState extends State<SecondPage> {
                 onPressed: () => debugPrint("BackButton"),
               ).toColoredBox(),
             ),
-            buildSection(
+            NSectionHeader(
               title: "IconButton",
               child: IconButton(
                 style: TextButton.styleFrom(
@@ -197,7 +198,7 @@ class _SecondPageState extends State<SecondPage> {
                 },
               ).toColoredBox(),
             ),
-            buildSection(
+            NSectionHeader(
               title: "FilledButton",
               child: Row(
                 children: [
@@ -217,7 +218,7 @@ class _SecondPageState extends State<SecondPage> {
                 ],
               ),
             ),
-            buildSection(
+            NSectionHeader(
               title: "TextButton",
               child: Row(
                 children: [
@@ -259,7 +260,7 @@ class _SecondPageState extends State<SecondPage> {
                 ],
               ),
             ),
-            buildSection(
+            NSectionHeader(
               title: "OutlinedButton",
               child: OutlinedButton.icon(
                 key: _globalKey1,
@@ -279,7 +280,7 @@ class _SecondPageState extends State<SecondPage> {
                 ),
               ),
             ),
-            buildSection(
+            NSectionHeader(
               title: "ElevatedButton",
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -295,7 +296,7 @@ class _SecondPageState extends State<SecondPage> {
                 }).toList(),
               ),
             ),
-            buildSection(
+            NSectionHeader(
               title: "ElevatedButton",
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -325,7 +326,7 @@ class _SecondPageState extends State<SecondPage> {
                 ],
               ),
             ),
-            buildSection(
+            NSectionHeader(
               title: "ElevatedButton OutlinedBorder",
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -362,7 +363,7 @@ class _SecondPageState extends State<SecondPage> {
                 }).toList(),
               ),
             ),
-            buildSection(
+            NSectionHeader(
               title: "FloatingActionButton",
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -405,7 +406,7 @@ class _SecondPageState extends State<SecondPage> {
                 ],
               ),
             ),
-            buildSection(
+            NSectionHeader(
               title: "TextSelectionToolbarTextButton",
               child: TextSelectionToolbarTextButton(
                 padding: EdgeInsets.all(8),
@@ -415,7 +416,7 @@ class _SecondPageState extends State<SecondPage> {
                 child: Text("TextSelectionToolbarTextButton"),
               ),
             ),
-            buildSection(
+            NSectionHeader(
               title: "NLabelAndIcon + OutlinedButton",
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -432,7 +433,7 @@ class _SecondPageState extends State<SecondPage> {
                   )).toList(),
               ),
             ),
-            buildSection(
+            NSectionHeader(
               title: "NLabelAndIcon + ElevatedButton",
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -455,23 +456,23 @@ class _SecondPageState extends State<SecondPage> {
                 )).toList(),
               ),
             ),
-            buildSection(
+            NSectionHeader(
               title: "ToggleButtons",
               child: buildToggleButtons(),
             ),
-            buildSection(
+            NSectionHeader(
               title: "DropdownButton",
               child: _buildDropdownButton()
             ),
-            buildSection(
+            NSectionHeader(
               title: "_buildDropdownButton1",
               child: _buildDropdownButton1()
             ),
-            buildSection(
+            NSectionHeader(
               title: "_buildPopupMenuButtonExt",
               child: _buildPopupMenuButtonExt()
             ),
-            buildSection(
+            NSectionHeader(
               title: "UploadButton",
               child: UploadButton(
                 image: Image.asset("img_update.png".toPath(),
@@ -492,7 +493,7 @@ class _SecondPageState extends State<SecondPage> {
                 },
               ),
             ),
-            buildSection(
+            NSectionHeader(
               title: "SpreadArea",
               child: Column(
                 children: [
@@ -522,11 +523,11 @@ class _SecondPageState extends State<SecondPage> {
                 ],
               ),
             ),
-            buildSection(
+            NSectionHeader(
               title: "_buildCustomPaint",
               child: _buildCustomPaint()
             ),
-            buildSection(
+            NSectionHeader(
               title: "MyPainterArc",
               child: Container(
                 height: 100,
@@ -543,11 +544,11 @@ class _SecondPageState extends State<SecondPage> {
                 ),
               ),
             ),
-            buildSection(
+            NSectionHeader(
               title: "_buildInkWell",
               child: _buildInkWell(),
             ),
-            buildSection(
+            NSectionHeader(
               title: "_buildButtonBar",
               child: ButtonBar(
                 children: ['Ok', 'Cancel', ].map((e) => ElevatedButton(
@@ -613,26 +614,18 @@ class _SecondPageState extends State<SecondPage> {
 
             _buildGradientBound(),
             SizedBox(height: 20,),
+            buildElevatedButtonGradient(
+              width: 300,
+              title: 'ElevatedButton',
+              onPressed: (){
 
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.transparent,
-                border: Border.all(color: Colors.blue),
-                borderRadius: BorderRadius.all(Radius.circular(0)),
-              ),
-            )
+              },
+            ),
+            buildMaterialButtonGradient(),
+
+    
           ],
         ),
-      ],
-    );
-  }
-
-  Widget buildSection({required String title, required Widget child}) {
-    return Column(
-      children: [
-        Divider(),
-        NHeader.h5(title: title),
-        child,
       ],
     );
   }
@@ -1020,7 +1013,76 @@ class _SecondPageState extends State<SecondPage> {
       );
     });
   }
-  
+
+
+  buildElevatedButtonGradient({
+    double? width,
+    double? height = 45,
+    required String title,
+    required VoidCallback? onPressed,
+    double radius = 22.5,
+    Gradient? gradient,
+  }) {
+    bool enable = (onPressed != null);
+
+    final borderRadius = BorderRadius.circular(radius);
+
+    return ElevatedButton(
+      onPressed: onPressed,
+      style: ElevatedButton.styleFrom(
+        padding: EdgeInsets.zero,
+        disabledForegroundColor: Colors.white,
+        disabledBackgroundColor: Colors.grey,
+        shape: RoundedRectangleBorder(
+          borderRadius: borderRadius,
+        ),
+      ),
+      child: Container(
+        width: width,
+        height: height,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          borderRadius: borderRadius,
+          gradient: !enable ? null : (gradient ?? LinearGradient(
+            colors: [
+              Colors.red,
+              Colors.blue,
+              Colors.green,
+            ],
+          )),
+        ),
+        child: Text(
+          title,
+          style: TextStyle(fontSize: 18),
+        ),
+      )
+    );
+  }
+
+  buildMaterialButtonGradient({VoidCallback? onPressed}) {
+    return Container(
+      width: 300,
+      height: 45,
+      decoration: const ShapeDecoration(
+        shape: StadiumBorder(),
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [Colors.blue, Colors.orange, Colors.green],
+        ),
+      ),
+      child: MaterialButton(
+        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        shape: const StadiumBorder(),
+        onPressed: onPressed,
+        disabledColor: Colors.grey,
+        child: const Text(
+          'MaterialButton',
+          style: TextStyle(color: Colors.white, fontSize: 20),
+        ),
+      ),
+    );
+  }
 }
 
 

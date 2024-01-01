@@ -151,7 +151,7 @@ class NSectionHeader extends StatelessWidget{
     this.divider,
     this.mainAxisAlignment = MainAxisAlignment.start,
     this.mainAxisSize = MainAxisSize.max,
-    this.crossAxisAlignment = CrossAxisAlignment.start,
+    this.crossAxisAlignment = CrossAxisAlignment.center,
     required this.child,
   }) : super(key: key);
 

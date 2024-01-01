@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/NSectionHeader.dart';
 
 class DropdownMenuDemo extends StatefulWidget {
 
@@ -40,6 +41,9 @@ class _DropdownMenuDemoState extends State<DropdownMenuDemo> {
   }).toList();
 
 
+  final _selectedItemVN = ValueNotifier<BoxFit>(BoxFit.none);
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,62 +53,143 @@ class _DropdownMenuDemoState extends State<DropdownMenuDemo> {
       body: SafeArea(
         child: Column(
           children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  DropdownMenu<ColorLabel>(
-                    controller: colorController,
-                    initialSelection: ColorLabel.green,
-                    label: const Text('Color'),
-                    dropdownMenuEntries: colorEntries,
-                    onSelected: (ColorLabel? color) {
-                      selectedColor = color;
-                      setState(() {});
-                    },
-                  ),
-                  const SizedBox(width: 20),
-                  DropdownMenu<IconLabel>(
-                    controller: iconController,
-                    enableFilter: true,
-                    leadingIcon: const Icon(Icons.search),
-                    label: const Text('Icon'),
-                    dropdownMenuEntries: iconEntries,
-                    inputDecorationTheme: const InputDecorationTheme(
-                      filled: true,
-                      contentPadding: EdgeInsets.symmetric(vertical: 5.0),
-                    ),
-                    onSelected: (IconLabel? icon) {
-                      selectedIcon = icon;
-                      setState(() {});
-                    },
-                  )
-                ],
+            NSectionHeader(
+              title: "DropdownMenu",
+              child: buildDropdownMenu(),
+            ),
+            NSectionHeader(
+              title: "MenuAnchor",
+              child: buildMenuAnchor<BoxFit>(
+                values: BoxFit.values,
+                initialItem: BoxFit.values[0],
+                cbName: (e) => e.name,
+                onChanged: (BoxFit e) {
+                  debugPrint(e.name);
+                  _selectedItemVN.value = e;
+                },
               ),
             ),
-            if (selectedColor != null && selectedIcon != null)
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                      'You selected a ${selectedColor?.label} ${selectedIcon?.label}'),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 5),
-                    child: Icon(
-                      selectedIcon?.icon,
-                      color: selectedColor?.color,
-                    ),
-                  )
-                ],
-              )
-            else
-              const Text('Please select a color and an icon.')
+
           ],
         ),
       ),
     );
   }
+
+  /// DropdownMenu 下拉菜单
+  Widget buildDropdownMenu() {
+    return Column(
+      children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 20),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              DropdownMenu<ColorLabel>(
+                controller: colorController,
+                initialSelection: ColorLabel.green,
+                label: const Text('Color'),
+                dropdownMenuEntries: colorEntries,
+                onSelected: (ColorLabel? color) {
+                  selectedColor = color;
+                  setState(() {});
+                },
+              ),
+              const SizedBox(width: 20),
+              DropdownMenu<IconLabel>(
+                controller: iconController,
+                enableFilter: true,
+                leadingIcon: const Icon(Icons.search),
+                label: const Text('Icon'),
+                dropdownMenuEntries: iconEntries,
+                inputDecorationTheme: const InputDecorationTheme(
+                  filled: true,
+                  contentPadding: EdgeInsets.symmetric(vertical: 5.0),
+                ),
+                onSelected: (IconLabel? icon) {
+                  selectedIcon = icon;
+                  setState(() {});
+                },
+              )
+            ],
+          ),
+        ),
+        if (selectedColor != null && selectedIcon != null)
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                  'You selected a ${selectedColor?.label} ${selectedIcon?.label}'
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 5),
+                child: Icon(
+                  selectedIcon?.icon,
+                  color: selectedColor?.color,
+                ),
+              )
+            ],
+          )
+        else
+          const Text('Please select a color and an icon.')
+      ],
+    );
+  }
+
+  /// MenuAnchor 下拉菜单
+  Widget buildMenuAnchor<E>({
+    required List<E> values,
+    required E initialItem,
+    required String Function(E e) cbName,
+    required ValueChanged<E> onChanged,
+    Widget Function(MenuController controller, E? selectedItem)? itemBuilder,
+  }) {
+    var selectedItem = initialItem;
+
+    return StatefulBuilder(
+        builder: (BuildContext context, StateSetter setState) {
+
+          return MenuAnchor(
+            alignmentOffset: Offset(0, 0),
+            builder: (context, MenuController controller, Widget? child) {
+
+              return itemBuilder?.call(controller, selectedItem) ?? OutlinedButton(
+                style: OutlinedButton.styleFrom(
+                  // padding: EdgeInsets.zero,
+                  // tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  // minimumSize: Size(50, 18),
+                ),
+                onPressed: (){
+                  if (controller.isOpen) {
+                    controller.close();
+                  } else {
+                    controller.open();
+                  }
+                },
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(cbName(selectedItem)),
+                    Icon(Icons.arrow_drop_down),
+                  ],
+                ),
+              );
+            },
+            menuChildren: values.map((e) {
+              return MenuItemButton(
+                onPressed: () {
+                  selectedItem = e;
+                  setState(() {});
+                  onChanged.call(e);
+                },
+                child: Text(cbName(e)),
+              );
+            }).toList(),
+          );
+        }
+    );
+  }
+
 }
 
 enum ColorLabel {
