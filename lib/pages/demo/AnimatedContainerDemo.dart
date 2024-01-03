@@ -7,7 +7,12 @@
 //
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/NSectionHeader.dart';
+import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/change_notifier_ext.dart';
+import 'package:flutter_templet_project/extension/string_ext.dart';
+import 'package:flutter_templet_project/extension/widget_ext.dart';
+import 'package:flutter_templet_project/util/color_util.dart';
 
 
 class AnimatedContainerDemo extends StatefulWidget {
@@ -44,9 +49,8 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
 
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
+      backgroundColor: bgColor,
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: ['done',].map((e) => TextButton(
@@ -62,16 +66,22 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
 
   Widget buildBody() {
     return Center(
-      child: Wrap(
-        direction: Axis.vertical,
-        crossAxisAlignment: WrapCrossAlignment.center,
+      child: Column(
+        // crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           ElevatedButton(
             onPressed: _changeSize,
             child: const Text('更新宽高'),
           ),
-          const SizedBox(height: 10,),
-          buildAnimatedContainer(),
+          NSectionHeader(
+            title: "searchContainer",
+            child: buildAnimatedContainer(),
+          ),
+          NSectionHeader(
+            title: "searchContainer",
+            child: searchContainer(),
+          ),
+
         ],
       ),
     );
@@ -117,6 +127,131 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
     _height.value = _height.value == sizeStart.height ? sizeEnd.height : sizeStart.height;
     _color.value = _color.value == Colors.green ? Colors.lightBlue : Colors.green;
     _alignment.value = _alignment.value == Alignment.topLeft ? Alignment.center : Alignment.topLeft;
+  }
+
+
+  // 搜索框初始宽度
+  double _searchWidth = 28;
+  // 标志是否已展开
+  bool _isExpanded = false;
+
+  final _searchWidthVN = ValueNotifier(28.0);
+  final _searchVN = ValueNotifier("");
+
+  final _searchController = TextEditingController();
+
+  Widget searchContainer() {
+    final fontColor = Color(0xFF1A1A1A);
+
+    void toggle() {
+      _isExpanded = !_isExpanded;
+      _searchWidth = _isExpanded ? 160.0 : 28.0;
+
+      _searchWidthVN.value = _searchWidth;
+      debugPrint("_isExpanded: $_isExpanded, ${_searchWidthVN.value}");
+    }
+
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(right: 12),
+          child: NText(
+            '全部标签',
+            fontWeight: FontWeight.w400,
+          ),
+        ),
+        ValueListenableBuilder(
+            valueListenable: _searchWidthVN,
+            builder: (context, _searchWidth, child){
+
+              return GestureDetector(
+                onTap: toggle,
+                child: AnimatedContainer(
+                  height: 28,
+                  width: _searchWidth,
+                  curve: Curves.easeInOut,
+                  duration: const Duration(milliseconds: 200),
+                  alignment: Alignment.centerLeft,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(14),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      InkWell(
+                        onTap: (){
+                          toggle();
+                        },
+                        child: Container(
+                          width: 28,
+                          height: 28,
+                          alignment: Alignment.center,
+                          child:  Image(
+                            image: 'icon_search.png'.toAssetImage(),
+                            width: 18,
+                            height: 18,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                          flex: 4,
+                          child: TextField(
+                            controller: _searchController,
+                            textAlignVertical: TextAlignVertical.center,
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: fontColor,
+                            ),
+                            maxLength: 15,
+                            maxLines: 1,
+                            onChanged: (val){
+                              _searchVN.value = val;
+                            },
+                            onSubmitted: (val){
+                              _searchVN.value = val;
+                            },
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                              fillColor: Colors.green,
+                              hintStyle: TextStyle(color: fontColor.withOpacity(0.2)),
+                              isCollapsed: true,
+                              // contentPadding: const EdgeInsets.only(bottom: (12.5)),
+                              contentPadding: EdgeInsets.zero,
+                              counterText: '',
+                              hintText: '搜索',
+                              suffixIcon: ValueListenableBuilder(
+                                valueListenable: _searchVN,
+                                builder: (context, value, child){
+                                  if (value.isEmpty) {
+                                    return SizedBox();
+                                  }
+
+                                  return InkWell(
+                                    onTap: (){
+                                      _searchController.clear();
+                                      _searchVN.value = "";
+                                      toggle();
+                                    },
+                                    child: Icon(Icons.cancel, color: Colors.grey,),
+                                  );
+                                }
+                              ),
+                              // suffix: Icon(Icons.clear),
+                            ),
+                          )
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            }
+        ),
+      ],
+    );
   }
 }
 
