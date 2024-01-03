@@ -219,7 +219,6 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
                               fillColor: Colors.green,
                               hintStyle: TextStyle(color: fontColor.withOpacity(0.2)),
                               isCollapsed: true,
-                              // contentPadding: const EdgeInsets.only(bottom: (12.5)),
                               contentPadding: EdgeInsets.zero,
                               counterText: '',
                               hintText: '搜索',
