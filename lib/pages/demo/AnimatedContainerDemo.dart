@@ -7,6 +7,7 @@
 //
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/NExpansionCrossFade.dart';
 import 'package:flutter_templet_project/basicWidget/NSectionHeader.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/change_notifier_ext.dart';
@@ -81,7 +82,19 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
             title: "searchContainer",
             child: searchContainer(),
           ),
-
+          NSectionHeader(
+            title: "ExpansionCrossFade",
+            child: buildExpansionCrossFade(),
+          ),
+          NSectionHeader(
+            title: "AnimatedCrossFade",
+            child: AnimatedCrossFade(
+              duration: const Duration(seconds: 1),
+              firstChild: const FlutterLogo(style: FlutterLogoStyle.horizontal, size: 100.0),
+              secondChild: const FlutterLogo(style: FlutterLogoStyle.stacked, size: 100.0),
+              crossFadeState: isExpandedExpansion ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+            ),
+          ),
         ],
       ),
     );
@@ -250,6 +263,37 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
             }
         ),
       ],
+    );
+  }
+
+  bool isExpandedExpansion = true;
+
+
+  Widget buildExpansionCrossFade() {
+    return NExpansionCrossFade(
+      isExpanded: isExpandedExpansion,
+      child: Container(
+        height: 100,
+        color: Colors.green,
+        child: IconButton(
+            onPressed: (){
+              isExpandedExpansion = !isExpandedExpansion;
+              setState(() {});
+            },
+            icon: Icon(Icons.expand_more)
+        ),
+      ),
+      expandedChild: Container(
+        height: 200,
+        color: Colors.red,
+        child: IconButton(
+            onPressed: (){
+              isExpandedExpansion = !isExpandedExpansion;
+              setState(() {});
+            },
+            icon: Icon(Icons.expand_less)
+        ),
+      ),
     );
   }
 }
