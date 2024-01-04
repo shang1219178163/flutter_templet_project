@@ -90,101 +90,127 @@ class _TextFieldDemoState extends State<TextFieldDemo> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              NHeader.h5(title: "CupertinoTextField"),
-              CupertinoTextField(
-                controller: _textController,
-                placeholder: "请输入",
-                padding: EdgeInsets.only(left: 8, top: 8, bottom: 8, right: 8),
-                suffixMode: OverlayVisibilityMode.editing,
+              NSectionHeader(
+                title: "CupertinoTextField",
+                child: CupertinoTextField(
+                  controller: _textController,
+                  placeholder: "请输入",
+                  textAlign: TextAlign.start,
+                  padding: EdgeInsets.only(left: 8, top: 8, bottom: 8, right: 8),
+                  suffixMode: OverlayVisibilityMode.editing,
+                ),
               ),
-              NHeader.h5(title: "CupertinoSearchTextField"),
-              CupertinoSearchTextField(
-                // prefixIcon: SizedBox(),
-                // prefixInsets: EdgeInsets.zero,
-                // backgroundColor: Colors.white,
-                padding: EdgeInsets.only(left: 8, top: 8, bottom: 8, right: 8),
-                placeholder: "请输入",
-                onChanged: (String value) {
-                  // debugPrint('onChanged: $value');
-                  delayed(() => debugPrint('delayed: $value'));
-                  // _debounce(() => debugPrint( 'delayed: $value' ));
-                },
-                onSubmitted: (String value) {
-                  debugPrint('onSubmitted: $value');
-                },
+              NSectionHeader(
+                title: "CupertinoTextField 1",
+                child: CupertinoTextField(
+                  controller: _textController,
+                  placeholder: "请输入",
+                  textAlign: TextAlign.center,
+                  padding: EdgeInsets.only(left: 8, top: 8, bottom: 8, right: 8),
+                  suffixMode: OverlayVisibilityMode.editing,
+                  decoration: BoxDecoration(
+                    color: CupertinoColors.tertiarySystemFill,
+                    border: Border.all(color: Colors.blue),
+                    borderRadius: BorderRadius.all(Radius.circular(0)),
+                  )
+                ),
               ),
-              NHeader.h5(title: "TextField"),
-              buildTextField(
-                controller: editingController,
-                keyboardType: TextInputType.number,
-                labelText: 'Weight (KG)',
+              NSectionHeader(
+                title: "CupertinoSearchTextField",
+                child: CupertinoSearchTextField(
+                  // prefixIcon: SizedBox(),
+                  // prefixInsets: EdgeInsets.zero,
+                  // backgroundColor: Colors.white,
+                  padding: EdgeInsets.only(left: 8, top: 8, bottom: 8, right: 8),
+                  placeholder: "请输入",
+                  onChanged: (String value) {
+                    // debugPrint('onChanged: $value');
+                    delayed(() => debugPrint('delayed: $value'));
+                    // _debounce(() => debugPrint( 'delayed: $value' ));
+                  },
+                  onSubmitted: (String value) {
+                    debugPrint('onSubmitted: $value');
+                  },
+                ),
               ),
-              NHeader.h5(title: "TextField readOnly"),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: buildTextFieldUnit(
-                      controller: editingController,
-                      readOnly: false,
-                      fillColorReadOnly: Colors.white,
-                      inputFormatters: [
-                        LengthLimitingTextInputFormatter(4),
-                        FilteringTextInputFormatter.digitsOnly,
-                      ]
-                    ),
-                  ),
-                  SizedBox(width: 48,),
-                  Expanded(
-                    child: buildTextFieldUnit(
-                      controller: editingController,
-                      readOnly: true,
-                      fillColorReadOnly: Colors.white,
-                    ),
-                  ),
-                  SizedBox(width: 48,),
-                  Expanded(
-                    child: buildTextFieldUnit(
-                      controller: editingController,
-                      readOnly: true,
-                      fillColorReadOnly: Colors.white,
-                    ),
-                  ),
-                ],
+              NSectionHeader(
+                title: "TextField",
+                child: buildTextField(
+                  controller: editingController,
+                  keyboardType: TextInputType.number,
+                  labelText: 'Weight (KG)',
+                ),
               ),
-              NHeader.h5(title: "NOrderNumUnit"),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: NOrderNumUnit(
-                      value: '1111',
-                      readOnly: false,
-                      fillColorReadOnly: Colors.white,
-                      inputFormatters: [
-                        LengthLimitingTextInputFormatter(4),
-                        FilteringTextInputFormatter.digitsOnly,
-                      ],
+              NSectionHeader(
+                title: "TextField readOnly",
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: buildTextFieldUnit(
+                        controller: editingController,
+                        readOnly: false,
+                        fillColorReadOnly: Colors.white,
+                        inputFormatters: [
+                          LengthLimitingTextInputFormatter(4),
+                          FilteringTextInputFormatter.digitsOnly,
+                        ]
+                      ),
                     ),
-                  ),
-                  SizedBox(width: 48,),
-                  Expanded(
-                    child: NOrderNumUnit(
-                      value: '2222',
-                      readOnly: true,
-                      fillColorReadOnly: Colors.white,
-                      unit: " g ",
+                    SizedBox(width: 48,),
+                    Expanded(
+                      child: buildTextFieldUnit(
+                        controller: editingController,
+                        readOnly: true,
+                        fillColorReadOnly: Colors.white,
+                      ),
                     ),
-                  ),
-                  SizedBox(width: 48,),
-                  Expanded(
-                    child: NOrderNumUnit(
-                      value: '3333',
-                      readOnly: true,
-                      fillColorReadOnly: Colors.white,
+                    SizedBox(width: 48,),
+                    Expanded(
+                      child: buildTextFieldUnit(
+                        controller: editingController,
+                        readOnly: true,
+                        fillColorReadOnly: Colors.white,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
+              ),
+              NSectionHeader(
+                title: "NOrderNumUnit",
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: NOrderNumUnit(
+                        value: '1111',
+                        readOnly: false,
+                        fillColorReadOnly: Colors.white,
+                        inputFormatters: [
+                          LengthLimitingTextInputFormatter(4),
+                          FilteringTextInputFormatter.digitsOnly,
+                        ],
+                      ),
+                    ),
+                    SizedBox(width: 48,),
+                    Expanded(
+                      child: NOrderNumUnit(
+                        value: '2222',
+                        readOnly: true,
+                        fillColorReadOnly: Colors.white,
+                        unit: " g ",
+                      ),
+                    ),
+                    SizedBox(width: 48,),
+                    Expanded(
+                      child: NOrderNumUnit(
+                        value: '3333',
+                        readOnly: true,
+                        fillColorReadOnly: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
               ),
               NHeader.h5(title: "TextFormField"),
               TextFormField( //用户名
