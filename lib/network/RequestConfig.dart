@@ -1,23 +1,75 @@
+//
+//  RequestConfig.dart
+//  flutter_templet_project
+//
+//  Created by shang on 2024/1/6 10:58.
+//  Copyright © 2024/1/6 shang. All rights reserved.
+//
 
-/// app 接口环境
-enum APPEnvironment { dev, beta, test, pre, prod }
+
+import 'package:flutter_templet_project/cache/CacheService.dart';
+
+/// 当前 api 环境
+enum APPEnvironment{
+  /// 开发环境
+  dev('https://*.cn'),
+  /// 预测试环境
+  beta('https://*.cn'),
+  /// 测试环境
+  test('https://*.cn'),
+  /// 预发布环境
+  pre('https://*.cn'),
+  /// 生产环境
+  prod('https://*.cn');
+
+  const APPEnvironment(this.origin,);
+  /// 当前枚举对应的域名
+  final String origin;
+
+
+  /// 字符串转类型
+  static APPEnvironment? fromString(String? val) {
+    if (val == null || !val.contains(",")) {
+      return null;
+    }
+
+    final list = val.split(",");
+    if (list.length != 2) {
+      return null;
+    }
+
+    final first = list[0];
+    final isEnumType = APPEnvironment.values.map((e) => e.name).contains(first);
+    if (!isEnumType) {
+      return null;
+    }
+    return APPEnvironment.values.firstWhere((e) => e.name == first);
+  }
+
+  @override
+  String toString(){
+    if (this == APPEnvironment.dev) {
+      return "$name,${CacheService().devOrigin ?? origin}";
+    }
+    return "$name,$origin";
+  }
+}
 
 ///request config
 class RequestConfig {
   static APPEnvironment current = APPEnvironment.dev;
 
-  /// 环境集合
-  static Map<APPEnvironment, String> originMap = {
-    APPEnvironment.dev: 'https://*.cn',
-    APPEnvironment.beta: 'https://*.cn',
-    APPEnvironment.test: 'https://*.cn',
-    APPEnvironment.pre: 'https://*.cn',
-    APPEnvironment.prod: 'https://*.cn',
-  };
 
+  /// 网络请求域名
   static String get baseUrl {
-    final result = originMap[current]!;
-    return result;
+    final env = CacheService().env;
+    if (env != null) {
+      current = env;
+      if (env == APPEnvironment.dev) {
+        return CacheService().devOrigin ?? current.origin;
+      }
+    }
+    return current.origin;
   }
 
   static String apiTitle = '/api/crm';
