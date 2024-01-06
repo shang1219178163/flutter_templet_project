@@ -214,7 +214,7 @@ class _NRequestBoxState extends State<NRequestBox> {
           Expanded(
             child: SizedBox(
               height: 36.h,
-              child: NSearchTextfield(
+              child: NSearchTextField(
                 controller: controller,
                 placeholder: placeholder,
                 onChanged: onChanged,

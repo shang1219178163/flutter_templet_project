@@ -1,3 +1,10 @@
+//
+//  NOriginSheet.dart
+//  flutter_templet_project
+//
+//  Created by shang on 2024/1/6 11:54.
+//  Copyright © 2024/1/6 shang. All rights reserved.
+//
 
 
 import 'package:flutter/cupertino.dart';
@@ -199,7 +206,6 @@ class _NOriginSheetState extends State<NOriginSheet> {
     if (env == APPEnvironment.dev) {
       CacheService().devOrigin = origin;
     }
-    // YLog.d("CacheService().env: ${CacheService().env?.name}, ${CacheService().devOrigin}");
     setState(() {});
 
     widget.onChanged?.call(env, origin);
