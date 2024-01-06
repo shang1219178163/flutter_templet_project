@@ -118,7 +118,7 @@ class _IMTextfieldBarState extends State<IMTextfieldBar> with WidgetsBindingObse
   @override
   Widget build(BuildContext context) {
 
-    final textfield = NTextfield(
+    final textfield = NTextField(
       controller: widget.controller,
       maxLines: 3,
       keyboardType: TextInputType.multiline,

@@ -2,7 +2,13 @@
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_templet_project/network/RequestConfig.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+/// 请求环境信息缓存
+const String CACHE_REQUEST_ENV = "CACHE_REQUEST_ENV";
+
+const String CACHE_REQUEST_ENV_DEV_ORIGIN = "CACHE_REQUEST_ENV_DEV_ORIGIN";
 
 /// 请求错误缓存
 const String CACHE_REQUEST_ERROR = "CACHE_REQUEST_ERROR";
@@ -15,6 +21,11 @@ const String CACHE_APP_VERSION = "CACHE_APP_VERSION"; // 1.0.0
 const String CACHE_APP_PACKAGE_NAME = "CACHE_APP_PACKAGE_NAME";
 
 const String CACHE_TOKEN = "CACHE_TOKEN";
+
+/// 缓存用户登录账号
+const String CACHE_USER_LOGIN_NAME = "USER_LOGIN_NAME";
+/// 缓存用户登录账号密码
+const String CACHE_USER_LOGIN_PWD = "USER_LOGIN_PWD";
 
 /// 用户信息 key
 const String CACHE_USER_ID = "CACHE_USER_ID";
@@ -192,6 +203,73 @@ class CacheService {
 
 
 extension CacheServiceExt on CacheService {
+
+  /// 清除缓存数据
+  Future<bool>? clear() async {
+    final env = CacheService().getString(CACHE_REQUEST_ENV);
+
+    final isClear = await prefs?.clear();
+    debugPrint("isClear: $isClear");
+
+    CacheService().setString(CACHE_REQUEST_ENV, env);
+
+    return Future.value(true);
+  }
+
+  Future<void> noClear(List<String> keys, VoidCallback onDone) async {
+    final tuples = keys.map((key) {
+      final value = CacheService().getString(key);
+      return (key, value);
+    });
+
+    onDone();
+
+    tuples.forEach((e) {
+      CacheService().set(e.$1, e.$2);
+    });
+  }
+
+  List<String> get noClearKeys {
+    return [
+      CACHE_REQUEST_ENV,
+    ];
+  }
+
+  /// 清除登录环境
+  clearEnv() {
+    CacheService().remove(CACHE_REQUEST_ENV);
+  }
+
+  /// 设置登录环境
+  set env(APPEnvironment? val) {
+    if (val == null) {
+      return;
+    }
+    final result = val.toString();
+    CacheService().setString(CACHE_REQUEST_ENV, result);
+  }
+
+  /// 获取登录环境
+  APPEnvironment? get env {
+    final result = CacheService().getString(CACHE_REQUEST_ENV);
+    final val = APPEnvironment.fromString(result);
+    return val;
+  }
+
+  /// 设置登录环境 dev 下的域名
+  set devOrigin(String? val) {
+    if (val == null || val.isEmpty) {
+      return;
+    }
+    CacheService().setString(CACHE_REQUEST_ENV_DEV_ORIGIN, val);
+  }
+
+  /// 获取登录环境 dev 下的域名
+  String? get devOrigin {
+    return CacheService().getString(CACHE_REQUEST_ENV_DEV_ORIGIN);
+  }
+
+
   /// 医链执业版
   String? get appName {
     return CacheService().getString(CACHE_APP_NAME);
@@ -225,6 +303,32 @@ extension CacheServiceExt on CacheService {
     final token = CacheService().token ?? "";
     final result = token.isNotEmpty;
     return result;
+  }
+
+  /// 设置登录账号
+  set loginId(String? val) {
+    if (val == null || val.isEmpty) {
+      return;
+    }
+    CacheService().setString(CACHE_USER_LOGIN_NAME, val);
+  }
+
+  /// 获取登录账号
+  String? get loginId {
+    return CacheService().getString(CACHE_USER_LOGIN_NAME);
+  }
+
+  /// 设置 登录账号密码
+  set loginPwd(String? val) {
+    if (val == null || val.isEmpty) {
+      return;
+    }
+    CacheService().setString(CACHE_USER_LOGIN_PWD, val);
+  }
+
+  /// 获取登录账号密码
+  String? get loginPwd {
+    return CacheService().getString(CACHE_USER_LOGIN_PWD);
   }
 
   /// 获取用户id

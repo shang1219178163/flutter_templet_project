@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 
@@ -29,21 +30,22 @@ import 'package:flutter_templet_project/util/color_util.dart';
 // ),
 
 /// 封装输入框组件
-class NTextfield extends StatefulWidget {
-  NTextfield({
+class NTextField extends StatefulWidget {
+  NTextField({
     Key? key,
-    this.title,
-    // this.value = "",
+    this.value = "",
     this.controller,
     required this.onChanged,
     required this.onSubmitted,
+    this.style,
+    this.textAlign = TextAlign.left,
+    this.readOnly = false,
     this.hintText = "请输入",
     this.minLines = 1,
     this.maxLines = 1,
     this.keyboardType,
     this.textInputAction = TextInputAction.done,
-    this.textAlignVertical = TextAlignVertical.center,
-    this.obscureText,
+    this.obscureText = false,
     this.contentPadding,
     this.fillColor = bgColor,
     this.focusColor = Colors.white,
@@ -54,9 +56,10 @@ class NTextfield extends StatefulWidget {
     this.suffixIconBuilder,
     this.focusNode,
     this.isCollapsed,
+    this.inputFormatters,
   }) : super(key: key);
 
-  final String? title;
+  final String? value;
 
   /// 控制器
   final TextEditingController? controller;
@@ -66,6 +69,12 @@ class NTextfield extends StatefulWidget {
 
   /// 一般是键盘回车键/确定回调
   final ValueChanged<String>? onSubmitted;
+
+  final TextStyle? style;
+
+  final TextAlign textAlign;
+
+  final bool readOnly;
 
   /// 是否密文
   final bool? obscureText;
@@ -83,8 +92,6 @@ class NTextfield extends StatefulWidget {
   final TextInputType? keyboardType;
 
   final TextInputAction? textInputAction;
-
-  final TextAlignVertical textAlignVertical;
 
   /// 内容边距
   final EdgeInsetsGeometry? contentPadding;
@@ -116,12 +123,14 @@ class NTextfield extends StatefulWidget {
   // true代表取消textfield最小高度限制
   final bool? isCollapsed;
 
+  final List<TextInputFormatter>? inputFormatters;
+
   @override
-  _NTextfieldState createState() => _NTextfieldState();
+  _NTextFieldState createState() => _NTextFieldState();
 }
 
-class _NTextfieldState extends State<NTextfield> {
-  late final textEditingController = widget.controller ?? TextEditingController();
+class _NTextFieldState extends State<NTextField> {
+  late final textEditingController = widget.controller ?? TextEditingController(text: widget.value);
 
   final current = ValueNotifier("");
 
@@ -153,9 +162,11 @@ class _NTextfieldState extends State<NTextfield> {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      textAlign: widget.textAlign,
+      readOnly: widget.readOnly,
       minLines: widget.minLines,
       maxLines: widget.maxLines,
-      cursorColor: primaryColor,
+      cursorColor: context.primaryColor,
       focusNode: _focusNode,
       controller: textEditingController,
       // focusNode: focusChanged,
@@ -168,19 +179,21 @@ class _NTextfieldState extends State<NTextfield> {
       keyboardType: widget.keyboardType,
       textInputAction: widget.textInputAction,
       // autofocus: !widget.obscureText,
-      textAlignVertical: widget.textAlignVertical,
-      style: const TextStyle(
-        fontSize: 16,
+      style: widget.style ?? const TextStyle(
+        fontSize: 14,
         fontWeight: FontWeight.w400,
         color: fontColor,
       ),
+      inputFormatters: widget.inputFormatters,
       decoration: InputDecoration(
         filled: true,
-        fillColor: widget.focusColor,
+        // fillColor: widget.focusColor,
+        fillColor: widget.fillColor,
+        focusColor: widget.focusColor,
         contentPadding: widget.contentPadding ?? const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
         border: InputBorder.none,
-        enabledBorder: widget.enabledBorder ?? buildEnabledBorder(radus: widget.radius),
-        focusedBorder: widget.focusedBorder ?? buildFocusedBorder(radus: widget.radius),
+        enabledBorder: widget.readOnly ? null : widget.enabledBorder ?? buildEnabledBorder(radus: widget.radius),
+        focusedBorder: widget.readOnly ? null : widget.focusedBorder ?? buildFocusedBorder(radus: widget.radius),
         hintText: widget.hintText,
         isCollapsed: widget.isCollapsed ?? false,
         hintStyle: TextStyle(fontSize: 16, color: fontColor[10]),
@@ -197,7 +210,7 @@ class _NTextfieldState extends State<NTextfield> {
             valueListenable: hasFocusVN,
             builder: (_, isFocus, child) {
               return IconButton(
-                focusColor: primaryColor,
+                focusColor: context.primaryColor,
                 icon: widget.suffixIconBuilder?.call(
                   isFocus,
                   isCloseEye,
@@ -229,7 +242,7 @@ class _NTextfieldState extends State<NTextfield> {
     return OutlineInputBorder(
       borderRadius: BorderRadius.all(Radius.circular(radus)), //边角
       borderSide: BorderSide(
-        color: primaryColor, //边框颜色为白色
+        color: context.primaryColor, //边框颜色为白色
         width: 1, //宽度为1
       ),
     );
