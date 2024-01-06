@@ -51,9 +51,14 @@ class _NSliverPersistentHeaderDemoState extends State<NSliverPersistentHeaderDem
     return CustomScrollView(
       slivers: [
         Container(
-          child: Text("arguments.toString()")
+          height: 200,
+          alignment: Alignment.center,
+          color: Colors.green,
+          child: Text("${widget}")
         ).toSliverToBoxAdapter(),
         NSliverPersistentHeader(
+          // pinned: true,
+          // floating: true,
           builder: (context, offset, overlapsContent){
             return Container(
               decoration: BoxDecoration(
@@ -62,7 +67,7 @@ class _NSliverPersistentHeaderDemoState extends State<NSliverPersistentHeaderDem
                 borderRadius: BorderRadius.all(Radius.circular(116)),
               ),
               child: Center(
-                child: Text("NNSliverPersistentHeader"),
+                child: Text("NSliverPersistentHeader"),
               ),
             );
           },

@@ -23,6 +23,7 @@ class NNetContainerListView<T> extends StatefulWidget {
 
   NNetContainerListView({
     Key? key,
+    this.child,
     required this.onRequest,
     required this.onRequestError,
     this.pageSize = 30,
