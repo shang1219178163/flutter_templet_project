@@ -12,19 +12,20 @@ import 'package:intl/intl.dart';
 extension NumberFormatExt on NumberFormat{
   /// 转为百分比描述
   // 返回千分位分隔的金额
-  static String? formatAmount(String? val) {
+  static String? formatAmount(String? val, {String fmt = '0,000.00', String? locale}) {
     if (val == '' || val == null) {
       return null;
     }
-    double? num = double.tryParse(val);
+    var num = double.tryParse(val);
     if (num == null) {
       return null;
     }
-    if (num > 999) {
-      var format = NumberFormat('0,000.00');
-      return format.format(num);
-    } else {
+
+    if (num < 999) {
       return val;
     }
+
+    var format = NumberFormat(fmt, locale);
+    return format.format(num);
   }
 }
