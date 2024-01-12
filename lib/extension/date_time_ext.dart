@@ -32,35 +32,26 @@ extension DateTimeExt on DateTime {
   /// 时间戳(秒)
   int get secondsSinceEpoch => millisecondsSinceEpoch~/1000;
 
-
   /// 时间戳 转 DateTime
-  static DateTime dateFromTimestamp({required int timestamp}) {
+  static DateTime dateFromTimestamp({required int timestamp, bool isUtc = false}) {
     var isMilliseconds = ("$timestamp".length == 13);
     var timeSampNew = isMilliseconds ? timestamp : timestamp*1000;
     var dateTime = DateTime.fromMillisecondsSinceEpoch(timeSampNew);
+    if (isUtc) {
+      return dateTime.toUtc();
+    }
     return dateTime;
   }
 
-  /// DateTime 转 时间戳(默认秒)
-  // static int timestampFromDate({required DateTime date}) {
-  //   var result = date.millisecondsSinceEpoch~/1000;
-  //   return result;
-  // }
-
-
-  /// 字符串 转 DateTime
-  static DateTime dateFromString({
+  /// 字符串 转 时间戳(秒)
+  static int timestampFromDateStr({
     required String dateStr,
     String format = DATE_FORMAT,
-    bool isUtc = false
+    bool isUtc = false,
   }) {
-    var dateFormat = DateFormat(format);
-    var dateTime = dateFormat.parse(dateStr);
-    if (isUtc) {
-      var timezoneOffset = dateTime.timeZoneOffset.inHours;
-      dateTime = dateTime.add(Duration(hours: timezoneOffset));
-    }
-    return dateTime;
+    final date = dateFromString(dateStr: dateStr, format: format, isUtc: isUtc);
+    var result = date.secondsSinceEpoch;
+    return result;
   }
 
   /// DateTime 转 字符串
@@ -70,34 +61,39 @@ extension DateTimeExt on DateTime {
     return result;
   }
 
+  /// 字符串 转 DateTime
+  static DateTime dateFromString({
+    required String dateStr,
+    String format = DATE_FORMAT,
+    bool isUtc = false,
+  }) {
+    var dateFormat = DateFormat(format);
+    var dateTime = dateFormat.parse(dateStr);
+    if (isUtc) {
+      return dateTime.toUtc();
+    }
+    return dateTime;
+  }
+
   /// 时间戳 转 字符串
   ///timeSamp:毫秒值
   ///format:"yyyy年MM月dd hh:mm:ss"  "yyy?MM?dd  hh?MM?dd" "yyyy:MM:dd"......
   ///结果： 2019?08?04  02?08?02
-  static String stringFromTimestamp({required int timestamp, String format = DATE_FORMAT}) {
-    var dateTime = DateTimeExt.dateFromTimestamp(timestamp: timestamp);
+  static String stringFromTimestamp({
+    required int timestamp,
+    String format = DATE_FORMAT,
+    bool isUtc = false,
+  }) {
+    var dateTime = DateTimeExt.dateFromTimestamp(timestamp: timestamp, isUtc: isUtc);
     var result = stringFromDate(date: dateTime, format: format);
     return result;
   }
 
-  /// 字符串 转 时间戳
-  static int timestampFromDateStr({
-    required String dateStr,
-    String format = DATE_FORMAT,
-    bool isUtc = false,
-    bool isMilliseconds = false,
-  }) {
-    final date = dateFromString(dateStr: dateStr, format: format, isUtc: isUtc);
-    var result = date.secondsSinceEpoch;
-    return result;
-  }
-
-  /// 打印代码执行时间
-  static double logDifference(DateTime before) {
+  /// 打印代码执行时间(毫秒)
+  static int logDifference(DateTime before) {
     final now = DateTime.now();
     final gap = now.difference(before).inMilliseconds;
-    final second = gap / 1000;
-    return second;
+    return gap;
   }
 
   bool isSameDay(DateTime? date){
@@ -111,7 +107,6 @@ extension DateTimeExt on DateTime {
   }
 
   String toString19() => toString().split(".").first;
-
 
   DateTime offsetDay({required int count}) {
     final timstamp = DateTime.now().millisecondsSinceEpoch + count * 24 * 60 * 60 * 1000;
@@ -194,6 +189,25 @@ extension DateTimeExt on DateTime {
   // }
 }
 
+
+extension DateTimeIntExt on int{
+
+  /// 转为秒时间戳
+  int toTimeStamp() {
+    var value = this;
+    if (value < 0) {
+      return 0;
+    }
+
+    if ("$value".length == 13) {
+      value = value ~/ 1000;
+      return value.toInt();
+    }
+
+    return value;
+  }
+
+}
 
 // const duration = Duration(seconds: 123);
 // print('Days: ${duration.inDaysRest}'); // 0

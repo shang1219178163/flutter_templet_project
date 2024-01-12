@@ -9,6 +9,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/util/debug_log.dart';
 
 
 class DateTimeDemo extends StatefulWidget {
@@ -47,6 +48,8 @@ class _DateTimeDemoState extends State<DateTimeDemo> {
   }
 
   void _handleDateTime() {
+    final now = DateTime.now();
+
     var _time = "2012-02-27 13:27:00";
     var dateTime = DateTime.parse(_time);//字符串转时间
     var interval = dateTime.millisecondsSinceEpoch;//时间转毫秒时间戳
@@ -55,6 +58,11 @@ class _DateTimeDemoState extends State<DateTimeDemo> {
     ddlog(dateTime);
     ddlog(interval);
     ddlog(intendtime);
+
+    DebugLog.d([
+      now,
+      now.toUtc(),
+    ]);
   }
 
 
