@@ -10,6 +10,14 @@ import 'dart:developer' as developer;
 import 'package:flutter/foundation.dart';
 
 
+// void debugLog(dynamic obj){
+//   if (!kDebugMode) {
+//     return;
+//   }
+//   developer.log("${DateTime.now()} $obj");
+// }
+
+
 class DebugLog {
 
   // /// 防止日志被截断

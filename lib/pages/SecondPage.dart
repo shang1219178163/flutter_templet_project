@@ -28,6 +28,7 @@ import 'package:flutter_templet_project/extension/button_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/pages/demo/curve_painter.dart';
 import 'package:flutter_templet_project/util/app_util.dart';
+import 'package:flutter_templet_project/util/debug_log.dart';
 
 import 'package:tuple/tuple.dart';
 
@@ -621,9 +622,38 @@ class _SecondPageState extends State<SecondPage> {
 
               },
             ),
-            buildMaterialButtonGradient(),
+            buildMaterialButtonGradient(
+              onPressed: (){
+                DebugLog.d("buildMaterialButtonGradient");
+              },
+            ),
+            buildMaterialButtonGradient(
+              onPressed: null,
+            ),
 
-    
+            MaterialButton(
+              onPressed: (){
+
+              },
+
+              elevation: 0,
+              disabledElevation: 0,
+              textColor: Colors.white,
+              disabledTextColor: Colors.white,
+              color: Colors.blue.withOpacity(0.5),
+              disabledColor: Colors.grey.withOpacity(0.5),
+              child: Text("Button"),
+            ),
+            MaterialButton(
+              onPressed: null,
+              elevation: 0,
+              disabledElevation: 0,
+              textColor: Colors.white,
+              disabledTextColor: Colors.white,
+              color: Colors.blue.withOpacity(0.5),
+              disabledColor: Colors.grey.withOpacity(0.5),
+              child: Text("Button"),
+            )
           ],
         ),
       ],
@@ -1059,13 +1089,17 @@ class _SecondPageState extends State<SecondPage> {
     );
   }
 
-  buildMaterialButtonGradient({VoidCallback? onPressed}) {
+  buildMaterialButtonGradient({
+    ShapeBorder shape = const StadiumBorder(),
+    Gradient? gradient,
+    VoidCallback? onPressed,
+  }) {
     return Container(
-      width: 300,
-      height: 45,
-      decoration: const ShapeDecoration(
-        shape: StadiumBorder(),
-        gradient: LinearGradient(
+      // width: 300,
+      // height: 45,
+      decoration: ShapeDecoration(
+        shape: shape,
+        gradient: gradient ?? LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [Colors.blue, Colors.orange, Colors.green],
@@ -1073,12 +1107,16 @@ class _SecondPageState extends State<SecondPage> {
       ),
       child: MaterialButton(
         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        shape: const StadiumBorder(),
+        shape: shape,
         onPressed: onPressed,
         disabledColor: Colors.grey,
+        textColor: Colors.white,
+        disabledTextColor: Colors.red,
         child: const Text(
           'MaterialButton',
-          style: TextStyle(color: Colors.white, fontSize: 20),
+          // style: TextStyle(
+          //   fontSize: 14,
+          // ),
         ),
       ),
     );

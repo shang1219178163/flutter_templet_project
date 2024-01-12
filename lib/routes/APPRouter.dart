@@ -35,6 +35,7 @@ import 'package:flutter_templet_project/pages/demo/HitTestBehaviorDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ImageStretchDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MenuAnchorDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MenuEntryDemo.dart';
+import 'package:flutter_templet_project/pages/demo/NAppBarColorChangerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NChoiceBoxOneDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NIndexAvatarGroupDemo.dart';
 import 'package:flutter_templet_project/pages/demo/OverlayPortalDemo.dart';
@@ -664,6 +665,7 @@ class APPRouter {
   static const selectListPage = '/selectListPage';
   static const indexAvatarGroupDemo = '/indexAvatarGroupDemo';
   static const overlayPortalDemo = '/overlayPortalDemo';
+  static const appBarColorChangerDemo = '/appBarColorChangerDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -1057,6 +1059,7 @@ class AppPage {
     GetPage(name: APPRouter.selectListPage, page: () => SelectListPage(),),
     GetPage(name: APPRouter.indexAvatarGroupDemo, page: () => NIndexAvatarGroupDemo(),),
     GetPage(name: APPRouter.overlayPortalDemo, page: () => OverlayPortalDemo(),),
+    GetPage(name: APPRouter.appBarColorChangerDemo, page: () => NAppBarColorChangerDemo(),),
 
 
   ];
