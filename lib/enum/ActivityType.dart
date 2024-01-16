@@ -2,6 +2,7 @@
 
 
 enum ActivityType {
+  unknown(-1, '未知'),
 
   running(1, '跑步'),
 
@@ -11,9 +12,8 @@ enum ActivityType {
 
   cycling(7, '骑行'),
 
-  Skiing(10, '滑雪'),
+  Skiing(10, '滑雪');
 
-  unknown(-1, '未知');
 
   const ActivityType(this.value, this.desc,);
   /// 当前枚举值对应的 int 值(非 index)
@@ -25,21 +25,6 @@ enum ActivityType {
   static ActivityType getBy({required bool Function(ActivityType element) test}) {
     return ActivityType.values.firstWhere(test, orElse: () => ActivityType.unknown,);
   }
-
-  // static ActivityType getByIndex(int index) {
-  //   return ActivityType.getBy(test: (e) => e.index == index);
-  //
-  // }
-  //
-  // static ActivityType getByName(String name) {
-  //   return ActivityType.getBy(test: (e) => e.name == name);
-  //
-  // }
-  //
-  // static ActivityType getByValue(int value) {
-  //   return ActivityType.getBy(test: (e) => e.value == value);
-  // }
-
 
   @override
   String toString() {

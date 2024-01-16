@@ -192,7 +192,7 @@ class _ThirdPageState extends State<ThirdPage> with RouteAware {
               selectedIndex = index;
               setState(() {});
               ddlog([selectedIndex, index,]);
-              ddlog([_globalKey(index).position(), _globalKey(index).size]);
+              ddlog([_globalKey(index).currentContext?.frame]);
             },
           );
 

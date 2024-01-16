@@ -268,8 +268,7 @@ class _SecondPageState extends State<SecondPage> {
                 icon: Icon(Icons.add),
                 label: Text("OutlinedButton"),
                 onPressed: () {
-                  ddlog([_globalKey1.position(),
-                    _globalKey1.size]);
+                  ddlog(_globalKey1.currentContext?.frame);
                 },
                 style: OutlinedButton.styleFrom(
                   padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
@@ -723,7 +722,7 @@ class _SecondPageState extends State<SecondPage> {
           key: _globalKey,
           onPressed: () {
             // _showCustomPopView();
-            ddlog([_globalKey.position(), _globalKey.size]);
+            ddlog(_globalKey1.currentContext?.frame);
             // test();
           },
         ),
@@ -736,7 +735,7 @@ class _SecondPageState extends State<SecondPage> {
           label: Text("OutlinedButton"),
           key: _globalKey1,
           onPressed: () {
-            ddlog([_globalKey1.position(), _globalKey1.size]);
+            ddlog(_globalKey1.currentContext?.frame);
             // test();
           },
         ),

@@ -17,8 +17,8 @@ extension BuildContextExt on BuildContext {
 
   /// 获取当前组件的 RenderBox
   RenderBox? get renderBox {
-    var renderObj = findRenderObject();
-    return renderObj is RenderBox ? renderObj : null;
+    var renderObj = findRenderObject() as RenderBox?;
+    return renderObj;
   }
 
   /// 获取当前组件的坐标点
@@ -28,6 +28,20 @@ extension BuildContextExt on BuildContext {
 
   /// 获取当前组件的 Size
   Size? get renderBoxSize => renderBox?.size;
+
+  /// 位置宽高
+  Rect? get frame {
+    if (renderBox == null || renderBoxSize == null || origin() == null) {
+      return null;
+    }
+
+    return Rect.fromLTWH(
+      origin()?.dx ?? 0,
+      origin()?.dy ?? 0,
+      renderBoxSize?.width ?? 0,
+      renderBoxSize?.height ?? 0,
+    );
+  }
 
   double? minX({Offset offset = Offset.zero}) {
     return origin(offset: offset)?.dx;
@@ -169,12 +183,12 @@ extension StatefulWidgetExt<T extends StatefulWidget> on State<T> {
 
 extension GlobalKeyExt on GlobalKey{
 
-  /// 获取当前组件的 RenderBox
-  RenderBox? get renderBox => currentContext?.renderBox;
-  /// 获取当前组件的 position
-  Offset? position({Offset offset = Offset.zero}) => currentContext?.origin(offset: offset);
-  /// 获取当前组件的 Size
-  Size? get size => currentContext?.size;
+  // /// 获取当前组件的 RenderBox
+  // RenderBox? get renderBox => currentContext?.renderBox;
+  // /// 获取当前组件的 position
+  // Offset? position({Offset offset = Offset.zero}) => currentContext?.origin(offset: offset);
+  // /// 获取当前组件的 Size
+  // Size? get size => currentContext?.size;
 
   double? minX({Offset offset = Offset.zero}) => currentContext?.minX(offset: offset);
   double? minY({Offset offset = Offset.zero}) => currentContext?.minY(offset: offset);
