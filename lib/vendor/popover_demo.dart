@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/util/debug_log.dart';
 import 'package:popover/popover.dart';
 
 
@@ -134,7 +135,9 @@ class PopoverButton extends StatelessWidget {
       onTap: () {
         // _handleShowPopover(context);
         _handleShowPopover1(context);
-        context.logRendBoxInfo();
+        debugLog(context.frame);
+
+
       }
     );
   }

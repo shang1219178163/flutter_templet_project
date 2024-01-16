@@ -9,13 +9,10 @@
 import 'dart:developer' as developer;
 import 'package:flutter/foundation.dart';
 
-
-// void debugLog(dynamic obj){
-//   if (!kDebugMode) {
-//     return;
-//   }
-//   developer.log("${DateTime.now()} $obj");
-// }
+/// 自定义打印方法
+void debugLog(dynamic obj){
+  DebugLog.d(obj);
+}
 
 
 class DebugLog {
