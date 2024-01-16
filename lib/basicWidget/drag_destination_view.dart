@@ -28,46 +28,20 @@ class _DragDestinationViewState extends State<DragDestinationView> {
 
   @override
   Widget build(BuildContext context) {
-
-    return _buildBody();
-  }
-
-  _buildBody() {
     return Container(
+      padding: EdgeInsets.all(0),
       decoration: BoxDecoration(
         border: Border.all(width: 2, color: Colors.red)
       ),
-      padding: EdgeInsets.all(0),
       child: Column(
         children: [
           Stack(
             children: [
               _buildDropTarget(),
-
-              if(file != null) Positioned(
+              Positioned(
                 top: 0,
                 right: 0,
-                child:
-                CircleAvatar(
-                  radius: 12,
-                  backgroundColor: Colors.blue,
-                  child: IconButton(
-                    padding: EdgeInsets.zero,
-                    icon: Container(
-                      child: Icon(
-                        Icons.remove,
-                        color: Colors.white,
-                        size: 12
-                      ),
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        files = [];
-                        file = null;
-                      });
-                    },
-                  ),
-                ),
+                child: buildDeleteButton(),
               )
             ],
           )
@@ -76,16 +50,20 @@ class _DragDestinationViewState extends State<DragDestinationView> {
     );
   }
 
-  _buildDropTarget() {
+  Widget _buildDropTarget() {
+    if (file == null) {
+      return SizedBox();
+    }
     return Container(
       decoration: BoxDecoration(
           border: Border.all(width: 2, color: Colors.blue)
       ),
       child: DropTarget(
-        child: _buildDraggingShow(file != null),
         onDragDone: (detail) {
           files = detail.files;
-          if (files.isEmpty) return;
+          if (files.isEmpty) {
+            return;
+          }
           // 读取第一个文件
           file = files.first;
           debugPrint("file: ${file?.path}_${file?.name}");
@@ -93,25 +71,27 @@ class _DragDestinationViewState extends State<DragDestinationView> {
           setState(() {});
         },
         onDragEntered: (detail) {
-          setState(() {
-            dragging = true;
-          });
+          dragging = true;
+          setState(() {});
         },
         onDragExited: (detail) {
-          setState(() {
-            dragging = false;
-          });
+          dragging = false;
+          setState(() {});
         },
+        child: _buildDragBox(file),
       ),
     );
   }
 
-  _buildDraggingShow(bool existFile) {
+  Widget _buildDragBox(XFile? file) {
     var iconSize = 75.0;
     var textWidth = 100.0;
 
-    var icon = existFile ? Image.asset('images/icon_json_file.png', width: iconSize, height: iconSize) : Icon(Icons.undo, size: iconSize,);
-    var text = existFile ? file?.name ?? "" : '拖拽文件';
+    var icon = file != null ? Image.file(
+        File(file.path),
+        fit: BoxFit.contain,
+    )  : Icon(Icons.undo, size: iconSize,);
+    var text = file != null ? (file.name ?? "") : '拖拽文件';
 
     return Container(
       padding: EdgeInsets.all(8),
@@ -120,23 +100,49 @@ class _DragDestinationViewState extends State<DragDestinationView> {
         children: [
           icon,
           // Text(text, style: TextStyle(fontSize: 12)),
-          ConstrainedBox(
-            constraints: BoxConstraints(
-              maxWidth: textWidth,
-              minWidth: textWidth,
-            ),
-            child: Text(
-              text,
-              overflow: TextOverflow.ellipsis,
-              softWrap:true,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 12,
-              ),
-            ) ,
-          ),
+          buildText(textWidth: textWidth, text: text),
         ]
       ),
+    );
+  }
+
+  Widget buildDeleteButton() {
+    return CircleAvatar(
+      radius: 12,
+      backgroundColor: Colors.blue,
+      child: IconButton(
+        padding: EdgeInsets.zero,
+        icon: Icon(
+          Icons.remove,
+          color: Colors.white,
+          size: 12
+        ),
+        onPressed: () {
+          setState(() {
+            files = [];
+            file = null;
+          });
+        },
+      ),
+    );
+  }
+
+  Widget buildText({double textWidth = 0.0, String text = ""}) {
+    return ConstrainedBox(
+      constraints: BoxConstraints(
+        maxWidth: 200,
+        minWidth: textWidth,
+        minHeight: 20,
+      ),
+      child: Text(
+        text,
+        overflow: TextOverflow.ellipsis,
+        softWrap:true,
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          fontSize: 12,
+        ),
+      ) ,
     );
   }
 

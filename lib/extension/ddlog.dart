@@ -6,7 +6,7 @@
 //  Copyright © 7/4/21 shang. All rights reserved.
 //
 
-
+import 'dart:developer' as developer;
 import 'package:flutter/foundation.dart'
     show TargetPlatform, defaultTargetPlatform, kReleaseMode;
 import 'package:flutter/material.dart';
@@ -16,16 +16,19 @@ void ddlog(dynamic? obj) {
   if (kReleaseMode) {
     return;
   }
-  var model = DDTraceModel(StackTrace.current);
+  developer.log("${DateTime.now()} $obj");
 
-  var items = [
-    DateTime.now().toString(),
-    model.fileName,
-    model.className,
-    model.selectorName,
-    "[${model.lineNumber}:${model.columnNumber}]"
-  ].where((element) => element != "");
-  debugPrint("${items.join(" ")}: $obj");
+
+  // var model = DDTraceModel(StackTrace.current);
+  //
+  // var items = [
+  //   DateTime.now().toString(),
+  //   model.fileName,
+  //   model.className,
+  //   model.selectorName,
+  //   "[${model.lineNumber}:${model.columnNumber}]"
+  // ].where((element) => element != "");
+  // debugPrint("${items.join(" ")}: $obj");
 }
 
 /// TraceModel

@@ -39,8 +39,12 @@ class _DragAndDropDemoState extends State<DragAndDropDemo> {
             // minHeight: 200,
           // ),
           // width: 120,
-          height: 200,
-          child: DragDestinationView(),
+          // height: 200,
+          child: FractionallySizedBox(
+            heightFactor: 0.5,
+            widthFactor: 0.5,
+            child: DragDestinationView(),
+          ),
         )
     );
   }
