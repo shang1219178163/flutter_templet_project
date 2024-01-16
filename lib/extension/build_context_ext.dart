@@ -79,10 +79,6 @@ extension BuildContextExt on BuildContext {
     return origin()!.dy + size!.height * 0.5;
   }
 
-  ///扩展方法
-  void logRendBoxInfo() {
-    debugPrint("${[DateTime.now(), origin(), size]}");
-  }
 
   /// 扩展属性 Theme.of(context)
   ThemeData get theme => Theme.of(this);
@@ -181,20 +177,13 @@ extension StatefulWidgetExt<T extends StatefulWidget> on State<T> {
 }
 
 
-extension GlobalKeyExt on GlobalKey{
-
-  // /// 获取当前组件的 RenderBox
-  // RenderBox? get renderBox => currentContext?.renderBox;
-  // /// 获取当前组件的 position
-  // Offset? position({Offset offset = Offset.zero}) => currentContext?.origin(offset: offset);
-  // /// 获取当前组件的 Size
-  // Size? get size => currentContext?.size;
-
-  double? minX({Offset offset = Offset.zero}) => currentContext?.minX(offset: offset);
-  double? minY({Offset offset = Offset.zero}) => currentContext?.minY(offset: offset);
-  double? midX({Offset offset = Offset.zero}) => currentContext?.midX(offset: offset);
-  double? midY({Offset offset = Offset.zero}) => currentContext?.midY(offset: offset);
-  double? maxX({Offset offset = Offset.zero}) => currentContext?.maxX(offset: offset);
-  double? maxY({Offset offset = Offset.zero}) => currentContext?.maxY(offset: offset);
-
-}
+// extension GlobalKeyExt on GlobalKey{
+//
+//   double? minX({Offset offset = Offset.zero}) => currentContext?.minX(offset: offset);
+//   double? minY({Offset offset = Offset.zero}) => currentContext?.minY(offset: offset);
+//   double? midX({Offset offset = Offset.zero}) => currentContext?.midX(offset: offset);
+//   double? midY({Offset offset = Offset.zero}) => currentContext?.midY(offset: offset);
+//   double? maxX({Offset offset = Offset.zero}) => currentContext?.maxX(offset: offset);
+//   double? maxY({Offset offset = Offset.zero}) => currentContext?.maxY(offset: offset);
+//
+// }
