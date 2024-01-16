@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
-import 'package:flutter_templet_project/cache/cache_asset_service.dart';
+import 'package:flutter_templet_project/cache/asset_cache_service.dart';
 import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:flutter_templet_project/vendor/easy_toast.dart';
@@ -27,7 +27,7 @@ class ImageService{
       //   debugPrint('assetDir 文件保存路径为 ${assetDir.path}');
       // }
 
-      Directory? assetDir = await CacheAssetService().getDir();
+      Directory? assetDir = await AssetCacheService().getDir();
       var tmpPath = '${assetDir.path}/$fileName';
       targetPath ??= tmpPath;
       // debugPrint('fileName_${fileName}');
@@ -151,7 +151,7 @@ class ImageService{
        name = "tmp.png";
      }
 
-     var cacheDir = await CacheAssetService().getDir();
+     var cacheDir = await AssetCacheService().getDir();
      String savePath = "${cacheDir.path}/$name";
      await Dio().download(url, savePath,
          onReceiveProgress: (received, total) {

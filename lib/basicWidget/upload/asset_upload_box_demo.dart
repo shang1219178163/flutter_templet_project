@@ -8,7 +8,7 @@ import 'package:flutter_templet_project/basicWidget/n_network_image.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/upload/asset_upload_box.dart';
 import 'package:flutter_templet_project/basicWidget/upload/asset_upload_model.dart';
-import 'package:flutter_templet_project/cache/cache_asset_service.dart';
+import 'package:flutter_templet_project/cache/asset_cache_service.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 
 
@@ -50,7 +50,7 @@ class _AssetUploadBoxDemoState extends State<AssetUploadBoxDemo> {
             style: TextStyle(color: Colors.white),
           ),
           onPressed: (){
-            CacheAssetService().clearDirCache();
+            AssetCacheService().clearDirCache();
             setState(() {});
           },
         )).toList(),

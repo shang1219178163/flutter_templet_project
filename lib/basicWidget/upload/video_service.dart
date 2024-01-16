@@ -4,7 +4,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/cache/cache_asset_service.dart';
+import 'package:flutter_templet_project/cache/asset_cache_service.dart';
 import 'package:flutter_templet_project/vendor/easy_toast.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 
@@ -119,7 +119,7 @@ class VideoService{
       name = "tmp.mp4";
     }
 
-    var cacheDir = await CacheAssetService().getDir();
+    var cacheDir = await AssetCacheService().getDir();
     var savePath = "${cacheDir.path}/$name";
     await Dio().download(url, savePath,
         onReceiveProgress: (received, total) {

@@ -11,7 +11,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/cache/cache_asset_service.dart';
+import 'package:flutter_templet_project/cache/asset_cache_service.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/vendor/easy_toast.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -92,7 +92,7 @@ class _WebviewFilePreviewPageState extends State<WebviewFilePreviewPage> {
   }
 
   onShare() async {
-    Directory tempDir = await CacheAssetService().getDir();
+    Directory tempDir = await AssetCacheService().getDir();
     var tmpPath = '${tempDir.path}/${widget.title}';
 
     final percentVN = ValueNotifier(0.0);

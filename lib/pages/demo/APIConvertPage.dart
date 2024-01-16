@@ -57,7 +57,7 @@ class _APIConvertPageState extends State<APIConvertPage> {
     _textEditingController.text = """
 import 'dart:convert';
 
-import 'package:flutter_templet_project/cache/CacheService.dart';
+import 'package:flutter_templet_project/cache/cache_service.dart';
 import 'package:flutter_templet_project/network/base_request_api.dart';
 import 'package:flutter_templet_project/vendor/easy_toast.dart';
 

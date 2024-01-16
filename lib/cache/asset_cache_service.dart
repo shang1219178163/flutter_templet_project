@@ -5,12 +5,12 @@ import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
 
 ///缓存媒体文件
-class CacheAssetService {
-  CacheAssetService._();
+class AssetCacheService {
+  AssetCacheService._();
 
-  static final CacheAssetService _instance = CacheAssetService._();
+  static final AssetCacheService _instance = AssetCacheService._();
 
-  factory CacheAssetService() => _instance;
+  factory AssetCacheService() => _instance;
 
 
   Directory? _dir;
@@ -19,8 +19,8 @@ class CacheAssetService {
     if (_dir != null) {
       return _dir!;
     }
-    Directory tempDir = await getTemporaryDirectory();
-    Directory targetDir = Directory('${tempDir.path}/asset');
+    var tempDir = await getTemporaryDirectory();
+    var targetDir = Directory('${tempDir.path}/asset');
     if (!targetDir.existsSync()) {
       targetDir.createSync();
       debugPrint('targetDir 路径为 ${targetDir.path}');

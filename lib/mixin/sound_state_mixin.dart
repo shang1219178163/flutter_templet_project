@@ -6,7 +6,7 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter_sound/flutter_sound.dart';
 import 'package:flutter_sound_platform_interface/flutter_sound_recorder_platform_interface.dart';
-import 'package:flutter_templet_project/cache/cache_asset_service.dart';
+import 'package:flutter_templet_project/cache/asset_cache_service.dart';
 import 'package:logger/logger.dart' show Level, Logger;
 import 'package:permission_handler/permission_handler.dart';
 
@@ -76,7 +76,7 @@ mixin SoundStateMixin<T extends StatefulWidget> on State<T> {
   Future<String> soundLocalPath() async {
     //用户允许使用麦克风之后开始录音
     // Directory tempDir = await getTemporaryDirectory();
-    var tempDir = await CacheAssetService().getDir();
+    var tempDir = await AssetCacheService().getDir();
     // var time = DateTime.now();
     // var timeStr = DateTimeExt.stringFromDate(date: time, format: DATE_FORMAT_INT);
     // String path = '${tempDir.path}/tmp_sound_${timeStr}${ext[_codec.index]}';
