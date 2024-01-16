@@ -14,4 +14,4 @@ typedef GenericWidgetBuilder<T> = Widget Function(BuildContext context, T generi
 
 typedef VoidCallbackWidgetBuilder = Widget Function(BuildContext context, VoidCallback cb);
 
-typedef ValueChangedWidgetBuilder = Widget Function<T>(BuildContext context, ValueChanged<T> onChanged);
+typedef ValueChangedWidgetBuilder<T> = Widget Function(BuildContext context, ValueChanged<T> onChanged);
