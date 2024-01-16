@@ -628,6 +628,7 @@ var customs = [
   Tuple2(APPRouter.selectListPage, "selectListPage", ),
   Tuple2(APPRouter.indexAvatarGroupDemo, "indexAvatarGroupDemo", ),
   Tuple2(APPRouter.appBarColorChangerDemo, "appBarColorChangerDemo", ),
+  Tuple2(APPRouter.footerButtonBarDemo, "footerButtonBarDemo", ),
 
 
 ];
