@@ -157,7 +157,7 @@ class _NPageViewDemoState extends State<NPageViewDemo> {
         );
       },
       separatorBuilder: (BuildContext context, int index) {
-        return DividerExt.custome();
+        return Divider();
       },
     )),
 

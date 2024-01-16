@@ -213,7 +213,7 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
         );
       },
       separatorBuilder: (BuildContext context, int index) {
-        return DividerExt.custome();
+        return Divider();
       },
     );
   }

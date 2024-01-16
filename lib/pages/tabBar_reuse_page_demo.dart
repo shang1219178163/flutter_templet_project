@@ -139,7 +139,7 @@ class _TabBarReusePageDemoState extends State<TabBarReusePageDemo> {
         );
       },
       separatorBuilder: (BuildContext context, int index) {
-        return DividerExt.custome();
+        return Divider();
       },
     )),
 

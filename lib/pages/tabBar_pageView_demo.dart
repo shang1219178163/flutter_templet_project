@@ -233,7 +233,7 @@ class _TabBarPageViewDemoState extends State<TabBarPageViewDemo> with SingleTick
         );
       },
       separatorBuilder: (BuildContext context, int index) {
-        return DividerExt.custome();
+        return Divider();
       },
     )),
 

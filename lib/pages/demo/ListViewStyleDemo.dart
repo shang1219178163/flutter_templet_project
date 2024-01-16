@@ -141,7 +141,7 @@ class _ListViewStyleDemoState extends State<ListViewStyleDemo> with SingleTicker
         );
       },
       separatorBuilder: (BuildContext context, int index) {
-        return DividerExt.custome();
+        return Divider();
       },
     );
   }

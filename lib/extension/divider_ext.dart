@@ -10,13 +10,6 @@
 import 'package:flutter/material.dart';
 
 extension DividerExt on Divider {
-  /// 扩展方法
-  static Divider custome({bool isDark = false}) {
-    return Divider(
-      height: .5,
-      indent: 15,
-      endIndent: 15,
-      color: Color(0xFFDDDDDD),
-    );
-  }
+
+
 }
