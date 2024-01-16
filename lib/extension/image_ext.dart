@@ -14,6 +14,7 @@ import 'dart:ui' as ui;
 // import 'package:flutter/painting.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_templet_project/extension/file_ext.dart';
 
 extension UIImageExt on ui.Image {
   /// 获取本地图片图像
@@ -85,17 +86,12 @@ extension ImageProviderExt on ImageProvider {
 extension ByteDataExt on ByteData {
   /// 获取文件在内存中的大小
   String fileSize() {
-    final bytes = buffer.lengthInBytes;
-    if (bytes == 0) {
+    final length = buffer.lengthInBytes;
+    if (length == 0) {
       throw Exception("获取文件字节失败");
     }
 
-    final kb = bytes / 1024;
-    final mb = kb / 1024;
-
-    final result = kb > 1024 ? '${mb.toStringAsFixed(2)}MB' : "${kb.toStringAsFixed(0)}kb";
-    // print("imageSize: ${result}");
-    return result;
+    return length.fileSizeDesc;
   }
 }
 

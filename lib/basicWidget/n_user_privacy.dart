@@ -49,10 +49,8 @@ class _NUserPrivacyState extends State<NUserPrivacy> {
   void initState() {
     //监听滚动事件，打印滚动位置
     _scrollController.addListener(() {
-      setState(() {
-        isScrollBottom = (_scrollController.offset >=
-            _scrollController.position.maxScrollExtent);
-      });
+      isScrollBottom = (_scrollController.offset >= _scrollController.position.maxScrollExtent);
+      setState(() {});
     });
 
     super.initState();

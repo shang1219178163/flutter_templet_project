@@ -17,9 +17,13 @@ extension FileExt on File {
 extension FileIntExt on int{
   /// length 转为 MB 描述
   String get fileSizeDesc {
-    final result = this/(1024 *1024);
-    final desc = "${result.toStringAsFixed(2)}MB";
-    return desc;
+    int length = this;
+
+    final kb = length / 1024;
+    final mb = kb / 1024;
+
+    final result = kb > 1024 ? '${mb.toStringAsFixed(2)}MB' : "${kb.toStringAsFixed(0)}kb";
+    return result;
   }
 
   /// 压缩质量( )
