@@ -85,6 +85,7 @@ class Assets {
   static const String imagesIconEmojiCircle = 'assets/images/icon_emoji_circle.png';
   static const String imagesIconEyeClose = 'assets/images/icon_eye_close.png';
   static const String imagesIconEyeOpen = 'assets/images/icon_eye_open.png';
+  static const String imagesIconFileUnknow = 'assets/images/icon_file_unknow.png';
   static const String imagesIconHeart = 'assets/images/icon_heart.png';
   static const String imagesIconHeartBorder = 'assets/images/icon_heart_border.png';
   static const String imagesIconHeartHalf = 'assets/images/icon_heart_half.png';
