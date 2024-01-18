@@ -9,6 +9,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/NSectionHeader.dart';
 import 'package:flutter_templet_project/basicWidget/triangle_path.dart';
+import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/pages/demo/ChipDemo.dart';
 
 class ClipDemo extends StatefulWidget {
@@ -43,32 +44,42 @@ class _ClipDemoState extends State<ClipDemo> {
         Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            NHeader.h4(title: 'ClipRect //将溢出部分剪裁'),
-            ClipRect(
-              child: Align(
-                alignment: Alignment.topCenter,
-                heightFactor: 0.5,
+            NSectionHeader(
+              title: 'ClipRect //将溢出部分剪裁',
+              child: ClipRect(
+                child: Align(
+                  alignment: Alignment.topCenter,
+                  heightFactor: 0.5,
+                  child: _buildBox(),
+                ),
+              ),
+            ),
+            NSectionHeader(
+              title: "ClipRRect",
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(20),
                 child: _buildBox(),
               ),
             ),
-            NHeader.h4(title: 'ClipRRect'),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: _buildBox(),
+            NSectionHeader(
+              title: "ClipOval",
+              child: ClipOval(
+                child: _buildBox(),
+              ),
             ),
-            NHeader.h4(title: 'ClipOval'),
-            ClipOval(
-              child: _buildBox(),
+            NSectionHeader(
+              title: "ClipPath.shape",
+              child: ClipPath.shape(
+                shape: StadiumBorder(),
+                child: _buildBox(),
+              ),
             ),
-            NHeader.h4(title: 'ClipPath.shape'),
-            ClipPath.shape(
-              shape: StadiumBorder(),
-              child: _buildBox(),
-            ),
-            NHeader.h4(title: 'ClipPath'),
-            ClipPath(
-              clipper: TrianglePath(),
-              child: _buildBox(),
+            NSectionHeader(
+              title: "ClipPath - TrianglePath",
+              child: ClipPath(
+                clipper: TrianglePath(),
+                child: _buildBox(),
+              ),
             ),
           ],
         ),
@@ -80,8 +91,8 @@ class _ClipDemoState extends State<ClipDemo> {
     return Container(
       height: 100,
       width: 150,
-      child: Image.asset(
-        'images/bg.jpg',
+      child: Image(
+        image: 'bg.png'.toAssetImage(),
         fit: BoxFit.cover,
       ),
     );

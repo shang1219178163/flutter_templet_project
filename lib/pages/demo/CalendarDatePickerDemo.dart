@@ -34,24 +34,28 @@ class _CalendarDatePickerDemoState extends State<CalendarDatePickerDemo> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
       ),
-      body: Container(
-        child: Column(
-          // mainAxisSize: MainAxisSize.min,
-          children: [
-            NHeader.h4(title: "buildCalendarDatePicker", ),
-            buildCalendarDatePicker(),
-            Divider(),
-            NHeader.h4(title: "buildCupertinoDatePicker", ),
-            Expanded(
-              child: buildCupertinoDatePicker()
-            ),
-            Text("${selectedDate.toLocal()}".split(' ')[0]),
-            const SizedBox(height: 20.0,),
-            ElevatedButton(
-              onPressed: () => _selectDate(context),
-              child: const Text('Select date'),
-            ),
-          ],
+      body: SingleChildScrollView(
+        child: Container(
+          child: Column(
+            children: [
+              NSectionHeader(
+                title: "buildCalendarDatePicker",
+                child: buildCalendarDatePicker(),
+              ),
+              NSectionHeader(
+                title: "buildCalendarDatePicker",
+                child: Column(
+                  children: [
+                    // Text("${selectedDate.toLocal()}".substring(0, 10)),
+                    ElevatedButton(
+                      onPressed: () => _selectDate(context),
+                      child: Text("${selectedDate.toLocal()}".substring(0, 10)),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       )
     );
@@ -68,7 +72,7 @@ class _CalendarDatePickerDemoState extends State<CalendarDatePickerDemo> {
         debugPrint(value.toString());
       },
       firstDate: DateTime(2020, 6, 0), // 开始日期
-      lastDate: DateTime(2023, 7, 0), // 结束日期
+      lastDate: DateTime(2030, 7, 0), // 结束日期
       initialDate: DateTime.now(), // 初始化选中日期
       selectableDayPredicate: (val) {
         if (val.weekday == 5 || val.weekday == 6) {

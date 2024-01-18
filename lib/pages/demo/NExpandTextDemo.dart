@@ -50,35 +50,40 @@ class _NExpandTextDemoState extends State<NExpandTextDemo> {
                   expandTitleStyle: TextStyle(color: Colors.red)
               ),
               SizedBox(height: 134,),
-
-              NHeader.h4(title: "字符串不够一行时"),
-              Container(
-                color: Colors.yellowAccent,
-                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                child: NExpandText(
-                    text: text.substring(0, 20),
-                    textStyle: textStyle,
-                    expandTitleStyle: TextStyle(color: Colors.green)
+              NSectionHeader(
+                title: "字符串不够一行时",
+                child: Container(
+                  color: Colors.yellowAccent,
+                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                  child: NExpandText(
+                      text: text.substring(0, 20),
+                      textStyle: textStyle,
+                      expandTitleStyle: TextStyle(color: Colors.green)
+                  ),
                 ),
               ),
-              NHeader.h4(title: "字符串超过一行时(折叠)"),
-              Container(
-                color: Colors.yellow,
-                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                child: NExpandText(
-                    text: text,
-                    textStyle: textStyle,
-                    expandTitleStyle: TextStyle(color: Colors.green)
+              NSectionHeader(
+                title: "字符串超过一行时(折叠)",
+                child: Container(
+                  color: Colors.yellow,
+                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                  child: NExpandText(
+                      text: text,
+                      textStyle: textStyle,
+                      expandTitleStyle: TextStyle(color: Colors.green)
+                  ),
                 ),
               ),
-              NHeader.h4(title: "字符串超过一行时(展开)"),
-              Container(
-                color: Colors.yellow,
-                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                child: NExpandText(
-                    text: text,
-                    textStyle: textStyle,
-                    expandTitleStyle: TextStyle(color: Colors.green)
+              NSectionHeader(
+                title: "字符串超过一行时(展开)",
+                child: Container(
+                  color: Colors.yellow,
+                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                  child: NExpandText(
+                      text: text,
+                      textStyle: textStyle,
+                      expandTitleStyle: TextStyle(color: Colors.green)
+                  ),
                 ),
               ),
               // buildBtnColor(),

@@ -35,60 +35,75 @@ class _BoxConstraintsDemoState extends State<BoxConstraintsDemo> {
         children: [
           Column(
             children: [
-              NHeader.h4(title: 'ConstrainedBox',),
-              ConstrainedBox(
-                // BoxConstraints 构造
-                constraints: BoxConstraints(
-                  minHeight: 40,
-                  maxHeight: 100,
-                  minWidth: 40,
-                  maxWidth: 300,
+              NSectionHeader(
+                title: "ConstrainedBox",
+                child: ConstrainedBox(
+                  // BoxConstraints 构造
+                  constraints: BoxConstraints(
+                    minHeight: 40,
+                    maxHeight: 100,
+                    minWidth: 40,
+                    maxWidth: 300,
+                  ),
+                  child: _buildBox(),
                 ),
-                child: _buildBox(),
               ),
-              NHeader.h4(title: 'ConstrainedBox.expand（展开约束）',),
-              ConstrainedBox(
-                constraints: BoxConstraints.expand(width: 300, height: 100),
-                child: _buildBox(),
+              NSectionHeader(
+                title: "ConstrainedBox.expand（展开约束）",
+                child: ConstrainedBox(
+                  constraints: BoxConstraints.expand(width: 300, height: 100),
+                  child: _buildBox(),
+                ),
               ),
-              NHeader.h4(title: 'ConstrainedBox.loose（松约束）',),
-              ConstrainedBox(
-                constraints: BoxConstraints.loose(Size(300, 100)),
-                child: _buildBox(),
-              ),
-
-              NHeader.h4(title: 'ConstrainedBox.tight（紧约束）',),
-              ConstrainedBox(
-                constraints: BoxConstraints.tight(Size(300, 100)),
-                child: _buildBox(),
+              NSectionHeader(
+                title: "ConstrainedBox.loose（松约束）",
+                child: ConstrainedBox(
+                  constraints: BoxConstraints.loose(Size(300, 100)),
+                  child: _buildBox(),
+                ),
               ),
 
-              NHeader.h4(title: 'BoxConstraints.tightForFinite（有限紧约束）',),
-              ConstrainedBox(
-                constraints: BoxConstraints.tightForFinite(height: 100),
-                child: _buildBox(),
+              NSectionHeader(
+                title: "ConstrainedBox.tight（紧约束）",
+                child: ConstrainedBox(
+                  constraints: BoxConstraints.tight(Size(300, 100)),
+                  child: _buildBox(),
+                ),
               ),
 
-              NHeader.h4(title: '.loosen()',),
-              ConstrainedBox(
-                // BoxConstraints 构造,转换为松约束
-                constraints: BoxConstraints(
-                  minHeight: 40,
-                  maxHeight: 100,
-                  minWidth: 40,
-                  maxWidth: 300,
-                ).loosen(),
-                child: _buildBox(),
+              NSectionHeader(
+                title: "BoxConstraints.tightForFinite（有限紧约束）",
+                child: ConstrainedBox(
+                  constraints: BoxConstraints.tightForFinite(height: 100),
+                  child: _buildBox(),
+                ),
               ),
 
-              Divider(),
-              Column(
-                children: list.map((e) => NHeader.h5(title: e)).toList(),
+              NSectionHeader(
+                title: ".loosen()",
+                child: ConstrainedBox(
+                  // BoxConstraints 构造,转换为松约束
+                  constraints: BoxConstraints(
+                    minHeight: 40,
+                    maxHeight: 100,
+                    minWidth: 40,
+                    maxWidth: 300,
+                  ).loosen(),
+                  child: _buildBox(),
+                ),
               ),
 
-              Divider(),
-              NHeader.h4(title: 'buildTextView',),
-              buildTextView()
+              NSectionHeader(
+                title: "list",
+                child: Column(
+                  children: list.map((e) => Text(e)).toList(),
+                ),
+              ),
+
+              NSectionHeader(
+                title: "buildTextView",
+                child: buildTextView(),
+              ),
             ],
           )
         ],
@@ -96,7 +111,7 @@ class _BoxConstraintsDemoState extends State<BoxConstraintsDemo> {
     );
   }
 
-  buildTextView() {
+  Widget buildTextView() {
     return Container(
       constraints: BoxConstraints(
         maxWidth: 300,

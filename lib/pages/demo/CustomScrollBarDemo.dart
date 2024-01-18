@@ -5,7 +5,6 @@ import 'package:flutter_templet_project/extension/scroll_controller_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/util/R.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
-import 'package:flutter_templet_project/extension/build_context_ext.dart';
 
 /// 自定义 ScrollBar
 class CustomScrollBarDemo extends StatefulWidget {
@@ -94,12 +93,13 @@ class _CustomScrollBarDemoState extends State<CustomScrollBarDemo> {
   _buildBody({isCustomScrollView = false}) {
     final child = ListView(
       children: [
-        NHeader.h4(title: isCustomScrollView ? "CustomScrollView" : "ListView",),
-        NHeader.h4(title: "自定义滚动条/ScrollerBar",),
-        Container(
-          height: 100,
-          padding: padding,
-          child: _buildListView(),
+        NSectionHeader(
+          title: "${isCustomScrollView ? "CustomScrollView" : "ListView"}(自定义滚动条/ScrollerBar)",
+          child: Container(
+            height: 100,
+            padding: padding,
+            child: _buildListView(),
+          ),
         )
       ]
     );

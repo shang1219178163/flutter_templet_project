@@ -52,29 +52,61 @@ class _BuilderDemoState extends State<BuilderDemo> with TickerProviderStateMixin
   _buildBody() {
     return Column(
       children: [
-        NHeader.h5(title: 'AnimatedBuilder'),
-        AnimatedBuilder(
-          animation: _controller,
-          child: _buildBox('AnimatedBuilder'),
-          builder: (BuildContext context, Widget? child) {
-            return Transform.rotate(
-              angle: _controller.value * 2.0 * math.pi,
-              child: child,
-            );
-          },
+        NSectionHeader(
+          title: "AnimatedBuilder",
+          child: AnimatedBuilder(
+            animation: _controller,
+            child: _buildBox('AnimatedBuilder'),
+            builder: (BuildContext context, Widget? child) {
+              return Transform.rotate(
+                angle: _controller.value * 2.0 * math.pi,
+                child: child,
+              );
+            },
+          ),
+        ),
+        NSectionHeader(
+          title: "AnimatedBuilder",
+          child: AnimatedBuilder(
+            animation: _controller,
+            child: _buildBox('AnimatedBuilder'),
+            builder: (BuildContext context, Widget? child) {
+
+              return Transform.rotate(
+                angle: _controller.value * 2.0 * math.pi,
+                child: child,
+              );
+            },
+          ),
         ),
 
-        Divider(),
-        NHeader.h5(title: 'Builder/约等于 StatelessWidget'),
-        Builder(builder: (BuildContext context) {
-          return _buildBox('Builder');
-        }),
+        NSectionHeader(
+          title: 'Builder/约等于 StatelessWidget',
+          child: AnimatedBuilder(
+            animation: _controller,
+            child: _buildBox('AnimatedBuilder'),
+            builder: (BuildContext context, Widget? child) {
 
-        Divider(),
-        NHeader.h5(title: 'StatefulBuilder/约等于 StatefulWidget'),
-        StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
-          return _buildBox('StatefulBuilder');
-        }),
+              return Builder(builder: (BuildContext context) {
+                return _buildBox('Builder');
+              });
+            },
+          ),
+        ),
+
+        NSectionHeader(
+          title: 'Builder/约等于 StatelessWidget',
+          child: AnimatedBuilder(
+            animation: _controller,
+            child: _buildBox('AnimatedBuilder'),
+            builder: (BuildContext context, Widget? child) {
+
+              return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
+                return _buildBox('StatefulBuilder');
+              });
+            },
+          ),
+        ),
 
         // FadeUpwardsPageTransitionsBuilder(),
         // CupertinoPageTransitionsBuilder(),

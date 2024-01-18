@@ -163,7 +163,11 @@ class _EmojiPageState extends State<EmojiPage> {
                     final emojiList = e.item2.split(" ");
                     return Column(
                       children: [
-                        NHeader.h4(title: emojiTitle),
+                        Container(
+                          padding: EdgeInsets.all(8),
+                          alignment: Alignment.centerLeft,
+                          child: Text(emojiTitle),
+                        ),
                         Wrap(
                           children: emojiList.map((e) {
                             return InkWell(

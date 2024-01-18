@@ -133,71 +133,81 @@ class _OverlayDemoState extends State<OverlayDemo> {
                 child: Text('PopupView: $e'),
               );
             }).toList(),
-            NHeader.h5(title: "NToast"),
-            ...[Alignment.topCenter,
-              Alignment.center,
-              Alignment.bottomCenter,
-            ].map((e) {
-              return ElevatedButton(
-                onPressed: () => NOverlay.showToast(
-                  context,
-                  message: 'NToast is awesome!',
-                  onDismiss: (){
-                    debugPrint("onDismiss: ${DateTime.now()}");
-                  },
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(right: 8.0),
-                        child: Icon(Icons.error_outline, color: Colors.white,),
+            NSectionHeader(
+              title: "NToast",
+              child: Column(
+                children: [Alignment.topCenter,
+                  Alignment.center,
+                  Alignment.bottomCenter,
+                ].map((e) {
+                  return ElevatedButton(
+                    onPressed: () => NOverlay.showToast(
+                      context,
+                      message: 'NToast is awesome!',
+                      onDismiss: (){
+                        debugPrint("onDismiss: ${DateTime.now()}");
+                      },
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(right: 8.0),
+                            child: Icon(Icons.error_outline, color: Colors.white,),
+                          ),
+                          NText('NToast is awesome!',
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.white,
+                          ),
+                        ],
                       ),
-                      NText('NToast is awesome!',
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.white,
-                      ),
-                    ],
-                  ),
-                  // barrierDismissible: false,
-                  alignment: e,
-                ),
-                child: Text('Show Toast: ${e.toString().split(".").last}'),
-              );
-            }).toList(),
-            NHeader.h5(title: "Loadding"),
-            ElevatedButton(
-              onPressed: () => NOverlay.showToast(
-                context,
-                message: 'NToast is awesome!',
-                onDismiss: () {
-                  debugPrint("onDismiss: ${DateTime.now()}");
-                },
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(right: 8.0),
-                      child: Icon(Icons.error_outline, color: Colors.white,),
+                      // barrierDismissible: false,
+                      alignment: e,
                     ),
-                    NText('NToast is awesome!',
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.white,
-                    ),
-                  ],
-                ),
-                // barrierDismissible: false,
-                alignment: Alignment.center,
+                    child: Text('Show Toast: ${e.toString().split(".").last}'),
+                  );
+                }).toList(),
               ),
-              child: Text('Show Loadding'),
             ),
-            ElevatedButton(
-              onPressed: () => NOverlay.showLoading(
-                context,
-                message: 'NToast is awesome!',
+            NSectionHeader(
+              title: "Loadding",
+              child: Column(
+                children: [
+                  ElevatedButton(
+                    onPressed: () => NOverlay.showToast(
+                      context,
+                      message: 'NToast is awesome!',
+                      onDismiss: () {
+                        debugPrint("onDismiss: ${DateTime.now()}");
+                      },
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(right: 8.0),
+                            child: Icon(Icons.error_outline, color: Colors.white,),
+                          ),
+                          NText('NToast is awesome!',
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.white,
+                          ),
+                        ],
+                      ),
+                      // barrierDismissible: false,
+                      alignment: Alignment.center,
+                    ),
+                    child: Text('Show Loadding'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () => NOverlay.showLoading(
+                      context,
+                      message: 'NToast is awesome!',
+                    ),
+                    child: Text('Show Loadding'),
+                  ),
+                ],
               ),
-              child: Text('Show Loadding'),
             ),
           ],
         ),

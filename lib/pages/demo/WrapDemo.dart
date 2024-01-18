@@ -31,34 +31,36 @@ class _WrapDemoState extends State<WrapDemo> {
   _buildBody() {
     return Column(
       children: [
-        NHeader(title: 'Axis.horizontal'),
-        Container(
-          // height: 200,
-          // width: 400,
-          constraints: BoxConstraints(
-            maxHeight: 200,
-          ),
-          margin: EdgeInsets.all(12),
-          child: WrapWidget(
-            width: screenSize.width - 24,
-            direction: Axis.horizontal,
-            // height: 500,
+        NSectionHeader(
+          title: "Axis.horizontal",
+          child: Container(
+            // height: 200,
+            // width: 400,
+            constraints: BoxConstraints(
+              maxHeight: 200,
+            ),
+            margin: EdgeInsets.all(12),
+            child: WrapWidget(
+              width: screenSize.width - 24,
+              direction: Axis.horizontal,
+              // height: 500,
+            ),
           ),
         ),
-        
-        Divider(),
-        NHeader(title: 'Axis.vertical'),
-        Container(
-          // height: 200,
-          // width: 400,
-          constraints: BoxConstraints(
-            maxHeight: 200,
-          ),
-          margin: EdgeInsets.all(12),
-          child: WrapWidget(
-            width: screenSize.width - 24,
-            direction: Axis.vertical,
-            // height: 500,
+        NSectionHeader(
+          title: "Axis.vertical",
+          child: Container(
+            // height: 200,
+            // width: 400,
+            constraints: BoxConstraints(
+              maxHeight: 200,
+            ),
+            margin: EdgeInsets.all(12),
+            child: WrapWidget(
+              width: screenSize.width - 24,
+              direction: Axis.vertical,
+              // height: 500,
+            ),
           ),
         ),
       ]
@@ -104,10 +106,7 @@ class WrapWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _buildSwiperItem();
-  }
 
-  _buildSwiperItem() {
     return ColoredBox(
       color: Colors.lightGreen,
       child: Wrap(

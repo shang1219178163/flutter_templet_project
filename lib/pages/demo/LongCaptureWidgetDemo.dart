@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/NSectionHeader.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
+import 'package:flutter_templet_project/extension/text_style_ext.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
@@ -54,13 +55,22 @@ class _LongCaptureWidgetDemoState extends State<LongCaptureWidgetDemo> {
           color: Colors.white,
           child: Column(
             children: [
-              NHeader.h1(title: "长截图", alignment: Alignment.center,),
+              Container(
+                alignment: Alignment.centerLeft,
+                child: Text("长截图", style: TextStyle().h1,),
+              ),
               ...List.generate(19, (index) => Container(
                   color: ColorExt.random,
                   height: 90,
                 )
               ),
-              NHeader.h2(title: "长截图 Footer",),
+              NSectionHeader(
+                title: "buildCalendarDatePicker",
+                child: Container(
+                  alignment: Alignment.center,
+                  // child: Text("长截图 Footer"),
+                ),
+              ),
             ]
           ),
         ),

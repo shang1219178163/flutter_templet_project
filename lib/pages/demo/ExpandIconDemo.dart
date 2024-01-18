@@ -76,32 +76,38 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
       ),
       body: ListView(
         children: [
-          NHeader.h4(title: "ExpansionTile",),
-          buildExpandColorMenu(),
-          // Divider(),
-          NHeader.h4(title: "ListViewSegmentControl"),
-          buildListViewHorizontal(),
-          Divider(),
-          NHeader.h4(title: "Visibility",),
-          _buildVisbility(),
-          Divider(),
-          NHeader.h4(title: "自定义 VisibleContainer",),
-          _buildVisibleContainer(),
-          Divider(),
-          NHeader.h4(title: "自定义 FoldMenu",),
-          FoldMenu(
-            children: [
-              Tuple2(List.generate(8, (index) => "item0_$index"), 0),
-              Tuple2(List.generate(8, (index) => "item1_$index"), 1),
-              Tuple2(List.generate(8, (index) => "item2_$index"), 2),
-              Tuple2(List.generate(8, (index) => "item3_$index"), 3),
-              Tuple2(List.generate(8, (index) => "item4_$index"), 4),
-            ],
-            foldCount: 3,
-            isVisible: _isVisible,
-            onValueChanged: (row, index, indexs) {
-              ddlog("$row, $index, $indexs");
-            },
+          NSectionHeader(
+            title: "ExpansionTile",
+            child: buildExpandColorMenu(),
+          ),
+          NSectionHeader(
+            title: "ListViewSegmentControl",
+            child: buildListViewHorizontal(),
+          ),
+          NSectionHeader(
+            title: "Visibility",
+            child: _buildVisbility(),
+          ),
+          NSectionHeader(
+            title: "自定义 VisibleContainer",
+            child: _buildVisibleContainer(),
+          ),
+          NSectionHeader(
+            title: "自定义 FoldMenu",
+            child: FoldMenu(
+              children: [
+                Tuple2(List.generate(8, (index) => "item0_$index"), 0),
+                Tuple2(List.generate(8, (index) => "item1_$index"), 1),
+                Tuple2(List.generate(8, (index) => "item2_$index"), 2),
+                Tuple2(List.generate(8, (index) => "item3_$index"), 3),
+                Tuple2(List.generate(8, (index) => "item4_$index"), 4),
+              ],
+              foldCount: 3,
+              isVisible: _isVisible,
+              onValueChanged: (row, index, indexs) {
+                ddlog("$row, $index, $indexs");
+              },
+            ),
           )
         ],
       ),
@@ -167,7 +173,7 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
 
   bool _isShowing = true;
 
-  _buildVisbility() {
+  Widget _buildVisbility() {
     return Container(
       color: Colors.green,
       child: Column(
@@ -205,7 +211,7 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
 
   final bool _isVisible = true;
 
-  _buildVisibleContainer() {
+  Widget _buildVisibleContainer() {
     return VisibleContainer(
       isVisible: _isVisible,
       // indicator: ListTile(
