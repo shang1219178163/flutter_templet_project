@@ -12,7 +12,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_templet_project/util/debug_log.dart';
 import 'package:get/get.dart';
 
-
+/// app 前后台生命周期函数监听
 class LifecycleEventObserver extends WidgetsBindingObserver{
 
   LifecycleEventObserver({
@@ -50,7 +50,7 @@ class LifecycleEventObserver extends WidgetsBindingObserver{
   }
 }
 
-
+/// app 前后台生命周期函数混入封装
 mixin LifecycleEventObserverMixin<T extends StatefulWidget> on State<T>, WidgetsBindingObserver{
   late final _lifecycleEvent = LifecycleEventObserver(
     onResume: onResume,
@@ -72,19 +72,19 @@ mixin LifecycleEventObserverMixin<T extends StatefulWidget> on State<T>, Widgets
   }
 
   Future<void> onResume() async {
-    throw UnimplementedError();
+    throw UnimplementedError("未实现 onResume");
   }
 
   Future<void> onInactive() async {
-    throw UnimplementedError();
+    throw UnimplementedError("未实现 onInactive");
   }
 
   Future<void> onPause() async {
-    throw UnimplementedError();
+    throw UnimplementedError("未实现 onPause");
   }
 
   Future<void> onDetached() async {
-    throw UnimplementedError();
+    throw UnimplementedError("未实现 onDetached");
   }
 
 }
