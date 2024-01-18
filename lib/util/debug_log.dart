@@ -10,7 +10,7 @@ import 'dart:developer' as developer;
 import 'package:flutter/foundation.dart';
 
 /// 自定义打印方法
-void NNLog(dynamic obj){
+void DDLog(dynamic obj){
   DebugLog.d(obj);
 }
 

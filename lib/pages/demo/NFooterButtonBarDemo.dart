@@ -36,7 +36,7 @@ class _NFooterButtonBarDemoState extends State<NFooterButtonBarDemo> {
   void initState() {
     //监听滚动事件，打印滚动位置
     _scrollController.addListener(() {
-      NNLog("_scrollController.offset: ${_scrollController.offset}/${_scrollController.position.maxScrollExtent}");
+      DDLog("_scrollController.offset: ${_scrollController.offset}/${_scrollController.position.maxScrollExtent}");
       enableVN.value = (_scrollController.offset >= _scrollController.position.maxScrollExtent);
     });
 
@@ -89,7 +89,7 @@ class _NFooterButtonBarDemoState extends State<NFooterButtonBarDemo> {
         ),
         buildPageFooter(
           onConfirm: (){
-            NNLog("NFooterButtonBar");
+            DDLog("NFooterButtonBar");
           }
         ),
       ],
