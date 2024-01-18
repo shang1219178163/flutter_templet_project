@@ -520,6 +520,7 @@ var slivers = <Tuple2<String, String>>[
 ];
 
 var specials = <Tuple2<String, String>>[
+  Tuple2(APPRouter.lifecycleEventObserverDemo, "lifecycleEventObserverDemo", ),
   Tuple2(APPRouter.themeColorDemo, "themeColor", ),
   Tuple2(APPRouter.emojiPage, "emoji", ),
   Tuple2(APPRouter.operatorDemo, "特殊操作符", ),

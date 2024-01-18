@@ -12,6 +12,7 @@ import 'package:flutter_templet_project/pages/AppLaunchPage.dart';
 import 'package:flutter_templet_project/pages/DataTypeDemo.dart';
 import 'package:flutter_templet_project/pages/DevelopToolList.dart';
 import 'package:flutter_templet_project/pages/EmojiPage.dart';
+import 'package:flutter_templet_project/pages/LifecycleEventObserverDemo.dart';
 import 'package:flutter_templet_project/pages/NTargetFollowerDemo.dart';
 import 'package:flutter_templet_project/pages/PageLifecycleFuncTest.dart';
 import 'package:flutter_templet_project/pages/DialogChoiceChipDemo.dart';
@@ -317,6 +318,7 @@ import 'package:flutter_templet_project/main.dart';
 ///https://www.jianshu.com/p/b9d6ec92926f
 class APPRouter {
 
+  static const lifecycleEventObserverDemo = '/lifecycleEventObserverDemo';
   static const themeColorDemo = '/themeColorDemo';
 
   static const launchPage = '/APPLaunchPage';
@@ -707,7 +709,7 @@ class AppPage {
   static final List<GetPage> routes = [
     unknownRoute,
 
-
+    GetPage(name: APPRouter.lifecycleEventObserverDemo, page: () => LifecycleEventObserverDemo(),),
     GetPage(name: APPRouter.themeColorDemo, page: () => ThemeColorDemo(),),
     GetPage(name: APPRouter.emojiPage, page: () => EmojiPage(),),
 

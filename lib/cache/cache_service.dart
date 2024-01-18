@@ -47,7 +47,7 @@ class CacheService {
 
   init() async {
     prefs ??= await SharedPreferences.getInstance();
-    debugPrint("init prefs: $prefs");
+    // debugPrint("init prefs: $prefs");
   }
 
   /// 清除数据
