@@ -30,6 +30,7 @@ import 'package:flutter_templet_project/provider/rxDart_provider_demo.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:flutter_templet_project/routes/AppRouteObserver.dart';
+import 'package:flutter_templet_project/util/LifecycleEventHandler.dart';
 import 'package:flutter_templet_project/util/app_util.dart';
 import 'package:flutter_templet_project/util/localizations/AppCupertinoLocalizations.dart';
 import 'package:flutter_templet_project/util/localizations/ZhCupertinoLocalizations.dart';
@@ -245,17 +246,10 @@ class _MyHomePageState extends State<MyHomePage> {
     ),
   ];
 
-  /*切换页面*/
-  void _onBarTap(int index) {
-    /*如果点击的导航项不是当前项  切换 */
-    if (index != currentIndex) {
-      currentIndex = index;
-      setState(() {});
-      if (index == tabItems.length - 1) {
-        unreadVN.value = 100;
-      }
-      ddlog(currentIndex);
-    }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override
@@ -388,6 +382,19 @@ class _MyHomePageState extends State<MyHomePage> {
         ]
     );
     return icon;
+  }
+
+  /*切换页面*/
+  void _onBarTap(int index) {
+    /*如果点击的导航项不是当前项  切换 */
+    if (index != currentIndex) {
+      currentIndex = index;
+      setState(() {});
+      if (index == tabItems.length - 1) {
+        unreadVN.value = 100;
+      }
+      ddlog(currentIndex);
+    }
   }
 
   Future<PackageInfo> getPackageInfo() async {
