@@ -1,3 +1,10 @@
+//
+//  ActivityType.dart
+//  flutter_templet_project
+//
+//  Created by shang on 2024/1/18 11:07.
+//  Copyright © 2024/1/18 shang. All rights reserved.
+//
 
 
 
@@ -12,7 +19,7 @@ enum ActivityType {
 
   cycling(7, '骑行'),
 
-  Skiing(10, '滑雪');
+  skiing(10, '滑雪');
 
 
   const ActivityType(this.value, this.desc,);
@@ -40,7 +47,7 @@ enum ActivityTypeNew {
   climbing,
   hiking,
   cycling,
-  Skiing,
+  skiing,
 }
 
 extension ActivityTypeNewExt on ActivityTypeNew {
@@ -51,7 +58,7 @@ extension ActivityTypeNewExt on ActivityTypeNew {
     ActivityTypeNew.climbing: "攀登",
     ActivityTypeNew.hiking: "徒步旅行",
     ActivityTypeNew.cycling: "骑行",
-    ActivityTypeNew.Skiing: "滑雪",
+    ActivityTypeNew.skiing: "滑雪",
   };
 
   String? get desc {
