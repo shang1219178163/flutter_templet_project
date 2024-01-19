@@ -126,15 +126,8 @@ class _AssetUploadBoxState extends State<AssetUploadBox> {
                               widget.onTap?.call(urls, index);
                               return;
                             }
-                            showEntry(
-                              child: NImagePreview(
-                                urls: urls,
-                                index: index,
-                                onBack: (){
-                                  hideEntry();
-                                },
-                              ),
-                            );
+
+                            jumpImagePreview(urls: urls, index: index);
                           },
                           child: AssetUploadButton(
                             model: e,
@@ -271,6 +264,25 @@ class _AssetUploadBoxState extends State<AssetUploadBox> {
       // BrunoUtil.showToast('$err');
       showToast(message: '$err');
     }
+  }
+
+  /// 展示图片预览相册
+  jumpImagePreview({required List<String> urls, required int index,}) {
+    Navigator.push(context,
+      MaterialPageRoute(
+        builder: (context) => NImagePreview(urls: urls, index: index),
+      ),
+    );
+
+    // showEntry(
+    //   child: NImagePreview(
+    //     urls: urls,
+    //     index: index,
+    //     onBack: (){
+    //       hideEntry();
+    //     },
+    //   ),
+    // );
   }
 
   showToast({required String message}) {
