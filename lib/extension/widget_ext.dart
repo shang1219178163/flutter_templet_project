@@ -16,15 +16,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 
-const double kCupertinoButtonHeight = 56.0;
-
-///默认分割线
-const Divider kDivider = Divider(
-  height: .5,
-  indent: 15,
-  endIndent: 15,
-  color: Color(0xFFDDDDDD),
-);
+// const double kCupertinoButtonHeight = 56.0;
 
 
 extension WidgetExt on Widget {
@@ -42,7 +34,7 @@ extension WidgetExt on Widget {
   Widget toBorder({
     Color? color,
     Color borderColor = Colors.blue,
-  }) => Container(
+  }) => DecoratedBox(
     decoration: BoxDecoration(
       color: color,
       border: Border.all(color: borderColor),

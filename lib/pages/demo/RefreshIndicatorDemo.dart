@@ -18,8 +18,6 @@ class _RefreshIndicatorDemoState extends State<RefreshIndicatorDemo> {
 
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
@@ -59,6 +57,7 @@ class _RefreshIndicatorDemoState extends State<RefreshIndicatorDemo> {
       child: ListView.builder(
         itemCount: 25,
         itemBuilder: (BuildContext context, int index) {
+          
           return ListTile(
             title: Text('Item $index'),
           );
