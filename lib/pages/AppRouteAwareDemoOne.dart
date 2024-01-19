@@ -5,9 +5,9 @@ import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:get/get.dart';
 
 /// 路由监听
-class AppRouteObserverDemoOne extends StatefulWidget {
+class AppRouteAwareDemoOne extends StatefulWidget {
 
-  AppRouteObserverDemoOne({
+  AppRouteAwareDemoOne({
     Key? key,
     this.title
   }) : super(key: key);
@@ -15,10 +15,10 @@ class AppRouteObserverDemoOne extends StatefulWidget {
   final String? title;
 
   @override
-  _AppRouteObserverDemoOneState createState() => _AppRouteObserverDemoOneState();
+  _AppRouteAwareDemoOneState createState() => _AppRouteAwareDemoOneState();
 }
 
-class _AppRouteObserverDemoOneState extends State<AppRouteObserverDemoOne> with RouteAware, RouteAwareMixin {
+class _AppRouteAwareDemoOneState extends State<AppRouteAwareDemoOne> with RouteAware, RouteAwareMixin {
 
   @override
   void dispose() {
