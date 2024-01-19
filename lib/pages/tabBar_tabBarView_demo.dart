@@ -381,7 +381,7 @@ var list = <Tuple2<String, String>>[
   Tuple2(APPRouter.pickerDemo, "pickerDemo", ),
   Tuple2(APPRouter.progressHudDemo, "ProgressHudDemo", ),
   Tuple2(APPRouter.progressHudDemoNew, "ProgressHudDemoNew", ),
-  Tuple2(APPRouter.progressIndicatorDemo, "ProgressIndicatorDemo", ),
+  Tuple2(APPRouter.indicatorDemo, "indicatorDemo", ),
 
   Tuple2(APPRouter.reorderableListViewDemo, "reorderableListViewDemo", ),
   Tuple2(APPRouter.listDismissibleDemo, "recordListDemo", ),

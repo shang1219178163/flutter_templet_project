@@ -284,7 +284,7 @@ import 'package:flutter_templet_project/pages/demo/CarouselSliderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DataTableDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DraggableDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DraggableScrollableSheetDemo.dart';
-import 'package:flutter_templet_project/pages/demo/ProgressIndicatorDemo.dart';
+import 'package:flutter_templet_project/pages/demo/IndicatorDemo.dart';
 import 'package:flutter_templet_project/pages/demo/SliderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/SegmentedButtonDemo.dart';
 import 'package:flutter_templet_project/pages/demo/StepperDemo.dart';
@@ -417,7 +417,7 @@ class APPRouter {
 
   static const sliderDemo = '/sliderDemo';
   static const draggableScrollableSheetDemo = '/DraggableScrollableSheetDemo';
-  static const progressIndicatorDemo = '/ProgressIndicatorDemo';
+  static const indicatorDemo = '/IndicatorDemo';
   static const appWebViewDemo = '/AppWebViewDemo';
   static const carouselSliderDemo = '/carouselSliderDemo';
   static const sliverAppBarDemo = '/SliverAppBarDemo';
@@ -803,7 +803,7 @@ class AppPage {
 
     GetPage(name: APPRouter.sliderDemo, page: () => SliderDemo(),),
     GetPage(name: APPRouter.draggableScrollableSheetDemo, page: () => DraggableScrollableSheetDemo(),),
-    GetPage(name: APPRouter.progressIndicatorDemo, page: () => ProgressIndicatorDemo(),),
+    GetPage(name: APPRouter.indicatorDemo, page: () => IndicatorDemo(),),
     GetPage(name: APPRouter.appWebViewDemo, page: () => AppWebViewDemo(),),
     GetPage(name: APPRouter.carouselSliderDemo, page: () => CarouselSliderDemo(),),
     GetPage(name: APPRouter.sliverAppBarDemo, page: () => SliverAppBarDemo(),),
