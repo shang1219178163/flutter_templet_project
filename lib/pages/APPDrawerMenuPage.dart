@@ -58,10 +58,11 @@ class _APPDrawerMenuPageState extends State<APPDrawerMenuPage> {
                 ...items.map((e) => Column(
                   children: [
                     ListTile(
+                      dense: false,
+                      contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
                       leading: Icon(e.item1),
                       title: Text(e.item2, style: TextStyle(fontSize: 16.0)),
                       trailing: Icon(Icons.chevron_right),
-                      dense: true,
                       // horizontalTitleGap: 0,
                       minLeadingWidth: 0,
                       minVerticalPadding: 0,
@@ -77,8 +78,12 @@ class _APPDrawerMenuPageState extends State<APPDrawerMenuPage> {
                 Divider(),
               ],
             ),
-            ...buildFooter(),
-            // SizedBox(height: 15,)
+            Column(
+              children: [
+                SizedBox(height: 12,),
+                ...buildFooter(),
+              ],
+            )
           ],
         ),
       ),
@@ -151,6 +156,8 @@ class _APPDrawerMenuPageState extends State<APPDrawerMenuPage> {
     var filteredProvider = Provider.of<ColorFilteredProvider>(context);
 
     return ListTile(
+      dense: false,
+      contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
       leading: Icon(Icons.change_circle_outlined,),
       title: Text("灰色滤镜",style: TextStyle(fontSize: 16.0)),
       trailing: Switch(
@@ -162,7 +169,6 @@ class _APPDrawerMenuPageState extends State<APPDrawerMenuPage> {
         },
         value: isGrey,
       ),
-      dense: true,
       // horizontalTitleGap: 0,
       minLeadingWidth: 0,
       minVerticalPadding: 0,

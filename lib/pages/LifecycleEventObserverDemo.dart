@@ -1,7 +1,6 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/util/LifecycleEventHandler.dart';
 import 'package:flutter_templet_project/util/LifecycleEventObserver.dart';
 import 'package:flutter_templet_project/util/debug_log.dart';
 

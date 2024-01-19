@@ -131,6 +131,8 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
           // testData();
           // final titles = getTitles(tuples: tuples);
           // debugPrint("titles: ${titles}");
+
+          Scaffold.of(context).openEndDrawer();
         },
         child: Icon(Icons.add),
       ),

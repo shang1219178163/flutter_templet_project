@@ -30,7 +30,6 @@ import 'package:flutter_templet_project/provider/rxDart_provider_demo.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:flutter_templet_project/routes/AppRouteObserver.dart';
-import 'package:flutter_templet_project/util/LifecycleEventHandler.dart';
 import 'package:flutter_templet_project/util/app_util.dart';
 import 'package:flutter_templet_project/util/localizations/AppCupertinoLocalizations.dart';
 import 'package:flutter_templet_project/util/localizations/ZhCupertinoLocalizations.dart';

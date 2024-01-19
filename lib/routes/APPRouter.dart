@@ -6,8 +6,8 @@ import 'package:flutter_templet_project/basicWidget/NTree/NTreeDemo.dart';
 import 'package:flutter_templet_project/basicWidget/drag_destination_view.dart';
 import 'package:flutter_templet_project/basicWidget/responsive_column.dart';
 import 'package:flutter_templet_project/basicWidget/upload/asset_upload_box_demo.dart';
-import 'package:flutter_templet_project/pages/AppRouteObserverDemo.dart';
-import 'package:flutter_templet_project/pages/AppRouteObserverDemoOne.dart';
+import 'package:flutter_templet_project/pages/AppRouteAwareDemo.dart';
+import 'package:flutter_templet_project/pages/AppRouteAwareDemoOne.dart';
 import 'package:flutter_templet_project/pages/AppLaunchPage.dart';
 import 'package:flutter_templet_project/pages/DataTypeDemo.dart';
 import 'package:flutter_templet_project/pages/DevelopToolList.dart';
@@ -750,9 +750,8 @@ class AppPage {
 
     GetPage(name: APPRouter.enumDemo, page: () => EnumDemo(),),
     GetPage(name: APPRouter.reflectDemo, page: () => ReflectDemo(),),
-    GetPage(name: APPRouter.appRouteObserverDemo, page: () => AppRouteObserverDemo(),),
-    GetPage(name: APPRouter.appRouteObserverDemoOne, page: () => AppRouteObserverDemoOne(),),
-    GetPage(name: APPRouter.pageLifecycleObserverDemo, page: () => PageLifecycleObserverDemo(),),
+    GetPage(name: APPRouter.appRouteObserverDemo, page: () => AppRouteAwareDemo(),),
+    GetPage(name: APPRouter.appRouteObserverDemoOne, page: () => AppRouteAwareDemoOne(),),
     GetPage(name: APPRouter.pageLifecycleFuncTest, page: () => PageLifecycleFuncTest(),),
 
 
