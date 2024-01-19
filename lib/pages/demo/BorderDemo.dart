@@ -290,21 +290,29 @@ class _BorderDemoState extends State<BorderDemo> {
                       child: Text('ShapeDecoration - UnderlineInputBorder'),
                     ),
                   ),
+                ],
+              ),
+            ),
+            NSectionHeader(
+              title: "Decoration - UnderlineTabIndicator",
+              child: Container(
+                margin: EdgeInsets.all(8),
+                decoration: UnderlineTabIndicator(
+                    borderSide: BorderSide(width: 2.0, color: Colors.red),
+                    insets: EdgeInsets.fromLTRB(0, 0, 0, 10)
+                ),
+                child: TextButton(
+                  onPressed: () {
 
-                  Container(
-                    margin: EdgeInsets.all(8),
-                    decoration: UnderlineTabIndicator(
-                        borderSide: BorderSide(width: 2.0, color: Colors.red),
-                        insets: EdgeInsets.fromLTRB(0, 0, 0, 10)
-                    ),
-                    child: TextButton(
-                      onPressed: () {
-
-                      },
-                      child: Text('UnderlineTabIndicator - borderSide'),
-                    ),
-                  ),
-
+                  },
+                  child: Text('Decoration - UnderlineTabIndicator'),
+                ),
+              ),
+            ),
+            NSectionHeader(
+              title: "ShapeDecoration - InputBorder",
+              child: Column(
+                children: [
                   Container(
                     margin: EdgeInsets.all(8),
                     decoration: ShapeDecoration(
@@ -320,23 +328,22 @@ class _BorderDemoState extends State<BorderDemo> {
                       child: Text('ShapeDecoration - OutlineInputBorder'),
                     ),
                   ),
-                  Container(
-                    margin: EdgeInsets.all(8),
-                    decoration: ShapeDecoration(
-                      shape: UnderlineInputBorder(
-                        borderSide: BorderSide(width: 1, color: Colors.red),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    child: TextButton(
-                      onPressed: () {
-
-                      },
-                      child: Text('ShapeDecoration - UnderlineInputBorder'),
-                    ),
-                  ),
-
                 ],
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.all(8),
+              decoration: ShapeDecoration(
+                shape: UnderlineInputBorder(
+                  borderSide: BorderSide(width: 1, color: Colors.red),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+              child: TextButton(
+                onPressed: () {
+
+                },
+                child: Text('ShapeDecoration - UnderlineInputBorder'),
               ),
             ),
           ],
