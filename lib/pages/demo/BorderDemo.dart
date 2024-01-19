@@ -121,7 +121,7 @@ class _BorderDemoState extends State<BorderDemo> {
               ),
             ),
             NSectionHeader(
-              title: "LinearBorder",
+              title: "OutlinedBorder - LinearBorder",
               child: TextButton(
                 style: TextButton.styleFrom(
                   // side: const BorderSide(color: Colors.red),
@@ -166,7 +166,7 @@ class _BorderDemoState extends State<BorderDemo> {
               ),
             ),
             NSectionHeader(
-              title: "StarBorder",
+              title: "OutlinedBorder - StarBorder",
               child: TextButton(
                 style: TextButton.styleFrom(
                   side: const BorderSide(color: Colors.red),
@@ -214,7 +214,7 @@ class _BorderDemoState extends State<BorderDemo> {
             ),
 
             NSectionHeader(
-              title: "Container - ShapeDecoration - ShapeBorder",
+              title: "ShapeDecoration - ShapeBorder",
               child: Column(
                 children: [
                   Container(
