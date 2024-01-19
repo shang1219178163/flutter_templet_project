@@ -11,8 +11,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_templet_project/basicWidget/NSectionHeader.dart';
+import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/num_ext.dart';
+import 'package:flutter_templet_project/extension/widget_ext.dart';
 
 class IndicatorDemo extends StatefulWidget {
 
@@ -30,9 +33,7 @@ class _IndicatorDemoState extends State<IndicatorDemo> with TickerProviderStateM
   void initState() {
     controller = AnimationController(vsync: this, duration: Duration(seconds: 3),)
     ..addListener(() {
-      setState(() {
-        // ddlog("${controller.value}");
-      });
+      setState(() {});
     });
     controller.repeat(reverse: true);
     super.initState();
@@ -74,12 +75,22 @@ class _IndicatorDemoState extends State<IndicatorDemo> with TickerProviderStateM
               title: "CircularProgressIndicator",
               child: SizedBox(
                 width: 60,
-                height: 60,
-                child: CircularProgressIndicator(
-                  value: controller.value,
-                  semanticsLabel: 'Linear progress indicator',
-                  strokeWidth: 4,
-                  backgroundColor: Colors.grey.withAlpha(30),
+                child: Column(
+                  children: [
+                    CircularProgressIndicator(
+                      value: controller.value,
+                      semanticsLabel: 'Linear progress indicator',
+                      strokeWidth: 4,
+                      backgroundColor: Colors.grey.withAlpha(30),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: NText(
+                        controller.value.toStringAsPercent(2),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
