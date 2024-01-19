@@ -7,6 +7,7 @@
 //
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/NSectionHeader.dart';
 
 class BorderDemo extends StatefulWidget {
 
@@ -24,255 +25,324 @@ class _BorderDemoState extends State<BorderDemo> {
 
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.title ?? "$widget"),
         ),
-        body: _buildBody(),
+        body: buildBody(),
     );
   }
 
-  _buildHeaderText(String data) {
-    return Column(
-        children: [
-          Divider(),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              data,
-              style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
-            ),
-          ),
-        ]
-    );
-  }
-
-  _buildBody() {
+  buildBody() {
     return ListView(
       children: [
         Column(
           children: [
-            _buildHeaderText("OutlinedButton - ButtonStyle - BorderSide"),
-
-            OutlinedButton(
-              style: OutlinedButton.styleFrom(
-                side: BorderSide(color: Colors.red, width: 1),
-              ),
-              onPressed: () {
-
-              },
-              child: Text('BeveledRectangleBorder'),
-            ),
-
-            _buildHeaderText("TextButton - ButtonStyle - BorderSide"),
-
-            TextButton(
-                style: OutlinedButton.styleFrom(
-                  side: BorderSide(color: Colors.blue, width: 1),
+            NSectionHeader(
+              title: "BorderSide",
+              child: TextButton(
+                style: TextButton.styleFrom(
+                  side: BorderSide(color: Colors.red, width: 1),
                 ),
-                onPressed: (){},
-                child: Text('TextButton')
-            ),
+                onPressed: () {
 
-            _buildHeaderText("ElevatedButton - ButtonStyle - OutlinedBorder"),
-
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                shape: _buildBeveledRectangleBorder(radius: 0),
+                },
+                child: Text('BorderSide'),
               ),
-              onPressed: () {
-
-              },
-              child: Text('BeveledRectangleBorder'),
             ),
+            NSectionHeader(
+              title: "BeveledRectangleBorder",
+              child: Column(
+                children: [
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      shape: _buildBeveledRectangleBorder(radius: 0),
+                    ),
+                    onPressed: () {
 
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                shape: _buildBeveledRectangleBorder(radius: 10),
+                    },
+                    child: Text('BeveledRectangleBorder - radius: 0'),
+                  ),
+                  SizedBox(height: 8,),
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      shape: _buildBeveledRectangleBorder(radius: 10),
+                    ),
+                    onPressed: () {
+
+                    },
+                    child: Text('BeveledRectangleBorder - radius: 10'),
+                  ),
+                  SizedBox(height: 8,),
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      shape: _buildBeveledRectangleBorder(radius: 100),
+                    ),
+                    onPressed: () {
+
+                    },
+                    child: Text('BeveledRectangleBorder - radius: 100'),
+                  ),
+                ],
               ),
-              onPressed: () {
-
-              },
-              child: Text('BeveledRectangleBorder'),
             ),
+            NSectionHeader(
+              title: "CircleBorder",
+              child: Column(
+                children: [
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      shape: CircleBorder(
+                        side: BorderSide(width: 1, color: Colors.red),
+                      ),
+                      minimumSize: Size(100, 100),
+                    ),
+                    onPressed: () {
 
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                shape: _buildBeveledRectangleBorder(radius: 100),
+                    },
+                    child: Text('CircleBorder'),
+                  ),
+                ],
               ),
-              onPressed: () {
-
-              },
-              child: Text('BeveledRectangleBorder'),
             ),
+            NSectionHeader(
+              title: "ContinuousRectangleBorder",
+              child: TextButton(
+                style: TextButton.styleFrom(
+                  shape: ContinuousRectangleBorder(
+                      side: BorderSide(width: 1, color: Colors.red),
+                      borderRadius: BorderRadius.circular(20)
+                  ),
+                ),
+                onPressed: () {
 
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                shape: _buildCircleBorder(),
-                minimumSize: Size(100, 100),
+                },
+                child: Text('ContinuousRectangleBorder'),
               ),
-              onPressed: () {
-
-              },
-              child: Text('CircleBorder'),
             ),
+            NSectionHeader(
+              title: "LinearBorder",
+              child: TextButton(
+                style: TextButton.styleFrom(
+                  // side: const BorderSide(color: Colors.red),
+                  shape: const LinearBorder(
+                    side: BorderSide(color: Colors.green),
+                    bottom: LinearBorderEdge(),
+                  ),
+                ),
+                onPressed: () {
 
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                shape: _buildContinuousRectangleBorder(radius: 20),
+                },
+                child: Text('LinearBorder'),
               ),
-              onPressed: () {
-
-              },
-              child: Text('ContinuousRectangleBorder'),
             ),
+            NSectionHeader(
+              title: "RoundedRectangleBorder",
+              child: TextButton(
+                style: TextButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                      side: BorderSide(width: 1, color: Colors.red),
+                      borderRadius: BorderRadius.circular(8)
+                  ),
+                ),
+                onPressed: () {
 
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                shape: _buildRoundedRectangleBorder(radius: 8),
+                },
+                child: Text('RoundedRectangleBorder'),
               ),
-              onPressed: () {
-
-              },
-              child: Text('RoundedRectangleBorder'),
             ),
+            NSectionHeader(
+              title: "StadiumBorder",
+              child: TextButton(
+                style: TextButton.styleFrom(
+                  shape: StadiumBorder(
+                    side: BorderSide(width: 1, color: Colors.red),
+                  ),
+                ),
+                onPressed: () {
 
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                shape: _buildStadiumBorder(radius: 20),
+                },
+                child: Text('StadiumBorder'),
               ),
-              onPressed: () {
-
-              },
-              child: Text('StadiumBorder'),
             ),
+            NSectionHeader(
+              title: "StarBorder",
+              child: TextButton(
+                style: TextButton.styleFrom(
+                  side: const BorderSide(color: Colors.red),
+                  shape: const StarBorder(
+                    side: BorderSide(color: Colors.blue),
+                  ),
+                ),
+                onPressed: () {
 
-
-            _buildHeaderText("Container - BoxDecoration - BoxBorder"),
-
-            Container(
-              padding: EdgeInsets.all(16),
-              margin: EdgeInsets.all(8),
-              width: 60,
-              height: 60,
-              decoration: BoxDecoration(
+                },
+                child: Text('StarBorder'),
+              ),
+            ),
+            NSectionHeader(
+              title: "BoxDecoration - BoxBorder",
+              child: Container(
+                padding: EdgeInsets.all(16),
+                margin: EdgeInsets.all(8),
+                width: 60,
+                height: 60,
+                decoration: BoxDecoration(
                   color: Colors.blue,
                   border: Border(
-                      top: BorderSide(color: Colors.red, width: 3,)
+                    top: BorderSide(color: Colors.red, width: 3,)
                   )
-              ),
-              child: Icon(Icons.pool, size: 32, color: Colors.white,),
-            ),
-
-            Container(
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.blue, width: 4),
-                color: Colors.green,
-                shape: BoxShape.circle,
-              ),
-              child: IconButton(
-                iconSize: 56,
-                icon: Icon(Icons.check),
-                onPressed: () {},
+                ),
+                child: Icon(Icons.pool, size: 32, color: Colors.white,),
               ),
             ),
 
-            _buildContainerBorder(),
+            NSectionHeader(
+              title: "BoxDecoration - BoxShape.circle",
+              child: Container(
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.blue, width: 4),
+                  color: Colors.green,
+                  shape: BoxShape.circle,
+                ),
+                child: IconButton(
+                  iconSize: 24,
+                  icon: Icon(Icons.check),
+                  onPressed: () {},
+                ),
+              ),
+            ),
+
+            NSectionHeader(
+              title: "Container - ShapeDecoration - ShapeBorder",
+              child: Column(
+                children: [
+                  Container(
+                    margin: EdgeInsets.all(8),
+                    decoration: ShapeDecoration(
+                      // color: Colors.green,
+                        shape: Border.all(color: Colors.green, width: 2)
+                    ),
+                    child: TextButton( onPressed: () {  },child: Text("ShapeDecoration - Border.all"),),
+                  ),
+                  Container(
+                    margin: EdgeInsets.all(8),
+                    decoration: ShapeDecoration(
+                        shape: Border(
+                            top: BorderSide(color: Colors.red, width: 5),
+                            bottom: BorderSide(color: Colors.yellow, width: 5),
+                            right: BorderSide(color: Colors.blue, width: 5),
+                            left: BorderSide(color: Colors.green, width: 5)
+                        )
+                    ),
+                    child: TextButton( onPressed: () {  },child: Text('ShapeDecoration - Border.top,bottom,right,left'),),
+                  ),
+                  Container(
+                    margin: EdgeInsets.all(8),
+                    decoration: ShapeDecoration(
+                        color: Colors.yellowAccent,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            side: BorderSide(color: Colors.red, width: 2)
+                        )
+                    ),
+                    child: TextButton(
+                      onPressed: () {
+
+                      },
+                      child: Text('ShapeDecoration - RoundedRectangleBorder'),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.all(8),
+                    decoration: ShapeDecoration(
+                        color: Colors.yellowAccent,
+                        shape: BeveledRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            side: BorderSide(color: Colors.red, width: 2)
+                        )
+                    ),
+                    child: TextButton(
+                      onPressed: () {
+
+                      },
+                      child: Text('ShapeDecoration - BeveledRectangleBorder'),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.all(8),
+                    decoration: ShapeDecoration(
+                      // color: Colors.yellowAccent,
+                        gradient: LinearGradient(
+                          colors: [
+                            Colors.yellow,
+                            Colors.green,
+                          ],
+                        ),
+                        shape: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.red, width: 2)
+                        )
+                    ),
+                    child: TextButton(
+                      onPressed: () {
+
+                      },
+                      child: Text('ShapeDecoration - UnderlineInputBorder'),
+                    ),
+                  ),
+
+                  Container(
+                    margin: EdgeInsets.all(8),
+                    decoration: UnderlineTabIndicator(
+                        borderSide: BorderSide(width: 2.0, color: Colors.red),
+                        insets: EdgeInsets.fromLTRB(0, 0, 0, 10)
+                    ),
+                    child: TextButton(
+                      onPressed: () {
+
+                      },
+                      child: Text('UnderlineTabIndicator - borderSide'),
+                    ),
+                  ),
+
+                  Container(
+                    margin: EdgeInsets.all(8),
+                    decoration: ShapeDecoration(
+                      shape: OutlineInputBorder(
+                        borderSide: BorderSide(width: 1, color: Colors.red),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    child: TextButton(
+                      onPressed: () {
+
+                      },
+                      child: Text('ShapeDecoration - OutlineInputBorder'),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.all(8),
+                    decoration: ShapeDecoration(
+                      shape: UnderlineInputBorder(
+                        borderSide: BorderSide(width: 1, color: Colors.red),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    child: TextButton(
+                      onPressed: () {
+
+                      },
+                      child: Text('ShapeDecoration - UnderlineInputBorder'),
+                    ),
+                  ),
+
+                ],
+              ),
+            ),
           ],
         ),
       ],
     );
-
-  }
-
-  _buildContainerBorder() {
-
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        _buildHeaderText("Container - ShapeDecoration - ShapeBorder",),
-
-        Container(
-          margin: EdgeInsets.all(8),
-          decoration: ShapeDecoration(
-            // color: Colors.green,
-            shape: Border.all(color: Colors.green, width: 2)
-          ),
-          child: TextButton( onPressed: () {  },child: Text("ShapeDecoration - Border.all"),),
-        ),
-
-        Container(
-          margin: EdgeInsets.all(8),
-          decoration: ShapeDecoration(
-            shape: Border(
-              top: BorderSide(color: Colors.red, width: 5),
-              bottom: BorderSide(color: Colors.yellow, width: 5),
-              right: BorderSide(color: Colors.blue, width: 5),
-              left: BorderSide(color: Colors.green, width: 5)
-            )
-          ),
-          child: TextButton( onPressed: () {  },child: Text('ShapeDecoration - Border.top,bottom,right,left'),),
-        ),
-
-        Container(
-          margin: EdgeInsets.all(8),
-          decoration: ShapeDecoration(
-              color: Colors.yellowAccent,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                  side: BorderSide(color: Colors.red, width: 2))
-          ),
-          child: TextButton( onPressed: () {  },child: Text('ShapeDecoration - RoundedRectangleBorder'),),
-        ),
-
-        Container(
-          margin: EdgeInsets.all(8),
-          decoration: ShapeDecoration(
-              color: Colors.yellowAccent,
-              shape: CircleBorder(side: BorderSide(color: Colors.red, width: 2))
-          ),
-          child: TextButton( onPressed: () {  },child: Text('ShapeDecoration - CircleBorder'),),
-        ),
-
-        Container(
-          margin: EdgeInsets.all(8),
-          decoration: ShapeDecoration(
-            color: Colors.yellowAccent,
-            shape: BeveledRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(10)),
-              side: BorderSide(color: Colors.red, width: 2)
-            )
-          ),
-          child: TextButton( onPressed: () {  },child: Text('ShapeDecoration - BeveledRectangleBorder'),),
-        ),
-
-        Container(
-          margin: EdgeInsets.all(8),
-          decoration: ShapeDecoration(
-            // color: Colors.yellowAccent,
-            gradient: LinearGradient(
-              colors: [
-                Colors.yellow,
-                Colors.green,
-              ],
-            ),
-            shape: UnderlineInputBorder(borderSide: BorderSide(color: Colors.red, width: 2))
-          ),
-          child: TextButton( onPressed: () {  },child: Text('ShapeDecoration - UnderlineInputBorder'),),
-        ),
-
-        Container(
-          margin: EdgeInsets.all(8),
-          decoration: UnderlineTabIndicator(
-            borderSide: BorderSide(width: 2.0, color: Colors.red),
-            insets: EdgeInsets.fromLTRB(0, 0, 0, 10)
-          ),
-          child: TextButton( onPressed: () {  },child: Text('UnderlineTabIndicator - borderSide'),),
-        ),
-      ]);
-
   }
 
   /// 斜角矩形边框
@@ -283,62 +353,7 @@ class _BorderDemoState extends State<BorderDemo> {
     );
   }
 
-  /// 斜角矩形边框
-  _buildCircleBorder({double width = 1, Color color = Colors.red,}) {
-    return CircleBorder(
-        side: BorderSide(width: width, color: color),
-    );
-  }
 
-  /// 连续的圆角矩形，直线和圆角平滑连续的过渡，和RoundedRectangleBorder相比，圆角效果会小一些。
-  _buildContinuousRectangleBorder({required double radius, double width = 1, Color color = Colors.red,}) {
-    return ContinuousRectangleBorder(
-        side: BorderSide(width: width, color: color),
-        borderRadius: BorderRadius.circular(radius)
-    );
-  }
-
-  /// 圆角矩形
-  _buildRoundedRectangleBorder({required double radius, double width = 1, Color color = Colors.red,}) {
-    return RoundedRectangleBorder(
-        side: BorderSide(width: width, color: color),
-        borderRadius: BorderRadius.circular(radius)
-    );
-  }
-
-  /// 类似足球场的形状，两边圆形，中间矩形
-  _buildStadiumBorder({required double radius, double width = 1, Color color = Colors.red,}) {
-    return StadiumBorder(
-        side: BorderSide(width: width, color: color),
-    );
-  }
-
-
-  _buildShapeBorder({Color color = Colors.red,}){
-    return ShapeDecoration(
-      color: color,
-      shape: Border(
-          top: BorderSide(color: Colors.red, width: 15),
-          bottom: BorderSide(color: Colors.yellow, width: 15),
-          right: BorderSide(color: Colors.blue, width: 15),
-          left: BorderSide(color: Colors.green, width: 15)
-      )
-    );
-  }
-  /// 带外边框
-  _buildOutlineInputBorder({required double radius, double width = 1, Color color = Colors.red,}) {
-    return OutlineInputBorder(
-      borderSide: BorderSide(width: width, color: color),
-      borderRadius: BorderRadius.circular(radius),
-    );
-  }
-  /// 下划线边框
-  _buildUnderlineInputBorder({required double radius, double width = 1, Color color = Colors.red,}) {
-    return UnderlineInputBorder(
-      borderSide: BorderSide(width: width, color: color),
-      borderRadius: BorderRadius.circular(radius),
-    );
-  }
 }
 
 
