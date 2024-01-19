@@ -1,3 +1,11 @@
+//
+//  NImagePreview.dart
+//  flutter_templet_project
+//
+//  Created by shang on 2024/1/19 16:23.
+//  Copyright © 2024/1/19 shang. All rights reserved.
+//
+
 import 'package:dio/dio.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
@@ -9,8 +17,7 @@ import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 
 
-// @version[创建日期，2023/6/8 14:36]
-// @function[图片预览 ]
+/// 图片预览组件
 class NImagePreview extends StatefulWidget {
   const NImagePreview({
     Key? key,
