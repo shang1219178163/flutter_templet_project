@@ -21,6 +21,7 @@ class NButtonCancel extends StatelessWidget {
   	this.title = '取消',
     required this.onPressed,
     this.height = 44,
+    this.borderRadius = const BorderRadius.all(Radius.circular(8)),
   });
 
   final Color? bgColor;
@@ -31,6 +32,7 @@ class NButtonCancel extends StatelessWidget {
   final VoidCallback? onPressed;
   /// 高度
   final double height;
+  final BorderRadius? borderRadius;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +45,7 @@ class NButtonCancel extends StatelessWidget {
         alignment: Alignment.center,
         decoration: BoxDecoration(
           color: primary.withOpacity(0.1),
-          borderRadius: const BorderRadius.all(Radius.circular(8)),
+          borderRadius: borderRadius,
         ),
         child: NText(
           title,

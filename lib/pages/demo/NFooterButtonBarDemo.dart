@@ -92,6 +92,11 @@ class _NFooterButtonBarDemoState extends State<NFooterButtonBarDemo> {
             DDLog("NFooterButtonBar");
           }
         ),
+        buildPageFooter1(
+          onConfirm: (){
+            DDLog("NFooterButtonBar");
+          }
+        ),
       ],
     );
   }
@@ -116,6 +121,32 @@ class _NFooterButtonBarDemoState extends State<NFooterButtonBarDemo> {
           onConfirm: onConfirm,
         );
       }
+    );
+  }
+
+  buildPageFooter1({required VoidCallback onConfirm}) {
+    return ValueListenableBuilder(
+        valueListenable: enableVN,
+        builder: (context, value, child) {
+
+          return NFooterButtonBar(
+            primary: Colors.red,
+            decoration: const BoxDecoration(
+                color: Colors.white,
+                border: Border(
+                    top: BorderSide(color: Color(0xffE5E5E5))
+                )
+            ),
+            confirmTitle: "保存",
+            enable: value,
+            // hideCancel: true,
+            // isReverse: true,
+            onConfirm: onConfirm,
+            gap: 0,
+            btnBorderRadius: BorderRadius.zero,
+            padding: EdgeInsets.zero,
+          );
+        }
     );
   }
 }

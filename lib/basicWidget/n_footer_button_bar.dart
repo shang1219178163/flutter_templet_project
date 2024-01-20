@@ -25,6 +25,7 @@ class NFooterButtonBar extends StatelessWidget {
     this.cancelTitle = "取消",
     this.confirmTitle = "确定",
     this.gap = 16,
+    this.btnBorderRadius = const BorderRadius.all(Radius.circular(8)),
     this.onCancel,
     required this.onConfirm,
     this.hideCancel = false,
@@ -39,6 +40,7 @@ class NFooterButtonBar extends StatelessWidget {
   final String cancelTitle;
   final String confirmTitle;
   final double gap;
+  final BorderRadius? btnBorderRadius;
   final VoidCallback? onCancel;
   final VoidCallback? onConfirm;
   /// 是否隐藏取消按钮
@@ -57,6 +59,7 @@ class NFooterButtonBar extends StatelessWidget {
       if(!hideCancel)Expanded(
         child: NButtonCancel(
           bgColor: primary,
+          borderRadius: btnBorderRadius,
           title: cancelTitle,
           onPressed: onCancel,
         ),
@@ -67,6 +70,7 @@ class NFooterButtonBar extends StatelessWidget {
       Expanded(
         child: NButtonConfirm(
           bgColor: primary,
+          borderRadius: btnBorderRadius,
           title: confirmTitle,
           enable: enable,
           onPressed: onConfirm,
