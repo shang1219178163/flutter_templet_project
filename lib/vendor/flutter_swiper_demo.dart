@@ -469,7 +469,7 @@ class ExamplePhone extends StatelessWidget {
                 "images/2.png",
                 fit: BoxFit.contain,
               ),
-              Image.asset("images/3.png", fit: BoxFit.contain)
+              Image.asset("assets/images/3.png", fit: BoxFit.contain)
             ],
           )
         ],

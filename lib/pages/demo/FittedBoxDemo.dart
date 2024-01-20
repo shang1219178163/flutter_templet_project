@@ -53,7 +53,7 @@ class _FittedBoxDemoState extends State<FittedBoxDemo> {
         alignment: Alignment.centerLeft,
         child: Container(
             color: Colors.yellow,
-            child: Image.asset("images/avatar.png", width: 200, height: 100)
+            child: Image.asset("assets/images/avatar.png", width: 200, height: 100)
         ),
       ),
     );

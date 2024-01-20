@@ -30,12 +30,8 @@ class DraggableScrollableSheetDemo extends StatefulWidget {
 class _DraggableScrollableSheetDemoState extends State<DraggableScrollableSheetDemo> {
 
 
-
-
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget", style: TextStyle(fontSize: 15),),
@@ -45,7 +41,7 @@ class _DraggableScrollableSheetDemoState extends State<DraggableScrollableSheetD
     );
   }
 
-  Widget buildBody({double minChildSize = 0.3}) {
+  Widget buildBody({double minChildSize = 0.15}) {
     final height = MediaQuery.of(context).size.height
         - MediaQuery.of(context).viewPadding.top
         - MediaQuery.of(context).viewPadding.bottom
@@ -77,7 +73,7 @@ class _DraggableScrollableSheetDemoState extends State<DraggableScrollableSheetD
             ),
           ),
           DraggableScrollableSheet(
-            initialChildSize: 0.5,
+            initialChildSize: minChildSize,
             minChildSize: minChildSize,
             maxChildSize: 1,
             builder: (context, scrollController){

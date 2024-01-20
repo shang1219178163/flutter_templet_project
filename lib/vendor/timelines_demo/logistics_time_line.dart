@@ -281,13 +281,13 @@ class _LogisticsTimeLineState extends State<LogisticsTimeLine> {
                               height: 60,
                               width: 100,
                               // color: Colors.green,
-                              child: Image.asset("images/img_404.png"),
+                              child: Image.asset("assets/images/img_404.png"),
                             ),
                             Container(
                               height: 60,
                               width: 100,
                               // color: Colors.green,
-                              child: Image.asset("images/img_404.png"),
+                              child: Image.asset("assets/images/img_404.png"),
                             ),
                             TextButton(
                               style: OutlinedButton.styleFrom(

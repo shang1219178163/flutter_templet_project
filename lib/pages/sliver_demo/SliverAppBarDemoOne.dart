@@ -83,7 +83,7 @@ class _SliverAppBarDemoOneState extends State<SliverAppBarDemoOne> with SingleTi
                 ],
 
                 flexibleSpace: FlexibleSpaceBar(
-                  background: Image.asset("images/bg.png", fit: BoxFit.fill),
+                  background: Image.asset("assets/images/bg.png", fit: BoxFit.fill),
                   // background: Container(
                   //   padding: EdgeInsets.fromLTRB(20, 100, 20, 60),
                   //   // height: 80,

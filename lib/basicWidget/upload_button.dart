@@ -65,7 +65,7 @@ class _UploadButtonState extends State<UploadButton> {
             child: OutlinedButton(
               onPressed: widget.onPressed,
               child: widget.image ??
-                  Image.asset("images/img_upload_placeholder.png",
+                  Image.asset("assets/images/img_upload_placeholder.png",
                       fit: BoxFit.fill
                   ),
             ),
