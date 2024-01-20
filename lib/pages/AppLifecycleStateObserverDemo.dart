@@ -1,12 +1,12 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/util/LifecycleEventObserver.dart';
+import 'package:flutter_templet_project/util/AppLifecycleObserver.dart';
 import 'package:flutter_templet_project/util/debug_log.dart';
 
-class LifecycleEventObserverDemo extends StatefulWidget {
+class AppLifecycleStateObserverDemo extends StatefulWidget {
 
-  LifecycleEventObserverDemo({
+  AppLifecycleStateObserverDemo({
     super.key, 
     this.title
   });
@@ -14,12 +14,12 @@ class LifecycleEventObserverDemo extends StatefulWidget {
   final String? title;
 
   @override
-  State<LifecycleEventObserverDemo> createState() => _LifecycleEventObserverDemoState();
+  State<AppLifecycleStateObserverDemo> createState() => _AppLifecycleStateObserverDemoState();
 }
 
-class _LifecycleEventObserverDemoState extends State<LifecycleEventObserverDemo> with
+class _AppLifecycleStateObserverDemoState extends State<AppLifecycleStateObserverDemo> with
     WidgetsBindingObserver,
-    LifecycleEventObserverMixin {
+    AppLifecycleObserverMixin {
 
   final _scrollController = ScrollController();
 
@@ -82,26 +82,29 @@ class _LifecycleEventObserverDemoState extends State<LifecycleEventObserverDemo>
     );
   }
 
-  /*************** LifecycleEventObserverMixin ***************/
-
+  /*************** AppLifecycleObserverMixin ***************/
   @override
   Future<void> onResume() async {
-    DDLog("onResume");
+    // TODO: implement onResume
+    DDLog("$widget onResume");
   }
 
   @override
   Future<void> onInactive() async {
-    DDLog("onInactive");
+    // TODO: implement onInactive
+    DDLog("$widget onInactive");
   }
 
   @override
   Future<void> onPause() async {
-    DDLog("onPause");
+    // TODO: implement onPause
+    DDLog("$widget onPause");
   }
 
   @override
   Future<void> onDetached() async {
-    DDLog("onDetached");
+    // TODO: implement onDetached
+    DDLog("$widget onDetached");
   }
 }
 

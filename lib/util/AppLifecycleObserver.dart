@@ -1,5 +1,5 @@
 //
-//  LifecycleEventObserver.dart
+//  AppLifecycleObserver.dart
 //  flutter_templet_project
 //
 //  Created by shang on 2024/1/18 14:25.
@@ -13,9 +13,9 @@ import 'package:flutter_templet_project/util/debug_log.dart';
 import 'package:get/get.dart';
 
 /// app 前后台生命周期函数监听
-class LifecycleEventObserver extends WidgetsBindingObserver{
+class AppLifecycleObserver extends WidgetsBindingObserver{
 
-  LifecycleEventObserver({
+  AppLifecycleObserver({
     required this.onResume,
     required this.onInactive,
     required this.onPause,
@@ -31,7 +31,7 @@ class LifecycleEventObserver extends WidgetsBindingObserver{
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    DDLog('${Get.currentRoute} APP状态监听：$state, ${data ?? ""}');
+    // DDLog('${Get.currentRoute} APP状态监听：$state, ${data ?? ""}');
 
     switch (state) {
       case AppLifecycleState.resumed:
@@ -51,8 +51,8 @@ class LifecycleEventObserver extends WidgetsBindingObserver{
 }
 
 /// app 前后台生命周期函数混入封装
-mixin LifecycleEventObserverMixin<T extends StatefulWidget> on State<T>, WidgetsBindingObserver{
-  late final _lifecycleEvent = LifecycleEventObserver(
+mixin AppLifecycleObserverMixin<T extends StatefulWidget> on State<T>, WidgetsBindingObserver{
+  late final _lifecycleEvent = AppLifecycleObserver(
     onResume: onResume,
     onInactive: onInactive,
     onPause: onPause,
@@ -72,19 +72,19 @@ mixin LifecycleEventObserverMixin<T extends StatefulWidget> on State<T>, Widgets
   }
 
   Future<void> onResume() async {
-    throw UnimplementedError("未实现 onResume");
+    throw UnimplementedError("❌: $this 未实现 onResume");
   }
 
   Future<void> onInactive() async {
-    throw UnimplementedError("未实现 onInactive");
+    throw UnimplementedError("❌: $this 未实现 onInactive");
   }
 
   Future<void> onPause() async {
-    throw UnimplementedError("未实现 onPause");
+    throw UnimplementedError("❌: $this 未实现 onPause");
   }
 
   Future<void> onDetached() async {
-    throw UnimplementedError("未实现 onDetached");
+    throw UnimplementedError("❌: $this 未实现 onDetached");
   }
 
 }

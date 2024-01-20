@@ -30,7 +30,9 @@ import 'package:flutter_templet_project/provider/rxDart_provider_demo.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:flutter_templet_project/routes/AppRouteObserver.dart';
+import 'package:flutter_templet_project/util/AppLifecycleObserver.dart';
 import 'package:flutter_templet_project/util/app_util.dart';
+import 'package:flutter_templet_project/util/debug_log.dart';
 import 'package:flutter_templet_project/util/localizations/AppCupertinoLocalizations.dart';
 import 'package:flutter_templet_project/util/localizations/ZhCupertinoLocalizations.dart';
 
@@ -217,7 +219,7 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver, AppLifecycleObserverMixin {
   int currentIndex = 0;
 
   final unreadVN = ValueNotifier(0);
@@ -248,6 +250,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void dispose() {
+    debugPrint("11");
     super.dispose();
   }
 
@@ -263,6 +266,31 @@ class _MyHomePageState extends State<MyHomePage> {
 
     configRefresh();
     super.initState();
+  }
+
+
+  @override
+  Future<void> onResume() async {
+    // TODO: implement onResume
+    DDLog("$widget onResume");
+  }
+
+  @override
+  Future<void> onInactive() async {
+    // TODO: implement onInactive
+    DDLog("$widget onInactive");
+  }
+
+  @override
+  Future<void> onPause() async {
+    // TODO: implement onPause
+    DDLog("$widget onPause");
+  }
+
+  @override
+  Future<void> onDetached() async {
+    // TODO: implement onDetached
+    DDLog("$widget onDetached");
   }
 
 
