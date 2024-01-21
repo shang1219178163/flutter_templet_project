@@ -176,7 +176,7 @@ class XBoxWidget extends StatelessWidget {
 
     final opacityNew = opacity?.clamp(0, 1.0).toDouble() ?? 1.0;
     var opacity2 = ClipRRect(
-      borderRadius: borderRadius,
+      borderRadius: borderRadius ?? BorderRadius.zero,
       child: Opacity(
         opacity: opacityNew,
         child: Container(
@@ -185,7 +185,7 @@ class XBoxWidget extends StatelessWidget {
           margin: margin.isNonNegative ? margin : EdgeInsets.zero,
           decoration: decoration,
           child: ClipRRect(
-            borderRadius: borderRadius,
+            borderRadius: borderRadius ?? BorderRadius.zero,
             child: BackdropFilter(
               filter: ui.ImageFilter.blur(sigmaX: bgBlur, sigmaY: bgBlur),
               child: Container(
@@ -214,7 +214,7 @@ class XBoxWidget extends StatelessWidget {
           right: margin.right,
           bottom: margin.bottom,
           child: ClipRRect(
-            borderRadius: borderRadius,
+            borderRadius: borderRadius ?? BorderRadius.zero,
             child: BackdropFilter(
               filter: ui.ImageFilter.blur(
                 sigmaX: blur,

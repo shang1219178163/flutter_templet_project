@@ -181,7 +181,7 @@ class _HorizontalScrollWidgetState extends State<NHorizontalScrollWidget> {
         padding: EdgeInsets.only(bottom: blur), //为了显示阴影
         decoration: _buildDecoration(),
         child: ClipRRect(
-          borderRadius: widget.borderRadius,
+          borderRadius: widget.borderRadius ?? BorderRadius.zero,
           child: Stack(
             alignment: Alignment.center,
             fit: StackFit.expand,
@@ -224,7 +224,7 @@ class _HorizontalScrollWidgetState extends State<NHorizontalScrollWidget> {
           width: constraints.maxWidth,
           height: constraints.maxHeight,
           child: ClipRRect(
-            borderRadius: widget.borderRadius,
+            borderRadius: widget.borderRadius ?? BorderRadius.zero,
             child: Stack(
               children: [
                 Swiper(

@@ -31,7 +31,7 @@ extension StackExt on Stack{
         child,
         Positioned.fill(
           child: ClipRRect(
-            borderRadius: borderRadius,
+            borderRadius: borderRadius ?? BorderRadius.zero,
             clipper: clipper,
             clipBehavior: clipBehavior,
             child: BackdropFilter(

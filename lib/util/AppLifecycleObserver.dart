@@ -20,6 +20,7 @@ class AppLifecycleObserver extends WidgetsBindingObserver{
     required this.onInactive,
     required this.onPause,
     required this.onDetached,
+    required this.onHidden,
     this.data,
   });
 
@@ -27,6 +28,7 @@ class AppLifecycleObserver extends WidgetsBindingObserver{
   final AsyncCallback onInactive;
   final AsyncCallback onPause;
   final AsyncCallback onDetached;
+  final AsyncCallback onHidden;
   final dynamic data;
 
   @override
@@ -46,6 +48,10 @@ class AppLifecycleObserver extends WidgetsBindingObserver{
       case AppLifecycleState.detached:
         onDetached();
         break;
+      case AppLifecycleState.hidden:
+      //当前页面即将隐藏
+        debugPrint('YM----->AppLifecycleState.hidden');
+        break;
     }
   }
 }
@@ -57,6 +63,7 @@ mixin AppLifecycleObserverMixin<T extends StatefulWidget> on State<T>, WidgetsBi
     onInactive: onInactive,
     onPause: onPause,
     onDetached: onDetached,
+    onHidden: onHidden,
   );
 
   @override
@@ -87,4 +94,7 @@ mixin AppLifecycleObserverMixin<T extends StatefulWidget> on State<T>, WidgetsBi
     throw UnimplementedError("❌: $this 未实现 onDetached");
   }
 
+  Future<void> onHidden() async {
+    throw UnimplementedError("❌: $this 未实现 onHidden");
+  }
 }

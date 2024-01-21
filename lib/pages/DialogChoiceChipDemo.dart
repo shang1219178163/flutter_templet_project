@@ -696,7 +696,7 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
             //   color: Colors.transparent,
             // ),
             child: ClipRRect(
-              borderRadius: borderRadius,
+              borderRadius: borderRadius ?? BorderRadius.zero,
               child: Container(
                 color: Colors.white,
                 child: Column(

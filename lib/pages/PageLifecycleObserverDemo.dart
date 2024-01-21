@@ -78,6 +78,10 @@ class _PageLifecycleObserverDemoState extends State<PageLifecycleObserverDemo> w
       //当前页面即将退出
         debugPrint('YM----->AppLifecycleState.detached');
         break;
+      case AppLifecycleState.hidden:
+      //当前页面即将隐藏
+        debugPrint('YM----->AppLifecycleState.hidden');
+        break;
     }
   }
 

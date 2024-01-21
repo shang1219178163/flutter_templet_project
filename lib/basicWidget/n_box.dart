@@ -168,7 +168,7 @@ class NBox extends StatelessWidget {
         padding: padding,
         decoration: decoration,
           child: ClipRRect(
-            borderRadius: borderRadius,
+            borderRadius: borderRadius ?? BorderRadius.zero,
             child: BackdropFilter(
               filter: filter ?? ui.ImageFilter.blur(
                 sigmaX: bgBlur,
