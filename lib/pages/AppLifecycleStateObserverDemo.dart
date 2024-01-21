@@ -43,11 +43,17 @@ class _AppLifecycleStateObserverDemoState extends State<AppLifecycleStateObserve
       onResume: (){
         ddLog("$widget onResume - AppLifecycleListener");
       },
+      onInactive: (){
+        ddLog("$widget onInactive - AppLifecycleListener");
+      },
       onPause: (){
         ddLog("$widget onPause - AppLifecycleListener");
       },
       onDetach: (){
         ddLog("$widget onDetach - AppLifecycleListener");
+      },
+      onHide: (){
+        ddLog("$widget onHide - AppLifecycleListener");
       },
     );
   }

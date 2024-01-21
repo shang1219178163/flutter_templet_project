@@ -63,8 +63,8 @@ class AppLifecycleObserver extends WidgetsBindingObserver{
 }
 
 /// app 前后台生命周期函数混入封装
-mixin AppLifecycleObserverMixin<T extends StatefulWidget> on State<T>, WidgetsBindingObserver{
-  late final _lifecycleEvent = AppLifecycleObserver(
+mixin AppLifecycleObserverMixin<T extends StatefulWidget> on State<T>{
+  late final _lifecycleObserver = AppLifecycleObserver(
     onResume: onResume,
     onInactive: onInactive,
     onPause: onPause,
@@ -75,12 +75,12 @@ mixin AppLifecycleObserverMixin<T extends StatefulWidget> on State<T>, WidgetsBi
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addObserver(_lifecycleEvent);
+    WidgetsBinding.instance.addObserver(_lifecycleObserver);
   }
 
   @override
   void dispose() {
-    WidgetsBinding.instance.removeObserver(_lifecycleEvent);
+    WidgetsBinding.instance.removeObserver(_lifecycleObserver);
     super.dispose();
   }
 
