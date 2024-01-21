@@ -22,7 +22,9 @@ class AppLifecycleObserver extends WidgetsBindingObserver{
     required this.onDetached,
     required this.onHidden,
     this.data,
-  });
+  }) {
+    // WidgetsBinding.instance.addObserver(this);
+  }
 
   final AsyncCallback onResume;
   final AsyncCallback onInactive;
@@ -30,6 +32,11 @@ class AppLifecycleObserver extends WidgetsBindingObserver{
   final AsyncCallback onDetached;
   final AsyncCallback onHidden;
   final dynamic data;
+
+  // @mustCallSuper
+  // void dispose() {
+  //   WidgetsBinding.instance.removeObserver(this);
+  // }
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
