@@ -49,8 +49,7 @@ class AppLifecycleObserver extends WidgetsBindingObserver{
         onDetached();
         break;
       case AppLifecycleState.hidden:
-      //当前页面即将隐藏
-        debugPrint('YM----->AppLifecycleState.hidden');
+        onHidden();
         break;
     }
   }

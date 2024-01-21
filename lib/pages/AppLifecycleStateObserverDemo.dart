@@ -23,34 +23,34 @@ class _AppLifecycleStateObserverDemoState extends State<AppLifecycleStateObserve
 
   final _scrollController = ScrollController();
 
-  // late final _lifecycleEvent = LifecycleEventObserver(
-  //   data: "$widget",
-  //   onResume: () async {
-  //
-  //   },
-  //   onInactive: () async {
-  //
-  //   },
-  //   onPause: () async {
-  //
-  //   },
-  //   onDetached: () async {
-  //
-  //   }
-  // );
-  //
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   WidgetsBinding.instance.addObserver(_lifecycleEvent);
-  // }
-  //
-  // @override
-  // void dispose() {
-  //   WidgetsBinding.instance.removeObserver(_lifecycleEvent);
-  //   super.dispose();
-  // }
+  late AppLifecycleListener _lifecycleListener;
 
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _lifecycleListener.dispose();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    _lifecycleListener = AppLifecycleListener(
+      onRestart: (){
+        ddLog("$widget onRestart - AppLifecycleListener");
+      },
+      onResume: (){
+        ddLog("$widget onResume - AppLifecycleListener");
+      },
+      onPause: (){
+        ddLog("$widget onPause - AppLifecycleListener");
+      },
+      onDetach: (){
+        ddLog("$widget onDetach - AppLifecycleListener");
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -86,25 +86,31 @@ class _AppLifecycleStateObserverDemoState extends State<AppLifecycleStateObserve
   @override
   Future<void> onResume() async {
     // TODO: implement onResume
-    DDLog("$widget onResume");
+    ddLog("$widget onResume");
   }
 
   @override
   Future<void> onInactive() async {
     // TODO: implement onInactive
-    DDLog("$widget onInactive");
+    ddLog("$widget onInactive");
   }
 
   @override
   Future<void> onPause() async {
     // TODO: implement onPause
-    DDLog("$widget onPause");
+    ddLog("$widget onPause");
   }
 
   @override
   Future<void> onDetached() async {
     // TODO: implement onDetached
-    DDLog("$widget onDetached");
+    ddLog("$widget onDetached");
+  }
+
+  @override
+  Future<void> onHidden() async {
+    // TODO: implement onHidden
+    ddLog("$widget onHidden");
   }
 }
 

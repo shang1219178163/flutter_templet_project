@@ -272,25 +272,31 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver, Ap
   @override
   Future<void> onResume() async {
     // TODO: implement onResume
-    DDLog("$widget onResume");
+    ddLog("$widget onResume");
   }
 
   @override
   Future<void> onInactive() async {
     // TODO: implement onInactive
-    DDLog("$widget onInactive");
+    ddLog("$widget onInactive");
   }
 
   @override
   Future<void> onPause() async {
     // TODO: implement onPause
-    DDLog("$widget onPause");
+    ddLog("$widget onPause");
   }
 
   @override
   Future<void> onDetached() async {
     // TODO: implement onDetached
-    DDLog("$widget onDetached");
+    ddLog("$widget onDetached");
+  }
+
+  @override
+  Future<void> onHidden() async {
+    // TODO: implement onHidden
+    ddLog("$widget onHidden");
   }
 
 
