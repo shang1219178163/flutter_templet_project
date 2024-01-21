@@ -18,7 +18,6 @@ class AppLifecycleStateObserverDemo extends StatefulWidget {
 }
 
 class _AppLifecycleStateObserverDemoState extends State<AppLifecycleStateObserverDemo> with
-    WidgetsBindingObserver,
     AppLifecycleObserverMixin {
 
   final _scrollController = ScrollController();
