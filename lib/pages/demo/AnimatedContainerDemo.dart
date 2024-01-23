@@ -66,7 +66,7 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
   }
 
   Widget buildBody() {
-    return Center(
+    return SingleChildScrollView(
       child: Column(
         // crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
