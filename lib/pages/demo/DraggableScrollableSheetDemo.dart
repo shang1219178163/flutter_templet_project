@@ -13,6 +13,8 @@ import 'package:extended_image/extended_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
+import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/network/dio_upload_service.dart';
 import 'package:flutter_templet_project/util/R.dart';
 
@@ -29,23 +31,127 @@ class DraggableScrollableSheetDemo extends StatefulWidget {
 
 class _DraggableScrollableSheetDemoState extends State<DraggableScrollableSheetDemo> {
 
+  final _scrollController = ScrollController();
+
+  double minExtent = 0.15;
+
+  late double extent = 0.15;
+
+  final extentVN = ValueNotifier(0.15);
+
+
+  @override
+  void initState() {
+    // TODO: implement initState
+
+    // _scrollController.addListener(() {
+    //   final isBottom =_scrollController.position.pixels ==
+    //       _scrollController.position.maxScrollExtent;
+    //   final isTop =_scrollController.position.pixels <= 0;
+    //   ddlog("isTop: $isTop, isBottom: $isBottom");
+    //
+    //   if (isBottom) {
+    //     // 滑动到底部，执行加载更多操作
+    //   } else {
+    //
+    //   }
+    // });
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title ?? "$widget", style: TextStyle(fontSize: 15),),
+        title: ValueListenableBuilder(
+           valueListenable: extentVN,
+           builder: (context,  value, child){
+             var desc = widget.title ?? "$widget";
+             if (value == 1) {
+               desc = "顶部";
+              return buildTopBar().toColoredBox();
+             } else if (value == minExtent) {
+               desc = "底部";
+             } else {
+               desc = "中间";
+             }
+            return Text(desc, style: TextStyle(fontSize: 15),);
+          }
+        ),
       ),
       body: buildBody(),
       // body: buildBody1(),
     );
   }
 
-  Widget buildBody({double minChildSize = 0.15}) {
+  Widget buildTopBar() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Row(
+          children: [
+            FlutterLogo(size: 40,),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text("我是标题",
+                  style: TextStyle(
+                    fontSize: 14,
+
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                Text("评分9.0",
+                  style: TextStyle(
+                    fontSize: 12,
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
+            ),
+          ],
+        ),
+        Row(
+          children: <({IconData iconData, VoidCallback click})>[
+            (iconData: Icons.star_border, click: onCollect),
+            (iconData: Icons.share, click: onShare),
+            (iconData: Icons.more_horiz, click: onMore),
+          ].map((e) {
+            return InkWell(
+              onTap: e.click,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 12),
+                child: Icon(e.iconData),
+              ) ,
+            );
+          }).toList(),
+        ),
+      ],
+    );
+  }
+
+  void onCollect() {
+    ddlog("onCollect");
+  }
+
+  void onShare() {
+    ddlog("onShare");
+  }
+
+  void onMore() {
+    ddlog("onMore");
+  }
+
+  Widget buildBody({double minChildSize = 0.3}) {
     final height = MediaQuery.of(context).size.height
         - MediaQuery.of(context).viewPadding.top
         - MediaQuery.of(context).viewPadding.bottom
         - kToolbarHeight;
+
+    minChildSize = minExtent;
 
     return SizedBox.expand(
       child: Stack(
@@ -69,26 +175,42 @@ class _DraggableScrollableSheetDemoState extends State<DraggableScrollableSheetD
                 decoration: BoxDecoration(
                   color: Colors.yellowAccent,
                 ),
+                child: Column(
+                  children: [
+                    ...[
+                      MediaQuery.of(context).viewPadding,
+                      kToolbarHeight,
+                    ].map((e) => Text(e.toString())).toList(),
+                  ],
+                ),
               ),
             ),
           ),
-          DraggableScrollableSheet(
-            initialChildSize: minChildSize,
-            minChildSize: minChildSize,
-            maxChildSize: 1,
-            builder: (context, scrollController){
-
-              return Container(
-                color: Colors.green,
-                child: ListView.builder(
-                  controller: scrollController,
-                  itemCount: 20,
-                  itemBuilder: (BuildContext context, int index){
-                    return ListTile(title : Text('Item $index'),);
-                  }
-                ),
-              );
+          NotificationListener<DraggableScrollableNotification>(
+            onNotification: (DraggableScrollableNotification e) {
+              // doing this in setState breaks DraggableScrollableSheet behaviour
+              ddlog("e: $e");
+              extentVN.value = e.extent;
+              return false;
             },
+            child: DraggableScrollableSheet(
+              initialChildSize: minChildSize,
+              minChildSize: minChildSize,
+              maxChildSize: 1,
+              builder: (context, scrollController){
+
+                return Container(
+                  color: Colors.green,
+                  child: ListView.builder(
+                    controller: scrollController,
+                    itemCount: 20,
+                    itemBuilder: (BuildContext context, int index){
+                      return ListTile(title : Text('Item $index'),);
+                    }
+                  ),
+                );
+              },
+            ),
           )
         ],
       ),
