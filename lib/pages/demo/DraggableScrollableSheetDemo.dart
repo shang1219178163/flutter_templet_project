@@ -68,13 +68,14 @@ class _DraggableScrollableSheetDemoState extends State<DraggableScrollableSheetD
            valueListenable: extentVN,
            builder: (context,  value, child){
              var desc = widget.title ?? "$widget";
-             if (value == 1) {
-               desc = "顶部";
-              return buildTopBar().toColoredBox();
-             } else if (value == minExtent) {
+             if (value == minExtent) {
                desc = "底部";
              } else {
                desc = "中间";
+               return Opacity(
+                 opacity: value/1.0,
+                 child: buildTopBar(),
+               );
              }
             return Text(desc, style: TextStyle(fontSize: 15),);
           }
@@ -197,6 +198,7 @@ class _DraggableScrollableSheetDemoState extends State<DraggableScrollableSheetD
               initialChildSize: minChildSize,
               minChildSize: minChildSize,
               maxChildSize: 1,
+              snap: true,      //true：触发滚动则滚动到maxChildSize或者minChildSize，不在跟随手势滚动距离 false:滚动跟随手势滚动距离
               builder: (context, scrollController){
 
                 return Container(

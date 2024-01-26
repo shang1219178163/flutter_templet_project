@@ -111,10 +111,8 @@ class _OverlayDemoOneState extends State<OverlayDemoOne> {
           child: _contentBody(),
           childWhenDragging: Container(), //拖动过程回调
           onDraggableCanceled: (Velocity velocity, Offset offset) {
-            setState(() {
-              //第二个参数为拖动的动态坐标
-              this.offset = offset;
-            });
+            this.offset = offset;
+            setState(() {});
           },
         ),
       );

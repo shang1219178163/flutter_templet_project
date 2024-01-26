@@ -247,16 +247,38 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver, Ap
     ),
   ];
 
+  late AppLifecycleListener _lifecycleListener;
 
   @override
   void dispose() {
-    debugPrint("11");
+    _lifecycleListener.dispose();
     super.dispose();
   }
 
   @override
   void initState() {
     SystemChannels.textInput.invokeMethod('TextInput.hide');
+
+    // _lifecycleListener = AppLifecycleListener(
+    //   onRestart: (){
+    //     ddLog("$widget onRestart - AppLifecycleListener");
+    //   },
+    //   onResume: (){
+    //     ddLog("$widget onResume - AppLifecycleListener");
+    //   },
+    //   onInactive: (){
+    //     ddLog("$widget onInactive - AppLifecycleListener");
+    //   },
+    //   onPause: (){
+    //     ddLog("$widget onPause - AppLifecycleListener");
+    //   },
+    //   onDetach: (){
+    //     ddLog("$widget onDetach - AppLifecycleListener");
+    //   },
+    //   onHide: (){
+    //     ddLog("$widget onHide - AppLifecycleListener");
+    //   },
+    // );
 
     getPackageInfo().then((value){
       CacheService().setString(CACHE_APP_NAME, value.appName);
