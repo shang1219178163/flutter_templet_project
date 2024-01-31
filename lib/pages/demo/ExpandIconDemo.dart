@@ -8,6 +8,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/NExpansionCrossFade.dart';
 import 'package:flutter_templet_project/basicWidget/list_view_segment_control.dart';
 import 'package:flutter_templet_project/basicWidget/NSectionHeader.dart';
 import 'package:flutter_templet_project/basicWidget/n_expansion_tile.dart';
@@ -94,19 +95,34 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
           ),
           NSectionHeader(
             title: "自定义 FoldMenu",
-            child: FoldMenu(
-              children: [
-                Tuple2(List.generate(8, (index) => "item0_$index"), 0),
-                Tuple2(List.generate(8, (index) => "item1_$index"), 1),
-                Tuple2(List.generate(8, (index) => "item2_$index"), 2),
-                Tuple2(List.generate(8, (index) => "item3_$index"), 3),
-                Tuple2(List.generate(8, (index) => "item4_$index"), 4),
-              ],
-              foldCount: 3,
-              isVisible: _isVisible,
-              onValueChanged: (row, index, indexs) {
-                ddlog("$row, $index, $indexs");
-              },
+            child: NExpansionCrossFade(
+              isExpanded: false,
+              expandedChild: FoldMenu(
+                children: [
+                  Tuple2(List.generate(8, (index) => "item0_$index"), 0),
+                  Tuple2(List.generate(8, (index) => "item1_$index"), 1),
+                  Tuple2(List.generate(8, (index) => "item2_$index"), 2),
+                ],
+                foldCount: 2,
+                isVisible: _isVisible,
+                onValueChanged: (row, index, indexs) {
+                  ddlog("$row, $index, $indexs");
+                },
+              ),
+              child: FoldMenu(
+                children: [
+                  Tuple2(List.generate(8, (index) => "item0_$index"), 0),
+                  Tuple2(List.generate(8, (index) => "item1_$index"), 1),
+                  Tuple2(List.generate(8, (index) => "item2_$index"), 2),
+                  Tuple2(List.generate(8, (index) => "item3_$index"), 3),
+                  Tuple2(List.generate(8, (index) => "item4_$index"), 4),
+                ],
+                foldCount: 3,
+                isVisible: _isVisible,
+                onValueChanged: (row, index, indexs) {
+                  ddlog("$row, $index, $indexs");
+                },
+              ),
             ),
           )
         ],
