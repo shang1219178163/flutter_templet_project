@@ -53,6 +53,7 @@ class _NAppBarThemChangeState extends State<NAppBarThemChange> {
         systemOverlayStyle: NSystemOverlayStyle.transparent,
         backgroundColor: Colors.transparent,
         titleTextStyle: const TextStyle(color: Colors.transparent),
+        shadowColor: Colors.transparent,//不加,暗黑模式有灰色阴影
       ),
     );
   }
