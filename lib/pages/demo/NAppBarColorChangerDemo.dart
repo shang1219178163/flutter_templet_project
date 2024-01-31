@@ -73,6 +73,7 @@ class _NAppBarColorChangerDemoState extends State<NAppBarColorChangerDemo> {
       controller: _scrollController,
       child: SingleChildScrollView(
         controller: _scrollController,
+        physics: ClampingScrollPhysics(),
         child: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
@@ -83,8 +84,17 @@ class _NAppBarColorChangerDemoState extends State<NAppBarColorChangerDemo> {
           child: Column(
             children: [
               ...indexs.map((e) {
-                return ListTile(
-                  title: Text("row_$e"),
+                return Column(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                      child: ListTile(
+                        leading: FlutterLogo(size: 48,),
+                        title: Text("row_$e"),
+                      ),
+                    ),
+                    Divider(indent: 48 + 12 * 2,),
+                  ],
                 );
               }).toList(),
             ]
