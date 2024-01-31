@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 
-class NAppBarColorChanger extends StatefulWidget {
-  const NAppBarColorChanger({
+/// appBar 主题随滚动改变组件
+class NAppBarThemChange extends StatefulWidget {
+  const NAppBarThemChange({
     super.key,
     this.offsetY = 190,
     required this.child,
@@ -26,10 +27,10 @@ class NAppBarColorChanger extends StatefulWidget {
   final Widget child;
 
   @override
-  State<NAppBarColorChanger> createState() => _NAppBarColorChangerState();
+  State<NAppBarThemChange> createState() => _NAppBarThemChangeState();
 }
 
-class _NAppBarColorChangerState extends State<NAppBarColorChanger> {
+class _NAppBarThemChangeState extends State<NAppBarThemChange> {
 
   late bool noDefault = !widget.isDefault;
 

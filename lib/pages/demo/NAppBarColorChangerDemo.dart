@@ -33,7 +33,7 @@ class _NAppBarColorChangerDemoState extends State<NAppBarColorChangerDemo> {
 
   @override
   Widget build(BuildContext context) {
-    return NAppBarColorChanger(
+    return NAppBarThemChange(
       child: Scaffold(
         backgroundColor: Colors.black12,
         extendBodyBehindAppBar: true,

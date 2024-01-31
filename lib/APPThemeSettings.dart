@@ -41,7 +41,7 @@ class APPThemeService {
     materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
     dividerTheme: const DividerThemeData(
       color: Color(0xFFE4E4E4),
-      space: 1,
+      space: 0.5,
       thickness: 1,
     ),
     badgeTheme: const BadgeThemeData(
