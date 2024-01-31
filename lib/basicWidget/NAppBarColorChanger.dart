@@ -6,18 +6,22 @@ import 'package:flutter_templet_project/extension/build_context_ext.dart';
 class NAppBarColorChanger extends StatefulWidget {
   const NAppBarColorChanger({
     super.key,
-    this.yThresholdOffset = 30,
+    this.offsetY = 190,
     required this.child,
-    this.scrollToDark = false,
+    this.isDefault = false,
+    this.defaultThemeData,
+    this.themeData,
   });
 
-  /// y轴阈值
-  ///
-  /// 页面滚动达到此阈值会触发配色方案变化
-  final double yThresholdOffset;
+  /// y偏移量,页面滚动达到此偏移量会触发配色方案变化
+  final double offsetY;
 
-  /// 由浅入深
-  final bool scrollToDark;
+  /// 默认导航栏颜色
+  final bool isDefault;
+
+  final ThemeData? defaultThemeData;
+
+  final ThemeData? themeData;
 
   final Widget child;
 
@@ -26,27 +30,14 @@ class NAppBarColorChanger extends StatefulWidget {
 }
 
 class _NAppBarColorChangerState extends State<NAppBarColorChanger> {
-  late bool light;
 
-  bool comingLight(ScrollNotification notification) {
-    return notification.metrics.pixels < widget.yThresholdOffset;
-  }
+  late bool noDefault = !widget.isDefault;
 
   @override
   void initState() {
-    light = !widget.scrollToDark;
     super.initState();
   }
 
-  bool _listener(ScrollNotification notification) {
-    bool comingLight(ScrollNotification notification) =>
-        notification.metrics.pixels < widget.yThresholdOffset;
-
-    if (light != comingLight(notification)) {
-      setState(() => light = !light);
-    }
-    return true;
-  }
 
   ThemeData get _transparentThemeData {
     return Theme.of(context).copyWith(
@@ -109,13 +100,24 @@ class _NAppBarColorChangerState extends State<NAppBarColorChanger> {
 
   @override
   Widget build(BuildContext context) {
+    final data = noDefault ? (widget.themeData ?? _transparentThemeData) : (widget.defaultThemeData ?? _whiteThemeData);
+
     return NotificationListener<ScrollNotification>(
-      onNotification: _listener,
+      onNotification: onNotification,
       child: Theme(
-        data: light ? _transparentThemeData : _whiteThemeData,
+        data: data,
         child: widget.child,
       ),
     );
+  }
+
+  bool onNotification(ScrollNotification notification) {
+    final noChange = notification.metrics.pixels < widget.offsetY;
+    if (noDefault != noChange) {
+      noDefault = !noDefault;
+      setState(() {});
+    }
+    return true;
   }
 }
 

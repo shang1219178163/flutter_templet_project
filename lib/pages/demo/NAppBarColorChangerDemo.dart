@@ -68,7 +68,7 @@ class _NAppBarColorChangerDemoState extends State<NAppBarColorChangerDemo> {
   }
 
   buildBody() {
-    var indexs = List<int>.generate(20, (index) => index);
+    var indexs = List<int>.generate(30, (index) => index);
     return Scrollbar(
       controller: _scrollController,
       child: SingleChildScrollView(
