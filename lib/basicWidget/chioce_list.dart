@@ -114,7 +114,7 @@ class _ChioceListState extends State<ChioceList> {
             color: Color(0xFFe4e4e4),
           );
         },
-      ).addCupertinoScrollbar(),
+      ).toCupertinoScrollbar(),
     );
   }
 

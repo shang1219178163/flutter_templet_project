@@ -519,7 +519,7 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
             color: Color(0xFFe4e4e4),
           );
         },
-      ).addCupertinoScrollbar(),
+      ).toCupertinoScrollbar(),
     );
   }
 

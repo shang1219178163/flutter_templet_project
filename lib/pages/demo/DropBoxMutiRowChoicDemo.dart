@@ -681,7 +681,7 @@ selectedModels: ${item.selectedModels.map((e) => e.name).toList()},""");
             color: Color(0xFFe4e4e4),
           );
         },
-      ).addCupertinoScrollbar(),
+      ).toCupertinoScrollbar(),
     );
   }
 
