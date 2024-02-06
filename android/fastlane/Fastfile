@@ -1,0 +1,171 @@
+
+# fastlane_version "2.112.0"
+default_platform :android
+
+platform :android do
+
+  #firim token
+  FirToken = "3c17b06506821b9e4ef15cf8746f6a2f"
+  #蒲同英
+  PgyerApiKey = "8317d5a6d40a0b60a2cce12b794863b2"
+
+  # project_dir = 'android/'
+
+  ## Common
+  desc "打包, type: Release"
+  private_lane :build do |options|
+    gradle(
+      task: 'assemble',
+      build_type: options[:type] || 'Release',
+      # project_dir: project_dir,
+    )
+  end
+
+
+  desc "上传 develop 版本, to: pgy/fir"
+  lane :develop do |options|
+    #默认env文件    
+    platform = options[:to]
+    platform = platform ? platform : "pgy"
+
+    type = options[:type] || 'Release'
+    build(type: type)
+    filePath = rename(type: type);
+
+    if platform.start_with?"pgy"
+      uploadPgyer(filePath: filePath)
+    else
+      uploadFir(filePath: filePath)
+    end
+  
+  end
+
+
+
+  desc "上传到 firim"
+  def uploadFir(filePath: String, firToken: FirToken)
+    response = firim(
+      firim_api_token: firToken, 
+      icon: ENV["App_Icon_Local"], 
+      apk: filePath
+    )
+    UI.message "firim response: #{response.to_json}"
+    # handleDingTalk(name: name, ipaDir: ipaDir, downloadUrl: ENV["Firim_Shortcut_Link"])
+  end
+
+
+  desc "上传到 Pgyer"
+  def uploadPgyer(filePath: String, apiKey: PgyerApiKey)
+    # uploadtime = Time.now.strftime("%Y%m%d%H%M")
+    uploadtime = Time.now.strftime("%Y-%m-%d %H:%M:%S")
+
+    response = pgyer(
+      api_key: apiKey, 
+      # update_description: "fastlane自动打包上传测试 pgyer",  
+      update_description: "#{uploadtime}", 
+      install_type: "1",
+      apk: filePath,
+    )
+
+    UI.message "pgyer response: #{response.to_json}"
+    UI.message "pgyer buildQRCodeURL: #{response["buildQRCodeURL"]}".blue
+
+    handleDingTalk(
+      filePath: filePath, 
+      downloadUrl: response["fastlaneAddedWholeVisitUrl"], 
+      qrcodeURL: response["buildQRCodeURL"]
+    )
+  end
+
+
+  desc "webhook 钉钉"
+  def handleDingTalk(filePath: String, downloadUrl: String, qrcodeURL: String)
+    params = {appPath: filePath,
+              appIcon: qrcodeURL,
+              dingUrl: ENV["Dingtalk_Url"],
+              slogan: ENV["APP_Slogan"],
+              downloadUrl: downloadUrl,
+              }
+              
+    UI.message "handleDingTalk: #{params.to_json}".blue
+    dingdingtalk_robot(params)
+  end
+
+
+  desc "rename"
+  def rename(type: 'Release')
+    fileName = getName();
+    UI.message "fileName: #{fileName}"
+
+    current = getProjectDir();
+
+
+    apkDir = "#{current}/build/app/outputs/flutter-apk"
+    apkPath = "#{apkDir}/app-#{type.downcase}.apk"
+    apkPathNew = "#{apkDir}/#{fileName}.apk"
+
+    sh("mv #{apkPath} #{apkPathNew}")
+
+    ipaDir = ENV["IpaDir_Development"]
+    ipaPath = "#{ipaDir}/#{fileName}.apk"
+    sh("mv #{apkPathNew} #{ipaPath}")
+    return ipaPath;
+  end
+
+
+  desc "getName"
+  def getName()
+    current = getProjectDir();
+    UI.message "current: #{current}"
+
+    yaml_path = File.join(current, "pubspec.yaml");
+    result = yaml_from_path(path: yaml_path);
+    name = result["name"]
+    version = result["version"].split("+")[0]
+    UI.message "version: #{version}"
+
+    time = Time.now.strftime("%Y-%m-%d-%H-%M-%S")
+    fileName="#{name}_v#{version}_#{time}"
+    return fileName;
+  end
+
+
+  desc "getProjectDir"
+  def getProjectDir()
+    current = Dir.pwd;
+    current = File.expand_path("..", current);
+    current = File.expand_path("..", current);
+
+    UI.message "#{__method__}: #{current}"
+    return current;
+  end
+
+
+  desc "测试"
+  lane :test do
+
+    current = getProjectDir();
+    UI.message "current: #{current}"
+
+  end
+
+
+  # You can define as many lanes as you want
+  after_all do |lane|
+
+  end
+
+  error do |lane, exception|
+
+  end
+end
+
+
+# More information about multiple platforms in fastlane: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Platforms.md
+# All available actions: https://docs.fastlane.tools/actions
+
+# fastlane reports which actions are used. No personal data is recorded.
+# Learn more at https://github.com/fastlane/fastlane#metrics
+
+
+# fastlane ios developupload to: pgy

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="fastlane.lanes">
+    
+    
+    
+      
+      <testcase classname="fastlane.lanes" name="0: default_platform" time="0.000671">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="1: Switch to android build lane" time="0.000201">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="2: assembleRelease" time="14.410921">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="3: yaml_from_path" time="0.034317">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="4: mv /Users/shang/yl/yl_health_app_副本/build/app/outputs/flutter-apk/app-release.apk /Users/shang/yl/yl_health_app_副本/build/app/outputs/flutter-apk/yl_health_app_v2.0.4_2024-02-06-20-12-00.apk" time="0.007225">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="5: mv /Users/shang/yl/yl_health_app_副本/build/app/outputs/flutter-apk/yl_health_app_v2.0.4_2024-02-06-20-12-00.apk /Users/shang/yl/ipa_development/yl_health_app_v2.0.4_2024-02-06-20-12-00.apk" time="0.006875">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="6: pgyer" time="32.45002">
+        
+      </testcase>
+    
+  </testsuite>
+</testsuites>
