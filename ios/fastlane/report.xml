@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="fastlane.lanes">
+    
+    
+    
+      
+      <testcase classname="fastlane.lanes" name="0: default_platform" time="0.000318">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="1: plist_from_path" time="0.000497">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="2: update_build" time="0.034203">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="3: gym" time="289.016433">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="4: fastlane developupload to:pgy" time="26.226102">
+        
+      </testcase>
+    
+  </testsuite>
+</testsuites>

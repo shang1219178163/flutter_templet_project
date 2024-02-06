@@ -1,0 +1,8 @@
+
+apple_id ENV["Apple_Id"]
+app_identifier ENV["App_Identifier"]
+
+itc_team_name ENV["Itc_Team_Name"]
+itc_team_id ENV["Itc_Team_Id"]
+
+team_id ENV["Team_Id"]

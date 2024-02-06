@@ -1,0 +1,303 @@
+
+# fastlane_version "2.112.0"
+default_platform :ios
+
+platform :ios do
+
+  #firim token
+  FirToken = "*"
+  #蒲同英
+  PgyerApiKey = "*"
+
+
+  ## Common
+  desc "打包 release 版本, to: pgy/fir/release"
+  lane :release do |options|
+    #默认env文件
+    archiveRelease()
+    
+    platform = options[:to]
+    platform = platform ? platform : "release"
+
+    sh "fastlane releaseupload to:#{platform}"
+  end
+
+
+  desc "上传 release 版本, to: pgy/fir/release"
+  lane :releaseupload do |options|
+    #默认env文件    
+    platform = options[:to]
+    platform = platform ? platform : "rel"
+    
+    if platform.start_with?"rel" 
+      uploadRelease(ipaDir: ENV["IpaDir_AppStore"])
+    elsif platform.start_with?"fir" 
+      uploadFir(ipaDir: ENV["IpaDir_AppStore"])
+    else
+      uploadPgyer(ipaDir: ENV["IpaDir_AppStore"])
+    end
+  
+  end
+
+
+  desc "打包 development 版本, to: pgy/fir"
+  lane :develop do |options|
+    #默认env文件
+    archiveDevelopment() 
+
+    platform = options[:to]
+    platform = platform ? platform : "pgy"
+
+    sh "fastlane developupload to:#{platform}"
+  end
+
+
+  desc "上传 develop 版本, to: pgy/fir"
+  lane :developupload do |options|
+    #默认env文件    
+    platform = options[:to]
+    platform = platform ? platform : "pgy"
+
+    if platform.start_with?"fir" 
+      uploadFir()
+    else
+      uploadPgyer()
+    end
+  
+  end
+
+
+  desc "[通用]发布新版本到 AppStore"
+  def archiveRelease(name: ENV["Scheme_Name"], ipaDir: ENV["IpaDir_AppStore"])
+    clear_cache_files()
+    # cocoapods()
+    updateBuildVersion(showHash: false)
+    gym(
+      output_directory: ipaDir,
+      scheme: name,
+      export_method: 'app-store',
+      export_options: {
+        xcargs: "-allowProvisioningUpdates",
+        iCloudContainerEnvironment: 'Production',
+        provisioningProfiles:{
+          "com.yilian.ylHealthApp" => "health_prod",
+        }
+      }
+    )
+  end
+
+
+  desc "[通用]发布新版本到 AppStore"
+  def uploadRelease(name: ENV["Scheme_Name"], ipaDir: ENV["IpaDir_AppStore"])
+    deliver(force: true,
+      # ipa: "/Users/shang/ACS/access-admin-app-ios/ipa_appStore/AccessControlSystem.ipa",
+      ipa: "#{ipaDir}/#{name}.ipa",
+      metadata_path: ENV["Metadata_Path"], 
+      screenshots_path: ENV["Screenshots_Path"], 
+    )
+    # system "open #{ipaDir}"
+    handleDingTalk(name: name, ipaDir: ipaDir, downloadUrl: ENV["App_Store_Link"])
+  end 
+
+
+  desc "[通用]发布新版本到 fir"
+  def archiveDevelopment(name: ENV["Scheme_Name"], ipaDir: ENV["IpaDir_Development"])
+    updateBuildVersion(showHash: false)
+    gym(
+      clean: false,
+      include_symbols: true,
+      output_directory: ipaDir,
+      scheme: name,
+      # configuration: 'Debug',
+      configuration: 'Release',
+      export_method: 'development',
+      export_options: {
+        method: 'development',
+        iCloudContainerEnvironment: 'Development',
+        provisioningProfiles:{
+          "com.yilian.ylHealthApp" => "health_dev",
+        }
+      }
+    )
+  end
+
+
+  desc "上传ipad 到 firim"
+  def uploadFir(name: ENV["Scheme_Name"], ipaDir: ENV["IpaDir_Development"], firToken: FirToken)
+    firim(firim_api_token: firToken, icon: ENV["App_Icon_Local"], ipa: "#{ipaDir}/#{name}.ipa")
+    handleDingTalk(name: name, ipaDir: ipaDir, downloadUrl: ENV["Firim_Shortcut_Link"])
+  end
+
+
+  desc "上传ipad 到 Pgyer"
+  def uploadPgyer(name: ENV["Scheme_Name"], ipaDir: ENV["IpaDir_Development"], apiKey: PgyerApiKey)
+    # uploadtime = Time.now.strftime("%Y%m%d%H%M")
+    uploadtime = Time.now.strftime("%Y-%m-%d %H:%M:%S")
+
+    response = pgyer(api_key: apiKey, 
+      # update_description: "fastlane自动打包上传测试 pgyer",  
+      update_description: "#{uploadtime}", 
+      install_type: "1",
+      ipa: "#{ipaDir}/#{name}.ipa",
+    )
+    puts "pgyer response: #{response.to_json}"
+    puts "pgyer buildQRCodeURL: #{response["buildQRCodeURL"]}"
+
+    # handleDingTalk(name: name, ipaDir: ipaDir, downloadUrl: ENV["Pgyer_Shortcut_Link"], qrcodeURL: response["buildQRCodeURL"])
+  end
+
+
+  desc "更新BuildVersion"
+  def updateBuildVersion(name: ENV["Scheme_Name"], showHash: true)
+    plistDir = File.dirname(Dir.pwd)
+    puts "plist所在目录：_#{plistDir}_"
+
+    case name
+    when "IntelligentOfParkingOne"
+      plistFile = plist_from_path(path: "#{plistDir}/#{name}/#{name}-Info.plist")
+
+    else
+      plistFile = plist_from_path(path: "#{plistDir}/#{name}/*Info.plist")
+
+    end
+
+    puts "plistFile：_#{plistFile}_"
+    update_build({plist: plistFile, showHash: showHash})
+  end
+
+
+  desc "webhook 钉钉"
+  def handleDingTalk(name: ENV["Scheme_Name"], ipaDir: ENV["IpaDir_Development"], downloadUrl: ENV["Firim_Shortcut_Link"], qrcodeURL: ENV["Firim_Shortcut_Link"])
+    appPath = ipaDir + "/#{name}.ipa" 
+    params = {appPath: appPath,
+              # appIcon: ENV["App_Icon_Link"],
+              appIcon: qrcodeURL,
+              dingUrl: ENV["Dingtalk_Url"],
+              slogan: ENV["APP_Slogan"],
+              downloadUrl: downloadUrl,
+              }
+    puts "---#{params.to_json}--"
+    dingdingtalk_robot(params)
+  end
+
+
+  desc "推送通知到slack"
+  def handleDingSlack(name: ENV["Scheme_Name"], ipaDir: ENV["IpaDir_Development"], downloadUrl: ENV["Firim_Shortcut_Link"])
+    appPath = ipaDir + "/#{name}.ipa" 
+    params = {appPath: appPath,
+              appIcon: ENV["App_Icon_Link"],
+              slackUrl: ENV["Slack_Url"],
+              slogan: ENV["APP_Slogan"],  
+              downloadUrl: downloadUrl           
+              }
+    puts "---#{params.to_json}--"
+    dingslack_robot(params)
+  end
+
+  # desc("increase the current_project_version config based on configuration")
+  # lane :increase_build do |option|
+      
+  #   fastlane_require 'Xcodeproj'
+    
+  #   project = "Runner/#{urProjectName.xcodeproj}"
+  #   target = "Runner"
+  #   buildConfiguration = <#release_configuration_name#> 
+  #   CUSTOM_BUILD_NUMBER = "#{Time.now.strftime("%Y%m%d%H%M")}"
+
+  #   project = Xcodeproj::Project.open(project)
+  #   project.targets.each do |mtarget|
+  #       if mtarget.name == target
+  #           mtarget.build_configurations.each do |mbuild|
+  #               if mbuild.name == buildConfiguration
+  #                   CUSTOM_BUILD_NUMBER = mbuild.build_settings['CURRENT_PROJECT_VERSION']
+  #                   mbuild.build_settings['CURRENT_PROJECT_VERSION'] = CUSTOM_BUILD_NUMBER.to_i + 1
+  #               end
+  #           end
+  #       end
+  #   end
+  #   project.save()
+  # end
+
+
+  desc "测试"
+  lane :test do
+    # clear_cache_files()
+    # puts "user name is: #{`whoami`}"  
+
+    # account = "#{`whoami`}".delete "\n"
+    # tokenfiles = "/Users/#{account}/Library/Caches/com.apple.amp.itmstransporter/UploadTokens/*.token"
+    # UI.message "Token: #{tokenfiles}"
+    
+    # handleDingSlack()
+    # handleDingTalk()
+  end
+
+
+  desc "archive sign: develop/release, to: pgy/fir/release, target: A/B/C"
+  lane :archive do |options|
+    # puts "-#{options}-"
+
+    sign = options[:sign]
+    platform = options[:to]
+    target = options[:target]
+
+    sign = sign ? sign : "develop"
+    platform = platform ? platform : "pgy"
+    targetInfo = target ? "--env target#{target.capitalize}" : ""
+
+    if sign != ""
+      if sign.start_with?"rel" 
+        sh "fastlane release to:#{platform} #{targetInfo}"
+      else
+        sh "fastlane develop to:#{platform} #{targetInfo}"
+      end
+    end
+
+    if platform != "" 
+      sh "fastlane upload to:#{platform} #{targetInfo}"
+    end
+      
+  end
+
+ 
+  desc "upload sign: develop/release, to:pgy/fir/release, target: A/B/C"
+  lane :upload do |options|
+    # puts "-#{options}-"
+
+    sign = options[:sign]
+    platform = options[:to]
+    target = options[:target]
+
+    sign = sign ? sign : "develop"
+    platform = platform ? platform  : "pgy"
+    targetInfo = target ? "--env target#{target.capitalize}" : ""
+    # puts "_#{sign}_#{platform}_#{target}_#{targetInfo}_"
+
+    if sign.start_with?"rel" 
+      sh "fastlane releaseupload to:#{platform} #{targetInfo}"
+    else
+      sh "fastlane developupload to:#{platform} #{targetInfo}"
+    end
+      
+  end
+
+
+  # You can define as many lanes as you want
+  after_all do |lane|
+
+  end
+
+  error do |lane, exception|
+
+  end
+end
+
+
+# More information about multiple platforms in fastlane: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Platforms.md
+# All available actions: https://docs.fastlane.tools/actions
+
+# fastlane reports which actions are used. No personal data is recorded.
+# Learn more at https://github.com/fastlane/fastlane#metrics
+
+
+# fastlane ios developupload to: pgy

@@ -5,9 +5,9 @@ default_platform :android
 platform :android do
 
   #firim token
-  FirToken = "3c17b06506821b9e4ef15cf8746f6a2f"
+  FirToken = "*"
   #蒲同英
-  PgyerApiKey = "8317d5a6d40a0b60a2cce12b794863b2"
+  PgyerApiKey = "*"
 
   # project_dir = 'android/'
 
