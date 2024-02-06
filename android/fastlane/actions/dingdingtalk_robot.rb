@@ -44,7 +44,7 @@ module Fastlane
         # end
         
         markdownText = "#{markdownText}\n
-版  本：#{appVersion}\n
+版  本：v#{appVersion}\n
 地  址：#{downloadUrl}\n
 时  间：#{time}\n
 ![](#{appIcon})"

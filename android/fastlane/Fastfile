@@ -140,7 +140,7 @@ platform :android do
     result = yaml_from_path(path: yaml_path);
     name = result["name"]
     version = result["version"].split("+")[0]
-    return version;
+    return version
   end
 
 
