@@ -79,7 +79,7 @@ class NBadge extends StatelessWidget {
       child: Text(
         badgeStr,
         style: TextStyle(
-          fontSize: 13.sp,
+          fontSize: 13,
           color: Colors.white,
         ),
       ),

@@ -6,6 +6,7 @@
 //  Copyright © 10/14/21 shang. All rights reserved.
 //
 
+import 'dart:io';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 
@@ -102,7 +103,9 @@ extension BuildContextExt on BuildContext {
   /// 安全区域距离顶部高度(电池栏高度:有刘海的屏幕:47 没有刘海的屏幕为20)
   double get safeAreaTop => mediaQuery.viewPadding.top;
   /// 安全区域底部高度(有刘海的屏幕:34 没有刘海的屏幕0)
-  double get safeAreaBottom => mediaQuery.viewPadding.bottom;
+  // double get safeAreaBottom => mediaQuery.viewPadding.bottom;
+  double get safeAreaBottom => Platform.isIOS ? 34 : mediaQuery.padding.bottom + 10;
+
   /// 安全区高度(去除电池栏高度和 iphone底部34)
   double get safeAreaHeight => mediaQuery.size.height
       - mediaQuery.viewPadding.top

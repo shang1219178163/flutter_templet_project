@@ -81,8 +81,8 @@ class _DraggableScrollableSheetDemoState extends State<DraggableScrollableSheetD
           }
         ),
       ),
-      body: buildBody(),
-      // body: buildBody1(),
+      // body: buildBody(),
+      body: buildBody1(),
     );
   }
 
@@ -238,7 +238,13 @@ class _DraggableScrollableSheetDemoState extends State<DraggableScrollableSheetD
                 controller: scrollController,
                 itemCount: 25,
                 itemBuilder: (BuildContext context, int index) {
-                  return ListTile(title: Text('Item $index'));
+                  return Container(
+                    height: 75,
+                    child: ListTile(
+                      leading: FlutterLogo(size: 48,),
+                      title: Text('Item $index')
+                    )
+                  );
                 },
               ),
             );
