@@ -352,9 +352,8 @@ var list = <Tuple2<String, String>>[
   Tuple2(APPRouter.alertSheetDemo, "AlertSheet", ),
   Tuple2(APPRouter.appWebViewDemo, "appWebViewDemo", ),
   Tuple2(APPRouter.builderDemo, "builderDemo", ),
-
+  Tuple2(APPRouter.badgeDemo, "badgeDemo", ),
   Tuple2(APPRouter.backdropFilterDemo, "backdropFilterDemo", ),
-
   Tuple2(APPRouter.cupertinoTabScaffoldDemo, "CupertinoTabScaffoldDemo", ),
   Tuple2(APPRouter.cupertinoFormDemo, "cupertinoFormDemo", ),
   Tuple2(APPRouter.contextMenuActionDemo, "cupertinoFormDemo", ),

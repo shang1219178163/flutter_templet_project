@@ -25,6 +25,7 @@ import 'package:flutter_templet_project/pages/demo/APIConvertPage.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedSizeDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedSizeDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/AppBarDemo.dart';
+import 'package:flutter_templet_project/pages/demo/BadgeDemo.dart';
 import 'package:flutter_templet_project/pages/demo/CompositedTransformTargetDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ContextMenuDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DrawCanvasDemo.dart';
@@ -540,6 +541,7 @@ class APPRouter {
   static const stackDemoOne = '/stackDemoOne';
   static const stackDemoTwo = '/stackDemoTwo';
 
+  static const badgeDemo = '/badgeDemo';
   static const badgesDemo = '/badgesDemo';
   static const flutterSwiperDemo = '/flutterSwiperDemo';
   static const flutterSwiperIndicatorDemo = '/flutterSwiperIndicatorDemo';
@@ -932,7 +934,7 @@ class AppPage {
     GetPage(name: APPRouter.stackDemoOne, page: () => StackDemoOne(),),
     GetPage(name: APPRouter.stackDemoTwo, page: () => StackDemoTwo(),),
 
-
+    GetPage(name: APPRouter.badgeDemo, page: () => BadgeDemo(),),
     GetPage(name: APPRouter.badgesDemo, page: () => BadgesDemo(),),
     GetPage(name: APPRouter.flutterSwiperDemo, page: () => FlutterSwiperDemo(),),
     GetPage(name: APPRouter.flutterSwiperIndicatorDemo, page: () => FlutterSwiperIndicatorDemo(),),
