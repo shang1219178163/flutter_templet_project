@@ -11,29 +11,23 @@ module Fastlane
         # sh "shellcommand ./path"
         # Actions.lane_context[SharedValues::DINGDINGTALK_ROBOT_CUSTOM_VALUE] = "my_val"
         appPath = params[:appPath]
+        appName = params[:appName]
+        appVersion = params[:appVersion]
         appIcon = params[:appIcon]
         dingUrl = params[:dingUrl]
         downloadUrl = params[:downloadUrl]
         slogan = params[:slogan]
         markdownText = params[:markdownText]
 
-        appName    = other_action.get_ipa_info_plist_value(ipa: appPath, key: "CFBundleDisplayName")
-        bundleName = other_action.get_ipa_info_plist_value(ipa: appPath, key: "CFBundleBundleName")
-        appVersion = other_action.get_ipa_info_plist_value(ipa: appPath, key: "CFBundleShortVersionString")
-        appBuild   = other_action.get_ipa_info_plist_value(ipa: appPath, key: "CFBundleVersion")
-        ipaName    = other_action.get_ipa_info_plist_value(ipa: appPath, key: "CFBundleName")#备用
-
-        appName = appName.empty? == false ? appName : bundleName
-
         platformInfo = "已更新至 #{downloadUrl.split(".")[1].capitalize} 啦！"
-        title = "iOS #{appName} v#{appVersion} #{platformInfo}"
+        title = "Andriod #{appName} v#{appVersion} #{platformInfo}"
         time = Time.new.strftime("%Y-%m-%d %H:%M:%S")
 
         # markdown ={
         #   msgtype: "link",
         #   link: {
         #       title: title,
-        #       text: "版  本：#{appBuild}\n地  址：#{downloadUrl}\n时  间：#{time}",
+        #       text: "版  本：#{appVersion}\n地  址：#{downloadUrl}\n时  间：#{time}",
         #       picUrl: "#{appIcon}",
         #       messageUrl: "#{downloadUrl}"
         #   }
@@ -50,7 +44,7 @@ module Fastlane
         # end
         
         markdownText = "#{markdownText}\n
-版  本：#{appBuild}\n
+版  本：#{appVersion}\n
 地  址：#{downloadUrl}\n
 时  间：#{time}\n
 ![](#{appIcon})"
@@ -97,6 +91,14 @@ module Fastlane
                                   description: "ipa文件所在的文件夹路径",
                                      optional: false,
                                          type: String),
+            FastlaneCore::ConfigItem.new(key: :appName,
+                                  description: "app 名称",
+                                      optional: false,
+                                          type: String),
+            FastlaneCore::ConfigItem.new(key: :appVersion,
+                                  description: "app 版本",
+                                      optional: false,
+                                          type: String),
              FastlaneCore::ConfigItem.new(key: :downloadUrl,
                                   description: "fir的ipa文件下载网址",
                                      optional: false,

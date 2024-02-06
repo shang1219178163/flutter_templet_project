@@ -12,7 +12,7 @@ platform :android do
   # project_dir = 'android/'
 
   ## Common
-  desc "打包, type: Release"
+  desc "打包 development 版本, to: pgy/fir"
   private_lane :build do |options|
     gradle(
       task: 'assemble',
@@ -24,7 +24,7 @@ platform :android do
 
   desc "上传 develop 版本, to: pgy/fir"
   lane :develop do |options|
-    #默认env文件    
+    #默认env文件
     platform = options[:to]
     platform = platform ? platform : "pgy"
 
@@ -37,16 +37,14 @@ platform :android do
     else
       uploadFir(filePath: filePath)
     end
-  
   end
 
 
-
-  desc "上传到 firim"
+  desc "上传ipad 到 firim"
   def uploadFir(filePath: String, firToken: FirToken)
     response = firim(
-      firim_api_token: firToken, 
-      icon: ENV["App_Icon_Local"], 
+      firim_api_token: firToken,
+      icon: ENV["App_Icon_Local"],
       apk: filePath
     )
     UI.message "firim response: #{response.to_json}"
@@ -54,15 +52,15 @@ platform :android do
   end
 
 
-  desc "上传到 Pgyer"
+  desc "上传ipad 到 Pgyer"
   def uploadPgyer(filePath: String, apiKey: PgyerApiKey)
     # uploadtime = Time.now.strftime("%Y%m%d%H%M")
     uploadtime = Time.now.strftime("%Y-%m-%d %H:%M:%S")
 
     response = pgyer(
-      api_key: apiKey, 
-      # update_description: "fastlane自动打包上传测试 pgyer",  
-      update_description: "#{uploadtime}", 
+      api_key: apiKey,
+      # update_description: "fastlane自动打包上传测试 pgyer",
+      update_description: "#{uploadtime}",
       install_type: "1",
       apk: filePath,
     )
@@ -71,8 +69,8 @@ platform :android do
     UI.message "pgyer buildQRCodeURL: #{response["buildQRCodeURL"]}".blue
 
     handleDingTalk(
-      filePath: filePath, 
-      downloadUrl: response["fastlaneAddedWholeVisitUrl"], 
+      filePath: filePath,
+      downloadUrl: response["fastlaneAddedWholeVisitUrl"],
       qrcodeURL: response["buildQRCodeURL"]
     )
   end
@@ -80,13 +78,17 @@ platform :android do
 
   desc "webhook 钉钉"
   def handleDingTalk(filePath: String, downloadUrl: String, qrcodeURL: String)
+    appVersion = getVersion()
+
     params = {appPath: filePath,
+              appName: ENV["app_name"],
+              appVersion: appVersion,
               appIcon: qrcodeURL,
               dingUrl: ENV["Dingtalk_Url"],
               slogan: ENV["APP_Slogan"],
               downloadUrl: downloadUrl,
               }
-              
+
     UI.message "handleDingTalk: #{params.to_json}".blue
     dingdingtalk_robot(params)
   end
@@ -127,6 +129,18 @@ platform :android do
     time = Time.now.strftime("%Y-%m-%d-%H-%M-%S")
     fileName="#{name}_v#{version}_#{time}"
     return fileName;
+  end
+
+  desc "getVersion"
+  def getVersion()
+    current = getProjectDir();
+    UI.message "current: #{current}"
+
+    yaml_path = File.join(current, "pubspec.yaml");
+    result = yaml_from_path(path: yaml_path);
+    name = result["name"]
+    version = result["version"].split("+")[0]
+    return version;
   end
 
 
