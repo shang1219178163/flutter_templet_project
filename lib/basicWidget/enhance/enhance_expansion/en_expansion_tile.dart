@@ -68,9 +68,7 @@ class EnExpansionTile extends StatefulWidget {
     this.iconColor,
     this.collapsedIconColor,
     this.controlAffinity,
-  }) : assert(initiallyExpanded != null),
-        assert(maintainState != null),
-        assert(
+  }) : assert(
         expandedCrossAxisAlignment != CrossAxisAlignment.baseline,
         'CrossAxisAlignment.baseline is not supported since the expanded children '
             'are aligned in a column, not a row. Try to use another constant.',
@@ -307,9 +305,10 @@ class _EnExpansionTileState extends State<EnExpansionTile> with SingleTickerProv
     _iconColor = _controller.drive(_iconColorTween.chain(_easeInTween));
     _backgroundColor = _controller.drive(_backgroundColorTween.chain(_easeOutTween));
 
-    _isExpanded = PageStorage.of(context)?.readState(context) as bool? ?? widget.initiallyExpanded;
-    if (_isExpanded)
+    _isExpanded = PageStorage.of(context).readState(context) as bool? ?? widget.initiallyExpanded;
+    if (_isExpanded) {
       _controller.value = 1.0;
+    }
   }
 
   @override
@@ -325,14 +324,15 @@ class _EnExpansionTileState extends State<EnExpansionTile> with SingleTickerProv
         _controller.forward();
       } else {
         _controller.reverse().then<void>((void value) {
-          if (!mounted)
+          if (!mounted) {
             return;
+          }
           setState(() {
             // Rebuild without widget.children.
           });
         });
       }
-      PageStorage.of(context)?.writeState(context, _isExpanded);
+      PageStorage.of(context).writeState(context, _isExpanded);
     });
     widget.onExpansionChanged?.call(_isExpanded);
   }
@@ -356,20 +356,22 @@ class _EnExpansionTileState extends State<EnExpansionTile> with SingleTickerProv
   }
 
   Widget? _buildLeadingIcon(BuildContext context) {
-    if (_effectiveAffinity(widget.controlAffinity) != ListTileControlAffinity.leading)
+    if (_effectiveAffinity(widget.controlAffinity) != ListTileControlAffinity.leading) {
       return null;
+    }
     return _buildIcon(context);
   }
 
   Widget? _buildTrailingIcon(BuildContext context) {
-    if (_effectiveAffinity(widget.controlAffinity) != ListTileControlAffinity.trailing)
+    if (_effectiveAffinity(widget.controlAffinity) != ListTileControlAffinity.trailing) {
       return null;
+    }
     return _buildIcon(context);
   }
 
   Widget _buildChildren(BuildContext context, Widget? child) {
-    final ExpansionTileThemeData expansionTileTheme = ExpansionTileTheme.of(context);
-    final Color borderSideColor = _borderColor.value ?? Colors.transparent;
+    final expansionTileTheme = ExpansionTileTheme.of(context);
+    final borderSideColor = _borderColor.value ?? Colors.transparent;
 
     return ClipRRect(
       borderRadius: widget.borderRadius ?? BorderRadius.zero,
@@ -416,14 +418,14 @@ class _EnExpansionTileState extends State<EnExpansionTile> with SingleTickerProv
 
   @override
   void didChangeDependencies() {
-    final ThemeData theme = Theme.of(context);
-    final ExpansionTileThemeData expansionTileTheme = ExpansionTileTheme.of(context);
-    final ColorScheme colorScheme = theme.colorScheme;
+    final theme = Theme.of(context);
+    final expansionTileTheme = ExpansionTileTheme.of(context);
+    final colorScheme = theme.colorScheme;
     _borderColorTween.end = theme.dividerColor;
     _headerColorTween
       ..begin = widget.collapsedTextColor
           ?? expansionTileTheme.collapsedTextColor
-          ?? theme.textTheme.subtitle1!.color
+          ?? theme.textTheme.titleMedium!.color
       ..end = widget.textColor ?? expansionTileTheme.textColor ?? colorScheme.primary;
     _iconColorTween
       ..begin = widget.collapsedIconColor
@@ -438,9 +440,9 @@ class _EnExpansionTileState extends State<EnExpansionTile> with SingleTickerProv
 
   @override
   Widget build(BuildContext context) {
-    final ExpansionTileThemeData expansionTileTheme = ExpansionTileTheme.of(context);
-    final bool closed = !_isExpanded && _controller.isDismissed;
-    final bool shouldRemoveChildren = closed && !widget.maintainState;
+    final expansionTileTheme = ExpansionTileTheme.of(context);
+    final closed = !_isExpanded && _controller.isDismissed;
+    final shouldRemoveChildren = closed && !widget.maintainState;
 
     final Widget result = Offstage(
       offstage: closed,

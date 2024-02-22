@@ -20,10 +20,12 @@ import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/basicWidget/im_textfield_bar.dart';
 import 'package:flutter_templet_project/mixin/bottom_sheet_phrases_mixin.dart';
 import 'package:flutter_templet_project/mixin/keyboard_change_mixin.dart';
+import 'package:flutter_templet_project/mixin/safe_set_state_mixin.dart';
 import 'package:flutter_templet_project/pages/EmojiPage.dart';
 import 'package:flutter_templet_project/util/R.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:flutter_templet_project/vendor/easy_toast.dart';
+import 'package:get/get.dart';
 import 'package:tuple/tuple.dart';
 
 class IMChatPage extends StatefulWidget {
@@ -44,6 +46,7 @@ class _IMChatPageState extends State<IMChatPage> with
     RouteAware,
     WidgetsBindingObserver,
     KeyboardChangeMixin,
+    SafeSetStateMixin,
     BottomSheetPhrasesMixin {
 
   final _scrollController = ScrollController();
@@ -127,8 +130,10 @@ class _IMChatPageState extends State<IMChatPage> with
           child: Text(e,
             style: TextStyle(color: Colors.white),
           ),
-          onPressed: () => debugPrint(e),)
-        ).toList(),
+          onPressed: () {
+            debugPrint(e);
+            setState(() {});
+          }),).toList(),
         elevation: 0,
         // bottom: buildAppbarBottom(),
       ),
