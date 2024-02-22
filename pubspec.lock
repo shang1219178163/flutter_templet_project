@@ -501,10 +501,10 @@ packages:
     dependency: "direct main"
     description:
       name: enhance_expansion_panel
-      sha256: c41a6ee82d02ea66f44d32cb5ce108fd446d9cb2918ddfe0dbf7d027c2d6a4aa
+      sha256: d9da5bdf1b73a245a594ab314414e57742a5ceb44c559d39fde89f88f01cefe4
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.0.4"
+    version: "0.5.0"
   enhance_stepper:
     dependency: "direct main"
     description:
@@ -1225,7 +1225,7 @@ packages:
     source: hosted
     version: "3.3.2"
   package_config:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: package_config
       sha256: "1c5b77ccc91e4823a5af61ee74e6b972db1ef98c2ff5a18d3161c982a55448bd"
@@ -1249,7 +1249,7 @@ packages:
     source: hosted
     version: "2.0.1"
   path:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: path
       sha256: "8829d8a55c13fc0e37127c29fedf290c102f4e40ae94ada574091fe0ff96c917"
@@ -2103,7 +2103,7 @@ packages:
     source: hosted
     version: "6.3.0"
   yaml:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: yaml
       sha256: "75769501ea3489fca56601ff33454fe45507ea3bfb014161abc3b43ae25989d5"

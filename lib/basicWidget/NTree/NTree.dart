@@ -8,7 +8,7 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/enhance/enhance_expansion/enhance_expansion_tile.dart';
+import 'package:flutter_templet_project/basicWidget/enhance/enhance_expansion/en_expansion_tile.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 
 class NTree extends StatefulWidget {
@@ -88,7 +88,7 @@ class _NTreeState extends State<NTree> {
       data: ThemeData(
         dividerColor: Colors.transparent,
       ),
-      child: EnhanceExpansionTile(
+      child: EnExpansionTile(
         backgroundColor: ColorExt.random,
         // tilePadding: EdgeInsets.symmetric(horizontal: 100),
         // leading: leading,

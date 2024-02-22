@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 
 const Duration _kExpand = Duration(milliseconds: 200);
 /// EnhanceExpansionTile 部分子组件构建类型
-typedef ExpansionWidgetBuilder = Widget Function(VoidCallback onTap);
+typedef ToggleWidgetBuilder = Widget Function(VoidCallback onToggle);
 
 /// A single-line [ListTile] with an expansion arrow icon that expands or collapses
 /// the tile to reveal or hide the [children].
@@ -15,7 +15,7 @@ typedef ExpansionWidgetBuilder = Widget Function(VoidCallback onTap);
 /// This widget is typically used with [ListView] to create an
 /// "expand / collapse" list entry. When used with scrolling widgets like
 /// [ListView], a unique [PageStorageKey] must be specified to enable the
-/// [EnhanceExpansionTile] to save and restore its expanded state when it is scrolled
+/// [EnExpansionTile] to save and restore its expanded state when it is scrolled
 /// in and out of view.
 ///
 /// This class overrides the [ListTileThemeData.iconColor] and [ListTileThemeData.textColor]
@@ -25,7 +25,7 @@ typedef ExpansionWidgetBuilder = Widget Function(VoidCallback onTap);
 ///
 /// The expansion arrow icon is shown on the right by default in left-to-right languages
 /// (i.e. the trailing edge). This can be changed using [controlAffinity]. This maps
-/// to the [leading] and [trailing] properties of [EnhanceExpansionTile].
+/// to the [leading] and [trailing] properties of [EnExpansionTile].
 ///
 /// {@tool dartpad}
 /// This example demonstrates different configurations of EnhanceExpansionTile.
@@ -39,11 +39,11 @@ typedef ExpansionWidgetBuilder = Widget Function(VoidCallback onTap);
 ///    expansion tile represents a sublist.
 ///  * The "Expand and collapse" section of
 ///    <https://material.io/components/lists#types>
-class EnhanceExpansionTile extends StatefulWidget {
+class EnExpansionTile extends StatefulWidget {
   /// Creates a single-line [ListTile] with an expansion arrow icon that expands or collapses
   /// the tile to reveal or hide the [children]. The [initiallyExpanded] property must
   /// be non-null.
-  const EnhanceExpansionTile({
+  const EnExpansionTile({
     Key? key,
     this.leading,
     required this.title,
@@ -108,13 +108,13 @@ class EnhanceExpansionTile extends StatefulWidget {
   final List<Widget> children;
 
   /// replace ListTile,
-  final ExpansionWidgetBuilder? header;
+  final ToggleWidgetBuilder? header;
 
   /// isExpand == false, visable,
-  final ExpansionWidgetBuilder? childrenHeader;
+  final ToggleWidgetBuilder? childrenHeader;
 
   /// isExpand == false, visable,
-  final ExpansionWidgetBuilder? childrenFooter;
+  final ToggleWidgetBuilder? childrenFooter;
 
   /// borderRadius
   final BorderRadiusGeometry? borderRadius;
@@ -273,10 +273,10 @@ class EnhanceExpansionTile extends StatefulWidget {
   final ListTileControlAffinity? controlAffinity;
 
   @override
-  State<EnhanceExpansionTile> createState() => _EnhanceExpansionTileState();
+  State<EnExpansionTile> createState() => _EnExpansionTileState();
 }
 
-class _EnhanceExpansionTileState extends State<EnhanceExpansionTile> with SingleTickerProviderStateMixin {
+class _EnExpansionTileState extends State<EnExpansionTile> with SingleTickerProviderStateMixin {
   static final Animatable<double> _easeOutTween = CurveTween(curve: Curves.easeOut);
   static final Animatable<double> _easeInTween = CurveTween(curve: Curves.easeIn);
   static final Animatable<double> _halfTween = Tween<double>(begin: 0.0, end: 0.5);

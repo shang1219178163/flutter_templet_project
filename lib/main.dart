@@ -8,6 +8,8 @@
 
 
 
+import 'dart:io';
+
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -38,6 +40,8 @@ import 'package:flutter_templet_project/util/localizations/ZhCupertinoLocalizati
 
 import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:path/path.dart' as path;
+import 'package:path/path.dart';
 import 'package:provider/provider.dart';
 import 'package:tuple/tuple.dart';
 
@@ -51,6 +55,7 @@ import 'package:flutter_templet_project/pages/ThirdPage.dart';
 
 import 'package:flutter_templet_project/provider/notifier_demo.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:yaml/yaml.dart';
 
 
 // void main() {
@@ -68,6 +73,54 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 //     exit(1);
 //   });
 // }
+
+String _scriptPath() {
+  var script = Platform.script.toString();
+  if (script.startsWith("file://")) {
+    script = script.substring(7);
+  } else {
+    final idx = script.indexOf("file:/");
+    script = script.substring(idx + 5);
+  }
+  return script;
+}
+
+parseYaml() async {
+  ddlog("current: ${path.current}");
+
+  String yamlPath1 = path.dirname(Platform.script.toFilePath());
+  ddlog("yamlPath1: $yamlPath1");
+  //
+  String yamlPath = path.join(yamlPath1, '../pubspec.yaml');
+  yamlPath = '/Users/shang/GitHub/flutter_templet_project/pubspec.yaml';
+  ddlog("yamlPath: $yamlPath");
+
+  File f = File(yamlPath);
+  bool exist = f.existsSync();
+  String yamlText = f.readAsStringSync();
+  ddlog("yamlText: $yamlText");
+
+  Map yamlMap = loadYaml(yamlText);
+  ddlog("yamlMap: $yamlMap");
+
+  // /Users/shang/GitHub/flutter_templet_project/pubspec.yaml
+  final currentDirectory = path.dirname(_scriptPath());
+  var filePath = normalize(path.join(currentDirectory, 'pubspec.yaml'));
+  ddlog("currentDirectory: $currentDirectory");
+  ddlog("filePath: $filePath");
+  // final file = File(filePath);
+  // final file = File("/Users/shang/GitHub/flutter_templet_project/pubspec.yaml");
+
+  // final file = File(filePath);
+  File file = File("../pubspec.yaml");
+
+  // final jsonRawData = file.readAsStringSync();
+  // ddlog("jsonRawData: $jsonRawData");
+
+  final jsonRawData = await rootBundle.loadString("pubspec.yaml");
+  ddlog("jsonRawData: $jsonRawData");
+
+}
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -147,6 +200,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    parseYaml();
+
     final app = GetMaterialApp(
       popGesture: true,//swipe back
       navigatorKey: AppUtil.navigatorKey,

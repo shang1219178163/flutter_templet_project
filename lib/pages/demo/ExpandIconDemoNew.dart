@@ -9,6 +9,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/widget_ext.dart';
 
 
 class ExpandIconDemoNew extends StatefulWidget {
@@ -103,6 +104,7 @@ class ExpandIconDemoNewState extends State<ExpandIconDemoNew> {
         child: ExpansionPanelList(
           dividerColor: Colors.red,
           // elevation: 4,
+          materialGapSize: 0,
           expandedHeaderPadding: EdgeInsets.only(top: 0, bottom: 0),
           expansionCallback: (int index, bool isExpanded) {
             setState(() {

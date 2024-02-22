@@ -126,7 +126,8 @@ platform :android do
     version = result["version"].split("+")[0]
     UI.message "version: #{version}"
 
-    time = Time.now.strftime("%Y-%m-%d-%H-%M-%S")
+    # time = Time.now.strftime("%Y-%m-%d-%H-%M-%S")
+    time = Time.now.strftime("%Y-%m-%d")
     fileName="#{name}_v#{version}_#{time}"
     return fileName;
   end
