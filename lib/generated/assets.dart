@@ -3,6 +3,7 @@ class Assets {
   Assets._();
 
   static const String assetsImagesImgFlutter310 = 'assets/images/img_flutter_3_10.webp';
+  static const String assetsPubspec = 'assets/pubspec.yaml';
   static const String curveCurveBounceIn = 'assets/images/curve/curve_bounce_in.gif';
   static const String curveCurveBounceInOut = 'assets/images/curve/curve_bounce_in_out.gif';
   static const String curveCurveBounceOut = 'assets/images/curve/curve_bounce_out.gif';

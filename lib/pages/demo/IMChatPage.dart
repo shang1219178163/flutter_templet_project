@@ -120,6 +120,7 @@ class _IMChatPageState extends State<IMChatPage> with
     dataList.value = List.generate(20, (index) => "index_$index");
 
     return Scaffold(
+      backgroundColor: Colors.black12,
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: ['done',].map((e) => TextButton(
@@ -174,6 +175,8 @@ class _IMChatPageState extends State<IMChatPage> with
       // bottom: false,
       child: Column(
         children: [
+          buildTips1(tips: "患者暂未购买问诊服务"),
+          buildTips2(tips: "患者暂未购买问诊服务"),
           Expanded(
             // flex: 1,
             child: buildListView(),
@@ -238,7 +241,7 @@ class _IMChatPageState extends State<IMChatPage> with
                       // ),
                     );
                   },
-                ).toColoredBox(color: Colors.black12),
+                ),
               ),
             ),
           )
@@ -810,5 +813,99 @@ class _IMChatPageState extends State<IMChatPage> with
         }
       ),
     );
+  }
+
+  /// 问诊倒计时显示器 Widget
+  Widget buildTips1({
+    required String? tips,
+  }) {
+    Widget child = Container(
+      height: 44,
+      alignment: Alignment.center,
+      padding: const EdgeInsets.only(left: 17, right: 7),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(
+            child: Container(
+              height: 1,
+              color: const Color(0xffe5e5e5),
+            ),
+          ),
+          Container(
+            height: 32,
+            alignment: Alignment.center,
+            padding: const EdgeInsets.only(left: 17, right: 7),
+            decoration: BoxDecoration(
+              color: const Color(0xffEBF8F8),
+              borderRadius: BorderRadius.circular(18), //边角
+            ),
+            child: NText(
+              tips ?? "这是一个提示",
+              fontSize: 13,
+              color: context.primaryColor,
+            ),
+          ),
+          Expanded(
+            child: Container(
+              height: 1,
+              color: const Color(0xffe5e5e5),
+            ),
+          ),
+        ],
+      ),
+    );
+    return child;
+  }
+
+  /// 问诊倒计时显示器 Widget
+  Widget buildTips2({
+    required String? tips,
+  }) {
+    Widget child = Container(
+      height: 44,
+      alignment: Alignment.center,
+      margin: const EdgeInsets.symmetric(vertical: 8),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Expanded(
+            child: SizedBox(),
+          ),
+          Container(
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: const Color(0xffFFF4EB),
+              borderRadius: BorderRadius.circular(8), //边角
+            ),
+            child: Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 2),
+                  child: Image(
+                    image: "icon_hi.png".toAssetImage(),
+                    width: 35,
+                    height: 42,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 10, right: 16),
+                  child: NText(
+                    tips ?? "这是一个提示",
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: const Color(0xffFF8F3E),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const Expanded(
+            child: SizedBox(),
+          ),
+        ],
+      ),
+    );
+    return child;
   }
 }
