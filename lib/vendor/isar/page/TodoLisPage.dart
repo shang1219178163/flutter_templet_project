@@ -59,27 +59,27 @@ class _TodoLisPageState extends State<TodoLisPage> {
       ),
       body: Consumer<DBTodoProvider>(
         builder: (context, value, child) {
-          if (value.todos.isEmpty) {
+          if (value.entitys.isEmpty) {
             return const Center(
               child: Text("no todo"),
             );
           }
 
-          final checkedItems = value.todos.where((e) => e.isFinished == true).toList();
-          isAllChoic = value.todos.firstWhereOrNull((e) => e.isFinished == false) == null;
+          final checkedItems = value.entitys.where((e) => e.isFinished == true).toList();
+          isAllChoic = value.entitys.firstWhereOrNull((e) => e.isFinished == false) == null;
 
           final icon = isAllChoic ? Icons.check_box : Icons.check_box_outline_blank;
-          final desc = "已选择 ${checkedItems.length}/${value.todos.length}";
+          final desc = "已选择 ${checkedItems.length}/${value.entitys.length}";
 
           return Column(
             children: [
               Expanded(
                 child: ListView.builder(
                   padding: EdgeInsets.all(10),
-                  itemCount: value.todos.length,
+                  itemCount: value.entitys.length,
                   itemBuilder: (context, index) {
 
-                    final model = value.todos.reversed.toList()[index];
+                    final model = value.entitys.reversed.toList()[index];
 
                     onToggle(){
                       model.isFinished = !model.isFinished;
@@ -102,7 +102,7 @@ class _TodoLisPageState extends State<TodoLisPage> {
                           );
                         },
                         onDelete: () {
-                          provider.delete(model);
+                          provider.delete(model.id);
                         },
                       ),
                     );
@@ -127,11 +127,11 @@ class _TodoLisPageState extends State<TodoLisPage> {
                             child: TextButton(
                               onPressed: () async {
                                 ddlog("isAllChoic TextButton: $isAllChoic");
-                                for (var i = 0; i < value.todos.length; i++) {
-                                  final todo = value.todos[i];
+                                for (var i = 0; i < value.entitys.length; i++) {
+                                  final todo = value.entitys[i];
                                   todo.isFinished = !isAllChoic;
                                 }
-                                provider.putAll(value.todos);
+                                provider.putAll(value.entitys);
                               },
                               child: Row(
                                 children: [
@@ -145,7 +145,7 @@ class _TodoLisPageState extends State<TodoLisPage> {
                           Expanded(
                             child: InkWell(
                               onTap: () async {
-                                final choicItems = value.todos.where((e) => e.isFinished).toList();
+                                final choicItems = value.entitys.where((e) => e.isFinished).map((e) => e.id).toList();
                                 await provider.deleteAll(choicItems);
                               },
                               child: Container(
@@ -235,10 +235,11 @@ class _TodoLisPageState extends State<TodoLisPage> {
       return;
     }
 
-    var todo = DBTodo()
-      ..title = title
-      ..isFinished = false
-      ..createdDate = DateTime.now();
+    var todo = DBTodo(
+      title: title,
+      isFinished: false,
+      createdDate: DateTime.now().toIso8601String(),
+    );
     Provider.of<DBTodoProvider>(context, listen: false).put(todo);
   }
 }

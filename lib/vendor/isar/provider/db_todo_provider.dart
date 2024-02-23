@@ -1,71 +1,76 @@
+//
+//  DbTodoProvider.dart
+//  flutter_templet_project
+//
+//  Created by shang on 2024/2/23 22:42.
+//  Copyright © 2024/2/23 shang. All rights reserved.
+//
+
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/vendor/isar/model/db_todo.dart';
 import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
 
-class DBTodoProvider extends ChangeNotifier {
+/// 待办事项基于 isar 数据库的 Provider 实现
+class DBTodoProvider<E extends DBTodo> extends ChangeNotifier {
   DBTodoProvider() {
-    db = openDB();
     init();
   }
 
-  late Future<Isar?> db;
+  late Isar isar;
 
-  List<DBTodo> _todos = <DBTodo>[];
-  List<DBTodo> get todos => _todos;
+  List<E> _entitys = <E>[];
+  List<E> get entitys => _entitys;
 
+  Future<void> init() async {
+    isar = await openDB(schemas: [DBTodoSchema]);
+    isar.txn(() async {
+      await update();
+    });
+  }
+
+  Future<Isar> openDB({required List<CollectionSchema<dynamic>> schemas,}) async {
+    final dir = await getApplicationDocumentsDirectory();
+    final result = await Isar.open(
+      schemas,
+      directory: dir.path,
+      inspector: true,
+    );
+    return result;
+  }
+
+  /// 查
   Future<void> update() async {
-    final isar = await db;
-    _todos = await isar!.dBTodos.where().findAll();
+    _entitys = await isar.collection<E>().where().findAll();
     notifyListeners();
   }
 
-  Future<void> init() async {
-    final isar = await db;
-    isar!.txn(() async {
+  /// 增/改
+  Future<void> putAll(List<E> list) async {
+    await isar.writeTxn(() async {
+      await isar.collection<E>().putAll(list);
       await update();
     });
   }
-
-  Future<Isar?> openDB() async {
-    if (Isar.instanceNames.isEmpty) {
-      final dir = await getApplicationDocumentsDirectory();
-      return Isar.open(
-        [DBTodoSchema],
-        directory: dir.path,
-        inspector: true,
-      );
-    }
-
-    return Isar.getInstance();
-  }
-
-  Future<void> putAll(List<DBTodo> list) async {
-    final isar = await db;
-    await isar?.writeTxn(() async {
-      await isar.dBTodos.putAll(list);
-      await update();
-    });
-  }
-
-  Future<void> put(DBTodo e) async {
+  /// 增/改
+  Future<void> put(E e) async {
     await putAll([e]);
   }
 
-  Future<void> deleteAll(List<DBTodo> list) async {
-    final isar = await db;
-    await isar!.writeTxn(() async {
-      final ids = list.map((e) => e.id).toList();
-      final count = await isar.dBTodos.deleteAll(ids);
+  /// 删
+  Future<void> deleteAll(List<Id> ids) async {
+    await isar.writeTxn(() async {
+      final count = await isar.collection<E>().deleteAll(ids);
       debugPrint('$this deleted $count');
 
       await update();
     });
   }
 
-  Future<void> delete(DBTodo e) async {
-    await deleteAll([e]);
+  /// 删
+  Future<void> delete(Id id) async {
+    await deleteAll([id]);
   }
 
 }

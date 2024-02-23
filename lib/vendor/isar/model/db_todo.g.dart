@@ -20,7 +20,7 @@ const DBTodoSchema = CollectionSchema(
     r'createdDate': PropertySchema(
       id: 0,
       name: r'createdDate',
-      type: IsarType.dateTime,
+      type: IsarType.string,
     ),
     r'isFinished': PropertySchema(
       id: 1,
@@ -35,7 +35,7 @@ const DBTodoSchema = CollectionSchema(
     r'updatedDate': PropertySchema(
       id: 3,
       name: r'updatedDate',
-      type: IsarType.dateTime,
+      type: IsarType.string,
     )
   },
   estimateSize: _dBTodoEstimateSize,
@@ -53,57 +53,70 @@ const DBTodoSchema = CollectionSchema(
 );
 
 int _dBTodoEstimateSize(
-  DBTodo object,
-  List<int> offsets,
-  Map<Type, List<int>> allOffsets,
-) {
+    DBTodo object,
+    List<int> offsets,
+    Map<Type, List<int>> allOffsets,
+    ) {
   var bytesCount = offsets.last;
+  {
+    final value = object.createdDate;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
   bytesCount += 3 + object.title.length * 3;
+  {
+    final value = object.updatedDate;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
   return bytesCount;
 }
 
 void _dBTodoSerialize(
-  DBTodo object,
-  IsarWriter writer,
-  List<int> offsets,
-  Map<Type, List<int>> allOffsets,
-) {
-  writer.writeDateTime(offsets[0], object.createdDate);
+    DBTodo object,
+    IsarWriter writer,
+    List<int> offsets,
+    Map<Type, List<int>> allOffsets,
+    ) {
+  writer.writeString(offsets[0], object.createdDate);
   writer.writeBool(offsets[1], object.isFinished);
   writer.writeString(offsets[2], object.title);
-  writer.writeDateTime(offsets[3], object.updatedDate);
+  writer.writeString(offsets[3], object.updatedDate);
 }
 
 DBTodo _dBTodoDeserialize(
-  Id id,
-  IsarReader reader,
-  List<int> offsets,
-  Map<Type, List<int>> allOffsets,
-) {
-  final object = DBTodo();
-  object.createdDate = reader.readDateTimeOrNull(offsets[0]);
-  object.id = id;
-  object.isFinished = reader.readBool(offsets[1]);
-  object.title = reader.readString(offsets[2]);
-  object.updatedDate = reader.readDateTimeOrNull(offsets[3]);
+    Id id,
+    IsarReader reader,
+    List<int> offsets,
+    Map<Type, List<int>> allOffsets,
+    ) {
+  final object = DBTodo(
+    createdDate: reader.readStringOrNull(offsets[0]),
+    id: id,
+    isFinished: reader.readBoolOrNull(offsets[1]) ?? false,
+    title: reader.readString(offsets[2]),
+    updatedDate: reader.readStringOrNull(offsets[3]),
+  );
   return object;
 }
 
 P _dBTodoDeserializeProp<P>(
-  IsarReader reader,
-  int propertyId,
-  int offset,
-  Map<Type, List<int>> allOffsets,
-) {
+    IsarReader reader,
+    int propertyId,
+    int offset,
+    Map<Type, List<int>> allOffsets,
+    ) {
   switch (propertyId) {
     case 0:
-      return (reader.readDateTimeOrNull(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 1:
-      return (reader.readBool(offset)) as P;
+      return (reader.readBoolOrNull(offset) ?? false) as P;
     case 2:
       return (reader.readString(offset)) as P;
     case 3:
-      return (reader.readDateTimeOrNull(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
@@ -144,19 +157,19 @@ extension DBTodoQueryWhere on QueryBuilder<DBTodo, DBTodo, QWhereClause> {
       if (query.whereSort == Sort.asc) {
         return query
             .addWhereClause(
-              IdWhereClause.lessThan(upper: id, includeUpper: false),
-            )
+          IdWhereClause.lessThan(upper: id, includeUpper: false),
+        )
             .addWhereClause(
-              IdWhereClause.greaterThan(lower: id, includeLower: false),
-            );
+          IdWhereClause.greaterThan(lower: id, includeLower: false),
+        );
       } else {
         return query
             .addWhereClause(
-              IdWhereClause.greaterThan(lower: id, includeLower: false),
-            )
+          IdWhereClause.greaterThan(lower: id, includeLower: false),
+        )
             .addWhereClause(
-              IdWhereClause.lessThan(upper: id, includeUpper: false),
-            );
+          IdWhereClause.lessThan(upper: id, includeUpper: false),
+        );
       }
     });
   }
@@ -180,11 +193,11 @@ extension DBTodoQueryWhere on QueryBuilder<DBTodo, DBTodo, QWhereClause> {
   }
 
   QueryBuilder<DBTodo, DBTodo, QAfterWhereClause> idBetween(
-    Id lowerId,
-    Id upperId, {
-    bool includeLower = true,
-    bool includeUpper = true,
-  }) {
+      Id lowerId,
+      Id upperId, {
+        bool includeLower = true,
+        bool includeUpper = true,
+      }) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IdWhereClause.between(
         lower: lowerId,
@@ -214,47 +227,55 @@ extension DBTodoQueryFilter on QueryBuilder<DBTodo, DBTodo, QFilterCondition> {
   }
 
   QueryBuilder<DBTodo, DBTodo, QAfterFilterCondition> createdDateEqualTo(
-      DateTime? value) {
+      String? value, {
+        bool caseSensitive = true,
+      }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'createdDate',
         value: value,
+        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<DBTodo, DBTodo, QAfterFilterCondition> createdDateGreaterThan(
-    DateTime? value, {
-    bool include = false,
-  }) {
+      String? value, {
+        bool include = false,
+        bool caseSensitive = true,
+      }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
         property: r'createdDate',
         value: value,
+        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<DBTodo, DBTodo, QAfterFilterCondition> createdDateLessThan(
-    DateTime? value, {
-    bool include = false,
-  }) {
+      String? value, {
+        bool include = false,
+        bool caseSensitive = true,
+      }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
         property: r'createdDate',
         value: value,
+        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<DBTodo, DBTodo, QAfterFilterCondition> createdDateBetween(
-    DateTime? lower,
-    DateTime? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-  }) {
+      String? lower,
+      String? upper, {
+        bool includeLower = true,
+        bool includeUpper = true,
+        bool caseSensitive = true,
+      }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
         property: r'createdDate',
@@ -262,6 +283,75 @@ extension DBTodoQueryFilter on QueryBuilder<DBTodo, DBTodo, QFilterCondition> {
         includeLower: includeLower,
         upper: upper,
         includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<DBTodo, DBTodo, QAfterFilterCondition> createdDateStartsWith(
+      String value, {
+        bool caseSensitive = true,
+      }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'createdDate',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<DBTodo, DBTodo, QAfterFilterCondition> createdDateEndsWith(
+      String value, {
+        bool caseSensitive = true,
+      }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'createdDate',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<DBTodo, DBTodo, QAfterFilterCondition> createdDateContains(
+      String value,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'createdDate',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<DBTodo, DBTodo, QAfterFilterCondition> createdDateMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'createdDate',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<DBTodo, DBTodo, QAfterFilterCondition> createdDateIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'createdDate',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<DBTodo, DBTodo, QAfterFilterCondition> createdDateIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'createdDate',
+        value: '',
       ));
     });
   }
@@ -276,9 +366,9 @@ extension DBTodoQueryFilter on QueryBuilder<DBTodo, DBTodo, QFilterCondition> {
   }
 
   QueryBuilder<DBTodo, DBTodo, QAfterFilterCondition> idGreaterThan(
-    Id value, {
-    bool include = false,
-  }) {
+      Id value, {
+        bool include = false,
+      }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
@@ -289,9 +379,9 @@ extension DBTodoQueryFilter on QueryBuilder<DBTodo, DBTodo, QFilterCondition> {
   }
 
   QueryBuilder<DBTodo, DBTodo, QAfterFilterCondition> idLessThan(
-    Id value, {
-    bool include = false,
-  }) {
+      Id value, {
+        bool include = false,
+      }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
@@ -302,11 +392,11 @@ extension DBTodoQueryFilter on QueryBuilder<DBTodo, DBTodo, QFilterCondition> {
   }
 
   QueryBuilder<DBTodo, DBTodo, QAfterFilterCondition> idBetween(
-    Id lower,
-    Id upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-  }) {
+      Id lower,
+      Id upper, {
+        bool includeLower = true,
+        bool includeUpper = true,
+      }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
         property: r'id',
@@ -329,9 +419,9 @@ extension DBTodoQueryFilter on QueryBuilder<DBTodo, DBTodo, QFilterCondition> {
   }
 
   QueryBuilder<DBTodo, DBTodo, QAfterFilterCondition> titleEqualTo(
-    String value, {
-    bool caseSensitive = true,
-  }) {
+      String value, {
+        bool caseSensitive = true,
+      }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'title',
@@ -342,10 +432,10 @@ extension DBTodoQueryFilter on QueryBuilder<DBTodo, DBTodo, QFilterCondition> {
   }
 
   QueryBuilder<DBTodo, DBTodo, QAfterFilterCondition> titleGreaterThan(
-    String value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
+      String value, {
+        bool include = false,
+        bool caseSensitive = true,
+      }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
@@ -357,10 +447,10 @@ extension DBTodoQueryFilter on QueryBuilder<DBTodo, DBTodo, QFilterCondition> {
   }
 
   QueryBuilder<DBTodo, DBTodo, QAfterFilterCondition> titleLessThan(
-    String value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
+      String value, {
+        bool include = false,
+        bool caseSensitive = true,
+      }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
@@ -372,12 +462,12 @@ extension DBTodoQueryFilter on QueryBuilder<DBTodo, DBTodo, QFilterCondition> {
   }
 
   QueryBuilder<DBTodo, DBTodo, QAfterFilterCondition> titleBetween(
-    String lower,
-    String upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
+      String lower,
+      String upper, {
+        bool includeLower = true,
+        bool includeUpper = true,
+        bool caseSensitive = true,
+      }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
         property: r'title',
@@ -391,9 +481,9 @@ extension DBTodoQueryFilter on QueryBuilder<DBTodo, DBTodo, QFilterCondition> {
   }
 
   QueryBuilder<DBTodo, DBTodo, QAfterFilterCondition> titleStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
+      String value, {
+        bool caseSensitive = true,
+      }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.startsWith(
         property: r'title',
@@ -404,9 +494,9 @@ extension DBTodoQueryFilter on QueryBuilder<DBTodo, DBTodo, QFilterCondition> {
   }
 
   QueryBuilder<DBTodo, DBTodo, QAfterFilterCondition> titleEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
+      String value, {
+        bool caseSensitive = true,
+      }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.endsWith(
         property: r'title',
@@ -475,47 +565,55 @@ extension DBTodoQueryFilter on QueryBuilder<DBTodo, DBTodo, QFilterCondition> {
   }
 
   QueryBuilder<DBTodo, DBTodo, QAfterFilterCondition> updatedDateEqualTo(
-      DateTime? value) {
+      String? value, {
+        bool caseSensitive = true,
+      }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'updatedDate',
         value: value,
+        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<DBTodo, DBTodo, QAfterFilterCondition> updatedDateGreaterThan(
-    DateTime? value, {
-    bool include = false,
-  }) {
+      String? value, {
+        bool include = false,
+        bool caseSensitive = true,
+      }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
         property: r'updatedDate',
         value: value,
+        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<DBTodo, DBTodo, QAfterFilterCondition> updatedDateLessThan(
-    DateTime? value, {
-    bool include = false,
-  }) {
+      String? value, {
+        bool include = false,
+        bool caseSensitive = true,
+      }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
         property: r'updatedDate',
         value: value,
+        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<DBTodo, DBTodo, QAfterFilterCondition> updatedDateBetween(
-    DateTime? lower,
-    DateTime? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-  }) {
+      String? lower,
+      String? upper, {
+        bool includeLower = true,
+        bool includeUpper = true,
+        bool caseSensitive = true,
+      }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
         property: r'updatedDate',
@@ -523,6 +621,75 @@ extension DBTodoQueryFilter on QueryBuilder<DBTodo, DBTodo, QFilterCondition> {
         includeLower: includeLower,
         upper: upper,
         includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<DBTodo, DBTodo, QAfterFilterCondition> updatedDateStartsWith(
+      String value, {
+        bool caseSensitive = true,
+      }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'updatedDate',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<DBTodo, DBTodo, QAfterFilterCondition> updatedDateEndsWith(
+      String value, {
+        bool caseSensitive = true,
+      }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'updatedDate',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<DBTodo, DBTodo, QAfterFilterCondition> updatedDateContains(
+      String value,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'updatedDate',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<DBTodo, DBTodo, QAfterFilterCondition> updatedDateMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'updatedDate',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<DBTodo, DBTodo, QAfterFilterCondition> updatedDateIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'updatedDate',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<DBTodo, DBTodo, QAfterFilterCondition> updatedDateIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'updatedDate',
+        value: '',
       ));
     });
   }
@@ -645,9 +812,10 @@ extension DBTodoQuerySortThenBy on QueryBuilder<DBTodo, DBTodo, QSortThenBy> {
 }
 
 extension DBTodoQueryWhereDistinct on QueryBuilder<DBTodo, DBTodo, QDistinct> {
-  QueryBuilder<DBTodo, DBTodo, QDistinct> distinctByCreatedDate() {
+  QueryBuilder<DBTodo, DBTodo, QDistinct> distinctByCreatedDate(
+      {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'createdDate');
+      return query.addDistinctBy(r'createdDate', caseSensitive: caseSensitive);
     });
   }
 
@@ -664,9 +832,10 @@ extension DBTodoQueryWhereDistinct on QueryBuilder<DBTodo, DBTodo, QDistinct> {
     });
   }
 
-  QueryBuilder<DBTodo, DBTodo, QDistinct> distinctByUpdatedDate() {
+  QueryBuilder<DBTodo, DBTodo, QDistinct> distinctByUpdatedDate(
+      {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'updatedDate');
+      return query.addDistinctBy(r'updatedDate', caseSensitive: caseSensitive);
     });
   }
 }
@@ -678,7 +847,7 @@ extension DBTodoQueryProperty on QueryBuilder<DBTodo, DBTodo, QQueryProperty> {
     });
   }
 
-  QueryBuilder<DBTodo, DateTime?, QQueryOperations> createdDateProperty() {
+  QueryBuilder<DBTodo, String?, QQueryOperations> createdDateProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'createdDate');
     });
@@ -696,7 +865,7 @@ extension DBTodoQueryProperty on QueryBuilder<DBTodo, DBTodo, QQueryProperty> {
     });
   }
 
-  QueryBuilder<DBTodo, DateTime?, QQueryOperations> updatedDateProperty() {
+  QueryBuilder<DBTodo, String?, QQueryOperations> updatedDateProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'updatedDate');
     });
