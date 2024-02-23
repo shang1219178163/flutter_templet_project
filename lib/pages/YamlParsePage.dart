@@ -5,7 +5,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
-import 'package:path/path.dart';
+import 'package:path/path.dart' as path;
 import 'package:yaml/yaml.dart';
 
 class YamlParsePage extends StatefulWidget {
@@ -82,10 +82,11 @@ class _YamlParsePageState extends State<YamlParsePage> {
   }
 
   parseYaml() async {
-    String yamlPath1 = dirname(Platform.script.toFilePath());
+    String yamlPath1 = path.dirname(Platform.script.toFilePath());
     ddlog("yamlPath1: $yamlPath1");
 
-    String yamlPath = join(yamlPath1, '../pubspec.yaml');
+    String yamlPath = path.join(yamlPath1, '../pubspec.yaml');
+    yamlPath = '/Users/shang/GitHub/flutter_templet_project/pubspec.yaml';
     ddlog("yamlPath: $yamlPath");
 
     File f = File(yamlPath);

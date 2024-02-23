@@ -21,6 +21,7 @@ import 'package:flutter_templet_project/pages/PageLifecycleObserverDemo.dart';
 import 'package:flutter_templet_project/pages/RegExpDemo.dart';
 import 'package:flutter_templet_project/pages/StringTransformPage.dart';
 import 'package:flutter_templet_project/pages/ThemeColorDemo.dart';
+import 'package:flutter_templet_project/pages/YamlParsePage.dart';
 import 'package:flutter_templet_project/pages/demo/APIConvertPage.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedSizeDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedSizeDemoOne.dart';
@@ -318,6 +319,8 @@ import 'package:flutter_templet_project/main.dart';
 
 ///https://www.jianshu.com/p/b9d6ec92926f
 class APPRouter {
+
+  static const yamlParsePage = '/yamlParsePage';
 
   static const appLifecycleObserverDemo = '/appLifecycleObserverDemo';
   static const themeColorDemo = '/themeColorDemo';
@@ -715,6 +718,7 @@ class AppPage {
     GetPage(name: APPRouter.themeColorDemo, page: () => ThemeColorDemo(),),
     GetPage(name: APPRouter.emojiPage, page: () => EmojiPage(),),
 
+    GetPage(name: APPRouter.yamlParsePage, page: () => YamlParsePage(),),
 
     GetPage(name: APPRouter.developToolList, page: () => DevelopToolList(),),
 

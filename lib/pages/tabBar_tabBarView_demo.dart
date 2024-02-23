@@ -521,6 +521,7 @@ var slivers = <Tuple2<String, String>>[
 ];
 
 var specials = <Tuple2<String, String>>[
+  Tuple2(APPRouter.yamlParsePage, "yaml解析", ),
   Tuple2(APPRouter.appLifecycleObserverDemo, "appLifecycleObserverDemo", ),
   Tuple2(APPRouter.themeColorDemo, "themeColor", ),
   Tuple2(APPRouter.emojiPage, "emoji", ),

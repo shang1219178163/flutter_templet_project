@@ -8,54 +8,40 @@
 
 
 
-import 'dart:io';
-
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 // import 'package:http_proxy/http_proxy.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/APPThemeSettings.dart';
+import 'package:flutter_templet_project/Pages/APPDrawerMenuPage.dart';
+import 'package:flutter_templet_project/Pages/APPUserCenterPage.dart';
+import 'package:flutter_templet_project/basicWidget/error_custom_widget.dart';
 import 'package:flutter_templet_project/cache/cache_service.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/button_ext.dart';
-import 'package:flutter_templet_project/pages/demo/CalendarDatePickerDemo.dart';
+import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/pages/SecondPage.dart';
+import 'package:flutter_templet_project/pages/ThirdPage.dart';
 import 'package:flutter_templet_project/pages/demo/TabBarDemo.dart';
 import 'package:flutter_templet_project/pages/tabBar_tabBarView_demo.dart';
-import 'package:flutter_templet_project/provider/provider_demo.dart';
 import 'package:flutter_templet_project/provider/color_filtered_provider.dart';
+import 'package:flutter_templet_project/provider/notifier_demo.dart';
+import 'package:flutter_templet_project/provider/provider_demo.dart';
 import 'package:flutter_templet_project/provider/rxDart_provider_demo.dart';
-
-import 'package:flutter_templet_project/extension/ddlog.dart';
-import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:flutter_templet_project/routes/AppRouteObserver.dart';
+import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:flutter_templet_project/util/AppLifecycleObserver.dart';
 import 'package:flutter_templet_project/util/app_util.dart';
 import 'package:flutter_templet_project/util/debug_log.dart';
-import 'package:flutter_templet_project/util/localizations/AppCupertinoLocalizations.dart';
-import 'package:flutter_templet_project/util/localizations/ZhCupertinoLocalizations.dart';
-
 import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:path/path.dart' as path;
-import 'package:path/path.dart';
 import 'package:provider/provider.dart';
 import 'package:tuple/tuple.dart';
-
-import 'package:flutter_templet_project/Pages/APPDrawerMenuPage.dart';
-import 'package:flutter_templet_project/Pages/APPUserCenterPage.dart';
-
-import 'package:flutter_templet_project/basicWidget/error_custom_widget.dart';
-import 'package:flutter_templet_project/pages/FirstPage.dart';
-import 'package:flutter_templet_project/pages/SecondPage.dart';
-import 'package:flutter_templet_project/pages/ThirdPage.dart';
-
-import 'package:flutter_templet_project/provider/notifier_demo.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:yaml/yaml.dart';
 
 
 // void main() {
@@ -73,54 +59,6 @@ import 'package:yaml/yaml.dart';
 //     exit(1);
 //   });
 // }
-
-String _scriptPath() {
-  var script = Platform.script.toString();
-  if (script.startsWith("file://")) {
-    script = script.substring(7);
-  } else {
-    final idx = script.indexOf("file:/");
-    script = script.substring(idx + 5);
-  }
-  return script;
-}
-
-parseYaml() async {
-  ddlog("current: ${path.current}");
-
-  String yamlPath1 = path.dirname(Platform.script.toFilePath());
-  ddlog("yamlPath1: $yamlPath1");
-  //
-  String yamlPath = path.join(yamlPath1, '../pubspec.yaml');
-  yamlPath = '/Users/shang/GitHub/flutter_templet_project/pubspec.yaml';
-  ddlog("yamlPath: $yamlPath");
-
-  File f = File(yamlPath);
-  bool exist = f.existsSync();
-  String yamlText = f.readAsStringSync();
-  ddlog("yamlText: $yamlText");
-
-  Map yamlMap = loadYaml(yamlText);
-  ddlog("yamlMap: $yamlMap");
-
-  // /Users/shang/GitHub/flutter_templet_project/pubspec.yaml
-  final currentDirectory = path.dirname(_scriptPath());
-  var filePath = normalize(path.join(currentDirectory, 'pubspec.yaml'));
-  ddlog("currentDirectory: $currentDirectory");
-  ddlog("filePath: $filePath");
-  // final file = File(filePath);
-  // final file = File("/Users/shang/GitHub/flutter_templet_project/pubspec.yaml");
-
-  // final file = File(filePath);
-  File file = File("../pubspec.yaml");
-
-  // final jsonRawData = file.readAsStringSync();
-  // ddlog("jsonRawData: $jsonRawData");
-
-  final jsonRawData = await rootBundle.loadString("pubspec.yaml");
-  ddlog("jsonRawData: $jsonRawData");
-
-}
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -200,7 +138,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    parseYaml();
+    // parseYaml();
 
     final app = GetMaterialApp(
       popGesture: true,//swipe back
