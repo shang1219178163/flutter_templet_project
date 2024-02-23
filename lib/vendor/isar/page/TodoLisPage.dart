@@ -113,7 +113,6 @@ class _TodoLisPageState extends State<TodoLisPage> {
                 height: 70,
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  border: Border.all(color: Colors.blue),
                   borderRadius: BorderRadius.all(Radius.circular(0)),
                 ),
                 child: Column(
