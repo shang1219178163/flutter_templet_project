@@ -210,6 +210,7 @@ import 'package:flutter_templet_project/vendor/flutter_swiper_demo.dart';
 import 'package:flutter_templet_project/vendor/flutter_swiper_indicator_demo.dart';
 import 'package:flutter_templet_project/vendor/getx/getx_demo.dart';
 import 'package:flutter_templet_project/pages/keyboard_attach_demo.dart';
+import 'package:flutter_templet_project/vendor/isar/page/TodoLisPage.dart';
 import 'package:flutter_templet_project/vendor/qr/qr_code_scanner_demo.dart';
 import 'package:flutter_templet_project/vendor/qr/qr_flutter_demo.dart';
 import 'package:flutter_templet_project/vendor/soundAbount/SoundPlayDemo.dart';
@@ -677,6 +678,7 @@ class APPRouter {
   static const appBarColorChangerDemo = '/appBarColorChangerDemo';
   static const footerButtonBarDemo = '/footerButtonBarDemo';
   static const sectionHeaderDemo = '/sectionHeaderDemo';
+  static const todoListPage = '/todoListPage';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -1073,6 +1075,7 @@ class AppPage {
     GetPage(name: APPRouter.appBarColorChangerDemo, page: () => NAppBarColorChangerDemo(),),
     GetPage(name: APPRouter.footerButtonBarDemo, page: () => NFooterButtonBarDemo(),),
     GetPage(name: APPRouter.sectionHeaderDemo, page: () => NSectionHeaderDemo(),),
+    GetPage(name: APPRouter.todoListPage, page: () => TodoListPage(),),
 
 
   ];

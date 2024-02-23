@@ -38,7 +38,7 @@ import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:flutter_templet_project/util/AppLifecycleObserver.dart';
 import 'package:flutter_templet_project/util/app_util.dart';
 import 'package:flutter_templet_project/util/debug_log.dart';
-import 'package:flutter_templet_project/vendor/isar/page/TodoList.dart';
+import 'package:flutter_templet_project/vendor/isar/page/TodoLisPage.dart';
 import 'package:flutter_templet_project/vendor/isar/provider/db_todo_provider.dart';
 import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -85,6 +85,7 @@ Future<void> main() async {
       providers: [
         // ChangeNotifierProvider.value(value: ColorFilteredProvider()),
         ChangeNotifierProvider(create: (context) => ColorFilteredProvider()),
+        ChangeNotifierProvider(create: (context) => DBTodoProvider()),
 
         ChangeNotifierProvider(create: (context) => CartModel()),
         ChangeNotifierProvider<Person>(create: (ctx) => Person(),),
@@ -94,8 +95,8 @@ Future<void> main() async {
           update: (ctx, person, eatModel) => EatModel(name: person.name),
         ),
       ],
-      // child: MyApp(),
-      child: DBMyApp(),
+      child: MyApp(),
+      // child: DBMyApp(),
     ),
   );
 
@@ -202,25 +203,25 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class DBMyApp extends StatelessWidget {
-  const DBMyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => DBTodoProvider(),
-      child: MaterialApp(
-        title: 'ISAR TodoList',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-        ),
-        home: TodoList(),
-      ),
-    );
-  }
-
-}
+// class DBMyApp extends StatelessWidget {
+//   const DBMyApp({super.key});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return ChangeNotifierProvider(
+//       create: (context) => DBTodoProvider(),
+//       child: MaterialApp(
+//         title: 'ISAR TodoList',
+//         theme: ThemeData(
+//           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+//           useMaterial3: true,
+//         ),
+//         home: TodoList(),
+//       ),
+//     );
+//   }
+//
+// }
 
 
 class MyHomePage extends StatefulWidget {
