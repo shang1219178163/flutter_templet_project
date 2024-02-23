@@ -12,24 +12,26 @@ class DBTodoProvider extends ChangeNotifier {
 
   late Future<Isar?> db;
 
-  List<DBTodo> _todos = [];
+  List<DBTodo> _todos = <DBTodo>[];
   List<DBTodo> get todos => _todos;
+
+  Future<void> update() async {
+    final isar = await db;
+    _todos = await isar!.dBTodos.where().findAll();
+    notifyListeners();
+  }
 
   Future<void> init() async {
     final isar = await db;
     isar!.txn(() async {
-      final todoCollection = isar.dBTodos;
-      _todos = await todoCollection.where().findAll();
-      notifyListeners();
+      await update();
     });
   }
 
   Future<Isar?> openDB() async {
     if (Isar.instanceNames.isEmpty) {
       final dir = await getApplicationDocumentsDirectory();
-      debugPrint("dir: $dir");
-
-      return await Isar.open(
+      return Isar.open(
         [DBTodoSchema],
         directory: dir.path,
         inspector: true,
@@ -39,37 +41,31 @@ class DBTodoProvider extends ChangeNotifier {
     return Isar.getInstance();
   }
 
-  Future<void> addTodo(DBTodo todo) async {
+  Future<void> putAll(List<DBTodo> list) async {
+    final isar = await db;
+    await isar?.writeTxn(() async {
+      await isar.dBTodos.putAll(list);
+      await update();
+    });
+  }
+
+  Future<void> put(DBTodo e) async {
+    await putAll([e]);
+  }
+
+  Future<void> deleteAll(List<DBTodo> list) async {
     final isar = await db;
     await isar!.writeTxn(() async {
-      await isar.dBTodos.put(todo);
-      _todos.add(todo);
-      notifyListeners();
+      final ids = list.map((e) => e.id).toList();
+      final count = await isar.dBTodos.deleteAll(ids);
+      debugPrint('$this deleted $count');
+
+      await update();
     });
   }
 
-  Future<void> toggleFinished(DBTodo todo) async {
-    final isar = await db;
-
-    isar!.writeTxn(() async {
-      todo.isFinished = !todo.isFinished;
-      todo.updatedDate = DateTime.now();
-      await isar.dBTodos.put(todo);
-
-      int todoIndex = _todos.indexWhere((element) => todo.id == element.id);
-      _todos[todoIndex].isFinished = todo.isFinished;
-      _todos[todoIndex].updatedDate = todo.updatedDate;
-      notifyListeners();
-    });
+  Future<void> delete(DBTodo e) async {
+    await deleteAll([e]);
   }
 
-  Future<void> deleteTodo(DBTodo todo) async {
-    final isar = await db;
-    await isar!.writeTxn(() async {
-      await isar.dBTodos.delete(todo.id);
-      _todos.remove(todo);
-
-      notifyListeners();
-    });
-  }
 }

@@ -1,22 +1,44 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_footer_button_bar.dart';
+import 'package:flutter_templet_project/basicWidget/n_text.dart';
+import 'package:flutter_templet_project/extension/build_context_ext.dart';
+import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/num_ext.dart';
+import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/vendor/isar/model/db_todo.dart';
 import 'package:flutter_templet_project/vendor/isar/page/TodoItem.dart';
 import 'package:flutter_templet_project/vendor/isar/provider/db_todo_provider.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 
-/// 基于 Provider 的 isar 数据库存储
-class TodoListPage extends StatelessWidget {
-  TodoListPage({super.key});
+class TodoLisPage extends StatefulWidget {
+
+  TodoLisPage({
+    super.key,
+    this.title
+  });
+
+  final String? title;
+
+  @override
+  State<TodoLisPage> createState() => _TodoLisPageState();
+}
+
+class _TodoLisPageState extends State<TodoLisPage> {
+
+  final _scrollController = ScrollController();
 
   final titleController = TextEditingController();
 
+  bool isAllChoic = false;
+  // bool get isAllChoic = false;
+  DBTodoProvider get provider => Provider.of<DBTodoProvider>(context, listen: false);
+
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<DBTodoProvider>(context, listen: false);
 
     return Scaffold(
       backgroundColor: Colors.black12,
@@ -24,10 +46,7 @@ class TodoListPage extends StatelessWidget {
         title: Text("Todo List"),
         actions: [
           IconButton(
-            onPressed: (){
-              titleController.text = "项目${IntExt.random(max: 999)}";
-              addModel(context: context, title: titleController.text);
-            },
+            onPressed: onAddItemRandom,
             icon: Icon(Icons.add)
           ),
           IconButton(
@@ -46,6 +65,12 @@ class TodoListPage extends StatelessWidget {
             );
           }
 
+          final checkedItems = value.todos.where((e) => e.isFinished == true).toList();
+          isAllChoic = value.todos.firstWhereOrNull((e) => e.isFinished == false) == null;
+
+          final icon = isAllChoic ? Icons.check_box : Icons.check_box_outline_blank;
+          final desc = "已选择 ${checkedItems.length}/${value.todos.length}";
+
           return Column(
             children: [
               Expanded(
@@ -56,87 +81,157 @@ class TodoListPage extends StatelessWidget {
 
                     final model = value.todos.reversed.toList()[index];
 
-                    return TodoItem(
-                      model: model,
-                      onToggleFinished: () {
-                        provider.toggleFinished(model);
-                      },
-                      onDelete: () {
-                        provider.deleteTodo(model);
-                      },
+                    onToggle(){
+                      model.isFinished = !model.isFinished;
+                      provider.put(model);
+                    }
+
+                    return InkWell(
+                      onTap: onToggle,
+                      child: TodoItem(
+                        model: model,
+                        onToggle: onToggle,
+                        onEdit: (){
+                          presentDiaog(
+                              text: model.title,
+                              onSure: (val){
+                                model.title = val;
+                                provider.put(model);
+
+                              }
+                          );
+                        },
+                        onDelete: () {
+                          provider.delete(model);
+                        },
+                      ),
                     );
                   }
                 ),
               ),
               Container(
-                height: 69,
-                color: Colors.white,
+                height: 70,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(color: Colors.blue),
+                  borderRadius: BorderRadius.all(Radius.circular(0)),
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Expanded(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            child: TextButton(
+                              onPressed: () async {
+                                ddlog("isAllChoic TextButton: $isAllChoic");
+                                for (var i = 0; i < value.todos.length; i++) {
+                                  final todo = value.todos[i];
+                                  todo.isFinished = !isAllChoic;
+                                }
+                                provider.putAll(value.todos);
+                              },
+                              child: Row(
+                                children: [
+                                  Icon(icon,),
+                                  SizedBox(width: 4,),
+                                  Text("全选 (${desc})"),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: InkWell(
+                              onTap: () async {
+                                final choicItems = value.todos.where((e) => e.isFinished).toList();
+                                await provider.deleteAll(choicItems);
+                              },
+                              child: Container(
+                                height: double.maxFinite,
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                  color: context.primaryColor,
+                                ),
+                                child: NText("删除", color: Colors.white,),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               ),
             ],
           );
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          addItem(context, onAdd: () {
-            addModel(context: context, title: titleController.text);
-            titleController.clear();
-            Navigator.pop(context);
-          });
-        },
+        onPressed: onAddItemRandom,
         child: const Icon(Icons.add),
       ),
     );
   }
 
-  addItem(BuildContext context, {required VoidCallback onAdd}) {
-    showDialog(
-        context: context,
-        builder: (context) {
+  presentDiaog({required String? text, required ValueChanged<String> onSure}) {
+    titleController.text = text ?? "项目${IntExt.random(max: 999)}";
 
-          titleController.text = "项目${IntExt.random(max: 999)}";
-
-          return AlertDialog(
-            title: const Text("Tambah Todo"),
-            shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(12)),
+    AlertDialog(
+      title: const Text("提示"),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(12)),
+      ),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          TextFormField(
+            controller: titleController,
+            decoration: const InputDecoration(
+              border: OutlineInputBorder(),
+              enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.grey)),
+              hintText: "请输入",
+              fillColor: Colors.white,
+              filled: true,
+              contentPadding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
             ),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                TextFormField(
-                  controller: titleController,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey)),
-                    hintText: "请输入",
-                    fillColor: Colors.white,
-                    filled: true,
-                    contentPadding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
-                  ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                ElevatedButton(
-                    onPressed: onAdd,
-                    style: const ButtonStyle(
-                        backgroundColor:
-                        MaterialStatePropertyAll(Colors.blue)),
-                    child: const Text(
-                      "add",
-                      style: TextStyle(color: Colors.white),
-                    ))
-              ],
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          NFooterButtonBar(
+            primary: Colors.red,
+            decoration: const BoxDecoration(
+              color: Colors.white,
             ),
-          );
-        }
-        );
+            enable: true,
+            // hideCancel: true,
+            // isReverse: true,
+            onCancel:  () {
+              Navigator.of(context).pop();
+            },
+            onConfirm: () {
+              onSure(titleController.text);
+              Navigator.of(context).pop();
+            },
+            // gap: 0,
+            // btnBorderRadius: BorderRadius.zero,
+            padding: EdgeInsets.zero,
+          ),
+        ],
+      ),
+    ).toShowDialog(context: context);
   }
 
+  onAddItemRandom() {
+    titleController.text = "项目${IntExt.random(max: 999)}";
+    addTodoItem(title: titleController.text);
+  }
 
-  addModel({required BuildContext context, required String title}) {
+  addTodoItem({required String title}) {
     if (title.isEmpty) {
       return;
     }
@@ -145,6 +240,6 @@ class TodoListPage extends StatelessWidget {
       ..title = title
       ..isFinished = false
       ..createdDate = DateTime.now();
-    Provider.of<DBTodoProvider>(context, listen: false).addTodo(todo);
+    Provider.of<DBTodoProvider>(context, listen: false).put(todo);
   }
 }
