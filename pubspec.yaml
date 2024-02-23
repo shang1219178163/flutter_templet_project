@@ -10,7 +10,7 @@ analyzer:
 #    - non-nullable
 
 environment:
-  sdk: '>=3.1.5 <4.0.0'
+  sdk: '>=3.0.6 <4.0.0'
 
 dependencies:
   flutter:
