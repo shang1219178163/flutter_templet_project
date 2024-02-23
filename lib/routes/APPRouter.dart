@@ -50,6 +50,7 @@ import 'package:flutter_templet_project/pages/demo/SegmentedControlDemo.dart';
 import 'package:flutter_templet_project/pages/demo/SelectList.dart';
 import 'package:flutter_templet_project/pages/demo/SwitchDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TapRegionDemo.dart';
+import 'package:flutter_templet_project/pages/demo/TextDemo.dart';
 import 'package:flutter_templet_project/pages/demo/WeatherInfoPage.dart';
 import 'package:flutter_templet_project/pages/demo/AutoLayoutDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AlertDialogTagSelectDemo.dart';
@@ -336,7 +337,7 @@ class APPRouter {
   static const mediaQueryScreeenDemo = '/mediaQueryScreeenDemo';
   static const autoLayoutDemo = '/AutoLayoutDemo';
   static const appBarDemo = '/appBarDemo';
-
+  static const textDemo = '/textDemo';
 
   static const loginPage = '/LoginPage';
   static const loginPageOne = '/loginPageOne';
@@ -732,6 +733,7 @@ class AppPage {
     GetPage(name: APPRouter.autoLayoutDemo, page: () => AutoLayoutDemo(),),
 
 
+    GetPage(name: APPRouter.textDemo, page: () => TextDemo(),),
 
     GetPage(name: APPRouter.appBarDemo, page: () => AppBarDemo(),),
 
@@ -1075,7 +1077,7 @@ class AppPage {
     GetPage(name: APPRouter.appBarColorChangerDemo, page: () => NAppBarColorChangerDemo(),),
     GetPage(name: APPRouter.footerButtonBarDemo, page: () => NFooterButtonBarDemo(),),
     GetPage(name: APPRouter.sectionHeaderDemo, page: () => NSectionHeaderDemo(),),
-    GetPage(name: APPRouter.todoListPage, page: () => TodoListPage(),),
+    GetPage(name: APPRouter.todoListPage, page: () => TodoLisPage(),),
 
 
   ];

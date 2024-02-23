@@ -344,6 +344,8 @@ var tuples = <Tuple2<String, List<Tuple2<String, String>>>>[
 
 
 var list = <Tuple2<String, String>>[
+
+  Tuple2(APPRouter.textDemo, "textDemo", ),
   Tuple2(APPRouter.materialDemo, "materialDemo", ),
   Tuple2(APPRouter.alertDialogDemo, "AlertDialog", ),
   Tuple2(APPRouter.alertDialogTagSelectDemo, "alertDialogTagSelectDemo", ),
