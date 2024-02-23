@@ -211,6 +211,7 @@ import 'package:flutter_templet_project/vendor/flutter_swiper_demo.dart';
 import 'package:flutter_templet_project/vendor/flutter_swiper_indicator_demo.dart';
 import 'package:flutter_templet_project/vendor/getx/getx_demo.dart';
 import 'package:flutter_templet_project/pages/keyboard_attach_demo.dart';
+import 'package:flutter_templet_project/vendor/isar/page/StudentLisPage.dart';
 import 'package:flutter_templet_project/vendor/isar/page/TodoLisPage.dart';
 import 'package:flutter_templet_project/vendor/qr/qr_code_scanner_demo.dart';
 import 'package:flutter_templet_project/vendor/qr/qr_flutter_demo.dart';
@@ -680,6 +681,7 @@ class APPRouter {
   static const footerButtonBarDemo = '/footerButtonBarDemo';
   static const sectionHeaderDemo = '/sectionHeaderDemo';
   static const todoListPage = '/todoListPage';
+  static const studentLisPage = '/studentLisPage';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -1078,6 +1080,7 @@ class AppPage {
     GetPage(name: APPRouter.footerButtonBarDemo, page: () => NFooterButtonBarDemo(),),
     GetPage(name: APPRouter.sectionHeaderDemo, page: () => NSectionHeaderDemo(),),
     GetPage(name: APPRouter.todoListPage, page: () => TodoLisPage(),),
+    GetPage(name: APPRouter.studentLisPage, page: () => StudentLisPage(),),
 
 
   ];
