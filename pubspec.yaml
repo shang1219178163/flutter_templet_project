@@ -10,7 +10,7 @@ analyzer:
 #    - non-nullable
 
 environment:
-  sdk: '>=3.0.0 <4.0.0'
+  sdk: '>=3.1.5 <4.0.0'
 
 dependencies:
   flutter:
@@ -189,6 +189,8 @@ dependencies:
     git:
       url: 'git@github.com:shang1219178163/json_to_dart.git'
       ref: 'v1.0.0'
+  isar: ^3.1.0+1
+  isar_flutter_libs: ^3.1.0+1
 
 #  User:
 #    hosted:
@@ -217,7 +219,8 @@ dev_dependencies:
 #  integration_test:
 #    sdk: flutter
 
-  build_runner: ^2.1.4
+  build_runner: ^2.4.8
+  isar_generator: ^3.1.0+1
 
 
 # The following section is specific to Flutter.

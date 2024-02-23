@@ -38,6 +38,8 @@ import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:flutter_templet_project/util/AppLifecycleObserver.dart';
 import 'package:flutter_templet_project/util/app_util.dart';
 import 'package:flutter_templet_project/util/debug_log.dart';
+import 'package:flutter_templet_project/vendor/isar/page/TodoList.dart';
+import 'package:flutter_templet_project/vendor/isar/provider/db_todo_provider.dart';
 import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
@@ -92,7 +94,8 @@ Future<void> main() async {
           update: (ctx, person, eatModel) => EatModel(name: person.name),
         ),
       ],
-      child: MyApp(),
+      // child: MyApp(),
+      child: DBMyApp(),
     ),
   );
 
@@ -138,8 +141,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // parseYaml();
-
     final app = GetMaterialApp(
       popGesture: true,//swipe back
       navigatorKey: AppUtil.navigatorKey,
@@ -201,7 +202,26 @@ class MyApp extends StatelessWidget {
   }
 }
 
-final kScaffoldKey = GlobalKey<ScaffoldState>();
+class DBMyApp extends StatelessWidget {
+  const DBMyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider(
+      create: (context) => DBTodoProvider(),
+      child: MaterialApp(
+        title: 'ISAR TodoList',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
+        ),
+        home: TodoList(),
+      ),
+    );
+  }
+
+}
+
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({ Key? key, this.title}) : super(key: key);
@@ -318,7 +338,7 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver, Ap
   @override
   Widget build(BuildContext context) {
     final page = Scaffold(
-      key: kScaffoldKey,
+      // key: Scaffold.of(context),
       // drawer: MyDrawer(),
       drawer: APPDrawerMenuPage(),
       endDrawer: APPDrawerMenuPage(),
