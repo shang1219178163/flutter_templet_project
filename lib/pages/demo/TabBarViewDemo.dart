@@ -39,7 +39,7 @@ class TabBarViewDemo extends StatelessWidget {
             onPressed: () {
               // 打开抽屉菜单
               // Scaffold.of(context).openDrawer();
-              kScaffoldKey.currentState!.openDrawer();
+              Scaffold.of(context).openDrawer();
             },
           );
         }),

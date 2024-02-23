@@ -93,8 +93,7 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
           return IconButton(
             icon: Icon(Icons.menu, color: Colors.white), //自定义图标
             onPressed: () {
-              // Scaffold.of(context).openDrawer();
-              kScaffoldKey.currentState!.openDrawer();// 打开抽屉菜单
+              Scaffold.of(context).openDrawer();// 打开抽屉菜单
             },
           );
         }),
@@ -127,7 +126,7 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
       floatingActionButton: FloatingActionButton(
         tooltip: 'Increment',
         onPressed: () {
-          // kScaffoldKey.currentState!.openEndDrawer();
+          // Scaffold.of(context).currentState!.openEndDrawer();
           // testData();
           // final titles = getTitles(tuples: tuples);
           // debugPrint("titles: ${titles}");

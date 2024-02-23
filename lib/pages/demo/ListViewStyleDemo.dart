@@ -85,7 +85,7 @@ class _ListViewStyleDemoState extends State<ListViewStyleDemo> with SingleTicker
       floatingActionButton: FloatingActionButton(
         tooltip: 'Increment',
         onPressed: () {
-          kScaffoldKey.currentState!.openEndDrawer();
+          Scaffold.of(context).openEndDrawer();
           // testData();
           getTitles(tuples: tuples);
         },
