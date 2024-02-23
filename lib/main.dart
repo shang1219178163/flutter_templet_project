@@ -39,7 +39,8 @@ import 'package:flutter_templet_project/util/AppLifecycleObserver.dart';
 import 'package:flutter_templet_project/util/app_util.dart';
 import 'package:flutter_templet_project/util/debug_log.dart';
 import 'package:flutter_templet_project/vendor/isar/page/TodoLisPage.dart';
-import 'package:flutter_templet_project/vendor/isar/provider/db_todo_provider.dart';
+import 'package:flutter_templet_project/vendor/isar/provider/db_student_provider.dart';
+import 'package:flutter_templet_project/vendor/isar/provider/db_provider.dart';
 import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
@@ -85,7 +86,7 @@ Future<void> main() async {
       providers: [
         // ChangeNotifierProvider.value(value: ColorFilteredProvider()),
         ChangeNotifierProvider(create: (context) => ColorFilteredProvider()),
-        ChangeNotifierProvider(create: (context) => DBTodoProvider()),
+        ChangeNotifierProvider(create: (context) => DBProvider()),
 
         ChangeNotifierProvider(create: (context) => CartModel()),
         ChangeNotifierProvider<Person>(create: (ctx) => Person(),),
