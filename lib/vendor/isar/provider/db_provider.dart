@@ -6,6 +6,13 @@
 //  Copyright © 2024/2/23 shang. All rights reserved.
 //
 
+//
+//  DbProvider.dart
+//  flutter_templet_project
+//
+//  Created by shang on 2024/2/24 00:08.
+//  Copyright © 2024/2/24 shang. All rights reserved.
+//
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/vendor/isar/model/db_student.dart';
@@ -13,7 +20,7 @@ import 'package:flutter_templet_project/vendor/isar/model/db_todo.dart';
 import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
 
-/// 待办事项基于 isar 数据库的 Provider 实现
+/// 基于 isar 数据库的 Provider 实现
 class DBProvider extends ChangeNotifier {
   DBProvider() {
     init();
