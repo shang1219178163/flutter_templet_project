@@ -212,7 +212,13 @@ import 'package:flutter_templet_project/vendor/flutter_swiper_indicator_demo.dar
 import 'package:flutter_templet_project/vendor/getx/getx_demo.dart';
 import 'package:flutter_templet_project/pages/keyboard_attach_demo.dart';
 import 'package:flutter_templet_project/vendor/isar/page/StudentLisPage.dart';
-import 'package:flutter_templet_project/vendor/isar/page/TodoLisPage.dart';
+import 'package:flutter_templet_project/vendor/isar/page/StudentLisPageOne.dart';
+import 'package:flutter_templet_project/vendor/isar/page/StudentLisPageTwo.dart';
+import 'package:flutter_templet_project/vendor/isar/page/StudentTabPage.dart';
+import 'package:flutter_templet_project/vendor/isar/page/TodoListPage.dart';
+import 'package:flutter_templet_project/vendor/isar/page/TodoListPageOne.dart';
+import 'package:flutter_templet_project/vendor/isar/page/TodoListPageTwo.dart';
+import 'package:flutter_templet_project/vendor/isar/page/TodoListTabPage.dart';
 import 'package:flutter_templet_project/vendor/qr/qr_code_scanner_demo.dart';
 import 'package:flutter_templet_project/vendor/qr/qr_flutter_demo.dart';
 import 'package:flutter_templet_project/vendor/soundAbount/SoundPlayDemo.dart';
@@ -680,8 +686,8 @@ class APPRouter {
   static const appBarColorChangerDemo = '/appBarColorChangerDemo';
   static const footerButtonBarDemo = '/footerButtonBarDemo';
   static const sectionHeaderDemo = '/sectionHeaderDemo';
-  static const todoListPage = '/todoListPage';
-  static const studentLisPage = '/studentLisPage';
+  static const todoListTabPage = '/todoListTabPage';
+  static const studentTabPage = '/studentTabPage';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -1079,9 +1085,8 @@ class AppPage {
     GetPage(name: APPRouter.appBarColorChangerDemo, page: () => NAppBarColorChangerDemo(),),
     GetPage(name: APPRouter.footerButtonBarDemo, page: () => NFooterButtonBarDemo(),),
     GetPage(name: APPRouter.sectionHeaderDemo, page: () => NSectionHeaderDemo(),),
-    GetPage(name: APPRouter.todoListPage, page: () => TodoLisPage(),),
-    GetPage(name: APPRouter.studentLisPage, page: () => StudentLisPage(),),
-
+    GetPage(name: APPRouter.todoListTabPage, page: () => TodoListTabPage(),),
+    GetPage(name: APPRouter.studentTabPage, page: () => StudentTabPage(),),
 
   ];
 }

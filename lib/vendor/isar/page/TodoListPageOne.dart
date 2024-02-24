@@ -11,39 +11,39 @@ import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
-import 'package:flutter_templet_project/vendor/isar/model/db_student.dart';
-import 'package:flutter_templet_project/vendor/isar/page/StudentCell.dart';
+import 'package:flutter_templet_project/vendor/isar/model/db_todo.dart';
+import 'package:flutter_templet_project/vendor/isar/page/TodoItem.dart';
 import 'package:flutter_templet_project/vendor/isar/provider/change_notifier/db_provider.dart';
+import 'package:flutter_templet_project/vendor/isar/provider/gex_controller/db_todo_controller.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
+/// DBTodoController 示例
+class TodoListPageOne extends StatefulWidget {
 
-class StudentLisPage extends StatefulWidget {
-
-  StudentLisPage({
+  TodoListPageOne({
     super.key,
-    this.title
+    this.title,
   });
 
   final String? title;
 
   @override
-  State<StudentLisPage> createState() => _StudentLisPageState();
+  State<TodoListPageOne> createState() => _TodoListPageOneState();
 }
 
-class _StudentLisPageState extends State<StudentLisPage> {
+class _TodoListPageOneState extends State<TodoListPageOne> {
 
   final _scrollController = ScrollController();
 
   final titleController = TextEditingController();
 
   bool isAllChoic = false;
-  // bool get isAllChoic = false;
-  DBProvider get provider => Provider.of<DBProvider>(context, listen: false);
+
+  final provider = Get.put(DBTodoController());
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       backgroundColor: Colors.black12,
       appBar: AppBar(
@@ -55,19 +55,19 @@ class _StudentLisPageState extends State<StudentLisPage> {
           ),
         ],
       ),
-      body: Consumer<DBProvider>(
-        builder: (context, value, child) {
-          if (value.students.isEmpty) {
+      body: GetBuilder<DBTodoController>(
+        builder: (value) {
+          if (value.entitys.isEmpty) {
             return const Center(
-              child: Text("noting"),
+              child: Text("no todo"),
             );
           }
 
-          final checkedItems = value.students.where((e) => e.isSelected == true).toList();
-          isAllChoic = value.students.firstWhereOrNull((e) => e.isSelected == false) == null;
+          final checkedItems = value.entitys.where((e) => e.isFinished == true).toList();
+          isAllChoic = value.entitys.firstWhereOrNull((e) => e.isFinished == false) == null;
 
           final checkIcon = isAllChoic ? Icons.check_box : Icons.check_box_outline_blank;
-          final checkDesc = "已选择 ${checkedItems.length}/${value.students.length}";
+          final checkDesc = "已选择 ${checkedItems.length}/${value.entitys.length}";
 
           return Column(
             children: [
@@ -78,32 +78,33 @@ class _StudentLisPageState extends State<StudentLisPage> {
                   },
                   child: ListView.builder(
                     padding: EdgeInsets.all(10),
-                    itemCount: value.students.length,
+                    itemCount: value.entitys.length,
                     itemBuilder: (context, index) {
 
-                      final model = value.students.reversed.toList()[index];
+                      final model = value.entitys.reversed.toList()[index];
 
                       onToggle(){
-                        model.isSelected = !model.isSelected;
-                        provider.put<DBStudent>(model);
+                        model.isFinished = !model.isFinished;
+                        provider.put(model);
                       }
 
                       return InkWell(
                         onTap: onToggle,
-                        child: StudentCell(
+                        child: TodoItem(
                           model: model,
                           onToggle: onToggle,
                           onEdit: (){
                             presentDiaog(
-                                text: model.name,
+                                text: model.title,
                                 onSure: (val){
-                                  model.name = val;
-                                  provider.put<DBStudent>(model);
+                                  model.title = val;
+                                  provider.put(model);
+
                                 }
                             );
                           },
                           onDelete: () {
-                            provider.delete<DBStudent>(model.id);
+                            provider.delete(model.id);
                           },
                         ),
                       );
@@ -116,19 +117,16 @@ class _StudentLisPageState extends State<StudentLisPage> {
                 checkDesc: checkDesc,
                 onCheck: () async {
                   ddlog("isAllChoic TextButton: $isAllChoic");
-                  for (var i = 0; i < value.students.length; i++) {
-                    final e = value.students[i];
-                    e.isSelected = !isAllChoic;
+                  for (var i = 0; i < value.entitys.length; i++) {
+                    final e = value.entitys[i];
+                    e.isFinished = !isAllChoic;
                   }
-                  provider.putAll<DBStudent>(value.students);
+                  provider.putAll(value.entitys);
                 },
-                onAdd: () async {
-                  titleController.text = "学生${IntExt.random(max: 999)}";
-                  addTodoItem(title: titleController.text);
-                },
+                onAdd: onAddItemRandom,
                 onDelete:  () async {
-                  final choicItems = value.students.where((e) => e.isSelected).map((e) => e.id).toList();
-                  await provider.deleteAll<DBStudent>(choicItems);
+                  final choicItems = value.entitys.where((e) => e.isFinished).map((e) => e.id).toList();
+                  await provider.deleteAll(choicItems);
                 },
               ),
             ],
@@ -206,7 +204,7 @@ class _StudentLisPageState extends State<StudentLisPage> {
   }
 
   onAddItemRandom() {
-    titleController.text = "学生${IntExt.random(max: 999)}";
+    titleController.text = "项目${IntExt.random(max: 999)}";
     addTodoItem(title: titleController.text);
   }
 
@@ -215,11 +213,12 @@ class _StudentLisPageState extends State<StudentLisPage> {
       return;
     }
 
-    var todo = DBStudent(
-      name: title,
-      isSelected: false,
+    var todo = DBTodo(
+      title: title,
+      isFinished: false,
       createdDate: DateTime.now().toIso8601String(),
     );
-    provider.put<DBStudent>(todo);
+    provider.put(todo);
   }
+
 }

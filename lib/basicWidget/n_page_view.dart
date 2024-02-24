@@ -23,6 +23,7 @@ class NPageView extends StatefulWidget {
     this.isScrollable = false,
     this.isBottom = false,
     this.tabBar,
+    this.onPageChanged,
   }) : super(key: key);
 
   final List<Tuple2<String, Widget>> items;
@@ -36,6 +37,8 @@ class NPageView extends StatefulWidget {
   final bool isBottom;
   /// 样式设置
   final TabBar? tabBar;
+  
+  final ValueChanged<int>? onPageChanged;
 
   @override
   _NPageViewState createState() => _NPageViewState();
@@ -78,6 +81,7 @@ class _NPageViewState extends State<NPageView> with SingleTickerProviderStateMix
           onPageChanged: (index) {
             _tabController.animateTo(index);
             setState(() {});
+            widget.onPageChanged?.call(index);
           },
           children: widget.items.map((e) => e.item2).toList(),
         ),
@@ -131,6 +135,7 @@ class _NPageViewState extends State<NPageView> with SingleTickerProviderStateMix
       onTap: (index){
         _pageController.jumpToPage(index);
         setState(() {});
+        widget.onPageChanged?.call(index);
       },
     )
         // .cover(widget.tabBar)

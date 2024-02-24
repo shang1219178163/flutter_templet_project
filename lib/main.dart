@@ -9,6 +9,7 @@
 
 
 import 'package:easy_refresh/easy_refresh.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -38,9 +39,11 @@ import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:flutter_templet_project/util/AppLifecycleObserver.dart';
 import 'package:flutter_templet_project/util/app_util.dart';
 import 'package:flutter_templet_project/util/debug_log.dart';
-import 'package:flutter_templet_project/vendor/isar/page/TodoLisPage.dart';
-import 'package:flutter_templet_project/vendor/isar/provider/db_student_provider.dart';
-import 'package:flutter_templet_project/vendor/isar/provider/db_provider.dart';
+import 'package:flutter_templet_project/vendor/isar/DBManager.dart';
+import 'package:flutter_templet_project/vendor/isar/page/TodoListPage.dart';
+import 'package:flutter_templet_project/vendor/isar/provider/change_notifier/db_student_provider.dart';
+import 'package:flutter_templet_project/vendor/isar/provider/change_notifier/db_todo_provider.dart';
+import 'package:flutter_templet_project/vendor/isar/provider/change_notifier/db_provider.dart';
 import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
@@ -76,6 +79,7 @@ Future<void> main() async {
   }
   await ScreenUtil.ensureScreenSize();
   await CacheService().init();
+  await DBManager().init();
 
   setCustomErrorPage();
   await initServices();
@@ -87,6 +91,8 @@ Future<void> main() async {
         // ChangeNotifierProvider.value(value: ColorFilteredProvider()),
         ChangeNotifierProvider(create: (context) => ColorFilteredProvider()),
         ChangeNotifierProvider(create: (context) => DBProvider()),
+        ChangeNotifierProvider(create: (context) => DBTodoProvider()),
+        ChangeNotifierProvider(create: (context) => DBStudentProvider()),
 
         ChangeNotifierProvider(create: (context) => CartModel()),
         ChangeNotifierProvider<Person>(create: (ctx) => Person(),),
@@ -479,7 +485,7 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver, Ap
 
   /// 上拉刷新,下拉加载全局配置
   configRefresh() {
-    EasyRefresh.defaultHeaderBuilder = () => const ClassicHeader(
+    EasyRefresh.defaultHeaderBuilder = () => ClassicHeader(
       triggerOffset: 50,
       showMessage: false,
       dragText: "下拉刷新",
@@ -490,9 +496,22 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver, Ap
       noMoreText: "我可是有底线的 ~",
       failedText: "刷新失败",
       messageText: '更新时间 %T',
+      spacing: 0,
+      textBuilder: (context, state, text) {
+        return const SizedBox();
+      },
+      messageBuilder: (context, state, text, dateTime) {
+        return const SizedBox();
+      },
+      pullIconBuilder: (context, state, animation) {
+        return const SizedBox(
+          child: CupertinoActivityIndicator(radius: 10),
+        );
+      },
+      infiniteOffset: null,
     );
 
-    EasyRefresh.defaultFooterBuilder = () => const ClassicFooter(
+    EasyRefresh.defaultFooterBuilder = () => ClassicFooter(
       triggerOffset: 50,
       showMessage: false,
       dragText: "上拉加载",
@@ -502,10 +521,20 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver, Ap
       processedText: "加载完成",
       noMoreText: "我可是有底线的 ~",
       failedText: "加载失败",
-      // messageBuilder: (context, state, text, dateTime) {
-      //   return SizedBox();
-      // },
-      noMoreIcon: SizedBox(),
+      // noMoreIcon: SizedBox(),
+      spacing: 0,
+      textBuilder: (context, state, text) {
+        return const SizedBox();
+      },
+      messageBuilder: (context, state, text, dateTime) {
+        return const SizedBox();
+      },
+      pullIconBuilder: (context, state, animation) {
+        return const SizedBox(
+          child: CupertinoActivityIndicator(radius: 10),
+        );
+      },
+      infiniteOffset: null,
     );
   }
 

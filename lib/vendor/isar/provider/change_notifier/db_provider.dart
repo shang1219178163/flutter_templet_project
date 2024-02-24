@@ -1,12 +1,4 @@
 //
-//  DbTodoProvider.dart
-//  flutter_templet_project
-//
-//  Created by shang on 2024/2/23 22:42.
-//  Copyright © 2024/2/23 shang. All rights reserved.
-//
-
-//
 //  DbProvider.dart
 //  flutter_templet_project
 //
@@ -15,10 +7,10 @@
 //
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/vendor/isar/DBManager.dart';
 import 'package:flutter_templet_project/vendor/isar/model/db_student.dart';
 import 'package:flutter_templet_project/vendor/isar/model/db_todo.dart';
 import 'package:isar/isar.dart';
-import 'package:path_provider/path_provider.dart';
 
 /// 基于 isar 数据库的 Provider 实现
 class DBProvider extends ChangeNotifier {
@@ -26,7 +18,8 @@ class DBProvider extends ChangeNotifier {
     init();
   }
 
-  late Isar isar;
+  // late Isar isar;
+  final isar = DBManager().isar;
 
   /// 待办事项
   final List<DBTodo> _todos = <DBTodo>[];
@@ -37,15 +30,25 @@ class DBProvider extends ChangeNotifier {
   List<DBStudent> get students => _students;
 
   Future<void> init() async {
-    isar = await openDB(schemas: [
-      DBTodoSchema,
-      DBStudentSchema,
-    ]);
+    // isar = await openDB(schemas: [
+    //   DBTodoSchema,
+    //   DBStudentSchema,
+    // ]);
     isar.txn(() async {
       await update<DBTodo>();
       await update<DBStudent>();
     });
   }
+
+  // Future<Isar> openDB({required List<CollectionSchema<dynamic>> schemas,}) async {
+  //   final dir = await getApplicationDocumentsDirectory();
+  //   final result = await Isar.open(
+  //     schemas,
+  //     directory: dir.path,
+  //     inspector: true,
+  //   );
+  //   return result;
+  // }
 
   /// 查
   Future<void> update<E>() async {
@@ -59,16 +62,6 @@ class DBProvider extends ChangeNotifier {
       _students.addAll(items as List<DBStudent>);
     }
     notifyListeners();
-  }
-
-  Future<Isar> openDB({required List<CollectionSchema<dynamic>> schemas,}) async {
-    final dir = await getApplicationDocumentsDirectory();
-    final result = await Isar.open(
-      schemas,
-      directory: dir.path,
-      inspector: true,
-    );
-    return result;
   }
 
   /// 增/改

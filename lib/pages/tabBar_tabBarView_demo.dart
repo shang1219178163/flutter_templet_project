@@ -575,10 +575,9 @@ var specials = <Tuple2<String, String>>[
   Tuple2(APPRouter.longCaptureWidgetDemo, "widget长截图", ),
   Tuple2(APPRouter.imageStretchDemo, "图片拉伸", ),
   Tuple2(APPRouter.drawCanvasDemo, "drawCanvas", ),
-  Tuple2(APPRouter.todoListPage, "todoListPage", ),
-  Tuple2(APPRouter.studentLisPage, "studentLisPage", ),
 
-
+  Tuple2(APPRouter.todoListTabPage, "todoListTabPage", ),
+  Tuple2(APPRouter.studentTabPage, "studentTabPage", ),
 
 ];
 
