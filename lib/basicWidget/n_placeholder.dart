@@ -5,20 +5,28 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 
+enum NPlaceholderType{
+  none,
+  empty,
+  offline;
+
+}
+
+
 /// 占位
 class NPlaceholder extends StatelessWidget {
 
   NPlaceholder({
   	Key? key,
-    required this.onTap,
-    this.imageName,
+    this.onTap,
+    this.placeholder = const AssetImage("assets/images/img_placeholder_empty.png"),
     this.message,
     this.imageAndTextSpacing = 10,
     this.image,
     this.text,
   }) : super(key: key);
 
-  String? imageName;
+  AssetImage placeholder;
 
   String? message;
 
@@ -46,8 +54,7 @@ class NPlaceholder extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             image ?? Image(
-              image: imageName?.toAssetImage() ??
-                  "img_network_empty.png".toAssetImage(),
+              image: placeholder,
               width: 110.w,
               height: 110.w,
             ),

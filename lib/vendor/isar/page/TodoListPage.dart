@@ -5,12 +5,10 @@ import 'dart:async';
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_choic_bottom_bar.dart';
-import 'package:flutter_templet_project/basicWidget/n_footer_button_bar.dart';
-import 'package:flutter_templet_project/basicWidget/n_text.dart';
-import 'package:flutter_templet_project/extension/build_context_ext.dart';
+import 'package:flutter_templet_project/basicWidget/n_placeholder.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/num_ext.dart';
-import 'package:flutter_templet_project/extension/widget_ext.dart';
+import 'package:flutter_templet_project/vendor/isar/DBDialogMixin.dart';
 import 'package:flutter_templet_project/vendor/isar/model/db_todo.dart';
 import 'package:flutter_templet_project/vendor/isar/page/TodoItem.dart';
 import 'package:flutter_templet_project/vendor/isar/provider/change_notifier/db_provider.dart';
@@ -31,7 +29,7 @@ class TodoListPage extends StatefulWidget {
   State<TodoListPage> createState() => _TodoListPageState();
 }
 
-class _TodoListPageState extends State<TodoListPage> {
+class _TodoListPageState extends State<TodoListPage> with DBDialogMxin {
 
   final _scrollController = ScrollController();
 
@@ -59,11 +57,6 @@ class _TodoListPageState extends State<TodoListPage> {
       ),
       body: Consumer<DBProvider>(
         builder: (context, value, child) {
-          if (value.todos.isEmpty) {
-            return const Center(
-              child: Text("no todo"),
-            );
-          }
 
           final checkedItems = value.todos.where((e) => e.isFinished == true).toList();
           isAllChoic = value.todos.firstWhereOrNull((e) => e.isFinished == false) == null;
@@ -71,48 +64,59 @@ class _TodoListPageState extends State<TodoListPage> {
           final checkIcon = isAllChoic ? Icons.check_box : Icons.check_box_outline_blank;
           final checkDesc = "已选择 ${checkedItems.length}/${value.todos.length}";
 
+          Widget content = NPlaceholder(
+            onTap: (){
+              provider.update();
+            },
+          );
+          if (value.todos.isNotEmpty) {
+            content = buildRefresh(
+              onRefresh: (){
+                provider.update();
+              },
+              child: ListView.builder(
+                  padding: EdgeInsets.all(10),
+                  itemCount: value.todos.length,
+                  itemBuilder: (context, index) {
+
+                    final model = value.todos.reversed.toList()[index];
+
+                    onToggle(){
+                      model.isFinished = !model.isFinished;
+                      provider.put<DBTodo>(model);
+                    }
+
+                    return InkWell(
+                      onTap: onToggle,
+                      child: TodoItem(
+                        model: model,
+                        onToggle: onToggle,
+                        onEdit: (){
+                          titleController.text = model.title;
+
+                          presentDialog(
+                            controller: titleController,
+                            onSure: (val){
+                              model.title = val;
+                              provider.put<DBTodo>(model);
+
+                            }
+                          );
+                        },
+                        onDelete: () {
+                          provider.delete<DBTodo>(model.id);
+                        },
+                      ),
+                    );
+                  }
+              ),
+            );
+          }
+
           return Column(
             children: [
               Expanded(
-                child: buildRefresh(
-                  onRefresh: (){
-                    provider.update<DBTodo>();
-                  },
-                  child: ListView.builder(
-                    padding: EdgeInsets.all(10),
-                    itemCount: value.todos.length,
-                    itemBuilder: (context, index) {
-
-                      final model = value.todos.reversed.toList()[index];
-
-                      onToggle(){
-                        model.isFinished = !model.isFinished;
-                        provider.put<DBTodo>(model);
-                      }
-
-                      return InkWell(
-                        onTap: onToggle,
-                        child: TodoItem(
-                          model: model,
-                          onToggle: onToggle,
-                          onEdit: (){
-                            presentDiaog(
-                                text: model.title,
-                                onSure: (val){
-                                  model.title = val;
-                                  provider.put<DBTodo>(model);
-
-                                }
-                            );
-                          },
-                          onDelete: () {
-                            provider.delete<DBTodo>(model.id);
-                          },
-                        ),
-                      );
-                    }
-                  ),
-                ),
+                child: content,
               ),
               NChoicBottomBar(
                 checkIcon: checkIcon,
@@ -153,56 +157,6 @@ class _TodoListPageState extends State<TodoListPage> {
       onLoad: onLoad,
       child: child,
     );
-  }
-
-  presentDiaog({required String? text, required ValueChanged<String> onSure}) {
-    titleController.text = text ?? "项目${IntExt.random(max: 999)}";
-
-    AlertDialog(
-      title: const Text("提示"),
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(12)),
-      ),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          TextFormField(
-            controller: titleController,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.grey)),
-              hintText: "请输入",
-              fillColor: Colors.white,
-              filled: true,
-              contentPadding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
-            ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          NFooterButtonBar(
-            primary: Colors.red,
-            decoration: const BoxDecoration(
-              color: Colors.white,
-            ),
-            enable: true,
-            // hideCancel: true,
-            // isReverse: true,
-            onCancel:  () {
-              Navigator.of(context).pop();
-            },
-            onConfirm: () {
-              onSure(titleController.text);
-              Navigator.of(context).pop();
-            },
-            // gap: 0,
-            // btnBorderRadius: BorderRadius.zero,
-            padding: EdgeInsets.zero,
-          ),
-        ],
-      ),
-    ).toShowDialog(context: context);
   }
 
   onAddItemRandom() {
