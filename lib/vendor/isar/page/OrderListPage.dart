@@ -10,11 +10,8 @@ import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/vendor/isar/DBDialogMixin.dart';
 import 'package:flutter_templet_project/vendor/isar/model/db_order.dart';
-import 'package:flutter_templet_project/vendor/isar/model/db_todo.dart';
 import 'package:flutter_templet_project/vendor/isar/page/OrderItem.dart';
-import 'package:flutter_templet_project/vendor/isar/page/TodoItem.dart';
 import 'package:flutter_templet_project/vendor/isar/provider/change_notifier/db_generic_provider.dart';
-import 'package:flutter_templet_project/vendor/isar/provider/change_notifier/db_todo_provider.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 

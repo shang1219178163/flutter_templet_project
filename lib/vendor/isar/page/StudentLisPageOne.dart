@@ -11,8 +11,9 @@ import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/vendor/isar/DBDialogMixin.dart';
 import 'package:flutter_templet_project/vendor/isar/model/db_student.dart';
 import 'package:flutter_templet_project/vendor/isar/page/StudentCell.dart';
-import 'package:flutter_templet_project/vendor/isar/provider/gex_controller/db_student_controller.dart';
+import 'package:flutter_templet_project/vendor/isar/provider/change_notifier/db_generic_provider.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
 
 class StudentLisPageOne extends StatefulWidget {
@@ -35,11 +36,8 @@ class _StudentLisPageOneState extends State<StudentLisPageOne> with DBDialogMxin
   final titleController = TextEditingController();
 
   bool isAllChoic = false;
-  // bool get isAllChoic = false;
-  // DBStudentProvider get provider => Provider.of<DBStudentProvider>(context, listen: false);
 
-  final provider = Get.put(DBStudentController());
-
+  DBGenericProvider<DBStudent> get provider => Provider.of<DBGenericProvider<DBStudent>>(context, listen: false);
 
   @override
   Widget build(BuildContext context) {
@@ -57,8 +55,8 @@ class _StudentLisPageOneState extends State<StudentLisPageOne> with DBDialogMxin
           ),
         ],
       ),
-      body: GetBuilder<DBStudentController>(
-        builder: (value) {
+      body: Consumer<DBGenericProvider<DBStudent>>(
+        builder: (context, value, child) {
 
           final checkedItems = value.entitys.where((e) => e.isSelected == true).toList();
           isAllChoic = value.entitys.firstWhereOrNull((e) => e.isSelected == false) == null;

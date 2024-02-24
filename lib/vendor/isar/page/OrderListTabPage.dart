@@ -2,13 +2,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_page_view.dart';
-import 'package:flutter_templet_project/vendor/isar/page/StudentLisPage.dart';
-import 'package:flutter_templet_project/vendor/isar/page/StudentLisPageOne.dart';
+import 'package:flutter_templet_project/vendor/isar/page/OrderListPage.dart';
+import 'package:flutter_templet_project/vendor/isar/page/OrderListPageOne.dart';
 import 'package:tuple/tuple.dart';
 
-class StudentTabPage extends StatefulWidget {
+class OrderListTabPage extends StatefulWidget {
 
-  StudentTabPage({
+  OrderListTabPage({
     super.key,
     this.title
   });
@@ -16,10 +16,10 @@ class StudentTabPage extends StatefulWidget {
   final String? title;
 
   @override
-  State<StudentTabPage> createState() => _StudentTabPageState();
+  State<OrderListTabPage> createState() => _OrderListTabPageState();
 }
 
-class _StudentTabPageState extends State<StudentTabPage> {
+class _OrderListTabPageState extends State<OrderListTabPage> {
 
   final _scrollController = ScrollController();
 
@@ -42,13 +42,16 @@ class _StudentTabPageState extends State<StudentTabPage> {
 
   buildBody() {
     return NPageView(
+      needSafeArea: false,
       items: items,
+      onPageChanged: (index) {
+
+      },
     );
   }
 
   List<Tuple2<String, Widget>> items = [
-    Tuple2('DBStudentController', StudentLisPage()),
-    Tuple2('DBStudentProvider', StudentLisPageOne()),
-
+    Tuple2('DBGenericProvider', OrderListPage()),
+    Tuple2('GenericProvider<DBOrder>', OrderListPageOne()),
   ];
 }

@@ -1,20 +1,21 @@
 //
-//  DbStudentProvider.dart
+//  DbTodoController.dart
 //  flutter_templet_project
 //
-//  Created by shang on 2024/2/24 09:09.
+//  Created by shang on 2024/2/24 09:36.
 //  Copyright © 2024/2/24 shang. All rights reserved.
 //
 
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/vendor/isar/DBManager.dart';
-import 'package:flutter_templet_project/vendor/isar/model/db_student.dart';
+import 'package:flutter_templet_project/vendor/isar/model/db_todo.dart';
+import 'package:get/get.dart';
 import 'package:isar/isar.dart';
 
 
-class DBStudentProvider<E extends DBStudent> extends ChangeNotifier {
-  DBStudentProvider() {
+class DBGenericController<E> extends GetxController {
+  DBGenericController() {
     init();
   }
 
@@ -30,11 +31,15 @@ class DBStudentProvider<E extends DBStudent> extends ChangeNotifier {
   }
 
   /// 查
-  Future<void> update() async {
+  @override
+  Future<void> update([List<Object>? ids, bool condition = true]) async {
+    if (!Get.isRegistered<DBGenericController<E>>()) {
+      return;
+    }
     final items = await isar.collection<E>().where().findAll();
     _entitys.clear();
     _entitys.addAll(items);
-    notifyListeners();
+    super.update(ids, condition);
   }
 
   /// 增/改

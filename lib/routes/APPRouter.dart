@@ -184,6 +184,7 @@ import 'package:flutter_templet_project/pages/demo/smart_dialog_demo.dart';
 import 'package:flutter_templet_project/pages/demo/isolateDemo.dart';
 import 'package:flutter_templet_project/pages/demo/merge_images_demo.dart';
 import 'package:flutter_templet_project/pages/demo/merge_network_images_demo.dart';
+import 'package:flutter_templet_project/pages/keyboard_attach_demo.dart';
 import 'package:flutter_templet_project/pages/neomorphism/neomorphism_home_page.dart';
 import 'package:flutter_templet_project/pages/operator_demo.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/SliverAppBarDemo.dart';
@@ -210,14 +211,8 @@ import 'package:flutter_templet_project/vendor/flutter_pickers/flutter_pickers_d
 import 'package:flutter_templet_project/vendor/flutter_swiper_demo.dart';
 import 'package:flutter_templet_project/vendor/flutter_swiper_indicator_demo.dart';
 import 'package:flutter_templet_project/vendor/getx/getx_demo.dart';
-import 'package:flutter_templet_project/pages/keyboard_attach_demo.dart';
-import 'package:flutter_templet_project/vendor/isar/page/StudentLisPage.dart';
-import 'package:flutter_templet_project/vendor/isar/page/StudentLisPageOne.dart';
-import 'package:flutter_templet_project/vendor/isar/page/StudentLisPageTwo.dart';
+import 'package:flutter_templet_project/vendor/isar/page/OrderListTabPage.dart';
 import 'package:flutter_templet_project/vendor/isar/page/StudentTabPage.dart';
-import 'package:flutter_templet_project/vendor/isar/page/TodoListPage.dart';
-import 'package:flutter_templet_project/vendor/isar/page/TodoListPageOne.dart';
-import 'package:flutter_templet_project/vendor/isar/page/TodoListPageTwo.dart';
 import 'package:flutter_templet_project/vendor/isar/page/TodoListTabPage.dart';
 import 'package:flutter_templet_project/vendor/qr/qr_code_scanner_demo.dart';
 import 'package:flutter_templet_project/vendor/qr/qr_flutter_demo.dart';
@@ -688,6 +683,7 @@ class APPRouter {
   static const sectionHeaderDemo = '/sectionHeaderDemo';
   static const todoListTabPage = '/todoListTabPage';
   static const studentTabPage = '/studentTabPage';
+  static const orderListTabPage = '/orderListTabPage';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -1087,6 +1083,9 @@ class AppPage {
     GetPage(name: APPRouter.sectionHeaderDemo, page: () => NSectionHeaderDemo(),),
     GetPage(name: APPRouter.todoListTabPage, page: () => TodoListTabPage(),),
     GetPage(name: APPRouter.studentTabPage, page: () => StudentTabPage(),),
+    GetPage(name: APPRouter.orderListTabPage, page: () => OrderListTabPage(),),
+
+
 
   ];
 }

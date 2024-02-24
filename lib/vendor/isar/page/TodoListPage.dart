@@ -11,16 +11,16 @@ import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/vendor/isar/DBDialogMixin.dart';
 import 'package:flutter_templet_project/vendor/isar/model/db_todo.dart';
 import 'package:flutter_templet_project/vendor/isar/page/TodoItem.dart';
-import 'package:flutter_templet_project/vendor/isar/provider/change_notifier/db_provider.dart';
+import 'package:flutter_templet_project/vendor/isar/provider/gex_controller/db_generic_controller.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
 
-/// DBProvider 示例
+
+/// DBTodoController 示例
 class TodoListPage extends StatefulWidget {
 
   TodoListPage({
     super.key,
-    this.title
+    this.title,
   });
 
   final String? title;
@@ -37,7 +37,7 @@ class _TodoListPageState extends State<TodoListPage> with DBDialogMxin {
 
   bool isAllChoic = false;
 
-  DBProvider get provider => Provider.of<DBProvider>(context, listen: false);
+  final provider = Get.put(DBGenericController<DBTodo>());
 
   @override
   Widget build(BuildContext context) {
@@ -55,35 +55,35 @@ class _TodoListPageState extends State<TodoListPage> with DBDialogMxin {
           ),
         ],
       ),
-      body: Consumer<DBProvider>(
-        builder: (context, value, child) {
+      body: GetBuilder<DBGenericController<DBTodo>>(
+        builder: (value) {
 
-          final checkedItems = value.todos.where((e) => e.isFinished == true).toList();
-          isAllChoic = value.todos.firstWhereOrNull((e) => e.isFinished == false) == null;
+          final checkedItems = value.entitys.where((e) => e.isFinished == true).toList();
+          isAllChoic = value.entitys.firstWhereOrNull((e) => e.isFinished == false) == null;
 
           final checkIcon = isAllChoic ? Icons.check_box : Icons.check_box_outline_blank;
-          final checkDesc = "已选择 ${checkedItems.length}/${value.todos.length}";
+          final checkDesc = "已选择 ${checkedItems.length}/${value.entitys.length}";
 
           Widget content = NPlaceholder(
             onTap: (){
               provider.update();
             },
           );
-          if (value.todos.isNotEmpty) {
+          if (value.entitys.isNotEmpty) {
             content = buildRefresh(
               onRefresh: (){
                 provider.update();
               },
               child: ListView.builder(
                   padding: EdgeInsets.all(10),
-                  itemCount: value.todos.length,
+                  itemCount: value.entitys.length,
                   itemBuilder: (context, index) {
 
-                    final model = value.todos.reversed.toList()[index];
+                    final model = value.entitys.reversed.toList()[index];
 
                     onToggle(){
                       model.isFinished = !model.isFinished;
-                      provider.put<DBTodo>(model);
+                      provider.put(model);
                     }
 
                     return InkWell(
@@ -98,13 +98,13 @@ class _TodoListPageState extends State<TodoListPage> with DBDialogMxin {
                             controller: titleController,
                             onSure: (val){
                               model.title = val;
-                              provider.put<DBTodo>(model);
+                              provider.put(model);
 
                             }
                           );
                         },
                         onDelete: () {
-                          provider.delete<DBTodo>(model.id);
+                          provider.delete(model.id);
                         },
                       ),
                     );
@@ -123,16 +123,16 @@ class _TodoListPageState extends State<TodoListPage> with DBDialogMxin {
                 checkDesc: checkDesc,
                 onCheck: () async {
                   ddlog("isAllChoic TextButton: $isAllChoic");
-                  for (var i = 0; i < value.todos.length; i++) {
-                    final e = value.todos[i];
+                  for (var i = 0; i < value.entitys.length; i++) {
+                    final e = value.entitys[i];
                     e.isFinished = !isAllChoic;
                   }
-                  provider.putAll<DBTodo>(value.todos);
+                  provider.putAll(value.entitys);
                 },
                 onAdd: onAddItemRandom,
                 onDelete:  () async {
-                  final choicItems = value.todos.where((e) => e.isFinished).map((e) => e.id).toList();
-                  await provider.deleteAll<DBTodo>(choicItems);
+                  final choicItems = value.entitys.where((e) => e.isFinished).map((e) => e.id).toList();
+                  await provider.deleteAll(choicItems);
                 },
               ),
             ],
@@ -159,6 +159,7 @@ class _TodoListPageState extends State<TodoListPage> with DBDialogMxin {
     );
   }
 
+
   onAddItemRandom() {
     titleController.text = "项目${IntExt.random(max: 999)}";
     addTodoItem(title: titleController.text);
@@ -174,6 +175,7 @@ class _TodoListPageState extends State<TodoListPage> with DBDialogMxin {
       isFinished: false,
       createdDate: DateTime.now().toIso8601String(),
     );
-    Provider.of<DBProvider>(context, listen: false).put<DBTodo>(todo);
+    provider.put(todo);
   }
+
 }

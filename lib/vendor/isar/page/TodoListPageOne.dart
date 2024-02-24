@@ -11,16 +11,16 @@ import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/vendor/isar/DBDialogMixin.dart';
 import 'package:flutter_templet_project/vendor/isar/model/db_todo.dart';
 import 'package:flutter_templet_project/vendor/isar/page/TodoItem.dart';
-import 'package:flutter_templet_project/vendor/isar/provider/gex_controller/db_todo_controller.dart';
+import 'package:flutter_templet_project/vendor/isar/provider/change_notifier/db_generic_provider.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
-
-/// DBTodoController 示例
+/// DBTodoProvider 示例
 class TodoListPageOne extends StatefulWidget {
 
   TodoListPageOne({
     super.key,
-    this.title,
+    this.title
   });
 
   final String? title;
@@ -37,7 +37,8 @@ class _TodoListPageOneState extends State<TodoListPageOne> with DBDialogMxin {
 
   bool isAllChoic = false;
 
-  final provider = Get.put(DBTodoController());
+  DBGenericProvider<DBTodo> get provider => Provider.of<DBGenericProvider<DBTodo>>(context, listen: false);
+
 
   @override
   Widget build(BuildContext context) {
@@ -55,8 +56,8 @@ class _TodoListPageOneState extends State<TodoListPageOne> with DBDialogMxin {
           ),
         ],
       ),
-      body: GetBuilder<DBTodoController>(
-        builder: (value) {
+      body: Consumer<DBGenericProvider<DBTodo>>(
+        builder: (context, value, child) {
 
           final checkedItems = value.entitys.where((e) => e.isFinished == true).toList();
           isAllChoic = value.entitys.firstWhereOrNull((e) => e.isFinished == false) == null;
@@ -159,7 +160,6 @@ class _TodoListPageOneState extends State<TodoListPageOne> with DBDialogMxin {
     );
   }
 
-
   onAddItemRandom() {
     titleController.text = "项目${IntExt.random(max: 999)}";
     addTodoItem(title: titleController.text);
@@ -177,5 +177,4 @@ class _TodoListPageOneState extends State<TodoListPageOne> with DBDialogMxin {
     );
     provider.put(todo);
   }
-
 }

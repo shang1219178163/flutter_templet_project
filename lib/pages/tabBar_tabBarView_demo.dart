@@ -578,6 +578,8 @@ var specials = <Tuple2<String, String>>[
 
   Tuple2(APPRouter.todoListTabPage, "todoListTabPage", ),
   Tuple2(APPRouter.studentTabPage, "studentTabPage", ),
+  Tuple2(APPRouter.orderListTabPage, "orderListTabPage", ),
+
 
 ];
 

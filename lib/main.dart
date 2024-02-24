@@ -41,11 +41,9 @@ import 'package:flutter_templet_project/util/app_util.dart';
 import 'package:flutter_templet_project/util/debug_log.dart';
 import 'package:flutter_templet_project/vendor/isar/DBManager.dart';
 import 'package:flutter_templet_project/vendor/isar/model/db_order.dart';
-import 'package:flutter_templet_project/vendor/isar/page/TodoListPage.dart';
+import 'package:flutter_templet_project/vendor/isar/model/db_student.dart';
+import 'package:flutter_templet_project/vendor/isar/model/db_todo.dart';
 import 'package:flutter_templet_project/vendor/isar/provider/change_notifier/db_generic_provider.dart';
-import 'package:flutter_templet_project/vendor/isar/provider/change_notifier/db_student_provider.dart';
-import 'package:flutter_templet_project/vendor/isar/provider/change_notifier/db_todo_provider.dart';
-import 'package:flutter_templet_project/vendor/isar/provider/change_notifier/db_provider.dart';
 import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
@@ -92,12 +90,10 @@ Future<void> main() async {
       providers: [
         // ChangeNotifierProvider.value(value: ColorFilteredProvider()),
         ChangeNotifierProvider(create: (context) => ColorFilteredProvider()),
-        ChangeNotifierProvider(create: (context) => DBProvider()),
-        ChangeNotifierProvider(create: (context) => DBTodoProvider()),
-        ChangeNotifierProvider(create: (context) => DBStudentProvider()),
 
+        ChangeNotifierProvider(create: (context) => DBGenericProvider<DBTodo>()),
+        ChangeNotifierProvider(create: (context) => DBGenericProvider<DBStudent>()),
         ChangeNotifierProvider(create: (context) => DBGenericProvider<DBOrder>()),
-
 
         ChangeNotifierProvider(create: (context) => CartModel()),
         ChangeNotifierProvider<Person>(create: (ctx) => Person(),),

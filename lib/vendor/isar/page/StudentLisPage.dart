@@ -11,9 +11,8 @@ import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/vendor/isar/DBDialogMixin.dart';
 import 'package:flutter_templet_project/vendor/isar/model/db_student.dart';
 import 'package:flutter_templet_project/vendor/isar/page/StudentCell.dart';
-import 'package:flutter_templet_project/vendor/isar/provider/change_notifier/db_provider.dart';
+import 'package:flutter_templet_project/vendor/isar/provider/gex_controller/db_generic_controller.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
 
 
 class StudentLisPage extends StatefulWidget {
@@ -36,15 +35,15 @@ class _StudentLisPageState extends State<StudentLisPage> with DBDialogMxin {
   final titleController = TextEditingController();
 
   bool isAllChoic = false;
-  // bool get isAllChoic = false;
-  DBProvider get provider => Provider.of<DBProvider>(context, listen: false);
+
+  final provider = Get.put(DBGenericController<DBStudent>());
 
   @override
   Widget build(BuildContext context) {
     final automaticallyImplyLeading = Get.currentRoute.toLowerCase() == "/$widget".toLowerCase();
 
     return Scaffold(
-      backgroundColor: Colors.black.withOpacity(0.05),
+      backgroundColor: Colors.black12,
       appBar: AppBar(
         title: Text("$widget"),
         automaticallyImplyLeading: automaticallyImplyLeading,
@@ -55,35 +54,35 @@ class _StudentLisPageState extends State<StudentLisPage> with DBDialogMxin {
           ),
         ],
       ),
-      body: Consumer<DBProvider>(
-        builder: (context, value, child) {
+      body: GetBuilder<DBGenericController<DBStudent>>(
+        builder: (value) {
 
-          final checkedItems = value.students.where((e) => e.isSelected == true).toList();
-          isAllChoic = value.students.firstWhereOrNull((e) => e.isSelected == false) == null;
+          final checkedItems = value.entitys.where((e) => e.isSelected == true).toList();
+          isAllChoic = value.entitys.firstWhereOrNull((e) => e.isSelected == false) == null;
 
           final checkIcon = isAllChoic ? Icons.check_box : Icons.check_box_outline_blank;
-          final checkDesc = "已选择 ${checkedItems.length}/${value.students.length}";
+          final checkDesc = "已选择 ${checkedItems.length}/${value.entitys.length}";
 
           Widget content = NPlaceholder(
             onTap: (){
               provider.update();
             },
           );
-          if (value.students.isNotEmpty) {
+          if (value.entitys.isNotEmpty) {
             content = buildRefresh(
               onRefresh: (){
-                provider.update<DBStudent>();
+                provider.update();
               },
               child: ListView.builder(
                   padding: EdgeInsets.all(10),
-                  itemCount: value.students.length,
+                  itemCount: value.entitys.length,
                   itemBuilder: (context, index) {
 
-                    final model = value.students.reversed.toList()[index];
+                    final model = value.entitys.reversed.toList()[index];
 
                     onToggle(){
                       model.isSelected = !model.isSelected;
-                      provider.put<DBStudent>(model);
+                      provider.put(model);
                     }
 
                     return InkWell(
@@ -98,12 +97,12 @@ class _StudentLisPageState extends State<StudentLisPage> with DBDialogMxin {
                             controller: titleController,
                             onSure: (val){
                               model.name = val;
-                              provider.put<DBStudent>(model);
+                              provider.put(model);
                             }
                           );
                         },
                         onDelete: () {
-                          provider.delete<DBStudent>(model.id);
+                          provider.delete(model.id);
                         },
                       ),
                     );
@@ -122,19 +121,16 @@ class _StudentLisPageState extends State<StudentLisPage> with DBDialogMxin {
                 checkDesc: checkDesc,
                 onCheck: () async {
                   ddlog("isAllChoic TextButton: $isAllChoic");
-                  for (var i = 0; i < value.students.length; i++) {
-                    final e = value.students[i];
+                  for (var i = 0; i < value.entitys.length; i++) {
+                    final e = value.entitys[i];
                     e.isSelected = !isAllChoic;
                   }
-                  provider.putAll<DBStudent>(value.students);
+                  provider.putAll(value.entitys);
                 },
-                onAdd: () async {
-                  titleController.text = "学生${IntExt.random(max: 999)}";
-                  addTodoItem(title: titleController.text);
-                },
+                onAdd: onAddItemRandom,
                 onDelete:  () async {
-                  final choicItems = value.students.where((e) => e.isSelected).map((e) => e.id).toList();
-                  await provider.deleteAll<DBStudent>(choicItems);
+                  final choicItems = value.entitys.where((e) => e.isSelected).map((e) => e.id).toList();
+                  await provider.deleteAll(choicItems);
                 },
               ),
             ],
@@ -176,6 +172,6 @@ class _StudentLisPageState extends State<StudentLisPage> with DBDialogMxin {
       isSelected: false,
       createdDate: DateTime.now().toIso8601String(),
     );
-    provider.put<DBStudent>(todo);
+    provider.put(todo);
   }
 }
