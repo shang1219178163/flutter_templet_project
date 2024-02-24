@@ -74,7 +74,7 @@ class _StudentLisPageState extends State<StudentLisPage> {
               Expanded(
                 child: buildRefresh(
                   onRefresh: (){
-                    provider.update();
+                    provider.update<DBStudent>();
                   },
                   child: ListView.builder(
                     padding: EdgeInsets.all(10),
