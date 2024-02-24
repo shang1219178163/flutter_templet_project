@@ -43,10 +43,13 @@ class _TodoListPageState extends State<TodoListPage> {
 
   @override
   Widget build(BuildContext context) {
+    final automaticallyImplyLeading = Get.currentRoute.toLowerCase() == "/$widget".toLowerCase();
+
     return Scaffold(
       backgroundColor: Colors.black12,
       appBar: AppBar(
         title: Text("$widget"),
+        automaticallyImplyLeading: automaticallyImplyLeading,
         actions: [
           IconButton(
             onPressed: onAddItemRandom,
