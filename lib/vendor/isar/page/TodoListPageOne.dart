@@ -15,7 +15,7 @@ import 'package:flutter_templet_project/vendor/isar/provider/change_notifier/db_
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
-/// DBTodoProvider 示例
+/// DBGenericProvider<DBTodo> 示例
 class TodoListPageOne extends StatefulWidget {
 
   TodoListPageOne({

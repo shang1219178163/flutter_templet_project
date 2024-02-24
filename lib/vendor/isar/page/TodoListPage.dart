@@ -15,7 +15,7 @@ import 'package:flutter_templet_project/vendor/isar/provider/gex_controller/db_g
 import 'package:get/get.dart';
 
 
-/// DBTodoController 示例
+/// DBGenericController<DBTodo> 示例
 class TodoListPage extends StatefulWidget {
 
   TodoListPage({
