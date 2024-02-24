@@ -104,7 +104,6 @@ Future<void> main() async {
         ),
       ],
       child: MyApp(),
-      // child: DBMyApp(),
     ),
   );
 
@@ -210,26 +209,6 @@ class MyApp extends StatelessWidget {
     // );
   }
 }
-
-// class DBMyApp extends StatelessWidget {
-//   const DBMyApp({super.key});
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return ChangeNotifierProvider(
-//       create: (context) => DBTodoProvider(),
-//       child: MaterialApp(
-//         title: 'ISAR TodoList',
-//         theme: ThemeData(
-//           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-//           useMaterial3: true,
-//         ),
-//         home: TodoList(),
-//       ),
-//     );
-//   }
-//
-// }
 
 
 class MyHomePage extends StatefulWidget {
