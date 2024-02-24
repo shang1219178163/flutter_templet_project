@@ -9,6 +9,7 @@
 
 
 
+import 'package:flutter_templet_project/vendor/isar/model/db_order.dart';
 import 'package:flutter_templet_project/vendor/isar/model/db_student.dart';
 import 'package:flutter_templet_project/vendor/isar/model/db_todo.dart';
 import 'package:isar/isar.dart';
@@ -29,6 +30,7 @@ class DBManager {
     isar = await openDB(schemas: [
       DBTodoSchema,
       DBStudentSchema,
+      DBOrderSchema,
     ]);
   }
 

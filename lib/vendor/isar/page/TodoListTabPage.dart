@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_page_view.dart';
 import 'package:flutter_templet_project/pages/demo/NPageViewDemo.dart';
+import 'package:flutter_templet_project/vendor/isar/page/OrderListPage.dart';
 import 'package:flutter_templet_project/vendor/isar/page/StudentLisPage.dart';
 import 'package:flutter_templet_project/vendor/isar/page/StudentLisPageOne.dart';
 import 'package:flutter_templet_project/vendor/isar/page/StudentLisPageTwo.dart';
@@ -59,6 +60,7 @@ class _TodoListTabPageState extends State<TodoListTabPage> {
     Tuple2('DBProvider', TodoListPage()),
     Tuple2('DBTodoListController', TodoListPageOne()),
     Tuple2('DBTodoListProvider', TodoListPageTwo()),
+    Tuple2('DBGenericProvider', OrderListPage()),
 
   ];
 }
