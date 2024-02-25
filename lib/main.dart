@@ -210,6 +210,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
+final kScaffoldKey = GlobalKey<ScaffoldState>();
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({ Key? key, this.title}) : super(key: key);
@@ -326,8 +327,7 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver, Ap
   @override
   Widget build(BuildContext context) {
     final page = Scaffold(
-      // key: Scaffold.of(context),
-      // drawer: MyDrawer(),
+      key: kScaffoldKey,
       drawer: APPDrawerMenuPage(),
       endDrawer: APPDrawerMenuPage(),
       // appBar: buildAppBar(),

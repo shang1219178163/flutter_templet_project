@@ -41,7 +41,7 @@ class TabBarTabBarViewDemo extends StatefulWidget {
 }
 
 class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with SingleTickerProviderStateMixin {
-  late final TabController _tabController = TabController(length: _pages.length, vsync: this);
+  late final _tabController = TabController(length: items.length, vsync: this);
 
   final textEditingController = TextEditingController();
 
@@ -49,20 +49,18 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
 
   // late List<String> _titles = getTitlesOfTuples();
 
-  List<Tuple2<String, Widget>> _pages = [];
+  late final List<Tuple2<String, Widget>> items = [
+    Tuple2('功能列表', buildPage1()),
+    Tuple2('升级列表', buildPage2()),
+    Tuple2('列表搜索', buildPage3()),
+    Tuple2('列表(折叠)', buildPage4()),
+  ];
 
   @override
   void initState() {
     super.initState();
 
-    _pages = [
-      Tuple2('功能列表', _buildPage1()),
-      Tuple2('升级列表', _buildPage2()),
-      Tuple2('列表搜索', _buildPage3()),
-      Tuple2('列表(折叠)', _buildPage4()),
-    ];
-
-    _tabController.index = _pages.length - 2;
+    _tabController.index = items.length - 2;
     // testData();
   }
 
@@ -76,24 +74,17 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        systemOverlayStyle: SystemUiOverlayStyle(
-          // Status bar color
-          statusBarColor: Colors.red,
-
-          // Status bar brightness (optional)
-          // statusBarIconBrightness: Brightness.dark, // For Android (dark icons)
-          // statusBarBrightness: Brightness.light, // For iOS (dark icons)
-        ),
         // titleTextStyle: TextStyle(color: Colors.red),
         // toolbarTextStyle: TextStyle(color: Colors.orange),
         // iconTheme: IconThemeData(color: Colors.green),
         actionsIconTheme: IconThemeData(color: Colors.yellow),
         title: Text('基础组件列表'),
         leading: Builder(builder: (context) {
+
           return IconButton(
             icon: Icon(Icons.menu, color: Colors.white), //自定义图标
             onPressed: () {
-              Scaffold.of(context).openDrawer();// 打开抽屉菜单
+              kScaffoldKey.currentState?.openDrawer();
             },
           );
         }),
@@ -111,7 +102,7 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
         bottom: TabBar(
           controller: _tabController,
           isScrollable: true,
-          tabs: _pages.map((e) => Tab(
+          tabs: items.map((e) => Tab(
               key: PageStorageKey<String>(e.item1),
               text: e.item1
           )).toList(),
@@ -121,22 +112,17 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
       ),
       body: TabBarView(
         controller: _tabController,
-        children: _pages.map((e) => e.item2).toList(),
+        children: items.map((e) => e.item2).toList(),
       ),
-      floatingActionButton: FloatingActionButton(
-        tooltip: 'Increment',
-        onPressed: () {
-          // Scaffold.of(context).currentState!.openEndDrawer();
-          // testData();
-          // final titles = getTitles(tuples: tuples);
-          // debugPrint("titles: ${titles}");
-
-          Scaffold.of(context).openEndDrawer();
-        },
-        child: Icon(Icons.add),
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   tooltip: 'Increment',
+      //   onPressed: () {
+      //     Scaffold.of(context).openEndDrawer();
+      //   },
+      //   child: Icon(Icons.add),
+      // ),
       // floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
-      // floatingActionButton: _buildFab(isTop: true),
+      floatingActionButton: _buildFab(isTop: true),
     );
   }
 
@@ -166,7 +152,7 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
     );
   }
   
-  _buildPage1() {
+  buildPage1() {
     return ListView.separated(
       cacheExtent: 180,
       itemCount: kAliPayList.length,
@@ -219,7 +205,7 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
     );
   }
 
-  _buildPage2() {
+  buildPage2() {
     return ListView.separated(
       cacheExtent: 180,
       itemCount: kUpdateAppList.length,
@@ -236,11 +222,11 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
     );
   }
 
-  _buildPage3() {
+  buildPage3() {
     return AutocompleteDemo(hideAppBar: true,);
   }
 
-  _buildPage4() {
+  buildPage4() {
     return EnhanceExpandListView(
       children: tuples.map<ExpandPanelModel<Tuple2<String, String>>>((e) => ExpandPanelModel(
         canTapOnHeader: true,
