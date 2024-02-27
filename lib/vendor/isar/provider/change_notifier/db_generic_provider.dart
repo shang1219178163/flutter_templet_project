@@ -37,6 +37,21 @@ class DBGenericProvider<E> extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// 过滤
+  Future<List<E>> filterEntitys({Future<List<E>> Function(QueryBuilder<E, E, QFilterCondition> isarItems)? filterCb}) async {
+    final collections = isar.collection<E>();
+    final filters = collections.filter();
+    final items = await filterCb?.call(filters) ?? await collections.where().findAll();
+    _entitys.clear();
+    _entitys.addAll(items);
+    return _entitys;
+  }
+
+  /// 获取所有实体
+  Future<List<E>> getAllEntitys() async {
+    return filterEntitys();
+  }
+
   /// 增/改
   Future<void> putAll(List<E> list) async {
     await isar.writeTxn(() async {
