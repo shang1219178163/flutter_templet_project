@@ -11,6 +11,7 @@ import 'package:flutter_templet_project/basicWidget/n_label_and_icon.dart';
 import 'package:flutter_templet_project/extension/button_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/navigator_ext.dart';
+import 'package:flutter_templet_project/pages/TopDrawer.dart';
 
 class BottomSheetDemo extends StatelessWidget {
   final String? title;
@@ -22,11 +23,17 @@ class BottomSheetDemo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
       appBar: AppBar(
         title: Text("$this"),
+        actions: ['done',].map((e) => TextButton(
+          child: Text(e,
+            style: TextStyle(color: Colors.white),
+          ),
+          onPressed: () {
+            presentTopFilter(context);
+          },)
+        ).toList(),
       ),
       body: buildBody(),
     );
@@ -42,6 +49,40 @@ class BottomSheetDemo extends StatelessWidget {
             },
             child: Text('SHOW BOTTOM SHEET'),
           ),
+        );
+      },
+    );
+  }
+
+  presentTopFilter(BuildContext context){
+    showDialog(
+      context: context,
+      useSafeArea: false,
+      builder: (BuildContext context) {
+
+        return Container(
+          alignment: Alignment.center,
+          padding: EdgeInsets.only(left: 0, right: 0, top: 0, bottom: 300),
+          child: TopDrawer(
+            builder: (onHide) {
+
+              return Scaffold(
+                appBar: AppBar(
+                  title: Text("TopDrawer"),
+                  automaticallyImplyLeading: false,
+                  actions: [
+                    TextButton(
+                      onPressed: onHide,
+                      child: Text('取消',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ]
+                ),
+                body: buildBody(),
+              );
+            },
+          )
         );
       },
     );
