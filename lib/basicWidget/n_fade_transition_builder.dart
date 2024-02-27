@@ -20,27 +20,27 @@ class NFadeTransitionBuilder extends StatefulWidget {
 
 class _NFadeTransitionBuilderState extends State<NFadeTransitionBuilder> with SingleTickerProviderStateMixin {
 
-  late final AnimationController opacity;
+  late final controller = AnimationController(
+    vsync: this,
+    duration: widget.duration,
+  );
 
   @override
   void initState() {
     super.initState();
-    opacity = AnimationController(
-      vsync: this,
-      duration: widget.duration,
-    )..forward();
+    controller.forward();
   }
 
   @override
   void dispose() {
-    opacity.dispose();
+    controller.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return FadeTransition(
-      opacity: opacity,
+      opacity: controller,
       child: widget.builder(context, setState),
     );
   }
