@@ -40,12 +40,18 @@ class DBGenericController<E> extends GetxController {
     super.update(ids, condition);
   }
 
-  /// 获取所有实体
-  Future<List<E>> getAllEntitys() async {
-    final items = await isar.collection<E>().where().findAll();
+  /// 过滤
+  List<E> filterEntitys({List<E> Function(QueryBuilder<E, E, QFilterCondition> isarItems)? filterCb}) {
+    final collections = isar.collection<E>();
+    final items = filterCb?.call(collections.filter()) ?? collections.where().findAllSync();
     _entitys.clear();
     _entitys.addAll(items);
     return _entitys;
+  }
+
+  /// 获取所有实体
+  Future<List<E>> getAllEntitys() async {
+    return filterEntitys();
   }
 
   /// 增/改
