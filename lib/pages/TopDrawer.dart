@@ -1,6 +1,13 @@
 
 import 'package:flutter/material.dart';
 
+enum DrawerFromDirection{
+  fromTop,
+  fromBottom,
+  fromLeft,
+  fromRight
+}
+
 /// 顶部弹窗
 class TopDrawer extends StatefulWidget {
 
@@ -19,8 +26,10 @@ class _TopDrawerState extends State<TopDrawer> with SingleTickerProviderStateMix
   final _scrollController = ScrollController();
 
   late final controller = AnimationController(vsync: this, duration: Duration(milliseconds: 350));
-  late final Animation<Offset> slideAnimation = Tween<Offset>(begin: Offset(0.0, -4.0), end: Offset.zero)
-      .animate(CurvedAnimation(parent: controller, curve: Curves.decelerate));
+  late final Animation<Offset> slideAnimation = Tween<Offset>(
+      begin: Offset(0.0, -4.0),
+      end: Offset.zero,
+  ).animate(CurvedAnimation(parent: controller, curve: Curves.decelerate));
 
   @override
   void dispose() {
@@ -33,9 +42,9 @@ class _TopDrawerState extends State<TopDrawer> with SingleTickerProviderStateMix
 
   @override
   void initState() {
+    super.initState();
     controller.addListener(onListener);
     controller.forward();
-    super.initState();
   }
 
   void onListener(){
