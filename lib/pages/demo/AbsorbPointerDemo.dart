@@ -9,6 +9,7 @@
 
 
 import "package:flutter/material.dart";
+import "package:flutter_templet_project/basicWidget/n_text.dart";
 
 
 class AbsorbPointerDemo extends StatefulWidget {
@@ -21,6 +22,8 @@ class AbsorbPointerDemo extends StatefulWidget {
 class _AbsorbPointerDemoState extends State<AbsorbPointerDemo> {
   bool _disable = false;
   bool _switchValue = false;
+  
+  final desc = ValueNotifier("");
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +36,7 @@ class _AbsorbPointerDemoState extends State<AbsorbPointerDemo> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          _buildSection1(),
+          buildSwitchCell(),
           // _buildSection2(),
           Divider(),
           _buildAbsorbPointerNew(absorbing: _disable),
@@ -42,12 +45,22 @@ class _AbsorbPointerDemoState extends State<AbsorbPointerDemo> {
             onPressed: () => onClick('我是外面的按钮，不受影响'),
             child: Text('我是外面的按钮，不受影响'),
           ),
+          ValueListenableBuilder(
+              valueListenable: desc,
+              builder: (context,  value, child){
+
+                return Container(
+                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  child: NText(value),
+                );
+              }
+          ),
         ],
       ),
     );
   }
 
-  _buildSection1() {
+  buildSwitchCell() {
     return Row(
       children: <Widget>[
         Text('不可点击：absorbing: ${_disable}'),
@@ -126,14 +139,14 @@ class _AbsorbPointerDemoState extends State<AbsorbPointerDemo> {
   /// 默认吸收事件，拦截事件
   _buildAbsorbPointerNew({bool absorbing = true}) {
     return InkWell(
-      onTap: () => onClick("outside"),
+      onTap: () => onClick("green: outside"),
       child: Container(
         color: Colors.green,
         padding: EdgeInsets.all(20),
         child: AbsorbPointer(
           absorbing: absorbing,
           child: InkWell(
-            onTap: () => onClick("inside"),
+            onTap: () => onClick("blue: inside"),
             child: Container(
               color: Colors.blue,
               width: 200.0,
@@ -172,6 +185,7 @@ class _AbsorbPointerDemoState extends State<AbsorbPointerDemo> {
   onClick(String msg) {
     // ddlog(msg);
     debugPrint(msg);
+    desc.value = msg;
   }
 }
 
