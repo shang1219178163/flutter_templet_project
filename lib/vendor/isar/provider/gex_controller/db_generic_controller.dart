@@ -36,10 +36,16 @@ class DBGenericController<E> extends GetxController {
     if (!Get.isRegistered<DBGenericController<E>>()) {
       return;
     }
+    await getAllEntitys();
+    super.update(ids, condition);
+  }
+
+  /// 获取所有实体
+  Future<List<E>> getAllEntitys() async {
     final items = await isar.collection<E>().where().findAll();
     _entitys.clear();
     _entitys.addAll(items);
-    super.update(ids, condition);
+    return _entitys;
   }
 
   /// 增/改
