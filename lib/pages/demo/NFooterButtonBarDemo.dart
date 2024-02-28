@@ -60,7 +60,7 @@ class _NFooterButtonBarDemoState extends State<NFooterButtonBarDemo> {
   }
 
   Widget buildBody() {
-    enableVN.value = true;
+    enableVN.value = false;
 
     return Column(
       children: [

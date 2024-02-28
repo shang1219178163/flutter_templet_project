@@ -32,6 +32,8 @@ class NFooterButtonBar extends StatelessWidget {
     this.hideCancel = false,
     this.enable = true,
     this.isReverse = false,
+    this.header,
+    this.footer,
   }) : super(key: key);
 
   final Color? primary;
@@ -55,6 +57,10 @@ class NFooterButtonBar extends StatelessWidget {
   /// 标题图标翻转
   final bool isReverse;
 
+
+  final Widget? header;
+  final Widget? footer;
+
   @override
   Widget build(BuildContext context) {
     var children = [
@@ -64,6 +70,7 @@ class NFooterButtonBar extends StatelessWidget {
           bgColor: primary,
           borderRadius: btnBorderRadius,
           title: cancelTitle,
+          enable: enable,
           onPressed: onCancel,
         ),
       ),
@@ -99,8 +106,14 @@ class NFooterButtonBar extends StatelessWidget {
           top: BorderSide(color: Color(0xffE5E5E5))
         )
       ),
-      child: Row(
-        children: children,
+      child: Column(
+        children: [
+          header ?? const SizedBox(),
+          Row(
+            children: children,
+          ),
+          footer ?? const SizedBox(),
+        ],
       ),
     );
   }

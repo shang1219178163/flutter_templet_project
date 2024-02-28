@@ -86,7 +86,7 @@ class NButtonConfirm extends StatelessWidget {
           //   border: Border.all(color: Colors.blue),
           borderRadius: borderRadius ?? const BorderRadius.all(Radius.circular(8)),
           gradient: LinearGradient(colors: [
-              primary.withOpacity(0.5),
+              primary.withOpacity(0.8),
               primary,
               // Color(0xff359EEB),
               // Color(0xff007DBF),
