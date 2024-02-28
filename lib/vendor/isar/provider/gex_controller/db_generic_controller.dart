@@ -55,6 +55,14 @@ class DBGenericController<E> extends GetxController {
     return filterEntitys();
   }
 
+  /// 寻找第一个
+  Future<E?> filterEntity({required Future<E?> Function(QueryBuilder<E, E, QFilterCondition> isarItems) filterCb}) async {
+    final collections = isar.collection<E>();
+    final filters = collections.filter();
+    final item = await filterCb(filters);
+    return item;
+  }
+
   /// 增/改
   Future<void> putAll(List<E> list) async {
     await isar.writeTxn(() async {
