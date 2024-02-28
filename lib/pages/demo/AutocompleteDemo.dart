@@ -19,11 +19,14 @@ class AutocompleteDemo extends StatefulWidget {
     Key? key,
     this.title,
     this.hideAppBar = false,
+    this.routingCallback,
   }) : super(key: key);
 
-  String? title;
+  final String? title;
 
-  bool hideAppBar;
+  final bool hideAppBar;
+
+  final ValueChanged<OptionModel>? routingCallback;
 
   @override
   _AutocompleteDemoState createState() => _AutocompleteDemoState();
@@ -68,7 +71,7 @@ class _AutocompleteDemoState extends State<AutocompleteDemo>{
           Autocomplete<OptionModel>(
             displayStringForOption: (option) => option.name,
             fieldViewBuilder: _params[0].isOpen ? _buildFieldView : _buildFieldViewDefault,
-            onSelected: onChoosed,
+            onSelected: onSelected,
             optionsBuilder: _buildOptions,
             // optionsViewBuilder: _buildOptionsView,
             optionsViewBuilder: (context,  onSelected, options) {
@@ -129,9 +132,13 @@ class _AutocompleteDemoState extends State<AutocompleteDemo>{
     return result;
   }
 
-  void onChoosed(OptionModel val) {
+  void onSelected(OptionModel val) {
+    if (widget.routingCallback != null) {
+      widget.routingCallback?.call(val);
+      return;
+    }
     // debugPrint('onChoosed: ${val.name}');
-    Get.toNamed(val.name, arguments: val.desc);
+    Get.toNamed(val.name, arguments: val.toJson());
   }
 
   Widget _buildOptionsView(
@@ -386,15 +393,35 @@ class _AutocompleteDemoState extends State<AutocompleteDemo>{
 
 class OptionModel {
   OptionModel({
-    this.name = "",
+    required this.name,
     this.desc = "",
     this.children = const [],
   });
 
   String name;
-  String desc;
+  String? desc;
 
   List<OptionModel> children;
+
+
+  static OptionModel? fromJson(Map<String, dynamic>? json) {
+    if (json == null) {
+      return null;
+    }
+    return OptionModel(
+      name: json['name'],
+      desc: json['desc'],
+      children: List<OptionModel>.from((json["children"] ?? []).map((e) => OptionModel.fromJson(e))),
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    final data = <String, dynamic>{};
+    data['name'] = name;
+    data['desc'] = desc;
+    data['children'] = children?.map((v) => v.toJson()).toList();
+    return data;
+  }
 
   @override
   String toString() {
@@ -405,7 +432,7 @@ class OptionModel {
 
 class ParamModel {
   ParamModel({
-    this.name = "",
+    this.name = '',
     this.isOpen = false,
   });
 

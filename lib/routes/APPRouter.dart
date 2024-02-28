@@ -9,6 +9,7 @@ import 'package:flutter_templet_project/basicWidget/upload/asset_upload_box_demo
 import 'package:flutter_templet_project/pages/AppRouteAwareDemo.dart';
 import 'package:flutter_templet_project/pages/AppRouteAwareDemoOne.dart';
 import 'package:flutter_templet_project/pages/AppLaunchPage.dart';
+import 'package:flutter_templet_project/pages/ComponentMiddlePage.dart';
 import 'package:flutter_templet_project/pages/DataTypeDemo.dart';
 import 'package:flutter_templet_project/pages/DevelopToolList.dart';
 import 'package:flutter_templet_project/pages/EmojiPage.dart';
@@ -684,6 +685,7 @@ class APPRouter {
   static const todoListTabPage = '/todoListTabPage';
   static const studentTabPage = '/studentTabPage';
   static const orderListTabPage = '/orderListTabPage';
+  static const componentMiddlePage = '/componentMiddlePage';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -1084,6 +1086,7 @@ class AppPage {
     GetPage(name: APPRouter.todoListTabPage, page: () => TodoListTabPage(),),
     GetPage(name: APPRouter.studentTabPage, page: () => StudentTabPage(),),
     GetPage(name: APPRouter.orderListTabPage, page: () => OrderListTabPage(),),
+    GetPage(name: APPRouter.componentMiddlePage, page: () => ComponentMiddlePage(),),
 
 
 

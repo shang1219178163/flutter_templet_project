@@ -19,13 +19,14 @@ import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/divider_ext.dart';
 import 'package:flutter_templet_project/extension/list_ext.dart';
+import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/object_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 
 import 'package:flutter_templet_project/main.dart';
 import 'package:flutter_templet_project/model/mock_data.dart';
-import 'package:flutter_templet_project/routes/AppRouter.dart';
+import 'package:flutter_templet_project/routes/APPRouter.dart';
 
 import 'package:get/get.dart';
 import 'package:tuple/tuple.dart';
@@ -122,7 +123,7 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
       //   child: Icon(Icons.add),
       // ),
       // floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
-      floatingActionButton: _buildFab(isTop: true),
+      // floatingActionButton: _buildFab(isTop: true),
     );
   }
 
@@ -223,7 +224,35 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
   }
 
   buildPage3() {
-    return AutocompleteDemo(hideAppBar: true,);
+    return AutocompleteDemo(
+      hideAppBar: true,
+      routingCallback: (val) {
+        if (val.name == APPRouter.componentMiddlePage) {
+          Get.toNamed(val.name,
+              arguments: {
+                ...val.toJson(),
+                "onSkip": onSkip,
+                "header": buildHeader(),
+              },
+          );
+          return;
+        }
+        Get.toNamed(val.name, arguments: val.toJson());
+      },
+    );
+  }
+
+  Widget buildHeader() {
+    return ElevatedButton(
+        onPressed: (){
+          ddlog("buildHeader");
+        },
+        child: Text("header_${IntExt.random(max: 100)}")
+    );
+  }
+
+  onSkip() {
+    Get.back();
   }
 
   buildPage4() {
@@ -498,6 +527,7 @@ var list = <Tuple2<String, String>>[
   Tuple2(APPRouter.menuAnchorDemo, "menuAnchorDemo", ),
   Tuple2(APPRouter.myMenuBarDemo, "myMenuBarDemo", ),
   Tuple2(APPRouter.overlayPortalDemo, "overlayPortalDemo", ),
+  Tuple2(APPRouter.componentMiddlePage, "componentMiddlePage", ),
 
 
 ];
