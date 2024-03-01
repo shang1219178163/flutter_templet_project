@@ -18,7 +18,7 @@ module Fastlane
         build = params[:showHash] ? shortHash : ""
 
         # params[:version] = params[:version] ? params[:version] : Time.now.strftime("%Y%m%d%H%M") + build
-        params[:version] = params[:version] ? params[:version] : Time.now.strftime("%Y.%m%d.%H%M") + build
+        params[:version] = params[:version] ? params[:version] : Time.now.strftime("%Y%m%d.%H%M") + build
         UI.message "version:_#{params[:version]}_".green
 
         command = []
