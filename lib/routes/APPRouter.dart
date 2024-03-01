@@ -22,6 +22,7 @@ import 'package:flutter_templet_project/pages/PageLifecycleObserverDemo.dart';
 import 'package:flutter_templet_project/pages/RegExpDemo.dart';
 import 'package:flutter_templet_project/pages/StringTransformPage.dart';
 import 'package:flutter_templet_project/pages/ThemeColorDemo.dart';
+import 'package:flutter_templet_project/pages/TwoDimensionalGridViewDemo.dart';
 import 'package:flutter_templet_project/pages/YamlParsePage.dart';
 import 'package:flutter_templet_project/pages/demo/APIConvertPage.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedSizeDemo.dart';
@@ -688,6 +689,7 @@ class APPRouter {
   static const orderListTabPage = '/orderListTabPage';
   static const componentMiddlePage = '/componentMiddlePage';
   static const sliverMainAxisGroupDemo = '/sliverMainAxisGroupDemo';
+  static const twoDimensionalGridViewDemo = '/TwoDimensionalGridViewDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -1090,6 +1092,7 @@ class AppPage {
     GetPage(name: APPRouter.orderListTabPage, page: () => OrderListTabPage(),),
     GetPage(name: APPRouter.componentMiddlePage, page: () => ComponentMiddlePage(),),
     GetPage(name: APPRouter.sliverMainAxisGroupDemo, page: () => SliverMainAxisGroupDemo(),),
+    GetPage(name: APPRouter.twoDimensionalGridViewDemo, page: () => TwoDimensionalGridViewDemo(),),
 
 
 

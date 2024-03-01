@@ -534,6 +534,7 @@ var list = <Tuple2<String, String>>[
 var slivers = <Tuple2<String, String>>[
   Tuple2(APPRouter.sliverFamilyDemo, "SliverFamilyDemo", ),
   Tuple2(APPRouter.sliverMainAxisGroupDemo, "sliverMainAxisGroupDemo", ),
+  Tuple2(APPRouter.twoDimensionalGridViewDemo, "twoDimensionalGridViewDemo", ),
 
 
 ];
