@@ -192,6 +192,7 @@ import 'package:flutter_templet_project/pages/neomorphism/neomorphism_home_page.
 import 'package:flutter_templet_project/pages/operator_demo.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/SliverAppBarDemo.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/SliverPersistentHeaderDemo.dart';
+import 'package:flutter_templet_project/pages/sliver_demo/listener_header_page.dart';
 import 'package:flutter_templet_project/pages/system_color_page.dart';
 import 'package:flutter_templet_project/pages/system_curves_page.dart';
 import 'package:flutter_templet_project/pages/system_icons_page.dart';
@@ -688,6 +689,7 @@ class APPRouter {
   static const componentMiddlePage = '/componentMiddlePage';
   static const sliverMainAxisGroupDemo = '/sliverMainAxisGroupDemo';
   static const twoDimensionalGridViewDemo = '/TwoDimensionalGridViewDemo';
+  static const listenerHeaderPage = '/listenerHeaderPage';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -1089,6 +1091,7 @@ class AppPage {
     GetPage(name: APPRouter.componentMiddlePage, page: () => ComponentMiddlePage(),),
     GetPage(name: APPRouter.sliverMainAxisGroupDemo, page: () => SliverMainAxisGroupDemo(),),
     GetPage(name: APPRouter.twoDimensionalGridViewDemo, page: () => TwoDimensionalGridViewDemo(),),
+    GetPage(name: APPRouter.listenerHeaderPage, page: () => ListenerHeaderPage(),),
 
 
 
