@@ -20,16 +20,24 @@ class StudentLisPageOne extends StatefulWidget {
 
   StudentLisPageOne({
     super.key,
-    this.title
+    this.title,
+    this.arguments,
   });
 
   final String? title;
+
+  final Map<String, dynamic>? arguments;
 
   @override
   State<StudentLisPageOne> createState() => _StudentLisPageOneState();
 }
 
 class _StudentLisPageOneState extends State<StudentLisPageOne> with DBDialogMxin {
+
+  late final Map<String, dynamic> arguments = widget.arguments ?? Get.arguments ?? {};
+
+  late final hideAppBar = arguments["hideAppBar"] as bool?;
+
 
   final _scrollController = ScrollController();
 
@@ -45,7 +53,7 @@ class _StudentLisPageOneState extends State<StudentLisPageOne> with DBDialogMxin
 
     return Scaffold(
       backgroundColor: Colors.black12,
-      appBar: AppBar(
+      appBar: hideAppBar == true ? null : AppBar(
         title: Text("$widget"),
         automaticallyImplyLeading: automaticallyImplyLeading,
         actions: [

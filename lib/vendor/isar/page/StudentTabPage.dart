@@ -47,7 +47,9 @@ class _StudentTabPageState extends State<StudentTabPage> {
   }
 
   List<Tuple2<String, Widget>> items = [
-    Tuple2('DBStudentController', StudentLisPage()),
+    Tuple2('DBStudentController', StudentLisPage(
+      arguments: {"hideAppBar": true},
+    )),
     Tuple2('DBStudentProvider', StudentLisPageOne()),
 
   ];

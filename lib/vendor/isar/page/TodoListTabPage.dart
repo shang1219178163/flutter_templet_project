@@ -51,7 +51,9 @@ class _TodoListTabPageState extends State<TodoListTabPage> {
   }
 
   List<Tuple2<String, Widget>> items = [
-    Tuple2('DBTodoListController', TodoListPage()),
+    Tuple2('DBTodoListController', TodoListPage(
+      arguments: {"hideAppBar": true},
+    )),
     Tuple2('DBTodoListProvider', TodoListPageOne()),
 
   ];

@@ -1,6 +1,7 @@
 
 
 import 'dart:async';
+import 'dart:ffi';
 
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
@@ -19,16 +20,24 @@ class StudentLisPage extends StatefulWidget {
 
   StudentLisPage({
     super.key,
-    this.title
+    this.title,
+    this.arguments,
   });
 
   final String? title;
+
+  final Map<String, dynamic>? arguments;
 
   @override
   State<StudentLisPage> createState() => _StudentLisPageState();
 }
 
 class _StudentLisPageState extends State<StudentLisPage> with DBDialogMxin {
+
+  late final Map<String, dynamic> arguments = widget.arguments ?? Get.arguments ?? {};
+
+  late final hideAppBar = arguments["hideAppBar"] as bool?;
+
 
   final _scrollController = ScrollController();
 
@@ -44,7 +53,7 @@ class _StudentLisPageState extends State<StudentLisPage> with DBDialogMxin {
 
     return Scaffold(
       backgroundColor: Colors.black12,
-      appBar: AppBar(
+      appBar: hideAppBar == true ? null : AppBar(
         title: Text("$widget"),
         automaticallyImplyLeading: automaticallyImplyLeading,
         actions: [

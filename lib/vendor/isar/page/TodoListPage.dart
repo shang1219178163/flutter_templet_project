@@ -21,15 +21,22 @@ class TodoListPage extends StatefulWidget {
   TodoListPage({
     super.key,
     this.title,
+    this.arguments,
   });
 
   final String? title;
+
+  final Map<String, dynamic>? arguments;
 
   @override
   State<TodoListPage> createState() => _TodoListPageState();
 }
 
 class _TodoListPageState extends State<TodoListPage> with DBDialogMxin {
+  late final Map<String, dynamic> arguments = widget.arguments ?? Get.arguments ?? {};
+
+  late final hideAppBar = arguments["hideAppBar"] as bool?;
+
 
   final _scrollController = ScrollController();
 
@@ -45,7 +52,7 @@ class _TodoListPageState extends State<TodoListPage> with DBDialogMxin {
 
     return Scaffold(
       backgroundColor: Colors.black12,
-      appBar: AppBar(
+      appBar: hideAppBar == true ? null : AppBar(
         title: Text("$widget"),
         automaticallyImplyLeading: automaticallyImplyLeading,
         actions: [
