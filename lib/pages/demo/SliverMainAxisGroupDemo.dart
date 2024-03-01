@@ -19,7 +19,18 @@ class _SliverMainAxisGroupDemoState extends State<SliverMainAxisGroupDemo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.title ?? "$widget")),
+      appBar: AppBar(
+        title: Text(widget.title ?? "$widget"),
+        actions: [
+          TextButton(
+            onPressed: (){
+              // Feedback.forLongPress(context);
+              Feedback.forTap(context);
+            },
+            child: Text("done", style: TextStyle(color: Colors.white),),
+          )
+        ],
+      ),
       body: buildBoy(),
     );
   }
