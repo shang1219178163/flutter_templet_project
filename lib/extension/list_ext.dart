@@ -6,12 +6,10 @@
 //  Copyright © 10/21/21 shang. All rights reserved.
 //
 
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 
-extension ListExt<T,E> on List<E> {
-
+extension ListExt<T, E> on List<E> {
   // static bool isEmpty(List? val) {
   //   return val == null || val.isEmpty;
   // }
@@ -38,6 +36,7 @@ extension ListExt<T,E> on List<E> {
     }
     return null;
   }
+
   /// 倒叙查询符合条件元素
   E? findLast(bool Function(E) test) {
     for (var i = length - 1; i >= 0; i--) {
@@ -51,6 +50,7 @@ extension ListExt<T,E> on List<E> {
 
   /// 查询符合条件元素,没有则返回为空
   E? firstWhere(bool Function(E) test) => find(test);
+
   /// 倒叙查询符合条件元素
   E? lastWhere(bool Function(E) test) => findLast(test);
 
@@ -64,6 +64,7 @@ extension ListExt<T,E> on List<E> {
     }
     return null;
   }
+
   /// 倒叙查询符合条件元素
   int? findLastIndex(bool Function(E) test) {
     for (var i = length - 1; i >= 0; i--) {
@@ -74,8 +75,10 @@ extension ListExt<T,E> on List<E> {
     }
     return null;
   }
+
   /// 查询符合条件元素,没有则返回为空
   int? indexWhere(bool Function(E) test) => findIndex(test);
+
   /// 倒叙查询符合条件元素
   int? lastIndexWhere(bool Function(E) test) => findLastIndex(test);
 
@@ -89,14 +92,48 @@ extension ListExt<T,E> on List<E> {
     }
     return true;
   }
-  
+
+  /// 移除数组空值
+  List<E> removeNull() {
+    var val = this;
+    val.removeWhere((e) => e == null);
+    final result = val.whereType<E>().toList();
+    return result;
+  }
+
+  /// 用多个元素取代数组中满足条件的第一个元素
+  /// replacements 取代某个元素的集合
+  /// isReversed 是否倒序查询
+  List<E> replace(bool Function(E) test, {
+    required List<E> replacements,
+    bool isReversed = false,
+  }) {
+    final target = !isReversed ? firstWhere(test) : findLast(test);
+    if (target == null) {
+      return this;
+    }
+    return replaceTarget(target, replacements: replacements);
+  }
+
+  /// 用多个元素取代数组中某个元素
+  /// replacements 取代某个元素的集合
+  List<E> replaceTarget(E target, {
+    required List<E> replacements,
+  }) {
+    final index = indexOf(target);
+    if (index != -1) {
+      replaceRange(index, index + 1, replacements);
+    }
+    return this;
+  }
+
   /// 数组降维() expand
   // List<T> flatMap(List<T> action(E e)) {
-    // var result = <T>[];
-    // this.forEach((e) {
-    //   result.addAll(action(e));
-    // });
-    // return result;
+  // var result = <T>[];
+  // this.forEach((e) {
+  //   result.addAll(action(e));
+  // });
+  // return result;
   // }
 
   /// 同 sorted
@@ -199,9 +236,7 @@ extension ListExtObject<E extends Object> on List<E> {
   }
 }
 
-
 extension IterableExt<E> on Iterable<E> {
-
   // /// 重新
   // E? get firstNBew {
   //   var it = iterator;
@@ -236,9 +271,7 @@ extension IterableExt<E> on Iterable<E> {
   // }
 }
 
-
 extension ListNullExt<E> on List<E?> {
-
   /// 移除数组空值
   List<E> removeNull() {
     var val = this;
@@ -246,4 +279,5 @@ extension ListNullExt<E> on List<E?> {
     final result = val.whereType<E>().toList();
     return result;
   }
+
 }
