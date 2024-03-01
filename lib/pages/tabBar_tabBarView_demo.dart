@@ -409,7 +409,6 @@ var list = <Tuple2<String, String>>[
   Tuple2(APPRouter.sliderDemo, "sliderDemo", ),
   Tuple2(APPRouter.stepperDemo, "stepperDemo", ),
   Tuple2(APPRouter.slidableDemo, "SlidableDemo", ),
-  Tuple2(APPRouter.sliverFamilyDemo, "SliverFamilyDemo", ),
 
   Tuple2(APPRouter.tabBarDemo, "tabBarDemo", ),
   Tuple2(APPRouter.tabBarDemoNew, "tabBarDemoNew", ),
@@ -534,6 +533,8 @@ var list = <Tuple2<String, String>>[
 
 var slivers = <Tuple2<String, String>>[
   Tuple2(APPRouter.sliverFamilyDemo, "SliverFamilyDemo", ),
+  Tuple2(APPRouter.sliverMainAxisGroupDemo, "sliverMainAxisGroupDemo", ),
+
 
 ];
 

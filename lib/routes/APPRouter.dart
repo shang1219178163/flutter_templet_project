@@ -49,6 +49,7 @@ import 'package:flutter_templet_project/pages/demo/ProgressClipperDemo.dart';
 import 'package:flutter_templet_project/pages/demo/SearchDemo.dart';
 import 'package:flutter_templet_project/pages/demo/SegmentedControlDemo.dart';
 import 'package:flutter_templet_project/pages/demo/SelectList.dart';
+import 'package:flutter_templet_project/pages/demo/SliverMainAxisGroupDemo.dart';
 import 'package:flutter_templet_project/pages/demo/SwitchDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TapRegionDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TextDemo.dart';
@@ -686,6 +687,7 @@ class APPRouter {
   static const studentTabPage = '/studentTabPage';
   static const orderListTabPage = '/orderListTabPage';
   static const componentMiddlePage = '/componentMiddlePage';
+  static const sliverMainAxisGroupDemo = '/sliverMainAxisGroupDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -1087,6 +1089,7 @@ class AppPage {
     GetPage(name: APPRouter.studentTabPage, page: () => StudentTabPage(),),
     GetPage(name: APPRouter.orderListTabPage, page: () => OrderListTabPage(),),
     GetPage(name: APPRouter.componentMiddlePage, page: () => ComponentMiddlePage(),),
+    GetPage(name: APPRouter.sliverMainAxisGroupDemo, page: () => SliverMainAxisGroupDemo(),),
 
 
 
