@@ -11,7 +11,6 @@ import 'package:flutter/material.dart';
 
 class NSliverPersistentHeaderDelegate extends SliverPersistentHeaderDelegate {
   NSliverPersistentHeaderDelegate({
-    // Key? key,
     this.min = 48,
     this.max = 80,
     required this.builder,
@@ -38,7 +37,9 @@ class NSliverPersistentHeaderDelegate extends SliverPersistentHeaderDelegate {
 
   @override
   bool shouldRebuild(covariant NSliverPersistentHeaderDelegate oldDelegate) {
-    return min != oldDelegate.min || max != oldDelegate.max || builder != oldDelegate.builder;
+    return min != oldDelegate.min
+        || max != oldDelegate.max
+        || builder != oldDelegate.builder;
   }
 }
 
@@ -46,16 +47,13 @@ class NSliverPersistentHeaderDelegate extends SliverPersistentHeaderDelegate {
 class NSliverPersistentHeader extends StatelessWidget {
 
   const NSliverPersistentHeader({
-  	Key? key,
-  	this.title,
-    this.pinned = true,
+    super.key,
+    this.pinned = false,
     this.floating = false,
     this.min = 48,
     this.max = 80,
     required this.builder,
-  }) : super(key: key);
-
-  final String? title;
+  });
 
   final bool pinned;
 
