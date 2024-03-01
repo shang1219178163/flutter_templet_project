@@ -67,16 +67,16 @@ PODS:
     - Toast
   - fluwx (0.0.1):
     - Flutter
+    - fluwx/pay (= 0.0.1)
+  - fluwx/pay (0.0.1):
+    - Flutter
     - WechatOpenSDK-XCFramework (~> 2.0.2)
-  - FMDB (2.7.5):
-    - FMDB/standard (= 2.7.5)
-  - FMDB/standard (2.7.5)
   - http_proxy (0.0.1):
     - Flutter
   - image_cropper (0.0.4):
     - Flutter
     - TOCropViewController (~> 2.6.1)
-  - image_gallery_saver (1.5.0):
+  - image_gallery_saver (2.0.2):
     - Flutter
   - image_picker_ios (0.0.1):
     - Flutter
@@ -102,7 +102,7 @@ PODS:
   - path_provider_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
-  - "permission_handler (5.1.0+2)":
+  - permission_handler_apple (9.3.0):
     - Flutter
   - photo_manager (2.0.0):
     - Flutter
@@ -130,7 +130,7 @@ PODS:
     - Flutter
   - sqflite (0.0.3):
     - Flutter
-    - FMDB (>= 2.7.5)
+    - FlutterMacOS
   - SwiftyGif (5.4.4)
   - Toast (4.0.0)
   - TOCropViewController (2.6.1)
@@ -173,7 +173,7 @@ DEPENDENCIES:
   - open_file (from `.symlinks/plugins/open_file/ios`)
   - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
-  - permission_handler (from `.symlinks/plugins/permission_handler/ios`)
+  - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
   - photo_manager (from `.symlinks/plugins/photo_manager/ios`)
   - qr_code_scanner (from `.symlinks/plugins/qr_code_scanner/ios`)
   - sensors_plus (from `.symlinks/plugins/sensors_plus/ios`)
@@ -181,7 +181,7 @@ DEPENDENCIES:
   - share_plus (from `.symlinks/plugins/share_plus/ios`)
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
   - sign_in_with_apple (from `.symlinks/plugins/sign_in_with_apple/ios`)
-  - sqflite (from `.symlinks/plugins/sqflite/ios`)
+  - sqflite (from `.symlinks/plugins/sqflite/darwin`)
   - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
   - vibration (from `.symlinks/plugins/vibration/ios`)
   - video_compress (from `.symlinks/plugins/video_compress/ios`)
@@ -194,7 +194,6 @@ SPEC REPOS:
     - DKImagePickerController
     - DKPhotoGallery
     - flutter_sound_core
-    - FMDB
     - libwebp
     - Mantle
     - MTBBarcodeScanner
@@ -253,8 +252,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/package_info_plus/ios"
   path_provider_foundation:
     :path: ".symlinks/plugins/path_provider_foundation/darwin"
-  permission_handler:
-    :path: ".symlinks/plugins/permission_handler/ios"
+  permission_handler_apple:
+    :path: ".symlinks/plugins/permission_handler_apple/ios"
   photo_manager:
     :path: ".symlinks/plugins/photo_manager/ios"
   qr_code_scanner:
@@ -270,7 +269,7 @@ EXTERNAL SOURCES:
   sign_in_with_apple:
     :path: ".symlinks/plugins/sign_in_with_apple/ios"
   sqflite:
-    :path: ".symlinks/plugins/sqflite/ios"
+    :path: ".symlinks/plugins/sqflite/darwin"
   url_launcher_ios:
     :path: ".symlinks/plugins/url_launcher_ios/ios"
   vibration:
@@ -288,25 +287,24 @@ SPEC CHECKSUMS:
   aesthetic_dialogs: a5f6a847f4820321f7d2eadf80f36d5d558777f8
   audio_session: 4f3e461722055d21515cf3261b64c973c062f345
   audioplayers_darwin: 877d9a4d06331c5c374595e46e16453ac7eafa40
-  camera_avfoundation: 8b8d780bcfb6a4a02b0fbe2b4bd17b5b71946e68
-  connectivity_plus: 07c49e96d7fc92bc9920617b83238c4d178b446a
+  camera_avfoundation: 759172d1a77ae7be0de08fc104cfb79738b8a59e
+  connectivity_plus: bf0076dd84a130856aa636df1c71ccaff908fa1d
   device_info_plus: c6fb39579d0f423935b0c9ce7ee2f44b71b9fce6
   DKImagePickerController: b512c28220a2b8ac7419f21c491fc8534b7601ac
   DKPhotoGallery: fdfad5125a9fdda9cc57df834d49df790dbb4179
-  file_picker: ce3938a0df3cc1ef404671531facef740d03f920
+  file_picker: 15fd9539e4eb735dc54bae8c0534a7a9511a03de
   file_preview: f1f26bfb9836a41685d3098dccf3ebecd01f85b9
-  Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
+  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   flutter_boost: 3e8a6e28c86d24c83be5b2fab067746dc77a1ad6
   flutter_image_compress_common: ec1d45c362c9d30a3f6a0426c297f47c52007e3e
   flutter_isolate: 0edf5081826d071adf21759d1eb10ff5c24503b5
   flutter_sound: c60effa2a350fb977885f0db2fbc4c1ad5160900
   flutter_sound_core: 26c10e5832e76aaacfae252d8925232281c486ae
   fluttertoast: 31b00dabfa7fb7bacd9e7dbee580d7a2ff4bf265
-  fluwx: e9e728cfdb80e82dac5f4ff974b1901a7939dcd0
-  FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
+  fluwx: 4e01cbba9403c95cd973d5d8f8b9db5244f09446
   http_proxy: 20f129d3e1c70cfdef92530b374c619832027729
   image_cropper: a3291c624a953049bc6a02e1f8c8ceb162a24b25
-  image_gallery_saver: 259eab68fb271cfd57d599904f7acdc7832e7ef2
+  image_gallery_saver: cb43cc43141711190510e92c460eb1655cd343cb
   image_picker_ios: 99dfe1854b4fa34d0364e74a78448a0151025425
   isar_flutter_libs: b69f437aeab9c521821c3f376198c4371fa21073
   libwebp: f62cb61d0a484ba548448a4bd52aabf150ff6eef
@@ -315,7 +313,7 @@ SPEC CHECKSUMS:
   open_file: 02eb5cb6b21264bd3a696876f5afbfb7ca4f4b7d
   package_info_plus: 115f4ad11e0698c8c1c5d8a689390df880f47e85
   path_provider_foundation: 3784922295ac71e43754bd15e0653ccfd36a147c
-  permission_handler: ccb20a9fad0ee9b1314a52b70b76b473c5f8dab0
+  permission_handler_apple: 036b856153a2b1f61f21030ff725f3e6fece2b78
   photo_manager: 4f6810b7dfc4feb03b461ac1a70dacf91fba7604
   qr_code_scanner: bb67d64904c3b9658ada8c402e8b4d406d5d796e
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
@@ -326,16 +324,16 @@ SPEC CHECKSUMS:
   share_plus: c3fef564749587fc939ef86ffb283ceac0baf9f5
   shared_preferences_foundation: b4c3b4cddf1c21f02770737f147a3f5da9d39695
   sign_in_with_apple: f3bf75217ea4c2c8b91823f225d70230119b8440
-  sqflite: 31f7eba61e3074736dff8807a9b41581e4f7f15a
+  sqflite: 673a0e54cc04b7d6dba8d24fb8095b31c3a99eec
   SwiftyGif: 93a1cc87bf3a51916001cf8f3d63835fb64c819f
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
   TOCropViewController: edfd4f25713d56905ad1e0b9f5be3fbe0f59c863
-  url_launcher_ios: bbd758c6e7f9fd7b5b1d4cde34d2b95fcce5e812
+  url_launcher_ios: 6116280ddcfe98ab8820085d8d76ae7449447586
   vibration: 7d883d141656a1c1a6d8d238616b2042a51a1241
   video_compress: fce97e4fb1dfd88175aa07d2ffc8a2f297f87fbe
-  video_player_avfoundation: e9e6f9cae7d7a6d9b43519b0aab382bca60fcfd1
+  video_player_avfoundation: 02011213dab73ae3687df27ce441fbbcc82b5579
   wakelock_plus: 8b09852c8876491e4b6d179e17dfe2a0b5f60d47
-  webview_flutter_wkwebview: b7e70ef1ddded7e69c796c7390ee74180182971f
+  webview_flutter_wkwebview: be0f0d33777f1bfd0c9fdcb594786704dbf65f36
   WechatOpenSDK-XCFramework: acdeeda129efbef9532bca8a10c24e1b4b8c7d69
 
 PODFILE CHECKSUM: 0cb26ce23d619cbd15161540cbfad967aec8d253

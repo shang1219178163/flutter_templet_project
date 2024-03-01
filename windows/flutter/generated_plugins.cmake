@@ -8,6 +8,7 @@ list(APPEND FLUTTER_PLUGIN_LIST
   desktop_drop
   file_selector_windows
   isar_flutter_libs
+  permission_handler_windows
   share_plus
   url_launcher_windows
 )
