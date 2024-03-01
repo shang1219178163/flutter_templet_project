@@ -51,7 +51,7 @@ class NSearchTextField extends StatefulWidget {
     this.onSuffixTap,
     this.focusNode,
     this.onFocus,
-    this.enabled,
+    this.enabled = true,
   }) : super(key: key);
 
   final String? title;
@@ -80,7 +80,7 @@ class NSearchTextField extends StatefulWidget {
   /// 焦点回调
   final ValueChanged<bool>? onFocus;
   /// 是否可以响应键盘
-  final bool? enabled;
+  final bool enabled;
 
   @override
   NSearchTextFieldState createState() => NSearchTextFieldState();
@@ -145,7 +145,7 @@ class NSearchTextFieldState extends State<NSearchTextField> {
     ValueChanged<String>? onSubmitted,
     VoidCallback? onSuffixTap,
     EdgeInsetsGeometry? padding,
-    bool? enabled,
+    bool enabled = true,
   }) {
     return CupertinoTextField(
       focusNode: focusNode,

@@ -22,8 +22,7 @@ class APPThemeService {
 
   // static APPThemeSettings get instance => _instance;
 
-  late ThemeData themeData = ThemeData.light().copyWith(
-    useMaterial3: false,
+  late ThemeData themeData = ThemeData.light(useMaterial3: false).copyWith(
     platform: TargetPlatform.iOS,
     // scaffoldBackgroundColor: Colors.red
     splashFactory: NoSplash.splashFactory,
@@ -83,12 +82,10 @@ class APPThemeService {
         backgroundColor: Colors.blue,
       ).merge(buildButtonStyle()),
     ),
-    // scaffoldBackgroundColor: Colors.red
   );
 
   // ThemeData? darkThemeData;
-  ThemeData darkThemeData = ThemeData.dark().copyWith(
-    useMaterial3: false,
+  ThemeData darkThemeData = ThemeData.dark(useMaterial3: false).copyWith(
     platform: TargetPlatform.iOS,
     splashFactory: NoSplash.splashFactory,
     splashColor: Colors.transparent, // 点击时的高亮效果设置为透明

@@ -71,24 +71,29 @@ class _WebviewFilePreviewPageState extends State<WebviewFilePreviewPage> {
           ),
         ),
       ),
-      body: SafeArea(
-        child: WebView(
-          initialUrl: initialUrl,
-          javascriptMode: JavascriptMode.unrestricted,
-          onProgress: (int progress) {
-            debugPrint("progress: $progress");
-            _progressVN.value = progress/100;
-          },
-          onPageStarted: (String url) {
-            debugPrint("onPageStarted $url");
-          },
-          onPageFinished: (String url) {
-            debugPrint("onPageFinished $url");
-            _progressVN.value = 1;
-          },
-        ),
-      ),
+      body: buildBody(),
     );
+  }
+
+  Widget buildBody() {
+    return SizedBox();
+    // return SafeArea(
+    //   child: WebView(
+    //     initialUrl: initialUrl,
+    //     javascriptMode: JavascriptMode.unrestricted,
+    //     onProgress: (int progress) {
+    //       debugPrint("progress: $progress");
+    //       _progressVN.value = progress/100;
+    //     },
+    //     onPageStarted: (String url) {
+    //       debugPrint("onPageStarted $url");
+    //     },
+    //     onPageFinished: (String url) {
+    //       debugPrint("onPageFinished $url");
+    //       _progressVN.value = 1;
+    //     },
+    //   ),
+    // );
   }
 
   onShare() async {

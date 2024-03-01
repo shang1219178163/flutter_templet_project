@@ -821,44 +821,6 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
     );
   }
 
-  ///创建 WebView
-  Widget buildWebView(BuildContext context, {required String initialUrl}) {
-    return Scaffold(
-        appBar: AppBar(
-          leadingWidth: 100,
-          leading: Container(
-            child: Row(
-              children: [
-                Icons.chevron_left,
-                Icons.close
-              ].map((e) => IconButton(
-                icon: Icon(e),
-                iconSize: 30,
-                // color: Theme.of(context).accentColor,
-                onPressed: () {
-                  if (e == Icons.chevron_left) {
-                    Navigator.of(context).pop();
-                  } else if (e == Icons.close) {
-                    Navigator.of(context).pop();
-                  }
-                },
-              ),
-            ).toList(),
-            ),
-          ),
-          actions: [
-            Icons.refresh,
-          ].map((e) => IconButton(
-              icon: Icon(e),
-              iconSize: 30,
-              // color: Theme.of(context).accentColor,
-              onPressed: () {},
-            ),
-          ).toList(),
-        ),
-        body: WebView(initialUrl: initialUrl));
-  }
-
   showUserPrivacy() {
     var linkMap = {
       '《用户协议》': 'https://flutter.dev',

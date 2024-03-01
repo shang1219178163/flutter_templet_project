@@ -48,21 +48,21 @@ class _WebviewFilePreviewPageState extends State<WebviewFilePreviewPage> {
       ),
       body: Stack(
         children: [
-          WebView(
-            initialUrl: widget.url,
-            javascriptMode: JavascriptMode.unrestricted,
-            onProgress: (int progress) {
-              debugPrint("progress: $progress");
-              _progressVN.value = progress/100;
-            },
-            onPageStarted: (String url) {
-              debugPrint("onPageStarted $url");
-            },
-            onPageFinished: (String url) {
-              debugPrint("onPageFinished $url");
-              _progressVN.value = 1;
-            },
-          ),
+          // WebView(
+          //   initialUrl: widget.url,
+          //   javascriptMode: JavascriptMode.unrestricted,
+          //   onProgress: (int progress) {
+          //     debugPrint("progress: $progress");
+          //     _progressVN.value = progress/100;
+          //   },
+          //   onPageStarted: (String url) {
+          //     debugPrint("onPageStarted $url");
+          //   },
+          //   onPageFinished: (String url) {
+          //     debugPrint("onPageFinished $url");
+          //     _progressVN.value = 1;
+          //   },
+          // ),
           Positioned(
             left: 0,
             right: 0,

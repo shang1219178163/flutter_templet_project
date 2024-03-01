@@ -12,7 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/num_ext.dart';
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
+
 
 class StaggeredGridViewDemo extends StatefulWidget {
   final String? title;
@@ -47,30 +47,32 @@ class _StaggeredGridViewDemoState extends State<StaggeredGridViewDemo> {
   }
 
   _buildBody() {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(30),
-      child: StaggeredGridView.countBuilder(
-        mainAxisSpacing: 4.0,
-        crossAxisSpacing: 4.0,
-        shrinkWrap: true,
-        crossAxisCount: 2,
-        itemCount: 12,
-        itemBuilder: (BuildContext context, int index) => Container(
-            color: ColorExt.random,
-            child: Container(
-              height: IntExt.random(min: 100, max: 200).toDouble(),
-              child: Center(
-                child: CircleAvatar(
-                  backgroundColor: Colors.white,
-                  child: Text('$index'),
-                ),
-              ),
-            )),
-        // staggeredTileBuilder: (int index) =>
-        //     StaggeredTile.count(2, index.isEven ? 2 : 1),
-        staggeredTileBuilder: (index) => StaggeredTile.fit(1),
-      ),
+    return Container(
     );
+    // return ClipRRect(
+    //   borderRadius: BorderRadius.circular(30),
+    //   child: StaggeredGridView.countBuilder(
+    //     mainAxisSpacing: 4.0,
+    //     crossAxisSpacing: 4.0,
+    //     shrinkWrap: true,
+    //     crossAxisCount: 2,
+    //     itemCount: 12,
+    //     itemBuilder: (BuildContext context, int index) => Container(
+    //         color: ColorExt.random,
+    //         child: Container(
+    //           height: IntExt.random(min: 100, max: 200).toDouble(),
+    //           child: Center(
+    //             child: CircleAvatar(
+    //               backgroundColor: Colors.white,
+    //               child: Text('$index'),
+    //             ),
+    //           ),
+    //         )),
+    //     // staggeredTileBuilder: (int index) =>
+    //     //     StaggeredTile.count(2, index.isEven ? 2 : 1),
+    //     staggeredTileBuilder: (index) => StaggeredTile.fit(1),
+    //   ),
+    // );
   }
 
   Widget _buildCustomScrollView() {
@@ -89,25 +91,48 @@ class _StaggeredGridViewDemoState extends State<StaggeredGridViewDemo> {
       child: Text('$index'),
     ));
 
-    return SliverPadding(
-      padding: EdgeInsets.all(20),
-      sliver: SliverStaggeredGrid.count(
-        crossAxisCount: 4,
-        mainAxisSpacing: 4,
-        crossAxisSpacing: 4,
-        staggeredTiles: const <StaggeredTile>[
-          StaggeredTile.count(2, 2),
-          StaggeredTile.count(2, 1),
-          StaggeredTile.count(2, 2),
-          StaggeredTile.count(2, 1),
-          StaggeredTile.count(2, 2),
-          StaggeredTile.count(2, 1),
-          StaggeredTile.count(2, 2),
-          StaggeredTile.count(2, 1),
+    return GridView.custom(
+      gridDelegate: SliverWovenGridDelegate.count(
+        crossAxisCount: 2,
+        mainAxisSpacing: 8,
+        crossAxisSpacing: 8,
+        pattern: [
+          WovenGridTile(1),
+          WovenGridTile(
+            5 / 7,
+            crossAxisRatio: 0.9,
+            alignment: AlignmentDirectional.centerEnd,
+          ),
         ],
-        children: list,
+      ),
+      childrenDelegate: SliverChildBuilderDelegate(
+            (context, index) {
+              return Container(
+                child: Text("$index"),
+              );
+            },
       ),
     );
+
+    // return SliverPadding(
+    //   padding: EdgeInsets.all(20),
+    //   sliver: SliverStaggeredGrid.count(
+    //     crossAxisCount: 4,
+    //     mainAxisSpacing: 4,
+    //     crossAxisSpacing: 4,
+    //     staggeredTiles: const <StaggeredTile>[
+    //       StaggeredTile.count(2, 2),
+    //       StaggeredTile.count(2, 1),
+    //       StaggeredTile.count(2, 2),
+    //       StaggeredTile.count(2, 1),
+    //       StaggeredTile.count(2, 2),
+    //       StaggeredTile.count(2, 1),
+    //       StaggeredTile.count(2, 2),
+    //       StaggeredTile.count(2, 1),
+    //     ],
+    //     children: list,
+    //   ),
+    // );
   }
 
   _buildSliverBorderRadius({bool addToSliverBox = true}) {

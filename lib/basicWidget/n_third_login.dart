@@ -117,10 +117,10 @@ class NThirdLoginState extends State<NThirdLogin> with AppleSiginMixin, LoginMix
   initFlux() async {
     // 初始化微信登录
     if(Platform.isAndroid){
-      await FluwxUtil.init();
+      await FluwxUtil().init();
     }
     // 微信授权监听
-    FluwxUtil.addListen(
+    FluwxUtil().addListen(
       type: '授权',
       callback: (res) {
         _authWeChat(res);
@@ -174,7 +174,7 @@ class NThirdLoginState extends State<NThirdLogin> with AppleSiginMixin, LoginMix
     }
 
     initFlux();
-    FluwxUtil.authLogin();
+    FluwxUtil().authLogin();
   }
 
 }

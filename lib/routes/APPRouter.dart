@@ -207,7 +207,6 @@ import 'package:flutter_templet_project/vendor/SlidableDemoOne.dart';
 import 'package:flutter_templet_project/vendor/VisibilityDetectorDemo.dart';
 import 'package:flutter_templet_project/vendor/aesthetic_dialogs_demo.dart';
 import 'package:flutter_templet_project/vendor/azlistview/azlistview_demo.dart';
-import 'package:flutter_templet_project/vendor/badges_demo.dart';
 import 'package:flutter_templet_project/vendor/color_converter_demo.dart';
 import 'package:flutter_templet_project/vendor/custom_timer_demo.dart';
 import 'package:flutter_templet_project/vendor/flutter_pickers/flutter_pickers_demo.dart';
@@ -220,7 +219,6 @@ import 'package:flutter_templet_project/vendor/isar/page/TodoListTabPage.dart';
 import 'package:flutter_templet_project/vendor/qr/qr_code_scanner_demo.dart';
 import 'package:flutter_templet_project/vendor/qr/qr_flutter_demo.dart';
 import 'package:flutter_templet_project/vendor/soundAbount/SoundPlayDemo.dart';
-import 'package:flutter_templet_project/vendor/syncfusion_flutter_datepicker_demo.dart';
 import 'package:flutter_templet_project/vendor/timeline/timeline_demo.dart';
 import 'package:flutter_templet_project/vendor/timelines_demo/timelines_demo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedGroupDemo.dart';
@@ -953,7 +951,6 @@ class AppPage {
     GetPage(name: APPRouter.stackDemoTwo, page: () => StackDemoTwo(),),
 
     GetPage(name: APPRouter.badgeDemo, page: () => BadgeDemo(),),
-    GetPage(name: APPRouter.badgesDemo, page: () => BadgesDemo(),),
     GetPage(name: APPRouter.flutterSwiperDemo, page: () => FlutterSwiperDemo(),),
     GetPage(name: APPRouter.flutterSwiperIndicatorDemo, page: () => FlutterSwiperIndicatorDemo(),),
     GetPage(name: APPRouter.homeSrollDemo, page: () => HomeSrollDemo(),),
@@ -1040,7 +1037,6 @@ class AppPage {
     GetPage(name: APPRouter.imChatPage, page: () => IMChatPage(),),
     GetPage(name: APPRouter.soundPlayDemo, page: () => SoundPlayDemo(),),
     GetPage(name: APPRouter.expandTextDemo, page: () => NExpandTextDemo(),),
-    GetPage(name: APPRouter.syncfusionFlutterDatepickerDemo, page: () => SyncfusionFlutterDatepickerDemo(),),
     GetPage(name: APPRouter.tableCalenderMain, page: () => TableCalenderMain(),),
     GetPage(name: APPRouter.suspensionButtonDemo, page: () => SuspensionButtonDemo(),),
     GetPage(name: APPRouter.neomorphismHomePage, page: () => NeomorphismHomePage(),),
