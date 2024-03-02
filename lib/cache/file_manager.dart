@@ -6,6 +6,9 @@
 //  Copyright © 7/26/21 shang. All rights reserved.
 //
 
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:path_provider/path_provider.dart';
 
 class FileManager {
@@ -30,5 +33,25 @@ class FileManager {
   static Future<String> getDocumentsDirPath() async {
     var directory = await getApplicationDocumentsDirectory();
     return directory.path;
+  }
+
+  /// 创建文件
+  /// fileName - 文件名
+  /// content - 文件内容
+  /// dir - 保存文件夹
+  Future<File> createFile({String? fileName, required String content, Directory? dir}) async {
+    fileName ??= "未命名_${DateTime.now().toString().substring(0, 10).replaceAll("-", "_")}";
+
+    /// 生成本地文件
+    var tempDir = dir ?? await getDownloadsDirectory();
+    if (Platform.isIOS) {
+      tempDir = dir ?? await getTemporaryDirectory();
+    }
+    var path = '${tempDir?.path}/$fileName.dart';
+    // debugPrint("file: $path");
+    var file = File(path);
+    file.createSync();
+    file.writeAsStringSync(content);
+    return file;
   }
 }

@@ -1,21 +1,14 @@
 
-import 'dart:io';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
-import 'package:flutter_templet_project/basicWidget/n_textfield.dart';
-import 'package:flutter_templet_project/extension/color_ext.dart';
+import 'package:flutter_templet_project/cache/file_manager.dart';
 import 'package:flutter_templet_project/extension/snack_bar_ext.dart';
-import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:get/get.dart';
 import 'package:json_to_dart/model_generator.dart';
-
-import 'package:path_provider/path_provider.dart';
-
 
 class JsonToDartPage extends StatefulWidget {
 
@@ -377,11 +370,8 @@ class _JsonToDartPageState extends State<JsonToDartPage> {
       // debugPrint("fileName: $fileName");
 
       /// 生成本地文件
-      final tempDir = await getDownloadsDirectory();
-      var path = '${tempDir?.path}/$fileName.dart';
-      var file = File(path);
-      file.createSync();
-      file.writeAsStringSync(outVN.value);
+      final file = await FileManager().createFile(fileName: fileName, content: outVN.value);
+      debugPrint("file: ${file.path}");
 
       showSnackBar(SnackBar(
         content: NText("文件已生成(下载文件夹)",

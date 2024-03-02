@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_page_view.dart';
 import 'package:flutter_templet_project/basicWidget/n_placeholder.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
+import 'package:flutter_templet_project/cache/file_manager.dart';
 import 'package:flutter_templet_project/extension/snack_bar_ext.dart';
 import 'package:tuple/tuple.dart';
 import 'package:path_provider/path_provider.dart';
@@ -43,35 +44,11 @@ class _IconConvertPageState extends State<IconConvertPage> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: ['done',].map((e) => TextButton(
+          onPressed: onDone,
           child: Text(e,
             style: TextStyle(color: Colors.white),
           ),
-          onPressed: () async {
-            debugPrint("$widget: $e");
-            var lines = await readFile();
-            lines = lines.where((e) => e.contains("IconData get") || e.contains("const IconData ")).toList();
-            linesVN.value = lines;
-
-            linesOneVN.value = lines.where((e) => e.contains("IconData get")).toList();
-            linesTwoVN.value = lines.where((e) => e.contains("const IconData ")).toList();
-            debugPrint("$widget linesOneVN: ${linesOneVN.value.length},");
-            debugPrint("$widget linesTwoVN: ${linesTwoVN.value.length},");
-
-            linesThreeVN.value = lines.map((e) => convertToMapItem(e)).toList();
-            debugPrint("$widget linesThreeVN: ${linesThreeVN.value.length},");
-
-            final keyValues = linesThreeVN.value.map((e) => "\t$e\n").join("");
-            createFile(
-              fileName: "icons_map",
-              content: """
-import 'package:flutter/material.dart';
-  
-  
-Map<String, IconData> kIConDic = {
-  $keyValues
-};
-""");
-          },)
+        )
         ).toList(),
       ),
       body: NPageView(
@@ -153,12 +130,36 @@ Map<String, IconData> kIConDic = {
     );
   }
 
-  Future<List<String>> readFile() async {
+  onDone() async {
+    var lines = await readFile(path: '/Users/shang/fvm/versions/3.16.7/packages/flutter/lib/src/material/icons.dart');
+    lines = lines.where((e) => e.contains("IconData get") || e.contains("const IconData ")).toList();
+    linesVN.value = lines;
+
+    linesOneVN.value = lines.where((e) => e.contains("IconData get")).toList();
+    linesTwoVN.value = lines.where((e) => e.contains("const IconData ")).toList();
+    debugPrint("$widget linesOneVN: ${linesOneVN.value.length},");
+    debugPrint("$widget linesTwoVN: ${linesTwoVN.value.length},");
+
+    linesThreeVN.value = lines.map((e) => convertToMapItem(e)).toList();
+    debugPrint("$widget linesThreeVN: ${linesThreeVN.value.length},");
+
+    final keyValues = linesThreeVN.value.map((e) => "\t$e\n").join("");
+    createFile(
+        fileName: "icons_map",
+        content: """
+import 'package:flutter/material.dart';
+  
+  
+Map<String, IconData> kIConDic = {
+  $keyValues
+};
+""");
+  }
+
+  Future<List<String>> readFile({required String path}) async {
     List<String> contents = [];
-
     try {
-      final file = File('/Users/shang/fvm/versions/3.16.7/packages/flutter/lib/src/material/icons.dart');
-
+      final file = File(path);
       // Read the file
       contents = await file.readAsLines();
     } catch (e) {
@@ -189,26 +190,15 @@ Map<String, IconData> kIConDic = {
     }
 
     result = result.replaceAll("IconData", "Icons");
-    if (result.contains('static.')) {
-      debugPrint("e: $e");
-    }
+    // if (result.contains('static.')) {
+    //   debugPrint("e: $e");
+    // }
     return result;
   }
 
   createFile({String? fileName, required String content}) async {
-    fileName ??= "未命名_${DateTime.now().toString().substring(0, 10).replaceAll("-", "_")}";
-
-    /// 生成本地文件
-    // final tempDir = await getDownloadsDirectory();
-    var tempDir = await getDownloadsDirectory();
-    if (Platform.isIOS) {
-      tempDir = await getTemporaryDirectory();
-    }
-    var path = '${tempDir?.path}/$fileName.dart';
-    debugPrint("file: $path");
-    var file = File(path);
-    file.createSync();
-    file.writeAsStringSync(content);
+    final file = await FileManager().createFile(fileName: fileName, content: content);
+    debugPrint("file: ${file.path}");
 
     showSnackBar(SnackBar(
       content: NText("文件已生成(下载文件夹)",
