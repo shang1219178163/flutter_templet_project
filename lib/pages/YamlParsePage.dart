@@ -1,9 +1,11 @@
 
 
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_templet_project/cache/file_manager.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:path/path.dart' as path;
 import 'package:yaml/yaml.dart';
@@ -25,6 +27,8 @@ class _YamlParsePageState extends State<YamlParsePage> {
 
   final _scrollController = ScrollController();
 
+  final contentVN = ValueNotifier("");
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +39,7 @@ class _YamlParsePageState extends State<YamlParsePage> {
             style: TextStyle(color: Colors.white),
           ),
           onPressed: () async {
-            await parseYaml();
+            await onParse();
             // final path = _scriptPath();
             // ddlog("path: $path");
 
@@ -61,7 +65,13 @@ class _YamlParsePageState extends State<YamlParsePage> {
         controller: _scrollController,
         child: Column(
           children: [
-            Text("$widget"),
+            ValueListenableBuilder(
+               valueListenable: contentVN,
+               builder: (context,  value, child){
+
+                  return Text("$value");
+                }
+            ),
           ],
         ),
       ),
@@ -81,19 +91,36 @@ class _YamlParsePageState extends State<YamlParsePage> {
     return script;
   }
 
-  parseYaml() async {
+  onParse() async {
     String yamlPath1 = path.dirname(Platform.script.toFilePath());
     ddlog("yamlPath1: $yamlPath1");
 
-    String yamlPath = path.join(yamlPath1, '../pubspec.yaml');
-    yamlPath = '/Users/shang/GitHub/flutter_templet_project/pubspec.yaml';
+    String yamlPath2 = Platform.script.path;
+    ddlog("yamlPath2: $yamlPath2");
+
+    String yamlPath3 = path.join(yamlPath1, '../pubspec.yaml');
+    ddlog("yamlPath3: $yamlPath3");
+
+
+    String yamlPath4 = Uri.file(yamlPath3).path;
+    ddlog("yamlPath4: $yamlPath4");
+
+
+    String yamlPath = '/Users/shang/GitHub/flutter_templet_project/pubspec.yaml';
     ddlog("yamlPath: $yamlPath");
 
-    File f = File(yamlPath);
-    String yamlText = f.readAsStringSync();
-    ddlog("yamlText: $yamlText");
+    File file = File(yamlPath);
+    String yamlStr = file.readAsStringSync();
+    contentVN.value = yamlStr;
+  }
 
-    Map yamlMap = loadYaml(yamlText);
-    ddlog("yamlMap: $yamlMap");
+  Future<Map<String, dynamic>> parseYaml({required String path}) async {
+    File file = File(path);
+    String yamlStr = file.readAsStringSync();
+    // ddlog("yamlText: $yamlText");
+    Map<String, dynamic> yamlMap = loadYaml(yamlStr);
+    // final jsonStr = jsonEncode(yamlMap);
+    // ddlog("yamlMap: \n${jsonStr}");
+    return yamlMap;
   }
 }

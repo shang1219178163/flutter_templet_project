@@ -18,19 +18,19 @@ class FileManager {
   static FileManager get instance => _instance;
 
   ///获取缓存目录路径
-  static Future<String> getCacheDirPath() async {
+  Future<String> getCacheDirPath() async {
     var directory = await getTemporaryDirectory();
     return directory.path;
   }
 
   ///获取文件缓存目录路径
-  static Future<String> getFilesDirPath() async {
+  Future<String> getFilesDirPath() async {
     var directory = await getApplicationSupportDirectory();
     return directory.path;
   }
 
   ///获取文档存储目录路径
-  static Future<String> getDocumentsDirPath() async {
+  Future<String> getDocumentsDirPath() async {
     var directory = await getApplicationDocumentsDirectory();
     return directory.path;
   }
