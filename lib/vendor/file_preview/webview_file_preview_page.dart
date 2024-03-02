@@ -11,6 +11,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_webview_page.dart';
 import 'package:flutter_templet_project/cache/asset_cache_service.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/vendor/easy_toast.dart';
@@ -22,11 +23,10 @@ import 'package:share_plus/share_plus.dart';
 class WebviewFilePreviewPage extends StatefulWidget {
 
   WebviewFilePreviewPage({
-    Key? key,
+    super.key,
     required this.url,
     this.title,
-  }) : assert(url.startsWith("http")),
-        super(key: key);
+  }) : assert(url.startsWith("http"));
 
   final String url;
 
@@ -43,8 +43,6 @@ class _WebviewFilePreviewPageState extends State<WebviewFilePreviewPage> {
 
   @override
   Widget build(BuildContext context) {
-    final initialUrl = widget.url;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? '详情'),
@@ -76,28 +74,17 @@ class _WebviewFilePreviewPageState extends State<WebviewFilePreviewPage> {
   }
 
   Widget buildBody() {
-    return SizedBox();
-    // return SafeArea(
-    //   child: WebView(
-    //     initialUrl: initialUrl,
-    //     javascriptMode: JavascriptMode.unrestricted,
-    //     onProgress: (int progress) {
-    //       debugPrint("progress: $progress");
-    //       _progressVN.value = progress/100;
-    //     },
-    //     onPageStarted: (String url) {
-    //       debugPrint("onPageStarted $url");
-    //     },
-    //     onPageFinished: (String url) {
-    //       debugPrint("onPageFinished $url");
-    //       _progressVN.value = 1;
-    //     },
-    //   ),
-    // );
+    return SafeArea(
+      child: NWebViewPage(
+        initialUrl: widget.url,
+        title: '',
+        hideAppBar: true,
+      ),
+    );
   }
 
   onShare() async {
-    Directory tempDir = await AssetCacheService().getDir();
+    var tempDir = await AssetCacheService().getDir();
     var tmpPath = '${tempDir.path}/${widget.title}';
 
     final percentVN = ValueNotifier(0.0);

@@ -21,12 +21,18 @@ class NWebViewPage extends StatefulWidget {
     super.key,
     required this.title,
     required this.initialUrl,
+    this.onProgress,
+    this.hideAppBar = true,
   });
 
 
   final String title;
 
   final String initialUrl;
+
+  final ValueChanged<double>? onProgress;
+
+  final bool hideAppBar;
 
   @override
   _NWebViewPageState createState() => _NWebViewPageState();
@@ -37,7 +43,7 @@ class _NWebViewPageState extends State<NWebViewPage> {
 
   String? currentTitle;
 
-  final progressVN = ValueNotifier(0);
+  final progressVN = ValueNotifier(0.0);
 
   @override
   void initState() {
@@ -65,8 +71,8 @@ class _NWebViewPageState extends State<NWebViewPage> {
         NavigationDelegate(
           onProgress: (int progress) {
             debugPrint('WebView is loading (progress : $progress%)');
-            progressVN.value = progress;
-
+            progressVN.value = progress/100.0;
+            widget.onProgress?.call(progressVN.value);
           },
           onPageStarted: (String url) {
             debugPrint('Page started loading: $url');
@@ -74,8 +80,8 @@ class _NWebViewPageState extends State<NWebViewPage> {
           onPageFinished: (String url) {
             debugPrint('Page finished loading: $url');
 
-            if (progressVN.value < 100) {
-              progressVN.value = 100;
+            if (progressVN.value < 1) {
+              progressVN.value = 1;
             }
           },
           onWebResourceError: (WebResourceError error) {
@@ -126,7 +132,7 @@ Page resource error:
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: widget.hideAppBar? null : AppBar(
         title: Text(currentTitle ?? widget.title,),
         actions: [
           WebViewNavigationControls(controller: _controller),
@@ -137,16 +143,15 @@ Page resource error:
           WebViewWidget(controller: _controller),
           ValueListenableBuilder(
               valueListenable: progressVN,
-              builder: (context, value, child){
+              builder: (context, progress, child){
 
-                final progress = value / 100;
                 return LinearProgressIndicator(
                   value: progress,
                   minHeight: 4,
                   backgroundColor: Colors.transparent,
                   color: progress >= 1 ? Colors.transparent : Colors.blue,
                 );
-              }
+              },
           ),
         ],
       ),

@@ -285,9 +285,6 @@ class _AssetUploadButtonState extends State<AssetUploadButton> with AutomaticKee
       // return ImageService().compressAndGetFile(file);
       return fileNew;
     }).then((file) {
-      if (file == null) {
-        throw "文件为空";
-      }
       widget.model.file = file;
       setState(() {});
 
