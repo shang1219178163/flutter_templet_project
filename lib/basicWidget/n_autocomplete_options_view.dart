@@ -42,33 +42,35 @@ class NAutocompleteOptionsView<T extends Object> extends StatelessWidget {
         elevation: 4.0,
         child: ConstrainedBox(
           constraints: BoxConstraints(maxHeight: maxOptionsHeight),
-          child: ListView.builder(
-            padding: EdgeInsets.zero,
-            shrinkWrap: true,
-            itemCount: options.length,
-            itemBuilder: (BuildContext context, int index) {
-              final option = options.elementAt(index);
-              return cellBuilder?.call(context, index) ?? InkWell(
-                onTap: () {
-                  onSelected(option);
-                },
-                child: Builder(
-                  builder: (BuildContext context) {
-                    final highlight = AutocompleteHighlightedOption.of(context) == index;
-                    if (highlight) {
-                      SchedulerBinding.instance.addPostFrameCallback((Duration timeStamp) {
-                        Scrollable.ensureVisible(context, alignment: 0.5);
-                      });
+          child: Scrollbar(
+            child: ListView.builder(
+              padding: EdgeInsets.zero,
+              shrinkWrap: true,
+              itemCount: options.length,
+              itemBuilder: (BuildContext context, int index) {
+                final option = options.elementAt(index);
+                return cellBuilder?.call(context, index) ?? InkWell(
+                  onTap: () {
+                    onSelected(option);
+                  },
+                  child: Builder(
+                    builder: (BuildContext context) {
+                      final highlight = AutocompleteHighlightedOption.of(context) == index;
+                      if (highlight) {
+                        SchedulerBinding.instance.addPostFrameCallback((Duration timeStamp) {
+                          Scrollable.ensureVisible(context, alignment: 0.5);
+                        });
+                      }
+                      return Container(
+                        color: highlight ? Theme.of(context).focusColor : null,
+                        padding: const EdgeInsets.all(16.0),
+                        child: Text(displayStringForOption(option)),
+                      );
                     }
-                    return Container(
-                      color: highlight ? Theme.of(context).focusColor : null,
-                      padding: const EdgeInsets.all(16.0),
-                      child: Text(displayStringForOption(option)),
-                    );
-                  }
-                ),
-              );
-            },
+                  ),
+                );
+              },
+            ),
           ),
         ),
       ),
