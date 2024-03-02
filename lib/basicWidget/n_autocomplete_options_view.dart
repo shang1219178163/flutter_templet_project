@@ -19,8 +19,8 @@ class NAutocompleteOptionsView<T extends Object> extends StatelessWidget {
     required this.displayStringForOption,
     required this.onSelected,
     required this.options,
-    required this.maxOptionsHeight,
-    this.cellBuilder
+    required this.maxHeight,
+    this.itemBuilder
   }) : super(key: key);
 
   final AutocompleteOptionToString<T> displayStringForOption;
@@ -29,10 +29,10 @@ class NAutocompleteOptionsView<T extends Object> extends StatelessWidget {
 
   final Iterable<T> options;
 
-  final double maxOptionsHeight;
+  final double maxHeight;
 
   // final OptionWidgetBuilder<T>? cellBuilder;
-  final IndexedWidgetBuilder? cellBuilder;
+  final IndexedWidgetBuilder? itemBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +41,7 @@ class NAutocompleteOptionsView<T extends Object> extends StatelessWidget {
       child: Material(
         elevation: 4.0,
         child: ConstrainedBox(
-          constraints: BoxConstraints(maxHeight: maxOptionsHeight),
+          constraints: BoxConstraints(maxHeight: maxHeight),
           child: Scrollbar(
             child: ListView.builder(
               padding: EdgeInsets.zero,
@@ -49,7 +49,7 @@ class NAutocompleteOptionsView<T extends Object> extends StatelessWidget {
               itemCount: options.length,
               itemBuilder: (BuildContext context, int index) {
                 final option = options.elementAt(index);
-                return cellBuilder?.call(context, index) ?? InkWell(
+                return itemBuilder?.call(context, index) ?? InkWell(
                   onTap: () {
                     onSelected(option);
                   },

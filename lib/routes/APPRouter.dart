@@ -14,6 +14,7 @@ import 'package:flutter_templet_project/pages/DataTypeDemo.dart';
 import 'package:flutter_templet_project/pages/DevelopToolList.dart';
 import 'package:flutter_templet_project/pages/EmojiPage.dart';
 import 'package:flutter_templet_project/pages/AppLifecycleStateObserverDemo.dart';
+import 'package:flutter_templet_project/pages/IconConvertPage.dart';
 import 'package:flutter_templet_project/pages/NTargetFollowerDemo.dart';
 import 'package:flutter_templet_project/pages/PageLifecycleFuncTest.dart';
 import 'package:flutter_templet_project/pages/DialogChoiceChipDemo.dart';
@@ -692,6 +693,7 @@ class APPRouter {
   static const twoDimensionalGridViewDemo = '/TwoDimensionalGridViewDemo';
   static const listenerHeaderPage = '/listenerHeaderPage';
   static const nwebViewDemo = '/nwebViewDemo';
+  static const iconConvertPage = '/iconConvertPage';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -1095,6 +1097,7 @@ class AppPage {
     GetPage(name: APPRouter.twoDimensionalGridViewDemo, page: () => TwoDimensionalGridViewDemo(),),
     GetPage(name: APPRouter.listenerHeaderPage, page: () => ListenerHeaderPage(),),
     GetPage(name: APPRouter.nwebViewDemo, page: () => NWebViewDemo(),),
+    GetPage(name: APPRouter.iconConvertPage, page: () => IconConvertPage(),),
 
 
 

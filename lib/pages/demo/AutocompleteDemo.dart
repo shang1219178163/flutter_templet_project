@@ -80,8 +80,8 @@ class _AutocompleteDemoState extends State<AutocompleteDemo>{
                 displayStringForOption: (option) => option.name,
                 onSelected: onSelected,
                 options: options,
-                maxOptionsHeight: 300,
-                cellBuilder: (context, index) {
+                maxHeight: 300,
+                itemBuilder: (context, index) {
                   final option = options.elementAt(index);
 
                   final str = option.name;
