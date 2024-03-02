@@ -8,7 +8,7 @@ import 'package:flutter_templet_project/basicWidget/chioce_list.dart';
 import 'package:flutter_templet_project/basicWidget/chioce_wrap.dart';
 import 'package:flutter_templet_project/basicWidget/n_cancel_and_confirm_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_user_privacy.dart';
-import 'package:flutter_templet_project/basicWidget/n_webview.dart';
+import 'package:flutter_templet_project/basicWidget/n_webview_page.dart';
 import 'package:flutter_templet_project/basicWidget/n_popup_route.dart';
 import 'package:flutter_templet_project/basicWidget/n_alert_dialog.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';

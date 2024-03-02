@@ -45,6 +45,7 @@ import 'package:flutter_templet_project/pages/demo/NChoiceBoxOneDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NFooterButtonBarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NIndexAvatarGroupDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NSectionHeaderDemo.dart';
+import 'package:flutter_templet_project/pages/demo/NWebViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/OverlayPortalDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ProgressClipperDemo.dart';
 import 'package:flutter_templet_project/pages/demo/SearchDemo.dart';
@@ -690,6 +691,7 @@ class APPRouter {
   static const sliverMainAxisGroupDemo = '/sliverMainAxisGroupDemo';
   static const twoDimensionalGridViewDemo = '/TwoDimensionalGridViewDemo';
   static const listenerHeaderPage = '/listenerHeaderPage';
+  static const nwebViewDemo = '/nwebViewDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -1092,6 +1094,7 @@ class AppPage {
     GetPage(name: APPRouter.sliverMainAxisGroupDemo, page: () => SliverMainAxisGroupDemo(),),
     GetPage(name: APPRouter.twoDimensionalGridViewDemo, page: () => TwoDimensionalGridViewDemo(),),
     GetPage(name: APPRouter.listenerHeaderPage, page: () => ListenerHeaderPage(),),
+    GetPage(name: APPRouter.nwebViewDemo, page: () => NWebViewDemo(),),
 
 
 

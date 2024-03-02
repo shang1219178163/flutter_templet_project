@@ -656,6 +656,7 @@ var customs = [
   Tuple2(APPRouter.appBarColorChangerDemo, "appBarColorChangerDemo", ),
   Tuple2(APPRouter.footerButtonBarDemo, "footerButtonBarDemo", ),
   Tuple2(APPRouter.sectionHeaderDemo, "sectionHeaderDemo", ),
+  Tuple2(APPRouter.nwebViewDemo, "nwebViewDemo", ),
 
 
 ];
