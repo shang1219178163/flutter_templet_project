@@ -8,16 +8,17 @@
 
 
 
-
 import 'package:flutter/material.dart';
 
-/// 弹窗
+/// 弹窗/抽屉/页面展示
 class NAlignmentDrawer extends StatefulWidget {
 
   NAlignmentDrawer({
     super.key,
     this.duration = const Duration(milliseconds: 350),
     this.alignment = Alignment.topCenter,
+    this.barrierColor,
+    this.onBarrier,
     this.hasFade = true,
     this.builder,
   });
@@ -26,6 +27,10 @@ class NAlignmentDrawer extends StatefulWidget {
   final Duration duration;
   /// 目标位置
   final Alignment alignment;
+
+  final Color? barrierColor;
+  final VoidCallback? onBarrier;
+
   /// 是否有 fade 动画
   final bool hasFade;
 
@@ -75,7 +80,6 @@ class _NAlignmentDrawerState extends State<NAlignmentDrawer> with SingleTickerPr
 
   @override
   void dispose() {
-    // TODO: implement dispose
     _scrollController.dispose();
     controller.removeListener(onListener);
     controller.dispose();
@@ -101,7 +105,7 @@ class _NAlignmentDrawerState extends State<NAlignmentDrawer> with SingleTickerPr
 
   @override
   Widget build(BuildContext context) {
-    Widget child = widget.builder?.call(onHide) ?? Scaffold(
+    final defaultWidget = Scaffold(
       appBar: AppBar(
           title: Text("$widget"),
           automaticallyImplyLeading: false,
@@ -117,6 +121,8 @@ class _NAlignmentDrawerState extends State<NAlignmentDrawer> with SingleTickerPr
       body: buildBody(),
     );
 
+    Widget child = widget.builder?.call(onHide) ?? defaultWidget;
+
     if (widget.hasFade) {
       child = FadeTransition(
         opacity: fadeAnimation,
@@ -124,9 +130,18 @@ class _NAlignmentDrawerState extends State<NAlignmentDrawer> with SingleTickerPr
       );
     }
 
-    return SlideTransition(
+    child = SlideTransition(
       position: offsetAnimation,
       child: child,
+    );
+
+    return InkWell(
+      onTap: widget.onBarrier ?? onHide,
+      child: Container(
+        alignment: widget.alignment,
+        color: widget.barrierColor ?? Theme.of(context).bottomSheetTheme.modalBarrierColor,
+        child: child,
+      )
     );
   }
 

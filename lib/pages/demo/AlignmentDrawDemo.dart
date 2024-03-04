@@ -87,19 +87,17 @@ class _AlignmentDrawDemoState extends State<AlignmentDrawDemo> {
       barrierDismissible: false,
       builder: (BuildContext context) {
 
-        return Container(
+        return NAlignmentDrawer(
           alignment: alignment,
-          child: NAlignmentDrawer(
-            alignment: alignment,
-            builder: (onHide) {
+          builder: (onHide) {
 
-              return ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(12)),
-                child: Container(
-                  width: 300,
-                  height: 400,
-                  child: Scaffold(
-                    appBar: AppBar(
+            return ClipRRect(
+              borderRadius: BorderRadius.all(Radius.circular(12)),
+              child: Container(
+                width: 300,
+                height: 400,
+                child: Scaffold(
+                  appBar: AppBar(
                       title: Text("NAlignmentDrawer"),
                       automaticallyImplyLeading: false,
                       actions: [
@@ -110,13 +108,12 @@ class _AlignmentDrawDemoState extends State<AlignmentDrawDemo> {
                           ),
                         ),
                       ]
-                    ),
-                    body: buildBody(),
                   ),
+                  body: buildBody(),
                 ),
-              );
-            },
-          )
+              ),
+            );
+          },
         );
       },
     );
