@@ -7,11 +7,13 @@
 //
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_alignment_drawer.dart';
 import 'package:flutter_templet_project/basicWidget/n_label_and_icon.dart';
 import 'package:flutter_templet_project/extension/button_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/navigator_ext.dart';
-import 'package:flutter_templet_project/pages/TopDrawer.dart';
+import 'package:flutter_templet_project/extension/widget_ext.dart';
+
 
 class BottomSheetDemo extends StatelessWidget {
   final String? title;
@@ -31,7 +33,7 @@ class BottomSheetDemo extends StatelessWidget {
             style: TextStyle(color: Colors.white),
           ),
           onPressed: () {
-            presentTopFilter(context);
+
           },)
         ).toList(),
       ),
@@ -54,42 +56,8 @@ class BottomSheetDemo extends StatelessWidget {
     );
   }
 
-  presentTopFilter(BuildContext context){
-    showDialog(
-      context: context,
-      useSafeArea: false,
-      builder: (BuildContext context) {
-
-        return Container(
-          alignment: Alignment.center,
-          padding: EdgeInsets.only(left: 0, right: 0, top: 0, bottom: 300),
-          child: TopDrawer(
-            builder: (onHide) {
-
-              return Scaffold(
-                appBar: AppBar(
-                  title: Text("TopDrawer"),
-                  automaticallyImplyLeading: false,
-                  actions: [
-                    TextButton(
-                      onPressed: onHide,
-                      child: Text('取消',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ]
-                ),
-                body: buildBody(),
-              );
-            },
-          )
-        );
-      },
-    );
-  }
-
   showSheet(BuildContext context) {
-    final content = SafeArea(
+    SafeArea(
       child: Stack(
         clipBehavior: Clip.none,
         children: [
@@ -108,16 +76,8 @@ class BottomSheetDemo extends StatelessWidget {
           ),
         ],
       ),
-    );
-
-    showModalBottomSheet(
-      // showDragHandle: true,
-      context: context,
-      builder: (context) {
-
-        return content;
-      },
-    );
+    ).toShowModalBottomSheet(context: context);
+    
   }
 
   _buildList(BuildContext context) {
