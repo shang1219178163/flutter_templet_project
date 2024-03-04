@@ -456,9 +456,22 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
     final arr = [];
     final arrNew = arr.take(1);
     debugPrint('arrNew: ${arrNew.isEmpty}');
+
+    removeSame();
+  }
+
+  removeSame() {
+    List list = [{'id':1,'name':'小明'},{'id':1,'name':'小红'},{'id':2,'name':'小明'}];
+
+    final ids = list.map((e) => e['id']).toSet();
+    debugPrint('ids: ${ids}');
+
+    list.retainWhere((e) => ids.remove(e['id']));
+    debugPrint('list: ${list}');
   }
 
   testBool({bool value = false}) {
+
 
   }
   
