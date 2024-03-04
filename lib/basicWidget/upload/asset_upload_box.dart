@@ -72,6 +72,18 @@ class _AssetUploadBoxState extends State<AssetUploadBox> {
   }
 
   @override
+  void didUpdateWidget(covariant AssetUploadBox oldWidget) {
+    final entityIds = widget.items.map((e) => e.entity?.id).join(",");
+    final oldWidgetEntityIds = oldWidget.items.map((e) => e.entity?.id).join(",");
+    if (entityIds != oldWidgetEntityIds) {
+      selectedModels
+        ..clear()
+        ..addAll(widget.items);
+    }
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return photoSection(
       items: selectedModels,
