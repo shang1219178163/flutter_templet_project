@@ -65,7 +65,7 @@ class _NAlignmentDrawerState extends State<NAlignmentDrawer> with SingleTickerPr
     );
   }
 
-  late final controller = AnimationController(duration: widget.duration, vsync: this, );
+  late final controller = AnimationController(duration: widget.duration, vsync: this,);
 
   late final Animation<Offset> offsetAnimation = tween.animate(CurvedAnimation(
       parent: controller,
