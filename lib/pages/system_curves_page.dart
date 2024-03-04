@@ -113,8 +113,10 @@ class _SystemCurvesPageState extends State<SystemCurvesPage> {
                       ),
                       child: Row(
                         children: [
-                          Image.asset(
-                            e.toPath("assets/images/curve"),
+                          Expanded(
+                            child: Image.asset(
+                              e.toPath("assets/images/curve"),
+                            ),
                           ),
                         ],
                       ),
