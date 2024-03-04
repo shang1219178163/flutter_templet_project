@@ -41,7 +41,7 @@ class _AlignmentDrawDemoState extends State<AlignmentDrawDemo> {
             style: TextStyle(color: Colors.white),
           ),
           onPressed: () {
-            presentDrawer();
+            presentDrawer(alignment: topAlignment);
           },
         )
         ).toList(),
@@ -81,41 +81,37 @@ class _AlignmentDrawDemoState extends State<AlignmentDrawDemo> {
   }
 
   presentDrawer({Alignment alignment = Alignment.topCenter,}){
-    showDialog(
+    NAlignmentDrawer(
+      alignment: alignment,
+      builder: (onHide) {
+
+        return ClipRRect(
+          borderRadius: BorderRadius.all(Radius.circular(12)),
+          child: Container(
+            width: 300,
+            height: 400,
+            child: Scaffold(
+              appBar: AppBar(
+                  title: Text("NAlignmentDrawer"),
+                  automaticallyImplyLeading: false,
+                  actions: [
+                    TextButton(
+                      onPressed: onHide,
+                      child: Text('取消',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ]
+              ),
+              body: buildBody(),
+            ),
+          ),
+        );
+      },
+    ).toShowDialog(
       context: context,
       useSafeArea: false,
       barrierDismissible: false,
-      builder: (BuildContext context) {
-
-        return NAlignmentDrawer(
-          alignment: alignment,
-          builder: (onHide) {
-
-            return ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(12)),
-              child: Container(
-                width: 300,
-                height: 400,
-                child: Scaffold(
-                  appBar: AppBar(
-                      title: Text("NAlignmentDrawer"),
-                      automaticallyImplyLeading: false,
-                      actions: [
-                        TextButton(
-                          onPressed: onHide,
-                          child: Text('取消',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
-                      ]
-                  ),
-                  body: buildBody(),
-                ),
-              ),
-            );
-          },
-        );
-      },
     );
   }
 
