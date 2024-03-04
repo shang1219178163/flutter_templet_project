@@ -26,6 +26,7 @@ import 'package:flutter_templet_project/pages/ThemeColorDemo.dart';
 import 'package:flutter_templet_project/pages/TwoDimensionalGridViewDemo.dart';
 import 'package:flutter_templet_project/pages/YamlParsePage.dart';
 import 'package:flutter_templet_project/pages/demo/APIConvertPage.dart';
+import 'package:flutter_templet_project/pages/demo/AlignmentDrawDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedSizeDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedSizeDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/AppBarDemo.dart';
@@ -694,6 +695,7 @@ class APPRouter {
   static const listenerHeaderPage = '/listenerHeaderPage';
   static const nwebViewDemo = '/nwebViewDemo';
   static const iconConvertPage = '/iconConvertPage';
+  static const alignmentDrawDemo = '/alignmentDrawDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -1098,6 +1100,7 @@ class AppPage {
     GetPage(name: APPRouter.listenerHeaderPage, page: () => ListenerHeaderPage(),),
     GetPage(name: APPRouter.nwebViewDemo, page: () => NWebViewDemo(),),
     GetPage(name: APPRouter.iconConvertPage, page: () => IconConvertPage(),),
+    GetPage(name: APPRouter.alignmentDrawDemo, page: () => AlignmentDrawDemo(),),
 
 
 

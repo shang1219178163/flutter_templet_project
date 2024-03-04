@@ -658,7 +658,7 @@ var customs = [
   Tuple2(APPRouter.sectionHeaderDemo, "sectionHeaderDemo", ),
   Tuple2(APPRouter.nwebViewDemo, "nwebViewDemo", ),
   Tuple2(APPRouter.iconConvertPage, "iconConvertPage", ),
-
+  Tuple2(APPRouter.alignmentDrawDemo, "alignmentDrawDemo", ),
 
 ];
 
