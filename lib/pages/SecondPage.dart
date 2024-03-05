@@ -3,14 +3,12 @@ import 'dart:math';
 import 'package:dash_painter/dash_decoration.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
-import 'package:flutter_templet_project/APPThemeSettings.dart';
 import 'package:flutter_templet_project/basicWidget/GradientBoundPainter.dart';
 import 'package:flutter_templet_project/basicWidget/after_layout_builder.dart';
 import 'package:flutter_templet_project/basicWidget/n_dash_decoration.dart';
-import 'package:flutter_templet_project/basicWidget/n_label_and_icon.dart';
 import 'package:flutter_templet_project/basicWidget/n_painter_arc.dart';
+import 'package:flutter_templet_project/basicWidget/n_pair.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/n_text_button.dart';
 import 'package:flutter_templet_project/basicWidget/radial_button.dart';
@@ -156,9 +154,9 @@ class _SecondPageState extends State<SecondPage> {
                     onPressed: () {
                       debugPrint("MaterialButton");
                     },
-                    child: NLabelAndIcon(
-                      label: Text("MaterialButton"),
+                    child: NPair(
                       icon: Icon(Icons.info),
+                      child: Text("MaterialButton"),
                     ),
                   ),
                 ],
@@ -417,7 +415,7 @@ class _SecondPageState extends State<SecondPage> {
               ),
             ),
             NSectionHeader(
-              title: "NLabelAndIcon + OutlinedButton",
+              title: "NPair + OutlinedButton",
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: iconDirectionItems().map((e) => OutlinedButton(
@@ -434,7 +432,7 @@ class _SecondPageState extends State<SecondPage> {
               ),
             ),
             NSectionHeader(
-              title: "NLabelAndIcon + ElevatedButton",
+              title: "NPair + ElevatedButton",
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: iconDirectionItems().map((e) => ElevatedButton(
@@ -659,27 +657,27 @@ class _SecondPageState extends State<SecondPage> {
   }
 
   /// icon 上下左右
-  List<NLabelAndIcon> iconDirectionItems() {
+  List<NPair> iconDirectionItems() {
     return [
-      NLabelAndIcon(
-        label: Text("left"),
+      NPair(
         icon: Icon(Icons.info),
+        child: Text("left"),
       ),
-      NLabelAndIcon(
-        label: Text("right"),
+      NPair(
         icon: Icon(Icons.info),
         isReverse: true,
+        child: Text("right"),
       ),
-      NLabelAndIcon(
-        label: Text("top"),
+      NPair(
         icon: Icon(Icons.info),
         direction: Axis.vertical,
+        child: Text("top"),
       ),
-      NLabelAndIcon(
-        label: Text("bottom"),
+      NPair(
         icon: Icon(Icons.info),
         direction: Axis.vertical,
         isReverse: true,
+        child: Text("bottom"),
       ),
     ];
   }
@@ -856,9 +854,11 @@ class _SecondPageState extends State<SecondPage> {
       ).toList(),
       onChanged: (value) {
         ddlog(value);
-        if (value == null) return;
+        if (value == null) {
+          return;
+        }
         setState(() {
-          _dropValue = value as String;
+          _dropValue = value;
         });
       },
     );
@@ -1031,10 +1031,10 @@ class _SecondPageState extends State<SecondPage> {
               _volume += 2;
               setState(() {});
             },
-            child: NLabelAndIcon(
+            child: NPair(
               direction: Axis.vertical,
-              label: Text(_volume.toString(), style: TextStyle(fontSize: 20)),
               icon: Icon(Icons.ring_volume, size: 30),
+              child: Text(_volume.toString(), style: TextStyle(fontSize: 20)),
             ),
           ),
         ],

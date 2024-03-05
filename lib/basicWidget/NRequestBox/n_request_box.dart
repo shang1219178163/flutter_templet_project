@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/n_cancel_and_confirm_bar.dart';
-import 'package:flutter_templet_project/basicWidget/n_label_and_icon.dart';
+import 'package:flutter_templet_project/basicWidget/n_pair.dart';
 import 'package:flutter_templet_project/basicWidget/n_search_textfield.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/date_time_ext.dart';
@@ -229,8 +229,8 @@ class _NRequestBoxState extends State<NRequestBox> {
                 // padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
               ),
               onPressed: onClick,
-              child: NLabelAndIcon(
-                label: NText("筛选", fontSize: 16.sp),
+              child: NPair(
+                child: NText("筛选", fontSize: 16.sp),
                 icon: Image(
                   image: "icon_patient_filter.png".toAssetImage(),
                   width: 18.w,

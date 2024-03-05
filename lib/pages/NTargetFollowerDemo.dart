@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/n_long_press_menu.dart';
 
 import 'package:flutter_templet_project/basicWidget/n_target_follower.dart';
-import 'package:flutter_templet_project/basicWidget/n_label_and_icon.dart';
+import 'package:flutter_templet_project/basicWidget/n_pair.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
@@ -213,18 +213,18 @@ class _NTargetFollowerDemoState extends State<NTargetFollowerDemo> {
         runSpacing: 16,
         children: items.map((e) {
 
-          final child = NLabelAndIcon(
+          final child = NPair(
             direction: Axis.vertical,
-            label: NText(e.item1,
-              color: Colors.white,
-              fontSize: 13.sp,
-              fontWeight: FontWeight.w400,
-            ),
             icon: Image(
               image: e.item2.toAssetImage(),
               width: 18,
               height: 18,
               fit: BoxFit.fill,
+            ),
+            child: NText(e.item1,
+              color: Colors.white,
+              fontSize: 13.sp,
+              fontWeight: FontWeight.w400,
             ),
           );
 

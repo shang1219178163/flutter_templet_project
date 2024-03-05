@@ -20,11 +20,11 @@ class PreferredSizeSegmentedControl extends StatelessWidget implements Preferred
     required this.onValueChanged,
   }) : super(key: key);
 
-  List<String> titles;
+  final List<String> titles;
 
-  int groupValue;
+  final int groupValue;
 
-  ValueChanged<int> onValueChanged;
+  final ValueChanged<int> onValueChanged;
 
   @override
   final Size preferredSize;

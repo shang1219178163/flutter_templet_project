@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/NSectionHeader.dart';
-import 'package:flutter_templet_project/basicWidget/n_label_and_icon.dart';
+import 'package:flutter_templet_project/basicWidget/n_pair.dart';
 import 'package:flutter_templet_project/enum/ActivityType.dart';
 import 'package:flutter_templet_project/extension/text_style_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
@@ -54,9 +54,9 @@ class _EnumDemoState extends State<EnumDemo> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(e.toString()),
-                    NLabelAndIcon(
+                    NPair(
                       icon: Text("${e.name}"),
-                      label: Text("(e.name)"),
+                      child: Text("(e.name)"),
                     ),
                   ],
                 ),
@@ -76,9 +76,9 @@ class _EnumDemoState extends State<EnumDemo> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(e.toString()),
-                    NLabelAndIcon(
+                    NPair(
                       icon: Text("${e.name}"),
-                      label: Text("(e.name)"),
+                      child: Text("(e.name)"),
                     ),
                   ],
                 ),

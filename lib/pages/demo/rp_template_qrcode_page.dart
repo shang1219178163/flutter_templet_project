@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/n_four_corner.dart';
-import 'package:flutter_templet_project/basicWidget/n_label_and_icon.dart';
+import 'package:flutter_templet_project/basicWidget/n_pair.dart';
 import 'package:flutter_templet_project/basicWidget/n_network_image.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/n_ticket_divder.dart';
@@ -177,17 +177,17 @@ class _QrcodePageState extends State<QrcodePage> {
 
           return InkWell(
             onTap: e.item3,
-            child: NLabelAndIcon(
+            child: NPair(
               direction: Axis.vertical,
-              label: NText(e.item1,
-                fontSize: 18.sp,
-                fontWeight: FontWeight.w500,
-                color: fontColor[20],
-              ),
               icon: Image(
                 image: AssetImage(e.item2),
                 width: 56.w,
                 height: 56.h,
+              ),
+              child: NText(e.item1,
+                fontSize: 18.sp,
+                fontWeight: FontWeight.w500,
+                color: fontColor[20],
               ),
             ),
           );

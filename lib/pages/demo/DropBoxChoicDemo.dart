@@ -10,7 +10,7 @@ import 'package:flutter_templet_project/basicWidget/enhance/enhance_expansion/en
 
 import 'package:flutter_templet_project/basicWidget/n_cancel_and_confirm_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_choice_box.dart';
-import 'package:flutter_templet_project/basicWidget/n_label_and_icon.dart';
+import 'package:flutter_templet_project/basicWidget/n_pair.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
@@ -208,8 +208,8 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
       ),
     );
 
-    final child = NLabelAndIcon(
-      label: label,
+    final child = NPair(
+      child: label,
       icon: icon,
       betweenGap: labelIconPadding,
       isReverse: isIconRight,

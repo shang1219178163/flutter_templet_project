@@ -12,6 +12,7 @@ import 'package:flutter_templet_project/pages/AppLaunchPage.dart';
 import 'package:flutter_templet_project/pages/ComponentMiddlePage.dart';
 import 'package:flutter_templet_project/pages/DataTypeDemo.dart';
 import 'package:flutter_templet_project/pages/DevelopToolList.dart';
+import 'package:flutter_templet_project/pages/DisplayFeatureDemo.dart';
 import 'package:flutter_templet_project/pages/EmojiPage.dart';
 import 'package:flutter_templet_project/pages/AppLifecycleStateObserverDemo.dart';
 import 'package:flutter_templet_project/pages/IconConvertPage.dart';
@@ -696,6 +697,7 @@ class APPRouter {
   static const nwebViewDemo = '/nwebViewDemo';
   static const iconConvertPage = '/iconConvertPage';
   static const alignmentDrawDemo = '/alignmentDrawDemo';
+  static const displayFeatureDemo = '/displayFeatureDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -1101,6 +1103,7 @@ class AppPage {
     GetPage(name: APPRouter.nwebViewDemo, page: () => NWebViewDemo(),),
     GetPage(name: APPRouter.iconConvertPage, page: () => IconConvertPage(),),
     GetPage(name: APPRouter.alignmentDrawDemo, page: () => AlignmentDrawDemo(),),
+    GetPage(name: APPRouter.displayFeatureDemo, page: () => DisplayFeatureDemo(),),
 
 
 

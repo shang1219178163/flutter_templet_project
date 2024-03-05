@@ -44,7 +44,7 @@
 // import 'package:yl_health_app/util/tool_util.dart';
 // import 'package:yl_health_app/widget/common/my_app_bar.dart';
 // import 'package:yl_health_app/widget/common/my_image.dart';
-// import 'package:yl_health_app/widget/n_label_and_icon.dart';
+// import 'package:yl_health_app/widget/n_pair.dart';
 // import 'package:yl_health_app/widget/n_placeholder.dart';
 // import 'package:yl_health_app/widget/n_search_textfield.dart';
 // import 'package:yl_health_app/widget/n_skeleton_screen.dart';
@@ -261,7 +261,7 @@
 //       child: Container(
 //         margin: const EdgeInsets.only(right: 14),
 //         // padding: const EdgeInsets.only(right: 14),
-//         child: NLabelAndIcon(
+//         child: NPair(
 //           label: NText(data: "筛选", fontSize: 14, color: color,),
 //           icon: MyImage(
 //             "images/icon_filter_template.png",
