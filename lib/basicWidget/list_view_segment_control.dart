@@ -163,6 +163,8 @@ class FoldMenu extends StatefulWidget {
 
 class _FoldMenuState extends State<FoldMenu> {
 
+  late bool isVisible = widget.isVisible;
+
   List<int> _indexs = [];
 
   @override
@@ -180,16 +182,16 @@ class _FoldMenuState extends State<FoldMenu> {
             children: topChildren.map((e) => buildListViewHorizontal(e: e, row: widget.children.indexOf(e))).toList(),
           ),
           Visibility(
-            visible: widget.isVisible,
+            visible: isVisible,
             child: Column(
               children: foldChildren.map((e) => buildListViewHorizontal(e: e, row: widget.children.indexOf(e))).toList(),
             ),
           ),
           widget.indicator ?? IconButton(
-            icon: widget.isVisible ? Icon(Icons.keyboard_arrow_up) : Icon(Icons.keyboard_arrow_down),
+            icon: isVisible ? Icon(Icons.keyboard_arrow_up) : Icon(Icons.keyboard_arrow_down),
             onPressed: () {
               setState(() {
-                widget.isVisible = !widget.isVisible;
+                isVisible = !isVisible;
               });
             },
           ),

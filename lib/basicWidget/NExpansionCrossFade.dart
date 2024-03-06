@@ -1,32 +1,53 @@
 
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 
-class NExpansionCrossFade extends StatelessWidget {
+class NExpansionCrossFade extends StatefulWidget {
 
-  const NExpansionCrossFade({
+  NExpansionCrossFade({
     super.key,
-    required this.child,
-    required this.expandedChild,
-    required this.isExpanded,
+    this.isExpanded = false,
+    required this.childBuilder,
+    required this.expandedChildBuilder,
   });
 
-  final Widget child;
-  final Widget expandedChild;
+  /// 是否展开,默认false
   final bool isExpanded;
+
+  final Widget Function(bool isExpanded, VoidCallback onToggle)? childBuilder;
+
+  final Widget Function(bool isExpanded, VoidCallback onToggle)? expandedChildBuilder;
+
+  @override
+  State<NExpansionCrossFade> createState() => _NExpansionCrossFadeState();
+}
+
+class _NExpansionCrossFadeState extends State<NExpansionCrossFade> {
+
+  late bool isExpanded = widget.isExpanded;
 
   @override
   Widget build(BuildContext context) {
-    final curve = const Interval(0.0, 1.0, curve: Curves.fastOutSlowIn);
     return AnimatedCrossFade(
-      firstChild: child,
-      secondChild: expandedChild,
-      firstCurve: curve,
-      secondCurve: curve,
-      sizeCurve: Curves.decelerate,
-      crossFadeState: isExpanded ? CrossFadeState.showSecond : CrossFadeState.showFirst,
-      duration: const Duration(milliseconds: 300),
+      duration: const Duration(milliseconds: 350),
+      firstChild: widget.childBuilder?.call(isExpanded, onToggle) ?? InkWell(
+        onTap: onToggle,
+        child: const FlutterLogo(style: FlutterLogoStyle.horizontal, size: 100.0)
+      ),
+      secondChild: widget.expandedChildBuilder?.call(isExpanded, onToggle) ?? InkWell(
+        onTap: onToggle,
+        child: const FlutterLogo(style: FlutterLogoStyle.stacked, size: 100.0)
+      ),
+      crossFadeState: !isExpanded ? CrossFadeState.showFirst : CrossFadeState.showSecond,
     );
   }
+
+  onToggle() {
+    isExpanded = !isExpanded;
+    setState(() { });
+  }
+
+
 }

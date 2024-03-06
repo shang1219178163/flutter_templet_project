@@ -87,14 +87,27 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
             child: buildExpansionCrossFade(),
           ),
           NSectionHeader(
-            title: "AnimatedCrossFade",
-            child: AnimatedCrossFade(
-              duration: const Duration(seconds: 1),
-              firstChild: const FlutterLogo(style: FlutterLogoStyle.horizontal, size: 100.0),
-              secondChild: const FlutterLogo(style: FlutterLogoStyle.stacked, size: 100.0),
-              crossFadeState: isExpandedExpansion ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+            title: "ExpansionCrossFade",
+            child: NExpansionCrossFade(
+              childBuilder: (isExpanded, onToggle) {
+
+                return buildExpansionChild(
+                  content: "测试_" * 500,
+                  isExpanded: isExpanded,
+                  onToggle: onToggle,
+                );
+              },
+              expandedChildBuilder: (isExpanded, onToggle) {
+
+                return buildExpansionChild(
+                  content: "测试1_" * 500,
+                  isExpanded: isExpanded,
+                  onToggle: onToggle,
+                );
+              },
             ),
           ),
+          SizedBox(height: 100,)
         ],
       ),
     );
@@ -141,7 +154,6 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
     _color.value = _color.value == Colors.green ? Colors.lightBlue : Colors.green;
     _alignment.value = _alignment.value == Alignment.topLeft ? Alignment.center : Alignment.topLeft;
   }
-
 
   // 搜索框初始宽度
   double _searchWidth = 28;
@@ -272,27 +284,72 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
   Widget buildExpansionCrossFade() {
     return NExpansionCrossFade(
       isExpanded: isExpandedExpansion,
-      child: Container(
-        height: 100,
-        color: Colors.green,
-        child: IconButton(
-            onPressed: (){
-              isExpandedExpansion = !isExpandedExpansion;
-              setState(() {});
-            },
+      childBuilder: (isExpanded, onToggle) {
+        return Container(
+          height: 100,
+          color: Colors.green,
+          child: IconButton(
+            onPressed: onToggle,
             icon: Icon(Icons.expand_more)
-        ),
-      ),
-      expandedChild: Container(
-        height: 200,
-        color: Colors.red,
-        child: IconButton(
-            onPressed: (){
-              isExpandedExpansion = !isExpandedExpansion;
-              setState(() {});
-            },
+          ),
+        );
+      },
+      expandedChildBuilder: (isExpanded, onToggle) {
+        return Container(
+          height: 200,
+          color: Colors.red,
+          child: IconButton(
+            onPressed: onToggle,
             icon: Icon(Icons.expand_less)
-        ),
+          ),
+        );
+      }
+    );
+  }
+
+  buildExpansionChild({
+    required String content,
+    required bool isExpanded,
+    required VoidCallback onToggle
+  }) {
+    final maxLines = isExpanded ? 10 : 5;
+    final arrowImage = isExpanded ? "icon_expand_arrow_up.png" : "icon_expand_arrow_down.png";
+
+    return InkWell(
+      onTap: onToggle,
+      child: Column(
+        children: [
+          Container(
+            child: NText(
+              "测试_" * 500,
+              maxLines: maxLines,
+            ),
+          ),
+          Container(
+            width: double.maxFinite,
+            height: 40,
+            padding: EdgeInsets.only(top: 8, bottom: 11),
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              // border: Border.all(color: Colors.blue),
+              // borderRadius: BorderRadius.all(Radius.circular(0)),
+              // gradient: LinearGradient(
+              //   tileMode: TileMode.clamp,
+              //   begin: Alignment.topCenter,
+              //   end: Alignment.bottomCenter,
+              //   colors: [
+              //     Color(0xFFF9F9F9).withOpacity(0.01),
+              //     Color(0xFFF9F9F9),
+              //   ],
+              // )
+            ),
+            child: Image(
+              image: arrowImage.toAssetImage(),
+              width: 21,
+              height: 8,
+            ),
+          )
+        ],
       ),
     );
   }
