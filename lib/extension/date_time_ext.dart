@@ -84,6 +84,10 @@ extension DateTimeExt on DateTime {
     String format = DATE_FORMAT,
     bool isUtc = false,
   }) {
+    if (timestamp == 0) {
+      return "";
+    }
+
     var dateTime = DateTimeExt.dateFromTimestamp(timestamp: timestamp, isUtc: isUtc);
     var result = stringFromDate(date: dateTime, format: format);
     return result;
