@@ -8,7 +8,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/NExpansionCrossFade.dart';
+import 'package:flutter_templet_project/basicWidget/n_expansion_cross_fade.dart';
 import 'package:flutter_templet_project/basicWidget/list_view_segment_control.dart';
 import 'package:flutter_templet_project/basicWidget/NSectionHeader.dart';
 import 'package:flutter_templet_project/basicWidget/n_expansion_tile.dart';

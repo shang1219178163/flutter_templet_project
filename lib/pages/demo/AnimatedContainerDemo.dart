@@ -7,7 +7,7 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/NExpansionCrossFade.dart';
+import 'package:flutter_templet_project/basicWidget/n_expansion_cross_fade.dart';
 import 'package:flutter_templet_project/basicWidget/NSectionHeader.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/change_notifier_ext.dart';
