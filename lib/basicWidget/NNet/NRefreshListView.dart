@@ -9,11 +9,8 @@
 
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/NNet/NNetContainer.dart';
 import 'package:flutter_templet_project/basicWidget/n_placeholder.dart';
 import 'package:flutter_templet_project/basicWidget/n_skeleton_screen.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
-
 
 
 typedef ValueIndexedWidgetBuilder<T> = Widget Function(
@@ -211,7 +208,7 @@ class NRefreshListViewState<T> extends State<NRefreshListView<T>> {
   }
 
   buildBody() {
-    return NNetContainer<List<T>>(
+    return ValueListenableBuilder<List<T>>(
       valueListenable: items,
       builder: (context, value, child) {
         return buildRefresh(
@@ -222,23 +219,6 @@ class NRefreshListViewState<T> extends State<NRefreshListView<T>> {
                 items: value,
               ),
         );
-      },
-      errorBuilder: (context, child) {
-        return widget.errorBuilder?.call(context, widget.cachedChild) ??
-            NPlaceholder(
-              imageAndTextSpacing: 10,
-              text: Text(
-                "网络连接失败,请稍后重试",
-                style: TextStyle(
-                  color: fontColor[30],
-                  fontSize: 14,
-                ),
-              ),
-              onTap: () async {
-                debugPrint("NPlaceholder");
-                _easyRefreshController.callRefresh();
-              },
-            );
       },
     );
   }
