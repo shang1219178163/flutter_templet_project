@@ -85,7 +85,6 @@ import 'package:flutter_templet_project/pages/demo/MediaQueryDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/MediaQueryScreeenDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NExpandTextDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NPageViewDemo.dart';
-import 'package:flutter_templet_project/pages/demo/NSkeletonDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PageBuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PageViewAndBarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PageViewDemoOne.dart';
@@ -100,6 +99,7 @@ import 'package:flutter_templet_project/pages/demo/UploadFileDemo.dart';
 import 'package:flutter_templet_project/pages/demo/LongCaptureWidgetDemo.dart';
 import 'package:flutter_templet_project/pages/demo/enumDemo.dart';
 import 'package:flutter_templet_project/pages/demo/box_shadow_demo_one.dart';
+import 'package:flutter_templet_project/pages/demo/isolateDemo.dart';
 import 'package:flutter_templet_project/pages/demo/rp_template_qrcode_page.dart';
 import 'package:flutter_templet_project/pages/homeSrollDemo.dart';
 import 'package:flutter_templet_project/pages/demo/BuilderDemo.dart';
@@ -188,7 +188,6 @@ import 'package:flutter_templet_project/pages/demo/drawImageNineDemo.dart';
 import 'package:flutter_templet_project/pages/demo/n_collection_nav_widget_demo.dart';
 import 'package:flutter_templet_project/pages/demo/n_horizontal_scroll_widget_demo.dart';
 import 'package:flutter_templet_project/pages/demo/smart_dialog_demo.dart';
-import 'package:flutter_templet_project/pages/demo/isolateDemo.dart';
 import 'package:flutter_templet_project/pages/demo/merge_images_demo.dart';
 import 'package:flutter_templet_project/pages/demo/merge_network_images_demo.dart';
 import 'package:flutter_templet_project/pages/keyboard_attach_demo.dart';
@@ -207,7 +206,6 @@ import 'package:flutter_templet_project/provider/provider_demo.dart';
 import 'package:flutter_templet_project/provider/provider_demo_one.dart';
 import 'package:flutter_templet_project/vendor/SVGAImageDemo.dart';
 import 'package:flutter_templet_project/vendor/ScribbleDemo.dart';
-import 'package:flutter_templet_project/vendor/SkeletonDemo.dart';
 import 'package:flutter_templet_project/vendor/SlidableDemoOne.dart';
 import 'package:flutter_templet_project/vendor/VisibilityDetectorDemo.dart';
 import 'package:flutter_templet_project/vendor/aesthetic_dialogs_demo.dart';
@@ -922,7 +920,6 @@ class AppPage {
     GetPage(name: APPRouter.scribbleDemo, page: () => ScribbleDemo(),),
     GetPage(name: APPRouter.aestheticDialogsDemo, page: () => AestheticDialogsDemo(),),
     GetPage(name: APPRouter.customTimerDemo, page: () => CustomTimerDemo(),),
-    GetPage(name: APPRouter.skeletonDemo, page: () => SkeletonDemo(),),
     GetPage(name: APPRouter.flutterFFiTest, page: () => FlutterFFiTest(),),
     GetPage(name: APPRouter.smartDialogPageDemo, page: () => SmartDialogPageDemo(),),
     GetPage(name: APPRouter.mergeImagesDemo, page: () => MergeImagesDemo(),),
@@ -1031,7 +1028,6 @@ class AppPage {
     GetPage(name: APPRouter.nestedScrollViewDemoOne, page: () => NestedScrollViewDemoOne(),),
     GetPage(name: APPRouter.nestedScrollViewDemoTwo, page: () => NestedScrollViewDemoTwo(),),
     GetPage(name: APPRouter.testFunction, page: () => TestFunction(),),
-    GetPage(name: APPRouter.nSkeletonDemo, page: () => NSkeletonDemo(),),
     GetPage(name: APPRouter.nTreeDemo, page: () => NTreeDemo(),),
     GetPage(name: APPRouter.azlistviewDemo, page: () => AzlistviewDemo(),),
     GetPage(name: APPRouter.expansionTileCard, page: () => ExpansionTileCard(),),

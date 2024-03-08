@@ -106,7 +106,7 @@ dependencies:
   custom_timer: ^0.2.3
   scribble: ^0.9.0
   aesthetic_dialogs: ^0.0.15
-  shimmer_animation: ^2.1.0+1
+  shimmer: ^3.0.0
 
   flutter_swiper_null_safety: ^1.0.2
   flutter_smart_dialog: ^4.2.1
