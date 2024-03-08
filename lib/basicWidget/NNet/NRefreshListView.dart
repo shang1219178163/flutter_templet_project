@@ -1,6 +1,6 @@
 //
 //  NRefreshListView.dart
-//  yl_health_app
+//  flutter_templet_project
 //
 //  Created by shang on 2024/3/8 10:59.
 //  Copyright © 2024/3/8 shang. All rights reserved.
@@ -19,10 +19,14 @@ import 'package:flutter_templet_project/util/color_util.dart';
 typedef ValueIndexedWidgetBuilder<T> = Widget Function(
     BuildContext context, int index, T data);
 
+/// 请求列表回调
+typedef RequestListCallback<T> = Future<List<T>> Function(
+    bool isRefresh, int pageNo, int pageSize, T? last,);
+
 /// 使用示例:
-// class PatientSchemeNewPage extends StatefulWidget {
+// class SchemeListPage extends StatefulWidget {
 //
-//   PatientSchemeNewPage({
+//   const SchemeListPage({
 //     super.key,
 //     this.arguments,
 //   });
@@ -30,13 +34,13 @@ typedef ValueIndexedWidgetBuilder<T> = Widget Function(
 //   final Map<String, dynamic>? arguments;
 //
 //   @override
-//   State<PatientSchemeNewPage> createState() => _PatientSchemePageNewState();
+//   State<SchemeListPage> createState() => _SchemeListPageState();
 // }
 //
-// class _PatientSchemePageNewState extends State<PatientSchemeNewPage> {
+// class _SchemeListPageState extends State<SchemeListPage> {
 //
 //   /// 获取上个页面传的参数
-//   /// userId --- 患者id
+//   /// userId --- 用户id
 //   late Map<String, dynamic> arguments = widget.arguments ?? Get.arguments;
 //
 //   @override
@@ -99,6 +103,7 @@ typedef ValueIndexedWidgetBuilder<T> = Widget Function(
 //   }
 // }
 
+
 /// 刷新列表
 class NRefreshListView<T> extends StatefulWidget {
   const NRefreshListView({
@@ -140,12 +145,7 @@ class NRefreshListView<T> extends StatefulWidget {
   final bool needRemovePadding;
 
   /// 请求方法
-  final Future<List<T>> Function(
-      bool isRefresh,
-      int pageNo,
-      int pageSize,
-      T? last,
-      ) onRequest;
+  final RequestListCallback<T> onRequest;
 
   /// 请求错误方法
   final void Function(Object error, StackTrace stack)? onRequestError;
