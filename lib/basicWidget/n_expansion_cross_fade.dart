@@ -8,22 +8,22 @@
 
 import 'package:flutter/material.dart';
 
-
+/// 折叠展开菜单
 class NExpansionCrossFade extends StatefulWidget {
 
   NExpansionCrossFade({
     super.key,
     this.isExpanded = false,
     required this.childBuilder,
-    required this.expandedChildBuilder,
+    required this.expandedBuilder,
   });
 
   /// 是否展开,默认false
   final bool isExpanded;
-
+  /// 非展开状态
   final Widget Function(bool isExpanded, VoidCallback onToggle)? childBuilder;
-
-  final Widget Function(bool isExpanded, VoidCallback onToggle)? expandedChildBuilder;
+  /// 展开状态
+  final Widget Function(bool isExpanded, VoidCallback onToggle)? expandedBuilder;
 
   @override
   State<NExpansionCrossFade> createState() => _NExpansionCrossFadeState();
@@ -41,7 +41,7 @@ class _NExpansionCrossFadeState extends State<NExpansionCrossFade> {
         onTap: onToggle,
         child: const FlutterLogo(style: FlutterLogoStyle.horizontal, size: 100.0)
       ),
-      secondChild: widget.expandedChildBuilder?.call(isExpanded, onToggle) ?? InkWell(
+      secondChild: widget.expandedBuilder?.call(isExpanded, onToggle) ?? InkWell(
         onTap: onToggle,
         child: const FlutterLogo(style: FlutterLogoStyle.stacked, size: 100.0)
       ),

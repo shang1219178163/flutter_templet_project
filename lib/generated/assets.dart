@@ -3,7 +3,6 @@ class Assets {
   Assets._();
 
   static const String assetsImagesImgFlutter310 = 'assets/images/img_flutter_3_10.webp';
-  static const String assetsPubspec = 'assets/pubspec.yaml';
   static const String curveCurveBounceIn = 'assets/images/curve/curve_bounce_in.gif';
   static const String curveCurveBounceInOut = 'assets/images/curve/curve_bounce_in_out.gif';
   static const String curveCurveBounceOut = 'assets/images/curve/curve_bounce_out.gif';
@@ -84,12 +83,15 @@ class Assets {
   static const String imagesIconDelete = 'assets/images/icon_delete.png';
   static const String imagesIconDowload = 'assets/images/icon_dowload.png';
   static const String imagesIconEmojiCircle = 'assets/images/icon_emoji_circle.png';
+  static const String imagesIconExpandArrowDown = 'assets/images/icon_expand_arrow_down.png';
+  static const String imagesIconExpandArrowUp = 'assets/images/icon_expand_arrow_up.png';
   static const String imagesIconEyeClose = 'assets/images/icon_eye_close.png';
   static const String imagesIconEyeOpen = 'assets/images/icon_eye_open.png';
   static const String imagesIconFileUnknow = 'assets/images/icon_file_unknow.png';
   static const String imagesIconHeart = 'assets/images/icon_heart.png';
   static const String imagesIconHeartBorder = 'assets/images/icon_heart_border.png';
   static const String imagesIconHeartHalf = 'assets/images/icon_heart_half.png';
+  static const String imagesIconHi = 'assets/images/icon_hi.png';
   static const String imagesIconHomeDelete = 'assets/images/icon_home_delete.png';
   static const String imagesIconJc = 'assets/images/icon_jc.png';
   static const String imagesIconJsonFile = 'assets/images/icon_json_file.png';

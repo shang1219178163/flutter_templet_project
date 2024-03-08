@@ -113,7 +113,7 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
                   onPressed: onToggle,
                 ),
               ),
-              expandedChildBuilder: (isExpanded, onToggle) => FoldMenu(
+              expandedBuilder: (isExpanded, onToggle) => FoldMenu(
                 children: [
                   Tuple2(List.generate(8, (index) => "item0_$index"), 0),
                   Tuple2(List.generate(8, (index) => "item1_$index"), 1),

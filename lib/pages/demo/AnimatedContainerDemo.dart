@@ -97,7 +97,7 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
                   onToggle: onToggle,
                 );
               },
-              expandedChildBuilder: (isExpanded, onToggle) {
+              expandedBuilder: (isExpanded, onToggle) {
 
                 return buildExpansionChild(
                   content: "测试1_" * 500,
@@ -294,7 +294,7 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
           ),
         );
       },
-      expandedChildBuilder: (isExpanded, onToggle) {
+      expandedBuilder: (isExpanded, onToggle) {
         return Container(
           height: 200,
           color: Colors.red,

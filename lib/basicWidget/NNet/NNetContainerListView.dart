@@ -192,9 +192,6 @@ class NNetContainerListViewState<T> extends State<NNetContainerListView<T>> {
         if (!mounted) {
           return;
         }
-        if (_indicatorResult == IndicatorResult.noMore) {
-          return;
-        }
         _page += 1;
         final models = await widget.onRequest(false, _page, widget.pageSize, _items.value.last);
         _items.value = [..._items.value, ...models];
