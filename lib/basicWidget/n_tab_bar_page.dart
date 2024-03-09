@@ -8,11 +8,10 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:tuple/tuple.dart';
 
 
-/// TabBar 初步页面封装
+/// 选项卡页面封装
 class NTabBarPage extends StatefulWidget {
 
   NTabBarPage({
