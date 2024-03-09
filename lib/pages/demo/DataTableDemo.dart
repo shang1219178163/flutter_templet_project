@@ -255,13 +255,17 @@ class _DataSource extends DataTableSource {
 
   @override
   DataRow? getRow(int index) {
-    if (index >= _rows.length) return null;
+    if (index >= _rows.length) {
+      return null;
+    }
     final e = _rows[index];
     return DataRow.byIndex(
       index: index,
       selected: e.isSelected,
       onSelectChanged: (value) {
-        if (value == null) return;
+        if (value == null) {
+          return;
+        }
         if (e.isSelected != value) {
           _selectedCount += value ? 1 : -1;
           assert(_selectedCount >= 0);

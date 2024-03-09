@@ -375,7 +375,7 @@ var list = <Tuple2<String, String>>[
   Tuple2(APPRouter.contextMenuActionDemo, "cupertinoFormDemo", ),
 
   Tuple2(APPRouter.dataTableDemo, "dateTableDemo", ),
-  Tuple2(APPRouter.dataTableByPaginatedDemo, "dataTableDemoNew", ),
+  Tuple2(APPRouter.dataTableByPaginatedDemo, "dataTableByPaginatedDemo", ),
   Tuple2(APPRouter.draggableDemo, "draggableDemo", ),
   Tuple2(APPRouter.draggableScrollableSheetDemo, "draggableScrollableSheetDemo", ),
 

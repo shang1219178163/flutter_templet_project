@@ -424,7 +424,7 @@ class APPRouter {
   static const draggableDemo = '/DraggableDemo';
   static const forgetPasswordPage = '/ForgetPasswordPage';
   static const dataTableDemo = '/DataTableDemo';
-  static const dataTableByPaginatedDemo = '/DataTableDemoNew';
+  static const dataTableByPaginatedDemo = '/dataTableByPaginatedDemo';
   static const segmentControlDemo = '/segmentControlDemo';
   static const segmentedButtonDemo = '/SegmentedButtonDemo';
 
