@@ -121,7 +121,6 @@ class _NTabBarViewState extends State<NTabBarView> with SingleTickerProviderStat
       labelStyle: widget.labelStyle,
       indicator: widget.isTabBottom ? decorationTop : decorationBom,
       onTap: (index) {
-        // ddlog([index, _tabController.index]);
         setState(() { });
       },
     );
@@ -132,15 +131,9 @@ class _NTabBarViewState extends State<NTabBarView> with SingleTickerProviderStat
       );
     }
 
-    // if (widget.isReverse) {
-    //   return tabBar;
-    // }
-
     return Material(
       color: widget.tabBgColor,
-      child: SafeArea(
-        child: tabBar,
-      )
+      child: tabBar,
     );
   }
 
