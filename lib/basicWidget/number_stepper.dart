@@ -15,7 +15,7 @@ import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:get/get.dart';
 
-import 'package:flutter_templet_project/basicWidget/TextInputFormatter/MinMaxTextInputFormatter.dart';
+import 'package:flutter_templet_project/basicWidget/TextInputFormatter/int_clamp_text_input_formatter.dart';
 
 
 ///自定义数值增减 Stepper
@@ -213,7 +213,7 @@ class _NumberStepperState extends State<NumberStepper> {
       inputFormatters: [
         FilteringTextInputFormatter.digitsOnly,
         LengthLimitingTextInputFormatter("${widget.max}".length),
-        MinMaxTextInputFormatter(max: widget.max, min: widget.min),
+        IntClampTextInputFormatter(max: widget.max, min: widget.min),
       ],
     );
   }
