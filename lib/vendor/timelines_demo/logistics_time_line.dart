@@ -8,8 +8,8 @@
 
 // import 'dart:ffi';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/preferred_size_segmented_control.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:timelines/timelines.dart';
 
@@ -19,7 +19,6 @@ class LogisticsTimeLine extends StatefulWidget {
   final String? title;
 
   const LogisticsTimeLine({ Key? key, this.title}) : super(key: key);
-
 
   @override
   _LogisticsTimeLineState createState() => _LogisticsTimeLineState();
@@ -36,7 +35,8 @@ class _LogisticsTimeLineState extends State<LogisticsTimeLine> {
   late final TimelineThemeData _theme1 = TimelineThemeData(
       nodePosition: 0,
       connectorTheme: ConnectorThemeData(color: Colors.red),
-      indicatorTheme: IndicatorThemeData(color: Colors.red, size: 10));
+      indicatorTheme: IndicatorThemeData(color: Colors.red, size: 10),
+  );
 
 
   @override
@@ -50,21 +50,48 @@ class _LogisticsTimeLineState extends State<LogisticsTimeLine> {
     );
   }
 
-  PreferredSizeWidget buildPreferredSize() {
-    final titles = List.generate(3, (index) => '样式$index',).toList();
-    // ddlog(titles);
-    return PreferredSizeSegmentedControl(
-      titles: titles,
-      groupValue: groupValue,
-      onValueChanged: (int value) {
-        ddlog(value.toString());
-        setState(() {
-          groupValue = value;
-        });
-      },
+  Widget buildPreferredSize() {
+    final children = List.generate(3, (i) {
+      return Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Text('样式$i', style: TextStyle(fontSize: 15))
+      );
+    },).toList();
+
+    final map = <int, Widget>{};
+    for (var i = 0; i < children.length; i++) {
+      map[i] = children[i];
+    }
+
+    return PreferredSize(
+      preferredSize: const Size(double.infinity, 48),
+      child: Padding(
+        padding: const EdgeInsets.only(top: 8, bottom: 12),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            // SizedBox(width: 24),
+            Expanded(
+              child: CupertinoSegmentedControl(
+                children: map,
+                groupValue: groupValue,
+                onValueChanged: (int value) {
+                  ddlog(value.toString());
+                  setState(() {
+                    groupValue = value;
+                  });
+                },
+                borderColor: Colors.white,
+                unselectedColor: Theme.of(context).primaryColor,
+                selectedColor: Colors.white,
+              ),
+            ),
+            // SizedBox(width: 24)
+          ],
+        ),
+      ),
     );
   }
-
 
   _getBody() {
     final map = {
