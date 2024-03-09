@@ -528,6 +528,8 @@ var list = <Tuple2<String, String>>[
   Tuple2(APPRouter.overlayPortalDemo, "overlayPortalDemo", ),
   Tuple2(APPRouter.componentMiddlePage, "componentMiddlePage", ),
   Tuple2(APPRouter.displayFeatureDemo, "displayFeatureDemo", ),
+  Tuple2(APPRouter.preferredSizeDemo, "preferredSizeDemo", ),
+  Tuple2(APPRouter.ntabBarPageDemo, "ntabBarPageDemo", ),
 
 
 ];
