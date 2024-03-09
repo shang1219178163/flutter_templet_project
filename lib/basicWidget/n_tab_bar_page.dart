@@ -14,7 +14,7 @@ import 'package:tuple/tuple.dart';
 /// 选项卡页面封装
 class NTabBarPage extends StatefulWidget {
 
-  NTabBarPage({
+  const NTabBarPage({
     super.key,
     required this.items,
     this.tabBarAlignment = Alignment.center,
