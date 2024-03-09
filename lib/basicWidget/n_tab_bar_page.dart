@@ -18,9 +18,11 @@ class NTabBarPage extends StatefulWidget {
   NTabBarPage({
     super.key,
     required this.items,
+    this.onChanged,
   });
 
   final List<Tuple2<String, Widget>> items;
+  final ValueChanged<int>? onChanged;
 
   @override
   State<NTabBarPage> createState() => _NTabBarPageState();
@@ -61,6 +63,7 @@ class _NTabBarPageState extends State<NTabBarPage> with SingleTickerProviderStat
           onTap: (index){
             tabBarIndex = index;
             setState(() {});
+            widget.onChanged?.call(index);
           },
         ),
       ),
