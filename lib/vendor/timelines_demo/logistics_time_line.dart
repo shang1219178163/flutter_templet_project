@@ -50,7 +50,7 @@ class _LogisticsTimeLineState extends State<LogisticsTimeLine> {
     );
   }
 
-  Widget buildPreferredSize() {
+  PreferredSizeWidget buildPreferredSize() {
     final children = List.generate(3, (i) {
       return Padding(
           padding: EdgeInsets.all(8.0),
