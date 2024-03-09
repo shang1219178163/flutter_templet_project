@@ -9,6 +9,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_tab_bar_page.dart';
+import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:tuple/tuple.dart';
 
 class NTabBarPageDemo extends StatefulWidget {
@@ -50,6 +51,9 @@ class _NTabBarPageDemoState extends State<NTabBarPageDemo> {
       ),
       body: NTabBarPage(
         items: items,
+        onChanged: (index){
+          ddlog("NTabBarPage: $index");
+        },
       ),
     );
   }

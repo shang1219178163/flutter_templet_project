@@ -37,13 +37,33 @@ class _NTabBarPageState extends State<NTabBarPage> with SingleTickerProviderStat
   int tabBarIndex = 0;
 
   @override
+  void dispose() {
+    tabController.removeListener(onListener);
+    tabController.dispose();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    tabController.addListener(onListener);
+  }
+
+  onListener() {
+    if (!tabController.indexIsChanging) {
+      widget.onChanged?.call(tabController.index);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         buildTabBar(),
         Expanded(
-          child: items[tabBarIndex].item2,
+          child: buildBody(),
         ),
       ],
     );
@@ -61,12 +81,19 @@ class _NTabBarPageState extends State<NTabBarPage> with SingleTickerProviderStat
           indicatorSize: TabBarIndicatorSize.label,
           // indicatorPadding: EdgeInsets.only(left: 6, right: 6),
           onTap: (index){
-            tabBarIndex = index;
-            setState(() {});
+            // tabBarIndex = index;
+            // setState(() {});
             widget.onChanged?.call(index);
           },
         ),
       ),
+    );
+  }
+
+  Widget buildBody() {
+    return TabBarView(
+      controller: tabController,
+      children: items.map((e) => e.item2).toList(),
     );
   }
 }
