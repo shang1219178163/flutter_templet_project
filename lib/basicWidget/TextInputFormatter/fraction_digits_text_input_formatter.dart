@@ -7,15 +7,14 @@ import 'package:flutter/services.dart';
 
 
 /// 最多小数
-class TextInputFormatterDecimal extends TextInputFormatter {
+class FractionDigitsTextInputFormatter extends TextInputFormatter {
 
-  TextInputFormatterDecimal({
-    this.decimal = 2,
-  })
-      : assert(decimal > 0);
+  FractionDigitsTextInputFormatter({
+    this.fractionDigits = 2,
+  }) : assert(fractionDigits > 0);
 
   /// 最大小数个数
-  final int decimal;
+  final int fractionDigits;
 
   @override
   TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
@@ -36,7 +35,7 @@ class TextInputFormatterDecimal extends TextInputFormatter {
       nValue = '0.';
     } else if (nValue.contains('.')) {
       //来验证小数点位置
-      if (nValue.substring(nValue.indexOf('.') + 1).length > decimal) {
+      if (nValue.substring(nValue.indexOf('.') + 1).length > fractionDigits) {
         nValue = oldValue.text;
       } else {
         if (nValue.split('.').length > 2) { //多个小数点，去掉后面的

@@ -1,5 +1,5 @@
 //
-//  BlockTextInputFormatter.dart
+//  block_text_input_formatter.dart
 //  flutter_templet_project
 //
 //  Created by shang on 2023/12/13 21:50.
@@ -9,13 +9,14 @@
 
 import 'package:flutter/services.dart';
 
-/// int 最大最小值
+
 class BlockTextInputFormatter extends TextInputFormatter {
 
   BlockTextInputFormatter({
     required this.banBlock,
   });
 
+  /// 禁用回调
   final bool Function(TextEditingValue oldValue, TextEditingValue newValue) banBlock;
 
   @override

@@ -1,5 +1,5 @@
 //
-//  MinMaxTextInputFormatter.dart
+//  int_clamp_text_input_formatter.dart
 //  flutter_templet_project
 //
 //  Created by shang on 2023/12/13 21:50.
@@ -9,9 +9,9 @@
 import 'package:flutter/services.dart';
 
 /// int 最大最小值
-class MinMaxTextInputFormatter extends TextInputFormatter {
+class IntClampTextInputFormatter extends TextInputFormatter {
 
-  MinMaxTextInputFormatter({
+  IntClampTextInputFormatter({
     this.min = 0,
     required this.max,
   })  : assert(min >= 0),

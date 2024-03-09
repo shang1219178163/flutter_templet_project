@@ -3,7 +3,13 @@
 import 'package:flutter/services.dart';
 
 /// 每四位数字加空格
-class TextInputFormatterCard extends TextInputFormatter {
+class InsertBlankTextInputFormatter extends TextInputFormatter {
+
+  InsertBlankTextInputFormatter({
+    this.step = 4,
+  });
+
+  final int step;
 
   @override
   TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
@@ -24,7 +30,7 @@ class TextInputFormatterCard extends TextInputFormatter {
       //index 当前字条的位置
       var index = i + 1;
       //每四个字条中间添加一个空格 最后一位不在考虑范围里
-      if (index % 4 == 0 && inuptData.length != index) {
+      if (index % step == 0 && inuptData.length != index) {
         stringBuffer.write("  ");
       }
     }
