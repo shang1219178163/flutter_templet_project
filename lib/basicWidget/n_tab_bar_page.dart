@@ -22,6 +22,9 @@ class NTabBarPage extends StatefulWidget {
     this.isThemeBg = true,
     this.onTabBar,
     this.onChanged,
+    this.headerBuilder,
+    this.middleBuilder,
+    this.footerBuilder,
   });
 
   final List<Tuple2<String, Widget>> items;
@@ -35,17 +38,21 @@ class NTabBarPage extends StatefulWidget {
   final ValueChanged<int>? onTabBar;
   final ValueChanged<int>? onChanged;
 
+  final IndexedWidgetBuilder? headerBuilder;
+  final IndexedWidgetBuilder? middleBuilder;
+  final IndexedWidgetBuilder? footerBuilder;
+
   @override
   State<NTabBarPage> createState() => _NTabBarPageState();
 }
 
 class _NTabBarPageState extends State<NTabBarPage> with SingleTickerProviderStateMixin {
 
-  late List<Tuple2<String, Widget>> items = widget.items;
+  late final List<Tuple2<String, Widget>> items = widget.items;
 
   late final tabController = TabController(length: items.length, vsync: this);
 
-  int tabBarIndex = 0;
+  final tabBarIndex = ValueNotifier(0);
 
   late final colorScheme = Theme.of(context).colorScheme;
 
@@ -84,7 +91,8 @@ class _NTabBarPageState extends State<NTabBarPage> with SingleTickerProviderStat
 
   onListener() {
     if (!tabController.indexIsChanging) {
-      widget.onChanged?.call(tabController.index);
+      tabBarIndex.value = tabController.index;
+      widget.onChanged?.call(tabBarIndex.value);
     }
   }
 
@@ -93,9 +101,27 @@ class _NTabBarPageState extends State<NTabBarPage> with SingleTickerProviderStat
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
+        ValueListenableBuilder(
+           valueListenable: tabBarIndex,
+           builder: (context, index, child){
+            return widget.headerBuilder?.call(context, index) ?? SizedBox();
+          }
+        ),
         buildTabBar(),
+        ValueListenableBuilder(
+          valueListenable: tabBarIndex,
+          builder: (context, index, child){
+            return widget.middleBuilder?.call(context, index) ?? SizedBox();
+          }
+        ),
         Expanded(
           child: buildBody(),
+        ),
+        ValueListenableBuilder(
+          valueListenable: tabBarIndex,
+          builder: (context, index, child){
+            return widget.footerBuilder?.call(context, index) ?? SizedBox();
+          }
         ),
       ],
     );

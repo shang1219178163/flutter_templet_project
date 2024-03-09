@@ -9,6 +9,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_tab_bar_page.dart';
+import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:tuple/tuple.dart';
 
@@ -64,6 +65,27 @@ class _NTabBarPageDemoState extends State<NTabBarPageDemo> {
         onTabBar: (index){
           ddlog("NTabBarPage onTabBar: $index");
         },
+        // headerBuilder: (context, index) {
+        //   return Container(
+        //     color: Colors.green,
+        //     height: 35,
+        //     child: NText("NTabBarPage headerBuilder: $index"),
+        //   );
+        // },
+        // middleBuilder: (context, index) {
+        //   return Container(
+        //     color: Colors.green,
+        //     height: 35,
+        //     child: NText("NTabBarPage middleBuilder: $index"),
+        //   );
+        // },
+        // footerBuilder:  (context, index) {
+        //   return Container(
+        //     color: Colors.green,
+        //     height: 35,
+        //     child: NText("NTabBarPage footerBuilder: $index"),
+        //   );
+        // },
       ),
     );
   }
