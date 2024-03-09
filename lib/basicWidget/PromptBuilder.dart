@@ -105,7 +105,7 @@ class PromptBuilder {
         ),
       );
     });
-    Overlay.of(context)?.insert(lastOverlay!);
+    Overlay.of(context).insert(lastOverlay!);
   }
 
   static _removeCurrentOverlay() {

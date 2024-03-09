@@ -12,7 +12,7 @@ class TabBarIndicatorFixed extends Decoration {
   /// Create an underline style selected tab indicator.
   ///
   /// The [borderSide] and [insets] arguments must not be null.
-  TabBarIndicatorFixed({
+ const TabBarIndicatorFixed({
     this.width = 20,
     this.height = 4.0,
     this.borderSide = const BorderSide(width: 0.0, color: Colors.redAccent),
@@ -26,7 +26,7 @@ class TabBarIndicatorFixed extends Decoration {
   });
 
   /// The color and weight of the horizontal line drawn below the selected tab.
-  BorderSide borderSide;
+ final BorderSide borderSide;
 
   /// Locates the selected tab's underline relative to the tab's boundary.
   ///
@@ -54,6 +54,8 @@ class TabBarIndicatorFixed extends Decoration {
   final double width;
 // 高度
   final double height;
+
+
   @override
   Decoration? lerpFrom(Decoration? a, double t) {
     if (a is TabBarIndicatorFixed) {

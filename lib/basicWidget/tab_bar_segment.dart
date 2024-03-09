@@ -49,58 +49,58 @@ class TabBarSegment extends StatefulWidget implements PreferredSizeWidget {
     this.maxHeight = _kTabHeight
   }) : super(key: key);
 
-  TabController? controller;
+  final TabController? controller;
   /// 初始索引
-  int initialIndex;
+  final int initialIndex;
   /// 当前索引
-  int currentIndex;
+  final int currentIndex;
   /// 总数
-  int tabCount;
+  final int tabCount;
   /// item builder
-  IndexedWidgetBuilder itemBuilder;
+  final IndexedWidgetBuilder itemBuilder;
   /// 点击回调
-  ValueChanged<int>? onTap;
+  final ValueChanged<int>? onTap;
   // /// 点击回调
   // IndexedCallback? onClick;
 
-  bool isScrollable;
+  final bool isScrollable;
 
-  EdgeInsetsGeometry? padding;
+  final EdgeInsetsGeometry? padding;
 
-  Color? indicatorColor;
+  final Color? indicatorColor;
 
-  double indicatorWeight;
+  final double indicatorWeight;
 
-  EdgeInsetsGeometry indicatorPadding;
+  final EdgeInsetsGeometry indicatorPadding;
 
-  Decoration? indicator;
+  final Decoration? indicator;
 
-  bool automaticIndicatorColorAdjustment;
+  final bool automaticIndicatorColorAdjustment;
 
-  TabBarIndicatorSize? indicatorSize;
+  final TabBarIndicatorSize? indicatorSize;
 
-  Color? labelColor;
+  final Color? labelColor;
 
-  Color? unselectedLabelColor;
+  final Color? unselectedLabelColor;
 
-  TextStyle? labelStyle;
+  final  TextStyle? labelStyle;
 
-  EdgeInsetsGeometry? labelPadding;
+  final EdgeInsetsGeometry? labelPadding;
 
-  TextStyle? unselectedLabelStyle;
+  final TextStyle? unselectedLabelStyle;
 
-  MaterialStateProperty<Color?>? overlayColor;
+  final MaterialStateProperty<Color?>? overlayColor;
 
-  DragStartBehavior dragStartBehavior;
+  final DragStartBehavior dragStartBehavior;
 
-  MouseCursor? mouseCursor;
+  final MouseCursor? mouseCursor;
 
-  bool? enableFeedback;
+  final bool? enableFeedback;
 
-  ScrollPhysics? physics;
+  final ScrollPhysics? physics;
 
   /// 设置为 AppBar 的 bottom 时子项 Tab 的最大高度
-  double maxHeight;
+  final double maxHeight;
 
   @override
   Size get preferredSize {
@@ -113,7 +113,10 @@ class TabBarSegment extends StatefulWidget implements PreferredSizeWidget {
 }
 
 class TabBarSegmentState extends State<TabBarSegment> with SingleTickerProviderStateMixin {
-  TabController? _tabController;
+
+  late final _tabController = widget.controller ?? TabController(length: widget.tabCount, vsync: this);
+
+  late int currentIndex = widget.initialIndex;
 
   var _items = <Widget>[];
 
@@ -127,13 +130,7 @@ class TabBarSegmentState extends State<TabBarSegment> with SingleTickerProviderS
   void initState() {
     super.initState();
 
-    widget.currentIndex = widget.initialIndex;
-    _tabController = widget.controller ?? TabController(length: widget.tabCount, vsync: this);
-    debugPrint("_tabController:${_tabController == widget.controller}");
-    if (_tabController == null) {
-      return;
-    }
-    _tabController!.index = widget.currentIndex;
+    _tabController.index = widget.currentIndex;
     // _tabController?.addListener(() {
     //   if(!_tabController!.indexIsChanging){
     //     setState(() {
@@ -161,38 +158,9 @@ class TabBarSegmentState extends State<TabBarSegment> with SingleTickerProviderS
       controller: _tabController,
       tabs: items,
       onTap: (index){
-        widget.currentIndex = index;
+        currentIndex = index;
         widget.onTap?.call(index);
-        _tabController?.index = index;
-        setState(() {});
-      },
-      isScrollable: widget.isScrollable,
-      padding: widget.padding,
-      indicatorColor: widget.indicatorColor,
-      automaticIndicatorColorAdjustment: widget.automaticIndicatorColorAdjustment,
-      indicatorWeight: widget.indicatorWeight,
-      indicatorPadding: widget.indicatorPadding,
-      indicator: widget.indicator,
-      indicatorSize: widget.indicatorSize,
-      labelColor: widget.labelColor,
-      labelStyle: widget.labelStyle,
-      labelPadding: widget.labelPadding,
-      unselectedLabelColor: widget.unselectedLabelColor,
-      unselectedLabelStyle: widget.unselectedLabelStyle,
-      dragStartBehavior: widget.dragStartBehavior,
-      overlayColor: widget.overlayColor,
-      mouseCursor: widget.mouseCursor,
-      enableFeedback: widget.enableFeedback,
-      physics: widget.physics,
-    );
-
-    return TabBar(
-      controller: _tabController,
-      tabs: items,
-      onTap: (index){
-        widget.currentIndex = index;
-        widget.onTap?.call(index);
-        _tabController?.index = index;
+        _tabController.index = index;
         setState(() {});
       },
       isScrollable: widget.isScrollable,
@@ -218,10 +186,7 @@ class TabBarSegmentState extends State<TabBarSegment> with SingleTickerProviderS
 
   /// 重置
   reset() {
-    if (_tabController == null) {
-      return;
-    }
-    _tabController!.index = widget.initialIndex;
+    _tabController.index = widget.initialIndex;
   }
 
 }
