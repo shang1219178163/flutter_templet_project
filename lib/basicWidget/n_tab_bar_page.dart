@@ -18,10 +18,22 @@ class NTabBarPage extends StatefulWidget {
   NTabBarPage({
     super.key,
     required this.items,
+    this.tabBarAlignment = Alignment.center,
+    this.isScrollable = false,
+    this.isThemeBg = true,
+    this.onTabBar,
     this.onChanged,
   });
 
   final List<Tuple2<String, Widget>> items;
+
+  final Alignment tabBarAlignment;
+
+  final bool isScrollable;
+
+  final bool isThemeBg;
+
+  final ValueChanged<int>? onTabBar;
   final ValueChanged<int>? onChanged;
 
   @override
@@ -36,6 +48,16 @@ class _NTabBarPageState extends State<NTabBarPage> with SingleTickerProviderStat
 
   int tabBarIndex = 0;
 
+  late final colorScheme = Theme.of(context).colorScheme;
+
+  Color get textColor{
+    return widget.isThemeBg ? colorScheme.primary : colorScheme.onPrimary;
+  }
+
+  Color get bgColor{
+    return widget.isThemeBg ? colorScheme.onPrimary : colorScheme.primary;
+  }
+
   @override
   void dispose() {
     tabController.removeListener(onListener);
@@ -48,6 +70,17 @@ class _NTabBarPageState extends State<NTabBarPage> with SingleTickerProviderStat
     super.initState();
 
     tabController.addListener(onListener);
+  }
+
+  @override
+  void didUpdateWidget(covariant NTabBarPage oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.tabBarAlignment != oldWidget.tabBarAlignment ||
+        widget.isScrollable != oldWidget.isScrollable ||
+        widget.isThemeBg != oldWidget.isThemeBg ||
+        widget.items.map((e) => e.item1).join(",") != oldWidget.items.map((e) => e.item1).join(",")) {
+      setState(() {});
+    }
   }
 
   onListener() {
@@ -71,20 +104,19 @@ class _NTabBarPageState extends State<NTabBarPage> with SingleTickerProviderStat
 
   Widget buildTabBar() {
     return Material(
-      color: context.primaryColor,
-      child: Center(
+      color: bgColor,
+      child: Align(
+        alignment: widget.tabBarAlignment,
         child: TabBar(
           controller: tabController,
-          isScrollable: true,
+          isScrollable: widget.isScrollable,
           tabAlignment: TabAlignment.center,
           tabs: items.map((e) => Tab(text: e.item1)).toList(),
           indicatorSize: TabBarIndicatorSize.label,
           // indicatorPadding: EdgeInsets.only(left: 6, right: 6),
-          onTap: (index){
-            // tabBarIndex = index;
-            // setState(() {});
-            widget.onChanged?.call(index);
-          },
+          labelColor: textColor,
+          indicatorColor: textColor,
+          onTap: widget.onTabBar,
         ),
       ),
     );

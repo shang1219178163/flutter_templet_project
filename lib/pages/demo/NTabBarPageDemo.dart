@@ -36,6 +36,8 @@ class _NTabBarPageDemoState extends State<NTabBarPageDemo> {
     // Tuple2('功能列表5', buildSubpage(prefix: "选项five")),
   ];
 
+  var isThemeBg = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,14 +47,22 @@ class _NTabBarPageDemoState extends State<NTabBarPageDemo> {
           child: Text(e,
             style: TextStyle(color: Colors.white),
           ),
-          onPressed: () => debugPrint(e),)
+          onPressed: () {
+            isThemeBg = !isThemeBg;
+            setState(() {});
+          },)
         ).toList(),
         // bottom: buildTabBar(),
       ),
       body: NTabBarPage(
         items: items,
+        // tabBarAlignment: Alignment.centerLeft,
+        isThemeBg: isThemeBg,
         onChanged: (index){
-          ddlog("NTabBarPage: $index");
+          ddlog("NTabBarPage onChanged: $index");
+        },
+        onTabBar: (index){
+          ddlog("NTabBarPage onTabBar: $index");
         },
       ),
     );

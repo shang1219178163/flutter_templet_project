@@ -46,9 +46,9 @@ class NPageView extends StatefulWidget {
 
 class _NPageViewState extends State<NPageView> with SingleTickerProviderStateMixin {
 
-  late final _tabController = TabController(length: widget.items.length, vsync: this);
+  late final tabController = TabController(length: widget.items.length, vsync: this);
 
-  late final _pageController = PageController(initialPage: 0, keepPage: true);
+  late final pageController = PageController(initialPage: 0, keepPage: true);
 
   late final textColor = Theme.of(context).colorScheme.primary;
 
@@ -61,8 +61,8 @@ class _NPageViewState extends State<NPageView> with SingleTickerProviderStateMix
 
   @override
   void dispose() {
-    _tabController.dispose();
-    _pageController.dispose();
+    tabController.dispose();
+    pageController.dispose();
     super.dispose();
   }
 
@@ -77,9 +77,9 @@ class _NPageViewState extends State<NPageView> with SingleTickerProviderStateMix
       ),
       Expanded(
         child: PageView(
-          controller: _pageController,
+          controller: pageController,
           onPageChanged: (index) {
-            _tabController.animateTo(index);
+            tabController.animateTo(index);
             setState(() {});
             widget.onPageChanged?.call(index);
           },
@@ -115,7 +115,7 @@ class _NPageViewState extends State<NPageView> with SingleTickerProviderStateMix
     final labelColor = !isThemeBg ? textColor : bgColor;
 
     final tabBar = TabBar(
-      controller: _tabController,
+      controller: tabController,
       isScrollable: isScrollable,
       tabs: items.map((e) => Tab(text: e.item1)).toList(),
       // indicatorSize: TabBarIndicatorSize.label,
@@ -133,7 +133,7 @@ class _NPageViewState extends State<NPageView> with SingleTickerProviderStateMix
         ),
       ),
       onTap: (index){
-        _pageController.jumpToPage(index);
+        pageController.jumpToPage(index);
         setState(() {});
         widget.onPageChanged?.call(index);
       },
