@@ -52,14 +52,17 @@ class _NMenuAnchorForImageState extends State<NMenuAnchorForImage> {
           style: MenuStyle(
             backgroundColor: MaterialStateProperty.all(Colors.transparent),
             shadowColor: MaterialStateProperty.all(Colors.transparent),
-            // surfaceTintColor: MaterialStateProperty.all(Colors.yellow),
+            // surfaceTintColor: MaterialStateProperty.all(Colors.red),
+            shape: MaterialStateProperty.all<OutlinedBorder?>(const RoundedRectangleBorder()),
+            elevation: MaterialStateProperty.all<double?>(0.0),
           )
         ),
-        // menuButtonTheme: MenuButtonThemeData(
-        //   style: ButtonStyle(
-        //     backgroundColor: MaterialStateProperty.all(Colors.red),
-        //   )
-        // )
+        menuButtonTheme: MenuButtonThemeData(
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all(Colors.transparent),
+            shadowColor: MaterialStateProperty.all(Colors.transparent),
+          )
+        )
       ),
       child: MenuAnchor(
         controller: menuController,
@@ -78,6 +81,7 @@ class _NMenuAnchorForImageState extends State<NMenuAnchorForImage> {
           );
         },
         menuChildren: widget.values.map((e) {
+
           return Padding(
             padding: EdgeInsets.only(bottom: widget.itemSpacing),
             child: buildItem(
@@ -105,23 +109,43 @@ class _NMenuAnchorForImageState extends State<NMenuAnchorForImage> {
     VoidCallback? onPressed,
     padding = const EdgeInsets.all(16.0),
   }) {
-    return Theme(
-      data: ThemeData(
-        floatingActionButtonTheme: FloatingActionButtonThemeData(
-          backgroundColor: Theme.of(context).indicatorColor,
-        )
-      ),
-      child: FloatingActionButton(
-        onPressed:onPressed,
-        child: Padding(
-          padding: padding,
-          child: Image(
-            image: imgName.toAssetImage(),
-            color: Colors.white,
-          ),
+    return InkWell(
+      splashColor: Colors.transparent,
+      onTap: onPressed,
+      child: Container(
+        padding: padding,
+        decoration: BoxDecoration(
+          color: Colors.blue,
+          border: Border.all(color: Colors.blue),
+          borderRadius: BorderRadius.all(Radius.circular(16)),
+        ),
+        child: Image(
+          image: imgName.toAssetImage(),
+          color: Colors.white,
+          width: 20,
+          height: 20,
         ),
       ),
     );
+
+    // return Theme(
+    //   data: ThemeData(
+    //     floatingActionButtonTheme: FloatingActionButtonThemeData(
+    //       backgroundColor: Theme.of(context).indicatorColor,
+    //       splashColor: Colors.transparent,
+    //     )
+    //   ),
+    //   child: FloatingActionButton(
+    //     onPressed: onPressed,
+    //     child: Padding(
+    //       padding: padding,
+    //       child: Image(
+    //         image: imgName.toAssetImage(),
+    //         color: Colors.white,
+    //       ),
+    //     ),
+    //   ),
+    // );
   }
 
 }

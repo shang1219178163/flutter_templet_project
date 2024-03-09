@@ -98,7 +98,10 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
               style: TextStyle(color: Colors.white),
             ),
           ),
-          IconButton(onPressed: () => debugPrint("aa"), icon: Icon(Icons.ac_unit))
+          IconButton(
+            onPressed: () => debugPrint("aa"),
+            icon: Icon(Icons.ac_unit),
+          )
         ],
         bottom: TabBar(
           controller: _tabController,
