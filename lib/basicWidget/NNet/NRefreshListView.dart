@@ -198,25 +198,26 @@ class NRefreshListViewState<T> extends State<NRefreshListView<T>> {
       return const NSkeletonScreen();
     }
 
-    if (items.value.isEmpty) {
-      return NPlaceholder(
-        onTap: onLoad,
-      );
-    }
-
     return buildBody();
   }
 
   buildBody() {
     return ValueListenableBuilder<List<T>>(
       valueListenable: items,
-      builder: (context, value, child) {
+      builder: (context, list, child) {
+
+        if (list.isEmpty) {
+          return NPlaceholder(
+            onTap: onRefresh,
+          );
+        }
+
         return buildRefresh(
           child: widget.child ??
               buildListView(
                 controller: _scrollController,
                 needRemovePadding: widget.needRemovePadding,
-                items: value,
+                items: list,
               ),
         );
       },
