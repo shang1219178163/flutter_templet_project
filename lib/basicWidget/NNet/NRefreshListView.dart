@@ -14,7 +14,7 @@ import 'package:flutter_templet_project/basicWidget/n_skeleton_screen.dart';
 
 
 typedef ValueIndexedWidgetBuilder<T> = Widget Function(
-    BuildContext context, int index, T data);
+    BuildContext context, int index, T data, VoidCallback onRefresh);
 
 /// 请求列表回调
 typedef RequestListCallback<T> = Future<List<T>> Function(
@@ -102,12 +102,12 @@ typedef RequestListCallback<T> = Future<List<T>> Function(
 
 
 /// 刷新列表
+/// 刷新列表组件化
 class NRefreshListView<T> extends StatefulWidget {
   const NRefreshListView({
     super.key,
     this.child,
     required this.onRequest,
-    this.onRequestError,
     this.pageSize = 20,
     this.pageNoInitial = 1,
     this.disableOnReresh = false,
@@ -115,9 +115,9 @@ class NRefreshListView<T> extends StatefulWidget {
     this.needRemovePadding = false,
     required this.itemBuilder,
     this.separatorBuilder,
-    this.errorBuilder,
     this.cachedChild,
     this.refreshController,
+    this.tag,
   });
 
   /// 子视图(为空 默认 带刷新组件的 ListView)
@@ -144,12 +144,6 @@ class NRefreshListView<T> extends StatefulWidget {
   /// 请求方法
   final RequestListCallback<T> onRequest;
 
-  /// 请求错误方法
-  final void Function(Object error, StackTrace stack)? onRequestError;
-
-  /// 错误视图构建器
-  final TransitionBuilder? errorBuilder;
-
   /// ListView 的 itemBuilder
   final ValueIndexedWidgetBuilder<T> itemBuilder;
 
@@ -159,12 +153,16 @@ class NRefreshListView<T> extends StatefulWidget {
   /// 刷新控制器
   final EasyRefreshController? refreshController;
 
+  final String? tag;
 
   @override
   NRefreshListViewState<T> createState() => NRefreshListViewState<T>();
 }
 
-class NRefreshListViewState<T> extends State<NRefreshListView<T>> {
+class NRefreshListViewState<T> extends State<NRefreshListView<T>> with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
+
   late final _easyRefreshController = widget.refreshController ??
       EasyRefreshController(
         controlFinishRefresh: true,
@@ -189,11 +187,29 @@ class NRefreshListViewState<T> extends State<NRefreshListView<T>> {
     widget.onRequest(true, pageNo, widget.pageSize, null).then((value) {
       items.value = value;
       isFirstLoad = false;
+
+      if (mounted) {
+        setState(() {});
+      }
     });
   }
 
   @override
+  void didUpdateWidget(covariant NRefreshListView<T> oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.onRequest != oldWidget.onRequest ||
+        widget.itemBuilder != oldWidget.itemBuilder ||
+        widget.separatorBuilder != oldWidget.separatorBuilder ||
+        widget.cachedChild != oldWidget.cachedChild ||
+        widget.tag != widget.tag
+    ) {
+      onRefresh();
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     if (isFirstLoad) {
       return const NSkeletonScreen();
     }
@@ -256,6 +272,7 @@ class NRefreshListViewState<T> extends State<NRefreshListView<T>> {
     }
 
     pageNo += 1;
+
     final models = await widget.onRequest(
         false,
         pageNo,
@@ -280,7 +297,7 @@ class NRefreshListViewState<T> extends State<NRefreshListView<T>> {
         controller: controller,
         itemCount: items.length,
         itemBuilder: (context, index) =>
-            widget.itemBuilder(context, index, items[index]),
+            widget.itemBuilder(context, index, items[index], onRefresh),
         separatorBuilder: widget.separatorBuilder ??
                 (context, index) {
               return const Divider(
