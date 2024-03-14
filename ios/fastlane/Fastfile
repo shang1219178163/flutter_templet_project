@@ -80,7 +80,8 @@ platform :ios do
         xcargs: "-allowProvisioningUpdates",
         iCloudContainerEnvironment: 'Production',
         provisioningProfiles:{
-          "com.yilian.ylHealthApp" => "health_prod",
+#           "com.yilian.ylHealthApp" => "health_prod",
+            "#{ENV["App_bundleid"]}" => "#{ENV["App_mobileprovision_prod"]}",
         }
       }
     )
@@ -115,7 +116,8 @@ platform :ios do
         method: 'development',
         iCloudContainerEnvironment: 'Development',
         provisioningProfiles:{
-          "com.yilian.ylHealthApp" => "health_dev",
+#           "com.yilian.ylHealthApp" => "health_dev",
+            "#{ENV["App_bundleid"]}" => "#{ENV["App_mobileprovision_dev"]}",
         }
       }
     )
