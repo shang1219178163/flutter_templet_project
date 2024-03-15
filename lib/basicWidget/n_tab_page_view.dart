@@ -8,12 +8,11 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:tuple/tuple.dart';
-
 
 /// TabBar + PageView
 class NTabPageView extends StatefulWidget {
-
   const NTabPageView({
     Key? key,
     required this.items,
@@ -28,54 +27,54 @@ class NTabPageView extends StatefulWidget {
     this.isTabBottom = false,
   }) : super(key: key);
 
-
   final List<Tuple2<String, Widget>> items;
+
   /// tab背景颜色
   final Color? tabBgColor;
+
   /// 标题和指示器颜色
   final Color? labelColor;
+
   /// 字体样式
   final TextStyle? labelStyle;
+
   /// PageView 控制器
   final PageController? pageController;
+
   /// Tab 控制器
   final TabController? tabController;
+
   /// 初始索引
   final int initialIndex;
+
   /// 左右滑动回调
   final ValueChanged<int> onPageChanged;
+
   /// 范围 false 时,锁定不在滚动
   final bool Function(int)? canPageChanged;
+
   /// tab 位置底部 false 顶部, true 底部
   final bool isTabBottom;
-
 
   @override
   _NTabPageViewState createState() => _NTabPageViewState();
 }
 
-class _NTabPageViewState extends State<NTabPageView> with SingleTickerProviderStateMixin {
-
-  late final _tabController = widget.tabController ?? TabController(
-      initialIndex: widget.initialIndex, length: widget.items.length, vsync: this);
-  late final _pageController = widget.pageController ?? PageController(
-      initialPage: widget.initialIndex, keepPage: true);
+class _NTabPageViewState extends State<NTabPageView>
+    with SingleTickerProviderStateMixin {
+  late final _tabController = widget.tabController ??
+      TabController(
+          initialIndex: widget.initialIndex,
+          length: widget.items.length,
+          vsync: this);
+  late final _pageController = widget.pageController ??
+      PageController(initialPage: widget.initialIndex, keepPage: true);
 
   ///是否允许滚动
   bool get canScrollable {
-    final disable = (widget.canPageChanged?.call(_tabController.index) == false);
+    final disable =
+        (widget.canPageChanged?.call(_tabController.index) == false);
     return !disable;
-  }
-
-  @override
-  void initState() {
-    // _tabController = widget.tabController ?? TabController(length: widget.items.length, vsync: this);
-    // _pageController = widget.pageController ?? PageController(initialPage: 0, keepPage: true);
-    // ..addListener(() {
-    //   ddlog(_pageController.page);
-    // });
-
-    super.initState();
   }
 
   @override
@@ -87,25 +86,40 @@ class _NTabPageViewState extends State<NTabPageView> with SingleTickerProviderSt
   }
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void didUpdateWidget(covariant NTabPageView oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.tabBgColor != oldWidget.tabBgColor ||
+        widget.labelColor != oldWidget.labelColor ||
+        widget.labelStyle != oldWidget.labelStyle ||
+        widget.isTabBottom != oldWidget.isTabBottom ||
+        widget.items.map((e) => e.item1).join(",") != oldWidget.items.map((e) => e.item1).join(",")) {
+      setState(() {});
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    var list = [
-      _buildTabBar(),
-      _buildPageView(),
+    var children = [
+      buildTabBar(),
+      buildPageView(),
     ];
     if (widget.isTabBottom) {
-      list = list.reversed.toList();
+      children = children.reversed.toList();
     }
     return Column(
       mainAxisSize: MainAxisSize.min,
-      children: list,
+      children: children,
     );
   }
 
-  Widget _buildTabBar() {
-    final textColor = widget.labelColor ?? Theme
-        .of(context)
-        .colorScheme
-        .primary;
+  Widget buildTabBar() {
+    final textColor =
+        widget.labelColor ?? Theme.of(context).colorScheme.primary;
 
     final borderSide = BorderSide(
       color: textColor,
@@ -148,23 +162,24 @@ class _NTabPageViewState extends State<NTabPageView> with SingleTickerProviderSt
 
     return Material(
       color: widget.tabBgColor,
-      child: SafeArea(
-        child: tabBar,
-      )
+      child: tabBar,
     );
   }
 
-  Widget _buildPageView() {
+  Widget buildPageView() {
     return Expanded(
       child: PageView(
         controller: _pageController,
-        physics: canScrollable ? BouncingScrollPhysics() : NeverScrollableScrollPhysics(),
+        physics: canScrollable
+            ? BouncingScrollPhysics()
+            : NeverScrollableScrollPhysics(),
         onPageChanged: (index) {
           widget.onPageChanged(index);
           _tabController.animateTo(index);
           setState(() {});
         },
         children: widget.items.map((e) => e.item2).toList(),
-      ));
+      ),
+    );
   }
 }

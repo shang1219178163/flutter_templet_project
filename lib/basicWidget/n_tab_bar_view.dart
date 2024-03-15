@@ -64,11 +64,6 @@ class _NTabBarViewState extends State<NTabBarView> with SingleTickerProviderStat
   }
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   void dispose() {
     _tabController.dispose();
 
@@ -76,21 +71,38 @@ class _NTabBarViewState extends State<NTabBarView> with SingleTickerProviderStat
   }
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void didUpdateWidget(covariant NTabBarView oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.tabBgColor != oldWidget.tabBgColor ||
+        widget.labelColor != oldWidget.labelColor ||
+        widget.labelStyle != oldWidget.labelStyle ||
+        widget.isTabBottom != oldWidget.isTabBottom ||
+        widget.items.map((e) => e.item1).join(",") != oldWidget.items.map((e) => e.item1).join(",")) {
+      setState(() {});
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    var list = [
-      _buildTabBar(),
-      _buildTabBarView(),
+    var children = [
+      buildTabBar(),
+      buildTabBarView(),
     ];
     if (widget.isTabBottom) {
-      list = list.reversed.toList();
+      children = children.reversed.toList();
     }
     return Column(
       mainAxisSize: MainAxisSize.min,
-      children: list,
+      children: children,
     );
   }
 
-  Widget _buildTabBar() {
+  Widget buildTabBar() {
     final textColor = widget.labelColor ?? Theme
         .of(context)
         .colorScheme
@@ -137,11 +149,11 @@ class _NTabBarViewState extends State<NTabBarView> with SingleTickerProviderStat
     );
   }
 
-  Widget _buildTabBarView() {
+  Widget buildTabBarView() {
     return Expanded(
       child: TabBarView(
-        physics: canScrollable ? BouncingScrollPhysics() : NeverScrollableScrollPhysics(),
         controller: _tabController,
+        physics: canScrollable ? BouncingScrollPhysics() : NeverScrollableScrollPhysics(),
         children: widget.items.map((e) => e.item2).toList(),
       ),
     );
