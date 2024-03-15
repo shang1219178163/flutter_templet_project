@@ -17,9 +17,7 @@ import 'package:path_provider/path_provider.dart';
 
 /// 数据库管理类
 class DBManager {
-  DBManager._(){
-    init();
-  }
+  DBManager._();
   static final DBManager _instance = DBManager._();
   factory DBManager() => _instance;
   static DBManager get instance => _instance;
