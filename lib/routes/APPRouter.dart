@@ -232,8 +232,6 @@ import 'package:flutter_templet_project/pages/demo/StepperDemo.dart';
 import 'package:flutter_templet_project/pages/demo/StreamBuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/SuspensionButtonDemo.dart';
 import 'package:flutter_templet_project/pages/demo/SwitchDemo.dart';
-import 'package:flutter_templet_project/pages/demo/TabBarDemo.dart';
-import 'package:flutter_templet_project/pages/demo/TabBarSegmentDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TableDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TapRegionDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TestFunction.dart';
@@ -358,8 +356,6 @@ class APPRouter {
   static const mediaQueryDemoOne = '/mediaQueryDemoOne';
 
   static const tabBarDemo = '/TabBarDemo';
-  static const tabBarSegmentDemo = '/tabBarSegmentDemo';
-  static const tabBarSegmentNewDemo = '/tabBarSegmentNewDemo';
   static const widgetListPage = '/WidgetListPage';
   static const animatedDemo = '/AnimatedDemo';
   static const animatedWidgetDemo = '/AnimatedWidgetDemo';
@@ -771,9 +767,6 @@ class AppPage {
     GetPage(name: APPRouter.mediaQueryDemo, page: () => MediaQueryDemo(),),
     GetPage(name: APPRouter.mediaQueryDemoOne, page: () => MediaQueryDemoOne(),),
 
-    GetPage(name: APPRouter.tabBarDemo, page: () => TabBarDemo(),),
-    GetPage(name: APPRouter.tabBarSegmentDemo, page: () => TabBarSegmentDemo(),),
-    GetPage(name: APPRouter.tabBarSegmentNewDemo, page: () => TabBarSegmentNewDemo(),),
     GetPage(name: APPRouter.alertDialogDemo, page: () => AlertDialogDemo(),),
     GetPage(name: APPRouter.alertDialogTagSelectDemo, page: () => AlertDialogTagSelectDemo(),),
 

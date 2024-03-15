@@ -1,70 +1,126 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
-import 'package:flutter_templet_project/main.dart';
-import 'package:tuple/tuple.dart';
+import 'package:flutter_templet_project/basicWidget/EnhanceTab/enhance_tab_bar.dart';
+import 'package:flutter_templet_project/extension/color_ext.dart';
+import 'package:flutter_templet_project/extension/string_ext.dart';
+import 'package:flutter_templet_project/util/R.dart';
 
 
-///多页面左右滚动容器
-class TabBarViewDemo extends StatelessWidget {
-  final String title;
-  final List<Tuple2<String, Widget>> pages;
-  final bool tabScrollable;
-  final TabController tabController;
+class TabBarViewDemo extends StatefulWidget {
 
-  const TabBarViewDemo({
-    Key? key,
-    required this.title,
-    required this.pages,
-    required this.tabController,
-    required this.tabScrollable,
-  }) : super(key: key);
+  TabBarViewDemo({
+    super.key,
+    this.title,
+  });
 
+  final String? title;
+
+  @override
+  State<TabBarViewDemo> createState() => _TabBarViewDemoState();
+}
+
+class _TabBarViewDemoState extends State<TabBarViewDemo> with SingleTickerProviderStateMixin {
+
+  /// 当前索引
+  int currentIndex = 0;
+
+  int selectedIndex = 0;
+
+  List<String> titles = List.generate(9, (index) => 'item_$index').toList();
+
+  late final tabController = TabController(length: titles.length, vsync: this);
+
+  final tabIndex = ValueNotifier<int>(0);
+
+  Color get primary => Theme.of(context).colorScheme.primary;
+
+  @override
+  void dispose() {
+    tabController.dispose();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    tabController.addListener(() {
+      if(!tabController.indexIsChanging){
+        tabIndex.value = tabController.index;
+        debugPrint("indexVN:${tabIndex.value}_${tabController.index}");
+      }
+    });
+
+  }
 
   @override
   Widget build(BuildContext context) {
+    return buildPage();
+  }
+
+  Widget buildPage() {
     return Scaffold(
       appBar: AppBar(
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: NetworkImage('https://tenfei02.cfp.cn/creative/vcg/800/new/VCG21409037867.jpg'),
-              fit: BoxFit.cover,
+        title: Text("App Name"),
+      ),
+      body: Column(
+        children: [
+          Material(
+            color: primary,
+            child: TabBar(
+              isScrollable: true,
+              controller: tabController,
+              // indicatorSize: TabBarIndicatorSize.label,
+              indicatorSize: TabBarIndicatorSize.tab,
+              // indicatorSize: TabBarIndicatorSize.width,
+              labelPadding: EdgeInsets.symmetric(horizontal: 12),
+              indicatorPadding: EdgeInsets.only(left: 16, right: 16),
+              indicator: UnderlineTabIndicator(
+                  borderSide: BorderSide(
+                    style: BorderStyle.solid,
+                    width: 4,
+                    color: Colors.red,
+                  )
+              ),
+              tabs: titles.map((e) => Tab(
+                child: ValueListenableBuilder<int>(
+                    valueListenable: tabIndex,
+                    builder: (BuildContext context, int value, Widget? child) {
+                      final index = titles.indexOf(e);
+                      if (index != 1){
+                        if (index == 2){
+                          return Tab(child: Text(e + e,),);
+                        }
+                        if (index == 3){
+                          return Tab(child: Text(e + e, style: TextStyle(fontSize: 20)),);
+                        }
+                        return Tab(text: e);
+                      }
+
+                      final url = (value == index) ? R.image.urls[1] : R.image.urls[0];
+                      return Tab(
+                        child: FadeInImage(
+                          image: NetworkImage(url),
+                          placeholder: "flutter_logo.png".toAssetImage(),
+                        ),
+                      );
+                    }),
+              )).toList(),
             ),
           ),
-        ),
-        title: Text(title),
-        leading: Builder(builder: (context) {
-          return IconButton(
-            icon: Icon(Icons.menu, color: Colors.white), //自定义图标
-            onPressed: () {
-              // 打开抽屉菜单
-              // Scaffold.of(context).openDrawer();
-              Scaffold.of(context).openDrawer();
-            },
-          );
-        }),
-        actions: [
-          TextButton(
-            onPressed: (){
-              ddlog("provider");
-              // Get.toNamed(e.item1, arguments: e);
-            },
-            child: Text("状态管理",
-              style: TextStyle(color: Colors.white),
+          Expanded(
+            child: TabBarView( //构建
+              controller: tabController,
+              children: titles.map((e) {
+                return Container(
+                  alignment: Alignment.center,
+                  child: Text(e, style: TextStyle(color: Colors.red),),
+                );
+              }).toList(),
             ),
           ),
         ],
-        bottom: TabBar(
-          controller: tabController,
-          isScrollable: tabScrollable,
-          tabs: pages.map((e) => Tab(text: e.item1)).toList(),
-        ),
-      ),
-      body: TabBarView(
-        controller: tabController,
-        children: pages.map((e) => e.item2).toList(),
       ),
     );
   }
+
 }
 

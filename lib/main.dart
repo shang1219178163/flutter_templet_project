@@ -28,7 +28,7 @@ import 'package:flutter_templet_project/extension/button_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/pages/SecondPage.dart';
 import 'package:flutter_templet_project/pages/ThirdPage.dart';
-import 'package:flutter_templet_project/pages/demo/TabBarDemo.dart';
+import 'package:flutter_templet_project/pages/demo/TabBarViewDemo.dart';
 import 'package:flutter_templet_project/pages/tabBar_tabBarView_demo.dart';
 import 'package:flutter_templet_project/provider/color_filtered_provider.dart';
 import 'package:flutter_templet_project/provider/notifier_demo.dart';
@@ -237,7 +237,7 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver, Ap
     ),
     Tuple2(
       Tuple2("消息", Icon(Icons.message),),
-      TabBarDemo(initialIndex: 3,),
+      TabBarViewDemo(title: '',),
     ),
     Tuple2(
       Tuple2("购物车", Icon(Icons.shopping_cart),),
@@ -341,7 +341,7 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver, Ap
           selectedFontSize: 10.sp, // 选中字体大小
           unselectedFontSize: 10.sp, // 未选中字体大小
           selectedItemColor: context.primaryColor,
-          onTap: (index) => _onBarTap(index),
+          onTap: (index) => onTapBar(index),
           items: items.map((e) => BottomNavigationBarItem(
             tooltip: '', // 去除长按文字提示
             label: e.item1.item1,
@@ -441,15 +441,12 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver, Ap
   }
 
   /*切换页面*/
-  void _onBarTap(int index) {
+  void onTapBar(int index) {
     /*如果点击的导航项不是当前项  切换 */
     if (index != currentIndex) {
       currentIndex = index;
-      setState(() {});
-      if (index == tabItems.length - 1) {
-        unreadVN.value = 100;
-      }
       ddlog(currentIndex);
+      setState(() {});
     }
   }
 
