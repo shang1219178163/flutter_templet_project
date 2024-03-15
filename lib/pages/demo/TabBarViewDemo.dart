@@ -53,72 +53,72 @@ class _TabBarViewDemoState extends State<TabBarViewDemo> with SingleTickerProvid
 
   @override
   Widget build(BuildContext context) {
-    return buildPage();
-  }
-
-  Widget buildPage() {
     return Scaffold(
       appBar: AppBar(
-        title: Text("App Name"),
+        title: Text("$widget"),
       ),
-      body: Column(
-        children: [
-          Material(
-            color: primary,
-            child: TabBar(
-              isScrollable: true,
-              controller: tabController,
-              // indicatorSize: TabBarIndicatorSize.label,
-              indicatorSize: TabBarIndicatorSize.tab,
-              // indicatorSize: TabBarIndicatorSize.width,
-              labelPadding: EdgeInsets.symmetric(horizontal: 12),
-              indicatorPadding: EdgeInsets.only(left: 16, right: 16),
-              indicator: UnderlineTabIndicator(
-                  borderSide: BorderSide(
-                    style: BorderStyle.solid,
-                    width: 4,
-                    color: Colors.red,
-                  )
-              ),
-              tabs: titles.map((e) => Tab(
-                child: ValueListenableBuilder<int>(
-                    valueListenable: tabIndex,
-                    builder: (BuildContext context, int value, Widget? child) {
-                      final index = titles.indexOf(e);
-                      if (index != 1){
-                        if (index == 2){
-                          return Tab(child: Text(e + e,),);
-                        }
-                        if (index == 3){
-                          return Tab(child: Text(e + e, style: TextStyle(fontSize: 20)),);
-                        }
-                        return Tab(text: e);
-                      }
+      body: buildBody(),
+    );
+  }
 
-                      final url = (value == index) ? R.image.urls[1] : R.image.urls[0];
-                      return Tab(
-                        child: FadeInImage(
-                          image: NetworkImage(url),
-                          placeholder: "flutter_logo.png".toAssetImage(),
-                        ),
-                      );
-                    }),
-              )).toList(),
+  Widget buildBody() {
+    return Column(
+      children: [
+        Material(
+          color: primary,
+          child: TabBar(
+            isScrollable: true,
+            controller: tabController,
+            // indicatorSize: TabBarIndicatorSize.label,
+            indicatorSize: TabBarIndicatorSize.tab,
+            // indicatorSize: TabBarIndicatorSize.width,
+            labelPadding: EdgeInsets.symmetric(horizontal: 12),
+            indicatorPadding: EdgeInsets.only(left: 16, right: 16),
+            indicator: UnderlineTabIndicator(
+                borderSide: BorderSide(
+                  style: BorderStyle.solid,
+                  width: 4,
+                  color: Colors.red,
+                )
             ),
+            tabs: titles.map((e) => Tab(
+              child: ValueListenableBuilder<int>(
+                  valueListenable: tabIndex,
+                  builder: (BuildContext context, int value, Widget? child) {
+                    final index = titles.indexOf(e);
+                    if (index != 1){
+                      if (index == 2){
+                        return Tab(child: Text(e + e,),);
+                      }
+                      if (index == 3){
+                        return Tab(child: Text(e + e, style: TextStyle(fontSize: 20)),);
+                      }
+                      return Tab(text: e);
+                    }
+
+                    final url = (value == index) ? R.image.urls[1] : R.image.urls[0];
+                    return Tab(
+                      child: FadeInImage(
+                        image: NetworkImage(url),
+                        placeholder: "flutter_logo.png".toAssetImage(),
+                      ),
+                    );
+                  }),
+            )).toList(),
           ),
-          Expanded(
-            child: TabBarView( //构建
-              controller: tabController,
-              children: titles.map((e) {
-                return Container(
-                  alignment: Alignment.center,
-                  child: Text(e, style: TextStyle(color: Colors.red),),
-                );
-              }).toList(),
-            ),
+        ),
+        Expanded(
+          child: TabBarView( //构建
+            controller: tabController,
+            children: titles.map((e) {
+              return Container(
+                alignment: Alignment.center,
+                child: Text(e, style: TextStyle(color: Colors.red),),
+              );
+            }).toList(),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
