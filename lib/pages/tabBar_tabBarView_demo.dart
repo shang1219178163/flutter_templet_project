@@ -414,8 +414,6 @@ var list = <Tuple2<String, String>>[
   Tuple2(APPRouter.slidableDemo, "SlidableDemo", ),
 
   Tuple2(APPRouter.tabBarDemo, "tabBarDemo", ),
-  Tuple2(APPRouter.tabBarDemoNew, "tabBarDemoNew", ),
-  Tuple2(APPRouter.tabBarOnlyDemo, "tabBarOnlyDemo", ),
   Tuple2(APPRouter.tabBarSegmentDemo, "tabBarSegmentDemo", ),
   Tuple2(APPRouter.tabBarSegmentNewDemo, "tabBarSegmentNewDemo", ),
 
