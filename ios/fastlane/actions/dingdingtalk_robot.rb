@@ -29,6 +29,9 @@ module Fastlane
         title = "iOS #{appName} v#{appVersion} #{platformInfo}"
         time = Time.new.strftime("%Y-%m-%d %H:%M:%S")
 
+        current_branch = sh 'git rev-parse --abbrev-ref HEAD'
+        UI.message "current_branch: #{current_branch}".red
+
         # markdown ={
         #   msgtype: "link",
         #   link: {
@@ -51,6 +54,7 @@ module Fastlane
         
         markdownText = "#{markdownText}\n
 版  本：#{appBuild}\n
+分  支：#{current_branch}\n
 地  址：#{downloadUrl}\n
 时  间：#{time}\n
 ![](#{appIcon})"

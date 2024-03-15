@@ -9,5 +9,5 @@
 # app_identifier "com.parkingwang.iop" # The bundle identifier of your app
 # username "shangbinbin@parkingwang.com" # your Apple ID user
 
-app_identifier ENV["App_Identifier"]
+app_identifier ENV["App_bundleid"]
 username ENV["Apple_Id"]
