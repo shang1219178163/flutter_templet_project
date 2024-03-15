@@ -58,11 +58,11 @@ class _TabBarReusePageDemoState extends State<TabBarReusePageDemo> {
         ],
         elevation: 0,
       ),
-      body: isPageView ? _buildTabBarPageView() : _buildTabBarTabBarView(),
+      body: isPageView ? buildTabPageView() : buildTabBarView(),
     );
   }
 
-  Widget _buildTabBarPageView() {
+  Widget buildTabPageView() {
     return NTabPageView(
       items: _items,
       isTabBottom: isBom,
@@ -76,7 +76,7 @@ class _TabBarReusePageDemoState extends State<TabBarReusePageDemo> {
     );
   }
 
-  Widget _buildTabBarTabBarView() {
+  Widget buildTabBarView() {
     return NTabBarView(
       items: _items,
       isTabBottom: isBom,
