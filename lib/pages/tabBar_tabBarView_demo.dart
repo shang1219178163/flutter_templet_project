@@ -393,8 +393,6 @@ var list = <Tuple2<String, String>>[
   Tuple2(APPRouter.pageViewDemo, "PageViewDemo", ),
   Tuple2(APPRouter.pageViewDemoOne, "pageViewDemoOne", ),
   Tuple2(APPRouter.pageViewDemoThree, "PageViewDemoThree", ),
-  
-  Tuple2(APPRouter.pageViewTabBarWidget, "PageViewTabBarWidget", ),
 
   Tuple2(APPRouter.pickerDemo, "pickerDemo", ),
   Tuple2(APPRouter.progressHudDemo, "ProgressHudDemo", ),

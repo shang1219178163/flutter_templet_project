@@ -384,7 +384,6 @@ class APPRouter {
   static const pageViewDemo = '/PageViewDemo';
   static const pageViewDemoThree = '/pageViewDemoThree';
 
-  static const pageViewTabBarWidget = '/PageViewTabBarWidget';
   static const snackBarDemo = '/SnackBarDemo';
   static const snackBarDemoOne = '/SnackBarDemoOne';
   static const cupertinoTabScaffoldDemo = '/CupertinoTabScaffoldDemo';
@@ -779,8 +778,6 @@ class AppPage {
     GetPage(name: APPRouter.pageViewDemo, page: () => PageViewDemo(),),
     GetPage(name: APPRouter.pageViewDemoThree, page: () => PageViewDemoThree(),),
 
-
-    GetPage(name: APPRouter.pageViewTabBarWidget, page: () => PageViewTabBarWidget(),),
     GetPage(name: APPRouter.snackBarDemo, page: () => SnackBarDemo(),),
     GetPage(name: APPRouter.snackBarDemoOne, page: () => SnackBarDemoOne(),),
     GetPage(name: APPRouter.cupertinoTabScaffoldDemo, page: () => CupertinoTabScaffoldDemo(),),
