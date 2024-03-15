@@ -8,6 +8,8 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/widget_ext.dart';
 
 class IndexedStackDemo extends StatefulWidget {
 
@@ -22,6 +24,8 @@ class IndexedStackDemo extends StatefulWidget {
 
 class _IndexedStackDemoState extends State<IndexedStackDemo> {
 
+  final _scrollController = ScrollController();
+
   int selectedIndex = 1;
 
   @override
@@ -30,31 +34,7 @@ class _IndexedStackDemoState extends State<IndexedStackDemo> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
       ),
-      body: SizedBox (
-        width: double.infinity,
-        height: double.infinity,
-        child: IndexedStack (
-            alignment: Alignment.center,
-            index: selectedIndex,
-            children: <Widget>[
-              Container(
-                width: 200,
-                height: 200,
-                color: Colors.green,
-              ),
-              Container(
-                width: 250,
-                height: 250,
-                color: Colors.red,
-              ),
-              Container(
-                width: 300,
-                height: 300,
-                color: Colors.yellow,
-              ),
-            ]
-        ),
-      ),
+      body: buildBody(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           setState(() {
@@ -70,5 +50,49 @@ class _IndexedStackDemoState extends State<IndexedStackDemo> {
     );
   }
 
-}
+  Widget buildBody() {
+    return Scrollbar(
+      controller: _scrollController,
+      child: SingleChildScrollView(
+        controller: _scrollController,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text("IndexedStack 开始就会初始化所有子视图"),
+            buildIndexedStack(),
+          ],
+        ),
+      ),
+    );
+  }
 
+  Widget buildIndexedStack() {
+    final items = [
+      Colors.green,
+      Colors.red,
+      Colors.yellow,
+    ];
+    return IndexedStack (
+        alignment: Alignment.center,
+        index: selectedIndex,
+        children: items.map((e) {
+          final index = items.indexOf(e);
+
+          return StatefulBuilder(
+            builder: (BuildContext context, StateSetter setState) {
+              ddlog("$widget, index $index");
+
+              return Container(
+                width: 200,
+                height: 200,
+                color: e,
+                alignment: Alignment.center,
+                child: Text(index.toString()),
+              );
+            }
+          );
+        }).toList(),
+    );
+  }
+
+}
