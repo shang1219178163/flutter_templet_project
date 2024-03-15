@@ -49,6 +49,7 @@ import 'package:flutter_templet_project/pages/demo/NFooterButtonBarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NIndexAvatarGroupDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NSectionHeaderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NTabBarPageDemo.dart';
+import 'package:flutter_templet_project/pages/demo/NTabBarViewCustomDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NWebViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/OverlayPortalDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PreferredSizeDemo.dart';
@@ -700,6 +701,7 @@ class APPRouter {
   static const displayFeatureDemo = '/displayFeatureDemo';
   static const preferredSizeDemo = '/preferredSizeDemo';
   static const ntabBarPageDemo = '/ntabBarPageDemo';
+  static const nTabBarViewCustomDemo = '/nTabBarViewCustomDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -1106,6 +1108,7 @@ class AppPage {
     GetPage(name: APPRouter.displayFeatureDemo, page: () => DisplayFeatureDemo(),),
     GetPage(name: APPRouter.preferredSizeDemo, page: () => PreferredSizeDemo(),),
     GetPage(name: APPRouter.ntabBarPageDemo, page: () => NTabBarPageDemo(),),
+    GetPage(name: APPRouter.nTabBarViewCustomDemo, page: () => NTabBarViewCustomDemo(),),
 
 
   ];

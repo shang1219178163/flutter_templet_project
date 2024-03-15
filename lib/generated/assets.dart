@@ -93,6 +93,10 @@ class Assets {
   static const String imagesIconHeartHalf = 'assets/images/icon_heart_half.png';
   static const String imagesIconHi = 'assets/images/icon_hi.png';
   static const String imagesIconHomeDelete = 'assets/images/icon_home_delete.png';
+  static const String imagesIconInquiryPaySelected = 'assets/images/icon_inquiry_pay_selected.png';
+  static const String imagesIconInquiryPayUnselected = 'assets/images/icon_inquiry_pay_unselected.png';
+  static const String imagesIconInquiryRightsSelected = 'assets/images/icon_inquiry_rights_selected.png';
+  static const String imagesIconInquiryRightsUnselected = 'assets/images/icon_inquiry_rights_unselected.png';
   static const String imagesIconJc = 'assets/images/icon_jc.png';
   static const String imagesIconJsonFile = 'assets/images/icon_json_file.png';
   static const String imagesIconLeftVoice1 = 'assets/images/icon_left_voice_1.png';

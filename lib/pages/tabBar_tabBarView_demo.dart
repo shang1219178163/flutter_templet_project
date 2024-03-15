@@ -533,6 +533,7 @@ var list = <Tuple2<String, String>>[
   Tuple2(APPRouter.displayFeatureDemo, "displayFeatureDemo", ),
   Tuple2(APPRouter.preferredSizeDemo, "preferredSizeDemo", ),
   Tuple2(APPRouter.ntabBarPageDemo, "ntabBarPageDemo", ),
+  Tuple2(APPRouter.nTabBarViewCustomDemo, "nTabBarViewCustomDemo", ),
 
 
 ];
