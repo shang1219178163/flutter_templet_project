@@ -6,14 +6,12 @@
 //  Copyright © 2023/12/20 shang. All rights reserved.
 //
 
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_picker_tool_bar.dart';
 
 /// Picker 工具类
-class PickerUtil{
-
+class PickerUtil {
   static void show({
     required BuildContext context,
     required List<String> data,
@@ -34,10 +32,11 @@ class PickerUtil{
         child: Column(
           children: [
             NPickerToolBar(
-              onCancel: onCancel ?? (){
-                Navigator.of(context).pop();
-              },
-              onConfirm: (){
+              onCancel: onCancel ??
+                  () {
+                    Navigator.of(context).pop();
+                  },
+              onConfirm: () {
                 onConfirm(selectedData);
               },
             ),
@@ -48,7 +47,7 @@ class PickerUtil{
                 items: data,
                 selectedIndex: selectedIndex,
                 onChanged: onChanged,
-                onSelected: (val){
+                onSelected: (val) {
                   selectedData = val;
                   onSelected(selectedData);
                 },
@@ -60,10 +59,10 @@ class PickerUtil{
     );
 
     showCupertinoModalPopup(
-        context: context,
-        builder: (_) {
-          return content;
-        }
+      context: context,
+      builder: (_) {
+        return content;
+      },
     );
   }
 
@@ -93,10 +92,11 @@ class PickerUtil{
         child: Column(
           children: [
             NPickerToolBar(
-              onCancel: onCancel ?? (){
-                Navigator.of(context).pop();
-              },
-              onConfirm: (){
+              onCancel: onCancel ??
+                  () {
+                    Navigator.of(context).pop();
+                  },
+              onConfirm: () {
                 onConfirm(selectedData);
               },
             ),
@@ -116,13 +116,13 @@ class PickerUtil{
                       position: i,
                       items: items,
                       selectedIndex: selectedIndex,
-                      onChanged: (val){
+                      onChanged: (val) {
                         indexs[i] = val;
                         // debugPrint("indexs: $indexs, val: $val");
 
                         onChanged?.call(indexs);
                       },
-                      onSelected: (val){
+                      onSelected: (val) {
                         selectedData[i] = val;
 
                         // debugPrint("selectedData: $selectedData");
@@ -139,10 +139,10 @@ class PickerUtil{
     );
 
     showCupertinoModalPopup(
-        context: context,
-        builder: (_) {
-          return content;
-        }
+      context: context,
+      builder: (_) {
+        return content;
+      },
     );
   }
 
@@ -154,32 +154,31 @@ class PickerUtil{
     required ValueChanged<String> onSelected,
     int selectedIndex = 1,
   }) {
-
     return StatefulBuilder(
-      builder: (BuildContext context, StateSetter setState) {
+        builder: (BuildContext context, StateSetter setState) {
+      return CupertinoPicker.builder(
+        backgroundColor: Colors.white,
+        itemExtent: 50,
+        scrollController:
+            FixedExtentScrollController(initialItem: selectedIndex),
+        onSelectedItemChanged: (value) {
+          onChanged?.call(value);
+          onSelected(items[value]);
+          setState(() {});
+        },
+        childCount: items.length,
+        itemBuilder: (BuildContext context, int index) {
+          var text = items[index];
 
-        return CupertinoPicker.builder(
-          backgroundColor: Colors.white,
-          itemExtent: 50,
-          scrollController: FixedExtentScrollController(initialItem: selectedIndex),
-          onSelectedItemChanged: (value) {
-            onChanged?.call(value);
-            onSelected(items[value]);
-            setState(() {});
-          },
-          childCount: items.length,
-          itemBuilder: (BuildContext context, int index) {
-            var text = items[index];
-
-            return Align(
-                alignment: Alignment.center,
-                child: Text(text,
-                    textAlign: TextAlign.start
-                )
-            );
-          },
-        );
-      }
-    );
+          return Align(
+            alignment: Alignment.center,
+            child: Text(
+              text,
+              textAlign: TextAlign.start,
+            ),
+          );
+        },
+      );
+    });
   }
 }
