@@ -7,6 +7,7 @@
 //
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_picker_tool_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_placeholder.dart';
 import 'package:flutter_templet_project/basicWidget/n_search_textfield.dart';
 import 'package:flutter_templet_project/basicWidget/n_toolbar.dart';
@@ -43,6 +44,7 @@ class NPickerListView<E> extends StatefulWidget {
     required this.title,
     this.toolbar,
     this.onCancel,
+    this.onConfirm,
     required this.items,
     required this.itemBuilder,
     required this.filterCb,
@@ -55,6 +57,8 @@ class NPickerListView<E> extends StatefulWidget {
 
   /// 取消回调
   final VoidCallback? onCancel;
+  /// 取消回调
+  final VoidCallback? onConfirm;
 
   /// 数据源
   final List<E> items;
@@ -80,9 +84,12 @@ class NPickerListViewState<E> extends State<NPickerListView<E>> {
     final child = Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        if(widget.toolbar == null)NToolbar(
+        if(widget.toolbar == null)NPickerToolBar(
           title: widget.title,
-          onCancel: widget.onCancel,
+          onCancel: widget.onCancel ?? (){
+            Navigator.of(context).pop();
+          },
+          confirmTitle: "",
         ),
         if(widget.toolbar == null)const Divider(height: 0.5),
         widget.toolbar ?? SizedBox(),

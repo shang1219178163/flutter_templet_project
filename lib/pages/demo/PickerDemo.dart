@@ -222,8 +222,12 @@ class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          NToolbar(
+          NPickerToolBar(
             title: "单选",
+            confirmTitle: "",
+            onConfirm: (){
+              ddlog("NPickerToolBar");
+            },
           ),
           const Divider(height: 0.5),
           Expanded(

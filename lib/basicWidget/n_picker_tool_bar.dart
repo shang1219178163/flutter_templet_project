@@ -10,6 +10,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+
 class NPickerToolBar extends StatelessWidget {
 
   const NPickerToolBar({
@@ -19,8 +20,8 @@ class NPickerToolBar extends StatelessWidget {
     this.title = '请选择',
     this.cancelTitle = '取消',
     this.confirmTitle = '确定',
-    required this.onCancel,
-    required this.onConfirm,
+    this.onCancel,
+    this.onConfirm,
   });
 
   final double? width;
@@ -29,20 +30,27 @@ class NPickerToolBar extends StatelessWidget {
   final String cancelTitle;
   final String confirmTitle;
   final VoidCallback? onCancel;
-  final VoidCallback onConfirm;
+  final VoidCallback? onConfirm;
 
   @override
   Widget build(BuildContext context) {
     final toolbar = NavigationToolbar(
       leading: CupertinoButton(
         padding: EdgeInsets.all(12),
-        onPressed: onCancel,
-        child: Text(cancelTitle),
+        onPressed: onCancel ?? () {
+          Navigator.of(context).pop();
+        },
+        child: Text(cancelTitle,
+          style: TextStyle(
+            fontSize: 16,
+            color: Colors.black38,
+          ),
+        ),
       ),
       middle: Text(title,
         style: TextStyle(
-          fontSize: 17,
-          fontWeight: FontWeight.normal,
+          fontSize: 16,
+          fontWeight: FontWeight.w500,
           color: Colors.black,
           backgroundColor: Colors.white,
           decoration: TextDecoration.none
@@ -51,8 +59,12 @@ class NPickerToolBar extends StatelessWidget {
       ),
       trailing: CupertinoButton(
         padding: EdgeInsets.all(12),
-        onPressed: onConfirm,
-        child: Text(confirmTitle),
+        onPressed: confirmTitle.isEmpty ? null : onConfirm,
+        child: Text(confirmTitle,
+          style: TextStyle(
+            fontSize: 16,
+          ),
+        ),
       ),
     );
 
@@ -100,3 +112,51 @@ class NPickerToolBar extends StatelessWidget {
   //   );
   // }
 }
+
+
+// /// picker 顶部
+// class NToolbar extends StatelessWidget {
+//
+//   const NToolbar({
+//   	super.key,
+//   	required this.title,
+//     this.onCancel,
+//     this.trailing,
+//   });
+//
+//   final String title;
+//   final VoidCallback? onCancel;
+//   final Widget? trailing;
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return SizedBox(
+//       height: 50,
+//       child: NavigationToolbar(
+//         leading: InkWell(
+//           onTap: onCancel ?? (){
+//             Navigator.of(context).pop();
+//           },
+//           child: Container(
+//             padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+//             child: const Text("取消",
+//               style: TextStyle(
+//                 fontWeight: FontWeight.w500,
+//                 fontSize: 16.0,
+//                 color: Color(0xff737373),
+//               ),
+//             ),
+//           ),
+//         ),
+//         middle: Text(title,
+//           style: const TextStyle(
+//             fontWeight: FontWeight.w500,
+//             fontSize: 18.0
+//           ),
+//           textAlign: TextAlign.center,
+//         ),
+//         trailing: trailing,
+//       ),
+//     );
+//   }
+// }
