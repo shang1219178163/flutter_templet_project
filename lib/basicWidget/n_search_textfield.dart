@@ -172,6 +172,10 @@ class NSearchTextFieldState extends State<NSearchTextField> {
           height: 14,
         ),
       ),
+      decoration: BoxDecoration(
+        color: backgroundColor,
+        borderRadius: BorderRadius.all(Radius.circular(4)),
+      ),
       // suffix: InkWell(
       //   onTap: onSuffixTap ?? (){
       //     controller.clear();

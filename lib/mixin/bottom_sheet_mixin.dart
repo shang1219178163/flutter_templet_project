@@ -139,9 +139,8 @@ mixin BottomSheetMixin{
     VoidCallback? onCancel,
     required VoidCallback? onConfirm,
   }){
-    final scrollController = ScrollController();
-
     final content = Material(
+      color: Colors.white,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -153,10 +152,7 @@ mixin BottomSheetMixin{
             onConfirm: onConfirm,
           ),
           Expanded(
-              child: Container(
-                color: Colors.white,
-                child: child,
-              )
+            child: child,
           ),
 
           // Expanded(
@@ -180,6 +176,7 @@ mixin BottomSheetMixin{
 
     showModalBottomSheet(
       context: context,
+      backgroundColor: Colors.transparent,
       builder: (BuildContext context) {
 
         return content;

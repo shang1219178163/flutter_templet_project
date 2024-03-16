@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/PickerUtil.dart';
+import 'package:flutter_templet_project/basicWidget/n_picker_list_view.dart';
 import 'package:flutter_templet_project/basicWidget/n_picker_tool_bar.dart';
 import 'package:flutter_templet_project/basicWidget/chioce_wrap.dart';
+import 'package:flutter_templet_project/basicWidget/n_toolbar.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/date_time_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
@@ -31,6 +33,7 @@ class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
     (name: "datePicker mixin封装", action: onDateMixin),
     (name: "Picker浅封装", action: onSelect),
     (name: "自定义", action: onCustom),
+    (name: "自定义 onPickerListView", action: onPickerListView),
     (name: "单选滚动列表", action: onSingle),
     (name: "多选滚动列表", action: onMuti),
     (name: "多种类按钮", action: onPage),
@@ -173,28 +176,74 @@ class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
     );
   }
 
-  Future<void> onSingle() async {
-    presentBottomSheet(
-      context: context,
-// height: 500,
-      onConfirm: () {
-        debugPrint("${DateTime.now()}");
-        Navigator.of(context).pop();
+
+
+  var selectedItem = {"name": "选项_3"};
+
+  Future<void> onPickerListView() async {
+    final items = List.generate(1000, (i) {
+      return {"name": "选项_$i"};
+    });
+
+    NPickerListView(
+      title: 'NPickerListView',
+      items: items,
+      filterCb: (e, value) => (e['name'] ?? '').contains(value),
+      itemBuilder: (BuildContext context, idx, list) {
+        final item = list[idx];
+
+        final isSame = selectedItem['name'] == item['name'];
+        final textColor = isSame ? Colors.blue : Colors.black87;
+        final checkColor = isSame ? Colors.blue : Colors.transparent;
+
+        return ListTile(
+          title: Text(item['name'] ?? '', style: TextStyle(color: textColor),),
+          trailing: Icon(Icons.check, color: checkColor,),
+          onTap: () {
+            Navigator.of(context).pop(idx);
+            ddlog(item);
+            selectedItem = item;
+          },
+        );
       },
-      child: Material(
-        child: Container(
-// color: Colors.green,
-          child: ChioceList(
-// isMutiple: true,
-            children: payTypes * 5,
-            indexs: [0],
-            canScroll: true,
-            callback: (Object index) {
-              ddlog(index);
-            },
-          ),
-        ),
+    ).toShowModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+    );
+  }
+
+  Future<void> onSingle() async {
+    final child = Material(
+      color: Colors.white,
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(16),
+        topRight: Radius.circular(16),
       ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          NToolbar(
+            title: "单选",
+          ),
+          const Divider(height: 0.5),
+          Expanded(
+            child: ChioceList(
+              // isMutiple: true,
+              children: payTypes * 5,
+              indexs: [0],
+              canScroll: true,
+              callback: (Object index) {
+                ddlog(index);
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+
+    child.toShowModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
     );
   }
 
