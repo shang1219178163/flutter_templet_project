@@ -116,7 +116,8 @@ mixin BottomSheetMixin{
               ],
             ),
           );
-        });
+        },
+    );
 
     showCupertinoModalPopup(
       context: context,
@@ -133,7 +134,7 @@ mixin BottomSheetMixin{
   presentBottomSheet({
     required BuildContext context,
     String title = "请选择",
-    double maxHeight = 400,
+    double maxHeight = 300,
     required Widget child,
     VoidCallback? onCancel,
     required VoidCallback? onConfirm,
@@ -194,7 +195,7 @@ mixin BottomSheetMixin{
     required VoidCallback? onConfirm,
   }){
     return Container(
-      height: kToolbarHeight,
+      height: 45,
       decoration: BoxDecoration(
         border: Border(bottom: BorderSide(width: 1, color: Color(0xffe4e4e4))),
       ),

@@ -13,19 +13,21 @@ import 'package:flutter/material.dart';
 class NPickerToolBar extends StatelessWidget {
 
   const NPickerToolBar({
-  	Key? key,
+    super.key,
     this.height = 45,
     this.width = double.infinity,
     this.title = '请选择',
-    this.actionTitles = const ['取消', '确定'],
+    this.cancelTitle = '取消',
+    this.confirmTitle = '确定',
     required this.onCancel,
     required this.onConfirm,
-  }) : super(key: key);
+  });
 
   final double? width;
   final double? height;
   final String title;
-  final List<String> actionTitles;
+  final String cancelTitle;
+  final String confirmTitle;
   final VoidCallback? onCancel;
   final VoidCallback onConfirm;
 
@@ -35,7 +37,7 @@ class NPickerToolBar extends StatelessWidget {
       leading: CupertinoButton(
         padding: EdgeInsets.all(12),
         onPressed: onCancel,
-        child: Text(actionTitles[0]),
+        child: Text(cancelTitle),
       ),
       middle: Text(title,
         style: TextStyle(
@@ -50,7 +52,7 @@ class NPickerToolBar extends StatelessWidget {
       trailing: CupertinoButton(
         padding: EdgeInsets.all(12),
         onPressed: onConfirm,
-        child: Text(actionTitles[1]),
+        child: Text(confirmTitle),
       ),
     );
 
