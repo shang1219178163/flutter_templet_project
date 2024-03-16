@@ -49,23 +49,25 @@ class _TextFieldDemoTwoState extends State<TextFieldDemoTwo> with SingleTickerPr
   late final items = [
     (name: "可编辑", action: onEdit),
     (name: "不可编辑", action: onOnlyRead),
-    (name: "其他", action: onPressed),
+    (name: "内容初始化", action: onInitial),
+    (name: "60字", action: onMax60),
     (name: "其他", action: onPressed),
   ];
 
   final textEditingController = TextEditingController();
 
+  final String messgae = "今天我们向您介绍一个新的Flutter版本，Flutter 3.19。此版本为Gemini带来了一个新的Dart SDK，该SDK使开发人员能够对小部件动画进行细粒度控制，通过对Impeller进行更新提升了渲染性能，提供了工具来帮助实现深链接，支持Windows Arm64等等！Flutter社区继续给人留下深刻印象，由168名社区成员合并了1429个拉取请求，其中43名社区成员提交了他们的第一个Flutter拉取请求！继续阅读以了解Flutter社区为这个最新版本做出的所有新增和改进！";
+
+
   @override
   void initState() {
     super.initState();
 
-    textEditingController.text = "今天我们向您介绍一个新的Flutter版本，Flutter 3.19。此版本为Gemini带来了一个新的Dart SDK，该SDK使开发人员能够对小部件动画进行细粒度控制，通过对Impeller进行更新提升了渲染性能，提供了工具来帮助实现深链接，支持Windows Arm64等等！Flutter社区继续给人留下深刻印象，由168名社区成员合并了1429个拉取请求，其中43名社区成员提交了他们的第一个Flutter拉取请求！继续阅读以了解Flutter社区为这个最新版本做出的所有新增和改进！";
+    textEditingController.text = messgae;
   }
 
   @override
   Widget build(BuildContext context) {
-    textEditingController.text = textEditingController.text.substring(0, 60);
-
     return Scaffold(
       appBar: hideApp ? null : AppBar(
         title: Text("$widget"),
@@ -185,8 +187,17 @@ class _TextFieldDemoTwoState extends State<TextFieldDemoTwo> with SingleTickerPr
     readOnly.value = true;
   }
 
-  onPressed(){
+  onMax60(){
+    textEditingController.text = textEditingController.text.substring(0, 60);
+    setState(() {});
+  }
 
+  onInitial(){
+    textEditingController.text = messgae;
+    setState(() {});
+  }
+
+  onPressed(){
 
   }
 }
