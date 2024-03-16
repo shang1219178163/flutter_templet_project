@@ -18,7 +18,7 @@ class NTabBarPage extends StatefulWidget {
     super.key,
     required this.items,
     this.tabBarAlignment = Alignment.center,
-    this.isScrollable = false,
+    this.isScrollable = true,
     this.isThemeBg = true,
     this.onTabBar,
     this.onChanged,
