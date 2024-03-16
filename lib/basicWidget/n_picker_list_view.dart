@@ -41,7 +41,7 @@ class NPickerListView<E> extends StatefulWidget {
   const NPickerListView({
     super.key,
     required this.title,
-    this.header,
+    this.toolbar,
     this.onCancel,
     required this.items,
     required this.itemBuilder,
@@ -51,7 +51,7 @@ class NPickerListView<E> extends StatefulWidget {
   /// 中间标题
   final String title;
 
-  final Widget? header;
+  final Widget? toolbar;
 
   /// 取消回调
   final VoidCallback? onCancel;
@@ -80,12 +80,12 @@ class NPickerListViewState<E> extends State<NPickerListView<E>> {
     final child = Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        if(widget.header == null)NToolbar(
+        if(widget.toolbar == null)NToolbar(
           title: widget.title,
           onCancel: widget.onCancel,
         ),
-        if(widget.header == null)const Divider(height: 0.5),
-        widget.header ?? SizedBox(),
+        if(widget.toolbar == null)const Divider(height: 0.5),
+        widget.toolbar ?? SizedBox(),
         if(widget.filterCb != null)Container(
           padding: const EdgeInsets.all(16),
           child: NSearchTextField(
