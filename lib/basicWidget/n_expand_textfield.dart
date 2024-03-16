@@ -70,8 +70,6 @@ class _NExpandTextfieldState extends State<NExpandTextfield> {
 
   void onListener() {
     wordCount.value = textEditingController.text.characters.length;
-    ddlog(
-        "onListener: ${textEditingController.text.length},${textEditingController.text.characters.length}");
   }
 
   @override
@@ -114,21 +112,6 @@ class _NExpandTextfieldState extends State<NExpandTextfield> {
               readOnly: widget.readOnly,
               maxLength: widget.maxLength,
             ),
-            // if(numberOfLines > 1) Padding(
-            //   padding: EdgeInsets.only(bottom: 8),
-            //   child: TextButton(
-            //     style: TextButton.styleFrom(
-            //       padding: EdgeInsets.zero,
-            //       tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            //       minimumSize: Size(50, 18),
-            //     ),
-            //     onPressed: (){
-            //       isExpand = !isExpand;
-            //       setState((){});
-            //     },
-            //     child: Text(btnTitle, style: expandTitleStyle,),
-            //   ),
-            // ),
             Offstage(
               offstage: !isBeyond || !widget.readOnly,
               child: InkWell(

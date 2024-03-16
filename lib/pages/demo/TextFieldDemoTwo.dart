@@ -50,8 +50,8 @@ class _TextFieldDemoTwoState extends State<TextFieldDemoTwo> with SingleTickerPr
     (name: "可编辑", action: onEdit),
     (name: "不可编辑", action: onOnlyRead),
     (name: "内容初始化", action: onInitial),
-    (name: "60字", action: onMax60),
-    (name: "其他", action: onPressed),
+    (name: "小于三行", action: onMax60),
+    // (name: "其他", action: onPressed),
   ];
 
   final textEditingController = TextEditingController();
@@ -95,7 +95,7 @@ class _TextFieldDemoTwoState extends State<TextFieldDemoTwo> with SingleTickerPr
             //   child: buildTextField(),
             // ),
             NSectionHeader(
-              title: "字符串不够一行时",
+              title: "填空组件封装",
               child: Container(
                 // color: Colors.yellowAccent,
                 padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
