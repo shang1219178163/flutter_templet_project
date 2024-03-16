@@ -238,6 +238,7 @@ import 'package:flutter_templet_project/pages/demo/TestFunction.dart';
 import 'package:flutter_templet_project/pages/demo/TextDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TextFieldDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/TextFieldLoginDemo.dart';
+import 'package:flutter_templet_project/pages/demo/TextFieldTabDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TextViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TicketUiDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TimePickerDemo.dart';
@@ -680,6 +681,7 @@ class APPRouter {
   static const preferredSizeDemo = '/preferredSizeDemo';
   static const ntabBarPageDemo = '/ntabBarPageDemo';
   static const nTabBarViewCustomDemo = '/nTabBarViewCustomDemo';
+  static const textFieldTabDemo = '/textFieldTabDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -1075,6 +1077,8 @@ class AppPage {
     GetPage(name: APPRouter.preferredSizeDemo, page: () => PreferredSizeDemo(),),
     GetPage(name: APPRouter.ntabBarPageDemo, page: () => NTabBarPageDemo(),),
     GetPage(name: APPRouter.nTabBarViewCustomDemo, page: () => NTabBarViewCustomDemo(),),
+    GetPage(name: APPRouter.textFieldTabDemo, page: () => TextFieldTabDemo(),),
+
 
 
   ];

@@ -12,9 +12,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/NSectionHeader.dart';
 import 'package:flutter_templet_project/basicWidget/n_order_num_unit.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/image_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/util/Debounce.dart';
 import 'package:flutter_templet_project/util/Throttle.dart';
+import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_workers/utils/debouncer.dart';
 
 
@@ -30,6 +32,8 @@ class TextFieldDemo extends StatefulWidget {
 }
 
 class _TextFieldDemoState extends State<TextFieldDemo> {
+
+  bool get hideApp => Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
 
   late final _textController = TextEditingController(text: '测试');
   late final editingController = TextEditingController(text: '测试');
@@ -58,7 +62,7 @@ class _TextFieldDemoState extends State<TextFieldDemo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: hideApp ? null : AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: ['done',].map((e) =>
             TextButton(

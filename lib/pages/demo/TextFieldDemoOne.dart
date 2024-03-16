@@ -14,6 +14,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/TextInputFormatter/fraction_digits_text_input_formatter.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
+import 'package:get/get.dart';
 import 'package:tuple/tuple.dart';
 
 class TextFieldDemoOne extends StatefulWidget {
@@ -28,9 +29,12 @@ class TextFieldDemoOne extends StatefulWidget {
 }
 
 class _TextFieldDemoOneState extends State<TextFieldDemoOne> {
+
+  bool get hideApp => Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
+
   final textEditingController = TextEditingController();
 
- final current = ValueNotifier("");
+  final current = ValueNotifier("");
 
 
   ///用来控制  TextField 焦点的获取与关闭
@@ -61,6 +65,7 @@ class _TextFieldDemoOneState extends State<TextFieldDemoOne> {
     ),
   ];
 
+
   @override
   void initState() {
     super.initState();
@@ -87,7 +92,7 @@ class _TextFieldDemoOneState extends State<TextFieldDemoOne> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: hideApp ? null : AppBar(
         title: Text(widget.title ?? "$widget"),
       ),
       body: Column(

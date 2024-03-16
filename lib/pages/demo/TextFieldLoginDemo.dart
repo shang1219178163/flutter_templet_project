@@ -1,19 +1,13 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
-
+import 'package:get/get.dart';
 
 class TextFieldLoginDemo extends StatefulWidget {
-
-  TextFieldLoginDemo({
-    Key? key, 
-    this.title
-  }) : super(key: key);
+  TextFieldLoginDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -22,119 +16,120 @@ class TextFieldLoginDemo extends StatefulWidget {
 }
 
 class _TextFieldLoginDemoState extends State<TextFieldLoginDemo> {
-    late final FocusNode _focusNode = FocusNode();
+  bool get hideApp =>
+      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
 
-    String loginId = "";
-    String password = "";
+  late final FocusNode _focusNode = FocusNode();
 
-    final loginEnable = ValueNotifier(false);
+  String loginId = "";
+  String password = "";
 
-    @override
-    void dispose() {
-      super.dispose();
-      _focusNode.dispose();
-    }
+  final loginEnable = ValueNotifier(false);
 
-    @override
-    void initState() {
-      super.initState();
-      _focusNode.addListener(_onOnFocusNodeEvent);
-    }
+  @override
+  void dispose() {
+    super.dispose();
+    _focusNode.dispose();
+  }
 
-    _onOnFocusNodeEvent() {
-      setState(() {});
-    }
+  @override
+  void initState() {
+    super.initState();
+    _focusNode.addListener(_onOnFocusNodeEvent);
+  }
 
-    @override
-    Widget build(BuildContext context) {
-      return Scaffold(
-        appBar: AppBar(
-          title: Text('${widget}'),
-        ),
-        body: Container(
+  _onOnFocusNodeEvent() {
+    setState(() {});
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: hideApp
+          ? null
+          : AppBar(
+              title: Text('${widget}'),
+            ),
+      body: Container(
           padding: EdgeInsets.all(40.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               buildLoginBox(),
             ],
-          )
-        ),
-      );
-    }
-    /// 登录盒子
-    Widget buildLoginBox() {
-      return Container(
-        margin: EdgeInsets.only(top: 25, left: 30, right: 30, bottom: 27),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            LoginInput(
-              image: 'icon_account.png'.toPath(),
-              hint: '请输入手机号/账号',
-              // keyboardType: TextInputType.number,
-              inputFormatters: [
-                LengthLimitingTextInputFormatter(10),
-              ],
-              value: loginId,
-              onChanged: (text) {
-                loginId = text.trim();
-                checkLoginEnable();
-              },
-            ),
-            SizedBox(height: 16,),
-            LoginInput(
-              image: 'icon_lock.png'.toPath(),
-              hint: '请输入密码',
-              // obscureText: true,
-              isPwd: true,
-              showEyeIcon: true,
-              inputFormatters: [
-                LengthLimitingTextInputFormatter(10),
-              ],
-              value: password,
-              onChanged: (text) {
-                password = text.trim();
-                checkLoginEnable();
-              },
-            ),
-            SizedBox(height: 32,),
-            ValueListenableBuilder(
-                valueListenable: loginEnable,
-                builder: (context,  value, child){
-
-                  return ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.symmetric(vertical: 18),
-                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                      minimumSize: Size(50, 18),
-                      shape: const StadiumBorder(),
-                      disabledBackgroundColor: primaryColor.withOpacity(0.5),
-                      disabledForegroundColor: Colors.white,
-                    ),
-                    onPressed: !value ? null : (){
-
-                    },
-                    child: Text("登录"),
-                  );
-                }
-            )
-          ],
-        ),
-      );
-    }
-
-    checkLoginEnable() {
-      loginEnable.value = loginId.isNotEmpty && password.isNotEmpty;
-
-    }
+          )),
+    );
   }
 
+  /// 登录盒子
+  Widget buildLoginBox() {
+    return Container(
+      margin: EdgeInsets.only(top: 25, left: 30, right: 30, bottom: 27),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          LoginInput(
+            image: 'icon_account.png'.toPath(),
+            hint: '请输入手机号/账号',
+            // keyboardType: TextInputType.number,
+            inputFormatters: [
+              LengthLimitingTextInputFormatter(10),
+            ],
+            value: loginId,
+            onChanged: (text) {
+              loginId = text.trim();
+              checkLoginEnable();
+            },
+          ),
+          SizedBox(
+            height: 16,
+          ),
+          LoginInput(
+            image: 'icon_lock.png'.toPath(),
+            hint: '请输入密码',
+            // obscureText: true,
+            isPwd: true,
+            showEyeIcon: true,
+            inputFormatters: [
+              LengthLimitingTextInputFormatter(10),
+            ],
+            value: password,
+            onChanged: (text) {
+              password = text.trim();
+              checkLoginEnable();
+            },
+          ),
+          SizedBox(
+            height: 32,
+          ),
+          ValueListenableBuilder(
+              valueListenable: loginEnable,
+              builder: (context, value, child) {
+                return ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.symmetric(vertical: 18),
+                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    minimumSize: Size(50, 18),
+                    shape: const StadiumBorder(),
+                    disabledBackgroundColor: primaryColor.withOpacity(0.5),
+                    disabledForegroundColor: Colors.white,
+                  ),
+                  onPressed: !value ? null : () {},
+                  child: Text("登录"),
+                );
+              })
+        ],
+      ),
+    );
+  }
+
+  checkLoginEnable() {
+    loginEnable.value = loginId.isNotEmpty && password.isNotEmpty;
+  }
+}
 
 ///登录输入框，自定义widget
 class LoginInput extends StatefulWidget {
-
-
   const LoginInput({
     Key? key,
     this.controller,
@@ -173,20 +168,21 @@ class LoginInput extends StatefulWidget {
   final Widget? suffixIcon;
   final Widget? suffix;
 
-
   @override
   _LoginInputState createState() => _LoginInputState();
 }
 
 class _LoginInputState extends State<LoginInput> {
   final _focusNode = FocusNode();
+
   // final _focusNodePwd = FocusNode();
 
   final hasFocusVN = ValueNotifier<bool>(false);
 
   bool isCloseEye = true;
 
-  late final _textEditingController = widget.controller ?? TextEditingController();
+  late final _textEditingController =
+      widget.controller ?? TextEditingController();
 
   @override
   void initState() {
@@ -273,28 +269,29 @@ class _LoginInputState extends State<LoginInput> {
   _passwordInput() {
     Widget? suffixIconTmp;
     if (widget.showEyeIcon) {
-      suffixIconTmp = widget.suffixIcon ?? ValueListenableBuilder<bool>(
-          valueListenable: hasFocusVN,
-          builder: (_, isFocus, child) {
-            return Padding(
-              padding: const EdgeInsets.only(right: 8),
-              child: IconButton(
-                focusColor: fontColor[10],
-                icon: Image.asset(
-                  isCloseEye
-                      ? 'assets/images/icon_eye_close.png'
-                      : 'assets/images/icon_eye_open.png',
-                  width: 20,
-                  height: 20,
-                  color: isFocus ? primaryColor : null,
-                ),
-                onPressed: () {
-                  isCloseEye = !isCloseEye;
-                  setState(() {});
-                },
-              ),
-            );
-          });
+      suffixIconTmp = widget.suffixIcon ??
+          ValueListenableBuilder<bool>(
+              valueListenable: hasFocusVN,
+              builder: (_, isFocus, child) {
+                return Padding(
+                  padding: const EdgeInsets.only(right: 8),
+                  child: IconButton(
+                    focusColor: fontColor[10],
+                    icon: Image.asset(
+                      isCloseEye
+                          ? 'assets/images/icon_eye_close.png'
+                          : 'assets/images/icon_eye_open.png',
+                      width: 20,
+                      height: 20,
+                      color: isFocus ? primaryColor : null,
+                    ),
+                    onPressed: () {
+                      isCloseEye = !isCloseEye;
+                      setState(() {});
+                    },
+                  ),
+                );
+              });
     }
 
     return TextField(
@@ -302,7 +299,8 @@ class _LoginInputState extends State<LoginInput> {
       focusNode: _focusNode,
       onChanged: widget.onChanged,
       obscureText: widget.isPwd ? isCloseEye : false,
-      keyboardType: widget.isPwd ? TextInputType.visiblePassword : widget.keyboardType,
+      keyboardType:
+          widget.isPwd ? TextInputType.visiblePassword : widget.keyboardType,
       autofocus: !isCloseEye,
       cursorColor: primaryColor,
       style: TextStyle(
@@ -323,15 +321,15 @@ class _LoginInputState extends State<LoginInput> {
         hintStyle: TextStyle(fontSize: 16.sp, color: fontColor[10]),
         prefixIcon: IconButton(
           focusColor: primaryColor,
-          icon: widget.image == null ? SizedBox() : Image.asset(
-            widget.image!,
-            width: 20,
-            height: 20,
-            color: primaryColor,
-          ),
-          onPressed: () {
-
-          },
+          icon: widget.image == null
+              ? SizedBox()
+              : Image.asset(
+                  widget.image!,
+                  width: 20,
+                  height: 20,
+                  color: primaryColor,
+                ),
+          onPressed: () {},
         ),
         suffixIcon: suffixIconTmp,
         suffix: widget.suffix ?? buildClearButton(),
@@ -367,7 +365,7 @@ class _LoginInputState extends State<LoginInput> {
   Widget buildClearButton() {
     return ValueListenableBuilder(
         valueListenable: hasFocusVN,
-        builder: (context, value, child){
+        builder: (context, value, child) {
           if (!value) {
             return SizedBox();
           }
@@ -378,14 +376,14 @@ class _LoginInputState extends State<LoginInput> {
                 left: 8.0,
                 top: 4,
               ),
-              child: Icon(Icons.cancel,
+              child: Icon(
+                Icons.cancel,
                 color: Colors.black.withOpacity(0.3),
                 size: 16,
               ),
             ),
           );
-        }
-    );
+        });
   }
 
   onClear() {
