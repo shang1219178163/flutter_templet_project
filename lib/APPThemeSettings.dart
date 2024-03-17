@@ -106,23 +106,31 @@ class APPThemeService {
     //   color: Colors.black54,
     // ),
     // indicatorColor: Colors.white,
-    // textButtonTheme: TextButtonThemeData(
-    //   style: ButtonStyle(
-    //     foregroundColor: MaterialStateProperty.all(Colors.tealAccent[200]!),
-    //     textStyle: MaterialStateProperty.all(TextStyle(color: Colors.tealAccent[200]!)),
-    //   ),
-    // ),
-    // elevatedButtonTheme: ElevatedButtonThemeData(
-    //     style: ButtonStyle(
-    //       backgroundColor: MaterialStateProperty.all(Colors.tealAccent[200]!),
-    //     )
-    // ),
-    // outlinedButtonTheme: OutlinedButtonThemeData(
-    //   style: ButtonStyle(
-    //     foregroundColor: MaterialStateProperty.all(Colors.tealAccent[200]!),
-    //     // textStyle: MaterialStateProperty.all(TextStyle(color: e)),
-    //   ),
-    // ),
+    appBarTheme: const AppBarTheme(
+      elevation: 0,
+    ),
+    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+    dividerTheme: const DividerThemeData(
+      space: 0.5,
+      thickness: 1,
+    ),
+    badgeTheme: const BadgeThemeData(
+      offset: Offset(-1, -4),
+      largeSize: 20,
+      smallSize: 20,
+      textColor: Colors.white,
+      textStyle: TextStyle(
+        fontWeight: FontWeight.bold,
+        color: Colors.white,
+        fontSize: 11,
+      ),
+    ),
+    bottomAppBarTheme: const BottomAppBarTheme(
+      height: 60,
+    ),
+    chipTheme: ChipThemeData(
+      pressElevation: 0,//不明原因未生效
+    ),
   );
 
   /// 自定义行为

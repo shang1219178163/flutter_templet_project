@@ -58,7 +58,7 @@ class _APPDrawerMenuPageState extends State<APPDrawerMenuPage> {
                 ...items.map((e) => Column(
                   children: [
                     ListTile(
-                      dense: false,
+                      dense: true,
                       contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
                       leading: Icon(e.item1),
                       title: Text(e.item2, style: TextStyle(fontSize: 16.0)),
