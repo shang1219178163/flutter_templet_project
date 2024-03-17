@@ -1,5 +1,5 @@
 //
-//  SliverAppBarDemo.dart
+//  SliverTabbarDemoOne.dart
 //  flutter_templet_project
 //
 //  Created by shang on 6/8/21 6:00 PM.
@@ -11,26 +11,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 
-class SliverAppBarDemoOne extends StatefulWidget {
-  final String? title;
+class SliverTabbarDemoOne extends StatefulWidget {
 
-  const SliverAppBarDemoOne({Key? key, this.title}) : super(key: key);
+  const SliverTabbarDemoOne({Key? key}) : super(key: key);
 
   @override
-  _SliverAppBarDemoOneState createState() => _SliverAppBarDemoOneState();
+  _SliverTabbarDemoOneState createState() => _SliverTabbarDemoOneState();
 }
 
-class _SliverAppBarDemoOneState extends State<SliverAppBarDemoOne>
+class _SliverTabbarDemoOneState extends State<SliverTabbarDemoOne>
     with SingleTickerProviderStateMixin {
   var items = List.generate(3, (index) => "Tab $index");
 
-  late TabController tabController;
+  late final tabController = TabController(length: items.length, vsync: this);
 
   @override
   void initState() {
     super.initState();
-
-    tabController = TabController(length: items.length, vsync: this);
   }
 
   @override
@@ -59,14 +56,14 @@ class _SliverAppBarDemoOneState extends State<SliverAppBarDemoOne>
                     Navigator.of(context).pop();
                   },
                 ),
-                title: Text(widget.title ?? "$widget"),
+                title: Text("$widget"),
                 centerTitle: false,
                 pinned: true,
                 floating: false,
                 snap: false,
                 primary: true,
                 expandedHeight: 300,
-                elevation: 10,
+                elevation: 0,
                 //是否显示阴影，直接取值innerBoxIsScrolled，展开不显示阴影，合并后会显示
                 forceElevated: innerBoxIsScrolled,
                 actions: <Widget>[
@@ -84,11 +81,23 @@ class _SliverAppBarDemoOneState extends State<SliverAppBarDemoOne>
                     child: buildTopMenu(),
                   ),
                 ),
-                bottom: TabBar(
-                  tabs: items.map((String name) => Tab(text: name)).toList(),
-                  controller: tabController,
-                  isScrollable: true,
-                  indicatorColor: Colors.white,
+                // bottom: TabBar(
+                //   tabs: items.map((String name) => Tab(text: name)).toList(),
+                //   controller: tabController,
+                //   isScrollable: true,
+                //   indicatorColor: Colors.white,
+                // ),
+                bottom: ColoredTabBar(
+                  width: double.maxFinite,
+                  // backgroudColor: Colors.white,
+                  // labelColor: context.primaryColor,
+                  labelColor: Colors.white,
+                  backgroudColor: context.primaryColor,
+                  child: TabBar(
+                    tabs: items.map((String name) => Tab(text: name)).toList(),
+                    controller: tabController,
+                    isScrollable: true,
+                  ),
                 ),
               ),
             ),
@@ -122,10 +131,10 @@ class _SliverAppBarDemoOneState extends State<SliverAppBarDemoOne>
                     sliver: SliverFixedExtentList(
                       itemExtent: 50.0, //item高度或宽度，取决于滑动方向
                       delegate: SliverChildBuilderDelegate(
-                        (BuildContext context, int index) {
+                            (BuildContext context, int index) {
                           return ListTile(
                             title:
-                                Text('Item $index, tab${tabController.index}'),
+                            Text('Item $index, tab${tabController.index}'),
                           );
                         },
                         childCount: 20,
@@ -182,3 +191,91 @@ class _SliverAppBarDemoOneState extends State<SliverAppBarDemoOne>
     );
   }
 }
+
+
+class ColoredTabBar extends StatelessWidget implements PreferredSizeWidget {
+
+  ColoredTabBar({
+    super.key,
+    this.backgroudColor,
+    this.padding,
+    this.decoration,
+    this.height,
+    this.width,
+    this.labelColor,
+    required this.child,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Ink(
+      padding: padding,
+      color: backgroudColor,
+      decoration: decoration,
+      width: width ?? double.maxFinite,
+      height: height,
+      // child: child,
+      child: Theme(
+        data: ThemeData(
+          tabBarTheme: TabBarTheme(
+            dividerColor: Colors.transparent,
+            labelColor: labelColor,
+            unselectedLabelColor: labelColor,
+            indicatorColor: labelColor,
+          ),
+        ),
+        child: child,
+      ),
+    );
+  }
+
+  final EdgeInsetsGeometry? padding;
+  final Decoration ? decoration;
+
+  final double? height;
+  final double? width;
+
+  final Color? labelColor;
+  final Color? backgroudColor;
+  final PreferredSizeWidget child;
+
+  @override
+  Size get preferredSize => child.preferredSize;
+}
+
+// class ColoredTabBar extends StatelessWidget implements PreferredSizeWidget {
+//
+//   ColoredTabBar({
+//     super.key,
+//     required this.color,
+//     this.padding,
+//     this.decoration,
+//     this.width,
+//     this.height,
+//     required this.child,
+//   });
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Ink(
+//       padding: padding,
+//       color: color,
+//       decoration: decoration,
+//       width: width,
+//       height: height,
+//       child: child,
+//     );
+//   }
+//
+//   final EdgeInsetsGeometry? padding;
+//   final Color? color;
+//   final Decoration ? decoration;
+//
+//   final double? width;
+//   final double? height;
+//   final PreferredSizeWidget child;
+//
+//
+//   @override
+//   Size get preferredSize => child.preferredSize;
+// }

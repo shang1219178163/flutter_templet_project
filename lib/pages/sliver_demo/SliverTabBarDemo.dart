@@ -1,12 +1,17 @@
 
+
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_sliver_persistent_header_delegate.dart';
 import 'package:flutter_templet_project/basicWidget/n_tab_bar_page.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
+import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:tuple/tuple.dart';
+
 
 class SliverTabBarDemo extends StatefulWidget {
 
@@ -38,6 +43,17 @@ class _SliverTabBarDemoState extends State<SliverTabBarDemo> with SingleTickerPr
 
   final scrollController = ScrollController();
 
+  final offsetY = ValueNotifier(0.0);
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    scrollController.addListener(() {
+      // offsetY.value = scrollController.position.pixels;
+      // ddlog("offsetY.value: ${offsetY.value}");
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -87,10 +103,11 @@ class _SliverTabBarDemoState extends State<SliverTabBarDemo> with SingleTickerPr
                 // margin: const EdgeInsets.only(top: 48),
                 // padding: const EdgeInsets.only(top: 48),
                 alignment: Alignment.center,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   color: Colors.white,
                   border: Border(
-                      bottom: BorderSide(width: 0, color: Color(0xFFE5E5E5))),
+                    bottom: BorderSide(width: 0, color: Color(0xFFE5E5E5))
+                  ),
                 ),
                 child: TabBar(
                   controller: tabController,
@@ -108,20 +125,46 @@ class _SliverTabBarDemoState extends State<SliverTabBarDemo> with SingleTickerPr
             );
           },
         ),
-        SliverFillRemaining(
-          child: ListenableBuilder(
-            listenable: tabController,
-             builder: (context, child){
-
-              return MediaQuery.removePadding(
-                context: context,
-                // removeBottom: true,
-                // removeTop: true,
-                child: items[tabController.index].item2,
-              );
-            }
-          ),
-        ),
+        SliverList(
+          delegate: SliverChildBuilderDelegate((context, index) {
+            return ListTile(
+              title: Text('Item $index'),
+          );
+        }, childCount: 20),),
+        // SliverToBoxAdapter(
+        //   child: AnimatedBuilder(
+        //       animation: Listenable.merge([
+        //         tabController,
+        //         offsetY,
+        //       ]),
+        //       builder: (context, child){
+        //
+        //         return MediaQuery.removePadding(
+        //           context: context,
+        //           // removeBottom: true,
+        //           removeTop: true,
+        //           child: items[tabController.index].item2,
+        //         );
+        //       }
+        //   ),
+        // ),
+        // SliverFillRemaining(
+        //   child: AnimatedBuilder(
+        //       animation: Listenable.merge([
+        //         tabController,
+        //         offsetY,
+        //       ]),
+        //       builder: (context, child){
+        //
+        //         return MediaQuery.removePadding(
+        //           context: context,
+        //           // removeBottom: true,
+        //           removeTop: true,
+        //           child: items[tabController.index].item2,
+        //         );
+        //       }
+        //   ),
+        // ),
       ],
     );
   }
@@ -130,17 +173,21 @@ class _SliverTabBarDemoState extends State<SliverTabBarDemo> with SingleTickerPr
     final scrollController = ScrollController();
 
     final titles = List.generate(20, (index) => index);
-    return Scrollbar(
-      controller: scrollController,
-      child: ListView.builder(
+    return Container(
+      width: double.maxFinite,
+      height: double.maxFinite,
+      child: Scrollbar(
         controller: scrollController,
-        itemCount: titles.length,
-        itemBuilder: (_, index){
+        child: ListView.builder(
+          controller: scrollController,
+          itemCount: titles.length,
+          itemBuilder: (_, index){
 
-          return ListTile(
-            title: Text("${tabController.index} 选项_$index"),
-          );
-        }
+            return ListTile(
+              title: Text("${tabController.index} 选项_$index"),
+            ).toColoredBox(color: ColorExt.random);
+          }
+        ),
       ),
     );
   }

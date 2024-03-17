@@ -13,6 +13,7 @@ import 'package:flutter_templet_project/pages/sliver_demo/SliverListDemo.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/SliverListPopverDemo.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/SliverPersistentHeaderDemoOne.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/SliverTabBarDemo.dart';
+import 'package:flutter_templet_project/pages/sliver_demo/SliverTabbarDemoOne.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/StaggeredGridViewDemo.dart';
 import 'package:tuple/tuple.dart';
 
@@ -197,5 +198,11 @@ List<Tuple3<String, String, Widget>> _list = [
     '测试',
     SliverTabBarDemo(),
   ),
+  Tuple3(
+    'SliverTabbarDemoOne',
+    '测试1',
+    SliverTabbarDemoOne(),
+  ),
+
 
 ];
