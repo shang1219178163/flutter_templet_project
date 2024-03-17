@@ -80,3 +80,22 @@ class NSliverPersistentHeader extends StatelessWidget {
   }
 }
 
+class SliverPersistentHeaderBuilder extends SliverPersistentHeader {
+  SliverPersistentHeaderBuilder({
+    Key? key,
+    double max = 48,
+    double min = 48,
+    bool pinned = false,
+    bool floating = false,
+    required Widget Function(BuildContext context, double offset, bool overlapsContent) builder,
+  }) : super(
+    key: key,
+    pinned: pinned,
+    floating: floating,
+    delegate: NSliverPersistentHeaderDelegate(
+      max: max,
+      min: min,
+      builder: builder,
+    ),
+  );
+}
