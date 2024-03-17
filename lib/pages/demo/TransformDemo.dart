@@ -37,13 +37,29 @@ class _TransformDemoState extends State<TransformDemo> {
     return ListView(
       children: [
         NSectionHeader(
+          title: "Matrix4.skewX",
+          mainAxisSize: MainAxisSize.min,
+          child: Container(
+            color: Colors.black,
+            child: Transform(
+              alignment: Alignment.topRight,
+              transform: Matrix4.skewX(-0.3),
+              child: Container(
+                padding: const EdgeInsets.all(8.0),
+                color: const Color(0xFFE8581C),
+                child: const Text('Apartment for rent!'),
+              ),
+            ),
+          ),
+        ),
+        NSectionHeader(
           title: "Matrix4.skewY",
           mainAxisSize: MainAxisSize.min,
           child: Container(
             color: Colors.black,
             child: Transform(
               alignment: Alignment.topRight,
-              transform: Matrix4.skewY(0.3)..rotateZ(-math.pi / 12.0),
+              transform: Matrix4.skewY(0.7)..rotateZ(-math.pi / 12.0),
               child: Container(
                 padding: const EdgeInsets.all(8.0),
                 color: const Color(0xFFE8581C),
