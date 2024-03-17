@@ -9,6 +9,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 
 class SliverAppBarDemoOne extends StatefulWidget {
@@ -23,7 +24,7 @@ class SliverAppBarDemoOne extends StatefulWidget {
 }
 
 class _SliverAppBarDemoOneState extends State<SliverAppBarDemoOne> with SingleTickerProviderStateMixin {
-  var pages = List.generate(3, (index) => "Tab $index");
+  var items = List.generate(3, (index) => "Tab $index");
 
   late TabController _tabController;
 
@@ -31,27 +32,25 @@ class _SliverAppBarDemoOneState extends State<SliverAppBarDemoOne> with SingleTi
   void initState() {
     super.initState();
 
-    _tabController = TabController(length: pages.length, vsync: this);
+    _tabController = TabController(length: items.length, vsync: this);
   }
 
 
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
         // appBar: AppBar(
         //   title: Text(widget.title ?? "$widget"),
         // ),
-        body: buildDefaultTabController(context),
+        body: buildDefaultTabController(),
     );
   }
 
 
-  Widget buildDefaultTabController(BuildContext context) {
+  Widget buildDefaultTabController() {
     return
     DefaultTabController(
-      length: pages.length, // This is the number of tabs.
+      length: items.length, // This is the number of tabs.
       child: NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           // These are the slivers that show up in the "outer" scroll view.
@@ -81,18 +80,17 @@ class _SliverAppBarDemoOneState extends State<SliverAppBarDemoOne> with SingleTi
                     onPressed: () => debugPrint("更多"),
                   ),
                 ],
-
                 flexibleSpace: FlexibleSpaceBar(
-                  background: Image.asset("assets/images/bg.png", fit: BoxFit.fill),
-                  // background: Container(
-                  //   padding: EdgeInsets.fromLTRB(20, 100, 20, 60),
-                  //   // height: 80,
-                  //   color: Colors.green,
-                  //   child: _buildTopMenu(context),
-                  // ),
+                  // background: Image.asset("assets/images/bg.png", fit: BoxFit.fill),
+                  background: Container(
+                    padding: EdgeInsets.fromLTRB(20, safeAreaTop, 20, 60),
+                    // height: 80,
+                    // color: Colors.green,
+                    child: buildTopMenu(),
+                  ),
                 ),
                 bottom: TabBar(
-                  tabs: pages.map((String name) => Tab(text: name)).toList(),
+                  tabs: items.map((String name) => Tab(text: name)).toList(),
                   controller: _tabController,
                   isScrollable: true,
                   indicatorColor: Colors.white,
@@ -101,17 +99,16 @@ class _SliverAppBarDemoOneState extends State<SliverAppBarDemoOne> with SingleTi
             ),
           ];
         },
-        body: buildTabBarView(context),
+        body: buildTabBarView(),
       ),
     );
   }
 
-  Widget buildTabBarView(BuildContext context) {
-    return
-    TabBarView(
+  Widget buildTabBarView() {
+    return TabBarView(
       controller: _tabController,
       // These are the contents of the tab views, below the tabs.
-      children: pages.map((String name) {
+      children: items.map((String name) {
         //SafeArea 适配刘海屏的一个widget
         return SafeArea(
           top: false,
@@ -145,7 +142,7 @@ class _SliverAppBarDemoOneState extends State<SliverAppBarDemoOne> with SingleTi
     );
   }
 
-  Widget _buildTopMenu(BuildContext context) {
+  Widget buildTopMenu() {
     final list = List.generate(8, (index) => "item_$index");
 
     return Container(
