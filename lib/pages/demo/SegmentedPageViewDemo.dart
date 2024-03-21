@@ -5,6 +5,7 @@ import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:get/get.dart';
 
+/// 带页面的滑动分段组件页面 NSlidingSegmentedPageView
 class SegmentedPageViewDemo extends StatefulWidget {
   SegmentedPageViewDemo({
     super.key,
