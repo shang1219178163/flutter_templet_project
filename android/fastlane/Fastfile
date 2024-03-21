@@ -14,15 +14,23 @@ platform :android do
   ## Common
   desc "打包 development 版本, to: pgy/fir"
   private_lane :build do |options|
+
+    versionName = getVersion()
+    versionCode = versionName.gsub(".", "");
+
     gradle(
       task: 'assemble',
       build_type: options[:type] || 'Release',
       # project_dir: project_dir,
+        properties: {
+          "android.injected.version.code" => versionCode,
+          "android.injected.version.name" => versionName,
+        }
     )
   end
 
 
-  desc "上传 develop 版本, to: pgy/fir"
+  desc "打包并上传 develop 版本, to: pgy/fir"
   lane :develop do |options|
     #默认env文件
     platform = options[:to]
@@ -32,11 +40,34 @@ platform :android do
     build(type: type)
     filePath = rename(type: type);
 
-    if platform.start_with?"pgy"
-      uploadPgyer(filePath: filePath)
-    else
+    if platform.start_with?"fir"
       uploadFir(filePath: filePath)
+    else
+      uploadPgyer(filePath: filePath)
     end
+
+  end
+
+
+  desc "打包并上传 develop 版本, to: pgy/fir"
+  lane :upload do |options|
+    #默认env文件
+    platform = options[:to]
+    platform = platform ? platform : "pgy"
+
+    fileName = getAppName()
+
+    fileDir = ENV["IpaDir_Development"]
+    filePath = "#{fileDir}/#{fileName}.apk"
+    UI.message "upload fileName: #{fileName}"
+    UI.message "upload filePath: #{filePath}"
+
+    if platform.start_with?"fir"
+      uploadFir(filePath: filePath)
+    else
+      uploadPgyer(filePath: filePath)
+    end
+
   end
 
 
@@ -96,7 +127,7 @@ platform :android do
 
   desc "rename"
   def rename(type: 'Release')
-    fileName = getName();
+    fileName = getAppName();
     UI.message "fileName: #{fileName}"
 
     current = getProjectDir();
@@ -115,33 +146,42 @@ platform :android do
   end
 
 
-  desc "getName"
-  def getName()
-    current = getProjectDir();
-    UI.message "current: #{current}"
-
-    yaml_path = File.join(current, "pubspec.yaml");
-    result = yaml_from_path(path: yaml_path);
-    name = result["name"]
-    version = result["version"].split("+")[0]
-    UI.message "version: #{version}"
-
+  desc "getAppName"
+  def getAppName()
     # time = Time.now.strftime("%Y-%m-%d-%H-%M-%S")
     time = Time.now.strftime("%Y-%m-%d")
-    fileName="#{name}_v#{version}_#{time}"
+    fileName = "#{getSchemeName()}_v#{getVersion()}_#{time}"
+    UI.message "fileName: #{fileName}"
     return fileName;
   end
 
+
+  desc "getSchemeName"
+  def getSchemeName()
+    yamlMap = getYamlMap();
+    name = yamlMap["name"]
+    UI.message "schemeName: #{name}"
+    return name;
+  end
+
+
   desc "getVersion"
   def getVersion()
+    yamlMap = getYamlMap();
+    version = yamlMap["version"].split("+")[0]
+    UI.message "version: #{version}"
+    return version
+  end
+
+
+  desc "getYamlMap"
+  def getYamlMap()
     current = getProjectDir();
     UI.message "current: #{current}"
 
     yaml_path = File.join(current, "pubspec.yaml");
     result = yaml_from_path(path: yaml_path);
-    name = result["name"]
-    version = result["version"].split("+")[0]
-    return version
+    return result
   end
 
 
@@ -161,6 +201,13 @@ platform :android do
 
     current = getProjectDir();
     UI.message "current: #{current}"
+
+    fileName = getAppName()
+
+    fileDir = ENV["IpaDir_Development"]
+    filePath = "#{fileDir}/#{fileName}.apk"
+    UI.message "upload fileName: #{fileName}"
+    UI.message "upload filePath: #{filePath}"
 
   end
 
