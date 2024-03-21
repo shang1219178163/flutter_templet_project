@@ -42,18 +42,21 @@ class NPickerListView<E> extends StatefulWidget {
   const NPickerListView({
     super.key,
     required this.title,
-    this.toolbar,
     this.onCancel,
     this.onConfirm,
     required this.items,
     required this.itemBuilder,
-    required this.filterCb,
+    this.filterCb,
+    this.toolbar,
+    this.empty,
   });
 
   /// 中间标题
   final String title;
 
   final Widget? toolbar;
+
+  final Widget? empty;
 
   /// 取消回调
   final VoidCallback? onCancel;
@@ -115,7 +118,7 @@ class NPickerListViewState<E> extends State<NPickerListView<E>> {
                     .toList();
 
                 if (list.isEmpty) {
-                  return NPlaceholder();
+                  return widget.empty ?? NPlaceholder();
                 }
 
                 return Scrollbar(
