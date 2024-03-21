@@ -14,7 +14,7 @@ extension TextPainterExt on TextPainter{
   static TextPainter getTextPainter({
     required String text,
     TextStyle? textStyle,
-    required int maxLine,
+    required int? maxLine,
     required double maxWidth
   }) {
     var textSpan = TextSpan(text: text, style: textStyle);
