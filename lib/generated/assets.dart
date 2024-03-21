@@ -109,6 +109,10 @@ class Assets {
   static const String imagesIconQuote = 'assets/images/icon_quote.png';
   static const String imagesIconRevoke = 'assets/images/icon_revoke.png';
   static const String imagesIconSearch = 'assets/images/icon_search.png';
+  static const String imagesIconSegmentedControlCarerGray = 'assets/images/icon_segmented_control_carer_gray.png';
+  static const String imagesIconSegmentedControlCarerWhite = 'assets/images/icon_segmented_control_carer_white.png';
+  static const String imagesIconSegmentedControlDoctorGray = 'assets/images/icon_segmented_control_doctor_gray.png';
+  static const String imagesIconSegmentedControlDoctorWhite = 'assets/images/icon_segmented_control_doctor_white.png';
   static const String imagesIconSkipping = 'assets/images/icon_skipping.gif';
   static const String imagesIconVoiceCircle = 'assets/images/icon_voice_circle.png';
   static const String imagesIconWechat = 'assets/images/icon_wechat.png';
