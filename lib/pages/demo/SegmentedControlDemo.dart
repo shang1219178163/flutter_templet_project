@@ -1,22 +1,16 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/NSectionHeader.dart';
-import 'package:flutter_templet_project/basicWidget/enhance/en_sliding_segmented_control.dart';
+import 'package:flutter_templet_project/basicWidget/enhance/en_sliding_segmented_control/en_sliding_segmented_control.dart';
+import 'package:flutter_templet_project/basicWidget/enhance/en_sliding_segmented_control/n_sliding_segmented_control.dart';
 import 'package:flutter_templet_project/basicWidget/n_line_segment_view.dart';
 import 'package:flutter_templet_project/basicWidget/n_list_view_segment_control.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
-import 'package:flutter_templet_project/extension/color_ext.dart';
-
+import 'package:flutter_templet_project/extension/string_ext.dart';
 
 class SegmentedControlDemo extends StatefulWidget {
-
-  SegmentedControlDemo({
-    Key? key,
-    this.title
-  }) : super(key: key);
+  SegmentedControlDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -25,10 +19,7 @@ class SegmentedControlDemo extends StatefulWidget {
 }
 
 class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
-
-
   int groupValue = 0;
-
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +31,6 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
       body: buildListView(),
     );
   }
-
 
   PreferredSizeWidget buildPreferredSize() {
     return PreferredSize(
@@ -56,16 +46,13 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
                 children: const <int, Widget>{
                   0: Padding(
                       padding: EdgeInsets.all(8.0),
-                      child: Text(
-                          'Midnight', style: TextStyle(fontSize: 15))),
+                      child: Text('Midnight', style: TextStyle(fontSize: 15))),
                   1: Padding(
                       padding: EdgeInsets.all(8.0),
-                      child: Text(
-                          'Viridian', style: TextStyle(fontSize: 15))),
+                      child: Text('Viridian', style: TextStyle(fontSize: 15))),
                   2: Padding(
                       padding: EdgeInsets.all(8.0),
-                      child: Text(
-                          'Cerulean', style: TextStyle(fontSize: 15)))
+                      child: Text('Cerulean', style: TextStyle(fontSize: 15)))
                 },
                 groupValue: groupValue,
                 onValueChanged: (value) {
@@ -105,13 +92,53 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
         buildSlidingSegmentedControlNew(),
 
         SizedBox(height: 15),
+        buildSegmentedControlNew(
+          radius: Radius.circular(24),
+          padding: EdgeInsets.all(4),
+          onChanged: (int index) {
+            ddlog("index: $index");
+          },
+        ),
+
+        NSectionHeader(
+          title: "NSlidingSegmentedControl",
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 48, vertical: 14),
+            decoration: BoxDecoration(
+              color: Colors.green,
+              // border: Border.all(color: Colors.blue),
+              // borderRadius: BorderRadius.all(Radius.circular(0)),
+            ),
+            child: NSlidingSegmentedControl(
+              items: <({String title, String icon,})>[
+                (
+                  title: "医生",
+                  icon: "icon_segmented_control_doctor_gray.png",
+                ),
+                (
+                  title: "健管师",
+                  icon: "icon_segmented_control_carer_gray.png",
+                ),
+              ],
+              selectedIndex: 1,
+              onChanged: (int index) {
+                ddlog("onChanged: $index");
+              },
+            ),
+          ),
+        ),
+
+        SizedBox(height: 15),
         buildSlidingSegmentedControl3(),
 
         SizedBox(height: 15),
-        buildLineSegmentControl(null, lineColor: Theme.of(context).primaryColor),
+        buildLineSegmentControl(null,
+            lineColor: Theme.of(context).primaryColor),
 
         SizedBox(height: 15),
-        buildLineSegmentControl(Colors.transparent, lineColor: Theme.of(context).primaryColor),
+        buildLineSegmentControl(Colors.transparent,
+            lineColor: Theme.of(context).primaryColor),
 
         SizedBox(height: 15),
         buildLineSegmentControl(Colors.black87, lineColor: Colors.white),
@@ -130,26 +157,23 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
     );
   }
 
-
   final Map<int, Widget> children = <int, Widget>{
     0: Container(
       padding: EdgeInsets.all(8),
-      child: Text(
-          "Item 1", style: TextStyle(fontSize: 15, color: Colors.black)),
+      child:
+          Text("Item 1", style: TextStyle(fontSize: 15, color: Colors.black)),
     ),
     1: Container(
       padding: EdgeInsets.all(8),
-      child: Text(
-          "Item 2", style: TextStyle(fontSize: 15, color: Colors.black)),
+      child:
+          Text("Item 2", style: TextStyle(fontSize: 15, color: Colors.black)),
     ),
     2: Container(
       padding: EdgeInsets.all(8),
-      child: Text(
-          "Item 3", style: TextStyle(fontSize: 15, color: Colors.black)),
+      child:
+          Text("Item 3", style: TextStyle(fontSize: 15, color: Colors.black)),
     ),
   };
-
-
 
   Widget buildSegmentedControl() {
     return CupertinoSegmentedControl<int>(
@@ -167,9 +191,18 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
 
   Widget buildSlidingSegmentedControl() {
     const children = <int, Widget>{
-      0: Text("Item 1", style: TextStyle(fontSize: 15),),
-      1: Text("Item 2", style: TextStyle(fontSize: 15),),
-      2: Text("Item 3", style: TextStyle(fontSize: 15),),
+      0: Text(
+        "Item 1",
+        style: TextStyle(fontSize: 15),
+      ),
+      1: Text(
+        "Item 2",
+        style: TextStyle(fontSize: 15),
+      ),
+      2: Text(
+        "Item 3",
+        style: TextStyle(fontSize: 15),
+      ),
     };
 
     return CupertinoSlidingSegmentedControl(
@@ -187,91 +220,239 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
   }
 
   Widget buildSlidingSegmentedControlNew() {
-
-    final items = <({String title, IconData icon,})>[
-      (title: "选项 1", icon: Icons.ac_unit,),
-      (title: "选项 2", icon: Icons.abc,),
-      (title: "选项 3", icon: Icons.access_alarm,),
+    final items = <({
+      String title,
+      IconData icon,
+    })>[
+      (
+        title: "选项 1",
+        icon: Icons.ac_unit,
+      ),
+      (
+        title: "选项 2",
+        icon: Icons.abc,
+      ),
+      (
+        title: "选项 3",
+        icon: Icons.access_alarm,
+      ),
     ];
 
     var current = items[0];
 
     return StatefulBuilder(
-      builder: (BuildContext context, StateSetter setState) {
+        builder: (BuildContext context, StateSetter setState) {
+      return Container(
+        // height: 56,
+        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        decoration: BoxDecoration(
+          color: Colors.green,
+          // border: Border.all(color: Colors.blue),
+          // borderRadius: BorderRadius.all(Radius.circular(0)),
+        ),
+        child: ENCupertinoSlidingSegmentedControl<
+            ({
+              String title,
+              IconData icon,
+            })>(
+          groupValue: current,
+          // children: children,
+          children: Map<
+              ({
+                String title,
+                IconData icon,
+              }),
+              Widget>.fromIterable(
+            items,
+            key: (v) => v,
+            value: (val) {
+              final e = val as ({
+                String title,
+                IconData icon,
+              });
 
-        return Container(
-          // height: 56,
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          decoration: BoxDecoration(
-            color: Colors.green,
-            // border: Border.all(color: Colors.blue),
-            // borderRadius: BorderRadius.all(Radius.circular(0)),
+              final isSelecetd = current == val;
+              final color = isSelecetd ? Colors.white : Colors.black54;
+              final icon = isSelecetd ? e.icon : e.icon;
+
+              return Container(
+                height: 32,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: Colors.transparent,
+                  border: Border.all(color: Colors.blue),
+                  borderRadius: BorderRadius.all(Radius.circular(0)),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(right: 4),
+                      child: Icon(
+                        icon,
+                        color: color,
+                      ),
+                    ),
+                    Flexible(
+                      child: Text(
+                        e.title,
+                        style: TextStyle(
+                          color: color,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
           ),
-          child: ENCupertinoSlidingSegmentedControl<({String title, IconData icon,})>(
-            groupValue: current,
-            // children: children,
-            children: Map<({String title, IconData icon,}), Widget>.fromIterable(
-              items,
-              key: (v) => v,
-              value: (val) {
-                final e = val as ({String title, IconData icon,});
+          onValueChanged: (val) {
+            if (val == null) {
+              return;
+            }
+            current = val;
+            setState(() {});
+            ddlog(current);
+          },
+          backgroundColor: Color(0xfff3F3F3),
+          thumbColor: context.primaryColor,
+          radius: Radius.circular(16),
+          padding: EdgeInsets.all(2),
+        ),
+      );
+    });
+  }
 
-                final isSelecetd = current == val;
-                final color = isSelecetd ? Colors.white : Colors.black54;
-                final icon = isSelecetd ? e.icon : e.icon;
+  Widget buildSegmentedControlNew({
+    Color? textColor,
+    Color? thumbTextColor,
+    Color? backgroundColor,
+    Color? thumbColor,
+    Radius? radius,
+    EdgeInsets? padding,
+    required ValueChanged<int> onChanged,
+  }) {
+    final items = <({
+      String title,
+      String icon,
+    })>[
+      (
+        title: "医生",
+        icon: "icon_segmented_control_doctor_gray.png",
+      ),
+      (
+        title: "健管师",
+        icon: "icon_segmented_control_carer_gray.png",
+      ),
+    ];
 
-                return Container(
-                  height: 32,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: Colors.transparent,
-                    border: Border.all(color: Colors.blue),
-                    borderRadius: BorderRadius.all(Radius.circular(0)),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
+    var current = items[0];
+
+    return StatefulBuilder(
+        builder: (BuildContext context, StateSetter setState) {
+      return Container(
+        // height: 56,
+        padding: EdgeInsets.symmetric(horizontal: 48, vertical: 0),
+        decoration: BoxDecoration(
+          color: Colors.green,
+          // border: Border.all(color: Colors.blue),
+          // borderRadius: BorderRadius.all(Radius.circular(0)),
+        ),
+        child: ENCupertinoSlidingSegmentedControl<
+            ({
+              String title,
+              String icon,
+            })>(
+          groupValue: current,
+          // children: children,
+          children: Map<
+              ({
+                String title,
+                String icon,
+              }),
+              Widget>.fromIterable(
+            items,
+            key: (v) => v,
+            value: (val) {
+              final e = val as ({
+                String title,
+                String icon,
+              });
+
+              final isSelecetd = current == val;
+
+              final color = isSelecetd
+                  ? (thumbTextColor ?? Colors.white)
+                  : (textColor ?? Color(0xff737373));
+              final icon = isSelecetd ? e.icon : e.icon;
+
+              return Container(
+                height: 32,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: Colors.transparent,
+                  // border: Border.all(color: Colors.blue),
+                  // borderRadius: BorderRadius.all(Radius.circular(0)),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    if (icon.isNotEmpty)
                       Padding(
                         padding: const EdgeInsets.only(right: 4),
-                        child: Icon(icon, color: color,),
+                        child: Image(
+                          image: icon.toAssetImage(),
+                          width: 12,
+                          height: 14,
+                          color: color,
+                        ),
                       ),
+                    if (e.title.isNotEmpty)
                       Flexible(
                         child: Text(
                           e.title,
                           style: TextStyle(
+                            fontSize: 14,
                             color: color,
                           ),
                         ),
                       ),
-                    ],
-                  ),
-                );
-              },
-            ),
-            onValueChanged: (val) {
-              if (val == null) {
-                return;
-              }
-              current = val;
-              setState(() {});
-              ddlog(current);
+                  ],
+                ),
+              );
             },
-            backgroundColor: Color(0xfff3F3F3),
-            thumbColor: context.primaryColor,
-            radius: Radius.circular(16),
-            padding: EdgeInsets.all(2),
           ),
-        );
-      }
-    );
+          onValueChanged: (val) {
+            if (val == null) {
+              return;
+            }
+            current = val;
+            onChanged(items.indexOf(val));
+            setState(() {});
+          },
+          backgroundColor: backgroundColor ?? Color(0xfff3F3F3),
+          thumbColor: thumbColor ?? context.primaryColor,
+          radius: radius ?? Radius.circular(16),
+          padding: padding ?? EdgeInsets.all(2),
+        ),
+      );
+    });
   }
-
 
   Widget buildSlidingSegmentedControl2() {
     const children = <int, Widget>{
-      0: Text("Item 1", style: TextStyle(fontSize: 15),),
-      1: Text("Item 2", style: TextStyle(fontSize: 15),),
-      2: Text("Item 3", style: TextStyle(fontSize: 15),),
+      0: Text(
+        "Item 1",
+        style: TextStyle(fontSize: 15),
+      ),
+      1: Text(
+        "Item 2",
+        style: TextStyle(fontSize: 15),
+      ),
+      2: Text(
+        "Item 3",
+        style: TextStyle(fontSize: 15),
+      ),
     };
 
     return CupertinoSlidingSegmentedControl(
@@ -290,9 +471,18 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
 
   Widget buildSlidingSegmentedControl3() {
     const children = <int, Widget>{
-      0: Text("Item 1", style: TextStyle(fontSize: 15),),
-      1: Text("Item 2", style: TextStyle(fontSize: 15),),
-      2: Text("Item 3", style: TextStyle(fontSize: 15),),
+      0: Text(
+        "Item 1",
+        style: TextStyle(fontSize: 15),
+      ),
+      1: Text(
+        "Item 2",
+        style: TextStyle(fontSize: 15),
+      ),
+      2: Text(
+        "Item 3",
+        style: TextStyle(fontSize: 15),
+      ),
     };
 
     return CupertinoSlidingSegmentedControl(
@@ -309,11 +499,24 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
     );
   }
 
-  Widget buildLineSegmentControl(Color? backgroundColor, {required Color lineColor}) {
+  Widget buildLineSegmentControl(Color? backgroundColor,
+      {required Color lineColor}) {
     const children = <int, Widget>{
-      0: Text("Item 111", style: TextStyle(fontSize: 15), textAlign: TextAlign.center,),
-      1: Text("Item 222", style: TextStyle(fontSize: 15), textAlign: TextAlign.center,),
-      2: Text("Item 333", style: TextStyle(fontSize: 15), textAlign: TextAlign.center,),
+      0: Text(
+        "Item 111",
+        style: TextStyle(fontSize: 15),
+        textAlign: TextAlign.center,
+      ),
+      1: Text(
+        "Item 222",
+        style: TextStyle(fontSize: 15),
+        textAlign: TextAlign.center,
+      ),
+      2: Text(
+        "Item 333",
+        style: TextStyle(fontSize: 15),
+        textAlign: TextAlign.center,
+      ),
     };
 
     if (backgroundColor != null) {
@@ -322,7 +525,7 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
         children: children,
         backgroundColor: backgroundColor,
         lineColor: lineColor,
-        onValueChanged: (i){
+        onValueChanged: (i) {
           setState(() {
             groupValue = int.parse("$i");
           });
@@ -337,12 +540,11 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
       lineColor: lineColor,
       // lineHeight: 5,
       // lineWidth: 50,
-      onValueChanged: (i){
+      onValueChanged: (i) {
         setState(() {
           groupValue = int.parse("$i");
         });
         ddlog(groupValue);
-
       },
     );
   }
@@ -358,7 +560,7 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
         items: items,
         // itemWidths: itemWiths,
         selectedIndex: 0,
-        onValueChanged: (index){
+        onValueChanged: (index) {
           ddlog(index);
         });
   }
@@ -374,8 +576,9 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
         itemSelectedBgColor: Colors.transparent,
         itemWidth: 70,
         itemRadius: 0,
-        itemSelectedTextStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-        onValueChanged: (index){
+        itemSelectedTextStyle:
+            TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        onValueChanged: (index) {
           ddlog(index);
         });
   }
