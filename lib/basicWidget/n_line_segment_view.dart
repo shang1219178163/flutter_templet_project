@@ -14,13 +14,13 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 
 
-enum LineSegmentStyle {
+enum NLineSegmentStyle {
   top,
   bottom,
 }
 
 ///线条指示器分段组件
-class LineSegmentView<T> extends StatefulWidget {
+class NLineSegmentView<T> extends StatefulWidget {
   
   final Map<T, Widget> children;
   
@@ -29,7 +29,7 @@ class LineSegmentView<T> extends StatefulWidget {
   final EdgeInsetsGeometry padding;
   final EdgeInsetsGeometry margin;
 
-  final LineSegmentStyle style;
+  final NLineSegmentStyle style;
 
   final Color? backgroundColor;
   final Color lineColor;
@@ -42,11 +42,11 @@ class LineSegmentView<T> extends StatefulWidget {
 
   void Function(T value) onValueChanged;
 
-  LineSegmentView({
+  NLineSegmentView({
     Key? key,
     required this.children,
     required this.groupValue,
-    this.style = LineSegmentStyle.bottom,
+    this.style = NLineSegmentStyle.bottom,
     this.backgroundColor = CupertinoColors.tertiarySystemFill,
     this.lineColor = Colors.blue,
     this.lineWidth,
@@ -61,10 +61,10 @@ class LineSegmentView<T> extends StatefulWidget {
 
 
   @override
-  _LineSegmentViewState createState() => _LineSegmentViewState();
+  _NLineSegmentViewState createState() => _NLineSegmentViewState();
 }
 
-class _LineSegmentViewState extends State<LineSegmentView> {
+class _NLineSegmentViewState extends State<NLineSegmentView> {
 
   @override
   Widget build(BuildContext context) {
@@ -107,7 +107,7 @@ class _LineSegmentViewState extends State<LineSegmentView> {
           ),
           AnimatedPositioned(
             duration: Duration(milliseconds: 200),
-            top: widget.style == LineSegmentStyle.top ? 0 : widget.height - widget.lineHeight,
+            top: widget.style == NLineSegmentStyle.top ? 0 : widget.height - widget.lineHeight,
             left: widget.lineWidth != null ? widget.groupValue*itemWidth + (itemWidth - widget.lineWidth!)*0.5 : widget.groupValue*itemWidth,
             child: Container(
               height: widget.lineHeight,

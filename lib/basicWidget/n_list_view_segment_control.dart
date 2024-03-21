@@ -1,5 +1,5 @@
 //
-//  list_view_segment_control.dart
+//  n_list_view_segment_control.dart
 //  flutter_templet_project
 //
 //  Created by shang on 10/11/21 3:08 PM.
@@ -12,9 +12,9 @@ import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:tuple/tuple.dart';
 
 // ignore: must_be_immutable (水平菜单单选器)
-class ListViewSegmentControl extends StatefulWidget {
+class NListViewSegmentControl extends StatefulWidget {
 
-  ListViewSegmentControl({
+  NListViewSegmentControl({
     Key? key,
     required this.items,
     required this.selectedIndex,
@@ -59,10 +59,10 @@ class ListViewSegmentControl extends StatefulWidget {
   void Function(int value) onValueChanged;
 
   @override
-  _ListViewSegmentControlState createState() => _ListViewSegmentControlState();
+  _NListViewSegmentControlState createState() => _NListViewSegmentControlState();
 }
 
-class _ListViewSegmentControlState extends State<ListViewSegmentControl> {
+class _NListViewSegmentControlState extends State<NListViewSegmentControl> {
 
   late final ScrollController _scrollController = ScrollController();
 
@@ -204,7 +204,7 @@ class _FoldMenuState extends State<FoldMenu> {
     required Tuple2<List<String>, int> e,
     required int row
   }) {
-    return ListViewSegmentControl(
+    return NListViewSegmentControl(
       items: e.item1,
       itemWidth: widget.itemWidth,
       selectedIndex: e.item2,
