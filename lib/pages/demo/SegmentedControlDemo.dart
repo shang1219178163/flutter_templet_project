@@ -3,8 +3,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/NSectionHeader.dart';
-import 'package:flutter_templet_project/basicWidget/line_segment_view.dart';
-import 'package:flutter_templet_project/basicWidget/list_view_segment_control.dart';
+import 'package:flutter_templet_project/basicWidget/enhance/en_sliding_segmented_control.dart';
+import 'package:flutter_templet_project/basicWidget/n_line_segment_view.dart';
+import 'package:flutter_templet_project/basicWidget/n_list_view_segment_control.dart';
+import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 
@@ -100,6 +102,9 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
         buildSlidingSegmentedControl2(),
 
         SizedBox(height: 15),
+        buildSlidingSegmentedControlNew(),
+
+        SizedBox(height: 15),
         buildSlidingSegmentedControl3(),
 
         SizedBox(height: 15),
@@ -120,6 +125,7 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
         SizedBox(height: 15),
         buildListViewHorizontal1(),
 
+        // Switch(value: value, onChanged: onChanged)
       ],
     );
   }
@@ -180,6 +186,86 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
     );
   }
 
+  Widget buildSlidingSegmentedControlNew() {
+
+    final items = <({String title, IconData icon,})>[
+      (title: "选项 1", icon: Icons.ac_unit,),
+      (title: "选项 2", icon: Icons.abc,),
+      (title: "选项 3", icon: Icons.access_alarm,),
+    ];
+
+    var current = items[0];
+
+    return StatefulBuilder(
+      builder: (BuildContext context, StateSetter setState) {
+
+        return Container(
+          // height: 56,
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          decoration: BoxDecoration(
+            color: Colors.green,
+            // border: Border.all(color: Colors.blue),
+            // borderRadius: BorderRadius.all(Radius.circular(0)),
+          ),
+          child: ENCupertinoSlidingSegmentedControl<({String title, IconData icon,})>(
+            groupValue: current,
+            // children: children,
+            children: Map<({String title, IconData icon,}), Widget>.fromIterable(
+              items,
+              key: (v) => v,
+              value: (val) {
+                final e = val as ({String title, IconData icon,});
+
+                final isSelecetd = current == val;
+                final color = isSelecetd ? Colors.white : Colors.black54;
+                final icon = isSelecetd ? e.icon : e.icon;
+
+                return Container(
+                  height: 32,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: Colors.transparent,
+                    border: Border.all(color: Colors.blue),
+                    borderRadius: BorderRadius.all(Radius.circular(0)),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 4),
+                        child: Icon(icon, color: color,),
+                      ),
+                      Flexible(
+                        child: Text(
+                          e.title,
+                          style: TextStyle(
+                            color: color,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+            onValueChanged: (val) {
+              if (val == null) {
+                return;
+              }
+              current = val;
+              setState(() {});
+              ddlog(current);
+            },
+            backgroundColor: Color(0xfff3F3F3),
+            thumbColor: context.primaryColor,
+            radius: Radius.circular(16),
+            padding: EdgeInsets.all(2),
+          ),
+        );
+      }
+    );
+  }
+
 
   Widget buildSlidingSegmentedControl2() {
     const children = <int, Widget>{
@@ -231,7 +317,7 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
     };
 
     if (backgroundColor != null) {
-      return LineSegmentView(
+      return NLineSegmentView(
         groupValue: groupValue,
         children: children,
         backgroundColor: backgroundColor,
@@ -244,7 +330,7 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
         },
       );
     }
-    return LineSegmentView(
+    return NLineSegmentView(
       groupValue: groupValue,
       children: children,
       // backgroundColor: backgroundColor,
@@ -268,7 +354,7 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
     var items = List.generate(8, (index) => "item_$index");
     var itemWiths = <double>[60, 70, 80, 90, 100, 110, 120, 130];
 
-    return ListViewSegmentControl(
+    return NListViewSegmentControl(
         items: items,
         // itemWidths: itemWiths,
         selectedIndex: 0,
@@ -281,7 +367,7 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
   Widget buildListViewHorizontal1() {
     var items = List.generate(4, (index) => "item_$index");
 
-    return ListViewSegmentControl(
+    return NListViewSegmentControl(
         items: items,
         selectedIndex: 0,
         itemBgColor: Colors.transparent,

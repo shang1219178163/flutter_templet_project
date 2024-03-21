@@ -9,7 +9,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_expansion_cross_fade.dart';
-import 'package:flutter_templet_project/basicWidget/list_view_segment_control.dart';
+import 'package:flutter_templet_project/basicWidget/n_list_view_segment_control.dart';
 import 'package:flutter_templet_project/basicWidget/NSectionHeader.dart';
 import 'package:flutter_templet_project/basicWidget/n_expansion_tile.dart';
 import 'package:flutter_templet_project/basicWidget/visible_container.dart';
@@ -186,7 +186,7 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
     var items = titles ?? List.generate(8, (index) => "item_$index");
     var itemWiths = <double>[60, 70, 80, 90, 100, 110, 120, 130];
 
-    return ListViewSegmentControl(
+    return NListViewSegmentControl(
         items: items,
         // itemWidths: itemWiths,
         selectedIndex: 0,

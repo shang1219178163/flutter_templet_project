@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/list_view_segment_control.dart';
+import 'package:flutter_templet_project/basicWidget/n_list_view_segment_control.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/alignment_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
@@ -88,7 +88,7 @@ class _CompositedTransformTargetDemoState extends State<CompositedTransformTarge
       children: [
         if(title.isNotEmpty)NText(title),
         Expanded(
-          child: ListViewSegmentControl(
+          child: NListViewSegmentControl(
             items: items,
             // itemWidths: itemWiths,
             selectedIndex: index,
