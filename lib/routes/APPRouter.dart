@@ -215,6 +215,7 @@ import 'package:flutter_templet_project/pages/demo/ScrollbarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/SearchDemo.dart';
 import 'package:flutter_templet_project/pages/demo/SegmentedButtonDemo.dart';
 import 'package:flutter_templet_project/pages/demo/SegmentedControlDemo.dart';
+import 'package:flutter_templet_project/pages/demo/SegmentedPageViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/SelectList.dart';
 import 'package:flutter_templet_project/pages/demo/SelectableTextDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ShaderMaskDemo.dart';
@@ -239,6 +240,7 @@ import 'package:flutter_templet_project/pages/demo/TextDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TextFieldDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/TextFieldLoginDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TextFieldTabDemo.dart';
+import 'package:flutter_templet_project/pages/demo/TextPaintDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TextViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TicketUiDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TimePickerDemo.dart';
@@ -682,6 +684,8 @@ class APPRouter {
   static const ntabBarPageDemo = '/ntabBarPageDemo';
   static const nTabBarViewCustomDemo = '/nTabBarViewCustomDemo';
   static const textFieldTabDemo = '/textFieldTabDemo';
+  static const textPaintDemo = '/textPaintDemo';
+  static const segmentedPageViewDemo = '/segmentedPageViewDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -1078,6 +1082,8 @@ class AppPage {
     GetPage(name: APPRouter.ntabBarPageDemo, page: () => NTabBarPageDemo(),),
     GetPage(name: APPRouter.nTabBarViewCustomDemo, page: () => NTabBarViewCustomDemo(),),
     GetPage(name: APPRouter.textFieldTabDemo, page: () => TextFieldTabDemo(),),
+    GetPage(name: APPRouter.textPaintDemo, page: () => TextPaintDemo(),),
+    GetPage(name: APPRouter.segmentedPageViewDemo, page: () => SegmentedPageViewDemo(),),
 
 
 
