@@ -529,6 +529,8 @@ var list = <Tuple2<String, String>>[
   Tuple2(APPRouter.ntabBarPageDemo, "ntabBarPageDemo", ),
   Tuple2(APPRouter.nTabBarViewCustomDemo, "nTabBarViewCustomDemo", ),
   Tuple2(APPRouter.textFieldTabDemo, "textFieldTabDemo", ),
+  Tuple2(APPRouter.textPaintDemo, "textPaintDemo", ),
+  Tuple2(APPRouter.segmentedPageViewDemo, "segmentedPageViewDemo", ),
 
 
 ];

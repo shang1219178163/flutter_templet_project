@@ -114,37 +114,33 @@ class _SliverTabbarDemoOneState extends State<SliverTabbarDemoOne>
       // These are the contents of the tab views, below the tabs.
       children: items.map((String name) {
         //SafeArea 适配刘海屏的一个widget
-        return SafeArea(
-          top: false,
-          bottom: false,
-          child: Builder(
-            builder: (BuildContext context) {
-              return CustomScrollView(
-                key: PageStorageKey<String>(name),
-                slivers: <Widget>[
-                  SliverOverlapInjector(
-                    handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
-                        context),
-                  ),
-                  SliverPadding(
-                    padding: EdgeInsets.all(10.0),
-                    sliver: SliverFixedExtentList(
-                      itemExtent: 50.0, //item高度或宽度，取决于滑动方向
-                      delegate: SliverChildBuilderDelegate(
-                            (BuildContext context, int index) {
-                          return ListTile(
-                            title:
-                            Text('Item $index, tab${tabController.index}'),
-                          );
-                        },
-                        childCount: 20,
-                      ),
+        return Builder(
+          builder: (BuildContext context) {
+            return CustomScrollView(
+              key: PageStorageKey<String>(name),
+              slivers: <Widget>[
+                SliverOverlapInjector(
+                  handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
+                      context),
+                ),
+                SliverPadding(
+                  padding: EdgeInsets.all(10.0),
+                  sliver: SliverFixedExtentList(
+                    itemExtent: 50.0, //item高度或宽度，取决于滑动方向
+                    delegate: SliverChildBuilderDelegate(
+                          (BuildContext context, int index) {
+                        return ListTile(
+                          title:
+                          Text('Item $index, tab${tabController.index}'),
+                        );
+                      },
+                      childCount: 20,
                     ),
                   ),
-                ],
-              );
-            },
-          ),
+                ),
+              ],
+            );
+          },
         );
       }).toList(),
     );
@@ -203,6 +199,7 @@ class ColoredTabBar extends StatelessWidget implements PreferredSizeWidget {
     this.height,
     this.width,
     this.labelColor,
+    this.tabBarTheme,
     required this.child,
   });
 
@@ -217,7 +214,7 @@ class ColoredTabBar extends StatelessWidget implements PreferredSizeWidget {
       // child: child,
       child: Theme(
         data: ThemeData(
-          tabBarTheme: TabBarTheme(
+          tabBarTheme: tabBarTheme ?? TabBarTheme(
             dividerColor: Colors.transparent,
             labelColor: labelColor,
             unselectedLabelColor: labelColor,
@@ -237,6 +234,8 @@ class ColoredTabBar extends StatelessWidget implements PreferredSizeWidget {
 
   final Color? labelColor;
   final Color? backgroudColor;
+  final TabBarTheme? tabBarTheme;
+
   final PreferredSizeWidget child;
 
   @override
