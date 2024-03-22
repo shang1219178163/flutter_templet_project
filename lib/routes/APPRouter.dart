@@ -178,6 +178,7 @@ import 'package:flutter_templet_project/pages/demo/NWebViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NavigationBarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NavigationRailDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NavigationToolbarDemo.dart';
+import 'package:flutter_templet_project/pages/demo/NestedScrollViewDemoThree.dart';
 import 'package:flutter_templet_project/pages/demo/NestedScrollViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NestedScrollViewDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/NestedScrollViewDemoTwo.dart';
@@ -690,6 +691,7 @@ class APPRouter {
   static const segmentedPageViewDemo = '/segmentedPageViewDemo';
   static const nPinnedTabBarPageDemo = '/nPinnedTabBarPageDemo';
   static const nRefreshListViewDemo = '/nRefreshListViewDemo';
+  static const nestedScrollViewDemoThree = '/nestedScrollViewDemoThree';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -1090,6 +1092,7 @@ class AppPage {
     GetPage(name: APPRouter.segmentedPageViewDemo, page: () => SegmentedPageViewDemo(),),
     GetPage(name: APPRouter.nPinnedTabBarPageDemo, page: () => NPinnedTabBarPageDemo(),),
     GetPage(name: APPRouter.nRefreshListViewDemo, page: () => NRefreshListViewDemo(),),
+    GetPage(name: APPRouter.nestedScrollViewDemoThree, page: () => NestedScrollViewDemoThree(),),
 
 
 
