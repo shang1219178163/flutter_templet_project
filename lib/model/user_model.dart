@@ -51,7 +51,7 @@ class UserModel {
     var data = Map<String, dynamic>();
     data['id'] = id;
     data['name'] = name;
-    data['username'] = nickName;
+    data['nickName'] = nickName;
     data['email'] = email;
     if (address != null) {
       data['address'] = address!.toJson();
