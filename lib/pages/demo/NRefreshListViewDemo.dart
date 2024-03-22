@@ -94,21 +94,22 @@ class _NRefreshListViewDemoState extends State<NRefreshListViewDemo> {
   }) async {
     await Future.delayed(Duration(milliseconds: 1500));
 
-    final chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toLowerCase().characters;
     final list = List.generate(pageSize, (index) {
-
-      final idx = index + dataList.value.length;
-      var tmp = "";
-       for (var i = 0; i < 4; i++) {
-         tmp += "${chars.characterAt(IntExt.random(max: chars.length))}";
-       }
-
       return UserModel(
-        id: idx,
+        id: IntExt.random(min: 1000, max: 9999),
         // name: "index_$idx",
-        name: tmp,
+        name: generateChars(),
       );
     });
     return list;
+  }
+
+  String generateChars({int length = 4}) {
+    final chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toLowerCase().characters;
+    var tmp = "";
+    for (var i = 0; i < length; i++) {
+      tmp += "${chars.characterAt(IntExt.random(max: chars.length))}";
+    }
+    return tmp;
   }
 }
