@@ -3,8 +3,9 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_footer_button_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_pinned_tab_bar_page.dart';
+import 'package:flutter_templet_project/basicWidget/n_sliver_persistent_header_delegate.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
-import 'package:flutter_templet_project/extension/widget_ext.dart';
+import 'package:flutter_templet_project/pages/demo/NRefreshListViewDemo.dart';
 import 'package:get/get.dart';
 
 class NPinnedTabBarPageDemo extends StatefulWidget {
@@ -19,85 +20,183 @@ class NPinnedTabBarPageDemo extends StatefulWidget {
   State<NPinnedTabBarPageDemo> createState() => _NPinnedTabBarPageDemoState();
 }
 
-class _NPinnedTabBarPageDemoState extends State<NPinnedTabBarPageDemo> {
+class _NPinnedTabBarPageDemoState extends State<NPinnedTabBarPageDemo>
+    with SingleTickerProviderStateMixin {
+
   bool get hideApp =>
       Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
 
-  final _scrollController = ScrollController();
+  late final List<({Tab tab, Widget child})> tabItems = [
+    (tab: Tab(text: "选项卡0",), child: buildList(tabIndex: 1)),
+    (tab: Tab(text: "选项卡1",), child: buildList(tabIndex: 2)),
+    (tab: Tab(text: "选项卡2",), child: buildList(tabIndex: 3)),
+    (tab: Tab(text: "选项卡3",), child: buildList(tabIndex: 4)),
+    (tab: Tab(text: "选项卡4",), child: buildList(tabIndex: 5)),
+  ];
+
+  late final tabController = TabController(length: tabItems.length, vsync: this);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: buildPinnedTabBarPage(),
-    );
-  }
-
-  Widget buildPinnedTabBarPage() {
-    final tabItems = [
-      (title: "选项卡片0", page: buildSliverFixedExtentList(tabIndex: 0)),
-      (title: "选项卡片1", page: buildSliverFixedExtentList(tabIndex: 1)),
-      (title: "选项卡片2", page: buildSliverFixedExtentList(tabIndex: 2)),
-      (title: "选项卡片3", page: buildSliverFixedExtentList(tabIndex: 3)),
-      (title: "选项卡片4", page: buildSliverFixedExtentList(tabIndex: 4)),
-    ];
-
-    return NPinnedTabBarPage(
-      title: Text("NPinnedTabBarPage"),
-      expandedHeight: 200,
-      expandedHeader: Container(
-        height: 200,
-        padding: EdgeInsets.only(top: safeAreaTop),
-        decoration: BoxDecoration(
-          color: Colors.transparent,
-          border: Border.all(color: Colors.blue),
-          borderRadius: BorderRadius.all(Radius.circular(0)),
+      body: NPinnedTabBarPage(
+        title: Text("NPinnedTabBarPage"),
+        expandedHeight: 300,
+        expandedHeader: Container(
+          decoration: BoxDecoration(
+            color: Colors.yellow,
+            border: Border.all(color: Colors.blue),
+          ),
+          child: Text(
+            "Collapsing Toolbar",
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 16.0,
+            ),
+          ),
         ),
-        child: Wrap(
-          spacing: 8,
-          runSpacing: 8,
-          children: tabItems.map((e) => Chip(label: Text(e.title))).toList(),
-        ).toColoredBox(color: Colors.green),
+        tabItems: tabItems,
       ),
-      tabItems: tabItems,
-      isScrollable: false,
-      labelPadding: const EdgeInsets.only(left: 6, right: 6),
+    );
+
+    return Scaffold(
+      body: buildPinnedTabBar(
+        title: Text("buildPinnedTabBar"),
+        expandedHeight: 300,
+        expandedHeader: Container(
+          decoration: BoxDecoration(
+            color: Colors.yellow,
+            border: Border.all(color: Colors.blue),
+          ),
+          child: Text(
+            "Collapsing Toolbar",
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 16.0,
+            ),
+          ),
+        ),
+        tabItems: tabItems,
+      ),
     );
   }
 
-  Widget buildSliverFixedExtentList({required int tabIndex}) {
-    // return SliverFillRemaining(child: buildBox(tabIndex: tabIndex));
-    return SliverPadding(
-      padding: EdgeInsets.all(10.0),
-      sliver: SliverFixedExtentList(
-        itemExtent: 50.0, //item高度或宽度，取决于滑动方向
-        delegate: SliverChildBuilderDelegate(
-          (BuildContext context, int index) {
-            return Container(
-              decoration: BoxDecoration(
-                color: Colors.transparent,
-                border: Border(bottom: BorderSide(color: Colors.black12)),
-                borderRadius: BorderRadius.all(Radius.circular(0)),
+  Widget buildPinnedTabBar({
+    required Text title,
+    List<Widget>? actions,
+    double expandedHeight = 200,
+    required Widget expandedHeader,
+    required List<({Tab tab, Widget child})> tabItems,
+    Color backgroudColor = Colors.white,
+    Color labelColor = Colors.blue,
+  }) {
+    return Scaffold(
+      body: DefaultTabController(
+        length: tabItems.length,
+        child: NestedScrollView(
+          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+
+            final top = mediaQuery.viewPadding.top + kToolbarHeight;
+            return <Widget>[
+              SliverAppBar(
+                expandedHeight: expandedHeight,
+                floating: false,
+                pinned: true,
+                title: title,
+                actions: actions,
+                flexibleSpace: FlexibleSpaceBar(
+                  background: Container(
+                    padding: EdgeInsets.only(top: top,),
+                    // decoration: BoxDecoration(
+                    //   color: Colors.green,
+                    //   border: Border.all(color: Colors.blue),
+                    // ),
+                    child: expandedHeader,
+                  ),
+                ),
               ),
-              child: ListTile(
-                title: Text('Item $index, tab${tabIndex}'),
+              NSliverPersistentHeaderBuilder(
+                pinned: true,
+                builder: (context, offset, overlapsContent) {
+
+                  final tabBar = TabBar(
+                    controller: tabController,
+                    // labelColor: Colors.black87,
+                    // unselectedLabelColor: Colors.grey,
+                    padding: EdgeInsets.zero,
+                    tabs: tabItems.map((e) => e.tab).toList(),
+                  );
+
+                  // Color backgroudColor = Colors.blue;
+                  // Color labelColor = Colors.white;
+                  //
+                  // backgroudColor = Colors.white;
+                  // labelColor = Colors.blue;
+
+                  return Material(
+                    color: backgroudColor,
+                    child: Theme(
+                      data: ThemeData(
+                        splashColor: Colors.transparent, // 点击时的水波纹颜色设置为透明
+                        highlightColor: Colors.transparent, // 点击时的背景高亮颜色设置为透明
+                        tabBarTheme: TabBarTheme(
+                          dividerColor: Colors.transparent,
+                          labelColor: labelColor,
+                          unselectedLabelColor: labelColor,
+                          indicatorColor: labelColor,
+                        ),
+                      ),
+                      child: tabBar,
+                    ),
+                  );
+                },
               ),
-            );
+            ];
           },
-          childCount: 20,
+          body: TabBarView(
+            controller: tabController,
+            children: tabItems.map((e){
+
+              return MediaQuery.removePadding(
+                context: context,
+                removeTop: true,
+                child: Builder(
+                  builder: (context) {
+                    return e.child;
+                    return buildList(tabIndex: tabController.index);
+                  }
+                ),
+              );
+            }).toList(),
+          ),
         ),
       ),
     );
   }
 
-  Widget buildBox({required int tabIndex}) {
+  Widget buildList({required int tabIndex}) {
+    if (tabIndex == 1) {
+      return NRefreshListViewDemo();
+    }
+    return ListView.builder(
+      itemBuilder: (context, index){
+        return buildCell(index: index);
+      },
+      itemCount: 20,
+    );
+  }
+
+  Widget buildCell({required int index}){
     return Container(
-      height: double.maxFinite,
       decoration: BoxDecoration(
         color: Colors.transparent,
-        border: Border.all(color: Colors.orange, width: 10),
-        borderRadius: BorderRadius.all(Radius.circular(0)),
+        border: Border(bottom: BorderSide(color: Colors.blue)),
       ),
-      child: Text('tab${tabIndex}'),
+      child: ListTile(
+        title: Text('${tabController.index}, Item #$index,'),
+      ),
     );
   }
+
+
 }

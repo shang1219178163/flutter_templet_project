@@ -49,6 +49,9 @@ class _IMChatPageState extends State<IMChatPage> with
     SafeSetStateMixin,
     BottomSheetPhrasesMixin {
 
+  bool get hideApp =>
+      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
+
   final _scrollController = ScrollController();
 
   final _inputController = TextEditingController();
@@ -85,6 +88,7 @@ class _IMChatPageState extends State<IMChatPage> with
   /// 长按菜单专用
   final List<OverlayEntry> longPressEntries = [];
 
+  final isKeyboardVisibleVN = ValueNotifier(false);
 
   @override
   void dispose() {
@@ -95,16 +99,13 @@ class _IMChatPageState extends State<IMChatPage> with
 
   @override
   void initState() {
+    super.initState();
     if (isExpand) {
       _controller.value = 1;
     }
 
-    dataList.value = List.generate(20, (index) => "index_$index");
-    super.initState();
+    initData();
   }
-
-
-  final isKeyboardVisibleVN = ValueNotifier(false);
 
   @override
   void onKeyboardChanged(bool visible) {
@@ -116,15 +117,16 @@ class _IMChatPageState extends State<IMChatPage> with
     }
   }
 
+  initData(){
+    dataList.value = List.generate(20, (index) => "index_$index");
+  }
 
   @override
   Widget build(BuildContext context) {
     // _controller.forward();
-    dataList.value = List.generate(20, (index) => "index_$index");
-
     return Scaffold(
       backgroundColor: Colors.black12,
-      appBar: AppBar(
+      appBar: hideApp ? null : AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: ['done',].map((e) => TextButton(
           child: Text(e,
@@ -202,6 +204,7 @@ class _IMChatPageState extends State<IMChatPage> with
 
         return buildRefresh(
           onRefresh: onLoad,
+          // onLoad: onRefresh,
           child: MediaQuery.removePadding(
             removeTop: true,
             removeBottom: true,
@@ -613,8 +616,14 @@ class _IMChatPageState extends State<IMChatPage> with
       ),
       onRefresh: onRefresh,
       onLoad: onLoad,
+
       child: child,
     );
+  }
+
+  onRefresh() async {
+    await Future.delayed(const Duration(milliseconds: 1500), () {});
+    initData();
   }
 
   onLoad() async {
