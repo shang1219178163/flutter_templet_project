@@ -80,8 +80,8 @@ class NSliverPersistentHeader extends StatelessWidget {
   }
 }
 
-class SliverPersistentHeaderBuilder extends SliverPersistentHeader {
-  SliverPersistentHeaderBuilder({
+class NSliverPersistentHeaderBuilder extends SliverPersistentHeader {
+  NSliverPersistentHeaderBuilder({
     Key? key,
     double max = 48,
     double min = 48,

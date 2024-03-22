@@ -82,7 +82,7 @@ class _SliverTabBarDemoState extends State<SliverTabBarDemo> with SingleTickerPr
           pinned: true,
           forceMaterialTransparency: true,
         ),
-        SliverPersistentHeaderBuilder(
+        NSliverPersistentHeaderBuilder(
           pinned: true,
           max: 200,
           min: 0,
@@ -93,7 +93,7 @@ class _SliverTabBarDemoState extends State<SliverTabBarDemo> with SingleTickerPr
             );
           }
         ),
-        SliverPersistentHeaderBuilder(
+        NSliverPersistentHeaderBuilder(
           pinned: true,
           max: 48,
           min: 48,
