@@ -63,7 +63,7 @@ typedef RequestListCallback<T> = Future<List<T>> Function(
 //
 //         return await requestList(pageNo: page, pageSize: pageSize);
 //       },
-//       itemBuilder: (BuildContext context, int index, e) {
+//       itemBuilder: (BuildContext context, int index, e, onRefresh) {
 //
 //         return InkWell(
 //           onTap: () {
