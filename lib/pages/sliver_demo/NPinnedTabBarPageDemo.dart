@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_footer_button_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_pinned_tab_bar_page.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
@@ -26,9 +27,6 @@ class _NPinnedTabBarPageDemoState extends State<NPinnedTabBarPageDemo> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: CustomSliverAppbar(),
-    );
     return Scaffold(
       body: buildPinnedTabBarPage(),
     );
@@ -58,7 +56,7 @@ class _NPinnedTabBarPageDemoState extends State<NPinnedTabBarPageDemo> {
           spacing: 8,
           runSpacing: 8,
           children: tabItems.map((e) => Chip(label: Text(e.title))).toList(),
-        ),
+        ).toColoredBox(color: Colors.green),
       ),
       tabItems: tabItems,
       isScrollable: false,
@@ -100,98 +98,6 @@ class _NPinnedTabBarPageDemoState extends State<NPinnedTabBarPageDemo> {
         borderRadius: BorderRadius.all(Radius.circular(0)),
       ),
       child: Text('tab${tabIndex}'),
-    );
-  }
-}
-
-class CustomSliverAppbar extends StatefulWidget {
-  const CustomSliverAppbar({super.key});
-
-  @override
-  _CustomSliverAppbarState createState() => _CustomSliverAppbarState();
-}
-
-class _CustomSliverAppbarState extends State<CustomSliverAppbar>
-    with SingleTickerProviderStateMixin {
-  late final _tabController = TabController(
-    initialIndex: 0,
-    length: 2,
-    vsync: this,
-  );
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: NestedScrollView(
-        floatHeaderSlivers: true,
-        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-          return <Widget>[
-            SliverAppBar(
-              title: Text(
-                "WhatsApp type sliver appbar",
-              ),
-              centerTitle: true,
-              pinned: true,
-              floating: true,
-              bottom: TabBar(
-                  indicatorColor: Colors.black,
-                  labelPadding: const EdgeInsets.only(
-                    bottom: 16,
-                  ),
-                  controller: _tabController,
-                  tabs: [
-                    Text("TAB A"),
-                    Text("TAB B"),
-                  ]),
-            ),
-          ];
-        },
-        body: TabBarView(
-          controller: _tabController,
-          children: [
-            TabA(),
-            const Center(
-              child: Text('Display Tab 2',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  @override
-  void dispose() {
-    _tabController.dispose();
-    super.dispose();
-  }
-}
-
-class TabA extends StatelessWidget {
-  const TabA({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scrollbar(
-      child: ListView.separated(
-        separatorBuilder: (context, child) => Divider(
-          height: 1,
-        ),
-        padding: EdgeInsets.all(0.0),
-        itemCount: 30,
-        itemBuilder: (context, i) {
-          return Container(
-            height: 100,
-            width: double.infinity,
-            color: Colors.primaries[Random().nextInt(Colors.primaries.length)],
-          );
-        },
-      ),
     );
   }
 }

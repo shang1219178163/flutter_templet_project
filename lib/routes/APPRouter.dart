@@ -270,6 +270,7 @@ import 'package:flutter_templet_project/pages/keyboard_attach_demo.dart';
 import 'package:flutter_templet_project/pages/navgation_bar_demo.dart';
 import 'package:flutter_templet_project/pages/neomorphism/neomorphism_home_page.dart';
 import 'package:flutter_templet_project/pages/operator_demo.dart';
+import 'package:flutter_templet_project/pages/sliver_demo/NPinnedTabBarPageDemo.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/SliverAppBarDemo.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/SliverFamilyDemo.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/SliverPersistentHeaderDemo.dart';
@@ -686,6 +687,7 @@ class APPRouter {
   static const textFieldTabDemo = '/textFieldTabDemo';
   static const textPaintDemo = '/textPaintDemo';
   static const segmentedPageViewDemo = '/segmentedPageViewDemo';
+  static const nPinnedTabBarPageDemo = '/nPinnedTabBarPageDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -1084,6 +1086,7 @@ class AppPage {
     GetPage(name: APPRouter.textFieldTabDemo, page: () => TextFieldTabDemo(),),
     GetPage(name: APPRouter.textPaintDemo, page: () => TextPaintDemo(),),
     GetPage(name: APPRouter.segmentedPageViewDemo, page: () => SegmentedPageViewDemo(),),
+    GetPage(name: APPRouter.nPinnedTabBarPageDemo, page: () => NPinnedTabBarPageDemo(),),
 
 
 

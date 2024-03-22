@@ -7,6 +7,7 @@
 //
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/pages/sliver_demo/NPinnedTabBarPageDemo.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/SliverAppBarDemoOne.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/SliverGridDemo.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/SliverListDemo.dart';
@@ -203,6 +204,10 @@ List<Tuple3<String, String, Widget>> _list = [
     '测试1',
     SliverTabbarDemoOne(),
   ),
-
+  Tuple3(
+    'NPinnedTabBarPageDemo',
+    '测试1',
+    NPinnedTabBarPageDemo(),
+  ),
 
 ];
