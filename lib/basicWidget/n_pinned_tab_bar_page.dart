@@ -27,11 +27,6 @@ class NPinnedTabBarPage extends StatefulWidget {
     this.tabAlignment = TabAlignment.center,
     this.isScrollable = false,
     this.labelPadding = const EdgeInsets.only(left: 8, right: 6),
-    // this.arguments,
-    // this.arguments,
-    // this.arguments,
-    // this.arguments,
-    // this.arguments,
   });
 
   final Text title;
@@ -69,6 +64,24 @@ class _NPinnedTabBarPageState extends State<NPinnedTabBarPage>
   }
 
   @override
+  void didUpdateWidget(covariant NPinnedTabBarPage oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.title == widget.title ||
+        oldWidget.actions == widget.actions ||
+        oldWidget.expandedHeight == widget.expandedHeight ||
+        oldWidget.expandedHeader == widget.expandedHeader ||
+        oldWidget.tabItems == widget.tabItems ||
+        oldWidget.backgroudColor == widget.backgroudColor ||
+        oldWidget.labelColor == widget.labelColor ||
+        oldWidget.tabAlignment == widget.tabAlignment ||
+        oldWidget.isScrollable == widget.isScrollable ||
+        oldWidget.labelPadding == widget.labelPadding
+    ) {
+      setState(() {});
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return buildPinnedTabBar(
       title: widget.title,
@@ -78,6 +91,9 @@ class _NPinnedTabBarPageState extends State<NPinnedTabBarPage>
       tabItems: widget.tabItems,
       backgroudColor: widget.backgroudColor,
       labelColor: widget.labelColor,
+      tabAlignment: widget.tabAlignment,
+      isScrollable: widget.isScrollable,
+      labelPadding: widget.labelPadding,
     );
   }
 
@@ -89,6 +105,9 @@ class _NPinnedTabBarPageState extends State<NPinnedTabBarPage>
     required List<({Tab tab, Widget child})> tabItems,
     Color backgroudColor = Colors.white,
     Color labelColor = Colors.blue,
+    TabAlignment tabAlignment = TabAlignment.center,
+    bool isScrollable = false,
+    EdgeInsets labelPadding = EdgeInsets.zero,
   }) {
     return DefaultTabController(
       length: tabItems.length,
@@ -125,6 +144,9 @@ class _NPinnedTabBarPageState extends State<NPinnedTabBarPage>
                   // unselectedLabelColor: Colors.grey,
                   padding: EdgeInsets.zero,
                   tabs: tabItems.map((e) => e.tab).toList(),
+                  tabAlignment: tabAlignment,
+                  isScrollable: isScrollable,
+                  labelPadding: labelPadding,
                 );
 
                 // Color backgroudColor = Colors.blue;
