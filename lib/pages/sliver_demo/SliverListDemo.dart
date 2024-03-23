@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_sliver_persistent_header_delegate.dart';
 
 class SliverListDemo extends StatefulWidget {
 
@@ -69,7 +70,7 @@ class _SliverListDemoState extends State<SliverListDemo> {
     );
   }
 
-  sectionHeader({Widget? child, String? title}) {
+  sectionHeader({required String title}) {
     return SliverToBoxAdapter(
       child: Container(
         margin: EdgeInsets.only(
@@ -77,7 +78,7 @@ class _SliverListDemoState extends State<SliverListDemo> {
           bottom: 20,
           left: 20,
         ),
-        child: child ?? (title != null ? Text(title) : null) ?? Text('SliverToBoxAdapter'),
+        child: Text(title),
       ),
     );
   }

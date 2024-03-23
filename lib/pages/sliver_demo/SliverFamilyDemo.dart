@@ -140,10 +140,10 @@ List<Tuple3<String, String, Widget>> _list = [
   ),
 
   Tuple3(
-    'SliverList、SliverFixedExtentList',
+    'SliverList',
     '常用的组合方式',
     SliverListDemo(title:
-    'SliverList、SliverFixedExtentList',
+    'SliverList',
     ),
   ),
   Tuple3(
