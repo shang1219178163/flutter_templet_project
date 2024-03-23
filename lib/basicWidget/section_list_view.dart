@@ -54,18 +54,14 @@ class _SectionListViewState<H, E> extends State<SectionListView<H,E>> {
 
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
-    return _buildBody();
-  }
-
-  Widget _buildBody() {
-    return CustomScrollView(
-      slivers: slivers,
+    return Scrollbar(
+      child: CustomScrollView(
+        slivers: slivers,
+      ),
     );
   }
 
-  Widget _buildHeader({required int section, required Widget child}) {
+  Widget buildHeader({required int section, required Widget child}) {
     if(child is SliverToBoxAdapter) {
       return child;
     }
@@ -74,7 +70,7 @@ class _SectionListViewState<H, E> extends State<SectionListView<H,E>> {
     );
   }
 
-  Widget _buildSliverList({required int section, required List<E> list}) {
+  Widget buildSliverList({required int section, required List<E> list}) {
     final items = widget.itemList[section];
     return SliverList(
         delegate: SliverChildBuilderDelegate((_, int index)
@@ -87,8 +83,8 @@ class _SectionListViewState<H, E> extends State<SectionListView<H,E>> {
     for(var i = 0; i < widget.headerList.length; i++) {
       var headerItem = widget.headerList[i];
       var items = widget.itemList[i];
-      slivers.add(_buildHeader(section: i, child: widget.headerBuilder(headerItem),));
-      slivers.add(_buildSliverList(section: i, list: items.whereType<E>().toList()));
+      slivers.add(buildHeader(section: i, child: widget.headerBuilder(headerItem),));
+      slivers.add(buildSliverList(section: i, list: items.whereType<E>().toList()));
     }
     // ddlog([widget.sectionTitles.length, slivers.length]);
 
