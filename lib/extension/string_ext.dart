@@ -61,6 +61,18 @@ extension StringExt on String{
     return result;
   }
 
+  /// 添加前缀后缀
+  String padding({String prefix = "", String suffix = "",}) {
+    var result = this;
+    if (!result.startsWith(prefix)) {
+      result = "$prefix$result";
+    }
+    if (!result.endsWith(suffix)) {
+      result = "$result$suffix";
+    }
+    return result;
+  }
+
   /// 转 Map<String, dynamic>
   Map<String, dynamic>? decodeMap({Object? Function(Object? key, Object? value)? reviver}) {
     if (this.isEmpty) {

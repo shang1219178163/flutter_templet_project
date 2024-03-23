@@ -348,7 +348,11 @@ class _JsonToDartPageState extends State<JsonToDartPage> {
   /// 转模型
   String convertModel({required String rawJson, String rootClassName = "RootModel", String classPrefix = "YY", String classSuffix = "Model"}) {
     final classGenerator = ModelGenerator(rootClassName);
-    var dartCode = classGenerator.generateDartClasses(rawJson, classPrefix: classPrefix, classSuffix: classSuffix);
+    var dartCode = classGenerator.generateDartClasses(
+        rawJson: rawJson,
+        classPrefix: classPrefix,
+        classSuffix: classSuffix,
+    );
     // debugPrint("dartCode.code:${dartCode.code}");
     return dartCode.code;
   }

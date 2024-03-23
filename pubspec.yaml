@@ -186,7 +186,9 @@ dependencies:
   json_to_dart:
     git:
       url: 'git@github.com:shang1219178163/json_to_dart.git'
-      ref: 'v1.0.0'
+#      ref: 'v1.0.0'
+      version: ">=1.0.1"
+
   isar: ^3.1.0+1
   isar_flutter_libs: ^3.1.0+1
 

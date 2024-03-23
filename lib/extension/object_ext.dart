@@ -29,7 +29,7 @@
 // }
 
 
-class ObjectEnhanceMixin {
+abstract class ObjectEnhanceMixin {
   ///运算符重载
   dynamic operator [](String key) {
     // final keys = this.toJson().keys.toList();
