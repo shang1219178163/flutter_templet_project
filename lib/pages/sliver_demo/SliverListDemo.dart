@@ -16,17 +16,60 @@ class _SliverListDemoState extends State<SliverListDemo> {
 
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title ?? "$widget"),
-        ),
-        body: createExample(),
+      appBar: AppBar(
+        title: Text(widget.title ?? "$widget"),
+      ),
+      body: buildBody(),
     );
   }
 
-  sectionHeader({Widget? child}) {
+  buildBody() {
+    List<Color> colors = Colors.primaries.sublist(5, 10);
+    var list = colors.map((e) => _buildItem(color: e)).toList();
+
+    return CustomScrollView(
+      slivers: <Widget>[
+        sectionHeader(title: 'SliverList - SliverChildListDelegate'),
+        SliverList(
+          delegate: SliverChildListDelegate(list,),
+        ),
+
+        sectionHeader(title: 'SliverList - SliverChildBuilderDelegate'),
+        SliverList(
+          delegate: SliverChildBuilderDelegate((context, index) {
+            return _buildItem(color: colors[index]);
+          },
+          childCount: colors.length
+          ),
+        ),
+
+        sectionHeader(title: 'SliverFixedExtentList - SliverChildBuilderDelegate'),
+        SliverFixedExtentList(
+          delegate: SliverChildBuilderDelegate((context, index) {
+            return _buildItem(color: colors[index]);
+          },
+            childCount: colors.length,
+          ),
+          itemExtent: 50,
+        ),
+
+        sectionHeader(title: 'SliverPrototypeExtentList - SliverChildBuilderDelegate'),
+        SliverPrototypeExtentList(
+          prototypeItem: Container(
+            height: 50,
+          ),
+          delegate: SliverChildBuilderDelegate((context, index) {
+            return _buildItem(color: colors[index]);
+          },
+            childCount: colors.length,
+          ),
+        ),
+      ],
+    );
+  }
+
+  sectionHeader({Widget? child, String? title}) {
     return SliverToBoxAdapter(
       child: Container(
         margin: EdgeInsets.only(
@@ -34,7 +77,7 @@ class _SliverListDemoState extends State<SliverListDemo> {
           bottom: 20,
           left: 20,
         ),
-        child: child ?? Text('SliverToBoxAdapter'),
+        child: child ?? (title != null ? Text(title) : null) ?? Text('SliverToBoxAdapter'),
       ),
     );
   }
@@ -46,38 +89,4 @@ class _SliverListDemoState extends State<SliverListDemo> {
     );
   }
 
-  createExample() {
-    List<Color> colors = Colors.primaries.sublist(5, 10);
-    var list = colors.map((e) => _buildItem(color: e)).toList();
-
-    return CustomScrollView(
-      slivers: <Widget>[
-        sectionHeader(child: Text('SliverList - SliverChildListDelegate')),
-        SliverList(
-          delegate: SliverChildListDelegate(list,),
-        ),
-
-        sectionHeader(child: Text('SliverList - SliverChildBuilderDelegate')),
-        SliverList(
-          delegate: SliverChildBuilderDelegate((context, index) {
-            return _buildItem(color: colors[index]);
-          },
-              childCount: colors.length
-          ),
-        ),
-
-        sectionHeader(child: Text('SliverFixedExtentList - SliverChildBuilderDelegate')),
-        SliverFixedExtentList(
-          delegate: SliverChildBuilderDelegate((context, index) {
-            return Container(
-              color: colors[index],
-            );
-          },
-            childCount: colors.length,
-          ),
-          itemExtent: 50,
-        ),
-      ],
-    );
-  }
 }

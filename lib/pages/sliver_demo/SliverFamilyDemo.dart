@@ -24,7 +24,7 @@ import 'package:flutter_templet_project/pages/sliver_demo/SliverAppBarDemo.dart'
 import 'package:flutter_templet_project/pages/sliver_demo/SliverFillRemainingDemo.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/SliverFillViewportDemo.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/SliverBaseDemo.dart';
-import 'package:flutter_templet_project/pages/sliver_demo/SliverPrototypeExtentListDemo.dart';
+
 
 class SliverFamilyDemo extends StatefulWidget {
 
@@ -178,11 +178,6 @@ List<Tuple3<String, String, Widget>> _list = [
     'SliverFillViewport',
     '每个子元素都填充满整个视图',
     SliverFillViewportDemo(),
-  ),
-  Tuple3(
-    'SliverPrototypeExtentList',
-    '由prototypeItem属性来控制所有子控件的高度',
-    SliverPrototypeExtentListDemo(),
   ),
   Tuple3(
     'StaggeredGridView',

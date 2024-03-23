@@ -23,6 +23,7 @@ class NSectionHeader extends StatelessWidget{
     this.mainAxisAlignment = MainAxisAlignment.start,
     this.mainAxisSize = MainAxisSize.max,
     this.crossAxisAlignment = CrossAxisAlignment.center,
+    this.addSliverToBoxAdapter = false,
     required this.child,
   }) : super(key: key);
 
@@ -38,11 +39,13 @@ class NSectionHeader extends StatelessWidget{
   final MainAxisSize mainAxisSize;
   final CrossAxisAlignment crossAxisAlignment;
 
+  final bool addSliverToBoxAdapter;
+
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    Widget content = Column(
       mainAxisSize: mainAxisSize,
       mainAxisAlignment: mainAxisAlignment,
       crossAxisAlignment: crossAxisAlignment,
@@ -73,6 +76,12 @@ class NSectionHeader extends StatelessWidget{
         divider ?? Divider(),
       ],
     );
+    if (addSliverToBoxAdapter) {
+      content = SliverToBoxAdapter(
+        child: content,
+      );
+    }
+    return content;
   }
 
 }
