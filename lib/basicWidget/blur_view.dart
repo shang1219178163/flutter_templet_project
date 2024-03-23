@@ -14,35 +14,36 @@ import 'package:flutter/material.dart';
 class BlurView extends StatelessWidget {
 
   BlurView({
-    Key? key,
-    this.margin, 
-    this.radius = 10, 
+    super.key,
+    this.borderRadius = BorderRadius.zero,
+    this.clipper,
+    this.clipBehavior = Clip.antiAlias,
     required this.child, 
     this.backdropFilter, 
-    this.blur
-  }) : super(key: key);
+    this.blur = 20,
+  });
 
-  final EdgeInsets? margin;
+  final BorderRadiusGeometry borderRadius;
+  final CustomClipper<RRect>? clipper;
+  final Clip clipBehavior;
 
-  final double? radius;
   final BackdropFilter? backdropFilter;
   final Widget child;
 
-  final double? blur;
+  final double blur;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: margin,
-      child: ClipRRect(
-        borderRadius: BorderRadius.all(Radius.circular(radius!)),
-        child: backdropFilter ?? BackdropFilter(
-          filter: ui.ImageFilter.blur(
-            sigmaX: blur ?? 20,
-            sigmaY: blur ?? 20,
-          ),
-          child: child,
+    return ClipRRect(
+      borderRadius: borderRadius,
+      clipBehavior: clipBehavior,
+      clipper: clipper,
+      child: backdropFilter ?? BackdropFilter(
+        filter: ui.ImageFilter.blur(
+          sigmaX: blur ?? 20,
+          sigmaY: blur ?? 20,
         ),
+        child: child,
       ),
     );
   }

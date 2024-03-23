@@ -8,6 +8,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/blur_view.dart';
+import 'package:flutter_templet_project/extension/string_ext.dart';
 
 class BlurViewDemo extends StatelessWidget {
 
@@ -37,13 +38,15 @@ class BlurViewDemo extends StatelessWidget {
     return Stack(
       fit: StackFit.expand,
       children: <Widget>[
-        Image.asset(
-          'images/bg.jpg',
+        Image(
+          image: "bg.png".toAssetImage(),
           fit: BoxFit.cover,
         ),
-        Center(
+        Container(
+          margin: EdgeInsets.symmetric(horizontal: 20),
+          alignment: Alignment.center,
           child: BlurView(
-            margin: EdgeInsets.all(8),
+            borderRadius: BorderRadius.all(Radius.circular(16)),
             blur: 25,
             child: Container(
               // color: Colors.red,
