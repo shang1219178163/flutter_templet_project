@@ -9,7 +9,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
-import 'package:flutter_templet_project/pages/PageLifecycleObserverDemo.dart';
+import 'package:flutter_templet_project/pages/demo/PageLifecycleObserverDemo.dart';
 
 class PageLifecycleFuncTest extends StatefulWidget {
 

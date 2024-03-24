@@ -23,7 +23,7 @@ import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 
 import 'package:get/get.dart';
-import 'package:flutter_templet_project/pages/APPDrawerMenuPage.dart';
+import 'package:flutter_templet_project/pages/demo/APPDrawerMenuPage.dart';
 import 'package:tuple/tuple.dart';
 
 
