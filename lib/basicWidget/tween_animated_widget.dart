@@ -27,15 +27,12 @@ class TweenAnimatedWidget<T extends Object?> extends StatefulWidget {
 }
 
 class _TweenAnimatedWidgetState<T extends Object?> extends State<TweenAnimatedWidget<T>> with SingleTickerProviderStateMixin {
-  late Animation<T> animation;
-  late AnimationController controller;
+  late AnimationController controller = AnimationController(duration: widget.duration, vsync: this);
+  late Animation<T> animation = widget.tween.animate(controller);
 
   @override
   initState() {
     super.initState();
-    controller = AnimationController(duration: widget.duration, vsync: this);
-    //图片宽高从0变到300
-    animation = widget.tween.animate(controller);
     //启动动画
     controller.forward();
   }
