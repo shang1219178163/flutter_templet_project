@@ -6,7 +6,7 @@ import 'dart:ui' show lerpDouble;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/sdk_widget_change/n_display_feature_sub_screen.dart';
+import 'package:flutter_templet_project/basicWidget/enhance/enhance_dialog_sheet/en_display_feature_sub_screen.dart';
 
 const Duration _bottomSheetEnterDuration = Duration(milliseconds: 250);
 const Duration _bottomSheetExitDuration = Duration(milliseconds: 200);
@@ -395,7 +395,7 @@ class ModalBottomSheetRouteNew<T> extends PopupRoute<T> {
   @override
   Widget buildPage(BuildContext context, Animation<double> animation,
       Animation<double> secondaryAnimation) {
-    final Widget content = DisplayFeatureSubScreenNew(
+    final Widget content = EnDisplayFeatureSubScreen(
       anchorPoint: anchorPoint,
       right: right,
       child: Builder(

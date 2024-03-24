@@ -47,10 +47,10 @@ import 'package:flutter/material.dart';
 ///
 ///  * [showDialog], which is a way to display a [DialogRoute].
 ///  * [showCupertinoDialog], which displays an iOS-style dialog.
-class DisplayFeatureSubScreenNew extends StatelessWidget {
+class EnDisplayFeatureSubScreen extends StatelessWidget {
   /// Creates a widget that positions its child so that it avoids display
   /// features.
-  const DisplayFeatureSubScreenNew({
+  const EnDisplayFeatureSubScreen({
     super.key,
     this.anchorPoint,
     this.right,

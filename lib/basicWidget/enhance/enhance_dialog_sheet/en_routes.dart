@@ -5,7 +5,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_templet_project/sdk_widget_change/n_display_feature_sub_screen.dart';
+import 'package:flutter_templet_project/basicWidget/enhance/enhance_dialog_sheet/en_display_feature_sub_screen.dart';
 
 
 /// A general dialog route which allows for customization of the dialog popup.
@@ -64,8 +64,7 @@ class RawDialogRouteNew<T> extends PopupRoute<T> {
     super.settings,
     this.anchorPoint,
     this.right,
-  })  : assert(barrierDismissible != null),
-        _pageBuilder = pageBuilder,
+  })  : _pageBuilder = pageBuilder,
         _barrierDismissible = barrierDismissible,
         _barrierLabel = barrierLabel,
         _barrierColor = barrierColor,
@@ -103,7 +102,7 @@ class RawDialogRouteNew<T> extends PopupRoute<T> {
     return Semantics(
       scopesRoute: true,
       explicitChildNodes: true,
-      child: DisplayFeatureSubScreenNew(
+      child: EnDisplayFeatureSubScreen(
         anchorPoint: anchorPoint,
         right: right,
         child: _pageBuilder(context, animation, secondaryAnimation),

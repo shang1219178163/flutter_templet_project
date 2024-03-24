@@ -19,7 +19,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/APPThemeSettings.dart';
-import 'package:flutter_templet_project/Pages/APPDrawerMenuPage.dart';
 import 'package:flutter_templet_project/Pages/APPUserCenterPage.dart';
 import 'package:flutter_templet_project/basicWidget/error_custom_widget.dart';
 import 'package:flutter_templet_project/cache/cache_service.dart';
@@ -28,6 +27,7 @@ import 'package:flutter_templet_project/extension/button_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/pages/SecondPage.dart';
 import 'package:flutter_templet_project/pages/ThirdPage.dart';
+import 'package:flutter_templet_project/pages/demo/APPDrawerMenuPage.dart';
 import 'package:flutter_templet_project/pages/demo/TabBarViewDemo.dart';
 import 'package:flutter_templet_project/pages/tabBar_tabBarView_demo.dart';
 import 'package:flutter_templet_project/provider/color_filtered_provider.dart';
