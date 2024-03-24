@@ -45,7 +45,7 @@ class BlurViewDemo extends StatelessWidget {
         Container(
           margin: EdgeInsets.symmetric(horizontal: 20),
           alignment: Alignment.center,
-          child: BlurView(
+          child: NBlurView(
             borderRadius: BorderRadius.all(Radius.circular(16)),
             blur: 25,
             child: Container(

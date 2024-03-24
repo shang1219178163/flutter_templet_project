@@ -71,7 +71,7 @@ class _APPUserCenterPageState extends State<APPUserCenterPage> with BottomSheetI
               icon: Icon(Icons.menu, color: Colors.white), //自定义图标
               onPressed: () {
                 // Scaffold.of(context).openDrawer();
-                Scaffold.of(context).openDrawer();
+                kScaffoldKey.currentState?.openDrawer();
               },
             );
           }),
