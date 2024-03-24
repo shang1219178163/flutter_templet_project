@@ -106,7 +106,9 @@ typedef RequestListCallback<T> = Future<List<T>> Function(
 class NRefreshListView<T> extends StatefulWidget {
   const NRefreshListView({
     super.key,
+    this.controller,
     this.child,
+    this.placeholder,
     required this.onRequest,
     this.pageSize = 20,
     this.pageNoInitial = 1,
@@ -119,12 +121,16 @@ class NRefreshListView<T> extends StatefulWidget {
     this.refreshController,
     this.tag,
   });
+  /// 控制器
+  final NRefreshListViewController<T>? controller;
 
   /// 子视图(为空 默认 带刷新组件的 ListView)
   final Widget? child;
 
   /// 刷新页面不变的部分,
   final Widget? cachedChild;
+
+  final Widget? placeholder;
 
   /// 每页数量
   final int pageSize;
@@ -181,8 +187,16 @@ class NRefreshListViewState<T> extends State<NRefreshListView<T>> with Automatic
   var isFirstLoad = true;
 
   @override
+  void dispose() {
+    widget.controller?._detach(this);
+    super.dispose();
+  }
+
+  @override
   void initState() {
     super.initState();
+
+    widget.controller?._attach(this);
 
     widget.onRequest(true, pageNo, widget.pageSize, null).then((value) {
       items.value = value;
@@ -197,7 +211,9 @@ class NRefreshListViewState<T> extends State<NRefreshListView<T>> with Automatic
   @override
   void didUpdateWidget(covariant NRefreshListView<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (widget.onRequest != oldWidget.onRequest ||
+    if (widget.controller != oldWidget.controller ||
+        widget.placeholder != oldWidget.placeholder ||
+        widget.onRequest != oldWidget.onRequest ||
         widget.itemBuilder != oldWidget.itemBuilder ||
         widget.separatorBuilder != oldWidget.separatorBuilder ||
         widget.cachedChild != oldWidget.cachedChild ||
@@ -223,7 +239,7 @@ class NRefreshListViewState<T> extends State<NRefreshListView<T>> with Automatic
       builder: (context, list, child) {
 
         if (list.isEmpty) {
-          return NPlaceholder(
+          return widget.placeholder ?? NPlaceholder(
             onTap: onRefresh,
           );
         }
@@ -316,5 +332,32 @@ class NRefreshListViewState<T> extends State<NRefreshListView<T>> with Automatic
       );
     }
     return child;
+  }
+}
+
+/// NRefreshListView 组件控制器,将 NRefreshListViewState 的私有属性或者方法暴漏出去
+class NRefreshListViewController<E> {
+
+  NRefreshListViewState<E>? _anchor;
+
+  List<E> get items {
+    assert(_anchor != null);
+    return _anchor!.items.value;
+  }
+
+  void onRefresh() {
+    assert(_anchor != null);
+    _anchor!.onRefresh();
+  }
+
+
+  void _attach(NRefreshListViewState<E> anchor) {
+    _anchor = anchor;
+  }
+
+  void _detach(NRefreshListViewState<E> anchor) {
+    if (_anchor == anchor) {
+      _anchor = null;
+    }
   }
 }
