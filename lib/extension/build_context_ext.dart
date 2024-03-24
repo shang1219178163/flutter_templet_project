@@ -90,6 +90,9 @@ extension BuildContextExt on BuildContext {
 
   Color get dialogBackgroundColor => theme.dialogBackgroundColor;
 
+  /// 扩展属性 Theme.of(this).colorScheme
+  ColorScheme get colorScheme => Theme.of(this).colorScheme;
+
   /// 扩展属性 MediaQuery.of(context)
   MediaQueryData get mediaQuery => MediaQuery.of(this);
 
