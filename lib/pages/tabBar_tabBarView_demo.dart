@@ -14,6 +14,7 @@ import 'package:flutter_templet_project/basicWidget/ExpandButtons/expand_layout.
 import 'package:flutter_templet_project/basicWidget/list_subtitle_cell.dart';
 import 'package:flutter_templet_project/basicWidget/app_update_card.dart';
 import 'package:flutter_templet_project/basicWidget/section_list_view.dart';
+import 'package:flutter_templet_project/extension/build_context_ext.dart';
 
 import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
@@ -178,7 +179,7 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w500,
-              color: Color(0xFF333333),
+              color: context.colorScheme.onSurface,
             ),
           ),
           subtitle: Text(data.content,
