@@ -14,29 +14,26 @@ import 'package:flutter/material.dart';
 class NFilter extends StatelessWidget {
 
   NFilter({
-    Key? key,
-    this.title,
+    super.key,
     this.borderRadius = BorderRadius.zero,
     this.clipper,
     this.clipBehavior = Clip.antiAlias,
     this.foregroundFilter,
     this.filter,
     this.child,
-  }) : super(key: key);
+  });
 
-  String? title;
+  final BorderRadius borderRadius;
 
-  BorderRadius borderRadius;
+  final CustomClipper<RRect>? clipper;
 
-  CustomClipper<RRect>? clipper;
-
-  Clip clipBehavior ;
+  final Clip clipBehavior ;
   /// 前景滤镜
-  ui.ImageFilter? foregroundFilter;
+  final ui.ImageFilter? foregroundFilter;
   /// 背景滤镜
-  ui.ImageFilter? filter;
+  final ui.ImageFilter? filter;
 
-  Widget? child;
+  final Widget? child;
 
 
   @override

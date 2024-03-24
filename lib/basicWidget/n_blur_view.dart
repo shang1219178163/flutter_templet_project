@@ -1,5 +1,5 @@
 //
-//  blur_view.dart
+//  n_blur_view.dart
 //  flutter_templet_project
 //
 //  Created by shang on 7/30/21 11:49 AM.
@@ -11,9 +11,9 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 
 /// 高斯模糊
-class BlurView extends StatelessWidget {
+class NBlurView extends StatelessWidget {
 
-  BlurView({
+  const NBlurView({
     super.key,
     this.borderRadius = BorderRadius.zero,
     this.clipper,
