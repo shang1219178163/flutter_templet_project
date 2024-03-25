@@ -223,7 +223,7 @@ class EnExpansionTile extends StatefulWidget {
   ///
   /// Used to override to the [ListTileThemeData.iconColor].
   ///
-  /// If this property is null then [EnhanceExpansionTileThemeData.iconColor] is used. If that
+  /// If this property is null then [EnhanceExpansionTileThemeData.activeColor] is used. If that
   /// is also null then the value of [ListTileThemeData.iconColor] is used.
   ///
   /// See also:
