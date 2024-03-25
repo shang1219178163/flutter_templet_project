@@ -44,6 +44,7 @@ import 'package:flutter_templet_project/pages/demo/NTargetFollowerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PageLifecycleFuncTest.dart';
 import 'package:flutter_templet_project/pages/demo/ReflectDemo.dart';
 import 'package:flutter_templet_project/pages/demo/RegExpDemo.dart';
+import 'package:flutter_templet_project/pages/demo/SegmentedControlDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/StringTransformPage.dart';
 import 'package:flutter_templet_project/pages/demo/ThemeColorDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TwoDimensionalGridViewDemo.dart';
@@ -410,7 +411,8 @@ class APPRouter {
   static const forgetPasswordPage = '/ForgetPasswordPage';
   static const dataTableDemo = '/DataTableDemo';
   static const dataTableByPaginatedDemo = '/dataTableByPaginatedDemo';
-  static const segmentControlDemo = '/segmentControlDemo';
+  static const segmentedControlDemo = '/segmentedControlDemo';
+  static const segmentedControlDemoOne = '/segmentedControlDemoOne';
   static const segmentedButtonDemo = '/SegmentedButtonDemo';
 
 
@@ -807,7 +809,8 @@ class AppPage {
     GetPage(name: APPRouter.dataTableDemo, page: () => DataTableDemo(),),
     GetPage(name: APPRouter.dataTableByPaginatedDemo, page: () => PaginatedDataTableDemo(),),
     GetPage(name: APPRouter.segmentedButtonDemo, page: () => SegmentedButtonDemo(),),
-    GetPage(name: APPRouter.segmentControlDemo, page: () => SegmentedControlDemo(),),
+    GetPage(name: APPRouter.segmentedControlDemo, page: () => SegmentedControlDemo(),),
+    GetPage(name: APPRouter.segmentedControlDemoOne, page: () => SegmentedControlDemoOne(),),
 
 
     GetPage(name: APPRouter.sliderDemo, page: () => SliderDemo(),),

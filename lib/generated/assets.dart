@@ -72,6 +72,8 @@ class Assets {
   static const String imagesIconAppleBgGrey = 'assets/images/icon_apple_bg_grey.png';
   static const String imagesIconArrowDown = 'assets/images/icon_arrow_down.png';
   static const String imagesIconArrowUp = 'assets/images/icon_arrow_up.png';
+  static const String imagesIconAvatar = 'assets/images/icon_segment_emoji.png';
+  static const String imagesIconAvatarCollect = 'assets/images/icon_segment_collect.png';
   static const String imagesIconCamera = 'assets/images/icon_camera.png';
   static const String imagesIconChineseMedicine = 'assets/images/icon_chinese_medicine.png';
   static const String imagesIconCircleHalf = 'assets/images/icon_circle_half.png';

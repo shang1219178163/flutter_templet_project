@@ -403,7 +403,10 @@ var list = <Tuple2<String, String>>[
   Tuple2(APPRouter.reorderableListViewDemo, "reorderableListViewDemo", ),
   Tuple2(APPRouter.listDismissibleDemo, "recordListDemo", ),
 
-  Tuple2(APPRouter.segmentControlDemo, "segmentControlDemo", ),
+  Tuple2(APPRouter.segmentedControlDemo, "segmentControlDemo", ),
+  Tuple2(APPRouter.segmentedControlDemoOne, "segmentControlDemoOne", ),
+
+
   Tuple2(APPRouter.segmentedButtonDemo, "SegmentedButtonDemo", ),
 
   Tuple2(APPRouter.snackBarDemo, "SnackBar", ),
