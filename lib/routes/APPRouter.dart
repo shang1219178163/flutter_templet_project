@@ -22,6 +22,7 @@ import 'package:flutter_templet_project/basicWidget/responsive_column.dart';
 import 'package:flutter_templet_project/basicWidget/upload/asset_upload_box_demo.dart';
 import 'package:flutter_templet_project/main.dart';
 import 'package:flutter_templet_project/pages/demo/APPForgetPwdPage.dart';
+import 'package:flutter_templet_project/pages/demo/ApiCreatePage.dart';
 import 'package:flutter_templet_project/pages/demo/AppLaunchPage.dart';
 import 'package:flutter_templet_project/pages/demo/AppLifecycleStateObserverDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AppRouteAwareDemo.dart';
@@ -694,6 +695,7 @@ class APPRouter {
   static const nPinnedTabBarPageDemo = '/nPinnedTabBarPageDemo';
   static const nRefreshListViewDemo = '/nRefreshListViewDemo';
   static const nestedScrollViewDemoThree = '/nestedScrollViewDemoThree';
+  static const apiCreatePage = '/apiCreatePage';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -1095,6 +1097,7 @@ class AppPage {
     GetPage(name: APPRouter.nPinnedTabBarPageDemo, page: () => NPinnedTabBarPageDemo(),),
     GetPage(name: APPRouter.nRefreshListViewDemo, page: () => NRefreshListViewDemo(),),
     GetPage(name: APPRouter.nestedScrollViewDemoThree, page: () => NestedScrollViewDemoThree(),),
+    GetPage(name: APPRouter.apiCreatePage, page: () => ApiCreatePage(),),
 
 
 
