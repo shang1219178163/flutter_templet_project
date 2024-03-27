@@ -61,6 +61,9 @@ class BaseRequestAPI {
 
   bool get shouldCache => false;
 
+  /// 接口调用地方处理异常code
+  List<String> get errorCodes => [];
+
   bool canUpdateCache(Map<String, dynamic>? map) {
     if (map == null) {
       return false;
