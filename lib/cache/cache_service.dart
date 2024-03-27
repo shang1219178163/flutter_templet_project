@@ -136,6 +136,7 @@ class CacheService {
     prefs?.setString(key, value);
   }
 
+
   String? getString(String key) {
     final result = prefs?.getString(key);
     return result;
