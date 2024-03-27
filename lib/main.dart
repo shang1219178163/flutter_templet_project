@@ -36,6 +36,7 @@ import 'package:flutter_templet_project/provider/provider_demo.dart';
 import 'package:flutter_templet_project/provider/rxDart_provider_demo.dart';
 import 'package:flutter_templet_project/routes/AppRouteObserver.dart';
 import 'package:flutter_templet_project/routes/AppRouter.dart';
+import 'package:flutter_templet_project/routes/InitialBinding.dart';
 import 'package:flutter_templet_project/util/AppLifecycleObserver.dart';
 import 'package:flutter_templet_project/util/app_util.dart';
 import 'package:flutter_templet_project/util/debug_log.dart';
@@ -155,6 +156,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Templet',
       debugShowCheckedModeBanner: false,
       locale: const Locale('zh'),
+      initialBinding: InitialBinding(),
       localizationsDelegates: [
         // AppCupertinoLocalizations.delegate,
         // ZhCupertinoLocalizations.delegate,
