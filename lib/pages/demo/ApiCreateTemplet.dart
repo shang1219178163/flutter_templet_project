@@ -8,13 +8,32 @@
 
 /// api 模板
 class ApiCreateTemplet{
+
+  static String createCopyRights({required String appScheme, required String className,}) {
+    final now = DateTime.now();
+    final nowStr = "$now".substring(0, 19);
+    final yearStr = nowStr.substring(0, 10);
+    return """
+//
+//  $className.dart
+//  $appScheme
+//
+//  Created by shang on $nowStr.
+//  Copyright © $yearStr shang. All rights reserved.
+//
+""";
+  }
   
   static String createApi({required String appScheme, required String className,}) {
+    final copyRights = createCopyRights(appScheme: appScheme, className: className);
     return """
-    
+$copyRights
     
 import 'package:$appScheme/http/request_manager.dart';
 
+/// 
+/// 
+/// 
 class $className extends BaseRequestAPI {
   $className({
     this.pageNo = 1,
@@ -29,12 +48,14 @@ class $className extends BaseRequestAPI {
   int pageSize;
 
   String? packageId;
+  
   String? servicePackageName;
+  
   String? doctorName;
 
   @override
   String get requestURI {
-    const url = '*';
+    const url = '';
     return url;
   }
 
