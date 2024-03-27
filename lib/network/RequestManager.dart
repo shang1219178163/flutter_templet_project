@@ -63,7 +63,7 @@ class RequestManager extends BaseRequestAPI{
         DebugLog.d(response.toDescription());
         return handler.next(response);
       },
-      onError: (DioError e, handler) {
+      onError: (DioException e, handler) {
         return handler.next(e);
       }
     );
@@ -203,6 +203,7 @@ class RequestManager extends BaseRequestAPI{
     dynamic queryParams,
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
+    List<String> errorCodes = const [],
   }) async {
     var formData = FormData.fromMap({
       'dirName': 'MY_APP',
@@ -214,7 +215,7 @@ class RequestManager extends BaseRequestAPI{
       queryParams: queryParams,
       data: formData,
     );
-    return _handleResponse(response: response);
+    return _handleResponse(response: response, errorCodes: errorCodes,);
   }
 
   Future<Map<String, dynamic>> download({
@@ -222,6 +223,7 @@ class RequestManager extends BaseRequestAPI{
     dynamic queryParams,
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
+    List<String> errorCodes = const [],
   }) async {
     var response = await sendRequest(
       url: url,
@@ -231,29 +233,36 @@ class RequestManager extends BaseRequestAPI{
         followRedirects: false,
       ),
     );
-    return _handleResponse(response: response);
+    return _handleResponse(response: response, errorCodes: errorCodes,);
   }
 
   Map<String, dynamic> _handleResponse({
     required Response? response,
     BaseRequestAPI? api,
+    List<String> errorCodes = const [],
   }) {
-    final result = response?.data as Map<String, dynamic>?;
-    if (result == null || result.keys.contains("code") != true) {
+    final resMap = response?.data as Map<String, dynamic>? ?? {};
+    if (resMap.isEmpty || resMap.keys.contains("code") != true) {
       return {
         "code": RequestError.serverError,
         "message": RequestError.serverError.desc,
       };
     }
 
-    if (result['code'] == 'OK') {
-      if (api?.shouldCache == true && api?.canUpdateCache(result) == true) {
-        api?.saveJsonOfCache(result);
+    final codeStr = resMap['code'];
+    if (codeStr == 'OK') {
+      if (api?.shouldCache == true && api?.canUpdateCache(resMap) == true) {
+        api?.saveJsonOfCache(resMap);
       }
-      return result;
+      return resMap;
     }
 
-    switch (result['code']) {
+    if (api?.errorCodes.contains(codeStr) == true
+        && errorCodes.contains(codeStr)) {
+      return resMap;
+    }
+
+    switch (resMap['code']) {
       case 'AUTH_TOKEN_NOT_FOUND':
       case 'AUTH_TOKENT_REQUIRED':
       case 'TOKEN_VALIDATE_ERROR':
@@ -280,9 +289,9 @@ class RequestManager extends BaseRequestAPI{
       case 'WX_GET_ACCESS_TOKEN_EXCEPTION':
         break;
       default:
-        EasyToast.showInfoToast(result['message']);
+        EasyToast.showInfoToast(resMap['message']);
         break;
     }
-    return result;
+    return resMap;
   }
 }
