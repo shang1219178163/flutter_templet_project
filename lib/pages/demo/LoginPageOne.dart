@@ -2,6 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_account_sheet.dart';
 import 'package:flutter_templet_project/basicWidget/n_origin_sheet.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
@@ -66,94 +67,25 @@ class _LoginPageOneState extends State<LoginPageOne> {
             ),
           ),
           NOriginSheet(),
-          SizedBox(height: 30),
-          Form(
-            key: _formKey,
-            autovalidateMode: AutovalidateMode.always,
-            child: Column(
-              children: [
-                TextFormField( //用户名
-                  controller: _unameController,
-                  focusNode: focusNode1,//关联focusNode1
-                  keyboardType: TextInputType.text,//键盘类型
-                  maxLength: 12,
-                  textInputAction: TextInputAction.next,//显示'下一步'
-                  textAlignVertical: TextAlignVertical.center,
-                  decoration: InputDecoration(
-                    isCollapsed: true,
-                    contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                    hintText: '请输入账号',
-                    // labelText: "账号",
-                    // contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-                    prefixIcon:Icon(Icons.perm_identity),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(4.0) //圆角大小
-                    ),
-                    suffixIcon: _unameController.text.isNotEmpty ? IconButton(
-                      icon: Icon(
-                        Icons.clear,
-                        size: 21,
-                        color: Color(0xff666666),
-                      ),
-                      onPressed: (){
-                        setState(() {
-                          _unameController.text = '';
-                          checkLoginText();
-                        });
-                      },
-                    ):null
-                  ),
-                  validator: (v) {
-                    return !_unameExp.hasMatch(v!)?'账号由6到12位数字与小写字母组成':null;
-                  },
-                  onEditingComplete: ()=>FocusScope.of(context).requestFocus(focusNode2),
-                  onChanged: (v){
-                    checkLoginText();
-                    setState(() {});
-                  },
-                ),
-                // SizedBox(height: 15.0),
-                TextFormField( //密码
-                  controller: _pwdController,
-                  focusNode: focusNode2,//关联focusNode1
-                  obscureText: isEye, //密码类型 内容用***显示
-                  maxLength: 12,
-                  textInputAction: TextInputAction.done, //显示'完成'
-                  textAlignVertical: TextAlignVertical.center,
-                  decoration: InputDecoration(
-                    isCollapsed: true,
-                    contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                    hintText: '请输入密码',
-                    // labelText: '密码',
-                    // contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-                    prefixIcon:Icon(Icons.lock),
-                    // border: OutlineInputBorder(
-                    //     borderRadius: BorderRadius.circular(40.0)
-                    // ),
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                        Icons.remove_red_eye,
-                        size: 21,
-                      ),
-                      onPressed: (){
-                        setState(() {
-                          isEye = !isEye;
-                        });
-                      },
-                    )
-                  ),
-                  validator:(v){
-                    return !_pwdExp.hasMatch(v!)?'密码由6到12位数字与小写字母组成':null;
-                  },
-                  onChanged: (v){
-                    checkLoginText();
-                    setState(() {});
-                  },
-                  onEditingComplete: onLogin, //'完成'回调
-                )
-              ],
-            ),
+          NAccountSheet(
+            items: [
+              "18729742696",
+              "18766668888",
+            ],
+            selectedItem: _unameController.text,
+            onChanged: (String value) {
+              _unameController.text = value;
+              // setState(() {});
+            },
+            selecetdCb: (String e) {
+              return e.isEmpty ? "请选择账号" : e;
+            },
+            titleCb: (String e) {
+              return e;
+            },
           ),
+          SizedBox(height: 30),
+          buildInputBox(),
           SizedBox(height: 25),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
@@ -184,6 +116,96 @@ class _LoginPageOneState extends State<LoginPageOne> {
     //   childrens.add(Loadding());
     // }
     return Stack(children: childrens);
+  }
+
+  Widget buildInputBox() {
+    return Form(
+      key: _formKey,
+      autovalidateMode: AutovalidateMode.always,
+      child: Column(
+        children: [
+          TextFormField( //用户名
+            controller: _unameController,
+            focusNode: focusNode1,//关联focusNode1
+            keyboardType: TextInputType.text,//键盘类型
+            maxLength: 12,
+            textInputAction: TextInputAction.next,//显示'下一步'
+            textAlignVertical: TextAlignVertical.center,
+            decoration: InputDecoration(
+                isCollapsed: true,
+                contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                hintText: '请输入账号',
+                // labelText: "账号",
+                // contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                prefixIcon:Icon(Icons.perm_identity),
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(4.0) //圆角大小
+                ),
+                suffixIcon: _unameController.text.isNotEmpty ? IconButton(
+                  icon: Icon(
+                    Icons.clear,
+                    size: 21,
+                    color: Color(0xff666666),
+                  ),
+                  onPressed: (){
+                    setState(() {
+                      _unameController.text = '';
+                      checkLoginText();
+                    });
+                  },
+                ):null
+            ),
+            validator: (v) {
+              return !_unameExp.hasMatch(v!)?'账号由6到12位数字与小写字母组成':null;
+            },
+            onEditingComplete: ()=>FocusScope.of(context).requestFocus(focusNode2),
+            onChanged: (v){
+              checkLoginText();
+              setState(() {});
+            },
+          ),
+          // SizedBox(height: 15.0),
+          TextFormField( //密码
+            controller: _pwdController,
+            focusNode: focusNode2,//关联focusNode1
+            obscureText: isEye, //密码类型 内容用***显示
+            maxLength: 12,
+            textInputAction: TextInputAction.done, //显示'完成'
+            textAlignVertical: TextAlignVertical.center,
+            decoration: InputDecoration(
+                isCollapsed: true,
+                contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                hintText: '请输入密码',
+                // labelText: '密码',
+                // contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                prefixIcon:Icon(Icons.lock),
+                // border: OutlineInputBorder(
+                //     borderRadius: BorderRadius.circular(40.0)
+                // ),
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    Icons.remove_red_eye,
+                    size: 21,
+                  ),
+                  onPressed: (){
+                    setState(() {
+                      isEye = !isEye;
+                    });
+                  },
+                )
+            ),
+            validator:(v){
+              return !_pwdExp.hasMatch(v!)?'密码由6到12位数字与小写字母组成':null;
+            },
+            onChanged: (v){
+              checkLoginText();
+              setState(() {});
+            },
+            onEditingComplete: onLogin, //'完成'回调
+          )
+        ],
+      ),
+    );
   }
 
   // 异步操作
