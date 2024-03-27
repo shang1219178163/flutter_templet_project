@@ -1,0 +1,20 @@
+
+import 'package:flutter_templet_project/routes/APPRouter.dart';
+import 'package:get/get.dart';
+
+class NavigatorUtil {
+
+  /// 返回登录页
+  static toLoginPage() {
+    // toPage(APPRouter.loginPage);
+    if (Get.currentRoute != APPRouter.loginPage) {
+      Get.toNamed(APPRouter.loginPage);
+    }
+  }
+
+  static toPage(String page, ) {
+    if (Get.currentRoute != page) {
+      Get.toNamed(page);
+    }
+  }
+}

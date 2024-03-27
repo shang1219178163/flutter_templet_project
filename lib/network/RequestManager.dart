@@ -16,24 +16,26 @@ import 'package:flutter_templet_project/network/RequestError.dart';
 import 'package:flutter_templet_project/network/base_request_api.dart';
 import 'package:flutter_templet_project/network/dio_ext.dart';
 import 'package:flutter_templet_project/network/proxy/dio_proxy.dart';
+import 'package:flutter_templet_project/routes/APPRouter.dart';
+import 'package:flutter_templet_project/routes/NavigatorUtil.dart';
 import 'package:flutter_templet_project/util/debug_log.dart';
-import 'package:flutter_templet_project/vendor/easy_toast.dart';
 
 
-class RequestManager extends BaseRequestAPI{
+class RequestManager extends BaseRequestAPI {
   // static const BASE_URL = "";
   static const CODE_SUCCESS = 200;
   static const CODE_TIME_OUT = -1;
 
   // 私有构造器
   RequestManager._();
+
   // 静态变量指向自身
   static final RequestManager _instance = RequestManager._();
+
   // 方案1：工厂构造方法获得实例变量
   factory RequestManager() => _instance;
 
   String? get token => CacheService().token;
-
 
   // Dio _dio = Dio();
   Dio getDio() {
@@ -47,11 +49,10 @@ class RequestManager extends BaseRequestAPI{
     options.headers = {
       'token': token,
       'Content-Type': 'application/json',
-      'Connection':"keep-alive",
+      'Connection': "keep-alive",
       'terminal': '*',
     };
     dio.options = options;
-
 
     final interceptor = InterceptorsWrapper(
       onRequest: (RequestOptions options, handler) {
@@ -65,10 +66,12 @@ class RequestManager extends BaseRequestAPI{
       },
       onError: (DioException e, handler) {
         return handler.next(e);
-      }
+      },
     );
     dio.interceptors.add(interceptor);
-    DioProxy.setProxy(dio);/// 添加抓包代理
+    DioProxy.setProxy(dio);
+
+    /// 添加抓包代理
     return dio;
   }
 
@@ -133,37 +136,43 @@ class RequestManager extends BaseRequestAPI{
     try {
       switch (method) {
         case HttpMethod.GET:
-          return await getDio().get<Map<String, dynamic>>(path,
-              queryParameters: queryParams,
-              options: options,
+          return await getDio().get<Map<String, dynamic>>(
+            path,
+            queryParameters: queryParams,
+            options: options,
           );
         case HttpMethod.PUT:
-          return await getDio().put<Map<String, dynamic>>(path,
-              queryParameters: queryParams,
-              data: data,
-              options: options,
+          return await getDio().put<Map<String, dynamic>>(
+            path,
+            queryParameters: queryParams,
+            data: data,
+            options: options,
           );
         case HttpMethod.POST:
-          return await getDio().post<Map<String, dynamic>>(path,
-              queryParameters: queryParams,
-              data: data,
-              options: options,
+          return await getDio().post<Map<String, dynamic>>(
+            path,
+            queryParameters: queryParams,
+            data: data,
+            options: options,
           );
         case HttpMethod.DELETE:
-          return await getDio().delete<Map<String, dynamic>>(path,
-              queryParameters: queryParams,
-              data: data,
-              options: options,
+          return await getDio().delete<Map<String, dynamic>>(
+            path,
+            queryParameters: queryParams,
+            data: data,
+            options: options,
           );
         case HttpMethod.UPLOAD:
           {
             assert(filePath?.isNotEmpty == true, "上传文件路径不能为空");
-            return await getDio().post(path,
+            return await getDio().post(
+              path,
               queryParameters: queryParams,
-              data: data ?? FormData.fromMap({
-                'dirName': 'APP',
-                'files': await MultipartFile.fromFile(filePath!),
-              }),
+              data: data ??
+                  FormData.fromMap({
+                    'dirName': 'APP',
+                    'files': await MultipartFile.fromFile(filePath!),
+                  }),
               options: options,
               onSendProgress: onSendProgress,
               onReceiveProgress: onReceiveProgress,
@@ -171,25 +180,27 @@ class RequestManager extends BaseRequestAPI{
           }
         case HttpMethod.DOWNLOAD:
           {
-            return await getDio().get(path,
+            return await getDio().get(
+              path,
               queryParameters: queryParams,
               data: FormData.fromMap({
                 'dirName': 'APP',
                 'files': await MultipartFile.fromFile(filePath!),
               }),
-              options: options ?? Options(
-                responseType: ResponseType.bytes,
-                followRedirects: false,
-              ),
+              options: options ??
+                  Options(
+                    responseType: ResponseType.bytes,
+                    followRedirects: false,
+                  ),
               onReceiveProgress: onReceiveProgress,
             );
           }
-          default:
-          // BrunoUti.showInfoToast('请求方式错误');
+        default:
+        // BrunoUti.showInfoToast('请求方式错误');
       }
-    } on DioError catch (e) {
-        // final message = RequestMsg.statusCodeMap['${e.response?.statusCode}']
-        //     ?? RequestMsg.networkErrorSeverMsg;
+    } on DioException catch (e) {
+      // final message = RequestMsg.statusCodeMap['${e.response?.statusCode}']
+      //     ?? RequestMsg.networkErrorSeverMsg;
       // BrunoUti.showInfoToast(message);
     } on Exception catch (e) {
       // BrunoUti.showInfoToast(e.toString());
@@ -215,7 +226,10 @@ class RequestManager extends BaseRequestAPI{
       queryParams: queryParams,
       data: formData,
     );
-    return _handleResponse(response: response, errorCodes: errorCodes,);
+    return _handleResponse(
+      response: response,
+      errorCodes: errorCodes,
+    );
   }
 
   Future<Map<String, dynamic>> download({
@@ -233,7 +247,10 @@ class RequestManager extends BaseRequestAPI{
         followRedirects: false,
       ),
     );
-    return _handleResponse(response: response, errorCodes: errorCodes,);
+    return _handleResponse(
+      response: response,
+      errorCodes: errorCodes,
+    );
   }
 
   Map<String, dynamic> _handleResponse({
@@ -257,40 +274,19 @@ class RequestManager extends BaseRequestAPI{
       return resMap;
     }
 
-    if (api?.errorCodes.contains(codeStr) == true
-        && errorCodes.contains(codeStr)) {
+    if (api?.errorCodes.contains(codeStr) == true ||
+        errorCodes.contains(codeStr)) {
       return resMap;
     }
 
-    switch (resMap['code']) {
-      case 'AUTH_TOKEN_NOT_FOUND':
-      case 'AUTH_TOKENT_REQUIRED':
-      case 'TOKEN_VALIDATE_ERROR':
-      case 'TOKEN_REQUIRED':
-      // 此方法用于账号被踢时
-      // 防止多个接口报token失效，重复进入登录页面
-      //   CacheService().remove(CACHE_TOKEN);
-      //   if (checkValve) return;
-      //   checkValve = true;
-      //   Timer(const Duration(seconds: 8), () {
-      //     checkValve = false;
-      //   });
-        // 延迟，保证获取到_context
-        Future.delayed(Duration.zero, () {
-          // 重新登录
-          // NavigatorUtil.goLoginRemovePage(_context);
-        });
-        break;
-      case 'LOGIN_ID_FORBID_UPDATE':
-        EasyToast.showInfoToast('该手机号已被绑定');
-        break;
-    //  微信授权时手机号是否存在
-      case 'USER_LOGIN_INFO_NOT_FOUND':
-      case 'WX_GET_ACCESS_TOKEN_EXCEPTION':
-        break;
-      default:
-        EasyToast.showInfoToast(resMap['message']);
-        break;
+    if ([
+      'AUTH_TOKEN_NOT_FOUND',
+      'AUTH_TOKENT_REQUIRED',
+      'TOKEN_VALIDATE_ERROR',
+      'TOKEN_REQUIRED',
+    ].contains(codeStr)) {
+      // 此方法用于账号被踢时,token失效
+      NavigatorUtil.toLoginPage();
     }
     return resMap;
   }

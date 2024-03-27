@@ -22,3 +22,15 @@ enum RequestError{
   const RequestError(this.desc);
   final String desc;
 }
+
+
+enum RequestStatusCode{
+  code401("校验失败!"),
+  code403("无权限访问!"),
+  code404("404未找到!"),
+  code500("服务器内部错误!"),
+  code502("服务器内部错误!");
+
+  const RequestStatusCode(this.desc);
+  final String desc;
+}
