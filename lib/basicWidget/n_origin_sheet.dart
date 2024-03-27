@@ -8,6 +8,7 @@
 
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_textfield.dart';
 import 'package:flutter_templet_project/cache/cache_service.dart';
@@ -51,7 +52,7 @@ class _NOriginSheetState extends State<NOriginSheet> {
 
   /// 域名选择
   Widget buildOriginSheet() {
-    if (currentEnv == APPEnvironment.prod) {
+    if (currentEnv == APPEnvironment.prod && kReleaseMode) {
       return const SizedBox();
     }
 
@@ -97,6 +98,10 @@ class _NOriginSheetState extends State<NOriginSheet> {
                     },
                     title: Text(e.name.toString()),
                     subtitle: Text(e.origin),
+                    trailing: Icon(
+                      Icons.check,
+                      color: currentEnv == e ? Colors.blue : Colors.transparent,
+                    ),
                   );
                 }).toList(),
               );
