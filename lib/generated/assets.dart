@@ -49,6 +49,7 @@ class Assets {
   static const String dataCarModels = 'assets/data/car_models.json';
   static const String dataChina = 'assets/data/china.json';
   static const String dataContacts = 'assets/data/contacts.json';
+  static const String dataRequestApiTemplet = 'assets/data/ApiCreateTemplet.dart';
   static const String images404 = 'assets/images/404.png';
   static const String imagesAvatar = 'assets/images/avatar.png';
   static const String imagesBg = 'assets/images/bg.png';
@@ -72,8 +73,6 @@ class Assets {
   static const String imagesIconAppleBgGrey = 'assets/images/icon_apple_bg_grey.png';
   static const String imagesIconArrowDown = 'assets/images/icon_arrow_down.png';
   static const String imagesIconArrowUp = 'assets/images/icon_arrow_up.png';
-  static const String imagesIconAvatar = 'assets/images/icon_segment_emoji.png';
-  static const String imagesIconAvatarCollect = 'assets/images/icon_segment_collect.png';
   static const String imagesIconCamera = 'assets/images/icon_camera.png';
   static const String imagesIconChineseMedicine = 'assets/images/icon_chinese_medicine.png';
   static const String imagesIconCircleHalf = 'assets/images/icon_circle_half.png';
@@ -111,6 +110,8 @@ class Assets {
   static const String imagesIconQuote = 'assets/images/icon_quote.png';
   static const String imagesIconRevoke = 'assets/images/icon_revoke.png';
   static const String imagesIconSearch = 'assets/images/icon_search.png';
+  static const String imagesIconSegmentCollect = 'assets/images/icon_segment_collect.png';
+  static const String imagesIconSegmentEmoji = 'assets/images/icon_segment_emoji.png';
   static const String imagesIconSegmentedControlCarerGray = 'assets/images/icon_segmented_control_carer_gray.png';
   static const String imagesIconSegmentedControlCarerWhite = 'assets/images/icon_segmented_control_carer_white.png';
   static const String imagesIconSegmentedControlDoctorGray = 'assets/images/icon_segmented_control_doctor_gray.png';
