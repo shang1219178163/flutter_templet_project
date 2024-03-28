@@ -1,7 +1,12 @@
 
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_resize.dart';
+import 'package:flutter_templet_project/basicWidget/n_resize_switch.dart';
+import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
+import 'package:flutter_templet_project/extension/widget_ext.dart';
 
 class SwitchDemo extends StatefulWidget {
 
@@ -52,7 +57,6 @@ class _SwitchDemoState extends State<SwitchDemo> {
     return Column(
       children: [
         Switch(
-          // activeThumbImage: Image,
           value: value,
           onChanged: (val){
             value = val;
@@ -76,6 +80,26 @@ class _SwitchDemoState extends State<SwitchDemo> {
             value = val;
             setState(() {});
           },
+        ),
+        NResizeSwitch(
+          width: 40,
+          height: 25,
+          value: value,
+          onChanged: (val){
+            value = val;
+            setState(() {});
+          },
+        ),
+        NResize(
+          width: 40,
+          height: 25,
+          child: CupertinoSwitch(
+            value: value,
+            onChanged: (bool val) {
+              value = val;
+              setState(() {});
+            },
+          ),
         ),
       ],
     );
