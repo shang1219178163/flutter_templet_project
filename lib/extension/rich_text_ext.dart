@@ -6,29 +6,28 @@
 //  Copyright © 7/31/21 shang. All rights reserved.
 //
 
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:tuple/tuple.dart';
 
-extension RichTextExt on RichText{
-
+extension RichTextExt on RichText {
   /// List<TextSpan> by [String text], [Map<String, String> linkMap], prefix = "《", suffix = "》"
-  static List<TextSpan> createTextSpans(BuildContext context, {
+  static List<TextSpan> createTextSpans({
     required String text,
     Map<String, String>? linkMap,
     String prefix = "《",
     String suffix = "》",
     TextStyle? style,
     TextStyle? linkStyle,
-    required void Function(String key, String? value) onTap
+    required void Function(String key, String? value) onTap,
   }) {
     assert(text.isNotEmpty && prefix.isNotEmpty && suffix.isNotEmpty);
 
     linkMap?.forEach((key, value) {
-      assert(key.startsWith(prefix) && key.endsWith(suffix) && text.contains(key));
+      assert(
+          key.startsWith(prefix) && key.endsWith(suffix) && text.contains(key));
     });
 
     final origin = '$prefix[^$prefix$suffix]+$suffix';
@@ -40,24 +39,21 @@ extension RichTextExt on RichText{
 
     var textSpans = list
         .map((e) => !titles.contains("$prefix$e$suffix")
-        ? TextSpan(text: e, style: style)
-        : TextSpan(
-      text: "$prefix$e$suffix",
-      style: linkStyle ??
-          TextStyle(color: Theme.of(context).colorScheme.primary),
-      recognizer: TapGestureRecognizer()
-        ..onTap = () {
-          onTap("$prefix$e$suffix", linkMap?["$prefix$e$suffix"]);
-        },
-    )).toList();
+            ? TextSpan(text: e, style: style)
+            : TextSpan(
+                text: "$prefix$e$suffix",
+                style: linkStyle ?? TextStyle(color: Colors.blue),
+                recognizer: TapGestureRecognizer()
+                  ..onTap = () {
+                    onTap("$prefix$e$suffix", linkMap?["$prefix$e$suffix"]);
+                  },
+              ))
+        .toList();
     return textSpans;
   }
-
 }
 
-
-extension TextSpanExt on TextSpan{
-
+extension TextSpanExt on TextSpan {
   /// 二次赋值
   TextSpan copyWith({
     String? text,
@@ -73,17 +69,16 @@ extension TextSpanExt on TextSpan{
   }) {
     final content = text ?? this.text;
 
-    TapGestureRecognizer? reco;
+    TapGestureRecognizer? gesture;
     if (onTap != null) {
-      reco = TapGestureRecognizer()
-        ..onTap = () => onTap.call(content);
+      gesture = TapGestureRecognizer()..onTap = () => onTap.call(content);
     }
 
     return TextSpan(
       text: content,
       children: children ?? this.children,
       style: style ?? this.style,
-      recognizer: reco ?? recognizer ?? this.recognizer,
+      recognizer: gesture ?? recognizer ?? this.recognizer,
       onEnter: onEnter ?? this.onEnter,
       onExit: onExit ?? this.onExit,
       semanticsLabel: semanticsLabel ?? this.semanticsLabel,
@@ -91,5 +86,4 @@ extension TextSpanExt on TextSpan{
       spellOut: spellOut ?? this.spellOut,
     );
   }
-
 }

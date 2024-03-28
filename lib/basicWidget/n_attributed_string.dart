@@ -62,7 +62,7 @@ class NAttributedString{
     TextStyle? linkStyle,
     required void Function(String key, String? value) onTap
   }) {
-    return RichTextExt.createTextSpans(context,
+    return RichTextExt.createTextSpans(
       text: text,
       linkMap: linkMap,
       prefix: prefix,

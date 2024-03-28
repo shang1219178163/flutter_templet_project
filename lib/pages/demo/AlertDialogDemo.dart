@@ -850,7 +850,7 @@ xxxx十分重视用户权利及隐私政策并严格按照相关法律法规的�
           //       ddlog(value);
           //     }
           // ).textSpans,
-          children: RichTextExt.createTextSpans(context,
+          children: RichTextExt.createTextSpans(
               text: text,
               linkMap: linkMap,
               onTap: (key, value) {
