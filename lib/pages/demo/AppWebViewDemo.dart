@@ -192,6 +192,7 @@ Page resource error:
     }
     // #enddocregion platform_features
 
+    controller.enableZoom(false);
     _controller = controller;
   }
 

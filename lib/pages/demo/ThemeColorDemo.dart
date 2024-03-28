@@ -92,10 +92,8 @@ class _ThemeColorDemoState extends State<ThemeColorDemo> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: ['change',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
+        actions: [Icon(Icons.change_circle_outlined),].map((e) => IconButton(
+          icon: e,
           onPressed: () {
             APPThemeService().changeTheme();
           },

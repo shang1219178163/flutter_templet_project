@@ -7,6 +7,7 @@ import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/provider/color_filtered_provider.dart';
+import 'package:flutter_templet_project/routes/APPRouter.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:tuple/tuple.dart';
@@ -29,7 +30,7 @@ class _APPDrawerMenuPageState extends State<APPDrawerMenuPage> {
     Tuple3(Icons.settings, "设置", "setting"),
     Tuple3(Icons.share, "分享", "share"),
     Tuple3(Icons.open_in_new, "退出", "exit"),
-
+    Tuple3(Icons.color_lens_outlined, "主题色", APPRouter.themeColorDemo),
   ];
 
   bool isGrey = false;

@@ -5,12 +5,12 @@ import 'package:flutter/material.dart';
 class NFutureBuilder<T> extends StatelessWidget {
 
   const NFutureBuilder({
-  	Key? key,
+    super.key,
     required this.future,
     required this.builder,
     this.errorBuilder,
     this.loadingBuilder,
-  }) : super(key: key);
+  });
 
   final Future<T>? future;
   final Widget Function(T data) builder;
@@ -32,14 +32,13 @@ class NFutureBuilder<T> extends StatelessWidget {
           // final response = snapshot.data/(1024 *1024);
           // final desc = response.toStringAsFixed(2) + "MB";
           // return Text(desc);
-        } else {
-          final indicator = FractionallySizedBox(
-            widthFactor: 0.5,
-            heightFactor: 0.5,
-            child: CircularProgressIndicator(),
-          );
-          return loadingBuilder?.call() ?? indicator;
         }
+        final indicator = FractionallySizedBox(
+          widthFactor: 0.5,
+          heightFactor: 0.5,
+          child: CircularProgressIndicator(),
+        );
+        return loadingBuilder?.call() ?? indicator;
       },
     );
   }
