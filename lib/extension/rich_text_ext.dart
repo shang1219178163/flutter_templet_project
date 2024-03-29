@@ -111,13 +111,13 @@ extension TextSpanExt on TextSpan {
     String? semanticsLabel,
     Locale? locale,
     bool? spellOut,
-    ValueChanged<String?>? onTap,
+    ValueChanged<String?>? onLink,
   }) {
     final content = text ?? this.text;
 
     TapGestureRecognizer? gesture;
-    if (onTap != null) {
-      gesture = TapGestureRecognizer()..onTap = () => onTap.call(content);
+    if (onLink != null) {
+      gesture = TapGestureRecognizer()..onTap = () => onLink.call(content);
     }
 
     return TextSpan(
