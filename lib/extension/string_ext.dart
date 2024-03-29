@@ -190,6 +190,13 @@ extension StringExt on String{
     return int.tryParse(this);
   }
 
+  /// 用多个字符串分割文本
+  List<String> splitBySet(Set<String> set) {
+    var pattern = set.map((d) => RegExp.escape(d)).join('|');
+    var parts = split(RegExp(pattern, multiLine: true));
+    return parts;
+  }
+
   ///解析
   static parseResponse(dynamic data) {
     try {
