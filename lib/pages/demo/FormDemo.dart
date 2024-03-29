@@ -87,6 +87,8 @@ class _FormDemoState extends State<FormDemo> {
 
   final resultVN = ValueNotifier("");
 
+  String text = "字段【执业版APP】核心指标&电子病历，N类（数值类）字段历史记录统计可视化趋势图支持拉取更多历史数据;核心指标&电子病历";
+  List<String> delimiters = ['APP', '指标', '电子', '数据', '字段', '类'];
 
   @override
   Widget build(BuildContext context) {
@@ -107,41 +109,9 @@ class _FormDemoState extends State<FormDemo> {
   onPressed() {
     final isSame = items[1].controller == items[1].controller;
     ddlog("isSame: $isSame");
-
-    String text = 'Hello! This,is;a:test-string';
-    List<String> delimiters = [',', ';', ':', '-', ]; // List of delimiters
-    delimiters = ['i', ':', '-', ]; // List of delimiters
-
-    text = "字段【执业版APP】核心指标&电子病历，N类（数值类）字段历史记录统计可视化趋势图支持拉取更多历史数据;核心指标&电子病历";
-    delimiters = ['APP', '指标', '电子', '数据', '字段', '类'];
-
-    // Regular expression pattern to match any of the delimiters
-    String pattern = delimiters.map((d) => RegExp.escape(d)).join('|');
-    final regExp = RegExp(pattern);
-    List<String> parts = text.split(regExp);
-    // ddlog("parts: $parts");
-
-    final matchs = regExp.allMatches(text);
-    final match = matchs.map((e) => e.group(0)).toList();
-    var matchStr = match.join("_");
-    ddlog("${matchs.length},${matchStr}"); // chat
   }
 
   buildBody() {
-    onPressed();
-
-    String text = 'Hello! This,is;a:test-string';
-    List<String> delimiters = [',', ';', ':', '-', ' ']; // List of delimiters
-
-    text = "字段【执业版APP】核心指标&电子病历，N类（数值类）字段历史记录统计可视化趋势图支持拉取更多历史数据;核心指标&电子病历";
-    delimiters = ['APP', '指标', '电子', '数据', '字段', '类'];
-
-    final linkMap = <String, String>{};
-    for (var i = 0; i < delimiters.length; i++) {
-      final key = delimiters[i];
-      linkMap[key] = "https://baike.sogou.com/v269089.htm?ch=zhihu.topic";
-    }
-
     return Scrollbar(
       controller: _scrollController,
       child: SingleChildScrollView(
