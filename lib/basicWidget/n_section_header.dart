@@ -17,7 +17,7 @@ class NSectionHeader extends StatelessWidget{
     this.title = '',
     this.text,
     this.style = const TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
-    this.padding = const EdgeInsets.all(8),
+    this.padding = const EdgeInsets.all(16),
     this.alignment = Alignment.centerLeft,
     this.divider,
     this.mainAxisAlignment = MainAxisAlignment.start,

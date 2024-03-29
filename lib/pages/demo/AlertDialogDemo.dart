@@ -853,7 +853,7 @@ xxxx十分重视用户权利及隐私政策并严格按照相关法律法规的�
           children: RichTextExt.createTextSpans(
             text: text,
             textTaps: linkMap.keys.toList(),
-   onLink    onLink: (textTap){
+            onLink: (textTap){
               ddlog(textTap);
             },
           )
