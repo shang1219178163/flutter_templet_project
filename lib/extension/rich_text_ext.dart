@@ -18,8 +18,8 @@ extension RichTextExt on RichText {
   /// textTaps 高亮字符串数组
   /// style 段落样式
   /// linkStyle 高亮样式
-  /// prefix 切割符号,避免和文章包含字符窜重复
-  /// suffix 切割符号,避免和文章包含字符窜重复
+  /// prefix 切割符号,避免和文章包含字符串重复
+  /// suffix 切割符号,避免和文章包含字符串重复
   /// onLink 高亮部分点击事件
   static List<TextSpan> createTextSpans({
     required String text,
