@@ -1,5 +1,5 @@
 //
-//  FormDemoPage.dart
+//  FormDemo.dart
 //  flutter_templet_project
 //
 //  Created by shang on 2024/3/28 16:53.
@@ -8,18 +8,21 @@
 
 
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/editable_text_ext.dart';
+import 'package:flutter_templet_project/extension/rich_text_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:get/get.dart';
 
 /// 表单组件测试
-class FormPage extends StatefulWidget {
+class FormDemo extends StatefulWidget {
 
-  FormPage({
+  FormDemo({
     super.key,
     this.arguments,
   });
@@ -27,10 +30,10 @@ class FormPage extends StatefulWidget {
   final Map<String, dynamic>? arguments;
 
   @override
-  State<FormPage> createState() => _FormPageState();
+  State<FormDemo> createState() => _FormDemoState();
 }
 
-class _FormPageState extends State<FormPage> {
+class _FormDemoState extends State<FormDemo> {
 
   bool get hideApp => Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
 
@@ -82,6 +85,8 @@ class _FormPageState extends State<FormPage> {
     ),
   ];
 
+  final resultVN = ValueNotifier("");
+
 
   @override
   Widget build(BuildContext context) {
@@ -102,42 +107,99 @@ class _FormPageState extends State<FormPage> {
   onPressed() {
     final isSame = items[1].controller == items[1].controller;
     ddlog("isSame: $isSame");
+
+    String text = 'Hello! This,is;a:test-string';
+    List<String> delimiters = [',', ';', ':', '-', ]; // List of delimiters
+    delimiters = ['i', ':', '-', ]; // List of delimiters
+
+    text = "字段【执业版APP】核心指标&电子病历，N类（数值类）字段历史记录统计可视化趋势图支持拉取更多历史数据;核心指标&电子病历";
+    delimiters = ['APP', '指标', '电子', '数据', '字段', '类'];
+
+    // Regular expression pattern to match any of the delimiters
+    String pattern = delimiters.map((d) => RegExp.escape(d)).join('|');
+    final regExp = RegExp(pattern);
+    List<String> parts = text.split(regExp);
+    // ddlog("parts: $parts");
+
+    final matchs = regExp.allMatches(text);
+    final match = matchs.map((e) => e.group(0)).toList();
+    var matchStr = match.join("_");
+    ddlog("${matchs.length},${matchStr}"); // chat
   }
 
   buildBody() {
+    onPressed();
+
+    String text = 'Hello! This,is;a:test-string';
+    List<String> delimiters = [',', ';', ':', '-', ' ']; // List of delimiters
+
+    text = "字段【执业版APP】核心指标&电子病历，N类（数值类）字段历史记录统计可视化趋势图支持拉取更多历史数据;核心指标&电子病历";
+    delimiters = ['APP', '指标', '电子', '数据', '字段', '类'];
+
+    final linkMap = <String, String>{};
+    for (var i = 0; i < delimiters.length; i++) {
+      final key = delimiters[i];
+      linkMap[key] = "https://baike.sogou.com/v269089.htm?ch=zhihu.topic";
+    }
+
     return Scrollbar(
       controller: _scrollController,
       child: SingleChildScrollView(
         controller: _scrollController,
         child: Column(
           children: [
-            ...items.map((e){
-              e.controller.text = e.value;
+            // ...items.map((e){
+            //   e.controller.text = e.value;
+            //
+            //   return Column(
+            //     mainAxisSize: MainAxisSize.min,
+            //     children: [
+            //       buildCell(
+            //         title: e.title,
+            //         trailing: buildTextfield(
+            //           controller: e.controller,
+            //           enabled: true,
+            //           inputFormatters: e.inputFormatters,
+            //           autofocus: false,
+            //           maxLines: e.maxLines,
+            //           onChanged: (v) {
+            //             debugPrint('单行输入内容：$v');
+            //           },
+            //           onEditingComplete: () {
+            //             FocusScope.of(context).unfocus();
+            //           },
+            //         ),
+            //       ),
+            //       // Text(e.toString()),
+            //       Divider(height: 1, indent: 15, endIndent: 0,),
+            //     ],
+            //   );
+            // }).toList(),
+            NText(text, fontSize: 14, maxLines: 100, ),
+            ValueListenableBuilder(
+               valueListenable: resultVN,
+               builder: (context,  value, child){
 
-              return Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  buildCell(
-                    title: e.title,
-                    trailing: buildTextfield(
-                      controller: e.controller,
-                      enabled: true,
-                      inputFormatters: e.inputFormatters,
-                      autofocus: false,
-                      maxLines: e.maxLines,
-                      onChanged: (v) {
-                        debugPrint('单行输入内容：$v');
-                      },
-                      onEditingComplete: () {
-                        FocusScope.of(context).unfocus();
-                      },
-                    ),
-                  ),
-                  // Text(e.toString()),
-                  Divider(height: 1, indent: 15, endIndent: 0,),
-                ],
-              );
-            }).toList(),
+                  return NText(value,
+                    fontSize: 14,
+                    maxLines: 100,
+                  );
+                }
+            ),
+            Divider(height: 1,),
+            Text.rich(
+              TextSpan(
+                children: RichTextExt.createTextSpans(
+                  text: text,
+                  textTaps: delimiters,
+                  onLink: (textTap){
+                    ddlog("textTap: $textTap");
+                  },
+                ),
+              ),
+              maxLines: 100,
+              overflow: TextOverflow.ellipsis,
+            ),
           ],
         ),
       ),
@@ -183,14 +245,13 @@ class _FormPageState extends State<FormPage> {
     VoidCallback? onEditingComplete,
   }) {
 
+    Color? borderColor = context.primaryColor;
+    // borderColor = Color(0xffe4e4e4);
+
     final focusedBorder = OutlineInputBorder(
-      ///设置边框四个角的弧度
       borderRadius: BorderRadius.all(Radius.circular(4)),
-      ///用来配置边框的样式
       borderSide: BorderSide(
-        ///设置边框的颜色
-        color: Color(0xffe4e4e4),
-        ///设置边框的粗细
+        color: borderColor,
         width: 1,
       ),
     );
@@ -207,7 +268,7 @@ class _FormPageState extends State<FormPage> {
           color: Color(0xffb3b3b3),
         ),
         border: !readOnly && maxLines == 1 ? InputBorder.none : focusedBorder,
-        // focusedBorder: focusedBorder,
+        focusedBorder: focusedBorder,
         // focusedErrorBorder: null,
         // disabledBorder: null,
         // enabledBorder: null,

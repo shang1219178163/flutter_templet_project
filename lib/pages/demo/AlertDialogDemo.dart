@@ -851,13 +851,12 @@ xxxx十分重视用户权利及隐私政策并严格按照相关法律法规的�
           //     }
           // ).textSpans,
           children: RichTextExt.createTextSpans(
-              text: text,
-              linkMap: linkMap,
-              onTap: (key, value) {
-                ddlog(key);
-                ddlog(value);
-              }
-            )
+            text: text,
+            textTaps: linkMap.keys.toList(),
+            onLink: (textTap){
+              ddlog(textTap);
+            },
+          )
       ),
     );
 

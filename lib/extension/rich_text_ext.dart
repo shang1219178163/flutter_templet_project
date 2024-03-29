@@ -9,48 +9,94 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:tuple/tuple.dart';
 
 extension RichTextExt on RichText {
-  /// List<TextSpan> by [String text], [Map<String, String> linkMap], prefix = "《", suffix = "》"
+  /// 创建 List<TextSpan>
+  ///
+  /// text 整个段落
+  /// textTaps 高亮字符串数组
+  /// style 段落样式
+  /// linkStyle 高亮样式
+  /// prefix 切割符号,避免和文章包含字符窜重复
+  /// suffix 切割符号,避免和文章包含字符窜重复
+  /// onLink 高亮部分点击事件
   static List<TextSpan> createTextSpans({
     required String text,
-    Map<String, String>? linkMap,
-    String prefix = "《",
-    String suffix = "》",
+    required List<String> textTaps,
     TextStyle? style,
     TextStyle? linkStyle,
-    required void Function(String key, String? value) onTap,
+    String prefix = "_&t",
+    String suffix = "_&t",
+    required void Function(String textTap) onLink,
   }) {
-    assert(text.isNotEmpty && prefix.isNotEmpty && suffix.isNotEmpty);
+    final pattern = textTaps.map((d) => RegExp.escape(d)).join('|');
+    final regExp = RegExp(pattern, multiLine: true);
+    final textNew = text.splitMapJoin(regExp,
+      onMatch: (m) => '$prefix${m[0]}$suffix', // (or no onMatch at all)
+      onNonMatch: (n) => n,
+    );
 
-    linkMap?.forEach((key, value) {
-      assert(
-          key.startsWith(prefix) && key.endsWith(suffix) && text.contains(key));
-    });
-
-    final origin = '$prefix[^$prefix$suffix]+$suffix';
-    final reg = RegExp(origin, multiLine: true).allMatches(text);
-    var matchTitles = reg.map((e) => e.group(0)).whereType<String>().toList();
-
-    final titles = linkMap?.keys ?? matchTitles;
-    final list = text.split(RegExp('$prefix|$suffix'));
-
-    var textSpans = list
-        .map((e) => !titles.contains("$prefix$e$suffix")
-            ? TextSpan(text: e, style: style)
-            : TextSpan(
-                text: "$prefix$e$suffix",
-                style: linkStyle ?? TextStyle(color: Colors.blue),
-                recognizer: TapGestureRecognizer()
-                  ..onTap = () {
-                    onTap("$prefix$e$suffix", linkMap?["$prefix$e$suffix"]);
-                  },
-              ))
-        .toList();
-    return textSpans;
+    final list = textNew.split(RegExp('$prefix|$suffix'));
+    return list.map((e) {
+      if (e.isNotEmpty) {
+        final isEquel = textTaps.contains(e);
+        if (isEquel) {
+          return TextSpan(
+            text: e,
+            style: linkStyle ?? TextStyle(color: Colors.blue),
+            recognizer: TapGestureRecognizer()
+              ..onTap = () {
+                onLink(e);
+              },
+          );
+        }
+      }
+      return TextSpan(text: e, style: style);
+    }).toList();
   }
+
+
+  /// List<TextSpan> by [String text], [Map<String, String> linkMap], prefix = "《", suffix = "》"
+  // static List<TextSpan> createTextSpans({
+  //   required String text,
+  //   Map<String, String>? linkMap,
+  //   String prefix = "《",
+  //   String suffix = "》",
+  //   TextStyle? style,
+  //   TextStyle? linkStyle,
+  //   required void Function(String key, String? value) onTap,
+  // }) {
+  //   assert(text.isNotEmpty && prefix.isNotEmpty && suffix.isNotEmpty);
+  //
+  //   linkMap?.forEach((key, value) {
+  //     assert(
+  //         key.startsWith(prefix) && key.endsWith(suffix) && text.contains(key));
+  //   });
+  //
+  //   final origin = '$prefix[^$prefix$suffix]+$suffix';
+  //   final reg = RegExp(origin, multiLine: true).allMatches(text);
+  //   var matchTitles = reg.map((e) => e.group(0)).whereType<String>().toList();
+  //
+  //   final titles = linkMap?.keys ?? matchTitles;
+  //   final list = text.split(RegExp('$prefix|$suffix'));
+  //
+  //   var textSpans = list
+  //       .map((e) => !titles.contains("$prefix$e$suffix")
+  //           ? TextSpan(text: e, style: style)
+  //           : TextSpan(
+  //               text: "$prefix$e$suffix",
+  //               style: linkStyle ?? TextStyle(color: Colors.blue),
+  //               recognizer: TapGestureRecognizer()
+  //                 ..onTap = () {
+  //                   onTap("$prefix$e$suffix", linkMap?["$prefix$e$suffix"]);
+  //                 },
+  //             ))
+  //       .toList();
+  //   return textSpans;
+  // }
+
+
 }
 
 extension TextSpanExt on TextSpan {

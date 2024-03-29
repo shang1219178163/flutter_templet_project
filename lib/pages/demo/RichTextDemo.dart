@@ -6,9 +6,7 @@
 //  Copyright © 7/31/21 shang. All rights reserved.
 //
 
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_attributed_string.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/rich_text_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
@@ -30,6 +28,7 @@ class _RichTextDemoState extends State<RichTextDemo> {
   var linkMap = {
     '《用户协议》': 'https://flutter.dev',
     '《隐私政策》': 'https://flutter.dev',
+    '您的': 'https://flutter.dev',
   };
 
   String text = """
@@ -105,27 +104,13 @@ xxxx十分重视用户权利及隐私政策并严格按照相关法律法规的�
       padding: EdgeInsets.all(12),
       child: Text.rich(
         TextSpan(
-          children: NAttributedString(
-              context: context,
-              text: text,
-              linkMap: linkMap,
-              // style: TextStyle(
-              //     fontSize: 13,
-              // ),
-              // linkStyle: TextStyle(fontSize: 15),
-              onTap: (key, value){
-                ddlog(key);
-                ddlog(value);
-              }
-          ).textSpans,
-          // children: RichTextExt.createTextSpans(context,
-          //     text: text,
-          //     linkMap: linkMap,
-          //     onTap: (key, value){
-          //       ddlog(key);
-          //       ddlog(value);
-          //     }
-          // )
+          children: RichTextExt.createTextSpans(
+            text: text,
+            textTaps: linkMap.keys.toList(),
+            onLink: (textTap){
+              ddlog(textTap);
+            },
+          )
         ),
         // style: TextStyle(
         //   wordSpacing: 12
