@@ -35,7 +35,7 @@ import 'package:flutter_templet_project/pages/demo/DialogChoiceChipDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DisplayFeatureDemo.dart';
 import 'package:flutter_templet_project/pages/demo/EmojiPage.dart';
 import 'package:flutter_templet_project/pages/demo/FlutterFFiTest.dart';
-import 'package:flutter_templet_project/pages/demo/FormDemoPage.dart';
+import 'package:flutter_templet_project/pages/demo/FormDemo.dart';
 import 'package:flutter_templet_project/pages/demo/HomeNavDemo.dart';
 import 'package:flutter_templet_project/pages/demo/IconConvertPage.dart';
 import 'package:flutter_templet_project/pages/demo/LocalImagePage.dart';
@@ -697,7 +697,7 @@ class APPRouter {
   static const nRefreshListViewDemo = '/nRefreshListViewDemo';
   static const nestedScrollViewDemoThree = '/nestedScrollViewDemoThree';
   static const apiCreatePage = '/apiCreatePage';
-  static const formPage = '/formPage';
+  static const formDemo = '/formDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -1100,7 +1100,7 @@ class AppPage {
     GetPage(name: APPRouter.nRefreshListViewDemo, page: () => NRefreshListViewDemo(),),
     GetPage(name: APPRouter.nestedScrollViewDemoThree, page: () => NestedScrollViewDemoThree(),),
     GetPage(name: APPRouter.apiCreatePage, page: () => ApiCreatePage(),),
-    GetPage(name: APPRouter.formPage, page: () => FormPage(),),
+    GetPage(name: APPRouter.formDemo, page: () => FormDemo(),),
 
 
 
