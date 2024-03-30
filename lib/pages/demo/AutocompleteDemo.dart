@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_autocomplete_options_view.dart';
+import 'package:flutter_templet_project/basicWidget/n_pair.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:get/get_core/src/get_main.dart';
 
@@ -70,7 +71,7 @@ class _AutocompleteDemoState extends State<AutocompleteDemo>{
           ...buildHeader(),
           Autocomplete<OptionModel>(
             displayStringForOption: (option) => option.name,
-            fieldViewBuilder: _params[0].isOpen ? _buildFieldView : _buildFieldViewDefault,
+            fieldViewBuilder: _params[0].isOpen ? buildFieldView : buildFieldViewDefault,
             onSelected: onSelected,
             optionsBuilder: _buildOptions,
             // optionsViewBuilder: _buildOptionsView,
@@ -91,7 +92,7 @@ class _AutocompleteDemoState extends State<AutocompleteDemo>{
                   ),);
                   textWidget = Text.rich(formSpan(str, _textEditingValue.text,));
 
-                  return _buildItem(
+                  return buildItem(
                     onTap: () => onSelected(option),
                     text: textWidget,
                   );
@@ -141,7 +142,7 @@ class _AutocompleteDemoState extends State<AutocompleteDemo>{
     Get.toNamed(val.name, arguments: val.toJson());
   }
 
-  Widget _buildOptionsView(
+  Widget buildOptionsView(
       BuildContext context,
       AutocompleteOnSelected<OptionModel> onSelected,
       Iterable<OptionModel> options,
@@ -168,7 +169,7 @@ class _AutocompleteDemoState extends State<AutocompleteDemo>{
                 ),
               );
               textWidget = Text.rich(formSpan(str, _textEditingValue.text,));
-              return _buildItem(
+              return buildItem(
                 onTap: () => onSelected(option),
                 text: textWidget,
               );
@@ -179,7 +180,7 @@ class _AutocompleteDemoState extends State<AutocompleteDemo>{
     );
   }
 
-  Widget _buildFieldViewDefault(
+  Widget buildFieldViewDefault(
       BuildContext context,
       TextEditingController textEditingController,
       FocusNode focusNode,
@@ -201,13 +202,13 @@ class _AutocompleteDemoState extends State<AutocompleteDemo>{
       onEditingComplete: (){
         debugPrint("onEditingComplete: ${textEditingController.text}");
       },
-      decoration: _buildInputDecoration(
+      decoration: buildInputDecoration(
         textEditingController: textEditingController,
       ),
     );
   }
 
-  Widget _buildFieldView(
+  Widget buildFieldView(
       BuildContext context,
       TextEditingController textEditingController,
       FocusNode focusNode,
@@ -228,7 +229,7 @@ class _AutocompleteDemoState extends State<AutocompleteDemo>{
         // }
         return "null";
       },
-      decoration: _buildInputDecoration(
+      decoration: buildInputDecoration(
         textEditingController: textEditingController,
         hasEnabledBorder: true
       ),
@@ -236,7 +237,7 @@ class _AutocompleteDemoState extends State<AutocompleteDemo>{
   }
 
   /// 输入框修饰器
-  _buildInputDecoration({
+  buildInputDecoration({
     required TextEditingController textEditingController,
     bool hasEnabledBorder = false,
     InputBorder? enabledBorder
@@ -304,23 +305,18 @@ class _AutocompleteDemoState extends State<AutocompleteDemo>{
     ]);
   }
 
-  _buildItem({
+  Widget buildItem({
     required VoidCallback onTap,
-    required Text text
+    required Widget text,
   }) {
     return InkWell(
       onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-        decoration: BoxDecoration(
-          // color: index % 2 == 0 ? Colors.green : Colors.yellow,
-        ),
-        child: Row(
-          children: [
-            Icon(Icons.search, color: Colors.grey, size: 22),
-            SizedBox(width: 5,),
-            text
-          ],
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+        child: NPair(
+          mainAxisAlignment: MainAxisAlignment.start,
+          icon: Icon(Icons.search, color: Colors.grey, size: 22),
+          child: text,
         ),
       ),
     );
