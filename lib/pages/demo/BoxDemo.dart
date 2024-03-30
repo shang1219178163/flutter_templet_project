@@ -12,8 +12,15 @@
 /// FractionallySizedBox 可以根据父容器宽高的百分比来设置子组件宽高等
 ///
 
+import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_avatar_badge.dart';
+import 'package:flutter_templet_project/basicWidget/n_section_header.dart';
+import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
+import 'package:flutter_templet_project/extension/widget_ext.dart';
+import 'package:flutter_templet_project/util/R.dart';
 
 class BoxDemo extends StatefulWidget {
 
@@ -37,32 +44,60 @@ class _BoxDemoState extends State<BoxDemo> {
         appBar: AppBar(
           title: Text(widget.title ?? "$widget"),
         ),
-        body: _buildBody(),
+        body: buildBody(),
     );
   }
 
-  _buildBody() {
-    return Column(
-      children: [
-        _buildSizedBox(),
-        Divider(),
-        _buildConstrainedBox(),
-        Divider(),
-        _buildFittedBox(),
-        Divider(),
-        _buildUnconstrainedBox(),
-        // Divider(),
-        // _buildOverflowBox(),
-        Divider(),
-        _buildOverflowBox1(),
-        Divider(),
-        _buildOverflowBox2(),
-      ],
+  Widget buildBody() {
+    return Scrollbar(
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            NSectionHeader(
+              title: "UnconstrainedBox",
+              child: buildSizedBox(),
+            ),
+            NSectionHeader(
+              title: "UnconstrainedBox",
+              child: buildConstrainedBox(),
+            ),
+            NSectionHeader(
+              title: "FittedBox",
+              child: buildFittedBox(),
+            ),
+            NSectionHeader(
+              title: "UnconstrainedBox",
+              child: buildUnconstrainedBox(),
+            ),
+            NSectionHeader(
+              title: "OverflowBox",
+              child: buildOverflowBox(),
+            ),
+            NSectionHeader(
+              title: "OverflowBox1",
+              child: buildOverflowBox(alignment: Alignment.center),
+            ),
+            NSectionHeader(
+              title: "OverflowBox2",
+              child: buildOverflowBox(alignment: Alignment.topRight),
+            ),
+            NSectionHeader(
+              title: "buildBage",
+              child: buildBage(),
+            ),
+            NSectionHeader(
+              title: "buildAvatarBage",
+              child: buildAvatarBage(),
+            ),
+
+          ],
+        ),
+      ),
     );
   }
 
 
-  _buildSizedBox() {
+  Widget buildSizedBox() {
     return Container(
       width: 300,
       height: 100,
@@ -72,13 +107,15 @@ class _BoxDemoState extends State<BoxDemo> {
           widthFactor: 0.5,
           heightFactor: 0.5,
           alignment: FractionalOffset.center,
-          child: DecoratedBox(
+          child: Container(
+            alignment: Alignment.center,
             decoration: BoxDecoration(
               border: Border.all(
                 color: Colors.blue,
                 width: 4,
               ),
             ),
+            child: Text("SizedBox.expand"),
           ),
         ),
       ),
@@ -86,24 +123,24 @@ class _BoxDemoState extends State<BoxDemo> {
   }
 
   /// ConstrainedBox用于对子组件添加额外的约束。
-  _buildConstrainedBox() {
+  Widget buildConstrainedBox() {
     return ConstrainedBox(
       constraints: BoxConstraints(
         minWidth: double.infinity, //宽度尽可能大
         minHeight: 50.0 //最小高度为50像素
       ),
       child: Container(
-        height: 5.0,
-        child: DecoratedBox(
-          decoration: BoxDecoration(
-              color: Colors.green
-          ),
-        ) ,
+        // height: 5.0,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          color: Colors.green,
+        ),
+        child: Text("ConstrainedBox"),
       ),
     );
   }
 
-  _buildFittedBox() {
+  Widget buildFittedBox() {
     return Container(
       height: 100,
       width: 300,
@@ -111,7 +148,7 @@ class _BoxDemoState extends State<BoxDemo> {
       child: FittedBox(
         fit: BoxFit.contain,
         // child: Image.network('https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg'),
-        child: Image.asset('bg.jpg'.toPath(),
+        child: Image.asset('bg.png'.toPath(),
           fit: BoxFit.cover,
         ),
       ),
@@ -119,7 +156,7 @@ class _BoxDemoState extends State<BoxDemo> {
   }
   
   /// UnconstrainedBox会消除上层组件的约束，也就意味着UnconstrainedBox 的子组件将不再受到约束，大小完全取决于自己。
-  _buildUnconstrainedBox() {
+  Widget buildUnconstrainedBox() {
     return Container(
       child: ConstrainedBox(
         constraints: BoxConstraints(minWidth: 200.0, minHeight: 100.0),  //父
@@ -136,10 +173,11 @@ class _BoxDemoState extends State<BoxDemo> {
   }
 
 
-  _buildOverflowBox({
-    width = 70.0,
-    height = 70.0,
+  Widget buildOverflowBox({
+    double width = 70.0,
+    double height = 70.0,
     padding = const EdgeInsets.all(5.0),
+    alignment = Alignment.topLeft,
   }) {
     return Container(
       color: Colors.green,
@@ -147,9 +185,9 @@ class _BoxDemoState extends State<BoxDemo> {
       height: height,
       padding: padding,
       child: OverflowBox(
-        alignment: Alignment.topLeft,
-        maxWidth: width + 20 * 2,
-        maxHeight: width + 20 * 2,
+        alignment: alignment,
+        maxWidth: width + 20,
+        maxHeight: width + 20,
         child: Container(
           color: Colors.yellow.withOpacity(0.5),
         ),
@@ -157,47 +195,86 @@ class _BoxDemoState extends State<BoxDemo> {
     );
   }
 
-  _buildOverflowBox1({
-    width = 70.0,
-    height = 70.0,
-    padding = const EdgeInsets.all(5.0),
-  }) {
-    return Container(
-      color: Colors.green,
+  var badge = 9;
+  var badgeStr = "999+";
+
+  Widget buildBage() {
+    double width = 60;
+    double height = 60;
+    double size = 20;
+
+    final padding = EdgeInsets.symmetric(horizontal: 4, vertical: 2);
+
+    final content = Container(
       width: width,
       height: height,
-      // padding: padding,
-      child: OverflowBox(
+      alignment: Alignment.topRight,
+      decoration: BoxDecoration(
+        // color: Colors.grey.withAlpha(88),
+        borderRadius: BorderRadius.all(Radius.circular(8)),
+        image: DecorationImage(
+          image: ExtendedNetworkImageProvider(
+            R.image.urls[7],
+            cache: true,
+          ),
+          fit: BoxFit.fill,
+        ),
+      ),
+      child: SizedOverflowBox(
         alignment: Alignment.center,
-        maxWidth: width + 20 * 2,
-        maxHeight: width + 20 * 2,
-        child: Container(
-          color: Colors.yellow.withOpacity(0.5),
+        size: Size.zero,
+        child: UnconstrainedBox(
+          child: Container(
+            // width: size,
+            height: size,
+            constraints: BoxConstraints(
+              minWidth: size + padding.horizontal*2,
+            ),
+            padding: padding,
+            alignment: Alignment.center,
+            decoration: ShapeDecoration(
+              color: Colors.red,
+              shape: badgeStr.length <= 2 ? CircleBorder() : StadiumBorder(),
+            ),
+            child: Text(badgeStr,
+              style: TextStyle(
+                fontSize: 12,
+                color: Colors.white,
+              ),
+            ),
+          ),
         ),
+      ),
+    );
+
+    return InkWell(
+      onTap: (){
+        badge = badge < 999 ? badge * 10 : 9;
+        ddlog("badge: $badge");
+        badgeStr = badge > 99 ? "$badge+" : "$badge";
+        // badgeStr = "1";
+        setState(() {});
+      },
+      child: content,
+    );
+  }
+
+  Widget buildAvatarBage() {
+    return InkWell(
+      onTap: (){
+        badge = badge < 999 ? badge * 10 : 9;
+        ddlog("badge: $badge");
+        badgeStr = badge > 99 ? "$badge+" : "$badge";
+        // badgeStr = "1";
+        setState(() {});
+      },
+      child: NAvatarBadge(
+        url: R.image.urls[7],
+        badgeStr: badgeStr,
       ),
     );
   }
 
-  _buildOverflowBox2({
-    width = 70.0,
-    height = 70.0,
-    padding = const EdgeInsets.all(5.0),
-  }) {
-    return Container(
-      color: Colors.green,
-      width: width,
-      height: height,
-      // padding: padding,
-      child: OverflowBox(
-        alignment: Alignment.topRight,
-        maxWidth: 140,
-        maxHeight: 140,
-        child: Container(
-          color: Colors.blue.withOpacity(0.5),
-        ),
-      ),
-    );
-  }
 }
 
 
