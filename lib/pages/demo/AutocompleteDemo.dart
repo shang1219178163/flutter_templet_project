@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_autocomplete_options_view.dart';
 import 'package:flutter_templet_project/basicWidget/n_pair.dart';
+import 'package:flutter_templet_project/extension/rich_text_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:get/get_core/src/get_main.dart';
 
@@ -46,6 +47,13 @@ class _AutocompleteDemoState extends State<AutocompleteDemo>{
 
   final textFieldVN = ValueNotifier("");
 
+  /// 高亮样式
+  final TextStyle lightTextStyle = const TextStyle(
+    color: Colors.blue,
+    fontWeight: FontWeight.bold,
+  );
+
+
   @override
   void initState() {
     _tuples = tuples.map((e) => OptionModel(
@@ -85,16 +93,16 @@ class _AutocompleteDemoState extends State<AutocompleteDemo>{
                 itemBuilder: (context, index) {
                   final option = options.elementAt(index);
 
-                  final str = option.name;
-                  var textWidget = Text.rich(str.formSpan(
-                      _textEditingValue.text,
-                      highlightStyle: lightTextStyle
+                  final name = option.name;
+                  final query = _textEditingValue.text;
+                  var textWidget = Text.rich(name.firstMatchLight(
+                      pattern: query,
+                      lightTextStyle: lightTextStyle
                   ),);
-                  textWidget = Text.rich(formSpan(str, _textEditingValue.text,));
 
                   return buildItem(
                     onTap: () => onSelected(option),
-                    text: textWidget,
+                    child: textWidget,
                   );
                 },
               );
@@ -161,17 +169,18 @@ class _AutocompleteDemoState extends State<AutocompleteDemo>{
             itemBuilder: ( _ , index) {
 
               final option = options.elementAt(index);
-              final str = option.name;
+              final name = option.name;
+              final query = _textEditingValue.text;
 
-              var textWidget = Text.rich(str.formSpan(
-                  _textEditingValue.text,
-                  highlightStyle: lightTextStyle
+              var textWidget = Text.rich(name.firstMatchLight(
+                  pattern: query,
+                  lightTextStyle: lightTextStyle
                 ),
               );
-              textWidget = Text.rich(formSpan(str, _textEditingValue.text,));
+              
               return buildItem(
                 onTap: () => onSelected(option),
-                text: textWidget,
+                child: textWidget,
               );
             }
           ),
@@ -276,38 +285,10 @@ class _AutocompleteDemoState extends State<AutocompleteDemo>{
     );
   }
 
-  /// 高亮样式
-  final TextStyle lightTextStyle = const TextStyle(
-    color: Colors.blue,
-    fontWeight: FontWeight.bold,
-  );
-
-  InlineSpan formSpan(String str, String pattern) {
-    final regexp = RegExp(pattern, caseSensitive: false);
-    final match = regexp.firstMatch(str);
-    final matchedText = match?.group(0);
-    // print("matchedText: $str $pattern $matchedText");
-    if (matchedText == null) {
-      return TextSpan(children: [ TextSpan(text: str) ]);
-    }
-
-    var index = str.indexOf(matchedText);
-    var endIndex = index + matchedText.length;
-
-    final sub = str.substring(index, endIndex);
-    final leftStr = str.substring(0, index);
-    final rightStr = str.substring(endIndex);
-
-    return TextSpan(children: [
-      TextSpan(text: leftStr),
-      TextSpan(text: sub, style: lightTextStyle),
-      TextSpan(text: rightStr),
-    ]);
-  }
 
   Widget buildItem({
     required VoidCallback onTap,
-    required Widget text,
+    required Widget child,
   }) {
     return InkWell(
       onTap: onTap,
@@ -316,7 +297,7 @@ class _AutocompleteDemoState extends State<AutocompleteDemo>{
         child: NPair(
           mainAxisAlignment: MainAxisAlignment.start,
           icon: Icon(Icons.search, color: Colors.grey, size: 22),
-          child: text,
+          child: child,
         ),
       ),
     );

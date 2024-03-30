@@ -262,55 +262,35 @@ extension StringExt on String{
     return result;
   }
 
-  /// 获取 pattern 的大小写变种(模糊化)
-  String? blurred({
-    bool multiLine = false,
-    bool unicode = false,
-    bool dotAll = false,
+  /// 根据 pattern 将首次匹配的部分高亮显示
+  InlineSpan firstMatchLight({
+    required String pattern,
+    TextStyle? textStyle,
+    TextStyle? lightTextStyle,
   }) {
-    final regexp = RegExp(this,
-      caseSensitive: false,
-      multiLine: multiLine,
-      unicode: unicode,
-      dotAll: dotAll
-    );
-    final match = regexp.firstMatch(this);
-    final matchedText = match?.group(0);
-    return matchedText;
-  }
+    String text = this;
 
-  /// 以 pattern 分割字符串为3元素数组
-  List<String> seperator(String pattern) {
-    final matchedText = pattern.blurred();
-    if (matchedText == null || !contains(matchedText)) {
-      return [this];
+    final regexp = RegExp(pattern, caseSensitive: false, multiLine: true);
+    final match = regexp.firstMatch(text);
+    final matchedText = match?.group(0);
+    if (matchedText == null) {
+      return TextSpan(text: text);
     }
 
-    var index = indexOf(matchedText);
+    var index = text.indexOf(matchedText);
     var endIndex = index + matchedText.length;
 
-    final leftStr = substring(0, index);
-    final sub = substring(index, endIndex);
-    final rightStr = substring(endIndex);
-    return [leftStr, sub, rightStr];
-  }
+    final sub = text.substring(index, endIndex);
+    final leftStr = text.substring(0, index);
+    final rightStr = text.substring(endIndex);
 
-  /// 获取掺杂高亮的富文本
-  InlineSpan formSpan(String pattern, {TextStyle? nomalStyle, TextStyle? highlightStyle}) {
-    var strs = seperator(pattern);
-    if (strs.length <= 1) {
-      final items = strs.map((e) => TextSpan(
-        text: e,
-        style: highlightStyle
-      )).toList();
-      return TextSpan(children: items);
-    }
-
-    var spans = strs.map((e) => TextSpan(
-      text: e,
-      style: strs.indexOf(e) == 1 ? highlightStyle : nomalStyle
-    )).toList();
-    return TextSpan(children: spans);
+    return TextSpan(
+      children: [
+        TextSpan(text: leftStr, style: textStyle,),
+        TextSpan(text: sub, style: lightTextStyle),
+        TextSpan(text: rightStr, style: textStyle,),
+      ],
+    );
   }
   
   /// url 阿里云存储处理
