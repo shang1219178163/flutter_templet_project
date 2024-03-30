@@ -28,7 +28,7 @@ extension RichTextExt on RichText {
     TextStyle? linkStyle,
     String prefix = "_&t",
     String suffix = "_&t",
-    required void Function(String textTap) onLink,
+    void Function(String textTap)? onLink,
   }) {
     final pattern = textTaps.map((d) => RegExp.escape(d)).join('|');
     final regExp = RegExp(pattern, multiLine: true);
@@ -47,7 +47,7 @@ extension RichTextExt on RichText {
             style: linkStyle ?? TextStyle(color: Colors.blue),
             recognizer: TapGestureRecognizer()
               ..onTap = () {
-                onLink(e);
+                onLink?.call(e);
               },
           );
         }
