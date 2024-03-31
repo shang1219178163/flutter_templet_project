@@ -14,7 +14,7 @@ import 'package:flutter_templet_project/basicWidget/n_skeleton_screen.dart';
 
 
 typedef ValueIndexedWidgetBuilder<T> = Widget Function(
-    BuildContext context, int index, T data, VoidCallback onRefresh);
+    BuildContext context, int index, T data);
 
 /// 请求列表回调
 typedef RequestListCallback<T> = Future<List<T>> Function(
@@ -313,7 +313,7 @@ class NRefreshListViewState<T> extends State<NRefreshListView<T>> with Automatic
         controller: controller,
         itemCount: items.length,
         itemBuilder: (context, index) =>
-            widget.itemBuilder(context, index, items[index], onRefresh),
+            widget.itemBuilder(context, index, items[index],),
         separatorBuilder: widget.separatorBuilder ??
                 (context, index) {
               return const Divider(

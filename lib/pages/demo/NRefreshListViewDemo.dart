@@ -41,6 +41,8 @@ class _NRefreshListViewDemoState extends State<NRefreshListViewDemo> {
   /// userId --- 用户id
   late Map<String, dynamic> arguments = widget.arguments ?? Get.arguments;
 
+  final refreshListViewController = NRefreshListViewController<UserModel>();
+
   var dataList = ValueNotifier(<UserModel>[]);
 
   initData(){
@@ -65,12 +67,13 @@ class _NRefreshListViewDemoState extends State<NRefreshListViewDemo> {
 
   buildBody() {
     return NRefreshListView<UserModel>(
+      controller: refreshListViewController,
       pageSize: 5,
       onRequest: (bool isRefresh, int page, int pageSize, last) async {
 
         return await requestList(pageNo: page, pageSize: pageSize);
       },
-      itemBuilder: (BuildContext context, int index, e, onRefresh) {
+      itemBuilder: (BuildContext context, int index, e) {
 
         final map = e.toJson();
         map.removeWhere((key, value) => value == null);

@@ -62,7 +62,7 @@ class NCancelAndConfirmBar extends StatelessWidget {
         borderRadius: BorderRadius.all(bottomRadius,),
       ),
       child: Container(
-        height: height.h,
+        height: height,
         clipBehavior: Clip.hardEdge,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.only(
@@ -96,7 +96,7 @@ class NCancelAndConfirmBar extends StatelessWidget {
                         ),
                       ),
                     ),
-                  if (divider != null) divider!,
+                  divider ?? const SizedBox(),
                   Expanded(
                     child: InkWell(
                       onTap: onConfirm,
