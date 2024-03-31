@@ -34,7 +34,7 @@ class _ScaffoldBottomSheetState extends State<ScaffoldBottomSheet> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title ?? "$widget"),
+        title: Text("键盘辅助视图"),
         actions: ['done',].map((e) =>
           TextButton(
             child: Text(e,

@@ -83,6 +83,12 @@ class IMRecipleBottomSheet extends StatelessWidget {
       ),
     );
 
+    // return ClipRect(
+    //   child: BackdropFilter(
+    //     filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+    //     child: content,
+    //   ),
+    // );
     return content;
   }
 

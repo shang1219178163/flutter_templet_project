@@ -31,7 +31,7 @@ extension RichTextExt on RichText {
     void Function(String textTap)? onLink,
   }) {
     final pattern = textTaps.map((d) => RegExp.escape(d)).join('|');
-    final regExp = RegExp(pattern, multiLine: true);
+    final regExp = RegExp(pattern, multiLine: true, caseSensitive: false);
     final textNew = text.splitMapJoin(regExp,
       onMatch: (m) => '$prefix${m[0]}$suffix', // (or no onMatch at all)
       onNonMatch: (n) => n,

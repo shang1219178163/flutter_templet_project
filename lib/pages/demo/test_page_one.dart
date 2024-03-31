@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/cache/cache_service.dart';
+import 'package:flutter_templet_project/extension/ddlog.dart';
 
 class TestPageOne extends StatefulWidget {
 
@@ -100,6 +101,15 @@ class _TestPageOneState extends State<TestPageOne> {
     assert(listEquals(list1, list2) == true);
 
     setState(() {});
+
+    final tmp = "阿斯顿发斯蒂芬";
+    final tmpNew = jsonEncode(tmp);
+    final listNew = jsonEncode(list1);
+
+    final has = tmpNew.startsWith('\\');
+    ddlog("tmp: $tmp");
+    ddlog("tmp1: ${tmpNew},${has}");
+
   }
 
   int searchInsert(List<int> nums, int target) {

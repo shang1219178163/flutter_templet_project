@@ -24,16 +24,20 @@ class AlertSheetDemo extends StatefulWidget {
 
 class _AlertSheetDemoState extends State<AlertSheetDemo> with BottomSheetMixin {
 
-  var titles = [
-    "默认样式",
-    "ListTile",
-    "添加子视图",
-    "自定义",
-    "单选列表",
-    "多选列表",
-    "6",
-    "presentCupertinoActionSheet",
-    "8"];
+  late var items = [
+    ("默认样式", showAlertSheet),
+    ("ListTile", presentAlertSheetListTile),
+    ("添加子视图", presentCustomSheet),
+    ("自定义", presentBottomSheetMixin),
+    ("单选列表", presentSingle),
+    ("多选列表", presentMutiple),
+    ("搜索", presentSearcgPage),
+    ("presentCupertinoActionSheet", onPresentCupertinoActionSheet),
+    ("8", onSendRecipel),
+  ];
+
+  List<String> get titles => items.map((e) => e.$1).toList();
+
 
   final title = "新版本 v${2.1}";
   final message = """
@@ -60,133 +64,16 @@ class _AlertSheetDemoState extends State<AlertSheetDemo> with BottomSheetMixin {
       spacing: 8.0, // 主轴(水平)方向间距
       runSpacing: 8.0, // 纵轴（垂直）方向间距
       alignment: WrapAlignment.start, //沿主轴方向居中
-        children: titles.map((e) => ActionChip(
+        children: items.map((e) => ActionChip(
           avatar: CircleAvatar(backgroundColor: Theme.of(context).primaryColor,
-              child: Text(e.characters.first.toUpperCase())
+              child: Text(e.$1.characters.first.toUpperCase())
           ),
-          label: Text(e),
+          label: Text(e.$1),
           onPressed: (){
-            _onPressed(titles.indexOf(e));
+            e.$2();
           },
         )).toList(),
     );
-  }
-
-  _onPressed(int e) {
-    switch (e) {
-      case 1:
-          showAlertSheetListTile();
-        break;
-
-      case 2:
-        {
-          CupertinoActionSheet(
-            title: Text(title),
-            message: Text(message),
-            actions: [
-              Container(
-                color: Colors.lightGreen,
-                height: 300,
-              ),
-            ],
-            cancelButton: CupertinoActionSheetAction(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: Text('取消'),
-            ),
-          ).toShowCupertinoModalPopup(context: context);
-        }
-        break;
-
-      case 3:
-        {
-          presentBottomSheet(
-            context: context,
-            title: title,
-            onConfirm: (){
-              debugPrint("确定");
-              Navigator.of(context).pop();
-            },
-            child: Container(
-              child: Column(
-                children: [
-                  Container(
-                    padding: EdgeInsets.all(16),
-                    child: Text(message),
-                  ),
-                  ...titles.map((e) {
-                    return InkWell(
-                      onTap: (){
-                        debugPrint("${DateTime.now()}: $e");
-                      },
-                      child: Container(
-                        child: Column(
-                          children: [
-                            ListTile(title: Text(e),),
-                            Divider(height: 1, indent: 15, endIndent: 15,),
-                          ],
-                        ),
-                      ),
-                    );
-                  }).toList(),
-                ],
-              ),
-            )
-          );
-        }
-        break;
-
-      case 4:
-        {
-          _showChioceList(isMutiple: false);
-
-        }
-        break;
-
-      case 5:
-        {
-          _showChioceList(isMutiple: true);
-
-        }
-        break;
-
-      case 6:
-        {
-          // List<String> list = List.generate(100, (i) => 'item $i');
-          // showSearch(context: context, delegate: CustomSearchDelegate(list: list, select: ""));
-          Get.toNamed(APPRouter.showSearchDemo, arguments: []);
-        }
-        break;
-      case 7:
-        {
-          presentCupertinoActionSheet(
-            context: context,
-            title: Text(title),
-            message: Text(message, textAlign: TextAlign.start),
-            items: List.generate(5, (index) => Text("item_$index")).toList(),
-            cancel: Text('取消'),
-            onSelected: (int index) {
-              debugPrint(index.toString());
-            },
-            onCancel: () {
-              debugPrint('onCancell');
-              Navigator.pop(context);
-            },
-          );
-        }
-        break;
-      case 8:
-        {
-          onSendRecipel();
-        }
-        break;
-
-      default:
-          showAlertSheet();
-        break;
-    }
-    // ddlog(e);
   }
 
   /// ios 弹窗
@@ -219,7 +106,97 @@ class _AlertSheetDemoState extends State<AlertSheetDemo> with BottomSheetMixin {
     ).toShowCupertinoModalPopup(context: context);
   }
 
-  showAlertSheetListTile() {
+  void presentCustomSheet() {
+    CupertinoActionSheet(
+      title: Text(title),
+      message: Text(message),
+      actions: [
+        Container(
+          color: Colors.lightGreen,
+          height: 300,
+        ),
+      ],
+      cancelButton: CupertinoActionSheetAction(
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        child: Text('取消'),
+      ),
+    ).toShowCupertinoModalPopup(context: context);
+  }
+  
+  void presentBottomSheetMixin() {
+    presentBottomSheet(
+        context: context,
+        title: title,
+        onConfirm: (){
+          debugPrint("确定");
+          Navigator.of(context).pop();
+        },
+        child: Scrollbar(
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  padding: EdgeInsets.all(16),
+                  child: Text(message),
+                ),
+                ...titles.map((e) {
+                  return InkWell(
+                    onTap: (){
+                      debugPrint("${DateTime.now()}: $e");
+                    },
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        ListTile(title: Text(e),),
+                        Divider(height: 1, indent: 15, endIndent: 15,),
+                      ],
+                    ),
+                  );
+                }).toList(),
+              ],
+            ),
+          ),
+        )
+    );
+  }
+
+  void presentSingle() {
+    _showChioceList(isMutiple: false);
+
+  }
+
+  void presentMutiple() {
+    _showChioceList(isMutiple: true);
+
+  }
+
+  void presentSearcgPage() {
+    Get.toNamed(APPRouter.showSearchDemo, arguments: []);
+  }
+
+  void onPresentCupertinoActionSheet() {
+    presentCupertinoActionSheet(
+      context: context,
+      title: Text(title),
+      message: Text(message, textAlign: TextAlign.start),
+      items: List.generate(3, (index) => Text("item_$index")).toList(),
+      cancel: Text('取消'),
+      onSelected: (int index) {
+        debugPrint(index.toString());
+      },
+      onCancel: () {
+        debugPrint('onCancell');
+        Navigator.pop(context);
+      },
+    );
+  }
+
+
+
+  presentAlertSheetListTile() {
       final actions = [
         ListTile(
           leading: Icon(Icons.add),
@@ -275,10 +252,7 @@ class _AlertSheetDemoState extends State<AlertSheetDemo> with BottomSheetMixin {
           },
           child: Text('取消'),
         ),
-      )
-          .toShowCupertinoModalPopup(context: context)
-
-      ;
+      ).toShowCupertinoModalPopup(context: context);
     }
 
   _showChioceList({required bool isMutiple}){

@@ -37,7 +37,7 @@ class _NavgationBarDemoState extends State<NavgationBarDemo> {
               // padding: EdgeInsets.only(left: 8, right: 8, top: 0, bottom: 0),
               child: Center(
                 child: Image.asset(
-                  'images/bg.jpg',
+                  'images/bg.png',
                   fit: BoxFit.fill,
                 ),
               ),

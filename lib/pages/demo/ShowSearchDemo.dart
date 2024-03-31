@@ -26,9 +26,11 @@ class ShowSearchDemo extends StatefulWidget {
 
 class _ShowSearchDemoState extends State<ShowSearchDemo> {
 
-  List<String> _list = List.generate(100, (i) => 'item $i');
+  List<String> list = List.generate(100, (i) => 'item $i');
 
+  late List<String> filters = [...list];
 
+  var search = "";
 
   @override
   Widget build(BuildContext context) {
@@ -36,36 +38,31 @@ class _ShowSearchDemoState extends State<ShowSearchDemo> {
       appBar: AppBar(
         title: Text('Flutter Search'),
         actions: <Widget>[
-          Builder(
-            builder: (context) {
-              return IconButton(
-                icon: Icon(Icons.search),
-                onPressed: () {
-                  showSearch<String>(
-                    context: context,
-                    delegate: CustomSearchDelegate(list: _list, select: '', callback: (String query) {
-                      ddlog(query);
-                      setState(() {
-                        if (query.isEmpty) {
-                          _list = List.generate(100, (i) => 'item $i');
-                        } else {
-                          var filterList = _list.where((String s) => s.contains(query.trim()));
-                          _list = filterList.toList();
-                        }
-                      });
-                    }),
-                  );
-                },
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () {
+              showSearch<String>(
+                context: context,
+                query: search,
+                delegate: CustomSearchDelegate(
+                  list: filters,
+                  select: '',
+                  onSelected: (String query) {
+                    ddlog(query);
+                    filters = list.where((e) => query.isEmpty ? e != null : e.contains(query.trim())).toList();
+                    setState(() {});
+                  },
+                ),
               );
             },
-          )
+          ),
         ],
       ),
       body: ListView(
-        children:
-        _list.map((e) => ListTile(
+        children: filters.map((e) => ListTile(
             title: Text(e),
-          ),).toList(),
+          ),
+        ).toList(),
       ),
     );
   }
@@ -74,11 +71,15 @@ class _ShowSearchDemoState extends State<ShowSearchDemo> {
 
 
 class CustomSearchDelegate extends SearchDelegate<String> {
-  List<String> list;
-  String select = "";
-  void Function(String select) callback;
+  CustomSearchDelegate({
+    required this.list,
+    this.select = "",
+    required this.onSelected,
+  });
 
-  CustomSearchDelegate({required this.list, required this.select, required this.callback});
+  final List<String> list;
+  final String select;
+  final ValueChanged<String> onSelected;
 
   @override
   appBarTheme(BuildContext context) {
@@ -92,7 +93,7 @@ class CustomSearchDelegate extends SearchDelegate<String> {
         icon: Icon(Icons.close),
         onPressed: () {
           query = '';
-          callback(query);
+          onSelected(query);
         },
       ),
     ];
@@ -103,7 +104,7 @@ class CustomSearchDelegate extends SearchDelegate<String> {
     return IconButton(
       icon: Icon(Icons.arrow_back),
       onPressed: () {
-        callback(query);
+        onSelected(query);
         close(context, query);
       },
     );
@@ -118,11 +119,11 @@ class CustomSearchDelegate extends SearchDelegate<String> {
         leading: Icon(Icons.message),
         title: Text(
           e,
-          style: Theme.of(context).textTheme.headline6,
+          style: Theme.of(context).textTheme.titleLarge,
         ),
         onTap: () {
           query = e;
-          callback(e);
+          onSelected(e);
           close(context, e);
         },
       )).toList(),
@@ -142,7 +143,7 @@ class CustomSearchDelegate extends SearchDelegate<String> {
         ),
         onTap: () {
           query = e;
-          callback(e);
+          onSelected(e);
           close(context, e);
         },
       )).toList(),

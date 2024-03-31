@@ -11,6 +11,7 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_filter.dart';
 import 'package:flutter_templet_project/basicWidget/n_slider.dart';
+import 'package:flutter_templet_project/extension/string_ext.dart';
 
 
 class FilterDemo extends StatefulWidget {
@@ -72,8 +73,8 @@ class _FilterDemoState extends State<FilterDemo> {
                     sigmaX: 2,
                     sigmaY: 2,
                   ),
-                  child: Image.asset(
-                    'images/404.png',
+                  child: Image(
+                    image: '404.png'.toAssetImage(),
                     fit: BoxFit.cover,
                     width: 200.0,
                     height: 120.0,
@@ -93,8 +94,8 @@ class _FilterDemoState extends State<FilterDemo> {
         sigmaX: 2,
         sigmaY: 2,
       ),
-      child: Image.asset(
-        'images/404.png',
+      child: Image(
+        image: '404.png'.toAssetImage(),
         fit: BoxFit.cover,
         width: 200.0,
         height: 120.0,

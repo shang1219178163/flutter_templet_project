@@ -8,7 +8,7 @@ class NavigatorUtil {
   static toLoginPage() {
     // toPage(APPRouter.loginPage);
     if (Get.currentRoute != APPRouter.loginPage) {
-      Get.toNamed(APPRouter.loginPage);
+      Get.offAllNamed(APPRouter.loginPage);
     }
   }
 

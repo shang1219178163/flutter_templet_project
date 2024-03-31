@@ -59,6 +59,7 @@ class BaseRequestAPI {
 
   bool get needToken => true;
 
+  @Deprecated("已弃用,请使用 canUpdateCache")
   bool get shouldCache => false;
 
   /// 接口调用地方处理异常code
