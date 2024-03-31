@@ -49,7 +49,6 @@ class Assets {
   static const String dataCarModels = 'assets/data/car_models.json';
   static const String dataChina = 'assets/data/china.json';
   static const String dataContacts = 'assets/data/contacts.json';
-  static const String dataRequestApiTemplet = 'assets/data/ApiCreateTemplet.dart';
   static const String images404 = 'assets/images/404.png';
   static const String imagesAvatar = 'assets/images/avatar.png';
   static const String imagesBg = 'assets/images/bg.png';
@@ -89,6 +88,7 @@ class Assets {
   static const String imagesIconEyeClose = 'assets/images/icon_eye_close.png';
   static const String imagesIconEyeOpen = 'assets/images/icon_eye_open.png';
   static const String imagesIconFileUnknow = 'assets/images/icon_file_unknow.png';
+  static const String imagesIconFilter = 'assets/images/icon_filter.png';
   static const String imagesIconHeart = 'assets/images/icon_heart.png';
   static const String imagesIconHeartBorder = 'assets/images/icon_heart_border.png';
   static const String imagesIconHeartHalf = 'assets/images/icon_heart_half.png';
