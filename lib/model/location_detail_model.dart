@@ -10,8 +10,8 @@
 
 /// 高德地图定位模型(省市区信息 android上只有通过[AMapLocationOption.needAddress]为true时才有可能返回值)
 class LocationDetailModel {
-  LocationDetailModel(
-      {this.callbackTime,
+  LocationDetailModel({
+    this.callbackTime,
       this.locTime,
       this.locationType,
       this.accuracy,
@@ -29,7 +29,8 @@ class LocationDetailModel {
       this.streetNumber,
       this.adCode,
       this.address,
-      this.description});
+      this.description,
+  });
 
   /// 回调时间，格式为"yyyy-MM-dd HH:mm:ss
   String? callbackTime;
