@@ -90,4 +90,18 @@ class DBGenericController<E> extends GetxController {
     await deleteAll([id]);
   }
 
+  /// 模型字段更新
+  Future<void> migrate({int limit = 50,}) async {
+    final collections = isar.collection<E>();
+    final count = await collections.count();
+
+    // 我们对用户数据进行分页读写，避免同时将所有数据存放到内存
+    for (var i = 0; i < count; i += limit) {
+      final models = await collections.where().offset(i).limit(limit).findAll();
+      await isar.writeTxn(() async {
+        // 我们不需要更新任何信息，因为 字段 的 getter 已经被使用
+        await collections.putAll(models);
+      });
+    }
+  }
 }
