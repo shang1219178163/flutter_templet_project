@@ -31,9 +31,7 @@ class DBGenericProvider<E> extends ChangeNotifier {
 
   /// 查
   Future<void> update() async {
-    final items = await isar.collection<E>().where().findAll();
-    _entitys.clear();
-    _entitys.addAll(items);
+    await findEntitys();
     notifyListeners();
   }
 
