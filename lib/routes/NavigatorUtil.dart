@@ -6,7 +6,6 @@ class NavigatorUtil {
 
   /// 返回登录页
   static toLoginPage() {
-    // toPage(APPRouter.loginPage);
     if (Get.currentRoute != APPRouter.loginPage) {
       Get.offAllNamed(APPRouter.loginPage);
     }
