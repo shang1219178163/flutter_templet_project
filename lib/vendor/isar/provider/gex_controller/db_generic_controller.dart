@@ -36,12 +36,14 @@ class DBGenericController<E> extends GetxController {
     if (!Get.isRegistered<DBGenericController<E>>()) {
       return;
     }
-    await getAllEntitys();
+    await findEntitys();
     super.update(ids, condition);
   }
 
-  /// 过滤
-  Future<List<E>> filterEntitys({Future<List<E>> Function(QueryBuilder<E, E, QFilterCondition> isarItems)? filterCb}) async {
+  /// 查
+  ///
+  /// filterCb 为空,返回所有实体
+  Future<List<E>> findEntitys({Future<List<E>> Function(QueryBuilder<E, E, QFilterCondition> isarItems)? filterCb}) async {
     final collections = isar.collection<E>();
     final filters = collections.filter();
     final items = await filterCb?.call(filters) ?? await collections.where().findAll();
@@ -50,13 +52,8 @@ class DBGenericController<E> extends GetxController {
     return _entitys;
   }
 
-  /// 获取所有实体
-  Future<List<E>> getAllEntitys() async {
-    return filterEntitys();
-  }
-
   /// 寻找第一个
-  Future<E?> filterEntity({required Future<E?> Function(QueryBuilder<E, E, QFilterCondition> isarItems) filterCb}) async {
+  Future<E?> findEntity({required Future<E?> Function(QueryBuilder<E, E, QFilterCondition> isarItems) filterCb}) async {
     final collections = isar.collection<E>();
     final filters = collections.filter();
     final item = await filterCb(filters);
