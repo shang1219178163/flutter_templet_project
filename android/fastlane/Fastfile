@@ -29,16 +29,31 @@ platform :android do
     )
   end
 
+  desc "打包并上传 develop 版本, to: pgy/fir"
+  lane :release do |options|
+    platform = options[:to]
+    platform = platform ? platform : "pgy"
+
+    type = 'Release'
+    build(type: type)
+    filePath = rename(type: type);
+
+    if platform.start_with?"fir"
+      uploadFir(filePath: filePath)
+    else
+      uploadPgyer(filePath: filePath)
+    end
+  end
+
 
   desc "打包并上传 develop 版本, to: pgy/fir"
   lane :develop do |options|
-    #默认env文件
     platform = options[:to]
     platform = platform ? platform : "pgy"
 
     type = options[:type] || 'Release'
     build(type: type)
-    filePath = rename(type: type);
+    filePath = rename(type: type, ipaDir: ENV["IpaDir_Development"]);
 
     if platform.start_with?"fir"
       uploadFir(filePath: filePath)
@@ -51,7 +66,6 @@ platform :android do
 
   desc "打包并上传 develop 版本, to: pgy/fir"
   lane :upload do |options|
-    #默认env文件
     platform = options[:to]
     platform = platform ? platform : "pgy"
 
@@ -126,12 +140,11 @@ platform :android do
 
 
   desc "rename"
-  def rename(type: 'Release')
+  def rename(type: 'Release', ipaDir: ENV["IpaDir_AppStore"])
     fileName = getAppName();
     UI.message "fileName: #{fileName}"
 
     current = getProjectDir();
-
 
     apkDir = "#{current}/build/app/outputs/flutter-apk"
     apkPath = "#{apkDir}/app-#{type.downcase}.apk"
@@ -139,7 +152,6 @@ platform :android do
 
     sh("mv #{apkPath} #{apkPathNew}")
 
-    ipaDir = ENV["IpaDir_Development"]
     ipaPath = "#{ipaDir}/#{fileName}.apk"
     sh("mv #{apkPathNew} #{ipaPath}")
     return ipaPath;
