@@ -116,7 +116,7 @@ class BaseRequestAPI {
     if (hasLoading) {
       EasyToast.showLoading("请求中");
     }
-    final response = await RequestManager().request(api);
+    final response = await api.fetch();
     if (hasLoading) {
       EasyToast.hideLoading();
     }
@@ -142,7 +142,7 @@ class BaseRequestAPI {
     List<T> Function(Map<String, dynamic> response)? onList,
   }) async {
     BaseRequestAPI api = this;
-    final response = await RequestManager().request(api);
+    final response = await api.fetch();
     if (response.isEmpty) {
       return (isSuccess: false, message: "", list: <T>[]);
     }
