@@ -52,12 +52,12 @@ class TagClearApi extends BaseRequestAPI{
 
   bool get validateParamsOld {
     if (ownerId == null) {
-      EasyToast.showInfoToast('对象ID 不能为空', needLogin: true);
+      EasyToast.showInfo('对象ID 不能为空', needLogin: true);
       return false;
     }
 
     if (diseaseDepartmentId == null) {
-      EasyToast.showInfoToast('diseaseDepartmentId 不能为空', needLogin: true);
+      EasyToast.showInfo('diseaseDepartmentId 不能为空', needLogin: true);
       return false;
     }
     return true;

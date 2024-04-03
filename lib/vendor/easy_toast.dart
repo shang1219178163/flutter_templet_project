@@ -8,30 +8,17 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 class EasyToast {
   // toast
   static void showToast(
-      String text, {
-        int milliseconds = 1500,
-        VoidCallback? cb,
-        bool needLogin = false,
-      }) {
-    final duration = Duration(milliseconds: milliseconds);
-    EasyLoading.showToast(
-      text,
-      duration: duration,
-    );
-    if (cb != null) {
-      Timer(duration, cb);
-    }
-  }
-
-  // toast - 错误
-  static void showInfoToast(
     String text, {
       int milliseconds = 1500,
       VoidCallback? cb,
       bool needLogin = false,
   }) {
+    if (text.isEmpty) {
+      return;
+    }
+
     final duration = Duration(milliseconds: milliseconds);
-    EasyLoading.showInfo(
+    EasyLoading.showToast(
       text,
       duration: duration,
     );
@@ -41,10 +28,14 @@ class EasyToast {
   // toast - 错误
   static void showInfo(
     String text, {
-    int milliseconds = 1500,
-    VoidCallback? cb,
-    bool needLogin = false,
+      int milliseconds = 1500,
+      VoidCallback? cb,
+      bool needLogin = false,
   }) {
+    if (text.isEmpty) {
+      return;
+    }
+
     final duration = Duration(milliseconds: milliseconds);
     EasyLoading.showInfo(
       text,
@@ -54,25 +45,31 @@ class EasyToast {
   }
 
   // toast - 成功
-  static void showSuccessToast(
+  static void showSuccess(
     String text, {
     int milliseconds = 2000,
     VoidCallback? cb,
   }) {
+    if (text.isEmpty) {
+      return;
+    }
+
     final duration = Duration(milliseconds: milliseconds);
     EasyLoading.showSuccess(
       text,
       duration: duration,
     );
-    if (cb != null) {
-      Timer(duration, cb);
-    }
+    Future.delayed(duration, cb);
   }
 
   // loading - 加载
   static void showLoading(String content, {
     Widget? indicator,
   }) {
+    if (content.isEmpty) {
+      return;
+    }
+
     EasyLoading.show(
       status: content,
       indicator: indicator,

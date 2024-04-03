@@ -57,15 +57,15 @@ class TagSetApi extends BaseRequestAPI{
 
   bool get validateParamsOld {
     if (tagsId.isEmpty) {
-      EasyToast.showInfoToast('标签ID 不能为空');
+      EasyToast.showInfo('标签ID 不能为空');
       return false;
     }
     if (ownerId == null) {
-      EasyToast.showInfoToast('对象ID 不能为空');
+      EasyToast.showInfo('对象ID 不能为空');
       return false;
     }
     if (ownerType == null) {
-      EasyToast.showInfoToast('对象类型 不能为空');
+      EasyToast.showInfo('对象类型 不能为空');
       return false;
     }
 

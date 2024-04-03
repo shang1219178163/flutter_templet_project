@@ -46,11 +46,11 @@ class TagListApi extends BaseRequestAPI{
 
   bool get validateParamsOld {
     if (diseaseDepartmentId == null) {
-      EasyToast.showInfoToast('diseaseDepartmentId 不能为空', needLogin: true);
+      EasyToast.showInfo('diseaseDepartmentId 不能为空', needLogin: true);
       return false;
     }
     if (name == null) {
-      EasyToast.showInfoToast('name 不能为空', needLogin: true);
+      EasyToast.showInfo('name 不能为空', needLogin: true);
       return false;
     }
     return true;

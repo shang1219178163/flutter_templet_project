@@ -57,12 +57,12 @@ class TagGetApi extends BaseRequestAPI{
   bool get validateParamsOld {
 
     if (diseaseDepartmentId == null) {
-      EasyToast.showInfoToast('diseaseDepartmentId 不能为空', needLogin: true);
+      EasyToast.showInfo('diseaseDepartmentId 不能为空', needLogin: true);
       return false;
     }
 
     if (agencyId == null) {
-      EasyToast.showInfoToast('agencyId 不能为空', needLogin: true);
+      EasyToast.showInfo('agencyId 不能为空', needLogin: true);
       return false;
     }
 
