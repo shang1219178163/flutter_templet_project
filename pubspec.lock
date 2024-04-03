@@ -489,6 +489,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "5.4.1"
+  dio_cache_interceptor:
+    dependency: "direct main"
+    description:
+      name: dio_cache_interceptor
+      sha256: fb7905c0d12075d8786a6b63bffd64ae062d053f682cfaf28d145a2686507308
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.5.0"
   dio_cookie_manager:
     dependency: "direct main"
     description:
