@@ -28,6 +28,7 @@ import 'package:flutter_templet_project/pages/demo/AppLifecycleStateObserverDemo
 import 'package:flutter_templet_project/pages/demo/AppRouteAwareDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AppRouteAwareDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/AppWebViewDemo.dart';
+import 'package:flutter_templet_project/pages/demo/AsyncDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ComponentMiddlePage.dart';
 import 'package:flutter_templet_project/pages/demo/DataTypeDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DevelopToolList.dart';
@@ -698,6 +699,7 @@ class APPRouter {
   static const nestedScrollViewDemoThree = '/nestedScrollViewDemoThree';
   static const apiCreatePage = '/apiCreatePage';
   static const formDemo = '/formDemo';
+  static const asyncDemo = '/asyncDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -1101,6 +1103,7 @@ class AppPage {
     GetPage(name: APPRouter.nestedScrollViewDemoThree, page: () => NestedScrollViewDemoThree(),),
     GetPage(name: APPRouter.apiCreatePage, page: () => ApiCreatePage(),),
     GetPage(name: APPRouter.formDemo, page: () => FormDemo(),),
+    GetPage(name: APPRouter.asyncDemo, page: () => AsyncDemo(),),
 
 
 
