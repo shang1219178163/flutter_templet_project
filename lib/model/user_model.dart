@@ -17,7 +17,7 @@ class UserModel {
     this.phone,
     this.website,
     this.company,
-    this.isSelected,
+    this.isSelected = false,
   });
   
   int? id;
@@ -29,7 +29,7 @@ class UserModel {
   String? website;
   Company? company;
   
-  bool? isSelected;
+  bool isSelected = false;
   
   
   UserModel.fromJson(Map<String, dynamic> json) {
@@ -44,7 +44,7 @@ class UserModel {
     company =
     json['company'] != null ? Company.fromJson(json['company']) : null;
 
-    isSelected = json['isSelected'];
+    isSelected = json['isSelected'] ?? false;
   }
 
   Map<String, dynamic> toJson() {
