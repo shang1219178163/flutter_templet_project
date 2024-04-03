@@ -107,7 +107,7 @@ class BaseRequestAPI {
   /// onResult 根据 response 返回和泛型 T 对应的值(默认值取 response["result"])
   ///
   /// return (请求是否成功, 提示语)
-  Future<({bool isSuccess, String message, T? result})>fetchResult<T>({
+  Future<({bool isSuccess, String message, T? result})> fetchResult<T>({
     required T Function(Map<String, dynamic> response)? onResult,
   }) async {
     BaseRequestAPI api = this;
