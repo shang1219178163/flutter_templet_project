@@ -112,12 +112,12 @@ class TagGetApi extends BaseRequestAPI{
   bool get validateParamsOld {
 
     if (diseaseDepartmentId == null) {
-      EasyToast.showInfoToast('diseaseDepartmentId 不能为空', needLogin: true);
+      EasyToast.showInfo('diseaseDepartmentId 不能为空', needLogin: true);
       return false;
     }
 
     if (agencyId == null) {
-      EasyToast.showInfoToast('agencyId 不能为空', needLogin: true);
+      EasyToast.showInfo('agencyId 不能为空', needLogin: true);
       return false;
     }
 
@@ -469,7 +469,7 @@ class TagGetApi extends BaseRequestAPI{
         tmp = tmp.replaceAll("needLogin: true", "");
         tmp = tmp.replaceAll(", ", "");
         tmp = tmp.replaceAll(");", "");
-        tmp = tmp.replaceAll("EasyToast.showInfoToast(", "");
+        tmp = tmp.replaceAll("EasyToast.showInfo(", "");
         tmp = tmp.replaceAll("EasyToast.showToast(", "");
 
         return "return (false, $tmp);";
