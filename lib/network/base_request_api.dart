@@ -136,13 +136,14 @@ class BaseRequestAPI {
   /// onResult 根据字典返回 true 的判断条件
   /// hasLoading 是否展示 loading
   /// return (请求是否成功, 提示语, 数组)
-  Future<({bool isSuccess, String message, List<T> list})> fetchList<T extends Map<String, dynamic>>({
+  Future<({bool isSuccess, String message, List<T> list})>
+      fetchList<T extends Map<String, dynamic>>({
     List<T> Function(Map<String, dynamic> response)? onList,
   }) async {
     BaseRequestAPI api = this;
     final response = await RequestManager().request(api);
     if (response.isEmpty) {
-      return (isSuccess: false, message: RequestMsg.networkErrorMsg, list: <T>[]);
+      return (isSuccess: false, message: "", list: <T>[]);
     }
     bool isSuccess = response["code"] == "OK";
     String message = response["message"] ?? "";
