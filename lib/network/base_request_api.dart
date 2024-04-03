@@ -104,11 +104,12 @@ class BaseRequestAPI {
 
   /// 返回布尔值的数据请求
   ///
-  /// onResult 根据字典返回 true 的判断条件
+  /// onSuccess 根据字典返回 true 的判断条件(默认判断 response["result"] 布尔值真假)
   /// hasLoading 是否展示 loading
+  ///
   /// return (请求是否成功, 提示语)
   Future<({bool isSuccess, String message})> fetchBool({
-    required bool Function(Map<String, dynamic> response)? onSuccess,
+    bool Function(Map<String, dynamic> response)? onSuccess,
     bool hasLoading = true,
   }) async {
     BaseRequestAPI api = this;
@@ -133,8 +134,8 @@ class BaseRequestAPI {
 
   /// 返回列表类型请求接口
   ///
-  /// onResult 根据字典返回 true 的判断条件
-  /// hasLoading 是否展示 loading
+  /// onList 根据字典返回数组;(默认取 response["result"] 对应的数组值)
+  ///
   /// return (请求是否成功, 提示语, 数组)
   Future<({bool isSuccess, String message, List<T> list})>
       fetchList<T extends Map<String, dynamic>>({
