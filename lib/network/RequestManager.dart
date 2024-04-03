@@ -7,6 +7,7 @@
 //
 
 import 'package:dio/dio.dart';
+import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_templet_project/cache/cache_service.dart';
@@ -22,20 +23,32 @@ import 'package:flutter_templet_project/util/debug_log.dart';
 
 
 class RequestManager extends BaseRequestAPI {
-  // static const BASE_URL = "";
-  static const CODE_SUCCESS = 200;
-  static const CODE_TIME_OUT = -1;
-
   // 私有构造器
   RequestManager._();
 
-  // 静态变量指向自身
   static final RequestManager _instance = RequestManager._();
 
   // 方案1：工厂构造方法获得实例变量
   factory RequestManager() => _instance;
 
   String? get token => CacheService().token;
+
+  // static const BASE_URL = "";
+  static const CODE_SUCCESS = 200;
+  static const CODE_TIME_OUT = -1;
+
+  // final cacheStore = MemCacheStore(maxSize: 10485760, maxEntrySize: 1048576);
+  // late final cacheOptions = CacheOptions(
+  //   store: cacheStore,
+  //   hitCacheOnErrorExcept: [], // for offline behaviour
+  // );
+
+  late final cacheInterceptor = DioCacheInterceptor(
+      options: CacheOptions(
+        store: MemCacheStore(maxSize: 10485760, maxEntrySize: 1048576),
+        hitCacheOnErrorExcept: [], // for offline behaviour
+      ),
+  );
 
   // Dio _dio = Dio();
   Dio getDio() {
@@ -69,6 +82,9 @@ class RequestManager extends BaseRequestAPI {
       },
     );
     dio.interceptors.add(interceptor);
+
+    dio.interceptors.add(cacheInterceptor);
+
     DioProxy.setProxy(dio);
 
     /// 添加抓包代理
