@@ -27,6 +27,14 @@ mixin TagApiMixin<T extends TagDetailModel> {
       diseaseDepartmentId: diseaseDepartmentId,
       agencyId: agencyId,
     );
+
+    // var tuple = await api.fetchList<T>(
+    //   onList: (respone){
+    //     final result = respone["result"] as List<Map<String, dynamic>>? ?? <Map<String, dynamic>>[];
+    //     return result.map((e) => TagDetailModel.fromJson(e) as T).toList();
+    //   },
+    // );
+
     var tuple = await api.fetchModels<T>(
       onModel: (json) => TagDetailModel.fromJson(json) as T,//dart 泛型传递有问题,必须声明一下
       // onModels: (jsons) => jsons.map((e) => TagDetailModel.fromJson(e) as T).toList(),
