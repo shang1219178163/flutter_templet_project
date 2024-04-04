@@ -70,7 +70,7 @@ class TagGetxController extends GetxController with TagApiMixin {
       selectTags: selectTags,
       publicUserId: publicUserId,
     );
-    isUpdate = tuple.isSuccess;
+    isUpdate = tuple.isSuccess && tuple.result;
     return tuple;
   }
 

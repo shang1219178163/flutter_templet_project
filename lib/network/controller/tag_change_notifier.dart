@@ -60,7 +60,7 @@ class TagViewModel extends ChangeNotifier with TagApiMixin {
       selectTags: selectTags,
       publicUserId: publicUserId,
     );
-    isUpdate = tuple.isSuccess;
+    isUpdate = tuple.isSuccess && tuple.result;
     return tuple;
   }
 
