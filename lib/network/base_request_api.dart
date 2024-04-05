@@ -57,6 +57,7 @@ class BaseRequestAPI {
 
   /// 毫秒
   Duration? get connectTimeout => null;
+
   /// 毫秒
   Duration? get receiveTimeout => null;
 
@@ -90,12 +91,13 @@ class BaseRequestAPI {
     return null;
   }
 
-  Future<bool>? removeCache(){
+  Future<bool>? removeCache() {
     // TODO: implement jsonFromCache
     // throw UnimplementedError();
     return Future.value(false);
   }
 
+  
   /// 发起请求
   Future<Map<String, dynamic>> fetch() async {
     final response = await RequestManager().request(this);
@@ -127,14 +129,14 @@ class BaseRequestAPI {
 
   /// 返回布尔值的数据请求
   ///
-  /// onSuccess 根据字典返回 true 的判断条件(默认判断 response["result"] 布尔值真假)
+  /// onTrue 根据字典返回 true 的判断条件(默认判断 response["result"] 布尔值真假)
   /// defaultValue 默认值 false,
   /// hasLoading 是否展示 loading
   ///
   /// return (请求是否成功, 提示语, response["result"]对应的值,为空返回默认值)
   /// 备注: isSuccess == false 且 message为空一般为断网
   Future<({bool isSuccess, String message, bool result})> fetchBool({
-    bool Function(Map<String, dynamic> response)? onSuccess,
+    bool Function(Map<String, dynamic> response)? onTrue,
     bool defaultValue = false,
     bool hasLoading = true,
   }) async {
@@ -142,7 +144,7 @@ class BaseRequestAPI {
       EasyToast.showLoading("请求中");
     }
     final tuple = await fetchResult<bool>(
-      onResult: onSuccess,
+      onResult: onTrue,
       defaultValue: defaultValue,
     );
     if (hasLoading) {
@@ -151,7 +153,7 @@ class BaseRequestAPI {
     return tuple;
   }
 
-  /// 返回列表类型请求接口
+  /// 返回列表类型请求接口(T 只能是基础类型,不能是模型)
   ///
   /// onList 根据字典返回数组;(默认取 response["result"] 对应的数组值)
   /// defaultValue 默认值空数组
