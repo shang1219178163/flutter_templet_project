@@ -9,6 +9,11 @@ platform :ios do
   #蒲同英
   PgyerApiKey = "*"
 
+  # 生产包目录
+  ProductionDir  = "/Users/#{`whoami`}/Desktop/ipa_appStore".gsub("\n", "")
+  # 开发包目录
+  DevelopmentDir  = "/Users/#{`whoami`}/Desktop/ipa_development".gsub("\n", "")
+
 
   ## Common
   desc "打包 release 版本, to: pgy/fir/release"
@@ -30,11 +35,11 @@ platform :ios do
     platform = platform ? platform : "rel"
     
     if platform.start_with?"rel" 
-      uploadRelease(ipaDir: ENV["IpaDir_AppStore"])
+      uploadRelease(ipaDir: ProductionDir)
     elsif platform.start_with?"fir" 
-      uploadFir(ipaDir: ENV["IpaDir_AppStore"])
+      uploadFir(ipaDir: ProductionDir)
     else
-      uploadPgyer(ipaDir: ENV["IpaDir_AppStore"])
+      uploadPgyer(ipaDir: ProductionDir)
     end
   
   end
@@ -43,7 +48,7 @@ platform :ios do
   desc "打包 development 版本, to: pgy/fir"
   lane :develop do |options|
     #默认env文件
-    archiveDevelopment() 
+    archiveDevelopment(ipaDir: DevelopmentDir)
 
     platform = options[:to]
     platform = platform ? platform : "pgy"
@@ -68,7 +73,7 @@ platform :ios do
 
 
   desc "[通用]发布新版本到 AppStore"
-  def archiveRelease(name: ENV["Scheme_Name"], ipaDir: ENV["IpaDir_AppStore"])
+  def archiveRelease(name: ENV["Scheme_Name"], ipaDir: ProductionDir)
     clear_cache_files()
     # cocoapods()
     updateBuildVersion(showHash: false)
@@ -89,7 +94,7 @@ platform :ios do
 
 
   desc "[通用]发布新版本到 AppStore"
-  def uploadRelease(name: ENV["Scheme_Name"], ipaDir: ENV["IpaDir_AppStore"])
+  def uploadRelease(name: ENV["Scheme_Name"], ipaDir: ProductionDir)
     deliver(force: true,
       # ipa: "/Users/shang/ACS/access-admin-app-ios/ipa_appStore/AccessControlSystem.ipa",
       ipa: "#{ipaDir}/#{name}.ipa",
@@ -102,7 +107,7 @@ platform :ios do
 
 
   desc "[通用]发布新版本到 fir"
-  def archiveDevelopment(name: ENV["Scheme_Name"], ipaDir: ENV["IpaDir_Development"])
+  def archiveDevelopment(name: ENV["Scheme_Name"], ipaDir: DevelopmentDir)
     updateBuildVersion(showHash: false)
     gym(
       clean: false,
@@ -125,14 +130,14 @@ platform :ios do
 
 
   desc "上传ipad 到 firim"
-  def uploadFir(name: ENV["Scheme_Name"], ipaDir: ENV["IpaDir_Development"], firToken: FirToken)
+  def uploadFir(name: ENV["Scheme_Name"], ipaDir: DevelopmentDir, firToken: FirToken)
     firim(firim_api_token: firToken, icon: ENV["App_Icon_Local"], ipa: "#{ipaDir}/#{name}.ipa")
     handleDingTalk(name: name, ipaDir: ipaDir, downloadUrl: ENV["Firim_Shortcut_Link"])
   end
 
 
   desc "上传ipad 到 Pgyer"
-  def uploadPgyer(name: ENV["Scheme_Name"], ipaDir: ENV["IpaDir_Development"], apiKey: PgyerApiKey)
+  def uploadPgyer(name: ENV["Scheme_Name"], ipaDir: DevelopmentDir, apiKey: PgyerApiKey)
     # uploadtime = Time.now.strftime("%Y%m%d%H%M")
     uploadtime = Time.now.strftime("%Y-%m-%d %H:%M:%S")
 
@@ -169,7 +174,7 @@ platform :ios do
 
 
   desc "webhook 钉钉"
-  def handleDingTalk(name: ENV["Scheme_Name"], ipaDir: ENV["IpaDir_Development"], downloadUrl: ENV["Firim_Shortcut_Link"], qrcodeURL: ENV["Firim_Shortcut_Link"])
+  def handleDingTalk(name: ENV["Scheme_Name"], ipaDir: DevelopmentDir, downloadUrl: ENV["Firim_Shortcut_Link"], qrcodeURL: ENV["Firim_Shortcut_Link"])
     appPath = ipaDir + "/#{name}.ipa" 
     params = {appPath: appPath,
               # appIcon: ENV["App_Icon_Link"],
@@ -184,7 +189,7 @@ platform :ios do
 
 
   desc "推送通知到slack"
-  def handleDingSlack(name: ENV["Scheme_Name"], ipaDir: ENV["IpaDir_Development"], downloadUrl: ENV["Firim_Shortcut_Link"])
+  def handleDingSlack(name: ENV["Scheme_Name"], ipaDir: DevelopmentDir, downloadUrl: ENV["Firim_Shortcut_Link"])
     appPath = ipaDir + "/#{name}.ipa" 
     params = {appPath: appPath,
               appIcon: ENV["App_Icon_Link"],

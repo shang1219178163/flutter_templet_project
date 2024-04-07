@@ -1,6 +1,6 @@
 
 apple_id ENV["Apple_Id"]
-app_identifier ENV["App_Identifier"]
+app_identifier ENV["App_bundleid"]
 
 itc_team_name ENV["Itc_Team_Name"]
 itc_team_id ENV["Itc_Team_Id"]

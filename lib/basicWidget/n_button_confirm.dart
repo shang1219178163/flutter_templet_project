@@ -22,6 +22,7 @@ class NButtonConfirm extends StatelessWidget {
     required this.onPressed,
     this.height = 44,
     this.width,
+    this.margin,
     this.padding,
     this.borderRadius = const BorderRadius.all(Radius.circular(8)),
     this.boxShadow,
@@ -37,6 +38,8 @@ class NButtonConfirm extends StatelessWidget {
   /// 高度
   final double height;
   final double? width;
+
+  final EdgeInsets? margin;
 
   final EdgeInsets? padding;
 
@@ -58,6 +61,7 @@ class NButtonConfirm extends StatelessWidget {
         child: Container(
           width: width,
           height: height,
+          margin: margin,
           padding: padding,
           alignment: Alignment.center,
           decoration: BoxDecoration(

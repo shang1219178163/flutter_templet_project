@@ -9,7 +9,11 @@ platform :android do
   #蒲同英
   PgyerApiKey = "*"
 
-  # project_dir = 'android/'
+  # 生产包目录
+  ProductionDir  = "/Users/#{`whoami`}/Desktop/ipa_appStore".gsub("\n", "")
+    # 开发包目录
+  DevelopmentDir  = "/Users/#{`whoami`}/Desktop/ipa_development".gsub("\n", "")
+  
 
   ## Common
   desc "打包 development 版本, to: pgy/fir"
@@ -53,7 +57,7 @@ platform :android do
 
     type = options[:type] || 'Release'
     build(type: type)
-    filePath = rename(type: type, ipaDir: ENV["IpaDir_Development"]);
+    filePath = rename(type: type, ipaDir: DevelopmentDir);
 
     if platform.start_with?"fir"
       uploadFir(filePath: filePath)
@@ -71,7 +75,7 @@ platform :android do
 
     fileName = getAppName()
 
-    fileDir = ENV["IpaDir_Development"]
+    fileDir = DevelopmentDir
     filePath = "#{fileDir}/#{fileName}.apk"
     UI.message "upload fileName: #{fileName}"
     UI.message "upload filePath: #{filePath}"
@@ -140,7 +144,7 @@ platform :android do
 
 
   desc "rename"
-  def rename(type: 'Release', ipaDir: ENV["IpaDir_AppStore"])
+  def rename(type: 'Release', ipaDir: ProductionDir)
     fileName = getAppName();
     UI.message "fileName: #{fileName}"
 
@@ -216,7 +220,7 @@ platform :android do
 
     fileName = getAppName()
 
-    fileDir = ENV["IpaDir_Development"]
+    fileDir = DevelopmentDir
     filePath = "#{fileDir}/#{fileName}.apk"
     UI.message "upload fileName: #{fileName}"
     UI.message "upload filePath: #{filePath}"

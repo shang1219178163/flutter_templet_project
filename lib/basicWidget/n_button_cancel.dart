@@ -22,6 +22,7 @@ class NButtonCancel extends StatelessWidget {
     required this.onPressed,
     this.height = 44,
     this.width,
+    this.margin,
     this.padding,
     this.borderRadius = const BorderRadius.all(Radius.circular(8)),
     this.enable = true,
@@ -38,6 +39,7 @@ class NButtonCancel extends StatelessWidget {
   final double height;
   final double? width;
 
+  final EdgeInsets? margin;
   final EdgeInsets? padding;
   final BorderRadius? borderRadius;
   /// 按钮是否可点击
@@ -55,6 +57,7 @@ class NButtonCancel extends StatelessWidget {
         child: Container(
           width: width,
           height: height,
+          margin: margin,
           padding: padding,
           alignment: Alignment.center,
           decoration: BoxDecoration(
