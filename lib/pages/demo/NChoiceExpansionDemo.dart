@@ -87,7 +87,7 @@ class _NChoiceExpansionDemoState extends State<NChoiceExpansionDemo> {
   List<Widget> buildChoiceExpansions() {
     return [
       NChoiceExpansion(
-        title: '标签 单选',
+        title: '标签 单选(用对象 id 对比)',
         items: items,
         titleCb: (e) => e.name ?? "",
         selectedCb: (e) => e.id == selectTag?.id,

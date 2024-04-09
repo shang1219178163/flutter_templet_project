@@ -17,7 +17,11 @@ class NChoiceExpansionOfModel<T extends TagDetailModel> extends StatelessWidget 
   const NChoiceExpansionOfModel({
   	super.key,
     required this.title,
-    this.titleStyle,
+    this.titleStyle = const TextStyle(
+      color: Color(0xff737373),
+      fontSize: 14,
+      fontWeight: FontWeight.w500,
+    ),
     required this.items,
     this.isSingle = false,
     required this.onChanged,
@@ -50,6 +54,7 @@ class NChoiceExpansionOfModel<T extends TagDetailModel> extends StatelessWidget 
   Widget build(BuildContext context) {
     return NChoiceExpansion<T>(
       title: title,
+      titleStyle: titleStyle,
       items: items,
       titleCb: (e) => e.name ?? "",
       selectedCb: (e) => e.isSelected == true,

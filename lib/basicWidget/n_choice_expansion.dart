@@ -20,7 +20,11 @@ class NChoiceExpansion<T> extends StatefulWidget {
   NChoiceExpansion({
     super.key,
     required this.title,
-    this.titleStyle,
+    this.titleStyle = const TextStyle(
+      color: Color(0xff737373),
+      fontSize: 14,
+      fontWeight: FontWeight.w500,
+    ),
     required this.items,
     required this.titleCb,
     required this.selectedCb,
