@@ -18,7 +18,7 @@ class NChoiceExpansionOfModel<T extends TagDetailModel> extends StatelessWidget 
   	super.key,
     required this.title,
     required this.items,
-    this.isMuti = false,
+    this.isSingle = false,
     required this.onChanged,
     this.onSingleChanged,
     this.itemBuilder,
@@ -28,7 +28,7 @@ class NChoiceExpansionOfModel<T extends TagDetailModel> extends StatelessWidget 
   //组数据
   final List<T> items;
 
-  final bool isMuti;
+  final bool isSingle;
   final ValueChanged<List<T>> onChanged;
   final ValueChanged<T?>? onSingleChanged;
   final Widget Function(T e)? itemBuilder;
@@ -46,7 +46,7 @@ class NChoiceExpansionOfModel<T extends TagDetailModel> extends StatelessWidget 
           if (element.id == e.id) {
             element.isSelected = !element.isSelected;
           } else {
-            if (!isMuti) {
+            if (isSingle) {
               element.isSelected = false;
             }
           }

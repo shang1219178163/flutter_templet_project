@@ -110,9 +110,24 @@ class _NChoiceExpansionDemoState extends State<NChoiceExpansionDemo> {
       NChoiceExpansionOfModel(
         title: '多多',
         items: items,
-        isMuti: true,
+        isSingle: false,
         onChanged: (list){
           ddlog(list.map((e) => "${e.name}_${e.isSelected}"));
+        },
+        itemBuilder: (e) {
+          final isSelected = (e.isSelected == true);
+          return buildItem(e: e, isSelected: isSelected);
+        },
+      ),
+      NChoiceExpansionOfModel(
+        title: '单',
+        items: items,
+        isSingle: true,
+        onChanged: (list){
+          ddlog(list.map((e) => "${e.name}_${e.isSelected}"));
+        },
+        onSingleChanged: (val) {
+          ddlog(val?.name);
         },
         itemBuilder: (e) {
           final isSelected = (e.isSelected == true);
