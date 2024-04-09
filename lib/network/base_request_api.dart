@@ -160,16 +160,23 @@ class BaseRequestAPI {
   ///
   /// return (请求是否成功, 提示语, 数组)
   /// 备注: isSuccess == false 且 message为空一般为断网
-  Future<({bool isSuccess, String message, List<T> list})>
+  Future<({bool isSuccess, String message, List<T> result})>
       fetchList<T extends Map<String, dynamic>>({
     List<T> Function(Map<String, dynamic> response)? onList,
     List<T> defaultValue = const [],
   }) async {
     final tuple = await fetchResult<List<T>>(
-      onResult: onList,
+      onResult: onList ?? (response) {
+        final result = response["result"];
+        if (result is List) {
+          // dart: _GrowableList 与 List 无法 as 强转
+          return List<T>.from(result);
+        }
+        return result;
+      },
       defaultValue: defaultValue,
     );
-    return (isSuccess: tuple.isSuccess, message: tuple.message, list: tuple.result);
+    return tuple;
   }
 
   /// 返回模型列表类型请求接口
@@ -180,7 +187,7 @@ class BaseRequestAPI {
   ///
   /// return (请求是否成功, 提示语, 模型数组)
   /// 备注: isSuccess == false 且 message为空一般为断网
-  Future<({bool isSuccess, String message, List<M> list})>
+  Future<({bool isSuccess, String message, List<M> result})>
       fetchModels<M>({
     List<Map<String, dynamic>> Function(Map<String, dynamic> response)? onList,
     List<Map<String, dynamic>> defaultValue = const [],
@@ -190,9 +197,9 @@ class BaseRequestAPI {
       onList: onList,
       defaultValue: defaultValue,
     );
-    final list = tuple.list;
+    final list = tuple.result;
     final models = list.map(onModel).toList();
-    return (isSuccess: tuple.isSuccess, message: tuple.message, list: models);
+    return (isSuccess: tuple.isSuccess, message: tuple.message, result: models);
   }
 
 }
