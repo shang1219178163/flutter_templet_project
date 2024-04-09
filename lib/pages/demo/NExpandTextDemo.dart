@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_expand_text_vertical.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_header.dart';
 import 'package:flutter_templet_project/basicWidget/n_expand_text.dart';
 import 'package:flutter_templet_project/basicWidget/n_footer.dart';
@@ -29,8 +30,6 @@ class _NExpandTextDemoState extends State<NExpandTextDemo> {
 
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
@@ -44,21 +43,16 @@ class _NExpandTextDemoState extends State<NExpandTextDemo> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              buildText(
-                  text: text,
-                  textStyle: textStyle,
-                  expandTitleStyle: TextStyle(color: Colors.red)
-              ),
-              SizedBox(height: 134,),
+              SizedBox(height: 14,),
               NSectionHeader(
                 title: "字符串不够一行时",
                 child: Container(
                   color: Colors.yellowAccent,
-                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   child: NExpandText(
-                      text: text.substring(0, 20),
-                      textStyle: textStyle,
-                      expandTitleStyle: TextStyle(color: Colors.green)
+                    text: text.substring(0, 20),
+                    textStyle: textStyle,
+                    expandTitleStyle: TextStyle(color: Colors.green)
                   ),
                 ),
               ),
@@ -66,11 +60,11 @@ class _NExpandTextDemoState extends State<NExpandTextDemo> {
                 title: "字符串超过一行时(折叠)",
                 child: Container(
                   color: Colors.yellow,
-                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   child: NExpandText(
-                      text: text,
-                      textStyle: textStyle,
-                      expandTitleStyle: TextStyle(color: Colors.green)
+                    text: text,
+                    textStyle: textStyle,
+                    expandTitleStyle: TextStyle(color: Colors.green)
                   ),
                 ),
               ),
@@ -78,11 +72,33 @@ class _NExpandTextDemoState extends State<NExpandTextDemo> {
                 title: "字符串超过一行时(展开)",
                 child: Container(
                   color: Colors.yellow,
-                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   child: NExpandText(
-                      text: text,
-                      textStyle: textStyle,
-                      expandTitleStyle: TextStyle(color: Colors.green)
+                    text: text,
+                    textStyle: textStyle,
+                    expandTitleStyle: TextStyle(color: Colors.green)
+                  ),
+                ),
+              ),
+              NSectionHeader(
+                title: "NExpandTextVertical",
+                child: NExpandTextVertical(
+                  text: text*2,
+                  isExpand: false,
+                  expandMinLine: 3,
+                ),
+              ),
+              NSectionHeader(
+                title: "NExpandTextVertical",
+                child: NExpandTextVertical(
+                  text: text*2,
+                  isExpand: false,
+                  expandMinLine: 3,
+                  tailingWidth: 100,
+                  tailing: Container(
+                    width: 100,
+                    height: 20,
+                    color: Colors.green,
                   ),
                 ),
               ),
@@ -104,69 +120,6 @@ class _NExpandTextDemoState extends State<NExpandTextDemo> {
         cb: (String val) {
       debugPrint(val);
     });
-  }
-
-  buildText({
-    required String text,
-    required TextStyle textStyle,
-    bool isExpand = false,
-    int expandMaxLine = 10,
-    TextStyle? expandTitleStyle,
-  }) {
-
-    return LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints){
-
-          final textPainter = TextPainterExt.getTextPainter(
-            text: text,
-            textStyle: textStyle,
-            maxLine: 100,
-            maxWidth: constraints.maxWidth,
-          );
-          final numberOfLines = textPainter.computeLineMetrics().length;
-          // debugPrint("numberOfLines:${numberOfLines}");
-
-          return StatefulBuilder(
-              builder: (BuildContext context, StateSetter setState) {
-
-                final btnTitle = isExpand ? "收起" : "展开";
-                return Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Expanded(
-                      child: Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(19))
-                        ),
-                        child: Container(
-                          // width: maxWidth,
-                          // color: Colors.green,
-                          child: Text(text,
-                            style: textStyle,
-                            maxLines: isExpand ? expandMaxLine : 1,
-                          ),
-                        ),
-                      ),
-                    ),
-                    if(numberOfLines > 1) TextButton(
-                      style: TextButton.styleFrom(
-                        padding: EdgeInsets.zero,
-                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                        minimumSize: Size(50, 30),
-                      ),
-                      onPressed: (){
-                        isExpand = !isExpand;
-                        setState((){});
-                      },
-                      child: Text(btnTitle, style: expandTitleStyle,),
-                    ),
-                  ],
-                );
-              }
-          );
-        }
-    );
-
   }
 
   showTipsSheet({

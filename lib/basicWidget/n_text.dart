@@ -8,6 +8,7 @@ class NText extends StatelessWidget {
     this.textAlign,
     this.maxLines,
     this.overflow = TextOverflow.ellipsis,
+    this.softWrap,
     this.style,
     this.fontSize,
     this.color,
@@ -22,6 +23,7 @@ class NText extends StatelessWidget {
   final TextAlign? textAlign;
   final int? maxLines;
   final TextOverflow? overflow;
+  final bool? softWrap;
   final TextStyle? style;
   final double? fontSize;
   final FontWeight? fontWeight;
@@ -36,7 +38,7 @@ class NText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final softWrap = (maxLines != null && maxLines! > 1);
+    // final softWrap = (maxLines != null && maxLines! > 1);
 
     return Text(data,
       textAlign: textAlign,
