@@ -7,7 +7,7 @@
 //
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_templet_project/mixin/dialog_tag_select.dart';
+import 'package:flutter_templet_project/model/tag_detail_model.dart';
 import 'package:flutter_templet_project/network/controller/tag_api_mixin.dart';
 
 
@@ -38,7 +38,7 @@ class TagViewModel extends ChangeNotifier with TagApiMixin {
 
   /// 获取标签
   @override
-  Future<({bool isSuccess, String message, List<TagDetailModel> list})> requestTagList({
+  Future<({bool isSuccess, String message, List<TagDetailModel> result})> requestTagList({
     required String diseaseDepartmentId,
     required String agencyId,
   }) async {
@@ -46,7 +46,7 @@ class TagViewModel extends ChangeNotifier with TagApiMixin {
       diseaseDepartmentId: diseaseDepartmentId,
       agencyId: agencyId,
     );
-    list = tuple.list;
+    list = tuple.result;
     return tuple;
   }
 

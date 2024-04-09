@@ -1,4 +1,10 @@
-
+//
+//  TagDetailModel.dart
+//  flutter_templet_project
+//
+//  Created by shang on 2024/4/9 10:53.
+//  Copyright © 2024/4/9 shang. All rights reserved.
+//
 
 
 class TagDetailModel {
@@ -6,31 +12,19 @@ class TagDetailModel {
     this.id,
     this.createTime,
     this.updateTime,
-    this.createBy,
-    this.updateBy,
-    this.remark,
-    this.agencyId,
-    this.agencyType,
     this.name,
     this.color,
-    this.deleteStatus,
     this.isSelected = false,
   });
 
   String? id;
   int? createTime;
   int? updateTime;
-  String? createBy;
-  String? updateBy;
-  String? remark;
-  String? agencyId;
-  String? agencyType;
   String? name;
   String? color;
-  String? deleteStatus;
 
   /// 非接口返回字段
-  bool? isSelected = false;
+  bool isSelected = false;
 
   TagDetailModel.fromJson(Map<String, dynamic>? json) {
     if (json == null) {
@@ -39,14 +33,8 @@ class TagDetailModel {
     id = json['id'] ?? json['tagsId'];
     createTime = json['createTime'];
     updateTime = json['updateTime'];
-    createBy = json['createBy'];
-    updateBy = json['updateBy'];
-    remark = json['remark'];
-    agencyId = json['agencyId'];
-    agencyType = json['agencyType'];
     name = json['name'] ?? json['tagsName'];
     color = json['color'] ?? json['tagsColor'];
-    deleteStatus = json['deleteStatus'];
     isSelected = json['isSelected'];
   }
 
@@ -55,14 +43,8 @@ class TagDetailModel {
     data['id'] = id;
     data['createTime'] = createTime;
     data['updateTime'] = updateTime;
-    data['createBy'] = createBy;
-    data['updateBy'] = updateBy;
-    data['remark'] = remark;
-    data['agencyId'] = agencyId;
-    data['agencyType'] = agencyType;
     data['name'] = name;
     data['color'] = color;
-    data['deleteStatus'] = deleteStatus;
     data['isSelected'] = isSelected;
     return data;
   }

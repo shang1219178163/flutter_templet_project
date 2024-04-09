@@ -7,7 +7,7 @@
 //
 
 
-import 'package:flutter_templet_project/mixin/dialog_tag_select.dart';
+import 'package:flutter_templet_project/model/tag_detail_model.dart';
 import 'package:flutter_templet_project/network/controller/tag_api_mixin.dart';
 import 'package:get/get.dart';
 
@@ -48,7 +48,7 @@ class TagGetxController extends GetxController with TagApiMixin {
 
   /// 获取标签
   @override
-  Future<({bool isSuccess, String message, List<TagDetailModel> list})> requestTagList({
+  Future<({bool isSuccess, String message, List<TagDetailModel> result})> requestTagList({
     required String diseaseDepartmentId,
     required String agencyId,
   }) async {
@@ -56,7 +56,7 @@ class TagGetxController extends GetxController with TagApiMixin {
       diseaseDepartmentId: diseaseDepartmentId,
       agencyId: agencyId,
     );
-    list = tuple.list;
+    list = tuple.result;
     return tuple;
   }
 

@@ -166,36 +166,3 @@ class DialogTagSelect with DialogMixin {
 }
 
 
-class TagDetailModel {
-  TagDetailModel({
-    this.id,
-    this.name,
-    this.color,
-    this.isSelected = false,
-  });
-
-  String? id;
-  String? name;
-  String? color;
-  /// 非接口返回字段
-  bool? isSelected = false;
-
-  TagDetailModel.fromJson(Map<String, dynamic>? json) {
-    if (json == null) {
-      return;
-    }
-    id = json['id'] ?? json['tagsId'];
-    name = json['name'] ?? json['tagsName'];
-    color = json['color'] ?? json['tagsColor'];
-    isSelected = json['isSelected'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final data = Map<String, dynamic>();
-    data['id'] = id;
-    data['name'] = name;
-    data['color'] = color;
-    data['isSelected'] = isSelected;
-    return data;
-  }
-}

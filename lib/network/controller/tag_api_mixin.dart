@@ -7,7 +7,7 @@
 //
 
 
-import 'package:flutter_templet_project/mixin/dialog_tag_select.dart';
+import 'package:flutter_templet_project/model/tag_detail_model.dart';
 import 'package:flutter_templet_project/network/api/tag_clear_api.dart';
 import 'package:flutter_templet_project/network/api/tag_list_api.dart';
 import 'package:flutter_templet_project/network/api/tag_set_api.dart';
@@ -19,7 +19,7 @@ mixin TagApiMixin<T extends TagDetailModel> {
 
 
   /// 获取标签
-  Future<({bool isSuccess, String message, List<T> list})> requestTagList({
+  Future<({bool isSuccess, String message, List<T> result})> requestTagList({
     required String diseaseDepartmentId,
     required String agencyId,
   }) async {
