@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_choice_expansion.dart';
+import 'package:flutter_templet_project/basicWidget/n_choice_expansion_of_model.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_header.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
@@ -100,6 +101,18 @@ class _NChoiceExpansionDemoState extends State<NChoiceExpansionDemo> {
         isSingle: false,
         onChanged: (list){
           // ddlog(list.map((e) => "${e.name}_${e.isSelected}"));
+        },
+        itemBuilder: (e) {
+          final isSelected = (e.isSelected == true);
+          return buildItem(e: e, isSelected: isSelected);
+        },
+      ),
+      NChoiceExpansionOfModel(
+        title: '多多',
+        items: items,
+        isMuti: true,
+        onChanged: (list){
+          ddlog(list.map((e) => "${e.name}_${e.isSelected}"));
         },
         itemBuilder: (e) {
           final isSelected = (e.isSelected == true);
