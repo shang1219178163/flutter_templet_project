@@ -1,7 +1,10 @@
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_choice_expansion.dart';
 import 'package:flutter_templet_project/basicWidget/n_choice_expansion_of_model.dart';
+import 'package:flutter_templet_project/basicWidget/n_pair.dart';
+import 'package:flutter_templet_project/basicWidget/n_resize.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_header.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
@@ -34,6 +37,9 @@ class _NChoiceExpansionDemoState extends State<NChoiceExpansionDemo> {
     name: "标签$i",
   )).toList();
 
+  bool isSingle = false;
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,6 +63,20 @@ class _NChoiceExpansionDemoState extends State<NChoiceExpansionDemo> {
       child: SingleChildScrollView(
         child: Column(
             children: [
+              NPair(
+                icon: NText("单选($isSingle)"),
+                child: NResize(
+                  width: 40,
+                  height: 25,
+                  child: CupertinoSwitch(
+                    value: isSingle,
+                    onChanged: (bool val) {
+                      isSingle = val;
+                      setState(() {});
+                    },
+                  ),
+                ),
+              ),
               ...buildChoiceExpansions(),
             ]
         ),
@@ -65,14 +85,13 @@ class _NChoiceExpansionDemoState extends State<NChoiceExpansionDemo> {
   }
 
   List<Widget> buildChoiceExpansions() {
-
     return [
       NChoiceExpansion(
         title: '标签 单选',
         items: items,
         titleCb: (e) => e.name ?? "",
         selectedCb: (e) => e.id == selectTag?.id,
-        onSelect: (e) {
+        onSelected: (e) {
           if (selectTag == e) {
             selectTag = null;
           } else {
@@ -86,48 +105,12 @@ class _NChoiceExpansionDemoState extends State<NChoiceExpansionDemo> {
           return buildItem(e: e, isSelected: isSelected, primaryColor: Colors.red);
         },
       ),
-      buildChoiceExpansion(
-        items: items,
-        isSingle: true,
-        onChanged: (list){
-          // ddlog(list.map((e) => "${e.name}_${e.isSelected}"));
-        },
-        onSingleChanged: (val){
-          ddlog("onSingleChanged: ${val?.name}_${val?.isSelected}");
-        }
-      ),
-      buildChoiceExpansion(
-        items: items,
-        isSingle: false,
-        onChanged: (list){
-          // ddlog(list.map((e) => "${e.name}_${e.isSelected}"));
-        },
-        itemBuilder: (e) {
-          final isSelected = (e.isSelected == true);
-          return buildItem(e: e, isSelected: isSelected);
-        },
-      ),
       NChoiceExpansionOfModel(
         title: '多多',
         items: items,
-        isSingle: false,
+        isSingle: isSingle,
         onChanged: (list){
           ddlog(list.map((e) => "${e.name}_${e.isSelected}"));
-        },
-        itemBuilder: (e) {
-          final isSelected = (e.isSelected == true);
-          return buildItem(e: e, isSelected: isSelected);
-        },
-      ),
-      NChoiceExpansionOfModel(
-        title: '单',
-        items: items,
-        isSingle: true,
-        onChanged: (list){
-          ddlog(list.map((e) => "${e.name}_${e.isSelected}"));
-        },
-        onSingleChanged: (val) {
-          ddlog(val?.name);
         },
         itemBuilder: (e) {
           final isSelected = (e.isSelected == true);
@@ -135,41 +118,6 @@ class _NChoiceExpansionDemoState extends State<NChoiceExpansionDemo> {
         },
       ),
     ];
-  }
-
-  Widget buildChoiceExpansion<T extends TagDetailModel>({
-    String title = "标签选择",
-    required List<T> items,
-    required bool isSingle,
-    required ValueChanged<List<T>> onChanged,
-    ValueChanged<T?>? onSingleChanged,
-    Widget Function(T e)? itemBuilder,
-  }) {
-    return NChoiceExpansion(
-      title: '$title(${isSingle ? "单选" : "多选"})',
-      items: items,
-      titleCb: (e) => e.name ?? "",
-      selectedCb: (e) => e.isSelected == true,
-      onSelect: (e) {
-        // ddlog(e.name);
-        for (final element in items) {
-          if (element.id == e.id) {
-            element.isSelected = !element.isSelected;
-          } else {
-            if (isSingle) {
-              element.isSelected = false;
-            }
-          }
-        }
-        final selecetdItems = items.where((e) => e.isSelected).toList();
-        // ddlog(selecetdItems.map((e) => e.name ?? ""));
-        onChanged(selecetdItems);
-
-        final first = selecetdItems.isEmpty ? null : selecetdItems.first;
-        onSingleChanged?.call(first);
-      },
-      itemBuilder: itemBuilder,
-    );
   }
 
   /// 子元素自定义

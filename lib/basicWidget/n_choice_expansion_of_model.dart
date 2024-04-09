@@ -17,21 +17,34 @@ class NChoiceExpansionOfModel<T extends TagDetailModel> extends StatelessWidget 
   const NChoiceExpansionOfModel({
   	super.key,
     required this.title,
+    this.titleStyle,
     required this.items,
     this.isSingle = false,
     required this.onChanged,
     this.onSingleChanged,
     this.itemBuilder,
+    this.headerBuilder,
+    this.footerBuilder,
   });
 
+  /// 标题
   final String title;
-  //组数据
+  /// 标题字体样式
+  final TextStyle? titleStyle;
+  /// 组数据
   final List<T> items;
-
+  /// 单选/多选
   final bool isSingle;
+  /// 改变回掉
   final ValueChanged<List<T>> onChanged;
+  /// 单选回调
   final ValueChanged<T?>? onSingleChanged;
+  /// 子项样式自定义
   final Widget Function(T e)? itemBuilder;
+  /// 头部项目自定义
+  final Widget Function(VoidCallback onToggle)? headerBuilder;
+  /// 尾部自定义
+  final Widget Function(VoidCallback onToggle)? footerBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +53,7 @@ class NChoiceExpansionOfModel<T extends TagDetailModel> extends StatelessWidget 
       items: items,
       titleCb: (e) => e.name ?? "",
       selectedCb: (e) => e.isSelected == true,
-      onSelect: (e) {
+      onSelected: (e) {
         // ddlog(e.name);
         for (final element in items) {
           if (element.id == e.id) {
@@ -59,6 +72,8 @@ class NChoiceExpansionOfModel<T extends TagDetailModel> extends StatelessWidget 
         onSingleChanged?.call(first);
       },
       itemBuilder: itemBuilder,
+      headerBuilder: headerBuilder,
+      footerBuilder: footerBuilder,
     );
   }
 

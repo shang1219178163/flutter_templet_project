@@ -20,33 +20,44 @@ class NChoiceExpansion<T> extends StatefulWidget {
   NChoiceExpansion({
     super.key,
     required this.title,
+    this.titleStyle,
     required this.items,
     required this.titleCb,
     required this.selectedCb,
-    required this.onSelect,
+    required this.onSelected,
     this.isExpand = false,
     this.collapseCount = 6,
-    this.onSelectExpand,
+    this.onExpand,
     this.itemBuilder,
+    this.headerBuilder,
+    this.footerBuilder,
   });
 
+  /// 标题
   final String title;
-  //组数据
+  /// 标题字体样式
+  final TextStyle? titleStyle;
+  /// 组数据
   final List<T> items;
-
+  /// 选择判断
   final bool Function(T e) selectedCb;
+  /// 标题显示
   final String Function(T e) titleCb;
 
-  //选择事件
-  final ValueChanged<T> onSelect;
-
+  /// 选择事件
+  final ValueChanged<T> onSelected;
+  /// 初始展开还是关闭
   final bool isExpand;
+  /// 最小折叠值
   final int collapseCount;
-
-  final ValueChanged<bool>? onSelectExpand;
-
+  /// 折叠展开
+  final ValueChanged<bool>? onExpand;
+  /// 子项样式自定义
   final Widget Function(T e)? itemBuilder;
-
+  /// 头部项目自定义
+  final Widget Function(VoidCallback onToggle)? headerBuilder;
+  /// 尾部自定义
+  final Widget Function(VoidCallback onToggle)? footerBuilder;
 
   @override
   _NChoiceExpansionState<T> createState() => _NChoiceExpansionState<T>();
@@ -66,96 +77,86 @@ class _NChoiceExpansionState<T> extends State<NChoiceExpansion<T>> {
 
   @override
   Widget build(BuildContext context) {
-
     final hideExpandButton = (widget.items.length <= widget.collapseCount);
 
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          StatefulBuilder(
-            builder: (context, setState) {
-              final items = isExpand
-                  ? widget.items
-                  : widget.items.take(6).toList();
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      top: 15,
-                      bottom: 12,
-                      left: 15,
-                      right: 15,
-                    ),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: NText(
-                            widget.title,
-                            fontSize: 15,
-                          ),
-                        ),
-                        Offstage(
-                          offstage: hideExpandButton,
-                          child: GestureDetector(
-                            onTap: () {
-                              isExpand = !isExpand;
-                              widget.onSelectExpand?.call(isExpand);
-                              setState(() {});
-                            },
-                            child: Container(
-                              padding: const EdgeInsets.only(
-                                left: 12,
-                                right: 6,
-                                top: 4,
-                                bottom: 4,
-                              ),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Text(
-                                    isExpand ? "收起" : "展开",
-                                    style: TextStyle(
-                                      color: weChatSubTitleColor,
-                                      fontSize: 12,
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    width: 0,
-                                  ),
-                                  Icon(
-                                    isExpand? Icons.expand_less : Icons.expand_more,
-                                    size: 18,
-                                    color: weChatSubTitleColor,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
-                    child: Wrap(
-                      spacing: 8,
-                      runSpacing: 10,
-                      children: items.map((e) {
-                        return buildItem(e);
-                      }).toList(),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                ],
-              );
-            },
+    void onToggle() {
+      isExpand = !isExpand;
+      widget.onExpand?.call(isExpand);
+      setState(() {});
+    }
+
+    final expandButton = Offstage(
+      offstage: hideExpandButton,
+      child: GestureDetector(
+        onTap: onToggle,
+        child: Container(
+          padding: const EdgeInsets.only(
+            left: 12,
+            right: 6,
+            top: 4,
+            bottom: 4,
           ),
-        ],
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                isExpand ? "收起" : "展开",
+                style: TextStyle(
+                  color: weChatSubTitleColor,
+                  fontSize: 12,
+                ),
+              ),
+              const SizedBox(
+                width: 0,
+              ),
+              Icon(
+                isExpand? Icons.expand_less : Icons.expand_more,
+                size: 18,
+                color: weChatSubTitleColor,
+              ),
+            ],
+          ),
+        ),
       ),
+    );
+
+    final items = isExpand
+        ? widget.items
+        : widget.items.take(6).toList();
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        widget.headerBuilder?.call(onToggle) ?? Padding(
+          padding: const EdgeInsets.only(
+            top: 15,
+            bottom: 12,
+            left: 15,
+            right: 15,
+          ),
+          child: Row(
+            children: [
+              Expanded(
+                child: Text(
+                  widget.title,
+                  style: widget.titleStyle,
+                ),
+              ),
+              expandButton,
+            ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15),
+          child: Wrap(
+            spacing: 8,
+            runSpacing: 10,
+            children: items.map((e) {
+              return buildItem(e);
+            }).toList(),
+          ),
+        ),
+        widget.footerBuilder?.call(onToggle) ?? SizedBox(),
+      ],
     );
   }
 
@@ -165,7 +166,7 @@ class _NChoiceExpansionState<T> extends State<NChoiceExpansion<T>> {
 
     return InkWell(
       onTap: () {
-        widget.onSelect(e);
+        widget.onSelected(e);
         setState(() {});
       },
       child: widget.itemBuilder?.call(e) ?? Container(
