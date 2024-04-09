@@ -538,6 +538,8 @@ var list = <Tuple2<String, String>>[
   Tuple2(APPRouter.nRefreshListViewDemo, "nRefreshListViewDemo", ),
   Tuple2(APPRouter.nestedScrollViewDemoThree, "nestedScrollPageDemo", ),
   Tuple2(APPRouter.formDemo, "formDemoPage", ),
+  Tuple2(APPRouter.choiceExpansionDemo, "choiceExpansionDemo", ),
+
 
 
 ];

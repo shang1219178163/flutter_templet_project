@@ -43,6 +43,7 @@ import 'package:flutter_templet_project/pages/demo/LocalImagePage.dart';
 import 'package:flutter_templet_project/pages/demo/LoginPage.dart';
 import 'package:flutter_templet_project/pages/demo/LoginPageOne.dart';
 import 'package:flutter_templet_project/pages/demo/LoginPageTwo.dart';
+import 'package:flutter_templet_project/pages/demo/NChoiceExpansionDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NTargetFollowerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PageLifecycleFuncTest.dart';
 import 'package:flutter_templet_project/pages/demo/ReflectDemo.dart';
@@ -700,6 +701,7 @@ class APPRouter {
   static const apiCreatePage = '/apiCreatePage';
   static const formDemo = '/formDemo';
   static const asyncDemo = '/asyncDemo';
+  static const choiceExpansionDemo = '/nchoiceExpansionDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -1104,6 +1106,7 @@ class AppPage {
     GetPage(name: APPRouter.apiCreatePage, page: () => ApiCreatePage(),),
     GetPage(name: APPRouter.formDemo, page: () => FormDemo(),),
     GetPage(name: APPRouter.asyncDemo, page: () => AsyncDemo(),),
+    GetPage(name: APPRouter.choiceExpansionDemo, page: () => NChoiceExpansionDemo(),),
 
 
 
