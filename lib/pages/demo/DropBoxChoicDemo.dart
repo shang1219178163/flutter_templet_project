@@ -10,11 +10,16 @@ import 'package:flutter_templet_project/basicWidget/enhance/enhance_expansion/en
 
 import 'package:flutter_templet_project/basicWidget/n_cancel_and_confirm_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_choice_box.dart';
+import 'package:flutter_templet_project/basicWidget/n_choice_expansion_of_model.dart';
+import 'package:flutter_templet_project/basicWidget/n_filter_drop_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_pair.dart';
+import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
+import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
+import 'package:flutter_templet_project/model/tag_detail_model.dart';
 import 'package:flutter_templet_project/util/Debounce.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:flutter_templet_project/model/fake_data_model.dart';
@@ -238,88 +243,40 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
     bool hasShadow = false,
     bool isSingle = false,
   }) {
-    final child = Container(
-      width: double.maxFinite,
-      // padding: EdgeInsets.only(left: 16, right: 16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(20),
-          bottomRight: Radius.circular(20),
-        ),
-        boxShadow: !hasShadow ? null : [
-          BoxShadow(
-            offset: Offset(0, 8.w),
-            blurRadius: 8.w,
-            // spreadRadius: 4,
-            color: context.primaryColor.withOpacity(0.3),
-          ),
-        ]
+    final tags = List.generate(10, (i) => TagDetailModel(
+      id: i.toString(),
+      name: "标签$i",
+    )).toList();
+    final choicSections = [
+      NChoiceExpansionOfModel(
+        title: '标签',
+        items: tags,
+        isSingle: isSingle,
+        idCb: (e) => e.id ?? "",
+        titleCb: (e) => e.name ?? "",
+        onChanged: (list){
+          ddlog(list.map((e) => "${e.name}_${e.isSelected}"));
+        },
       ),
-      child: Column(
-        children: [
-          Divider(height: 1.h, color: lineColor,),
-          Expanded(
-            child: CupertinoScrollbar(
-              controller: controller,
-              child: SingleChildScrollView(
-                controller: controller,
-                child: Container(
-                  color: Colors.white,
-                  padding: EdgeInsets.only(
-                    left: 16.w,
-                    right: 16.w,
-                    // bottom: 30.w,
-                  ),
-                  child: Column(
-                    children: [
-                      buildDropBoxTagChoic<FakeDataModel>(
-                        title: "标签",
-                        models: models,
-                        cbID: (e) => e.id ?? "",
-                        cbName: (e) => e.name ?? "",
-                        cbSelected: (e) => selectedModelsTmp.map((e) => e.id ?? "").toList().contains(e.id),
-                        onChanged: (value) {
-                          // debugPrint("selectedModels: $value");
-                          selectedModelsTmp = value.map((e) => e.data!).toList();
-                          debugPrint("selectedModelsTmp: ${selectedModelsTmp.map((e) => e.name).toList()}");
-                        },
-                      ),
-                      EnhanceExpansionChoic<FakeDataModel>(
-                        trailingColor: Colors.orange,
-                        title: Text("EnhanceExpansionChoic",
-                          style: TextStyle(
-                            color: fontColor,
-                            fontSize: 18.sp,
-                            fontWeight: FontWeight.bold
-                          ),
-                        ),
-                        isSingle: isSingle,
-                        collapseCount: 9,
-                        models: tagModels,
-                        cbID: (e) => e.id ?? "",
-                        cbTitle: (e) => e.name ?? "",
-                        cbSelected: (e) => selectedTagModelsTmp.map((e) => e.id ?? "").toList().contains(e.id),
-                        onChanged: (value) {
-                          // debugPrint("selectedModels: ${value.map((e) => e.title).toList()}");
-                          selectedTagModelsTmp = value.map((e) => e.data!).toList();
-                          debugPrint("selectedTagModelsTmp: ${selectedTagModelsTmp.map((e) => e.name).toList()}");
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
-          buildDropBoxButtonBar(),
-        ],
+      buildDropBoxTagChoic<FakeDataModel>(
+        title: "标签",
+        models: models,
+        cbID: (e) => e.id ?? "",
+        cbName: (e) => e.name ?? "",
+        cbSelected: (e) => selectedModelsTmp.map((e) => e.id ?? "").toList().contains(e.id),
+        onChanged: (value) {
+          // debugPrint("selectedModels: $value");
+          selectedModelsTmp = value.map((e) => e.data!).toList();
+          debugPrint("selectedModelsTmp: ${selectedModelsTmp.map((e) => e.name).toList()}");
+        },
       ),
-    );
-    return Container(
-      color: Colors.black.withOpacity(0.1),
-      // padding: EdgeInsets.only(bottom: context.appBarHeight.h),
-      child: child,
+    ];
+
+    return NFilterDropBox(
+      sections: choicSections,
+      onCancel: onFilterCancel,
+      onReset: onFitlerReset,
+      onConfirm: onFitlerConfirm,
     );
   }
 
@@ -380,17 +337,23 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
       bottomRadius: Radius.circular(20),
       onCancel: () {
         // Navigator.of(context).pop();
-        handleResetFitler();
+        onFitlerReset();
       },
       onConfirm: () {
         // Navigator.of(context).pop();
-        handleConfirmFitler();
+        onFitlerConfirm();
       },
     );
   }
 
+  void onFilterCancel() {
+    selectedModelsTmp = [];
+    selectedTagModelsTmp = [];
+    closeDropBox();
+  }
+
   /// 重置过滤参数
-  handleResetFitler() {
+  onFitlerReset() {
     closeDropBox();
 
     selectedModelsTmp = [];
@@ -403,7 +366,7 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
     //请求
   }
   /// 确定过滤参数
-  handleConfirmFitler() {
+  onFitlerConfirm() {
     closeDropBox();
 
     selectedModels = selectedModelsTmp;
@@ -477,21 +440,19 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
         ? Icon(Icons.expand_less, size: 24, color: color,)
         : Icon(Icons.expand_more, size: 24, color: color,);
 
-    return OutlinedButton.icon(
-      style: OutlinedButton.styleFrom(
-        padding: EdgeInsets.only(left: 12, right: 8, top: 12, bottom: 12),
-        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        minimumSize: Size(50, 18),
-        foregroundColor: color,
+    return Container(
+      decoration: ShapeDecoration(
+        color: Colors.transparent,
         shape: StadiumBorder(),
-        side: BorderSide(color: color.withOpacity(0.3))
       ),
-      onPressed: null,
-      icon: Text(
-        title,
-        style: TextStyle(color: color),
-      ) ,
-      label: icon
+      child: NPair(
+        icon: NText(title,
+          fontSize: 18,
+          fontWeight: FontWeight.w600,
+          style: TextStyle(color: color),
+        ),
+        child: icon,
+      ),
     );
   }
 
