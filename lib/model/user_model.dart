@@ -7,7 +7,9 @@
 //
 
 
-class UserModel {
+import 'package:flutter_templet_project/mixin/selectable_mixin.dart';
+
+class UserModel with SelectableMixin{
   UserModel({
     this.id,
     this.name,
@@ -17,10 +19,9 @@ class UserModel {
     this.phone,
     this.website,
     this.company,
-    this.isSelected = false,
   });
-  
-  int? id;
+
+  String? id;
   String? name;
   String? nickName;
   String? email;
@@ -28,10 +29,7 @@ class UserModel {
   String? phone;
   String? website;
   Company? company;
-  
-  bool isSelected = false;
-  
-  
+
   UserModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];

@@ -7,11 +7,11 @@
 //
 
 
-class OrderModel{
+import 'package:flutter_templet_project/mixin/selectable_mixin.dart';
 
-  int id = 0;
-  String name = '';
-  double pirce = 0;
+
+
+class OrderModel with SelectableMixin{
 
   OrderModel({
     required this.id,
@@ -19,13 +19,17 @@ class OrderModel{
     required this.pirce,
   });
 
+  int id = 0;
+  String name = '';
+  double pirce = 0;
+
   OrderModel.fromJson(Map json){
     if(json.isEmpty){
       return;
     }
     id = json["id"];
     pirce = json["pirce"];
-    name = json["name"].stringValue;
+    name = json["name"];
   }
 
   Map<String, dynamic> toJson(){

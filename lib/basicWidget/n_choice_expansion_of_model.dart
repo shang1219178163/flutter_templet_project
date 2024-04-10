@@ -8,14 +8,17 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_choice_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_choice_expansion.dart';
+import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/mixin/selectable_mixin.dart';
 import 'package:flutter_templet_project/model/tag_detail_model.dart';
 
-/// 模型(必须包含 String id, String name, bool isSelected)的标签选择器
-class NChoiceExpansionOfModel<T extends TagDetailModel> extends StatelessWidget {
+/// 模型(必须包含 bool isSelected 属性)的标签选择器
+class NChoiceExpansionOfModel<T extends SelectableMixin> extends StatelessWidget {
 
   const NChoiceExpansionOfModel({
-  	super.key,
+    super.key,
     required this.title,
     this.titleStyle = const TextStyle(
       color: Color(0xff737373),
@@ -23,6 +26,8 @@ class NChoiceExpansionOfModel<T extends TagDetailModel> extends StatelessWidget 
       fontWeight: FontWeight.w500,
     ),
     required this.items,
+    required this.idCb,
+    required this.titleCb,
     this.isSingle = false,
     required this.onChanged,
     this.onSingleChanged,
@@ -39,6 +44,10 @@ class NChoiceExpansionOfModel<T extends TagDetailModel> extends StatelessWidget 
   final List<T> items;
   /// 单选/多选
   final bool isSingle;
+  final String Function(T e) idCb;
+  /// 标题显示
+  final String Function(T e) titleCb;
+
   /// 改变回掉
   final ValueChanged<List<T>> onChanged;
   /// 单选回调
@@ -56,12 +65,12 @@ class NChoiceExpansionOfModel<T extends TagDetailModel> extends StatelessWidget 
       title: title,
       titleStyle: titleStyle,
       items: items,
-      titleCb: (e) => e.name ?? "",
+      titleCb: titleCb,
       selectedCb: (e) => e.isSelected == true,
       onSelected: (e) {
         // ddlog(e.name);
         for (final element in items) {
-          if (element.id == e.id) {
+          if (idCb(element) == idCb(e)) {
             element.isSelected = !element.isSelected;
           } else {
             if (isSingle) {
@@ -70,7 +79,7 @@ class NChoiceExpansionOfModel<T extends TagDetailModel> extends StatelessWidget 
           }
         }
         final selecetdItems = items.where((e) => e.isSelected).toList();
-        // ddlog(selecetdItems.map((e) => e.name ?? ""));
+        // ddlog(items.map((e) => "${titleCb(e)},${e.isSelected}" ).toList().join("\n"));
         onChanged(selecetdItems);
 
         final first = selecetdItems.isEmpty ? null : selecetdItems.first;

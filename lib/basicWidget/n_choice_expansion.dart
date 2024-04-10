@@ -83,12 +83,6 @@ class _NChoiceExpansionState<T> extends State<NChoiceExpansion<T>> {
   Widget build(BuildContext context) {
     final hideExpandButton = (widget.items.length <= widget.collapseCount);
 
-    void onToggle() {
-      isExpand = !isExpand;
-      widget.onExpand?.call(isExpand);
-      setState(() {});
-    }
-
     final expandButton = Offstage(
       offstage: hideExpandButton,
       child: GestureDetector(
@@ -193,5 +187,11 @@ class _NChoiceExpansionState<T> extends State<NChoiceExpansion<T>> {
         ),
       ),
     );
+  }
+
+  void onToggle() {
+    isExpand = !isExpand;
+    widget.onExpand?.call(isExpand);
+    setState(() {});
   }
 }

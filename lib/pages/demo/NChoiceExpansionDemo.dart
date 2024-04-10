@@ -1,6 +1,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_choice_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_choice_expansion.dart';
 import 'package:flutter_templet_project/basicWidget/n_choice_expansion_of_model.dart';
 import 'package:flutter_templet_project/basicWidget/n_pair.dart';
@@ -8,7 +9,9 @@ import 'package:flutter_templet_project/basicWidget/n_resize.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_header.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/model/order_model.dart';
 import 'package:flutter_templet_project/model/tag_detail_model.dart';
+import 'package:flutter_templet_project/model/user_model.dart';
 import 'package:get/get.dart';
 
 class NChoiceExpansionDemo extends StatefulWidget {
@@ -32,12 +35,21 @@ class _NChoiceExpansionDemoState extends State<NChoiceExpansionDemo> {
 
   Map<String, dynamic> arguments = Get.arguments ?? <String, dynamic>{};
 
-  final items = List.generate(20, (i) => TagDetailModel(
+  bool isSingle = false;
+
+  final items = List.generate(10, (i) => TagDetailModel(
     id: i.toString(),
     name: "标签$i",
   )).toList();
 
-  bool isSingle = false;
+  final users = List.generate(10, (i) {
+    final model = UserModel(
+      id: i.toString() ?? "",
+      name: "订单$i",
+    );
+    model.isSelected = true;
+    return model;
+  }).toList();
 
 
   @override
@@ -102,33 +114,54 @@ class _NChoiceExpansionDemoState extends State<NChoiceExpansionDemo> {
         },
         itemBuilder: (e) {
           final isSelected = (e.id == selectTag?.id);
-          return buildItem(e: e, isSelected: isSelected, primaryColor: Colors.red);
+          return buildItem(
+            e: e,
+            isSelected: isSelected,
+            titleCb: (e) => e.name ?? "",
+          );
         },
       ),
       NChoiceExpansionOfModel(
-        title: '多多',
+        title: '标签',
         items: items,
         isSingle: isSingle,
+        idCb: (e) => e.id ?? "",
+        titleCb: (e) => e.name ?? "",
         onChanged: (list){
           ddlog(list.map((e) => "${e.name}_${e.isSelected}"));
         },
         itemBuilder: (e) {
-          final isSelected = (e.isSelected == true);
-          return buildItem(e: e, isSelected: isSelected);
+          return buildItem(e: e, isSelected: e.isSelected, titleCb: (e) => e.name ?? "",);
+        },
+      ),
+      NChoiceExpansionOfModel(
+        title: '人员',
+        items: users,
+        isSingle: isSingle,
+        idCb: (e) => e.id ?? "",
+        titleCb: (e) => e.name ?? "",
+        onChanged: (list){
+          ddlog(list.map((e) => "${e.name}_${e.isSelected}"));
+        },
+        itemBuilder: (e) {
+          return buildItem(e: e, isSelected: e.isSelected, titleCb: (e) => e.name ?? "",);
         },
       ),
     ];
   }
 
   /// 子元素自定义
-  Widget buildItem<T extends TagDetailModel>({
+  Widget buildItem<T>({
     required T e,
     required bool isSelected,
+    required String Function(T e) titleCb,
     Color primaryColor = Colors.green,
   }) {
     final textColor = isSelected ? primaryColor : Color(0xff737373);
     final borderColor = isSelected ? primaryColor : Colors.transparent;
     final bgColor = textColor.withOpacity(0.1);
+
+    final title = titleCb(e);
 
     return Container(
       padding: const EdgeInsets.symmetric(
@@ -141,7 +174,7 @@ class _NChoiceExpansionDemoState extends State<NChoiceExpansionDemo> {
         borderRadius: BorderRadius.all(Radius.circular(4)),
       ),
       child: NText(
-        e.name ?? "",
+        title,
         fontSize: 14,
         color: textColor,
       ),

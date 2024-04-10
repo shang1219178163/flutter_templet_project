@@ -14,7 +14,7 @@ class NChoiceBox<T> extends StatefulWidget {
     required this.onChanged,
     this.title,
     this.itemMargin = const EdgeInsets.symmetric(vertical: 4),
-    this.itemColor = bgColor,
+    this.itemColor = const Color(0xffF3F3F3),
     this.itemRadius = 8,
     this.itemSelectedColor = Colors.blue,
     this.crossAxisAlignment = CrossAxisAlignment.stretch,
@@ -84,20 +84,23 @@ class _NChoiceBoxState<T> extends State<NChoiceBox<T>> {
             ),
             child: ChoiceChip(
               pressElevation: 0,
+              showCheckmark: false,
               label: Text(e.title,
                 style: TextStyle(
                   color: e.isSelected == true ? Colors.white : fontColor,
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.w500,
+                  fontSize: 14,
                 ),
               ),
-              // padding: EdgeInsets.only(left: 15, right: 15),
+              padding: EdgeInsets.zero,
+              labelPadding: EdgeInsets.symmetric(horizontal: 6),
               materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
               selected: e.isSelected == true,
               selectedColor: widget.itemSelectedColor,
-              backgroundColor: widget.itemColor,
+              // backgroundColor: widget.itemColor,
+              backgroundColor: e.isSelected ? widget.itemSelectedColor : Color(0xffF3F3F3),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(widget.itemRadius),)
+                borderRadius: BorderRadius.all(Radius.circular(widget.itemRadius),),
+                side: BorderSide(color: Colors.transparent),
               ),
               onSelected: (bool selected) {
                 for (final element in widget.items) {
@@ -127,15 +130,15 @@ class ChoiceBoxModel<T> {
   ChoiceBoxModel({
     required this.title,
     required this.id,
-    required this.isSelected,
-    this.data,
-  }) ;
-
-  String title;
+    this.isSelected = false,
+    required this.data,
+  });
 
   String id;
 
+  String title;
+
   bool isSelected;
 
-  T? data;
+  T data;
 }

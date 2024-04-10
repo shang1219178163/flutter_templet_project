@@ -7,14 +7,15 @@
 //
 
 
-class TagDetailModel {
+import 'package:flutter_templet_project/mixin/selectable_mixin.dart';
+
+class TagDetailModel with SelectableMixin{
   TagDetailModel({
     this.id,
     this.createTime,
     this.updateTime,
     this.name,
     this.color,
-    this.isSelected = false,
   });
 
   String? id;
@@ -23,8 +24,9 @@ class TagDetailModel {
   String? name;
   String? color;
 
-  /// 非接口返回字段
-  bool isSelected = false;
+
+  // @override
+  // bool isSelected = true;
 
   TagDetailModel.fromJson(Map<String, dynamic>? json) {
     if (json == null) {
