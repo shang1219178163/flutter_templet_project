@@ -22,7 +22,7 @@ import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
-import 'package:flutter_templet_project/mixin/selected_mixin.dart';
+import 'package:flutter_templet_project/mixin/selectable_mixin.dart';
 import 'package:flutter_templet_project/model/user_model.dart';
 import 'package:get/get.dart';
 
@@ -57,7 +57,7 @@ class _NRefreshListViewDemoState extends State<NRefreshListViewDemo> {
 
   initData(){
     dataList.value = List.generate(20, (index) => UserModel(
-        id: index + 1000,
+        id: "${index + 1000}" ,
         name: "用户_$index",
     ));
   }
@@ -201,7 +201,7 @@ class _NRefreshListViewDemoState extends State<NRefreshListViewDemo> {
     final list = List.generate(pageSize, (index) {
       return UserModel(
         // id: IntExt.random(min: 1000, max: 9999),
-        id: 1000 + index,
+        id: "${index + 1000}" ,
         name: "用户_$index",
         // name: generateChars(),
       );

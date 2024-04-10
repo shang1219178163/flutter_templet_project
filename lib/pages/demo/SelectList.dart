@@ -27,9 +27,8 @@ class _SelectListPageState extends State<SelectListPage> {
 
   late final List<UserModel> models = List.generate(20, (i) {
     return UserModel(
-      id: i,
+      id: i.toString(),
       name: "选项_$i",
-      isSelected: false,
     );
   }).toList();
 
