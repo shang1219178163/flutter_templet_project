@@ -67,6 +67,9 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
   List<TagDetailModel> selectedTagModels = [];
   List<TagDetailModel> selectedTagModelsTmp = [];
 
+  final dataDesc = ValueNotifier("");
+  final tagDesc = ValueNotifier("");
+
   @override
   Widget build(BuildContext context) {
     bool isSingle = false;
@@ -82,6 +85,7 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
         ).toList(),
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           buildSearchAndFilterBar(
             onToggle:  (){
@@ -89,6 +93,27 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
               dropBoxController.onToggle();
               closeKeyboard();
             },
+          ),
+          AnimatedBuilder(
+            animation: Listenable.merge([
+              dataDesc,
+              tagDesc,
+            ]),
+            builder: (context, child) {
+
+              return Container(
+                decoration: BoxDecoration(
+                  color: Colors.green,
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    if (dataDesc.value.isNotEmpty) NText(dataDesc.value),
+                    if (dataDesc.value.isNotEmpty) NText(tagDesc.value),
+                  ],
+                ),
+              );
+            }
           ),
           Expanded(
             child: NFilterDropBox(
@@ -260,18 +285,19 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
           // setState((){});
         },
       ),
-      // buildDropBoxTagChoic<FakeDataModel>(
-      //   title: "标签",
-      //   models: models,
-      //   cbID: (e) => e.id ?? "",
-      //   cbName: (e) => e.name ?? "",
-      //   cbSelected: (e) => selectedModelsTmp.map((e) => e.id ?? "").toList().contains(e.id),
-      //   onChanged: (value) {
-      //     // debugPrint("selectedModels: $value");
-      //     selectedModelsTmp = value.map((e) => e.data).toList();
-      //     debugPrint("selectedModelsTmp: ${selectedModelsTmp.map((e) => e.name).toList()}");
-      //   },
-      // ),
+      buildDropBoxTagChoic<FakeDataModel>(
+        title: "标签",
+        isSingle: isSingle,
+        models: models,
+        cbID: (e) => e.id ?? "",
+        cbName: (e) => e.name ?? "",
+        cbSelected: (e) => selectedModels.map((e) => e.id ?? "").toList().contains(e.id),
+        onChanged: (value) {
+          // debugPrint("selectedModels: $value");
+          selectedModelsTmp = value;
+          debugPrint("selectedModelsTmp: ${selectedModelsTmp.map((e) => e.name).toList()}");
+        },
+      ),
     ];
     return choicSections;
   }
@@ -326,9 +352,11 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
     required String Function(T) cbID,
     required String Function(T) cbName,
     required bool Function(T) cbSelected,
-    ValueChanged<List<ChoiceBoxModel<T>>>? onChanged,
+    required ValueChanged<List<T>> onChanged,
+    ValueChanged<T?>? onSingleChanged,
     bool isExpand = false,
     int collapseCount = 6,
+    bool isSingle = true,
   }) {
     final disable = (models.length <= collapseCount);
 
@@ -347,7 +375,7 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
           childrenHeader: (isExpanded, onTap) => Column(
             children: [
               NChoiceBox<T>(
-                isSingle: true,
+                isSingle: isSingle,
                 itemColor: Colors.transparent,
                 // wrapAlignment: WrapAlignment.spaceBetween,
                 // wrapAlignment: WrapAlignment.start,
@@ -357,8 +385,12 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
                   isSelected: cbSelected(e),
                   data: e,
                 )).toList(),
-                onChanged: onChanged ?? (value) {
-                  debugPrint("selectedModels: $value");
+                onChanged: (list) {
+                  final items = list.map((e) => e.data).toList();
+                  onChanged(items);
+
+                  final first = items.isEmpty ? null : items.first;
+                  onSingleChanged?.call(first);
                 },
               ),
             ],
@@ -391,6 +423,7 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
     selectedTagModelsTmp = [];
     debugPrint("取消 selectedModels: ${selectedModels.map((e) => e.name).toList()}");
     debugPrint("取消 selectedTagModels: ${selectedTagModels.map((e) => e.name).toList()}");
+    updateFitlerInfo();
   }
 
   /// 重置过滤参数
@@ -404,6 +437,7 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
     selectedTagModels = selectedTagModelsTmp;
     debugPrint("重置 selectedModels: ${selectedModels.map((e) => e.name).toList()}");
     debugPrint("重置 selectedTagModels: ${selectedTagModels.map((e) => e.name).toList()}");
+    updateFitlerInfo();
     //请求
   }
   /// 确定过滤参数
@@ -414,7 +448,13 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
     selectedTagModels = selectedTagModelsTmp;
     debugPrint("重置 selectedModels: ${selectedModels.map((e) => e.name).toList()}");
     debugPrint("确定 selectedTagModels: ${selectedTagModels.map((e) => e.name).toList()}");
+    updateFitlerInfo();
     //请求
+  }
+
+  void updateFitlerInfo() {
+    tagDesc.value = selectedTagModels.map((e) => e.name).toList().join(", ");
+    dataDesc.value = selectedModels.map((e) => e.name).toList().join(", ");
   }
 
 
@@ -500,28 +540,30 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
   buildList({required List<String> items}) {
     return Material(
       // color: Colors.transparent,
-      child: ListView.separated(
-        padding: EdgeInsets.all(0),
-        itemCount: items.length,
-        cacheExtent: 10,
-        itemBuilder: (context, index) {
-          final e = items[index];
-          return ListTile(
-            title: Text(e),
-            onTap: () {
-              debugPrint(e);
-            },
-          );
-        },
-        separatorBuilder: (context, index) {
-          return Divider(
-            height: .5,
-            indent: 15,
-            endIndent: 15,
-            color: Color(0xFFe4e4e4),
-          );
-        },
-      ).toCupertinoScrollbar(),
+      child: Scrollbar(
+        child: ListView.separated(
+          padding: EdgeInsets.all(0),
+          itemCount: items.length,
+          cacheExtent: 10,
+          itemBuilder: (context, index) {
+            final e = items[index];
+            return ListTile(
+              title: Text(e),
+              onTap: () {
+                debugPrint(e);
+              },
+            );
+          },
+          separatorBuilder: (context, index) {
+            return Divider(
+              height: .5,
+              indent: 15,
+              endIndent: 15,
+              color: Color(0xFFe4e4e4),
+            );
+          },
+        ).toCupertinoScrollbar(),
+      ),
     );
   }
 

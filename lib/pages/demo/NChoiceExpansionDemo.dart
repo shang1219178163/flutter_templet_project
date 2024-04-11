@@ -115,8 +115,8 @@ class _NChoiceExpansionDemoState extends State<NChoiceExpansionDemo> {
           ddlog(e.name);
           // ddlog(items.where((e) => e.isSelected).map((e) => e.name ?? ""));
         },
-        itemBuilder: (e) {
-          final isSelected = e.id == selectTag?.id;
+        itemBuilder: (e, isSelected) {
+          // final isSelected = e.id == selectTag?.id;
           return buildItem(e: e, isSelected: isSelected, titleCb: (e) => e.name ?? "",);
         },
       ),
@@ -131,8 +131,8 @@ class _NChoiceExpansionDemoState extends State<NChoiceExpansionDemo> {
           ddlog("list: ${list.map((e) => "${e.name}_${e.isSelected}")}");
           selectedTags = list;
         },
-        itemBuilder: (e) {
-          final isSelected = selectedTags.map((e) => e.id).contains(e.id);
+        itemBuilder: (e, isSelected) {
+          // final isSelected = selectedTags.map((e) => e.id).contains(e.id);
           return buildItem(e: e, isSelected: isSelected, titleCb: (e) => e.name ?? "",);
         },
       ),
@@ -147,8 +147,8 @@ class _NChoiceExpansionDemoState extends State<NChoiceExpansionDemo> {
           ddlog("list: ${list.map((e) => "${e.name}_${e.isSelected}")}");
           selectedUsers = list;
         },
-        itemBuilder: (e) {
-          final isSelected = selectedUsers.map((e) => e.id).contains(e.id);
+        itemBuilder: (e, isSelected) {
+          // final isSelected = selectedUsers.map((e) => e.id).contains(e.id);
           return buildItem(e: e, isSelected: isSelected, titleCb: (e) => e.name ?? "",);
         },
       ),

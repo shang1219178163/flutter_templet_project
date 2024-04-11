@@ -142,7 +142,7 @@ class NChoiceExpansionOfModel<T> extends StatefulWidget {
   /// 单选回调
   final ValueChanged<T?>? onSingleChanged;
   /// 子项样式自定义
-  final Widget Function(T e)? itemBuilder;
+  final Widget Function(T e, bool isSelected)? itemBuilder;
   /// 头部项目自定义
   final Widget Function(VoidCallback onToggle)? headerBuilder;
   /// 尾部自定义
@@ -193,7 +193,7 @@ class _NChoiceExpansionOfModelState<T> extends State<NChoiceExpansionOfModel<T>>
         final first = selecetdItems.isEmpty ? null : selecetdItems.first;
         widget.onSingleChanged?.call(first);
       },
-      itemBuilder: (e) => widget.itemBuilder?.call(e.data),
+      itemBuilder: (e, isSelected) => widget.itemBuilder?.call(e.data, e.isSelected),
       headerBuilder: widget.headerBuilder,
       footerBuilder: widget.footerBuilder,
     );

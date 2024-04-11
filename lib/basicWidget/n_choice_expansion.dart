@@ -57,7 +57,7 @@ class NChoiceExpansion<T> extends StatefulWidget {
   /// 折叠展开
   final ValueChanged<bool>? onExpand;
   /// 子项样式自定义
-  final Widget? Function(T e)? itemBuilder;
+  final Widget? Function(T e, bool isSelected)? itemBuilder;
   /// 头部项目自定义
   final Widget Function(VoidCallback onToggle)? headerBuilder;
   /// 尾部自定义
@@ -181,7 +181,7 @@ class _NChoiceExpansionState<T> extends State<NChoiceExpansion<T>> {
         widget.onSelected(e);
         setState(() {});
       },
-      child: widget.itemBuilder?.call(e) ?? Container(
+      child: widget.itemBuilder?.call(e, isSelected) ?? Container(
         padding: const EdgeInsets.symmetric(
           vertical: 4,
           horizontal: 10,
