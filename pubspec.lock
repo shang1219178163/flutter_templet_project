@@ -517,10 +517,10 @@ packages:
     dependency: "direct main"
     description:
       name: enhance_expansion_panel
-      sha256: d9da5bdf1b73a245a594ab314414e57742a5ceb44c559d39fde89f88f01cefe4
+      sha256: "7f28891935ec02473611321d7893aa173e1b22123d6f48a825e9411a3b866cc9"
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.5.0"
+    version: "0.6.0"
   enhance_stepper:
     dependency: "direct main"
     description:
