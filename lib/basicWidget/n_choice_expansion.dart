@@ -57,7 +57,7 @@ class NChoiceExpansion<T> extends StatefulWidget {
   /// 折叠展开
   final ValueChanged<bool>? onExpand;
   /// 子项样式自定义
-  final Widget Function(T e)? itemBuilder;
+  final Widget? Function(T e)? itemBuilder;
   /// 头部项目自定义
   final Widget Function(VoidCallback onToggle)? headerBuilder;
   /// 尾部自定义
@@ -79,6 +79,20 @@ class _NChoiceExpansionState<T> extends State<NChoiceExpansion<T>> {
     super.initState();
   }
 
+  // @override
+  // void didUpdateWidget(covariant NChoiceExpansion<T> oldWidget) {
+  //   // TODO: implement didUpdateWidget
+  //   super.didUpdateWidget(oldWidget);
+  //   final tmp = oldWidget.items.map((e) => "${widget.titleCb(e)}_${widget.selectedCb(e)}").join(",");
+  //   final tmpNew = widget.items.map((e) => "${widget.titleCb(e)}_${widget.selectedCb(e)}").join(",");
+  //   // if (tmp != tmpNew) {
+  //   //   setState(() {});
+  //   // }
+  //
+  //   ddlog("tmp: $tmp");
+  //   ddlog("tmpNew: $tmpNew");
+  // }
+
   @override
   Widget build(BuildContext context) {
     final hideExpandButton = (widget.items.length <= widget.collapseCount);
@@ -89,10 +103,14 @@ class _NChoiceExpansionState<T> extends State<NChoiceExpansion<T>> {
         onTap: onToggle,
         child: Container(
           padding: const EdgeInsets.only(
-            left: 12,
-            right: 6,
+            left: 8,
+            right: 8,
             top: 4,
             bottom: 4,
+          ),
+          decoration: BoxDecoration(
+            color: Colors.transparent,
+            // border: Border.all(color: Colors.blue),
           ),
           child: Row(
             mainAxisSize: MainAxisSize.min,
@@ -128,8 +146,6 @@ class _NChoiceExpansionState<T> extends State<NChoiceExpansion<T>> {
           padding: const EdgeInsets.only(
             top: 15,
             bottom: 12,
-            left: 15,
-            right: 15,
           ),
           child: Row(
             children: [
@@ -143,15 +159,12 @@ class _NChoiceExpansionState<T> extends State<NChoiceExpansion<T>> {
             ],
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15),
-          child: Wrap(
-            spacing: 8,
-            runSpacing: 10,
-            children: items.map((e) {
-              return buildItem(e);
-            }).toList(),
-          ),
+        Wrap(
+          spacing: 8,
+          runSpacing: 8,
+          children: items.map((e) {
+            return buildItem(e);
+          }).toList(),
         ),
         widget.footerBuilder?.call(onToggle) ?? SizedBox(),
       ],
@@ -161,6 +174,7 @@ class _NChoiceExpansionState<T> extends State<NChoiceExpansion<T>> {
   Widget buildItem(T e) {
     final title = widget.titleCb(e);
     final isSelected = widget.selectedCb(e);
+    // ddlog("buildItem: ${title}, $isSelected");
 
     return InkWell(
       onTap: () {

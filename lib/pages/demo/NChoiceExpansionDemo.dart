@@ -37,10 +37,11 @@ class _NChoiceExpansionDemoState extends State<NChoiceExpansionDemo> {
 
   bool isSingle = false;
 
-  final items = List.generate(10, (i) => TagDetailModel(
+  final tags = List.generate(10, (i) => TagDetailModel(
     id: i.toString(),
     name: "标签$i",
   )).toList();
+  List<TagDetailModel> selectedTags = [];
 
   final users = List.generate(10, (i) {
     final model = UserModel(
@@ -50,6 +51,8 @@ class _NChoiceExpansionDemoState extends State<NChoiceExpansionDemo> {
     model.isSelected = true;
     return model;
   }).toList();
+
+  List<UserModel> selectedUsers = [];
 
 
   @override
@@ -100,7 +103,7 @@ class _NChoiceExpansionDemoState extends State<NChoiceExpansionDemo> {
     return [
       NChoiceExpansion(
         title: '标签 单选(用对象 id 对比)',
-        items: items,
+        items: tags,
         titleCb: (e) => e.name ?? "",
         selectedCb: (e) => e.id == selectTag?.id,
         onSelected: (e) {
@@ -113,25 +116,24 @@ class _NChoiceExpansionDemoState extends State<NChoiceExpansionDemo> {
           // ddlog(items.where((e) => e.isSelected).map((e) => e.name ?? ""));
         },
         itemBuilder: (e) {
-          final isSelected = (e.id == selectTag?.id);
-          return buildItem(
-            e: e,
-            isSelected: isSelected,
-            titleCb: (e) => e.name ?? "",
-          );
+          final isSelected = e.id == selectTag?.id;
+          return buildItem(e: e, isSelected: isSelected, titleCb: (e) => e.name ?? "",);
         },
       ),
       NChoiceExpansionOfModel(
         title: '标签',
-        items: items,
+        items: tags,
         isSingle: isSingle,
         idCb: (e) => e.id ?? "",
         titleCb: (e) => e.name ?? "",
+        selectedCb: (e) => selectedTags.map((e) => e.id).contains(e.id),
         onChanged: (list){
-          ddlog(list.map((e) => "${e.name}_${e.isSelected}"));
+          ddlog("list: ${list.map((e) => "${e.name}_${e.isSelected}")}");
+          selectedTags = list;
         },
         itemBuilder: (e) {
-          return buildItem(e: e, isSelected: e.isSelected, titleCb: (e) => e.name ?? "",);
+          final isSelected = selectedTags.map((e) => e.id).contains(e.id);
+          return buildItem(e: e, isSelected: isSelected, titleCb: (e) => e.name ?? "",);
         },
       ),
       NChoiceExpansionOfModel(
@@ -140,11 +142,14 @@ class _NChoiceExpansionDemoState extends State<NChoiceExpansionDemo> {
         isSingle: isSingle,
         idCb: (e) => e.id ?? "",
         titleCb: (e) => e.name ?? "",
+        selectedCb: (e) => selectedUsers.map((e) => e.id).contains(e.id),
         onChanged: (list){
-          ddlog(list.map((e) => "${e.name}_${e.isSelected}"));
+          ddlog("list: ${list.map((e) => "${e.name}_${e.isSelected}")}");
+          selectedUsers = list;
         },
         itemBuilder: (e) {
-          return buildItem(e: e, isSelected: e.isSelected, titleCb: (e) => e.name ?? "",);
+          final isSelected = selectedUsers.map((e) => e.id).contains(e.id);
+          return buildItem(e: e, isSelected: isSelected, titleCb: (e) => e.name ?? "",);
         },
       ),
     ];

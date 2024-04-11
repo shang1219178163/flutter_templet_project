@@ -5,7 +5,7 @@ import 'package:enhance_expansion_panel/enhance_expansion_panel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_templet_project/basicWidget/enhance/enhance_expansion/en_expansion_tile.dart';
+// import 'package:flutter_templet_project/basicWidget/enhance/enhance_expansion/en_expansion_tile.dart';
 
 import 'package:flutter_templet_project/basicWidget/n_cancel_and_confirm_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_choice_box.dart';
@@ -356,8 +356,8 @@ class _DropBoxMutiRowChoicDemoState extends State<DropBoxMutiRowChoicDemo> {
             setState(() {});
           },
           title: "多行选择菜单",
-          header: (onTap) => Container(),
-          childrenHeader: (onTap) => Column(
+          header: (isExpanded, onTap) => Container(),
+          childrenHeader: (isExpanded, onTap) => Column(
             children: models.take(2).map((item) {
               return buildHorizontalChoicRow<FakeDataModel>(
                 title: "${item.title}: ",
@@ -393,7 +393,7 @@ class _DropBoxMutiRowChoicDemoState extends State<DropBoxMutiRowChoicDemo> {
               }).toList(),
             )
           ],
-          childrenFooter: (onTap) => Container(
+          childrenFooter: (isExpanded, onTap) => Container(
             padding: EdgeInsets.symmetric(horizontal: 0, vertical: 1),
             child: GestureDetector(
               onTap: onTap,
@@ -425,8 +425,8 @@ class _DropBoxMutiRowChoicDemoState extends State<DropBoxMutiRowChoicDemo> {
             setState(() {});
           },
           title: "多行选择菜单",
-          header: (onTap) => Container(),
-          childrenHeader: (onTap){
+          header: (isExpanded, onTap) => Container(),
+          childrenHeader: (isExpanded, onTap){
 
             return Column(
               children: items.map((item) {
@@ -447,7 +447,7 @@ class _DropBoxMutiRowChoicDemoState extends State<DropBoxMutiRowChoicDemo> {
             );
           },
           children: [],
-          childrenFooter: (onTap) => Container(
+          childrenFooter: (isExpanded, onTap) => Container(
             padding: EdgeInsets.symmetric(horizontal: 0, vertical: 1),
             child: GestureDetector(
               onTap: onTap,

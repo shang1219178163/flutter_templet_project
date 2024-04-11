@@ -87,7 +87,7 @@ class _NChoiceBoxState<T> extends State<NChoiceBox<T>> {
               showCheckmark: false,
               label: Text(e.title,
                 style: TextStyle(
-                  color: e.isSelected == true ? Colors.white : fontColor,
+                  color: e.isSelected == true ? Colors.white : fontColor.withOpacity(0.8),
                   fontSize: 14,
                 ),
               ),

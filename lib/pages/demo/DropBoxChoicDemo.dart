@@ -5,9 +5,6 @@ import 'package:enhance_expansion_panel/enhance_expansion_panel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_templet_project/basicWidget/enhance/enhance_expansion/en_expansion_tile.dart';
-import 'package:flutter_templet_project/basicWidget/enhance/enhance_expansion/enhance_expansion_choic.dart';
-
 import 'package:flutter_templet_project/basicWidget/n_cancel_and_confirm_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_choice_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_choice_expansion_of_model.dart';
@@ -39,7 +36,7 @@ class DropBoxChoicDemo extends StatefulWidget {
 }
 
 class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
-  final items = List.generate(20, (i) => i).toList();
+  final items = List.generate(6, (i) => i).toList();
 
   var searchText = "";
   late final searchtEditingController = TextEditingController();
@@ -48,11 +45,11 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
 
   // final _throttle = Throttle(milliseconds: 500);
 
-  var isVisible = ValueNotifier(false);
+  var showDropBox = ValueNotifier(false);
+
+  final dropBoxController = NFilterDropBoxController();
 
   final _globalKey = GlobalKey();
-
-  ScrollController? dropBoxController = ScrollController();
 
   /// 选项组
   List<FakeDataModel> get models => items.map((e) => FakeDataModel(
@@ -63,15 +60,17 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
   List<FakeDataModel> selectedModelsTmp = [];
 
   /// 标签组
-  List<FakeDataModel> get tagModels => items.map((e) => FakeDataModel(
+  List<TagDetailModel> get tagModels => items.map((e) => TagDetailModel(
     id: "id_$e",
     name: "标签_$e",
   )).toList();
-  List<FakeDataModel> selectedTagModels = [];
-  List<FakeDataModel> selectedTagModelsTmp = [];
+  List<TagDetailModel> selectedTagModels = [];
+  List<TagDetailModel> selectedTagModelsTmp = [];
 
   @override
   Widget build(BuildContext context) {
+    bool isSingle = false;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
@@ -82,45 +81,63 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
           onPressed: () => debugPrint(e),)
         ).toList(),
       ),
-      body: SafeArea(
-          child: Column(
-            children: [
-              buildSearchAndFilterBar(),
-              Expanded(
-                child: Stack(
-                  clipBehavior: Clip.none,
-                  children: [
-                    buildList(
-                      items: items.map((e) => "item_$e").toList(),
-                    ),
-                    ValueListenableBuilder<bool>(
-                      valueListenable: isVisible,
-                      builder: (context, bool value, child) {
-                        if (value == false) {
-                          return const SizedBox();
-                        }
-
-                        return Positioned(
-                          top: 0,
-                          bottom: context.appBarHeight * 2,
-                          width: context.screenSize.width,
-                          child: buildDropBox(
-                            controller: dropBoxController,
-                            hasShadow: true,
-                          ),
-                        );
-                      }
-                    ),
-                  ],
-                ),
+      body: Column(
+        children: [
+          buildSearchAndFilterBar(
+            onToggle:  (){
+              // showDropBox.value = !showDropBox.value;
+              dropBoxController.onToggle();
+              closeKeyboard();
+            },
+          ),
+          Expanded(
+            child: NFilterDropBox(
+              controller: dropBoxController,
+              sections: getDropBoxSections(isSingle: isSingle),
+              onCancel: onFilterCancel,
+              onReset: onFitlerReset,
+              onConfirm: onFitlerConfirm,
+              child: buildList(
+                items: items.map((e) => "item_$e").toList(),
               ),
-            ],
-          )
+            )
+          ),
+          // Expanded(
+          //   child: Stack(
+          //     clipBehavior: Clip.none,
+          //     children: [
+          //       buildList(
+          //         items: items.map((e) => "item_$e").toList(),
+          //       ),
+          //       ValueListenableBuilder<bool>(
+          //         valueListenable: showDropBox,
+          //         builder: (context, bool value, child) {
+          //
+          //           return Positioned(
+          //             top: 0,
+          //             bottom: 0,
+          //             width: context.screenSize.width,
+          //             child: Offstage(
+          //               offstage: !value,
+          //               child: buildDropBox(
+          //                 controller: dropBoxController,
+          //                 hasShadow: true,
+          //               ),
+          //             ),
+          //           );
+          //         }
+          //       ),
+          //     ],
+          //   ),
+          // ),
+        ],
       ),
     );
   }
 
-  buildSearchAndFilterBar() {
+  buildSearchAndFilterBar({
+    required VoidCallback onToggle,
+}) {
     return Container(
       key: _globalKey,
       padding: EdgeInsets.only(left: 16.w, right: 8.w, top: 12.w, bottom: 12.w),
@@ -132,16 +149,11 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
               //...
             }),
           ),
-          // SizedBox(
-          //   width: 8.w,
-          // ),
-          buildTextBtn(
-            padding: EdgeInsets.only(left: 16.w),
-            icon: Icon(Icons.fitbit),
-            cb: (){
-              isVisible.value = !isVisible.value;
-              closeKeyboard();
-            }
+          SizedBox(
+            width: 8,
+          ),
+          buildFilterBtn(
+            onPressed: onToggle,
           ),
         ],
       ),
@@ -194,91 +206,118 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
     );
   }
 
-  buildTextBtn({
+  Widget buildFilterBtn({
     String title = "筛选",
+    IconData? icon = Icons.fitbit,
     Color? color = Colors.blue,
-    VoidCallback? cb,
-    bool isIconRight = false,
-    OutlinedBorder? shape,
-    double labelIconPadding = 4,
-    EdgeInsets? padding,
-    Widget? icon,
+    VoidCallback? onPressed,
   }) {
-    final label = Text(
-      title,
-      style: TextStyle(
-        color: color,
-        fontSize: 15.sp,
-        fontWeight: FontWeight.w500,
+    return InkWell(
+      onTap: onPressed,
+      child: NPair(
+        icon: Icon(icon, color: color,),
+        child: Text(
+          title,
+          style: TextStyle(
+            color: color,
+            fontSize: 15,
+            fontWeight: FontWeight.w500,
+          ),
+        )
       ),
-    );
-
-    final child = NPair(
-      child: label,
-      icon: icon,
-      betweenGap: labelIconPadding,
-      isReverse: isIconRight,
-    );
-
-    return TextButton(
-      style: TextButton.styleFrom(
-        // splashFactory: NoSplash.splashFactory,
-        // padding: EdgeInsets.zero,
-        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        shape: shape,
-        // shape: StadiumBorder(
-        //   side: BorderSide(color: color ?? Color(0xFF000000)),
-        // ),
-      ),
-      onPressed: cb ?? () {
-        debugPrint(title);
-      },
-      child: child,
     );
   }
 
   /// 筛选弹窗
-  Widget buildDropBox({
-    required ScrollController? controller,
-    bool hasShadow = false,
+  List<Widget> getDropBoxSections({
     bool isSingle = false,
   }) {
-    final tags = List.generate(10, (i) => TagDetailModel(
-      id: i.toString(),
-      name: "标签$i",
-    )).toList();
     final choicSections = [
       NChoiceExpansionOfModel(
         title: '标签',
-        items: tags,
+        items: models,
         isSingle: isSingle,
         idCb: (e) => e.id ?? "",
         titleCb: (e) => e.name ?? "",
+        selectedCb: (e) => selectedModels.map((e) => e.id).contains(e.id),
         onChanged: (list){
-          ddlog(list.map((e) => "${e.name}_${e.isSelected}"));
+          ddlog("NChoiceExpansionOfModel: ${list.map((e) => "${e.name}_${e.isSelected}")}");
+          selectedModelsTmp = list;
         },
       ),
-      buildDropBoxTagChoic<FakeDataModel>(
-        title: "标签",
-        models: models,
-        cbID: (e) => e.id ?? "",
-        cbName: (e) => e.name ?? "",
-        cbSelected: (e) => selectedModelsTmp.map((e) => e.id ?? "").toList().contains(e.id),
-        onChanged: (value) {
-          // debugPrint("selectedModels: $value");
-          selectedModelsTmp = value.map((e) => e.data!).toList();
-          debugPrint("selectedModelsTmp: ${selectedModelsTmp.map((e) => e.name).toList()}");
+      NChoiceExpansionOfModel(
+        title: '标签',
+        items: tagModels,
+        // selectedItems: selectedTagModelsTmp,
+        isSingle: isSingle,
+        idCb: (e) => e.id ?? "",
+        titleCb: (e) => e.name ?? "",
+        selectedCb: (e) => selectedTagModels.map((e) => e.id).contains(e.id),
+        onChanged: (list){
+          // ddlog(list.map((e) => "${e.name}_${e.isSelected}"));
+          selectedTagModelsTmp = list;
+          debugPrint("重置 selectedTagModelsTmp: ${selectedTagModelsTmp.map((e) => e.name).toList()}");
+          // setState((){});
         },
       ),
+      // buildDropBoxTagChoic<FakeDataModel>(
+      //   title: "标签",
+      //   models: models,
+      //   cbID: (e) => e.id ?? "",
+      //   cbName: (e) => e.name ?? "",
+      //   cbSelected: (e) => selectedModelsTmp.map((e) => e.id ?? "").toList().contains(e.id),
+      //   onChanged: (value) {
+      //     // debugPrint("selectedModels: $value");
+      //     selectedModelsTmp = value.map((e) => e.data).toList();
+      //     debugPrint("selectedModelsTmp: ${selectedModelsTmp.map((e) => e.name).toList()}");
+      //   },
+      // ),
     ];
-
-    return NFilterDropBox(
-      sections: choicSections,
-      onCancel: onFilterCancel,
-      onReset: onFitlerReset,
-      onConfirm: onFitlerConfirm,
-    );
+    return choicSections;
   }
+
+  // /// 筛选弹窗
+  // Widget buildDropBox({
+  //   required ScrollController? controller,
+  //   bool hasShadow = false,
+  //   bool isSingle = false,
+  // }) {
+  //   final tags = List.generate(10, (i) => TagDetailModel(
+  //     id: i.toString(),
+  //     name: "标签$i",
+  //   )).toList();
+  //   final choicSections = [
+  //     NChoiceExpansionOfModel(
+  //       title: '标签',
+  //       items: tags,
+  //       isSingle: isSingle,
+  //       idCb: (e) => e.id ?? "",
+  //       titleCb: (e) => e.name ?? "",
+  //       onChanged: (list){
+  //         ddlog(list.map((e) => "${e.name}_${e.isSelected}"));
+  //       },
+  //     ),
+  //     buildDropBoxTagChoic<FakeDataModel>(
+  //       title: "标签",
+  //       models: models,
+  //       cbID: (e) => e.id ?? "",
+  //       cbName: (e) => e.name ?? "",
+  //       cbSelected: (e) => selectedModelsTmp.map((e) => e.id ?? "").toList().contains(e.id),
+  //       onChanged: (value) {
+  //         // debugPrint("selectedModels: $value");
+  //         selectedModelsTmp = value.map((e) => e.data!).toList();
+  //         debugPrint("selectedModelsTmp: ${selectedModelsTmp.map((e) => e.name).toList()}");
+  //       },
+  //     ),
+  //   ];
+  //
+  //   return NFilterDropBox(
+  //     sections: choicSections,
+  //     onCancel: onFilterCancel,
+  //     onReset: onFitlerReset,
+  //     onConfirm: onFitlerConfirm,
+  //   );
+  // }
 
   /// 筛选弹窗 标签选择
   Widget buildDropBoxTagChoic<T>({
@@ -305,7 +344,7 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
             setState(() {});
           },
           title: title,
-          childrenHeader: (onTap) => Column(
+          childrenHeader: (isExpanded, onTap) => Column(
             children: [
               NChoiceBox<T>(
                 isSingle: true,
@@ -347,9 +386,11 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
   }
 
   void onFilterCancel() {
+    closeDropBox();
     selectedModelsTmp = [];
     selectedTagModelsTmp = [];
-    closeDropBox();
+    debugPrint("取消 selectedModels: ${selectedModels.map((e) => e.name).toList()}");
+    debugPrint("取消 selectedTagModels: ${selectedTagModels.map((e) => e.name).toList()}");
   }
 
   /// 重置过滤参数
@@ -420,8 +461,8 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
           title,
           style: TextStyle(
               color: fontColor,
-              fontSize: 18.sp,
-              fontWeight: FontWeight.bold
+              fontSize: 14,
+              fontWeight: FontWeight.w500,
           ),
         ),
         initiallyExpanded: disable ? false : isExpand,
@@ -485,10 +526,11 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
   }
 
   closeDropBox() {
-    if (isVisible.value == false) {
+    dropBoxController.onToggle();
+    if (showDropBox.value == false) {
       return;
     }
-    isVisible.value = !isVisible.value;
+    showDropBox.value = !showDropBox.value;
   }
 
   closeKeyboard() {

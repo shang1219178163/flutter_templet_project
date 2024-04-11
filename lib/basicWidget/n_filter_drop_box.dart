@@ -6,90 +6,153 @@
 //  Copyright © 2024/4/9 shang. All rights reserved.
 //
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_footer_button_bar.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 
-
-
 class NFilterDropBox extends StatefulWidget {
-
   NFilterDropBox({
     super.key,
+    this.controller,
+    this.heightFactor = 0.6,
+    this.barrierColor,
+    this.borderRadius = const BorderRadius.only(
+      bottomLeft: Radius.circular(8),
+      bottomRight: Radius.circular(8),
+    ),
     required this.sections,
     required this.onCancel,
     required this.onReset,
     required this.onConfirm,
+    this.onVisible,
+    required this.child,
   });
 
+  final NFilterDropBoxController? controller;
 
   final List<Widget> sections;
   final VoidCallback onCancel;
   final VoidCallback onReset;
   final VoidCallback onConfirm;
 
+  /// 高度比例
+  final double? heightFactor;
+  /// 背景色
+  final Color? barrierColor;
+  /// 圆角
+  final BorderRadius borderRadius;
+  /// 折叠展开
+  final ValueChanged<bool>? onVisible;
+
+  final Widget child;
+
   @override
   State<NFilterDropBox> createState() => _NFilterDropBoxState();
 }
 
 class _NFilterDropBoxState extends State<NFilterDropBox> {
-
   final _scrollController = ScrollController();
+
+  var isVisible = ValueNotifier(false);
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    widget.controller?._detach(this);
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    widget.controller?._attach(this);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTapUp: (details) => widget.onCancel,
+    return Stack(
+      clipBehavior: Clip.none,
+      children: [
+        widget.child,
+        ValueListenableBuilder<bool>(
+            valueListenable: isVisible,
+            builder: (context, bool value, child) {
+              if (!value) {
+                return SizedBox();
+              }
+
+              return Positioned(
+                top: 0,
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: buildDropBox(),
+              );
+            }
+        ),
+      ],
+    );
+  }
+
+  Widget buildDropBox() {
+    return InkWell(
+      onTap: widget.onCancel,
       child: Container(
-        width: double.maxFinite,
-        padding: EdgeInsets.only(
-          // bottom: context.appBarHeight + 51,
-        ),
+        alignment: Alignment.topCenter,
         decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border.all(color: Colors.blue),
-          borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(8),
-            bottomRight: Radius.circular(8),
-          ),
+          color: widget.barrierColor ??
+              Theme.of(context).bottomSheetTheme.modalBarrierColor ??
+              Colors.black.withOpacity(0.2),
         ),
-        child: Column(
-          children: [
-            const Divider(
-              height: 1,
-              color: lineColor,
+        child: FractionallySizedBox(
+          heightFactor: widget.heightFactor,
+          child: Container(
+            width: double.maxFinite,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              // border: Border.all(color: Colors.blue),
+              borderRadius: widget.borderRadius,
             ),
-            Expanded(
-              child: Scrollbar(
-                child: SingleChildScrollView(
-                  child: Container(
-                    color: Colors.white,
-                    child: Column(
-                      children: widget.sections.map((e) {
-                        return Column(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 16,
-                              ),
-                              child: e,
-                            ),
-                            if (widget.sections.last != e) buildDvider(),
-                          ],
-                        );
-                      }).toList(),
+            child: Column(
+              children: [
+                const Divider(
+                  height: 1,
+                  color: lineColor,
+                ),
+                Expanded(
+                  child: Scrollbar(
+                    child: SingleChildScrollView(
+                      child: Container(
+                        color: Colors.white,
+                        child: Column(
+                          children: widget.sections.map((e) {
+                            return Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 16,
+                                  ),
+                                  child: e,
+                                ),
+                                if (widget.sections.last != e) buildDvider(),
+                              ],
+                            );
+                          }).toList(),
+                        ),
+                      ),
                     ),
                   ),
                 ),
-              ),
+                buildDropBoxButtonBar(
+                  borderRadius: widget.borderRadius,
+                  onCancel: widget.onReset,
+                  onConfirm: widget.onConfirm,
+                ),
+              ],
             ),
-            buildDropBoxButtonBar(
-              onCancel: widget.onReset,
-              onConfirm: widget.onConfirm,
-            ),
-          ],
+          ),
         ),
       ),
     );
@@ -99,17 +162,18 @@ class _NFilterDropBoxState extends State<NFilterDropBox> {
     return Container(
       height: 8,
       margin: const EdgeInsets.only(top: 15),
-      color: lineColor[30],
+      color: Color(0xffF3F3F3),
     );
   }
 
   /// 筛选弹窗 取消确认菜单
   Widget buildDropBoxButtonBar({
+    BorderRadius? borderRadius,
     required VoidCallback onCancel,
     required VoidCallback onConfirm,
   }) {
     return ClipRRect(
-      borderRadius: const BorderRadius.only(
+      borderRadius: borderRadius ?? const BorderRadius.only(
         bottomLeft: Radius.circular(8),
         bottomRight: Radius.circular(8),
       ),
@@ -124,5 +188,38 @@ class _NFilterDropBoxState extends State<NFilterDropBox> {
         onConfirm: onConfirm,
       ),
     );
+  }
+
+  void onToggle() {
+    isVisible.value = !isVisible.value;
+    widget.onVisible?.call(isVisible.value);
+  }
+}
+
+
+
+/// NRefreshListView 组件控制器,将 NRefreshListViewState 的私有属性或者方法暴漏出去
+class NFilterDropBoxController {
+
+  _NFilterDropBoxState? _anchor;
+
+  void onToggle() {
+    assert(_anchor != null);
+    _anchor!.onToggle();
+  }
+
+  bool get isVisible {
+    assert(_anchor != null);
+    return _anchor!.isVisible.value;
+  }
+
+  void _attach(_NFilterDropBoxState anchor) {
+    _anchor = anchor;
+  }
+
+  void _detach(_NFilterDropBoxState anchor) {
+    if (_anchor == anchor) {
+      _anchor = null;
+    }
   }
 }

@@ -2,21 +2,19 @@
 
 
 
-class FakeDataModel {
+import 'package:flutter_templet_project/mixin/selectable_mixin.dart';
+
+class FakeDataModel with SelectableMixin{
   String? id;
   String? name;
   String? code;
   String? createBy;
-
-  /// 非接口返回字段
-  bool? isSelected;
 
   FakeDataModel({
     required this.id,
     this.name,
     this.code,
     this.createBy,
-    this.isSelected = false,
   });
 
   FakeDataModel.fromJson(Map<String, dynamic>? json) {
@@ -39,4 +37,5 @@ class FakeDataModel {
     data['isSelected'] = isSelected;
     return data;
   }
+
 }
