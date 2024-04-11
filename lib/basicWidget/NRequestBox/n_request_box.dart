@@ -78,7 +78,7 @@ import 'package:flutter_templet_project/util/color_util.dart';
 //   );
 // }
 
-typedef ToggleWidgetBuilder = Widget Function(BuildContext context, VoidCallback onToggle);
+typedef ToggleWidgetBuilder = Widget Function(bool isVisible, VoidCallback onToggle);
 
 /// 列表请求组件
 /// 支持: 下拉刷新,上拉加载; 搜索框回调; dropbox
@@ -223,7 +223,7 @@ class _NRequestBoxState extends State<NRequestBox> {
           ),
           if(onClick != null) InkWell(
             onTap: onClick,
-            child: btnBulder?.call(context, onClick) ?? TextButton(
+            child: btnBulder?.call(_showDropbox.value, onClick) ?? TextButton(
               style: TextButton.styleFrom(
                 padding: EdgeInsets.zero,
                 // padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
