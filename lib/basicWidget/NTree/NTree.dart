@@ -106,7 +106,7 @@ class _NTreeState extends State<NTree> {
           e.onClick?.call(e);
           setState((){});
         },
-        header: (onTap) => InkWell(
+        header: (isExpanded, onTap) => InkWell(
           onTap: (){
             onTap();
             e.isExpand = !e.isExpand;
