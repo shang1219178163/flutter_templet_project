@@ -7,7 +7,9 @@ import 'package:flutter/material.dart';
 
 const Duration _kExpand = Duration(milliseconds: 200);
 /// EnhanceExpansionTile 部分子组件构建类型
-typedef ToggleWidgetBuilder = Widget Function(VoidCallback onToggle);
+// typedef ToggleWidgetBuilder = Widget Function(VoidCallback onToggle);
+typedef ExpansionWidgetBuilder = Widget Function(
+    bool isExpanded, VoidCallback onToggle);
 
 /// A single-line [ListTile] with an expansion arrow icon that expands or collapses
 /// the tile to reveal or hide the [children].
@@ -106,13 +108,13 @@ class EnExpansionTile extends StatefulWidget {
   final List<Widget> children;
 
   /// replace ListTile,
-  final ToggleWidgetBuilder? header;
+  final ExpansionWidgetBuilder? header;
 
   /// isExpand == false, visable,
-  final ToggleWidgetBuilder? childrenHeader;
+  final ExpansionWidgetBuilder? childrenHeader;
 
   /// isExpand == false, visable,
-  final ToggleWidgetBuilder? childrenFooter;
+  final ExpansionWidgetBuilder? childrenFooter;
 
   /// borderRadius
   final BorderRadiusGeometry? borderRadius;
@@ -386,7 +388,7 @@ class _EnExpansionTileState extends State<EnExpansionTile> with SingleTickerProv
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            widget.header?.call(_handleTap) ?? ListTileTheme.merge(
+            widget.header?.call(_isExpanded, _handleTap) ?? ListTileTheme.merge(
               iconColor: _iconColor.value ?? expansionTileTheme.iconColor,
               textColor: _headerColor.value,
               child: ListTile(
@@ -399,7 +401,7 @@ class _EnExpansionTileState extends State<EnExpansionTile> with SingleTickerProv
                 // horizontalTitleGap: 0,
               ),
             ),
-            widget.childrenHeader?.call(_handleTap) ?? SizedBox(),
+            widget.childrenHeader?.call(_isExpanded, _handleTap) ?? SizedBox(),
             ClipRect(
               child: Align(
                 alignment: widget.expandedAlignment
@@ -409,7 +411,7 @@ class _EnExpansionTileState extends State<EnExpansionTile> with SingleTickerProv
                 child: child,
               ),
             ),
-            widget.childrenFooter?.call(_handleTap) ?? SizedBox(),
+            widget.childrenFooter?.call(_isExpanded, _handleTap) ?? SizedBox(),
           ],
         ),
       ),
