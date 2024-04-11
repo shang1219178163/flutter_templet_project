@@ -9,33 +9,54 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_footer_button_bar.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
+import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 
 class NFilterDropBox extends StatefulWidget {
   NFilterDropBox({
     super.key,
     this.controller,
+    required this.sections,
+    required this.onCancel,
+    required this.onReset,
+    required this.onConfirm,
+    this.onVisible,
+    this.stackAlignment = AlignmentDirectional.topStart,
+    this.stackTextDirection,
+    this.stackFit = StackFit.loose,
+    this.stackClipBehavior = Clip.hardEdge,
+    this.contentAlignment = Alignment.topCenter,
+    this.width,
     this.heightFactor = 0.6,
     this.barrierColor,
     this.borderRadius = const BorderRadius.only(
       bottomLeft: Radius.circular(8),
       bottomRight: Radius.circular(8),
     ),
-    required this.sections,
-    required this.onCancel,
-    required this.onReset,
-    required this.onConfirm,
-    this.onVisible,
     required this.child,
+    this.header,
+    this.footer,
   });
-
+  /// 控制器
   final NFilterDropBoxController? controller;
-
+  /// 筛选项
   final List<Widget> sections;
   final VoidCallback onCancel;
   final VoidCallback onReset;
   final VoidCallback onConfirm;
 
+  /// stack alignment
+  final AlignmentGeometry stackAlignment;
+  /// stack textDirection
+  final TextDirection? stackTextDirection;
+  /// stack fit
+  final StackFit stackFit;
+  /// stack clipBehavior
+  final Clip stackClipBehavior;
+  /// 对齐方式
+  final Alignment contentAlignment;
+  /// 宽度
+  final double? width;
   /// 高度比例
   final double? heightFactor;
   /// 背景色
@@ -45,6 +66,10 @@ class NFilterDropBox extends StatefulWidget {
   /// 折叠展开
   final ValueChanged<bool>? onVisible;
 
+  final Widget Function(BuildContext context)? header;
+
+  final Widget Function(BuildContext context)? footer;
+
   final Widget child;
 
   @override
@@ -52,20 +77,19 @@ class NFilterDropBox extends StatefulWidget {
 }
 
 class _NFilterDropBoxState extends State<NFilterDropBox> {
-  final _scrollController = ScrollController();
+  final scrollController = ScrollController();
 
   var isVisible = ValueNotifier(false);
 
   @override
   void dispose() {
-    // TODO: implement dispose
     widget.controller?._detach(this);
+    scrollController.dispose();
     super.dispose();
   }
 
   @override
   void initState() {
-    // TODO: implement initState
     widget.controller?._attach(this);
     super.initState();
   }
@@ -73,7 +97,10 @@ class _NFilterDropBoxState extends State<NFilterDropBox> {
   @override
   Widget build(BuildContext context) {
     return Stack(
-      clipBehavior: Clip.none,
+      alignment: widget.stackAlignment,
+      textDirection: widget.stackTextDirection,
+      fit: widget.stackFit,
+      clipBehavior: widget.stackClipBehavior,
       children: [
         widget.child,
         ValueListenableBuilder<bool>(
@@ -97,60 +124,69 @@ class _NFilterDropBoxState extends State<NFilterDropBox> {
   }
 
   Widget buildDropBox() {
-    return InkWell(
+    // return
+    return GestureDetector(
       onTap: widget.onCancel,
       child: Container(
-        alignment: Alignment.topCenter,
+        alignment: widget.contentAlignment,
         decoration: BoxDecoration(
           color: widget.barrierColor ??
               Theme.of(context).bottomSheetTheme.modalBarrierColor ??
               Colors.black.withOpacity(0.2),
         ),
-        child: FractionallySizedBox(
-          heightFactor: widget.heightFactor,
-          child: Container(
-            width: double.maxFinite,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              // border: Border.all(color: Colors.blue),
-              borderRadius: widget.borderRadius,
-            ),
-            child: Column(
-              children: [
-                const Divider(
-                  height: 1,
-                  color: lineColor,
-                ),
-                Expanded(
-                  child: Scrollbar(
-                    child: SingleChildScrollView(
-                      child: Container(
-                        color: Colors.white,
-                        child: Column(
-                          children: widget.sections.map((e) {
-                            return Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 16,
+        child: InkWell(
+          onTap: (){
+            // debugPrint("拦截展示内容背景事件");
+          },
+          child: FractionallySizedBox(
+            heightFactor: widget.heightFactor,
+            child: Container(
+              // width: double.maxFinite,
+              width: widget.width,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                // border: Border.all(color: Colors.blue),
+                borderRadius: widget.borderRadius,
+              ),
+              child: Column(
+                children: [
+                  widget.header?.call(context) ?? const Divider(
+                    height: 1,
+                    color: lineColor,
+                  ),
+                  Expanded(
+                    child: Scrollbar(
+                      controller: scrollController,
+                      child: SingleChildScrollView(
+                        controller: scrollController,
+                        child: Container(
+                          color: Colors.white,
+                          child: Column(
+                            children: widget.sections.map((e) {
+                              return Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 16,
+                                    ),
+                                    child: InkWell(child: e),
                                   ),
-                                  child: e,
-                                ),
-                                if (widget.sections.last != e) buildDvider(),
-                              ],
-                            );
-                          }).toList(),
+                                  if (widget.sections.last != e) buildDvider(),
+                                ],
+                              );
+                            }).toList(),
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-                buildDropBoxButtonBar(
-                  borderRadius: widget.borderRadius,
-                  onCancel: widget.onReset,
-                  onConfirm: widget.onConfirm,
-                ),
-              ],
+                  widget.footer?.call(context) ?? buildDropBoxButtonBar(
+                    borderRadius: widget.borderRadius,
+                    onCancel: widget.onReset,
+                    onConfirm: widget.onConfirm,
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -178,6 +214,12 @@ class _NFilterDropBoxState extends State<NFilterDropBox> {
         bottomRight: Radius.circular(8),
       ),
       child: NFooterButtonBar(
+        padding: EdgeInsets.only(
+          top: 12,
+          left: 16,
+          right: 16,
+          bottom: 12,
+        ),
         decoration: const BoxDecoration(
           color: Colors.white,
           border: Border(top: BorderSide(color: Color(0xffE5E5E5), width: 0.5)),

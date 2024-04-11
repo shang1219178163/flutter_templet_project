@@ -14,8 +14,10 @@ import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
+import 'package:flutter_templet_project/model/order_model.dart';
 import 'package:flutter_templet_project/model/tag_detail_model.dart';
 import 'package:flutter_templet_project/util/Debounce.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
@@ -36,7 +38,7 @@ class DropBoxChoicDemo extends StatefulWidget {
 }
 
 class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
-  final items = List.generate(6, (i) => i).toList();
+  final items = List.generate(9, (i) => i).toList();
 
   var searchText = "";
   late final searchtEditingController = TextEditingController();
@@ -64,15 +66,24 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
     id: "id_$e",
     name: "标签_$e",
   )).toList();
-  List<TagDetailModel> selectedTagModels = [];
-  List<TagDetailModel> selectedTagModelsTmp = [];
+  List<TagDetailModel> selectedTags = [];
+  List<TagDetailModel> selectedTagsTmp = [];
+
+  /// 标签组
+  List<OrderModel> get orders => items.map((e) => OrderModel(
+    id: e,
+    name: "订单_$e",
+    pirce: IntExt.random(max: 1000, min: 100).toDouble(),
+  )).toList();
+  List<OrderModel> selectedOrders = [];
+  List<OrderModel> selectedOrdersTmp = [];
 
   final dataDesc = ValueNotifier("");
   final tagDesc = ValueNotifier("");
 
   @override
   Widget build(BuildContext context) {
-    bool isSingle = false;
+    bool isSingle = false;//单选多选
 
     return Scaffold(
       appBar: AppBar(
@@ -127,34 +138,6 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
               ),
             )
           ),
-          // Expanded(
-          //   child: Stack(
-          //     clipBehavior: Clip.none,
-          //     children: [
-          //       buildList(
-          //         items: items.map((e) => "item_$e").toList(),
-          //       ),
-          //       ValueListenableBuilder<bool>(
-          //         valueListenable: showDropBox,
-          //         builder: (context, bool value, child) {
-          //
-          //           return Positioned(
-          //             top: 0,
-          //             bottom: 0,
-          //             width: context.screenSize.width,
-          //             child: Offstage(
-          //               offstage: !value,
-          //               child: buildDropBox(
-          //                 controller: dropBoxController,
-          //                 hasShadow: true,
-          //               ),
-          //             ),
-          //           );
-          //         }
-          //       ),
-          //     ],
-          //   ),
-          // ),
         ],
       ),
     );
@@ -257,7 +240,7 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
   List<Widget> getDropBoxSections({
     bool isSingle = false,
   }) {
-    final choicSections = [
+    return [
       NChoiceExpansionOfModel(
         title: '标签',
         items: models,
@@ -277,73 +260,29 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
         isSingle: isSingle,
         idCb: (e) => e.id ?? "",
         titleCb: (e) => e.name ?? "",
-        selectedCb: (e) => selectedTagModels.map((e) => e.id).contains(e.id),
+        selectedCb: (e) => selectedTags.map((e) => e.id).contains(e.id),
         onChanged: (list){
           // ddlog(list.map((e) => "${e.name}_${e.isSelected}"));
-          selectedTagModelsTmp = list;
-          debugPrint("重置 selectedTagModelsTmp: ${selectedTagModelsTmp.map((e) => e.name).toList()}");
+          selectedTagsTmp = list;
+          debugPrint("重置 selectedTagModelsTmp: ${selectedTagsTmp.map((e) => e.name).toList()}");
           // setState((){});
         },
       ),
-      buildDropBoxTagChoic<FakeDataModel>(
+      buildDropBoxTagChoic<OrderModel>(
         title: "标签",
         isSingle: isSingle,
-        models: models,
-        cbID: (e) => e.id ?? "",
+        models: orders,
+        cbID: (e) => e.id.toString(),
         cbName: (e) => e.name ?? "",
-        cbSelected: (e) => selectedModels.map((e) => e.id ?? "").toList().contains(e.id),
+        cbSelected: (e) => selectedOrders.map((e) => e.id ?? "").toList().contains(e.id),
         onChanged: (value) {
           // debugPrint("selectedModels: $value");
-          selectedModelsTmp = value;
-          debugPrint("selectedModelsTmp: ${selectedModelsTmp.map((e) => e.name).toList()}");
+          selectedOrdersTmp = value;
+          debugPrint("selectedModelsTmp: ${selectedOrdersTmp.map((e) => e.name).toList()}");
         },
       ),
     ];
-    return choicSections;
   }
-
-  // /// 筛选弹窗
-  // Widget buildDropBox({
-  //   required ScrollController? controller,
-  //   bool hasShadow = false,
-  //   bool isSingle = false,
-  // }) {
-  //   final tags = List.generate(10, (i) => TagDetailModel(
-  //     id: i.toString(),
-  //     name: "标签$i",
-  //   )).toList();
-  //   final choicSections = [
-  //     NChoiceExpansionOfModel(
-  //       title: '标签',
-  //       items: tags,
-  //       isSingle: isSingle,
-  //       idCb: (e) => e.id ?? "",
-  //       titleCb: (e) => e.name ?? "",
-  //       onChanged: (list){
-  //         ddlog(list.map((e) => "${e.name}_${e.isSelected}"));
-  //       },
-  //     ),
-  //     buildDropBoxTagChoic<FakeDataModel>(
-  //       title: "标签",
-  //       models: models,
-  //       cbID: (e) => e.id ?? "",
-  //       cbName: (e) => e.name ?? "",
-  //       cbSelected: (e) => selectedModelsTmp.map((e) => e.id ?? "").toList().contains(e.id),
-  //       onChanged: (value) {
-  //         // debugPrint("selectedModels: $value");
-  //         selectedModelsTmp = value.map((e) => e.data!).toList();
-  //         debugPrint("selectedModelsTmp: ${selectedModelsTmp.map((e) => e.name).toList()}");
-  //       },
-  //     ),
-  //   ];
-  //
-  //   return NFilterDropBox(
-  //     sections: choicSections,
-  //     onCancel: onFilterCancel,
-  //     onReset: onFitlerReset,
-  //     onConfirm: onFitlerConfirm,
-  //   );
-  // }
 
   /// 筛选弹窗 标签选择
   Widget buildDropBoxTagChoic<T>({
@@ -401,28 +340,13 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
     );
   }
 
-  /// 筛选弹窗 取消确认菜单
-  Widget buildDropBoxButtonBar() {
-    return NCancelAndConfirmBar(
-      cancelTitle: "重置",
-      bottomRadius: Radius.circular(20),
-      onCancel: () {
-        // Navigator.of(context).pop();
-        onFitlerReset();
-      },
-      onConfirm: () {
-        // Navigator.of(context).pop();
-        onFitlerConfirm();
-      },
-    );
-  }
-
   void onFilterCancel() {
     closeDropBox();
     selectedModelsTmp = [];
-    selectedTagModelsTmp = [];
+    selectedTagsTmp = [];
+    selectedOrdersTmp = [];
     debugPrint("取消 selectedModels: ${selectedModels.map((e) => e.name).toList()}");
-    debugPrint("取消 selectedTagModels: ${selectedTagModels.map((e) => e.name).toList()}");
+    debugPrint("取消 selectedTagModels: ${selectedTags.map((e) => e.name).toList()}");
     updateFitlerInfo();
   }
 
@@ -430,13 +354,11 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
   onFitlerReset() {
     closeDropBox();
 
-    selectedModelsTmp = [];
-    selectedModels = selectedModelsTmp;
-
-    selectedTagModelsTmp = [];
-    selectedTagModels = selectedTagModelsTmp;
+    selectedModels = selectedModelsTmp = [];
+    selectedTags = selectedTagsTmp = [];
+    selectedOrders = selectedOrdersTmp = [];
     debugPrint("重置 selectedModels: ${selectedModels.map((e) => e.name).toList()}");
-    debugPrint("重置 selectedTagModels: ${selectedTagModels.map((e) => e.name).toList()}");
+    debugPrint("重置 selectedTagModels: ${selectedTags.map((e) => e.name).toList()}");
     updateFitlerInfo();
     //请求
   }
@@ -445,15 +367,16 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
     closeDropBox();
 
     selectedModels = selectedModelsTmp;
-    selectedTagModels = selectedTagModelsTmp;
+    selectedTags = selectedTagsTmp;
+    selectedOrders = selectedOrdersTmp;
     debugPrint("重置 selectedModels: ${selectedModels.map((e) => e.name).toList()}");
-    debugPrint("确定 selectedTagModels: ${selectedTagModels.map((e) => e.name).toList()}");
+    debugPrint("确定 selectedTagModels: ${selectedTags.map((e) => e.name).toList()}");
     updateFitlerInfo();
     //请求
   }
 
   void updateFitlerInfo() {
-    tagDesc.value = selectedTagModels.map((e) => e.name).toList().join(", ");
+    tagDesc.value = selectedTags.map((e) => e.name).toList().join(", ");
     dataDesc.value = selectedModels.map((e) => e.name).toList().join(", ");
   }
 
