@@ -240,7 +240,7 @@ class _NFilterDropBoxState extends State<NFilterDropBox> {
 
 
 
-/// NRefreshListView 组件控制器,将 NRefreshListViewState 的私有属性或者方法暴漏出去
+/// NFilterDropBox 组件控制器,将 State 的私有属性或者方法暴漏出去
 class NFilterDropBoxController {
 
   _NFilterDropBoxState? _anchor;

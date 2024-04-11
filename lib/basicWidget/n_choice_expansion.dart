@@ -19,6 +19,7 @@ class NChoiceExpansion<T> extends StatefulWidget {
 
   NChoiceExpansion({
     super.key,
+    this.controller,
     required this.title,
     this.titleStyle = const TextStyle(
       color: Color(0xff737373),
@@ -37,6 +38,8 @@ class NChoiceExpansion<T> extends StatefulWidget {
     this.footerBuilder,
   });
 
+  /// 控制器
+  final NChoiceExpansionController? controller;
   /// 标题
   final String title;
   /// 标题字体样式
@@ -74,8 +77,14 @@ class _NChoiceExpansionState<T> extends State<NChoiceExpansion<T>> {
   final weChatSubTitleColor = Color(0xff737373);
 
   @override
+  void dispose() {
+    widget.controller?._detach(this);
+    super.dispose();
+  }
+
+  @override
   void initState() {
-    // TODO: implement initState
+    widget.controller?._attach(this);
     super.initState();
   }
 
@@ -95,47 +104,6 @@ class _NChoiceExpansionState<T> extends State<NChoiceExpansion<T>> {
 
   @override
   Widget build(BuildContext context) {
-    final hideExpandButton = (widget.items.length <= widget.collapseCount);
-
-    final expandButton = Offstage(
-      offstage: hideExpandButton,
-      child: GestureDetector(
-        onTap: onToggle,
-        child: Container(
-          padding: const EdgeInsets.only(
-            left: 8,
-            right: 8,
-            top: 4,
-            bottom: 4,
-          ),
-          decoration: BoxDecoration(
-            color: Colors.transparent,
-            // border: Border.all(color: Colors.blue),
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                isExpand ? "收起" : "展开",
-                style: TextStyle(
-                  color: weChatSubTitleColor,
-                  fontSize: 12,
-                ),
-              ),
-              const SizedBox(
-                width: 0,
-              ),
-              Icon(
-                isExpand? Icons.expand_less : Icons.expand_more,
-                size: 18,
-                color: weChatSubTitleColor,
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-
     final items = isExpand
         ? widget.items
         : widget.items.take(6).toList();
@@ -155,7 +123,7 @@ class _NChoiceExpansionState<T> extends State<NChoiceExpansion<T>> {
                   style: widget.titleStyle,
                 ),
               ),
-              expandButton,
+              buildExpandButton(),
             ],
           ),
         ),
@@ -202,10 +170,81 @@ class _NChoiceExpansionState<T> extends State<NChoiceExpansion<T>> {
       ),
     );
   }
+  /// 折叠展开按钮
+  Widget buildExpandButton() {
+    final hideExpandButton = (widget.items.length <= widget.collapseCount);
+
+    final expandButton = Offstage(
+      offstage: hideExpandButton,
+      child: GestureDetector(
+        onTap: onToggle,
+        child: Container(
+          padding: const EdgeInsets.only(
+            left: 8,
+            right: 8,
+            top: 4,
+            bottom: 4,
+          ),
+          decoration: BoxDecoration(
+            color: Colors.transparent,
+            // border: Border.all(color: Colors.blue),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                isExpand ? "收起" : "展开",
+                style: TextStyle(
+                  color: weChatSubTitleColor,
+                  fontSize: 12,
+                ),
+              ),
+              const SizedBox(
+                width: 0,
+              ),
+              Icon(
+                isExpand? Icons.expand_less : Icons.expand_more,
+                size: 18,
+                color: weChatSubTitleColor,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+    return expandButton;
+  }
 
   void onToggle() {
     isExpand = !isExpand;
     widget.onExpand?.call(isExpand);
     setState(() {});
+  }
+}
+
+
+/// NFilterDropBox 组件控制器,将 State 的私有属性或者方法暴漏出去
+class NChoiceExpansionController {
+
+  _NChoiceExpansionState? _anchor;
+
+  void onToggle() {
+    assert(_anchor != null);
+    _anchor!.onToggle();
+  }
+
+  Widget buildExpandButton() {
+    assert(_anchor != null);
+    return _anchor!.buildExpandButton();
+  }
+
+  void _attach(_NChoiceExpansionState anchor) {
+    _anchor = anchor;
+  }
+
+  void _detach(_NChoiceExpansionState anchor) {
+    if (_anchor == anchor) {
+      _anchor = null;
+    }
   }
 }

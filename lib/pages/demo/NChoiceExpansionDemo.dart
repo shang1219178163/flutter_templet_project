@@ -152,7 +152,10 @@ class _NChoiceExpansionDemoState extends State<NChoiceExpansionDemo> {
           return buildItem(e: e, isSelected: isSelected, titleCb: (e) => e.name ?? "",);
         },
       ),
-    ];
+    ].map((e) => Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: e,
+    )).toList();
   }
 
   /// 子元素自定义
