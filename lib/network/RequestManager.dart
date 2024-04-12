@@ -14,12 +14,16 @@ import 'package:flutter_templet_project/cache/cache_service.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/network/RequestConfig.dart';
 import 'package:flutter_templet_project/network/RequestError.dart';
+import 'package:flutter_templet_project/network/api/token_refersh_api.dart';
 import 'package:flutter_templet_project/network/base_request_api.dart';
 import 'package:flutter_templet_project/network/dio_ext.dart';
+import 'package:flutter_templet_project/network/interceptors/token_interceptor.dart';
+import 'package:flutter_templet_project/network/interceptors/validate_interceptor.dart';
 import 'package:flutter_templet_project/network/proxy/dio_proxy.dart';
 import 'package:flutter_templet_project/routes/APPRouter.dart';
 import 'package:flutter_templet_project/routes/NavigatorUtil.dart';
 import 'package:flutter_templet_project/util/debug_log.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 
 class RequestManager extends BaseRequestAPI {
@@ -51,7 +55,7 @@ class RequestManager extends BaseRequestAPI {
   );
 
   // Dio _dio = Dio();
-  Dio getDio() {
+  Dio getDio(BaseRequestAPI? api) {
     var dio = Dio();
 
     var options = BaseOptions();
@@ -67,7 +71,7 @@ class RequestManager extends BaseRequestAPI {
     };
     dio.options = options;
 
-    final interceptor = InterceptorsWrapper(
+    final interceptor = QueuedInterceptorsWrapper(
       onRequest: (RequestOptions options, handler) {
         // print("请求之前");
         return handler.next(options);
@@ -77,12 +81,15 @@ class RequestManager extends BaseRequestAPI {
         DebugLog.d(response.toDescription());
         return handler.next(response);
       },
-      onError: (DioException e, handler) {
+      onError: (DioException e, handler) async {
         return handler.next(e);
       },
     );
+    if (api != null) {
+      dio.interceptors.add(ValidateInterceptor(api: api));
+    }
+    dio.interceptors.add(TokenInterceptor(dio: dio));
     dio.interceptors.add(interceptor);
-
     dio.interceptors.add(cacheInterceptor);
 
     DioProxy.setProxy(dio);
@@ -128,6 +135,7 @@ class RequestManager extends BaseRequestAPI {
       method: api.requestType,
       queryParams: api.requestParams,
       data: api.requestParams,
+      api: api,
     );
     return _handleResponse(response: response, api: api);
   }
@@ -142,6 +150,7 @@ class RequestManager extends BaseRequestAPI {
     String? filePath,
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
+    BaseRequestAPI? api,
   }) async {
     final seperator = url.startsWith("/") ? "" : "/";
     var path = "${RequestConfig.baseUrl}$seperator$url";
@@ -152,27 +161,27 @@ class RequestManager extends BaseRequestAPI {
     try {
       switch (method) {
         case HttpMethod.GET:
-          return await getDio().get<Map<String, dynamic>>(
+          return await getDio(api).get<Map<String, dynamic>>(
             path,
             queryParameters: queryParams,
             options: options,
           );
         case HttpMethod.PUT:
-          return await getDio().put<Map<String, dynamic>>(
+          return await getDio(api).put<Map<String, dynamic>>(
             path,
             queryParameters: queryParams,
             data: data,
             options: options,
           );
         case HttpMethod.POST:
-          return await getDio().post<Map<String, dynamic>>(
+          return await getDio(api).post<Map<String, dynamic>>(
             path,
             queryParameters: queryParams,
             data: data,
             options: options,
           );
         case HttpMethod.DELETE:
-          return await getDio().delete<Map<String, dynamic>>(
+          return await getDio(api).delete<Map<String, dynamic>>(
             path,
             queryParameters: queryParams,
             data: data,
@@ -181,7 +190,7 @@ class RequestManager extends BaseRequestAPI {
         case HttpMethod.UPLOAD:
           {
             assert(filePath?.isNotEmpty == true, "上传文件路径不能为空");
-            return await getDio().post(
+            return await getDio(api).post(
               path,
               queryParameters: queryParams,
               data: data ??
@@ -196,7 +205,8 @@ class RequestManager extends BaseRequestAPI {
           }
         case HttpMethod.DOWNLOAD:
           {
-            return await getDio().get(
+            assert(filePath?.isNotEmpty == true, "下载文件路径不能为空");
+            return await getDio(api).get(
               path,
               queryParameters: queryParams,
               data: FormData.fromMap({
@@ -231,6 +241,7 @@ class RequestManager extends BaseRequestAPI {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
     List<String> errorCodes = const [],
+    BaseRequestAPI? api,
   }) async {
     var formData = FormData.fromMap({
       'dirName': 'MY_APP',
@@ -241,6 +252,7 @@ class RequestManager extends BaseRequestAPI {
       method: HttpMethod.POST,
       queryParams: queryParams,
       data: formData,
+      api: api,
     );
     return _handleResponse(
       response: response,

@@ -19,7 +19,7 @@ enum HttpMethod {
 }
 
 /// 请求基类
-class BaseRequestAPI {
+abstract class BaseRequestAPI {
   ///url
   String get requestURI {
     // TODO: implement requestURI
