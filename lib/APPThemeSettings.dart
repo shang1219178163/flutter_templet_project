@@ -59,6 +59,7 @@ class APPThemeService {
     ),
     chipTheme: ChipThemeData(
       pressElevation: 0,//不明原因未生效
+      showCheckmark: false,
     ),
     buttonTheme: ButtonThemeData(
       splashColor: Colors.transparent,
@@ -130,6 +131,7 @@ class APPThemeService {
     ),
     chipTheme: ChipThemeData(
       pressElevation: 0,//不明原因未生效
+      showCheckmark: false,
     ),
   );
 

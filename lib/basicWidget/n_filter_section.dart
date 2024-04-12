@@ -76,18 +76,18 @@ class _NFilterSectionState<T> extends State<NFilterSection<T>> {
         },
         childrenHeader: (isExpanded, onTap) => Column(
           children: [
-            NChoiceBox(
+            NChoiceBox<T>(
               isSingle: true,
               itemColor: Colors.transparent,
               items: items
-                  .map((e) => ChoiceBoxModel(
+                  .map((e) => ChoiceBoxModel<T>(
                 id: widget.cbID(e),
                 title: widget.cbName(e),
                 isSelected: widget.cbSelected(e),
                 data: e,
               ))
                   .toList(),
-              onChanged: (List<ChoiceBoxModel> value) {
+              onChanged: (value) {
                 final tmp = value.isEmpty ? null : value.first.data;
                 widget.onChanged(tmp);
               },

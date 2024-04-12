@@ -122,6 +122,8 @@ class _NChoiceBoxOneState<T> extends State<NChoiceBoxOne> {
                 backgroundColor: Colors.transparent,
                 selectedColor: Colors.transparent,
                 pressElevation: 0,
+                showCheckmark: false,
+                side: BorderSide(color: Colors.transparent),
                 label: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [

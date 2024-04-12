@@ -9,10 +9,10 @@ import 'package:flutter_templet_project/util/color_util.dart';
 class NChoiceBox<T> extends StatefulWidget {
 
   NChoiceBox({
-    Key? key,
+    super.key,
     required this.items,
     required this.onChanged,
-    this.title,
+    this.isSingle = false,
     this.itemMargin = const EdgeInsets.symmetric(vertical: 4),
     this.itemColor = const Color(0xffF3F3F3),
     this.itemRadius = 8,
@@ -21,33 +21,33 @@ class NChoiceBox<T> extends StatefulWidget {
     this.wrapSpacing = 16,
     this.wrapRunSpacing = 12,
     this.wrapAlignment = WrapAlignment.start,
-    this.isSingle = false,
-  }) : super(key: key);
-
-  List<ChoiceBoxModel<T>> items;
-
-  ValueChanged<List<ChoiceBoxModel<T>>> onChanged;
-
-  String? title;
-
-  CrossAxisAlignment crossAxisAlignment;
-
-  double wrapSpacing;
-
-  double wrapRunSpacing;
-
-  WrapAlignment wrapAlignment;
-
-  EdgeInsets itemMargin;
-  /// item 圆角
-  double itemRadius;
-  /// 元素背景色
-  Color itemColor;
-  /// 选中元素背景色
-  Color itemSelectedColor;
+    this.itemBuilder,
+  });
 
   /// 是否单选
-  bool isSingle;
+  final bool isSingle;
+  
+  final List<ChoiceBoxModel<T>> items;
+
+  final ValueChanged<List<ChoiceBoxModel<T>>> onChanged;
+
+  final CrossAxisAlignment crossAxisAlignment;
+
+  final double wrapSpacing;
+
+  final double wrapRunSpacing;
+
+  final WrapAlignment wrapAlignment;
+
+  final EdgeInsets itemMargin;
+  /// item 圆角
+  final double itemRadius;
+  /// 元素背景色
+  final Color itemColor;
+  /// 选中元素背景色
+  final Color itemSelectedColor;
+  /// 子项样式自定义
+  final Widget? Function(T e, bool isSelected)? itemBuilder;
 
 
   @override
@@ -77,49 +77,73 @@ class _NChoiceBoxState<T> extends State<NChoiceBox<T>> {
           spacing: widget.wrapSpacing,
           runSpacing: widget.wrapRunSpacing,
           alignment: widget.wrapAlignment,
-          children: widget.items.map((e) => Theme(
-            data: ThemeData(
-              canvasColor: Colors.transparent,
-              highlightColor: Colors.white,
-            ),
-            child: ChoiceChip(
-              pressElevation: 0,
-              showCheckmark: false,
-              label: Text(e.title,
-                style: TextStyle(
-                  color: e.isSelected == true ? Colors.white : fontColor.withOpacity(0.8),
-                  fontSize: 14,
-                ),
-              ),
-              padding: EdgeInsets.zero,
-              labelPadding: EdgeInsets.symmetric(horizontal: 6),
-              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-              selected: e.isSelected == true,
-              selectedColor: widget.itemSelectedColor,
-              // backgroundColor: widget.itemColor,
-              backgroundColor: e.isSelected ? widget.itemSelectedColor : Color(0xffF3F3F3),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(widget.itemRadius),),
-                side: BorderSide(color: Colors.transparent),
-              ),
-              onSelected: (bool selected) {
-                for (final element in widget.items) {
-                  if (element.id == e.id) {
-                    element.isSelected = selected;
-                  } else {
-                    if (widget.isSingle) {
-                      element.isSelected = false;
-                    }
-                  }
-                }
-                setState(() {});
-                widget.onChanged(seletectedItems);
-                // debugPrint("seletectedItemNames: ${seletectedItemNames}");
-              },
-            ),
-          ),).toList(),
+          children: widget.items.map((e) => buildItem(e),).toList(),
         ),
       ],
+    );
+  }
+
+  Widget buildItem(ChoiceBoxModel e) {
+    if (widget.itemBuilder != null) {
+      return InkWell(
+        onTap: () {
+          // widget.onSelected(e);
+          for (final element in widget.items) {
+            if (element.id == e.id) {
+              element.isSelected = !element.isSelected;
+            } else {
+              if (widget.isSingle) {
+                element.isSelected = false;
+              }
+            }
+          }
+          setState(() {});
+          widget.onChanged(seletectedItems);
+        },
+        child: widget.itemBuilder?.call(e.data!, e.isSelected),
+      );
+    }
+    
+    return Theme(
+      data: ThemeData(
+        canvasColor: Colors.transparent,
+        highlightColor: Colors.white,
+      ),
+      child: ChoiceChip(
+        pressElevation: 0,
+        showCheckmark: false,
+        label: Text(e.title,
+          style: TextStyle(
+            color: e.isSelected == true ? Colors.white : fontColor.withOpacity(0.8),
+            fontSize: 14,
+          ),
+        ),
+        padding: EdgeInsets.zero,
+        labelPadding: EdgeInsets.symmetric(horizontal: 6),
+        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        selected: e.isSelected == true,
+        selectedColor: widget.itemSelectedColor,
+        // backgroundColor: widget.itemColor,
+        backgroundColor: e.isSelected ? widget.itemSelectedColor : Color(0xffF3F3F3),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(widget.itemRadius),),
+          side: BorderSide(color: Colors.transparent),
+        ),
+        onSelected: (bool selected) {
+          for (final element in widget.items) {
+            if (element.id == e.id) {
+              element.isSelected = selected;
+            } else {
+              if (widget.isSingle) {
+                element.isSelected = false;
+              }
+            }
+          }
+          setState(() {});
+          widget.onChanged(seletectedItems);
+          // debugPrint("seletectedItemNames: ${seletectedItemNames}");
+        },
+      ),
     );
   }
 }
