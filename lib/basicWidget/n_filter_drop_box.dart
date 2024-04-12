@@ -162,19 +162,7 @@ class _NFilterDropBoxState extends State<NFilterDropBox> {
                         child: Container(
                           color: Colors.white,
                           child: Column(
-                            children: widget.sections.map((e) {
-                              return Column(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 16,
-                                    ),
-                                    child: InkWell(child: e),
-                                  ),
-                                  if (widget.sections.last != e) buildDvider(),
-                                ],
-                              );
-                            }).toList(),
+                            children: widget.sections,
                           ),
                         ),
                       ),
@@ -194,13 +182,13 @@ class _NFilterDropBoxState extends State<NFilterDropBox> {
     );
   }
 
-  Widget buildDvider() {
-    return Container(
-      height: 8,
-      margin: const EdgeInsets.only(top: 15),
-      color: Color(0xffF3F3F3),
-    );
-  }
+  // Widget buildDvider() {
+  //   return Container(
+  //     height: 8,
+  //     margin: const EdgeInsets.only(top: 15),
+  //     color: Color(0xffF3F3F3),
+  //   );
+  // }
 
   /// 筛选弹窗 取消确认菜单
   Widget buildDropBoxButtonBar({

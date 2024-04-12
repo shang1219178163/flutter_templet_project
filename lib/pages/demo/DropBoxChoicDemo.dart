@@ -240,7 +240,7 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
   List<Widget> getDropBoxSections({
     bool isSingle = false,
   }) {
-    return [
+    final sections = [
       NChoiceExpansionOfModel(
         title: '标签',
         items: models,
@@ -282,6 +282,27 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
         },
       ),
     ];
+
+    return sections.map((e) {
+      return Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 16,
+            ),
+            child: e,
+          ),
+          if (sections.last != e) Container(
+            height: 8,
+            margin: const EdgeInsets.only(top: 15),
+            color: Color(0xffF3F3F3),
+          ),
+          if (sections.last == e) SizedBox(
+            height: 8,
+          ),
+        ],
+      );
+    }).toList();
   }
 
   /// 筛选弹窗 标签选择
