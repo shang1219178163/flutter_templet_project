@@ -145,7 +145,7 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
 
   buildSearchAndFilterBar({
     required VoidCallback onToggle,
-}) {
+  }) {
     return Container(
       key: _globalKey,
       padding: EdgeInsets.only(left: 16.w, right: 8.w, top: 12.w, bottom: 12.w),
@@ -366,7 +366,6 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
     selectedModelsTmp = selectedModels;
     selectedTagsTmp = selectedTags;
     selectedOrdersTmp = selectedOrders;
-    closeDropBox();
   }
 
   void onFilterCancel() {
