@@ -99,29 +99,29 @@ class RequestManager extends BaseRequestAPI {
   }
 
   Future<Map<String, dynamic>> request(BaseRequestAPI api) async {
-    if (api.needToken && token?.isNotEmpty != true) {
-      // debugPrint("❌ 无效请求: ${api.requestURI}\ntoken: $token");
-      return {
-        "code": RequestError.cancel,
-        "message": RequestError.cancel.desc,
-      };
-    }
-
-    final validateURLTuple = api.validateURL;
-    if (!validateURLTuple.$1) {
-      return {
-        "code": RequestError.urlError,
-        "message": validateURLTuple.$2,
-      };
-    }
-
-    final validateParamsTuple = api.validateParams;
-    if (!validateParamsTuple.$1) {
-      return {
-        "code": RequestError.paramsError,
-        "message": validateParamsTuple.$2,
-      };
-    }
+    // if (api.needToken && token?.isNotEmpty != true) {
+    //   // debugPrint("❌ 无效请求: ${api.requestURI}\ntoken: $token");
+    //   return {
+    //     "code": RequestError.cancel,
+    //     "message": RequestError.cancel.desc,
+    //   };
+    // }
+    //
+    // final validateURLTuple = api.validateURL;
+    // if (!validateURLTuple.$1) {
+    //   return {
+    //     "code": RequestError.urlError,
+    //     "message": validateURLTuple.$2,
+    //   };
+    // }
+    //
+    // final validateParamsTuple = api.validateParams;
+    // if (!validateParamsTuple.$1) {
+    //   return {
+    //     "code": RequestError.paramsError,
+    //     "message": validateParamsTuple.$2,
+    //   };
+    // }
 
     if (api.shouldCache) {
       final cache = api.jsonFromCache();
