@@ -100,7 +100,7 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
         children: [
           buildSearchAndFilterBar(
             onToggle:  (){
-              // showDropBox.value = !showDropBox.value;
+              onFilterInit();
               dropBoxController.onToggle();
               closeKeyboard();
             },
@@ -359,6 +359,14 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
         );
       }
     );
+  }
+
+  /// 筛选弹窗 - 初始化
+  void onFilterInit() {
+    selectedModelsTmp = selectedModels;
+    selectedTagsTmp = selectedTags;
+    selectedOrdersTmp = selectedOrders;
+    closeDropBox();
   }
 
   void onFilterCancel() {
