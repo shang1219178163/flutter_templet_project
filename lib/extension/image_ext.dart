@@ -69,8 +69,9 @@ extension ImageProviderExt on ImageProvider {
   }) async {
     final completer = Completer<ImageInfo>();
     resolve(configuration).addListener(
-      ImageStreamListener((ImageInfo info, bool _) async {
-          completer.complete(info);
+      ImageStreamListener((ImageInfo imageInfo, bool _) async {
+        // imageInfo.image.dispose();
+          completer.complete(imageInfo);
           evict();
         },
         onError: (Object exception, StackTrace? stackTrace) {
