@@ -66,23 +66,3 @@ extension VoidCallbackExt on VoidCallback {
   }
 
 }
-
-
-class DebounceNew {
-  DebounceNew({
-    this.delay = const Duration(milliseconds: 500),
-  });
-
-  Duration delay;
-
-  Timer? _timer;
-
-  void call(VoidCallback callback) {
-    _timer?.cancel();
-    _timer = Timer(delay, callback);
-  }
-
-  bool get isRunning => _timer?.isActive ?? false;
-
-  void cancel() => _timer?.cancel();
-}
