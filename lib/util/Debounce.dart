@@ -10,7 +10,7 @@ class Debounce {
     this.delay = const Duration(milliseconds: 500),
   });
 
-  final Duration delay;
+  Duration delay;
 
   Timer? _timer;
 
@@ -24,11 +24,10 @@ class Debounce {
   void cancel() => _timer?.cancel();
 }
 
-
 // final _debounce = Debounce(milliseconds: 500);
 //
 // onTextChange(String text) {
-//   _debouncer(() => print(text));
+//   _debounce(() => print(text));
 // }
 
 

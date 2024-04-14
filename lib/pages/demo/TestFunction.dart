@@ -7,7 +7,11 @@
 //
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_text.dart';
+import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/function_ext.dart';
+import 'package:flutter_templet_project/extension/num_ext.dart';
+import 'package:flutter_templet_project/util/Debounce.dart';
 
 class TestFunction extends StatefulWidget {
 
@@ -24,11 +28,13 @@ class TestFunction extends StatefulWidget {
 
 class _TestFunctionState extends State<TestFunction> {
 
+  late final items = <({String name, VoidCallback action})>[
+    (name: "apply", action: onApply),
+    (name: "防抖", action: onDebounce),
+  ];
 
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
@@ -39,40 +45,34 @@ class _TestFunctionState extends State<TestFunction> {
           ),)
         ).toList(),
       ),
-      body: Text(arguments.toString())
+      body: buildBody(),
     );
   }
 
-  fc(int n, int m, {operation = "add"}) {
-    if (operation == "add") {
-      return n + m;
-    }
-    return n - m;
-  }
+  buildBody() {
+    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
 
-  fcOne(int vintage, {String? country, String? name}) {
-    debugPrint('Name: $name, Country: $country, Vintage: $vintage');
+    return Scrollbar(
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            Text(arguments.toString()),
+            Wrap(
+              children: items.map((e) {
+                return TextButton(
+                    onPressed: e.action,
+                    child: NText(e.name)
+                );
+              }).toList(),
+            ),
+
+          ],
+        ),
+      ),
+    );
   }
 
   onPressed() {
-    int a = Function.apply(fc, [10, 3]);
-    debugPrint("a: $a");//a: 13
-    int b = Function.apply(fc, [10, 3], {Symbol("operation"): "subtract"});
-    debugPrint("b: $b");//b: 7
-
-    Function.apply(fcOne, [2018], {#country: 'USA', #name: 'Dominus Estate'});
-    final map = {
-      "country": 'USA',
-      "name": 'Dominus Estate'
-    };
-    final mapNew = {
-      "country": 'USA1',
-      "name": 'Dominus Estate1'
-    }.mapSymbolKey();
-
-    Function.apply(fcOne, [2018], mapNew);
-    FunctionExt.apply(fcOne, [2019], map);
-
     final func = closure();
     debugPrint("b: ${func()}");
     debugPrint("b: ${func()}");
@@ -88,6 +88,46 @@ class _TestFunctionState extends State<TestFunction> {
     funcOne();
     funcOne();
   }
+
+  fc(int n, int m, {operation = "add"}) {
+    if (operation == "add") {
+      return n + m;
+    }
+    return n - m;
+  }
+
+  fcOne(int year, {String? country, String? city}) {
+    debugPrint('city: $city, Country: $country, year: $year');
+  }
+
+  onApply(){
+    int a = Function.apply(fc, [10, 3]);
+    debugPrint("a: $a");//a: 13
+    int b = Function.apply(fc, [10, 3], {Symbol("operation"): "subtract"});
+    debugPrint("b: $b");//b: 7
+
+    Function.apply(fcOne, [2018], {#country: 'USA', #city: 'Dominus Estate'});
+    final map = {
+      "country": 'USA',
+      "city": 'Dominus Estate'
+    };
+    final mapNew = {
+      "country": 'USA1',
+      "city": 'Dominus Estate1'
+    }.mapSymbolKey();
+
+    Function.apply(fcOne, [2018], mapNew);
+    FunctionExt.apply(fcOne, [2019], map);
+
+    fcOne.applyNew(
+      positionalArguments: [2024,],
+      namedArguments: {
+        "country": 'China',
+        "city": 'HongKong'
+      },
+    );
+  }
+
 
   Function closure() {
     var i = 0;
@@ -106,6 +146,21 @@ class _TestFunctionState extends State<TestFunction> {
       ++i;
       return i;
     };
+  }
+
+  onDebounce(){
+    testVoidCallback.debounce();
+    testFuntion.debounce(namedArguments: {"name": "testFuntion1"});
+  }
+
+  testFuntion({required String name, }) {
+    final index = IntExt.random(max: 1000);
+    ddlog("name: $name, index: $index");
+  }
+
+  testVoidCallback() {
+    final index = IntExt.random(max: 1000);
+    ddlog("testVoidCallback index: $index");
   }
 }
 
