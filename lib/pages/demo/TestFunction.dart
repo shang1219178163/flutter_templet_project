@@ -65,7 +65,10 @@ class _TestFunctionState extends State<TestFunction> {
                 );
               }).toList(),
             ),
-
+            OutlinedButton(
+              onPressed: testVoidCallback.debounce,
+              child: NText("testVoidCallback.debounce")
+            ),
           ],
         ),
       ),
