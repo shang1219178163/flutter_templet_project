@@ -41,7 +41,7 @@ extension FunctionExt on Function{
     Map<String, dynamic>? namedArguments,
   }){
     _debounce.delay = duration;
-    return _debounce.call(() {
+    return _debounce(() {
       applyNew(positionalArguments: positionalArguments, namedArguments: namedArguments);
     });
   }
@@ -65,15 +65,13 @@ extension VoidCallbackExt on VoidCallback {
 
   /// 认证
   ///
-  /// isAuth 是否认证
   /// onAuth 返回认证状态
   /// onUnauth 未认证回调
   auth({
-    required bool isAuth,
-    bool Function()? onAuth,
+    required bool Function() onAuth,
     VoidCallback? onUnauth,
   }) {
-    final hadAuth = onAuth?.call() ?? isAuth;
+    final hadAuth = onAuth();
     if (!hadAuth) {
       return (){
         onUnauth?.call();
@@ -82,3 +80,4 @@ extension VoidCallbackExt on VoidCallback {
     return this;
   }
 }
+

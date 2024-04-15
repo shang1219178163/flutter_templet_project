@@ -71,10 +71,9 @@ class _TestFunctionState extends State<TestFunction> {
             ),
             OutlinedButton(
                 onPressed: testVoidCallback.auth(
-                  isAuth: true,
-                  // onAuth: (){
-                  //   return false;
-                  // },
+                  onAuth: (){
+                    return false;
+                  },
                   onUnauth: (){
                     ddlog("OutlinedButton - onUnauth");
                   }
