@@ -69,6 +69,18 @@ class _TestFunctionState extends State<TestFunction> {
               onPressed: testVoidCallback.debounce,
               child: NText("testVoidCallback.debounce")
             ),
+            OutlinedButton(
+                onPressed: testVoidCallback.auth(
+                  isAuth: true,
+                  // onAuth: (){
+                  //   return false;
+                  // },
+                  onUnauth: (){
+                    ddlog("OutlinedButton - onUnauth");
+                  }
+                ),
+                child: NText("testVoidCallback.auth")
+            ),
           ],
         ),
       ),

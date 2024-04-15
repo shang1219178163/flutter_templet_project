@@ -44,9 +44,7 @@ extension FunctionExt on Function{
     return _debounce.call(() {
       applyNew(positionalArguments: positionalArguments, namedArguments: namedArguments);
     });
-
   }
-
 }
 
 
@@ -65,4 +63,22 @@ extension VoidCallbackExt on VoidCallback {
     _debounce(() => this());
   }
 
+  /// 认证
+  ///
+  /// isAuth 是否认证
+  /// onAuth 返回认证状态
+  /// onUnauth 未认证回调
+  auth({
+    required bool isAuth,
+    bool Function()? onAuth,
+    VoidCallback? onUnauth,
+  }) {
+    final hadAuth = onAuth?.call() ?? isAuth;
+    if (!hadAuth) {
+      return (){
+        onUnauth?.call();
+      };
+    }
+    return this;
+  }
 }
