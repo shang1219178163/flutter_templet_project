@@ -178,8 +178,6 @@ dependencies:
     git:
       url: git@github.com:Sky24n/github_language_colors.git
 
-
-#  syncfusion_flutter_datepicker: ^24.2.8
   photo_manager: ^3.0.0
   #震动
   vibration: ^1.8.4
@@ -187,8 +185,8 @@ dependencies:
   json_to_dart:
     git:
       url: 'git@github.com:shang1219178163/json_to_dart.git'
-#      ref: 'v1.0.0'
-      version: ">=1.0.1"
+      ref: 'v1.0.6'
+#      version: ">=1.0.1"
 
   isar: ^3.1.0+1
   isar_flutter_libs: ^3.1.0+1
