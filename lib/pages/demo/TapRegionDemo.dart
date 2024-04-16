@@ -1,7 +1,7 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/vendor/easy_toast.dart';
+import 'package:flutter_templet_project/vendor/toast_util.dart';
 
 class TapRegionDemo extends StatefulWidget {
 
@@ -52,7 +52,7 @@ class _TapRegionDemoState extends State<TapRegionDemo> {
               },
               child: OutlinedButton(
                 onPressed: (){
-                  EasyToast.showToast("text");
+                  ToastUtil.show("text");
                 },
                 child: Text("$widget")),
             )

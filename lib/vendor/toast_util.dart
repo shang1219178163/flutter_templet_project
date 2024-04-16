@@ -5,9 +5,9 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 
 // EasyLoading toast
-class EasyToast {
+class ToastUtil {
   // toast
-  static void showToast(
+  static void show(
     String text, {
       int milliseconds = 1500,
       VoidCallback? cb,
@@ -26,7 +26,7 @@ class EasyToast {
   }
 
   // toast - 错误
-  static void showInfo(
+  static void info(
     String text, {
       int milliseconds = 1500,
       VoidCallback? cb,
@@ -45,7 +45,7 @@ class EasyToast {
   }
 
   // toast - 成功
-  static void showSuccess(
+  static void success(
     String text, {
     int milliseconds = 2000,
     VoidCallback? cb,
@@ -63,7 +63,7 @@ class EasyToast {
   }
 
   // loading - 加载
-  static void showLoading(String content, {
+  static void loading(String content, {
     Widget? indicator,
   }) {
     if (content.isEmpty) {

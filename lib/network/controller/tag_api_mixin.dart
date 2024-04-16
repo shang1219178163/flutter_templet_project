@@ -11,7 +11,7 @@ import 'package:flutter_templet_project/model/tag_detail_model.dart';
 import 'package:flutter_templet_project/network/api/tag_clear_api.dart';
 import 'package:flutter_templet_project/network/api/tag_list_api.dart';
 import 'package:flutter_templet_project/network/api/tag_set_api.dart';
-import 'package:flutter_templet_project/vendor/easy_toast.dart';
+import 'package:flutter_templet_project/vendor/toast_util.dart';
 
 
 /// 标签API管理器
@@ -67,7 +67,7 @@ mixin TagApiMixin<T extends TagDetailModel> {
     );
     final tuple = await api.fetchBool(hasLoading: true);
     if (tuple.isSuccess == false) {
-      EasyToast.showToast(tuple.message);
+      ToastUtil.show(tuple.message);
     }
     return tuple;
   }

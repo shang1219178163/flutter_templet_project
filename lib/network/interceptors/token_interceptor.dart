@@ -24,15 +24,16 @@ class TokenInterceptor extends QueuedInterceptor {
     //令牌失效
     if (err.response?.statusCode == 403) {
       try {
-        RequestOptions requestOptions = err.requestOptions;
-        final res = await TokenRefreshApi().fetchResult<String>(defaultValue: "");
+        final api = TokenRefreshApi();
+        final res = await api.fetchResult<String>(defaultValue: "");
         String newAccessToken = res.result;
         if (newAccessToken.isEmpty) {
           super.onError(err, handler);
         }
         CacheService().token = newAccessToken;
-        requestOptions.headers["token"] = CacheService().token;
 
+        RequestOptions requestOptions = err.requestOptions;
+        requestOptions.headers["token"] = CacheService().token;
         final opts = Options(method: requestOptions.method);
 
         final response = await dio.request(requestOptions.path,

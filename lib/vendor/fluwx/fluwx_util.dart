@@ -4,7 +4,7 @@ import 'dart:typed_data';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/util/Debounce.dart';
-import 'package:flutter_templet_project/vendor/easy_toast.dart';
+import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:fluwx/fluwx.dart';
 
 
@@ -62,11 +62,11 @@ class FluwxUtil {
             callback(response);
           });
         } else if (errCode == -4) {
-          EasyToast.showToast("用户拒绝授权");
+          ToastUtil.show("用户拒绝授权");
         } else if (errCode == -2) {
-          EasyToast.showToast("用户取消$type");
+          ToastUtil.show("用户取消$type");
         } else {
-          EasyToast.showToast('失败原因：${response.errStr}');
+          ToastUtil.show('失败原因：${response.errStr}');
         }
       }
     });
@@ -81,7 +81,7 @@ class FluwxUtil {
       ),
     ).then((data) {
       if (!data) {
-        EasyToast.showToast('没有安装微信，请安装微信后使用该功能');
+        ToastUtil.show('没有安装微信，请安装微信后使用该功能');
       }
     });
   }

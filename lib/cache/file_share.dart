@@ -3,7 +3,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/vendor/easy_toast.dart';
+import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:share_plus/share_plus.dart';
 
 import 'package:flutter_templet_project/cache/asset_cache_service.dart';
@@ -17,7 +17,7 @@ class FileShare{
 
     final percentVN = ValueNotifier(0.0);
 
-    EasyToast.showLoading(
+    ToastUtil.loading(
         "文件下载中",
         indicator: ValueListenableBuilder<double>(
             valueListenable: percentVN,
@@ -42,7 +42,7 @@ class FileShare{
     );
     // debugPrint("response: ${response.data}");
     debugPrint("tmpPath: ${tmpPath}");
-    EasyToast.hideLoading();
+    ToastUtil.hideLoading();
 
     Share.shareXFiles([XFile(tmpPath)]);
   }

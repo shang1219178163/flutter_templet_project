@@ -13,7 +13,7 @@ import 'package:flutter_templet_project/extension/build_context_ext.dart';
 
 import 'package:flutter_templet_project/util/R.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
-import 'package:flutter_templet_project/vendor/easy_toast.dart';
+import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:get/get.dart';
 import 'package:tuple/tuple.dart';
 
@@ -204,11 +204,11 @@ class _QrcodePageState extends State<QrcodePage> {
 
     debugPrint("image: $image");
     if (image == null) {
-      EasyToast.showToast("生成图片失败,请稍后重试");
+      ToastUtil.show("生成图片失败,请稍后重试");
      return;
     }
     if (imageWidget == null) {
-      EasyToast.showToast("生成图片失败,请稍后重试");
+      ToastUtil.show("生成图片失败,请稍后重试");
       return;
     }
     Get.bottomSheet(

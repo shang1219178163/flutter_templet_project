@@ -8,7 +8,7 @@ import 'package:flutter_templet_project/extension/overlay_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/mixin/sound_state_mixin.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
-import 'package:flutter_templet_project/vendor/easy_toast.dart';
+import 'package:flutter_templet_project/vendor/toast_util.dart';
 
 
 class GestureDetectorDemo extends StatefulWidget {
@@ -158,7 +158,7 @@ class _GestureDetectorDemoState extends State<GestureDetectorDemo> with SoundSta
           return;
         }
         if (soundDuration <= 1) {
-          EasyToast.showToast("说话时间太短");
+          ToastUtil.show("说话时间太短");
           return;
         }
 

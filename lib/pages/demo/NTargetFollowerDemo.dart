@@ -9,7 +9,7 @@ import 'package:flutter_templet_project/basicWidget/n_pair.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
-import 'package:flutter_templet_project/vendor/easy_toast.dart';
+import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:tuple/tuple.dart';
 
 class NTargetFollowerDemo extends StatefulWidget {
@@ -124,7 +124,7 @@ class _NTargetFollowerDemoState extends State<NTargetFollowerDemo> {
                               onItem: (Tuple2<String, AssetImage> t) {
                                 onHide();
                                 debugPrint("onChanged_$t");
-                                EasyToast.showToast(t.item1);
+                                ToastUtil.show(t.item1);
                                 switch (t.item1) {
                                   case "复制":
                                     {

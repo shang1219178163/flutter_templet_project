@@ -16,7 +16,7 @@ import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/network/RequestConfig.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:flutter_templet_project/util/debug_log.dart';
-import 'package:flutter_templet_project/vendor/easy_toast.dart';
+import 'package:flutter_templet_project/vendor/toast_util.dart';
 
 
 /// 域名选择器
@@ -190,7 +190,7 @@ class _NOriginSheetState extends State<NOriginSheet> {
           if (e == "确定") {
             final val = textController.text.trim();
             if (!val.startsWith("http")) {
-              EasyToast.showToast("必须以 http 开头");
+              ToastUtil.show("必须以 http 开头");
               return;
             }
             onChanged(val);

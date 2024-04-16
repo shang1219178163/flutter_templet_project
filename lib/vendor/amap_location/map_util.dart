@@ -7,7 +7,7 @@
 //
 
 import 'dart:io';
-import 'package:flutter_templet_project/vendor/easy_toast.dart';
+import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 
@@ -23,7 +23,7 @@ class MapUtil {
         'amap://navi?sourceApplication=amap&lat=$latitude&lon=$longitude&dev=0&style=2';
     bool canLaunchUrl = await canLaunch(url);
     if (!canLaunchUrl) {
-      EasyToast.showToast('未检测到高德地图~');
+      ToastUtil.show('未检测到高德地图~');
       return false;
     }
     await launch(url);
@@ -34,7 +34,7 @@ class MapUtil {
     var url = 'qqmap://map/routeplan?type=drive&fromcoord=CurrentLocation&tocoord=$latitude,$longitude&referer=IXHBZ-QIZE4-ZQ6UP-DJYEO-HC2K2-EZBXJ';
     bool canLaunchUrl = await canLaunch(url);
     if (!canLaunchUrl) {
-      EasyToast.showToast('未检测到腾讯地图~');
+      ToastUtil.show('未检测到腾讯地图~');
       return false;
     }
     await launch(url);
@@ -44,7 +44,7 @@ class MapUtil {
     var url = 'baidumap://map/direction?destination=$latitude,$longitude&coord_type=bd09ll&mode=driving';
     bool canLaunchUrl = await canLaunch(url);
     if (!canLaunchUrl) {
-      EasyToast.showToast('未检测到百度地图~');
+      ToastUtil.show('未检测到百度地图~');
       return false;
     }
     await launch(url);
@@ -55,7 +55,7 @@ class MapUtil {
     var url = 'http://maps.apple.com/?&daddr=$latitude,$longitude';
     bool canLaunchUrl = await canLaunch(url);
     if (!canLaunchUrl) {
-      EasyToast.showToast('打开失败~');
+      ToastUtil.show('打开失败~');
       return false;
     }
     await launch(url);

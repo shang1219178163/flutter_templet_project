@@ -4,7 +4,7 @@ import 'dart:convert';
 
 import 'package:flutter_templet_project/cache/cache_service.dart';
 import 'package:flutter_templet_project/network/base_request_api.dart';
-import 'package:flutter_templet_project/vendor/easy_toast.dart';
+import 'package:flutter_templet_project/vendor/toast_util.dart';
 
 // https://doc.yljt.cn/docs/platform//5245
 
@@ -52,12 +52,12 @@ class TagClearApi extends BaseRequestAPI{
 
   bool get validateParamsOld {
     if (ownerId == null) {
-      EasyToast.showInfo('对象ID 不能为空', needLogin: true);
+      ToastUtil.info('对象ID 不能为空', needLogin: true);
       return false;
     }
 
     if (diseaseDepartmentId == null) {
-      EasyToast.showInfo('diseaseDepartmentId 不能为空', needLogin: true);
+      ToastUtil.info('diseaseDepartmentId 不能为空', needLogin: true);
       return false;
     }
     return true;

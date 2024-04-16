@@ -4,7 +4,7 @@ import 'dart:convert';
 
 import 'package:flutter_templet_project/cache/cache_service.dart';
 import 'package:flutter_templet_project/network/base_request_api.dart';
-import 'package:flutter_templet_project/vendor/easy_toast.dart';
+import 'package:flutter_templet_project/vendor/toast_util.dart';
 
 
 /// 【科室端】标签列表（无分页）
@@ -46,11 +46,11 @@ class TagListApi extends BaseRequestAPI{
 
   bool get validateParamsOld {
     if (diseaseDepartmentId == null) {
-      EasyToast.showInfo('diseaseDepartmentId 不能为空', needLogin: true);
+      ToastUtil.info('diseaseDepartmentId 不能为空', needLogin: true);
       return false;
     }
     if (name == null) {
-      EasyToast.showInfo('name 不能为空', needLogin: true);
+      ToastUtil.info('name 不能为空', needLogin: true);
       return false;
     }
     return true;

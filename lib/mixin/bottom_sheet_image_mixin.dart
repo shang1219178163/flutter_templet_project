@@ -15,7 +15,7 @@ import 'package:flutter_templet_project/basicWidget/upload/image_service.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/util/permission_util.dart';
 import 'package:flutter_templet_project/util/get_util.dart';
-import 'package:flutter_templet_project/vendor/easy_toast.dart';
+import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:tuple/tuple.dart';
@@ -222,14 +222,14 @@ mixin BottomSheetImageMixin<T extends StatefulWidget> on State<T> {
       return;
     }
     if (entitys.length > maxCount) {
-      EasyToast.showToast('最多上传$maxCount张图片');
+      ToastUtil.show('最多上传$maxCount张图片');
       return;
     }
 
     if (maxCount == 1 && needCropp) {
       final file = await entitys[0].file;
       if (file == null) {
-        EasyToast.showToast('图片路径为空');
+        ToastUtil.show('图片路径为空');
         return;
       }
       // EasyToast.showLoading("图片处理中...");
@@ -245,7 +245,7 @@ mixin BottomSheetImageMixin<T extends StatefulWidget> on State<T> {
       final file = await item.file;
       // final imagePath = file?.path;
       if (file == null) {
-        EasyToast.showToast('图片路径为空');
+        ToastUtil.show('图片路径为空');
         return;
       }
       var fileNew = await ImageService().compressAndGetFile(file);
@@ -256,7 +256,7 @@ mixin BottomSheetImageMixin<T extends StatefulWidget> on State<T> {
       if (isLimit) {
         final fileSizeInfo = (length/1024/1024).toStringAsFixed(2);
         debugPrint("fileSizeInfo: $imagePath ${fileSizeInfo}M");
-        EasyToast.showToast('图片体积超出限制, 请重新选择');
+        ToastUtil.show('图片体积超出限制, 请重新选择');
         return;
       }
       onChanged(fileNew);

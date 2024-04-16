@@ -11,7 +11,7 @@ import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/routes/APPRouter.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:flutter_templet_project/vendor/apple_sigin_mixin.dart';
-import 'package:flutter_templet_project/vendor/easy_toast.dart';
+import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:flutter_templet_project/vendor/fluwx/fluwx_util.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -129,7 +129,7 @@ class NThirdLoginState extends State<NThirdLogin> with AppleSiginMixin, LoginMix
   }
   // 微信登录
   _authWeChat(res) async {
-    EasyToast.showLoading('正在登录...');
+    ToastUtil.loading('正在登录...');
     // var api = WechatSignInApi(code: res.code);
     // // 把微信登录返回的code传给后台，剩下的事就交给后台处理
     // var response = await api.startRequest();
@@ -138,7 +138,7 @@ class NThirdLoginState extends State<NThirdLogin> with AppleSiginMixin, LoginMix
 
   onLoginApple() async {
     if (!isCheck) {
-      EasyToast.showToast('请先阅读并同意协议');
+      ToastUtil.show('请先阅读并同意协议');
       return;
     }
 
@@ -147,11 +147,11 @@ class NThirdLoginState extends State<NThirdLogin> with AppleSiginMixin, LoginMix
 
     String identityToken = param['identityToken'] ?? "";
     if (identityToken.isEmpty) {
-      EasyToast.showToast("Apple 账户未登录, 请登录后重试");
+      ToastUtil.show("Apple 账户未登录, 请登录后重试");
       return;
     }
 
-    EasyToast.showLoading('正在登录...');
+    ToastUtil.loading('正在登录...');
 
     final map = <String, dynamic>{};
     map["idType"] = "IOS";
@@ -170,7 +170,7 @@ class NThirdLoginState extends State<NThirdLogin> with AppleSiginMixin, LoginMix
 
   onLoginWechat() {
     if (!isCheck) {
-      return EasyToast.showToast('请先阅读并同意协议');
+      return ToastUtil.show('请先阅读并同意协议');
     }
 
     initFlux();

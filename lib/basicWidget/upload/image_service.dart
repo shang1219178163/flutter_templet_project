@@ -7,7 +7,7 @@ import 'package:flutter_templet_project/cache/asset_cache_service.dart';
 import 'package:flutter_templet_project/extension/file_ext.dart';
 import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
-import 'package:flutter_templet_project/vendor/easy_toast.dart';
+import 'package:flutter_templet_project/vendor/toast_util.dart';
 
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
@@ -88,7 +88,7 @@ class ImageService{
      final sourcePath = file.path;
 
      if(showLoading) {
-       EasyToast.showLoading("图片处理中...");
+       ToastUtil.loading("图片处理中...");
      }
 
      var croppedFile = await ImageCropper().cropImage(
@@ -113,7 +113,7 @@ class ImageService{
      );
 
      if(showLoading) {
-       EasyToast.hideLoading();
+       ToastUtil.hideLoading();
      }
 
      if (croppedFile == null) {
@@ -130,7 +130,7 @@ class ImageService{
    }) async {
      final percentVN = ValueNotifier(0.0);
 
-     EasyToast.showLoading(
+     ToastUtil.loading(
          "文件下载中",
          indicator: ValueListenableBuilder<double>(
              valueListenable: percentVN,
@@ -165,14 +165,14 @@ class ImageService{
          }
      );
      // debugPrint("savePath: ${savePath}");
-     EasyToast.hideLoading();
+     ToastUtil.hideLoading();
 
      final result = await ImageGallerySaver.saveFile(savePath);
      debugPrint("saveFile: ${result} $url");
      final isSuccess = result["isSuccess"];
      final message = isSuccess ? "已保存到相册" : "操作失败";
      if (isSuccess && showToast) {
-       EasyToast.showToast(message,);
+       ToastUtil.show(message,);
      }
      return isSuccess;
    }

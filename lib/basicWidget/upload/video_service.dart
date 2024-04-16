@@ -5,7 +5,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/cache/asset_cache_service.dart';
-import 'package:flutter_templet_project/vendor/easy_toast.dart';
+import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 
 import 'package:video_compress/video_compress.dart';
@@ -97,7 +97,7 @@ class VideoService{
   }) async {
     final percentVN = ValueNotifier(0.0);
 
-    EasyToast.showLoading(
+    ToastUtil.loading(
         "文件下载中",
         indicator: ValueListenableBuilder<double>(
             valueListenable: percentVN,
@@ -132,14 +132,14 @@ class VideoService{
         }
     );
     // debugPrint("savePath: ${savePath}");
-    EasyToast.hideLoading();
+    ToastUtil.hideLoading();
 
     final result = await ImageGallerySaver.saveFile(savePath);
     debugPrint("saveFile: $result $url");
     final isSuccess = result["isSuccess"];
     final message = isSuccess ? "已保存到相册" : "操作失败";
     if (isSuccess && showToast) {
-      EasyToast.showToast(message,);
+      ToastUtil.show(message,);
     }
     return isSuccess;
   }

@@ -24,7 +24,7 @@ import 'package:flutter_templet_project/mixin/safe_set_state_mixin.dart';
 import 'package:flutter_templet_project/pages/demo/EmojiPage.dart';
 import 'package:flutter_templet_project/util/R.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
-import 'package:flutter_templet_project/vendor/easy_toast.dart';
+import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:get/get.dart';
 import 'package:tuple/tuple.dart';
 
@@ -427,7 +427,7 @@ class _IMChatPageState extends State<IMChatPage> with
               onItem: (Tuple2<String, AssetImage> t) {
                 onHide();
                 debugPrint("onChanged_$t");
-                EasyToast.showToast(t.item1);
+                ToastUtil.show(t.item1);
               }
             ),
           );

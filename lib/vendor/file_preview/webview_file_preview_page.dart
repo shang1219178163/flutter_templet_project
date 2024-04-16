@@ -14,7 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_webview_page.dart';
 import 'package:flutter_templet_project/cache/asset_cache_service.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
-import 'package:flutter_templet_project/vendor/easy_toast.dart';
+import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -89,7 +89,7 @@ class _WebviewFilePreviewPageState extends State<WebviewFilePreviewPage> {
 
     final percentVN = ValueNotifier(0.0);
 
-    EasyToast.showLoading(
+    ToastUtil.loading(
       "文件下载中",
       indicator: ValueListenableBuilder<double>(
         valueListenable: percentVN,
@@ -114,7 +114,7 @@ class _WebviewFilePreviewPageState extends State<WebviewFilePreviewPage> {
     );
     // debugPrint("response: ${response.data}");
     debugPrint("tmpPath: ${tmpPath}");
-    EasyToast.hideLoading();
+    ToastUtil.hideLoading();
 
     Share.shareXFiles([XFile(tmpPath)]);
   }

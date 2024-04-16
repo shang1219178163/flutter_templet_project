@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_templet_project/network/RequestConfig.dart';
 import 'package:flutter_templet_project/network/RequestError.dart';
 import 'package:flutter_templet_project/network/RequestManager.dart';
-import 'package:flutter_templet_project/vendor/easy_toast.dart';
+import 'package:flutter_templet_project/vendor/toast_util.dart';
 
 
 enum HttpMethod {
@@ -141,14 +141,14 @@ abstract class BaseRequestAPI {
     bool hasLoading = true,
   }) async {
     if (hasLoading) {
-      EasyToast.showLoading("请求中");
+      ToastUtil.loading("请求中");
     }
     final tuple = await fetchResult<bool>(
       onResult: onTrue,
       defaultValue: defaultValue,
     );
     if (hasLoading) {
-      EasyToast.hideLoading();
+      ToastUtil.hideLoading();
     }
     return tuple;
   }
