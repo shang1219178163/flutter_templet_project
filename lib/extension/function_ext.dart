@@ -82,7 +82,15 @@ extension VoidCallbackExt on VoidCallback {
 }
 
 
-extension ValueChangedExt on ValueChanged {
+extension ValueChangedExt<T> on ValueChanged<T> {
 
-
+  /// 防抖
+  debounce({
+    required T value,
+    Duration duration = const Duration(milliseconds: 500),
+  }){
+    _debounce.delay = duration;
+    _debounce(() => this.call(value));
+  }
 }
+

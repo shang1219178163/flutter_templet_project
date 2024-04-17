@@ -12,7 +12,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_header.dart';
 import 'package:flutter_templet_project/basicWidget/n_order_num_unit.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/function_ext.dart';
 import 'package:flutter_templet_project/extension/image_ext.dart';
+import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/util/Debounce.dart';
 import 'package:flutter_templet_project/util/Throttle.dart';
@@ -102,6 +104,7 @@ class _TextFieldDemoState extends State<TextFieldDemo> {
                   textAlign: TextAlign.start,
                   padding: EdgeInsets.only(left: 8, top: 8, bottom: 8, right: 8),
                   suffixMode: OverlayVisibilityMode.editing,
+                  onChanged: (val) => onChanged.debounce(value: val),
                 ),
               ),
               NSectionHeader(
@@ -300,6 +303,12 @@ class _TextFieldDemoState extends State<TextFieldDemo> {
         ),
       ),
     );
+  }
+
+  void onChanged(val) {
+    final index = IntExt.random(min: 1000, max: 9999);
+    ddlog("onChanged: $val, $index");
+
   }
 
   onPressed(){
