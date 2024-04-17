@@ -162,13 +162,13 @@ class _NTextFieldState extends State<NTextField> {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: textEditingController,
       textAlign: widget.textAlign,
       readOnly: widget.readOnly,
       minLines: widget.minLines,
       maxLines: widget.maxLines,
       cursorColor: context.primaryColor,
       focusNode: _focusNode,
-      controller: textEditingController,
       // focusNode: focusChanged,
       onChanged: widget.onChanged,
       onSubmitted: (val) {

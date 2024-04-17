@@ -48,6 +48,7 @@ import 'package:flutter_templet_project/pages/demo/NTargetFollowerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PageLifecycleFuncTest.dart';
 import 'package:flutter_templet_project/pages/demo/ReflectDemo.dart';
 import 'package:flutter_templet_project/pages/demo/RegExpDemo.dart';
+import 'package:flutter_templet_project/pages/demo/RiverPodPageCreate.dart';
 import 'package:flutter_templet_project/pages/demo/SegmentedControlDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/StringTransformPage.dart';
 import 'package:flutter_templet_project/pages/demo/ThemeColorDemo.dart';
@@ -702,6 +703,7 @@ class APPRouter {
   static const formDemo = '/formDemo';
   static const asyncDemo = '/asyncDemo';
   static const choiceExpansionDemo = '/nchoiceExpansionDemo';
+  static const riverPodPageCreate = '/riverPodPageCreate';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -1107,6 +1109,7 @@ class AppPage {
     GetPage(name: APPRouter.formDemo, page: () => FormDemo(),),
     GetPage(name: APPRouter.asyncDemo, page: () => AsyncDemo(),),
     GetPage(name: APPRouter.choiceExpansionDemo, page: () => NChoiceExpansionDemo(),),
+    GetPage(name: APPRouter.riverPodPageCreate, page: () => RiverPodPageCreate(),),
 
 
 
