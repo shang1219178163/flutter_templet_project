@@ -57,16 +57,22 @@ class _RiverPodPageCreateState extends State<RiverPodPageCreate> {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            NTextField(
-              minLines: 10,
-              maxLines: 10,
-              controller: textEditingController,
-              onChanged: (val){
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16,
+                vertical: 8,
+              ),
+              child: NTextField(
+                minLines: 10,
+                maxLines: 10,
+                controller: textEditingController,
+                onChanged: (val){
 
-              },
-              onSubmitted: (val){
+                },
+                onSubmitted: (val){
 
-              }
+                }
+              ),
             ),
           ],
         ),
@@ -140,6 +146,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:go_router/go_router.dart';
 import 'package:yl_gcp_app/core/router/based.dart';
 import 'package:yl_gcp_app/core/router/provider.dart';
 import 'package:yl_gcp_app/module/_examples/page/state.dart';
@@ -148,7 +155,19 @@ import 'package:yl_gcp_app/vender/toast_util.dart';
 
 
 class $className extends ConsumerStatefulWidget {
-  static const tabPath = 'message';
+  
+    /// 路由名称
+  static String routeName = '$className';
+  
+  /// 路由
+  static final route = GoRoute(
+    name: routeName,
+    path: '/' + routeName,
+    pageBuilder: (context, state) => MaterialPage(
+      fullscreenDialog: true,
+      child: $className(),
+    ),
+  );
 
   const ${className}({
     super.key,
