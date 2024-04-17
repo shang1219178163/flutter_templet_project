@@ -57,9 +57,9 @@ class NChoiceBox<T> extends StatefulWidget {
 class _NChoiceBoxState<T> extends State<NChoiceBox<T>> {
 
   /// 选中的 items
-  List<ChoiceBoxModel<T>> get seletectedItems => widget.items.where((e) => e.isSelected == true).toList();
+  List<ChoiceBoxModel<T>> get selectedItems => widget.items.where((e) => e.isSelected == true).toList();
 
-  List<String> get seletectedItemNames => seletectedItems.map((e) => e.title).toList();
+  List<String> get selectedItemNames => selectedItems.map((e) => e.title).toList();
 
   @override
   void initState() {
@@ -98,7 +98,7 @@ class _NChoiceBoxState<T> extends State<NChoiceBox<T>> {
             }
           }
           setState(() {});
-          widget.onChanged(seletectedItems);
+          widget.onChanged(selectedItems);
         },
         child: widget.itemBuilder?.call(e.data!, e.isSelected),
       );
@@ -140,7 +140,7 @@ class _NChoiceBoxState<T> extends State<NChoiceBox<T>> {
             }
           }
           setState(() {});
-          widget.onChanged(seletectedItems);
+          widget.onChanged(selectedItems);
           // debugPrint("seletectedItemNames: ${seletectedItemNames}");
         },
       ),
