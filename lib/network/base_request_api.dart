@@ -1,6 +1,7 @@
 
 
 
+import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_templet_project/network/RequestConfig.dart';
 import 'package:flutter_templet_project/network/RequestError.dart';
@@ -97,7 +98,13 @@ abstract class BaseRequestAPI {
     return Future.value(false);
   }
 
-  
+  CancelToken get cancelToken => CancelToken();
+
+  /// 取消请求
+  void fetchCancel() {
+    cancelToken.cancel('fetchCancel');
+  }
+
   /// 发起请求
   Future<Map<String, dynamic>> fetch() async {
     final response = await RequestManager().request(this);

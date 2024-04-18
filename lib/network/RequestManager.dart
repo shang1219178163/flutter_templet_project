@@ -165,6 +165,7 @@ class RequestManager extends BaseRequestAPI {
             path,
             queryParameters: queryParams,
             options: options,
+            cancelToken: api?.cancelToken,
           );
         case HttpMethod.PUT:
           return await getDio(api).put<Map<String, dynamic>>(
@@ -172,6 +173,7 @@ class RequestManager extends BaseRequestAPI {
             queryParameters: queryParams,
             data: data,
             options: options,
+            cancelToken: api?.cancelToken,
           );
         case HttpMethod.POST:
           return await getDio(api).post<Map<String, dynamic>>(
@@ -179,6 +181,7 @@ class RequestManager extends BaseRequestAPI {
             queryParameters: queryParams,
             data: data,
             options: options,
+            cancelToken: api?.cancelToken,
           );
         case HttpMethod.DELETE:
           return await getDio(api).delete<Map<String, dynamic>>(
@@ -186,6 +189,7 @@ class RequestManager extends BaseRequestAPI {
             queryParameters: queryParams,
             data: data,
             options: options,
+            cancelToken: api?.cancelToken,
           );
         case HttpMethod.UPLOAD:
           {
@@ -201,6 +205,7 @@ class RequestManager extends BaseRequestAPI {
               options: options,
               onSendProgress: onSendProgress,
               onReceiveProgress: onReceiveProgress,
+              cancelToken: api?.cancelToken,
             );
           }
         case HttpMethod.DOWNLOAD:
@@ -219,6 +224,7 @@ class RequestManager extends BaseRequestAPI {
                     followRedirects: false,
                   ),
               onReceiveProgress: onReceiveProgress,
+              cancelToken: api?.cancelToken,
             );
           }
         default:
