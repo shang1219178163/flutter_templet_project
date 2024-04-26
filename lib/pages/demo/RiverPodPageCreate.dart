@@ -6,6 +6,7 @@ import 'package:flutter_templet_project/basicWidget/n_textfield.dart';
 import 'package:flutter_templet_project/cache/file_manager.dart';
 import 'package:flutter_templet_project/extension/snack_bar_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
+import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:get/get.dart';
 
 /// RiverPod 页面创建
@@ -63,9 +64,9 @@ class _RiverPodPageCreateState extends State<RiverPodPageCreate> {
                 vertical: 8,
               ),
               child: NTextField(
+                controller: textEditingController,
                 minLines: 10,
                 maxLines: 10,
-                controller: textEditingController,
                 onChanged: (val){
 
                 },
@@ -81,26 +82,31 @@ class _RiverPodPageCreateState extends State<RiverPodPageCreate> {
   }
 
   void onCreate() {
-    final text = '''
-    im_chat_page.dart
-    im_group_member_list_page.dart
-    im_group_setname.dart
-    im_group_setting.dart
-    patient_detail_page.dart
-    patient_list_page.dart
-    follow_up_evaluation_tab_page.dart
-    follow_up_evaluation_list_page.dart
-    follow_up_evaluation_updatet_page.dart
-    follow_up_evaluation_createt_page.dart
-    ''';
+    // final text = '''
+    // im_chat_page.dart
+    // im_group_member_list_page.dart
+    // im_group_setname.dart
+    // im_group_setting.dart
+    // follow_up_evaluation_tab_page.dart
+    // follow_up_evaluation_list_page.dart
+    // follow_up_evaluation_updatet_page.dart
+    // follow_up_evaluation_createt_page.dart
+    // patient_detail_page.dart
+    // patient_list_page.dart
+    // ''';
 
-    textEditingController.text = text;
+    final text = textEditingController.text;
+    if (text.isEmpty) {
+      ToastUtil.show("请输入文件名(用换行隔开)");
+      return;
+    }
+
     setState(() {});
     final list = text.split("\n")
         .where((e) => e.trim().isNotEmpty)
         .map((e) {
       final line = e.trim();
-      final result = line.split(".").first;
+      final result = line.endsWith(".dart") ? line.split(".").first : line;
 
       return result;
     }).toList();
