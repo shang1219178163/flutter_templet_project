@@ -32,6 +32,7 @@ class _TestFunctionState extends State<TestFunction> {
   late final items = <({String name, VoidCallback action})>[
     (name: "apply", action: onApply),
     (name: "防抖", action: onDebounce),
+    (name: "防抖1", action: onDebounceOne),
   ];
 
   @override
@@ -81,6 +82,13 @@ class _TestFunctionState extends State<TestFunction> {
                 ),
                 child: NText("testVoidCallback.auth")
             ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              child: NSearchTextField(
+                backgroundColor: Colors.black12,
+                onChanged: (val) => onChanged.debounce(value: val),
+              ),
+            )
           ],
         ),
       ),
@@ -163,19 +171,61 @@ class _TestFunctionState extends State<TestFunction> {
     };
   }
 
-  onDebounce(){
+  void onDebounce(){
     testVoidCallback.debounce();
-    testFuntion.debounce(namedArguments: {"name": "testFuntion1"});
+    // testFuntion.debounce(namedArguments: {"name": "testFuntion1"});
   }
 
-  testFuntion({required String name, }) {
+  void onDebounceOne(){
+    testVoidCallbackOne.debounce();
+  }
+
+  void onChanged(val){
+    final index = IntExt.random(max: 1000);
+    ddlog("onChanged: $val, index: $index");
+  }
+
+  void testFuntion({required String name, }) {
     final index = IntExt.random(max: 1000);
     ddlog("name: $name, index: $index");
   }
 
-  testVoidCallback() {
+  void testVoidCallback() {
     final index = IntExt.random(max: 1000);
     ddlog("testVoidCallback index: $index");
+
+    final isEqual = Symbol("city") == #city;
+    ddlog("testVoidCallback isEqual: $isEqual");
+    // [log] 2024-04-21 12:33:04.265310 testVoidCallback isEqual: true
+  }
+
+  void testVoidCallbackOne() {
+    // final index = IntExt.random(max: 1000);
+    // ddlog("testVoidCallbackOne index: $index");
+    //
+    // final isEqual = Symbol("city") == #city;
+    // ddlog("testVoidCallbackOne isEqual: $isEqual");
+    // [log] 2024-04-21 12:33:04.265310 testVoidCallback isEqual: true
+
+    // fn1();
+    // fn2();
+
+    fn1.debounce(
+      duration: Duration(seconds: 1),
+    );
+    fn2.debounce(
+      duration: Duration(seconds: 1),
+    );
+  }
+
+  void fn1() {
+    final index = IntExt.random(max: 1000);
+    ddlog("fn1 index: $index");
+  }
+
+  void fn2() {
+    final index = IntExt.random(max: 1000);
+    ddlog("fn2 index: $index");
   }
 }
 

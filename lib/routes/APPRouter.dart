@@ -37,6 +37,8 @@ import 'package:flutter_templet_project/pages/demo/DisplayFeatureDemo.dart';
 import 'package:flutter_templet_project/pages/demo/EmojiPage.dart';
 import 'package:flutter_templet_project/pages/demo/FlutterFFiTest.dart';
 import 'package:flutter_templet_project/pages/demo/FormDemo.dart';
+import 'package:flutter_templet_project/pages/demo/GetxControllerDemo.dart';
+import 'package:flutter_templet_project/pages/demo/GetxRouteCreatePage.dart';
 import 'package:flutter_templet_project/pages/demo/HomeNavDemo.dart';
 import 'package:flutter_templet_project/pages/demo/IconConvertPage.dart';
 import 'package:flutter_templet_project/pages/demo/LocalImagePage.dart';
@@ -704,6 +706,8 @@ class APPRouter {
   static const asyncDemo = '/asyncDemo';
   static const choiceExpansionDemo = '/nchoiceExpansionDemo';
   static const riverPodPageCreate = '/riverPodPageCreate';
+  static const getxRouteCreatePage = '/getxRouteCreatePage';
+  static const getxControllerDemo = '/GetxControllerDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -1111,6 +1115,8 @@ class AppPage {
     GetPage(name: APPRouter.choiceExpansionDemo, page: () => NChoiceExpansionDemo(),),
     GetPage(name: APPRouter.riverPodPageCreate, page: () => RiverPodPageCreate(),),
 
+    GetPage(name: APPRouter.getxRouteCreatePage, page: () => GetxRouteCreatePage(),),
+    GetPage(name: APPRouter.getxControllerDemo, page: () => GetxControllerDemo(),),
 
 
   ];
