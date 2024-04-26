@@ -116,6 +116,8 @@ class _NChoiceBoxOneState<T> extends State<NChoiceBoxOne> {
                 canvasColor: Colors.transparent,
                 // canvasColor: Colors.green,
                 highlightColor: Colors.white,
+                hoverColor: Colors.white,
+                focusColor: Colors.white,
               ),
               child: ChoiceChip(
                 materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,

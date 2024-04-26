@@ -289,6 +289,7 @@ extension FlexExt on Flex {
     slivers: children.map((e) => itemBuilder?.call(e) ?? e.toSliverToBoxAdapter()).toList(),
     clipBehavior: clipBehavior,
   );
+
 }
 
 
@@ -347,16 +348,18 @@ extension CustomScrollViewExt on CustomScrollView {
 
   /// 转为 Flex
   Flex toFlex({
-    direction = Axis.vertical,
-    mainAxisAlignment = MainAxisAlignment.start,
-    mainAxisSize = MainAxisSize.max,
-    crossAxisAlignment = CrossAxisAlignment.center,
+    Axis direction = Axis.vertical,
+    MainAxisAlignment mainAxisAlignment = MainAxisAlignment.start,
+    MainAxisSize mainAxisSize = MainAxisSize.max,
+    CrossAxisAlignment crossAxisAlignment = CrossAxisAlignment.center,
     TextBaseline? textBaseline,
-    verticalDirection = VerticalDirection.down,
+    VerticalDirection verticalDirection = VerticalDirection.down,
     TextDirection? textDirection,
-    clipBehavior = Clip.none,
+    Clip clipBehavior = Clip.none,
   }) {
-    final children = slivers.map((e) => (e is SliverToBoxAdapter ? e.child ?? SizedBox() : e)).toList();
+    final children = slivers
+        .map((e) => (e is SliverToBoxAdapter ? e.child ?? SizedBox() : e))
+        .toList();
     return Flex(
       key: key,
       direction: direction,

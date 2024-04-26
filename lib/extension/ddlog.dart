@@ -12,12 +12,13 @@ import 'package:flutter/foundation.dart'
 import 'package:flutter/material.dart';
 
 // ignore: non_constant_identifier_names, unnecessary_question_mark
-void ddlog(dynamic? obj) {
+void ddlog(dynamic? obj, {bool hasTime = true}) {
   if (kReleaseMode) {
     return;
   }
-  developer.log("${DateTime.now()} $obj");
-
+  final dateStr = DateTime.now();
+  developer.log("${hasTime ? dateStr : ""} $obj");
+  // developer.log("$obj");
 
   // var model = DDTraceModel(StackTrace.current);
   //

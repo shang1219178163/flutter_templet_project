@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 /// @version[创建日期，2024/4/7 10:20]
 /// @function[渐变文字效果 ]
 
-class ShaderText extends StatelessWidget {
-  const ShaderText({
+class NShaderText extends StatelessWidget {
+  const NShaderText({
     super.key,
     this.hasShader = false,
     this.colors = const [

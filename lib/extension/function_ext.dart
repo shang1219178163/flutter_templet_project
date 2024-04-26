@@ -14,6 +14,8 @@ import 'package:flutter_templet_project/util/Debounce.dart';
 
 final _debounce = Debounce();
 
+final _debounceMap = <Function, Debounce>{};
+
 extension FunctionExt on Function{
   /// 同 Function.apply
   static apply(
@@ -59,8 +61,13 @@ extension VoidCallbackExt on VoidCallback {
   void debounce({
     Duration duration = const Duration(milliseconds: 500),
   }){
-    _debounce.delay = duration;
-    _debounce(() => this());
+    var debounceFn = _debounceMap[this];
+    if (debounceFn == null) {
+      debounceFn = Debounce();
+      _debounceMap[this] = debounceFn;
+    }
+    debounceFn.delay = duration;
+    debounceFn(() => this());
   }
 
   /// 认证
