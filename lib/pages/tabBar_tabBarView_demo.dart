@@ -542,6 +542,7 @@ var list = <Tuple2<String, String>>[
   Tuple2(APPRouter.riverPodPageCreate, "riverPodPageCreate", ),
   Tuple2(APPRouter.getxRouteCreatePage, "getxRouteCreatePage", ),
   Tuple2(APPRouter.getxControllerDemo, "getxControllerDemo", ),
+  Tuple2(APPRouter.nTransformViewDemo, "responsiveCreateViewDemo", ),
 
 
 ];

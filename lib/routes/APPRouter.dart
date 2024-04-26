@@ -46,6 +46,7 @@ import 'package:flutter_templet_project/pages/demo/LoginPage.dart';
 import 'package:flutter_templet_project/pages/demo/LoginPageOne.dart';
 import 'package:flutter_templet_project/pages/demo/LoginPageTwo.dart';
 import 'package:flutter_templet_project/pages/demo/NChoiceExpansionDemo.dart';
+import 'package:flutter_templet_project/pages/demo/NTransformViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NTargetFollowerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PageLifecycleFuncTest.dart';
 import 'package:flutter_templet_project/pages/demo/ReflectDemo.dart';
@@ -708,6 +709,7 @@ class APPRouter {
   static const riverPodPageCreate = '/riverPodPageCreate';
   static const getxRouteCreatePage = '/getxRouteCreatePage';
   static const getxControllerDemo = '/GetxControllerDemo';
+  static const nTransformViewDemo = '/nTransformViewDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -1117,6 +1119,7 @@ class AppPage {
 
     GetPage(name: APPRouter.getxRouteCreatePage, page: () => GetxRouteCreatePage(),),
     GetPage(name: APPRouter.getxControllerDemo, page: () => GetxControllerDemo(),),
+    GetPage(name: APPRouter.nTransformViewDemo, page: () => NTransformViewDemo(),),
 
 
   ];
