@@ -107,7 +107,7 @@ class _AppLifecycleStateObserverDemoState extends State<AppLifecycleStateObserve
   }
 
   @override
-  Future<void> onDetached() async {
+  Future<void> onDetach() async {
     // TODO: implement onDetached
     ddLog("$widget onDetached");
   }

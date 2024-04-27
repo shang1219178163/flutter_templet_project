@@ -21,17 +21,18 @@ class AppLifecycleObserver extends WidgetsBindingObserver{
     required this.onPause,
     required this.onDetached,
     required this.onHidden,
-    this.data,
+    this.onStateChange,
   }) {
     // WidgetsBinding.instance.addObserver(this);
   }
+
+  final ValueChanged<AppLifecycleState>? onStateChange;
 
   final AsyncCallback onResume;
   final AsyncCallback onInactive;
   final AsyncCallback onPause;
   final AsyncCallback onDetached;
   final AsyncCallback onHidden;
-  final dynamic data;
 
   // @mustCallSuper
   // void dispose() {
@@ -41,7 +42,7 @@ class AppLifecycleObserver extends WidgetsBindingObserver{
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     // DDLog('${Get.currentRoute} APP状态监听：$state, ${data ?? ""}');
-
+    onStateChange?.call(state);
     switch (state) {
       case AppLifecycleState.resumed:
         onResume();
@@ -68,7 +69,7 @@ mixin AppLifecycleObserverMixin<T extends StatefulWidget> on State<T>{
     onResume: onResume,
     onInactive: onInactive,
     onPause: onPause,
-    onDetached: onDetached,
+    onDetached: onDetach,
     onHidden: onHidden,
   );
 
@@ -89,18 +90,18 @@ mixin AppLifecycleObserverMixin<T extends StatefulWidget> on State<T>{
   }
 
   Future<void> onInactive() async {
-    throw UnimplementedError("❌: $this 未实现 onInactive");
+    // throw UnimplementedError("❌: $this 未实现 onInactive");
   }
 
   Future<void> onPause() async {
     throw UnimplementedError("❌: $this 未实现 onPause");
   }
 
-  Future<void> onDetached() async {
+  Future<void> onDetach() async {
     throw UnimplementedError("❌: $this 未实现 onDetached");
   }
 
   Future<void> onHidden() async {
-    throw UnimplementedError("❌: $this 未实现 onHidden");
+    // throw UnimplementedError("❌: $this 未实现 onHidden");
   }
 }
