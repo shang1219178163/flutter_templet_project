@@ -54,6 +54,7 @@ import 'package:flutter_templet_project/pages/demo/RegExpDemo.dart';
 import 'package:flutter_templet_project/pages/demo/RiverPodPageCreate.dart';
 import 'package:flutter_templet_project/pages/demo/SegmentedControlDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/StringTransformPage.dart';
+import 'package:flutter_templet_project/pages/demo/TextFieldDemoTwo.dart';
 import 'package:flutter_templet_project/pages/demo/ThemeColorDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TwoDimensionalGridViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/YamlParsePage.dart';
@@ -449,6 +450,8 @@ class APPRouter {
   static const dateTimeDemo = '/DateTimeDemo';
   static const textFieldDemo = '/TextFieldDemo';
   static const textFieldDemoOne = '/TextFieldDemoOne';
+  static const textFieldDemoTwo = '/textFieldDemoTwo';
+
   static const cupertinoFormDemo = '/CupertinoFormDemo';
   static const contextMenuActionDemo = '/ContextMenuActionDemo';
   static const menuDemo = '/MenuDemo';
@@ -866,6 +869,7 @@ class AppPage {
     GetPage(name: APPRouter.dateTimeDemo, page: () => DateTimeDemo(),),
     GetPage(name: APPRouter.textFieldDemo, page: () => TextFieldDemo(),),
     GetPage(name: APPRouter.textFieldDemoOne, page: () => TextFieldDemoOne(),),
+    GetPage(name: APPRouter.textFieldDemoTwo, page: () => TextFieldDemoTwo(),),
     GetPage(name: APPRouter.cupertinoFormDemo, page: () => CupertinoFormDemo(),),
     GetPage(name: APPRouter.contextMenuActionDemo, page: () => ContextMenuActionDemo(),),
     GetPage(name: APPRouter.menuDemo, page: () => MenuDemo(),),
