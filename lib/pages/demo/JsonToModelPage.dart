@@ -129,7 +129,7 @@ class _JsonToDartPageState extends State<JsonToDartPage> {
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                buildLeft(),
+                buildLeft(width: constraints.maxWidth * 0.45),
                 SizedBox(width: spacing*3,),
                 Expanded(
                   child: buildRight(),
@@ -213,9 +213,9 @@ class _JsonToDartPageState extends State<JsonToDartPage> {
   Widget buildLeft({
     bool isVertical = false,
     double spacing = 10,
-    double maxWidth = 400,
+    double width = 400,
   }) {
-    double? maxWidth = isVertical ? double.maxFinite : 300;
+    double? maxWidth = isVertical ? double.maxFinite : width;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
