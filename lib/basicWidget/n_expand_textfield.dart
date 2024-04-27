@@ -101,16 +101,19 @@ class _NExpandTextfieldState extends State<NExpandTextfield> {
           setState(() {});
         }
 
-        final child = Column(
+        return Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            buildTextField(
-              text: widget.text,
-              style: widget.textStyle,
-              maxLines: isExpand ? widget.expandMaxLine : widget.expandMinLine,
-              readOnly: widget.readOnly,
-              maxLength: widget.maxLength,
+            buildMask(
+              showMask: isBeyond && !isExpand && widget.readOnly,
+              child: buildTextField(
+                text: widget.text,
+                style: widget.textStyle,
+                maxLines: isExpand ? widget.expandMaxLine : widget.expandMinLine,
+                readOnly: widget.readOnly,
+                maxLength: widget.maxLength,
+              ),
             ),
             Offstage(
               offstage: !isBeyond || !widget.readOnly,
@@ -131,37 +134,77 @@ class _NExpandTextfieldState extends State<NExpandTextfield> {
           ],
         );
 
-        if (!widget.readOnly) {
-          return child;
-        }
-
-        return Stack(
-          children: [
-            child,
-            Positioned(
-              bottom: 25,
-              left: 0,
-              right: 0,
-              child: Visibility(
-                visible: isBeyond && !isExpand,
-                child: InkWell(
-                  onTap: onToggle,
-                  child: Container(
-                    width: double.maxFinite,
-                    height: 25,
-                    decoration: const BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [Color(0x99FFFFFF), Colors.white],
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            )
-          ],
-        );
+        // final child = Column(
+        //   mainAxisSize: MainAxisSize.min,
+        //   crossAxisAlignment: CrossAxisAlignment.end,
+        //   children: [
+        //     // buildMask(
+        //     //   showMask: !isExpand && isBeyond,
+        //     //   child: buildTextField(
+        //     //     text: widget.text,
+        //     //     style: widget.textStyle,
+        //     //     maxLines: isExpand ? widget.expandMaxLine : widget.expandMinLine,
+        //     //     readOnly: widget.readOnly,
+        //     //     maxLength: widget.maxLength,
+        //     //   ),
+        //     // ),
+        //     buildTextField(
+        //       text: widget.text,
+        //       style: widget.textStyle,
+        //       maxLines: isExpand ? widget.expandMaxLine : widget.expandMinLine,
+        //       readOnly: widget.readOnly,
+        //       maxLength: widget.maxLength,
+        //     ),
+        //     Offstage(
+        //       offstage: !isBeyond || !widget.readOnly,
+        //       child: InkWell(
+        //         onTap: onToggle,
+        //         child: Container(
+        //           padding: const EdgeInsets.only(top: 8, bottom: 8),
+        //           alignment: Alignment.center,
+        //           child: Image(
+        //             image: toggleImage,
+        //             width: 21,
+        //             height: 8,
+        //             color: context.primaryColor,
+        //           ),
+        //         ),
+        //       ),
+        //     ),
+        //   ],
+        // );
+        //
+        // if (!widget.readOnly) {
+        //   return child;
+        // }
+        //
+        // return Stack(
+        //   children: [
+        //     child,
+        //     Positioned(
+        //       bottom: 25,
+        //       left: 0,
+        //       right: 0,
+        //       child: Visibility(
+        //         visible: isBeyond && !isExpand,
+        //         child: InkWell(
+        //           onTap: onToggle,
+        //           child: Container(
+        //             width: double.maxFinite,
+        //             height: 25,
+        //             decoration: const BoxDecoration(
+        //               gradient: LinearGradient(
+        //                 colors: [Color(0x99FFFFFF), Colors.white],
+        //                 begin: Alignment.topCenter,
+        //                 end: Alignment.bottomCenter,
+        //               ),
+        //             ),
+        //           ),
+        //         ),
+        //       ),
+        //     )
+        //   ],
+        // );
       });
     });
   }
@@ -184,6 +227,7 @@ class _NExpandTextfieldState extends State<NExpandTextfield> {
       controller: textEditingController,
       style: style,
       textAlignVertical: TextAlignVertical.center,
+      minLines: 1,
       maxLines: maxLines,
       scrollPhysics: readOnly ? NeverScrollableScrollPhysics() : null,
       readOnly: readOnly,
@@ -233,6 +277,34 @@ class _NExpandTextfieldState extends State<NExpandTextfield> {
         // suffixIcon: suffixIcon,
         // suffixIconConstraints: suffixIconConstraints,
       ),
+    );
+  }
+
+  Widget buildMask({
+    List<Color> colors = const [
+      Colors.transparent,
+      Colors.transparent,
+      Color(0x88FFFFFF),
+      Color(0xFFFFFFFF),
+    ],
+    required bool showMask,
+    required Widget child,
+  }) {
+    if (!showMask) {
+      return child;
+    }
+
+    return ShaderMask(
+      shaderCallback: (Rect bounds) {
+        return LinearGradient(
+          colors: colors,
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          tileMode: TileMode.clamp,
+        ).createShader(bounds);
+      },
+      blendMode: BlendMode.srcATop,
+      child: child,
     );
   }
 }
