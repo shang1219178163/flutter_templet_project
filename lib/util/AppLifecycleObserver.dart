@@ -19,7 +19,7 @@ class AppLifecycleObserver extends WidgetsBindingObserver{
     required this.onResume,
     required this.onInactive,
     required this.onPause,
-    required this.onDetached,
+    required this.onDetach,
     required this.onHidden,
     this.onStateChange,
   }) {
@@ -31,7 +31,7 @@ class AppLifecycleObserver extends WidgetsBindingObserver{
   final AsyncCallback onResume;
   final AsyncCallback onInactive;
   final AsyncCallback onPause;
-  final AsyncCallback onDetached;
+  final AsyncCallback onDetach;
   final AsyncCallback onHidden;
 
   // @mustCallSuper
@@ -54,7 +54,7 @@ class AppLifecycleObserver extends WidgetsBindingObserver{
         onPause();
         break;
       case AppLifecycleState.detached:
-        onDetached();
+        onDetach();
         break;
       case AppLifecycleState.hidden:
         onHidden();
@@ -69,7 +69,7 @@ mixin AppLifecycleObserverMixin<T extends StatefulWidget> on State<T>{
     onResume: onResume,
     onInactive: onInactive,
     onPause: onPause,
-    onDetached: onDetach,
+    onDetach: onDetach,
     onHidden: onHidden,
   );
 

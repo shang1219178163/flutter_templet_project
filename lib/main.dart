@@ -301,11 +301,11 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver, Ap
     ddLog("$widget onResume");
   }
 
-  // @override
-  // Future<void> onInactive() async {
-  //   // TODO: implement onInactive
-  //   ddLog("$widget onInactive");
-  // }
+  @override
+  Future<void> onInactive() async {
+    // TODO: implement onInactive
+    ddLog("$widget onInactive");
+  }
 
   @override
   Future<void> onPause() async {
@@ -319,11 +319,11 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver, Ap
     ddLog("$widget onDetach");
   }
 
-  // @override
-  // Future<void> onHidden() async {
-  //   // TODO: implement onHidden
-  //   ddLog("$widget onHidden");
-  // }
+  @override
+  Future<void> onHidden() async {
+    // TODO: implement onHidden
+    ddLog("$widget onHidden");
+  }
 
 
   @override
