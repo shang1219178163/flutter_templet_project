@@ -9,7 +9,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_templet_project/util/debug_log.dart';
+
 import 'package:get/get.dart';
 
 /// app 前后台生命周期函数监听

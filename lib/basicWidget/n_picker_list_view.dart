@@ -10,7 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_picker_tool_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_placeholder.dart';
 import 'package:flutter_templet_project/basicWidget/n_search_textfield.dart';
-import 'package:flutter_templet_project/util/debug_log.dart';
+import 'package:flutter_templet_project/extension/ddlog.dart';
+
 
 
 // content = NPickerListView(
@@ -103,7 +104,7 @@ class NPickerListViewState<E> extends State<NPickerListView<E>> {
             backgroundColor: Color(0xffEDEDED),
             onChanged: (String value) {
               searchVN.value = value;
-              ddLog("onChanged: $value, ${searchVN.value}, ");
+              ddlog("onChanged: $value, ${searchVN.value}, ");
             },
           ),
         ),

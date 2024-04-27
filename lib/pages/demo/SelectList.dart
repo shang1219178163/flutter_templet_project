@@ -4,9 +4,10 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
+import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/model/user_model.dart';
-import 'package:flutter_templet_project/util/debug_log.dart';
+
 
 
 /// 单选/多选模型
@@ -56,7 +57,7 @@ class _SelectListPageState extends State<SelectListPage> {
       models: models,
       isMultiple: isMultiple,
       onSelected: (List<UserModel> items) {
-        DebugLog.d(items.map((e) => (e.name,)));
+        ddlog(items.map((e) => (e.name,)));
       },
     );
   }
@@ -121,7 +122,7 @@ class _SelectListState extends State<SelectList> {
 
             onTap(){
               e.isSelected = !(e.isSelected ?? false);
-              // DebugLog.d(e.toJson());
+              // ddlog(e.toJson());
               setState((){});
 
               updateSelectedCount();
@@ -197,8 +198,8 @@ class _SelectListState extends State<SelectList> {
               // backgroundColor: Colors.red
             ),
             onPressed: (){
-              // DebugLog.d("isAll: $isAll");
-              // DebugLog.d(dataList.value
+              // ddlog("isAll: $isAll");
+              // ddlog(dataList.value
               //     .where((e) => e.isSelected != true)
               //     .map((e) => (e.name, e.isSelected)).toList());
 
@@ -215,7 +216,7 @@ class _SelectListState extends State<SelectList> {
               }
               setState(() {});
               updateSelectedCount();
-              // DebugLog.d(selectedItems);
+              // ddlog(selectedItems);
             },
             child: Row(
               children: [

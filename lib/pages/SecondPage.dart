@@ -26,7 +26,7 @@ import 'package:flutter_templet_project/extension/button_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/pages/demo/curve_painter.dart';
 import 'package:flutter_templet_project/util/app_util.dart';
-import 'package:flutter_templet_project/util/debug_log.dart';
+
 
 import 'package:tuple/tuple.dart';
 
@@ -621,7 +621,7 @@ class _SecondPageState extends State<SecondPage> {
             ),
             buildMaterialButtonGradient(
               onPressed: (){
-                DebugLog.d("buildMaterialButtonGradient");
+                ddlog("buildMaterialButtonGradient");
               },
             ),
             buildMaterialButtonGradient(

@@ -11,7 +11,8 @@ import 'package:flutter_templet_project/basicWidget/app_update_card.dart';
 import 'package:flutter_templet_project/basicWidget/list_subtitle_cell.dart';
 import 'package:flutter_templet_project/basicWidget/n_tab_bar_view.dart';
 import 'package:flutter_templet_project/basicWidget/n_tab_page_view.dart';
-import 'package:flutter_templet_project/util/debug_log.dart';
+import 'package:flutter_templet_project/extension/ddlog.dart';
+
 import 'package:flutter_templet_project/extension/divider_ext.dart';
 import 'package:flutter_templet_project/model/mock_data.dart';
 import 'package:flutter_templet_project/pages/tabBar_tabBarView_demo.dart';
@@ -71,7 +72,7 @@ class _TabBarReusePageDemoState extends State<TabBarReusePageDemo> {
       //   return (index != 1);
       // },
       onPageChanged: (index) {
-        DebugLog.d(index);
+        ddlog(index);
       }
     );
   }
@@ -87,7 +88,7 @@ class _TabBarReusePageDemoState extends State<TabBarReusePageDemo> {
       //   return (index != 1);
       // },
       onPageChanged: (index) {
-        DebugLog.d(index);
+        ddlog(index);
       }
     );
   }

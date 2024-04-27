@@ -9,7 +9,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
-import 'package:flutter_templet_project/util/debug_log.dart';
+
 
 
 class DateTimeDemo extends StatefulWidget {
@@ -59,7 +59,7 @@ class _DateTimeDemoState extends State<DateTimeDemo> {
     ddlog(interval);
     ddlog(intendtime);
 
-    DebugLog.d([
+    ddlog([
       now,
       now.toUtc(),
     ]);

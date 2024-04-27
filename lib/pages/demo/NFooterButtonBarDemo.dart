@@ -10,7 +10,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_footer_button_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
-import 'package:flutter_templet_project/util/debug_log.dart';
+import 'package:flutter_templet_project/extension/ddlog.dart';
+
 
 class NFooterButtonBarDemo extends StatefulWidget {
 
@@ -36,7 +37,7 @@ class _NFooterButtonBarDemoState extends State<NFooterButtonBarDemo> {
   void initState() {
     //监听滚动事件，打印滚动位置
     _scrollController.addListener(() {
-      ddLog("_scrollController.offset: ${_scrollController.offset}/${_scrollController.position.maxScrollExtent}");
+      ddlog("_scrollController.offset: ${_scrollController.offset}/${_scrollController.position.maxScrollExtent}");
       enableVN.value = (_scrollController.offset >= _scrollController.position.maxScrollExtent);
     });
 
@@ -89,12 +90,12 @@ class _NFooterButtonBarDemoState extends State<NFooterButtonBarDemo> {
         ),
         buildPageFooter(
           onConfirm: (){
-            ddLog("NFooterButtonBar");
+            ddlog("NFooterButtonBar");
           }
         ),
         buildPageFooter1(
           onConfirm: (){
-            ddLog("NFooterButtonBar");
+            ddlog("NFooterButtonBar");
           }
         ),
       ],

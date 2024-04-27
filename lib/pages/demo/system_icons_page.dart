@@ -10,7 +10,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_templet_project/util/debug_log.dart';
+import 'package:flutter_templet_project/extension/ddlog.dart';
+
 import 'package:flutter_templet_project/util/icons_map.dart';
 
 
@@ -117,7 +118,7 @@ class _SystemIconsPageState extends State<SystemIconsPage> {
               title: Text("$item"),
               // subtitle: Text(array[0]),
               onTap: (){
-                DebugLog.d(item);
+                ddlog(item);
                 // Clipboard.setData(ClipboardData(text: "$item"));
                 editingController.text = item.split('.').last;
                 onChanged(editingController.text);
@@ -170,7 +171,7 @@ class _SystemIconsPageState extends State<SystemIconsPage> {
       searchResults = list;
     } else {
       searchResults = list.where((e) => e.contains(value)).toList();
-      DebugLog.d(searchResults.length);
+      ddlog(searchResults.length);
     }
     setState(() {});
   }

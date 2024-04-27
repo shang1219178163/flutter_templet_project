@@ -10,9 +10,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_app_bar_them_change.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
+import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
-import 'package:flutter_templet_project/util/debug_log.dart';
+
 
 class NAppBarColorChangerDemo extends StatefulWidget {
 
@@ -42,7 +43,7 @@ class _NAppBarColorChangerDemoState extends State<NAppBarColorChangerDemo> {
           actions: ['保存', '分享'].map((e) => buildAppBarButton(
             title: e,
             onPressed: () {
-              DebugLog.d("onTap: $e");
+              ddlog("onTap: $e");
             },
           )).toList(),
         ),
@@ -54,7 +55,7 @@ class _NAppBarColorChangerDemoState extends State<NAppBarColorChangerDemo> {
   Widget buildAppBarButton({required String title, VoidCallback? onPressed}) {
     return InkWell(
       onTap: onPressed ?? () {
-        DebugLog.d("onTap: $title");
+        ddlog("onTap: $title");
       },
       child: Container(
         margin: EdgeInsets.only(right: 16, top: 12, bottom: 12),

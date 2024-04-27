@@ -22,7 +22,6 @@ import 'package:flutter_templet_project/network/interceptors/validate_intercepto
 import 'package:flutter_templet_project/network/proxy/dio_proxy.dart';
 import 'package:flutter_templet_project/routes/APPRouter.dart';
 import 'package:flutter_templet_project/routes/NavigatorUtil.dart';
-import 'package:flutter_templet_project/util/debug_log.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 
@@ -78,7 +77,7 @@ class RequestManager extends BaseRequestAPI {
       },
       onResponse: (Response response, handler) {
         // print("响应之前");
-        DebugLog.d(response.toDescription());
+        ddlog(response.toDescription());
         return handler.next(response);
       },
       onError: (DioException e, handler) async {

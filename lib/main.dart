@@ -39,7 +39,7 @@ import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:flutter_templet_project/routes/InitialBinding.dart';
 import 'package:flutter_templet_project/util/AppLifecycleObserver.dart';
 import 'package:flutter_templet_project/util/app_util.dart';
-import 'package:flutter_templet_project/util/debug_log.dart';
+
 import 'package:flutter_templet_project/vendor/isar/DBManager.dart';
 import 'package:flutter_templet_project/vendor/isar/model/db_order.dart';
 import 'package:flutter_templet_project/vendor/isar/model/db_student.dart';
@@ -265,22 +265,22 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver, Ap
 
     // _lifecycleListener = AppLifecycleListener(
     //   onRestart: (){
-    //     ddLog("$widget onRestart - AppLifecycleListener");
+    //     ddlog("$widget onRestart - AppLifecycleListener");
     //   },
     //   onResume: (){
-    //     ddLog("$widget onResume - AppLifecycleListener");
+    //     ddlog("$widget onResume - AppLifecycleListener");
     //   },
     //   onInactive: (){
-    //     ddLog("$widget onInactive - AppLifecycleListener");
+    //     ddlog("$widget onInactive - AppLifecycleListener");
     //   },
     //   onPause: (){
-    //     ddLog("$widget onPause - AppLifecycleListener");
+    //     ddlog("$widget onPause - AppLifecycleListener");
     //   },
     //   onDetach: (){
-    //     ddLog("$widget onDetach - AppLifecycleListener");
+    //     ddlog("$widget onDetach - AppLifecycleListener");
     //   },
     //   onHide: (){
-    //     ddLog("$widget onHide - AppLifecycleListener");
+    //     ddlog("$widget onHide - AppLifecycleListener");
     //   },
     // );
 
@@ -298,31 +298,31 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver, Ap
   @override
   Future<void> onResume() async {
     // TODO: implement onResume
-    ddLog("$widget onResume");
+    ddlog("$widget onResume");
   }
 
   @override
   Future<void> onInactive() async {
     // TODO: implement onInactive
-    ddLog("$widget onInactive");
+    ddlog("$widget onInactive");
   }
 
   @override
   Future<void> onPause() async {
     // TODO: implement onPause
-    ddLog("$widget onPause");
+    ddlog("$widget onPause");
   }
 
   @override
   Future<void> onDetach() async {
     // TODO: implement onDetach
-    ddLog("$widget onDetach");
+    ddlog("$widget onDetach");
   }
 
   @override
   Future<void> onHidden() async {
     // TODO: implement onHidden
-    ddLog("$widget onHidden");
+    ddlog("$widget onHidden");
   }
 
 
