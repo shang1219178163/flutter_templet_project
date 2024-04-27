@@ -34,7 +34,6 @@ class _NTransformViewDemoState extends State<NTransformViewDemo> {
     (name: "Paste", action: onPaste),
     (name: "Clear", action: onClear),
     (name: "Create", action: onCreate),
-
   ];
 
   @override

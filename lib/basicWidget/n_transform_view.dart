@@ -1,15 +1,17 @@
 
+//
+//  NTransformView.dart
+//  flutter_templet_project
+//
+//  Created by shang on 2024/4/27 09:02.
+//  Copyright © 2024/4/27 shang. All rights reserved.
+//
 
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
-import 'package:flutter_templet_project/cache/file_manager.dart';
-import 'package:flutter_templet_project/extension/snack_bar_ext.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
-import 'package:get/get.dart';
-import 'package:json_to_dart/model_generator.dart';
 
 
 /// 字符串转文件
