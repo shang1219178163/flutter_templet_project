@@ -12,38 +12,49 @@ import 'package:get/get.dart';
 import 'package:json_to_dart/model_generator.dart';
 
 
-///
+/// 字符串转文件
 class NTransformView extends StatefulWidget {
 
   NTransformView({
     super.key,
+    this.controller,
     required this.title,
     required this.message,
-    required this.onGenerate,
-    required this.onCreate,
+    required this.toolbarBuilder,
   });
 
-  final String title;
-  final String message;
+  final NTransformViewController? controller;
 
-  final String Function(String value) onGenerate;
-  final ValueChanged<String> onCreate;
+  final Widget title;
+  final Widget message;
 
+  final Widget Function(BuildContext context) toolbarBuilder;
 
   @override
-  _NTransformViewState createState() => _NTransformViewState();
+  NTransformViewState createState() => NTransformViewState();
 }
 
-class _NTransformViewState extends State<NTransformView> {
+class NTransformViewState extends State<NTransformView> {
 
   final _textEditingController = TextEditingController();
   final _focusNode = FocusNode();
 
   final _scrollController = ScrollController();
 
-  var jsonStr = "";
   final outVN = ValueNotifier("");
 
+  @override
+  void dispose() {
+    super.dispose();
+    widget.controller?._detach(this);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    widget.controller?._attach(this);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -116,14 +127,9 @@ class _NTransformViewState extends State<NTransformView> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        NText(widget.title,
-          fontSize: 20,
-          fontWeight: FontWeight.w500,
-        ),
+        widget.title,
         SizedBox(height: spacing,),
-        NText(widget.message,
-          maxLines: 3,
-        ),
+        widget.message,
         SizedBox(height: spacing*2,),
       ],
     );
@@ -198,32 +204,7 @@ class _NTransformViewState extends State<NTransformView> {
           ),
         ),
         SizedBox(height: 8,),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                elevation: 0,
-                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-              ),
-              onPressed: onGenerate,
-              child: NText("Generate"),
-            ),
-            ElevatedButton(
-              onPressed: onPaste,
-              child: NText("Paste"),
-            ),
-            ElevatedButton(
-              onPressed: onClear,
-              child: NText("Clear"),
-            ),
-            ElevatedButton(
-              onPressed: onCreate,
-              child: NText("Create"),
-            ),
-          ],
-        ),
+        widget.toolbarBuilder(context),
       ],
     );
   }
@@ -256,32 +237,47 @@ class _NTransformViewState extends State<NTransformView> {
     );
   }
 
-  onGenerate() async {
-    if (_textEditingController.text.isEmpty) {
-      var data = await Clipboard.getData("text/plain");
-      final dateStr = data?.text ?? "";
-      if (dateStr.isNotEmpty) {
-        _textEditingController.text = dateStr;
-      }
+}
+
+
+class NTransformViewController {
+
+  NTransformViewState? _anchor;
+
+  void _attach(NTransformViewState anchor) {
+    _anchor = anchor;
+  }
+
+  void _detach(NTransformViewState anchor) {
+    if (_anchor == anchor) {
+      _anchor = null;
     }
-    _textEditingController.text = widget.onGenerate(_textEditingController.text);
-    outVN.value = widget.onGenerate(_textEditingController.text);
   }
 
-  onClear() {
-    _textEditingController.text = "";
+
+  TextEditingController get textEditingController {
+    return _anchor!._textEditingController;
   }
 
-  onPaste() async {
+
+  set out(String value) {
+    _anchor!.outVN.value = value;
+  }
+
+  String get out {
+    return _anchor!.outVN.value;
+  }
+
+  Future<void> paste() async {
     var data = await Clipboard.getData("text/plain");
     final str = data?.text ?? "";
     if (str.isNotEmpty) {
-      _textEditingController.text = str;
+      textEditingController.text = str;
     }
-    onGenerate();
   }
 
-  onCreate(){
-    widget.onCreate(outVN.value);
+  void clear() {
+    textEditingController.text = "";
+    out = "";
   }
 }
