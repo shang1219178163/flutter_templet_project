@@ -369,7 +369,7 @@ class _JsonToDartPageState extends State<JsonToDartPage> {
       );
 
       final fileName = (_prefixController.text ?? "").toUpperCase() +
-        (_nameController.text.capitalizeFirst ?? "") +
+        (_nameController.text ?? "") +
         (_suffixController.text.capitalizeFirst ?? "");
       // debugPrint("fileName: $fileName");
 
