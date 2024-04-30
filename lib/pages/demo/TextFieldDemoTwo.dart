@@ -105,7 +105,7 @@ class _TextFieldDemoTwoState extends State<TextFieldDemoTwo> with SingleTickerPr
 
                     return NExpandTextfield(
                       text: textEditingController.text,
-                      initiallyExpanded: true,
+                      isExpand: true,
                       expandMaxLine: null,
                       readOnly: value,
                       textStyle: TextStyle(

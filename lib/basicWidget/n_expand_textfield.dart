@@ -24,7 +24,8 @@ class NExpandTextfield extends StatefulWidget {
     // this.expandTitleStyle,
     this.readOnly = true,
     this.maxLength = 300,
-    this.initiallyExpanded = false,
+    this.isExpand = false,
+    this.textBuilder,
   });
 
   /// 字符串
@@ -34,7 +35,7 @@ class NExpandTextfield extends StatefulWidget {
    final TextStyle? textStyle;
 
   /// 超过一行初始展开状态
-   final bool initiallyExpanded;
+   final bool isExpand;
 
   /// 展开状态最大行
    final int? expandMaxLine;
@@ -46,16 +47,15 @@ class NExpandTextfield extends StatefulWidget {
    final int maxLength;
 
    final bool readOnly;
-
-   /// 展开按钮文字样式
-   // final TextStyle? expandTitleStyle;
+   
+   final Widget Function(bool isExpand, int expandMinLine)? textBuilder;
 
   @override
   _NExpandTextfieldState createState() => _NExpandTextfieldState();
 }
 
 class _NExpandTextfieldState extends State<NExpandTextfield> {
-  late bool isExpand = widget.initiallyExpanded;
+  late bool isExpand = widget.isExpand;
 
   final textEditingController = TextEditingController();
 
@@ -101,19 +101,23 @@ class _NExpandTextfieldState extends State<NExpandTextfield> {
           setState(() {});
         }
 
+        final textChild = widget.textBuilder
+            ?.call(widget.isExpand, widget.expandMinLine) ??
+            buildTextField(
+              text: widget.text,
+              style: widget.textStyle,
+              maxLines: isExpand ? widget.expandMaxLine : widget.expandMinLine,
+              readOnly: widget.readOnly,
+              maxLength: widget.maxLength,
+            );
+
         return Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             buildMask(
               showMask: isBeyond && !isExpand && widget.readOnly,
-              child: buildTextField(
-                text: widget.text,
-                style: widget.textStyle,
-                maxLines: isExpand ? widget.expandMaxLine : widget.expandMinLine,
-                readOnly: widget.readOnly,
-                maxLength: widget.maxLength,
-              ),
+              child: textChild,
             ),
             Offstage(
               offstage: !isBeyond || !widget.readOnly,
@@ -133,78 +137,6 @@ class _NExpandTextfieldState extends State<NExpandTextfield> {
             ),
           ],
         );
-
-        // final child = Column(
-        //   mainAxisSize: MainAxisSize.min,
-        //   crossAxisAlignment: CrossAxisAlignment.end,
-        //   children: [
-        //     // buildMask(
-        //     //   showMask: !isExpand && isBeyond,
-        //     //   child: buildTextField(
-        //     //     text: widget.text,
-        //     //     style: widget.textStyle,
-        //     //     maxLines: isExpand ? widget.expandMaxLine : widget.expandMinLine,
-        //     //     readOnly: widget.readOnly,
-        //     //     maxLength: widget.maxLength,
-        //     //   ),
-        //     // ),
-        //     buildTextField(
-        //       text: widget.text,
-        //       style: widget.textStyle,
-        //       maxLines: isExpand ? widget.expandMaxLine : widget.expandMinLine,
-        //       readOnly: widget.readOnly,
-        //       maxLength: widget.maxLength,
-        //     ),
-        //     Offstage(
-        //       offstage: !isBeyond || !widget.readOnly,
-        //       child: InkWell(
-        //         onTap: onToggle,
-        //         child: Container(
-        //           padding: const EdgeInsets.only(top: 8, bottom: 8),
-        //           alignment: Alignment.center,
-        //           child: Image(
-        //             image: toggleImage,
-        //             width: 21,
-        //             height: 8,
-        //             color: context.primaryColor,
-        //           ),
-        //         ),
-        //       ),
-        //     ),
-        //   ],
-        // );
-        //
-        // if (!widget.readOnly) {
-        //   return child;
-        // }
-        //
-        // return Stack(
-        //   children: [
-        //     child,
-        //     Positioned(
-        //       bottom: 25,
-        //       left: 0,
-        //       right: 0,
-        //       child: Visibility(
-        //         visible: isBeyond && !isExpand,
-        //         child: InkWell(
-        //           onTap: onToggle,
-        //           child: Container(
-        //             width: double.maxFinite,
-        //             height: 25,
-        //             decoration: const BoxDecoration(
-        //               gradient: LinearGradient(
-        //                 colors: [Color(0x99FFFFFF), Colors.white],
-        //                 begin: Alignment.topCenter,
-        //                 end: Alignment.bottomCenter,
-        //               ),
-        //             ),
-        //           ),
-        //         ),
-        //       ),
-        //     )
-        //   ],
-        // );
       });
     });
   }
