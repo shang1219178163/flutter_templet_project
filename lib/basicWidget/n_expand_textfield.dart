@@ -102,7 +102,7 @@ class _NExpandTextfieldState extends State<NExpandTextfield> {
         }
 
         final textChild = widget.textBuilder
-            ?.call(widget.isExpand, widget.expandMinLine) ??
+            ?.call(isExpand, widget.expandMinLine) ??
             buildTextField(
               text: widget.text,
               style: widget.textStyle,
