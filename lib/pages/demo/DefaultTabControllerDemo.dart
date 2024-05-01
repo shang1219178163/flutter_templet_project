@@ -164,7 +164,6 @@ class _DataTypeDemoState extends State<DataTypeDemo> with AutomaticKeepAliveClie
               Container(
                 height: 500,
                 color: ColorExt.random,
-
               )
             ],
           ),
