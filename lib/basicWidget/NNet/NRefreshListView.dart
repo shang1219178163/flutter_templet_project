@@ -276,7 +276,7 @@ class NRefreshListViewState<T> extends State<NRefreshListView<T>> with Automatic
     indicator = items.value.length < widget.pageSize
         ? IndicatorResult.noMore
         : IndicatorResult.success;
-    _easyRefreshController.finishRefresh(indicator);
+    _easyRefreshController.finishRefresh(IndicatorResult.success);
   }
 
   onLoad() async {
