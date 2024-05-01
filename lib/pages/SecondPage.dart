@@ -69,12 +69,32 @@ class _SecondPageState extends State<SecondPage> {
   final GlobalKey _globalKey = GlobalKey();
   final GlobalKey _globalKey1 = GlobalKey();
 
+  Widget buildBtnColor() {
+    return TextButton(
+      onPressed: () {},
+      style: ButtonStyle(
+        foregroundColor: MaterialStateProperty.resolveWith<Color>((Set<MaterialState> states) {
+          if (states.contains(MaterialState.pressed)) {
+            return Colors.green;
+          }
+          return Colors.black87; // Defer to the widget's default.
+        }),
+      ),
+      child: Text('长按变色', style: TextStyle(fontSize: 20),
+      ),
+    );
+  }
+
   buildListView() {
     return ListView(
       children: [
         Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
+            NSectionHeader(
+              title: "MaterialState",
+              child: buildBtnColor(),
+            ),
             NSectionHeader(
               title: "RadialButton",
               child: Column(
@@ -1119,6 +1139,7 @@ class _SecondPageState extends State<SecondPage> {
       ),
     );
   }
+
 }
 
 

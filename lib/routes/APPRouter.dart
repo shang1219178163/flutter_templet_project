@@ -31,6 +31,7 @@ import 'package:flutter_templet_project/pages/demo/AppWebViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AsyncDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ComponentMiddlePage.dart';
 import 'package:flutter_templet_project/pages/demo/DataTypeDemo.dart';
+import 'package:flutter_templet_project/pages/demo/DefaultTabControllerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DevelopToolList.dart';
 import 'package:flutter_templet_project/pages/demo/DialogChoiceChipDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DisplayFeatureDemo.dart';
@@ -277,6 +278,7 @@ import 'package:flutter_templet_project/pages/demo/operator_demo.dart';
 import 'package:flutter_templet_project/pages/demo/rp_template_qrcode_page.dart';
 import 'package:flutter_templet_project/pages/demo/smart_dialog_demo.dart';
 import 'package:flutter_templet_project/pages/demo/steper_connector_demo.dart';
+import 'package:flutter_templet_project/pages/demo/test_data_tye_demo.dart';
 import 'package:flutter_templet_project/pages/demo/test_page.dart';
 import 'package:flutter_templet_project/pages/demo/will_pop_scope_demo.dart';
 import 'package:flutter_templet_project/pages/demo/homeSrollDemo.dart';
@@ -604,7 +606,7 @@ class APPRouter {
   static const netStateListenerDemo = '/netStateListenerDemo';
   static const netStateListenerDemoOne = '/netStateListenerDemoOne';
   static const interactiveViewerDemo = '/interactiveViewerDemo';
-  static const dataTypeDemo = '/dataTypeDemo';
+  static const defaultTabControllerDemo = '/defaultTabControllerDemo';
   static const regExpDemo = '/regExpDemo';
   static const inputDatePickerFormFieldDemo = '/inputDatePickerFormFieldDemo';
   static const dateRangePickerDialogDemo = '/dateRangePickerDialogDemo';
@@ -713,6 +715,7 @@ class APPRouter {
   static const getxRouteCreatePage = '/getxRouteCreatePage';
   static const getxControllerDemo = '/GetxControllerDemo';
   static const nTransformViewDemo = '/nTransformViewDemo';
+  static const testDataTyeDemo = '/testDataTyeDemo';
 
 
   // static final routes = <String, WidgetBuilder>{
@@ -1013,7 +1016,7 @@ class AppPage {
     GetPage(name: APPRouter.netStateListenerDemo, page: () => NetStateListenerDemo(),),
     GetPage(name: APPRouter.netStateListenerDemoOne, page: () => NetStateListenerDemoOne(),),
     GetPage(name: APPRouter.interactiveViewerDemo, page: () => InteractiveViewerDemo(),),
-    GetPage(name: APPRouter.dataTypeDemo, page: () => DataTypeDemo(),),
+    GetPage(name: APPRouter.defaultTabControllerDemo, page: () => DefaultTabControllerDemo(),),
     GetPage(name: APPRouter.regExpDemo, page: () => RegExpDemo(),),
     GetPage(name: APPRouter.inputDatePickerFormFieldDemo, page: () => InputDatePickerFormFieldDemo(),),
     GetPage(name: APPRouter.dateRangePickerDialogDemo, page: () => DateRangePickerDialogDemo(),),
@@ -1124,6 +1127,7 @@ class AppPage {
     GetPage(name: APPRouter.getxRouteCreatePage, page: () => GetxRouteCreatePage(),),
     GetPage(name: APPRouter.getxControllerDemo, page: () => GetxControllerDemo(),),
     GetPage(name: APPRouter.nTransformViewDemo, page: () => NTransformViewDemo(),),
+    GetPage(name: APPRouter.testDataTyeDemo, page: () => TestDataTyeDemo(),),
 
 
   ];

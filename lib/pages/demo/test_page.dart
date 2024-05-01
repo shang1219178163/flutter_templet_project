@@ -110,22 +110,6 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
               }
             ),
             RepaintBoundary(child: buildSection3(),),
-            Container(
-              margin: const EdgeInsets.all(8),
-              color: Colors.green,
-              child: Container(
-                  width: 200,
-                  height: 40,
-                  child: Text('widget.title')
-              ),
-            ),
-            TextField(
-              cursorColor: Colors.purple,
-              cursorRadius: Radius.circular(8.0),
-              cursorWidth: 8.0,
-            ),
-
-            buildBtnColor(),
             buildSection4(),
             buildSection5(),
             SizedBox(height: 34,),
@@ -146,15 +130,6 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
         children: items,
       ),
     );
-
-    return PreferredSize(
-      preferredSize: Size(screenSize.width, 60),
-      child: Row(
-        children: List.generate(16, (i) => Container(
-          child: Text('item_$i'),
-        )).toList(),
-      ),
-    );
   }
 
   onDone() {
@@ -162,68 +137,7 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
     const a = true;
     final b = "nested ${a ? "strings" : "can"} be wrapped by a double quote";
 
-    final shard = Singleton();
-    final shard1 = Singleton.instance;
-    final shard2 = Singleton.getInstance();
-    debugPrint("Singleton: ${shard == shard1 && shard1 == shard2}");
 
-    var record1 = ('first', 2, true, 'last');
-    debugPrint("record1.1:${record1.$1}");
-    debugPrint("record1.2:${record1.$2}");
-    debugPrint("record1.3:${record1.$3}");
-    debugPrint("record1.4:${record1.$4}");
-
-    final list = <int>[];
-
-    final lastElement = list.lastOrNull;
-
-    (List<String> a, Map<String, dynamic> b) re = ([], {});
-    debugPrint("re:${re}");
-
-    re.$1.add("a");
-    re.$2["a"] = "aa";
-    debugPrint("re1:${re}");
-
-    ({int a, int b}) recordAB = (a: 1, b: 2);
-
-    (double lat, double lon) geoLocation(String name) =>
-        (231.23, 36.8219);
-
-    var map = <(int, int), String>{};
-    map[(1, 2)] = "1,2";
-    map[(3, 4)] = "3,4";
-    debugPrint("map: ${map}");
-
-    final list1 = ["aaa"];
-    final list2 = ["aaa"];
-    debugPrint("${DateTime.now()} list ==: ${list1 == list2}");
-    debugPrint("${DateTime.now()} list listEquals: ${listEquals(list1, list2)}");
-
-    final map1 = {"a": "aa"};
-    final map2 = {"a": "aa"};
-    debugPrint("${DateTime.now()} map ==: ${map1 == map2}");
-    debugPrint("${DateTime.now()} map mapEquals: ${mapEquals(map1, map2)}");
-
-    final set1 = {'a'};
-    final set2 = {'a'};
-    debugPrint("${DateTime.now()} set ==: ${set1 == set2}");
-    debugPrint("${DateTime.now()} set setEquals: ${setEquals(set1, set2)}");
-
-    final user = LocationDetailModel(description: "aaa");
-    final user1 = LocationDetailModel(description: "aaa");
-    debugPrint("user: ${user.toJson() == user1.toJson()}");
-
-    final sameUser = user == user1;
-    debugPrint("sameUser: ${sameUser}");
-
-    final result = identical(user, user1);//检查两个对象引用是否指向同一对象。
-    debugPrint("result: ${result}");
-
-    final bob = NPerson(name: "Bob", age: 40);
-    final bob1 = NPerson(name: "Bob", age: 40);
-    debugPrint("NPerson:${bob == bob1}"); // false
-    debugPrint("NPerson bob: ${bob.hashCode}"); // false
-    debugPrint("NPerson bob1: ${bob.hashCode1}"); // false
 
   }
 
@@ -356,198 +270,9 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
     );
   }
 
-  buildBtnColor() {
-    return TextButton(
-      onPressed: () {},
-      style: ButtonStyle(
-        foregroundColor: MaterialStateProperty.resolveWith<Color>((Set<MaterialState> states) {
-          if (states.contains(MaterialState.pressed)) {
-            return Colors.green;
-          }
-          return Colors.black87; // Defer to the widget's default.
-        }),
-      ),
-      child: Text('Change My Color', style: TextStyle(fontSize: 30),
-      ),
-    );
-  }
-
   void _onPressed(int e) {
-    final a = 'Eats shoots leaves'.splitMapJoin((RegExp(r'shoots')),
-         onMatch:    (m) => m[0] ?? "",  // (or no onMatch at all)
-         onNonMatch: (n) => '*'); // Result: "*shoots*"
-    ddlog(a);
-
-    final b = 'Eats shoots leaves'.splitMapJoin((RegExp(r's|o')),
-        onMatch: (m) => "_",
-    );
-    ddlog(b);
-
-    final c = 'Eats shoots leaves'.split(RegExp(r's|o'));
-    ddlog(c);
-
-    final d = "easy_refresh_plugin".toCamlCase("_");
-    ddlog(d);
-
-    final d1 = "easyRefreshPlugin".toUncamlCase("_");
-    ddlog(d1);
-
-    final d2 = "easyRefreshPlugin".toCapitalize();
-    ddlog(d2);
-
-    showSnackBar(SnackBar(content: Text(d2)));
-
-    var map = <String, dynamic>{
-      'msgType': '5',
-      'msgTag': '官方号',
-      'msgUnreadNum': 3,
-    };
-
-    ddlog('getUrlParams():${getUrlParams(map: map)}');
-    ddlog('map.join():${map.join()}' );
-
-    double? z;
-    double? z1;
-    final list = [z, z1];
-    debugPrint('z1:$list');
-
-    List<String>? items;
-    final zz = items?[0];
-    debugPrint('zz:$zz');
-
-    final map1 = {
-      'a': 1,
-      'b': 11,
-      'c': 111
-    };
-
-    debugPrint('map: $map1');
-    debugPrint('map1: $map1');
-
-    try {
-      List<String>? listNew = [];
-      // debugPrint('first: ${listNew.first}');
-
-      listNew = ["a", "b", "c"];
-      for (var i = 0; i < listNew.length; i++) {
-        final e = listNew[i];
-        debugPrint('e: $e');
-      }
-      for (var i = listNew.length - 1; i >= 0; i--) {
-        final e = listNew[i];
-        debugPrint('倒叙e: $e');
-      }
-
-    } catch (exception) {
-      debugPrint(exception.toString());
-    }
-
-    String? maxline;
-    // maxline = map["aa'a'a"];
-    final flag = (maxline?.isNotEmpty == true);
-    debugPrint('flag: $flag');
-    maxline = "1";
-    final flag1 = (maxline?.isNotEmpty == true);
-    debugPrint('flag1: $flag1');
-
-    // final dateTime = DateTime(1970, 1, 1).add(duration);
-    // debugPrint('1970: ${dateTime.millisecond}');
-
-    final arr = [];
-    final arrNew = arr.take(1);
-    debugPrint('arrNew: ${arrNew.isEmpty}');
-
-    removeSame();
-  }
-
-  removeSame() {
-    List list = [{'id':1,'name':'小明'},{'id':1,'name':'小红'},{'id':2,'name':'小明'}];
-
-    final ids = list.map((e) => e['id']).toSet();
-    debugPrint('ids: ${ids}');
-
-    list.retainWhere((e) => ids.remove(e['id']));
-    debugPrint('list: ${list}');
-  }
-
-  testBool({bool value = false}) {
 
 
-  }
-  
-  buildText({
-    required String text,
-    required TextStyle textStyle,
-    bool isExpand = false,
-    int expandMaxLine = 10,
-    TextStyle? expandTitleStyle,
-  }) {
-
-    return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints){
-
-        final textPainter = TextPainterExt.getTextPainter(
-            text: text,
-            textStyle: textStyle,
-            maxLine: 100,
-            maxWidth: constraints.maxWidth,
-        );
-        final numberOfLines = textPainter.computeLineMetrics().length;
-        // debugPrint("numberOfLines:${numberOfLines}");
-
-        return StatefulBuilder(
-          builder: (BuildContext context, StateSetter setState) {
-
-            final btnTitle = isExpand ? "收起" : "展开";
-            return Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Expanded(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(19))
-                    ),
-                    child: Container(
-                      // width: maxWidth,
-                      // color: Colors.green,
-                      child: Text(text,
-                        style: textStyle,
-                        maxLines: isExpand ? expandMaxLine : 1,
-                      ),
-                    ),
-                  ),
-                ),
-                if(numberOfLines > 1) TextButton(
-                  style: TextButton.styleFrom(
-                    padding: EdgeInsets.zero,
-                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                    minimumSize: Size(50, 30),
-                  ),
-                  onPressed: (){
-                    isExpand = !isExpand;
-                    setState((){});
-                  },
-                  child: Text(btnTitle, style: expandTitleStyle,),
-                ),
-              ],
-            );
-          }
-        );
-      }
-    );
-
-  }
-
-  getUrlParams({Map<String, dynamic> map = const {}}) {
-    if (map.keys.isEmpty) {
-      return '';
-    }
-    var paramStr = '';
-    map.forEach((key, value) {
-      paramStr += '$key=$value&';
-    });
-    var result = paramStr.substring(0, paramStr.length - 1);
-    return result;
   }
 
 }

@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:tuple/tuple.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 
-class DataTypeDemo extends StatefulWidget {
 
-  const DataTypeDemo({
+class DefaultTabControllerDemo extends StatefulWidget {
+
+  const DefaultTabControllerDemo({
     Key? key, 
     this.title
   }) : super(key: key);
@@ -12,10 +13,10 @@ class DataTypeDemo extends StatefulWidget {
   final String? title;
 
   @override
-  _DataTypeDemoState createState() => _DataTypeDemoState();
+  _DefaultTabControllerDemoState createState() => _DefaultTabControllerDemoState();
 }
 
-class _DataTypeDemoState extends State<DataTypeDemo> with AutomaticKeepAliveClientMixin{
+class _DefaultTabControllerDemoState extends State<DefaultTabControllerDemo> with AutomaticKeepAliveClientMixin{
 
 
   var initialIndex = 0;

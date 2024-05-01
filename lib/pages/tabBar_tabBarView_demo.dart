@@ -618,6 +618,7 @@ var specials = <Tuple2<String, String>>[
   Tuple2(APPRouter.orderListTabPage, "orderListTabPage", ),
   Tuple2(APPRouter.apiCreatePage, "apiCreatePage", ),
   Tuple2(APPRouter.asyncDemo, "asyncDemo", ),
+  Tuple2(APPRouter.testDataTyeDemo, "testDataTyeDemo", ),
 
 
 ];
@@ -751,7 +752,7 @@ var forms = <Tuple2<String, String>>[
 ];
 
 var dataTypes = <Tuple2<String, String>>[
-  Tuple2(APPRouter.dataTypeDemo, "数据类型", ),
+  Tuple2(APPRouter.defaultTabControllerDemo, "数据类型", ),
   Tuple2(APPRouter.regExpDemo, "正则匹配", ),
   Tuple2(APPRouter.enumDemo, "枚举研究", ),
 
