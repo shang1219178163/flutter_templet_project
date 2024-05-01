@@ -50,6 +50,7 @@ import 'package:flutter_templet_project/pages/demo/NChoiceExpansionDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NTransformViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NTargetFollowerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PageLifecycleFuncTest.dart';
+import 'package:flutter_templet_project/pages/demo/QueueAlertDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ReflectDemo.dart';
 import 'package:flutter_templet_project/pages/demo/RegExpDemo.dart';
 import 'package:flutter_templet_project/pages/demo/RiverPodPageCreate.dart';
@@ -716,7 +717,7 @@ class APPRouter {
   static const getxControllerDemo = '/GetxControllerDemo';
   static const nTransformViewDemo = '/nTransformViewDemo';
   static const testDataTyeDemo = '/testDataTyeDemo';
-
+  static const queueAlertDemo = '/queueAlertDemo';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -1128,6 +1129,7 @@ class AppPage {
     GetPage(name: APPRouter.getxControllerDemo, page: () => GetxControllerDemo(),),
     GetPage(name: APPRouter.nTransformViewDemo, page: () => NTransformViewDemo(),),
     GetPage(name: APPRouter.testDataTyeDemo, page: () => TestDataTyeDemo(),),
+    GetPage(name: APPRouter.queueAlertDemo, page: () => QueueAlertDemo(),),
 
 
   ];
