@@ -536,7 +536,7 @@ var list = <Tuple2<String, String>>[
   Tuple2(APPRouter.textFieldTabDemo, "textFieldTabDemo", ),
   Tuple2(APPRouter.textPaintDemo, "textPaintDemo", ),
   Tuple2(APPRouter.segmentedPageViewDemo, "segmentedPageViewDemo", ),
-  Tuple2(APPRouter.nRefreshListViewDemo, "nRefreshListViewDemo", ),
+  Tuple2(APPRouter.nRefreshViewDemo, "nRefreshListViewDemo", ),
   Tuple2(APPRouter.nestedScrollViewDemoThree, "nestedScrollPageDemo", ),
   Tuple2(APPRouter.formDemo, "formDemoPage", ),
   Tuple2(APPRouter.choiceExpansionDemo, "choiceExpansionDemo", ),

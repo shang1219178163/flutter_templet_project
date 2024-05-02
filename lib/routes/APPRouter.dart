@@ -30,7 +30,6 @@ import 'package:flutter_templet_project/pages/demo/AppRouteAwareDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/AppWebViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AsyncDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ComponentMiddlePage.dart';
-import 'package:flutter_templet_project/pages/demo/DataTypeDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DefaultTabControllerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DevelopToolList.dart';
 import 'package:flutter_templet_project/pages/demo/DialogChoiceChipDemo.dart';
@@ -181,7 +180,7 @@ import 'package:flutter_templet_project/pages/demo/NExpandTextDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NFooterButtonBarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NIndexAvatarGroupDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NPageViewDemo.dart';
-import 'package:flutter_templet_project/pages/demo/NRefreshListViewDemo.dart';
+import 'package:flutter_templet_project/pages/demo/NRefreshViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NSectionHeaderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NSliverPersistentHeaderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NTabBarPageDemo.dart';
@@ -706,7 +705,7 @@ class APPRouter {
   static const textPaintDemo = '/textPaintDemo';
   static const segmentedPageViewDemo = '/segmentedPageViewDemo';
   static const nPinnedTabBarPageDemo = '/nPinnedTabBarPageDemo';
-  static const nRefreshListViewDemo = '/nRefreshListViewDemo';
+  static const nRefreshViewDemo = '/nRefreshViewDemo';
   static const nestedScrollViewDemoThree = '/nestedScrollViewDemoThree';
   static const apiCreatePage = '/apiCreatePage';
   static const formDemo = '/formDemo';
@@ -1117,7 +1116,7 @@ class AppPage {
     GetPage(name: APPRouter.textPaintDemo, page: () => TextPaintDemo(),),
     GetPage(name: APPRouter.segmentedPageViewDemo, page: () => SegmentedPageViewDemo(),),
     GetPage(name: APPRouter.nPinnedTabBarPageDemo, page: () => NPinnedTabBarPageDemo(),),
-    GetPage(name: APPRouter.nRefreshListViewDemo, page: () => NRefreshListViewDemo(),),
+    GetPage(name: APPRouter.nRefreshViewDemo, page: () => NRefreshViewDemo(),),
     GetPage(name: APPRouter.nestedScrollViewDemoThree, page: () => NestedScrollViewDemoThree(),),
     GetPage(name: APPRouter.apiCreatePage, page: () => ApiCreatePage(),),
     GetPage(name: APPRouter.formDemo, page: () => FormDemo(),),

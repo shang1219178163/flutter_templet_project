@@ -1,5 +1,5 @@
 //
-//  NRefreshListViewDemo.dart
+//  NRefreshViewDemo.dart
 //  flutter_templet_project
 //
 //  Created by shang on 2024/3/22 18:04.
@@ -12,7 +12,7 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/NNet/NRefreshListView.dart';
+import 'package:flutter_templet_project/basicWidget/NNet/NRefreshView.dart';
 import 'package:flutter_templet_project/basicWidget/n_network_image.dart';
 import 'package:flutter_templet_project/basicWidget/n_selected_cell.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
@@ -26,9 +26,9 @@ import 'package:flutter_templet_project/mixin/selectable_mixin.dart';
 import 'package:flutter_templet_project/model/user_model.dart';
 import 'package:get/get.dart';
 
-class NRefreshListViewDemo extends StatefulWidget {
+class NRefreshViewDemo extends StatefulWidget {
 
-  const NRefreshListViewDemo({
+  const NRefreshViewDemo({
     super.key,
     this.arguments,
   });
@@ -36,10 +36,10 @@ class NRefreshListViewDemo extends StatefulWidget {
   final Map<String, dynamic>? arguments;
 
   @override
-  State<NRefreshListViewDemo> createState() => _NRefreshListViewDemoState();
+  State<NRefreshViewDemo> createState() => _NRefreshViewDemoState();
 }
 
-class _NRefreshListViewDemoState extends State<NRefreshListViewDemo> {
+class _NRefreshViewDemoState extends State<NRefreshViewDemo> {
 
   bool get hideApp =>
       Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
@@ -48,7 +48,7 @@ class _NRefreshListViewDemoState extends State<NRefreshListViewDemo> {
   /// userId --- 用户id
   late Map<String, dynamic> arguments = widget.arguments ?? Get.arguments;
 
-  final refreshListViewController = NRefreshListViewController<UserModel>();
+  final refreshViewController = NRefreshViewController<UserModel>();
 
   var dataList = ValueNotifier(<UserModel>[]);
 
@@ -116,8 +116,8 @@ class _NRefreshListViewDemoState extends State<NRefreshListViewDemo> {
              valueListenable: isEditVN,
              builder: (context, isEdit, child){
 
-              return NRefreshListView<UserModel>(
-                controller: refreshListViewController,
+              return NRefreshView<UserModel>(
+                controller: refreshViewController,
                 pageSize: 10,
                 onRequest: (bool isRefresh, int page, int pageSize, last) async {
                   return requestList(isRefresh: isRefresh, pageNo: page, pageSize: pageSize);
@@ -198,11 +198,13 @@ class _NRefreshListViewDemoState extends State<NRefreshListViewDemo> {
   }) async {
     await Future.delayed(Duration(milliseconds: 1500));
 
-    final list = List.generate(pageSize, (index) {
+    final list = List.generate(pageSize, (i) {
+      final id = isRefresh ? i : i + refreshViewController.items.length;
+
       return UserModel(
         // id: IntExt.random(min: 1000, max: 9999),
-        id: "${index + 1000}" ,
-        name: "用户_$index",
+        id: "$id",
+        name: "用户_$id",
         // name: generateChars(),
       );
     });

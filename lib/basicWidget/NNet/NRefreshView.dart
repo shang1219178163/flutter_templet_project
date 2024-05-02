@@ -1,5 +1,5 @@
 //
-//  NRefreshListView.dart
+//  NRefreshView.dart
 //  flutter_templet_project
 //
 //  Created by shang on 2024/3/8 10:59.
@@ -103,8 +103,8 @@ typedef RequestListCallback<T> = Future<List<T>> Function(
 
 /// 刷新列表
 /// 刷新列表组件化
-class NRefreshListView<T> extends StatefulWidget {
-  const NRefreshListView({
+class NRefreshView<T> extends StatefulWidget {
+  const NRefreshView({
     super.key,
     this.controller,
     this.child,
@@ -122,7 +122,7 @@ class NRefreshListView<T> extends StatefulWidget {
     this.tag,
   });
   /// 控制器
-  final NRefreshListViewController<T>? controller;
+  final NRefreshViewController<T>? controller;
 
   /// 子视图(为空 默认 带刷新组件的 ListView)
   final Widget? child;
@@ -162,10 +162,10 @@ class NRefreshListView<T> extends StatefulWidget {
   final String? tag;
 
   @override
-  NRefreshListViewState<T> createState() => NRefreshListViewState<T>();
+  NRefreshViewState<T> createState() => NRefreshViewState<T>();
 }
 
-class NRefreshListViewState<T> extends State<NRefreshListView<T>> with AutomaticKeepAliveClientMixin {
+class NRefreshViewState<T> extends State<NRefreshView<T>> with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
 
@@ -209,7 +209,7 @@ class NRefreshListViewState<T> extends State<NRefreshListView<T>> with Automatic
   }
 
   @override
-  void didUpdateWidget(covariant NRefreshListView<T> oldWidget) {
+  void didUpdateWidget(covariant NRefreshView<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.controller != oldWidget.controller ||
         widget.placeholder != oldWidget.placeholder ||
@@ -336,9 +336,9 @@ class NRefreshListViewState<T> extends State<NRefreshListView<T>> with Automatic
 }
 
 /// NRefreshListView 组件控制器,将 NRefreshListViewState 的私有属性或者方法暴漏出去
-class NRefreshListViewController<E> {
+class NRefreshViewController<E> {
 
-  NRefreshListViewState<E>? _anchor;
+  NRefreshViewState<E>? _anchor;
 
   List<E> get items {
     assert(_anchor != null);
@@ -351,11 +351,11 @@ class NRefreshListViewController<E> {
   }
 
 
-  void _attach(NRefreshListViewState<E> anchor) {
+  void _attach(NRefreshViewState<E> anchor) {
     _anchor = anchor;
   }
 
-  void _detach(NRefreshListViewState<E> anchor) {
+  void _detach(NRefreshViewState<E> anchor) {
     if (_anchor == anchor) {
       _anchor = null;
     }
