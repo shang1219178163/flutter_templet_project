@@ -10,20 +10,16 @@
 // import 'dart:ui' as ui;
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_templet_project/extension/ddlog.dart';
 
 
 mixin KeyboardChangeMixin<T extends StatefulWidget> on State<T>, WidgetsBindingObserver {
 
-  bool _isVisible = false;
+  var _isVisible = false;
 
   double get _bottom {
     final result = MediaQuery.of(context).viewInsets.bottom;
     return result;
-    // return WidgetsBinding.instance?.window.viewInsets.bottom ?? 0;
-    // return EdgeInsets.fromWindowPadding(
-    //   WidgetsBinding.instance?.window.viewInsets ?? ui.WindowPadding.zero,
-    //   WidgetsBinding.instance?.window.devicePixelRatio ?? 0,
-    // ).bottom;
   }
 
   @override
@@ -43,14 +39,20 @@ mixin KeyboardChangeMixin<T extends StatefulWidget> on State<T>, WidgetsBindingO
   @override
   void didChangeMetrics() {
     super.didChangeMetrics();
-    if (!mounted) return;
+    if (!mounted) {
+      return;
+    }
 
     final temp = _bottom > 0;
-    if (_isVisible == temp) return;
+    if (_isVisible == temp) {
+      return;
+    }
     _isVisible = temp;
     onKeyboardChanged(_isVisible);
   }
 
-  void onKeyboardChanged(bool visible);
+  void onKeyboardChanged(bool visible) {
+    throw UnimplementedError("❌: $this 未实现 onKeyboardChanged");
+  }
 
 }
