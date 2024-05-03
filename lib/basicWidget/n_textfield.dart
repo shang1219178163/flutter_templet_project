@@ -41,10 +41,12 @@ class NTextField extends StatefulWidget {
     this.textAlign = TextAlign.left,
     this.readOnly = false,
     this.hintText = "请输入",
+    this.hintStyle = const TextStyle(fontSize: 16, color: Color(0xff737373)),
     this.minLines = 1,
     this.maxLines = 1,
     this.keyboardType,
     this.textInputAction = TextInputAction.done,
+    this.autofocus = false,
     this.obscureText = false,
     this.contentPadding,
     this.fillColor = bgColor,
@@ -81,7 +83,8 @@ class NTextField extends StatefulWidget {
 
   /// 提示语
   final String? hintText;
-
+  
+  final TextStyle? hintStyle;
   /// 最小行数
   final int? minLines;
 
@@ -93,6 +96,7 @@ class NTextField extends StatefulWidget {
 
   final TextInputAction? textInputAction;
 
+  final bool autofocus;
   /// 内容边距
   final EdgeInsetsGeometry? contentPadding;
 
@@ -178,7 +182,7 @@ class _NTextFieldState extends State<NTextField> {
       obscureText: widget.obscureText != null ? widget.obscureText! : isCloseEye,
       keyboardType: widget.keyboardType,
       textInputAction: widget.textInputAction,
-      // autofocus: !widget.obscureText,
+      autofocus: widget.autofocus,
       style: widget.style ?? const TextStyle(
         fontSize: 14,
         fontWeight: FontWeight.w400,
@@ -195,8 +199,8 @@ class _NTextFieldState extends State<NTextField> {
         enabledBorder: widget.readOnly ? null : widget.enabledBorder ?? buildEnabledBorder(radus: widget.radius),
         focusedBorder: widget.readOnly ? null : widget.focusedBorder ?? buildFocusedBorder(radus: widget.radius),
         hintText: widget.hintText,
+        hintStyle: widget.hintStyle,
         isCollapsed: widget.isCollapsed ?? false,
-        hintStyle: TextStyle(fontSize: 16, color: fontColor[10]),
         prefixIcon: widget.prefixIconBuilder == null
             ? null
             : ValueListenableBuilder<bool>(
