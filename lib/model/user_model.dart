@@ -6,10 +6,9 @@
 //  Copyright © 5/19/21 shang. All rights reserved.
 //
 
-
 import 'package:flutter_templet_project/mixin/selectable_mixin.dart';
 
-class UserModel with SelectableMixin{
+class UserModel with SelectableMixin {
   UserModel({
     this.id,
     this.name,
@@ -36,11 +35,11 @@ class UserModel with SelectableMixin{
     nickName = json['nickName'];
     email = json['email'];
     address =
-    json['address'] != null ? Address.fromJson(json['address']) : null;
+        json['address'] != null ? Address.fromJson(json['address']) : null;
     phone = json['phone'];
     website = json['website'];
     company =
-    json['company'] != null ? Company.fromJson(json['company']) : null;
+        json['company'] != null ? Company.fromJson(json['company']) : null;
 
     isSelected = json['isSelected'] ?? false;
   }
@@ -64,6 +63,12 @@ class UserModel with SelectableMixin{
     data['isSelected'] = isSelected;
     return data;
   }
+
+  @override
+  String get selectableId => id.toString();
+
+  @override
+  String get selectableName => name ?? "";
 }
 
 class Address {

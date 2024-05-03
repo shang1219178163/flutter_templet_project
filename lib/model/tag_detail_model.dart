@@ -6,7 +6,6 @@
 //  Copyright © 2024/4/9 shang. All rights reserved.
 //
 
-
 import 'package:flutter_templet_project/mixin/selectable_mixin.dart';
 
 class TagsRootModel {
@@ -65,7 +64,7 @@ class TagsRootModel {
   }
 }
 
-class TagDetailModel with SelectableMixin{
+class TagDetailModel with SelectableMixin {
   TagDetailModel({
     this.id,
     this.createTime,
@@ -79,7 +78,6 @@ class TagDetailModel with SelectableMixin{
   int? updateTime;
   String? name;
   String? color;
-
 
   // @override
   // bool isSelected = true;
@@ -106,4 +104,10 @@ class TagDetailModel with SelectableMixin{
     data['isSelected'] = isSelected;
     return data;
   }
+
+  @override
+  String get selectableId => id.toString();
+
+  @override
+  String get selectableName => name ?? "";
 }

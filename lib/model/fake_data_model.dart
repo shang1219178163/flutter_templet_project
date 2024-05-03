@@ -1,10 +1,6 @@
-
-
-
-
 import 'package:flutter_templet_project/mixin/selectable_mixin.dart';
 
-class FakeDataModel with SelectableMixin{
+class FakeDataModel with SelectableMixin {
   String? id;
   String? name;
   String? code;
@@ -38,4 +34,9 @@ class FakeDataModel with SelectableMixin{
     return data;
   }
 
+  @override
+  String get selectableId => code ?? "";
+
+  @override
+  String get selectableName => name ?? "";
 }
