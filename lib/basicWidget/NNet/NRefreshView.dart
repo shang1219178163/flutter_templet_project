@@ -6,19 +6,21 @@
 //  Copyright © 2024/3/8 shang. All rights reserved.
 //
 
-
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_placeholder.dart';
 import 'package:flutter_templet_project/basicWidget/n_skeleton_screen.dart';
-
 
 typedef ValueIndexedWidgetBuilder<T> = Widget Function(
     BuildContext context, int index, T data);
 
 /// 请求列表回调
 typedef RequestListCallback<T> = Future<List<T>> Function(
-    bool isRefresh, int pageNo, int pageSize, T? last,);
+  bool isRefresh,
+  int pageNo,
+  int pageSize,
+  T? last,
+);
 
 /// 使用示例:
 // class SchemeListPage extends StatefulWidget {
@@ -100,7 +102,6 @@ typedef RequestListCallback<T> = Future<List<T>> Function(
 //   }
 // }
 
-
 /// 刷新列表
 /// 刷新列表组件化
 class NRefreshView<T> extends StatefulWidget {
@@ -116,11 +117,14 @@ class NRefreshView<T> extends StatefulWidget {
     this.disableOnLoad = false,
     this.needRemovePadding = false,
     required this.itemBuilder,
+    this.headerBuilder,
+    this.footerBuilder,
     this.separatorBuilder,
     this.cachedChild,
     this.refreshController,
     this.tag,
   });
+
   /// 控制器
   final NRefreshViewController<T>? controller;
 
@@ -156,6 +160,12 @@ class NRefreshView<T> extends StatefulWidget {
   /// ListView 的 separatorBuilder
   final IndexedWidgetBuilder? separatorBuilder;
 
+  /// 列表表头
+  final Widget Function(int count)? headerBuilder;
+
+  /// 列表表尾
+  final Widget Function(int count)? footerBuilder;
+
   /// 刷新控制器
   final EasyRefreshController? refreshController;
 
@@ -165,7 +175,8 @@ class NRefreshView<T> extends StatefulWidget {
   NRefreshViewState<T> createState() => NRefreshViewState<T>();
 }
 
-class NRefreshViewState<T> extends State<NRefreshView<T>> with AutomaticKeepAliveClientMixin {
+class NRefreshViewState<T> extends State<NRefreshView<T>>
+    with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
 
@@ -195,17 +206,8 @@ class NRefreshViewState<T> extends State<NRefreshView<T>> with AutomaticKeepAliv
   @override
   void initState() {
     super.initState();
-
     widget.controller?._attach(this);
-
-    widget.onRequest(true, pageNo, widget.pageSize, null).then((value) {
-      items.value = value;
-      isFirstLoad = false;
-
-      if (mounted) {
-        setState(() {});
-      }
-    });
+    initData();
   }
 
   @override
@@ -217,9 +219,16 @@ class NRefreshViewState<T> extends State<NRefreshView<T>> with AutomaticKeepAliv
         widget.itemBuilder != oldWidget.itemBuilder ||
         widget.separatorBuilder != oldWidget.separatorBuilder ||
         widget.cachedChild != oldWidget.cachedChild ||
-        widget.tag != widget.tag
-    ) {
+        widget.tag != widget.tag) {
       onRefresh();
+    }
+  }
+
+  Future<void> initData() async {
+    await onRefresh();
+    isFirstLoad = false;
+    if (mounted) {
+      setState(() {});
     }
   }
 
@@ -233,15 +242,15 @@ class NRefreshViewState<T> extends State<NRefreshView<T>> with AutomaticKeepAliv
     return buildBody();
   }
 
-  buildBody() {
+  Widget buildBody() {
     return ValueListenableBuilder<List<T>>(
       valueListenable: items,
       builder: (context, list, child) {
-
         if (list.isEmpty) {
-          return widget.placeholder ?? NPlaceholder(
-            onTap: onRefresh,
-          );
+          return widget.placeholder ??
+              NPlaceholder(
+                onTap: onRefresh,
+              );
         }
 
         return buildRefresh(
@@ -289,10 +298,7 @@ class NRefreshViewState<T> extends State<NRefreshView<T>> with AutomaticKeepAliv
 
     pageNo += 1;
 
-    final models = await widget.onRequest(
-        false,
-        pageNo,
-        widget.pageSize,
+    final models = await widget.onRequest(false, pageNo, widget.pageSize,
         items.value.isNotEmpty ? items.value.last : null);
     items.value = [...items.value, ...models];
 
@@ -307,15 +313,36 @@ class NRefreshViewState<T> extends State<NRefreshView<T>> with AutomaticKeepAliv
     bool needRemovePadding = false,
     required List<T> items,
   }) {
+    final itemCount = items.length + 2;
+
     Widget child = Scrollbar(
       controller: controller,
       child: ListView.separated(
         controller: controller,
-        itemCount: items.length,
-        itemBuilder: (context, index) =>
-            widget.itemBuilder(context, index, items[index],),
+        itemCount: itemCount,
+        // itemBuilder: (context, index) => widget.itemBuilder(
+        //   context,
+        //   index,
+        //   items[index],
+        // ),
+        itemBuilder: (context, index) {
+          if (index == 0) {
+            return widget.headerBuilder?.call(items.length) ?? const SizedBox();
+          }
+
+          if (index == itemCount - 1) {
+            return widget.footerBuilder?.call(items.length) ?? const SizedBox();
+          }
+
+          final i = index - 1;
+          return widget.itemBuilder(
+            context,
+            i,
+            items[i],
+          );
+        },
         separatorBuilder: widget.separatorBuilder ??
-                (context, index) {
+            (context, index) {
               return const Divider(
                 color: Color(0xffe4e4e4),
                 height: 1,
@@ -337,7 +364,6 @@ class NRefreshViewState<T> extends State<NRefreshView<T>> with AutomaticKeepAliv
 
 /// NRefreshListView 组件控制器,将 NRefreshListViewState 的私有属性或者方法暴漏出去
 class NRefreshViewController<E> {
-
   NRefreshViewState<E>? _anchor;
 
   List<E> get items {
@@ -349,7 +375,6 @@ class NRefreshViewController<E> {
     assert(_anchor != null);
     _anchor!.onRefresh();
   }
-
 
   void _attach(NRefreshViewState<E> anchor) {
     _anchor = anchor;
