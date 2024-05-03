@@ -2,6 +2,7 @@
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_templet_project/model/tag_detail_model.dart';
 import 'package:flutter_templet_project/network/RequestConfig.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -30,6 +31,9 @@ const String CACHE_USER_LOGIN_PWD = "USER_LOGIN_PWD";
 /// 用户信息 key
 const String CACHE_USER_ID = "CACHE_USER_ID";
 
+const String CACHE_TAG_ROOT_MODEL = "CACHE_TAG_ROOT_MODEL";
+
+
 
 class CacheService {
 
@@ -49,6 +53,9 @@ class CacheService {
     prefs ??= await SharedPreferences.getInstance();
     // debugPrint("init prefs: $prefs");
   }
+
+  /// memory cache, 内存缓存
+  final _memoryMap = <String, dynamic>{};
 
   /// 清除数据
   Future<bool>? remove(String key) {
@@ -199,6 +206,25 @@ class CacheService {
       debugPrint("getMap${e.toString()}");
     }
     return map;
+  }
+
+  /// 标签
+  set tagsRootModel(TagsRootModel? model) {
+    if (model == null) {
+      return;
+    }
+    _memoryMap[CACHE_TAG_ROOT_MODEL] = model.toJson();
+    CacheService().setMap(CACHE_TAG_ROOT_MODEL, model.toJson());
+  }
+
+  TagsRootModel? get tagsRootModel {
+    final val = _memoryMap[CACHE_TAG_ROOT_MODEL];
+    final json = val ?? CacheService().getMap(CACHE_TAG_ROOT_MODEL);
+    if (json == null) {
+      return null;
+    }
+    final model = TagsRootModel.fromJson(json);
+    return model;
   }
 }
 
