@@ -6,15 +6,13 @@
 //  Copyright © 2024/1/18 shang. All rights reserved.
 //
 
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 
 import 'package:get/get.dart';
 
 /// app 前后台生命周期函数监听
-class AppLifecycleObserver extends WidgetsBindingObserver{
-
+class AppLifecycleObserver extends WidgetsBindingObserver {
   AppLifecycleObserver({
     required this.onResume,
     required this.onInactive,
@@ -28,11 +26,11 @@ class AppLifecycleObserver extends WidgetsBindingObserver{
 
   final ValueChanged<AppLifecycleState>? onStateChange;
 
-  final AsyncCallback onResume;
-  final AsyncCallback onInactive;
-  final AsyncCallback onPause;
-  final AsyncCallback onDetach;
-  final AsyncCallback onHidden;
+  final VoidCallback onResume;
+  final VoidCallback onInactive;
+  final VoidCallback onPause;
+  final VoidCallback onDetach;
+  final VoidCallback onHidden;
 
   // @mustCallSuper
   // void dispose() {
@@ -42,7 +40,11 @@ class AppLifecycleObserver extends WidgetsBindingObserver{
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     // DDLog('${Get.currentRoute} APP状态监听：$state, ${data ?? ""}');
-    onStateChange?.call(state);
+    if (onStateChange != null) {
+      onStateChange?.call(state);
+      return;
+    }
+
     switch (state) {
       case AppLifecycleState.resumed:
         onResume();
@@ -64,7 +66,7 @@ class AppLifecycleObserver extends WidgetsBindingObserver{
 }
 
 /// app 前后台生命周期函数混入封装
-mixin AppLifecycleObserverMixin<T extends StatefulWidget> on State<T>{
+mixin AppLifecycleObserverMixin<T extends StatefulWidget> on State<T> {
   late final _lifecycleObserver = AppLifecycleObserver(
     onResume: onResume,
     onInactive: onInactive,
@@ -85,23 +87,23 @@ mixin AppLifecycleObserverMixin<T extends StatefulWidget> on State<T>{
     super.dispose();
   }
 
-  Future<void> onResume() async {
+  void onResume() {
     throw UnimplementedError("❌: $this 未实现 onResume");
   }
 
-  Future<void> onInactive() async {
+  void onInactive() {
     // throw UnimplementedError("❌: $this 未实现 onInactive");
   }
 
-  Future<void> onPause() async {
+  void onPause() {
     throw UnimplementedError("❌: $this 未实现 onPause");
   }
 
-  Future<void> onDetach() async {
+  void onDetach() {
     throw UnimplementedError("❌: $this 未实现 onDetached");
   }
 
-  Future<void> onHidden() async {
+  void onHidden() {
     // throw UnimplementedError("❌: $this 未实现 onHidden");
   }
 }

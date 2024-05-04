@@ -6,8 +6,6 @@
 //  Copyright © 3/13/23 shang. All rights reserved.
 //
 
-
-
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -50,7 +48,6 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
 import 'package:tuple/tuple.dart';
 
-
 // void main() {
 //   runZonedGuarded(() async {
 //     WidgetsFlutterBinding.ensureInitialized();
@@ -69,6 +66,7 @@ import 'package:tuple/tuple.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   /// That's all done.You can use Charles or other proxy tools now.
   // final httpProxy = await HttpProxy.createHttpProxy();
   // HttpOverrides.global = httpProxy;
@@ -92,13 +90,20 @@ Future<void> main() async {
         // ChangeNotifierProvider.value(value: ColorFilteredProvider()),
         ChangeNotifierProvider(create: (context) => ColorFilteredProvider()),
 
-        ChangeNotifierProvider(create: (context) => DBGenericProvider<DBTodo>()),
-        ChangeNotifierProvider(create: (context) => DBGenericProvider<DBStudent>()),
-        ChangeNotifierProvider(create: (context) => DBGenericProvider<DBOrder>()),
+        ChangeNotifierProvider(
+            create: (context) => DBGenericProvider<DBTodo>()),
+        ChangeNotifierProvider(
+            create: (context) => DBGenericProvider<DBStudent>()),
+        ChangeNotifierProvider(
+            create: (context) => DBGenericProvider<DBOrder>()),
 
         ChangeNotifierProvider(create: (context) => CartModel()),
-        ChangeNotifierProvider<Person>(create: (ctx) => Person(),),
-        ChangeNotifierProvider<Foo>(create: (ctx) => Foo(),),
+        ChangeNotifierProvider<Person>(
+          create: (ctx) => Person(),
+        ),
+        ChangeNotifierProvider<Foo>(
+          create: (ctx) => Foo(),
+        ),
         Provider(create: (context) => CounterBloc()),
         ProxyProvider<Person, EatModel>(
           update: (ctx, person, eatModel) => EatModel(name: person.name),
@@ -108,16 +113,17 @@ Future<void> main() async {
     ),
   );
 
-  var systemUiOverlayStyle = SystemUiOverlayStyle(statusBarColor: Colors.transparent);
+  var systemUiOverlayStyle =
+      SystemUiOverlayStyle(statusBarColor: Colors.transparent);
   SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
 }
 
-void setCustomErrorPage(){
+void setCustomErrorPage() {
   // FlutterError.onError = (details) {
   //   FlutterError.presentError(details);
   // };
 
-  ErrorWidget.builder = (FlutterErrorDetails details){
+  ErrorWidget.builder = (FlutterErrorDetails details) {
     debugPrint("flutterErrorDetails:${details.toString()}");
     return ErrorCustomWidget(details: details);
   };
@@ -133,6 +139,7 @@ Future<void> initServices() async {
 Future<void> initDebugInfo() async {
   ///向Timeline事件中添加每个widget的build信息
   debugProfileBuildsEnabled = true;
+
   ///向timeline事件中添加每个renderObject的paint信息
   // debugProfilePaintsEnabled = true;
   // ///每个layer会出现一个边框,帮助区分layer层级
@@ -151,7 +158,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final app = GetMaterialApp(
-      popGesture: true,//swipe back
+      popGesture: true, //swipe back
       navigatorKey: AppUtil.navigatorKey,
       title: 'Flutter Templet',
       debugShowCheckedModeBanner: false,
@@ -175,31 +182,30 @@ class MyApp extends StatelessWidget {
       getPages: AppPage.routes,
       unknownRoute: AppPage.unknownRoute,
       navigatorObservers: [AppRouteObserver().routeObserver],
-      routingCallback: AppRouteObserver().routingCallback ?? (routing) {
-        // if (routing != null) {
-        //   ddlog([routing.previous, routing.current]);
-        // }
-      },
+      routingCallback: AppRouteObserver().routingCallback ??
+          (routing) {
+            // if (routing != null) {
+            //   ddlog([routing.previous, routing.current]);
+            // }
+          },
       // routes: {
-    //     "/": (context) => MyHomePage(),
-    //     "/TwoPage": (context) => TwoPage(),
-    //   },
+      //     "/": (context) => MyHomePage(),
+      //     "/TwoPage": (context) => TwoPage(),
+      //   },
       builder: EasyLoading.init(),
     );
 
     return ScreenUtilInit(
-      useInheritedMediaQuery: true,
-      designSize: const Size(375, 812),
-      minTextAdapt: true,
-      splitScreenMode: true,
-      builder: (context, child) {
-
-        return TooltipVisibility(
-          visible: false,// 关闭返回按钮长按 tooltip
-          child: app,
-        );
-      }
-    );
+        useInheritedMediaQuery: true,
+        designSize: const Size(375, 812),
+        minTextAdapt: true,
+        splitScreenMode: true,
+        builder: (context, child) {
+          return TooltipVisibility(
+            visible: false, // 关闭返回按钮长按 tooltip
+            child: app,
+          );
+        });
     //全局置灰
     // return Consumer<ColorFilteredProvider>(
     //   builder: (BuildContext context, provider, Widget? child) {
@@ -215,7 +221,7 @@ class MyApp extends StatelessWidget {
 final kScaffoldKey = GlobalKey<ScaffoldState>();
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({ Key? key, this.title}) : super(key: key);
+  const MyHomePage({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -223,30 +229,48 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver, AppLifecycleObserverMixin {
+class _MyHomePageState extends State<MyHomePage>
+    with WidgetsBindingObserver, AppLifecycleObserverMixin {
   int currentIndex = 0;
 
   final unreadVN = ValueNotifier(0);
 
   final List<Tuple2<Tuple2<String, Widget>, Widget>> items = [
     Tuple2(
-      Tuple2("首页", Icon(Icons.home),),
+      Tuple2(
+        "首页",
+        Icon(Icons.home),
+      ),
       TabBarTabBarViewDemo(),
     ),
     Tuple2(
-      Tuple2("按钮", Icon(Icons.merge_type_sharp),),
+      Tuple2(
+        "按钮",
+        Icon(Icons.merge_type_sharp),
+      ),
       SecondPage(),
     ),
     Tuple2(
-      Tuple2("消息", Icon(Icons.message),),
-      TabBarViewDemo(title: '',),
+      Tuple2(
+        "消息",
+        Icon(Icons.message),
+      ),
+      TabBarViewDemo(
+        title: '',
+      ),
     ),
     Tuple2(
-      Tuple2("购物车", Icon(Icons.shopping_cart),),
+      Tuple2(
+        "购物车",
+        Icon(Icons.shopping_cart),
+      ),
       ThirdPage(),
     ),
     Tuple2(
-      Tuple2("个人中心", Icon(Icons.person),),
+      Tuple2(
+        "个人中心",
+        Icon(Icons.person),
+      ),
       APPUserCenterPage(),
     ),
   ];
@@ -284,7 +308,7 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver, Ap
     //   },
     // );
 
-    getPackageInfo().then((value){
+    getPackageInfo().then((value) {
       CacheService().setString(CACHE_APP_NAME, value.appName);
       CacheService().setString(CACHE_APP_PACKAGE_NAME, value.packageName);
       CacheService().setString(CACHE_APP_VERSION, value.version);
@@ -294,37 +318,30 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver, Ap
     super.initState();
   }
 
-
   @override
-  Future<void> onResume() async {
-    // TODO: implement onResume
+  void onResume() {
     ddlog("$widget onResume");
   }
 
   @override
-  Future<void> onInactive() async {
-    // TODO: implement onInactive
+  void onInactive() {
     ddlog("$widget onInactive");
   }
 
   @override
-  Future<void> onPause() async {
-    // TODO: implement onPause
+  void onPause() {
     ddlog("$widget onPause");
   }
 
   @override
-  Future<void> onDetach() async {
-    // TODO: implement onDetach
+  void onDetach() {
     ddlog("$widget onDetach");
   }
 
   @override
-  Future<void> onHidden() async {
-    // TODO: implement onHidden
+  void onHidden() {
     ddlog("$widget onHidden");
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -335,8 +352,8 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver, Ap
       // appBar: buildAppBar(),
       bottomNavigationBar: Theme(
         data: Theme.of(context).copyWith(
-          // canvasColor: Colors.red,
-        ),
+            // canvasColor: Colors.red,
+            ),
         child: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           currentIndex: currentIndex,
@@ -344,22 +361,24 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver, Ap
           unselectedFontSize: 10.sp, // 未选中字体大小
           selectedItemColor: context.primaryColor,
           onTap: (index) => onTapBar(index),
-          items: items.map((e) => BottomNavigationBarItem(
-            tooltip: '', // 去除长按文字提示
-            label: e.item1.item1,
-            icon: ValueListenableBuilder<int>(
-              valueListenable: unreadVN,
-              builder: (context, badge, child){
-
-                return buildIcon(
-                  title: e.item1.item1,
-                  normalIcon: e.item1.item2,
-                  activeIcon: e.item1.item2,
-                  badge: badge,
-                );
-              }
-            ),
-          ),).toList(),
+          items: items
+              .map(
+                (e) => BottomNavigationBarItem(
+                  tooltip: '', // 去除长按文字提示
+                  label: e.item1.item1,
+                  icon: ValueListenableBuilder<int>(
+                      valueListenable: unreadVN,
+                      builder: (context, badge, child) {
+                        return buildIcon(
+                          title: e.item1.item1,
+                          normalIcon: e.item1.item2,
+                          activeIcon: e.item1.item2,
+                          badge: badge,
+                        );
+                      }),
+                ),
+              )
+              .toList(),
         ),
       ),
       body: items.map((e) => e.item2).toList()[currentIndex],
@@ -381,15 +400,13 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver, Ap
   }
 
   ///创建导航栏
-  AppBar buildAppBar(){
+  AppBar buildAppBar() {
     return AppBar(
       title: Text(widget.title ?? "标题"),
       leading: Icon(Icons.arrow_back),
       actions: [
         PopupMenuButtonExt.fromEntryJson(
-            json: {"aa": "0",
-              "bb": "1",
-              "cc": "2"},
+            json: {"aa": "0", "bb": "1", "cc": "2"},
             checkedString: "aa",
             callback: (value) {
               setState(() => ddlog(value));
@@ -410,35 +427,36 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver, Ap
     required Widget activeIcon,
     int badge = 0,
   }) {
-
     if (badge > 99) {
       badge = 99;
     }
 
-    final badgeChild = title != "消息" || badge == 0 ? SizedBox() : Container(
-      padding: EdgeInsets.symmetric(horizontal: 3, vertical: 2),
-      decoration: const ShapeDecoration(
-        color: Colors.red,
-        shape: StadiumBorder(),
-      ),
-      child: Text("$badge",
-        style: TextStyle(
-          fontSize: 10.sp,
-          color: Colors.white,
-        ),),
-    );
+    final badgeChild = title != "消息" || badge == 0
+        ? SizedBox()
+        : Container(
+            padding: EdgeInsets.symmetric(horizontal: 3, vertical: 2),
+            decoration: const ShapeDecoration(
+              color: Colors.red,
+              shape: StadiumBorder(),
+            ),
+            child: Text(
+              "$badge",
+              style: TextStyle(
+                fontSize: 10.sp,
+                color: Colors.white,
+              ),
+            ),
+          );
 
-    final icon = Stack(
-        clipBehavior: Clip.none,
-        children: <Widget>[
-          normalIcon,
-          Positioned(  // draw a red marble
-            top: -5,
-            right: -5,
-            child: badgeChild,
-          ),
-        ]
-    );
+    final icon = Stack(clipBehavior: Clip.none, children: <Widget>[
+      normalIcon,
+      Positioned(
+        // draw a red marble
+        top: -5,
+        right: -5,
+        child: badgeChild,
+      ),
+    ]);
     return icon;
   }
 
@@ -465,58 +483,57 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver, Ap
   /// 上拉刷新,下拉加载全局配置
   configRefresh() {
     EasyRefresh.defaultHeaderBuilder = () => ClassicHeader(
-      triggerOffset: 50,
-      showMessage: false,
-      dragText: "下拉刷新",
-      armedText: "释放刷新",
-      readyText: "正在刷新...",
-      processingText: "正在刷新...",
-      processedText: "刷新完成",
-      noMoreText: "我可是有底线的 ~",
-      failedText: "刷新失败",
-      messageText: '更新时间 %T',
-      spacing: 0,
-      textBuilder: (context, state, text) {
-        return const SizedBox();
-      },
-      messageBuilder: (context, state, text, dateTime) {
-        return const SizedBox();
-      },
-      pullIconBuilder: (context, state, animation) {
-        return const SizedBox(
-          child: CupertinoActivityIndicator(radius: 10),
+          triggerOffset: 50,
+          showMessage: false,
+          dragText: "下拉刷新",
+          armedText: "释放刷新",
+          readyText: "正在刷新...",
+          processingText: "正在刷新...",
+          processedText: "刷新完成",
+          noMoreText: "我可是有底线的 ~",
+          failedText: "刷新失败",
+          messageText: '更新时间 %T',
+          spacing: 0,
+          textBuilder: (context, state, text) {
+            return const SizedBox();
+          },
+          messageBuilder: (context, state, text, dateTime) {
+            return const SizedBox();
+          },
+          pullIconBuilder: (context, state, animation) {
+            return const SizedBox(
+              child: CupertinoActivityIndicator(radius: 10),
+            );
+          },
+          infiniteOffset: null,
         );
-      },
-      infiniteOffset: null,
-    );
 
     EasyRefresh.defaultFooterBuilder = () => ClassicFooter(
-      triggerOffset: 50,
-      showMessage: false,
-      dragText: "上拉加载",
-      armedText: "释放加载",
-      readyText: "加载中...",
-      processingText: "加载中...",
-      processedText: "加载完成",
-      noMoreText: "我可是有底线的 ~",
-      failedText: "加载失败",
-      // noMoreIcon: SizedBox(),
-      spacing: 0,
-      textBuilder: (context, state, text) {
-        return const SizedBox();
-      },
-      messageBuilder: (context, state, text, dateTime) {
-        return const SizedBox();
-      },
-      pullIconBuilder: (context, state, animation) {
-        return const SizedBox(
-          child: CupertinoActivityIndicator(radius: 10),
+          triggerOffset: 50,
+          showMessage: false,
+          dragText: "上拉加载",
+          armedText: "释放加载",
+          readyText: "加载中...",
+          processingText: "加载中...",
+          processedText: "加载完成",
+          noMoreText: "我可是有底线的 ~",
+          failedText: "加载失败",
+          // noMoreIcon: SizedBox(),
+          spacing: 0,
+          textBuilder: (context, state, text) {
+            return const SizedBox();
+          },
+          messageBuilder: (context, state, text, dateTime) {
+            return const SizedBox();
+          },
+          pullIconBuilder: (context, state, animation) {
+            return const SizedBox(
+              child: CupertinoActivityIndicator(radius: 10),
+            );
+          },
+          infiniteOffset: null,
         );
-      },
-      infiniteOffset: null,
-    );
   }
-
 
   test() {
     var a = 85.99999;
@@ -539,14 +556,21 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver, Ap
 
     return Container(
       padding: EdgeInsets.only(top: 100, left: 15, bottom: 100, right: 15),
-      child: Column( //Column控件用来垂直摆放子Widget
-        // crossAxisAlignment: CrossAxisAlignment.start, //水平方向距左对⻬
+      child: Column(
+          //Column控件用来垂直摆放子Widget
+          // crossAxisAlignment: CrossAxisAlignment.start, //水平方向距左对⻬
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Text(title, style: TextStyle(fontSize: 20),),
+            Text(
+              title,
+              style: TextStyle(fontSize: 20),
+            ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal:15),
-              child: Text(message, style: TextStyle(fontSize: 14),),
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              child: Text(
+                message,
+                style: TextStyle(fontSize: 14),
+              ),
             ),
             Row(
               children: [
@@ -554,21 +578,23 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver, Ap
                   onPressed: () {
                     ddlog("以后再说");
                   },
-                  child: Text("以后再说", style: TextStyle(fontSize: 14),),
+                  child: Text(
+                    "以后再说",
+                    style: TextStyle(fontSize: 14),
+                  ),
                 ),
                 TextButton(
                   onPressed: () {
                     ddlog("立即升级");
                   },
-                  child: Text("立即升级",
+                  child: Text(
+                    "立即升级",
                     style: TextStyle(fontSize: 14, color: Colors.white),
                   ),
                 ),
               ],
             ),
-          ]
-      ),
+          ]),
     );
   }
 }
-
