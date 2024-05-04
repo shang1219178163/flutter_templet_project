@@ -1,13 +1,9 @@
-
-
-
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_templet_project/network/RequestConfig.dart';
 import 'package:flutter_templet_project/network/RequestError.dart';
 import 'package:flutter_templet_project/network/RequestManager.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
-
 
 enum HttpMethod {
   GET,
@@ -30,7 +26,6 @@ abstract class BaseRequestAPI {
   /// get/post...
   HttpMethod get requestType => HttpMethod.GET;
 
-
   Map<String, dynamic> get requestParams => {};
 
   Map<String, dynamic>? get requestHeaders {
@@ -45,7 +40,8 @@ abstract class BaseRequestAPI {
   /// url 验证
   (bool, String) get validateURL {
     if (requestType == HttpMethod.GET) {
-      final isError = requestURI.endsWith("/") || requestURI.endsWith("undefined");
+      final isError =
+          requestURI.endsWith("/") || requestURI.endsWith("undefined");
       if (isError) {
         return (false, RequestError.urlError.desc);
       }
@@ -125,12 +121,12 @@ abstract class BaseRequestAPI {
     BaseRequestAPI api = this;
     final response = await api.fetch();
     if (response.isEmpty) {
-      return (isSuccess: false, message: "", result: defaultValue);//断网
+      return (isSuccess: false, message: "", result: defaultValue); //断网
     }
     bool isSuccess = response["code"] == "OK";
     String message = response["message"] ?? "";
     final result = response["result"] as T? ?? defaultValue;
-    final resultNew = onResult?.call(response) ?? result;
+    final resultNew = onResult?.call(response) ?? result ?? defaultValue;
     return (isSuccess: isSuccess, message: message, result: resultNew);
   }
 
@@ -170,17 +166,15 @@ abstract class BaseRequestAPI {
   Future<({bool isSuccess, String message, List<T> result})>
       fetchList<T extends Map<String, dynamic>>({
     List<T> Function(Map<String, dynamic> response)? onList,
+    required List<dynamic> Function(Map<String, dynamic> response) onValue,
     List<T> defaultValue = const [],
   }) async {
     final tuple = await fetchResult<List<T>>(
-      onResult: onList ?? (response) {
-        final result = response["result"];
-        if (result is List) {
-          // dart: _GrowableList 与 List 无法 as 强转
-          return List<T>.from(result);
-        }
-        return result;
-      },
+      onResult: onList ??
+          (response) {
+            final result = onValue(response);
+            return List<T>.from(result);
+          },
       defaultValue: defaultValue,
     );
     return tuple;
@@ -194,28 +188,25 @@ abstract class BaseRequestAPI {
   ///
   /// return (请求是否成功, 提示语, 模型数组)
   /// 备注: isSuccess == false 且 message为空一般为断网
-  Future<({bool isSuccess, String message, List<M> result})>
-      fetchModels<M>({
+  Future<({bool isSuccess, String message, List<M> result})> fetchModels<M>({
+    required List<dynamic> Function(Map<String, dynamic> response) onValue,
     List<Map<String, dynamic>> Function(Map<String, dynamic> response)? onList,
     List<Map<String, dynamic>> defaultValue = const [],
     required M Function(Map<String, dynamic> json) onModel,
   }) async {
     final tuple = await fetchList<Map<String, dynamic>>(
       onList: onList,
+      onValue: onValue,
       defaultValue: defaultValue,
     );
     final list = tuple.result;
     final models = list.map(onModel).toList();
     return (isSuccess: tuple.isSuccess, message: tuple.message, result: models);
   }
-
 }
-
-
 
 /// 请求分页基类
 class BasePageRequestApi extends BaseRequestAPI {
-
   BasePageRequestApi({
     this.pageNo = 1,
     this.pageSize = 30,
@@ -224,5 +215,4 @@ class BasePageRequestApi extends BaseRequestAPI {
   int pageNo;
 
   int pageSize;
-
 }
