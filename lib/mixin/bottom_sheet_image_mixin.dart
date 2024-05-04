@@ -6,7 +6,6 @@
 //  Copyright © 2023/9/8 shang. All rights reserved.
 //
 
-
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
@@ -21,7 +20,6 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:tuple/tuple.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 
-
 /// 头像更换(回调返回单张图片的路径)
 /// 默认图片压缩,图片裁剪
 mixin BottomSheetImageMixin<T extends StatefulWidget> on State<T> {
@@ -33,13 +31,13 @@ mixin BottomSheetImageMixin<T extends StatefulWidget> on State<T> {
     bool needCropp = false,
     required ValueChanged<File> onChanged,
   }) {
-    GetSheet.showSheetActions(
+    GetSheet.showActions(
         actions: [
-          Tuple2(0, NText('拍摄', ),),
-          Tuple2(1, NText('从相册选择', ),),
+          (index: 0, child: NText('拍摄')),
+          (index: 1, child: NText('从相册选择')),
         ],
-        onItem: (tag) {
-          if (tag == 0) {
+        onItem: (e) {
+          if (e.index == 0) {
             takePhoto(
               needCropp: needCropp,
               onChanged: onChanged,
@@ -56,8 +54,7 @@ mixin BottomSheetImageMixin<T extends StatefulWidget> on State<T> {
               onChanged: onChanged,
             );
           }
-        }
-    );
+        });
   }
 
   // 更新头像
@@ -74,9 +71,16 @@ mixin BottomSheetImageMixin<T extends StatefulWidget> on State<T> {
           onPressed: () {
             Navigator.of(context).pop();
             if (e == titles[0]) {
-              takePhoto(needCropp: needCropp, onChanged: onChanged);
+              takePhoto(
+                needCropp: needCropp,
+                onChanged: onChanged,
+              );
             } else {
-              chooseImagesByWechatPicker(needCropp: needCropp, onChanged: onChanged, maxCount: 1);
+              chooseImagesByWechatPicker(
+                needCropp: needCropp,
+                onChanged: onChanged,
+                maxCount: 1,
+              );
             }
           },
           child: Text(e),
@@ -91,7 +95,6 @@ mixin BottomSheetImageMixin<T extends StatefulWidget> on State<T> {
       ),
     ).toShowCupertinoModalPopup(context: context);
   }
-
 
   /// 拍照
   /// needCropp 是否需要裁剪(仅在 maxCount == 1 时有效)
@@ -209,14 +212,15 @@ mixin BottomSheetImageMixin<T extends StatefulWidget> on State<T> {
     }
 
     final entitys = await AssetPicker.pickAssets(
-      context,
-      pickerConfig: AssetPickerConfig(
-        requestType: RequestType.image,
-        specialPickerType: SpecialPickerType.noPreview,
-        selectedAssets: [],
-        maxAssets: maxCount,
-      ),
-    ) ?? [];
+          context,
+          pickerConfig: AssetPickerConfig(
+            requestType: RequestType.image,
+            specialPickerType: SpecialPickerType.noPreview,
+            selectedAssets: [],
+            maxAssets: maxCount,
+          ),
+        ) ??
+        [];
 
     if (entitys.isEmpty) {
       return;
@@ -236,7 +240,7 @@ mixin BottomSheetImageMixin<T extends StatefulWidget> on State<T> {
       final cropFile = await file.toCropImage() ?? file;
       // EasyToast.hideLoading();
       final compressFile = await cropFile.toCompressImage();
-      
+
       onChanged(compressFile);
       return;
     }
@@ -254,7 +258,7 @@ mixin BottomSheetImageMixin<T extends StatefulWidget> on State<T> {
       var length = await fileNew.length();
       var isLimit = length > limit * 1024 * 1024;
       if (isLimit) {
-        final fileSizeInfo = (length/1024/1024).toStringAsFixed(2);
+        final fileSizeInfo = (length / 1024 / 1024).toStringAsFixed(2);
         debugPrint("fileSizeInfo: $imagePath ${fileSizeInfo}M");
         ToastUtil.show('图片体积超出限制, 请重新选择');
         return;
@@ -262,6 +266,4 @@ mixin BottomSheetImageMixin<T extends StatefulWidget> on State<T> {
       onChanged(fileNew);
     }).toList();
   }
-  
-
 }

@@ -62,7 +62,7 @@ extension GetRouteUtil on GetInterface {
 
 class GetSheet {
   /// 弹框 - 自定义child
-  static void showBottomSheet({
+  static void showBottom({
     Widget? child,
   }) {
     Get.bottomSheet(
@@ -85,36 +85,35 @@ class GetSheet {
   }
 
   /// 底部展示菜单
-  static void showSheetActions({
-    required List<Tuple2<int, Widget>> actions,
-    required ValueChanged<int> onItem,
+  static void showActions<T extends ({int index, Widget child})>({
+    required List<T> actions,
+    required ValueChanged<T> onItem,
+    VoidCallback? onCancel,
   }) {
-    assert(actions.isNotEmpty && !actions.map((e) => e.item1).contains(-1),
-        "取消是 -1");
     if (actions.isEmpty) {
       return;
     }
 
-    showBottomSheet(
+    showBottom(
       child: Column(
         children: [
           ...actions
               .map((e) => sheetActionCell(
-                    content: e.item2,
-                    tag: e.item1,
-                    onItem: onItem,
+                    content: e.child,
+                    onTap: () => onItem(e),
                     hasDivider: actions.indexOf(e) != 0,
                   ))
               .toList(),
-          Container(height: 8.h, color: bgColor),
+          Container(height: 8, color: bgColor),
           sheetActionCell(
-            content: NText(
-              '取消',
-            ),
-            tag: -1,
-            onItem: onItem,
-          ),
-          SizedBox(height: Platform.isIOS ? 34.h : 8.h),
+              content: NText(
+                '取消',
+              ),
+              onTap: () {
+                onCancel?.call();
+                Get.back();
+              }),
+          SizedBox(height: Platform.isIOS ? 34 : 8),
         ],
       ),
     );
@@ -128,8 +127,7 @@ class GetSheet {
   static Widget sheetActionCell({
     bool hasDivider = true,
     required Widget content,
-    required int tag,
-    required ValueChanged<int> onItem,
+    required VoidCallback? onTap,
   }) {
     return Column(
       children: [
@@ -138,10 +136,7 @@ class GetSheet {
             height: 1,
           ),
         InkWell(
-          onTap: () {
-            Get.back();
-            onItem(tag);
-          },
+          onTap: onTap,
           child: Container(
             width: double.infinity,
             alignment: Alignment.center,
@@ -171,7 +166,7 @@ class GetSheet {
     final context = Get.context;
     final primary = context?.primaryColor ?? Colors.transparent;
 
-    showBottomSheet(
+    showBottom(
       child: Container(
         width: double.infinity,
         alignment: Alignment.center,
