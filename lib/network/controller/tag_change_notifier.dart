@@ -8,14 +8,15 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_templet_project/model/tag_detail_model.dart';
-import 'package:flutter_templet_project/network/controller/tag_api_mixin.dart';
-
+import 'package:flutter_templet_project/network/api/tag_clear_api.dart';
+import 'package:flutter_templet_project/network/api/tag_list_api.dart';
+import 'package:flutter_templet_project/network/api/tag_set_api.dart';
+import 'package:flutter_templet_project/vendor/toast_util.dart';
 
 /// 标签管理器
-class TagViewModel extends ChangeNotifier with TagApiMixin {
-
+class TagViewModel extends ChangeNotifier {
   /// 标签列表
-  late List<TagDetailModel> _list;
+  List<TagDetailModel> _list = [];
   List<TagDetailModel> get list => _list;
   set list(List<TagDetailModel> value) {
     if (_list == value) {
@@ -26,7 +27,7 @@ class TagViewModel extends ChangeNotifier with TagApiMixin {
   }
 
   /// 新增或者编辑标签操作是否成功
-  late bool _isUpdate;
+  bool _isUpdate = false;
   bool get isUpdate => _isUpdate;
   set isUpdate(bool value) {
     if (_isUpdate == value) {
@@ -37,31 +38,54 @@ class TagViewModel extends ChangeNotifier with TagApiMixin {
   }
 
   /// 获取标签
-  @override
-  Future<({bool isSuccess, String message, List<TagDetailModel> result})> requestTagList({
-    required String diseaseDepartmentId,
-    required String agencyId,
+  Future<({bool isSuccess, String message, List<TagDetailModel> result})>
+      requestTagList({
+    required String departmentId,
   }) async {
-    var tuple = await super.requestTagList(
-      diseaseDepartmentId: diseaseDepartmentId,
-      agencyId: agencyId,
+    var api = TagListApi(
+      departmentId: departmentId,
+    );
+
+    // var tuple = await api.fetchList<T>(
+    //   onList: (respone){
+    //     final result = List<Map<String, dynamic>>.from(response["result"]
+    //     ?? []);
+    //     return result.map((e) => TagDetailModel.fromJson(e) as T).toList();
+    //   },
+    // );
+
+    var tuple = await api.fetchModels(
+      onValue: (response) =>
+          List<Map<String, dynamic>>.from(response["result"] ?? []),
+      onModel: (json) => TagDetailModel.fromJson(json), //dart 泛型传递有问题,必须声明一下
     );
     list = tuple.result;
     return tuple;
   }
 
   /// 更新标签
-  @override
   Future<({bool isSuccess, String message, bool result})> requestUpdateTag({
     required List<TagDetailModel> selectTags,
-    required String? publicUserId,
+    required String? userId,
   }) async {
-    final tuple = await super.requestUpdateTag(
-      selectTags: selectTags,
-      publicUserId: publicUserId,
-    );
+    final tagIds = selectTags.map((e) => e.id ?? "").toList();
+    var departmentId = "";
+
+    final api = tagIds.isEmpty
+        ? TagClearApi(
+            userId: userId,
+            departmentId: departmentId,
+          )
+        : TagSetApi(
+            tagsId: tagIds,
+            userId: userId,
+            departmentId: departmentId,
+          );
+    final tuple = await api.fetchBool(hasLoading: true);
+    if (tuple.isSuccess == false) {
+      ToastUtil.show(tuple.message);
+    }
     isUpdate = tuple.isSuccess && tuple.result;
     return tuple;
   }
-
 }

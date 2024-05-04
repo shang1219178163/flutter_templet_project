@@ -3,15 +3,13 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
-
 // EasyLoading toast
 class ToastUtil {
   // toast
   static void show(
     String text, {
-      int milliseconds = 1500,
-      VoidCallback? cb,
-      bool needLogin = false,
+    int milliseconds = 1500,
+    VoidCallback? cb,
   }) {
     if (text.isEmpty) {
       return;
@@ -28,9 +26,8 @@ class ToastUtil {
   // toast - 错误
   static void info(
     String text, {
-      int milliseconds = 1500,
-      VoidCallback? cb,
-      bool needLogin = false,
+    int milliseconds = 1500,
+    VoidCallback? cb,
   }) {
     if (text.isEmpty) {
       return;
@@ -63,7 +60,8 @@ class ToastUtil {
   }
 
   // loading - 加载
-  static void loading(String content, {
+  static void loading(
+    String content, {
     Widget? indicator,
   }) {
     if (content.isEmpty) {

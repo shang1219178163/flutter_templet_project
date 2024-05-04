@@ -1,31 +1,28 @@
-
+//
+//  TagListApi.dart
+//  flutter_templet_project
+//
+//  Created by shang on 2024/5/4 17:24.
+//  Copyright © 2024/5/4 shang. All rights reserved.
+//
 
 import 'dart:convert';
 
 import 'package:flutter_templet_project/cache/cache_service.dart';
 import 'package:flutter_templet_project/network/base_request_api.dart';
-import 'package:flutter_templet_project/vendor/toast_util.dart';
 
-
-/// 【科室端】标签列表（无分页）
-class TagListApi extends BaseRequestAPI{
-
+/// 标签列表获取
+class TagListApi extends BaseRequestAPI {
   TagListApi({
-    this.name,
-    this.diseaseDepartmentId,
-    this.agencyId,
+    this.departmentId,
   });
 
-  /// 标签名称
-  String? name;
-  /// 机构ID，执业版调用传医生所在的科室ID
-  String? diseaseDepartmentId;
-
-  String? agencyId;
+  /// 机构ID
+  String? departmentId;
 
   @override
-  String get requestURI{
-    const url = 'api/yft/disease_course/tags/list';
+  String get requestURI {
+    const url = '*/tags/list';
     return url;
   }
 
@@ -33,38 +30,20 @@ class TagListApi extends BaseRequestAPI{
   HttpMethod get requestType => HttpMethod.GET;
 
   @override
-  Map<String, dynamic> get requestParams{
+  Map<String, dynamic> get requestParams {
     final map = <String, dynamic>{};
-    if (name != null) {
-      map["name"] = name;
-    }
 
-    map["agencyId"] = diseaseDepartmentId;
+    map["departmentId"] = departmentId;
     return map;
   }
 
-
-  bool get validateParamsOld {
-    if (diseaseDepartmentId == null) {
-      ToastUtil.info('diseaseDepartmentId 不能为空', needLogin: true);
-      return false;
+  @override
+  (bool, String) get validateParams {
+    if (departmentId?.isNotEmpty != true) {
+      return (false, 'departmentId 不能为空');
     }
-    if (name == null) {
-      ToastUtil.info('name 不能为空', needLogin: true);
-      return false;
-    }
-    return true;
+    return (true, "");
   }
-
-  // (bool, String) get validateParamsNew {
-  //   if (diseaseDepartmentId == null) {
-  //     return (false, 'diseaseDepartmentId 不能为空');
-  //   }
-  //   if (name == null) {
-  //     return (false, 'name 不能为空');
-  //   }
-  //   return (true, '');
-  // }
 
   @override
   bool get shouldCache => false;
@@ -83,8 +62,7 @@ class TagListApi extends BaseRequestAPI{
   }
 
   @override
-  Future<bool>? removeCache(){
+  Future<bool>? removeCache() {
     return CacheService().remove(_cacheKey);
   }
-
 }

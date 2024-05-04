@@ -189,7 +189,8 @@ abstract class BaseRequestAPI {
   /// return (请求是否成功, 提示语, 模型数组)
   /// 备注: isSuccess == false 且 message为空一般为断网
   Future<({bool isSuccess, String message, List<M> result})> fetchModels<M>({
-    required List<dynamic> Function(Map<String, dynamic> response) onValue,
+    required List<Map<String, dynamic>> Function(Map<String, dynamic> response)
+        onValue,
     List<Map<String, dynamic>> Function(Map<String, dynamic> response)? onList,
     List<Map<String, dynamic>> defaultValue = const [],
     required M Function(Map<String, dynamic> json) onModel,
