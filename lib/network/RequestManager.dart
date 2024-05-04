@@ -24,7 +24,6 @@ import 'package:flutter_templet_project/routes/APPRouter.dart';
 import 'package:flutter_templet_project/routes/NavigatorUtil.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-
 class RequestManager extends BaseRequestAPI {
   // 私有构造器
   RequestManager._();
@@ -47,10 +46,10 @@ class RequestManager extends BaseRequestAPI {
   // );
 
   late final cacheInterceptor = DioCacheInterceptor(
-      options: CacheOptions(
-        store: MemCacheStore(maxSize: 10485760, maxEntrySize: 1048576),
-        hitCacheOnErrorExcept: [], // for offline behaviour
-      ),
+    options: CacheOptions(
+      store: MemCacheStore(maxSize: 10485760, maxEntrySize: 1048576),
+      hitCacheOnErrorExcept: [], // for offline behaviour
+    ),
   );
 
   // Dio _dio = Dio();
@@ -139,7 +138,8 @@ class RequestManager extends BaseRequestAPI {
     return _handleResponse(response: response, api: api);
   }
 
-  Future<Response<Map<String, dynamic>>?> sendRequest({
+  Future<Response<Map<String, dynamic>>?>
+      sendRequest<T extends Map<String, dynamic>>({
     required String url,
     required HttpMethod method,
     dynamic queryParams,
@@ -160,14 +160,14 @@ class RequestManager extends BaseRequestAPI {
     try {
       switch (method) {
         case HttpMethod.GET:
-          return await getDio(api).get<Map<String, dynamic>>(
+          return await getDio(api).get<T>(
             path,
             queryParameters: queryParams,
             options: options,
             cancelToken: api?.cancelToken,
           );
         case HttpMethod.PUT:
-          return await getDio(api).put<Map<String, dynamic>>(
+          return await getDio(api).put<T>(
             path,
             queryParameters: queryParams,
             data: data,
@@ -175,7 +175,7 @@ class RequestManager extends BaseRequestAPI {
             cancelToken: api?.cancelToken,
           );
         case HttpMethod.POST:
-          return await getDio(api).post<Map<String, dynamic>>(
+          return await getDio(api).post<T>(
             path,
             queryParameters: queryParams,
             data: data,
@@ -183,7 +183,7 @@ class RequestManager extends BaseRequestAPI {
             cancelToken: api?.cancelToken,
           );
         case HttpMethod.DELETE:
-          return await getDio(api).delete<Map<String, dynamic>>(
+          return await getDio(api).delete<T>(
             path,
             queryParameters: queryParams,
             data: data,
