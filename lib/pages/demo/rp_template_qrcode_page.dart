@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/n_four_corner.dart';
@@ -17,15 +15,9 @@ import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:get/get.dart';
 import 'package:tuple/tuple.dart';
 
-
-
 /// 处方模板二维码
 class QrcodePage extends StatefulWidget {
-
-  QrcodePage({
-    Key? key, 
-    this.title
-  }) : super(key: key);
+  QrcodePage({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -34,9 +26,9 @@ class QrcodePage extends StatefulWidget {
 }
 
 class _QrcodePageState extends State<QrcodePage> {
-
   /// 标题
   late final name = "标题";
+
   /// 二维码链接
   late final qrUrl = R.image.urls[1];
 
@@ -60,7 +52,9 @@ class _QrcodePageState extends State<QrcodePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: bgColor,
-      appBar: AppBar(title: Text('二维码'),),
+      appBar: AppBar(
+        title: Text('二维码'),
+      ),
       body: buildBody(),
     );
   }
@@ -123,12 +117,14 @@ class _QrcodePageState extends State<QrcodePage> {
                   topRight: radius,
                 ),
               ),
-              child: NText(name ?? "-",
+              child: NText(
+                name ?? "-",
                 fontSize: 20.sp,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),
             ),
+
             /// 二维码
             Container(
               padding: EdgeInsets.symmetric(horizontal: 27.w, vertical: 36.h),
@@ -144,20 +140,23 @@ class _QrcodePageState extends State<QrcodePage> {
                 children: [
                   NFourCorner(
                     child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 10.w, vertical: 10.h),
                       child: NNetworkImage(
                         url: qrUrl,
                         height: 300,
                       ),
                     ),
                   ),
-                  if(!hideQrcodeTips)Padding(
-                    padding: EdgeInsets.only(top: 36.h),
-                    child: NText("微信扫一扫或长按识别",
-                      fontSize: 18.sp,
-                      color: Color(0xff5B626B),
+                  if (!hideQrcodeTips)
+                    Padding(
+                      padding: EdgeInsets.only(top: 36.h),
+                      child: NText(
+                        "微信扫一扫或长按识别",
+                        fontSize: 18.sp,
+                        color: Color(0xff5B626B),
+                      ),
                     ),
-                  ),
                 ],
               ),
             ),
@@ -173,8 +172,7 @@ class _QrcodePageState extends State<QrcodePage> {
       padding: EdgeInsets.symmetric(vertical: 24.h),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: shareItems.map((e){
-
+        children: shareItems.map((e) {
           return InkWell(
             onTap: e.item3,
             child: NPair(
@@ -184,10 +182,11 @@ class _QrcodePageState extends State<QrcodePage> {
                 width: 56.w,
                 height: 56.h,
               ),
-              child: NText(e.item1,
+              child: NText(
+                e.item1,
                 fontSize: 18.sp,
                 fontWeight: FontWeight.w500,
-                color: fontColor[20],
+                color: fontColor777777,
               ),
             ),
           );
@@ -200,12 +199,13 @@ class _QrcodePageState extends State<QrcodePage> {
   onShareWechat() async {
     debugPrint("onShareWechat");
     final image = await _shareKey.currentContext?.toImage(pixelRatio: 2);
-    final imageWidget = await _shareKey.currentContext?.toImageWidget(pixelRatio: 2);
+    final imageWidget =
+        await _shareKey.currentContext?.toImageWidget(pixelRatio: 2);
 
     debugPrint("image: $image");
     if (image == null) {
       ToastUtil.show("生成图片失败,请稍后重试");
-     return;
+      return;
     }
     if (imageWidget == null) {
       ToastUtil.show("生成图片失败,请稍后重试");
@@ -218,11 +218,9 @@ class _QrcodePageState extends State<QrcodePage> {
       ),
     );
   }
-  
+
   /// 分享到给患者
-  onSharePatient(){
+  onSharePatient() {
     debugPrint("onSharePatient");
   }
-
-
 }

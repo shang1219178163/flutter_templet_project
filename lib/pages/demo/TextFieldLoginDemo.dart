@@ -245,7 +245,7 @@ class _LoginInputState extends State<LoginInput> {
   //       contentPadding: const EdgeInsets.only(left: 20, right: 20),
   //       border: InputBorder.none,
   //       hintText: widget.hint,
-  //       hintStyle: TextStyle(fontSize: 16.sp, color: fontColor[10]),
+  //       hintStyle: TextStyle(fontSize: 16.sp, color: fontColorF9F9F9),
   //       enabledBorder: buildEnabledBorder(),
   //       focusedBorder: buildFocusedBorder(),
   //       prefixIcon: IconButton(
@@ -276,7 +276,7 @@ class _LoginInputState extends State<LoginInput> {
                 return Padding(
                   padding: const EdgeInsets.only(right: 8),
                   child: IconButton(
-                    focusColor: fontColor[10],
+                    focusColor: fontColorF9F9F9,
                     icon: Image.asset(
                       isCloseEye
                           ? 'assets/images/icon_eye_close.png'
@@ -318,7 +318,7 @@ class _LoginInputState extends State<LoginInput> {
         enabledBorder: buildEnabledBorder(),
         focusedBorder: buildFocusedBorder(),
         hintText: widget.hint,
-        hintStyle: TextStyle(fontSize: 16.sp, color: fontColor[10]),
+        hintStyle: TextStyle(fontSize: 16.sp, color: fontColorF9F9F9),
         prefixIcon: IconButton(
           focusColor: primaryColor,
           icon: widget.image == null

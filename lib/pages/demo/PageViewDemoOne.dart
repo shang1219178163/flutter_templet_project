@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/n_placeholder.dart';
@@ -11,11 +9,7 @@ import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:tuple/tuple.dart';
 
 class PageViewDemoOne extends StatefulWidget {
-
-  PageViewDemoOne({
-    Key? key, 
-    this.title
-  }) : super(key: key);
+  PageViewDemoOne({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -23,7 +17,8 @@ class PageViewDemoOne extends StatefulWidget {
   _PageViewDemoOneState createState() => _PageViewDemoOneState();
 }
 
-class _PageViewDemoOneState extends State<PageViewDemoOne> with SingleTickerProviderStateMixin {
+class _PageViewDemoOneState extends State<PageViewDemoOne>
+    with SingleTickerProviderStateMixin {
   late final scrollController = ScrollController();
 
   late final List<Tuple3<String, Widget, List<ItemModel>>> _tabItems = [
@@ -36,10 +31,11 @@ class _PageViewDemoOneState extends State<PageViewDemoOne> with SingleTickerProv
 
   final tabIndex = ValueNotifier(0);
 
-  late final _tabController = TabController(length: _tabItems.length, vsync: this);
+  late final _tabController =
+      TabController(length: _tabItems.length, vsync: this);
 
-  late final _pageController = PageController(initialPage: tabIndex.value, keepPage: true);
-
+  late final _pageController =
+      PageController(initialPage: tabIndex.value, keepPage: true);
 
   @override
   void dispose() {
@@ -58,19 +54,22 @@ class _PageViewDemoOneState extends State<PageViewDemoOne> with SingleTickerProv
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () => debugPrint(e),)
-        ).toList(),
-      ),
-      body: buildBody()
-    );
+        appBar: AppBar(
+          title: Text(widget.title ?? "$widget"),
+          actions: [
+            'done',
+          ]
+              .map((e) => TextButton(
+                    child: Text(
+                      e,
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onPressed: () => debugPrint(e),
+                  ))
+              .toList(),
+        ),
+        body: buildBody());
   }
-
 
   buildBody() {
     return Container(
@@ -85,17 +84,20 @@ class _PageViewDemoOneState extends State<PageViewDemoOne> with SingleTickerProv
             child: Column(
               children: [
                 buildTab(
-                  controller: _tabController,
-                  tabs: _tabItems.map((e) => Tab(
-                    text: e.item1,
-                  )).toList(),
-                  onTap: (int index) async {
-                    // debugPrint("buildTab: $index");
-                    tabIndex.value = index;
-                    _pageController.jumpToPage(index);
-                  }
+                    controller: _tabController,
+                    tabs: _tabItems
+                        .map((e) => Tab(
+                              text: e.item1,
+                            ))
+                        .toList(),
+                    onTap: (int index) async {
+                      // debugPrint("buildTab: $index");
+                      tabIndex.value = index;
+                      _pageController.jumpToPage(index);
+                    }),
+                SizedBox(
+                  height: 8.w,
                 ),
-                SizedBox(height: 8.w,),
                 buildDebugInfo(),
               ],
             ),
@@ -115,7 +117,6 @@ class _PageViewDemoOneState extends State<PageViewDemoOne> with SingleTickerProv
     required ValueChanged<int>? onTap,
     Color? color = Colors.blue,
   }) {
-
     Color? primary = color ?? context.primaryColor;
     return PreferredSize(
       preferredSize: Size(double.maxFinite, 30.h),
@@ -132,16 +133,16 @@ class _PageViewDemoOneState extends State<PageViewDemoOne> with SingleTickerProv
             fontSize: 16.sp,
             fontWeight: FontWeight.bold,
           ),
-          unselectedLabelColor: fontColor[20],
+          unselectedLabelColor: fontColor777777,
           unselectedLabelStyle: TextStyle(
             // color: primary,
             fontSize: 16.sp,
             fontWeight: FontWeight.w500,
           ),
           indicator: TabBarIndicatorFixed(
-              width: 32.w,
-              height: 2.h,
-              color: primary,
+            width: 32.w,
+            height: 2.h,
+            color: primary,
           ),
           onTap: onTap,
           tabs: tabs,
@@ -172,42 +173,43 @@ class _PageViewDemoOneState extends State<PageViewDemoOne> with SingleTickerProv
             );
           }).toList(),
         ),
-        if(_tabItems.isNotEmpty)Positioned(
-          bottom: 0,
-          left: 0,
-          right: 0,
-          height: 40,
-          child: Container(
-            // color: Colors.black12,
-            child: ValueListenableBuilder<int>(
-               valueListenable: tabIndex,
-               builder: (context, value, child){
-
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: List<Widget>.generate(
-                    _tabItems.length,
+        if (_tabItems.isNotEmpty)
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: 40,
+            child: Container(
+              // color: Colors.black12,
+              child: ValueListenableBuilder<int>(
+                  valueListenable: tabIndex,
+                  builder: (context, value, child) {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: List<Widget>.generate(
+                        _tabItems.length,
                         (index) => Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: CircleAvatar(
-                        radius: 5,
-                        backgroundColor: index == value
-                            ? Colors.greenAccent
-                            : Colors.white30,
+                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                          child: CircleAvatar(
+                            radius: 5,
+                            backgroundColor: index == value
+                                ? Colors.greenAccent
+                                : Colors.white30,
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                );
-              }
+                    );
+                  }),
             ),
           ),
-        ),
       ],
     );
   }
 
   Widget buildPageViewChild() {
-    return Container(color: ColorExt.random,);
+    return Container(
+      color: ColorExt.random,
+    );
   }
 
   Widget buildPlaceholder() {
@@ -215,7 +217,6 @@ class _PageViewDemoOneState extends State<PageViewDemoOne> with SingleTickerProv
       imageAndTextSpacing: 10.h,
       onTap: () async {
         debugPrint("NPlaceholder");
-
       },
     );
   }
@@ -271,18 +272,14 @@ class _PageViewDemoOneState extends State<PageViewDemoOne> with SingleTickerProv
     }
     _pageController.jumpToPage(page);
   }
-
-
-
 }
-
 
 class ItemModel {
   ItemModel({
     required this.icon,
     required this.name,
     required this.cb,
-});
+  });
 
   String icon;
 

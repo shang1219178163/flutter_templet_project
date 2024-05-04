@@ -145,7 +145,7 @@ class NNetContainerListViewState<T> extends State<NNetContainerListView<T>> {
           imageAndTextSpacing: 10.h,
           text: Text("网络连接失败,请稍后重试",
             style: TextStyle(
-              color: fontColor[30],
+              color: fontColorBCBFC2,
               fontSize: 14.sp,
             ),
           ),

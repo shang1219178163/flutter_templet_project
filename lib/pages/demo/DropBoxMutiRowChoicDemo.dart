@@ -1,6 +1,3 @@
-
-
-
 import 'package:enhance_expansion_panel/enhance_expansion_panel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -25,16 +22,13 @@ import 'package:get_storage/get_storage.dart';
 import 'package:tuple/tuple.dart';
 
 class DropBoxMutiRowChoicDemo extends StatefulWidget {
-
-  DropBoxMutiRowChoicDemo({
-    Key? key, 
-    this.title
-  }) : super(key: key);
+  DropBoxMutiRowChoicDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
   @override
-  _DropBoxMutiRowChoicDemoState createState() => _DropBoxMutiRowChoicDemoState();
+  _DropBoxMutiRowChoicDemoState createState() =>
+      _DropBoxMutiRowChoicDemoState();
 }
 
 class _DropBoxMutiRowChoicDemoState extends State<DropBoxMutiRowChoicDemo> {
@@ -50,29 +44,36 @@ class _DropBoxMutiRowChoicDemoState extends State<DropBoxMutiRowChoicDemo> {
   final dropBoxController = NFilterDropBoxController();
 
   /// 数据源
-  List<FakeDataModel> get models => items.map((e) => FakeDataModel(
-    id: "id_$e",
-    name: "选项_$e",
-  )).toList();
+  List<FakeDataModel> get models => items
+      .map((e) => FakeDataModel(
+            id: "id_$e",
+            name: "选项_$e",
+          ))
+      .toList();
 
   /// 数据源
-  List<FakeDataModel> get item1Models => items.map((e) => FakeDataModel(
-    id: "id_$e",
-    name: "选项1_$e",
-  )).toList();
+  List<FakeDataModel> get item1Models => items
+      .map((e) => FakeDataModel(
+            id: "id_$e",
+            name: "选项1_$e",
+          ))
+      .toList();
 
   /// 数据源
-  List<FakeDataModel> get item2Models => items.map((e) => FakeDataModel(
-    id: "id_$e",
-    name: "选项2_$e",
-  )).toList();
+  List<FakeDataModel> get item2Models => items
+      .map((e) => FakeDataModel(
+            id: "id_$e",
+            name: "选项2_$e",
+          ))
+      .toList();
 
   /// 数据源
-  List<FakeDataModel> get item3Models => items.map((e) => FakeDataModel(
-    id: "id_$e",
-    name: "选项3_$e",
-  )).toList();
-
+  List<FakeDataModel> get item3Models => items
+      .map((e) => FakeDataModel(
+            id: "id_$e",
+            name: "选项3_$e",
+          ))
+      .toList();
 
   late final mutiRowItems = <NChoiceBoxHorizontalModel<FakeDataModel>>[
     NChoiceBoxHorizontalModel<FakeDataModel>(
@@ -103,24 +104,28 @@ class _DropBoxMutiRowChoicDemoState extends State<DropBoxMutiRowChoicDemo> {
     ),
   ];
 
-
   @override
   Widget build(BuildContext context) {
     bool isSingle = true;
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () => debugPrint(e),)
-        ).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () => debugPrint(e),
+                ))
+            .toList(),
       ),
       body: Column(
         children: [
           buildSearchAndFilterBar(
-            onToggle:  (){
+            onToggle: () {
               onFilterInit();
               dropBoxController.onToggle();
               ddlog("dropBoxController: ${dropBoxController.isVisible}");
@@ -128,16 +133,16 @@ class _DropBoxMutiRowChoicDemoState extends State<DropBoxMutiRowChoicDemo> {
             },
           ),
           Expanded(
-              child: NFilterDropBox(
-                controller: dropBoxController,
-                sections: getDropBoxSections(isSingle: isSingle),
-                onCancel: onFilterCancel,
-                onReset: onFitlerReset,
-                onConfirm: onFitlerConfirm,
-                child: buildList(
-                  items: items.map((e) => "item_$e").toList(),
-                ),
+            child: NFilterDropBox(
+              controller: dropBoxController,
+              sections: getDropBoxSections(isSingle: isSingle),
+              onCancel: onFilterCancel,
+              onReset: onFitlerReset,
+              onConfirm: onFitlerConfirm,
+              child: buildList(
+                items: items.map((e) => "item_$e").toList(),
               ),
+            ),
           ),
         ],
       ),
@@ -168,10 +173,7 @@ class _DropBoxMutiRowChoicDemoState extends State<DropBoxMutiRowChoicDemo> {
     );
   }
 
-  buildSearch({
-    String placeholder = "搜索",
-    ValueChanged<String>? cb
-  }) {
+  buildSearch({String placeholder = "搜索", ValueChanged<String>? cb}) {
     return Container(
       height: 36.h,
       // width: 295.w,
@@ -190,14 +192,14 @@ class _DropBoxMutiRowChoicDemoState extends State<DropBoxMutiRowChoicDemo> {
           color: const Color(0xff999999),
           size: 20.h,
         ),
-        prefixInsets: EdgeInsets.only(left: 14.w, top: 5, bottom: 5, right: 6.w),
+        prefixInsets:
+            EdgeInsets.only(left: 14.w, top: 5, bottom: 5, right: 6.w),
         // padding: EdgeInsets.only(left: 3, top: 5, bottom: 5, right: 5),
         placeholder: placeholder,
-        placeholderStyle: TextStyle(fontSize: 15.sp, color: fontColor[30]),
+        placeholderStyle: TextStyle(fontSize: 15.sp, color: fontColorBCBFC2),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(4.w)),
-            color: bgColor
-        ),
+            color: bgColor),
         onChanged: (String value) {
           _debounce(() {
             debugPrint('searchText: $value');
@@ -223,7 +225,10 @@ class _DropBoxMutiRowChoicDemoState extends State<DropBoxMutiRowChoicDemo> {
     return InkWell(
       onTap: onPressed,
       child: NPair(
-          icon: Icon(icon, color: color,),
+          icon: Icon(
+            icon,
+            color: color,
+          ),
           child: Text(
             title,
             style: TextStyle(
@@ -231,8 +236,7 @@ class _DropBoxMutiRowChoicDemoState extends State<DropBoxMutiRowChoicDemo> {
               fontSize: 15,
               fontWeight: FontWeight.w500,
             ),
-          )
-      ),
+          )),
     );
   }
 
@@ -247,14 +251,22 @@ class _DropBoxMutiRowChoicDemoState extends State<DropBoxMutiRowChoicDemo> {
         cbID: (e) => e.id ?? "",
         cbName: (e) => e.name ?? "",
         cbSelected: (row, e) {
-          final result = row.selectedModelsTmp.map((e) => e.id ?? "").toList().contains(e.id);
+          final result = row.selectedModelsTmp
+              .map((e) => e.id ?? "")
+              .toList()
+              .contains(e.id);
           return result;
         },
         onChanged: (row) {
-          debugPrint("${row.title} selectedModelsTmp: ${row.selectedModelsTmp.map((e) => e.name).toList()}");
+          debugPrint(
+              "${row.title} selectedModelsTmp: ${row.selectedModelsTmp.map((e) => e.name).toList()}");
         },
         itemBuilder: (e, isSelected) {
-          return buildItem(e: e, isSelected: isSelected, titleCb: (e) => e.name ?? "",);
+          return buildItem(
+            e: e,
+            isSelected: isSelected,
+            titleCb: (e) => e.name ?? "",
+          );
         },
       ),
     ];
@@ -268,14 +280,16 @@ class _DropBoxMutiRowChoicDemoState extends State<DropBoxMutiRowChoicDemo> {
             ),
             child: e,
           ),
-          if (sections.last != e) Container(
-            height: 8,
-            margin: const EdgeInsets.only(top: 15),
-            color: Color(0xffF3F3F3),
-          ),
-          if (sections.last == e) SizedBox(
-            height: 8,
-          ),
+          if (sections.last != e)
+            Container(
+              height: 8,
+              margin: const EdgeInsets.only(top: 15),
+              color: Color(0xffF3F3F3),
+            ),
+          if (sections.last == e)
+            SizedBox(
+              height: 8,
+            ),
         ],
       );
     }).toList();
@@ -307,6 +321,7 @@ class _DropBoxMutiRowChoicDemoState extends State<DropBoxMutiRowChoicDemo> {
     onFitlerConfirm();
     //请求
   }
+
   /// 确定过滤参数
   onFitlerConfirm() {
     closeDropBox();
@@ -336,64 +351,66 @@ selectedModels: ${item.selectedModels.map((e) => e.name).toList()},""");
     int collapseCount = 2,
     double itemHeight = 30,
   }) {
-    return StatefulBuilder(
-      builder: (context, setState) {
+    return StatefulBuilder(builder: (context, setState) {
+      final rowsNew = isExpand ? rows : rows.take(collapseCount).toList();
 
-        final rowsNew = isExpand ? rows : rows.take(collapseCount).toList();
+      onToggle() {
+        isExpand = !isExpand;
+        setState(() {});
+      }
 
-        onToggle(){
-          isExpand = !isExpand;
-          setState((){});
-        }
-
-        return Column(
-          children: [
-            ...rowsNew.map((row) {
-              return Padding(
-                padding: const EdgeInsets.symmetric(vertical: 4),
-                child: Row(
-                  children: [
-                    Text(
-                      "${row.title}: ",
-                      style: TextStyle(fontWeight: FontWeight.w500),
-                    ),
-                    SizedBox(width: 8,),
-                    Expanded(
-                      child: Container(
-                        height: itemHeight,
-                        width: double.maxFinite,
-                        child: NChoiceBoxHorizontal<T>(
-                          isSingle: row.isSingle,
-                          onChanged: (value){
-                            row.selectedModelsTmp = value.map((e) => e.data).toList();
-                            onChanged(row);
-                          },
-                          items: row.models.map((e) =>
-                              ChoiceBoxModel<T>(
-                                id: cbID(e),
-                                title: cbName(e),
-                                isSelected: cbSelected(row, e),
-                                data: e,
-                              )).toList(),
-                          itemBuilder: itemBuilder,
-                        ),
+      return Column(
+        children: [
+          ...rowsNew.map((row) {
+            return Padding(
+              padding: const EdgeInsets.symmetric(vertical: 4),
+              child: Row(
+                children: [
+                  Text(
+                    "${row.title}: ",
+                    style: TextStyle(fontWeight: FontWeight.w500),
+                  ),
+                  SizedBox(
+                    width: 8,
+                  ),
+                  Expanded(
+                    child: Container(
+                      height: itemHeight,
+                      width: double.maxFinite,
+                      child: NChoiceBoxHorizontal<T>(
+                        isSingle: row.isSingle,
+                        onChanged: (value) {
+                          row.selectedModelsTmp =
+                              value.map((e) => e.data).toList();
+                          onChanged(row);
+                        },
+                        items: row.models
+                            .map((e) => ChoiceBoxModel<T>(
+                                  id: cbID(e),
+                                  title: cbName(e),
+                                  isSelected: cbSelected(row, e),
+                                  data: e,
+                                ))
+                            .toList(),
+                        itemBuilder: itemBuilder,
                       ),
                     ),
-                  ],
-                ),
-              );
-            }).toList(),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 0, vertical: 1),
-              child: GestureDetector(
-                onTap: onToggle,
-                child: Icon(isExpand ? Icons.arrow_drop_up : Icons.arrow_drop_down),
+                  ),
+                ],
               ),
+            );
+          }).toList(),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 0, vertical: 1),
+            child: GestureDetector(
+              onTap: onToggle,
+              child:
+                  Icon(isExpand ? Icons.arrow_drop_up : Icons.arrow_drop_down),
             ),
-          ],
-        );
-      }
-    );
+          ),
+        ],
+      );
+    });
   }
 
   /// 子元素自定义
@@ -464,4 +481,3 @@ selectedModels: ${item.selectedModels.map((e) => e.name).toList()},""");
     FocusManager.instance.primaryFocus?.unfocus();
   }
 }
-

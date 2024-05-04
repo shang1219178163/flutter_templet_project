@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 
-
 class NCancelAndConfirmBar extends StatelessWidget {
   NCancelAndConfirmBar({
     Key? key,
@@ -21,33 +20,43 @@ class NCancelAndConfirmBar extends StatelessWidget {
     required this.onConfirm,
   }) : super(key: key);
 
-
   final double height;
+
   /// 默认 Radius.circular(4)
   final Radius bottomRadius;
+
   /// 顶部线
   final Divider? dividerTop;
+
   /// 垂直分割线
   final VerticalDivider? divider;
+
   /// 是否存在取消按钮
   final bool hasCancelButton;
+
   /// 默认取消
   final String cancelTitle;
+
   /// 默认确定
   final String confirmTitle;
+
   /// 取消按钮字体样式
   final TextStyle? cancelTextStyle;
+
   /// 确定按钮字体样式
   final TextStyle? confirmTextStyle;
+
   /// 取消按钮背景色
   final Color? cancelBgColor;
+
   /// 确定按钮背景色
   final Color? confirmBgColor;
+
   /// 取消按钮事件
   final VoidCallback? onCancel;
+
   /// 确定按钮事件
   final VoidCallback? onConfirm;
-
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +68,9 @@ class NCancelAndConfirmBar extends StatelessWidget {
       margin: EdgeInsets.zero,
       // color: Colors.transparent,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(bottomRadius,),
+        borderRadius: BorderRadius.all(
+          bottomRadius,
+        ),
       ),
       child: Container(
         height: height,
@@ -89,7 +100,7 @@ class NCancelAndConfirmBar extends StatelessWidget {
                                   TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w500,
-                                    color: fontColor[20],
+                                    color: fontColor777777,
                                   ),
                             ),
                           ),

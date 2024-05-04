@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,7 +11,6 @@ import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:tuple/tuple.dart';
 
 class StackDemoTwo extends StatefulWidget {
-
   StackDemoTwo({
     Key? key,
     this.title,
@@ -25,17 +22,17 @@ class StackDemoTwo extends StatefulWidget {
   _StackDemoTwoState createState() => _StackDemoTwoState();
 }
 
-class _StackDemoTwoState extends State<StackDemoTwo> with SingleTickerProviderStateMixin {
-
+class _StackDemoTwoState extends State<StackDemoTwo>
+    with SingleTickerProviderStateMixin {
   late final List<Tuple2<String, Widget>> _tabItems = [
     Tuple2("患者档案", buildPaticentRecord()),
     Tuple2("全病程轨迹", buildPaticentDepartmentPage()),
     Tuple2("日程", buildPaticentSchedule()),
   ];
-  late final _tabController = TabController(length: _tabItems.length, vsync: this);
+  late final _tabController =
+      TabController(length: _tabItems.length, vsync: this);
 
   late final _pageController = PageController(initialPage: 0, keepPage: true);
-
 
   final scrollController = ScrollController();
 
@@ -43,7 +40,6 @@ class _StackDemoTwoState extends State<StackDemoTwo> with SingleTickerProviderSt
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       backgroundColor: bgColor,
       extendBodyBehindAppBar: true,
@@ -55,12 +51,17 @@ class _StackDemoTwoState extends State<StackDemoTwo> with SingleTickerProviderSt
         titleTextStyle: TextStyle(
           color: Colors.white,
         ),
-        actions: ['done',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () => debugPrint(e),)
-        ).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () => debugPrint(e),
+                ))
+            .toList(),
       ),
       body: Scrollbar(
         controller: scrollController,
@@ -68,14 +69,16 @@ class _StackDemoTwoState extends State<StackDemoTwo> with SingleTickerProviderSt
           controller: scrollController,
           children: [
             Container(
-              height: screenSize.height + (globalKey.currentContext?.minY() ?? 0.0) - mediaQuery.viewPadding.top - mediaQuery.viewPadding.bottom - kToolbarHeight,
+              height: screenSize.height +
+                  (globalKey.currentContext?.minY() ?? 0.0) -
+                  mediaQuery.viewPadding.top -
+                  mediaQuery.viewPadding.bottom -
+                  kToolbarHeight,
               color: Colors.green,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Expanded(
-                    child: buildBody()
-                  ),
+                  Expanded(child: buildBody()),
                 ],
               ),
             ),
@@ -99,12 +102,11 @@ class _StackDemoTwoState extends State<StackDemoTwo> with SingleTickerProviderSt
                   Container(
                     height: 172.h,
                     decoration: BoxDecoration(
-                      color: Colors.yellowAccent,
-                      image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: "bg_mine.png".toAssetImage(),
-                      )
-                    ),
+                        color: Colors.yellowAccent,
+                        image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: "bg_mine.png".toAssetImage(),
+                        )),
                   ),
                   InkWell(
                     onTap: () {
@@ -122,17 +124,16 @@ class _StackDemoTwoState extends State<StackDemoTwo> with SingleTickerProviderSt
                 top: (paddingTop + kToolbarHeight + 20).h,
                 bottom: 1.w,
                 child: SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      buildListBox(),
-                      Expanded(
-                        child: buildFooter(),
-                      ),
-                    ],
-                  )
-                ),
+                    width: MediaQuery.of(context).size.width,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        buildListBox(),
+                        Expanded(
+                          child: buildFooter(),
+                        ),
+                      ],
+                    )),
               ),
             ],
           ),
@@ -152,18 +153,17 @@ class _StackDemoTwoState extends State<StackDemoTwo> with SingleTickerProviderSt
         color: Colors.white,
         borderRadius: BorderRadius.all(Radius.circular(8.w)),
       ),
-      child: Column(
-        children: [
-          Container(
-            height: 76.w,
-            color: ColorExt.random,
-          ),
-          ...Container(
-            height: 46.w,
-            color: ColorExt.random,
-          )*3,
-        ]
-      ),
+      child: Column(children: [
+        Container(
+          height: 76.w,
+          color: ColorExt.random,
+        ),
+        ...Container(
+              height: 46.w,
+              color: ColorExt.random,
+            ) *
+            3,
+      ]),
     );
   }
 
@@ -174,15 +174,18 @@ class _StackDemoTwoState extends State<StackDemoTwo> with SingleTickerProviderSt
       children: [
         buildTab(
             controller: _tabController,
-            tabs: _tabItems.map((e) => Tab(
-              text: e.item1,
-            )).toList(),
+            tabs: _tabItems
+                .map((e) => Tab(
+                      text: e.item1,
+                    ))
+                .toList(),
             onTap: (int index) async {
               debugPrint("buildTab: $index");
               _pageController.jumpToPage(index);
-            }
+            }),
+        SizedBox(
+          height: 12.w,
         ),
-        SizedBox(height: 12.w,),
         Expanded(
           child: buildPageView(),
         ),
@@ -210,17 +213,14 @@ class _StackDemoTwoState extends State<StackDemoTwo> with SingleTickerProviderSt
             fontSize: 16.sp,
             fontWeight: FontWeight.bold,
           ),
-          unselectedLabelColor: fontColor[20],
+          unselectedLabelColor: fontColor777777,
           unselectedLabelStyle: TextStyle(
             // color: primary,
             fontSize: 16.sp,
             fontWeight: FontWeight.w500,
           ),
-          indicator: TabBarIndicatorFixed(
-              width: 32.w,
-              height: 2.h,
-              color: color
-          ),
+          indicator:
+              TabBarIndicatorFixed(width: 32.w, height: 2.h, color: color),
           onTap: onTap,
           tabs: tabs,
         ),
@@ -255,7 +255,7 @@ class _StackDemoTwoState extends State<StackDemoTwo> with SingleTickerProviderSt
       child: Column(
         children: [
           TextButton(
-            onPressed: (){
+            onPressed: () {
               debugPrint("患者档");
             },
             child: Text("患者档案"),
@@ -271,7 +271,7 @@ class _StackDemoTwoState extends State<StackDemoTwo> with SingleTickerProviderSt
       child: Column(
         children: [
           TextButton(
-            onPressed: (){
+            onPressed: () {
               debugPrint("患者档");
             },
             child: Text("患者档案"),
@@ -279,7 +279,6 @@ class _StackDemoTwoState extends State<StackDemoTwo> with SingleTickerProviderSt
         ],
       ),
     );
-
   }
 
   Widget buildPaticentSchedule() {
@@ -288,18 +287,17 @@ class _StackDemoTwoState extends State<StackDemoTwo> with SingleTickerProviderSt
       child: Column(
         children: [
           ...Padding(
-            padding: EdgeInsets.symmetric(vertical: 16.w),
-            child: TextButton(
-              onPressed: (){
-                debugPrint("日程");
-              },
-              child: Text("日程"),
-            ),
-          )*3,
+                padding: EdgeInsets.symmetric(vertical: 16.w),
+                child: TextButton(
+                  onPressed: () {
+                    debugPrint("日程");
+                  },
+                  child: Text("日程"),
+                ),
+              ) *
+              3,
         ],
       ),
     );
-
   }
-
 }

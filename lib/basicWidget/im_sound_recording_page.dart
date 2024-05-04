@@ -6,16 +6,13 @@
 //  Copyright © 2023/10/24 shang. All rights reserved.
 //
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_transition_builder.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 
-
 /// 发语音: 声音录制页面
 class IMSoundRecordingPage extends StatelessWidget {
-
   const IMSoundRecordingPage({
     Key? key,
     this.bottomBarHeight = 100,
@@ -37,9 +34,12 @@ class IMSoundRecordingPage extends StatelessWidget {
     return ValueListenableBuilder<bool>(
       valueListenable: cancelVN,
       builder: (context, isCancel, child) {
-        final closeButtonIconName =
-        (isCancel ? "img_sound_overlay_button_cancel.png" : "img_sound_overlay_button.png");
-        final bottomBarIconName = (isCancel ? "img_sound_overlay_bottom_cancel.png" : "img_sound_overlay_bottom.png");
+        final closeButtonIconName = (isCancel
+            ? "img_sound_overlay_button_cancel.png"
+            : "img_sound_overlay_button.png");
+        final bottomBarIconName = (isCancel
+            ? "img_sound_overlay_bottom_cancel.png"
+            : "img_sound_overlay_bottom.png");
 
         return Container(
           color: Colors.black.withOpacity(0.5),
@@ -103,7 +103,7 @@ class IMSoundRecordingPage extends StatelessWidget {
                   child: Text(
                     "松开 发送",
                     style: TextStyle(
-                      color: fontColor[15],
+                      color: fontColorB3B3B3,
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
                     ),
@@ -113,7 +113,6 @@ class IMSoundRecordingPage extends StatelessWidget {
               NTransitionBuilder(
                 duration: duration,
                 builder: (context, controller, Animation<double> animation) {
-
                   return SizeTransition(
                     axisAlignment: 0.0,
                     sizeFactor: animation,
@@ -135,8 +134,7 @@ class IMSoundRecordingPage extends StatelessWidget {
             ],
           ),
         );
-      }
+      },
     );
   }
-
 }

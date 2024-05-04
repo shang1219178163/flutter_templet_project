@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_choice_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_choice_box_one.dart';
@@ -15,11 +13,7 @@ import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:tuple/tuple.dart';
 
 class NChoiceBoxOneDemo extends StatefulWidget {
-
-  NChoiceBoxOneDemo({
-    Key? key,
-    this.title
-  }) : super(key: key);
+  NChoiceBoxOneDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -28,7 +22,6 @@ class NChoiceBoxOneDemo extends StatefulWidget {
 }
 
 class _NChoiceBoxOneDemoState extends State<NChoiceBoxOneDemo> {
-
   final _scrollController = ScrollController();
 
   final rpItems = <Tuple3<String, String, String>>[
@@ -42,11 +35,12 @@ class _NChoiceBoxOneDemoState extends State<NChoiceBoxOneDemo> {
 
   final canChange = false;
 
-
-  final tags = List.generate(10, (i) => TagDetailModel(
-    id: i.toString(),
-    name: "标签$i",
-  )).toList();
+  final tags = List.generate(
+      10,
+      (i) => TagDetailModel(
+            id: i.toString(),
+            name: "标签$i",
+          )).toList();
   List<TagDetailModel> selectedTags = [];
 
   final orders = List.generate(10, (i) {
@@ -66,12 +60,17 @@ class _NChoiceBoxOneDemoState extends State<NChoiceBoxOneDemo> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () => debugPrint(e),)
-        ).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () => debugPrint(e),
+                ))
+            .toList(),
       ),
       body: buildBody(),
     );
@@ -94,9 +93,10 @@ class _NChoiceBoxOneDemoState extends State<NChoiceBoxOneDemo> {
                 idCb: (e) => e.id ?? "",
                 titleCb: (e) => e.name ?? "",
                 selectedCb: (e) => selectedTags.map((e) => e.id).contains(e.id),
-                onChanged: (list){
+                onChanged: (list) {
                   selectedTags = list;
-                  debugPrint("重置 selectedTagModelsTmp: ${selectedTags.map((e) => e.name).toList()}");
+                  debugPrint(
+                      "重置 selectedTagModelsTmp: ${selectedTags.map((e) => e.name).toList()}");
                 },
                 itemBuilder: (e, isSelected) {
                   return buildItem(
@@ -115,11 +115,13 @@ class _NChoiceBoxOneDemoState extends State<NChoiceBoxOneDemo> {
                 isSingle: isSingle,
                 idCb: (e) => e.id.toString() ?? "",
                 titleCb: (e) => e.name ?? "",
-                selectedCb: (e) => selectedOrders.map((e) => e.id).contains(e.id ?? ""),
-                onChanged: (list){
+                selectedCb: (e) =>
+                    selectedOrders.map((e) => e.id).contains(e.id ?? ""),
+                onChanged: (list) {
                   // ddlog(list.map((e) => "${e.name}_${e.isSelected}"));
                   selectedOrders = list;
-                  debugPrint("重置 selectedUsers: ${selectedOrders.map((e) => e.name).toList()}");
+                  debugPrint(
+                      "重置 selectedUsers: ${selectedOrders.map((e) => e.name).toList()}");
                   // setState((){});
                 },
                 itemBuilder: (e, isSelected) {
@@ -140,43 +142,42 @@ class _NChoiceBoxOneDemoState extends State<NChoiceBoxOneDemo> {
   /// 模板类型
   Widget buildRpTypeBox() {
     Widget content = NChoiceBoxOne<Tuple3<String, String, String>>(
-          items: rpItems,
-          seletedItem: rpItemCurrent,
-          primaryColor: context.primaryColor,
-          styleSeleted: TextStyle(
-            color: context.primaryColor,
-            fontSize: 15,
-          ),
-          canChanged: (val, onSelect) {
-            if (rpItemCurrent == val) {
-              return false;
-            }
-            if (!canChange) {
-              DeleteAlert().show(context,
-                scrollController: ScrollController(),
-                title: "提示",
-                message: "切换模板种类会清空已选中的药品，是否确认切换?",
-                onConfirm: () async {
-                  Navigator.of(context).pop();
-                  onSelect(val, true);
-                  rpItemCurrent = val;
-                },
-              );
-            }
-            return canChange;
-          },
-          onChanged: (val){
-            // debugPrint("NChoiceBoxOne e: $val");
-            if (rpItemCurrent == val) {
-              return;
-            }
-            if (val is! Tuple3<String, String, String>) {
-              return;
-            }
-            rpItemCurrent = val;
-
+        items: rpItems,
+        seletedItem: rpItemCurrent,
+        primaryColor: context.primaryColor,
+        styleSeleted: TextStyle(
+          color: context.primaryColor,
+          fontSize: 15,
+        ),
+        canChanged: (val, onSelect) {
+          if (rpItemCurrent == val) {
+            return false;
           }
-      );
+          if (!canChange) {
+            DeleteAlert().show(
+              context,
+              scrollController: ScrollController(),
+              title: "提示",
+              message: "切换模板种类会清空已选中的药品，是否确认切换?",
+              onConfirm: () async {
+                Navigator.of(context).pop();
+                onSelect(val, true);
+                rpItemCurrent = val;
+              },
+            );
+          }
+          return canChange;
+        },
+        onChanged: (val) {
+          // debugPrint("NChoiceBoxOne e: $val");
+          if (rpItemCurrent == val) {
+            return;
+          }
+          if (val is! Tuple3<String, String, String>) {
+            return;
+          }
+          rpItemCurrent = val;
+        });
 
     return buildItemHeader(
       title: '模版类型',
@@ -204,11 +205,12 @@ class _NChoiceBoxOneDemoState extends State<NChoiceBoxOneDemo> {
       // wrapAlignment: WrapAlignment.spaceBetween,
       items: models
           .map((e) => ChoiceBoxModel<T>(
-        id: idCb(e),
-        title: titleCb(e),
-        isSelected: selectedCb(e),
-        data: e,
-      )).toList(),
+                id: idCb(e),
+                title: titleCb(e),
+                isSelected: selectedCb(e),
+                data: e,
+              ))
+          .toList(),
       onChanged: (val) {
         final selectedItems = val.map((e) => e.data).toList();
         onChanged(selectedItems);
@@ -278,7 +280,8 @@ class _NChoiceBoxOneDemoState extends State<NChoiceBoxOneDemo> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Flexible(
-                            child: NText(title,
+                            child: NText(
+                              title,
                               fontSize: 14,
                               fontWeight: FontWeight.w400,
                               // letterSpacing: 2,
@@ -301,10 +304,9 @@ class _NChoiceBoxOneDemoState extends State<NChoiceBoxOneDemo> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           NText(detailTitle ?? "",
-                            color: fontColor[30],
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500
-                          ),
+                              color: fontColorBCBFC2,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500),
                         ],
                       ),
                   ],
@@ -320,23 +322,27 @@ class _NChoiceBoxOneDemoState extends State<NChoiceBoxOneDemo> {
   }
 }
 
-
 /// 处方类型
 enum RpType {
   /// 西药
   WESTERN_MEDICINE('西药/中成药/特医'),
+
   /// 中药
   CHINESE_MEDICINE('中药'),
+
   /// 器械
   MEDICAL_APPLIANCE('医疗器械'),
+
   /// 检查
   JC('检测检查'),
+
   /// 续方
   RENEW_RP('续方');
 
+  const RpType(
+    this.desc,
+  );
 
-  const RpType(this.desc,);
   /// 当前枚举对应的 描述文字
   final String desc;
-
 }

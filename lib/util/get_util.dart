@@ -1,25 +1,26 @@
-
-
 import 'dart:io';
-
+import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
+import 'package:flutter_templet_project/basicWidget/n_textfield.dart';
+import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:get/get.dart';
 import 'package:tuple/tuple.dart';
 
 /// 自定义路由函数封装
 extension GetRouteUtil on GetInterface {
-
   /// 堆栈路由跳转
   /// pageRoute 路由
   /// onBefore 跳转前回调函数
   /// onUntil 堆栈中查询到路由时回调方法, 为空执行 Get.until
   /// onJump 堆栈中没查询到路由时回调方法, 为空执行 Get.offNamed
   /// 返回值 是否在堆栈中查询到路由
-  bool jump(String pageRoute, {
+  bool jump(
+    String pageRoute, {
     dynamic arguments,
     VoidCallback? onBefore,
     VoidCallback? onJump,
@@ -59,8 +60,7 @@ extension GetRouteUtil on GetInterface {
   }
 }
 
-class GetSheet{
-
+class GetSheet {
   /// 弹框 - 自定义child
   static void showBottomSheet({
     Widget? child,
@@ -89,7 +89,8 @@ class GetSheet{
     required List<Tuple2<int, Widget>> actions,
     required ValueChanged<int> onItem,
   }) {
-    assert(actions.isNotEmpty && !actions.map((e) => e.item1).contains(-1), "取消是 -1");
+    assert(actions.isNotEmpty && !actions.map((e) => e.item1).contains(-1),
+        "取消是 -1");
     if (actions.isEmpty) {
       return;
     }
@@ -97,15 +98,19 @@ class GetSheet{
     showBottomSheet(
       child: Column(
         children: [
-          ...actions.map((e) => sheetActionCell(
-            content: e.item2,
-            tag: e.item1,
-            onItem: onItem,
-            hasDivider: actions.indexOf(e) != 0,
-          )).toList(),
+          ...actions
+              .map((e) => sheetActionCell(
+                    content: e.item2,
+                    tag: e.item1,
+                    onItem: onItem,
+                    hasDivider: actions.indexOf(e) != 0,
+                  ))
+              .toList(),
           Container(height: 8.h, color: bgColor),
           sheetActionCell(
-            content: NText('取消',),
+            content: NText(
+              '取消',
+            ),
             tag: -1,
             onItem: onItem,
           ),
@@ -128,7 +133,10 @@ class GetSheet{
   }) {
     return Column(
       children: [
-        if (hasDivider) const Divider(height: 1,),
+        if (hasDivider)
+          const Divider(
+            height: 1,
+          ),
         InkWell(
           onTap: () {
             Get.back();
@@ -146,10 +154,166 @@ class GetSheet{
     );
   }
 
+  /// 输入框弹窗
+  static void showInput({
+    required TextEditingController controller,
+    String title = "编辑原因",
+    int lengthLimit = 200,
+    EdgeInsets textFieldPadding = const EdgeInsets.only(
+      top: 20,
+      left: 15,
+      right: 15,
+      bottom: 12,
+    ),
+    VoidCallback? onCancel,
+    required VoidCallback? onConfirm,
+  }) {
+    final context = Get.context;
+    final primary = context?.primaryColor ?? Colors.transparent;
+
+    showBottomSheet(
+      child: Container(
+        width: double.infinity,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          color: white,
+          borderRadius: BorderRadius.circular(4),
+        ),
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 8,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  width: 40,
+                  height: 3,
+                  decoration: BoxDecoration(
+                    color: lineColor,
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 13,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  title,
+                  style: TextStyle(
+                    color: fontColor,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                  ),
+                )
+              ],
+            ),
+            Container(
+              padding: textFieldPadding,
+              constraints: const BoxConstraints(minHeight: 82),
+              child: Column(
+                children: [
+                  NTextField(
+                    controller: controller,
+                    hintText: '请输入...',
+                    hintStyle: TextStyle(fontSize: 14, color: fontColor),
+                    minLines: 5,
+                    maxLines: 10,
+                    autofocus: true,
+                    fillColor: Colors.white,
+                    radius: 8,
+                    inputFormatters: [
+                      LengthLimitingTextInputFormatter(lengthLimit),
+                    ],
+                    onChanged: (String value) {},
+                    onSubmitted: (String value) {},
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: InkWell(
+                      onTap: onCancel ?? () => Get.back(),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: primary.withOpacity(0.08),
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(8),
+                          ),
+                        ),
+                        height: 44,
+                        alignment: Alignment.center,
+                        child: Text(
+                          '取消',
+                          style: TextStyle(
+                            color: primary,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 11,
+                  ),
+                  Expanded(
+                    child: InkWell(
+                      onTap: onConfirm,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: primary,
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(8),
+                          ),
+                          gradient: LinearGradient(
+                            colors: [primary, primary],
+                          ),
+                          boxShadow: const [
+                            BoxShadow(
+                              offset: Offset(0, 5),
+                              blurRadius: 10,
+                              color: Color(0x52007DBF),
+                            )
+                          ],
+                        ),
+                        height: 44,
+                        alignment: Alignment.center,
+                        child: const Text(
+                          '提交',
+                          style: TextStyle(
+                            color: white,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: max(
+                  context == null ? 0 : MediaQuery.of(context).padding.bottom,
+                  12),
+            ),
+            // const SizedBox(
+            //   height: 12,
+            // ),
+          ],
+        ),
+      ),
+    );
+  }
 }
 
-class GetDialog{
-
+class GetDialog {
   /// 弹框 - 自定义child
   static void showBottomSheet({
     Widget? child,
@@ -178,7 +342,8 @@ class GetDialog{
     required List<Tuple2<int, Widget>> actions,
     required ValueChanged<int> onItem,
   }) {
-    assert(actions.isNotEmpty && !actions.map((e) => e.item1).contains(-1), "取消是 -1");
+    assert(actions.isNotEmpty && !actions.map((e) => e.item1).contains(-1),
+        "取消是 -1");
     if (actions.isEmpty) {
       return;
     }
@@ -186,15 +351,19 @@ class GetDialog{
     showBottomSheet(
       child: Column(
         children: [
-          ...actions.map((e) => sheetActionCell(
-            content: e.item2,
-            tag: e.item1,
-            onItem: onItem,
-            hasDivider: actions.indexOf(e) != 0,
-          )).toList(),
+          ...actions
+              .map((e) => sheetActionCell(
+                    content: e.item2,
+                    tag: e.item1,
+                    onItem: onItem,
+                    hasDivider: actions.indexOf(e) != 0,
+                  ))
+              .toList(),
           Container(height: 8.h, color: bgColor),
           sheetActionCell(
-            content: NText('取消',),
+            content: NText(
+              '取消',
+            ),
             tag: -1,
             onItem: onItem,
           ),
@@ -217,7 +386,10 @@ class GetDialog{
   }) {
     return Column(
       children: [
-        if (hasDivider) const Divider(height: 1,),
+        if (hasDivider)
+          const Divider(
+            height: 1,
+          ),
         InkWell(
           onTap: () {
             Get.back();
@@ -234,5 +406,4 @@ class GetDialog{
       ],
     );
   }
-
 }

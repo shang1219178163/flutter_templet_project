@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/im_sound_record_bar.dart';
@@ -10,13 +8,8 @@ import 'package:flutter_templet_project/mixin/sound_state_mixin.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 
-
 class GestureDetectorDemo extends StatefulWidget {
-
-  GestureDetectorDemo({
-    Key? key, 
-    this.title
-  }) : super(key: key);
+  GestureDetectorDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -24,29 +17,33 @@ class GestureDetectorDemo extends StatefulWidget {
   _GestureDetectorDemoState createState() => _GestureDetectorDemoState();
 }
 
-class _GestureDetectorDemoState extends State<GestureDetectorDemo> with SoundStateMixin {
-
+class _GestureDetectorDemoState extends State<GestureDetectorDemo>
+    with SoundStateMixin {
   final cancelVN = ValueNotifier(false);
 
   late final screeenSize = MediaQuery.of(context).size;
 
   double bottomBarHeight = 100;
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () {
-            cancelVN.value = !cancelVN.value;
-            setState(() {});
-          },)
-        ).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () {
+                    cancelVN.value = !cancelVN.value;
+                    setState(() {});
+                  },
+                ))
+            .toList(),
       ),
       body: Container(
         color: Colors.greenAccent,
@@ -64,7 +61,8 @@ class _GestureDetectorDemoState extends State<GestureDetectorDemo> with SoundSta
         );
       },
       onPanUpdate: (e) {
-        debugPrint("${DateTime.now()} bottomSheet onPanUpdate ${e.globalPosition}");
+        debugPrint(
+            "${DateTime.now()} bottomSheet onPanUpdate ${e.globalPosition}");
 
         final temp = e.globalPosition.dy < screeenSize.height - bottomBarHeight;
         if (cancelVN.value == temp) return;
@@ -88,26 +86,25 @@ class _GestureDetectorDemoState extends State<GestureDetectorDemo> with SoundSta
           color: Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(4.w)),
         ),
-        child: Text("按住说话",
+        child: Text(
+          "按住说话",
           textAlign: TextAlign.center,
           style: TextStyle(
-              fontSize: 18.sp,
-              fontWeight: FontWeight.bold,
-              color: fontColor
-          ),
+              fontSize: 18.sp, fontWeight: FontWeight.bold, color: fontColor),
         ),
       ),
     );
 
     return GestureDetector(
-      onLongPressStart: (details){
+      onLongPressStart: (details) {
         debugPrint("onLongPressStart");
         showEntry(
           child: buildRecoring(),
         );
       },
-      onLongPressMoveUpdate:  (e) {
-        debugPrint("${DateTime.now()} bottomSheet onPanUpdate ${e.globalPosition}");
+      onLongPressMoveUpdate: (e) {
+        debugPrint(
+            "${DateTime.now()} bottomSheet onPanUpdate ${e.globalPosition}");
 
         final temp = e.globalPosition.dy < screeenSize.height - bottomBarHeight;
         if (cancelVN.value == temp) return;
@@ -115,7 +112,7 @@ class _GestureDetectorDemoState extends State<GestureDetectorDemo> with SoundSta
         setState(() {});
       },
 
-      onLongPressEnd: (details){
+      onLongPressEnd: (details) {
         debugPrint("onLongPressEnd");
         hideEntry();
       },
@@ -131,13 +128,11 @@ class _GestureDetectorDemoState extends State<GestureDetectorDemo> with SoundSta
           color: Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(4.w)),
         ),
-        child: Text("按住说话",
+        child: Text(
+          "按住说话",
           textAlign: TextAlign.center,
           style: TextStyle(
-              fontSize: 18.sp,
-              fontWeight: FontWeight.bold,
-              color: fontColor
-          ),
+              fontSize: 18.sp, fontWeight: FontWeight.bold, color: fontColor),
         ),
       ),
     );
@@ -161,8 +156,6 @@ class _GestureDetectorDemoState extends State<GestureDetectorDemo> with SoundSta
           ToastUtil.show("说话时间太短");
           return;
         }
-
-
       },
     );
   }
@@ -170,10 +163,13 @@ class _GestureDetectorDemoState extends State<GestureDetectorDemo> with SoundSta
   Widget buildRecoring() {
     return ValueListenableBuilder<bool>(
         valueListenable: cancelVN,
-        builder: (context, isCancel, child){
-
-          final closeButtonIconName =  (isCancel ? "img_sound_overlay_button_cancel.png" : "img_sound_overlay_button.png");
-          final bottombarIconName =  (isCancel ? "img_sound_overlay_bottom_cancel.png" : "img_sound_overlay_bottom.png");
+        builder: (context, isCancel, child) {
+          final closeButtonIconName = (isCancel
+              ? "img_sound_overlay_button_cancel.png"
+              : "img_sound_overlay_button.png");
+          final bottombarIconName = (isCancel
+              ? "img_sound_overlay_bottom_cancel.png"
+              : "img_sound_overlay_bottom.png");
 
           return Material(
             type: MaterialType.transparency,
@@ -189,7 +185,8 @@ class _GestureDetectorDemoState extends State<GestureDetectorDemo> with SoundSta
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: "img_sound_overlay_bg_recording.png".toAssetImage(),
+                        image:
+                            "img_sound_overlay_bg_recording.png".toAssetImage(),
                         fit: BoxFit.scaleDown,
                         colorFilter: ColorFilter.mode(
                           isCancel ? Colors.red : context.primaryColor,
@@ -203,15 +200,18 @@ class _GestureDetectorDemoState extends State<GestureDetectorDemo> with SoundSta
                       height: 42.w,
                     ),
                   ),
-                  SizedBox(height: 190.h,),
+                  SizedBox(
+                    height: 190.h,
+                  ),
                   Opacity(
                     opacity: isCancel ? 1 : 0,
                     child: Container(
                       padding: EdgeInsets.symmetric(vertical: 12.h),
                       alignment: Alignment.center,
-                      child: Text("松开 取消",
+                      child: Text(
+                        "松开 取消",
                         style: TextStyle(
-                          color: fontColor[15],
+                          color: fontColorB3B3B3,
                           fontSize: 14.sp,
                           fontWeight: FontWeight.bold,
                         ),
@@ -220,9 +220,7 @@ class _GestureDetectorDemoState extends State<GestureDetectorDemo> with SoundSta
                   ),
                   Container(
                     alignment: Alignment.center,
-                    decoration: BoxDecoration(
-
-                    ),
+                    decoration: BoxDecoration(),
                     child: Image(
                       image: closeButtonIconName.toAssetImage(),
                       width: 64,
@@ -234,9 +232,10 @@ class _GestureDetectorDemoState extends State<GestureDetectorDemo> with SoundSta
                     child: Container(
                       padding: EdgeInsets.symmetric(vertical: 12.h),
                       alignment: Alignment.center,
-                      child: Text("松开 发送",
+                      child: Text(
+                        "松开 发送",
                         style: TextStyle(
-                          color: fontColor[15],
+                          color: fontColorB3B3B3,
                           fontSize: 14.sp,
                           fontWeight: FontWeight.bold,
                         ),
@@ -258,8 +257,6 @@ class _GestureDetectorDemoState extends State<GestureDetectorDemo> with SoundSta
               ),
             ),
           );
-        }
-    );
+        });
   }
-
 }

@@ -187,7 +187,7 @@ class _StackDemoOneState extends State<StackDemoOne> with SingleTickerProviderSt
             fontSize: 16.sp,
             fontWeight: FontWeight.bold,
           ),
-          unselectedLabelColor: fontColor[20],
+          unselectedLabelColor: fontColor777777,
           unselectedLabelStyle: TextStyle(
             // color: primary,
             fontSize: 16.sp,

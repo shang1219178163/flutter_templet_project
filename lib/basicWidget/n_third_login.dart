@@ -1,5 +1,3 @@
-
-
 import 'dart:async';
 import 'dart:io';
 
@@ -17,7 +15,6 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:tuple/tuple.dart';
 
-
 /// 第三方登录类型
 enum NLoginType {
   account,
@@ -25,10 +22,8 @@ enum NLoginType {
   apple,
 }
 
-
 /// 登录页第三方登录
 class NThirdLogin extends StatefulWidget {
-
   const NThirdLogin({
     Key? key,
     required this.wxIsInstalled,
@@ -42,11 +37,11 @@ class NThirdLogin extends StatefulWidget {
   NThirdLoginState createState() => NThirdLoginState();
 }
 
-class NThirdLoginState extends State<NThirdLogin> with AppleSiginMixin, LoginMixin {
-
+class NThirdLoginState extends State<NThirdLogin>
+    with AppleSiginMixin, LoginMixin {
   List<Tuple2<String, VoidCallback>> get thirdLoginItems {
     return [
-      if(Platform.isIOS)Tuple2(Assets.imagesIconAppleBgGrey, onLoginApple),
+      if (Platform.isIOS) Tuple2(Assets.imagesIconAppleBgGrey, onLoginApple),
       Tuple2(Assets.imagesIconWechatBgGreen, onLoginWechat),
     ];
   }
@@ -60,7 +55,6 @@ class NThirdLoginState extends State<NThirdLogin> with AppleSiginMixin, LoginMix
   @override
   void initState() {
     super.initState();
-
   }
 
   @override
@@ -83,7 +77,7 @@ class NThirdLoginState extends State<NThirdLogin> with AppleSiginMixin, LoginMix
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 9, right: 9),
-                child: NText('第三方登录', fontSize: 14, color: fontColor[10]),
+                child: NText('第三方登录', fontSize: 14, color: fontColorB3B3B3),
               ),
               const Expanded(
                 child: Divider(
@@ -98,14 +92,11 @@ class NThirdLoginState extends State<NThirdLogin> with AppleSiginMixin, LoginMix
           padding: const EdgeInsets.only(top: 20, bottom: 33),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: thirdLoginItems.map((e){
+            children: thirdLoginItems.map((e) {
               return InkWell(
                 onTap: e.item2,
-                child: Image(
-                  image: e.item1.toAssetImage(),
-                  width: 40,
-                  height: 40
-                ),
+                child:
+                    Image(image: e.item1.toAssetImage(), width: 40, height: 40),
               );
             }).toList(),
           ),
@@ -116,7 +107,7 @@ class NThirdLoginState extends State<NThirdLogin> with AppleSiginMixin, LoginMix
 
   initFlux() async {
     // 初始化微信登录
-    if(Platform.isAndroid){
+    if (Platform.isAndroid) {
       await FluwxUtil().init();
     }
     // 微信授权监听
@@ -127,6 +118,7 @@ class NThirdLoginState extends State<NThirdLogin> with AppleSiginMixin, LoginMix
       },
     );
   }
+
   // 微信登录
   _authWeChat(res) async {
     ToastUtil.loading('正在登录...');
@@ -176,12 +168,9 @@ class NThirdLoginState extends State<NThirdLogin> with AppleSiginMixin, LoginMix
     initFlux();
     FluwxUtil().authLogin();
   }
-
 }
 
-
 mixin LoginMixin<T extends StatefulWidget> on State<T> {
-
   /// LoginMixin 登录结果统一处理
   handleLoginResult({
     required NLoginType loginType,

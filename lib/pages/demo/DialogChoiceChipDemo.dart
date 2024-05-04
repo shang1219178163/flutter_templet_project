@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/n_cancel_and_confirm_bar.dart';
@@ -16,11 +14,7 @@ import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:tuple/tuple.dart';
 
 class DialogChoiceChipDemo extends StatefulWidget {
-
-  DialogChoiceChipDemo({
-    Key? key,
-    this.title
-  }) : super(key: key);
+  DialogChoiceChipDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -43,76 +37,80 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
   late var items = <Tuple3<String, String, String>>[
     Tuple3("icon_section.png", "分组", "userTypesDesc"),
     Tuple3("icon_remark.png", "标签", "tagsDesc"),
-    Tuple3("icon_tag.png", "备注", "remark",),
+    Tuple3(
+      "icon_tag.png",
+      "备注",
+      "remark",
+    ),
   ];
 
-
   /// 分组疾病列表
-  late List<SelectModel<FakeDataModel>> tags = nums.map((e){
+  late List<SelectModel<FakeDataModel>> tags = nums.map((e) {
     return SelectModel(
-      id: e.toString(),
-      name: "标签_$e",
-      isSelected: false,
-      data: FakeDataModel(
-      id: e.toString(),
-    ));
+        id: e.toString(),
+        name: "标签_$e",
+        isSelected: false,
+        data: FakeDataModel(
+          id: e.toString(),
+        ));
   }).toList();
-
 
   /// 已选择的列表(多选)
   List<SelectModel<FakeDataModel>> selectedTags = [];
+
   /// 临时已选择的列表(多选)
   List<SelectModel<FakeDataModel>> selectedTagsTmp = [];
 
   /// 已选择的列表名称
-  List<String> get selectedTagsNames => selectedTags.map((e) => e.name ?? "-").toList();
-
+  List<String> get selectedTagsNames =>
+      selectedTags.map((e) => e.name ?? "-").toList();
 
   final info = ValueNotifier("");
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: onPressed,
-        )).toList(),
-      ),
-      body: ListView(
-        children: [
-          Column(
-            children: [
-              ValueListenableBuilder<String>(
-                valueListenable: info,
-                builder: (context,  value, child){
-
-                  return Container(
-                    padding: EdgeInsets.all(16),
-                    child: Text(value)
-                  );
-                }
-              ),
-              Wrap(
-                runSpacing: 12,
-                spacing: 16,
-                children: funcMap.keys.map((e) => TextButton(
-                  onPressed: () => funcMap[e]?.call(),
-                  child: Text(e),
-                )).toList(),
-              ),
-            ],
-          )
-        ],
-      )
-    );
+        appBar: AppBar(
+          title: Text(widget.title ?? "$widget"),
+          actions: [
+            'done',
+          ]
+              .map((e) => TextButton(
+                    child: Text(
+                      e,
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onPressed: onPressed,
+                  ))
+              .toList(),
+        ),
+        body: ListView(
+          children: [
+            Column(
+              children: [
+                ValueListenableBuilder<String>(
+                    valueListenable: info,
+                    builder: (context, value, child) {
+                      return Container(
+                          padding: EdgeInsets.all(16), child: Text(value));
+                    }),
+                Wrap(
+                  runSpacing: 12,
+                  spacing: 16,
+                  children: funcMap.keys
+                      .map((e) => TextButton(
+                            onPressed: () => funcMap[e]?.call(),
+                            child: Text(e),
+                          ))
+                      .toList(),
+                ),
+              ],
+            )
+          ],
+        ));
   }
 
-  onPressed(){
+  onPressed() {
     clickUpdateTags();
     // showPopViewBox(e: items[0]);
   }
@@ -122,110 +120,114 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
     Alignment alignment = Alignment.center,
   }) {
     final box = NPopViewBox(
-      // alignment: Alignment.bottomCenter,
-      title: Text("选择",
-        style: TextStyle(
-        fontSize: 18,
-        fontWeight: FontWeight.bold,
-        color: Color(0xff333333),
-      ),),
-      onCancell: (){
-        selectedTagsTmp = selectedTags;
-        handleItems(selectedItems: selectedTags);
-        Navigator.of(context).pop();
-      },
-      onConfirm: () async {
-        Navigator.of(context).pop();
+        // alignment: Alignment.bottomCenter,
+        title: Text(
+          "选择",
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: Color(0xff333333),
+          ),
+        ),
+        onCancell: () {
+          selectedTagsTmp = selectedTags;
+          handleItems(selectedItems: selectedTags);
+          Navigator.of(context).pop();
+        },
+        onConfirm: () async {
+          Navigator.of(context).pop();
 
-        selectedTags = selectedTagsTmp;
-        info.value = selectedTagsNames.join(",");
+          selectedTags = selectedTagsTmp;
+          info.value = selectedTagsNames.join(",");
 
-        // final response = await requestUpdateSections();
-        // if (response is! Map<String, dynamic> || response['code'] != 'OK' || response['result'] != true) {
-        //   BrunoUti.showInfoToast(RequestMsg.networkErrorMsg);
-        //   return;
-        // }
+          // final response = await requestUpdateSections();
+          // if (response is! Map<String, dynamic> || response['code'] != 'OK' || response['result'] != true) {
+          //   BrunoUti.showInfoToast(RequestMsg.networkErrorMsg);
+          //   return;
+          // }
 
-        // handleDiseaseTypes(selectedItems: selectDiseaseTypes);
-        // map[e.item3] = selectDiseaseTypesNames;
-        // debugPrint("selectDiseaseTypesNames: ${map[e.item3]}");
-        // debugPrint("map[e.item3]: ${map[e.item3]}");
-        setState(() {});
-      },
-      contentChildBuilder: (context, setState1) {
-        return Wrap(
-          runSpacing: 12,
-          spacing: 16,
-          alignment: WrapAlignment.start,
-          children: tags.map((e) => Material(
-            color: Colors.transparent,
-            child: ChoiceChip(
-              side: BorderSide(color: Color(0xfff3f3f3)),
-              label: Text(e.name ?? "-"),
-              labelStyle: TextStyle(
-                color: e.isSelected == true ? Colors.white : fontColor,
-              ),
-              // padding: EdgeInsets.only(left: 15, right: 15),
-              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-              selected: e.isSelected == true,
-              selectedColor: Theme.of(context).primaryColor,
-              backgroundColor: bgColor[10],
-              onSelected: (bool selected) {
-                for (final element in tags) {
-                  if (element.data?.id == e.data?.id) {
-                    element.isSelected = selected;
-                  } else {
-                    if (isMuti == false) {
-                      element.isSelected = false;//单选
-                    }
-                  }
-                }
+          // handleDiseaseTypes(selectedItems: selectDiseaseTypes);
+          // map[e.item3] = selectDiseaseTypesNames;
+          // debugPrint("selectDiseaseTypesNames: ${map[e.item3]}");
+          // debugPrint("map[e.item3]: ${map[e.item3]}");
+          setState(() {});
+        },
+        contentChildBuilder: (context, setState1) {
+          return Wrap(
+            runSpacing: 12,
+            spacing: 16,
+            alignment: WrapAlignment.start,
+            children: tags
+                .map((e) => Material(
+                      color: Colors.transparent,
+                      child: ChoiceChip(
+                        side: BorderSide(color: Color(0xfff3f3f3)),
+                        label: Text(e.name ?? "-"),
+                        labelStyle: TextStyle(
+                          color:
+                              e.isSelected == true ? Colors.white : fontColor,
+                        ),
+                        // padding: EdgeInsets.only(left: 15, right: 15),
+                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        selected: e.isSelected == true,
+                        selectedColor: Theme.of(context).primaryColor,
+                        backgroundColor: bgColorF9F9F9,
+                        onSelected: (bool selected) {
+                          for (final element in tags) {
+                            if (element.data?.id == e.data?.id) {
+                              element.isSelected = selected;
+                            } else {
+                              if (isMuti == false) {
+                                element.isSelected = false; //单选
+                              }
+                            }
+                          }
 
-                selectedTagsTmp = tags.where((e) => e.isSelected == true).toList();
-                setState1(() {});
-                // debugPrint("${e.toString()}");
-              },
-            ),)).toList(),
-        );
-      }
-    );
+                          selectedTagsTmp =
+                              tags.where((e) => e.isSelected == true).toList();
+                          setState1(() {});
+                          // debugPrint("${e.toString()}");
+                        },
+                      ),
+                    ))
+                .toList(),
+          );
+        });
 
     return showGeneralDialog(
-      context: context,
-      barrierDismissible: false,
-      barrierLabel: 'barrierLabel',
-      transitionDuration: Duration(milliseconds: 200),
-      pageBuilder: (context, animation, secondaryAnimation) {
-        return Dialog(
-          backgroundColor: Colors.black.withOpacity(0.01),
-          insetPadding: EdgeInsets.zero,
-          child: InkWell(
-            onTap: () {
-              Navigator.of(context).pop();
-              // AppUti.removeInputFocus();
-            },
-            child: box,
-          ),
-        );
-        return Material(
-          color: Colors.black.withOpacity(0.01),
-          child: InkWell(
-            onTap: () {
-              Navigator.of(context).pop();
-              // AppUti.removeInputFocus();
-            },
-            child: Container(
-              color: Colors.black.withOpacity(0.05),
-              child: Align(
-                alignment: alignment,
-                child: box,
-              )
+        context: context,
+        barrierDismissible: false,
+        barrierLabel: 'barrierLabel',
+        transitionDuration: Duration(milliseconds: 200),
+        pageBuilder: (context, animation, secondaryAnimation) {
+          return Dialog(
+            backgroundColor: Colors.black.withOpacity(0.01),
+            insetPadding: EdgeInsets.zero,
+            child: InkWell(
+              onTap: () {
+                Navigator.of(context).pop();
+                // AppUti.removeInputFocus();
+              },
+              child: box,
             ),
-          ),
-        );
-        return box;
-      }
-    );
+          );
+          return Material(
+            color: Colors.black.withOpacity(0.01),
+            child: InkWell(
+              onTap: () {
+                Navigator.of(context).pop();
+                // AppUti.removeInputFocus();
+              },
+              child: Container(
+                  color: Colors.black.withOpacity(0.05),
+                  child: Align(
+                    alignment: alignment,
+                    child: box,
+                  )),
+            ),
+          );
+          return box;
+        });
   }
 
   clickUpdateTags({
@@ -233,95 +235,8 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
     WrapAlignment alignment = WrapAlignment.start,
   }) {
     return showPopView(
-      title: "选择",
-      onCancell: (){
-        handleItems(selectedItems: selectedTags);
-        Navigator.of(context).pop();
-      },
-      onConfirm: () async {
-        Navigator.of(context).pop();
-
-        selectedTags = selectedTagsTmp;
-        info.value = selectedTagsNames.join(",");
-
-        // final response = await requestUpdateSections();
-        // if (response is! Map<String, dynamic> || response['code'] != 'OK' || response['result'] != true) {
-        //   BrunoUti.showInfoToast(RequestMsg.networkErrorMsg);
-        //   return;
-        // }
-
-        // handleDiseaseTypes(selectedItems: selectDiseaseTypes);
-        // map[e.item3] = selectDiseaseTypesNames;
-        // debugPrint("selectDiseaseTypesNames: ${map[e.item3]}");
-        // debugPrint("map[e.item3]: ${map[e.item3]}");
-        setState(() {});
-      },
-      contentChildBuilder: (context, setState1) {
-        return Wrap(
-          runSpacing: 12,
-          spacing: 16,
-          alignment: alignment,
-          children: tags.map((e) => Material(
-            color: Colors.transparent,
-            child: ChoiceChip(
-              side: BorderSide(color: Color(0xfff3f3f3)),
-              // label: Text((e.name ?? "-")*5 + '一二三四五六七八九十'.substring(0, 3),
-              //   maxLines: 2,
-              //   softWrap: true,
-              //   overflow: TextOverflow.ellipsis,
-              // ),
-              label: RichText(
-                text: TextSpan(
-                  children: [
-                    TextSpan(
-                      text: (e.name ?? "-")*5 + '一二三四五六七八九十'.substring(0, 3),
-                      style: TextStyle(
-                        color: e.isSelected == true ? Colors.white : fontColor,
-                      ),
-                    ),
-                  ],
-                ),
-                maxLines: 2,
-                softWrap: true,
-                overflow: TextOverflow.ellipsis,
-              ),
-              labelStyle: TextStyle(
-                color: e.isSelected == true ? Colors.white : fontColor,
-              ),
-              // padding: EdgeInsets.only(left: 15, right: 15),
-              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-              selected: e.isSelected == true,
-              selectedColor: Theme.of(context).primaryColor,
-              backgroundColor: bgColor[10],
-              onSelected: (bool selected) {
-                for (final element in tags) {
-                  if (element.id == e.id) {
-                    element.isSelected = selected;
-                  } else {
-                    if (isSingle) {
-                      element.isSelected = false;//单选
-                    }
-                  }
-                }
-
-                selectedTagsTmp = tags.where((e) => e.isSelected == true).toList();
-                // selectDiseaseTypes = diseaseTypeshere((e) => e.isSelected == true).toList();
-                setState1(() {});
-                // debugPrint("${e.toString()}");
-              },
-            ),)).toList(),
-        );
-      }
-    );
-  }
-
-  clickUpdateTagsOne({
-    bool isSingle = false,
-    WrapAlignment alignment = WrapAlignment.start,
-  }) {
-    return showPopView(
         title: "选择",
-        onCancell: (){
+        onCancell: () {
           handleItems(selectedItems: selectedTags);
           Navigator.of(context).pop();
         },
@@ -348,58 +263,159 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
             runSpacing: 12,
             spacing: 16,
             alignment: alignment,
-            children: tags.map((e) => Material(
-              color: Colors.transparent,
-              child: ChoiceChip(
-                side: BorderSide(color: Color(0xfff3f3f3)),
-                // label: Text((e.name ?? "-")*5 + '一二三四五六七八九十'.substring(0, 3),
-                //   maxLines: 2,
-                //   softWrap: true,
-                //   overflow: TextOverflow.ellipsis,
-                // ),
-                label: RichText(
-                  text: TextSpan(
-                    children: [
-                      TextSpan(
-                        text: (e.name ?? "-")*5 + '一二三四五六七八九十'.substring(0, 3),
-                        style: TextStyle(
-                          color: e.isSelected == true ? Colors.white : fontColor,
+            children: tags
+                .map((e) => Material(
+                      color: Colors.transparent,
+                      child: ChoiceChip(
+                        side: BorderSide(color: Color(0xfff3f3f3)),
+                        // label: Text((e.name ?? "-")*5 + '一二三四五六七八九十'.substring(0, 3),
+                        //   maxLines: 2,
+                        //   softWrap: true,
+                        //   overflow: TextOverflow.ellipsis,
+                        // ),
+                        label: RichText(
+                          text: TextSpan(
+                            children: [
+                              TextSpan(
+                                text: (e.name ?? "-") * 5 +
+                                    '一二三四五六七八九十'.substring(0, 3),
+                                style: TextStyle(
+                                  color: e.isSelected == true
+                                      ? Colors.white
+                                      : fontColor,
+                                ),
+                              ),
+                            ],
+                          ),
+                          maxLines: 2,
+                          softWrap: true,
+                          overflow: TextOverflow.ellipsis,
                         ),
-                      ),
-                    ],
-                  ),
-                  maxLines: 2,
-                  softWrap: true,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                labelStyle: TextStyle(
-                  color: e.isSelected == true ? Colors.white : fontColor,
-                ),
-                // padding: EdgeInsets.only(left: 15, right: 15),
-                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                selected: e.isSelected == true,
-                selectedColor: Theme.of(context).primaryColor,
-                backgroundColor: bgColor[10],
-                onSelected: (bool selected) {
-                  for (final element in tags) {
-                    if (element.id == e.id) {
-                      element.isSelected = selected;
-                    } else {
-                      if (isSingle) {
-                        element.isSelected = false;//单选
-                      }
-                    }
-                  }
+                        labelStyle: TextStyle(
+                          color:
+                              e.isSelected == true ? Colors.white : fontColor,
+                        ),
+                        // padding: EdgeInsets.only(left: 15, right: 15),
+                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        selected: e.isSelected == true,
+                        selectedColor: Theme.of(context).primaryColor,
+                        backgroundColor: bgColorF9F9F9,
+                        onSelected: (bool selected) {
+                          for (final element in tags) {
+                            if (element.id == e.id) {
+                              element.isSelected = selected;
+                            } else {
+                              if (isSingle) {
+                                element.isSelected = false; //单选
+                              }
+                            }
+                          }
 
-                  selectedTagsTmp = tags.where((e) => e.isSelected == true).toList();
-                  // selectDiseaseTypes = diseaseTypeshere((e) => e.isSelected == true).toList();
-                  setState1(() {});
-                  // debugPrint("${e.toString()}");
-                },
-              ),)).toList(),
+                          selectedTagsTmp =
+                              tags.where((e) => e.isSelected == true).toList();
+                          // selectDiseaseTypes = diseaseTypeshere((e) => e.isSelected == true).toList();
+                          setState1(() {});
+                          // debugPrint("${e.toString()}");
+                        },
+                      ),
+                    ))
+                .toList(),
           );
-        }
-    );
+        });
+  }
+
+  clickUpdateTagsOne({
+    bool isSingle = false,
+    WrapAlignment alignment = WrapAlignment.start,
+  }) {
+    return showPopView(
+        title: "选择",
+        onCancell: () {
+          handleItems(selectedItems: selectedTags);
+          Navigator.of(context).pop();
+        },
+        onConfirm: () async {
+          Navigator.of(context).pop();
+
+          selectedTags = selectedTagsTmp;
+          info.value = selectedTagsNames.join(",");
+
+          // final response = await requestUpdateSections();
+          // if (response is! Map<String, dynamic> || response['code'] != 'OK' || response['result'] != true) {
+          //   BrunoUti.showInfoToast(RequestMsg.networkErrorMsg);
+          //   return;
+          // }
+
+          // handleDiseaseTypes(selectedItems: selectDiseaseTypes);
+          // map[e.item3] = selectDiseaseTypesNames;
+          // debugPrint("selectDiseaseTypesNames: ${map[e.item3]}");
+          // debugPrint("map[e.item3]: ${map[e.item3]}");
+          setState(() {});
+        },
+        contentChildBuilder: (context, setState1) {
+          return Wrap(
+            runSpacing: 12,
+            spacing: 16,
+            alignment: alignment,
+            children: tags
+                .map((e) => Material(
+                      color: Colors.transparent,
+                      child: ChoiceChip(
+                        side: BorderSide(color: Color(0xfff3f3f3)),
+                        // label: Text((e.name ?? "-")*5 + '一二三四五六七八九十'.substring(0, 3),
+                        //   maxLines: 2,
+                        //   softWrap: true,
+                        //   overflow: TextOverflow.ellipsis,
+                        // ),
+                        label: RichText(
+                          text: TextSpan(
+                            children: [
+                              TextSpan(
+                                text: (e.name ?? "-") * 5 +
+                                    '一二三四五六七八九十'.substring(0, 3),
+                                style: TextStyle(
+                                  color: e.isSelected == true
+                                      ? Colors.white
+                                      : fontColor,
+                                ),
+                              ),
+                            ],
+                          ),
+                          maxLines: 2,
+                          softWrap: true,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        labelStyle: TextStyle(
+                          color:
+                              e.isSelected == true ? Colors.white : fontColor,
+                        ),
+                        // padding: EdgeInsets.only(left: 15, right: 15),
+                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        selected: e.isSelected == true,
+                        selectedColor: Theme.of(context).primaryColor,
+                        backgroundColor: bgColorF9F9F9,
+                        onSelected: (bool selected) {
+                          for (final element in tags) {
+                            if (element.id == e.id) {
+                              element.isSelected = selected;
+                            } else {
+                              if (isSingle) {
+                                element.isSelected = false; //单选
+                              }
+                            }
+                          }
+
+                          selectedTagsTmp =
+                              tags.where((e) => e.isSelected == true).toList();
+                          // selectDiseaseTypes = diseaseTypeshere((e) => e.isSelected == true).toList();
+                          setState1(() {});
+                          // debugPrint("${e.toString()}");
+                        },
+                      ),
+                    ))
+                .toList(),
+          );
+        });
   }
 
   clickUpdateTagsNew({
@@ -408,7 +424,7 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
   }) {
     return showPopView(
         title: "选择",
-        onCancell: (){
+        onCancell: () {
           handleItems(selectedItems: selectedTags);
           Navigator.of(context).pop();
         },
@@ -435,65 +451,81 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
             children: [
               Padding(
                 padding: EdgeInsets.only(bottom: 8.0),
-                child: NText("解决 ChoiceChip显示不全的问题", fontSize: 14,),
+                child: NText(
+                  "解决 ChoiceChip显示不全的问题",
+                  fontSize: 14,
+                ),
               ),
               Wrap(
                 runSpacing: 12,
                 spacing: 16,
                 alignment: alignment,
-                children: tags.map((e) => Material(
-                  color: Colors.transparent,
-                  child: StatefulBuilder(
-                    builder: (BuildContext context, StateSetter setState) {
+                children: tags
+                    .map((e) => Material(
+                          color: Colors.transparent,
+                          child: StatefulBuilder(builder:
+                              (BuildContext context, StateSetter setState) {
+                            return InkWell(
+                              onTap: () {
+                                e.isSelected = !e.isSelected!;
 
-                      return InkWell(
-                        onTap: (){
-                          e.isSelected = !e.isSelected!;
+                                for (final element in tags) {
+                                  if (element.id == e.id) {
+                                    element.isSelected = e.isSelected;
+                                  } else {
+                                    if (isSingle) {
+                                      element.isSelected = false; //单选
+                                    }
+                                  }
+                                }
 
-                          for (final element in tags) {
-                            if (element.id == e.id) {
-                              element.isSelected = e.isSelected;
-                            } else {
-                              if (isSingle) {
-                                element.isSelected = false;//单选
-                              }
-                            }
-                          }
-
-                          selectedTagsTmp = tags.where((e) => e.isSelected == true).toList();
-                          // selectDiseaseTypes = diseaseTypeshere((e) => e.isSelected == true).toList();
-                          setState(() => {});
-                          debugPrint(selectedTagsTmp.map((e) => e.name ?? "").join(","));
-                        },
-                        child: Container(
-                          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                          // decoration: BoxDecoration(
-                          //   color: e.isSelected == true ? Theme.of(context).primaryColor : bgColor[10],
-                          //   border: Border.all(color: Color(0xfff3f3f3)),
-                          //   borderRadius: BorderRadius.all(Radius.circular(8.r)),
-                          //   shape: StadiumBorder(),
-                          // ),
-                          decoration: ShapeDecoration(
-                            color: e.isSelected == true ? Theme.of(context).primaryColor : bgColor[10],
-                            shape: StadiumBorder(side: BorderSide(color: Color(0xfff3f3f3))),
-                          ),
-                          child: Text((e.name ?? "-")*5 + '一二三四五六七八九十'.substring(0, 3),
-                            maxLines: 2,
-                            softWrap: true,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                              color: e.isSelected == true ? Colors.white : fontColor,
-                            ),
-                          ),
-                        ),
-                      );
-                    }
-                  ),)).toList(),
+                                selectedTagsTmp = tags
+                                    .where((e) => e.isSelected == true)
+                                    .toList();
+                                // selectDiseaseTypes = diseaseTypeshere((e) => e.isSelected == true).toList();
+                                setState(() => {});
+                                debugPrint(selectedTagsTmp
+                                    .map((e) => e.name ?? "")
+                                    .join(","));
+                              },
+                              child: Container(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 12, vertical: 4),
+                                // decoration: BoxDecoration(
+                                //   color: e.isSelected == true ? Theme.of(context).primaryColor : bgColorF9F9F9,
+                                //   border: Border.all(color: Color(0xfff3f3f3)),
+                                //   borderRadius: BorderRadius.all(Radius.circular(8.r)),
+                                //   shape: StadiumBorder(),
+                                // ),
+                                decoration: ShapeDecoration(
+                                  color: e.isSelected == true
+                                      ? Theme.of(context).primaryColor
+                                      : bgColorF9F9F9,
+                                  shape: StadiumBorder(
+                                      side:
+                                          BorderSide(color: Color(0xfff3f3f3))),
+                                ),
+                                child: Text(
+                                  (e.name ?? "-") * 5 +
+                                      '一二三四五六七八九十'.substring(0, 3),
+                                  maxLines: 2,
+                                  softWrap: true,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                    color: e.isSelected == true
+                                        ? Colors.white
+                                        : fontColor,
+                                  ),
+                                ),
+                              ),
+                            );
+                          }),
+                        ))
+                    .toList(),
               ),
             ],
           );
-        }
-    );
+        });
   }
 
   clickAlertInset() {
@@ -509,7 +541,10 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Divider(height: 2, color: Colors.red,),
+          Divider(
+            height: 2,
+            color: Colors.red,
+          ),
           Container(
             color: ColorExt.random,
             height: 150,
@@ -523,74 +558,71 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
     final isMuti = true;
 
     presentAlertMaxHeight(
-      header: Container(
-        height: 45,
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border(
-            bottom: BorderSide(
-              width: 1,
-              color: Color(0xffe4e4e4)
+        header: Container(
+          height: 45,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            border: Border(
+              bottom: BorderSide(width: 1, color: Color(0xffe4e4e4)),
+            ),
+          ),
+          child: Text(
+            "标题",
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
             ),
           ),
         ),
-        child: Text("标题",
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
-      footer: NCancelAndConfirmBar(
-        onCancel: (){
+        footer: NCancelAndConfirmBar(onCancel: () {
           selectedTagsTmp = selectedTags;
           handleItems(selectedItems: selectedTagsTmp);
           Navigator.of(context).pop();
           debugPrint("${DateTime.now()} onCancell");
-
-        },
-        onConfirm: (){
+        }, onConfirm: () {
           Navigator.of(context).pop();
           selectedTags = selectedTagsTmp;
           info.value = selectedTagsNames.join(",");
           debugPrint("${DateTime.now()} ${info.value}");
-        }
-      ),
-      contentBuilder: (context, setState) {
-
-        return Container(
-          color: Colors.white,
-          padding: EdgeInsets.all(20),
-          child: Wrap(
-            runSpacing: 8.w,
-            spacing: 16.w,
-            children: tags.map((e) => ChoiceChip(
-              label: Text(e.name ?? ""),
-              labelStyle: TextStyle(
-                color: e.isSelected == true ? Colors.white : Color(0xff181818),
-              ),
-              // padding: EdgeInsets.only(left: 15, right: 15),
-              selected: e.isSelected == true,
-              selectedColor: context.primaryColor,
-              onSelected: (selected) {
-                for (var element in tags) {
-                  if (element.id == e.id) {
-                    element.isSelected = selected;
-                  } else {
-                    if (isMuti == false) {
-                      element.isSelected = false;
-                    }
-                  }
-                }
-                selectedTagsTmp = tags.where((e) => e.isSelected == true).toList();
-                setState((){});
-              },
-            )).toList(),
-          ),
-        );
-      }
-    );
+        }),
+        contentBuilder: (context, setState) {
+          return Container(
+            color: Colors.white,
+            padding: EdgeInsets.all(20),
+            child: Wrap(
+              runSpacing: 8.w,
+              spacing: 16.w,
+              children: tags
+                  .map((e) => ChoiceChip(
+                        label: Text(e.name ?? ""),
+                        labelStyle: TextStyle(
+                          color: e.isSelected == true
+                              ? Colors.white
+                              : Color(0xff181818),
+                        ),
+                        // padding: EdgeInsets.only(left: 15, right: 15),
+                        selected: e.isSelected == true,
+                        selectedColor: context.primaryColor,
+                        onSelected: (selected) {
+                          for (var element in tags) {
+                            if (element.id == e.id) {
+                              element.isSelected = selected;
+                            } else {
+                              if (isMuti == false) {
+                                element.isSelected = false;
+                              }
+                            }
+                          }
+                          selectedTagsTmp =
+                              tags.where((e) => e.isSelected == true).toList();
+                          setState(() {});
+                        },
+                      ))
+                  .toList(),
+            ),
+          );
+        });
   }
 
   /// 固定高度弹窗
@@ -600,45 +632,43 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
     Widget? footer,
   }) {
     return showGeneralDialog(
-      context: context,
-      // barrierDismissible: true,
-      // barrierColor: Colors.yellowAccent,
-      barrierLabel: 'showGeneralDialog',
-      transitionDuration: Duration(milliseconds: 200),
-      pageBuilder: (context, animation, secondaryAnimation) {
-
-        return Material(
-          color: Colors.black.withOpacity(0.05),
-          child: InkWell(
-            onTap: () {
-              debugPrint("barrier dismiss");
-              Navigator.of(context).pop();
-            },
-            child: Dialog(
-              // backgroundColor: Colors.red,
-              insetPadding: EdgeInsets.symmetric(
-                horizontal: 50,
-                vertical: 100,
-              ),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
-              ),
-              clipBehavior: Clip.hardEdge,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  if (header != null) header,
-                  Expanded(
-                    child: content,
-                  ),
-                  if (footer != null) footer,
-                ],
+        context: context,
+        // barrierDismissible: true,
+        // barrierColor: Colors.yellowAccent,
+        barrierLabel: 'showGeneralDialog',
+        transitionDuration: Duration(milliseconds: 200),
+        pageBuilder: (context, animation, secondaryAnimation) {
+          return Material(
+            color: Colors.black.withOpacity(0.05),
+            child: InkWell(
+              onTap: () {
+                debugPrint("barrier dismiss");
+                Navigator.of(context).pop();
+              },
+              child: Dialog(
+                // backgroundColor: Colors.red,
+                insetPadding: EdgeInsets.symmetric(
+                  horizontal: 50,
+                  vertical: 100,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                clipBehavior: Clip.hardEdge,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    if (header != null) header,
+                    Expanded(
+                      child: content,
+                    ),
+                    if (footer != null) footer,
+                  ],
+                ),
               ),
             ),
-          ),
-        );
-      }
-    );
+          );
+        });
   }
 
   /// 内容自适应高度
@@ -657,63 +687,57 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
   }) {
     final scrollController = ScrollController();
 
-    final defaultContent = StatefulBuilder(
-      builder: (context, setState) {
-
-        return Scrollbar(
-          controller: scrollController,
-          child: ConstrainedBox(
-            constraints: BoxConstraints(
-              maxHeight: maxHeight,
-              minHeight: 100,
-            ),
-            child: SingleChildScrollView(
+    final defaultContent = StatefulBuilder(builder: (context, setState) {
+      return Scrollbar(
+        controller: scrollController,
+        child: ConstrainedBox(
+          constraints: BoxConstraints(
+            maxHeight: maxHeight,
+            minHeight: 100,
+          ),
+          child: SingleChildScrollView(
               controller: scrollController,
               child: Padding(
                 padding: contentPadding,
                 child: contentBuilder?.call(context, setState),
-              )
-            ),
-          ),
-        );
-      }
-    );
+              )),
+        ),
+      );
+    });
 
     return showGeneralDialog(
-      context: context,
-      barrierDismissible: false,
-      // barrierColor: Colors.yellowAccent,
-      barrierLabel: 'showGeneralDialog',
-      transitionDuration: Duration(milliseconds: 200),
-      pageBuilder: (context, animation, secondaryAnimation) {
-
-        return Material(
-          color: Colors.black.withOpacity(0.05),
-          child: Container(
-            alignment: Alignment.center,
-            padding: EdgeInsets.symmetric(horizontal: 50),
-            // decoration: BoxDecoration(
-            //   color: Colors.transparent,
-            // ),
-            child: ClipRRect(
-              borderRadius: borderRadius ?? BorderRadius.zero,
-              child: Container(
-                color: Colors.white,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    if (header != null) header,
-                    Flexible(child: defaultContent),
-                    if (footer != null) footer,
-                  ],
+        context: context,
+        barrierDismissible: false,
+        // barrierColor: Colors.yellowAccent,
+        barrierLabel: 'showGeneralDialog',
+        transitionDuration: Duration(milliseconds: 200),
+        pageBuilder: (context, animation, secondaryAnimation) {
+          return Material(
+            color: Colors.black.withOpacity(0.05),
+            child: Container(
+              alignment: Alignment.center,
+              padding: EdgeInsets.symmetric(horizontal: 50),
+              // decoration: BoxDecoration(
+              //   color: Colors.transparent,
+              // ),
+              child: ClipRRect(
+                borderRadius: borderRadius ?? BorderRadius.zero,
+                child: Container(
+                  color: Colors.white,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      if (header != null) header,
+                      Flexible(child: defaultContent),
+                      if (footer != null) footer,
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-        );
-      }
-    );
+          );
+        });
   }
 
   /// 弹窗封装
@@ -734,15 +758,17 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
     EdgeInsets contentPadding = const EdgeInsets.all(20),
     StatefulWidgetBuilder? contentChildBuilder,
   }) {
-
     final scrollController = ScrollController();
 
     final defaultHeader = Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Padding(
-          padding: EdgeInsets.only(left: 20,),
-          child: Text(title,
+          padding: EdgeInsets.only(
+            left: 20,
+          ),
+          child: Text(
+            title,
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
@@ -754,10 +780,12 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
           padding: EdgeInsets.only(right: 4),
           child: Material(
             child: IconButton(
-              onPressed: onCancell ?? (){
-                Navigator.of(context).pop();
-              },
-              icon: Icon(Icons.clear,
+              onPressed: onCancell ??
+                  () {
+                    Navigator.of(context).pop();
+                  },
+              icon: Icon(
+                Icons.clear,
                 size: 20,
                 color: Colors.black.withOpacity(0.5),
               ),
@@ -767,38 +795,36 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
       ],
     );
 
-    final defaultContent = StatefulBuilder(
-      builder: (context, setState) {
-
-        return Scrollbar(
-          controller: scrollController,
-          child: ConstrainedBox(
-            constraints: BoxConstraints(
-              maxHeight: contentMaxHeight - buttonBarHeight,
-              minHeight: contentMinHeight,
-            ),
-            child: SingleChildScrollView(
+    final defaultContent = StatefulBuilder(builder: (context, setState) {
+      return Scrollbar(
+        controller: scrollController,
+        child: ConstrainedBox(
+          constraints: BoxConstraints(
+            maxHeight: contentMaxHeight - buttonBarHeight,
+            minHeight: contentMinHeight,
+          ),
+          child: SingleChildScrollView(
               controller: scrollController,
               child: Padding(
                 padding: contentPadding,
                 child: contentChildBuilder?.call(context, setState),
-              )
-            ),
-          ),
-        );
-      }
-    );
+              )),
+        ),
+      );
+    });
 
     final defaultFooter = NCancelAndConfirmBar(
       height: buttonBarHeight,
       confirmBgColor: Theme.of(context).primaryColor,
       bottomRadius: radius,
-      onCancel: onCancell ?? (){
-        Navigator.of(context).pop();
-      },
-      onConfirm: onConfirm ?? () {
-        Navigator.of(context).pop();
-      },
+      onCancel: onCancell ??
+          () {
+            Navigator.of(context).pop();
+          },
+      onConfirm: onConfirm ??
+          () {
+            Navigator.of(context).pop();
+          },
     );
 
     final child = Container(
@@ -816,7 +842,10 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
         mainAxisSize: MainAxisSize.min,
         children: [
           header ?? defaultHeader,
-          Divider(height: 1, color: divderColor,),
+          Divider(
+            height: 1,
+            color: divderColor,
+          ),
           content ?? defaultContent,
           footer ?? defaultFooter,
         ],
@@ -824,18 +853,16 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
     );
 
     return showGeneralDialog(
-      context: context,
-      barrierDismissible: false,
-      barrierLabel: 'barrierLabel',
-      transitionDuration: Duration(milliseconds: 200),
-      pageBuilder: (context, animation, secondaryAnimation) {
-
-        return Align(
-          alignment: alignment,
-          child: child,
-        );
-      }
-    );
+        context: context,
+        barrierDismissible: false,
+        barrierLabel: 'barrierLabel',
+        transitionDuration: Duration(milliseconds: 200),
+        pageBuilder: (context, animation, secondaryAnimation) {
+          return Align(
+            alignment: alignment,
+            child: child,
+          );
+        });
   }
 
   /// 处理疾病分组选中数据
@@ -848,4 +875,3 @@ class _DialogChoiceChipDemoState extends State<DialogChoiceChipDemo> {
     }
   }
 }
-
