@@ -6,15 +6,23 @@
 //  Copyright © 2024/1/16 shang. All rights reserved.
 //
 
-
 import 'dart:io';
 
 extension FileExt on File {
+  bool get isVideo {
+    var ext = path.toLowerCase();
 
-
+    return ext.endsWith(".mp4") ||
+        ext.endsWith(".avi") ||
+        ext.endsWith(".wmv") ||
+        ext.endsWith(".rmvb") ||
+        ext.endsWith(".mpg") ||
+        ext.endsWith(".mpeg") ||
+        ext.endsWith(".3gp");
+  }
 }
 
-extension FileIntExt on int{
+extension FileIntExt on int {
   /// length 转为 MB 描述
   String get fileSizeDesc {
     int length = this;
@@ -22,7 +30,8 @@ extension FileIntExt on int{
     final kb = length / 1024;
     final mb = kb / 1024;
 
-    final result = kb > 1024 ? '${mb.toStringAsFixed(2)}MB' : "${kb.toStringAsFixed(0)}kb";
+    final result =
+        kb > 1024 ? '${mb.toStringAsFixed(2)}MB' : "${kb.toStringAsFixed(0)}kb";
     return result;
   }
 
