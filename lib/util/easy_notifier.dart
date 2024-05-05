@@ -9,7 +9,7 @@
 import 'package:flutter/cupertino.dart';
 
 /// 自定义个监听触发类
-class EasyNotifer {
+class EasyNotifier {
   final List<VoidCallback> _listeners = [];
 
   void addListener(VoidCallback listener) {
@@ -44,5 +44,14 @@ class EasyNotifer {
         debugPrint(e.toString());
       }
     }
+  }
+}
+
+class EasyController {
+  final notifier = EasyNotifier();
+
+  ///刷新控件
+  void update() {
+    notifier.notify();
   }
 }
