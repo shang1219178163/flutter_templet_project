@@ -37,18 +37,6 @@ abstract class BaseRequestAPI {
     };
   }
 
-  /// url 验证
-  (bool, String) get validateURL {
-    if (requestType == HttpMethod.GET) {
-      final isError =
-          requestURI.endsWith("/") || requestURI.endsWith("undefined");
-      if (isError) {
-        return (false, RequestError.urlError.desc);
-      }
-    }
-    return (true, "");
-  }
-
   /// 传参验证
   (bool, String) get validateParams => (true, "");
 

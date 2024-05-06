@@ -6,8 +6,8 @@
 //  Copyright © 2024/4/12 shang. All rights reserved.
 //
 
-
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/network/RequestError.dart';
 import 'package:flutter_templet_project/network/base_request_api.dart';
 
@@ -21,35 +21,14 @@ class ValidateInterceptor extends QueuedInterceptor {
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    String token = options.headers["token"] ?? "";
-    if (api.needToken && token.isNotEmpty != true) {
+    final requestURI = options.path;
+    if (options.path.endsWith("/") || requestURI.endsWith("undefined")) {
+      debugPrint("❌ 无效请求: ${requestURI}");
       handler.resolve(Response(
         requestOptions: options,
-        data:  {
-          "code": RequestError.cancel,
-          "message": RequestError.cancel.desc,
-        },
-      ));
-    }
-
-    final validateURLTuple = api.validateURL;
-    if (!validateURLTuple.$1) {
-      handler.resolve(Response(
-        requestOptions: options,
-        data:  {
-          "code": RequestError.urlError,
-          "message": validateURLTuple.$2,
-        },
-      ));
-    }
-
-    final validateParamsTuple = api.validateParams;
-    if (!validateParamsTuple.$1) {
-      handler.resolve(Response(
-        requestOptions: options,
-        data:  {
-          "code": RequestError.paramsError,
-          "message": validateParamsTuple.$2,
+        data: {
+          "code": "",
+          "message": RequestError.urlError.desc,
         },
       ));
     }
@@ -59,7 +38,8 @@ class ValidateInterceptor extends QueuedInterceptor {
 
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
-    if (response.data is! Map<String, dynamic> || (response.data as Map<String, dynamic>).isEmpty) {
+    if (response.data is! Map<String, dynamic> ||
+        (response.data as Map<String, dynamic>).isEmpty) {
       return handler.reject(DioException.badResponse(
         statusCode: response.statusCode ?? 500,
         requestOptions: response.requestOptions,
@@ -72,7 +52,8 @@ class ValidateInterceptor extends QueuedInterceptor {
 
 /// 校验异常
 class ValidateException extends DioException {
-  ValidateException(RequestOptions options, {required this.err}) : super(requestOptions: options);
+  ValidateException(RequestOptions options, {required this.err})
+      : super(requestOptions: options);
 
   RequestError err;
 

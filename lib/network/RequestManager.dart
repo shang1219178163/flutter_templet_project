@@ -22,6 +22,7 @@ import 'package:flutter_templet_project/network/interceptors/validate_intercepto
 import 'package:flutter_templet_project/network/proxy/dio_proxy.dart';
 import 'package:flutter_templet_project/routes/APPRouter.dart';
 import 'package:flutter_templet_project/routes/NavigatorUtil.dart';
+import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class RequestManager extends BaseRequestAPI {
@@ -97,29 +98,21 @@ class RequestManager extends BaseRequestAPI {
   }
 
   Future<Map<String, dynamic>> request(BaseRequestAPI api) async {
-    // if (api.needToken && token?.isNotEmpty != true) {
-    //   // debugPrint("❌ 无效请求: ${api.requestURI}\ntoken: $token");
-    //   return {
-    //     "code": RequestError.cancel,
-    //     "message": RequestError.cancel.desc,
-    //   };
-    // }
-    //
-    // final validateURLTuple = api.validateURL;
-    // if (!validateURLTuple.$1) {
-    //   return {
-    //     "code": RequestError.urlError,
-    //     "message": validateURLTuple.$2,
-    //   };
-    // }
-    //
-    // final validateParamsTuple = api.validateParams;
-    // if (!validateParamsTuple.$1) {
-    //   return {
-    //     "code": RequestError.paramsError,
-    //     "message": validateParamsTuple.$2,
-    //   };
-    // }
+    if (api.needToken && token?.isNotEmpty != true) {
+      // debugPrint("❌ 无效请求: ${api.requestURI}\ntoken: $token");
+      return {
+        "code": RequestError.cancel,
+        "message": RequestError.cancel.desc,
+      };
+    }
+
+    final validateParamsTuple = api.validateParams;
+    if (!validateParamsTuple.$1) {
+      return {
+        "code": RequestError.paramsError,
+        "message": validateParamsTuple.$2,
+      };
+    }
 
     if (api.shouldCache) {
       final cache = api.jsonFromCache();
@@ -320,6 +313,13 @@ class RequestManager extends BaseRequestAPI {
     ].contains(codeStr)) {
       // 此方法用于账号被踢时,token失效
       NavigatorUtil.toLoginPage();
+    } else {
+      final hide = ![
+        RequestError.urlError.desc,
+      ].contains(resMap['message']);
+      if (hide) {
+        ToastUtil.show(resMap['message'] ?? "未知异常"); //TODO: 是否还需要次全局Toast?
+      }
     }
     return resMap;
   }
