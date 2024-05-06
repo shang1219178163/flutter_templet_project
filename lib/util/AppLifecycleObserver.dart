@@ -26,9 +26,16 @@ class AppLifecycleObserver extends WidgetsBindingObserver {
 
   final ValueChanged<AppLifecycleState>? onStateChange;
 
+  /// 切回前台(App 处于具有输入焦点且可见的正在运行的状态。)
   final VoidCallback onResume;
+
+  /// 切至后台(在 Android 和 iOS 上， inactive 可以认为它们马上会进入 hidden 和 paused 状态。)
   final VoidCallback onInactive;
+
+  /// 切至后台(App 当前对用户不可见，并且不响应用户行为。)
   final VoidCallback onPause;
+
+  /// 销毁页面(般不严谨要求的情况下，可以简单用于退出 App 的状态监听。)
   final VoidCallback onDetach;
   final VoidCallback onHidden;
 
