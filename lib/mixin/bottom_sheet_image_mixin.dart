@@ -31,18 +31,19 @@ mixin BottomSheetImageMixin<T extends StatefulWidget> on State<T> {
     bool needCropp = false,
     required ValueChanged<File> onChanged,
   }) {
-    GetSheet.showActions(
-        actions: [
-          (index: 0, child: NText('拍摄')),
-          (index: 1, child: NText('从相册选择')),
-        ],
-        onItem: (e) {
-          if (e.index == 0) {
+    GetBottomSheet.showActions(
+      actions: [
+        (
+          onTap: () {
             takePhoto(
               needCropp: needCropp,
               onChanged: onChanged,
             );
-          } else {
+          },
+          child: NText('拍摄')
+        ),
+        (
+          onTap: () {
             // chooseImagesByImagePicker(
             //   isFile: isFile,
             //   onChanged: onChanged,
@@ -53,8 +54,11 @@ mixin BottomSheetImageMixin<T extends StatefulWidget> on State<T> {
               needCropp: needCropp,
               onChanged: onChanged,
             );
-          }
-        });
+          },
+          child: NText('从相册选择')
+        ),
+      ],
+    );
   }
 
   // 更新头像

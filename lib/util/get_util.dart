@@ -60,73 +60,107 @@ extension GetRouteUtil on GetInterface {
   }
 }
 
-class GetSheet {
+/// Get.bottomSheet 封装类
+class GetBottomSheet {
   /// 弹框 - 自定义child
-  static void showBottom({
+  static void showCustom({
     Widget? child,
+    bool enableDrag = false,
+    bool needUnconstrainedBox = true,
   }) {
-    Get.bottomSheet(
-      UnconstrainedBox(
-        child: Container(
-          clipBehavior: Clip.hardEdge,
-          width: ScreenUtil().screenWidth,
-          decoration: BoxDecoration(
-            color: white,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(12.r),
-              topRight: Radius.circular(12.r),
-            ),
-          ),
-          child: child,
+    Widget content = Container(
+      clipBehavior: Clip.hardEdge,
+      width: Get.width,
+      decoration: const BoxDecoration(
+        color: white,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(12),
+          topRight: Radius.circular(12),
         ),
       ),
-      enableDrag: false,
+      child: child,
     );
+    if (needUnconstrainedBox) {
+      content = UnconstrainedBox(
+        child: content,
+      );
+    }
+    Get.bottomSheet(content, enableDrag: enableDrag, isScrollControlled: true);
   }
 
   /// 底部展示菜单
-  static void showActions<T extends ({int index, Widget child})>({
+  ///
+  /// actions 每项点击事件及视图 ({VoidCallback onTap, Widget child}
+  static void showActions<T extends ({VoidCallback onTap, Widget child})>({
     required List<T> actions,
-    required ValueChanged<T> onItem,
     VoidCallback? onCancel,
   }) {
     if (actions.isEmpty) {
       return;
     }
 
-    showBottom(
+    showCustom(
       child: Column(
         children: [
           ...actions
-              .map((e) => sheetActionCell(
-                    content: e.child,
-                    onTap: () => onItem(e),
+              .map((e) => buildActionCell(
+                    onTap: e.onTap,
                     hasDivider: actions.indexOf(e) != 0,
+                    child: e.child,
                   ))
               .toList(),
           Container(height: 8, color: bgColor),
-          sheetActionCell(
-              content: NText(
-                '取消',
-              ),
-              onTap: () {
-                onCancel?.call();
-                Get.back();
-              }),
+          buildActionCancel(onTap: onCancel),
           SizedBox(height: Platform.isIOS ? 34 : 8),
         ],
       ),
     );
   }
 
+  /// 弹框 - bottomSheet类型
+  ///
+  /// actions 数据
+  /// onItem 回调参数
+  static void showActionTitles({
+    required List<String> actions,
+    required Function(int) onItem,
+  }) {
+    showCustom(
+      child: Column(
+        children: [
+          ...actions.map((e) {
+            final i = actions.indexOf(e);
+
+            return buildActionCell(
+              onTap: () => onItem(i),
+              child: NText(
+                e,
+                color: fontColor,
+              ),
+            );
+          }).toList(),
+          Container(height: 8, color: bgColor),
+          buildActionCell(
+            onTap: () => Get.back(),
+            child: const NText(
+              '取消',
+              color: fontColor,
+            ),
+          ),
+          SizedBox(height: Platform.isIOS ? 30 : 0),
+        ],
+      ),
+    );
+  }
+
   /// 展示菜单子项
+  ///
   /// hasDivider 是否显示分割线
-  /// content 子组件
-  /// content 对应的 tag
-  /// onItem 点击回调
-  static Widget sheetActionCell({
+  /// onTap 点击回调
+  /// child 子组件
+  static Widget buildActionCell({
     bool hasDivider = true,
-    required Widget content,
+    required Widget child,
     required VoidCallback? onTap,
   }) {
     return Column(
@@ -142,10 +176,33 @@ class GetSheet {
             alignment: Alignment.center,
             // color: ColorExt.random,
             padding: EdgeInsets.symmetric(vertical: 12.h),
-            child: content,
+            child: child,
           ),
         ),
       ],
+    );
+  }
+
+  /// 展示菜单取消项
+  ///
+  /// onTap 点击回调
+  /// child 自定义内容
+  static Widget buildActionCancel({
+    VoidCallback? onTap,
+    Widget? child,
+  }) {
+    return buildActionCell(
+      onTap: () {
+        if (onTap != null) {
+          onTap.call();
+        } else {
+          Get.back();
+        }
+      },
+      child: child ??
+          const NText(
+            '取消',
+          ),
     );
   }
 
@@ -166,7 +223,7 @@ class GetSheet {
     final context = Get.context;
     final primary = context?.primaryColor ?? Colors.transparent;
 
-    showBottom(
+    showCustom(
       child: Container(
         width: double.infinity,
         alignment: Alignment.center,
@@ -304,101 +361,6 @@ class GetSheet {
           ],
         ),
       ),
-    );
-  }
-}
-
-class GetDialog {
-  /// 弹框 - 自定义child
-  static void showBottomSheet({
-    Widget? child,
-  }) {
-    Get.bottomSheet(
-      UnconstrainedBox(
-        child: Container(
-          clipBehavior: Clip.hardEdge,
-          width: ScreenUtil().screenWidth,
-          decoration: BoxDecoration(
-            color: white,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(12.r),
-              topRight: Radius.circular(12.r),
-            ),
-          ),
-          child: child,
-        ),
-      ),
-      enableDrag: false,
-    );
-  }
-
-  /// 底部展示菜单
-  static void showSheetActions({
-    required List<Tuple2<int, Widget>> actions,
-    required ValueChanged<int> onItem,
-  }) {
-    assert(actions.isNotEmpty && !actions.map((e) => e.item1).contains(-1),
-        "取消是 -1");
-    if (actions.isEmpty) {
-      return;
-    }
-
-    showBottomSheet(
-      child: Column(
-        children: [
-          ...actions
-              .map((e) => sheetActionCell(
-                    content: e.item2,
-                    tag: e.item1,
-                    onItem: onItem,
-                    hasDivider: actions.indexOf(e) != 0,
-                  ))
-              .toList(),
-          Container(height: 8.h, color: bgColor),
-          sheetActionCell(
-            content: NText(
-              '取消',
-            ),
-            tag: -1,
-            onItem: onItem,
-          ),
-          SizedBox(height: Platform.isIOS ? 34.h : 8.h),
-        ],
-      ),
-    );
-  }
-
-  /// 展示菜单子项
-  /// hasDivider 是否显示分割线
-  /// content 子组件
-  /// content 对应的 tag
-  /// onItem 点击回调
-  static Widget sheetActionCell({
-    bool hasDivider = true,
-    required Widget content,
-    required int tag,
-    required ValueChanged<int> onItem,
-  }) {
-    return Column(
-      children: [
-        if (hasDivider)
-          const Divider(
-            height: 1,
-          ),
-        InkWell(
-          onTap: () {
-            Get.back();
-            onItem(tag);
-          },
-          child: Container(
-            width: double.infinity,
-            alignment: Alignment.center,
-            // color: ColorExt.random,
-            padding: EdgeInsets.symmetric(vertical: 12.h),
-            child: content,
-          ),
-        ),
-      ],
     );
   }
 }

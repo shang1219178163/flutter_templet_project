@@ -247,18 +247,16 @@ class _BottomSheetDemoState extends State<BottomSheetDemo> {
   }
 
   void onGetBottom() {
-    GetSheet.showActions(
-        actions: [
-          (index: 0, child: NText('拍摄')),
-          (index: 1, child: NText('从相册选择')),
-        ],
-        onItem: (index) {
-          ddlog("index: $index");
-        });
+    GetBottomSheet.showActions(
+      actions: [
+        (onTap: () {}, child: NText('拍摄')),
+        (onTap: () {}, child: NText('从相册选择')),
+      ],
+    );
   }
 
   void onGetBottomInput() {
-    GetSheet.showInput(
+    GetBottomSheet.showInput(
       controller: textController,
       onConfirm: () {
         Navigator.of(context).pop();
