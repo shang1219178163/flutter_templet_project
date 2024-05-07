@@ -12,18 +12,6 @@ import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 
 extension FileExt on File {
-  bool get isVideo {
-    var ext = path.toLowerCase();
-
-    return ext.endsWith(".mp4") ||
-        ext.endsWith(".avi") ||
-        ext.endsWith(".wmv") ||
-        ext.endsWith(".rmvb") ||
-        ext.endsWith(".mpg") ||
-        ext.endsWith(".mpeg") ||
-        ext.endsWith(".3gp");
-  }
-
   /// assets 路径转 File
   static Future<File> fromAssets(String path) async {
     final byteData = await rootBundle.load(path);
@@ -38,6 +26,19 @@ extension FileExt on File {
       byteData.lengthInBytes,
     ));
     return file;
+  }
+
+  /// 是否是视频
+  bool get isVideo {
+    var ext = path.toLowerCase();
+
+    return ext.endsWith(".mp4") ||
+        ext.endsWith(".avi") ||
+        ext.endsWith(".wmv") ||
+        ext.endsWith(".rmvb") ||
+        ext.endsWith(".mpg") ||
+        ext.endsWith(".mpeg") ||
+        ext.endsWith(".3gp");
   }
 
   String get fileSizeDesc {
