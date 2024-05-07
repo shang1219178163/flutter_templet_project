@@ -8,6 +8,9 @@
 
 import 'dart:io';
 
+import 'package:flutter/services.dart';
+import 'package:path_provider/path_provider.dart';
+
 extension FileExt on File {
   bool get isVideo {
     var ext = path.toLowerCase();
@@ -19,6 +22,27 @@ extension FileExt on File {
         ext.endsWith(".mpg") ||
         ext.endsWith(".mpeg") ||
         ext.endsWith(".3gp");
+  }
+
+  /// assets 路径转 File
+  static Future<File> fromAssets(String path) async {
+    final byteData = await rootBundle.load(path);
+    final fileName = path.split("/").last;
+
+    final tempPath = (await getTemporaryDirectory()).path;
+
+    final file = File('$tempPath/$fileName');
+    await file.create(recursive: true);
+    await file.writeAsBytes(byteData.buffer.asUint8List(
+      byteData.offsetInBytes,
+      byteData.lengthInBytes,
+    ));
+    return file;
+  }
+
+  String get fileSizeDesc {
+    final length = lengthSync();
+    return length.fileSizeDesc;
   }
 }
 
