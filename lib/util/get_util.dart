@@ -207,6 +207,15 @@ class GetBottomSheet {
   }
 
   /// 输入框弹窗
+  ///
+  /// controller 输入框控制器
+  /// lengthLimit 字数限制,默认 200
+  /// textFieldPadding textField边距
+  /// onCancel 取消回调
+  /// onConfirm 确定回调
+  /// header 输入框上面
+  /// middle 输入框下面
+  /// footer 取消和确定按钮下面
   static void showInput({
     required TextEditingController controller,
     String title = "编辑原因",
@@ -219,6 +228,9 @@ class GetBottomSheet {
     ),
     VoidCallback? onCancel,
     required VoidCallback? onConfirm,
+    Widget? header,
+    Widget? middle,
+    Widget? footer,
   }) {
     final context = Get.context;
     final primary = context?.primaryColor ?? Colors.transparent;
@@ -265,6 +277,7 @@ class GetBottomSheet {
                 )
               ],
             ),
+            header ?? const SizedBox(),
             Container(
               padding: textFieldPadding,
               constraints: const BoxConstraints(minHeight: 82),
@@ -288,6 +301,7 @@ class GetBottomSheet {
                 ],
               ),
             ),
+            middle ?? const SizedBox(),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 15),
               child: Row(
@@ -350,6 +364,7 @@ class GetBottomSheet {
                 ],
               ),
             ),
+            footer ?? const SizedBox(),
             SizedBox(
               height: max(
                   context == null ? 0 : MediaQuery.of(context).padding.bottom,

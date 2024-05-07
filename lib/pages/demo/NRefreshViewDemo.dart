@@ -6,13 +6,8 @@
 //  Copyright © 2024/3/22 shang. All rights reserved.
 //
 
-
-
-
-
-
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/NNet/NRefreshView.dart';
+import 'package:flutter_templet_project/basicWidget/n_network/n_refresh_view.dart';
 import 'package:flutter_templet_project/basicWidget/n_network_image.dart';
 import 'package:flutter_templet_project/basicWidget/n_selected_cell.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
@@ -27,7 +22,6 @@ import 'package:flutter_templet_project/model/user_model.dart';
 import 'package:get/get.dart';
 
 class NRefreshViewDemo extends StatefulWidget {
-
   const NRefreshViewDemo({
     super.key,
     this.arguments,
@@ -40,7 +34,6 @@ class NRefreshViewDemo extends StatefulWidget {
 }
 
 class _NRefreshViewDemoState extends State<NRefreshViewDemo> {
-
   bool get hideApp =>
       Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
 
@@ -55,38 +48,41 @@ class _NRefreshViewDemoState extends State<NRefreshViewDemo> {
   var isEditVN = ValueNotifier(false);
   var selectedList = ValueNotifier(<UserModel>[]);
 
-  initData(){
-    dataList.value = List.generate(20, (index) => UserModel(
-        id: "${index + 1000}" ,
-        name: "用户_$index",
-    ));
+  initData() {
+    dataList.value = List.generate(
+        20,
+        (index) => UserModel(
+              id: "${index + 1000}",
+              name: "用户_$index",
+            ));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: hideApp ? null : AppBar(
-        title: Text("$widget"),
-        actions: [
-          ValueListenableBuilder(
-             valueListenable: isEditVN,
-             builder: (context,  isEdit, child){
-
-               final title = isEdit ? "取消" : "选择";
-                return TextButton(
-                  onPressed: (){
-                    isEditVN.value = !isEditVN.value;
-                  },
-                  child: Text(title,
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                );
-              }
-          ),
-        ],
-      ),
+      appBar: hideApp
+          ? null
+          : AppBar(
+              title: Text("$widget"),
+              actions: [
+                ValueListenableBuilder(
+                    valueListenable: isEditVN,
+                    builder: (context, isEdit, child) {
+                      final title = isEdit ? "取消" : "选择";
+                      return TextButton(
+                        onPressed: () {
+                          isEditVN.value = !isEditVN.value;
+                        },
+                        child: Text(
+                          title,
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                      );
+                    }),
+              ],
+            ),
       body: buildBody(),
     );
   }
@@ -96,37 +92,39 @@ class _NRefreshViewDemoState extends State<NRefreshViewDemo> {
       children: [
         ValueListenableBuilder(
             valueListenable: selectedList,
-            builder: (context,  list, child){
-
-              final items = list.map((e) => {
-                // "id": e.id,
-                "name": e.name,
-                // "isSelected": e.isSelected,
-              }).toList();
+            builder: (context, list, child) {
+              final items = list
+                  .map((e) => {
+                        // "id": e.id,
+                        "name": e.name,
+                        // "isSelected": e.isSelected,
+                      })
+                  .toList();
               ddlog(items);
 
               final count = list.length;
               var desc = "已选择 $count";
               desc = items.join(",");
-              return NText("已选择 $desc", maxLines: 100,);
-            }
-        ),
+              return NText(
+                "已选择 $desc",
+                maxLines: 100,
+              );
+            }),
         Expanded(
           child: ValueListenableBuilder(
-             valueListenable: isEditVN,
-             builder: (context, isEdit, child){
-
-              return NRefreshView<UserModel>(
-                controller: refreshViewController,
-                pageSize: 10,
-                onRequest: (bool isRefresh, int page, int pageSize, last) async {
-                  return requestList(isRefresh: isRefresh, pageNo: page, pageSize: pageSize);
-                },
-                itemBuilder: (BuildContext context, int index, e) {
-
-                  return StatefulBuilder(
-                    builder: (BuildContext context, StateSetter setState) {
-
+              valueListenable: isEditVN,
+              builder: (context, isEdit, child) {
+                return NRefreshView<UserModel>(
+                  controller: refreshViewController,
+                  pageSize: 10,
+                  onRequest:
+                      (bool isRefresh, int page, int pageSize, last) async {
+                    return requestList(
+                        isRefresh: isRefresh, pageNo: page, pageSize: pageSize);
+                  },
+                  itemBuilder: (BuildContext context, int index, e) {
+                    return StatefulBuilder(
+                        builder: (BuildContext context, StateSetter setState) {
                       void onTap() {
                         ddlog("onSelected: ${e.toJson()}");
                       }
@@ -134,7 +132,7 @@ class _NRefreshViewDemoState extends State<NRefreshViewDemo> {
                       void onToggle() {
                         e.isSelected = !e.isSelected;
                         ddlog("onSelected: ${e.isSelected}");
-                        setState((){});
+                        setState(() {});
 
                         if (e.isSelected) {
                           selectedList.value.add(e);
@@ -152,17 +150,20 @@ class _NRefreshViewDemoState extends State<NRefreshViewDemo> {
                         onTap: !isEdit ? onTap : onToggle,
                         leading: NNetworkImage(
                           url: "",
-                          placehorder: AssetImage("img_placeholder_patient.png".toPath()),
+                          placehorder: AssetImage(
+                              "img_placeholder_patient.png".toPath()),
                           width: 40,
                           height: 40,
                         ),
-                        title: Text(title,
+                        title: Text(
+                          title,
                           style: TextStyle(
                             fontSize: 14,
                             color: e.isSelected ? context.primaryColor : null,
                           ),
                         ),
-                        subtitle: Text(subtitle,
+                        subtitle: Text(
+                          subtitle,
                           style: TextStyle(
                             fontSize: 12,
                           ),
@@ -178,14 +179,11 @@ class _NRefreshViewDemoState extends State<NRefreshViewDemo> {
                         onToggle: onToggle,
                         child: child,
                       );
-                    }
-                  );
-                },
-              );
-            }
-          ),
+                    });
+                  },
+                );
+              }),
         ),
-
       ],
     );
   }

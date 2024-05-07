@@ -1,8 +1,9 @@
-
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_templet_project/basicWidget/n_resize.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/cache/file_manager.dart';
 import 'package:flutter_templet_project/extension/snack_bar_ext.dart';
@@ -11,11 +12,7 @@ import 'package:get/get.dart';
 import 'package:json_to_dart/model_generator.dart';
 
 class JsonToDartPage extends StatefulWidget {
-
-  JsonToDartPage({
-    Key? key, 
-    this.title
-  }) : super(key: key);
+  JsonToDartPage({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -24,14 +21,14 @@ class JsonToDartPage extends StatefulWidget {
 }
 
 class _JsonToDartPageState extends State<JsonToDartPage> {
-
   final _textEditingController = TextEditingController();
   final _focusNode = FocusNode();
-
 
   var rootClassNameStr = "Root";
   var classPrefix = "YY";
   var classSuffix = "Model";
+
+  var hasCopyWithFunc = false;
 
   late final _nameController = TextEditingController(text: rootClassNameStr);
   late final _prefixController = TextEditingController(text: classPrefix);
@@ -41,7 +38,6 @@ class _JsonToDartPageState extends State<JsonToDartPage> {
 
   var jsonStr = "";
   final outVN = ValueNotifier("");
-
 
   @override
   void initState() {
@@ -53,52 +49,49 @@ class _JsonToDartPageState extends State<JsonToDartPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title ?? "$widget"),
-        actions: [
-          IconButton(
-            onPressed: (){
+      appBar: AppBar(title: Text(widget.title ?? "$widget"), actions: [
+        IconButton(
+            onPressed: () {
               Get.bottomSheet(Container(
                 color: Colors.white,
                 height: MediaQuery.of(context).size.height * 0.3,
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    NText("1. 所有对象不能为空(零属性)",),
+                    NText(
+                      "1. 所有对象不能为空(零属性)",
+                    ),
                   ],
                 ),
               ));
             },
-            icon: Icon(Icons.warning_amber_rounded)
-          ),
-        ]
-      ),
+            icon: Icon(Icons.warning_amber_rounded)),
+      ]),
       body: buildBody(),
     );
   }
 
   buildBody() {
     return Container(
-      child: LayoutBuilder(
-        builder: (context, constraints) {
-
-          final direction = constraints.maxWidth > 500 ? Axis.horizontal : Axis.vertical;
-          if (direction == Axis.horizontal) {
-            return buildBodyHorizontal(constraints: constraints);
-          }
-          return buildBodyVertical(constraints: constraints);
+      child: LayoutBuilder(builder: (context, constraints) {
+        final direction =
+            constraints.maxWidth > 500 ? Axis.horizontal : Axis.vertical;
+        if (direction == Axis.horizontal) {
+          return buildBodyHorizontal(constraints: constraints);
         }
-      ),
+        return buildBodyVertical(constraints: constraints);
+      }),
     );
   }
 
-  buildBodyVertical({double spacing = 10, required BoxConstraints constraints}) {
+  buildBodyVertical(
+      {double spacing = 10, required BoxConstraints constraints}) {
     return Scrollbar(
       controller: _scrollController,
       child: SingleChildScrollView(
         controller: _scrollController,
         child: Container(
-          padding: EdgeInsets.all(spacing*3),
+          padding: EdgeInsets.all(spacing * 3),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -107,7 +100,9 @@ class _JsonToDartPageState extends State<JsonToDartPage> {
                 height: constraints.maxHeight * 0.7,
                 child: buildLeft(isVertical: true),
               ),
-              SizedBox(height: spacing*3,),
+              SizedBox(
+                height: spacing * 3,
+              ),
               Container(
                 child: buildRight(),
               ),
@@ -118,9 +113,10 @@ class _JsonToDartPageState extends State<JsonToDartPage> {
     );
   }
 
-  buildBodyHorizontal({double spacing = 10, required BoxConstraints constraints}) {
+  buildBodyHorizontal(
+      {double spacing = 10, required BoxConstraints constraints}) {
     return Container(
-      padding: EdgeInsets.all(spacing*3),
+      padding: EdgeInsets.all(spacing * 3),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -130,7 +126,9 @@ class _JsonToDartPageState extends State<JsonToDartPage> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 buildLeft(width: constraints.maxWidth * 0.45),
-                SizedBox(width: spacing*3,),
+                SizedBox(
+                  width: spacing * 3,
+                ),
                 Expanded(
                   child: buildRight(),
                 ),
@@ -149,15 +147,21 @@ class _JsonToDartPageState extends State<JsonToDartPage> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        NText("JSON to Dart",
+        NText(
+          "JSON to Dart",
           fontSize: 24,
           fontWeight: FontWeight.w500,
         ),
-        SizedBox(height: spacing,),
-        NText("Paste your JSON in the textarea below, click convert and get your Dart classes for free.",
+        SizedBox(
+          height: spacing,
+        ),
+        NText(
+          "Paste your JSON in the textarea below, click convert and get your Dart classes for free.",
           maxLines: 3,
         ),
-        SizedBox(height: spacing*2,),
+        SizedBox(
+          height: spacing * 2,
+        ),
       ],
     );
   }
@@ -192,10 +196,10 @@ class _JsonToDartPageState extends State<JsonToDartPage> {
         ),
         counterText: '',
       ),
-      onChanged: (val) async{
+      onChanged: (val) async {
         // debugPrint("onChanged: $val");
       },
-      onSubmitted: (val){
+      onSubmitted: (val) {
         debugPrint("onSubmitted: $val");
       },
       onEditingComplete: () {
@@ -252,7 +256,9 @@ class _JsonToDartPageState extends State<JsonToDartPage> {
                   ),
                 ),
               ),
-              SizedBox(width: 16,),
+              SizedBox(
+                width: 16,
+              ),
               Expanded(
                 child: Container(
                   padding: EdgeInsets.only(bottom: 0),
@@ -265,6 +271,34 @@ class _JsonToDartPageState extends State<JsonToDartPage> {
             ],
           ),
         ),
+        StatefulBuilder(builder: (context, setState) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(vertical: 4),
+            child: Row(
+              children: [
+                Text(
+                  "显示 CopyWith 函数",
+                  style: TextStyle(fontSize: 14),
+                ),
+                SizedBox(
+                  width: 6,
+                ),
+                NResize(
+                  width: 40,
+                  height: 25,
+                  child: CupertinoSwitch(
+                    value: hasCopyWithFunc,
+                    onChanged: (bool val) {
+                      hasCopyWithFunc = val;
+                      setState(() {});
+                      onGenerate();
+                    },
+                  ),
+                ),
+              ],
+            ),
+          );
+        }),
         Row(
           children: [
             ElevatedButton(
@@ -290,12 +324,15 @@ class _JsonToDartPageState extends State<JsonToDartPage> {
                 // minimumSize: Size(50, 18),
                 shape: CircleBorder(),
               ),
-              onPressed: () async{
+              onPressed: () async {
                 final jsonStr = await loadData();
                 _textEditingController.text = jsonStr;
                 toCreateDartFile();
               },
-              child: NText("try", color: Colors.black45,),
+              child: NText(
+                "try",
+                color: Colors.black45,
+              ),
             ),
           ],
         ),
@@ -305,7 +342,7 @@ class _JsonToDartPageState extends State<JsonToDartPage> {
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.black54,
             ),
-            onPressed: (){
+            onPressed: () {
               debugPrint("copy");
               Clipboard.setData(ClipboardData(text: outVN.value));
             },
@@ -316,42 +353,47 @@ class _JsonToDartPageState extends State<JsonToDartPage> {
     );
   }
 
-
   Widget buildRight({
     ScrollController? controller,
     double spacing = 10,
     bool selectable = true,
   }) {
     return ValueListenableBuilder<String>(
-      valueListenable: outVN,
-      builder: (context,  value, child){
+        valueListenable: outVN,
+        builder: (context, value, child) {
+          final child = selectable
+              ? SelectableText(
+                  value,
+                  // maxLines: 1000,
+                )
+              : NText(
+                  value,
+                  // maxLines: 1000,
+                );
 
-        final child = selectable ?
-        SelectableText(value,
-          // maxLines: 1000,
-        ) : NText(value,
-          // maxLines: 1000,
-        );
-
-        return Scrollbar(
-          controller: controller,
-          thumbVisibility: true,
-          child: SingleChildScrollView(
+          return Scrollbar(
             controller: controller,
-            child: child,
-          ),
-        );
-      }
-    );
+            thumbVisibility: true,
+            child: SingleChildScrollView(
+              controller: controller,
+              child: child,
+            ),
+          );
+        });
   }
 
   /// 转模型
-  String convertModel({required String rawJson, String rootClassName = "RootModel", String classPrefix = "YY", String classSuffix = "Model"}) {
+  String convertModel(
+      {required String rawJson,
+      String rootClassName = "RootModel",
+      String classPrefix = "YY",
+      String classSuffix = "Model"}) {
     final classGenerator = ModelGenerator(rootClassName);
     var dartCode = classGenerator.generateDartClasses(
-        rawJson: rawJson,
-        classPrefix: classPrefix,
-        classSuffix: classSuffix,
+      rawJson: rawJson,
+      classPrefix: classPrefix,
+      classSuffix: classSuffix,
+      hasCopyWithFunc: hasCopyWithFunc,
     );
     // debugPrint("dartCode.code:${dartCode.code}");
     return dartCode.code;
@@ -369,16 +411,18 @@ class _JsonToDartPageState extends State<JsonToDartPage> {
       );
 
       final fileName = (_prefixController.text ?? "").toUpperCase() +
-        (_nameController.text ?? "") +
-        (_suffixController.text.capitalizeFirst ?? "");
+          (_nameController.text ?? "") +
+          (_suffixController.text.capitalizeFirst ?? "");
       // debugPrint("fileName: $fileName");
 
       /// 生成本地文件
-      final file = await FileManager().createFile(fileName: fileName, content: outVN.value);
+      final file = await FileManager()
+          .createFile(fileName: fileName, content: outVN.value);
       debugPrint("file: ${file.path}");
 
       showSnackBar(SnackBar(
-        content: NText("文件已生成(下载文件夹)",
+        content: NText(
+          "文件已生成(下载文件夹)",
           color: Colors.white,
           textAlign: TextAlign.center,
         ),
@@ -391,12 +435,13 @@ class _JsonToDartPageState extends State<JsonToDartPage> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            NText(e.toString(),),
+            NText(
+              e.toString(),
+            ),
           ],
         ),
       ));
     }
-
   }
 
   onGenerate() async {
@@ -418,7 +463,6 @@ class _JsonToDartPageState extends State<JsonToDartPage> {
       Clipboard.setData(ClipboardData(text: text));
     }
 
-
     try {
       jsonDecode(_textEditingController.text);
 
@@ -430,7 +474,9 @@ class _JsonToDartPageState extends State<JsonToDartPage> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            NText(e.toString(),),
+            NText(
+              e.toString(),
+            ),
           ],
         ),
       ));
@@ -443,7 +489,6 @@ class _JsonToDartPageState extends State<JsonToDartPage> {
     final response = await rootBundle.loadString('assets/data/appInfo.json');
     return response;
   }
-
 
   onClear() {
     _textEditingController.text = "";
@@ -478,7 +523,6 @@ class _JsonToDartPageState extends State<JsonToDartPage> {
 //     }
 //   }
 
-
   onPressed() {
     // var tmp = "{ 'name': 'John Smith', 'age': 30, 'city': 'New York',}>";
     // // tmp = "atogeneratedBCDE";
@@ -488,7 +532,6 @@ class _JsonToDartPageState extends State<JsonToDartPage> {
     // debugPrint("str1: $str1");
     onGenerate();
   }
-
 }
 
 // extension StringExt on String{
@@ -507,4 +550,3 @@ class _JsonToDartPageState extends State<JsonToDartPage> {
 //     return str;
 //   }
 // }
-

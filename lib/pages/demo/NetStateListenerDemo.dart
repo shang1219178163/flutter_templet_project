@@ -9,16 +9,11 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/NNet/NNet.dart';
-import 'package:flutter_templet_project/basicWidget/NNet/NNetContainerListView.dart';
+import 'package:flutter_templet_project/basicWidget/n_network/n_network_online.dart';
 import 'package:flutter_templet_project/service/connectivity_service.dart';
 
 class NetStateListenerDemo extends StatefulWidget {
-
-  NetStateListenerDemo({
-    Key? key,
-    this.title
-  }) : super(key: key);
+  NetStateListenerDemo({Key? key, this.title}) : super(key: key);
 
   String? title;
 
@@ -27,7 +22,6 @@ class NetStateListenerDemo extends StatefulWidget {
 }
 
 class _NetStateListenerDemoState extends State<NetStateListenerDemo> {
-
   late final _easyRefreshController = EasyRefreshController(
     controlFinishRefresh: true,
     controlFinishLoad: true,
@@ -38,65 +32,38 @@ class _NetStateListenerDemoState extends State<NetStateListenerDemo> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          onPressed: () => debugPrint(e),
-          child: Text(e,
-            style: const TextStyle(color: Colors.white),
-          ),)
-        ).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  onPressed: () => debugPrint(e),
+                  child: Text(
+                    e,
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                ))
+            .toList(),
       ),
       body: Column(
         children: [
           _buildNetState(),
           _buildNetOnline(),
           _buildNet(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              ElevatedButton(
-                onPressed: () => _easyRefreshController.callRefresh(),
-                child: Text("callRefresh"),
-              ),
-              ElevatedButton(
-                onPressed: () => _easyRefreshController.callLoad(),
-                child: Text("callLoad"),
-              ),
-            ]
-          ),
-          Container(
-            decoration: BoxDecoration(
-              color: Colors.green,
-              border: Border.all(color: Colors.red, width: 2),
+          Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+            ElevatedButton(
+              onPressed: () => _easyRefreshController.callRefresh(),
+              child: Text("callRefresh"),
             ),
-            height: 400,
-            width: double.maxFinite,
-            child: NNetContainerListView<String>(
-              refreshController: _easyRefreshController,
-              onRequest: (bool isRefesh, int page, int pageSize, last) async {
-
-                return await Future.delayed(const Duration(milliseconds: 1500), () {
-                  final result = List<String>.generate(3, (i) => 'page_${page}_pageSize_${pageSize}_Item_$i');
-                  return Future.value(result);
-                });
-              },
-              onRequestError: (error, stackTree) {
-                debugPrint(error.toString());
-              },
-              itemBuilder: (BuildContext context, int index, data) {
-
-                return ListTile(
-                  leading: Icon(Icons.ac_unit),
-                  title: Text("$data"),
-                );
-              },
+            ElevatedButton(
+              onPressed: () => _easyRefreshController.callLoad(),
+              child: Text("callLoad"),
             ),
-          )
-
+          ]),
         ],
       ),
     );
   }
-  
+
   _buildNetState() {
     return ValueListenableBuilder<ConnectivityResult>(
       valueListenable: ConnectivityService().netState,
@@ -135,27 +102,20 @@ class _NetStateListenerDemoState extends State<NetStateListenerDemo> {
     );
   }
 
-
   _buildNet() {
-    return NNet(
-      // state: netState,
-      childBuilder: (ctx, child) {
+    return NNetworkOnLine(
+      builder: (ctx, child) {
         return ElevatedButton(
-            onPressed: () => debugPrint("ElevatedButton"),
-            child: Text("ElevatedButton"),
+          onPressed: () => debugPrint("ElevatedButton"),
+          child: Text("ElevatedButton"),
         );
       },
-      errorBuilder: (ctx, child) {
+      offlineBuilder: (ctx, child) {
         return TextButton(
           onPressed: () => debugPrint("offlineBuilder"),
           child: Text("offlineBuilder"),
         );
       },
-
     );
   }
-  
-
 }
-
-
