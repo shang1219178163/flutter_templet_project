@@ -1,5 +1,3 @@
-
-
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -8,11 +6,7 @@ import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:get/get.dart';
 
 class AppLaunchPage extends StatefulWidget {
-
-  AppLaunchPage({
-    Key? key,
-    this.title
-  }) : super(key: key);
+  AppLaunchPage({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -21,7 +15,6 @@ class AppLaunchPage extends StatefulWidget {
 }
 
 class _AppLaunchPageState extends State<AppLaunchPage> {
-
   Timer? timer;
 
   @override
@@ -37,24 +30,21 @@ class _AppLaunchPageState extends State<AppLaunchPage> {
 
     timer?.cancel();
     timer ??= Timer(const Duration(milliseconds: 300), () {
-      Get.offAndToNamed(APPRouter.homePage);
+      Get.offAndToNamed(APPRouter.appTabPage);
     });
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: "bg_mountain.png".toAssetImage(),
-            fit: BoxFit.cover,
-          )
+        body: Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: "bg_mountain.png".toAssetImage(),
+          fit: BoxFit.cover,
         ),
-      )
-    );
+      ),
+    ));
   }
-
 }

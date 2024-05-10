@@ -27,6 +27,7 @@ import 'package:flutter_templet_project/extension/widget_ext.dart';
 
 import 'package:flutter_templet_project/main.dart';
 import 'package:flutter_templet_project/model/mock_data.dart';
+import 'package:flutter_templet_project/pages/app_tab_page.dart';
 import 'package:flutter_templet_project/routes/APPRouter.dart';
 
 import 'package:get/get.dart';

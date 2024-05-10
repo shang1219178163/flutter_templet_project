@@ -21,6 +21,7 @@ import 'package:flutter_templet_project/basicWidget/NTree/NTreeDemo.dart';
 import 'package:flutter_templet_project/basicWidget/responsive_column.dart';
 import 'package:flutter_templet_project/basicWidget/upload/asset_upload_box_demo.dart';
 import 'package:flutter_templet_project/main.dart';
+import 'package:flutter_templet_project/pages/app_tab_page.dart';
 import 'package:flutter_templet_project/pages/demo/APPForgetPwdPage.dart';
 import 'package:flutter_templet_project/pages/demo/ApiCreatePage.dart';
 import 'package:flutter_templet_project/pages/demo/AppLaunchPage.dart';
@@ -331,7 +332,7 @@ import 'package:get/get.dart';
 
 ///https://www.jianshu.com/p/b9d6ec92926f
 class APPRouter {
-
+  static const appTabPage = '/AppTabPage';
   static const yamlParsePage = '/yamlParsePage';
 
   static const appLifecycleObserverDemo = '/appLifecycleObserverDemo';
@@ -343,7 +344,6 @@ class APPRouter {
 
   static const notFound = '/APPNotFoundPage';
 
-  static const homePage = '/MyHomePage';
   static const mediaQueryScreeenDemo = '/mediaQueryScreeenDemo';
   static const autoLayoutDemo = '/AutoLayoutDemo';
   static const appBarDemo = '/appBarDemo';
@@ -385,11 +385,9 @@ class APPRouter {
   static const animatedSizeDemo = '/animatedSizeDemo';
   static const animatedSizeDemoOne = '/animatedSizeDemoOne';
 
-
   static const textlessDemo = '/textlessDemo';
   static const alertDialogDemo = '/AlertDialogDemo';
   static const alertDialogTagSelectDemo = '/alertDialogTagSelectDemo';
-
 
   static const alertSheetDemo = '/AlertSheetDemo';
   static const systemIconsPage = '/systemIconsPage';
@@ -425,7 +423,6 @@ class APPRouter {
   static const segmentedControlDemo = '/segmentedControlDemo';
   static const segmentedControlDemoOne = '/segmentedControlDemoOne';
   static const segmentedButtonDemo = '/SegmentedButtonDemo';
-
 
   static const sliderDemo = '/sliderDemo';
   static const draggableScrollableSheetDemo = '/DraggableScrollableSheetDemo';
@@ -641,7 +638,8 @@ class APPRouter {
   static const soundPlayDemo = '/soundPlayDemo';
   static const wPopupMenuDemo = '/wPopupMenuDemo';
   static const expandTextDemo = '/expandTextDemo';
-  static const syncfusionFlutterDatepickerDemo = '/syncfusionFlutterDatepickerDemo';
+  static const syncfusionFlutterDatepickerDemo =
+      '/syncfusionFlutterDatepickerDemo';
   static const tableCalenderMain = '/tableCalenderMain';
   static const suspensionButtonDemo = '/suspensionButtonDemo';
   static const neomorphismHomePage = '/neomorphismHomePage';
@@ -672,7 +670,8 @@ class APPRouter {
   static const contextMenuDemo = '/contextMenuDemo';
   static const targetFollowerDemo = '/targetFollowerDemo';
   static const tapRegionDemo = '/tapRegionDemo';
-  static const glowingOverscrollIndicatorDemo = '/glowingOverscrollIndicatorDemo';
+  static const glowingOverscrollIndicatorDemo =
+      '/glowingOverscrollIndicatorDemo';
   static const progressClipperDemo = '/progressClipperDemo';
   static const heroDemo = '/heroDemo';
   static const hitTestBehaviorDemo = '/hitTestBehaviorDemo';
@@ -745,391 +744,1379 @@ class APPRouter {
 }
 
 class AppPage {
-  static const INITIAL = APPRouter.homePage;
+  static const INITIAL = APPRouter.appTabPage;
   // static const INITIAL = APPRouter.developToolList;
 
-  static final unknownRoute = GetPage(name: APPRouter.notFound, page: () => APPNotFoundPage(),);
+  static final unknownRoute = GetPage(
+    name: APPRouter.notFound,
+    page: () => APPNotFoundPage(),
+  );
 
   static final List<GetPage> routes = [
     unknownRoute,
 
-    GetPage(name: APPRouter.appLifecycleObserverDemo, page: () => AppLifecycleStateObserverDemo(),),
-    GetPage(name: APPRouter.themeColorDemo, page: () => ThemeColorDemo(),),
-    GetPage(name: APPRouter.emojiPage, page: () => EmojiPage(),),
+    GetPage(
+      name: APPRouter.appLifecycleObserverDemo,
+      page: () => AppLifecycleStateObserverDemo(),
+    ),
+    GetPage(
+      name: APPRouter.themeColorDemo,
+      page: () => ThemeColorDemo(),
+    ),
+    GetPage(
+      name: APPRouter.emojiPage,
+      page: () => EmojiPage(),
+    ),
 
-    GetPage(name: APPRouter.yamlParsePage, page: () => YamlParsePage(),),
+    GetPage(
+      name: APPRouter.yamlParsePage,
+      page: () => YamlParsePage(),
+    ),
 
-    GetPage(name: APPRouter.developToolList, page: () => DevelopToolList(),),
+    GetPage(
+      name: APPRouter.developToolList,
+      page: () => DevelopToolList(),
+    ),
 
-    GetPage(name: APPRouter.launchPage, page: () => AppLaunchPage(),),
-    GetPage(name: APPRouter.homePage, page: () => MyHomePage(),),
-    GetPage(name: APPRouter.tabBarTabBarViewDemo, page: () => TabBarTabBarViewDemo(),),
-    GetPage(name: APPRouter.mediaQueryScreeenDemo, page: () => MediaQueryScreeenDemo(),),
-    GetPage(name: APPRouter.autoLayoutDemo, page: () => AutoLayoutDemo(),),
+    GetPage(
+      name: APPRouter.launchPage,
+      page: () => AppLaunchPage(),
+    ),
+    GetPage(
+      name: APPRouter.appTabPage,
+      page: () => AppTabPage(),
+    ),
+    GetPage(
+      name: APPRouter.tabBarTabBarViewDemo,
+      page: () => TabBarTabBarViewDemo(),
+    ),
+    GetPage(
+      name: APPRouter.mediaQueryScreeenDemo,
+      page: () => MediaQueryScreeenDemo(),
+    ),
+    GetPage(
+      name: APPRouter.autoLayoutDemo,
+      page: () => AutoLayoutDemo(),
+    ),
 
+    GetPage(
+      name: APPRouter.textDemo,
+      page: () => TextDemo(),
+    ),
 
-    GetPage(name: APPRouter.textDemo, page: () => TextDemo(),),
+    GetPage(
+      name: APPRouter.appBarDemo,
+      page: () => AppBarDemo(),
+    ),
 
-    GetPage(name: APPRouter.appBarDemo, page: () => AppBarDemo(),),
-
-    GetPage(name: APPRouter.testPage, page: () => TestPage(),),
-    GetPage(name: APPRouter.testPageOne, page: () => TestPageOne(),),
-    GetPage(name: APPRouter.loginPage, page: () => LoginPage(),
+    GetPage(
+      name: APPRouter.testPage,
+      page: () => TestPage(),
+    ),
+    GetPage(
+      name: APPRouter.testPageOne,
+      page: () => TestPageOne(),
+    ),
+    GetPage(
+      name: APPRouter.loginPage, page: () => LoginPage(),
       // transition: Transition.downToUp,
     ),
-    GetPage(name: APPRouter.loginPageOne, page: () => LoginPageOne(),
+    GetPage(
+      name: APPRouter.loginPageOne, page: () => LoginPageOne(),
       // transition: Transition.downToUp,),
     ),
-    GetPage(name: APPRouter.loginPageTwo, page: () => LoginPageTwo(),
+    GetPage(
+      name: APPRouter.loginPageTwo, page: () => LoginPageTwo(),
       // transition: Transition.downToUp,),
     ),
-    GetPage(name: APPRouter.forgetPasswordPage, page: () => APPForgetPwdPage(),),
-    GetPage(name: APPRouter.firstPage, page: () => FirstPage(),),
-    GetPage(name: APPRouter.secondPage, page: () => SecondPage(),),
-    GetPage(name: APPRouter.thirdPage, page: () => ThirdPage(),),
-    GetPage(name: APPRouter.fourthPage, page: () => FourthPage(),),
-    GetPage(name: APPRouter.pageBuilderDemo, page: () => PageBuilderDemo(),),
+    GetPage(
+      name: APPRouter.forgetPasswordPage,
+      page: () => APPForgetPwdPage(),
+    ),
+    GetPage(
+      name: APPRouter.firstPage,
+      page: () => FirstPage(),
+    ),
+    GetPage(
+      name: APPRouter.secondPage,
+      page: () => SecondPage(),
+    ),
+    GetPage(
+      name: APPRouter.thirdPage,
+      page: () => ThirdPage(),
+    ),
+    GetPage(
+      name: APPRouter.fourthPage,
+      page: () => FourthPage(),
+    ),
+    GetPage(
+      name: APPRouter.pageBuilderDemo,
+      page: () => PageBuilderDemo(),
+    ),
 
-    GetPage(name: APPRouter.stringTransformPage, page: () => StringTransformPage(),),
+    GetPage(
+      name: APPRouter.stringTransformPage,
+      page: () => StringTransformPage(),
+    ),
 
-    GetPage(name: APPRouter.enumDemo, page: () => EnumDemo(),),
-    GetPage(name: APPRouter.reflectDemo, page: () => ReflectDemo(),),
-    GetPage(name: APPRouter.appRouteObserverDemo, page: () => AppRouteAwareDemo(),),
-    GetPage(name: APPRouter.appRouteObserverDemoOne, page: () => AppRouteAwareDemoOne(),),
-    GetPage(name: APPRouter.pageLifecycleFuncTest, page: () => PageLifecycleFuncTest(),),
+    GetPage(
+      name: APPRouter.enumDemo,
+      page: () => EnumDemo(),
+    ),
+    GetPage(
+      name: APPRouter.reflectDemo,
+      page: () => ReflectDemo(),
+    ),
+    GetPage(
+      name: APPRouter.appRouteObserverDemo,
+      page: () => AppRouteAwareDemo(),
+    ),
+    GetPage(
+      name: APPRouter.appRouteObserverDemoOne,
+      page: () => AppRouteAwareDemoOne(),
+    ),
+    GetPage(
+      name: APPRouter.pageLifecycleFuncTest,
+      page: () => PageLifecycleFuncTest(),
+    ),
 
-    GetPage(name: APPRouter.mediaQueryDemo, page: () => MediaQueryDemo(),),
-    GetPage(name: APPRouter.mediaQueryDemoOne, page: () => MediaQueryDemoOne(),),
+    GetPage(
+      name: APPRouter.mediaQueryDemo,
+      page: () => MediaQueryDemo(),
+    ),
+    GetPage(
+      name: APPRouter.mediaQueryDemoOne,
+      page: () => MediaQueryDemoOne(),
+    ),
 
-    GetPage(name: APPRouter.alertDialogDemo, page: () => AlertDialogDemo(),),
-    GetPage(name: APPRouter.alertDialogTagSelectDemo, page: () => AlertDialogTagSelectDemo(),),
+    GetPage(
+      name: APPRouter.alertDialogDemo,
+      page: () => AlertDialogDemo(),
+    ),
+    GetPage(
+      name: APPRouter.alertDialogTagSelectDemo,
+      page: () => AlertDialogTagSelectDemo(),
+    ),
 
-    GetPage(name: APPRouter.alertSheetDemo, page: () => AlertSheetDemo(),),
-    GetPage(name: APPRouter.systemIconsPage, page: () => SystemIconsPage(),),
-    GetPage(name: APPRouter.systemColorPage, page: () => SystemColorPage(),),
-    GetPage(name: APPRouter.systemCurvesPage, page: () => SystemCurvesPage(),),
+    GetPage(
+      name: APPRouter.alertSheetDemo,
+      page: () => AlertSheetDemo(),
+    ),
+    GetPage(
+      name: APPRouter.systemIconsPage,
+      page: () => SystemIconsPage(),
+    ),
+    GetPage(
+      name: APPRouter.systemColorPage,
+      page: () => SystemColorPage(),
+    ),
+    GetPage(
+      name: APPRouter.systemCurvesPage,
+      page: () => SystemCurvesPage(),
+    ),
 
-    GetPage(name: APPRouter.gridViewDemo, page: () => GridViewDemo(),),
-    GetPage(name: APPRouter.pageViewDemo, page: () => PageViewDemo(),),
-    GetPage(name: APPRouter.pageViewDemoThree, page: () => PageViewDemoThree(),),
+    GetPage(
+      name: APPRouter.gridViewDemo,
+      page: () => GridViewDemo(),
+    ),
+    GetPage(
+      name: APPRouter.pageViewDemo,
+      page: () => PageViewDemo(),
+    ),
+    GetPage(
+      name: APPRouter.pageViewDemoThree,
+      page: () => PageViewDemoThree(),
+    ),
 
-    GetPage(name: APPRouter.snackBarDemo, page: () => SnackBarDemo(),),
-    GetPage(name: APPRouter.snackBarDemoOne, page: () => SnackBarDemoOne(),),
-    GetPage(name: APPRouter.cupertinoTabScaffoldDemo, page: () => CupertinoTabScaffoldDemo(),),
-    GetPage(name: APPRouter.pickerDemo, page: () => PickerDemo(),),
-    GetPage(name: APPRouter.datePickerDemo, page: () => DatePickerDemo(),),
-    GetPage(name: APPRouter.localNotifationDemo, page: () => LocalNotifationDemo(),),
-    GetPage(name: APPRouter.progressHudDemoNew, page: () => ProgressHudDemoNew(),),
-    GetPage(name: APPRouter.toastContext, page: () => ToastContext(),),
-    GetPage(name: APPRouter.toastNoContext, page: () => ToastNoContext(),),
-    GetPage(name: APPRouter.listDismissibleDemo, page: () => ListDismissibleDemo(),),
+    GetPage(
+      name: APPRouter.snackBarDemo,
+      page: () => SnackBarDemo(),
+    ),
+    GetPage(
+      name: APPRouter.snackBarDemoOne,
+      page: () => SnackBarDemoOne(),
+    ),
+    GetPage(
+      name: APPRouter.cupertinoTabScaffoldDemo,
+      page: () => CupertinoTabScaffoldDemo(),
+    ),
+    GetPage(
+      name: APPRouter.pickerDemo,
+      page: () => PickerDemo(),
+    ),
+    GetPage(
+      name: APPRouter.datePickerDemo,
+      page: () => DatePickerDemo(),
+    ),
+    GetPage(
+      name: APPRouter.localNotifationDemo,
+      page: () => LocalNotifationDemo(),
+    ),
+    GetPage(
+      name: APPRouter.progressHudDemoNew,
+      page: () => ProgressHudDemoNew(),
+    ),
+    GetPage(
+      name: APPRouter.toastContext,
+      page: () => ToastContext(),
+    ),
+    GetPage(
+      name: APPRouter.toastNoContext,
+      page: () => ToastNoContext(),
+    ),
+    GetPage(
+      name: APPRouter.listDismissibleDemo,
+      page: () => ListDismissibleDemo(),
+    ),
     // GetPage(name: APPRouter.slidableDemo, page: () => SlidableDemo(),),
-    GetPage(name: APPRouter.settingsPage, page: () => AppSettingsPage(),),
-    GetPage(name: APPRouter.containerDemo, page: () => ContainerDemo(),),
-    GetPage(name: APPRouter.animatedContainerDemo, page: () => AnimatedContainerDemo(),),
-    GetPage(name: APPRouter.draggableDemo, page: () => DraggableDemo(),),
-    GetPage(name: APPRouter.dataTableDemo, page: () => DataTableDemo(),),
-    GetPage(name: APPRouter.dataTableByPaginatedDemo, page: () => PaginatedDataTableDemo(),),
-    GetPage(name: APPRouter.segmentedButtonDemo, page: () => SegmentedButtonDemo(),),
-    GetPage(name: APPRouter.segmentedControlDemo, page: () => SegmentedControlDemo(),),
-    GetPage(name: APPRouter.segmentedControlDemoOne, page: () => SegmentedControlDemoOne(),),
+    GetPage(
+      name: APPRouter.settingsPage,
+      page: () => AppSettingsPage(),
+    ),
+    GetPage(
+      name: APPRouter.containerDemo,
+      page: () => ContainerDemo(),
+    ),
+    GetPage(
+      name: APPRouter.animatedContainerDemo,
+      page: () => AnimatedContainerDemo(),
+    ),
+    GetPage(
+      name: APPRouter.draggableDemo,
+      page: () => DraggableDemo(),
+    ),
+    GetPage(
+      name: APPRouter.dataTableDemo,
+      page: () => DataTableDemo(),
+    ),
+    GetPage(
+      name: APPRouter.dataTableByPaginatedDemo,
+      page: () => PaginatedDataTableDemo(),
+    ),
+    GetPage(
+      name: APPRouter.segmentedButtonDemo,
+      page: () => SegmentedButtonDemo(),
+    ),
+    GetPage(
+      name: APPRouter.segmentedControlDemo,
+      page: () => SegmentedControlDemo(),
+    ),
+    GetPage(
+      name: APPRouter.segmentedControlDemoOne,
+      page: () => SegmentedControlDemoOne(),
+    ),
 
-
-    GetPage(name: APPRouter.sliderDemo, page: () => SliderDemo(),),
-    GetPage(name: APPRouter.draggableScrollableSheetDemo, page: () => DraggableScrollableSheetDemo(),),
-    GetPage(name: APPRouter.indicatorDemo, page: () => IndicatorDemo(),),
-    GetPage(name: APPRouter.appWebViewDemo, page: () => AppWebViewDemo(),),
-    GetPage(name: APPRouter.carouselSliderDemo, page: () => CarouselSliderDemo(),),
-    GetPage(name: APPRouter.sliverAppBarDemo, page: () => SliverAppBarDemo(),),
-    GetPage(name: APPRouter.hudProgressDemo, page: () => HudProgressDemo(),),
-    GetPage(name: APPRouter.reorderableListViewDemo, page: () => ReorderableListViewDemo(),),
-    GetPage(name: APPRouter.expandIconDemoNew, page: () => ExpandIconDemoNew(),),
-    GetPage(name: APPRouter.expandIconDemo, page: () => ExpandIconDemo(),),
-    GetPage(name: APPRouter.stepperDemo, page: () => StepperDemo(),),
-    GetPage(name: APPRouter.numberStepperDemo, page: () => NumberStepperDemo(),),
+    GetPage(
+      name: APPRouter.sliderDemo,
+      page: () => SliderDemo(),
+    ),
+    GetPage(
+      name: APPRouter.draggableScrollableSheetDemo,
+      page: () => DraggableScrollableSheetDemo(),
+    ),
+    GetPage(
+      name: APPRouter.indicatorDemo,
+      page: () => IndicatorDemo(),
+    ),
+    GetPage(
+      name: APPRouter.appWebViewDemo,
+      page: () => AppWebViewDemo(),
+    ),
+    GetPage(
+      name: APPRouter.carouselSliderDemo,
+      page: () => CarouselSliderDemo(),
+    ),
+    GetPage(
+      name: APPRouter.sliverAppBarDemo,
+      page: () => SliverAppBarDemo(),
+    ),
+    GetPage(
+      name: APPRouter.hudProgressDemo,
+      page: () => HudProgressDemo(),
+    ),
+    GetPage(
+      name: APPRouter.reorderableListViewDemo,
+      page: () => ReorderableListViewDemo(),
+    ),
+    GetPage(
+      name: APPRouter.expandIconDemoNew,
+      page: () => ExpandIconDemoNew(),
+    ),
+    GetPage(
+      name: APPRouter.expandIconDemo,
+      page: () => ExpandIconDemo(),
+    ),
+    GetPage(
+      name: APPRouter.stepperDemo,
+      page: () => StepperDemo(),
+    ),
+    GetPage(
+      name: APPRouter.numberStepperDemo,
+      page: () => NumberStepperDemo(),
+    ),
     // GetPage(name: APPRouter.animatedIconDemo, page: () => AnimatedIconDemo(), ),
-    GetPage(name: APPRouter.animatedDemo, page: () => AnimatedDemo(),),
-    GetPage(name: APPRouter.animatedSwitcherDemo, page: () => AnimatedSwitcherDemo(),),
-    GetPage(name: APPRouter.animatedWidgetDemo, page: () => AnimatedWidgetDemo(),),
-    GetPage(name: APPRouter.animatedGroupDemo, page: () => AnimatedGroupDemo(),),
-    GetPage(name: APPRouter.animatedBuilderDemo, page: () => AnimatedBuilderDemo(),),
-    GetPage(name: APPRouter.animatedListDemo, page: () => AnimatedListDemo(),),
-    GetPage(name: APPRouter.animatedListSample, page: () => AnimatedListSample(),),
-    GetPage(name: APPRouter.animatedSizeDemo, page: () => AnimatedSizeDemo(),),
-    GetPage(name: APPRouter.animatedSizeDemoOne, page: () => AnimatedSizeDemoOne(),),
+    GetPage(
+      name: APPRouter.animatedDemo,
+      page: () => AnimatedDemo(),
+    ),
+    GetPage(
+      name: APPRouter.animatedSwitcherDemo,
+      page: () => AnimatedSwitcherDemo(),
+    ),
+    GetPage(
+      name: APPRouter.animatedWidgetDemo,
+      page: () => AnimatedWidgetDemo(),
+    ),
+    GetPage(
+      name: APPRouter.animatedGroupDemo,
+      page: () => AnimatedGroupDemo(),
+    ),
+    GetPage(
+      name: APPRouter.animatedBuilderDemo,
+      page: () => AnimatedBuilderDemo(),
+    ),
+    GetPage(
+      name: APPRouter.animatedListDemo,
+      page: () => AnimatedListDemo(),
+    ),
+    GetPage(
+      name: APPRouter.animatedListSample,
+      page: () => AnimatedListSample(),
+    ),
+    GetPage(
+      name: APPRouter.animatedSizeDemo,
+      page: () => AnimatedSizeDemo(),
+    ),
+    GetPage(
+      name: APPRouter.animatedSizeDemoOne,
+      page: () => AnimatedSizeDemoOne(),
+    ),
 
+    GetPage(
+      name: APPRouter.futureBuilderDemo,
+      page: () => FutureBuilderDemo(),
+    ),
+    GetPage(
+      name: APPRouter.streamBuilderDemo,
+      page: () => StreamBuilderDemo(),
+    ),
+    GetPage(
+      name: APPRouter.githubRepoDemo,
+      page: () => GithubRepoDemo(),
+    ),
+    GetPage(
+      name: APPRouter.progressHudDemo,
+      page: () => ProgressHudDemo(),
+    ),
+    GetPage(
+      name: APPRouter.locationPopView,
+      page: () => LocationPopView(),
+    ),
+    GetPage(
+      name: APPRouter.backdropFilterDemo,
+      page: () => BackdropFilterDemo(),
+    ),
+    GetPage(
+      name: APPRouter.richTextDemo,
+      page: () => RichTextDemo(),
+    ),
+    GetPage(
+      name: APPRouter.numberFormatDemo,
+      page: () => NumberFormatDemo(),
+    ),
+    GetPage(
+      name: APPRouter.dateTimeDemo,
+      page: () => DateTimeDemo(),
+    ),
+    GetPage(
+      name: APPRouter.textFieldDemo,
+      page: () => TextFieldDemo(),
+    ),
+    GetPage(
+      name: APPRouter.textFieldDemoOne,
+      page: () => TextFieldDemoOne(),
+    ),
+    GetPage(
+      name: APPRouter.textFieldDemoTwo,
+      page: () => TextFieldDemoTwo(),
+    ),
+    GetPage(
+      name: APPRouter.cupertinoFormDemo,
+      page: () => CupertinoFormDemo(),
+    ),
+    GetPage(
+      name: APPRouter.contextMenuActionDemo,
+      page: () => ContextMenuActionDemo(),
+    ),
+    GetPage(
+      name: APPRouter.menuDemo,
+      page: () => MenuDemo(),
+    ),
+    GetPage(
+      name: APPRouter.gridPaperDemo,
+      page: () => GridPaperDemo(),
+    ),
+    GetPage(
+      name: APPRouter.sliverPersistentHeaderDemo,
+      page: () => SliverPersistentHeaderDemo(),
+    ),
+    GetPage(
+      name: APPRouter.providerListDemo,
+      page: () => ProviderListDemo(),
+    ),
+    GetPage(
+      name: APPRouter.layoutBuilderDemo,
+      page: () => LayoutBuilderDemo(),
+    ),
+    GetPage(
+      name: APPRouter.tableDemo,
+      page: () => TableDemo(),
+    ),
+    GetPage(
+      name: APPRouter.sliverFamilyDemo,
+      page: () => SliverFamilyDemo(),
+    ),
+    GetPage(
+      name: APPRouter.sliverFamilyPageViewDemo,
+      page: () => SliverFamilyPageViewDemo(),
+    ),
+    GetPage(
+      name: APPRouter.nestedScrollViewDemo,
+      page: () => NestedScrollViewDemo(),
+    ),
+    GetPage(
+      name: APPRouter.popoverDemo,
+      page: () => PopoverDemo(),
+    ),
+    GetPage(
+      name: APPRouter.tabBarPageViewDemo,
+      page: () => TabBarPageViewDemo(),
+    ),
+    GetPage(
+      name: APPRouter.tabBarReusePageDemo,
+      page: () => TabBarReusePageDemo(),
+    ),
+    GetPage(
+      name: APPRouter.absorbPointerDemo,
+      page: () => AbsorbPointerDemo(),
+    ),
+    GetPage(
+      name: APPRouter.willPopScopeDemo,
+      page: () => WillPopScopeDemo(),
+    ),
+    GetPage(
+      name: APPRouter.bannerDemo,
+      page: () => BannerDemo(),
+    ),
+    GetPage(
+      name: APPRouter.indexedStackDemo,
+      page: () => IndexedStackDemo(),
+    ),
 
+    GetPage(
+      name: APPRouter.rxDartProviderDemo,
+      page: () => RxDartProviderDemo(),
+    ),
+    GetPage(
+      name: APPRouter.stateManagerDemo,
+      page: () => StateManagerDemo(),
+    ),
+    GetPage(
+      name: APPRouter.getxStateDemo,
+      page: () => GetxStateDemo(),
+    ),
+    GetPage(
+      name: APPRouter.getxStateDemoNew,
+      page: () => GetxStateDemoNew(),
+    ),
 
+    GetPage(
+      name: APPRouter.responsiveColumnDemo,
+      page: () => ResponsiveColumnDemo(),
+    ),
 
-    GetPage(name: APPRouter.futureBuilderDemo, page: () => FutureBuilderDemo(),),
-    GetPage(name: APPRouter.streamBuilderDemo, page: () => StreamBuilderDemo(),),
-    GetPage(name: APPRouter.githubRepoDemo, page: () => GithubRepoDemo(),),
-    GetPage(name: APPRouter.progressHudDemo, page: () => ProgressHudDemo(),),
-    GetPage(name: APPRouter.locationPopView, page: () => LocationPopView(),),
-    GetPage(name: APPRouter.backdropFilterDemo, page: () => BackdropFilterDemo(),),
-    GetPage(name: APPRouter.richTextDemo, page: () => RichTextDemo(),),
-    GetPage(name: APPRouter.numberFormatDemo, page: () => NumberFormatDemo(),),
-    GetPage(name: APPRouter.dateTimeDemo, page: () => DateTimeDemo(),),
-    GetPage(name: APPRouter.textFieldDemo, page: () => TextFieldDemo(),),
-    GetPage(name: APPRouter.textFieldDemoOne, page: () => TextFieldDemoOne(),),
-    GetPage(name: APPRouter.textFieldDemoTwo, page: () => TextFieldDemoTwo(),),
-    GetPage(name: APPRouter.cupertinoFormDemo, page: () => CupertinoFormDemo(),),
-    GetPage(name: APPRouter.contextMenuActionDemo, page: () => ContextMenuActionDemo(),),
-    GetPage(name: APPRouter.menuDemo, page: () => MenuDemo(),),
-    GetPage(name: APPRouter.gridPaperDemo, page: () => GridPaperDemo(),),
-    GetPage(name: APPRouter.sliverPersistentHeaderDemo, page: () => SliverPersistentHeaderDemo(),),
-    GetPage(name: APPRouter.providerListDemo, page: () => ProviderListDemo(),),
-    GetPage(name: APPRouter.layoutBuilderDemo, page: () => LayoutBuilderDemo(),),
-    GetPage(name: APPRouter.tableDemo, page: () => TableDemo(),),
-    GetPage(name: APPRouter.sliverFamilyDemo, page: () => SliverFamilyDemo(),),
-    GetPage(name: APPRouter.sliverFamilyPageViewDemo, page: () => SliverFamilyPageViewDemo(),),
-    GetPage(name: APPRouter.nestedScrollViewDemo, page: () => NestedScrollViewDemo(),),
-    GetPage(name: APPRouter.popoverDemo, page: () => PopoverDemo(),),
-    GetPage(name: APPRouter.tabBarPageViewDemo, page: () => TabBarPageViewDemo(),),
-    GetPage(name: APPRouter.tabBarReusePageDemo, page: () => TabBarReusePageDemo(),),
-    GetPage(name: APPRouter.absorbPointerDemo, page: () => AbsorbPointerDemo(),),
-    GetPage(name: APPRouter.willPopScopeDemo, page: () => WillPopScopeDemo(),),
-    GetPage(name: APPRouter.bannerDemo, page: () => BannerDemo(),),
-    GetPage(name: APPRouter.indexedStackDemo, page: () => IndexedStackDemo(),),
+    GetPage(
+      name: APPRouter.offstageDemo,
+      page: () => OffstageDemo(),
+    ),
+    GetPage(
+      name: APPRouter.bottomAppBarDemo,
+      page: () => BottomAppBarDemo(),
+    ),
+    GetPage(
+      name: APPRouter.calendarDatePickerDemo,
+      page: () => CalendarDatePickerDemo(),
+    ),
 
+    GetPage(
+      name: APPRouter.chipDemo,
+      page: () => ChipDemo(),
+    ),
+    GetPage(
+      name: APPRouter.chipFilterDemo,
+      page: () => ChipFilterDemo(),
+    ),
+    GetPage(
+      name: APPRouter.bottomSheetDemo,
+      page: () => BottomSheetDemo(),
+    ),
+    GetPage(
+      name: APPRouter.timePickerDemo,
+      page: () => TimePickerDemo(),
+    ),
+    GetPage(
+      name: APPRouter.shaderMaskDemo,
+      page: () => ShaderMaskDemo(),
+    ),
+    GetPage(
+      name: APPRouter.blurViewDemo,
+      page: () => BlurViewDemo(),
+    ),
+    GetPage(
+      name: APPRouter.boxDemo,
+      page: () => BoxDemo(),
+    ),
+    GetPage(
+      name: APPRouter.mouseRegionDemo,
+      page: () => MouseRegionDemo(),
+    ),
+    GetPage(
+      name: APPRouter.localImagePage,
+      page: () => LocalImagePage(),
+    ),
+    GetPage(
+      name: APPRouter.timelineDemo,
+      page: () => TimelineDemo(),
+    ),
+    GetPage(
+      name: APPRouter.timelinesDemo,
+      page: () => TimelinesDemo(),
+    ),
+    GetPage(
+      name: APPRouter.hitTest,
+      page: () => HitTest(),
+    ),
+    GetPage(
+      name: APPRouter.navgationBarDemo,
+      page: () => NavgationBarDemo(),
+    ),
+    GetPage(
+      name: APPRouter.borderDemo,
+      page: () => BorderDemo(),
+    ),
+    GetPage(
+      name: APPRouter.clipDemo,
+      page: () => ClipDemo(),
+    ),
+    GetPage(
+      name: APPRouter.steperConnectorDemo,
+      page: () => SteperConnectorDemo(),
+    ),
+    GetPage(
+      name: APPRouter.textViewDemo,
+      page: () => TextViewDemo(),
+    ),
+    GetPage(
+      name: APPRouter.navigationBarDemo,
+      page: () => NavigationBarDemo(),
+    ),
+    GetPage(
+      name: APPRouter.qrCodeScannerDemo,
+      page: () => QrCodeScannerDemo(),
+    ),
+    GetPage(
+      name: APPRouter.qrFlutterDemo,
+      page: () => QrFlutterDemo(),
+    ),
+    GetPage(
+      name: APPRouter.scribbleDemo,
+      page: () => ScribbleDemo(),
+    ),
+    GetPage(
+      name: APPRouter.aestheticDialogsDemo,
+      page: () => AestheticDialogsDemo(),
+    ),
+    GetPage(
+      name: APPRouter.customTimerDemo,
+      page: () => CustomTimerDemo(),
+    ),
+    GetPage(
+      name: APPRouter.flutterFFiTest,
+      page: () => FlutterFFiTest(),
+    ),
+    GetPage(
+      name: APPRouter.smartDialogPageDemo,
+      page: () => SmartDialogPageDemo(),
+    ),
+    GetPage(
+      name: APPRouter.mergeImagesDemo,
+      page: () => MergeImagesDemo(),
+    ),
+    GetPage(
+      name: APPRouter.mergeNetworkImagesDemo,
+      page: () => MergeNetworkImagesDemo(),
+    ),
+    GetPage(
+      name: APPRouter.drawImageNineDemo,
+      page: () => DrawImageNineDemo(),
+    ),
+    GetPage(
+      name: APPRouter.proxyProviderDemo,
+      page: () => ProxyProviderDemo(),
+    ),
+    GetPage(
+      name: APPRouter.ratingBarDemo,
+      page: () => RatingBarDemo(),
+    ),
+    GetPage(
+      name: APPRouter.shortcutsDemo,
+      page: () => ShortcutsDemo(),
+    ),
+    GetPage(
+      name: APPRouter.shortcutsDemoOne,
+      page: () => ShortcutsDemoOne(),
+    ),
+    GetPage(
+      name: APPRouter.dragAndDropDemo,
+      page: () => DragAndDropDemo(),
+    ),
+    GetPage(
+      name: APPRouter.transformDemo,
+      page: () => TransformDemo(),
+    ),
+    GetPage(
+      name: APPRouter.fittedBoxDemo,
+      page: () => FittedBoxDemo(),
+    ),
+    GetPage(
+      name: APPRouter.coloredBoxDemo,
+      page: () => ColoredBoxDemo(),
+    ),
+    GetPage(
+      name: APPRouter.positionedDirectionalDemo,
+      page: () => PositionedDirectionalDemo(),
+    ),
+    GetPage(
+      name: APPRouter.statefulBuilderDemo,
+      page: () => StatefulBuilderDemo(),
+    ),
+    GetPage(
+      name: APPRouter.valueListenableBuilderDemo,
+      page: () => ValueListenableBuilderDemo(),
+    ),
+    GetPage(
+      name: APPRouter.overflowBarDemo,
+      page: () => OverflowBarDemo(),
+    ),
+    GetPage(
+      name: APPRouter.navigationToolbarDemo,
+      page: () => NavigationToolbarDemo(),
+    ),
+    GetPage(
+      name: APPRouter.selectableTextDemo,
+      page: () => SelectableTextDemo(),
+    ),
+    GetPage(
+      name: APPRouter.materialBannerDemo,
+      page: () => MaterialBannerDemo(),
+    ),
+    GetPage(
+      name: APPRouter.autocompleteDemo,
+      page: () => AutocompleteDemo(),
+    ),
 
-    GetPage(name: APPRouter.rxDartProviderDemo, page: () => RxDartProviderDemo(),),
-    GetPage(name: APPRouter.stateManagerDemo, page: () => StateManagerDemo(),),
-    GetPage(name: APPRouter.getxStateDemo, page: () => GetxStateDemo(),),
-    GetPage(name: APPRouter.getxStateDemoNew, page: () => GetxStateDemoNew(),),
+    GetPage(
+      name: APPRouter.autofillGroupDemo,
+      page: () => AutofillGroupDemo(),
+    ),
+    GetPage(
+      name: APPRouter.promptBuilderDemo,
+      page: () => PromptBuilderDemo(),
+    ),
+    GetPage(
+      name: APPRouter.rotatedBoxDemo,
+      page: () => RotatedBoxDemo(),
+    ),
+    GetPage(
+      name: APPRouter.dismissibleDemo,
+      page: () => DismissibleDemo(),
+    ),
+    GetPage(
+      name: APPRouter.modalBarrierDemo,
+      page: () => ModalBarrierDemo(),
+    ),
+    GetPage(
+      name: APPRouter.isolateDemo,
+      page: () => IsolateDemo(),
+    ),
+    GetPage(
+      name: APPRouter.listViewDemo,
+      page: () => ListViewDemo(),
+    ),
+    GetPage(
+      name: APPRouter.listViewStyleDemo,
+      page: () => ListViewStyleDemo(),
+    ),
+    GetPage(
+      name: APPRouter.builderDemo,
+      page: () => BuilderDemo(),
+    ),
+    GetPage(
+      name: APPRouter.overlayDemo,
+      page: () => OverlayDemo(),
+    ),
+    GetPage(
+      name: APPRouter.decorationDemo,
+      page: () => DecorationDemo(),
+    ),
+    GetPage(
+      name: APPRouter.stackDemo,
+      page: () => StackDemo(),
+    ),
+    GetPage(
+      name: APPRouter.stackDemoOne,
+      page: () => StackDemoOne(),
+    ),
+    GetPage(
+      name: APPRouter.stackDemoTwo,
+      page: () => StackDemoTwo(),
+    ),
 
+    GetPage(
+      name: APPRouter.badgeDemo,
+      page: () => BadgeDemo(),
+    ),
+    GetPage(
+      name: APPRouter.flutterSwiperDemo,
+      page: () => FlutterSwiperDemo(),
+    ),
+    GetPage(
+      name: APPRouter.flutterSwiperIndicatorDemo,
+      page: () => FlutterSwiperIndicatorDemo(),
+    ),
+    GetPage(
+      name: APPRouter.homeSrollDemo,
+      page: () => HomeSrollDemo(),
+    ),
+    GetPage(
+      name: APPRouter.homeNavDemo,
+      page: () => HomeNavDemo(),
+    ),
+    GetPage(
+      name: APPRouter.wrapDemo,
+      page: () => WrapDemo(),
+    ),
+    GetPage(
+      name: APPRouter.boxConstraintsDemo,
+      page: () => BoxConstraintsDemo(),
+    ),
+    GetPage(
+      name: APPRouter.gradientDemo,
+      page: () => GradientDemo(),
+    ),
+    GetPage(
+      name: APPRouter.imageBlendModeDemo,
+      page: () => ImageBlendModeDemo(),
+    ),
+    GetPage(
+      name: APPRouter.customSwipperDemo,
+      page: () => CustomSwipperDemo(),
+    ),
+    GetPage(
+      name: APPRouter.visibilityDetectorDemo,
+      page: () => VisibilityDetectorDemo(),
+    ),
+    GetPage(
+      name: APPRouter.svgaImageDemo,
+      page: () => SvgaImageDemo(),
+    ),
+    GetPage(
+      name: APPRouter.providerDemo,
+      page: () => ProviderDemo(),
+    ),
+    GetPage(
+      name: APPRouter.providerDemoOne,
+      page: () => ProviderDemoOne(),
+    ),
+    GetPage(
+      name: APPRouter.inheritedWidgetDemo,
+      page: () => InheritedWidgetDemo(),
+    ),
+    GetPage(
+      name: APPRouter.notificationListenerDemo,
+      page: () => NotificationListenerDemo(),
+    ),
+    GetPage(
+      name: APPRouter.scrollbarDemo,
+      page: () => ScrollbarDemo(),
+    ),
+    GetPage(
+      name: APPRouter.notificationCustomDemo,
+      page: () => NotificationCustomDemo(),
+    ),
+    GetPage(
+      name: APPRouter.scrollControllerDemo,
+      page: () => ScrollControllerDemo(),
+    ),
+    GetPage(
+      name: APPRouter.colorConverterDemo,
+      page: () => ColorConverterDemo(),
+    ),
+    GetPage(
+      name: APPRouter.intrinsicHeightDemo,
+      page: () => IntrinsicHeightDemo(),
+    ),
+    GetPage(
+      name: APPRouter.flexDemo,
+      page: () => FlexDemo(),
+    ),
+    GetPage(
+      name: APPRouter.flexibleDemo,
+      page: () => FlexibleDemo(),
+    ),
+    GetPage(
+      name: APPRouter.physicalModelDemo,
+      page: () => PhysicalModelDemo(),
+    ),
+    GetPage(
+      name: APPRouter.neumorphismDemo,
+      page: () => NeumorphismDemo(),
+    ),
+    GetPage(
+      name: APPRouter.wechatAssetsPickerDemo,
+      page: () => WechatAssetsPickerDemo(),
+    ),
+    GetPage(
+      name: APPRouter.wechatPhotoPickerDemo,
+      page: () => WechatPhotoPickerDemo(),
+    ),
+    GetPage(
+      name: APPRouter.visibilityDemo,
+      page: () => VisibilityDemo(),
+    ),
+    GetPage(
+      name: APPRouter.ignorePointerDemo,
+      page: () => IgnorePointerDemo(),
+    ),
+    GetPage(
+      name: APPRouter.horizontalCellDemo,
+      page: () => HorizontalCellDemo(),
+    ),
+    GetPage(
+      name: APPRouter.boxShadowDemo,
+      page: () => BoxShadowDemo(),
+    ),
+    GetPage(
+      name: APPRouter.listViewOneDemo,
+      page: () => ListViewOneDemo(),
+    ),
+    GetPage(
+      name: APPRouter.marqueeWidgetDemo,
+      page: () => MarqueeWidgetDemo(),
+    ),
+    GetPage(
+      name: APPRouter.animatedStaggerDemo,
+      page: () => AnimatedStaggerDemo(),
+    ),
+    GetPage(
+      name: APPRouter.buttonStyleDemo,
+      page: () => ButtonStyleDemo(),
+    ),
+    GetPage(
+      name: APPRouter.ticketDemo,
+      page: () => TicketUiDemo(),
+    ),
+    GetPage(
+      name: APPRouter.myPopverDemo,
+      page: () => MyPopverDemo(),
+    ),
+    GetPage(
+      name: APPRouter.keyDemo,
+      page: () => KeyDemo(),
+    ),
+    GetPage(
+      name: APPRouter.customScrollBarDemo,
+      page: () => CustomScrollBarDemo(),
+    ),
+    GetPage(
+      name: APPRouter.overflowDemo,
+      page: () => OverflowDemo(),
+    ),
+    GetPage(
+      name: APPRouter.enhanceTabBarDemo,
+      page: () => EnhanceTabBarDemo(),
+    ),
+    GetPage(
+      name: APPRouter.collectionNavWidgetDemo,
+      page: () => NCollectionNavWidgetDemo(),
+    ),
+    GetPage(
+      name: APPRouter.nnHorizontalScrollWidgetDemo,
+      page: () => NHorizontalScrollWidgetDemo(),
+    ),
 
-    GetPage(name: APPRouter.responsiveColumnDemo, page: () => ResponsiveColumnDemo(),),
+    GetPage(
+      name: APPRouter.materialDemo,
+      page: () => MaterialDemo(),
+    ),
+    GetPage(
+      name: APPRouter.flexibleSpaceDemo,
+      page: () => FlexibleSpaceDemo(),
+    ),
+    GetPage(
+      name: APPRouter.operatorDemo,
+      page: () => OperatorDemo(),
+    ),
+    GetPage(
+      name: APPRouter.netStateListenerDemo,
+      page: () => NetStateListenerDemo(),
+    ),
+    GetPage(
+      name: APPRouter.netStateListenerDemoOne,
+      page: () => NetStateListenerDemoOne(),
+    ),
+    GetPage(
+      name: APPRouter.interactiveViewerDemo,
+      page: () => InteractiveViewerDemo(),
+    ),
+    GetPage(
+      name: APPRouter.defaultTabControllerDemo,
+      page: () => DefaultTabControllerDemo(),
+    ),
+    GetPage(
+      name: APPRouter.regExpDemo,
+      page: () => RegExpDemo(),
+    ),
+    GetPage(
+      name: APPRouter.inputDatePickerFormFieldDemo,
+      page: () => InputDatePickerFormFieldDemo(),
+    ),
+    GetPage(
+      name: APPRouter.dateRangePickerDialogDemo,
+      page: () => DateRangePickerDialogDemo(),
+    ),
+    GetPage(
+      name: APPRouter.mergeableMaterialDemo,
+      page: () => MergeableMaterialDemo(),
+    ),
+    GetPage(
+      name: APPRouter.navigationRailDemo,
+      page: () => NavigationRailDemo(),
+    ),
+    GetPage(
+      name: APPRouter.listTileDemo,
+      page: () => ListTileDemo(),
+    ),
+    GetPage(
+      name: APPRouter.refreshIndicatorDemo,
+      page: () => RefreshIndicatorDemo(),
+    ),
+    GetPage(
+      name: APPRouter.refreshIndicatorDemoOne,
+      page: () => RefreshIndicatorDemoOne(),
+    ),
+    GetPage(
+      name: APPRouter.showSearchDemo,
+      page: () => ShowSearchDemo(),
+    ),
+    GetPage(
+      name: APPRouter.tooltipDemo,
+      page: () => TooltipDemo(),
+    ),
+    GetPage(
+      name: APPRouter.filterDemo,
+      page: () => FilterDemo(),
+    ),
+    GetPage(
+      name: APPRouter.filterDemoOne,
+      page: () => FilterDemoOne(),
+    ),
+    GetPage(
+      name: APPRouter.videoPlayerScreenDemo,
+      page: () => VideoPlayerDemo(),
+    ),
+    GetPage(
+      name: APPRouter.boxWidgetDemo,
+      page: () => NBoxWidgetDemo(),
+    ),
+    GetPage(
+      name: APPRouter.fractionallySizedBoxDemo,
+      page: () => FractionallySizedBoxDemo(),
+    ),
+    GetPage(
+      name: APPRouter.listWheelScrollViewDemo,
+      page: () => ListWheelScrollViewDemo(),
+    ),
+    GetPage(
+      name: APPRouter.nnsliverPersistentHeaderDemo,
+      page: () => NSliverPersistentHeaderDemo(),
+    ),
+    GetPage(
+      name: APPRouter.nestedScrollViewDemoOne,
+      page: () => NestedScrollViewDemoOne(),
+    ),
+    GetPage(
+      name: APPRouter.nestedScrollViewDemoTwo,
+      page: () => NestedScrollViewDemoTwo(),
+    ),
+    GetPage(
+      name: APPRouter.testFunction,
+      page: () => TestFunction(),
+    ),
+    GetPage(
+      name: APPRouter.nTreeDemo,
+      page: () => NTreeDemo(),
+    ),
+    GetPage(
+      name: APPRouter.azlistviewDemo,
+      page: () => AzlistviewDemo(),
+    ),
+    GetPage(
+      name: APPRouter.expansionTileCard,
+      page: () => ExpansionTileCard(),
+    ),
+    GetPage(
+      name: APPRouter.dialogChoiceChipDemo,
+      page: () => DialogChoiceChipDemo(),
+    ),
+    GetPage(
+      name: APPRouter.textFieldLoginDemo,
+      page: () => TextFieldLoginDemo(),
+    ),
+    GetPage(
+      name: APPRouter.pageViewAndBarDemo,
+      page: () => PageViewAndBarDemo(),
+    ),
+    GetPage(
+      name: APPRouter.pageViewDemoOne,
+      page: () => PageViewDemoOne(),
+    ),
 
+    GetPage(
+      name: APPRouter.dropBoxChoicDemo,
+      page: () => DropBoxChoicDemo(),
+    ),
+    GetPage(
+      name: APPRouter.dropBoxMutiRowChoicDemo,
+      page: () => DropBoxMutiRowChoicDemo(),
+    ),
+    GetPage(
+      name: APPRouter.slidableDemoOne,
+      page: () => SlidableDemoOne(),
+    ),
+    GetPage(
+      name: APPRouter.imChatPage,
+      page: () => IMChatPage(),
+    ),
+    GetPage(
+      name: APPRouter.soundPlayDemo,
+      page: () => SoundPlayDemo(),
+    ),
+    GetPage(
+      name: APPRouter.expandTextDemo,
+      page: () => NExpandTextDemo(),
+    ),
+    GetPage(
+      name: APPRouter.tableCalenderMain,
+      page: () => TableCalenderMain(),
+    ),
+    GetPage(
+      name: APPRouter.suspensionButtonDemo,
+      page: () => SuspensionButtonDemo(),
+    ),
+    GetPage(
+      name: APPRouter.neomorphismHomePage,
+      page: () => NeomorphismHomePage(),
+    ),
+    GetPage(
+      name: APPRouter.uploadFileDemo,
+      page: () => UploadFileDemo(),
+    ),
+    GetPage(
+      name: APPRouter.customSingleChildLayoutDemo,
+      page: () => CustomSingleChildLayoutDemo(),
+    ),
+    GetPage(
+      name: APPRouter.customMultiChildLayoutDemo,
+      page: () => CustomMultiChildLayoutDemo(),
+    ),
+    GetPage(
+      name: APPRouter.refreshListView,
+      page: () => RefreshListView(),
+    ),
+    GetPage(
+      name: APPRouter.npageViewDemo,
+      page: () => NPageViewDemo(),
+    ),
+    GetPage(
+      name: APPRouter.boxShadowDemoOne,
+      page: () => BoxShadowDemoOne(),
+    ),
+    GetPage(
+      name: APPRouter.getxDemo,
+      page: () => GetxDemo(),
+    ),
+    GetPage(
+      name: APPRouter.globalIsolateDemo,
+      page: () => GlobalIsolateDemo(),
+    ),
+    GetPage(
+      name: APPRouter.longCaptureWidgetDemo,
+      page: () => LongCaptureWidgetDemo(),
+    ),
+    GetPage(
+      name: APPRouter.jsonToDartPage,
+      page: () => JsonToDartPage(),
+    ),
+    GetPage(
+      name: APPRouter.assetUploadBoxDemo,
+      page: () => AssetUploadBoxDemo(),
+    ),
+    GetPage(
+      name: APPRouter.keyboardAttachDemo,
+      page: () => KeyboardAttachDemo(),
+    ),
+    GetPage(
+      name: APPRouter.dashLineDemo,
+      page: () => DashLineDemo(),
+    ),
+    GetPage(
+      name: APPRouter.scaffoldBottomSheet,
+      page: () => ScaffoldBottomSheet(),
+    ),
+    GetPage(
+      name: APPRouter.floatingActionButtonDemo,
+      page: () => FloatingActionButtonDemo(),
+    ),
+    GetPage(
+      name: APPRouter.weatherInfoPage,
+      page: () => WeatherInfoPage(),
+    ),
 
-    GetPage(name: APPRouter.offstageDemo, page: () => OffstageDemo(),),
-    GetPage(name: APPRouter.bottomAppBarDemo, page: () => BottomAppBarDemo(),),
-    GetPage(name: APPRouter.calendarDatePickerDemo, page: () => CalendarDatePickerDemo(),),
+    GetPage(
+      name: APPRouter.flutterPickersDemo,
+      page: () => FlutterPickersDemo(),
+    ),
+    GetPage(
+      name: APPRouter.imageStretchDemo,
+      page: () => ImageStretchDemo(),
+    ),
+    GetPage(
+      name: APPRouter.dropdownMenuDemo,
+      page: () => DropdownMenuDemo(),
+    ),
+    GetPage(
+      name: APPRouter.searchDemo,
+      page: () => SearchDemo(),
+    ),
+    GetPage(
+      name: APPRouter.switchDemo,
+      page: () => SwitchDemo(),
+    ),
+    GetPage(
+      name: APPRouter.gestureDetectorDemo,
+      page: () => GestureDetectorDemo(),
+    ),
+    GetPage(
+      name: APPRouter.compositedTransformTargetDemo,
+      page: () => CompositedTransformTargetDemo(),
+    ),
+    GetPage(
+      name: APPRouter.drawCanvasDemo,
+      page: () => DrawCanvasDemo(),
+    ),
+    GetPage(
+      name: APPRouter.contextMenuDemo,
+      page: () => ContextMenuDemo(),
+    ),
+    GetPage(
+      name: APPRouter.targetFollowerDemo,
+      page: () => NTargetFollowerDemo(),
+    ),
+    GetPage(
+      name: APPRouter.tapRegionDemo,
+      page: () => TapRegionDemo(),
+    ),
+    GetPage(
+      name: APPRouter.glowingOverscrollIndicatorDemo,
+      page: () => GlowingOverscrollIndicatorDemo(),
+    ),
+    GetPage(
+      name: APPRouter.progressClipperDemo,
+      page: () => ProgressClipperDemo(),
+    ),
+    GetPage(
+      name: APPRouter.heroDemo,
+      page: () => HeroDemo(),
+    ),
+    GetPage(
+      name: APPRouter.hitTestBehaviorDemo,
+      page: () => HitTestBehaviorDemo(),
+    ),
+    GetPage(
+      name: APPRouter.qrcodePage,
+      page: () => QrcodePage(),
+    ),
+    GetPage(
+      name: APPRouter.menuAnchorDemo,
+      page: () => MenuAnchorDemo(),
+    ),
+    GetPage(
+      name: APPRouter.myMenuBarDemo,
+      page: () => MyMenuBarDemo(),
+    ),
+    GetPage(
+      name: APPRouter.choiceBoxOneDemo,
+      page: () => NChoiceBoxOneDemo(),
+    ),
+    GetPage(
+      name: APPRouter.apiConvertPage,
+      page: () => APIConvertPage(),
+    ),
+    GetPage(
+      name: APPRouter.selectListPage,
+      page: () => SelectListPage(),
+    ),
+    GetPage(
+      name: APPRouter.indexAvatarGroupDemo,
+      page: () => NIndexAvatarGroupDemo(),
+    ),
+    GetPage(
+      name: APPRouter.overlayPortalDemo,
+      page: () => OverlayPortalDemo(),
+    ),
+    GetPage(
+      name: APPRouter.appBarColorChangerDemo,
+      page: () => NAppBarColorChangerDemo(),
+    ),
+    GetPage(
+      name: APPRouter.footerButtonBarDemo,
+      page: () => NFooterButtonBarDemo(),
+    ),
+    GetPage(
+      name: APPRouter.sectionHeaderDemo,
+      page: () => NSectionHeaderDemo(),
+    ),
+    GetPage(
+      name: APPRouter.todoListTabPage,
+      page: () => TodoListTabPage(),
+    ),
+    GetPage(
+      name: APPRouter.studentTabPage,
+      page: () => StudentTabPage(),
+    ),
+    GetPage(
+      name: APPRouter.orderListTabPage,
+      page: () => OrderListTabPage(),
+    ),
+    GetPage(
+      name: APPRouter.componentMiddlePage,
+      page: () => ComponentMiddlePage(),
+    ),
+    GetPage(
+      name: APPRouter.sliverMainAxisGroupDemo,
+      page: () => SliverMainAxisGroupDemo(),
+    ),
+    GetPage(
+      name: APPRouter.twoDimensionalGridViewDemo,
+      page: () => TwoDimensionalGridViewDemo(),
+    ),
+    GetPage(
+      name: APPRouter.listenerHeaderPage,
+      page: () => ListenerHeaderPage(),
+    ),
+    GetPage(
+      name: APPRouter.nwebViewDemo,
+      page: () => NWebViewDemo(),
+    ),
+    GetPage(
+      name: APPRouter.iconConvertPage,
+      page: () => IconConvertPage(),
+    ),
+    GetPage(
+      name: APPRouter.alignmentDrawDemo,
+      page: () => AlignmentDrawDemo(),
+    ),
+    GetPage(
+      name: APPRouter.displayFeatureDemo,
+      page: () => DisplayFeatureDemo(),
+    ),
+    GetPage(
+      name: APPRouter.preferredSizeDemo,
+      page: () => PreferredSizeDemo(),
+    ),
+    GetPage(
+      name: APPRouter.ntabBarPageDemo,
+      page: () => NTabBarPageDemo(),
+    ),
+    GetPage(
+      name: APPRouter.nTabBarViewCustomDemo,
+      page: () => NTabBarViewCustomDemo(),
+    ),
+    GetPage(
+      name: APPRouter.textFieldTabDemo,
+      page: () => TextFieldTabDemo(),
+    ),
+    GetPage(
+      name: APPRouter.textPaintDemo,
+      page: () => TextPaintDemo(),
+    ),
+    GetPage(
+      name: APPRouter.segmentedPageViewDemo,
+      page: () => SegmentedPageViewDemo(),
+    ),
+    GetPage(
+      name: APPRouter.nPinnedTabBarPageDemo,
+      page: () => NPinnedTabBarPageDemo(),
+    ),
+    GetPage(
+      name: APPRouter.nRefreshViewDemo,
+      page: () => NRefreshViewDemo(),
+    ),
+    GetPage(
+      name: APPRouter.nestedScrollViewDemoThree,
+      page: () => NestedScrollViewDemoThree(),
+    ),
+    GetPage(
+      name: APPRouter.apiCreatePage,
+      page: () => ApiCreatePage(),
+    ),
+    GetPage(
+      name: APPRouter.formDemo,
+      page: () => FormDemo(),
+    ),
+    GetPage(
+      name: APPRouter.asyncDemo,
+      page: () => AsyncDemo(),
+    ),
+    GetPage(
+      name: APPRouter.choiceExpansionDemo,
+      page: () => NChoiceExpansionDemo(),
+    ),
+    GetPage(
+      name: APPRouter.riverPodPageCreate,
+      page: () => RiverPodPageCreate(),
+    ),
 
-    GetPage(name: APPRouter.chipDemo, page: () => ChipDemo(),),
-    GetPage(name: APPRouter.chipFilterDemo, page: () => ChipFilterDemo(),),
-    GetPage(name: APPRouter.bottomSheetDemo, page: () => BottomSheetDemo(),),
-    GetPage(name: APPRouter.timePickerDemo, page: () => TimePickerDemo(),),
-    GetPage(name: APPRouter.shaderMaskDemo, page: () => ShaderMaskDemo(),),
-    GetPage(name: APPRouter.blurViewDemo, page: () => BlurViewDemo(),),
-    GetPage(name: APPRouter.boxDemo, page: () => BoxDemo(),),
-    GetPage(name: APPRouter.mouseRegionDemo, page: () => MouseRegionDemo(),),
-    GetPage(name: APPRouter.localImagePage, page: () => LocalImagePage(),),
-    GetPage(name: APPRouter.timelineDemo, page: () => TimelineDemo(),),
-    GetPage(name: APPRouter.timelinesDemo, page: () => TimelinesDemo(),),
-    GetPage(name: APPRouter.hitTest, page: () => HitTest(),),
-    GetPage(name: APPRouter.navgationBarDemo, page: () => NavgationBarDemo(),),
-    GetPage(name: APPRouter.borderDemo, page: () => BorderDemo(),),
-    GetPage(name: APPRouter.clipDemo, page: () => ClipDemo(),),
-    GetPage(name: APPRouter.steperConnectorDemo, page: () => SteperConnectorDemo(),),
-    GetPage(name: APPRouter.textViewDemo, page: () => TextViewDemo(),),
-    GetPage(name: APPRouter.navigationBarDemo, page: () => NavigationBarDemo(),),
-    GetPage(name: APPRouter.qrCodeScannerDemo, page: () => QrCodeScannerDemo(),),
-    GetPage(name: APPRouter.qrFlutterDemo, page: () => QrFlutterDemo(),),
-    GetPage(name: APPRouter.scribbleDemo, page: () => ScribbleDemo(),),
-    GetPage(name: APPRouter.aestheticDialogsDemo, page: () => AestheticDialogsDemo(),),
-    GetPage(name: APPRouter.customTimerDemo, page: () => CustomTimerDemo(),),
-    GetPage(name: APPRouter.flutterFFiTest, page: () => FlutterFFiTest(),),
-    GetPage(name: APPRouter.smartDialogPageDemo, page: () => SmartDialogPageDemo(),),
-    GetPage(name: APPRouter.mergeImagesDemo, page: () => MergeImagesDemo(),),
-    GetPage(name: APPRouter.mergeNetworkImagesDemo, page: () => MergeNetworkImagesDemo(),),
-    GetPage(name: APPRouter.drawImageNineDemo, page: () => DrawImageNineDemo(),),
-    GetPage(name: APPRouter.proxyProviderDemo, page: () => ProxyProviderDemo(),),
-    GetPage(name: APPRouter.ratingBarDemo, page: () => RatingBarDemo(),),
-    GetPage(name: APPRouter.shortcutsDemo, page: () => ShortcutsDemo(),),
-    GetPage(name: APPRouter.shortcutsDemoOne, page: () => ShortcutsDemoOne(),),
-    GetPage(name: APPRouter.dragAndDropDemo, page: () => DragAndDropDemo(),),
-    GetPage(name: APPRouter.transformDemo, page: () => TransformDemo(),),
-    GetPage(name: APPRouter.fittedBoxDemo, page: () => FittedBoxDemo(),),
-    GetPage(name: APPRouter.coloredBoxDemo, page: () => ColoredBoxDemo(),),
-    GetPage(name: APPRouter.positionedDirectionalDemo, page: () => PositionedDirectionalDemo(),),
-    GetPage(name: APPRouter.statefulBuilderDemo, page: () => StatefulBuilderDemo(),),
-    GetPage(name: APPRouter.valueListenableBuilderDemo, page: () => ValueListenableBuilderDemo(),),
-    GetPage(name: APPRouter.overflowBarDemo, page: () => OverflowBarDemo(),),
-    GetPage(name: APPRouter.navigationToolbarDemo, page: () => NavigationToolbarDemo(),),
-    GetPage(name: APPRouter.selectableTextDemo, page: () => SelectableTextDemo(),),
-    GetPage(name: APPRouter.materialBannerDemo, page: () => MaterialBannerDemo(),),
-    GetPage(name: APPRouter.autocompleteDemo, page: () => AutocompleteDemo(),),
-
-    GetPage(name: APPRouter.autofillGroupDemo, page: () => AutofillGroupDemo(),),
-    GetPage(name: APPRouter.promptBuilderDemo, page: () => PromptBuilderDemo(),),
-    GetPage(name: APPRouter.rotatedBoxDemo, page: () => RotatedBoxDemo(),),
-    GetPage(name: APPRouter.dismissibleDemo, page: () => DismissibleDemo(),),
-    GetPage(name: APPRouter.modalBarrierDemo, page: () => ModalBarrierDemo(),),
-    GetPage(name: APPRouter.isolateDemo, page: () => IsolateDemo(),),
-    GetPage(name: APPRouter.listViewDemo, page: () => ListViewDemo(),),
-    GetPage(name: APPRouter.listViewStyleDemo, page: () => ListViewStyleDemo(),),
-    GetPage(name: APPRouter.builderDemo, page: () => BuilderDemo(),),
-    GetPage(name: APPRouter.overlayDemo, page: () => OverlayDemo(),),
-    GetPage(name: APPRouter.decorationDemo, page: () => DecorationDemo(),),
-    GetPage(name: APPRouter.stackDemo, page: () => StackDemo(),),
-    GetPage(name: APPRouter.stackDemoOne, page: () => StackDemoOne(),),
-    GetPage(name: APPRouter.stackDemoTwo, page: () => StackDemoTwo(),),
-
-    GetPage(name: APPRouter.badgeDemo, page: () => BadgeDemo(),),
-    GetPage(name: APPRouter.flutterSwiperDemo, page: () => FlutterSwiperDemo(),),
-    GetPage(name: APPRouter.flutterSwiperIndicatorDemo, page: () => FlutterSwiperIndicatorDemo(),),
-    GetPage(name: APPRouter.homeSrollDemo, page: () => HomeSrollDemo(),),
-    GetPage(name: APPRouter.homeNavDemo, page: () => HomeNavDemo(),),
-    GetPage(name: APPRouter.wrapDemo, page: () => WrapDemo(),),
-    GetPage(name: APPRouter.boxConstraintsDemo, page: () => BoxConstraintsDemo(),),
-    GetPage(name: APPRouter.gradientDemo, page: () => GradientDemo(),),
-    GetPage(name: APPRouter.imageBlendModeDemo, page: () => ImageBlendModeDemo(),),
-    GetPage(name: APPRouter.customSwipperDemo, page: () => CustomSwipperDemo(),),
-    GetPage(name: APPRouter.visibilityDetectorDemo, page: () => VisibilityDetectorDemo(),),
-    GetPage(name: APPRouter.svgaImageDemo, page: () => SvgaImageDemo(),),
-    GetPage(name: APPRouter.providerDemo, page: () => ProviderDemo(),),
-    GetPage(name: APPRouter.providerDemoOne, page: () => ProviderDemoOne(),),
-    GetPage(name: APPRouter.inheritedWidgetDemo, page: () => InheritedWidgetDemo(),),
-    GetPage(name: APPRouter.notificationListenerDemo, page: () => NotificationListenerDemo(),),
-    GetPage(name: APPRouter.scrollbarDemo, page: () => ScrollbarDemo(),),
-    GetPage(name: APPRouter.notificationCustomDemo, page: () => NotificationCustomDemo(),),
-    GetPage(name: APPRouter.scrollControllerDemo, page: () => ScrollControllerDemo(),),
-    GetPage(name: APPRouter.colorConverterDemo, page: () => ColorConverterDemo(),),
-    GetPage(name: APPRouter.intrinsicHeightDemo, page: () => IntrinsicHeightDemo(),),
-    GetPage(name: APPRouter.flexDemo, page: () => FlexDemo(),),
-    GetPage(name: APPRouter.flexibleDemo, page: () => FlexibleDemo(),),
-    GetPage(name: APPRouter.physicalModelDemo, page: () => PhysicalModelDemo(),),
-    GetPage(name: APPRouter.neumorphismDemo, page: () => NeumorphismDemo(),),
-    GetPage(name: APPRouter.wechatAssetsPickerDemo, page: () => WechatAssetsPickerDemo(),),
-    GetPage(name: APPRouter.wechatPhotoPickerDemo, page: () => WechatPhotoPickerDemo(),),
-    GetPage(name: APPRouter.visibilityDemo, page: () => VisibilityDemo(),),
-    GetPage(name: APPRouter.ignorePointerDemo, page: () => IgnorePointerDemo(),),
-    GetPage(name: APPRouter.horizontalCellDemo, page: () => HorizontalCellDemo(),),
-    GetPage(name: APPRouter.boxShadowDemo, page: () => BoxShadowDemo(),),
-    GetPage(name: APPRouter.listViewOneDemo, page: () => ListViewOneDemo(),),
-    GetPage(name: APPRouter.marqueeWidgetDemo, page: () => MarqueeWidgetDemo(),),
-    GetPage(name: APPRouter.animatedStaggerDemo, page: () => AnimatedStaggerDemo(),),
-    GetPage(name: APPRouter.buttonStyleDemo, page: () => ButtonStyleDemo(),),
-    GetPage(name: APPRouter.ticketDemo, page: () => TicketUiDemo(),),
-    GetPage(name: APPRouter.myPopverDemo, page: () => MyPopverDemo(),),
-    GetPage(name: APPRouter.keyDemo, page: () => KeyDemo(),),
-    GetPage(name: APPRouter.customScrollBarDemo, page: () => CustomScrollBarDemo(),),
-    GetPage(name: APPRouter.overflowDemo, page: () => OverflowDemo(),),
-    GetPage(name: APPRouter.enhanceTabBarDemo, page: () => EnhanceTabBarDemo(),),
-    GetPage(name: APPRouter.collectionNavWidgetDemo, page: () => NCollectionNavWidgetDemo(),),
-    GetPage(name: APPRouter.nnHorizontalScrollWidgetDemo, page: () => NHorizontalScrollWidgetDemo(),),
-
-    GetPage(name: APPRouter.materialDemo, page: () => MaterialDemo(),),
-    GetPage(name: APPRouter.flexibleSpaceDemo, page: () => FlexibleSpaceDemo(),),
-    GetPage(name: APPRouter.operatorDemo, page: () => OperatorDemo(),),
-    GetPage(name: APPRouter.netStateListenerDemo, page: () => NetStateListenerDemo(),),
-    GetPage(name: APPRouter.netStateListenerDemoOne, page: () => NetStateListenerDemoOne(),),
-    GetPage(name: APPRouter.interactiveViewerDemo, page: () => InteractiveViewerDemo(),),
-    GetPage(name: APPRouter.defaultTabControllerDemo, page: () => DefaultTabControllerDemo(),),
-    GetPage(name: APPRouter.regExpDemo, page: () => RegExpDemo(),),
-    GetPage(name: APPRouter.inputDatePickerFormFieldDemo, page: () => InputDatePickerFormFieldDemo(),),
-    GetPage(name: APPRouter.dateRangePickerDialogDemo, page: () => DateRangePickerDialogDemo(),),
-    GetPage(name: APPRouter.mergeableMaterialDemo, page: () => MergeableMaterialDemo(),),
-    GetPage(name: APPRouter.navigationRailDemo, page: () => NavigationRailDemo(),),
-    GetPage(name: APPRouter.listTileDemo, page: () => ListTileDemo(),),
-    GetPage(name: APPRouter.refreshIndicatorDemo, page: () => RefreshIndicatorDemo(),),
-    GetPage(name: APPRouter.refreshIndicatorDemoOne, page: () => RefreshIndicatorDemoOne(),),
-    GetPage(name: APPRouter.showSearchDemo, page: () => ShowSearchDemo(),),
-    GetPage(name: APPRouter.tooltipDemo, page: () => TooltipDemo(),),
-    GetPage(name: APPRouter.filterDemo, page: () => FilterDemo(),),
-    GetPage(name: APPRouter.filterDemoOne, page: () => FilterDemoOne(),),
-    GetPage(name: APPRouter.videoPlayerScreenDemo, page: () => VideoPlayerDemo(),),
-    GetPage(name: APPRouter.boxWidgetDemo, page: () => NBoxWidgetDemo(),),
-    GetPage(name: APPRouter.fractionallySizedBoxDemo, page: () => FractionallySizedBoxDemo(),),
-    GetPage(name: APPRouter.listWheelScrollViewDemo, page: () => ListWheelScrollViewDemo(),),
-    GetPage(name: APPRouter.nnsliverPersistentHeaderDemo, page: () => NSliverPersistentHeaderDemo(),),
-    GetPage(name: APPRouter.nestedScrollViewDemoOne, page: () => NestedScrollViewDemoOne(),),
-    GetPage(name: APPRouter.nestedScrollViewDemoTwo, page: () => NestedScrollViewDemoTwo(),),
-    GetPage(name: APPRouter.testFunction, page: () => TestFunction(),),
-    GetPage(name: APPRouter.nTreeDemo, page: () => NTreeDemo(),),
-    GetPage(name: APPRouter.azlistviewDemo, page: () => AzlistviewDemo(),),
-    GetPage(name: APPRouter.expansionTileCard, page: () => ExpansionTileCard(),),
-    GetPage(name: APPRouter.dialogChoiceChipDemo, page: () => DialogChoiceChipDemo(),),
-    GetPage(name: APPRouter.textFieldLoginDemo, page: () => TextFieldLoginDemo(),),
-    GetPage(name: APPRouter.pageViewAndBarDemo, page: () => PageViewAndBarDemo(),),
-    GetPage(name: APPRouter.pageViewDemoOne, page: () => PageViewDemoOne(),),
-
-
-    GetPage(name: APPRouter.dropBoxChoicDemo, page: () => DropBoxChoicDemo(),),
-    GetPage(name: APPRouter.dropBoxMutiRowChoicDemo, page: () => DropBoxMutiRowChoicDemo(),),
-    GetPage(name: APPRouter.slidableDemoOne, page: () => SlidableDemoOne(),),
-    GetPage(name: APPRouter.imChatPage, page: () => IMChatPage(),),
-    GetPage(name: APPRouter.soundPlayDemo, page: () => SoundPlayDemo(),),
-    GetPage(name: APPRouter.expandTextDemo, page: () => NExpandTextDemo(),),
-    GetPage(name: APPRouter.tableCalenderMain, page: () => TableCalenderMain(),),
-    GetPage(name: APPRouter.suspensionButtonDemo, page: () => SuspensionButtonDemo(),),
-    GetPage(name: APPRouter.neomorphismHomePage, page: () => NeomorphismHomePage(),),
-    GetPage(name: APPRouter.uploadFileDemo, page: () => UploadFileDemo(),),
-    GetPage(name: APPRouter.customSingleChildLayoutDemo, page: () => CustomSingleChildLayoutDemo(),),
-    GetPage(name: APPRouter.customMultiChildLayoutDemo, page: () => CustomMultiChildLayoutDemo(),),
-    GetPage(name: APPRouter.refreshListView, page: () => RefreshListView(),),
-    GetPage(name: APPRouter.npageViewDemo, page: () => NPageViewDemo(),),
-    GetPage(name: APPRouter.boxShadowDemoOne, page: () => BoxShadowDemoOne(),),
-    GetPage(name: APPRouter.getxDemo, page: () => GetxDemo(),),
-    GetPage(name: APPRouter.globalIsolateDemo, page: () => GlobalIsolateDemo(),),
-    GetPage(name: APPRouter.longCaptureWidgetDemo, page: () => LongCaptureWidgetDemo(),),
-    GetPage(name: APPRouter.jsonToDartPage, page: () => JsonToDartPage(),),
-    GetPage(name: APPRouter.assetUploadBoxDemo, page: () => AssetUploadBoxDemo(),),
-    GetPage(name: APPRouter.keyboardAttachDemo, page: () => KeyboardAttachDemo(),),
-    GetPage(name: APPRouter.dashLineDemo, page: () => DashLineDemo(),),
-    GetPage(name: APPRouter.scaffoldBottomSheet, page: () => ScaffoldBottomSheet(),),
-    GetPage(name: APPRouter.floatingActionButtonDemo, page: () => FloatingActionButtonDemo(),),
-    GetPage(name: APPRouter.weatherInfoPage, page: () => WeatherInfoPage(),),
-
-    GetPage(name: APPRouter.flutterPickersDemo, page: () => FlutterPickersDemo(),),
-    GetPage(name: APPRouter.imageStretchDemo, page: () => ImageStretchDemo(),),
-    GetPage(name: APPRouter.dropdownMenuDemo, page: () => DropdownMenuDemo(),),
-    GetPage(name: APPRouter.searchDemo, page: () => SearchDemo(),),
-    GetPage(name: APPRouter.switchDemo, page: () => SwitchDemo(),),
-    GetPage(name: APPRouter.gestureDetectorDemo, page: () => GestureDetectorDemo(),),
-    GetPage(name: APPRouter.compositedTransformTargetDemo, page: () => CompositedTransformTargetDemo(),),
-    GetPage(name: APPRouter.drawCanvasDemo, page: () => DrawCanvasDemo(),),
-    GetPage(name: APPRouter.contextMenuDemo, page: () => ContextMenuDemo(),),
-    GetPage(name: APPRouter.targetFollowerDemo, page: () => NTargetFollowerDemo(),),
-    GetPage(name: APPRouter.tapRegionDemo, page: () => TapRegionDemo(),),
-    GetPage(name: APPRouter.glowingOverscrollIndicatorDemo, page: () => GlowingOverscrollIndicatorDemo(),),
-    GetPage(name: APPRouter.progressClipperDemo, page: () => ProgressClipperDemo(),),
-    GetPage(name: APPRouter.heroDemo, page: () => HeroDemo(),),
-    GetPage(name: APPRouter.hitTestBehaviorDemo, page: () => HitTestBehaviorDemo(),),
-    GetPage(name: APPRouter.qrcodePage, page: () => QrcodePage(),),
-    GetPage(name: APPRouter.menuAnchorDemo, page: () => MenuAnchorDemo(),),
-    GetPage(name: APPRouter.myMenuBarDemo, page: () => MyMenuBarDemo(),),
-    GetPage(name: APPRouter.choiceBoxOneDemo, page: () => NChoiceBoxOneDemo(),),
-    GetPage(name: APPRouter.apiConvertPage, page: () => APIConvertPage(),),
-    GetPage(name: APPRouter.selectListPage, page: () => SelectListPage(),),
-    GetPage(name: APPRouter.indexAvatarGroupDemo, page: () => NIndexAvatarGroupDemo(),),
-    GetPage(name: APPRouter.overlayPortalDemo, page: () => OverlayPortalDemo(),),
-    GetPage(name: APPRouter.appBarColorChangerDemo, page: () => NAppBarColorChangerDemo(),),
-    GetPage(name: APPRouter.footerButtonBarDemo, page: () => NFooterButtonBarDemo(),),
-    GetPage(name: APPRouter.sectionHeaderDemo, page: () => NSectionHeaderDemo(),),
-    GetPage(name: APPRouter.todoListTabPage, page: () => TodoListTabPage(),),
-    GetPage(name: APPRouter.studentTabPage, page: () => StudentTabPage(),),
-    GetPage(name: APPRouter.orderListTabPage, page: () => OrderListTabPage(),),
-    GetPage(name: APPRouter.componentMiddlePage, page: () => ComponentMiddlePage(),),
-    GetPage(name: APPRouter.sliverMainAxisGroupDemo, page: () => SliverMainAxisGroupDemo(),),
-    GetPage(name: APPRouter.twoDimensionalGridViewDemo, page: () => TwoDimensionalGridViewDemo(),),
-    GetPage(name: APPRouter.listenerHeaderPage, page: () => ListenerHeaderPage(),),
-    GetPage(name: APPRouter.nwebViewDemo, page: () => NWebViewDemo(),),
-    GetPage(name: APPRouter.iconConvertPage, page: () => IconConvertPage(),),
-    GetPage(name: APPRouter.alignmentDrawDemo, page: () => AlignmentDrawDemo(),),
-    GetPage(name: APPRouter.displayFeatureDemo, page: () => DisplayFeatureDemo(),),
-    GetPage(name: APPRouter.preferredSizeDemo, page: () => PreferredSizeDemo(),),
-    GetPage(name: APPRouter.ntabBarPageDemo, page: () => NTabBarPageDemo(),),
-    GetPage(name: APPRouter.nTabBarViewCustomDemo, page: () => NTabBarViewCustomDemo(),),
-    GetPage(name: APPRouter.textFieldTabDemo, page: () => TextFieldTabDemo(),),
-    GetPage(name: APPRouter.textPaintDemo, page: () => TextPaintDemo(),),
-    GetPage(name: APPRouter.segmentedPageViewDemo, page: () => SegmentedPageViewDemo(),),
-    GetPage(name: APPRouter.nPinnedTabBarPageDemo, page: () => NPinnedTabBarPageDemo(),),
-    GetPage(name: APPRouter.nRefreshViewDemo, page: () => NRefreshViewDemo(),),
-    GetPage(name: APPRouter.nestedScrollViewDemoThree, page: () => NestedScrollViewDemoThree(),),
-    GetPage(name: APPRouter.apiCreatePage, page: () => ApiCreatePage(),),
-    GetPage(name: APPRouter.formDemo, page: () => FormDemo(),),
-    GetPage(name: APPRouter.asyncDemo, page: () => AsyncDemo(),),
-    GetPage(name: APPRouter.choiceExpansionDemo, page: () => NChoiceExpansionDemo(),),
-    GetPage(name: APPRouter.riverPodPageCreate, page: () => RiverPodPageCreate(),),
-
-    GetPage(name: APPRouter.getxRouteCreatePage, page: () => GetxRouteCreatePage(),),
-    GetPage(name: APPRouter.getxControllerDemo, page: () => GetxControllerDemo(),),
-    GetPage(name: APPRouter.nTransformViewDemo, page: () => NTransformViewDemo(),),
-    GetPage(name: APPRouter.testDataTyeDemo, page: () => TestDataTyeDemo(),),
-    GetPage(name: APPRouter.queueAlertDemo, page: () => QueueAlertDemo(),),
-
-
+    GetPage(
+      name: APPRouter.getxRouteCreatePage,
+      page: () => GetxRouteCreatePage(),
+    ),
+    GetPage(
+      name: APPRouter.getxControllerDemo,
+      page: () => GetxControllerDemo(),
+    ),
+    GetPage(
+      name: APPRouter.nTransformViewDemo,
+      page: () => NTransformViewDemo(),
+    ),
+    GetPage(
+      name: APPRouter.testDataTyeDemo,
+      page: () => TestDataTyeDemo(),
+    ),
+    GetPage(
+      name: APPRouter.queueAlertDemo,
+      page: () => QueueAlertDemo(),
+    ),
   ];
 }

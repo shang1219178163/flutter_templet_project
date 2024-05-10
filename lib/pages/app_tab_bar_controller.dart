@@ -8,7 +8,7 @@ abstract class AppTabBarController {
   void onBarDoubleTap(int index);
 }
 
-abstract class TabBarState<T extends StatefulWidget> extends State<T> {
+abstract class AppTabBarState<T extends StatefulWidget> extends State<T> {
   /// tab bar item 单击回调
   @mustCallSuper
   void onBarTap(int index);
