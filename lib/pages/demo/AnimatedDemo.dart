@@ -8,36 +8,34 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_slide_transition.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 
 import 'package:flutter_templet_project/pages/demo/AnimatedSwitcherDemo.dart';
 
-
 class AnimatedDemo extends StatefulWidget {
-
   String? title;
 
-  AnimatedDemo({ Key? key, this.title}) : super(key: key);
-
+  AnimatedDemo({Key? key, this.title}) : super(key: key);
 
   @override
   _AnimatedDemoState createState() => _AnimatedDemoState();
 }
 
-class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMixin{
-
-  late final AnimationController _controller = AnimationController(duration: const Duration(milliseconds: 350), vsync: this);
+class _AnimatedDemoState extends State<AnimatedDemo>
+    with TickerProviderStateMixin {
+  late final AnimationController _controller = AnimationController(
+      duration: const Duration(milliseconds: 350), vsync: this);
 
   double size = 100;
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title ?? "$widget"),
-        ),
-        body: _buildPageView(context),
+      appBar: AppBar(
+        title: Text(widget.title ?? "$widget"),
+      ),
+      body: _buildPageView(context),
     );
   }
 
@@ -45,10 +43,10 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
     return PageView(
       scrollDirection: Axis.horizontal,
       pageSnapping: true,
-      onPageChanged: (index){
+      onPageChanged: (index) {
         debugPrint('当前为第$index页');
         setState(() {
-          widget.title ='当前为第$index页';
+          widget.title = '当前为第$index页';
         });
       },
       children: <Widget>[
@@ -56,9 +54,7 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
         _buildAnimatedSizeIcon(),
         _buildAnimatedCrossFade(),
         _buildAnimatedScale(),
-        _buildAnimatedMySlideTransition(),
-        _buildAnimatedSlideTransition(),
-        _buildAnimatedSlideTransitionX(),
+        _buildAnimatedNSlideTransition(),
         _buildAnimatedLineSlideTransition(),
         Container(
           color: Colors.red,
@@ -103,11 +99,10 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
     );
   }
 
-
   ///缩放组件
   Widget _buildAnimatedSizeIcon() {
     return GestureDetector(
-      onTap: (){
+      onTap: () {
         ddlog("AnimatedSize");
         setState(() {
           size = size == 100 ? 200 : 100;
@@ -120,7 +115,9 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
             children: [
               AnimatedSize(
                 duration: Duration(milliseconds: 350),
-                child: FlutterLogo(size: size,),
+                child: FlutterLogo(
+                  size: size,
+                ),
               ),
               Text("AnimatedSize"),
             ],
@@ -131,6 +128,7 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
   }
 
   CrossFadeState _crossFadeState = CrossFadeState.showFirst;
+
   ///播放按钮组件
   Widget _buildAnimatedCrossFade() {
     return Center(
@@ -142,7 +140,11 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
               AnimatedCrossFade(
                 crossFadeState: _crossFadeState,
                 duration: Duration(milliseconds: 2),
-                firstChild: Icon(Icons.text_rotate_up, size: 150, color: Colors.green,),
+                firstChild: Icon(
+                  Icons.text_rotate_up,
+                  size: 150,
+                  color: Colors.green,
+                ),
                 secondChild: Icon(Icons.text_rotate_vertical, size: 150),
               ),
               Text("AnimatedCrossFade"),
@@ -153,13 +155,14 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
         onTap: () {
           ddlog("AnimatedCrossFade");
           setState(() {
-            _crossFadeState = _crossFadeState == CrossFadeState.showFirst ?  CrossFadeState.showSecond : CrossFadeState.showFirst;
+            _crossFadeState = _crossFadeState == CrossFadeState.showFirst
+                ? CrossFadeState.showSecond
+                : CrossFadeState.showFirst;
           });
         },
       ),
     );
   }
-
 
   int _count = 0;
 
@@ -173,45 +176,8 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
             duration: Duration(milliseconds: 500),
             transitionBuilder: (Widget child, Animation<double> animation) {
               //执行缩放动画
-              return ScaleTransition( scale: animation, child: child,);
-            },
-            child: Text(
-              '$_count',
-              //显示指定key，不同的key会被认为是不同的Text，这样才能执行动画
-              key: ValueKey<int>(_count),
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ),
-          OutlinedButton(
-            onPressed: () {
-              ddlog("AnimatedSwitcher");
-
-              setState(() {
-                _count += 1;
-              });
-            },
-            child: Text('+1',),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildAnimatedMySlideTransition() {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Text("MySlideTransition"),
-
-          AnimatedSwitcher(
-            duration: Duration(milliseconds: 500),
-            transitionBuilder: (Widget child, Animation<double> animation) {
-              //执行缩放动画
-              // return ScaleTransition(child: child, scale: animation);
-              var tween = Tween<Offset>(begin: Offset(1, 0), end: Offset(0, 0));
-              return MySlideTransition(
-                position: tween.animate(animation),
+              return ScaleTransition(
+                scale: animation,
                 child: child,
               );
             },
@@ -230,59 +196,25 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
                 _count += 1;
               });
             },
-            child: Text('+1',),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildAnimatedSlideTransition() {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Text("SlideTransition"),
-
-          AnimatedSwitcher(
-            duration: Duration(milliseconds: 500),
-            transitionBuilder: (Widget child, Animation<double> animation) {
-              final tween = Tween(begin: Offset(0.0, 1.0), end: Offset.zero);
-              return SlideTransition(
-                position: animation.drive(tween),
-                child: child,
-              );
-            },
-            child: Text('$_count',
-              //显示指定key，不同的key会被认为是不同的Text，这样才能执行动画
-              key: ValueKey<int>(_count),
-              style: Theme.of(context).textTheme.headline4,
+            child: Text(
+              '+1',
             ),
           ),
-
-          OutlinedButton(
-            onPressed: () {
-              _count += 1;
-              setState(() {});
-            },
-            child: Text('+1',),
-          ),
         ],
       ),
     );
   }
 
-  Widget _buildAnimatedSlideTransitionX() {
+  Widget _buildAnimatedNSlideTransition() {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Text("SlideTransitionX"),
-
+          Text("NSlideTransition"),
           AnimatedSwitcher(
             duration: Duration(milliseconds: 500),
             transitionBuilder: (Widget child, Animation<double> animation) {
-              return SlideTransitionX(
+              return NSlideTransition(
                 direction: AxisDirection.up, //上入下出
                 position: animation,
                 child: child,
@@ -295,7 +227,6 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
               style: Theme.of(context).textTheme.headline4,
             ),
           ),
-
           OutlinedButton(
             onPressed: () {
               ddlog("AnimatedSwitcher");
@@ -304,7 +235,9 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
                 _count += 1;
               });
             },
-            child: Text('+1',),
+            child: Text(
+              '+1',
+            ),
           ),
         ],
       ),
@@ -317,14 +250,17 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text("LineSlideTransition"),
-
           AnimatedSwitcher(
             duration: Duration(milliseconds: 500),
             transitionBuilder: (Widget child, Animation<double> animation) {
-              final tween = Tween<Offset>(begin: Offset(0, 1), end: Offset(0, 0));
+              final tween = Tween<Offset>(
+                begin: Offset(0, 1),
+                end: Offset(0, 0),
+              );
               return LineSlideTransition(
-                  position: animation.drive(tween),
-                  child: child);
+                position: animation.drive(tween),
+                child: child,
+              );
             },
             child: Text(
               '$_count',
@@ -333,7 +269,6 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
               style: Theme.of(context).textTheme.headline4,
             ),
           ),
-
           OutlinedButton(
             onPressed: () {
               ddlog("AnimatedSwitcher");
@@ -342,11 +277,12 @@ class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMix
                 _count += 1;
               });
             },
-            child: Text('+1',),
+            child: Text(
+              '+1',
+            ),
           ),
         ],
       ),
     );
   }
-
 }
