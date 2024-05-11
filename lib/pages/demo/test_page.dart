@@ -150,11 +150,17 @@ class _TestPageState extends State<TestPage>
     final val = "1# 8ji#2_3I  ".toInt();
     ddlog("val: $val");
 
-    final duration = Duration(milliseconds: 46 * 1000);
+    final duration = Duration(milliseconds: 146 * 1000);
     ddlog("duration: $duration");
 
     ddlog("toTimeNew: ${duration.toTimeNew()}");
     ddlog("toTime: ${duration.toTime()}");
+
+    ddlog("list: ${[
+      duration.inHours.remainder(24),
+      duration.inMinutes.remainder(60),
+      duration.inSeconds.remainder(60),
+    ]}");
   }
 
   Wrap buildWrap() {
