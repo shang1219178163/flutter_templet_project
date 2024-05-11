@@ -15,7 +15,9 @@ import 'package:flutter_templet_project/basicWidget/n_section_header.dart';
 import 'package:flutter_templet_project/basicWidget/n_expand_text.dart';
 import 'package:flutter_templet_project/basicWidget/n_footer.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
+import 'package:flutter_templet_project/extension/duration_ext.dart';
 import 'package:flutter_templet_project/extension/file_ext.dart';
+import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/model/NPerson.dart';
 import 'package:flutter_templet_project/model/user_model.dart';
@@ -144,6 +146,15 @@ class _TestPageState extends State<TestPage>
   onDone() {
     const a = true;
     final b = "nested ${a ? "strings" : "can"} be wrapped by a double quote";
+
+    final val = "1# 8ji#2_3I  ".toInt();
+    ddlog("val: $val");
+
+    final duration = Duration(milliseconds: 46 * 1000);
+    ddlog("duration: $duration");
+
+    ddlog("toTimeNew: ${duration.toTimeNew()}");
+    ddlog("toTime: ${duration.toTime()}");
   }
 
   Wrap buildWrap() {
