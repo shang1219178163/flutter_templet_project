@@ -6,27 +6,24 @@
 //  Copyright © 2023/8/29 shang. All rights reserved.
 //
 
-
 import 'dart:math' as math;
 
 import 'package:flutter/painting.dart';
 
 extension SizeExt on Size {
   /// 等比缩放大小
-  Size adjustToWidth(double width) {
+  Size toWidth(double width) {
     final scale = width / this.width;
     final heightNew = scale * height;
     // print("SizeExt:${heightNew}");
     return Size(width, heightNew);
   }
+
   /// 等比缩放大小
-  Size adjustToHeight(double height) {
+  Size toHeight(double height) {
     final scale = height / this.height;
     final widthNew = scale * width;
     // print("SizeExt:${widthNew}");
     return Size(widthNew, height);
   }
-
 }
-
-

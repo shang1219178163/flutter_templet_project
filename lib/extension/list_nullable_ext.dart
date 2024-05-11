@@ -6,9 +6,7 @@
 //  Copyright © 2023/8/29 shang. All rights reserved.
 //
 
-
-extension ListNullableExt<T,E> on List<E> {
-
+extension ListNullableExt<E> on List<E> {
   /// 重写属性
   E? get first {
     try {

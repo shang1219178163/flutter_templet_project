@@ -6,13 +6,11 @@
 //  Copyright © 2022/11/24 shang. All rights reserved.
 //
 
-
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 
-extension MapExt on Map<String, dynamic>{
-
+extension MapExt on Map<String, dynamic> {
   // static bool isEmpty(Map? val) {
   //   return val == null || val.isEmpty;
   // }
@@ -22,8 +20,8 @@ extension MapExt on Map<String, dynamic>{
   // }
 
   Map get reversed => {
-    for (var e in entries) e.value: e.key,
-  };
+        for (final e in entries) e.value: e.key,
+      };
 
   // 拼接键值成字符串
   String join({String char = '&'}) {
@@ -45,14 +43,10 @@ extension MapExt on Map<String, dynamic>{
       recursion(cb);
     });
   }
-
-
-
 }
 
 /// 请求结果脱壳
-extension MapResponseExt on Map<String, dynamic>{
-
+extension MapResponseExt on Map<String, dynamic> {
   /// 数据请求
   ///
   /// onResult 根据 response 返回和泛型 T 对应的值(默认值取 response["result"])
@@ -108,14 +102,15 @@ extension MapResponseExt on Map<String, dynamic>{
     List<T> defaultValue = const [],
   }) async {
     final tuple = await fetchResult<List<T>>(
-      onResult: onList ?? (response) {
-        final result = response["result"];
-        if (result is List) {
-          // dart: _GrowableList 与 List 无法 as 强转
-          return List<T>.from(result);
-        }
-        return result as List<T>;
-      },
+      onResult: onList ??
+          (response) {
+            final result = response["result"];
+            if (result is List) {
+              // dart: _GrowableList 与 List 无法 as 强转
+              return List<T>.from(result);
+            }
+            return result as List<T>;
+          },
       defaultValue: defaultValue,
     );
     return tuple;
@@ -142,6 +137,4 @@ extension MapResponseExt on Map<String, dynamic>{
     final models = list.map(onModel).toList();
     return (isSuccess: tuple.isSuccess, message: tuple.message, result: models);
   }
-
-
 }
