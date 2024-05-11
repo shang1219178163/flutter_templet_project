@@ -6,15 +6,13 @@
 //  Copyright © 8/3/21 shang. All rights reserved.
 //
 
-
 import 'dart:convert';
 import 'dart:typed_data';
 import 'package:flutter/cupertino.dart';
 
 typedef TransformCallback<E> = E Function(E e);
 
-extension StringExt on String{
-
+extension StringExt on String {
   static bool isEmpty(String? val) {
     return val == null || val.isEmpty;
   }
@@ -24,7 +22,7 @@ extension StringExt on String{
   }
 
   ///运算符重载
-  bool operator > (String val) {
+  bool operator >(String val) {
     return compareTo(val) == 1;
   }
 
@@ -62,7 +60,10 @@ extension StringExt on String{
   }
 
   /// 添加前缀后缀
-  String padding({String prefix = "", String suffix = "",}) {
+  String padding({
+    String prefix = "",
+    String suffix = "",
+  }) {
     var result = this;
     if (!result.startsWith(prefix)) {
       result = "$prefix$result";
@@ -74,13 +75,15 @@ extension StringExt on String{
   }
 
   /// 转 Map<String, dynamic>
-  Map<String, dynamic>? decodeMap({Object? Function(Object? key, Object? value)? reviver}) {
+  Map<String, dynamic>? decodeMap(
+      {Object? Function(Object? key, Object? value)? reviver}) {
     if (this.isEmpty) {
       return null;
     }
 
     try {
-      final result = jsonDecode(this, reviver: reviver) as Map<String, dynamic>?;
+      final result =
+          jsonDecode(this, reviver: reviver) as Map<String, dynamic>?;
       return result;
     } catch (exception) {
       debugPrint("decodeMap: exception: $exception");
@@ -89,7 +92,9 @@ extension StringExt on String{
   }
 
   /// 转 List<T>
-  List<T>? decodeList<T>({Object? Function(Object? key, Object? value)? reviver}) {
+  List<T>? decodeList<T>({
+    Object? Function(Object? key, Object? value)? reviver,
+  }) {
     if (this.isEmpty) {
       return null;
     }
@@ -104,25 +109,26 @@ extension StringExt on String{
   }
 
   /// 本地图片路径
-  String toPath([String dir = "assets/images",]) {
+  String toPath([String dir = "assets/images"]) {
     return "$dir/$this";
   }
 
   /// 图片名称转 AssetImage
-  AssetImage toAssetImage({AssetBundle? bundle, String? package,}) {
-    final assetName = startsWith("assets/images/") ? this : "assets/images/$this";
-    return AssetImage(assetName,
-        bundle: bundle,
-        package: package
-    );
+  AssetImage toAssetImage({AssetBundle? bundle, String? package}) {
+    final assetName =
+        startsWith("assets/images/") ? this : "assets/images/$this";
+    return AssetImage(assetName, bundle: bundle, package: package);
   }
 
   /// 同 int.parse(this)
   int get parseInt => int.parse(this);
+
   /// 同 int.tryParse(this)
   int? get tryParseInt => int.tryParse(this);
+
   /// 同 double.parse(this)
   double get parseDouble => double.parse(this);
+
   /// 同 double.tryParse(this)
   double? get tryParseDouble => double.tryParse(this);
 
@@ -169,25 +175,23 @@ extension StringExt on String{
       return index == 0 && isUpper == false ? e : e.toCapitalize();
     }).join("");
   }
+
   ///反驼峰命名法
   String toUncamlCase([String separator = "_"]) {
     var reg = RegExp(r'[A-Z]');
     return split("").map((e) {
       final i = indexOf(e);
-      return e.contains(reg) ? "${i == 0 ? "" : separator}${e.toLowerCase()}" : e;
+      return e.contains(reg)
+          ? "${i == 0 ? "" : separator}${e.toLowerCase()}"
+          : e;
     }).join("");
   }
 
   /// 转为 int
   int? toInt() {
-    final regInt = RegExp(r"[0-9]");
-    final regIntNon = RegExp(r"[^0-9]");
-
-    if (contains(regInt)) {
-      final result = replaceAll(regIntNon, '');
-      return int.tryParse(result);
-    }
-    return int.tryParse(this);
+    var val = replaceAll(RegExp(r'[^0-9]'), '');
+    final result = int.tryParse(val) ?? 0;
+    return result;
   }
 
   /// 用多个字符串分割文本
@@ -203,14 +207,11 @@ extension StringExt on String{
       var result = "";
       if (data is Map) {
         result += jsonEncode(data);
-      }
-      else if (data is List) {
+      } else if (data is List) {
         result += jsonEncode(data);
-      }
-      else if (data is bool || data is num) {
+      } else if (data is bool || data is num) {
         result += data.toString();
-      }
-      else if (data is String) {
+      } else if (data is String) {
         result += data;
       }
       return result;
@@ -241,9 +242,10 @@ extension StringExt on String{
     bool multiLine = false,
     bool caseSensitive = true,
     bool unicode = false,
-    bool dotAll = false
+    bool dotAll = false,
   }) {
-    final reg = RegExp(source,
+    final reg = RegExp(
+      source,
       multiLine: multiLine,
       caseSensitive: caseSensitive,
       unicode: unicode,
@@ -255,7 +257,8 @@ extension StringExt on String{
     //   String match = m[0]!;
     //   print(match);
     // }
-    final seperators = matchs.map((e) => e[0] ?? "").where((e) => e.isNotEmpty).toList();
+    final seperators =
+        matchs.map((e) => e[0] ?? "").where((e) => e.isNotEmpty).toList();
 
     var result = this;
     seperators.forEach((e) => result = result.replaceAll(e, cb?.call(e) ?? e));
@@ -286,13 +289,19 @@ extension StringExt on String{
 
     return TextSpan(
       children: [
-        TextSpan(text: leftStr, style: textStyle,),
+        TextSpan(
+          text: leftStr,
+          style: textStyle,
+        ),
         TextSpan(text: sub, style: lightTextStyle),
-        TextSpan(text: rightStr, style: textStyle,),
+        TextSpan(
+          text: rightStr,
+          style: textStyle,
+        ),
       ],
     );
   }
-  
+
   /// url 阿里云存储处理
   processAliOSS({
     int? cacheWidth,
@@ -309,18 +318,10 @@ extension StringExt on String{
     final extra = url.endsWith('?') ? "" : "?";
     url = '$url$extra&x-oss-process=image/resize,w_$cacheWidth';
 
-    if (!url.contains(".aliyuncs.com")){ // 如果不是阿里OSS的图片直接返回
+    if (!url.contains(".aliyuncs.com")) {
+      // 如果不是阿里OSS的图片直接返回
       return url;
     }
     return url;
   }
-
 }
-
-// extension StringCryptExt on String{
-//   toMd5() {
-//     Uint8List content = const Utf8Encoder().convert(this);
-//     Digest digest = md5.convert(content);
-//     return digest.toString();
-//   }
-// }
