@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/n_cancel_and_confirm_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_choice_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_choice_expansion_of_model.dart';
+import 'package:flutter_templet_project/basicWidget/n_date_start_end.dart';
 import 'package:flutter_templet_project/basicWidget/n_filter_drop_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_pair.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
@@ -19,6 +20,7 @@ import 'package:flutter_templet_project/model/tag_detail_model.dart';
 import 'package:flutter_templet_project/util/Debounce.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:flutter_templet_project/model/fake_data_model.dart';
+import 'package:flutter_templet_project/vendor/flutter_pickers/flutter_picker_util.dart';
 import 'package:get_storage/get_storage.dart';
 
 class DropBoxChoicDemo extends StatefulWidget {
@@ -45,6 +47,8 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
   final dropBoxController = NFilterDropBoxController();
 
   final _globalKey = GlobalKey();
+
+  final isFilterHighlight = ValueNotifier(false);
 
   /// 选项组
   List<FakeDataModel> get models => items
@@ -77,6 +81,14 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
   List<OrderModel> selectedOrders = [];
   List<OrderModel> selectedOrdersTmp = [];
 
+  /// 入组时间 - 开始
+  String? startTime;
+  String? startTimeTmp;
+
+  /// 入组时间 - 结束
+  String? endTime;
+  String? endTimeTmp;
+
   final dataDesc = ValueNotifier("");
   final tagDesc = ValueNotifier("");
 
@@ -87,17 +99,6 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: [
-          'done',
-        ]
-            .map((e) => TextButton(
-                  child: Text(
-                    e,
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  onPressed: () => debugPrint(e),
-                ))
-            .toList(),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -285,6 +286,34 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
               "selectedModelsTmp: ${selectedOrdersTmp.map((e) => e.name).toList()}");
         },
       ),
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Padding(
+            padding: EdgeInsets.symmetric(vertical: 12),
+            child: Text(
+              "入组时间",
+              style: TextStyle(
+                color: fontColor,
+                fontSize: 15,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+          NDateStartEnd(
+            startDate: () => startTimeTmp,
+            endDate: () => endTimeTmp,
+            onStart: (dateStr) {
+              ddlog("onStart: $dateStr");
+              startTimeTmp = dateStr;
+            },
+            onEnd: (dateStr) {
+              ddlog("onEnd: $dateStr");
+              endTimeTmp = dateStr;
+            },
+          ),
+        ],
+      )
     ];
 
     return sections.map((e) {
@@ -302,10 +331,7 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
               margin: const EdgeInsets.only(top: 15),
               color: Color(0xffF3F3F3),
             ),
-          if (sections.last == e)
-            SizedBox(
-              height: 8,
-            ),
+          if (sections.last == e) SizedBox(height: 8),
         ],
       );
     }).toList();
@@ -371,6 +397,9 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
     selectedModelsTmp = selectedModels;
     selectedTagsTmp = selectedTags;
     selectedOrdersTmp = selectedOrders;
+
+    startTimeTmp = startTime;
+    endTimeTmp = endTime;
   }
 
   void onFilterCancel() {
@@ -378,11 +407,20 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
     selectedModelsTmp = [];
     selectedTagsTmp = [];
     selectedOrdersTmp = [];
+
+    if (startTime == null) {
+      startTimeTmp = null;
+    }
+    if (endTime == null) {
+      endTimeTmp = null;
+    }
+
     debugPrint(
         "取消 selectedModels: ${selectedModels.map((e) => e.name).toList()}");
     debugPrint(
         "取消 selectedTagModels: ${selectedTags.map((e) => e.name).toList()}");
     updateFitlerInfo();
+    updateFilterHighlight();
   }
 
   /// 重置过滤参数
@@ -392,12 +430,14 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
     selectedModels = selectedModelsTmp = [];
     selectedTags = selectedTagsTmp = [];
     selectedOrders = selectedOrdersTmp = [];
+    startTime = startTimeTmp = null;
+    endTime = endTimeTmp = null;
     debugPrint(
         "重置 selectedModels: ${selectedModels.map((e) => e.name).toList()}");
     debugPrint(
         "重置 selectedTagModels: ${selectedTags.map((e) => e.name).toList()}");
     updateFitlerInfo();
-    //请求
+    updateFilterHighlight();
   }
 
   /// 确定过滤参数
@@ -407,6 +447,8 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
     selectedModels = selectedModelsTmp;
     selectedTags = selectedTagsTmp;
     selectedOrders = selectedOrdersTmp;
+    startTime = startTimeTmp;
+    endTime = endTimeTmp;
     debugPrint(
         "重置 selectedModels: ${selectedModels.map((e) => e.name).toList()}");
     debugPrint(
@@ -418,6 +460,17 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
   void updateFitlerInfo() {
     tagDesc.value = selectedTags.map((e) => e.name).toList().join(", ");
     dataDesc.value = selectedModels.map((e) => e.name).toList().join(", ");
+  }
+
+  //选择的时候动态改变筛选按钮高亮状态
+  void updateFilterHighlight() {
+    isFilterHighlight.value = [
+      selectedModelsTmp,
+      selectedTagsTmp,
+      selectedOrdersTmp,
+      startTimeTmp,
+      endTimeTmp,
+    ].where((e) => e != null).isNotEmpty;
   }
 
   Widget buildExpandMenu({
@@ -482,16 +535,8 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
   }) {
     final title = isExpand ? "收起" : "展开";
     final icon = isExpand
-        ? Icon(
-            Icons.expand_less,
-            size: 24,
-            color: color,
-          )
-        : Icon(
-            Icons.expand_more,
-            size: 24,
-            color: color,
-          );
+        ? Icon(Icons.expand_less, size: 24, color: color)
+        : Icon(Icons.expand_more, size: 24, color: color);
 
     return Container(
       decoration: ShapeDecoration(
