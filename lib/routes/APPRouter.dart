@@ -1,12 +1,6 @@
 // import 'package:flutter/cupertino.dart';
 // import 'package:flutter/material.dart';
 
-import 'package:flutter_templet_project/Pages/APPNotFoundPage.dart';
-import 'package:flutter_templet_project/Pages/AppSettingsPage.dart';
-import 'package:flutter_templet_project/Pages/FirstPage.dart';
-import 'package:flutter_templet_project/Pages/FourthPage.dart';
-import 'package:flutter_templet_project/Pages/SecondPage.dart';
-import 'package:flutter_templet_project/Pages/ThirdPage.dart';
 import 'package:flutter_templet_project/Pages/demo/AlertDialogDemo.dart';
 import 'package:flutter_templet_project/Pages/demo/AlertSheetDemo.dart';
 import 'package:flutter_templet_project/Pages/demo/CupertinoTabScaffoldDemo.dart';
@@ -15,12 +9,15 @@ import 'package:flutter_templet_project/Pages/demo/PageViewDemo.dart';
 import 'package:flutter_templet_project/Pages/demo/ProgressHudDemoNew.dart';
 import 'package:flutter_templet_project/Pages/demo/SnackBarDemo.dart';
 import 'package:flutter_templet_project/Pages/demo/TextFieldDemo.dart';
+import 'package:flutter_templet_project/Pages/second_page.dart';
 import 'package:flutter_templet_project/Provider/provider_list_demo.dart';
 import 'package:flutter_templet_project/basicWidget/EnhanceTab/enhance_tab_bar_demo.dart';
 import 'package:flutter_templet_project/basicWidget/NTree/NTreeDemo.dart';
 import 'package:flutter_templet_project/basicWidget/responsive_column.dart';
 import 'package:flutter_templet_project/basicWidget/upload/asset_upload_box_demo.dart';
 import 'package:flutter_templet_project/main.dart';
+import 'package:flutter_templet_project/pages/app_not_found_page.dart';
+import 'package:flutter_templet_project/pages/app_settings_page.dart';
 import 'package:flutter_templet_project/pages/app_tab_page.dart';
 import 'package:flutter_templet_project/pages/demo/APPForgetPwdPage.dart';
 import 'package:flutter_templet_project/pages/demo/ApiCreatePage.dart';
@@ -37,6 +34,7 @@ import 'package:flutter_templet_project/pages/demo/DialogChoiceChipDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DisplayFeatureDemo.dart';
 import 'package:flutter_templet_project/pages/demo/EmojiPage.dart';
 import 'package:flutter_templet_project/pages/demo/FlutterFFiTest.dart';
+import 'package:flutter_templet_project/pages/demo/FlutterPickerUtilDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FormDemo.dart';
 import 'package:flutter_templet_project/pages/demo/GetxControllerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/GetxRouteCreatePage.dart';
@@ -285,6 +283,8 @@ import 'package:flutter_templet_project/pages/demo/will_pop_scope_demo.dart';
 import 'package:flutter_templet_project/pages/demo/homeSrollDemo.dart';
 import 'package:flutter_templet_project/pages/demo/keyboard_attach_demo.dart';
 import 'package:flutter_templet_project/pages/demo/navgation_bar_demo.dart';
+import 'package:flutter_templet_project/pages/first_page.dart';
+import 'package:flutter_templet_project/pages/fourth_page.dart';
 import 'package:flutter_templet_project/pages/neomorphism/neomorphism_home_page.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/NPinnedTabBarPageDemo.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/SliverAppBarDemo.dart';
@@ -298,6 +298,7 @@ import 'package:flutter_templet_project/pages/tabBar_pageView_demo.dart';
 import 'package:flutter_templet_project/pages/tabBar_reuse_page_demo.dart';
 import 'package:flutter_templet_project/pages/demo/test_page_one.dart';
 import 'package:flutter_templet_project/pages/tabBar_tabBarView_demo.dart';
+import 'package:flutter_templet_project/pages/third_page.dart';
 import 'package:flutter_templet_project/provider/ProxyProvider_demo.dart';
 import 'package:flutter_templet_project/provider/getx_state_demo.dart';
 import 'package:flutter_templet_project/provider/getx_state_demo_new.dart';
@@ -716,6 +717,7 @@ class APPRouter {
   static const nTransformViewDemo = '/nTransformViewDemo';
   static const testDataTyeDemo = '/testDataTyeDemo';
   static const queueAlertDemo = '/queueAlertDemo';
+  static const flutterPickerUtilDemo = '/flutterPickerUtilDemo';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -2117,6 +2119,10 @@ class AppPage {
     GetPage(
       name: APPRouter.queueAlertDemo,
       page: () => QueueAlertDemo(),
+    ),
+    GetPage(
+      name: APPRouter.flutterPickerUtilDemo,
+      page: () => FlutterPickerUtilDemo(),
     ),
   ];
 }
