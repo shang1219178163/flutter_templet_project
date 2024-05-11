@@ -24,7 +24,7 @@ class UserModel with SelectableMixin {
   String? name;
   String? nickName;
   String? email;
-  Address? address;
+  AddressDetailModel? address;
   String? phone;
   String? website;
   Company? company;
@@ -34,8 +34,9 @@ class UserModel with SelectableMixin {
     name = json['name'];
     nickName = json['nickName'];
     email = json['email'];
-    address =
-        json['address'] != null ? Address.fromJson(json['address']) : null;
+    address = json['address'] != null
+        ? AddressDetailModel.fromJson(json['address'])
+        : null;
     phone = json['phone'];
     website = json['website'];
     company =
@@ -71,16 +72,17 @@ class UserModel with SelectableMixin {
   String get selectableName => name ?? "";
 }
 
-class Address {
+class AddressDetailModel {
   String? street;
   String? suite;
   String? city;
   String? zipcode;
   Coordinate? geo;
 
-  Address({this.street, this.suite, this.city, this.zipcode, this.geo});
+  AddressDetailModel(
+      {this.street, this.suite, this.city, this.zipcode, this.geo});
 
-  Address.fromJson(Map<String, dynamic> json) {
+  AddressDetailModel.fromJson(Map<String, dynamic> json) {
     street = json['street'];
     suite = json['suite'];
     city = json['city'];
