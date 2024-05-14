@@ -32,7 +32,8 @@ extension RichTextExt on RichText {
   }) {
     final pattern = textTaps.map((d) => RegExp.escape(d)).join('|');
     final regExp = RegExp(pattern, multiLine: true, caseSensitive: false);
-    final textNew = text.splitMapJoin(regExp,
+    final textNew = text.splitMapJoin(
+      regExp,
       onMatch: (m) => '$prefix${m[0]}$suffix', // (or no onMatch at all)
       onNonMatch: (n) => n,
     );
@@ -40,7 +41,9 @@ extension RichTextExt on RichText {
     final list = textNew.split(RegExp('$prefix|$suffix'));
     return list.map((e) {
       if (e.isNotEmpty) {
-        final isEquel = textTaps.contains(e);
+        final isEquel = textTaps.contains(e) ||
+            textTaps.contains(e.toLowerCase()) ||
+            textTaps.contains(e.toUpperCase());
         if (isEquel) {
           return TextSpan(
             text: e,
@@ -55,7 +58,6 @@ extension RichTextExt on RichText {
       return TextSpan(text: e, style: style);
     }).toList();
   }
-
 
   /// List<TextSpan> by [String text], [Map<String, String> linkMap], prefix = "《", suffix = "》"
   // static List<TextSpan> createTextSpans({
@@ -95,8 +97,6 @@ extension RichTextExt on RichText {
   //       .toList();
   //   return textSpans;
   // }
-
-
 }
 
 extension TextSpanExt on TextSpan {
