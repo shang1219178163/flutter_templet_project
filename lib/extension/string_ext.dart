@@ -35,6 +35,13 @@ extension StringExt on String {
     return result;
   }
 
+  /// 转为 int
+  int? toInt() {
+    var val = replaceAll(RegExp(r'[^0-9]'), '');
+    final result = int.tryParse(val);
+    return result;
+  }
+
   /// 移除左边
   String trimLeftChar(String char) {
     var result = this;
@@ -185,13 +192,6 @@ extension StringExt on String {
           ? "${i == 0 ? "" : separator}${e.toLowerCase()}"
           : e;
     }).join("");
-  }
-
-  /// 转为 int
-  int? toInt() {
-    var val = replaceAll(RegExp(r'[^0-9]'), '');
-    final result = int.tryParse(val) ?? 0;
-    return result;
   }
 
   /// 用多个字符串分割文本
