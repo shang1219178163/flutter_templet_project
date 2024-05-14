@@ -19,12 +19,12 @@ class AppLifecycleObserver extends WidgetsBindingObserver {
     required this.onPause,
     required this.onDetach,
     required this.onHidden,
-    this.onStateChange,
+    this.onStateChanged,
   }) {
     // WidgetsBinding.instance.addObserver(this);
   }
 
-  final ValueChanged<AppLifecycleState>? onStateChange;
+  final ValueChanged<AppLifecycleState>? onStateChanged;
 
   /// 切回前台(App 处于具有输入焦点且可见的正在运行的状态。)
   final VoidCallback onResume;
@@ -47,8 +47,8 @@ class AppLifecycleObserver extends WidgetsBindingObserver {
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     // DDLog('${Get.currentRoute} APP状态监听：$state, ${data ?? ""}');
-    if (onStateChange != null) {
-      onStateChange?.call(state);
+    if (onStateChanged != null) {
+      onStateChanged?.call(state);
       return;
     }
 
@@ -75,6 +75,7 @@ class AppLifecycleObserver extends WidgetsBindingObserver {
 /// app 前后台生命周期函数混入封装
 mixin AppLifecycleObserverMixin<T extends StatefulWidget> on State<T> {
   late final _lifecycleObserver = AppLifecycleObserver(
+    onStateChanged: onAppLifecycleStateChanged,
     onResume: onResume,
     onInactive: onInactive,
     onPause: onPause,
@@ -94,8 +95,12 @@ mixin AppLifecycleObserverMixin<T extends StatefulWidget> on State<T> {
     super.dispose();
   }
 
+  void onAppLifecycleStateChanged(AppLifecycleState state) {
+    // debugPrint('onStateChanged didChangeAppLifecycleState state');
+  }
+
   void onResume() {
-    throw UnimplementedError("❌: $this 未实现 onResume");
+    // throw UnimplementedError("❌: $this 未实现 onResume");
   }
 
   void onInactive() {
@@ -103,11 +108,11 @@ mixin AppLifecycleObserverMixin<T extends StatefulWidget> on State<T> {
   }
 
   void onPause() {
-    throw UnimplementedError("❌: $this 未实现 onPause");
+    // throw UnimplementedError("❌: $this 未实现 onPause");
   }
 
   void onDetach() {
-    throw UnimplementedError("❌: $this 未实现 onDetached");
+    // throw UnimplementedError("❌: $this 未实现 onDetached");
   }
 
   void onHidden() {
