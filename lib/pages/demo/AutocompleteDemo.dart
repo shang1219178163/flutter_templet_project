@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_autocomplete_options_view.dart';
 import 'package:flutter_templet_project/basicWidget/n_pair.dart';
@@ -14,9 +13,7 @@ import 'package:flutter_templet_project/extension/change_notifier_ext.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:flutter_templet_project/pages/tabBar_tabBarView_demo.dart';
 
-
 class AutocompleteDemo extends StatefulWidget {
-
   AutocompleteDemo({
     Key? key,
     this.title,
@@ -34,8 +31,7 @@ class AutocompleteDemo extends StatefulWidget {
   _AutocompleteDemoState createState() => _AutocompleteDemoState();
 }
 
-class _AutocompleteDemoState extends State<AutocompleteDemo>{
-
+class _AutocompleteDemoState extends State<AutocompleteDemo> {
   // final _textEditingController = TextEditingController();
   var _textEditingValue = TextEditingValue();
 
@@ -53,69 +49,80 @@ class _AutocompleteDemoState extends State<AutocompleteDemo>{
     fontWeight: FontWeight.bold,
   );
 
-
   @override
   void initState() {
-    _tuples = tuples.map((e) => OptionModel(
-      name: e.item1,
-      children: e.item2.map((e) => OptionModel(
-          name: e.item1,
-          desc: e.item2
-      )).toList(),)
-    ).toList();
-
     super.initState();
+
+    _tuples = tuples
+        .map((e) => OptionModel(
+              name: e.item1,
+              children: e.item2
+                  .map((e) => OptionModel(name: e.item1, desc: e.item2))
+                  .toList(),
+            ))
+        .toList();
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-      appBar: widget.hideAppBar ? null : AppBar(
-        title: Text(widget.title ?? "$widget"),
-      ),
-      body: CustomScrollView(
-        slivers: [
-          ...buildHeader(),
-          Autocomplete<OptionModel>(
-            displayStringForOption: (option) => option.name,
-            fieldViewBuilder: _params[0].isOpen ? buildFieldView : buildFieldViewDefault,
-            onSelected: onSelected,
-            optionsBuilder: _buildOptions,
-            // optionsViewBuilder: _buildOptionsView,
-            optionsViewBuilder: (context,  onSelected, options) {
+        appBar: widget.hideAppBar
+            ? null
+            : AppBar(
+                title: Text(widget.title ?? "$widget"),
+              ),
+        body: CustomScrollView(
+          slivers: [
+            ...buildHeader(),
+            Autocomplete<OptionModel>(
+              displayStringForOption: (option) => option.name,
+              fieldViewBuilder:
+                  _params[0].isOpen ? buildFieldView : buildFieldViewDefault,
+              onSelected: onSelected,
+              optionsBuilder: _buildOptions,
+              // optionsViewBuilder: _buildOptionsView,
+              optionsViewBuilder: (context, onSelected, options) {
+                return NAutocompleteOptionsView<OptionModel>(
+                  displayStringForOption: (option) => option.name,
+                  onSelected: onSelected,
+                  options: options,
+                  maxHeight: 300,
+                  itemBuilder: (context, index) {
+                    final option = options.elementAt(index);
 
-              return NAutocompleteOptionsView<OptionModel>(
-                displayStringForOption: (option) => option.name,
-                onSelected: onSelected,
-                options: options,
-                maxHeight: 300,
-                itemBuilder: (context, index) {
-                  final option = options.elementAt(index);
+                    final name = option.name;
+                    final query = _textEditingValue.text;
+                    // var textWidget = Text.rich(
+                    //   name.firstMatchLight(
+                    //     pattern: query,
+                    //     lightTextStyle: lightTextStyle,
+                    //   ),
+                    // );
 
-                  final name = option.name;
-                  final query = _textEditingValue.text;
-                  var textWidget = Text.rich(name.firstMatchLight(
-                      pattern: query,
-                      lightTextStyle: lightTextStyle
-                  ),);
-
-                  return buildItem(
-                    onTap: () => onSelected(option),
-                    child: textWidget,
-                  );
-                },
-              );
-            },
-          ),
-          Image(
-            image: "img_flutter_3_10.png".toAssetImage(),
-            colorBlendMode: BlendMode.dst,
-            color: context.primaryColor,
-          ),
-        ].map((e) => SliverToBoxAdapter(child: e,)).toList(),
-      )
-    );
+                    final textWidget = Text.rich(
+                      TextSpan(
+                        children: RichTextExt.createTextSpans(
+                          text: name,
+                          textTaps: [query],
+                          linkStyle: lightTextStyle,
+                        ),
+                      ),
+                    );
+                    return buildItem(
+                      onTap: () => onSelected(option),
+                      child: textWidget,
+                    );
+                  },
+                );
+              },
+            ),
+            Image(
+              image: "img_flutter_3_10.png".toAssetImage(),
+              colorBlendMode: BlendMode.dst,
+              color: context.primaryColor,
+            ),
+          ].map((e) => SliverToBoxAdapter(child: e)).toList(),
+        ));
   }
 
   buildHeader() {
@@ -137,7 +144,9 @@ class _AutocompleteDemoState extends State<AutocompleteDemo>{
     }
 
     final items = _tuples.expand((e) => e.children).toList();
-    final result = items.where((e) => e.name.toLowerCase().contains(text.toLowerCase())).toList();
+    final result = items
+        .where((e) => e.name.toLowerCase().contains(text.toLowerCase()))
+        .toList();
     return result;
   }
 
@@ -151,9 +160,9 @@ class _AutocompleteDemoState extends State<AutocompleteDemo>{
   }
 
   Widget buildOptionsView(
-      BuildContext context,
-      AutocompleteOnSelected<OptionModel> onSelected,
-      Iterable<OptionModel> options,
+    BuildContext context,
+    AutocompleteOnSelected<OptionModel> onSelected,
+    Iterable<OptionModel> options,
   ) {
     final items = _buildFilterTitle(_textEditingValue.text);
 
@@ -165,35 +174,32 @@ class _AutocompleteDemoState extends State<AutocompleteDemo>{
           padding: EdgeInsets.symmetric(vertical: 8),
           constraints: BoxConstraints(maxHeight: 200),
           child: ListView.builder(
-            itemCount: items.length,
-            itemBuilder: ( _ , index) {
+              itemCount: items.length,
+              itemBuilder: (_, index) {
+                final option = options.elementAt(index);
+                final name = option.name;
+                final query = _textEditingValue.text;
 
-              final option = options.elementAt(index);
-              final name = option.name;
-              final query = _textEditingValue.text;
+                var textWidget = Text.rich(
+                  name.firstMatchLight(
+                      pattern: query, lightTextStyle: lightTextStyle),
+                );
 
-              var textWidget = Text.rich(name.firstMatchLight(
-                  pattern: query,
-                  lightTextStyle: lightTextStyle
-                ),
-              );
-              
-              return buildItem(
-                onTap: () => onSelected(option),
-                child: textWidget,
-              );
-            }
-          ),
+                return buildItem(
+                  onTap: () => onSelected(option),
+                  child: textWidget,
+                );
+              }),
         ),
       ),
     );
   }
 
   Widget buildFieldViewDefault(
-      BuildContext context,
-      TextEditingController textEditingController,
-      FocusNode focusNode,
-      VoidCallback onFieldSubmitted,
+    BuildContext context,
+    TextEditingController textEditingController,
+    FocusNode focusNode,
+    VoidCallback onFieldSubmitted,
   ) {
     return TextField(
       textInputAction: TextInputAction.next,
@@ -204,11 +210,11 @@ class _AutocompleteDemoState extends State<AutocompleteDemo>{
       //   debugPrint("Field: $value");
       //   onFieldSubmitted();
       // },
-      onChanged: (val){
+      onChanged: (val) {
         // debugPrint("onChanged: $val");
         textFieldVN.value = val;
       },
-      onEditingComplete: (){
+      onEditingComplete: () {
         debugPrint("onEditingComplete: ${textEditingController.text}");
       },
       decoration: buildInputDecoration(
@@ -218,10 +224,10 @@ class _AutocompleteDemoState extends State<AutocompleteDemo>{
   }
 
   Widget buildFieldView(
-      BuildContext context,
-      TextEditingController textEditingController,
-      FocusNode focusNode,
-      VoidCallback onFieldSubmitted,
+    BuildContext context,
+    TextEditingController textEditingController,
+    FocusNode focusNode,
+    VoidCallback onFieldSubmitted,
   ) {
     return TextFormField(
       textInputAction: TextInputAction.next,
@@ -239,52 +245,56 @@ class _AutocompleteDemoState extends State<AutocompleteDemo>{
         return "null";
       },
       decoration: buildInputDecoration(
-        textEditingController: textEditingController,
-        hasEnabledBorder: true
-      ),
+          textEditingController: textEditingController, hasEnabledBorder: true),
     );
   }
 
   /// 输入框修饰器
-  buildInputDecoration({
-    required TextEditingController textEditingController,
-    bool hasEnabledBorder = false,
-    InputBorder? enabledBorder
-  }) {
-    final enabledBorderWidget = enabledBorder ?? (!hasEnabledBorder ? null : OutlineInputBorder(
-      borderRadius: BorderRadius.circular(15),
-      borderSide: const BorderSide(
-          width: 1.5,
-          color: Colors.lightBlue
-      ),
-    ));
+  buildInputDecoration(
+      {required TextEditingController textEditingController,
+      bool hasEnabledBorder = false,
+      InputBorder? enabledBorder}) {
+    final enabledBorderWidget = enabledBorder ??
+        (!hasEnabledBorder
+            ? null
+            : OutlineInputBorder(
+                borderRadius: BorderRadius.circular(15),
+                borderSide:
+                    const BorderSide(width: 1.5, color: Colors.lightBlue),
+              ));
 
     return InputDecoration(
       contentPadding: const EdgeInsets.all(10),
+
       ///设置输入文本框的提示文字
       ///输入框获取焦点时 并且没有输入文字时
       hintText: "请输入关键词",
+
       ///设置输入文本框的提示文字的样式
-      hintStyle: TextStyle(color: Colors.grey,textBaseline: TextBaseline.ideographic,),
+      hintStyle: TextStyle(
+        color: Colors.grey,
+        textBaseline: TextBaseline.ideographic,
+      ),
+
       ///输入文字前的小图标
       prefixIcon: Icon(Icons.search),
+
       ///输入文字后面的小图标
       suffixIcon: ValueListenableBuilder<String>(
-        valueListenable: textFieldVN,
-        builder: (context, value, child) {
-          return value.isEmpty ? SizedBox() : IconButton(
-            onPressed: (){
-              textEditingController.clear();
-              textFieldVN.value = "";
-            } ,
-            icon: Icon(Icons.cancel, color: Colors.grey)
-          );
-        }
-      ),
+          valueListenable: textFieldVN,
+          builder: (context, value, child) {
+            return value.isEmpty
+                ? SizedBox()
+                : IconButton(
+                    onPressed: () {
+                      textEditingController.clear();
+                      textFieldVN.value = "";
+                    },
+                    icon: Icon(Icons.cancel, color: Colors.grey));
+          }),
       enabledBorder: enabledBorderWidget,
     );
   }
-
 
   Widget buildItem({
     required VoidCallback onTap,
@@ -303,15 +313,20 @@ class _AutocompleteDemoState extends State<AutocompleteDemo>{
     );
   }
 
-
   var colors = Colors.primaries;
   // final selectedColor = ValueNotifier(Colors.lightBlue);
   final selectedColor = Colors.lightBlue.vn;
 
   Widget buildExpandColor() {
     return ExpansionTile(
-      leading: Icon(Icons.color_lens, color: selectedColor.value,),
-      title: Text('颜色', style: TextStyle(color: selectedColor.value),),
+      leading: Icon(
+        Icons.color_lens,
+        color: selectedColor.value,
+      ),
+      title: Text(
+        '颜色',
+        style: TextStyle(color: selectedColor.value),
+      ),
       initiallyExpanded: false,
       children: <Widget>[
         Padding(
@@ -329,7 +344,12 @@ class _AutocompleteDemoState extends State<AutocompleteDemo>{
                   width: 40,
                   height: 40,
                   color: e,
-                  child: selectedColor.value == e ? Icon(Icons.done, color: Colors.white,) : null,
+                  child: selectedColor.value == e
+                      ? Icon(
+                          Icons.done,
+                          color: Colors.white,
+                        )
+                      : null,
                 ),
               );
             }).toList(),
@@ -342,25 +362,33 @@ class _AutocompleteDemoState extends State<AutocompleteDemo>{
   Widget buildExpandMenu() {
     return Theme(
       data: ThemeData(
-          dividerColor: Colors.transparent,
+        dividerColor: Colors.transparent,
       ),
       child: ExpansionTile(
         tilePadding: EdgeInsets.symmetric(horizontal: 10),
-        leading: Icon(Icons.ac_unit, color: selectedColor.value,),
-        title: Text('配置', style: TextStyle(color: selectedColor.value),),
+        leading: Icon(
+          Icons.ac_unit,
+          color: selectedColor.value,
+        ),
+        title: Text(
+          '配置',
+          style: TextStyle(color: selectedColor.value),
+        ),
         initiallyExpanded: false,
         children: <Widget>[
           Column(
-            children: _params.map((e) => ListTile(
-              title: Text(e.name),
-              trailing: Switch(
-                onChanged: (bool value) {
-                  e.isOpen = value;
-                  setState(() {});
-                },
-                value: e.isOpen,
-              ),
-            )).toList(),
+            children: _params
+                .map((e) => ListTile(
+                      title: Text(e.name),
+                      trailing: Switch(
+                        onChanged: (bool value) {
+                          e.isOpen = value;
+                          setState(() {});
+                        },
+                        value: e.isOpen,
+                      ),
+                    ))
+                .toList(),
           ),
         ],
       ),
@@ -380,7 +408,6 @@ class OptionModel {
 
   List<OptionModel> children;
 
-
   static OptionModel? fromJson(Map<String, dynamic>? json) {
     if (json == null) {
       return null;
@@ -388,7 +415,8 @@ class OptionModel {
     return OptionModel(
       name: json['name'],
       desc: json['desc'],
-      children: List<OptionModel>.from((json["children"] ?? []).map((e) => OptionModel.fromJson(e))),
+      children: List<OptionModel>.from(
+          (json["children"] ?? []).map((e) => OptionModel.fromJson(e))),
     );
   }
 
@@ -406,7 +434,6 @@ class OptionModel {
   }
 }
 
-
 class ParamModel {
   ParamModel({
     this.name = '',
@@ -421,4 +448,3 @@ class ParamModel {
     return '$this{ name: $name, isOpen: $isOpen, }';
   }
 }
-
