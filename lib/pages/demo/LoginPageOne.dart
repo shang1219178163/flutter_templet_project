@@ -266,18 +266,18 @@ class _LoginPageOneState extends State<LoginPageOne> {
 
     // Get.toNamed(APPRouter.appTabPage)
 
-    accountSheetNewController.addAccount(
+    accountSheetController.addAccount(
       account: accountController.text.trim(),
       pwd: pwdController.text.trim(),
     );
     setState(() {});
   }
 
-  final accountSheetNewController = NAccountSheetNewController();
+  final accountSheetController = NAccountSheetController();
 
   Widget buildAccountSheet() {
-    return NAccountSheetNew(
-      controller: accountSheetNewController,
+    return NAccountSheet(
+      controller: accountSheetController,
       items: [],
       onChanged: (e) {
         accountController.text = e.key;

@@ -1,5 +1,5 @@
 //
-//  NAccountSheet.dart
+//  NAccountSheetNewNew.dart
 //  yl_health_app_v2.20.4.1
 //
 //  Created by shang on 2024/3/27 16:24.
@@ -13,45 +13,37 @@ import 'package:flutter_templet_project/cache/cache_service.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 
 /// 账号选择器
-class NAccountSheet<E extends MapEntry<String, dynamic>>
-    extends StatefulWidget {
+class NAccountSheet extends StatefulWidget {
   const NAccountSheet({
     super.key,
     this.controller,
     required this.items,
-    required this.selectedItem,
     required this.onChanged,
-    required this.selecetdCb,
-    required this.titleCb,
+    this.titleCb,
     this.subtitleCb,
   });
 
   /// 控制器
-  final NAccountSheetController<E>? controller;
+  final NAccountSheetController? controller;
 
-  final List<E> items;
-
-  final E selectedItem;
+  final List<MapEntry<String, dynamic>> items;
 
   /// 改变回调
-  final ValueChanged<E> onChanged;
+  final ValueChanged<MapEntry<String, dynamic>> onChanged;
 
-  final String Function(E e) selecetdCb;
-  final String Function(E e) titleCb;
-  final String Function(E e)? subtitleCb;
+  final String Function(MapEntry<String, dynamic> e)? titleCb;
+  final String Function(MapEntry<String, dynamic> e)? subtitleCb;
 
   @override
-  State<NAccountSheet<E>> createState() => _NAccountSheetState<E>();
+  State<NAccountSheet> createState() => _NAccountSheetState();
 }
 
-class _NAccountSheetState<E extends MapEntry<String, dynamic>>
-    extends State<NAccountSheet<E>> {
-  late List<E> items = widget.items;
+class _NAccountSheetState extends State<NAccountSheet> {
+  late List<MapEntry<String, dynamic>> items = widget.items;
 
-  late E? current = items.isEmpty ? null : items.first;
+  late MapEntry<String, dynamic>? current = items.isEmpty ? null : items.first;
 
-  String get btnTitle =>
-      current == null ? "请选择账号" : widget.selecetdCb(current!);
+  String get btnTitle => current == null ? "请选择账号" : current!.key;
 
   @override
   void dispose() {
@@ -63,11 +55,20 @@ class _NAccountSheetState<E extends MapEntry<String, dynamic>>
   void initState() {
     super.initState();
     widget.controller?._attach(this);
+
+    var map = CacheService().getMap(CACHE_ACCOUNT_List) ?? <String, dynamic>{};
+    if (map.isNotEmpty) {
+      updateItems(map.entries.toList());
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     if (kReleaseMode) {
+      return const SizedBox();
+    }
+
+    if (items.isEmpty) {
       return const SizedBox();
     }
 
@@ -94,6 +95,8 @@ class _NAccountSheetState<E extends MapEntry<String, dynamic>>
     showAlertSheet(
       message: Text(btnTitle),
       actions: items.map((e) {
+        final title = widget.titleCb?.call(e) ?? e.key;
+
         return ListTile(
           dense: true,
           onTap: () {
@@ -104,11 +107,11 @@ class _NAccountSheetState<E extends MapEntry<String, dynamic>>
 
             setState(() {});
           },
-          title: Text(widget.titleCb(e)),
+          title: Text(title),
           subtitle: Text(widget.subtitleCb?.call(e) ?? ""),
           trailing: Icon(
             Icons.check,
-            color: current == e ? Colors.blue : Colors.transparent,
+            color: current?.key == e.key ? Colors.blue : Colors.transparent,
           ),
         );
       }).toList(),
@@ -134,17 +137,18 @@ class _NAccountSheetState<E extends MapEntry<String, dynamic>>
     ).toShowCupertinoModalPopup(context: context);
   }
 
-  void updateItems(List<E> value) {
+  void updateItems(List<MapEntry<String, dynamic>> value) {
+    value.sort((a, b) => a.key.compareTo(b.key));
     items = value;
   }
 
-  void updateCurrent(E e) {
+  void updateCurrent(MapEntry<String, dynamic> e) {
     current = e;
     debugPrint("current: ${current}");
   }
 }
 
-class NAccountSheetController<E extends MapEntry<String, dynamic>> {
+class NAccountSheetController {
   _NAccountSheetState? _anchor;
 
   void _attach(_NAccountSheetState anchor) {
@@ -167,22 +171,20 @@ class NAccountSheetController<E extends MapEntry<String, dynamic>> {
     _anchor!.updateItems(items.reversed.toList());
   }
 
-  final _cacheKey = CACHE_ACCOUNT_List;
-
   /// 添加账户
   void addAccount({
     required String account,
     required String pwd,
   }) {
     assert(_anchor != null);
-    var map = CacheService().getMap(_cacheKey) ?? <String, dynamic>{};
+    var map = CacheService().getMap(CACHE_ACCOUNT_List) ?? <String, dynamic>{};
     map.putIfAbsent(account, () => pwd);
 
     _anchor?.items.forEach((e) {
       map.putIfAbsent(e.key, () => e.value);
     });
 
-    CacheService().setMap(_cacheKey, map);
+    CacheService().setMap(CACHE_ACCOUNT_List, map);
     updateItems(map.entries.toList());
     _anchor?.updateCurrent(MapEntry(account, pwd));
   }
