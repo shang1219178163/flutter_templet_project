@@ -283,12 +283,9 @@ class _LoginPageOneState extends State<LoginPageOne> {
         accountController.text = e.key;
         pwdController.text = e.value;
       },
-      selecetdCb: (e) {
-        return e == null ? "请选择账号" : e.key;
-      },
-      titleCb: (e) {
-        return e.key;
-      },
+      // titleCb: (e) {
+      //   return e.key;
+      // },
     );
   }
 }

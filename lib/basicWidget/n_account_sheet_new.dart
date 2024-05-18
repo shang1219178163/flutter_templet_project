@@ -20,8 +20,7 @@ class NAccountSheetNew extends StatefulWidget {
     this.controller,
     required this.items,
     required this.onChanged,
-    required this.selecetdCb,
-    required this.titleCb,
+    this.titleCb,
     this.subtitleCb,
   });
 
@@ -33,8 +32,7 @@ class NAccountSheetNew extends StatefulWidget {
   /// 改变回调
   final ValueChanged<MapEntry<String, dynamic>> onChanged;
 
-  final String Function(MapEntry<String, dynamic>? e) selecetdCb;
-  final String Function(MapEntry<String, dynamic> e) titleCb;
+  final String Function(MapEntry<String, dynamic> e)? titleCb;
   final String Function(MapEntry<String, dynamic> e)? subtitleCb;
 
   @override
@@ -45,6 +43,8 @@ class _NAccountSheetNewState extends State<NAccountSheetNew> {
   late List<MapEntry<String, dynamic>> items = widget.items;
 
   late MapEntry<String, dynamic>? current = items.isEmpty ? null : items.first;
+
+  String get btnTitle => current == null ? "请选择账号" : current!.key;
 
   @override
   void dispose() {
@@ -80,7 +80,7 @@ class _NAccountSheetNewState extends State<NAccountSheetNew> {
               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
             ),
             onPressed: onChooseAccount,
-            child: Text(widget.selecetdCb(current)),
+            child: Text(btnTitle),
           ),
         ],
       ),
@@ -89,8 +89,10 @@ class _NAccountSheetNewState extends State<NAccountSheetNew> {
 
   void onChooseAccount() {
     showAlertSheet(
-      message: Text(widget.selecetdCb(current)),
+      message: Text(btnTitle),
       actions: items.map((e) {
+        final title = widget.titleCb?.call(e) ?? e.key;
+
         return ListTile(
           dense: true,
           onTap: () {
@@ -101,7 +103,7 @@ class _NAccountSheetNewState extends State<NAccountSheetNew> {
 
             setState(() {});
           },
-          title: Text(widget.titleCb(e)),
+          title: Text(title),
           subtitle: Text(widget.subtitleCb?.call(e) ?? ""),
           trailing: Icon(
             Icons.check,
