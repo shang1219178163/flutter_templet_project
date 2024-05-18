@@ -11,8 +11,10 @@ import 'package:flutter_templet_project/mixin/selectable_mixin.dart';
 class UserModel with SelectableMixin {
   UserModel({
     this.id,
+    this.avatar,
     this.name,
     this.nickName,
+    this.jobTitle,
     this.email,
     this.address,
     this.phone,
@@ -21,8 +23,10 @@ class UserModel with SelectableMixin {
   });
 
   String? id;
+  String? avatar;
   String? name;
   String? nickName;
+  String? jobTitle;
   String? email;
   AddressDetailModel? address;
   String? phone;
@@ -31,8 +35,10 @@ class UserModel with SelectableMixin {
 
   UserModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
+    avatar = json['avatar'];
     name = json['name'];
     nickName = json['nickName'];
+    jobTitle = json['jobTitle'];
     email = json['email'];
     address = json['address'] != null
         ? AddressDetailModel.fromJson(json['address'])
@@ -48,18 +54,15 @@ class UserModel with SelectableMixin {
   Map<String, dynamic> toJson() {
     var data = Map<String, dynamic>();
     data['id'] = id;
+    data['avatar'] = avatar;
+    data['jobTitle'] = jobTitle;
     data['name'] = name;
     data['nickName'] = nickName;
     data['email'] = email;
-    if (address != null) {
-      data['address'] = address!.toJson();
-    }
+    data['address'] = address?.toJson();
     data['phone'] = phone;
     data['website'] = website;
-
-    if (company != null) {
-      data['company'] = company!.toJson();
-    }
+    data['company'] = company?.toJson();
 
     data['isSelected'] = isSelected;
     return data;

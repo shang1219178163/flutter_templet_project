@@ -6,32 +6,33 @@
 //  Copyright © 2023/12/19 shang. All rights reserved.
 //
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_network_image.dart';
 
-
 /// 层叠头像组
 class NIndexAvatarGroup extends StatelessWidget {
-
   const NIndexAvatarGroup({
-  	Key? key,
-  	required this.avatars,
-    this.placehorder = const AssetImage("assets/images/img_placeholder_doctor.png"),
+    Key? key,
+    required this.avatars,
+    this.placehorder =
+        const AssetImage("assets/images/img_placeholder_doctor.png"),
     this.isRevered = false,
     this.itemWidth = 28,
-    this.scale = 18/28,
+    this.scale = 18 / 28,
   }) : super(key: key);
 
   /// url
   final List<String?> avatars;
+
   /// 占位图
   final AssetImage placehorder;
+
   /// 层叠反向
   final bool isRevered;
 
   /// 子项宽高
   final double itemWidth;
+
   /// 层叠比
   final double scale;
 
@@ -73,7 +74,6 @@ class NIndexAvatarGroup extends StatelessWidget {
     return list;
   }
 
-
   Widget buildAvatar({
     required String url,
     required AssetImage placehorder,
@@ -82,14 +82,14 @@ class NIndexAvatarGroup extends StatelessWidget {
       padding: const EdgeInsets.all(2),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(itemWidth*0.5),
+        borderRadius: BorderRadius.circular(itemWidth * 0.5),
       ),
       width: itemWidth,
       height: itemWidth,
       child: NNetworkImage(
-        radius: itemWidth*0.5,
+        radius: itemWidth * 0.5,
         url: url,
-        placehorder: placehorder,
+        placeholder: placehorder,
       ),
     );
   }
