@@ -150,7 +150,7 @@ class _NRefreshViewDemoState extends State<NRefreshViewDemo> {
                         onTap: !isEdit ? onTap : onToggle,
                         leading: NNetworkImage(
                           url: "",
-                          placehorder: AssetImage(
+                          placeholder: AssetImage(
                               "img_placeholder_patient.png".toPath()),
                           width: 40,
                           height: 40,
