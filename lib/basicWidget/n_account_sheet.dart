@@ -9,12 +9,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/cache/cache_service.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 
 /// 账号选择器
-class NAccountSheet<E> extends StatefulWidget {
+class NAccountSheet<E extends MapEntry<String, dynamic>>
+    extends StatefulWidget {
   const NAccountSheet({
     super.key,
+    this.controller,
     required this.items,
     required this.selectedItem,
     required this.onChanged,
@@ -22,6 +25,9 @@ class NAccountSheet<E> extends StatefulWidget {
     required this.titleCb,
     this.subtitleCb,
   });
+
+  /// 控制器
+  final NAccountSheetController<E>? controller;
 
   final List<E> items;
 
@@ -38,15 +44,25 @@ class NAccountSheet<E> extends StatefulWidget {
   State<NAccountSheet<E>> createState() => _NAccountSheetState<E>();
 }
 
-class _NAccountSheetState<E> extends State<NAccountSheet<E>> {
-  late var current = widget.selectedItem;
+class _NAccountSheetState<E extends MapEntry<String, dynamic>>
+    extends State<NAccountSheet<E>> {
+  late List<E> items = widget.items;
 
-  List<E> get items {
-    List<E> array = [...widget.items];
-    if (!widget.items.contains(widget.selectedItem)) {
-      array.add(widget.selectedItem);
-    }
-    return array;
+  late E? current = items.isEmpty ? null : items.first;
+
+  String get btnTitle =>
+      current == null ? "请选择账号" : widget.selecetdCb(current!);
+
+  @override
+  void dispose() {
+    widget.controller?._detach(this);
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    widget.controller?._attach(this);
   }
 
   @override
@@ -67,7 +83,7 @@ class _NAccountSheetState<E> extends State<NAccountSheet<E>> {
               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
             ),
             onPressed: onChooseAccount,
-            child: Text(widget.selecetdCb(current)),
+            child: Text(btnTitle),
           ),
         ],
       ),
@@ -76,7 +92,7 @@ class _NAccountSheetState<E> extends State<NAccountSheet<E>> {
 
   void onChooseAccount() {
     showAlertSheet(
-      message: Text(current.toString()),
+      message: Text(btnTitle),
       actions: items.map((e) {
         return ListTile(
           dense: true,
@@ -116,5 +132,58 @@ class _NAccountSheetState<E> extends State<NAccountSheet<E>> {
         child: const Text('取消'),
       ),
     ).toShowCupertinoModalPopup(context: context);
+  }
+
+  void updateItems(List<E> value) {
+    items = value;
+  }
+
+  void updateCurrent(E e) {
+    current = e;
+    debugPrint("current: ${current}");
+  }
+}
+
+class NAccountSheetController<E extends MapEntry<String, dynamic>> {
+  _NAccountSheetState? _anchor;
+
+  void _attach(_NAccountSheetState anchor) {
+    _anchor = anchor;
+  }
+
+  void _detach(_NAccountSheetState anchor) {
+    if (_anchor == anchor) {
+      _anchor = null;
+    }
+  }
+
+  void onChooseAccount() {
+    assert(_anchor != null);
+    _anchor!.onChooseAccount();
+  }
+
+  void updateItems(List<MapEntry<String, dynamic>> items) {
+    assert(_anchor != null);
+    _anchor!.updateItems(items.reversed.toList());
+  }
+
+  final _cacheKey = CACHE_ACCOUNT_List;
+
+  /// 添加账户
+  void addAccount({
+    required String account,
+    required String pwd,
+  }) {
+    assert(_anchor != null);
+    var map = CacheService().getMap(_cacheKey) ?? <String, dynamic>{};
+    map.putIfAbsent(account, () => pwd);
+
+    _anchor?.items.forEach((e) {
+      map.putIfAbsent(e.key, () => e.value);
+    });
+
+    CacheService().setMap(_cacheKey, map);
+    updateItems(map.entries.toList());
+    _anchor?.updateCurrent(MapEntry(account, pwd));
   }
 }
