@@ -1,30 +1,34 @@
-
-import 'package:flutter/material.dart';
+//
+//  NNetworkImage.dart
+//  flutter_templet_project
+//
+//  Created by shang on 2024/5/18 16:43.
+//  Copyright © 2024/5/18 shang. All rights reserved.
+//
 
 import 'package:extended_image/extended_image.dart';
-import 'package:flutter_templet_project/extension/string_ext.dart';
-
+import 'package:flutter/material.dart';
 
 class NNetworkImage extends StatelessWidget {
-
   NNetworkImage({
-  	Key? key,
-  	this.title,
+    super.key,
+    this.title,
     required this.url,
-    this.placehorder = const AssetImage("assets/images/img_placehorder.png"),
+    this.placeholder = const AssetImage("assets/images/img_placehorder.png"),
     this.fit = BoxFit.fill,
     this.width,
     this.height,
     this.radius = 8,
     this.cache = true,
     this.mode = ExtendedImageMode.none,
-  }) : super(key: key);
+  });
 
   final String? title;
 
   final String url;
+
   /// 占位图
-  final AssetImage placehorder;
+  final AssetImage placeholder;
 
   final BoxFit? fit;
 
@@ -38,16 +42,25 @@ class NNetworkImage extends StatelessWidget {
 
   final ExtendedImageMode mode;
 
-
   @override
   Widget build(BuildContext context) {
+    final placeholderImage = Image(
+      image: placeholder,
+      width: width,
+      height: height,
+    );
+
+    final isUrlError = url.startsWith("http") == false;
+    if (isUrlError) {
+      return ClipRRect(
+        borderRadius: BorderRadius.circular(radius),
+        child: placeholderImage,
+      );
+    }
+
     return ClipRRect(
       borderRadius: BorderRadius.circular(radius),
-      child: url.startsWith("http") == false ? Image(
-        image: placehorder,
-        width: width,
-        height: height,
-      ) : ExtendedImage.network(
+      child: ExtendedImage.network(
         url,
         width: width,
         height: height,
@@ -60,10 +73,10 @@ class NNetworkImage extends StatelessWidget {
         borderRadius: BorderRadius.circular(radius),
         //cancelToken: cancellationToken,
         loadStateChanged: (ExtendedImageState state) {
-          if(state.extendedImageLoadState != LoadState.completed) {
+          if (state.extendedImageLoadState != LoadState.completed) {
             // return Icon(Icons.photo, color: Colors.teal.shade100, size: height,);
             return Image(
-              image: placehorder,
+              image: placeholder,
               width: width,
               height: height,
             );
@@ -79,7 +92,7 @@ class NNetworkImage extends StatelessWidget {
           );
           // debugPrint("Source Rect width ${widget.width} height : ${widget.height}");
           return child;
-        }
+        },
       ),
     );
   }
