@@ -6,11 +6,11 @@
 //  Copyright © 2024/3/25 shang. All rights reserved.
 //
 
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter_templet_project/cache/cache_service.dart';
 import 'package:get/get.dart';
-
 
 class CacheController {
   CacheController();
@@ -18,7 +18,7 @@ class CacheController {
   String get userId => CacheService().userID ?? "";
 
   /// 模型列表转存
-  Future<bool>? setModels<T>({
+  FutureOr<bool> setModels<T>({
     required String key,
     required List<T> value,
     required Map<String, dynamic> Function(T e) mapCb,

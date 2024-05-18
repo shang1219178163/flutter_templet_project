@@ -1,4 +1,4 @@
-
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
@@ -25,6 +25,7 @@ const String CACHE_TOKEN = "CACHE_TOKEN";
 
 /// 缓存用户登录账号
 const String CACHE_USER_LOGIN_NAME = "USER_LOGIN_NAME";
+
 /// 缓存用户登录账号密码
 const String CACHE_USER_LOGIN_PWD = "USER_LOGIN_PWD";
 
@@ -33,10 +34,10 @@ const String CACHE_USER_ID = "CACHE_USER_ID";
 
 const String CACHE_TAG_ROOT_MODEL = "CACHE_TAG_ROOT_MODEL";
 
-
+/// 账号列表缓存
+const String CACHE_ACCOUNT_List = "CACHE_ACCOUNT_List";
 
 class CacheService {
-
   CacheService._() {
     init();
   }
@@ -47,10 +48,11 @@ class CacheService {
 
   static CacheService get shard => _instance;
 
-  SharedPreferences? prefs;
+  SharedPreferences? _prefs;
+  SharedPreferences get prefs => _prefs!;
 
   init() async {
-    prefs ??= await SharedPreferences.getInstance();
+    _prefs ??= await SharedPreferences.getInstance();
     // debugPrint("init prefs: $prefs");
   }
 
@@ -58,22 +60,22 @@ class CacheService {
   final _memoryMap = <String, dynamic>{};
 
   /// 清除数据
-  Future<bool>? remove(String key) {
-    return prefs?.remove(key);
+  Future<bool> remove(String key) {
+    return prefs.remove(key);
   }
 
   /// 动态值
-  Object? operator [](String key){
-    final val = prefs?.get(key);
+  Object? operator [](String key) {
+    final val = prefs.get(key);
     return val;
   }
 
   /// 动态复制
-  void operator []=(String key, String? val){
+  void operator []=(String key, String? val) {
     if (val == null) {
       return;
     }
-    prefs?.setString(key, val);
+    prefs.setString(key, val);
   }
 
   /// 泛型获取值
@@ -83,22 +85,21 @@ class CacheService {
     }
     switch (T) {
       case String:
-        prefs?.setString(key, value as String);
+        prefs.setString(key, value as String);
         break;
       case int:
-        prefs?.setInt(key, value as int);
+        prefs.setInt(key, value as int);
         break;
       case bool:
-        prefs?.setBool(key, value as bool);
+        prefs.setBool(key, value as bool);
         break;
       case double:
-        prefs?.setDouble(key, value as double);
+        prefs.setDouble(key, value as double);
         break;
-      case Map:
-      case List:
+      default:
         try {
           var jsonStr = jsonEncode(value);
-          prefs?.setString(key, jsonStr);
+          prefs.setString(key, jsonStr);
         } catch (e) {
           debugPrint("$this $e");
         }
@@ -106,96 +107,96 @@ class CacheService {
     }
   }
 
-  /// 泛型获取值
-  T? get<T>(String key) {
-    var value = prefs?.get(key);
+  // /// 泛型获取值
+  // T? get<T>(String key) {
+  //   var value = prefs.get(key);
+  //   if (value == null) {
+  //     return null;
+  //   }
+  //   if (value is! String) {
+  //     return value as T?;
+  //   }
+  //
+  //   try {
+  //     var result = jsonDecode(value);
+  //     return result;
+  //   } catch (e) {
+  //     return value as T?;
+  //   }
+  // }
+
+  FutureOr<bool> setStringList(String key, List<String>? value) {
     if (value == null) {
-      return null;
+      return false;
     }
-    if (value is! String) {
-      return value as T?;
-    }
-
-    try {
-      var result = jsonDecode(value);
-      return result;
-    } catch (e) {
-      return value as T?;
-    }
-  }
-
-
-  setStringList(String key, List<String>? value) {
-    if (value == null) {
-      return;
-    }
-    prefs?.setStringList(key, value);
+    return prefs.setStringList(key, value);
   }
 
   List<String>? getStringList(String key) {
-    return prefs?.getStringList(key);
+    return prefs.getStringList(key);
   }
 
-  setString(String key, String? value) {
+  FutureOr<bool> setString(String key, String? value) async {
     if (value == null) {
-      return;
+      return false;
     }
-    prefs?.setString(key, value);
-  }
-
-
-  String? getString(String key) {
-    final result = prefs?.getString(key);
+    final result = prefs.setString(key, value);
     return result;
   }
 
-  setDouble(String key, double? value) {
+  String? getString(String key) {
+    final result = prefs.getString(key);
+    return result;
+  }
+
+  FutureOr<bool> setDouble(String key, double? value) {
     if (value == null) {
-      return;
+      return false;
     }
-    prefs?.setDouble(key, value);
+    return prefs.setDouble(key, value);
   }
 
   double? getDouble(String key) {
-    return prefs?.getDouble(key);
+    return prefs.getDouble(key);
   }
 
-  setInt(String key, int? value) {
+  FutureOr<bool> setInt(String key, int? value) {
     if (value == null) {
-      return;
+      return false;
     }
-    prefs?.setInt(key, value);
+    return prefs.setInt(key, value);
   }
 
   int? getInt(String key) {
-    return prefs?.getInt(key);
+    return prefs.getInt(key);
   }
 
-  setBool(String key, bool? value) {
+  FutureOr<bool> setBool(String key, bool? value) {
     if (value == null) {
-      return;
+      return false;
     }
-    prefs?.setBool(key, value);
+    return prefs.setBool(key, value);
   }
 
   bool? getBool(String key) {
-    return prefs?.getBool(key);
+    return prefs.getBool(key);
   }
 
-  setMap(String key, Map<String, dynamic>? value) {
+  FutureOr<bool> setMap(String key, Map<String, dynamic>? value) {
     if (value == null) {
-      return;
+      return false;
     }
     try {
       final jsonStr = jsonEncode(value);
-      setString(key, jsonStr);
+      return setString(key, jsonStr);
     } catch (e) {
       debugPrint("$this $e");
     }
+    return false;
   }
 
   Map<String, dynamic>? getMap(String key) {
-    var value = prefs?.getString(key);
+    var value = prefs.getString(key);
     if (value == null) {
       return null;
     }
@@ -206,6 +207,19 @@ class CacheService {
       debugPrint("getMap${e.toString()}");
     }
     return map;
+  }
+
+  /// 更新
+  FutureOr<bool> updateMap({
+    required String key,
+    required Map<String, dynamic> value,
+  }) {
+    final map = CacheService().getMap(key) ?? <String, dynamic>{};
+    // value.forEach((key, value) {
+    //   map.putIfAbsent(key, () => value);
+    // });
+    map.addAll(value);
+    return CacheService().setMap(key, map);
   }
 
   /// 标签
@@ -228,14 +242,12 @@ class CacheService {
   }
 }
 
-
 extension CacheServiceExt on CacheService {
-
   /// 清除缓存数据
   Future<bool>? clear() async {
     final env = CacheService().getString(CACHE_REQUEST_ENV);
 
-    final isClear = await prefs?.clear();
+    final isClear = await prefs.clear();
     debugPrint("isClear: $isClear");
 
     CacheService().setString(CACHE_REQUEST_ENV, env);
@@ -295,7 +307,6 @@ extension CacheServiceExt on CacheService {
   String? get devOrigin {
     return CacheService().getString(CACHE_REQUEST_ENV_DEV_ORIGIN);
   }
-
 
   /// 医链执业版
   String? get appName {
@@ -362,5 +373,4 @@ extension CacheServiceExt on CacheService {
   String? get userID {
     return CacheService().getString(CACHE_USER_ID);
   }
-
 }

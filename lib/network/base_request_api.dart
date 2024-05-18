@@ -64,7 +64,7 @@ abstract class BaseRequestAPI {
     return false;
   }
 
-  bool saveJsonOfCache(Map<String, dynamic>? map) {
+  Future<bool> saveJsonOfCache(Map<String, dynamic>? map) async {
     // TODO: implement saveJsonOfCache
     // throw UnimplementedError();
     return false;

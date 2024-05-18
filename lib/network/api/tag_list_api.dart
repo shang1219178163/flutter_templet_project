@@ -51,8 +51,8 @@ class TagListApi extends BaseRequestAPI {
   String get _cacheKey => requestURI + jsonEncode(requestParams);
 
   @override
-  bool saveJsonOfCache(Map<String, dynamic>? map) {
-    return CacheService().setMap(_cacheKey, map) ?? false;
+  Future<bool> saveJsonOfCache(Map<String, dynamic>? map) async {
+    return CacheService().setMap(_cacheKey, map);
   }
 
   @override
