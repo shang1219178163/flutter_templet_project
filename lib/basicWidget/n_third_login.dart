@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/cache/cache_service.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
-import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/routes/APPRouter.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:flutter_templet_project/vendor/apple_sigin_mixin.dart';
@@ -41,8 +40,9 @@ class NThirdLoginState extends State<NThirdLogin>
     with AppleSiginMixin, LoginMixin {
   List<Tuple2<String, VoidCallback>> get thirdLoginItems {
     return [
-      if (Platform.isIOS) Tuple2(Assets.imagesIconAppleBgGrey, onLoginApple),
-      Tuple2(Assets.imagesIconWechatBgGreen, onLoginWechat),
+      if (Platform.isIOS)
+        Tuple2("icon_apple_bg_grey.png".toPath(), onLoginApple),
+      Tuple2("icon_wechat_bg_green.png".toPath(), onLoginWechat),
     ];
   }
 

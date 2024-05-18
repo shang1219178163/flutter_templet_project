@@ -6,28 +6,28 @@
 //  Copyright © 2023/3/25 shang. All rights reserved.
 //
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_sliver_persistent_header_delegate.dart';
 import 'package:flutter_templet_project/basicWidget/tab_bar_indicator_fixed.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
-import 'package:flutter_templet_project/generated/assets.dart';
 import 'package:flutter_templet_project/util/R.dart';
 
 class NestedScrollViewDemoOne extends StatefulWidget {
-
-  const NestedScrollViewDemoOne({ Key? key, this.title}) : super(key: key);
+  const NestedScrollViewDemoOne({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
   @override
-  _NestedScrollViewDemoOneState createState() => _NestedScrollViewDemoOneState();
+  _NestedScrollViewDemoOneState createState() =>
+      _NestedScrollViewDemoOneState();
 }
 
-class _NestedScrollViewDemoOneState extends State<NestedScrollViewDemoOne> with SingleTickerProviderStateMixin {
+class _NestedScrollViewDemoOneState extends State<NestedScrollViewDemoOne>
+    with SingleTickerProviderStateMixin {
   TabController? _tabController;
-  final ScrollController? _scrollController = ScrollController(initialScrollOffset: 0.0);
+  final ScrollController? _scrollController =
+      ScrollController(initialScrollOffset: 0.0);
 
   List<String> items = List.generate(9, (index) => 'item_$index').toList();
 
@@ -55,25 +55,27 @@ class _NestedScrollViewDemoOneState extends State<NestedScrollViewDemoOne> with 
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
         title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          onPressed: onPressed,
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),)
-        ).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  onPressed: onPressed,
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ))
+            .toList(),
       ),
       body: buildPage(),
     );
   }
 
-  onPressed(){
-
-  }
+  onPressed() {}
 
   buildPage() {
     return NestedScrollView(
@@ -105,30 +107,7 @@ class _NestedScrollViewDemoOneState extends State<NestedScrollViewDemoOne> with 
     return SliverPersistentHeader(
       pinned: true,
       delegate: NSliverPersistentHeaderDelegate(
-        builder: (ctx, offset, overlapsContent) {
-          return ColoredBox(
-            color: Colors.yellow,
-            child: Align(
-              alignment: Alignment.center,
-              child: ColoredBox(
-                color: Colors.blue,
-                child: buildTabBar(
-                  controller: _tabController,
-                  indexVN: indexVN,
-                  items: items,
-                ),
-              )
-            ),
-          );
-        }
-      ),
-    );
-  }
-
-  buildNSliverPersistentHeader() {
-    return NSliverPersistentHeader(
-      pinned: true,
-      builder: (ctx, offset, overlapsContent) {
+          builder: (ctx, offset, overlapsContent) {
         return ColoredBox(
           color: Colors.yellow,
           child: Align(
@@ -140,11 +119,30 @@ class _NestedScrollViewDemoOneState extends State<NestedScrollViewDemoOne> with 
                   indexVN: indexVN,
                   items: items,
                 ),
-              )
-          ),
+              )),
         );
-      }
+      }),
     );
+  }
+
+  buildNSliverPersistentHeader() {
+    return NSliverPersistentHeader(
+        pinned: true,
+        builder: (ctx, offset, overlapsContent) {
+          return ColoredBox(
+            color: Colors.yellow,
+            child: Align(
+                alignment: Alignment.center,
+                child: ColoredBox(
+                  color: Colors.blue,
+                  child: buildTabBar(
+                    controller: _tabController,
+                    indexVN: indexVN,
+                    items: items,
+                  ),
+                )),
+          );
+        });
   }
 
   buildTabBar({
@@ -168,30 +166,39 @@ class _NestedScrollViewDemoOneState extends State<NestedScrollViewDemoOne> with 
       //   )
       // ),
       indicator: TabBarIndicatorFixed(),
-      tabs: items.map((e) => Tab(
-        child: ValueListenableBuilder<int>(
-          valueListenable: indexVN,
-          builder: (BuildContext context, int value, Widget? child) {
-            final index = items.indexOf(e);
-            if (index != 1){
-              if (index == 2){
-                return Tab(child: Text(e + e,),);
-              }
-              if (index == 3){
-                return Tab(child: Text(e + e, style: TextStyle(fontSize: 20)),);
-              }
-              return Tab(text: e);
-            }
+      tabs: items
+          .map((e) => Tab(
+                child: ValueListenableBuilder<int>(
+                    valueListenable: indexVN,
+                    builder: (BuildContext context, int value, Widget? child) {
+                      final index = items.indexOf(e);
+                      if (index != 1) {
+                        if (index == 2) {
+                          return Tab(
+                            child: Text(
+                              e + e,
+                            ),
+                          );
+                        }
+                        if (index == 3) {
+                          return Tab(
+                            child: Text(e + e, style: TextStyle(fontSize: 20)),
+                          );
+                        }
+                        return Tab(text: e);
+                      }
 
-            final url = (value == index) ? R.image.urls[1] : R.image.urls[0];
-            return Tab(
-              child: FadeInImage(
-                image: NetworkImage(url),
-                placeholder: Assets.imagesFlutterLogo.toAssetImage(),
-              ),
-            );
-          }),
-      )).toList(),
+                      final url =
+                          (value == index) ? R.image.urls[1] : R.image.urls[0];
+                      return Tab(
+                        child: FadeInImage(
+                          image: NetworkImage(url),
+                          placeholder: "flutter_logo.png".toAssetImage(),
+                        ),
+                      );
+                    }),
+              ))
+          .toList(),
     );
   }
 
@@ -199,7 +206,8 @@ class _NestedScrollViewDemoOneState extends State<NestedScrollViewDemoOne> with 
     required TabController? controller,
     required List<String> items,
   }) {
-    return TabBarView( //构建
+    return TabBarView(
+      //构建
       controller: controller,
       children: items.map((e) {
         return RefreshIndicator(
@@ -216,14 +224,16 @@ class _NestedScrollViewDemoOneState extends State<NestedScrollViewDemoOne> with 
   buildList() {
     const items = Colors.primaries;
     return ListView.builder(
-      itemCount: items.length,
-      itemBuilder: (BuildContext context, int index){
-        final color = items[index];
-        return ListTile(
-          leading: Icon(Icons.ac_unit, color: color,),
-          title: Text("$index"),
-        );
-      }
-    );
+        itemCount: items.length,
+        itemBuilder: (BuildContext context, int index) {
+          final color = items[index];
+          return ListTile(
+            leading: Icon(
+              Icons.ac_unit,
+              color: color,
+            ),
+            title: Text("$index"),
+          );
+        });
   }
 }
