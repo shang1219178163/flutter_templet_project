@@ -1,11 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_account_sheet.dart';
+import 'package:flutter_templet_project/basicWidget/n_account_sheet_new.dart';
 import 'package:flutter_templet_project/basicWidget/n_origin_sheet.dart';
+import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/network/RequestConfig.dart';
 import 'package:flutter_templet_project/routes/AppRouter.dart';
+import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:get/get.dart';
 import 'package:tuple/tuple.dart';
 
@@ -20,19 +23,37 @@ class LoginPageOne extends StatefulWidget {
 
 class _LoginPageOneState extends State<LoginPageOne> {
   // 控制器
-  final _unameController = TextEditingController();
-  final _pwdController = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
+  final accountController = TextEditingController();
+  final pwdController = TextEditingController();
+
+  // final accountExp = RegExp(r'^(?![0-9]+$)(?![a-z]+$)[0-9a-z]{6,12}$');
+  final accountExp = RegExp(r'^\d{6,12}$');
+  final pwdExp = RegExp(r'^(?![0-9]+$)(?![a-z]+$)[0-9a-z]{6,12}$');
 
   // 焦点
   final focusNode1 = FocusNode();
   final focusNode2 = FocusNode();
 
+  final _formKey = GlobalKey<FormState>();
+
   bool isEye = true;
-  bool isBtnEnabled = false;
-  bool showLoading = false;
-  final _unameExp = RegExp(r'^(?![0-9]+$)(?![a-z]+$)[0-9a-z]{6,12}$'); //用户名正则
-  final _pwdExp = RegExp(r'^(?![0-9]+$)(?![a-z]+$)[0-9a-z]{6,12}$'); //密码正则
+  final isBtnEnabled = ValueNotifier(false);
+
+  @override
+  void initState() {
+    super.initState();
+
+    initData();
+  }
+
+  initData() {
+    final phone = IntExt.random(max: 200000000, min: 100000000);
+    final pwd = IntExt.random(max: 200000, min: 100000);
+    final result = "${1.generateChars()}${pwd}";
+    accountController.text = "$phone";
+    pwdController.text = result;
+    checkLogin();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,44 +75,55 @@ class _LoginPageOneState extends State<LoginPageOne> {
         children: [
           Hero(
             tag: 'avatar',
-            child: CircleAvatar(
-              backgroundColor: Colors.transparent,
-              radius: 50.0,
-              child: Image.asset('avatar.png'.toPath()),
+            child: InkWell(
+              onTap: () {
+                initData();
+              },
+              child: CircleAvatar(
+                backgroundColor: Colors.transparent,
+                radius: 50.0,
+                child: Image.asset('avatar.png'.toPath()),
+              ),
             ),
           ),
           NOriginSheet(),
-          NAccountSheet(
-            items: [
-              "18729742696",
-              "18766668888",
-            ],
-            selectedItem: _unameController.text,
-            onChanged: (String value) {
-              _unameController.text = value;
-              // setState(() {});
-            },
-            selecetdCb: (String e) {
-              return e.isEmpty ? "请选择账号" : e;
-            },
-            titleCb: (String e) {
-              return e;
-            },
-          ),
+          // NAccountSheet(
+          //   items: [
+          //     "18729742696",
+          //     "18766668888",
+          //   ],
+          //   selectedItem: accountController.text,
+          //   onChanged: (String value) {
+          //     accountController.text = value;
+          //     // setState(() {});
+          //   },
+          //   selecetdCb: (String e) {
+          //     return e.isEmpty ? "请选择账号" : e;
+          //   },
+          //   titleCb: (String e) {
+          //     return e;
+          //   },
+          // ),
+          buildAccountSheet(),
           SizedBox(height: 30),
           buildInputBox(),
           SizedBox(height: 25),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(3)),
-            ),
-            onPressed: !isBtnEnabled ? null : onLogin,
-            child: Container(
-                padding: EdgeInsets.symmetric(vertical: 10),
-                child: Text('登录',
-                    style: TextStyle(fontSize: 18.0, color: Colors.white))),
-          ),
+          ValueListenableBuilder(
+              valueListenable: isBtnEnabled,
+              builder: (context, enabled, child) {
+                return ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(3)),
+                  ),
+                  onPressed: !enabled ? null : onLogin,
+                  child: Container(
+                      padding: EdgeInsets.symmetric(vertical: 10),
+                      child: Text('登录',
+                          style:
+                              TextStyle(fontSize: 18.0, color: Colors.white))),
+                );
+              }),
           TextButton(
             onPressed: () {
               // Navigator.pushNamed(context, 'forget');
@@ -120,7 +152,7 @@ class _LoginPageOneState extends State<LoginPageOne> {
         children: [
           TextFormField(
             //用户名
-            controller: _unameController,
+            controller: accountController,
             focusNode: focusNode1, //关联focusNode1
             keyboardType: TextInputType.text, //键盘类型
             maxLength: 12,
@@ -137,7 +169,7 @@ class _LoginPageOneState extends State<LoginPageOne> {
                 border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(4.0) //圆角大小
                     ),
-                suffixIcon: _unameController.text.isNotEmpty
+                suffixIcon: accountController.text.isNotEmpty
                     ? IconButton(
                         icon: Icon(
                           Icons.clear,
@@ -146,26 +178,26 @@ class _LoginPageOneState extends State<LoginPageOne> {
                         ),
                         onPressed: () {
                           setState(() {
-                            _unameController.text = '';
-                            checkLoginText();
+                            accountController.text = '';
+                            checkLogin();
                           });
                         },
                       )
                     : null),
             validator: (v) {
-              return !_unameExp.hasMatch(v!) ? '账号由6到12位数字与小写字母组成' : null;
+              return !accountExp.hasMatch(v!) ? '账号由6到12位数字与小写字母组成' : null;
             },
             onEditingComplete: () =>
                 FocusScope.of(context).requestFocus(focusNode2),
             onChanged: (v) {
-              checkLoginText();
+              checkLogin();
               setState(() {});
             },
           ),
           // SizedBox(height: 15.0),
           TextFormField(
             //密码
-            controller: _pwdController,
+            controller: pwdController,
             focusNode: focusNode2, //关联focusNode1
             obscureText: isEye, //密码类型 内容用***显示
             maxLength: 12,
@@ -194,10 +226,10 @@ class _LoginPageOneState extends State<LoginPageOne> {
                   },
                 )),
             validator: (v) {
-              return !_pwdExp.hasMatch(v!) ? '密码由6到12位数字与小写字母组成' : null;
+              return !pwdExp.hasMatch(v!) ? '密码由6到12位数字与小写字母组成' : null;
             },
             onChanged: (v) {
-              checkLoginText();
+              checkLogin();
               setState(() {});
             },
             onEditingComplete: onLogin, //'完成'回调
@@ -215,38 +247,48 @@ class _LoginPageOneState extends State<LoginPageOne> {
   }
 
   // 登录按钮是否可点击
-  void checkLoginText() {
-    if (_unameExp.hasMatch(_unameController.text) &&
-        _pwdExp.hasMatch(_pwdController.text)) {
-      isBtnEnabled = true;
+  void checkLogin() {
+    if (accountExp.hasMatch(accountController.text) &&
+        pwdExp.hasMatch(pwdController.text)) {
+      isBtnEnabled.value = true;
     } else {
-      isBtnEnabled = false;
+      isBtnEnabled.value = false;
     }
   }
 
   // 登录提交
-  void onLogin() {
-    FocusScope.of(context).requestFocus(FocusNode()); //收起键盘
-    setState(() {
-      showLoading = true;
-    });
-    loginRequest().then((v) => {
-          setState(() {
-            showLoading = false;
-          }),
-          // toast提示
-          // 模拟登录跳转首页
-          // ToastCom.show('登录成功', context),
-          // Navigator.pushNamed(context, '/')
+  Future<void> onLogin() async {
+    FocusScope.of(context).requestFocus(FocusNode());
 
-          Get.toNamed(APPRouter.appTabPage)
-          // showDialog(
-          //     context: context,
-          //     builder: (context){
-          //         String alertText = "登录成功!!!"+"\n用户名:"+_unameController.text+"\n密码:"+_pwdController.text;
-          //         return AlertDialog(content: Text(alertText));
-          //     }
-          // )
-        });
+    ToastUtil.loading("请求中...");
+    await Future.delayed(Duration(milliseconds: 300), () {});
+    ToastUtil.hideLoading();
+
+    // Get.toNamed(APPRouter.appTabPage)
+
+    accountSheetNewController.addAccount(
+      account: accountController.text.trim(),
+      pwd: pwdController.text.trim(),
+    );
+    setState(() {});
+  }
+
+  final accountSheetNewController = NAccountSheetNewController();
+
+  Widget buildAccountSheet() {
+    return NAccountSheetNew(
+      controller: accountSheetNewController,
+      items: [],
+      onChanged: (e) {
+        accountController.text = e.key;
+        pwdController.text = e.value;
+      },
+      selecetdCb: (e) {
+        return e == null ? "请选择账号" : e.key;
+      },
+      titleCb: (e) {
+        return e.key;
+      },
+    );
   }
 }
