@@ -17,7 +17,7 @@ class NAccountSheet extends StatefulWidget {
   const NAccountSheet({
     super.key,
     this.controller,
-    required this.items,
+    this.items = const [],
     required this.onChanged,
     this.titleCb,
     this.subtitleCb,
@@ -26,12 +26,16 @@ class NAccountSheet extends StatefulWidget {
   /// 控制器
   final NAccountSheetController? controller;
 
+  /// 预置数据列表(默认值空)
   final List<MapEntry<String, dynamic>> items;
 
   /// 改变回调
   final ValueChanged<MapEntry<String, dynamic>> onChanged;
 
+  /// 子项标题显示
   final String Function(MapEntry<String, dynamic> e)? titleCb;
+
+  /// 子项目副标题显示
   final String Function(MapEntry<String, dynamic> e)? subtitleCb;
 
   @override
@@ -142,7 +146,7 @@ class _NAccountSheetState extends State<NAccountSheet> {
     items = value;
   }
 
-  void updateCurrent(MapEntry<String, dynamic> e) {
+  void updateCurrent(MapEntry<String, dynamic>? e) {
     current = e;
     debugPrint("current: ${current}");
   }
@@ -187,5 +191,11 @@ class NAccountSheetController {
     CacheService().setMap(CACHE_ACCOUNT_List, map);
     updateItems(map.entries.toList());
     _anchor?.updateCurrent(MapEntry(account, pwd));
+  }
+
+  void clear() {
+    CacheService().remove(CACHE_ACCOUNT_List);
+    updateItems([]);
+    _anchor?.updateCurrent(null);
   }
 }

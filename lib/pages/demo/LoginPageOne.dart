@@ -62,6 +62,15 @@ class _LoginPageOneState extends State<LoginPageOne> {
         iconTheme: IconThemeData(color: Colors.white),
         centerTitle: true,
         title: Text('登录', style: TextStyle(color: Colors.white)),
+        actions: [
+          TextButton(
+            onPressed: onClear,
+            child: Text(
+              "clear",
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+        ],
       ),
       body: buildBody(),
     );
@@ -273,19 +282,20 @@ class _LoginPageOneState extends State<LoginPageOne> {
     setState(() {});
   }
 
+  // 账号切换
   final accountSheetController = NAccountSheetController();
 
   Widget buildAccountSheet() {
     return NAccountSheet(
       controller: accountSheetController,
-      items: [],
       onChanged: (e) {
         accountController.text = e.key;
         pwdController.text = e.value;
       },
-      // titleCb: (e) {
-      //   return e.key;
-      // },
     );
+  }
+
+  void onClear() {
+    accountSheetController.clear();
   }
 }
