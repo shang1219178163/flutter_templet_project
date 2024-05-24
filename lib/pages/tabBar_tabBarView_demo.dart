@@ -584,10 +584,7 @@ var specials = <Tuple2<String, String>>[
   Tuple2(APPRouter.pageLifecycleFuncTest, "页面生命方法测试"),
   Tuple2(APPRouter.systemIconsPage, "flutter 系统 Icons"),
   Tuple2(APPRouter.systemColorPage, "flutter 系统 颜色"),
-  Tuple2(
-    APPRouter.systemCurvesPage,
-    "flutter Curves动画效果",
-  ),
+  Tuple2(APPRouter.systemCurvesPage, "flutter Curves动画效果"),
   Tuple2(APPRouter.localImagePage, "本地图片"),
   Tuple2(APPRouter.providerRoute, "providerRoute"),
   Tuple2(APPRouter.stateManagerDemo, "状态管理"),
@@ -629,6 +626,7 @@ var specials = <Tuple2<String, String>>[
   Tuple2(APPRouter.apiCreatePage, "apiCreatePage"),
   Tuple2(APPRouter.asyncDemo, "asyncDemo"),
   Tuple2(APPRouter.testDataTyeDemo, "testDataTyeDemo"),
+  Tuple2(APPRouter.audioPlayPageDemo, "audioPlayPage"),
 ];
 
 var animateds = <Tuple2<String, String>>[

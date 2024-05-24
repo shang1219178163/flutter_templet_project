@@ -27,6 +27,7 @@ import 'package:flutter_templet_project/pages/demo/AppRouteAwareDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AppRouteAwareDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/AppWebViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AsyncDemo.dart';
+import 'package:flutter_templet_project/pages/demo/AudioPlayerPageDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ComponentMiddlePage.dart';
 import 'package:flutter_templet_project/pages/demo/DefaultTabControllerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DevelopToolList.dart';
@@ -311,6 +312,7 @@ import 'package:flutter_templet_project/vendor/ScribbleDemo.dart';
 import 'package:flutter_templet_project/vendor/SlidableDemoOne.dart';
 import 'package:flutter_templet_project/vendor/VisibilityDetectorDemo.dart';
 import 'package:flutter_templet_project/vendor/aesthetic_dialogs_demo.dart';
+import 'package:flutter_templet_project/vendor/audioplayers/audio_play_page.dart';
 import 'package:flutter_templet_project/vendor/azlistview/azlistview_demo.dart';
 import 'package:flutter_templet_project/vendor/color_converter_demo.dart';
 import 'package:flutter_templet_project/vendor/custom_timer_demo.dart';
@@ -328,6 +330,7 @@ import 'package:flutter_templet_project/vendor/soundAbount/SoundPlayDemo.dart';
 import 'package:flutter_templet_project/vendor/table_calendar/table_calender_main.dart';
 import 'package:flutter_templet_project/vendor/timeline/timeline_demo.dart';
 import 'package:flutter_templet_project/vendor/timelines_demo/timelines_demo.dart';
+import 'package:flutter_templet_project/vendor/video_player/video_player_by_chewie_page.dart.dart';
 import 'package:flutter_templet_project/vendor/wechat_assets_picker_demo.dart';
 import 'package:get/get.dart';
 
@@ -718,6 +721,9 @@ class APPRouter {
   static const testDataTyeDemo = '/testDataTyeDemo';
   static const queueAlertDemo = '/queueAlertDemo';
   static const flutterPickerUtilDemo = '/flutterPickerUtilDemo';
+  static const audioPlayPage = '/AudioPlayPage';
+  static const audioPlayPageDemo = '/AudioPlayPageDemo';
+  static const chewiePlayerPage = '/chewiePlayerPage';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -2123,6 +2129,19 @@ class AppPage {
     GetPage(
       name: APPRouter.flutterPickerUtilDemo,
       page: () => FlutterPickerUtilDemo(),
+    ),
+
+    GetPage(
+      name: APPRouter.audioPlayPage,
+      page: () => AudioPlayPage(),
+    ),
+    GetPage(
+      name: APPRouter.audioPlayPageDemo,
+      page: () => AudioPlayPageDemo(),
+    ),
+    GetPage(
+      name: APPRouter.chewiePlayerPage,
+      page: () => VideoPlayerByChewiePage(),
     ),
   ];
 }
