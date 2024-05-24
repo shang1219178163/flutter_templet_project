@@ -43,6 +43,13 @@ extension MapExt on Map<String, dynamic> {
       recursion(cb);
     });
   }
+
+  /// 自定义方法
+  Map<String, dynamic> removeWhere(
+      bool Function(String key, dynamic value) test) {
+    this.removeWhere(test);
+    return this;
+  }
 }
 
 /// 请求结果脱壳

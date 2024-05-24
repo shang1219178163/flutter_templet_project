@@ -6,12 +6,10 @@
 //  Copychild © 2024/1/13 shang. All childs reserved.
 //
 
-
 import 'package:flutter/material.dart';
 
 /// 双组件,支持水平和垂直显示
 class NPair<T> extends StatelessWidget {
-
   const NPair({
     super.key,
     this.data,
@@ -25,16 +23,20 @@ class NPair<T> extends StatelessWidget {
     this.verticalDirection = VerticalDirection.down,
     this.textBaseline, // NO DEFAULT: we don't know what the text's baseline should be
     this.clipBehavior = Clip.none,
+    this.flexibleChild = true,
     this.icon,
     required this.child,
   });
+
   /// 传参
   final T? data;
 
   /// 标题图标翻转
   final bool isReverse;
+
   /// 图标标题间距
   final double betweenGap;
+
   /// 标题图标方向
   final Axis direction;
 
@@ -45,9 +47,11 @@ class NPair<T> extends StatelessWidget {
   final VerticalDirection verticalDirection;
   final TextBaseline? textBaseline;
   final Clip clipBehavior;
+  final bool flexibleChild;
 
   /// 图标
   final Widget? icon;
+
   /// 文字
   final Widget child;
 
@@ -57,11 +61,17 @@ class NPair<T> extends StatelessWidget {
       return child;
     }
 
-    var gap = direction == Axis.horizontal ? SizedBox(width: betweenGap,) : SizedBox(height: betweenGap,);
+    var gap = direction == Axis.horizontal
+        ? SizedBox(
+            width: betweenGap,
+          )
+        : SizedBox(
+            height: betweenGap,
+          );
     var children = <Widget>[
       icon ?? SizedBox(),
-      if (icon != null)gap,
-      Flexible(child: child),
+      if (icon != null) gap,
+      flexibleChild ? Flexible(child: child) : child,
     ];
 
     if (isReverse) {
