@@ -41,18 +41,16 @@ extension IntExt on int {
   }
 
   /// 生成随机字符串
-  String generateChars() {
+  String generateChars({String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"}) {
     if (this == 0) {
       return "";
     }
-
     int length = this;
-    final chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toLowerCase().characters;
-
     var tmp = "";
     for (var i = 0; i < length; i++) {
       var randomIndex = IntExt.random(max: chars.length);
-      tmp += "${chars.characterAt(randomIndex)}";
+      var randomChar = chars[randomIndex];
+      tmp += randomChar;
     }
     return tmp;
   }
