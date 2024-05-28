@@ -50,6 +50,9 @@ extension MapExt on Map<String, dynamic> {
     this.removeWhere(test);
     return this;
   }
+
+  Map<String, dynamic> get asMapHash =>
+      map((k, v) => MapEntry(k, "$v,${v.hashCode}"));
 }
 
 /// 请求结果脱壳
@@ -61,9 +64,9 @@ extension MapResponseExt on Map<String, dynamic> {
   ///
   /// return (请求是否成功, 提示语)
   /// 备注: isSuccess == false 且 message为空一般为断网
-  Future<({bool isSuccess, String message, T result})> fetchResult<T>({
+  Future<({bool isSuccess, String message, T? result})> fetchResult<T>({
     required T Function(Map<String, dynamic> response)? onResult,
-    required T defaultValue,
+    required T? defaultValue,
   }) async {
     final response = this;
     if (response.isEmpty) {
@@ -83,7 +86,7 @@ extension MapResponseExt on Map<String, dynamic> {
   /// onAfter 请求后
   ///
   /// return (请求是否成功, 提示语)
-  Future<({bool isSuccess, String message})> fetchBool({
+  Future<({bool isSuccess, String message, bool result})> fetchBool({
     bool Function(Map<String, dynamic> response)? onTrue,
     bool defaultValue = false,
     VoidCallback? onBefore,
@@ -95,7 +98,11 @@ extension MapResponseExt on Map<String, dynamic> {
       defaultValue: defaultValue,
     );
     onAfter?.call();
-    return (isSuccess: tuple.isSuccess, message: tuple.message);
+    return (
+      isSuccess: tuple.isSuccess,
+      message: tuple.message,
+      result: tuple.result ?? defaultValue,
+    );
   }
 
   /// 返回列表类型请求接口
@@ -106,6 +113,7 @@ extension MapResponseExt on Map<String, dynamic> {
   Future<({bool isSuccess, String message, List<T> result})>
       fetchList<T extends Map<String, dynamic>>({
     List<T> Function(Map<String, dynamic> response)? onList,
+    required List<dynamic> Function(Map<String, dynamic> response) onValue,
     List<T> defaultValue = const [],
   }) async {
     final tuple = await fetchResult<List<T>>(
@@ -120,7 +128,11 @@ extension MapResponseExt on Map<String, dynamic> {
           },
       defaultValue: defaultValue,
     );
-    return tuple;
+    return (
+      isSuccess: tuple.isSuccess,
+      message: tuple.message,
+      result: tuple.result ?? defaultValue,
+    );
   }
 
   /// 返回模型列表类型请求接口
@@ -132,12 +144,14 @@ extension MapResponseExt on Map<String, dynamic> {
   /// return (请求是否成功, 提示语, 模型数组)
   /// 备注: isSuccess == false 且 message为空一般为断网
   Future<({bool isSuccess, String message, List<M> result})> fetchModels<M>({
+    required List<dynamic> Function(Map<String, dynamic> response) onValue,
     List<Map<String, dynamic>> Function(Map<String, dynamic> response)? onList,
     List<Map<String, dynamic>> defaultValue = const [],
     required M Function(Map<String, dynamic> json) onModel,
   }) async {
     final tuple = await fetchList<Map<String, dynamic>>(
       onList: onList,
+      onValue: onValue,
       defaultValue: defaultValue,
     );
     final list = tuple.result;
