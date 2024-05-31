@@ -17,13 +17,14 @@ import 'package:get/get.dart';
 
 /// 标签管理器
 class TagGetxController extends GetxController {
+  Worker? worker;
+
   @override
   void onInit() {
     super.onInit();
     // ddlog("$this 初始化");
-    debugPrint("");
     // 监听count的值,当它发生改变的时候调用
-    ever(count, (callback) => ddlog("ever----$count"));
+    worker = ever(count, (callback) => ddlog("ever----$count"));
 
     // 监听多个值,当它们发生改变的时候调用
     everAll([count], (callback) => ddlog("everAll----$count"));
@@ -41,15 +42,14 @@ class TagGetxController extends GetxController {
   @override
   void onReady() {
     super.onReady();
-    // ddlog("$this 加载完成");
-    debugPrint("");
+    ddlog("$this onReady 加载完成");
   }
 
   @override
   void onClose() {
     super.onClose();
     // ddlog("$this 控制器被释放");
-    debugPrint("");
+    worker?.dispose();
   }
 
   var count = 0.obs;
