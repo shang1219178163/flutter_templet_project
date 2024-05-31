@@ -86,7 +86,7 @@ extension StringExt on String {
       final result = jsonDecode(this, reviver: reviver) as T?;
       return result;
     } catch (e) {
-      debugPrint("decodeMap: exception: $e");
+      debugPrint("❌tryJsonDecode: $e");
       return null;
     }
   }
