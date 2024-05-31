@@ -21,7 +21,7 @@ import 'package:flutter_templet_project/network/interceptors/token_interceptor.d
 import 'package:flutter_templet_project/network/interceptors/validate_interceptor.dart';
 import 'package:flutter_templet_project/network/proxy/dio_proxy.dart';
 import 'package:flutter_templet_project/routes/APPRouter.dart';
-import 'package:flutter_templet_project/routes/NavigatorUtil.dart';
+import 'package:flutter_templet_project/util/app_util.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -312,7 +312,7 @@ class RequestManager extends BaseRequestAPI {
       'TOKEN_REQUIRED',
     ].contains(codeStr)) {
       // 此方法用于账号被踢时,token失效
-      NavigatorUtil.toLoginPage();
+      AppUtil.toLoginPage();
     } else {
       final hide = ![
         RequestError.urlError.desc,

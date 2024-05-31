@@ -38,27 +38,28 @@ class _AppLifecycleStateObserverDemoState
   @override
   void initState() {
     super.initState();
+    ddlog("$widget initState");
 
-    _lifecycleListener = AppLifecycleListener(
-      onRestart: () {
-        ddlog("$widget onRestart - AppLifecycleListener");
-      },
-      onResume: () {
-        ddlog("$widget onResume - AppLifecycleListener");
-      },
-      onInactive: () {
-        ddlog("$widget onInactive - AppLifecycleListener");
-      },
-      onPause: () {
-        ddlog("$widget onPause - AppLifecycleListener");
-      },
-      onDetach: () {
-        ddlog("$widget onDetach - AppLifecycleListener");
-      },
-      onHide: () {
-        ddlog("$widget onHide - AppLifecycleListener");
-      },
-    );
+    // _lifecycleListener = AppLifecycleListener(
+    //   onRestart: () {
+    //     ddlog("$widget onRestart - AppLifecycleListener");
+    //   },
+    //   onResume: () {
+    //     ddlog("$widget onResume - AppLifecycleListener");
+    //   },
+    //   onInactive: () {
+    //     ddlog("$widget onInactive - AppLifecycleListener");
+    //   },
+    //   onPause: () {
+    //     ddlog("$widget onPause - AppLifecycleListener");
+    //   },
+    //   onDetach: () {
+    //     ddlog("$widget onDetach - AppLifecycleListener");
+    //   },
+    //   onHide: () {
+    //     ddlog("$widget onHide - AppLifecycleListener");
+    //   },
+    // );
   }
 
   @override
@@ -131,32 +132,7 @@ class _AppLifecycleStateObserverDemoState
 
   /*************** AppLifecycleObserverMixin ***************/
   @override
-  Future<void> onResume() async {
-    // TODO: implement onResume
-    ddlog("$widget onResume");
-  }
-
-  @override
-  Future<void> onInactive() async {
-    // TODO: implement onInactive
-    ddlog("$widget onInactive");
-  }
-
-  @override
-  Future<void> onPause() async {
-    // TODO: implement onPause
-    ddlog("$widget onPause");
-  }
-
-  @override
-  Future<void> onDetach() async {
-    // TODO: implement onDetached
-    ddlog("$widget onDetached");
-  }
-
-  @override
-  Future<void> onHidden() async {
-    // TODO: implement onHidden
-    ddlog("$widget onHidden");
+  void onAppLifecycleStateChanged(AppLifecycleState state) {
+    ddlog("$widget ${state.name}");
   }
 }

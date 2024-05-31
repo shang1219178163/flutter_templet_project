@@ -97,28 +97,8 @@ class _AppTabPageState extends State<AppTabPage>
   }
 
   @override
-  void onResume() {
-    ddlog("$widget onResume");
-  }
-
-  @override
-  void onInactive() {
-    ddlog("$widget onInactive");
-  }
-
-  @override
-  void onPause() {
-    ddlog("$widget onPause");
-  }
-
-  @override
-  void onDetach() {
-    ddlog("$widget onDetach");
-  }
-
-  @override
-  void onHidden() {
-    ddlog("$widget onHidden");
+  void onAppLifecycleStateChanged(AppLifecycleState state) {
+    ddlog("$widget ${state.name}");
   }
 
   @override
