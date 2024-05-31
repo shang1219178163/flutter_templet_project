@@ -81,38 +81,27 @@ extension StringExt on String {
     return result;
   }
 
+  T? tryJsonDecode<T>({Object? Function(Object? key, Object? value)? reviver}) {
+    try {
+      final result = jsonDecode(this, reviver: reviver) as T?;
+      return result;
+    } catch (e) {
+      debugPrint("decodeMap: exception: $e");
+      return null;
+    }
+  }
+
   /// 转 Map<String, dynamic>
   Map<String, dynamic>? decodeMap(
       {Object? Function(Object? key, Object? value)? reviver}) {
-    if (this.isEmpty) {
-      return null;
-    }
-
-    try {
-      final result =
-          jsonDecode(this, reviver: reviver) as Map<String, dynamic>?;
-      return result;
-    } catch (exception) {
-      debugPrint("decodeMap: exception: $exception");
-      return null;
-    }
+    return tryJsonDecode<Map<String, dynamic>>(reviver: reviver);
   }
 
   /// 转 List<T>
   List<T>? decodeList<T>({
     Object? Function(Object? key, Object? value)? reviver,
   }) {
-    if (this.isEmpty) {
-      return null;
-    }
-
-    try {
-      final result = jsonDecode(this, reviver: reviver) as List<T>?;
-      return result;
-    } catch (exception) {
-      debugPrint("decodeList: exception: $exception");
-      return null;
-    }
+    return tryJsonDecode<List<T>>(reviver: reviver);
   }
 
   /// 本地图片路径
