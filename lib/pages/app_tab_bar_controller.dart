@@ -11,7 +11,7 @@ abstract class AppTabBarState<T extends StatefulWidget> extends State<T> {
   void onBarDoubleTap(int index) {}
 }
 
-class AppController extends GetxController {
+class AppTabBarController extends GetxController {
   // late final messageController = Get.find<MessageController>();
   // late final userController = Get.find<UserController>();
 
