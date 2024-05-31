@@ -82,7 +82,7 @@ abstract class BaseRequestAPI {
     return Future.value(false);
   }
 
-  CancelToken get cancelToken => CancelToken();
+  CancelToken cancelToken = CancelToken();
 
   /// 取消请求
   void fetchCancel() {
