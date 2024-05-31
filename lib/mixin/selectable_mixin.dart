@@ -13,6 +13,10 @@ mixin SelectableMixin {
 
   /// 名称显示
   String get selectableName;
-  // String code = "";
+
+  /// 是否可用
+  bool get enable => true;
+
+  /// 是否已选择
   bool isSelected = false;
 }
