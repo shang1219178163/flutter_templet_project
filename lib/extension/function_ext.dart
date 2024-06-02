@@ -6,7 +6,6 @@
 //  Copyright © 3/29/23 shang. All rights reserved.
 //
 
-
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
@@ -16,14 +15,12 @@ final _debounce = Debounce();
 
 final _debounceMap = <Function, Debounce>{};
 
-extension FunctionExt on Function{
+extension FunctionExt on Function {
   /// 同 Function.apply
-  static apply(
-      Function function,
-      List<dynamic>? positionalArguments,
-      [Map<String, dynamic>? namedArguments]
-  ) {
-    final arguments = namedArguments?.map((key, value) => MapEntry(Symbol(key), value));
+  static apply(Function function, List<dynamic>? positionalArguments,
+      [Map<String, dynamic>? namedArguments]) {
+    final arguments =
+        namedArguments?.map((key, value) => MapEntry(Symbol(key), value));
     return Function.apply(function, positionalArguments, arguments);
   }
 
@@ -32,7 +29,8 @@ extension FunctionExt on Function{
     List<dynamic>? positionalArguments,
     Map<String, dynamic>? namedArguments,
   }) {
-    final arguments = namedArguments?.map((key, value) => MapEntry(Symbol(key), value));
+    final arguments =
+        namedArguments?.map((key, value) => MapEntry(Symbol(key), value));
     return Function.apply(this, positionalArguments, arguments);
   }
 
@@ -41,26 +39,27 @@ extension FunctionExt on Function{
     Duration duration = const Duration(milliseconds: 500),
     List<dynamic>? positionalArguments,
     Map<String, dynamic>? namedArguments,
-  }){
+  }) {
     _debounce.delay = duration;
     return _debounce(() {
-      applyNew(positionalArguments: positionalArguments, namedArguments: namedArguments);
+      applyNew(
+          positionalArguments: positionalArguments,
+          namedArguments: namedArguments);
     });
   }
 }
 
-
 extension VoidCallbackExt on VoidCallback {
-
   /// 延迟执行
   Future delayed({
     Duration duration = const Duration(milliseconds: 500),
-  }) => Future.delayed(duration, this);
+  }) =>
+      Future.delayed(duration, this);
 
   /// 防抖
   void debounce({
     Duration duration = const Duration(milliseconds: 500),
-  }){
+  }) {
     var debounceFn = _debounceMap[this];
     if (debounceFn == null) {
       debounceFn = Debounce();
@@ -80,7 +79,7 @@ extension VoidCallbackExt on VoidCallback {
   }) {
     final hadAuth = onAuth();
     if (!hadAuth) {
-      return (){
+      return () {
         onUnauth?.call();
       };
     }
@@ -88,16 +87,13 @@ extension VoidCallbackExt on VoidCallback {
   }
 }
 
-
 extension ValueChangedExt<T> on ValueChanged<T> {
-
   /// 防抖
   debounce({
     required T value,
     Duration duration = const Duration(milliseconds: 500),
-  }){
+  }) {
     _debounce.delay = duration;
     _debounce(() => this.call(value));
   }
 }
-
