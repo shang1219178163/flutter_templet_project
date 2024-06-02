@@ -93,7 +93,12 @@ extension ValueChangedExt<T> on ValueChanged<T> {
     required T value,
     Duration duration = const Duration(milliseconds: 500),
   }) {
-    _debounce.delay = duration;
+    var debounceFn = _debounceMap[this];
+    if (debounceFn == null) {
+      debounceFn = Debounce();
+      _debounceMap[this] = debounceFn;
+    }
+    debounceFn.delay = duration;
     _debounce(() => this.call(value));
   }
 }
