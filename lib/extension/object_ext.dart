@@ -6,7 +6,6 @@
 //  Copyright © 10/12/22 shang. All rights reserved.
 //
 
-
 // class ObjectBaseModel {
 //   ///运算符重载
 //   dynamic operator [](String key) {
@@ -28,6 +27,9 @@
 //   // }
 // }
 
+import 'dart:convert';
+
+import 'package:flutter/cupertino.dart';
 
 abstract class ObjectEnhanceMixin {
   ///运算符重载
@@ -44,12 +46,9 @@ abstract class ObjectEnhanceMixin {
   Map<String, dynamic> toJson() {
     return {};
   }
-
-
 }
 
-
-extension ObjectExt on Object{
+extension ObjectExt on Object {
   ///运算符重载
   List operator *(int value) {
     var result = [];
@@ -58,11 +57,21 @@ extension ObjectExt on Object{
     }
     return result;
   }
+
+  /// 转字符串
+  String? tryJsonEncode<T>(
+      {Object? Function(Object? nonEncodable)? toEncodable}) {
+    try {
+      final result = jsonEncode(this, toEncodable: toEncodable);
+      return result;
+    } catch (e) {
+      debugPrint("❌tryJsonEncode: $e");
+      return null;
+    }
+  }
 }
 
-
-extension GetDynamicExt<T> on T {
-
+extension DynamicExt<T> on T {
   /// 返回可选值或者 `else` 闭包返回的值
   /// 例如. nullable.or(else: {
   /// ... code
@@ -87,6 +96,3 @@ extension GetDynamicExt<T> on T {
 //   }
 //
 // }
-
-
-

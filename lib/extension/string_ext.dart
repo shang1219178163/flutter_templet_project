@@ -81,6 +81,7 @@ extension StringExt on String {
     return result;
   }
 
+  /// 转类型 T
   T? tryJsonDecode<T>({Object? Function(Object? key, Object? value)? reviver}) {
     try {
       final result = jsonDecode(this, reviver: reviver) as T?;
