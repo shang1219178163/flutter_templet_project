@@ -6,12 +6,15 @@
 //  Copyright © 2023/10/16 shang. All rights reserved.
 //
 
-
-
 import 'package:flutter/material.dart';
 
-typedef GenericWidgetBuilder<T> = Widget Function(BuildContext context, T generic);
+typedef GenericWidgetBuilder<T> = Widget Function(
+    BuildContext context, T generic);
 
-typedef VoidCallbackWidgetBuilder = Widget Function(BuildContext context, VoidCallback cb);
+typedef VoidCallbackWidgetBuilder = Widget Function(
+    BuildContext context, VoidCallback cb);
 
-typedef ValueChangedWidgetBuilder<T> = Widget Function(BuildContext context, ValueChanged<T> onChanged);
+typedef ValueChangedWidgetBuilder<T> = Widget Function(
+    BuildContext context, ValueChanged<T> onChanged);
+
+typedef ActionRecord = ({String title, VoidCallback action});

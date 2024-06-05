@@ -25,9 +25,8 @@ typedef ButtonRecord = ({String name, VoidCallback action});
 
 /// 基础类型数据测试
 class TestDataTyeDemo extends StatefulWidget {
-
   const TestDataTyeDemo({
-    super.key, 
+    super.key,
     this.arguments,
   });
 
@@ -38,16 +37,14 @@ class TestDataTyeDemo extends StatefulWidget {
 }
 
 class _TestDataTyeDemoState extends State<TestDataTyeDemo> {
-
-  bool get hideApp => Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
+  bool get hideApp =>
+      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
 
   final _scrollController = ScrollController();
 
   late final specialItems = <ButtonRecord>[
     (name: "Singleton", action: onSingleton),
     (name: "Equals", action: onEquals),
-
-
   ];
 
   late final items = <ButtonRecord>[
@@ -58,21 +55,27 @@ class _TestDataTyeDemoState extends State<TestDataTyeDemo> {
     (name: "Set", action: onSet),
     (name: "bool", action: onBool),
     (name: "Record", action: onRecord),
-
   ];
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: hideApp ? null : AppBar(
-        title: Text("$widget"),
-        actions: ['done',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () => debugPrint(e),)
-        ).toList(),
-      ),
+      appBar: hideApp
+          ? null
+          : AppBar(
+              title: Text("$widget"),
+              actions: [
+                'done',
+              ]
+                  .map((e) => TextButton(
+                        child: Text(
+                          e,
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        onPressed: () => debugPrint(e),
+                      ))
+                  .toList(),
+            ),
       body: buildBody(),
     );
   }
@@ -87,27 +90,33 @@ class _TestDataTyeDemoState extends State<TestDataTyeDemo> {
           children: [
             buildSectionBox(items: specialItems),
             buildSectionBox(items: items),
-          ].map((e) => Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                e,
-                // Divider(height: 16,),
-              ],
-            ),
-          ),).toList(),
+          ]
+              .map(
+                (e) => Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      e,
+                      // Divider(height: 16,),
+                    ],
+                  ),
+                ),
+              )
+              .toList(),
         ),
       ),
     );
   }
 
-  Widget buildSectionBox({required List<ButtonRecord> items,}) {
+  Widget buildSectionBox({
+    required List<ButtonRecord> items,
+  }) {
     return Wrap(
       spacing: 8,
       runSpacing: 8,
       children: items.map((e) {
-
         return InkWell(
           onTap: e.action,
           child: Container(
@@ -117,7 +126,10 @@ class _TestDataTyeDemoState extends State<TestDataTyeDemo> {
               border: Border.all(color: Colors.blue),
               borderRadius: BorderRadius.all(Radius.circular(4)),
             ),
-            child: NText(e.name, color: context.primaryColor,),
+            child: NText(
+              e.name,
+              color: context.primaryColor,
+            ),
           ),
         );
       }).toList(),
@@ -131,7 +143,6 @@ class _TestDataTyeDemoState extends State<TestDataTyeDemo> {
     debugPrint("Singleton: ${shard == shard1 && shard1 == shard2}");
   }
 
-
   void onEquals() {
     var map = <(int, int), String>{};
     map[(1, 2)] = "1,2";
@@ -141,7 +152,8 @@ class _TestDataTyeDemoState extends State<TestDataTyeDemo> {
     final list1 = ["aaa"];
     final list2 = ["aaa"];
     debugPrint("${DateTime.now()} list ==: ${list1 == list2}");
-    debugPrint("${DateTime.now()} list listEquals: ${listEquals(list1, list2)}");
+    debugPrint(
+        "${DateTime.now()} list listEquals: ${listEquals(list1, list2)}");
 
     final map1 = {"a": "aa"};
     final map2 = {"a": "aa"};
@@ -160,7 +172,7 @@ class _TestDataTyeDemoState extends State<TestDataTyeDemo> {
     final sameUser = user == user1;
     debugPrint("sameUser: ${sameUser}");
 
-    final result = identical(user, user1);//检查两个对象引用是否指向同一对象。
+    final result = identical(user, user1); //检查两个对象引用是否指向同一对象。
     debugPrint("result: ${result}");
 
     final bob = NPerson(name: "Bob", age: 40);
@@ -172,11 +184,12 @@ class _TestDataTyeDemoState extends State<TestDataTyeDemo> {
 
   void onString() {
     final a = 'Eats shoots leaves'.splitMapJoin((RegExp(r'shoots')),
-        onMatch:    (m) => m[0] ?? "",  // (or no onMatch at all)
+        onMatch: (m) => m[0] ?? "", // (or no onMatch at all)
         onNonMatch: (n) => '*'); // Result: "*shoots*"
     ddlog(a);
 
-    final b = 'Eats shoots leaves'.splitMapJoin((RegExp(r's|o')),
+    final b = 'Eats shoots leaves'.splitMapJoin(
+      (RegExp(r's|o')),
       onMatch: (m) => "_",
     );
     ddlog(b);
@@ -194,9 +207,7 @@ class _TestDataTyeDemoState extends State<TestDataTyeDemo> {
     ddlog(d2);
 
     showSnackBar(SnackBar(content: Text(d2)));
-
   }
-
 
   void onList() {
     double? z;
@@ -221,7 +232,6 @@ class _TestDataTyeDemoState extends State<TestDataTyeDemo> {
         final e = listNew[i];
         debugPrint('倒叙e: $e');
       }
-
     } catch (exception) {
       debugPrint(exception.toString());
     }
@@ -239,9 +249,7 @@ class _TestDataTyeDemoState extends State<TestDataTyeDemo> {
     debugPrint('flag1: $flag1');
   }
 
-  void onSet() {
-
-  }
+  void onSet() {}
 
   void onMap() {
     var map = <String, dynamic>{
@@ -251,16 +259,16 @@ class _TestDataTyeDemoState extends State<TestDataTyeDemo> {
     };
 
     ddlog('getUrlParams():${getUrlParams(map: map)}');
-    ddlog('map.join():${map.join()}' );
+    ddlog('map.join():${map.join()}');
+
+    final _memoryMap = <String, dynamic>{};
+
+    _memoryMap['msgTag'] = null;
+    ddlog('_memoryMap:${_memoryMap}');
   }
 
-
   void onLruMap() {
-    final map = {
-      'a': 1,
-      'b': 11,
-      'c': 111
-    };
+    final map = {'a': 1, 'b': 11, 'c': 111};
 
     final lruMap = LruMap(maximumSize: 10);
     final list = List.generate(20, (i) => i).toList();
@@ -274,9 +282,7 @@ class _TestDataTyeDemoState extends State<TestDataTyeDemo> {
     }
   }
 
-  void onBool() {
-
-  }
+  void onBool() {}
 
   void onRecord() {
     (List<String> a, Map<String, dynamic> b) re = ([], {});
@@ -288,9 +294,7 @@ class _TestDataTyeDemoState extends State<TestDataTyeDemo> {
 
     ({int a, int b}) recordAB = (a: 1, b: 2);
 
-    (double lat, double lon) geoLocation(String name) =>
-        (231.23, 36.8219);
-
+    (double lat, double lon) geoLocation(String name) => (231.23, 36.8219);
 
     var record1 = ('first', 2, true, 'last');
     debugPrint("record1.1:${record1.$1}");
@@ -300,7 +304,11 @@ class _TestDataTyeDemoState extends State<TestDataTyeDemo> {
   }
 
   removeSame() {
-    List list = [{'id':1,'name':'小明'},{'id':1,'name':'小红'},{'id':2,'name':'小明'}];
+    List list = [
+      {'id': 1, 'name': '小明'},
+      {'id': 1, 'name': '小红'},
+      {'id': 2, 'name': '小明'}
+    ];
 
     final ids = list.map((e) => e['id']).toSet();
     debugPrint('ids: ${ids}');
