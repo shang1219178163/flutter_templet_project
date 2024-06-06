@@ -101,6 +101,7 @@ class GetBottomSheet {
 
     showCustom(
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           ...actions
               .map((e) => buildActionCell(
@@ -164,6 +165,7 @@ class GetBottomSheet {
     required VoidCallback? onTap,
   }) {
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
         if (hasDivider)
           const Divider(
