@@ -12,6 +12,7 @@ import 'package:flutter_templet_project/util/color_util.dart';
 
 typedef ChromeSegmentRecord = ({Widget title, int count});
 
+/// 浏览器风格分段菜单
 class NChromeSegment extends StatefulWidget {
   const NChromeSegment({
     super.key,
