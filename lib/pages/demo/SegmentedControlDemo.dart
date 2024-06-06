@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_chrome_segment.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_header.dart';
 import 'package:flutter_templet_project/basicWidget/enhance/en_sliding_segmented_control/en_sliding_segmented_control.dart';
 import 'package:flutter_templet_project/basicWidget/enhance/en_sliding_segmented_control/n_sliding_segmented_control.dart';
@@ -8,6 +9,7 @@ import 'package:flutter_templet_project/basicWidget/n_list_view_segment_control.
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
+import 'package:flutter_templet_project/util/color_util.dart';
 
 class SegmentedControlDemo extends StatefulWidget {
   SegmentedControlDemo({Key? key, this.title}) : super(key: key);
@@ -111,7 +113,10 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
               // borderRadius: BorderRadius.all(Radius.circular(0)),
             ),
             child: NSlidingSegmentedControl(
-              items: <({String title, String icon,})>[
+              items: <({
+                String title,
+                String icon,
+              })>[
                 (
                   title: "医生",
                   icon: "icon_segmented_control_doctor_gray.png",
@@ -127,6 +132,12 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
               },
             ),
           ),
+        ),
+
+        NSectionHeader(
+          title: "NChromeSegment",
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          child: buildChromeSegment(),
         ),
 
         SizedBox(height: 15),
@@ -581,5 +592,66 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
         onValueChanged: (index) {
           ddlog(index);
         });
+  }
+
+  Widget buildChromeSegment() {
+    return NChromeSegment(
+      items: const [
+        (
+          title: Text(
+            "院内治疗",
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+              color: fontColor737373,
+              // fontStyle: FontStyle.italic,
+            ),
+          ),
+          count: 99,
+        ),
+        (
+          title: Text(
+            "居家治疗",
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+              color: fontColor737373,
+              // fontStyle: FontStyle.italic,
+            ),
+          ),
+          count: 1,
+        ),
+        (
+          title: Text(
+            "机构治疗",
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+              color: fontColor737373,
+              // fontStyle: FontStyle.italic,
+            ),
+          ),
+          count: 50,
+        ),
+        // (
+        //   title: Text(
+        //     "其他治疗",
+        //     style: TextStyle(
+        //       fontSize: 14,
+        //       fontWeight: FontWeight.bold,
+        //       color: fontColor737373,
+        //       // fontStyle: FontStyle.italic,
+        //     ),
+        //   ),
+        //   count: 50,
+        // ),
+      ],
+      currentIndex: 1,
+      onChanged: (index) {
+        ddlog("index $index");
+      },
+      // selectedBgColor: Colors.red,
+      // bgColor: Colors.blue,
+    );
   }
 }
