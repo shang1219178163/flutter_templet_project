@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_placeholder.dart';
 import 'package:flutter_templet_project/basicWidget/n_skeleton_screen.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
+import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/mixin/selectable_mixin.dart';
 import 'package:flutter_templet_project/model/user_model.dart';
@@ -50,11 +51,9 @@ class _SegmentVerticalDemoState extends State<SegmentVerticalDemo> {
     super.initState();
 
     leftItems.value = List.generate(
-        6,
-        (i) => UserModel(
-            id: i.toString(),
-            name: "人员$i"
-                ""));
+      6,
+      (i) => UserModel(id: i.toString(), name: "人员$i"),
+    );
     isLoadding.value = false;
   }
 
@@ -92,7 +91,12 @@ class _SegmentVerticalDemoState extends State<SegmentVerticalDemo> {
           selectedUserModel ??= list.first;
           return Row(
             children: [
-              leftList(list: list),
+              leftList(
+                list: list,
+                onChanged: (SelectableMixin e) {
+                  ddlog("onChanged $e");
+                },
+              ),
               // Expanded(child: _rightListWidget()),
             ],
           );
@@ -101,7 +105,10 @@ class _SegmentVerticalDemoState extends State<SegmentVerticalDemo> {
     );
   }
 
-  Widget leftList({required List<SelectableMixin> list}) {
+  Widget leftList({
+    required List<SelectableMixin> list,
+    required ValueChanged<SelectableMixin> onChanged,
+  }) {
     return Container(
       width: 98,
       color: bgColor,
@@ -119,6 +126,7 @@ class _SegmentVerticalDemoState extends State<SegmentVerticalDemo> {
                 onTap: () {
                   selectedUserModel = model;
                   setState(() {});
+                  onChanged(model);
                 },
                 child: leftItem(
                   list: list,
