@@ -33,6 +33,12 @@ class UserModel with SelectableMixin {
   String? website;
   Company? company;
 
+  @override
+  String get selectableId => id.toString();
+
+  @override
+  String get selectableName => name ?? "";
+
   UserModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     avatar = json['avatar'];
@@ -67,12 +73,6 @@ class UserModel with SelectableMixin {
     data['isSelected'] = isSelected;
     return data;
   }
-
-  @override
-  String get selectableId => id.toString();
-
-  @override
-  String get selectableName => name ?? "";
 }
 
 class AddressDetailModel {

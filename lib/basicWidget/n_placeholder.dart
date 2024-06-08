@@ -11,8 +11,8 @@ enum NPlaceholderType {
 
 /// 占位
 class NPlaceholder extends StatelessWidget {
-  NPlaceholder({
-    Key? key,
+  const NPlaceholder({
+    super.key,
     this.onTap,
     this.placeholder =
         const AssetImage("assets/images/img_placeholder_empty.png"),
@@ -20,19 +20,19 @@ class NPlaceholder extends StatelessWidget {
     this.imageAndTextSpacing = 10,
     this.image,
     this.text,
-  }) : super(key: key);
+  });
 
-  AssetImage placeholder;
+  final AssetImage placeholder;
 
-  String? message;
+  final String? message;
 
-  Widget? image;
+  final Widget? image;
 
-  Widget? text;
+  final Widget? text;
 
-  double imageAndTextSpacing;
+  final double imageAndTextSpacing;
 
-  VoidCallback? onTap;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -44,10 +44,7 @@ class NPlaceholder extends StatelessWidget {
             overlayColor:
                 MaterialStateColor.resolveWith((states) => Colors.transparent),
           ),
-          onPressed: onTap ??
-              () {
-                debugPrint("$this");
-              },
+          onPressed: onTap,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
