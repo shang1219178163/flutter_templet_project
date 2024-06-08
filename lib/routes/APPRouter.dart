@@ -46,6 +46,7 @@ import 'package:flutter_templet_project/pages/demo/LoginPage.dart';
 import 'package:flutter_templet_project/pages/demo/LoginPageOne.dart';
 import 'package:flutter_templet_project/pages/demo/LoginPageTwo.dart';
 import 'package:flutter_templet_project/pages/demo/NChoiceExpansionDemo.dart';
+import 'package:flutter_templet_project/pages/demo/NSegmentVerticalDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NTransformViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NTargetFollowerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PageLifecycleFuncTest.dart';
@@ -724,6 +725,7 @@ class APPRouter {
   static const audioPlayPage = '/AudioPlayPage';
   static const audioPlayPageDemo = '/AudioPlayPageDemo';
   static const chewiePlayerPage = '/chewiePlayerPage';
+  static const segmentVerticalDemo = '/segmentVerticalDemo';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -2142,6 +2144,10 @@ class AppPage {
     GetPage(
       name: APPRouter.chewiePlayerPage,
       page: () => VideoPlayerByChewiePage(),
+    ),
+    GetPage(
+      name: APPRouter.segmentVerticalDemo,
+      page: () => SegmentVerticalDemo(),
     ),
   ];
 }
