@@ -44,7 +44,7 @@ class _SegmentVerticalDemoState extends State<SegmentVerticalDemo> {
 
   final leftItems = ValueNotifier(<SelectableMixin>[]);
 
-  SelectableMixin? selectedUserModel;
+  SelectableMixin? selectedModel;
 
   @override
   void initState() {
@@ -88,7 +88,7 @@ class _SegmentVerticalDemoState extends State<SegmentVerticalDemo> {
           if (list.isEmpty) {
             return const NPlaceholder();
           }
-          selectedUserModel ??= list.first;
+          selectedModel ??= list.first;
           return Row(
             children: [
               leftList(
@@ -124,14 +124,14 @@ class _SegmentVerticalDemoState extends State<SegmentVerticalDemo> {
 
               return InkWell(
                 onTap: () {
-                  selectedUserModel = model;
+                  selectedModel = model;
                   setState(() {});
                   onChanged(model);
                 },
                 child: leftItem(
                   list: list,
                   index: index,
-                  selectedIndex: list.indexOf(selectedUserModel!),
+                  selectedIndex: list.indexOf(selectedModel!),
                 ),
               );
             },
@@ -149,7 +149,7 @@ class _SegmentVerticalDemoState extends State<SegmentVerticalDemo> {
     Widget? child,
   }) {
     final model = list[index];
-    bool isSelected = model.selectableId == selectedUserModel?.selectableId;
+    bool isSelected = model.selectableId == selectedModel?.selectableId;
     var bgColor = isSelected ? white : bgColorF9F9F9;
     // bgColor = isSelected ? white : Colors.green;
 
