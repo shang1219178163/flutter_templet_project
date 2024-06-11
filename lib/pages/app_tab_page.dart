@@ -6,6 +6,9 @@
 //  Copyright © 2024/5/10 shang. All rights reserved.
 //
 
+import 'dart:async';
+import 'dart:developer';
+
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -91,6 +94,8 @@ class _AppTabPageState extends State<AppTabPage>
       CacheService().setString(CACHE_APP_PACKAGE_NAME, value.packageName);
       CacheService().setString(CACHE_APP_VERSION, value.version);
     });
+
+    getObservatoryUri();
 
     configRefresh();
     super.initState();
@@ -354,5 +359,15 @@ class _AppTabPageState extends State<AppTabPage>
             ),
           ]),
     );
+  }
+
+  /// 获取 devTool 链接 serverUri
+  FutureOr<Uri?> getObservatoryUri() async {
+    final serviceProtocolInfo = await Service.getInfo();
+    final serverUri = serviceProtocolInfo.serverUri;
+    final serverWebSocketUri = serviceProtocolInfo.serverWebSocketUri;
+    // ddlog("serverUri: $serverUri");
+    // ddlog("serverWebSocketUri: $serverWebSocketUri");
+    return serverUri;
   }
 }
