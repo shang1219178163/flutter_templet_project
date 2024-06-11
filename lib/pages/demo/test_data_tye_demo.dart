@@ -328,4 +328,18 @@ class _TestDataTyeDemoState extends State<TestDataTyeDemo> {
     var result = paramStr.substring(0, paramStr.length - 1);
     return result;
   }
+
+  void printFormat() {
+    final list = [
+      '***************************************************',
+      '',
+      'ISAR CONNECT STARTED',
+      '',
+      'Open the link to connect to the Isar',
+      'Inspector while this build is running.',
+      '',
+      '***************************************************',
+    ];
+    DLog.format(list);
+  }
 }

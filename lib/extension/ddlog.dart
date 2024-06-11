@@ -12,11 +12,11 @@ import 'package:flutter/foundation.dart'
 import 'package:flutter/material.dart';
 
 // ignore: non_constant_identifier_names, unnecessary_question_mark
-void ddlog(dynamic obj, {bool hasTime = true}) {
+void ddlog(dynamic obj, {bool hasTime = true, String prefix = "ddlog"}) {
   if (kReleaseMode) {
     return;
   }
-  developer.log("${hasTime ? DateTime.now() : ""} $obj");
+  developer.log("$prefix ${hasTime ? DateTime.now() : ""} $obj");
 
   // var model = DDTraceModel(StackTrace.current);
   //
@@ -28,6 +28,45 @@ void ddlog(dynamic obj, {bool hasTime = true}) {
   //   "[${model.lineNumber}:${model.columnNumber}]"
   // ].where((element) => element != "");
   // debugPrint("${items.join(" ")}: $obj");
+}
+
+/// DLog 日志打印
+class DLog {
+  /// 防止日志被截断
+  static void d(
+    dynamic obj, {
+    String prefix = "DLog",
+    bool hasTime = true,
+  }) {
+    ddlog(obj, prefix: prefix, hasTime: hasTime);
+  }
+
+  /// 函数执行时间
+  static void codeExecution({
+    required DateTime stime,
+    String? funcName,
+  }) {
+    var etime = DateTime.now();
+    final inMilliseconds = etime.difference(stime).inMilliseconds;
+    DLog.d("$funcName 执行时长：$inMilliseconds 毫秒.");
+  }
+
+  static void format(List<String> list) {
+    String line(String text, {String fill = "", required int maxLength}) {
+      final fillCount = maxLength - text.length;
+      final left = List.filled(fillCount ~/ 2, fill);
+      final right = List.filled(fillCount - left.length, fill);
+      return left.join() + text + right.join();
+    }
+
+    final listNew = [...list];
+    listNew.sort((a, b) => b.length.compareTo(a.length));
+    final maxLength = listNew.first.length;
+
+    for (final e in list) {
+      d(line(e, fill: ' ', maxLength: maxLength), hasTime: false);
+    }
+  }
 }
 
 /// TraceModel
@@ -58,7 +97,8 @@ class DDTraceModel {
               .split(" ")
               .where((element) => element != "")
               .toList();
-          selectorName = list.last.replaceAll("[", "").replaceAll("]", "()").trim();
+          selectorName =
+              list.last.replaceAll("[", "").replaceAll("]", "()").trim();
 
           _parseClassName(path: list.first);
           _parseLineAndcolumn(location: list[1]);
