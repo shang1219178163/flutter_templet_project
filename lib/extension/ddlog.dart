@@ -51,7 +51,7 @@ class DLog {
     DLog.d("$funcName 执行时长：$inMilliseconds 毫秒.");
   }
 
-  static void format(List<String> list) {
+  static void center(List<String> list) {
     String line(String text, {String fill = "", required int maxLength}) {
       final fillCount = maxLength - text.length;
       final left = List.filled(fillCount ~/ 2, fill);

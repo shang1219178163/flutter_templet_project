@@ -340,6 +340,6 @@ class _TestDataTyeDemoState extends State<TestDataTyeDemo> {
       '',
       '***************************************************',
     ];
-    DLog.format(list);
+    DLog.center(list);
   }
 }
