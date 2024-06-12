@@ -11,8 +11,6 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_templet_project/util/Debounce.dart';
 
-final _debounce = Debounce();
-
 final _debounceMap = <Function, Debounce>{};
 
 extension FunctionExt on Function {
@@ -34,18 +32,42 @@ extension FunctionExt on Function {
     return Function.apply(this, positionalArguments, arguments);
   }
 
+  /// 获取缓存的 Debounce 方法,没有就常见一个新的
+  Debounce getDebounceFn({
+    Duration duration = const Duration(milliseconds: 500),
+  }) {
+    var debounceFn = _debounceMap[this];
+    if (debounceFn == null) {
+      debounceFn = Debounce();
+      _debounceMap[this] = debounceFn;
+    }
+    debounceFn.delay = duration;
+    return debounceFn;
+  }
+
   /// 防抖
   debounce({
     Duration duration = const Duration(milliseconds: 500),
     List<dynamic>? positionalArguments,
     Map<String, dynamic>? namedArguments,
   }) {
-    _debounce.delay = duration;
-    return _debounce(() {
+    var debounceFn = getDebounceFn(duration: duration);
+    return debounceFn(() {
       applyNew(
           positionalArguments: positionalArguments,
           namedArguments: namedArguments);
     });
+  }
+
+  void tryApply(List<dynamic>? positionalArguments,
+      [Map<String, dynamic>? namedArguments]) {
+    try {
+      applyNew(
+          positionalArguments: positionalArguments,
+          namedArguments: namedArguments);
+    } catch (e) {
+      debugPrint("$this $e");
+    }
   }
 }
 
@@ -60,12 +82,7 @@ extension VoidCallbackExt on VoidCallback {
   void debounce({
     Duration duration = const Duration(milliseconds: 500),
   }) {
-    var debounceFn = _debounceMap[this];
-    if (debounceFn == null) {
-      debounceFn = Debounce();
-      _debounceMap[this] = debounceFn;
-    }
-    debounceFn.delay = duration;
+    var debounceFn = getDebounceFn(duration: duration);
     debounceFn(() => this());
   }
 
@@ -93,12 +110,7 @@ extension ValueChangedExt<T> on ValueChanged<T> {
     required T value,
     Duration duration = const Duration(milliseconds: 500),
   }) {
-    var debounceFn = _debounceMap[this];
-    if (debounceFn == null) {
-      debounceFn = Debounce();
-      _debounceMap[this] = debounceFn;
-    }
-    debounceFn.delay = duration;
-    _debounce(() => this.call(value));
+    var debounceFn = getDebounceFn(duration: duration);
+    debounceFn(() => this.call(value));
   }
 }
