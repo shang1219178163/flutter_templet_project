@@ -11,6 +11,7 @@
 // import 'dart:convert';
 // import 'dart:io';
 // import 'package:flutter/cupertino.dart';
+// import 'package:flutter_templet_project/vendor/amap_location/location_detail_model.dart';
 //
 // import 'package:permission_handler/permission_handler.dart';
 // import 'package:amap_flutter_location/amap_flutter_location.dart';
@@ -19,7 +20,7 @@
 // import 'package:yl_health_app/vender/amap_location/map_util.dart';
 //
 // /*
-// * 混入然后使用 locationModel 即可
+// * 混入然后实现 onLocationChanged 和 onLocationFailed 即可
 // * */
 //
 //
@@ -29,11 +30,6 @@
 //   StreamSubscription<Map<String, Object>>? _locationListener;
 //   /// 请求
 //   final _locationPlugin = AMapFlutterLocation();
-//
-//   LocationDetailModel? _locationModel;
-//
-//   /// 当前定位详情
-//   LocationDetailModel? get locationModel => _locationModel;
 //
 //   @override
 //   void initState() {
@@ -73,12 +69,16 @@
 //       requestAccuracyAuthorization();
 //     }
 //
-//     ///注册定位结果监听
-//     _locationListener = _locationPlugin.onLocationChanged().listen((Map<String, Object> result) {
-//       // final jsonStr = jsonEncode(result);
-//       // debugPrint("jsonStr: $jsonStr");
-//       _locationModel = LocationDetailModel.fromJson(result);
-//       // debugPrint("locationModel: $_locationModel");
+//    ///注册定位结果监听
+//     _locationListener = _locationPlugin.onLocationChanged().listen((result) {
+//       if (!result.containsKey("latitude") || result["latitude"] == 0) {
+//         // YLog.d("$this ${result["errorInfo"]}");
+//         onLocationFailed(result);
+//         return;
+//       }
+//       final locationModel = LocationDetailModel.fromJson(result);
+//       onLocationChanged(locationModel);
+//       stopLocation();
 //     });
 //
 //     startLocation();
@@ -188,6 +188,16 @@
 //     //未授权则发起一次申请
 //     status = await Permission.location.request();
 //     return (status == PermissionStatus.granted);
+//   }
+//
+//   /************************* 定位回调方法 *************************/
+//   /// 定位回调
+//   void onLocationChanged(LocationDetailModel locationModel) {
+//     throw UnimplementedError("❌: $this 未实现 onLocationChanged");
+//   }
+//   /// 定位失败回调
+//   void onLocationFailed(Map<String, Object> result) {
+//     throw UnimplementedError("❌: $this 未实现 onLocationFailed");
 //   }
 // }
 //
