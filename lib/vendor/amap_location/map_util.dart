@@ -10,7 +10,6 @@ import 'dart:io';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-
 /// 地图关文件
 class MapUtil {
   static String iOSKey = "";
@@ -18,7 +17,7 @@ class MapUtil {
   static String androidKey = "";
 
   /// 高德地图
-  static Future<bool> gotoAMap(longitude, latitude) async {
+  static Future<bool> jumpAMap(longitude, latitude) async {
     var url = '${Platform.isAndroid ? 'android' : 'ios'}'
         'amap://navi?sourceApplication=amap&lat=$latitude&lon=$longitude&dev=0&style=2';
     bool canLaunchUrl = await canLaunch(url);
@@ -29,9 +28,11 @@ class MapUtil {
     await launch(url);
     return true;
   }
+
   /// 腾讯地图
-  static Future<bool> gotoTencentMap(longitude, latitude) async {
-    var url = 'qqmap://map/routeplan?type=drive&fromcoord=CurrentLocation&tocoord=$latitude,$longitude&referer=IXHBZ-QIZE4-ZQ6UP-DJYEO-HC2K2-EZBXJ';
+  static Future<bool> jumpTencentMap(longitude, latitude) async {
+    var url =
+        'qqmap://map/routeplan?type=drive&fromcoord=CurrentLocation&tocoord=$latitude,$longitude&referer=IXHBZ-QIZE4-ZQ6UP-DJYEO-HC2K2-EZBXJ';
     bool canLaunchUrl = await canLaunch(url);
     if (!canLaunchUrl) {
       ToastUtil.show('未检测到腾讯地图~');
@@ -39,9 +40,12 @@ class MapUtil {
     }
     await launch(url);
     return canLaunchUrl;
-  }/// 百度地图
-  static Future<bool> gotoBaiduMap(longitude, latitude) async {
-    var url = 'baidumap://map/direction?destination=$latitude,$longitude&coord_type=bd09ll&mode=driving';
+  }
+
+  /// 百度地图
+  static Future<bool> jumpBaiduMap(longitude, latitude) async {
+    var url =
+        'baidumap://map/direction?destination=$latitude,$longitude&coord_type=bd09ll&mode=driving';
     bool canLaunchUrl = await canLaunch(url);
     if (!canLaunchUrl) {
       ToastUtil.show('未检测到百度地图~');
@@ -50,8 +54,9 @@ class MapUtil {
     await launch(url);
     return canLaunchUrl;
   }
+
   /// 苹果地图
-  static Future<bool> gotoAppleMap(longitude, latitude) async {
+  static Future<bool> jumpAppleMap(longitude, latitude) async {
     var url = 'http://maps.apple.com/?&daddr=$latitude,$longitude';
     bool canLaunchUrl = await canLaunch(url);
     if (!canLaunchUrl) {

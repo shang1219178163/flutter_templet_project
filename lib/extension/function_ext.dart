@@ -59,7 +59,7 @@ extension FunctionExt on Function {
     });
   }
 
-  void tryApply(List<dynamic>? positionalArguments,
+  void tryCall(List<dynamic>? positionalArguments,
       [Map<String, dynamic>? namedArguments]) {
     try {
       applyNew(

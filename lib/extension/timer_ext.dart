@@ -29,7 +29,7 @@ extension TimerExt on Timer {
         t.cancel();
         return;
       }
-      if (count < 0) {
+      if (count <= 0) {
         t.cancel();
         // YLog.d("Timer 结束");
         onTimerEnd?.call();
