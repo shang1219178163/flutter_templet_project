@@ -25,6 +25,7 @@ dependencies:
 
 #  splashscreen: ^1.3.5
   connectivity_plus: ^5.0.2
+  dart_ping: ^9.0.1
   intl: ^0.18.0
   tuple: ^2.0.0
   event_bus: ^2.0.0

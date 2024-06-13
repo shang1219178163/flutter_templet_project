@@ -6,6 +6,7 @@
 //  Copyright © 3/13/23 shang. All rights reserved.
 //
 
+import 'package:dart_ping/dart_ping.dart';
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/APPThemeSettings.dart';
 import 'package:flutter_templet_project/basicWidget/error_custom_widget.dart';
 import 'package:flutter_templet_project/cache/cache_service.dart';
+import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/provider/color_filtered_provider.dart';
 import 'package:flutter_templet_project/provider/notifier_demo.dart';
 import 'package:flutter_templet_project/provider/provider_demo.dart';
@@ -54,6 +56,11 @@ import 'package:tuple/tuple.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // final ping = Ping('baidu.com', count: 20);
+  // ping.stream.listen((event) {
+  //   ddlog("ping $event");
+  // });
 
   /// That's all done.You can use Charles or other proxy tools now.
   // final httpProxy = await HttpProxy.createHttpProxy();

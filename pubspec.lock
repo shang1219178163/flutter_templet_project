@@ -417,6 +417,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.2.3"
+  dart_ping:
+    dependency: "direct main"
+    description:
+      name: dart_ping
+      sha256: "2f5418d0a5c64e53486caaac78677b25725b1e13c33c5be834ce874ea18bd24f"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "9.0.1"
   dart_style:
     dependency: transitive
     description:
