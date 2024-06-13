@@ -22,6 +22,32 @@
 // /*
 // * 混入然后实现 onLocationChanged 和 onLocationFailed 即可
 // * */
+// example:
+// //  // 当前所在位置
+// //  String location = '';
+// //
+// // @override
+// // void onLocationChanged(LocationDetailModel locationModel) {
+// //   YLog.d("$this onLocationChanged: $location");
+// //   final address = locationModel.address ?? "";
+// //   if (location.isEmpty || location == locationErrorMsg) {
+// //     if (address.isNotEmpty) {
+// //       location = address;
+// //     } else {
+// //       location = locationErrorMsg;
+// //     }
+// //     ...
+// //   }
+// // }
+// //
+// // @override
+// // void onLocationFailed(Map<String, Object> result) {
+// //   if (location.isEmpty) {
+// //     location = locationErrorMsg;
+// //   }
+// //   YLog.d("$this onLocationFailed: $location");
+// //     ...
+// // }
 //
 //
 // /// 高德定位混入
