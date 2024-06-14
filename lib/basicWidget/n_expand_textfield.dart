@@ -21,6 +21,7 @@ class NExpandTextfield extends StatefulWidget {
     this.expandMaxLine,
     this.expandMinLine = 3,
     // this.expandTitleStyle,
+    this.fillColor,
     this.readOnly = true,
     this.maxLength = 300,
     this.isExpand = false,
@@ -44,6 +45,8 @@ class NExpandTextfield extends StatefulWidget {
 
   /// 最大字符数
   final int maxLength;
+
+  final Color? fillColor;
 
   final bool readOnly;
 
@@ -111,6 +114,7 @@ class _NExpandTextfieldState extends State<NExpandTextfield> {
                   maxLength: widget.maxLength,
                 );
 
+        final opacity = widget.fillColor == Colors.white ? 0.1 : 0.05;
         return GestureDetector(
           onTap: onToggle,
           child: Column(
@@ -119,6 +123,12 @@ class _NExpandTextfieldState extends State<NExpandTextfield> {
             children: [
               buildMask(
                 showMask: isBeyond && !isExpand && widget.readOnly,
+                colors: [
+                  Colors.transparent,
+                  Colors.transparent,
+                  (widget.fillColor ?? Color(0xFFFFFFFF)).withOpacity(opacity),
+                  (widget.fillColor ?? Color(0xFFFFFFFF)),
+                ],
                 child: textChild,
               ),
               Offstage(
@@ -172,7 +182,7 @@ class _NExpandTextfieldState extends State<NExpandTextfield> {
         hintText: "请输入",
         hintStyle: TextStyle(color: Colors.black38),
         filled: true,
-        // fillColor: Colors.yellow,
+        fillColor: widget.fillColor,
         border: border,
         enabledBorder: border,
         focusedBorder: border,
