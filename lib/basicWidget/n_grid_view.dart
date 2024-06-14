@@ -18,14 +18,16 @@ class NGridView extends StatelessWidget {
     required this.children,
   });
 
-  ///每页列数
+  /// 每行列数
   final int numPerRow;
 
   /// 子项宽度
   final double itemWidth;
 
+  /// 垂直间距
   final double runSpacing;
 
+  /// 子项
   final List<Widget> children;
 
   @override
