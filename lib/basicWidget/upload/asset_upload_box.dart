@@ -1,6 +1,6 @@
-
-
+import 'dart:async';
 import 'dart:ffi';
+import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -11,70 +11,109 @@ import 'package:flutter_templet_project/basicWidget/upload/asset_upload_config.d
 import 'package:flutter_templet_project/basicWidget/upload/asset_upload_model.dart';
 import 'package:flutter_templet_project/extension/overlay_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 import 'package:wechat_camera_picker/wechat_camera_picker.dart';
 
-
 /// 上传图片单元(基于 wechat_assets_picker)
 class AssetUploadBox extends StatefulWidget {
-
   AssetUploadBox({
-    Key? key,
+    super.key,
+    this.controller,
     required this.items,
     required this.onChanged,
     this.maxCount = 9,
     this.rowCount = 4,
     this.spacing = 3,
     this.runSpacing = 3,
-    this.canCameraTakePhoto = false,
+    this.canTakePhoto = false,
     this.canEdit = true,
     this.imgBuilder,
     this.onTap,
     this.showFileSize = false,
-  }) : super(key: key);
+    this.hasTakePhoto = false,
+    this.onStart,
+    this.onCancel,
+  });
 
+  /// 控制器
+  final AssetUploadBoxController? controller;
 
-  List<AssetUploadModel> items;
+  /// 默认显示
+  final List<AssetUploadModel> items;
+
   /// 全部结束(有成功有失败 url="")或者删除完失败图片时会回调
-  ValueChanged<List<AssetUploadModel>> onChanged;
+  final ValueChanged<List<AssetUploadModel>> onChanged;
+
+  /// 权限校验
+  // final FutureOr<bool> Function() onPermission;
+
+  /// 开始上传回调
+  final VoidCallback? onStart;
+
+  /// 取消
+  final VoidCallback? onCancel;
+
   /// 做大个数
-  int maxCount;
+  final int maxCount;
+
   /// 每行个数
-  int rowCount;
+  final int rowCount;
+
   /// 水平间距
-  double spacing;
+  final double spacing;
+
   /// 垂直间距
-  double runSpacing;
+  final double runSpacing;
+
   /// 可以 拍摄图片
-  bool canCameraTakePhoto;
+  final bool canTakePhoto;
+
   /// 可以编辑
-  bool canEdit;
+  final bool canEdit;
+
   /// 网络图片url转为组件
-  Widget Function(String url)? imgBuilder;
+  final Widget Function(String url)? imgBuilder;
+
   /// 图片点击事件
-  Void Function(List<String> urls, int index)? onTap;
+  final Void Function(List<String> urls, int index)? onTap;
+
   /// 显示文件大小
-  bool showFileSize;
+  final bool showFileSize;
+
+  /// 是否只拍照
+  final bool hasTakePhoto;
 
   @override
-  _AssetUploadBoxState createState() => _AssetUploadBoxState();
+  AssetUploadBoxState createState() => AssetUploadBoxState();
 }
 
-class _AssetUploadBoxState extends State<AssetUploadBox> {
+class AssetUploadBoxState extends State<AssetUploadBox> {
+  late final List<AssetUploadModel> selectedModels = [];
 
-  late List<AssetUploadModel> selectedModels = widget.items;
-  // List<AssetEntity> selectedEntitys = [];
+  final _imagePicker = ImagePicker();
+
+  /// 全部上传结束
+  final isAllUploadFinished = ValueNotifier(false);
+
+  @override
+  void dispose() {
+    widget.controller?._detach(this);
+    super.dispose();
+  }
 
   @override
   void initState() {
-    // TODO: implement initState
+    selectedModels.addAll(widget.items);
+    widget.controller?._attach(this);
     super.initState();
   }
 
   @override
   void didUpdateWidget(covariant AssetUploadBox oldWidget) {
     final entityIds = widget.items.map((e) => e.entity?.id).join(",");
-    final oldWidgetEntityIds = oldWidget.items.map((e) => e.entity?.id).join(",");
+    final oldWidgetEntityIds =
+        oldWidget.items.map((e) => e.entity?.id).join(",");
     if (entityIds != oldWidgetEntityIds) {
       selectedModels
         ..clear()
@@ -104,10 +143,12 @@ class _AssetUploadBoxState extends State<AssetUploadBox> {
     bool canEdit = true,
   }) {
     return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints){
-        var itemWidth = ((constraints.maxWidth - spacing * (rowCount - 1))/rowCount).truncateToDouble();
-        // print("itemWidth: $itemWidth");
-        return Wrap(
+        builder: (BuildContext context, BoxConstraints constraints) {
+      var itemWidth =
+          ((constraints.maxWidth - spacing * (rowCount - 1)) / rowCount)
+              .truncateToDouble();
+      // print("itemWidth: $itemWidth");
+      return Wrap(
           spacing: spacing,
           runSpacing: runSpacing,
           alignment: WrapAlignment.start,
@@ -126,10 +167,12 @@ class _AssetUploadBoxState extends State<AssetUploadBox> {
                         width: itemWidth,
                         height: itemWidth,
                         child: InkWell(
-                          onTap: (){
+                          onTap: () {
                             // debugPrint("onTap: ${e.url}");
-                            final urls = items.where((e) => e.url?.startsWith("http") == true)
-                              .map((e) => e.url ?? "").toList();
+                            final urls = items
+                                .where((e) => e.url?.startsWith("http") == true)
+                                .map((e) => e.url ?? "")
+                                .toList();
                             final index = urls.indexOf(e.url ?? "");
                             // debugPrint("urls: ${urls.length}, $index");
                             FocusScope.of(context).unfocus();
@@ -143,24 +186,28 @@ class _AssetUploadBoxState extends State<AssetUploadBox> {
                           },
                           child: AssetUploadButton(
                             model: e,
-                            urlBlock: (url){
+                            urlBlock: (url) {
                               // e.url = url;
                               // debugPrint("e: ${e.data?.name}_${e.url}");
-                              final isAllFinished = items.where((e) =>
-                              e.url == null).isEmpty;
+                              final isAllFinished =
+                                  items.where((e) => e.url == null).isEmpty;
                               // debugPrint("isAllFinsied: ${isAllFinsied}");
                               if (isAllFinished) {
                                 final urls = items.map((e) => e.url).toList();
                                 debugPrint("isAllFinsied urls: ${urls}");
                                 widget.onChanged(items);
+                                isAllUploadFinished.value = true;
                               }
                             },
-                            onDelete: canEdit == false ? null : (){
-                              debugPrint("onDelete: $index, lenth: ${items[index].file?.path}");
-                              items.remove(e);
-                              setState(() {});
-                              widget.onChanged(items);
-                            },
+                            onDelete: canEdit == false
+                                ? null
+                                : () {
+                                    debugPrint(
+                                        "onDelete: $index, lenth: ${items[index].file?.path}");
+                                    items.remove(e);
+                                    setState(() {});
+                                    widget.onChanged(items);
+                                  },
                             showFileSize: widget.showFileSize,
                           ),
                         ),
@@ -198,10 +245,8 @@ class _AssetUploadBoxState extends State<AssetUploadBox> {
                   ),
                 ),
               )
-          ]
-        );
-      }
-    );
+          ]);
+    });
   }
 
   onPicker({
@@ -209,67 +254,80 @@ class _AssetUploadBoxState extends State<AssetUploadBox> {
     // required Function(int length, String result) cb,
   }) async {
     try {
-      final tmpUrls = selectedModels.map((e) => e.url).where((e) => e != null).toList();
-      final tmpEntitys = selectedModels.map((e) => e.entity).where((e) => e != null).toList();
-      final selectedEntitys = List<AssetEntity>.from(tmpEntitys);
+      // if (!await widget.onPermission()) {
+      //   debugPrint("授权失败");
+      //   return;
+      // }
+
+      final tmpUrls =
+          selectedModels.map((e) => e.url).where((e) => e != null).toList();
+      final tmpEntity =
+          selectedModels.map((e) => e.entity).where((e) => e != null).toList();
+
+      final selectedEntitys = List<AssetEntity>.from(tmpEntity);
 
       final result = await AssetPicker.pickAssets(
-        context,
-        pickerConfig: AssetPickerConfig(
-          requestType: RequestType.image,
-          specialPickerType: SpecialPickerType.noPreview,
-          selectedAssets: selectedEntitys,
-          maxAssets: maxCount,
-          specialItemPosition: SpecialItemPosition.prepend,
-          specialItemBuilder: (context, AssetPathEntity? path, int length,) {
-            if (path?.isAll != true) {
-              return null;
-            }
-            if (!widget.canCameraTakePhoto) {
-              return null;
-            }
+            context,
+            pickerConfig: AssetPickerConfig(
+              requestType: RequestType.image,
+              specialPickerType: SpecialPickerType.noPreview,
+              selectedAssets: selectedEntitys,
+              maxAssets: maxCount,
+              specialItemPosition: SpecialItemPosition.prepend,
+              specialItemBuilder: (
+                context,
+                AssetPathEntity? path,
+                int length,
+              ) {
+                if (path?.isAll != true) {
+                  return null;
+                }
+                if (!widget.canTakePhoto) {
+                  return null;
+                }
 
-            const textDelegate = AssetPickerTextDelegate();
-            return Semantics(
-              label: textDelegate.sActionUseCameraHint,
-              button: true,
-              onTapHint: textDelegate.sActionUseCameraHint,
-              child: GestureDetector(
-                behavior: HitTestBehavior.opaque,
-                onTap: () async {
-                  Feedback.forTap(context);
-                  final takePhoto = await CameraPicker.pickFromCamera(
-                    context,
-                    pickerConfig: const CameraPickerConfig(enableRecording: true),
-                  );
-                  if (takePhoto != null) {
-                    selectedModels.add(AssetUploadModel(entity: takePhoto));
-                    debugPrint("selectedEntitys:${selectedEntitys.length} ${selectedModels.length}");
-                    setState(() {});
-                  }
-                },
-                child: const Center(
-                  child: Icon(Icons.camera_enhance, size: 42.0),
-                ),
-              ),
-            );
-          },
-        ),
-      ) ?? [];
+                const textDelegate = AssetPickerTextDelegate();
+                return Semantics(
+                  label: textDelegate.sActionUseCameraHint,
+                  button: true,
+                  onTapHint: textDelegate.sActionUseCameraHint,
+                  child: GestureDetector(
+                    behavior: HitTestBehavior.opaque,
+                    onTap: takePhotoByWechatCamera,
+                    child: Container(
+                      padding: const EdgeInsets.all(28.0),
+                      color: Theme.of(context).dividerColor,
+                      child: const FittedBox(
+                        fit: BoxFit.fill,
+                        child: Icon(Icons.camera_enhance),
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+          ) ??
+          [];
 
       // BrunoUtil.showLoading("图片处理中...");
-      final same = result.map((e) => e.id).join() == selectedEntitys.map((e) => e.id).join();
+      final same = result.map((e) => e.id).join() ==
+          selectedEntitys.map((e) => e.id).join();
       if (result.isEmpty || same) {
         debugPrint("没有添加新图片");
+        widget.onCancel?.call();
         return;
       }
+
+      widget.onStart?.call();
+      isAllUploadFinished.value = false;
 
       for (final e in result) {
         if (!selectedEntitys.contains(e)) {
           selectedModels.add(AssetUploadModel(entity: e));
         }
       }
-      debugPrint("selectedEntitys:${selectedEntitys.length} ${selectedModels.length}");
+      debugPrint(
+          "selectedEntitys:${selectedEntitys.length} ${selectedModels.length}");
       setState(() {});
     } catch (err) {
       debugPrint("err:$err");
@@ -278,26 +336,119 @@ class _AssetUploadBoxState extends State<AssetUploadBox> {
     }
   }
 
+  /// 微信风格相机
+  Future<void> takePhotoByWechatCamera() async {
+    try {
+      // if (!await widget.onPermission()) {
+      //   debugPrint("授权失败");
+      //   return;
+      // }
+
+      Feedback.forTap(context);
+      final takePhoto = await CameraPicker.pickFromCamera(
+        context,
+        pickerConfig: const CameraPickerConfig(
+          enableRecording: true,
+        ),
+      );
+      if (takePhoto == null) {
+        debugPrint("没有拍照,直接返回");
+        widget.onCancel?.call();
+        return;
+      }
+
+      widget.onStart?.call();
+      isAllUploadFinished.value = false;
+
+      selectedModels.add(AssetUploadModel(entity: takePhoto));
+      // debugPrint(
+      //     "selectedEntitys:${selectedEntitys.length} ${selectedModels.length}");
+      setState(() {});
+    } catch (e) {
+      debugPrint("$this $e");
+    }
+  }
+
+  // 相机拍摄
+  Future<void> onTakePhoto({
+    double? maxHeight,
+    double? maxWidth,
+    int imageQuality = 50,
+  }) async {
+    try {
+      // if (!await widget.onPermission()) {
+      //   debugPrint("授权失败");
+      //   return;
+      // }
+
+      final tmpEntities =
+          selectedModels.map((e) => e.entity).where((e) => e != null).toList();
+
+      final selectedEntities = List<AssetEntity>.from(tmpEntities);
+      //相机
+      var imageFile = await _imagePicker.pickImage(
+        source: ImageSource.camera,
+        maxWidth: maxWidth,
+        maxHeight: maxHeight,
+        imageQuality: imageQuality,
+      );
+
+      /// 没有拍照,直接返回
+      if (imageFile == null) {
+        debugPrint("没有拍照,直接返回");
+        widget.onCancel?.call();
+        return;
+      }
+
+      widget.onStart?.call();
+      isAllUploadFinished.value = false;
+
+      // Uint8List bytes = await imageFile.readAsBytes();
+      final imageEntity = await PhotoManager.editor.saveImageWithPath(
+        imageFile.path,
+        title: 'image_${DateTime.now().millisecond}',
+      );
+      if (imageEntity != null && !selectedEntities.contains(imageEntity)) {
+        selectedModels.add(AssetUploadModel(entity: imageEntity));
+      }
+      setState(() {});
+    } catch (e) {
+      debugPrint("❌onTakePhoto: $e");
+    }
+  }
+
   /// 展示图片预览相册
-  jumpImagePreview({required List<String> urls, required int index,}) {
-    Navigator.push(context,
+  jumpImagePreview({
+    required List<String> urls,
+    required int index,
+  }) {
+    Navigator.push(
+      context,
       MaterialPageRoute(
         builder: (context) => NImagePreview(urls: urls, index: index),
       ),
     );
-
-    // showEntry(
-    //   child: NImagePreview(
-    //     urls: urls,
-    //     index: index,
-    //     onBack: (){
-    //       hideEntry();
-    //     },
-    //   ),
-    // );
   }
 
   showToast({required String message}) {
     Text(message).toShowCupertinoDialog(context: context);
   }
+}
+
+/// AssetUploadBox 组件控制器
+class AssetUploadBoxController {
+  AssetUploadBoxState? _anchor;
+
+  void _attach(AssetUploadBoxState anchor) {
+    _anchor = anchor;
+  }
+
+  void _detach(AssetUploadBoxState anchor) {
+    if (_anchor == anchor) {
+      _anchor = null;
+    }
+  }
+
+  /// 是否全部上传结束
+  ValueNotifier<bool> get isAllUploadFinished => _anchor!.isAllUploadFinished;
 }
