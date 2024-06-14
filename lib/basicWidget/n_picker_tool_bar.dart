@@ -6,13 +6,10 @@
 //  Copyright © 4/3/23 shang. All rights reserved.
 //
 
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-
 class NPickerToolBar extends StatelessWidget {
-
   const NPickerToolBar({
     super.key,
     this.height = 45,
@@ -37,30 +34,34 @@ class NPickerToolBar extends StatelessWidget {
     final toolbar = NavigationToolbar(
       leading: CupertinoButton(
         padding: EdgeInsets.all(12),
-        onPressed: onCancel ?? () {
-          Navigator.of(context).pop();
-        },
-        child: Text(cancelTitle,
+        onPressed: onCancel ??
+            () {
+              Navigator.of(context).pop();
+            },
+        child: Text(
+          cancelTitle,
           style: TextStyle(
             fontSize: 16,
-            color: Colors.black38,
+            color: Colors.black54,
           ),
         ),
       ),
-      middle: Text(title,
+      middle: Text(
+        title,
         style: TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.w500,
           color: Colors.black,
           backgroundColor: Colors.white,
-          decoration: TextDecoration.none
+          decoration: TextDecoration.none,
         ),
         textAlign: TextAlign.center,
       ),
       trailing: CupertinoButton(
         padding: EdgeInsets.all(12),
         onPressed: confirmTitle.isEmpty ? null : onConfirm,
-        child: Text(confirmTitle,
+        child: Text(
+          confirmTitle,
           style: TextStyle(
             fontSize: 16,
           ),
@@ -112,7 +113,6 @@ class NPickerToolBar extends StatelessWidget {
   //   );
   // }
 }
-
 
 // /// picker 顶部
 // class NToolbar extends StatelessWidget {
