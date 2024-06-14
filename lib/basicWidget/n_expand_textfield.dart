@@ -111,7 +111,7 @@ class _NExpandTextfieldState extends State<NExpandTextfield> {
                   maxLength: widget.maxLength,
                 );
 
-        return InkWell(
+        return GestureDetector(
           onTap: onToggle,
           child: Column(
             mainAxisSize: MainAxisSize.min,
