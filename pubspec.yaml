@@ -140,7 +140,7 @@ dependencies:
   image_gallery_saver: ^2.0.3
   # 图片选择
   wechat_camera_picker: ^4.1.2
-  wechat_assets_picker: ^9.0.0
+  wechat_assets_picker: ^9.0.4
 #  wechat_assets_picker:
 #    git:
 #      url: 'git@github.com:shang1219178163/flutter_wechat_assets_picker.git'

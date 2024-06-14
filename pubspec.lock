@@ -2153,10 +2153,10 @@ packages:
     dependency: "direct main"
     description:
       name: wechat_assets_picker
-      sha256: dc289e7418dff078ab5b4383dceda83ee0afb5b98f16f3bc0cc58da2e672d3bd
+      sha256: "6a1193beb2ce170edcf4091d849d2bc811eb2a36a8007fa63e6bfbaf3ac99625"
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "9.0.0"
+    version: "9.0.4"
   wechat_camera_picker:
     dependency: "direct main"
     description:
