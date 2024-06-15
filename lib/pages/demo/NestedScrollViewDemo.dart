@@ -6,12 +6,10 @@
 //  Copyright © 10/21/21 shang. All rights reserved.
 //
 
-
 import 'package:flutter/material.dart';
 
 class NestedScrollViewDemo extends StatefulWidget {
-
-  const NestedScrollViewDemo({ Key? key, this.title}) : super(key: key);
+  const NestedScrollViewDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -20,8 +18,6 @@ class NestedScrollViewDemo extends StatefulWidget {
 }
 
 class _NestedScrollViewDemoState extends State<NestedScrollViewDemo> {
-
-
   @override
   Widget build(BuildContext context) {
     return NestedScrollView(
@@ -36,30 +32,34 @@ class _NestedScrollViewDemoState extends State<NestedScrollViewDemo> {
             forceElevated: innerBoxIsScrolled,
             flexibleSpace: FlexibleSpaceBar(
               background: Image.asset(
-                "images/bg.png",
+                "assets/images/bg.png",
                 fit: BoxFit.cover,
               ),
             ),
           ),
         ];
       },
-      body: ListView.builder(
-        itemCount: 50,
-        itemBuilder: (BuildContext context, int index) {
-          return Material(
-            child: Container(
-              height: 60,
-              decoration: BoxDecoration(
-                  border: Border(bottom: BorderSide(color: Colors.red))
+      body: MediaQuery.removePadding(
+        context: context,
+        removeTop: true,
+        child: ListView.builder(
+          itemCount: 50,
+          itemBuilder: (BuildContext context, int index) {
+            return Material(
+              child: Container(
+                height: 60,
+                decoration: BoxDecoration(
+                  border: Border(bottom: BorderSide(color: Colors.red)),
+                ),
+                child: ListTile(
+                  title: Text("row_$index"),
+                  trailing: Icon(Icons.arrow_forward_ios_outlined),
+                ),
               ),
-              child: ListTile(
-                title: Text("row_$index"),
-                trailing: Icon(Icons.arrow_forward_ios_outlined),
-              )
-            )
-          );
-        }
-      )
+            );
+          },
+        ),
+      ),
     );
   }
 }
