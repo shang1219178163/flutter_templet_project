@@ -16,7 +16,7 @@ enum HttpMethod {
 }
 
 /// 请求基类
-abstract class BaseRequestAPI {
+class BaseRequestAPI {
   ///url
   String get requestURI {
     // TODO: implement requestURI
@@ -88,6 +88,9 @@ abstract class BaseRequestAPI {
   void fetchCancel() {
     cancelToken.cancel('fetchCancel');
   }
+
+  /// 发起请求时的页面路由
+  String? route;
 
   /// 发起请求
   Future<Map<String, dynamic>> fetch() async {

@@ -23,7 +23,7 @@ import 'package:flutter_templet_project/network/proxy/dio_proxy.dart';
 import 'package:flutter_templet_project/routes/APPRouter.dart';
 import 'package:flutter_templet_project/util/app_util.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
-import 'package:permission_handler/permission_handler.dart';
+import 'package:get/get.dart' as get_navigation;
 
 class RequestManager extends BaseRequestAPI {
   // 私有构造器
@@ -98,6 +98,7 @@ class RequestManager extends BaseRequestAPI {
   }
 
   Future<Map<String, dynamic>> request(BaseRequestAPI api) async {
+    api.route = get_navigation.Get.currentRoute; //进入当前页面
     if (api.needToken && token?.isNotEmpty != true) {
       // debugPrint("❌ 无效请求: ${api.requestURI}\ntoken: $token");
       return {
@@ -284,6 +285,13 @@ class RequestManager extends BaseRequestAPI {
     BaseRequestAPI? api,
     List<String> errorCodes = const [],
   }) {
+    if (api?.route != get_navigation.Get.currentRoute) {
+      //退出当前页面
+      return {
+        "code": RequestError.cancel,
+        "message": "",
+      };
+    }
     final resMap = response?.data as Map<String, dynamic>? ?? {};
     if (resMap.isEmpty || resMap.keys.contains("code") != true) {
       return {
@@ -318,7 +326,7 @@ class RequestManager extends BaseRequestAPI {
         RequestError.urlError.desc,
       ].contains(resMap['message']);
       if (hide) {
-        ToastUtil.show(resMap['message'] ?? "未知异常"); //TODO: 是否还需要次全局Toast?
+        ToastUtil.show(resMap['message']); //TODO: 是否还需要次全局Toast?
       }
     }
     return resMap;
