@@ -8,7 +8,6 @@
 
 // mac不支持
 
-
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -19,26 +18,26 @@ import 'package:flutter_templet_project/network/dio_upload_service.dart';
 import 'package:flutter_templet_project/util/R.dart';
 
 class DraggableScrollableSheetDemo extends StatefulWidget {
-
   final String? title;
 
-  const DraggableScrollableSheetDemo({ Key? key, this.title}) : super(key: key);
+  const DraggableScrollableSheetDemo({Key? key, this.title}) : super(key: key);
 
-  
   @override
-  _DraggableScrollableSheetDemoState createState() => _DraggableScrollableSheetDemoState();
+  _DraggableScrollableSheetDemoState createState() =>
+      _DraggableScrollableSheetDemoState();
 }
 
-class _DraggableScrollableSheetDemoState extends State<DraggableScrollableSheetDemo> {
-
+class _DraggableScrollableSheetDemoState
+    extends State<DraggableScrollableSheetDemo> {
   final _scrollController = ScrollController();
+
+  final draggableController = DraggableScrollableController();
 
   double minExtent = 0.15;
 
   late double extent = 0.15;
 
   final extentVN = ValueNotifier(0.15);
-
 
   @override
   void initState() {
@@ -65,21 +64,31 @@ class _DraggableScrollableSheetDemoState extends State<DraggableScrollableSheetD
     return Scaffold(
       appBar: AppBar(
         title: ValueListenableBuilder(
-           valueListenable: extentVN,
-           builder: (context,  value, child){
-             var desc = widget.title ?? "$widget";
-             if (value == minExtent) {
-               desc = "底部";
-             } else {
-               desc = "中间";
-               return Opacity(
-                 opacity: value/1.0,
-                 child: buildTopBar(),
-               );
-             }
-            return Text(desc, style: TextStyle(fontSize: 15),);
-          }
-        ),
+            valueListenable: extentVN,
+            builder: (context, value, child) {
+              var desc = widget.title ?? "$widget";
+              if (value == minExtent) {
+                desc = "底部";
+              } else {
+                desc = "中间";
+                return Opacity(
+                  opacity: value / 1.0,
+                  child: buildTopBar(),
+                );
+              }
+              return Text(
+                desc,
+                style: TextStyle(fontSize: 15),
+              );
+            }),
+        actions: [
+          ElevatedButton(
+            onPressed: () {
+              draggableController.reset();
+            },
+            child: const Text('reset'),
+          ),
+        ],
       ),
       // body: buildBody(),
       body: buildBody1(),
@@ -92,19 +101,22 @@ class _DraggableScrollableSheetDemoState extends State<DraggableScrollableSheetD
       children: [
         Row(
           children: [
-            FlutterLogo(size: 40,),
+            FlutterLogo(
+              size: 40,
+            ),
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("我是标题",
+                Text(
+                  "我是标题",
                   style: TextStyle(
                     fontSize: 14,
-
                   ),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
-                Text("评分9.0",
+                Text(
+                  "评分9.0",
                   style: TextStyle(
                     fontSize: 12,
                   ),
@@ -126,7 +138,7 @@ class _DraggableScrollableSheetDemoState extends State<DraggableScrollableSheetD
               child: Padding(
                 padding: const EdgeInsets.only(left: 12),
                 child: Icon(e.iconData),
-              ) ,
+              ),
             );
           }).toList(),
         ),
@@ -147,10 +159,10 @@ class _DraggableScrollableSheetDemoState extends State<DraggableScrollableSheetD
   }
 
   Widget buildBody({double minChildSize = 0.3}) {
-    final height = MediaQuery.of(context).size.height
-        - MediaQuery.of(context).viewPadding.top
-        - MediaQuery.of(context).viewPadding.bottom
-        - kToolbarHeight;
+    final height = MediaQuery.of(context).size.height -
+        MediaQuery.of(context).viewPadding.top -
+        MediaQuery.of(context).viewPadding.bottom -
+        kToolbarHeight;
 
     minChildSize = minExtent;
 
@@ -167,7 +179,8 @@ class _DraggableScrollableSheetDemoState extends State<DraggableScrollableSheetD
               decoration: BoxDecoration(
                 color: Colors.green,
                 image: DecorationImage(
-                    image: ExtendedNetworkImageProvider(R.image.urls[6],
+                  image: ExtendedNetworkImageProvider(
+                    R.image.urls[6],
                   ),
                   fit: BoxFit.cover,
                 ),
@@ -195,20 +208,23 @@ class _DraggableScrollableSheetDemoState extends State<DraggableScrollableSheetD
               return false;
             },
             child: DraggableScrollableSheet(
+              controller: draggableController,
               initialChildSize: minChildSize,
               minChildSize: minChildSize,
               maxChildSize: 1,
-              snap: true,      //true：触发滚动则滚动到maxChildSize或者minChildSize，不在跟随手势滚动距离 false:滚动跟随手势滚动距离
-              builder: (context, scrollController){
-
+              snap:
+                  true, //true：触发滚动则滚动到maxChildSize或者minChildSize，不在跟随手势滚动距离 false:滚动跟随手势滚动距离
+              builder: (context, scrollController) {
                 return Container(
                   color: Colors.green,
                   child: ListView.builder(
                     controller: scrollController,
                     itemCount: 20,
-                    itemBuilder: (BuildContext context, int index){
-                      return ListTile(title : Text('Item $index'),);
-                    }
+                    itemBuilder: (BuildContext context, int index) {
+                      return ListTile(
+                        title: Text('Item $index'),
+                      );
+                    },
                   ),
                 );
               },
@@ -224,26 +240,37 @@ class _DraggableScrollableSheetDemoState extends State<DraggableScrollableSheetD
       decoration: BoxDecoration(
         color: Colors.green,
         image: DecorationImage(
-          image: ExtendedNetworkImageProvider(R.image.urls[6],
+          image: ExtendedNetworkImageProvider(
+            R.image.urls[6],
           ),
           fit: BoxFit.cover,
         ),
       ),
       child: SizedBox.expand(
         child: DraggableScrollableSheet(
+          controller: draggableController,
           builder: (BuildContext context, ScrollController scrollController) {
             return Container(
-              color: Theme.of(context).primaryColor,
+              color: Colors.white,
               child: ListView.builder(
                 controller: scrollController,
                 itemCount: 25,
                 itemBuilder: (BuildContext context, int index) {
                   return Container(
                     height: 75,
-                    child: ListTile(
-                      leading: FlutterLogo(size: 48,),
-                      title: Text('Item $index')
-                    )
+                    child: Column(
+                      children: [
+                        ListTile(
+                          leading: FlutterLogo(
+                            size: 48,
+                          ),
+                          title: Text('Item $index'),
+                        ),
+                        Divider(
+                          indent: 75,
+                        ),
+                      ],
+                    ),
                   );
                 },
               ),
@@ -253,5 +280,4 @@ class _DraggableScrollableSheetDemoState extends State<DraggableScrollableSheetD
       ),
     );
   }
-
 }
