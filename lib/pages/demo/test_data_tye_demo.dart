@@ -10,6 +10,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
+import 'package:flutter_templet_project/extension/custom_type_util.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/map_ext.dart';
 import 'package:flutter_templet_project/extension/snack_bar_ext.dart';
@@ -20,8 +21,6 @@ import 'package:flutter_templet_project/util/Singleton.dart';
 import 'package:flutter_templet_project/vendor/amap_location/location_detail_model.dart';
 import 'package:get/get.dart';
 import 'package:quiver/collection.dart';
-
-typedef ButtonRecord = ({String name, VoidCallback action});
 
 /// 基础类型数据测试
 class TestDataTyeDemo extends StatefulWidget {
@@ -42,19 +41,19 @@ class _TestDataTyeDemoState extends State<TestDataTyeDemo> {
 
   final _scrollController = ScrollController();
 
-  late final specialItems = <ButtonRecord>[
-    (name: "Singleton", action: onSingleton),
-    (name: "Equals", action: onEquals),
+  late final specialItems = <ActionRecord>[
+    (e: "Singleton", action: onSingleton),
+    (e: "Equals", action: onEquals),
   ];
 
-  late final items = <ButtonRecord>[
-    (name: "String", action: onString),
-    (name: "List", action: onList),
-    (name: "Map", action: onMap),
-    (name: "LruMap", action: onLruMap),
-    (name: "Set", action: onSet),
-    (name: "bool", action: onBool),
-    (name: "Record", action: onRecord),
+  late final items = <ActionRecord>[
+    (e: "String", action: onString),
+    (e: "List", action: onList),
+    (e: "Map", action: onMap),
+    (e: "LruMap", action: onLruMap),
+    (e: "Set", action: onSet),
+    (e: "bool", action: onBool),
+    (e: "Record", action: onRecord),
   ];
 
   @override
@@ -111,7 +110,7 @@ class _TestDataTyeDemoState extends State<TestDataTyeDemo> {
   }
 
   Widget buildSectionBox({
-    required List<ButtonRecord> items,
+    required List<ActionRecord> items,
   }) {
     return Wrap(
       spacing: 8,
@@ -127,7 +126,7 @@ class _TestDataTyeDemoState extends State<TestDataTyeDemo> {
               borderRadius: BorderRadius.all(Radius.circular(4)),
             ),
             child: NText(
-              e.name,
+              e.e,
               color: context.primaryColor,
             ),
           ),

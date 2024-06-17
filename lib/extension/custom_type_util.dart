@@ -17,4 +17,7 @@ typedef VoidCallbackWidgetBuilder = Widget Function(
 typedef ValueChangedWidgetBuilder<T> = Widget Function(
     BuildContext context, ValueChanged<T> onChanged);
 
-typedef ActionRecord = ({String title, VoidCallback action});
+/// 一个两个元素的元祖;
+/// e 泛型数据;
+/// action 事件回调;
+typedef ActionRecord<T> = ({T e, VoidCallback action});
