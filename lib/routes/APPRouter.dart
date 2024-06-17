@@ -29,6 +29,7 @@ import 'package:flutter_templet_project/pages/demo/AppWebViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AsyncDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AudioPlayerPageDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ComponentMiddlePage.dart';
+import 'package:flutter_templet_project/pages/demo/DecoratedBoxTransitionDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DefaultTabControllerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DevelopToolList.dart';
 import 'package:flutter_templet_project/pages/demo/DialogChoiceChipDemo.dart';
@@ -726,6 +727,7 @@ class APPRouter {
   static const audioPlayPageDemo = '/AudioPlayPageDemo';
   static const chewiePlayerPage = '/chewiePlayerPage';
   static const segmentVerticalDemo = '/segmentVerticalDemo';
+  static const decoratedBoxTransitionDemo = '/decoratedBoxTransitionDemo';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -2148,6 +2150,10 @@ class AppPage {
     GetPage(
       name: APPRouter.segmentVerticalDemo,
       page: () => SegmentVerticalDemo(),
+    ),
+    GetPage(
+      name: APPRouter.decoratedBoxTransitionDemo,
+      page: () => DecoratedBoxTransitionDemo(),
     ),
   ];
 }

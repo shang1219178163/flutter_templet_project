@@ -561,6 +561,7 @@ var list = <Tuple2<String, String>>[
   Tuple2(APPRouter.queueAlertDemo, "queueAlertDemo"),
   Tuple2(APPRouter.flutterPickerUtilDemo, "queueAlertDemo"),
   Tuple2(APPRouter.segmentVerticalDemo, "segmentVerticalDemo"),
+  Tuple2(APPRouter.decoratedBoxTransitionDemo, "decoratedBoxTransitionDemo"),
 ];
 
 var slivers = <Tuple2<String, String>>[

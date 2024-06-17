@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/im_reciple_bottom_sheet.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
@@ -13,17 +14,14 @@ import 'package:flutter_templet_project/mixin/bottom_sheet_mixin.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:tuple/tuple.dart';
 
-
 class AlertSheetDemo extends StatefulWidget {
   const AlertSheetDemo({Key? key}) : super(key: key);
-
 
   @override
   _AlertSheetDemoState createState() => _AlertSheetDemoState();
 }
 
 class _AlertSheetDemoState extends State<AlertSheetDemo> with BottomSheetMixin {
-
   late var items = [
     ("默认样式", showAlertSheet),
     ("ListTile", presentAlertSheetListTile),
@@ -38,7 +36,6 @@ class _AlertSheetDemoState extends State<AlertSheetDemo> with BottomSheetMixin {
 
   List<String> get titles => items.map((e) => e.$1).toList();
 
-
   final title = "新版本 v${2.1}";
   final message = """
 1、支持立体声蓝牙耳机，同时改善配对性能;
@@ -47,16 +44,14 @@ class _AlertSheetDemoState extends State<AlertSheetDemo> with BottomSheetMixin {
 4、修复一些软件在使用时自动退出bug;
 """;
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black.withOpacity(0.05),
+        backgroundColor: Colors.black.withOpacity(0.05),
         appBar: AppBar(
           title: Text("$widget"),
         ),
-        body: buildWrap()
-    );
+        body: buildWrap());
   }
 
   Wrap buildWrap() {
@@ -64,15 +59,17 @@ class _AlertSheetDemoState extends State<AlertSheetDemo> with BottomSheetMixin {
       spacing: 8.0, // 主轴(水平)方向间距
       runSpacing: 8.0, // 纵轴（垂直）方向间距
       alignment: WrapAlignment.start, //沿主轴方向居中
-        children: items.map((e) => ActionChip(
-          avatar: CircleAvatar(backgroundColor: Theme.of(context).primaryColor,
-              child: Text(e.$1.characters.first.toUpperCase())
-          ),
-          label: Text(e.$1),
-          onPressed: (){
-            e.$2();
-          },
-        )).toList(),
+      children: items
+          .map((e) => ActionChip(
+                avatar: CircleAvatar(
+                    backgroundColor: Theme.of(context).primaryColor,
+                    child: Text(e.$1.characters.first.toUpperCase())),
+                label: Text(e.$1),
+                onPressed: () {
+                  e.$2();
+                },
+              ))
+          .toList(),
     );
   }
 
@@ -89,13 +86,22 @@ class _AlertSheetDemoState extends State<AlertSheetDemo> with BottomSheetMixin {
       actionScrollController: actionScrollController,
       title: title,
       message: message,
-      actions: actions ?? ["选择 1", "选择 2", "选择 3",].map((e) => CupertinoActionSheetAction(
-        onPressed: () {
-          ddlog(e);
-          Navigator.pop(context);
-        },
-        child: Text(e),
-      ),).toList(),
+      actions: actions ??
+          [
+            "选择 1",
+            "选择 2",
+            "选择 3",
+          ]
+              .map(
+                (e) => CupertinoActionSheetAction(
+                  onPressed: () {
+                    ddlog(e);
+                    Navigator.pop(context);
+                  },
+                  child: Text(e),
+                ),
+              )
+              .toList(),
       cancelButton: CupertinoActionSheetAction(
         isDestructiveAction: true,
         onPressed: () {
@@ -124,12 +130,12 @@ class _AlertSheetDemoState extends State<AlertSheetDemo> with BottomSheetMixin {
       ),
     ).toShowCupertinoModalPopup(context: context);
   }
-  
+
   void presentBottomSheetMixin() {
     presentBottomSheet(
         context: context,
         title: title,
-        onConfirm: (){
+        onConfirm: () {
           debugPrint("确定");
           Navigator.of(context).pop();
         },
@@ -144,14 +150,20 @@ class _AlertSheetDemoState extends State<AlertSheetDemo> with BottomSheetMixin {
                 ),
                 ...titles.map((e) {
                   return InkWell(
-                    onTap: (){
+                    onTap: () {
                       debugPrint("${DateTime.now()}: $e");
                     },
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        ListTile(title: Text(e),),
-                        Divider(height: 1, indent: 15, endIndent: 15,),
+                        ListTile(
+                          title: Text(e),
+                        ),
+                        Divider(
+                          height: 1,
+                          indent: 15,
+                          endIndent: 15,
+                        ),
                       ],
                     ),
                   );
@@ -159,18 +171,15 @@ class _AlertSheetDemoState extends State<AlertSheetDemo> with BottomSheetMixin {
               ],
             ),
           ),
-        )
-    );
+        ));
   }
 
   void presentSingle() {
     _showChioceList(isMutiple: false);
-
   }
 
   void presentMutiple() {
     _showChioceList(isMutiple: true);
-
   }
 
   void presentSearcgPage() {
@@ -194,120 +203,114 @@ class _AlertSheetDemoState extends State<AlertSheetDemo> with BottomSheetMixin {
     );
   }
 
-
-
   presentAlertSheetListTile() {
-      final actions = [
-        ListTile(
-          leading: Icon(Icons.add),
-          title: Text('Add account'),
-          trailing: Icon(Icons.check),
-          onTap: () {
-            ddlog("account");
-            Navigator.pop(context);
+    final actions = [
+      ListTile(
+        leading: Icon(Icons.add),
+        title: Text('Add account'),
+        trailing: Icon(Icons.check),
+        onTap: () {
+          ddlog("account");
+          Navigator.pop(context);
+        },
+      ),
+      ListTile(
+        leading: Icon(Icons.settings),
+        title: Text('Manage accounts'),
+        onTap: () {
+          ddlog("accounts");
+          Navigator.pop(context);
+        },
+      ),
+      ListTile(
+        leading: Icon(Icons.person),
+        title: Text(
+          "Your Profile",
+        ),
+        onTap: () {
+          ddlog("Profile");
+          Navigator.pop(context);
+        },
+      ),
+    ];
 
-          },
-        ),
-        ListTile(
-          leading: Icon(Icons.settings),
-          title: Text('Manage accounts'),
-          onTap: () {
-            ddlog("accounts");
-            Navigator.pop(context);
-          },
-        ),
-        ListTile(
-          leading: Icon(Icons.person),
-          title: Text(
-            "Your Profile",
-          ),
-          onTap: () {
-            ddlog("Profile");
-            Navigator.pop(context);
-          },
-        ),
-      ];
-
-      CupertinoActionSheet(
-        title: Text(title),
-        message: Text(message, textAlign: TextAlign.left,),
-        actions: [
-          Material(
-            type: MaterialType.canvas,
-            elevation: 0,
-            borderOnForeground: true,
-            clipBehavior: Clip.none,
-            animationDuration: kThemeChangeDuration,
-            child: ColoredBox(
-              color: Colors.black.withAlpha(10),
-              child: Column(
-                children: actions,
-              ),
+    CupertinoActionSheet(
+      title: Text(title),
+      message: Text(
+        message,
+        textAlign: TextAlign.left,
+      ),
+      actions: [
+        Material(
+          type: MaterialType.canvas,
+          elevation: 0,
+          borderOnForeground: true,
+          clipBehavior: Clip.none,
+          animationDuration: kThemeChangeDuration,
+          child: ColoredBox(
+            color: Colors.black.withAlpha(10),
+            child: Column(
+              children: actions,
             ),
           ),
-        ],
-        cancelButton: CupertinoActionSheetAction(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: Text('取消'),
         ),
-      ).toShowCupertinoModalPopup(context: context);
-    }
+      ],
+      cancelButton: CupertinoActionSheetAction(
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        child: Text('取消'),
+      ),
+    ).toShowCupertinoModalPopup(context: context);
+  }
 
-  _showChioceList({required bool isMutiple}){
-
-      CupertinoActionSheet(
-        title: Text(title, style: TextStyle(fontSize: 18, color: Colors.black)),
-        message: Text(message, textAlign: TextAlign.start,),
-        actions: [
-          ChioceList(
-            isMutiple: isMutiple,
-            backgroudColor: Colors.black.withAlpha(5),
-            children: payTypes,
-            indexs: [1],
-            canScroll: false,
-            callback: (indexs) {
-              ddlog([indexs.runtimeType, indexs]);
-            },
-          ),
-        ],
-        cancelButton: CupertinoActionSheetAction(
-          onPressed: () {
-            Navigator.pop(context);
+  _showChioceList({required bool isMutiple}) {
+    CupertinoActionSheet(
+      title: Text(title, style: TextStyle(fontSize: 18, color: Colors.black)),
+      message: Text(
+        message,
+        textAlign: TextAlign.start,
+      ),
+      actions: [
+        ChioceList(
+          isMutiple: isMutiple,
+          backgroudColor: Colors.black.withAlpha(5),
+          children: payTypes,
+          indexs: [1],
+          canScroll: false,
+          callback: (indexs) {
+            ddlog([indexs.runtimeType, indexs]);
           },
-          child: Text('取消'),
         ),
-      )
-          .toShowCupertinoModalPopup(context: context)
-      ;
-    }
+      ],
+      cancelButton: CupertinoActionSheetAction(
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        child: Text('取消'),
+      ),
+    ).toShowCupertinoModalPopup(context: context);
+  }
 
   /// 开处方
   onSendRecipel() {
-    onItem (){
+    onItem() {
       debugPrint("onItem");
     }
+
     IMRecipleBottomSheet(
       onWestMedicine: onItem,
       onJC: onItem,
       onMedicalAppliancee: onItem,
       onChineseMedicinee: onItem,
-      onBefore: (index) {
-
-      },
+      onBefore: (index) {},
     ).toShowModalBottomSheet(
       context: context,
       backgroundColor: Colors.white70,
       barrierColor: Colors.transparent,
     );
   }
-
-
-
 }
-
-
 
 ///单选列表
 class RadioListChooseNewWidget extends StatefulWidget {
@@ -316,12 +319,11 @@ class RadioListChooseNewWidget extends StatefulWidget {
   Object? selectedIndex = 0;
 
   @override
-  _RadioListChooseNewWidgetState createState() => _RadioListChooseNewWidgetState();
+  _RadioListChooseNewWidgetState createState() =>
+      _RadioListChooseNewWidgetState();
 }
 
-
 class _RadioListChooseNewWidgetState extends State<RadioListChooseNewWidget> {
-
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -356,19 +358,19 @@ class _RadioListChooseNewWidgetState extends State<RadioListChooseNewWidget> {
     );
   }
 
-  void _changeValue(Object? value){
+  void _changeValue(Object? value) {
     setState(() {
       widget.selectedIndex = value;
     });
   }
 }
 
-
 ///单选菜单
 class RadioTileSexWidget extends StatefulWidget {
   Object selectedIndex = 0;
 
-  RadioTileSexWidget({Key? key,
+  RadioTileSexWidget({
+    Key? key,
     required this.selectedIndex,
   }) : super(key: key);
 
@@ -376,9 +378,7 @@ class RadioTileSexWidget extends StatefulWidget {
   _RadioTileSexWidgetState createState() => _RadioTileSexWidgetState();
 }
 
-
 class _RadioTileSexWidgetState extends State<RadioTileSexWidget> {
-
   @override
   void initState() {
     // TODO: implement initState
@@ -425,8 +425,8 @@ class _RadioTileSexWidgetState extends State<RadioTileSexWidget> {
     );
   }
 
-  void _changeValue(Object? value){
-    if (value == null){
+  void _changeValue(Object? value) {
+    if (value == null) {
       return;
     }
     setState(() {
@@ -441,9 +441,10 @@ final payTypes = <Tuple4<String, String, Widget, bool>>[
   Tuple4("微信支付", "微信支付，不止支付", Icon(Icons.camera), false),
   Tuple4("阿里支付", "支付就用支付宝", Icon(Icons.palette), false),
   Tuple4("银联支付", "不打开APP就支付", Icon(Icons.payment), false),
-].map((e) => ChioceDataModel(
-    title: Text(e.item1),
-    subtitle: Text(e.item2),
-    secondary: e.item3,
-    selected: e.item4
-)).toList();
+]
+    .map((e) => ChioceDataModel(
+        title: Text(e.item1),
+        subtitle: Text(e.item2),
+        secondary: e.item3,
+        selected: e.item4))
+    .toList();
