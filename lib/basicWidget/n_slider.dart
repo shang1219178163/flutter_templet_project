@@ -8,13 +8,12 @@
 
 import 'package:flutter/material.dart';
 
-typedef ValueChangedWidgetBuilder<T> = Widget Function(BuildContext context, T value);
+typedef ValueWidgetBuilder<T> = Widget Function(BuildContext context, T value);
 
 /// 自定义 Slider 组件封住，增加首尾组件，尾部组件实时显示当前数值；
 class NSlider extends StatefulWidget {
-
   NSlider({
-    Key? key, 
+    Key? key,
     this.title,
     this.leading,
     this.trailingBuilder,
@@ -38,7 +37,7 @@ class NSlider extends StatefulWidget {
   String? title;
   Widget? leading;
 
-  ValueChangedWidgetBuilder<double>? trailingBuilder;
+  ValueWidgetBuilder<double>? trailingBuilder;
 
   ValueChanged<double>? onChanged;
 
@@ -75,7 +74,6 @@ class NSlider extends StatefulWidget {
 }
 
 class _NSliderState extends State<NSlider> {
-
   var sliderVN = ValueNotifier(0.0);
 
   @override
@@ -95,45 +93,45 @@ class _NSliderState extends State<NSlider> {
       children: [
         if (widget.leading != null) widget.leading!,
         Expanded(
-          child: StatefulBuilder(
-            builder: (context, setState) {
-              return Slider(
-                value: sliderVN.value,
-                onChanged: (double value) {
-                  sliderVN.value = value;
-                  widget.onChanged?.call(value);
-                  setState(() {});
-                },
-                onChangeStart: widget.onChangeStart,
-                onChangeEnd: widget.onChangeEnd,
-                min: widget.min,
-                max: widget.max,
-                divisions: widget.divisions,
-                label: widget.label,
-                activeColor: widget.activeColor,
-                inactiveColor: widget.inactiveColor,
-                thumbColor: widget.thumbColor,
-                mouseCursor: widget.mouseCursor,
-                semanticFormatterCallback: widget.semanticFormatterCallback,
-                focusNode: widget.focusNode,
-                autofocus: widget.autofocus,
-              );
-            }
-          ),
+          child: StatefulBuilder(builder: (context, setState) {
+            return Slider(
+              value: sliderVN.value,
+              onChanged: (double value) {
+                sliderVN.value = value;
+                widget.onChanged?.call(value);
+                setState(() {});
+              },
+              onChangeStart: widget.onChangeStart,
+              onChangeEnd: widget.onChangeEnd,
+              min: widget.min,
+              max: widget.max,
+              divisions: widget.divisions,
+              label: widget.label,
+              activeColor: widget.activeColor,
+              inactiveColor: widget.inactiveColor,
+              thumbColor: widget.thumbColor,
+              mouseCursor: widget.mouseCursor,
+              semanticFormatterCallback: widget.semanticFormatterCallback,
+              focusNode: widget.focusNode,
+              autofocus: widget.autofocus,
+            );
+          }),
         ),
         ValueListenableBuilder<double>(
-          valueListenable: sliderVN,
-          builder: (context, value, child) {
-
-            final result = widget.max > 1 ? value.toStringAsFixed(0) : value.toStringAsFixed(2);
-            return widget.trailingBuilder?.call(context, value) ?? TextButton(
-              onPressed: () { debugPrint(result); },
-              child: Text(result),
-            );
-          }
-        ),
+            valueListenable: sliderVN,
+            builder: (context, value, child) {
+              final result = widget.max > 1
+                  ? value.toStringAsFixed(0)
+                  : value.toStringAsFixed(2);
+              return widget.trailingBuilder?.call(context, value) ??
+                  TextButton(
+                    onPressed: () {
+                      debugPrint(result);
+                    },
+                    child: Text(result),
+                  );
+            }),
       ],
     );
   }
 }
-
