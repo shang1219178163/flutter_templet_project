@@ -192,6 +192,7 @@ dependencies:
   isar: ^3.1.0+1
   isar_flutter_libs: ^3.1.0+1
 
+  # 含 LruMap
   quiver: ^3.2.1
 
 #  User:
