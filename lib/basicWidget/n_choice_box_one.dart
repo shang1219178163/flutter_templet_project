@@ -8,6 +8,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_indicator_point.dart';
+import 'package:flutter_templet_project/extension/color_ext.dart';
 
 typedef ChoiceSelectedType<T> = void Function(T e, bool selected);
 
@@ -30,6 +31,8 @@ class NChoiceBoxOne<T> extends StatefulWidget {
     this.avatarSeleted,
     this.style,
     this.styleSeleted,
+    this.backgroundColor = Colors.transparent,
+    this.selectedColor = Colors.transparent,
   });
 
   final List<T> items;
@@ -56,6 +59,10 @@ class NChoiceBoxOne<T> extends StatefulWidget {
 
   final TextStyle? style;
   final TextStyle? styleSeleted;
+
+  /// 背景颜色
+  final Color backgroundColor;
+  final Color selectedColor;
 
   @override
   State<NChoiceBoxOne<T>> createState() => _NChoiceBoxOneState<T>();
@@ -112,8 +119,8 @@ class _NChoiceBoxOneState<T> extends State<NChoiceBoxOne<T>> {
               alignment: Alignment.centerLeft,
               child: ChipTheme(
                 data: ChipTheme.of(context).copyWith(
-                  backgroundColor: Colors.transparent,
-                  selectedColor: Colors.transparent,
+                  backgroundColor: widget.backgroundColor ?? Colors.transparent,
+                  selectedColor: widget.selectedColor ?? Colors.transparent,
                   elevation: 0,
                   pressElevation: 0,
                   showCheckmark: false,

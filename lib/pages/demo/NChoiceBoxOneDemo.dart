@@ -98,14 +98,14 @@ class _NChoiceBoxOneDemoState extends State<NChoiceBoxOneDemo> {
                   debugPrint(
                       "重置 selectedTagModelsTmp: ${selectedTags.map((e) => e.name).toList()}");
                 },
-                itemBuilder: (e, isSelected) {
-                  return buildItem(
-                    e: e,
-                    isSelected: isSelected,
-                    titleCb: (e) => e.name ?? "",
-                    primaryColor: Colors.blue,
-                  );
-                },
+                // itemBuilder: (e, isSelected) {
+                //   return buildItem(
+                //     e: e,
+                //     isSelected: isSelected,
+                //     titleCb: (e) => e.name ?? "",
+                //     primaryColor: Colors.blue,
+                //   );
+                // },
               ),
             ),
             NSectionHeader(
@@ -146,6 +146,8 @@ class _NChoiceBoxOneDemoState extends State<NChoiceBoxOneDemo> {
       seletedItem: rpItemCurrent,
       itemNameCb: (e) => e.item1,
       primaryColor: context.primaryColor,
+      backgroundColor: Colors.white,
+      selectedColor: Colors.white,
       styleSeleted: TextStyle(
         color: context.primaryColor,
         fontSize: 15,

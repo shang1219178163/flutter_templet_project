@@ -117,22 +117,22 @@ class _NChoiceBoxState<T> extends State<NChoiceBox<T>> {
         pressElevation: 0,
         showCheckmark: false,
         padding: EdgeInsets.zero,
+        labelPadding: EdgeInsets.symmetric(horizontal: 6),
       ),
       child: ChoiceChip(
         label: Text(
           e.title,
           style: TextStyle(
-            color: e.isSelected ? Colors.white : fontColor.withOpacity(0.8),
+            color: e.isSelected
+                ? widget.itemSelectedColor
+                : fontColor.withOpacity(0.8),
             fontSize: 14,
+            fontWeight: FontWeight.w400,
           ),
         ),
-        labelPadding: EdgeInsets.symmetric(horizontal: 6),
         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
         selected: e.isSelected,
-        selectedColor: widget.itemSelectedColor,
-        // backgroundColor: widget.itemColor,
-        backgroundColor:
-            e.isSelected ? widget.itemSelectedColor : Color(0xffF3F3F3),
+        selectedColor: widget.itemSelectedColor.withOpacity(0.1),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(
             Radius.circular(widget.itemRadius),
