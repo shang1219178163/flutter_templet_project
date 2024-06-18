@@ -110,21 +110,17 @@ class _NChoiceBoxOneState<T> extends State<NChoiceBoxOne<T>> {
             return Container(
               width: itemWidth - 1,
               alignment: Alignment.centerLeft,
-              child: Theme(
-                // data: ThemeData(canvasColor: widget.itemColor),
-                data: ThemeData(
-                  canvasColor: Colors.transparent,
-                  // canvasColor: Colors.green,
-                  highlightColor: Colors.white,
-                  hoverColor: Colors.white,
-                  focusColor: Colors.white,
+              child: ChipTheme(
+                data: ChipTheme.of(context).copyWith(
+                  backgroundColor: Colors.transparent,
+                  selectedColor: Colors.transparent,
+                  elevation: 0,
+                  pressElevation: 0,
+                  showCheckmark: false,
+                  padding: EdgeInsets.zero,
                 ),
                 child: ChoiceChip(
                   materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  backgroundColor: Colors.transparent,
-                  selectedColor: Colors.transparent,
-                  pressElevation: 0,
-                  showCheckmark: false,
                   side: BorderSide(color: Colors.transparent),
                   label: Row(
                     mainAxisSize: MainAxisSize.min,
@@ -143,8 +139,6 @@ class _NChoiceBoxOneState<T> extends State<NChoiceBoxOne<T>> {
                       ),
                     ],
                   ),
-                  // padding: EdgeInsets.only(left: 8, right: 8),
-                  padding: EdgeInsets.zero,
                   selected: isSelected,
                   onSelected: (bool selected) {
                     // debugPrint("e: $selected,  $e");
