@@ -6,6 +6,8 @@
 //  Copyright © 10/26/21 shang. All rights reserved.
 //
 
+//Cronet https://juejin.cn/post/7358647510518497307
+
 import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
@@ -56,6 +58,7 @@ class RequestManager extends BaseRequestAPI {
   // Dio _dio = Dio();
   Dio getDio(BaseRequestAPI? api) {
     var dio = Dio();
+    // dio.httpClientAdapter = NativeAdapter();//支持 Cronet
 
     var options = BaseOptions();
     options.baseUrl = RequestConfig.baseUrl;
