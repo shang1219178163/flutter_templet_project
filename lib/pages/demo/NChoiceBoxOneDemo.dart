@@ -31,7 +31,7 @@ class _NChoiceBoxOneDemoState extends State<NChoiceBoxOneDemo> {
     Tuple3('中药', RpType.CHINESE_MEDICINE.name, "+添加药品"),
   ];
 
-  late Tuple3<String, String, String> rpItemCurrent = rpItems[0];
+  late final rpItemCurrent = ValueNotifier(rpItems[0]);
 
   final canChange = false;
 
@@ -142,42 +142,37 @@ class _NChoiceBoxOneDemoState extends State<NChoiceBoxOneDemo> {
   /// 模板类型
   Widget buildRpTypeBox() {
     Widget content = NChoiceBoxOne<Tuple3<String, String, String>>(
-        items: rpItems,
-        seletedItem: rpItemCurrent,
-        primaryColor: context.primaryColor,
-        styleSeleted: TextStyle(
-          color: context.primaryColor,
-          fontSize: 15,
-        ),
-        canChanged: (val, onSelect) {
-          if (rpItemCurrent == val) {
-            return false;
-          }
-          if (!canChange) {
-            DeleteAlert().show(
-              context,
-              scrollController: ScrollController(),
-              title: "提示",
-              message: "切换模板种类会清空已选中的药品，是否确认切换?",
-              onConfirm: () async {
-                Navigator.of(context).pop();
-                onSelect(val, true);
-                rpItemCurrent = val;
-              },
-            );
-          }
-          return canChange;
-        },
-        onChanged: (val) {
-          // debugPrint("NChoiceBoxOne e: $val");
-          if (rpItemCurrent == val) {
-            return;
-          }
-          if (val is! Tuple3<String, String, String>) {
-            return;
-          }
-          rpItemCurrent = val;
-        });
+      items: rpItems,
+      seletedItem: rpItemCurrent,
+      itemNameCb: (e) => e.item1,
+      primaryColor: context.primaryColor,
+      styleSeleted: TextStyle(
+        color: context.primaryColor,
+        fontSize: 15,
+      ),
+      canChanged: (val, onSelect) {
+        if (rpItemCurrent.value == val) {
+          return false;
+        }
+        if (!canChange) {
+          DeleteAlert().show(
+            context,
+            scrollController: ScrollController(),
+            title: "提示",
+            message: "切换模板种类会清空已选中的药品，是否确认切换?",
+            onConfirm: () async {
+              Navigator.of(context).pop();
+              onSelect(val, true);
+            },
+          );
+        }
+        return canChange;
+      },
+      // onChanged: (val) {
+      //   YLog.d("onChanged: ${val.title},${val.value}");
+      //   // rpItemCurrent.value = val;
+      // },
+    );
 
     return buildItemHeader(
       title: '模版类型',

@@ -32,7 +32,6 @@ class ChipDemo extends StatefulWidget {
 }
 
 class _ChipDemoState extends State<ChipDemo> with CupertinoAlertDialogMixin {
-
   final tuples = List.generate(9, (i) => (i, "选择$i")).toList();
 
   final tuplesNew = List.generate(9, (i) => Tuple2(i, "选择$i")).toList();
@@ -56,12 +55,10 @@ class _ChipDemoState extends State<ChipDemo> with CupertinoAlertDialogMixin {
     const Tuple2('中药', "CHINESE_MEDICINE"),
   ];
 
-  // late Tuple2<String, String> rpValue = items[0];
-  var rpTypeIndex = 0;
-
+  late final itemCurrent = ValueNotifier(items[0]);
 
   Widget buildWrap({double spacing = 8.0, double runSpacing = 8.0}) {
-    var titles = List<int>.generate(4, (index) => index);
+    var titles = List<int>.generate(3, (index) => index);
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -78,19 +75,22 @@ class _ChipDemoState extends State<ChipDemo> with CupertinoAlertDialogMixin {
                   label: Text("99+"),
                   backgroundColor: Colors.red,
                   child: Chip(
-                    label: Text("Chip",),
+                    label: Text(
+                      "Chip",
+                    ),
                   ),
                 ),
                 Chip(
-                  label: Text("Chip",),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                  )
-                ),
+                    label: Text(
+                      "Chip",
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    )),
                 Chip(
                   labelPadding: EdgeInsets.symmetric(horizontal: 8),
                   label: Text(
-                    "带 deleteIcon的 Chip${'一二三四五六七八九十'.substring(0, 9)*2}",
+                    "带 deleteIcon的 Chip${'一二三四五六七八九十'.substring(0, 9) * 2}",
                     maxLines: 2,
                     softWrap: true,
                     // overflow: TextOverflow.ellipsis,
@@ -103,9 +103,13 @@ class _ChipDemoState extends State<ChipDemo> with CupertinoAlertDialogMixin {
                   // deleteButtonTooltipMessage: "弹出提示",
                 ),
                 Chip(
-                  label: Text("带 avatar 和 deleteIcon的 Chip",),
+                  label: Text(
+                    "带 avatar 和 deleteIcon的 Chip",
+                  ),
                   avatar: Image.asset("avatar.png".toPath(), fit: BoxFit.fill),
-                  deleteIcon: Icon(Icons.cancel,),
+                  deleteIcon: Icon(
+                    Icons.cancel,
+                  ),
                   onDeleted: () {
                     ddlog("onDeleted:带 avatar 和 deleteIcon的 Chip");
                     setState(() {});
@@ -113,8 +117,12 @@ class _ChipDemoState extends State<ChipDemo> with CupertinoAlertDialogMixin {
                 ),
                 Chip(
                   avatar: InkWell(
-                    onTap: () { ddlog("onTap:Chip"); },
-                    child: Icon(Icons.add_circle,),
+                    onTap: () {
+                      ddlog("onTap:Chip");
+                    },
+                    child: Icon(
+                      Icons.add_circle,
+                    ),
                   ),
                   // avatar: IconButton(
                   //   onPressed: () { setState(() { ddlog("add"); } ); },
@@ -125,7 +133,7 @@ class _ChipDemoState extends State<ChipDemo> with CupertinoAlertDialogMixin {
                   deleteIcon: Icon(Icons.remove_circle),
                   onDeleted: () {
                     ddlog("onDeleted:Chip");
-                    setState(() {  } );
+                    setState(() {});
                   },
                 ),
               ],
@@ -140,22 +148,30 @@ class _ChipDemoState extends State<ChipDemo> with CupertinoAlertDialogMixin {
               alignment: WrapAlignment.start, //沿主轴方向居中
               children: [
                 RawChip(
-                  label: Text("RawChip",),
+                  label: Text(
+                    "RawChip",
+                  ),
                   avatar: Image.asset("avatar.png".toPath(), fit: BoxFit.fill),
                   padding: EdgeInsets.all(0),
-                  onPressed: (){
+                  onPressed: () {
                     ddlog("onPressed: RawChip");
                   },
-                  deleteIcon: Icon( Icons.close, ),
-                  onDeleted: (){
+                  deleteIcon: Icon(
+                    Icons.close,
+                  ),
+                  onDeleted: () {
                     ddlog("onDeleted: RawChip");
                   },
                 ),
                 RawChip(
-                  label: Text("RawChip",),
-                  avatar: Icon( Icons.close, ),
+                  label: Text(
+                    "RawChip",
+                  ),
+                  avatar: Icon(
+                    Icons.close,
+                  ),
                   padding: EdgeInsets.all(0),
-                  onPressed: (){
+                  onPressed: () {
                     ddlog("onPressed: RawChip");
                   },
                 ),
@@ -174,35 +190,39 @@ class _ChipDemoState extends State<ChipDemo> with CupertinoAlertDialogMixin {
                   spacing: spacing,
                   runSpacing: runSpacing,
                   alignment: WrapAlignment.start, //沿主轴方向居中
-                  children: titles.map((e) => ActionChip(
-                    avatar: CircleAvatar(
-                        backgroundColor: Theme.of(context).primaryColor,
-                        child: Text(e.toString().characters.first.toUpperCase())
-                    ),
-                    label: Text("Action_$e"),
-                    onPressed: (){
-                      _onPressed(titles.indexOf(e));
-                    },
-                  )).toList(),
+                  children: titles
+                      .map((e) => ActionChip(
+                            avatar: CircleAvatar(
+                                backgroundColor: Theme.of(context).primaryColor,
+                                child: Text(e
+                                    .toString()
+                                    .characters
+                                    .first
+                                    .toUpperCase())),
+                            label: Text("Action_$e"),
+                            onPressed: () {
+                              _onPressed(titles.indexOf(e));
+                            },
+                          ))
+                      .toList(),
                 ),
               ],
             ),
           ),
           NChoiceBoxOne<Tuple2<String, String>>(
             items: items,
-            seletedItem: items[rpTypeIndex],
+            seletedItem: itemCurrent,
+            itemNameCb: (e) => e.item1,
             // numPerRow: 3,
             primaryColor: Colors.red,
-            style: TextStyle(
-              color: Colors.black87
-            ),
+            style: TextStyle(color: Colors.black87),
             styleSeleted: TextStyle(
-                color: Colors.red,
+              color: Colors.red,
             ),
             canChanged: (e, onSelect) => true,
-            onChanged: (e){
+            onChanged: (e) {
               debugPrint("NChoiceBoxOne e: $e");
-            }
+            },
           ),
           buildTagManager(),
           buildTagManagerNew(),
@@ -216,16 +236,20 @@ class _ChipDemoState extends State<ChipDemo> with CupertinoAlertDialogMixin {
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: titles.map((e) => ChoiceChip(
-                    label: Text('Choice_$e'),
-                    // padding: EdgeInsets.only(left: 8, right: 8),
-                    selected: _value == e,
-                    onSelected: (bool selected) {
-                      ddlog(e);
-                      _value = selected ? e : null;
-                      setState(() {});
-                    },
-                  ),).toList(),
+                  children: titles
+                      .map(
+                        (e) => ChoiceChip(
+                          label: Text('Choice_$e'),
+                          // padding: EdgeInsets.only(left: 8, right: 8),
+                          selected: _value == e,
+                          onSelected: (bool selected) {
+                            ddlog(e);
+                            _value = selected ? e : null;
+                            setState(() {});
+                          },
+                        ),
+                      )
+                      .toList(),
                 ),
                 Divider(),
                 Row(
@@ -261,23 +285,23 @@ class _ChipDemoState extends State<ChipDemo> with CupertinoAlertDialogMixin {
               alignment: WrapAlignment.start, //沿主轴方向居中
               children: [
                 InputChip(
-                    avatar: CircleAvatar(
-                      backgroundColor: Colors.grey.shade800,
-                      child: const Text('IC'),
-                    ),
-                    label: const Text('InputChip'),
-                    onPressed: () {
-                      debugPrint('onPressed: InputChip');
-                    }
+                  avatar: CircleAvatar(
+                    backgroundColor: Colors.grey.shade800,
+                    child: const Text('IC'),
+                  ),
+                  label: const Text('InputChip'),
+                  onPressed: () {
+                    debugPrint('onPressed: InputChip');
+                  },
                 ),
               ],
             ),
           ),
           FilterChip(
             label: Text('FilterChip'),
-            onSelected: (val){
+            onSelected: (val) {
               debugPrint('onSelected: $val');
-            }
+            },
           ),
         ],
       ),
@@ -294,28 +318,25 @@ class _ChipDemoState extends State<ChipDemo> with CupertinoAlertDialogMixin {
       title: "NTagBox",
       crossAxisAlignment: CrossAxisAlignment.start,
       child: StatefulBuilder(
-        builder: (BuildContext context, StateSetter setState) {
-
-          return NTagBox<(int, String)>(
+          builder: (BuildContext context, StateSetter setState) {
+        return NTagBox<(int, String)>(
             keywords: "初步诊断",
             items: tuples,
             titleCb: (e) => e.$2,
             onDelete: (e) {
               tuples.remove(e);
-              setState((){});
+              setState(() {});
             },
-            onAdd: (){
+            onAdd: () {
               final id = IntExt.random(max: 100);
               tuples.add((id, "选择$id"));
-              setState((){});
+              setState(() {});
             },
-            onChanged: (items){
+            onChanged: (items) {
               final titles = items.map((e) => e.$2).toList();
               debugPrint(titles.join(","));
-            }
-          );
-        }
-      ),
+            });
+      }),
     );
   }
 
@@ -325,37 +346,33 @@ class _ChipDemoState extends State<ChipDemo> with CupertinoAlertDialogMixin {
       title: "NTagBoxNew",
       crossAxisAlignment: CrossAxisAlignment.start,
       child: NTagBoxNew<(int, String)>(
-        keywords: "初步诊断",
-        items: tuples,
-        titleCb: (e) => e.$2,
-        canDelete: (e, onDelete) {
-          final index = tuples.indexOf(e);
-          if (index % 2 != 0) {
-            presentAlert(
-              titleStr: "提示",
-              contentStr: "确定删除$e",
-              onConfirm: (){
-                onDelete(e);
-              }
-            );
-            return false;
-          }
-          return true;
-        },
-        onAdd: (){
-          final id = IntExt.random(max: 100);
-          tuples.add((id, "选择$id"));
-        },
-        onChanged: (items){
-          final titles = items.map((e) => e.$2).toList();
-          debugPrint(titles.join(","));
-        }
-    ),
+          keywords: "初步诊断",
+          items: tuples,
+          titleCb: (e) => e.$2,
+          canDelete: (e, onDelete) {
+            final index = tuples.indexOf(e);
+            if (index % 2 != 0) {
+              presentAlert(
+                  titleStr: "提示",
+                  contentStr: "确定删除$e",
+                  onConfirm: () {
+                    onDelete(e);
+                  });
+              return false;
+            }
+            return true;
+          },
+          onAdd: () {
+            final id = IntExt.random(max: 100);
+            tuples.add((id, "选择$id"));
+          },
+          onChanged: (items) {
+            final titles = items.map((e) => e.$2).toList();
+            debugPrint(titles.join(","));
+          }),
     );
   }
 }
-
-
 
 class ActorFilterEntry {
   const ActorFilterEntry(this.name, this.initials);
