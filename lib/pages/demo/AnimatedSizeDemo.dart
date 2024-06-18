@@ -1,13 +1,7 @@
-
-
 import 'package:flutter/material.dart';
 
 class AnimatedSizeDemo extends StatefulWidget {
-
-  AnimatedSizeDemo({
-    Key? key, 
-    this.title
-  }) : super(key: key);
+  AnimatedSizeDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -40,32 +34,39 @@ class _AnimatedSizeDemoState extends State<AnimatedSizeDemo> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () => debugPrint(e),)
-        ).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () => debugPrint(e),
+                ))
+            .toList(),
       ),
       body: buildBody(),
     );
   }
 
   Widget buildBody() {
-    return GestureDetector(
-      onTap: () => _updateSize(),
-      child: ColoredBox(
-        color: Colors.amberAccent,
-        child: AnimatedSize(
-          curve: Curves.easeIn,
-          duration: const Duration(seconds: 1),
-          child: FlutterLogo(size: _size),
+    return Column(
+      children: [
+        GestureDetector(
+          onTap: () => _updateSize(),
+          child: ColoredBox(
+            color: Colors.amberAccent,
+            child: AnimatedSize(
+              curve: Curves.easeIn,
+              duration: const Duration(seconds: 1),
+              child: FlutterLogo(
+                size: _size,
+              ),
+            ),
+          ),
         ),
-      ),
+      ],
     );
   }
-
 }
-
-
-
