@@ -1,9 +1,6 @@
-
-
 /// 文件类型
-enum IMFileType{
-  // unknow("icon_file_word.png"),
-
+enum IMFileType {
+  unknow("icon_file_word.png"),
   docx("icon_file_word.png"),
   doc("icon_file_word.png"),
   xls("icon_file_excel.png.png"),
@@ -15,5 +12,4 @@ enum IMFileType{
   const IMFileType(this.iconName);
 
   final String iconName;
-
 }

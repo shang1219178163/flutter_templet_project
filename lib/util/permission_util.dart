@@ -237,4 +237,20 @@ class PermissionUtil {
     );
   }
 
+  /// (文档)文件权限
+  static Future<bool> checkDocument() async {
+    if (Platform.isIOS) {
+      return true;
+    }
+    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+    AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+    int sdkInt = androidInfo.version.sdkInt;
+    Permission permission =
+    sdkInt < 33 ? Permission.storage : Permission.photos;
+    return check(
+      permission: permission,
+      name: '文件',
+    );
+  }
+
 }
