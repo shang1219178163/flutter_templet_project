@@ -1,14 +1,8 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_webview_page.dart';
 
 class NWebViewDemo extends StatefulWidget {
-
-  NWebViewDemo({
-    super.key,
-    this.title
-  });
+  NWebViewDemo({super.key, this.title});
 
   final String? title;
 
@@ -17,7 +11,6 @@ class NWebViewDemo extends StatefulWidget {
 }
 
 class _NWebViewDemoState extends State<NWebViewDemo> {
-
   final initialUrl = 'https://flutter.dev';
 
   @override
@@ -38,9 +31,8 @@ class _NWebViewDemoState extends State<NWebViewDemo> {
 
   buildBody() {
     return NWebViewPage(
-      initialUrl: initialUrl,
+      url: initialUrl,
       title: initialUrl,
     );
   }
-
 }

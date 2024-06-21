@@ -16,23 +16,25 @@ import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
 
 /// webview_flutter 简易封装
 class NWebViewPage extends StatefulWidget {
-
   NWebViewPage({
     super.key,
     required this.title,
-    required this.initialUrl,
+    required this.url,
     this.onProgress,
     this.hideAppBar = true,
+    this.errorReloadAgain = true,
   });
-
 
   final String title;
 
-  final String initialUrl;
+  final String url;
 
   final ValueChanged<double>? onProgress;
 
   final bool hideAppBar;
+
+  /// 加载失败多刷一次
+  final bool errorReloadAgain;
 
   @override
   _NWebViewPageState createState() => _NWebViewPageState();
@@ -40,6 +42,8 @@ class NWebViewPage extends StatefulWidget {
 
 class _NWebViewPageState extends State<NWebViewPage> {
   late final WebViewController _controller;
+
+  bool isFirstLoad = true;
 
   String? currentTitle;
 
@@ -64,14 +68,15 @@ class _NWebViewPageState extends State<NWebViewPage> {
       params = const PlatformWebViewControllerCreationParams();
     }
 
-    final controller = WebViewController.fromPlatformCreationParams(params)
+    final controller = WebViewController.fromPlatformCreationParams(params);
+    controller
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setBackgroundColor(const Color(0x00000000))
       ..setNavigationDelegate(
         NavigationDelegate(
           onProgress: (int progress) {
             debugPrint('WebView is loading (progress : $progress%)');
-            progressVN.value = progress/100.0;
+            progressVN.value = progress / 100.0;
             widget.onProgress?.call(progressVN.value);
           },
           onPageStarted: (String url) {
@@ -92,6 +97,13 @@ Page resource error:
   errorType: ${error.errorType}
   isForMainFrame: ${error.isForMainFrame}
           ''');
+            if (widget.errorReloadAgain) {
+              if (isFirstLoad) {
+                _onClearCache(controller: controller);
+                controller.reload();
+                isFirstLoad = false;
+              }
+            }
           },
           onNavigationRequest: (NavigationRequest request) {
             if (request.url.startsWith('https://www.youtube.com/')) {
@@ -117,12 +129,13 @@ Page resource error:
           );
         },
       )
-      ..loadRequest(Uri.parse(widget.initialUrl));
+      ..loadRequest(Uri.parse(widget.url));
 
     // #docregion platform_features
     if (controller.platform is AndroidWebViewController) {
       AndroidWebViewController.enableDebugging(true);
-      (controller.platform as AndroidWebViewController).setMediaPlaybackRequiresUserGesture(false);
+      (controller.platform as AndroidWebViewController)
+          .setMediaPlaybackRequiresUserGesture(false);
     }
     // #enddocregion platform_features
 
@@ -132,30 +145,38 @@ Page resource error:
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: widget.hideAppBar? null : AppBar(
-        title: Text(currentTitle ?? widget.title,),
-        actions: [
-          WebViewNavigationControls(controller: _controller),
-        ],
-      ),
+      appBar: widget.hideAppBar
+          ? null
+          : AppBar(
+              title: Text(
+                currentTitle ?? widget.title,
+              ),
+              actions: [
+                WebViewNavigationControls(controller: _controller),
+              ],
+            ),
       body: Stack(
         children: [
           WebViewWidget(controller: _controller),
           ValueListenableBuilder(
-              valueListenable: progressVN,
-              builder: (context, progress, child){
-
-                return LinearProgressIndicator(
-                  value: progress,
-                  minHeight: 4,
-                  backgroundColor: Colors.transparent,
-                  color: progress >= 1 ? Colors.transparent : Colors.blue,
-                );
-              },
+            valueListenable: progressVN,
+            builder: (context, progress, child) {
+              return LinearProgressIndicator(
+                value: progress,
+                minHeight: 4,
+                backgroundColor: Colors.transparent,
+                color: progress >= 1 ? Colors.transparent : Colors.blue,
+              );
+            },
           ),
         ],
       ),
     );
+  }
+
+  Future<void> _onClearCache({required WebViewController controller}) async {
+    await controller.clearCache();
+    await controller.clearLocalStorage();
   }
 }
 

@@ -1,5 +1,5 @@
 //
-//  WebviewFilePreviewPage.dart
+//  FilePreviewPage.dart
 //  yl_health_app
 //
 //  Created by shang on 2023/9/19 16:24.
@@ -9,6 +9,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:file_preview/file_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_webview_page.dart';
 import 'package:flutter_templet_project/cache/asset_cache_service.dart';
@@ -18,23 +19,27 @@ import 'package:webview_flutter/webview_flutter.dart';
 import 'package:share_plus/share_plus.dart';
 
 /// 网页加载
-class WebviewFilePreviewPage extends StatefulWidget {
-  WebviewFilePreviewPage({
+class FilePreviewPage extends StatefulWidget {
+  FilePreviewPage({
     super.key,
-    required this.url,
+    required this.path,
     this.title,
-  }) : assert(url.startsWith("http"));
+  });
 
-  final String url;
+  final String path;
 
   final String? title;
 
   @override
-  _WebviewFilePreviewPageState createState() => _WebviewFilePreviewPageState();
+  _FilePreviewPageState createState() => _FilePreviewPageState();
 }
 
-class _WebviewFilePreviewPageState extends State<WebviewFilePreviewPage> {
+class _FilePreviewPageState extends State<FilePreviewPage> {
+  final controller = FilePreviewController();
+
   final _progressVN = ValueNotifier(0.0);
+  // 加载
+  bool _isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -72,42 +77,25 @@ class _WebviewFilePreviewPageState extends State<WebviewFilePreviewPage> {
 
   Widget buildBody() {
     return SafeArea(
-      child: NWebViewPage(
-        url: widget.url,
-        title: '',
-        hideAppBar: true,
+      child: FilePreviewWidget(
+        controller: controller,
+        width: double.maxFinite,
+        height: double.maxFinite,
+        path: widget.path,
+        callBack: FilePreviewCallBack(
+          onShow: () {
+            _isLoading = true;
+            setState(() {});
+          },
+          onFail: (code, msg) {
+            ToastUtil.show('文件加载失败');
+          },
+        ),
       ),
     );
   }
 
   onShare() async {
-    var tempDir = await AssetCacheService().getDir();
-    var tmpPath = '${tempDir.path}/${widget.title}';
-
-    final percentVN = ValueNotifier(0.0);
-
-    ToastUtil.loading("文件下载中",
-        indicator: ValueListenableBuilder<double>(
-            valueListenable: percentVN,
-            builder: (context, value, child) {
-              return CircularProgressIndicator(
-                value: value,
-              );
-            }));
-
-    final response = await Dio().download(widget.url, tmpPath,
-        onReceiveProgress: (received, total) {
-      if (total != -1) {
-        final percent = (received / total);
-        final percentStr = "${(percent * 100).toStringAsFixed(0)}%";
-        percentVN.value = percent;
-        debugPrint("percentStr: $percentStr");
-      }
-    });
-    // debugPrint("response: ${response.data}");
-    debugPrint("tmpPath: ${tmpPath}");
-    ToastUtil.hideLoading();
-
-    Share.shareXFiles([XFile(tmpPath)]);
+    Share.shareXFiles([XFile(widget.path)]);
   }
 }
