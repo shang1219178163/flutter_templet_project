@@ -22,6 +22,15 @@ class ToolUtil {
   // 全局获取context
   static get globalContext => navigatorKey.currentState!.overlay!.context;
 
+  // 移除输入框焦点
+  static void removeFocus() {
+    FocusManager.instance.primaryFocus?.unfocus();
+    // 延迟，保证获取到context
+    // Future.delayed(Duration.zero, () {
+    //   FocusScope.of(globalContext).requestFocus(FocusNode());
+    // });
+  }
+
   // 访问外部链接
   static Future<void> openLaunchUrl(String url) async {
     final Uri launchUri = Uri.parse(url);
