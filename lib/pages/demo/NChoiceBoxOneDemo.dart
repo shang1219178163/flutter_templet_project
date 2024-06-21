@@ -143,12 +143,12 @@ class _NChoiceBoxOneDemoState extends State<NChoiceBoxOneDemo> {
   Widget buildRpTypeBox() {
     Widget content = NChoiceBoxOne<Tuple3<String, String, String>>(
       items: rpItems,
-      seletedItem: rpItemCurrent,
+      selectedItem: rpItemCurrent,
       itemNameCb: (e) => e.item1,
       primaryColor: context.primaryColor,
       backgroundColor: Colors.white,
       selectedColor: Colors.white,
-      styleSeleted: TextStyle(
+      styleSelected: TextStyle(
         color: context.primaryColor,
         fontSize: 15,
       ),

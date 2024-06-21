@@ -8,8 +8,6 @@ import 'package:flutter_pickers/time_picker/model/pduration.dart';
 import 'package:flutter_templet_project/extension/date_time_ext.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:tuple/tuple.dart';
 
 // 地址选择器模型
 class AddressPickerModel {
@@ -89,7 +87,7 @@ class FlutterPickerUtil {
       onConfirm: (pDate) {
         final dateTime = DateTime(pDate.year!, pDate.month!, pDate.day!);
         final date = DateTimeExt.stringFromDate(date: dateTime, format: 'Y-D');
-        confirm(pDate, date);
+        confirm(pDate, date!);
       },
     );
   }
@@ -99,15 +97,15 @@ class FlutterPickerUtil {
     String title = '',
     String selectData = '',
     required dynamic dataList,
-    Function(bool)? cancel,
-    required Function(dynamic, int) confirm,
+    ValueChanged<bool>? onCancel,
+    required Function(dynamic data, int position) confirm,
   }) {
     Pickers.showSinglePicker(
       Get.context!,
       data: dataList,
       selectData: selectData,
       pickerStyle: getPickerStyle(title),
-      onCancel: cancel,
+      onCancel: onCancel,
       onConfirm: confirm,
     );
   }

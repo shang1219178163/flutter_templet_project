@@ -18,7 +18,7 @@ class NChoiceBoxOne<T> extends StatefulWidget {
   const NChoiceBoxOne({
     super.key,
     required this.items,
-    required this.seletedItem,
+    required this.selectedItem,
     required this.itemNameCb,
     this.numPerRow = 2,
     this.spacing = 8,
@@ -28,15 +28,15 @@ class NChoiceBoxOne<T> extends StatefulWidget {
     required this.canChanged,
     this.primaryColor = Colors.blue,
     this.avatar,
-    this.avatarSeleted,
+    this.avatarSelected,
     this.style,
-    this.styleSeleted,
+    this.styleSelected,
     this.backgroundColor = Colors.transparent,
     this.selectedColor = Colors.transparent,
   });
 
   final List<T> items;
-  final ValueNotifier<T?> seletedItem;
+  final ValueNotifier<T?> selectedItem;
 
   /// 类型转字符串
   final String Function(T e) itemNameCb;
@@ -55,10 +55,10 @@ class NChoiceBoxOne<T> extends StatefulWidget {
   final bool Function(T value, ChoiceSelectedType<T>)? canChanged;
 
   final Widget? avatar;
-  final Widget? avatarSeleted;
+  final Widget? avatarSelected;
 
   final TextStyle? style;
-  final TextStyle? styleSeleted;
+  final TextStyle? styleSelected;
 
   /// 背景颜色
   final Color backgroundColor;
@@ -91,10 +91,10 @@ class _NChoiceBoxOneState<T> extends State<NChoiceBoxOne<T>> {
         runSpacing: widget.runSpacing,
         children: widget.items.map(
           (e) {
-            final isSelected = widget.seletedItem.value == e;
+            final isSelected = widget.selectedItem.value == e;
 
             final avatar = isSelected
-                ? (widget.avatarSeleted ??
+                ? (widget.avatarSelected ??
                     NIndicatorPointNew(
                       size: 14,
                       innerSize: 8,
@@ -140,7 +140,7 @@ class _NChoiceBoxOneState<T> extends State<NChoiceBoxOne<T>> {
                         child: Text(
                           itemTitle,
                           style: isSelected
-                              ? widget.styleSeleted ?? defaultTextStyle
+                              ? widget.styleSelected ?? defaultTextStyle
                               : widget.style ?? defaultTextStyle,
                         ),
                       ),
@@ -170,11 +170,11 @@ class _NChoiceBoxOneState<T> extends State<NChoiceBoxOne<T>> {
     if (selected == false) {
       return;
     }
-    if (widget.seletedItem.value == e) {
+    if (widget.selectedItem.value == e) {
       return;
     }
-    widget.seletedItem.value = e;
-    widget.onChanged?.call(widget.seletedItem.value as T);
+    widget.selectedItem.value = e;
+    widget.onChanged?.call(widget.selectedItem.value as T);
     setState(() {});
   }
 }

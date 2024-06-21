@@ -211,12 +211,12 @@ class _ChipDemoState extends State<ChipDemo> with CupertinoAlertDialogMixin {
           ),
           NChoiceBoxOne<Tuple2<String, String>>(
             items: items,
-            seletedItem: itemCurrent,
+            selectedItem: itemCurrent,
             itemNameCb: (e) => e.item1,
             // numPerRow: 3,
             primaryColor: Colors.red,
             style: TextStyle(color: Colors.black87),
-            styleSeleted: TextStyle(
+            styleSelected: TextStyle(
               color: Colors.red,
             ),
             canChanged: (e, onSelect) => true,
