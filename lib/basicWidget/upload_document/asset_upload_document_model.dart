@@ -8,7 +8,7 @@
 
 import 'dart:io';
 
-/// 图片选择器
+/// 文档选择器模型
 class AssetUploadDocumentModel {
   AssetUploadDocumentModel({
     this.url,

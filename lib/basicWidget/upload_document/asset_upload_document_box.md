@@ -1,12 +1,12 @@
 
-# 图片上传选择器 - AssetUploadBox（基于 wechat_assets_picker）
+# 文档上传选择器 - AssetUploadDocumentModel
 
 
 ## 使用
 
 ```
   /// 初始化数据
-  var selectedModels = <AssetUploadModel>[];
+  var selectedModels = <AssetUploadDocumentModel>[];
   /// 获取图片链接数组
   List<String> urls = [];
 
@@ -14,7 +14,7 @@
   
   Container(
     padding: EdgeInsets.symmetric(horizontal: 20),
-    child: AssetUploadBox(
+    child: AssetUploadDocumentBox(
       items: selectedModels,
       // showFileSize: true,
       onChanged: (items){
