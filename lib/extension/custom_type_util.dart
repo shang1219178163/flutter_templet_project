@@ -21,3 +21,9 @@ typedef ValueChangedWidgetBuilder<T> = Widget Function(
 /// e 泛型数据;
 /// action 事件回调;
 typedef ActionRecord<T> = ({T e, VoidCallback action});
+
+/// 选择菜单子元素的元祖;
+/// title 标题
+/// value 泛型数据;
+/// title 所选元素对应接口参数;
+typedef ChooseItemRecord<T> = ({String title, String key, T value});
