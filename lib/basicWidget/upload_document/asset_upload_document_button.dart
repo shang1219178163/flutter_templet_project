@@ -274,7 +274,6 @@ class AssetUploadDocumentButtonState extends State<AssetUploadDocumentButton>
     if (res?.startsWith("http") == true) {
       // debugPrint("res: $res");
       _percentVN.value = 1;
-      // setState(() {});
       return res;
     }
     return null;
@@ -313,9 +312,10 @@ class AssetUploadDocumentButtonState extends State<AssetUploadDocumentButton>
       debugPrint("err: $err");
       widget.model.url = "";
       _successVN.value = false;
+
+      setState(() {});
     }).whenComplete(() {
       _isLoading = false;
-
       // LogUtil.d("${fileName}_whenComplete");
       widget.urlBlock?.call(widget.model.url ?? "");
     });
