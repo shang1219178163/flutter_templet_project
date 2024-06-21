@@ -1179,8 +1179,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: "v1.0.7"
-      resolved-ref: "459f0fea0ced696f5d61d4d6199b42ce10b7a8c2"
+      ref: "v1.0.7.1"
+      resolved-ref: "65ae42f90f6dee01f38460ed05fa37544a874160"
       url: "git@github.com:shang1219178163/json_to_dart.git"
     source: git
     version: "1.0.6"
