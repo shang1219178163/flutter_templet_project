@@ -6,6 +6,8 @@
 //  Copyright © 10/21/21 shang. All rights reserved.
 //
 
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 
@@ -25,6 +27,16 @@ extension ListExt<T, E> on List<E> {
       l.addAll([...this]);
     }
     return l;
+  }
+
+  /// 获取随机元素
+  E? get randomOne {
+    if (isEmpty) {
+      return null;
+    }
+    final index = Random().nextInt(length);
+    final e = elementAt(index);
+    return e;
   }
 
   /// 查询符合条件元素,没有则返回为空
@@ -104,7 +116,8 @@ extension ListExt<T, E> on List<E> {
   /// 用多个元素取代数组中满足条件的第一个元素
   /// replacements 取代某个元素的集合
   /// isReversed 是否倒序查询
-  List<E> replace(bool Function(E) test, {
+  List<E> replace(
+    bool Function(E) test, {
     required List<E> replacements,
     bool isReversed = false,
   }) {
@@ -117,7 +130,8 @@ extension ListExt<T, E> on List<E> {
 
   /// 用多个元素取代数组中某个元素
   /// replacements 取代某个元素的集合
-  List<E> replaceTarget(E target, {
+  List<E> replaceTarget(
+    E target, {
     required List<E> replacements,
   }) {
     final index = indexOf(target);
@@ -216,7 +230,8 @@ extension ListExtObject<E extends Object> on List<E> {
   //   return this;
   // }
 
-  List<E> sortedByValue({bool ascending = true, required dynamic Function(E obj) cb}) {
+  List<E> sortedByValue(
+      {bool ascending = true, required dynamic Function(E obj) cb}) {
     if (ascending) {
       // this.sort((a, b) => cb(a).compareTo(cb(b)));
       sort((a, b) => _customeCompare(cb(a), cb(b)));
@@ -279,5 +294,4 @@ extension ListNullExt<E> on List<E?> {
     final result = val.whereType<E>().toList();
     return result;
   }
-
 }

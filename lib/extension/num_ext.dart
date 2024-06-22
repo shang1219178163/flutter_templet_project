@@ -14,6 +14,77 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 extension NumExt on num {}
 
+extension IntExt on int {
+  static int random({int min = 0, required int max}) {
+    return min + Random().nextInt(max - min);
+  }
+
+  /// 随机布尔值
+  static bool randomBool() {
+    final result = Random().nextInt(2) == 1;
+    return result;
+  }
+
+  String toHanzi() {
+    if (this == 0) return '零';
+
+    const List<String> chineseDigits = [
+      '零',
+      '一',
+      '二',
+      '三',
+      '四',
+      '五',
+      '六',
+      '七',
+      '八',
+      '九'
+    ];
+    const List<String> chineseUnits = ['', '十', '百', '千', '万', '亿'];
+
+    String result = '';
+    int unitIndex = 0;
+    int number = this;
+
+    while (number > 0) {
+      int digit = number % 10;
+      result = (digit == 0 ? '' : chineseDigits[digit]) +
+          chineseUnits[unitIndex] +
+          result;
+      unitIndex++;
+      number ~/= 10;
+    }
+
+    // 处理连续的零
+    result = result
+        .replaceAllMapped(RegExp('零+'), (match) => '零')
+        .replaceAll(RegExp('^零|零\$'), '');
+
+    return result;
+  }
+
+  /// 生成随机字符串
+  String generateChars({String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"}) {
+    if (this == 0) {
+      return "";
+    }
+    int length = this;
+    var tmp = "";
+    for (var i = 0; i < length; i++) {
+      var randomIndex = IntExt.random(max: chars.length);
+      var randomChar = chars[randomIndex];
+      tmp += randomChar;
+    }
+    return tmp;
+  }
+
+// /// 数字格式化
+// String numFormat([String? newPattern = '0,000', String? locale]) {
+//   final fmt = NumberFormat(newPattern, locale);
+//   return fmt.format(this);
+// }
+}
+
 extension DoubleExt on double {
   /// 2位小数
   double get fixed2 => double.parse(toStringAsFixed(2));
@@ -33,31 +104,4 @@ extension DoubleExt on double {
     }
     return percentDes;
   }
-}
-
-extension IntExt on int {
-  static int random({int min = 0, required int max}) {
-    return min + Random().nextInt(max - min);
-  }
-
-  /// 生成随机字符串
-  String generateChars({String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"}) {
-    if (this == 0) {
-      return "";
-    }
-    int length = this;
-    var tmp = "";
-    for (var i = 0; i < length; i++) {
-      var randomIndex = IntExt.random(max: chars.length);
-      var randomChar = chars[randomIndex];
-      tmp += randomChar;
-    }
-    return tmp;
-  }
-
-  // /// 数字格式化
-  // String numFormat([String? newPattern = '0,000', String? locale]) {
-  //   final fmt = NumberFormat(newPattern, locale);
-  //   return fmt.format(this);
-  // }
 }

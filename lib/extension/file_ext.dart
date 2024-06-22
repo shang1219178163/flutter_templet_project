@@ -41,9 +41,31 @@ extension FileExt on File {
         ext.endsWith(".3gp");
   }
 
+  /// 是否是图片
+  bool get isImage {
+    final extension = path.toLowerCase().split('.').last;
+    const imageExtensions = [
+      'jpg',
+      'jpeg',
+      'png',
+      'gif',
+      'bmp',
+      'webp',
+      'heic'
+    ];
+    return imageExtensions.contains(extension);
+  }
+
+  /// length 转为 MB 描述
   String get fileSizeDesc {
     final length = lengthSync();
     return length.fileSizeDesc;
+  }
+
+  /// 压缩质量
+  int get compressQuality {
+    final length = lengthSync();
+    return length.compressQuality;
   }
 }
 
@@ -60,7 +82,7 @@ extension FileIntExt on int {
     return result;
   }
 
-  /// 压缩质量( )
+  /// 压缩质量
   int get compressQuality {
     int length = this;
     // var quality = 100;
