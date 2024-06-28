@@ -193,7 +193,7 @@ class AssetUploadDocumentBoxState extends State<AssetUploadDocumentBox>
           if (items.length < maxCount && widget.hasPlaceholder)
             InkWell(
               onTap: () async {
-                ToolUtil.removeFocus();
+                ToolUtil.removeInputFocus();
                 if (!canEdit) {
                   debugPrint("无图片编辑权限");
                   return;

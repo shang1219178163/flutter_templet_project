@@ -5,10 +5,12 @@
 //  Created by shang on 2023/11/10 14:26.
 //  Copyright © 2023/11/10 shang. All rights reserved.
 //
+// Chip 默认高度 _kChipHeight _RenderChip
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_indicator_point.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
+import 'package:flutter_templet_project/extension/ddlog.dart';
 
 typedef ChoiceSelectedType<T> = void Function(T e, bool selected);
 
@@ -33,6 +35,9 @@ class NChoiceBoxOne<T> extends StatefulWidget {
     this.styleSelected,
     this.backgroundColor = Colors.transparent,
     this.selectedColor = Colors.transparent,
+    this.disabledColor = Colors.white,
+    this.disabledAvatarColor = const Color(0xffB3B3B3),
+    this.enable = true,
   });
 
   final List<T> items;
@@ -64,6 +69,12 @@ class NChoiceBoxOne<T> extends StatefulWidget {
   final Color backgroundColor;
   final Color selectedColor;
 
+  final Color disabledColor;
+  final Color disabledAvatarColor;
+
+  /// 是否禁用
+  final bool enable;
+
   @override
   State<NChoiceBoxOne<T>> createState() => _NChoiceBoxOneState<T>();
 }
@@ -93,13 +104,17 @@ class _NChoiceBoxOneState<T> extends State<NChoiceBoxOne<T>> {
           (e) {
             final isSelected = widget.selectedItem.value == e;
 
+            final avatarColor = !widget.enable
+                ? widget.disabledAvatarColor
+                : widget.primaryColor;
+
             final avatar = isSelected
                 ? (widget.avatarSelected ??
                     NIndicatorPointNew(
                       size: 14,
                       innerSize: 8,
-                      color: widget.primaryColor,
-                      innerColor: widget.primaryColor,
+                      color: avatarColor,
+                      innerColor: avatarColor,
                     ))
                 : (widget.avatar ??
                     NIndicatorPointNew(
@@ -109,11 +124,20 @@ class _NChoiceBoxOneState<T> extends State<NChoiceBoxOne<T>> {
                       innerColor: Colors.transparent,
                     ));
 
-            final defaultTextStyle = TextStyle(
-              color: isSelected ? widget.primaryColor : Colors.black87,
-            );
-
             String itemTitle = widget.itemNameCb(e);
+
+            TextStyle textStyle = isSelected
+                ? widget.styleSelected ??
+                    TextStyle(
+                      color: widget.primaryColor,
+                    )
+                : widget.style ??
+                    TextStyle(
+                      color: Colors.black87,
+                    );
+            if (!widget.enable) {
+              textStyle = textStyle.copyWith(color: avatarColor);
+            }
             return Container(
               width: itemWidth - 1,
               alignment: Alignment.centerLeft,
@@ -121,10 +145,12 @@ class _NChoiceBoxOneState<T> extends State<NChoiceBoxOne<T>> {
                 data: ChipTheme.of(context).copyWith(
                   backgroundColor: widget.backgroundColor ?? Colors.transparent,
                   selectedColor: widget.selectedColor ?? Colors.transparent,
+                  disabledColor: widget.disabledColor,
                   elevation: 0,
                   pressElevation: 0,
                   showCheckmark: false,
                   padding: EdgeInsets.zero,
+                  // labelPadding: EdgeInsets.zero,
                 ),
                 child: ChoiceChip(
                   materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
@@ -139,9 +165,7 @@ class _NChoiceBoxOneState<T> extends State<NChoiceBoxOne<T>> {
                       Flexible(
                         child: Text(
                           itemTitle,
-                          style: isSelected
-                              ? widget.styleSelected ?? defaultTextStyle
-                              : widget.style ?? defaultTextStyle,
+                          style: textStyle,
                         ),
                       ),
                     ],
@@ -149,6 +173,10 @@ class _NChoiceBoxOneState<T> extends State<NChoiceBoxOne<T>> {
                   selected: isSelected,
                   onSelected: (bool selected) {
                     // debugPrint("e: $selected,  $e");
+                    if (!widget.enable) {
+                      DLog.d("❌$runtimeType 组件已禁用!");
+                      return;
+                    }
                     final canChange = widget.canChanged
                             ?.call(e, onSelect as ChoiceSelectedType) ??
                         true;

@@ -92,6 +92,36 @@ class FlutterPickerUtil {
     );
   }
 
+  // 日期选择器(以 DateTime 传值)
+  static void showDatePickerNew({
+    String title = '请选择',
+    DateMode mode = DateMode.YMD,
+    DateTime? minDateTime,
+    DateTime? maxDateTime,
+    DateTime? selectDate,
+    required ValueChanged<DateTime> onConfirm,
+  }) {
+    showDatePicker(
+      title: title,
+      mode: mode,
+      minDateTime: minDateTime?.toPDuration(),
+      maxDateTime: maxDateTime?.toPDuration(),
+      selectDate: selectDate?.toPDuration(),
+      confirm: (pDate, dateStr) {
+        final now = DateTime.now();
+        final pDateNew = PDuration(
+          year: pDate.year,
+          month: pDate.month,
+          day: pDate.day,
+          hour: (pDate.hour ?? 0) > 0 ? pDate.hour : now.hour,
+          minute: (pDate.minute ?? 0) > 0 ? pDate.minute : now.minute,
+          second: (pDate.second ?? 0) > 0 ? pDate.second : now.second,
+        );
+        onConfirm(pDateNew.toDate());
+      },
+    );
+  }
+
   // 单项选择器
   static void showSinglePicker({
     String title = '',
@@ -250,5 +280,12 @@ extension PDurationExt on PDuration {
       second ?? 0,
     );
     return date;
+  }
+}
+
+extension DateTimePickerExt on DateTime {
+  /// 转 PDuration
+  PDuration toPDuration() {
+    return PDuration.parse(this);
   }
 }
