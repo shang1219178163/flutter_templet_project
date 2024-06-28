@@ -23,7 +23,7 @@ class ToolUtil {
   static get globalContext => navigatorKey.currentState!.overlay!.context;
 
   // 移除输入框焦点
-  static void removeFocus() {
+  static void removeInputFocus() {
     FocusManager.instance.primaryFocus?.unfocus();
     // 延迟，保证获取到context
     // Future.delayed(Duration.zero, () {
