@@ -267,6 +267,7 @@ import 'package:flutter_templet_project/pages/demo/VideoPlayerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/VisibilityDemo.dart';
 import 'package:flutter_templet_project/pages/demo/WeatherInfoPage.dart';
 import 'package:flutter_templet_project/pages/demo/WrapDemo.dart';
+import 'package:flutter_templet_project/pages/demo/ae_report_page.dart';
 import 'package:flutter_templet_project/pages/demo/box_shadow_demo.dart';
 import 'package:flutter_templet_project/pages/demo/box_shadow_demo_one.dart';
 import 'package:flutter_templet_project/pages/demo/drawImageNineDemo.dart';
@@ -728,6 +729,7 @@ class APPRouter {
   static const chewiePlayerPage = '/chewiePlayerPage';
   static const segmentVerticalDemo = '/segmentVerticalDemo';
   static const decoratedBoxTransitionDemo = '/decoratedBoxTransitionDemo';
+  static const aeReportPage = '/aeReportPage';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -2154,6 +2156,10 @@ class AppPage {
     GetPage(
       name: APPRouter.decoratedBoxTransitionDemo,
       page: () => DecoratedBoxTransitionDemo(),
+    ),
+    GetPage(
+      name: APPRouter.aeReportPage,
+      page: () => AeReportPage(),
     ),
   ];
 }
