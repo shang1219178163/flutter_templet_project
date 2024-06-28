@@ -27,37 +27,11 @@ const bgColorF7F7F7 = Color(0xFFF7F7F7);
 const bgColorF9F9F9 = Color(0xffF9F9F9);
 const bgColor000000 = Color(0xFF000000);
 
-///线条 #EEEEEE
-const MaterialColor lineColor = MaterialColor(
-  // 0xffEEEEEE,
-  0xffF3F3F3,
-  <int, Color>{},
-);
+/// 线条
+const Color lineColor = Color(0xFFE5E5E5);
 
-///阴影 #B5B5B5
-const MaterialColor shadowColor = MaterialColor(
-  0x1AB5B5B5,
-  <int, Color>{
-    10: Color(0xffDBDBDB),
-    20: Color(0xff999999), // 不可编辑
-    50: Color(0xff5B626B), // 中间色
-    100: Color(0xFF000000),
-  },
-);
+/// 取消颜色
+const Color cancelColor = Color(0xFFE65F55);
 
-class HiColor {
-  static const Color red = Color(0xFFFF4759);
-  static const Color dark_red = Color(0xFFE03E4E);
-  static const Color dark_bg = Color(0xFF18191A);
-  static const Color status_stay = Color(0xFFF57B25);
-  static const Color status_stay_bg = Color(0xFFFFF9F0);
-  static const Color status_in = Color(0xFF40B31B);
-  static const Color status_in_bg = Color(0xFFEBF7E8);
-  static const Color status_err = Color(0xFFF23041);
-  static const Color status_err_bg = Color(0xFFFDEAEC);
-  static const Color status_normal = Color(0xFF1D7AFF);
-  static const Color status_normal_bg = Color(0xFFE8F1FF);
-
-  /// 女性图标颜色
-  static const Color femaleColor = Color(0xFFFF7E6E);
-}
+/// 阴影 #B5B5B5
+const Color shadowColor = Color(0x08000000);
