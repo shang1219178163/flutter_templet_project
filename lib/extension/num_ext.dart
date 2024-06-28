@@ -28,19 +28,8 @@ extension IntExt on int {
   String toHanzi() {
     if (this == 0) return '零';
 
-    const List<String> chineseDigits = [
-      '零',
-      '一',
-      '二',
-      '三',
-      '四',
-      '五',
-      '六',
-      '七',
-      '八',
-      '九'
-    ];
-    const List<String> chineseUnits = ['', '十', '百', '千', '万', '亿'];
+    final List<String> chineseDigits = '零一二三四五六七八九'.split("").toList();
+    final List<String> chineseUnits = '十百千万亿'.split("").toList();
 
     String result = '';
     int unitIndex = 0;
