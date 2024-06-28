@@ -8,6 +8,8 @@ import 'package:flutter_pickers/time_picker/model/pduration.dart';
 import 'package:flutter_templet_project/extension/date_time_ext.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:get/get.dart';
+import 'package:path/path.dart';
+import 'package:flutter_templet_project/extension/build_context_ext.dart';
 
 // 地址选择器模型
 class AddressPickerModel {
@@ -234,7 +236,10 @@ class FlutterPickerUtil {
         ],
       ),
       cancelButton: buildTextButton(title: "取消"),
-      commitButton: buildTextButton(title: '确定'),
+      commitButton: buildTextButton(
+        title: '确定',
+        textColor: Get.context?.primaryColor,
+      ),
       title: Text(
         title,
         style: TextStyle(
@@ -252,6 +257,7 @@ class FlutterPickerUtil {
 
   static Widget buildTextButton({
     required String title,
+    Color? textColor = fontColor737373,
     VoidCallback? onPressed,
   }) {
     return InkWell(
@@ -261,7 +267,7 @@ class FlutterPickerUtil {
         child: Text(
           title,
           style: TextStyle(
-            color: fontColor737373,
+            color: textColor,
           ),
         ),
       ),
