@@ -1,4 +1,3 @@
-
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -14,10 +13,8 @@ import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 
-
 /// 上传图片单元(基于 wechat_assets_picker)
 class AssetUploadButton extends StatefulWidget {
-
   AssetUploadButton({
     Key? key,
     required this.model,
@@ -34,8 +31,10 @@ class AssetUploadButton extends StatefulWidget {
 
   /// 上传成功获取 url 回调
   final ValueChanged<String>? urlBlock;
+
   /// 返回删除元素的 id
   final VoidCallback? onDelete;
+
   /// 圆角 默认8
   final double radius;
 
@@ -54,14 +53,16 @@ class AssetUploadButton extends StatefulWidget {
   _AssetUploadButtonState createState() => _AssetUploadButtonState();
 }
 
-class _AssetUploadButtonState extends State<AssetUploadButton> with AutomaticKeepAliveClientMixin {
+class _AssetUploadButtonState extends State<AssetUploadButton>
+    with AutomaticKeepAliveClientMixin {
   /// 防止触发多次上传动作
   var _isLoading = false;
+
   /// 请求成功或失败
   final _successVN = ValueNotifier(true);
+
   /// 上传进度
   final _percentVN = ValueNotifier(0.0);
-
 
   @override
   void initState() {
@@ -105,7 +106,7 @@ class _AssetUploadButtonState extends State<AssetUploadButton> with AutomaticKee
         child: img,
       ),
     );
-    
+
     return Stack(
       fit: StackFit.expand,
       children: [
@@ -113,22 +114,26 @@ class _AssetUploadButtonState extends State<AssetUploadButton> with AutomaticKee
           padding: EdgeInsets.only(top: 10, right: 10),
           child: imgChild,
         )
-            // .toColoredBox()
+        // .toColoredBox()
         ,
-        if(widget.model.url == null || widget.model.url == "")Positioned(
-          top: 0,
-          right: 0,
-          bottom: 0,
-          left: 0,
-          child: buildUploading(),
-        ),
-        if (widget.showFileSize) Positioned(
-          top: 0,
-          right: 0,
-          bottom: 0,
-          left: 0,
-          child: buildFileSizeInfo(length: widget.model.file?.lengthSync(),),
-        ),
+        if (widget.model.url?.startsWith("http") != true)
+          Positioned(
+            top: 0,
+            right: 0,
+            bottom: 0,
+            left: 0,
+            child: buildUploading(),
+          ),
+        if (widget.showFileSize)
+          Positioned(
+            top: 0,
+            right: 0,
+            bottom: 0,
+            left: 0,
+            child: buildFileSizeInfo(
+              length: widget.model.file?.lengthSync(),
+            ),
+          ),
         Positioned(
           top: 0,
           right: 0,
@@ -152,7 +157,10 @@ class _AssetUploadButtonState extends State<AssetUploadButton> with AutomaticKee
         padding: EdgeInsets.zero,
         constraints: BoxConstraints(),
         onPressed: widget.onDelete,
-        icon: const Icon(Icons.cancel, color: Colors.red,),
+        icon: const Icon(
+          Icons.cancel,
+          color: Colors.red,
+        ),
       ),
     );
   }
@@ -171,6 +179,12 @@ class _AssetUploadButtonState extends State<AssetUploadButton> with AutomaticKee
         if (value >= 1) {
           return const SizedBox();
         }
+
+        final showPercent = widget.model.file != null &&
+            (widget.model.file!.lengthSync() > 2 * 1024 * 1024) == true;
+
+        final desc = showPercent ? value.toStringAsPercent(2) : "上传中";
+
         return Container(
           alignment: Alignment.center,
           margin: const EdgeInsets.only(top: 10, right: 10),
@@ -186,19 +200,15 @@ class _AssetUploadButtonState extends State<AssetUploadButton> with AutomaticKee
               //   fontSize: 14,
               //   color: Colors.white,
               // ),
-              if(widget.model.file != null && (widget.model.file!.lengthSync() > 2 * 1024 * 1024) == true)NText(
-                value.toStringAsPercent(2),
-                fontSize: 12.sp,
-                color: Colors.white,
-              ),
-              NText("上传中",
-                fontSize: 12.sp,
+              NText(
+                desc,
+                fontSize: 12,
                 color: Colors.white,
               ),
             ],
           ),
         );
-      }
+      },
     );
   }
 
@@ -206,7 +216,7 @@ class _AssetUploadButtonState extends State<AssetUploadButton> with AutomaticKee
     return Stack(
       children: [
         InkWell(
-          onTap: (){
+          onTap: () {
             debugPrint("onTap");
             onRefresh();
           },
@@ -221,7 +231,8 @@ class _AssetUploadButtonState extends State<AssetUploadButton> with AutomaticKee
               mainAxisSize: MainAxisSize.min,
               children: [
                 Icon(Icons.refresh, color: Colors.red),
-                NText("点击重试",
+                NText(
+                  "点击重试",
                   fontSize: 14,
                   color: Colors.white,
                 ),
@@ -260,7 +271,7 @@ class _AssetUploadButtonState extends State<AssetUploadButton> with AutomaticKee
     final result = urlConvert?.call(res) ?? res['result'];
     return result;
   }
-  
+
   onRefresh() {
     // debugPrint("onRefresh ${widget.entity}");
     final entityFile = widget.model.entity?.file;
@@ -281,7 +292,9 @@ class _AssetUploadButtonState extends State<AssetUploadButton> with AutomaticKee
       }
       final isImage = (widget.model.entity!.type == AssetType.image);
 
-      final fileNew = isImage ? ImageService().compressAndGetFile(file) : VideoService.compressVideo(file);
+      final fileNew = isImage
+          ? ImageService().compressAndGetFile(file)
+          : VideoService.compressVideo(file);
       // return ImageService().compressAndGetFile(file);
       return fileNew;
     }).then((file) {
@@ -295,16 +308,13 @@ class _AssetUploadButtonState extends State<AssetUploadButton> with AutomaticKee
       // return "";//调试代码,勿删!!!
       return uploadFile(
         filePath: path,
-        onSendProgress: (int count, int total){
-          // _percentVN.value = (count/total);
-          final percent = (count/total);
-          if(percent >= 0.99){
-            _percentVN.value = 0.99;// dio 上传进度和返回 url 有时间差
-          }
+        onSendProgress: (int count, int total) {
+          final percent = (count / total);
+          _percentVN.value = percent.clamp(0, 0.99); // dio 上传进度和返回 url 有时间差
         },
-        onReceiveProgress: (int count, int total){
-          final receiveProgress = (count/total);
-          _percentVN.value = 1;// dio 上传进度和返回 url 有时间差
+        onReceiveProgress: (int count, int total) {
+          final receiveProgress = (count / total);
+          _percentVN.value = 1; // dio 上传进度和返回 url 有时间差
           // LogUtil.d("${fileName}__receiveProgress: ${_percentVN.value}");
         },
         urlConvert: widget.urlConvert,
@@ -315,9 +325,10 @@ class _AssetUploadButtonState extends State<AssetUploadButton> with AutomaticKee
         _successVN.value = false;
         throw "上传失败 ${widget.model.file?.path}";
       }
+      _percentVN.value = 1;
       _successVN.value = true;
       widget.model.url = url;
-    }).catchError((err){
+    }).catchError((err) {
       debugPrint("err: $err");
       widget.model.url = "";
       _successVN.value = false;
@@ -331,17 +342,11 @@ class _AssetUploadButtonState extends State<AssetUploadButton> with AutomaticKee
     if (length == null) {
       return SizedBox();
     }
-    final result = length/(1024 *1024);
+    final result = length / (1024 * 1024);
     final desc = "${result.toStringAsFixed(2)}MB";
-    return Align(
-      child: Container(
-        color: Colors.red,
-        child: Text(desc)
-      )
-    );
+    return Align(child: Container(color: Colors.red, child: Text(desc)));
   }
 
-  
   @override
   bool get wantKeepAlive => true;
 }
