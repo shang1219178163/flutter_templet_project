@@ -6,6 +6,7 @@
 //  Copyright © 7/26/21 shang. All rights reserved.
 //
 
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
@@ -35,23 +36,114 @@ class FileManager {
     return directory.path;
   }
 
-  /// 创建文件
-  /// fileName - 文件名
-  /// content - 文件内容
-  /// dir - 保存文件夹
-  Future<File> createFile({String? fileName, required String content, Directory? dir}) async {
-    fileName ??= "未命名_${DateTime.now().toString().substring(0, 10).replaceAll("-", "_")}";
+  /// 文件创建
+  ///
+  /// - fileName 文件名
+  ///
+  /// - ext 文件扩展
+  ///
+  /// - content 文件内容
+  ///
+  /// - dir 保存文件夹
+  Future<File> createFile({
+    required String fileName,
+    String ext = "dart",
+    required String content,
+    Directory? dir,
+  }) async {
+    // final dateStr = "${DateTime.now()}".split(".").first ?? "";
 
-    /// 生成本地文件
-    var tempDir = dir ?? await getDownloadsDirectory();
-    if (Platform.isIOS) {
-      tempDir = dir ?? await getTemporaryDirectory();
+    /// 本地文件目录
+    Directory tempDir = dir ?? await getApplicationCacheDirectory();
+    if (Platform.isMacOS) {
+      final downloadsDir = await getDownloadsDirectory();
+      if (downloadsDir != null) {
+        tempDir = downloadsDir;
+      }
     }
-    var path = '${tempDir?.path}/$fileName.dart';
-    // debugPrint("file: $path");
+
+    final fileNameNew = fileName.contains(".") ? fileName : '$fileName.$ext';
+    assert(fileNameNew.contains("."), "文件类型不能为空");
+
+    var path = '${tempDir.path}/$fileNameNew';
+    debugPrint("$this $fileNameNew: $path");
     var file = File(path);
     file.createSync();
     file.writeAsStringSync(content);
     return file;
+  }
+
+  /// 文件读取
+  ///
+  /// - fileName 文件名
+  ///
+  /// - ext 文件扩展
+  ///
+  /// - content 文件内容
+  ///
+  /// - dir 保存文件夹
+  Future<File> readFile({
+    required String fileName,
+    String ext = "dart",
+    Directory? dir,
+  }) async {
+    /// 本地文件目录
+    var tempDir = dir ?? await getApplicationCacheDirectory();
+
+    final fileNameNew = fileName.contains(".") ? fileName : '$fileName.$ext';
+    assert(fileNameNew.contains("."), "文件类型不能为空");
+
+    var path = '${tempDir.path}/$fileNameNew';
+    debugPrint("$this $fileNameNew: $path");
+    var file = File(path);
+    return file;
+  }
+
+  /// 存储 map
+  ///
+  /// - fileName 文件名
+  ///
+  /// - ext 文件类型, 默认 txt
+  ///
+  /// - map 要存储的字典
+  Future<File> saveJson({
+    required String fileName,
+    String ext = "dart",
+    Directory? dir,
+    required Map<String, dynamic> map,
+  }) async {
+    final content = jsonEncode(map);
+    final file = await FileManager().createFile(
+      fileName: fileName,
+      ext: ext,
+      content: content,
+    );
+    return file;
+  }
+
+  /// 读取 map
+  ///
+  /// - fileName 文件名
+  ///
+  /// - ext 文件类型, 默认 txt
+  ///
+  /// - dir 目标文件夹
+  Future<Map<String, dynamic>?> readJson({
+    required String fileName,
+    String ext = "dart",
+    Directory? dir,
+  }) async {
+    final file = await FileManager().readFile(
+      fileName: fileName,
+      ext: ext,
+      dir: dir,
+    );
+    final fileExists = file.existsSync();
+    if (!fileExists) {
+      debugPrint("❌ $this $fileName.$ext: 文件不存在");
+      return null;
+    }
+    final content = await file.readAsString();
+    return jsonDecode(content);
   }
 }
