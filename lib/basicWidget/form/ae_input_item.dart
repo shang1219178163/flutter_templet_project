@@ -119,6 +119,7 @@ class AeInputItem extends StatelessWidget {
       );
     }
 
+    /// 边框
     buildBorder({Color color = const Color(0xFFE6E6E6)}) {
       return OutlineInputBorder(
         borderSide: BorderSide(color: color, width: 0.5),
@@ -128,45 +129,39 @@ class AeInputItem extends StatelessWidget {
 
     final hasCounterDesc = enable && maxLines > 1;
 
-    return Container(
-      decoration: BoxDecoration(
-        color: white,
-        boxShadow: boxShadow,
-      ),
-      child: TextField(
-        controller: controller,
-        onChanged: onChanged,
-        enabled: enable,
-        onEditingComplete: onEditingComplete,
-        keyboardType: keyboardType,
-        minLines: minLines,
-        maxLines: maxLines,
-        textAlign: textAlign,
-        autofocus: autofocus,
-        cursorColor: context.primaryColor,
-        decoration: InputDecoration(
-          isCollapsed: true,
-          contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-          // icon: Icon(Icons.search),
-          // labelText: "Search",
-          hintText: "",
-          // prefixIcon: Icon(Icons.search),
-          border: const OutlineInputBorder(borderSide: BorderSide.none),
-          enabledBorder: buildBorder(),
-          focusedBorder: buildBorder(
-            color: context.primaryColor,
-          ),
-          counter: hasCounterDesc
-              ? controller.buildInputDecorationCounter(
-                  maxLength: maxLength,
-                )
-              : null,
+    return TextField(
+      controller: controller,
+      onChanged: onChanged,
+      enabled: enable,
+      onEditingComplete: onEditingComplete,
+      keyboardType: keyboardType,
+      minLines: minLines,
+      maxLines: maxLines,
+      textAlign: textAlign,
+      autofocus: autofocus,
+      cursorColor: context.primaryColor,
+      decoration: InputDecoration(
+        isCollapsed: true,
+        contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+        // icon: Icon(Icons.search),
+        // labelText: "Search",
+        hintText: "",
+        // prefixIcon: Icon(Icons.search),
+        border: const OutlineInputBorder(borderSide: BorderSide.none),
+        enabledBorder: buildBorder(),
+        focusedBorder: buildBorder(
+          color: context.primaryColor,
         ),
-        inputFormatters: inputFormatters ??
-            [
-              LengthLimitingTextInputFormatter(maxLength),
-            ],
+        counter: hasCounterDesc
+            ? controller.buildInputDecorationCounter(
+                maxLength: maxLength,
+              )
+            : null,
       ),
+      inputFormatters: inputFormatters ??
+          [
+            LengthLimitingTextInputFormatter(maxLength),
+          ],
     );
   }
 }

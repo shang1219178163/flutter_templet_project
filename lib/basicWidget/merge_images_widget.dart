@@ -1,4 +1,3 @@
-
 import 'dart:async';
 import 'dart:typed_data';
 
@@ -12,7 +11,6 @@ import 'package:flutter_templet_project/extension/string_ext.dart';
 
 /// 合并多张图片为长图
 class MergeImagesWidget extends StatefulWidget {
-
   List<MergeImageModel> models;
   Widget Function(MergeImageModel model)? imageBuilder;
   // double width;
@@ -46,7 +44,6 @@ class MergeImagesWidget extends StatefulWidget {
 }
 
 class MergeImagesWidgetState extends State<MergeImagesWidget> {
-
   final minCodeGlobalKey = GlobalKey();
 
   @override
@@ -54,7 +51,7 @@ class MergeImagesWidgetState extends State<MergeImagesWidget> {
     return _buildBody();
   }
 
-  _buildBody(){
+  _buildBody() {
     final screenSize = MediaQuery.of(context).size;
     final devicePixelRatio = MediaQuery.of(context).devicePixelRatio;
 
@@ -63,34 +60,50 @@ class MergeImagesWidgetState extends State<MergeImagesWidget> {
       return Stack(
         children: [
           _buildTool(
-            hideUp: idx == 0,
-            hideDown: idx == widget.models.length - 1,
-            repaintBoundary: RepaintBoundary(
-              key: e.globalKey,
-              child: widget.imageBuilder != null ? widget.imageBuilder!(e) : FadeInImage.assetNetwork(
-                placeholder: 'images/img_placeholder.png',
-                image: e.url ?? '',
-                fit: BoxFit.cover,
-                width: double.tryParse(e.width ?? "${screenSize.width}") ?? screenSize.width,
-                height: double.tryParse(e.height ?? "${screenSize.height}") ?? screenSize.height,
-                imageCacheWidth: ((double.tryParse(e.width ?? "${screenSize.width}") ?? screenSize.width) * devicePixelRatio).toInt(),
-                imageCacheHeight: ((double.tryParse(e.height ?? "${screenSize.height}") ?? screenSize.height) * devicePixelRatio).toInt(),
+              hideUp: idx == 0,
+              hideDown: idx == widget.models.length - 1,
+              repaintBoundary: RepaintBoundary(
+                key: e.globalKey,
+                child: widget.imageBuilder != null
+                    ? widget.imageBuilder!(e)
+                    : FadeInImage.assetNetwork(
+                        placeholder: 'images/img_placeholder.png',
+                        image: e.url ?? '',
+                        fit: BoxFit.cover,
+                        width:
+                            double.tryParse(e.width ?? "${screenSize.width}") ??
+                                screenSize.width,
+                        height: double.tryParse(
+                                e.height ?? "${screenSize.height}") ??
+                            screenSize.height,
+                        imageCacheWidth: ((double.tryParse(
+                                        e.width ?? "${screenSize.width}") ??
+                                    screenSize.width) *
+                                devicePixelRatio)
+                            .toInt(),
+                        imageCacheHeight: ((double.tryParse(
+                                        e.height ?? "${screenSize.height}") ??
+                                    screenSize.height) *
+                                devicePixelRatio)
+                            .toInt(),
+                      ),
               ),
+              callback: (step) {
+                debugPrint("callback:$step");
+                widget.models.exchange(idx, idx + step);
+                setState(() {});
+              }),
+          if (widget.qrCodeBuilder != null)
+            Positioned(
+              right: widget.qrCodeRight.toDouble(),
+              bottom: widget.qrCodeBottom.toDouble(),
+              child: idx != (widget.models.length - 1)
+                  ? Container()
+                  : RepaintBoundary(
+                      key: minCodeGlobalKey,
+                      child: widget.qrCodeBuilder?.call(widget.qrCodeUrl),
+                    ),
             ),
-            callback: (step){
-              debugPrint("callback:$step");
-              widget.models.exchange(idx, idx + step);
-              setState(() {});
-            }
-          ),
-          if (widget.qrCodeBuilder != null) Positioned(
-            right: widget.qrCodeRight.toDouble(),
-            bottom: widget.qrCodeBottom.toDouble(),
-            child: idx != (widget.models.length - 1) ? Container() : RepaintBoundary(
-              key: minCodeGlobalKey,
-              child: widget.qrCodeBuilder?.call(widget.qrCodeUrl),
-            ),
-          ),
         ],
       );
     }).toList();
@@ -118,12 +131,12 @@ class MergeImagesWidgetState extends State<MergeImagesWidget> {
             children: [
               _buildBtn(
                 onTap: () => callback?.call(-1),
-                image: Image.asset('icon_arrow_up.png'.toPath()),
+                image: Image.asset('icon_move_up.png'.toPath()),
                 hidden: hideUp,
               ),
               hideUp ? Container() : SizedBox(height: 6),
               _buildBtn(
-                image: Image.asset('icon_arrow_down.png'.toPath()),
+                image: Image.asset('icon_move_down.png'.toPath()),
                 onTap: () => callback?.call(1),
                 hidden: hideDown,
               ),
@@ -156,7 +169,8 @@ class MergeImagesWidgetState extends State<MergeImagesWidget> {
   }
 
   FutureOr<ui.Image?> _capturePic(GlobalKey key) async {
-    var boundary = key.currentContext?.findRenderObject() as RenderRepaintBoundary?;
+    var boundary =
+        key.currentContext?.findRenderObject() as RenderRepaintBoundary?;
     var image = await boundary?.toImage(pixelRatio: ui.window.devicePixelRatio);
 
     // ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
@@ -236,24 +250,18 @@ class MergeImagesWidgetState extends State<MergeImagesWidget> {
     int right = 16,
     int bottom = 16,
   }) async {
-
-    var images = await Future.wait(
-        imageUrls.map((imageUrl) async {
-          final imageUint8List = await ImageExt.imageDataFromUrl(imageUrl: imageUrl);
-          if (imageUint8List == null) {
-            throw Exception('图片数据异常');
-          }
-          final image = await decodeImageFromList(imageUint8List);
-          return image;
-        }).toList()
-    );
+    var images = await Future.wait(imageUrls.map((imageUrl) async {
+      final imageUint8List =
+          await ImageExt.imageDataFromUrl(imageUrl: imageUrl);
+      if (imageUint8List == null) {
+        throw Exception('图片数据异常');
+      }
+      final image = await decodeImageFromList(imageUint8List);
+      return image;
+    }).toList());
 
     final bytes = await toCompositeUIImages(
-        images: images,
-        miniCode: miniCode,
-        right: right,
-        bottom: bottom
-    );
+        images: images, miniCode: miniCode, right: right, bottom: bottom);
     return bytes;
   }
 
@@ -285,7 +293,8 @@ class MergeImagesWidgetState extends State<MergeImagesWidget> {
       //画图
       for (var i = 0; i < images.length; i++) {
         final e = images[i];
-        final offsetY = i == 0 ? 0 : imageHeights.sublist(0, i).reduce((a,b) => a + b);
+        final offsetY =
+            i == 0 ? 0 : imageHeights.sublist(0, i).reduce((a, b) => a + b);
         // print("offset:${i}_${e.height}_${offsetY}");
         canvas.drawImage(e, Offset(0, offsetY.toDouble()), paint);
       }
@@ -309,7 +318,9 @@ class MergeImagesWidgetState extends State<MergeImagesWidget> {
       }
 
       //获取合成的图片
-      var image = await recorder.endRecording().toImage(totalWidth.toInt(), totalHeight.toInt());
+      var image = await recorder
+          .endRecording()
+          .toImage(totalWidth.toInt(), totalHeight.toInt());
       var byteData = await image.toByteData(format: ui.ImageByteFormat.png);
       var pngBytes = byteData?.buffer.asUint8List();
       if (pngBytes == null) {
@@ -330,7 +341,8 @@ class MergeImagesWidgetState extends State<MergeImagesWidget> {
     // List<GlobalKey?> keys = widget.models.map((e) => e.globalKey).toList();
     // return _compositePics(keys);
     var urls = widget.models.map((e) => e.url ?? "").toList();
-    final miniCodeBytes = await ImageExt.imageDataFromUrl(imageUrl: widget.qrCodeUrl);
+    final miniCodeBytes =
+        await ImageExt.imageDataFromUrl(imageUrl: widget.qrCodeUrl);
     return toCompositeImageUrls(imageUrls: urls, miniCode: miniCodeBytes);
   }
 }
@@ -350,10 +362,7 @@ class MergeImageModel {
     this.url,
     this.width,
     this.height,
-  }): super() {
-    globalKey =  GlobalKey();
+  }) : super() {
+    globalKey = GlobalKey();
   }
 }
-
-
-

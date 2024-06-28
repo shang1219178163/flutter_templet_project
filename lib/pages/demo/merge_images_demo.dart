@@ -8,22 +8,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_templet_project/extension/image_ext.dart';
 import 'package:flutter_templet_project/extension/list_ext.dart';
+import 'package:flutter_templet_project/extension/string_ext.dart';
 
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MergeImagesDemo extends StatefulWidget {
-
   final String? title;
 
-  const MergeImagesDemo({ Key? key, this.title}) : super(key: key);
+  const MergeImagesDemo({Key? key, this.title}) : super(key: key);
 
   @override
   _MergeImagesDemoState createState() => _MergeImagesDemoState();
 }
 
 class _MergeImagesDemoState extends State<MergeImagesDemo> {
-
   final GlobalKey _globalKey = GlobalKey();
   // GlobalKey repaintBoundaryKey = GlobalKey(debugLabel: 'gk');
 
@@ -39,31 +38,37 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
 
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title ?? "$widget"),
-          actions: [
-            TextButton(
+      appBar: AppBar(
+        title: Text(widget.title ?? "$widget"),
+        actions: [
+          TextButton(
               onPressed: () => {
-                // print("保存")
-                // storeImageNew().then((val) => { print("保存 ${val}")})
-                _compositePic().then((pngBytes) {
-                  imageMerged = Image.memory(pngBytes!, width: 200, height: 600);
-                  setState(() {});
-                })
-                // _capturePng().then((val) => { print("保存")})
-              },
-              child: Text('保存', style: TextStyle(color: Colors.white),)
-            ),
-            TextButton(
+                    // print("保存")
+                    // storeImageNew().then((val) => { print("保存 ${val}")})
+                    _compositePic().then((pngBytes) {
+                      imageMerged =
+                          Image.memory(pngBytes!, width: 200, height: 600);
+                      setState(() {});
+                    })
+                    // _capturePng().then((val) => { print("保存")})
+                  },
+              child: Text(
+                '保存',
+                style: TextStyle(color: Colors.white),
+              )),
+          TextButton(
               onPressed: () => {
-                _compositePicNew().then((pngBytes) {
-                    imageMerged = Image.memory(pngBytes!, width: 400, height: 1200);
-                    setState(() {});
-                  })
-              },
-              child: Text('保存三', style: TextStyle(color: Colors.white),)
-            ),
-            TextButton(
+                    _compositePicNew().then((pngBytes) {
+                      imageMerged =
+                          Image.memory(pngBytes!, width: 400, height: 1200);
+                      setState(() {});
+                    })
+                  },
+              child: Text(
+                '保存三',
+                style: TextStyle(color: Colors.white),
+              )),
+          TextButton(
               onPressed: () {
                 final keys = [
                   repaintBoundaryKey1,
@@ -71,44 +76,46 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
                   repaintBoundaryKey3
                 ];
                 _compositePics(keys).then((pngBytes) {
-                  imageMerged = Image.memory(pngBytes!, width: 400, height: 600);
+                  imageMerged =
+                      Image.memory(pngBytes!, width: 400, height: 600);
                   setState(() {});
                 });
               },
-              child: Text('key3', style: TextStyle(color: Colors.white),)
-            ),
-          ],
-        ),
-        body: _buildBodyNew(),
+              child: Text(
+                'key3',
+                style: TextStyle(color: Colors.white),
+              )),
+        ],
+      ),
+      body: _buildBodyNew(),
     );
   }
 
-  _buildBodyNew(){
+  _buildBodyNew() {
     final screenSize = MediaQuery.of(context).size;
 
     return SingleChildScrollView(
       key: _globalKey,
       child: Column(
         children: [
-          if(imageMerged != null) imageMerged!,
+          if (imageMerged != null) imageMerged!,
           Text('合成图片'),
           _buildItem(
             repaintBoundary: RepaintBoundary(
-                key: repaintBoundaryKey1,
-                child: Image.asset(
-                  'images/bg_alp.png',
-                  fit: BoxFit.cover,
-                  width: screenSize.width,
-                  height: screenSize.height * 0.25,
-                ),
+              key: repaintBoundaryKey1,
+              child: Image(
+                image: 'bg_jiguang.png'.toAssetImage(),
+                fit: BoxFit.cover,
+                width: screenSize.width,
+                height: screenSize.height * 0.25,
               ),
-            callback: (step){
+            ),
+            callback: (step) {
               debugPrint("callback:$step");
 
               var items = ['a', 'b', 'c', 'd'];
               final itemsNew = items.exchange(1, 2);
               debugPrint("exchange:$itemsNew");
-
 
               var list = [1, 2, 3, 4, 5];
               // list.replaceRange(1, 1, [6]);
@@ -122,28 +129,28 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
           _buildItem(
             repaintBoundary: RepaintBoundary(
               key: repaintBoundaryKey3,
-              child: Image.asset(
-                'images/sha_qiu.png',
+              child: Image(
+                image: 'sha_qiu.png'.toAssetImage(),
                 fit: BoxFit.cover,
                 width: screenSize.width,
                 height: screenSize.height,
               ),
             ),
-            callback: (step){
+            callback: (step) {
               debugPrint("callback:$step");
             },
           ),
           _buildItem(
             repaintBoundary: RepaintBoundary(
               key: repaintBoundaryKey2,
-              child: Image.asset(
-                'images/bg_ocean.png',
+              child: Image(
+                image: 'bg_beach.jpg'.toAssetImage(),
                 fit: BoxFit.cover,
                 width: screenSize.width,
                 height: screenSize.height,
               ),
             ),
-            callback: (step){
+            callback: (step) {
               debugPrint("callback:$step");
             },
           ),
@@ -174,10 +181,11 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
                   heroTag: null,
                   backgroundColor: Colors.red,
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(radius))
-                  ),
+                      borderRadius: BorderRadius.all(Radius.circular(radius))),
                   onPressed: () => callback?.call(1),
-                  child: Icon(Icons.arrow_circle_down,),
+                  child: Icon(
+                    Icons.arrow_circle_down,
+                  ),
                 ),
               ),
               SizedBox(height: 8),
@@ -188,10 +196,11 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
                   heroTag: null,
                   backgroundColor: Colors.red,
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(radius))
-                  ),
+                      borderRadius: BorderRadius.all(Radius.circular(radius))),
                   onPressed: () => callback?.call(-1),
-                  child: Icon(Icons.arrow_circle_up,),
+                  child: Icon(
+                    Icons.arrow_circle_up,
+                  ),
                 ),
               ),
             ],
@@ -235,30 +244,30 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
       final paint = Paint();
       var canvas = Canvas(recorder);
       //画第一张图
-      canvas.drawRect(Rect.fromLTWH(
-          0,
-          0,
-          totalWidth * 1.0,
-          one.height * 1.0), paint);
+      canvas.drawRect(
+          Rect.fromLTWH(0, 0, totalWidth * 1.0, one.height * 1.0), paint);
       canvas.drawImage(one, Offset((totalWidth - one.width) / 2, 0), paint);
       //画第二张图
       paint.shader = null;
       paint.color = Colors.red;
-      canvas.drawRect(Rect.fromLTWH(
-          0,
-          one.height * 1.0,
-          totalWidth * 1.0,
-          two.height * 1.0), paint);
+      canvas.drawRect(
+          Rect.fromLTWH(
+              0, one.height * 1.0, totalWidth * 1.0, two.height * 1.0),
+          paint);
       canvas.drawImage(two, Offset(0, one.height + 12), paint);
       //画第三张图
-      canvas.drawRect(Rect.fromLTWH(
-        0,
-        one.height * 1.0 + two.height * 1.0,
-        totalWidth * 1.0,
-          two.height * 1.0), paint);
-      canvas.drawImage(three, Offset((totalWidth - two.width) / 2, one.height + two.height + 12), paint);
+      canvas.drawRect(
+          Rect.fromLTWH(0, one.height * 1.0 + two.height * 1.0,
+              totalWidth * 1.0, two.height * 1.0),
+          paint);
+      canvas.drawImage(
+          three,
+          Offset((totalWidth - two.width) / 2, one.height + two.height + 12),
+          paint);
 
-      var image = await recorder.endRecording().toImage(totalWidth, one.height + two.height + three.height + 24);
+      var image = await recorder
+          .endRecording()
+          .toImage(totalWidth, one.height + two.height + three.height + 24);
       //获取合成的图片
       var byteData = await image.toByteData(format: ui.ImageByteFormat.png);
       var pngBytes = byteData?.buffer.asUint8List();
@@ -288,23 +297,21 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
       var canvas = Canvas(recorder);
       final paint = Paint();
       //画第一张图
-      canvas.drawRect(Rect.fromLTWH(
-        0,
-        0,
-        totalWidth * 1.0,
-        one.height * 1.0), paint);
+      canvas.drawRect(
+          Rect.fromLTWH(0, 0, totalWidth * 1.0, one.height * 1.0), paint);
       canvas.drawImage(one, Offset((totalWidth - one.width) / 2, 0), paint);
       //画第二张图
       paint.shader = null;
       paint.color = Colors.red;
-      canvas.drawRect(Rect.fromLTWH(
-        0,
-        one.height * 1.0,
-        totalWidth * 1.0,
-          (totalHeight - one.height)*1.0), paint);
-      canvas.drawImage(two, Offset((totalWidth - two.width) / 2, one.height + 12), paint);
+      canvas.drawRect(
+          Rect.fromLTWH(0, one.height * 1.0, totalWidth * 1.0,
+              (totalHeight - one.height) * 1.0),
+          paint);
+      canvas.drawImage(
+          two, Offset((totalWidth - two.width) / 2, one.height + 12), paint);
       //获取合成的图片
-      var image = await recorder.endRecording().toImage(totalWidth, totalHeight);
+      var image =
+          await recorder.endRecording().toImage(totalWidth, totalHeight);
       var byteData = await image.toByteData(format: ui.ImageByteFormat.png);
       var pngBytes = byteData?.buffer.asUint8List();
 
@@ -318,15 +325,17 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
   /// 通过多个 SingleChildScrollView 的 RepaintBoundary 对象合成长海报
   ///
   /// keys: 根据 GlobalKey 获取 Image 数组
-  Future<Uint8List?> _compositePics([List<GlobalKey> keys = const [],]) async {
+  Future<Uint8List?> _compositePics([
+    List<GlobalKey> keys = const [],
+  ]) async {
     //根据 GlobalKey 获取 Image 数组
-    var imgs = await Future.wait(
-      keys.map((key) async {
-        var boundary = key.currentContext?.findRenderObject() as RenderRepaintBoundary?;
-        var image = await boundary?.toImage(pixelRatio: ui.window.devicePixelRatio);
-        return image;
-      }
-    ).toList());
+    var imgs = await Future.wait(keys.map((key) async {
+      var boundary =
+          key.currentContext?.findRenderObject() as RenderRepaintBoundary?;
+      var image =
+          await boundary?.toImage(pixelRatio: ui.window.devicePixelRatio);
+      return image;
+    }).toList());
 
     var images = imgs.where((e) => e != null).cast<ui.Image>().toList();
     // print("images:${images}");
@@ -348,18 +357,20 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
       //画图
       for (var i = 0; i < images.length; i++) {
         final e = images[i];
-        final offsetY = i == 0 ? 0 : imageHeights.sublist(0, i).reduce((a,b) => a + b);
+        final offsetY =
+            i == 0 ? 0 : imageHeights.sublist(0, i).reduce((a, b) => a + b);
         // print("offset:${i}_${e.height}_${offsetY}");
-        canvas.drawRect(Rect.fromLTWH(
-            0,
-            offsetY.toDouble(),
-            totalWidth * 1.0,
-            e.height * 1.0), paint);
+        canvas.drawRect(
+            Rect.fromLTWH(
+                0, offsetY.toDouble(), totalWidth * 1.0, e.height * 1.0),
+            paint);
         canvas.drawImage(e, Offset(0, offsetY.toDouble()), paint);
       }
 
       //获取合成的图片
-      var image = await recorder.endRecording().toImage(totalWidth.toInt(), totalHeight.toInt());
+      var image = await recorder
+          .endRecording()
+          .toImage(totalWidth.toInt(), totalHeight.toInt());
       var byteData = await image.toByteData(format: ui.ImageByteFormat.png);
       var pngBytes = byteData?.buffer.asUint8List();
       //图片大小
@@ -417,4 +428,3 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
   //   return byteData?.buffer.asUint8List() ?? Uint8List(10);
   // }
 }
-

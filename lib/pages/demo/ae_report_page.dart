@@ -14,10 +14,12 @@ import 'package:flutter_templet_project/basicWidget/form/ae_judge_item.dart';
 import 'package:flutter_templet_project/basicWidget/form/ae_patient_card.dart';
 import 'package:flutter_templet_project/basicWidget/form/ae_section_header.dart';
 import 'package:flutter_templet_project/basicWidget/form/ae_single_choose_item.dart';
+import 'package:flutter_templet_project/basicWidget/form/ae_upload_document_item.dart';
 import 'package:flutter_templet_project/basicWidget/form/ae_upload_image_item.dart';
 import 'package:flutter_templet_project/basicWidget/n_footer_button_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_skeleton_screen.dart';
 import 'package:flutter_templet_project/basicWidget/upload/asset_upload_model.dart';
+import 'package:flutter_templet_project/basicWidget/upload_document/asset_upload_document_model.dart';
 import 'package:flutter_templet_project/enum/ActivityType.dart';
 import 'package:flutter_templet_project/extension/bool_ext.dart';
 import 'package:flutter_templet_project/extension/custom_type_util.dart';
@@ -86,8 +88,10 @@ class _AeReportPageState extends State<AeReportPage> with SafeSetStateMixin {
   final remarkController = TextEditingController();
 
   final isUploading = ValueNotifier(false);
+  final isUploadingDoc = ValueNotifier(false);
 
   final selectedModelsVN = ValueNotifier<List<AssetUploadModel>>([]);
+  final selectedModelsDocVN = ValueNotifier<List<AssetUploadDocumentModel>>([]);
 
   final isLoading = ValueNotifier(false);
 
@@ -331,6 +335,22 @@ class _AeReportPageState extends State<AeReportPage> with SafeSetStateMixin {
                   isUploading: isUploading,
                   header: const AeSectionHeader(
                     title: '上传图片',
+                    isRequired: false,
+                  ),
+                  footer: const SizedBox(height: 15),
+                ),
+                AeUploadDocumentItem(
+                  enable: !readOnly,
+                  maxCount: 30,
+                  selectedModels: selectedModelsDocVN.value,
+                  // imgUrlsVN: null,
+                  onUpload: (list) {
+                    selectedModelsDocVN.value = list;
+                    setState(() {});
+                  },
+                  isUploading: isUploadingDoc,
+                  header: const AeSectionHeader(
+                    title: '任务凭证上传（最多9个）',
                     isRequired: false,
                   ),
                   // footer: const SizedBox(height: 15),
