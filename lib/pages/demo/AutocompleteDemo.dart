@@ -108,6 +108,7 @@ class _AutocompleteDemoState extends State<AutocompleteDemo> {
                         ),
                       ),
                     );
+
                     return buildItem(
                       onTap: () => onSelected(option),
                       child: textWidget,
@@ -174,22 +175,25 @@ class _AutocompleteDemoState extends State<AutocompleteDemo> {
           padding: EdgeInsets.symmetric(vertical: 8),
           constraints: BoxConstraints(maxHeight: 200),
           child: ListView.builder(
-              itemCount: items.length,
-              itemBuilder: (_, index) {
-                final option = options.elementAt(index);
-                final name = option.name;
-                final query = _textEditingValue.text;
+            itemCount: items.length,
+            itemBuilder: (_, index) {
+              final option = options.elementAt(index);
+              final name = option.name;
+              final query = _textEditingValue.text;
 
-                var textWidget = Text.rich(
-                  name.firstMatchLight(
-                      pattern: query, lightTextStyle: lightTextStyle),
-                );
+              var textWidget = Text.rich(
+                name.firstMatchLight(
+                  pattern: query,
+                  lightTextStyle: lightTextStyle,
+                ),
+              );
 
-                return buildItem(
-                  onTap: () => onSelected(option),
-                  child: textWidget,
-                );
-              }),
+              return buildItem(
+                onTap: () => onSelected(option),
+                child: textWidget,
+              );
+            },
+          ),
         ),
       ),
     );
@@ -245,15 +249,18 @@ class _AutocompleteDemoState extends State<AutocompleteDemo> {
         return "null";
       },
       decoration: buildInputDecoration(
-          textEditingController: textEditingController, hasEnabledBorder: true),
+        textEditingController: textEditingController,
+        hasEnabledBorder: true,
+      ),
     );
   }
 
   /// 输入框修饰器
-  buildInputDecoration(
-      {required TextEditingController textEditingController,
-      bool hasEnabledBorder = false,
-      InputBorder? enabledBorder}) {
+  buildInputDecoration({
+    required TextEditingController textEditingController,
+    bool hasEnabledBorder = false,
+    InputBorder? enabledBorder,
+  }) {
     final enabledBorderWidget = enabledBorder ??
         (!hasEnabledBorder
             ? null
@@ -265,33 +272,32 @@ class _AutocompleteDemoState extends State<AutocompleteDemo> {
 
     return InputDecoration(
       contentPadding: const EdgeInsets.all(10),
-
-      ///设置输入文本框的提示文字
-      ///输入框获取焦点时 并且没有输入文字时
+      //设置输入文本框的提示文字
+      //输入框获取焦点时 并且没有输入文字时
       hintText: "请输入关键词",
-
-      ///设置输入文本框的提示文字的样式
+      //设置输入文本框的提示文字的样式
       hintStyle: TextStyle(
         color: Colors.grey,
         textBaseline: TextBaseline.ideographic,
       ),
-
-      ///输入文字前的小图标
+      //输入文字前的小图标
       prefixIcon: Icon(Icons.search),
-
-      ///输入文字后面的小图标
+      //输入文字后面的小图标
       suffixIcon: ValueListenableBuilder<String>(
-          valueListenable: textFieldVN,
-          builder: (context, value, child) {
-            return value.isEmpty
-                ? SizedBox()
-                : IconButton(
-                    onPressed: () {
-                      textEditingController.clear();
-                      textFieldVN.value = "";
-                    },
-                    icon: Icon(Icons.cancel, color: Colors.grey));
-          }),
+        valueListenable: textFieldVN,
+        builder: (context, value, child) {
+          if (value.isEmpty) {
+            return SizedBox();
+          }
+          return IconButton(
+            onPressed: () {
+              textEditingController.clear();
+              textFieldVN.value = "";
+            },
+            icon: Icon(Icons.cancel, color: Colors.grey),
+          );
+        },
+      ),
       enabledBorder: enabledBorderWidget,
     );
   }

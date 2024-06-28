@@ -48,8 +48,8 @@ extension RichTextExt on RichText {
           return TextSpan(
             text: e,
             style: linkStyle ?? TextStyle(color: Colors.blue),
-            recognizer: TapGestureRecognizer()
-              ..onTap = () {
+            recognizer: onLink == null ? null : TapGestureRecognizer()
+              ?..onTap = () {
                 onLink?.call(e);
               },
           );
