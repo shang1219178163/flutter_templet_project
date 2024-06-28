@@ -152,9 +152,13 @@ class _NChoiceBoxOneDemoState extends State<NChoiceBoxOneDemo> {
         color: context.primaryColor,
         fontSize: 15,
       ),
+      // enable: false,
       canChanged: (val, onSelect) {
         if (rpItemCurrent.value == val) {
           return false;
+        }
+        if (val.item2 != RpType.WESTERN_MEDICINE.name) {
+          return true;
         }
         if (!canChange) {
           DeleteAlert().show(

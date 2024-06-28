@@ -6,19 +6,16 @@
 //  Copyright © 2023/12/28 shang. All rights reserved.
 //
 
-
 import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_button_cancel.dart';
 import 'package:flutter_templet_project/basicWidget/n_button_confirm.dart';
 
-
 /// 页面底部取消确定菜单
 class NFooterButtonBar extends StatelessWidget {
-
   const NFooterButtonBar({
-  	Key? key,
+    super.key,
     this.primary,
     this.padding,
     this.decoration,
@@ -28,13 +25,17 @@ class NFooterButtonBar extends StatelessWidget {
     this.gap = 16,
     this.btnBorderRadius = const BorderRadius.all(Radius.circular(8)),
     this.onCancel,
+    this.onCancelTap,
     required this.onConfirm,
+    this.onConfirmTap,
     this.hideCancel = false,
-    this.enable = true,
-    this.isReverse = false,
+    this.hideConfirm = false,
+    this.boxShadow,
+    this.gradient,
     this.header,
     this.footer,
-  }) : super(key: key);
+    this.enable = true,
+  });
 
   final Color? primary;
   final EdgeInsets? padding;
@@ -47,75 +48,82 @@ class NFooterButtonBar extends StatelessWidget {
   final BorderRadius? btnBorderRadius;
   final VoidCallback? onCancel;
   final VoidCallback? onConfirm;
+  final ValueChanged<String>? onCancelTap;
+  final ValueChanged<String>? onConfirmTap;
+  final Gradient? gradient;
+
+  /// 阴影
+  final List<BoxShadow>? boxShadow;
+
   /// 是否隐藏取消按钮
   final bool hideCancel;
 
-  /// 确定按钮是否可点击
-  final bool enable;
+  /// 是否隐藏确定按钮
+  final bool hideConfirm;
 
   final bool isPageBottom = true;
-  /// 标题图标翻转
-  final bool isReverse;
-
 
   final Widget? header;
   final Widget? footer;
 
+  /// 确定按钮是否可点击
+  final bool enable;
+
   @override
   Widget build(BuildContext context) {
-    var children = [
-      if(!hideCancel)Expanded(
-        child: NButtonCancel(
-          height: height,
-          bgColor: primary,
-          borderRadius: btnBorderRadius,
-          title: cancelTitle,
-          enable: enable,
-          onPressed: onCancel,
-        ),
-      ),
-      if(!hideCancel)SizedBox(
-        width: gap,
-      ),
-      Expanded(
-        child: NButtonConfirm(
-          height: height,
-          bgColor: primary,
-          borderRadius: btnBorderRadius,
-          title: confirmTitle,
-          enable: enable,
-          onPressed: onConfirm,
-        ),
-      ),
-    ];
-
-    if (isReverse) {
-      children = children.reversed.toList();
+    if (hideCancel && hideConfirm) {
+      return const SizedBox();
     }
-
     return Container(
-      padding: padding ?? EdgeInsets.only(
-        top: 12,
-        left: 16,
-        right: 16,
-        bottom: max(12, MediaQuery.of(context).padding.bottom),
-      ),
-      decoration: decoration ?? const BoxDecoration(
-        color: Colors.white,
-        border: Border(
-          top: BorderSide(color: Color(0xffE5E5E5))
-        )
-      ),
+      padding: padding ??
+          EdgeInsets.only(
+            top: 12,
+            left: 16,
+            right: 16,
+            bottom: max(12, MediaQuery.of(context).padding.bottom),
+          ),
+      decoration: decoration ??
+          const BoxDecoration(
+              color: Colors.white,
+              border: Border(top: BorderSide(color: Color(0xffE5E5E5)))),
       child: Column(
         children: [
           header ?? const SizedBox(),
-          Row(
-            children: children,
-          ),
+          buildButtonBar(),
           footer ?? const SizedBox(),
         ],
       ),
     );
   }
 
+  /// 按钮菜单栏
+  Widget buildButtonBar() {
+    return Row(
+      children: [
+        if (!hideCancel)
+          Expanded(
+            child: NButtonCancel(
+              title: cancelTitle,
+              onPressed: onCancel,
+              onTap: onCancelTap,
+            ),
+          ),
+        if (!hideCancel && !hideConfirm)
+          SizedBox(
+            width: gap,
+          ),
+        if (!hideConfirm)
+          Expanded(
+            child: NButtonConfirm(
+              boxShadow: boxShadow,
+              gradient: gradient,
+              title: confirmTitle,
+              enable: enable,
+              onPressed: onConfirm,
+              onTap: onConfirmTap,
+            ),
+          ),
+      ],
+    );
+  }
 }
