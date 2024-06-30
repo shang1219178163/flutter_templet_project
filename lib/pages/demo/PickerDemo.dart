@@ -24,7 +24,6 @@ class PickerDemo extends StatefulWidget {
 }
 
 class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
-
   var title = "";
 
   late final List<({String name, VoidCallback action})> items = [
@@ -41,7 +40,6 @@ class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
     (name: "单项选择", action: onSingleOne),
     (name: "多项选择", action: onWeight),
   ];
-
 
   /// 体重
   final weightData = <List<String>>[
@@ -92,10 +90,10 @@ class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
             padding: EdgeInsets.all(0),
           ),
           child: Text('${e.name}_${i}',
-              style: TextStyle(fontSize: 12,
+              style: TextStyle(
+                fontSize: 12,
                 color: Colors.black87,
-              )
-          ),
+              )),
         );
       }).toList(),
     );
@@ -104,7 +102,7 @@ class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
   Future<void> onDate() async {
     _showDatePicker(
       context: context,
-      onCancel: (){
+      onCancel: () {
         ddlog("${DateTime.now()}");
         Navigator.of(context).pop();
       },
@@ -140,14 +138,15 @@ class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
       child: CupertinoPicker(
         backgroundColor: Colors.white,
         itemExtent: 30,
-        scrollController: FixedExtentScrollController(
-            initialItem: _selectedValue),
+        scrollController:
+            FixedExtentScrollController(initialItem: _selectedValue),
         onSelectedItemChanged: (val) {
           _selectedValue = val;
-      // setState(() {});
+          // setState(() {});
         },
         children: List.generate(10, (index) {
-          return Text('选择_$index',
+          return Text(
+            '选择_$index',
             style: TextStyle(fontSize: 16),
           );
         }),
@@ -169,13 +168,12 @@ class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
         child: TextButton(
           onPressed: () {
             ddlog("Button");
-          }, child: Text("Button"),
+          },
+          child: Text("Button"),
         ),
       ),
     );
   }
-
-
 
   var selectedItem = {"name": "选项_3"};
 
@@ -196,10 +194,16 @@ class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
         final checkColor = isSame ? Colors.blue : Colors.transparent;
 
         return ListTile(
-          title: Text(item['name'] ?? '', style: TextStyle(color: textColor),),
-          trailing: Icon(Icons.check, color: checkColor,),
+          title: Text(
+            item['name'] ?? '',
+            style: TextStyle(color: textColor),
+          ),
+          trailing: Icon(
+            Icons.check,
+            color: checkColor,
+          ),
           onTap: () {
-            Navigator.of(context).pop(idx);
+            // Navigator.of(context).pop(idx);
             ddlog(item);
             selectedItem = item;
           },
@@ -224,7 +228,7 @@ class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
           NPickerToolBar(
             title: "单选",
             confirmTitle: "",
-            onConfirm: (){
+            onConfirm: () {
               ddlog("NPickerToolBar");
             },
           ),
@@ -284,8 +288,7 @@ class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
       },
       child: Container(
 // height: 300,
-          child: ListTileDemo()
-      ),
+          child: ListTileDemo()),
     );
   }
 
@@ -335,8 +338,7 @@ class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
         },
         onCancel: () {
           Navigator.of(context).pop();
-        }
-    );
+        });
   }
 
   Future<void> onWeight() async {
@@ -356,8 +358,7 @@ class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
         },
         onCancel: () {
           Navigator.of(context).pop();
-        }
-    );
+        });
   }
 
   void _showDatePicker({
@@ -395,22 +396,16 @@ class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
                         dateTime = val;
                         onDateTimeChanged(val);
                         setState(() {});
-                      }
-                  ),
+                      }),
                 ),
               ],
             ),
           );
-        }
-    );
+        });
   }
-
-
 }
 
-
 class DatePickerDemo extends StatefulWidget {
-
   DatePickerDemo({
     Key? key,
     this.dateTime,
@@ -426,7 +421,6 @@ class DatePickerDemo extends StatefulWidget {
 }
 
 class _DatePickerDemoState extends State<DatePickerDemo> {
-
   @override
   Widget build(BuildContext context) {
     final time = widget.dateTime != null
@@ -436,31 +430,31 @@ class _DatePickerDemoState extends State<DatePickerDemo> {
       navigationBar: CupertinoNavigationBar(
         middle: Text('$widget.dateTime'),
         // This button triggers the _showDatePicker function
-        trailing: Container(child:
-        CupertinoButton(
-          padding: EdgeInsetsDirectional.zero,
-          onPressed: () {
-            // _showDatePicker(context);
-            // _datePickerValueChange();
-          },
-          child: Text('Show Picker'),
-        ),),
+        trailing: Container(
+          child: CupertinoButton(
+            padding: EdgeInsetsDirectional.zero,
+            onPressed: () {
+              // _showDatePicker(context);
+              // _datePickerValueChange();
+            },
+            child: Text('Show Picker'),
+          ),
+        ),
       ),
       child: SafeArea(
         child: Center(
             child: TextButton(
-              onPressed: () {
-                // _showDatePicker(context);
-                //   _datePickerValueChange();
-              },
-              child: Text(time),
-            )
-        ),
+          onPressed: () {
+            // _showDatePicker(context);
+            //   _datePickerValueChange();
+          },
+          child: Text(time),
+        )),
       ),
     );
   }
 
-///时间变动
+  ///时间变动
 // void _datePickerValueChange() {
 //   context.showDatePicker(
 //       mode: CupertinoDatePickerMode.date,
@@ -477,6 +471,4 @@ class _DatePickerDemoState extends State<DatePickerDemo> {
 // groovyScript("def result = ''; _1.split().eachWithIndex { item, index -> result = result + index.next() + '. ' + item + System.lineSeparator() }; return result;", SELECTION);
 // groovyScript("return _editor.filePath().split('/').get(4)");
 // }
-
 }
-

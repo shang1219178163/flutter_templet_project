@@ -8,7 +8,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/form/ae_card.dart';
+import 'package:flutter_templet_project/basicWidget/form/ae_choose_item.dart';
 import 'package:flutter_templet_project/basicWidget/form/ae_date_choose_item.dart';
+import 'package:flutter_templet_project/basicWidget/form/ae_horizal_choose_item.dart';
+import 'package:flutter_templet_project/basicWidget/form/ae_horizal_choose_mutil_item.dart';
 import 'package:flutter_templet_project/basicWidget/form/ae_input_item.dart';
 import 'package:flutter_templet_project/basicWidget/form/ae_judge_item.dart';
 import 'package:flutter_templet_project/basicWidget/form/ae_patient_card.dart';
@@ -69,7 +72,16 @@ class _AeReportPageState extends State<AeReportPage> with SafeSetStateMixin {
   final drugRelated = ValueNotifier<ActivityType?>(null);
   final drugMeasures = ValueNotifier<ActivityType?>(null);
 
+  final aePrognosisMuti = ValueNotifier<List<ActivityType>?>(null);
   final aePrognosis = ValueNotifier<ActivityType?>(null);
+  final aePrognosisNew = ValueNotifier<List<ActivityType>?>(null);
+
+  /// 体重
+  final weightData = <List<String>>[
+    List.generate(240, (index) => '${index + 10}').toList(),
+    List.generate(10, (index) => '.$index').toList(),
+  ];
+  final weightDataVN = ValueNotifier<List<String>?>(null);
 
   final dateBegin = ValueNotifier<DateTime?>(null);
   final dateEnd = ValueNotifier<DateTime?>(null);
@@ -243,6 +255,50 @@ class _AeReportPageState extends State<AeReportPage> with SafeSetStateMixin {
                   },
                   header: const AeSectionHeader(
                     title: 'AE转归',
+                    isRequired: false,
+                  ),
+                  footer: const SizedBox(height: 15),
+                ),
+                AeChooseItem(
+                  enable: !readOnly,
+                  title: 'AE转归多选Muti',
+                  dataList: ActivityType.values,
+                  selectVN: aePrognosisMuti,
+                  convertCb: (e) => e.desc,
+                  onChanged: (e) {
+                    DLog.d(e);
+                  },
+                  header: const AeSectionHeader(
+                    title: 'AE转归多选Muti',
+                    isRequired: false,
+                  ),
+                  footer: const SizedBox(height: 15),
+                ),
+                AeHorizalChooseMutilItem(
+                  enable: !readOnly,
+                  title: 'AE转归多选',
+                  dataList: [ActivityType.values, ActivityType.values],
+                  selectVN: aePrognosisNew,
+                  convertCb: (e) => e.map((e) => e.desc).toList(),
+                  onChanged: (e) {
+                    DLog.d(e);
+                  },
+                  header: const AeSectionHeader(
+                    title: 'AE转归多选',
+                    isRequired: false,
+                  ),
+                  footer: const SizedBox(height: 15),
+                ),
+                AeHorizalChooseItem(
+                  enable: !readOnly,
+                  title: '体重',
+                  dataList: weightData,
+                  selectVN: weightDataVN,
+                  onChanged: (e) {
+                    DLog.d(e);
+                  },
+                  header: const AeSectionHeader(
+                    title: '体重',
                     isRequired: false,
                   ),
                   footer: const SizedBox(height: 15),
