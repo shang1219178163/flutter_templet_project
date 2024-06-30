@@ -17,7 +17,7 @@ import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/network/oss/oss_util.dart';
 import 'package:get/get.dart';
 
-/// 上传图片单元(基于 wechat_assets_picker)
+/// 上传文档子项
 class AssetUploadDocumentButton extends StatefulWidget {
   const AssetUploadDocumentButton({
     super.key,
@@ -174,49 +174,49 @@ class AssetUploadDocumentButtonState extends State<AssetUploadDocumentButton>
 
   Widget buildUploading() {
     return AnimatedBuilder(
-        animation: Listenable.merge([
-          _successVN,
-          _percentVN,
-        ]),
-        builder: (context, child) {
-          if (_successVN.value == false) {
-            return buildUploadFail();
-          }
-          final value = _percentVN.value;
-          // LogUtil.d("${fileName}_percentVN: ${_percentVN.value}");
-          if (value >= 1) {
-            return const SizedBox();
-          }
-          return Container(
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: Colors.black45,
-              borderRadius: BorderRadius.all(Radius.circular(widget.radius)),
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                // if (value <= 0)NText(
-                //   data: "处理中",
-                //   fontSize: 14,
-                //   color: Colors.white,
-                // ),
-                if (widget.model.file != null &&
-                    (widget.model.file!.lengthSync() > 2 * 1024 * 1024) == true)
-                  NText(
-                    value.toStringAsPercent(2),
-                    fontSize: 12,
-                    color: Colors.white,
-                  ),
-                const NText(
-                  "上传中",
-                  fontSize: 12,
-                  color: Colors.white,
-                ),
-              ],
-            ),
-          );
-        });
+      animation: Listenable.merge([
+        _successVN,
+        _percentVN,
+      ]),
+      builder: (context, child) {
+        if (_successVN.value == false) {
+          return buildUploadFail();
+        }
+        final value = _percentVN.value;
+        // LogUtil.d("${fileName}_percentVN: ${_percentVN.value}");
+        if (value >= 1) {
+          return const SizedBox();
+        }
+
+        final showPercent = widget.model.file != null &&
+            (widget.model.file!.lengthSync() > 2 * 1024 * 1024) == true;
+
+        final desc = showPercent ? value.toStringAsPercent(2) : "上传中";
+
+        return Container(
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: Colors.black45,
+            borderRadius: BorderRadius.all(Radius.circular(widget.radius)),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // if (value <= 0)NText(
+              //   data: "处理中",
+              //   fontSize: 14,
+              //   color: Colors.white,
+              // ),
+              NText(
+                desc,
+                fontSize: 12,
+                color: Colors.white,
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 
   Widget buildUploadFail() {
@@ -262,9 +262,7 @@ class AssetUploadDocumentButtonState extends State<AssetUploadDocumentButton>
       filePath: path,
       onSendProgress: (int count, int total) {
         final percent = (count / total);
-        if (percent >= 0.99) {
-          _percentVN.value = 0.99;
-        }
+        _percentVN.value = percent.clamp(0, 0.99); // dio 上传进度和返回 url 有时间差
       },
       onReceiveProgress: (int count, int total) {
         _percentVN.value = 1;

@@ -7,7 +7,7 @@
 ```
   /// 初始化数据
   var selectedModels = <AssetUploadDocumentModel>[];
-  /// 获取图片链接数组
+  /// 获取链接数组
   List<String> urls = [];
 
   ......

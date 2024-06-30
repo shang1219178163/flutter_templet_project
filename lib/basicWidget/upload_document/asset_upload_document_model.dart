@@ -24,7 +24,7 @@ class AssetUploadDocumentModel {
   Map<String, dynamic> toJson() {
     final data = Map<String, dynamic>();
     data['url'] = url;
-    data['file'] = file?.path;
+    data['file'] = file;
     return data;
   }
 }

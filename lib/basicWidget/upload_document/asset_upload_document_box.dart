@@ -18,7 +18,7 @@ import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:flutter_templet_project/util/tool_util.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 
-/// 上传文档单元(基于 file_picker)
+/// 上传文档组件(基于 file_picker)
 class AssetUploadDocumentBox extends StatefulWidget {
   const AssetUploadDocumentBox({
     super.key,
@@ -87,9 +87,6 @@ class AssetUploadDocumentBox extends StatefulWidget {
 class AssetUploadDocumentBoxState extends State<AssetUploadDocumentBox>
     with FilePickerMixin {
   late final List<AssetUploadDocumentModel> selectedModels = [];
-
-  // Sheet选择器
-  final List<String> actions = ['拍摄', '从相册选择'];
 
   /// 全部上传结束
   final isAllUploadFinished = ValueNotifier(false);
@@ -227,12 +224,12 @@ class AssetUploadDocumentBoxState extends State<AssetUploadDocumentBox>
   }) async {
     try {
       List<File> files = await onPickerFiles(maxMB: maxMB);
-      for (final file in files) {
-        if (file.lengthSync() >= maxMB * 1024 * 1024) {
-          ToastUtil.show("单个文件大小不得超出${maxMB}M");
-          continue;
-        }
-      }
+      // for (final file in files) {
+      //   if (file.lengthSync() >= maxMB * 1024 * 1024) {
+      //     ToastUtil.show("单个文件大小不得超出${maxMB}M");
+      //     continue;
+      //   }
+      // }
       if (files.isEmpty) {
         debugPrint("没有添加新图片");
         widget.onCancel?.call();
