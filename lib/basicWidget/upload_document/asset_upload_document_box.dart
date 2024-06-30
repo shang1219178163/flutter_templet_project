@@ -1,9 +1,9 @@
 //
 //  AssetUploadDocumentBox.dart
-//  hf
+//  flutter_templet_project
 //
-//  Created by shang on 2023/04/30 11:17.
-//  Copyright © 2023/04/30 shang. All rights reserved.
+//  Created by shang on 2024/6/30 08:37.
+//  Copyright © 2024/6/30 shang. All rights reserved.
 //
 
 import 'dart:io';
@@ -217,7 +217,7 @@ class AssetUploadDocumentBoxState extends State<AssetUploadDocumentBox>
     });
   }
 
-  /// 微信相册选择器
+  /// 选择
   Future<void> onPicker({
     int maxCount = 9,
     int maxMB = 28,

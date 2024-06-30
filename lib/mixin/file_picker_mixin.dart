@@ -8,9 +8,8 @@
 
 import 'dart:io';
 
-import 'package:flutter/material.dart';
-
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/util/permission_util.dart';
 
 /// (文档)文件选择

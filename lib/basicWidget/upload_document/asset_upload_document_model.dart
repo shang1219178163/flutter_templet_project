@@ -18,7 +18,7 @@ class AssetUploadDocumentModel {
   /// 上传之后的文件 url
   String? url;
 
-  /// 压缩之后的文件
+  /// 文件
   File? file;
 
   Map<String, dynamic> toJson() {
