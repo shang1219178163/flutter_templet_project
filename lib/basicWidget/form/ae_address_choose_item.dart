@@ -1,5 +1,5 @@
 //
-//  AeChooseItem.dart
+//  AeAddressChooseItem.dart
 //  yl_ylgcp_app
 //
 //  Created by shang on 2024/6/18 10:37.
@@ -7,24 +7,21 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_picker_choice_view.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
-import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:flutter_templet_project/util/tool_util.dart';
 import 'package:flutter_templet_project/vendor/flutter_pickers/flutter_picker_util.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
-import 'package:get/get.dart';
 
-/// AE 多选组件
-class AeChooseItem<T> extends StatelessWidget {
-  const AeChooseItem({
+/// AE 地址组件
+class AeAddressChooseItem extends StatelessWidget {
+  const AeAddressChooseItem({
     super.key,
     this.title,
-    required this.dataList,
+    // required this.dataList,
     required this.selectVN,
     required this.convertCb,
     this.onChanged,
@@ -39,16 +36,16 @@ class AeChooseItem<T> extends StatelessWidget {
   final String? title;
 
   /// 选择项列表
-  final List<T> dataList;
+  // final List<AddressPickerModel> dataList;
 
   /// 选择项
-  final ValueNotifier<List<T>?> selectVN;
+  final ValueNotifier<AddressPickerModel?> selectVN;
 
   /// 类型转字符串
-  final String Function(T e) convertCb;
+  final String Function(AddressPickerModel e) convertCb;
 
   /// 修改回调
-  final ValueChanged<List<T>?>? onChanged;
+  final ValueChanged<AddressPickerModel>? onChanged;
 
   /// 组件头
   final Widget? header;
@@ -70,17 +67,17 @@ class AeChooseItem<T> extends StatelessWidget {
       children: [
         header ?? const SizedBox(),
         if (header != null) const SizedBox(height: 5),
-        buildBody(context),
+        buildBody(),
         footer ?? const SizedBox(),
       ],
     );
   }
 
-  Widget buildBody(BuildContext context) {
+  Widget buildBody() {
     final bgColor = enable ? white : disableBgColor ?? bgColorEDEDED;
 
     return GestureDetector(
-      onTap: () => onPicker(context),
+      onTap: onPicker,
       child: Container(
         width: double.infinity,
         constraints: const BoxConstraints(minHeight: 36),
@@ -104,7 +101,7 @@ class AeChooseItem<T> extends StatelessWidget {
               child: ValueListenableBuilder(
                 valueListenable: selectVN,
                 builder: (context, value, child) {
-                  var name = value != null ? '请选择' : "";
+                  var name = value == null ? '请选择' : convertCb(value);
                   final color = enable
                       ? (value != null ? fontColor : fontColorB3B3B3)
                       : (disableTextColor ?? fontColorB3B3B3);
@@ -112,7 +109,7 @@ class AeChooseItem<T> extends StatelessWidget {
                     name = "--";
                   }
                   return NText(
-                    name ?? "",
+                    name,
                     fontSize: 14,
                     color: color,
                   );
@@ -134,78 +131,20 @@ class AeChooseItem<T> extends StatelessWidget {
     );
   }
 
-  void onPicker(BuildContext context) {
+  void onPicker() {
     if (!enable) {
       DLog.d("$this 组件已禁用");
       return;
     }
-    if (dataList.isEmpty) {
-      ToastUtil.show('暂无数据');
-      return;
-    }
+
     ToolUtil.removeInputFocus();
-
-    final pickerView = ValueListenableBuilder(
-      valueListenable: selectVN,
-      builder: (context, value, child) {
-        return NPickerChoiceView(
-          title: '请选择',
-          divider: SizedBox(),
-          onConfirm: () {
-            onChanged?.call(selectVN.value);
-            Navigator.of(context).pop();
-          },
-          items: dataList,
-          itemBuilder: (BuildContext context, idx) {
-            final e = dataList[idx];
-
-            final name = convertCb(e);
-
-            final isSame = selectVN.value != null
-                ? selectVN.value!.map((e) => convertCb(e)).contains(name)
-                : false;
-            final textColor = isSame ? Colors.blue : Colors.black87;
-            final checkColor = isSame ? Colors.blue : Colors.transparent;
-
-            return Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                ListTile(
-                  title: Text(
-                    name,
-                    style: TextStyle(color: textColor),
-                  ),
-                  trailing: Icon(
-                    Icons.check,
-                    color: checkColor,
-                  ),
-                  onTap: () {
-                    // Navigator.of(context).pop(idx);
-                    final list = <T>[...selectVN.value ?? []];
-                    if (selectVN.value?.contains(e) != true) {
-                      list.add(e);
-                    } else {
-                      list.remove(e);
-                    }
-                    selectVN.value = list;
-                    // DLog.d(
-                    //     "$this selectVN.value${selectVN.value.hashCode}: ${selectVN.value}");
-                  },
-                ),
-                Divider(
-                  height: 0.5,
-                  indent: 15,
-                ),
-              ],
-            );
-          },
-        );
+    FlutterPickerUtil.showAddressPicker(
+      title: '请选择${title ?? ""}',
+      initTown: "",
+      confirm: (e) {
+        selectVN.value = e;
+        onChanged?.call(e);
       },
-    );
-
-    pickerView.toShowModalBottomSheet(
-      context: context,
-      backgroundColor: Colors.transparent,
     );
   }
 }

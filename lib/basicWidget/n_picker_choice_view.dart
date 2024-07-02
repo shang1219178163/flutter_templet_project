@@ -23,6 +23,7 @@ class NPickerChoiceView<E> extends StatefulWidget {
     required this.itemBuilder,
     this.filterCb,
     this.toolbar,
+    this.divider,
     this.empty,
   });
 
@@ -30,6 +31,8 @@ class NPickerChoiceView<E> extends StatefulWidget {
   final String title;
 
   final Widget? toolbar;
+
+  final Widget? divider;
 
   final Widget? empty;
 
@@ -68,9 +71,12 @@ class NPickerChoiceViewState<E> extends State<NPickerChoiceView<E>> {
                 () {
                   Navigator.of(context).pop();
                 },
-            confirmTitle: "",
+            onConfirm: widget.onConfirm ??
+                () {
+                  Navigator.of(context).pop();
+                },
           ),
-        widget.toolbar ?? Divider(height: 0.5),
+        widget.divider ?? Divider(height: 0.5),
         Expanded(
           child: Scrollbar(
             controller: scrollController,

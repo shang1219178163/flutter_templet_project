@@ -7,6 +7,7 @@
 //
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/form/ae_address_choose_item.dart';
 import 'package:flutter_templet_project/basicWidget/form/ae_card.dart';
 import 'package:flutter_templet_project/basicWidget/form/ae_choose_item.dart';
 import 'package:flutter_templet_project/basicWidget/form/ae_date_choose_item.dart';
@@ -31,6 +32,7 @@ import 'package:flutter_templet_project/extension/function_ext.dart';
 import 'package:flutter_templet_project/mixin/safe_set_state_mixin.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:flutter_templet_project/util/tool_util.dart';
+import 'package:flutter_templet_project/vendor/flutter_pickers/flutter_picker_util.dart';
 import 'package:get/get.dart';
 
 /// 不良事件上报
@@ -98,6 +100,8 @@ class _AeReportPageState extends State<AeReportPage> with SafeSetStateMixin {
   ];
 
   final remarkController = TextEditingController();
+
+  final addressVN = ValueNotifier<AddressPickerModel?>(null);
 
   final isUploading = ValueNotifier(false);
   final isUploadingDoc = ValueNotifier(false);
@@ -367,6 +371,22 @@ class _AeReportPageState extends State<AeReportPage> with SafeSetStateMixin {
                     footer: const SizedBox(height: 15),
                   );
                 }).toList(),
+                AeAddressChooseItem(
+                  selectVN: addressVN,
+                  convertCb: (AddressPickerModel e) {
+                    return [e.province, e.city, e.town]
+                        .where((e) => e?.isNotEmpty == true)
+                        .join();
+                  },
+                  onChanged: (e) {
+                    DLog.d("$e");
+                  },
+                  header: const AeSectionHeader(
+                    title: "地址信息",
+                    isRequired: false,
+                  ),
+                  footer: const SizedBox(height: 15),
+                ),
                 AeInputItem(
                   title: '备注',
                   enable: !readOnly,
