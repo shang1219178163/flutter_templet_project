@@ -24,14 +24,15 @@ class AeInputItem extends StatelessWidget {
     this.keyboardType,
     this.textAlign = TextAlign.start,
     this.radius = 4,
-    this.minLines = 4,
+    this.minLines = 3,
     this.maxLines = 4,
-    this.maxLength,
+    this.maxLength = 100,
     this.softWrap = true,
     this.autofocus = false,
     this.inputFormatters,
     this.disableBgColor,
     this.disableTextColor,
+    this.showCounter = false,
     this.isCounterInner = false,
     this.header,
     this.footer,
@@ -63,7 +64,7 @@ class AeInputItem extends StatelessWidget {
   final int? minLines;
 
   /// 最大行数
-  final int maxLines;
+  final int? maxLines;
 
   /// 最大字数
   final int? maxLength;
@@ -82,6 +83,9 @@ class AeInputItem extends StatelessWidget {
 
   /// 禁用字体颜色
   final Color? disableTextColor;
+
+  /// 是否显示字数统计
+  final bool showCounter;
 
   /// 字数统计 是否显示在内部
   final bool isCounterInner;
@@ -158,10 +162,9 @@ class AeInputItem extends StatelessWidget {
       );
     }
 
-    final hasMaxLengthLimit = maxLength != null;
-    final counter = hasMaxLengthLimit
+    final counter = showCounter
         ? controller.buildInputDecorationCounter(
-            maxLength: maxLength!,
+            maxLength: maxLength,
           )
         : null;
 
@@ -185,7 +188,7 @@ class AeInputItem extends StatelessWidget {
               left: 8,
               top: 8,
               right: 8,
-              bottom: hasMaxLengthLimit && isCounterInner ? 22 + 8 : 8,
+              bottom: showCounter && isCounterInner ? 22 + 8 : 8,
             ),
             // icon: Icon(Icons.search),
             // labelText: "Search",
@@ -196,7 +199,7 @@ class AeInputItem extends StatelessWidget {
             focusedBorder: buildBorder(
               color: context.primaryColor,
             ),
-            counter: hasMaxLengthLimit && !isCounterInner ? counter : null,
+            counter: showCounter && !isCounterInner ? counter : null,
           ),
           inputFormatters: inputFormatters ??
               [
@@ -204,7 +207,7 @@ class AeInputItem extends StatelessWidget {
                   LengthLimitingTextInputFormatter(maxLength),
               ],
         ),
-        if (hasMaxLengthLimit && isCounterInner)
+        if (showCounter && isCounterInner)
           Positioned(
             right: 10,
             bottom: 8,

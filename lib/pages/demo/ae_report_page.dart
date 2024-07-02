@@ -402,8 +402,8 @@ class _AeReportPageState extends State<AeReportPage> with SafeSetStateMixin {
                   enable: !readOnly,
                   controller: remarkController,
                   softWrap: true,
-                  maxLines: 10,
-                  maxLength: 200,
+                  maxLines: null,
+                  maxLength: null,
                   header: const AeSectionHeader(
                     title: '备注',
                     isRequired: false,
@@ -415,8 +415,9 @@ class _AeReportPageState extends State<AeReportPage> with SafeSetStateMixin {
                   enable: !readOnly,
                   controller: remarkController,
                   softWrap: true,
-                  maxLines: 10,
+                  maxLines: 6,
                   maxLength: 2000,
+                  showCounter: true,
                   isCounterInner: true,
                   header: const AeSectionHeader(
                     title: '备注1',
@@ -429,7 +430,8 @@ class _AeReportPageState extends State<AeReportPage> with SafeSetStateMixin {
                   enable: !readOnly,
                   controller: remarkController,
                   softWrap: true,
-                  maxLines: 10,
+                  maxLines: 6,
+                  showCounter: true,
                   isCounterInner: false,
                   header: const AeSectionHeader(
                     title: '备注2',
