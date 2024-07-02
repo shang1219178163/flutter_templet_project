@@ -1,5 +1,5 @@
 //
-//  AeRemarkItem.dart
+//  AeTextfiled.dart
 //  yl_ylgcp_app
 //
 //  Created by shang on 2024/6/18 21:17.
@@ -14,8 +14,8 @@ import 'package:flutter_templet_project/extension/editable_text_ext.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 
 /// AE 输入框组件
-class AeInputItem extends StatelessWidget {
-  const AeInputItem({
+class AeTextfiled extends StatelessWidget {
+  const AeTextfiled({
     super.key,
     this.title,
     required this.controller,
@@ -32,131 +32,45 @@ class AeInputItem extends StatelessWidget {
     this.inputFormatters,
     this.disableBgColor,
     this.disableTextColor,
-    this.isCounterInner = false,
-    this.header,
-    this.footer,
+    this.isCounterInner = true,
     this.enable = true,
   });
 
   /// 选择项标题
   final String? title;
 
-  /// 控制器
   final TextEditingController controller;
 
-  /// 回调
   final ValueChanged<String>? onChanged;
-
-  /// 编辑回调
   final VoidCallback? onEditingComplete;
-
-  /// 键盘样式
   final TextInputType? keyboardType;
-
-  /// 字体对齐方式
   final TextAlign textAlign;
-
-  /// 圆角
   final double radius;
-
-  /// 最小行数
   final int? minLines;
-
-  /// 最大行数
   final int maxLines;
 
-  /// 最大字数
+  /// 最大长度
   final int? maxLength;
 
   /// 是否可以折行
   final bool softWrap;
-
-  /// 是否自动对焦
   final bool autofocus;
-
-  /// 输入过滤
   final List<TextInputFormatter>? inputFormatters;
 
   /// 禁用背景色
   final Color? disableBgColor;
 
-  /// 禁用字体颜色
   final Color? disableTextColor;
 
   /// 字数统计 是否显示在内部
   final bool isCounterInner;
-
-  /// 组件头
-  final Widget? header;
-
-  /// 组件尾
-  final Widget? footer;
 
   /// 是否禁用
   final bool enable;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        header ?? const SizedBox(),
-        if (header != null) const SizedBox(height: 5),
-        buildBody(context),
-        footer ?? const SizedBox(),
-      ],
-    );
-  }
-
-  Widget buildBody(BuildContext context) {
-    final boxShadow = const [
-      BoxShadow(
-        color: Color(0x08000000),
-        blurRadius: 16,
-        offset: Offset(0, 5),
-      )
-    ];
-    final textColor =
-        enable ? fontColor : (disableTextColor ?? fontColorB3B3B3);
-    final bgColor = enable ? white : disableBgColor ?? bgColorEDEDED;
-
-    final style = TextStyle(
-      color: textColor,
-      fontSize: 14,
-    );
-
-    if (!enable) {
-      var text = controller.text;
-      if (text.isEmpty) {
-        text = "--";
-      }
-
-      return Container(
-        width: double.infinity,
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-        decoration: BoxDecoration(
-          color: bgColor,
-          border: Border.all(color: const Color(0xFFE6E6E6), width: 0.5),
-          borderRadius: const BorderRadius.all(Radius.circular(4)),
-          boxShadow: boxShadow,
-        ),
-        child: NText(
-          text,
-          style: TextStyle(
-            color: textColor,
-            fontSize: 14,
-          ),
-        ),
-      );
-    }
-
-    /// 边框
-    buildBorder({Color color = const Color(0xFFE6E6E6)}) {
-      return OutlineInputBorder(
-        borderSide: BorderSide(color: color, width: 0.5),
-        borderRadius: BorderRadius.circular(radius),
-      );
-    }
+    // final hasCounterDesc = enable && maxLines > 1;
 
     final hasMaxLengthLimit = maxLength != null;
     final counter = hasMaxLengthLimit
@@ -176,7 +90,6 @@ class AeInputItem extends StatelessWidget {
           minLines: minLines,
           maxLines: maxLines,
           textAlign: textAlign,
-          style: style,
           autofocus: autofocus,
           cursorColor: context.primaryColor,
           decoration: InputDecoration(
@@ -211,6 +124,14 @@ class AeInputItem extends StatelessWidget {
             child: counter ?? SizedBox(),
           ),
       ],
+    );
+  }
+
+  /// 边框
+  buildBorder({Color color = const Color(0xFFE6E6E6)}) {
+    return OutlineInputBorder(
+      borderSide: BorderSide(color: color, width: 0.5),
+      borderRadius: BorderRadius.circular(radius),
     );
   }
 }

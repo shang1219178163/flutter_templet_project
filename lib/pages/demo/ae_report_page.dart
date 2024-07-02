@@ -18,6 +18,7 @@ import 'package:flutter_templet_project/basicWidget/form/ae_judge_item.dart';
 import 'package:flutter_templet_project/basicWidget/form/ae_patient_card.dart';
 import 'package:flutter_templet_project/basicWidget/form/ae_section_header.dart';
 import 'package:flutter_templet_project/basicWidget/form/ae_single_choose_item.dart';
+import 'package:flutter_templet_project/basicWidget/form/ae_textfiled.dart';
 import 'package:flutter_templet_project/basicWidget/form/ae_upload_document_item.dart';
 import 'package:flutter_templet_project/basicWidget/form/ae_upload_image_item.dart';
 import 'package:flutter_templet_project/basicWidget/n_footer_button_bar.dart';
@@ -144,6 +145,15 @@ class _AeReportPageState extends State<AeReportPage> with SafeSetStateMixin {
         iconTheme: const IconThemeData(color: fontColor, size: 20),
         elevation: 0.0,
         backgroundColor: bgColor,
+        actions: [
+          IconButton(
+            onPressed: () {
+              readOnly = !readOnly;
+              setState(() {});
+            },
+            icon: Icon(Icons.currency_exchange),
+          )
+        ],
       ),
       body: GestureDetector(
         behavior: HitTestBehavior.translucent,
@@ -396,6 +406,33 @@ class _AeReportPageState extends State<AeReportPage> with SafeSetStateMixin {
                   maxLength: 200,
                   header: const AeSectionHeader(
                     title: '备注',
+                    isRequired: false,
+                  ),
+                  footer: const SizedBox(height: 15),
+                ),
+                AeInputItem(
+                  title: '备注1',
+                  enable: !readOnly,
+                  controller: remarkController,
+                  softWrap: true,
+                  maxLines: 10,
+                  maxLength: 2000,
+                  isCounterInner: true,
+                  header: const AeSectionHeader(
+                    title: '备注1',
+                    isRequired: false,
+                  ),
+                  footer: const SizedBox(height: 15),
+                ),
+                AeInputItem(
+                  title: '备注2',
+                  enable: !readOnly,
+                  controller: remarkController,
+                  softWrap: true,
+                  maxLines: 10,
+                  isCounterInner: false,
+                  header: const AeSectionHeader(
+                    title: '备注2',
                     isRequired: false,
                   ),
                   footer: const SizedBox(height: 15),

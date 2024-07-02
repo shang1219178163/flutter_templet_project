@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 
-
 class NText extends StatelessWidget {
-
-  const NText(this.data,{
-  	Key? key,
+  const NText(
+    this.data, {
+    super.key,
     this.textAlign,
-    this.maxLines,
+    this.maxLines = 1000,
     this.overflow = TextOverflow.ellipsis,
     this.softWrap,
     this.style,
@@ -17,7 +16,7 @@ class NText extends StatelessWidget {
     this.letterSpacing,
     this.wordSpacing,
     this.decoration = TextDecoration.none,
-  }) : super(key: key);
+  });
 
   final String data;
   final TextAlign? textAlign;
@@ -35,25 +34,26 @@ class NText extends StatelessWidget {
 
   final TextDecoration? decoration;
 
-
   @override
   Widget build(BuildContext context) {
     // final softWrap = (maxLines != null && maxLines! > 1);
 
-    return Text(data,
+    return Text(
+      data,
       textAlign: textAlign,
       maxLines: maxLines,
       overflow: overflow,
       softWrap: softWrap,
-      style: style ?? TextStyle(
-        fontSize: fontSize,
-        fontWeight: fontWeight,
-        color: color,
-        backgroundColor: backgroundColor,
-        letterSpacing: letterSpacing,
-        wordSpacing: wordSpacing,
-        decoration: decoration,
-      ),
+      style: style ??
+          TextStyle(
+            fontSize: fontSize,
+            fontWeight: fontWeight,
+            color: color,
+            backgroundColor: backgroundColor,
+            letterSpacing: letterSpacing,
+            wordSpacing: wordSpacing,
+            decoration: decoration,
+          ),
     );
   }
 }
