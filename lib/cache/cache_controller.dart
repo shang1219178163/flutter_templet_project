@@ -17,39 +17,6 @@ class CacheController {
 
   String get userId => CacheService().userID ?? "";
 
-  /// 模型列表转存
-  FutureOr<bool> setModels<T>({
-    required String key,
-    required List<T> value,
-    required Map<String, dynamic> Function(T e) mapCb,
-  }) {
-    if (value.isNotEmpty != true) {
-      return Future.value(false);
-    }
-    List<String> list = value.map((e) {
-      final result = jsonEncode(mapCb(e));
-      return result;
-    }).toList();
-    return CacheService().setStringList(key, list);
-  }
-
-  /// 模型列表读取
-  List<T> getModels<T>({
-    required String key,
-    required T Function(Map<String, dynamic> map) modelCb,
-  }) {
-    final value = CacheService().getStringList(key);
-    if (value == null || value.isNotEmpty != true) {
-      return <T>[];
-    }
-
-    final result = value.map((e) {
-      final json = jsonDecode(e) as Map<String, dynamic>;
-      return modelCb(json);
-    }).toList();
-    return result;
-  }
-
   // /// 群聊天模型列表转存
   // Future<bool>? setGroupHistorys<T extends IMMsgDetailModel>({
   //   required String groupId,
