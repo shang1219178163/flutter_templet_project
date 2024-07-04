@@ -191,16 +191,17 @@ class MyApp extends StatelessWidget {
     );
 
     return ScreenUtilInit(
-        useInheritedMediaQuery: true,
-        designSize: const Size(375, 812),
-        minTextAdapt: true,
-        splitScreenMode: true,
-        builder: (context, child) {
-          return TooltipVisibility(
-            visible: false, // 关闭返回按钮长按 tooltip
-            child: app,
-          );
-        });
+      useInheritedMediaQuery: true,
+      designSize: const Size(375, 812),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (context, child) {
+        return TooltipVisibility(
+          visible: false, // 关闭返回按钮长按 tooltip
+          child: app,
+        );
+      },
+    );
     //全局置灰
     // return Consumer<ColorFilteredProvider>(
     //   builder: (BuildContext context, provider, Widget? child) {

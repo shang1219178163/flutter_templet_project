@@ -24,6 +24,7 @@ class ToolUtil {
 
   // 移除输入框焦点
   static void removeInputFocus() {
+    // SystemChannels.textInput.invokeMethod('TextInput.hide');
     FocusManager.instance.primaryFocus?.unfocus();
     // 延迟，保证获取到context
     // Future.delayed(Duration.zero, () {
