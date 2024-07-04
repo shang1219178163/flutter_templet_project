@@ -80,51 +80,50 @@ class CacheService {
   }
 
   /// 泛型获取值
-  void set<T>(String key, T? value) {
-    if (value == null) {
-      return;
-    }
+  Future<bool> set<T>(String key, T value) {
     switch (T) {
-      case String:
-        prefs.setString(key, value as String);
+      case bool:
+        return prefs.setBool(key, value as bool);
         break;
       case int:
-        prefs.setInt(key, value as int);
-        break;
-      case bool:
-        prefs.setBool(key, value as bool);
+        return prefs.setInt(key, value as int);
         break;
       case double:
-        prefs.setDouble(key, value as double);
+        return prefs.setDouble(key, value as double);
+        break;
+      case String:
+        return prefs.setString(key, value as String);
         break;
       default:
         try {
           var jsonStr = jsonEncode(value);
-          prefs.setString(key, jsonStr);
+          return prefs.setString(key, jsonStr);
         } catch (e) {
           debugPrint("$this $e");
         }
         break;
     }
+    return Future.value(false);
   }
 
-  // /// 泛型获取值
-  // T? get<T>(String key) {
-  //   var value = prefs.get(key);
-  //   if (value == null) {
-  //     return null;
-  //   }
-  //   if (value is! String) {
-  //     return value as T?;
-  //   }
-  //
-  //   try {
-  //     var result = jsonDecode(value);
-  //     return result;
-  //   } catch (e) {
-  //     return value as T?;
-  //   }
-  // }
+  /// 泛型获取值
+  T? get<T>(String key) {
+    var value = prefs.get(key);
+    if (value == null) {
+      return null;
+    }
+    if (value is! String) {
+      return value as T?;
+    }
+
+    try {
+      var result = jsonDecode(value);
+      return result;
+    } catch (e) {
+      debugPrint("$this $e");
+    }
+    return value as T?;
+  }
 
   FutureOr<bool> setStringList(String key, List<String>? value) {
     if (value == null) {
@@ -246,13 +245,10 @@ class CacheService {
   /// 更新
   FutureOr<bool> updateMap({
     required String key,
-    required Map<String, dynamic> value,
+    required Map<String, dynamic> Function(Map<String, dynamic> v) onUpdate,
   }) {
     final map = CacheService().getMap(key) ?? <String, dynamic>{};
-    // value.forEach((key, value) {
-    //   map.putIfAbsent(key, () => value);
-    // });
-    map.addAll(value);
+    onUpdate(map);
     return CacheService().setMap(key, map);
   }
 
