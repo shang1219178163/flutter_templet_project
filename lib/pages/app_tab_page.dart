@@ -20,12 +20,14 @@ import 'package:flutter_templet_project/cache/cache_service.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/button_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/pages/app_tab_bar_controller.dart';
 import 'package:flutter_templet_project/pages/demo/APPDrawerMenuPage.dart';
 import 'package:flutter_templet_project/pages/demo/TabBarViewDemo.dart';
 import 'package:flutter_templet_project/pages/tabBar_tabBarView_demo.dart';
 import 'package:flutter_templet_project/pages/third_page.dart';
 import 'package:flutter_templet_project/provider/color_filtered_provider.dart';
 import 'package:flutter_templet_project/util/AppLifecycleObserver.dart';
+import 'package:get/get.dart';
 
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
@@ -44,6 +46,8 @@ class AppTabPage extends StatefulWidget {
 
 class _AppTabPageState extends State<AppTabPage>
     with WidgetsBindingObserver, AppLifecycleObserverMixin {
+  final appController = Get.find<AppTabBarController>();
+
   int currentIndex = 0;
 
   final unreadVN = ValueNotifier(0);
@@ -66,6 +70,11 @@ class _AppTabPageState extends State<AppTabPage>
 
   @override
   void initState() {
+    super.initState();
+    initData();
+  }
+
+  Future<void> initData() async {
     SystemChannels.textInput.invokeMethod('TextInput.hide');
 
     // _lifecycleListener = AppLifecycleListener(
@@ -89,21 +98,25 @@ class _AppTabPageState extends State<AppTabPage>
     //   },
     // );
 
-    getPackageInfo().then((value) {
-      CacheService().setString(CACHE_APP_NAME, value.appName);
-      CacheService().setString(CACHE_APP_PACKAGE_NAME, value.packageName);
-      CacheService().setString(CACHE_APP_VERSION, value.version);
-    });
+    /// 保存app包信息
+    appController.getPackageInfo();
 
-    getObservatoryUri();
+    /// 获取 Observatory uri
+    appController.getObservatoryUri();
 
+    /// 列表刷新组件配置
     configRefresh();
-    super.initState();
+
+    /// app 生命周期监听
+    // appController.appState.listen((event) {
+    //   ddlog("$widget appController.appState.listen ${event}");
+    // });
   }
 
   @override
   void onAppLifecycleStateChanged(AppLifecycleState state) {
-    ddlog("$widget ${state.name}");
+    appController.appState.value = state;
+    ddlog("$widget ${state.name}, ${appController.appState.value}");
   }
 
   @override
@@ -169,17 +182,19 @@ class _AppTabPageState extends State<AppTabPage>
       leading: Icon(Icons.arrow_back),
       actions: [
         PopupMenuButtonExt.fromEntryJson(
-            json: {"aa": "0", "bb": "1", "cc": "2"},
-            checkedString: "aa",
-            callback: (value) {
-              setState(() => ddlog(value));
-            }),
+          json: {"aa": "0", "bb": "1", "cc": "2"},
+          checkedString: "aa",
+          callback: (value) {
+            setState(() => ddlog(value));
+          },
+        ),
         PopupMenuButtonExt.fromCheckList(
-            list: ["a", "b", "c"],
-            checkedIdx: 1,
-            callback: (value) {
-              setState(() => ddlog(value));
-            }),
+          list: ["a", "b", "c"],
+          checkedIdx: 1,
+          callback: (value) {
+            setState(() => ddlog(value));
+          },
+        ),
       ],
     );
   }
@@ -211,15 +226,18 @@ class _AppTabPageState extends State<AppTabPage>
             ),
           );
 
-    final icon = Stack(clipBehavior: Clip.none, children: <Widget>[
-      normalIcon,
-      Positioned(
-        // draw a red marble
-        top: -5,
-        right: -5,
-        child: badgeChild,
-      ),
-    ]);
+    final icon = Stack(
+      clipBehavior: Clip.none,
+      children: <Widget>[
+        normalIcon,
+        Positioned(
+          // draw a red marble
+          top: -5,
+          right: -5,
+          child: badgeChild,
+        ),
+      ],
+    );
     return icon;
   }
 
@@ -231,16 +249,6 @@ class _AppTabPageState extends State<AppTabPage>
       ddlog(currentIndex);
       setState(() {});
     }
-  }
-
-  Future<PackageInfo> getPackageInfo() async {
-    var packageInfo = await PackageInfo.fromPlatform();
-    // String appName = packageInfo.appName;// 医链健康执业版
-    // String packageName = packageInfo.packageName;// com.yilian.ylHealthApp
-    // String version = packageInfo.version;// 1.0.0
-    // String buildNumber = packageInfo.buildNumber;//1
-    // debugPrint("packageInfo: ${packageInfo.toString()}");
-    return Future.value(packageInfo);
   }
 
   /// 上拉刷新,下拉加载全局配置
@@ -298,16 +306,6 @@ class _AppTabPageState extends State<AppTabPage>
         );
   }
 
-  test() {
-    var a = 85.99999;
-    var b = 488.236;
-    var c = 488.3;
-
-    ddlog(a.toStringAsExponential(2));
-    ddlog(a.toStringAsFixed(2));
-    ddlog(a.toStringAsPrecision(2));
-  }
-
   Widget buildUpdateAlert(BuildContext context) {
     const title = "新版本v ${2.0}";
     const message = """
@@ -320,54 +318,45 @@ class _AppTabPageState extends State<AppTabPage>
     return Container(
       padding: EdgeInsets.only(top: 100, left: 15, bottom: 100, right: 15),
       child: Column(
-          //Column控件用来垂直摆放子Widget
-          // crossAxisAlignment: CrossAxisAlignment.start, //水平方向距左对⻬
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Text(
-              title,
-              style: TextStyle(fontSize: 20),
+        //Column控件用来垂直摆放子Widget
+        // crossAxisAlignment: CrossAxisAlignment.start, //水平方向距左对⻬
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          Text(
+            title,
+            style: TextStyle(fontSize: 20),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: Text(
+              message,
+              style: TextStyle(fontSize: 14),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
-              child: Text(
-                message,
-                style: TextStyle(fontSize: 14),
+          ),
+          Row(
+            children: [
+              TextButton(
+                onPressed: () {
+                  ddlog("以后再说");
+                },
+                child: Text(
+                  "以后再说",
+                  style: TextStyle(fontSize: 14),
+                ),
               ),
-            ),
-            Row(
-              children: [
-                TextButton(
-                  onPressed: () {
-                    ddlog("以后再说");
-                  },
-                  child: Text(
-                    "以后再说",
-                    style: TextStyle(fontSize: 14),
-                  ),
+              TextButton(
+                onPressed: () {
+                  ddlog("立即升级");
+                },
+                child: Text(
+                  "立即升级",
+                  style: TextStyle(fontSize: 14, color: Colors.white),
                 ),
-                TextButton(
-                  onPressed: () {
-                    ddlog("立即升级");
-                  },
-                  child: Text(
-                    "立即升级",
-                    style: TextStyle(fontSize: 14, color: Colors.white),
-                  ),
-                ),
-              ],
-            ),
-          ]),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
-  }
-
-  /// 获取 devTool 链接 serverUri
-  FutureOr<Uri?> getObservatoryUri() async {
-    final serviceProtocolInfo = await Service.getInfo();
-    final serverUri = serviceProtocolInfo.serverUri;
-    final serverWebSocketUri = serviceProtocolInfo.serverWebSocketUri;
-    // ddlog("serverUri: $serverUri");
-    // ddlog("serverWebSocketUri: $serverWebSocketUri");
-    return serverUri;
   }
 }
