@@ -9,6 +9,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
+import 'package:flutter_templet_project/cache/cache_service.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/custom_type_util.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
@@ -18,9 +19,11 @@ import 'package:flutter_templet_project/extension/snack_bar_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/model/NPerson.dart';
+import 'package:flutter_templet_project/util/Codable.dart';
 import 'package:flutter_templet_project/util/Singleton.dart';
 import 'package:flutter_templet_project/vendor/amap_location/location_detail_model.dart';
 import 'package:get/get.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:quiver/collection.dart';
 
 /// 基础类型数据测试
@@ -207,6 +210,14 @@ class _DataTypeDemoState extends State<DataTypeDemo> {
     final d2 = "easyRefreshPlugin".toCapitalize();
     ddlog(d2);
 
+    var aa = 85.99999;
+    var bb = 488.236;
+    var cc = 488.3;
+
+    ddlog(aa.toStringAsExponential(2));
+    ddlog(aa.toStringAsFixed(2));
+    ddlog(aa.toStringAsPrecision(2));
+
     showSnackBar(SnackBar(content: Text(d2)));
   }
 
@@ -252,7 +263,7 @@ class _DataTypeDemoState extends State<DataTypeDemo> {
 
   void onSet() {}
 
-  void onMap() {
+  Future<void> onMap() async {
     var map = <String, dynamic>{
       'msgType': '5',
       'msgTag': '官方号',
@@ -265,7 +276,14 @@ class _DataTypeDemoState extends State<DataTypeDemo> {
     final _memoryMap = <String, dynamic>{};
 
     _memoryMap['msgTag'] = null;
-    ddlog('_memoryMap:${_memoryMap}');
+    // ddlog('_memoryMap:${_memoryMap}');
+    _memoryMap["sss"] = "ssss";
+
+    final info = await PackageInfo.fromPlatform();
+
+    await CacheService().set("info", info.data);
+    final result = CacheService().get("info");
+    ddlog("info:${result}");
   }
 
   void onLruMap() {
@@ -285,7 +303,7 @@ class _DataTypeDemoState extends State<DataTypeDemo> {
 
   void onBool() {}
 
-  void onRecord() {
+  Future<void> onRecord() async {
     (List<String> a, Map<String, dynamic> b) re = ([], {});
     debugPrint("re:${re}");
 
