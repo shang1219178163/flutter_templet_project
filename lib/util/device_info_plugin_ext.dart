@@ -18,9 +18,10 @@ extension DeviceInfoPluginExt on DeviceInfoPlugin {
     return !result;
   }
 
-  /// 是真机(true)
+  /// 是真机
   FutureOr<bool> isPhysicalDevice() async {
-    if (!Platform.isIOS && !Platform.isAndroid) {
+    final supports = [Platform.isIOS, Platform.isAndroid];
+    if (!supports.contains(true)) {
       return false;
     }
 
@@ -36,7 +37,8 @@ extension DeviceInfoPluginExt on DeviceInfoPlugin {
 
   /// 是pad
   FutureOr<bool> isPad() async {
-    if (!Platform.isIOS && !Platform.isAndroid) {
+    final supports = [Platform.isIOS, Platform.isAndroid];
+    if (!supports.contains(true)) {
       return false;
     }
 
