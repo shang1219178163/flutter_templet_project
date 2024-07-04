@@ -1,5 +1,3 @@
-
-
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -12,6 +10,12 @@ class DioProxy {
   static HttpProxy? proxy;
   // 是否启用代理
   static bool isProxy = false;
+
+  // 初始化
+  static initHttp() async {
+    HttpProxy httpProxy = await HttpProxy.createHttpProxy();
+    HttpOverrides.global = httpProxy;
+  }
 
   /// 设置抓包
   static Future setProxy(Dio? dio) async {

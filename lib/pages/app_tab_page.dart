@@ -20,6 +20,7 @@ import 'package:flutter_templet_project/cache/cache_service.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/button_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/network/proxy/dio_proxy.dart';
 import 'package:flutter_templet_project/pages/app_tab_bar_controller.dart';
 import 'package:flutter_templet_project/pages/demo/APPDrawerMenuPage.dart';
 import 'package:flutter_templet_project/pages/demo/TabBarViewDemo.dart';
@@ -75,6 +76,9 @@ class _AppTabPageState extends State<AppTabPage>
   }
 
   Future<void> initData() async {
+    // 代理
+    DioProxy.initHttp();
+    // 收起键盘
     SystemChannels.textInput.invokeMethod('TextInput.hide');
 
     // _lifecycleListener = AppLifecycleListener(
@@ -143,15 +147,16 @@ class _AppTabPageState extends State<AppTabPage>
                   tooltip: '', // 去除长按文字提示
                   label: e.item1.item1,
                   icon: ValueListenableBuilder<int>(
-                      valueListenable: unreadVN,
-                      builder: (context, badge, child) {
-                        return buildIcon(
-                          title: e.item1.item1,
-                          normalIcon: e.item1.item2,
-                          activeIcon: e.item1.item2,
-                          badge: badge,
-                        );
-                      }),
+                    valueListenable: unreadVN,
+                    builder: (context, badge, child) {
+                      return buildIcon(
+                        title: e.item1.item1,
+                        normalIcon: e.item1.item2,
+                        activeIcon: e.item1.item2,
+                        badge: badge,
+                      );
+                    },
+                  ),
                 ),
               )
               .toList(),
