@@ -55,6 +55,7 @@ class _DataTypeDemoState extends State<DataTypeDemo> {
     (e: "Set", action: onSet),
     (e: "bool", action: onBool),
     (e: "Record", action: onRecord),
+    (e: "Object", action: onObject),
   ];
 
   @override
@@ -303,6 +304,10 @@ class _DataTypeDemoState extends State<DataTypeDemo> {
     debugPrint("record1.4:${record1.$4}");
   }
 
+  void onObject() {
+    testData();
+  }
+
   removeSame() {
     List list = [
       {'id': 1, 'name': '小明'},
@@ -345,41 +350,21 @@ class _DataTypeDemoState extends State<DataTypeDemo> {
 
   testData() {
     const String? a = null;
-    ddlog(a.runtimeType);
-
     const String? a1 = "a1";
-    ddlog(a1.runtimeType);
-
     const List<String>? array = null;
-    ddlog(array.runtimeType);
+    ddlog([a.runtimeType, a1.runtimeType, array.runtimeType].asMap());
 
-    ddlog(a.isBlank);
-    // ddlog(a.or(block: (){
-    //   return "123";
-    // }));
-    ddlog(a?.orElse(() => "456"));
-    ddlog(a.orElse(() {
-      return "111";
-    }));
+    const String? b = null;
+    ddlog([a.orElse(() => "456"), b.or("333")].asMap());
 
-    // array.or(() => null);
+    final nums = List<int>.generate(10, (i) => i);
+    final val = nums.reduce((v, e) => v + e);
+    ddlog("reduce int: $val");
 
-    final List<String>? array1 = List.generate(9, (index) => "$index");
-    final result = array1!.reduce((value, element) => value + element);
-    ddlog(result);
+    final array1 = nums.map((e) => "$e").toList();
+    final result = array1.reduce((v, e) => v + e);
+    ddlog("reduce String: $result");
 
     ddlog(array.orElse(() => array1));
-
-    final nums = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-    final val = nums.reduce((value, element) => value + element);
-    ddlog(val);
-
-    final map = {
-      "a": "aa",
-      "b": "bb",
-      "c": "cc",
-    };
-    final value = map["d"] ?? "-";
-    ddlog(value);
   }
 }
