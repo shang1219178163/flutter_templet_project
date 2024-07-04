@@ -32,6 +32,18 @@ extension FunctionExt on Function {
     return Function.apply(this, positionalArguments, arguments);
   }
 
+  /// try catch 包装 applyNew
+  tryCall(List<dynamic>? positionalArguments,
+      [Map<String, dynamic>? namedArguments]) {
+    try {
+      return applyNew(
+          positionalArguments: positionalArguments,
+          namedArguments: namedArguments);
+    } catch (e) {
+      debugPrint("$this $e");
+    }
+  }
+
   /// 获取缓存的 Debounce 方法,没有就常见一个新的
   Debounce getDebounceFn({
     Duration duration = const Duration(milliseconds: 500),
@@ -43,31 +55,6 @@ extension FunctionExt on Function {
     }
     debounceFn.delay = duration;
     return debounceFn;
-  }
-
-  /// 防抖
-  debounce({
-    Duration duration = const Duration(milliseconds: 500),
-    List<dynamic>? positionalArguments,
-    Map<String, dynamic>? namedArguments,
-  }) {
-    var debounceFn = getDebounceFn(duration: duration);
-    return debounceFn(() {
-      applyNew(
-          positionalArguments: positionalArguments,
-          namedArguments: namedArguments);
-    });
-  }
-
-  void tryCall(List<dynamic>? positionalArguments,
-      [Map<String, dynamic>? namedArguments]) {
-    try {
-      applyNew(
-          positionalArguments: positionalArguments,
-          namedArguments: namedArguments);
-    } catch (e) {
-      debugPrint("$this $e");
-    }
   }
 }
 

@@ -181,10 +181,20 @@ class _AutocompleteDemoState extends State<AutocompleteDemo> {
               final name = option.name;
               final query = _textEditingValue.text;
 
-              var textWidget = Text.rich(
-                name.firstMatchLight(
-                  pattern: query,
-                  lightTextStyle: lightTextStyle,
+              // var textWidget = Text.rich(
+              //   name.firstMatchLight(
+              //     pattern: query,
+              //     lightTextStyle: lightTextStyle,
+              //   ),
+              // );
+
+              final textWidget = Text.rich(
+                TextSpan(
+                  children: RichTextExt.createTextSpans(
+                    text: name,
+                    textTaps: [query],
+                    linkStyle: lightTextStyle,
+                  ),
                 ),
               );
 
