@@ -76,8 +76,12 @@ extension DynamicExt<T> on T {
   /// 例如. nullable.or(else: {
   /// ... code
   /// })
-  T or(T Function() block) {
+  T orElse(T Function() block) {
     return this ?? block();
+  }
+
+  T or(T v) {
+    return this ?? v;
   }
 }
 
