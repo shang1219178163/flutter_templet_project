@@ -59,6 +59,21 @@ class CacheService {
   /// memory cache, 内存缓存
   final _memoryMap = <String, dynamic>{};
 
+  /// 获取持久化数据中所有存入的key
+  Set<String> getKeys() {
+    return prefs.getKeys();
+  }
+
+  /// 获取持久化数据中是否包含某个key
+  bool containsKey(String key) {
+    return prefs.containsKey(key);
+  }
+
+  /// 重新加载所有数据,仅重载运行时
+  Future<void> reload() async {
+    return prefs.reload();
+  }
+
   /// 清除数据
   Future<bool> remove(String key) {
     _memoryMap.remove(key);
