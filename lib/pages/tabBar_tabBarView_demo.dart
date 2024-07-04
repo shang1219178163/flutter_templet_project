@@ -335,46 +335,6 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo>
     debugPrint('result runtimeType:${result.runtimeType}');
     return result;
   }
-
-  testData() {
-    const String? a = null;
-    ddlog(a.runtimeType);
-
-    const String? a1 = "a1";
-    ddlog(a1.runtimeType);
-
-    const List<String>? array = null;
-    ddlog(array.runtimeType);
-
-    ddlog(a.isBlank);
-    // ddlog(a.or(block: (){
-    //   return "123";
-    // }));
-    ddlog(a.or(() => "456"));
-    ddlog(a.or(() {
-      return "111";
-    }));
-
-    // array.or(() => null);
-
-    final List<String>? array1 = List.generate(9, (index) => "$index");
-    final result = array1!.reduce((value, element) => value + element);
-    ddlog(result);
-
-    ddlog(array.or(() => array1));
-
-    final nums = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-    final val = nums.reduce((value, element) => value + element);
-    ddlog(val);
-
-    final map = {
-      "a": "aa",
-      "b": "bb",
-      "c": "cc",
-    };
-    final value = map["d"] ?? "-";
-    ddlog(value);
-  }
 }
 
 /// 元祖总数组
@@ -563,6 +523,7 @@ var list = <Tuple2<String, String>>[
   Tuple2(APPRouter.segmentVerticalDemo, "segmentVerticalDemo"),
   Tuple2(APPRouter.decoratedBoxTransitionDemo, "decoratedBoxTransitionDemo"),
   Tuple2(APPRouter.aeReportPage, "表单"),
+  Tuple2(APPRouter.scaffoldDemo, "scaffoldDemo"),
 ];
 
 var slivers = <Tuple2<String, String>>[
@@ -628,7 +589,7 @@ var specials = <Tuple2<String, String>>[
   Tuple2(APPRouter.orderListTabPage, "orderListTabPage"),
   Tuple2(APPRouter.apiCreatePage, "apiCreatePage"),
   Tuple2(APPRouter.asyncDemo, "asyncDemo"),
-  Tuple2(APPRouter.testDataTyeDemo, "testDataTyeDemo"),
+  Tuple2(APPRouter.dataTypeDemo, "testDataTyeDemo"),
   Tuple2(APPRouter.audioPlayPageDemo, "audioPlayPage"),
 ];
 
@@ -745,10 +706,7 @@ var others = <Tuple2<String, String>>[
 ];
 
 var forms = <Tuple2<String, String>>[
-  Tuple2(
-    APPRouter.autocompleteDemo,
-    "autocompleteDemo",
-  ),
+  Tuple2(APPRouter.autocompleteDemo, "autocompleteDemo"),
   Tuple2(APPRouter.autofillGroupDemo, "autofillGroupDemo"),
   Tuple2(
       APPRouter.inputDatePickerFormFieldDemo, "inputDatePickerFormFieldDemo"),

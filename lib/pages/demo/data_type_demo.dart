@@ -13,6 +13,7 @@ import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/custom_type_util.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/map_ext.dart';
+import 'package:flutter_templet_project/extension/object_ext.dart';
 import 'package:flutter_templet_project/extension/snack_bar_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
@@ -23,8 +24,8 @@ import 'package:get/get.dart';
 import 'package:quiver/collection.dart';
 
 /// 基础类型数据测试
-class TestDataTyeDemo extends StatefulWidget {
-  const TestDataTyeDemo({
+class DataTypeDemo extends StatefulWidget {
+  const DataTypeDemo({
     super.key,
     this.arguments,
   });
@@ -32,10 +33,10 @@ class TestDataTyeDemo extends StatefulWidget {
   final Map<String, dynamic>? arguments;
 
   @override
-  State<TestDataTyeDemo> createState() => _TestDataTyeDemoState();
+  State<DataTypeDemo> createState() => _DataTypeDemoState();
 }
 
-class _TestDataTyeDemoState extends State<TestDataTyeDemo> {
+class _DataTypeDemoState extends State<DataTypeDemo> {
   bool get hideApp =>
       Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
 
@@ -340,5 +341,45 @@ class _TestDataTyeDemoState extends State<TestDataTyeDemo> {
       '***************************************************',
     ];
     DLog.center(list);
+  }
+
+  testData() {
+    const String? a = null;
+    ddlog(a.runtimeType);
+
+    const String? a1 = "a1";
+    ddlog(a1.runtimeType);
+
+    const List<String>? array = null;
+    ddlog(array.runtimeType);
+
+    ddlog(a.isBlank);
+    // ddlog(a.or(block: (){
+    //   return "123";
+    // }));
+    ddlog(a?.orElse(() => "456"));
+    ddlog(a.orElse(() {
+      return "111";
+    }));
+
+    // array.or(() => null);
+
+    final List<String>? array1 = List.generate(9, (index) => "$index");
+    final result = array1!.reduce((value, element) => value + element);
+    ddlog(result);
+
+    ddlog(array.orElse(() => array1));
+
+    final nums = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+    final val = nums.reduce((value, element) => value + element);
+    ddlog(val);
+
+    final map = {
+      "a": "aa",
+      "b": "bb",
+      "c": "cc",
+    };
+    final value = map["d"] ?? "-";
+    ddlog(value);
   }
 }

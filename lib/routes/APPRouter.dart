@@ -55,6 +55,7 @@ import 'package:flutter_templet_project/pages/demo/QueueAlertDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ReflectDemo.dart';
 import 'package:flutter_templet_project/pages/demo/RegExpDemo.dart';
 import 'package:flutter_templet_project/pages/demo/RiverPodPageCreate.dart';
+import 'package:flutter_templet_project/pages/demo/ScaffoldDemo.dart';
 import 'package:flutter_templet_project/pages/demo/SegmentedControlDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/StringTransformPage.dart';
 import 'package:flutter_templet_project/pages/demo/TextFieldDemoTwo.dart';
@@ -281,7 +282,7 @@ import 'package:flutter_templet_project/pages/demo/operator_demo.dart';
 import 'package:flutter_templet_project/pages/demo/rp_template_qrcode_page.dart';
 import 'package:flutter_templet_project/pages/demo/smart_dialog_demo.dart';
 import 'package:flutter_templet_project/pages/demo/steper_connector_demo.dart';
-import 'package:flutter_templet_project/pages/demo/test_data_tye_demo.dart';
+import 'package:flutter_templet_project/pages/demo/data_type_demo.dart';
 import 'package:flutter_templet_project/pages/demo/test_page.dart';
 import 'package:flutter_templet_project/pages/demo/will_pop_scope_demo.dart';
 import 'package:flutter_templet_project/pages/demo/homeSrollDemo.dart';
@@ -721,7 +722,7 @@ class APPRouter {
   static const getxRouteCreatePage = '/getxRouteCreatePage';
   static const getxControllerDemo = '/GetxControllerDemo';
   static const nTransformViewDemo = '/nTransformViewDemo';
-  static const testDataTyeDemo = '/testDataTyeDemo';
+  static const dataTypeDemo = '/dataTypeDemo';
   static const queueAlertDemo = '/queueAlertDemo';
   static const flutterPickerUtilDemo = '/flutterPickerUtilDemo';
   static const audioPlayPage = '/AudioPlayPage';
@@ -730,6 +731,7 @@ class APPRouter {
   static const segmentVerticalDemo = '/segmentVerticalDemo';
   static const decoratedBoxTransitionDemo = '/decoratedBoxTransitionDemo';
   static const aeReportPage = '/aeReportPage';
+  static const scaffoldDemo = '/scaffoldDemo';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -2125,8 +2127,8 @@ class AppPage {
       page: () => NTransformViewDemo(),
     ),
     GetPage(
-      name: APPRouter.testDataTyeDemo,
-      page: () => TestDataTyeDemo(),
+      name: APPRouter.dataTypeDemo,
+      page: () => DataTypeDemo(),
     ),
     GetPage(
       name: APPRouter.queueAlertDemo,
@@ -2160,6 +2162,10 @@ class AppPage {
     GetPage(
       name: APPRouter.aeReportPage,
       page: () => AeReportPage(),
+    ),
+    GetPage(
+      name: APPRouter.scaffoldDemo,
+      page: () => ScaffoldDemo(),
     ),
   ];
 }
