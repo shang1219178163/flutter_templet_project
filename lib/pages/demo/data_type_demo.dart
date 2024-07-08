@@ -384,5 +384,17 @@ class _DataTypeDemoState extends State<DataTypeDemo> {
     ddlog("reduce String: $result");
 
     ddlog(array.orElse(() => array1));
+
+    // 定义一个数组
+    List<int> numbers = [3, 7, 2, 9, 5, 1];
+    // 找到数组的最大值
+    int maxValue = numbers.reduce((a, b) => a > b ? a : b);
+    int maxValue1 = numbers.reduce((a, b) {
+      final result = a > b ? a : b;
+      DLog.d("result: $a, $b, $result");
+      return result;
+    });
+
+    ddlog("maxValue: $maxValue");
   }
 }

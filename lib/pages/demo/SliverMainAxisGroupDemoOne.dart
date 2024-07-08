@@ -8,12 +8,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_sliver_list_section.dart';
-import 'package:flutter_templet_project/basicWidget/n_sliver_persistent_header_delegate.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
-import 'package:flutter_templet_project/extension/list_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
-import 'package:get/get.dart';
 
 class SliverMainAxisGroupDemoOne extends StatefulWidget {
   const SliverMainAxisGroupDemoOne({
@@ -27,8 +24,8 @@ class SliverMainAxisGroupDemoOne extends StatefulWidget {
 
 class _SliverMainAxisGroupDemoOneState
     extends State<SliverMainAxisGroupDemoOne> {
-  final dataList = const [
-    NSliverListSectionModel(name: '水果', items: [
+  final dataList = [
+    NSliverSectionModel(name: '水果', items: [
       '苹果',
       '香蕉',
       '橙子',
@@ -50,7 +47,7 @@ class _SliverMainAxisGroupDemoOneState
       '石榴',
       '木瓜'
     ]),
-    NSliverListSectionModel(name: '动物', items: [
+    NSliverSectionModel(name: '动物', items: [
       '狗',
       '猫',
       '狮子',
@@ -72,7 +69,7 @@ class _SliverMainAxisGroupDemoOneState
       '孔雀',
       '乌龟'
     ]),
-    NSliverListSectionModel(name: '职业', items: [
+    NSliverSectionModel(name: '职业', items: [
       '医生',
       '护士',
       '教师',
@@ -94,7 +91,7 @@ class _SliverMainAxisGroupDemoOneState
       '画家',
       '摄影师'
     ]),
-    NSliverListSectionModel(name: '菜谱', items: [
+    NSliverSectionModel(name: '菜谱', items: [
       '红烧肉',
       '糖醋排骨',
       '宫保鸡丁',
@@ -143,21 +140,9 @@ class _SliverMainAxisGroupDemoOneState
   }
 
   /// 分组
-  Widget buildSection(NSliverListSectionModel model) {
-    return NSliverListSection(
+  Widget buildSection(NSliverSectionModel model) {
+    return NSliverSection(
       model: model,
-      headerDelegate: NSliverPersistentHeaderDelegate(
-        min: 35,
-        max: 35,
-        builder: (BuildContext context, double offset, bool overlapsContent) {
-          return Container(
-            alignment: Alignment.centerLeft,
-            color: Colors.green,
-            padding: const EdgeInsets.only(left: 20),
-            child: Text(model.name, style: const TextStyle(fontSize: 16)),
-          );
-        },
-      ),
       itembuilder: (_, index) => buildItem(model.items[index]),
     );
   }
@@ -168,21 +153,31 @@ class _SliverMainAxisGroupDemoOneState
       onTap: () {
         DLog.d("item: $item");
       },
-      child: Container(
-        alignment: Alignment.center,
-        height: 50,
-        child: Row(
-          children: [
-            const Padding(
-              padding: EdgeInsets.only(left: 20, right: 10.0),
-              child: FlutterLogo(size: 30),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            alignment: Alignment.center,
+            height: 50,
+            child: Row(
+              children: [
+                const Padding(
+                  padding: EdgeInsets.only(left: 20, right: 10.0),
+                  child: FlutterLogo(size: 30),
+                ),
+                Text(
+                  item,
+                  style: const TextStyle(fontSize: 16),
+                ),
+              ],
             ),
-            Text(
-              item,
-              style: const TextStyle(fontSize: 16),
-            ),
-          ],
-        ),
+          ),
+          Divider(
+            height: 0.5,
+            color: Color(0xffe4e4e4),
+            indent: 64,
+          ),
+        ],
       ),
     );
   }
