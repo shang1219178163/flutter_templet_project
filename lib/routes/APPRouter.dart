@@ -57,6 +57,7 @@ import 'package:flutter_templet_project/pages/demo/RegExpDemo.dart';
 import 'package:flutter_templet_project/pages/demo/RiverPodPageCreate.dart';
 import 'package:flutter_templet_project/pages/demo/ScaffoldDemo.dart';
 import 'package:flutter_templet_project/pages/demo/SegmentedControlDemoOne.dart';
+import 'package:flutter_templet_project/pages/demo/SliverMainAxisGroupDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/StringTransformPage.dart';
 import 'package:flutter_templet_project/pages/demo/TextFieldDemoTwo.dart';
 import 'package:flutter_templet_project/pages/demo/ThemeColorDemo.dart';
@@ -732,6 +733,7 @@ class APPRouter {
   static const decoratedBoxTransitionDemo = '/decoratedBoxTransitionDemo';
   static const aeReportPage = '/aeReportPage';
   static const scaffoldDemo = '/scaffoldDemo';
+  static const sliverMainAxisGroupDemoOne = '/SliverMainAxisGroupDemoOne';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -2166,6 +2168,10 @@ class AppPage {
     GetPage(
       name: APPRouter.scaffoldDemo,
       page: () => ScaffoldDemo(),
+    ),
+    GetPage(
+      name: APPRouter.sliverMainAxisGroupDemoOne,
+      page: () => SliverMainAxisGroupDemoOne(),
     ),
   ];
 }
