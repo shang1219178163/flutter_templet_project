@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'dart:ui' as ui;
 
+import 'package:flutter_templet_project/extension/widget_ext.dart';
+
 /// TextStyle 研究
 class TextDemo extends StatefulWidget {
   TextDemo({super.key, this.title});
@@ -75,44 +77,52 @@ class _TextDemoState extends State<TextDemo> {
     return CustomPaint(
       size: Size(300, 200),
       painter: MyTextPainter(
-          'Hello, Flutter developers! This is a sample text to demonstrate '
+        Text(
+          'Hello, Flutter developers! This is a '
+          'sample text to demonstrate '
           'ParagraphStyle.',
-          style: ui.TextStyle()),
+          style: DefaultTextStyle.of(context).style,
+          maxLines: 1000,
+        ),
+      ),
     );
   }
 }
 
 class MyTextPainter extends CustomPainter {
   MyTextPainter(
-    this.text, {
-    this.style,
-  });
-  final String text;
-  final ui.TextStyle? style;
+    this.text,
+  );
+  final Text text;
 
   @override
   void paint(Canvas canvas, Size size) {
+    if (text.data?.isNotEmpty != true) {
+      return;
+    }
+    var textStyle = text.style;
+
     var paragraphStyle = ui.ParagraphStyle(
-      // textAlign: TextAlign.center,
-      // maxLines: null,
-      // ellipsis: '...',
-      textDirection: TextDirection.ltr,
-      // fontWeight: FontWeight.bold,
-      fontSize: 17,
+      textAlign: text.textAlign ?? TextAlign.start,
+      textDirection: text.textDirection ?? TextDirection.ltr,
+      maxLines: text.maxLines,
+      textHeightBehavior: text.textHeightBehavior ?? TextHeightBehavior(),
+      fontFamily: textStyle?.fontFamily,
+      fontSize: textStyle?.fontSize,
+      height: textStyle?.height,
+      fontWeight: textStyle?.fontWeight,
+      fontStyle: textStyle?.fontStyle,
+      locale: textStyle?.locale,
+      ellipsis: '...',
     );
 
-    var textStyle = style ??
-        ui.TextStyle(
-          color: Colors.black,
-        );
-
-    var paragraphBuilder = ui.ParagraphBuilder(paragraphStyle)
-      ..pushStyle(textStyle)
-      ..addText(text);
-
-    if (style != null) {
-      paragraphBuilder.pushStyle(style! as ui.TextStyle);
+    var paragraphBuilder = ui.ParagraphBuilder(paragraphStyle);
+    if (textStyle != null) {
+      paragraphBuilder.pushStyle(ui.TextStyle(
+        color: Colors.black,
+      ));
     }
+    paragraphBuilder.addText(text.data ?? "");
 
     var paragraph = paragraphBuilder.build()
       ..layout(ui.ParagraphConstraints(width: size.width));
