@@ -7,7 +7,8 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_sliver_list_section.dart';
+import 'package:flutter_templet_project/basicWidget/n_sliver_section.dart';
+import 'package:flutter_templet_project/basicWidget/n_sliver_section_list.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
@@ -119,14 +120,24 @@ class _SliverMainAxisGroupDemoOneState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('分组列表')),
-      body: Scrollbar(
-        child: CustomScrollView(
-          slivers: [
-            buildHeaderFooter().toSliverToBoxAdapter(),
-            ...dataList.map(buildSection),
-            buildHeaderFooter().toSliverToBoxAdapter(),
-          ],
-        ),
+      body: buildBody(),
+    );
+  }
+
+  Widget buildBody() {
+    return NSliverSectionList(
+      items: dataList,
+      sectionBuilder: buildSection,
+      header: buildHeaderFooter(),
+      footer: buildHeaderFooter(),
+    );
+    return Scrollbar(
+      child: CustomScrollView(
+        slivers: [
+          buildHeaderFooter().toSliverToBoxAdapter(),
+          ...dataList.map(buildSection),
+          buildHeaderFooter().toSliverToBoxAdapter(),
+        ],
       ),
     );
   }
