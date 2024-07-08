@@ -67,7 +67,7 @@ class MergeImagesWidgetState extends State<MergeImagesWidget> {
                 child: widget.imageBuilder != null
                     ? widget.imageBuilder!(e)
                     : FadeInImage.assetNetwork(
-                        placeholder: 'images/img_placeholder.png',
+                        placeholder: 'assets/images/img_placeholder.png',
                         image: e.url ?? '',
                         fit: BoxFit.cover,
                         width:
