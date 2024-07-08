@@ -84,9 +84,9 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
                     quality: 100,
                   );
                 }).then((result) {
-                  ddlog("result:${result.isSuccess}");
+                  ddlog("result:${result}");
                 }).catchError((e) {
-                  debugPrint("error:${e.message}");
+                  debugPrint("error:${e}");
                 });
               },
               child: Text(

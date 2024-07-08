@@ -42,49 +42,39 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
         title: Text(widget.title ?? "$widget"),
         actions: [
           TextButton(
-              onPressed: () => {
-                    // print("保存")
-                    // storeImageNew().then((val) => { print("保存 ${val}")})
-                    _compositePic().then((pngBytes) {
-                      imageMerged =
-                          Image.memory(pngBytes!, width: 200, height: 600);
-                      setState(() {});
-                    })
-                    // _capturePng().then((val) => { print("保存")})
-                  },
-              child: Text(
-                '保存',
-                style: TextStyle(color: Colors.white),
-              )),
+            onPressed: () => {
+              // print("保存")
+              _compositePicNew().then((pngBytes) {
+                imageMerged = Image.memory(pngBytes!,
+                    width: double.maxFinite, height: 1200);
+                setState(() {});
+              })
+            },
+            child: Text(
+              '保存',
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
           TextButton(
-              onPressed: () => {
-                    _compositePicNew().then((pngBytes) {
-                      imageMerged =
-                          Image.memory(pngBytes!, width: 400, height: 1200);
-                      setState(() {});
-                    })
-                  },
-              child: Text(
-                '保存三',
-                style: TextStyle(color: Colors.white),
-              )),
-          TextButton(
-              onPressed: () {
-                final keys = [
-                  repaintBoundaryKey1,
-                  repaintBoundaryKey2,
-                  repaintBoundaryKey3
-                ];
-                _compositePics(keys).then((pngBytes) {
+            onPressed: () {
+              final keys = [
+                repaintBoundaryKey1,
+                repaintBoundaryKey2,
+                repaintBoundaryKey3
+              ];
+              _compositePics(keys).then(
+                (pngBytes) {
                   imageMerged =
                       Image.memory(pngBytes!, width: 400, height: 600);
                   setState(() {});
-                });
-              },
-              child: Text(
-                'key3',
-                style: TextStyle(color: Colors.white),
-              )),
+                },
+              );
+            },
+            child: Text(
+              'key3',
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
         ],
       ),
       body: _buildBodyNew(),
@@ -133,7 +123,7 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
                 image: 'sha_qiu.png'.toAssetImage(),
                 fit: BoxFit.cover,
                 width: screenSize.width,
-                height: screenSize.height,
+                // height: screenSize.height,
               ),
             ),
             callback: (step) {
@@ -236,7 +226,10 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
       }
 
       debugPrint("three: ${three.width} ${three.height}");
-      var totalWidth = one.width > two.width ? one.width : two.width;
+      // var totalWidth = one.width > two.width ? one.width : two.width;
+      var totalWidth =
+          [one.width, two.width, three.width].reduce((a, b) => a > b ? a : b);
+
       // int totalHeight = one.height + two.height + 20.h.toInt();
       // int totalHeight = one.height + two.height;
       //初始化画布
@@ -269,49 +262,6 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
           .endRecording()
           .toImage(totalWidth, one.height + two.height + three.height + 24);
       //获取合成的图片
-      var byteData = await image.toByteData(format: ui.ImageByteFormat.png);
-      var pngBytes = byteData?.buffer.asUint8List();
-
-      return Future.value(pngBytes);
-    } catch (e) {
-      debugPrint(e.toString());
-    }
-    return null;
-  }
-
-  /// 合成截图
-  Future<Uint8List?> _compositePic() async {
-    try {
-      ui.Image? one = await _capturePic(repaintBoundaryKey1);
-      ui.Image? two = await _capturePic(repaintBoundaryKey2);
-      if (one == null || two == null) {
-        return null;
-      }
-      debugPrint("two: ${two.width} ${two.height}");
-
-      var totalWidth = one.width > two.width ? one.width : two.width;
-      // int totalHeight = one.height + two.height + 20.h.toInt();
-      var totalHeight = one.height + two.height;
-      //初始化画布
-      var recorder = ui.PictureRecorder();
-      var canvas = Canvas(recorder);
-      final paint = Paint();
-      //画第一张图
-      canvas.drawRect(
-          Rect.fromLTWH(0, 0, totalWidth * 1.0, one.height * 1.0), paint);
-      canvas.drawImage(one, Offset((totalWidth - one.width) / 2, 0), paint);
-      //画第二张图
-      paint.shader = null;
-      paint.color = Colors.red;
-      canvas.drawRect(
-          Rect.fromLTWH(0, one.height * 1.0, totalWidth * 1.0,
-              (totalHeight - one.height) * 1.0),
-          paint);
-      canvas.drawImage(
-          two, Offset((totalWidth - two.width) / 2, one.height + 12), paint);
-      //获取合成的图片
-      var image =
-          await recorder.endRecording().toImage(totalWidth, totalHeight);
       var byteData = await image.toByteData(format: ui.ImageByteFormat.png);
       var pngBytes = byteData?.buffer.asUint8List();
 
