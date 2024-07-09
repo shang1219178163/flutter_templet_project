@@ -1,49 +1,42 @@
-
+import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/cache/file_manager.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:share_plus/share_plus.dart';
 
-import 'package:flutter_templet_project/cache/asset_cache_service.dart';
-
-
-class FileShare{
-
-  Future<void> onShare({required String url, required String fileName,}) async {
-    var tempDir = await AssetCacheService().getDir();
-    var tmpPath = '${tempDir.path}/${fileName}';
-
+class FileShare {
+  /// 文件分享
+  Future<void> onShare({
+    required String url,
+    required String fileName,
+  }) async {
     final percentVN = ValueNotifier(0.0);
-
     ToastUtil.loading(
-        "文件下载中",
-        indicator: ValueListenableBuilder<double>(
-            valueListenable: percentVN,
-            builder: (context,  value, child){
-
-              return CircularProgressIndicator(
-                value: value,
-              );
-            }
-        )
+      "文件下载中",
+      indicator: ValueListenableBuilder<double>(
+        valueListenable: percentVN,
+        builder: (context, value, child) {
+          return CircularProgressIndicator(
+            value: value,
+          );
+        },
+      ),
     );
 
-    final response = await Dio().download(url, tmpPath,
-        onReceiveProgress: (received, total) {
-          if (total != -1) {
-            final percent = (received / total);
-            final percentStr = "${(percent * 100).toStringAsFixed(0)}%";
-            percentVN.value = percent;
-            debugPrint("percentStr: $percentStr");
-          }
-        }
+    final file = await FileManager().downloadFile(
+      url: url,
+      fileName: fileName,
+      onProgress: (v) {
+        percentVN.value = v;
+      },
     );
-    // debugPrint("response: ${response.data}");
-    debugPrint("tmpPath: ${tmpPath}");
     ToastUtil.hideLoading();
-
-    Share.shareXFiles([XFile(tmpPath)]);
+    if (file == null) {
+      return;
+    }
+    Share.shareXFiles([XFile(file!.path)]);
   }
 }

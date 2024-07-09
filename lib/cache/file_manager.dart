@@ -9,9 +9,12 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_templet_project/cache/asset_cache_service.dart';
 import 'package:path_provider/path_provider.dart';
 
+/// 文件管理类
 class FileManager {
   static final FileManager _instance = FileManager._();
   FileManager._();
@@ -145,5 +148,43 @@ class FileManager {
     }
     final content = await file.readAsString();
     return jsonDecode(content);
+  }
+
+  /// 文件下载
+  Future<File?> downloadFile({
+    required String url,
+    String? fileName,
+    ValueChanged<double>? onProgress,
+  }) async {
+    assert(url.startsWith("http"), "url 必须以 http 开头");
+    if (url.startsWith("http") != true) {
+      return null;
+    }
+    fileName ??= url.split("/").last;
+
+    var tempDir = await AssetCacheService().getDir();
+    var tmpPath = '${tempDir.path}/$fileName';
+
+    final percentVN = ValueNotifier(0.0);
+
+    final response = await Dio().download(url, tmpPath,
+        onReceiveProgress: (received, total) {
+      if (total != -1) {
+        final percent = (received / total);
+        final percentStr = "${(percent * 100).toStringAsFixed(0)}%";
+        percentVN.value = percent;
+        debugPrint("percentStr: $percentStr");
+        onProgress?.call(percent);
+      }
+    });
+    if (response.statusCode != 200) {
+      debugPrint("❌FileShare onDownload: $response");
+      return null;
+    }
+    if (percentVN.value < 1) {
+      onProgress?.call(1);
+    }
+    // debugPrint("response: ${response.data}");
+    return File(tmpPath);
   }
 }
