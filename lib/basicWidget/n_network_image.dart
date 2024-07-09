@@ -48,6 +48,7 @@ class NNetworkImage extends StatelessWidget {
       image: placeholder,
       width: width,
       height: height,
+      fit: fit,
     );
 
     final isUrlError = url.startsWith("http") == false;
@@ -64,8 +65,8 @@ class NNetworkImage extends StatelessWidget {
         url,
         width: width,
         height: height,
-        cacheWidth: width?.toInt(),
-        cacheHeight: height?.toInt(),
+        cacheWidth: width == null ? null : (width! * 3).toInt(),
+        cacheHeight: height == null ? null : (height! * 3).toInt(),
         fit: fit,
         cache: cache,
         mode: mode,
@@ -74,12 +75,7 @@ class NNetworkImage extends StatelessWidget {
         //cancelToken: cancellationToken,
         loadStateChanged: (ExtendedImageState state) {
           if (state.extendedImageLoadState != LoadState.completed) {
-            // return Icon(Icons.photo, color: Colors.teal.shade100, size: height,);
-            return Image(
-              image: placeholder,
-              width: width,
-              height: height,
-            );
+            return placeholderImage;
           }
           // debugPrint("Image width ${state.extendedImageInfo?.image.width} height : ${state.extendedImageInfo?.image.height}");
           final image = state.extendedImageInfo?.image;
@@ -87,7 +83,7 @@ class NNetworkImage extends StatelessWidget {
             image: image,
             width: width ?? image?.width.toDouble(),
             height: height ?? image?.height.toDouble(),
-            fit: BoxFit.fill,
+            fit: fit,
             // soucreRect: Rect.fromLTWH((state.extendedImageInfo?.image?.width-200)/2,(state.extendedImageInfo?.image?.height-200)/2, 200, 200),
           );
           // debugPrint("Source Rect width ${widget.width} height : ${widget.height}");
