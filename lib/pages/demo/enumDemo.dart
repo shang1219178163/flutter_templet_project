@@ -49,92 +49,76 @@ class _EnumDemoState extends State<EnumDemo> {
   }
 
   buildBody() {
-    return Column(
-      children: [
-        NSectionHeader(
-          title: "1.ActivityTypeNew.values",
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              (
-                key: "byName",
-                value: ActivityTypeNew.values.byName(
-                  ActivityTypeNew.hiking.name,
-                )
-              ),
-              (
-                key: "asNameMap",
-                value: ActivityTypeNew.values.asNameMap(),
-              ),
-            ]
-                .map((e) => NPair(
-                      icon: Text(e.key),
-                      child: Text("${e.value}"),
-                    ))
-                .toList(),
-          ),
-        ),
-        NSectionHeader(
-          title: "1.ActivityTypeNew.values",
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: ActivityTypeNew.values.map((e) {
-              return Container(
-                alignment: Alignment.centerLeft,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(e.toString()),
-                    NPair(
-                      icon: Text("${e.name}"),
-                      child: Text("(e.name)"),
-                    ),
-                  ],
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          NSectionHeader(
+            title: "1.ActivityTypeNew.values",
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                (
+                  key: "byName",
+                  value: ActivityTypeNew.values.byName(
+                    ActivityTypeNew.hiking.name,
+                  )
                 ),
-              );
-            }).toList(),
+              ]
+                  .map((e) => NPair(
+                        icon: Text(e.key),
+                        child: Text("${e.value}"),
+                      ))
+                  .toList(),
+            ),
           ),
-        ),
-        NSectionHeader(
-          title: "2. ActivityType.values",
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: ActivityType.values.map((e) {
-              return Container(
-                alignment: Alignment.centerLeft,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(e.toString()),
-                    NPair(
-                      icon: Text("${e.name}"),
-                      child: Text("(e.name)"),
-                    ),
-                  ],
-                ),
-              );
-            }).toList(),
+          NSectionHeader(
+            title: "1.ActivityTypeNew.values",
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: ActivityTypeNew.values.map((e) {
+                return Container(
+                  alignment: Alignment.centerLeft,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      // Text(e.toString()),
+                      NPair(
+                        icon: Text(
+                          "index: ${e.index}, value: ${e.name}, desc: ${e.desc}",
+                        ),
+                        child: Text(""),
+                      ),
+                    ],
+                  ),
+                );
+              }).toList(),
+            ),
           ),
-        ),
-        Container(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            "ActivityType",
-            style: TextStyle().h3,
+          NSectionHeader(
+            title: "2. ActivityType.values",
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: ActivityType.values.map((e) {
+                return Container(
+                  alignment: Alignment.centerLeft,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      // Text(e.toString()),
+                      NPair(
+                        icon: Text(
+                          "index: ${e.index}, value: ${e.name}, desc: ${e.desc}",
+                        ),
+                        child: Text(""),
+                      ),
+                    ],
+                  ),
+                );
+              }).toList(),
+            ),
           ),
-        ),
-        Expanded(
-          child: ListView(
-            children: ActivityType.values.map((e) {
-              return ListTile(
-                title: Text("name: ${e.name}"),
-                subtitle: Text(
-                    "index: ${e.index}, value: ${e.value}, desc: ${e.desc}"),
-              );
-            }).toList(),
-          ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
