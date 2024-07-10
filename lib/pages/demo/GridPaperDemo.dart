@@ -6,12 +6,10 @@
 //  Copyright © 10/12/21 shang. All rights reserved.
 //
 
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_network_image.dart';
 import 'package:flutter_templet_project/util/R.dart';
-
 
 class GridPaperDemo extends StatelessWidget {
   const GridPaperDemo({Key? key}) : super(key: key);
@@ -27,16 +25,19 @@ class GridPaperDemo extends StatelessWidget {
   }
 
   Widget _contentWidget() {
-    final items = R.image.urls.map((e) => Image.network(
-        e,
-        scale: 1,
-        fit: BoxFit.cover)).toList();
+    final items = R.image.urls
+        .map((e) => NNetworkImage(url: e, fit: BoxFit.cover))
+        .toList();
 
+    final style = const TextStyle(
+      color: Colors.black,
+      fontSize: 14,
+    );
     return Container(
       key: GlobalKey(),
 //       color: Colors.grey,
       child: GridView.count(
-        crossAxisCount: 3,
+        crossAxisCount: 2,
         mainAxisSpacing: 10.0,
         crossAxisSpacing: 4.0,
         padding: const EdgeInsets.all(10.0),
@@ -44,27 +45,45 @@ class GridPaperDemo extends StatelessWidget {
         children: <Widget>[
           GridTile(
             header: GridTileBar(
+              backgroundColor: Colors.blueGrey,
               title: Text('title'),
               subtitle: Text('subtitle'),
               leading: Icon(Icons.add),
               trailing: Text("trailing"),
             ),
-            footer: Center(child: Text('footer')),
-            child: Image.network(
-              R.image.urls[6],
-              scale: 1,
-              fit: BoxFit.cover
+            footer: GridTileBar(
+              backgroundColor: Colors.blueGrey,
+              leading: IconButton(
+                icon: const Icon(Icons.favorite),
+                color: Colors.white,
+                onPressed: () {},
+              ),
+              title: const Text(
+                "Title",
+                textAlign: TextAlign.center,
+              ),
+              trailing: IconButton(
+                icon: const Icon(
+                  Icons.shopping_cart,
+                ),
+                onPressed: () {},
+                color: Colors.white,
+              ),
+            ),
+            child: NNetworkImage(
+              url: R.image.urls[3],
+              fit: BoxFit.cover,
             ),
           ),
-          GridPaper(//绘制一个像素宽度的直线网格
-            interval: 3,//参数表示2条线之间的间隔
-            divisions: 3,//分割数
-            subdivisions: 3,//测网格分割数,包含自身
+          GridPaper(
+            //绘制一个像素宽度的直线网格
+            interval: 3, //参数表示2条线之间的间隔
+            divisions: 3, //分割数
+            subdivisions: 3, //测网格分割数,包含自身
             // color: Colors.transparent,
-            child: Image.network(
-              R.image.urls[0],
-              scale: 1,
-              fit: BoxFit.cover
+            child: NNetworkImage(
+              url: R.image.urls[0],
+              fit: BoxFit.cover,
             ),
           ),
           ...items,
@@ -73,4 +92,3 @@ class GridPaperDemo extends StatelessWidget {
     );
   }
 }
-

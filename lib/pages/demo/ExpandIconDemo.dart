@@ -8,33 +8,27 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_expansion_cross_fade.dart';
+import 'package:flutter_templet_project/basicWidget/n_expansion_fade.dart';
 import 'package:flutter_templet_project/basicWidget/n_list_view_segment_control.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_header.dart';
-import 'package:flutter_templet_project/basicWidget/n_expansion_tile.dart';
 import 'package:flutter_templet_project/basicWidget/visible_container.dart';
 import 'package:flutter_templet_project/extension/change_notifier_ext.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
-import 'package:flutter_templet_project/extension/widget_ext.dart';
-import 'package:flutter_templet_project/extension/change_notifier_ext.dart';
-
+import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:get/get.dart';
 
 import 'package:tuple/tuple.dart';
 
 class ExpandIconDemo extends StatefulWidget {
-
   final String? title;
 
-  const ExpandIconDemo({ Key? key, this.title}) : super(key: key);
-
+  const ExpandIconDemo({Key? key, this.title}) : super(key: key);
 
   @override
   _ExpandIconDemoState createState() => _ExpandIconDemoState();
 }
 
 class _ExpandIconDemoState extends State<ExpandIconDemo> {
-
   late final bool _isExpanded = false;
 
   List<Color> colors = [
@@ -67,10 +61,8 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
   //   return Tuple2(List.generate(8, (index) => "item${i}_$index"), i);
   // }).toList();
 
-
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
@@ -95,7 +87,7 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
           ),
           NSectionHeader(
             title: "自定义 FoldMenu",
-            child: NExpansionCrossFade(
+            child: NExpansionFade(
               isExpanded: false,
               childBuilder: (isExpanded, onToggle) => FoldMenu(
                 children: [
@@ -109,7 +101,9 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
                   ddlog("$row, $index, $indexs");
                 },
                 indicator: IconButton(
-                  icon: isExpanded ? Icon(Icons.keyboard_arrow_up) : Icon(Icons.keyboard_arrow_down),
+                  icon: isExpanded
+                      ? Icon(Icons.keyboard_arrow_up)
+                      : Icon(Icons.keyboard_arrow_down),
                   onPressed: onToggle,
                 ),
               ),
@@ -127,12 +121,14 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
                   ddlog("$row, $index, $indexs");
                 },
                 indicator: IconButton(
-                  icon: isExpanded ? Icon(Icons.keyboard_arrow_up) : Icon(Icons.keyboard_arrow_down),
+                  icon: isExpanded
+                      ? Icon(Icons.keyboard_arrow_up)
+                      : Icon(Icons.keyboard_arrow_down),
                   onPressed: onToggle,
                 ),
               ),
             ),
-          )
+          ),
         ],
       ),
     );
@@ -142,15 +138,20 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
   Widget buildExpandColorMenu() {
     return Theme(
       data: ThemeData(
-        dividerColor: Colors.transparent,
-        expansionTileTheme: ExpansionTileThemeData(
-          iconColor:selectedColor.value,
-          collapsedIconColor: selectedColor.value,
-        )
-      ),
+          dividerColor: Colors.transparent,
+          expansionTileTheme: ExpansionTileThemeData(
+            iconColor: selectedColor.value,
+            collapsedIconColor: selectedColor.value,
+          )),
       child: ExpansionTile(
-        leading: Icon(Icons.color_lens, color: selectedColor.value,),
-        title: Text('颜色主题', style: TextStyle(color: selectedColor.value),),
+        leading: Icon(
+          Icons.color_lens,
+          color: selectedColor.value,
+        ),
+        title: Text(
+          '颜色主题',
+          style: TextStyle(color: selectedColor.value),
+        ),
         initiallyExpanded: false,
         children: <Widget>[
           Padding(
@@ -162,15 +163,21 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
                 return InkWell(
                   onTap: () {
                     selectedColor.value = e;
-                    ddlog(e.nameDes,);
+                    ddlog(
+                      e.nameDes,
+                    );
                     setState(() {});
                   },
                   child: Container(
                     width: 40,
                     height: 40,
                     color: e,
-                    child: selectedColor.value == e ? Icon(
-                      Icons.done, color: Colors.white,) : null,
+                    child: selectedColor.value == e
+                        ? Icon(
+                            Icons.done,
+                            color: Colors.white,
+                          )
+                        : null,
                   ),
                 );
               }).toList(),
@@ -187,12 +194,13 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
     var itemWiths = <double>[60, 70, 80, 90, 100, 110, 120, 130];
 
     return NListViewSegmentControl(
-        items: items,
-        // itemWidths: itemWiths,
-        selectedIndex: 0,
-        onValueChanged: (index) {
-          ddlog(index);
-        });
+      items: items,
+      // itemWidths: itemWiths,
+      selectedIndex: 0,
+      onValueChanged: (index) {
+        ddlog(index);
+      },
+    );
   }
 
   bool _isShowing = true;
@@ -200,38 +208,34 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
   Widget _buildVisbility() {
     return Container(
       color: Colors.green,
-      child: Column(
-          children: [
+      child: Column(children: [
+        SizedBox(height: 5),
+        buildListViewHorizontal(),
+        Visibility(
+          visible: _isShowing,
+          child: Column(children: [
             SizedBox(height: 5),
-            buildListViewHorizontal(),
-            Visibility(
-              visible: _isShowing,
-              child:
-              Column(
-                  children: [
-                    SizedBox(height: 5),
-                    buildListViewHorizontal(
-                        titles: List.generate(8, (index) => "item4_$index")),
-                    SizedBox(height: 5),
-                    buildListViewHorizontal(
-                        titles: List.generate(8, (index) => "item5_$index")),
-                    SizedBox(height: 5),
-                  ]
-              ),
-            ),
-            IconButton(
-              icon: _isShowing ? Icon(Icons.keyboard_arrow_up) : Icon(
-                  Icons.keyboard_arrow_down),
-              onPressed: () {
-                setState(() {
-                  _isShowing = !_isShowing;
-                });
-              },)
-          ]
-      ),
+            buildListViewHorizontal(
+                titles: List.generate(8, (index) => "item4_$index")),
+            SizedBox(height: 5),
+            buildListViewHorizontal(
+                titles: List.generate(8, (index) => "item5_$index")),
+            SizedBox(height: 5),
+          ]),
+        ),
+        IconButton(
+          icon: _isShowing
+              ? Icon(Icons.keyboard_arrow_up)
+              : Icon(Icons.keyboard_arrow_down),
+          onPressed: () {
+            setState(() {
+              _isShowing = !_isShowing;
+            });
+          },
+        )
+      ]),
     );
   }
-
 
   final bool _isVisible = true;
 
@@ -256,38 +260,28 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
       header: Container(
         color: Colors.orange,
         // height: 50,
-        child: Column(
-            children: [
-              SizedBox(height: 5),
-              buildListViewHorizontal(
-                  titles: List.generate(8, (index) => "item1_$index")),
-              SizedBox(height: 5),
-            ]
-        ),
+        child: Column(children: [
+          SizedBox(height: 5),
+          buildListViewHorizontal(
+              titles: List.generate(8, (index) => "item1_$index")),
+          SizedBox(height: 5),
+        ]),
       ),
-      body: Column(
-          children: [
-            SizedBox(height: 5),
-            buildListViewHorizontal(
-                titles: List.generate(8, (index) => "item4_$index")),
-            SizedBox(height: 5),
-            buildListViewHorizontal(
-                titles: List.generate(8, (index) => "item5_$index")),
-            SizedBox(height: 5),
-          ]
-      ),
+      body: Column(children: [
+        SizedBox(height: 5),
+        buildListViewHorizontal(
+            titles: List.generate(8, (index) => "item4_$index")),
+        SizedBox(height: 5),
+        buildListViewHorizontal(
+            titles: List.generate(8, (index) => "item5_$index")),
+        SizedBox(height: 5),
+      ]),
     );
   }
-
 }
 
-
 class ExpansionTileCard extends StatefulWidget {
-
-  ExpansionTileCard({
-    Key? key,
-    this.title
-  }) : super(key: key);
+  ExpansionTileCard({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -296,31 +290,26 @@ class ExpansionTileCard extends StatefulWidget {
 }
 
 class _ExpansionTileCardState extends State<ExpansionTileCard> {
-  final _isExpanded = false.vn;
+  final isExpanded = false.vn;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title ?? "$widget"),
-          actions: ['done',].map((e) => TextButton(
-            child: Text(e,
-              style: TextStyle(color: Colors.white),
-            ),
-            onPressed: () => debugPrint(e),)
-          ).toList(),
-        ),
-        body: _buildBody()
+      appBar: AppBar(
+        title: Text(widget.title ?? "$widget"),
+      ),
+      body: _buildBody(),
     );
-
   }
 
   _buildBody() {
     return Column(
       children: [
-        ExpansionTile(
+        NSectionHeader(
+          title: "ExpansionTile",
+          child: ExpansionTile(
             onExpansionChanged: (value) {
-              _isExpanded.value = value;
+              isExpanded.value = value;
             },
             title: Text(
               "ExpansionTile",
@@ -334,59 +323,85 @@ class _ExpansionTileCardState extends State<ExpansionTileCard> {
             childrenPadding: EdgeInsets.fromLTRB(0, 0, 0, 20),
             // iconColor: Colors.green,
             trailing: ValueListenableBuilder<bool>(
-              valueListenable: _isExpanded,
-              builder:  ( context, value,  child) {
-                return _buildTrailing1(isExpand: value);
-              }
+              valueListenable: isExpanded,
+              builder: (context, value, child) {
+                return buildTrailing(isExpand: value);
+              },
             ),
             children: [
               Column(
                 children: [
                   Container(
-                    height: 300,
+                    height: 200,
                     color: ColorExt.random,
-                  )
+                  ),
                 ],
-              )
+              ),
             ],
+          ),
         ),
-
-        NExpansionTile(
-          children: [
-            Column(
-              children: [
-                Container(
-                  height: 300,
+        NSectionHeader(
+          title: "NExpansionFade",
+          child: NExpansionFade(
+            isExpanded: isExpanded.value,
+            childBuilder: (isExpand, onToggle) {
+              return InkWell(
+                onTap: () {
+                  onToggle();
+                },
+                child: Container(
+                  height: 100,
                   color: ColorExt.random,
-                )
-              ],
-            )
-          ],
+                ),
+              );
+            },
+            expandedBuilder: (isExpand, onToggle) {
+              return InkWell(
+                onTap: () {
+                  onToggle();
+                },
+                child: Container(
+                  height: 200,
+                  color: ColorExt.random,
+                ),
+              );
+            },
+          ),
         ),
       ],
     );
   }
 
-  _buildTrailing() {
-    return AnimatedRotation(
-      turns: _isExpanded.value ? .5 : 0,
-      duration: Duration(seconds: 1),
-      child: Icon(Icons.abc_sharp, size: 40,),
-    );
-  }
+  buildTrailing({
+    Color? color,
+    bool isExpand = true,
+  }) {
+    // return AnimatedRotation(
+    //   turns: _isExpanded.value ? .5 : 0,
+    //   duration: Duration(milliseconds: 300),
+    //   child: Icon(
+    //     // Icons.abc_sharp,
+    //     Icons.arrow_drop_down_outlined,
+    //     size: 40,
+    //   ),
+    // );
 
-  Widget _buildTrailing1({Color? color, bool isExpand = true,}) {
     return _buildCustomBtn(isExpand: isExpand, color: Colors.green);
   }
 
   _buildCustomBtn({
     bool isExpand = true,
     Color color = Colors.blueAccent,
-    VoidCallback? cb,
   }) {
-    final title = isExpand ? "收起" : "展开";
-    final icon = isExpand ? Icon(Icons.expand_less, size: 24, color: color,) :
-    Icon(Icons.expand_more, size: 24, color: color,);
+    final tuple = isExpand
+        ? (title: "收起", icon: Icons.expand_less)
+        : (title: "展开", icon: Icons.expand_more);
+
+    return Icon(
+      tuple.icon,
+      size: 24,
+      color: color,
+    );
 
     return Container(
       width: 66,
@@ -399,13 +414,19 @@ class _ExpansionTileCardState extends State<ExpansionTileCard> {
       ),
       child: Row(
         children: [
-          Text(title,
+          Text(
+            tuple.title,
             style: TextStyle(
-                color: color
+              color: color,
+              fontSize: 14,
             ),
           ),
-          SizedBox(width: 0,),
-          icon,
+          SizedBox(width: 0),
+          Icon(
+            tuple.icon,
+            size: 24,
+            color: color,
+          ),
         ],
       ),
     );

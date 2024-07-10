@@ -7,7 +7,7 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_expansion_cross_fade.dart';
+import 'package:flutter_templet_project/basicWidget/n_expansion_fade.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_header.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/change_notifier_ext.dart';
@@ -15,13 +15,8 @@ import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 
-
 class AnimatedContainerDemo extends StatefulWidget {
-
-  const AnimatedContainerDemo({
-    Key? key, 
-    this.title
-  }) : super(key: key);
+  const AnimatedContainerDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -30,7 +25,6 @@ class AnimatedContainerDemo extends StatefulWidget {
 }
 
 class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
-
   final sizeStart = Size(200, 200);
   final sizeEnd = Size(400, 400);
 
@@ -51,18 +45,22 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: bgColor,
-      appBar: AppBar(
-        title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          onPressed: onPressed,
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-        )).toList(),
-      ),
-      body: buildBody()
-    );
+        backgroundColor: bgColor,
+        appBar: AppBar(
+          title: Text(widget.title ?? "$widget"),
+          actions: [
+            'done',
+          ]
+              .map((e) => TextButton(
+                    onPressed: onPressed,
+                    child: Text(
+                      e,
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ))
+              .toList(),
+        ),
+        body: buildBody());
   }
 
   Widget buildBody() {
@@ -88,9 +86,8 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
           ),
           NSectionHeader(
             title: "ExpansionCrossFade",
-            child: NExpansionCrossFade(
+            child: NExpansionFade(
               childBuilder: (isExpanded, onToggle) {
-
                 return buildExpansionChild(
                   content: "测试_" * 500,
                   isExpanded: isExpanded,
@@ -98,7 +95,6 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
                 );
               },
               expandedBuilder: (isExpanded, onToggle) {
-
                 return buildExpansionChild(
                   content: "测试1_" * 500,
                   isExpanded: isExpanded,
@@ -107,7 +103,9 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
               },
             ),
           ),
-          SizedBox(height: 100,)
+          SizedBox(
+            height: 100,
+          )
         ],
       ),
     );
@@ -115,44 +113,52 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
 
   Widget buildAnimatedContainer() {
     return AnimatedBuilder(
-      animation: Listenable.merge([
-        _width,
-        _height,
-        _color,
-        _alignment,
-      ]),
-      builder: (context, child) {
-
-        return AnimatedContainer(
-          duration: const Duration(seconds: 1),
-          curve: Curves.fastOutSlowIn,
-          width: _width.value,
-          height: _height.value,
-          color: _color.value,
-          alignment: _alignment.value,
-          onEnd: onEnd,
-          child: TextButton(
-            onPressed: () { debugPrint("AnimatedContainer"); },
-            child: Text("AnimatedContainer", style: TextStyle(color: Colors.white),),
-          ),
-        );
-      }
-    );
+        animation: Listenable.merge([
+          _width,
+          _height,
+          _color,
+          _alignment,
+        ]),
+        builder: (context, child) {
+          return AnimatedContainer(
+            duration: const Duration(seconds: 1),
+            curve: Curves.fastOutSlowIn,
+            width: _width.value,
+            height: _height.value,
+            color: _color.value,
+            alignment: _alignment.value,
+            onEnd: onEnd,
+            child: TextButton(
+              onPressed: () {
+                debugPrint("AnimatedContainer");
+              },
+              child: Text(
+                "AnimatedContainer",
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          );
+        });
   }
 
   void onEnd() {
     debugPrint('End');
   }
 
-  onPressed(){
+  onPressed() {
     _changeSize();
   }
 
   void _changeSize() {
-    _width.value = _width.value == sizeStart.width ? sizeEnd.width : sizeStart.width;
-    _height.value = _height.value == sizeStart.height ? sizeEnd.height : sizeStart.height;
-    _color.value = _color.value == Colors.green ? Colors.lightBlue : Colors.green;
-    _alignment.value = _alignment.value == Alignment.topLeft ? Alignment.center : Alignment.topLeft;
+    _width.value =
+        _width.value == sizeStart.width ? sizeEnd.width : sizeStart.width;
+    _height.value =
+        _height.value == sizeStart.height ? sizeEnd.height : sizeStart.height;
+    _color.value =
+        _color.value == Colors.green ? Colors.lightBlue : Colors.green;
+    _alignment.value = _alignment.value == Alignment.topLeft
+        ? Alignment.center
+        : Alignment.topLeft;
   }
 
   // 搜索框初始宽度
@@ -189,8 +195,7 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
         ),
         ValueListenableBuilder(
             valueListenable: _searchWidthVN,
-            builder: (context, _searchWidth, child){
-
+            builder: (context, _searchWidth, child) {
               return GestureDetector(
                 onTap: toggle,
                 child: AnimatedContainer(
@@ -208,14 +213,14 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       InkWell(
-                        onTap: (){
+                        onTap: () {
                           toggle();
                         },
                         child: Container(
                           width: 28,
                           height: 28,
                           alignment: Alignment.center,
-                          child:  Image(
+                          child: Image(
                             image: 'icon_search.png'.toAssetImage(),
                             width: 18,
                             height: 18,
@@ -233,87 +238,82 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
                             ),
                             maxLength: 15,
                             maxLines: 1,
-                            onChanged: (val){
+                            onChanged: (val) {
                               _searchVN.value = val;
                             },
-                            onSubmitted: (val){
+                            onSubmitted: (val) {
                               _searchVN.value = val;
                             },
                             decoration: InputDecoration(
                               border: InputBorder.none,
                               fillColor: Colors.green,
-                              hintStyle: TextStyle(color: fontColor.withOpacity(0.2)),
+                              hintStyle:
+                                  TextStyle(color: fontColor.withOpacity(0.2)),
                               isCollapsed: true,
                               contentPadding: EdgeInsets.zero,
                               counterText: '',
                               hintText: '搜索',
                               suffixIcon: ValueListenableBuilder(
-                                valueListenable: _searchVN,
-                                builder: (context, value, child){
-                                  if (value.isEmpty) {
-                                    return SizedBox();
-                                  }
+                                  valueListenable: _searchVN,
+                                  builder: (context, value, child) {
+                                    if (value.isEmpty) {
+                                      return SizedBox();
+                                    }
 
-                                  return InkWell(
-                                    onTap: (){
-                                      _searchController.clear();
-                                      _searchVN.value = "";
-                                      toggle();
-                                    },
-                                    child: Icon(Icons.cancel, color: Colors.grey,),
-                                  );
-                                }
-                              ),
+                                    return InkWell(
+                                      onTap: () {
+                                        _searchController.clear();
+                                        _searchVN.value = "";
+                                        toggle();
+                                      },
+                                      child: Icon(
+                                        Icons.cancel,
+                                        color: Colors.grey,
+                                      ),
+                                    );
+                                  }),
                               // suffix: Icon(Icons.clear),
                             ),
-                          )
-                      ),
+                          )),
                     ],
                   ),
                 ),
               );
-            }
-        ),
+            }),
       ],
     );
   }
 
   bool isExpandedExpansion = true;
 
-
   Widget buildExpansionCrossFade() {
-    return NExpansionCrossFade(
-      isExpanded: isExpandedExpansion,
-      childBuilder: (isExpanded, onToggle) {
-        return Container(
-          height: 100,
-          color: Colors.green,
-          child: IconButton(
-            onPressed: onToggle,
-            icon: Icon(Icons.expand_more)
-          ),
-        );
-      },
-      expandedBuilder: (isExpanded, onToggle) {
-        return Container(
-          height: 200,
-          color: Colors.red,
-          child: IconButton(
-            onPressed: onToggle,
-            icon: Icon(Icons.expand_less)
-          ),
-        );
-      }
-    );
+    return NExpansionFade(
+        isExpanded: isExpandedExpansion,
+        childBuilder: (isExpanded, onToggle) {
+          return Container(
+            height: 100,
+            color: Colors.green,
+            child:
+                IconButton(onPressed: onToggle, icon: Icon(Icons.expand_more)),
+          );
+        },
+        expandedBuilder: (isExpanded, onToggle) {
+          return Container(
+            height: 200,
+            color: Colors.red,
+            child:
+                IconButton(onPressed: onToggle, icon: Icon(Icons.expand_less)),
+          );
+        });
   }
 
-  buildExpansionChild({
-    required String content,
-    required bool isExpanded,
-    required VoidCallback onToggle
-  }) {
+  buildExpansionChild(
+      {required String content,
+      required bool isExpanded,
+      required VoidCallback onToggle}) {
     final maxLines = isExpanded ? 10 : 5;
-    final arrowImage = isExpanded ? "icon_expand_arrow_up.png" : "icon_expand_arrow_down.png";
+    final arrowImage =
+        isExpanded ? "icon_expand_arrow_up.png" : "icon_expand_arrow_down.png";
 
     return InkWell(
       onTap: onToggle,
@@ -331,18 +331,18 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
             padding: EdgeInsets.only(top: 8, bottom: 11),
             alignment: Alignment.center,
             decoration: BoxDecoration(
-              // border: Border.all(color: Colors.blue),
-              // borderRadius: BorderRadius.all(Radius.circular(0)),
-              // gradient: LinearGradient(
-              //   tileMode: TileMode.clamp,
-              //   begin: Alignment.topCenter,
-              //   end: Alignment.bottomCenter,
-              //   colors: [
-              //     Color(0xFFF9F9F9).withOpacity(0.01),
-              //     Color(0xFFF9F9F9),
-              //   ],
-              // )
-            ),
+                // border: Border.all(color: Colors.blue),
+                // borderRadius: BorderRadius.all(Radius.circular(0)),
+                // gradient: LinearGradient(
+                //   tileMode: TileMode.clamp,
+                //   begin: Alignment.topCenter,
+                //   end: Alignment.bottomCenter,
+                //   colors: [
+                //     Color(0xFFF9F9F9).withOpacity(0.01),
+                //     Color(0xFFF9F9F9),
+                //   ],
+                // )
+                ),
             child: Image(
               image: arrowImage.toAssetImage(),
               width: 21,
@@ -354,5 +354,3 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
     );
   }
 }
-
-
