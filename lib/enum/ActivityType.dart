@@ -6,8 +6,6 @@
 //  Copyright © 2024/1/18 shang. All rights reserved.
 //
 
-
-
 enum ActivityType {
   unknown(-1, '未知'),
 
@@ -21,16 +19,23 @@ enum ActivityType {
 
   skiing(10, '滑雪');
 
+  const ActivityType(
+    this.value,
+    this.desc,
+  );
 
-  const ActivityType(this.value, this.desc,);
   /// 当前枚举值对应的 int 值(非 index)
   final int value;
+
   /// 当前枚举对应的 描述文字
   final String desc;
 
   /// 获取类型
-  static ActivityType getBy({required bool Function(ActivityType element) test}) {
-    return ActivityType.values.firstWhere(test, orElse: () => ActivityType.unknown,);
+  static ActivityType getBy({required bool Function(ActivityType e) test}) {
+    return ActivityType.values.firstWhere(
+      test,
+      orElse: () => ActivityType.unknown,
+    );
   }
 
   @override
@@ -38,8 +43,6 @@ enum ActivityType {
     return '$desc is $value';
   }
 }
-
-
 
 enum ActivityTypeNew {
   unknown,
@@ -51,7 +54,6 @@ enum ActivityTypeNew {
 }
 
 extension ActivityTypeNewExt on ActivityTypeNew {
-
   static const map = {
     ActivityTypeNew.unknown: "未知",
     ActivityTypeNew.running: "跑步",
@@ -66,8 +68,12 @@ extension ActivityTypeNewExt on ActivityTypeNew {
   }
 
   /// 获取类型
-  static ActivityTypeNew getBy({required bool Function(ActivityTypeNew element) test}) {
-    return ActivityTypeNew.values.firstWhere(test, orElse: () => ActivityTypeNew.unknown,);
+  static ActivityTypeNew getBy(
+      {required bool Function(ActivityTypeNew element) test}) {
+    return ActivityTypeNew.values.firstWhere(
+      test,
+      orElse: () => ActivityTypeNew.unknown,
+    );
   }
 
 // static ActivityTypeNew getByIndex(int index) {
