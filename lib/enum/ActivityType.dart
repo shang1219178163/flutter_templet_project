@@ -30,14 +30,6 @@ enum ActivityType {
   /// 当前枚举对应的 描述文字
   final String desc;
 
-  /// 获取类型
-  static ActivityType getBy({required bool Function(ActivityType e) test}) {
-    return ActivityType.values.firstWhere(
-      test,
-      orElse: () => ActivityType.unknown,
-    );
-  }
-
   @override
   String toString() {
     return '$desc is $value';
@@ -66,21 +58,4 @@ extension ActivityTypeNewExt on ActivityTypeNew {
   String? get desc {
     return map[this];
   }
-
-  /// 获取类型
-  static ActivityTypeNew getBy(
-      {required bool Function(ActivityTypeNew element) test}) {
-    return ActivityTypeNew.values.firstWhere(
-      test,
-      orElse: () => ActivityTypeNew.unknown,
-    );
-  }
-
-// static ActivityTypeNew getByIndex(int index) {
-//   return ActivityTypeNewExt.getBy(test: (e) => e.index == index);
-// }
-//
-// static ActivityTypeNew getByName(String name) {
-//   return ActivityTypeNewExt.getBy(test: (e) => e.name == name);
-// }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_header.dart';
 import 'package:flutter_templet_project/basicWidget/n_pair.dart';
 import 'package:flutter_templet_project/enum/ActivityType.dart';
+import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/enum_ext.dart';
 import 'package:flutter_templet_project/extension/text_style_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
@@ -41,7 +42,10 @@ class _EnumDemoState extends State<EnumDemo> {
     String? name = "${ActivityTypeNew.hiking.name}";
     // name = "null";
     final v = ActivityTypeNew.values.byNullableName(name);
-    debugPrint("v: ${v.runtimeType} $v");
+    final v1 = ActivityTypeNew.skiing.name?.toEnum(ActivityTypeNew.values);
+    final v2 = ActivityTypeNew.values.by((e) => e.name == "cycling");
+
+    ddlog([v, v1, v2].map((e) => "e: $e").join("\n"));
   }
 
   buildBody() {
