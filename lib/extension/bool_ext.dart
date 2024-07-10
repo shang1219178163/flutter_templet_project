@@ -15,7 +15,7 @@ extension BoolExt on bool {
 
 extension BoolStringExt on String {
   /// 转字符串
-  bool toBool({List<String> trueValues = const ["y", "true"]}) {
+  bool toBool({List<String> trueValues = const ["y", "true", "yes"]}) {
     final val = toLowerCase();
     final result = trueValues.contains(val);
     return result;
