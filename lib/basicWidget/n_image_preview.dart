@@ -19,6 +19,7 @@ import 'package:flutter_templet_project/extension/overlay_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:get/get.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 
 /// 图片预览组件
@@ -125,11 +126,16 @@ class _NImagePreviewState extends State<NImagePreview> {
             child: PhotoViewGallery.builder(
               builder: (BuildContext context, int index) {
                 int quarterTurns = urlMaps[index]["quarterTurns"];
+                final url = widget.urls[index];
+
                 return PhotoViewGalleryPageOptions.customChild(
+                  heroAttributes: PhotoViewHeroAttributes(
+                    tag: url,
+                  ),
                   child: RotatedBox(
                     quarterTurns: quarterTurns,
                     child: NNetworkImage(
-                      url: widget.urls[index],
+                      url: url,
                       fit: BoxFit.contain,
                     ),
                   ),

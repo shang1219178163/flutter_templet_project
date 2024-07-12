@@ -6,7 +6,9 @@ import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/upload/asset_upload_box.dart';
 import 'package:flutter_templet_project/basicWidget/upload/asset_upload_model.dart';
 import 'package:flutter_templet_project/cache/asset_cache_service.dart';
+import 'package:flutter_templet_project/util/CustomeMaterialPageRoute.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/tool_util.dart';
 
 class AssetUploadBoxDemo extends StatefulWidget {
   AssetUploadBoxDemo({Key? key, this.title}) : super(key: key);
@@ -170,13 +172,7 @@ class _AssetUploadBoxDemoState extends State<AssetUploadBoxDemo> {
                             .toList();
                         final index = urls.indexOf(e.url ?? "");
                         // debugPrint("urls: ${urls.length}, $index");
-                        FocusScope.of(context).unfocus();
-                        Navigator.push(context, MaterialPageRoute(builder: (_) {
-                          return NImagePreview(
-                            urls: urls,
-                            index: index,
-                          );
-                        }));
+                        jumpImagePreview(urls: urls, index: index);
                       },
                       child: NNetworkImage(
                         url: e.url ?? "",
@@ -213,5 +209,20 @@ class _AssetUploadBoxDemoState extends State<AssetUploadBoxDemo> {
           )
       ]);
     });
+  }
+
+  /// 展示图片预览相册
+  jumpImagePreview({
+    required List<String> urls,
+    required int index,
+  }) {
+    // ToolUtil.imagePreview(urls, index);
+    FocusScope.of(context).unfocus();
+    Navigator.push(
+      context,
+      FadePageRoute(
+        builder: (context) => NImagePreview(urls: urls, index: index),
+      ),
+    );
   }
 }

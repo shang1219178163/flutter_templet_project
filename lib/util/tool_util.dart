@@ -11,6 +11,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_image_preview.dart';
 import 'package:flutter_templet_project/basicWidget/n_webview_page.dart';
+import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/util/CustomeMaterialPageRoute.dart';
 import 'package:flutter_templet_project/vendor/file_preview/file_preview_page.dart';
 import 'package:flutter_templet_project/vendor/file_preview/webview_file_preview_page.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -76,9 +78,10 @@ class ToolUtil {
 
   // 查看大图
   static void imagePreview(List<String> urls, int index) {
+    FocusScope.of(globalContext).unfocus();
     Navigator.push(
       globalContext,
-      MaterialPageRoute(
+      FadePageRoute(
         builder: (context) => NImagePreview(
           urls: urls,
           index: index,
