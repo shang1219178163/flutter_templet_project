@@ -11,7 +11,7 @@ import 'package:flutter_templet_project/basicWidget/upload/asset_upload_config.d
 import 'package:flutter_templet_project/basicWidget/upload/asset_upload_model.dart';
 import 'package:flutter_templet_project/extension/overlay_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
-import 'package:flutter_templet_project/util/CustomeMaterialPageRoute.dart';
+import 'package:flutter_templet_project/util/fade_page_route.dart';
 import 'package:flutter_templet_project/util/tool_util.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';

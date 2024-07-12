@@ -6,8 +6,8 @@ import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/upload/asset_upload_box.dart';
 import 'package:flutter_templet_project/basicWidget/upload/asset_upload_model.dart';
 import 'package:flutter_templet_project/cache/asset_cache_service.dart';
-import 'package:flutter_templet_project/util/CustomeMaterialPageRoute.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/fade_page_route.dart';
 import 'package:flutter_templet_project/util/tool_util.dart';
 
 class AssetUploadBoxDemo extends StatefulWidget {
@@ -174,9 +174,12 @@ class _AssetUploadBoxDemoState extends State<AssetUploadBoxDemo> {
                         // debugPrint("urls: ${urls.length}, $index");
                         jumpImagePreview(urls: urls, index: index);
                       },
-                      child: NNetworkImage(
-                        url: e.url ?? "",
-                        fit: BoxFit.cover,
+                      child: Hero(
+                        tag: e.url ?? "",
+                        child: NNetworkImage(
+                          url: e.url ?? "",
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                   ),
