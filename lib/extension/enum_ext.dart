@@ -9,7 +9,7 @@
 import 'package:flutter/cupertino.dart';
 
 /// 可空 name 匹配
-extension EnumByNullableName<T extends Enum> on Iterable<T> {
+extension EnumExt<T extends Enum> on Iterable<T> {
   /// Finds the enum value in this list with name [name].
   T? byNullableName(String? name) {
     if (name == null) {
@@ -34,10 +34,10 @@ extension EnumByNullableName<T extends Enum> on Iterable<T> {
   }
 }
 
-extension EnumStringExt<T extends Enum> on String {
+extension EnumStringExt<T extends Enum> on String? {
   /// 字符串转枚举
   /// values - 枚举数组
-  T? toEnum(Iterable<T> values) {
+  T? enumOf(Iterable<T> values) {
     return values.byNullableName(this);
   }
 }

@@ -26,11 +26,11 @@ class _EnumDemoState extends State<EnumDemo> {
           'done',
         ]
             .map((e) => TextButton(
+                  onPressed: onDone,
                   child: Text(
                     e,
                     style: TextStyle(color: Colors.white),
                   ),
-                  onPressed: onDone,
                 ))
             .toList(),
       ),
@@ -42,7 +42,7 @@ class _EnumDemoState extends State<EnumDemo> {
     String? name = "${ActivityTypeNew.hiking.name}";
     // name = "null";
     final v = ActivityTypeNew.values.byNullableName(name);
-    final v1 = ActivityTypeNew.skiing.name?.toEnum(ActivityTypeNew.values);
+    final v1 = ActivityTypeNew.skiing.name?.enumOf(ActivityTypeNew.values);
     final v2 = ActivityTypeNew.values.by((e) => e.name == "cycling");
 
     ddlog([v, v1, v2].map((e) => "e: $e").join("\n"));

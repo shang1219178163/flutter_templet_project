@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_dash_line.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
+import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/extension/snack_bar_ext.dart';
+import 'package:get/get.dart';
 
 import 'package:tuple/tuple.dart';
 
@@ -20,18 +22,23 @@ const kUpdateContent = """
 class SnackBarDemo extends StatefulWidget {
   const SnackBarDemo({Key? key}) : super(key: key);
 
-  
   @override
   State<StatefulWidget> createState() => SnackBarDemoState();
 }
 
 class SnackBarDemoState extends State<SnackBarDemo> {
-
   GlobalKey globalKey = GlobalKey();
 
   final _globalKey = GlobalKey<ScaffoldMessengerState>();
 
   var behavior = SnackBarBehavior.floating;
+
+  SnackbarController? snackbarController;
+
+  late final footerItems = [
+    (title: "one", action: onOne),
+    (title: "two", action: onToggle),
+  ];
 
   @override
   void dispose() {
@@ -56,22 +63,24 @@ class SnackBarDemoState extends State<SnackBarDemo> {
           clearSnackBars();
         });
         debugPrint("WillPopScope");
-       return true;
+        return true;
       },
       child: Scaffold(
-        persistentFooterButtons: ["one", "two"].map((e) => TextButton(
-          onPressed: () {
-            debugPrint(e);
-          },
-          child: Text(e))
-        ).toList(),
-        bottomSheet: Container(color: Colors.green, height: 100,),
+        persistentFooterButtons: footerItems
+            .map((e) => TextButton(onPressed: e.action, child: Text(e.title)))
+            .toList(),
+        bottomSheet: Container(
+          color: Colors.green,
+          height: 100,
+        ),
         appBar: AppBar(
           title: Text('SnackBar'),
           actions: [
             IconButton(
               onPressed: () {
-                behavior = behavior == SnackBarBehavior.floating ? SnackBarBehavior.fixed : SnackBarBehavior.floating;
+                behavior = behavior == SnackBarBehavior.floating
+                    ? SnackBarBehavior.fixed
+                    : SnackBarBehavior.floating;
                 setState(() {});
               },
               icon: Icon(Icons.all_inclusive),
@@ -89,39 +98,77 @@ class SnackBarDemoState extends State<SnackBarDemo> {
     );
   }
 
+  void onOne() {
+    snackbarController = Get.snackbar(
+      "Get.snackbar", 100.generateChars(),
+      // overlayColor: Colors.white,
+      // overlayBlur: 0,
+      backgroundColor: Colors.white,
+      duration: Duration(milliseconds: 1),
+      onTap: (snack) {
+        ddlog("isSnackbarOpen: ${Get.isSnackbarOpen}");
+        snackbarController?.close();
+      },
+    );
+  }
+
+  void onToggle() {
+    ddlog("isSnackbarOpen: ${Get.isSnackbarOpen}");
+    if (Get.isSnackbarOpen) {
+      snackbarController?.close();
+    } else {
+      snackbarController?.show();
+    }
+  }
+
   _buildBody() {
     return Builder(builder: (BuildContext context) {
       return RepaintBoundary(
         key: globalKey,
-        child: Center(
-            child: Container(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Spacer(),
-                  _buildItem(text: '显示SnackBar, 不覆盖', onPressed: () {
-                    // final snackBar = buildSnackBar();
-                    // ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                    showSnackBar(buildSnackBar(behavior: behavior));
-                  }),
-
-                  NDashLine(color: Colors.red,),
-
-                  _buildItem(text: '显示SnackBar, 覆盖 isCenter', onPressed: () {
-                    showSnackBar(buildSnackBar(behavior: behavior, isCenter: true),);
-                  }),
-
-                  _buildItem(text: '显示SnackBar, 覆盖', onPressed: () {
-                    showSnackBar(buildSnackBar(behavior: behavior), );
-                  }),
-
-                  _buildItem(text: '显示断网SnackBar, 覆盖', onPressed: () {
-                    showSnackBar(buildSnackBar2(), );
-                  }),
-                  Spacer(),
-                ],
+        child: Container(
+          alignment: Alignment.center,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Spacer(),
+              _buildItem(
+                text: '显示SnackBar, 不覆盖',
+                onPressed: () {
+                  // final snackBar = buildSnackBar();
+                  // ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                  showSnackBar(buildSnackBar(behavior: behavior));
+                },
               ),
-            )
+              NDashLine(
+                color: Colors.red,
+              ),
+              _buildItem(
+                text: '显示SnackBar, 覆盖 isCenter',
+                onPressed: () {
+                  showSnackBar(
+                    buildSnackBar(behavior: behavior, isCenter: true),
+                  );
+                },
+              ),
+              _buildItem(
+                text: '显示SnackBar, 覆盖',
+                onPressed: () {
+                  showSnackBar(
+                    buildSnackBar(behavior: behavior),
+                  );
+                },
+              ),
+              _buildItem(
+                text: '显示断网SnackBar, 覆盖',
+                onPressed: () {
+                  showSnackBar(
+                    buildSnackBar2(),
+                  );
+                },
+              ),
+              Spacer(),
+            ],
+          ),
         ),
       );
     });
@@ -145,9 +192,9 @@ class SnackBarDemoState extends State<SnackBarDemo> {
 
   SnackBar buildSnackBar({
     bool isCenter = false,
-    SnackBarBehavior behavior = SnackBarBehavior.floating
+    SnackBarBehavior behavior = SnackBarBehavior.floating,
   }) {
-     Widget child = Container(
+    Widget child = Container(
       // color: Colors.white,
       // decoration: BoxDecoration(color: Colors.red,
       //     border: Border.all(width: 2.0, color: Colors.black),
@@ -160,7 +207,9 @@ class SnackBarDemoState extends State<SnackBarDemo> {
     );
 
     if (isCenter) {
-      child = Center(child: child,);
+      child = Center(
+        child: child,
+      );
     }
 
     return SnackBar(
@@ -181,8 +230,7 @@ class SnackBarDemoState extends State<SnackBarDemo> {
         debugPrint("显示SnackBar");
       },
       shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(50))
-      ),
+          borderRadius: BorderRadius.all(Radius.circular(50))),
       behavior: SnackBarBehavior.floating,
       backgroundColor: Colors.orange,
       content: Text('断网了？'),
@@ -210,8 +258,10 @@ class SnackBarDemoState extends State<SnackBarDemo> {
       // padding: EdgeInsets.zero,
       // leadingPadding: EdgeInsets.zero,
       content: InkWell(
-        onTap: () => hideMaterialBanner(isClear: false),
-          child: Text('Hello, I am a Material Banner $nowStr' * 3)
+        onTap: () {
+          hideMaterialBanner(isClear: false);
+        },
+        child: Text('Hello, I am a Material Banner $nowStr' * 3),
       ),
       leading: const Icon(Icons.info),
       backgroundColor: Colors.yellow,
@@ -230,8 +280,9 @@ class SnackBarDemoState extends State<SnackBarDemo> {
       ],
     );
     // ScaffoldMessenger.of(context).showMaterialBanner(banner);
-    showMaterialBanner(banner, isClear: false,);
+    showMaterialBanner(
+      banner,
+      isClear: false,
+    );
   }
-
-
 }

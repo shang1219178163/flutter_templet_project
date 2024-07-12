@@ -6,7 +6,6 @@
 //  Copyright © 5/17/21 shang. All rights reserved.
 //
 
-
 import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
@@ -18,9 +17,7 @@ import 'package:flutter_templet_project/extension/ddlog.dart';
 
 // const double kCupertinoButtonHeight = 56.0;
 
-
 extension WidgetExt on Widget {
-
   ///运算符重载
   List<Widget> operator *(int value) {
     var l = <Widget>[];
@@ -34,17 +31,22 @@ extension WidgetExt on Widget {
   Widget toBorder({
     Color? color,
     Color borderColor = Colors.blue,
-  }) => DecoratedBox(
-    decoration: BoxDecoration(
-      color: color,
-      border: Border.all(color: borderColor),
-    ),
-    child: this,
-  );
+  }) =>
+      DecoratedBox(
+        decoration: BoxDecoration(
+          color: color,
+          border: Border.all(color: borderColor),
+        ),
+        child: this,
+      );
 
   ColoredBox toColoredBox({
     Color? color,
-  }) => ColoredBox(color: color ?? ColorExt.random, child: this,);
+  }) =>
+      ColoredBox(
+        color: color ?? ColorExt.random,
+        child: this,
+      );
 
   DecoratedBox toDecoratedBox({
     Color color = Colors.blue,
@@ -55,20 +57,20 @@ extension WidgetExt on Widget {
     Gradient? gradient,
     BlendMode? backgroundBlendMode,
     BoxShape shape = BoxShape.rectangle,
-  }) => DecoratedBox(
-    decoration: BoxDecoration(
-      color: color,
-      image: image,
-      border: border,
-      borderRadius: borderRadius,
-      boxShadow: boxShadow,
-      gradient: gradient,
-      backgroundBlendMode: backgroundBlendMode,
-      shape: shape,
-    ),
-    child: this,
-  );
-
+  }) =>
+      DecoratedBox(
+        decoration: BoxDecoration(
+          color: color,
+          image: image,
+          border: border,
+          borderRadius: borderRadius,
+          boxShadow: boxShadow,
+          gradient: gradient,
+          backgroundBlendMode: backgroundBlendMode,
+          shape: shape,
+        ),
+        child: this,
+      );
 
   toShowCupertinoDialog({
     required BuildContext context,
@@ -76,14 +78,15 @@ extension WidgetExt on Widget {
     bool useRootNavigator = true,
     bool barrierDismissible = false,
     RouteSettings? routeSettings,
-  }) => showCupertinoDialog(
-    context: context,
-    builder: (context) => this,
-    barrierLabel: barrierLabel,
-    useRootNavigator: useRootNavigator,
-    barrierDismissible: barrierDismissible,
-    routeSettings: routeSettings,
-  );
+  }) =>
+      showCupertinoDialog(
+        context: context,
+        builder: (context) => this,
+        barrierLabel: barrierLabel,
+        useRootNavigator: useRootNavigator,
+        barrierDismissible: barrierDismissible,
+        routeSettings: routeSettings,
+      );
 
   ///showCupertinoModalPopup
   toShowCupertinoModalPopup({
@@ -94,15 +97,16 @@ extension WidgetExt on Widget {
     bool useRootNavigator = true,
     bool semanticsDismissible = false,
     RouteSettings? routeSettings,
-  }) => showCupertinoModalPopup(
-    context: context,
-    builder: (context) => this,
-    filter: filter,
-    barrierColor: barrierColor,
-    barrierDismissible: barrierDismissible,
-    semanticsDismissible: semanticsDismissible,
-    routeSettings: routeSettings,
-  );
+  }) =>
+      showCupertinoModalPopup(
+        context: context,
+        builder: (context) => this,
+        filter: filter,
+        barrierColor: barrierColor,
+        barrierDismissible: barrierDismissible,
+        semanticsDismissible: semanticsDismissible,
+        routeSettings: routeSettings,
+      );
 
   ///弹窗
   toShowGeneralDialog({
@@ -117,30 +121,29 @@ extension WidgetExt on Widget {
     Offset? anchorPoint,
     VoidCallback? onBarrier,
     Alignment alignment = Alignment.center,
-  }) => showGeneralDialog(
-    context: context,
-    barrierDismissible: barrierDismissible,
-    barrierLabel: barrierLabel,
-    barrierColor: barrierColor,
-    transitionDuration: transitionDuration,
-    transitionBuilder: transitionBuilder,
-    useRootNavigator: useRootNavigator,
-    routeSettings: routeSettings,
-    pageBuilder: (context, animation, secondaryAnimation) {
-
-      return Material(
-        color: barrierColor,
-        child: InkWell(
-          onTap: onBarrier,
-          child: Align(
-            alignment: alignment,
-            child: this,
-          ),
-        ),
+  }) =>
+      showGeneralDialog(
+        context: context,
+        barrierDismissible: barrierDismissible,
+        barrierLabel: barrierLabel,
+        barrierColor: barrierColor,
+        transitionDuration: transitionDuration,
+        transitionBuilder: transitionBuilder,
+        useRootNavigator: useRootNavigator,
+        routeSettings: routeSettings,
+        pageBuilder: (context, animation, secondaryAnimation) {
+          return Material(
+            color: barrierColor,
+            child: InkWell(
+              onTap: onBarrier,
+              child: Align(
+                alignment: alignment,
+                child: this,
+              ),
+            ),
+          );
+        },
       );
-    },
-  );
-
 
   ///正面弹窗
   toShowDialog({
@@ -151,15 +154,16 @@ extension WidgetExt on Widget {
     bool useSafeArea = true,
     bool useRootNavigator = true,
     RouteSettings? routeSettings,
-  }) => showDialog(
-    context: context,
-    builder: (context) => this,
-    barrierColor: barrierColor,
-    barrierDismissible: barrierDismissible,
-    barrierLabel: barrierLabel,
-    useSafeArea: useSafeArea,
-    routeSettings: routeSettings,
-  );
+  }) =>
+      showDialog(
+        context: context,
+        builder: (context) => this,
+        barrierColor: barrierColor,
+        barrierDismissible: barrierDismissible,
+        barrierLabel: barrierLabel,
+        useSafeArea: useSafeArea,
+        routeSettings: routeSettings,
+      );
 
   ///底部弹窗
   toShowModalBottomSheet({
@@ -175,21 +179,22 @@ extension WidgetExt on Widget {
     bool enableDrag = true,
     RouteSettings? routeSettings,
     AnimationController? transitionAnimationController,
-  }) => showModalBottomSheet(
-    context: context,
-    builder: (context) => this,
-    backgroundColor: backgroundColor,
-    elevation: elevation,
-    shape: shape,
-    clipBehavior: clipBehavior,
-    barrierColor: barrierColor,
-    isScrollControlled: isScrollControlled,
-    useRootNavigator: useRootNavigator,
-    isDismissible: isDismissible,
-    enableDrag: enableDrag,
-    routeSettings: routeSettings,
-    transitionAnimationController: transitionAnimationController,
-  );
+  }) =>
+      showModalBottomSheet(
+        context: context,
+        builder: (context) => this,
+        backgroundColor: backgroundColor,
+        elevation: elevation,
+        shape: shape,
+        clipBehavior: clipBehavior,
+        barrierColor: barrierColor,
+        isScrollControlled: isScrollControlled,
+        useRootNavigator: useRootNavigator,
+        isDismissible: isDismissible,
+        enableDrag: enableDrag,
+        routeSettings: routeSettings,
+        transitionAnimationController: transitionAnimationController,
+      );
 
   /// 加拟物风格
   toNeumorphism({
@@ -222,41 +227,48 @@ extension WidgetExt on Widget {
   /// 转为 SliverToBoxAdapter
   SliverToBoxAdapter toSliverToBoxAdapter({
     Key? key,
-    }) => SliverToBoxAdapter(
-      key: key,
-      child: this,
-    );
+  }) =>
+      SliverToBoxAdapter(
+        key: key,
+        child: this,
+      );
 
   /// 转为 SliverFillRemaining
   SliverFillRemaining toSliverFillRemaining({
     Key? key,
     bool hasScrollBody = true,
     bool fillOverscroll = false,
-  }) => SliverFillRemaining(
-    key: key,
-    hasScrollBody: hasScrollBody,
-    fillOverscroll: fillOverscroll,
-    child: this,
-  );
+  }) =>
+      SliverFillRemaining(
+        key: key,
+        hasScrollBody: hasScrollBody,
+        fillOverscroll: fillOverscroll,
+        child: this,
+      );
 
   /// 转为 ValueListenableBuilder
-  ValueListenableBuilder toValueListenableBuilder<T>({
+  ///
+  /// - valueListenable ValueListenable<bool>
+  ///
+  /// - placeholder valueListenable 为 true 时显示
+  ValueListenableBuilder toListenable(
+    ValueListenable<bool> valueListenable, {
     Key? key,
-    required ValueListenable<T> valueListenable,
-    Widget? child,
-  }) => ValueListenableBuilder<T>(
-    valueListenable: valueListenable,
-    child: child,
-    builder: (context, value, child) {
-      return this;
-    },
-  );
-
+    Widget placeholder = const SizedBox(),
+  }) =>
+      ValueListenableBuilder(
+        key: key,
+        valueListenable: valueListenable,
+        builder: (context, value, child) {
+          if (value) {
+            return placeholder;
+          }
+          return this;
+        },
+      );
 }
 
-
 extension ScrollViewExt on ScrollView {
-
   CupertinoScrollbar toCupertinoScrollbar({
     Key? key,
     ScrollController? controller,
@@ -266,40 +278,43 @@ extension ScrollViewExt on ScrollView {
     Radius radius = CupertinoScrollbar.defaultRadius,
     radiusWhileDragging = CupertinoScrollbar.defaultRadiusWhileDragging,
     ScrollNotificationPredicate? notificationPredicate,
-  }) => CupertinoScrollbar(
-    key: key,
-    controller: controller,
-    thumbVisibility: isAlwaysShown,
-    thickness: thickness,
-    radius: radius,
-    notificationPredicate: notificationPredicate ?? defaultScrollNotificationPredicate,
-    child: this,
-  );
+  }) =>
+      CupertinoScrollbar(
+        key: key,
+        controller: controller,
+        thumbVisibility: isAlwaysShown,
+        thickness: thickness,
+        radius: radius,
+        notificationPredicate:
+            notificationPredicate ?? defaultScrollNotificationPredicate,
+        child: this,
+      );
 }
 
-
 extension FlexExt on Flex {
-
   /// 转为 SliverToBoxAdapter
   CustomScrollView toCustomScrollView({
     Key? key,
     Widget Function(Widget e)? itemBuilder,
-  }) => CustomScrollView(
-    key: key,
-    slivers: children.map((e) => itemBuilder?.call(e) ?? e.toSliverToBoxAdapter()).toList(),
-    clipBehavior: clipBehavior,
-  );
-
+  }) =>
+      CustomScrollView(
+        key: key,
+        slivers: children
+            .map((e) => itemBuilder?.call(e) ?? e.toSliverToBoxAdapter())
+            .toList(),
+        clipBehavior: clipBehavior,
+      );
 }
 
-
 extension ListViewExt on ListView {
-
   /// 转为 CustomScrollView
   CustomScrollView toCustomScrollView({
     Widget Function(Widget e)? itemBuilder,
   }) {
-    final slivers = (childrenDelegate as SliverChildListDelegate).children.map((e) => itemBuilder?.call(e) ?? e.toSliverToBoxAdapter()).toList();
+    final slivers = (childrenDelegate as SliverChildListDelegate)
+        .children
+        .map((e) => itemBuilder?.call(e) ?? e.toSliverToBoxAdapter())
+        .toList();
     return CustomScrollView(
       key: key,
       slivers: slivers,
@@ -322,12 +337,12 @@ extension ListViewExt on ListView {
   }
 }
 
-
 extension CustomScrollViewExt on CustomScrollView {
-
   /// 转为 ListView
   ListView toListView() {
-    final children = slivers.map((e) => (e is SliverToBoxAdapter ? e.child ?? SizedBox() : e)).toList();
+    final children = slivers
+        .map((e) => (e is SliverToBoxAdapter ? e.child ?? SizedBox() : e))
+        .toList();
     return ListView(
       key: key,
       scrollDirection: scrollDirection,

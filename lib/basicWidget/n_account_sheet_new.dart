@@ -10,6 +10,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/cache/cache_service.dart';
+import 'package:flutter_templet_project/cache/file_manager.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 
 /// 账号选择器(泛型尝试)
@@ -173,20 +174,18 @@ class NAccountSheetNewController<E extends MapEntry<String, dynamic>> {
   }
 
   /// 添加账户
-  void addAccount({
+  Future<void> addAccount({
     required String account,
     required String pwd,
-  }) {
+  }) async {
     assert(_anchor != null);
-    var map = CacheService().getMap(CACHE_ACCOUNT_List) ?? <String, dynamic>{};
-    map.putIfAbsent(account, () => pwd);
+    final map =
+        await FileManager().readJson(fileName: CACHE_ACCOUNT_List) ?? {};
+    map[account] = pwd;
 
-    _anchor?.items.forEach((e) {
-      map.putIfAbsent(e.key, () => e.value);
-    });
-
-    CacheService().setMap(CACHE_ACCOUNT_List, map);
-    updateItems(map.entries.toList());
+    final accounts =
+        map.entries.map((e) => (account: e.key, pwd: e.value) as E).toList();
+    updateItems(accounts);
     _anchor?.updateCurrent(MapEntry(account, pwd));
   }
 }
