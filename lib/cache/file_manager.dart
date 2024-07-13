@@ -150,6 +150,24 @@ class FileManager {
     return jsonDecode(content);
   }
 
+  /// 更新 map
+  Future<File?> updateJson({
+    required String fileName,
+    String ext = "txt",
+    Directory? dir,
+    required Future<Map<String, dynamic>> Function(Map<String, dynamic> map)
+        onUpdate,
+  }) async {
+    final map = await FileManager().readJson(
+      fileName: fileName,
+      ext: ext,
+      dir: dir,
+    );
+    final mapNew = await onUpdate(map ?? {});
+    final fileNew = await saveJson(fileName: fileName, map: mapNew);
+    return fileNew;
+  }
+
   /// 文件下载
   Future<File?> downloadFile({
     required String url,
