@@ -8,45 +8,46 @@
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/cache/cache_service.dart';
 import 'package:flutter_templet_project/service/connectivity_service.dart';
 
 class NetStateListenerDemoOne extends StatefulWidget {
-
-  const NetStateListenerDemoOne({
-    Key? key,
-    this.title
-  }) : super(key: key);
+  const NetStateListenerDemoOne({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
   @override
-  _NetStateListenerDemoOneState createState() => _NetStateListenerDemoOneState();
+  _NetStateListenerDemoOneState createState() =>
+      _NetStateListenerDemoOneState();
 }
 
-class _NetStateListenerDemoOneState extends State<NetStateListenerDemoOne> with NetConnectivityMixin
+class _NetStateListenerDemoOneState extends State<NetStateListenerDemoOne>
+    with NetConnectivityMixin
     implements NetConnectivityListener {
-
-  final netConnectResult = ValueNotifier<ConnectivityResult>(ConnectivityResult.mobile);
-
+  final netConnectResult = ValueNotifier<bool>(true);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          onPressed: onPressed,
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),)
-        ).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  onPressed: onPressed,
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ))
+            .toList(),
       ),
       body: Column(
         children: [
           ValueListenableBuilder<bool>(
             valueListenable: ConnectivityService().onLine,
             builder: (context, value, child) {
-
               return Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
@@ -59,7 +60,7 @@ class _NetStateListenerDemoOneState extends State<NetStateListenerDemoOne> with 
           ),
           Divider(),
           ValueListenableBuilder<ConnectivityResult>(
-            valueListenable: netConnectResult,
+            valueListenable: ConnectivityService().netState,
             builder: (context, value, child) {
               debugPrint('netConnectResult: $value');
 
@@ -78,7 +79,7 @@ class _NetStateListenerDemoOneState extends State<NetStateListenerDemoOne> with 
     );
   }
 
-  onPressed(){
+  onPressed() {
     final list = [];
     list.remove("1");
     debugPrint(list.toString());
@@ -88,11 +89,7 @@ class _NetStateListenerDemoOneState extends State<NetStateListenerDemoOne> with 
   NetConnectivityListener get connectivityListener => this;
 
   @override
-  void onNetStateChaneged(ConnectivityResult result) {
-    debugPrint("onNetStateChaneged $result ${result != ConnectivityResult.none}");
-    netConnectResult.value = result;
-    if (result == ConnectivityResult.none) {
-      return;
-    }
+  void onNetStateChaneged(bool onLine) {
+    netConnectResult.value = onLine;
   }
 }
