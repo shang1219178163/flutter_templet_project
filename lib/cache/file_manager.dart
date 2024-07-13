@@ -153,16 +153,12 @@ class FileManager {
   /// 更新 map
   Future<File?> updateJson({
     required String fileName,
-    String ext = "txt",
+    String ext = "dart",
     Directory? dir,
     required Future<Map<String, dynamic>> Function(Map<String, dynamic> map)
         onUpdate,
   }) async {
-    final map = await FileManager().readJson(
-      fileName: fileName,
-      ext: ext,
-      dir: dir,
-    );
+    final map = await readJson(fileName: fileName, ext: ext, dir: dir);
     final mapNew = await onUpdate(map ?? {});
     final fileNew = await saveJson(fileName: fileName, map: mapNew);
     return fileNew;
