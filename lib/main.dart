@@ -27,7 +27,7 @@ import 'package:flutter_templet_project/provider/rxDart_provider_demo.dart';
 import 'package:flutter_templet_project/routes/AppRouteObserver.dart';
 import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:flutter_templet_project/routes/InitialBinding.dart';
-import 'package:flutter_templet_project/util/app_util.dart';
+import 'package:flutter_templet_project/util/tool_util.dart';
 
 import 'package:flutter_templet_project/vendor/isar/DBManager.dart';
 import 'package:flutter_templet_project/vendor/isar/model/db_order.dart';
@@ -154,7 +154,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final app = GetMaterialApp(
       popGesture: true, //swipe back
-      navigatorKey: AppUtil.navigatorKey,
+      navigatorKey: ToolUtil.navigatorKey,
       title: 'Flutter Templet',
       debugShowCheckedModeBanner: false,
       locale: const Locale('zh'),
