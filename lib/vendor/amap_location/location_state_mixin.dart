@@ -11,6 +11,7 @@
 // import 'dart:convert';
 // import 'dart:io';
 // import 'package:flutter/cupertino.dart';
+// import 'package:flutter_templet_project/extension/ddlog.dart';
 // import 'package:flutter_templet_project/vendor/amap_location/location_detail_model.dart';
 //
 // import 'package:permission_handler/permission_handler.dart';
@@ -24,27 +25,17 @@
 // * */
 // example:
 // //  // 当前所在位置
-// //  String location = '';
+// //  LocationDetailModel? locationModel;
 // //
 // // @override
 // // void onLocationChanged(LocationDetailModel locationModel) {
 // //   YLog.d("$this onLocationChanged: $location");
-// //   final address = locationModel.address ?? "";
-// //   if (location.isEmpty || location == locationErrorMsg) {
-// //     if (address.isNotEmpty) {
-// //       location = address;
-// //     } else {
-// //       location = locationErrorMsg;
-// //     }
-// //     ...
-// //   }
+// //   locationModel = model;
+// //   return model.cityCode?.isNotEmpty == true;
 // // }
 // //
 // // @override
 // // void onLocationFailed(Map<String, Object> result) {
-// //   if (location.isEmpty) {
-// //     location = locationErrorMsg;
-// //   }
 // //   YLog.d("$this onLocationFailed: $location");
 // //     ...
 // // }
@@ -58,8 +49,24 @@
 //   final _locationPlugin = AMapFlutterLocation();
 //
 //   @override
+//   void dispose() {
+//     super.dispose();
+//
+//     stopLocation();
+//     _locationListener?.cancel();
+//     ///销毁定位
+//     _locationPlugin.destroy();
+//   }
+//
+//   @override
 //   void initState() {
 //     super.initState();
+//
+//     _initData();
+//   }
+//
+//   /// 初始化
+//   Future<void> _initData() async {
 //     /// 设置是否已经包含高德隐私政策并弹窗展示显示用户查看，如果未包含或者没有弹窗展示，高德定位SDK将不会工作
 //     ///
 //     /// 高德SDK合规使用方案请参考官网地址：https://lbs.amap.com/news/sdkhgsy
@@ -81,9 +88,6 @@
 //     /// [hasAgree] 隐私权政策是否已经取得用户同意
 //     AMapFlutterLocation.updatePrivacyAgree(true);
 //
-//     /// 动态申请定位权限
-//     requestPermission();
-//
 //     ///设置Android和iOS的apiKey<br>
 //     ///key的申请请参考高德开放平台官网说明<br>
 //     ///Android: https://lbs.amap.com/api/android-location-sdk/guide/create-project/get-key
@@ -93,31 +97,34 @@
 //     ///iOS 获取native精度类型
 //     if (Platform.isIOS) {
 //       requestAccuracyAuthorization();
+//     } else {
+//       if (needPermission) {
+//         /// 动态申请定位权限
+//         await requestPermission();
+//       }
 //     }
 //
-//    ///注册定位结果监听
-//     _locationListener = _locationPlugin.onLocationChanged().listen((result) {
-//       if (!result.containsKey("latitude") || result["latitude"] == 0) {
-//         // YLog.d("$this ${result["errorInfo"]}");
+//     ///注册定位结果监听
+//     _locationListener = _locationPlugin
+//         .onLocationChanged()
+//         .listen((Map<String, Object> result) {
+//       // final jsonStr = jsonEncode(result);
+//       // debugPrint("LocationStateMixin jsonStr: $jsonStr");
+//       if (!result.containsKey("latitude") ||
+//           [0, "", null].contains(result["latitude"])) {
+//         DLog.d("❌ $this ${result["errorInfo"]}");
 //         onLocationFailed(result);
 //         return;
 //       }
 //       final locationModel = LocationDetailModel.fromJson(result);
-//       onLocationChanged(locationModel);
-//       stopLocation();
+//       // debugPrint("locationModel: locationModel");
+//       final isSuccess = onLocationChanged(locationModel);
+//       if (isSuccess) {
+//         stopLocation();
+//       }
 //     });
 //
 //     startLocation();
-//   }
-//
-//   @override
-//   void dispose() {
-//     super.dispose();
-//
-//     stopLocation();
-//     _locationListener?.cancel();
-//     ///销毁定位
-//     _locationPlugin.destroy();
 //   }
 //
 //   ///设置定位参数
@@ -218,12 +225,19 @@
 //
 //   /************************* 定位回调方法 *************************/
 //   /// 定位回调
-//   void onLocationChanged(LocationDetailModel locationModel) {
-//     throw UnimplementedError("❌: $this 未实现 onLocationChanged");
+//   ///
+//   /// - locationModel 定位返回信息对象(有时仅返回经纬度,不返回城市信息)
+//   ///
+//   /// return 返回 true 则停止继续定位
+//   bool onLocationChanged(LocationDetailModel model) {
+//     throw UnimplementedError("❌$this 未实现 onLocationChanged");
 //   }
-//   /// 定位失败回调
+//
+//   /// 定位失败回调(可选实现)
+//   ///
+//   /// - error 定位失败返回信息(定位成功则为空)
 //   void onLocationFailed(Map<String, Object> result) {
-//     throw UnimplementedError("❌: $this 未实现 onLocationFailed");
+//     DLog.d("❌$this onLocationFailed ${result}");
 //   }
 // }
 //
