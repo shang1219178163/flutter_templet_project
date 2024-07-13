@@ -1,17 +1,12 @@
-
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/n_cancel_and_confirm_bar.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
-import 'package:flutter_templet_project/util/app_util.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/tool_util.dart';
 
-
-mixin DialogMixin{
-
+mixin DialogMixin {
   /// 项目通用弹窗封装
   presentDialog({
     required BuildContext context,
@@ -43,8 +38,11 @@ mixin DialogMixin{
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Padding(
-          padding: EdgeInsets.only(left: 20.w,),
-          child: Text(title,
+          padding: EdgeInsets.only(
+            left: 20.w,
+          ),
+          child: Text(
+            title,
             style: TextStyle(
               fontSize: 18.sp,
               fontWeight: FontWeight.bold,
@@ -55,10 +53,12 @@ mixin DialogMixin{
         Padding(
           padding: EdgeInsets.only(right: 4.w),
           child: IconButton(
-            onPressed: onCancel ?? (){
-              Navigator.of(context).pop();
-            },
-            icon: Icon(Icons.clear,
+            onPressed: onCancel ??
+                () {
+                  Navigator.of(context).pop();
+                },
+            icon: Icon(
+              Icons.clear,
               size: 20.w,
               // color: Color(0xff231815),
             ),
@@ -67,27 +67,23 @@ mixin DialogMixin{
       ],
     );
 
-    final defaultContent = StatefulBuilder(
-        builder: (context, setState) {
-
-          return Scrollbar(
-            controller: scrollController,
-            child: ConstrainedBox(
-              constraints: BoxConstraints(
-                maxHeight: contentMaxHeight - buttonBarHeight,
-                minHeight: contentMinHeight,
-              ),
-              child: SingleChildScrollView(
-                controller: scrollController,
-                child: Padding(
-                  padding: contentPadding,
-                  child: contentChildBuilder?.call(context, setState),
-                )
-              ),
-            ),
-          );
-        }
-    );
+    final defaultContent = StatefulBuilder(builder: (context, setState) {
+      return Scrollbar(
+        controller: scrollController,
+        child: ConstrainedBox(
+          constraints: BoxConstraints(
+            maxHeight: contentMaxHeight - buttonBarHeight,
+            minHeight: contentMinHeight,
+          ),
+          child: SingleChildScrollView(
+              controller: scrollController,
+              child: Padding(
+                padding: contentPadding,
+                child: contentChildBuilder?.call(context, setState),
+              )),
+        ),
+      );
+    });
 
     final defaultFooter = NCancelAndConfirmBar(
       height: buttonBarHeight,
@@ -95,12 +91,14 @@ mixin DialogMixin{
       bottomRadius: radius,
       divider: buttonBarDivider,
       hasCancelButton: hasCancelButton,
-      onCancel: onCancel ?? (){
-        Navigator.of(context).pop();
-      },
-      onConfirm: onConfirm ?? () {
-        Navigator.of(context).pop();
-      },
+      onCancel: onCancel ??
+          () {
+            Navigator.of(context).pop();
+          },
+      onConfirm: onConfirm ??
+          () {
+            Navigator.of(context).pop();
+          },
     );
 
     final child = Container(
@@ -118,7 +116,10 @@ mixin DialogMixin{
         mainAxisSize: MainAxisSize.min,
         children: [
           header ?? defaultHeader,
-          Divider(height: 1.w, color: divderColor,),
+          Divider(
+            height: 1.w,
+            color: divderColor,
+          ),
           content ?? defaultContent,
           footer ?? defaultFooter,
         ],
@@ -128,31 +129,29 @@ mixin DialogMixin{
     final page = Material(
       color: barrierColor ?? Colors.black.withOpacity(0.05),
       child: InkWell(
-        onTap: onBarrier ?? () {
-          // Navigator.of(context).pop();
-          AppUtil.removeInputFocus();
-        },
+        onTap: onBarrier ??
+            () {
+              // Navigator.of(context).pop();
+              ToolUtil.removeInputFocus();
+            },
         child: Container(
-          padding: contentOffset,
-          color: barrierColor ?? Colors.black.withOpacity(0.05),
-          child: Align(
-            alignment: alignment,
-            child: child,
-          )
-        ),
+            padding: contentOffset,
+            color: barrierColor ?? Colors.black.withOpacity(0.05),
+            child: Align(
+              alignment: alignment,
+              child: child,
+            )),
       ),
     );
 
     return showGeneralDialog(
-      context: context,
-      barrierDismissible: false,
-      barrierLabel: 'barrierLabel',
-      transitionDuration: Duration(milliseconds: 200),
-      pageBuilder: (context, animation, secondaryAnimation) {
-
-        return page;
-      }
-    );
+        context: context,
+        barrierDismissible: false,
+        barrierLabel: 'barrierLabel',
+        transitionDuration: Duration(milliseconds: 200),
+        pageBuilder: (context, animation, secondaryAnimation) {
+          return page;
+        });
   }
 
   /// 项目通用 alert 弹窗封装
@@ -184,17 +183,19 @@ mixin DialogMixin{
     confirmBgColor ??= Theme.of(context).primaryColor;
     Color? bColor = Theme.of(context).scaffoldBackgroundColor;
 
-    final titleWidget = title == null ? const SizedBox() : Padding(
-      padding: EdgeInsets.only(top: 24.h, bottom: 8.h),
-      child: Text(
-        title ?? "",
-        textAlign: TextAlign.center,
-        style: TextStyle(
-          fontSize: 20.sp,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-    );
+    final titleWidget = title == null
+        ? const SizedBox()
+        : Padding(
+            padding: EdgeInsets.only(top: 24.h, bottom: 8.h),
+            child: Text(
+              title ?? "",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 20.sp,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          );
 
     presentDialog(
       scrollController: scrollController,
@@ -203,13 +204,13 @@ mixin DialogMixin{
       contentOffset: contentOffset,
       header: header ?? titleWidget,
       contentMinHeight: 50.h,
-      contentChildBuilder: (context, setState){
-
+      contentChildBuilder: (context, setState) {
         return Container(
           // color: ColorExt.random,
           color: bColor,
           alignment: Alignment.center,
-          child: Text(message ?? "",
+          child: Text(
+            message ?? "",
             textAlign: TextAlign.start,
             style: TextStyle(
               fontSize: 16.sp,
@@ -227,12 +228,14 @@ mixin DialogMixin{
         cancelTextStyle: cancellTextStyle,
         confirmTextStyle: confirmTextStyle,
         bottomRadius: Radius.circular(12.w),
-        onCancel: onCancel ?? (){
-          Navigator.of(context).pop();
-        },
-        onConfirm: onConfirm ?? () {
-          Navigator.of(context).pop();
-        },
+        onCancel: onCancel ??
+            () {
+              Navigator.of(context).pop();
+            },
+        onConfirm: onConfirm ??
+            () {
+              Navigator.of(context).pop();
+            },
         // divider: VerticalDivider(
         //   color: Colors.red,
         //   width: 1,
@@ -242,8 +245,8 @@ mixin DialogMixin{
     );
   }
 
-
-  presentCupertinoAlert(BuildContext context,{
+  presentCupertinoAlert(
+    BuildContext context, {
     Widget? title,
     Widget? content,
     VoidCallback? onCancel,
@@ -254,40 +257,37 @@ mixin DialogMixin{
       content: content,
       actions: [
         TextButton(
-          onPressed: onCancel ?? () async {
-            Navigator.of(context, rootNavigator: true).pop();
-          },
+          onPressed: onCancel ??
+              () async {
+                Navigator.of(context, rootNavigator: true).pop();
+              },
           child: Text("取消"),
         ),
         TextButton(
-          onPressed: onConfirm ?? () async {
-            Navigator.of(context, rootNavigator: true).pop();
-          },
+          onPressed: onConfirm ??
+              () async {
+                Navigator.of(context, rootNavigator: true).pop();
+              },
           child: Text("确定"),
         ),
       ],
     );
 
     return showGeneralDialog(
-      context: context,
-      barrierDismissible: false,
-      barrierLabel: 'barrierLabel',
-      transitionDuration: Duration(milliseconds: 200),
-      pageBuilder: (context, animation, secondaryAnimation) {
-
-        return dialog;
-      }
-    );
+        context: context,
+        barrierDismissible: false,
+        barrierLabel: 'barrierLabel',
+        transitionDuration: Duration(milliseconds: 200),
+        pageBuilder: (context, animation, secondaryAnimation) {
+          return dialog;
+        });
   }
-
-
 }
 
-
 /// 删除确认弹窗
-class DeleteAlert with DialogMixin{
-
-  void show(BuildContext context, {
+class DeleteAlert with DialogMixin {
+  void show(
+    BuildContext context, {
     required ScrollController? scrollController,
     String? title,
     String? message,
@@ -305,8 +305,14 @@ class DeleteAlert with DialogMixin{
       confirmTextStyle: TextStyle(
         color: Theme.of(context).colorScheme.primary,
       ),
-      buttonBarDividerTop: const Divider(height: 1, color: lineColor,),
-      buttonBarDivider: const VerticalDivider(width: 1, color: lineColor,),
+      buttonBarDividerTop: const Divider(
+        height: 1,
+        color: lineColor,
+      ),
+      buttonBarDivider: const VerticalDivider(
+        width: 1,
+        color: lineColor,
+      ),
       onCancel: onCancel,
       onConfirm: onConfirm,
     );
