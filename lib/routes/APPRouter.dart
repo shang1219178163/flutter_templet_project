@@ -312,6 +312,7 @@ import 'package:flutter_templet_project/provider/provider_demo.dart';
 import 'package:flutter_templet_project/provider/provider_demo_one.dart';
 import 'package:flutter_templet_project/provider/rxDart_provider_demo.dart';
 import 'package:flutter_templet_project/provider/state_manager_demo.dart';
+import 'package:flutter_templet_project/routes/middleware/AuthMiddleware.dart';
 import 'package:flutter_templet_project/vendor/SVGAImageDemo.dart';
 import 'package:flutter_templet_project/vendor/ScribbleDemo.dart';
 import 'package:flutter_templet_project/vendor/SlidableDemoOne.dart';
@@ -837,7 +838,10 @@ class AppPage {
     ),
     GetPage(
       name: APPRouter.loginPage, page: () => LoginPage(),
-      // transition: Transition.downToUp,
+      middlewares: [
+        AuthMiddleware(),
+      ],
+      // transition: Transition.downToUp,login
     ),
     GetPage(
       name: APPRouter.loginPageOne, page: () => LoginPageOne(),

@@ -76,7 +76,7 @@ class _AudioPlayPageState extends State<AudioPlayPage> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          IMCallRecordMediaInfoBox(
+          MediaRecordCard(
             desc: desc ?? "未知",
             timeLong: timeLong,
             onPlay: () {
@@ -95,9 +95,8 @@ class _AudioPlayPageState extends State<AudioPlayPage> {
   }
 }
 
-/// 通话记录(左边标题,右边图标)
-class IMCallRecordMediaInfoBox extends StatelessWidget {
-  const IMCallRecordMediaInfoBox({
+class MediaRecordCard extends StatelessWidget {
+  const MediaRecordCard({
     super.key,
     required this.timeLong,
     required this.desc,

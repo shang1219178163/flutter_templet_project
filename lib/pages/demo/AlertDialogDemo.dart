@@ -96,7 +96,6 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
     Alignment.bottomRight,
   ];
 
-
   Map<String, Widget> map = {
     'topCenter': Text("topCenter"),
     'Center': Text("Center"),
@@ -124,13 +123,13 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
         title: Text("$widget"),
         actions: [
           TextButton(
-            onPressed: () {
-              APPThemeService().changeTheme();
-            },
-            child: Icon(Icons.extension,
-              color: Colors.white,
-            )
-          )
+              onPressed: () {
+                APPThemeService().changeTheme();
+              },
+              child: Icon(
+                Icons.extension,
+                color: Colors.white,
+              ))
         ],
         bottom: _buildAppbarBottom(),
       ),
@@ -156,13 +155,18 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
               // color: index %2 == 0 ? Colors.yellow : Colors.green,
               // child: Center(child: Text(name)),
               child: TextButton(
-                onPressed: () {
-                  alignment = e;
-                  showSnackBar(SnackBar(content: Text(name)),);
-                  debugPrint("alignment:$alignment ${alignment.x} ${alignment.y}");
-                },
-                child: Text(name, style: TextStyle(color: Colors.white),)
-              ),
+                  onPressed: () {
+                    alignment = e;
+                    showSnackBar(
+                      SnackBar(content: Text(name)),
+                    );
+                    debugPrint(
+                        "alignment:$alignment ${alignment.x} ${alignment.y}");
+                  },
+                  child: Text(
+                    name,
+                    style: TextStyle(color: Colors.white),
+                  )),
             );
           },
           separatorBuilder: (BuildContext context, int index) {
@@ -206,7 +210,14 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
                 value: .5,
               ),
             ),
-            actions: ["确定",].map((e) => _buildButton(e, () => Navigator.pop(context),)).toList(),
+            actions: [
+              "确定",
+            ]
+                .map((e) => _buildButton(
+                      e,
+                      () => Navigator.pop(context),
+                    ))
+                .toList(),
           ).toShowCupertinoDialog(context: context);
           // .toShowDialog(context);
         }
@@ -218,7 +229,12 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
             content: SizedBox(
               height: 160,
               child: Padding(
-                padding: const EdgeInsets.only(left: 36, right: 36, top: 16, bottom: 0,),
+                padding: const EdgeInsets.only(
+                  left: 36,
+                  right: 36,
+                  top: 16,
+                  bottom: 0,
+                ),
                 child: CircularProgressIndicator(
                   backgroundColor: Colors.grey[200],
                   valueColor: AlwaysStoppedAnimation(Colors.blue),
@@ -226,7 +242,14 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
                 ),
               ),
             ),
-            actions: ["确定1",].map((e) => _buildButton(e, () => Navigator.pop(context),)).toList(),
+            actions: [
+              "确定1",
+            ]
+                .map((e) => _buildButton(
+                      e,
+                      () => Navigator.pop(context),
+                    ))
+                .toList(),
           ).toShowCupertinoDialog(context: context);
           // .toShowDialog(context);
         }
@@ -236,7 +259,14 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
           CupertinoAlertDialog(
             title: Text(title),
             content: buildWrap(context),
-            actions: ["确定",].map((e) => _buildButton(e, () => Navigator.pop(context),)).toList(),
+            actions: [
+              "确定",
+            ]
+                .map((e) => _buildButton(
+                      e,
+                      () => Navigator.pop(context),
+                    ))
+                .toList(),
           ).toShowCupertinoDialog(context: context);
           // .toShowDialog(context);
         }
@@ -268,7 +298,14 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
             content: RadioTileSexWidget(
               selectedIndex: 0,
             ),
-            actions: ["确定",].map((e) => _buildButton(e, () => Navigator.pop(context),)).toList(),
+            actions: [
+              "确定",
+            ]
+                .map((e) => _buildButton(
+                      e,
+                      () => Navigator.pop(context),
+                    ))
+                .toList(),
           ).toShowCupertinoDialog(context: context);
           // .toShowDialog(context);
         }
@@ -276,49 +313,46 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
       case 10:
         {
           Container(
-            height: 300,
-            width: MediaQuery.of(context).size.width - 80,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: Theme.of(context).dialogBackgroundColor,
-              borderRadius: BorderRadius.all(Radius.circular(16)),
-            ),
-            child: Column(
-              children: [
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: SingleChildScrollView(
-                      child: ChioceWrap(
-                        indexs: [0],
-                        callback: (indexs) {
-                          ddlog(indexs);
-                        },
-                        children: titles.map((e) => Text(e)).toList(),
+              height: 300,
+              width: MediaQuery.of(context).size.width - 80,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: Theme.of(context).dialogBackgroundColor,
+                borderRadius: BorderRadius.all(Radius.circular(16)),
+              ),
+              child: Column(
+                children: [
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: SingleChildScrollView(
+                        child: ChioceWrap(
+                          indexs: [0],
+                          callback: (indexs) {
+                            ddlog(indexs);
+                          },
+                          children: titles.map((e) => Text(e)).toList(),
+                        ),
                       ),
                     ),
                   ),
-                ),
-                NCancelAndConfirmBar(
-                  cancelBgColor: Theme.of(context).dialogBackgroundColor,
-                  confirmBgColor: Theme.of(context).colorScheme.secondary,
-                  bottomRadius: const Radius.circular(16),
-                  onCancel: (){
-                    debugPrint("onCancel");
-                  },
-                  onConfirm: (){
-                    debugPrint("onConfirm");
-                  }
-                )
-              ],
-            )
-          ).toShowGeneralDialog(
-            context: context,
-            barrierDismissible: true,
-            onBarrier: (){
-              Navigator.of(context).pop();
-            }
-          );
+                  NCancelAndConfirmBar(
+                      cancelBgColor: Theme.of(context).dialogBackgroundColor,
+                      confirmBgColor: Theme.of(context).colorScheme.secondary,
+                      bottomRadius: const Radius.circular(16),
+                      onCancel: () {
+                        debugPrint("onCancel");
+                      },
+                      onConfirm: () {
+                        debugPrint("onConfirm");
+                      })
+                ],
+              )).toShowGeneralDialog(
+              context: context,
+              barrierDismissible: true,
+              onBarrier: () {
+                Navigator.of(context).pop();
+              });
         }
         break;
       case 11:
@@ -401,7 +435,8 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
         {
           var screenSize = MediaQuery.of(context).size;
           var size = Size(screenSize.width - 40, 300);
-          Navigator.push(context,
+          Navigator.push(
+            context,
             NPopupRoute(
               alignment: alignment,
               onClick: () {
@@ -425,7 +460,8 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
         break;
       case 15:
         {
-          Navigator.push(context,
+          Navigator.push(
+            context,
             NPopupRoute(
               alignment: alignment,
               onClick: () {
@@ -495,77 +531,74 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
       case 18:
         {
           showGeneralDialog(
-            barrierDismissible: false,
+              barrierDismissible: false,
               context: context,
               pageBuilder: (context, animation, secondaryAnimation) {
                 return Center(
                   child: Container(
-                    height: 400,
-                    color: Colors.red,
-                    margin: EdgeInsets.symmetric(horizontal: 10, vertical: 100),
-                    child: TextButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                        child: Text('showGeneralDialog弹窗', style: TextStyle(fontSize: 17),)
-                    )
-                  ),
+                      height: 400,
+                      color: Colors.red,
+                      margin:
+                          EdgeInsets.symmetric(horizontal: 10, vertical: 100),
+                      child: TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: Text(
+                            'showGeneralDialog弹窗',
+                            style: TextStyle(fontSize: 17),
+                          ))),
                 );
-              }
-              );
+              });
         }
         break;
       case 19:
         {
           presentDialog(
-            context: context,
-            scrollController: ScrollController(),
-            buttonBarHeight: 60,
-            content: Container(
-              height: 400,
-              color: Colors.green,
-            ),
-            hasCancelButton: false,
-            onCancel: () {
-              Navigator.of(context).pop();
-            },
-            onConfirm: () {
-              Navigator.of(context).pop();
-            }
-          );
+              context: context,
+              scrollController: ScrollController(),
+              buttonBarHeight: 60,
+              content: Container(
+                height: 400,
+                color: Colors.green,
+              ),
+              hasCancelButton: false,
+              onCancel: () {
+                Navigator.of(context).pop();
+              },
+              onConfirm: () {
+                Navigator.of(context).pop();
+              });
         }
         break;
       case 20:
         {
           presentDialogAlert(
-            context: context,
-            scrollController: ScrollController(),
-            title: title,
-            message: message,
-            content: Container(
-              height: 400,
-              color: Colors.green,
-            ),
-            // hasCancelButton: false,
-            // cancellBgColor: context.dialogBackgroundColor,
-            confirmBgColor: context.primaryColor,
-            onCancel: () {
-              Navigator.of(context).pop();
-            },
-            onConfirm: () {
-              Navigator.of(context).pop();
-            }
-          );
+              context: context,
+              scrollController: ScrollController(),
+              title: title,
+              message: message,
+              content: Container(
+                height: 400,
+                color: Colors.green,
+              ),
+              // hasCancelButton: false,
+              // cancellBgColor: context.dialogBackgroundColor,
+              confirmBgColor: context.primaryColor,
+              onCancel: () {
+                Navigator.of(context).pop();
+              },
+              onConfirm: () {
+                Navigator.of(context).pop();
+              });
         }
         break;
       case 21:
         {
-          presentCupertinoAlert(context,
-            content: Text("presentCupertinoAlert"),
-            onConfirm: () async {
-              // Navigator.of(context).pop();
-            }
-          );
+          presentCupertinoAlert(context, content: Text("presentCupertinoAlert"),
+              onConfirm: () async {
+            // Navigator.of(context).pop();
+          });
         }
         break;
       default:
@@ -573,7 +606,6 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
         break;
     }
   }
-
 
   buildBody() {
     // return Flow(
@@ -591,19 +623,21 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
     //       .toList(),
     // );
 
-    return SingleChildScrollView( 
+    return SingleChildScrollView(
       child: Container(
         padding: EdgeInsets.all(8),
         child: Wrap(
           spacing: 8,
           runSpacing: 8,
-          children: titles.map((e) => OutlinedButton(
-            onPressed: () {
-              _onPressed(titles.indexOf(e));
-            },
-            child: Text('${e}_${titles.indexOf(e)}')
-          ),
-          ).toList(),
+          children: titles
+              .map(
+                (e) => OutlinedButton(
+                    onPressed: () {
+                      _onPressed(titles.indexOf(e));
+                    },
+                    child: Text('${e}_${titles.indexOf(e)}')),
+              )
+              .toList(),
         ),
       ),
     );
@@ -623,13 +657,15 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
     CupertinoAlertDialog(
       title: Text(title),
       content: Text(message, textAlign: TextAlign.start),
-      actions: ["取消", "确定"].map((e) => TextButton(
-        onPressed: () => Navigator.pop(context),
-        child: Container(
-          height: 45,
-          child: Center(child: Text(e)),
-        ),
-      )).toList(),
+      actions: ["取消", "确定"]
+          .map((e) => TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: Container(
+                  height: 45,
+                  child: Center(child: Text(e)),
+                ),
+              ))
+          .toList(),
     ).toShowCupertinoDialog(context: context);
   }
 
@@ -637,13 +673,15 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
     AlertDialog(
       title: Text(title),
       content: Text(message, textAlign: TextAlign.start),
-      actions: ["取消", "确定"].map((e) => TextButton(
-        onPressed: () {
-          ddlog(e);
-          Navigator.pop(context);
-        },
-        child: Text(e),
-      )).toList(),
+      actions: ["取消", "确定"]
+          .map((e) => TextButton(
+                onPressed: () {
+                  ddlog(e);
+                  Navigator.pop(context);
+                },
+                child: Text(e),
+              ))
+          .toList(),
     ).toShowCupertinoDialog(context: context);
     // .toShowDialog(context: context);
   }
@@ -653,28 +691,28 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
       spacing: 8.0, // 主轴(水平)方向间距
       runSpacing: -8.0, // 纵轴（垂直）方向间距
       alignment: WrapAlignment.start, //沿主轴方向居中
-      children: titles.map((e) => Padding(
-        padding: const EdgeInsets.symmetric(vertical: 2),
-        child: TextButton.icon(
-          onPressed: () {
-            ddlog(titles.indexOf(e));
-            // }, icon: Icon(Icons.check_circle_outline), label: Text("Button"))).toList(),
-          },
-          icon: Icon(Icons.radio_button_unchecked_outlined),
-          label: Text(e),
-          style: OutlinedButton.styleFrom(
-            primary: Colors.black87,
-            side: BorderSide(width: 1, color: Colors.transparent),
-          ),
-        ),
-      ))
-      .toList(),
+      children: titles
+          .map((e) => Padding(
+                padding: const EdgeInsets.symmetric(vertical: 2),
+                child: TextButton.icon(
+                  onPressed: () {
+                    ddlog(titles.indexOf(e));
+                    // }, icon: Icon(Icons.check_circle_outline), label: Text("Button"))).toList(),
+                  },
+                  icon: Icon(Icons.radio_button_unchecked_outlined),
+                  label: Text(e),
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: Colors.black87,
+                    side: BorderSide(width: 1, color: Colors.transparent),
+                  ),
+                ),
+              ))
+          .toList(),
     );
   }
 
   //多选/单选
   showChioceListAlertDialog({bool isMutiple = false}) {
-
     CupertinoAlertDialog(
       title: Text("ChioceList ${isMutiple ? '多选' : '单选'}"),
       content: ChioceList(
@@ -687,7 +725,14 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
           ddlog([indexs.runtimeType, indexs]);
         },
       ),
-      actions: ["确定",].map((e) => _buildButton(e, () => Navigator.pop(context),)).toList(),
+      actions: [
+        "确定",
+      ]
+          .map((e) => _buildButton(
+                e,
+                () => Navigator.pop(context),
+              ))
+          .toList(),
     ).toShowDialog(context: context);
     // .toShowDialog(context);
   }
@@ -697,15 +742,23 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
       title: Text("ChioceWrap ${isMutiple ? '多选' : '单选'}"),
       content: ChioceWrap(
         isMutiple: isMutiple,
-        indexs:[0],
+        indexs: [0],
         callback: (indexs) {
           ddlog(indexs);
         },
         children: titles.map((e) => Text(e)).toList(),
       ),
-      actions: ["确定",].map((e) => _buildButton(e, () => Navigator.pop(context),)).toList(),
+      actions: [
+        "确定",
+      ]
+          .map((e) => _buildButton(
+                e,
+                () => Navigator.pop(context),
+              ))
+          .toList(),
     ).toShowCupertinoDialog(context: context);
   }
+
   ///自约束
   Widget buildAlertColumn() {
     // Size screenSize = MediaQuery.of(context).size;
@@ -722,15 +775,13 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
             horizontal: spacingHor,
             vertical: spacingVer,
           ),
-          child: Text(title1, style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16)),
+          child: Text(title1,
+              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16)),
         ),
         Container(
           // color: Colors.green,
           padding: EdgeInsets.only(
-            left: spacingHor,
-            right: spacingHor,
-            bottom: spacingVer
-          ),
+              left: spacingHor, right: spacingHor, bottom: spacingVer),
           child: Text(message1),
         ),
         Container(
@@ -752,9 +803,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
                 ),
               ),
               Container(
-                height: 55,
-                child: VerticalDivider(color: Colors.grey[400])
-              ),
+                  height: 55, child: VerticalDivider(color: Colors.grey[400])),
               Expanded(
                 child: TextButton.icon(
                   onPressed: () {
@@ -853,11 +902,10 @@ xxxx十分重视用户权利及隐私政策并严格按照相关法律法规的�
           children: RichTextExt.createTextSpans(
             text: text,
             textTaps: linkMap.keys.toList(),
-            onLink: (textTap){
+            onLink: (textTap) {
               ddlog(textTap);
             },
-          )
-      ),
+          )),
     );
 
     showGeneralDialog(
@@ -865,7 +913,8 @@ xxxx十分重视用户权利及隐私政策并严格按照相关法律法规的�
         pageBuilder: (BuildContext context, Animation<double> animation,
             Animation<double> secondaryAnimation) {
           return NUserPrivacy(
-            title: Text('用户隐私及协议',
+            title: Text(
+              '用户隐私及协议',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             content: textRich,
@@ -883,12 +932,10 @@ xxxx十分重视用户权利及隐私政策并严格按照相关法律法规的�
 }
 
 class TestFlowDelegate extends FlowDelegate {
-
-  TestFlowDelegate({
-    this.margin = const EdgeInsets.all(0),
-    this.spacing = 8.0,
-    this.flowHeight = double.infinity
-  });
+  TestFlowDelegate(
+      {this.margin = const EdgeInsets.all(0),
+      this.spacing = 8.0,
+      this.flowHeight = double.infinity});
 
   EdgeInsets margin;
 

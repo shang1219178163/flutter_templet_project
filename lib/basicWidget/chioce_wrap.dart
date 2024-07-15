@@ -11,7 +11,6 @@ import 'package:flutter/material.dart';
 
 ///多选菜单
 class ChioceWrap extends StatefulWidget {
-
   ChioceWrap({
     Key? key,
     this.isMutiple = false,
@@ -41,9 +40,7 @@ class ChioceWrap extends StatefulWidget {
   _ChioceWrapState createState() => _ChioceWrapState();
 }
 
-
 class _ChioceWrapState extends State<ChioceWrap> {
-
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -52,21 +49,25 @@ class _ChioceWrapState extends State<ChioceWrap> {
         spacing: 8.0, // 主轴(水平)方向间距
         runSpacing: -8.0, // 纵轴（垂直）方向间距
         alignment: WrapAlignment.start, //沿主轴方向居中
-        children: widget.children.map((e) => TextButton.icon(
-          onPressed: (){
-            _changeValue(widget.children.indexOf(e));
-          },
-          icon: widget.indexs.contains(widget.children.indexOf(e)) ? widget.seletedIcon : widget.icon,
-          label: e,
-          // style: OutlinedButton.styleFrom(
-          //   backgroundColor: Colors.transparent,
-          //   primary: widget.selectedIndexs.contains(widget.titles.indexOf(e)) ? Theme.of(context).primaryColor : Colors.black87,
-          // ),
-          style: OutlinedButton.styleFrom(
-            backgroundColor: Colors.transparent,
-            primary: Colors.black87,
-          ),
-        )).toList(),
+        children: widget.children
+            .map((e) => TextButton.icon(
+                  onPressed: () {
+                    _changeValue(widget.children.indexOf(e));
+                  },
+                  icon: widget.indexs.contains(widget.children.indexOf(e))
+                      ? widget.seletedIcon
+                      : widget.icon,
+                  label: e,
+                  // style: OutlinedButton.styleFrom(
+                  //   backgroundColor: Colors.transparent,
+                  //   primary: widget.selectedIndexs.contains(widget.titles.indexOf(e)) ? Theme.of(context).primaryColor : Colors.black87,
+                  // ),
+                  style: OutlinedButton.styleFrom(
+                    backgroundColor: Colors.transparent,
+                    foregroundColor: Colors.black87,
+                  ),
+                ))
+            .toList(),
       ),
     );
   }
@@ -81,7 +82,6 @@ class _ChioceWrapState extends State<ChioceWrap> {
         }
       } else {
         if (widget.indexs.contains(value)) {
-
         } else {
           widget.indexs.clear();
           widget.indexs.add(value);
@@ -93,9 +93,7 @@ class _ChioceWrapState extends State<ChioceWrap> {
   }
 }
 
-
-class ChioceDataModel{
-
+class ChioceDataModel {
   ChioceDataModel({
     required this.title,
     this.subtitle,
@@ -113,5 +111,4 @@ class ChioceDataModel{
   bool selected;
 
   dynamic data;
-
 }

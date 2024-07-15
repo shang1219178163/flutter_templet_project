@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 
@@ -37,7 +35,8 @@ class ZhCupertinoLocalizations implements CupertinoLocalizations {
   String datePickerMonth(int monthIndex) => monthIndex.toString();
 
   @override
-  String datePickerDayOfMonth(int dayIndex, [int? weekDay]) => dayIndex.toString();
+  String datePickerDayOfMonth(int dayIndex, [int? weekDay]) =>
+      dayIndex.toString();
 
   @override
   String datePickerHour(int hour) => hour.toString();
@@ -116,12 +115,14 @@ class ZhCupertinoLocalizations implements CupertinoLocalizations {
   static Future<CupertinoLocalizations> load(Locale locale) {
     // var localizations = await DefaultCupertinoLocalizations.delegate.load(locale);
     // return AppCupertinoLocalizations(localizations);
-    return SynchronousFuture<CupertinoLocalizations>(const ZhCupertinoLocalizations());
+    return SynchronousFuture<CupertinoLocalizations>(
+        const ZhCupertinoLocalizations());
   }
 
   /// A [LocalizationsDelegate] that uses [DefaultCupertinoLocalizations.load]
   /// to create an instance of this class.
-  static const LocalizationsDelegate<CupertinoLocalizations> delegate = MyLocalizationsDelegate();
+  static const LocalizationsDelegate<CupertinoLocalizations> delegate =
+      MyLocalizationsDelegate();
 
   @override
   // TODO: implement modalBarrierDismissLabel
@@ -174,10 +175,14 @@ class ZhCupertinoLocalizations implements CupertinoLocalizations {
   @override
   // TODO: implement shareButtonLabel
   String get shareButtonLabel => throw UnimplementedError();
+
+  @override
+  // TODO: implement clearButtonLabel
+  String get clearButtonLabel => throw UnimplementedError();
 }
 
-
-class MyLocalizationsDelegate extends LocalizationsDelegate<CupertinoLocalizations> {
+class MyLocalizationsDelegate
+    extends LocalizationsDelegate<CupertinoLocalizations> {
   const MyLocalizationsDelegate();
 
   @override

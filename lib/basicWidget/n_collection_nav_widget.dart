@@ -4,13 +4,14 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/edge_insets_ext.dart';
+import 'package:flutter_templet_project/extension/enum_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 
 /// 默认图标大小
 const double DEFALUT_ICON_SIZE = 44;
+
 /// 默认间距
 const double SPACING = 10;
-
 
 /// 图文导航
 class NCollectionNavWidget extends StatefulWidget {
@@ -47,26 +48,37 @@ class NCollectionNavWidget extends StatefulWidget {
 
   ///金刚区每页行数
   int pageRowNum;
+
   ///金刚区每页列数
   int pageColumnNum;
+
   /// 图标默认高度
   double iconSize;
+
   /// 子项标题高度
   double textHeight;
+
   /// 文字间距
   double textGap;
+
   /// 垂直间距
   double columnSpacing;
+
   /// 水平间距
   double rowSpacing;
+
   /// 是否自适应高度
   bool autoAdjustHeight;
+
   /// 指示器高度
   double indicatorItemHeight;
+
   /// 指示器子项宽度
   double indicatorItemWidth;
+
   /// 指示器与最后一样的标题间距
   double indicatorGap;
+
   /// 阴影
   List<BoxShadow>? boxShadows;
 
@@ -78,7 +90,6 @@ class NCollectionNavWidget extends StatefulWidget {
 }
 
 class _NCollectionNavWidgetState extends State<NCollectionNavWidget> {
-  
   // /// 初始传值数据
   // List<AttrNavItem> _initilItems = [];
   /// 当前页面数据
@@ -89,10 +100,13 @@ class _NCollectionNavWidgetState extends State<NCollectionNavWidget> {
 
   /// 滑动控制器
   PageController? controller;
+
   /// 监听滚动偏移量
   var scrollOffset = ValueNotifier(0.0);
+
   /// 子项高度
   double get itemHeight => widget.iconSize + widget.textGap + widget.textHeight;
+
   /// 传入的每页最大数量
   int get pageNum => widget.pageRowNum * widget.pageColumnNum;
 
@@ -113,6 +127,7 @@ class _NCollectionNavWidgetState extends State<NCollectionNavWidget> {
 
     if (widget.boxShadows != null && widget.boxShadows!.isNotEmpty) {
       var shadow = widget.boxShadows![0];
+
       /// 留出阴影空间
       edge = edge.mergeShadow(shadow: shadow);
     }
@@ -132,7 +147,7 @@ class _NCollectionNavWidgetState extends State<NCollectionNavWidget> {
   @override
   void dispose() {
     controller?.dispose();
-    
+
     super.dispose();
   }
 
@@ -145,7 +160,7 @@ class _NCollectionNavWidgetState extends State<NCollectionNavWidget> {
     });
 
     initailData();
-    
+
     super.initState();
   }
 
@@ -160,11 +175,19 @@ class _NCollectionNavWidgetState extends State<NCollectionNavWidget> {
       pageCount = (totalCount / pageNum).ceil();
     }
     // 整个视图总高度
-    var totalHeight = itemHeight * widget.pageRowNum + widget.columnSpacing * (widget.pageRowNum - 1) + widget.indicatorGap + widget.indicatorItemHeight;
+    var totalHeight = itemHeight * widget.pageRowNum +
+        widget.columnSpacing * (widget.pageRowNum - 1) +
+        widget.indicatorGap +
+        widget.indicatorItemHeight;
     if (pageNum >= _items.length) {
       /// 实际 pageRowNum
-      final num = (totalCount % widget.pageColumnNum) == 0 ? totalCount ~/ widget.pageColumnNum : totalCount ~/ widget.pageColumnNum + 1;
-      totalHeight = itemHeight * num + widget.columnSpacing * (num - 1) + widget.indicatorGap + widget.indicatorItemHeight;
+      final num = (totalCount % widget.pageColumnNum) == 0
+          ? totalCount ~/ widget.pageColumnNum
+          : totalCount ~/ widget.pageColumnNum + 1;
+      totalHeight = itemHeight * num +
+          widget.columnSpacing * (num - 1) +
+          widget.indicatorGap +
+          widget.indicatorItemHeight;
     }
 
     var margin = EdgeInsets.zero;
@@ -172,34 +195,32 @@ class _NCollectionNavWidgetState extends State<NCollectionNavWidget> {
     var container = Container(
       // color: widget.isDebug ? Colors.green : null,
       height: widget.autoAdjustHeight ? totalHeight : null,
-      child: LayoutBuilder(
-          builder: (context, constraints) {
-          return Stack(
-            alignment: AlignmentDirectional.bottomCenter,
-            children: <Widget>[
-              Container(
-                color: widget.isDebug ? ColorExt.random : null,
-                margin: margin,
-                width: constraints.maxWidth,
-                child: _pageContent(),
-              ),
-              Positioned(
-                bottom: 0,
-                child: Container(
-                  height: widget.indicatorItemHeight,
-                  child: Center(
-                    child: _scrollerIndicator(
-                      width: constraints.maxWidth,
-                      indicatorItemHeight: widget.indicatorItemHeight,
-                      indicatorItemWidth: widget.indicatorItemWidth,
-                    ),
+      child: LayoutBuilder(builder: (context, constraints) {
+        return Stack(
+          alignment: AlignmentDirectional.bottomCenter,
+          children: <Widget>[
+            Container(
+              color: widget.isDebug ? ColorExt.random : null,
+              margin: margin,
+              width: constraints.maxWidth,
+              child: _pageContent(),
+            ),
+            Positioned(
+              bottom: 0,
+              child: Container(
+                height: widget.indicatorItemHeight,
+                child: Center(
+                  child: _scrollerIndicator(
+                    width: constraints.maxWidth,
+                    indicatorItemHeight: widget.indicatorItemHeight,
+                    indicatorItemWidth: widget.indicatorItemWidth,
                   ),
                 ),
-              )
-            ],
-          );
-        }
-      ),
+              ),
+            )
+          ],
+        );
+      }),
     );
     return container;
   }
@@ -211,64 +232,61 @@ class _NCollectionNavWidgetState extends State<NCollectionNavWidget> {
 
   /// 每页的内容容器
   Widget _pageContent() {
-    return LayoutBuilder(
-      builder: (context, constraints) {
+    return LayoutBuilder(builder: (context, constraints) {
+      var edgeHorizontal = widget.rowSpacing * 0.5;
+      var itemWidth = (constraints.maxWidth -
+              widget.rowSpacing * (widget.pageColumnNum - 1) -
+              edgeHorizontal * 2) /
+          widget.pageColumnNum;
 
-        var edgeHorizontal = widget.rowSpacing*0.5;
-        var itemWidth = (constraints.maxWidth - widget.rowSpacing * (widget.pageColumnNum - 1) - edgeHorizontal*2) / widget.pageColumnNum;
-
-        return PageView.builder(
-          key: const PageStorageKey('CollectionNavWidget'),
-          itemCount: pageCount,
-          controller: controller,
-          pageSnapping: pageSnap,
-          physics: pageCount == 1 ? NeverScrollableScrollPhysics() : null,
-          // clipBehavior: Clip.none,
-          itemBuilder: (context, pageIndex) {
-
-            return Container(
-              // color: ColorExt.random,//add test
-              padding: EdgeInsets.only(left: edgeHorizontal),
-              child: Wrap(
-                key: Key("Wrap_$pageIndex"),
-                spacing: widget.rowSpacing,
-                runSpacing: widget.columnSpacing,
-                children: _getChildren(
-                  pageIndex: pageIndex,
-                  pageTotal: widget.pageRowNum * widget.pageColumnNum,
-                  width: itemWidth,
-                ),
+      return PageView.builder(
+        key: const PageStorageKey('CollectionNavWidget'),
+        itemCount: pageCount,
+        controller: controller,
+        pageSnapping: pageSnap,
+        physics: pageCount == 1 ? NeverScrollableScrollPhysics() : null,
+        // clipBehavior: Clip.none,
+        itemBuilder: (context, pageIndex) {
+          return Container(
+            // color: ColorExt.random,//add test
+            padding: EdgeInsets.only(left: edgeHorizontal),
+            child: Wrap(
+              key: Key("Wrap_$pageIndex"),
+              spacing: widget.rowSpacing,
+              runSpacing: widget.columnSpacing,
+              children: _getChildren(
+                pageIndex: pageIndex,
+                pageTotal: widget.pageRowNum * widget.pageColumnNum,
+                width: itemWidth,
               ),
-            );
-          },
-        );
-      }
-    );
+            ),
+          );
+        },
+      );
+    });
   }
 
   /// item 数组集合
-  List<Widget> _getChildren({
-    required int pageIndex,
-    required int pageTotal,
-    required double width
-  }) {
-    return List.generate(pageTotal, (i) => Container(
-      // color: i % 2 == 0 ? Colors.green : Colors.yellow,
-      constraints: BoxConstraints(maxWidth: width),
-      child: _getItem(
-        ctx: context,
-        index: pageTotal * pageIndex + i,
-        imgWidth: width,
-      ),
-    )).toList();
+  List<Widget> _getChildren(
+      {required int pageIndex, required int pageTotal, required double width}) {
+    return List.generate(
+        pageTotal,
+        (i) => Container(
+              // color: i % 2 == 0 ? Colors.green : Colors.yellow,
+              constraints: BoxConstraints(maxWidth: width),
+              child: _getItem(
+                ctx: context,
+                index: pageTotal * pageIndex + i,
+                imgWidth: width,
+              ),
+            )).toList();
   }
 
   /// item 组件
-  Widget _getItem({
-    required BuildContext ctx,
-    required int index,
-    required double imgWidth
-  }) {
+  Widget _getItem(
+      {required BuildContext ctx,
+      required int index,
+      required double imgWidth}) {
     if (index >= _items.length) {
       return SizedBox();
     }
@@ -277,20 +295,20 @@ class _NCollectionNavWidgetState extends State<NCollectionNavWidget> {
 
     var iconUrl = model.icon ?? '';
 
-    var imgBorderRadius = BorderRadius.all(Radius.circular(10));//add test
+    var imgBorderRadius = BorderRadius.all(Radius.circular(10)); //add test
 
     // var imgBoxShadow = widget.attr?.itemImg?.shadow?.boxShadows;//图文导航子项没有阴影设置
 
     final child = Container(
-      color: widget.isDebug ? ColorExt.random : null,//add test
+      color: widget.isDebug ? ColorExt.random : null, //add test
       // width: imgWidth,
       child: Column(
         children: <Widget>[
           Container(
             decoration: BoxDecoration(
-              // color: Colors.green,//add test
-              // boxShadow: imgBoxShadow,
-            ),
+                // color: Colors.green,//add test
+                // boxShadow: imgBoxShadow,
+                ),
             child: ClipRRect(
               borderRadius: imgBorderRadius,
               child: FadeInImage(
@@ -303,23 +321,22 @@ class _NCollectionNavWidgetState extends State<NCollectionNavWidget> {
             ),
           ),
           Container(
-            margin: EdgeInsets.only(top: widget.textGap),
-            height: widget.textHeight,
-            child: Center(
-              child: _getItemTitle(
-                model: model,
-                imgWidth: imgWidth,
-                index: index,
-                addFittedBox: true,
-              ),
-            )
-          ),
+              margin: EdgeInsets.only(top: widget.textGap),
+              height: widget.textHeight,
+              child: Center(
+                child: _getItemTitle(
+                  model: model,
+                  imgWidth: imgWidth,
+                  index: index,
+                  addFittedBox: true,
+                ),
+              )),
         ],
       ),
     );
 
     return InkWell(
-      onTap: (){
+      onTap: () {
         // print("InkWell: ${model.name}");
         widget.onItem(model);
       },
@@ -358,10 +375,7 @@ class _NCollectionNavWidgetState extends State<NCollectionNavWidget> {
     );
 
     if (widget.isDebug) {
-      textWidget = ColoredBox(
-        color: ColorExt.random,
-        child: textWidget
-      );
+      textWidget = ColoredBox(color: ColorExt.random, child: textWidget);
     }
 
     if (addFittedBox) {
@@ -393,31 +407,27 @@ class _NCollectionNavWidgetState extends State<NCollectionNavWidget> {
           ),
         ),
         ValueListenableBuilder<double>(
-          valueListenable: scrollOffset,
-          builder: (context, value, child) {
-            final offset = (value / width) * indicatorItemWidth;
-            // print("ValueListenableBuilder: ${value}_${offset}");
+            valueListenable: scrollOffset,
+            builder: (context, value, child) {
+              final offset = (value / width) * indicatorItemWidth;
+              // print("ValueListenableBuilder: ${value}_${offset}");
 
-            return Positioned(
-              left: offset,
-              child: Container(
-                height: indicatorItemHeight,
-                width: indicatorItemWidth,
-                decoration: BoxDecoration(
-                  color: Color(0xFFBE965A),
-                  // color: Colors.red,
-                  borderRadius: BorderRadius.circular(1),
-                ),
-              )
-            );
-          }
-        ),
+              return Positioned(
+                  left: offset,
+                  child: Container(
+                    height: indicatorItemHeight,
+                    width: indicatorItemWidth,
+                    decoration: BoxDecoration(
+                      color: Color(0xFFBE965A),
+                      // color: Colors.red,
+                      borderRadius: BorderRadius.circular(1),
+                    ),
+                  ));
+            }),
       ],
     );
   }
-
 }
-
 
 class AttrNavItem {
   // 唯一标识
@@ -468,37 +478,34 @@ class AttrNavItem {
   }
 }
 
-
 /// PageView 滚动方式
 enum PageViewScrollType {
   /// 整屏滑动
   full,
+
   /// 拖拽滑动
   drag,
+
   /// 禁用滑动
   none,
 }
 
-extension PageViewScrollTypeExt on int{
+extension PageViewScrollTypeExt on int {
   /// int 转枚举
-  PageViewScrollType? toPageViewScrollType([bool isClamp = true]){
+  PageViewScrollType? toPageViewScrollType([bool isClamp = true]) {
     const allCases = PageViewScrollType.values;
-    if (!isClamp) {
-      if (this < 0 || this > allCases.length - 1) {
-        return null;
-      }
-      return allCases[this];
+    var index = this;
+    if (isClamp) {
+      index = clamp(0, allCases.length - 1).toInt();
     }
-    final index = clamp(0, allCases.length - 1);
-    return allCases[index.toInt()];
+    return allCases.by((e) => e.index == index);
   }
 
   /// int 转枚举
-  PageViewScrollType get pageViewScrollType{
+  PageViewScrollType get pageViewScrollType {
     const allCases = PageViewScrollType.values;
     // final index = this.clamp(0, allCases.length - 1);
     // return allCases[index];
     return toPageViewScrollType(true) ?? allCases.first;
   }
-
 }

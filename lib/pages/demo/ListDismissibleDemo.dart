@@ -12,14 +12,11 @@ import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
-
 class ListDismissibleDemo extends StatefulWidget {
-
   final String? title;
 
-  const ListDismissibleDemo({ Key? key, this.title}) : super(key: key);
+  const ListDismissibleDemo({Key? key, this.title}) : super(key: key);
 
-  
   @override
   _ListDismissibleDemoState createState() => _ListDismissibleDemoState();
 }
@@ -78,11 +75,14 @@ class _ListDismissibleDemoState extends State<ListDismissibleDemo> {
       },
     );
   }
-  
+
   Widget buildListTile({required int index, bool addDismissible = false}) {
     var item = list[index];
 
-    final child = ListTile(leading: Text(item.toString()), trailing: Text("滑动删除"),);
+    final child = ListTile(
+      leading: Text(item.toString()),
+      trailing: Text("滑动删除"),
+    );
     if (!addDismissible) {
       return child;
     }
@@ -94,9 +94,9 @@ class _ListDismissibleDemoState extends State<ListDismissibleDemo> {
         list.removeAt(index);
 
         ScaffoldMessenger.of(context).hideCurrentSnackBar();
-        ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('删除了${item.toString()}'),
-         ));
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text('删除了${item.toString()}'),
+        ));
         setState(() {});
       },
       background: Container(
@@ -116,9 +116,9 @@ class _ListDismissibleDemoState extends State<ListDismissibleDemo> {
       context: context,
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(8),
-            topRight: Radius.circular(8),
-          )),
+        topLeft: Radius.circular(8),
+        topRight: Radius.circular(8),
+      )),
       builder: (context) {
         return Container(
           height: 360,
@@ -159,33 +159,31 @@ class _ListDismissibleDemoState extends State<ListDismissibleDemo> {
                   ),
                   Spacer(),
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: 4),
-                    margin: EdgeInsets.symmetric(vertical: 8.0),
-                    height: 36,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(6),
-                    ),
-                    child: StatefulBuilder(
-                      builder: (context, setState) {
-                        return OutlinedButton(
-                          onPressed: () async {
-                            datePickerSelect(context);
-                          },
-                          child: Row(
-                            mainAxisAlignment:
-                            MainAxisAlignment.spaceBetween,
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.only(right: 16.0),
-                                child: Text(datetimeStr),
-                              ),
-                              Icon(Icons.calendar_today_outlined),
-                            ],
-                          ),
-                        );
-                      },
-                    )
-                  ),
+                      padding: EdgeInsets.symmetric(horizontal: 4),
+                      margin: EdgeInsets.symmetric(vertical: 8.0),
+                      height: 36,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                      child: StatefulBuilder(
+                        builder: (context, setState) {
+                          return OutlinedButton(
+                            onPressed: () async {
+                              datePickerSelect(context);
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.only(right: 16.0),
+                                  child: Text(datetimeStr),
+                                ),
+                                Icon(Icons.calendar_today_outlined),
+                              ],
+                            ),
+                          );
+                        },
+                      )),
                 ],
               ),
               Spacer(),
@@ -194,14 +192,13 @@ class _ListDismissibleDemoState extends State<ListDismissibleDemo> {
                   ElevatedButton(
                     onPressed: () => Navigator.pop(context),
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.white,
+                      backgroundColor: Colors.white,
                       // minimumSize: Size(96, 48),
                     ),
                     child: Text('Cancel',
-                      style: TextStyle(
-                        color: Theme.of(context).primaryColor,
-                      )
-                    ),
+                        style: TextStyle(
+                          color: Theme.of(context).primaryColor,
+                        )),
                   ),
                   ElevatedButton(
                     onPressed: () {
@@ -223,15 +220,18 @@ class _ListDismissibleDemoState extends State<ListDismissibleDemo> {
     final now = DateTime.now();
 
     final result = await showDatePicker(
-      context: context,
-      initialDate: now,
-      firstDate: now.subtract( Duration(days: 90,),),
-      lastDate: now
-    );
+        context: context,
+        initialDate: now,
+        firstDate: now.subtract(
+          Duration(
+            days: 90,
+          ),
+        ),
+        lastDate: now);
 
     if (result != null) {
-        setState(() {
-          selectedDate = result;
+      setState(() {
+        selectedDate = result;
       });
     }
   }
@@ -247,10 +247,7 @@ class _ListDismissibleDemoState extends State<ListDismissibleDemo> {
 
   void _showSnackBar(String message) {
     ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(message)),
+      SnackBar(content: Text(message)),
     );
   }
 }
-
-
-

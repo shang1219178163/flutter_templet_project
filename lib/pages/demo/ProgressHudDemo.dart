@@ -21,14 +21,12 @@ class ProgressHudDemo extends StatefulWidget {
 }
 
 class _ProgressHudDemoState extends State<ProgressHudDemo> {
-
-
   ButtonStyle get buttonStyle => TextButton.styleFrom(
-    minimumSize: Size(100, 30),
-    backgroundColor: Colors.blue,
-    primary: Colors.white,
-    padding: EdgeInsets.symmetric(horizontal: 5, vertical: 2),
-  );
+        foregroundColor: Colors.white,
+        backgroundColor: Colors.blue,
+        minimumSize: Size(100, 30),
+        padding: EdgeInsets.symmetric(horizontal: 5, vertical: 2),
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -37,12 +35,18 @@ class _ProgressHudDemoState extends State<ProgressHudDemo> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          onPressed: () {
-            setState(() {});
-          },
-          child: Text(e,),)
-        ).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  onPressed: () {
+                    setState(() {});
+                  },
+                  child: Text(
+                    e,
+                  ),
+                ))
+            .toList(),
       ),
       body: buildBody(),
     );
@@ -101,16 +105,18 @@ class _ProgressHudDemoState extends State<ProgressHudDemo> {
           TextButton(
             style: buttonStyle,
             onPressed: () {
-              NNProgressHUD.showToast(context, message: "这是一个 NNProgressHUD.toast 类型的文字提示 toast.");
+              NNProgressHUD.showToast(context,
+                  message: "这是一个 NNProgressHUD.toast 类型的文字提示 toast.");
             },
             child: Text("showToast"),
           ),
-        ].map((e) => Padding(
-          padding: EdgeInsets.symmetric(vertical: 5),
-          child: e,
-        )).toList(),
+        ]
+            .map((e) => Padding(
+                  padding: EdgeInsets.symmetric(vertical: 5),
+                  child: e,
+                ))
+            .toList(),
       ),
     );
   }
-
 }

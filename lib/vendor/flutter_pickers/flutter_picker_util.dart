@@ -1,15 +1,13 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_pickers/address_picker/locations_data.dart';
 import 'package:flutter_pickers/pickers.dart';
 import 'package:flutter_pickers/style/picker_style.dart';
 import 'package:flutter_pickers/time_picker/model/date_mode.dart';
 import 'package:flutter_pickers/time_picker/model/pduration.dart';
+import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/date_time_ext.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:get/get.dart';
-import 'package:path/path.dart';
-import 'package:flutter_templet_project/extension/build_context_ext.dart';
 
 // 地址选择器模型
 class AddressPickerModel {

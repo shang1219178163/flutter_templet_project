@@ -1,24 +1,49 @@
-
-
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/routes/APPRouter.dart';
 import 'package:get/get.dart';
 
-
 class AuthMiddleware extends GetMiddleware {
-  AuthMiddleware({required this.newRouteCb});
+  AuthMiddleware({this.newRouteCb});
 
-  final String Function(GetNavConfig route) newRouteCb;
+  final String Function(GetNavConfig route)? newRouteCb;
+
+  // @override
+  // RouteSettings? redirect(String? route) {
+  //   ddlog("$runtimeType redirect: ${[
+  //     Get.arguments,
+  //     Get.parameters,
+  //     Get.rootDelegate.arguments(),
+  //   ]}");
+  //   bool isLogin = false;
+  //   if (!isLogin) {
+  //     // 如果未登录，重定向到登录页面
+  //     return RouteSettings(
+  //         name: APPRouter.aeReportPage, arguments: Get.arguments);
+  //   }
+  //   return null; // 继续访问原始路由
+  // }
 
   @override
   Future<GetNavConfig?> redirectDelegate(GetNavConfig route) async {
-    // you can do whatever you want here
-    // but it's preferable to make this method fast
-    // await Future.delayed(Duration(milliseconds: 500));
+    ddlog("$runtimeType redirectDelegate: ${[
+      Get.arguments,
+      Get.parameters,
+      Get.rootDelegate.arguments(),
+    ]}");
+    final args = route.currentPage?.arguments as Map<String, dynamic>?;
 
-    final newRoute = newRouteCb(route);
-    if (newRoute.isNotEmpty) {
-      return GetNavConfig.fromRoute(newRoute);
+    // Check if arguments are as expected
+    if (args != null) {
+      bool isAuthorized = args['isAuthorized'] ?? false;
+
+      if (!isAuthorized) {
+        // If not authorized, redirect to an unauthorized page
+        return GetNavConfig.fromRoute('/unauthorized');
+      }
     }
+
+    // Allow navigation if arguments are valid or not present
     return super.redirectDelegate(route);
   }
-
 }

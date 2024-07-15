@@ -1,9 +1,6 @@
-
-
 import 'package:flutter/cupertino.dart';
 
 class AppCupertinoLocalizations extends CupertinoLocalizations {
-
   final CupertinoLocalizations localizations;
 
   AppCupertinoLocalizations(this.localizations);
@@ -34,28 +31,31 @@ class AppCupertinoLocalizations extends CupertinoLocalizations {
   }
 
   @override
-  String? timerPickerSecondLabel(int second) => localizations.timerPickerSecondLabel(second);
+  String? timerPickerSecondLabel(int second) =>
+      localizations.timerPickerSecondLabel(second);
 
   @override
-  String? timerPickerMinuteLabel(int minute) => localizations.timerPickerMinuteLabel(minute);
+  String? timerPickerMinuteLabel(int minute) =>
+      localizations.timerPickerMinuteLabel(minute);
 
   @override
-  String? timerPickerHourLabel(int hour) => localizations.timerPickerHourLabel(hour);
+  String? timerPickerHourLabel(int hour) =>
+      localizations.timerPickerHourLabel(hour);
 
   @override
-  String timerPickerSecond(int second) => localizations.timerPickerSecond(second);
+  String timerPickerSecond(int second) =>
+      localizations.timerPickerSecond(second);
 
   @override
-  String timerPickerMinute(int minute) => localizations.timerPickerMinute(minute);
+  String timerPickerMinute(int minute) =>
+      localizations.timerPickerMinute(minute);
 
   @override
   String timerPickerHour(int hour) => localizations.timerPickerHour(hour);
 
   @override
-  String tabSemanticsLabel({
-    required int tabIndex,
-    required int tabCount
-  }) => localizations.tabSemanticsLabel(tabIndex: tabIndex, tabCount: tabCount);
+  String tabSemanticsLabel({required int tabIndex, required int tabCount}) =>
+      localizations.tabSemanticsLabel(tabIndex: tabIndex, tabCount: tabCount);
 
   @override
   String get alertDialogLabel => localizations.alertDialogLabel;
@@ -70,40 +70,49 @@ class AppCupertinoLocalizations extends CupertinoLocalizations {
   String get anteMeridiemAbbreviation => localizations.anteMeridiemAbbreviation;
 
   @override
-  DatePickerDateTimeOrder get datePickerDateTimeOrder => localizations.datePickerDateTimeOrder;
+  DatePickerDateTimeOrder get datePickerDateTimeOrder =>
+      localizations.datePickerDateTimeOrder;
 
   @override
-  String? datePickerMinuteSemanticsLabel(int minute) => localizations.datePickerMinuteSemanticsLabel(minute);
+  String? datePickerMinuteSemanticsLabel(int minute) =>
+      localizations.datePickerMinuteSemanticsLabel(minute);
 
   @override
   String datePickerMinute(int minute) => localizations.datePickerMinute(minute);
 
   @override
-  String? datePickerHourSemanticsLabel(int hour) => localizations.datePickerHourSemanticsLabel(hour);
+  String? datePickerHourSemanticsLabel(int hour) =>
+      localizations.datePickerHourSemanticsLabel(hour);
 
   @override
   String datePickerHour(int hour) => localizations.datePickerHour(hour);
 
   @override
-  String datePickerMediumDate(DateTime date) => localizations.datePickerMediumDate(date);
+  String datePickerMediumDate(DateTime date) =>
+      localizations.datePickerMediumDate(date);
 
   @override
-  String datePickerDayOfMonth(int dayIndex, [int? weekDay]) => localizations.datePickerDayOfMonth(dayIndex);
+  String datePickerDayOfMonth(int dayIndex, [int? weekDay]) =>
+      localizations.datePickerDayOfMonth(dayIndex);
 
   @override
-  String datePickerMonth(int monthIndex) => localizations.datePickerMonth(monthIndex);
+  String datePickerMonth(int monthIndex) =>
+      localizations.datePickerMonth(monthIndex);
 
   @override
-  String get searchTextFieldPlaceholderLabel => localizations.searchTextFieldPlaceholderLabel;
+  String get searchTextFieldPlaceholderLabel =>
+      localizations.searchTextFieldPlaceholderLabel;
 
   @override
   List<String> get timerPickerHourLabels => localizations.timerPickerHourLabels;
 
   @override
-  List<String> get timerPickerMinuteLabels => localizations.timerPickerMinuteLabels;
+  List<String> get timerPickerMinuteLabels =>
+      localizations.timerPickerMinuteLabels;
 
   @override
-  List<String> get timerPickerSecondLabels => localizations.timerPickerSecondLabels;
+  List<String> get timerPickerSecondLabels =>
+      localizations.timerPickerSecondLabels;
 
   @override
   // TODO: implement noSpellCheckReplacementsLabel
@@ -131,16 +140,21 @@ class AppCupertinoLocalizations extends CupertinoLocalizations {
   // TODO: implement shareButtonLabel
   String get shareButtonLabel => throw UnimplementedError();
 
+  @override
+  // TODO: implement clearButtonLabel
+  String get clearButtonLabel => throw UnimplementedError();
 }
 
-class AppGlobalCupertinoLocalizationsDelegate extends LocalizationsDelegate<CupertinoLocalizations> {
-
+class AppGlobalCupertinoLocalizationsDelegate
+    extends LocalizationsDelegate<CupertinoLocalizations> {
   @override
-  bool isSupported(Locale locale) => DefaultCupertinoLocalizations.delegate.isSupported(locale);
+  bool isSupported(Locale locale) =>
+      DefaultCupertinoLocalizations.delegate.isSupported(locale);
 
   @override
   Future<CupertinoLocalizations> load(Locale locale) async {
-    var localizations = await DefaultCupertinoLocalizations.delegate.load(locale);
+    var localizations =
+        await DefaultCupertinoLocalizations.delegate.load(locale);
     return AppCupertinoLocalizations(localizations);
   }
 
@@ -151,5 +165,3 @@ class AppGlobalCupertinoLocalizationsDelegate extends LocalizationsDelegate<Cupe
   @override
   String toString() => 'AppGlobalCupertinoLocalizationsDelegate';
 }
-
-
