@@ -71,17 +71,25 @@ extension ObjectExt on Object {
   }
 }
 
-extension DynamicExt<T> on T {
+extension DynamicExt<E> on E {
   /// 返回可选值或者 `else` 闭包返回的值
   /// 例如. nullable.or(else: {
   /// ... code
   /// })
-  T orElse(T Function() block) {
+  E orElse(E Function() block) {
     return this ?? block();
   }
 
-  T or(T v) {
+  E or(E v) {
     return this ?? v;
+  }
+
+  /// 不为空则转换为目标类型
+  T? map<T>(T Function(E v) fn) {
+    if (this == null) {
+      return null;
+    }
+    return fn(this);
   }
 }
 

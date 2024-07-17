@@ -373,7 +373,14 @@ class _DataTypeDemoState extends State<DataTypeDemo> {
     ddlog([a.runtimeType, a1.runtimeType, array.runtimeType].asMap());
 
     const String? b = null;
-    ddlog([a.orElse(() => "456"), b.or("333")].asMap());
+    ddlog([
+      a.orElse(() => "456"),
+      b.or("333"),
+      a.map((v) => Text("$a")),
+      b.map((v) => Text("$b"))
+    ].asMap());
+
+    final Text? z = a.map((v) => Text("$a"));
 
     final nums = List<int>.generate(10, (i) => i);
     final val = nums.reduce((v, e) => v + e);
