@@ -9,14 +9,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "61.0.0"
-  aesthetic_dialogs:
-    dependency: "direct main"
-    description:
-      name: aesthetic_dialogs
-      sha256: "46301a99da07baeed6704e11e46d83a39f93059fec7a3dcc33a40d96e8603000"
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "0.0.15"
   analyzer:
     dependency: transitive
     description:
@@ -1468,10 +1460,10 @@ packages:
     dependency: "direct main"
     description:
       name: photo_manager
-      sha256: df594f989f0c31cdb3ed48f3d49cb9ffadf11cc3700d2c3460b1912c93432621
+      sha256: "91abfc4881ed8b97092ceb290fc5a591dcd53262052dd7a9dc7b3928e2bd4838"
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "3.0.0"
+    version: "3.2.1"
   photo_manager_image_provider:
     dependency: transitive
     description:

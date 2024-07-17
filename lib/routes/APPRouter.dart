@@ -317,7 +317,6 @@ import 'package:flutter_templet_project/vendor/SVGAImageDemo.dart';
 import 'package:flutter_templet_project/vendor/ScribbleDemo.dart';
 import 'package:flutter_templet_project/vendor/SlidableDemoOne.dart';
 import 'package:flutter_templet_project/vendor/VisibilityDetectorDemo.dart';
-import 'package:flutter_templet_project/vendor/aesthetic_dialogs_demo.dart';
 import 'package:flutter_templet_project/vendor/audioplayers/audio_play_page.dart';
 import 'package:flutter_templet_project/vendor/azlistview/azlistview_demo.dart';
 import 'package:flutter_templet_project/vendor/color_converter_demo.dart';
@@ -1353,10 +1352,6 @@ class AppPage {
     GetPage(
       name: APPRouter.scribbleDemo,
       page: () => ScribbleDemo(),
-    ),
-    GetPage(
-      name: APPRouter.aestheticDialogsDemo,
-      page: () => AestheticDialogsDemo(),
     ),
     GetPage(
       name: APPRouter.customTimerDemo,

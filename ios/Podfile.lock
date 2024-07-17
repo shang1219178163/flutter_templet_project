@@ -1,6 +1,4 @@
 PODS:
-  - aesthetic_dialogs (0.0.1):
-    - Flutter
   - audio_session (0.0.1):
     - Flutter
   - audioplayers_darwin (0.0.1):
@@ -150,7 +148,6 @@ PODS:
   - WechatOpenSDK-XCFramework (2.0.2)
 
 DEPENDENCIES:
-  - aesthetic_dialogs (from `.symlinks/plugins/aesthetic_dialogs/ios`)
   - audio_session (from `.symlinks/plugins/audio_session/ios`)
   - audioplayers_darwin (from `.symlinks/plugins/audioplayers_darwin/ios`)
   - camera_avfoundation (from `.symlinks/plugins/camera_avfoundation/ios`)
@@ -206,8 +203,6 @@ SPEC REPOS:
     - WechatOpenSDK-XCFramework
 
 EXTERNAL SOURCES:
-  aesthetic_dialogs:
-    :path: ".symlinks/plugins/aesthetic_dialogs/ios"
   audio_session:
     :path: ".symlinks/plugins/audio_session/ios"
   audioplayers_darwin:
@@ -284,7 +279,6 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/webview_flutter_wkwebview/ios"
 
 SPEC CHECKSUMS:
-  aesthetic_dialogs: a5f6a847f4820321f7d2eadf80f36d5d558777f8
   audio_session: 4f3e461722055d21515cf3261b64c973c062f345
   audioplayers_darwin: 877d9a4d06331c5c374595e46e16453ac7eafa40
   camera_avfoundation: 759172d1a77ae7be0de08fc104cfb79738b8a59e
@@ -314,7 +308,7 @@ SPEC CHECKSUMS:
   package_info_plus: 115f4ad11e0698c8c1c5d8a689390df880f47e85
   path_provider_foundation: 3784922295ac71e43754bd15e0653ccfd36a147c
   permission_handler_apple: 036b856153a2b1f61f21030ff725f3e6fece2b78
-  photo_manager: 4f6810b7dfc4feb03b461ac1a70dacf91fba7604
+  photo_manager: ff695c7a1dd5bc379974953a2b5c0a293f7c4c8a
   qr_code_scanner: bb67d64904c3b9658ada8c402e8b4d406d5d796e
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
   SDWebImage: 2aea163b50bfcb569a2726b6a754c54a4506fcf6
