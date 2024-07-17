@@ -80,6 +80,7 @@ extension DynamicExt<E> on E {
     return this ?? block();
   }
 
+  /// 赋予默认值
   E or(E v) {
     return this ?? v;
   }
