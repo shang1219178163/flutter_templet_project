@@ -138,24 +138,24 @@ class _NChoiceBoxOneState<T> extends State<NChoiceBoxOne<T>> {
             if (!widget.enable) {
               textStyle = textStyle.copyWith(color: avatarColor);
             }
+
             return Container(
               width: itemWidth - 1,
               alignment: Alignment.centerLeft,
-              child: ChipTheme(
-                data: ChipTheme.of(context).copyWith(
-                  backgroundColor: widget.backgroundColor ?? Colors.transparent,
-                  selectedColor: widget.selectedColor ?? Colors.transparent,
-                  disabledColor: widget.disabledColor,
-                  elevation: 0,
-                  pressElevation: 0,
-                  showCheckmark: false,
-                  padding: EdgeInsets.zero,
-                  // labelPadding: EdgeInsets.zero,
-                ),
-                child: ChoiceChip(
-                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  side: BorderSide(color: Colors.transparent),
-                  label: Row(
+              child: GestureDetector(
+                onTap: () {
+                  onTap(e: e, isSelected: isSelected);
+                },
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 4,
+                    horizontal: 10,
+                  ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(4)),
+                    // border: Border.all(color: Colors.blue),
+                  ),
+                  child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Padding(
@@ -170,21 +170,6 @@ class _NChoiceBoxOneState<T> extends State<NChoiceBoxOne<T>> {
                       ),
                     ],
                   ),
-                  selected: isSelected,
-                  onSelected: (bool selected) {
-                    // debugPrint("e: $selected,  $e");
-                    if (!widget.enable) {
-                      DLog.d("❌$runtimeType 组件已禁用!");
-                      return;
-                    }
-                    final canChange = widget.canChanged
-                            ?.call(e, onSelect as ChoiceSelectedType) ??
-                        true;
-                    if (!canChange) {
-                      return;
-                    }
-                    onSelect(e, selected);
-                  },
                 ),
               ),
             );
@@ -194,10 +179,24 @@ class _NChoiceBoxOneState<T> extends State<NChoiceBoxOne<T>> {
     });
   }
 
-  onSelect(T e, bool selected) {
-    if (selected == false) {
+  /// 子项选择
+  void onTap({required T e, required bool isSelected}) {
+    if (!widget.enable) {
+      DLog.d("❌$runtimeType 组件已禁用!");
       return;
     }
+
+    bool selected = !isSelected;
+    // debugPrint("e: $selected,  $e");
+    final canChange =
+        widget.canChanged?.call(e, onSelect as ChoiceSelectedType) ?? true;
+    if (!canChange) {
+      return;
+    }
+    onSelect(e, selected);
+  }
+
+  onSelect(T e, bool selected) {
     if (widget.selectedItem.value == e) {
       return;
     }
