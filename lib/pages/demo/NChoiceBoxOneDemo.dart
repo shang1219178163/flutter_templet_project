@@ -39,7 +39,7 @@ class _NChoiceBoxOneDemoState extends State<NChoiceBoxOneDemo> {
       10,
       (i) => TagDetailModel(
             id: i.toString(),
-            name: "标签$i",
+            name: "标签$i${"元" * i}",
           )).toList();
   List<TagDetailModel> selectedTags = [];
 
@@ -202,7 +202,7 @@ class _NChoiceBoxOneDemoState extends State<NChoiceBoxOneDemo> {
   }) {
     return NChoiceBox<T>(
       isSingle: isSingle,
-      itemColor: Colors.transparent,
+      // itemColor: Colors.transparent,
       // wrapAlignment: WrapAlignment.spaceBetween,
       items: models
           .map((e) => ChoiceBoxModel<T>(
