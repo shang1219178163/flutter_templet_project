@@ -113,9 +113,9 @@ class FlutterPickerUtil {
           year: pDate.year,
           month: pDate.month,
           day: pDate.day,
-          hour: (pDate.hour ?? 0) > 0 ? pDate.hour : now.hour,
-          minute: (pDate.minute ?? 0) > 0 ? pDate.minute : now.minute,
-          second: (pDate.second ?? 0) > 0 ? pDate.second : now.second,
+          hour: pDate.hour ?? now.hour,
+          minute: pDate.minute ?? now.minute,
+          second: pDate.second ?? now.second,
         );
         onConfirm(pDateNew.toDate());
       },
@@ -274,6 +274,7 @@ class FlutterPickerUtil {
 }
 
 extension PDurationExt on PDuration {
+  /// 转为 DateTime
   DateTime toDate() {
     final date = DateTime(
       year ?? 0,
@@ -284,6 +285,25 @@ extension PDurationExt on PDuration {
       second ?? 0,
     );
     return date;
+  }
+
+  /// copyWith 覆盖当前值
+  PDuration copyWith({
+    int? year,
+    int? month,
+    int? day,
+    int? hour,
+    int? minute,
+    int? second,
+  }) {
+    return PDuration(
+      year: year ?? this.year,
+      month: month ?? this.month,
+      day: day ?? this.day,
+      hour: hour ?? this.hour,
+      minute: minute ?? this.minute,
+      second: second ?? this.second,
+    );
   }
 }
 

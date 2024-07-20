@@ -37,9 +37,11 @@ extension StringExt on String {
 
   /// 转为 int
   int? toInt() {
-    var val = replaceAll(RegExp(r'[^0-9]'), '');
-    final result = int.tryParse(val);
-    return result;
+    return int.tryParse(this);
+  }
+
+  double? toDouble() {
+    return double.tryParse(this);
   }
 
   /// 移除左边
@@ -117,14 +119,8 @@ extension StringExt on String {
     return AssetImage(assetName, bundle: bundle, package: package);
   }
 
-  /// 同 int.parse(this)
-  int get parseInt => int.parse(this);
-
   /// 同 int.tryParse(this)
   int? get tryParseInt => int.tryParse(this);
-
-  /// 同 double.parse(this)
-  double get parseDouble => double.parse(this);
 
   /// 同 double.tryParse(this)
   double? get tryParseDouble => double.tryParse(this);
