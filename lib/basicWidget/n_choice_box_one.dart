@@ -46,7 +46,7 @@ class NChoiceBoxOne<T> extends StatefulWidget {
   /// 类型转字符串
   final String Function(T e) itemNameCb;
 
-  /// 每列数
+  /// 每列数,为 0 时自由排布
   final int numPerRow;
 
   final Color primaryColor;
@@ -93,6 +93,20 @@ class _NChoiceBoxOneState<T> extends State<NChoiceBoxOne<T>> {
 
   @override
   Widget build(BuildContext context) {
+    if (widget.numPerRow <= 0) {
+      return Wrap(
+        // alignment: WrapAlignment.start,
+        // crossAxisAlignment: WrapCrossAlignment.start,
+        spacing: widget.spacing,
+        runSpacing: widget.runSpacing,
+        children: widget.items.map(
+          (e) {
+            return buildItem(e: e);
+          },
+        ).toList(),
+      );
+    }
+
     return LayoutBuilder(builder: (context, constraints) {
       final itemWidth = constraints.maxWidth / widget.numPerRow;
 
@@ -102,81 +116,85 @@ class _NChoiceBoxOneState<T> extends State<NChoiceBoxOne<T>> {
         runSpacing: widget.runSpacing,
         children: widget.items.map(
           (e) {
-            final isSelected = widget.selectedItem.value == e;
-
-            final avatarColor = !widget.enable
-                ? widget.disabledAvatarColor
-                : widget.primaryColor;
-
-            final avatar = isSelected
-                ? (widget.avatarSelected ??
-                    NIndicatorPointNew(
-                      size: 14,
-                      innerSize: 8,
-                      color: avatarColor,
-                      innerColor: avatarColor,
-                    ))
-                : (widget.avatar ??
-                    NIndicatorPointNew(
-                      size: 14,
-                      innerSize: 8,
-                      color: Color(0xffBCBFC2),
-                      innerColor: Colors.transparent,
-                    ));
-
-            String itemTitle = widget.itemNameCb(e);
-
-            TextStyle textStyle = isSelected
-                ? widget.styleSelected ??
-                    TextStyle(
-                      color: widget.primaryColor,
-                    )
-                : widget.style ??
-                    TextStyle(
-                      color: Colors.black87,
-                    );
-            if (!widget.enable) {
-              textStyle = textStyle.copyWith(color: avatarColor);
-            }
-
             return Container(
               width: itemWidth - 1,
               alignment: Alignment.centerLeft,
-              child: GestureDetector(
-                onTap: () {
-                  onTap(e: e, isSelected: isSelected);
-                },
-                child: Container(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 4,
-                    horizontal: 10,
-                  ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(4)),
-                    // border: Border.all(color: Colors.blue),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(right: 8.0),
-                        child: avatar,
-                      ),
-                      Flexible(
-                        child: Text(
-                          itemTitle,
-                          style: textStyle,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+              child: buildItem(e: e),
             );
           },
         ).toList(),
       );
     });
+  }
+
+  /// 子项
+  Widget buildItem({required T e}) {
+    final isSelected = widget.selectedItem.value == e;
+
+    final avatarColor =
+        !widget.enable ? widget.disabledAvatarColor : widget.primaryColor;
+
+    final avatar = isSelected
+        ? (widget.avatarSelected ??
+            NIndicatorPointNew(
+              size: 14,
+              innerSize: 8,
+              color: avatarColor,
+              innerColor: avatarColor,
+            ))
+        : (widget.avatar ??
+            NIndicatorPointNew(
+              size: 14,
+              innerSize: 8,
+              color: Color(0xffBCBFC2),
+              innerColor: Colors.transparent,
+            ));
+
+    String itemTitle = widget.itemNameCb(e);
+
+    TextStyle textStyle = isSelected
+        ? widget.styleSelected ??
+            TextStyle(
+              color: widget.primaryColor,
+            )
+        : widget.style ??
+            TextStyle(
+              color: Colors.black87,
+            );
+    if (!widget.enable) {
+      textStyle = textStyle.copyWith(color: avatarColor);
+    }
+
+    return GestureDetector(
+      onTap: () {
+        onTap(e: e, isSelected: isSelected);
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(
+          vertical: 4,
+          horizontal: 10,
+        ),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(4)),
+          // border: Border.all(color: Colors.blue),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Padding(
+              padding: EdgeInsets.only(right: 8.0),
+              child: avatar,
+            ),
+            Flexible(
+              child: Text(
+                itemTitle,
+                style: textStyle,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   /// 子项选择

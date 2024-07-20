@@ -103,7 +103,7 @@ class _NChoiceBoxState<T> extends State<NChoiceBox<T>> {
 
   Widget buildItem(ChoiceBoxModel<T> e) {
     if (widget.itemBuilder != null) {
-      return InkWell(
+      return GestureDetector(
         onTap: () {
           onSelect(e: e);
         },

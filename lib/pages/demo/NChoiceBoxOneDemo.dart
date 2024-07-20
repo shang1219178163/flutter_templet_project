@@ -152,6 +152,7 @@ class _NChoiceBoxOneDemoState extends State<NChoiceBoxOneDemo> {
         color: context.primaryColor,
         fontSize: 15,
       ),
+      // numPerRow: 0,
       // enable: false,
       canChanged: (val, onSelect) {
         if (rpItemCurrent.value == val) {
