@@ -15,11 +15,7 @@ import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/util/Debounce.dart';
 
 class TestFunction extends StatefulWidget {
-
-  const TestFunction({
-    Key? key, 
-    this.title
-  }) : super(key: key);
+  const TestFunction({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -28,7 +24,6 @@ class TestFunction extends StatefulWidget {
 }
 
 class _TestFunctionState extends State<TestFunction> {
-
   late final items = <({String name, VoidCallback action})>[
     (name: "apply", action: onApply),
     (name: "防抖", action: onDebounce),
@@ -40,12 +35,17 @@ class _TestFunctionState extends State<TestFunction> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          onPressed: onPressed,
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),)
-        ).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  onPressed: onPressed,
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ))
+            .toList(),
       ),
       body: buildBody(),
     );
@@ -61,27 +61,19 @@ class _TestFunctionState extends State<TestFunction> {
             Text(arguments.toString()),
             Wrap(
               children: items.map((e) {
-                return TextButton(
-                    onPressed: e.action,
-                    child: NText(e.name)
-                );
+                return TextButton(onPressed: e.action, child: NText(e.name));
               }).toList(),
             ),
             OutlinedButton(
-              onPressed: testVoidCallback.debounce,
-              child: NText("testVoidCallback.debounce")
-            ),
+                onPressed: testVoidCallback.debounce,
+                child: NText("testVoidCallback.debounce")),
             OutlinedButton(
-                onPressed: testVoidCallback.auth(
-                  onAuth: (){
-                    return false;
-                  },
-                  onUnauth: (){
-                    ddlog("OutlinedButton - onUnauth");
-                  }
-                ),
-                child: NText("testVoidCallback.auth")
-            ),
+                onPressed: testVoidCallback.auth(onAuth: () {
+                  return false;
+                }, onUnauth: () {
+                  ddlog("OutlinedButton - onUnauth");
+                }),
+                child: NText("testVoidCallback.auth")),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               child: NSearchTextField(
@@ -100,7 +92,7 @@ class _TestFunctionState extends State<TestFunction> {
     debugPrint("b: ${func()}");
     debugPrint("b: ${func()}");
 
-    final funcOne = repeat(onChanged: (val){
+    final funcOne = repeat(onChanged: (val) {
       debugPrint("onChanged: ${val}");
     });
 
@@ -123,34 +115,27 @@ class _TestFunctionState extends State<TestFunction> {
     debugPrint('city: $city, Country: $country, year: $year');
   }
 
-  onApply(){
+  onApply() {
     int a = Function.apply(fc, [10, 3]);
-    debugPrint("a: $a");//a: 13
+    debugPrint("a: $a"); //a: 13
     int b = Function.apply(fc, [10, 3], {Symbol("operation"): "subtract"});
-    debugPrint("b: $b");//b: 7
+    debugPrint("b: $b"); //b: 7
 
     Function.apply(fcOne, [2018], {#country: 'USA', #city: 'Dominus Estate'});
-    final map = {
-      "country": 'USA',
-      "city": 'Dominus Estate'
-    };
-    final mapNew = {
-      "country": 'USA1',
-      "city": 'Dominus Estate1'
-    }.mapSymbolKey();
+    final map = {"country": 'USA', "city": 'Dominus Estate'};
+    final mapNew =
+        {"country": 'USA1', "city": 'Dominus Estate1'}.mapSymbolKey();
 
     Function.apply(fcOne, [2018], mapNew);
     FunctionExt.apply(fcOne, [2019], map);
 
     fcOne.applyNew(
-      positionalArguments: [2024,],
-      namedArguments: {
-        "country": 'China',
-        "city": 'HongKong'
-      },
+      positionalArguments: [
+        2024,
+      ],
+      namedArguments: {"country": 'China', "city": 'HongKong'},
     );
   }
-
 
   Function closure() {
     var i = 0;
@@ -171,21 +156,23 @@ class _TestFunctionState extends State<TestFunction> {
     };
   }
 
-  void onDebounce(){
+  void onDebounce() {
     testVoidCallback.debounce();
     // testFuntion.debounce(namedArguments: {"name": "testFuntion1"});
   }
 
-  void onDebounceOne(){
+  void onDebounceOne() {
     testVoidCallbackOne.debounce();
   }
 
-  void onChanged(val){
+  void onChanged(val) {
     final index = IntExt.random(max: 1000);
     ddlog("onChanged: $val, index: $index");
   }
 
-  void testFuntion({required String name, }) {
+  void testFuntion({
+    required String name,
+  }) {
     final index = IntExt.random(max: 1000);
     ddlog("name: $name, index: $index");
   }
@@ -229,7 +216,7 @@ class _TestFunctionState extends State<TestFunction> {
   }
 }
 
-extension MapExt on Map{
+extension MapExt on Map {
   Map<Symbol, dynamic> mapSymbolKey() {
     return map((key, value) => MapEntry(Symbol("$key"), value));
   }
