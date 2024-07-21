@@ -321,7 +321,7 @@ class _GridViewDemoState extends State<GridViewDemo> {
     List<UserModel> listNew =
         list.length > showLength ? list.sublist(0, showLength) : list;
 
-    List<Widget> listView = listNew.map(
+    List<Widget> items = listNew.map(
       (e) {
         var avatarUrl = e.avatar;
         String title = e.name ?? '';
@@ -337,22 +337,27 @@ class _GridViewDemoState extends State<GridViewDemo> {
         );
       },
     ).toList();
-    listView.add(ImGroupAvatar(
-      onTap: onAdd,
-      avatar: "",
-      placeholder: const AssetImage("assets/images/icon_user_add.png"),
-      title: "",
-      subtitle: "",
-      width: itemWidth,
-    ));
-    listView.add(ImGroupAvatar(
-      onTap: onDel,
-      avatar: "",
-      placeholder: const AssetImage("assets/images/icon_user_del.png"),
-      title: "",
-      subtitle: "",
-      width: itemWidth,
-    ));
-    return listView;
+    if (onAdd != null) {
+      items.add(ImGroupAvatar(
+        onTap: onAdd,
+        avatar: "",
+        placeholder: const AssetImage("assets/images/icon_user_add.png"),
+        title: "",
+        subtitle: "",
+        width: itemWidth,
+      ));
+    }
+
+    if (onDel != null) {
+      items.add(ImGroupAvatar(
+        onTap: onDel,
+        avatar: "",
+        placeholder: const AssetImage("assets/images/icon_user_del.png"),
+        title: "",
+        subtitle: "",
+        width: itemWidth,
+      ));
+    }
+    return items;
   }
 }
