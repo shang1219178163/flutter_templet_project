@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 /// @author[yilian]
 /// @version[创建日期，2024/4/7 10:20]
 /// @function[渐变文字效果 ]
@@ -19,15 +18,16 @@ class NShaderText extends StatelessWidget {
 
   /// 是否展开  - 展开隐藏渐变色，用于档案多行文本
   final bool hasShader;
+
   /// 渐变色
   final List<Color> colors;
+
   /// 子text组件
   final Widget child;
 
-
   @override
   Widget build(BuildContext context) {
-    if (hasShader) {
+    if (!hasShader) {
       return child;
     }
 
