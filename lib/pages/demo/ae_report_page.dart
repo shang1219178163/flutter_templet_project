@@ -27,7 +27,7 @@ import 'package:flutter_templet_project/basicWidget/upload/asset_upload_model.da
 import 'package:flutter_templet_project/basicWidget/upload_document/asset_upload_document_model.dart';
 import 'package:flutter_templet_project/enum/ActivityType.dart';
 import 'package:flutter_templet_project/extension/bool_ext.dart';
-import 'package:flutter_templet_project/extension/custom_type_util.dart';
+import 'package:flutter_templet_project/extension/type_util.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/function_ext.dart';
 import 'package:flutter_templet_project/mixin/safe_set_state_mixin.dart';

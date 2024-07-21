@@ -13,6 +13,7 @@ import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/model/user_model.dart';
 import 'package:flutter_templet_project/util/R.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:get/get.dart';
 
 class GridViewDemo extends StatefulWidget {
   const GridViewDemo({Key? key}) : super(key: key);

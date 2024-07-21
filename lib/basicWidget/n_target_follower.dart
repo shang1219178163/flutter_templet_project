@@ -8,7 +8,7 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/custom_type_util.dart';
+import 'package:flutter_templet_project/extension/type_util.dart';
 
 /// 关联组件
 class NTargetFollower extends StatefulWidget {
