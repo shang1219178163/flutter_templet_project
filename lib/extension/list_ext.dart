@@ -252,6 +252,18 @@ extension ListExtObject<E extends Object> on List<E> {
 }
 
 extension IterableExt<E> on Iterable<E> {
+  /// 动态值
+  E operator [](int index) {
+    final i = index.clamp(0, length);
+    return this[i];
+  }
+
+  /// 动态复制
+  void operator []=(int index, E? val) {
+    final i = index.clamp(0, length);
+    this[i] = val;
+  }
+
   // /// 重新
   // E? get firstNBew {
   //   var it = iterator;
