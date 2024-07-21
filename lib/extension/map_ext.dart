@@ -9,6 +9,7 @@
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
 
 extension MapExt on Map<String, dynamic> {
   // static bool isEmpty(Map? val) {
@@ -44,11 +45,15 @@ extension MapExt on Map<String, dynamic> {
     });
   }
 
-  /// 自定义方法
-  Map<String, dynamic> removeWhere(
-      bool Function(String key, dynamic value) test) {
-    this.removeWhere(test);
-    return this;
+  /// 过滤满足条件的键值对
+  Map<String, dynamic> filter(bool Function(String key, dynamic value) test) {
+    final map = <String, dynamic>{};
+    for (final e in entries) {
+      if (test(e.key, e.value)) {
+        map[e.key] = e.value;
+      }
+    }
+    return map;
   }
 
   Map<String, dynamic> get asMapHash =>
