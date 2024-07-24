@@ -15,14 +15,22 @@ platform :ios do
   DevelopmentDir  = "/Users/#{`whoami`}/Desktop/ipa_development".gsub("\n", "")
 
 
-  ## Common
+=begin
+这个 lane 用于构建应用程序商店包。
+
+参数：
+- :to: 部署平台 "pgy/fir/release", 默认为 "release"
+- :en: 构建环境 "test/pre/prod", 默认 "prod"
+=end
   desc "打包 release 版本, to: pgy/fir/release"
   lane :release do |options|
-    #默认env文件
-    archiveRelease()
-    
-    platform = options[:to]
-    platform = platform ? platform : "release"
+    platform = options[:to] || "release"
+    en = options[:en] || "prod"
+
+    sh "cd .. && cd .."
+    sh "flutter build ios --release lib/main_#{en}.dart"
+    fileDir = getTargetDir(platform: platform)
+    archiveRelease(ipaDir: fileDir)
 
     sh "fastlane releaseupload to:#{platform}"
   end
@@ -30,9 +38,7 @@ platform :ios do
 
   desc "上传 release 版本, to: pgy/fir/release"
   lane :releaseupload do |options|
-    #默认env文件    
-    platform = options[:to]
-    platform = platform ? platform : "rel"
+    platform = options[:to] || "release"
     
     if platform.start_with?"rel" 
       uploadRelease(ipaDir: ProductionDir)
@@ -44,14 +50,22 @@ platform :ios do
   
   end
 
+=begin
+这个 lane 用于构建应用程序开发包。
 
+参数：
+- :to: 部署平台 "pgy/fir", 默认为 "pgy"
+- :en: 构建环境 "test/pre/prod", 默认 "pre"
+=end
   desc "打包 development 版本, to: pgy/fir"
   lane :develop do |options|
-    #默认env文件
-    archiveDevelopment(ipaDir: DevelopmentDir)
+    platform = options[:to] ||"pgy"
+    en = options[:en] || "pre"
 
-    platform = options[:to]
-    platform = platform ? platform : "pgy"
+    sh "cd .. && cd .."
+    sh "flutter build ios --release lib/main_#{en}.dart"
+    fileDir = getTargetDir(platform: platform)
+    archiveDevelopment(ipaDir: fileDir)
 
     sh "fastlane developupload to:#{platform}"
   end
@@ -59,14 +73,13 @@ platform :ios do
 
   desc "上传 develop 版本, to: pgy/fir"
   lane :developupload do |options|
-    #默认env文件    
-    platform = options[:to]
-    platform = platform ? platform : "pgy"
+    platform = options[:to] || "pgy"
 
+    fileDir = getTargetDir(platform: platform)
     if platform.start_with?"fir" 
-      uploadFir()
+      uploadFir(ipaDir: fileDir)
     else
-      uploadPgyer()
+      uploadPgyer(ipaDir: fileDir)
     end
   
   end
@@ -121,8 +134,7 @@ platform :ios do
         method: 'development',
         iCloudContainerEnvironment: 'Development',
         provisioningProfiles:{
-#           "com.yilian.ylHealthApp" => "health_dev",
-            "#{ENV["App_bundleid"]}" => "#{ENV["App_mobileprovision_dev"]}",
+          "#{ENV["App_bundleid"]}" => "#{ENV["App_mobileprovision_dev"]}",
         }
       }
     )
@@ -153,26 +165,6 @@ platform :ios do
     # handleDingTalk(name: name, ipaDir: ipaDir, downloadUrl: ENV["Pgyer_Shortcut_Link"], qrcodeURL: response["buildQRCodeURL"])
   end
 
-
-  desc "更新BuildVersion"
-  def updateBuildVersion(name: ENV["Scheme_Name"], showHash: true)
-    plistDir = File.dirname(Dir.pwd)
-    puts "plist所在目录：_#{plistDir}_"
-
-    case name
-    when "IntelligentOfParkingOne"
-      plistFile = plist_from_path(path: "#{plistDir}/#{name}/#{name}-Info.plist")
-
-    else
-      plistFile = plist_from_path(path: "#{plistDir}/#{name}/*Info.plist")
-
-    end
-
-    puts "plistFile：_#{plistFile}_"
-    update_build({plist: plistFile, showHash: showHash})
-  end
-
-
   desc "webhook 钉钉"
   def handleDingTalk(name: ENV["Scheme_Name"], ipaDir: DevelopmentDir, downloadUrl: ENV["Firim_Shortcut_Link"], qrcodeURL: ENV["Firim_Shortcut_Link"])
     appPath = ipaDir + "/#{name}.ipa" 
@@ -201,6 +193,7 @@ platform :ios do
     dingslack_robot(params)
   end
 
+
   # desc("increase the current_project_version config based on configuration")
   # lane :increase_build do |option|
       
@@ -226,31 +219,12 @@ platform :ios do
   # end
 
 
-  desc "测试"
-  lane :test do
-    # clear_cache_files()
-    # puts "user name is: #{`whoami`}"  
-
-    # account = "#{`whoami`}".delete "\n"
-    # tokenfiles = "/Users/#{account}/Library/Caches/com.apple.amp.itmstransporter/UploadTokens/*.token"
-    # UI.message "Token: #{tokenfiles}"
-    
-    # handleDingSlack()
-    # handleDingTalk()
-  end
-
-
   desc "archive sign: develop/release, to: pgy/fir/release, target: A/B/C"
   lane :archive do |options|
-    # puts "-#{options}-"
-
-    sign = options[:sign]
-    platform = options[:to]
+    platform = options[:to] || "pgy"
     target = options[:target]
-
-    sign = sign ? sign : "develop"
-    platform = platform ? platform : "pgy"
     targetInfo = target ? "--env target#{target.capitalize}" : ""
+    # puts "_#{sign}_#{platform}_#{target}_#{targetInfo}_"
 
     if sign != ""
       if sign.start_with?"rel" 
@@ -269,14 +243,8 @@ platform :ios do
  
   desc "upload sign: develop/release, to:pgy/fir/release, target: A/B/C"
   lane :upload do |options|
-    # puts "-#{options}-"
-
-    sign = options[:sign]
-    platform = options[:to]
+    platform = options[:to] || "pgy"
     target = options[:target]
-
-    sign = sign ? sign : "develop"
-    platform = platform ? platform  : "pgy"
     targetInfo = target ? "--env target#{target.capitalize}" : ""
     # puts "_#{sign}_#{platform}_#{target}_#{targetInfo}_"
 
@@ -286,6 +254,20 @@ platform :ios do
       sh "fastlane developupload to:#{platform} #{targetInfo}"
     end
       
+  end
+
+
+  desc "测试"
+  lane :test do |options|
+    # clear_cache_files()
+    # puts "user name is: #{`whoami`}"  
+
+    # account = "#{`whoami`}".delete "\n"
+    # tokenfiles = "/Users/#{account}/Library/Caches/com.apple.amp.itmstransporter/UploadTokens/*.token"
+    # UI.message "Token: #{tokenfiles}"
+    
+    # handleDingSlack()
+    # handleDingTalk()
   end
 
 
