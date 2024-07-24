@@ -101,3 +101,14 @@ extension ValueChangedExt<T> on ValueChanged<T> {
     debounceFn(() => this.call(value));
   }
 }
+
+extension FutureExt on Future {
+  /// 打印代码执行时间
+  Future codeExecution() async {
+    final stime = DateTime.now();
+    await this;
+    var etime = DateTime.now();
+    final inMilliseconds = etime.difference(stime).inMilliseconds;
+    debugPrint("codeExecution $etime 执行时长：$inMilliseconds 毫秒.");
+  }
+}

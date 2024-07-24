@@ -28,6 +28,7 @@ class _TestFunctionState extends State<TestFunction> {
     (name: "apply", action: onApply),
     (name: "防抖", action: onDebounce),
     (name: "防抖1", action: onDebounceOne),
+    (name: "函数执行时长", action: onExecution),
   ];
 
   @override
@@ -58,22 +59,26 @@ class _TestFunctionState extends State<TestFunction> {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            Text(arguments.toString()),
             Wrap(
-              children: items.map((e) {
-                return TextButton(onPressed: e.action, child: NText(e.name));
-              }).toList(),
+              runSpacing: 8,
+              children: [
+                ...items.map((e) {
+                  return TextButton(onPressed: e.action, child: NText(e.name));
+                }).toList(),
+                OutlinedButton(
+                  onPressed: testVoidCallback.debounce,
+                  child: NText("testVoidCallback.debounce"),
+                ),
+                OutlinedButton(
+                  onPressed: testVoidCallback.auth(onAuth: () {
+                    return false;
+                  }, onUnauth: () {
+                    ddlog("OutlinedButton - onUnauth");
+                  }),
+                  child: NText("testVoidCallback.auth"),
+                ),
+              ],
             ),
-            OutlinedButton(
-                onPressed: testVoidCallback.debounce,
-                child: NText("testVoidCallback.debounce")),
-            OutlinedButton(
-                onPressed: testVoidCallback.auth(onAuth: () {
-                  return false;
-                }, onUnauth: () {
-                  ddlog("OutlinedButton - onUnauth");
-                }),
-                child: NText("testVoidCallback.auth")),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               child: NSearchTextField(
@@ -163,6 +168,14 @@ class _TestFunctionState extends State<TestFunction> {
 
   void onDebounceOne() {
     testVoidCallbackOne.debounce();
+  }
+
+  Future<void> onExecution() async {
+    await tes().codeExecution();
+  }
+
+  Future<void> tes() async {
+    await Future.delayed(Duration(milliseconds: 1234));
   }
 
   void onChanged(val) {
