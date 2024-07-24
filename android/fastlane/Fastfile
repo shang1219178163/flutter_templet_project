@@ -18,13 +18,14 @@ platform :android do
   ## Common
   desc "打包 development 版本, to: pgy/fir"
   private_lane :build do |options|
+    type = options[:type] || 'Release'
 
     versionName = getVersion()
     versionCode = versionName.gsub(".", "");
 
     gradle(
       task: 'assemble',
-      build_type: options[:type] || 'Release',
+      build_type: type,
       # project_dir: project_dir,
         properties: {
           "android.injected.version.code" => versionCode,
@@ -35,10 +36,9 @@ platform :android do
 
   desc "打包并上传 develop 版本, to: pgy/fir"
   lane :release do |options|
-    platform = options[:to]
-    platform = platform ? platform : "pgy"
-
+    platform = options[:to] || "pgy"
     type = 'Release'
+
     build(type: type)
     filePath = rename(type: type);
 
@@ -52,10 +52,9 @@ platform :android do
 
   desc "打包并上传 develop 版本, to: pgy/fir"
   lane :develop do |options|
-    platform = options[:to]
-    platform = platform ? platform : "pgy"
-
+    platform = options[:to] || "pgy"
     type = options[:type] || 'Release'
+
     build(type: type)
     filePath = rename(type: type, ipaDir: DevelopmentDir);
 
@@ -70,8 +69,7 @@ platform :android do
 
   desc "打包并上传 develop 版本, to: pgy/fir"
   lane :upload do |options|
-    platform = options[:to]
-    platform = platform ? platform : "pgy"
+    platform = options[:to] || "pgy"
 
     fileName = getAppName()
 
