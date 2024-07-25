@@ -323,7 +323,8 @@ class _DataTypeDemoState extends State<DataTypeDemo> {
   }
 
   void onObject() {
-    testData();
+    // testData();
+    onVersion();
   }
 
   removeSame() {
@@ -403,5 +404,44 @@ class _DataTypeDemoState extends State<DataTypeDemo> {
     });
 
     ddlog("maxValue: $maxValue");
+  }
+
+  void onVersion() {
+    ddlog(compareVersion("1.0.33", "1.0.27")); // 输出 1
+    ddlog(compareVersion("1.0.0", "1.0.0")); // 输出 0
+    ddlog(compareVersion("1.0.1", "1.0.2")); // 输出 -1
+    ddlog(compareVersion("2.1", "2.1.0")); // 输出 0
+    ddlog(compareVersion("3.2.1", "3.2.0")); // 输出 1
+    ddlog(compareVersion("3.2.0", "3.2")); // 输出 0
+  }
+
+  int compareVersion(String version1, String version2) {
+    ddlog("__${version1.compareVersion(version2)}"); // 输出 -1
+
+    // 将版本号字符串分割成整数列表
+    List<int> v1 = version1.split('.').map(int.parse).toList();
+    List<int> v2 = version2.split('.').map(int.parse).toList();
+
+    // 获取最大长度
+    int maxLength = v1.length > v2.length ? v1.length : v2.length;
+
+    // 补全较短的版本号列表
+    for (var i = v1.length; i < maxLength; i++) {
+      v1.add(0);
+    }
+    for (var i = v2.length; i < maxLength; i++) {
+      v2.add(0);
+    }
+
+    // 比较每个部分的值
+    for (var i = 0; i < maxLength; i++) {
+      final result = v1[i].compareTo(v2[i]);
+      if (result != 0) {
+        return result;
+      }
+    }
+
+    // 如果所有部分都相等，则返回 0
+    return 0;
   }
 }

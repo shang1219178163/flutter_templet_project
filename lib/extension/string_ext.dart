@@ -206,6 +206,48 @@ extension StringExt on String {
     }
   }
 
+  /// 字符串版本对比
+  ///
+  /// - separator 分隔符;
+  /// - absent 长度不同时补位字符串;
+  /// - caseSensitive 是否大小写敏感;
+  ///
+  int compareVersion(
+    String version2, {
+    String separator = ".",
+    String absent = "0",
+    bool caseSensitive = true,
+  }) {
+    String version1 = this;
+    // 将版本号字符串分割成整数列表
+    List<String> v1 = version1.split(separator).toList();
+    List<String> v2 = version2.split(separator).toList();
+
+    // 获取最大长度
+    int maxLength = v1.length > v2.length ? v1.length : v2.length;
+
+    // 补全较短的版本号列表
+    for (var i = v1.length; i < maxLength; i++) {
+      v1.add(absent);
+    }
+    for (var i = v2.length; i < maxLength; i++) {
+      v2.add(absent);
+    }
+
+    // 比较每个部分的值
+    for (var i = 0; i < maxLength; i++) {
+      final a = caseSensitive ? v1[i] : v1[i].toLowerCase();
+      final b = caseSensitive ? v2[i] : v2[i].toLowerCase();
+      final result = a.compareTo(b);
+      if (result != 0) {
+        return result;
+      }
+    }
+
+    // 如果所有部分都相等，则返回 0
+    return 0;
+  }
+
   /// 处理字符串中包含数字排序异常的问题
   int compareCustom(String b) {
     var a = this;
