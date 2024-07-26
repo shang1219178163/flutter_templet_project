@@ -525,6 +525,7 @@ var list = <Tuple2<String, String>>[
   Tuple2(APPRouter.aeReportPage, "表单"),
   Tuple2(APPRouter.scaffoldDemo, "scaffoldDemo"),
   Tuple2(APPRouter.sliverMainAxisGroupDemoOne, "sliverMainAxisGroupDemoOne"),
+  Tuple2(APPRouter.listBodyDemo, "listBodyDemo"),
 ];
 
 var slivers = <Tuple2<String, String>>[
