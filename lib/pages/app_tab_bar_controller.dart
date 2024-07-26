@@ -29,8 +29,11 @@ class AppTabBarController extends GetxController {
     Get.until((route) => route.settings.name == APPRouter.appTabPage);
   }
 
+  PackageInfo? _packageInfo;
+  PackageInfo? get packageInfo => _packageInfo;
+
   // 获取应用版本信息并存储
-  Future<PackageInfo> getPackageInfo() async {
+  Future<void> getPackageInfo() async {
     var info = await PackageInfo.fromPlatform();
     // String appName = packageInfo.appName;// 医链健康执业版
     // String packageName = packageInfo.packageName;// com.yilian.ylHealthApp
@@ -41,7 +44,7 @@ class AppTabBarController extends GetxController {
     await CacheService().setString(CACHE_APP_NAME, info.appName);
     await CacheService().setString(CACHE_APP_PACKAGE_NAME, info.packageName);
     await CacheService().setString(CACHE_APP_VERSION, info.version);
-    return Future.value(info);
+    _packageInfo = info;
   }
 
   /// 获取 devTool 链接 serverUri

@@ -103,7 +103,7 @@ class _AppTabPageState extends State<AppTabPage>
     // );
 
     /// 保存app包信息
-    appController.getPackageInfo();
+    await appController.getPackageInfo();
 
     /// 获取 Observatory uri
     appController.getObservatoryUri();
