@@ -42,6 +42,7 @@ import 'package:flutter_templet_project/pages/demo/GetxControllerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/GetxRouteCreatePage.dart';
 import 'package:flutter_templet_project/pages/demo/HomeNavDemo.dart';
 import 'package:flutter_templet_project/pages/demo/IconConvertPage.dart';
+import 'package:flutter_templet_project/pages/demo/ListBodyDemo.dart';
 import 'package:flutter_templet_project/pages/demo/LocalImagePage.dart';
 import 'package:flutter_templet_project/pages/demo/LoginPage.dart';
 import 'package:flutter_templet_project/pages/demo/LoginPageOne.dart';
@@ -734,6 +735,7 @@ class APPRouter {
   static const aeReportPage = '/aeReportPage';
   static const scaffoldDemo = '/scaffoldDemo';
   static const sliverMainAxisGroupDemoOne = '/SliverMainAxisGroupDemoOne';
+  static const listBodyDemo = '/listBodyDemo';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -2171,6 +2173,10 @@ class AppPage {
     GetPage(
       name: APPRouter.sliverMainAxisGroupDemoOne,
       page: () => SliverMainAxisGroupDemoOne(),
+    ),
+    GetPage(
+      name: APPRouter.listBodyDemo,
+      page: () => ListBodyDemo(),
     ),
   ];
 }
