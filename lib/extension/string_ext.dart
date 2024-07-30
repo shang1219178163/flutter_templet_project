@@ -44,6 +44,17 @@ extension StringExt on String {
     return double.tryParse(this);
   }
 
+  /// 超过 max ...
+  String toShort({
+    int max = 10,
+  }) {
+    if (length < (max + 1)) {
+      return this;
+    }
+    final result = "${substring(0, max)}...";
+    return result;
+  }
+
   /// 移除左边
   String trimLeftChar(String char) {
     var result = this;
