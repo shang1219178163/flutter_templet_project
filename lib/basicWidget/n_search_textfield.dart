@@ -6,12 +6,10 @@
 //  Copyright © 2023/8/22 shang. All rights reserved.
 //
 
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/util/Debounce.dart';
-
 
 // ```
 // Expanded(
@@ -35,7 +33,6 @@ import 'package:flutter_templet_project/util/Debounce.dart';
 
 /// 搜索框封装
 class NSearchTextField extends StatefulWidget {
-
   const NSearchTextField({
     Key? key,
     this.title,
@@ -57,6 +54,7 @@ class NSearchTextField extends StatefulWidget {
   final String? title;
 
   final TextEditingController? controller;
+
   /// 默认请输入
   final String placeholder;
 
@@ -64,12 +62,15 @@ class NSearchTextField extends StatefulWidget {
 
   /// 默认浅灰色
   final Color? backgroundColor;
+
   /// 默认圆角 4px
   final BorderRadius? borderRadius;
 
   final EdgeInsetsGeometry padding;
+
   /// 默认0.5秒延迟
   final int? milliseconds;
+
   /// 回调
   final ValueChanged<String> onChanged;
   final ValueChanged<String>? onSubmitted;
@@ -77,8 +78,10 @@ class NSearchTextField extends StatefulWidget {
 
   /// 输入框焦点
   final FocusNode? focusNode;
+
   /// 焦点回调
   final ValueChanged<bool>? onFocus;
+
   /// 是否可以响应键盘
   final bool enabled;
 
@@ -87,10 +90,10 @@ class NSearchTextField extends StatefulWidget {
 }
 
 class NSearchTextFieldState extends State<NSearchTextField> {
+  late final _debounce =
+      Debounce(delay: Duration(milliseconds: widget.milliseconds ?? 500));
 
-  late final _debounce = Debounce(delay: Duration(milliseconds: widget.milliseconds ?? 500));
-
-  late final  _controller = widget.controller ?? TextEditingController();
+  late final _controller = widget.controller ?? TextEditingController();
 
   late final _focusNode = widget.focusNode ?? FocusNode();
 
@@ -147,25 +150,23 @@ class NSearchTextFieldState extends State<NSearchTextField> {
     EdgeInsetsGeometry? padding,
     bool enabled = true,
   }) {
+    // DefaultSelectionStyle(
+    //     cursorColor: fontsColor ?? fontColor, // 设置光标颜色
     return CupertinoTextField(
       focusNode: focusNode,
       controller: controller,
       padding: padding ?? EdgeInsets.zero,
       placeholder: placeholder,
-      placeholderStyle: placeholderStyle ?? const TextStyle(
-        fontSize: 14,
-        color: Color(0xFF737373),
-        fontWeight: FontWeight.w400,
-      ),
+      placeholderStyle: placeholderStyle ??
+          const TextStyle(
+            fontSize: 14,
+            color: Color(0xFF737373),
+            fontWeight: FontWeight.w400,
+          ),
       textAlignVertical: TextAlignVertical.center,
       clearButtonMode: OverlayVisibilityMode.editing,
       prefix: Padding(
-        padding: const EdgeInsets.only(
-            left: 15,
-            top: 9,
-            bottom: 9,
-            right: 9
-        ),
+        padding: const EdgeInsets.only(left: 15, top: 9, bottom: 9, right: 9),
         child: Image(
           image: "icon_search.png".toAssetImage(),
           width: 14,
@@ -201,12 +202,13 @@ class NSearchTextFieldState extends State<NSearchTextField> {
           onChanged.call(value);
         });
       },
-      onSubmitted: onSubmitted ?? (String value) {
-        _debounce(() {
-          // debugPrint('onSubmitted: $value');
-          onChanged.call(value);
-        });
-      },
+      onSubmitted: onSubmitted ??
+          (String value) {
+            _debounce(() {
+              // debugPrint('onSubmitted: $value');
+              onChanged.call(value);
+            });
+          },
       enabled: enabled,
     );
   }
