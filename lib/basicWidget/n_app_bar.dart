@@ -1,0 +1,101 @@
+import 'dart:io';
+
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_templet_project/extension/string_ext.dart';
+import 'package:flutter_templet_project/util/color_util.dart';
+
+/// 自定义顶部appBar
+class NAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const NAppBar({
+    super.key,
+    this.titleStr = '',
+    this.title,
+    this.centerTitle = true,
+    this.actions,
+    this.backgroundColor = bgColorF3F3F3,
+    this.titleSpacing,
+    this.bottom,
+    this.leading,
+    this.leadingWidth,
+    this.flexibleSpace,
+    this.leadingVisible = true,
+    this.systemOverlayStyle = SystemUiOverlayStyle.dark,
+    this.automaticallyImplyLeading = true,
+    this.elevation = 0,
+    this.toolbarHeight = kToolbarHeight,
+    this.onBack,
+  });
+
+  final String titleStr;
+  final Widget? title;
+  final bool centerTitle; //标题是否居中，默认居中
+  final List<Widget>? actions;
+  final Color? backgroundColor;
+  final Widget? flexibleSpace;
+  final double? leadingWidth;
+  final double? titleSpacing;
+  final Widget? leading;
+  final bool leadingVisible;
+  final PreferredSizeWidget? bottom;
+  final double elevation;
+  final double toolbarHeight;
+  final SystemUiOverlayStyle systemOverlayStyle; // ios系统风格
+  final bool automaticallyImplyLeading; //配合leading 使用，如果左侧不需要图标 ，设置false
+  /// 默认返回按钮事件
+  final VoidCallback? onBack;
+
+  @override
+  Size get preferredSize =>
+      Size.fromHeight(toolbarHeight + (bottom?.preferredSize.height ?? 0.0));
+
+  @override
+  Widget build(BuildContext context) {
+    // 默认标题
+    final defaultTitle = Text(
+      titleStr.toShort(),
+      style: TextStyle(
+        fontSize: 18,
+        fontWeight: FontWeight.w500,
+        color: fontColor,
+      ),
+      maxLines: 1,
+    );
+
+    // 默认返回按钮
+    final defaultBackButton = Visibility(
+      visible: leadingVisible,
+      child: IconButton(
+        onPressed: () {
+          if (onBack != null) {
+            onBack!();
+          } else {
+            Navigator.of(context).pop();
+          }
+        },
+        icon: Icon(
+          Icons.arrow_back_ios_new_outlined,
+          color: fontColor,
+          size: 18,
+        ),
+      ),
+    );
+
+    return AppBar(
+      title: title ?? defaultTitle,
+      backgroundColor: backgroundColor,
+      elevation: elevation,
+      scrolledUnderElevation: elevation,
+      flexibleSpace: flexibleSpace,
+      leading: leading ?? defaultBackButton,
+      titleSpacing: titleSpacing,
+      leadingWidth: leadingWidth,
+      systemOverlayStyle: systemOverlayStyle,
+      automaticallyImplyLeading: automaticallyImplyLeading,
+      centerTitle: centerTitle,
+      actions: actions,
+      toolbarHeight: toolbarHeight,
+      bottom: bottom,
+    );
+  }
+}
