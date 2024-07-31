@@ -80,7 +80,7 @@ class RequestManager extends BaseRequestAPI {
       },
       onResponse: (Response response, handler) {
         // print("响应之前");
-        ddlog(response.toDescription());
+        // ddlog(response.toDescription());
         return handler.next(response);
       },
       onError: (DioException e, handler) async {

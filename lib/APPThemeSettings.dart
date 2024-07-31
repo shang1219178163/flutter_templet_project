@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/list_ext.dart';
+import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:get/get.dart';
 
 class APPThemeService {
@@ -34,6 +35,7 @@ class APPThemeService {
     // textTheme: ThemeData.light().textTheme.copyWith(
     //     button: TextStyle(color: Colors.red)
     // ),//设置文本颜色为红色
+    scaffoldBackgroundColor: bgColor,
     appBarTheme: const AppBarTheme(
       elevation: 0,
     ),
@@ -56,10 +58,13 @@ class APPThemeService {
     ),
     bottomAppBarTheme: const BottomAppBarTheme(
       height: 60,
+      surfaceTintColor: Color(0xFFFFFFFF),
+      color: Color(0xFFFFFFFF),
     ),
     chipTheme: ChipThemeData(
-      pressElevation: 0,//不明原因未生效
+      pressElevation: 0,
       showCheckmark: false,
+      side: BorderSide.none,
     ),
     buttonTheme: ButtonThemeData(
       splashColor: Colors.transparent,
@@ -130,7 +135,7 @@ class APPThemeService {
       height: 60,
     ),
     chipTheme: ChipThemeData(
-      pressElevation: 0,//不明原因未生效
+      pressElevation: 0, //不明原因未生效
       showCheckmark: false,
     ),
   );
@@ -138,13 +143,12 @@ class APPThemeService {
   /// 自定义行为
   ButtonStyle buildButtonStyle() {
     return ButtonStyle(
-      elevation: MaterialStateProperty.resolveWith<double>((states) {
-        if (states.contains(MaterialState.pressed)) {
-          return 0; // 点击时阴影隐藏
-        }
-        return 0; // 正常时阴影隐藏
-      })
-    );
+        elevation: MaterialStateProperty.resolveWith<double>((states) {
+      if (states.contains(MaterialState.pressed)) {
+        return 0; // 点击时阴影隐藏
+      }
+      return 0; // 正常时阴影隐藏
+    }));
   }
 
   late ScrollController? actionScrollController = ScrollController();
@@ -166,44 +170,50 @@ class APPThemeService {
           },
           child: const Text('取消'),
         ),
-      )
+      ),
     );
   }
-  
+
   _buildActions({
     required BuildContext context,
     required void Function() cb,
   }) {
     return colors.map((e) {
-      final text = e.toString()
+      final text = e
+          .toString()
           .replaceAll('MaterialColor(primary value:', '')
           .replaceAll('MaterialAccentColor(primary value:', '')
           .replaceAll('))', ')');
 
       return Container(
-          color: e,
-          child: Column(
-            children: [
-              const SizedBox(height: 18,),
-              GestureDetector(
-                onTap: () {
-                  changeThemeLight(e);
-                  Navigator.pop(context);
-                  cb();
-                },
-                child: Text(
-                  text,
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.white,
-                    backgroundColor: e,
-                    decoration: TextDecoration.none,
-                  ),
+        color: e,
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 18,
+            ),
+            GestureDetector(
+              onTap: () {
+                changeThemeLight(e);
+                Navigator.pop(context);
+                cb();
+              },
+              child: Text(
+                text,
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.white,
+                  backgroundColor: e,
+                  decoration: TextDecoration.none,
                 ),
               ),
-              const SizedBox(height: 18,),
-            ],
-          ));
+            ),
+            const SizedBox(
+              height: 18,
+            ),
+          ],
+        ),
+      );
     }).toList();
   }
 
@@ -262,11 +272,14 @@ class APPThemeService {
         // primaryContrastingColor: Colors.red,
         // barBackgroundColor: Colors.red,
         // scaffoldBackgroundColor: Colors.red,
-      ), colorScheme: ThemeData.light().colorScheme.copyWith(secondary: e).copyWith(secondary: e),
+      ),
+      colorScheme: ThemeData.light()
+          .colorScheme
+          .copyWith(secondary: e)
+          .copyWith(secondary: e),
     );
     Get.changeTheme(themeData);
   }
-
 
   final List<Color> colors = [
     // Colors.black,
@@ -290,7 +303,6 @@ class APPThemeService {
     ...Colors.accents,
   ];
 
-  
   buildMaterial3Theme() {
     final color = Colors.blue;
     return ThemeData(
@@ -302,6 +314,7 @@ class APPThemeService {
         seedColor: color,
         primary: color,
         brightness: Brightness.light,
+
         ///影响 card 的表色，因为 M3 下是  applySurfaceTint ，在 Material 里
         surfaceTint: Colors.transparent,
       ),
@@ -314,6 +327,7 @@ class APPThemeService {
         titleTextStyle: Typography.dense2014.titleLarge,
         systemOverlayStyle: SystemUiOverlayStyle.light,
       ),
+
       /// 受到 iconThemeData.isConcrete 的印象，需要全参数才不会进入 fallback
       iconTheme: IconThemeData(
         size: 24.0,
@@ -324,12 +338,13 @@ class APPThemeService {
         color: Colors.white,
         opacity: 0.8,
       ),
+
       ///修改 FloatingActionButton的默认主题行为
       floatingActionButtonTheme: FloatingActionButtonThemeData(
-          foregroundColor: Colors.white,
-          backgroundColor: color,
-          shape: CircleBorder()
-        ),
-      );
+        foregroundColor: Colors.white,
+        backgroundColor: color,
+        shape: CircleBorder(),
+      ),
+    );
   }
 }

@@ -9,7 +9,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_scan_image.dart';
+import 'package:flutter_templet_project/basicWidget/n_scan_photo.dart';
 import 'package:flutter_templet_project/mixin/photo_picker_mixin.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:get/get.dart';

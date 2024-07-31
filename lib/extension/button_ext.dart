@@ -6,34 +6,11 @@
 //  Copyright © 7/1/21 shang. All rights reserved.
 //
 
-
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_pair.dart';
 
-// extension ButtonStyleExt on ButtonStyle {
-//
-//   ///边框线加圆角
-//   static outline({
-//     BorderRadius borderRadius = BorderRadius.zero,
-//     required Color borderColor,
-//   }) {
-//     return ButtonStyle(
-//       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-//         RoundedRectangleBorder(
-//           borderRadius: borderRadius,
-//           side: BorderSide(color: borderColor)
-//         ),
-//       ),
-//     );
-//   }
-//
-// }
-
-
-
-extension OutlinedButtonExt on OutlinedButton{
-
+extension OutlinedButtonExt on OutlinedButton {
   /// 自定义方法
   OutlinedButton copy({
     Key? key,
@@ -64,8 +41,7 @@ extension OutlinedButtonExt on OutlinedButton{
   }
 }
 
-extension TextButtonExt on TextButton{
-
+extension TextButtonExt on TextButton {
   /// 自定义方法
   TextButton copy({
     Key? key,
@@ -96,8 +72,7 @@ extension TextButtonExt on TextButton{
   }
 }
 
-extension ElevatedButtonExt on ElevatedButton{
-
+extension ElevatedButtonExt on ElevatedButton {
   /// 自定义方法
   ElevatedButton copy({
     Key? key,
@@ -128,22 +103,23 @@ extension ElevatedButtonExt on ElevatedButton{
   }
 }
 
-extension PopupMenuButtonExt on PopupMenuButton{
-
-  static fromList({
-    Widget? child,
-    required List<String> list,
-    Offset offset = Offset.zero,
-    void Function(String value)? callback
-  }) => PopupMenuButton<String>(
-    itemBuilder: (BuildContext context) => list.map((value) => PopupMenuItem(
-      value: "${list.indexOf(value)}",
-      child: Text(value),
-    )).toList(),
-    onSelected: callback,
-    offset: offset,
-    child: child,
-  );
+extension PopupMenuButtonExt on PopupMenuButton {
+  static fromList(
+          {Widget? child,
+          required List<String> list,
+          Offset offset = Offset.zero,
+          void Function(String value)? callback}) =>
+      PopupMenuButton<String>(
+        itemBuilder: (BuildContext context) => list
+            .map((value) => PopupMenuItem(
+                  value: "${list.indexOf(value)}",
+                  child: Text(value),
+                ))
+            .toList(),
+        onSelected: callback,
+        offset: offset,
+        child: child,
+      );
 
   /// itemBuilder: <PopupMenuButton<String>>[]
   static fromJson<T>({
@@ -152,74 +128,81 @@ extension PopupMenuButtonExt on PopupMenuButton{
     T? initialValue,
     Offset offset = Offset.zero,
     PopupMenuItemSelected<T>? onSelected,
-  }) => PopupMenuButton<T>(
-    itemBuilder: (context) {
-      return json.keys.map((key) => PopupMenuItem<T>(
-        value: json[key],
-        child: Text(key),
-      )).toList();
-    },
-    initialValue: initialValue,
-    onSelected: onSelected,
-    offset: offset,
-    child: child,
-  );
+  }) =>
+      PopupMenuButton<T>(
+        itemBuilder: (context) {
+          return json.keys
+              .map((key) => PopupMenuItem<T>(
+                    value: json[key],
+                    child: Text(key),
+                  ))
+              .toList();
+        },
+        initialValue: initialValue,
+        onSelected: onSelected,
+        offset: offset,
+        child: child,
+      );
 
   /// itemBuilder: <CheckedPopupMenuItem<String>>[]
-  static fromCheckList({
-    Widget? child,
-    required List<String> list,
-    int checkedIdx = 0, Offset
-    offset = Offset.zero,
-    void Function(String value)? callback
-  }) => PopupMenuButton<String>(
-    itemBuilder: (BuildContext context) => list.map((value) => CheckedPopupMenuItem<String>(
-      checked: checkedIdx == list.indexOf(value),
-      value: "${list.indexOf(value)}",
-      child: Text(value),
-    )).toList(),
-    onSelected: callback,
-    offset: offset,
-    shape: RoundedRectangleBorder(
-      side: BorderSide(
-        color: Colors.grey.withOpacity(0.7),
-      ),
-      borderRadius: BorderRadius.circular(5)
-    ),
-    child: child,
-  );
+  static fromCheckList(
+          {Widget? child,
+          required List<String> list,
+          int checkedIdx = 0,
+          Offset offset = Offset.zero,
+          void Function(String value)? callback}) =>
+      PopupMenuButton<String>(
+        itemBuilder: (BuildContext context) => list
+            .map((value) => CheckedPopupMenuItem<String>(
+                  checked: checkedIdx == list.indexOf(value),
+                  value: "${list.indexOf(value)}",
+                  child: Text(value),
+                ))
+            .toList(),
+        onSelected: callback,
+        offset: offset,
+        shape: RoundedRectangleBorder(
+            side: BorderSide(
+              color: Colors.grey.withOpacity(0.7),
+            ),
+            borderRadius: BorderRadius.circular(5)),
+        child: child,
+      );
 
   /// itemBuilder: <CheckedPopupMenuItem<String>>[]
-  static fromCheckJson({
-    Widget? child,
-    required Map<String, String> json,
-    required String checkedString,
-    Offset offset = Offset.zero,
-    void Function(String value)? callback
-  }) => PopupMenuButton<String>(
-    itemBuilder: (BuildContext context) => json.keys.map((key) => CheckedPopupMenuItem<String>(
-      checked: key == checkedString,
-      value: json[key],
-      child: Text(key),
-    )).toList(),
-    onSelected: callback,
-    offset: offset,
-    child: child,
-  );
+  static fromCheckJson(
+          {Widget? child,
+          required Map<String, String> json,
+          required String checkedString,
+          Offset offset = Offset.zero,
+          void Function(String value)? callback}) =>
+      PopupMenuButton<String>(
+        itemBuilder: (BuildContext context) => json.keys
+            .map((key) => CheckedPopupMenuItem<String>(
+                  checked: key == checkedString,
+                  value: json[key],
+                  child: Text(key),
+                ))
+            .toList(),
+        onSelected: callback,
+        offset: offset,
+        child: child,
+      );
 
   /// itemBuilder: <PopupMenuEntry<String>>[]
-  static fromEntryList({
-    Widget? child,
-    required List<String> list,
-    required int checkedIdx,
-    Offset offset = Offset.zero,
-    void Function(String value)? callback
-  }) {
-    var items = list.map((e) => CheckedPopupMenuItem<String>(
-      value: e,
-      checked: list.indexOf(e) == checkedIdx,
-      child: Text(e),
-    )).toList();
+  static fromEntryList(
+      {Widget? child,
+      required List<String> list,
+      required int checkedIdx,
+      Offset offset = Offset.zero,
+      void Function(String value)? callback}) {
+    var items = list
+        .map((e) => CheckedPopupMenuItem<String>(
+              value: e,
+              checked: list.indexOf(e) == checkedIdx,
+              child: Text(e),
+            ))
+        .toList();
 
     return PopupMenuButton<String>(
       itemBuilder: (BuildContext context) => items,
@@ -236,18 +219,19 @@ extension PopupMenuButtonExt on PopupMenuButton{
   }
 
   /// itemBuilder: <PopupMenuEntry<String>>[]
-  static fromEntryJson({
-    Widget? child,
-    required Map<String, String> json,
-    required String checkedString,
-    Offset offset = Offset.zero,
-    void Function(String value)? callback
-  }) {
-    var items = json.keys.map((e) => CheckedPopupMenuItem<String>(
-      value: e,
-      checked: e == checkedString,
-      child: Text(e),
-    )).toList();
+  static fromEntryJson(
+      {Widget? child,
+      required Map<String, String> json,
+      required String checkedString,
+      Offset offset = Offset.zero,
+      void Function(String value)? callback}) {
+    var items = json.keys
+        .map((e) => CheckedPopupMenuItem<String>(
+              value: e,
+              checked: e == checkedString,
+              child: Text(e),
+            ))
+        .toList();
 
     return PopupMenuButton<String>(
       itemBuilder: (context) => items,

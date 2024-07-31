@@ -93,19 +93,3 @@ extension DynamicExt<E> on E {
     return fn(this);
   }
 }
-
-// extension on dynamic{
-//
-//   dynamic or({required dynamic callback()}) async {
-//     return this ?? callback();
-//   }
-//
-// }
-
-// extension NullExt on Null{
-//
-//   dynamic or({required dynamic callback()}) async {
-//     return
-//   }
-//
-// }
