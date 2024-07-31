@@ -1,14 +1,15 @@
-
+import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/string_ext.dart';
+import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/mixin/photo_picker_mixin.dart';
+import 'package:flutter_templet_project/pages/demo/NScanPhotoDemo.dart';
+import 'package:flutter_templet_project/vendor/toast_util.dart';
+import 'package:get/get.dart';
 
+/// 图片扫描demo
 class ScanAnimationDemo extends StatefulWidget {
-
-  ScanAnimationDemo({
-    Key? key,
-    this.title
-  }) : super(key: key);
+  ScanAnimationDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -16,107 +17,75 @@ class ScanAnimationDemo extends StatefulWidget {
   State<ScanAnimationDemo> createState() => _ScanAnimationDemoState();
 }
 
-class _ScanAnimationDemoState extends State<ScanAnimationDemo> with SingleTickerProviderStateMixin{
-
+class _ScanAnimationDemoState extends State<ScanAnimationDemo>
+    with SingleTickerProviderStateMixin, PhotoPickerMixin {
   final _scrollController = ScrollController();
 
-  //扫描动画
-  AnimationController? _controller;
-  Animation? _animation;
-
-  // late double animateHeight = MediaQuery.of(context).size.height*4/3;
-  late double animateHeight = 500;
-  late final isScaning = ValueNotifier(false);
+  File? image;
 
   @override
   void initState() {
-    // TODO: implement initState
-    initAnimate();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () => debugPrint(e),)
-        ).toList(),
       ),
       body: buildBody(),
     );
   }
 
-  buildBody() {
-    return Scrollbar(
-      controller: _scrollController,
-      child: SingleChildScrollView(
-        controller: _scrollController,
-        child: Column(
-          children: [
-            Text("$widget"),
-
-            ValueListenableBuilder(
-               valueListenable: isScaning,
-                builder: (context,  value, child){
-
-                  return Opacity(
-                    opacity: value ? 1 : 0,
-                    child: AnimatedBuilder(
-                      animation: _controller!,
-                      child: Image(image: "icon_ocr_bar.png".toAssetImage(), fit: BoxFit.fitWidth, width: double.infinity),
-                      builder: (cxt, child) {
-
-                        return Container(
-                          height: 53,
-                          margin: EdgeInsets.fromLTRB(0, 0.0 + _animation!.value, 0, 0),
-                          child: child,
-                        );
-                      },
-                    ),
-                  );
-                }
-            ),
-          ],
+  Widget buildBody() {
+    Widget imgWidget = Container(
+      width: 100,
+      height: 100,
+      alignment: Alignment.center,
+      child: Image(
+        image: AssetImage("assets/images/icon_camera.png"),
+        width: 24,
+        height: 24,
+      ),
+    );
+    if (image != null) {
+      imgWidget = Image.file(image!);
+    }
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          color: Colors.white,
         ),
+        child: imgWidget,
       ),
     );
   }
 
-  initAnimate() async {
-    //创建AnimationController
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(seconds: 3),
-      reverseDuration: const Duration(seconds: 3),
-    );
-
-    //Tween
-    //.1创建位移的tween，值必须是double类型
-    _animation = Tween(begin: 0.0, end: animateHeight - 100).animate(_controller!);
-
-    //监听动画的状态改变
-    _controller?.addStatusListener((status) {
-      if (status == AnimationStatus.completed) {
-        _controller?.reverse();
-      } else if (status == AnimationStatus.dismissed) {
-        _controller?.forward();
-      }
-    });
-  }
-
-  void scanStart() {
-    isScaning.value = true;
-    _controller?.forward();
+  Future<void> onTap() async {
+    final asset = await onPicker(maxCount: 1);
+    if (asset == null) {
+      ToastUtil.show("取消选择");
+      return;
+    }
+    final file = await asset.firstOrNull?.file;
+    if (file == null) {
+      ToastUtil.show("获取文件路径失败");
+      return;
+    }
+    image = file;
     setState(() {});
-  }
-
-  void scanStop() {
-    _controller?.stop();
-    isScaning.value = false;
+    Get.to(
+      () => NScanPhotoDemo(arguments: {
+        "image": file,
+        "onScanStop": () {
+          ddlog(file.path);
+          Get.back();
+        }
+      }),
+    );
   }
 }

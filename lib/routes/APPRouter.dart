@@ -57,6 +57,7 @@ import 'package:flutter_templet_project/pages/demo/ReflectDemo.dart';
 import 'package:flutter_templet_project/pages/demo/RegExpDemo.dart';
 import 'package:flutter_templet_project/pages/demo/RiverPodPageCreate.dart';
 import 'package:flutter_templet_project/pages/demo/ScaffoldDemo.dart';
+import 'package:flutter_templet_project/pages/demo/ScanAnimationDemo.dart';
 import 'package:flutter_templet_project/pages/demo/SegmentedControlDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/SliverMainAxisGroupDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/StringTransformPage.dart';
@@ -736,6 +737,7 @@ class APPRouter {
   static const scaffoldDemo = '/scaffoldDemo';
   static const sliverMainAxisGroupDemoOne = '/SliverMainAxisGroupDemoOne';
   static const listBodyDemo = '/listBodyDemo';
+  static const scanAnimationDemo = '/scanAnimationDemo';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -2177,6 +2179,10 @@ class AppPage {
     GetPage(
       name: APPRouter.listBodyDemo,
       page: () => ListBodyDemo(),
+    ),
+    GetPage(
+      name: APPRouter.scanAnimationDemo,
+      page: () => ScanAnimationDemo(),
     ),
   ];
 }
