@@ -366,6 +366,16 @@ class NRefreshViewState<T> extends State<NRefreshView<T>>
 class NRefreshViewController<E> {
   NRefreshViewState<E>? _anchor;
 
+  void _attach(NRefreshViewState<E> anchor) {
+    _anchor = anchor;
+  }
+
+  void _detach(NRefreshViewState<E> anchor) {
+    if (_anchor == anchor) {
+      _anchor = null;
+    }
+  }
+
   List<E> get items {
     assert(_anchor != null);
     return _anchor!.items.value;
@@ -376,13 +386,15 @@ class NRefreshViewController<E> {
     _anchor!.onRefresh();
   }
 
-  void _attach(NRefreshViewState<E> anchor) {
-    _anchor = anchor;
+  /// 页码减一
+  void turnPrePage() {
+    assert(_anchor != null);
+    _anchor!.pageNo--;
   }
 
-  void _detach(NRefreshViewState<E> anchor) {
-    if (_anchor == anchor) {
-      _anchor = null;
-    }
+  /// 页码加一
+  void turnNextPage() {
+    assert(_anchor != null);
+    _anchor!.pageNo++;
   }
 }
