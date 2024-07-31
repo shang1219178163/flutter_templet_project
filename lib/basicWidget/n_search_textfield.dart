@@ -8,6 +8,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/util/Debounce.dart';
 
@@ -150,66 +151,67 @@ class NSearchTextFieldState extends State<NSearchTextField> {
     EdgeInsetsGeometry? padding,
     bool enabled = true,
   }) {
-    // DefaultSelectionStyle(
-    //     cursorColor: fontsColor ?? fontColor, // 设置光标颜色
-    return CupertinoTextField(
-      focusNode: focusNode,
-      controller: controller,
-      padding: padding ?? EdgeInsets.zero,
-      placeholder: placeholder,
-      placeholderStyle: placeholderStyle ??
-          const TextStyle(
-            fontSize: 14,
-            color: Color(0xFF737373),
-            fontWeight: FontWeight.w400,
+    return DefaultSelectionStyle(
+      cursorColor: context.primaryColor,
+      child: CupertinoTextField(
+        focusNode: focusNode,
+        controller: controller,
+        padding: padding ?? EdgeInsets.zero,
+        placeholder: placeholder,
+        placeholderStyle: placeholderStyle ??
+            const TextStyle(
+              fontSize: 14,
+              color: Color(0xFF737373),
+              fontWeight: FontWeight.w400,
+            ),
+        textAlignVertical: TextAlignVertical.center,
+        clearButtonMode: OverlayVisibilityMode.editing,
+        prefix: Padding(
+          padding: const EdgeInsets.only(left: 15, top: 9, bottom: 9, right: 9),
+          child: Image(
+            image: "icon_search.png".toAssetImage(),
+            width: 14,
+            height: 14,
           ),
-      textAlignVertical: TextAlignVertical.center,
-      clearButtonMode: OverlayVisibilityMode.editing,
-      prefix: Padding(
-        padding: const EdgeInsets.only(left: 15, top: 9, bottom: 9, right: 9),
-        child: Image(
-          image: "icon_search.png".toAssetImage(),
-          width: 14,
-          height: 14,
         ),
+        decoration: BoxDecoration(
+          color: backgroundColor,
+          borderRadius: BorderRadius.all(Radius.circular(4)),
+        ),
+        // suffix: InkWell(
+        //   onTap: onSuffixTap ?? (){
+        //     controller.clear();
+        //     onChanged.call("");
+        //   },
+        //   child: const Padding(
+        //     padding: EdgeInsets.only(
+        //       left: 6,
+        //       top: 10,
+        //       bottom: 10,
+        //       right: 12,
+        //     ),
+        //     child: Icon(
+        //       Icons.cancel,
+        //       color: Color(0xff999999),
+        //       size: 16,
+        //     ),
+        //   ),
+        // ),
+        onChanged: (String value) {
+          _debounce(() {
+            // debugPrint('searchText: $value');
+            onChanged.call(value);
+          });
+        },
+        onSubmitted: onSubmitted ??
+            (String value) {
+              _debounce(() {
+                // debugPrint('onSubmitted: $value');
+                onChanged.call(value);
+              });
+            },
+        enabled: enabled,
       ),
-      decoration: BoxDecoration(
-        color: backgroundColor,
-        borderRadius: BorderRadius.all(Radius.circular(4)),
-      ),
-      // suffix: InkWell(
-      //   onTap: onSuffixTap ?? (){
-      //     controller.clear();
-      //     onChanged.call("");
-      //   },
-      //   child: const Padding(
-      //     padding: EdgeInsets.only(
-      //       left: 6,
-      //       top: 10,
-      //       bottom: 10,
-      //       right: 12,
-      //     ),
-      //     child: Icon(
-      //       Icons.cancel,
-      //       color: Color(0xff999999),
-      //       size: 16,
-      //     ),
-      //   ),
-      // ),
-      onChanged: (String value) {
-        _debounce(() {
-          // debugPrint('searchText: $value');
-          onChanged.call(value);
-        });
-      },
-      onSubmitted: onSubmitted ??
-          (String value) {
-            _debounce(() {
-              // debugPrint('onSubmitted: $value');
-              onChanged.call(value);
-            });
-          },
-      enabled: enabled,
     );
   }
 }
