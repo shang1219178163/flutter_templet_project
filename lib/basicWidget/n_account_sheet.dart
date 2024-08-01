@@ -10,7 +10,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/cache/cache_service.dart';
+import 'package:flutter_templet_project/cache/file_manager.dart';
+import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
+
+final cacheKey = CACHE_ACCOUNT_List;
 
 /// 账号选择器
 class NAccountSheet extends StatefulWidget {
@@ -60,10 +64,37 @@ class _NAccountSheetState extends State<NAccountSheet> {
     super.initState();
     widget.controller?._attach(this);
 
-    var map = CacheService().getMap(CACHE_ACCOUNT_List) ?? <String, dynamic>{};
+    var map = CacheService().getMap(cacheKey) ?? <String, dynamic>{};
     if (map.isNotEmpty) {
       updateItems(map.entries.toList());
     }
+  }
+
+  /// 数据初始化
+  Future<void> initData() async {
+    await readFromSandbox();
+  }
+
+  /// 从沙盒读取数据
+  Future<void> readFromSandbox() async {
+    var map = CacheService().getMap(cacheKey) ?? <String, dynamic>{};
+    if (map.isNotEmpty && items.isNotEmpty) {
+      return;
+    }
+    final mapNew = await FileManager().readJson(fileName: cacheKey);
+    if (mapNew == null) {
+      return;
+    }
+
+    items.addAll(mapNew.entries);
+    updateItems(items);
+    CacheService().setMap(cacheKey, mapNew);
+  }
+
+  /// 保存数据到沙盒
+  Future<void> saveToSandbox({required Map<String, dynamic> map}) async {
+    final file = await FileManager().saveJson(fileName: cacheKey, map: map);
+    DLog.d("file: $file");
   }
 
   @override
@@ -176,25 +207,28 @@ class NAccountSheetController {
   }
 
   /// 添加账户
-  void addAccount({
+  Future<void> addAccount({
     required String account,
     required String pwd,
-  }) {
+  }) async {
     assert(_anchor != null);
-    var map = CacheService().getMap(CACHE_ACCOUNT_List) ?? <String, dynamic>{};
+    var map = CacheService().getMap(cacheKey) ?? <String, dynamic>{};
     map.putIfAbsent(account, () => pwd);
 
     _anchor?.items.forEach((e) {
       map.putIfAbsent(e.key, () => e.value);
     });
 
-    CacheService().setMap(CACHE_ACCOUNT_List, map);
+    CacheService().setMap(cacheKey, map);
     updateItems(map.entries.toList());
     _anchor?.updateCurrent(MapEntry(account, pwd));
+
+    final file = await _anchor?.saveToSandbox(map: map);
+    await _anchor?.readFromSandbox();
   }
 
   void clear() {
-    CacheService().remove(CACHE_ACCOUNT_List);
+    CacheService().remove(cacheKey);
     updateItems([]);
     _anchor?.updateCurrent(null);
   }
