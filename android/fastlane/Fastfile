@@ -71,12 +71,14 @@ platform :android do
   lane :upload do |options|
     platform = options[:to] || "pgy"
 
-    fileName = getAppName()
+    if filePath == nil
+      fileName = getAppName()
+      fileDir = getTargetDir(dir: DevelopmentDir)
+      filePath = "#{fileDir}/#{fileName}.apk"
+      UI.message "upload fileName: #{fileName}"
+    end
 
-    fileDir = DevelopmentDir
-    filePath = "#{fileDir}/#{fileName}.apk"
-    UI.message "upload fileName: #{fileName}"
-    UI.message "upload filePath: #{filePath}"
+    # UI.message "upload filePath: #{filePath}"
 
     if platform.start_with?"fir"
       uploadFir(filePath: filePath)
