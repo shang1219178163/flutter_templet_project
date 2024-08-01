@@ -6,15 +6,13 @@
 //  Copyright © 2023/10/18 shang. All rights reserved.
 //
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/type_util.dart';
 
 /// 关联组件
 class NTargetFollower extends StatefulWidget {
-
-  NTargetFollower({
-    Key? key,
+  const NTargetFollower({
+    super.key,
     this.targetAnchor = Alignment.topCenter,
     this.followerAnchor = Alignment.bottomCenter,
     this.showWhenUnlinked = true,
@@ -24,7 +22,7 @@ class NTargetFollower extends StatefulWidget {
     required this.target,
     required this.followerBuilder,
     this.entries,
-  }) : super(key: key);
+  });
 
   final Alignment targetAnchor;
   final Alignment followerAnchor;
@@ -43,15 +41,13 @@ class NTargetFollower extends StatefulWidget {
 
   final Widget target;
 
-  VoidCallbackWidgetBuilder? followerBuilder;
-
+  final VoidCallbackWidgetBuilder? followerBuilder;
 
   @override
   _NTargetFollowerState createState() => _NTargetFollowerState();
 }
 
 class _NTargetFollowerState extends State<NTargetFollower> {
-
   final LayerLink layerLink = LayerLink();
 
   late final _entries = widget.entries ?? <OverlayEntry>[];
@@ -81,7 +77,6 @@ class _NTargetFollowerState extends State<NTargetFollower> {
       ),
     );
   }
-
 
   void _toggleOverlay() {
     if (!show) {
@@ -114,7 +109,6 @@ class _NTargetFollowerState extends State<NTargetFollower> {
     indicatorOffset = details.localPosition;
     _overlayEntry.markNeedsBuild();
   }
-
 
   void updateIndicatorLongPress(LongPressMoveUpdateDetails details) {
     indicatorOffset = details.localPosition;
