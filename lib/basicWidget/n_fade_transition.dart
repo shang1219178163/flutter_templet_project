@@ -1,26 +1,27 @@
-
-
 import 'package:flutter/material.dart';
 
-
 class NFadeTransition extends StatefulWidget {
-
   NFadeTransition({
-    Key? key, 
+    super.key,
+    this.duration = const Duration(seconds: 1),
     required this.child,
-  }) : super(key: key);
+  });
 
   final Widget child;
+
+  final Duration duration;
 
   @override
   _NFadeTransitionState createState() => _NFadeTransitionState();
 }
 
-class _NFadeTransitionState extends State<NFadeTransition> with SingleTickerProviderStateMixin {
+class _NFadeTransitionState extends State<NFadeTransition>
+    with SingleTickerProviderStateMixin {
   late final _controller = AnimationController(
     vsync: this,
-    duration: Duration(seconds: 1),
+    duration: widget.duration,
   );
+
   late final Animation<double> _animation = Tween(
     begin: 0.0,
     end: 1.0,
@@ -29,7 +30,7 @@ class _NFadeTransitionState extends State<NFadeTransition> with SingleTickerProv
   @override
   void initState() {
     super.initState();
-    
+
     _controller.forward();
   }
 

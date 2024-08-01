@@ -17,6 +17,7 @@ class NScanPhoto extends StatefulWidget {
     super.key,
     required this.image,
     this.tween,
+    this.duration = const Duration(milliseconds: 2000),
     required this.onScanning,
     required this.onStop,
   });
@@ -26,6 +27,8 @@ class NScanPhoto extends StatefulWidget {
 
   /// 动画范围
   final Tween<double>? tween;
+
+  final Duration duration;
 
   /// 扫描中
   final Future<void> Function() onScanning;
@@ -107,8 +110,8 @@ class _NScanPhotoState extends State<NScanPhoto>
     //创建AnimationController
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 3),
-      reverseDuration: const Duration(seconds: 3),
+      duration: widget.duration ?? const Duration(seconds: 3),
+      reverseDuration: widget.duration ?? const Duration(seconds: 3),
     );
 
     //Tween

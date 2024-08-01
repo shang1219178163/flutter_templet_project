@@ -62,6 +62,6 @@ class _NScanPhotoDemoState extends State<NScanPhotoDemo> with PhotoPickerMixin {
   }
 
   Future<void> onAction() async {
-    await Future.delayed(Duration(milliseconds: 1000));
+    await Future.delayed(Duration(milliseconds: 3000));
   }
 }
