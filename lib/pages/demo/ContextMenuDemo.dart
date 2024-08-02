@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -9,11 +7,7 @@ import 'package:tuple/tuple.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ContextMenuDemo extends StatefulWidget {
-
-  ContextMenuDemo({
-    Key? key, 
-    this.title
-  }) : super(key: key);
+  ContextMenuDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -42,7 +36,7 @@ class _ContextMenuDemoState extends State<ContextMenuDemo> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("$this"),
+        title: Text("$widget"),
         actions: <Widget>[
           // PlatformSelector(
           //   onChangedPlatform: onChangedPlatform,
@@ -106,26 +100,17 @@ class _ContextMenuDemoState extends State<ContextMenuDemo> {
             ),
           ),
           NContextMenu(
-            items: const [
-              '保存',
-              '分享',
-              '编辑'
-            ],
-            onItem: (val){
+            items: const ['保存', '分享', '编辑'],
+            onItem: (val) {
               debugPrint(val);
             },
             child: Image.asset(
               'assets/images/404.png',
               height: 200,
-            )
+            ),
           ),
         ],
       ),
     );
   }
-
 }
-
-
-
-
