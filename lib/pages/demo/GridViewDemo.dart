@@ -48,7 +48,7 @@ class _GridViewDemoState extends State<GridViewDemo> {
           children: [
             buildNGridView(),
             Container(
-              height: 200,
+              height: 400,
               child: buildGridView(titles),
             ),
           ],
@@ -66,7 +66,7 @@ class _GridViewDemoState extends State<GridViewDemo> {
     return GridView.count(
       padding: EdgeInsets.all(15.0),
       //一行多少个
-      crossAxisCount: 5,
+      crossAxisCount: 4,
       //滚动方向
       scrollDirection: Axis.vertical,
       // 左右间隔
@@ -82,7 +82,7 @@ class _GridViewDemoState extends State<GridViewDemo> {
             decoration: BoxDecoration(
               // color: Colors.transparent,
               border: Border.all(color: Colors.blue),
-              borderRadius: BorderRadius.all(Radius.circular(0)),
+              borderRadius: BorderRadius.all(Radius.circular(8)),
             ),
             child: GridTileBar(
               title: Text(
@@ -116,6 +116,7 @@ class _GridViewDemoState extends State<GridViewDemo> {
           child: Container(
             decoration: BoxDecoration(
               color: primaryColor,
+              borderRadius: BorderRadius.all(Radius.circular(8)),
             ),
             child: Center(
               child: Text("GridTileBar"),
@@ -167,22 +168,23 @@ class _GridViewDemoState extends State<GridViewDemo> {
             alignment: Alignment.center,
             child: Text(
               "Card",
-              style: TextStyle(fontSize: 28, color: Colors.white),
+              style: TextStyle(fontSize: 18, color: Colors.white),
             ),
           ),
         ),
-        buildCard(context),
+        buildCard(),
       ],
     );
   }
 
-  Widget buildCard(BuildContext context) {
+  Widget buildCard() {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.transparent,
-        borderRadius: BorderRadius.all(Radius.circular(8)),
+        color: Colors.green,
+        borderRadius: BorderRadius.all(Radius.circular(16)),
       ),
       child: Card(
+        margin: EdgeInsets.zero,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
