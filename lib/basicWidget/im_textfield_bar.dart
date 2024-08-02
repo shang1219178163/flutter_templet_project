@@ -1,6 +1,3 @@
-
-
-
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -12,16 +9,16 @@ import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/mixin/keyboard_change_mixin.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 
-enum IMTextfieldBarEvent{
+enum IMTextfieldBarEvent {
   sound,
   emoji,
   add,
 }
 
-typedef EventWidgetBuilder = Widget Function(BuildContext context, IMTextfieldBarEvent event);
+typedef EventWidgetBuilder = Widget Function(
+    BuildContext context, IMTextfieldBarEvent event);
 
 class IMTextfieldBar extends StatefulWidget {
-
   IMTextfieldBar({
     Key? key,
     this.controller,
@@ -44,25 +41,29 @@ class IMTextfieldBar extends StatefulWidget {
   // final String? title;
   /// 控制器
   final TextEditingController? controller;
+
   /// 改变回调
   final ValueChanged<String> onChanged;
+
   /// 一般是键盘回车键/确定回调
   final ValueChanged<String>? onSubmitted;
+
   /// 提示语
   final String? hintText;
+
   /// 键盘类型
   final TextInputType? keyboardType;
 
-  Widget header;
+  final Widget header;
   // Widget footer;
 
-  EventWidgetBuilder? footerBuilder;
-  double footerMinHeight;
-  double footerMaxHeight;
+  final EventWidgetBuilder? footerBuilder;
+  final double footerMinHeight;
+  final double footerMaxHeight;
 
-  double spacing;
-  double runSpacing;
-  bool isVoice;
+  final double spacing;
+  final double runSpacing;
+  final bool isVoice;
 
   // ValueNotifier isKeyboardVisibleVN;
 
@@ -70,8 +71,8 @@ class IMTextfieldBar extends StatefulWidget {
   _IMTextfieldBarState createState() => _IMTextfieldBarState();
 }
 
-class _IMTextfieldBarState extends State<IMTextfieldBar> with WidgetsBindingObserver {
-
+class _IMTextfieldBarState extends State<IMTextfieldBar>
+    with WidgetsBindingObserver {
   var isExpand = ValueNotifier(false);
   var isExpandEmoji = ValueNotifier(false);
 
@@ -93,6 +94,7 @@ class _IMTextfieldBarState extends State<IMTextfieldBar> with WidgetsBindingObse
   @override
   void initState() {
     super.initState();
+
     /// 初始化
     WidgetsBinding.instance.addObserver(this);
   }
@@ -117,21 +119,26 @@ class _IMTextfieldBarState extends State<IMTextfieldBar> with WidgetsBindingObse
 
   @override
   Widget build(BuildContext context) {
-
-    final textfield = NTextField(
-      controller: widget.controller,
-      maxLines: 3,
-      keyboardType: TextInputType.multiline,
-      textInputAction: TextInputAction.done,
-      obscureText: false,
-      contentPadding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 0.h),
-      enabledBorder: OutlineInputBorder(
+    buildBorder() {
+      OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(4.w)), //边角
         borderSide: const BorderSide(
           color: Colors.transparent, //边框颜色为白色
           width: 1, //宽度为1
         ),
-      ),
+      );
+    }
+
+    final textfield = NTextField(
+      isCollapsed: true,
+      controller: widget.controller,
+      maxLines: 3,
+      keyboardType: TextInputType.multiline,
+      textInputAction: TextInputAction.done,
+      obscureText: false,
+      contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+      border: buildBorder(),
+      enabledBorder: buildBorder(),
       onChanged: widget.onChanged,
       onSubmitted: widget.onSubmitted,
     );
@@ -154,7 +161,6 @@ class _IMTextfieldBarState extends State<IMTextfieldBar> with WidgetsBindingObse
         //   EasyToast.showToast("说话时间太短");
         //   return;
         // }
-
       },
     );
 
@@ -163,7 +169,6 @@ class _IMTextfieldBarState extends State<IMTextfieldBar> with WidgetsBindingObse
       // padding: EdgeInsets.all(8),
       child: StatefulBuilder(
         builder: (context, setState) {
-
           return Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -242,32 +247,37 @@ class _IMTextfieldBarState extends State<IMTextfieldBar> with WidgetsBindingObse
                   ],
                 ),
               ),
-              if(widget.footerBuilder != null)ValueListenableBuilder<bool>(
-                 valueListenable: isExpandEmoji,
-                 builder: (context,  value, child){
-                   if (!value) {
-                     return const SizedBox();
-                   }
-                   if (isKeyboardVisibleVN.value) {
-                     FocusScope.of(context).unfocus();
-                   }
-                   return widget.footerBuilder?.call(context, IMTextfieldBarEvent.emoji) ?? SizedBox();
-                }
-              ),
-              if(widget.footerBuilder != null)ValueListenableBuilder<bool>(
-                  valueListenable: isExpand,
-                  builder: (context,  value, child){
-                    if (!value) {
-                      return const SizedBox();
-                    }
-                    if (isKeyboardVisibleVN.value) {
-                      FocusScope.of(context).unfocus();
-                    }
-                    return widget.footerBuilder?.call(context, IMTextfieldBarEvent.add) ?? SizedBox();
-                  }
-              ),
+              if (widget.footerBuilder != null)
+                ValueListenableBuilder<bool>(
+                    valueListenable: isExpandEmoji,
+                    builder: (context, value, child) {
+                      if (!value) {
+                        return const SizedBox();
+                      }
+                      if (isKeyboardVisibleVN.value) {
+                        FocusScope.of(context).unfocus();
+                      }
+                      return widget.footerBuilder
+                              ?.call(context, IMTextfieldBarEvent.emoji) ??
+                          SizedBox();
+                    }),
+              if (widget.footerBuilder != null)
+                ValueListenableBuilder<bool>(
+                    valueListenable: isExpand,
+                    builder: (context, value, child) {
+                      if (!value) {
+                        return const SizedBox();
+                      }
+                      if (isKeyboardVisibleVN.value) {
+                        FocusScope.of(context).unfocus();
+                      }
+                      return widget.footerBuilder
+                              ?.call(context, IMTextfieldBarEvent.add) ??
+                          SizedBox();
+                    }),
               SizedBox(
-                height: max(widget.runSpacing, MediaQuery.of(context).padding.bottom),
+                height: max(
+                    widget.runSpacing, MediaQuery.of(context).padding.bottom),
               ),
             ],
           );

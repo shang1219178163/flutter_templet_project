@@ -1,5 +1,3 @@
-
-
 import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
@@ -29,11 +27,7 @@ import 'package:get/get.dart';
 import 'package:tuple/tuple.dart';
 
 class IMChatPage extends StatefulWidget {
-
-  IMChatPage({
-    Key? key,
-    this.title
-  }) : super(key: key);
+  IMChatPage({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -41,14 +35,14 @@ class IMChatPage extends StatefulWidget {
   _IMChatPageState createState() => _IMChatPageState();
 }
 
-class _IMChatPageState extends State<IMChatPage> with
-    SingleTickerProviderStateMixin,
-    RouteAware,
-    WidgetsBindingObserver,
-    KeyboardChangeMixin,
-    SafeSetStateMixin,
-    BottomSheetPhrasesMixin {
-
+class _IMChatPageState extends State<IMChatPage>
+    with
+        SingleTickerProviderStateMixin,
+        RouteAware,
+        WidgetsBindingObserver,
+        KeyboardChangeMixin,
+        SafeSetStateMixin,
+        BottomSheetPhrasesMixin {
   bool get hideApp =>
       Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
 
@@ -60,16 +54,18 @@ class _IMChatPageState extends State<IMChatPage> with
 
   var dataList = ValueNotifier(<String>[]);
 
-  late final AnimationController _controller = AnimationController(duration: Duration(milliseconds: 350), vsync: this);
+  late final AnimationController _controller =
+      AnimationController(duration: Duration(milliseconds: 350), vsync: this);
   final Animatable<double> _easeInTween = CurveTween(curve: Curves.easeIn);
 
-  late final Animation<double> _heightFactor = Tween(begin: 0.0, end: 200.0).animate(_controller);
-  late final Animation<double> _heightFactorNew = _controller.drive(_easeInTween);
+  late final Animation<double> _heightFactor =
+      Tween(begin: 0.0, end: 200.0).animate(_controller);
+  late final Animation<double> _heightFactorNew =
+      _controller.drive(_easeInTween);
 
   var isExpand = false;
 
   final heightVN = ValueNotifier(0.0);
-
 
   final inputBarFooterItems = <Tuple3<String, IconData, String>>[
     const Tuple3("照片", Icons.insert_photo, ""),
@@ -80,7 +76,6 @@ class _IMChatPageState extends State<IMChatPage> with
     const Tuple3("其他1", Icons.access_alarm, ""),
     const Tuple3("其他2", Icons.color_lens_outlined, ""),
   ];
-
 
   static final RegExp emojiReg = RegExp(
       r'(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])');
@@ -117,7 +112,7 @@ class _IMChatPageState extends State<IMChatPage> with
     }
   }
 
-  initData(){
+  initData() {
     dataList.value = List.generate(20, (index) => "index_$index");
   }
 
@@ -126,19 +121,28 @@ class _IMChatPageState extends State<IMChatPage> with
     // _controller.forward();
     return Scaffold(
       backgroundColor: Colors.black12,
-      appBar: hideApp ? null : AppBar(
-        title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () {
-            debugPrint(e);
-            setState(() {});
-          }),).toList(),
-        elevation: 0,
-        // bottom: buildAppbarBottom(),
-      ),
+      appBar: hideApp
+          ? null
+          : AppBar(
+              title: Text(widget.title ?? "$widget"),
+              actions: [
+                'done',
+              ]
+                  .map(
+                    (e) => TextButton(
+                        child: Text(
+                          e,
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        onPressed: () {
+                          debugPrint(e);
+                          setState(() {});
+                        }),
+                  )
+                  .toList(),
+              elevation: 0,
+              // bottom: buildAppbarBottom(),
+            ),
       body: buildBody(),
       // body: buildListView(),
       // bottomSheet: buildInputBar(),
@@ -156,8 +160,7 @@ class _IMChatPageState extends State<IMChatPage> with
       preferredSize: Size.fromHeight(48),
       child: ValueListenableBuilder<List<String>>(
           valueListenable: dataList,
-          builder: (context,  value, child){
-
+          builder: (context, value, child) {
             // if (value.length < 3) {
             //   return SizedBox();
             // }
@@ -172,90 +175,92 @@ class _IMChatPageState extends State<IMChatPage> with
               alignment: Alignment.center,
               child: Text("${value.length}条数据"),
             );
-          }
-      ),
+          }),
     );
   }
 
   buildBody() {
     return SafeArea(
-      // bottom: false,
-      child: Column(
-        children: [
-          buildTips1(tips: "患者暂未购买问诊服务"),
-          buildTips2(tips: "患者暂未购买问诊服务"),
-          Expanded(
-            // flex: 1,
-            child: buildListView(),
-          ),
-          buildInputBar(),
-        ],
-      )
-    );
+        // bottom: false,
+        child: Column(
+      children: [
+        buildTips1(tips: "患者暂未购买问诊服务"),
+        buildTips2(tips: "患者暂未购买问诊服务"),
+        Expanded(
+          // flex: 1,
+          child: buildListView(),
+        ),
+        buildInputBar(),
+      ],
+    ));
   }
 
   Widget buildListView() {
     return ValueListenableBuilder<List<String>>(
-      valueListenable: dataList,
-      builder: (context, list, child) {
-        if (list.isEmpty) {
-          return SizedBox();
-        }
+        valueListenable: dataList,
+        builder: (context, list, child) {
+          if (list.isEmpty) {
+            return SizedBox();
+          }
 
-        return buildRefresh(
-          onRefresh: onLoad,
-          // onLoad: onRefresh,
-          child: MediaQuery.removePadding(
-            removeTop: true,
-            removeBottom: true,
-            context: context,
-            child: GestureDetector(
-              behavior: HitTestBehavior.translucent,
-              onTap: () {
-                debugPrint("onTap");
-              },
-              child: Scrollbar(
-                controller: _scrollController,
-                child: ListView.builder(
-                  controller: _scrollController,
-                  reverse: true,
-                  shrinkWrap: true,
-                  // physics: ClampingScrollPhysics(),
-                  // cacheExtent: 600,
-                  itemCount: list.length,
-                  itemBuilder: (context, index) {
-                    final e = list[index];
-
-                    final isOwner = index %2 == 0;
-                    return InkWell(
-                      onTap: (){
-                        debugPrint("index: ${index}, $e");
-                      },
-                      child: buildChatCell(
-                        modelIndex: index,
-                        imgUrl: R.image.urls[IntExt.random(max: R.image.urls.length, )],
-                        isOwner: isOwner,
-                        name: "路人甲",
-                        title: "title",
-                        contentChild: buildContentChild(
-                          modelIndex: index,
-                          isOwner: isOwner,
-                          // text: "buildContentChild",
-                          text: "聊一会" * IntExt.random(min: 1, max: 6,),
-                        ),
-                      ),
-                      // child: ListTile(title: Text(e),
-                      //   subtitle: Text("index: ${index}"),
-                      // ),
-                    );
+          return buildRefresh(
+              onRefresh: onLoad,
+              // onLoad: onRefresh,
+              child: MediaQuery.removePadding(
+                removeTop: true,
+                removeBottom: true,
+                context: context,
+                child: GestureDetector(
+                  behavior: HitTestBehavior.translucent,
+                  onTap: () {
+                    debugPrint("onTap");
                   },
+                  child: Scrollbar(
+                    controller: _scrollController,
+                    child: ListView.builder(
+                      controller: _scrollController,
+                      reverse: true,
+                      shrinkWrap: true,
+                      // physics: ClampingScrollPhysics(),
+                      // cacheExtent: 600,
+                      itemCount: list.length,
+                      itemBuilder: (context, index) {
+                        final e = list[index];
+
+                        final isOwner = index % 2 == 0;
+                        return InkWell(
+                          onTap: () {
+                            debugPrint("index: ${index}, $e");
+                          },
+                          child: buildChatCell(
+                            modelIndex: index,
+                            imgUrl: R.image.urls[IntExt.random(
+                              max: R.image.urls.length,
+                            )],
+                            isOwner: isOwner,
+                            name: "路人甲",
+                            title: "title",
+                            contentChild: buildContentChild(
+                              modelIndex: index,
+                              isOwner: isOwner,
+                              // text: "buildContentChild",
+                              text: "聊一会" *
+                                  IntExt.random(
+                                    min: 1,
+                                    max: 6,
+                                  ),
+                            ),
+                          ),
+                          // child: ListTile(title: Text(e),
+                          //   subtitle: Text("index: ${index}"),
+                          // ),
+                        );
+                      },
+                    ),
+                  ),
                 ),
-              ),
-            ),
-          )
-        );
-      }
-    );
+              ));
+        });
   }
 
   Widget buildChatCell({
@@ -297,15 +302,15 @@ class _IMChatPageState extends State<IMChatPage> with
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
       child: Column(
         children: [
-            Container(
-              padding: const EdgeInsets.only(left: 4, bottom: 12),
-              child: NText(
-                "${DateTime.now().toString().substring(0, 19)}",
-                color: Colors.black.withOpacity(0.5),
-                fontSize: 13,
-                fontWeight: FontWeight.w400,
-              ),
+          Container(
+            padding: const EdgeInsets.only(left: 4, bottom: 12),
+            child: NText(
+              "${DateTime.now().toString().substring(0, 19)}",
+              color: Colors.black.withOpacity(0.5),
+              fontSize: 13,
+              fontWeight: FontWeight.w400,
             ),
+          ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             // mainAxisSize: MainAxisSize.min,
@@ -317,9 +322,7 @@ class _IMChatPageState extends State<IMChatPage> with
                 child: Opacity(
                   opacity: !isOwner ? 1 : 0,
                   child: InkWell(
-                    onTap: () {
-
-                    },
+                    onTap: () {},
                     child: NNetworkImage(
                       url: imgUrl,
                       width: imgSize,
@@ -332,7 +335,9 @@ class _IMChatPageState extends State<IMChatPage> with
               Expanded(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: isOwner ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+                  crossAxisAlignment: isOwner
+                      ? CrossAxisAlignment.end
+                      : CrossAxisAlignment.start,
                   children: [
                     if (!isOwner)
                       Container(
@@ -390,11 +395,19 @@ class _IMChatPageState extends State<IMChatPage> with
       contentFontColor: contentFontColor,
     );
 
-
     late final menueItems = <Tuple2<String, String>>[
-      Tuple2("复制", "icon_copy.png",),
-      Tuple2("引用", "icon_quote.png",),
-      Tuple2("撤回", "icon_revoke.png",),
+      Tuple2(
+        "复制",
+        "icon_copy.png",
+      ),
+      Tuple2(
+        "引用",
+        "icon_quote.png",
+      ),
+      Tuple2(
+        "撤回",
+        "icon_revoke.png",
+      ),
     ];
 
     if (menueItems.isEmpty) {
@@ -423,19 +436,18 @@ class _IMChatPageState extends State<IMChatPage> with
               onHide();
             },
             child: NLongPressMenu(
-              items: menueItems.map((e) => Tuple2(e.item1, e.item2.toAssetImage())).toList(),
-              onItem: (Tuple2<String, AssetImage> t) {
-                onHide();
-                debugPrint("onChanged_$t");
-                ToastUtil.show(t.item1);
-              }
-            ),
+                items: menueItems
+                    .map((e) => Tuple2(e.item1, e.item2.toAssetImage()))
+                    .toList(),
+                onItem: (Tuple2<String, AssetImage> t) {
+                  onHide();
+                  debugPrint("onChanged_$t");
+                  ToastUtil.show(t.item1);
+                }),
           );
-        }
-    );
+        });
     return child;
   }
-
 
   Widget buildCellChild({
     required bool? isOwner,
@@ -452,7 +464,9 @@ class _IMChatPageState extends State<IMChatPage> with
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 9),
       constraints: const BoxConstraints(minHeight: 37),
-      margin: isOwner == true ? const EdgeInsets.only(right: 6) : const EdgeInsets.only(left: 6),
+      margin: isOwner == true
+          ? const EdgeInsets.only(right: 6)
+          : const EdgeInsets.only(left: 6),
       decoration: BoxDecoration(
         color: contentBgColor,
         borderRadius: borderRadius,
@@ -464,14 +478,12 @@ class _IMChatPageState extends State<IMChatPage> with
           if (isOwner != true && image != null) image,
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: NText(
-                text ?? "",
-              // textAlign: TextAlign.right,
+            child: NText(text ?? "",
+                // textAlign: TextAlign.right,
                 fontSize: 15,
                 color: contentFontColor,
                 maxLines: 100,
-                fontWeight: FontWeight.w500
-            ),
+                fontWeight: FontWeight.w500),
           ),
           if (isOwner == true && image != null) image,
         ],
@@ -499,7 +511,9 @@ class _IMChatPageState extends State<IMChatPage> with
         color: contentBgColor,
         borderRadius: borderRadius,
       ),
-      margin: isOwner ? const EdgeInsets.only(right: 6) : const EdgeInsets.only(left: 6),
+      margin: isOwner
+          ? const EdgeInsets.only(right: 6)
+          : const EdgeInsets.only(left: 6),
       constraints: const BoxConstraints(minHeight: 37),
       // constraints: BoxConstraints().loosen(),
       child: NText(
@@ -530,23 +544,17 @@ class _IMChatPageState extends State<IMChatPage> with
         switch (event) {
           case IMTextfieldBarEvent.add:
             {
-              child = buildIMBarFooter(
-                  cb: (index) {
-                    debugPrint("cb:$index");
-                    choosePhrases(
-                        cb: (val) {
-                          debugPrint(val.phrases ?? "-");
-                        },
-                        onCancel: (){
-                          Navigator.of(context).pop();
-                        },
-                        onAdd: () {
-                          debugPrint("onAdd");
-                          Navigator.of(context).pop();
-                        }
-                    );
-                  }
-              );
+              child = buildIMBarFooter(cb: (index) {
+                debugPrint("cb:$index");
+                choosePhrases(cb: (val) {
+                  debugPrint(val.phrases ?? "-");
+                }, onCancel: () {
+                  Navigator.of(context).pop();
+                }, onAdd: () {
+                  debugPrint("onAdd");
+                  Navigator.of(context).pop();
+                });
+              });
             }
             break;
           case IMTextfieldBarEvent.emoji:
@@ -559,7 +567,8 @@ class _IMChatPageState extends State<IMChatPage> with
                   onChanged: (val) {
                     debugPrint("onChanged: ${val}");
                     _inputController.text += val;
-                    debugPrint("onChanged _inputController.text: ${_inputController.text}");
+                    debugPrint(
+                        "onChanged _inputController.text: ${_inputController.text}");
 
                     _inputController.moveCursorEnd();
                   },
@@ -570,9 +579,10 @@ class _IMChatPageState extends State<IMChatPage> with
 
                     _inputController.deleteChar();
 
-                    debugPrint("_inputController.text: ${_inputController.text}");
+                    debugPrint(
+                        "_inputController.text: ${_inputController.text}");
                   },
-                  onSend: (val){
+                  onSend: (val) {
                     debugPrint("onSend: ${val}");
                     if (_inputController.text.trim().isEmpty) {
                       return;
@@ -616,7 +626,6 @@ class _IMChatPageState extends State<IMChatPage> with
       ),
       onRefresh: onRefresh,
       onLoad: onLoad,
-
       child: child,
     );
   }
@@ -776,56 +785,58 @@ class _IMChatPageState extends State<IMChatPage> with
         left: 16.w,
         right: 16.w,
       ),
-      child: LayoutBuilder(
-        builder: (context, constraints){
-          final runSpacing = 16.w;
+      child: LayoutBuilder(builder: (context, constraints) {
+        final runSpacing = 16.w;
 
-          // final spacing = 16.w;
-          // final itemWidth = ((constraints.maxWidth - spacing * (rowCount - 1))/rowCount).truncateToDouble();
+        // final spacing = 16.w;
+        // final itemWidth = ((constraints.maxWidth - spacing * (rowCount - 1))/rowCount).truncateToDouble();
 
-          final itemWidth = 64.w;
-          final spacing = (constraints.maxWidth - itemWidth * rowCount) /(rowCount - 1).truncateToDouble();
-          return Wrap(
-            spacing: spacing,
-            runSpacing: runSpacing,
-            children: inputBarFooterItems.map((e) {
-
-              final i = inputBarFooterItems.indexOf(e);
-              return InkWell(
-                onTap: () => cb.call(i),
-                child: SizedBox(
-                  width: itemWidth,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Container(
-                        width: 54.w,
-                        height: 54.w,
-                        // padding: EdgeInsets.all(6.w),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.all(Radius.circular(14.w)),
-                        ),
-                        child: Icon(e.item2, size: 30,),
+        final itemWidth = 64.w;
+        final spacing = (constraints.maxWidth - itemWidth * rowCount) /
+            (rowCount - 1).truncateToDouble();
+        return Wrap(
+          spacing: spacing,
+          runSpacing: runSpacing,
+          children: inputBarFooterItems.map((e) {
+            final i = inputBarFooterItems.indexOf(e);
+            return InkWell(
+              onTap: () => cb.call(i),
+              child: SizedBox(
+                width: itemWidth,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Container(
+                      width: 54.w,
+                      height: 54.w,
+                      // padding: EdgeInsets.all(6.w),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(14.w)),
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(top: 8.w),
-                        child: Text(e.item1,
-                          style: TextStyle(
-                            fontSize: 12.sp,
-                            fontWeight: FontWeight.w500,
-                            color: fontColor,
-                          ),
+                      child: Icon(
+                        e.item2,
+                        size: 30,
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 8.w),
+                      child: Text(
+                        e.item1,
+                        style: TextStyle(
+                          fontSize: 12.sp,
+                          fontWeight: FontWeight.w500,
+                          color: fontColor,
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              );
-            }).toList(),
-          );
-        }
-      ),
+              ),
+            );
+          }).toList(),
+        );
+      }),
     );
   }
 

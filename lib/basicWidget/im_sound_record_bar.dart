@@ -6,7 +6,6 @@
 //  Copyright © 2023/9/23 shang. All rights reserved.
 //
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/im_sound_recording_page.dart';
@@ -17,11 +16,9 @@ import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:flutter_templet_project/vendor/vibration_service.dart';
 
-
 /// 音频录制(按住说话)组件
 class IMSoundRecordBar extends StatefulWidget {
-
-  IMSoundRecordBar({
+  const IMSoundRecordBar({
     Key? key,
     this.height = 48,
     required this.onRecordStart,
@@ -29,11 +26,11 @@ class IMSoundRecordBar extends StatefulWidget {
     // required this.onRecordCancel,
   }) : super(key: key);
 
-  double height;
+  final double height;
 
-  VoidCallback onRecordStart;
+  final VoidCallback onRecordStart;
 
-  ValueChanged<bool> onRecordEnd;
+  final ValueChanged<bool> onRecordEnd;
 
   // VoidCallback onRecordCancel;
 
@@ -42,13 +39,11 @@ class IMSoundRecordBar extends StatefulWidget {
 }
 
 class _IMSoundRecordBarState extends State<IMSoundRecordBar> {
-
   late final screeenSize = MediaQuery.of(context).size;
 
   final cancelVN = ValueNotifier(false);
 
   final bottomBarHeight = 100.0;
-
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +51,10 @@ class _IMSoundRecordBarState extends State<IMSoundRecordBar> {
       onPanStart: (e) {
         debugPrint("onPanStart");
         // Vibration.vibrate(amplitude: 128, duration: 100);
-        VibrationService.vibrate(duration: 100, amplitude: 128,);
+        VibrationService.vibrate(
+          duration: 100,
+          amplitude: 128,
+        );
 
         cancelVN.value = false;
         showEntry(
@@ -155,5 +153,4 @@ class _IMSoundRecordBarState extends State<IMSoundRecordBar> {
     //   ),
     // );
   }
-
 }

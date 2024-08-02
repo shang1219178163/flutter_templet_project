@@ -1,10 +1,7 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
-
 
 // Padding(
 //   padding: EdgeInsets.all(16),
@@ -52,6 +49,7 @@ class NTextField extends StatefulWidget {
     this.fillColor = bgColor,
     this.focusColor = Colors.white,
     this.radius = 4,
+    this.border,
     this.enabledBorder,
     this.focusedBorder,
     this.prefixIconBuilder,
@@ -83,8 +81,9 @@ class NTextField extends StatefulWidget {
 
   /// 提示语
   final String? hintText;
-  
+
   final TextStyle? hintStyle;
+
   /// 最小行数
   final int? minLines;
 
@@ -97,6 +96,7 @@ class NTextField extends StatefulWidget {
   final TextInputAction? textInputAction;
 
   final bool autofocus;
+
   /// 内容边距
   final EdgeInsetsGeometry? contentPadding;
 
@@ -112,17 +112,16 @@ class NTextField extends StatefulWidget {
   /// 输入框焦点
   final FocusNode? focusNode;
 
-  InputBorder? enabledBorder;
-  InputBorder? focusedBorder;
+  final InputBorder? border;
+
+  final InputBorder? enabledBorder;
+  final InputBorder? focusedBorder;
 
   /// 左边组件构造器
-  Widget Function(bool isFocus)? prefixIconBuilder;
+  final Widget Function(bool isFocus)? prefixIconBuilder;
 
   /// 右边组件构造器
-  Widget Function(
-      bool isFocus,
-      bool isCloseEye,
-      )? suffixIconBuilder;
+  final Widget Function(bool isFocus, bool isCloseEye)? suffixIconBuilder;
 
   // true代表取消textfield最小高度限制
   final bool? isCollapsed;
@@ -134,7 +133,8 @@ class NTextField extends StatefulWidget {
 }
 
 class _NTextFieldState extends State<NTextField> {
-  late final textEditingController = widget.controller ?? TextEditingController(text: widget.value);
+  late final textEditingController =
+      widget.controller ?? TextEditingController(text: widget.value);
 
   final current = ValueNotifier("");
 
@@ -179,53 +179,60 @@ class _NTextFieldState extends State<NTextField> {
         widget.onSubmitted?.call(val);
         textEditingController.clear();
       },
-      obscureText: widget.obscureText != null ? widget.obscureText! : isCloseEye,
+      obscureText:
+          widget.obscureText != null ? widget.obscureText! : isCloseEye,
       keyboardType: widget.keyboardType,
       textInputAction: widget.textInputAction,
       autofocus: widget.autofocus,
-      style: widget.style ?? const TextStyle(
-        fontSize: 14,
-        fontWeight: FontWeight.w400,
-        color: fontColor,
-      ),
+      style: widget.style ??
+          const TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w400,
+            color: fontColor,
+          ),
       inputFormatters: widget.inputFormatters,
       decoration: InputDecoration(
         filled: true,
         // fillColor: widget.focusColor,
         fillColor: widget.fillColor,
         focusColor: widget.focusColor,
-        contentPadding: widget.contentPadding ?? const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-        border: InputBorder.none,
-        enabledBorder: widget.readOnly ? null : widget.enabledBorder ?? buildEnabledBorder(radus: widget.radius),
-        focusedBorder: widget.readOnly ? null : widget.focusedBorder ?? buildFocusedBorder(radus: widget.radius),
+        contentPadding: widget.contentPadding ??
+            const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+        border: widget.border ?? InputBorder.none,
+        enabledBorder: widget.readOnly
+            ? null
+            : widget.enabledBorder ?? buildEnabledBorder(radus: widget.radius),
+        focusedBorder: widget.readOnly
+            ? null
+            : widget.focusedBorder ?? buildFocusedBorder(radus: widget.radius),
         hintText: widget.hintText,
         hintStyle: widget.hintStyle,
         isCollapsed: widget.isCollapsed ?? false,
         prefixIcon: widget.prefixIconBuilder == null
             ? null
             : ValueListenableBuilder<bool>(
-            valueListenable: hasFocusVN,
-            builder: (_, isFocus, child) {
-              return widget.prefixIconBuilder?.call(isFocus) ?? SizedBox();
-            }),
+                valueListenable: hasFocusVN,
+                builder: (_, isFocus, child) {
+                  return widget.prefixIconBuilder?.call(isFocus) ?? SizedBox();
+                }),
         suffixIcon: widget.suffixIconBuilder == null
             ? null
             : ValueListenableBuilder<bool>(
-            valueListenable: hasFocusVN,
-            builder: (_, isFocus, child) {
-              return IconButton(
-                focusColor: context.primaryColor,
-                icon: widget.suffixIconBuilder?.call(
-                  isFocus,
-                  isCloseEye,
-                ) ??
-                    SizedBox(),
-                onPressed: () {
-                  isCloseEye = !isCloseEye;
-                  setState(() {});
-                },
-              );
-            }),
+                valueListenable: hasFocusVN,
+                builder: (_, isFocus, child) {
+                  return IconButton(
+                    focusColor: context.primaryColor,
+                    icon: widget.suffixIconBuilder?.call(
+                          isFocus,
+                          isCloseEye,
+                        ) ??
+                        SizedBox(),
+                    onPressed: () {
+                      isCloseEye = !isCloseEye;
+                      setState(() {});
+                    },
+                  );
+                }),
       ),
     );
   }
