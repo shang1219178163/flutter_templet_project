@@ -74,6 +74,7 @@ class NFooterButtonBar extends StatelessWidget {
     if (hideCancel && hideConfirm) {
       return const SizedBox();
     }
+
     return Container(
       padding: padding ??
           EdgeInsets.only(
@@ -84,8 +85,11 @@ class NFooterButtonBar extends StatelessWidget {
           ),
       decoration: decoration ??
           const BoxDecoration(
-              color: Colors.white,
-              border: Border(top: BorderSide(color: Color(0xffE5E5E5)))),
+            color: Colors.white,
+            border: Border(
+              top: BorderSide(width: 0.5, color: Color(0xffE5E5E5)),
+            ),
+          ),
       child: Column(
         children: [
           header ?? const SizedBox(),
@@ -108,10 +112,7 @@ class NFooterButtonBar extends StatelessWidget {
               onTap: onCancelTap,
             ),
           ),
-        if (!hideCancel && !hideConfirm)
-          SizedBox(
-            width: gap,
-          ),
+        if (!hideCancel && !hideConfirm) SizedBox(width: gap),
         if (!hideConfirm)
           Expanded(
             child: NButtonConfirm(
