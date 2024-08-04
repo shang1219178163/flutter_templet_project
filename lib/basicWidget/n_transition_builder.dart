@@ -6,15 +6,13 @@
 //  Copyright © 2023/10/16 shang. All rights reserved.
 //
 
-
-
 import 'package:flutter/material.dart';
 
-typedef AnimationWidgeBuilder<T> = Widget Function(BuildContext context, AnimationController controller, Animation<T> _animation);
+typedef AnimationWidgeBuilder<T> = Widget Function(BuildContext context,
+    AnimationController controller, Animation<T> animation);
 
 /// Transition 动画封装
 class NTransitionBuilder extends StatefulWidget {
-
   NTransitionBuilder({
     Key? key,
     this.duration = const Duration(milliseconds: 350),
@@ -30,9 +28,8 @@ class NTransitionBuilder extends StatefulWidget {
   _NTransitionBuilderState createState() => _NTransitionBuilderState();
 }
 
-class _NTransitionBuilderState extends State<NTransitionBuilder> with SingleTickerProviderStateMixin {
-
-
+class _NTransitionBuilderState extends State<NTransitionBuilder>
+    with SingleTickerProviderStateMixin {
   late final _duration = widget.duration ?? Duration(milliseconds: 350);
 
   late final _controller = AnimationController(
@@ -68,12 +65,11 @@ class _NTransitionBuilderState extends State<NTransitionBuilder> with SingleTick
   }
 
   /// 开始动画
-  startAnimation({bool reverse = false}) async  {
+  startAnimation({bool reverse = false}) async {
     if (!reverse) {
       await _controller.forward(from: _controller.lowerBound);
     } else {
       await _controller.reverse(from: _controller.upperBound);
     }
   }
-
 }

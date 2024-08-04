@@ -1,11 +1,16 @@
-import 'dart:math';
+//
+//  XBoxWidget.dart
+//  flutter_templet_project
+//
+//  Created by shang on 2024/8/4 08:55.
+//  Copyright © 2024/8/4 shang. All rights reserved.
+//
+
 import 'dart:ui' as ui;
 
-import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-
+import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/edge_insets_ext.dart';
-
 
 /// 组件通用外观设置
 class XBoxWidget extends StatelessWidget {
@@ -83,44 +88,6 @@ class XBoxWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _buildBody(
-      width: width,
-      height: height,
-      blur: blur,
-      bgBlur: bgBlur,
-      opacity: opacity,
-      margin: margin,
-      padding: padding,
-      border: border,
-      borderRadius: borderRadius,
-      bgUrl: bgUrl,
-      bgColor: bgColor,
-      bgGradient: bgGradient,
-      boxShadow: boxShadow,
-      child: child,
-      imageFit: imageFit,
-      hideBlur: hideBlur
-    );
-  }
-
-  _buildBody({
-    double? width,
-    double? height,
-    double blur = 0,
-    double bgBlur = 0,
-    double? opacity = 1.0,
-    EdgeInsets margin = const EdgeInsets.all(0),
-    EdgeInsets padding = const EdgeInsets.all(0),
-    BoxBorder? border,
-    BorderRadius? borderRadius,
-    Color? bgColor,
-    Gradient? bgGradient,
-    String? bgUrl,
-    BoxFit? imageFit,
-    List<BoxShadow>? boxShadow,
-    required Widget child,
-    bool? hideBlur = false
-  }) {
     // add test
     // bgGradient = LinearGradient(
     //     colors: [Colors.red, Colors.green],
@@ -130,18 +97,19 @@ class XBoxWidget extends StatelessWidget {
     // add test
     // bgUrl = 'https://i.zgjm.org/top/20190526/3264-1.jpg';
     //bgUrl 不为空则为背景图片
-    var decorationImage = bgUrl != null && bgUrl.startsWith('http')
+    var decorationImage = bgUrl?.startsWith('http') == true
         ? DecorationImage(
 //         image: NetworkImage(bgUrl),
-          image: CachedNetworkImageProvider(bgUrl),
-          fit: imageFit,
-    ) : null;
+            image: CachedNetworkImageProvider(bgUrl!),
+            fit: imageFit,
+          )
+        : null;
 
     if (boxShadow != null &&
-        boxShadow.isNotEmpty &&
+        boxShadow!.isNotEmpty &&
         width != null &&
         height != null) {
-      var shadow = boxShadow[0];
+      var shadow = boxShadow![0];
 
       /// 留出阴影空间
       margin = margin.mergeShadow(shadow: shadow);
@@ -155,13 +123,12 @@ class XBoxWidget extends StatelessWidget {
     // blur = 10;//add test
 
     final decoration = BoxDecoration(
-      borderRadius: borderRadius,
-      gradient: bgGradient,
-      boxShadow: boxShadow,
-      image: decorationImage,
-      border: border,
-      color: bgColor
-    );
+        borderRadius: borderRadius,
+        gradient: bgGradient,
+        boxShadow: boxShadow,
+        image: decorationImage,
+        border: border,
+        color: bgColor);
 
     // if (hideBlur == true) {
     //   return Container(
@@ -180,24 +147,23 @@ class XBoxWidget extends StatelessWidget {
       child: Opacity(
         opacity: opacityNew,
         child: Container(
-          width: width,
-          height: height,
-          margin: margin.isNonNegative ? margin : EdgeInsets.zero,
-          decoration: decoration,
-          child: ClipRRect(
-            borderRadius: borderRadius ?? BorderRadius.zero,
-            child: BackdropFilter(
-              filter: ui.ImageFilter.blur(sigmaX: bgBlur, sigmaY: bgBlur),
-              child: Container(
-                constraints: BoxConstraints.expand(),
-                decoration: BoxDecoration(
-                  borderRadius: borderRadius,
+            width: width,
+            height: height,
+            margin: margin.isNonNegative ? margin : EdgeInsets.zero,
+            decoration: decoration,
+            child: ClipRRect(
+              borderRadius: borderRadius ?? BorderRadius.zero,
+              child: BackdropFilter(
+                filter: ui.ImageFilter.blur(sigmaX: bgBlur, sigmaY: bgBlur),
+                child: Container(
+                  constraints: BoxConstraints.expand(),
+                  decoration: BoxDecoration(
+                    borderRadius: borderRadius,
+                  ),
+                  child: Container(padding: padding, child: child),
                 ),
-                child: Container(padding: padding, child: child),
               ),
-            ),
-          )
-        ),
+            )),
       ),
     );
 
@@ -209,23 +175,22 @@ class XBoxWidget extends StatelessWidget {
       children: [
         opacity2,
         Positioned(
-          left: margin.left,
-          top: margin.top,
-          right: margin.right,
-          bottom: margin.bottom,
-          child: ClipRRect(
-            borderRadius: borderRadius ?? BorderRadius.zero,
-            child: BackdropFilter(
-              filter: ui.ImageFilter.blur(
-                sigmaX: blur,
-                sigmaY: blur,
+            left: margin.left,
+            top: margin.top,
+            right: margin.right,
+            bottom: margin.bottom,
+            child: ClipRRect(
+              borderRadius: borderRadius ?? BorderRadius.zero,
+              child: BackdropFilter(
+                filter: ui.ImageFilter.blur(
+                  sigmaX: blur,
+                  sigmaY: blur,
+                ),
+                child: Container(
+                  color: Colors.black.withOpacity(0),
+                ),
               ),
-              child: Container(
-                color: Colors.black.withOpacity(0),
-              ),
-            ),
-          )
-        )
+            ))
       ],
     );
     return stackWidget;

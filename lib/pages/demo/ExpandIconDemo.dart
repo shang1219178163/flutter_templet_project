@@ -11,7 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_expansion_fade.dart';
 import 'package:flutter_templet_project/basicWidget/n_list_view_segment_control.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_header.dart';
-import 'package:flutter_templet_project/basicWidget/visible_container.dart';
 import 'package:flutter_templet_project/extension/change_notifier_ext.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
