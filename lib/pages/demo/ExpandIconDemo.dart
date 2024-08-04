@@ -96,7 +96,7 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
                   Tuple2(List.generate(8, (index) => "item2_$index"), 2),
                 ],
                 // foldCount: 2,
-                isVisible: _isVisible,
+                isVisible: isVisible,
                 onValueChanged: (row, index, indexs) {
                   ddlog("$row, $index, $indexs");
                 },
@@ -116,7 +116,7 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
                   Tuple2(List.generate(8, (index) => "item4_$index"), 4),
                 ],
                 // foldCount: 3,
-                isVisible: _isVisible,
+                isVisible: isVisible,
                 onValueChanged: (row, index, indexs) {
                   ddlog("$row, $index, $indexs");
                 },
@@ -237,45 +237,50 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
     );
   }
 
-  final bool _isVisible = true;
+  bool isVisible = true;
 
   Widget _buildVisibleContainer() {
-    return VisibleContainer(
-      isVisible: _isVisible,
-      // indicator: ListTile(
-      //   leading: Icon(Icons.fourteen_mp),
-      //   title: Text("title"),
-      //   subtitle: Text("subtitle"),
-      //   trailing: RotatedBox(
-      //     quarterTurns: _isVisible == true ? 2 : 0,
-      //     child: Icon(Icons.keyboard_arrow_down),
-      //   ),
-      // //   trailing: Icon(Icons.chevron_right),
-      //   onTap: () {
-      //     setState(() {
-      //       _isVisible = !_isVisible;
-      //     });
-      //   }
-      // ),
-      header: Container(
-        color: Colors.orange,
-        // height: 50,
-        child: Column(children: [
-          SizedBox(height: 5),
-          buildListViewHorizontal(
-              titles: List.generate(8, (index) => "item1_$index")),
-          SizedBox(height: 5),
-        ]),
-      ),
-      body: Column(children: [
-        SizedBox(height: 5),
-        buildListViewHorizontal(
-            titles: List.generate(8, (index) => "item4_$index")),
-        SizedBox(height: 5),
-        buildListViewHorizontal(
-            titles: List.generate(8, (index) => "item5_$index")),
-        SizedBox(height: 5),
-      ]),
+    return Column(
+      children: [
+        Container(
+          color: Colors.orange,
+          // height: 50,
+          child: Column(
+            children: [
+              SizedBox(height: 5),
+              buildListViewHorizontal(
+                titles: List.generate(8, (index) => "item1_$index"),
+              ),
+              SizedBox(height: 5),
+            ],
+          ),
+        ),
+        Visibility(
+          visible: isVisible,
+          child: Column(
+            children: [
+              SizedBox(height: 5),
+              buildListViewHorizontal(
+                titles: List.generate(8, (index) => "item4_$index"),
+              ),
+              SizedBox(height: 5),
+              buildListViewHorizontal(
+                titles: List.generate(8, (index) => "item5_$index"),
+              ),
+              SizedBox(height: 5),
+            ],
+          ),
+        ),
+        IconButton(
+          icon: isVisible
+              ? Icon(Icons.keyboard_arrow_up)
+              : Icon(Icons.keyboard_arrow_down),
+          onPressed: () {
+            isVisible = !isVisible;
+            setState(() {});
+          },
+        ),
+      ],
     );
   }
 }
