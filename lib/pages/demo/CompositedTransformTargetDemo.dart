@@ -1,3 +1,4 @@
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_list_view_segment_control.dart';
@@ -5,46 +6,46 @@ import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/alignment_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-
 
 class CompositedTransformTargetDemo extends StatefulWidget {
-
-  CompositedTransformTargetDemo({
-    Key? key,
-    this.title
-  }) : super(key: key);
+  CompositedTransformTargetDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
   @override
-  _CompositedTransformTargetDemoState createState() => _CompositedTransformTargetDemoState();
+  _CompositedTransformTargetDemoState createState() =>
+      _CompositedTransformTargetDemoState();
 }
 
-class _CompositedTransformTargetDemoState extends State<CompositedTransformTargetDemo> {
-
+class _CompositedTransformTargetDemoState
+    extends State<CompositedTransformTargetDemo> {
   final LayerLink layerLink = LayerLink();
   late OverlayEntry _overlayEntry;
   bool show = false;
   Offset indicatorOffset = const Offset(0, 0);
 
-
   Alignment followerAnchor = Alignment.centerLeft;
   Alignment targetAnchor = Alignment.centerRight;
+  double followerRotation = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () {
-            Get.to(() => CustomSlideDemo());
-          },)
-        ).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () {
+                    Get.to(() => CustomSlideDemo());
+                  },
+                ))
+            .toList(),
         elevation: 0,
         bottom: buildTab(),
       ),
@@ -68,7 +69,8 @@ class _CompositedTransformTargetDemoState extends State<CompositedTransformTarge
               link: layerLink,
               child: Image.asset(
                 "assets/images/avatar.png",
-                width: 80, height: 80,
+                width: 80,
+                height: 80,
               ).toColoredBox(),
             ),
           ),
@@ -80,22 +82,22 @@ class _CompositedTransformTargetDemoState extends State<CompositedTransformTarge
   ///设置单个宽度
   Widget buildListViewHorizontal({
     String title = "",
+    required List<String> items,
     required ValueChanged<int> onChanged,
-    int index = 0
+    int index = 0,
   }) {
-    var items = AlignmentExt.allCases.map((e) => e.toString().split(".").last).toList();
     return Row(
       children: [
-        if(title.isNotEmpty)NText(title),
+        if (title.isNotEmpty) NText(title),
         Expanded(
           child: NListViewSegmentControl(
             items: items,
             // itemWidths: itemWiths,
             selectedIndex: index,
-            onValueChanged: (val){
+            onValueChanged: (val) {
               debugPrint(val.toString());
               onChanged.call(val);
-            }
+            },
           ),
         ),
       ],
@@ -103,34 +105,54 @@ class _CompositedTransformTargetDemoState extends State<CompositedTransformTarge
   }
 
   PreferredSize buildTab() {
+    var items =
+        AlignmentExt.allCases.map((e) => e.toString().split(".").last).toList();
+
+    final List<double> rotations = [-180, -135, -90, -45, 0, 45, 90, 135, 180];
+    final double height = 24 * 3 + 8 + 3;
     return PreferredSize(
-      preferredSize: Size.fromHeight(48),
+      preferredSize: Size.fromHeight(height),
       child: Container(
         decoration: BoxDecoration(
-          // color: Colors.greenAccent,
-          // border: Border.all(color: Colors.yellow),
-        ),
+            // color: Colors.greenAccent,
+            // border: Border.all(color: Colors.yellow),
+            ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             buildListViewHorizontal(
               title: "Target:",
+              items: items,
               onChanged: (int value) {
                 targetAnchor = AlignmentExt.allCases[value];
                 debugPrint("targetAnchor: $targetAnchor");
                 _overlayEntry.markNeedsBuild();
-              }
+              },
             ),
-            SizedBox(height: 8,),
             buildListViewHorizontal(
               title: "Follower:",
+              items: items,
               onChanged: (int value) {
                 followerAnchor = AlignmentExt.allCases[value];
                 debugPrint("followerAnchor: $followerAnchor");
                 _overlayEntry.markNeedsBuild();
-              }
+              },
             ),
-          ],
+            buildListViewHorizontal(
+              title: "Rotation:",
+              items: rotations.map((e) => e.toString()).toList(),
+              index: rotations.indexOf(0),
+              onChanged: (int value) {
+                followerRotation = rotations[value];
+                _overlayEntry.markNeedsBuild();
+              },
+            ),
+          ]
+              .map((e) => Padding(
+                    padding: EdgeInsets.only(top: 4, bottom: 4),
+                    child: e,
+                  ))
+              .toList(),
         ),
       ),
     );
@@ -159,7 +181,6 @@ class _CompositedTransformTargetDemoState extends State<CompositedTransformTarge
     _overlayEntry.markNeedsBuild();
   }
 
-
   void updateIndicatorLongPress(LongPressMoveUpdateDetails details) {
     indicatorOffset = details.localPosition;
     _overlayEntry?.markNeedsBuild();
@@ -175,17 +196,24 @@ class _CompositedTransformTargetDemoState extends State<CompositedTransformTarge
           followerAnchor: followerAnchor,
           targetAnchor: targetAnchor,
           // offset: Offset(5,0),
-          child: Material(
-            child: Container(
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: Colors.blue,
-                borderRadius: BorderRadius.circular(5)
+          child: Transform(
+            transform: Matrix4.rotationZ(followerRotation / 180 * pi),
+            alignment: Alignment.center,
+            child: Material(
+              child: Container(
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                padding: const EdgeInsets.all(10),
+                width: 50,
+                height: 100,
+                child: const Text(
+                  "跟随者",
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
-              padding: const EdgeInsets.all(10),
-              width: 50,
-              height: 100,
-              child: const Text("toly",style: TextStyle(color: Colors.white),)
             ),
           ),
         ),
@@ -194,14 +222,13 @@ class _CompositedTransformTargetDemoState extends State<CompositedTransformTarge
   }
 }
 
-
 class CustomSlideDemo extends StatefulWidget {
   const CustomSlideDemo({Key? key}) : super(key: key);
   @override
   _CustomSlideDemoState createState() => _CustomSlideDemoState();
 }
-class _CustomSlideDemoState extends State {
 
+class _CustomSlideDemoState extends State {
   final double indicatorWidth = 24.0;
   final double indicatorHeight = 300.0;
   final double slideHeight = 200.0;
@@ -214,12 +241,17 @@ class _CustomSlideDemoState extends State {
     return Scaffold(
       appBar: AppBar(
         title: Text("$widget"),
-        actions: ['done',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () => debugPrint(e),)
-        ).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () => debugPrint(e),
+                ))
+            .toList(),
       ),
       body: Center(
         child: CompositedTransformTarget(
@@ -255,16 +287,15 @@ class _CustomSlideDemoState extends State {
           top: 0.0,
           left: 0.0,
           child: SizedBox(
-            width: indicatorWidth,
-            height: indicatorHeight,
-            child: CompositedTransformFollower(
-              offset: indicatorOffset,
-              link: layerLink,
-              child: Container(
-                color: Colors.blue,
-              ),
-            )
-          ),
+              width: indicatorWidth,
+              height: indicatorHeight,
+              child: CompositedTransformFollower(
+                offset: indicatorOffset,
+                link: layerLink,
+                child: Container(
+                  color: Colors.blue,
+                ),
+              )),
         );
       },
     );
@@ -279,6 +310,4 @@ class _CustomSlideDemoState extends State {
   void hideIndicator(DragEndDetails details) {
     _overlayEntry?.remove();
   }
-
-
 }
