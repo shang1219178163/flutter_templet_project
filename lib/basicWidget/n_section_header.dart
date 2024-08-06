@@ -6,12 +6,9 @@
 //  Copyright © 4/3/23 shang. All rights reserved.
 //
 
-
 import 'package:flutter/material.dart';
 
-
-class NSectionHeader extends StatelessWidget{
-
+class NSectionHeader extends StatelessWidget {
   const NSectionHeader({
     Key? key,
     this.title = '',
@@ -58,10 +55,11 @@ class NSectionHeader extends StatelessWidget{
           ),
           child: Align(
             alignment: Alignment.centerLeft,
-            child: Text(
-              title,
-              style: style,
-            ),
+            child: text ??
+                Text(
+                  title,
+                  style: style,
+                ),
           ),
         ),
         Padding(
@@ -83,6 +81,4 @@ class NSectionHeader extends StatelessWidget{
     }
     return content;
   }
-
 }
-

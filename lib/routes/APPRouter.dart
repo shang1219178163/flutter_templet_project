@@ -277,6 +277,7 @@ import 'package:flutter_templet_project/pages/demo/box_shadow_demo_one.dart';
 import 'package:flutter_templet_project/pages/demo/drawImageNineDemo.dart';
 import 'package:flutter_templet_project/pages/demo/enumDemo.dart';
 import 'package:flutter_templet_project/pages/demo/isolateDemo.dart';
+import 'package:flutter_templet_project/pages/demo/lerpDemo.dart';
 import 'package:flutter_templet_project/pages/demo/merge_images_demo.dart';
 import 'package:flutter_templet_project/pages/demo/merge_network_images_demo.dart';
 import 'package:flutter_templet_project/pages/demo/n_collection_nav_widget_demo.dart';
@@ -738,6 +739,7 @@ class APPRouter {
   static const sliverMainAxisGroupDemoOne = '/SliverMainAxisGroupDemoOne';
   static const listBodyDemo = '/listBodyDemo';
   static const scanAnimationDemo = '/scanAnimationDemo';
+  static const lerpDemo = '/lerpDemo';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -2183,6 +2185,10 @@ class AppPage {
     GetPage(
       name: APPRouter.scanAnimationDemo,
       page: () => ScanAnimationDemo(),
+    ),
+    GetPage(
+      name: APPRouter.lerpDemo,
+      page: () => LerpDemo(),
     ),
   ];
 }
