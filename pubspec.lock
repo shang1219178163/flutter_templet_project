@@ -2214,13 +2214,13 @@ packages:
     source: hosted
     version: "4.7.0"
   webview_flutter_android:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       name: webview_flutter_android
-      sha256: "3e5f4e9d818086b0d01a66fb1ff9cc72ab0cc58c71980e3d3661c5685ea0efb0"
+      sha256: dad3313c9ead95517bb1cae5e1c9d20ba83729d5a59e5e83c0a2d66203f27f91
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "3.15.0"
+    version: "3.16.1"
   webview_flutter_platform_interface:
     dependency: transitive
     description:

@@ -208,12 +208,12 @@ dependencies:
 #      url: 'git@github.com:shang1219178163/UserPlugin.git'
 #      ref: 'master'
 
-#  ansicolor: ^2.0.1
-
 dependency_overrides:
-  scrollable_positioned_list: ^0.3.8
   intl: 0.17.0
   http: 1.0.0
+  scrollable_positioned_list: ^0.3.8
+  # 修复 SUPPRESS_ERROR_PAGE https://github.com/pichillilorenzo/flutter_inappwebview/issues/2150
+  webview_flutter_android: 3.16.1
 
 # User:
 #   path: ../User
