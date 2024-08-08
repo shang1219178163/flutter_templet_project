@@ -6,6 +6,7 @@
 //  Copyright © 2024/7/8 shang. All rights reserved.
 //
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_sliver_persistent_header_delegate.dart';
 
@@ -56,10 +57,12 @@ class _NSliverSectionState<T> extends State<NSliverSection<T>> {
                     ?.call(context, shrinkOffset, overlapsContent) ??
                 Container(
                   alignment: Alignment.centerLeft,
-                  color: Colors.grey,
+                  color: Colors.black.withOpacity(0.15),
                   padding: const EdgeInsets.only(left: 20),
-                  child: Text(widget.model.name,
-                      style: const TextStyle(fontSize: 16)),
+                  child: Text(
+                    widget.model.name,
+                    style: const TextStyle(fontSize: 16),
+                  ),
                 );
             return InkWell(
               onTap: () {

@@ -31,7 +31,9 @@ extension SnackBarExt<T extends StatefulWidget> on State<T> {
       _snackBars.clear();
     } else {
       scaffoldMessenger.hideCurrentSnackBar();
-      _snackBars.removeLast();
+      if (_snackBars.isNotEmpty) {
+        _snackBars.removeLast();
+      }
     }
   }
 

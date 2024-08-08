@@ -127,18 +127,12 @@ class _SliverMainAxisGroupDemoOneState
   Widget buildBody() {
     return NSliverSectionList(
       items: dataList,
-      sectionBuilder: buildSection,
+      sectionBuilder: (section) => NSliverSection(
+        model: section,
+        itembuilder: (_, index) => buildItem(section.items[index]),
+      ),
       header: buildHeaderFooter(),
       footer: buildHeaderFooter(),
-    );
-    return Scrollbar(
-      child: CustomScrollView(
-        slivers: [
-          buildHeaderFooter().toSliverToBoxAdapter(),
-          ...dataList.map(buildSection),
-          buildHeaderFooter().toSliverToBoxAdapter(),
-        ],
-      ),
     );
   }
 
@@ -147,14 +141,6 @@ class _SliverMainAxisGroupDemoOneState
     return Container(
       height: 100,
       color: ColorExt.random,
-    );
-  }
-
-  /// 分组
-  Widget buildSection(NSliverSectionModel model) {
-    return NSliverSection(
-      model: model,
-      itembuilder: (_, index) => buildItem(model.items[index]),
     );
   }
 
