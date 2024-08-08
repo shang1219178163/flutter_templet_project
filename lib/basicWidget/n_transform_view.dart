@@ -19,7 +19,7 @@ class NTransformView extends StatefulWidget {
   NTransformView({
     super.key,
     this.controller,
-    required this.title,
+    this.title,
     this.message,
     this.start,
     this.end,
@@ -31,7 +31,7 @@ class NTransformView extends StatefulWidget {
 
   final NTransformViewController? controller;
 
-  final Widget title;
+  final Widget? title;
   final Widget? message;
 
   final Widget? start;
@@ -150,14 +150,10 @@ class NTransformViewState extends State<NTransformView> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        widget.title,
-        SizedBox(
-          height: spacing,
-        ),
+        widget.title ?? SizedBox(),
+        if (widget.title != null) SizedBox(height: spacing),
         widget.message ?? SizedBox(),
-        SizedBox(
-          height: spacing * 2,
-        ),
+        if (widget.message != null) SizedBox(height: spacing * 2),
       ],
     );
   }

@@ -59,7 +59,7 @@ class _ConvertThemeState extends State<ConvertTheme> {
     (name: "拖拽", action: onDrag),
   ];
 
-  final canDrag = ValueNotifier(false);
+  final canDrag = ValueNotifier(Platform.isMacOS);
 
   List<File> files = [];
   List<Tuple2<String, SelectableText>> tabItems = [];
@@ -196,11 +196,11 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget buildBody() {
     return NTransformView(
       controller: transformViewController,
-      title: NText(
-        '根据 Widget 组件生成对应的 Theme',
-        fontSize: 20,
-        fontWeight: FontWeight.w500,
-      ),
+      // title: NText(
+      //   '根据 Widget 组件生成对应的 Theme',
+      //   fontSize: 20,
+      //   fontWeight: FontWeight.w500,
+      // ),
       // message: NText(
       //   "这是一条提示信息",
       //   maxLines: 3,
@@ -238,17 +238,20 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
               return Wrap(
                 spacing: 8,
                 runSpacing: 8,
-                children: actionItems.map((e) {
-                  return ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      elevation: 0,
-                      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                    ),
-                    onPressed: e.action,
-                    child: NText(e.name),
-                  );
-                }).toList(),
+                children: [
+                  ...actionItems.map((e) {
+                    return ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        elevation: 0,
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      ),
+                      onPressed: e.action,
+                      child: NText(e.name),
+                    );
+                  }).toList(),
+                ],
               );
             });
       },
@@ -343,7 +346,8 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
     final clsName =
         (lines.where((e) => e.startsWith("class ")).firstOrNull ?? "ClassName")
             .split(" ")[1]
-            .replaceAll("My", "Yl");
+            .replaceFirst("My", "Yl")
+            .replaceFirst("N", "Yl");
 
     final propertys = lines.where((e) {
       final result = e.trimLeft().startsWith("final ") && e.contains("?");
@@ -359,7 +363,8 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
     //     propertys.map((e) => e.toString()).join(""
     //         "\n");
 
-    final fileName = "${clsName.toUncamlCase("_")}_theme.dart";
+    final fileName =
+        "${clsName.toUncamlCase("_")}_theme.dart".replaceFirst("yl_", "");
     final content = createThemeFileContent(
       clsName: clsName,
       propertys: propertys,
@@ -457,9 +462,9 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
 
 import 'package:flutter/material.dart';
 
-/// 取消按钮
+/// 自定义 
 class ${name}Theme extends ThemeExtension<${name}Theme> {
-  /// 取消按钮
+  /// 自定义  
   ${name}Theme({
 ${propertys.map((e) => "\t\tthis.${e.name},").join("\n")}
   });
