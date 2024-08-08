@@ -111,4 +111,23 @@ extension FutureExt on Future {
     final inMilliseconds = etime.difference(stime).inMilliseconds;
     debugPrint("codeExecution $etime 执行时长：$inMilliseconds 毫秒.");
   }
+
+  FutureBuilder when<T>({
+    required Widget Function(T? data) data,
+    required Widget Function(Object? e, StackTrace? s) error,
+    required Widget Function()? loading,
+  }) {
+    return FutureBuilder(
+      future: this,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState != ConnectionState.done) {
+          return loading?.call() ?? const Text('加载中');
+        }
+        if (snapshot.hasError) {
+          return error(snapshot.error, snapshot.stackTrace);
+        }
+        return data(snapshot.data as T?);
+      },
+    );
+  }
 }
