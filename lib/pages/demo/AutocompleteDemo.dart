@@ -117,11 +117,11 @@ class _AutocompleteDemoState extends State<AutocompleteDemo> {
                 );
               },
             ),
-            Image(
-              image: "img_flutter_3_10.png".toAssetImage(),
-              colorBlendMode: BlendMode.dst,
-              color: context.primaryColor,
-            ),
+            // Image(
+            //   image: "img_flutter_3_10.png".toAssetImage(),
+            //   colorBlendMode: BlendMode.dst,
+            //   color: context.primaryColor,
+            // ),
           ].map((e) => SliverToBoxAdapter(child: e)).toList(),
         ));
   }
