@@ -539,6 +539,7 @@ var list = <Tuple2<String, String>>[
   Tuple2(APPRouter.scanAnimationDemo, "scanAnimationDemo"),
   Tuple2(APPRouter.lerpDemo, "lerpDemo"),
   Tuple2(APPRouter.convertTheme, "convertTheme"),
+  Tuple2(APPRouter.splitViewDemo, "splitViewDemo"),
 ];
 
 var slivers = <Tuple2<String, String>>[

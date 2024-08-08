@@ -61,6 +61,7 @@ import 'package:flutter_templet_project/pages/demo/ScaffoldDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ScanAnimationDemo.dart';
 import 'package:flutter_templet_project/pages/demo/SegmentedControlDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/SliverMainAxisGroupDemoOne.dart';
+import 'package:flutter_templet_project/pages/demo/SplitViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/StringTransformPage.dart';
 import 'package:flutter_templet_project/pages/demo/TextFieldDemoTwo.dart';
 import 'package:flutter_templet_project/pages/demo/ThemeColorDemo.dart';
@@ -742,6 +743,7 @@ class APPRouter {
   static const scanAnimationDemo = '/scanAnimationDemo';
   static const lerpDemo = '/lerpDemo';
   static const convertTheme = '/ConvertTheme';
+  static const splitViewDemo = '/SplitViewDemo';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -2195,6 +2197,10 @@ class AppPage {
     GetPage(
       name: APPRouter.convertTheme,
       page: () => ConvertTheme(),
+    ),
+    GetPage(
+      name: APPRouter.splitViewDemo,
+      page: () => SplitViewDemo(),
     ),
   ];
 }
