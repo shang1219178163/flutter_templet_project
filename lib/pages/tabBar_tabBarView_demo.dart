@@ -7,12 +7,15 @@
 //
 
 import 'package:enhance_expansion_panel/enhance_expansion_panel.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/ExpandButtons/expand_icons.dart';
 import 'package:flutter_templet_project/basicWidget/ExpandButtons/expand_layout.dart';
 import 'package:flutter_templet_project/basicWidget/list_subtitle_cell.dart';
 import 'package:flutter_templet_project/basicWidget/app_update_card.dart';
+import 'package:flutter_templet_project/basicWidget/n_sliver_section.dart';
+import 'package:flutter_templet_project/basicWidget/n_sliver_section_list.dart';
 import 'package:flutter_templet_project/basicWidget/section_list_view.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 
@@ -268,61 +271,68 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo>
   }
 
   buildPage4() {
+    Widget buildHeader({required String sectionTile, required bool isExpand}) {
+      final trailing = isExpand
+          ? Icon(Icons.keyboard_arrow_up, color: Colors.blue)
+          : Icon(
+              Icons.keyboard_arrow_down,
+              color: Colors.blue,
+            );
+      return Container(
+        // color: Colors.green,
+        color: isExpand ? Colors.black12 : null,
+        child: ListTile(
+          title: Text(
+            sectionTile,
+            style: TextStyle(fontWeight: FontWeight.w600),
+          ),
+          // subtitle: Text("subtitle"),
+          trailing: trailing,
+        ),
+      );
+    }
+
+    Widget buildItem(Tuple2<String, String> e) {
+      return ListTile(
+        title: Text(
+          e.item1,
+          style: TextStyle(fontSize: 14),
+        ),
+        subtitle: Text(
+          e.item2,
+          style: TextStyle(fontSize: 12),
+        ),
+        trailing: Icon(Icons.chevron_right),
+        dense: true,
+        // contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
+        onTap: () {
+          ddlog("section_");
+          if (e.item1.toLowerCase().contains("loginPage".toLowerCase())) {
+            Get.offNamed(e.item1, arguments: e.item1);
+          } else {
+            Get.toNamed(e.item1, arguments: e.item1);
+          }
+        },
+      );
+    }
+
     return EnhanceExpandListView(
       children: tuples
-          .map<ExpandPanelModel<Tuple2<String, String>>>(
-              (e) => ExpandPanelModel(
-                    canTapOnHeader: true,
-                    isExpanded: false,
-                    arrowPosition: EnhanceExpansionPanelArrowPosition.none,
-                    // backgroundColor: Color(0xFFDDDDDD),
-                    headerBuilder: (contenx, isExpand) {
-                      final trailing = isExpand
-                          ? Icon(Icons.keyboard_arrow_up, color: Colors.blue)
-                          : Icon(
-                              Icons.keyboard_arrow_down,
-                              color: Colors.blue,
-                            );
-                      return Container(
-                        // color: Colors.green,
-                        color: isExpand ? Colors.black12 : null,
-                        child: ListTile(
-                          title: Text(
-                            e.item1,
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          // subtitle: Text("subtitle"),
-                          trailing: trailing,
-                        ),
-                      );
-                    },
-                    bodyChildren: e.item2.sorted((a, b) =>
-                        a.item1.toLowerCase().compareTo(b.item1.toLowerCase())),
-                    bodyItemBuilder: (context, e) {
-                      return ListTile(
-                          title: Text(
-                            e.item1,
-                            style: TextStyle(fontSize: 14),
-                          ),
-                          subtitle: Text(
-                            e.item2,
-                            style: TextStyle(fontSize: 12),
-                          ),
-                          trailing: Icon(Icons.chevron_right),
-                          dense: true,
-                          // contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
-                          onTap: () {
-                            ddlog("section_");
-                            if (e.item1
-                                .toLowerCase()
-                                .contains("loginPage".toLowerCase())) {
-                              Get.offNamed(e.item1, arguments: e.item1);
-                            } else {
-                              Get.toNamed(e.item1, arguments: e.item1);
-                            }
-                          });
-                    },
-                  ))
+          .map<ExpandPanelModel<Tuple2<String, String>>>((e) =>
+              ExpandPanelModel(
+                canTapOnHeader: true,
+                isExpanded: false,
+                arrowPosition: EnhanceExpansionPanelArrowPosition.none,
+                // backgroundColor: Color(0xFFDDDDDD),
+                headerBuilder: (context, isExpand) {
+                  return buildHeader(isExpand: isExpand, sectionTile: e.item1);
+                },
+                bodyChildren: e.item2.sorted((a, b) =>
+                    a.item1.toLowerCase().compareTo(b.item1.toLowerCase())),
+                bodyItemBuilder: (context, e) {
+                  return buildItem(e);
+                },
+              ))
           .toList(),
     );
   }
@@ -528,6 +538,7 @@ var list = <Tuple2<String, String>>[
   Tuple2(APPRouter.listBodyDemo, "listBodyDemo"),
   Tuple2(APPRouter.scanAnimationDemo, "scanAnimationDemo"),
   Tuple2(APPRouter.lerpDemo, "lerpDemo"),
+  Tuple2(APPRouter.convertTheme, "convertTheme"),
 ];
 
 var slivers = <Tuple2<String, String>>[
