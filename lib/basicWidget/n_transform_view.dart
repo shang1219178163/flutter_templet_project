@@ -6,6 +6,9 @@
 //  Copyright © 2024/4/27 shang. All rights reserved.
 //
 
+import 'dart:io';
+
+import 'package:desktop_drop/desktop_drop.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
@@ -18,6 +21,11 @@ class NTransformView extends StatefulWidget {
     this.controller,
     required this.title,
     this.message,
+    this.start,
+    this.end,
+    // this.canDrag = false,
+    // this.onDropChanged,
+    // this.dragChild,
     required this.toolbarBuilder,
   });
 
@@ -25,6 +33,16 @@ class NTransformView extends StatefulWidget {
 
   final Widget title;
   final Widget? message;
+
+  final Widget? start;
+  final Widget? end;
+
+  // /// 是否开启拖拽
+  // final bool canDrag;
+  // final Widget? dragChild;
+  //
+  // /// 拖拽回调
+  // final ValueChanged<List<File>>? onDropChanged;
 
   final Widget Function(BuildContext context) toolbarBuilder;
 
@@ -39,6 +57,10 @@ class NTransformViewState extends State<NTransformView> {
   final _scrollController = ScrollController();
 
   final outVN = ValueNotifier("");
+
+  // bool get isDrag => Platform.isMacOS && widget.canDrag;
+
+  List<File> files = [];
 
   @override
   void dispose() {
@@ -196,17 +218,20 @@ class NTransformViewState extends State<NTransformView> {
   }) {
     double? maxWidth = isVertical ? double.maxFinite : width;
 
+    Widget child = widget.start ??
+        buildTextfield(
+          controller: _textEditingController,
+          focusNode: _focusNode,
+          maxLines: 200,
+        );
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Expanded(
           child: Container(
             width: maxWidth,
-            child: buildTextfield(
-              controller: _textEditingController,
-              focusNode: _focusNode,
-              maxLines: 200,
-            ),
+            child: child,
           ),
         ),
         SizedBox(
@@ -223,27 +248,29 @@ class NTransformViewState extends State<NTransformView> {
     bool selectable = true,
   }) {
     return ValueListenableBuilder<String>(
-        valueListenable: outVN,
-        builder: (context, value, child) {
-          final child = selectable
-              ? SelectableText(
-                  value,
-                  // maxLines: 1000,
-                )
-              : NText(
-                  value,
-                  // maxLines: 1000,
-                );
+      valueListenable: outVN,
+      builder: (context, value, child) {
+        final text = selectable
+            ? SelectableText(
+                value,
+                // maxLines: 1000,
+              )
+            : NText(
+                value,
+                // maxLines: 1000,
+              );
 
-          return Scrollbar(
-            controller: controller,
-            thumbVisibility: true,
-            child: SingleChildScrollView(
+        return widget.end ??
+            Scrollbar(
               controller: controller,
-              child: child,
-            ),
-          );
-        });
+              thumbVisibility: true,
+              child: SingleChildScrollView(
+                controller: controller,
+                child: text,
+              ),
+            );
+      },
+    );
   }
 }
 

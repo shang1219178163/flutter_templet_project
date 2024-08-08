@@ -8,19 +8,25 @@
 
 import 'dart:io';
 
+import 'package:desktop_drop/desktop_drop.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_page_view.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/n_transform_view.dart';
 import 'package:flutter_templet_project/cache/file_manager.dart';
+import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/date_time_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/snack_bar_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:tuple/tuple.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 /// 属性元祖
 typedef PropertyRecord = ({String name, String type, String comment});
+typedef FileRecord = ({String name, String content});
 
 class ConvertTheme extends StatefulWidget {
   ConvertTheme({
@@ -49,7 +55,14 @@ class _ConvertThemeState extends State<ConvertTheme> {
     (name: "Generate", action: onGenerate),
     (name: "Paste", action: onPaste),
     (name: "Clear", action: onClear),
+    (name: "Try", action: onTry),
+    (name: "拖拽", action: onDrag),
   ];
+
+  final canDrag = ValueNotifier(false);
+
+  List<File> files = [];
+  List<Tuple2<String, SelectableText>> tabItems = [];
 
   final themeTemplet = """
 import 'dart:io';
@@ -166,10 +179,6 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   void initState() {
     super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      transformViewController.textEditingController.text = themeTemplet;
-    });
   }
 
   @override
@@ -180,32 +189,126 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
           : AppBar(
               title: Text("$widget"),
             ),
-      body: NTransformView(
-        controller: transformViewController,
-        title: NText(
-          '根据 Widget 组件生成对应的 Theme',
-          fontSize: 20,
-          fontWeight: FontWeight.w500,
-        ),
-        // message: NText(
-        //   "这是一条提示信息",
-        //   maxLines: 3,
-        // ),
-        toolbarBuilder: (_) {
-          return Wrap(
-            spacing: 8,
-            runSpacing: 8,
-            children: actionItems.map((e) {
-              return ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  elevation: 0,
-                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                ),
-                onPressed: e.action,
-                child: NText(e.name),
+      body: buildBody(),
+    );
+  }
+
+  Widget buildBody() {
+    return NTransformView(
+      controller: transformViewController,
+      title: NText(
+        '根据 Widget 组件生成对应的 Theme',
+        fontSize: 20,
+        fontWeight: FontWeight.w500,
+      ),
+      // message: NText(
+      //   "这是一条提示信息",
+      //   maxLines: 3,
+      // ),
+      // canDrag: true,
+      // onDropChanged: (files) async {
+      //   ddlog(files);
+      //   String content = await files.first.readAsString();
+      //   transformViewController.out = content;
+      // },
+      start: canDrag.value == false
+          ? null
+          : buildDragBox(
+              onDropChanged: (List<File> files) async {
+                ddlog(files);
+                String content1 = await files.first.readAsString();
+                transformViewController.out = content1;
+
+                final list = <Tuple2<String, SelectableText>>[];
+                for (var e in files) {
+                  final name = e.path.split("/").last;
+                  String content = await e.readAsString();
+                  final result = Tuple2(name, SelectableText(content));
+                  list.add(result);
+                }
+                tabItems = list;
+
+                setState(() {});
+              },
+            ),
+      toolbarBuilder: (_) {
+        return ValueListenableBuilder(
+            valueListenable: canDrag,
+            builder: (context, value, child) {
+              return Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                children: actionItems.map((e) {
+                  return ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      elevation: 0,
+                      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    ),
+                    onPressed: e.action,
+                    child: NText(e.name),
+                  );
+                }).toList(),
               );
-            }).toList(),
+            });
+      },
+      end: canDrag.value == false
+          ? null
+          : NPageView(
+              items: tabItems,
+              isScrollable: true,
+              tabAlignment: TabAlignment.start,
+              isThemeBg: false,
+              isBottom: false,
+              needSafeArea: false,
+            ),
+    );
+  }
+
+  Widget buildDragBox({
+    required ValueChanged<List<File>> onDropChanged,
+  }) {
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(width: 2, color: Colors.blue),
+      ),
+      child: StatefulBuilder(
+        builder: (BuildContext context, StateSetter setState) {
+          return DropTarget(
+            onDragDone: (detail) {
+              files = detail.files.map((e) => File(e.path)).toList();
+              onDropChanged.call(files);
+              if (files.isEmpty) {
+                return;
+              }
+              // 读取第一个文件
+              // final file = files.first;
+              // debugPrint("file: ${file.path}");
+              setState(() {});
+            },
+            onDragEntered: (detail) {
+              // setState(() {});
+            },
+            onDragExited: (detail) {
+              // setState(() {});
+            },
+            child: Scrollbar(
+              child: SingleChildScrollView(
+                child: Container(
+                  padding: EdgeInsets.all(8),
+                  child: Column(
+                    // mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ...files
+                          .map((e) =>
+                              Text(e.path, style: TextStyle(fontSize: 12)))
+                          .toList(),
+                    ],
+                  ),
+                ),
+              ),
+            ),
           );
         },
       ),
@@ -213,7 +316,23 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   onGenerate() async {
-    final lines = transformViewController.textEditingController.text
+    if (canDrag.value) {
+      for (final e in tabItems) {
+        try {
+          onConvert(text: e.item2.data ?? "");
+        } catch (e) {
+          debugPrint("❌$this $e");
+          continue;
+        }
+      }
+    } else {
+      onConvert();
+    }
+  }
+
+  onConvert({String? text}) async {
+    text ??= transformViewController.textEditingController.text;
+    final lines = text
         .split("Widget build(BuildContext context)")
         .first
         .split("\n")
@@ -272,6 +391,16 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   onPaste() async {
     transformViewController.paste();
     onGenerate();
+  }
+
+  onTry() async {
+    transformViewController.textEditingController.text = themeTemplet;
+    onGenerate();
+  }
+
+  onDrag() async {
+    canDrag.value = !canDrag.value;
+    setState(() {});
   }
 
   onCreate({

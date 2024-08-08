@@ -13,8 +13,6 @@ import 'package:tuple/tuple.dart';
 
 /// 多页面左右滑动封装
 class NPageView extends StatefulWidget {
-
-
   const NPageView({
     Key? key,
     required this.items,
@@ -22,6 +20,7 @@ class NPageView extends StatefulWidget {
     this.isThemeBg = false,
     this.isScrollable = false,
     this.isBottom = false,
+    this.tabAlignment = TabAlignment.center,
     this.tabBar,
     this.onPageChanged,
   }) : super(key: key);
@@ -35,18 +34,21 @@ class NPageView extends StatefulWidget {
   final bool isScrollable;
 
   final bool isBottom;
+
   /// 样式设置
   final TabBar? tabBar;
-  
+
+  final TabAlignment tabAlignment;
+
   final ValueChanged<int>? onPageChanged;
 
   @override
   _NPageViewState createState() => _NPageViewState();
 }
 
-class _NPageViewState extends State<NPageView> with SingleTickerProviderStateMixin {
-
-  late final tabController = TabController(length: widget.items.length, vsync: this);
+class _NPageViewState extends State<NPageView> with TickerProviderStateMixin {
+  late TabController tabController =
+      TabController(length: widget.items.length, vsync: this);
 
   late final pageController = PageController(initialPage: 0, keepPage: true);
 
@@ -67,7 +69,21 @@ class _NPageViewState extends State<NPageView> with SingleTickerProviderStateMix
   }
 
   @override
+  void didUpdateWidget(covariant NPageView oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    final names = widget.items.map((e) => e.item1).join(",");
+    final oldNames = oldWidget.items.map((e) => e.item1).join(",");
+    if (names != oldNames) {
+      tabController = TabController(length: widget.items.length, vsync: this);
+      setState(() {});
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    if (tabController.length == 0) {
+      return SizedBox();
+    }
     var children = [
       _buildBottomBar(
         items: widget.items,
@@ -111,42 +127,49 @@ class _NPageViewState extends State<NPageView> with SingleTickerProviderStateMix
     bool isBottom = false,
     bool isThemeBg = true,
   }) {
-
     final labelColor = !isThemeBg ? textColor : bgColor;
 
-    final tabBar = TabBar(
+    Widget tabBar = TabBar(
       controller: tabController,
+      tabAlignment: widget.tabAlignment,
       isScrollable: isScrollable,
       tabs: items.map((e) => Tab(text: e.item1)).toList(),
       // indicatorSize: TabBarIndicatorSize.label,
       labelColor: labelColor,
       indicator: BoxDecoration(
         border: Border(
-          top: !isBottom ? BorderSide.none : BorderSide(
-              color: labelColor,
-              width: 3.0,
-          ),
-          bottom: isBottom ? BorderSide.none : BorderSide(
-              color: labelColor,
-              width: 3.0,
-          ),
+          top: !isBottom
+              ? BorderSide.none
+              : BorderSide(
+                  color: labelColor,
+                  width: 3.0,
+                ),
+          bottom: isBottom
+              ? BorderSide.none
+              : BorderSide(
+                  color: labelColor,
+                  width: 3.0,
+                ),
         ),
       ),
-      onTap: (index){
+      onTap: (index) {
         pageController.jumpToPage(index);
         setState(() {});
         widget.onPageChanged?.call(index);
       },
     )
         // .cover(widget.tabBar)
-    ;
+        ;
+
+    if (widget.tabAlignment == TabAlignment.center) {
+      tabBar = Center(
+        child: tabBar,
+      );
+    }
 
     return Material(
       color: isThemeBg ? primaryColor : null,
-      child: Center(
-        child: tabBar,
-      ),
+      child: tabBar,
     );
   }
-
 }
