@@ -30,3 +30,6 @@ typedef ChooseItemRecord<T> = ({String title, String key, T value});
 
 /// 判断条件
 typedef ConditionFn = bool Function<T>(T e);
+
+/// 属性元祖
+typedef PropertyRecord = ({String name, String type, String comment});
