@@ -53,6 +53,7 @@ class FileManager {
     String ext = "dart",
     required String content,
     Directory? dir,
+    bool cover = false,
   }) async {
     // final dateStr = "${DateTime.now()}".split(".").first ?? "";
 
@@ -71,6 +72,9 @@ class FileManager {
     var path = '${tempDir.path}/$fileNameNew';
     debugPrint("$this $fileNameNew: $path");
     var file = File(path);
+    if (cover && file.existsSync()) {
+      file.deleteSync();
+    }
     file.createSync();
     file.writeAsStringSync(content);
     return file;

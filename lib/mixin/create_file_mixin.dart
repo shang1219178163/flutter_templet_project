@@ -30,6 +30,7 @@ mixin CreateFileMixin<T extends StatefulWidget> on State<T> {
     final file = await FileManager.instance.createFile(
       fileName: name,
       content: content,
+      cover: true,
     );
     final isExist = file.existsSync();
     final message = isExist ? "文件已生成(下载文件夹)" : "文件创建失败";
