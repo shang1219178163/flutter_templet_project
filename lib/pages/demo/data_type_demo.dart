@@ -219,6 +219,21 @@ class _DataTypeDemoState extends State<DataTypeDemo> {
     ddlog(aa.toStringAsPrecision(2));
 
     showSnackBar(SnackBar(content: Text(d2)));
+
+    int j = 0; //第n次匹配
+    String pigLatin(String words) =>
+        words.replaceAllMapped(RegExp(r'([a|e])', caseSensitive: false),
+            (Match m) {
+          for (var i = 0; i < m.groupCount; i++) {
+            ddlog("${j}_m[${i}]/${m.groupCount - 1}: ${m[i]}");
+            j++;
+          }
+
+          final result = "${m[1]}*";
+          return result;
+        });
+    final result = pigLatin('I have a secret now!');
+    ddlog(result); // 'Iway avehay away ecretsay ownay!'
   }
 
   void onList() {
