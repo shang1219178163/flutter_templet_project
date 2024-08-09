@@ -6,27 +6,25 @@
 //  Copyright © 2024/8/8 shang. All rights reserved.
 //
 
+import 'dart:async';
 import 'dart:io';
 
 import 'package:desktop_drop/desktop_drop.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_page_view.dart';
+import 'package:flutter_templet_project/basicWidget/n_pair.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/n_transform_view.dart';
 import 'package:flutter_templet_project/cache/file_manager.dart';
-import 'package:flutter_templet_project/extension/build_context_ext.dart';
-import 'package:flutter_templet_project/extension/date_time_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/snack_bar_ext.dart';
-import 'package:flutter_templet_project/extension/string_ext.dart';
+import 'package:flutter_templet_project/mixin/create_file_mixin.dart';
+import 'package:flutter_templet_project/pages/demo/convert/WidgetThemeConvert.dart';
+import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:tuple/tuple.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-/// 属性元祖
-typedef PropertyRecord = ({String name, String type, String comment});
-typedef FileRecord = ({String name, String content});
 
 class ConvertTheme extends StatefulWidget {
   ConvertTheme({
@@ -40,7 +38,7 @@ class ConvertTheme extends StatefulWidget {
   State<ConvertTheme> createState() => _ConvertThemeState();
 }
 
-class _ConvertThemeState extends State<ConvertTheme> {
+class _ConvertThemeState extends State<ConvertTheme> with CreateFileMixin {
   bool get hideApp =>
       Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
 
@@ -49,6 +47,8 @@ class _ConvertThemeState extends State<ConvertTheme> {
   /// id
   late final id = arguments["id"];
 
+  final _scrollController = ScrollController();
+
   final transformViewController = NTransformViewController();
 
   late final actionItems = <({String name, VoidCallback action})>[
@@ -56,7 +56,6 @@ class _ConvertThemeState extends State<ConvertTheme> {
     (name: "Paste", action: onPaste),
     (name: "Clear", action: onClear),
     (name: "Try", action: onTry),
-    (name: "拖拽", action: onDrag),
   ];
 
   final canDrag = ValueNotifier(Platform.isMacOS);
@@ -64,117 +63,7 @@ class _ConvertThemeState extends State<ConvertTheme> {
   List<File> files = [];
   List<Tuple2<String, SelectableText>> tabItems = [];
 
-  final themeTemplet = """
-import 'dart:io';
-
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:yl_health_app/extension/string_ext.dart';
-import 'package:yl_health_app/routers/navigator_util.dart';
-import 'package:yl_health_app/util/color_util_new.dart';
-import 'package:yl_health_app/widget/common/my_icon.dart';
-import 'package:yl_health_app/widget/common/my_text.dart';
-
-///自定义顶部appBar
-class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const MyAppBar({
-    Key? key,
-    this.title = '',
-    this.centerTitle = true,
-    this.rightActions,
-    this.backgroundColor = white,
-    this.mainColor = fontColor,
-    this.titleW,
-    this.titleSpacing,
-    this.bottom,
-    this.leading,
-    this.leadingWidth,
-    this.flexibleSpace,
-    this.leadingImg = '',
-    this.leadingVisible = true,
-    this.brightness = Brightness.dark,
-    this.overlayStyle = SystemUiOverlayStyle.dark,
-    this.automaticallyImplyLeading = true,
-    this.elevation = 0,
-    this.toolbarHeight = 48,
-    this.backClick,
-  }) : super(key: key);
-
-  final String title;
-  final bool centerTitle; //标题是否居中，默认居中
-  final List<Widget>? rightActions;
-  final Color? backgroundColor;//背景色
-  final Color? mainColor;
-  final Widget? titleW;
-  final Widget? flexibleSpace;
-  final double? leadingWidth;
-  final double? titleSpacing;
-  final Widget? leading;
-  final bool leadingVisible;
-  final PreferredSizeWidget? bottom;
-  final String leadingImg;
-  final double elevation;
-  final double toolbarHeight;
-  final Brightness brightness; //状态栏颜色 默认为白色文字
-  final SystemUiOverlayStyle overlayStyle;
-  final bool automaticallyImplyLeading; //配合leading 使用，如果左侧不需要图标 ，设置false
-  final Function? backClick;
-
-  @override
-  Size get preferredSize =>
-      Size.fromHeight(toolbarHeight + (bottom?.preferredSize.height ?? 0.0));
-
-  @override
-  Widget build(BuildContext context) {
-    final titleStr = title.toShort();
-
-    return AppBar(
-      title: titleW ??
-          MyText(
-            titleStr,
-            size: 18,
-            color: mainColor,
-            fontWeight: FontWeight.w500,
-          ),
-      backgroundColor: backgroundColor,
-      elevation: elevation,
-      flexibleSpace: flexibleSpace,
-      leading: leading ??
-          Visibility(
-            visible: leadingVisible,
-            child: IconButton(
-              onPressed: () {
-                if (backClick != null) {
-                  backClick!();
-                } else {
-                  NavigatorUtil.goBack();
-                }
-              },
-              icon: MyIcon(
-                Icons.arrow_back_ios_new_outlined,
-                color: mainColor,
-                size: 18,
-              ),
-            ),
-          ),
-      titleSpacing: titleSpacing,
-      leadingWidth: leadingWidth,
-      systemOverlayStyle: Platform.isAndroid
-          ? SystemUiOverlayStyle(
-              statusBarBrightness: brightness,
-              statusBarIconBrightness: brightness,
-              systemNavigationBarColor: Colors.transparent,
-            )
-          : overlayStyle,
-      automaticallyImplyLeading: automaticallyImplyLeading,
-      centerTitle: centerTitle,
-      actions: rightActions ?? rightActions,
-      toolbarHeight: toolbarHeight,
-      bottom: bottom ?? bottom,
-    );
-  }
-}
-""";
+  final themeConvert = WidgetThemeConvert();
 
   @override
   void initState() {
@@ -216,46 +105,69 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
           : buildDragBox(
               onDropChanged: (List<File> files) async {
                 ddlog(files);
-                String content1 = await files.first.readAsString();
-                transformViewController.out = content1;
+                // String content1 = await files.first.readAsString();
+                // transformViewController.out = content1;
 
                 final list = <Tuple2<String, SelectableText>>[];
-                for (var e in files) {
-                  final name = e.path.split("/").last;
-                  String content = await e.readAsString();
-                  final result = Tuple2(name, SelectableText(content));
-                  list.add(result);
+                for (final e in files) {
+                  final tuple = await themeConvert.convertFile(file: e);
+                  if (tuple == null) {
+                    continue;
+                  }
+                  final item = Tuple2(
+                    tuple.nameNew ?? "",
+                    SelectableText(tuple.contentNew ?? ""),
+                  );
+                  list.add(item);
                 }
                 tabItems = list;
-
                 setState(() {});
               },
             ),
       toolbarBuilder: (_) {
         return ValueListenableBuilder(
-            valueListenable: canDrag,
-            builder: (context, value, child) {
-              return Wrap(
-                spacing: 8,
-                runSpacing: 8,
-                children: [
-                  ...actionItems.map((e) {
-                    return ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        elevation: 0,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+          valueListenable: canDrag,
+          builder: (context, value, child) {
+            return Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: [
+                ...actionItems.map((e) {
+                  return ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      elevation: 0,
+                      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    ),
+                    onPressed: e.action,
+                    child: NText(e.name),
+                  );
+                }).toList(),
+                NPair(
+                  icon: Text(
+                    "Drag",
+                    style: TextStyle(fontSize: 14),
+                  ),
+                  child: SizedBox(
+                    // width: 50,
+                    height: 28,
+                    child: FittedBox(
+                      fit: BoxFit.fill,
+                      child: CupertinoSwitch(
+                        value: canDrag.value,
+                        onChanged: (val) {
+                          onDrag(val);
+                        },
                       ),
-                      onPressed: e.action,
-                      child: NText(e.name),
-                    );
-                  }).toList(),
-                ],
-              );
-            });
+                    ),
+                  ),
+                ),
+              ],
+            );
+          },
+        );
       },
-      end: canDrag.value == false
+      end: canDrag.value == false || tabItems.isEmpty
           ? null
           : NPageView(
               items: tabItems,
@@ -296,7 +208,9 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
               // setState(() {});
             },
             child: Scrollbar(
+              controller: _scrollController,
               child: SingleChildScrollView(
+                controller: _scrollController,
                 child: Container(
                   padding: EdgeInsets.all(8),
                   child: Column(
@@ -304,9 +218,18 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       ...files
-                          .map((e) =>
-                              Text(e.path, style: TextStyle(fontSize: 12)))
+                          .map(
+                            (e) => SelectableText(
+                              e.path,
+                              style: TextStyle(fontSize: 12),
+                            ),
+                          )
                           .toList(),
+                      if (files.isEmpty)
+                        NText(
+                          "拖拽文件",
+                          style: TextStyle(color: fontColor737373),
+                        ),
                     ],
                   ),
                 ),
@@ -329,68 +252,31 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
         }
       }
     } else {
-      onConvert();
+      onConvert(text: transformViewController.textEditingController.text);
     }
   }
 
-  onConvert({String? text}) async {
-    text ??= transformViewController.textEditingController.text;
-    final lines = text
-        .split("Widget build(BuildContext context)")
-        .first
-        .split("\n")
-        .where(
-            (e) => e.startsWith("class ") || e.trimLeft().startsWith("final "))
-        .toList();
-
-    final clsName =
-        (lines.where((e) => e.startsWith("class ")).firstOrNull ?? "ClassName")
-            .split(" ")[1]
-            .replaceFirst("My", "Yl")
-            .replaceFirst("N", "Yl");
-
-    final propertys = lines.where((e) {
-      final result = e.trimLeft().startsWith("final ") && e.contains("?");
-      return result;
-    }).map((e) {
-      final eContent = e.trimLeft();
-      final comment = eContent.contains("//") ? eContent.split("//").last : "";
-      final parts = eContent.split(RegExp(r'[ ;]+'));
-      final p = (name: parts[2], type: parts[1], comment: comment);
-      return p;
-    }).toList();
-    // transformViewController.out = clsName +
-    //     propertys.map((e) => e.toString()).join(""
-    //         "\n");
-
-    final fileName =
-        "${clsName.toUncamlCase("_")}_theme.dart".replaceFirst("yl_", "");
-    final content = createThemeFileContent(
-      clsName: clsName,
-      propertys: propertys,
-    );
-    transformViewController.out = content;
-
-    onCreate(fileName: fileName, content: content);
-    final file = await FileManager.instance.createFile(
-      fileName: fileName,
-      content: content,
-    );
-    if (file.existsSync()) {
-      showSnackBar(SnackBar(
-        content: NText(
-          "文件已生成(下载文件夹)",
-          color: Colors.white,
-          textAlign: TextAlign.center,
-        ),
-        backgroundColor: Colors.green,
-      ));
-      openFolder(file: file);
+  onConvert({required String text}) async {
+    final model = await themeConvert.convert(content: text);
+    if (model == null) {
+      ddlog("❌convert 转换失败");
+      return;
     }
+
+    transformViewController.out = model.contentNew ?? "";
+
+    final isSuccess = await onCreate(
+      fileName: model.nameNew ?? "",
+      content: model.contentNew ?? "",
+    );
+    if (isSuccess) {}
   }
 
   onClear() {
     transformViewController.clear();
+    files.clear();
+    tabItems.clear();
+    setState(() {});
   }
 
   onPaste() async {
@@ -399,105 +285,18 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   onTry() async {
-    transformViewController.textEditingController.text = themeTemplet;
+    transformViewController.textEditingController.text =
+        themeConvert.exampleTemplet();
     onGenerate();
   }
 
-  onDrag() async {
-    canDrag.value = !canDrag.value;
+  onDrag(bool? val) async {
+    canDrag.value = val ?? !canDrag.value;
     setState(() {});
   }
 
-  onCreate({
-    required String fileName,
-    required String content,
-  }) async {
-    final file = await FileManager.instance.createFile(
-      fileName: fileName,
-      content: content,
-    );
-    if (file.existsSync()) {
-      showSnackBar(SnackBar(
-        content: NText(
-          "文件已生成(下载文件夹)",
-          color: Colors.white,
-          textAlign: TextAlign.center,
-        ),
-        backgroundColor: Colors.green,
-      ));
-      openFolder(file: file);
-    }
-  }
-
-  Future<void> openFolder({required File file}) async {
-    final path = 'file:///Users/shang/Downloads';
-    final uri = Uri.parse(path);
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri);
-    } else {
-      throw 'Could not launch $uri';
-    }
-  }
-
-  String createThemeFileContent({
-    String prefix = "Yl",
-    required String clsName,
-    required List<PropertyRecord> propertys,
-  }) {
-    final projectName = "yl_design";
-    final dateStr = DateTimeExt.stringFromDate(
-      date: DateTime.now(),
-      format: 'yyyy/MM/dd HH:mm:ss',
-    );
-
-    final name = clsName.startsWith(prefix) ? clsName : prefix + clsName;
-    final content = """
-//
-//  ${name}Theme.dart
-//  $projectName
-//
-//  Created by shang on ${dateStr?.substring(0, 16)}.
-//  Copyright © ${dateStr?.substring(0, 10)} shang. All rights reserved.
-//
-
-import 'package:flutter/material.dart';
-
-/// 自定义 
-class ${name}Theme extends ThemeExtension<${name}Theme> {
-  /// 自定义  
-  ${name}Theme({
-${propertys.map((e) => "\t\tthis.${e.name},").join("\n")}
-  });
-
-${propertys.map((e) => """
-  /// ${e.comment}
-  final ${e.type} ${e.name};
-  """).join("\n")}
-
-  @override
-  ThemeExtension<${name}Theme> copyWith({
-${propertys.map((e) => """
-\t\t${e.type} ${e.name},
-""").join("")}
-  }) =>
-      ${name}Theme(
-    ${propertys.map((e) => """
-      ${e.name}: ${e.name} ?? this.${e.name},
-    """).join("")}
-      );
-
-  @override
-  ThemeExtension<${name}Theme> lerp(
-    covariant ${name}Theme? other,
-    double t,
-  ) =>
-      ${name}Theme(
-    ${propertys.map((e) => """
-      ${e.name}: ${e.type.replaceAll("?", "")}.lerp(${e.name}, other?.${e.name}, t),
-    """).join("")}
-      );
-}
-    """;
-    return content;
+  Future<bool> onCreate(
+      {required String fileName, required String content}) async {
+    return onCreateFile(name: fileName, content: content);
   }
 }
