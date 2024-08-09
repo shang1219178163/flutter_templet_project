@@ -538,7 +538,7 @@ var list = <Tuple2<String, String>>[
   Tuple2(APPRouter.listBodyDemo, "listBodyDemo"),
   Tuple2(APPRouter.scanAnimationDemo, "scanAnimationDemo"),
   Tuple2(APPRouter.lerpDemo, "lerpDemo"),
-  Tuple2(APPRouter.convertTheme, "convertTheme"),
+  Tuple2(APPRouter.convertFlle, "convertTheme"),
   Tuple2(APPRouter.splitViewDemo, "splitViewDemo"),
 ];
 

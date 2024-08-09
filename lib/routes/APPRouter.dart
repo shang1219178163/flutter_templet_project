@@ -29,7 +29,7 @@ import 'package:flutter_templet_project/pages/demo/AppWebViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AsyncDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AudioPlayerPageDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ComponentMiddlePage.dart';
-import 'package:flutter_templet_project/pages/demo/ConvertTheme.dart';
+import 'package:flutter_templet_project/pages/demo/ConvertFlle.dart';
 import 'package:flutter_templet_project/pages/demo/DecoratedBoxTransitionDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DefaultTabControllerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DevelopToolList.dart';
@@ -742,7 +742,7 @@ class APPRouter {
   static const listBodyDemo = '/listBodyDemo';
   static const scanAnimationDemo = '/scanAnimationDemo';
   static const lerpDemo = '/lerpDemo';
-  static const convertTheme = '/ConvertTheme';
+  static const convertFlle = '/ConvertFlle';
   static const splitViewDemo = '/SplitViewDemo';
 
   // static final routes = <String, WidgetBuilder>{
@@ -2195,8 +2195,8 @@ class AppPage {
       page: () => LerpDemo(),
     ),
     GetPage(
-      name: APPRouter.convertTheme,
-      page: () => ConvertTheme(),
+      name: APPRouter.convertFlle,
+      page: () => ConvertFlle(),
     ),
     GetPage(
       name: APPRouter.splitViewDemo,

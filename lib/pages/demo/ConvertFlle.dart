@@ -1,5 +1,5 @@
 //
-//  NTransformTheme.dart
+//  ConvertFlle.dart
 //  flutter_templet_project
 //
 //  Created by shang on 2024/8/8 10:14.
@@ -12,22 +12,22 @@ import 'dart:io';
 import 'package:desktop_drop/desktop_drop.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_menu_anchor.dart';
 import 'package:flutter_templet_project/basicWidget/n_page_view.dart';
 import 'package:flutter_templet_project/basicWidget/n_pair.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/n_transform_view.dart';
-import 'package:flutter_templet_project/cache/file_manager.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
-import 'package:flutter_templet_project/extension/snack_bar_ext.dart';
 import 'package:flutter_templet_project/mixin/create_file_mixin.dart';
+import 'package:flutter_templet_project/pages/demo/convert/ConvertProtocol.dart';
+import 'package:flutter_templet_project/pages/demo/convert/WidgetNameConvert.dart';
 import 'package:flutter_templet_project/pages/demo/convert/WidgetThemeConvert.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:get/get.dart';
 import 'package:tuple/tuple.dart';
-import 'package:url_launcher/url_launcher.dart';
 
-class ConvertTheme extends StatefulWidget {
-  ConvertTheme({
+class ConvertFlle extends StatefulWidget {
+  ConvertFlle({
     super.key,
     this.arguments,
   });
@@ -35,10 +35,10 @@ class ConvertTheme extends StatefulWidget {
   final Map<String, dynamic>? arguments;
 
   @override
-  State<ConvertTheme> createState() => _ConvertThemeState();
+  State<ConvertFlle> createState() => _ConvertFlleState();
 }
 
-class _ConvertThemeState extends State<ConvertTheme> with CreateFileMixin {
+class _ConvertFlleState extends State<ConvertFlle> with CreateFileMixin {
   bool get hideApp =>
       Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
 
@@ -60,10 +60,18 @@ class _ConvertThemeState extends State<ConvertTheme> with CreateFileMixin {
 
   final canDrag = ValueNotifier(Platform.isMacOS);
 
+  final progressVN = ValueNotifier(0.0);
+
   List<File> files = [];
   List<Tuple2<String, SelectableText>> tabItems = [];
 
-  final themeConvert = WidgetThemeConvert();
+  final convertTypeIndex = 0;
+  final convertTypes = <({String name, ConvertProtocol convert})>[
+    (name: "组件转Theme文件", convert: WidgetThemeConvert()),
+    (name: "组件类名修改", convert: WidgetNameConvert()),
+  ];
+
+  late var current = convertTypes[convertTypeIndex];
 
   @override
   void initState() {
@@ -77,8 +85,28 @@ class _ConvertThemeState extends State<ConvertTheme> with CreateFileMixin {
           ? null
           : AppBar(
               title: Text("$widget"),
+              bottom: buildBottomProgress(),
             ),
       body: buildBody(),
+    );
+  }
+
+  /// 进度指示条
+  PreferredSize buildBottomProgress() {
+    return PreferredSize(
+      preferredSize: const Size.fromHeight(2),
+      child: ValueListenableBuilder<double>(
+        valueListenable: progressVN,
+        builder: (_, value, child) {
+          var indicatorColor = value >= 1.0 ? Colors.transparent : Colors.green;
+          return LinearProgressIndicator(
+            value: value,
+            color: indicatorColor,
+            backgroundColor: Colors.transparent,
+            minHeight: 5,
+          );
+        },
+      ),
     );
   }
 
@@ -90,38 +118,23 @@ class _ConvertThemeState extends State<ConvertTheme> with CreateFileMixin {
       //   fontSize: 20,
       //   fontWeight: FontWeight.w500,
       // ),
-      // message: NText(
-      //   "这是一条提示信息",
-      //   maxLines: 3,
-      // ),
-      // canDrag: true,
-      // onDropChanged: (files) async {
-      //   ddlog(files);
-      //   String content = await files.first.readAsString();
-      //   transformViewController.out = content;
-      // },
+      message: NMenuAnchor<({String name, ConvertProtocol convert})>(
+        values: convertTypes,
+        initialItem: current,
+        cbName: (e) => e.name,
+        onChanged: (e) async {
+          debugPrint(e.name);
+          current = e;
+          await onDragChanged();
+        },
+      ),
       start: canDrag.value == false
           ? null
           : buildDragBox(
               onDropChanged: (List<File> files) async {
-                ddlog(files);
-                // String content1 = await files.first.readAsString();
-                // transformViewController.out = content1;
-
-                final list = <Tuple2<String, SelectableText>>[];
-                for (final e in files) {
-                  final tuple = await themeConvert.convertFile(file: e);
-                  if (tuple == null) {
-                    continue;
-                  }
-                  final item = Tuple2(
-                    tuple.nameNew ?? "",
-                    SelectableText(tuple.contentNew ?? ""),
-                  );
-                  list.add(item);
-                }
-                tabItems = list;
-                setState(() {});
+                // ddlog(files);
+                this.files = files;
+                await onDragChanged();
               },
             ),
       toolbarBuilder: (_) {
@@ -241,23 +254,46 @@ class _ConvertThemeState extends State<ConvertTheme> with CreateFileMixin {
     );
   }
 
+  Future<void> onDragChanged() async {
+    final list = <Tuple2<String, SelectableText>>[];
+    for (final e in files) {
+      final model = await current.convert.convertFile(file: e);
+      progressVN.value = files.indexOf(e) / (files.length - 1);
+      if (model == null) {
+        continue;
+      }
+      final item = Tuple2(
+        model.nameNew ?? "",
+        SelectableText(model.contentNew ?? ""),
+      );
+      list.add(item);
+    }
+    tabItems = list;
+    setState(() {});
+  }
+
   onGenerate() async {
     if (canDrag.value) {
       for (final e in tabItems) {
         try {
-          onConvert(text: e.item2.data ?? "");
+          onCreateFile(name: e.item1, content: e.item2.data ?? "");
         } catch (e) {
           debugPrint("❌$this $e");
           continue;
         }
       }
     } else {
-      onConvert(text: transformViewController.textEditingController.text);
+      onCreateFile(
+        name: "未知文件_${DateTime.now()}.dart",
+        content: transformViewController.textEditingController.text,
+      );
     }
   }
 
-  onConvert({required String text}) async {
-    final model = await themeConvert.convert(content: text);
+  onConvert({
+    required String content,
+  }) async {
+    final model = await current.convert.convert(content: content);
     if (model == null) {
       ddlog("❌convert 转换失败");
       return;
@@ -265,11 +301,10 @@ class _ConvertThemeState extends State<ConvertTheme> with CreateFileMixin {
 
     transformViewController.out = model.contentNew ?? "";
 
-    final isSuccess = await onCreate(
-      fileName: model.nameNew ?? "",
+    final isSuccess = await onCreateFile(
+      name: model.nameNew ?? "",
       content: model.contentNew ?? "",
     );
-    if (isSuccess) {}
   }
 
   onClear() {
@@ -286,17 +321,12 @@ class _ConvertThemeState extends State<ConvertTheme> with CreateFileMixin {
 
   onTry() async {
     transformViewController.textEditingController.text =
-        themeConvert.exampleTemplet();
+        current.convert.exampleTemplet();
     onGenerate();
   }
 
   onDrag(bool? val) async {
     canDrag.value = val ?? !canDrag.value;
     setState(() {});
-  }
-
-  Future<bool> onCreate(
-      {required String fileName, required String content}) async {
-    return onCreateFile(name: fileName, content: content);
   }
 }

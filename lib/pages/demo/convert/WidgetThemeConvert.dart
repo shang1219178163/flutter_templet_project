@@ -8,12 +8,13 @@
 
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_templet_project/extension/date_time_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/type_util.dart';
 import 'package:flutter_templet_project/pages/demo/convert/ConvertProtocol.dart';
 
-class WidgetThemeConvert implements ConvertProtocol {
+class WidgetThemeConvert extends ConvertProtocol {
   @override
   String exampleTemplet() {
     return """
@@ -131,9 +132,14 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Future<ConvertModel?> convertFile({required File file}) async {
-    final name = file.path.split("/").last;
-    String content = await file.readAsString();
-    return convert(content: content, name: name);
+    try {
+      final name = file.path.split("/").last;
+      String content = await file.readAsString();
+      return convert(content: content, name: name);
+    } catch (e) {
+      debugPrint("$this $e");
+    }
+    return null;
   }
 
   @override
@@ -152,11 +158,21 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
             (e) => e.startsWith("class ") || e.trimLeft().startsWith("final "))
         .toList();
 
-    final clsName =
-        (lines.where((e) => e.startsWith("class ")).firstOrNull ?? "ClassName")
-            .split(" ")[1]
-            .replaceFirst("My", "Yl")
-            .replaceFirst("N", "Yl");
+    final line =
+        (lines.where((e) => e.startsWith("class ")).firstOrNull ?? "ClassName");
+    // final clsName =
+    //     (lines.where((e) => e.startsWith("class ")).firstOrNull ?? "ClassName")
+    //         .split(" ")[1]
+    //         .replaceFirst("My", "Yl")
+    //         .replaceFirst("N", "Yl");
+
+    var clsName = "";
+    if (line.contains("<")) {
+      clsName = line.split("<").first.split(" ")[1];
+    } else {
+      clsName = line.split(" ")[1];
+    }
+    clsName = clsName.replaceFirst("My", "Yl").replaceFirst("N", "Yl");
 
     final propertys = lines.where((e) {
       final result = e.trimLeft().startsWith("final ") && e.contains("?");

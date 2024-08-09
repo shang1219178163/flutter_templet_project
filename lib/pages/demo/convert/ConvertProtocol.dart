@@ -10,6 +10,11 @@ import 'dart:io';
 
 /// 文件转换协议
 abstract class ConvertProtocol {
+  /// 名称
+  String name() {
+    return runtimeType.toString();
+  }
+
   /// 示例模板
   String exampleTemplet() {
     throw UnimplementedError("❌$this 未实现 exampleTemplet");
@@ -26,7 +31,6 @@ abstract class ConvertProtocol {
   }) async {
     throw UnimplementedError("❌$this 未实现 convert");
   }
-
 }
 
 class ConvertModel {
