@@ -74,7 +74,7 @@ class _SplitViewDemoState extends State<SplitViewDemo> {
       key: ValueKey("left"),
       color: ColorExt.random,
       child: ListTile(
-        title: Text("buildLeft"),
+        title: Text("buildLeft" * 9),
       ),
     );
   }
@@ -83,6 +83,9 @@ class _SplitViewDemoState extends State<SplitViewDemo> {
     return Container(
       key: ValueKey("right"),
       color: ColorExt.random,
+      child: ListTile(
+        title: Text("buildRight" * 9),
+      ),
     );
   }
 }

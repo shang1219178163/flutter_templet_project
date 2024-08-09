@@ -118,18 +118,20 @@ class _APPUserCenterPageState extends State<APPUserCenterPage>
           Expanded(
             child: InkWell(
               onTap: () async {
-                chooseImagesByWechatPicker(onChanged: (File val) {
-                  debugPrint("value: $val");
-                  avatarVN.value = val.path;
-                });
+                chooseImagesByWechatPicker(
+                  maxCount: 1,
+                  needCropp: true,
+                  onChanged: (File val) {
+                    debugPrint("value: $val");
+                    avatarVN.value = val.path;
+                  },
+                );
                 // updateAvatar(
-                //   cb: (val){
-                //     if (val == null) {
-                //       return;
-                //     }
+                //   needCropp: true,
+                //   onChanged: (File val) {
                 //     debugPrint("updateAvatar: $val");
-                //     avatarVN.value = val;
-                //   }
+                //     avatarVN.value = val.path;
+                //   },
                 // );
               },
               child: ValueListenableBuilder<String>(
