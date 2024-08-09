@@ -75,8 +75,8 @@ class _NPageViewState extends State<NPageView> with TickerProviderStateMixin {
     final oldNames = oldWidget.items.map((e) => e.item1).join(",");
     if (names != oldNames) {
       tabController = TabController(length: widget.items.length, vsync: this);
-      setState(() {});
     }
+    setState(() {});
   }
 
   @override
