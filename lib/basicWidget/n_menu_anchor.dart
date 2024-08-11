@@ -11,8 +11,9 @@ import 'package:flutter_templet_project/extension/widget_ext.dart';
 
 /// MenuAnchor 简易封装,方便代码复用
 class NMenuAnchor<E> extends StatelessWidget {
-  NMenuAnchor({
+  const NMenuAnchor({
     super.key,
+    this.style,
     required this.values,
     required this.initialItem,
     this.builder,
@@ -20,6 +21,8 @@ class NMenuAnchor<E> extends StatelessWidget {
     required this.onChanged,
     required this.cbName,
   });
+
+  final MenuStyle? style;
 
   /// 数据源
   final List<E> values;
@@ -52,45 +55,57 @@ class NMenuAnchor<E> extends StatelessWidget {
           onChanged.call(e);
         }
 
-        return MenuAnchor(
-          builder: (context, MenuController controller, Widget? child) {
-            return builder?.call(controller, selectedItem) ??
-                OutlinedButton(
-                  style: OutlinedButton.styleFrom(
-                    // backgroundColor: Color(0xff5690F4).withOpacity(0.1),
-                    // foregroundColor: Color(0xff5690F4),
-                    elevation: 0,
-                    // shape: StadiumBorder(),
-                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                    // minimumSize: Size(64, 32),
-                    padding:
-                        EdgeInsets.only(left: 8, right: 2, top: 6, bottom: 6),
-                    foregroundColor: Colors.black87,
-                  ),
-                  onPressed: () {
-                    if (controller.isOpen) {
-                      controller.close();
-                    } else {
-                      controller.open();
-                    }
-                  },
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(cbName(selectedItem)),
-                      Icon(Icons.arrow_drop_down),
-                    ],
-                  ),
-                );
-          },
-          menuChildren: values.map((e) {
-            return MenuItemButton(
-              onPressed: () {
-                onItem(e);
-              },
-              child: itemBuilder?.call(e, e == selectedItem) ?? Text(cbName(e)),
-            ).toColoredBox();
-          }).toList(),
+        return MenuTheme(
+          data: MenuThemeData(
+            style: style ??
+                MenuStyle(
+                  padding: MaterialStateProperty.all(EdgeInsets.all(0.0)),
+                  // backgroundColor: MaterialStateProperty.all(Colors.white),
+                  elevation: MaterialStateProperty.all(8),
+                  shadowColor: MaterialStateProperty.all(Colors.black54),
+                ),
+          ),
+          child: MenuAnchor(
+            builder: (context, MenuController controller, Widget? child) {
+              return builder?.call(controller, selectedItem) ??
+                  OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      // backgroundColor: Color(0xff5690F4).withOpacity(0.1),
+                      // foregroundColor: Color(0xff5690F4),
+                      elevation: 0,
+                      // shape: StadiumBorder(),
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      // minimumSize: Size(64, 32),
+                      padding:
+                          EdgeInsets.only(left: 8, right: 2, top: 6, bottom: 6),
+                      foregroundColor: Colors.black87,
+                    ),
+                    onPressed: () {
+                      if (controller.isOpen) {
+                        controller.close();
+                      } else {
+                        controller.open();
+                      }
+                    },
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(cbName(selectedItem)),
+                        Icon(Icons.arrow_drop_down),
+                      ],
+                    ),
+                  );
+            },
+            menuChildren: values.map((e) {
+              return MenuItemButton(
+                onPressed: () {
+                  onItem(e);
+                },
+                child:
+                    itemBuilder?.call(e, e == selectedItem) ?? Text(cbName(e)),
+              );
+            }).toList(),
+          ),
         );
       },
     );
