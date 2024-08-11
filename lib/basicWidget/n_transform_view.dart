@@ -23,26 +23,23 @@ class NTransformView extends StatefulWidget {
     this.message,
     this.start,
     this.end,
-    // this.canDrag = false,
-    // this.onDropChanged,
-    // this.dragChild,
     required this.toolbarBuilder,
   });
 
+  /// 控制器
   final NTransformViewController? controller;
 
+  /// 标题
   final Widget? title;
+
+  /// 描述
   final Widget? message;
 
+  /// 头部组件
   final Widget? start;
-  final Widget? end;
 
-  // /// 是否开启拖拽
-  // final bool canDrag;
-  // final Widget? dragChild;
-  //
-  // /// 拖拽回调
-  // final ValueChanged<List<File>>? onDropChanged;
+  /// 尾部组件
+  final Widget? end;
 
   final Widget Function(BuildContext context) toolbarBuilder;
 
@@ -285,6 +282,14 @@ class NTransformViewController {
 
   TextEditingController get textEditingController {
     return _anchor!._textEditingController;
+  }
+
+  set input(String value) {
+    textEditingController.text = value;
+  }
+
+  String get input {
+    return textEditingController.text;
   }
 
   set out(String value) {

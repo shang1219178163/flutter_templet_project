@@ -15,6 +15,9 @@ import 'package:flutter_templet_project/pages/demo/convert/ConvertProtocol.dart'
 
 class WidgetNameConvert extends ConvertProtocol {
   @override
+  String get name => "组件类名修改";
+
+  @override
   String exampleTemplet() {
     return """
 import 'package:flutter/material.dart';

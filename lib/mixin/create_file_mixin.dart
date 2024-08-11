@@ -51,6 +51,9 @@ mixin CreateFileMixin<T extends StatefulWidget> on State<T> {
   }
 
   Future<bool> _openFolder({required File file}) async {
+    if (!Platform.isMacOS) {
+      return false;
+    }
     var path = file.path;
     if (Platform.isMacOS) {
       path = 'file:///Users/shang/Downloads';

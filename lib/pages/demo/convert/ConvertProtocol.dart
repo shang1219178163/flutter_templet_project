@@ -11,7 +11,7 @@ import 'dart:io';
 /// 文件转换协议
 abstract class ConvertProtocol {
   /// 名称
-  String name() {
+  String get name {
     return runtimeType.toString();
   }
 

@@ -66,9 +66,10 @@ class _ConvertFlleState extends State<ConvertFlle> with CreateFileMixin {
   List<Tuple2<String, SelectableText>> tabItems = [];
 
   final convertTypeIndex = 0;
-  final convertTypes = <({String name, ConvertProtocol convert})>[
-    (name: "组件转Theme文件", convert: WidgetThemeConvert()),
-    (name: "组件类名修改", convert: WidgetNameConvert()),
+
+  final convertTypes = <ConvertProtocol>[
+    WidgetThemeConvert(),
+    WidgetNameConvert(),
   ];
 
   late var current = convertTypes[convertTypeIndex];
@@ -118,7 +119,7 @@ class _ConvertFlleState extends State<ConvertFlle> with CreateFileMixin {
       //   fontSize: 20,
       //   fontWeight: FontWeight.w500,
       // ),
-      message: NMenuAnchor<({String name, ConvertProtocol convert})>(
+      message: NMenuAnchor<ConvertProtocol>(
         values: convertTypes,
         initialItem: current,
         cbName: (e) => e.name,
@@ -257,7 +258,7 @@ class _ConvertFlleState extends State<ConvertFlle> with CreateFileMixin {
   Future<void> onDragChanged() async {
     final list = <Tuple2<String, SelectableText>>[];
     for (final e in files) {
-      final model = await current.convert.convertFile(file: e);
+      final model = await current.convertFile(file: e);
       progressVN.value = files.indexOf(e) / (files.length - 1);
       if (model == null) {
         continue;
@@ -285,7 +286,7 @@ class _ConvertFlleState extends State<ConvertFlle> with CreateFileMixin {
     } else {
       onCreateFile(
         name: "未知文件_${DateTime.now()}.dart",
-        content: transformViewController.textEditingController.text,
+        content: transformViewController.out,
       );
     }
   }
@@ -293,7 +294,7 @@ class _ConvertFlleState extends State<ConvertFlle> with CreateFileMixin {
   onConvert({
     required String content,
   }) async {
-    final model = await current.convert.convert(content: content);
+    final model = await current.convert(content: content);
     if (model == null) {
       ddlog("❌convert 转换失败");
       return;
@@ -320,8 +321,12 @@ class _ConvertFlleState extends State<ConvertFlle> with CreateFileMixin {
   }
 
   onTry() async {
-    transformViewController.textEditingController.text =
-        current.convert.exampleTemplet();
+    transformViewController.input = current.exampleTemplet();
+
+    final model = await current.convert(
+      content: transformViewController.input,
+    );
+    transformViewController.out = model?.contentNew ?? "";
     onGenerate();
   }
 
