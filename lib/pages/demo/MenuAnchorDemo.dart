@@ -1,13 +1,8 @@
-
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_menu_anchor.dart';
 import 'package:flutter_templet_project/basicWidget/n_menu_anchor_for_image.dart';
 
-
 enum SomeItemType { none, itemOne, itemTwo, itemThree }
-
 
 class MenuAnchorDemo extends StatefulWidget {
   const MenuAnchorDemo({super.key});
@@ -17,7 +12,6 @@ class MenuAnchorDemo extends StatefulWidget {
 }
 
 class _MenuAnchorDemoState extends State<MenuAnchorDemo> {
-
   final _selectedItemVN = ValueNotifier<SomeItemType>(SomeItemType.none);
 
   String defaultValue = "-";
@@ -25,7 +19,6 @@ class _MenuAnchorDemoState extends State<MenuAnchorDemo> {
   var selectedItem = SomeItemType.itemThree;
 
   final MenuController controller = MenuController();
-
 
   @override
   Widget build(BuildContext context) {
@@ -58,12 +51,10 @@ class _MenuAnchorDemoState extends State<MenuAnchorDemo> {
       children: [
         // Spacer(),
         ValueListenableBuilder(
-          valueListenable: _selectedItemVN,
-          builder: (context, value, child){
-
-            return Text(value.name ?? defaultValue);
-          }
-        ),
+            valueListenable: _selectedItemVN,
+            builder: (context, value, child) {
+              return Text(value.name ?? defaultValue);
+            }),
 
         // buildMenuAnchor<SomeItemType>(
         //   values: SomeItemType.values,
@@ -83,6 +74,17 @@ class _MenuAnchorDemoState extends State<MenuAnchorDemo> {
             debugPrint(e.name);
             _selectedItemVN.value = e;
           },
+          itemBuilder: (e, isSeleced) {
+            return SizedBox(
+              width: 100,
+              height: 45,
+              child: ListTile(
+                dense: true,
+                // leading: FlutterLogo(size: 24),
+                title: Text(e.name),
+              ),
+            );
+          },
         ),
 
         // NEnumMenuAnchor<SomeItemType>(
@@ -93,13 +95,12 @@ class _MenuAnchorDemoState extends State<MenuAnchorDemo> {
         //     _selectedItemVN.value = e;
         //   },
         // ),
-
       ],
     );
   }
 
   buildMenuAnchor<E>({
-    required List<E> values, 
+    required List<E> values,
     required E initialItem,
     required String Function(E e) cbName,
     required ValueChanged<E> onChanged,
@@ -108,45 +109,39 @@ class _MenuAnchorDemoState extends State<MenuAnchorDemo> {
     var selectedItem = initialItem;
 
     return StatefulBuilder(
-      builder: (BuildContext context, StateSetter setState) {
-
-        return MenuAnchor(
-          alignmentOffset: Offset(0, 0),
-          builder: (context, MenuController controller, Widget? child) {
-
-            return itemBuilder?.call(controller, selectedItem) ?? OutlinedButton(
-              onPressed: (){
-                if (controller.isOpen) {
-                  controller.close();
-                } else {
-                  controller.open();
-                }
-              },
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(cbName(selectedItem)),
-                  Icon(Icons.arrow_drop_down),
-                ],
-              ),
-            );
-          },
-          menuChildren: values.map((e) {
-            return MenuItemButton(
-              onPressed: () {
-                selectedItem = e;
-                setState(() {});
-                onChanged.call(e);
-              },
-              child: Text(cbName(e)),
-            );
-          }).toList(),
-        );
-      }
-    );
+        builder: (BuildContext context, StateSetter setState) {
+      return MenuAnchor(
+        alignmentOffset: Offset(0, 0),
+        builder: (context, MenuController controller, Widget? child) {
+          return itemBuilder?.call(controller, selectedItem) ??
+              OutlinedButton(
+                onPressed: () {
+                  if (controller.isOpen) {
+                    controller.close();
+                  } else {
+                    controller.open();
+                  }
+                },
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(cbName(selectedItem)),
+                    Icon(Icons.arrow_drop_down),
+                  ],
+                ),
+              );
+        },
+        menuChildren: values.map((e) {
+          return MenuItemButton(
+            onPressed: () {
+              selectedItem = e;
+              setState(() {});
+              onChanged.call(e);
+            },
+            child: Text(cbName(e)),
+          );
+        }).toList(),
+      );
+    });
   }
-
-
 }
-
-
