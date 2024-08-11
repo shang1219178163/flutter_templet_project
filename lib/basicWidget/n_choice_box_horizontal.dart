@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/n_choice_box.dart';
@@ -8,8 +6,7 @@ import 'package:flutter_templet_project/util/color_util.dart';
 
 ///选择盒子水平
 class NChoiceBoxHorizontal<T> extends StatefulWidget {
-
-  NChoiceBoxHorizontal({
+  const NChoiceBoxHorizontal({
     super.key,
     required this.items,
     required this.onChanged,
@@ -18,54 +15,60 @@ class NChoiceBoxHorizontal<T> extends StatefulWidget {
     this.itemSelectedColor = Colors.blue,
     this.spacing = 8,
     this.itemBuilder,
-  }) ;
+  });
 
-  List<ChoiceBoxModel<T>> items;
+  final List<ChoiceBoxModel<T>> items;
 
-  ValueChanged<List<ChoiceBoxModel<T>>> onChanged;
+  final ValueChanged<List<ChoiceBoxModel<T>>> onChanged;
+
   /// 是否单选
-  bool isSingle;
+  final bool isSingle;
+
   /// 元素水平距离默认 8px
-  double spacing;
+  final double spacing;
+
   /// 元素背景色
-  Color itemColor;
+  final Color itemColor;
+
   /// 选中元素背景色
-  Color itemSelectedColor;
+  final Color itemSelectedColor;
+
   /// 子项样式自定义
   final Widget? Function(T e, bool isSelected)? itemBuilder;
 
   @override
-  _NChoiceBoxHorizontalState<T> createState() => _NChoiceBoxHorizontalState<T>();
+  _NChoiceBoxHorizontalState<T> createState() =>
+      _NChoiceBoxHorizontalState<T>();
 }
 
 class _NChoiceBoxHorizontalState<T> extends State<NChoiceBoxHorizontal<T>> {
-
   /// 选中的 items
-  List<ChoiceBoxModel<T>> get seletectedItems => widget.items.where((e) => e.isSelected == true).toList();
+  List<ChoiceBoxModel<T>> get seletectedItems =>
+      widget.items.where((e) => e.isSelected == true).toList();
 
-  List<String> get seletectedItemNames => seletectedItems.map((e) => e.title).toList();
+  List<String> get seletectedItemNames =>
+      seletectedItems.map((e) => e.title).toList();
 
   @override
   void initState() {
     super.initState();
   }
 
-   @override
+  @override
   Widget build(BuildContext context) {
     return ListView.separated(
-      scrollDirection: Axis.horizontal,
-      itemCount: widget.items.length,
-      itemBuilder: (context, index) {
-
-        final e = widget.items[index];
-        return buildItem(e);
-      },
-      separatorBuilder: (context, index) {
-        return SizedBox(width: widget.spacing,);
-      }
-    );
+        scrollDirection: Axis.horizontal,
+        itemCount: widget.items.length,
+        itemBuilder: (context, index) {
+          final e = widget.items[index];
+          return buildItem(e);
+        },
+        separatorBuilder: (context, index) {
+          return SizedBox(
+            width: widget.spacing,
+          );
+        });
   }
-
 
   Widget buildItem(ChoiceBoxModel e) {
     if (widget.itemBuilder != null) {
@@ -99,7 +102,8 @@ class _NChoiceBoxHorizontalState<T> extends State<NChoiceBoxHorizontal<T>> {
         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
         padding: EdgeInsets.zero,
         labelPadding: EdgeInsets.symmetric(horizontal: 6, vertical: -3),
-        label: Text(e.title,
+        label: Text(
+          e.title,
           style: TextStyle(
             color: e.isSelected == true ? Colors.white : fontColor,
             fontSize: 14,
@@ -128,10 +132,8 @@ class _NChoiceBoxHorizontalState<T> extends State<NChoiceBoxHorizontal<T>> {
   }
 }
 
-
 /// 多选模型
-class NChoiceBoxHorizontalModel<T>{
-
+class NChoiceBoxHorizontalModel<T> {
   NChoiceBoxHorizontalModel({
     required this.models,
     this.selectedModelsTmp = const [],
@@ -142,18 +144,21 @@ class NChoiceBoxHorizontalModel<T>{
   });
 
   String title;
+
   /// 是否单选
   bool isSingle;
+
   /// 模型数组
   List<T> models;
+
   /// 模型最终数组(可传入默认选择)
   List<T> selectedModels = [];
+
   /// 模型临时数组(可传入默认选择)
   List<T> selectedModelsTmp = [];
 
   /// 通用参数,挂载任何其他需要的参数
   dynamic data;
-
 }
 
 /// 多选模型
