@@ -55,14 +55,20 @@ class _NExpansionFadeState extends State<NExpansionFade> {
       duration: const Duration(milliseconds: 350),
       firstChild: widget.childBuilder?.call(isExpanded, onToggle) ??
           InkWell(
-              onTap: onToggle,
-              child: const FlutterLogo(
-                  style: FlutterLogoStyle.horizontal, size: 100.0)),
+            onTap: onToggle,
+            child: const FlutterLogo(
+              style: FlutterLogoStyle.horizontal,
+              size: 100.0,
+            ),
+          ),
       secondChild: widget.expandedBuilder?.call(isExpanded, onToggle) ??
           InkWell(
-              onTap: onToggle,
-              child: const FlutterLogo(
-                  style: FlutterLogoStyle.stacked, size: 100.0)),
+            onTap: onToggle,
+            child: const FlutterLogo(
+              style: FlutterLogoStyle.stacked,
+              size: 100.0,
+            ),
+          ),
       crossFadeState:
           !isExpanded ? CrossFadeState.showFirst : CrossFadeState.showSecond,
     );

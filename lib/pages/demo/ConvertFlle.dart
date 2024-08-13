@@ -86,14 +86,17 @@ class _ConvertFlleState extends State<ConvertFlle> with CreateFileMixin {
           ? null
           : AppBar(
               title: Text("$widget"),
-              bottom: buildBottomProgress(),
+              // bottom: buildBottomProgress(),
             ),
       body: buildBody(),
     );
   }
 
   /// 进度指示条
-  PreferredSize buildBottomProgress() {
+  PreferredSize? buildBottomProgress() {
+    // if (!canDrag.value) {
+    //   return null;
+    // }
     return PreferredSize(
       preferredSize: const Size.fromHeight(2),
       child: ValueListenableBuilder<double>(
