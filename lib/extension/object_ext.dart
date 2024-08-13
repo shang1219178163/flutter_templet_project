@@ -71,7 +71,7 @@ extension ObjectExt on Object {
   }
 }
 
-extension DynamicExt<E> on E {
+extension DynamicExt<E> on E? {
   /// 返回可选值或者 `else` 闭包返回的值
   /// 例如. nullable.or(else: {
   /// ... code
@@ -90,6 +90,6 @@ extension DynamicExt<E> on E {
     if (this == null) {
       return null;
     }
-    return fn(this);
+    return fn(this as E);
   }
 }

@@ -10,6 +10,7 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
+import 'package:get/get.dart';
 
 extension ListExt<T, E> on List<E> {
   ///运算符重载
@@ -95,14 +96,6 @@ extension ListExt<T, E> on List<E> {
       }
     }
     return true;
-  }
-
-  /// 移除数组空值
-  List<E> removeNull() {
-    var val = this;
-    val.removeWhere((e) => e == null);
-    final result = val.whereType<E>().toList();
-    return result;
   }
 
   /// 用多个元素取代数组中满足条件的第一个元素
@@ -297,5 +290,16 @@ extension ListNullExt<E> on List<E?> {
     val.removeWhere((e) => e == null);
     final result = val.whereType<E>().toList();
     return result;
+  }
+
+  /// 移除数组空值
+  List<E> mapNonNull() {
+    var list = <E>[];
+    for (final e in this) {
+      if (e != null) {
+        list.add(e);
+      }
+    }
+    return list;
   }
 }

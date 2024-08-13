@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/cache/cache_service.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
+import 'package:flutter_templet_project/extension/list_ext.dart';
 import 'package:flutter_templet_project/extension/type_util.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/map_ext.dart';
@@ -235,6 +236,26 @@ class _DataTypeDemoState extends State<DataTypeDemo> {
         });
     final result = pigLatin('I have a secret now!');
     ddlog(result); // 'Iway avehay away ecretsay ownay!'
+
+    String? a1;
+    String? a2 = "a2";
+    String? a3;
+    String? a4 = "a4";
+    final resultA = a1.or("") + a2.or("") + a3.or("") + a4.or("");
+    final resultB = a1.orBlank + a2.orBlank + a3.orBlank + a4.orBlank;
+    final resultC = [a1, a2, a3, a4].removeNull();
+
+    ddlog("resultA: $resultA");
+    ddlog("resultB: $resultB");
+    ddlog("resultC: $resultC");
+
+    final listA = [
+      a1.map((v) => "A1"),
+      a2.map((v) => "A2"),
+      a3.map((v) => "A3"),
+      a4.map((v) => "A4"),
+    ];
+    ddlog(listA);
   }
 
   void onDate() {

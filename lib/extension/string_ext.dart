@@ -364,3 +364,10 @@ extension StringExt on String {
     return url;
   }
 }
+
+extension StringNullableExt on String? {
+  /// 赋予默认值
+  String get orBlank {
+    return this ?? "";
+  }
+}
