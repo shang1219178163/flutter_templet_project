@@ -154,6 +154,9 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
       return null;
     }
     final lines = content
+        .split("\n")
+        .where((e) => !e.startsWith("//"))
+        .join("\n")
         .split("Widget build(BuildContext context)")
         .first
         .split("\n")
@@ -178,7 +181,9 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
     clsName = clsName.replaceFirst("My", "Yl").replaceFirst("N", "Yl");
 
     final propertys = lines.where((e) {
-      final result = e.trimLeft().startsWith("final ") && e.contains("?");
+      final result = e.trimLeft().startsWith("final ") &&
+          e.contains("?") &&
+          !e.contains(")");
       return result;
     }).map((e) {
       final eContent = e.trimLeft();
