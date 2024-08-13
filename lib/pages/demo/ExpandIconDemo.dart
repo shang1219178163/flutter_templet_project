@@ -8,12 +8,16 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_choice_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_expansion_fade.dart';
+import 'package:flutter_templet_project/basicWidget/n_expansion_menu.dart';
 import 'package:flutter_templet_project/basicWidget/n_list_view_segment_control.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_header.dart';
+import 'package:flutter_templet_project/cache/cache_service.dart';
 import 'package:flutter_templet_project/extension/change_notifier_ext.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/model/tag_detail_model.dart';
 import 'package:get/get.dart';
 
 import 'package:tuple/tuple.dart';
@@ -85,7 +89,7 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
             child: _buildVisibleContainer(),
           ),
           NSectionHeader(
-            title: "自定义 FoldMenu",
+            title: "自定义 FoldMenu - NExpansionFade",
             child: NExpansionFade(
               isExpanded: false,
               childBuilder: (isExpanded, onToggle) => FoldMenu(
@@ -128,6 +132,10 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
               ),
             ),
           ),
+          NSectionHeader(
+            title: "自定义 NExpansionMenu",
+            child: buildTagChoice(),
+          ),
         ],
       ),
     );
@@ -137,11 +145,12 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
   Widget buildExpandColorMenu() {
     return Theme(
       data: ThemeData(
-          dividerColor: Colors.transparent,
-          expansionTileTheme: ExpansionTileThemeData(
-            iconColor: selectedColor.value,
-            collapsedIconColor: selectedColor.value,
-          )),
+        dividerColor: Colors.transparent,
+        expansionTileTheme: ExpansionTileThemeData(
+          iconColor: selectedColor.value,
+          collapsedIconColor: selectedColor.value,
+        ),
+      ),
       child: ExpansionTile(
         leading: Icon(
           Icons.color_lens,
@@ -280,6 +289,101 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
           },
         ),
       ],
+    );
+  }
+
+  /// 标签组
+  List<TagDetailModel> tagModels = [];
+  TagDetailModel? selectedTagModel;
+  TagDetailModel? selectedTagModelTmp;
+
+  /// 筛选弹窗 标签选择
+  Widget buildTagChoice({
+    bool isExpand = false,
+    int collapseCount = 6,
+    Color btnColor = const Color(0xffFF7E6E),
+  }) {
+    tagModels = List.generate(9, (i) {
+      return TagDetailModel(id: "$i", name: "标签$i");
+    }).toList();
+    final models = tagModels;
+    if (models.isEmpty) {
+      return const SizedBox();
+    }
+
+    final disable = (models.length <= collapseCount);
+
+    return StatefulBuilder(builder: (context, setState) {
+      final items = isExpand ? models : models.take(collapseCount).toList();
+
+      return NExpansionMenu(
+        title: "标签",
+        disable: disable,
+        isExpand: isExpand,
+        color: btnColor,
+        onExpansionChanged: (val) {
+          isExpand = !isExpand;
+          setState(() {});
+        },
+        indicatorBuilder: (isExpand) {
+          return Container(
+            width: 3,
+            height: 14,
+            margin: EdgeInsets.only(right: 4),
+            decoration: BoxDecoration(
+              color: btnColor,
+              borderRadius: const BorderRadius.only(
+                topRight: Radius.circular(2),
+                bottomRight: Radius.circular(2),
+              ),
+            ),
+          );
+        },
+        childrenHeader: (isExpanded, onTap) => Column(
+          children: [
+            buildChoicePart<TagDetailModel>(
+              models: items,
+              cbID: (e) => e.id ?? "",
+              cbName: (e) => e.name ?? "",
+              cbSelected: (e) => e.id == selectedTagModelTmp?.id,
+              onChanged: (values) {
+                debugPrint("selectedModels: ${values.map((e) => e.data.name)}");
+                if (values.isEmpty) {
+                  selectedTagModelTmp = null;
+                  return;
+                }
+                selectedTagModelTmp = values.first.data;
+                setState(() {});
+              },
+            ),
+          ],
+        ),
+        children: const [],
+      );
+    });
+  }
+
+  /// 筛选弹窗 选择子菜单
+  buildChoicePart<T>({
+    required List<T> models,
+    required String Function(T) cbID,
+    required String Function(T) cbName,
+    required bool Function(T) cbSelected,
+    required ValueChanged<List<ChoiceBoxModel<T>>> onChanged,
+  }) {
+    return NChoiceBox(
+      isSingle: true,
+      itemColor: Colors.transparent,
+      // wrapAlignment: WrapAlignment.spaceBetween,
+      items: models
+          .map((e) => ChoiceBoxModel<T>(
+                id: cbID(e),
+                title: cbName(e),
+                isSelected: cbSelected(e),
+                data: e,
+              ))
+          .toList(),
+      onChanged: onChanged,
     );
   }
 }
