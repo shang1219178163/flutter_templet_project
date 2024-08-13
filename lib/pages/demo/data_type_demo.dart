@@ -52,6 +52,7 @@ class _DataTypeDemoState extends State<DataTypeDemo> {
 
   late final items = <ActionRecord>[
     (e: "String", action: onString),
+    (e: "Date", action: onDate),
     (e: "List", action: onList),
     (e: "Map", action: onMap),
     (e: "LruMap", action: onLruMap),
@@ -234,6 +235,12 @@ class _DataTypeDemoState extends State<DataTypeDemo> {
         });
     final result = pigLatin('I have a secret now!');
     ddlog(result); // 'Iway avehay away ecretsay ownay!'
+  }
+
+  void onDate() {
+    final now = DateTime.now();
+    final dateStr = "$now".substring(0, 10);
+    debugPrint("dateStr: ${dateStr}");
   }
 
   void onList() {
