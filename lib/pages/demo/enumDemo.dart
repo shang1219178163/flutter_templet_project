@@ -40,13 +40,13 @@ class _EnumDemoState extends State<EnumDemo> {
 
   onDone() {
     String? name = "${ActivityTypeNew.hiking.name}";
-    // name = "null";
+    name = null;
     final v = ActivityTypeNew.values.byNullableName(name);
     final v1 = ActivityTypeNew.skiing.name?.enumOf(ActivityTypeNew.values);
     final v2 = ActivityTypeNew.values.by((e) => e.name == "cycling");
     final v3 = ActivityTypeNew.values.by((e) => e.index == 2);
 
-    ddlog([v, v1, v2].map((e) => "e: $e").join("\n"));
+    ddlog([v, v1, v2].asMap());
   }
 
   buildBody() {
