@@ -166,7 +166,6 @@ import 'package:flutter_templet_project/pages/demo/ListViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ListViewOneDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ListViewStyleDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ListWheelScrollViewDemo.dart';
-import 'package:flutter_templet_project/pages/demo/LocationPopView.dart';
 import 'package:flutter_templet_project/pages/demo/LongCaptureWidgetDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MarqueeWidgetDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MaterialBannerDemo.dart';
@@ -1138,10 +1137,6 @@ class AppPage {
     GetPage(
       name: APPRouter.progressHudDemo,
       page: () => ProgressHudDemo(),
-    ),
-    GetPage(
-      name: APPRouter.locationPopView,
-      page: () => LocationPopView(),
     ),
     GetPage(
       name: APPRouter.backdropFilterDemo,

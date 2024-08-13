@@ -6,7 +6,22 @@
 //  Copyright © 2024/5/11 shang. All rights reserved.
 //
 
+// const duration = Duration(seconds: 123);
+// print('Days: ${duration.inDaysRest}'); // 0
+// print('Hours: ${duration.inHoursRest}'); // 0
+// print('Minutes: ${duration.inMinutesRest}'); // 2
+// print('Seconds: ${duration.inSecondsRest}'); // 3
+// print('Milliseconds: ${duration.inMillisecondsRest}'); // 0
+// print('Microseconds: ${duration.inMicrosecondsRest}'); // 0
+
 extension DurationExt on Duration {
+  int get inDaysRest => inDays;
+  int get inHoursRest => inHours - (inDays * 24);
+  int get inMinutesRest => inMinutes - (inHours * 60);
+  int get inSecondsRest => inSeconds - (inMinutes * 60);
+  int get inMillisecondsRest => inMilliseconds - (inSeconds * 1000);
+  int get inMicrosecondsRest => inMicroseconds - (inMilliseconds * 1000);
+
   /// 秒转计时器格式 00:00:00
   String toTime() {
     final duration = this;

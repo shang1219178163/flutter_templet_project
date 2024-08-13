@@ -12,14 +12,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 extension MapExt on Map<String, dynamic> {
-  // static bool isEmpty(Map? val) {
-  //   return val == null || val.isEmpty;
-  // }
-  //
-  // static bool isNotEmpty(Map? val) {
-  //   return val != null && val.isNotEmpty;
-  // }
-
   Map get reversed => {
         for (final e in entries) e.value: e.key,
       };

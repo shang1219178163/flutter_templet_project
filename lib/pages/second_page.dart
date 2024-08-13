@@ -937,42 +937,61 @@ class _SecondPageState extends State<SecondPage> {
     );
   }
 
+  final list = {"aa": "0", "bb": "1", "cc": "2"}.entries.toList();
+  late var selectedValue = list.first;
+
   Widget _buildPopupMenuButtonExt() {
-    final json = {"aa": "0", "bb": "1", "cc": "2"};
-    return Column(children: [
-      PopupMenuButtonExt.fromJson<String>(
-          child: Container(
-              padding: EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                  color: Colors.greenAccent, border: Border.all()),
-              child: Text('PopupMenuButtonExt.fromJson')),
-          json: json,
-          onSelected: (value) {
-            setState(() => ddlog(value));
-          }),
-      PopupMenuButtonExt.fromEntryJson(
-          child: Container(
-              padding: EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                  color: Colors.greenAccent, border: Border.all()),
-              child: Text('PopupMenuButtonExt.fromEntryJson')),
-          json: json,
-          checkedString: "aa",
-          callback: (value) {
-            setState(() => ddlog(value));
-          }),
-      PopupMenuButtonExt.fromCheckList(
-          child: Container(
-              padding: EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                  color: Colors.greenAccent, border: Border.all()),
-              child: Text('PopupMenuButtonExt.fromCheckList')),
-          list: ["a", "b", "c"],
-          checkedIdx: 1,
-          callback: (value) {
-            setState(() => ddlog(value));
-          }),
-    ]);
+    return StatefulBuilder(
+      builder: (BuildContext context, StateSetter setState) {
+        return Column(
+          children: [
+            PopupMenuButton(
+              itemBuilder: (BuildContext context) => list.map((e) {
+                return PopupMenuItem(value: e, child: Text(e.key));
+              }).toList(),
+              offset: Offset(0, 30),
+              onSelected: (value) {
+                ddlog(value);
+                selectedValue = value;
+                setState(() {});
+              },
+              child: Container(
+                padding: EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(8)),
+                  border: Border.all(),
+                ),
+                child: Text('PopupMenuButton - PopupMenuItem'),
+              ),
+            ),
+            SizedBox(height: 8),
+            PopupMenuButton(
+              itemBuilder: (BuildContext context) => list.map((e) {
+                return CheckedPopupMenuItem(
+                  checked: e == selectedValue,
+                  value: e,
+                  child: Text(e.key),
+                );
+              }).toList(),
+              offset: Offset(0, 30),
+              onSelected: (value) {
+                ddlog(value);
+                selectedValue = value;
+                setState(() {});
+              },
+              child: Container(
+                padding: EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(8)),
+                  border: Border.all(),
+                ),
+                child: Text('PopupMenuButton - CheckedPopupMenuItem'),
+              ),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   Widget _buildCustomPaint() {

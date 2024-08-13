@@ -67,12 +67,18 @@ extension DateTimeExt on DateTime {
     required DateTime? date,
     String format = DATE_FORMAT,
   }) {
-    if (date == null) {
-      return null;
+    try {
+      if (date == null) {
+        return null;
+      }
+
+      final dataFormat = DateFormat(format);
+      var result = dataFormat.format(date);
+      return result;
+    } catch (e) {
+      debugPrint("❌stringFromDate $e");
     }
-    final dataFormat = DateFormat(format);
-    var result = dataFormat.format(date);
-    return result;
+    return null;
   }
 
   /// 字符串 转 DateTime
@@ -235,20 +241,3 @@ extension DateTimeIntExt on int {
     return value;
   }
 }
-
-// const duration = Duration(seconds: 123);
-// print('Days: ${duration.inDaysRest}'); // 0
-// print('Hours: ${duration.inHoursRest}'); // 0
-// print('Minutes: ${duration.inMinutesRest}'); // 2
-// print('Seconds: ${duration.inSecondsRest}'); // 3
-// print('Milliseconds: ${duration.inMillisecondsRest}'); // 0
-// print('Microseconds: ${duration.inMicrosecondsRest}'); // 0
-
-// extension DurationExt on Duration {
-//   int get inDaysRest => inDays;
-//   int get inHoursRest => inHours - (inDays * 24);
-//   int get inMinutesRest => inMinutes - (inHours * 60);
-//   int get inSecondsRest => inSeconds - (inMinutes * 60);
-//   int get inMillisecondsRest => inMilliseconds - (inSeconds * 1000);
-//   int get inMicrosecondsRest => inMicroseconds - (inMilliseconds * 1000);
-// }

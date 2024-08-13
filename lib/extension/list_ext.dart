@@ -12,14 +12,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 
 extension ListExt<T, E> on List<E> {
-  // static bool isEmpty(List? val) {
-  //   return val == null || val.isEmpty;
-  // }
-  //
-  // static bool isNotEmpty(List? val) {
-  //   return val != null && val.isNotEmpty;
-  // }
-
   ///运算符重载
   List<E> operator *(int value) {
     var l = <E>[];

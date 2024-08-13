@@ -185,22 +185,6 @@ class _AppTabPageState extends State<AppTabPage>
     return AppBar(
       title: Text(widget.title ?? "标题"),
       leading: Icon(Icons.arrow_back),
-      actions: [
-        PopupMenuButtonExt.fromEntryJson(
-          json: {"aa": "0", "bb": "1", "cc": "2"},
-          checkedString: "aa",
-          callback: (value) {
-            setState(() => ddlog(value));
-          },
-        ),
-        PopupMenuButtonExt.fromCheckList(
-          list: ["a", "b", "c"],
-          checkedIdx: 1,
-          callback: (value) {
-            setState(() => ddlog(value));
-          },
-        ),
-      ],
     );
   }
 

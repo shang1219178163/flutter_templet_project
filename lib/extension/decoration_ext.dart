@@ -6,7 +6,6 @@
 //  Copyright © 10/25/21 shang. All rights reserved.
 //
 
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -24,37 +23,18 @@ const shadow3D = [
   ),
 ];
 
-
 /// 外观样式
-enum IndicatorStyle{
-  topLine,
-  bottomLine,
-  box
-}
+enum IndicatorStyle { topLine, bottomLine, box }
 
-extension on BoxDecoration{
+extension on BoxDecoration {}
 
-  // lineDecoration() {
-  //   return BoxDecoration(
-  //     // color: Colors.green,
-  //     border: Border.all(
-  //       color: Colors.red,
-  //     ),
-  //   );
-  // }
-
-}
-
-extension BorderExt on Border{
-
+extension BorderExt on Border {
   /// 扩展方法
-  static Border create({
-    required IndicatorStyle indicatorStyle,
-    Color color = Colors.blue,
-    double width = 2,
-    BorderStyle style = BorderStyle.solid
-  }) {
-
+  static Border create(
+      {required IndicatorStyle indicatorStyle,
+      Color color = Colors.blue,
+      double width = 2,
+      BorderStyle style = BorderStyle.solid}) {
     final borderSide = BorderSide(
       color: color,
       width: width,
@@ -90,8 +70,7 @@ extension BorderExt on Border{
   }
 }
 
-extension BorderRadiusExt on BorderRadius{
-
+extension BorderRadiusExt on BorderRadius {
   //doule 转 BorderRadius
   static BorderRadius fromRadius({
     double topLeft = 0,
@@ -117,4 +96,3 @@ extension BorderRadiusExt on BorderRadius{
     );
   }
 }
-

@@ -6,23 +6,14 @@
 //  Copyright © 1/13/23 shang. All rights reserved.
 //
 
-
 import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 
-
-extension EdgeInsetsExt on EdgeInsets{
-
+extension EdgeInsetsExt on EdgeInsets {
   /// 负值转 0
   EdgeInsets get positive {
     return convert((e) => max(0, e));
-    return EdgeInsets.only(
-      top: top >= 0 ? top : 0,
-      right: right >= 0 ? right : 0,
-      bottom: bottom >= 0 ? bottom : 0,
-      left: left >= 0 ? left : 0,
-    );
   }
 
   /// 根据函数转化
@@ -50,7 +41,7 @@ extension EdgeInsetsExt on EdgeInsets{
     }
 
     final shadowRadius = shadow.spreadRadius + shadow.blurRadius;
-    
+
     final topOffset = shadowRadius - shadow.offset.dy;
     final bottomOffset = shadowRadius + shadow.offset.dy;
     final rightOffset = shadowRadius + shadow.offset.dx;

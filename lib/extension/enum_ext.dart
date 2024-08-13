@@ -12,13 +12,10 @@ import 'package:flutter/cupertino.dart';
 extension EnumExt<T extends Enum> on Iterable<T> {
   /// Finds the enum value in this list with name [name].
   T? byNullableName(String? name) {
-    if (name == null) {
-      return null;
-    }
     try {
-      return byName(name);
+      return byName(name ?? "");
     } catch (e) {
-      debugPrint("❌ $e");
+      debugPrint("❌byNullableName: $e");
     }
     return null;
   }
