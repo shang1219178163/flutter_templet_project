@@ -3,32 +3,26 @@ import 'package:flutter_templet_project/basicWidget/n_section_header.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 
 class WrapDemo extends StatefulWidget {
-
   final String? title;
 
-  const WrapDemo({ Key? key, this.title}) : super(key: key);
-
+  const WrapDemo({Key? key, this.title}) : super(key: key);
 
   @override
   _WrapDemoState createState() => _WrapDemoState();
 }
 
 class _WrapDemoState extends State<WrapDemo> {
-
-
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title ?? "$widget"),
-        ),
-        body: _buildBody(),
+      appBar: AppBar(
+        title: Text(widget.title ?? "$widget"),
+      ),
+      body: buildBody(),
     );
   }
 
-  _buildBody() {
+  buildBody() {
     return Column(
       children: [
         NSectionHeader(
@@ -63,14 +57,12 @@ class _WrapDemoState extends State<WrapDemo> {
             ),
           ),
         ),
-      ]
+      ],
     );
   }
-
 }
 
 class WrapWidget extends StatelessWidget {
-
   const WrapWidget({
     Key? key,
     this.title,
@@ -83,7 +75,6 @@ class WrapWidget extends StatelessWidget {
     this.direction = Axis.horizontal,
     this.rowCount = 5,
   }) : super(key: key);
-
 
   final String? title;
   final double width;
@@ -99,14 +90,14 @@ class WrapWidget extends StatelessWidget {
   final int rowCount;
 
   itemWidth() {
-    var contentWidth = width - padding.left - padding.right - margin.left - margin.right;
-    var w = (contentWidth - (rowCount - 1) * spacing)/rowCount;
+    var contentWidth =
+        width - padding.left - padding.right - margin.left - margin.right;
+    var w = (contentWidth - (rowCount - 1) * spacing) / rowCount;
     return w;
   }
 
   @override
   Widget build(BuildContext context) {
-
     return ColoredBox(
       color: Colors.lightGreen,
       child: Wrap(
@@ -121,8 +112,10 @@ class WrapWidget extends StatelessWidget {
         // children: images.map((e) => _buildItem(url: e, text: "装修灵感啊", onPressed: (){
         //   print(e);
         // })).toList(),
-        children: Colors.primaries.take(10).map((e) => _buildItemNew(color: e)
-        ).toList(),
+        children: Colors.primaries
+            .take(10)
+            .map((e) => _buildItemNew(color: e))
+            .toList(),
       ),
     );
   }
@@ -138,14 +131,17 @@ class WrapWidget extends StatelessWidget {
           children: [
             FittedBox(
               child: FadeInImage.assetNetwork(
-                placeholder: 'images/img_placeholder.png',
-                image: 'https://pic.616pic.com/bg_w1180/00/07/20/2gfqq0N3qX.jpg!/fw/1120',
+                placeholder: 'assets/images/img_placeholder.png',
+                image:
+                    'https://pic.616pic.com/bg_w1180/00/07/20/2gfqq0N3qX.jpg!/fw/1120',
                 fit: BoxFit.fill,
                 width: 44,
                 height: 44,
               ),
             ),
-            SizedBox(height: 6,),
+            SizedBox(
+              height: 6,
+            ),
             _buildText(text: '免费设计免'),
           ],
         ),
@@ -180,7 +176,6 @@ class WrapWidget extends StatelessWidget {
       ),
     );
   }
-
 }
 
 final List<String> images = [

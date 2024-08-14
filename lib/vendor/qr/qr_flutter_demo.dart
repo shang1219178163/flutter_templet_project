@@ -1,4 +1,3 @@
-
 import 'dart:async';
 import 'dart:ui' as ui;
 
@@ -7,12 +6,10 @@ import 'package:flutter/services.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class QrFlutterDemo extends StatefulWidget {
-
   final String? title;
 
-  const QrFlutterDemo({ Key? key, this.title}) : super(key: key);
+  const QrFlutterDemo({Key? key, this.title}) : super(key: key);
 
-  
   @override
   _QrFlutterDemoState createState() => _QrFlutterDemoState();
 }
@@ -21,7 +18,7 @@ class _QrFlutterDemoState extends State<QrFlutterDemo> {
   @override
   Widget build(BuildContext context) {
     const message =
-    // ignore: lines_longer_than_80_chars
+        // ignore: lines_longer_than_80_chars
         'Hey this is a QR code. Change this value in the main_screen.dart file.';
 
     final qrFutureBuilder = FutureBuilder<ui.Image>(
@@ -86,7 +83,7 @@ class _QrFlutterDemoState extends State<QrFlutterDemo> {
 
   Future<ui.Image> _loadOverlayImage() async {
     final completer = Completer<ui.Image>();
-    final byteData = await rootBundle.load('images/3.0x/img_update.png');
+    final byteData = await rootBundle.load('assets/images/3.0x/img_update.png');
     ui.decodeImageFromList(byteData.buffer.asUint8List(), completer.complete);
     return completer.future;
   }

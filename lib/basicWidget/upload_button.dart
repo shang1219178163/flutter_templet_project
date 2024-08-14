@@ -8,7 +8,6 @@
 
 import 'package:flutter/material.dart';
 
-
 class UploadButton extends StatefulWidget {
   UploadButton({
     Key? key,
@@ -38,11 +37,11 @@ class _UploadButtonState extends State<UploadButton> {
   @override
   void initState() {
     widget.deteleImage ??= Image.asset(
-        "images/icon_delete.png",
-        fit: BoxFit.fill,
-        width: 30,
-        height: 30,
-      );
+      "assets/images/icon_delete.png",
+      fit: BoxFit.fill,
+      width: 30,
+      height: 30,
+    );
     super.initState();
   }
 
@@ -59,14 +58,15 @@ class _UploadButtonState extends State<UploadButton> {
           Container(
             padding: EdgeInsets.only(
               top: widget.deteleHeight * 0.5 - 3,
-              right: widget.deteleWidth * 0.5 - 3
+              right: widget.deteleWidth * 0.5 - 3,
             ),
             color: widget.color,
             child: OutlinedButton(
               onPressed: widget.onPressed,
               child: widget.image ??
-                  Image.asset("assets/images/img_upload_placeholder.png",
-                      fit: BoxFit.fill
+                  Image.asset(
+                    "assets/images/img_upload_placeholder.png",
+                    fit: BoxFit.fill,
                   ),
             ),
           ),
@@ -80,7 +80,7 @@ class _UploadButtonState extends State<UploadButton> {
                 child: IconButton(
                   padding: EdgeInsets.all(0),
                   icon: widget.deteleImage!,
-                  onPressed: widget.onDetele
+                  onPressed: widget.onDetele,
                 ),
               ),
             ),
@@ -88,7 +88,4 @@ class _UploadButtonState extends State<UploadButton> {
       ),
     );
   }
-
 }
-
-

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 
-
 class SliverAppBarDemo extends StatefulWidget {
   const SliverAppBarDemo({Key? key}) : super(key: key);
 
@@ -11,7 +10,6 @@ class SliverAppBarDemo extends StatefulWidget {
 
 class _SliverAppBarDemoState extends State<SliverAppBarDemo>
     with SingleTickerProviderStateMixin {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +34,7 @@ class _SliverAppBarDemoState extends State<SliverAppBarDemo>
           floating: false,
           snap: false,
           pinned: true,
-          stretch: true,        // 是否可拉伸
+          stretch: true, // 是否可拉伸
           expandedHeight: 150,
           flexibleSpace: FlexibleSpaceBar(
             title: Text('SliverAppBar'),
@@ -51,12 +49,17 @@ class _SliverAppBarDemoState extends State<SliverAppBarDemo>
               // StretchMode.zoomBackground
             ],
           ),
-          actions: ['done',].map((e) => TextButton(
-            onPressed: () => debugPrint(e.toString()),
-            child: Text(e,
-              style: TextStyle(color: Colors.white),
-            ),
-          )).toList(),
+          actions: [
+            'done',
+          ]
+              .map((e) => TextButton(
+                    onPressed: () => debugPrint(e.toString()),
+                    child: Text(
+                      e,
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ))
+              .toList(),
         ),
         SliverList(
           delegate: SliverChildBuilderDelegate((context, index) {
@@ -81,7 +84,7 @@ class _SliverAppBarDemoState extends State<SliverAppBarDemo>
           flexibleSpace: FlexibleSpaceBar(
             title: Text('SliverAppBar'),
             background: Image.asset(
-              'images/flutter-logo-sharing.png',
+              'assets/images/flutter-logo-sharing.png',
               fit: BoxFit.cover,
               height: 250,
             ),

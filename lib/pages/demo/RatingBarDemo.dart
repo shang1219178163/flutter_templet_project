@@ -1,39 +1,32 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class RatingBarDemo extends StatefulWidget {
-
   final String? title;
 
-  const RatingBarDemo({ Key? key, this.title}) : super(key: key);
+  const RatingBarDemo({Key? key, this.title}) : super(key: key);
 
-  
   @override
   _RatingBarDemoState createState() => _RatingBarDemoState();
 }
 
 class _RatingBarDemoState extends State<RatingBarDemo> {
-
-
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title ?? "$widget"),
-        ),
-        body: Column(
-          children: [
-            _buildBar(),
-            Divider(),
-            _buildBar1(),
-            Divider(),
-            _buildBar2(),
-          ],
-        )
+      appBar: AppBar(
+        title: Text(widget.title ?? "$widget"),
+      ),
+      body: Column(
+        children: [
+          _buildBar(),
+          Divider(),
+          _buildBar1(),
+          Divider(),
+          _buildBar2(),
+        ],
+      ),
     );
   }
 
@@ -62,9 +55,9 @@ class _RatingBarDemoState extends State<RatingBarDemo> {
       allowHalfRating: true,
       itemCount: 5,
       ratingWidget: RatingWidget(
-        full: _image('images/icon_heart.png'),
-        half: _image('images/icon_heart_half.png'),
-        empty: _image('images/icon_heart_border.png'),
+        full: _image('assets/images/icon_heart.png'),
+        half: _image('assets/images/icon_heart_half.png'),
+        empty: _image('assets/images/icon_heart_border.png'),
       ),
       itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
       onRatingUpdate: (rating) {
@@ -72,6 +65,7 @@ class _RatingBarDemoState extends State<RatingBarDemo> {
       },
     );
   }
+
   _buildBar2() {
     return RatingBar.builder(
       initialRating: 3,
@@ -93,10 +87,25 @@ class _RatingBarDemoState extends State<RatingBarDemo> {
   }
 
   Map<String, dynamic> itemMap = {
-  "0": Icon(Icons.sentiment_very_dissatisfied, color: Colors.red, ),
-  "1": Icon(Icons.sentiment_dissatisfied, color: Colors.redAccent, ),
-  "2": Icon(Icons.sentiment_neutral, color: Colors.amber, ),
-  "3": Icon(Icons.sentiment_satisfied, color: Colors.lightGreen, ),
-  "4": Icon(Icons.sentiment_very_satisfied, color: Colors.green, )
+    "0": Icon(
+      Icons.sentiment_very_dissatisfied,
+      color: Colors.red,
+    ),
+    "1": Icon(
+      Icons.sentiment_dissatisfied,
+      color: Colors.redAccent,
+    ),
+    "2": Icon(
+      Icons.sentiment_neutral,
+      color: Colors.amber,
+    ),
+    "3": Icon(
+      Icons.sentiment_satisfied,
+      color: Colors.lightGreen,
+    ),
+    "4": Icon(
+      Icons.sentiment_very_satisfied,
+      color: Colors.green,
+    )
   };
 }

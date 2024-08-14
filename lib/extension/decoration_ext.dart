@@ -30,11 +30,12 @@ extension on BoxDecoration {}
 
 extension BorderExt on Border {
   /// 扩展方法
-  static Border create(
-      {required IndicatorStyle indicatorStyle,
-      Color color = Colors.blue,
-      double width = 2,
-      BorderStyle style = BorderStyle.solid}) {
+  static Border create({
+    required IndicatorStyle indicatorStyle,
+    Color color = Colors.blue,
+    double width = 2,
+    BorderStyle style = BorderStyle.solid,
+  }) {
     final borderSide = BorderSide(
       color: color,
       width: width,

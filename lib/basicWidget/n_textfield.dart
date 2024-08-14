@@ -17,8 +17,8 @@ import 'package:flutter_templet_project/util/color_util.dart';
 //     },
 //     suffixIconBuilder: (isFocus, isCloseEye) => Image.asset(
 //       isCloseEye
-//           ? 'images/icon_eye_close.png'
-//           : 'images/icon_eye_open.png',
+//           ? 'assets/images/icon_eye_close.png'
+//           : 'assets/images/icon_eye_open.png',
 //       width: 20,
 //       height: 20,
 //       color: isFocus ? primary : null,

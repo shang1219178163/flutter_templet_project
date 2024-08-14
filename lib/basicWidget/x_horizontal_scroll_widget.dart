@@ -6,12 +6,11 @@ import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:tuple/tuple.dart';
 
-typedef XHomeSwiperBGWidgetBuilder = Widget Function(double itemWidth, int index);
+typedef XHomeSwiperBGWidgetBuilder = Widget Function(
+    double itemWidth, int index);
 typedef XHomeSwiperItemWidgetBuilder = Widget Function(int index);
 
-
 class XHorizontalScrollWidget extends StatelessWidget {
-
   final String? title;
   final List<Tuple4<String, String, String, bool>> items;
 
@@ -34,9 +33,9 @@ class XHorizontalScrollWidget extends StatelessWidget {
 
   final void Function(Tuple4<String, String, String, bool> e) onTap;
 
-   XHorizontalScrollWidget({
-  	Key? key,
-  	this.title,
+  XHorizontalScrollWidget({
+    Key? key,
+    this.title,
     required this.width,
     this.height = double.infinity,
     this.padding = EdgeInsets.zero,
@@ -58,9 +57,9 @@ class XHorizontalScrollWidget extends StatelessWidget {
   double getItemWidth() {
     var w = width - padding.left - padding.right;
     if (showCount == 2.5) {
-      w = (w - 2 * gap - startLeft)/2.7;
+      w = (w - 2 * gap - startLeft) / 2.7;
     } else if ([1, 2, 3].contains(showCount)) {
-      w = (w - startLeft - endRight - (showCount - 1) * gap - 16)/showCount;
+      w = (w - startLeft - endRight - (showCount - 1) * gap - 16) / showCount;
       if (showCount == 1 && isSwiper) {
         w = width - padding.left - padding.right - 12;
       }
@@ -78,94 +77,98 @@ class XHorizontalScrollWidget extends StatelessWidget {
 
   _buildBody() {
     return Container(
-      width: width,
-      height: height,
-      padding: padding,
-      margin: margin,
-      decoration: BoxDecoration(
-        // color: Colors.green,
-        // border: Border.all(width: 3, color: Colors.red),
-        // borderRadius:const BorderRadius.all(Radius.circular(8)),
-        image: bg == null ? null : DecorationImage(
-          image: bg!,
-          fit: BoxFit.fill
+        width: width,
+        height: height,
+        padding: padding,
+        margin: margin,
+        decoration: BoxDecoration(
+          // color: Colors.green,
+          // border: Border.all(width: 3, color: Colors.red),
+          // borderRadius:const BorderRadius.all(Radius.circular(8)),
+          image:
+              bg == null ? null : DecorationImage(image: bg!, fit: BoxFit.fill),
+          boxShadow: boxShadow,
+          //  boxShadow: [
+          //     BoxShadow(
+          //       color: Colors.grey.withOpacity(0.5),
+          //       spreadRadius: 5,
+          //       blurRadius: 7,
+          //       offset: Offset(0, 3), // changes position of shadow
+          //     ),
+          //   ],
         ),
-        boxShadow: boxShadow,
-      //  boxShadow: [
-      //     BoxShadow(
-      //       color: Colors.grey.withOpacity(0.5),
-      //       spreadRadius: 5,
-      //       blurRadius: 7,
-      //       offset: Offset(0, 3), // changes position of shadow
-      //     ),
-      //   ],
-      ),
-      child: ListView(
-        scrollDirection: Axis.horizontal,
-        children: items.map((e) => _buildChildrenItem(e: e)).toList(),
-      )
-    );
+        child: ListView(
+          scrollDirection: Axis.horizontal,
+          children: items.map((e) => _buildChildrenItem(e: e)).toList(),
+        ));
   }
-
 
   Widget _buildChildrenItem({
     required Tuple4<String, String, String, bool> e,
   }) {
-      var itemWidth = getItemWidth();
-      // double width = 150;
-      final url = e.item1;
-      final text = e.item2;
-      final isVideo = e.item4;
+    var itemWidth = getItemWidth();
+    // double width = 150;
+    final url = e.item1;
+    final text = e.item2;
+    final isVideo = e.item4;
 
-      var index = items.indexOf(e);
-      var padding = EdgeInsets.zero;
+    var index = items.indexOf(e);
+    var padding = EdgeInsets.zero;
 
-      if (showCount == 2.5) {
-        if (index == 0) {
-          padding = EdgeInsets.only(left: startLeft, right: gap);
-        } else if (index == items.length - 1) {
-          padding = EdgeInsets.only(left: 0, right: endRight);
-        } else {
-          padding = EdgeInsets.only(left: 0, right: gap);
-        }
+    if (showCount == 2.5) {
+      if (index == 0) {
+        padding = EdgeInsets.only(left: startLeft, right: gap);
+      } else if (index == items.length - 1) {
+        padding = EdgeInsets.only(left: 0, right: endRight);
+      } else {
+        padding = EdgeInsets.only(left: 0, right: gap);
       }
-      else {
-        var itemLeft = 0.0;
-        var itemRight = gap;
-        if (index == 0) {
-          itemLeft = startLeft;
-        }
-        if (index == items.length - 1) {
-          itemRight = 0;
-        }
-        padding = EdgeInsets.only(left: itemLeft, right: itemRight);
-        if (showCount == 1) {
-          padding = EdgeInsets.only(left: 0, right: 0);
-        }
+    } else {
+      var itemLeft = 0.0;
+      var itemRight = gap;
+      if (index == 0) {
+        itemLeft = startLeft;
       }
+      if (index == items.length - 1) {
+        itemRight = 0;
+      }
+      padding = EdgeInsets.only(left: itemLeft, right: itemRight);
+      if (showCount == 1) {
+        padding = EdgeInsets.only(left: 0, right: 0);
+      }
+    }
 
-      return InkWell(
-        onTap: (){ onTap(e); },
-        child: Padding(
-          padding: padding,
-          child: itemBuilder != null ? itemBuilder!(index) : _buildItem(
-            isVideo: isVideo,
-            itemWidth: itemWidth,
-            text: text,
-            padding: EdgeInsets.symmetric(horizontal: 6, vertical: 4,),
-            bg: ClipRRect(
-              borderRadius: BorderRadius.all(radius),
-              child: bgBuilder != null ? bgBuilder!(itemWidth, index) : FadeInImage.assetNetwork(
-                placeholder: 'images/img_placeholder.png',
-                image: url,
-                fit: BoxFit.cover,
-                width: itemWidth,
-                height: double.infinity
+    return InkWell(
+      onTap: () {
+        onTap(e);
+      },
+      child: Padding(
+        padding: padding,
+        child: itemBuilder != null
+            ? itemBuilder!(index)
+            : _buildItem(
+                isVideo: isVideo,
+                itemWidth: itemWidth,
+                text: text,
+                padding: EdgeInsets.symmetric(
+                  horizontal: 6,
+                  vertical: 4,
+                ),
+                bg: ClipRRect(
+                  borderRadius: BorderRadius.all(radius),
+                  child: bgBuilder != null
+                      ? bgBuilder!(itemWidth, index)
+                      : FadeInImage.assetNetwork(
+                          placeholder: 'assets/images/img_placeholder.png',
+                          image: url,
+                          fit: BoxFit.cover,
+                          width: itemWidth,
+                          height: double.infinity,
+                        ),
+                ),
               ),
-            ),
-          ),
-        ),
-      );
+      ),
+    );
   }
 
   _buildText({
@@ -188,7 +191,8 @@ class XHorizontalScrollWidget extends StatelessWidget {
         width: itemWidth,
         // constraints: BoxConstraints(maxWidth: itemWidth),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.only(bottomLeft: radius, bottomRight: radius),
+          borderRadius:
+              BorderRadius.only(bottomLeft: radius, bottomRight: radius),
           gradient: _buildLinearGradient(isVertical: true),
         ),
         child: Text(
@@ -212,18 +216,24 @@ class XHorizontalScrollWidget extends StatelessWidget {
       alignment: Alignment.center,
       children: [
         bg,
-        if (isVideo) SizedBox(
-          width: 24,
-          height: 24,
-          child: Image.asset('icon_play.png'.toPath(),),
-        ),
+        if (isVideo)
+          SizedBox(
+            width: 24,
+            height: 24,
+            child: Image.asset(
+              'icon_play.png'.toPath(),
+            ),
+          ),
       ],
     );
   }
 
   _buildLinearGradient({
     bool isVertical = false,
-    List<Color> colors = const [Color(0x19000000), Color(0x7f000000), ],
+    List<Color> colors = const [
+      Color(0x19000000),
+      Color(0x7f000000),
+    ],
   }) {
     var begin = isVertical ? Alignment.topCenter : Alignment.centerLeft;
     var end = isVertical ? Alignment.bottomCenter : Alignment.centerRight;
@@ -233,7 +243,6 @@ class XHorizontalScrollWidget extends StatelessWidget {
       colors: colors,
     );
   }
-
 
   _buildBodySwiper() {
     return Container(
@@ -245,17 +254,16 @@ class XHorizontalScrollWidget extends StatelessWidget {
         color: Colors.green,
         // border: Border.all(width: 3, color: Colors.red),
         // borderRadius:const BorderRadius.all(Radius.circular(8)),
-        image: bg == null ? null : DecorationImage(
-          image: bg!,
-          fit: BoxFit.fill
-        ), //设置图片
+        image: bg == null
+            ? null
+            : DecorationImage(image: bg!, fit: BoxFit.fill), //设置图片
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.all(radius),
         child: Swiper(
           itemBuilder: (BuildContext context, int index) {
             final e = items[index];
-            return _buildChildrenItem(e: e,);
+            return _buildChildrenItem(e: e);
           },
           indicatorLayout: PageIndicatorLayout.COLOR,
           autoplay: true,
@@ -269,15 +277,12 @@ class XHorizontalScrollWidget extends StatelessWidget {
       ),
     );
   }
-
 }
 
-
 class _SynHomeSwiperTitleWidget extends StatelessWidget {
-
   const _SynHomeSwiperTitleWidget({
-  	Key? key,
-  	this.title,
+    Key? key,
+    this.title,
     this.text,
     this.maxLines,
     this.style,
@@ -297,12 +302,13 @@ class _SynHomeSwiperTitleWidget extends StatelessWidget {
     return _buildText(
       text: text,
       maxLines: text,
-      style: style ?? const TextStyle(
-        fontSize: 12.0,
-        fontWeight: FontWeight.w400,
-        fontFamily: 'PingFangSC-Regular,PingFang SC',
-        color: Color(0xFFFFFFFF),
-      ),
+      style: style ??
+          const TextStyle(
+            fontSize: 12.0,
+            fontWeight: FontWeight.w400,
+            fontFamily: 'PingFangSC-Regular,PingFang SC',
+            color: Color(0xFFFFFFFF),
+          ),
       padding: padding ?? const EdgeInsets.all(0),
       alignment: alignment ?? Alignment.centerLeft,
     );
@@ -343,10 +349,9 @@ Map<String, double> itemMap = {
 };
 
 class HorizontalScrollWidget extends StatelessWidget {
-
   HorizontalScrollWidget({
-  	Key? key,
-  	this.title,
+    Key? key,
+    this.title,
     this.width = double.infinity,
     this.height = 187,
     this.showCount = 3,
@@ -356,7 +361,6 @@ class HorizontalScrollWidget extends StatelessWidget {
     required this.items,
     this.isVideo = true,
   }) : super(key: key);
-
 
   String? title;
   List<Tuple4<String, String, String, bool>> items;
@@ -372,9 +376,10 @@ class HorizontalScrollWidget extends StatelessWidget {
   Radius radius;
 
   bool isVideo;
+
   /// 获取 item 宽
   // double get itemWidth => itemMap['${this.showCount}'] ?? 225;
-  double get itemWidth{
+  double get itemWidth {
     if (showCount == 1) {
       return 327;
     }
@@ -413,11 +418,11 @@ class HorizontalScrollWidget extends StatelessWidget {
         padding: EdgeInsets.all(0),
         itemCount: items.length,
         // cacheExtent: 10,
-        itemBuilder: itemBuilder ?? (context, index) => _buildItem(context, index),
+        itemBuilder:
+            itemBuilder ?? (context, index) => _buildItem(context, index),
         separatorBuilder: (context, index) => _buildSeparator(context, index),
       ),
     );
-
 
     if (addToSliverBox) {
       return SliverToBoxAdapter(
@@ -435,27 +440,30 @@ class HorizontalScrollWidget extends StatelessWidget {
       child: Container(
         // color: Colors.green,
         width: itemWidth,
-        padding: EdgeInsets.only(bottom: 5),//为了显示阴影
+        padding: EdgeInsets.only(bottom: 5), //为了显示阴影
         decoration: _buildDecoration(),
         child: ClipRRect(
           borderRadius: BorderRadius.all(radius),
-          child: e.item1.startsWith('http') ? Stack(
-            alignment: Alignment.center,
-            fit: StackFit.expand,
-            children: [
-              FadeInImage(
-                placeholder: 'img_placeholder.png'.toAssetImage(),
-                image: NetworkImage(e.item1),
-                fit: BoxFit.fill,
-                height: double.infinity,
-              ),
-              if (isVideo) SizedBox(
-                width: 24,
-                height: 24,
-                child: Image.asset('icon_play.png'.toPath()),
-              ),
-            ],
-          ) : Center(child: Text('Index:${e.item1}')),
+          child: e.item1.startsWith('http')
+              ? Stack(
+                  alignment: Alignment.center,
+                  fit: StackFit.expand,
+                  children: [
+                    FadeInImage(
+                      placeholder: 'img_placeholder.png'.toAssetImage(),
+                      image: NetworkImage(e.item1),
+                      fit: BoxFit.fill,
+                      height: double.infinity,
+                    ),
+                    if (isVideo)
+                      SizedBox(
+                        width: 24,
+                        height: 24,
+                        child: Image.asset('icon_play.png'.toPath()),
+                      ),
+                  ],
+                )
+              : Center(child: Text('Index:${e.item1}')),
         ),
       ),
     );
@@ -503,7 +511,7 @@ class HorizontalScrollWidget extends StatelessWidget {
       // color: Colors.blue,
     );
   }
-  
+
   _buildDecoration() {
     return BoxDecoration(
       // color: Colors.green,

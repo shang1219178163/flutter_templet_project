@@ -4,22 +4,17 @@ import 'package:flutter_templet_project/basicWidget/custom_swiper.dart';
 import 'package:tuple/tuple.dart';
 
 class FlutterSwiperDemo extends StatefulWidget {
-
   final String? title;
 
-  const FlutterSwiperDemo({ Key? key, this.title}) : super(key: key);
+  const FlutterSwiperDemo({Key? key, this.title}) : super(key: key);
 
-  
   @override
   _FlutterSwiperDemoState createState() => _FlutterSwiperDemoState();
 }
 
 class _FlutterSwiperDemoState extends State<FlutterSwiperDemo> {
-
-
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
@@ -40,11 +35,9 @@ class _FlutterSwiperDemoState extends State<FlutterSwiperDemo> {
           final e = _list[index];
           return GestureDetector(
             onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) {
-                    return e.item3;
-                  }
-              ));
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                return e.item3;
+              }));
             },
             child: ListTile(
               title: Text(e.item1),
@@ -53,10 +46,7 @@ class _FlutterSwiperDemoState extends State<FlutterSwiperDemo> {
           );
         });
   }
-
 }
-
-
 
 List<Tuple3<String, String, Widget>> _list = [
   Tuple3(
@@ -85,7 +75,6 @@ List<Tuple3<String, String, Widget>> _list = [
     ExamplePhone(),
   ),
 ];
-
 
 final List<String> images = [
   "https://cdn.pixabay.com/photo/2016/09/04/08/13/harbour-crane-1643476_1280.jpg",
@@ -127,8 +116,7 @@ class ExampleHorizontal extends StatelessWidget {
           control: SwiperControl(),
           // itemWidth: screenSize.width * 0.5,
           // viewportFraction: 0.6,
-        )
-    );
+        ));
   }
 }
 
@@ -179,99 +167,95 @@ class ExampleFraction extends StatelessWidget {
 
             _buildCustomeBanner(),
           ],
-        )
-    );
+        ));
   }
 
   _buildSwiper() {
-    return  Expanded(
+    return Expanded(
         child: Swiper(
-          itemBuilder: (BuildContext context, int index) {
-            return Container(
-              child: CustomSwiperItem(
-                url: images[index],
-                color: index.isEven ? Colors.green : Colors.yellow,
-              ),
-            );
-          },
-          // autoplay: true,
-          itemCount: images.length,
-          pagination: SwiperPagination(builder: SwiperPagination.fraction),
-          control: SwiperControl(),
-          viewportFraction: 0.8,
-          scale: 0.9,
-          onTap: (index) => debugPrint("$index"),
-        )
-    );
+      itemBuilder: (BuildContext context, int index) {
+        return Container(
+          child: CustomSwiperItem(
+            url: images[index],
+            color: index.isEven ? Colors.green : Colors.yellow,
+          ),
+        );
+      },
+      // autoplay: true,
+      itemCount: images.length,
+      pagination: SwiperPagination(builder: SwiperPagination.fraction),
+      control: SwiperControl(),
+      viewportFraction: 0.8,
+      scale: 0.9,
+      onTap: (index) => debugPrint("$index"),
+    ));
   }
 
   _buildSwiper1() {
-    return  Expanded(
+    return Expanded(
         child: Swiper(
-          itemBuilder: (BuildContext context, int index) {
-            var left = index == 0 ? 20.0 : 0.0;
-            var right = index == (images.length - 1) ? 20.0 : 0.0;
+      itemBuilder: (BuildContext context, int index) {
+        var left = index == 0 ? 20.0 : 0.0;
+        var right = index == (images.length - 1) ? 20.0 : 0.0;
 
-            var padding = EdgeInsets.only(left: left, right: right, top: 0, bottom: 0);
-            var margin = EdgeInsets.only(left: 0, right: 0, top: 0, bottom: 0);
-            if (![0, images.length - 1].contains(index)) {
-              margin = EdgeInsets.only(left: 10, right: 10, top: 0, bottom: 0);
-            }
-            return Container(
-              margin: margin,
-              padding: padding,
-              child: CustomSwiperItem(
-                url: images[index],
-                color: index.isEven ? Colors.green : Colors.yellow,
-              ),
-            );
-          },
-          // autoplay: true,
-          itemCount: images.length,
-          pagination: SwiperPagination(builder: SwiperPagination.fraction),
-          control: SwiperControl(),
-          viewportFraction: 1,
-          onTap: (index) => debugPrint("$index"),
-        )
-    );
+        var padding =
+            EdgeInsets.only(left: left, right: right, top: 0, bottom: 0);
+        var margin = EdgeInsets.only(left: 0, right: 0, top: 0, bottom: 0);
+        if (![0, images.length - 1].contains(index)) {
+          margin = EdgeInsets.only(left: 10, right: 10, top: 0, bottom: 0);
+        }
+        return Container(
+          margin: margin,
+          padding: padding,
+          child: CustomSwiperItem(
+            url: images[index],
+            color: index.isEven ? Colors.green : Colors.yellow,
+          ),
+        );
+      },
+      // autoplay: true,
+      itemCount: images.length,
+      pagination: SwiperPagination(builder: SwiperPagination.fraction),
+      control: SwiperControl(),
+      viewportFraction: 1,
+      onTap: (index) => debugPrint("$index"),
+    ));
   }
 
   _buildSwiper2() {
     return Expanded(
         child: Swiper(
-          itemBuilder: (BuildContext context, int index) {
-            return CustomSwiperItem(
-              url: images[index],
-              color: index.isEven ? Colors.green : Colors.yellow,
-            );
-          },
-          // autoplay: true,
-          itemCount: images.length,
-          pagination: SwiperPagination(builder: SwiperPagination.fraction),
-          control: SwiperControl(),
-          // containerWidth: 100,
-          viewportFraction: 1/2,
-        )
-    );
+      itemBuilder: (BuildContext context, int index) {
+        return CustomSwiperItem(
+          url: images[index],
+          color: index.isEven ? Colors.green : Colors.yellow,
+        );
+      },
+      // autoplay: true,
+      itemCount: images.length,
+      pagination: SwiperPagination(builder: SwiperPagination.fraction),
+      control: SwiperControl(),
+      // containerWidth: 100,
+      viewportFraction: 1 / 2,
+    ));
   }
 
   _buildSwiper25() {
     return Expanded(
         child: Swiper(
-          itemBuilder: (BuildContext context, int index) {
-            return CustomSwiperItem(
-              url: images[index],
-              color: index.isEven ? Colors.green : Colors.yellow,
-            );
-          },
-          // autoplay: true,
-          itemCount: images.length,
-          pagination: SwiperPagination(builder: SwiperPagination.fraction),
-          control: SwiperControl(),
-          // containerWidth: 100,
-          viewportFraction: 1/2.5,
-        )
-    );
+      itemBuilder: (BuildContext context, int index) {
+        return CustomSwiperItem(
+          url: images[index],
+          color: index.isEven ? Colors.green : Colors.yellow,
+        );
+      },
+      // autoplay: true,
+      itemCount: images.length,
+      pagination: SwiperPagination(builder: SwiperPagination.fraction),
+      control: SwiperControl(),
+      // containerWidth: 100,
+      viewportFraction: 1 / 2.5,
+    ));
   }
 
   _buildSwiper3() {
@@ -287,20 +271,27 @@ class ExampleFraction extends StatelessWidget {
         itemCount: images.length,
         pagination: SwiperPagination(builder: SwiperPagination.fraction),
         control: SwiperControl(),
-        viewportFraction: 1/3,
+        viewportFraction: 1 / 3,
       ),
     );
   }
 
   _buildSwiper4() {
     final customLayoutOption = CustomLayoutOption(
-        startIndex: -1,  /// 开始下标
-        stateCount: 3    /// 下面的数组长度
-    ).addRotate([        //  每个元素的角度
-      -45.0/180,
+            startIndex: -1,
+
+            /// 开始下标
+            stateCount: 3
+
+            /// 下面的数组长度
+            )
+        .addRotate([
+      //  每个元素的角度
+      -45.0 / 180,
       0.0,
-      45.0/180
-    ]).addTranslate([           /// 每个元素的偏移
+      45.0 / 180
+    ]).addTranslate([
+      /// 每个元素的偏移
       Offset(-370.0, -40.0),
       Offset(0.0, 0.0),
       Offset(370.0, -40.0)
@@ -309,14 +300,8 @@ class ExampleFraction extends StatelessWidget {
     return Expanded(
       child: Swiper(
         layout: SwiperLayout.CUSTOM,
-        customLayoutOption: CustomLayoutOption(
-            startIndex: -1,
-            stateCount: 3
-        ).addRotate([
-          -45.0/180,
-          0.0,
-          45.0/180
-        ]).addTranslate([
+        customLayoutOption: CustomLayoutOption(startIndex: -1, stateCount: 3)
+            .addRotate([-45.0 / 180, 0.0, 45.0 / 180]).addTranslate([
           Offset(-370.0, -40.0),
           Offset(0.0, 0.0),
           Offset(370.0, -40.0)
@@ -335,7 +320,6 @@ class ExampleFraction extends StatelessWidget {
   }
 
   _buildCustomeBanner() {
-
     return Expanded(
       child: CustomSwipper(
         images: images,
@@ -414,10 +398,10 @@ class ExampleCustomPagination extends StatelessWidget {
                               child: Align(
                                 alignment: Alignment.centerRight,
                                 child: DotSwiperPaginationBuilder(
-                                    color: Colors.black12,
-                                    activeColor: Colors.black,
-                                    size: 10.0,
-                                    activeSize: 20.0)
+                                        color: Colors.black12,
+                                        activeColor: Colors.black,
+                                        size: 10.0,
+                                        activeSize: 20.0)
                                     .build(context, config),
                               ),
                             )
@@ -447,7 +431,7 @@ class ExamplePhone extends StatelessWidget {
           ConstrainedBox(
             constraints: BoxConstraints.expand(),
             child: Image.asset(
-              "images/bg.jpeg",
+              "assets/images/bg.jpeg",
               fit: BoxFit.fill,
             ),
           ),
@@ -462,11 +446,11 @@ class ExamplePhone extends StatelessWidget {
                     activeSize: 20.0)),
             children: <Widget>[
               Image.asset(
-                "images/1.png",
+                "assets/images/1.png",
                 fit: BoxFit.contain,
               ),
               Image.asset(
-                "images/2.png",
+                "assets/images/2.png",
                 fit: BoxFit.contain,
               ),
               Image.asset("assets/images/3.png", fit: BoxFit.contain)
@@ -479,8 +463,8 @@ class ExamplePhone extends StatelessWidget {
 }
 
 class ScaffoldWidget extends StatelessWidget {
-
-  const ScaffoldWidget({Key? key, this.child, this.title, this.actions}) : super(key: key);
+  const ScaffoldWidget({Key? key, this.child, this.title, this.actions})
+      : super(key: key);
 
   final Widget? child;
   final String? title;
@@ -498,16 +482,13 @@ class ScaffoldWidget extends StatelessWidget {
   }
 }
 
-
 class CustomSwiperItem extends StatelessWidget {
-
   const CustomSwiperItem({
     Key? key,
     this.color = Colors.white,
     this.padding = const EdgeInsets.all(0),
     this.margin = const EdgeInsets.all(0),
     required this.url,
-
   }) : super(key: key);
 
   final String url;
@@ -522,7 +503,7 @@ class CustomSwiperItem extends StatelessWidget {
       padding: padding,
       margin: margin,
       child: FadeInImage.assetNetwork(
-        placeholder: 'images/img_placeholder.png',
+        placeholder: 'assets/images/img_placeholder.png',
         image: url,
         fit: BoxFit.fill,
       ),

@@ -24,8 +24,6 @@ class _HomeSrollDemoState extends State<HomeSrollDemo> {
 
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
@@ -83,7 +81,7 @@ class _HomeSrollDemoState extends State<HomeSrollDemo> {
       margin: EdgeInsets.all(12),
       height: 147 * 1.2,
       width: screenSize.width,
-      bg: AssetImage('images/bg_horizontal_scroll.png'),
+      bg: AssetImage('assets/images/bg_horizontal_scroll.png'),
       boxShadow: [
         BoxShadow(
           color: Colors.grey.withOpacity(0.5),
@@ -92,7 +90,7 @@ class _HomeSrollDemoState extends State<HomeSrollDemo> {
           offset: Offset(0, 3), // changes position of shadow
         ),
       ],
-      padding: EdgeInsets.only(left: paddingLeft, top: 57, right: paddingRight, bottom: 16, ),
+      padding: EdgeInsets.only(left: paddingLeft, top: 57, right: paddingRight, bottom: 16,),
       showCount: showCount,
       onTap: (Tuple4<String, String, String, bool> e) {
         debugPrint("onTap:$e");
@@ -121,7 +119,7 @@ class _HomeSrollDemoState extends State<HomeSrollDemo> {
       ),
       bgUrl: 'https://tenfei02.cfp.cn/creative/vcg/800/new/VCG21409037867.jpg',
       // bgChild: FadeInImage.assetNetwork(
-      //   placeholder: 'images/img_placeholder.png',
+      //   placeholder: 'assets/images/img_placeholder.png',
       //   image: 'https://tenfei02.cfp.cn/creative/vcg/800/new/VCG21409037867.jpg',
       //   fit: BoxFit.fill,
       //   width: 400,

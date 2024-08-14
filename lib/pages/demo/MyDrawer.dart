@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -27,10 +25,12 @@ class MyDrawer extends StatelessWidget {
                     padding: EdgeInsets.symmetric(horizontal: 16.0),
                     child: ClipOval(
                       // child: Image.asset(
-                      //   "images/avatar.png",
+                      //   "assets/images/avatar.png",
                       //   width: 80,
                       // ),
-                      child: FlutterLogo(size: 60,),
+                      child: FlutterLogo(
+                        size: 60,
+                      ),
                     ),
                   ),
                   Text(
@@ -47,7 +47,7 @@ class MyDrawer extends StatelessWidget {
                     leading: Icon(Icons.add),
                     title: Text('Add account'),
                     trailing: Icon(Icons.add_a_photo),
-                    onTap: (){
+                    onTap: () {
                       debugPrint('Add account');
                     },
                   ),
@@ -60,7 +60,7 @@ class MyDrawer extends StatelessWidget {
                   ListTile(
                     leading: Icon(Icons.settings),
                     title: Text('Manage accounts'),
-                    onTap: (){
+                    onTap: () {
                       debugPrint("${Icons.title}");
                     },
                   ),
@@ -69,7 +69,7 @@ class MyDrawer extends StatelessWidget {
                     title: Text(
                       "Your Profile",
                     ),
-                    onTap: (){
+                    onTap: () {
                       debugPrint("Tapped Profile");
                     },
                   ),

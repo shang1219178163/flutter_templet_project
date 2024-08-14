@@ -12,11 +12,7 @@ import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/util/R.dart';
 
 class NBoxWidgetDemo extends StatefulWidget {
-
-  const NBoxWidgetDemo({
-    Key? key, 
-    this.title
-  }) : super(key: key);
+  const NBoxWidgetDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -25,73 +21,64 @@ class NBoxWidgetDemo extends StatefulWidget {
 }
 
 class _NBoxWidgetDemoState extends State<NBoxWidgetDemo> {
-
-  var bgGradient = LinearGradient(
-    tileMode: TileMode.clamp,
-    colors: [
-      Colors.yellow,
-      Colors.blue,
-    ]
-  );
+  var bgGradient = LinearGradient(tileMode: TileMode.clamp, colors: [
+    Colors.yellow,
+    Colors.blue,
+  ]);
 
   var boxShadows = <BoxShadow>[
-     BoxShadow(//add test
-      color: Colors.red,
-      blurRadius: 3,
-      spreadRadius: 3,
-      offset: Offset(0, 0)
-    ),
+    BoxShadow(
+        //add test
+        color: Colors.red,
+        blurRadius: 3,
+        spreadRadius: 3,
+        offset: Offset(0, 0)),
   ];
 
-  var border = Border.all(
-    color: Colors.red,
-    width: 3.3,
-    style: BorderStyle.solid
-  );
-
+  var border =
+      Border.all(color: Colors.red, width: 3.3, style: BorderStyle.solid);
 
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     bgGradient = LinearGradient(
-        tileMode: TileMode.clamp,
-        colors: [
-          Colors.yellow,
-          Colors.blue,
-        ]
+      tileMode: TileMode.clamp,
+      colors: [
+        Colors.yellow,
+        Colors.blue,
+      ],
     );
 
     boxShadows = <BoxShadow>[
-      BoxShadow(//add test
+      BoxShadow(
+          //add test
           color: Colors.red,
           blurRadius: 3,
           spreadRadius: 3,
-          offset: Offset(3, 3)
-      ),
+          offset: Offset(3, 3)),
     ];
 
-    border = Border.all(
-        color: Colors.red,
-        width: 3.3,
-        style: BorderStyle.solid
-    );
+    border =
+        Border.all(color: Colors.red, width: 3.3, style: BorderStyle.solid);
 
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          onPressed: () => debugPrint(e.toString()),
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),)
-        ).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  onPressed: () => debugPrint(e.toString()),
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ))
+            .toList(),
       ),
       body: Container(
-        color: Colors.green.withOpacity(0.3),
-        margin: EdgeInsets.all(16),
-        child: Stack(
-          children: [
+          color: Colors.green.withOpacity(0.3),
+          margin: EdgeInsets.all(16),
+          child: Stack(children: [
             Text("01" * 399),
             Container(
               padding: EdgeInsets.all(18),
@@ -106,16 +93,14 @@ class _NBoxWidgetDemoState extends State<NBoxWidgetDemo> {
                       boxShadow: boxShadows,
                     ),
                     child: Image.asset(
-                      'images/404.png',
+                      'assets/images/404.png',
                       fit: BoxFit.cover,
                     ),
                   )
                 ],
               ),
             ),
-          ]
-        )
-      ),
+          ])),
     );
   }
 
@@ -143,6 +128,4 @@ class _NBoxWidgetDemoState extends State<NBoxWidgetDemo> {
       ),
     );
   }
-
 }
-

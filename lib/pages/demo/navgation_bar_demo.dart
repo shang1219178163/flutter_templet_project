@@ -10,47 +10,41 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 
 class NavgationBarDemo extends StatefulWidget {
-
   final String? title;
 
-  const NavgationBarDemo({ Key? key, this.title}) : super(key: key);
-
+  const NavgationBarDemo({Key? key, this.title}) : super(key: key);
 
   @override
   _NavgationBarDemoState createState() => _NavgationBarDemoState();
 }
 
 class _NavgationBarDemoState extends State<NavgationBarDemo> {
-
-
   @override
   Widget build(BuildContext context) {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
     return Scaffold(
       extendBodyBehindAppBar: true,
       // backgroundColor: Colors.blue,
-      body: Stack(
-        children: [
-          SafeArea(
-            child: Container(
-              color: Colors.red,
-              // padding: EdgeInsets.only(left: 8, right: 8, top: 0, bottom: 0),
-              child: Center(
-                child: Image.asset(
-                  'images/bg.png',
-                  fit: BoxFit.fill,
-                ),
+      body: Stack(children: [
+        SafeArea(
+          child: Container(
+            color: Colors.red,
+            // padding: EdgeInsets.only(left: 8, right: 8, top: 0, bottom: 0),
+            child: Center(
+              child: Image.asset(
+                'assets/images/bg.png',
+                fit: BoxFit.fill,
               ),
             ),
           ),
-          Positioned(
-            child: Container(
-              height: 102,
-              child: _buildAppBar(),
-            ),
+        ),
+        Positioned(
+          child: Container(
+            height: 102,
+            child: _buildAppBar(),
           ),
-        ]
-      ),
+        ),
+      ]),
     );
   }
 
@@ -59,10 +53,10 @@ class _NavgationBarDemoState extends State<NavgationBarDemo> {
       title: Text("title"),
       actions: [
         IconButton(
-          onPressed: (){
+          onPressed: () {
             ddlog("share");
           },
-          icon: Icon(Icons.share)
+          icon: Icon(Icons.share),
         ),
       ],
       backgroundColor: Colors.transparent,
@@ -70,8 +64,4 @@ class _NavgationBarDemoState extends State<NavgationBarDemo> {
       foregroundColor: Colors.black,
     );
   }
-
 }
-
-
-

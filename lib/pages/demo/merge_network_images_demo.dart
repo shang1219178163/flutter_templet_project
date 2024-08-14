@@ -57,7 +57,6 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
 
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
     final screenSize = MediaQuery.of(this.context).size;
 
     return Scaffold(
@@ -77,22 +76,23 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
                 style: TextStyle(color: Colors.white),
               )),
           TextButton(
-              onPressed: () {
-                _globalKey.currentState?.toCompositePics().then((pngBytes) {
-                  return ImageGallerySaver.saveImage(
-                    pngBytes,
-                    quality: 100,
-                  );
-                }).then((result) {
-                  ddlog("result:${result}");
-                }).catchError((e) {
-                  debugPrint("error:${e}");
-                });
-              },
-              child: Text(
-                '保存',
-                style: TextStyle(color: Colors.white),
-              )),
+            onPressed: () {
+              _globalKey.currentState?.toCompositePics().then((pngBytes) {
+                return ImageGallerySaver.saveImage(
+                  pngBytes,
+                  quality: 100,
+                );
+              }).then((result) {
+                ddlog("result:${result}");
+              }).catchError((e) {
+                debugPrint("error:${e}");
+              });
+            },
+            child: Text(
+              '保存',
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
         ],
       ),
       // body: _buildBody(),
@@ -119,8 +119,11 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
                       height: e.materialHeight,
                     ))
                 .toList(),
-            qrCodeBuilder: (url) =>
-                Image.asset('QRCode.png'.toPath(), width: 90, height: 90),
+            qrCodeBuilder: (url) => Image.asset(
+              'QRCode.png'.toPath(),
+              width: 90,
+              height: 90,
+            ),
             qrCodeUrl: qrCodeUrl,
           ),
         ],
@@ -134,24 +137,25 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
     var children = detailList.map((e) {
       var idx = detailList.indexOf(e);
       return _buildToolNew(
-          hideUp: idx == 0,
-          hideDown: idx == detailList.length - 1,
-          repaintBoundary: RepaintBoundary(
-            key: e.globalKey,
-            child: FadeInImage.assetNetwork(
-              placeholder: 'images/sha_qiu.png',
-              image: e.message ??
-                  'https://fastly.jsdelivr.net/npm/@vant/assets/apple-1.jpeg',
-              fit: BoxFit.cover,
-              width: double.parse(e.materialWidth ?? "${screenSize.width}"),
-              height: double.parse(e.materialHeight ?? "${screenSize.height}"),
-            ),
+        hideUp: idx == 0,
+        hideDown: idx == detailList.length - 1,
+        repaintBoundary: RepaintBoundary(
+          key: e.globalKey,
+          child: FadeInImage.assetNetwork(
+            placeholder: 'assets/images/sha_qiu.png',
+            image: e.message ??
+                'https://fastly.jsdelivr.net/npm/@vant/assets/apple-1.jpeg',
+            fit: BoxFit.cover,
+            width: double.parse(e.materialWidth ?? "${screenSize.width}"),
+            height: double.parse(e.materialHeight ?? "${screenSize.height}"),
           ),
-          callback: (step) {
-            debugPrint("callback:$step");
-            detailList.exchange(idx, idx + step);
-            setState(() {});
-          });
+        ),
+        callback: (step) {
+          debugPrint("callback:$step");
+          detailList.exchange(idx, idx + step);
+          setState(() {});
+        },
+      );
     }).toList();
 
     return SingleChildScrollView(

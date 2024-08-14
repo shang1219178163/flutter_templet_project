@@ -6,19 +6,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
 class DrawImageNineDemo extends StatefulWidget {
-
   final String? title;
 
-  const DrawImageNineDemo({ Key? key, this.title}) : super(key: key);
-
+  const DrawImageNineDemo({Key? key, this.title}) : super(key: key);
 
   @override
   _DrawImageNineDemoState createState() => _DrawImageNineDemoState();
 }
 
 class _DrawImageNineDemoState extends State<DrawImageNineDemo> {
-  late ui.Image image;
-  bool isImageloaded = false;
+  late ui.Image? image;
+
   @override
   void initState() {
     super.initState();
@@ -27,32 +25,26 @@ class _DrawImageNineDemoState extends State<DrawImageNineDemo> {
 
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title ?? "$widget"),
-        ),
-        body: Container(
-          padding: EdgeInsets.all(10),
-          child: _buildImage(),
-        )
+      appBar: AppBar(
+        title: Text(widget.title ?? "$widget"),
+      ),
+      body: Container(
+        padding: EdgeInsets.all(10),
+        child: _buildImage(),
+      ),
     );
   }
 
   init() async {
     try {
-      final data = await rootBundle.load('images/weiqi.png');
+      final data = await rootBundle.load('assets/images/weiqi.png');
       var bytes = Uint8List.view(data.buffer);
       image = await loadImage(bytes);
-      setState(() {
-        isImageloaded = true;
-      });
-    }
-    catch (e) {
+      setState(() {});
+    } catch (e) {
       debugPrint(e.toString());
     }
-
   }
 
   Future<ui.Image> loadImage(Uint8List bytes) async {
@@ -65,11 +57,11 @@ class _DrawImageNineDemoState extends State<DrawImageNineDemo> {
 
   Widget _buildImage() {
     final screenSize = MediaQuery.of(context).size;
-    if (isImageloaded) {
+    if (image != null) {
       return CustomPaint(
         // size: screenSize,
         size: Size(screenSize.width, screenSize.width),
-        painter: ImageEditor(image: image),
+        painter: ImageEditor(image: image!),
       );
     } else {
       return Center(child: Text('loading'));
@@ -77,19 +69,15 @@ class _DrawImageNineDemoState extends State<DrawImageNineDemo> {
   }
 }
 
-
 class ImageEditor extends CustomPainter {
-
   ui.Image image;
 
   ImageEditor({
     required this.image,
   });
 
-
   @override
   void paint(Canvas canvas, Size size) {
-
     debugPrint('paint');
     debugPrint('paint size $size');
     debugPrint('paint center ${size.center(Offset.zero)}');
@@ -102,16 +90,13 @@ class ImageEditor extends CustomPainter {
     // canvas.drawImageRect(image, src, dst, Paint());
 
     var center = Rect.fromCenter(
-        center: size.center(Offset.zero),
-        width: 50,
-        height: 50
-    );
+        center: size.center(Offset.zero), width: 50, height: 50);
     debugPrint('paint center $center');
 
     var dst = Rect.fromCenter(
       center: size.center(Offset.zero),
-      width: size.width.toDouble() *1,
-      height: size.height.toDouble() *1,
+      width: size.width.toDouble() * 1,
+      height: size.height.toDouble() * 1,
     );
     canvas.drawImageNine(image, center, dst, Paint());
 
@@ -119,9 +104,8 @@ class ImageEditor extends CustomPainter {
     var paint = Paint()
       ..color = Colors.blue
       ..style = PaintingStyle.stroke
-      ..strokeWidth=2;
+      ..strokeWidth = 2;
     canvas.drawRect(center, paint);
-
   }
 
   // 返回false, 后面介绍

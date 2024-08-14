@@ -4,19 +4,18 @@ import 'package:flutter_templet_project/util/R.dart';
 import 'package:flutter_templet_project/basicWidget/page_indicator_widget.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 
-
 class FlutterSwiperIndicatorDemo extends StatefulWidget {
-
-  const FlutterSwiperIndicatorDemo({ Key? key, this.title}) : super(key: key);
+  const FlutterSwiperIndicatorDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
   @override
-  _FlutterSwiperIndicatorDemoState createState() => _FlutterSwiperIndicatorDemoState();
+  _FlutterSwiperIndicatorDemoState createState() =>
+      _FlutterSwiperIndicatorDemoState();
 }
 
-class _FlutterSwiperIndicatorDemoState extends State<FlutterSwiperIndicatorDemo> {
-
+class _FlutterSwiperIndicatorDemoState
+    extends State<FlutterSwiperIndicatorDemo> {
   ValueNotifier<int> currentIndex = ValueNotifier(0);
 
   BorderRadius borderRadius = BorderRadius.all(Radius.circular(8));
@@ -31,8 +30,7 @@ class _FlutterSwiperIndicatorDemoState extends State<FlutterSwiperIndicatorDemo>
         appBar: AppBar(
           title: Text(widget.title ?? "$widget"),
         ),
-        body: _buildSwiper()
-    );
+        body: _buildSwiper());
   }
 
   ///创建子项
@@ -52,7 +50,9 @@ class _FlutterSwiperIndicatorDemoState extends State<FlutterSwiperIndicatorDemo>
             fit: StackFit.expand,
             children: [
               FadeInImage(
-                placeholder: AssetImage('images/img_placeholder.png',),
+                placeholder: AssetImage(
+                  'assets/images/img_placeholder.png',
+                ),
                 image: NetworkImage(imgUrl),
                 fit: BoxFit.cover,
               ),
@@ -63,7 +63,6 @@ class _FlutterSwiperIndicatorDemoState extends State<FlutterSwiperIndicatorDemo>
     );
   }
 
-
   _buildSwiper() {
     return Container(
       height: 200,
@@ -72,36 +71,35 @@ class _FlutterSwiperIndicatorDemoState extends State<FlutterSwiperIndicatorDemo>
           child: Stack(
             children: [
               Swiper(
-                itemBuilder: (context, index) => _buildItem(context, index),
-                // indicatorLayout: PageIndicatorLayout.COLOR,
-                autoplay: items.length > 1,
-                loop: items.length > 1,
-                itemCount: items.length,
-                // pagination: this.items.length <= 1 ? null : SwiperPagination(),
-                // control: SwiperControl(),
-                // itemWidth: 200,
-                // viewportFraction: 0.6,
-                onIndexChanged: (index){
-                  currentIndex.value = index;
-                }
-              ),
+                  itemBuilder: (context, index) => _buildItem(context, index),
+                  // indicatorLayout: PageIndicatorLayout.COLOR,
+                  autoplay: items.length > 1,
+                  loop: items.length > 1,
+                  itemCount: items.length,
+                  // pagination: this.items.length <= 1 ? null : SwiperPagination(),
+                  // control: SwiperControl(),
+                  // itemWidth: 200,
+                  // viewportFraction: 0.6,
+                  onIndexChanged: (index) {
+                    currentIndex.value = index;
+                  }),
               // if (this.items.length > 1) buildPageIndicator(),
-              if (this.items.isNotEmpty) PageIndicatorWidget(
-                currentPage: currentIndex,
-                itemCount: items.length,
-                itemSize: Size(context.screenSize.width/ 4 / items.length, 2),
-                // itemBuilder: (isSelected, itemSize) {
-                //   return Container(
-                //     width: itemSize.width,
-                //     height: itemSize.height,
-                //     color: isSelected ? Colors.red : Colors.green,
-                //   );
-                // },
-              )
+              if (this.items.isNotEmpty)
+                PageIndicatorWidget(
+                  currentPage: currentIndex,
+                  itemCount: items.length,
+                  itemSize:
+                      Size(context.screenSize.width / 4 / items.length, 2),
+                  // itemBuilder: (isSelected, itemSize) {
+                  //   return Container(
+                  //     width: itemSize.width,
+                  //     height: itemSize.height,
+                  //     color: isSelected ? Colors.red : Colors.green,
+                  //   );
+                  // },
+                )
             ],
-          )
-      ),
+          )),
     );
   }
-
 }

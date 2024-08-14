@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_box.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/decoration_ext.dart';
-
+import 'package:flutter_templet_project/extension/list_nullable_ext.dart';
+import 'package:flutter_templet_project/util/R.dart';
 
 class DecorationDemo extends StatefulWidget {
-
-  const DecorationDemo({ Key? key, this.title}) : super(key: key);
+  const DecorationDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -17,11 +17,10 @@ class DecorationDemo extends StatefulWidget {
 }
 
 class _DecorationDemoState extends State<DecorationDemo> {
-
   bool isFlag = false;
+
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
@@ -31,13 +30,14 @@ class _DecorationDemoState extends State<DecorationDemo> {
               isFlag = !isFlag;
               setState(() {});
             },
-            child: Text('done',
+            child: Text(
+              'done',
               style: TextStyle(color: Colors.white),
             ),
           ),
         ],
       ),
-      body: isFlag ?  buildSection1() : buildSection3(),
+      body: isFlag ? buildSection1() : buildSection3(),
     );
   }
 
@@ -110,7 +110,7 @@ class _DecorationDemoState extends State<DecorationDemo> {
             ),
           ],
           image: DecorationImage(
-            image: NetworkImage('https://tenfei02.cfp.cn/creative/vcg/800/new/VCG21409037867.jpg'),
+            image: NetworkImage(R.image.urls.first),
             fit: BoxFit.cover,
           ),
         ),
@@ -133,15 +133,13 @@ class _DecorationDemoState extends State<DecorationDemo> {
     double width = 200,
     double height = 200,
   }) {
-    var url  = 'https://tenfei02.cfp.cn/creative/vcg/800/new/VCG211409104387-QDB.jpg';
-    url  = 'https://tenfei02.cfp.cn/creative/vcg/800/new/VCG21409037867.jpg';
+    var url = R.image.urls.first;
     return FadeInImage.assetNetwork(
-      placeholder: 'images/img_placeholder.png',
+      placeholder: 'assets/images/img_placeholder.png',
       image: url,
       fit: BoxFit.cover,
       width: width,
       height: height,
     );
   }
-
 }
