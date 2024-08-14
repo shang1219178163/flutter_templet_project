@@ -12,6 +12,7 @@ import 'dart:io';
 import 'package:desktop_drop/desktop_drop.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_templet_project/basicWidget/n_menu_anchor.dart';
 import 'package:flutter_templet_project/basicWidget/n_page_view.dart';
 import 'package:flutter_templet_project/basicWidget/n_pair.dart';
@@ -20,6 +21,7 @@ import 'package:flutter_templet_project/basicWidget/n_transform_view.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/mixin/create_file_mixin.dart';
 import 'package:flutter_templet_project/pages/demo/convert/ConvertProtocol.dart';
+import 'package:flutter_templet_project/pages/demo/convert/PackageExportConvert.dart';
 import 'package:flutter_templet_project/pages/demo/convert/WidgetNameConvert.dart';
 import 'package:flutter_templet_project/pages/demo/convert/WidgetThemeConvert.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
@@ -70,6 +72,7 @@ class _ConvertFlleState extends State<ConvertFlle> with CreateFileMixin {
   final convertTypes = <ConvertProtocol>[
     WidgetThemeConvert(),
     WidgetNameConvert(),
+    PackageExportConvert(),
   ];
 
   late var current = convertTypes[convertTypeIndex];
@@ -117,20 +120,42 @@ class _ConvertFlleState extends State<ConvertFlle> with CreateFileMixin {
   Widget buildBody() {
     return NTransformView(
       controller: transformViewController,
-      // title: NText(
-      //   '根据 Widget 组件生成对应的 Theme',
-      //   fontSize: 20,
-      //   fontWeight: FontWeight.w500,
-      // ),
-      message: NMenuAnchor<ConvertProtocol>(
-        values: convertTypes,
-        initialItem: current,
-        cbName: (e) => e.name,
-        onChanged: (e) async {
-          debugPrint(e.name);
-          current = e;
-          await onDragChanged();
-        },
+      header: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Flexible(
+                child: NMenuAnchor<ConvertProtocol>(
+                  values: convertTypes,
+                  initialItem: current,
+                  cbName: (e) => e.name,
+                  onChanged: (e) async {
+                    debugPrint(e.name);
+                    current = e;
+                    await onDragChanged();
+                  },
+                ),
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              NText(
+                current.message,
+                fontSize: 14,
+              ),
+            ],
+          ),
+        ]
+            .map((e) => Padding(
+                  padding: EdgeInsets.symmetric(vertical: 8),
+                  child: e,
+                ))
+            .toList(),
       ),
       start: canDrag.value == false
           ? null
