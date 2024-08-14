@@ -21,6 +21,7 @@ class NTransformView extends StatefulWidget {
     this.controller,
     this.title,
     this.message,
+    this.header,
     this.start,
     this.end,
     required this.toolbarBuilder,
@@ -34,6 +35,9 @@ class NTransformView extends StatefulWidget {
 
   /// 描述
   final Widget? message;
+
+  /// 顶部组件
+  final Widget? header;
 
   /// 头部组件
   final Widget? start;
@@ -84,8 +88,10 @@ class NTransformViewState extends State<NTransformView> {
     });
   }
 
-  Widget buildBodyVertical(
-      {double spacing = 10, required BoxConstraints constraints}) {
+  Widget buildBodyVertical({
+    double spacing = 10,
+    required BoxConstraints constraints,
+  }) {
     return Scrollbar(
       controller: _scrollController,
       child: SingleChildScrollView(
@@ -113,8 +119,10 @@ class NTransformViewState extends State<NTransformView> {
     );
   }
 
-  Widget buildBodyHorizontal(
-      {double spacing = 10, required BoxConstraints constraints}) {
+  Widget buildBodyHorizontal({
+    double spacing = 10,
+    required BoxConstraints constraints,
+  }) {
     return Container(
       padding: EdgeInsets.all(spacing * 3),
       child: Column(
@@ -144,15 +152,16 @@ class NTransformViewState extends State<NTransformView> {
     bool isVertical = false,
     double spacing = 10,
   }) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        widget.title ?? SizedBox(),
-        if (widget.title != null) SizedBox(height: spacing),
-        widget.message ?? SizedBox(),
-        if (widget.message != null) SizedBox(height: spacing * 2),
-      ],
-    );
+    return widget.header ??
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            widget.title ?? SizedBox(),
+            if (widget.title != null) SizedBox(height: spacing),
+            widget.message ?? SizedBox(),
+            if (widget.message != null) SizedBox(height: spacing * 2),
+          ],
+        );
   }
 
   Widget buildTextfield({
@@ -259,7 +268,14 @@ class NTransformViewState extends State<NTransformView> {
               thumbVisibility: true,
               child: SingleChildScrollView(
                 controller: controller,
-                child: text,
+                child: Container(
+                  padding: EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: Colors.transparent,
+                    border: Border.all(color: Color(0xffe4e4e4), width: 1),
+                  ),
+                  child: text,
+                ),
               ),
             );
       },
