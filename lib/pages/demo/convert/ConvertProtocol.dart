@@ -15,6 +15,11 @@ abstract class ConvertProtocol {
     return runtimeType.toString();
   }
 
+  /// 提示信息
+  String get message {
+    return "";
+  }
+
   /// 示例模板
   String exampleTemplet() {
     throw UnimplementedError("❌$this 未实现 exampleTemplet");
