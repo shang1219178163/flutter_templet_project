@@ -1,4 +1,3 @@
-
 //
 //  NFooterButtonBarDemo.dart
 //  flutter_templet_project
@@ -12,13 +11,8 @@ import 'package:flutter_templet_project/basicWidget/n_footer_button_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 
-
 class NFooterButtonBarDemo extends StatefulWidget {
-
-  NFooterButtonBarDemo({
-    super.key,
-    this.title
-  });
+  NFooterButtonBarDemo({super.key, this.title});
 
   final String? title;
 
@@ -27,7 +21,6 @@ class NFooterButtonBarDemo extends StatefulWidget {
 }
 
 class _NFooterButtonBarDemoState extends State<NFooterButtonBarDemo> {
-
   final _scrollController = ScrollController();
   late final enableVN = ValueNotifier(true);
 
@@ -37,8 +30,10 @@ class _NFooterButtonBarDemoState extends State<NFooterButtonBarDemo> {
   void initState() {
     //监听滚动事件，打印滚动位置
     _scrollController.addListener(() {
-      ddlog("_scrollController.offset: ${_scrollController.offset}/${_scrollController.position.maxScrollExtent}");
-      enableVN.value = (_scrollController.offset >= _scrollController.position.maxScrollExtent);
+      ddlog(
+          "_scrollController.offset: ${_scrollController.offset}/${_scrollController.position.maxScrollExtent}");
+      enableVN.value = (_scrollController.offset >=
+          _scrollController.position.maxScrollExtent);
     });
 
     super.initState();
@@ -49,12 +44,6 @@ class _NFooterButtonBarDemoState extends State<NFooterButtonBarDemo> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () => debugPrint(e),)
-        ).toList(),
       ),
       body: buildBody(),
     );
@@ -72,7 +61,6 @@ class _NFooterButtonBarDemoState extends State<NFooterButtonBarDemo> {
               controller: _scrollController,
               child: Column(
                 children: items.map((e) {
-
                   return Column(
                     children: [
                       ListTile(
@@ -88,16 +76,12 @@ class _NFooterButtonBarDemoState extends State<NFooterButtonBarDemo> {
             ),
           ),
         ),
-        buildPageFooter(
-          onConfirm: (){
-            ddlog("NFooterButtonBar");
-          }
-        ),
-        buildPageFooter1(
-          onConfirm: (){
-            ddlog("NFooterButtonBar");
-          }
-        ),
+        buildPageFooter(onConfirm: () {
+          ddlog("NFooterButtonBar");
+        }),
+        buildPageFooter1(onConfirm: () {
+          ddlog("NFooterButtonBar");
+        }),
       ],
     );
   }
@@ -106,38 +90,54 @@ class _NFooterButtonBarDemoState extends State<NFooterButtonBarDemo> {
     return ValueListenableBuilder(
       valueListenable: enableVN,
       builder: (context, value, child) {
-
         return NFooterButtonBar(
           primary: Colors.red,
           decoration: const BoxDecoration(
-            color: Colors.white,
-            border: Border(
-              top: BorderSide(color: Color(0xffE5E5E5))
-            )
-          ),
+              color: Colors.white,
+              border: Border(top: BorderSide(color: Color(0xffE5E5E5)))),
           confirmTitle: "保存",
           enable: value,
           // hideCancel: true,
-          // isReverse: true,
+          isReverse: true,
           onConfirm: onConfirm,
+          leading: GestureDetector(
+            onTap: () {
+              ddlog("left");
+            },
+            child: Padding(
+              padding: const EdgeInsets.only(right: 8.0),
+              child: Icon(
+                Icons.keyboard_double_arrow_left,
+                color: Colors.blue,
+              ),
+            ),
+          ),
+          trailing: GestureDetector(
+            onTap: () {
+              ddlog("right");
+            },
+            child: Padding(
+              padding: const EdgeInsets.only(left: 8.0),
+              child: Icon(
+                Icons.keyboard_double_arrow_right,
+                color: Colors.blue,
+              ),
+            ),
+          ),
         );
-      }
+      },
     );
   }
 
-  buildPageFooter1({required VoidCallback onConfirm}) {
+  Widget buildPageFooter1({required VoidCallback onConfirm}) {
     return ValueListenableBuilder(
         valueListenable: enableVN,
         builder: (context, value, child) {
-
           return NFooterButtonBar(
             primary: Colors.red,
             decoration: const BoxDecoration(
                 color: Colors.white,
-                border: Border(
-                    top: BorderSide(color: Color(0xffE5E5E5))
-                )
-            ),
+                border: Border(top: BorderSide(color: Color(0xffE5E5E5)))),
             confirmTitle: "保存",
             enable: value,
             // hideCancel: true,
@@ -147,8 +147,6 @@ class _NFooterButtonBarDemoState extends State<NFooterButtonBarDemo> {
             btnBorderRadius: BorderRadius.zero,
             padding: EdgeInsets.zero,
           );
-        }
-    );
+        });
   }
 }
-

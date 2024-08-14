@@ -21,7 +21,6 @@ class NFooterButtonBar extends StatelessWidget {
     this.decoration,
     this.cancelTitle = "取消",
     this.confirmTitle = "确定",
-    this.height = 44,
     this.gap = 16,
     this.btnBorderRadius = const BorderRadius.all(Radius.circular(8)),
     this.onCancel,
@@ -34,22 +33,46 @@ class NFooterButtonBar extends StatelessWidget {
     this.gradient,
     this.header,
     this.footer,
+    this.leading,
+    this.trailing,
+    this.isReverse = false,
     this.enable = true,
   });
 
+  /// 主题色
   final Color? primary;
+
+  /// 内边距
   final EdgeInsets? padding;
+
+  /// 装饰器
   final BoxDecoration? decoration;
 
+  /// 取消按钮标题
   final String cancelTitle;
+
+  /// 确定按钮标题
   final String confirmTitle;
-  final double height;
+
+  /// 取消按钮和确认按钮间距
   final double gap;
+
+  /// 按钮圆角
   final BorderRadius? btnBorderRadius;
+
+  /// 取消按钮回调
   final VoidCallback? onCancel;
+
+  /// 确定按钮回调
   final VoidCallback? onConfirm;
+
+  /// 取消按钮回调(带标题)
   final ValueChanged<String>? onCancelTap;
+
+  /// 确定按钮回调(带标题)
   final ValueChanged<String>? onConfirmTap;
+
+  /// 确定按钮渐变色
   final Gradient? gradient;
 
   /// 阴影
@@ -61,10 +84,13 @@ class NFooterButtonBar extends StatelessWidget {
   /// 是否隐藏确定按钮
   final bool hideConfirm;
 
-  final bool isPageBottom = true;
-
   final Widget? header;
   final Widget? footer;
+  final Widget? leading;
+  final Widget? trailing;
+
+  /// 是否顺序翻转
+  final bool isReverse;
 
   /// 确定按钮是否可点击
   final bool enable;
@@ -102,29 +128,37 @@ class NFooterButtonBar extends StatelessWidget {
 
   /// 按钮菜单栏
   Widget buildButtonBar() {
+    var children = [
+      leading ?? const SizedBox(),
+      if (!hideCancel)
+        Expanded(
+          child: NButtonCancel(
+            title: cancelTitle,
+            onPressed: onCancel,
+            onTap: onCancelTap,
+            borderRadius: btnBorderRadius,
+          ),
+        ),
+      if (!hideCancel && !hideConfirm) SizedBox(width: gap),
+      if (!hideConfirm)
+        Expanded(
+          child: NButtonConfirm(
+            boxShadow: boxShadow,
+            gradient: gradient,
+            title: confirmTitle,
+            enable: enable,
+            onPressed: onConfirm,
+            onTap: onConfirmTap,
+            borderRadius: btnBorderRadius,
+          ),
+        ),
+      trailing ?? const SizedBox(),
+    ];
+    if (isReverse) {
+      children = children.reversed.toList();
+    }
     return Row(
-      children: [
-        if (!hideCancel)
-          Expanded(
-            child: NButtonCancel(
-              title: cancelTitle,
-              onPressed: onCancel,
-              onTap: onCancelTap,
-            ),
-          ),
-        if (!hideCancel && !hideConfirm) SizedBox(width: gap),
-        if (!hideConfirm)
-          Expanded(
-            child: NButtonConfirm(
-              boxShadow: boxShadow,
-              gradient: gradient,
-              title: confirmTitle,
-              enable: enable,
-              onPressed: onConfirm,
-              onTap: onConfirmTap,
-            ),
-          ),
-      ],
+      children: children,
     );
   }
 }
