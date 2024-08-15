@@ -22,6 +22,7 @@ import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/mixin/create_file_mixin.dart';
 import 'package:flutter_templet_project/pages/demo/convert/ConvertProtocol.dart';
 import 'package:flutter_templet_project/pages/demo/convert/PackageExportConvert.dart';
+import 'package:flutter_templet_project/pages/demo/convert/SizeFilterConvert.dart';
 import 'package:flutter_templet_project/pages/demo/convert/WidgetNameConvert.dart';
 import 'package:flutter_templet_project/pages/demo/convert/WidgetThemeConvert.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
@@ -73,6 +74,7 @@ class _ConvertFlleState extends State<ConvertFlle> with CreateFileMixin {
     WidgetThemeConvert(),
     WidgetNameConvert(),
     PackageExportConvert(),
+    SizeFilterConvert(),
   ];
 
   late var current = convertTypes[convertTypeIndex];
@@ -301,7 +303,7 @@ class _ConvertFlleState extends State<ConvertFlle> with CreateFileMixin {
     setState(() {});
   }
 
-  onGenerate() async {
+  onGenerate({String? fileName}) async {
     if (canDrag.value) {
       for (final e in tabItems) {
         try {
@@ -313,7 +315,7 @@ class _ConvertFlleState extends State<ConvertFlle> with CreateFileMixin {
       }
     } else {
       onCreateFile(
-        name: "未知文件_${DateTime.now()}.dart",
+        name: fileName ?? "未知文件_${DateTime.now()}.dart",
         content: transformViewController.out,
       );
     }
@@ -355,7 +357,7 @@ class _ConvertFlleState extends State<ConvertFlle> with CreateFileMixin {
       content: transformViewController.input,
     );
     transformViewController.out = model?.contentNew ?? "";
-    onGenerate();
+    onGenerate(fileName: model?.nameNew);
   }
 
   onDrag(bool? val) async {
