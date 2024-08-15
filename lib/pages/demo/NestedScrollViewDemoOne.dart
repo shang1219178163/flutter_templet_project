@@ -8,7 +8,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_sliver_persistent_header_delegate.dart';
-import 'package:flutter_templet_project/basicWidget/tab_bar_indicator_fixed.dart';
+import 'package:flutter_templet_project/basicWidget/n_tab_bar_indicator_fixed.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/util/R.dart';
@@ -165,7 +165,7 @@ class _NestedScrollViewDemoOneState extends State<NestedScrollViewDemoOne>
       //     color: Colors.red,
       //   )
       // ),
-      indicator: TabBarIndicatorFixed(),
+      indicator: NTabBarIndicatorFixed(),
       tabs: items
           .map((e) => Tab(
                 child: ValueListenableBuilder<int>(

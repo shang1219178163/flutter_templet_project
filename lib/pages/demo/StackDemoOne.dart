@@ -1,11 +1,9 @@
-
-
 import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_templet_project/basicWidget/tab_bar_indicator_fixed.dart';
+import 'package:flutter_templet_project/basicWidget/n_tab_bar_indicator_fixed.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
@@ -15,11 +13,7 @@ import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:tuple/tuple.dart';
 
 class StackDemoOne extends StatefulWidget {
-
-  StackDemoOne({
-    Key? key,
-    this.title
-  }) : super(key: key);
+  StackDemoOne({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -27,17 +21,17 @@ class StackDemoOne extends StatefulWidget {
   _StackDemoOneState createState() => _StackDemoOneState();
 }
 
-class _StackDemoOneState extends State<StackDemoOne> with SingleTickerProviderStateMixin {
-
+class _StackDemoOneState extends State<StackDemoOne>
+    with SingleTickerProviderStateMixin {
   late final List<Tuple2<String, Widget>> _tabItems = [
     Tuple2("患者档案", buildPaticentRecord()),
     Tuple2("全病程轨迹", buildPaticentDepartmentPage()),
     Tuple2("日程", buildPaticentSchedule()),
   ];
-  late final _tabController = TabController(length: _tabItems.length, vsync: this);
+  late final _tabController =
+      TabController(length: _tabItems.length, vsync: this);
 
   late final _pageController = PageController(initialPage: 0, keepPage: true);
-
 
   @override
   Widget build(BuildContext context) {
@@ -52,12 +46,17 @@ class _StackDemoOneState extends State<StackDemoOne> with SingleTickerProviderSt
           color: Colors.white,
         ),
         title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () => debugPrint(e),)
-        ).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () => debugPrint(e),
+                ))
+            .toList(),
       ),
       body: buildBody(),
     );
@@ -79,12 +78,11 @@ class _StackDemoOneState extends State<StackDemoOne> with SingleTickerProviderSt
                   Container(
                     height: 172.h,
                     decoration: BoxDecoration(
-                      color: Colors.yellowAccent,
-                      image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: "bg_mine.png".toAssetImage(),
-                      )
-                    ),
+                        color: Colors.yellowAccent,
+                        image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: "bg_mine.png".toAssetImage(),
+                        )),
                   ),
                   InkWell(
                     onTap: () {
@@ -131,17 +129,17 @@ class _StackDemoOneState extends State<StackDemoOne> with SingleTickerProviderSt
         color: Colors.white,
         borderRadius: BorderRadius.all(Radius.circular(8.w)),
       ),
-      child: Column(
-          children: [
-            Container(
-              height: 76.w,
-              color: ColorExt.random,
-            ),
-            ...Container(
+      child: Column(children: [
+        Container(
+          height: 76.w,
+          color: ColorExt.random,
+        ),
+        ...Container(
               height: 46.w,
               color: ColorExt.random,
-            )*3,
-          ]),
+            ) *
+            3,
+      ]),
     );
   }
 
@@ -151,15 +149,18 @@ class _StackDemoOneState extends State<StackDemoOne> with SingleTickerProviderSt
       children: [
         buildTab(
             controller: _tabController,
-            tabs: _tabItems.map((e) => Tab(
-              text: e.item1,
-            )).toList(),
+            tabs: _tabItems
+                .map((e) => Tab(
+                      text: e.item1,
+                    ))
+                .toList(),
             onTap: (int index) async {
               debugPrint("buildTab: $index");
               _pageController.jumpToPage(index);
-            }
+            }),
+        SizedBox(
+          height: 12.w,
         ),
-        SizedBox(height: 12.w,),
         Expanded(
           child: buildPageView(),
         ),
@@ -193,11 +194,8 @@ class _StackDemoOneState extends State<StackDemoOne> with SingleTickerProviderSt
             fontSize: 16.sp,
             fontWeight: FontWeight.w500,
           ),
-          indicator: TabBarIndicatorFixed(
-              width: 32.w,
-              height: 2.h,
-              color: color
-          ),
+          indicator:
+              NTabBarIndicatorFixed(width: 32.w, height: 2.h, color: color),
           onTap: onTap,
           tabs: tabs,
         ),
@@ -232,7 +230,7 @@ class _StackDemoOneState extends State<StackDemoOne> with SingleTickerProviderSt
       child: Column(
         children: [
           TextButton(
-            onPressed: (){
+            onPressed: () {
               debugPrint("患者档");
             },
             child: Text("患者档案"),
@@ -248,7 +246,7 @@ class _StackDemoOneState extends State<StackDemoOne> with SingleTickerProviderSt
       child: Column(
         children: [
           TextButton(
-            onPressed: (){
+            onPressed: () {
               debugPrint("患者档");
             },
             child: Text("患者档案"),
@@ -256,7 +254,6 @@ class _StackDemoOneState extends State<StackDemoOne> with SingleTickerProviderSt
         ],
       ),
     );
-
   }
 
   Widget buildPaticentSchedule() {
@@ -265,18 +262,17 @@ class _StackDemoOneState extends State<StackDemoOne> with SingleTickerProviderSt
       child: Column(
         children: [
           ...Padding(
-            padding: EdgeInsets.symmetric(vertical: 16.w),
-            child: TextButton(
-              onPressed: (){
-                debugPrint("日程");
-              },
-              child: Text("日程"),
-            ),
-          )*3,
+                padding: EdgeInsets.symmetric(vertical: 16.w),
+                child: TextButton(
+                  onPressed: () {
+                    debugPrint("日程");
+                  },
+                  child: Text("日程"),
+                ),
+              ) *
+              3,
         ],
       ),
     );
-
   }
-
 }
