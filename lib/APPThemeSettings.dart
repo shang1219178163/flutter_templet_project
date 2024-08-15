@@ -24,71 +24,94 @@ class APPThemeService {
   // static APPThemeSettings get instance => _instance;
 
   late ThemeData themeData = ThemeData.light(useMaterial3: false).copyWith(
-    platform: TargetPlatform.iOS,
-    // scaffoldBackgroundColor: Colors.red
-    splashFactory: NoSplash.splashFactory,
-    splashColor: Colors.transparent, // 点击时的高亮效果设置为透明
-    highlightColor: Colors.transparent, // 长按时的扩散效果设置为透明
-    // primaryColor: Colors.blue, //主色调为青色
-    // indicatorColor: Colors.white,
-    // iconTheme: IconThemeData(color: Colors.yellow),//设置icon主题色为黄色
-    // textTheme: ThemeData.light().textTheme.copyWith(
-    //     button: TextStyle(color: Colors.red)
-    // ),//设置文本颜色为红色
-    scaffoldBackgroundColor: bgColor,
-    appBarTheme: const AppBarTheme(
-      elevation: 0,
-    ),
-    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-    dividerTheme: const DividerThemeData(
-      color: Color(0xFFE4E4E4),
-      space: 0.5,
-      thickness: 1,
-    ),
-    badgeTheme: const BadgeThemeData(
-      offset: Offset(-1, -4),
-      largeSize: 20,
-      smallSize: 20,
-      textColor: Colors.white,
-      textStyle: TextStyle(
-        fontWeight: FontWeight.bold,
-        color: Colors.white,
-        fontSize: 11,
+      platform: TargetPlatform.iOS,
+      // scaffoldBackgroundColor: Colors.red
+      splashFactory: NoSplash.splashFactory,
+      splashColor: Colors.transparent, // 点击时的高亮效果设置为透明
+      highlightColor: Colors.transparent, // 长按时的扩散效果设置为透明
+      // primaryColor: Colors.blue, //主色调为青色
+      // indicatorColor: Colors.white,
+      // iconTheme: IconThemeData(color: Colors.yellow),//设置icon主题色为黄色
+      // textTheme: ThemeData.light().textTheme.copyWith(
+      //     button: TextStyle(color: Colors.red)
+      // ),//设置文本颜色为红色
+      scaffoldBackgroundColor: bgColor,
+      appBarTheme: const AppBarTheme(
+        elevation: 0,
       ),
-    ),
-    bottomAppBarTheme: const BottomAppBarTheme(
-      height: 60,
-      surfaceTintColor: Color(0xFFFFFFFF),
-      color: Color(0xFFFFFFFF),
-    ),
-    chipTheme: ChipThemeData(
-      pressElevation: 0,
-      showCheckmark: false,
-      side: BorderSide.none,
-    ),
-    buttonTheme: ButtonThemeData(
-      splashColor: Colors.transparent,
-      buttonColor: Colors.blue,
-    ),
-    textButtonTheme: TextButtonThemeData(
-      style: TextButton.styleFrom(
-        splashFactory: NoSplash.splashFactory,
-        foregroundColor: Colors.blue,
-      ).merge(buildButtonStyle()),
-    ),
-    outlinedButtonTheme: OutlinedButtonThemeData(
-      style: OutlinedButton.styleFrom(
-        splashFactory: NoSplash.splashFactory,
-        foregroundColor: Colors.blue,
-      ).merge(buildButtonStyle()),
-    ),
-    elevatedButtonTheme: ElevatedButtonThemeData(
-      style: ElevatedButton.styleFrom(
-        splashFactory: NoSplash.splashFactory,
-        backgroundColor: Colors.blue,
-      ).merge(buildButtonStyle()),
-    ),
-  );
+      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+      dividerTheme: const DividerThemeData(
+        color: Color(0xFFE4E4E4),
+        space: 0.5,
+        thickness: 1,
+      ),
+      badgeTheme: const BadgeThemeData(
+        offset: Offset(-1, -4),
+        largeSize: 20,
+        smallSize: 20,
+        textColor: Colors.white,
+        textStyle: TextStyle(
+          fontWeight: FontWeight.bold,
+          color: Colors.white,
+          fontSize: 11,
+        ),
+      ),
+      bottomAppBarTheme: const BottomAppBarTheme(
+        height: 60,
+        surfaceTintColor: Color(0xFFFFFFFF),
+        color: Color(0xFFFFFFFF),
+      ),
+      chipTheme: ChipThemeData(
+        pressElevation: 0,
+        showCheckmark: false,
+        side: BorderSide.none,
+      ),
+      buttonTheme: ButtonThemeData(
+        splashColor: Colors.transparent,
+        buttonColor: Colors.blue,
+      ),
+      textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(
+          splashFactory: NoSplash.splashFactory,
+          foregroundColor: Colors.blue,
+        ).merge(buildButtonStyle()),
+      ),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: OutlinedButton.styleFrom(
+          splashFactory: NoSplash.splashFactory,
+          foregroundColor: Colors.blue,
+        ).merge(buildButtonStyle()),
+      ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          splashFactory: NoSplash.splashFactory,
+          backgroundColor: Colors.blue,
+        ).merge(buildButtonStyle()),
+      ),
+      extensions: [
+        AppTheme(
+          primary: const Color(0xFF00B451),
+          primary2: const Color(0xFF00B451).withOpacity(0.8),
+          bgColor: const Color(0xFFF3F3F3),
+          fontColor: const Color(0xFF1A1A1A),
+          titleStyle: const TextStyle(
+            color: Color(0xFF1A1A1A),
+            fontSize: 18,
+            fontWeight: FontWeight.w500,
+            decoration: TextDecoration.none,
+          ),
+          textStyle: const TextStyle(
+            color: Color(0xFF1A1A1A),
+            fontSize: 16,
+            fontWeight: FontWeight.w400,
+            decoration: TextDecoration.none,
+          ),
+          cancelColor: const Color(0xFFE65F55),
+          lineColor: const Color(0xffE4E4E4),
+          borderColor: const Color(0xFFE5E5E5),
+          disabledColor: const Color(0xffB3B3B3),
+        ),
+      ]);
 
   // ThemeData? darkThemeData;
   ThemeData darkThemeData = ThemeData.dark(useMaterial3: false).copyWith(
@@ -307,7 +330,7 @@ class APPThemeService {
     final color = Colors.blue;
     return ThemeData(
       ///用来适配 Theme.of(context).primaryColorLight 和 primaryColorDark 的颜色变化，不设置可能会是默认蓝色
-      primarySwatch: color as MaterialColor,
+      primarySwatch: color,
 
       /// Card 在 M3 下，会有 apply Overlay
       colorScheme: ColorScheme.fromSeed(
@@ -347,4 +370,105 @@ class APPThemeService {
       ),
     );
   }
+}
+
+/// App 自定义主题
+class AppTheme extends ThemeExtension<AppTheme> {
+  /// App 自定义主题
+  AppTheme({
+    this.primary = const Color(0xFF007DBF),
+    this.primary2 = const Color(0xFF359EEB),
+    this.bgColor = const Color(0xFFF3F3F3),
+    this.fontColor = const Color(0xFF1A1A1A),
+    this.titleStyle = const TextStyle(
+      color: Color(0xFF1A1A1A),
+      fontSize: 18,
+      fontWeight: FontWeight.w500,
+      decoration: TextDecoration.none,
+    ),
+    this.textStyle = const TextStyle(
+      color: Color(0xFF1A1A1A),
+      fontSize: 16,
+      fontWeight: FontWeight.w400,
+      decoration: TextDecoration.none,
+    ),
+    this.cancelColor = const Color(0xFFE65F55),
+    this.lineColor = const Color(0xFFE5E5E5),
+    this.borderColor = const Color(0xFFE5E5E5),
+    this.disabledColor = const Color(0xffB3B3B3),
+  });
+
+  /// 字体颜色
+  final Color? primary;
+
+  /// 主色调辅助色(用于渐进色)
+  final Color? primary2;
+
+  /// 背景色
+  final Color? bgColor;
+
+  /// 标题字体样式
+  final Color? fontColor;
+
+  /// 标题字体样式
+  final TextStyle? titleStyle;
+
+  /// 字体样式
+  final TextStyle? textStyle;
+
+  /// 取消按钮的那种深红色 cancel 0xFFE65F55
+  final Color? cancelColor;
+
+  /// 线条 #E5E5E5
+  final Color? lineColor;
+
+  /// 边框线条 #E5E5E5
+  final Color? borderColor;
+
+  /// 禁用状态的颜色 #B3B3B3
+  final Color? disabledColor;
+
+  @override
+  ThemeExtension<AppTheme> copyWith({
+    Color? primary,
+    Color? primary2,
+    Color? bgColor,
+    Color? fontColor,
+    TextStyle? titleStyle,
+    TextStyle? textStyle,
+    Color? cancelColor,
+    Color? lineColor,
+    Color? borderColor,
+    Color? disabledColor,
+  }) =>
+      AppTheme(
+        primary: primary ?? this.primary,
+        primary2: primary2 ?? this.primary2,
+        bgColor: bgColor ?? this.bgColor,
+        fontColor: fontColor ?? this.fontColor,
+        titleStyle: titleStyle ?? this.titleStyle,
+        textStyle: textStyle ?? this.textStyle,
+        cancelColor: cancelColor ?? this.cancelColor,
+        lineColor: lineColor ?? this.lineColor,
+        borderColor: borderColor ?? this.borderColor,
+        disabledColor: disabledColor ?? this.disabledColor,
+      );
+
+  @override
+  ThemeExtension<AppTheme> lerp(
+    covariant AppTheme? other,
+    double t,
+  ) =>
+      AppTheme(
+        primary: Color.lerp(primary, other?.primary, t),
+        primary2: Color.lerp(primary2, other?.primary2, t),
+        bgColor: Color.lerp(bgColor, other?.bgColor, t),
+        fontColor: Color.lerp(fontColor, other?.fontColor, t),
+        titleStyle: TextStyle.lerp(titleStyle, other?.titleStyle, t),
+        textStyle: TextStyle.lerp(textStyle, other?.textStyle, t),
+        cancelColor: Color.lerp(cancelColor, other?.cancelColor, t),
+        lineColor: Color.lerp(lineColor, other?.lineColor, t),
+        borderColor: Color.lerp(borderColor, other?.borderColor, t),
+        disabledColor: Color.lerp(disabledColor, other?.disabledColor, t),
+      );
 }
