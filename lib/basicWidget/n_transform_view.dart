@@ -263,17 +263,17 @@ class NTransformViewState extends State<NTransformView> {
               );
 
         return widget.end ??
-            Scrollbar(
-              controller: controller,
-              thumbVisibility: true,
-              child: SingleChildScrollView(
+            Container(
+              padding: EdgeInsets.only(left: 4, top: 2, bottom: 2),
+              decoration: BoxDecoration(
+                color: Colors.transparent,
+                border: Border.all(color: Color(0xffe4e4e4), width: 1),
+              ),
+              child: Scrollbar(
                 controller: controller,
-                child: Container(
-                  padding: EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    color: Colors.transparent,
-                    border: Border.all(color: Color(0xffe4e4e4), width: 1),
-                  ),
+                thumbVisibility: true,
+                child: SingleChildScrollView(
+                  controller: controller,
                   child: text,
                 ),
               ),
