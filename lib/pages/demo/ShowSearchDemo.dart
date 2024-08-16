@@ -6,7 +6,6 @@
 //  Copyright © 5/17/21 shang. All rights reserved.
 //
 
-
 import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
@@ -14,18 +13,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 
 class ShowSearchDemo extends StatefulWidget {
-
   final String? title;
 
-  const ShowSearchDemo({ Key? key, this.title}) : super(key: key);
-
+  const ShowSearchDemo({Key? key, this.title}) : super(key: key);
 
   @override
   _ShowSearchDemoState createState() => _ShowSearchDemoState();
 }
 
 class _ShowSearchDemoState extends State<ShowSearchDemo> {
-
   List<String> list = List.generate(100, (i) => 'item $i');
 
   late List<String> filters = [...list];
@@ -48,8 +44,11 @@ class _ShowSearchDemoState extends State<ShowSearchDemo> {
                   list: filters,
                   select: '',
                   onSelected: (String query) {
-                    ddlog(query);
-                    filters = list.where((e) => query.isEmpty ? e != null : e.contains(query.trim())).toList();
+                    filters = list
+                        .where((e) => query.isEmpty
+                            ? e != null
+                            : e.contains(query.trim()))
+                        .toList();
                     setState(() {});
                   },
                 ),
@@ -59,16 +58,17 @@ class _ShowSearchDemoState extends State<ShowSearchDemo> {
         ],
       ),
       body: ListView(
-        children: filters.map((e) => ListTile(
-            title: Text(e),
-          ),
-        ).toList(),
+        children: filters
+            .map(
+              (e) => ListTile(
+                title: Text(e),
+              ),
+            )
+            .toList(),
       ),
     );
   }
-
 }
-
 
 class CustomSearchDelegate extends SearchDelegate<String> {
   CustomSearchDelegate({
@@ -115,18 +115,20 @@ class CustomSearchDelegate extends SearchDelegate<String> {
   Widget buildResults(BuildContext context) {
     var filterList = list.where((String s) => s.contains(query.trim()));
     return ListView(
-      children: filterList.map((e) => ListTile(
-        leading: Icon(Icons.message),
-        title: Text(
-          e,
-          style: Theme.of(context).textTheme.titleLarge,
-        ),
-        onTap: () {
-          query = e;
-          onSelected(e);
-          close(context, e);
-        },
-      )).toList(),
+      children: filterList
+          .map((e) => ListTile(
+                leading: Icon(Icons.message),
+                title: Text(
+                  e,
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+                onTap: () {
+                  query = e;
+                  onSelected(e);
+                  close(context, e);
+                },
+              ))
+          .toList(),
     );
   }
 
@@ -135,25 +137,25 @@ class CustomSearchDelegate extends SearchDelegate<String> {
   Widget buildSuggestions(BuildContext context) {
     var filterList = list.where((String s) => s.contains(query.trim()));
     return ListView(
-      children: filterList.map((e) => ListTile(
-        leading: Icon(Icons.message),
-        title: Text(
-          e,
-          style: Theme.of(context).textTheme.headline6,
-        ),
-        onTap: () {
-          query = e;
-          onSelected(e);
-          close(context, e);
-        },
-      )).toList(),
+      children: filterList
+          .map((e) => ListTile(
+                leading: Icon(Icons.message),
+                title: Text(
+                  e,
+                  style: Theme.of(context).textTheme.headline6,
+                ),
+                onTap: () {
+                  query = e;
+                  onSelected(e);
+                  close(context, e);
+                },
+              ))
+          .toList(),
     );
   }
 }
 
-
-class SearchBarViewDelegate extends SearchDelegate<String>{
-
+class SearchBarViewDelegate extends SearchDelegate<String> {
   String searchHint = "请输入搜索内容...";
   var sourceList = [
     "dart",
@@ -163,57 +165,54 @@ class SearchBarViewDelegate extends SearchDelegate<String>{
     "flutter 编程开发",
   ];
 
-  var  suggestList = [
-    "flutter",
-    "flutter 编程开发"
-  ];
-
+  var suggestList = ["flutter", "flutter 编程开发"];
 
   @override
   String get searchFieldLabel => searchHint;
 
   @override
   List<Widget> buildActions(BuildContext context) {
-
     ///显示在最右边的控件列表
     return [
       IconButton(
         icon: Icon(Icons.clear),
-        onPressed: (){
+        onPressed: () {
           query = "";
+
           ///搜索建议的内容
           showSuggestions(context);
         },
       ),
       IconButton(
         icon: Icon(Icons.search),
-        onPressed: ()=>query = "",
+        onPressed: () => query = "",
       )
     ];
   }
-
 
   ///左侧带动画的控件，一般都是返回
   @override
   Widget buildLeading(BuildContext context) {
     return IconButton(
-      icon: AnimatedIcon(icon: AnimatedIcons.menu_arrow, progress: transitionAnimation
+      icon: AnimatedIcon(
+        icon: AnimatedIcons.menu_arrow,
+        progress: transitionAnimation,
       ),
-      ///调用 close 关闭 search 界面
-      onPressed: ()=>close(context,""),
+
+      //调用 close 关闭 search 界面
+      onPressed: () => close(context, ""),
     );
   }
 
   ///展示搜索结果
   @override
   Widget buildResults(BuildContext context) {
-
     var result = <String>[];
 
     ///模拟搜索过程
-    for (var str in sourceList){
+    for (var str in sourceList) {
       ///query 就是输入框的 TextEditingController
-      if (query.isNotEmpty && str.contains(query)){
+      if (query.isNotEmpty && str.contains(query)) {
         result.add(str);
       }
     }
@@ -221,7 +220,7 @@ class SearchBarViewDelegate extends SearchDelegate<String>{
     ///展示搜索结果
     return ListView.builder(
       itemCount: result.length,
-      itemBuilder: (BuildContext context, int index)=>ListTile(
+      itemBuilder: (BuildContext context, int index) => ListTile(
         title: Text(result[index]),
       ),
     );
@@ -229,34 +228,35 @@ class SearchBarViewDelegate extends SearchDelegate<String>{
 
   @override
   Widget buildSuggestions(BuildContext context) {
-
-    var suggest = query.isEmpty ? suggestList : sourceList.where((input)=>input.startsWith(query)).toList();
+    var suggest = query.isEmpty
+        ? suggestList
+        : sourceList.where((input) => input.startsWith(query)).toList();
     return ListView.builder(
       itemCount: suggest.length,
-      itemBuilder: (BuildContext context, int index)=>
-          InkWell(
-            onTap: (){
-              //  query.replaceAll("", suggest[index].toString());
-              searchHint = "";
-              query =  suggest[index].toString();
-              showResults(context);
-            },
-            child:         ListTile(
-              title: RichText(
-                text: TextSpan(
-                  text: suggest[index].substring(0, query.length),
-                  style: TextStyle(color: Theme.of(context).primaryColor,fontWeight: FontWeight.bold),
-                  children: [
-                    TextSpan(
-                      text: suggest[index].substring(query.length),
-                      style: TextStyle(color: Colors.grey),
-                    ),
-                  ],
+      itemBuilder: (BuildContext context, int index) => InkWell(
+        onTap: () {
+          //  query.replaceAll("", suggest[index].toString());
+          searchHint = "";
+          query = suggest[index].toString();
+          showResults(context);
+        },
+        child: ListTile(
+          title: RichText(
+            text: TextSpan(
+              text: suggest[index].substring(0, query.length),
+              style: TextStyle(
+                  color: Theme.of(context).primaryColor,
+                  fontWeight: FontWeight.bold),
+              children: [
+                TextSpan(
+                  text: suggest[index].substring(query.length),
+                  style: TextStyle(color: Colors.grey),
                 ),
-              ),
+              ],
             ),
           ),
+        ),
+      ),
     );
   }
 }
-

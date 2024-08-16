@@ -37,8 +37,10 @@ class NFilterDropBox extends StatefulWidget {
     this.header,
     this.footer,
   });
+
   /// 控制器
   final NFilterDropBoxController? controller;
+
   /// 筛选项
   final List<Widget> sections;
   final VoidCallback onCancel;
@@ -47,22 +49,31 @@ class NFilterDropBox extends StatefulWidget {
 
   /// stack alignment
   final AlignmentGeometry stackAlignment;
+
   /// stack textDirection
   final TextDirection? stackTextDirection;
+
   /// stack fit
   final StackFit stackFit;
+
   /// stack clipBehavior
   final Clip stackClipBehavior;
+
   /// 对齐方式
   final Alignment contentAlignment;
+
   /// 宽度
   final double? width;
+
   /// 高度比例
   final double? heightFactor;
+
   /// 背景色
   final Color? barrierColor;
+
   /// 圆角
   final BorderRadius borderRadius;
+
   /// 折叠展开
   final ValueChanged<bool>? onVisible;
 
@@ -104,27 +115,27 @@ class _NFilterDropBoxState extends State<NFilterDropBox> {
       children: [
         widget.child,
         ValueListenableBuilder<bool>(
-            valueListenable: isVisible,
-            builder: (context, bool value, child) {
-              if (!value) {
-                return SizedBox();
-              }
-
-              return Positioned(
-                top: 0,
-                bottom: 0,
-                left: 0,
-                right: 0,
-                child: buildDropBox(),
-              );
+          valueListenable: isVisible,
+          builder: (context, bool value, child) {
+            if (!value) {
+              return SizedBox();
             }
+
+            return Positioned(
+              top: 0,
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: child ?? SizedBox(),
+            );
+          },
+          child: buildDropBox(),
         ),
       ],
     );
   }
 
   Widget buildDropBox() {
-    // return
     return GestureDetector(
       onTap: widget.onCancel,
       child: Container(
@@ -135,7 +146,7 @@ class _NFilterDropBoxState extends State<NFilterDropBox> {
               Colors.black.withOpacity(0.2),
         ),
         child: InkWell(
-          onTap: (){
+          onTap: () {
             // debugPrint("拦截展示内容背景事件");
           },
           child: FractionallySizedBox(
@@ -150,10 +161,11 @@ class _NFilterDropBoxState extends State<NFilterDropBox> {
               ),
               child: Column(
                 children: [
-                  widget.header?.call(context) ?? const Divider(
-                    height: 1,
-                    color: lineColor,
-                  ),
+                  widget.header?.call(context) ??
+                      const Divider(
+                        height: 1,
+                        color: lineColor,
+                      ),
                   Expanded(
                     child: Scrollbar(
                       controller: scrollController,
@@ -168,11 +180,12 @@ class _NFilterDropBoxState extends State<NFilterDropBox> {
                       ),
                     ),
                   ),
-                  widget.footer?.call(context) ?? buildDropBoxButtonBar(
-                    borderRadius: widget.borderRadius,
-                    onCancel: widget.onReset,
-                    onConfirm: widget.onConfirm,
-                  ),
+                  widget.footer?.call(context) ??
+                      buildDropBoxButtonBar(
+                        borderRadius: widget.borderRadius,
+                        onCancel: widget.onReset,
+                        onConfirm: widget.onConfirm,
+                      ),
                 ],
               ),
             ),
@@ -197,10 +210,11 @@ class _NFilterDropBoxState extends State<NFilterDropBox> {
     required VoidCallback onConfirm,
   }) {
     return ClipRRect(
-      borderRadius: borderRadius ?? const BorderRadius.only(
-        bottomLeft: Radius.circular(8),
-        bottomRight: Radius.circular(8),
-      ),
+      borderRadius: borderRadius ??
+          const BorderRadius.only(
+            bottomLeft: Radius.circular(8),
+            bottomRight: Radius.circular(8),
+          ),
       child: NFooterButtonBar(
         padding: EdgeInsets.only(
           top: 12,
@@ -226,11 +240,8 @@ class _NFilterDropBoxState extends State<NFilterDropBox> {
   }
 }
 
-
-
 /// NFilterDropBox 组件控制器,将 State 的私有属性或者方法暴漏出去
 class NFilterDropBoxController {
-
   _NFilterDropBoxState? _anchor;
 
   void onToggle() {

@@ -195,8 +195,9 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
         placeholder: placeholder,
         placeholderStyle: TextStyle(fontSize: 15.sp, color: fontColorBCBFC2),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(4.w)),
-            color: bgColor),
+          borderRadius: BorderRadius.all(Radius.circular(4.w)),
+          color: Colors.white,
+        ),
         onChanged: (String value) {
           _debounce(() {
             debugPrint('searchText: $value');

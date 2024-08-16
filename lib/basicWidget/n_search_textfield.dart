@@ -40,6 +40,7 @@ class NSearchTextField extends StatefulWidget {
     this.controller,
     this.placeholder = "请输入",
     this.placeholderStyle,
+    this.decoration,
     this.backgroundColor,
     this.borderRadius = const BorderRadius.all(Radius.circular(6)),
     this.padding = const EdgeInsetsDirectional.fromSTEB(3.8, 8, 5, 8),
@@ -49,6 +50,7 @@ class NSearchTextField extends StatefulWidget {
     this.onSuffixTap,
     this.focusNode,
     this.onFocus,
+    this.autofocus = false,
     this.enabled = true,
   }) : super(key: key);
 
@@ -60,6 +62,8 @@ class NSearchTextField extends StatefulWidget {
   final String placeholder;
 
   final TextStyle? placeholderStyle;
+
+  final BoxDecoration? decoration;
 
   /// 默认浅灰色
   final Color? backgroundColor;
@@ -82,6 +86,9 @@ class NSearchTextField extends StatefulWidget {
 
   /// 焦点回调
   final ValueChanged<bool>? onFocus;
+
+  /// 是否自动聚焦
+  final bool autofocus;
 
   /// 是否可以响应键盘
   final bool enabled;
@@ -123,42 +130,14 @@ class NSearchTextFieldState extends State<NSearchTextField> {
 
   @override
   Widget build(BuildContext context) {
-    return buildSearch(
-      focusNode: _focusNode,
-      controller: widget.controller ?? _controller,
-      placeholder: widget.placeholder,
-      placeholderStyle: widget.placeholderStyle,
-      backgroundColor: widget.backgroundColor,
-      borderRadius: widget.borderRadius,
-      onChanged: widget.onChanged,
-      onSubmitted: widget.onSubmitted,
-      onSuffixTap: widget.onSuffixTap,
-      padding: widget.padding,
-      enabled: widget.enabled,
-    );
-  }
-
-  buildSearch({
-    FocusNode? focusNode,
-    required TextEditingController controller,
-    required String placeholder,
-    TextStyle? placeholderStyle,
-    Color? backgroundColor,
-    BorderRadius? borderRadius,
-    required ValueChanged<String> onChanged,
-    ValueChanged<String>? onSubmitted,
-    VoidCallback? onSuffixTap,
-    EdgeInsetsGeometry? padding,
-    bool enabled = true,
-  }) {
     return DefaultSelectionStyle(
       cursorColor: context.primaryColor,
       child: CupertinoTextField(
-        focusNode: focusNode,
-        controller: controller,
-        padding: padding ?? EdgeInsets.zero,
-        placeholder: placeholder,
-        placeholderStyle: placeholderStyle ??
+        focusNode: widget.focusNode,
+        controller: widget.controller,
+        padding: widget.padding ?? EdgeInsets.zero,
+        placeholder: widget.placeholder,
+        placeholderStyle: widget.placeholderStyle ??
             const TextStyle(
               fontSize: 14,
               color: Color(0xFF737373),
@@ -174,10 +153,11 @@ class NSearchTextFieldState extends State<NSearchTextField> {
             height: 14,
           ),
         ),
-        decoration: BoxDecoration(
-          color: backgroundColor,
-          borderRadius: BorderRadius.all(Radius.circular(4)),
-        ),
+        decoration: widget.decoration ??
+            BoxDecoration(
+              color: widget.backgroundColor,
+              borderRadius: BorderRadius.all(Radius.circular(4)),
+            ),
         // suffix: InkWell(
         //   onTap: onSuffixTap ?? (){
         //     controller.clear();
@@ -197,89 +177,11 @@ class NSearchTextFieldState extends State<NSearchTextField> {
         //     ),
         //   ),
         // ),
-        onChanged: (String value) {
-          _debounce(() {
-            // debugPrint('searchText: $value');
-            onChanged.call(value);
-          });
-        },
-        onSubmitted: onSubmitted ??
-            (String value) {
-              _debounce(() {
-                // debugPrint('onSubmitted: $value');
-                onChanged.call(value);
-              });
-            },
-        enabled: enabled,
+        onChanged: widget.onChanged,
+        onSubmitted: widget.onChanged,
+        enabled: widget.enabled,
+        autofocus: widget.autofocus,
       ),
     );
   }
 }
-
-//   buildSearch({
-//     FocusNode? focusNode,
-//     required TextEditingController controller,
-//     required String placeholder,
-//     TextStyle? placeholderStyle,
-//     Color? backgroundColor,
-//     BorderRadius? borderRadius,
-//     required ValueChanged<String> onChanged,
-//     ValueChanged<String>? onSubmitted,
-//     VoidCallback? onSuffixTap,
-//     EdgeInsetsGeometry? padding,
-//     bool? enabled,
-//   }) {
-//     return CupertinoSearchTextField(
-//       focusNode: focusNode,
-//       controller: controller,
-//       placeholder: placeholder,
-//       backgroundColor: backgroundColor,
-//       borderRadius: borderRadius,
-//       padding: padding ?? EdgeInsets.zero,
-//       placeholderStyle: placeholderStyle ?? const TextStyle(
-//         fontSize: 14,
-//         color: Color(0xFF737373),
-//         fontWeight: FontWeight.w400,
-//       ),
-//       prefixIcon: Image(
-//         image: "icon_search_black.png".toAssetImage(),
-//         width: 14,
-//         height: 14,
-//       ),
-//       prefixInsets: const EdgeInsets.only(
-//         left: 16,
-//         top: 9,
-//         bottom: 9,
-//         right: 9
-//       ),
-//       suffixIcon: const Icon(
-//         Icons.cancel,
-//         color: Color(0xff999999),
-//         size: 16,
-//       ),
-//       suffixInsets: const EdgeInsets.only(
-//         left: 6,
-//         top: 10,
-//         bottom: 10,
-//         right: 12,
-//       ),
-//       onChanged: (String value) {
-//         _debounce(() {
-//           // debugPrint('searchText: $value');
-//           onChanged.call(value);
-//         });
-//       },
-//       onSubmitted: onSubmitted ?? (String value) {
-//         _debounce(() {
-//           // debugPrint('onSubmitted: $value');
-//           onChanged.call(value);
-//         });
-//       },
-//       onSuffixTap: onSuffixTap ?? (){
-//         controller.clear();
-//         onChanged.call("");
-//       },
-//       enabled: enabled,
-//     );
-//   }
-// }

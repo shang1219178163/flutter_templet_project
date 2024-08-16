@@ -12,7 +12,6 @@ import 'package:flutter_templet_project/basicWidget/n_choice_box.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 
-
 class NFilterSection<T> extends StatefulWidget {
   NFilterSection({
     super.key,
@@ -53,7 +52,6 @@ class _NFilterSectionState<T> extends State<NFilterSection<T>> {
 
   final weChatTitleColor = Color(0xff1A1A1A);
 
-
   @override
   Widget build(BuildContext context) {
     final models = widget.items;
@@ -64,7 +62,7 @@ class _NFilterSectionState<T> extends State<NFilterSection<T>> {
 
     return StatefulBuilder(builder: (context, setState) {
       final items =
-      isExpand ? models : models.take(widget.collapseCount).toList();
+          isExpand ? models : models.take(widget.collapseCount).toList();
 
       return buildExpandMenu(
         title: widget.title,
@@ -81,11 +79,11 @@ class _NFilterSectionState<T> extends State<NFilterSection<T>> {
               itemColor: Colors.transparent,
               items: items
                   .map((e) => ChoiceBoxModel<T>(
-                id: widget.cbID(e),
-                title: widget.cbName(e),
-                isSelected: widget.cbSelected(e),
-                data: e,
-              ))
+                        id: widget.cbID(e),
+                        title: widget.cbName(e),
+                        isSelected: widget.cbSelected(e),
+                        data: e,
+                      ))
                   .toList(),
               onChanged: (value) {
                 final tmp = value.isEmpty ? null : value.first.data;
@@ -154,8 +152,9 @@ class _NFilterSectionState<T> extends State<NFilterSection<T>> {
       return const SizedBox();
     }
 
-    final tuple =
-    isExpand ? ("收起", "icon_arrow_up.png") : ("展开", "icon_arrow_down.png");
+    final tuple = isExpand
+        ? (title: "收起", image: "icon_arrow_up.png")
+        : (title: "展开", image: "icon_arrow_down.png");
 
     return Container(
       padding: const EdgeInsets.only(left: 12, right: 6, top: 4, bottom: 4),
@@ -166,14 +165,12 @@ class _NFilterSectionState<T> extends State<NFilterSection<T>> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            tuple.$1,
+            tuple.title,
             style: TextStyle(color: color, fontSize: 12),
           ),
-          const SizedBox(
-            width: 4,
-          ),
+          const SizedBox(width: 4),
           Image(
-            image: tuple.$2.toAssetImage(),
+            image: tuple.image.toAssetImage(),
             width: 10,
             height: 10,
           ),

@@ -52,17 +52,7 @@ class _NDateStartEndState extends State<NDateStartEnd> {
       children: [
         Expanded(
           child: InkWell(
-            onTap: () {
-              pickerDate(
-                selectDateStr: startDate,
-                onConfirm: (date) {
-                  startDate = DateTimeExt.stringFromDate(
-                      date: date, format: DATE_FORMAT_DAY_START);
-                  widget.onStart?.call(startDate ?? "");
-                  setState(() {});
-                },
-              );
-            },
+            onTap: onPickStart,
             child: Container(
               height: 28,
               padding: const EdgeInsets.symmetric(vertical: 4),
@@ -92,17 +82,7 @@ class _NDateStartEndState extends State<NDateStartEnd> {
         ),
         Expanded(
           child: InkWell(
-            onTap: () {
-              pickerDate(
-                selectDateStr: endDate,
-                onConfirm: (date) {
-                  endDate = DateTimeExt.stringFromDate(
-                      date: date, format: DATE_FORMAT_DAY_END);
-                  widget.onEnd?.call(endDate ?? "");
-                  setState(() {});
-                },
-              );
-            },
+            onTap: onPickEnd,
             child: Container(
               height: 28,
               padding: const EdgeInsets.symmetric(vertical: 4),
@@ -126,17 +106,52 @@ class _NDateStartEndState extends State<NDateStartEnd> {
     );
   }
 
+  void onPickStart() {
+    pickerDate(
+      selectDateStr: startDate,
+      onConfirm: (date) {
+        startDate = DateTimeExt.stringFromDate(
+          date: date,
+          format: DATE_FORMAT_DAY_START,
+        );
+        widget.onStart?.call(startDate ?? "");
+        setState(() {});
+      },
+    );
+  }
+
+  void onPickEnd() {
+    final bDate = startDate == null
+        ? null
+        : DateTimeExt.dateFromString(dateStr: startDate!);
+    pickerDate(
+      minDateTime: bDate,
+      selectDateStr: endDate,
+      onConfirm: (date) {
+        endDate = DateTimeExt.stringFromDate(
+          date: date,
+          format: DATE_FORMAT_DAY_END,
+        );
+        widget.onEnd?.call(endDate ?? "");
+        setState(() {});
+      },
+    );
+  }
+
   pickerDate({
+    DateTime? minDateTime,
     String? selectDateStr,
     required ValueChanged<DateTime> onConfirm,
   }) async {
+    final minDateTimeNew =
+        minDateTime == null ? null : PDuration.parse(minDateTime);
     final selectDate = selectDateStr == null
         ? null
         : DateTimeExt.dateFromString(dateStr: selectDateStr);
-
     FlutterPickerUtil.showDatePicker(
       title: '日期选择',
       selectDate: selectDate == null ? null : PDuration.parse(selectDate),
+      minDateTime: minDateTimeNew,
       maxDateTime: PDuration.now(),
       confirm: (PDuration pDate, String date) {
         // debugPrint('日期选择：$date');
