@@ -1,46 +1,52 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:tuple/tuple.dart';
 
-
 class NCollectionView extends StatefulWidget {
-
-  NCollectionView({
+  const NCollectionView({
     Key? key,
     required this.items,
+    this.itemWidth,
+    this.itemStyle,
     this.contentPadding,
-    this.onBefore,
-    this.onAfter,
+    this.decoration,
   }) : super(key: key);
+
+  /// 装饰器
+  final BoxDecoration? decoration;
 
   /// 第一个参数: 标题
   /// 第二个参数: 本地图路径
   /// 第三个参数: 回调方法
-  List<Tuple3<String, String, VoidCallback>> items;
+  final List<Tuple3<String, String, VoidCallback>> items;
 
-  EdgeInsets? contentPadding;
+  /// item 宽度
+  final double? itemWidth;
 
-  ValueChanged<int>? onBefore;
-  ValueChanged<int>? onAfter;
+  /// item 字体样式
+  final TextStyle? itemStyle;
+
+  final EdgeInsets? contentPadding;
 
   @override
   _NCollectionViewState createState() => _NCollectionViewState();
 }
 
-class _NCollectionViewState extends State<NCollectionView> with SingleTickerProviderStateMixin {
-
+class _NCollectionViewState extends State<NCollectionView>
+    with SingleTickerProviderStateMixin {
   final indexVN = ValueNotifier(0);
 
-  late final _pageController = PageController(initialPage: indexVN.value, keepPage: true);
+  late final _pageController =
+      PageController(initialPage: indexVN.value, keepPage: true);
 
   ///每页行数
   int rowNum = 2;
+
   ///每页列数
   int numPerRow = 4;
+
   ///每页数
   int get numPerPage => rowNum * numPerRow;
 
@@ -50,29 +56,29 @@ class _NCollectionViewState extends State<NCollectionView> with SingleTickerProv
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 216.w,
+      height: 216,
+      decoration: widget.decoration,
       child: buildPageView(
         items: widget.items,
+        itemWidth: widget.itemWidth ?? 64,
+        itemStyle: widget.itemStyle,
         contentPadding: widget.contentPadding,
-        onBefore: widget.onBefore,
-        onAfter: widget.onAfter,
       ),
     );
   }
 
   Widget buildPageView({
     required List<Tuple3<String, String, VoidCallback>> items,
+    double itemWidth = 64,
+    TextStyle? itemStyle,
     EdgeInsets? contentPadding,
-    ValueChanged<int>? onBefore,
-    ValueChanged<int>? onAfter,
   }) {
     // debugPrint("rowNum: $rowNum, numPerRow: $numPerRow, numPerPage: $numPerPage");
 
-    final num = items.length~/numPerPage;
+    final num = items.length ~/ numPerPage;
     final pageCount = items.length % numPerPage == 0 ? num : num + 1;
     final array = List.generate(pageCount.toInt(), (index) => index).toList();
     // debugPrint("pageCount: $pageCount, array: $array");
@@ -89,27 +95,24 @@ class _NCollectionViewState extends State<NCollectionView> with SingleTickerProv
             // setState(() {});
           },
           itemBuilder: (BuildContext context, int pageIndex) {
-
-            debugPrint("pageIndex: $pageIndex");
-
             return Container(
               // height: 200.w,
-              padding: contentPadding ?? EdgeInsets.only(
-                left: 20.w,
-                right: 20.w,
-                top: 20.h,
-                bottom: 16.h,
-              ),
+              padding: contentPadding ??
+                  EdgeInsets.only(
+                    left: 20.w,
+                    right: 20.w,
+                    top: 20.h,
+                    bottom: 16.h,
+                  ),
               // alignment: Alignment.center,
               decoration: BoxDecoration(
                 color: Color(0xffF3F3F3),
                 // border: Border.all(color: Colors.blue),
               ),
               child: LayoutBuilder(builder: (context, constraints) {
-                final itemWidth = 64.w;
-                final spacing =
-                    (constraints.maxWidth - itemWidth * numPerRow) / (numPerRow - 1).truncateToDouble();
-                final runSpacing = 16.w;
+                final spacing = (constraints.maxWidth - itemWidth * numPerRow) /
+                    (numPerRow - 1).truncateToDouble();
+                final runSpacing = 16.0;
 
                 return Wrap(
                   spacing: spacing,
@@ -126,10 +129,8 @@ class _NCollectionViewState extends State<NCollectionView> with SingleTickerProv
                     final e = items[itemIndex];
 
                     return InkWell(
-                      onTap: (){
-                        onBefore?.call(i);
+                      onTap: () {
                         e.item3();
-                        onAfter?.call(i);
                       },
                       child: SizedBox(
                         width: itemWidth,
@@ -141,7 +142,8 @@ class _NCollectionViewState extends State<NCollectionView> with SingleTickerProv
                               padding: EdgeInsets.all(10.w),
                               decoration: BoxDecoration(
                                 color: Colors.white,
-                                borderRadius: BorderRadius.all(Radius.circular(14.w)),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(14.w)),
                                 // border: Border.all(),
                               ),
                               child: Image(
@@ -152,11 +154,12 @@ class _NCollectionViewState extends State<NCollectionView> with SingleTickerProv
                               padding: EdgeInsets.only(top: 8.w),
                               child: Text(
                                 e.item1,
-                                style: TextStyle(
-                                  fontSize: 12.sp,
-                                  fontWeight: FontWeight.w500,
-                                  color: fontColor,
-                                ),
+                                style: itemStyle ??
+                                    TextStyle(
+                                      fontSize: 12.sp,
+                                      fontWeight: FontWeight.w500,
+                                      color: fontColor,
+                                    ),
                               ),
                             ),
                           ],
@@ -169,13 +172,14 @@ class _NCollectionViewState extends State<NCollectionView> with SingleTickerProv
             );
           },
         ),
-        if(array.length > 1)Positioned(
-          bottom: 8.w,
-          left: 0,
-          right: 0,
-          // height: 40,
-          child: buildIndiactor(count: array.length),
-        ),
+        if (array.length > 1)
+          Positioned(
+            bottom: 8.w,
+            left: 0,
+            right: 0,
+            // height: 40,
+            child: buildIndiactor(count: array.length),
+          ),
       ],
     );
   }
@@ -189,26 +193,25 @@ class _NCollectionViewState extends State<NCollectionView> with SingleTickerProv
       // color: Colors.black12,
       child: ValueListenableBuilder<int>(
           valueListenable: indexVN,
-          builder: (context, value, child){
-
+          builder: (context, value, child) {
             return Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: List<Widget>.generate(count, (index) {
-                return Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 4.w),
-                  child: CircleAvatar(
-                    radius: 4.w,
-                    backgroundColor: index == value
-                        ? Color(0xff7C7C7C)
-                        : Color(0xffDDDDDD),
-                  ),
-                );
-              },),
+              children: List<Widget>.generate(
+                count,
+                (index) {
+                  return Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 4.w),
+                    child: CircleAvatar(
+                      radius: 4.w,
+                      backgroundColor: index == value
+                          ? Color(0xff7C7C7C)
+                          : Color(0xffDDDDDD),
+                    ),
+                  );
+                },
+              ),
             );
-          }
-      ),
+          }),
     );
   }
-
-
 }
