@@ -25,7 +25,6 @@ class APPThemeService {
 
   late ThemeData themeData = ThemeData.light(useMaterial3: false).copyWith(
       platform: TargetPlatform.iOS,
-      // scaffoldBackgroundColor: Colors.red
       splashFactory: NoSplash.splashFactory,
       splashColor: Colors.transparent, // 点击时的高亮效果设置为透明
       highlightColor: Colors.transparent, // 长按时的扩散效果设置为透明
@@ -38,6 +37,15 @@ class APPThemeService {
       scaffoldBackgroundColor: bgColor,
       appBarTheme: const AppBarTheme(
         elevation: 0,
+        scrolledUnderElevation: 0,
+        titleTextStyle: TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.w500,
+        ),
+        toolbarTextStyle: TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.w400,
+        ),
       ),
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
       dividerTheme: const DividerThemeData(
@@ -51,24 +59,26 @@ class APPThemeService {
         smallSize: 20,
         textColor: Colors.white,
         textStyle: TextStyle(
-          fontWeight: FontWeight.bold,
+          fontWeight: FontWeight.w500,
           color: Colors.white,
           fontSize: 11,
         ),
       ),
       bottomAppBarTheme: const BottomAppBarTheme(
-        height: 60,
         surfaceTintColor: Color(0xFFFFFFFF),
         color: Color(0xFFFFFFFF),
       ),
       chipTheme: ChipThemeData(
         pressElevation: 0,
+        elevation: 0,
         showCheckmark: false,
         side: BorderSide.none,
       ),
       buttonTheme: ButtonThemeData(
         splashColor: Colors.transparent,
+        hoverColor: Colors.transparent,
         buttonColor: Colors.blue,
+        focusColor: Colors.transparent,
       ),
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
@@ -84,6 +94,12 @@ class APPThemeService {
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
+          splashFactory: NoSplash.splashFactory,
+          backgroundColor: Colors.blue,
+        ).merge(buildButtonStyle()),
+      ),
+      filledButtonTheme: FilledButtonThemeData(
+        style: FilledButton.styleFrom(
           splashFactory: NoSplash.splashFactory,
           backgroundColor: Colors.blue,
         ).merge(buildButtonStyle()),
@@ -212,9 +228,7 @@ class APPThemeService {
         color: e,
         child: Column(
           children: [
-            const SizedBox(
-              height: 18,
-            ),
+            const SizedBox(height: 18),
             GestureDetector(
               onTap: () {
                 changeThemeLight(e);
@@ -231,9 +245,7 @@ class APPThemeService {
                 ),
               ),
             ),
-            const SizedBox(
-              height: 18,
-            ),
+            const SizedBox(height: 18),
           ],
         ),
       );
@@ -269,9 +281,10 @@ class APPThemeService {
         ),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all(e),
-      )),
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all(e),
+        ),
+      ),
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: ButtonStyle(
           foregroundColor: MaterialStateProperty.all(e),
@@ -279,8 +292,9 @@ class APPThemeService {
         ),
       ),
       switchTheme: ThemeData.light().switchTheme.copyWith(
-          // thumbColor: e,
-          trackColor: MaterialStateProperty.all(e)),
+            // thumbColor: e,
+            trackColor: MaterialStateProperty.all(e),
+          ),
       bottomNavigationBarTheme:
           ThemeData.light().bottomNavigationBarTheme.copyWith(
                 type: BottomNavigationBarType.fixed,
@@ -296,32 +310,12 @@ class APPThemeService {
         // barBackgroundColor: Colors.red,
         // scaffoldBackgroundColor: Colors.red,
       ),
-      colorScheme: ThemeData.light()
-          .colorScheme
-          .copyWith(secondary: e)
-          .copyWith(secondary: e),
+      colorScheme: ThemeData.light().colorScheme.copyWith(secondary: e),
     );
     Get.changeTheme(themeData);
   }
 
   final List<Color> colors = [
-    // Colors.black,
-    // Colors.red,
-    // Colors.teal,
-    // Colors.pink,
-    // Colors.amber,
-    // Colors.orange,
-    // Colors.green,
-    // Colors.blue,
-    // Colors.lightBlue,
-    // Colors.purple,
-    // Colors.deepPurple,
-    // Colors.indigo,
-    // Colors.cyan,
-    // Colors.brown,
-    // Colors.grey,
-    // Colors.blueGrey,
-
     ...Colors.primaries,
     ...Colors.accents,
   ];
