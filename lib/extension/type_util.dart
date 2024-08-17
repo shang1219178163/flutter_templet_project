@@ -33,3 +33,12 @@ typedef ConditionFn = bool Function<T>(T e);
 
 /// 属性元祖
 typedef PropertyRecord = ({String name, String type, String comment});
+
+/// BottomNavigationBar 子项数据
+typedef BarItemRecord = ({
+  String title,
+  String icon,
+  String activeIcon,
+  Widget page,
+  ValueNotifier<int>? unreadVN,
+});
