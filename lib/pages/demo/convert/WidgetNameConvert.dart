@@ -199,12 +199,12 @@ class ChoiceBoxModel<T> {
 """;
   }
 
-  @override
-  Future<ConvertModel?> convertFile({required File file}) async {
-    final name = file.path.split("/").last;
-    String content = await file.readAsString();
-    return convert(content: content, name: name);
-  }
+  // @override
+  // Future<ConvertModel?> convertFile({required File file}) async {
+  //   final name = file.path.split("/").last;
+  //   String content = await file.readAsString();
+  //   return convert(content: content, name: name);
+  // }
 
   @override
   Future<ConvertModel?> convert({

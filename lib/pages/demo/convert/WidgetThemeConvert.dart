@@ -133,17 +133,17 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
 """;
   }
 
-  @override
-  Future<ConvertModel?> convertFile({required File file}) async {
-    try {
-      final name = file.path.split("/").last;
-      String content = await file.readAsString();
-      return convert(content: content, name: name);
-    } catch (e) {
-      debugPrint("$this $e");
-    }
-    return null;
-  }
+  // @override
+  // Future<ConvertModel?> convertFile({required File file}) async {
+  //   try {
+  //     final name = file.path.split("/").last;
+  //     String content = await file.readAsString();
+  //     return convert(content: content, name: name);
+  //   } catch (e) {
+  //     debugPrint("$this $e");
+  //   }
+  //   return null;
+  // }
 
   @override
   Future<ConvertModel?> convert({

@@ -8,6 +8,8 @@
 
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
+
 /// 文件转换协议
 abstract class ConvertProtocol {
   /// 名称
@@ -25,7 +27,15 @@ abstract class ConvertProtocol {
     throw UnimplementedError("❌$this 未实现 exampleTemplet");
   }
 
+  /// 文件转模型
   Future<ConvertModel?> convertFile({required File file}) async {
+    try {
+      final name = file.path.split("/").last;
+      final content = await file.readAsString();
+      return convert(content: content, name: name);
+    } catch (e) {
+      debugPrint("$this $e");
+    }
     return null;
   }
 
@@ -38,6 +48,7 @@ abstract class ConvertProtocol {
   }
 }
 
+/// ConvertProtocol 对应的 模型类
 class ConvertModel {
   ConvertModel({
     required this.name,
