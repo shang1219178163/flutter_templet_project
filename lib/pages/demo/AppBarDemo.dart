@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
@@ -9,11 +7,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:tuple/tuple.dart';
 
 class AppBarDemo extends StatefulWidget {
-
-  AppBarDemo({
-    Key? key, 
-    this.title
-  }) : super(key: key);
+  AppBarDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -21,9 +15,8 @@ class AppBarDemo extends StatefulWidget {
   _AppBarDemoState createState() => _AppBarDemoState();
 }
 
-class _AppBarDemoState extends State<AppBarDemo> with SingleTickerProviderStateMixin {
-
-
+class _AppBarDemoState extends State<AppBarDemo>
+    with SingleTickerProviderStateMixin {
   late final items = <String>[
     'AppBar隐藏',
     'AppBar背景',
@@ -35,13 +28,11 @@ class _AppBarDemoState extends State<AppBarDemo> with SingleTickerProviderStateM
     '滑动1',
   ];
 
-
   late final tabController = TabController(length: items.length, vsync: this);
 
   late MediaQueryData mq = MediaQuery.of(context);
 
   ThemeData get theme => Theme.of(context);
-
 
   final tabIndex = ValueNotifier(0);
 
@@ -50,10 +41,10 @@ class _AppBarDemoState extends State<AppBarDemo> with SingleTickerProviderStateM
     super.initState();
 
     tabController.addListener(() {
-        if(!tabController.indexIsChanging){
-          debugPrint("_tabController:${tabController.index}");
-        }
-      });
+      if (!tabController.indexIsChanging) {
+        debugPrint("_tabController:${tabController.index}");
+      }
+    });
   }
 
   @override
@@ -112,7 +103,6 @@ class _AppBarDemoState extends State<AppBarDemo> with SingleTickerProviderStateM
   }
 
   Widget buildTab() {
-
     return PreferredSize(
       preferredSize: Size.fromHeight(48),
       child: Container(
@@ -128,7 +118,7 @@ class _AppBarDemoState extends State<AppBarDemo> with SingleTickerProviderStateM
           onTap: (index) {
             debugPrint("index: $index");
             tabIndex.value = index;
-            setState(() { });
+            setState(() {});
           },
         ),
       ),
@@ -154,8 +144,7 @@ class _AppBarDemoState extends State<AppBarDemo> with SingleTickerProviderStateM
         Expanded(
           child: TabBarView(
             controller: controller,
-            children: items.map((e){
-
+            children: items.map((e) {
               final i = items.indexOf(e);
 
               return Container(
@@ -170,7 +159,5 @@ class _AppBarDemoState extends State<AppBarDemo> with SingleTickerProviderStateM
     );
   }
 
-  onPressed(){
-
-  }
+  onPressed() {}
 }

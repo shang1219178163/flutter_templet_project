@@ -1,17 +1,13 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/n_flexible_cell.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 
-
 class IMTipBellCell extends StatelessWidget {
-
   const IMTipBellCell({
-  	Key? key,
+    Key? key,
     this.text,
-  	required this.content,
+    required this.content,
     this.left,
     this.right,
     this.constraints = const BoxConstraints(
@@ -36,7 +32,6 @@ class IMTipBellCell extends StatelessWidget {
     );
   }
 
-
   Widget buildChatNoticeCell({
     String? text,
     Widget? content,
@@ -60,21 +55,25 @@ class IMTipBellCell extends StatelessWidget {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            start ?? Padding(
-              padding: EdgeInsets.only(right: 5.w),
-              child: Icon(Icons.notifications_active,
-                color: Colors.white,
-                size: 15.w,
-              ),
-            ),
+            start ??
+                Padding(
+                  padding: EdgeInsets.only(right: 5.w),
+                  child: Icon(
+                    Icons.notifications_active,
+                    color: Colors.white,
+                    size: 15.w,
+                  ),
+                ),
             Flexible(
-              child: content ?? NText(text ?? "",
-                textAlign: TextAlign.center,
-                fontSize: 12.sp,
-                color: Colors.white,
-                fontWeight: FontWeight.w500,
-                maxLines: 2,
-              ),
+              child: content ??
+                  NText(
+                    text ?? "",
+                    textAlign: TextAlign.center,
+                    fontSize: 12.sp,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500,
+                    maxLines: 2,
+                  ),
             ),
             if (end != null) end,
           ],

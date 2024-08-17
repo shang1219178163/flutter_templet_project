@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/vendor/azlistview/ui/car_models_page.dart';
 import 'package:flutter_templet_project/vendor/azlistview/ui/citylist_custom_header_page.dart';
@@ -12,8 +10,7 @@ import 'package:flutter_templet_project/vendor/azlistview/ui/page_scaffold.dart'
 
 /// 分组列表三方库
 class AzlistviewDemo extends StatefulWidget {
-
-  AzlistviewDemo({ Key? key, this.title}) : super(key: key);
+  AzlistviewDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -22,27 +19,29 @@ class AzlistviewDemo extends StatefulWidget {
 }
 
 class _AzlistviewDemoState extends State<AzlistviewDemo> {
-
-
   @override
   void initState() {
     super.initState();
   }
 
-   @override
+  @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title ?? "$widget"),
-          actions: ['done',].map((e) => TextButton(
-            child: Text(e,
-              style: TextStyle(color: Colors.white),
-            ),
-            onPressed: onPressed,)
-          ).toList(),
-        ),
-        body: _buildBody(),
+      appBar: AppBar(
+        title: Text(widget.title ?? "$widget"),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: onPressed,
+                ))
+            .toList(),
+      ),
+      body: _buildBody(),
     );
   }
 
@@ -52,16 +51,11 @@ class _AzlistviewDemoState extends State<AzlistviewDemo> {
       PageInfo("Contacts", (ctx) => ContactsPage(), false),
       PageInfo("Contacts List", (ctx) => ContactListPage()),
       PageInfo("City List", (ctx) => CityListPage(), false),
-      PageInfo(
-          "City List(Custom header)", (ctx) => CityListCustomHeaderPage()),
+      PageInfo("City List(Custom header)", (ctx) => CityListCustomHeaderPage()),
       PageInfo("Car models", (ctx) => CarModelsPage(), false),
       PageInfo("10000 data", (ctx) => LargeDataPage(), false),
-    ]
-    );
+    ]);
   }
 
-  onPressed(){
-
-  }
-
+  onPressed() {}
 }

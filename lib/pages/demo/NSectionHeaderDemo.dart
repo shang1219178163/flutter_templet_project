@@ -3,11 +3,7 @@ import 'package:flutter_templet_project/basicWidget/n_section_header.dart';
 import 'package:flutter_templet_project/extension/text_style_ext.dart';
 
 class NSectionHeaderDemo extends StatefulWidget {
-
-  NSectionHeaderDemo({
-    super.key, 
-    this.title
-  });
+  NSectionHeaderDemo({super.key, this.title});
 
   final String? title;
 
@@ -16,7 +12,6 @@ class NSectionHeaderDemo extends StatefulWidget {
 }
 
 class _NSectionHeaderDemoState extends State<NSectionHeaderDemo> {
-
   final _scrollController = ScrollController();
 
   @override
@@ -24,12 +19,17 @@ class _NSectionHeaderDemoState extends State<NSectionHeaderDemo> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () => debugPrint(e),)
-        ).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () => debugPrint(e),
+                ))
+            .toList(),
       ),
       body: buildBody(),
     );
@@ -77,5 +77,4 @@ class _NSectionHeaderDemoState extends State<NSectionHeaderDemo> {
       ),
     );
   }
-  
 }

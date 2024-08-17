@@ -171,4 +171,3 @@ double _getChildRadius(double r, double a) {
 double _radian(double angle) {
   return pi / 180 * angle;
 }
-

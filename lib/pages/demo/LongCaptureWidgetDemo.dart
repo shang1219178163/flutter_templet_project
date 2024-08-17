@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_header.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
@@ -7,14 +6,9 @@ import 'package:flutter_templet_project/extension/text_style_ext.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
-
 /// 长截图
 class LongCaptureWidgetDemo extends StatefulWidget {
-
-  LongCaptureWidgetDemo({
-    Key? key, 
-    this.title
-  }) : super(key: key);
+  LongCaptureWidgetDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -23,8 +17,6 @@ class LongCaptureWidgetDemo extends StatefulWidget {
 }
 
 class _LongCaptureWidgetDemoState extends State<LongCaptureWidgetDemo> {
-
-
   final _shareKey = GlobalKey();
 
   @override
@@ -32,12 +24,17 @@ class _LongCaptureWidgetDemoState extends State<LongCaptureWidgetDemo> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: onPressed,)
-        ).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: onPressed,
+                ))
+            .toList(),
       ),
       body: buildBody(),
     );
@@ -53,26 +50,28 @@ class _LongCaptureWidgetDemoState extends State<LongCaptureWidgetDemo> {
         key: key,
         child: Container(
           color: Colors.white,
-          child: Column(
-            children: [
-              Container(
-                alignment: Alignment.centerLeft,
-                child: Text("长截图", style: TextStyle().h1,),
+          child: Column(children: [
+            Container(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                "长截图",
+                style: TextStyle().h1,
               ),
-              ...List.generate(19, (index) => Container(
-                  color: ColorExt.random,
-                  height: 90,
-                )
+            ),
+            ...List.generate(
+                19,
+                (index) => Container(
+                      color: ColorExt.random,
+                      height: 90,
+                    )),
+            NSectionHeader(
+              title: "buildCalendarDatePicker",
+              child: Container(
+                alignment: Alignment.center,
+                // child: Text("长截图 Footer"),
               ),
-              NSectionHeader(
-                title: "buildCalendarDatePicker",
-                child: Container(
-                  alignment: Alignment.center,
-                  // child: Text("长截图 Footer"),
-                ),
-              ),
-            ]
-          ),
+            ),
+          ]),
         ),
       ),
     );
@@ -81,7 +80,8 @@ class _LongCaptureWidgetDemoState extends State<LongCaptureWidgetDemo> {
   onPressed() async {
     // debugPrint(e)
     final image = await _shareKey.currentContext?.toImage(pixelRatio: 2);
-    final imageWidget = await _shareKey.currentContext?.toImageWidget(pixelRatio: 2);
+    final imageWidget =
+        await _shareKey.currentContext?.toImageWidget(pixelRatio: 2);
 
     Get.bottomSheet(
       Container(
@@ -91,5 +91,4 @@ class _LongCaptureWidgetDemoState extends State<LongCaptureWidgetDemo> {
       ),
     );
   }
-
 }

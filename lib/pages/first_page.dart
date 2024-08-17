@@ -3,9 +3,7 @@ import 'package:flutter_templet_project/APPThemeSettings.dart';
 import 'package:get/get.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 
-
 class FirstPage extends StatefulWidget {
-
   final String? title;
   const FirstPage({Key? key, this.title}) : super(key: key);
 
@@ -22,15 +20,20 @@ class _FirstPageState extends State<FirstPage> {
       body: DefaultTabController(
         length: 4,
         child: Scaffold(
-          appBar: _hiddenAppBar ? null : AppBar(
-            title: Text('$widget'),
-          ),
+          appBar: _hiddenAppBar
+              ? null
+              : AppBar(
+                  title: Text('$widget'),
+                ),
           body: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text('You have pushed the button this many times:',),
-                Text('_counter',
+                Text(
+                  'You have pushed the button this many times:',
+                ),
+                Text(
+                  '_counter',
                   style: Theme.of(context).textTheme.headline4,
                 ),
                 InkWell(
@@ -42,9 +45,13 @@ class _FirstPageState extends State<FirstPage> {
                       color: Color(0xffEBECF1),
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    child: Icon(_hiddenAppBar == false ? Icons.bedtime : Icons.beach_access,
-                        color: _hiddenAppBar == false ? Colors.yellow : Colors.black
-                    ),
+                    child: Icon(
+                        _hiddenAppBar == false
+                            ? Icons.bedtime
+                            : Icons.beach_access,
+                        color: _hiddenAppBar == false
+                            ? Colors.yellow
+                            : Colors.black),
                   ),
                 ),
               ],
@@ -64,5 +71,4 @@ class _FirstPageState extends State<FirstPage> {
     _hiddenAppBar = !_hiddenAppBar;
     setState(() {});
   }
-
 }

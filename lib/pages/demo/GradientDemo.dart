@@ -20,45 +20,46 @@ class GradientDemo extends StatefulWidget {
 }
 
 class _GradientDemoState extends State<GradientDemo> with BottomSheetMixin {
-  
   // var blendModes = BlendMode.color;
   // var tileModes = TileMode.clamp;
-  
+
   var blendMode = BlendMode.color;
   var tileMode = TileMode.clamp;
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title ?? "$widget"),
-        actions: [
-          TextButton(
-            onPressed: () {
-              showSheetTileMode();
-            },
-            child: Text("$tileMode", style: TextStyle(color: Colors.white),)
-          ),
-          TextButton(
-            onPressed: () {
-              showSheetBlendMode();
-            },
-            child: Text("$blendMode", style: TextStyle(color: Colors.white),)
-          ),
-        ],
-        bottom: PreferredSize(
-          preferredSize: Size(double.infinity, 50),
-          child: Row(
-            children: [
-              _buildDropdownButton(),
+        appBar: AppBar(
+            title: Text(widget.title ?? "$widget"),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    showSheetTileMode();
+                  },
+                  child: Text(
+                    "$tileMode",
+                    style: TextStyle(color: Colors.white),
+                  )),
+              TextButton(
+                  onPressed: () {
+                    showSheetBlendMode();
+                  },
+                  child: Text(
+                    "$blendMode",
+                    style: TextStyle(color: Colors.white),
+                  )),
             ],
-          ),
-        )
-      ),
-      body: _buildBody()
-    );
+            bottom: PreferredSize(
+              preferredSize: Size(double.infinity, 50),
+              child: Row(
+                children: [
+                  _buildDropdownButton(),
+                ],
+              ),
+            )),
+        body: _buildBody());
   }
-  
+
   showSheetTileMode() {
     const tileModes = TileMode.values;
     final items = tileModes.map((e) => Text('$e')).toList();
@@ -72,6 +73,7 @@ class _GradientDemoState extends State<GradientDemo> with BottomSheetMixin {
       },
     );
   }
+
   showSheetBlendMode() {
     const blendModes = BlendMode.values;
 
@@ -101,31 +103,33 @@ class _GradientDemoState extends State<GradientDemo> with BottomSheetMixin {
     );
   }
 
-
   var _dropValue = AlignmentExt.allCases[0];
   var _radius = 0.5;
 
   _buildDropdownButton() {
     return DropdownButton<Alignment>(
       value: _dropValue,
-      items: AlignmentExt.allCases.map((e) => DropdownMenuItem(
-        value: e,
-        child: Text(e.toString()),
-      ),
-      ).toList(),
+      items: AlignmentExt.allCases
+          .map(
+            (e) => DropdownMenuItem(
+              value: e,
+              child: Text(e.toString()),
+            ),
+          )
+          .toList(),
       onChanged: (Alignment? value) {
         if (value == null) return;
         _dropValue = value;
         _radius = value.radiusOfRadialGradient(
-          width: 400,
-          height: 100,
-        ) ?? 0.5;
+              width: 400,
+              height: 100,
+            ) ??
+            0.5;
         debugPrint("_dropValue:$value scale:$_radius");
         setState(() {});
       },
     );
   }
-
 
   _buildBody() {
     return ListView(children: <Widget>[
@@ -137,42 +141,29 @@ class _GradientDemoState extends State<GradientDemo> with BottomSheetMixin {
             _buildBox(
               text: '两种颜色 均分',
               decoration: BoxDecoration(
-                color: Colors.red,
-                gradient: LinearGradient(
-                  tileMode: tileMode,
-                  colors: [
-                    Color(0xFFFFC125),
-                    Color(0xFFFF7F24)
-                  ]
-                )
-              ),
+                  color: Colors.red,
+                  gradient: LinearGradient(
+                      tileMode: tileMode,
+                      colors: [Color(0xFFFFC125), Color(0xFFFF7F24)])),
             ),
             _buildBox(
               text: '多种颜色 均分',
               decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      tileMode: tileMode,
-                      colors: [
-                        Color(0xFFFFC125),
-                        Color(0xFFFF7F24),
-                        Color(0xFFFF4040)
-                      ]
-                  )
-              ),
+                  gradient: LinearGradient(tileMode: tileMode, colors: [
+                Color(0xFFFFC125),
+                Color(0xFFFF7F24),
+                Color(0xFFFF4040)
+              ])),
             ),
             _buildBox(
               text: '两种颜色 1:3',
               decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      tileMode: tileMode,
-                      colors: [
-                        Color(0xFFFFC125),
-                        Color(0xFFFF7F24),
-                        Color(0xFFFF7F24),
-                        Color(0xFFFF7F24)
-                      ]
-                  )
-              ),
+                  gradient: LinearGradient(tileMode: tileMode, colors: [
+                Color(0xFFFFC125),
+                Color(0xFFFF7F24),
+                Color(0xFFFF7F24),
+                Color(0xFFFF7F24)
+              ])),
             ),
             _buildBox(
                 text: '两种颜色 垂直均分 topRight',
@@ -180,28 +171,15 @@ class _GradientDemoState extends State<GradientDemo> with BottomSheetMixin {
                     gradient: LinearGradient(
                         tileMode: tileMode,
                         begin: Alignment.topRight,
-                        colors: [
-                          Color(0xFFFFC125),
-                          Color(0xFFFF7F24)
-                        ]
-                    )
-                )
-            ),
+                        colors: [Color(0xFFFFC125), Color(0xFFFF7F24)]))),
             _buildBox(
                 text: '两种颜色 前半部均分 延伸',
-                decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                        tileMode: tileMode,
-                        begin: Alignment(-1.0, 0.0),
-                        end: Alignment(0.0, 0.0),
-                        // tileMode: TileMode.clamp,
-                        colors: [
-                          Color(0xFFFFC125),
-                          Color(0xFFFF7F24)
-                        ]
-                    )
-                )
-            ),
+                decoration: BoxDecoration(gradient: LinearGradient(
+                    tileMode: tileMode,
+                    begin: Alignment(-1.0, 0.0),
+                    end: Alignment(0.0, 0.0),
+                    // tileMode: TileMode.clamp,
+                    colors: [Color(0xFFFFC125), Color(0xFFFF7F24)]))),
             _buildBox(
                 text: '两种颜色 均分 重复 repeated',
                 decoration: BoxDecoration(
@@ -209,43 +187,25 @@ class _GradientDemoState extends State<GradientDemo> with BottomSheetMixin {
                         tileMode: tileMode,
                         begin: Alignment(-1.0, 0.0),
                         end: Alignment(0.0, 0.0),
-                        colors: [
-                          Color(0xFFFFC125),
-                          Color(0xFFFF7F24)
-                        ]
-                    )
-                )
-            ),
+                        colors: [Color(0xFFFFC125), Color(0xFFFF7F24)]))),
             _buildBox(
                 text: '两种颜色 均分 mirror',
-                decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                        tileMode: tileMode,
-                        begin: Alignment(-1.0, 0.0),
-                        end: Alignment(0.0, 0.0),
-                        // tileMode: TileMode.mirror,
-                        colors: [
-                          Color(0xFFFFC125),
-                          Color(0xFFFF7F24)
-                        ]
-                    )
-                )
-            ),
+                decoration: BoxDecoration(gradient: LinearGradient(
+                    tileMode: tileMode,
+                    begin: Alignment(-1.0, 0.0),
+                    end: Alignment(0.0, 0.0),
+                    // tileMode: TileMode.mirror,
+                    colors: [Color(0xFFFFC125), Color(0xFFFF7F24)]))),
             _buildBox(
                 text: '两种颜色 设置起始位置与终止位置',
                 decoration: BoxDecoration(
                     gradient: LinearGradient(
-                      tileMode: tileMode,
-                      begin: Alignment.topLeft,
-                      end: Alignment(0.5, 0.0),
-                      // tileMode: TileMode.repeated,
-                      colors: [
-                        Color(0xFFFFC125),
-                        Color(0xFFFF7F24)
-                      ],
-                    )
-                )
-            ),
+                  tileMode: tileMode,
+                  begin: Alignment.topLeft,
+                  end: Alignment(0.5, 0.0),
+                  // tileMode: TileMode.repeated,
+                  colors: [Color(0xFFFFC125), Color(0xFFFF7F24)],
+                ))),
             _buildBox(
                 text: '三种颜色 设置起始位置与终止位置',
                 decoration: BoxDecoration(
@@ -254,14 +214,15 @@ class _GradientDemoState extends State<GradientDemo> with BottomSheetMixin {
                         // begin: Alignment.topLeft,
                         // end: Alignment(0.5, 0.0),
                         colors: const <Color>[
-                          Colors.red, // blue
-                          Colors.blue,
-                          Colors.yellow,
-                        ],
-                        stops: [0.0, 0.5, 0.8]
-                    )
-                )
-            ),
+                      Colors.red, // blue
+                      Colors.blue,
+                      Colors.yellow,
+                    ],
+                        stops: [
+                      0.0,
+                      0.5,
+                      0.8
+                    ]))),
           ],
         ),
       ),
@@ -301,8 +262,12 @@ class _GradientDemoState extends State<GradientDemo> with BottomSheetMixin {
                       Colors.yellow,
                       Colors.green
                     ],
-                    stops: [0.25, 0.5, 0.75, 1]
-                ),
+                    stops: [
+                      0.25,
+                      0.5,
+                      0.75,
+                      1
+                    ]),
               ),
             ),
             _buildBox(
@@ -320,8 +285,12 @@ class _GradientDemoState extends State<GradientDemo> with BottomSheetMixin {
                       Colors.yellow,
                       Colors.green
                     ],
-                    stops: [0.25, 0.5, 0.75, 1]
-                ),
+                    stops: [
+                      0.25,
+                      0.5,
+                      0.75,
+                      1
+                    ]),
               ),
             ),
           ],
@@ -402,27 +371,23 @@ class _GradientDemoState extends State<GradientDemo> with BottomSheetMixin {
               },
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: buildGradientText(
-                  from: const Offset(0, 40),
-                  to: const Offset(150, 40),
-                  colors: <Color>[
-                    Colors.red,
-                    Colors.yellow,
-                  ]
-              )
-            ),
+                padding: const EdgeInsets.all(8.0),
+                child: buildGradientText(
+                    from: const Offset(0, 40),
+                    to: const Offset(150, 40),
+                    colors: <Color>[
+                      Colors.red,
+                      Colors.yellow,
+                    ])),
             Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: buildGradientText(
-                  from: const Offset(0, 40),
-                  to: const Offset(40, 100),
-                  colors: <Color>[
-                    Colors.red,
-                    Colors.yellow,
-                  ]
-              )
-            ),
+                padding: const EdgeInsets.all(8.0),
+                child: buildGradientText(
+                    from: const Offset(0, 40),
+                    to: const Offset(40, 100),
+                    colors: <Color>[
+                      Colors.red,
+                      Colors.yellow,
+                    ])),
           ],
         ),
       ),
@@ -445,20 +410,17 @@ class _GradientDemoState extends State<GradientDemo> with BottomSheetMixin {
     );
   }
 
-  _buildShaderMask({
-    required BlendMode blendMode,
-    required ShaderCallback shaderCallback
-  }) {
-    return
-      ShaderMask(
-        shaderCallback: shaderCallback,
-        blendMode: blendMode,
-        child: Image(
-          image: 'bg_jiguang.png'.toAssetImage(),
-          fit: BoxFit.cover,
-          height: 300,
-        ),
-      );
+  _buildShaderMask(
+      {required BlendMode blendMode, required ShaderCallback shaderCallback}) {
+    return ShaderMask(
+      shaderCallback: shaderCallback,
+      blendMode: blendMode,
+      child: Image(
+        image: 'bg_jiguang.png'.toAssetImage(),
+        fit: BoxFit.cover,
+        height: 300,
+      ),
+    );
   }
 
   buildTop() {
@@ -470,9 +432,9 @@ class _GradientDemoState extends State<GradientDemo> with BottomSheetMixin {
             },
             child: Container(
                 padding: EdgeInsets.all(8),
-                child: Text("雷达渐进色深入研究",)
-            )
-        ),
+                child: Text(
+                  "雷达渐进色深入研究",
+                ))),
       ],
     );
   }
@@ -485,7 +447,7 @@ class _GradientDemoState extends State<GradientDemo> with BottomSheetMixin {
     TileMode tileMode = TileMode.clamp,
   }) {
     return Text(
-      '如果设置的比较多可以封装组件widget，根据组件context获取位置大小;'*16,
+      '如果设置的比较多可以封装组件widget，根据组件context获取位置大小;' * 16,
       maxLines: 13,
       overflow: TextOverflow.ellipsis,
       softWrap: true,
@@ -493,21 +455,18 @@ class _GradientDemoState extends State<GradientDemo> with BottomSheetMixin {
           fontSize: 16,
           foreground: Paint()
             ..shader = ui.Gradient.linear(
-                from,
-                to,
-                colors,
-                colorStops,
-                tileMode,
-                )
-      ),
+              from,
+              to,
+              colors,
+              colorStops,
+              tileMode,
+            )),
     );
   }
 
   push({required Widget page}) {
-    Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) {
-          return page;
-        }
-    ));
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+      return page;
+    }));
   }
 }

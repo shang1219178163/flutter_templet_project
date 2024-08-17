@@ -6,9 +6,8 @@
 //  Copyright © 2023/11/16 shang. All rights reserved.
 //
 
-
 /// 网络错误
-enum RequestError{
+enum RequestError {
   unknown("未知错误"),
   jsonError("JSON解析错误"),
   paramsError("参数错误"),
@@ -23,8 +22,7 @@ enum RequestError{
   final String desc;
 }
 
-
-enum RequestStatusCode{
+enum RequestStatusCode {
   code401("校验失败!"),
   code403("无权限访问!"),
   code404("404未找到!"),

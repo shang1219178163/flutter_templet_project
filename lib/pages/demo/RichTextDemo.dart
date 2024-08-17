@@ -144,8 +144,7 @@ xxxx十分重视用户权利及隐私政策并严格按照相关法律法规的�
             width: 120,
             height: 40,
             child: Card(
-                color: Colors.blue,
-                child: Center(child: Text('Hello World!'))),
+                color: Colors.blue, child: Center(child: Text('Hello World!'))),
           ),
         ),
         WidgetSpan(
@@ -166,7 +165,11 @@ xxxx十分重视用户权利及隐私政策并严格按照相关法律法规的�
       text: TextSpan(
         text: '多种样式，如：',
         style: TextStyle(fontSize: 16.0, color: Colors.black),
-        children: textSpans.map((e) => e.copyWith(onLink: onLink,)).toList(),
+        children: textSpans
+            .map((e) => e.copyWith(
+                  onLink: onLink,
+                ))
+            .toList(),
       ),
       textAlign: TextAlign.center,
     );

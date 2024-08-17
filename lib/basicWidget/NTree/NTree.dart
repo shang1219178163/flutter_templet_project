@@ -6,13 +6,11 @@
 //  Copyright © 2023/4/1 shang. All rights reserved.
 //
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/enhance/enhance_expansion/en_expansion_tile.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 
 class NTree extends StatefulWidget {
-
   NTree({
     Key? key,
     required this.list,
@@ -23,10 +21,13 @@ class NTree extends StatefulWidget {
 
   /// 数据源
   List<NTreeNodeModel> list;
+
   /// 标题颜色
   Color color;
+
   /// 文字颜色
   Color iconColor;
+
   /// 层级缩进
   double indent;
 
@@ -35,13 +36,12 @@ class NTree extends StatefulWidget {
 }
 
 class _NTreeState extends State<NTree> {
-
   @override
   void initState() {
     super.initState();
   }
 
-   @override
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: widget.list.map((e) {
@@ -52,13 +52,14 @@ class _NTreeState extends State<NTree> {
               color: widget.color,
               iconColor: widget.iconColor,
             ),
-            if(e.isExpand)Padding(
-              padding: EdgeInsets.only(left: widget.indent),
-              child: NTree(
-                color: widget.color,
-                list: e.items,
+            if (e.isExpand)
+              Padding(
+                padding: EdgeInsets.only(left: widget.indent),
+                child: NTree(
+                  color: widget.color,
+                  list: e.items,
+                ),
               ),
-            ),
           ],
         );
       }).toList(),
@@ -69,18 +70,36 @@ class _NTreeState extends State<NTree> {
     required NTreeNodeModel e,
     Color? color,
     Color? iconColor,
-  }){
-    final leadingIcon = e.isSelected ? Icon(Icons.check_box, color: iconColor,)
-        : Icon(Icons.check_box_outline_blank, color: iconColor,);
-    final trailing = e.items.isEmpty ? SizedBox() :
-    (e.isExpand ? Icon(Icons.keyboard_arrow_down, color: iconColor,)
-        : Icon(Icons.keyboard_arrow_right, color: iconColor,));
+  }) {
+    final leadingIcon = e.isSelected
+        ? Icon(
+            Icons.check_box,
+            color: iconColor,
+          )
+        : Icon(
+            Icons.check_box_outline_blank,
+            color: iconColor,
+          );
+    final trailing = e.items.isEmpty
+        ? SizedBox()
+        : (e.isExpand
+            ? Icon(
+                Icons.keyboard_arrow_down,
+                color: iconColor,
+              )
+            : Icon(
+                Icons.keyboard_arrow_right,
+                color: iconColor,
+              ));
 
     final leading = IconButton(
       onPressed: () {
         e.isSelected = !e.isSelected;
-        recursion(e: e, cb: (item) => item.isSelected = e.isSelected,);
-        setState((){});
+        recursion(
+          e: e,
+          cb: (item) => item.isSelected = e.isSelected,
+        );
+        setState(() {});
       },
       icon: leadingIcon,
     );
@@ -94,23 +113,24 @@ class _NTreeState extends State<NTree> {
         // leading: leading,
         leading: leading,
         trailing: trailing,
-        title: Text("${e.name}",
+        title: Text(
+          "${e.name}",
           style: TextStyle(
             color: color,
           ),
         ),
         // title: Text("${e.name}"),
         initiallyExpanded: e.isExpand,
-        onExpansionChanged: (val){
+        onExpansionChanged: (val) {
           e.isExpand = val;
           e.onClick?.call(e);
-          setState((){});
+          setState(() {});
         },
         header: (isExpanded, onTap) => InkWell(
-          onTap: (){
+          onTap: () {
             onTap();
             e.isExpand = !e.isExpand;
-            setState((){});
+            setState(() {});
           },
           child: Container(
             padding: EdgeInsets.only(
@@ -123,7 +143,8 @@ class _NTreeState extends State<NTree> {
               children: [
                 leading,
                 Expanded(
-                  child: Text("${e.name}",
+                  child: Text(
+                    "${e.name}",
                     style: TextStyle(
                       color: color,
                     ),
@@ -138,20 +159,18 @@ class _NTreeState extends State<NTree> {
     );
   }
 
-  recursion({
-     required NTreeNodeModel e,
-     required void Function(NTreeNodeModel e) cb
-   }) {
-     cb(e);
-     debugPrint("item:${e.name} ${e.isSelected}");
-     e.items.forEach((item) {
-       recursion(e: item, cb: cb);
+  recursion(
+      {required NTreeNodeModel e,
+      required void Function(NTreeNodeModel e) cb}) {
+    cb(e);
+    debugPrint("item:${e.name} ${e.isSelected}");
+    e.items.forEach((item) {
+      recursion(e: item, cb: cb);
     });
   }
 }
 
-class NTreeNodeModel{
-
+class NTreeNodeModel {
   NTreeNodeModel({
     this.name,
     this.isExpand = false,
@@ -161,18 +180,25 @@ class NTreeNodeModel{
     this.data,
     this.items = const [],
   });
+
   /// 标题
   String? name;
+
   /// 是否展开
   bool isExpand;
+
   /// 是否已选择
   bool isSelected;
+
   ///
   bool enabled;
+
   /// 模型
   dynamic data;
+
   /// 子元素
   List<NTreeNodeModel> items;
+
   /// 点击事件
   void Function(NTreeNodeModel e)? onClick;
 

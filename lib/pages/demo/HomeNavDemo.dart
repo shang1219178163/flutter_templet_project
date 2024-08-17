@@ -5,8 +5,7 @@ import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/vendor/flutter_swiper_demo.dart';
 
 class HomeNavDemo extends StatefulWidget {
-
-  const HomeNavDemo({ Key? key, this.title}) : super(key: key);
+  const HomeNavDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -15,7 +14,6 @@ class HomeNavDemo extends StatefulWidget {
 }
 
 class _HomeNavDemoState extends State<HomeNavDemo> {
-
   @override
   Widget build(BuildContext context) {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
@@ -34,11 +32,10 @@ class _HomeNavDemoState extends State<HomeNavDemo> {
         Column(
           children: [
             _buildNav(
-              child: XCollectionNavWidget(
-                width: screenSize.width - 24,
-                rowCount: 5,
-              )
-            ),
+                child: XCollectionNavWidget(
+              width: screenSize.width - 24,
+              rowCount: 5,
+            )),
             Divider(),
             _buildSwiper(),
           ],
@@ -72,10 +69,9 @@ class _HomeNavDemoState extends State<HomeNavDemo> {
         itemBuilder: (BuildContext context, int index) {
           return _buildNav(
               child: XCollectionNavWidget(
-                width: screenSize.width - 24,
-                rowCount: 3,
-              )
-          );
+            width: screenSize.width - 24,
+            rowCount: 3,
+          ));
           return CustomSwiperItem(
             url: images[index],
             color: index.isEven ? Colors.green : Colors.yellow,
@@ -92,7 +88,6 @@ class _HomeNavDemoState extends State<HomeNavDemo> {
       ),
     );
   }
-
 }
 
 final List<String> images = [

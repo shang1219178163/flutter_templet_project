@@ -11,7 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_webview_page.dart';
 
 class NUserPrivacy extends StatefulWidget {
-
   const NUserPrivacy({
     Key? key,
     this.title,
@@ -22,7 +21,7 @@ class NUserPrivacy extends StatefulWidget {
     this.cancellBuilder,
     this.confirmBuilder,
     this.bottomBuilder,
-    }) : assert(title != null || content != null),
+  })  : assert(title != null || content != null),
         super(key: key);
 
   final Text? title;
@@ -49,7 +48,8 @@ class _NUserPrivacyState extends State<NUserPrivacy> {
   void initState() {
     //监听滚动事件，打印滚动位置
     _scrollController.addListener(() {
-      isScrollBottom = (_scrollController.offset >= _scrollController.position.maxScrollExtent);
+      isScrollBottom = (_scrollController.offset >=
+          _scrollController.position.maxScrollExtent);
       setState(() {});
     });
 
@@ -73,8 +73,8 @@ class _NUserPrivacyState extends State<NUserPrivacy> {
         borderRadius: BorderRadius.circular(widget.radius),
         child: Container(
           decoration: BoxDecoration(
-              color: Theme.of(context).scaffoldBackgroundColor,
-              borderRadius: BorderRadius.circular(widget.radius),
+            color: Theme.of(context).scaffoldBackgroundColor,
+            borderRadius: BorderRadius.circular(widget.radius),
           ),
           width: screenSize.width * .8,
           child: Column(
@@ -83,7 +83,8 @@ class _NUserPrivacyState extends State<NUserPrivacy> {
               if (widget.title != null)
                 Container(
                   height: 45,
-                  padding: EdgeInsets.only(top: 12, left: 12, bottom: 8, right: 12),
+                  padding:
+                      EdgeInsets.only(top: 12, left: 12, bottom: 8, right: 12),
                   child: widget.title,
                 ),
               if (widget.content != null)
@@ -119,10 +120,13 @@ class _NUserPrivacyState extends State<NUserPrivacy> {
               onTap: widget.onCancel,
               child: Container(
                 color: Colors.transparent,
-                  alignment: Alignment.center,
-                  child: widget.cancellBuilder != null ? widget.cancellBuilder?.call(context) : Text('不同意',
-                    style: TextStyle(fontWeight: FontWeight.w500),
-                  ),
+                alignment: Alignment.center,
+                child: widget.cancellBuilder != null
+                    ? widget.cancellBuilder?.call(context)
+                    : Text(
+                        '不同意',
+                        style: TextStyle(fontWeight: FontWeight.w500),
+                      ),
               ),
             ),
           ),
@@ -131,26 +135,33 @@ class _NUserPrivacyState extends State<NUserPrivacy> {
           ),
           Expanded(
               child: GestureDetector(
-                onTap: !isScrollBottom ? null : widget.onConfirm,
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: _getConfirmBtnBgColor(),
-                    borderRadius: BorderRadius.only(bottomRight: Radius.circular(widget.radius)),
-                  ),
-                  alignment: Alignment.center,
-                  child: widget.confirmBuilder != null ? widget.confirmBuilder?.call(context) : Text('同意',
-                    style: TextStyle(fontWeight: FontWeight.w500, color: _getConfirmBtnTextColor()),
-                  ),
-                ),
-              )
-          ),
+            onTap: !isScrollBottom ? null : widget.onConfirm,
+            child: Container(
+              decoration: BoxDecoration(
+                color: _getConfirmBtnBgColor(),
+                borderRadius: BorderRadius.only(
+                    bottomRight: Radius.circular(widget.radius)),
+              ),
+              alignment: Alignment.center,
+              child: widget.confirmBuilder != null
+                  ? widget.confirmBuilder?.call(context)
+                  : Text(
+                      '同意',
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          color: _getConfirmBtnTextColor()),
+                    ),
+            ),
+          )),
         ],
       ),
     );
   }
 
   Color _getConfirmBtnBgColor() {
-    return !isScrollBottom ? Colors.grey : Theme.of(context).colorScheme.primary;
+    return !isScrollBottom
+        ? Colors.grey
+        : Theme.of(context).colorScheme.primary;
   }
 
   Color _getConfirmBtnTextColor() {

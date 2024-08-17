@@ -2,9 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-
 class NDashDecoration extends Decoration {
-
   NDashDecoration({
     this.gradient,
     this.color,
@@ -16,6 +14,7 @@ class NDashDecoration extends Decoration {
     this.pointWidth,
     this.radius,
   });
+
   /// 渐进色
   final Gradient? gradient;
 
@@ -30,19 +29,18 @@ class NDashDecoration extends Decoration {
   final Color? strokeColor;
 
   @override
-  BoxPainter createBoxPainter([VoidCallback? onChanged]) => _DashBoxPainter(this);
+  BoxPainter createBoxPainter([VoidCallback? onChanged]) =>
+      _DashBoxPainter(this);
 }
 
 class _DashBoxPainter extends BoxPainter {
-
   _DashBoxPainter(this.decoration);
 
   final NDashDecoration decoration;
 
-
   @override
   void paint(Canvas canvas, Offset offset, ImageConfiguration configuration) {
-    if(configuration.size == null){
+    if (configuration.size == null) {
       return;
     }
 
@@ -67,8 +65,7 @@ class _DashBoxPainter extends BoxPainter {
 
     if (decoration.color != null) {
       final rectPaint = Paint()..color = decoration.color!;
-      canvas.drawRRect(
-          RRect.fromRectAndRadius(zone, radius), rectPaint);
+      canvas.drawRRect(RRect.fromRectAndRadius(zone, radius), rectPaint);
     }
 
     path.addRRect(RRect.fromRectAndRadius(
@@ -90,7 +87,6 @@ class _DashBoxPainter extends BoxPainter {
   }
 }
 
-
 class _DashPainter {
   const _DashPainter({
     this.step = 2,
@@ -101,10 +97,13 @@ class _DashPainter {
 
   /// [step] the length of solid line 每段实线长
   final double step;
+
   /// [span] the space of each solid line  每段空格线长
   final double span;
+
   /// [pointCount] the point count of dash line  点划线的点数
   final int pointCount;
+
   /// [pointWidth] the point width of dash line  点划线的点划长
   final double? pointWidth;
 
@@ -118,7 +117,9 @@ class _DashPainter {
       final count = pm.length ~/ partLength;
       for (var i = 0; i < count; i++) {
         canvas.drawPath(
-          pm.extractPath(partLength * i, partLength * i + step), paint,);
+          pm.extractPath(partLength * i, partLength * i + step),
+          paint,
+        );
         for (var j = 1; j <= pointCount; j++) {
           final start =
               partLength * i + step + span * j + pointLineLength * (j - 1);

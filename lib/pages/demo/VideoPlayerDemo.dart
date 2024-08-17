@@ -6,16 +6,13 @@
 //  Copyright © 3/21/23 shang. All rights reserved.
 //
 
-
 import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
-
 class VideoPlayerDemo extends StatefulWidget {
-
-  const VideoPlayerDemo({ Key? key, this.title}) : super(key: key);
+  const VideoPlayerDemo({Key? key, this.title}) : super(key: key);
   final String? title;
 
   @override
@@ -44,7 +41,6 @@ class _VideoPlayerDemoState extends State<VideoPlayerDemo> {
   //当前播放视频的位置
   Duration get currentDuration => videoPlayerValue.position;
 
-
   @override
   void initState() {
     super.initState();
@@ -52,12 +48,16 @@ class _VideoPlayerDemoState extends State<VideoPlayerDemo> {
     // Create and store the VideoPlayerController. The VideoPlayerController
     // offers several different constructors to play videos from assets, files,
     // or the internet.
-    var url = 'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4';
-    _controller = VideoPlayerController.network(url,);
+    var url =
+        'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4';
+    _controller = VideoPlayerController.network(
+      url,
+    );
     //_controller = VideoPlayerController.file(File(url));
 
     // Initialize the controller and store the Future for later use.
-    _initializeVideoPlayerFuture = _controller.initialize().then((value) => setState(() {}) );
+    _initializeVideoPlayerFuture =
+        _controller.initialize().then((value) => setState(() {}));
 
     // Use the controller to loop the video.
     _controller.setLooping(true);
@@ -111,8 +111,8 @@ class _VideoPlayerDemoState extends State<VideoPlayerDemo> {
   }
 
   playOrPauseWidget() {
-    IconData? icon = _controller.value.isPlaying ? Icons.pause : Icons.play_arrow;
+    IconData? icon =
+        _controller.value.isPlaying ? Icons.pause : Icons.play_arrow;
     return Icon(icon);
   }
-
 }

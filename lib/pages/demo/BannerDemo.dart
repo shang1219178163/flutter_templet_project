@@ -9,22 +9,18 @@
 import 'package:flutter/material.dart';
 
 class BannerDemo extends StatefulWidget {
-
   final String? title;
 
-  const BannerDemo({ Key? key, this.title}) : super(key: key);
+  const BannerDemo({Key? key, this.title}) : super(key: key);
 
-  
   @override
   _BannerDemoState createState() => _BannerDemoState();
 }
 
 class _BannerDemoState extends State<BannerDemo> {
-
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold (
+    return Scaffold(
       appBar: AppBar(
         title: Text("Banner Example"),
       ),
@@ -58,6 +54,4 @@ class _BannerDemoState extends State<BannerDemo> {
       ),
     );
   }
-
-
 }

@@ -1,10 +1,7 @@
-
-
 import 'package:flutter/services.dart';
 
 /// 每四位数字加空格
 class InsertBlankTextInputFormatter extends TextInputFormatter {
-
   InsertBlankTextInputFormatter({
     this.step = 4,
   });
@@ -12,8 +9,8 @@ class InsertBlankTextInputFormatter extends TextInputFormatter {
   final int step;
 
   @override
-  TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
-
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue, TextEditingValue newValue) {
     // print(" baseoffse is  ${newValue.selection.baseOffset}");
     //光标的位置 从0开始
     if (newValue.selection.baseOffset == 0) {

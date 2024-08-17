@@ -6,17 +6,12 @@
 //  Copyright © 3/13/23 shang. All rights reserved.
 //
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/model/app_update_model.dart';
 
 class ReflectDemo extends StatefulWidget {
-
-  const ReflectDemo({
-    Key? key,
-    this.title
-  }) : super(key: key);
+  const ReflectDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -25,8 +20,6 @@ class ReflectDemo extends StatefulWidget {
 }
 
 class _ReflectDemoState extends State<ReflectDemo> {
-
-
   @override
   Widget build(BuildContext context) {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
@@ -34,12 +27,17 @@ class _ReflectDemoState extends State<ReflectDemo> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          onPressed: onPressed,
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-        )).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  onPressed: onPressed,
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ))
+            .toList(),
       ),
       body: _buildBody(),
     );
@@ -58,7 +56,8 @@ class _ReflectDemoState extends State<ReflectDemo> {
                 padding: EdgeInsets.all(8),
                 child: Wrap(
                   children: [
-                    ElevatedButton(onPressed: onPressed, child: Text("Iterable")),
+                    ElevatedButton(
+                        onPressed: onPressed, child: Text("Iterable")),
                   ],
                 ),
               )
@@ -80,12 +79,11 @@ class _ReflectDemoState extends State<ReflectDemo> {
     -全新结构设计，整体交互优化/人性化和易用性大提升，操作体验豪华升级"；
   """,
         appVersion: "版本 7.6.0",
-        isShowAll: false
-    );
+        isShowAll: false);
 
-    debugPrint("appName before: ${model["appName"]}");//flutter: appName before: QQ音乐 - 让生活充满音乐
+    debugPrint(
+        "appName before: ${model["appName"]}"); //flutter: appName before: QQ音乐 - 让生活充满音乐
     model["appName"] = "哈哈哈哈";
-    debugPrint("appName after: ${model["appName"]}");//flutter: appName1: 哈哈哈哈
-
+    debugPrint("appName after: ${model["appName"]}"); //flutter: appName1: 哈哈哈哈
   }
 }

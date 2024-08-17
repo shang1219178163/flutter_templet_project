@@ -4,8 +4,7 @@ import 'package:flutter_templet_project/extension/object_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 
 class AnimatedBuilderDemo extends StatefulWidget {
-
-  const AnimatedBuilderDemo({ Key? key, this.title}) : super(key: key);
+  const AnimatedBuilderDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -13,11 +12,13 @@ class AnimatedBuilderDemo extends StatefulWidget {
   _AnimatedBuilderDemoState createState() => _AnimatedBuilderDemoState();
 }
 
-class _AnimatedBuilderDemoState extends State<AnimatedBuilderDemo> with SingleTickerProviderStateMixin {
-
-  late AnimationController controller = AnimationController(duration: Duration(seconds: 2), vsync: this);
+class _AnimatedBuilderDemoState extends State<AnimatedBuilderDemo>
+    with SingleTickerProviderStateMixin {
+  late AnimationController controller =
+      AnimationController(duration: Duration(seconds: 2), vsync: this);
   //图片宽高从0变到400
-  late Animation<double> animation = Tween(begin: 0.0, end: 400.0).animate(controller);
+  late Animation<double> animation =
+      Tween(begin: 0.0, end: 400.0).animate(controller);
 
   @override
   initState() {
@@ -29,29 +30,38 @@ class _AnimatedBuilderDemoState extends State<AnimatedBuilderDemo> with SingleTi
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () {
-            if (controller.value == 1) {
-              controller.reverse().orCancel;
-            } else {
-              controller.forward().orCancel;
-            }
-          },)
-        ).toList(),
-      ),
-      body: Column(
-        children: [
-          buildAnimatedBuilder(),
-          buildTweenAnimatedWidget(),
-
-        ].map((e) => Expanded(child: e,),).toList(),
-      )
-    );
+        appBar: AppBar(
+          title: Text(widget.title ?? "$widget"),
+          actions: [
+            'done',
+          ]
+              .map((e) => TextButton(
+                    child: Text(
+                      e,
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onPressed: () {
+                      if (controller.value == 1) {
+                        controller.reverse().orCancel;
+                      } else {
+                        controller.forward().orCancel;
+                      }
+                    },
+                  ))
+              .toList(),
+        ),
+        body: Column(
+          children: [
+            buildAnimatedBuilder(),
+            buildTweenAnimatedWidget(),
+          ]
+              .map(
+                (e) => Expanded(
+                  child: e,
+                ),
+              )
+              .toList(),
+        ));
   }
 
   buildAnimatedBuilder() {
@@ -69,9 +79,7 @@ class _AnimatedBuilderDemoState extends State<AnimatedBuilderDemo> with SingleTi
           ),
         );
       },
-      child: Image(
-          image: "bg.png".toAssetImage()
-      ),
+      child: Image(image: "bg.png".toAssetImage()),
     );
   }
 
@@ -90,10 +98,7 @@ class _AnimatedBuilderDemoState extends State<AnimatedBuilderDemo> with SingleTi
           ),
         );
       },
-      child: Image(
-          image: "bg.png".toAssetImage()
-      ),
+      child: Image(image: "bg.png".toAssetImage()),
     );
   }
-
 }

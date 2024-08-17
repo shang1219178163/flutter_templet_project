@@ -10,18 +10,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 
 class WillPopScopeDemo extends StatefulWidget {
-
   final String? title;
 
-  const WillPopScopeDemo({ Key? key, this.title}) : super(key: key);
-
+  const WillPopScopeDemo({Key? key, this.title}) : super(key: key);
 
   @override
   _WillPopScopeDemoState createState() => _WillPopScopeDemoState();
 }
 
 class _WillPopScopeDemoState extends State<WillPopScopeDemo> {
-
   bool _disable = false;
 
   @override

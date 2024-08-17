@@ -1,16 +1,10 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_header.dart';
 import 'package:flutter_templet_project/basicWidget/n_badge.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 
 class BadgeDemo extends StatefulWidget {
-
-  BadgeDemo({
-    super.key, 
-    this.title
-  });
+  BadgeDemo({super.key, this.title});
 
   final String? title;
 
@@ -19,7 +13,6 @@ class BadgeDemo extends StatefulWidget {
 }
 
 class _BadgeDemoState extends State<BadgeDemo> {
-
   final _scrollController = ScrollController();
 
   @override
@@ -27,12 +20,17 @@ class _BadgeDemoState extends State<BadgeDemo> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () => debugPrint(e),)
-        ).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () => debugPrint(e),
+                ))
+            .toList(),
       ),
       body: buildBody(),
     );
@@ -82,5 +80,4 @@ class _BadgeDemoState extends State<BadgeDemo> {
       ),
     );
   }
-  
 }

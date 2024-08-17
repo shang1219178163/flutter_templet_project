@@ -6,7 +6,6 @@
 //  Copyright © 1/6/23 shang. All rights reserved.
 //
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 
@@ -20,7 +19,7 @@ class NeumorphismButton extends StatelessWidget {
     this.borderRadius = 30,
     required this.child,
     this.onClick,
-  }): super(key: key);
+  }) : super(key: key);
 
   NeumorphismButton.icon({
     Key? key,
@@ -30,15 +29,15 @@ class NeumorphismButton extends StatelessWidget {
     double? borderRadius,
     required Widget child,
     GestureTapCallback? onClick,
-  }): this(
-    key: key,
-    width: width ?? 50,
-    height: height ?? 50,
-    padding: padding ?? const EdgeInsets.all(8),
-    borderRadius: borderRadius ?? 30,
-    child: child,
-    onClick: onClick,
-  );
+  }) : this(
+          key: key,
+          width: width ?? 50,
+          height: height ?? 50,
+          padding: padding ?? const EdgeInsets.all(8),
+          borderRadius: borderRadius ?? 30,
+          child: child,
+          onClick: onClick,
+        );
 
   double? width;
   double? height;
@@ -66,8 +65,7 @@ class NeumorphismButton extends StatelessWidget {
       ).toNeumorphism(
           bottomShadowColor: const Color(0xFFA3B1C6),
           borderRadius: borderRadius,
-          topShadowColor: Colors.white
-      ),
+          topShadowColor: Colors.white),
     );
   }
 }

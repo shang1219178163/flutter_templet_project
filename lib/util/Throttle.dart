@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/foundation.dart';
 
 /// 事件节流
@@ -17,7 +15,8 @@ class Throttle {
       cb();
       _lastActionTime = DateTime.now().millisecondsSinceEpoch;
     } else {
-      if (DateTime.now().millisecondsSinceEpoch - _lastActionTime! > delay.inMilliseconds) {
+      if (DateTime.now().millisecondsSinceEpoch - _lastActionTime! >
+          delay.inMilliseconds) {
         cb();
         _lastActionTime = DateTime.now().millisecondsSinceEpoch;
       }

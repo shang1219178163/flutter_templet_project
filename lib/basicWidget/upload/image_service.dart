@@ -12,12 +12,11 @@ import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 
-
 /// 图片处理工具类
-class ImageService{
-
+class ImageService {
   /// 图片压缩
-  Future<File> compressAndGetFile(File file, {String? targetPath, bool needLogInfo = true}) async {
+  Future<File> compressAndGetFile(File file,
+      {String? targetPath, bool needLogInfo = true}) async {
     try {
       var fileName = file.absolute.path.split('/').last;
 
@@ -48,7 +47,8 @@ class ImageService{
 
       final compressQuality = file.lengthSync().compressQuality;
       var result = await FlutterImageCompress.compressAndGetFile(
-        filePath, targetPath,
+        filePath,
+        targetPath,
         quality: compressQuality,
         format: format,
       );
@@ -78,110 +78,102 @@ class ImageService{
     return file;
   }
 
+  /// 图像裁剪
+  Future<File?> toCropImage(
+    File file, {
+    int? maxWidth,
+    int? maxHeight,
+    bool showLoading = true,
+  }) async {
+    final sourcePath = file.path;
 
-   /// 图像裁剪
-   Future<File?> toCropImage(File file, {
-     int? maxWidth,
-     int? maxHeight,
-     bool showLoading = true,
-   }) async {
-     final sourcePath = file.path;
+    if (showLoading) {
+      ToastUtil.loading("图片处理中...");
+    }
 
-     if(showLoading) {
-       ToastUtil.loading("图片处理中...");
-     }
+    var croppedFile = await ImageCropper().cropImage(
+      sourcePath: sourcePath,
+      maxWidth: maxWidth,
+      maxHeight: maxHeight,
+      aspectRatioPresets: [
+        CropAspectRatioPreset.square,
+      ],
+      uiSettings: [
+        AndroidUiSettings(
+          toolbarTitle: '',
+          toolbarColor: Colors.blue,
+          toolbarWidgetColor: white,
+          initAspectRatio: CropAspectRatioPreset.original,
+          lockAspectRatio: false,
+        ),
+        IOSUiSettings(
+          title: 'Cropper',
+        ),
+      ],
+    );
 
-     var croppedFile = await ImageCropper().cropImage(
-       sourcePath: sourcePath,
-       maxWidth: maxWidth,
-       maxHeight: maxHeight,
-       aspectRatioPresets: [
-         CropAspectRatioPreset.square,
-       ],
-       uiSettings: [
-         AndroidUiSettings(
-           toolbarTitle: '',
-           toolbarColor: Colors.blue,
-           toolbarWidgetColor: white,
-           initAspectRatio: CropAspectRatioPreset.original,
-           lockAspectRatio: false,
-         ),
-         IOSUiSettings(
-           title: 'Cropper',
-         ),
-       ],
-     );
+    if (showLoading) {
+      ToastUtil.hideLoading();
+    }
 
-     if(showLoading) {
-       ToastUtil.hideLoading();
-     }
+    if (croppedFile == null) {
+      return null;
+    }
+    return File(croppedFile.path);
+  }
 
-     if (croppedFile == null) {
-       return null;
-     }
-     return File(croppedFile.path);
-   }
+  /// 保存到相册
+  Future<bool> saveImage({
+    required String url,
+    bool showToast = true,
+  }) async {
+    final percentVN = ValueNotifier(0.0);
 
+    ToastUtil.loading("文件下载中",
+        indicator: ValueListenableBuilder<double>(
+            valueListenable: percentVN,
+            builder: (context, value, child) {
+              return CircularProgressIndicator(
+                value: value,
+              );
+            }));
 
-   /// 保存到相册
-   Future<bool> saveImage({
-     required String url,
-     bool showToast = true,
-   }) async {
-     final percentVN = ValueNotifier(0.0);
+    String? name;
+    try {
+      name = url.split("?").first.split("/").last;
+    } catch (e) {
+      debugPrint("saveVideo name: ${e.toString()}");
+      name = "tmp.png";
+    }
 
-     ToastUtil.loading(
-         "文件下载中",
-         indicator: ValueListenableBuilder<double>(
-             valueListenable: percentVN,
-             builder: (context,  value, child){
+    var cacheDir = await AssetCacheService().getDir();
+    String savePath = "${cacheDir.path}/$name";
+    await Dio().download(url, savePath, onReceiveProgress: (received, total) {
+      if (total != -1) {
+        final percent = (received / total);
+        final percentStr = "${(percent * 100).toStringAsFixed(0)}%";
+        percentVN.value = percent;
+        // debugPrint("percentStr: $percentStr");
+      }
+    });
+    // debugPrint("savePath: ${savePath}");
+    ToastUtil.hideLoading();
 
-               return CircularProgressIndicator(
-                 value: value,
-               );
-             }
-         )
-     );
-
-
-     String? name;
-     try {
-       name = url.split("?").first.split("/").last;
-     } catch (e) {
-       debugPrint("saveVideo name: ${e.toString()}");
-       name = "tmp.png";
-     }
-
-     var cacheDir = await AssetCacheService().getDir();
-     String savePath = "${cacheDir.path}/$name";
-     await Dio().download(url, savePath,
-         onReceiveProgress: (received, total) {
-           if (total != -1) {
-             final percent = (received / total);
-             final percentStr = "${(percent * 100).toStringAsFixed(0)}%";
-             percentVN.value = percent;
-             // debugPrint("percentStr: $percentStr");
-           }
-         }
-     );
-     // debugPrint("savePath: ${savePath}");
-     ToastUtil.hideLoading();
-
-     final result = await ImageGallerySaver.saveFile(savePath);
-     debugPrint("saveFile: ${result} $url");
-     final isSuccess = result["isSuccess"];
-     final message = isSuccess ? "已保存到相册" : "操作失败";
-     if (isSuccess && showToast) {
-       ToastUtil.show(message,);
-     }
-     return isSuccess;
-   }
+    final result = await ImageGallerySaver.saveFile(savePath);
+    debugPrint("saveFile: ${result} $url");
+    final isSuccess = result["isSuccess"];
+    final message = isSuccess ? "已保存到相册" : "操作失败";
+    if (isSuccess && showToast) {
+      ToastUtil.show(
+        message,
+      );
+    }
+    return isSuccess;
+  }
 }
-
 
 /// 图片文件扩展方法
 extension ImageFileExt on File {
-
   /// 图片压缩
   Future<File> toCompressImage() async {
     var compressFile = await ImageService().compressAndGetFile(this);
@@ -194,7 +186,8 @@ extension ImageFileExt on File {
     int? maxHeight,
     bool showLoading = true,
   }) async {
-    var compressFile = await ImageService().toCropImage(this,
+    var compressFile = await ImageService().toCropImage(
+      this,
       maxWidth: maxWidth,
       maxHeight: maxHeight,
       showLoading: showLoading,

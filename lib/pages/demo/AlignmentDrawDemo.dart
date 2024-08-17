@@ -18,15 +18,15 @@ import 'package:flutter_templet_project/extension/widget_ext.dart';
 
 /// 九个方向的 drawer
 class AlignmentDrawDemo extends StatefulWidget {
-
-  AlignmentDrawDemo({super.key,});
+  AlignmentDrawDemo({
+    super.key,
+  });
 
   @override
   State<AlignmentDrawDemo> createState() => _AlignmentDrawDemoState();
 }
 
 class _AlignmentDrawDemoState extends State<AlignmentDrawDemo> {
-
   final _scrollController = ScrollController();
 
   Alignment topAlignment = Alignment.topCenter;
@@ -36,15 +36,19 @@ class _AlignmentDrawDemoState extends State<AlignmentDrawDemo> {
     return Scaffold(
       appBar: AppBar(
         title: Text("$widget"),
-        actions: ['done',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () {
-            presentDrawer(alignment: topAlignment);
-          },
-        )
-        ).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () {
+                    presentDrawer(alignment: topAlignment);
+                  },
+                ))
+            .toList(),
       ),
       body: buildBody(),
     );
@@ -66,7 +70,7 @@ class _AlignmentDrawDemoState extends State<AlignmentDrawDemo> {
               NMenuAnchor(
                 values: AlignmentExt.allCases,
                 initialItem: topAlignment,
-                onChanged: (val){
+                onChanged: (val) {
                   ddlog(val);
                   topAlignment = val;
                   presentDrawer(alignment: topAlignment);
@@ -80,11 +84,12 @@ class _AlignmentDrawDemoState extends State<AlignmentDrawDemo> {
     );
   }
 
-  presentDrawer({Alignment alignment = Alignment.topCenter,}){
+  presentDrawer({
+    Alignment alignment = Alignment.topCenter,
+  }) {
     NAlignmentDrawer(
       alignment: alignment,
       builder: (onHide) {
-
         return ClipRRect(
           borderRadius: BorderRadius.all(Radius.circular(12)),
           child: Container(
@@ -97,12 +102,12 @@ class _AlignmentDrawDemoState extends State<AlignmentDrawDemo> {
                   actions: [
                     TextButton(
                       onPressed: onHide,
-                      child: Text('取消',
+                      child: Text(
+                        '取消',
                         style: TextStyle(color: Colors.white),
                       ),
                     ),
-                  ]
-              ),
+                  ]),
               body: buildBody(),
             ),
           ),
@@ -114,5 +119,4 @@ class _AlignmentDrawDemoState extends State<AlignmentDrawDemo> {
       barrierDismissible: false,
     );
   }
-
 }

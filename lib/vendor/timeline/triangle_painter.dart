@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
+
 //自绘图像小三角
 class TrianglePainter extends CustomPainter {
-
   Color color; //填充颜色
   // Paint painter; //画笔
   Path path; //绘制路径
@@ -28,9 +28,9 @@ class TrianglePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     var painter = Paint()
-        ..strokeWidth = 1.0 //线宽
-        ..color = color
-        ..isAntiAlias = true;
+      ..strokeWidth = 1.0 //线宽
+      ..color = color
+      ..isAntiAlias = true;
 
     // TODO: implement paint
     final baseX = size.width * 0.5;

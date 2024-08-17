@@ -6,39 +6,31 @@
 //  Copyright © 6/2/21 shang. All rights reserved.
 //
 
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class DraggableDemo extends StatefulWidget {
-
   final String? title;
 
-  const DraggableDemo({ Key? key, this.title}) : super(key: key);
+  const DraggableDemo({Key? key, this.title}) : super(key: key);
 
-  
   @override
   _DraggableDemoState createState() => _DraggableDemoState();
 }
 
 class _DraggableDemoState extends State<DraggableDemo> {
-
   int acceptedData = 0;
-
-
 
   @override
   Widget build(BuildContext context) {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title ?? "$widget"),
-        ),
-        body: buildBody(),
+      appBar: AppBar(
+        title: Text(widget.title ?? "$widget"),
+      ),
+      body: buildBody(),
     );
   }
-
 
   Widget buildBody() {
     return Row(
@@ -70,13 +62,20 @@ class _DraggableDemoState extends State<DraggableDemo> {
           ),
         ),
         DragTarget<int>(
-          builder: (BuildContext context, List<dynamic> accepted, List<dynamic> rejected,) {
+          builder: (
+            BuildContext context,
+            List<dynamic> accepted,
+            List<dynamic> rejected,
+          ) {
             return Container(
               height: 100.0,
               width: 100.0,
               color: Colors.cyan,
               child: Center(
-                child: Text('Value is updated to: $acceptedData', textAlign: TextAlign.center,),
+                child: Text(
+                  'Value is updated to: $acceptedData',
+                  textAlign: TextAlign.center,
+                ),
               ),
             );
           },
@@ -97,4 +96,3 @@ class _DraggableDemoState extends State<DraggableDemo> {
     });
   }
 }
-

@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/enhance/enhance_dialog_sheet/en_display_feature_sub_screen.dart';
 
-
 /// A general dialog route which allows for customization of the dialog popup.
 ///
 /// It is used internally by [showGeneralDialog] or can be directly pushed
@@ -233,4 +232,3 @@ Future<T?> showGeneralDialogNew<T extends Object?>({
     right: right,
   ));
 }
-

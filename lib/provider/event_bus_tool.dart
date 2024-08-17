@@ -6,7 +6,6 @@
 //  Copyright © 10/14/21 shang. All rights reserved.
 //
 
-
 //订阅者回调签名
 
 typedef EventCallback = void Function(dynamic arg);

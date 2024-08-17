@@ -6,12 +6,10 @@
 //  Copyright © 2023/10/16 shang. All rights reserved.
 //
 
-
 import 'package:flutter/material.dart';
 
 /// 滑动动画构造器
 class NSlideTransitionBuilder extends StatefulWidget {
-
   NSlideTransitionBuilder({
     Key? key,
     this.duration = const Duration(milliseconds: 350),
@@ -22,10 +20,13 @@ class NSlideTransitionBuilder extends StatefulWidget {
 
   /// 目标位置
   final Alignment alignment;
+
   /// 动画时间
   final Duration duration;
+
   /// 是否有 fade 动画
   final bool hasFade;
+
   /// 子组件
   final Widget? child;
 
@@ -33,7 +34,8 @@ class NSlideTransitionBuilder extends StatefulWidget {
   NSlideTransitionBuilderState createState() => NSlideTransitionBuilderState();
 }
 
-class NSlideTransitionBuilderState extends State<NSlideTransitionBuilder> with SingleTickerProviderStateMixin {
+class NSlideTransitionBuilderState extends State<NSlideTransitionBuilder>
+    with SingleTickerProviderStateMixin {
   late final _controller = AnimationController(
     duration: widget.duration,
     reverseDuration: widget.duration,
@@ -41,7 +43,6 @@ class NSlideTransitionBuilderState extends State<NSlideTransitionBuilder> with S
   );
 
   AnimationController get controller => _controller;
-
 
   late final Animation<Offset> _offsetAnimation;
 
@@ -94,12 +95,15 @@ class NSlideTransitionBuilderState extends State<NSlideTransitionBuilder> with S
   Widget build(BuildContext context) {
     Widget content = Align(
       alignment: widget.alignment,
-      child: widget.child ?? Container(
-        height: 300,
-        width: 300,
-        color: Colors.red,
-        child: FlutterLogo(size: 200,),
-      ),
+      child: widget.child ??
+          Container(
+            height: 300,
+            width: 300,
+            color: Colors.red,
+            child: FlutterLogo(
+              size: 200,
+            ),
+          ),
     );
     if (widget.hasFade) {
       content = FadeTransition(

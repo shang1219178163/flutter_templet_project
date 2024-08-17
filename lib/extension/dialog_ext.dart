@@ -6,14 +6,12 @@
 //  Copyright © 5/17/21 shang. All rights reserved.
 //
 
-
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 
-
-extension AlertDialogExt on AlertDialog{
+extension AlertDialogExt on AlertDialog {
   //
   // ///按平台弹出不同样式
   // static void toShowAlert({
@@ -50,4 +48,3 @@ extension AlertDialogExt on AlertDialog{
   //   }
   // }
 }
-

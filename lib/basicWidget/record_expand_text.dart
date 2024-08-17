@@ -7,7 +7,6 @@ import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/text_painter_ext.dart';
 
-
 /// 档案文字展开/收起组件
 class RecordExpandText extends StatefulWidget {
   RecordExpandText({
@@ -47,7 +46,6 @@ class RecordExpandText extends StatefulWidget {
 }
 
 class RecordExpandTextState extends State<RecordExpandText> {
-
   late bool isExpand = widget.isExpand;
 
   @override
@@ -127,8 +125,8 @@ class RecordExpandTextState extends State<RecordExpandText> {
             // final btnTitle = isExpand ? "收起" : "展开";
 
             final toggleImage = (isExpand
-                ? "icon_expand_arrow_up.png"
-                : "icon_expand_arrow_down.png")
+                    ? "icon_expand_arrow_up.png"
+                    : "icon_expand_arrow_down.png")
                 .toAssetImage();
             // gradientColor = Colors.blue;
 
@@ -137,14 +135,16 @@ class RecordExpandTextState extends State<RecordExpandText> {
               setState(() {});
             }
 
-            final textChild = widget.textBuilder?.call(isExpand, widget.expandMinLine) ?? NText(
-              text,
-              fontSize: 16,
-              maxLines: isExpand ? null : widget.expandMinLine,
-              overflow: TextOverflow.clip,
-              fontWeight: FontWeight.w400,
-              style: textStyle,
-            );
+            final textChild =
+                widget.textBuilder?.call(isExpand, widget.expandMinLine) ??
+                    NText(
+                      text,
+                      fontSize: 16,
+                      maxLines: isExpand ? null : widget.expandMinLine,
+                      overflow: TextOverflow.clip,
+                      fontWeight: FontWeight.w400,
+                      style: textStyle,
+                    );
 
             final textContent = Row(
               children: [

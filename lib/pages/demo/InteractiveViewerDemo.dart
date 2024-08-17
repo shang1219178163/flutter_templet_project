@@ -2,11 +2,7 @@ import 'package:flutter/material.dart';
 
 /// 交互式放大缩小
 class InteractiveViewerDemo extends StatefulWidget {
-
-  const InteractiveViewerDemo({
-    Key? key,
-    this.title
-  }) : super(key: key);
+  const InteractiveViewerDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -15,8 +11,6 @@ class InteractiveViewerDemo extends StatefulWidget {
 }
 
 class _InteractiveViewerDemoState extends State<InteractiveViewerDemo> {
-
-
   @override
   Widget build(BuildContext context) {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
@@ -24,12 +18,17 @@ class _InteractiveViewerDemoState extends State<InteractiveViewerDemo> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          onPressed: () => debugPrint(e),
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),)
-        ).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  onPressed: () => debugPrint(e),
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ))
+            .toList(),
       ),
       body: buildInteractiveViewer(),
     );
@@ -55,4 +54,3 @@ class _InteractiveViewerDemoState extends State<InteractiveViewerDemo> {
     );
   }
 }
-

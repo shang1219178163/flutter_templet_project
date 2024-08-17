@@ -6,26 +6,31 @@
 //  Copyright © 2024/1/6 shang. All rights reserved.
 //
 
-
 import 'package:flutter_templet_project/cache/cache_service.dart';
 
 /// 当前 api 环境
-enum APPEnvironment{
+enum APPEnvironment {
   /// 开发环境
   dev('https://*.cn'),
+
   /// 预测试环境
   beta('https://*.cn'),
+
   /// 测试环境
   test('https://*.cn'),
+
   /// 预发布环境
   pre('https://*.cn'),
+
   /// 生产环境
   prod('https://*.cn');
 
-  const APPEnvironment(this.origin,);
+  const APPEnvironment(
+    this.origin,
+  );
+
   /// 当前枚举对应的域名
   final String origin;
-
 
   /// 字符串转类型
   static APPEnvironment? fromString(String? val) {
@@ -47,7 +52,7 @@ enum APPEnvironment{
   }
 
   @override
-  String toString(){
+  String toString() {
     if (this == APPEnvironment.dev) {
       return "$name,${CacheService().devOrigin ?? origin}";
     }
@@ -58,7 +63,6 @@ enum APPEnvironment{
 ///request config
 class RequestConfig {
   static APPEnvironment current = APPEnvironment.dev;
-
 
   /// 网络请求域名
   static String get baseUrl {
@@ -75,7 +79,6 @@ class RequestConfig {
   static String apiTitle = '/api/crm';
   static String ossImageUrl = 'https://yl-oss.yljt.cn';
   static const connectTimeout = 15000;
-
 }
 
 class RequestMsg {
@@ -90,8 +93,4 @@ class RequestMsg {
     '500': '服务器内部错误!',
     '502': '服务器内部错误!',
   };
-
 }
-
-
-

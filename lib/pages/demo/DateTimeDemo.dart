@@ -6,25 +6,18 @@
 //  Copyright © 8/3/21 shang. All rights reserved.
 //
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 
-
-
 class DateTimeDemo extends StatefulWidget {
-
   final String? title;
-  const DateTimeDemo({ Key? key, this.title}) : super(key: key);
-
+  const DateTimeDemo({Key? key, this.title}) : super(key: key);
 
   @override
   _DateTimeDemoState createState() => _DateTimeDemoState();
 }
 
 class _DateTimeDemoState extends State<DateTimeDemo> {
-
-
   @override
   Widget build(BuildContext context) {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
@@ -34,13 +27,13 @@ class _DateTimeDemoState extends State<DateTimeDemo> {
         title: Text(widget.title ?? "$widget"),
         actions: [
           TextButton(
-            onPressed: (){
-              _handleDateTime();
-            },
-            child: Text("done",
-              style: TextStyle(color: Colors.white),
-            )
-          ),
+              onPressed: () {
+                _handleDateTime();
+              },
+              child: Text(
+                "done",
+                style: TextStyle(color: Colors.white),
+              )),
         ],
       ),
       body: _buildInputDatePickerFormField(),
@@ -51,9 +44,9 @@ class _DateTimeDemoState extends State<DateTimeDemo> {
     final now = DateTime.now();
 
     var _time = "2012-02-27 13:27:00";
-    var dateTime = DateTime.parse(_time);//字符串转时间
-    var interval = dateTime.millisecondsSinceEpoch;//时间转毫秒时间戳
-    var intendtime = DateTime.fromMillisecondsSinceEpoch(interval);//毫秒时间戳转时间
+    var dateTime = DateTime.parse(_time); //字符串转时间
+    var interval = dateTime.millisecondsSinceEpoch; //时间转毫秒时间戳
+    var intendtime = DateTime.fromMillisecondsSinceEpoch(interval); //毫秒时间戳转时间
 
     ddlog(dateTime);
     ddlog(interval);
@@ -64,7 +57,6 @@ class _DateTimeDemoState extends State<DateTimeDemo> {
       now.toUtc(),
     ]);
   }
-
 
   DateTime? selectedDate;
 
@@ -91,5 +83,4 @@ class _DateTimeDemoState extends State<DateTimeDemo> {
       ),
     );
   }
-
 }

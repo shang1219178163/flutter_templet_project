@@ -6,7 +6,6 @@
 //  Copyright © 2023/1/14 shang. All rights reserved.
 //
 
-
 import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
@@ -14,9 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_picker_tool_bar.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 
-
-mixin BottomSheetMixin{
-
+mixin BottomSheetMixin {
   /// CupertinoSheet 弹窗
   presentCupertinoActionSheet({
     required BuildContext context,
@@ -38,18 +35,23 @@ mixin BottomSheetMixin{
     final child = CupertinoActionSheet(
       title: title,
       message: message,
-      actions: items.map((e) => CupertinoActionSheetAction(
-        onPressed: () {
-          onSelected?.call(items.indexOf(e));
-          Navigator.pop(context);
-        },
-        child: e,
-      ),).toList(),
+      actions: items
+          .map(
+            (e) => CupertinoActionSheetAction(
+              onPressed: () {
+                onSelected?.call(items.indexOf(e));
+                Navigator.pop(context);
+              },
+              child: e,
+            ),
+          )
+          .toList(),
       cancelButton: CupertinoActionSheetAction(
         isDestructiveAction: true,
-        onPressed: onCancel ?? () {
-          Navigator.pop(context);
-        },
+        onPressed: onCancel ??
+            () {
+              Navigator.pop(context);
+            },
         child: cancel,
       ),
     );
@@ -79,44 +81,45 @@ mixin BottomSheetMixin{
     bool semanticsDismissible = false,
     RouteSettings? routeSettings,
   }) {
-
     var dateTime = initialDateTime ?? DateTime.now();
 
     final content = StatefulBuilder(
-        builder: (context, setState) {
-
-          return Container(
-            height: 300 + kToolbarHeight,
-            color: Colors.white,
-            child: Column(
-              children: [
-                NPickerToolBar(
-                  onCancel: onCancel ?? (){
-                    Navigator.of(context).pop();
-                  },
-                  onConfirm: (){
-                    onDateTimeConfirm(dateTime);
-                  },
+      builder: (context, setState) {
+        return Container(
+          height: 300 + kToolbarHeight,
+          color: Colors.white,
+          child: Column(
+            children: [
+              NPickerToolBar(
+                onCancel: onCancel ??
+                    () {
+                      Navigator.of(context).pop();
+                    },
+                onConfirm: () {
+                  onDateTimeConfirm(dateTime);
+                },
+              ),
+              Divider(
+                height: 1.0,
+                color: Color(0xffe4e4e4),
+              ),
+              Expanded(
+                child: Container(
+                  color: Colors.white,
+                  child: CupertinoDatePicker(
+                      mode: mode,
+                      initialDateTime: dateTime,
+                      dateOrder: DatePickerDateOrder.ymd,
+                      onDateTimeChanged: (val) {
+                        dateTime = val;
+                        setState(() {});
+                      }),
                 ),
-                Divider(height: 1.0, color: Color(0xffe4e4e4),),
-                Expanded(
-                  child: Container(
-                    color: Colors.white,
-                    child: CupertinoDatePicker(
-                        mode: mode,
-                        initialDateTime: dateTime,
-                        dateOrder: DatePickerDateOrder.ymd,
-                        onDateTimeChanged: (val) {
-                          dateTime = val;
-                          setState(() {});
-                        }
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          );
-        },
+              ),
+            ],
+          ),
+        );
+      },
     );
 
     showCupertinoModalPopup(
@@ -138,7 +141,7 @@ mixin BottomSheetMixin{
     required Widget child,
     VoidCallback? onCancel,
     required VoidCallback? onConfirm,
-  }){
+  }) {
     final content = Material(
       color: Colors.white,
       child: Column(
@@ -178,19 +181,17 @@ mixin BottomSheetMixin{
       context: context,
       backgroundColor: Colors.transparent,
       builder: (BuildContext context) {
-
         return content;
       },
     );
   }
-
 
   Widget buildPickerTitleBar({
     required BuildContext context,
     String title = "请选择",
     VoidCallback? onCancel,
     required VoidCallback? onConfirm,
-  }){
+  }) {
     return Container(
       height: 45,
       decoration: BoxDecoration(
@@ -198,30 +199,29 @@ mixin BottomSheetMixin{
       ),
       child: NavigationToolbar(
         leading: TextButton(
-          onPressed: onCancel ?? (){
-            debugPrint("取消");
-            Navigator.of(context).pop();
-          },
-          child: Text("取消",
-            style: TextStyle(
-              color: context.primaryColor
-            ),
-          )
-        ),
-        middle: Text(title,
+            onPressed: onCancel ??
+                () {
+                  debugPrint("取消");
+                  Navigator.of(context).pop();
+                },
+            child: Text(
+              "取消",
+              style: TextStyle(color: context.primaryColor),
+            )),
+        middle: Text(
+          title,
           style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
           textAlign: TextAlign.center,
         ),
         trailing: TextButton(
-          onPressed: onConfirm ?? (){
-            debugPrint("确定");
-          },
-          child: Text("确定",
-            style: TextStyle(
-              color: context.primaryColor
-            ),
-          )
-        ),
+            onPressed: onConfirm ??
+                () {
+                  debugPrint("确定");
+                },
+            child: Text(
+              "确定",
+              style: TextStyle(color: context.primaryColor),
+            )),
       ),
     );
   }

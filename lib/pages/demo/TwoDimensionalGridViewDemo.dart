@@ -1,5 +1,3 @@
-
-
 import 'dart:math' as math;
 
 import 'package:flutter/foundation.dart';
@@ -10,34 +8,35 @@ import 'package:flutter_templet_project/basicWidget/n_menu_anchor.dart';
 
 /// 二维视图
 class TwoDimensionalGridViewDemo extends StatefulWidget {
-
-  TwoDimensionalGridViewDemo({
-    super.key, 
-    this.title
-  });
+  TwoDimensionalGridViewDemo({super.key, this.title});
 
   final String? title;
 
   @override
-  State<TwoDimensionalGridViewDemo> createState() => _TwoDimensionalGridViewDemoState();
+  State<TwoDimensionalGridViewDemo> createState() =>
+      _TwoDimensionalGridViewDemoState();
 }
 
-class _TwoDimensionalGridViewDemoState extends State<TwoDimensionalGridViewDemo> {
-
+class _TwoDimensionalGridViewDemoState
+    extends State<TwoDimensionalGridViewDemo> {
   var diagonalDragBehavior = DiagonalDragBehavior.free;
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () => debugPrint(e),)
-        ).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () => debugPrint(e),
+                ))
+            .toList(),
       ),
       body: buildBody(),
     );
@@ -48,13 +47,13 @@ class _TwoDimensionalGridViewDemoState extends State<TwoDimensionalGridViewDemo>
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         NMenuAnchor(
-            values: DiagonalDragBehavior.values,
-            initialItem: diagonalDragBehavior,
-            onChanged: (val){
-              diagonalDragBehavior = val;
-              setState(() {});
-            },
-            cbName: (e) => "DiagonalDragBehavior.${e.name}",
+          values: DiagonalDragBehavior.values,
+          initialItem: diagonalDragBehavior,
+          onChanged: (val) {
+            diagonalDragBehavior = val;
+            setState(() {});
+          },
+          cbName: (e) => "DiagonalDragBehavior.${e.name}",
         ),
         Expanded(
           child: TwoDimensionalGridView(
@@ -69,10 +68,12 @@ class _TwoDimensionalGridViewDemoState extends State<TwoDimensionalGridViewDemo>
                 return Container(
                   width: 200,
                   height: 200,
-                  color:
-                      xyEven ? Colors.amber[50] : (xyOdd ? Colors.purple[50] : null),
+                  color: xyEven
+                      ? Colors.amber[50]
+                      : (xyOdd ? Colors.purple[50] : null),
                   child: Center(
-                    child: Text('Row ${vicinity.yIndex}: Column ${vicinity.xIndex}'),
+                    child: Text(
+                        'Row ${vicinity.yIndex}: Column ${vicinity.xIndex}'),
                   ),
                 );
               },
@@ -82,7 +83,6 @@ class _TwoDimensionalGridViewDemoState extends State<TwoDimensionalGridViewDemo>
       ],
     );
   }
-  
 }
 
 /// 二维 GridView
@@ -103,9 +103,9 @@ class TwoDimensionalGridView extends TwoDimensionalScrollView {
 
   @override
   Widget buildViewport(
-      BuildContext context,
-      ViewportOffset verticalOffset,
-      ViewportOffset horizontalOffset,
+    BuildContext context,
+    ViewportOffset verticalOffset,
+    ViewportOffset horizontalOffset,
   ) {
     return TwoDimensionalGridViewport(
       horizontalOffset: horizontalOffset,
@@ -150,9 +150,9 @@ class TwoDimensionalGridViewport extends TwoDimensionalViewport {
 
   @override
   void updateRenderObject(
-      BuildContext context,
-      RenderTwoDimensionalGridViewport renderObject,
-      ) {
+    BuildContext context,
+    RenderTwoDimensionalGridViewport renderObject,
+  ) {
     renderObject
       ..horizontalOffset = horizontalOffset
       ..horizontalAxisDirection = horizontalAxisDirection
@@ -185,7 +185,7 @@ class RenderTwoDimensionalGridViewport extends RenderTwoDimensionalViewport {
     final double viewportWidth = viewportDimension.width + cacheExtent;
     final double viewportHeight = viewportDimension.height + cacheExtent;
     final TwoDimensionalChildBuilderDelegate builderDelegate =
-    delegate as TwoDimensionalChildBuilderDelegate;
+        delegate as TwoDimensionalChildBuilderDelegate;
 
     final int maxRowIndex = builderDelegate.maxYIndex!;
     final int maxColumnIndex = builderDelegate.maxXIndex!;
@@ -206,7 +206,7 @@ class RenderTwoDimensionalGridViewport extends RenderTwoDimensionalViewport {
       double yLayoutOffset = (leadingRow * 200) - verticalOffset.pixels;
       for (int row = leadingRow; row <= trailingRow; row++) {
         final ChildVicinity vicinity =
-        ChildVicinity(xIndex: column, yIndex: row);
+            ChildVicinity(xIndex: column, yIndex: row);
         final RenderBox child = buildOrObtainChildFor(vicinity)!;
         child.layout(constraints.loosen());
 

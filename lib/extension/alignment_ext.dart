@@ -6,13 +6,11 @@
 //  Copyright © 2023/1/12 shang. All rights reserved.
 //
 
-
 import 'dart:math' as math;
 
 import 'package:flutter/cupertino.dart';
 
-
-extension AlignmentExt on Alignment{
+extension AlignmentExt on Alignment {
   /// 九个方位变量集合
   static const allCases = <Alignment>[
     Alignment.centerLeft,
@@ -35,8 +33,7 @@ extension AlignmentExt on Alignment{
     bool isGreed = true,
     bool isDiagonal = true,
   }) {
-    if(width == null || height == null
-        || width <= 0 || height <= 0) {
+    if (width == null || height == null || width <= 0 || height <= 0) {
       return null;
     }
 
@@ -44,17 +41,15 @@ extension AlignmentExt on Alignment{
     final min = math.min(width, height);
     var result = 0.5;
 
-    if([
+    if ([
       Alignment.center,
-    ].contains(this)){
-      result = isGreed == true ? max/min * 0.5 : 0.5;
-
+    ].contains(this)) {
+      result = isGreed == true ? max / min * 0.5 : 0.5;
     } else if ([
       Alignment.topCenter,
       Alignment.bottomCenter,
     ].contains(this)) {
-      result = isGreed == true ? max/min : 0.5;
-
+      result = isGreed == true ? max / min : 0.5;
     } else if ([
       Alignment.topLeft,
       Alignment.topRight,
@@ -64,16 +59,15 @@ extension AlignmentExt on Alignment{
       if (isDiagonal) {
         final tmp = math.sqrt(math.pow(max, 2) + math.pow(min, 2)).ceil();
         // result = isGreed == true ? tmp/min : max/min;
-        result = tmp/min;
+        result = tmp / min;
       } else {
-        result = isGreed == true ? max/min : 1;
+        result = isGreed == true ? max / min : 1;
       }
     } else if ([
       Alignment.centerLeft,
       Alignment.centerRight,
     ].contains(this)) {
-      result = isGreed == true ? 1 : max/min * 0.5;
-
+      result = isGreed == true ? 1 : max / min * 0.5;
     }
     return result;
   }

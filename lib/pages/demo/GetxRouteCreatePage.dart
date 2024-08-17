@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/n_textfield.dart';
@@ -11,7 +9,6 @@ import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:get/get.dart';
 
 class GetxRouteCreatePage extends StatefulWidget {
-
   GetxRouteCreatePage({
     super.key,
     this.arguments,
@@ -24,12 +21,13 @@ class GetxRouteCreatePage extends StatefulWidget {
 }
 
 class _GetxRouteCreatePageState extends State<GetxRouteCreatePage> {
-
-  bool get hideApp => Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
+  bool get hideApp =>
+      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
 
   final scrollController = ScrollController();
 
   Map<String, dynamic> arguments = Get.arguments ?? <String, dynamic>{};
+
   /// id
   late final id = arguments["id"];
 
@@ -86,16 +84,24 @@ static const String patientGroupPage = '/patientGroupPage';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: hideApp ? null : AppBar(
-        title: Text("$widget"),
-        actions: ['创建',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: onCreate,
-        ),
-        ).toList(),
-      ),
+      appBar: hideApp
+          ? null
+          : AppBar(
+              title: Text("$widget"),
+              actions: [
+                '创建',
+              ]
+                  .map(
+                    (e) => TextButton(
+                      child: Text(
+                        e,
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      onPressed: onCreate,
+                    ),
+                  )
+                  .toList(),
+            ),
       body: buildBody(),
     );
   }
@@ -114,13 +120,8 @@ static const String patientGroupPage = '/patientGroupPage';
                   controller: textEditingController,
                   minLines: 10,
                   maxLines: 10,
-                  onChanged: (val){
-
-                  },
-                  onSubmitted: (val){
-
-                  }
-              ),
+                  onChanged: (val) {},
+                  onSubmitted: (val) {}),
             ),
           ],
         ),
@@ -136,18 +137,17 @@ static const String patientGroupPage = '/patientGroupPage';
     }
 
     setState(() {});
-    final list = text.split("\n")
-        .where((e) {
-          var tmp = e.trim();
-          return tmp.isNotEmpty && tmp.contains("=");
-        })
-        .map((e) {
+    final list = text.split("\n").where((e) {
+      var tmp = e.trim();
+      return tmp.isNotEmpty && tmp.contains("=");
+    }).map((e) {
       final line = e.trim();
       final chars = ["const String", "="];
       final list = line.splitBySet(chars.toSet());
       final name = list[1].trim();
       // ddlog("name: $name");
-      final result = "GetPage(name: APPRouter.$name, page: () => const ${name.toCapitalize()}()),\n";
+      final result =
+          "GetPage(name: APPRouter.$name, page: () => const ${name.toCapitalize()}()),\n";
       ddlog("$result");
       return result;
     }).toList();
@@ -162,11 +162,13 @@ static const String patientGroupPage = '/patientGroupPage';
       final content = ceatePage(className: className);
 
       /// 生成本地文件
-      final file = await FileManager().createFile(fileName: fileName, content: content);
+      final file =
+          await FileManager().createFile(fileName: fileName, content: content);
       debugPrint("file: ${file.path}");
 
       showSnackBar(SnackBar(
-        content: NText("文件已生成(下载文件夹)",
+        content: NText(
+          "文件已生成(下载文件夹)",
           color: Colors.white,
           textAlign: TextAlign.center,
         ),
@@ -179,7 +181,9 @@ static const String patientGroupPage = '/patientGroupPage';
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            NText(e.toString(),),
+            NText(
+              e.toString(),
+            ),
           ],
         ),
       ));
@@ -198,5 +202,4 @@ class AppPages {
 }
 ''';
   }
-
 }

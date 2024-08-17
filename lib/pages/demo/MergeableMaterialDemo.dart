@@ -6,15 +6,10 @@
 //  Copyright © 3/13/23 shang. All rights reserved.
 //
 
-
 import 'package:flutter/material.dart';
 
 class MergeableMaterialDemo extends StatefulWidget {
-
-  const MergeableMaterialDemo({
-    Key? key, 
-    this.title
-  }) : super(key: key);
+  const MergeableMaterialDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -23,8 +18,6 @@ class MergeableMaterialDemo extends StatefulWidget {
 }
 
 class _MergeableMaterialDemoState extends State<MergeableMaterialDemo> {
-
-
   @override
   Widget build(BuildContext context) {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
@@ -32,12 +25,17 @@ class _MergeableMaterialDemoState extends State<MergeableMaterialDemo> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          onPressed: () => debugPrint("done"),
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-        )).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  onPressed: () => debugPrint("done"),
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ))
+            .toList(),
       ),
       body: _buildBody(),
     );
@@ -66,11 +64,8 @@ class _MergeableMaterialDemoState extends State<MergeableMaterialDemo> {
       ),
     );
   }
-  
-  onPressed() {
 
-  }
-
+  onPressed() {}
 
   final items = <MergeableMaterialItem>[];
   bool currIndex = false;
@@ -101,30 +96,29 @@ class _MergeableMaterialDemoState extends State<MergeableMaterialDemo> {
 
   _buildItem() {
     return MaterialSlice(
-      // key:  ValueKey<int>(currIndexNum),
+        // key:  ValueKey<int>(currIndexNum),
         key: UniqueKey(),
-        child:  Column(
-          children: <Widget>[
-            // header,
-            AnimatedCrossFade(
-              firstChild:  Container(
-                height: 20.0,
-                width: 20.0,
-                color: Colors.green,
-              ),
-              secondChild:  Container(
-                height: 20.0,
-                width: 20.0,
-                color: Colors.red,
-              ),
-              crossFadeState: currIndex ? CrossFadeState.showSecond : CrossFadeState.showFirst,
-              firstCurve: const Interval(0.0, 0.6, curve: Curves.fastOutSlowIn),
-              secondCurve: const Interval(0.4, 1.0, curve: Curves.fastOutSlowIn),
-              sizeCurve: Curves.fastOutSlowIn,
-              duration: Duration(microseconds: 6),
-            )
-          ]
-        )
-    );
+        child: Column(children: <Widget>[
+          // header,
+          AnimatedCrossFade(
+            firstChild: Container(
+              height: 20.0,
+              width: 20.0,
+              color: Colors.green,
+            ),
+            secondChild: Container(
+              height: 20.0,
+              width: 20.0,
+              color: Colors.red,
+            ),
+            crossFadeState: currIndex
+                ? CrossFadeState.showSecond
+                : CrossFadeState.showFirst,
+            firstCurve: const Interval(0.0, 0.6, curve: Curves.fastOutSlowIn),
+            secondCurve: const Interval(0.4, 1.0, curve: Curves.fastOutSlowIn),
+            sizeCurve: Curves.fastOutSlowIn,
+            duration: Duration(microseconds: 6),
+          )
+        ]));
   }
 }

@@ -96,10 +96,12 @@ class _GitHubLanguagePageState extends State<GitHubLanguagePage> {
   Widget getListItem(BuildContext context, Languages model,
       {double susHeight = 40}) {
     return ListTile(
-      title: Text(model.name,
+      title: Text(
+        model.name,
         style: TextStyle(
-        color: ColorExt.fromHex(model.color) ?? Colors.black87,
-      ),),
+          color: ColorExt.fromHex(model.color) ?? Colors.black87,
+        ),
+      ),
       onTap: () {
         LogUtil.v("onItemClick : $model");
         Utils.showSnackBar(context, "onItemClick : $model");

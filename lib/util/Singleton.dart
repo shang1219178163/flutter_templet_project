@@ -18,9 +18,7 @@ class Singleton {
   static Singleton get instance => _instance;
   // 方案3：静态方法获得实例变量
   static Singleton getInstance() => _instance;
-
 }
-
 
 class SharedInstance {
   // 私有构造函数
@@ -39,5 +37,4 @@ class SharedInstance {
   factory SharedInstance() => _sharedInstance();
 
   static SharedInstance? get instance => _sharedInstance();
-
 }

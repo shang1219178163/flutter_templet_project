@@ -6,12 +6,9 @@
 //  Copyright © 2024/3/28 shang. All rights reserved.
 //
 
-
 import 'package:flutter/cupertino.dart';
 
-
 class NResize extends StatelessWidget {
-
   NResize({
     super.key,
     this.width,
@@ -31,6 +28,7 @@ class NResize extends StatelessWidget {
   final AlignmentGeometry alignment;
 
   final Clip clipBehavior;
+
   /// 自定义 Switch
   final Widget? child;
 
@@ -47,5 +45,4 @@ class NResize extends StatelessWidget {
       ),
     );
   }
-
 }

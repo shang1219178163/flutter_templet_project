@@ -12,11 +12,7 @@ import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:tuple/tuple.dart';
 
 class PageViewDemoThree extends StatefulWidget {
-
-  PageViewDemoThree({
-    Key? key,
-    this.title
-  }) : super(key: key);
+  PageViewDemoThree({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -24,7 +20,8 @@ class PageViewDemoThree extends StatefulWidget {
   _PageViewDemoThreeState createState() => _PageViewDemoThreeState();
 }
 
-class _PageViewDemoThreeState extends State<PageViewDemoThree> with SingleTickerProviderStateMixin {
+class _PageViewDemoThreeState extends State<PageViewDemoThree>
+    with SingleTickerProviderStateMixin {
   late final scrollController = ScrollController();
 
   List<Tuple3<String, String, VoidCallback>> get items {
@@ -43,9 +40,12 @@ class _PageViewDemoThreeState extends State<PageViewDemoThree> with SingleTicker
 
   final indexVN = ValueNotifier(0);
 
-  late final _pageController = PageController(initialPage: indexVN.value, keepPage: true);
+  late final _pageController =
+      PageController(initialPage: indexVN.value, keepPage: true);
+
   ///每页行数
   int rowNum = 2;
+
   ///每页列数
   int numPerRow = 4;
 
@@ -70,17 +70,20 @@ class _PageViewDemoThreeState extends State<PageViewDemoThree> with SingleTicker
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.title ?? "$widget"),
-          actions: ['done',].map((e) => TextButton(
-            child: Text(e,
-              style: TextStyle(color: Colors.white),
-            ),
-            onPressed: () => debugPrint(e),)
-          ).toList(),
+          actions: [
+            'done',
+          ]
+              .map((e) => TextButton(
+                    child: Text(
+                      e,
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onPressed: () => debugPrint(e),
+                  ))
+              .toList(),
         ),
-        body: buildBody()
-    );
+        body: buildBody());
   }
-
 
   buildBody() {
     return Container(
@@ -106,7 +109,6 @@ class _PageViewDemoThreeState extends State<PageViewDemoThree> with SingleTicker
       imageAndTextSpacing: 10.h,
       onTap: () async {
         debugPrint("NPlaceholder");
-
       },
     );
   }
@@ -117,7 +119,6 @@ class _PageViewDemoThreeState extends State<PageViewDemoThree> with SingleTicker
     }
     _pageController.jumpToPage(page);
   }
-
 
   onTap() {
     debugPrint("onTap");

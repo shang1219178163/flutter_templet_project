@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
@@ -42,32 +40,38 @@ import 'package:flutter_templet_project/model/selected_model.dart';
 //   },
 // );
 
-
-
 /// 标签选择弹窗工具类
 class DialogTagSelect with DialogMixin {
-
   final _scrollController = ScrollController();
 
   /// 展示标签弹窗
   present<T>({
     required BuildContext context,
+
     /// 标题
     required String title,
+
     /// 标签列表
     required List<SelectModel<T>> tags,
+
     /// 临时选择的标签病列表
     required List<SelectModel<T>> selectTagsTmp,
+
     /// 选择的标签
     required List<SelectModel<T>> selectTags,
+
     /// 取消回调
     required VoidCallback onCancel,
+
     /// 确定回调
     required ValueChanged<List<SelectModel<T>>> onConfirm,
+
     /// 确定请求回调
     Future<bool> Function(List<SelectModel<T>>)? onRequestUpdate,
+
     /// 是否多选
     bool isMuti = true,
+
     /// 最多选择几个
     int? max,
     VoidCallback? onMax,
@@ -112,42 +116,46 @@ class DialogTagSelect with DialogMixin {
         return Wrap(
           spacing: 16.w,
           runSpacing: 12.w,
-          children: tags.map(
+          children: tags
+              .map(
                 (e) => ChoiceChip(
-              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-              side: e.isSelected == true
-                  ? const BorderSide(color: Colors.transparent)
-                  : const BorderSide(color: Color(0xffF3F3F3)),
-              label: Text(e.name ?? "-", maxLines: 2, softWrap: true),
-              labelStyle: TextStyle(
-                color: e.isSelected == true ? Colors.white : Color(0xff181818),
-              ),
-              // padding: EdgeInsets.only(left: 15, right: 15),
-              // selected: (e == selectTagModel),
-              selected: e.isSelected == true,
-              selectedColor: context.primaryColor,
-              backgroundColor: Colors.white,
-              onSelected: (bool selected) {
-                final chooseCount = tags.where((e) => e.isSelected == true).toList().length;
+                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  side: e.isSelected == true
+                      ? const BorderSide(color: Colors.transparent)
+                      : const BorderSide(color: Color(0xffF3F3F3)),
+                  label: Text(e.name ?? "-", maxLines: 2, softWrap: true),
+                  labelStyle: TextStyle(
+                    color:
+                        e.isSelected == true ? Colors.white : Color(0xff181818),
+                  ),
+                  // padding: EdgeInsets.only(left: 15, right: 15),
+                  // selected: (e == selectTagModel),
+                  selected: e.isSelected == true,
+                  selectedColor: context.primaryColor,
+                  backgroundColor: Colors.white,
+                  onSelected: (bool selected) {
+                    final chooseCount =
+                        tags.where((e) => e.isSelected == true).toList().length;
 
-                for (var element in tags) {
-                  if (element.id == e.id) {
-                    if (selected && max != null && chooseCount == max) {
-                      onMax?.call();
-                      return;
+                    for (var element in tags) {
+                      if (element.id == e.id) {
+                        if (selected && max != null && chooseCount == max) {
+                          onMax?.call();
+                          return;
+                        }
+                        element.isSelected = selected;
+                      } else {
+                        if (isMuti == false) {
+                          element.isSelected = false;
+                        }
+                      }
                     }
-                    element.isSelected = selected;
-                  } else {
-                    if (isMuti == false) {
-                      element.isSelected = false;
-                    }
-                  }
-                }
-                selectTagsTmp = tags.where((e) => e.isSelected == true).toList();
-                setState1(() {});
-              },
-            ),
-          )
+                    selectTagsTmp =
+                        tags.where((e) => e.isSelected == true).toList();
+                    setState1(() {});
+                  },
+                ),
+              )
               .toList(),
         );
       },
@@ -164,5 +172,3 @@ class DialogTagSelect with DialogMixin {
     return true;
   }
 }
-
-

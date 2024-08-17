@@ -20,7 +20,6 @@ class DBStudent {
   String? updatedDate;
   bool isSelected;
 
-
   static DBStudent? fromJson(Map<String, dynamic>? map) {
     if (map == null) {
       return null;
@@ -34,7 +33,7 @@ class DBStudent {
     );
   }
 
-  Map<String, dynamic>toJson() {
+  Map<String, dynamic> toJson() {
     return {
       "id": id,
       "name": name,
@@ -44,5 +43,4 @@ class DBStudent {
       "isSelected": isSelected,
     };
   }
-
 }

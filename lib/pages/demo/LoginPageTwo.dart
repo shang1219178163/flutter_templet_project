@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 
 class LoginPageTwo extends StatefulWidget {
-  const LoginPageTwo({ Key? key, this.title}) : super(key: key);
+  const LoginPageTwo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -69,8 +69,8 @@ class _LoginPageTwoState extends State<LoginPageTwo> {
                   hintText: "password",
                   prefixIcon: Icon(Icons.lock),
                   suffixIcon: IconButton(
-                    icon: Icon(
-                        pwdShow ? Icons.visibility_off : Icons.visibility),
+                    icon:
+                        Icon(pwdShow ? Icons.visibility_off : Icons.visibility),
                     onPressed: () {
                       setState(() {
                         pwdShow = !pwdShow;

@@ -4,22 +4,19 @@ import 'package:flutter_templet_project/basicWidget/n_box.dart';
 import 'package:flutter_templet_project/basicWidget/x_horizontal_scroll_widget.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/decoration_ext.dart';
+import 'package:flutter_templet_project/util/R.dart';
 import 'package:tuple/tuple.dart';
 
 class HomeSrollDemo extends StatefulWidget {
-
   final String? title;
 
-  const HomeSrollDemo({ Key? key, this.title}) : super(key: key);
-
+  const HomeSrollDemo({Key? key, this.title}) : super(key: key);
 
   @override
   _HomeSrollDemoState createState() => _HomeSrollDemoState();
 }
 
 class _HomeSrollDemoState extends State<HomeSrollDemo> {
-
-
   bool isList = true;
 
   @override
@@ -42,9 +39,7 @@ class _HomeSrollDemoState extends State<HomeSrollDemo> {
   }
 
   _buildBody() {
-    return buildDecoration(
-        child: buildHorizontalScrollWidget(showCount: 2.0)
-    );
+    return buildDecoration(child: buildHorizontalScrollWidget(showCount: 2.0));
   }
 
   _buildBodyList() {
@@ -55,23 +50,26 @@ class _HomeSrollDemoState extends State<HomeSrollDemo> {
         SizedBox(height: 16),
 
         buildDecoration(
-            child: HorizontalScrollWidget(items: items, showCount: 1,),
+          child: HorizontalScrollWidget(
+            items: items,
+            showCount: 1,
+          ),
         ),
         // buildSwiper(),
-        buildDecoration(
-            child: buildHorizontalScrollWidget(showCount: 2.0)
-        ),
+        buildDecoration(child: buildHorizontalScrollWidget(showCount: 2.0)),
         buildHorizontalScrollWidget(showCount: 3.0, color: Colors.green),
         buildHorizontalScrollWidget(showCount: 2.5),
         buildHorizontalScrollWidget(showCount: 1, isSwiper: true),
-
-      ].map((e) => SliverToBoxAdapter(
-        child: e,
-      )).toList(),
+      ]
+          .map((e) => SliverToBoxAdapter(
+                child: e,
+              ))
+          .toList(),
     );
   }
 
-  buildHorizontalScrollWidget({double showCount = 1.0, bool isSwiper = false, Color? color}) {
+  buildHorizontalScrollWidget(
+      {double showCount = 1.0, bool isSwiper = false, Color? color}) {
     var paddingRight = showCount == 2.5 ? 0.0 : 12.0;
     var paddingLeft = isSwiper ? 12.0 : 0.0;
 
@@ -90,7 +88,12 @@ class _HomeSrollDemoState extends State<HomeSrollDemo> {
           offset: Offset(0, 3), // changes position of shadow
         ),
       ],
-      padding: EdgeInsets.only(left: paddingLeft, top: 57, right: paddingRight, bottom: 16,),
+      padding: EdgeInsets.only(
+        left: paddingLeft,
+        top: 57,
+        right: paddingRight,
+        bottom: 16,
+      ),
       showCount: showCount,
       onTap: (Tuple4<String, String, String, bool> e) {
         debugPrint("onTap:$e");
@@ -117,10 +120,10 @@ class _HomeSrollDemoState extends State<HomeSrollDemo> {
         bottomLeft: 15,
         bottomRight: 15,
       ),
-      bgUrl: 'https://tenfei02.cfp.cn/creative/vcg/800/new/VCG21409037867.jpg',
+      bgUrl: R.image.urls[0],
       // bgChild: FadeInImage.assetNetwork(
       //   placeholder: 'assets/images/img_placeholder.png',
-      //   image: 'https://tenfei02.cfp.cn/creative/vcg/800/new/VCG21409037867.jpg',
+      //   image: 'R.image.urls[0]',
       //   fit: BoxFit.fill,
       //   width: 400,
       //   height: 400,
@@ -169,6 +172,4 @@ class _HomeSrollDemoState extends State<HomeSrollDemo> {
     //    false
     // ),
   ];
-
 }
-

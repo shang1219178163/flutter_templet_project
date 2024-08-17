@@ -1,5 +1,3 @@
-
-
 /// 苹果商店应用详情
 class AppstoreAppDetailRootModel {
   AppstoreAppDetailRootModel({
@@ -35,52 +33,51 @@ class AppstoreAppDetailRootModel {
 
 /// 苹果商店应用详情
 class AppstoreAppDetailModel {
-  AppstoreAppDetailModel({
-    this.supportedDevices,
-    // this.features,
-    this.isGameCenterEnabled,
-    // this.advisories,
-    this.screenshotUrls,
-    this.ipadScreenshotUrls,
-    this.appletvScreenshotUrls,
-    this.artworkUrl60,
-    this.artworkUrl512,
-    this.artworkUrl100,
-    this.artistViewUrl,
-    this.kind,
-    this.currentVersionReleaseDate,
-    this.minimumOsVersion,
-    this.releaseNotes,
-    this.artistId,
-    this.artistName,
-    this.genres,
-    this.price,
-    this.description,
-    this.genreIds,
-    this.isVppDeviceBasedLicensingEnabled,
-    this.bundleId,
-    this.trackId,
-    this.trackName,
-    this.primaryGenreName,
-    this.primaryGenreId,
-    this.releaseDate,
-    this.sellerName,
-    this.currency,
-    this.fileSizeBytes,
-    this.sellerUrl,
-    this.formattedPrice,
-    this.contentAdvisoryRating,
-    this.averageUserRatingForCurrentVersion,
-    this.userRatingCountForCurrentVersion,
-    this.averageUserRating,
-    this.trackViewUrl,
-    this.trackContentRating,
-    this.trackCensoredName,
-    this.languageCodesISO2A,
-    this.version,
-    this.wrapperType,
-    this.userRatingCount
-  });
+  AppstoreAppDetailModel(
+      {this.supportedDevices,
+      // this.features,
+      this.isGameCenterEnabled,
+      // this.advisories,
+      this.screenshotUrls,
+      this.ipadScreenshotUrls,
+      this.appletvScreenshotUrls,
+      this.artworkUrl60,
+      this.artworkUrl512,
+      this.artworkUrl100,
+      this.artistViewUrl,
+      this.kind,
+      this.currentVersionReleaseDate,
+      this.minimumOsVersion,
+      this.releaseNotes,
+      this.artistId,
+      this.artistName,
+      this.genres,
+      this.price,
+      this.description,
+      this.genreIds,
+      this.isVppDeviceBasedLicensingEnabled,
+      this.bundleId,
+      this.trackId,
+      this.trackName,
+      this.primaryGenreName,
+      this.primaryGenreId,
+      this.releaseDate,
+      this.sellerName,
+      this.currency,
+      this.fileSizeBytes,
+      this.sellerUrl,
+      this.formattedPrice,
+      this.contentAdvisoryRating,
+      this.averageUserRatingForCurrentVersion,
+      this.userRatingCountForCurrentVersion,
+      this.averageUserRating,
+      this.trackViewUrl,
+      this.trackContentRating,
+      this.trackCensoredName,
+      this.languageCodesISO2A,
+      this.version,
+      this.wrapperType,
+      this.userRatingCount});
 
   List<String>? supportedDevices;
   // List<Null>? features;
@@ -127,7 +124,6 @@ class AppstoreAppDetailModel {
   String? wrapperType;
   int? userRatingCount;
 
-
   AppstoreAppDetailModel.fromJson(Map<String, dynamic>? json) {
     if (json == null) {
       return;
@@ -149,7 +145,8 @@ class AppstoreAppDetailModel {
     // }
     screenshotUrls = List<String>.from(json['screenshotUrls'] ?? []);
     ipadScreenshotUrls = List<String>.from(json['ipadScreenshotUrls'] ?? []);
-    appletvScreenshotUrls = List<String>.from(json['appletvScreenshotUrls'] ?? []);
+    appletvScreenshotUrls =
+        List<String>.from(json['appletvScreenshotUrls'] ?? []);
     artworkUrl60 = json['artworkUrl60'];
     artworkUrl512 = json['artworkUrl512'];
     artworkUrl100 = json['artworkUrl100'];
@@ -177,7 +174,8 @@ class AppstoreAppDetailModel {
     sellerUrl = json['sellerUrl'];
     formattedPrice = json['formattedPrice'];
     contentAdvisoryRating = json['contentAdvisoryRating'];
-    averageUserRatingForCurrentVersion = json['averageUserRatingForCurrentVersion'];
+    averageUserRatingForCurrentVersion =
+        json['averageUserRatingForCurrentVersion'];
     userRatingCountForCurrentVersion = json['userRatingCountForCurrentVersion'];
     averageUserRating = json['averageUserRating'];
     trackViewUrl = json['trackViewUrl'];
@@ -230,7 +228,8 @@ class AppstoreAppDetailModel {
     data['sellerUrl'] = sellerUrl;
     data['formattedPrice'] = formattedPrice;
     data['contentAdvisoryRating'] = contentAdvisoryRating;
-    data['averageUserRatingForCurrentVersion'] = averageUserRatingForCurrentVersion;
+    data['averageUserRatingForCurrentVersion'] =
+        averageUserRatingForCurrentVersion;
     data['userRatingCountForCurrentVersion'] = userRatingCountForCurrentVersion;
     data['averageUserRating'] = averageUserRating;
     data['trackViewUrl'] = trackViewUrl;

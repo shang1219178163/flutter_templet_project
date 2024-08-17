@@ -9,10 +9,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
 class GetxStateDemo extends StatelessWidget {
   const GetxStateDemo({Key? key}) : super(key: key);
-
 
   @override
   Widget build(BuildContext context) {
@@ -20,43 +18,42 @@ class GetxStateDemo extends StatelessWidget {
     final counter = Get.put(CounterController());
 
     return Scaffold(
-      appBar: AppBar(title: const Text("GetX"),),
+      appBar: AppBar(
+        title: const Text("GetX"),
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Obx(() => Text(
-              "count的值为：${counter.count}",
-              style: const TextStyle(color: Colors.redAccent, fontSize: 20),
-            )),
-
+                  "count的值为：${counter.count}",
+                  style: const TextStyle(color: Colors.redAccent, fontSize: 20),
+                )),
             GetX<CounterController>(
               init: counter,
-              builder: (controller){
+              builder: (controller) {
                 return Text(
                   "count的值为：${controller.count}",
                   style: const TextStyle(color: Colors.redAccent, fontSize: 20),
                 );
               },
             ),
-
-            const SizedBox(height: 30,),
-            ElevatedButton( // 按钮点击count值++
-              onPressed: (){
+            const SizedBox(
+              height: 30,
+            ),
+            ElevatedButton(
+              // 按钮点击count值++
+              onPressed: () {
                 counter.increase();
               },
               child: const Text("点击count++"),
             ),
-
-
           ],
         ),
       ),
     );
   }
 }
-
-
 
 class CounterController extends GetxController {
   final count = 0.obs;

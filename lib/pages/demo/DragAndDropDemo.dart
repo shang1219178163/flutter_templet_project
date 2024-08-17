@@ -10,19 +10,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/drag_destination_view.dart';
 
 class DragAndDropDemo extends StatefulWidget {
-
   final String? title;
 
-  const DragAndDropDemo({ Key? key, this.title}) : super(key: key);
+  const DragAndDropDemo({Key? key, this.title}) : super(key: key);
 
-  
   @override
   _DragAndDropDemoState createState() => _DragAndDropDemoState();
 }
 
 class _DragAndDropDemoState extends State<DragAndDropDemo> {
-
-
   @override
   Widget build(BuildContext context) {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
@@ -33,10 +29,10 @@ class _DragAndDropDemoState extends State<DragAndDropDemo> {
         ),
         body: Container(
           // constraints: BoxConstraints(
-            // maxWidth: 120,
-            // maxHeight: 200,
-            // minWidth: 120,
-            // minHeight: 200,
+          // maxWidth: 120,
+          // maxHeight: 200,
+          // minWidth: 120,
+          // minHeight: 200,
           // ),
           // width: 120,
           // height: 200,
@@ -45,12 +41,6 @@ class _DragAndDropDemoState extends State<DragAndDropDemo> {
             widthFactor: 0.5,
             child: DragDestinationView(),
           ),
-        )
-    );
+        ));
   }
-
 }
-
-
-
-

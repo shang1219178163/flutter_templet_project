@@ -6,8 +6,6 @@
 //  Copyright © 4/6/23 shang. All rights reserved.
 //
 
-
-
 import 'package:flutter/cupertino.dart';
 
 class FadeRoute extends PageRoute {
@@ -41,22 +39,16 @@ class FadeRoute extends PageRoute {
 
   final WidgetBuilder builder;
 
+  @override
+  Widget buildPage(BuildContext context, Animation<double> animation,
+          Animation<double> secondaryAnimation) =>
+      builder(context);
 
   @override
-  Widget buildPage(
-      BuildContext context,
-      Animation<double> animation,
-      Animation<double> secondaryAnimation) => builder(context);
-
-  @override
-  Widget buildTransitions(
-      BuildContext context,
-      Animation<double> animation,
-      Animation<double> secondaryAnimation,
-      Widget child
-    ) {
+  Widget buildTransitions(BuildContext context, Animation<double> animation,
+      Animation<double> secondaryAnimation, Widget child) {
     //当前路由被激活，是打开新路由
-    if(!isActive) {
+    if (!isActive) {
       return builder(context);
     }
     return FadeTransition(

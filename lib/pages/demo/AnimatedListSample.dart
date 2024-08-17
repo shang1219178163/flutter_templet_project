@@ -1,4 +1,3 @@
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
@@ -15,7 +14,8 @@ class _AnimatedListSampleState extends State<AnimatedListSample> {
   final GlobalKey<AnimatedListState> _listKey = GlobalKey<AnimatedListState>();
   late ListModel<int> _list;
   int? _selectedItem = 0;
-  int _nextItem = 0; // The next item inserted when the user presses the '+' button.
+  int _nextItem =
+      0; // The next item inserted when the user presses the '+' button.
   ///
   @override
   void initState() {
@@ -60,7 +60,8 @@ class _AnimatedListSampleState extends State<AnimatedListSample> {
 
   ///
   // Used to build list items that haven't been removed.
-  Widget _buildItem(BuildContext context, int index, Animation<double> animation) {
+  Widget _buildItem(
+      BuildContext context, int index, Animation<double> animation) {
     if (index == 0) {
       return Container();
     }
@@ -80,7 +81,8 @@ class _AnimatedListSampleState extends State<AnimatedListSample> {
     );
   }
 
-  Widget _buildRemovedItem(int item, BuildContext context, Animation<double> animation) {
+  Widget _buildRemovedItem(
+      int item, BuildContext context, Animation<double> animation) {
     return CardItem(
       animation: animation,
       item: item,
@@ -111,55 +113,66 @@ class ListModel<E> {
     required this.listKey,
     required this.removedItemBuilder,
     Iterable<E>? initialItems,
-  }) : assert(listKey != null),
+  })  : assert(listKey != null),
         assert(removedItemBuilder != null),
         _items = List<E>.from(initialItems ?? <E>[]);
+
   ///
   final GlobalKey<AnimatedListState> listKey;
   final dynamic removedItemBuilder;
   final List<E> _items;
+
   ///
   AnimatedListState? get _animatedList => listKey.currentState;
+
   ///
   void insert(int index, E item) {
     _items.insert(index, item);
     _animatedList?.insertItem(index);
   }
+
   ///
   E removeAt(int index) {
     final removedItem = _items.removeAt(index);
     if (removedItem != null) {
-      _animatedList?.removeItem(index, (BuildContext context, Animation<double> animation) {
+      _animatedList?.removeItem(
+        index,
+        (BuildContext context, Animation<double> animation) {
           return removedItemBuilder(removedItem, context, animation);
         },
       );
     }
     return removedItem;
   }
+
   ///
   int get length => _items.length;
+
   ///
   E operator [](int index) => _items[index];
+
   ///
   int indexOf(E item) => _items.indexOf(item);
 }
 
 class CardItem extends StatelessWidget {
-  const CardItem({
-    Key? key,
-    required this.animation,
-    this.onTap,
-    required this.item,
-    this.selected = false
-  }) : assert(animation != null),
+  const CardItem(
+      {Key? key,
+      required this.animation,
+      this.onTap,
+      required this.item,
+      this.selected = false})
+      : assert(animation != null),
         assert(item != null && item >= 0),
         assert(selected != null),
         super(key: key);
+
   ///
   final Animation<double> animation;
   final VoidCallback? onTap;
   final int item;
   final bool selected;
+
   ///
   @override
   Widget build(BuildContext context) {

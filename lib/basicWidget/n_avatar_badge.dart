@@ -6,15 +6,13 @@
 //  Copyright © 2024/3/30 shang. All rights reserved.
 //
 
-
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 
 /// 带角标的头像组件
 class NAvatarBadge extends StatelessWidget {
-
   const NAvatarBadge({
-  	super.key,
+    super.key,
     required this.url,
     this.width = 60,
     this.height = 60,
@@ -30,18 +28,25 @@ class NAvatarBadge extends StatelessWidget {
 
   /// 头像宽
   final double width;
+
   /// 头像高
   final double height;
+
   /// 头像链接
   final String url;
+
   /// 头像圆角
   final BorderRadius borderRadius;
+
   /// 角标 尺寸
   final double badgeSize;
+
   /// 角标值
   final String badgeStr;
+
   /// 角标内边距
   final EdgeInsets badgePadding;
+
   /// 角标字体样式
   final TextStyle badgeTextStyle;
 
@@ -70,7 +75,7 @@ class NAvatarBadge extends StatelessWidget {
             // width: size,
             height: badgeSize,
             constraints: BoxConstraints(
-              minWidth: badgeSize + badgePadding.horizontal*2,
+              minWidth: badgeSize + badgePadding.horizontal * 2,
             ),
             padding: badgePadding,
             alignment: Alignment.center,
@@ -78,7 +83,8 @@ class NAvatarBadge extends StatelessWidget {
               color: Colors.red,
               shape: badgeStr.length <= 2 ? CircleBorder() : StadiumBorder(),
             ),
-            child: Text(badgeStr,
+            child: Text(
+              badgeStr,
               style: badgeTextStyle,
             ),
           ),

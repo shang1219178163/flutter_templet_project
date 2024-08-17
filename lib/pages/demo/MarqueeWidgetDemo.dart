@@ -5,12 +5,10 @@ import 'package:tuple/tuple.dart';
 
 import 'package:flutter_templet_project/basicWidget/marquee_widget.dart';
 
-
 // typedef onKeyCallback = void Function(BuildContext context, int index, GlobalKey key);
 
 class MarqueeWidgetDemo extends StatefulWidget {
-
-  const MarqueeWidgetDemo({ Key? key, this.title}) : super(key: key);
+  const MarqueeWidgetDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -52,12 +50,11 @@ class _MarqueeWidgetDemoState extends State<MarqueeWidgetDemo> {
     // ),
   ];
 
-  get itemWidgets => items.map((e) => Text("${items.indexOf(e)}_${e.item2}")).toList();
-
+  get itemWidgets =>
+      items.map((e) => Text("${items.indexOf(e)}_${e.item2}")).toList();
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
@@ -80,14 +77,16 @@ class _MarqueeWidgetDemoState extends State<MarqueeWidgetDemo> {
             ),
             child: MarqueeWidget(
               itemCount: itemWidgets.length,
-              itemBuilder: (BuildContext context, int index, BoxConstraints constraints) {
+              itemBuilder: (BuildContext context, int index,
+                  BoxConstraints constraints) {
                 return Container(
                   // color: Colors.green,
                   // child: itemWidgets[index],
                   child: Text("itemBuilder: $index"),
                 );
               },
-              separatorBuilder: (BuildContext context, int index, BoxConstraints constraints) {
+              separatorBuilder: (BuildContext context, int index,
+                  BoxConstraints constraints) {
                 return Container(
                   width: 100,
                   // decoration: BoxDecoration(
@@ -97,7 +96,8 @@ class _MarqueeWidgetDemoState extends State<MarqueeWidgetDemo> {
                   // child: Text("$index"),
                 );
               },
-              edgeBuilder: (BuildContext context, int index, BoxConstraints constraints) {
+              edgeBuilder: (BuildContext context, int index,
+                  BoxConstraints constraints) {
                 // print("MarqueeWidget edgeBuilder: $index ${index % 2 == 0}");
                 return Container(
                   width: constraints.maxWidth,

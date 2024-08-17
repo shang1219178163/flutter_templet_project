@@ -6,14 +6,12 @@
 //  Copyright © 2023/4/4 shang. All rights reserved.
 //
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/pages/demo/PageLifecycleObserverDemo.dart';
 
 class PageLifecycleFuncTest extends StatefulWidget {
-
-  PageLifecycleFuncTest({ Key? key, this.title}) : super(key: key);
+  PageLifecycleFuncTest({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -22,7 +20,6 @@ class PageLifecycleFuncTest extends StatefulWidget {
 }
 
 class _PageLifecycleFuncTestState extends State<PageLifecycleFuncTest> {
-
   final titleVN = ValueNotifier<String>("");
 
   @override
@@ -30,18 +27,22 @@ class _PageLifecycleFuncTestState extends State<PageLifecycleFuncTest> {
     super.initState();
   }
 
-   @override
+  @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: onPressed,)
-        ).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: onPressed,
+                ))
+            .toList(),
       ),
       body: _buildBody(),
     );
@@ -59,15 +60,20 @@ class _PageLifecycleFuncTestState extends State<PageLifecycleFuncTest> {
               // debugPrint("$value");
               return Container(
                 height: 300,
-                child: PageLifecycleObserverDemo(title: value,),
+                child: PageLifecycleObserverDemo(
+                  title: value,
+                ),
               );
-            }
-        ),
-      ].map((e) => SliverToBoxAdapter(child: e,)).toList(),
+            }),
+      ]
+          .map((e) => SliverToBoxAdapter(
+                child: e,
+              ))
+          .toList(),
     );
   }
-  
-  onPressed(){
+
+  onPressed() {
     if (titleVN.value.length > 20) {
       titleVN.value = "z_";
     } else {
@@ -75,5 +81,4 @@ class _PageLifecycleFuncTestState extends State<PageLifecycleFuncTest> {
     }
     titleVN.value += "_${titleVN.value.length}";
   }
-
 }

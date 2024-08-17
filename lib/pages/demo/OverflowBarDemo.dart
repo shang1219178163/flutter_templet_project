@@ -9,18 +9,15 @@
 import 'package:flutter/material.dart';
 
 class OverflowBarDemo extends StatefulWidget {
-
   final String? title;
 
-  const OverflowBarDemo({ Key? key, this.title}) : super(key: key);
+  const OverflowBarDemo({Key? key, this.title}) : super(key: key);
 
-  
   @override
   _OverflowBarDemoState createState() => _OverflowBarDemoState();
 }
 
 class _OverflowBarDemoState extends State<OverflowBarDemo> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +46,9 @@ class _OverflowBarDemoState extends State<OverflowBarDemo> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 SizedBox(height: 128, child: Placeholder()),
-                SizedBox(height: 5,),
+                SizedBox(
+                  height: 5,
+                ),
                 Align(
                   alignment: AlignmentDirectional.centerEnd,
                   child: OverflowBar(
@@ -58,7 +57,7 @@ class _OverflowBarDemoState extends State<OverflowBarDemo> {
                     children: <Widget>[
                       TextButton(
                         onPressed: () {},
-                          child: const Text('Cancel'),
+                        child: const Text('Cancel'),
                       ),
                       TextButton(
                         onPressed: () {},
@@ -78,8 +77,4 @@ class _OverflowBarDemoState extends State<OverflowBarDemo> {
       ),
     );
   }
-
-
 }
-
-

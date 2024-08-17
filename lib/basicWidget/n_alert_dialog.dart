@@ -9,7 +9,6 @@
 import 'package:flutter/material.dart';
 
 class NAlertDialog extends StatelessWidget {
-
   NAlertDialog({
     Key? key,
     this.header,
@@ -20,8 +19,9 @@ class NAlertDialog extends StatelessWidget {
     this.cancelButton,
     this.confirmButton,
     this.dividerColor,
-  }) : assert(header != null || content != null),
-        assert((actions != null || cancelButton != null || confirmButton != null)),
+  })  : assert(header != null || content != null),
+        assert(
+            (actions != null || cancelButton != null || confirmButton != null)),
         super(key: key);
 
   Widget? header;
@@ -29,7 +29,6 @@ class NAlertDialog extends StatelessWidget {
   Widget? content;
 
   Widget? footer;
-
 
   EdgeInsets margin;
 
@@ -40,7 +39,6 @@ class NAlertDialog extends StatelessWidget {
   Widget? confirmButton;
 
   Color? dividerColor;
-
 
   @override
   Widget build(BuildContext context) {
@@ -64,16 +62,28 @@ class NAlertDialog extends StatelessWidget {
           ),
           Row(
             mainAxisSize: MainAxisSize.min,
-            children: actions?.map((e) => Expanded(child: e,),).toList()
-                ?? [
-              if (cancelButton != null) Expanded(child: cancelButton!,),
-              Container(height: 55, child: VerticalDivider(color: dividerColor)),
-              if (confirmButton != null) Expanded(child: confirmButton!,),
-            ],
+            children: actions
+                    ?.map(
+                      (e) => Expanded(
+                        child: e,
+                      ),
+                    )
+                    .toList() ??
+                [
+                  if (cancelButton != null)
+                    Expanded(
+                      child: cancelButton!,
+                    ),
+                  Container(
+                      height: 55, child: VerticalDivider(color: dividerColor)),
+                  if (confirmButton != null)
+                    Expanded(
+                      child: confirmButton!,
+                    ),
+                ],
           ),
         ],
       ),
     );
   }
-
 }

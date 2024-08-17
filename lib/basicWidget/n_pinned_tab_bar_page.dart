@@ -43,14 +43,14 @@ class NPinnedTabBarPage extends StatefulWidget {
   final bool isScrollable;
   final EdgeInsets labelPadding;
 
-
   @override
   State<NPinnedTabBarPage> createState() => _NPinnedTabBarPageState();
 }
 
 class _NPinnedTabBarPageState extends State<NPinnedTabBarPage>
     with SingleTickerProviderStateMixin {
-  late final tabController = TabController(length: widget.tabItems.length, vsync: this);
+  late final tabController =
+      TabController(length: widget.tabItems.length, vsync: this);
 
   @override
   void dispose() {
@@ -75,8 +75,7 @@ class _NPinnedTabBarPageState extends State<NPinnedTabBarPage>
         oldWidget.labelColor == widget.labelColor ||
         oldWidget.tabAlignment == widget.tabAlignment ||
         oldWidget.isScrollable == widget.isScrollable ||
-        oldWidget.labelPadding == widget.labelPadding
-    ) {
+        oldWidget.labelPadding == widget.labelPadding) {
       setState(() {});
     }
   }
@@ -113,7 +112,6 @@ class _NPinnedTabBarPageState extends State<NPinnedTabBarPage>
       length: tabItems.length,
       child: NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-
           final top = mediaQuery.viewPadding.top + kToolbarHeight;
 
           return <Widget>[
@@ -125,7 +123,9 @@ class _NPinnedTabBarPageState extends State<NPinnedTabBarPage>
               actions: actions,
               flexibleSpace: FlexibleSpaceBar(
                 background: Container(
-                  padding: EdgeInsets.only(top: top,),
+                  padding: EdgeInsets.only(
+                    top: top,
+                  ),
                   // decoration: BoxDecoration(
                   //   color: Colors.green,
                   //   border: Border.all(color: Colors.blue),
@@ -137,7 +137,6 @@ class _NPinnedTabBarPageState extends State<NPinnedTabBarPage>
             NSliverPersistentHeaderBuilder(
               pinned: true,
               builder: (context, offset, overlapsContent) {
-
                 final tabBar = TabBar(
                   controller: tabController,
                   // labelColor: Colors.black87,
@@ -177,8 +176,7 @@ class _NPinnedTabBarPageState extends State<NPinnedTabBarPage>
         },
         body: TabBarView(
           controller: tabController,
-          children: tabItems.map((e){
-
+          children: tabItems.map((e) {
             return MediaQuery.removePadding(
               context: context,
               removeTop: true,

@@ -6,15 +6,12 @@
 //  Copyright © 7/16/21 shang. All rights reserved.
 //
 
-
 import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-
-
-extension ColorExt on Color{
+extension ColorExt on Color {
   /// 颜色字典
   static final colorsMap = <Color, String>{
     Colors.white: "white",
@@ -58,9 +55,7 @@ extension ColorExt on Color{
   ///随机颜色
   static Color get random {
     return Color.fromRGBO(
-        Random().nextInt(256),
-        Random().nextInt(256),
-        Random().nextInt(256), 1);
+        Random().nextInt(256), Random().nextInt(256), Random().nextInt(256), 1);
   }
 
   /// 十六进制转颜色
@@ -78,7 +73,7 @@ extension ColorExt on Color{
     }
     return Color(result).withOpacity(alpha);
   }
-  
+
   ///rgba 颜色字符串转 Color
   static Color? fromRGBA(String? val) {
     if (val == null || val == "") {
@@ -99,18 +94,23 @@ extension ColorExt on Color{
   }
 
   ///转渐进色
-  Gradient? toGradient() => LinearGradient(colors:[this, this,], stops: const [0.0, 1]);
+  Gradient? toGradient() => LinearGradient(colors: [
+        this,
+        this,
+      ], stops: const [
+        0.0,
+        1
+      ]);
 
   Color randomOpacity() {
-    return withOpacity(Random().nextInt(100)/100);
+    return withOpacity(Random().nextInt(100) / 100);
   }
-  
+
   /// 颜色名称描述
-  String get nameDes{
+  String get nameDes {
     if (colorsMap.keys.contains(this)) {
       return colorsMap[this] ?? "";
     }
     return toString();
   }
-
 }

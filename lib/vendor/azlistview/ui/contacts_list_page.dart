@@ -6,7 +6,6 @@ import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/vendor/azlistview/common/index.dart';
 
-
 class ContactListPage extends StatefulWidget {
   const ContactListPage({Key? key}) : super(key: key);
 

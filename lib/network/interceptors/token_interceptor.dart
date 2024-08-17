@@ -6,8 +6,6 @@
 //  Copyright © 2024/4/12 shang. All rights reserved.
 //
 
-
-
 import 'package:dio/dio.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_templet_project/cache/cache_service.dart';
@@ -20,7 +18,8 @@ class TokenInterceptor extends QueuedInterceptor {
   final Dio dio;
 
   @override
-  Future<void> onError(DioException err, ErrorInterceptorHandler handler) async {
+  Future<void> onError(
+      DioException err, ErrorInterceptorHandler handler) async {
     //令牌失效
     if (err.response?.statusCode == 403) {
       try {
@@ -36,7 +35,8 @@ class TokenInterceptor extends QueuedInterceptor {
         requestOptions.headers["token"] = CacheService().token;
         final opts = Options(method: requestOptions.method);
 
-        final response = await dio.request(requestOptions.path,
+        final response = await dio.request(
+          requestOptions.path,
           options: opts,
           cancelToken: requestOptions.cancelToken,
           onReceiveProgress: requestOptions.onReceiveProgress,

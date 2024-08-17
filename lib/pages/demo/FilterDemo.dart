@@ -13,13 +13,8 @@ import 'package:flutter_templet_project/basicWidget/n_filter.dart';
 import 'package:flutter_templet_project/basicWidget/n_slider.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 
-
 class FilterDemo extends StatefulWidget {
-
-  const FilterDemo({
-    Key? key, 
-    this.title
-  }) : super(key: key);
+  const FilterDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -28,64 +23,67 @@ class FilterDemo extends StatefulWidget {
 }
 
 class _FilterDemoState extends State<FilterDemo> {
-
-
   @override
   Widget build(BuildContext context) {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          onPressed: () => debugPrint(e),
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),)
-        ).toList(),
-      ),
-      body: Stack(
-        alignment: AlignmentDirectional.center,
-        children: [
-          Text("01" * 1299),
-          Positioned(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                  onPressed: (){
-                    debugPrint("ElevatedButton");
-                  },
-                  child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 6),
-                    child: Text("ImageFilter 显示在组件上边, \nBackdropFilter 显示在组件下边"),
+        appBar: AppBar(
+          title: Text(widget.title ?? "$widget"),
+          actions: [
+            'done',
+          ]
+              .map((e) => TextButton(
+                    onPressed: () => debugPrint(e),
+                    child: Text(
+                      e,
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ))
+              .toList(),
+        ),
+        body: Stack(
+          alignment: AlignmentDirectional.center,
+          children: [
+            Text("01" * 1299),
+            Positioned(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      debugPrint("ElevatedButton");
+                    },
+                    child: Container(
+                      padding: EdgeInsets.symmetric(vertical: 6),
+                      child:
+                          Text("ImageFilter 显示在组件上边, \nBackdropFilter 显示在组件下边"),
+                    ),
                   ),
-                ),
-                // buildImageFilter(),
-                // buildBackdropFilter(),
-                // buildCombin(),
-                NFilter(
-                  foregroundFilter: ui.ImageFilter.blur(
-                    sigmaX: 2,
-                    sigmaY: 2,
+                  // buildImageFilter(),
+                  // buildBackdropFilter(),
+                  // buildCombin(),
+                  NFilter(
+                    foregroundFilter: ui.ImageFilter.blur(
+                      sigmaX: 2,
+                      sigmaY: 2,
+                    ),
+                    filter: ui.ImageFilter.blur(
+                      sigmaX: 2,
+                      sigmaY: 2,
+                    ),
+                    child: Image(
+                      image: '404.png'.toAssetImage(),
+                      fit: BoxFit.cover,
+                      width: 200.0,
+                      height: 120.0,
+                    ),
                   ),
-                  filter: ui.ImageFilter.blur(
-                    sigmaX: 2,
-                    sigmaY: 2,
-                  ),
-                  child: Image(
-                    image: '404.png'.toAssetImage(),
-                    fit: BoxFit.cover,
-                    width: 200.0,
-                    height: 120.0,
-                  ),
-                ),
-              ],
-            ),
-          )
-        ],
-      )
-    );
+                ],
+              ),
+            )
+          ],
+        ));
   }
 
   Widget buildImageFilter() {
@@ -138,15 +136,17 @@ class _FilterDemoState extends State<FilterDemo> {
       clipper: clipper,
       clipBehavior: clipBehavior,
       child: BackdropFilter(
-        filter: filter ?? ui.ImageFilter.blur(
-          sigmaX: 0,
-          sigmaY: 0,
-        ),
+        filter: filter ??
+            ui.ImageFilter.blur(
+              sigmaX: 0,
+              sigmaY: 0,
+            ),
         child: ImageFiltered(
-          imageFilter: foregroundFilter ?? ui.ImageFilter.blur(
-            sigmaX: 0,
-            sigmaY: 0,
-          ),
+          imageFilter: foregroundFilter ??
+              ui.ImageFilter.blur(
+                sigmaX: 0,
+                sigmaY: 0,
+              ),
           child: child,
         ),
       ),
@@ -179,5 +179,3 @@ class _FilterDemoState extends State<FilterDemo> {
     );
   }
 }
-
-

@@ -56,9 +56,7 @@ class SliverBaseDemo extends StatelessWidget {
               child: Center(
                 child: Text(
                   '设置padding',
-                  style: TextStyle(
-                      color: Colors.white
-                  ),
+                  style: TextStyle(color: Colors.white),
                 ),
               ),
             ),
@@ -67,5 +65,4 @@ class SliverBaseDemo extends StatelessWidget {
       ],
     );
   }
-
 }

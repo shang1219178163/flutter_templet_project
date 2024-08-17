@@ -9,18 +9,17 @@
 import 'package:flutter/material.dart';
 
 class ValueListenableBuilderDemo extends StatefulWidget {
-
   final String? title;
 
-  const ValueListenableBuilderDemo({ Key? key, this.title}) : super(key: key);
+  const ValueListenableBuilderDemo({Key? key, this.title}) : super(key: key);
 
-  
   @override
-  _ValueListenableBuilderDemoState createState() => _ValueListenableBuilderDemoState();
+  _ValueListenableBuilderDemoState createState() =>
+      _ValueListenableBuilderDemoState();
 }
 
-class _ValueListenableBuilderDemoState extends State<ValueListenableBuilderDemo> {
-
+class _ValueListenableBuilderDemoState
+    extends State<ValueListenableBuilderDemo> {
   final _counter = ValueNotifier<int>(0);
   final netState = ValueNotifier<MyResult>(MyResult.mobile);
 
@@ -29,9 +28,7 @@ class _ValueListenableBuilderDemoState extends State<ValueListenableBuilderDemo>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          title: Text(widget.title ?? "$widget")
-      ),
+      appBar: AppBar(title: Text(widget.title ?? "$widget")),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -52,14 +49,16 @@ class _ValueListenableBuilderDemoState extends State<ValueListenableBuilderDemo>
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children:MyResult.values.map((e) => FloatingActionButton.extended(
-                onPressed: () => netState.value = e,
-                label: Text("$e".split(".")[1]),
-              )).toList(),
+              children: MyResult.values
+                  .map((e) => FloatingActionButton.extended(
+                        onPressed: () => netState.value = e,
+                        label: Text("$e".split(".")[1]),
+                      ))
+                  .toList(),
             ),
             ValueListenableBuilder<MyResult>(
               valueListenable: netState,
-              builder: (context, value,  child) {
+              builder: (context, value, child) {
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
@@ -80,7 +79,6 @@ class _ValueListenableBuilderDemoState extends State<ValueListenableBuilderDemo>
     );
   }
 }
-
 
 enum MyResult {
   /// WiFi: Device connected via Wi-Fi

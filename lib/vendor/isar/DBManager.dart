@@ -6,9 +6,6 @@
 //  Copyright © 2024/2/24 shang. All rights reserved.
 //
 
-
-
-
 import 'package:flutter_templet_project/vendor/isar/model/db_order.dart';
 import 'package:flutter_templet_project/vendor/isar/model/db_student.dart';
 import 'package:flutter_templet_project/vendor/isar/model/db_todo.dart';
@@ -32,7 +29,9 @@ class DBManager {
     ]);
   }
 
-  Future<Isar> openDB({required List<CollectionSchema<dynamic>> schemas,}) async {
+  Future<Isar> openDB({
+    required List<CollectionSchema<dynamic>> schemas,
+  }) async {
     final dir = await getApplicationDocumentsDirectory();
     final result = await Isar.open(
       schemas,
@@ -41,5 +40,4 @@ class DBManager {
     );
     return result;
   }
-
 }

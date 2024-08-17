@@ -13,20 +13,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/model/git_repo_model.dart';
 import 'package:flutter_templet_project/model/user_model.dart';
 
-
 class FutureBuilderDemo extends StatefulWidget {
-
   final String? title;
 
-  const FutureBuilderDemo({ Key? key, this.title}) : super(key: key);
+  const FutureBuilderDemo({Key? key, this.title}) : super(key: key);
 
-  
   @override
   _FutureBuilderDemoState createState() => _FutureBuilderDemoState();
 }
 
 class _FutureBuilderDemoState extends State<FutureBuilderDemo> {
-  
   final scrollController = ScrollController();
 
   final _dio = Dio();
@@ -48,12 +44,17 @@ class _FutureBuilderDemoState extends State<FutureBuilderDemo> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          onPressed: onPressed,
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),)
-        ).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  onPressed: onPressed,
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ))
+            .toList(),
       ),
       body: buildBody(),
     );
@@ -74,7 +75,9 @@ class _FutureBuilderDemoState extends State<FutureBuilderDemo> {
             // return Text("Contents: ${snapshot.data}");
 
             final response = snapshot.data;
-            var items = (response.data ?? []).map((e) => GitRepoModel.fromJson(e)).toList();
+            var items = (response.data ?? [])
+                .map((e) => GitRepoModel.fromJson(e))
+                .toList();
             final itemsNew = List<GitRepoModel>.from(items);
             return buildList(list: itemsNew);
           } else {
@@ -86,8 +89,7 @@ class _FutureBuilderDemoState extends State<FutureBuilderDemo> {
     );
   }
 
-  buildList({required List<GitRepoModel> list, ScrollController? controller }) {
-
+  buildList({required List<GitRepoModel> list, ScrollController? controller}) {
     controller ??= ScrollController();
     return RefreshIndicator(
       onRefresh: () {
@@ -99,7 +101,7 @@ class _FutureBuilderDemoState extends State<FutureBuilderDemo> {
         child: ListView.separated(
           controller: controller,
           itemCount: list.length,
-          itemBuilder: (context, index){
+          itemBuilder: (context, index) {
             final model = list[index];
 
             return ListTile(
@@ -107,8 +109,10 @@ class _FutureBuilderDemoState extends State<FutureBuilderDemo> {
               subtitle: Text(model.url ?? ""),
             );
           },
-          separatorBuilder: (context, index){
-            return Divider(height: 1,);
+          separatorBuilder: (context, index) {
+            return Divider(
+              height: 1,
+            );
           },
         ),
       ),
@@ -120,7 +124,9 @@ class _FutureBuilderDemoState extends State<FutureBuilderDemo> {
     var url = "https://api.github.com/orgs/flutterchina/repos";
     url = "https://api.github.com/users/shang1219178163/repos";
     // url = "https://jsonplaceholder.typicode.com/users";
-    final response = await _dio.get(url,);
+    final response = await _dio.get(
+      url,
+    );
     // var items = (response.data ?? []).map((e) => GitRepoModel.fromJson(e)).toList();
     // debugPrint("users: ${items.first.runtimeType}");
     //
@@ -135,8 +141,11 @@ class _FutureBuilderDemoState extends State<FutureBuilderDemo> {
     var url = "https://api.github.com/orgs/flutterchina/repos";
     url = "https://api.github.com/users/shang1219178163/repos";
     // url = "https://jsonplaceholder.typicode.com/users";
-    final response = await _dio.get<List<dynamic>>(url,);
-    var items = (response.data ?? []).map((e) => GitRepoModel.fromJson(e)).toList();
+    final response = await _dio.get<List<dynamic>>(
+      url,
+    );
+    var items =
+        (response.data ?? []).map((e) => GitRepoModel.fromJson(e)).toList();
     debugPrint("users: ${items.first.runtimeType}");
 
     dataList.value = items;
@@ -145,7 +154,9 @@ class _FutureBuilderDemoState extends State<FutureBuilderDemo> {
 
   testUrl() async {
     var url = "https://api.github.com/orgs/flutterchina/repos";
-    final response = await _dio.get<List<dynamic>>(url,);
+    final response = await _dio.get<List<dynamic>>(
+      url,
+    );
     final jsonStr = jsonEncode(response);
     debugPrint("${jsonStr}");
     final list = jsonDecode(jsonStr);

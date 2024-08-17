@@ -9,28 +9,25 @@
 import 'package:flutter/material.dart';
 
 class PositionedDirectionalDemo extends StatefulWidget {
-
   final String? title;
 
-  const PositionedDirectionalDemo({ Key? key, this.title}) : super(key: key);
+  const PositionedDirectionalDemo({Key? key, this.title}) : super(key: key);
 
-  
   @override
-  _PositionedDirectionalDemoState createState() => _PositionedDirectionalDemoState();
+  _PositionedDirectionalDemoState createState() =>
+      _PositionedDirectionalDemoState();
 }
 
 class _PositionedDirectionalDemoState extends State<PositionedDirectionalDemo> {
-
-
   @override
   Widget build(BuildContext context) {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
 
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title ?? "$widget"),
-        ),
-        body: _buildBody(),
+      appBar: AppBar(
+        title: Text(widget.title ?? "$widget"),
+      ),
+      body: _buildBody(),
     );
   }
 
@@ -51,6 +48,3 @@ class _PositionedDirectionalDemoState extends State<PositionedDirectionalDemo> {
     );
   }
 }
-
-
-

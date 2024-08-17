@@ -3,11 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 
 class OverlayDemoOne extends StatefulWidget {
-
-  OverlayDemoOne({
-    super.key, 
-    this.title
-  });
+  OverlayDemoOne({super.key, this.title});
 
   final String? title;
 
@@ -16,12 +12,11 @@ class OverlayDemoOne extends StatefulWidget {
 }
 
 class _OverlayDemoOneState extends State<OverlayDemoOne> {
-
   final _scrollController = ScrollController();
 
   @override
   void dispose() {
-    overlayEntry?.remove();//移除
+    overlayEntry?.remove(); //移除
     overlayEntry = null;
     super.dispose();
   }
@@ -31,12 +26,17 @@ class _OverlayDemoOneState extends State<OverlayDemoOne> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () => debugPrint(e),)
-        ).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () => debugPrint(e),
+                ))
+            .toList(),
       ),
       body: buildBody(),
     );
@@ -51,7 +51,7 @@ class _OverlayDemoOneState extends State<OverlayDemoOne> {
           children: [
             Text("$widget"),
             OutlinedButton(
-              onPressed: (){
+              onPressed: () {
                 clickShow();
               },
               child: Text("show"),
@@ -68,8 +68,7 @@ class _OverlayDemoOneState extends State<OverlayDemoOne> {
 
   double get screenWidth => context.screenSize.width;
 
-
-  clickShow(){
+  clickShow() {
     if (overlayEntry != null) {
       return;
     }
@@ -127,7 +126,4 @@ class _OverlayDemoOneState extends State<OverlayDemoOne> {
       height: overlayWidth,
     );
   }
-
-
-
 }

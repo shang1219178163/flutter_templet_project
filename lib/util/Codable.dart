@@ -1,6 +1,3 @@
-
-
-
 abstract class Codable {
   // factory Codable(Map<String, dynamic>? json) {
   //   throw UnimplementedError();
@@ -19,10 +16,11 @@ abstract class Codable {
   }
 }
 
-
-class XYZModel implements Codable{
-
-  XYZModel({this.id, this.name,});
+class XYZModel implements Codable {
+  XYZModel({
+    this.id,
+    this.name,
+  });
   String? id;
   String? name;
 
@@ -40,6 +38,4 @@ class XYZModel implements Codable{
     // TODO: implement toJson
     throw UnimplementedError();
   }
-
-
 }

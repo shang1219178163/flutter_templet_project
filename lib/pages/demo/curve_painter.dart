@@ -1,5 +1,3 @@
-
-
 //
 //  CirclePainter.dart
 //  flutter_templet_project
@@ -7,7 +5,6 @@
 //  Created by shang on 12/14/21 11:04 AM.
 //  Copyright © 12/14/21 shang. All rights reserved.
 //
-
 
 import 'dart:math';
 
@@ -44,9 +41,8 @@ class CurvePainter extends CustomPainter {
 
     var path = Path();
     path.moveTo(startPoint.dx, startPoint.dy);
-    path.cubicTo(controlPoint1.dx, controlPoint1.dy,
-        controlPoint2.dx, controlPoint2.dy,
-        endPoint.dx, endPoint.dy);
+    path.cubicTo(controlPoint1.dx, controlPoint1.dy, controlPoint2.dx,
+        controlPoint2.dy, endPoint.dx, endPoint.dy);
 
     // path.addRRect(RRect.fromLTRBXY(
     //   0, 0, size.width, size.height, radius, radius,
@@ -54,6 +50,3 @@ class CurvePainter extends CustomPainter {
     canvas.drawPath(path, paint);
   }
 }
-
-
-

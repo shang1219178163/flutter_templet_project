@@ -6,10 +6,9 @@
 //  Copyright © 1/19/23 shang. All rights reserved.
 //
 
-
 import 'package:flutter/material.dart';
 
-extension FloatingActionButtonLocationExt on FloatingActionButtonLocation{
+extension FloatingActionButtonLocationExt on FloatingActionButtonLocation {
   /// 枚举集合
   static const allCases = <FloatingActionButtonLocation>[
     FloatingActionButtonLocation.endFloat,

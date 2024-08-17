@@ -26,7 +26,8 @@ class CartModel extends ChangeNotifier {
     if (_items.isEmpty) {
       return 0;
     }
-    return _items.map((e) => e.pirce)
+    return _items
+        .map((e) => e.pirce)
         .reduce((value, e) => value + e)
         .roundToDouble();
   }
@@ -67,10 +68,8 @@ class CartModel extends ChangeNotifier {
   }
 }
 
-
 /// ValueNotifier<List<OrderModel>>(替代品 ValueNotifierList)
 class ValueNotifierOrderModels extends ValueNotifier<List<OrderModel>> {
-
   ValueNotifierOrderModels() : super(<OrderModel>[]); // 构造函数要提供value的初始值
 
   // double get totalPrice => value.map((e) => e.pirce).reduce((value, element) => value + element); // 当前购物车总价的getter(假设每件都是42块)
@@ -78,7 +77,10 @@ class ValueNotifierOrderModels extends ValueNotifier<List<OrderModel>> {
     if (value.isEmpty) {
       return 0;
     }
-    return value.map((e) => e.pirce).reduce((value, element) => value + element).roundToDouble();
+    return value
+        .map((e) => e.pirce)
+        .reduce((value, element) => value + element)
+        .roundToDouble();
   }
 
   void add(OrderModel item) {
@@ -122,7 +124,6 @@ class ValueNotifierOrderModels extends ValueNotifier<List<OrderModel>> {
 
 /// 泛型数组监听
 class ValueNotifierList<T> extends ValueNotifier<List<T>> {
-
   ValueNotifierList(List<T> initValue) : super(initValue);
 
   void add(T item) {
@@ -152,6 +153,7 @@ class ValueNotifierList<T> extends ValueNotifier<List<T>> {
     value.clear();
     _copyValue();
   }
+
   /// 进行深copy(原理与iOS的kvo原理类似.list添加元素,未改变地址,所以无法触发监听,利用深copy 重新赋值,就触发监听了)
   void _copyValue() {
     value = [...value];
@@ -167,13 +169,12 @@ class ValueNotifierList<T> extends ValueNotifier<List<T>> {
 
 /// ValueNotifier<int>
 class ValueNotifierNum extends ValueNotifier<num> {
-
-  ValueNotifierNum({
-    this.initValue = 0,
-    this.minValue = 0,
-    this.maxValue = 100000,
-    this.block
-  }) : super(initValue);
+  ValueNotifierNum(
+      {this.initValue = 0,
+      this.minValue = 0,
+      this.maxValue = 100000,
+      this.block})
+      : super(initValue);
 
   num initValue;
 
@@ -203,20 +204,21 @@ class ValueNotifierNum extends ValueNotifier<num> {
 }
 
 extension ValueNotierExtension<T> on T {
-
   /// ValueNotifier<T>
   ValueNotifier<T> get notifier => ValueNotifier<T>(this);
 }
 
-
 /// 购物车重新定义
-class CartModelNew extends ValueNotifierList<OrderModel>{
+class CartModelNew extends ValueNotifierList<OrderModel> {
   CartModelNew(List<OrderModel> value) : super(value);
 
   double get totalPrice {
     if (value.isEmpty) {
       return 0;
     }
-    return value.map((e) => e.pirce).reduce((value, element) => value + element).roundToDouble();
+    return value
+        .map((e) => e.pirce)
+        .reduce((value, element) => value + element)
+        .roundToDouble();
   }
 }

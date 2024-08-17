@@ -1,15 +1,8 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 
-
 class SystemCurvesPage extends StatefulWidget {
-
-  SystemCurvesPage({
-    Key? key, 
-    this.title
-  }) : super(key: key);
+  SystemCurvesPage({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -18,9 +11,7 @@ class SystemCurvesPage extends StatefulWidget {
 }
 
 class _SystemCurvesPageState extends State<SystemCurvesPage> {
-
   final _scollController = ScrollController();
-
 
   final items = <String>[
     "curve_bounce_in.gif",
@@ -72,12 +63,17 @@ class _SystemCurvesPageState extends State<SystemCurvesPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () => debugPrint(e),)
-        ).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () => debugPrint(e),
+                ))
+            .toList(),
       ),
       // body: buildBody(),
       body: buildBody(),
@@ -92,39 +88,35 @@ class _SystemCurvesPageState extends State<SystemCurvesPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            LayoutBuilder(
-              builder: (context, constraints) {
+            LayoutBuilder(builder: (context, constraints) {
+              final itemWidth = 470.0;
 
-                final itemWidth = 470.0;
+              // final direction = constraints.maxWidth > 480*2 ? Axis.horizontal : Axis.vertical;
 
-                // final direction = constraints.maxWidth > 480*2 ? Axis.horizontal : Axis.vertical;
-
-                return Wrap(
-                  runSpacing: 8,
-                  alignment: WrapAlignment.center,
-                  children: items.map((e) {
-
-                    return Container(
-                      width: itemWidth,
-                      decoration: BoxDecoration(
-                        color: Colors.transparent,
-                        // border: Border.all(color: Colors.blue),
-                        borderRadius: BorderRadius.all(Radius.circular(0)),
-                      ),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Image.asset(
-                              e.toPath("assets/images/curve"),
-                            ),
+              return Wrap(
+                runSpacing: 8,
+                alignment: WrapAlignment.center,
+                children: items.map((e) {
+                  return Container(
+                    width: itemWidth,
+                    decoration: BoxDecoration(
+                      color: Colors.transparent,
+                      // border: Border.all(color: Colors.blue),
+                      borderRadius: BorderRadius.all(Radius.circular(0)),
+                    ),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Image.asset(
+                            e.toPath("assets/images/curve"),
                           ),
-                        ],
-                      ),
-                    );
-                  }).toList(),
-                );
-              }
-            ),
+                        ),
+                      ],
+                    ),
+                  );
+                }).toList(),
+              );
+            }),
           ],
         ),
       ),
@@ -190,5 +182,4 @@ class _SystemCurvesPageState extends State<SystemCurvesPage> {
   //     }).toList(),
   //   );
   // }
-
 }

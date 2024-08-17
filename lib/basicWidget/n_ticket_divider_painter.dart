@@ -1,10 +1,6 @@
-
-
 import 'package:flutter/cupertino.dart';
 
-
 class NTicketDividerPainter extends CustomPainter {
-
   NTicketDividerPainter({
     required this.bgColor,
     required this.borderColor,
@@ -17,23 +13,27 @@ class NTicketDividerPainter extends CustomPainter {
 
   /// 边框颜色
   final Color borderColor;
+
   /// 边框线条宽度
   final double borderStrokeWidth;
 
   /// 背景颜色
   final Color bgColor;
+
   /// 内切圆半径
   final double cutoutRadius;
+
   /// 虚线高亮宽度
   final double dottedWidth;
+
   /// 虚线高亮间隔
   final double dottedSpace;
+
   /// 虚线线条宽度
   final double dottedStrokeWidth;
 
   /// 内切圆直径
   get _cutoutDiameter => cutoutRadius * 2;
-
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -59,8 +59,7 @@ class NTicketDividerPainter extends CustomPainter {
       ..strokeWidth = borderStrokeWidth
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round
-      ..color = borderColor
-    ;
+      ..color = borderColor;
 
     final paintDottedLine = Paint()
       ..color = borderColor.withOpacity(0.5)
@@ -68,7 +67,7 @@ class NTicketDividerPainter extends CustomPainter {
 
     var path = Path();
 
-    path.moveTo(maxWidth, rightCutoutStartY);//
+    path.moveTo(maxWidth, rightCutoutStartY); //
     _drawCutout(path, maxWidth, rightCutoutStartY + _cutoutDiameter);
 
     path.moveTo(0, leftCutoutStartY);

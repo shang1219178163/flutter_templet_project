@@ -13,7 +13,6 @@ import 'package:tuple/tuple.dart';
 
 // ignore: must_be_immutable (水平菜单单选器)
 class NListViewSegmentControl extends StatefulWidget {
-
   NListViewSegmentControl({
     Key? key,
     required this.items,
@@ -27,9 +26,10 @@ class NListViewSegmentControl extends StatefulWidget {
     this.itemMargin = const EdgeInsets.symmetric(horizontal: 5),
     this.itemRadius = 15,
     this.itemTextStyle = const TextStyle(fontSize: 14, color: Colors.black),
-    this.itemSelectedTextStyle = const TextStyle(fontSize: 14, color: Colors.black),
+    this.itemSelectedTextStyle =
+        const TextStyle(fontSize: 14, color: Colors.black),
     this.itemBgColor = const Color(0xFFF5F5F5),
-    this.itemSelectedBgColor =  Colors.orange,
+    this.itemSelectedBgColor = Colors.orange,
     required this.onValueChanged,
   }) : super(key: key);
 
@@ -59,11 +59,11 @@ class NListViewSegmentControl extends StatefulWidget {
   void Function(int value) onValueChanged;
 
   @override
-  _NListViewSegmentControlState createState() => _NListViewSegmentControlState();
+  _NListViewSegmentControlState createState() =>
+      _NListViewSegmentControlState();
 }
 
 class _NListViewSegmentControlState extends State<NListViewSegmentControl> {
-
   late final ScrollController _scrollController = ScrollController();
 
   @override
@@ -79,70 +79,78 @@ class _NListViewSegmentControlState extends State<NListViewSegmentControl> {
       margin: widget.margin,
       height: widget.height,
       child: ListView.builder(
-        shrinkWrap: true,
-        physics: ClampingScrollPhysics(),
-        itemCount: widget.items.length,
-        controller: _scrollController,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (ctx, index){
-          return GestureDetector(
-            onTap: (){
-              ddlog(index);
-              setState(() {
-                widget.selectedIndex = index;
-              });
-              widget.onValueChanged(index);
+          shrinkWrap: true,
+          physics: ClampingScrollPhysics(),
+          itemCount: widget.items.length,
+          controller: _scrollController,
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (ctx, index) {
+            return GestureDetector(
+              onTap: () {
+                ddlog(index);
+                setState(() {
+                  widget.selectedIndex = index;
+                });
+                widget.onValueChanged(index);
 
-              final screenSize = MediaQuery.of(context).size;
-              if (_scrollController.position.maxScrollExtent <= 0) {
-                // ddlog([_scrollController.position.maxScrollExtent, screenSize.width]);
-                return;
-              }
-              ///选中item滚动中间
-              if (widget.itemWidths != null) {
-                // final offsetX = widget.itemWidths!.take(widget.selectedIndex).reduce((value, element) => value + element);
-                // _scrollController.animateTo(offsetX, duration: new Duration(seconds: 1), curve: Curves.ease);
-                return;
-              }
-              final offsetX = widget.selectedIndex*(widget.itemWidth + widget.itemPadding.horizontal) - widget.itemWidth;
-              _scrollController.animateTo(offsetX, duration: Duration(seconds: 1), curve: Curves.ease);
-            },
-            child: Container(
-              width: widget.itemWidths != null ? widget.itemWidths![index] : widget.itemWidth,
-              height: widget.height,
-              margin: widget.itemMargin,
-              padding: widget.itemPadding,
-              alignment: Alignment.center,
-              // color: ColorExt.random(),
-              decoration: BoxDecoration(
-                color: widget.selectedIndex == index ? widget.itemSelectedBgColor : widget.itemBgColor,
-                borderRadius: BorderRadius.circular(widget.itemRadius),
+                final screenSize = MediaQuery.of(context).size;
+                if (_scrollController.position.maxScrollExtent <= 0) {
+                  // ddlog([_scrollController.position.maxScrollExtent, screenSize.width]);
+                  return;
+                }
+
+                ///选中item滚动中间
+                if (widget.itemWidths != null) {
+                  // final offsetX = widget.itemWidths!.take(widget.selectedIndex).reduce((value, element) => value + element);
+                  // _scrollController.animateTo(offsetX, duration: new Duration(seconds: 1), curve: Curves.ease);
+                  return;
+                }
+                final offsetX = widget.selectedIndex *
+                        (widget.itemWidth + widget.itemPadding.horizontal) -
+                    widget.itemWidth;
+                _scrollController.animateTo(offsetX,
+                    duration: Duration(seconds: 1), curve: Curves.ease);
+              },
+              child: Container(
+                width: widget.itemWidths != null
+                    ? widget.itemWidths![index]
+                    : widget.itemWidth,
+                height: widget.height,
+                margin: widget.itemMargin,
+                padding: widget.itemPadding,
+                alignment: Alignment.center,
+                // color: ColorExt.random(),
+                decoration: BoxDecoration(
+                  color: widget.selectedIndex == index
+                      ? widget.itemSelectedBgColor
+                      : widget.itemBgColor,
+                  borderRadius: BorderRadius.circular(widget.itemRadius),
+                ),
+                child: Text(
+                  widget.items[index],
+                  textAlign: TextAlign.center,
+                  style: widget.selectedIndex == index
+                      ? widget.itemSelectedTextStyle
+                      : widget.itemTextStyle,
+                ),
               ),
-              child: Text(widget.items[index],
-                textAlign: TextAlign.center,
-                style: widget.selectedIndex == index ? widget.itemSelectedTextStyle : widget.itemTextStyle,
-              ),
-            ),
-          );
-        }),
+            );
+          }),
     );
   }
 }
 
-
-
 /// 多行折叠菜单
 class FoldMenu extends StatefulWidget {
-
-  FoldMenu({
-    Key? key,
-    required this.isVisible,
-    required this.children,
-    required this.onValueChanged,
-    this.itemWidth = 100,
-    this.foldCount = 0,
-    this.indicator
-  }) : assert(children.length > foldCount, 'children 个数必须大于 foldCount'),
+  FoldMenu(
+      {Key? key,
+      required this.isVisible,
+      required this.children,
+      required this.onValueChanged,
+      this.itemWidth = 100,
+      this.foldCount = 0,
+      this.indicator})
+      : assert(children.length > foldCount, 'children 个数必须大于 foldCount'),
         super(key: key);
 
   late bool isVisible;
@@ -162,7 +170,6 @@ class FoldMenu extends StatefulWidget {
 }
 
 class _FoldMenuState extends State<FoldMenu> {
-
   late bool isVisible = widget.isVisible;
 
   List<int> _indexs = [];
@@ -171,50 +178,59 @@ class _FoldMenuState extends State<FoldMenu> {
   Widget build(BuildContext context) {
     _indexs = widget.children.map((e) => e.item2).toList();
 
-    var topChildren = widget.children.sublist(0, widget.children.length - widget.foldCount);
-    var foldChildren = widget.children.sublist(widget.children.length - 1 - widget.foldCount, widget.children.length - 1);
+    var topChildren =
+        widget.children.sublist(0, widget.children.length - widget.foldCount);
+    var foldChildren = widget.children.sublist(
+        widget.children.length - 1 - widget.foldCount,
+        widget.children.length - 1);
 
     return Container(
       // color: Colors.green,
       child: Column(
         children: [
-          if (topChildren.isNotEmpty) Column(
-            children: topChildren.map((e) => buildListViewHorizontal(e: e, row: widget.children.indexOf(e))).toList(),
-          ),
+          if (topChildren.isNotEmpty)
+            Column(
+              children: topChildren
+                  .map((e) => buildListViewHorizontal(
+                      e: e, row: widget.children.indexOf(e)))
+                  .toList(),
+            ),
           Visibility(
             visible: isVisible,
             child: Column(
-              children: foldChildren.map((e) => buildListViewHorizontal(e: e, row: widget.children.indexOf(e))).toList(),
+              children: foldChildren
+                  .map((e) => buildListViewHorizontal(
+                      e: e, row: widget.children.indexOf(e)))
+                  .toList(),
             ),
           ),
-          widget.indicator ?? IconButton(
-            icon: isVisible ? Icon(Icons.keyboard_arrow_up) : Icon(Icons.keyboard_arrow_down),
-            onPressed: () {
-              setState(() {
-                isVisible = !isVisible;
-              });
-            },
-          ),
+          widget.indicator ??
+              IconButton(
+                icon: isVisible
+                    ? Icon(Icons.keyboard_arrow_up)
+                    : Icon(Icons.keyboard_arrow_down),
+                onPressed: () {
+                  setState(() {
+                    isVisible = !isVisible;
+                  });
+                },
+              ),
         ],
       ),
     );
   }
 
-  Widget buildListViewHorizontal({
-    required Tuple2<List<String>, int> e,
-    required int row
-  }) {
+  Widget buildListViewHorizontal(
+      {required Tuple2<List<String>, int> e, required int row}) {
     return NListViewSegmentControl(
-      items: e.item1,
-      itemWidth: widget.itemWidth,
-      selectedIndex: e.item2,
-      onValueChanged: (index){
-        // ddlog("${e.item2}, ${index}");
-        _indexs[row] = index;
-        // ddlog("${row}, ${index}, ${_indexs}");
-        widget.onValueChanged(row, index, _indexs);
-      }
-    );
+        items: e.item1,
+        itemWidth: widget.itemWidth,
+        selectedIndex: e.item2,
+        onValueChanged: (index) {
+          // ddlog("${e.item2}, ${index}");
+          _indexs[row] = index;
+          // ddlog("${row}, ${index}, ${_indexs}");
+          widget.onValueChanged(row, index, _indexs);
+        });
   }
-
 }

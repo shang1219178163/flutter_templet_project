@@ -6,12 +6,10 @@
 //  Copyright © 1/11/23 shang. All rights reserved.
 //
 
-
 import 'package:flutter/material.dart';
 
 class IgnorePointerDemo extends StatefulWidget {
-
-  const IgnorePointerDemo({ Key? key, this.title}) : super(key: key);
+  const IgnorePointerDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -20,24 +18,26 @@ class IgnorePointerDemo extends StatefulWidget {
 }
 
 class _IgnorePointerDemoState extends State<IgnorePointerDemo> {
-
-
   @override
   Widget build(BuildContext context) {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          onPressed: () => debugPrint(e),
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),)
-        ).toList(),
-      ),
-      body: buildBody()
-    );
+        appBar: AppBar(
+          title: Text(widget.title ?? "$widget"),
+          actions: [
+            'done',
+          ]
+              .map((e) => TextButton(
+                    onPressed: () => debugPrint(e),
+                    child: Text(
+                      e,
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ))
+              .toList(),
+        ),
+        body: buildBody());
   }
 
   buildBody() {
@@ -58,16 +58,16 @@ class _IgnorePointerDemoState extends State<IgnorePointerDemo> {
         IgnorePointer(
           // ignoring: false,
           child: InkWell(
-            onTap: () {
-              debugPrint("${DateTime.now()}点击B");
-            },
-            child: Container(
-              width: 50,
-              height: 50,
-              color: Colors.red,
-              alignment: Alignment.center,
-              child: const Text('B'),
-            )),
+              onTap: () {
+                debugPrint("${DateTime.now()}点击B");
+              },
+              child: Container(
+                width: 50,
+                height: 50,
+                color: Colors.red,
+                alignment: Alignment.center,
+                child: const Text('B'),
+              )),
         ),
       ],
     );

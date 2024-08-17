@@ -6,16 +6,14 @@
 //  Copyright © 12/10/21 shang. All rights reserved.
 //
 
-
 import 'package:flutter/material.dart';
 
 class ShaderMaskDemo extends StatelessWidget {
-
   final String? title;
 
   const ShaderMaskDemo({
-  	Key? key,
-  	this.title,
+    Key? key,
+    this.title,
   }) : super(key: key);
 
   @override
@@ -36,12 +34,11 @@ class ShaderMaskDemo extends StatelessWidget {
                 tileMode: TileMode.mirror,
               ).createShader(bounds);
             },
-            child: const Text('I’m burning the memories!',
-              style: TextStyle(color: Colors.white, fontSize: 25),),
+            child: const Text(
+              'I’m burning the memories!',
+              style: TextStyle(color: Colors.white, fontSize: 25),
+            ),
           ),
-        )
-    );
+        ));
   }
 }
-
-

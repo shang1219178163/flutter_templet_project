@@ -19,10 +19,8 @@ class AppRouteObserver {
   ValueChanged<Routing?>? routingCallback;
 }
 
-
 /// RouteAware混入
 mixin RouteAwareMixin<T extends StatefulWidget> on State<T>, RouteAware {
-
   @override
   void dispose() {
     super.dispose();
@@ -34,6 +32,4 @@ mixin RouteAwareMixin<T extends StatefulWidget> on State<T>, RouteAware {
     super.didChangeDependencies();
     AppRouteObserver().routeObserver.subscribe(this, ModalRoute.of(context)!);
   }
-
 }
-

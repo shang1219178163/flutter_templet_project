@@ -14,7 +14,6 @@ import 'package:flutter_templet_project/extension/alignment_ext.dart';
 
 /// 雷达渐进色按钮
 class RadialButton extends StatefulWidget {
-
   RadialButton({
     Key? key,
     required this.text,
@@ -40,7 +39,6 @@ class RadialButton extends StatefulWidget {
 }
 
 class _RadialButtonState extends State<RadialButton> {
-
   var _scale = 0.5;
 
   Size? _currentSize;
@@ -61,10 +59,11 @@ class _RadialButtonState extends State<RadialButton> {
       //     alignment: widget.center,
       // );
       _scale = widget.center.radiusOfRadialGradient(
-        width: w,
-        height: h,
-        isGreed: true,
-      ) ?? 0.5;
+            width: w,
+            height: h,
+            isGreed: true,
+          ) ??
+          0.5;
       debugPrint("context.size:${context.size} $_scale");
       setState(() {});
     });
@@ -79,17 +78,19 @@ class _RadialButtonState extends State<RadialButton> {
         margin: widget.margin,
         padding: widget.padding,
         decoration: BoxDecoration(
-          gradient: _currentSize == null ? null : RadialGradient(
-            // tileMode: TileMode.mirror,
-            radius: _scale,
-            center: widget.center,
-            colors: <Color>[
-              Colors.red, // blue
-              Colors.blue,
-              Colors.yellow,
-            ],
-            stops: const <double>[0.0, 0.5, 0.8],
-          ),
+          gradient: _currentSize == null
+              ? null
+              : RadialGradient(
+                  // tileMode: TileMode.mirror,
+                  radius: _scale,
+                  center: widget.center,
+                  colors: <Color>[
+                    Colors.red, // blue
+                    Colors.blue,
+                    Colors.yellow,
+                  ],
+                  stops: const <double>[0.0, 0.5, 0.8],
+                ),
         ),
         child: widget.text,
       ),
@@ -104,18 +105,16 @@ class _RadialButtonState extends State<RadialButton> {
     bool isGreed = true,
     double defaultValue = 0.5,
   }) {
-    if(width == null || height == null
-        || width <= 0 || height <= 0) {
+    if (width == null || height == null || width <= 0 || height <= 0) {
       return defaultValue;
     }
 
     final max = math.max(width, height);
     final min = math.min(width, height);
-    var result = max/min;
+    var result = max / min;
     if (alignment.x != 0) {
       result *= 2.0;
     }
     return result;
   }
 }
-

@@ -19,12 +19,12 @@ class SmartDialogPage extends StatelessWidget {
   const SmartDialogPage({Key? key}) : super(key: key);
 
   List<Tuple2> get items => [
-    Tuple2('showToast', _showToast()),
-    Tuple2('showLoading', _showLoading()),
-    Tuple2('_show', _show()),
-    Tuple2('_showAttach', _showAttach()),
-  ];
-  
+        Tuple2('showToast', _showToast()),
+        Tuple2('showLoading', _showLoading()),
+        Tuple2('_show', _show()),
+        Tuple2('_showAttach', _showAttach()),
+      ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,21 +32,24 @@ class SmartDialogPage extends StatelessWidget {
       appBar: AppBar(title: Text('SmartDialog-EasyDemo')),
       body: Container(
         margin: EdgeInsets.all(30),
-        child: Wrap(spacing: 20,
-            children: items.map((e) => ElevatedButton(
-              onPressed: () => e.item2,
-              child: Text(e.item1),
-            )).toList()
-        ),
+        child: Wrap(
+            spacing: 20,
+            children: items
+                .map((e) => ElevatedButton(
+                      onPressed: () => e.item2,
+                      child: Text(e.item1),
+                    ))
+                .toList()),
       ),
     );
   }
 
-
   _showToast() {
     // SmartDialog.showToast('test toast11', alignment: Alignment.topCenter);
-    SmartDialog.showToast('the toast at the center', alignment: Alignment.center);
-    SmartDialog.showToast('the toast at the bottomCenter', alignment: Alignment.bottomCenter);
+    SmartDialog.showToast('the toast at the center',
+        alignment: Alignment.center);
+    SmartDialog.showToast('the toast at the bottomCenter',
+        alignment: Alignment.bottomCenter);
 
     debugPrint('SmartDialog.showToast');
   }
@@ -71,7 +74,7 @@ class SmartDialogPage extends StatelessWidget {
               style: TextStyle(color: Colors.white),
             ),
           );
-    });
+        });
 
     await Future.delayed(Duration(milliseconds: 1500));
     SmartDialog.dismiss();

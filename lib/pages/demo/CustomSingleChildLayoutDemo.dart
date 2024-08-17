@@ -1,34 +1,33 @@
-
-
 import 'package:flutter/material.dart';
 
 class CustomSingleChildLayoutDemo extends StatefulWidget {
-
-  CustomSingleChildLayoutDemo({
-    Key? key, 
-    this.title
-  }) : super(key: key);
+  CustomSingleChildLayoutDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
   @override
-  _CustomSingleChildLayoutDemoState createState() => _CustomSingleChildLayoutDemoState();
+  _CustomSingleChildLayoutDemoState createState() =>
+      _CustomSingleChildLayoutDemoState();
 }
 
-class _CustomSingleChildLayoutDemoState extends State<CustomSingleChildLayoutDemo> {
-
-
+class _CustomSingleChildLayoutDemoState
+    extends State<CustomSingleChildLayoutDemo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () => debugPrint(e),)
-        ).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () => debugPrint(e),
+                ))
+            .toList(),
       ),
       body: buildBody(),
     );
@@ -55,9 +54,7 @@ class _CustomSingleChildLayoutDemoState extends State<CustomSingleChildLayoutDem
   }
 }
 
-
 class _MySingleChildLayoutDelegate extends SingleChildLayoutDelegate {
-
   @override
   bool shouldRelayout(SingleChildLayoutDelegate oldDelegate) {
     return true;

@@ -11,9 +11,8 @@ import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 
 class HorizontalCell extends StatelessWidget {
-
   HorizontalCell({
-  	Key? key,
+    Key? key,
     required this.title,
     this.titleRight,
     this.subtitle,
@@ -33,33 +32,46 @@ class HorizontalCell extends StatelessWidget {
 
   /// 主标题
   Text title;
+
   /// 主标题-右标题
   Text? titleRight;
+
   /// 副标题
   Text? subtitle;
+
   /// 副标题-右标题
   Text? subtitleRight;
+
   /// 主副标题中间的Widget
   Widget titleSpace;
 
   /// 总体为 left + mid + right + arrow;
   Widget? left;
+
   /// 总体为 left + mid + right + arrow;
   Widget? mid;
+
   /// 总体为 left + mid + right + arrow;
   Widget? right;
+
   /// 总体为 left + mid + right + arrow;
   Widget? arrow;
+
   /// 内容高度;
   double? height;
+
   /// 内容外边距;
   EdgeInsetsGeometry? margin;
+
   /// 内容内边距;
   EdgeInsetsGeometry? padding;
+
   /// 内容装饰器;
   Decoration? decoration;
+
   /// 内容下边的线条;
   Widget? separator;
+
   /// mid 是否使用 IntrinsicHeight;
   bool useIntrinsicHeight;
 
@@ -73,42 +85,43 @@ class HorizontalCell extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          if(left != null) left!,
-          mid ?? Expanded(
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
+          if (left != null) left!,
+          mid ??
+              Expanded(
+                child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      title,
-                      if(titleRight != null) titleRight!,
-                    ].map((e) => e.toDecoratedBox(color: ColorExt.random)).toList(),
-                  ),
-                  if (subtitle != null || subtitleRight != null) titleSpace,
-                  if (subtitle != null || subtitleRight != null) Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      if(subtitle != null) subtitle!,
-                      if(subtitleRight != null) subtitleRight!,
-                    ]
-                        .map((e) => e.toDecoratedBox(color: ColorExt.random)).toList()
-                    ,
-                  ),
-                ]
-            )
-                .toDecoratedBox(color: ColorExt.random)
-            ,
-          ),
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          title,
+                          if (titleRight != null) titleRight!,
+                        ]
+                            .map(
+                                (e) => e.toDecoratedBox(color: ColorExt.random))
+                            .toList(),
+                      ),
+                      if (subtitle != null || subtitleRight != null) titleSpace,
+                      if (subtitle != null || subtitleRight != null)
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            if (subtitle != null) subtitle!,
+                            if (subtitleRight != null) subtitleRight!,
+                          ]
+                              .map((e) =>
+                                  e.toDecoratedBox(color: ColorExt.random))
+                              .toList(),
+                        ),
+                    ]).toDecoratedBox(color: ColorExt.random),
+              ),
           if (right != null) right!,
-          arrow ?? Container(
-            padding: const EdgeInsets.only(left: 20),
-            child: Icon(
-                Icons.arrow_forward_ios,
-                size: 20,
-                color: Colors.grey
-            ),
-          ),
+          arrow ??
+              Container(
+                padding: const EdgeInsets.only(left: 20),
+                child:
+                    Icon(Icons.arrow_forward_ios, size: 20, color: Colors.grey),
+              ),
         ],
       ),
     );
@@ -189,5 +202,3 @@ class HorizontalCell extends StatelessWidget {
   //   );
   // }
 }
-
-

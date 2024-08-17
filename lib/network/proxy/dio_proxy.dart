@@ -26,14 +26,16 @@ class DioProxy {
     if (proxy?.host != null) {
       isProxy = true;
     }
-    (dio.httpClientAdapter as IOHttpClientAdapter).onHttpClientCreate = (HttpClient client) {
+    (dio.httpClientAdapter as IOHttpClientAdapter).onHttpClientCreate =
+        (HttpClient client) {
       client.idleTimeout = const Duration(seconds: 5);
       if (isProxy) {
         client.findProxy = (uri) {
           return "PROXY ${proxy!.host}:${proxy!.port}";
         };
         // 代理工具会提供一个抓包的自签名证书，会通不过证书校验，所以我们禁用证书校验
-        client.badCertificateCallback = (X509Certificate cert, String host, int port) => true;
+        client.badCertificateCallback =
+            (X509Certificate cert, String host, int port) => true;
       }
       return null;
     };

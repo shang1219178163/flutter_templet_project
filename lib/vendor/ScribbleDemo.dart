@@ -1,22 +1,17 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:scribble/scribble.dart';
 
-
 class ScribbleDemo extends StatefulWidget {
-
   final String? title;
 
-  const ScribbleDemo({ Key? key, this.title}) : super(key: key);
-
+  const ScribbleDemo({Key? key, this.title}) : super(key: key);
 
   @override
   _ScribbleDemoState createState() => _ScribbleDemoState();
 }
 
 class _ScribbleDemoState extends State<ScribbleDemo> {
-
   late ScribbleNotifier notifier;
 
   @override
@@ -28,16 +23,13 @@ class _ScribbleDemoState extends State<ScribbleDemo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title ?? "-"),
-          actions:[
-          IconButton(
-            icon: const Icon(Icons.save),
-            tooltip: "Save to Image",
-            onPressed: () => _saveImage(context),
-          ),
-        ]
-      ),
+      appBar: AppBar(title: Text(widget.title ?? "-"), actions: [
+        IconButton(
+          icon: const Icon(Icons.save),
+          tooltip: "Save to Image",
+          onPressed: () => _saveImage(context),
+        ),
+      ]),
       body: SingleChildScrollView(
         child: SizedBox(
           height: MediaQuery.of(context).size.height * 2,
@@ -97,10 +89,10 @@ class _ScribbleDemoState extends State<ScribbleDemo> {
   }
 
   Widget _buildStrokeButton(
-      BuildContext context, {
-        required double strokeWidth,
-        required ScribbleState state,
-      }) {
+    BuildContext context, {
+    required double strokeWidth,
+    required ScribbleState state,
+  }) {
     final selected = state.selectedWidth == strokeWidth;
     return Padding(
       padding: const EdgeInsets.all(4),
@@ -151,7 +143,7 @@ class _ScribbleDemoState extends State<ScribbleDemo> {
           ),
           _buildPointerModeSwitcher(context,
               penMode:
-              state.allowedPointersMode == ScribblePointerMode.penOnly),
+                  state.allowedPointersMode == ScribblePointerMode.penOnly),
           const Divider(
             height: 20.0,
           ),
@@ -172,18 +164,19 @@ class _ScribbleDemoState extends State<ScribbleDemo> {
       onPressed: () => notifier.setAllowedPointersMode(
         penMode ? ScribblePointerMode.all : ScribblePointerMode.penOnly,
       ),
-      tooltip: "Switch drawing mode to ${penMode ? "all pointers" : "pen only"}",
+      tooltip:
+          "Switch drawing mode to ${penMode ? "all pointers" : "pen only"}",
       child: AnimatedSwitcher(
         duration: kThemeAnimationDuration,
         child: !penMode
             ? const Icon(
-          Icons.touch_app,
-          key: ValueKey(true),
-        )
+                Icons.touch_app,
+                key: ValueKey(true),
+              )
             : const Icon(
-          Icons.do_not_touch,
-          key: ValueKey(false),
-        ),
+                Icons.do_not_touch,
+                key: ValueKey(false),
+              ),
       ),
     );
   }
@@ -198,8 +191,8 @@ class _ScribbleDemoState extends State<ScribbleDemo> {
         shape: !isSelected
             ? const CircleBorder()
             : RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
+                borderRadius: BorderRadius.circular(8),
+              ),
         onPressed: notifier.setEraser,
         child: const Icon(Icons.remove, color: Colors.blueGrey),
       ),
@@ -207,30 +200,30 @@ class _ScribbleDemoState extends State<ScribbleDemo> {
   }
 
   Widget _buildColorButton(
-      BuildContext context, {
-        required Color color,
-        required ScribbleState state,
-      }) {
+    BuildContext context, {
+    required Color color,
+    required ScribbleState state,
+  }) {
     final isSelected = state is Drawing && state.selectedColor == color.value;
     return Padding(
       padding: const EdgeInsets.all(4),
       child: FloatingActionButton.small(
-          backgroundColor: color,
-          elevation: isSelected ? 10 : 2,
-          shape: !isSelected
-              ? const CircleBorder()
-              : RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
-          ),
-          onPressed: () => notifier.setColor(color),
-          child: Container(),
+        backgroundColor: color,
+        elevation: isSelected ? 10 : 2,
+        shape: !isSelected
+            ? const CircleBorder()
+            : RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+        onPressed: () => notifier.setColor(color),
+        child: Container(),
       ),
     );
   }
 
   Widget _buildUndoButton(
-      BuildContext context,
-      ) {
+    BuildContext context,
+  ) {
     return FloatingActionButton.small(
       tooltip: "Undo",
       onPressed: notifier.canUndo ? notifier.undo : null,
@@ -244,8 +237,8 @@ class _ScribbleDemoState extends State<ScribbleDemo> {
   }
 
   Widget _buildRedoButton(
-      BuildContext context,
-      ) {
+    BuildContext context,
+  ) {
     return FloatingActionButton.small(
       tooltip: "Redo",
       onPressed: notifier.canRedo ? notifier.redo : null,

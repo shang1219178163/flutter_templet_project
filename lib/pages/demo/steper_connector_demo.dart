@@ -45,7 +45,7 @@ class _SteperConnectorDemoState extends State<SteperConnectorDemo> {
           contents: Card(
             child: Container(
               padding: EdgeInsets.all(8.0),
-              child: Text('contents'*10),
+              child: Text('contents' * 10),
             ),
           ),
           node: TimelineNode(
@@ -54,7 +54,6 @@ class _SteperConnectorDemoState extends State<SteperConnectorDemo> {
             endConnector: SolidLineConnector(),
           ),
         ),
-
         Container(
           color: Colors.green,
           child: NNTimelineTile(
@@ -66,7 +65,7 @@ class _SteperConnectorDemoState extends State<SteperConnectorDemo> {
             contents: Card(
               child: Container(
                 padding: EdgeInsets.all(8.0),
-                child: Text('contents'*10),
+                child: Text('contents' * 10),
               ),
             ),
             node: TimelineNode(
@@ -76,58 +75,48 @@ class _SteperConnectorDemoState extends State<SteperConnectorDemo> {
             ),
           ),
         ),
-
-        Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Container(
-                  color: Colors.yellow,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text('12月9日\n10: 53'),
-                  ),
-                ),
-
-                _buildNode(
-                  startConnector: Container(
-                    color: Colors.green,
-                    width: 5,
-                    // height: 60,
-                  ),
-                  endConnector: Container(
-                    color: Colors.green,
-                    width: 5,
-                    // height: 60,
-                  ),
-                ),
-
-                _buildVerticalRight(),
-              ]
+        Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+          Row(mainAxisSize: MainAxisSize.min, children: [
+            Container(
+              color: Colors.yellow,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text('12月9日\n10: 53'),
+              ),
             ),
-            Flex(
+            _buildNode(
+              startConnector: Container(
+                color: Colors.green,
+                width: 5,
+                // height: 60,
+              ),
+              endConnector: Container(
+                color: Colors.green,
+                width: 5,
+                // height: 60,
+              ),
+            ),
+            _buildVerticalRight(),
+          ]),
+          Flex(direction: Axis.vertical, children: [
+            NNTimelineTile(
               direction: Axis.vertical,
-              children: [
-                NNTimelineTile(
-                  direction: Axis.vertical,
-                  oppositeContents: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text('opposite\ncontents'),
-                  ),
-                  contents: Card(
-                    child: Container(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text('contents'*10),
-                    ),
-                  ),
-                  node: TimelineNode(
-                    indicator: DotIndicator(),
-                    startConnector: SolidLineConnector(),
-                    endConnector: SolidLineConnector(),
-                  ),
+              oppositeContents: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text('opposite\ncontents'),
+              ),
+              contents: Card(
+                child: Container(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text('contents' * 10),
                 ),
+              ),
+              node: TimelineNode(
+                indicator: DotIndicator(),
+                startConnector: SolidLineConnector(),
+                endConnector: SolidLineConnector(),
+              ),
+            ),
           ]),
         ]),
       ],
@@ -135,8 +124,7 @@ class _SteperConnectorDemoState extends State<SteperConnectorDemo> {
   }
 
   _buildBodyColumn() {
-    return Column(
-        children: [
+    return Column(children: [
       Container(
         color: Colors.yellow,
         child: Padding(
@@ -160,30 +148,29 @@ class _SteperConnectorDemoState extends State<SteperConnectorDemo> {
   }
 
   _buildBodyRow() {
-    return Row(
-        children: [
-          Container(
-            color: Colors.yellow,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text('12月9日\n10: 53'),
-            ),
-          ),
-          _buildNode(
-            direction: Axis.vertical,
-            startConnector: Container(
-              color: Colors.green,
-              width: 5,
-              height: double.infinity,
-            ),
-            endConnector: Container(
-              color: Colors.green,
-              width: 5,
-              height: double.infinity,
-            ),
-          ),
-          _buildVerticalRight(),
-        ]);
+    return Row(children: [
+      Container(
+        color: Colors.yellow,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text('12月9日\n10: 53'),
+        ),
+      ),
+      _buildNode(
+        direction: Axis.vertical,
+        startConnector: Container(
+          color: Colors.green,
+          width: 5,
+          height: double.infinity,
+        ),
+        endConnector: Container(
+          color: Colors.green,
+          width: 5,
+          height: double.infinity,
+        ),
+      ),
+      _buildVerticalRight(),
+    ]);
   }
 
   _buildHorizontal() {
@@ -213,11 +200,10 @@ class _SteperConnectorDemoState extends State<SteperConnectorDemo> {
     ]);
   }
 
-  _buildNode({
-    Axis direction = Axis.vertical,
-    Widget? startConnector,
-    Widget? endConnector}){
-
+  _buildNode(
+      {Axis direction = Axis.vertical,
+      Widget? startConnector,
+      Widget? endConnector}) {
     final indicator = Container(
       color: Colors.green,
       width: 30,
@@ -263,11 +249,7 @@ class _SteperConnectorDemoState extends State<SteperConnectorDemo> {
     return Column(
       children: [
         Center(
-          child: Container(
-            color: Colors.red,
-            width: 5,
-            height: 25
-          ),
+          child: Container(color: Colors.red, width: 5, height: 25),
         ),
         // SteperConnector(
         //   direction: Axis.horizontal,
@@ -351,8 +333,7 @@ class _SteperConnectorDemoState extends State<SteperConnectorDemo> {
                     },
                     child: Text(
                       '更多',
-                      style: TextStyle(
-                          decoration: TextDecoration.underline),
+                      style: TextStyle(decoration: TextDecoration.underline),
                     ),
                   ),
                 ],
@@ -363,5 +344,4 @@ class _SteperConnectorDemoState extends State<SteperConnectorDemo> {
       ),
     );
   }
-
 }

@@ -1,19 +1,15 @@
 import 'package:flutter/material.dart';
 
 class ModalBarrierDemo extends StatefulWidget {
-
   final String? title;
 
-  const ModalBarrierDemo({ Key? key, this.title}) : super(key: key);
+  const ModalBarrierDemo({Key? key, this.title}) : super(key: key);
 
-  
   @override
   _ModalBarrierDemoState createState() => _ModalBarrierDemoState();
 }
 
 class _ModalBarrierDemoState extends State<ModalBarrierDemo> {
-
-
   @override
   Widget build(BuildContext context) {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
@@ -31,9 +27,7 @@ class _ModalBarrierDemoState extends State<ModalBarrierDemo> {
             // ),
             child: _buildModalBarrier(),
           ),
-        )
-
-    );
+        ));
   }
 
   Widget _buildModalBarrier() {
@@ -54,5 +48,4 @@ class _ModalBarrierDemoState extends State<ModalBarrierDemo> {
       ],
     );
   }
-
 }

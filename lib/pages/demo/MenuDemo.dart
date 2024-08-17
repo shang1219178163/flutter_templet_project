@@ -6,15 +6,10 @@
 //  Copyright © 8/17/21 shang. All rights reserved.
 //
 
-
 import 'package:flutter/material.dart';
 
 class MenuDemo extends StatefulWidget {
-
-  MenuDemo({
-    Key? key, 
-    this.title
-  }) : super(key: key);
+  MenuDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -23,7 +18,6 @@ class MenuDemo extends StatefulWidget {
 }
 
 class _MenuDemoState extends State<MenuDemo> {
-
   final _scrollController = ScrollController();
 
   @override
@@ -31,12 +25,17 @@ class _MenuDemoState extends State<MenuDemo> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () => debugPrint(e),)
-        ).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () => debugPrint(e),
+                ))
+            .toList(),
       ),
       body: buildBody(),
     );
@@ -55,5 +54,4 @@ class _MenuDemoState extends State<MenuDemo> {
       ),
     );
   }
-  
 }

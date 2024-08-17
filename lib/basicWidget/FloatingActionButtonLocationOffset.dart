@@ -6,12 +6,10 @@
 //  Copyright © 2023/9/7 shang. All rights reserved.
 //
 
-
 import 'package:flutter/material.dart';
 
 /// 基于 FloatingActionButtonLocation 进行偏移
 class FloatingActionButtonLocationOffset extends FloatingActionButtonLocation {
-
   FloatingActionButtonLocationOffset({
     required this.location,
     this.offsetX = 0,

@@ -6,8 +6,6 @@
 //  Copyright © 6/10/21 shang. All rights reserved.
 //
 
-
-
 import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
@@ -28,25 +26,25 @@ class CirclePulseLoadingWidget extends StatefulWidget {
 
   const CirclePulseLoadingWidget(
       {Key? key,
-        this.radius = 24,
-        this.itemShape = BoxShape.circle,
-        this.itemColor = Colors.white,
-        this.count = 9,
-        this.duration = const Duration(milliseconds: 1000),
-        this.curve = Curves.linear})
+      this.radius = 24,
+      this.itemShape = BoxShape.circle,
+      this.itemColor = Colors.white,
+      this.count = 9,
+      this.duration = const Duration(milliseconds: 1000),
+      this.curve = Curves.linear})
       : super(key: key);
 
   @override
-  _CirclePulseLoadingWidgetState createState() => _CirclePulseLoadingWidgetState();
+  _CirclePulseLoadingWidgetState createState() =>
+      _CirclePulseLoadingWidgetState();
 }
 
 class _CirclePulseLoadingWidgetState extends State<CirclePulseLoadingWidget>
     with SingleTickerProviderStateMixin {
-
-  late final AnimationController _controller = AnimationController(vsync: this, duration: widget.duration)
-    ..repeat();
-  late final Animation<double> _animation = _controller.drive(CurveTween(curve: widget.curve));
-
+  late final AnimationController _controller =
+      AnimationController(vsync: this, duration: widget.duration)..repeat();
+  late final Animation<double> _animation =
+      _controller.drive(CurveTween(curve: widget.curve));
 
   @override
   void dispose() {
@@ -80,7 +78,6 @@ class _CirclePulseLoadingWidgetState extends State<CirclePulseLoadingWidget>
       }),
     );
   }
-
 }
 
 class _CircleFlow extends FlowDelegate {
@@ -103,7 +100,6 @@ class _CircleFlow extends FlowDelegate {
   bool shouldRepaint(FlowDelegate oldDelegate) => true;
 }
 
-
 ///
 /// desc:
 ///
@@ -111,7 +107,7 @@ class DelayTween extends Tween<double> {
   final double delay;
 
   DelayTween({required double begin, required double end, required this.delay})
-      :super(begin: begin, end: end);
+      : super(begin: begin, end: end);
 
   @override
   double lerp(double t) {

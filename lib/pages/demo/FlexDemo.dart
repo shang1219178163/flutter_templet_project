@@ -1,4 +1,3 @@
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_header.dart';
@@ -7,8 +6,7 @@ import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 
 class FlexDemo extends StatefulWidget {
-
-  const FlexDemo({ Key? key, this.title}) : super(key: key);
+  const FlexDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -17,76 +15,54 @@ class FlexDemo extends StatefulWidget {
 }
 
 class _FlexDemoState extends State<FlexDemo> {
-
   ValueNotifier<bool> showTips = ValueNotifier(true);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title ?? "$widget"),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.only(bottom: 20),
-        child: ListView(
-          children: [
+        appBar: AppBar(
+          title: Text(widget.title ?? "$widget"),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.only(bottom: 20),
+          child: ListView(children: [
             NSectionHeader(
-              title: "Flex.Horizontal",
-              child: _buildFlexHorizontal()
-            ),
+                title: "Flex.Horizontal", child: _buildFlexHorizontal()),
+            NSectionHeader(title: "Flex.Vertical", child: _buildFlexVertical()),
+            NSectionHeader(title: "_buildSection", child: _buildSection()),
+            NSectionHeader(title: "_buildSection2", child: _buildSection2()),
+            NSectionHeader(title: "_buildSection3", child: _buildSection3()),
             NSectionHeader(
-              title: "Flex.Vertical",
-              child: _buildFlexVertical()
-            ),
-            NSectionHeader(
-              title: "_buildSection",
-              child: _buildSection()
-            ),
-
-            NSectionHeader(
-              title: "_buildSection2",
-              child: _buildSection2()
-            ),
-            NSectionHeader(
-              title: "_buildSection3",
-              child: _buildSection3()
-            ),
-            NSectionHeader(
-              title: "buildMutipleExpanded",
-              child: buildMutipleExpanded()
-            ),
+                title: "buildMutipleExpanded", child: buildMutipleExpanded()),
             NSectionHeader(
               title: "buildMutipleFlexible",
               child: buildMutipleFlexible(),
             ),
             NSectionHeader(
               title: "tips",
-              child: buildTipsWidget(showTips: showTips, tips: "这是一个提示信息或者警告⚠️"),
+              child:
+                  buildTipsWidget(showTips: showTips, tips: "这是一个提示信息或者警告⚠️"),
             ),
-          ]
-        ),
-      )
-    );
+          ]),
+        ));
   }
-  
+
   _buildSection() {
     return Container(
       // color: Colors.greenAccent,
       child: Row(
         children: <Widget>[
-          Expanded (
-            flex:1,
-            child : Column(
-              children: <Widget>[
-                Text("Hello World")
-              ],
+          Expanded(
+            flex: 1,
+            child: Column(
+              children: <Widget>[Text("Hello World")],
             ),
           ),
           Expanded(
             flex: 2,
             child: Column(
               children: <Widget>[
-                Text("This is a long text this is a long test"*5)
+                Text("This is a long text this is a long test" * 5)
               ],
             ),
           )
@@ -95,64 +71,66 @@ class _FlexDemoState extends State<FlexDemo> {
     );
   }
 
-
   _buildFlexHorizontal() {
     return Flex(
-      direction: Axis.horizontal,   // this is unique
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      mainAxisSize: MainAxisSize.max,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      verticalDirection: VerticalDirection.down,
-      textDirection: TextDirection.rtl,
-      children: [ColorExt.random, ColorExt.random, ColorExt.random].map((e) => Container(
-        color: e,
-        width: 50,
-        height: 50,
-      )).toList()
-    );
+        direction: Axis.horizontal, // this is unique
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        verticalDirection: VerticalDirection.down,
+        textDirection: TextDirection.rtl,
+        children: [ColorExt.random, ColorExt.random, ColorExt.random]
+            .map((e) => Container(
+                  color: e,
+                  width: 50,
+                  height: 50,
+                ))
+            .toList());
   }
 
   _buildFlexVertical() {
     return Flex(
-      direction: Axis.vertical,   // this is unique
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      mainAxisSize: MainAxisSize.max,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      verticalDirection: VerticalDirection.down,
-      textDirection: TextDirection.rtl,
-      children: [ColorExt.random, ColorExt.random, ColorExt.random].map((e) => Container(
-        color: e,
-        width: 50,
-        height: 50,
-      )).toList()
-    );
+        direction: Axis.vertical, // this is unique
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        verticalDirection: VerticalDirection.down,
+        textDirection: TextDirection.rtl,
+        children: [ColorExt.random, ColorExt.random, ColorExt.random]
+            .map((e) => Container(
+                  color: e,
+                  width: 50,
+                  height: 50,
+                ))
+            .toList());
   }
-  
-  
+
   _buildSection2() {
     return Column(
-      children:[
+      children: [
         Row(
-          children:[
+          children: [
             buildExpanded(),
             buildFlexible(),
           ],
         ),
         Row(
-          children:[
+          children: [
             buildExpanded(),
             buildExpanded(),
           ],
         ),
         Row(
-          children:[
+          children: [
             buildFlexible(),
-            SizedBox(width: 18,),
+            SizedBox(
+              width: 18,
+            ),
             buildFlexible(),
           ],
         ),
         Row(
-          children:[
+          children: [
             buildExpanded(),
             buildFlexible(fit: FlexFit.tight),
           ],
@@ -160,7 +138,6 @@ class _FlexDemoState extends State<FlexDemo> {
       ],
     );
   }
-
 
   _buildSection3() {
     return Container(
@@ -171,9 +148,8 @@ class _FlexDemoState extends State<FlexDemo> {
             children: <Widget>[
               Text("Hello World"),
               ElevatedButton(
-                onPressed: () => debugPrint("OutlinedButton"),
-                child: Text("OutlinedButton")
-              ),
+                  onPressed: () => debugPrint("OutlinedButton"),
+                  child: Text("OutlinedButton")),
             ],
           ),
           Expanded(
@@ -209,7 +185,6 @@ class _FlexDemoState extends State<FlexDemo> {
       ),
     );
   }
-
 
   buildMutipleExpanded() {
     return Row(
@@ -293,7 +268,8 @@ class _FlexDemoState extends State<FlexDemo> {
               color: const Color(0xffEBF8F8),
               borderRadius: BorderRadius.circular(18), //边角
             ),
-            child: NText(tips,
+            child: NText(
+              tips,
               fontSize: 13,
               color: primaryColor,
             ),
@@ -325,8 +301,9 @@ class _FlexDemoState extends State<FlexDemo> {
     return child;
   }
 
-
-  Widget buildLine({color = const Color(0xffe5e5e5), }) {
+  Widget buildLine({
+    color = const Color(0xffe5e5e5),
+  }) {
     return Container(
       height: 1,
       color: color,

@@ -6,7 +6,6 @@
 //  Copyright © 3/9/23 shang. All rights reserved.
 //
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
@@ -14,14 +13,14 @@ import 'package:flutter/scheduler.dart';
 
 /// Autocomplete 组件的 optionsViewBuilder 返回视图
 class NAutocompleteOptionsView<T extends Object> extends StatelessWidget {
-  const NAutocompleteOptionsView({
-    Key? key,
-    required this.displayStringForOption,
-    required this.onSelected,
-    required this.options,
-    required this.maxHeight,
-    this.itemBuilder
-  }) : super(key: key);
+  const NAutocompleteOptionsView(
+      {Key? key,
+      required this.displayStringForOption,
+      required this.onSelected,
+      required this.options,
+      required this.maxHeight,
+      this.itemBuilder})
+      : super(key: key);
 
   final AutocompleteOptionToString<T> displayStringForOption;
 
@@ -49,26 +48,28 @@ class NAutocompleteOptionsView<T extends Object> extends StatelessWidget {
               itemCount: options.length,
               itemBuilder: (BuildContext context, int index) {
                 final option = options.elementAt(index);
-                return itemBuilder?.call(context, index) ?? InkWell(
-                  onTap: () {
-                    onSelected(option);
-                  },
-                  child: Builder(
-                    builder: (BuildContext context) {
-                      final highlight = AutocompleteHighlightedOption.of(context) == index;
-                      if (highlight) {
-                        SchedulerBinding.instance.addPostFrameCallback((Duration timeStamp) {
-                          Scrollable.ensureVisible(context, alignment: 0.5);
-                        });
-                      }
-                      return Container(
-                        color: highlight ? Theme.of(context).focusColor : null,
-                        padding: const EdgeInsets.all(16.0),
-                        child: Text(displayStringForOption(option)),
-                      );
-                    }
-                  ),
-                );
+                return itemBuilder?.call(context, index) ??
+                    InkWell(
+                      onTap: () {
+                        onSelected(option);
+                      },
+                      child: Builder(builder: (BuildContext context) {
+                        final highlight =
+                            AutocompleteHighlightedOption.of(context) == index;
+                        if (highlight) {
+                          SchedulerBinding.instance
+                              .addPostFrameCallback((Duration timeStamp) {
+                            Scrollable.ensureVisible(context, alignment: 0.5);
+                          });
+                        }
+                        return Container(
+                          color:
+                              highlight ? Theme.of(context).focusColor : null,
+                          padding: const EdgeInsets.all(16.0),
+                          child: Text(displayStringForOption(option)),
+                        );
+                      }),
+                    );
               },
             ),
           ),
@@ -77,5 +78,3 @@ class NAutocompleteOptionsView<T extends Object> extends StatelessWidget {
     );
   }
 }
-
-

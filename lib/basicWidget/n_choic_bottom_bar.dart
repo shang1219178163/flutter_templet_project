@@ -1,14 +1,11 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 
 /// 选择列表,底部菜单
 class NChoicBottomBar extends StatelessWidget {
-
   const NChoicBottomBar({
-  	super.key,
+    super.key,
     required this.checkIcon,
     required this.checkDesc,
     required this.onCheck,
@@ -43,8 +40,12 @@ class NChoicBottomBar extends StatelessWidget {
                     onPressed: onCheck,
                     child: Row(
                       children: [
-                        Icon(checkIcon,),
-                        SizedBox(width: 4,),
+                        Icon(
+                          checkIcon,
+                        ),
+                        SizedBox(
+                          width: 4,
+                        ),
                         Text("全选 ($checkDesc)"),
                       ],
                     ),
@@ -62,7 +63,10 @@ class NChoicBottomBar extends StatelessWidget {
                             decoration: BoxDecoration(
                               color: context.primaryColor,
                             ),
-                            child: NText("新增", color: Colors.white,),
+                            child: NText(
+                              "新增",
+                              color: Colors.white,
+                            ),
                           ),
                         ),
                       ),
@@ -75,7 +79,10 @@ class NChoicBottomBar extends StatelessWidget {
                             decoration: BoxDecoration(
                               color: Colors.red,
                             ),
-                            child: NText("删除", color: Colors.white,),
+                            child: NText(
+                              "删除",
+                              color: Colors.white,
+                            ),
                           ),
                         ),
                       ),

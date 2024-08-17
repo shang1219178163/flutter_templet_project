@@ -1,16 +1,8 @@
-
-
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/CircleSectorProgressIndicator.dart';
 
 class ProgressClipperDemo extends StatefulWidget {
-
-  ProgressClipperDemo({
-    Key? key, 
-    this.title
-  }) : super(key: key);
+  ProgressClipperDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -19,9 +11,7 @@ class ProgressClipperDemo extends StatefulWidget {
 }
 
 class _ProgressClipperDemoState extends State<ProgressClipperDemo> {
-
   final _scrollController = ScrollController();
-
 
   final progressVN = ValueNotifier(0.0);
 
@@ -30,12 +20,17 @@ class _ProgressClipperDemoState extends State<ProgressClipperDemo> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: onPressed,)
-        ).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: onPressed,
+                ))
+            .toList(),
       ),
       body: buildBody(),
     );
@@ -74,53 +69,41 @@ class _ProgressClipperDemoState extends State<ProgressClipperDemo> {
     }
   }
 
-
   buildProgress({double width = 120, double height = 160}) {
     return ValueListenableBuilder(
-      valueListenable: progressVN,
-      builder: (context, value, child){
+        valueListenable: progressVN,
+        builder: (context, value, child) {
+          debugPrint("value: $value");
+          final precent = (value * 100).toInt().toStringAsFixed(0);
+          final precentStr = "$precent%";
 
-        debugPrint("value: $value");
-        final precent = (value * 100).toInt().toStringAsFixed(0);
-        final precentStr = "$precent%";
-
-        return Stack(
-          alignment: Alignment.center,
-          children: [
-            Image.asset(
-              'assets/images/bg.png',
-              width: width,
-              height: height,
-              fit: BoxFit.cover,
-            ),
-            ClipPath(
-              clipper: CircleSectorProgressClipper(
-                progress: value,
-              ),
-              child: Container(
+          return Stack(
+            alignment: Alignment.center,
+            children: [
+              Image.asset(
+                'assets/images/bg.png',
                 width: width,
                 height: height,
-                color: Colors.black.withOpacity(0.7),
+                fit: BoxFit.cover,
               ),
-            ),
-            Positioned(
-              child: Text(
-                precentStr,
-                style: TextStyle(
-                  color: Color(0xffEDFBFF),
-                  fontSize: 24
+              ClipPath(
+                clipper: CircleSectorProgressClipper(
+                  progress: value,
+                ),
+                child: Container(
+                  width: width,
+                  height: height,
+                  color: Colors.black.withOpacity(0.7),
                 ),
               ),
-            )
-          ],
-        );
-      }
-    );
+              Positioned(
+                child: Text(
+                  precentStr,
+                  style: TextStyle(color: Color(0xffEDFBFF), fontSize: 24),
+                ),
+              )
+            ],
+          );
+        });
   }
 }
-
-
-
-
-
-

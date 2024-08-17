@@ -1,11 +1,9 @@
-
 import 'package:flutter/material.dart';
 
 /// 自适应文本组件
 class NAdaptiveText extends StatelessWidget {
-
   const NAdaptiveText({
-  	Key? key,
+    Key? key,
     this.data = "自适应文本组件",
     this.child,
     this.alignment = Alignment.center,
@@ -24,28 +22,28 @@ class NAdaptiveText extends StatelessWidget {
   final EdgeInsets padding;
   final BoxDecoration? decoration;
 
-
   @override
   Widget build(BuildContext context) {
-
     return Align(
       alignment: alignment,
       child: Container(
         margin: margin,
         padding: padding,
-        decoration: decoration ?? BoxDecoration(
-          color: Colors.black.withOpacity(.65),
-          borderRadius: const BorderRadius.all(Radius.circular(10)),
-        ),
-        child: child ?? Text(
-          data,
-          style: const TextStyle(
-            fontSize: 14,
-            color: Colors.white,
-            decoration: TextDecoration.none,
-            fontWeight: FontWeight.normal,
-          ),
-        ),
+        decoration: decoration ??
+            BoxDecoration(
+              color: Colors.black.withOpacity(.65),
+              borderRadius: const BorderRadius.all(Radius.circular(10)),
+            ),
+        child: child ??
+            Text(
+              data,
+              style: const TextStyle(
+                fontSize: 14,
+                color: Colors.white,
+                decoration: TextDecoration.none,
+                fontWeight: FontWeight.normal,
+              ),
+            ),
       ),
     );
   }

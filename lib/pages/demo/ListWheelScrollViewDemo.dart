@@ -9,21 +9,16 @@
 import 'package:flutter/material.dart';
 
 class ListWheelScrollViewDemo extends StatefulWidget {
-
-  const ListWheelScrollViewDemo({
-    Key? key, 
-    this.title
-  }) : super(key: key);
+  const ListWheelScrollViewDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
   @override
-  _ListWheelScrollViewDemoState createState() => _ListWheelScrollViewDemoState();
+  _ListWheelScrollViewDemoState createState() =>
+      _ListWheelScrollViewDemoState();
 }
 
 class _ListWheelScrollViewDemoState extends State<ListWheelScrollViewDemo> {
-
-
   @override
   Widget build(BuildContext context) {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
@@ -31,12 +26,17 @@ class _ListWheelScrollViewDemoState extends State<ListWheelScrollViewDemo> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          onPressed: () => debugPrint(e),
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),)
-        ).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  onPressed: () => debugPrint(e),
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ))
+            .toList(),
       ),
       body: _buildListWheelScrollView(),
     );
@@ -49,9 +49,7 @@ class _ListWheelScrollViewDemoState extends State<ListWheelScrollViewDemo> {
         childCount: 100,
         builder: (context, index) {
           return Container(
-            margin: EdgeInsets.symmetric(
-                vertical: 10, horizontal: 30
-            ),
+            margin: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
             color: Colors.primaries[index % 10],
             alignment: Alignment.center,
             child: Text('$index'),
@@ -59,8 +57,5 @@ class _ListWheelScrollViewDemoState extends State<ListWheelScrollViewDemo> {
         },
       ),
     );
-
   }
-
 }
-

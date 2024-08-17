@@ -4,9 +4,7 @@ import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/util/R.dart';
 
-
 class TabBarViewDemo extends StatefulWidget {
-
   TabBarViewDemo({
     super.key,
     this.title,
@@ -18,8 +16,8 @@ class TabBarViewDemo extends StatefulWidget {
   State<TabBarViewDemo> createState() => _TabBarViewDemoState();
 }
 
-class _TabBarViewDemoState extends State<TabBarViewDemo> with SingleTickerProviderStateMixin {
-
+class _TabBarViewDemoState extends State<TabBarViewDemo>
+    with SingleTickerProviderStateMixin {
   /// 当前索引
   int currentIndex = 0;
 
@@ -43,12 +41,11 @@ class _TabBarViewDemoState extends State<TabBarViewDemo> with SingleTickerProvid
   void initState() {
     super.initState();
     tabController.addListener(() {
-      if(!tabController.indexIsChanging){
+      if (!tabController.indexIsChanging) {
         tabIndex.value = tabController.index;
         debugPrint("indexVN:${tabIndex.value}_${tabController.index}");
       }
     });
-
   }
 
   @override
@@ -76,44 +73,59 @@ class _TabBarViewDemoState extends State<TabBarViewDemo> with SingleTickerProvid
             indicatorPadding: EdgeInsets.only(left: 16, right: 16),
             indicator: UnderlineTabIndicator(
                 borderSide: BorderSide(
-                  style: BorderStyle.solid,
-                  width: 4,
-                  color: Colors.red,
-                )
-            ),
-            tabs: titles.map((e) => Tab(
-              child: ValueListenableBuilder<int>(
-                  valueListenable: tabIndex,
-                  builder: (BuildContext context, int value, Widget? child) {
-                    final index = titles.indexOf(e);
-                    if (index != 1){
-                      if (index == 2){
-                        return Tab(child: Text(e + e,),);
-                      }
-                      if (index == 3){
-                        return Tab(child: Text(e + e, style: TextStyle(fontSize: 20)),);
-                      }
-                      return Tab(text: e);
-                    }
+              style: BorderStyle.solid,
+              width: 4,
+              color: Colors.red,
+            )),
+            tabs: titles
+                .map((e) => Tab(
+                      child: ValueListenableBuilder<int>(
+                          valueListenable: tabIndex,
+                          builder:
+                              (BuildContext context, int value, Widget? child) {
+                            final index = titles.indexOf(e);
+                            if (index != 1) {
+                              if (index == 2) {
+                                return Tab(
+                                  child: Text(
+                                    e + e,
+                                  ),
+                                );
+                              }
+                              if (index == 3) {
+                                return Tab(
+                                  child: Text(e + e,
+                                      style: TextStyle(fontSize: 20)),
+                                );
+                              }
+                              return Tab(text: e);
+                            }
 
-                    final url = (value == index) ? R.image.urls[1] : R.image.urls[0];
-                    return Tab(
-                      child: FadeInImage(
-                        image: NetworkImage(url),
-                        placeholder: "flutter_logo.png".toAssetImage(),
-                      ),
-                    );
-                  }),
-            )).toList(),
+                            final url = (value == index)
+                                ? R.image.urls[1]
+                                : R.image.urls[0];
+                            return Tab(
+                              child: FadeInImage(
+                                image: NetworkImage(url),
+                                placeholder: "flutter_logo.png".toAssetImage(),
+                              ),
+                            );
+                          }),
+                    ))
+                .toList(),
           ),
         ),
         Expanded(
-          child: TabBarView( //构建
+          child: TabBarView(
+            //构建
             controller: tabController,
             children: titles.map((e) {
               return Container(
                 alignment: Alignment.center,
-                child: Text(e, style: TextStyle(color: Colors.red),),
+                child: Text(
+                  e,
+                  style: TextStyle(color: Colors.red),
+                ),
               );
             }).toList(),
           ),
@@ -121,6 +133,4 @@ class _TabBarViewDemoState extends State<TabBarViewDemo> with SingleTickerProvid
       ],
     );
   }
-
 }
-

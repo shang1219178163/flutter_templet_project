@@ -53,10 +53,10 @@ const DBTodoSchema = CollectionSchema(
 );
 
 int _dBTodoEstimateSize(
-    DBTodo object,
-    List<int> offsets,
-    Map<Type, List<int>> allOffsets,
-    ) {
+  DBTodo object,
+  List<int> offsets,
+  Map<Type, List<int>> allOffsets,
+) {
   var bytesCount = offsets.last;
   {
     final value = object.createdDate;
@@ -75,11 +75,11 @@ int _dBTodoEstimateSize(
 }
 
 void _dBTodoSerialize(
-    DBTodo object,
-    IsarWriter writer,
-    List<int> offsets,
-    Map<Type, List<int>> allOffsets,
-    ) {
+  DBTodo object,
+  IsarWriter writer,
+  List<int> offsets,
+  Map<Type, List<int>> allOffsets,
+) {
   writer.writeString(offsets[0], object.createdDate);
   writer.writeBool(offsets[1], object.isFinished);
   writer.writeString(offsets[2], object.title);
@@ -87,11 +87,11 @@ void _dBTodoSerialize(
 }
 
 DBTodo _dBTodoDeserialize(
-    Id id,
-    IsarReader reader,
-    List<int> offsets,
-    Map<Type, List<int>> allOffsets,
-    ) {
+  Id id,
+  IsarReader reader,
+  List<int> offsets,
+  Map<Type, List<int>> allOffsets,
+) {
   final object = DBTodo(
     createdDate: reader.readStringOrNull(offsets[0]),
     id: id,
@@ -103,11 +103,11 @@ DBTodo _dBTodoDeserialize(
 }
 
 P _dBTodoDeserializeProp<P>(
-    IsarReader reader,
-    int propertyId,
-    int offset,
-    Map<Type, List<int>> allOffsets,
-    ) {
+  IsarReader reader,
+  int propertyId,
+  int offset,
+  Map<Type, List<int>> allOffsets,
+) {
   switch (propertyId) {
     case 0:
       return (reader.readStringOrNull(offset)) as P;
@@ -157,19 +157,19 @@ extension DBTodoQueryWhere on QueryBuilder<DBTodo, DBTodo, QWhereClause> {
       if (query.whereSort == Sort.asc) {
         return query
             .addWhereClause(
-          IdWhereClause.lessThan(upper: id, includeUpper: false),
-        )
+              IdWhereClause.lessThan(upper: id, includeUpper: false),
+            )
             .addWhereClause(
-          IdWhereClause.greaterThan(lower: id, includeLower: false),
-        );
+              IdWhereClause.greaterThan(lower: id, includeLower: false),
+            );
       } else {
         return query
             .addWhereClause(
-          IdWhereClause.greaterThan(lower: id, includeLower: false),
-        )
+              IdWhereClause.greaterThan(lower: id, includeLower: false),
+            )
             .addWhereClause(
-          IdWhereClause.lessThan(upper: id, includeUpper: false),
-        );
+              IdWhereClause.lessThan(upper: id, includeUpper: false),
+            );
       }
     });
   }
@@ -193,11 +193,11 @@ extension DBTodoQueryWhere on QueryBuilder<DBTodo, DBTodo, QWhereClause> {
   }
 
   QueryBuilder<DBTodo, DBTodo, QAfterWhereClause> idBetween(
-      Id lowerId,
-      Id upperId, {
-        bool includeLower = true,
-        bool includeUpper = true,
-      }) {
+    Id lowerId,
+    Id upperId, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IdWhereClause.between(
         lower: lowerId,
@@ -227,9 +227,9 @@ extension DBTodoQueryFilter on QueryBuilder<DBTodo, DBTodo, QFilterCondition> {
   }
 
   QueryBuilder<DBTodo, DBTodo, QAfterFilterCondition> createdDateEqualTo(
-      String? value, {
-        bool caseSensitive = true,
-      }) {
+    String? value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'createdDate',
@@ -240,10 +240,10 @@ extension DBTodoQueryFilter on QueryBuilder<DBTodo, DBTodo, QFilterCondition> {
   }
 
   QueryBuilder<DBTodo, DBTodo, QAfterFilterCondition> createdDateGreaterThan(
-      String? value, {
-        bool include = false,
-        bool caseSensitive = true,
-      }) {
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
@@ -255,10 +255,10 @@ extension DBTodoQueryFilter on QueryBuilder<DBTodo, DBTodo, QFilterCondition> {
   }
 
   QueryBuilder<DBTodo, DBTodo, QAfterFilterCondition> createdDateLessThan(
-      String? value, {
-        bool include = false,
-        bool caseSensitive = true,
-      }) {
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
@@ -270,12 +270,12 @@ extension DBTodoQueryFilter on QueryBuilder<DBTodo, DBTodo, QFilterCondition> {
   }
 
   QueryBuilder<DBTodo, DBTodo, QAfterFilterCondition> createdDateBetween(
-      String? lower,
-      String? upper, {
-        bool includeLower = true,
-        bool includeUpper = true,
-        bool caseSensitive = true,
-      }) {
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
         property: r'createdDate',
@@ -289,9 +289,9 @@ extension DBTodoQueryFilter on QueryBuilder<DBTodo, DBTodo, QFilterCondition> {
   }
 
   QueryBuilder<DBTodo, DBTodo, QAfterFilterCondition> createdDateStartsWith(
-      String value, {
-        bool caseSensitive = true,
-      }) {
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.startsWith(
         property: r'createdDate',
@@ -302,9 +302,9 @@ extension DBTodoQueryFilter on QueryBuilder<DBTodo, DBTodo, QFilterCondition> {
   }
 
   QueryBuilder<DBTodo, DBTodo, QAfterFilterCondition> createdDateEndsWith(
-      String value, {
-        bool caseSensitive = true,
-      }) {
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.endsWith(
         property: r'createdDate',
@@ -366,9 +366,9 @@ extension DBTodoQueryFilter on QueryBuilder<DBTodo, DBTodo, QFilterCondition> {
   }
 
   QueryBuilder<DBTodo, DBTodo, QAfterFilterCondition> idGreaterThan(
-      Id value, {
-        bool include = false,
-      }) {
+    Id value, {
+    bool include = false,
+  }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
@@ -379,9 +379,9 @@ extension DBTodoQueryFilter on QueryBuilder<DBTodo, DBTodo, QFilterCondition> {
   }
 
   QueryBuilder<DBTodo, DBTodo, QAfterFilterCondition> idLessThan(
-      Id value, {
-        bool include = false,
-      }) {
+    Id value, {
+    bool include = false,
+  }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
@@ -392,11 +392,11 @@ extension DBTodoQueryFilter on QueryBuilder<DBTodo, DBTodo, QFilterCondition> {
   }
 
   QueryBuilder<DBTodo, DBTodo, QAfterFilterCondition> idBetween(
-      Id lower,
-      Id upper, {
-        bool includeLower = true,
-        bool includeUpper = true,
-      }) {
+    Id lower,
+    Id upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
         property: r'id',
@@ -419,9 +419,9 @@ extension DBTodoQueryFilter on QueryBuilder<DBTodo, DBTodo, QFilterCondition> {
   }
 
   QueryBuilder<DBTodo, DBTodo, QAfterFilterCondition> titleEqualTo(
-      String value, {
-        bool caseSensitive = true,
-      }) {
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'title',
@@ -432,10 +432,10 @@ extension DBTodoQueryFilter on QueryBuilder<DBTodo, DBTodo, QFilterCondition> {
   }
 
   QueryBuilder<DBTodo, DBTodo, QAfterFilterCondition> titleGreaterThan(
-      String value, {
-        bool include = false,
-        bool caseSensitive = true,
-      }) {
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
@@ -447,10 +447,10 @@ extension DBTodoQueryFilter on QueryBuilder<DBTodo, DBTodo, QFilterCondition> {
   }
 
   QueryBuilder<DBTodo, DBTodo, QAfterFilterCondition> titleLessThan(
-      String value, {
-        bool include = false,
-        bool caseSensitive = true,
-      }) {
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
@@ -462,12 +462,12 @@ extension DBTodoQueryFilter on QueryBuilder<DBTodo, DBTodo, QFilterCondition> {
   }
 
   QueryBuilder<DBTodo, DBTodo, QAfterFilterCondition> titleBetween(
-      String lower,
-      String upper, {
-        bool includeLower = true,
-        bool includeUpper = true,
-        bool caseSensitive = true,
-      }) {
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
         property: r'title',
@@ -481,9 +481,9 @@ extension DBTodoQueryFilter on QueryBuilder<DBTodo, DBTodo, QFilterCondition> {
   }
 
   QueryBuilder<DBTodo, DBTodo, QAfterFilterCondition> titleStartsWith(
-      String value, {
-        bool caseSensitive = true,
-      }) {
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.startsWith(
         property: r'title',
@@ -494,9 +494,9 @@ extension DBTodoQueryFilter on QueryBuilder<DBTodo, DBTodo, QFilterCondition> {
   }
 
   QueryBuilder<DBTodo, DBTodo, QAfterFilterCondition> titleEndsWith(
-      String value, {
-        bool caseSensitive = true,
-      }) {
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.endsWith(
         property: r'title',
@@ -565,9 +565,9 @@ extension DBTodoQueryFilter on QueryBuilder<DBTodo, DBTodo, QFilterCondition> {
   }
 
   QueryBuilder<DBTodo, DBTodo, QAfterFilterCondition> updatedDateEqualTo(
-      String? value, {
-        bool caseSensitive = true,
-      }) {
+    String? value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'updatedDate',
@@ -578,10 +578,10 @@ extension DBTodoQueryFilter on QueryBuilder<DBTodo, DBTodo, QFilterCondition> {
   }
 
   QueryBuilder<DBTodo, DBTodo, QAfterFilterCondition> updatedDateGreaterThan(
-      String? value, {
-        bool include = false,
-        bool caseSensitive = true,
-      }) {
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
@@ -593,10 +593,10 @@ extension DBTodoQueryFilter on QueryBuilder<DBTodo, DBTodo, QFilterCondition> {
   }
 
   QueryBuilder<DBTodo, DBTodo, QAfterFilterCondition> updatedDateLessThan(
-      String? value, {
-        bool include = false,
-        bool caseSensitive = true,
-      }) {
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
@@ -608,12 +608,12 @@ extension DBTodoQueryFilter on QueryBuilder<DBTodo, DBTodo, QFilterCondition> {
   }
 
   QueryBuilder<DBTodo, DBTodo, QAfterFilterCondition> updatedDateBetween(
-      String? lower,
-      String? upper, {
-        bool includeLower = true,
-        bool includeUpper = true,
-        bool caseSensitive = true,
-      }) {
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
         property: r'updatedDate',
@@ -627,9 +627,9 @@ extension DBTodoQueryFilter on QueryBuilder<DBTodo, DBTodo, QFilterCondition> {
   }
 
   QueryBuilder<DBTodo, DBTodo, QAfterFilterCondition> updatedDateStartsWith(
-      String value, {
-        bool caseSensitive = true,
-      }) {
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.startsWith(
         property: r'updatedDate',
@@ -640,9 +640,9 @@ extension DBTodoQueryFilter on QueryBuilder<DBTodo, DBTodo, QFilterCondition> {
   }
 
   QueryBuilder<DBTodo, DBTodo, QAfterFilterCondition> updatedDateEndsWith(
-      String value, {
-        bool caseSensitive = true,
-      }) {
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.endsWith(
         property: r'updatedDate',

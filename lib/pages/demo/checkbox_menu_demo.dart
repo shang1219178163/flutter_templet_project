@@ -1,8 +1,5 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 
 class CheckboxMenuDemo extends StatefulWidget {
   const CheckboxMenuDemo({super.key, required this.message});
@@ -15,7 +12,8 @@ class CheckboxMenuDemo extends StatefulWidget {
 
 class _CheckboxMenuDemoState extends State<CheckboxMenuDemo> {
   final _buttonFocusNode = FocusNode(debugLabel: 'Menu Button');
-  static const _showShortcut = SingleActivator(LogicalKeyboardKey.keyS, control: true);
+  static const _showShortcut =
+      SingleActivator(LogicalKeyboardKey.keyS, control: true);
   bool _showing = false;
 
   @override
@@ -54,14 +52,11 @@ class _CheckboxMenuDemoState extends State<CheckboxMenuDemo> {
               RadioMenuButton(
                 groupValue: 0,
                 value: 0,
-                onChanged: (int? value) {
-
-                },
+                onChanged: (int? value) {},
                 child: const Text('two'),
               ),
             ],
             builder: (context, MenuController controller, Widget? child) {
-
               return TextButton(
                 focusNode: _buttonFocusNode,
                 onPressed: () {

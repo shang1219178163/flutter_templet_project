@@ -6,8 +6,6 @@
 //  Copyright © 12/14/21 shang. All rights reserved.
 //
 
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -43,11 +41,7 @@ class HitTest extends StatelessWidget {
               child: GestureDetector(
                 onTap: () => debugPrint("I'm hit! I'm hit!"),
                 child: ExpandedHitTestArea(
-                  child: Container(
-                    width: 120,
-                    height: 110,
-                    color: Colors.red
-                  ),
+                  child: Container(width: 120, height: 110, color: Colors.red),
                 ),
               ),
             ),
@@ -75,13 +69,12 @@ class HitTest extends StatelessWidget {
     );
   }
 
-
   _buildBody1() {
     return Center(
       child: GestureDetector(
         ///这里设置behavior
         behavior: HitTestBehavior.translucent,
-        onTap: (){
+        onTap: () {
           ddlog("onTap");
         },
         child: Container(
@@ -90,10 +83,11 @@ class HitTest extends StatelessWidget {
           color: Colors.yellow,
           padding: EdgeInsets.symmetric(horizontal: 25),
           child: OutlinedButton(
-            onPressed: (){
-            ddlog("onPressed");
-          },
-            child: Text("OutlinedButton"),),
+            onPressed: () {
+              ddlog("onPressed");
+            },
+            child: Text("OutlinedButton"),
+          ),
         ),
       ),
     );
@@ -107,11 +101,12 @@ class ExpandedHitTestArea extends SingleChildRenderObjectWidget {
   }) : super(key: key, child: child);
 
   @override
-  RenderObject createRenderObject(BuildContext context) => RenderExpandedHitTestArea();
+  RenderObject createRenderObject(BuildContext context) =>
+      RenderExpandedHitTestArea();
 }
 
-class RenderExpandedHitTestArea extends RenderBox with RenderObjectWithChildMixin<RenderBox> {
-
+class RenderExpandedHitTestArea extends RenderBox
+    with RenderObjectWithChildMixin<RenderBox> {
   // trivial implementations left out to save space: computeMinIntrinsicWidth, computeMaxIntrinsicWidth, computeMinIntrinsicHeight, computeMaxIntrinsicHeight
 
   @override
@@ -125,7 +120,8 @@ class RenderExpandedHitTestArea extends RenderBox with RenderObjectWithChildMixi
   void paint(PaintingContext context, Offset offset) {
     if (child?.parentData is BoxParentData) {
       var childParentData = child?.parentData as BoxParentData?;
-      context.paintChild(child!, childParentData?.offset ?? Offset.zero + offset);
+      context.paintChild(
+          child!, childParentData?.offset ?? Offset.zero + offset);
     }
   }
 
@@ -134,7 +130,9 @@ class RenderExpandedHitTestArea extends RenderBox with RenderObjectWithChildMixi
     const minimalSize = 44;
     final deltaX = (minimalSize - size.width).clamp(0, double.infinity) / 2;
     final deltaY = (minimalSize - size.height).clamp(0, double.infinity) / 2;
-    if (Rect.fromLTRB(-deltaX, -deltaY, size.width + deltaX, size.height + deltaY).contains(position)) {
+    if (Rect.fromLTRB(
+            -deltaX, -deltaY, size.width + deltaX, size.height + deltaY)
+        .contains(position)) {
       result.add(BoxHitTestEntry(this, position));
       return true;
     }

@@ -6,16 +6,13 @@
 //  Copyright © 12/2/21 shang. All rights reserved.
 //
 
-
 import 'package:flutter/material.dart';
 
 class AfterLayoutDemo extends StatefulWidget {
-
   final String? title;
 
-  const AfterLayoutDemo({ Key? key, this.title}) : super(key: key);
+  const AfterLayoutDemo({Key? key, this.title}) : super(key: key);
 
-  
   @override
   _AfterLayoutDemoState createState() => _AfterLayoutDemoState();
 }

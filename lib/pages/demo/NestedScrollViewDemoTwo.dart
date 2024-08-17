@@ -6,7 +6,6 @@
 //  Copyright © 2023/3/25 shang. All rights reserved.
 //
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_sliver_persistent_header_delegate.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
@@ -15,16 +14,17 @@ import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/util/R.dart';
 
 class NestedScrollViewDemoTwo extends StatefulWidget {
-
-  const NestedScrollViewDemoTwo({ Key? key, this.title}) : super(key: key);
+  const NestedScrollViewDemoTwo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
   @override
-  _NestedScrollViewDemoTwoState createState() => _NestedScrollViewDemoTwoState();
+  _NestedScrollViewDemoTwoState createState() =>
+      _NestedScrollViewDemoTwoState();
 }
 
-class _NestedScrollViewDemoTwoState extends State<NestedScrollViewDemoTwo> with SingleTickerProviderStateMixin {
+class _NestedScrollViewDemoTwoState extends State<NestedScrollViewDemoTwo>
+    with SingleTickerProviderStateMixin {
   TabController? _tabController;
   ScrollController? _scrollController;
 
@@ -58,37 +58,40 @@ class _NestedScrollViewDemoTwoState extends State<NestedScrollViewDemoTwo> with 
       appBar: AppBar(
         elevation: 0,
         title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          onPressed: onPressed,
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),)
-        ).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  onPressed: onPressed,
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ))
+            .toList(),
       ),
       body: _buildBody(),
     );
   }
 
-  onPressed(){
+  onPressed() {
     flagVN.value = !flagVN.value;
     setState(() {});
   }
 
   _buildBody() {
-    if(flagVN.value) {
+    if (flagVN.value) {
       return _buildBody2(
+          scrollController: _scrollController,
+          tabController: _tabController,
+          indexVN: indexVN,
+          items: items);
+    }
+    return _buildBody1(
         scrollController: _scrollController,
         tabController: _tabController,
         indexVN: indexVN,
-        items: items
-      );
-    }
-    return _buildBody1(
-      scrollController: _scrollController,
-      tabController: _tabController,
-      indexVN: indexVN,
-      items: items
-    );
+        items: items);
   }
 
   _buildBody1({
@@ -112,25 +115,24 @@ class _NestedScrollViewDemoTwoState extends State<NestedScrollViewDemoTwo> with 
       body: TabBarView(
         controller: tabController,
         children: items.map((e) {
-          return SafeArea(
-            child: Builder(
-              builder: (BuildContext context) {
-                return CustomScrollView(
-                  slivers: <Widget>[
-                    SliverFillRemaining(
-                      // child: e
-                      child: Container(
-                        color: ColorExt.random,
-                        alignment: Alignment.center,
-                        child: Text(e),
-                      ),
-                    )
-                  ],
-                );
-              },
-            ));
-          }).toList(),
-        ),
+          return SafeArea(child: Builder(
+            builder: (BuildContext context) {
+              return CustomScrollView(
+                slivers: <Widget>[
+                  SliverFillRemaining(
+                    // child: e
+                    child: Container(
+                      color: ColorExt.random,
+                      alignment: Alignment.center,
+                      child: Text(e),
+                    ),
+                  )
+                ],
+              );
+            },
+          ));
+        }).toList(),
+      ),
     );
   }
 
@@ -176,7 +178,11 @@ class _NestedScrollViewDemoTwoState extends State<NestedScrollViewDemoTwo> with 
                             // labelPadding: EdgeInsets.zero,
                             controller: _tabController,
                             isScrollable: true,
-                            tabs: items.map((e) => Tab(child: Text(e),)).toList(),
+                            tabs: items
+                                .map((e) => Tab(
+                                      child: Text(e),
+                                    ))
+                                .toList(),
                           ),
                         ),
                       ),
@@ -208,39 +214,46 @@ class _NestedScrollViewDemoTwoState extends State<NestedScrollViewDemoTwo> with 
       // labelPadding: EdgeInsets.symmetric(horizontal: 12),
       // indicatorPadding: EdgeInsets.only(left: 8, right: 8),
       indicator: UnderlineTabIndicator(
-        borderSide: BorderSide(
-          style: BorderStyle.solid,
-          width: 4,
-          color: Colors.red,
-        )
-      ),
-      tabs: items.map((e) => Tab(
-        child: ValueListenableBuilder<int>(
-          valueListenable: indexVN,
-          builder: (BuildContext context, int value, Widget? child) {
-            final index = items.indexOf(e);
-            if (index != 1){
-              if (index == 2){
-                return Tab(child: Text(e + e,),);
-              }
-              if (index == 3){
-                return Tab(child: Text(e + e, style: TextStyle(fontSize: 20)),);
-              }
-              return Tab(text: e);
-            }
+          borderSide: BorderSide(
+        style: BorderStyle.solid,
+        width: 4,
+        color: Colors.red,
+      )),
+      tabs: items
+          .map((e) => Tab(
+                child: ValueListenableBuilder<int>(
+                    valueListenable: indexVN,
+                    builder: (BuildContext context, int value, Widget? child) {
+                      final index = items.indexOf(e);
+                      if (index != 1) {
+                        if (index == 2) {
+                          return Tab(
+                            child: Text(
+                              e + e,
+                            ),
+                          );
+                        }
+                        if (index == 3) {
+                          return Tab(
+                            child: Text(e + e, style: TextStyle(fontSize: 20)),
+                          );
+                        }
+                        return Tab(text: e);
+                      }
 
-            final url = (value == index) ? R.image.urls[1] : R.image.urls[0];
-            return Tab(
-              child: FadeInImage(
-                image: NetworkImage(url),
-                placeholder: "flutter_logo.png".toAssetImage(),
-              ),
-            );
-          }),
-      )).toList(),
+                      final url =
+                          (value == index) ? R.image.urls[1] : R.image.urls[0];
+                      return Tab(
+                        child: FadeInImage(
+                          image: NetworkImage(url),
+                          placeholder: "flutter_logo.png".toAssetImage(),
+                        ),
+                      );
+                    }),
+              ))
+          .toList(),
     );
   }
-
 
   ///有小问题
   buildSliverOverlapAbsorber({
@@ -252,23 +265,19 @@ class _NestedScrollViewDemoTwoState extends State<NestedScrollViewDemoTwo> with 
     return SliverOverlapAbsorber(
       handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
       sliver: SliverAppBar(
-        automaticallyImplyLeading: false,
-        pinned: true,
-        floating: true,
-        expandedHeight: 110.0,
-        forceElevated: innerBoxIsScrolled,
-        stretch: true,
-        bottom: TabBar(
-          controller: controller,
-          isScrollable: true,
-          tabs: items.map((e) => Tab(
-            child: Text(e)
-          )).toList(),
-        )
-      ),
+          automaticallyImplyLeading: false,
+          pinned: true,
+          floating: true,
+          expandedHeight: 110.0,
+          forceElevated: innerBoxIsScrolled,
+          stretch: true,
+          bottom: TabBar(
+            controller: controller,
+            isScrollable: true,
+            tabs: items.map((e) => Tab(child: Text(e))).toList(),
+          )),
     );
   }
-
 
   buildSliverFillRemaining() {
     return SliverFillRemaining(
@@ -288,10 +297,8 @@ class _NestedScrollViewDemoTwoState extends State<NestedScrollViewDemoTwo> with 
     );
   }
 
-  SliverPersistentHeader buildSliverHeader({
-    required Text text,
-    bool pinned = true
-  }) {
+  SliverPersistentHeader buildSliverHeader(
+      {required Text text, bool pinned = true}) {
     return SliverPersistentHeader(
       pinned: pinned,
       delegate: NSliverPersistentHeaderDelegate(
@@ -317,7 +324,8 @@ class _NestedScrollViewDemoTwoState extends State<NestedScrollViewDemoTwo> with 
     required TabController? controller,
     required List<String> items,
   }) {
-    return TabBarView( //构建
+    return TabBarView(
+      //构建
       controller: controller,
       children: items.map((e) {
         return RefreshIndicator(
@@ -334,16 +342,17 @@ class _NestedScrollViewDemoTwoState extends State<NestedScrollViewDemoTwo> with 
   buildList() {
     const items = Colors.primaries;
     return ListView.builder(
-      // controller: _scrollController,
-      itemCount: items.length,
-      itemBuilder: (BuildContext context, int index){
-        final color = items[index];
-        return ListTile(
-          leading: Icon(Icons.ac_unit, color: color,),
-          title: Text("$index"),
-        );
-      }
-    );
+        // controller: _scrollController,
+        itemCount: items.length,
+        itemBuilder: (BuildContext context, int index) {
+          final color = items[index];
+          return ListTile(
+            leading: Icon(
+              Icons.ac_unit,
+              color: color,
+            ),
+            title: Text("$index"),
+          );
+        });
   }
-
 }

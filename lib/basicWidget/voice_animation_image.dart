@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 
 class VoiceAnimationImage extends StatefulWidget {
-
   VoiceAnimationImage({
     Key? key,
     required this.assetList,
@@ -16,11 +15,10 @@ class VoiceAnimationImage extends StatefulWidget {
   final double width;
   final double height;
   int interval = 200;
-  bool isPlaying= false;
+  bool isPlaying = false;
 
   @override
   State<StatefulWidget> createState() => VoiceAnimationImageState();
-
 }
 
 class VoiceAnimationImageState extends State<VoiceAnimationImage>
@@ -44,21 +42,21 @@ class VoiceAnimationImageState extends State<VoiceAnimationImage>
     final maxTime = interval * imageCount;
 
     // 启动动画controller
-    _controller = AnimationController(duration: Duration(milliseconds: maxTime), vsync: this);
+    _controller = AnimationController(
+        duration: Duration(milliseconds: maxTime), vsync: this);
     _controller.addStatusListener((AnimationStatus status) {
       if (status == AnimationStatus.completed) {
         _controller.forward(from: 0.0); // 完成后重新开始
       }
     });
 
-    _animation = Tween<double>(begin: 0, end: imageCount.toDouble())
-        .animate(_controller)
-      ..addListener(() {
-        setState(() {});
-      });
+    _animation =
+        Tween<double>(begin: 0, end: imageCount.toDouble()).animate(_controller)
+          ..addListener(() {
+            setState(() {});
+          });
 
-
-    if(widget.isPlaying){
+    if (widget.isPlaying) {
       start();
     } else {
       stop();
@@ -67,7 +65,6 @@ class VoiceAnimationImageState extends State<VoiceAnimationImage>
 
   @override
   Widget build(BuildContext context) {
-
     var ix = _animation.value.floor() % widget.assetList.length;
     var images = <Widget>[];
     // 把所有图片都加载进内容，否则每一帧加载时会卡顿

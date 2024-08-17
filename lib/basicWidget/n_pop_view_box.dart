@@ -1,11 +1,8 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_cancel_and_confirm_bar.dart';
 
 /// PopView 内容
 class NPopViewBox extends StatefulWidget {
-
   NPopViewBox({
     Key? key,
     this.title,
@@ -48,7 +45,6 @@ class NPopViewBox extends StatefulWidget {
 }
 
 class _NPopViewBoxState extends State<NPopViewBox> {
-
   final _scrollController = ScrollController();
 
   @override
@@ -73,48 +69,51 @@ class _NPopViewBoxState extends State<NPopViewBox> {
     );
   }
 
-  buildBody(
-      {
-        Widget? title,
-        Widget? content,
-        Widget? header,
-        Widget? footer,
-        Color divderColor = const Color(0xffF3F3F3),
-        EdgeInsets margin = const EdgeInsets.symmetric(horizontal: 38),
-        Radius radius = const Radius.circular(8),
-        Alignment alignment = Alignment.center,
-        VoidCallback? onCancell,
-        VoidCallback? onConfirm,
-        double contentMaxHeight = 500,
-        double contentMinHeight = 150,
-        double buttonBarHeight = 48,
-        EdgeInsets contentPadding = const EdgeInsets.all(20),
-        StatefulWidgetBuilder? contentChildBuilder,
-        required ScrollController scrollController,
-      }
-  ) {
-
+  buildBody({
+    Widget? title,
+    Widget? content,
+    Widget? header,
+    Widget? footer,
+    Color divderColor = const Color(0xffF3F3F3),
+    EdgeInsets margin = const EdgeInsets.symmetric(horizontal: 38),
+    Radius radius = const Radius.circular(8),
+    Alignment alignment = Alignment.center,
+    VoidCallback? onCancell,
+    VoidCallback? onConfirm,
+    double contentMaxHeight = 500,
+    double contentMinHeight = 150,
+    double buttonBarHeight = 48,
+    EdgeInsets contentPadding = const EdgeInsets.all(20),
+    StatefulWidgetBuilder? contentChildBuilder,
+    required ScrollController scrollController,
+  }) {
     final defaultHeader = Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Padding(
-          padding: EdgeInsets.only(left: 20,),
-          child: title ?? Text("标题",
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              color: Color(0xff333333),
-            ),
+          padding: EdgeInsets.only(
+            left: 20,
           ),
+          child: title ??
+              Text(
+                "标题",
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xff333333),
+                ),
+              ),
         ),
         Padding(
           padding: EdgeInsets.only(right: 4),
           child: Material(
             child: IconButton(
-              onPressed: onCancell ?? (){
-                Navigator.of(context).pop();
-              },
-              icon: Icon(Icons.clear,
+              onPressed: onCancell ??
+                  () {
+                    Navigator.of(context).pop();
+                  },
+              icon: Icon(
+                Icons.clear,
                 size: 20,
                 color: Colors.black.withOpacity(0.5),
               ),
@@ -124,38 +123,36 @@ class _NPopViewBoxState extends State<NPopViewBox> {
       ],
     );
 
-    final defaultContent = StatefulBuilder(
-      builder: (context, setState) {
-
-        return Scrollbar(
-          controller: scrollController,
-          child: ConstrainedBox(
-            constraints: BoxConstraints(
-              maxHeight: contentMaxHeight - buttonBarHeight,
-              minHeight: contentMinHeight,
-            ),
-            child: SingleChildScrollView(
+    final defaultContent = StatefulBuilder(builder: (context, setState) {
+      return Scrollbar(
+        controller: scrollController,
+        child: ConstrainedBox(
+          constraints: BoxConstraints(
+            maxHeight: contentMaxHeight - buttonBarHeight,
+            minHeight: contentMinHeight,
+          ),
+          child: SingleChildScrollView(
               controller: scrollController,
               child: Padding(
                 padding: contentPadding,
                 child: contentChildBuilder?.call(context, setState),
-              )
-            ),
-          ),
-        );
-      }
-    );
+              )),
+        ),
+      );
+    });
 
     final defaultFooter = NCancelAndConfirmBar(
       height: buttonBarHeight,
       confirmBgColor: Theme.of(context).primaryColor,
       bottomRadius: radius,
-      onCancel: onCancell ?? (){
-        Navigator.of(context).pop();
-      },
-      onConfirm: onConfirm ?? () {
-        Navigator.of(context).pop();
-      },
+      onCancel: onCancell ??
+          () {
+            Navigator.of(context).pop();
+          },
+      onConfirm: onConfirm ??
+          () {
+            Navigator.of(context).pop();
+          },
     );
     return Align(
       alignment: alignment,
@@ -170,7 +167,10 @@ class _NPopViewBoxState extends State<NPopViewBox> {
           mainAxisSize: MainAxisSize.min,
           children: [
             header ?? defaultHeader,
-            Divider(height: 1, color: divderColor,),
+            Divider(
+              height: 1,
+              color: divderColor,
+            ),
             content ?? defaultContent,
             footer ?? defaultFooter,
           ],
@@ -178,7 +178,6 @@ class _NPopViewBoxState extends State<NPopViewBox> {
       ),
     );
   }
-
 
   // toShowGeneralDialog({
   //   required Widget child,
@@ -203,5 +202,4 @@ class _NPopViewBoxState extends State<NPopViewBox> {
   //     }
   //   );
   // }
-
 }

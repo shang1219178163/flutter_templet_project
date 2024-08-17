@@ -1,4 +1,3 @@
-
 //
 //  SystemIconsPage.dart
 //  flutter_templet_project
@@ -14,7 +13,6 @@ import 'package:flutter_templet_project/extension/ddlog.dart';
 
 import 'package:flutter_templet_project/util/icons_map.dart';
 
-
 class SystemIconsPage extends StatefulWidget {
   const SystemIconsPage({Key? key}) : super(key: key);
 
@@ -28,11 +26,9 @@ class _SystemIconsPageState extends State<SystemIconsPage> {
   var list = List.from(kIConDic.keys);
   var searchResults = List.from(kIConDic.keys);
 
-
   bool isGrid = false;
 
   String get actionTitle => isGrid ? 'List' : 'Grid';
-
 
   @override
   Widget build(BuildContext context) {
@@ -41,11 +37,14 @@ class _SystemIconsPageState extends State<SystemIconsPage> {
         title: Text("fluttefr 系统 Icons"),
         actions: [
           TextButton(
-            onPressed: (){
+            onPressed: () {
               isGrid = !isGrid;
               setState(() {});
             },
-            child: Text(actionTitle, style: TextStyle(color: Colors.white),),
+            child: Text(
+              actionTitle,
+              style: TextStyle(color: Colors.white),
+            ),
           ),
         ],
       ),
@@ -86,21 +85,24 @@ class _SystemIconsPageState extends State<SystemIconsPage> {
       onChanged: onChanged,
       controller: controller,
       decoration: InputDecoration(
-          icon: Icon(Icons.search),
+        icon: Icon(Icons.search),
         // labelText: "Search",
-          hintText: "Search",
-          // prefixIcon: Icon(Icons.search),
+        hintText: "Search",
+        // prefixIcon: Icon(Icons.search),
         suffixIcon: InkWell(
-          onTap: (){
+          onTap: () {
             controller?.clear();
             onChanged("");
           },
-          child: Icon(Icons.cancel, color: Colors.grey,),
+          child: Icon(
+            Icons.cancel,
+            color: Colors.grey,
+          ),
         ),
 
-          // border: OutlineInputBorder(
-          //     borderRadius: BorderRadius.all(Radius.circular(25.0))
-          // ),
+        // border: OutlineInputBorder(
+        //     borderRadius: BorderRadius.all(Radius.circular(25.0))
+        // ),
       ),
     );
   }
@@ -108,8 +110,8 @@ class _SystemIconsPageState extends State<SystemIconsPage> {
   _buildListView() {
     searchResults.sort((a, b) => a.compareTo(b));
     return CupertinoScrollbar(
-      thumbVisibility: false,
-      child: ListView.separated(
+        thumbVisibility: false,
+        child: ListView.separated(
           itemCount: searchResults.length,
           itemBuilder: (context, index) {
             final item = searchResults[index];
@@ -117,7 +119,7 @@ class _SystemIconsPageState extends State<SystemIconsPage> {
               leading: Icon(kIConDic[item]),
               title: Text("$item"),
               // subtitle: Text(array[0]),
-              onTap: (){
+              onTap: () {
                 ddlog(item);
                 // Clipboard.setData(ClipboardData(text: "$item"));
                 editingController.text = item.split('.').last;
@@ -133,8 +135,7 @@ class _SystemIconsPageState extends State<SystemIconsPage> {
               color: Color(0xFFDDDDDD),
             );
           },
-        )
-    );
+        ));
   }
 
   _buildGridView() {
@@ -148,13 +149,18 @@ class _SystemIconsPageState extends State<SystemIconsPage> {
           decoration: BoxDecoration(
             // color: index % 2 == 0 ? Colors.green : Colors.white,
             border: Border(
-              top: BorderSide(color: index > 2 ? Colors.transparent : Color(0xffe4e4e4)),
-              right: BorderSide(color: index % 3 == 2 ? Colors.transparent : Color(0xffe4e4e4)),
+              top: BorderSide(
+                  color: index > 2 ? Colors.transparent : Color(0xffe4e4e4)),
+              right: BorderSide(
+                  color:
+                      index % 3 == 2 ? Colors.transparent : Color(0xffe4e4e4)),
               bottom: BorderSide(color: Color(0xffe4e4e4)),
             ),
           ),
           child: GridTile(
-            footer: Text("$item",),
+            footer: Text(
+              "$item",
+            ),
             child: Icon(kIConDic[item]),
           ),
         );

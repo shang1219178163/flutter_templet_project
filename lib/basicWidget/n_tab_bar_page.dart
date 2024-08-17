@@ -6,14 +6,11 @@
 //  Copyright © 2024/3/9 shang. All rights reserved.
 //
 
-
 import 'package:flutter/material.dart';
 import 'package:tuple/tuple.dart';
 
-
 /// 选项卡页面封装
 class NTabBarPage extends StatefulWidget {
-
   const NTabBarPage({
     super.key,
     required this.items,
@@ -46,8 +43,8 @@ class NTabBarPage extends StatefulWidget {
   State<NTabBarPage> createState() => _NTabBarPageState();
 }
 
-class _NTabBarPageState extends State<NTabBarPage> with SingleTickerProviderStateMixin {
-
+class _NTabBarPageState extends State<NTabBarPage>
+    with SingleTickerProviderStateMixin {
   late final List<Tuple2<String, Widget>> items = widget.items;
 
   late final tabController = TabController(length: items.length, vsync: this);
@@ -56,11 +53,11 @@ class _NTabBarPageState extends State<NTabBarPage> with SingleTickerProviderStat
 
   late final colorScheme = Theme.of(context).colorScheme;
 
-  Color get textColor{
+  Color get textColor {
     return widget.isThemeBg ? colorScheme.primary : colorScheme.onPrimary;
   }
 
-  Color get bgColor{
+  Color get bgColor {
     return widget.isThemeBg ? colorScheme.onPrimary : colorScheme.primary;
   }
 
@@ -84,7 +81,8 @@ class _NTabBarPageState extends State<NTabBarPage> with SingleTickerProviderStat
     if (widget.tabBarAlignment != oldWidget.tabBarAlignment ||
         widget.isScrollable != oldWidget.isScrollable ||
         widget.isThemeBg != oldWidget.isThemeBg ||
-        widget.items.map((e) => e.item1).join(",") != oldWidget.items.map((e) => e.item1).join(",")) {
+        widget.items.map((e) => e.item1).join(",") !=
+            oldWidget.items.map((e) => e.item1).join(",")) {
       setState(() {});
     }
   }
@@ -102,27 +100,24 @@ class _NTabBarPageState extends State<NTabBarPage> with SingleTickerProviderStat
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         ValueListenableBuilder(
-           valueListenable: tabBarIndex,
-           builder: (context, index, child){
-            return widget.headerBuilder?.call(context, index) ?? SizedBox();
-          }
-        ),
+            valueListenable: tabBarIndex,
+            builder: (context, index, child) {
+              return widget.headerBuilder?.call(context, index) ?? SizedBox();
+            }),
         buildTabBar(),
         ValueListenableBuilder(
-          valueListenable: tabBarIndex,
-          builder: (context, index, child){
-            return widget.middleBuilder?.call(context, index) ?? SizedBox();
-          }
-        ),
+            valueListenable: tabBarIndex,
+            builder: (context, index, child) {
+              return widget.middleBuilder?.call(context, index) ?? SizedBox();
+            }),
         Expanded(
           child: buildBody(),
         ),
         ValueListenableBuilder(
-          valueListenable: tabBarIndex,
-          builder: (context, index, child){
-            return widget.footerBuilder?.call(context, index) ?? SizedBox();
-          }
-        ),
+            valueListenable: tabBarIndex,
+            builder: (context, index, child) {
+              return widget.footerBuilder?.call(context, index) ?? SizedBox();
+            }),
       ],
     );
   }

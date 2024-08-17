@@ -6,7 +6,6 @@
 //  Copyright © 2024/3/13 shang. All rights reserved.
 //
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/model/order_model.dart';
 import 'package:flutter_templet_project/vendor/isar/DBManager.dart';
@@ -46,5 +45,4 @@ class OrderProvider<E extends OrderModel> extends ChangeNotifier {
     notifyListeners();
     return (code: 0, message: "请求成功");
   }
-
 }

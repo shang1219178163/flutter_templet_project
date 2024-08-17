@@ -6,7 +6,6 @@
 //  Copyright © 6/7/21 shang. All rights reserved.
 //
 
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -18,23 +17,24 @@ import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 
 class IndicatorDemo extends StatefulWidget {
-
-  const IndicatorDemo({ super.key}) ;
+  const IndicatorDemo({super.key});
 
   @override
   _IndicatorDemoState createState() => _IndicatorDemoState();
 }
 
-class _IndicatorDemoState extends State<IndicatorDemo> with TickerProviderStateMixin {
-
+class _IndicatorDemoState extends State<IndicatorDemo>
+    with TickerProviderStateMixin {
   late AnimationController controller;
 
   @override
   void initState() {
-    controller = AnimationController(vsync: this, duration: Duration(seconds: 3),)
-    ..addListener(() {
-      setState(() {});
-    });
+    controller = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 3),
+    )..addListener(() {
+        setState(() {});
+      });
     controller.repeat(reverse: true);
     super.initState();
   }
@@ -45,20 +45,24 @@ class _IndicatorDemoState extends State<IndicatorDemo> with TickerProviderStateM
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("$widget"),
-        actions: ['done',].map((e) => TextButton(
-          onPressed: () {
-            // debugPrint(CupertinoActivityIndicator().runtimeType.toString());
-          },
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),)
-        ).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  onPressed: () {
+                    // debugPrint(CupertinoActivityIndicator().runtimeType.toString());
+                  },
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ))
+            .toList(),
       ),
       body: Padding(
         padding: EdgeInsets.all(20.0),
@@ -103,7 +107,6 @@ class _IndicatorDemoState extends State<IndicatorDemo> with TickerProviderStateM
                 color: Colors.red,
               ),
             ),
-
           ],
         ),
       ),

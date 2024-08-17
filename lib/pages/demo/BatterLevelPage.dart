@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-
 class BatterLevelPage extends StatefulWidget {
   const BatterLevelPage({Key? key, this.title}) : super(key: key);
 
@@ -12,7 +11,6 @@ class BatterLevelPage extends StatefulWidget {
 }
 
 class _BatterLevelPageState extends State<BatterLevelPage> {
-
   static const platform = MethodChannel('samples.flutter.io/battery');
   String _batteryLevel = "Unknown battery level.";
 
@@ -22,7 +20,7 @@ class _BatterLevelPageState extends State<BatterLevelPage> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         leading: GestureDetector(
-          onTap:  (){
+          onTap: () {
             if (!Navigator.canPop(context)) Navigator.pop(context);
           },
           child: Icon(Icons.arrow_back),
@@ -32,7 +30,9 @@ class _BatterLevelPageState extends State<BatterLevelPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(_batteryLevel,),
+            Text(
+              _batteryLevel,
+            ),
             OutlinedButton.icon(
               icon: Icon(Icons.search),
               label: Text("Get Battery Level"),
@@ -44,15 +44,15 @@ class _BatterLevelPageState extends State<BatterLevelPage> {
     );
   }
 
-  _getBatterLevel() async{
+  _getBatterLevel() async {
     String batteryLevel;
     try {
       final int result = await platform.invokeMethod('getBatteryLevel');
       batteryLevel = 'Battery level at $result % .';
-    } on PlatformException catch(e) {
+    } on PlatformException catch (e) {
       batteryLevel = "Failed to get battery level: '${e.message}'.";
     }
-    setState((){
+    setState(() {
       _batteryLevel = batteryLevel;
     });
   }

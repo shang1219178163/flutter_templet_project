@@ -6,17 +6,14 @@
 //  Copyright © 7/29/21 shang. All rights reserved.
 //
 
-
 import 'package:flutter/material.dart';
 
 class NPopupRoute<T> extends PopupRoute<T> {
-
-  NPopupRoute({
-    this.backgroudColor,
-    this.alignment = Alignment.center,
-    required this.onClick,
-    required this.child
-  });
+  NPopupRoute(
+      {this.backgroudColor,
+      this.alignment = Alignment.center,
+      required this.onClick,
+      required this.child});
 
   @override
   Color? get barrierColor => null;
@@ -42,9 +39,9 @@ class NPopupRoute<T> extends PopupRoute<T> {
   /// backgroudView action
   final Function onClick;
 
-
   @override
-  Widget buildPage(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
+  Widget buildPage(BuildContext context, Animation<double> animation,
+      Animation<double> secondaryAnimation) {
     final screenSize = MediaQuery.of(context).size;
 
     return Material(

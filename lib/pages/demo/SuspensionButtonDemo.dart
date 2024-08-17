@@ -1,15 +1,9 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/n_suspension.dart';
 
 class SuspensionButtonDemo extends StatefulWidget {
-
-  SuspensionButtonDemo({
-    Key? key,
-    this.title
-  }) : super(key: key);
+  SuspensionButtonDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -18,7 +12,6 @@ class SuspensionButtonDemo extends StatefulWidget {
 }
 
 class _SuspensionButtonDemoState extends State<SuspensionButtonDemo> {
-
   @override
   Widget build(BuildContext context) {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
@@ -30,12 +23,17 @@ class _SuspensionButtonDemoState extends State<SuspensionButtonDemo> {
       child: Scaffold(
         appBar: AppBar(
           title: Text(widget.title ?? "$widget"),
-          actions: ['done',].map((e) => TextButton(
-            child: Text(e,
-              style: TextStyle(color: Colors.white),
-            ),
-            onPressed: () => debugPrint(e),)
-          ).toList(),
+          actions: [
+            'done',
+          ]
+              .map((e) => TextButton(
+                    child: Text(
+                      e,
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onPressed: () => debugPrint(e),
+                  ))
+              .toList(),
         ),
         body: buildBody(),
       ),
@@ -56,9 +54,9 @@ class _SuspensionButtonDemoState extends State<SuspensionButtonDemo> {
         ),
       ),
       bgChild: Container(
-        color: Colors.black.withOpacity(0.1), //Color.fromRGBO(242, 243, 248, 1),
+        color:
+            Colors.black.withOpacity(0.1), //Color.fromRGBO(242, 243, 248, 1),
       ),
     );
   }
-
 }

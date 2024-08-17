@@ -1,14 +1,8 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_header.dart';
 
 class DropdownMenuDemo extends StatefulWidget {
-
-  DropdownMenuDemo({
-    Key? key, 
-    this.title
-  }) : super(key: key);
+  DropdownMenuDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -17,32 +11,22 @@ class DropdownMenuDemo extends StatefulWidget {
 }
 
 class _DropdownMenuDemoState extends State<DropdownMenuDemo> {
-
   final colorController = TextEditingController();
   final iconController = TextEditingController();
 
   ColorLabel? selectedColor;
   IconLabel? selectedIcon;
 
-
   final colorEntries = ColorLabel.values.map((e) {
     return DropdownMenuEntry<ColorLabel>(
-      value: e,
-      label: e.label,
-      enabled: e.label != 'Grey'
-    );
+        value: e, label: e.label, enabled: e.label != 'Grey');
   }).toList();
 
   final iconEntries = IconLabel.values.map((e) {
-    return DropdownMenuEntry<IconLabel>(
-      value: e,
-      label: e.label
-    );
+    return DropdownMenuEntry<IconLabel>(value: e, label: e.label);
   }).toList();
 
-
   final _selectedItemVN = ValueNotifier<BoxFit>(BoxFit.none);
-
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +53,6 @@ class _DropdownMenuDemoState extends State<DropdownMenuDemo> {
                 },
               ),
             ),
-
           ],
         ),
       ),
@@ -119,8 +102,7 @@ class _DropdownMenuDemoState extends State<DropdownMenuDemo> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-                  'You selected a ${selectedColor?.label} ${selectedIcon?.label}'
-              ),
+                  'You selected a ${selectedColor?.label} ${selectedIcon?.label}'),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 5),
                 child: Icon(
@@ -148,18 +130,17 @@ class _DropdownMenuDemoState extends State<DropdownMenuDemo> {
 
     return StatefulBuilder(
         builder: (BuildContext context, StateSetter setState) {
-
-          return MenuAnchor(
-            alignmentOffset: Offset(0, 0),
-            builder: (context, MenuController controller, Widget? child) {
-
-              return itemBuilder?.call(controller, selectedItem) ?? OutlinedButton(
+      return MenuAnchor(
+        alignmentOffset: Offset(0, 0),
+        builder: (context, MenuController controller, Widget? child) {
+          return itemBuilder?.call(controller, selectedItem) ??
+              OutlinedButton(
                 style: OutlinedButton.styleFrom(
-                  // padding: EdgeInsets.zero,
-                  // tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  // minimumSize: Size(50, 18),
-                ),
-                onPressed: (){
+                    // padding: EdgeInsets.zero,
+                    // tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    // minimumSize: Size(50, 18),
+                    ),
+                onPressed: () {
                   if (controller.isOpen) {
                     controller.close();
                   } else {
@@ -174,22 +155,20 @@ class _DropdownMenuDemoState extends State<DropdownMenuDemo> {
                   ],
                 ),
               );
+        },
+        menuChildren: values.map((e) {
+          return MenuItemButton(
+            onPressed: () {
+              selectedItem = e;
+              setState(() {});
+              onChanged.call(e);
             },
-            menuChildren: values.map((e) {
-              return MenuItemButton(
-                onPressed: () {
-                  selectedItem = e;
-                  setState(() {});
-                  onChanged.call(e);
-                },
-                child: Text(cbName(e)),
-              );
-            }).toList(),
+            child: Text(cbName(e)),
           );
-        }
-    );
+        }).toList(),
+      );
+    });
   }
-
 }
 
 enum ColorLabel {
@@ -206,7 +185,10 @@ enum ColorLabel {
 
 enum IconLabel {
   smile('Smile', Icons.sentiment_satisfied_outlined),
-  cloud('Cloud', Icons.cloud_outlined,),
+  cloud(
+    'Cloud',
+    Icons.cloud_outlined,
+  ),
   brush('Brush', Icons.brush_outlined),
   heart('Heart', Icons.favorite);
 

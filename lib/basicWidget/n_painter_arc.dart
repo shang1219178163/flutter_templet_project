@@ -1,6 +1,3 @@
-
-
-
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -30,10 +27,10 @@ class NPainterArc extends CustomPainter {
 
     final radius = min(size.width, size.height);
     final rect = Rect.fromCircle(
-      center: Offset(size.width/2, size.height/2),
-      radius: radius/2,
+      center: Offset(size.width / 2, size.height / 2),
+      radius: radius / 2,
     );
 
-    canvas.drawArc(rect, 0.0, 2*pi*percent, false, paint);
+    canvas.drawArc(rect, 0.0, 2 * pi * percent, false, paint);
   }
 }

@@ -19,18 +19,16 @@ import 'package:tuple/tuple.dart';
 final GlobalKey _globalKey = GlobalKey();
 
 class ProgressHudDemoNew extends StatefulWidget {
-
   final String? title;
 
-  const ProgressHudDemoNew({ Key? key, this.title}) : super(key: key);
+  const ProgressHudDemoNew({Key? key, this.title}) : super(key: key);
 
   @override
   _ProgressHudDemoNewState createState() => _ProgressHudDemoNewState();
 }
 
 class _ProgressHudDemoNewState extends State<ProgressHudDemoNew> {
-  var titles = ["0", "1", "2",
-    "3", "4", "5", "6", "7", "8"];
+  var titles = ["0", "1", "2", "3", "4", "5", "6", "7", "8"];
 
   var list = [
     APPRouter.toastNoContext,
@@ -47,15 +45,20 @@ class _ProgressHudDemoNewState extends State<ProgressHudDemoNew> {
       key: _globalKey,
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          onPressed: () {
-            isFlag = !isFlag;
-            setState(() {});
-          },
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),)
-        ).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  onPressed: () {
+                    isFlag = !isFlag;
+                    setState(() {});
+                  },
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ))
+            .toList(),
       ),
       // body: buildGridView(titles)
       // body: buildProgressHUD(context),
@@ -63,7 +66,9 @@ class _ProgressHudDemoNewState extends State<ProgressHudDemoNew> {
     );
   }
 
-  Widget buildGridView(List<String> list,) {
+  Widget buildGridView(
+    List<String> list,
+  ) {
     return GridView.count(
       padding: EdgeInsets.all(15.0),
       //一行多少个
@@ -77,7 +82,9 @@ class _ProgressHudDemoNewState extends State<ProgressHudDemoNew> {
       //宽高比
       childAspectRatio: 1 / 0.3,
 
-      children: initListWidget(list,),
+      children: initListWidget(
+        list,
+      ),
     );
   }
 
@@ -86,15 +93,22 @@ class _ProgressHudDemoNewState extends State<ProgressHudDemoNew> {
     for (var e in list) {
       lists.add(
         InkWell(
-          onTap: (){ _onPressed(list.indexOf(e)); },
+          onTap: () {
+            _onPressed(list.indexOf(e));
+          },
           child: Container(
             decoration: BoxDecoration(
-              border: Border.all(color: Colors.lightBlue,),
+              border: Border.all(
+                color: Colors.lightBlue,
+              ),
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("$e", style: TextStyle(fontSize: 12),),
+                Text(
+                  "$e",
+                  style: TextStyle(fontSize: 12),
+                ),
               ],
             ),
           ),
@@ -109,24 +123,23 @@ class _ProgressHudDemoNewState extends State<ProgressHudDemoNew> {
   }
 
   Widget buildColumn() {
-    return
-      Column(
-        // mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-          children: list.map((e) => ElevatedButton(
-            onPressed: () {
-              // Navigator.of(context).push(MaterialPageRoute(
-              //   builder: (context) => ToastNoContext(),
-              // ));
-              Get.toNamed(e, arguments: "array");
-            },
-            child: Text(e),
-          )).toList(),
-      );
+    return Column(
+      // mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: list
+          .map((e) => ElevatedButton(
+                onPressed: () {
+                  // Navigator.of(context).push(MaterialPageRoute(
+                  //   builder: (context) => ToastNoContext(),
+                  // ));
+                  Get.toNamed(e, arguments: "array");
+                },
+                child: Text(e),
+              ))
+          .toList(),
+    );
   }
 }
-
-
 
 class ToastContext extends StatefulWidget {
   const ToastContext({Key? key}) : super(key: key);
@@ -136,11 +149,10 @@ class ToastContext extends StatefulWidget {
 }
 
 class _ToastContextState extends State<ToastContext> {
-
   ButtonStyle get buttonStyle => ElevatedButton.styleFrom(
-    minimumSize: Size(100, 36),
-    padding: EdgeInsets.symmetric(horizontal: 5, vertical: 2),
-  );
+        minimumSize: Size(100, 36),
+        padding: EdgeInsets.symmetric(horizontal: 5, vertical: 2),
+      );
 
   FToast fToast = FToast();
 
@@ -164,7 +176,6 @@ class _ToastContextState extends State<ToastContext> {
 
   var list = <Tuple2<String, VoidCallback>>[];
 
-
   @override
   void initState() {
     super.initState();
@@ -175,12 +186,30 @@ class _ToastContextState extends State<ToastContext> {
     });
 
     list = [
-      Tuple2('Show Custom Toast', _showToast, ),
-      Tuple2('Show Custom Toast by PositionedToastBuilder', _showBuilderToast, ),
-      Tuple2('Custom Toast With Close', _showToastCancel, ),
-      Tuple2('Queue Toasts', _queueToasts, ),
-      Tuple2('Cancel Toast', _removeToast, ),
-      Tuple2('Remove Queued Toasts', _removeAllQueuedToasts,),
+      Tuple2(
+        'Show Custom Toast',
+        _showToast,
+      ),
+      Tuple2(
+        'Show Custom Toast by PositionedToastBuilder',
+        _showBuilderToast,
+      ),
+      Tuple2(
+        'Custom Toast With Close',
+        _showToastCancel,
+      ),
+      Tuple2(
+        'Queue Toasts',
+        _queueToasts,
+      ),
+      Tuple2(
+        'Cancel Toast',
+        _removeToast,
+      ),
+      Tuple2(
+        'Remove Queued Toasts',
+        _removeAllQueuedToasts,
+      ),
     ];
   }
 
@@ -191,14 +220,18 @@ class _ToastContextState extends State<ToastContext> {
         title: Text("ToastContext"),
       ),
       body: Column(
-        children: list.map((e) => Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: ElevatedButton(
-            onPressed: e.item2,
-            // style: buttonStyle,
-            child: Text(e.item1),
-          ),
-        ),).toList(),
+        children: list
+            .map(
+              (e) => Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ElevatedButton(
+                  onPressed: e.item2,
+                  // style: buttonStyle,
+                  child: Text(e.item1),
+                ),
+              ),
+            )
+            .toList(),
       ),
     );
   }
@@ -213,17 +246,16 @@ class _ToastContextState extends State<ToastContext> {
 
   _showBuilderToast() {
     fToast.showToast(
-      child: toast,
-      gravity: ToastGravity.BOTTOM,
-      toastDuration: Duration(seconds: 2),
-      positionedToastBuilder: (context, child) {
-        return Positioned(
-          top: 16.0,
-          left: 16.0,
-          child: child,
-        );
-      }
-    );
+        child: toast,
+        gravity: ToastGravity.BOTTOM,
+        toastDuration: Duration(seconds: 2),
+        positionedToastBuilder: (context, child) {
+          return Positioned(
+            top: 16.0,
+            left: 16.0,
+            child: child,
+          );
+        });
   }
 
   _showToastCancel() {
@@ -301,7 +333,6 @@ class _ToastContextState extends State<ToastContext> {
   }
 }
 
-
 class ToastNoContext extends StatefulWidget {
   const ToastNoContext({Key? key}) : super(key: key);
 
@@ -310,7 +341,6 @@ class ToastNoContext extends StatefulWidget {
 }
 
 class _ToastNoContextState extends State<ToastNoContext> {
-
   var list = <Tuple2<String, VoidCallback>>[];
 
   bool isFlag = false;
@@ -318,13 +348,34 @@ class _ToastNoContextState extends State<ToastNoContext> {
   @override
   void initState() {
     list = [
-      Tuple2('Show Long Toast', showLongToast, ),
-      Tuple2('Show Short Toast', showShortToast, ),
-      Tuple2('Show Center Short Toast', showCenterShortToast, ),
-      Tuple2('Show Top Short Toast', showTopShortToast, ),
-      Tuple2('Show Colored Toast', showColoredToast, ),
-      Tuple2('Show Web Colored Toast', showWebColoredToast,),
-      Tuple2('Cancel Toasts', cancelToast, ),
+      Tuple2(
+        'Show Long Toast',
+        showLongToast,
+      ),
+      Tuple2(
+        'Show Short Toast',
+        showShortToast,
+      ),
+      Tuple2(
+        'Show Center Short Toast',
+        showCenterShortToast,
+      ),
+      Tuple2(
+        'Show Top Short Toast',
+        showTopShortToast,
+      ),
+      Tuple2(
+        'Show Colored Toast',
+        showColoredToast,
+      ),
+      Tuple2(
+        'Show Web Colored Toast',
+        showWebColoredToast,
+      ),
+      Tuple2(
+        'Cancel Toasts',
+        cancelToast,
+      ),
     ];
 
     super.initState();
@@ -335,15 +386,20 @@ class _ToastNoContextState extends State<ToastNoContext> {
     return Scaffold(
       appBar: AppBar(
         title: Text('ToastNoContext'),
-        actions: ['done',].map((e) => TextButton(
-          onPressed: () {
-            isFlag = !isFlag;
-            setState(() {});
-          },
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),)
-        ).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  onPressed: () {
+                    isFlag = !isFlag;
+                    setState(() {});
+                  },
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ))
+            .toList(),
       ),
       body: isFlag ? buildBody() : buildBody2(),
     );
@@ -351,16 +407,20 @@ class _ToastNoContextState extends State<ToastNoContext> {
 
   Widget buildBody() {
     return Column(
-      children: list.map((e) => Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: ElevatedButton(
-          onPressed: e.item2,
-          child: Padding(
-            padding: const EdgeInsets.all(5),
-            child: Text(e.item1),
-          ),
-        ),
-      ),).toList(),
+      children: list
+          .map(
+            (e) => Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ElevatedButton(
+                onPressed: e.item2,
+                child: Padding(
+                  padding: const EdgeInsets.all(5),
+                  child: Text(e.item1),
+                ),
+              ),
+            ),
+          )
+          .toList(),
     );
   }
 
@@ -395,10 +455,12 @@ class _ToastNoContextState extends State<ToastNoContext> {
           onPressed: cancelToast,
           child: Text('Cancel Toasts'),
         ),
-      ].map((e) => Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: e,
-      )).toList(),
+      ]
+          .map((e) => Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: e,
+              ))
+          .toList(),
     );
   }
 

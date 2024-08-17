@@ -1,6 +1,3 @@
-
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_pair.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
@@ -9,7 +6,6 @@ import 'package:tuple/tuple.dart';
 
 /// 长按黑色菜单
 class NLongPressMenu extends StatelessWidget {
-
   const NLongPressMenu({
     Key? key,
     required this.items,
@@ -18,9 +14,9 @@ class NLongPressMenu extends StatelessWidget {
 
   /// 标题和本地图片
   final List<Tuple2<String, AssetImage>> items;
+
   /// 点击菜单回调
   final ValueChanged<Tuple2<String, AssetImage>> onItem;
-
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +38,6 @@ class NLongPressMenu extends StatelessWidget {
         spacing: 34,
         runSpacing: 16,
         children: items.map((e) {
-
           final child = NPair(
             direction: Axis.vertical,
             icon: Image(
@@ -51,7 +46,8 @@ class NLongPressMenu extends StatelessWidget {
               height: 18,
               fit: BoxFit.fill,
             ),
-            child: NText(e.item1,
+            child: NText(
+              e.item1,
               color: Colors.white,
               fontSize: 13,
               fontWeight: FontWeight.w400,
@@ -61,7 +57,7 @@ class NLongPressMenu extends StatelessWidget {
           return Material(
             color: Colors.transparent,
             child: InkWell(
-              onTap: (){
+              onTap: () {
                 onItem(e);
               },
               child: child,

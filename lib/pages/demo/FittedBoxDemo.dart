@@ -9,26 +9,22 @@
 import 'package:flutter/material.dart';
 
 class FittedBoxDemo extends StatefulWidget {
-
   final String? title;
 
-  const FittedBoxDemo({ Key? key, this.title}) : super(key: key);
-
+  const FittedBoxDemo({Key? key, this.title}) : super(key: key);
 
   @override
   _FittedBoxDemoState createState() => _FittedBoxDemoState();
 }
 
 class _FittedBoxDemoState extends State<FittedBoxDemo> {
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title ?? "$widget"),
-        ),
-        body: _buildBody(),
+      appBar: AppBar(
+        title: Text(widget.title ?? "$widget"),
+      ),
+      body: _buildBody(),
     );
   }
 
@@ -53,8 +49,8 @@ class _FittedBoxDemoState extends State<FittedBoxDemo> {
         alignment: Alignment.centerLeft,
         child: Container(
             color: Colors.yellow,
-            child: Image.asset("assets/images/avatar.png", width: 200, height: 100)
-        ),
+            child: Image.asset("assets/images/avatar.png",
+                width: 200, height: 100)),
       ),
     );
   }
@@ -81,6 +77,3 @@ class _FittedBoxDemoState extends State<FittedBoxDemo> {
     );
   }
 }
-
-
-

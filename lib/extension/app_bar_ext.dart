@@ -6,11 +6,10 @@
 //  Copyright © 2023/8/29 shang. All rights reserved.
 //
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-extension AppBarExt on AppBar{
+extension AppBarExt on AppBar {
   /// 自定义 copy
   AppBar copy({
     Widget? leading,
@@ -29,7 +28,7 @@ extension AppBarExt on AppBar{
     Color? foregroundColor,
     IconThemeData? iconTheme,
     IconThemeData? actionsIconTheme,
-    bool? primary ,
+    bool? primary,
     bool? centerTitle,
     bool? excludeHeaderSemantics,
     double? titleSpacing,
@@ -43,14 +42,17 @@ extension AppBarExt on AppBar{
   }) {
     return AppBar(
       leading: leading ?? this.leading,
-      automaticallyImplyLeading: automaticallyImplyLeading ?? this.automaticallyImplyLeading,
+      automaticallyImplyLeading:
+          automaticallyImplyLeading ?? this.automaticallyImplyLeading,
       title: title ?? this.title,
       actions: actions ?? this.actions,
       flexibleSpace: flexibleSpace ?? this.flexibleSpace,
       bottom: bottom ?? this.bottom,
       elevation: elevation ?? this.elevation,
-      scrolledUnderElevation: scrolledUnderElevation ?? this.scrolledUnderElevation,
-      notificationPredicate: notificationPredicate ?? this.notificationPredicate,
+      scrolledUnderElevation:
+          scrolledUnderElevation ?? this.scrolledUnderElevation,
+      notificationPredicate:
+          notificationPredicate ?? this.notificationPredicate,
       shadowColor: shadowColor ?? this.shadowColor,
       surfaceTintColor: surfaceTintColor ?? this.surfaceTintColor,
       shape: shape ?? this.shape,
@@ -60,7 +62,8 @@ extension AppBarExt on AppBar{
       actionsIconTheme: actionsIconTheme ?? this.actionsIconTheme,
       primary: primary ?? this.primary,
       centerTitle: centerTitle ?? this.centerTitle,
-      excludeHeaderSemantics: excludeHeaderSemantics ?? this.excludeHeaderSemantics,
+      excludeHeaderSemantics:
+          excludeHeaderSemantics ?? this.excludeHeaderSemantics,
       titleSpacing: titleSpacing ?? this.titleSpacing,
       toolbarOpacity: toolbarOpacity ?? this.toolbarOpacity,
       bottomOpacity: bottomOpacity ?? this.bottomOpacity,

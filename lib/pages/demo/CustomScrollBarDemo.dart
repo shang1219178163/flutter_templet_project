@@ -8,8 +8,7 @@ import 'package:flutter_templet_project/extension/widget_ext.dart';
 
 /// 自定义 ScrollBar
 class CustomScrollBarDemo extends StatefulWidget {
-
-  const CustomScrollBarDemo({ Key? key, this.title}) : super(key: key);
+  const CustomScrollBarDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -19,10 +18,13 @@ class CustomScrollBarDemo extends StatefulWidget {
 
 class _CustomScrollBarDemoState extends State<CustomScrollBarDemo> {
   final _scrollController = ScrollController();
+
   ///标准轮播页码监听
   ValueNotifier<int> currentIndex = ValueNotifier(0);
+
   ///滚动条监听
   ValueNotifier<double> scrollerOffset = ValueNotifier(0.0);
+
   ///滚动中监听
   ValueNotifier<bool> isScrolling = ValueNotifier(false);
 
@@ -64,7 +66,7 @@ class _CustomScrollBarDemoState extends State<CustomScrollBarDemo> {
       // print("scrollerOffset.value:${scrollerOffset.value}");
       var position = _scrollController.position;
       //滚动进度
-      var progress = position.pixels/position.maxScrollExtent;
+      var progress = position.pixels / position.maxScrollExtent;
       scrollerOffset.value = progress;
       // print("scrollerOffset.value:${scrollerOffset.value}_${progress}");
     });
@@ -76,33 +78,37 @@ class _CustomScrollBarDemoState extends State<CustomScrollBarDemo> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          onPressed: () {
-            isCustomScrollView = !isCustomScrollView;
-            setState(() {});
-          },
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),)
-        ).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  onPressed: () {
+                    isCustomScrollView = !isCustomScrollView;
+                    setState(() {});
+                  },
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ))
+            .toList(),
       ),
       body: _buildBody(isCustomScrollView: isCustomScrollView),
     );
   }
 
   _buildBody({isCustomScrollView = false}) {
-    final child = ListView(
-      children: [
-        NSectionHeader(
-          title: "${isCustomScrollView ? "CustomScrollView" : "ListView"}(自定义滚动条/ScrollerBar)",
-          child: Container(
-            height: 100,
-            padding: padding,
-            child: _buildListView(),
-          ),
-        )
-      ]
-    );
+    final child = ListView(children: [
+      NSectionHeader(
+        title:
+            "${isCustomScrollView ? "CustomScrollView" : "ListView"}(自定义滚动条/ScrollerBar)",
+        child: Container(
+          height: 100,
+          padding: padding,
+          child: _buildListView(),
+        ),
+      )
+    ]);
     if (isCustomScrollView) {
       return child.toCustomScrollView();
     }
@@ -114,7 +120,8 @@ class _CustomScrollBarDemoState extends State<CustomScrollBarDemo> {
   }) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        var itemWidth = (constraints.maxWidth - gap * (showCount.ceil() - 1)) / showCount;
+        var itemWidth =
+            (constraints.maxWidth - gap * (showCount.ceil() - 1)) / showCount;
 
         return Stack(
           children: [
@@ -135,28 +142,29 @@ class _CustomScrollBarDemoState extends State<CustomScrollBarDemo> {
                   padding: EdgeInsets.all(0),
                   itemCount: items.length,
                   // cacheExtent: 10,
-                  itemBuilder: itemBuilder ?? (context, index) => _buildItem(context, index, itemWidth),
-                  separatorBuilder: (context, index) => _buildSeparator(context, index),
+                  itemBuilder: itemBuilder ??
+                      (context, index) => _buildItem(context, index, itemWidth),
+                  separatorBuilder: (context, index) =>
+                      _buildSeparator(context, index),
                 ),
               ),
             ),
             if (showScrollbar)
-            Positioned(
-              bottom: 0,
-              child: ValueListenableBuilder(
-                valueListenable: isScrolling,
-                builder: (context, bool value, child) {
-                  // print('isScrolling:${isScrolling.value} value: ${value.toString()}');
-                  return Offstage(
-                    // offstage: !value,
-                    offstage: false,
-                    child: _scrollerBar(
-                      maxWidth: constraints.maxWidth,
-                    ),
-                  );
-                }
+              Positioned(
+                bottom: 0,
+                child: ValueListenableBuilder(
+                    valueListenable: isScrolling,
+                    builder: (context, bool value, child) {
+                      // print('isScrolling:${isScrolling.value} value: ${value.toString()}');
+                      return Offstage(
+                        // offstage: !value,
+                        offstage: false,
+                        child: _scrollerBar(
+                          maxWidth: constraints.maxWidth,
+                        ),
+                      );
+                    }),
               ),
-            ),
           ],
         );
       },
@@ -164,11 +172,15 @@ class _CustomScrollBarDemoState extends State<CustomScrollBarDemo> {
   }
 
   ///创建子项
-  _buildItem(context, index, double itemWidth,) {
+  _buildItem(
+    context,
+    index,
+    double itemWidth,
+  ) {
     final url = items[index];
     return InkWell(
-      onTap: (){
-        var offset = (itemWidth + gap)*index;
+      onTap: () {
+        var offset = (itemWidth + gap) * index;
         _scrollController.position.printInfo();
         var position = _scrollController.position;
         debugPrint("${index}_${itemWidth}_${offset}_");
@@ -178,9 +190,7 @@ class _CustomScrollBarDemoState extends State<CustomScrollBarDemo> {
           offset = position.maxScrollExtent;
         }
         _scrollController.animateTo(offset,
-          duration: Duration(milliseconds: 300),
-          curve: Curves.linear
-        );
+            duration: Duration(milliseconds: 300), curve: Curves.linear);
       },
       child: Container(
         // color: Colors.green,
@@ -199,15 +209,17 @@ class _CustomScrollBarDemoState extends State<CustomScrollBarDemo> {
                 // height: double.infinity,
               ),
               if (url.endsWith(".mp4"))
-              Positioned(
-                top: 1.w,
-                bottom: 1.w,
-                child: Container(
-                  width: 24.w,
-                  height: 24.w,
-                  child: Image.asset('icon_play.png'.toPath(),),
-                ),
-              )
+                Positioned(
+                  top: 1.w,
+                  bottom: 1.w,
+                  child: Container(
+                    width: 24.w,
+                    height: 24.w,
+                    child: Image.asset(
+                      'icon_play.png'.toPath(),
+                    ),
+                  ),
+                )
             ],
           ),
         ),
@@ -238,7 +250,6 @@ class _CustomScrollBarDemoState extends State<CustomScrollBarDemo> {
     );
   }
 
-
   /// 水平滚动条
   Widget _scrollerBar({
     required double maxWidth,
@@ -260,29 +271,23 @@ class _CustomScrollBarDemoState extends State<CustomScrollBarDemo> {
           ),
         ),
         ValueListenableBuilder<double>(
-          valueListenable: scrollerOffset,
-          builder: (context, value, child) {
-            // print("value:$value");
-            var indicatorWidth = 80.0;
-            var left = value * (maxWidth - indicatorWidth);
-            return Positioned(
-              left: left,
-              child: Container(
-                height: barHeight,
-                width: indicatorWidth,
-                decoration: BoxDecoration(
-                  color: barColor,
-                  borderRadius: BorderRadius.circular(3),
-                ),
-              )
-            );
-          }
-        ),
+            valueListenable: scrollerOffset,
+            builder: (context, value, child) {
+              // print("value:$value");
+              var indicatorWidth = 80.0;
+              var left = value * (maxWidth - indicatorWidth);
+              return Positioned(
+                  left: left,
+                  child: Container(
+                    height: barHeight,
+                    width: indicatorWidth,
+                    decoration: BoxDecoration(
+                      color: barColor,
+                      borderRadius: BorderRadius.circular(3),
+                    ),
+                  ));
+            }),
       ],
     );
   }
-
 }
-
-
-

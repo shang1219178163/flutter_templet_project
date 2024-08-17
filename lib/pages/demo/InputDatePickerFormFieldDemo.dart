@@ -1,23 +1,21 @@
 import 'package:flutter/material.dart';
 
 class InputDatePickerFormFieldDemo extends StatefulWidget {
-
-  const InputDatePickerFormFieldDemo({
-    Key? key, 
-    this.title
-  }) : super(key: key);
+  const InputDatePickerFormFieldDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
   @override
-  _InputDatePickerFormFieldDemoState createState() => _InputDatePickerFormFieldDemoState();
+  _InputDatePickerFormFieldDemoState createState() =>
+      _InputDatePickerFormFieldDemoState();
 }
 
-class _InputDatePickerFormFieldDemoState extends State<InputDatePickerFormFieldDemo> {
-
+class _InputDatePickerFormFieldDemoState
+    extends State<InputDatePickerFormFieldDemo> {
   DateTime firstDate = DateTime(2019);
   DateTime lastDate = DateTime(2030, 12, 12);
-  DateTime selectedDate = DateTime.now().add(Duration(hours: 0, minutes: 0, seconds: 0));
+  DateTime selectedDate =
+      DateTime.now().add(Duration(hours: 0, minutes: 0, seconds: 0));
 
   @override
   initState() {
@@ -29,17 +27,21 @@ class _InputDatePickerFormFieldDemoState extends State<InputDatePickerFormFieldD
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          onPressed: () => debugPrint(e),
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),)
-        ).toList(),
-      ),
-      body: buildBody()
-    );
+        appBar: AppBar(
+          title: Text(widget.title ?? "$widget"),
+          actions: [
+            'done',
+          ]
+              .map((e) => TextButton(
+                    onPressed: () => debugPrint(e),
+                    child: Text(
+                      e,
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ))
+              .toList(),
+        ),
+        body: buildBody());
   }
 
   Widget buildBody() {
@@ -62,8 +64,11 @@ class _InputDatePickerFormFieldDemoState extends State<InputDatePickerFormFieldD
             ],
           ),
         )
-      ].map((e) => SliverToBoxAdapter(child: e,)).toList(),
+      ]
+          .map((e) => SliverToBoxAdapter(
+                child: e,
+              ))
+          .toList(),
     );
   }
-
 }

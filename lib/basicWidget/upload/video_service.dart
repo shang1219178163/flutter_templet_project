@@ -1,5 +1,3 @@
-
-
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -10,20 +8,18 @@ import 'package:image_gallery_saver/image_gallery_saver.dart';
 
 import 'package:video_compress/video_compress.dart';
 
-
 /// 视频处理工具类
-class VideoService{
-
+class VideoService {
   /// 压缩
   static Future<File> compressVideo(
-      File file, {
-      int miniCompressLength = 20 * 1024 * 1024,
-      bool showToast = false,
-      bool deleteOrigin = false,
-      int? startTime,
-      int? duration,
-      bool? includeAudio,
-      int frameRate = 30,
+    File file, {
+    int miniCompressLength = 20 * 1024 * 1024,
+    bool showToast = false,
+    bool deleteOrigin = false,
+    int? startTime,
+    int? duration,
+    bool? includeAudio,
+    int frameRate = 30,
   }) async {
     final fileSize = file.lengthSync();
     final needCompress = (fileSize <= miniCompressLength);
@@ -34,7 +30,9 @@ class VideoService{
     try {
       // if(showToast)EasyToast.showLoading("视频处理中...");
 
-      final quality = needCompress ? VideoQuality.MediumQuality : VideoQuality.HighestQuality;
+      final quality = needCompress
+          ? VideoQuality.MediumQuality
+          : VideoQuality.HighestQuality;
       final compressVideoMediaInfo = await VideoCompress.compressVideo(
         file.path,
         quality: quality,
@@ -44,7 +42,8 @@ class VideoService{
         includeAudio: includeAudio,
         frameRate: frameRate,
       );
-      debugPrint("compressVideoMediaInfo: ${compressVideoMediaInfo?.toJson()},");
+      debugPrint(
+          "compressVideoMediaInfo: ${compressVideoMediaInfo?.toJson()},");
       // flutter: compressVideoMediaInfo: {
       // path: /Users/shang/Library/Developer/CoreSimulator/Devices/0F4619D8-E3FB-4AB1-BFCA-16209BC1C1DE/data/Containers/Data/Application/DF484842-8F8F-4011-9C97-A4B044C96F37/tmp/video_compress/3DC271D4-2CCA-4BB4-9E35-52212E604560_L0_001_1693920819.575075_134159A2-0202-4862-BF3A-1279987455655D4E097E-2E5C-4CA2-A928-43299E69B5F0.mp4,
       // title: ,
@@ -77,11 +76,10 @@ class VideoService{
     int quality = 50,
     int position = -1,
   }) async {
-    final thumbnailFile = VideoCompress.getFileThumbnail(
-      path,
-      quality: quality, // default(100)
-      position: position // default(-1)
-    );
+    final thumbnailFile = VideoCompress.getFileThumbnail(path,
+        quality: quality, // default(100)
+        position: position // default(-1)
+        );
     return thumbnailFile;
   }
 
@@ -97,19 +95,14 @@ class VideoService{
   }) async {
     final percentVN = ValueNotifier(0.0);
 
-    ToastUtil.loading(
-        "文件下载中",
+    ToastUtil.loading("文件下载中",
         indicator: ValueListenableBuilder<double>(
             valueListenable: percentVN,
-            builder: (context,  value, child){
-
+            builder: (context, value, child) {
               return CircularProgressIndicator(
                 value: value,
               );
-            }
-        )
-    );
-
+            }));
 
     String? name;
     try {
@@ -121,16 +114,14 @@ class VideoService{
 
     var cacheDir = await AssetCacheService().getDir();
     var savePath = "${cacheDir.path}/$name";
-    await Dio().download(url, savePath,
-        onReceiveProgress: (received, total) {
-          if (total != -1) {
-            final percent = (received / total);
-            final percentStr = "${(percent * 100).toStringAsFixed(0)}%";
-            percentVN.value = percent;
-            // debugPrint("percentStr: $percentStr");
-          }
-        }
-    );
+    await Dio().download(url, savePath, onReceiveProgress: (received, total) {
+      if (total != -1) {
+        final percent = (received / total);
+        final percentStr = "${(percent * 100).toStringAsFixed(0)}%";
+        percentVN.value = percent;
+        // debugPrint("percentStr: $percentStr");
+      }
+    });
     // debugPrint("savePath: ${savePath}");
     ToastUtil.hideLoading();
 
@@ -139,16 +130,13 @@ class VideoService{
     final isSuccess = result["isSuccess"];
     final message = isSuccess ? "已保存到相册" : "操作失败";
     if (isSuccess && showToast) {
-      ToastUtil.show(message,);
+      ToastUtil.show(
+        message,
+      );
     }
     return isSuccess;
   }
 }
 
-
 /// 图片文件扩展方法
-extension VideoFileExt on File {
-
-
-
-}
+extension VideoFileExt on File {}

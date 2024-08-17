@@ -11,18 +11,15 @@ import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 
 class SliverListPopverDemo extends StatefulWidget {
-
   final String? title;
 
-  const SliverListPopverDemo({ Key? key, this.title}) : super(key: key);
-
+  const SliverListPopverDemo({Key? key, this.title}) : super(key: key);
 
   @override
   _SliverListPopverDemoState createState() => _SliverListPopverDemoState();
 }
 
 class _SliverListPopverDemoState extends State<SliverListPopverDemo> {
-
   final _globalKey = GlobalKey();
 
   var btnIdx = 0;
@@ -66,23 +63,22 @@ class _SliverListPopverDemoState extends State<SliverListPopverDemo> {
       slivers: <Widget>[
         sectionHeader(child: Text('SliverList - SliverChildListDelegate')),
         SliverList(
-          delegate: SliverChildListDelegate(list,),
+          delegate: SliverChildListDelegate(
+            list,
+          ),
         ),
-
         _buildSection().toSliverToBoxAdapter(),
-
         sectionHeader(child: Text('SliverList - SliverChildBuilderDelegate')),
         SliverList(
           delegate: SliverChildBuilderDelegate((context, index) {
             return _buildItem(color: colors[index]);
-          },
-              childCount: colors.length
-          ),
+          }, childCount: colors.length),
         ),
-
-        sectionHeader(child: Text('SliverFixedExtentList - SliverChildBuilderDelegate')),
+        sectionHeader(
+            child: Text('SliverFixedExtentList - SliverChildBuilderDelegate')),
         SliverFixedExtentList(
-          delegate: SliverChildBuilderDelegate((context, index) {
+          delegate: SliverChildBuilderDelegate(
+            (context, index) {
               return _buildItem(color: colors[index]);
             },
             childCount: colors.length,
@@ -93,7 +89,7 @@ class _SliverListPopverDemoState extends State<SliverListPopverDemo> {
     );
   }
 
-   Widget _buildSection() {
+  Widget _buildSection() {
     return Stack(
       key: _globalKey,
       clipBehavior: Clip.none,
@@ -115,30 +111,30 @@ class _SliverListPopverDemoState extends State<SliverListPopverDemo> {
   _buildMenu({int count = 3}) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: List.generate(count, (index) => ElevatedButton(
-        onPressed: () {
-          final val = _globalKey.currentContext?.origin();
-          btnIdx = index;
-          isVisible = !isVisible;
-          setState(() {});
-        },
-        child: Text("菜单$index"),
-      )).map((e) => Expanded(child: e)).toList(),
+      children: List.generate(
+          count,
+          (index) => ElevatedButton(
+                onPressed: () {
+                  final val = _globalKey.currentContext?.origin();
+                  btnIdx = index;
+                  isVisible = !isVisible;
+                  setState(() {});
+                },
+                child: Text("菜单$index"),
+              )).map((e) => Expanded(child: e)).toList(),
     );
   }
 
   _buildDropBox() {
-    return Builder(
-        builder: (context) {
-          if (btnIdx == 0) {
-            return _buildDropBox1();
-          }
-          if (btnIdx == 1) {
-            return _buildDropBox2();
-          }
-          return _buildDropBox3();
-        }
-    );
+    return Builder(builder: (context) {
+      if (btnIdx == 0) {
+        return _buildDropBox1();
+      }
+      if (btnIdx == 1) {
+        return _buildDropBox2();
+      }
+      return _buildDropBox3();
+    });
   }
 
   _buildDropBox1() {
@@ -147,8 +143,7 @@ class _SliverListPopverDemoState extends State<SliverListPopverDemo> {
           color: Colors.green,
           border: Border.all(width: 5, color: Colors.red),
         ),
-        child: Center(child: Text("one"))
-    );
+        child: Center(child: Text("one")));
   }
 
   _buildDropBox2() {
@@ -157,8 +152,7 @@ class _SliverListPopverDemoState extends State<SliverListPopverDemo> {
           color: Colors.green,
           border: Border.all(width: 5, color: Colors.yellow),
         ),
-        child: Center(child: Text("two"))
-    );
+        child: Center(child: Text("two")));
   }
 
   _buildDropBox3() {
@@ -171,7 +165,11 @@ class _SliverListPopverDemoState extends State<SliverListPopverDemo> {
         children: [
           Column(
             children: [
-              ...List.generate(20, (index) => ListTile(title: Text("我是弹窗_$index"),)).toList(),
+              ...List.generate(
+                  20,
+                  (index) => ListTile(
+                        title: Text("我是弹窗_$index"),
+                      )).toList(),
             ],
           ),
         ],

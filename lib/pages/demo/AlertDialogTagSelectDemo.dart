@@ -1,32 +1,28 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/mixin/dialog_tag_select.dart';
 import 'package:flutter_templet_project/model/selected_model.dart';
 import 'package:get/get.dart';
 
 class AlertDialogTagSelectDemo extends StatefulWidget {
-
-  AlertDialogTagSelectDemo({
-    Key? key, 
-    this.title
-  }) : super(key: key);
+  AlertDialogTagSelectDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
   @override
-  _AlertDialogTagSelectDemoState createState() => _AlertDialogTagSelectDemoState();
+  _AlertDialogTagSelectDemoState createState() =>
+      _AlertDialogTagSelectDemoState();
 }
 
 class _AlertDialogTagSelectDemoState extends State<AlertDialogTagSelectDemo> {
-
   final items = List.generate(10, (i) => "$i");
 
   /// 标签列表
-  late List<SelectModel> tags = items.map((e) => SelectModel(
-    id: e.toString(),
-    name: "标签_${e}",
-  )).toList();
+  late List<SelectModel> tags = items
+      .map((e) => SelectModel(
+            id: e.toString(),
+            name: "标签_${e}",
+          ))
+      .toList();
 
   /// 选择的标签
   List<SelectModel> selectTags = [];
@@ -35,39 +31,43 @@ class _AlertDialogTagSelectDemoState extends State<AlertDialogTagSelectDemo> {
   List<SelectModel> selectTagsTmp = [];
 
   /// 已选择的标签
-  List<String> get selectTagNames => selectTags.map((e) => e.name ?? "-").toList();
-
+  List<String> get selectTagNames =>
+      selectTags.map((e) => e.name ?? "-").toList();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: onPressed,)
-        ).toList(),
-      ),
-      body: Column(
-        children: [
-          buildWrap(
-            onTap: onTap,
-          ),
-        ],
-      )
-    );
+        appBar: AppBar(
+          title: Text(widget.title ?? "$widget"),
+          actions: [
+            'done',
+          ]
+              .map((e) => TextButton(
+                    child: Text(
+                      e,
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onPressed: onPressed,
+                  ))
+              .toList(),
+        ),
+        body: Column(
+          children: [
+            buildWrap(
+              onTap: onTap,
+            ),
+          ],
+        ));
   }
 
-
-  Widget buildWrap({required ValueChanged<int> onTap,}) {
+  Widget buildWrap({
+    required ValueChanged<int> onTap,
+  }) {
     return Wrap(
       spacing: 8.0,
       runSpacing: 8.0,
       alignment: WrapAlignment.start,
       children: items.map((e) {
-
         final i = items.indexOf(e);
         return ActionChip(
           avatar: CircleAvatar(
@@ -85,7 +85,7 @@ class _AlertDialogTagSelectDemoState extends State<AlertDialogTagSelectDemo> {
     debugPrint(i.toString());
   }
 
-  onPressed(){
+  onPressed() {
     DialogTagSelect().present(
       context: context,
       title: "标签",
@@ -93,24 +93,20 @@ class _AlertDialogTagSelectDemoState extends State<AlertDialogTagSelectDemo> {
       selectTagsTmp: selectTagsTmp,
       selectTags: selectTags,
       // isMuti: false,
-      onCancel: (){
-
-      },
-      onConfirm: (List<SelectModel> selectedItems){
+      onCancel: () {},
+      onConfirm: (List<SelectModel> selectedItems) {
         selectTags = selectedItems;
 
         debugPrint(selectTagNames.toString());
         setState(() {});
       },
       max: 3,
-      onMax: (){
+      onMax: () {
         showAboutDialog(
-            context: context,
-            applicationName: "最多选择 3 个",
+          context: context,
+          applicationName: "最多选择 3 个",
         );
       },
-
     );
   }
-
 }

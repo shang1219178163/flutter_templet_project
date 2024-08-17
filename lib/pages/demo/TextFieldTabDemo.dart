@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/Pages/demo/TextFieldDemo.dart';
 import 'package:flutter_templet_project/basicWidget/n_tab_bar_page.dart';
@@ -11,7 +9,6 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:tuple/tuple.dart';
 
 class TextFieldTabDemo extends StatefulWidget {
-
   TextFieldTabDemo({
     super.key,
     this.arguments,
@@ -24,8 +21,8 @@ class TextFieldTabDemo extends StatefulWidget {
 }
 
 class _TextFieldTabDemoState extends State<TextFieldTabDemo> {
-
-  bool get hideApp => Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
+  bool get hideApp =>
+      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
 
   final _scrollController = ScrollController();
 
@@ -36,18 +33,22 @@ class _TextFieldTabDemoState extends State<TextFieldTabDemo> {
     Tuple2("TextFieldLoginDemo", TextFieldLoginDemo()),
   ];
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("$widget"),
-        actions: ['done',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () => debugPrint(e),)
-        ).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () => debugPrint(e),
+                ))
+            .toList(),
       ),
       body: buildBody(),
     );
@@ -56,8 +57,6 @@ class _TextFieldTabDemoState extends State<TextFieldTabDemo> {
   buildBody() {
     return NTabBarPage(
       items: items,
-
     );
   }
-
 }

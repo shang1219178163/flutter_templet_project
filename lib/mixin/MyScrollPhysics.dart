@@ -1,12 +1,8 @@
-
-
-
 import 'package:flutter/cupertino.dart';
 
 class MyScrollPhysics extends ScrollPhysics {
   /// Creates scroll physics that always lets the user scroll.
-  const MyScrollPhysics({ScrollPhysics? parent})
-      : super(parent: parent);
+  const MyScrollPhysics({ScrollPhysics? parent}) : super(parent: parent);
 
   @override
   MyScrollPhysics applyTo(ScrollPhysics? ancestor) {

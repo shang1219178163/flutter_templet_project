@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_templet_project/basicWidget/n_adaptive_text.dart';
@@ -8,16 +6,15 @@ import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/overlay_ext.dart';
 import 'package:get/get.dart';
 
-
 /// 浮层工具类
-class NOverlay{
-
+class NOverlay {
   static final _globalContext = Get.context;
 
   static final _overlayState = Overlay.of(_globalContext!);
 
   /// overlay 层集合
   static final List<OverlayEntry> _entriesList = [];
+
   /// 当前弹窗
   static OverlayEntry? get currentOverlayEntry {
     if (_entriesList.isEmpty) {
@@ -30,11 +27,12 @@ class NOverlay{
   bool get isLoading => _entriesList.isNotEmpty;
 
   /// OverlayEntry 弹窗展示
-  static OverlayEntry? show(BuildContext context,{
+  static OverlayEntry? show(
+    BuildContext context, {
     bool isReplace = false,
     bool maintainState = false,
     required Widget child,
-  }){
+  }) {
     // var context = AppUtil.globalContext;
     final OverlayState? _overlayState = Overlay.of(context);
     if (_overlayState == null) {
@@ -63,7 +61,7 @@ class NOverlay{
     if (currentOverlayEntry == null) {
       return;
     }
-    Future.delayed(duration, () { });
+    Future.delayed(duration, () {});
     currentOverlayEntry?.remove();
     _entriesList.remove(currentOverlayEntry!);
   }
@@ -77,7 +75,8 @@ class NOverlay{
   }
 
   /// 展示 OverlayEntry 弹窗
-  static showToast(BuildContext context,{
+  static showToast(
+    BuildContext context, {
     String message = "showToast",
     Widget? child,
     Alignment alignment = Alignment.center,
@@ -112,28 +111,29 @@ class NOverlay{
         ],
       );
     }
-    show(context,
+    show(
+      context,
       child: content,
     );
 
     if (autoDismiss) {
-      Future.delayed(duration, (){
+      Future.delayed(duration, () {
         hide();
         onDismiss?.call();
       });
     }
   }
 
-
   static showLoading(
-    BuildContext context,{
+    BuildContext context, {
     String message = "showToast",
     Widget? child,
   }) {
-    NOverlay.showToast(context,
+    NOverlay.showToast(
+      context,
       duration: const Duration(milliseconds: 5000),
       autoDismiss: true,
-      onDismiss: (){
+      onDismiss: () {
         debugPrint("onDismiss: ${DateTime.now()}");
       },
       // barrierDismissible: false,
@@ -150,18 +150,21 @@ class NOverlay{
               ],
             ),
           ),
-          child ?? NText(message,
-            fontSize: 16,
-            fontWeight: FontWeight.w400,
-            color: Colors.white,
-          ),
+          child ??
+              NText(
+                message,
+                fontSize: 16,
+                fontWeight: FontWeight.w400,
+                color: Colors.white,
+              ),
         ],
       ),
     );
   }
 
   /// 滑进滑出弹窗
-  static presentModalView(BuildContext context,{
+  static presentModalView(
+    BuildContext context, {
     bool isReplace = false,
     bool maintainState = false,
     Alignment alignment = Alignment.bottomCenter,
@@ -179,39 +182,33 @@ class NOverlay{
     }
 
     show(context,
-      isReplace: isReplace,
-      maintainState: maintainState,
-      child: Material(
-        color: Colors.black.withOpacity(0.1),
-        child: InkWell(
-          onTap: !barrierDismissible ? null : onHide,
-          child: NSlideTransitionBuilder(
-            key: globalKey,
-            alignment: alignment,
-            duration: duration,
-            hasFade: false,
-            child: builder(context, onHide),
+        isReplace: isReplace,
+        maintainState: maintainState,
+        child: Material(
+          color: Colors.black.withOpacity(0.1),
+          child: InkWell(
+            onTap: !barrierDismissible ? null : onHide,
+            child: NSlideTransitionBuilder(
+              key: globalKey,
+              alignment: alignment,
+              duration: duration,
+              hasFade: false,
+              child: builder(context, onHide),
+            ),
           ),
-        ),
-      )
-    );
-
+        ));
   }
-
-
 }
 
-
 class _SpinkitWidget extends StatefulWidget {
-
   _SpinkitWidget();
 
   @override
   _SpinkitWidgetState createState() => _SpinkitWidgetState();
 }
 
-class _SpinkitWidgetState extends State<_SpinkitWidget> with SingleTickerProviderStateMixin {
-
+class _SpinkitWidgetState extends State<_SpinkitWidget>
+    with SingleTickerProviderStateMixin {
   final spinkit = SpinKitFadingCircle(
     color: Colors.white,
     // itemBuilder: (BuildContext context, int index) {
@@ -231,5 +228,4 @@ class _SpinkitWidgetState extends State<_SpinkitWidget> with SingleTickerProvide
   Widget build(BuildContext context) {
     return spinkit1;
   }
-
 }

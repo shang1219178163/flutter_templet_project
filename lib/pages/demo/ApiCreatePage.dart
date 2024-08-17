@@ -1,5 +1,3 @@
-
-
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -15,9 +13,7 @@ import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:get/get.dart';
 import 'package:json_to_dart/model_generator.dart';
 
-
 class ApiCreatePage extends StatefulWidget {
-
   ApiCreatePage({
     super.key,
     this.arguments,
@@ -30,10 +26,8 @@ class ApiCreatePage extends StatefulWidget {
 }
 
 class _ApiCreatePageState extends State<ApiCreatePage> {
-
   final _textEditingController = TextEditingController();
   final _focusNode = FocusNode();
-
 
   var rootClassNameStr = "Root";
   var classPrefix = "YY";
@@ -66,52 +60,49 @@ class _ApiCreatePageState extends State<ApiCreatePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          title: Text("$widget"),
-          actions: [
-            IconButton(
-                onPressed: (){
-                  Get.bottomSheet(Container(
-                    color: Colors.white,
-                    height: MediaQuery.of(context).size.height * 0.3,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        NText("1. 所有对象不能为空(零属性)",),
-                      ],
+      appBar: AppBar(title: Text("$widget"), actions: [
+        IconButton(
+            onPressed: () {
+              Get.bottomSheet(Container(
+                color: Colors.white,
+                height: MediaQuery.of(context).size.height * 0.3,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    NText(
+                      "1. 所有对象不能为空(零属性)",
                     ),
-                  ));
-                },
-                icon: Icon(Icons.warning_amber_rounded)
-            ),
-          ]
-      ),
+                  ],
+                ),
+              ));
+            },
+            icon: Icon(Icons.warning_amber_rounded)),
+      ]),
       body: buildBody(),
     );
   }
 
   buildBody() {
     return Container(
-      child: LayoutBuilder(
-          builder: (context, constraints) {
-
-            final direction = constraints.maxWidth > 500 ? Axis.horizontal : Axis.vertical;
-            if (direction == Axis.horizontal) {
-              return buildBodyHorizontal(constraints: constraints);
-            }
-            return buildBodyVertical(constraints: constraints);
-          }
-      ),
+      child: LayoutBuilder(builder: (context, constraints) {
+        final direction =
+            constraints.maxWidth > 500 ? Axis.horizontal : Axis.vertical;
+        if (direction == Axis.horizontal) {
+          return buildBodyHorizontal(constraints: constraints);
+        }
+        return buildBodyVertical(constraints: constraints);
+      }),
     );
   }
 
-  buildBodyVertical({double spacing = 10, required BoxConstraints constraints}) {
+  buildBodyVertical(
+      {double spacing = 10, required BoxConstraints constraints}) {
     return Scrollbar(
       controller: _scrollController,
       child: SingleChildScrollView(
         controller: _scrollController,
         child: Container(
-          padding: EdgeInsets.all(spacing*3),
+          padding: EdgeInsets.all(spacing * 3),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -120,7 +111,9 @@ class _ApiCreatePageState extends State<ApiCreatePage> {
                 height: constraints.maxHeight * 0.7,
                 child: buildLeft(isVertical: true),
               ),
-              SizedBox(height: spacing*3,),
+              SizedBox(
+                height: spacing * 3,
+              ),
               Container(
                 child: buildRight(),
               ),
@@ -131,9 +124,10 @@ class _ApiCreatePageState extends State<ApiCreatePage> {
     );
   }
 
-  buildBodyHorizontal({double spacing = 10, required BoxConstraints constraints}) {
+  buildBodyHorizontal(
+      {double spacing = 10, required BoxConstraints constraints}) {
     return Container(
-      padding: EdgeInsets.all(spacing*3),
+      padding: EdgeInsets.all(spacing * 3),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -143,7 +137,9 @@ class _ApiCreatePageState extends State<ApiCreatePage> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 buildLeft(),
-                SizedBox(width: spacing*3,),
+                SizedBox(
+                  width: spacing * 3,
+                ),
                 Expanded(
                   child: buildRight(),
                 ),
@@ -162,10 +158,13 @@ class _ApiCreatePageState extends State<ApiCreatePage> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        NText("文件名生成 api 文件",
+        NText(
+          "文件名生成 api 文件",
           maxLines: 3,
         ),
-        SizedBox(height: spacing*2,),
+        SizedBox(
+          height: spacing * 2,
+        ),
       ],
     );
   }
@@ -200,10 +199,10 @@ class _ApiCreatePageState extends State<ApiCreatePage> {
         ),
         counterText: '',
       ),
-      onChanged: (val) async{
+      onChanged: (val) async {
         // debugPrint("onChanged: $val");
       },
-      onSubmitted: (val){
+      onSubmitted: (val) {
         debugPrint("onSubmitted: $val");
       },
       onEditingComplete: () {
@@ -243,7 +242,7 @@ class _ApiCreatePageState extends State<ApiCreatePage> {
           child: NMenuAnchor<String>(
             values: appSchemes,
             initialItem: appScheme,
-            onChanged: (val){
+            onChanged: (val) {
               appScheme = val;
             },
             cbName: (e) => e,
@@ -275,7 +274,10 @@ class _ApiCreatePageState extends State<ApiCreatePage> {
                 shape: CircleBorder(),
               ),
               onPressed: onTry,
-              child: NText("try", color: Colors.black45,),
+              child: NText(
+                "try",
+                color: Colors.black45,
+              ),
             ),
           ],
         ),
@@ -285,7 +287,7 @@ class _ApiCreatePageState extends State<ApiCreatePage> {
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.black54,
             ),
-            onPressed: (){
+            onPressed: () {
               debugPrint("copy");
               Clipboard.setData(ClipboardData(text: outVN.value));
             },
@@ -296,7 +298,6 @@ class _ApiCreatePageState extends State<ApiCreatePage> {
     );
   }
 
-
   Widget buildRight({
     ScrollController? controller,
     double spacing = 10,
@@ -304,14 +305,16 @@ class _ApiCreatePageState extends State<ApiCreatePage> {
   }) {
     return ValueListenableBuilder<String>(
         valueListenable: outVN,
-        builder: (context,  value, child){
-
-          final child = selectable ?
-          SelectableText(value,
-            // maxLines: 1000,
-          ) : NText(value,
-            // maxLines: 1000,
-          );
+        builder: (context, value, child) {
+          final child = selectable
+              ? SelectableText(
+                  value,
+                  // maxLines: 1000,
+                )
+              : NText(
+                  value,
+                  // maxLines: 1000,
+                );
 
           return Scrollbar(
             controller: controller,
@@ -321,8 +324,7 @@ class _ApiCreatePageState extends State<ApiCreatePage> {
               child: child,
             ),
           );
-        }
-    );
+        });
   }
 
   /// 生成模型文件
@@ -330,17 +332,21 @@ class _ApiCreatePageState extends State<ApiCreatePage> {
     try {
       _focusNode.unfocus();
 
-      final className = fileName.contains("_") ? fileName.toCamlCase("_") : fileName ;
+      final className =
+          fileName.contains("_") ? fileName.toCamlCase("_") : fileName;
 
-      outVN.value = ApiCreateTemplet.createApi(appScheme: appScheme, className: className);
+      outVN.value = ApiCreateTemplet.createApi(
+          appScheme: appScheme, className: className);
       // debugPrint("fileName: $fileName");
 
       /// 生成本地文件
-      final file = await FileManager().createFile(fileName: fileName, content: outVN.value);
+      final file = await FileManager()
+          .createFile(fileName: fileName, content: outVN.value);
       debugPrint("file: ${file.path}");
 
       showSnackBar(SnackBar(
-        content: NText("文件已生成(下载文件夹)",
+        content: NText(
+          "文件已生成(下载文件夹)",
           color: Colors.white,
           textAlign: TextAlign.center,
         ),
@@ -353,12 +359,13 @@ class _ApiCreatePageState extends State<ApiCreatePage> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            NText(e.toString(),),
+            NText(
+              e.toString(),
+            ),
           ],
         ),
       ));
     }
-
   }
 
   onGenerate() async {
@@ -378,7 +385,9 @@ class _ApiCreatePageState extends State<ApiCreatePage> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            NText(e.toString(),),
+            NText(
+              e.toString(),
+            ),
           ],
         ),
       ));
@@ -422,5 +431,4 @@ class _ApiCreatePageState extends State<ApiCreatePage> {
     // debugPrint("str1: $str1");
     onGenerate();
   }
-
 }

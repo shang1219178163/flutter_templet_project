@@ -7,10 +7,8 @@
 //
 // AbsorbPointer本身可以接收点击事件，消耗掉事件，而IgnorePointer无法接收点击事件，其下的控件可以接收到点击事件（不是子控件）。
 
-
 import "package:flutter/material.dart";
 import "package:flutter_templet_project/basicWidget/n_text.dart";
-
 
 class AbsorbPointerDemo extends StatefulWidget {
   const AbsorbPointerDemo({Key? key}) : super(key: key);
@@ -22,7 +20,7 @@ class AbsorbPointerDemo extends StatefulWidget {
 class _AbsorbPointerDemoState extends State<AbsorbPointerDemo> {
   bool _disable = false;
   bool _switchValue = false;
-  
+
   final desc = ValueNotifier("");
 
   @override
@@ -47,14 +45,12 @@ class _AbsorbPointerDemoState extends State<AbsorbPointerDemo> {
           ),
           ValueListenableBuilder(
               valueListenable: desc,
-              builder: (context,  value, child){
-
+              builder: (context, value, child) {
                 return Container(
                   padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   child: NText(value),
                 );
-              }
-          ),
+              }),
         ],
       ),
     );
@@ -188,4 +184,3 @@ class _AbsorbPointerDemoState extends State<AbsorbPointerDemo> {
     desc.value = msg;
   }
 }
-

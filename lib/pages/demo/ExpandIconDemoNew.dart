@@ -11,7 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 
-
 class ExpandIconDemoNew extends StatefulWidget {
   const ExpandIconDemoNew({Key? key}) : super(key: key);
 
@@ -20,7 +19,6 @@ class ExpandIconDemoNew extends StatefulWidget {
 }
 
 class ExpandIconDemoNewState extends State<ExpandIconDemoNew> {
-
   late bool _isExpanded = false;
 
   late List<ExpandedItem<String>> _data;
@@ -61,10 +59,8 @@ class ExpandIconDemoNewState extends State<ExpandIconDemoNew> {
             children: <Widget>[
               SizedBox(width: 25),
               Expanded(
-                child: Text(
-                    'ExpandIcon Row',
-                    style: TextStyle(color: Colors.white, fontSize: 22)
-                ),
+                child: Text('ExpandIcon Row',
+                    style: TextStyle(color: Colors.white, fontSize: 22)),
               ),
               ExpandIcon(
                 isExpanded: _isExpanded,
@@ -86,7 +82,8 @@ class ExpandIconDemoNewState extends State<ExpandIconDemoNew> {
           visible: _isExpanded,
           child: Padding(
             padding: EdgeInsets.all(15),
-            child: Text('我被 ExpandIcon 控制显示状态',
+            child: Text(
+              '我被 ExpandIcon 控制显示状态',
               style: TextStyle(
                 color: Colors.black,
                 // decorationColor: Colors.red,
@@ -142,33 +139,38 @@ class ExpandIconDemoNewState extends State<ExpandIconDemoNew> {
     final item = _data[section];
     return Column(
       mainAxisSize: MainAxisSize.min,
-      children: item.items.map((e) => Column(
-        children: [
-          ListTile(
-            title: Text("detail index: $e"),
-            subtitle: Text('To delete this panel, tap the trash can icon'),
-            trailing: Icon(Icons.delete),
-            onTap: () {
-              ddlog("section_${section}_$e");
-              setState(() {});
-            }),
-          Divider(color: Colors.blue,),
-        ],
-      )).toList(),
+      children: item.items
+          .map((e) => Column(
+                children: [
+                  ListTile(
+                      title: Text("detail index: $e"),
+                      subtitle:
+                          Text('To delete this panel, tap the trash can icon'),
+                      trailing: Icon(Icons.delete),
+                      onTap: () {
+                        ddlog("section_${section}_$e");
+                        setState(() {});
+                      }),
+                  Divider(
+                    color: Colors.blue,
+                  ),
+                ],
+              ))
+          .toList(),
     );
   }
 
   _buildListTitle(ExpandedItem item) {
-    return
-    ListTile(
-      title: Text(item.expandedValue),
-      subtitle: Text('To delete this panel, tap the trash can icon'),
-      trailing: Icon(Icons.delete),
-      onTap: () {
-        setState(() {
-          _data.removeWhere((ExpandedItem currentItem) => item == currentItem);
+    return ListTile(
+        title: Text(item.expandedValue),
+        subtitle: Text('To delete this panel, tap the trash can icon'),
+        trailing: Icon(Icons.delete),
+        onTap: () {
+          setState(() {
+            _data
+                .removeWhere((ExpandedItem currentItem) => item == currentItem);
+          });
         });
-      });
   }
 
   List<ExpandedItem<String>> _generateItems(int count) {
@@ -199,9 +201,7 @@ class ExpandedItem<E> {
     required this.items,
     this.isExpanded = false,
   });
-
 }
-
 
 ///自定义视图
 class CustomExpansionTile extends StatefulWidget {
@@ -224,14 +224,16 @@ class CustomExpansionTileState extends State<CustomExpansionTile> {
       title: Container(
         // Change header (which is a Container widget in this case) background colour here.
         color: isExpanded ? Colors.orange : Colors.green,
-        child: Text("HEADER HERE",
+        child: Text(
+          "HEADER HERE",
           style: TextStyle(
             color: isExpanded ? Colors.black : Colors.black,
           ),
         ),
       ),
       subtitle: Text("subtitle"),
-      onExpansionChanged: (bool expanding) => setState(() => isExpanded = expanding),
+      onExpansionChanged: (bool expanding) =>
+          setState(() => isExpanded = expanding),
       children: <Widget>[
         Text("Child Widget One"),
         Text("Child Widget Two"),

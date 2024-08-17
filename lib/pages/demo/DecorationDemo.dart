@@ -55,10 +55,10 @@ class _DecorationDemoState extends State<DecorationDemo> {
         bottomLeft: 45,
         bottomRight: 85,
       ),
-      bgUrl: 'https://tenfei02.cfp.cn/creative/vcg/800/new/VCG21409037867.jpg',
+      bgUrl: 'R.image.urls[0]',
       // bgChild: FadeInImage(
       //   placeholder: 'img_placeholder.png'.toAssetImage(),
-      //   image: NetworkImage('https://tenfei02.cfp.cn/creative/vcg/800/new/VCG21409037867.jpg'),
+      //   image: NetworkImage('R.image.urls[0]'),
       //   fit: BoxFit.fill,
       //   width: 400,
       //   height: 400,

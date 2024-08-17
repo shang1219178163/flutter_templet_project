@@ -1,11 +1,8 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/network/controller/tag_gex_controller.dart';
 import 'package:get/get.dart';
 
 class GetxControllerDemo extends StatefulWidget {
-
   GetxControllerDemo({
     super.key,
     this.arguments,
@@ -18,12 +15,13 @@ class GetxControllerDemo extends StatefulWidget {
 }
 
 class _GetxControllerDemoState extends State<GetxControllerDemo> {
-
-  bool get hideApp => Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
+  bool get hideApp =>
+      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
 
   final _scrollController = ScrollController();
 
   Map<String, dynamic> arguments = Get.arguments ?? <String, dynamic>{};
+
   /// id
   late final id = arguments["id"];
 
@@ -32,15 +30,22 @@ class _GetxControllerDemoState extends State<GetxControllerDemo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: hideApp ? null : AppBar(
-        title: Text("$widget"),
-        actions: ['done',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () => debugPrint(e),)
-        ).toList(),
-      ),
+      appBar: hideApp
+          ? null
+          : AppBar(
+              title: Text("$widget"),
+              actions: [
+                'done',
+              ]
+                  .map((e) => TextButton(
+                        child: Text(
+                          e,
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        onPressed: () => debugPrint(e),
+                      ))
+                  .toList(),
+            ),
       body: buildBody(),
     );
   }
@@ -56,16 +61,15 @@ class _GetxControllerDemoState extends State<GetxControllerDemo> {
             Row(
               children: [
                 OutlinedButton(
-                  onPressed: (){
+                  onPressed: () {
                     tagController.increment();
                   },
                   child: Text("加"),
                 ),
                 OutlinedButton(
-                  onPressed: (){
-                    tagController.updateCount(
-                      onUpdate: (val) {
-                        val.value--;
+                  onPressed: () {
+                    tagController.updateCount(onUpdate: (val) {
+                      val.value--;
                     });
                   },
                   child: Text("减少"),
@@ -89,11 +93,9 @@ class _GetxControllerDemoState extends State<GetxControllerDemo> {
                 );
               },
             ),
-
           ],
         ),
       ),
     );
   }
-
 }

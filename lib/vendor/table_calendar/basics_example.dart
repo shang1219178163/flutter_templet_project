@@ -28,9 +28,18 @@ class _TableBasicsExampleState extends State<TableBasicsExample> {
   late final dateTimes = indexs.map((e) => DateTime(2023, 6, e)).toList();
 
   final eventTypes = [
-    Tuple2("已完成事项", Color(0xff37C2BC), ),
-    Tuple2("待处理事项", Color(0xff5690F4), ),
-    Tuple2("未完成事项", Color(0xffEB6A54), ),
+    Tuple2(
+      "已完成事项",
+      Color(0xff37C2BC),
+    ),
+    Tuple2(
+      "待处理事项",
+      Color(0xff5690F4),
+    ),
+    Tuple2(
+      "未完成事项",
+      Color(0xffEB6A54),
+    ),
   ];
 
   final _selectedEvents = ValueNotifier(<Event>[]);
@@ -80,16 +89,21 @@ class _TableBasicsExampleState extends State<TableBasicsExample> {
               rightChevronPadding: EdgeInsets.all(0),
             ),
             calendarBuilders: CalendarBuilders(
-              defaultBuilder: (context, day, focusedDay){
+              defaultBuilder: (context, day, focusedDay) {
                 // debugPrint("todayBuilder: $day, $focusedDay");
                 return Container(
                   margin: EdgeInsets.all(6),
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                    color: [Colors.green, Colors.blue, Colors.orange][Random().nextInt(3)],
+                    color: [
+                      Colors.green,
+                      Colors.blue,
+                      Colors.orange
+                    ][Random().nextInt(3)],
                     shape: BoxShape.circle,
                   ),
-                  child: Text("${day.day}\n${day.weekday}",
+                  child: Text(
+                    "${day.day}\n${day.weekday}",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 16,
@@ -97,7 +111,7 @@ class _TableBasicsExampleState extends State<TableBasicsExample> {
                   ),
                 );
               },
-              todayBuilder: (context, day, focusedDay){
+              todayBuilder: (context, day, focusedDay) {
                 // debugPrint("todayBuilder: $day, $focusedDay");
                 return Container(
                   margin: EdgeInsets.all(6),
@@ -106,10 +120,13 @@ class _TableBasicsExampleState extends State<TableBasicsExample> {
                     color: Colors.red,
                     shape: BoxShape.circle,
                   ),
-                  child: Text("今", style: TextStyle(color: Colors.white),),
+                  child: Text(
+                    "今",
+                    style: TextStyle(color: Colors.white),
+                  ),
                 );
               },
-              selectedBuilder: (context, day, focusedDay){
+              selectedBuilder: (context, day, focusedDay) {
                 // debugPrint("todayBuilder: $day, $focusedDay");
                 return Container(
                   margin: EdgeInsets.all(6),
@@ -118,7 +135,10 @@ class _TableBasicsExampleState extends State<TableBasicsExample> {
                     color: Color(0xffD8D8D8),
                     shape: BoxShape.circle,
                   ),
-                  child: Text("${day.day}", style: TextStyle(color: Color(0xff181818)),),
+                  child: Text(
+                    "${day.day}",
+                    style: TextStyle(color: Color(0xff181818)),
+                  ),
                 );
               },
             ),
@@ -155,8 +175,10 @@ class _TableBasicsExampleState extends State<TableBasicsExample> {
               // No need to call `setState()` here
               _focusedDay = focusedDay;
 
-              final first = _focusedDay.calenderMonthPageFisrtDayStr(format: DATE_FORMAT_DAY);
-              final last = _focusedDay.calenderMonthPageLastDayStr(format: DATE_FORMAT_DAY_END);
+              final first = _focusedDay.calenderMonthPageFisrtDayStr(
+                  format: DATE_FORMAT_DAY);
+              final last = _focusedDay.calenderMonthPageLastDayStr(
+                  format: DATE_FORMAT_DAY_END);
               debugPrint("onPageChanged: calenderMonthPage $first, $last");
             },
           ),
@@ -167,9 +189,7 @@ class _TableBasicsExampleState extends State<TableBasicsExample> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: eventTypes.map((e) {
                   return TextButton.icon(
-                    onPressed: (){
-
-                    },
+                    onPressed: () {},
                     icon: Container(
                       width: 14,
                       height: 14,
@@ -180,14 +200,12 @@ class _TableBasicsExampleState extends State<TableBasicsExample> {
                     ),
                     label: Text(e.item1),
                   );
-                }).toList()
-            ),
+                }).toList()),
           ),
           Expanded(
             child: ValueListenableBuilder<List<Event>>(
               valueListenable: _selectedEvents,
               builder: (context, value, _) {
-
                 return ListView.builder(
                   itemCount: value.length,
                   itemBuilder: (context, index) {

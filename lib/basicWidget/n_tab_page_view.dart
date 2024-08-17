@@ -97,7 +97,8 @@ class _NTabPageViewState extends State<NTabPageView>
         widget.labelColor != oldWidget.labelColor ||
         widget.labelStyle != oldWidget.labelStyle ||
         widget.isTabBottom != oldWidget.isTabBottom ||
-        widget.items.map((e) => e.item1).join(",") != oldWidget.items.map((e) => e.item1).join(",")) {
+        widget.items.map((e) => e.item1).join(",") !=
+            oldWidget.items.map((e) => e.item1).join(",")) {
       setState(() {});
     }
   }

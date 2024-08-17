@@ -5,7 +5,6 @@
 //  Copyright © 3/31/23 shang. All rights reserved.
 //
 
-
 enum VariableType {
   /// null
   nil,
@@ -18,7 +17,6 @@ enum VariableType {
 }
 
 class PropertyInfo {
-
   static getVariableType({required String name, dynamic value}) {
     var type = VariableType.nil;
 

@@ -3,17 +3,12 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/cache/cache_service.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 
 class TestPageOne extends StatefulWidget {
-
-  const TestPageOne({
-    Key? key,
-    this.title
-  }) : super(key: key);
+  const TestPageOne({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -22,8 +17,6 @@ class TestPageOne extends StatefulWidget {
 }
 
 class _TestPageOneState extends State<TestPageOne> {
-
-
   @override
   Widget build(BuildContext context) {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
@@ -32,12 +25,17 @@ class _TestPageOneState extends State<TestPageOne> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          onPressed: () => onDone(),
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),)
-        ).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  onPressed: () => onDone(),
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ))
+            .toList(),
       ),
       body: B(),
     );
@@ -52,7 +50,7 @@ class _TestPageOneState extends State<TestPageOne> {
   onDone() {
     debugPrint("$this, onDone");
 
-    final nums = [1,3,5,6];
+    final nums = [1, 3, 5, 6];
     final result = searchInsert(nums, 5);
     debugPrint("onDone $result");
     // print("onDone ${nums.reversed}");
@@ -63,7 +61,6 @@ class _TestPageOneState extends State<TestPageOne> {
     // for(int i = nums.length - 1; i >= 0; i--) {
     //   print("onDone_ ${i}_${nums[i]}");
     // }
-
 
     // CacheService()["a"] = "aa";
     // final a = CacheService()["a"];
@@ -109,24 +106,23 @@ class _TestPageOneState extends State<TestPageOne> {
     final has = tmpNew.startsWith('\\');
     ddlog("tmp: $tmp");
     ddlog("tmp1: ${tmpNew},${has}");
-
   }
 
   int searchInsert(List<int> nums, int target) {
-    for(var i = nums.length - 1; i >= 0; i--) {
+    for (var i = nums.length - 1; i >= 0; i--) {
       var curr = nums[i];
-      if(curr == target) {
+      if (curr == target) {
         return i;
-      } else if(curr < target ) {
+      } else if (curr < target) {
         return i;
       }
     }
     return -1;
   }
 
-  int ? searchInsertNew(List<int> nums, int target) {
-    for(var i = 0; i<nums.length; i++) {
-      if(nums[i] == target || nums[i] > target) {
+  int? searchInsertNew(List<int> nums, int target) {
+    for (var i = 0; i < nums.length; i++) {
+      if (nums[i] == target || nums[i] > target) {
         return i;
       }
     }
@@ -150,15 +146,19 @@ class BState extends State {
     return Scaffold(
         appBar: AppBar(
           title: Text("$this"),
-          actions: ['done',].map((e) => TextButton(
-            onPressed: () => debugPrint("$e"),
-            child: Text(e,
-              style: TextStyle(color: Colors.white),
-            ),)
-          ).toList(),
+          actions: [
+            'done',
+          ]
+              .map((e) => TextButton(
+                    onPressed: () => debugPrint("$e"),
+                    child: Text(
+                      e,
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ))
+              .toList(),
         ),
-        body: Text(arguments.toString())
-    );
+        body: Text(arguments.toString()));
   }
 
   /// AState调用[AState.reload]后，[AState.didUpdateWidget]不会调用, [BState.didUpdateWidget]会调用

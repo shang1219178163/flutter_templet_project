@@ -12,7 +12,6 @@ class AssetCacheService {
 
   factory AssetCacheService() => _instance;
 
-
   Directory? _dir;
 
   Future<Directory> getDir() async {
@@ -49,5 +48,4 @@ class AssetCacheService {
     }
     await file.delete();
   }
-
 }

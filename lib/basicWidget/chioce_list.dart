@@ -4,10 +4,8 @@ import 'package:flutter_templet_project/extension/widget_ext.dart';
 
 import 'package:flutter_templet_project/basicWidget/chioce_wrap.dart';
 
-
 ///多选列表
 class ChioceList extends StatefulWidget {
-
   ChioceList({
     Key? key,
     this.isMutiple = false,
@@ -38,7 +36,6 @@ class ChioceList extends StatefulWidget {
 }
 
 class _ChioceListState extends State<ChioceList> {
-
   final scrollController = ScrollController();
 
   @override
@@ -55,32 +52,33 @@ class _ChioceListState extends State<ChioceList> {
         child: Scrollbar(
           controller: scrollController,
           child: ListView.builder(
-            controller: scrollController,
-            physics: NeverScrollableScrollPhysics(),//禁止滑动
-            itemExtent: widget.rowHeight,
-            itemCount: widget.children.length,
-            itemBuilder: (BuildContext context, int index) {
-
-              final e = widget.children[index];
-              return Container(
-                decoration: BoxDecoration(
-                  // color: widget.backgroudColor,
-                  border: Border.all(color: Colors.transparent),
-                ),
-                child: ListTile(
-                  dense: true,
-                  // tileColor: Colors.white,
-                  leading: e.secondary,
-                  title: e.title,
-                  subtitle: e.subtitle,
-                  trailing: widget.indexs.contains(index) ? Icon(Icons.check) : null,
-                  selected: widget.indexs.contains(index),
-                  onTap: (){
-                    _changeValue(widget.children.indexOf(e));
-                  },
-                ),
-              );
-            }),
+              controller: scrollController,
+              physics: NeverScrollableScrollPhysics(), //禁止滑动
+              itemExtent: widget.rowHeight,
+              itemCount: widget.children.length,
+              itemBuilder: (BuildContext context, int index) {
+                final e = widget.children[index];
+                return Container(
+                  decoration: BoxDecoration(
+                    // color: widget.backgroudColor,
+                    border: Border.all(color: Colors.transparent),
+                  ),
+                  child: ListTile(
+                    dense: true,
+                    // tileColor: Colors.white,
+                    leading: e.secondary,
+                    title: e.title,
+                    subtitle: e.subtitle,
+                    trailing: widget.indexs.contains(index)
+                        ? Icon(Icons.check)
+                        : null,
+                    selected: widget.indexs.contains(index),
+                    onTap: () {
+                      _changeValue(widget.children.indexOf(e));
+                    },
+                  ),
+                );
+              }),
         ),
       ),
     );
@@ -128,7 +126,6 @@ class _ChioceListState extends State<ChioceList> {
         }
       } else {
         if (widget.indexs.contains(value)) {
-
         } else {
           widget.indexs.clear();
           widget.indexs.add(value);

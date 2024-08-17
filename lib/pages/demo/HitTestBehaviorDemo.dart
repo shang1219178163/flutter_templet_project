@@ -1,13 +1,7 @@
-
-
 import 'package:flutter/material.dart';
 
 class HitTestBehaviorDemo extends StatefulWidget {
-
-  HitTestBehaviorDemo({
-    Key? key, 
-    this.title
-  }) : super(key: key);
+  HitTestBehaviorDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -16,7 +10,6 @@ class HitTestBehaviorDemo extends StatefulWidget {
 }
 
 class _HitTestBehaviorDemoState extends State<HitTestBehaviorDemo> {
-
   final _scrollController = ScrollController();
 
   @override
@@ -24,12 +17,17 @@ class _HitTestBehaviorDemoState extends State<HitTestBehaviorDemo> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () => debugPrint(e),)
-        ).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () => debugPrint(e),
+                ))
+            .toList(),
       ),
       body: buildBody(),
     );
@@ -59,30 +57,29 @@ class _HitTestBehaviorDemoState extends State<HitTestBehaviorDemo> {
     // 1. 设置behavior为HitTestBehavior.opaque或者translucent
     // 2. Container设置背景色,任意背景色都可以
     return GestureDetector(
-        behavior: HitTestBehavior.deferToChild,
-        child: Container(
-          height: 50,
-          color: Colors.transparent,
-          padding: EdgeInsets.only(left: 5, right: 5),
-          alignment: Alignment.center,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[
-              Text(
-                "left text",
-                style: TextStyle(fontSize: 20),
-              ),
-              Text(
-                "right text",
-                style: TextStyle(fontSize: 20),
-              ),
-            ],
-          ),
+      behavior: HitTestBehavior.deferToChild,
+      child: Container(
+        height: 50,
+        color: Colors.transparent,
+        padding: EdgeInsets.only(left: 5, right: 5),
+        alignment: Alignment.center,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+            Text(
+              "left text",
+              style: TextStyle(fontSize: 20),
+            ),
+            Text(
+              "right text",
+              style: TextStyle(fontSize: 20),
+            ),
+          ],
         ),
-        onTap: () {
-          debugPrint("${DateTime.now().toString().split(".").first} click");
-        },
-      );
+      ),
+      onTap: () {
+        debugPrint("${DateTime.now().toString().split(".").first} click");
+      },
+    );
   }
-  
 }

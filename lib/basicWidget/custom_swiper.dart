@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 
 ///自定义轮播
 class CustomSwipper extends StatefulWidget {
-
   const CustomSwipper({
     Key? key,
     required this.images,
@@ -85,23 +84,23 @@ class _CustomSwipperState extends State<CustomSwipper> {
     );
   }
 
-   Widget _buildIndicatorNew() {
-     var length = widget.images.length;
-     return Row(
-       children: widget.images.map((e) {
-         return Padding(
-           padding: const EdgeInsets.symmetric(horizontal: 0.0),
-           child: Container(
-             width: 28,
-             height: 2,
-             color: e == widget.images[_curIndex % length]
-                 ? Colors.white
-                 : Colors.grey,
-           ),
-         );
-       }).toList(),
-     );
-   }
+  Widget _buildIndicatorNew() {
+    var length = widget.images.length;
+    return Row(
+      children: widget.images.map((e) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 0.0),
+          child: Container(
+            width: 28,
+            height: 2,
+            color: e == widget.images[_curIndex % length]
+                ? Colors.white
+                : Colors.grey,
+          ),
+        );
+      }).toList(),
+    );
+  }
 
   Widget _buildPageView() {
     var length = widget.images.length;
@@ -130,11 +129,13 @@ class _CustomSwipperState extends State<CustomSwipper> {
 
               widget.onTap(currIdx);
             },
-            child: widget.itemBuilder != null ? widget.itemBuilder!(context, index) : FadeInImage.assetNetwork(
-              placeholder: 'images/img_placeholder.png',
-              image: widget.images[index % length],
-              fit: BoxFit.cover,
-            ),
+            child: widget.itemBuilder != null
+                ? widget.itemBuilder!(context, index)
+                : FadeInImage.assetNetwork(
+                    placeholder: 'images/img_placeholder.png',
+                    image: widget.images[index % length],
+                    fit: BoxFit.cover,
+                  ),
           );
         },
       ),
@@ -153,13 +154,13 @@ class _CustomSwipperState extends State<CustomSwipper> {
   /// 初始化定时任务
   _initTimer() {
     _timer ??= Timer.periodic(widget.duration ?? Duration(seconds: 3), (t) {
-        _curIndex++;
-        _pageController.animateToPage(
-          _curIndex,
-          duration: Duration(milliseconds: 350),
-          curve: Curves.linear,
-        );
-      });
+      _curIndex++;
+      _pageController.animateToPage(
+        _curIndex,
+        duration: Duration(milliseconds: 350),
+        curve: Curves.linear,
+      );
+    });
   }
 
   /// 切换页面，并刷新小圆点

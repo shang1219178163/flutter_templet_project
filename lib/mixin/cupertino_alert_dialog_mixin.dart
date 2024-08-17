@@ -6,7 +6,6 @@
 //  Copyright © 2023/10/5 shang. All rights reserved.
 //
 
-
 import 'dart:async';
 import 'dart:ui' as ui;
 
@@ -15,8 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 
 /// 简单提示信息
-mixin CupertinoAlertDialogMixin <T extends StatefulWidget> on State<T> {
-
+mixin CupertinoAlertDialogMixin<T extends StatefulWidget> on State<T> {
   presentAlert({
     String titleStr = "",
     String contentStr = "",
@@ -25,21 +23,21 @@ mixin CupertinoAlertDialogMixin <T extends StatefulWidget> on State<T> {
     VoidCallback? onCancel,
     VoidCallback? onConfirm,
   }) {
-    if (titleStr.isEmpty
-        && contentStr.isEmpty
-        && title == null
-        && content == null) {
+    if (titleStr.isEmpty &&
+        contentStr.isEmpty &&
+        title == null &&
+        content == null) {
       return;
     }
 
     CupertinoAlertDialog(
       title: title ?? (titleStr.isEmpty ? null : Text(titleStr)),
-      content: content ?? Text(contentStr, textAlign: TextAlign.left,),
-      actions: [
-        ("取消", onCancel),
-        ("确定", onConfirm)
-      ].map((e) {
-
+      content: content ??
+          Text(
+            contentStr,
+            textAlign: TextAlign.left,
+          ),
+      actions: [("取消", onCancel), ("确定", onConfirm)].map((e) {
         return TextButton(
           style: TextButton.styleFrom(
             padding: EdgeInsets.symmetric(vertical: 20),
@@ -55,7 +53,6 @@ mixin CupertinoAlertDialogMixin <T extends StatefulWidget> on State<T> {
       }).toList(),
     ).toShowCupertinoDialog(context: context);
   }
-
 
   ///alert弹窗
   showCupertinoSheet({
@@ -77,18 +74,24 @@ mixin CupertinoAlertDialogMixin <T extends StatefulWidget> on State<T> {
     final child = CupertinoActionSheet(
       title: title,
       message: message,
-      actions: items.map((e) => CupertinoActionSheetAction(
-        onPressed: () {
-          onSelect?.call(context, items.indexOf(e));
-          Navigator.pop(context);
-        },
-        child: e,
-      ),).toList(),
+      actions: items
+          .map(
+            (e) => CupertinoActionSheetAction(
+              onPressed: () {
+                onSelect?.call(context, items.indexOf(e));
+                Navigator.pop(context);
+              },
+              child: e,
+            ),
+          )
+          .toList(),
       cancelButton: CupertinoActionSheetAction(
         isDestructiveAction: true,
-        onPressed: onCancel != null ? onCancel?.call(context) : () {
-          Navigator.pop(context);
-        },
+        onPressed: onCancel != null
+            ? onCancel?.call(context)
+            : () {
+                Navigator.pop(context);
+              },
         child: cancel,
       ),
     );

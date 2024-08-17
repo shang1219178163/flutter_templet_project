@@ -1,52 +1,61 @@
-
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_header.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:tuple/tuple.dart';
 
 class FloatingActionButtonDemo extends StatefulWidget {
-
-  FloatingActionButtonDemo({
-    Key? key,
-    this.title
-  }) : super(key: key);
+  FloatingActionButtonDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
   @override
-  _FloatingActionButtonDemoState createState() => _FloatingActionButtonDemoState();
+  _FloatingActionButtonDemoState createState() =>
+      _FloatingActionButtonDemoState();
 }
 
 class _FloatingActionButtonDemoState extends State<FloatingActionButtonDemo> {
-
-
   @override
   Widget build(BuildContext context) {
     late final items = <Tuple2<String, Widget>>[
       Tuple2("buildButtonSmall", buildButtonSmall()),
-      Tuple2("buildButton", buildButton(),),
-      Tuple2("buildButtonLarge", buildButtonLarge(),),
-      Tuple2("buildButtonExtended", buildButtonExtended(),),
-      Tuple2("buildButtonExtendedCustom", buildButtonExtendedCustom(),),
+      Tuple2(
+        "buildButton",
+        buildButton(),
+      ),
+      Tuple2(
+        "buildButtonLarge",
+        buildButtonLarge(),
+      ),
+      Tuple2(
+        "buildButtonExtended",
+        buildButtonExtended(),
+      ),
+      Tuple2(
+        "buildButtonExtendedCustom",
+        buildButtonExtendedCustom(),
+      ),
     ];
 
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () => debugPrint(e),)
-        ).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () => debugPrint(e),
+                ))
+            .toList(),
       ),
       body: buildBody(
         items: items,
       ),
       floatingActionButton: buildFloatingActionButton(),
-      floatingActionButtonLocation:  FloatingActionButtonLocation.centerTop,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerTop,
     );
   }
 
@@ -55,10 +64,12 @@ class _FloatingActionButtonDemoState extends State<FloatingActionButtonDemo> {
       children: [
         SingleChildScrollView(
           child: Column(
-            children: items.map((e) => NSectionHeader(
-              title: e.item1,
-              child: e.item2,
-            )).toList(),
+            children: items
+                .map((e) => NSectionHeader(
+                      title: e.item1,
+                      child: e.item2,
+                    ))
+                .toList(),
           ),
         ),
       ],
@@ -70,25 +81,24 @@ class _FloatingActionButtonDemoState extends State<FloatingActionButtonDemo> {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         FloatingActionButton.small(
-          onPressed: (){
-
-          },
+          onPressed: () {},
           child: Icon(Icons.edit),
         ),
-        SizedBox(height: 16,),
+        SizedBox(
+          height: 16,
+        ),
         FloatingActionButton.small(
           // materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
           // extendedPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 0),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(8),),
+            borderRadius: BorderRadius.all(
+              Radius.circular(8),
+            ),
           ),
-          onPressed: (){
-
-          },
+          onPressed: () {},
           child: Container(
               // padding: EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-              child: Text("Small (40)")
-          ),
+              child: Text("Small (40)")),
         ),
       ],
     );
@@ -99,25 +109,24 @@ class _FloatingActionButtonDemoState extends State<FloatingActionButtonDemo> {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         FloatingActionButton(
-          onPressed: (){
-
-          },
+          onPressed: () {},
           child: Icon(Icons.edit),
         ),
-        SizedBox(height: 16,),
+        SizedBox(
+          height: 16,
+        ),
         FloatingActionButton(
           // materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
           // extendedPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 0),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(8),),
+            borderRadius: BorderRadius.all(
+              Radius.circular(8),
+            ),
           ),
-          onPressed: (){
-
-          },
+          onPressed: () {},
           child: Container(
-            // padding: EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-              child: Text("Regular (56)")
-          ),
+              // padding: EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+              child: Text("Regular (56)")),
         ),
       ],
     );
@@ -128,25 +137,24 @@ class _FloatingActionButtonDemoState extends State<FloatingActionButtonDemo> {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         FloatingActionButton.large(
-          onPressed: (){
-
-          },
+          onPressed: () {},
           child: Icon(Icons.edit),
         ),
-        SizedBox(height: 16,),
+        SizedBox(
+          height: 16,
+        ),
         FloatingActionButton.large(
           // materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
           // extendedPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 0),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(8),),
+            borderRadius: BorderRadius.all(
+              Radius.circular(8),
+            ),
           ),
-          onPressed: (){
-
-          },
+          onPressed: () {},
           child: Container(
-            // padding: EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-              child: Text("Large (96)")
-          ),
+              // padding: EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+              child: Text("Large (96)")),
         ),
       ],
     );
@@ -159,18 +167,18 @@ class _FloatingActionButtonDemoState extends State<FloatingActionButtonDemo> {
           // materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
           // extendedPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 0),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(8),),
+            borderRadius: BorderRadius.all(
+              Radius.circular(8),
+            ),
           ),
-          onPressed: (){
-
-          },
+          onPressed: () {},
           label: Text("Extended"),
         ),
-        SizedBox(height: 16,),
+        SizedBox(
+          height: 16,
+        ),
         FloatingActionButton.extended(
-          onPressed: (){
-
-          },
+          onPressed: () {},
           label: Text('Extended'),
           icon: Icon(Icons.edit),
         ),
@@ -186,11 +194,11 @@ class _FloatingActionButtonDemoState extends State<FloatingActionButtonDemo> {
         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
         extendedPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 0),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(8),),
+          borderRadius: BorderRadius.all(
+            Radius.circular(8),
+          ),
         ),
-        onPressed: (){
-
-        },
+        onPressed: () {},
         label: Container(
           child: Text("发送"),
         ),
@@ -237,19 +245,17 @@ class _FloatingActionButtonDemoState extends State<FloatingActionButtonDemo> {
       child: ListView(
         scrollDirection: Axis.horizontal,
         children: titles.map((e) {
-
           return TextButton(
-            style: TextButton.styleFrom(
-              padding: EdgeInsets.symmetric(horizontal: 8),
-              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-              minimumSize: Size(50, 18),
-              // backgroundColor: ColorExt.random,
-            ),
-            onPressed: (){
-              debugPrint("$e");
-            },
-            child: Text("$e")
-          );
+              style: TextButton.styleFrom(
+                padding: EdgeInsets.symmetric(horizontal: 8),
+                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                minimumSize: Size(50, 18),
+                // backgroundColor: ColorExt.random,
+              ),
+              onPressed: () {
+                debugPrint("$e");
+              },
+              child: Text("$e"));
         }).toList(),
       ),
     );

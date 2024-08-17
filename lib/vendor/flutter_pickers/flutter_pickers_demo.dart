@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_pickers/pickers.dart';
 import 'package:flutter_pickers/style/picker_style.dart';
@@ -11,7 +10,6 @@ import 'package:flutter_templet_project/vendor/flutter_pickers/multiple_picker_p
 import 'package:flutter_templet_project/vendor/flutter_pickers/single_picker_page.dart';
 import 'package:flutter_templet_project/vendor/flutter_pickers/style_picker_page.dart';
 
-
 class FlutterPickersDemo extends StatefulWidget {
   const FlutterPickersDemo({super.key});
 
@@ -20,8 +18,6 @@ class FlutterPickersDemo extends StatefulWidget {
 }
 
 class _FlutterPickersDemoState extends State<FlutterPickersDemo> {
-  
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(

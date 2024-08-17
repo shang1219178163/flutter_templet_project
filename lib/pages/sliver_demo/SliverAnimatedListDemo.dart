@@ -14,42 +14,43 @@ class _SliverAnimatedListDemoState extends State<SliverAnimatedListDemo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            'SliverAnimatedList'
+      appBar: AppBar(
+        title: Text('SliverAnimatedList'),
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.add_circle),
+            onPressed: onInsert,
+            iconSize: 32,
           ),
-          actions: <Widget>[
-            IconButton(
-              icon: const Icon(Icons.add_circle),
-              onPressed: onInsert,
-              iconSize: 32,
-            ),
-            IconButton(
-              icon: const Icon(Icons.remove_circle),
-              onPressed: onRemove,
-              iconSize: 32,
-            ),
-          ],
-        ),
-        body: CustomScrollView(
-          slivers: <Widget>[
-            SliverAnimatedList(
-              key: listKey,
-              initialItemCount: list.length,
-              itemBuilder: _buildItem,
-            ),
-          ],
-        ),
-      );
+          IconButton(
+            icon: const Icon(Icons.remove_circle),
+            onPressed: onRemove,
+            iconSize: 32,
+          ),
+        ],
+      ),
+      body: CustomScrollView(
+        slivers: <Widget>[
+          SliverAnimatedList(
+            key: listKey,
+            initialItemCount: list.length,
+            itemBuilder: _buildItem,
+          ),
+        ],
+      ),
+    );
   }
 
   // 创建item
-  Widget _buildItem(BuildContext context, int index, Animation<double> animation) {
+  Widget _buildItem(
+      BuildContext context, int index, Animation<double> animation) {
     return SizeTransition(
       sizeFactor: animation,
       child: Card(
         child: ListTile(
-          title: Text('Item $index',),
+          title: Text(
+            'Item $index',
+          ),
         ),
       ),
     );
@@ -69,9 +70,8 @@ class _SliverAnimatedListDemoState extends State<SliverAnimatedListDemo> {
     }
     final _index = list.length - 1;
     var item = list[_index];
-    listKey.currentState!.removeItem(_index,
-            (context, animation) => _buildItem(context, item, animation));
+    listKey.currentState!.removeItem(
+        _index, (context, animation) => _buildItem(context, item, animation));
     list.removeAt(_index);
   }
-
 }

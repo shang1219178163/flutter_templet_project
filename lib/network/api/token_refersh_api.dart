@@ -1,5 +1,3 @@
-
-
 import 'dart:convert';
 
 import 'package:flutter_templet_project/cache/cache_service.dart';
@@ -9,8 +7,7 @@ import 'package:flutter_templet_project/vendor/toast_util.dart';
 // https://doc.yljt.cn/docs/platform//5245
 
 /// 【通用】获取患者标签
-class TokenRefreshApi extends BaseRequestAPI{
-
+class TokenRefreshApi extends BaseRequestAPI {
   TokenRefreshApi({
     this.accessToken,
     this.refreshToken,
@@ -21,7 +18,7 @@ class TokenRefreshApi extends BaseRequestAPI{
   String? refreshToken;
 
   @override
-  String get requestURI{
+  String get requestURI {
     const url = '';
     return url;
   }
@@ -30,7 +27,7 @@ class TokenRefreshApi extends BaseRequestAPI{
   HttpMethod get requestType => HttpMethod.GET;
 
   @override
-  Map<String, dynamic> get requestParams{
+  Map<String, dynamic> get requestParams {
     final map = <String, dynamic>{};
     if (accessToken != null) {
       map["accessToken"] = accessToken;
@@ -40,5 +37,4 @@ class TokenRefreshApi extends BaseRequestAPI{
     }
     return map;
   }
-
 }

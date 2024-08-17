@@ -6,22 +6,19 @@
 //  Copyright © 6/10/21 shang. All rights reserved.
 //
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/basicWidget/hud/ToastDialog.dart';
 import 'package:flutter_templet_project/basicWidget/hud/CirclePulseLoadingWidget.dart';
 
-
 class HudProgressDemo extends StatelessWidget {
-
   var titles = List.generate(10, (index) => "item$index");
 
   final String? title;
 
   HudProgressDemo({
-  	Key? key,
-  	this.title,
+    Key? key,
+    this.title,
   }) : super(key: key);
 
   @override
@@ -29,50 +26,52 @@ class HudProgressDemo extends StatelessWidget {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
 
     return Scaffold(
-        appBar: AppBar(
-          title: Text(title ?? "$this"),
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(Icons.more_horiz),
-              onPressed: () {
-                debugPrint("更多");
-                showToast(context);
-              },
-            ),
-          ],
-        ),
-        body: buildGridView(context: context, list: titles),
+      appBar: AppBar(
+        title: Text(title ?? "$this"),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.more_horiz),
+            onPressed: () {
+              debugPrint("更多");
+              showToast(context);
+            },
+          ),
+        ],
+      ),
+      body: buildGridView(context: context, list: titles),
       // body: Center(
-        //   child: CirclePulseLoadingWidget(),
-        // )
+      //   child: CirclePulseLoadingWidget(),
+      // )
     );
   }
 
-  Widget buildGridView({required BuildContext context, required List<String> list}) {
+  Widget buildGridView(
+      {required BuildContext context, required List<String> list}) {
     return GridView.count(
-      padding: EdgeInsets.all(15.0),
-      //一行多少个
-      crossAxisCount: 4,
-      //滚动方向
-      scrollDirection: Axis.vertical,
-      // 左右间隔
-      crossAxisSpacing: 8,
-      // 上下间隔
-      mainAxisSpacing: 8,
-      //宽高比
-      childAspectRatio: 3 / 4,
-      children: list.map((e) => GridTile(
-        child: InkWell(
-          onTap: (){  _onPressed(context: context, e: e); },
-          child: Container(
-            color: Theme.of(context).primaryColor,
-            child: Center(
-              child: Text(e),
-            )
-          ),
-        )
-      )).toList()
-    );
+        padding: EdgeInsets.all(15.0),
+        //一行多少个
+        crossAxisCount: 4,
+        //滚动方向
+        scrollDirection: Axis.vertical,
+        // 左右间隔
+        crossAxisSpacing: 8,
+        // 上下间隔
+        mainAxisSpacing: 8,
+        //宽高比
+        childAspectRatio: 3 / 4,
+        children: list
+            .map((e) => GridTile(
+                    child: InkWell(
+                  onTap: () {
+                    _onPressed(context: context, e: e);
+                  },
+                  child: Container(
+                      color: Theme.of(context).primaryColor,
+                      child: Center(
+                        child: Text(e),
+                      )),
+                )))
+            .toList());
   }
 
   void _onPressed({required BuildContext context, required String e}) {
@@ -82,8 +81,11 @@ class HudProgressDemo extends StatelessWidget {
         {
           ToastDialog.show(
             context: context,
-            loadingView: CirclePulseLoadingWidget(itemColor: Colors.white,),
-            message: "经查，涉事两名攻击者非法获取某互联网公司客户信息共计 11.8 亿条，在 8 个月的时间里利用该信息经营共获利 34 万余元。"
+            loadingView: CirclePulseLoadingWidget(
+              itemColor: Colors.white,
+            ),
+            message:
+                "经查，涉事两名攻击者非法获取某互联网公司客户信息共计 11.8 亿条，在 8 个月的时间里利用该信息经营共获利 34 万余元。"
                 "最终，二人因侵犯公民个人信息罪，分别被判处有期徒刑三年六个月，有期徒刑三年三个月。",
             messageMargin: EdgeInsets.only(left: 40, right: 40),
           );
@@ -94,7 +96,9 @@ class HudProgressDemo extends StatelessWidget {
         {
           ToastDialog.show(
             context: context,
-            loadingView: CirclePulseLoadingWidget(itemColor: Colors.white,),
+            loadingView: CirclePulseLoadingWidget(
+              itemColor: Colors.white,
+            ),
             // message: "经查，涉事两名攻击者非法获取某互联网公司客户信息共计 11.8 亿条，在 8 个月的时间里利用该信息经营共获利 34 万余元。"
             //     "最终，二人因侵犯公民个人信息罪，分别被判处有期徒刑三年六个月，有期徒刑三年三个月。",
             // messageMargin: EdgeInsets.only(left: 40, right: 40),
@@ -107,7 +111,8 @@ class HudProgressDemo extends StatelessWidget {
           ToastDialog.show(
             context: context,
             // loadingView: CirclePulseLoadingWidget(itemColor: Colors.white,),
-            message: "经查，涉事两名攻击者非法获取某互联网公司客户信息共计 11.8 亿条，在 8 个月的时间里利用该信息经营共获利 34 万余元。"
+            message:
+                "经查，涉事两名攻击者非法获取某互联网公司客户信息共计 11.8 亿条，在 8 个月的时间里利用该信息经营共获利 34 万余元。"
                 "最终，二人因侵犯公民个人信息罪，分别被判处有期徒刑三年六个月，有期徒刑三年三个月。",
             messageMargin: EdgeInsets.only(left: 40, right: 40),
           );
@@ -115,33 +120,23 @@ class HudProgressDemo extends StatelessWidget {
         break;
 
       case 4:
-        {
-
-        }
+        {}
         break;
 
       case 5:
-        {
-
-        }
+        {}
         break;
 
       case 6:
-        {
-
-        }
+        {}
         break;
 
       case 7:
-        {
-
-        }
+        {}
         break;
 
       case 8:
-        {
-
-        }
+        {}
         break;
 
       default:
@@ -180,9 +175,9 @@ class HudProgressDemo extends StatelessWidget {
     //       );
     //     });
 
-    const message = "经查，涉事两名攻击者非法获取某互联网公司客户信息共计 11.8 亿条，在 8 个月的时间里利用该信息经营共获利 34 万余元。"
+    const message =
+        "经查，涉事两名攻击者非法获取某互联网公司客户信息共计 11.8 亿条，在 8 个月的时间里利用该信息经营共获利 34 万余元。"
         "最终，二人因侵犯公民个人信息罪，分别被判处有期徒刑三年六个月，有期徒刑三年三个月。";
-
 
     showDialog(
         context: context,

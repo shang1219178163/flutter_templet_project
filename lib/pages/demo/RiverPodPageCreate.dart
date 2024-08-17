@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/n_textfield.dart';
@@ -11,7 +9,6 @@ import 'package:get/get.dart';
 
 /// RiverPod 页面创建
 class RiverPodPageCreate extends StatefulWidget {
-
   RiverPodPageCreate({
     super.key,
     this.arguments,
@@ -24,31 +21,39 @@ class RiverPodPageCreate extends StatefulWidget {
 }
 
 class _RiverPodPageCreateState extends State<RiverPodPageCreate> {
-
-  bool get hideApp => Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
+  bool get hideApp =>
+      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
 
   final scrollController = ScrollController();
 
   Map<String, dynamic> arguments = Get.arguments ?? <String, dynamic>{};
+
   /// id
   late final id = arguments["id"];
 
   final textEditingController = TextEditingController();
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: hideApp ? null : AppBar(
-        title: Text("$widget"),
-        actions: ['创建',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: onCreate,
-        ),
-        ).toList(),
-      ),
+      appBar: hideApp
+          ? null
+          : AppBar(
+              title: Text("$widget"),
+              actions: [
+                '创建',
+              ]
+                  .map(
+                    (e) => TextButton(
+                      child: Text(
+                        e,
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      onPressed: onCreate,
+                    ),
+                  )
+                  .toList(),
+            ),
       body: buildBody(),
     );
   }
@@ -64,16 +69,11 @@ class _RiverPodPageCreateState extends State<RiverPodPageCreate> {
                 vertical: 8,
               ),
               child: NTextField(
-                controller: textEditingController,
-                minLines: 10,
-                maxLines: 10,
-                onChanged: (val){
-
-                },
-                onSubmitted: (val){
-
-                }
-              ),
+                  controller: textEditingController,
+                  minLines: 10,
+                  maxLines: 10,
+                  onChanged: (val) {},
+                  onSubmitted: (val) {}),
             ),
           ],
         ),
@@ -102,9 +102,7 @@ class _RiverPodPageCreateState extends State<RiverPodPageCreate> {
     }
 
     setState(() {});
-    final list = text.split("\n")
-        .where((e) => e.trim().isNotEmpty)
-        .map((e) {
+    final list = text.split("\n").where((e) => e.trim().isNotEmpty).map((e) {
       final line = e.trim();
       final result = line.endsWith(".dart") ? line.split(".").first : line;
 
@@ -116,17 +114,21 @@ class _RiverPodPageCreateState extends State<RiverPodPageCreate> {
   }
 
   /// 生成模型文件
-  toCreateDartFile({required String fileName,}) async {
+  toCreateDartFile({
+    required String fileName,
+  }) async {
     try {
       final className = fileName.toCamlCase("_");
       final content = ceatePage(className: className);
 
       /// 生成本地文件
-      final file = await FileManager().createFile(fileName: fileName, content: content);
+      final file =
+          await FileManager().createFile(fileName: fileName, content: content);
       debugPrint("file: ${file.path}");
 
       showSnackBar(SnackBar(
-        content: NText("文件已生成(下载文件夹)",
+        content: NText(
+          "文件已生成(下载文件夹)",
           color: Colors.white,
           textAlign: TextAlign.center,
         ),
@@ -139,12 +141,14 @@ class _RiverPodPageCreateState extends State<RiverPodPageCreate> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            NText(e.toString(),),
+            NText(
+              e.toString(),
+            ),
           ],
         ),
       ));
     }
-    }
+  }
 
   String ceatePage({required String className}) {
     return '''
@@ -237,6 +241,4 @@ mixin _PageBuilder on ConsumerState<$className> {
 }
 ''';
   }
-
 }
-

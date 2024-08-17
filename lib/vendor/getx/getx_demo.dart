@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/pages/demo/TestFunction.dart';
@@ -7,11 +6,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:tuple/tuple.dart';
 
 class GetxDemo extends StatefulWidget {
-
-  GetxDemo({
-    Key? key, 
-    this.title
-  }) : super(key: key);
+  GetxDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -20,12 +15,9 @@ class GetxDemo extends StatefulWidget {
 }
 
 class _GetxDemoState extends State<GetxDemo> {
-
   var count = 0.obs;
 
-
   final storage = GetStorage();
-
 
   late final items = <Tuple2<String, VoidCallback>>[
     Tuple2("showDefaultDialog", showDefaultDialog),
@@ -41,12 +33,17 @@ class _GetxDemoState extends State<GetxDemo> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: onPressed,)
-        ).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: onPressed,
+                ))
+            .toList(),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -56,11 +53,13 @@ class _GetxDemoState extends State<GetxDemo> {
               Wrap(
                 spacing: 8,
                 runSpacing: 8,
-                children: items.map((e) => OutlinedButton(
-                    onPressed: e.item2,
-                    child: NText(e.item1,
-                    )
-                )).toList(),
+                children: items
+                    .map((e) => OutlinedButton(
+                        onPressed: e.item2,
+                        child: NText(
+                          e.item1,
+                        )))
+                    .toList(),
               ),
               Obx(() => Text("count: $count")),
               // Obx(() => Text("storage count: ${storage.read("count")}")),
@@ -79,7 +78,6 @@ class _GetxDemoState extends State<GetxDemo> {
     );
   }
 
-
   onPressed() {
     // showDefaultDialog();
     // showDialog();
@@ -90,7 +88,8 @@ class _GetxDemoState extends State<GetxDemo> {
   showDefaultDialog() {
     Get.defaultDialog(
       title: "Welcome to Flutter Dev'S",
-      middleText: "FlutterDevs is a protruding flutter app development company with "
+      middleText:
+          "FlutterDevs is a protruding flutter app development company with "
           "an extensive in-house team of 30+ seasoned professionals who know "
           "exactly what you need to strengthen your business across various dimensions",
       backgroundColor: Colors.teal,
@@ -102,9 +101,8 @@ class _GetxDemoState extends State<GetxDemo> {
 
   showDialog() {
     Get.dialog(Align(
-        child: buildContent(),
-      )
-    );
+      child: buildContent(),
+    ));
   }
 
   showBottomSheet() {
@@ -114,14 +112,10 @@ class _GetxDemoState extends State<GetxDemo> {
   }
 
   showSnackbar() {
-    Get.snackbar(
-      "Snackbar 标题",
-      "欢迎使用Snackbar",
-      snackPosition: SnackPosition.TOP,
-      onTap: (snack) {
-        debugPrint("snackbar: $snack");
-      }
-    );
+    Get.snackbar("Snackbar 标题", "欢迎使用Snackbar",
+        snackPosition: SnackPosition.TOP, onTap: (snack) {
+      debugPrint("snackbar: $snack");
+    });
   }
 
   Widget buildContent() {
@@ -135,13 +129,17 @@ class _GetxDemoState extends State<GetxDemo> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          NText("Welcome to Flutter Dev'S",
+          NText(
+            "Welcome to Flutter Dev'S",
             fontSize: 15,
           ),
-          SizedBox(height: 20,),
-          NText("FlutterDevs is a protruding flutter app development company with "
-                "an extensive in-house team of 30+ seasoned professionals who know "
-                "exactly what you need to strengthen your business across various dimensions",
+          SizedBox(
+            height: 20,
+          ),
+          NText(
+            "FlutterDevs is a protruding flutter app development company with "
+            "an extensive in-house team of 30+ seasoned professionals who know "
+            "exactly what you need to strengthen your business across various dimensions",
             fontSize: 15,
             maxLines: 10,
           ),

@@ -18,64 +18,53 @@ import 'package:get/get.dart';
 import 'package:tuple/tuple.dart';
 
 class TextFieldDemoOne extends StatefulWidget {
-
   final String? title;
 
-  const TextFieldDemoOne({ Key? key, this.title}) : super(key: key);
+  const TextFieldDemoOne({Key? key, this.title}) : super(key: key);
 
-  
   @override
   _TextFieldDemoOneState createState() => _TextFieldDemoOneState();
 }
 
 class _TextFieldDemoOneState extends State<TextFieldDemoOne> {
-
-  bool get hideApp => Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
+  bool get hideApp =>
+      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
 
   final textEditingController = TextEditingController();
 
   final current = ValueNotifier("");
 
-
   ///用来控制  TextField 焦点的获取与关闭
   FocusNode focusNode = FocusNode();
+
   ///文本输入框是否可编辑
   bool isEnable = true;
 
   final inputFormatters = <Tuple3<String, TextInputFormatter, String>>[
+    Tuple3("长度限制", LengthLimitingTextInputFormatter(10),
+        "LengthLimitingTextInputFormatter(10)"),
     Tuple3(
-      "长度限制",
-      LengthLimitingTextInputFormatter(10),
-      "LengthLimitingTextInputFormatter(10)"
-    ),
-    Tuple3(
-      "英文字母/汉字/数字",
-      FilteringTextInputFormatter(RegExp("[a-zA-Z]|[\u4e00-\u9fa5]|[0-9]"), allow: true),
-      "FilteringTextInputFormatter(RegExp('[a-zA-Z]|[\u4e00-\u9fa5]|[0-9]'), allow: true)"
-    ),
-    Tuple3(
-      "仅数字",
-      FilteringTextInputFormatter.digitsOnly,
-      "FilteringTextInputFormatter.digitsOnly"
-    ),
-    Tuple3(
-      "仅单行",
-      FilteringTextInputFormatter.singleLineFormatter,
-      "FilteringTextInputFormatter.singleLineFormatter,"
-    ),
+        "英文字母/汉字/数字",
+        FilteringTextInputFormatter(RegExp("[a-zA-Z]|[\u4e00-\u9fa5]|[0-9]"),
+            allow: true),
+        "FilteringTextInputFormatter(RegExp('[a-zA-Z]|[\u4e00-\u9fa5]|[0-9]'), allow: true)"),
+    Tuple3("仅数字", FilteringTextInputFormatter.digitsOnly,
+        "FilteringTextInputFormatter.digitsOnly"),
+    Tuple3("仅单行", FilteringTextInputFormatter.singleLineFormatter,
+        "FilteringTextInputFormatter.singleLineFormatter,"),
   ];
-
 
   @override
   void initState() {
     super.initState();
 
-    textEditingController.value = TextEditingValue(text: "widget.value") ;
+    textEditingController.value = TextEditingValue(text: "widget.value");
 
     ///添加获取焦点与失去焦点的兼听
-    focusNode.addListener((){
+    focusNode.addListener(() {
       ///当前兼听的 TextFeild 是否获取了输入焦点
       var hasFocus = focusNode.hasFocus;
+
       ///当前 focusNode 是否添加了兼听
       var hasListeners = focusNode.hasListeners;
 
@@ -92,9 +81,11 @@ class _TextFieldDemoOneState extends State<TextFieldDemoOne> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: hideApp ? null : AppBar(
-        title: Text(widget.title ?? "$widget"),
-      ),
+      appBar: hideApp
+          ? null
+          : AppBar(
+              title: Text(widget.title ?? "$widget"),
+            ),
       body: Column(
         children: [
           Row(
@@ -107,7 +98,7 @@ class _TextFieldDemoOneState extends State<TextFieldDemoOne> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ...inputFormatters.map((e){
+              ...inputFormatters.map((e) {
                 return ListTile(
                   title: Text("${e.item1}"),
                   subtitle: Text("${e.item3}"),
@@ -123,26 +114,26 @@ class _TextFieldDemoOneState extends State<TextFieldDemoOne> {
   List<Widget> _buildButtons() {
     return [
       TextButton(
-        onPressed: (){
+        onPressed: () {
           FocusScope.of(context).requestFocus(focusNode);
         },
         child: Text("获取焦点"),
       ),
       TextButton(
-        onPressed: (){
+        onPressed: () {
           focusNode.unfocus();
         },
         child: Text("失去焦点"),
       ),
       TextButton(
-        onPressed: (){
-        isEnable = true;
-        setState(() {});
-      },
+        onPressed: () {
+          isEnable = true;
+          setState(() {});
+        },
         child: Text("编辑"),
       ),
       TextButton(
-        onPressed: (){
+        onPressed: () {
           isEnable = false;
           setState(() {});
         },
@@ -161,11 +152,14 @@ class _TextFieldDemoOneState extends State<TextFieldDemoOne> {
         height: 130,
         child: Container(
           color: Colors.white24,
+
           ///距离顶部
           margin: EdgeInsets.only(top: 30),
           padding: EdgeInsets.all(10),
+
           ///Alignment 用来对齐 Widget
           alignment: Alignment(0, 0),
+
           ///文本输入框
           child: TextField(
             controller: textEditingController,
@@ -173,23 +167,33 @@ class _TextFieldDemoOneState extends State<TextFieldDemoOne> {
               current.value = val;
               onChanged?.call(val);
             },
+
             ///是否可编辑
             enabled: isEnable,
+
             ///焦点获取
             focusNode: focusNode,
             inputFormatters: [FractionDigitsTextInputFormatter()],
+
             ///用来配置 TextField 的样式风格
             decoration: InputDecoration(
               filled: true,
               fillColor: Color(0xffF3F3F3),
+
               ///设置输入文本框的提示文字
               ///输入框获取焦点时 并且没有输入文字时
               hintText: "请输入用户名",
+
               ///设置输入文本框的提示文字的样式
-              hintStyle: TextStyle(color: Colors.grey,textBaseline: TextBaseline.ideographic,),
+              hintStyle: TextStyle(
+                color: Colors.grey,
+                textBaseline: TextBaseline.ideographic,
+              ),
+
               ///输入框内的提示 输入框没有获取焦点时显示
               labelText: "用户名",
               labelStyle: TextStyle(color: Colors.blue),
+
               ///显示在输入框下面的文字
               helperText: "这里是帮助提示语",
               helperStyle: TextStyle(color: Colors.green),
@@ -202,6 +206,7 @@ class _TextFieldDemoOneState extends State<TextFieldDemoOne> {
               ///输入框获取焦点时才会显示出来 输入文本的前面
               prefixText: "prefix  ",
               prefixStyle: TextStyle(color: Colors.deepPurple),
+
               ///输入框获取焦点时才会显示出来 输入文本的后面
               suffixText: "suf ",
               suffixStyle: TextStyle(color: Colors.black),
@@ -213,26 +218,27 @@ class _TextFieldDemoOneState extends State<TextFieldDemoOne> {
 
               ///输入文字前的小图标
               prefixIcon: Icon(Icons.phone),
+
               ///输入文字后面的小图标
               suffixIcon: ValueListenableBuilder<String>(
-                 valueListenable: current,
-                 builder: (context, value, child){
-                  if (value.isEmpty) {
-                    return SizedBox();
-                  }
-                  return IconButton(
-                    onPressed: () {
-                      textEditingController.clear();
-                      current.value = "";
-                    },
-                    // icon: Icon(Icons.clear),
-                    icon: Image(
-                      image:"icon_clear.png".toAssetImage(),
-                      width: 16,
-                      height: 16,
-                    ),
-                  );
-                }),
+                  valueListenable: current,
+                  builder: (context, value, child) {
+                    if (value.isEmpty) {
+                      return SizedBox();
+                    }
+                    return IconButton(
+                      onPressed: () {
+                        textEditingController.clear();
+                        current.value = "";
+                      },
+                      // icon: Icon(Icons.clear),
+                      icon: Image(
+                        image: "icon_clear.png".toAssetImage(),
+                        width: 16,
+                        height: 16,
+                      ),
+                    );
+                  }),
               // suffixIcon: textEditingController.text.isEmpty ? null : IconButton(
               //     onPressed: () => textEditingController.clear(),
               //     icon: Icon(Icons.close),
@@ -248,22 +254,27 @@ class _TextFieldDemoOneState extends State<TextFieldDemoOne> {
               border: OutlineInputBorder(
                 ///设置边框四个角的弧度
                 borderRadius: BorderRadius.all(Radius.circular(10)),
+
                 ///用来配置边框的样式
                 borderSide: BorderSide(
                   ///设置边框的颜色
                   color: Colors.red,
+
                   ///设置边框的粗细
                   width: 2.0,
                 ),
               ),
+
               ///设置输入框可编辑时的边框样式
               enabledBorder: OutlineInputBorder(
                 ///设置边框四个角的弧度
                 borderRadius: BorderRadius.all(Radius.circular(10)),
+
                 ///用来配置边框的样式
                 borderSide: BorderSide(
                   ///设置边框的颜色
                   color: Colors.blue,
+
                   ///设置边框的粗细
                   width: 2.0,
                 ),
@@ -271,22 +282,27 @@ class _TextFieldDemoOneState extends State<TextFieldDemoOne> {
               disabledBorder: OutlineInputBorder(
                 ///设置边框四个角的弧度
                 borderRadius: BorderRadius.all(Radius.circular(10)),
+
                 ///用来配置边框的样式
                 borderSide: BorderSide(
                   ///设置边框的颜色
                   color: Colors.red,
+
                   ///设置边框的粗细
                   width: 2.0,
                 ),
               ),
+
               ///用来配置输入框获取焦点时的颜色
               focusedBorder: OutlineInputBorder(
                 ///设置边框四个角的弧度
                 borderRadius: BorderRadius.all(Radius.circular(20)),
+
                 ///用来配置边框的样式
                 borderSide: BorderSide(
                   ///设置边框的颜色
                   color: Colors.green,
+
                   ///设置边框的粗细
                   width: 2.0,
                 ),
@@ -297,9 +313,7 @@ class _TextFieldDemoOneState extends State<TextFieldDemoOne> {
       ),
     );
   }
-
 }
-
 
 // const TextField({
 // Key key,
@@ -331,4 +345,3 @@ class _TextFieldDemoOneState extends State<TextFieldDemoOne> {
 // this.enableInteractiveSelection,    // 长按是否展示【剪切/复制/粘贴菜单LengthLimitingTextInputFormatter】
 // this.onTap,                         // 点击时回调
 // })
-

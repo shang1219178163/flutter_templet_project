@@ -1,5 +1,3 @@
-
-
 import 'dart:async';
 import 'dart:isolate';
 
@@ -16,8 +14,8 @@ class GlobalIsolate {
   static final Map<int, dynamic> _works = {};
 
   static Future isolateDo({
-    required Future Function(Map<String,dynamic> params) work,
-    required Map<String,dynamic> params,
+    required Future Function(Map<String, dynamic> params) work,
+    required Map<String, dynamic> params,
   }) async {
     if (_newIsolate == null) {
       await _initNewIsolate();
@@ -68,7 +66,8 @@ class GlobalIsolate {
   }
 
 //特别需要注意:createNewIsolateContext执行环境是newIsolate
-  static Future<void> _createNewIsolateContext(SendPort rootIsolateSendPort) async {
+  static Future<void> _createNewIsolateContext(
+      SendPort rootIsolateSendPort) async {
     //第4步: 注意callback这个函数执行环境就会变为newIsolate, 所以创建的是一个newIsolateReceivePort
     var newIsolateReceivePort = ReceivePort();
     //第5步: 获取newIsolateSendPort, 有人可能疑问这里为啥不是直接让全局newIsolateSendPort赋值，注意这里执行环境不是rootIsolate
@@ -87,8 +86,8 @@ class GlobalIsolate {
 ///通知子isolate工作
 class SendMessage {
   int id;
-  Map<String,dynamic> params;
-  Future Function(Map<String,dynamic> params) work;
+  Map<String, dynamic> params;
+  Future Function(Map<String, dynamic> params) work;
 
   SendMessage({
     required this.id,

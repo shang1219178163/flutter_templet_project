@@ -188,7 +188,8 @@ Page resource error:
     // #docregion platform_features
     if (controller.platform is AndroidWebViewController) {
       AndroidWebViewController.enableDebugging(true);
-      (controller.platform as AndroidWebViewController).setMediaPlaybackRequiresUserGesture(false);
+      (controller.platform as AndroidWebViewController)
+          .setMediaPlaybackRequiresUserGesture(false);
     }
     // #enddocregion platform_features
 
@@ -421,7 +422,8 @@ class SampleMenu extends StatelessWidget {
   }
 
   Future<void> _onListCookies(BuildContext context) async {
-    final cookies = await webViewController.runJavaScriptReturningResult('document.cookie') as String;
+    final cookies = await webViewController
+        .runJavaScriptReturningResult('document.cookie') as String;
     if (context.mounted) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Column(
@@ -449,7 +451,7 @@ class SampleMenu extends StatelessWidget {
 
   Future<void> _onListCache() {
     return webViewController.runJavaScript('caches.keys()'
-    // ignore: missing_whitespace_between_adjacent_strings
+        // ignore: missing_whitespace_between_adjacent_strings
         '.then((cacheKeys) => JSON.stringify({"cacheKeys" : cacheKeys, "localStorage" : localStorage}))'
         '.then((caches) => Toaster.postMessage(caches))');
   }

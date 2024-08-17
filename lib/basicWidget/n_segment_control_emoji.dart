@@ -1,11 +1,7 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 
-
 class NSegmentControlEmoji extends StatefulWidget {
-
   const NSegmentControlEmoji({
     super.key,
     required this.items,
@@ -15,14 +11,19 @@ class NSegmentControlEmoji extends StatefulWidget {
     this.segmentPadding = const EdgeInsets.symmetric(vertical: 7),
     required this.onChanged,
   });
+
   /// 数据源
   final List<SegmentEmojiModel> items;
+
   /// 默认选项
   final int selectedIndex;
+
   /// 间距
   final double segmentGap;
+
   /// 圆角
   final double segmentRadius;
+
   /// 内边距
   final EdgeInsets segmentPadding;
 
@@ -33,21 +34,17 @@ class NSegmentControlEmoji extends StatefulWidget {
 }
 
 class _NSegmentControlEmojiState extends State<NSegmentControlEmoji> {
-
-
   late var current = widget.items[widget.selectedIndex];
 
   @override
   void didUpdateWidget(covariant NSegmentControlEmoji oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (
-      oldWidget.items != widget.items ||
-      oldWidget.selectedIndex != widget.selectedIndex ||
-      oldWidget.segmentGap != widget.segmentGap ||
-      oldWidget.segmentRadius != widget.segmentRadius ||
-      oldWidget.segmentPadding != widget.segmentPadding ||
-      oldWidget.onChanged != widget.onChanged
-    ) {
+    if (oldWidget.items != widget.items ||
+        oldWidget.selectedIndex != widget.selectedIndex ||
+        oldWidget.segmentGap != widget.segmentGap ||
+        oldWidget.segmentRadius != widget.segmentRadius ||
+        oldWidget.segmentPadding != widget.segmentPadding ||
+        oldWidget.onChanged != widget.onChanged) {
       current = widget.items[widget.selectedIndex];
       setState(() {});
     }
@@ -73,8 +70,7 @@ class _NSegmentControlEmojiState extends State<NSegmentControlEmoji> {
   }) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: items.map((e){
-
+      children: items.map((e) {
         final index = items.indexOf(e);
         final isSelected = current == e;
         final iconColor = isSelected ? e.activeColor : null;
@@ -82,9 +78,9 @@ class _NSegmentControlEmojiState extends State<NSegmentControlEmoji> {
 
         return Expanded(
           child: InkWell(
-            onTap: (){
+            onTap: () {
               current = e;
-              setState((){});
+              setState(() {});
               onChanged(index);
             },
             child: Container(
@@ -98,21 +94,27 @@ class _NSegmentControlEmojiState extends State<NSegmentControlEmoji> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  if(e.iconPath.isNotEmpty)Image(
-                    image: AssetImage(e.iconPath),
-                    width: 25,
-                    height: 25,
-                    color: iconColor,
-                  ),
-                  if(e.iconPath.isNotEmpty || e.name.isNotEmpty)SizedBox(width: 6,),
-                  if(e.name.isNotEmpty)Flexible(
-                    child: Text(e.name,
-                      style: TextStyle(
-                        color: textColor,
-                        fontSize: 14,
-                      ),
+                  if (e.iconPath.isNotEmpty)
+                    Image(
+                      image: AssetImage(e.iconPath),
+                      width: 25,
+                      height: 25,
+                      color: iconColor,
                     ),
-                  )
+                  if (e.iconPath.isNotEmpty || e.name.isNotEmpty)
+                    SizedBox(
+                      width: 6,
+                    ),
+                  if (e.name.isNotEmpty)
+                    Flexible(
+                      child: Text(
+                        e.name,
+                        style: TextStyle(
+                          color: textColor,
+                          fontSize: 14,
+                        ),
+                      ),
+                    )
                 ],
               ),
             ),
@@ -123,8 +125,7 @@ class _NSegmentControlEmojiState extends State<NSegmentControlEmoji> {
   }
 }
 
-
-class SegmentEmojiModel{
+class SegmentEmojiModel {
   SegmentEmojiModel({
     required this.iconPath,
     required this.name,

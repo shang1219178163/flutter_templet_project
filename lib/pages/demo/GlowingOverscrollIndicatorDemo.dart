@@ -1,33 +1,33 @@
-
-
 import 'package:flutter/material.dart';
 
 class GlowingOverscrollIndicatorDemo extends StatefulWidget {
-
-  GlowingOverscrollIndicatorDemo({
-    Key? key, 
-    this.title
-  }) : super(key: key);
+  GlowingOverscrollIndicatorDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
   @override
-  State<GlowingOverscrollIndicatorDemo> createState() => _GlowingOverscrollIndicatorDemoState();
+  State<GlowingOverscrollIndicatorDemo> createState() =>
+      _GlowingOverscrollIndicatorDemoState();
 }
 
-class _GlowingOverscrollIndicatorDemoState extends State<GlowingOverscrollIndicatorDemo> {
-
+class _GlowingOverscrollIndicatorDemoState
+    extends State<GlowingOverscrollIndicatorDemo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () => debugPrint(e),)
-        ).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () => debugPrint(e),
+                ))
+            .toList(),
       ),
       body: buildBody(),
     );
@@ -59,16 +59,11 @@ class _GlowingOverscrollIndicatorDemoState extends State<GlowingOverscrollIndica
             ),
           ),
           SliverFillRemaining(
-            child: Container(
-              color: Colors.green,
-                child: FlutterLogo()
-            )
-          ),
+              child: Container(color: Colors.green, child: FlutterLogo())),
         ],
       ),
     );
   }
-
 
   Widget buildPage2() {
     return NestedScrollView(
@@ -87,14 +82,9 @@ class _GlowingOverscrollIndicatorDemoState extends State<GlowingOverscrollIndica
             ),
           ),
           SliverFillRemaining(
-            child: Container(
-              color: Colors.green,
-              child: FlutterLogo()
-            )
-          ),
+              child: Container(color: Colors.green, child: FlutterLogo())),
         ],
       ),
     );
   }
 }
-

@@ -6,20 +6,18 @@
 //  Copyright © 7/30/21 shang. All rights reserved.
 //
 
-
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 
 /// 高斯模糊
 class NBlurView extends StatelessWidget {
-
   const NBlurView({
     super.key,
     this.borderRadius = BorderRadius.zero,
     this.clipper,
     this.clipBehavior = Clip.antiAlias,
-    required this.child, 
-    this.backdropFilter, 
+    required this.child,
+    this.backdropFilter,
     this.blur = 20,
   });
 
@@ -38,13 +36,14 @@ class NBlurView extends StatelessWidget {
       borderRadius: borderRadius,
       clipBehavior: clipBehavior,
       clipper: clipper,
-      child: backdropFilter ?? BackdropFilter(
-        filter: ui.ImageFilter.blur(
-          sigmaX: blur ?? 20,
-          sigmaY: blur ?? 20,
-        ),
-        child: child,
-      ),
+      child: backdropFilter ??
+          BackdropFilter(
+            filter: ui.ImageFilter.blur(
+              sigmaX: blur ?? 20,
+              sigmaY: blur ?? 20,
+            ),
+            child: child,
+          ),
     );
   }
 }

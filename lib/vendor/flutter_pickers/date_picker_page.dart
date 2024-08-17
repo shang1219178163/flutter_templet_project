@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_pickers/pickers.dart';
@@ -88,10 +87,11 @@ class _DatePickerPageState extends State<DatePickerPage> {
             },
             trailing: Row(mainAxisSize: MainAxisSize.min, children: <Widget>[
               NText(
-              PicketUtil.strEmpty(selectData[model])
-                      ? '暂无'
-                      : selectData[model] ?? "",
-                  color: Colors.grey,),
+                PicketUtil.strEmpty(selectData[model])
+                    ? '暂无'
+                    : selectData[model] ?? "",
+                color: Colors.grey,
+              ),
               rightIcon
             ]),
           ),
@@ -182,7 +182,8 @@ class _DatePickerPageState extends State<DatePickerPage> {
         borderRadius: BorderRadius.only(
             topLeft: Radius.circular(8), topRight: Radius.circular(8)));
 
-    Widget title = Center(child: NText('倒计时', color: Colors.white, fontSize: 14));
+    Widget title =
+        Center(child: NText('倒计时', color: Colors.white, fontSize: 14));
 
     /// item 覆盖样式
     Widget itemOverlay = Container(

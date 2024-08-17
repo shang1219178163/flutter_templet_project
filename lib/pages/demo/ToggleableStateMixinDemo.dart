@@ -1,10 +1,7 @@
-
-
-
 import 'package:flutter/material.dart';
 
-class CustomCheckbox extends State<StatefulWidget> with TickerProviderStateMixin<StatefulWidget>,
-    ToggleableStateMixin {
+class CustomCheckbox extends State<StatefulWidget>
+    with TickerProviderStateMixin<StatefulWidget>, ToggleableStateMixin {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -22,5 +19,4 @@ class CustomCheckbox extends State<StatefulWidget> with TickerProviderStateMixin
   @override
   // TODO: implement value
   bool? get value => throw UnimplementedError();
-
 }

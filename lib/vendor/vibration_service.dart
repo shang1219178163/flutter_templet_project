@@ -1,12 +1,8 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:vibration/vibration.dart';
 
-
 /// 震动
-class VibrationService{
-
+class VibrationService {
   /// 震动
   static Future<void> vibrate({
     int duration = 500,
@@ -38,6 +34,5 @@ class VibrationService{
     } catch (e) {
       debugPrint("VibrationService: $e");
     }
-
   }
 }

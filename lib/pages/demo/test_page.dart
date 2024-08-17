@@ -6,35 +6,18 @@
 //  Copyright © 12/2/21 shang. All rights reserved.
 //
 
+import 'dart:io';
 import 'dart:ui' as ui;
 
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_section_header.dart';
-import 'package:flutter_templet_project/basicWidget/n_expand_text.dart';
-import 'package:flutter_templet_project/basicWidget/n_footer.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/duration_ext.dart';
 import 'package:flutter_templet_project/extension/file_ext.dart';
-import 'package:flutter_templet_project/extension/num_ext.dart';
-import 'package:flutter_templet_project/extension/widget_ext.dart';
-import 'package:flutter_templet_project/model/NPerson.dart';
-import 'package:flutter_templet_project/model/user_model.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
-import 'package:flutter_templet_project/vendor/amap_location/location_detail_model.dart';
 import 'package:get/get.dart';
 import 'package:tuple/tuple.dart';
 
-import 'package:flutter_templet_project/Language/Property.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
-import 'package:flutter_templet_project/extension/map_ext.dart';
-import 'package:flutter_templet_project/extension/text_painter_ext.dart';
-
-import 'package:flutter_templet_project/extension/build_context_ext.dart';
-import 'package:flutter_templet_project/extension/snack_bar_ext.dart';
-import 'package:flutter_templet_project/util/Singleton.dart';
 import 'package:flutter_templet_project/util/R.dart';
 
 class TestPage extends StatefulWidget {
@@ -82,7 +65,7 @@ class _TestPageState extends State<TestPage>
           ),
           title: Text(widget.title ?? "$widget"),
           actions: [
-            'done1',
+            'done',
           ]
               .map((e) => TextButton(
                     onPressed: onDone,

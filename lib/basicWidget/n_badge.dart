@@ -6,13 +6,11 @@
 //  Copyright © 2023/9/5 shang. All rights reserved.
 //
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 /// 红色角标
 class NBadge extends StatelessWidget {
-
   const NBadge({
     Key? key,
     required this.value,
@@ -23,13 +21,14 @@ class NBadge extends StatelessWidget {
 
   /// 数值
   final int value;
+
   /// 顶部偏移
   final double top;
+
   /// 字符步长
   final double letterStep;
 
   final Widget child;
-
 
   @override
   Widget build(BuildContext context) {
@@ -39,25 +38,23 @@ class NBadge extends StatelessWidget {
 
     int badge = value;
     var badgeStr = badge > 99 ? "99+" : "$badge";
-    ShapeBorder shape = badge > 99 ? const StadiumBorder() : const CircleBorder();
-    double right = -8 -(badgeStr.length - 1)*letterStep;
+    ShapeBorder shape =
+        badge > 99 ? const StadiumBorder() : const CircleBorder();
+    double right = -8 - (badgeStr.length - 1) * letterStep;
 
     final badgeChild = buildBadge(badgeStr: badgeStr, shape: shape);
     if (badgeStr.isEmpty || badgeStr == "0") {
       return child;
     }
 
-    return Stack(
-      clipBehavior: Clip.none,
-      children: <Widget>[
-        child,
-        Positioned(
-          top: top,
-          right: right,
-          child: badgeChild,
-        ),
-      ]
-    );
+    return Stack(clipBehavior: Clip.none, children: <Widget>[
+      child,
+      Positioned(
+        top: top,
+        right: right,
+        child: badgeChild,
+      ),
+    ]);
   }
 
   /// 红色角标
@@ -85,5 +82,4 @@ class NBadge extends StatelessWidget {
       ),
     );
   }
-
 }

@@ -19,12 +19,8 @@ class Utils {
     );
   }
 
-  static Widget getSusItem(
-      BuildContext context,
-      String tag,
-      {double susHeight = 40, Color
-      color = const Color(0xFFF3F4F5)
-  }) {
+  static Widget getSusItem(BuildContext context, String tag,
+      {double susHeight = 40, Color color = const Color(0xFFF3F4F5)}) {
     if (tag == '★') {
       tag = '★ 热门城市';
     }
@@ -106,13 +102,8 @@ class Utils {
 //      );
 //    }
     return Container(
-        decoration: BoxDecoration(
-        border: Border(
-          bottom: BorderSide(
-            width: 1,
-              color: Color(0xfff4f4f4)
-          )
-        ),
+      decoration: BoxDecoration(
+        border: Border(bottom: BorderSide(width: 1, color: Color(0xfff4f4f4))),
       ),
       child: ListTile(
         leading: Container(
@@ -123,9 +114,7 @@ class Utils {
             borderRadius: BorderRadius.circular(4.0),
             color: model.bgColor ?? defHeaderBgColor,
             image: image,
-            border: Border.all(
-                width: 1.0
-            ),
+            border: Border.all(width: 1.0),
           ),
           child: model.iconData == null
               ? null
@@ -135,7 +124,8 @@ class Utils {
                   size: 20,
                 ),
         ),
-        title: Text(model.name*3,
+        title: Text(
+          model.name * 3,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),

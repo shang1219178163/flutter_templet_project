@@ -24,22 +24,20 @@ class DBOrder {
 
   User? user;
 
-
   static DBOrder? fromJson(Map<String, dynamic>? map) {
     if (map == null) {
       return null;
     }
     return DBOrder(
-      title: map["title"],
-      isPay: map["isPay"],
-      createdDate: map["createdDate"],
-      updatedDate: map["updatedDate"],
-      isSelected: map["isSelected"],
-      user: User.fromJson(map["user"])
-    );
+        title: map["title"],
+        isPay: map["isPay"],
+        createdDate: map["createdDate"],
+        updatedDate: map["updatedDate"],
+        isSelected: map["isSelected"],
+        user: User.fromJson(map["user"]));
   }
 
-  Map<String, dynamic>toJson() {
+  Map<String, dynamic> toJson() {
     return {
       "id": id,
       "title": title,
@@ -50,9 +48,7 @@ class DBOrder {
       "user": user?.toJson(),
     };
   }
-
 }
-
 
 @embedded
 class User {
@@ -69,12 +65,12 @@ class User {
       return null;
     }
     return User(
-        name: map["title"],
-        isSelected: map["isSelected"],
+      name: map["title"],
+      isSelected: map["isSelected"],
     );
   }
 
-  Map<String, dynamic>toJson() {
+  Map<String, dynamic> toJson() {
     return {
       "name": name,
       "isSelected": isSelected,

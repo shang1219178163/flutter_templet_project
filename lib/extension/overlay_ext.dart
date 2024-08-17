@@ -6,19 +6,19 @@
 //  Copyright © 2023/8/29 shang. All rights reserved.
 //
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_adaptive_text.dart';
 import 'package:flutter_templet_project/basicWidget/n_slide_transition_builder.dart';
 
-typedef OverlayWidgetBuilder = Widget Function(BuildContext context, VoidCallback onHide);
-
+typedef OverlayWidgetBuilder = Widget Function(
+    BuildContext context, VoidCallback onHide);
 
 extension OverlayExt<T extends StatefulWidget> on State<T> {
-
   OverlayState get _overlayState => Overlay.of(context);
+
   /// overlay 层集合
   static final List<OverlayEntry> _entriesList = [];
+
   /// 当前弹窗
   static OverlayEntry? get currentOverlayEntry {
     if (_entriesList.isEmpty) {
@@ -35,7 +35,7 @@ extension OverlayExt<T extends StatefulWidget> on State<T> {
     bool isReplace = false,
     bool maintainState = false,
     required Widget child,
-  }){
+  }) {
     if (isReplace) {
       hideEntry();
     }
@@ -55,7 +55,7 @@ extension OverlayExt<T extends StatefulWidget> on State<T> {
     if (currentOverlayEntry == null) {
       return;
     }
-    Future.delayed(duration, () { });
+    Future.delayed(duration, () {});
     currentOverlayEntry?.remove();
     _entriesList.remove(currentOverlayEntry!);
   }
@@ -69,7 +69,8 @@ extension OverlayExt<T extends StatefulWidget> on State<T> {
   }
 
   /// 展示 OverlayEntry 弹窗
-  showToast(String message,{
+  showToast(
+    String message, {
     Alignment alignment = Alignment.center,
     Duration duration = const Duration(milliseconds: 2000),
     bool barrierDismissible = true,
@@ -128,24 +129,20 @@ extension OverlayExt<T extends StatefulWidget> on State<T> {
     }
 
     showEntry(
-      isReplace: isReplace,
-      maintainState: maintainState,
-      child: Material(
-        color: Colors.black.withOpacity(0.1),
-        child: InkWell(
-          onTap: !barrierDismissible ? null : onHide,
-          child: NSlideTransitionBuilder(
-            key: globalKey,
-            alignment: alignment,
-            duration: duration,
-            hasFade: false,
-            child: builder(context, onHide),
+        isReplace: isReplace,
+        maintainState: maintainState,
+        child: Material(
+          color: Colors.black.withOpacity(0.1),
+          child: InkWell(
+            onTap: !barrierDismissible ? null : onHide,
+            child: NSlideTransitionBuilder(
+              key: globalKey,
+              alignment: alignment,
+              duration: duration,
+              hasFade: false,
+              child: builder(context, onHide),
+            ),
           ),
-        ),
-      )
-    );
+        ));
   }
-
 }
-
-

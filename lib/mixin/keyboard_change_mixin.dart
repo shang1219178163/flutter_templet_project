@@ -6,15 +6,13 @@
 //  Copyright © 3/17/23 shang. All rights reserved.
 //
 
-
 // import 'dart:ui' as ui;
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 
-
-mixin KeyboardChangeMixin<T extends StatefulWidget> on State<T>, WidgetsBindingObserver {
-
+mixin KeyboardChangeMixin<T extends StatefulWidget>
+    on State<T>, WidgetsBindingObserver {
   var _isVisible = false;
 
   double get _bottom {
@@ -32,6 +30,7 @@ mixin KeyboardChangeMixin<T extends StatefulWidget> on State<T>, WidgetsBindingO
   @override
   void initState() {
     super.initState();
+
     /// 初始化
     WidgetsBinding.instance.addObserver(this);
   }
@@ -54,5 +53,4 @@ mixin KeyboardChangeMixin<T extends StatefulWidget> on State<T>, WidgetsBindingO
   void onKeyboardChanged(bool visible) {
     throw UnimplementedError("❌: $this 未实现 onKeyboardChanged");
   }
-
 }

@@ -25,11 +25,26 @@ class DataTableDemo extends StatefulWidget {
 class _DataTableDemoState extends State<DataTableDemo> {
   // List<String> titles = ['姓名', '年龄', '性别', '出生年份', '出生月份'];
   List<Tuple2> titles = [
-    Tuple2("姓名", "name", ),
-    Tuple2("性别", "sex", ),
-    Tuple2("年龄", "age", ),
-    Tuple2('出生年份', "birdthYear", ),
-    Tuple2('出生月份', "birdthMonth", ),
+    Tuple2(
+      "姓名",
+      "name",
+    ),
+    Tuple2(
+      "性别",
+      "sex",
+    ),
+    Tuple2(
+      "年龄",
+      "age",
+    ),
+    Tuple2(
+      '出生年份',
+      "birdthYear",
+    ),
+    Tuple2(
+      '出生月份',
+      "birdthMonth",
+    ),
   ];
 
   List<User> models = [
@@ -77,15 +92,18 @@ class _DataTableDemoState extends State<DataTableDemo> {
   final children = <int, Widget>{
     0: Container(
       padding: EdgeInsets.all(8),
-      child: Text("Item 1", style: TextStyle(fontSize: 15, color: Colors.black)),
+      child:
+          Text("Item 1", style: TextStyle(fontSize: 15, color: Colors.black)),
     ),
     1: Container(
       padding: EdgeInsets.all(8),
-      child: Text("Item 2", style: TextStyle(fontSize: 15, color: Colors.black)),
+      child:
+          Text("Item 2", style: TextStyle(fontSize: 15, color: Colors.black)),
     ),
     2: Container(
       padding: EdgeInsets.all(8),
-      child: Text("Item 3", style: TextStyle(fontSize: 15, color: Colors.black)),
+      child:
+          Text("Item 3", style: TextStyle(fontSize: 15, color: Colors.black)),
     ),
   };
 
@@ -118,32 +136,37 @@ class _DataTableDemoState extends State<DataTableDemo> {
             sortAscending: _sortAscending,
             showBottomBorder: true,
             showCheckboxColumn: true,
-            columns: titles.map((e) => DataColumn(
-              label: Text(e.item1),
-              onSort: (int columnIndex, bool ascending) {
-                _changeSort(columnIndex: columnIndex, ascending: ascending);
-              },
-            )).toList(),
-            rows: models.map((e) => DataRow(
-              cells: [
-                DataCell(Text(e.name)),
-                DataCell(Text('${e.age}')),
-                DataCell(Text(e.sex)),
-                DataCell(Text('${e.birdthYear}')),
-                DataCell(Text('${e.birdthMonth}')),
-              ],
-              selected: e.isSelected,
-              onSelectChanged: (bool? value) {
-                if (value == null) return;
-                setState(() {
-                  e.isSelected = value;
-                });
-                ddlog(models
-                    .where((e) => e.isSelected == true)
-                    .map((e) => "${e.name}_${e.isSelected}")
-                    .toList());
-              },
-            )).toList(),
+            columns: titles
+                .map((e) => DataColumn(
+                      label: Text(e.item1),
+                      onSort: (int columnIndex, bool ascending) {
+                        _changeSort(
+                            columnIndex: columnIndex, ascending: ascending);
+                      },
+                    ))
+                .toList(),
+            rows: models
+                .map((e) => DataRow(
+                      cells: [
+                        DataCell(Text(e.name)),
+                        DataCell(Text('${e.age}')),
+                        DataCell(Text(e.sex)),
+                        DataCell(Text('${e.birdthYear}')),
+                        DataCell(Text('${e.birdthMonth}')),
+                      ],
+                      selected: e.isSelected,
+                      onSelectChanged: (bool? value) {
+                        if (value == null) return;
+                        setState(() {
+                          e.isSelected = value;
+                        });
+                        ddlog(models
+                            .where((e) => e.isSelected == true)
+                            .map((e) => "${e.name}_${e.isSelected}")
+                            .toList());
+                      },
+                    ))
+                .toList(),
           ),
         ),
       ),
@@ -157,19 +180,21 @@ class _DataTableDemoState extends State<DataTableDemo> {
 
       switch (columnIndex) {
         case 1:
-            models.sortedByValue(ascending: ascending, cb: (obj) => obj.age);
+          models.sortedByValue(ascending: ascending, cb: (obj) => obj.age);
           break;
 
         case 2:
-            models.sortedByValue(ascending: ascending, cb: (obj) => obj.sex);
+          models.sortedByValue(ascending: ascending, cb: (obj) => obj.sex);
           break;
 
         case 3:
-            models.sortedByValue(ascending: ascending, cb: (obj) => obj.birdthYear);
+          models.sortedByValue(
+              ascending: ascending, cb: (obj) => obj.birdthYear);
           break;
 
         case 4:
-            models.sortedByValue(ascending: ascending, cb: (obj) => obj.birdthMonth);
+          models.sortedByValue(
+              ascending: ascending, cb: (obj) => obj.birdthMonth);
           break;
 
         default:
@@ -186,13 +211,12 @@ class _DataTableDemoState extends State<DataTableDemo> {
 }
 
 class User {
-  User({
-    required this.name,
-    required this.sex,
-    required this.age,
-    required this.birdthYear,
-    required this.birdthMonth
-  });
+  User(
+      {required this.name,
+      required this.sex,
+      required this.age,
+      required this.birdthYear,
+      required this.birdthMonth});
 
   final String name;
   final String sex;
@@ -208,11 +232,26 @@ class PaginatedDataTableDemo extends StatelessWidget {
   PaginatedDataTableDemo({Key? key}) : super(key: key);
 
   List<Tuple2> titles = [
-    Tuple2("姓名", "name", ),
-    Tuple2("性别", "sex", ),
-    Tuple2("年龄",  "age", ),
-    Tuple2('出生年份', "birdthYear", ),
-    Tuple2('出生月份', "birdthMonth", ),
+    Tuple2(
+      "姓名",
+      "name",
+    ),
+    Tuple2(
+      "性别",
+      "sex",
+    ),
+    Tuple2(
+      "年龄",
+      "age",
+    ),
+    Tuple2(
+      '出生年份',
+      "birdthYear",
+    ),
+    Tuple2(
+      '出生月份',
+      "birdthMonth",
+    ),
   ];
 
   @override
@@ -227,9 +266,11 @@ class PaginatedDataTableDemo extends StatelessWidget {
           PaginatedDataTable(
             header: Text('Header Text'),
             rowsPerPage: 3,
-            columns: titles.map((e) => DataColumn(
-              label: Text(e.item1),
-            )).toList(),
+            columns: titles
+                .map((e) => DataColumn(
+                      label: Text(e.item1),
+                    ))
+                .toList(),
             source: _DataSource(context),
           ),
         ],

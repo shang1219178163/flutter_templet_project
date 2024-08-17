@@ -1,8 +1,6 @@
-
 import 'package:flutter/material.dart';
 
 class NFadeTransitionBuilder extends StatefulWidget {
-
   NFadeTransitionBuilder({
     Key? key,
     this.duration = const Duration(milliseconds: 250),
@@ -13,13 +11,12 @@ class NFadeTransitionBuilder extends StatefulWidget {
 
   final StatefulWidgetBuilder builder;
 
-
   @override
   _NFadeTransitionBuilderState createState() => _NFadeTransitionBuilderState();
 }
 
-class _NFadeTransitionBuilderState extends State<NFadeTransitionBuilder> with SingleTickerProviderStateMixin {
-
+class _NFadeTransitionBuilderState extends State<NFadeTransitionBuilder>
+    with SingleTickerProviderStateMixin {
   late final controller = AnimationController(
     vsync: this,
     duration: widget.duration,

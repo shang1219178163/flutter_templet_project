@@ -6,13 +6,11 @@
 //  Copyright © 2024/4/9 shang. All rights reserved.
 //
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/text_painter_ext.dart';
-
 
 /// 档案文字展开/收起组件
 class NExpandTextVertical extends StatefulWidget {
@@ -50,7 +48,6 @@ class NExpandTextVertical extends StatefulWidget {
 }
 
 class NExpandTextVerticalState extends State<NExpandTextVertical> {
-
   final weChatTitleColor = Color(0xff1A1A1A);
 
   @override

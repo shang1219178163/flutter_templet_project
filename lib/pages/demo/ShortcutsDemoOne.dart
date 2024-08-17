@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class ShortcutsDemoOne extends StatefulWidget {
-
   final String? title;
 
-  const ShortcutsDemoOne({ Key? key, this.title}) : super(key: key);
-
+  const ShortcutsDemoOne({Key? key, this.title}) : super(key: key);
 
   @override
   _ShortcutsDemoOneState createState() => _ShortcutsDemoOneState();
@@ -20,38 +18,39 @@ class _ShortcutsDemoOneState extends State<ShortcutsDemoOne> {
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.title ?? "$widget"),
-      ),
-      body: Shortcuts(
-        shortcuts: <ShortcutActivator, Intent>{
-        LogicalKeySet(LogicalKeyboardKey.arrowUp): const IncrementIntent(2),
-        LogicalKeySet(LogicalKeyboardKey.arrowDown): const DecrementIntent(2),
-      },
-        child: Actions(
-          actions: <Type, Action<Intent>>{
-            IncrementIntent: IncrementAction(model),
-            DecrementIntent: DecrementAction(model),
+        ),
+        body: Shortcuts(
+          shortcuts: <ShortcutActivator, Intent>{
+            LogicalKeySet(LogicalKeyboardKey.arrowUp): const IncrementIntent(2),
+            LogicalKeySet(LogicalKeyboardKey.arrowDown):
+                const DecrementIntent(2),
           },
-          child: Focus(
-            autofocus: true,
-            child: Column(
-              children: <Widget>[
-                const Text('Add to the counter by pressing the up arrow key'),
-                const Text(
-                    'Subtract from the counter by pressing the down arrow key'),
-                AnimatedBuilder(
-                  animation: model,
-                  builder: (BuildContext context, Widget? child) {
-                    return Text('count: ${model.count}');
-                  },
-                ),
-              ],
+          child: Actions(
+            actions: <Type, Action<Intent>>{
+              IncrementIntent: IncrementAction(model),
+              DecrementIntent: DecrementAction(model),
+            },
+            child: Focus(
+              autofocus: true,
+              child: Column(
+                children: <Widget>[
+                  const Text('Add to the counter by pressing the up arrow key'),
+                  const Text(
+                      'Subtract from the counter by pressing the down arrow key'),
+                  AnimatedBuilder(
+                    animation: model,
+                    builder: (BuildContext context, Widget? child) {
+                      return Text('count: ${model.count}');
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
-        ),
-      )
-    );
+        ));
   }
 }
+
 class Model with ChangeNotifier {
   int count = 0;
   void incrementBy(int amount) {

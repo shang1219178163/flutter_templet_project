@@ -1,7 +1,4 @@
-
-
 class RootModel<T extends Coding> {
-
   RootModel({
     this.code,
     this.result,
@@ -16,7 +13,6 @@ class RootModel<T extends Coding> {
   String? application;
   String? traceId;
   String? message;
-
 
   RootModel.fromJson(Map<String, dynamic>? json) {
     if (json == null) {
@@ -34,14 +30,10 @@ class RootModel<T extends Coding> {
         }
         break;
       case List:
-        {
-
-        }
+        {}
         break;
       case Map:
-        {
-
-        }
+        {}
         break;
       default:
         break;
@@ -63,7 +55,6 @@ class RootModel<T extends Coding> {
     return data;
   }
 }
-
 
 interface class Coding {
   // factory Codable(Map<String, dynamic>? json) {

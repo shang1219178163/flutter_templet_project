@@ -9,28 +9,24 @@
 import 'package:flutter/material.dart';
 
 class ColoredBoxDemo extends StatefulWidget {
-
   final String? title;
 
-  const ColoredBoxDemo({ Key? key, this.title}) : super(key: key);
-
+  const ColoredBoxDemo({Key? key, this.title}) : super(key: key);
 
   @override
   _ColoredBoxDemoState createState() => _ColoredBoxDemoState();
 }
 
 class _ColoredBoxDemoState extends State<ColoredBoxDemo> {
-
-
   @override
   Widget build(BuildContext context) {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
 
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title ?? "$widget"),
-        ),
-        body: _buildBody(),
+      appBar: AppBar(
+        title: Text(widget.title ?? "$widget"),
+      ),
+      body: _buildBody(),
     );
   }
 
@@ -45,24 +41,19 @@ class _ColoredBoxDemoState extends State<ColoredBoxDemo> {
           ),
         ),
         Divider(),
-
         Image.network(
-          'https://fastly.jsdelivr.net/npm/@vant/assets/apple-1.jpeg',
-          width: 150,
-          height: 150
-        ),
+            'https://fastly.jsdelivr.net/npm/@vant/assets/apple-1.jpeg',
+            width: 150,
+            height: 150),
         Divider(),
-
         ColoredBox(
           color: Colors.yellow,
           child: Image.network(
-            'https://fastly.jsdelivr.net/npm/@vant/assets/apple-1.jpeg',
-            width: 150,
-            height: 150
-          ),
+              'https://fastly.jsdelivr.net/npm/@vant/assets/apple-1.jpeg',
+              width: 150,
+              height: 150),
         ),
         Divider(),
-
         Center(
           child: ColoredBox(
             color: Colors.orange,
@@ -75,8 +66,4 @@ class _ColoredBoxDemoState extends State<ColoredBoxDemo> {
       ],
     );
   }
-
 }
-
-
-

@@ -1,5 +1,3 @@
-
-
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
@@ -9,7 +7,6 @@ import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:get/get.dart';
 
 class AsyncDemo extends StatefulWidget {
-
   AsyncDemo({
     super.key,
     this.arguments,
@@ -22,12 +19,13 @@ class AsyncDemo extends StatefulWidget {
 }
 
 class _AsyncDemoState extends State<AsyncDemo> {
-
-  bool get hideApp => Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
+  bool get hideApp =>
+      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
 
   final _scrollController = ScrollController();
 
   Map<String, dynamic> arguments = Get.arguments ?? <String, dynamic>{};
+
   /// id
   late final id = arguments["id"];
 
@@ -36,16 +34,24 @@ class _AsyncDemoState extends State<AsyncDemo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: hideApp ? null : AppBar(
-        title: Text("$widget"),
-        actions: ['done',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: onPressed,
-        ),
-        ).toList(),
-      ),
+      appBar: hideApp
+          ? null
+          : AppBar(
+              title: Text("$widget"),
+              actions: [
+                'done',
+              ]
+                  .map(
+                    (e) => TextButton(
+                      child: Text(
+                        e,
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      onPressed: onPressed,
+                    ),
+                  )
+                  .toList(),
+            ),
       body: buildBody(),
     );
   }
@@ -58,12 +64,10 @@ class _AsyncDemoState extends State<AsyncDemo> {
         child: Column(
           children: [
             ValueListenableBuilder(
-               valueListenable: resultVN,
-               builder: (context, value, child){
-
-                return Text("$value");
-              }
-            ),
+                valueListenable: resultVN,
+                builder: (context, value, child) {
+                  return Text("$value");
+                }),
           ],
         ),
       ),
@@ -78,7 +82,7 @@ class _AsyncDemoState extends State<AsyncDemo> {
       ddlog("asyncMethod2: ${await val}");
     });
 
-    String data=' ';
+    String data = ' ';
 
     var original = utf8.encode(data);
     var compressed = gzip.encode(original);
@@ -91,11 +95,13 @@ class _AsyncDemoState extends State<AsyncDemo> {
     return completer.future;
   }
 
-  Future<dynamic> asyncMethod1({required ValueChanged<dynamic> handOut,}) {
-   var completer = Completer();
-   handOut(completer.future);
+  Future<dynamic> asyncMethod1({
+    required ValueChanged<dynamic> handOut,
+  }) {
+    var completer = Completer();
+    handOut(completer.future);
 
-   completer.complete('completion value');
-   return completer.future;
+    completer.complete('completion value');
+    return completer.future;
   }
 }

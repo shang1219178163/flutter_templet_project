@@ -2,19 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_sliver_persistent_header_delegate.dart';
 
 class SliverListDemo extends StatefulWidget {
-
   final String? title;
 
-  const SliverListDemo({ Key? key, this.title}) : super(key: key);
+  const SliverListDemo({Key? key, this.title}) : super(key: key);
 
-  
   @override
   _SliverListDemoState createState() => _SliverListDemoState();
 }
 
 class _SliverListDemoState extends State<SliverListDemo> {
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,36 +29,37 @@ class _SliverListDemoState extends State<SliverListDemo> {
       slivers: <Widget>[
         sectionHeader(title: 'SliverList - SliverChildListDelegate'),
         SliverList(
-          delegate: SliverChildListDelegate(list,),
+          delegate: SliverChildListDelegate(
+            list,
+          ),
         ),
-
         sectionHeader(title: 'SliverList - SliverChildBuilderDelegate'),
         SliverList(
           delegate: SliverChildBuilderDelegate((context, index) {
             return _buildItem(color: colors[index]);
-          },
-          childCount: colors.length
-          ),
+          }, childCount: colors.length),
         ),
-
-        sectionHeader(title: 'SliverFixedExtentList - SliverChildBuilderDelegate'),
+        sectionHeader(
+            title: 'SliverFixedExtentList - SliverChildBuilderDelegate'),
         SliverFixedExtentList(
-          delegate: SliverChildBuilderDelegate((context, index) {
-            return _buildItem(color: colors[index]);
-          },
+          delegate: SliverChildBuilderDelegate(
+            (context, index) {
+              return _buildItem(color: colors[index]);
+            },
             childCount: colors.length,
           ),
           itemExtent: 50,
         ),
-
-        sectionHeader(title: 'SliverPrototypeExtentList - SliverChildBuilderDelegate'),
+        sectionHeader(
+            title: 'SliverPrototypeExtentList - SliverChildBuilderDelegate'),
         SliverPrototypeExtentList(
           prototypeItem: Container(
             height: 50,
           ),
-          delegate: SliverChildBuilderDelegate((context, index) {
-            return _buildItem(color: colors[index]);
-          },
+          delegate: SliverChildBuilderDelegate(
+            (context, index) {
+              return _buildItem(color: colors[index]);
+            },
             childCount: colors.length,
           ),
         ),
@@ -89,5 +86,4 @@ class _SliverListDemoState extends State<SliverListDemo> {
       color: color,
     );
   }
-
 }

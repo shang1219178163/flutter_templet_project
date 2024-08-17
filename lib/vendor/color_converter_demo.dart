@@ -6,8 +6,7 @@ import 'package:color_converter/color_converter.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 
 class ColorConverterDemo extends StatefulWidget {
-
-  const ColorConverterDemo({ Key? key, this.title}) : super(key: key);
+  const ColorConverterDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -16,7 +15,6 @@ class ColorConverterDemo extends StatefulWidget {
 }
 
 class _ColorConverterDemoState extends State<ColorConverterDemo> {
-
   List<Color> get colors {
     // final color = Color.fromRGBO(234, 35, 20, 1);
     const color = Colors.greenAccent;
@@ -46,27 +44,27 @@ class _ColorConverterDemoState extends State<ColorConverterDemo> {
           title: Text(widget.title ?? "$widget"),
           actions: [
             TextButton(
-                onPressed: () => test(),
-                child: Text('done', style: TextStyle(color: Colors.white),),
+              onPressed: () => test(),
+              child: Text(
+                'done',
+                style: TextStyle(color: Colors.white),
+              ),
             )
           ],
         ),
         body: Column(
-          children: colors.map((e) => Container(
-            height: 100,
-            decoration: BoxDecoration(
-              color: e,
-              border: Border.all(color: Colors.blue),
-              borderRadius: BorderRadius.all(Radius.circular(20)),
-            )
-          )).toList(),
-        )
-    );
+          children: colors
+              .map((e) => Container(
+                  height: 100,
+                  decoration: BoxDecoration(
+                    color: e,
+                    border: Border.all(color: Colors.blue),
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                  )))
+              .toList(),
+        ));
   }
 
-
-
-  
   test() {
     final rgbColor = RGB(r: 234, g: 235, b: 120);
     debugPrint(rgbColor.toString());
@@ -77,7 +75,5 @@ class _ColorConverterDemoState extends State<ColorConverterDemo> {
     debugPrint(rgbColor.toLab().toString());
     debugPrint(rgbColor.toXyz().toString());
     debugPrint((rgbColor == CMYK(c: 0, m: 0, y: 49, k: 8)).toString());
-
   }
-
 }

@@ -10,11 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 
 class AutofillGroupDemo extends StatefulWidget {
-
-  const AutofillGroupDemo({
-    Key? key, 
-    this.title
-  }) : super(key: key);
+  const AutofillGroupDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -23,7 +19,6 @@ class AutofillGroupDemo extends StatefulWidget {
 }
 
 class _AutofillGroupDemoState extends State<AutofillGroupDemo> {
-
   bool isSameAddress = true;
   final shippingAddress1 = TextEditingController();
   final shippingAddress2 = TextEditingController();
@@ -42,18 +37,23 @@ class _AutofillGroupDemoState extends State<AutofillGroupDemo> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          onPressed: onPressed,
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),)
-        ).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  onPressed: onPressed,
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ))
+            .toList(),
       ),
       body: buildListView(),
     );
   }
 
-  onPressed(){
+  onPressed() {
     const str = "streetAddressLine2";
     final reg = RegExp('[A-Z]');
     final matchs = reg.allMatches(str);
@@ -65,7 +65,7 @@ class _AutofillGroupDemoState extends State<AutofillGroupDemo> {
     debugPrint("seperators: $seperators");
 
     var str1 = "streetAddressLine2";
-    seperators.forEach((e) => str1 = str1.replaceAll(e, "_$e") );
+    seperators.forEach((e) => str1 = str1.replaceAll(e, "_$e"));
     debugPrint("str1: $str1");
 
     const original = 'Hello World';
@@ -89,17 +89,17 @@ class _AutofillGroupDemoState extends State<AutofillGroupDemo> {
                 controller: shippingAddress1,
                 autofillHints: const <String>[AutofillHints.streetAddressLine1],
                 decoration: _buildInputDecoration(
-                  textEditingController: shippingAddress1,
-                  hintText: AutofillHints.streetAddressLine1.seperatorByChars(cb: (String e) => " $e")
-                ),
+                    textEditingController: shippingAddress1,
+                    hintText: AutofillHints.streetAddressLine1
+                        .seperatorByChars(cb: (String e) => " $e")),
               ),
               TextField(
                 controller: shippingAddress2,
                 autofillHints: const <String>[AutofillHints.streetAddressLine2],
                 decoration: _buildInputDecoration(
-                  textEditingController: shippingAddress2,
-                  hintText: AutofillHints.streetAddressLine2.seperatorByChars(cb: (String e) => " $e")
-                ),
+                    textEditingController: shippingAddress2,
+                    hintText: AutofillHints.streetAddressLine2
+                        .seperatorByChars(cb: (String e) => " $e")),
               ),
             ],
           ),
@@ -124,9 +124,9 @@ class _AutofillGroupDemoState extends State<AutofillGroupDemo> {
                     AutofillHints.streetAddressLine1,
                   ],
                   decoration: _buildInputDecoration(
-                    textEditingController: billingAddress1,
-                    hintText: AutofillHints.streetAddressLine1.seperatorByChars(cb: (String e) => " $e")
-                  ),
+                      textEditingController: billingAddress1,
+                      hintText: AutofillHints.streetAddressLine1
+                          .seperatorByChars(cb: (String e) => " $e")),
                 ),
                 TextField(
                   controller: billingAddress2,
@@ -134,9 +134,9 @@ class _AutofillGroupDemoState extends State<AutofillGroupDemo> {
                     AutofillHints.streetAddressLine2,
                   ],
                   decoration: _buildInputDecoration(
-                    textEditingController: billingAddress2,
-                    hintText: AutofillHints.streetAddressLine2.seperatorByChars(cb: (String e) => " $e")
-                  ),
+                      textEditingController: billingAddress2,
+                      hintText: AutofillHints.streetAddressLine2
+                          .seperatorByChars(cb: (String e) => " $e")),
                 ),
               ],
             ),
@@ -150,8 +150,8 @@ class _AutofillGroupDemoState extends State<AutofillGroupDemo> {
                 autofillHints: const <String>[AutofillHints.creditCardNumber],
                 decoration: _buildInputDecoration(
                     textEditingController: creditCardNumber,
-                    hintText: AutofillHints.creditCardNumber.seperatorByChars(cb: (String e) => " $e")
-                ),
+                    hintText: AutofillHints.creditCardNumber
+                        .seperatorByChars(cb: (String e) => " $e")),
               ),
               TextField(
                 controller: creditCardSecurityCode,
@@ -160,8 +160,8 @@ class _AutofillGroupDemoState extends State<AutofillGroupDemo> {
                 ],
                 decoration: _buildInputDecoration(
                     textEditingController: billingAddress2,
-                    hintText: AutofillHints.creditCardSecurityCode.seperatorByChars(cb: (String e) => " $e")
-                ),
+                    hintText: AutofillHints.creditCardSecurityCode
+                        .seperatorByChars(cb: (String e) => " $e")),
               ),
             ],
           ),
@@ -172,37 +172,44 @@ class _AutofillGroupDemoState extends State<AutofillGroupDemo> {
           autofillHints: const <String>[AutofillHints.telephoneNumber],
           decoration: _buildInputDecoration(
               textEditingController: phoneNumber,
-              hintText: AutofillHints.telephoneNumber.seperatorByChars(cb: (String e) => " $e")
-          ),
+              hintText: AutofillHints.telephoneNumber
+                  .seperatorByChars(cb: (String e) => " $e")),
         ),
       ],
     );
   }
 
   /// 输入框修饰器
-  _buildInputDecoration({
-    required TextEditingController textEditingController,
-    String hintText = "请输入",
-    bool hasEnabledBorder = false,
-    InputBorder? enabledBorder
-  }) {
-    final enabledBorderWidget = enabledBorder ?? (!hasEnabledBorder ? null : OutlineInputBorder(
-      borderRadius: BorderRadius.circular(15),
-      borderSide: const BorderSide(
-          width: 1.5,
-          color: Colors.lightBlue
-      ),
-    ));
+  _buildInputDecoration(
+      {required TextEditingController textEditingController,
+      String hintText = "请输入",
+      bool hasEnabledBorder = false,
+      InputBorder? enabledBorder}) {
+    final enabledBorderWidget = enabledBorder ??
+        (!hasEnabledBorder
+            ? null
+            : OutlineInputBorder(
+                borderRadius: BorderRadius.circular(15),
+                borderSide:
+                    const BorderSide(width: 1.5, color: Colors.lightBlue),
+              ));
 
     return InputDecoration(
       contentPadding: const EdgeInsets.all(10),
+
       ///设置输入文本框的提示文字
       ///输入框获取焦点时 并且没有输入文字时
       hintText: hintText,
+
       ///设置输入文本框的提示文字的样式
-      hintStyle: TextStyle(color: Colors.grey, textBaseline: TextBaseline.ideographic,),
+      hintStyle: TextStyle(
+        color: Colors.grey,
+        textBaseline: TextBaseline.ideographic,
+      ),
+
       ///输入文字前的小图标
       prefixIcon: Icon(Icons.search),
+
       ///输入文字后面的小图标
       // suffixIcon: IconButton(
       //   onPressed: () => textEditingController.clear(),
@@ -211,5 +218,4 @@ class _AutofillGroupDemoState extends State<AutofillGroupDemo> {
       enabledBorder: enabledBorderWidget,
     );
   }
-
 }

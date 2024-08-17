@@ -9,7 +9,6 @@ class ComponentPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final children = [
       TableRow(
         children: [
@@ -37,13 +36,13 @@ class ComponentPage extends StatelessWidget {
                         children: [
                           Text(model.title),
                           Text(model.description),
-
                         ],
                       ),
                     ),
                   );
                 },
-                connectorStyleBuilder: (context, index) => ConnectorStyle.solidLine,
+                connectorStyleBuilder: (context, index) =>
+                    ConnectorStyle.solidLine,
                 // connectorStyleBuilder: (context, index) => index == 0 ? ConnectorStyle.transparent : ConnectorStyle.solidLine,
                 indicatorStyleBuilder: (context, index) => IndicatorStyle.dot,
                 itemCount: listData.length,
@@ -135,7 +134,7 @@ class ComponentPage extends StatelessWidget {
           contents: Card(
             child: Container(
               padding: EdgeInsets.all(8.0),
-              child: Text('contents'*10),
+              child: Text('contents' * 10),
             ),
           ),
           node: TimelineNode(
@@ -450,4 +449,3 @@ class _ComponentName extends StatelessWidget {
     );
   }
 }
-

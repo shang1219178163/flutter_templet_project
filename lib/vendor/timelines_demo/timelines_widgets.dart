@@ -56,7 +56,7 @@ class NavigationCard extends StatelessWidget with NavigateMixin {
 
 class TitleAppBar extends AppBar {
   TitleAppBar({
-    super.key, 
+    super.key,
     super.title,
   });
 

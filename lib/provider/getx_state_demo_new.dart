@@ -9,15 +9,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
 import 'package:flutter/material.dart';
 
 class GetxStateDemoNew extends StatefulWidget {
-
-  GetxStateDemoNew({
-    Key? key, 
-    this.title
-  }) : super(key: key);
+  GetxStateDemoNew({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -26,25 +21,28 @@ class GetxStateDemoNew extends StatefulWidget {
 }
 
 class _GetxStateDemoNewState extends State<GetxStateDemoNew> {
-
   final _scrollController = ScrollController();
 
   var count = 0.obs;
 
   final desc = "GetX".obs;
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () => debugPrint(e),)
-        ).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () => debugPrint(e),
+                ))
+            .toList(),
       ),
       body: buildBody(),
     );
@@ -58,22 +56,26 @@ class _GetxStateDemoNewState extends State<GetxStateDemoNew> {
         child: Column(
           children: [
             Text("$widget"),
-            Obx(() => Text(desc.value )),
+            Obx(() => Text(desc.value)),
             Obx(() => Text(
-              "count的值为：$count",
-              style: const TextStyle(color: Colors.redAccent,fontSize: 20),
-            )),
-            ObxValue((data) => Switch(
-                 value: data.value,
-                 onChanged: (flag){
-                   data.value = flag;
-                   debugPrint("data: ${data.value}, ${data.runtimeType}");
-                 },
-               ),
-               false.obs,
+                  "count的值为：$count",
+                  style: const TextStyle(color: Colors.redAccent, fontSize: 20),
+                )),
+            ObxValue(
+              (data) => Switch(
+                value: data.value,
+                onChanged: (flag) {
+                  data.value = flag;
+                  debugPrint("data: ${data.value}, ${data.runtimeType}");
+                },
+              ),
+              false.obs,
             ),
-            const SizedBox(height: 30,),
-            ElevatedButton( // 按钮点击count值++
+            const SizedBox(
+              height: 30,
+            ),
+            ElevatedButton(
+              // 按钮点击count值++
               onPressed: () {
                 count++;
                 desc.value += "_9";
@@ -85,5 +87,4 @@ class _GetxStateDemoNewState extends State<GetxStateDemoNew> {
       ),
     );
   }
-  
 }

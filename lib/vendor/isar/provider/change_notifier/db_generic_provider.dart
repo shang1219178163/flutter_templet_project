@@ -6,12 +6,10 @@
 //  Copyright © 2024/2/24 shang. All rights reserved.
 //
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/vendor/isar/DBManager.dart';
 import 'package:flutter_templet_project/vendor/isar/model/db_todo.dart';
 import 'package:isar/isar.dart';
-
 
 class DBGenericProvider<E> extends ChangeNotifier {
   DBGenericProvider() {
@@ -38,17 +36,23 @@ class DBGenericProvider<E> extends ChangeNotifier {
   /// 查
   ///
   /// filterCb 为空,返回所有实体
-  Future<List<E>> findEntitys({Future<List<E>> Function(QueryBuilder<E, E, QFilterCondition> isarItems)? filterCb}) async {
+  Future<List<E>> findEntitys(
+      {Future<List<E>> Function(QueryBuilder<E, E, QFilterCondition> isarItems)?
+          filterCb}) async {
     final collections = isar.collection<E>();
     final filters = collections.filter();
-    final items = await filterCb?.call(filters) ?? await collections.where().findAll();
+    final items =
+        await filterCb?.call(filters) ?? await collections.where().findAll();
     _entitys.clear();
     _entitys.addAll(items);
     return _entitys;
   }
 
   /// 寻找第一个
-  Future<E?> findEntity({required Future<E?> Function(QueryBuilder<E, E, QFilterCondition> isarItems) filterCb}) async {
+  Future<E?> findEntity(
+      {required Future<E?> Function(
+              QueryBuilder<E, E, QFilterCondition> isarItems)
+          filterCb}) async {
     final collections = isar.collection<E>();
     final filters = collections.filter();
     final item = await filterCb(filters);
@@ -62,6 +66,7 @@ class DBGenericProvider<E> extends ChangeNotifier {
       await update();
     });
   }
+
   /// 增/改
   Future<void> put(E e) async {
     await putAll([e]);
@@ -83,7 +88,9 @@ class DBGenericProvider<E> extends ChangeNotifier {
   }
 
   /// 模型字段更新
-  Future<void> migrate({int limit = 50,}) async {
+  Future<void> migrate({
+    int limit = 50,
+  }) async {
     final collections = isar.collection<E>();
     final count = await collections.count();
 

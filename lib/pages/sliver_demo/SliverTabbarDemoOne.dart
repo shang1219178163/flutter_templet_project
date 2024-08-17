@@ -12,7 +12,6 @@ import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 
 class SliverTabbarDemoOne extends StatefulWidget {
-
   const SliverTabbarDemoOne({Key? key}) : super(key: key);
 
   @override
@@ -120,18 +119,17 @@ class _SliverTabbarDemoOneState extends State<SliverTabbarDemoOne>
               key: PageStorageKey<String>(name),
               slivers: <Widget>[
                 SliverOverlapInjector(
-                  handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
-                      context),
+                  handle:
+                      NestedScrollView.sliverOverlapAbsorberHandleFor(context),
                 ),
                 SliverPadding(
                   padding: EdgeInsets.all(10.0),
                   sliver: SliverFixedExtentList(
                     itemExtent: 50.0, //item高度或宽度，取决于滑动方向
                     delegate: SliverChildBuilderDelegate(
-                          (BuildContext context, int index) {
+                      (BuildContext context, int index) {
                         return ListTile(
-                          title:
-                          Text('Item $index, tab${tabController.index}'),
+                          title: Text('Item $index, tab${tabController.index}'),
                         );
                       },
                       childCount: 20,
@@ -188,9 +186,7 @@ class _SliverTabbarDemoOneState extends State<SliverTabbarDemoOne>
   }
 }
 
-
 class ColoredTabBar extends StatelessWidget implements PreferredSizeWidget {
-
   ColoredTabBar({
     super.key,
     this.backgroudColor,
@@ -214,12 +210,13 @@ class ColoredTabBar extends StatelessWidget implements PreferredSizeWidget {
       // child: child,
       child: Theme(
         data: ThemeData(
-          tabBarTheme: tabBarTheme ?? TabBarTheme(
-            dividerColor: Colors.transparent,
-            labelColor: labelColor,
-            unselectedLabelColor: labelColor,
-            indicatorColor: labelColor,
-          ),
+          tabBarTheme: tabBarTheme ??
+              TabBarTheme(
+                dividerColor: Colors.transparent,
+                labelColor: labelColor,
+                unselectedLabelColor: labelColor,
+                indicatorColor: labelColor,
+              ),
         ),
         child: child,
       ),
@@ -227,7 +224,7 @@ class ColoredTabBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   final EdgeInsetsGeometry? padding;
-  final Decoration ? decoration;
+  final Decoration? decoration;
 
   final double? height;
   final double? width;

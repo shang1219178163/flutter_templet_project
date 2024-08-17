@@ -11,43 +11,38 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_picker_tool_bar.dart';
 
 class NavigationToolbarDemo extends StatefulWidget {
-
   final String? title;
 
-  const NavigationToolbarDemo({ Key? key, this.title}) : super(key: key);
+  const NavigationToolbarDemo({Key? key, this.title}) : super(key: key);
 
-  
   @override
   _NavigationToolbarDemoState createState() => _NavigationToolbarDemoState();
 }
 
 class _NavigationToolbarDemoState extends State<NavigationToolbarDemo> {
-
-
   @override
   Widget build(BuildContext context) {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
 
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title ?? "$widget"),
-        ),
-        body: Column(
-          children: [
-            _buildBody(),
-            Divider(),
-
-            NPickerToolBar(
-              onCancel: (){
-                debugPrint("Cancel");
-              },
-              onConfirm: (){
-                debugPrint("onConfirm");
-              },
-            ),
-            Divider(),
-          ],
-        ),
+      appBar: AppBar(
+        title: Text(widget.title ?? "$widget"),
+      ),
+      body: Column(
+        children: [
+          _buildBody(),
+          Divider(),
+          NPickerToolBar(
+            onCancel: () {
+              debugPrint("Cancel");
+            },
+            onConfirm: () {
+              debugPrint("onConfirm");
+            },
+          ),
+          Divider(),
+        ],
+      ),
     );
   }
 
@@ -60,20 +55,23 @@ class _NavigationToolbarDemoState extends State<NavigationToolbarDemo> {
       child: NavigationToolbar(
         leading: IconButton(
           icon: Icon(Icons.add),
-          onPressed: () { debugPrint("leading"); },
+          onPressed: () {
+            debugPrint("leading");
+          },
         ),
         middle: IconButton(
           icon: Icon(Icons.clear),
-          onPressed: () { debugPrint("middle"); },
+          onPressed: () {
+            debugPrint("middle");
+          },
         ),
         trailing: IconButton(
           icon: Icon(Icons.home),
-          onPressed: () { debugPrint("trailing"); },
+          onPressed: () {
+            debugPrint("trailing");
+          },
         ),
       ),
     );
   }
 }
-
-
-

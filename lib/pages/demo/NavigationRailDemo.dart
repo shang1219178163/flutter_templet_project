@@ -12,11 +12,7 @@ import 'package:flutter_templet_project/extension/change_notifier_ext.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 
 class NavigationRailDemo extends StatefulWidget {
-
-  const NavigationRailDemo({
-    Key? key,
-    this.title
-  }) : super(key: key);
+  const NavigationRailDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -25,8 +21,6 @@ class NavigationRailDemo extends StatefulWidget {
 }
 
 class _NavigationRailDemoState extends State<NavigationRailDemo> {
-
-
   final _controller = PageController();
   final _selectIndex = ValueNotifier(0);
 
@@ -34,10 +28,14 @@ class _NavigationRailDemoState extends State<NavigationRailDemo> {
 
   final destinations = const <NavigationRailDestination>[
     NavigationRailDestination(icon: Icon(Icons.message), label: Text("消息")),
-    NavigationRailDestination(icon: Icon(Icons.video_camera_back), label: Text("视频会议")),
-    NavigationRailDestination(icon: Icon(Icons.book_outlined), label: Text("通讯录")),
-    NavigationRailDestination(icon: Icon(Icons.cloud_upload), label: Text("云文档")),
-    NavigationRailDestination(icon: Icon(Icons.games_sharp), label: Text("工作台")),
+    NavigationRailDestination(
+        icon: Icon(Icons.video_camera_back), label: Text("视频会议")),
+    NavigationRailDestination(
+        icon: Icon(Icons.book_outlined), label: Text("通讯录")),
+    NavigationRailDestination(
+        icon: Icon(Icons.cloud_upload), label: Text("云文档")),
+    NavigationRailDestination(
+        icon: Icon(Icons.games_sharp), label: Text("工作台")),
     NavigationRailDestination(icon: Icon(Icons.camera), label: Text("日历"))
   ];
 
@@ -53,42 +51,37 @@ class _NavigationRailDemoState extends State<NavigationRailDemo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          onPressed: onPressed,
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-        )).toList(),
-      ),
-      body: Row(
-        children: [
+        appBar: AppBar(
+          title: Text(widget.title ?? "$widget"),
+          actions: [
+            'done',
+          ]
+              .map((e) => TextButton(
+                    onPressed: onPressed,
+                    child: Text(
+                      e,
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ))
+              .toList(),
+        ),
+        body: Row(children: [
           AnimatedBuilder(
-            animation: Listenable.merge([
-              _selectIndex,
-              isNavigationRailExpand
-            ]),
+            animation: Listenable.merge([_selectIndex, isNavigationRailExpand]),
             builder: (context, child) {
               return _buildLeftNavigation(
-                selectedIndex: _selectIndex.value,
-                extended: isNavigationRailExpand.value
-              );
+                  selectedIndex: _selectIndex.value,
+                  extended: isNavigationRailExpand.value);
             },
           ),
           _buildRight(),
-        ]
-      )
-    );
+        ]));
   }
 
-  onPressed(){
-
-  }
+  onPressed() {}
 
   void onPageChanged(int value) {
     _selectIndex.value = value;
-
   }
 
   Widget _buildLeftNavigation({int selectedIndex = 0, bool extended = false}) {
@@ -96,7 +89,7 @@ class _NavigationRailDemoState extends State<NavigationRailDemo> {
     return NavigationRail(
       leading: IconButton(
         icon: openIcon,
-        onPressed: (){
+        onPressed: () {
           isNavigationRailExpand.value = !isNavigationRailExpand.value;
         },
       ),
@@ -129,27 +122,27 @@ class _NavigationRailDemoState extends State<NavigationRailDemo> {
     _selectIndex.value = value;
   }
 
-
   _buildRight() {
     return Expanded(
       child: PageView(
         scrollDirection: Axis.vertical,
         controller: _controller,
         onPageChanged: onPageChanged,
-        children: destinations.map((e) => Container(
-          color: ColorExt.random,
-          child: ListView(
-            controller: _trackingScrollController,
-            children: List.generate(199, (index) => Text("data_$index")),
-            // children: List.generate(299, (index) => TextButton(
-            //   onPressed: () { print("data_${index}"); },
-            //   child: Text("data_${index}"),
-            // )),
-          ),
-        )).toList(),
+        children: destinations
+            .map((e) => Container(
+                  color: ColorExt.random,
+                  child: ListView(
+                    controller: _trackingScrollController,
+                    children:
+                        List.generate(199, (index) => Text("data_$index")),
+                    // children: List.generate(299, (index) => TextButton(
+                    //   onPressed: () { print("data_${index}"); },
+                    //   child: Text("data_${index}"),
+                    // )),
+                  ),
+                ))
+            .toList(),
       ),
     );
   }
-
-
 }

@@ -9,20 +9,16 @@
 import 'package:flutter/material.dart';
 
 class FlutterRingtonePlayerDemo extends StatefulWidget {
-
-  FlutterRingtonePlayerDemo({
-    super.key,
-    this.title
-  });
+  FlutterRingtonePlayerDemo({super.key, this.title});
 
   final String? title;
 
   @override
-  State<FlutterRingtonePlayerDemo> createState() => _FlutterRingtonePlayerDemoState();
+  State<FlutterRingtonePlayerDemo> createState() =>
+      _FlutterRingtonePlayerDemoState();
 }
 
 class _FlutterRingtonePlayerDemoState extends State<FlutterRingtonePlayerDemo> {
-
   final _scrollController = ScrollController();
 
   @override
@@ -30,12 +26,17 @@ class _FlutterRingtonePlayerDemoState extends State<FlutterRingtonePlayerDemo> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () => debugPrint(e),)
-        ).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () => debugPrint(e),
+                ))
+            .toList(),
       ),
       body: buildBody(),
     );
@@ -180,4 +181,3 @@ class _FlutterRingtonePlayerDemoState extends State<FlutterRingtonePlayerDemo> {
   //   ];
   // }
 }
-

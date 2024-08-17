@@ -2,11 +2,7 @@ import 'package:flutter/material.dart';
 
 // https://stackoverflow.com/questions/46480221/flutter-floating-action-button-with-speed-dail
 class ExpandIcons extends StatefulWidget {
-  ExpandIcons({
-    super.key,
-    required this.items,
-    required this.onItem
-  });
+  ExpandIcons({super.key, required this.items, required this.onItem});
   final List<IconData> items;
   final ValueChanged<int> onItem;
 
@@ -14,7 +10,8 @@ class ExpandIcons extends StatefulWidget {
   State createState() => ExpandIconsState();
 }
 
-class ExpandIconsState extends State<ExpandIcons> with TickerProviderStateMixin {
+class ExpandIconsState extends State<ExpandIcons>
+    with TickerProviderStateMixin {
   late final _controller = AnimationController(
     vsync: this,
     duration: const Duration(milliseconds: 250),
@@ -32,9 +29,10 @@ class ExpandIconsState extends State<ExpandIcons> with TickerProviderStateMixin 
       mainAxisSize: MainAxisSize.min,
       children: List.generate(widget.items.length, (int index) {
         return _buildChild(index);
-      }).toList()..add(
-        _buildFab(),
-      ),
+      }).toList()
+        ..add(
+          _buildFab(),
+        ),
     );
   }
 
@@ -48,11 +46,8 @@ class ExpandIconsState extends State<ExpandIcons> with TickerProviderStateMixin 
       child: ScaleTransition(
         scale: CurvedAnimation(
           parent: _controller,
-          curve: Interval(
-              0.0,
-              1.0 - index / widget.items.length / 2.0,
-              curve: Curves.easeOut
-          ),
+          curve: Interval(0.0, 1.0 - index / widget.items.length / 2.0,
+              curve: Curves.easeOut),
         ),
         child: FloatingActionButton(
           backgroundColor: backgroundColor,

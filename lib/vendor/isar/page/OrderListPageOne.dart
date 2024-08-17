@@ -1,5 +1,3 @@
-
-
 import 'dart:async';
 
 import 'package:easy_refresh/easy_refresh.dart';
@@ -16,11 +14,7 @@ import 'package:get/get.dart';
 
 /// DBGenericProvider 示例
 class OrderListPageOne extends StatefulWidget {
-
-  OrderListPageOne({
-    super.key,
-    this.title
-  });
+  OrderListPageOne({super.key, this.title});
 
   final String? title;
 
@@ -29,7 +23,6 @@ class OrderListPageOne extends StatefulWidget {
 }
 
 class _OrderListPageOneState extends State<OrderListPageOne> with DBDialogMxin {
-
   final _scrollController = ScrollController();
 
   final titleController = TextEditingController();
@@ -40,7 +33,8 @@ class _OrderListPageOneState extends State<OrderListPageOne> with DBDialogMxin {
 
   @override
   Widget build(BuildContext context) {
-    final automaticallyImplyLeading = Get.currentRoute.toLowerCase() == "/$widget".toLowerCase();
+    final automaticallyImplyLeading =
+        Get.currentRoute.toLowerCase() == "/$widget".toLowerCase();
 
     return Scaffold(
       backgroundColor: Colors.black12,
@@ -48,39 +42,39 @@ class _OrderListPageOneState extends State<OrderListPageOne> with DBDialogMxin {
         title: Text("$widget"),
         automaticallyImplyLeading: automaticallyImplyLeading,
         actions: [
-          IconButton(
-              onPressed: onAddItemRandom,
-              icon: Icon(Icons.add)
-          ),
+          IconButton(onPressed: onAddItemRandom, icon: Icon(Icons.add)),
         ],
       ),
       body: GetBuilder<DBGenericController<DBOrder>>(
         builder: (value) {
+          final checkedItems =
+              value.entitys.where((e) => e.isSelected == true).toList();
+          isAllChoic =
+              value.entitys.firstWhereOrNull((e) => e.isSelected == false) ==
+                  null;
 
-          final checkedItems = value.entitys.where((e) => e.isSelected == true).toList();
-          isAllChoic = value.entitys.firstWhereOrNull((e) => e.isSelected == false) == null;
-
-          final checkIcon = isAllChoic ? Icons.check_box : Icons.check_box_outline_blank;
-          final checkDesc = "已选择 ${checkedItems.length}/${value.entitys.length}";
+          final checkIcon =
+              isAllChoic ? Icons.check_box : Icons.check_box_outline_blank;
+          final checkDesc =
+              "已选择 ${checkedItems.length}/${value.entitys.length}";
 
           Widget content = NPlaceholder(
-            onTap: (){
+            onTap: () {
               provider.update();
             },
           );
           if (value.entitys.isNotEmpty) {
             content = buildRefresh(
-              onRefresh: (){
+              onRefresh: () {
                 provider.update();
               },
               child: ListView.builder(
                   padding: EdgeInsets.all(10),
                   itemCount: value.entitys.length,
                   itemBuilder: (context, index) {
-
                     final model = value.entitys.reversed.toList()[index];
 
-                    onToggle(){
+                    onToggle() {
                       model.isSelected = !model.isSelected;
                       provider.put(model);
                     }
@@ -90,25 +84,22 @@ class _OrderListPageOneState extends State<OrderListPageOne> with DBDialogMxin {
                       child: OrderItem(
                         model: model,
                         onToggle: onToggle,
-                        onEdit: (){
+                        onEdit: () {
                           titleController.text = model.title;
 
                           presentDialog(
                               controller: titleController,
-                              onSure: (val){
+                              onSure: (val) {
                                 model.title = val;
                                 provider.put(model);
-
-                              }
-                          );
+                              });
                         },
                         onDelete: () {
                           provider.delete(model.id);
                         },
                       ),
                     );
-                  }
-              ),
+                  }),
             );
           }
 
@@ -129,8 +120,11 @@ class _OrderListPageOneState extends State<OrderListPageOne> with DBDialogMxin {
                   provider.putAll(value.entitys);
                 },
                 onAdd: onAddItemRandom,
-                onDelete:  () async {
-                  final choicItems = value.entitys.where((e) => e.isSelected).map((e) => e.id).toList();
+                onDelete: () async {
+                  final choicItems = value.entitys
+                      .where((e) => e.isSelected)
+                      .map((e) => e.id)
+                      .toList();
                   await provider.deleteAll(choicItems);
                 },
               ),
@@ -158,7 +152,6 @@ class _OrderListPageOneState extends State<OrderListPageOne> with DBDialogMxin {
     );
   }
 
-
   onAddItemRandom() {
     titleController.text = "项目${IntExt.random(max: 999)}";
     addTodoItem(title: titleController.text);
@@ -176,5 +169,4 @@ class _OrderListPageOneState extends State<OrderListPageOne> with DBDialogMxin {
     );
     provider.put(todo);
   }
-
 }

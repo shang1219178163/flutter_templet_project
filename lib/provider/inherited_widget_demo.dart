@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 
 /// InheritedWidget状态管理实现
 class GenericStateWidget<T extends ChangeNotifier> extends InheritedWidget {
-
   const GenericStateWidget({
     Key? key,
     required Widget child,
@@ -26,5 +25,4 @@ class GenericStateWidget<T extends ChangeNotifier> extends InheritedWidget {
   static GenericStateWidget? of(BuildContext context) {
     return context.dependOnInheritedWidgetOfExactType<GenericStateWidget>();
   }
-
 }

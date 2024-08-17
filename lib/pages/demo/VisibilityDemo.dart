@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 
 class VisibilityDemo extends StatefulWidget {
-
-  const VisibilityDemo({ Key? key, this.title}) : super(key: key);
+  const VisibilityDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -12,7 +11,6 @@ class VisibilityDemo extends StatefulWidget {
 }
 
 class _VisibilityDemoState extends State<VisibilityDemo> {
-
   bool isVisible = false;
 
   @override
@@ -22,15 +20,19 @@ class _VisibilityDemoState extends State<VisibilityDemo> {
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.title ?? "$widget"),
-          actions: ['done',].map((e) => TextButton(
-            onPressed: onDone,
-            child: Text(e,
-              style: TextStyle(color: Colors.white),
-            ),)
-          ).toList(),
+          actions: [
+            'done',
+          ]
+              .map((e) => TextButton(
+                    onPressed: onDone,
+                    child: Text(
+                      e,
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ))
+              .toList(),
         ),
-        body: _buildBody()
-    );
+        body: _buildBody());
   }
 
   _buildBody() {
@@ -77,5 +79,4 @@ class _VisibilityDemoState extends State<VisibilityDemo> {
     isVisible = !isVisible;
     setState(() {});
   }
-
 }

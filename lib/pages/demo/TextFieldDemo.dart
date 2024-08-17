@@ -21,21 +21,18 @@ import 'package:flutter_templet_project/util/Throttle.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_workers/utils/debouncer.dart';
 
-
 class TextFieldDemo extends StatefulWidget {
-
   final String? title;
 
-  const TextFieldDemo({ Key? key, this.title}) : super(key: key);
+  const TextFieldDemo({Key? key, this.title}) : super(key: key);
 
-  
   @override
   _TextFieldDemoState createState() => _TextFieldDemoState();
 }
 
 class _TextFieldDemoState extends State<TextFieldDemo> {
-
-  bool get hideApp => Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
+  bool get hideApp =>
+      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
 
   late final _textController = TextEditingController(text: '测试');
   late final editingController = TextEditingController(text: '测试');
@@ -60,20 +57,25 @@ class _TextFieldDemoState extends State<TextFieldDemo> {
 
   final _throttle = Throttle();
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: hideApp ? null : AppBar(
-        title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) =>
-            TextButton(
-              child: Text(e,
-                style: TextStyle(color: Colors.white),
-              ),
-              onPressed: onPressed,
-            )).toList(),
-      ),
+      appBar: hideApp
+          ? null
+          : AppBar(
+              title: Text(widget.title ?? "$widget"),
+              actions: [
+                'done',
+              ]
+                  .map((e) => TextButton(
+                        child: Text(
+                          e,
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        onPressed: onPressed,
+                      ))
+                  .toList(),
+            ),
       body: buildColumn(context),
       bottomSheet: Container(
         child: Row(
@@ -102,7 +104,8 @@ class _TextFieldDemoState extends State<TextFieldDemo> {
                   controller: _textController,
                   placeholder: "请输入",
                   textAlign: TextAlign.start,
-                  padding: EdgeInsets.only(left: 8, top: 8, bottom: 8, right: 8),
+                  padding:
+                      EdgeInsets.only(left: 8, top: 8, bottom: 8, right: 8),
                   suffixMode: OverlayVisibilityMode.editing,
                   onChanged: (val) => onChanged.debounce(value: val),
                 ),
@@ -110,17 +113,17 @@ class _TextFieldDemoState extends State<TextFieldDemo> {
               NSectionHeader(
                 title: "CupertinoTextField 1",
                 child: CupertinoTextField(
-                  controller: _textController,
-                  placeholder: "请输入",
-                  textAlign: TextAlign.center,
-                  padding: EdgeInsets.only(left: 8, top: 8, bottom: 8, right: 8),
-                  suffixMode: OverlayVisibilityMode.editing,
-                  decoration: BoxDecoration(
-                    color: CupertinoColors.tertiarySystemFill,
-                    border: Border.all(color: Colors.blue),
-                    borderRadius: BorderRadius.all(Radius.circular(0)),
-                  )
-                ),
+                    controller: _textController,
+                    placeholder: "请输入",
+                    textAlign: TextAlign.center,
+                    padding:
+                        EdgeInsets.only(left: 8, top: 8, bottom: 8, right: 8),
+                    suffixMode: OverlayVisibilityMode.editing,
+                    decoration: BoxDecoration(
+                      color: CupertinoColors.tertiarySystemFill,
+                      border: Border.all(color: Colors.blue),
+                      borderRadius: BorderRadius.all(Radius.circular(0)),
+                    )),
               ),
               NSectionHeader(
                 title: "CupertinoSearchTextField",
@@ -128,7 +131,8 @@ class _TextFieldDemoState extends State<TextFieldDemo> {
                   // prefixIcon: SizedBox(),
                   // prefixInsets: EdgeInsets.zero,
                   // backgroundColor: Colors.white,
-                  padding: EdgeInsets.only(left: 8, top: 8, bottom: 8, right: 8),
+                  padding:
+                      EdgeInsets.only(left: 8, top: 8, bottom: 8, right: 8),
                   placeholder: "请输入",
                   onChanged: (String value) {
                     // debugPrint('onChanged: $value');
@@ -155,16 +159,17 @@ class _TextFieldDemoState extends State<TextFieldDemo> {
                   children: [
                     Expanded(
                       child: buildTextFieldUnit(
-                        controller: editingController,
-                        readOnly: false,
-                        fillColorReadOnly: Colors.white,
-                        inputFormatters: [
-                          LengthLimitingTextInputFormatter(4),
-                          FilteringTextInputFormatter.digitsOnly,
-                        ]
-                      ),
+                          controller: editingController,
+                          readOnly: false,
+                          fillColorReadOnly: Colors.white,
+                          inputFormatters: [
+                            LengthLimitingTextInputFormatter(4),
+                            FilteringTextInputFormatter.digitsOnly,
+                          ]),
                     ),
-                    SizedBox(width: 48,),
+                    SizedBox(
+                      width: 48,
+                    ),
                     Expanded(
                       child: buildTextFieldUnit(
                         controller: editingController,
@@ -172,7 +177,9 @@ class _TextFieldDemoState extends State<TextFieldDemo> {
                         fillColorReadOnly: Colors.white,
                       ),
                     ),
-                    SizedBox(width: 48,),
+                    SizedBox(
+                      width: 48,
+                    ),
                     Expanded(
                       child: buildTextFieldUnit(
                         controller: editingController,
@@ -199,7 +206,9 @@ class _TextFieldDemoState extends State<TextFieldDemo> {
                         ],
                       ),
                     ),
-                    SizedBox(width: 48,),
+                    SizedBox(
+                      width: 48,
+                    ),
                     Expanded(
                       child: NOrderNumUnit(
                         value: '2222',
@@ -208,7 +217,9 @@ class _TextFieldDemoState extends State<TextFieldDemo> {
                         unit: " g ",
                       ),
                     ),
-                    SizedBox(width: 48,),
+                    SizedBox(
+                      width: 48,
+                    ),
                     Expanded(
                       child: NOrderNumUnit(
                         value: '3333',
@@ -221,7 +232,8 @@ class _TextFieldDemoState extends State<TextFieldDemo> {
               ),
               NSectionHeader(
                 title: "TextFormField",
-                child: TextFormField( //用户名
+                child: TextFormField(
+                  //用户名
                   controller: _unameController,
                   focusNode: focusNode1,
                   //关联focusNode1
@@ -238,16 +250,20 @@ class _TextFieldDemoState extends State<TextFieldDemo> {
                       // border: OutlineInputBorder(
                       //     borderRadius: BorderRadius.circular(4.0) //圆角大小
                       // ),
-                      suffixIcon: _unameController.text.isNotEmpty ? IconButton(
-                        icon: Icon(Icons.cancel, color: Colors.grey,),
-                        onPressed: () {
-                          _unameController.clear();
-                          //   _unameController.text = '';
-                          //   // checkLoginText();
-                          setState(() {});
-                        },
-                      ) : null
-                  ),
+                      suffixIcon: _unameController.text.isNotEmpty
+                          ? IconButton(
+                              icon: Icon(
+                                Icons.cancel,
+                                color: Colors.grey,
+                              ),
+                              onPressed: () {
+                                _unameController.clear();
+                                //   _unameController.text = '';
+                                //   // checkLoginText();
+                                setState(() {});
+                              },
+                            )
+                          : null),
                   validator: (v) {
                     return !_unameExp.hasMatch(v!) ? '账号由6到12位数字与小写字母组成' : null;
                   },
@@ -261,7 +277,8 @@ class _TextFieldDemoState extends State<TextFieldDemo> {
               ),
               NSectionHeader(
                 title: "TextFormField - pwd",
-                child: TextFormField( //密码
+                child: TextFormField(
+                  //密码
                   controller: _pwdController,
                   focusNode: focusNode2,
                   //关联focusNode1
@@ -279,13 +296,14 @@ class _TextFieldDemoState extends State<TextFieldDemo> {
                       //     borderRadius: BorderRadius.circular(40.0)
                       // ),
                       suffixIcon: IconButton(
-                        icon: Icon(Icons.remove_red_eye,),
+                        icon: Icon(
+                          Icons.remove_red_eye,
+                        ),
                         onPressed: () {
                           isEye = !isEye;
                           setState(() {});
                         },
-                      )
-                  ),
+                      )),
                   validator: (v) {
                     return !_pwdExp.hasMatch(v!) ? '密码由6到12位数字与小写字母组成' : null;
                   },
@@ -308,10 +326,9 @@ class _TextFieldDemoState extends State<TextFieldDemo> {
   void onChanged(val) {
     final index = IntExt.random(min: 1000, max: 9999);
     ddlog("onChanged: $val, $index");
-
   }
 
-  onPressed(){
+  onPressed() {
     _throttle(() => debugPrint("${DateTime.now()}: onPressed"));
   }
 
@@ -382,22 +399,23 @@ class _TextFieldDemoState extends State<TextFieldDemo> {
       fillColor: readOnly ? fillColorReadOnly : fillColor,
       inputFormatters: inputFormatters,
       suffixIconConstraints: BoxConstraints().loosen(),
-      suffixIcon: suffixIcon ?? Row(
-        mainAxisSize: MainAxisSize.min,
-        // crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Padding(
-            padding: EdgeInsets.only(right: contentPadding.left),
-            child: Text("| $unit",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.black54,
+      suffixIcon: suffixIcon ??
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            // crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Padding(
+                padding: EdgeInsets.only(right: contentPadding.left),
+                child: Text(
+                  "| $unit",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.black54,
+                  ),
+                ),
               ),
-            ),
+            ],
           ),
-        ],
-      ),
     );
   }
-
 }

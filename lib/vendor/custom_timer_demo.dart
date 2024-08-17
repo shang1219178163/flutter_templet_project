@@ -2,24 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:custom_timer/custom_timer.dart';
 
 class CustomTimerDemo extends StatefulWidget {
-
   final String? title;
 
-  const CustomTimerDemo({ Key? key, this.title}) : super(key: key);
+  const CustomTimerDemo({Key? key, this.title}) : super(key: key);
 
-  
   @override
   _CustomTimerDemoState createState() => _CustomTimerDemoState();
 }
 
-class _CustomTimerDemoState extends State<CustomTimerDemo> with SingleTickerProviderStateMixin {
+class _CustomTimerDemoState extends State<CustomTimerDemo>
+    with SingleTickerProviderStateMixin {
   late final _controller = CustomTimerController(
       vsync: this,
       begin: Duration(seconds: 1),
       end: Duration(seconds: 12),
       initialState: CustomTimerState.reset,
-      interval: CustomTimerInterval.milliseconds
-  );
+      interval: CustomTimerInterval.milliseconds);
 
   @override
   void dispose() {
@@ -132,7 +130,8 @@ class RoundedButton extends StatelessWidget {
   final Color color;
   final void Function()? onPressed;
 
-  RoundedButton({super.key, required this.text, required this.color, this.onPressed});
+  RoundedButton(
+      {super.key, required this.text, required this.color, this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -142,7 +141,7 @@ class RoundedButton extends StatelessWidget {
         backgroundColor: color,
         padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
         shape:
-        RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
       ),
       onPressed: onPressed,
     );

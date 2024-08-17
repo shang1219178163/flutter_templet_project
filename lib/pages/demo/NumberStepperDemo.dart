@@ -14,7 +14,6 @@ import 'package:flutter_templet_project/extension/widget_ext.dart';
 class NumberStepperDemo extends StatelessWidget {
   const NumberStepperDemo({Key? key}) : super(key: key);
 
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +27,9 @@ class NumberStepperDemo extends StatelessWidget {
           child: Column(
             children: [
               // Spacer(),
-              SizedBox(height: 20,),
+              SizedBox(
+                height: 20,
+              ),
               UnconstrainedBox(
                 child: NumberStepper(
                   min: 0,
@@ -41,12 +42,14 @@ class NumberStepperDemo extends StatelessWidget {
                   style: const TextStyle(
                     fontSize: 40,
                   ),
-                  onChanged: (value){
+                  onChanged: (value) {
                     ddlog(value);
                   },
                 ),
               ),
-              SizedBox(height: 20,),
+              SizedBox(
+                height: 20,
+              ),
               UnconstrainedBox(
                 child: NumberStepper(
                   min: 1,
@@ -56,12 +59,14 @@ class NumberStepperDemo extends StatelessWidget {
                   value: 99999,
                   color: Theme.of(context).primaryColor,
                   readOnly: false,
-                  onChanged: (value){
+                  onChanged: (value) {
                     ddlog(value);
                   },
                 ),
               ),
-              SizedBox(height: 20,),
+              SizedBox(
+                height: 20,
+              ),
               NumberStepper(
                 min: 1,
                 max: 99999,
@@ -69,13 +74,12 @@ class NumberStepperDemo extends StatelessWidget {
                 iconSize: 32,
                 value: 999,
                 color: Theme.of(context).primaryColor,
-                onChanged: (value){
+                onChanged: (value) {
                   ddlog(value);
                 },
               ),
 
               Spacer(),
-
             ],
           ),
         ),
@@ -83,77 +87,77 @@ class NumberStepperDemo extends StatelessWidget {
     );
   }
 
-
   Widget buildCard(BuildContext context) {
     return Center(
-      child: Container(
-        height: 300,
-        width: 300,
-        decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(8.0),
-            boxShadow: [
-              BoxShadow(
-                  color: Colors.red,
-                  offset: Offset(0, 20),
-                  blurRadius: 30.0),
-            ]
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.04),
-                  borderRadius: BorderRadius.circular(8.0),
-                ),
-                child: Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Image.asset('assets/images/avatar.png',fit: BoxFit.fitWidth,),
+        child: Container(
+      height: 300,
+      width: 300,
+      decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(8.0),
+          boxShadow: [
+            BoxShadow(
+                color: Colors.red, offset: Offset(0, 20), blurRadius: 30.0),
+          ]),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.black.withOpacity(0.04),
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+              child: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Image.asset(
+                  'assets/images/avatar.png',
+                  fit: BoxFit.fitWidth,
                 ),
               ),
             ),
-            Padding(
-              padding: EdgeInsets.only(top: 8.0,left: 8.0),
-              child: Text('Juicy Strawberry',style: TextStyle(
+          ),
+          Padding(
+            padding: EdgeInsets.only(top: 8.0, left: 8.0),
+            child: Text(
+              'Juicy Strawberry',
+              style: TextStyle(
                 color: Colors.black,
                 fontSize: 18.0,
-              ),),
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: 8.0,left: 8.0),
-              child: Row(
-                children: [
-                  Text('\$20.40',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 15.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Spacer(),
-                  NumberStepper(
-                    min: 1,
-                    max: 1000,
-                    step: 100,
-                    iconSize: 30,
-                    value: 1000,
-                    color: Colors.red,
-                    onChanged: (value){
-                      ddlog(value);
-                    },
-                  )
-                ],
               ),
             ),
-
-          ],
-        ),
-      ));
+          ),
+          Padding(
+            padding: EdgeInsets.only(top: 8.0, left: 8.0),
+            child: Row(
+              children: [
+                Text(
+                  '\$20.40',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 15.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Spacer(),
+                NumberStepper(
+                  min: 1,
+                  max: 1000,
+                  step: 100,
+                  iconSize: 30,
+                  value: 1000,
+                  color: Colors.red,
+                  onChanged: (value) {
+                    ddlog(value);
+                  },
+                )
+              ],
+            ),
+          ),
+        ],
+      ),
+    ));
   }
-
-
 }

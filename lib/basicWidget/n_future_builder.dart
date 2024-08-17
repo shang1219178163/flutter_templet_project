@@ -1,9 +1,6 @@
-
-
 import 'package:flutter/material.dart';
 
 class NFutureBuilder<T> extends StatelessWidget {
-
   const NFutureBuilder({
     super.key,
     required this.future,
@@ -16,7 +13,6 @@ class NFutureBuilder<T> extends StatelessWidget {
   final Widget Function(T data) builder;
   final Widget Function(Object? error)? errorBuilder;
   final Widget Function()? loadingBuilder;
-
 
   @override
   Widget build(BuildContext context) {

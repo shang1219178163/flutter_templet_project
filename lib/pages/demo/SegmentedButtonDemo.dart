@@ -1,4 +1,3 @@
-
 //
 //  SegmentedButtonDemo.dart
 //  flutter_templet_project
@@ -7,24 +6,18 @@
 //  Copyright © 6/4/21 shang. All rights reserved.
 //
 
-
-
 import 'package:flutter/material.dart';
 
-
 class SegmentedButtonDemo extends StatefulWidget {
-
   final String? title;
 
-  const SegmentedButtonDemo({ Key? key, this.title}) : super(key: key);
-
+  const SegmentedButtonDemo({Key? key, this.title}) : super(key: key);
 
   @override
   _SegmentedButtonDemoState createState() => _SegmentedButtonDemoState();
 }
 
 class _SegmentedButtonDemoState extends State<SegmentedButtonDemo> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,25 +57,21 @@ class _SingleChoiceState extends State<SingleChoice> {
     return SegmentedButton<Calendar>(
       segments: const <ButtonSegment<Calendar>>[
         ButtonSegment<Calendar>(
-          value: Calendar.day,
-          label: Text('Day'),
-          icon: Icon(Icons.calendar_view_day)
-        ),
+            value: Calendar.day,
+            label: Text('Day'),
+            icon: Icon(Icons.calendar_view_day)),
         ButtonSegment<Calendar>(
-          value: Calendar.week,
-          label: Text('Week'),
-          icon: Icon(Icons.calendar_view_week)
-        ),
+            value: Calendar.week,
+            label: Text('Week'),
+            icon: Icon(Icons.calendar_view_week)),
         ButtonSegment<Calendar>(
-          value: Calendar.month,
-          label: Text('Month'),
-          icon: Icon(Icons.calendar_view_month)
-        ),
+            value: Calendar.month,
+            label: Text('Month'),
+            icon: Icon(Icons.calendar_view_month)),
         ButtonSegment<Calendar>(
-          value: Calendar.year,
-          label: Text('Year'),
-          icon: Icon(Icons.calendar_today)
-        ),
+            value: Calendar.year,
+            label: Text('Year'),
+            icon: Icon(Icons.calendar_today)),
       ],
       selected: <Calendar>{calendarView},
       onSelectionChanged: (Set<Calendar> newSelection) {

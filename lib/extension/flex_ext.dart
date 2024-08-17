@@ -6,10 +6,9 @@
 //  Copyright © 2023/8/29 shang. All rights reserved.
 //
 
-
 import 'package:flutter/cupertino.dart';
 
-extension FlexExt on Flex{
+extension FlexExt on Flex {
   /// 自定义方法
   Flex copy({
     Key? key,

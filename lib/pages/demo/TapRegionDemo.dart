@@ -1,14 +1,8 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 
 class TapRegionDemo extends StatefulWidget {
-
-  TapRegionDemo({
-    Key? key, 
-    this.title
-  }) : super(key: key);
+  TapRegionDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -17,7 +11,6 @@ class TapRegionDemo extends StatefulWidget {
 }
 
 class _TapRegionDemoState extends State<TapRegionDemo> {
-
   final _scrollController = ScrollController();
 
   @override
@@ -25,12 +18,17 @@ class _TapRegionDemoState extends State<TapRegionDemo> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () => debugPrint(e),)
-        ).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () => debugPrint(e),
+                ))
+            .toList(),
       ),
       body: buildBody(),
     );
@@ -51,15 +49,14 @@ class _TapRegionDemoState extends State<TapRegionDemo> {
                 debugPrint('On Tap Outside!!');
               },
               child: OutlinedButton(
-                onPressed: (){
-                  ToastUtil.show("text");
-                },
-                child: Text("$widget")),
+                  onPressed: () {
+                    ToastUtil.show("text");
+                  },
+                  child: Text("$widget")),
             )
           ],
         ),
       ),
     );
   }
-  
 }

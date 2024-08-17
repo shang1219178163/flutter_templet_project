@@ -1,11 +1,10 @@
-
 import 'package:dio/dio.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 /// 苹果登录 mixin
-mixin AppleSiginMixin{
+mixin AppleSiginMixin {
   /// 苹果登录
-  Future<Map<String, dynamic>>appleSigin() async {
+  Future<Map<String, dynamic>> appleSigin() async {
     final credential = await SignInWithApple.getAppleIDCredential(
       scopes: [
         AppleIDAuthorizationScopes.email,
@@ -50,9 +49,7 @@ mixin AppleSiginMixin{
   }
 }
 
-
-extension on AuthorizationCredentialAppleID{
-
+extension on AuthorizationCredentialAppleID {
   static AuthorizationCredentialAppleID? fromJson(Map<String, dynamic>? map) {
     if (map == null) {
       return null;
@@ -68,8 +65,7 @@ extension on AuthorizationCredentialAppleID{
     );
   }
 
-
-  Map<String, dynamic>toJson() {
+  Map<String, dynamic> toJson() {
     return {
       "userIdentifier": userIdentifier,
       "givenName": givenName,

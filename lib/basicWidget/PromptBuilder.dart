@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +24,7 @@ class PromptBuilder {
     var promptItem = toPromptWidgetKeys.removeAt(0);
 
     var promptRenderObject =
-    promptItem.promptWidgetKey.currentContext?.findRenderObject();
+        promptItem.promptWidgetKey.currentContext?.findRenderObject();
     var widgetHeight = promptRenderObject?.paintBounds.height ?? 0;
     var widgetWidth = promptRenderObject?.paintBounds.width ?? 0;
 
@@ -68,28 +67,28 @@ class PromptBuilder {
           children: [
             Positioned.fill(
                 child: ColorFiltered(
-                  colorFilter: ColorFilter.mode(
-                      Colors.black.withOpacity(0.7), BlendMode.srcOut),
-                  child: Stack(
-                    children: [
-                      // 透明色填充背景，作为蒙版
-                      Positioned.fill(
-                          child: Container(
-                            color: Colors.transparent,
-                          )),
-                      // 镂空区域
-                      Positioned(
-                          left: l,
-                          top: t,
-                          child: Container(
-                            width: w,
-                            height: h,
-                            decoration: decoration ??
-                                const BoxDecoration(color: Colors.black),
-                          )),
-                    ],
-                  ),
-                )),
+              colorFilter: ColorFilter.mode(
+                  Colors.black.withOpacity(0.7), BlendMode.srcOut),
+              child: Stack(
+                children: [
+                  // 透明色填充背景，作为蒙版
+                  Positioned.fill(
+                      child: Container(
+                    color: Colors.transparent,
+                  )),
+                  // 镂空区域
+                  Positioned(
+                      left: l,
+                      top: t,
+                      child: Container(
+                        width: w,
+                        height: h,
+                        decoration: decoration ??
+                            const BoxDecoration(color: Colors.black),
+                      )),
+                ],
+              ),
+            )),
             // 文字提示，需要放在ColorFiltered的外层
             Positioned(
                 left: l - 40,

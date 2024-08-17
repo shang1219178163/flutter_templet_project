@@ -12,10 +12,8 @@ import 'package:flutter_templet_project/vendor/timelines_demo/showcase_page.dart
 import 'package:flutter_templet_project/vendor/timelines_demo/theme_page.dart';
 import 'package:flutter_templet_project/vendor/timelines_demo/timelines_widgets.dart';
 
-
 class TimelinesDemo extends StatelessWidget {
   const TimelinesDemo({Key? key}) : super(key: key);
-
 
   @override
   Widget build(BuildContext context) {

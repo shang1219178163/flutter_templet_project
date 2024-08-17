@@ -6,7 +6,6 @@
 //  Copyright © 2024/3/9 shang. All rights reserved.
 //
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_tab_bar_page.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
@@ -14,11 +13,7 @@ import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:tuple/tuple.dart';
 
 class NTabBarPageDemo extends StatefulWidget {
-
-  NTabBarPageDemo({
-    super.key,
-    this.title
-  });
+  NTabBarPageDemo({super.key, this.title});
 
   final String? title;
 
@@ -27,7 +22,6 @@ class NTabBarPageDemo extends StatefulWidget {
 }
 
 class _NTabBarPageDemoState extends State<NTabBarPageDemo> {
-
   late List<Tuple2<String, Widget>> items = [
     Tuple2('功能列表', buildSubpage(prefix: "选项zero")),
     Tuple2('功能列表1', buildSubpage(prefix: "选项one")),
@@ -44,25 +38,30 @@ class _NTabBarPageDemoState extends State<NTabBarPageDemo> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () {
-            isThemeBg = !isThemeBg;
-            setState(() {});
-          },)
-        ).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () {
+                    isThemeBg = !isThemeBg;
+                    setState(() {});
+                  },
+                ))
+            .toList(),
         // bottom: buildTabBar(),
       ),
       body: NTabBarPage(
         items: items,
         // tabBarAlignment: Alignment.centerLeft,
         isThemeBg: isThemeBg,
-        onChanged: (index){
+        onChanged: (index) {
           ddlog("NTabBarPage onChanged: $index");
         },
-        onTabBar: (index){
+        onTabBar: (index) {
           ddlog("NTabBarPage onTabBar: $index");
         },
         // headerBuilder: (context, index) {
@@ -95,7 +94,6 @@ class _NTabBarPageDemoState extends State<NTabBarPageDemo> {
       cacheExtent: 180,
       itemCount: 20,
       itemBuilder: (context, index) {
-
         return ListTile(
           title: Text("${prefix}_$index"),
         );
@@ -105,5 +103,4 @@ class _NTabBarPageDemoState extends State<NTabBarPageDemo> {
       },
     );
   }
-
 }

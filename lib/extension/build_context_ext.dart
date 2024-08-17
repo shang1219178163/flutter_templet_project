@@ -13,9 +13,7 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-
 extension BuildContextExt on BuildContext {
-
   /// 获取当前组件的 RenderBox
   RenderBox? get renderBox {
     var renderObj = findRenderObject() as RenderBox?;
@@ -80,9 +78,9 @@ extension BuildContextExt on BuildContext {
     return origin()!.dy + size!.height * 0.5;
   }
 
-
   /// 扩展属性 Theme.of(context)
   ThemeData get theme => Theme.of(this);
+
   /// 扩展属性 Theme.of(context).primaryColor
   Color get primaryColor => theme.primaryColor;
 
@@ -102,20 +100,23 @@ extension BuildContextExt on BuildContext {
   /// 扩展属性 MediaQuery.of(context).size
   Size get screenSize => mediaQuery.size;
 
-
   /// 安全区域距离顶部高度(电池栏高度:有刘海的屏幕:47 没有刘海的屏幕为20)
   double get safeAreaTop => mediaQuery.viewPadding.top;
+
   /// 安全区域底部高度(有刘海的屏幕:34 没有刘海的屏幕0)
   // double get safeAreaBottom => mediaQuery.viewPadding.bottom;
-  double get safeAreaBottom => Platform.isIOS ? 34 : mediaQuery.padding.bottom + 10;
+  double get safeAreaBottom =>
+      Platform.isIOS ? 34 : mediaQuery.padding.bottom + 10;
 
   /// 安全区高度(去除电池栏高度和 iphone底部34)
-  double get safeAreaHeight => mediaQuery.size.height
-      - mediaQuery.viewPadding.top
-      - mediaQuery.viewPadding.bottom;
+  double get safeAreaHeight =>
+      mediaQuery.size.height -
+      mediaQuery.viewPadding.top -
+      mediaQuery.viewPadding.bottom;
 
   /// 状态栏高度
   double get statusBarHeight => safeAreaTop;
+
   /// appbar 高度
   double get appBarHeight => kToolbarHeight;
 
@@ -123,9 +124,10 @@ extension BuildContextExt on BuildContext {
   double get viewBottom => mediaQuery.viewInsets.bottom;
 
   /// 截图(组件必须是 RepaintBoundary)
-  Future<ui.Image?> toImage({ double? pixelRatio }) async {
+  Future<ui.Image?> toImage({double? pixelRatio}) async {
     var boundary = findRenderObject() as RenderRepaintBoundary?;
-    var image = await boundary?.toImage(pixelRatio: pixelRatio ?? ui.window.devicePixelRatio);
+    var image = await boundary?.toImage(
+        pixelRatio: pixelRatio ?? ui.window.devicePixelRatio);
 
     // ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
     // Uint8List? pngBytes = byteData?.buffer.asUint8List() ?? Uint8List(10);
@@ -134,21 +136,21 @@ extension BuildContextExt on BuildContext {
   }
 
   /// 组件截图转 ByteData (组件必须是 RepaintBoundary)
-  Future<ByteData?> toImageByteData({ double? pixelRatio }) async {
+  Future<ByteData?> toImageByteData({double? pixelRatio}) async {
     final image = await toImage(pixelRatio: pixelRatio);
     final byteData = await image?.toByteData(format: ui.ImageByteFormat.png);
     return byteData;
   }
 
   /// 组件截图转 Uint8List (组件必须是 RepaintBoundary)
-  Future<Uint8List?> toImageUint8List({ double? pixelRatio }) async {
+  Future<Uint8List?> toImageUint8List({double? pixelRatio}) async {
     final byteData = await toImageByteData(pixelRatio: pixelRatio);
     final uint8List = byteData?.buffer.asUint8List();
     return uint8List;
   }
 
   /// 组件截图转 Image Widget(组件必须是 RepaintBoundary)
-  Future<Image?> toImageWidget({ double? pixelRatio }) async {
+  Future<Image?> toImageWidget({double? pixelRatio}) async {
     final pngBytes = await toImageUint8List(pixelRatio: pixelRatio);
     if (pngBytes == null) {
       return null;
@@ -170,18 +172,19 @@ extension StatefulWidgetExt<T extends StatefulWidget> on State<T> {
 
   /// 安全区域距离顶部高度(电池栏高度:有刘海的屏幕:44 没有刘海的屏幕为20)
   double get safeAreaTop => context.safeAreaTop;
+
   /// 没有弹出键盘时底部高度(有刘海的屏幕:34 没有刘海的屏幕0)
   double get safeAreaBottom => context.safeAreaBottom;
+
   /// 安全区高度(去除电池栏高度和 iphone底部34)
   double get safeAreaHeight => context.safeAreaHeight;
 
   /// 扩展属性 MediaQuery.of(context).size
   Size get screenSize => context.screenSize;
+
   /// 扩展属性 MediaQuery.of(.devicePixelRatio
   double get devicePixelRatio => context.devicePixelRatio;
-
 }
-
 
 // extension GlobalKeyExt on GlobalKey{
 //

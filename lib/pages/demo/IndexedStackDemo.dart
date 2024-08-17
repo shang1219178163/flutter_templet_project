@@ -6,24 +6,20 @@
 //  Copyright © 10/28/21 shang. All rights reserved.
 //
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 
 class IndexedStackDemo extends StatefulWidget {
-
   final String? title;
 
-  const IndexedStackDemo({ Key? key, this.title}) : super(key: key);
+  const IndexedStackDemo({Key? key, this.title}) : super(key: key);
 
-  
   @override
   _IndexedStackDemoState createState() => _IndexedStackDemoState();
 }
 
 class _IndexedStackDemoState extends State<IndexedStackDemo> {
-
   final _scrollController = ScrollController();
 
   int selectedIndex = 1;
@@ -38,7 +34,7 @@ class _IndexedStackDemoState extends State<IndexedStackDemo> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           setState(() {
-            if(selectedIndex < 2)  {
+            if (selectedIndex < 2) {
               selectedIndex++;
             } else {
               selectedIndex = 0;
@@ -72,27 +68,25 @@ class _IndexedStackDemoState extends State<IndexedStackDemo> {
       Colors.red,
       Colors.yellow,
     ];
-    return IndexedStack (
-        alignment: Alignment.center,
-        index: selectedIndex,
-        children: items.map((e) {
-          final index = items.indexOf(e);
+    return IndexedStack(
+      alignment: Alignment.center,
+      index: selectedIndex,
+      children: items.map((e) {
+        final index = items.indexOf(e);
 
-          return StatefulBuilder(
+        return StatefulBuilder(
             builder: (BuildContext context, StateSetter setState) {
-              ddlog("$widget, index $index");
+          ddlog("$widget, index $index");
 
-              return Container(
-                width: 200,
-                height: 200,
-                color: e,
-                alignment: Alignment.center,
-                child: Text(index.toString()),
-              );
-            }
+          return Container(
+            width: 200,
+            height: 200,
+            color: e,
+            alignment: Alignment.center,
+            child: Text(index.toString()),
           );
-        }).toList(),
+        });
+      }).toList(),
     );
   }
-
 }

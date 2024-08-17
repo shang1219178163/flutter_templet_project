@@ -5,18 +5,15 @@ import 'package:flutter_templet_project/extension/ddlog.dart';
 
 import 'package:popover/popover.dart';
 
-
 class PopoverDemo extends StatefulWidget {
-
   final String? title;
-  const PopoverDemo({ Key? key, this.title}) : super(key: key);
+  const PopoverDemo({Key? key, this.title}) : super(key: key);
 
   @override
   _PopoverDemoState createState() => _PopoverDemoState();
 }
 
 class _PopoverDemoState extends State<PopoverDemo> {
-
   bool isListStyle = false;
 
   @override
@@ -25,12 +22,17 @@ class _PopoverDemoState extends State<PopoverDemo> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: [
-          TextButton(onPressed: (){
-            ddlog("change");
-            setState(() {
-              isListStyle = !isListStyle;
-            });
-          }, child: Icon(Icons.change_circle_outlined, color: Colors.white,)),
+          TextButton(
+              onPressed: () {
+                ddlog("change");
+                setState(() {
+                  isListStyle = !isListStyle;
+                });
+              },
+              child: Icon(
+                Icons.change_circle_outlined,
+                color: Colors.white,
+              )),
         ],
       ),
       body: SafeArea(
@@ -40,7 +42,11 @@ class _PopoverDemoState extends State<PopoverDemo> {
   }
 
   Widget buildBody() {
-    final items = List.generate(3, (index) => PopoverButton(text: Text("title_$index"),));
+    final items = List.generate(
+        3,
+        (index) => PopoverButton(
+              text: Text("title_$index"),
+            ));
     return Padding(
       padding: const EdgeInsets.all(16),
       child: Column(
@@ -70,32 +76,33 @@ class _PopoverDemoState extends State<PopoverDemo> {
   Widget buildList() {
     final list = List.generate(9, (index) => index.toString());
     return Scrollbar(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8),
-        child: ListView.separated(
-            itemBuilder: (context, index) {
-              final e = list[index];
-              return ListTile(
-                title: Text(e),
-                // subtitle: const Text(e),
-                trailing: const PopoverButton(text: Text("点击"),),
-                dense: true,
-                onTap: (){
-                  debugPrint([DateTime.now(), e].toString());
-                },
-              );
-            },
-            itemCount: list.length,
-            separatorBuilder: (context, index) {
-              return const Divider(
-                height: .5,
-                indent: 15,
-                endIndent: 15,
-                color: Color(0xFFDDDDDD),
-              );
-            }
-        ),
-      ));
+        child: Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      child: ListView.separated(
+          itemBuilder: (context, index) {
+            final e = list[index];
+            return ListTile(
+              title: Text(e),
+              // subtitle: const Text(e),
+              trailing: const PopoverButton(
+                text: Text("点击"),
+              ),
+              dense: true,
+              onTap: () {
+                debugPrint([DateTime.now(), e].toString());
+              },
+            );
+          },
+          itemCount: list.length,
+          separatorBuilder: (context, index) {
+            return const Divider(
+              height: .5,
+              indent: 15,
+              endIndent: 15,
+              color: Color(0xFFDDDDDD),
+            );
+          }),
+    ));
   }
 
   void _showMyPop(BuildContext context) {
@@ -120,28 +127,24 @@ class PopoverButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      child: Container(
-        width: 80,
-        height: 40,
-        decoration: const BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.all(Radius.circular(5)),
-          boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 5)],
-        ),
-        child: Center(
+        child: Container(
+          width: 80,
+          height: 40,
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.all(Radius.circular(5)),
+            boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 5)],
+          ),
+          child: Center(
             child: text ?? Text(runtimeType.toString()),
+          ),
         ),
-      ),
-      onTap: () {
-        // _handleShowPopover(context);
-        _handleShowPopover1(context);
-        ddlog(context.frame);
-
-
-      }
-    );
+        onTap: () {
+          // _handleShowPopover(context);
+          _handleShowPopover1(context);
+          ddlog(context.frame);
+        });
   }
-
 
   void _handleShowPopover1(BuildContext context) {
     final items = List.generate(3, (index) => "按钮$index");
@@ -151,12 +154,13 @@ class PopoverButton extends StatelessWidget {
       bodyBuilder: (context) => Container(
         // color: Colors.green,
         child: Row(
-          children: items.map((e) => TextButton(
-            onPressed: (){
-              debugPrint([DateTime.now(), "按钮1"].toString());
-            },
-            child: const Text("按钮1"))
-          ).toList(),
+          children: items
+              .map((e) => TextButton(
+                  onPressed: () {
+                    debugPrint([DateTime.now(), "按钮1"].toString());
+                  },
+                  child: const Text("按钮1")))
+              .toList(),
         ),
       ),
       onPop: () => debugPrint('Popover was popped!'),
@@ -169,9 +173,7 @@ class PopoverButton extends StatelessWidget {
       barrierColor: Colors.black.withAlpha(30),
     );
   }
-
 }
-
 
 class ListItems extends StatelessWidget {
   const ListItems({Key? key}) : super(key: key);

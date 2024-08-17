@@ -13,31 +13,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:timelines/timelines.dart';
 
-
 class LogisticsTimeLine extends StatefulWidget {
-
   final String? title;
 
-  const LogisticsTimeLine({ Key? key, this.title}) : super(key: key);
+  const LogisticsTimeLine({Key? key, this.title}) : super(key: key);
 
   @override
   _LogisticsTimeLineState createState() => _LogisticsTimeLineState();
 }
 
 class _LogisticsTimeLineState extends State<LogisticsTimeLine> {
-
   int groupValue = 0;
 
   late final TimelineThemeData _theme = TimelineThemeData(
-      nodePosition: 0.20,
+    nodePosition: 0.20,
   );
 
   late final TimelineThemeData _theme1 = TimelineThemeData(
-      nodePosition: 0,
-      connectorTheme: ConnectorThemeData(color: Colors.red),
-      indicatorTheme: IndicatorThemeData(color: Colors.red, size: 10),
+    nodePosition: 0,
+    connectorTheme: ConnectorThemeData(color: Colors.red),
+    indicatorTheme: IndicatorThemeData(color: Colors.red, size: 10),
   );
-
 
   @override
   Widget build(BuildContext context) {
@@ -51,12 +47,14 @@ class _LogisticsTimeLineState extends State<LogisticsTimeLine> {
   }
 
   PreferredSizeWidget buildPreferredSize() {
-    final children = List.generate(3, (i) {
-      return Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Text('样式$i', style: TextStyle(fontSize: 15))
-      );
-    },).toList();
+    final children = List.generate(
+      3,
+      (i) {
+        return Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text('样式$i', style: TextStyle(fontSize: 15)));
+      },
+    ).toList();
 
     final map = <int, Widget>{};
     for (var i = 0; i < children.length; i++) {
@@ -108,7 +106,8 @@ class _LogisticsTimeLineState extends State<LogisticsTimeLine> {
       children: [
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text('商品名称: 某某至尊版', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
+          child: Text('商品名称: 某某至尊版',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
         ),
         Padding(
           padding: const EdgeInsets.all(.0),
@@ -117,24 +116,28 @@ class _LogisticsTimeLineState extends State<LogisticsTimeLine> {
             mainAxisSize: MainAxisSize.min,
             builder: TimelineTileBuilder.connected(
               contentsAlign: ContentsAlign.basic,
-              indicatorBuilder:(context, index){
-                return index % 2 == 0 ? ContainerIndicator(
-                  child: Container(
-                    width: 30.0,
-                    height: 30.0,
-                    color: Colors.blue,
-                  ),
-                ) : Container(
-                    // width: 30.0,
-                  padding: EdgeInsets.symmetric(horizontal: 8),
-                    child: DotIndicator());
+              indicatorBuilder: (context, index) {
+                return index % 2 == 0
+                    ? ContainerIndicator(
+                        child: Container(
+                          width: 30.0,
+                          height: 30.0,
+                          color: Colors.blue,
+                        ),
+                      )
+                    : Container(
+                        // width: 30.0,
+                        padding: EdgeInsets.symmetric(horizontal: 8),
+                        child: DotIndicator());
               },
-              connectorBuilder: (context, index, type){
-                return index % 2 == 0 ? SizedBox(
-                  child: SolidLineConnector(),
-                ) : SizedBox(
-                  child: DashedLineConnector(),
-                );
+              connectorBuilder: (context, index, type) {
+                return index % 2 == 0
+                    ? SizedBox(
+                        child: SolidLineConnector(),
+                      )
+                    : SizedBox(
+                        child: DashedLineConnector(),
+                      );
               },
               oppositeContentsBuilder: (context, index) {
                 var model = PlainDataModel.fromJson(listData[index]);
@@ -177,7 +180,8 @@ class _LogisticsTimeLineState extends State<LogisticsTimeLine> {
       children: [
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text('商品名称: 某某至尊版', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
+          child: Text('商品名称: 某某至尊版',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
@@ -215,7 +219,8 @@ class _LogisticsTimeLineState extends State<LogisticsTimeLine> {
                   ),
                 );
               },
-              connectorStyleBuilder: (context, index) => ConnectorStyle.solidLine,
+              connectorStyleBuilder: (context, index) =>
+                  ConnectorStyle.solidLine,
               // connectorStyleBuilder: (context, index) => index == 0 ? ConnectorStyle.transparent : ConnectorStyle.solidLine,
               indicatorStyleBuilder: (context, index) => IndicatorStyle.dot,
               itemCount: listData.length,
@@ -232,7 +237,8 @@ class _LogisticsTimeLineState extends State<LogisticsTimeLine> {
       children: [
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text('商品名称: 某某至尊版', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
+          child: Text('商品名称: 某某至尊版',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
         ),
         Padding(
           padding: const EdgeInsets.all(.0),
@@ -241,24 +247,28 @@ class _LogisticsTimeLineState extends State<LogisticsTimeLine> {
             mainAxisSize: MainAxisSize.min,
             builder: TimelineTileBuilder.connected(
               contentsAlign: ContentsAlign.basic,
-              indicatorBuilder:(context, index){
-                return index % 2 == 0 ? ContainerIndicator(
-                  child: Container(
-                    width: 30.0,
-                    height: 30.0,
-                    color: Colors.blue,
-                  ),
-                ) : Container(
-                  // width: 30.0,
-                    padding: EdgeInsets.symmetric(horizontal: 8),
-                    child: DotIndicator());
+              indicatorBuilder: (context, index) {
+                return index % 2 == 0
+                    ? ContainerIndicator(
+                        child: Container(
+                          width: 30.0,
+                          height: 30.0,
+                          color: Colors.blue,
+                        ),
+                      )
+                    : Container(
+                        // width: 30.0,
+                        padding: EdgeInsets.symmetric(horizontal: 8),
+                        child: DotIndicator());
               },
-              connectorBuilder: (context, index, type){
-                return index % 2 == 0 ? SizedBox(
-                  child: SolidLineConnector(),
-                ) : SizedBox(
-                  child: DashedLineConnector(),
-                );
+              connectorBuilder: (context, index, type) {
+                return index % 2 == 0
+                    ? SizedBox(
+                        child: SolidLineConnector(),
+                      )
+                    : SizedBox(
+                        child: DashedLineConnector(),
+                      );
               },
               oppositeContentsBuilder: (context, index) {
                 var model = PlainDataModel.fromJson(listData[index]);
@@ -293,7 +303,7 @@ class _LogisticsTimeLineState extends State<LogisticsTimeLine> {
                                   side: BorderSide(color: Colors.red),
                                 ),
                               ),
-                              onPressed: (){
+                              onPressed: () {
                                 ddlog("onPressed");
                               },
                               child: Text('查看'),
@@ -321,10 +331,14 @@ class _LogisticsTimeLineState extends State<LogisticsTimeLine> {
                                 minimumSize: Size.zero,
                                 padding: EdgeInsets.all(5),
                               ),
-                              onPressed: (){
+                              onPressed: () {
                                 ddlog("onPressed");
                               },
-                              child: Text('更多', style: TextStyle(decoration: TextDecoration.underline),),
+                              child: Text(
+                                '更多',
+                                style: TextStyle(
+                                    decoration: TextDecoration.underline),
+                              ),
                             ),
                           ],
                         )
@@ -342,14 +356,13 @@ class _LogisticsTimeLineState extends State<LogisticsTimeLine> {
   }
 }
 
-
 class PlainDataModel {
-  PlainDataModel({
-    required this.id,
-    required this.title,
-    required this.description,
-    required this.day,
-    required this.time});
+  PlainDataModel(
+      {required this.id,
+      required this.title,
+      required this.description,
+      required this.day,
+      required this.time});
 
   late String id;
   late String title;
@@ -380,7 +393,7 @@ class PlainDataModel {
   }
 }
 
-List listData =  [
+List listData = [
   {
     'day': '12月9日',
     'time': '10: 53',

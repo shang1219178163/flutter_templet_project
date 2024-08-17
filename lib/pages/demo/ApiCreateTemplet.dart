@@ -7,9 +7,11 @@
 //
 
 /// api 模板
-class ApiCreateTemplet{
-
-  static String createCopyRights({required String appScheme, required String className,}) {
+class ApiCreateTemplet {
+  static String createCopyRights({
+    required String appScheme,
+    required String className,
+  }) {
     final now = DateTime.now();
     final nowStr = "$now".substring(0, 19);
     final yearStr = nowStr.substring(0, 10);
@@ -23,9 +25,13 @@ class ApiCreateTemplet{
 //
 """;
   }
-  
-  static String createApi({required String appScheme, required String className,}) {
-    final copyRights = createCopyRights(appScheme: appScheme, className: className);
+
+  static String createApi({
+    required String appScheme,
+    required String className,
+  }) {
+    final copyRights =
+        createCopyRights(appScheme: appScheme, className: className);
     return """
 $copyRights
     

@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/n_long_press_menu.dart';
@@ -13,11 +11,7 @@ import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:tuple/tuple.dart';
 
 class NTargetFollowerDemo extends StatefulWidget {
-
-  NTargetFollowerDemo({
-    Key? key,
-    this.title
-  }) : super(key: key);
+  NTargetFollowerDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -26,13 +20,18 @@ class NTargetFollowerDemo extends StatefulWidget {
 }
 
 class _NTargetFollowerDemoState extends State<NTargetFollowerDemo> {
-
   final _scrollControlller = ScrollController();
 
   late final items = <Tuple2<String, String>>[
-    Tuple2("复制", "icon_copy.png",),
+    Tuple2(
+      "复制",
+      "icon_copy.png",
+    ),
     // Tuple2("引用", "icon_quote.png",),
-    Tuple2("撤回", "icon_revoke.png",),
+    Tuple2(
+      "撤回",
+      "icon_revoke.png",
+    ),
 
     // Tuple2("复制", "icon_copy.png"),
     // Tuple2("引用", "icon_quote.png"),
@@ -63,17 +62,21 @@ class _NTargetFollowerDemoState extends State<NTargetFollowerDemo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () => debugPrint(e),)
-        ).toList(),
-      ),
-      body: buildBody()
-    );
+        appBar: AppBar(
+          title: Text(widget.title ?? "$widget"),
+          actions: [
+            'done',
+          ]
+              .map((e) => TextButton(
+                    child: Text(
+                      e,
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onPressed: () => debugPrint(e),
+                  ))
+              .toList(),
+        ),
+        body: buildBody());
   }
 
   buildBody() {
@@ -87,72 +90,72 @@ class _NTargetFollowerDemoState extends State<NTargetFollowerDemo> {
                 controller: _scrollControlller,
                 itemCount: 20,
                 itemBuilder: (context, i) {
-
                   return Container(
                     height: 75,
                     child: ListTile(
-                      title: Text("row_$i"*20),
-                      trailing: i%3 != 0 ? null : NTargetFollower(
-                        targetAnchor: Alignment.topRight,
-                        followerAnchor: Alignment.bottomRight,
-                        entries: entries,
-                        offset: Offset(0, -8),
-                        onLongPressEnd: (e){
+                      title: Text("row_$i" * 20),
+                      trailing: i % 3 != 0
+                          ? null
+                          : NTargetFollower(
+                              targetAnchor: Alignment.topRight,
+                              followerAnchor: Alignment.bottomRight,
+                              entries: entries,
+                              offset: Offset(0, -8),
+                              onLongPressEnd: (e) {},
+                              target: OutlinedButton(
+                                onPressed: () {
+                                  debugPrint("button_$i");
+                                },
+                                // child: Text("button_$i"*3),
+                                child: Text("b_$i"),
+                              ),
+                              followerBuilder: (context, onHide) {
+                                _onHide = onHide;
 
-                        },
-                        target: OutlinedButton(
-                          onPressed: (){
-                            debugPrint("button_$i");
-                          },
-                          // child: Text("button_$i"*3),
-                          child: Text("b_$i"),
-                        ),
-                        followerBuilder: (context, onHide) {
-                          _onHide = onHide;
-
-                          debugPrint("${DateTime.now()} followerBuilder:");
-                          return TapRegion(
-                            onTapInside: (tap) {
-                              debugPrint('On Tap Inside!!');
-                            },
-                            onTapOutside: (tap) {
-                              debugPrint('On Tap Outside!!');
-                              onHide();
-                            },
-                            child: NLongPressMenu(
-                              items: items.map((e) => Tuple2(e.item1, e.item2.toAssetImage())).toList(),
-                              onItem: (Tuple2<String, AssetImage> t) {
-                                onHide();
-                                debugPrint("onChanged_$t");
-                                ToastUtil.show(t.item1);
-                                switch (t.item1) {
-                                  case "复制":
-                                    {
-                                    }
-                                    break;
-                                  case "引用":
-                                    {
-
-                                    }
-                                    break;
-                                  case "撤回":
-                                    {
-                                    }
-                                    break;
-                                  default:
-                                    break;
-                                }
-                              }
-                            ),
-                          );
-                          return buildFollowerDefault(onHide: onHide, index: i);
-                        }
-                      ),
+                                debugPrint(
+                                    "${DateTime.now()} followerBuilder:");
+                                return TapRegion(
+                                  onTapInside: (tap) {
+                                    debugPrint('On Tap Inside!!');
+                                  },
+                                  onTapOutside: (tap) {
+                                    debugPrint('On Tap Outside!!');
+                                    onHide();
+                                  },
+                                  child: NLongPressMenu(
+                                      items: items
+                                          .map((e) => Tuple2(
+                                              e.item1, e.item2.toAssetImage()))
+                                          .toList(),
+                                      onItem: (Tuple2<String, AssetImage> t) {
+                                        onHide();
+                                        debugPrint("onChanged_$t");
+                                        ToastUtil.show(t.item1);
+                                        switch (t.item1) {
+                                          case "复制":
+                                            {}
+                                            break;
+                                          case "引用":
+                                            {}
+                                            break;
+                                          case "撤回":
+                                            {}
+                                            break;
+                                          default:
+                                            break;
+                                        }
+                                      }),
+                                );
+                                return buildFollowerDefault(
+                                    onHide: onHide, index: i);
+                              }),
                     ),
                   );
                 },
                 separatorBuilder: (context, i) {
-                  return Divider(height: 1,);
+                  return Divider(
+                    height: 1,
+                  );
                 },
               ),
             ),
@@ -176,9 +179,9 @@ class _NTargetFollowerDemoState extends State<NTargetFollowerDemo> {
         minWidth: 0,
       ),
       child: Wrap(
-        children: List.generate((index/3).toInt() + 1, (i) => i).map((e) {
+        children: List.generate((index / 3).toInt() + 1, (i) => i).map((e) {
           return OutlinedButton(
-            onPressed: (){
+            onPressed: () {
               debugPrint("button_$e");
               if (e == 2) {
                 onHide();
@@ -212,7 +215,6 @@ class _NTargetFollowerDemoState extends State<NTargetFollowerDemo> {
         spacing: 34,
         runSpacing: 16,
         children: items.map((e) {
-
           final child = NPair(
             direction: Axis.vertical,
             icon: Image(
@@ -221,7 +223,8 @@ class _NTargetFollowerDemoState extends State<NTargetFollowerDemo> {
               height: 18,
               fit: BoxFit.fill,
             ),
-            child: NText(e.item1,
+            child: NText(
+              e.item1,
               color: Colors.white,
               fontSize: 13.sp,
               fontWeight: FontWeight.w400,
@@ -231,7 +234,7 @@ class _NTargetFollowerDemoState extends State<NTargetFollowerDemo> {
           return Material(
             color: Colors.transparent,
             child: InkWell(
-              onTap: (){
+              onTap: () {
                 onChanged(e);
               },
               child: child,

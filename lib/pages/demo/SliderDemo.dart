@@ -6,25 +6,21 @@
 //  Copyright © 6/5/21 shang. All rights reserved.
 //
 
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_slider.dart';
 import 'package:flutter_templet_project/provider/notifier_demo.dart';
 
-
 /// This is the main application widget.
 class SliderDemo extends StatefulWidget {
-
   final String? title;
-  const SliderDemo({ Key? key, this.title}) : super(key: key);
+  const SliderDemo({Key? key, this.title}) : super(key: key);
 
   @override
   _SliderDemoState createState() => _SliderDemoState();
 }
 
 class _SliderDemoState extends State<SliderDemo> {
-
   var sliderVN = ValueNotifier(50.0);
 
   RangeValues _rangeValues = RangeValues(30, 70);
@@ -32,11 +28,12 @@ class _SliderDemoState extends State<SliderDemo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.title ?? "$widget"),),
-      body: SafeArea(
-        child: _buildBody(),
-      )
-    );
+        appBar: AppBar(
+          title: Text(widget.title ?? "$widget"),
+        ),
+        body: SafeArea(
+          child: _buildBody(),
+        ));
   }
 
   _buildBody() {
@@ -47,7 +44,6 @@ class _SliderDemoState extends State<SliderDemo> {
         _buildSlider(),
         Text('RangeSlider'),
         _buildRangeSlider(),
-
         _buildNNSlider()
       ],
     );
@@ -58,47 +54,46 @@ class _SliderDemoState extends State<SliderDemo> {
       children: [
         Expanded(
           child: StatefulBuilder(
-            builder: (BuildContext context, StateSetter setState) {
-              return SliderTheme(
-                  data: SliderTheme.of(context).copyWith(
-                    valueIndicatorColor: Colors.red,
-                  ),
-                  child: Slider(
-                    inactiveColor: Color(0xffC0C0C0),
-                    activeColor: Color(0xff21BA45),
-                    onChangeStart: (double value) {
-                      debugPrint('Start value is $value');
-                    },
-                    onChangeEnd: (double value) {
-                      debugPrint('Finish value is $value');
-                    },
-                    //onChanged: (double value) {},
-                    divisions: 100,
-                    //label: 'Admitida',
-                    value: sliderVN.value,
-                    min: 0.0,
-                    max: 100.0,
-                    label: (sliderVN.value/100).toStringAsFixed(2),
+              builder: (BuildContext context, StateSetter setState) {
+            return SliderTheme(
+                data: SliderTheme.of(context).copyWith(
+                  valueIndicatorColor: Colors.red,
+                ),
+                child: Slider(
+                  inactiveColor: Color(0xffC0C0C0),
+                  activeColor: Color(0xff21BA45),
+                  onChangeStart: (double value) {
+                    debugPrint('Start value is $value');
+                  },
+                  onChangeEnd: (double value) {
+                    debugPrint('Finish value is $value');
+                  },
+                  //onChanged: (double value) {},
+                  divisions: 100,
+                  //label: 'Admitida',
+                  value: sliderVN.value,
+                  min: 0.0,
+                  max: 100.0,
+                  label: (sliderVN.value / 100).toStringAsFixed(2),
 
-                    onChanged: (double value) {
-                      sliderVN.value = value;
-                      setState(() {});
-                    },
-                  )
-              );
-            }
-          ),
+                  onChanged: (double value) {
+                    sliderVN.value = value;
+                    setState(() {});
+                  },
+                ));
+          }),
         ),
         ValueListenableBuilder(
-          valueListenable: sliderVN,
-          builder: (BuildContext context, double value, Widget? child) {
-            final result = (value/100).toStringAsFixed(2);
-            return TextButton(
-              onPressed: () { debugPrint(result); },
-              child: Text(result),
-            );
-          }
-        ),
+            valueListenable: sliderVN,
+            builder: (BuildContext context, double value, Widget? child) {
+              final result = (value / 100).toStringAsFixed(2);
+              return TextButton(
+                onPressed: () {
+                  debugPrint(result);
+                },
+                child: Text(result),
+              );
+            }),
       ],
     );
   }
@@ -146,6 +141,4 @@ class _SliderDemoState extends State<SliderDemo> {
       },
     );
   }
-
 }
-

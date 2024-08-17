@@ -6,7 +6,6 @@
 //  Copyright © 9/15/22 shang. All rights reserved.
 //
 
-
 import 'dart:async';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
@@ -39,9 +38,8 @@ extension UIImageExt on ui.Image {
   }
 
   /// 获取文件在内存中的大小
-  FutureOr<String?> fileSize({
-    ui.ImageByteFormat format = ui.ImageByteFormat.png
-  }) async {
+  FutureOr<String?> fileSize(
+      {ui.ImageByteFormat format = ui.ImageByteFormat.png}) async {
     var byteData = await toByteData(format: format);
     final result = byteData?.fileSize();
     // print("imageSize: ${result}");
@@ -50,7 +48,6 @@ extension UIImageExt on ui.Image {
 }
 
 extension ImageExt on Image {
-
   static FutureOr<Uint8List?> imageDataFromUrl({
     required String imageUrl,
     ui.ImageByteFormat format = ui.ImageByteFormat.png,
@@ -69,8 +66,9 @@ extension ImageProviderExt on ImageProvider {
   }) async {
     final completer = Completer<ImageInfo>();
     resolve(configuration).addListener(
-      ImageStreamListener((ImageInfo imageInfo, bool _) async {
-        // imageInfo.image.dispose();
+      ImageStreamListener(
+        (ImageInfo imageInfo, bool _) async {
+          // imageInfo.image.dispose();
           completer.complete(imageInfo);
           evict();
         },
@@ -107,9 +105,7 @@ extension ImageChunkEventExt on ImageChunkEvent {
   }
 }
 
-
 extension ImageCacheExt on ImageCache {
-
   /// PaintingBinding.instance?.imageCache?.clear();
   static clear() {
     PaintingBinding.instance.imageCache.clear();
@@ -121,14 +117,19 @@ extension ImageCacheExt on ImageCache {
   }
 
   /// evict
-  static bool evict(Object key, { bool includeLive = true }) {
-    return (PaintingBinding.instance.imageCache.evict(key, includeLive: includeLive) == true);
+  static bool evict(Object key, {bool includeLive = true}) {
+    return (PaintingBinding.instance.imageCache
+            .evict(key, includeLive: includeLive) ==
+        true);
   }
 
   /// evict images
   static evictImages(List<String> urls) {
     urls.forEach((e) {
-      Object key = NetworkImage(e, scale: 1.0,);
+      Object key = NetworkImage(
+        e,
+        scale: 1.0,
+      );
       PaintingBinding.instance.imageCache.evict(key, includeLive: true);
     });
   }

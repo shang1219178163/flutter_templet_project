@@ -1,10 +1,7 @@
-
-
 import 'dart:math';
 import 'package:flutter/material.dart';
 
 class RectProgressIndicator extends StatelessWidget {
-
   RectProgressIndicator({
     Key? key,
     required this.width,
@@ -13,7 +10,6 @@ class RectProgressIndicator extends StatelessWidget {
     this.borderRadius = const BorderRadius.all(Radius.circular(4)),
     this.child,
   }) : super(key: key);
-
 
   final double width;
   final double height;
@@ -24,14 +20,12 @@ class RectProgressIndicator extends StatelessWidget {
 
   final Widget? child;
 
-
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
         valueListenable: progressVN,
         child: child,
-        builder: (context, value, child){
-
+        builder: (context, value, child) {
           debugPrint("value: $value");
           final precent = (value * 100).toInt().toStringAsFixed(0);
           var precentStr = "$precent%";
@@ -72,20 +66,18 @@ class RectProgressIndicator extends StatelessWidget {
               ],
             ),
           );
-        }
-    );
+        });
   }
-
 }
 
 class RectProgressClipper extends CustomClipper<Path> {
   final double progress;
 
-  RectProgressClipper({this.progress=0});
+  RectProgressClipper({this.progress = 0});
 
   @override
   Path getClip(Size size) {
-    if(progress == 0){
+    if (progress == 0) {
       return Path();
     }
     var rect = Rect.fromPoints(

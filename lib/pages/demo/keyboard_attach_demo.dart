@@ -1,5 +1,3 @@
-
-
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -13,11 +11,7 @@ import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:tuple/tuple.dart';
 
 class KeyboardAttachDemo extends StatefulWidget {
-
-  KeyboardAttachDemo({
-    Key? key, 
-    this.title
-  }) : super(key: key);
+  KeyboardAttachDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -25,22 +19,15 @@ class KeyboardAttachDemo extends StatefulWidget {
   _KeyboardAttachDemoState createState() => _KeyboardAttachDemoState();
 }
 
-class _KeyboardAttachDemoState extends State<KeyboardAttachDemo> with
-    WidgetsBindingObserver,
-    KeyboardChangeMixin{
-
+class _KeyboardAttachDemoState extends State<KeyboardAttachDemo>
+    with WidgetsBindingObserver, KeyboardChangeMixin {
   final _textController = TextEditingController();
-
 
   final isKeyboardVisibleVN = ValueNotifier(false);
 
-
-  Widget get safeAreaBottom => SizedBox(height: max(
-      MediaQuery.of(context).viewInsets.bottom,
-      MediaQuery.of(context).viewPadding.bottom)
-  );
-
-
+  Widget get safeAreaBottom => SizedBox(
+      height: max(MediaQuery.of(context).viewInsets.bottom,
+          MediaQuery.of(context).viewPadding.bottom));
 
   @override
   void onKeyboardChanged(bool visible) {
@@ -58,7 +45,8 @@ class _KeyboardAttachDemoState extends State<KeyboardAttachDemo> with
   void initState() {
     // TODO: implement initState
     SystemChannels.navigation.setMethodCallHandler((call) {
-      debugPrint('<SystemChannels.navigation> ${call.method} (${call.arguments})');
+      debugPrint(
+          '<SystemChannels.navigation> ${call.method} (${call.arguments})');
       /*
    popRoute
    pushRoute
@@ -77,43 +65,47 @@ class _KeyboardAttachDemoState extends State<KeyboardAttachDemo> with
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: onPressed,)
-        ).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: onPressed,
+                ))
+            .toList(),
       ),
       body: buildBody(),
     );
   }
-  
+
   buildBody() {
-    return Stack(
-      children: <Widget>[
-        Container(
-          decoration: BoxDecoration(
+    return Stack(children: <Widget>[
+      Container(
+        decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage("assets/images/bg.png"),
-              fit: BoxFit.fill,
-            )
-          ),
-          child: ListView(
-            children: List.generate(20, (i){
-              return ListTile(
-                title: NText("item_$i",),
-              );
-            }).toList(),
-          ),
+          image: AssetImage("assets/images/bg.png"),
+          fit: BoxFit.fill,
+        )),
+        child: ListView(
+          children: List.generate(20, (i) {
+            return ListTile(
+              title: NText(
+                "item_$i",
+              ),
+            );
+          }).toList(),
         ),
-        Positioned(
-          bottom: MediaQuery.of(context).viewInsets.bottom,
-          left: 0,
-          right: 0,
-          child: textfieldBar(),
-        ),
-      ]
-    );
+      ),
+      Positioned(
+        bottom: MediaQuery.of(context).viewInsets.bottom,
+        left: 0,
+        right: 0,
+        child: textfieldBar(),
+      ),
+    ]);
   }
 
   //键盘推起界面
@@ -126,7 +118,8 @@ class _KeyboardAttachDemoState extends State<KeyboardAttachDemo> with
           Expanded(
             child: Container(
               // color: Colors.yellow,
-              child: NText(_textController.text,
+              child: NText(
+                _textController.text,
                 maxLines: 100,
               ),
             ),
@@ -168,10 +161,10 @@ class _KeyboardAttachDemoState extends State<KeyboardAttachDemo> with
         ),
         counterText: '',
       ),
-      onChanged: (val) async{
+      onChanged: (val) async {
         // debugPrint("onChanged: $val");
       },
-      onSubmitted: (val){
+      onSubmitted: (val) {
         debugPrint("onSubmitted: $val");
       },
       onEditingComplete: () {
@@ -204,7 +197,9 @@ class _KeyboardAttachDemoState extends State<KeyboardAttachDemo> with
               maxLines: null,
             ),
           ),
-          SizedBox(width: 8,),
+          SizedBox(
+            width: 8,
+          ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               elevation: 0,
@@ -212,7 +207,7 @@ class _KeyboardAttachDemoState extends State<KeyboardAttachDemo> with
               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
               minimumSize: Size(64, 32),
             ),
-            onPressed: (){
+            onPressed: () {
               FocusScope.of(context).unfocus();
             },
             child: Text("发送"),
@@ -237,77 +232,74 @@ class _KeyboardAttachDemoState extends State<KeyboardAttachDemo> with
   showSheet() {
     showModalBottomSheet(
       context: context,
-      isScrollControlled: true,  // !important
+      isScrollControlled: true, // !important
       barrierColor: Colors.transparent,
       builder: (BuildContext context) {
-
         return Container(
           // height: viewInsets.bottom,
           color: Colors.white,
           child: StatefulBuilder(
-            builder: (BuildContext context, StateSetter setState) {
-
-              return Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  ...items.map((e) {
-                    return ColoredBox(
-                      color: ColorExt.random,
-                      child: Material(
-                        child: RadioListTile(
-                          tileColor: Colors.red,
-                          title: Text(e.item2),
-                          value: e.item1,
-                          groupValue: selectedIndex,
-                          onChanged:(val) {
-                            selectedIndex = val;
-                            debugPrint("selectedIndex:$selectedIndex");
-                            setState((){});
-                          },
-                        ),
-                      ),
-                    );
-                  }).toList(),
-                  ColoredBox(
+              builder: (BuildContext context, StateSetter setState) {
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                ...items.map((e) {
+                  return ColoredBox(
                     color: ColorExt.random,
                     child: Material(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          RadioListTile(
-                            tileColor: Colors.red,
-                            title: Text("其他"),
-                            groupValue: selectedIndex,
-                            value: items.length,
-                            onChanged:(val) {
-                              selectedIndex = val;
-                              debugPrint("selectedIndex:$selectedIndex");
-                              setState((){});
-                            },
-                          ),
-                          Row(
-                            children: [
-                              SizedBox(width: 70,),
-                              Expanded(
-                                child: buildTextfield(
-                                  maxLines: 3,
-                                )
-                              ),
-                            ],
-                          ),
-                          safeAreaBottom,
-                        ],
+                      child: RadioListTile(
+                        tileColor: Colors.red,
+                        title: Text(e.item2),
+                        value: e.item1,
+                        groupValue: selectedIndex,
+                        onChanged: (val) {
+                          selectedIndex = val;
+                          debugPrint("selectedIndex:$selectedIndex");
+                          setState(() {});
+                        },
                       ),
                     ),
-                  )
-                ],
-              );
-            }
-          ),
+                  );
+                }).toList(),
+                ColoredBox(
+                  color: ColorExt.random,
+                  child: Material(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        RadioListTile(
+                          tileColor: Colors.red,
+                          title: Text("其他"),
+                          groupValue: selectedIndex,
+                          value: items.length,
+                          onChanged: (val) {
+                            selectedIndex = val;
+                            debugPrint("selectedIndex:$selectedIndex");
+                            setState(() {});
+                          },
+                        ),
+                        Row(
+                          children: [
+                            SizedBox(
+                              width: 70,
+                            ),
+                            Expanded(
+                                child: buildTextfield(
+                              maxLines: 3,
+                            )),
+                          ],
+                        ),
+                        safeAreaBottom,
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            );
+          }),
         );
       },
     );
-
   }
 }

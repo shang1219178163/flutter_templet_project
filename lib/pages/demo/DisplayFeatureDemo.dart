@@ -1,13 +1,7 @@
-
-
 import 'package:flutter/material.dart';
 
 class DisplayFeatureDemo extends StatefulWidget {
-
-  DisplayFeatureDemo({
-    super.key,
-    this.title
-  });
+  DisplayFeatureDemo({super.key, this.title});
 
   final String? title;
 
@@ -16,7 +10,6 @@ class DisplayFeatureDemo extends StatefulWidget {
 }
 
 class _DisplayFeatureDemoState extends State<DisplayFeatureDemo> {
-
   final _scrollController = ScrollController();
 
   @override
@@ -24,12 +17,17 @@ class _DisplayFeatureDemoState extends State<DisplayFeatureDemo> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () => debugPrint(e),)
-        ).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () => debugPrint(e),
+                ))
+            .toList(),
       ),
       body: buildBody(),
     );
@@ -60,5 +58,4 @@ class _DisplayFeatureDemoState extends State<DisplayFeatureDemo> {
       ),
     );
   }
-
 }

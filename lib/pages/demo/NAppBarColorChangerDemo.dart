@@ -1,4 +1,3 @@
-
 //
 //  NAppBarColorChangerDemo.dart
 //  flutter_templet_project
@@ -14,22 +13,17 @@ import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 
-
 class NAppBarColorChangerDemo extends StatefulWidget {
-
-  NAppBarColorChangerDemo({
-    super.key, 
-    this.title
-  });
+  NAppBarColorChangerDemo({super.key, this.title});
 
   final String? title;
 
   @override
-  State<NAppBarColorChangerDemo> createState() => _NAppBarColorChangerDemoState();
+  State<NAppBarColorChangerDemo> createState() =>
+      _NAppBarColorChangerDemoState();
 }
 
 class _NAppBarColorChangerDemoState extends State<NAppBarColorChangerDemo> {
-
   final _scrollController = ScrollController();
 
   @override
@@ -40,12 +34,14 @@ class _NAppBarColorChangerDemoState extends State<NAppBarColorChangerDemo> {
         extendBodyBehindAppBar: true,
         appBar: AppBar(
           title: Text(widget.title ?? "$widget"),
-          actions: ['保存', '分享'].map((e) => buildAppBarButton(
-            title: e,
-            onPressed: () {
-              ddlog("onTap: $e");
-            },
-          )).toList(),
+          actions: ['保存', '分享']
+              .map((e) => buildAppBarButton(
+                    title: e,
+                    onPressed: () {
+                      ddlog("onTap: $e");
+                    },
+                  ))
+              .toList(),
         ),
         body: buildBody(),
       ),
@@ -54,14 +50,16 @@ class _NAppBarColorChangerDemoState extends State<NAppBarColorChangerDemo> {
 
   Widget buildAppBarButton({required String title, VoidCallback? onPressed}) {
     return InkWell(
-      onTap: onPressed ?? () {
-        ddlog("onTap: $title");
-      },
+      onTap: onPressed ??
+          () {
+            ddlog("onTap: $title");
+          },
       child: Container(
         margin: EdgeInsets.only(right: 16, top: 12, bottom: 12),
         alignment: Alignment.center,
         // color: Colors.red,
-        child: Text(title,
+        child: Text(
+          title,
           textAlign: TextAlign.center,
         ),
       ),
@@ -77,36 +75,32 @@ class _NAppBarColorChangerDemoState extends State<NAppBarColorChangerDemo> {
         physics: ClampingScrollPhysics(),
         child: Container(
           decoration: BoxDecoration(
-            image: DecorationImage(
-              image: "bg_beach.jpg".toAssetImage(),
-              fit: BoxFit.fill,
-            )
-          ),
-          child: Column(
-            children: [
-              ...indexs.map((e) {
-                return Column(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.symmetric(vertical: 12),
-                      child: ListTile(
-                        leading: FlutterLogo(size: 48,),
-                        title: Text("row_$e"),
+              image: DecorationImage(
+            image: "bg_beach.jpg".toAssetImage(),
+            fit: BoxFit.fill,
+          )),
+          child: Column(children: [
+            ...indexs.map((e) {
+              return Column(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    child: ListTile(
+                      leading: FlutterLogo(
+                        size: 48,
                       ),
+                      title: Text("row_$e"),
                     ),
-                    Divider(indent: 48 + 12 * 2,),
-                  ],
-                );
-              }).toList(),
-            ]
-          ),
+                  ),
+                  Divider(
+                    indent: 48 + 12 * 2,
+                  ),
+                ],
+              );
+            }).toList(),
+          ]),
         ),
       ),
     );
   }
-
-
-
-  
 }
-

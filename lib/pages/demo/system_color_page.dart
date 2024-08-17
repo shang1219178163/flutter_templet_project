@@ -52,7 +52,6 @@ class _SystemColorPageState extends State<SystemColorPage> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: Text("flutter 系统颜色"),
@@ -61,7 +60,10 @@ class _SystemColorPageState extends State<SystemColorPage> {
             onPressed: () {
               ddlog("$widget");
             },
-            child: Text("Done", style: TextStyle(color: Colors.white),),
+            child: Text(
+              "Done",
+              style: TextStyle(color: Colors.white),
+            ),
           )
         ],
       ),
@@ -76,14 +78,16 @@ class _SystemColorPageState extends State<SystemColorPage> {
         tap: (obj) {
           debugPrint("obj:$obj");
         },
-        itemBuilder: (context, index, searchResults) => _buildCell(context, index, searchResults),
+        itemBuilder: (context, index, searchResults) =>
+            _buildCell(context, index, searchResults),
       ),
     );
   }
 
   _buildCell(BuildContext context, int index, List searchResults) {
     final str = searchResults[index];
-    var subtitle = kColorDic[str].toString()
+    var subtitle = kColorDic[str]
+        .toString()
         .replaceAll('MaterialColor(primary value:', '')
         .replaceAll('MaterialAccentColor(primary value:', '')
         .replaceAll('))', ')');
@@ -96,7 +100,7 @@ class _SystemColorPageState extends State<SystemColorPage> {
       ),
       title: Text("$str"),
       subtitle: Text(subtitle),
-      onTap: (){
+      onTap: () {
         ddlog(str);
         final value = "$str".split('.').last;
 
@@ -133,7 +137,7 @@ Map<String, dynamic> kColorDic = {
   "Colors.blue.shade600": Colors.blue.shade600,
   "Colors.blue.shade700": Colors.blue.shade700,
   "Colors.blue.shade800": Colors.blue.shade800,
-  "Colors.blue.shade900":  Colors.blue.shade900,
+  "Colors.blue.shade900": Colors.blue.shade900,
 
   "Colors.white": Colors.white,
   "Colors.white70": Colors.white70,

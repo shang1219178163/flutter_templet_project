@@ -35,7 +35,6 @@ class TicketUi extends StatelessWidget {
   }
 }
 
-
 class TicketPainter extends CustomPainter {
   TicketPainter({
     required this.bgColor,
@@ -50,25 +49,30 @@ class TicketPainter extends CustomPainter {
 
   /// 边框颜色
   final Color borderColor;
+
   /// 边框线条宽度
   final double borderStrokeWidth;
-  
+
   /// 背景颜色
   final Color bgColor;
+
   /// 边角圆半径
   final double cornerRadius;
+
   /// 内切圆半径
   final double cutoutRadius;
+
   /// 虚线高亮宽度
   final double dottedWidth;
+
   /// 虚线高亮间隔
   final double dottedSpace;
+
   /// 虚线线条宽度
   final double dottedStrokeWidth;
 
   /// 内切圆直径
   get _cutoutDiameter => cutoutRadius * 2;
-
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -150,5 +154,3 @@ class TicketPainter extends CustomPainter {
   @override
   bool shouldRebuildSemantics(TicketPainter oldDelegate) => false;
 }
-
-

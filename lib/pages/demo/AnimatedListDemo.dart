@@ -6,12 +6,10 @@
 //  Copyright © 1/18/23 shang. All rights reserved.
 //
 
-
 import 'package:flutter/material.dart';
 
 class AnimatedListDemo extends StatefulWidget {
-
-  const AnimatedListDemo({ Key? key, this.title}) : super(key: key);
+  const AnimatedListDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -20,7 +18,6 @@ class AnimatedListDemo extends StatefulWidget {
 }
 
 class _AnimatedListDemoState extends State<AnimatedListDemo> {
-
   var data = List.generate(9, (index) => "$index").toList();
   int counter = 5;
 
@@ -28,18 +25,22 @@ class _AnimatedListDemoState extends State<AnimatedListDemo> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title ?? "$widget"),
-          actions: ['done',].map((e) => TextButton(
-            onPressed: () => debugPrint(e.toString()),
-            child: Text(e,
-              style: TextStyle(color: Colors.white),
-            ),)
-          ).toList(),
-        ),
-        body: _buildAnimatedList(),
+      appBar: AppBar(
+        title: Text(widget.title ?? "$widget"),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  onPressed: () => debugPrint(e.toString()),
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ))
+            .toList(),
+      ),
+      body: _buildAnimatedList(),
     );
   }
 
@@ -62,7 +63,11 @@ class _AnimatedListDemoState extends State<AnimatedListDemo> {
         AnimatedList(
           key: globalKey,
           initialItemCount: data.length,
-          itemBuilder: (BuildContext context, int index, Animation<double> animation,) {
+          itemBuilder: (
+            BuildContext context,
+            int index,
+            Animation<double> animation,
+          ) {
             //添加列表项时会执行渐显动画
             return FadeTransition(
               opacity: animation,
@@ -113,7 +118,9 @@ class _AnimatedListDemoState extends State<AnimatedListDemo> {
   void onDelete(context, index) {
     // 待实现
     setState(() {
-      globalKey.currentState!.removeItem(index, (context, animation) {
+      globalKey.currentState!.removeItem(
+        index,
+        (context, animation) {
           // 删除过程执行的是反向动画，animation.value 会从1变为0
           var item = buildItem(context, index);
           debugPrint('删除 ${data[index]}');
@@ -137,9 +144,4 @@ class _AnimatedListDemoState extends State<AnimatedListDemo> {
       );
     });
   }
-
-
 }
-
-
-

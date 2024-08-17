@@ -6,12 +6,11 @@
 //  Copyright © 12/6/21 shang. All rights reserved.
 //
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/animated_group.dart';
 
 class AnimatedGroupDemo extends StatefulWidget {
-  const AnimatedGroupDemo({ Key? key, this.title}) : super(key: key);
+  const AnimatedGroupDemo({Key? key, this.title}) : super(key: key);
   final String? title;
 
   @override
@@ -19,31 +18,34 @@ class AnimatedGroupDemo extends StatefulWidget {
 }
 
 class _AnimatedGroupDemoState extends State<AnimatedGroupDemo> {
-
   final GlobalKey<AnimatedGroupState> _globalKey = GlobalKey();
 
   final _animations = <AnimatedGroupItemModel>[
     AnimatedGroupItemModel(
       data: "Tween<double> 动画",
-      tween: Tween<double>(begin: .0, end: 300.0,),
+      tween: Tween<double>(
+        begin: .0,
+        end: 300.0,
+      ),
       begin: 0.0,
       end: 0.6,
     ),
     AnimatedGroupItemModel(
-      data: "ColorTween 动画",
-      tween: ColorTween(begin: Colors.green, end: Colors.red,),
-      begin: 0.0,
-      end: 0.6
-    ),
+        data: "ColorTween 动画",
+        tween: ColorTween(
+          begin: Colors.green,
+          end: Colors.red,
+        ),
+        begin: 0.0,
+        end: 0.6),
     AnimatedGroupItemModel(
         data: "Tween<EdgeInsets> 动画",
         tween: Tween<EdgeInsets>(
-        begin: const EdgeInsets.only(left: .0),
-        end: const EdgeInsets.only(left: 100.0),
-      ),
-      begin: 0.6,
-      end: 1.0
-    ),
+          begin: const EdgeInsets.only(left: .0),
+          end: const EdgeInsets.only(left: 100.0),
+        ),
+        begin: 0.6,
+        end: 1.0),
   ];
 
   @override
@@ -56,8 +58,9 @@ class _AnimatedGroupDemoState extends State<AnimatedGroupDemo> {
         child: Column(
           children: [
             ElevatedButton(
-              onPressed: (){
-                _globalKey.currentState?.palyeAnimations(isRemovedOnCompletion: false);
+              onPressed: () {
+                _globalKey.currentState
+                    ?.palyeAnimations(isRemovedOnCompletion: false);
               },
               child: Text("start animation"),
             ),
@@ -65,16 +68,16 @@ class _AnimatedGroupDemoState extends State<AnimatedGroupDemo> {
               width: 300,
               height: 300,
               decoration: BoxDecoration(
-                color: Colors.black.withOpacity(0.1),
-                border: Border.all(
-                  color: Colors.black.withOpacity(0.5),
-                )
-              ),
+                  color: Colors.black.withOpacity(0.1),
+                  border: Border.all(
+                    color: Colors.black.withOpacity(0.5),
+                  )),
               child: AnimatedGroup(
                 key: _globalKey,
                 duration: Duration(milliseconds: 2000),
                 animations: _animations,
-                builder: (BuildContext context, Widget? child, List<Animation<dynamic>> animations) {
+                builder: (BuildContext context, Widget? child,
+                    List<Animation<dynamic>> animations) {
                   final aHeight = animations[0];
                   final aColor = animations[1];
                   final aPadding = animations[2];
@@ -94,11 +97,10 @@ class _AnimatedGroupDemoState extends State<AnimatedGroupDemo> {
                     ],
                   );
                 },
-                child: Text("AnimatedGroup 混合动画",
+                child: Text(
+                  "AnimatedGroup 混合动画",
                   style: TextStyle(
-                    color: Colors.white,
-                    backgroundColor: Colors.green
-                  ),
+                      color: Colors.white, backgroundColor: Colors.green),
                 ),
               ),
             )

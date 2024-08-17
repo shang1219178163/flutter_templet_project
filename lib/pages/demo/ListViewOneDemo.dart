@@ -9,10 +9,8 @@ import 'package:flutter_templet_project/pages/demo/ListViewDemo.dart';
 
 import 'package:tuple/tuple.dart';
 
-
 class ListViewOneDemo extends StatefulWidget {
-
-  const ListViewOneDemo({ Key? key, this.title}) : super(key: key);
+  const ListViewOneDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -31,7 +29,7 @@ class _ListViewOneDemoState extends State<ListViewOneDemo> {
   var items = [
     Tuple4(
       'https://pic.616pic.com/bg_w1180/00/04/08/G5Bftx5ZDI.jpg!/fw/1120',
-      '海尔｜无边界客厅'*6,
+      '海尔｜无边界客厅' * 6,
       '跳转url',
       false,
     ),
@@ -43,7 +41,7 @@ class _ListViewOneDemoState extends State<ListViewOneDemo> {
     ),
     Tuple4(
       'https://pic.616pic.com/bg_w1180/00/04/08/G5Bftx5ZDI.jpg!/fw/1120',
-      '海尔｜无边界客厅'*6,
+      '海尔｜无边界客厅' * 6,
       '跳转url',
       false,
     ),
@@ -80,18 +78,19 @@ class _ListViewOneDemoState extends State<ListViewOneDemo> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: [
           TextButton(
-            onPressed: () {
-              debugPrint(_scrollController.toString());
-              // _scrollController.jumpTo(200);
-            },
-              child: Text('done', style: TextStyle(color: Colors.white),)
-          ),
+              onPressed: () {
+                debugPrint(_scrollController.toString());
+                // _scrollController.jumpTo(200);
+              },
+              child: Text(
+                'done',
+                style: TextStyle(color: Colors.white),
+              )),
           IconButton(
             onPressed: () {
               setState(() {});
@@ -103,32 +102,31 @@ class _ListViewOneDemoState extends State<ListViewOneDemo> {
       body: Column(
         children: [
           _buildListView(
-            height: 100,
-            key: _globalKey,
-            controller: _scrollController,
+              height: 100,
+              key: _globalKey,
+              controller: _scrollController,
               scrollDirection: Axis.horizontal,
               onKeyCallback: (context, index, itemKey) {
-              _scrollController.jumToHorizontal(
-                key: itemKey,
-                offsetX: (MediaQuery.of(context).size.width / 2)
-              );
-            }
-          ),
+                _scrollController.jumToHorizontal(
+                    key: itemKey,
+                    offsetX: (MediaQuery.of(context).size.width / 2));
+              }),
           Container(
             height: 30,
-            padding: EdgeInsets.symmetric(horizontal:16),
+            padding: EdgeInsets.symmetric(horizontal: 16),
             child: MarqueeWidget(
               itemCount: itemCount,
-              itemBuilder: (BuildContext context, int index, BoxConstraints constraints) {
+              itemBuilder: (BuildContext context, int index,
+                  BoxConstraints constraints) {
                 // print("MarqueeWidget: $index ${index % 2 == 0}");
                 final isEdge = (index == 0 || index == itemCount - 1);
                 if (isEdge) {
                   return Container(
                     width: constraints.maxWidth,
                     decoration: BoxDecoration(
-                      // color: Colors.yellow,
-                      // border: Border.all(color: Colors.red),
-                    ),
+                        // color: Colors.yellow,
+                        // border: Border.all(color: Colors.red),
+                        ),
                     child: Text("$index"),
                   );
                 }
@@ -158,7 +156,6 @@ class _ListViewOneDemoState extends State<ListViewOneDemo> {
     );
   }
 
-
   _buildListView({
     required GlobalKey key,
     required ScrollController? controller,
@@ -172,43 +169,46 @@ class _ListViewOneDemoState extends State<ListViewOneDemo> {
       height: height,
       padding: EdgeInsets.all(8),
       child: ListView.separated(
-        key: key,
-        controller: controller,
-        scrollDirection: scrollDirection,
-        padding: EdgeInsets.all(0),
-        itemCount: items.length,
-        // cacheExtent: 10,
-        itemBuilder: itemBuilder ?? (context, index) {
-          final e = items[index];
+          key: key,
+          controller: controller,
+          scrollDirection: scrollDirection,
+          padding: EdgeInsets.all(0),
+          itemCount: items.length,
+          // cacheExtent: 10,
+          itemBuilder: itemBuilder ??
+              (context, index) {
+                final e = items[index];
 
-          final width = this.context.screenSize.width;
+                final width = this.context.screenSize.width;
 
-          GlobalKey itemKey = GlobalKey(debugLabel: e.item1);
-          return InkWell(
-            key: itemKey,
-            onTap: () {
-              onKeyCallback(context, index, itemKey);
-            },
-            child: Container(
-              color: Colors.green,
-              width: index != 1 ? width: null,
-              child: index == 1 ? Text(e.item2) : e.item1.startsWith('http') ? FadeInImage(
-                  placeholder: 'img_placeholder.png'.toAssetImage() ,
-                  image: NetworkImage(e.item1),
-                  fit: BoxFit.cover,
-                  height: 60,
-              ) : Container(
-                height: 60,
-                child: Text('Index:${e.item1}')
-              ),
-            ),
-          );
-        },
-        separatorBuilder: (context, index) => Divider(
-              indent: gap,
-              // color: Colors.blue,
-            )
-      ),
+                GlobalKey itemKey = GlobalKey(debugLabel: e.item1);
+                return InkWell(
+                  key: itemKey,
+                  onTap: () {
+                    onKeyCallback(context, index, itemKey);
+                  },
+                  child: Container(
+                    color: Colors.green,
+                    width: index != 1 ? width : null,
+                    child: index == 1
+                        ? Text(e.item2)
+                        : e.item1.startsWith('http')
+                            ? FadeInImage(
+                                placeholder:
+                                    'img_placeholder.png'.toAssetImage(),
+                                image: NetworkImage(e.item1),
+                                fit: BoxFit.cover,
+                                height: 60,
+                              )
+                            : Container(
+                                height: 60, child: Text('Index:${e.item1}')),
+                  ),
+                );
+              },
+          separatorBuilder: (context, index) => Divider(
+                indent: gap,
+                // color: Colors.blue,
+              )),
     );
   }
 
@@ -216,7 +216,7 @@ class _ListViewOneDemoState extends State<ListViewOneDemo> {
     if (_timer != null) {
       _timer?.cancel();
       _timer = null;
-      if (isContinue){
+      if (isContinue) {
         _initTimer();
       }
     }
@@ -225,24 +225,25 @@ class _ListViewOneDemoState extends State<ListViewOneDemo> {
   /// 初始化定时任务
   _initTimer() {
     _timer ??= Timer.periodic(Duration(milliseconds: 350), (t) {
-        final val = _scrollController.offset + 30;
-        _scrollController.animateTo(val, duration: Duration(milliseconds: 350), curve: Curves.linear);
-        if(_scrollController.position.outOfRange){
-          debugPrint("atEdge:到边界了");
-          _scrollController.jumpTo(0);
-        }
-      });
+      final val = _scrollController.offset + 30;
+      _scrollController.animateTo(val,
+          duration: Duration(milliseconds: 350), curve: Curves.linear);
+      if (_scrollController.position.outOfRange) {
+        debugPrint("atEdge:到边界了");
+        _scrollController.jumpTo(0);
+      }
+    });
   }
 }
 
 /// 跑马灯 Builder 类型
-typedef MarqueeWidgetBuilder = Widget Function(BuildContext context, int index, BoxConstraints constraints);
+typedef MarqueeWidgetBuilder = Widget Function(
+    BuildContext context, int index, BoxConstraints constraints);
 
 class MarqueeSimpleWidget extends StatelessWidget {
-
   MarqueeSimpleWidget({
-  	Key? key,
-  	this.title,
+    Key? key,
+    this.title,
     required this.itemCount,
     required this.itemBuilder,
     this.edgeBuilder,
@@ -255,8 +256,10 @@ class MarqueeSimpleWidget extends StatelessWidget {
 
   /// 内容 builder
   MarqueeWidgetBuilder itemBuilder;
+
   /// 边界 builder
   MarqueeWidgetBuilder? edgeBuilder;
+
   /// 间距 builder
   MarqueeWidgetBuilder? gapBuilder;
 
@@ -266,38 +269,44 @@ class MarqueeSimpleWidget extends StatelessWidget {
 
     return MarqueeWidget(
       itemCount: totalCount,
-      itemBuilder: (BuildContext context, int index, BoxConstraints constraints) {
+      itemBuilder:
+          (BuildContext context, int index, BoxConstraints constraints) {
         debugPrint("MarqueeWidget: $index ${index % 2 == 0}");
         final isEdge = (index == 0 || index == totalCount - 1);
         if (isEdge) {
-          return edgeBuilder != null ? edgeBuilder!(context, index, constraints) : Container(
-            width: constraints.maxWidth,
-            // width: 100,
-            decoration: BoxDecoration(
-              // color: Colors.yellow,
-              // border: Border.all(color: Colors.red),
-            ),
-            // child: Text("$index"),
-          );
+          return edgeBuilder != null
+              ? edgeBuilder!(context, index, constraints)
+              : Container(
+                  width: constraints.maxWidth,
+                  // width: 100,
+                  decoration: BoxDecoration(
+                      // color: Colors.yellow,
+                      // border: Border.all(color: Colors.red),
+                      ),
+                  // child: Text("$index"),
+                );
         }
 
         if (index % 2 == 0) {
-          return gapBuilder != null ? gapBuilder!(context, index, constraints) : Container(
-            width: 100,
-            decoration: BoxDecoration(
-              // color: Colors.blue,
-              // border: Border.all(color: Colors.red),
-            ),
-            // child: Text("$index"),
-          );
+          return gapBuilder != null
+              ? gapBuilder!(context, index, constraints)
+              : Container(
+                  width: 100,
+                  decoration: BoxDecoration(
+                      // color: Colors.blue,
+                      // border: Border.all(color: Colors.red),
+                      ),
+                  // child: Text("$index"),
+                );
         }
 
         // double indexNew = ((index - 1) / 2);
         var indexNew = (index - 1) ~/ 2;
         debugPrint("MarqueeWidget indexNew: $index $indexNew");
-        final e = Text("真实索引:${index}_item索引:${indexNew}_AAAAAAAAAAAAAAAAAAAAA");
+        final e =
+            Text("真实索引:${index}_item索引:${indexNew}_AAAAAAAAAAAAAAAAAAAAA");
         return itemBuilder(context, indexNew, constraints);
-        return  Container(
+        return Container(
           color: Colors.green,
           child: e,
         );
@@ -306,10 +315,8 @@ class MarqueeSimpleWidget extends StatelessWidget {
   }
 }
 
-
 /// 跑马灯
 class MarqueeWidget extends StatefulWidget {
-
   MarqueeWidget({
     Key? key,
     this.title,
@@ -364,7 +371,6 @@ class _MarqueeWidgetState extends State<MarqueeWidget> {
     );
   }
 
-
   _buildListView({
     required GlobalKey key,
     required ScrollController? controller,
@@ -373,26 +379,24 @@ class _MarqueeWidgetState extends State<MarqueeWidget> {
     IndexedWidgetBuilder? itemBuilder,
     double gap = 1,
   }) {
-    final child = LayoutBuilder(
-      builder: (context, constraints) {
-        return ListView.separated(
+    final child = LayoutBuilder(builder: (context, constraints) {
+      return ListView.separated(
           key: key,
           controller: controller,
           scrollDirection: scrollDirection,
           padding: EdgeInsets.all(0),
           itemCount: widget.itemCount,
           // cacheExtent: 10,
-          itemBuilder: itemBuilder ?? (context, index) {
-            // final isEdge = (index == 0 || index == widget.itemCount - 1);
-            return widget.itemBuilder(context, index, constraints);
-          },
+          itemBuilder: itemBuilder ??
+              (context, index) {
+                // final isEdge = (index == 0 || index == widget.itemCount - 1);
+                return widget.itemBuilder(context, index, constraints);
+              },
           separatorBuilder: (context, index) => Divider(
-            indent: gap,
-            // color: Colors.blue,
-          )
-        );
-      }
-    );
+                indent: gap,
+                // color: Colors.blue,
+              ));
+    });
 
     if (addToSliverBox) {
       return SliverToBoxAdapter(
@@ -406,7 +410,7 @@ class _MarqueeWidgetState extends State<MarqueeWidget> {
     if (_timer != null) {
       _timer?.cancel();
       _timer = null;
-      if (isContinue){
+      if (isContinue) {
         _initTimer();
       }
     }
@@ -415,13 +419,13 @@ class _MarqueeWidgetState extends State<MarqueeWidget> {
   /// 初始化定时任务
   _initTimer() {
     _timer ??= Timer.periodic(Duration(milliseconds: 350), (t) {
-        final val = _scrollController.offset + 30;
-        _scrollController.animateTo(val, duration: Duration(milliseconds: 350), curve: Curves.linear);
-        if(_scrollController.position.outOfRange){
-          debugPrint("atEdge:到边界了");
-          _scrollController.jumpTo(0);
-        }
-      });
+      final val = _scrollController.offset + 30;
+      _scrollController.animateTo(val,
+          duration: Duration(milliseconds: 350), curve: Curves.linear);
+      if (_scrollController.position.outOfRange) {
+        debugPrint("atEdge:到边界了");
+        _scrollController.jumpTo(0);
+      }
+    });
   }
 }
-

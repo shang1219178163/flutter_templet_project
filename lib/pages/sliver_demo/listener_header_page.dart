@@ -14,7 +14,6 @@ class ListenerHeaderPage extends StatefulWidget {
 }
 
 class _ListenerHeaderPageState extends State<ListenerHeaderPage> {
-
   int _count = 10;
 
   late final _controller = EasyRefreshController(
@@ -29,7 +28,6 @@ class _ListenerHeaderPageState extends State<ListenerHeaderPage> {
   @override
   void initState() {
     super.initState();
-
   }
 
   @override
@@ -51,9 +49,8 @@ class _ListenerHeaderPageState extends State<ListenerHeaderPage> {
                 centerTitle: false,
                 title: Text(
                   'Listener'.tr,
-                  style: TextStyle(
-                      color: themeData.textTheme.titleLarge?.color
-                  ),
+                  style:
+                      TextStyle(color: themeData.textTheme.titleLarge?.color),
                 ),
               ),
               actions: [
@@ -125,8 +122,7 @@ class _ListenerHeaderPageState extends State<ListenerHeaderPage> {
           value = 0;
         } else if (mode == IndicatorMode.processing) {
           value = null;
-        } else if (mode == IndicatorMode.drag ||
-            mode == IndicatorMode.armed) {
+        } else if (mode == IndicatorMode.drag || mode == IndicatorMode.armed) {
           value = math.min(offset / actualTriggerOffset, 1) * 0.75;
         } else if (mode == IndicatorMode.ready ||
             mode == IndicatorMode.processing) {
@@ -174,6 +170,3 @@ class _ListenerHeaderPageState extends State<ListenerHeaderPage> {
     );
   }
 }
-
-
-

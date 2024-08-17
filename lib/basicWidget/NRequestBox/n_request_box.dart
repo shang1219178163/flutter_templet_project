@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,7 +8,6 @@ import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/date_time_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
-
 
 // buildBody2() {
 //   return NRequestListBox(
@@ -78,12 +75,12 @@ import 'package:flutter_templet_project/util/color_util.dart';
 //   );
 // }
 
-typedef ToggleWidgetBuilder = Widget Function(bool isVisible, VoidCallback onToggle);
+typedef ToggleWidgetBuilder = Widget Function(
+    bool isVisible, VoidCallback onToggle);
 
 /// 列表请求组件
 /// 支持: 下拉刷新,上拉加载; 搜索框回调; dropbox
 class NRequestBox extends StatefulWidget {
-
   NRequestBox({
     Key? key,
     this.placeholder = "搜索",
@@ -98,18 +95,25 @@ class NRequestBox extends StatefulWidget {
 
   /// 占位
   final String? placeholder;
+
   /// 为空时,不显示搜索栏
   final ValueChanged<String>? onSearchChanged;
+
   /// 带翻转方法的构建方法
   final ToggleWidgetBuilder? btnBuilder;
+
   /// 为空时,不显示右边按钮
   final Widget? dropView;
+
   /// 重置按钮
   final bool Function()? dropViewCancel;
+
   /// 确定按钮
   final bool Function()? dropViewConfirm;
+
   /// 修饰属性
   final Decoration? bodyDecoration;
+
   /// 容器
   final Widget body;
 
@@ -118,7 +122,6 @@ class NRequestBox extends StatefulWidget {
 }
 
 class _NRequestBoxState extends State<NRequestBox> {
-
   /// 搜索
   late final _searchController = TextEditingController();
 
@@ -129,60 +132,63 @@ class _NRequestBoxState extends State<NRequestBox> {
 
   final _dropBoxController = ScrollController();
 
-
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: widget.bodyDecoration ?? BoxDecoration(
-        color: bgColor,
-        // border: Border.all(color: Colors.blue),
-        // borderRadius: BorderRadius.all(Radius.circular(0.w)),
-      ),
+      decoration: widget.bodyDecoration ??
+          BoxDecoration(
+            color: bgColor,
+            // border: Border.all(color: Colors.blue),
+            // borderRadius: BorderRadius.all(Radius.circular(0.w)),
+          ),
       child: Column(
         children: [
-          if(widget.onSearchChanged != null)buildSearchAndFilterBar(
-            controller: _searchController,
-            placeholder: _searchPlaceholder,
-            onChanged: widget.onSearchChanged!,
-            btnBulder: widget.btnBuilder,
-            onClick: widget.dropView == null ? null : (){
-              _showDropbox.value = !_showDropbox.value;
-            }
-          ),
+          if (widget.onSearchChanged != null)
+            buildSearchAndFilterBar(
+                controller: _searchController,
+                placeholder: _searchPlaceholder,
+                onChanged: widget.onSearchChanged!,
+                btnBulder: widget.btnBuilder,
+                onClick: widget.dropView == null
+                    ? null
+                    : () {
+                        _showDropbox.value = !_showDropbox.value;
+                      }),
           Expanded(
             child: buildStack(
               body: widget.body,
               showPositionedChild: _showDropbox,
               positionedChild: buildDropBoxNew(
                 controller: _dropBoxController,
-                onCancel: (){
+                onCancel: () {
                   final isCancel = widget.dropViewCancel?.call() == true;
                   if (isCancel) {
                     _showDropbox.value = false;
                   }
                 },
-                onConfirm: (){
+                onConfirm: () {
                   final isConfirm = widget.dropViewConfirm?.call() == true;
                   if (isConfirm) {
                     _showDropbox.value = false;
                   }
                 },
-                child: widget.dropView ?? Container(
-                  // color: Colors.white,
-                  padding: EdgeInsets.all(16),
-                  child: Column(
-                    children: [
-                      Container(
-                        height: 400,
-                        color: Colors.green,
+                child: widget.dropView ??
+                    Container(
+                      // color: Colors.white,
+                      padding: EdgeInsets.all(16),
+                      child: Column(
+                        children: [
+                          Container(
+                            height: 400,
+                            color: Colors.green,
+                          ),
+                          Container(
+                            height: 400,
+                            color: Colors.yellowAccent,
+                          ),
+                        ],
                       ),
-                      Container(
-                        height: 400,
-                        color: Colors.yellowAccent,
-                      ),
-                    ],
-                  ),
-                ),
+                    ),
               ),
             ),
           ),
@@ -200,12 +206,8 @@ class _NRequestBoxState extends State<NRequestBox> {
     VoidCallback? onClick,
   }) {
     return Container(
-      padding: EdgeInsets.only(
-        left: 16.w,
-        right: 16.w,
-        top: 12.h,
-        bottom: 12.h
-      ),
+      padding:
+          EdgeInsets.only(left: 16.w, right: 16.w, top: 12.h, bottom: 12.h),
       decoration: BoxDecoration(
         color: Colors.white,
       ),
@@ -221,26 +223,28 @@ class _NRequestBoxState extends State<NRequestBox> {
               ),
             ),
           ),
-          if(onClick != null) InkWell(
-            onTap: onClick,
-            child: btnBulder?.call(_showDropbox.value, onClick) ?? TextButton(
-              style: TextButton.styleFrom(
-                padding: EdgeInsets.zero,
-                // padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-              ),
-              onPressed: onClick,
-              child: NPair(
-                child: NText("筛选", fontSize: 16.sp),
-                icon: Image(
-                  image: "icon_patient_filter.png".toAssetImage(),
-                  width: 18.w,
-                  height: 18.h,
-                ),
-              ),
-              // direction: Axis.vertical,
-              // isReverse: true,
+          if (onClick != null)
+            InkWell(
+              onTap: onClick,
+              child: btnBulder?.call(_showDropbox.value, onClick) ??
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      padding: EdgeInsets.zero,
+                      // padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                    ),
+                    onPressed: onClick,
+                    child: NPair(
+                      child: NText("筛选", fontSize: 16.sp),
+                      icon: Image(
+                        image: "icon_patient_filter.png".toAssetImage(),
+                        width: 18.w,
+                        height: 18.h,
+                      ),
+                    ),
+                    // direction: Axis.vertical,
+                    // isReverse: true,
+                  ),
             ),
-          ),
         ],
       ),
     );
@@ -257,21 +261,18 @@ class _NRequestBoxState extends State<NRequestBox> {
       children: [
         body,
         Positioned(
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          child: ValueListenableBuilder<bool>(
-            valueListenable: showPositionedChild,
-            builder: (context,  value, child){
-
-              if (!value) {
-                return const SizedBox();
-              }
-              return positionedChild;
-            }
-          )
-        ),
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: ValueListenableBuilder<bool>(
+                valueListenable: showPositionedChild,
+                builder: (context, value, child) {
+                  if (!value) {
+                    return const SizedBox();
+                  }
+                  return positionedChild;
+                })),
       ],
     );
   }
@@ -280,7 +281,7 @@ class _NRequestBoxState extends State<NRequestBox> {
     required ScrollController? controller,
     required Widget? child,
     bool hasShadow = false,
-    double bottom = kBottomNavigationBarHeight*4,
+    double bottom = kBottomNavigationBarHeight * 4,
     double radius = 30,
     VoidCallback? onCancel,
     VoidCallback? onConfirm,
@@ -293,20 +294,20 @@ class _NRequestBoxState extends State<NRequestBox> {
       child: Container(
         width: double.maxFinite,
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(radius.r),
-            bottomRight: Radius.circular(radius.r),
-          ),
-          boxShadow: [
-            if(hasShadow)BoxShadow(
-              offset: Offset(0, 8.w),
-              blurRadius: 8.w,
-              // color: const Color(0xff999999),
-              color: Colors.red,
+            color: Colors.white,
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(radius.r),
+              bottomRight: Radius.circular(radius.r),
             ),
-          ]
-        ),
+            boxShadow: [
+              if (hasShadow)
+                BoxShadow(
+                  offset: Offset(0, 8.w),
+                  blurRadius: 8.w,
+                  // color: const Color(0xff999999),
+                  color: Colors.red,
+                ),
+            ]),
         child: Column(
           children: [
             Divider(
@@ -338,7 +339,7 @@ class _NRequestBoxState extends State<NRequestBox> {
     required ScrollController? controller,
     required Widget? child,
     bool hasShadow = false,
-    double bottom = kBottomNavigationBarHeight*4,
+    double bottom = kBottomNavigationBarHeight * 4,
     double radius = 30,
     VoidCallback? onCancel,
     VoidCallback? onConfirm,
@@ -351,20 +352,20 @@ class _NRequestBoxState extends State<NRequestBox> {
         child: Container(
           width: double.maxFinite,
           decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(radius.r),
-              bottomRight: Radius.circular(radius.r),
-            ),
-            boxShadow: [
-              if(hasShadow)BoxShadow(
-                offset: Offset(0, 8.w),
-                blurRadius: 8.w,
-                // color: const Color(0xff999999),
-                color: Colors.red,
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(radius.r),
+                bottomRight: Radius.circular(radius.r),
               ),
-            ]
-          ),
+              boxShadow: [
+                if (hasShadow)
+                  BoxShadow(
+                    offset: Offset(0, 8.w),
+                    blurRadius: 8.w,
+                    // color: const Color(0xff999999),
+                    color: Colors.red,
+                  ),
+              ]),
           child: Column(
             children: [
               Divider(
@@ -392,6 +393,4 @@ class _NRequestBoxState extends State<NRequestBox> {
       ),
     );
   }
-
 }
-

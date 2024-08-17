@@ -9,14 +9,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 
-
 class MouseRegionDemo extends StatefulWidget {
-
   String? title;
 
-  MouseRegionDemo({ Key? key, this.title}) : super(key: key);
+  MouseRegionDemo({Key? key, this.title}) : super(key: key);
 
-  
   @override
   _MouseRegionDemoState createState() => _MouseRegionDemoState();
 }
@@ -46,17 +43,15 @@ class _MouseRegionDemoState extends State<MouseRegionDemo> {
     });
   }
 
-
   bool _isVisible = false;
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title ?? "$widget"),
-          actions: [
-            MouseRegion(
+      appBar: AppBar(
+        title: Text(widget.title ?? "$widget"),
+        actions: [
+          MouseRegion(
               onEnter: (PointerEvent details) {
                 setState(() {
                   setState(() => ddlog(details));
@@ -77,41 +72,47 @@ class _MouseRegionDemoState extends State<MouseRegionDemo> {
                 margin: EdgeInsets.only(right: 15),
                 // color: Colors.green,
                 child: TextButton(
-                  onPressed: (){
+                  onPressed: () {
                     setState(() => ddlog("鼠标悬浮菜单"));
                     _isVisible = !_isVisible;
                   },
                   child: Center(
-                      child: Text("鼠标悬浮菜单", style: TextStyle(fontSize: 15, color: Colors.white),)
-                  ),
+                      child: Text(
+                    "鼠标悬浮菜单",
+                    style: TextStyle(fontSize: 15, color: Colors.white),
+                  )),
                 ),
               ))
-          ],
-        ),
-        // body: buildBody(),
-        body: Stack(
-          children: [
-            // buildBody1(),
-            Container(
+        ],
+      ),
+      // body: buildBody(),
+      body: Stack(
+        children: [
+          // buildBody1(),
+          Container(
               // color: Colors.lightBlueAccent,
-            ),
-            if (_isVisible) Positioned(
+              ),
+          if (_isVisible)
+            Positioned(
                 right: 15,
                 child: Container(
                   width: 120,
                   height: 150,
                   color: Colors.red,
                   child: ListView(
-                    children: List.generate(3, (index) => "菜单_$index").map((e) => ListTile(title: Text(e), onTap: (){
-                      setState(() => ddlog("鼠标悬浮菜单"));
-                      _isVisible = !_isVisible;
-                    },)).toList(),
+                    children: List.generate(3, (index) => "菜单_$index")
+                        .map((e) => ListTile(
+                              title: Text(e),
+                              onTap: () {
+                                setState(() => ddlog("鼠标悬浮菜单"));
+                                _isVisible = !_isVisible;
+                              },
+                            ))
+                        .toList(),
                   ),
-                )
-            )
-          ],
-        ),
-
+                ))
+        ],
+      ),
     );
   }
 
@@ -127,10 +128,12 @@ class _MouseRegionDemoState extends State<MouseRegionDemo> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text('You have entered or exited this box this many times:'),
-              Text('$_enterCounter Entries\n$_exitCounter Exits',
+              Text(
+                '$_enterCounter Entries\n$_exitCounter Exits',
                 style: Theme.of(context).textTheme.headline4,
               ),
-              Text('The cursor is here: (${x.toStringAsFixed(2)}, ${y.toStringAsFixed(2)})',
+              Text(
+                'The cursor is here: (${x.toStringAsFixed(2)}, ${y.toStringAsFixed(2)})',
               ),
             ],
           ),
@@ -152,10 +155,12 @@ class _MouseRegionDemoState extends State<MouseRegionDemo> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text('You have entered or exited this box this many times:'),
-              Text('$_enterCounter Entries\n$_exitCounter Exits',
+              Text(
+                '$_enterCounter Entries\n$_exitCounter Exits',
                 style: Theme.of(context).textTheme.headline4,
               ),
-              Text('The cursor is here: (${x.toStringAsFixed(2)}, ${y.toStringAsFixed(2)})',
+              Text(
+                'The cursor is here: (${x.toStringAsFixed(2)}, ${y.toStringAsFixed(2)})',
               ),
             ],
           ),

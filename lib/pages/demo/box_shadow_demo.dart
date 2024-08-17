@@ -6,13 +6,10 @@
 //  Copyright © 1/13/23 shang. All rights reserved.
 //
 
-
 import 'package:flutter/material.dart';
 
-
 class BoxShadowDemo extends StatefulWidget {
-
-  const BoxShadowDemo({ Key? key, this.title}) : super(key: key);
+  const BoxShadowDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -21,7 +18,6 @@ class BoxShadowDemo extends StatefulWidget {
 }
 
 class _BoxShadowDemoState extends State<BoxShadowDemo> {
-
   final tips = """
   /** 阴影效果
       const BoxShadow({
@@ -38,57 +34,54 @@ class _BoxShadowDemoState extends State<BoxShadowDemo> {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
 
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title ?? "$widget"),
-          actions: ['done',].map((e) => TextButton(
-            onPressed: () => debugPrint(e.toString()),
-            child: Text(e,
-              style: TextStyle(color: Colors.white),
-            ),)
-          ).toList(),
-        ),
+      appBar: AppBar(
+        title: Text(widget.title ?? "$widget"),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  onPressed: () => debugPrint(e.toString()),
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ))
+            .toList(),
+      ),
       body: ListView(
         children: <Widget>[
           Text(tips),
           _buildBox(
             text: "spreadRadius: 5.0",
-            decoration: BoxDecoration(
-                color: Color(0xffffffff),
-                boxShadow: [
-                  BoxShadow(
-                    color: Color(0xffff0000),
-                    spreadRadius: 5.0,
-                  ),
-                ]
-            ),
+            decoration: BoxDecoration(color: Color(0xffffffff), boxShadow: [
+              BoxShadow(
+                color: Color(0xffff0000),
+                spreadRadius: 5.0,
+              ),
+            ]),
           ),
           _buildBox(
             text: "blurRadius: 5.0",
-            decoration: BoxDecoration(
-              color: Color(0xffffffff),
-              boxShadow: [
-                BoxShadow(
-                  color: Color(0xffff0000),
-                  blurRadius: 5.0,
-                ),
-              ]
-            ),
+            decoration: BoxDecoration(color: Color(0xffffffff), boxShadow: [
+              BoxShadow(
+                color: Color(0xffff0000),
+                blurRadius: 5.0,
+              ),
+            ]),
           ),
           _buildBox(
             text: "spreadRadius: 5.0, blurRadius: 5.0",
-            decoration: BoxDecoration(
-                color: Color(0xffffffff),
-                boxShadow: [
-                  BoxShadow(
-                    color: Color(0xffff0000),
-                    spreadRadius: 5.0,
-                    blurRadius: 5.0,
-                  ),
-                ]
-            ),
+            decoration: BoxDecoration(color: Color(0xffffffff), boxShadow: [
+              BoxShadow(
+                color: Color(0xffff0000),
+                spreadRadius: 5.0,
+                blurRadius: 5.0,
+              ),
+            ]),
           ),
           _buildBox(
-            text: "spreadRadius: 5.0, blurRadius: 5.0, offset: Offset(3.0, 3.0)",
+            text:
+                "spreadRadius: 5.0, blurRadius: 5.0, offset: Offset(3.0, 3.0)",
             decoration: BoxDecoration(
               color: Color(0xffffffff),
               boxShadow: [
@@ -101,7 +94,6 @@ class _BoxShadowDemoState extends State<BoxShadowDemo> {
               ],
             ),
           ),
-
           _buildBox(
             text: "spreadRadius: 0, blurRadius: 0, offset: Offset(0, 0)",
             decoration: BoxDecoration(
@@ -134,5 +126,4 @@ class _BoxShadowDemoState extends State<BoxShadowDemo> {
       child: Text(text),
     );
   }
-
 }

@@ -8,13 +8,12 @@ import 'package:tuple/tuple.dart';
 class CupertinoTabScaffoldDemo extends StatefulWidget {
   const CupertinoTabScaffoldDemo({Key? key}) : super(key: key);
 
-
   @override
-  _CupertinoTabScaffoldDemoState createState() => _CupertinoTabScaffoldDemoState();
+  _CupertinoTabScaffoldDemoState createState() =>
+      _CupertinoTabScaffoldDemoState();
 }
 
 class _CupertinoTabScaffoldDemoState extends State {
-
   final List<Tuple2<BottomNavigationBarItem, Widget>> items = [
     Tuple2(
       BottomNavigationBarItem(
@@ -42,15 +41,16 @@ class _CupertinoTabScaffoldDemoState extends State {
   @override
   Widget build(BuildContext context) {
 //最外层导航选项卡
-    return CupertinoTabScaffold(//底部选项卡
+    return CupertinoTabScaffold(
+      //底部选项卡
       tabBar: CupertinoTabBar(
         activeColor: Color(0xffff0000),
         backgroundColor: CupertinoColors.lightBackgroundGray, //选项卡背景色 items: [
-          items: items.map((e) => e.item1).toList(),
-    ),
-    tabBuilder: (context, index) {//选项卡绑定的视图
-      return CupertinoTabView(
-        builder: (context) {
+        items: items.map((e) => e.item1).toList(),
+      ),
+      tabBuilder: (context, index) {
+        //选项卡绑定的视图
+        return CupertinoTabView(builder: (context) {
           return items.map((e) => e.item2).toList()[index];
         });
       },
@@ -58,23 +58,24 @@ class _CupertinoTabScaffoldDemoState extends State {
   }
 }
 
-
 class OnePage extends StatelessWidget {
   const OnePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-  return CupertinoPageScaffold(
-    backgroundColor: Colors.red,
-    navigationBar: CupertinoNavigationBar(
-      middle: Text("主⻚"), ),
-    child: Center(
-      child: Text(
-        'This is 主⻚ layout',
-        style: Theme.of(context).textTheme.button,
+    return CupertinoPageScaffold(
+      backgroundColor: Colors.red,
+      navigationBar: CupertinoNavigationBar(
+        middle: Text("主⻚"),
       ),
-    ), );
-}
+      child: Center(
+        child: Text(
+          'This is 主⻚ layout',
+          style: Theme.of(context).textTheme.button,
+        ),
+      ),
+    );
+  }
 }
 
 class TwoPage extends StatelessWidget {
@@ -82,40 +83,41 @@ class TwoPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-      return CupertinoPageScaffold(
-        backgroundColor: Colors.lightBlue,
-        navigationBar: CupertinoNavigationBar(
-          leading: Icon(CupertinoIcons.back),
-          trailing: Icon(CupertinoIcons.add),
-          middle: Text("聊天面板"),
-
+    return CupertinoPageScaffold(
+      backgroundColor: Colors.lightBlue,
+      navigationBar: CupertinoNavigationBar(
+        leading: Icon(CupertinoIcons.back),
+        trailing: Icon(CupertinoIcons.add),
+        middle: Text("聊天面板"),
+      ),
+      child: Center(
+        child: Text(
+          'This is 聊天面板 layout',
+          style: Theme.of(context).textTheme.button,
         ),
-        child: Center(
-          child: Text(
-            'This is 聊天面板 layout',
-            style: Theme.of(context).textTheme.button,
-          ), ),
-      ); }
+      ),
+    );
+  }
 }
-
 
 class ThreePage extends StatelessWidget {
   const ThreePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-      return CupertinoPageScaffold(
-        backgroundColor: Colors.lightGreen,
-        navigationBar: CupertinoNavigationBar(
-          leading: Icon(CupertinoIcons.back),
-          trailing: Icon(CupertinoIcons.add),
-          middle: Text("聊天面板"),
-
+    return CupertinoPageScaffold(
+      backgroundColor: Colors.lightGreen,
+      navigationBar: CupertinoNavigationBar(
+        leading: Icon(CupertinoIcons.back),
+        trailing: Icon(CupertinoIcons.add),
+        middle: Text("聊天面板"),
+      ),
+      child: Center(
+        child: Text(
+          'This is 聊天面板 layout',
+          style: Theme.of(context).textTheme.button,
         ),
-        child: Center(
-          child: Text(
-            'This is 聊天面板 layout',
-            style: Theme.of(context).textTheme.button,
-          ), ),
-      ); }
+      ),
+    );
+  }
 }

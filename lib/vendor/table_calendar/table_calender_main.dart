@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 
 import 'package:flutter_templet_project/vendor/table_calendar/basics_example.dart';
@@ -9,11 +7,7 @@ import 'package:flutter_templet_project/vendor/table_calendar/multi_example.dart
 import 'package:flutter_templet_project/vendor/table_calendar/range_example.dart';
 
 class TableCalenderMain extends StatefulWidget {
-
-  TableCalenderMain({
-    Key? key,
-    this.title
-  }) : super(key: key);
+  TableCalenderMain({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -22,8 +16,6 @@ class TableCalenderMain extends StatefulWidget {
 }
 
 class _TableCalenderMainState extends State<TableCalenderMain> {
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

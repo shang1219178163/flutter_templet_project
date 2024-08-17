@@ -6,13 +6,10 @@
 //  Copyright © 2024/4/12 shang. All rights reserved.
 //
 
-
-
 import 'package:dio/dio.dart';
 
 /// 异常处理拦截器
 class ExceptionInterceptor extends QueuedInterceptor {
-
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
     switch (err.type) {
@@ -47,8 +44,6 @@ class ExceptionInterceptor extends QueuedInterceptor {
     return handler.next(err);
   }
 }
-
-
 
 class BadRequestException extends DioException {
   BadRequestException(RequestOptions r) : super(requestOptions: r);
@@ -112,7 +107,6 @@ class TimeoutException extends DioException {
     return 'The connection has timed out, please try again.';
   }
 }
-
 
 class BadCertificateException extends DioException {
   BadCertificateException(RequestOptions r) : super(requestOptions: r);

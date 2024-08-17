@@ -8,22 +8,23 @@
 
 import 'package:flutter/material.dart';
 
-
 class NSliverPersistentHeaderDelegate extends SliverPersistentHeaderDelegate {
   NSliverPersistentHeaderDelegate({
     this.min = 48,
     this.max = 80,
     required this.builder,
   });
+
   /// 默认 48 是 TabBar 的默认高度
-   double min;
-   double max;
+  double min;
+  double max;
 
-   Widget Function(BuildContext context, double offset, bool overlapsContent) builder;
+  Widget Function(BuildContext context, double offset, bool overlapsContent)
+      builder;
 
-  
   @override
-  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
     return builder(context, shrinkOffset, overlapsContent);
   }
 
@@ -37,15 +38,14 @@ class NSliverPersistentHeaderDelegate extends SliverPersistentHeaderDelegate {
 
   @override
   bool shouldRebuild(covariant NSliverPersistentHeaderDelegate oldDelegate) {
-    return min != oldDelegate.min
-        || max != oldDelegate.max
-        || builder != oldDelegate.builder;
+    return min != oldDelegate.min ||
+        max != oldDelegate.max ||
+        builder != oldDelegate.builder;
   }
 }
 
 /// SliverPersistentHeader
 class NSliverPersistentHeader extends StatelessWidget {
-
   const NSliverPersistentHeader({
     super.key,
     this.pinned = false,
@@ -63,8 +63,8 @@ class NSliverPersistentHeader extends StatelessWidget {
 
   final double max;
 
-  final Widget Function(BuildContext context, double offset, bool overlapsContent) builder;
-
+  final Widget Function(
+      BuildContext context, double offset, bool overlapsContent) builder;
 
   @override
   Widget build(BuildContext context) {
@@ -87,15 +87,17 @@ class NSliverPersistentHeaderBuilder extends SliverPersistentHeader {
     double min = 48,
     bool pinned = false,
     bool floating = false,
-    required Widget Function(BuildContext context, double offset, bool overlapsContent) builder,
+    required Widget Function(
+            BuildContext context, double offset, bool overlapsContent)
+        builder,
   }) : super(
-    key: key,
-    pinned: pinned,
-    floating: floating,
-    delegate: NSliverPersistentHeaderDelegate(
-      max: max,
-      min: min,
-      builder: builder,
-    ),
-  );
+          key: key,
+          pinned: pinned,
+          floating: floating,
+          delegate: NSliverPersistentHeaderDelegate(
+            max: max,
+            min: min,
+            builder: builder,
+          ),
+        );
 }

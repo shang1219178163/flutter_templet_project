@@ -6,23 +6,20 @@
 //  Copyright © 3/13/23 shang. All rights reserved.
 //
 
-
 import 'package:flutter/material.dart';
 
 class DateRangePickerDialogDemo extends StatefulWidget {
-
-  const DateRangePickerDialogDemo({
-    Key? key, 
-    this.title
-  }) : super(key: key);
+  const DateRangePickerDialogDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
   @override
-  _DateRangePickerDialogDemoState createState() => _DateRangePickerDialogDemoState();
+  _DateRangePickerDialogDemoState createState() =>
+      _DateRangePickerDialogDemoState();
 }
 
-class _DateRangePickerDialogDemoState extends State<DateRangePickerDialogDemo> with SingleTickerProviderStateMixin {
+class _DateRangePickerDialogDemoState extends State<DateRangePickerDialogDemo>
+    with SingleTickerProviderStateMixin {
   TabController? _tabController;
 
   final models = DatePickerEntryMode.values;
@@ -42,17 +39,24 @@ class _DateRangePickerDialogDemoState extends State<DateRangePickerDialogDemo> w
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          onPressed: () => debugPrint("done"),
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-        )).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  onPressed: () => debugPrint("done"),
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ))
+            .toList(),
         bottom: TabBar(
           isScrollable: true,
           controller: _tabController,
           indicatorSize: TabBarIndicatorSize.label,
-          tabs: models.map((e) => Tab(text: e.toString().split(".").last)).toList(),
+          tabs: models
+              .map((e) => Tab(text: e.toString().split(".").last))
+              .toList(),
         ),
       ),
       body: _buildBody(),
@@ -81,7 +85,7 @@ class _DateRangePickerDialogDemoState extends State<DateRangePickerDialogDemo> w
       ),
     );
   }
-  
+
   onPressed() {
     _showDateRange();
   }
@@ -102,7 +106,5 @@ class _DateRangePickerDialogDemoState extends State<DateRangePickerDialogDemo> w
       currentDate: DateTime(2022, 10, 8),
     );
     debugPrint(range.toString());
-
   }
-
 }

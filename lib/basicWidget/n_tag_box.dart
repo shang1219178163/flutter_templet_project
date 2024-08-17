@@ -6,15 +6,13 @@
 //  Copyright © 2023/11/18 shang. All rights reserved.
 //
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 
 /// 标签编辑
 class NTagBox<E> extends StatelessWidget {
-
   const NTagBox({
-  	Key? key,
+    Key? key,
     this.keywords = "",
     required this.items,
     required this.titleCb,
@@ -62,35 +60,31 @@ class NTagBox<E> extends StatelessWidget {
         color: Colors.transparent,
         border: Border.all(color: Colors.blue),
       ),
-      child: Wrap(
-          spacing: 4,
-          runSpacing: 4,
-          children: [
-            ...items.map((e) {
-
-              return buildTagItem<E>(
-                e: e,
-                titleCb: titleCb,
-                onSelected: (_) {},
-                onDelete: (e) {
-                  onDelete.call(e);
-                  onChanged?.call(items);
-                },
-                primaryColor: tagColor,
-              );
-            }).toList(),
-            if(items.length < 9)buildTagItem<String>(
-              e: "+添加${keywords}",
-              titleCb: (e) => "+添加${keywords}",
-              onSelected: (selected) {
-                // debugPrint('onSelected: $selected');
-                onAdd.call();
-                onChanged?.call(items);
-              },
-              primaryColor: tagAddColor,
-            ),
-          ]
-      ),
+      child: Wrap(spacing: 4, runSpacing: 4, children: [
+        ...items.map((e) {
+          return buildTagItem<E>(
+            e: e,
+            titleCb: titleCb,
+            onSelected: (_) {},
+            onDelete: (e) {
+              onDelete.call(e);
+              onChanged?.call(items);
+            },
+            primaryColor: tagColor,
+          );
+        }).toList(),
+        if (items.length < 9)
+          buildTagItem<String>(
+            e: "+添加${keywords}",
+            titleCb: (e) => "+添加${keywords}",
+            onSelected: (selected) {
+              // debugPrint('onSelected: $selected');
+              onAdd.call();
+              onChanged?.call(items);
+            },
+            primaryColor: tagAddColor,
+          ),
+      ]),
     );
   }
 
@@ -103,14 +97,14 @@ class NTagBox<E> extends StatelessWidget {
     Radius radius = const Radius.circular(8),
     Color primaryColor = Colors.blue,
   }) {
-
     final child = Container(
       padding: const EdgeInsets.only(top: 4, right: 4),
       child: ChoiceChip(
         pressElevation: 0,
         shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(radius,)
-        ),
+            borderRadius: BorderRadius.all(
+          radius,
+        )),
         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
         labelStyle: TextStyle(
           color: Colors.white,
@@ -143,10 +137,8 @@ class NTagBox<E> extends StatelessWidget {
             child: InkWell(
               onTap: () => onDelete.call(e),
               child: Container(
-                decoration: ShapeDecoration(
-                    color: Colors.white,
-                    shape: CircleBorder()
-                ),
+                decoration:
+                    ShapeDecoration(color: Colors.white, shape: CircleBorder()),
                 child: Image(
                   image: "icon_delete.png".toAssetImage(),
                   width: 16,

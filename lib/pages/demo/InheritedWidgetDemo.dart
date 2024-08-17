@@ -6,8 +6,6 @@
 //  Copyright © 12/15/22 shang. All rights reserved.
 //
 
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -32,7 +30,6 @@ class ShareDataWidget extends InheritedWidget {
   }
 }
 
-
 class TestWidget extends StatefulWidget {
   const TestWidget({Key? key}) : super(key: key);
 
@@ -56,7 +53,6 @@ class _TestWidgetState extends State<TestWidget> {
   }
 }
 
-
 class InheritedWidgetDemo extends StatefulWidget {
   const InheritedWidgetDemo({Key? key}) : super(key: key);
 
@@ -74,14 +70,15 @@ class _InheritedWidgetDemoState extends State<InheritedWidgetDemo> {
         title: Text("$widget"),
       ),
       body: Center(
-        child: ShareDataWidget( //使用ShareDataWidget
+        child: ShareDataWidget(
+          //使用ShareDataWidget
           data: count,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.only(bottom: 20.0),
-                child: TestWidget(),//子widget中依赖ShareDataWidget
+                child: TestWidget(), //子widget中依赖ShareDataWidget
               ),
               ElevatedButton(
                 //每点击一次，将count自增，然后重新build,ShareDataWidget的data将被更新

@@ -1,6 +1,3 @@
-
-
-
 import 'package:flutter/foundation.dart';
 
 class NPerson {
@@ -39,11 +36,10 @@ class NPerson {
   @override
   int get hashCode => name.hashCode ^ age.hashCode;
 
-
   int get hashCode1 => Object.hash(
-    name.hashCode,
-    age.hashCode,
-  );
+        name.hashCode,
+        age.hashCode,
+      );
 
   @override
   String toString() {

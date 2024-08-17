@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_footer_button_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
@@ -9,11 +7,7 @@ import 'package:get/get.dart';
 
 /// 组件或者中间页
 class ComponentMiddlePage extends StatefulWidget {
-
-  ComponentMiddlePage({
-    super.key,
-    this.title
-  });
+  ComponentMiddlePage({super.key, this.title});
 
   final String? title;
 
@@ -22,12 +16,11 @@ class ComponentMiddlePage extends StatefulWidget {
 }
 
 class _ComponentMiddlePageState extends State<ComponentMiddlePage> {
-
   /// 传参
   final Map<String, dynamic> arguments = Get.arguments ?? <String, dynamic>{};
+
   /// 可选按钮事件
   late final onSkip = arguments["onSkip"] as VoidCallback?;
-
 
   final _scrollController = ScrollController();
 
@@ -36,12 +29,17 @@ class _ComponentMiddlePageState extends State<ComponentMiddlePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () => debugPrint(e),)
-        ).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () => debugPrint(e),
+                ))
+            .toList(),
       ),
       body: Column(
         children: [
@@ -67,7 +65,6 @@ class _ComponentMiddlePageState extends State<ComponentMiddlePage> {
         controller: _scrollController,
         child: Column(
           children: items.map((e) {
-
             return Column(
               children: [
                 ListTile(
@@ -99,19 +96,20 @@ class _ComponentMiddlePageState extends State<ComponentMiddlePage> {
       // isReverse: true,
       onConfirm: onConfirm,
       header: arguments["header"] ?? const SizedBox(),
-      footer: onSkip == null ? const SizedBox() : InkWell(
-        onTap: onSkip,
-        child: Padding(
-          padding: EdgeInsets.only(top: 12),
-          child: NText(
-            "先跳过，稍后再提交",
-            color: context.primaryColor,
-            fontSize: 16,
-            fontWeight: FontWeight.w400,
-          ),
-        ),
-      ),
+      footer: onSkip == null
+          ? const SizedBox()
+          : InkWell(
+              onTap: onSkip,
+              child: Padding(
+                padding: EdgeInsets.only(top: 12),
+                child: NText(
+                  "先跳过，稍后再提交",
+                  color: context.primaryColor,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            ),
     );
   }
-
 }

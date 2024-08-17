@@ -2,17 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/PromptBuilder.dart';
 
 class PromptBuilderDemo extends StatefulWidget {
-
   final String? title;
 
-  const PromptBuilderDemo({ Key? key, this.title}) : super(key: key);
+  const PromptBuilderDemo({Key? key, this.title}) : super(key: key);
 
   @override
   _PromptBuilderDemoState createState() => _PromptBuilderDemoState();
 }
 
-class _PromptBuilderDemoState extends State<PromptBuilderDemo> with WidgetsBindingObserver {
-
+class _PromptBuilderDemoState extends State<PromptBuilderDemo>
+    with WidgetsBindingObserver {
   int _counter = 0;
   GlobalKey centerWidgetKey = GlobalKey();
   GlobalKey bottomWidgetKey = GlobalKey();

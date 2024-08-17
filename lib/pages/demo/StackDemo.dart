@@ -2,33 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 
 class StackDemo extends StatefulWidget {
-
   final String? title;
 
-  const StackDemo({ Key? key, this.title}) : super(key: key);
-
+  const StackDemo({Key? key, this.title}) : super(key: key);
 
   @override
   _StackDemoState createState() => _StackDemoState();
 }
 
 class _StackDemoState extends State<StackDemo> {
-
-
   @override
   Widget build(BuildContext context) {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
 
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title ?? "$widget"),
-        ),
-        body: Column(
-          children: [
-            _buildSection(),
-            buildSection1(),
-          ],
-        ),
+      appBar: AppBar(
+        title: Text(widget.title ?? "$widget"),
+      ),
+      body: Column(
+        children: [
+          _buildSection(),
+          buildSection1(),
+        ],
+      ),
     );
   }
 
@@ -58,7 +54,9 @@ class _StackDemoState extends State<StackDemo> {
               child: Material(
                 color: Colors.red,
                 borderRadius: BorderRadius.circular(10),
-                child: Text('99+',),
+                child: Text(
+                  '99+',
+                ),
               ),
             ),
           ),

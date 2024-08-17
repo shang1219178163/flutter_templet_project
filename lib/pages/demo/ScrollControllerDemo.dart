@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ScrollControllerDemo extends StatefulWidget {
-
-  const ScrollControllerDemo({ Key? key, this.title}) : super(key: key);
+  const ScrollControllerDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -11,7 +10,6 @@ class ScrollControllerDemo extends StatefulWidget {
 }
 
 class _ScrollControllerDemoState extends State<ScrollControllerDemo> {
-
   final _trackingScrollController = TrackingScrollController();
 
   @override
@@ -19,10 +17,10 @@ class _ScrollControllerDemoState extends State<ScrollControllerDemo> {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
 
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title ?? "$widget"),
-        ),
-        // body: _buildSection(),
+      appBar: AppBar(
+        title: Text(widget.title ?? "$widget"),
+      ),
+      // body: _buildSection(),
       body: _buildPageView(),
     );
   }
@@ -40,15 +38,19 @@ class _ScrollControllerDemoState extends State<ScrollControllerDemo> {
           children: _buildChildren(page: 1),
         ),
         ListView(
-         controller: _trackingScrollController,
-         children: _buildChildren(page: 2),
+          controller: _trackingScrollController,
+          children: _buildChildren(page: 2),
         ),
       ],
     );
   }
 
   _buildChildren({int page = 0, int count = 50}) {
-    return List<Widget>.generate(count, (int i) => ListTile(leading: Text('page $page item $i'),)).toList();
+    return List<Widget>.generate(
+        count,
+        (int i) => ListTile(
+              leading: Text('page $page item $i'),
+            )).toList();
   }
 
   _buildPageView() {
@@ -71,7 +73,10 @@ class _ScrollControllerDemoState extends State<ScrollControllerDemo> {
     );
   }
 
-  List<Widget> buildChildren({required int page, required int count,}) {
+  List<Widget> buildChildren({
+    required int page,
+    required int count,
+  }) {
     return List<Widget>.generate(count, (int i) {
       return Container(
         padding: EdgeInsets.symmetric(vertical: 12),

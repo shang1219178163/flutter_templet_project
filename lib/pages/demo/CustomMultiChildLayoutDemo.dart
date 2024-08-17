@@ -1,22 +1,19 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/CircleLayout.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 
 class CustomMultiChildLayoutDemo extends StatefulWidget {
-
-  CustomMultiChildLayoutDemo({
-    Key? key, 
-    this.title
-  }) : super(key: key);
+  CustomMultiChildLayoutDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
   @override
-  _CustomMultiChildLayoutDemoState createState() => _CustomMultiChildLayoutDemoState();
+  _CustomMultiChildLayoutDemoState createState() =>
+      _CustomMultiChildLayoutDemoState();
 }
 
-class _CustomMultiChildLayoutDemoState extends State<CustomMultiChildLayoutDemo> with SingleTickerProviderStateMixin {
+class _CustomMultiChildLayoutDemoState extends State<CustomMultiChildLayoutDemo>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
   @override
@@ -37,28 +34,31 @@ class _CustomMultiChildLayoutDemoState extends State<CustomMultiChildLayoutDemo>
     super.initState();
   }
 
-
   @override
   Widget build(BuildContext context) {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () => debugPrint(e),)
-        ).toList(),
-      ),
-      body: CustomScrollView(
-        slivers: [
-          buildBody1(),
-          buildBody2(),
-        ].map((e) => e.toSliverToBoxAdapter()).toList(),
-      )
-    );
+        appBar: AppBar(
+          title: Text(widget.title ?? "$widget"),
+          actions: [
+            'done',
+          ]
+              .map((e) => TextButton(
+                    child: Text(
+                      e,
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onPressed: () => debugPrint(e),
+                  ))
+              .toList(),
+        ),
+        body: CustomScrollView(
+          slivers: [
+            buildBody1(),
+            buildBody2(),
+          ].map((e) => e.toSliverToBoxAdapter()).toList(),
+        ));
   }
 
   Widget buildPoint({
@@ -80,7 +80,6 @@ class _CustomMultiChildLayoutDemoState extends State<CustomMultiChildLayoutDemo>
     );
   }
 
-
   Widget buildBody1() {
     return Center(
       child: Container(
@@ -100,10 +99,10 @@ class _CustomMultiChildLayoutDemoState extends State<CustomMultiChildLayoutDemo>
               initAngle: _controller.value * 360,
               children: List.generate(
                 9,
-                    (index) => index == 8
+                (index) => index == 8
                     ? buildPoint(width: 80, height: 80, color: Colors.red)
                     : buildPoint(
-                    width: 100, height: 40, shape: BoxShape.rectangle),
+                        width: 100, height: 40, shape: BoxShape.rectangle),
               ),
             );
           },
@@ -148,5 +147,4 @@ class _CustomMultiChildLayoutDemoState extends State<CustomMultiChildLayoutDemo>
       ),
     );
   }
-
 }

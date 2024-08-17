@@ -25,7 +25,8 @@ class InnerShadow extends SingleChildRenderObjectWidget {
   }
 
   @override
-  void updateRenderObject(BuildContext context, RenderInnerShadow renderObject) {
+  void updateRenderObject(
+      BuildContext context, RenderInnerShadow renderObject) {
     renderObject
       ..color = color
       ..blur = blur
@@ -39,7 +40,7 @@ class RenderInnerShadow extends RenderProxyBox {
     required Color color,
     required double blur,
     required Offset offset,
-  }) : _color = color,
+  })  : _color = color,
         _blur = blur,
         _offset = offset,
         super(child);

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 class FlexibleDemo extends StatefulWidget {
-
-  const FlexibleDemo({ Key? key, this.title}) : super(key: key);
+  const FlexibleDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -11,8 +10,6 @@ class FlexibleDemo extends StatefulWidget {
 }
 
 class _FlexibleDemoState extends State<FlexibleDemo> {
-
-
   @override
   Widget build(BuildContext context) {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;

@@ -6,18 +6,16 @@
 //  Copyright © 5/20/21 shang. All rights reserved.
 //
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 
 class APPNotFoundPage extends StatelessWidget {
-
   final String? title;
 
   const APPNotFoundPage({
-  	Key? key,
-  	this.title,
+    Key? key,
+    this.title,
   }) : super(key: key);
 
   @override
@@ -48,14 +46,10 @@ class APPNotFoundPage extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(vertical: 8),
               child: Text('哎呀, 你的页面跑路了!',
-                style: TextStyle(
-                  fontSize: 17.0,
-                  color: Colors.black
-                )
-              ),
+                  style: TextStyle(fontSize: 17.0, color: Colors.black)),
             ),
             TextButton(
-              onPressed: (){
+              onPressed: () {
                 ddlog('哎呀, 你的页面跑路了!');
               },
               child: Text('立即捉它回家!', style: TextStyle(fontSize: 17.0)),

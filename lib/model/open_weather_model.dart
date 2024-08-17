@@ -1,5 +1,3 @@
-
-
 class OpenWeatherRoot {
   OpenWeatherRoot({
     this.coord,
@@ -49,7 +47,8 @@ class OpenWeatherRoot {
     if (json == null) {
       return;
     }
-    coord = json['coord'] != null ? OpenWeatherCoord.fromJson(json['coord']) : null;
+    coord =
+        json['coord'] != null ? OpenWeatherCoord.fromJson(json['coord']) : null;
     if (json['weather'] != null) {
       final array = json['weather'].map((e) => OpenWeather.fromJson(e));
       weather = List<OpenWeather>.from(array);
@@ -58,7 +57,9 @@ class OpenWeatherRoot {
     main = json['main'] != null ? OpenWeatherMain.fromJson(json['main']) : null;
     visibility = json['visibility'];
     wind = json['wind'] != null ? OpenWeatherWind.fromJson(json['wind']) : null;
-    clouds = json['clouds'] != null ? OpenWeatherCloud.fromJson(json['clouds']) : null;
+    clouds = json['clouds'] != null
+        ? OpenWeatherCloud.fromJson(json['clouds'])
+        : null;
     rain = json['rain'] != null ? OpenWeatherRain.fromJson(json['rain']) : null;
     dt = json['dt'];
     sys = json['sys'] != null ? OpenWeatherSys.fromJson(json['sys']) : null;
@@ -299,7 +300,6 @@ class OpenWeatherRain {
   }
 }
 
-
 class OpenWeatherSys {
   OpenWeatherSys({
     this.type,
@@ -369,7 +369,8 @@ class OpenWeatherForecast {
     message = json['message'];
     cnt = json['cnt'];
     if (json['list'] != null) {
-      final array = (json['list'] as List).map((e) => OpenWeatherList.fromJson(e));
+      final array =
+          (json['list'] as List).map((e) => OpenWeatherList.fromJson(e));
       list = List<OpenWeatherList>.from(array);
     }
     city = json['city'] != null ? OpenWeatherCity.fromJson(json['city']) : null;
@@ -389,7 +390,6 @@ class OpenWeatherForecast {
     return map;
   }
 }
-
 
 class OpenWeatherList {
   OpenWeatherList({
@@ -432,10 +432,13 @@ class OpenWeatherList {
     dt = json['dt'];
     main = json['main'] != null ? OpenWeatherMain.fromJson(json['main']) : null;
     if (json['weather'] != null) {
-      final array = (json['weather'] as List).map((e) => OpenWeather.fromJson(e));
+      final array =
+          (json['weather'] as List).map((e) => OpenWeather.fromJson(e));
       weather = List<OpenWeather>.from(array);
     }
-    clouds = json['clouds'] != null ? OpenWeatherCloud.fromJson(json['clouds']) : null;
+    clouds = json['clouds'] != null
+        ? OpenWeatherCloud.fromJson(json['clouds'])
+        : null;
     wind = json['wind'] != null ? OpenWeatherWind.fromJson(json['wind']) : null;
     visibility = json['visibility'];
     pop = json['pop'];
@@ -506,7 +509,8 @@ class OpenWeatherCity {
     }
     id = json['id'];
     name = json['name'];
-    coord = json['coord'] != null ? OpenWeatherCoord.fromJson(json['coord']) : null;
+    coord =
+        json['coord'] != null ? OpenWeatherCoord.fromJson(json['coord']) : null;
     country = json['country'];
     population = json['population'];
     timezone = json['timezone'];
@@ -529,4 +533,3 @@ class OpenWeatherCity {
     return map;
   }
 }
-

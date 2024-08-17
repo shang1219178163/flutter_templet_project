@@ -6,11 +6,7 @@ import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/util/R.dart';
 
 class HeroDemo extends StatefulWidget {
-
-  HeroDemo({
-    Key? key,
-    this.title
-  }) : super(key: key);
+  HeroDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -19,7 +15,6 @@ class HeroDemo extends StatefulWidget {
 }
 
 class _HeroDemoState extends State<HeroDemo> {
-
   final _scrollController = ScrollController();
 
   @override
@@ -27,13 +22,17 @@ class _HeroDemoState extends State<HeroDemo> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) =>
-            TextButton(
-              child: Text(e,
-                style: TextStyle(color: Colors.white),
-              ),
-              onPressed: () => debugPrint(e),)
-        ).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () => debugPrint(e),
+                ))
+            .toList(),
       ),
       body: buildBody(),
     );
@@ -53,7 +52,6 @@ class _HeroDemoState extends State<HeroDemo> {
     );
   }
 
-
   Widget buildHeroImage() {
     final heroTag = "avatar";
 
@@ -62,40 +60,39 @@ class _HeroDemoState extends State<HeroDemo> {
       child: Column(
         children: <Widget>[
           LayoutBuilder(
-            builder: (BuildContext context, BoxConstraints constraints) {
+              builder: (BuildContext context, BoxConstraints constraints) {
+            double spacing = 8;
+            double runSpacing = 8;
 
-              double spacing = 8;
-              double runSpacing = 8;
+            final rowCount = 4;
+            final itemWidth =
+                ((constraints.maxWidth - spacing * (rowCount - 1)) / rowCount)
+                    .truncateToDouble();
 
-              final rowCount = 4;
-              final itemWidth = ((constraints.maxWidth - spacing * (rowCount - 1)) / rowCount).truncateToDouble();
+            return Wrap(
+              spacing: spacing,
+              runSpacing: runSpacing,
+              children: R.image.urls.map((e) {
+                final child = NNetworkImage(
+                  url: e,
+                );
 
-              return Wrap(
-                spacing: spacing,
-                runSpacing: runSpacing,
-                children: R.image.urls.map((e) {
-
-                  final child = NNetworkImage(
-                    url: e,
-                  );
-
-                  return InkWell(
-                    onTap: () {
-                      goDetailPage(heroTag: heroTag, child: child);
-                    },
-                    child: Hero(
-                      tag: heroTag, //唯一标记，前后两个路由页Hero的tag必须相同
-                      child: SizedBox(
-                        width: itemWidth,
-                        height: itemWidth,
-                        child: child,
-                      ),
+                return InkWell(
+                  onTap: () {
+                    goDetailPage(heroTag: heroTag, child: child);
+                  },
+                  child: Hero(
+                    tag: heroTag, //唯一标记，前后两个路由页Hero的tag必须相同
+                    child: SizedBox(
+                      width: itemWidth,
+                      height: itemWidth,
+                      child: child,
                     ),
-                  );
-                }).toList(),
-              );
-            }
-          ),
+                  ),
+                );
+              }).toList(),
+            );
+          }),
           const Padding(
             padding: EdgeInsets.only(top: 8.0),
             child: Text("点击"),
@@ -105,11 +102,17 @@ class _HeroDemoState extends State<HeroDemo> {
     );
   }
 
-  goDetailPage({required String heroTag, required Widget child,}) {
+  goDetailPage({
+    required String heroTag,
+    required Widget child,
+  }) {
     //打开B路由
     Navigator.push(context, PageRouteBuilder(
-      pageBuilder: (context, animation, secondaryAnimation,) {
-
+      pageBuilder: (
+        context,
+        animation,
+        secondaryAnimation,
+      ) {
         return FadeTransition(
           opacity: animation,
           child: HeroAnimationDetailPage(
@@ -125,7 +128,6 @@ class _HeroDemoState extends State<HeroDemo> {
   }
 }
 
-
 class HeroAnimationDetailPage extends StatelessWidget {
   const HeroAnimationDetailPage({
     super.key,
@@ -138,7 +140,6 @@ class HeroAnimationDetailPage extends StatelessWidget {
   final VoidCallback? onTap;
 
   final Widget child;
-
 
   @override
   Widget build(BuildContext context) {

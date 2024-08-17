@@ -2,7 +2,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 
-
 /// app升级提示控件
 class AppUpgradeView extends StatefulWidget {
   const AppUpgradeView({
@@ -75,7 +74,7 @@ class AppUpgradeView extends StatefulWidget {
 
 class _AppUpgradeWidget extends State<AppUpgradeView> {
   static const String _downloadApkName = 'temp.apk';
-  
+
   /// 下载进度
   final double _downloadProgress = 0.0;
 
@@ -88,7 +87,7 @@ class _AppUpgradeWidget extends State<AppUpgradeView> {
         children: <Widget>[
           _buildInfoWidget(context),
           // _downloadProgress > 0
-              // ? Positioned.fill(child: _buildDownloadProgress())
+          // ? Positioned.fill(child: _buildDownloadProgress())
           //     : Container(
           //   height: 10,
           // )
@@ -96,7 +95,7 @@ class _AppUpgradeWidget extends State<AppUpgradeView> {
       ),
     );
   }
-  
+
   /// 信息展示widget
   Widget _buildInfoWidget(BuildContext context) {
     return Container(
@@ -104,11 +103,7 @@ class _AppUpgradeWidget extends State<AppUpgradeView> {
         mainAxisSize: MainAxisSize.min,
         // mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          _buildTitle(),
-          _buildAppInfo(),
-          _buildAction()
-        ],
+        children: <Widget>[_buildTitle(), _buildAppInfo(), _buildAction()],
       ),
     );
   }
@@ -116,13 +111,11 @@ class _AppUpgradeWidget extends State<AppUpgradeView> {
   /// 构建标题
   _buildTitle() {
     return Padding(
-      padding: EdgeInsets.only(top: 20),
-      child: Text(widget.title ?? '',
-        style: widget.titleStyle ?? TextStyle(fontSize: 22)
-      )
-    );
+        padding: EdgeInsets.only(top: 20),
+        child: Text(widget.title ?? '',
+            style: widget.titleStyle ?? TextStyle(fontSize: 22)));
   }
-  
+
   /// 构建版本更新信息
   _buildAppInfo() {
     return Container(
@@ -134,7 +127,7 @@ class _AppUpgradeWidget extends State<AppUpgradeView> {
       ),
     );
   }
-  
+
   /// 构建取消或者升级按钮
   _buildAction() {
     return Column(
@@ -148,8 +141,8 @@ class _AppUpgradeWidget extends State<AppUpgradeView> {
             widget.force
                 ? Container()
                 : Expanded(
-              child: _buildCancelButton(),
-            ),
+                    child: _buildCancelButton(),
+                  ),
             Expanded(
               child: _buildConfirmButton(),
             ),
@@ -158,21 +151,17 @@ class _AppUpgradeWidget extends State<AppUpgradeView> {
       ],
     );
   }
-  
+
   /// 取消按钮
   _buildCancelButton() {
     return Material(
       child: Ink(
         decoration: BoxDecoration(
-        borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(widget.borderRadius)
-          )
-        ),
-
+            borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(widget.borderRadius))),
         child: InkWell(
           borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(widget.borderRadius)
-          ),
+              bottomLeft: Radius.circular(widget.borderRadius)),
           onTap: () {
             // widget.onCancel?.call();
             Navigator.of(context).pop();
@@ -181,53 +170,52 @@ class _AppUpgradeWidget extends State<AppUpgradeView> {
             height: 45,
             alignment: Alignment.center,
             child: Text(widget.cancelText ?? '以后再说',
-                style: widget.cancelTextStyle ?? TextStyle()
-            ),
-          ),        ),
+                style: widget.cancelTextStyle ?? TextStyle()),
+          ),
+        ),
       ),
     );
   }
-  
+
   /// 确定按钮
   _buildConfirmButton() {
     var borderRadius =
-    BorderRadius.only(bottomRight: Radius.circular(widget.borderRadius));
+        BorderRadius.only(bottomRight: Radius.circular(widget.borderRadius));
     if (widget.force) {
       borderRadius = BorderRadius.only(
           bottomRight: Radius.circular(widget.borderRadius),
           bottomLeft: Radius.circular(widget.borderRadius));
     }
     var _okBackgroundColors = [
-        Theme.of(context).primaryColor,
-        Theme.of(context).primaryColor
-      ];
+      Theme.of(context).primaryColor,
+      Theme.of(context).primaryColor
+    ];
 
     return Material(
-        child: Ink(
-          decoration: BoxDecoration(
+      child: Ink(
+        decoration: BoxDecoration(
             gradient: LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
                 colors: [_okBackgroundColors[0], _okBackgroundColors[1]]),
-            borderRadius: borderRadius
-          ),
-          child: InkWell(
-            borderRadius: borderRadius,
-            onTap: () {
-              ddlog(widget.okText ?? '立即体验');
-              // onConfirm();
-            },
-            child: Container(
-              height: 45,
-              alignment: Alignment.center,
-              child: Text(widget.okText ?? '立即体验',
-                  style: widget.okTextStyle ?? TextStyle(color: Colors.white)),
-            ),
+            borderRadius: borderRadius),
+        child: InkWell(
+          borderRadius: borderRadius,
+          onTap: () {
+            ddlog(widget.okText ?? '立即体验');
+            // onConfirm();
+          },
+          child: Container(
+            height: 45,
+            alignment: Alignment.center,
+            child: Text(widget.okText ?? '立即体验',
+                style: widget.okTextStyle ?? TextStyle(color: Colors.white)),
           ),
         ),
+      ),
     );
   }
-  
+
   /// 点击确定按钮
   // onConfirm() async {
   // if (Platform.isIOS) {

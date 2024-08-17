@@ -1,16 +1,10 @@
-
-
 import 'dart:math';
 
 import 'package:flutter/material.dart';
 
 /// 键盘辅助视图
 class ScaffoldBottomSheet extends StatefulWidget {
-
-  ScaffoldBottomSheet({
-    Key? key, 
-    this.title
-  }) : super(key: key);
+  ScaffoldBottomSheet({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -19,7 +13,6 @@ class ScaffoldBottomSheet extends StatefulWidget {
 }
 
 class _ScaffoldBottomSheetState extends State<ScaffoldBottomSheet> {
-
   final _inputController = TextEditingController();
 
   final list = List.generate(20, (i) => "item_$i").toList();
@@ -35,41 +28,40 @@ class _ScaffoldBottomSheetState extends State<ScaffoldBottomSheet> {
     return Scaffold(
       appBar: AppBar(
         title: Text("键盘辅助视图"),
-        actions: ['done',].map((e) =>
-          TextButton(
-            child: Text(e,
-              style: TextStyle(color: Colors.white),
-            ),
-            onPressed: () => debugPrint(e),
-          )
-        ).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () => debugPrint(e),
+                ))
+            .toList(),
       ),
       // bottomSheet: buildInputBar(),
       bottomSheet: buildInputView(
-        controller: _inputController,
-        onChanged: (String value) {
-          list.insert(0, value);
-          setState(() {});
-        }
-      ),
-      body: Column(
-        children: [
-          buildInputBar(),
-          Expanded(
+          controller: _inputController,
+          onChanged: (String value) {
+            list.insert(0, value);
+            setState(() {});
+          }),
+      body: Column(children: [
+        buildInputBar(),
+        Expanded(
             child: ListView(
-              children: list.map((e) {
-
-                return buildCell(
-                  onDismissed: (direction) {
-                    list.remove(e);
-                  },
-                  child: ListTile(title: Text(e),)
-                );
-              }).toList(),
-            )
-          ),
-        ]
-      ),
+          children: list.map((e) {
+            return buildCell(
+                onDismissed: (direction) {
+                  list.remove(e);
+                },
+                child: ListTile(
+                  title: Text(e),
+                ));
+          }).toList(),
+        )),
+      ]),
     );
   }
 
@@ -152,7 +144,8 @@ class _ScaffoldBottomSheetState extends State<ScaffoldBottomSheet> {
               onPressed: () {
                 onChanged?.call(controller?.text.trim() ?? "");
               },
-              child: Text("确定",
+              child: Text(
+                "确定",
                 style: TextStyle(
                   // color: Theme.of(context).primaryColor,
                   fontWeight: FontWeight.w500,
@@ -166,6 +159,4 @@ class _ScaffoldBottomSheetState extends State<ScaffoldBottomSheet> {
       ),
     );
   }
-
-
 }

@@ -6,9 +6,8 @@
 //  Copyright © 2024/3/24 shang. All rights reserved.
 //
 
-
 /// 日期格式枚举
-enum DateTimeFormat{
+enum DateTimeFormat {
   yyyyMMddHHmmss("yyyy-MM-dd HH:mm:ss", "年月日时分秒"),
   yyyyMMdd("yyyy-MM-dd", "年月日"),
   yyyyMMdd000000("yyyy-MM-dd 00:00:00", "年月日 00:00:00"),

@@ -1,16 +1,10 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_dash_line.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:tuple/tuple.dart';
 
 class DashLineDemo extends StatefulWidget {
-
-  DashLineDemo({
-    Key? key,
-    this.title
-  }) : super(key: key);
+  DashLineDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -19,19 +13,22 @@ class DashLineDemo extends StatefulWidget {
 }
 
 class _DashLineDemoState extends State<DashLineDemo> {
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () => debugPrint(e),)
-        ).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () => debugPrint(e),
+                ))
+            .toList(),
       ),
       body: buildBody(),
     );
@@ -41,9 +38,15 @@ class _DashLineDemoState extends State<DashLineDemo> {
     return SingleChildScrollView(
       child: Column(
         children: [
-          SizedBox(height: 10,),
-          NDashLine(color: Colors.blue,),
-          SizedBox(height: 10,),
+          SizedBox(
+            height: 10,
+          ),
+          NDashLine(
+            color: Colors.blue,
+          ),
+          SizedBox(
+            height: 10,
+          ),
           buildDashLineOfMutiColor(),
           SizedBox(
             height: 300,
@@ -72,5 +75,4 @@ class _DashLineDemoState extends State<DashLineDemo> {
       ],
     );
   }
-
 }

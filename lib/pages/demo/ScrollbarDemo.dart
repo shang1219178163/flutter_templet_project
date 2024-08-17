@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ScrollbarDemo extends StatefulWidget {
-
-  const ScrollbarDemo({ Key? key, this.title}) : super(key: key);
+  const ScrollbarDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -11,16 +10,14 @@ class ScrollbarDemo extends StatefulWidget {
 }
 
 class _ScrollbarDemoState extends State<ScrollbarDemo> {
-
-
   @override
   Widget build(BuildContext context) {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
 
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title ?? "$widget"),
-        ),
+      appBar: AppBar(
+        title: Text(widget.title ?? "$widget"),
+      ),
       body: _buildBody(),
     );
   }
@@ -46,6 +43,4 @@ class _ScrollbarDemoState extends State<ScrollbarDemo> {
       ),
     );
   }
-
-
 }

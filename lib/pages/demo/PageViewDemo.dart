@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
@@ -7,10 +6,6 @@ import 'package:flutter_templet_project/extension/widget_ext.dart';
 
 import 'package:get/get.dart';
 import 'package:tuple/tuple.dart';
-
-
-
-
 
 class PageViewDemo extends StatefulWidget {
   const PageViewDemo({Key? key}) : super(key: key);
@@ -52,14 +47,17 @@ class _PageViewDemoState extends State<PageViewDemo> {
     return Scaffold(
       appBar: AppBar(
         title: Text("$widget"),
-        actions: rightTitles.map((e) => TextButton(
-          onPressed: (){
-            _actionTap(value: e);
-          },
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-        )).toList(),
+        actions: rightTitles
+            .map((e) => TextButton(
+                  onPressed: () {
+                    _actionTap(value: e);
+                  },
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ))
+            .toList(),
       ),
       body: _buildBody(),
     );
@@ -70,7 +68,11 @@ class _PageViewDemoState extends State<PageViewDemo> {
     padding = const EdgeInsets.all(15),
   }) {
     return LayoutBuilder(builder: (context, constraints) {
-      final pageViewWidth = constraints.maxWidth - margin.left - margin.right - padding.left - padding.right;
+      final pageViewWidth = constraints.maxWidth -
+          margin.left -
+          margin.right -
+          padding.left -
+          padding.right;
       return Container(
         margin: margin,
         padding: padding,
@@ -80,10 +82,7 @@ class _PageViewDemoState extends State<PageViewDemo> {
             SizedBox(height: 10),
             Container(
               // height: 50,
-              child: pageIndicator(
-                pageViewWidth: pageViewWidth,
-                pageCount: 3
-              ),
+              child: pageIndicator(pageViewWidth: pageViewWidth, pageCount: 3),
             )
           ],
         ),
@@ -96,23 +95,24 @@ class _PageViewDemoState extends State<PageViewDemo> {
       scrollDirection: Axis.horizontal,
       controller: controller,
       pageSnapping: true,
-      onPageChanged: (index){
+      onPageChanged: (index) {
         debugPrint('当前为第$index页');
       },
-      children: List.generate(3, (index) => Container(
-        decoration: BoxDecoration(
-          color: ColorExt.random,
-        ),
-        child: Center(child: Text('第$index页')),
-      )).toList(),
+      children: List.generate(
+          3,
+          (index) => Container(
+                decoration: BoxDecoration(
+                  color: ColorExt.random,
+                ),
+                child: Center(child: Text('第$index页')),
+              )).toList(),
     );
   }
 
-  Widget pageIndicator({
-    required int pageCount,
-    required double pageViewWidth,
-    double factor = 0.3
-  }) {
+  Widget pageIndicator(
+      {required int pageCount,
+      required double pageViewWidth,
+      double factor = 0.3}) {
     var width = pageViewWidth * factor;
     var itemWidth = width / pageCount;
     return Stack(
@@ -126,54 +126,53 @@ class _PageViewDemoState extends State<PageViewDemo> {
           ),
         ),
         ValueListenableBuilder<double>(
-          valueListenable: scrollerOffset,
-          builder: (context, value, child) {
-            return Positioned(
-              left: (value * factor / width) * itemWidth,
-              child: Container(
-                height: 4,
-                width: itemWidth,
-                decoration: BoxDecoration(
-                  color: Color(0xFFBE965A),
-                  borderRadius: BorderRadius.circular(1),
-                ),
-              ));
-          }),
+            valueListenable: scrollerOffset,
+            builder: (context, value, child) {
+              return Positioned(
+                  left: (value * factor / width) * itemWidth,
+                  child: Container(
+                    height: 4,
+                    width: itemWidth,
+                    decoration: BoxDecoration(
+                      color: Color(0xFFBE965A),
+                      borderRadius: BorderRadius.circular(1),
+                    ),
+                  ));
+            }),
       ],
     );
   }
 
   void _actionTap({required String value}) {
-    switch(value){
+    switch (value) {
       case "自定义":
-        {
-
-        }
+        {}
         break;
       default:
         {
           CupertinoActionSheet(
             title: Text(title),
             message: Text(message),
-            actions: titles.map((e) => CupertinoActionSheetAction(
-              onPressed: () {
-                ddlog(e);
-                Navigator.pop(context);
-              },
-              child: Text(e),
-            ),).toList(),
+            actions: titles
+                .map(
+                  (e) => CupertinoActionSheetAction(
+                    onPressed: () {
+                      ddlog(e);
+                      Navigator.pop(context);
+                    },
+                    child: Text(e),
+                  ),
+                )
+                .toList(),
             cancelButton: CupertinoActionSheetAction(
               onPressed: () {
                 Navigator.pop(context);
               },
               child: Text('取消'),
             ),
-          )
-              .toShowCupertinoModalPopup(context: context)
-          ;
+          ).toShowCupertinoModalPopup(context: context);
         }
         break;
     }
   }
-
 }

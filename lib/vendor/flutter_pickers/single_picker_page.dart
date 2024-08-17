@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_pickers/more_pickers/init_data.dart';
@@ -95,8 +94,10 @@ class _SinglePickerPageState extends State<SinglePickerPage> {
             title: Text(title),
             onTap: () => _onClickItem(data, selectData, label: label),
             trailing: Row(mainAxisSize: MainAxisSize.min, children: <Widget>[
-              NText(selectData.toString(),
-                  color: Colors.grey,),
+              NText(
+                selectData.toString(),
+                color: Colors.grey,
+              ),
               rightIcon
             ]),
           ),
@@ -145,7 +146,10 @@ class _SinglePickerPageState extends State<SinglePickerPage> {
             title: Text(title),
             onTap: () => _onClickItem2(),
             trailing: Row(mainAxisSize: MainAxisSize.min, children: <Widget>[
-              NText(selectHeight, color: Colors.grey, ),
+              NText(
+                selectHeight,
+                color: Colors.grey,
+              ),
               rightIcon
             ]),
           ),

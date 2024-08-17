@@ -6,7 +6,6 @@
 //  Copyright © 2024/3/2 shang. All rights reserved.
 //
 
-
 import 'package:flutter/material.dart';
 
 class NSkeletonItem extends StatelessWidget {

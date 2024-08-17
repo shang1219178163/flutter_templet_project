@@ -1,46 +1,41 @@
+class StudentClassroom {
+  String? name;
+  int? id;
 
+  StudentClassroom({this.name, this.id});
+}
 
-class StudentClassroom{
-    String? name;
-    int? id;
+class StudentTeacher {
+  String? name;
+  int? age;
 
-    StudentClassroom({
-      this.name,
-      this.id
-    });
-  }
+  StudentTeacher({
+    this.name,
+    this.age,
+  });
+}
 
-  class StudentTeacher{
-    String? name;
-    int? age;
+class Student {
+  //JsonName:score
+  int? score;
 
-    StudentTeacher({
-      this.name,
-      this.age,
-    });
-  }
+  //JsonName:teachers
+  List<StudentTeacher>? teachers;
 
-  class Student{
-    //JsonName:score
-    int? score;
+  //JsonName:name
+  String? name;
 
-    //JsonName:teachers
-    List<StudentTeacher>? teachers;
+  //JsonName:classroom
+  StudentClassroom? classroom;
 
-    //JsonName:name
-    String? name;
+  //JsonName:id
+  String? id;
 
-    //JsonName:classroom
-    StudentClassroom? classroom;
-
-    //JsonName:id
-    String? id;
-
-    Student({
-      this.score,
-      this.teachers,
-      this.name,
-      this.classroom,
-      this.id,
-    });
+  Student({
+    this.score,
+    this.teachers,
+    this.name,
+    this.classroom,
+    this.id,
+  });
 }

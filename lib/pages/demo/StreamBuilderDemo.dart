@@ -9,18 +9,15 @@
 import 'package:flutter/material.dart';
 
 class StreamBuilderDemo extends StatefulWidget {
-
   final String? title;
 
-  const StreamBuilderDemo({ Key? key, this.title}) : super(key: key);
+  const StreamBuilderDemo({Key? key, this.title}) : super(key: key);
 
-  
   @override
   _StreamBuilderDemoState createState() => _StreamBuilderDemoState();
 }
 
 class _StreamBuilderDemoState extends State<StreamBuilderDemo> {
-
   Stream<int> counter() {
     return Stream.periodic(Duration(seconds: 1), (i) {
       return i;
@@ -32,10 +29,10 @@ class _StreamBuilderDemoState extends State<StreamBuilderDemo> {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
 
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title ?? "$widget"),
-        ),
-        body: buildBody(),
+      appBar: AppBar(
+        title: Text(widget.title ?? "$widget"),
+      ),
+      body: buildBody(),
     );
   }
 
@@ -61,5 +58,4 @@ class _StreamBuilderDemoState extends State<StreamBuilderDemo> {
       },
     );
   }
-
 }

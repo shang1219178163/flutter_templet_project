@@ -10,9 +10,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-
 /// 跑马灯 Builder 类型
-typedef MarqueeWidgetBuilder = Widget Function(BuildContext context, int index, BoxConstraints constraints);
+typedef MarqueeWidgetBuilder = Widget Function(
+    BuildContext context, int index, BoxConstraints constraints);
 
 /// 跑马灯
 class MarqueeWidget extends StatefulWidget {
@@ -32,16 +32,22 @@ class MarqueeWidget extends StatefulWidget {
   String? title;
 
   int itemCount;
+
   /// item builder
   MarqueeWidgetBuilder itemBuilder;
+
   /// 边界(前后新增) builder
   MarqueeWidgetBuilder edgeBuilder;
+
   /// item 间距 builder
   MarqueeWidgetBuilder separatorBuilder;
+
   /// 控制器
   ScrollController? controller;
+
   /// 定时器运行间隔
   Duration? duration;
+
   /// 定时器运行间隔移动偏移量
   double? durationOffset;
 
@@ -49,7 +55,7 @@ class MarqueeWidget extends StatefulWidget {
   _MarqueeWidgetState createState() => _MarqueeWidgetState();
 }
 
-class _MarqueeWidgetState extends State<MarqueeWidget>{
+class _MarqueeWidgetState extends State<MarqueeWidget> {
   ScrollController? _scrollController;
 
   final _globalKey = GlobalKey();
@@ -80,32 +86,30 @@ class _MarqueeWidgetState extends State<MarqueeWidget>{
 
     final totalCount = widget.itemCount + 2;
 
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        return ListView.separated(
-          key: _globalKey,
-          controller: _scrollController,
-          scrollDirection: Axis.horizontal,
-          padding: EdgeInsets.all(0),
-          itemCount: totalCount,
-          // cacheExtent: 10,
-          itemBuilder: (context, index) {
-            // return widget.itemBuilder(context, index, constraints);
-            final isEdge = (index == 0 || index == totalCount - 1);
-            if (isEdge) {
-              return widget.edgeBuilder(context, index, constraints);
-            }
-            return widget.itemBuilder(context, index - 1, constraints);
-          },
-          separatorBuilder: (context, index) {
-            if (index == 0 || index == totalCount - 2) {
-              return Container();
-            }
-            return widget.separatorBuilder(context, index, constraints);
-          },
-        );
-      }
-    );
+    return LayoutBuilder(builder: (context, constraints) {
+      return ListView.separated(
+        key: _globalKey,
+        controller: _scrollController,
+        scrollDirection: Axis.horizontal,
+        padding: EdgeInsets.all(0),
+        itemCount: totalCount,
+        // cacheExtent: 10,
+        itemBuilder: (context, index) {
+          // return widget.itemBuilder(context, index, constraints);
+          final isEdge = (index == 0 || index == totalCount - 1);
+          if (isEdge) {
+            return widget.edgeBuilder(context, index, constraints);
+          }
+          return widget.itemBuilder(context, index - 1, constraints);
+        },
+        separatorBuilder: (context, index) {
+          if (index == 0 || index == totalCount - 2) {
+            return Container();
+          }
+          return widget.separatorBuilder(context, index, constraints);
+        },
+      );
+    });
   }
 
   /// 取消定时器
@@ -113,7 +117,7 @@ class _MarqueeWidgetState extends State<MarqueeWidget>{
     if (_timer != null) {
       _timer?.cancel();
       _timer = null;
-      if (isContinue){
+      if (isContinue) {
         _initTimer();
       }
     }
@@ -128,8 +132,9 @@ class _MarqueeWidgetState extends State<MarqueeWidget>{
           return;
         }
         final val = _scrollController!.offset + (widget.durationOffset ?? 30);
-        _scrollController!.animateTo(val, duration: duration, curve: Curves.linear);
-        if(_scrollController!.position.outOfRange){
+        _scrollController!
+            .animateTo(val, duration: duration, curve: Curves.linear);
+        if (_scrollController!.position.outOfRange) {
           // print("atEdge:到边界了");
           _scrollController!.jumpTo(0);
         }
@@ -137,4 +142,3 @@ class _MarqueeWidgetState extends State<MarqueeWidget>{
     }
   }
 }
-

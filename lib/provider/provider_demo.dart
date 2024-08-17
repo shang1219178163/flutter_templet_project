@@ -37,8 +37,7 @@ class ProviderDemo extends StatelessWidget {
             Divider(),
             _buildSelectorTuple(),
           ],
-        )
-    );
+        ));
   }
 
   _buildConsumer() {
@@ -46,8 +45,9 @@ class ProviderDemo extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         Consumer<EatModel>(builder: (ctx, model, child) => Text(model.whoEat)),
-        Consumer<Person>( // 拿到person对象，调用方法
-          builder: (ctx, model, child){
+        Consumer<Person>(
+          // 拿到person对象，调用方法
+          builder: (ctx, model, child) {
             return Column(
               children: [
                 ElevatedButton(
@@ -78,7 +78,7 @@ class ProviderDemo extends StatelessWidget {
         ),
         Selector<Person, Person>(
           selector: (ctx, person) => person,
-          builder: (ctx, model, child){
+          builder: (ctx, model, child) {
             return Column(
               children: [
                 ElevatedButton(
@@ -105,13 +105,13 @@ class ProviderDemo extends StatelessWidget {
       child: Column(
         children: [
           Selector<Foo, Tuple2<String, String>>(
-            selector: (ctx, foo) => Tuple2(foo.bar.name, foo.baz.name),
-            builder: (ctx, data, child) {
-              return Text('${data.item1}/${data.item2}');
-            }
-          ),
-          Consumer<Foo>( // 拿到person对象，调用方法
-            builder: (ctx, model, child){
+              selector: (ctx, foo) => Tuple2(foo.bar.name, foo.baz.name),
+              builder: (ctx, data, child) {
+                return Text('${data.item1}/${data.item2}');
+              }),
+          Consumer<Foo>(
+            // 拿到person对象，调用方法
+            builder: (ctx, model, child) {
               return Column(
                 children: [
                   ElevatedButton(
@@ -124,7 +124,8 @@ class ProviderDemo extends StatelessWidget {
             },
             child: Column(
               children: [
-                Text("Selector 监听 Foo 的 bar.name (String) 和 foo.baz.name (String)"),
+                Text(
+                    "Selector 监听 Foo 的 bar.name (String) 和 foo.baz.name (String)"),
               ],
             ),
           ),
@@ -134,8 +135,7 @@ class ProviderDemo extends StatelessWidget {
   }
 }
 
-
-class Person extends ChangeNotifier{
+class Person extends ChangeNotifier {
   Person({
     this.name = "小虎牙",
     this.age = 18,
@@ -147,7 +147,7 @@ class Person extends ChangeNotifier{
   final String _initail = "小虎牙";
   final String _changed = "更新的小虎牙";
 
-  void changName(){
+  void changName() {
     name = name == _initail ? _changed : _initail;
     notifyListeners();
   }
@@ -158,14 +158,13 @@ class Person extends ChangeNotifier{
   }
 }
 
-class EatModel{
+class EatModel {
   EatModel({required this.name});
 
   final String name;
 
   String get whoEat => "$name正在吃饭";
 }
-
 
 class Foo with ChangeNotifier {
   int count = 0;
@@ -188,7 +187,9 @@ class Foo with ChangeNotifier {
 }
 
 class Bar with ChangeNotifier {
-  Bar({this.name = "Bar",});
+  Bar({
+    this.name = "Bar",
+  });
 
   String name;
 
@@ -199,7 +200,9 @@ class Bar with ChangeNotifier {
 }
 
 class Baz with ChangeNotifier {
-  Baz({this.name = "Baz",});
+  Baz({
+    this.name = "Baz",
+  });
 
   String name;
 

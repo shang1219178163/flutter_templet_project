@@ -6,16 +6,13 @@
 //  Copyright © 12/8/21 shang. All rights reserved.
 //
 
-
 import 'package:flutter/material.dart';
 
 class TimePickerDemo extends StatefulWidget {
-
   final String? title;
 
-  const TimePickerDemo({ Key? key, this.title}) : super(key: key);
+  const TimePickerDemo({Key? key, this.title}) : super(key: key);
 
-  
   @override
   _TimePickerDemoState createState() => _TimePickerDemoState();
 }
@@ -38,9 +35,7 @@ class _TimePickerDemoState extends State<TimePickerDemo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title ?? "$widget")
-      ),
+      appBar: AppBar(title: Text(widget.title ?? "$widget")),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -59,8 +54,3 @@ class _TimePickerDemoState extends State<TimePickerDemo> {
     );
   }
 }
-
-
-
-
-

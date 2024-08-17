@@ -40,7 +40,9 @@ class PickerUtil {
                 onConfirm(selectedData);
               },
             ),
-            Divider(height: 0.5,),
+            Divider(
+              height: 0.5,
+            ),
             Expanded(
               child: buildPickerView(
                 items: data,
@@ -99,7 +101,9 @@ class PickerUtil {
               onConfirm(selectedData);
             },
           ),
-          Divider(height: 0.5,),
+          Divider(
+            height: 0.5,
+          ),
           Expanded(
             child: Row(
               children: List.generate(data.length, (i) {

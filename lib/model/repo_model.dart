@@ -1,4 +1,3 @@
-
 import 'package:json_annotation/json_annotation.dart';
 part 'repo_model.g.dart';
 
@@ -7,13 +6,10 @@ class RepoModel {
   List<RepoModelData> data;
   int code;
   int message;
-  RepoModel({
-    required this.data,
-    required this.code,
-    required this.message
-  });
+  RepoModel({required this.data, required this.code, required this.message});
 
-  factory RepoModel.fromJson(Map<String, dynamic> json) => _$RepoModelFromJson(json);
+  factory RepoModel.fromJson(Map<String, dynamic> json) =>
+      _$RepoModelFromJson(json);
   Map<String, dynamic> toJson() => _$RepoModelToJson(this);
 }
 
@@ -179,12 +175,13 @@ class RepoModelData {
     this.permissions,
   });
 
-  factory RepoModelData.fromJson(Map<String, dynamic> json) => _$RepoModelDataFromJson(json);
+  factory RepoModelData.fromJson(Map<String, dynamic> json) =>
+      _$RepoModelDataFromJson(json);
   Map<String, dynamic> toJson() => _$RepoModelDataToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
-class PermissionsData{
+class PermissionsData {
   bool? admin;
   bool? maintain;
   bool? push;
@@ -199,13 +196,13 @@ class PermissionsData{
     this.pull,
   });
 
-  factory PermissionsData.fromJson(Map<String, dynamic> json) => _$PermissionsDataFromJson(json);
+  factory PermissionsData.fromJson(Map<String, dynamic> json) =>
+      _$PermissionsDataFromJson(json);
   Map<String, dynamic> toJson() => _$PermissionsDataToJson(this);
-
 }
 
 @JsonSerializable(explicitToJson: true)
-class LicenseData{
+class LicenseData {
   String? key;
   String? name;
   String? spdxId;
@@ -220,13 +217,13 @@ class LicenseData{
     this.nodeId,
   });
 
-  factory LicenseData.fromJson(Map<String, dynamic> json) => _$LicenseDataFromJson(json);
+  factory LicenseData.fromJson(Map<String, dynamic> json) =>
+      _$LicenseDataFromJson(json);
   Map<String, dynamic> toJson() => _$LicenseDataToJson(this);
-
 }
 
 @JsonSerializable(explicitToJson: true)
-class OwnerData{
+class OwnerData {
   String? login;
   int id;
   String? nodeId;
@@ -267,8 +264,7 @@ class OwnerData{
     this.siteAdmin,
   });
 
-  factory OwnerData.fromJson(Map<String, dynamic> json) => _$OwnerDataFromJson(json);
+  factory OwnerData.fromJson(Map<String, dynamic> json) =>
+      _$OwnerDataFromJson(json);
   Map<String, dynamic> toJson() => _$OwnerDataToJson(this);
-
 }
-

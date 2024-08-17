@@ -12,8 +12,6 @@ import 'package:flutter_templet_project/basicWidget/n_placeholder.dart';
 import 'package:flutter_templet_project/basicWidget/n_search_textfield.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 
-
-
 // content = NPickerListView(
 //   title: 'NPickerListView',
 //   items: selectFeedbackTemplateList,
@@ -61,6 +59,7 @@ class NPickerListView<E> extends StatefulWidget {
 
   /// 取消回调
   final VoidCallback? onCancel;
+
   /// 取消回调
   final VoidCallback? onConfirm;
 
@@ -79,7 +78,6 @@ class NPickerListView<E> extends StatefulWidget {
 }
 
 class NPickerListViewState<E> extends State<NPickerListView<E>> {
-
   final scrollController = ScrollController();
   final searchVN = ValueNotifier("");
 
@@ -88,26 +86,29 @@ class NPickerListViewState<E> extends State<NPickerListView<E>> {
     final child = Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        if(widget.toolbar == null)NPickerToolBar(
-          title: widget.title,
-          onCancel: widget.onCancel ?? (){
-            Navigator.of(context).pop();
-          },
-          confirmTitle: "",
-        ),
-        if(widget.toolbar == null)const Divider(height: 0.5),
-        widget.toolbar ?? SizedBox(),
-        if(widget.filterCb != null)Container(
-          padding: const EdgeInsets.all(16),
-          child: NSearchTextField(
-            placeholder: '请输入',
-            backgroundColor: Color(0xffEDEDED),
-            onChanged: (String value) {
-              searchVN.value = value;
-              ddlog("onChanged: $value, ${searchVN.value}, ");
-            },
+        if (widget.toolbar == null)
+          NPickerToolBar(
+            title: widget.title,
+            onCancel: widget.onCancel ??
+                () {
+                  Navigator.of(context).pop();
+                },
+            confirmTitle: "",
           ),
-        ),
+        if (widget.toolbar == null) const Divider(height: 0.5),
+        widget.toolbar ?? SizedBox(),
+        if (widget.filterCb != null)
+          Container(
+            padding: const EdgeInsets.all(16),
+            child: NSearchTextField(
+              placeholder: '请输入',
+              backgroundColor: Color(0xffEDEDED),
+              onChanged: (String value) {
+                searchVN.value = value;
+                ddlog("onChanged: $value, ${searchVN.value}, ");
+              },
+            ),
+          ),
         Expanded(
           child: ValueListenableBuilder(
               valueListenable: searchVN,
@@ -115,8 +116,10 @@ class NPickerListViewState<E> extends State<NPickerListView<E>> {
                 final list = value.isEmpty
                     ? widget.items
                     : widget.items
-                    .where((e) => widget.filterCb == null ? e != null : widget.filterCb!(e, value))
-                    .toList();
+                        .where((e) => widget.filterCb == null
+                            ? e != null
+                            : widget.filterCb!(e, value))
+                        .toList();
 
                 if (list.isEmpty) {
                   return widget.empty ?? NPlaceholder();
@@ -126,15 +129,13 @@ class NPickerListViewState<E> extends State<NPickerListView<E>> {
                   controller: scrollController,
                   child: ListView.builder(
                     controller: scrollController,
-                    itemBuilder: (context, idx){
-
+                    itemBuilder: (context, idx) {
                       return widget.itemBuilder(context, idx, list);
                     },
                     itemCount: list.length,
                   ),
                 );
-              }
-          ),
+              }),
         ),
       ],
     );

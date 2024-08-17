@@ -33,7 +33,7 @@ import 'package:flutter_templet_project/extension/widget_ext.dart';
 // }
 
 /// 常用语封装 mixin
-mixin BottomSheetPhrasesMixin<T extends StatefulWidget> on State<T>  {
+mixin BottomSheetPhrasesMixin<T extends StatefulWidget> on State<T> {
   final _scrollController = ScrollController();
 
   List<IMPhrasesDetailModel> _phrases = [];
@@ -84,18 +84,27 @@ mixin BottomSheetPhrasesMixin<T extends StatefulWidget> on State<T>  {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 buildTextButton(
-                  text: Text("取消",),
+                  text: Text(
+                    "取消",
+                  ),
                   onPressed: onCancel,
                 ),
-                if(title != null) Expanded(child: title,),
+                if (title != null)
+                  Expanded(
+                    child: title,
+                  ),
                 buildTextButton(
-                  text: Text("自定义",),
+                  text: Text(
+                    "自定义",
+                  ),
                   onPressed: onAdd,
                 ),
               ],
             ),
           ),
-          Divider(height: 1,),
+          Divider(
+            height: 1,
+          ),
           Expanded(
             child: Scrollbar(
               controller: controller,
@@ -153,21 +162,18 @@ mixin BottomSheetPhrasesMixin<T extends StatefulWidget> on State<T>  {
     );
   }
 
-  Widget buildTextButton({
-    required Text text,
-    required VoidCallback? onPressed
-  }) {
+  Widget buildTextButton(
+      {required Text text, required VoidCallback? onPressed}) {
     return TextButton(
       style: TextButton.styleFrom(
-        padding: EdgeInsets.zero,
-        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        minimumSize: Size(50, 18),
-        textStyle: TextStyle(
-          color: context.primaryColor,
-          fontSize: 16.sp,
-          fontWeight: FontWeight.w500,
-        )
-      ),
+          padding: EdgeInsets.zero,
+          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+          minimumSize: Size(50, 18),
+          textStyle: TextStyle(
+            color: context.primaryColor,
+            fontSize: 16.sp,
+            fontWeight: FontWeight.w500,
+          )),
       onPressed: () {
         Navigator.of(context).pop();
         onPressed?.call();
@@ -186,9 +192,10 @@ mixin BottomSheetPhrasesMixin<T extends StatefulWidget> on State<T>  {
       items: _phrases,
       titleCb: (e) => e.phrases ?? "",
       textStyle: const TextStyle(overflow: TextOverflow.ellipsis),
-      cb: cb ?? (val) {
-        debugPrint(val.phrases ?? "-");
-      },
+      cb: cb ??
+          (val) {
+            debugPrint(val.phrases ?? "-");
+          },
       onCancel: onCancel,
       onAdd: onAdd,
     );
@@ -199,12 +206,11 @@ mixin BottomSheetPhrasesMixin<T extends StatefulWidget> on State<T>  {
     _phrases = List.generate(20, (i) {
       return IMPhrasesDetailModel(
         id: "$i",
-        phrases: "常用语_$i"*(i + 1),
+        phrases: "常用语_$i" * (i + 1),
       );
     });
   }
 }
-
 
 class IMPhrasesDetailModel {
   IMPhrasesDetailModel({
@@ -218,7 +224,6 @@ class IMPhrasesDetailModel {
   String? phrases;
   int? orderNum;
   String? createBy;
-
 
   IMPhrasesDetailModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];

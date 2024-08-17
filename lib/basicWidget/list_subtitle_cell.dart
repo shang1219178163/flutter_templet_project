@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class ListSubtitleCell extends StatelessWidget {
-
   final EdgeInsetsGeometry? padding;
 
   final double spacing;
@@ -37,7 +36,6 @@ class ListSubtitleCell extends StatelessWidget {
         children: <Widget>[
           if (leading != null) leading!,
           if (leading != null) Padding(padding: EdgeInsets.only(left: spacing)),
-
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -46,17 +44,20 @@ class ListSubtitleCell extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     if (title != null) Expanded(child: title!),
-                    if (title != null && trailing != null) Padding(padding: EdgeInsets.only(left: spacing)),
+                    if (title != null && trailing != null)
+                      Padding(padding: EdgeInsets.only(left: spacing)),
                     if (trailing != null) trailing!,
-
                   ],
                 ),
-                if (title != null && subtitle != null || trailing != null && subtrailing != null) Padding(padding: EdgeInsets.only(top: spacing)),
+                if (title != null && subtitle != null ||
+                    trailing != null && subtrailing != null)
+                  Padding(padding: EdgeInsets.only(top: spacing)),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     if (subtitle != null) Expanded(child: subtitle!),
-                    if (subtitle != null && subtrailing != null) Padding(padding: EdgeInsets.only(left: spacing)),
+                    if (subtitle != null && subtrailing != null)
+                      Padding(padding: EdgeInsets.only(left: spacing)),
                     if (subtrailing != null) subtrailing!,
                   ],
                 ),
@@ -67,5 +68,4 @@ class ListSubtitleCell extends StatelessWidget {
       ),
     );
   }
-
 }

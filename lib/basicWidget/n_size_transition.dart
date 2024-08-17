@@ -6,12 +6,10 @@
 //  Copyright © 2023/10/16 shang. All rights reserved.
 //
 
-
 import 'package:flutter/material.dart';
 
 /// SizeTransition 动画封装
 class NSizeTransition extends StatefulWidget {
-
   NSizeTransition({
     Key? key,
     this.axis = Axis.vertical,
@@ -21,6 +19,7 @@ class NSizeTransition extends StatefulWidget {
   }) : super(key: key);
 
   final Axis axis;
+
   /// -1.0, 0, 1
   final double axisAlignment;
 
@@ -33,7 +32,8 @@ class NSizeTransition extends StatefulWidget {
   _NSizeTransitionState createState() => _NSizeTransitionState();
 }
 
-class _NSizeTransitionState extends State<NSizeTransition> with SingleTickerProviderStateMixin {
+class _NSizeTransitionState extends State<NSizeTransition>
+    with SingleTickerProviderStateMixin {
   late final _controller = AnimationController(
     vsync: this,
     duration: widget.duration ?? Duration(seconds: 1),

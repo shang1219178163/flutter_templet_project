@@ -6,14 +6,13 @@
 //  Copyright © 12/15/21 shang. All rights reserved.
 //
 
-
 import 'package:flutter/cupertino.dart';
 
-class TrianglePath extends CustomClipper<Path>{
+class TrianglePath extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
     var path = Path();
-    path.moveTo(size.width/2, 0);
+    path.moveTo(size.width / 2, 0);
     path.lineTo(0, size.height);
     path.lineTo(size.width, size.height);
     return path;

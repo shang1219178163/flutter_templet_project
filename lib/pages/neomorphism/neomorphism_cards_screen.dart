@@ -5,9 +5,6 @@ import 'package:flutter_templet_project/pages/neomorphism/neomorphism_custom_swi
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tuple/tuple.dart';
 
-
-
-
 class NeomorphismCardsScreen extends StatefulWidget {
   NeomorphismCardsScreen({Key? key}) : super(key: key);
 
@@ -19,29 +16,63 @@ class _NeomorphismCardsScreenState extends State<NeomorphismCardsScreen> {
   bool status = true;
 
   final items = [
-    Tuple3(0, false, Icon(Icons.home, color: Color(0xFF4D70A6),),),
-    Tuple3(1, true, Icon(FontAwesomeIcons.film, color: Color(0xFF4D70A6),),),
-    Tuple3(2, false, Icon(FontAwesomeIcons.database, color: Color(0xFF4D70A6),),),
-    Tuple3(3, false, Icon(Icons.chat_bubble, color: Color(0xFF4D70A6),),),
-    Tuple3(4, false, Icon(Icons.settings, color: Color(0xFF4D70A6),),),
+    Tuple3(
+      0,
+      false,
+      Icon(
+        Icons.home,
+        color: Color(0xFF4D70A6),
+      ),
+    ),
+    Tuple3(
+      1,
+      true,
+      Icon(
+        FontAwesomeIcons.film,
+        color: Color(0xFF4D70A6),
+      ),
+    ),
+    Tuple3(
+      2,
+      false,
+      Icon(
+        FontAwesomeIcons.database,
+        color: Color(0xFF4D70A6),
+      ),
+    ),
+    Tuple3(
+      3,
+      false,
+      Icon(
+        Icons.chat_bubble,
+        color: Color(0xFF4D70A6),
+      ),
+    ),
+    Tuple3(
+      4,
+      false,
+      Icon(
+        Icons.settings,
+        color: Color(0xFF4D70A6),
+      ),
+    ),
   ];
 
   var selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(context,
+    ScreenUtil.init(
+      context,
       designSize: Size(1080, 2160),
     );
     return Scaffold(
-      backgroundColor: Color(0xFFF1F3F6),
-      body: SafeArea(
+        backgroundColor: Color(0xFFF1F3F6),
+        body: SafeArea(
           child: SingleChildScrollView(
             child: Container(
                 // height: MediaQuery.of(context).size.height,
-                margin: EdgeInsets.symmetric(
-                  horizontal: 120.w
-                ),
+                margin: EdgeInsets.symmetric(horizontal: 120.w),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
@@ -74,11 +105,16 @@ class _NeomorphismCardsScreenState extends State<NeomorphismCardsScreen> {
                           fontSize: 26,
                           fontWeight: FontWeight.bold),
                     ),
-                    listTile("Starbucks Coffee", "55.00 \$", Icon(
-                      Icons.local_drink,
-                      color: Color(0xFF4D70A6),
-                    ) ),
-                    listTile("Transfer to Acidney D.", "55.00 \$",
+                    listTile(
+                        "Starbucks Coffee",
+                        "55.00 \$",
+                        Icon(
+                          Icons.local_drink,
+                          color: Color(0xFF4D70A6),
+                        )),
+                    listTile(
+                        "Transfer to Acidney D.",
+                        "55.00 \$",
                         Icon(
                           FontAwesomeIcons.exchangeAlt,
                           color: Color(0xFF4D70A6),
@@ -86,52 +122,45 @@ class _NeomorphismCardsScreenState extends State<NeomorphismCardsScreen> {
                   ],
                 )),
           ),
-        )
-    );
+        ));
   }
 
   Widget buildButtonBar() {
-
-    return StatefulBuilder(
-      builder: (context, setState) {
-        return Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: items.map((e) {
-
-            return InkWell(
-              hoverColor: Colors.transparent,
-              onTap: (){
-                selectedIndex = e.item1;
-                setState((){});
-              },
-              child: buildButton(e.item3,
-                selected: selectedIndex == e.item1,
-              ),
-            );
-          }).toList(),
-        );
-      }
-    );
+    return StatefulBuilder(builder: (context, setState) {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: items.map((e) {
+          return InkWell(
+            hoverColor: Colors.transparent,
+            onTap: () {
+              selectedIndex = e.item1;
+              setState(() {});
+            },
+            child: buildButton(
+              e.item3,
+              selected: selectedIndex == e.item1,
+            ),
+          );
+        }).toList(),
+      );
+    });
   }
 
   /// 内外阴影
   Decoration buildShadowDecoration({double radius = 10}) {
     return BoxDecoration(
-      color: Color(0xFFF1F3F6),
-      borderRadius: BorderRadius.all(Radius.circular(radius)),
-      boxShadow: [
-        BoxShadow(
-          offset: Offset(10, 10),
-          color: Color(0xFF4D70A6).withOpacity(0.2),
-          blurRadius: 16
-        ),
-        BoxShadow(
-          offset: Offset(-10, -10),
-          color: Color.fromARGB(170, 255, 255, 255),
-          blurRadius: 10
-        ),
-      ]
-    );
+        color: Color(0xFFF1F3F6),
+        borderRadius: BorderRadius.all(Radius.circular(radius)),
+        boxShadow: [
+          BoxShadow(
+              offset: Offset(10, 10),
+              color: Color(0xFF4D70A6).withOpacity(0.2),
+              blurRadius: 16),
+          BoxShadow(
+              offset: Offset(-10, -10),
+              color: Color.fromARGB(170, 255, 255, 255),
+              blurRadius: 10),
+        ]);
   }
 
   Widget buildAppleCard() {
@@ -141,7 +170,9 @@ class _NeomorphismCardsScreenState extends State<NeomorphismCardsScreen> {
           width: double.infinity,
           alignment: Alignment.center,
           height: 520.h,
-          margin: EdgeInsets.symmetric(vertical: 15.h,),
+          margin: EdgeInsets.symmetric(
+            vertical: 15.h,
+          ),
           decoration: buildShadowDecoration(radius: 20),
         ),
         Positioned(
@@ -235,18 +266,16 @@ class _NeomorphismCardsScreenState extends State<NeomorphismCardsScreen> {
                 Text(
                   title,
                   style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.normal,
-                    color: Color(0xFF4D70A6).withOpacity(.7)
-                  ),
+                      fontSize: 16,
+                      fontWeight: FontWeight.normal,
+                      color: Color(0xFF4D70A6).withOpacity(.7)),
                 ),
                 Text(
                   cost,
                   style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF4D70A6).withOpacity(.7)
-                  ),
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF4D70A6).withOpacity(.7)),
                 ),
               ],
             ),
@@ -302,5 +331,4 @@ class _NeomorphismCardsScreenState extends State<NeomorphismCardsScreen> {
       ],
     );
   }
-
 }

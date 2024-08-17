@@ -1,9 +1,5 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-
 
 class MyMenuBar extends StatefulWidget {
   const MyMenuBar({
@@ -107,12 +103,12 @@ class _MyMenuBarState extends State<MyMenuBar> {
             onPressed: () {
               setState(() {
                 _lastSelection =
-                showingMessage ? 'Hide Message' : 'Show Message';
+                    showingMessage ? 'Hide Message' : 'Show Message';
                 showingMessage = !showingMessage;
               });
             },
             shortcut:
-            const SingleActivator(LogicalKeyboardKey.keyS, control: true),
+                const SingleActivator(LogicalKeyboardKey.keyS, control: true),
           ),
           // Hides the message, but is only enabled if the message isn't
           // already hidden.
@@ -120,11 +116,11 @@ class _MyMenuBarState extends State<MyMenuBar> {
             label: 'Reset Message',
             onPressed: showingMessage
                 ? () {
-              setState(() {
-                _lastSelection = 'Reset Message';
-                showingMessage = false;
-              });
-            }
+                    setState(() {
+                      _lastSelection = 'Reset Message';
+                      showingMessage = false;
+                    });
+                  }
                 : null,
             shortcut: const SingleActivator(LogicalKeyboardKey.escape),
           ),
@@ -172,7 +168,8 @@ class _MyMenuBarState extends State<MyMenuBar> {
     // (Re-)register the shortcuts with the ShortcutRegistry so that they are
     // available to the entire application, and update them if they've changed.
     _shortcutsEntry?.dispose();
-    _shortcutsEntry = ShortcutRegistry.of(context).addAll(MenuEntry.shortcuts(result));
+    _shortcutsEntry =
+        ShortcutRegistry.of(context).addAll(MenuEntry.shortcuts(result));
     return result;
   }
 }
@@ -187,20 +184,22 @@ class MyMenuBarDemo extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("$this"),
-        actions: ['done',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () => debugPrint(e),
-        )).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () => debugPrint(e),
+                ))
+            .toList(),
       ),
       body: MyMenuBar(message: kMessage),
     );
   }
 }
-
-
-
 
 /// A class for consolidating the definition of menu entries.
 ///
@@ -213,7 +212,7 @@ class MenuEntry {
     this.onPressed,
     this.menuChildren,
   }) : assert(menuChildren == null || onPressed == null,
-  'onPressed is ignored if menuChildren are provided');
+            'onPressed is ignored if menuChildren are provided');
 
   final String label;
 
@@ -239,14 +238,16 @@ class MenuEntry {
     return selections.map<Widget>(buildSelection).toList();
   }
 
-  static Map<MenuSerializableShortcut, Intent> shortcuts(List<MenuEntry> selections) {
+  static Map<MenuSerializableShortcut, Intent> shortcuts(
+      List<MenuEntry> selections) {
     final result = <MenuSerializableShortcut, Intent>{};
     for (final selection in selections) {
       if (selection.menuChildren != null) {
         result.addAll(MenuEntry.shortcuts(selection.menuChildren!));
       } else {
         if (selection.shortcut != null && selection.onPressed != null) {
-          result[selection.shortcut!] = VoidCallbackIntent(selection.onPressed!);
+          result[selection.shortcut!] =
+              VoidCallbackIntent(selection.onPressed!);
         }
       }
     }

@@ -62,7 +62,10 @@ class _CarModelsPageState extends State<CarModelsPage> {
   }
 
   Widget customHeader() {
-    return Container(height: susItemHeight, color: Colors.green,);
+    return Container(
+      height: susItemHeight,
+      color: Colors.green,
+    );
     return Column(
       children: <Widget>[
         Container(
@@ -110,7 +113,7 @@ class _CarModelsPageState extends State<CarModelsPage> {
         },
         // indexBarData: ['选', ...kIndexBarData],
         indexBarData: [...SuspensionUtil.getTagIndexList(contactList)],
-        indexHintBuilder: (BuildContext context, String tag){
+        indexHintBuilder: (BuildContext context, String tag) {
           return SizedBox();
         },
         indexBarOptions: IndexBarOptions(

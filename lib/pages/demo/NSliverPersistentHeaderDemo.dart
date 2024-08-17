@@ -6,42 +6,44 @@
 //  Copyright © 2023/3/25 shang. All rights reserved.
 //
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_sliver_persistent_header_delegate.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 
 class NSliverPersistentHeaderDemo extends StatefulWidget {
-
-  const NSliverPersistentHeaderDemo({ Key? key, this.title}) : super(key: key);
+  const NSliverPersistentHeaderDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
   @override
-  _NSliverPersistentHeaderDemoState createState() => _NSliverPersistentHeaderDemoState();
+  _NSliverPersistentHeaderDemoState createState() =>
+      _NSliverPersistentHeaderDemoState();
 }
 
-class _NSliverPersistentHeaderDemoState extends State<NSliverPersistentHeaderDemo> {
-
-
+class _NSliverPersistentHeaderDemoState
+    extends State<NSliverPersistentHeaderDemo> {
   @override
   void initState() {
     super.initState();
   }
 
-   @override
+  @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          onPressed: onPressed,
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),)
-        ).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  onPressed: onPressed,
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ))
+            .toList(),
       ),
       body: _buildBody(),
     );
@@ -51,15 +53,15 @@ class _NSliverPersistentHeaderDemoState extends State<NSliverPersistentHeaderDem
     return CustomScrollView(
       slivers: [
         Container(
-          height: 200,
-          alignment: Alignment.center,
-          color: Colors.green,
-          child: Text("${widget}")
-        ).toSliverToBoxAdapter(),
+                height: 200,
+                alignment: Alignment.center,
+                color: Colors.green,
+                child: Text("${widget}"))
+            .toSliverToBoxAdapter(),
         NSliverPersistentHeader(
           // pinned: true,
           // floating: true,
-          builder: (context, offset, overlapsContent){
+          builder: (context, offset, overlapsContent) {
             return Container(
               decoration: BoxDecoration(
                 // color: Colors.white,
@@ -80,11 +82,10 @@ class _NSliverPersistentHeaderDemoState extends State<NSliverPersistentHeaderDem
     );
   }
 
-  onPressed(){
+  onPressed() {}
 
-  }
-
-  SliverPersistentHeader buildSliverHeader({required Text text, bool pinned = true}) {
+  SliverPersistentHeader buildSliverHeader(
+      {required Text text, bool pinned = true}) {
     return SliverPersistentHeader(
       pinned: pinned,
       delegate: NSliverPersistentHeaderDelegate(
@@ -105,5 +106,4 @@ class _NSliverPersistentHeaderDemoState extends State<NSliverPersistentHeaderDem
       ),
     );
   }
-
 }

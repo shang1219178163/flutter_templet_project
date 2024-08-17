@@ -1,24 +1,20 @@
-
-
-
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 // import 'package:image/image.dart' as compress_image;
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 
-
 /// 压缩
-mixin CompressImageMixin{
-
+mixin CompressImageMixin {
   /// 压缩图片
   FutureOr<Uint8List> toCompressImage(Uint8List bytes) async {
     return compute(_comporessUint8List, bytes);
   }
 
-
   /// 压缩文件
-  Future<XFile?> toCompressFile(CompressFileModel model,) async {
+  Future<XFile?> toCompressFile(
+    CompressFileModel model,
+  ) async {
     return compute(_comporessFile, model);
   }
 
@@ -36,7 +32,9 @@ mixin CompressImageMixin{
     return result;
   }
 
-  Future<XFile?> _comporessFile(CompressFileModel model,) async {
+  Future<XFile?> _comporessFile(
+    CompressFileModel model,
+  ) async {
     var quality = _getQuality(model.length);
     final result = await FlutterImageCompress.compressAndGetFile(
       model.path,
@@ -75,9 +73,8 @@ mixin CompressImageMixin{
   }
 }
 
-
 /// 文件压缩模型
-class CompressFileModel{
+class CompressFileModel {
   CompressFileModel(
     this.path,
     this.length,

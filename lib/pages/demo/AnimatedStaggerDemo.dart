@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 
 class AnimatedStaggerDemo extends StatefulWidget {
@@ -11,7 +9,6 @@ class AnimatedStaggerDemo extends StatefulWidget {
 
 class _AnimatedStaggerDemoState extends State<AnimatedStaggerDemo>
     with TickerProviderStateMixin {
-
   late final _controller = AnimationController(
     duration: const Duration(milliseconds: 2000),
     vsync: this,

@@ -1,5 +1,3 @@
-
-
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -12,11 +10,9 @@ import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:get/get.dart';
 import 'package:tuple/tuple.dart';
 
-
 class SliverTabBarDemo extends StatefulWidget {
-
   SliverTabBarDemo({
-    super.key, 
+    super.key,
     this.arguments,
   });
 
@@ -26,10 +22,10 @@ class SliverTabBarDemo extends StatefulWidget {
   State<SliverTabBarDemo> createState() => _SliverTabBarDemoState();
 }
 
-class _SliverTabBarDemoState extends State<SliverTabBarDemo> with SingleTickerProviderStateMixin {
-
-  bool get hideApp => Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
-
+class _SliverTabBarDemoState extends State<SliverTabBarDemo>
+    with SingleTickerProviderStateMixin {
+  bool get hideApp =>
+      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
 
   late final List<Tuple2<String, Widget>> items = [
     Tuple2("人群画像", buildPage()),
@@ -37,7 +33,6 @@ class _SliverTabBarDemoState extends State<SliverTabBarDemo> with SingleTickerPr
     Tuple2("健康指标", buildPage()),
     Tuple2("异常指标", buildPage()),
   ];
-
 
   late final tabController = TabController(length: items.length, vsync: this);
 
@@ -83,16 +78,14 @@ class _SliverTabBarDemoState extends State<SliverTabBarDemo> with SingleTickerPr
           forceMaterialTransparency: true,
         ),
         NSliverPersistentHeaderBuilder(
-          pinned: true,
-          max: 200,
-          min: 0,
-          builder: (ctx, offset, overlapsContent) {
-
-            return Container(
-              color: Colors.red,
-            );
-          }
-        ),
+            pinned: true,
+            max: 200,
+            min: 0,
+            builder: (ctx, offset, overlapsContent) {
+              return Container(
+                color: Colors.red,
+              );
+            }),
         NSliverPersistentHeaderBuilder(
           pinned: true,
           max: 48,
@@ -106,15 +99,16 @@ class _SliverTabBarDemoState extends State<SliverTabBarDemo> with SingleTickerPr
                 decoration: BoxDecoration(
                   color: Colors.white,
                   border: Border(
-                    bottom: BorderSide(width: 0, color: Color(0xFFE5E5E5))
-                  ),
+                      bottom: BorderSide(width: 0, color: Color(0xFFE5E5E5))),
                 ),
                 child: TabBar(
                   controller: tabController,
                   tabAlignment: TabAlignment.center,
                   labelColor: context.primaryColor,
                   labelPadding: const EdgeInsets.only(left: 8, right: 8),
-                  labelStyle: TextStyle(fontWeight: FontWeight.w500,),
+                  labelStyle: TextStyle(
+                    fontWeight: FontWeight.w500,
+                  ),
                   padding: EdgeInsets.zero,
                   indicatorWeight: 2,
                   indicatorColor: context.primaryColor,
@@ -129,8 +123,9 @@ class _SliverTabBarDemoState extends State<SliverTabBarDemo> with SingleTickerPr
           delegate: SliverChildBuilderDelegate((context, index) {
             return ListTile(
               title: Text('Item $index'),
-          );
-        }, childCount: 20),),
+            );
+          }, childCount: 20),
+        ),
         // SliverToBoxAdapter(
         //   child: AnimatedBuilder(
         //       animation: Listenable.merge([
@@ -179,15 +174,13 @@ class _SliverTabBarDemoState extends State<SliverTabBarDemo> with SingleTickerPr
       child: Scrollbar(
         controller: scrollController,
         child: ListView.builder(
-          controller: scrollController,
-          itemCount: titles.length,
-          itemBuilder: (_, index){
-
-            return ListTile(
-              title: Text("${tabController.index} 选项_$index"),
-            ).toColoredBox(color: ColorExt.random);
-          }
-        ),
+            controller: scrollController,
+            itemCount: titles.length,
+            itemBuilder: (_, index) {
+              return ListTile(
+                title: Text("${tabController.index} 选项_$index"),
+              ).toColoredBox(color: ColorExt.random);
+            }),
       ),
     );
   }

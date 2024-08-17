@@ -13,8 +13,15 @@ import 'package:flutter_templet_project/extension/widget_ext.dart';
 class NSelectedCell extends StatefulWidget {
   NSelectedCell({
     super.key,
-    this.selectedIcon = const Icon(Icons.check_circle, size: 16, color: Colors.blue,),
-    this.unselectedIcon = const Icon(Icons.radio_button_unchecked, size: 16,),
+    this.selectedIcon = const Icon(
+      Icons.check_circle,
+      size: 16,
+      color: Colors.blue,
+    ),
+    this.unselectedIcon = const Icon(
+      Icons.radio_button_unchecked,
+      size: 16,
+    ),
     required this.isSelected,
     required this.onToggle,
     required this.child,
@@ -32,11 +39,11 @@ class NSelectedCell extends StatefulWidget {
 }
 
 class _NSelectedCellState extends State<NSelectedCell> {
-
   @override
   Widget build(BuildContext context) {
     // final icon = widget.isSelected ? Icons.check_circle : Icons.check;
-    final icon = widget.isSelected ? widget.selectedIcon : widget.unselectedIcon;
+    final icon =
+        widget.isSelected ? widget.selectedIcon : widget.unselectedIcon;
 
     return Container(
       decoration: const BoxDecoration(

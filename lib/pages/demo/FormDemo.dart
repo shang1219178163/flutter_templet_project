@@ -6,8 +6,6 @@
 //  Copyright © 2024/3/28 shang. All rights reserved.
 //
 
-
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -21,7 +19,6 @@ import 'package:get/get.dart';
 
 /// 表单组件测试
 class FormDemo extends StatefulWidget {
-
   FormDemo({
     super.key,
     this.arguments,
@@ -34,54 +31,60 @@ class FormDemo extends StatefulWidget {
 }
 
 class _FormDemoState extends State<FormDemo> {
-
-  bool get hideApp => Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
+  bool get hideApp =>
+      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
 
   final _scrollController = ScrollController();
 
   Map<String, dynamic> arguments = Get.arguments ?? <String, dynamic>{};
+
   /// id
   late final id = arguments["id"];
 
   static const weChatSubTitleColor = Color(0xff737373);
 
   late final items = [
-    (title: "真实姓名",
-    key: "name",
-    value: "",
-    maxLines: 1,
-    controller: TextEditingController(),
-    inputFormatters: <TextInputFormatter>[
-      LengthLimitingTextInputFormatter(20),
-    ],
+    (
+      title: "真实姓名",
+      key: "name",
+      value: "",
+      maxLines: 1,
+      controller: TextEditingController(),
+      inputFormatters: <TextInputFormatter>[
+        LengthLimitingTextInputFormatter(20),
+      ],
     ),
-    (title: "身份证号",
-    key: "idCard",
-    value: "",
-    maxLines: 1,
-    controller: TextEditingController(),
-    inputFormatters: <TextInputFormatter>[
-      FilteringTextInputFormatter.allow(RegExp('[X]|[0-9]')),
-      LengthLimitingTextInputFormatter(18)
-    ],
+    (
+      title: "身份证号",
+      key: "idCard",
+      value: "",
+      maxLines: 1,
+      controller: TextEditingController(),
+      inputFormatters: <TextInputFormatter>[
+        FilteringTextInputFormatter.allow(RegExp('[X]|[0-9]')),
+        LengthLimitingTextInputFormatter(18)
+      ],
     ),
-    (title: "手机号码",
-    key: "phone",
-    value: "",
-    maxLines: 1,
-    controller: TextEditingController(),
-    inputFormatters: <TextInputFormatter>[
-      LengthLimitingTextInputFormatter(11),
-    ],
+    (
+      title: "手机号码",
+      key: "phone",
+      value: "",
+      maxLines: 1,
+      controller: TextEditingController(),
+      inputFormatters: <TextInputFormatter>[
+        LengthLimitingTextInputFormatter(11),
+      ],
     ),
-    (title: "简       介",
-    key: "description",
-    value: "宝石：我曾踏足山巅，也曾进入低谷，二者都使我受益良多。 英文翻译——Once,I was the top.Once,I was the last.Both of them have benefited me a lot.",
-    maxLines: null,
-    controller: TextEditingController(),
-    inputFormatters: <TextInputFormatter>[
-      LengthLimitingTextInputFormatter(200),
-    ],
+    (
+      title: "简       介",
+      key: "description",
+      value:
+          "宝石：我曾踏足山巅，也曾进入低谷，二者都使我受益良多。 英文翻译——Once,I was the top.Once,I was the last.Both of them have benefited me a lot.",
+      maxLines: null,
+      controller: TextEditingController(),
+      inputFormatters: <TextInputFormatter>[
+        LengthLimitingTextInputFormatter(200),
+      ],
     ),
   ];
 
@@ -93,15 +96,22 @@ class _FormDemoState extends State<FormDemo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: hideApp ? null : AppBar(
-        title: Text("$widget"),
-        actions: ['done',].map((e) => TextButton(
-          onPressed: onPressed,
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),)
-        ).toList(),
-      ),
+      appBar: hideApp
+          ? null
+          : AppBar(
+              title: Text("$widget"),
+              actions: [
+                'done',
+              ]
+                  .map((e) => TextButton(
+                        onPressed: onPressed,
+                        child: Text(
+                          e,
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ))
+                  .toList(),
+            ),
       body: buildBody(),
     );
   }
@@ -145,24 +155,29 @@ class _FormDemoState extends State<FormDemo> {
             //     ],
             //   );
             // }).toList(),
-            NText(text, fontSize: 14, maxLines: 100, ),
+            NText(
+              text,
+              fontSize: 14,
+              maxLines: 100,
+            ),
             ValueListenableBuilder(
-               valueListenable: resultVN,
-               builder: (context,  value, child){
-
-                  return NText(value,
+                valueListenable: resultVN,
+                builder: (context, value, child) {
+                  return NText(
+                    value,
                     fontSize: 14,
                     maxLines: 100,
                   );
-                }
+                }),
+            Divider(
+              height: 1,
             ),
-            Divider(height: 1,),
             Text.rich(
               TextSpan(
                 children: RichTextExt.createTextSpans(
                   text: text,
                   textTaps: delimiters,
-                  onLink: (textTap){
+                  onLink: (textTap) {
                     ddlog("textTap: $textTap");
                   },
                 ),
@@ -176,7 +191,10 @@ class _FormDemoState extends State<FormDemo> {
     );
   }
 
-  Widget buildCell({required String title, required Widget trailing,}) {
+  Widget buildCell({
+    required String title,
+    required Widget trailing,
+  }) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       color: Colors.white,
@@ -184,14 +202,17 @@ class _FormDemoState extends State<FormDemo> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(title,
+          Text(
+            title,
             style: TextStyle(
               color: Color(0xff181818),
               fontSize: 16.0,
               fontWeight: FontWeight.w400,
             ),
           ),
-          SizedBox(width: 8,),
+          SizedBox(
+            width: 8,
+          ),
           Expanded(
             child: trailing,
           ),
@@ -199,7 +220,6 @@ class _FormDemoState extends State<FormDemo> {
       ),
     );
   }
-
 
   /// 身份证输入框
   Widget buildTextfield({
@@ -214,7 +234,6 @@ class _FormDemoState extends State<FormDemo> {
     ValueChanged<String>? onChanged,
     VoidCallback? onEditingComplete,
   }) {
-
     Color? borderColor = context.primaryColor;
     // borderColor = Color(0xffe4e4e4);
 
@@ -245,9 +264,11 @@ class _FormDemoState extends State<FormDemo> {
         contentPadding: EdgeInsets.symmetric(vertical: 4),
         isCollapsed: true,
         // counterText: readOnly || maxLines == 1 ? null : "${controller.text.length}/$maxLength",
-        counter: readOnly || maxLines == 1 ? null : controller.buildInputDecorationCounter(
-          maxLength: maxLength,
-        ),
+        counter: readOnly || maxLines == 1
+            ? null
+            : controller.buildInputDecorationCounter(
+                maxLength: maxLength,
+              ),
       ),
       style: const TextStyle(
         fontSize: 16,
@@ -258,7 +279,7 @@ class _FormDemoState extends State<FormDemo> {
       maxLines: maxLines,
       onChanged: onChanged,
       onEditingComplete: onEditingComplete ??
-              () {
+          () {
             FocusScope.of(context).unfocus();
           },
     );
@@ -293,7 +314,7 @@ class _FormDemoState extends State<FormDemo> {
       maxLines: maxLines,
       onChanged: onChanged,
       onEditingComplete: onEditingComplete ??
-              () {
+          () {
             FocusScope.of(context).unfocus();
           },
     );

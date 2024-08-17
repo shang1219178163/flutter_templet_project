@@ -20,13 +20,37 @@ class NestedScrollViewDemoThree extends StatefulWidget {
 }
 
 class _NestedScrollViewDemoThreeState extends State<NestedScrollViewDemoThree> {
-
   late final List<({Tab tab, Widget child})> tabItems = [
-    (tab: Tab(text: "选项卡0",), child: buildScrollView(name: '选项卡0')),
-    (tab: Tab(text: "选项卡1",), child: buildScrollView(name: '选项卡1')),
-    (tab: Tab(text: "选项卡2",), child: buildScrollView(name: '选项卡2')),
-    (tab: Tab(text: "选项卡3",), child: buildScrollView(name: '选项卡3')),
-    (tab: Tab(text: "选项卡4",), child: buildScrollView(name: '选项卡4')),
+    (
+      tab: Tab(
+        text: "选项卡0",
+      ),
+      child: buildScrollView(name: '选项卡0')
+    ),
+    (
+      tab: Tab(
+        text: "选项卡1",
+      ),
+      child: buildScrollView(name: '选项卡1')
+    ),
+    (
+      tab: Tab(
+        text: "选项卡2",
+      ),
+      child: buildScrollView(name: '选项卡2')
+    ),
+    (
+      tab: Tab(
+        text: "选项卡3",
+      ),
+      child: buildScrollView(name: '选项卡3')
+    ),
+    (
+      tab: Tab(
+        text: "选项卡4",
+      ),
+      child: buildScrollView(name: '选项卡4')
+    ),
   ];
 
   @override
@@ -36,7 +60,6 @@ class _NestedScrollViewDemoThreeState extends State<NestedScrollViewDemoThree> {
         length: tabItems.length,
         child: NestedScrollView(
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-
             Color backgroudColor = Colors.blue;
             Color labelColor = Colors.white;
 
@@ -97,9 +120,9 @@ class _NestedScrollViewDemoThreeState extends State<NestedScrollViewDemoThree> {
           // ),
           background: Container(
             decoration: BoxDecoration(
-              // color: Colors.orange,
-              // border: Border.all(color: Colors.blue),
-            ),
+                // color: Colors.orange,
+                // border: Border.all(color: Colors.blue),
+                ),
             padding: EdgeInsets.only(
               top: mediaQuery.viewPadding.top + kToolbarHeight,
               bottom: 46,
@@ -126,71 +149,69 @@ class _NestedScrollViewDemoThreeState extends State<NestedScrollViewDemoThree> {
     );
   }
 
-  Widget buildScrollView({required String name,}) {
-    return Builder(
-      builder: (context) {
+  Widget buildScrollView({
+    required String name,
+  }) {
+    return Builder(builder: (context) {
+      return CustomScrollView(
+        key: PageStorageKey<String>(name),
+        slivers: <Widget>[
+          // SliverOverlapInjector 的作用是处理重叠滚动效果，
+          // 确保 CustomScrollView 中的滚动视图不会与其他视图重叠。
+          SliverOverlapInjector(
+            handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
+          ),
 
-        return CustomScrollView(
-          key: PageStorageKey<String>(name),
-          slivers: <Widget>[
-            // SliverOverlapInjector 的作用是处理重叠滚动效果，
-            // 确保 CustomScrollView 中的滚动视图不会与其他视图重叠。
-            SliverOverlapInjector(
-              handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
-                  context),
-            ),
-
-            // 横向滚动
-            SliverToBoxAdapter(
-              child: SizedBox(
-                height: 100,
-                child: PageView(
-                  children: [
-                    Container(
-                      color: Colors.yellow,
-                      child: const Center(child: Text('横向滚动')),
-                    ),
-                    Container(color: Colors.green),
-                    Container(color: Colors.blue),
-                  ],
-                ),
+          // 横向滚动
+          SliverToBoxAdapter(
+            child: SizedBox(
+              height: 100,
+              child: PageView(
+                children: [
+                  Container(
+                    color: Colors.yellow,
+                    child: const Center(child: Text('横向滚动')),
+                  ),
+                  Container(color: Colors.green),
+                  Container(color: Colors.blue),
+                ],
               ),
             ),
+          ),
 
-            // 固定高度内容
-            SliverToBoxAdapter(
-              child: Container(
-                height: 100,
-                color: Colors.greenAccent,
-                child: const Center(child: Text('固定高度内容')),
-              ),
+          // 固定高度内容
+          SliverToBoxAdapter(
+            child: Container(
+              height: 100,
+              color: Colors.greenAccent,
+              child: const Center(child: Text('固定高度内容')),
             ),
+          ),
 
-            // 列表
-            buildContent(name),
+          // 列表
+          buildContent(name),
 
-            // 固定高度内容
-            SliverToBoxAdapter(
-              child: Container(
-                height: 100,
-                color: Colors.greenAccent,
-                child: const Center(child: Text('固定高度内容')),
-              ),
+          // 固定高度内容
+          SliverToBoxAdapter(
+            child: Container(
+              height: 100,
+              color: Colors.greenAccent,
+              child: const Center(child: Text('固定高度内容')),
             ),
+          ),
 
-            // 列表 100 行
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                    (BuildContext context, int index) {
-                  return ListTile(title: Text('Item $index'));
-                },
-                childCount: 100,
-              ),
+          // 列表 100 行
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (BuildContext context, int index) {
+                return ListTile(title: Text('Item $index'));
+              },
+              childCount: 100,
             ),
-          ],
-        );
-      }
-    );
+          ),
+        ],
+      );
+    });
   }
 
   Widget buildContent(String name) {
@@ -212,7 +233,6 @@ class _NestedScrollViewDemoThreeState extends State<NestedScrollViewDemoThree> {
 }
 
 class MyCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-
   const MyCustomAppBar({
     super.key,
     required this.context,

@@ -1,19 +1,15 @@
 import 'package:flutter/material.dart';
 
 class MaterialBannerDemo extends StatefulWidget {
-
   final String? title;
 
-  const MaterialBannerDemo({ Key? key, this.title}) : super(key: key);
+  const MaterialBannerDemo({Key? key, this.title}) : super(key: key);
 
-  
   @override
   _MaterialBannerDemoState createState() => _MaterialBannerDemoState();
 }
 
 class _MaterialBannerDemoState extends State<MaterialBannerDemo> {
-
-
   @override
   Widget build(BuildContext context) {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
@@ -22,12 +18,9 @@ class _MaterialBannerDemoState extends State<MaterialBannerDemo> {
         appBar: AppBar(
           title: Text(widget.title ?? "$widget"),
         ),
-        body: Column(
-          children: [
-            _buildMaterialBanner(),
-          ]
-        )
-    );
+        body: Column(children: [
+          _buildMaterialBanner(),
+        ]));
   }
 
   _buildMaterialBanner() {

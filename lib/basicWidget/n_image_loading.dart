@@ -6,14 +6,12 @@
 //  Copyright © 3/24/23 shang. All rights reserved.
 //
 
-
 import 'package:flutter/material.dart';
 
 class NImageLoading extends StatelessWidget {
-
   const NImageLoading({
-  	Key? key,
-  	this.title,
+    Key? key,
+    this.title,
     required this.image,
     required this.placeholder,
   }) : super(key: key);
@@ -38,12 +36,13 @@ class NImageLoading extends StatelessWidget {
           child: frame != null ? child : placeholder,
         );
       },
-      loadingBuilder: (context, child, ImageChunkEvent? loadingProgress){
+      loadingBuilder: (context, child, ImageChunkEvent? loadingProgress) {
         var val = 0.0;
         if (loadingProgress != null &&
             loadingProgress.cumulativeBytesLoaded != 0 &&
             loadingProgress.expectedTotalBytes != 0) {
-          val = loadingProgress.cumulativeBytesLoaded.toDouble()/loadingProgress.expectedTotalBytes!.toDouble();
+          val = loadingProgress.cumulativeBytesLoaded.toDouble() /
+              loadingProgress.expectedTotalBytes!.toDouble();
         }
 
         return Center(
@@ -55,4 +54,3 @@ class NImageLoading extends StatelessWidget {
     );
   }
 }
-

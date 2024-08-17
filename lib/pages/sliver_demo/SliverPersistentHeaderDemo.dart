@@ -20,7 +20,7 @@ class SliverPersistentHeaderDemo extends StatelessWidget {
           sectionHeader(text: Text('Header Section 1'), pinned: false),
           SliverGrid.count(
             crossAxisCount: 4,
-              children: list.map((e) => Container(color: e)).toList(),
+            children: list.map((e) => Container(color: e)).toList(),
             // children: Colors.accents.map((e) => Container(color: e)).toList(),
           ),
           sectionHeader(text: Text('Header Section 2'), pinned: true),
@@ -32,7 +32,8 @@ class SliverPersistentHeaderDemo extends StatelessWidget {
     );
   }
 
-  SliverPersistentHeader sectionHeader({required Text text, bool pinned = false}) {
+  SliverPersistentHeader sectionHeader(
+      {required Text text, bool pinned = false}) {
     return SliverPersistentHeader(
       pinned: pinned,
       delegate: NSliverPersistentHeaderDelegate(
@@ -43,11 +44,11 @@ class SliverPersistentHeaderDemo extends StatelessWidget {
             decoration: BoxDecoration(
               // color: Colors.white,
               color: Colors.lightBlue,
-                borderRadius: BorderRadius.all(Radius.circular(16)),
-              ),
-              child: Center(
-                child: text,
-              ),
+              borderRadius: BorderRadius.all(Radius.circular(16)),
+            ),
+            child: Center(
+              child: text,
+            ),
           ),
         ),
       ),
@@ -62,7 +63,8 @@ class SliverPersistentHeaderDemo extends StatelessWidget {
         crossAxisSpacing: 10.0,
         childAspectRatio: 4.0,
       ),
-      delegate: SliverChildBuilderDelegate((context, index) {
+      delegate: SliverChildBuilderDelegate(
+        (context, index) {
           return Container(
             alignment: Alignment.center,
             color: Colors.teal[100 * (index % 9)],
@@ -73,7 +75,4 @@ class SliverPersistentHeaderDemo extends StatelessWidget {
       ),
     );
   }
-
 }
-
-

@@ -10,19 +10,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class APPForgetPwdPage extends StatefulWidget {
-
   final String? title;
 
-  const APPForgetPwdPage({ Key? key, this.title}) : super(key: key);
+  const APPForgetPwdPage({Key? key, this.title}) : super(key: key);
 
-  
   @override
   _APPForgetPwdPageState createState() => _APPForgetPwdPageState();
 }
 
 class _APPForgetPwdPageState extends State<APPForgetPwdPage> {
-
-
   @override
   Widget build(BuildContext context) {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
@@ -31,8 +27,6 @@ class _APPForgetPwdPageState extends State<APPForgetPwdPage> {
         appBar: AppBar(
           title: Text(widget.title ?? "$widget"),
         ),
-        body: Text(arguments.toString())
-    );
+        body: Text(arguments.toString()));
   }
-
 }

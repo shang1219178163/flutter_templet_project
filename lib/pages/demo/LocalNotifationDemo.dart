@@ -11,7 +11,7 @@
 // import 'package:flutter/material.dart';
 // import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 //
-// 
+//
 //
 // class LocalNotifationDemo extends StatefulWidget {
 //
@@ -151,33 +151,25 @@
 // //
 // // }
 
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class LocalNotifationDemo extends StatefulWidget {
-
   final String? title;
 
-  const LocalNotifationDemo({ Key? key, this.title}) : super(key: key);
+  const LocalNotifationDemo({Key? key, this.title}) : super(key: key);
 
-  
   @override
   _LocalNotifationDemoState createState() => _LocalNotifationDemoState();
 }
 
 class _LocalNotifationDemoState extends State<LocalNotifationDemo> {
-
-
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.title ?? "$widget"),
         ),
-        body: Text('11111')
-    );
+        body: Text('11111'));
   }
-
 }

@@ -4,7 +4,6 @@ import 'package:flutter_templet_project/model/mock_data.dart';
 import 'package:flutter_templet_project/pages/tabBar_tabBarView_demo.dart';
 import 'package:tuple/tuple.dart';
 
-
 import 'package:flutter_templet_project/basicWidget/app_update_card.dart';
 import 'package:flutter_templet_project/basicWidget/list_subtitle_cell.dart';
 import 'package:flutter_templet_project/basicWidget/section_list_view.dart';
@@ -20,13 +19,8 @@ import 'package:get/get_navigation/src/extension_navigation.dart';
 
 import 'package:flutter_templet_project/main.dart';
 
-
 class ListViewStyleDemo extends StatefulWidget {
-
-  const ListViewStyleDemo({
-    Key? key,
-    this.title
-  }) : super(key: key);
+  const ListViewStyleDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -34,8 +28,10 @@ class ListViewStyleDemo extends StatefulWidget {
   _ListViewStyleDemoState createState() => _ListViewStyleDemoState();
 }
 
-class _ListViewStyleDemoState extends State<ListViewStyleDemo> with SingleTickerProviderStateMixin {
-  late final TabController _tabController = TabController(length: _pages.length, vsync: this);
+class _ListViewStyleDemoState extends State<ListViewStyleDemo>
+    with SingleTickerProviderStateMixin {
+  late final TabController _tabController =
+      TabController(length: _pages.length, vsync: this);
 
   List<Tuple2<String, Widget>> _pages = [];
 
@@ -70,10 +66,10 @@ class _ListViewStyleDemoState extends State<ListViewStyleDemo> with SingleTicker
         bottom: TabBar(
           controller: _tabController,
           isScrollable: true,
-          tabs: _pages.map((e) => Tab(
-              key: PageStorageKey<String>(e.item1),
-              text: e.item1
-          )).toList(),
+          tabs: _pages
+              .map((e) =>
+                  Tab(key: PageStorageKey<String>(e.item1), text: e.item1))
+              .toList(),
           // indicatorSize: TabBarIndicatorSize.label,
           // indicatorPadding: EdgeInsets.only(left: 6, right: 6),
         ),
@@ -118,7 +114,8 @@ class _ListViewStyleDemoState extends State<ListViewStyleDemo> with SingleTicker
               color: Color(0xFF333333),
             ),
           ),
-          subtitle: Text(data.content,
+          subtitle: Text(
+            data.content,
             // maxLines: 1,
             // overflow: TextOverflow.ellipsis,
             style: TextStyle(
@@ -126,13 +123,15 @@ class _ListViewStyleDemoState extends State<ListViewStyleDemo> with SingleTicker
               color: Color(0xFF999999),
             ),
           ),
-          trailing: Text(data.time,
+          trailing: Text(
+            data.time,
             style: TextStyle(
               fontSize: 13,
               color: Color(0xFF999999),
             ),
           ),
-          subtrailing: Text("已完成",
+          subtrailing: Text(
+            "已完成",
             style: TextStyle(
               fontSize: 13,
               color: Colors.blue,
@@ -153,7 +152,11 @@ class _ListViewStyleDemoState extends State<ListViewStyleDemo> with SingleTicker
       itemBuilder: (context, index) {
         final data = kUpdateAppList[index];
         if (index == 0) {
-          return AppUpdateCard(data: data, isExpand: true, showExpand: false,);
+          return AppUpdateCard(
+            data: data,
+            isExpand: true,
+            showExpand: false,
+          );
         }
         return AppUpdateCard(data: data);
       },
@@ -166,13 +169,20 @@ class _ListViewStyleDemoState extends State<ListViewStyleDemo> with SingleTicker
   _buildPage3() {
     return SectionListView<String, Tuple2<String, String>>(
       headerList: tuples.map((e) => e.item1).toList(),
-      itemList: tuples.map((e) => e.item2).toList()
-          .map((e) => e.sorted((a, b) => a.item1.toLowerCase().compareTo(b.item1.toLowerCase()))).toList(),
+      itemList: tuples
+          .map((e) => e.item2)
+          .toList()
+          .map((e) => e.sorted(
+              (a, b) => a.item1.toLowerCase().compareTo(b.item1.toLowerCase())))
+          .toList(),
       headerBuilder: (e) {
         return Container(
           // color: Colors.red,
           padding: EdgeInsets.only(top: 10, bottom: 8, left: 10, right: 15),
-          child: Text(e, style: TextStyle(fontWeight: FontWeight.w600),),
+          child: Text(
+            e,
+            style: TextStyle(fontWeight: FontWeight.w600),
+          ),
         );
       },
       itemBuilder: (section, row, e) {
@@ -181,9 +191,9 @@ class _ListViewStyleDemoState extends State<ListViewStyleDemo> with SingleTicker
           subtitle: Text(e.item2.toCapitalize()),
           trailing: Icon(Icons.keyboard_arrow_right_rounded),
           dense: true,
-          onTap: (){
+          onTap: () {
             // Get.toNamed(e.item1, arguments: e);
-            if (e.item1.toLowerCase().contains("loginPage".toLowerCase())){
+            if (e.item1.toLowerCase().contains("loginPage".toLowerCase())) {
               Get.offNamed(e.item1, arguments: e.item1);
             } else {
               Get.toNamed(e.item1, arguments: e.item1);
@@ -196,52 +206,68 @@ class _ListViewStyleDemoState extends State<ListViewStyleDemo> with SingleTicker
 
   _buildPage4() {
     return EnhanceExpandListView(
-      children: tuples.map<ExpandPanelModel<Tuple2<String, String>>>((e) => ExpandPanelModel(
-        canTapOnHeader: true,
-        isExpanded: false,
-        arrowPosition: EnhanceExpansionPanelArrowPosition.none,
-        // backgroundColor: Color(0xFFDDDDDD),
-        headerBuilder: (contenx, isExpand) {
-          final trailing = isExpand ? Icon(Icons.keyboard_arrow_up, color: Colors.blue) :
-          Icon(Icons.keyboard_arrow_down, color: Colors.blue,);
-          return Container(
-            // color: Colors.green,
-            color: isExpand ? Colors.black12 : null,
-            child: ListTile(
-              title: Text(e.item1, style: TextStyle(fontWeight: FontWeight.bold),),
-              // subtitle: Text("subtitle"),
-              trailing: trailing,
-            ),
-          );
-        },
-        bodyChildren: e.item2,
-        bodyItemBuilder: (context, e) {
-          return ListTile(
-            title: Text(e.item1, style: TextStyle(fontSize: 14),),
-            subtitle: Text(e.item2, style: TextStyle(fontSize: 12),),
-            trailing: Icon(Icons.chevron_right),
-            dense: true,
-            // contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
-            onTap: () {
-              if (e.item1.toLowerCase().contains("loginPage".toLowerCase())){
-                Get.offNamed(e.item1, arguments: e.item1);
-              } else {
-                Get.toNamed(e.item1, arguments: e.item1);
-              }
-            });
-        },
-      )).toList(),
+      children: tuples
+          .map<ExpandPanelModel<Tuple2<String, String>>>(
+              (e) => ExpandPanelModel(
+                    canTapOnHeader: true,
+                    isExpanded: false,
+                    arrowPosition: EnhanceExpansionPanelArrowPosition.none,
+                    // backgroundColor: Color(0xFFDDDDDD),
+                    headerBuilder: (contenx, isExpand) {
+                      final trailing = isExpand
+                          ? Icon(Icons.keyboard_arrow_up, color: Colors.blue)
+                          : Icon(
+                              Icons.keyboard_arrow_down,
+                              color: Colors.blue,
+                            );
+                      return Container(
+                        // color: Colors.green,
+                        color: isExpand ? Colors.black12 : null,
+                        child: ListTile(
+                          title: Text(
+                            e.item1,
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          // subtitle: Text("subtitle"),
+                          trailing: trailing,
+                        ),
+                      );
+                    },
+                    bodyChildren: e.item2,
+                    bodyItemBuilder: (context, e) {
+                      return ListTile(
+                          title: Text(
+                            e.item1,
+                            style: TextStyle(fontSize: 14),
+                          ),
+                          subtitle: Text(
+                            e.item2,
+                            style: TextStyle(fontSize: 12),
+                          ),
+                          trailing: Icon(Icons.chevron_right),
+                          dense: true,
+                          // contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
+                          onTap: () {
+                            if (e.item1
+                                .toLowerCase()
+                                .contains("loginPage".toLowerCase())) {
+                              Get.offNamed(e.item1, arguments: e.item1);
+                            } else {
+                              Get.toNamed(e.item1, arguments: e.item1);
+                            }
+                          });
+                    },
+                  ))
+          .toList(),
     );
   }
 
-  List<String> getTitles({
-    required List<Tuple2<String, List<Tuple2<String, String>>>> tuples
-  }) {
+  List<String> getTitles(
+      {required List<Tuple2<String, List<Tuple2<String, String>>>> tuples}) {
     final titles = tuples.expand((e) => e.item2.map((e) => e.item1)).toList();
     final result = List<String>.from(titles);
     // print('titles runtimeType:${titles.runtimeType},${titles.every((element) => element is String)},');
     debugPrint('result runtimeType:${result.runtimeType}');
     return result;
   }
-
 }

@@ -11,15 +11,15 @@ import 'package:desktop_drop/desktop_drop.dart';
 import 'package:cross_file/cross_file.dart';
 
 class DragDestinationView extends StatefulWidget {
-
-  const DragDestinationView({ Key? key,}) : super(key: key);
+  const DragDestinationView({
+    Key? key,
+  }) : super(key: key);
 
   @override
   _DragDestinationViewState createState() => _DragDestinationViewState();
 }
 
 class _DragDestinationViewState extends State<DragDestinationView> {
-
   XFile? file;
 
   List<XFile> files = [];
@@ -30,9 +30,8 @@ class _DragDestinationViewState extends State<DragDestinationView> {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(0),
-      decoration: BoxDecoration(
-        border: Border.all(width: 2, color: Colors.red)
-      ),
+      decoration:
+          BoxDecoration(border: Border.all(width: 2, color: Colors.red)),
       child: Column(
         children: [
           Stack(
@@ -55,9 +54,8 @@ class _DragDestinationViewState extends State<DragDestinationView> {
       return SizedBox();
     }
     return Container(
-      decoration: BoxDecoration(
-          border: Border.all(width: 2, color: Colors.blue)
-      ),
+      decoration:
+          BoxDecoration(border: Border.all(width: 2, color: Colors.blue)),
       child: DropTarget(
         onDragDone: (detail) {
           files = detail.files;
@@ -87,22 +85,24 @@ class _DragDestinationViewState extends State<DragDestinationView> {
     var iconSize = 75.0;
     var textWidth = 100.0;
 
-    var icon = file != null ? Image.file(
-        File(file.path),
-        fit: BoxFit.contain,
-    )  : Icon(Icons.undo, size: iconSize,);
+    var icon = file != null
+        ? Image.file(
+            File(file.path),
+            fit: BoxFit.contain,
+          )
+        : Icon(
+            Icons.undo,
+            size: iconSize,
+          );
     var text = file != null ? (file.name ?? "") : '拖拽文件';
 
     return Container(
       padding: EdgeInsets.all(8),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          icon,
-          // Text(text, style: TextStyle(fontSize: 12)),
-          buildText(textWidth: textWidth, text: text),
-        ]
-      ),
+      child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+        icon,
+        // Text(text, style: TextStyle(fontSize: 12)),
+        buildText(textWidth: textWidth, text: text),
+      ]),
     );
   }
 
@@ -112,11 +112,7 @@ class _DragDestinationViewState extends State<DragDestinationView> {
       backgroundColor: Colors.blue,
       child: IconButton(
         padding: EdgeInsets.zero,
-        icon: Icon(
-          Icons.remove,
-          color: Colors.white,
-          size: 12
-        ),
+        icon: Icon(Icons.remove, color: Colors.white, size: 12),
         onPressed: () {
           setState(() {
             files = [];
@@ -137,16 +133,12 @@ class _DragDestinationViewState extends State<DragDestinationView> {
       child: Text(
         text,
         overflow: TextOverflow.ellipsis,
-        softWrap:true,
+        softWrap: true,
         textAlign: TextAlign.center,
         style: TextStyle(
           fontSize: 12,
         ),
-      ) ,
+      ),
     );
   }
-
 }
-
-
-

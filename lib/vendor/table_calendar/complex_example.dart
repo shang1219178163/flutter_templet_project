@@ -9,7 +9,6 @@ import 'package:table_calendar/table_calendar.dart';
 
 import 'package:flutter_templet_project/vendor/table_calendar/table_calendar_utils.dart';
 
-
 class TableComplexExample extends StatefulWidget {
   const TableComplexExample({Key? key}) : super(key: key);
 

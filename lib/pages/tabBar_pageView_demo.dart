@@ -26,29 +26,28 @@ import 'package:tuple/tuple.dart';
 
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 
-
 class TabBarPageViewDemo extends StatefulWidget {
-
   final String? title;
 
-  const TabBarPageViewDemo({ Key? key, this.title}) : super(key: key);
+  const TabBarPageViewDemo({Key? key, this.title}) : super(key: key);
 
-  
   @override
   _TabBarPageViewDemoState createState() => _TabBarPageViewDemoState();
 }
 
-class _TabBarPageViewDemoState extends State<TabBarPageViewDemo> with SingleTickerProviderStateMixin {
-  late final TabController _tabController = TabController(length: items.length, vsync: this);
+class _TabBarPageViewDemoState extends State<TabBarPageViewDemo>
+    with SingleTickerProviderStateMixin {
+  late final TabController _tabController =
+      TabController(length: items.length, vsync: this);
 
-  late final PageController _pageController = PageController(initialPage: 0, keepPage: true);
+  late final PageController _pageController =
+      PageController(initialPage: 0, keepPage: true);
 
   var isTabBar = ValueNotifier(false);
 
   @override
   void initState() {
     super.initState();
-
   }
 
   @override
@@ -64,11 +63,14 @@ class _TabBarPageViewDemoState extends State<TabBarPageViewDemo> with SingleTick
         title: Text('页面封装'),
         actions: [
           TextButton(
-            onPressed: (){
+            onPressed: () {
               isTabBar.value = !isTabBar.value;
               setState(() {});
             },
-            child: Text(isTabBar.value ? "top" : "bottom", style: TextStyle(color: Colors.white),),
+            child: Text(
+              isTabBar.value ? "top" : "bottom",
+              style: TextStyle(color: Colors.white),
+            ),
           ),
         ],
         bottom: isTabBar.value ? null : _buildTabBar(),
@@ -77,9 +79,7 @@ class _TabBarPageViewDemoState extends State<TabBarPageViewDemo> with SingleTick
       bottomNavigationBar: !isTabBar.value ? null : _buildBottomNavigationBar(),
       floatingActionButton: FloatingActionButton(
         tooltip: 'Increment',
-        onPressed: () {
-
-        },
+        onPressed: () {},
         child: Icon(Icons.add),
       ),
       // persistentFooterButtons: persistentFooterButtons(),
@@ -90,10 +90,9 @@ class _TabBarPageViewDemoState extends State<TabBarPageViewDemo> with SingleTick
     return PreferredSize(
       preferredSize: Size.fromHeight(48),
       child: Theme(
-        data: Theme.of(context).
-          copyWith(colorScheme: ColorScheme.fromSwatch().
-          copyWith(secondary: Colors.white)
-        ),
+        data: Theme.of(context).copyWith(
+            colorScheme:
+                ColorScheme.fromSwatch().copyWith(secondary: Colors.white)),
         child: Container(
           height: 40,
           alignment: Alignment.center, //圆点居中
@@ -111,13 +110,14 @@ class _TabBarPageViewDemoState extends State<TabBarPageViewDemo> with SingleTick
       tabs: items.map((e) => Tab(text: e.item1)).toList(),
       indicatorSize: TabBarIndicatorSize.label,
       // indicatorPadding: EdgeInsets.only(left: 6, right: 6),
-      onTap: (index){
+      onTap: (index) {
         setState(() {
           _pageController.jumpToPage(index);
         });
       },
     );
   }
+
   Material _buildBottomNavigationBar() {
     final textColor = Theme.of(context).colorScheme.secondary;
     const bgColor = Colors.white;
@@ -126,33 +126,30 @@ class _TabBarPageViewDemoState extends State<TabBarPageViewDemo> with SingleTick
     // final textColor = Colors.white;
 
     return Material(
-      color: bgColor,
-      child: SafeArea(
-        child: TabBar(
-          controller: _tabController,
-          tabs: items.map((e) => Tab(text: e.item1)).toList(),
-          labelColor: textColor,
-          indicator: BoxDecoration(
-            border: Border(
-              top: BorderSide(
-                  // color: textColor ,
-                  color: textColor,
-                  width: 3.0
+        color: bgColor,
+        child: SafeArea(
+          child: TabBar(
+            controller: _tabController,
+            tabs: items.map((e) => Tab(text: e.item1)).toList(),
+            labelColor: textColor,
+            indicator: BoxDecoration(
+              border: Border(
+                top: BorderSide(
+                    // color: textColor ,
+                    color: textColor,
+                    width: 3.0),
               ),
             ),
+            onTap: (index) {
+              ddlog(index);
+              setState(() {
+                // _tabController.animateTo(index);
+                _pageController.jumpToPage(index);
+              });
+            },
           ),
-          onTap: (index){
-            ddlog(index);
-            setState(() {
-              // _tabController.animateTo(index);
-              _pageController.jumpToPage(index);
-            });
-          },
-        ),
-      )
-    );
+        ));
   }
-
 
   Widget _buildPageView() {
     return PageView(
@@ -165,7 +162,6 @@ class _TabBarPageViewDemoState extends State<TabBarPageViewDemo> with SingleTick
       children: items.map((e) => e.item2).toList(),
     );
   }
-
 
   List<Widget> persistentFooterButtons() {
     return [
@@ -187,98 +183,117 @@ class _TabBarPageViewDemoState extends State<TabBarPageViewDemo> with SingleTick
   }
 
   List<Tuple2<String, Widget>> items = [
-    Tuple2('功能列表', ListView.separated(
-      cacheExtent: 180,
-      itemCount: kAliPayList.length,
-      itemBuilder: (context, index) {
-        final data = kAliPayList[index];
-        return ListSubtitleCell(
-          padding: EdgeInsets.all(10),
-          leading: ClipRRect(
-            borderRadius: BorderRadius.circular(4),
-            child: Image.network(
-              data.imageUrl,
-              width: 40,
-              height: 40,
-            ),
-          ),
-          title: Text(
-            data.title,
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w500,
-              color: Color(0xFF333333),
-            ),
-          ),
-          subtitle: Text(data.content,
-            // maxLines: 1,
-            // overflow: TextOverflow.ellipsis,
-            style: TextStyle(
-              fontSize: 15,
-              color: Color(0xFF999999),
-            ),
-          ),
-          trailing: Text(data.time,
-            style: TextStyle(
-              fontSize: 13,
-              color: Color(0xFF999999),
-            ),
-          ),
-          subtrailing: Text("已完成",
-            style: TextStyle(
-              fontSize: 13,
-              color: Colors.blue,
-            ),
-          ),
-        );
-      },
-      separatorBuilder: (BuildContext context, int index) {
-        return Divider();
-      },
-    )),
-
-    Tuple2('升级列表(新)', ListView.separated(
-      cacheExtent: 180,
-      itemCount: kUpdateAppList.length,
-      itemBuilder: (context, index) {
-        final data = kUpdateAppList[index];
-        if (index == 0) {
-          return AppUpdateCard(data: data, isExpand: true, showExpand: false,);
-        }
-        return AppUpdateCard(data: data);
-      },
-      separatorBuilder: (context, index) {
-        return Divider();
-      },
-    )),
-
-    Tuple2('列表(泛型)', SectionListView<String, Tuple2<String, String>>(
-      headerList: tuples.map((e) => e.item1).toList(),
-      itemList: tuples.map((e) => e.item2).toList()
-          .map((e) => e.sorted((a, b) => a.item1.toLowerCase().compareTo(b.item1.toLowerCase()))).toList(),
-      headerBuilder: (e) {
-        return Container(
-          // color: Colors.red,
-          padding: EdgeInsets.only(top: 10, bottom: 8, left: 10, right: 15),
-          child: Text(e, style: TextStyle(fontWeight: FontWeight.w600),),
-        );
-      },
-      itemBuilder: (section, row, e) {
-        return ListTile(
-          title: Text(e.item2),
-          subtitle: Text(e.item2.toCapitalize()),
-          trailing: Icon(Icons.keyboard_arrow_right_rounded),
-          dense: true,
-          onTap: (){
-            Get.toNamed(e.item1, arguments: e);
-            if (e.item1.toLowerCase().contains("loginPage".toLowerCase())){
-              Get.offNamed(e.item1, arguments: e.item1);
-            } else {
-              Get.toNamed(e.item1, arguments: e.item1);
-            }
+    Tuple2(
+        '功能列表',
+        ListView.separated(
+          cacheExtent: 180,
+          itemCount: kAliPayList.length,
+          itemBuilder: (context, index) {
+            final data = kAliPayList[index];
+            return ListSubtitleCell(
+              padding: EdgeInsets.all(10),
+              leading: ClipRRect(
+                borderRadius: BorderRadius.circular(4),
+                child: Image.network(
+                  data.imageUrl,
+                  width: 40,
+                  height: 40,
+                ),
+              ),
+              title: Text(
+                data.title,
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                  color: Color(0xFF333333),
+                ),
+              ),
+              subtitle: Text(
+                data.content,
+                // maxLines: 1,
+                // overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  fontSize: 15,
+                  color: Color(0xFF999999),
+                ),
+              ),
+              trailing: Text(
+                data.time,
+                style: TextStyle(
+                  fontSize: 13,
+                  color: Color(0xFF999999),
+                ),
+              ),
+              subtrailing: Text(
+                "已完成",
+                style: TextStyle(
+                  fontSize: 13,
+                  color: Colors.blue,
+                ),
+              ),
+            );
           },
-        );
-      },
-    ),),
+          separatorBuilder: (BuildContext context, int index) {
+            return Divider();
+          },
+        )),
+    Tuple2(
+        '升级列表(新)',
+        ListView.separated(
+          cacheExtent: 180,
+          itemCount: kUpdateAppList.length,
+          itemBuilder: (context, index) {
+            final data = kUpdateAppList[index];
+            if (index == 0) {
+              return AppUpdateCard(
+                data: data,
+                isExpand: true,
+                showExpand: false,
+              );
+            }
+            return AppUpdateCard(data: data);
+          },
+          separatorBuilder: (context, index) {
+            return Divider();
+          },
+        )),
+    Tuple2(
+      '列表(泛型)',
+      SectionListView<String, Tuple2<String, String>>(
+        headerList: tuples.map((e) => e.item1).toList(),
+        itemList: tuples
+            .map((e) => e.item2)
+            .toList()
+            .map((e) => e.sorted((a, b) =>
+                a.item1.toLowerCase().compareTo(b.item1.toLowerCase())))
+            .toList(),
+        headerBuilder: (e) {
+          return Container(
+            // color: Colors.red,
+            padding: EdgeInsets.only(top: 10, bottom: 8, left: 10, right: 15),
+            child: Text(
+              e,
+              style: TextStyle(fontWeight: FontWeight.w600),
+            ),
+          );
+        },
+        itemBuilder: (section, row, e) {
+          return ListTile(
+            title: Text(e.item2),
+            subtitle: Text(e.item2.toCapitalize()),
+            trailing: Icon(Icons.keyboard_arrow_right_rounded),
+            dense: true,
+            onTap: () {
+              Get.toNamed(e.item1, arguments: e);
+              if (e.item1.toLowerCase().contains("loginPage".toLowerCase())) {
+                Get.offNamed(e.item1, arguments: e.item1);
+              } else {
+                Get.toNamed(e.item1, arguments: e.item1);
+              }
+            },
+          );
+        },
+      ),
+    ),
   ];
 }

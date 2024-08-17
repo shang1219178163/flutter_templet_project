@@ -11,11 +11,11 @@ class SliverMainAxisGroupDemo extends StatefulWidget {
   final String? title;
 
   @override
-  State<SliverMainAxisGroupDemo> createState() => _SliverMainAxisGroupDemoState();
+  State<SliverMainAxisGroupDemo> createState() =>
+      _SliverMainAxisGroupDemoState();
 }
 
 class _SliverMainAxisGroupDemoState extends State<SliverMainAxisGroupDemo> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,11 +23,14 @@ class _SliverMainAxisGroupDemoState extends State<SliverMainAxisGroupDemo> {
         title: Text(widget.title ?? "$widget"),
         actions: [
           TextButton(
-            onPressed: (){
+            onPressed: () {
               // Feedback.forLongPress(context);
               Feedback.forTap(context);
             },
-            child: Text("done", style: TextStyle(color: Colors.white),),
+            child: Text(
+              "done",
+              style: TextStyle(color: Colors.white),
+            ),
           )
         ],
       ),

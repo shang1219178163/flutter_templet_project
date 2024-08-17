@@ -6,10 +6,6 @@
 //  Copyright © 10/22/21 shang. All rights reserved.
 //
 
-
 import 'package:flutter/material.dart';
 
-extension DividerExt on Divider {
-
-
-}
+extension DividerExt on Divider {}

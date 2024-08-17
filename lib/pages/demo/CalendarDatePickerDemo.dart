@@ -6,7 +6,6 @@
 //  Copyright © 12/7/21 shang. All rights reserved.
 //
 
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -15,52 +14,47 @@ import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/util/localizations/AppCupertinoLocalizations.dart';
 
 class CalendarDatePickerDemo extends StatefulWidget {
-
   final String? title;
 
-  const CalendarDatePickerDemo({ Key? key, this.title}) : super(key: key);
-
+  const CalendarDatePickerDemo({Key? key, this.title}) : super(key: key);
 
   @override
   _CalendarDatePickerDemoState createState() => _CalendarDatePickerDemoState();
 }
 
 class _CalendarDatePickerDemoState extends State<CalendarDatePickerDemo> {
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title ?? "$widget"),
-      ),
-      body: SingleChildScrollView(
-        child: Container(
-          child: Column(
-            children: [
-              NSectionHeader(
-                title: "buildCalendarDatePicker",
-                child: buildCalendarDatePicker(),
-              ),
-              NSectionHeader(
-                title: "buildCalendarDatePicker",
-                child: Column(
-                  children: [
-                    // Text("${selectedDate.toLocal()}".substring(0, 10)),
-                    ElevatedButton(
-                      onPressed: () => _selectDate(context),
-                      child: Text("${selectedDate.toLocal()}".substring(0, 10)),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
+        appBar: AppBar(
+          title: Text(widget.title ?? "$widget"),
         ),
-      )
-    );
+        body: SingleChildScrollView(
+          child: Container(
+            child: Column(
+              children: [
+                NSectionHeader(
+                  title: "buildCalendarDatePicker",
+                  child: buildCalendarDatePicker(),
+                ),
+                NSectionHeader(
+                  title: "buildCalendarDatePicker",
+                  child: Column(
+                    children: [
+                      // Text("${selectedDate.toLocal()}".substring(0, 10)),
+                      ElevatedButton(
+                        onPressed: () => _selectDate(context),
+                        child:
+                            Text("${selectedDate.toLocal()}".substring(0, 10)),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ));
   }
-
 
   Widget buildCalendarDatePicker() {
     final indexs = List.generate(9, (index) => index);
@@ -121,4 +115,3 @@ class _CalendarDatePickerDemoState extends State<CalendarDatePickerDemo> {
     }
   }
 }
-

@@ -1,15 +1,9 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:tuple/tuple.dart';
 
 class PreferredSizeDemo extends StatefulWidget {
-
-  PreferredSizeDemo({
-    super.key, 
-    this.title
-  });
+  PreferredSizeDemo({super.key, this.title});
 
   final String? title;
 
@@ -17,8 +11,8 @@ class PreferredSizeDemo extends StatefulWidget {
   State<PreferredSizeDemo> createState() => _PreferredSizeDemoState();
 }
 
-class _PreferredSizeDemoState extends State<PreferredSizeDemo> with SingleTickerProviderStateMixin {
-
+class _PreferredSizeDemoState extends State<PreferredSizeDemo>
+    with SingleTickerProviderStateMixin {
   late List<Tuple2<String, Widget>> items = [
     Tuple2('功能列表', buildSubpage(prefix: "选项zero")),
     Tuple2('功能列表1', buildSubpage(prefix: "选项one")),
@@ -37,12 +31,17 @@ class _PreferredSizeDemoState extends State<PreferredSizeDemo> with SingleTicker
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () => debugPrint(e),)
-        ).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () => debugPrint(e),
+                ))
+            .toList(),
         // bottom: buildTabBar(),
       ),
       body: Column(
@@ -65,7 +64,7 @@ class _PreferredSizeDemoState extends State<PreferredSizeDemo> with SingleTicker
         tabs: items.map((e) => Tab(text: e.item1)).toList(),
         indicatorSize: TabBarIndicatorSize.label,
         // indicatorPadding: EdgeInsets.only(left: 6, right: 6),
-        onTap: (index){
+        onTap: (index) {
           tabBarIndex = index;
           setState(() {});
         },
@@ -78,7 +77,6 @@ class _PreferredSizeDemoState extends State<PreferredSizeDemo> with SingleTicker
       cacheExtent: 180,
       itemCount: 20,
       itemBuilder: (context, index) {
-
         return ListTile(
           title: Text("${prefix}_${index}"),
         );
@@ -88,16 +86,10 @@ class _PreferredSizeDemoState extends State<PreferredSizeDemo> with SingleTicker
       },
     );
   }
-
 }
 
-
 class NTabBarPage extends StatefulWidget {
-
-  NTabBarPage({
-    super.key,
-    this.title
-  });
+  NTabBarPage({super.key, this.title});
 
   final String? title;
 
@@ -105,8 +97,8 @@ class NTabBarPage extends StatefulWidget {
   State<NTabBarPage> createState() => _NTabBarPageState();
 }
 
-class _NTabBarPageState extends State<NTabBarPage> with SingleTickerProviderStateMixin {
-
+class _NTabBarPageState extends State<NTabBarPage>
+    with SingleTickerProviderStateMixin {
   late List<Tuple2<String, Widget>> items = [
     Tuple2('功能列表', buildSubpage(prefix: "选项zero")),
     Tuple2('功能列表1', buildSubpage(prefix: "选项one")),
@@ -125,12 +117,17 @@ class _NTabBarPageState extends State<NTabBarPage> with SingleTickerProviderStat
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () => debugPrint(e),)
-        ).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () => debugPrint(e),
+                ))
+            .toList(),
         // bottom: buildTabBar(),
       ),
       body: Column(
@@ -153,7 +150,7 @@ class _NTabBarPageState extends State<NTabBarPage> with SingleTickerProviderStat
         tabs: items.map((e) => Tab(text: e.item1)).toList(),
         indicatorSize: TabBarIndicatorSize.label,
         // indicatorPadding: EdgeInsets.only(left: 6, right: 6),
-        onTap: (index){
+        onTap: (index) {
           tabBarIndex = index;
           setState(() {});
         },
@@ -166,7 +163,6 @@ class _NTabBarPageState extends State<NTabBarPage> with SingleTickerProviderStat
       cacheExtent: 180,
       itemCount: 20,
       itemBuilder: (context, index) {
-
         return ListTile(
           title: Text("${prefix}_${index}"),
         );
@@ -176,5 +172,4 @@ class _NTabBarPageState extends State<NTabBarPage> with SingleTickerProviderStat
       },
     );
   }
-
 }

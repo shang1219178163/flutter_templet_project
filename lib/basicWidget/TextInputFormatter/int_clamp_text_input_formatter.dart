@@ -10,7 +10,6 @@ import 'package:flutter/services.dart';
 
 /// int 最大最小值
 class IntClampTextInputFormatter extends TextInputFormatter {
-
   IntClampTextInputFormatter({
     this.min = 0,
     required this.max,
@@ -21,7 +20,8 @@ class IntClampTextInputFormatter extends TextInputFormatter {
   final int min;
 
   @override
-  TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue, TextEditingValue newValue) {
     // debugPrint("newValue.text: ${newValue.text}");
     final newNum = int.tryParse(newValue.text) ?? 0;
     final isBeyond = newNum < min || newNum > max;
@@ -32,5 +32,3 @@ class IntClampTextInputFormatter extends TextInputFormatter {
     return newValue;
   }
 }
-
-

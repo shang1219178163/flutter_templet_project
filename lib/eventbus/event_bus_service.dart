@@ -14,7 +14,6 @@ import 'package:flutter/widgets.dart';
 //   debugPrint("listenEventOn:${event.data}");
 // });
 
-
 class EventBusService {
   EventBusService._();
 
@@ -43,19 +42,10 @@ class EventBusService {
 mixin EventBusServiceListenerMixin<T extends StatefulWidget> on State<T> {
   StreamSubscription? subscription;
 
-  listenEventOn<E>(
-    void Function(E)? onData,
-  {
-    Function? onError,
-    void Function()? onDone,
-    bool? cancelOnError
-  }) {
-    subscription = EventBusService().on<E>().listen(
-      onData,
-      onError: onError,
-      onDone: onDone,
-      cancelOnError: cancelOnError
-    );
+  listenEventOn<E>(void Function(E)? onData,
+      {Function? onError, void Function()? onDone, bool? cancelOnError}) {
+    subscription = EventBusService().on<E>().listen(onData,
+        onError: onError, onDone: onDone, cancelOnError: cancelOnError);
   }
 
   @override

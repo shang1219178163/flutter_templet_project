@@ -10,19 +10,15 @@
 import 'package:flutter/material.dart';
 
 class StatefulBuilderDemo extends StatefulWidget {
-
   final String? title;
 
-  const StatefulBuilderDemo({ Key? key, this.title}) : super(key: key);
+  const StatefulBuilderDemo({Key? key, this.title}) : super(key: key);
 
-  
   @override
   _StatefulBuilderDemoState createState() => _StatefulBuilderDemoState();
 }
 
 class _StatefulBuilderDemoState extends State<StatefulBuilderDemo> {
-
-
   @override
   Widget build(BuildContext context) {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
@@ -36,11 +32,11 @@ class _StatefulBuilderDemoState extends State<StatefulBuilderDemo> {
                 debugPrint("done");
                 await showDialogAlert();
               },
-              child: Text("done", style: TextStyle(color: Colors.white)),),
+              child: Text("done", style: TextStyle(color: Colors.white)),
+            ),
           ],
         ),
-        body: Text(arguments.toString())
-    );
+        body: Text(arguments.toString()));
   }
 
   showDialogAlert() async {
@@ -72,9 +68,4 @@ class _StatefulBuilderDemoState extends State<StatefulBuilderDemo> {
       },
     );
   }
-
 }
-
-
-
-

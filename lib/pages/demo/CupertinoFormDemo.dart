@@ -91,9 +91,7 @@ class _CupertinoFormDemoState extends State<CupertinoFormDemo> {
                       },
                       onChanged: (value) {
                         ddlog(value);
-                        setState(() {
-
-                        });
+                        setState(() {});
                       },
                       onEditingComplete: () {
                         ddlog("onEditingComplete");

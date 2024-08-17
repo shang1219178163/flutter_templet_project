@@ -2,23 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:tuple/tuple.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 
-
 class DefaultTabControllerDemo extends StatefulWidget {
-
-  const DefaultTabControllerDemo({
-    Key? key, 
-    this.title
-  }) : super(key: key);
+  const DefaultTabControllerDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
   @override
-  _DefaultTabControllerDemoState createState() => _DefaultTabControllerDemoState();
+  _DefaultTabControllerDemoState createState() =>
+      _DefaultTabControllerDemoState();
 }
 
-class _DefaultTabControllerDemoState extends State<DefaultTabControllerDemo> with AutomaticKeepAliveClientMixin{
-
-
+class _DefaultTabControllerDemoState extends State<DefaultTabControllerDemo>
+    with AutomaticKeepAliveClientMixin {
   var initialIndex = 0;
 
   var items = <Tuple2<Tab, Widget>>[];
@@ -91,7 +86,8 @@ class _DefaultTabControllerDemoState extends State<DefaultTabControllerDemo> wit
                 padding: EdgeInsets.all(8),
                 child: Wrap(
                   children: [
-                    ElevatedButton(onPressed: onPressed, child: Text("Iterable")),
+                    ElevatedButton(
+                        onPressed: onPressed, child: Text("Iterable")),
                   ],
                 ),
               )
@@ -111,7 +107,6 @@ class _DefaultTabControllerDemoState extends State<DefaultTabControllerDemo> wit
               Container(
                 height: 500,
                 color: ColorExt.random,
-
               )
             ],
           ),
@@ -129,7 +124,6 @@ class _DefaultTabControllerDemoState extends State<DefaultTabControllerDemo> wit
               Container(
                 height: 500,
                 color: ColorExt.random,
-
               )
             ],
           ),
@@ -147,7 +141,6 @@ class _DefaultTabControllerDemoState extends State<DefaultTabControllerDemo> wit
               Container(
                 height: 500,
                 color: ColorExt.random,
-
               )
             ],
           ),
@@ -177,11 +170,9 @@ class _DefaultTabControllerDemoState extends State<DefaultTabControllerDemo> wit
     var nums = <int>[1, 2, 3, 4, 5];
     final sum = nums.reduce((pre, e) => pre + e);
 
-    final join = nums.fold("", (prev, int e) => "$prev $e" );
+    final join = nums.fold("", (prev, int e) => "$prev $e");
 
     debugPrint("sum: $sum");
     debugPrint("join: $join");
-
   }
-
 }

@@ -34,6 +34,7 @@ import 'package:flutter_templet_project/pages/demo/DecoratedBoxTransitionDemo.da
 import 'package:flutter_templet_project/pages/demo/DefaultTabControllerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DevelopToolList.dart';
 import 'package:flutter_templet_project/pages/demo/DialogChoiceChipDemo.dart';
+import 'package:flutter_templet_project/pages/demo/DirectoryTestDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DisplayFeatureDemo.dart';
 import 'package:flutter_templet_project/pages/demo/EmojiPage.dart';
 import 'package:flutter_templet_project/pages/demo/FlutterFFiTest.dart';
@@ -743,6 +744,7 @@ class APPRouter {
   static const lerpDemo = '/lerpDemo';
   static const convertFlle = '/ConvertFlle';
   static const splitViewDemo = '/SplitViewDemo';
+  static const directoryTestDemo = '/directoryTestDemo';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -2196,6 +2198,10 @@ class AppPage {
     GetPage(
       name: APPRouter.splitViewDemo,
       page: () => SplitViewDemo(),
+    ),
+    GetPage(
+      name: APPRouter.directoryTestDemo,
+      page: () => DirectoryTestDemo(),
     ),
   ];
 }

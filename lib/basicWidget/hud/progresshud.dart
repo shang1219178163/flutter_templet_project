@@ -6,7 +6,6 @@
 //  Copyright © 7/29/21 shang. All rights reserved.
 //
 
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -24,9 +23,7 @@ enum NNProgressHUDType {
   toast,
 }
 
-
 class NNProgressHUD {
-
   static showLoading(BuildContext context, {String? message}) {
     if (message != null) {
       _show(NNProgressHUDType.loading, context, message: message);
@@ -62,13 +59,15 @@ class NNProgressHUD {
     dismiss(context, delay: 2);
   }
 
-  static _show(NNProgressHUDType type, BuildContext context, {String? message}) {
-    Navigator.push(context,
+  static _show(NNProgressHUDType type, BuildContext context,
+      {String? message}) {
+    Navigator.push(
+        context,
         ProgressHUD(
-            barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
+            barrierLabel:
+                MaterialLocalizations.of(context).modalBarrierDismissLabel,
             message: message,
-            progressType: type)
-    );
+            progressType: type));
   }
 
   static dismiss(BuildContext context, {int delay = 0}) {
@@ -84,7 +83,10 @@ class ProgressHUD<T> extends PopupRoute<T> {
   String? message;
   NNProgressHUDType progressType;
 
-  ProgressHUD({required this.barrierLabel, required this.message, required this.progressType});
+  ProgressHUD(
+      {required this.barrierLabel,
+      required this.message,
+      required this.progressType});
 
   @override
   Color? get barrierColor => null;
@@ -99,8 +101,11 @@ class ProgressHUD<T> extends PopupRoute<T> {
   String barrierLabel;
 
   @override
-  Widget buildPage(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
-    var size = progressType == NNProgressHUDType.toast ? Size(MediaQuery.of(context).size.width - 60, 60) : Size(120, 120);
+  Widget buildPage(BuildContext context, Animation<double> animation,
+      Animation<double> secondaryAnimation) {
+    var size = progressType == NNProgressHUDType.toast
+        ? Size(MediaQuery.of(context).size.width - 60, 60)
+        : Size(120, 120);
     return Center(
       child: Container(
         width: size.width,
@@ -143,38 +148,32 @@ class ProgressHUD<T> extends PopupRoute<T> {
     if (progressType == NNProgressHUDType.toast) {
       assert(message != null);
       return Padding(
-        padding: EdgeInsets.only(top: 5, left: 5, bottom: 5, right: 5),
-        child: Text(
-          message!,
-          textAlign: TextAlign.center,
-          maxLines: 2,
-          style: TextStyle(
-            fontSize: 15,
-            color: Colors.white,
-            fontWeight: FontWeight.normal,
-            decoration: TextDecoration.none
-          )
-        )
-      );
+          padding: EdgeInsets.only(top: 5, left: 5, bottom: 5, right: 5),
+          child: Text(message!,
+              textAlign: TextAlign.center,
+              maxLines: 2,
+              style: TextStyle(
+                  fontSize: 15,
+                  color: Colors.white,
+                  fontWeight: FontWeight.normal,
+                  decoration: TextDecoration.none)));
     }
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
         if (icon != null) icon,
-        if (message != null) Padding(
-          padding: EdgeInsets.only(left: 5.0, right: 5.0),
-          child: Text(message!,
-            textAlign: TextAlign.center,
-            maxLines: 2,
-            style: TextStyle(
-              fontSize: 15,
-              color: Colors.white,
-              fontWeight: FontWeight.normal,
-              decoration: TextDecoration.none
-            )
-          )
-        )
+        if (message != null)
+          Padding(
+              padding: EdgeInsets.only(left: 5.0, right: 5.0),
+              child: Text(message!,
+                  textAlign: TextAlign.center,
+                  maxLines: 2,
+                  style: TextStyle(
+                      fontSize: 15,
+                      color: Colors.white,
+                      fontWeight: FontWeight.normal,
+                      decoration: TextDecoration.none)))
       ],
     );
   }

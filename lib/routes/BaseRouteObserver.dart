@@ -1,9 +1,6 @@
-
-
 import 'package:flutter/cupertino.dart';
 
 //https://www.cnblogs.com/mengqd/p/13683126.html
-
 
 // class BaseRouteObserver<R extends Route<dynamic>> extends RouteObserver<R> {
 //   @override
@@ -42,7 +39,6 @@ import 'package:flutter/cupertino.dart';
 //     print('didStopUserGesture');
 //   }
 // }
-
 
 // abstract class RouteAwareState<T extends StatefulWidget> extends State<T>
 //     with RouteAware {

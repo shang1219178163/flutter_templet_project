@@ -5,55 +5,51 @@ import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 
 class ContainerDemo extends StatefulWidget {
-
   final String? title;
 
-  const ContainerDemo({ Key? key, this.title}) : super(key: key);
+  const ContainerDemo({Key? key, this.title}) : super(key: key);
 
   @override
   _ContainerDemoState createState() => _ContainerDemoState();
 }
 
 class _ContainerDemoState extends State<ContainerDemo> {
-
   bool isSliver = true;
 
   @override
   void initState() {
     super.initState();
-
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title ?? "$widget"),
-        actions: [
-          TextButton(
-            onPressed: () {
-              debugPrint('TextButton');
-              isSliver = !isSliver;
-              setState(() {});
-            },
-            child: Text('done',
-              style: TextStyle(color: Colors.white),
+        appBar: AppBar(
+          title: Text(widget.title ?? "$widget"),
+          actions: [
+            TextButton(
+              onPressed: () {
+                debugPrint('TextButton');
+                isSliver = !isSliver;
+                setState(() {});
+              },
+              child: Text(
+                'done',
+                style: TextStyle(color: Colors.white),
+              ),
             ),
-          ),
-        ],
-      ),
-      // body: isSliver ? buildBodyCustom() : buildBodyColumn(),
-      body: CustomScrollView(
-        slivers: [
-          buildSection(),
-          buildSection1(),
-          // buildSection2(),
-          buildGradientBorder(),
-          buildSection3(),
-
-        ].map((e) => e.toSliverToBoxAdapter()).toList(),
-      )
-    );
+          ],
+        ),
+        // body: isSliver ? buildBodyCustom() : buildBodyColumn(),
+        body: CustomScrollView(
+          slivers: [
+            buildSection(),
+            buildSection1(),
+            // buildSection2(),
+            buildGradientBorder(),
+            buildSection3(),
+          ].map((e) => e.toSliverToBoxAdapter()).toList(),
+        ));
   }
 
   buildBodyColumn() {
@@ -65,11 +61,13 @@ class _ContainerDemoState extends State<ContainerDemo> {
     ];
 
     return Column(
-      children: children.map((e) => Builder(
-        builder: (context) {
-          return Expanded(child: e,);
-        }
-      )).toList(),
+      children: children
+          .map((e) => Builder(builder: (context) {
+                return Expanded(
+                  child: e,
+                );
+              }))
+          .toList(),
     );
   }
 
@@ -83,7 +81,11 @@ class _ContainerDemoState extends State<ContainerDemo> {
     ];
 
     return CustomScrollView(
-      slivers: children.map((e) => SliverToBoxAdapter(child: e,)).toList(),
+      slivers: children
+          .map((e) => SliverToBoxAdapter(
+                child: e,
+              ))
+          .toList(),
     );
   }
 
@@ -112,7 +114,7 @@ class _ContainerDemoState extends State<ContainerDemo> {
               ),
             ],
             image: DecorationImage(
-              image: NetworkImage('https://tenfei02.cfp.cn/creative/vcg/800/new/VCG21409037867.jpg'),
+              image: NetworkImage('R.image.urls[0]'),
               fit: BoxFit.cover,
             ),
           ),
@@ -143,12 +145,11 @@ class _ContainerDemoState extends State<ContainerDemo> {
   Widget buildSection1() {
     return Container(
       decoration: BoxDecoration(
-        image: DecorationImage(
-          image: "img_update.png".toAssetImage(),
-          repeat: ImageRepeat.repeat,
-          alignment: Alignment.topLeft,
-        )
-      ),
+          image: DecorationImage(
+        image: "img_update.png".toAssetImage(),
+        repeat: ImageRepeat.repeat,
+        alignment: Alignment.topLeft,
+      )),
       transform: Matrix4.rotationZ(.2),
       alignment: Alignment.centerRight, //卡片内文字居中
       child: Text(
@@ -199,16 +200,18 @@ class _ContainerDemoState extends State<ContainerDemo> {
       Container(
         decoration: BoxDecoration(
             image: DecorationImage(
-              image: 'img_update.png'.toAssetImage(),
-              repeat: ImageRepeat.repeat,
-              alignment: Alignment.topLeft,
-            )
-        ),
+          image: 'img_update.png'.toAssetImage(),
+          repeat: ImageRepeat.repeat,
+          alignment: Alignment.topLeft,
+        )),
         child: Container(
           constraints: BoxConstraints.expand(),
           child: OutlinedButton(
-            onPressed: () { debugPrint("ImageRepeat.repeat"); },
-            child: Text('ImageRepeat.repeat',
+            onPressed: () {
+              debugPrint("ImageRepeat.repeat");
+            },
+            child: Text(
+              'ImageRepeat.repeat',
               style: TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
             ),
           ),

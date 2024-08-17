@@ -6,7 +6,6 @@
 //  Copyright © 2024/4/9 shang. All rights reserved.
 //
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_choice_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_choice_expansion.dart';
@@ -97,9 +96,7 @@ import 'package:flutter_templet_project/model/tag_detail_model.dart';
 //
 // }
 
-
 class NChoiceExpansionOfModel<T> extends StatefulWidget {
-
   const NChoiceExpansionOfModel({
     super.key,
     required this.title,
@@ -123,37 +120,47 @@ class NChoiceExpansionOfModel<T> extends StatefulWidget {
 
   /// 标题
   final String title;
+
   /// 标题字体样式
   final TextStyle? titleStyle;
+
   /// 组数据
   final List<T> items;
+
   /// 组数据
   // final List<T> selectedItems;
   /// 单选/多选
   final bool isSingle;
   final String Function(T e) idCb;
+
   /// 标题显示
   final String Function(T e) titleCb;
+
   /// 标题显示
   final bool Function(T e) selectedCb;
 
   /// 改变回掉
   final ValueChanged<List<T>> onChanged;
+
   /// 单选回调
   final ValueChanged<T?>? onSingleChanged;
+
   /// 子项样式自定义
   final Widget Function(T e, bool isSelected)? itemBuilder;
+
   /// 头部项目自定义
   final Widget Function(VoidCallback onToggle)? headerBuilder;
+
   /// 尾部自定义
   final Widget Function(VoidCallback onToggle)? footerBuilder;
 
   @override
-  _NChoiceExpansionOfModelState<T> createState() => _NChoiceExpansionOfModelState<T>();
+  _NChoiceExpansionOfModelState<T> createState() =>
+      _NChoiceExpansionOfModelState<T>();
 }
 
-class _NChoiceExpansionOfModelState<T> extends State<NChoiceExpansionOfModel<T>> {
-
+class _NChoiceExpansionOfModelState<T>
+    extends State<NChoiceExpansionOfModel<T>> {
   @override
   void didUpdateWidget(covariant NChoiceExpansionOfModel<T> oldWidget) {
     // TODO: implement didUpdateWidget
@@ -162,12 +169,13 @@ class _NChoiceExpansionOfModelState<T> extends State<NChoiceExpansionOfModel<T>>
 
   @override
   Widget build(BuildContext context) {
-    final models = widget.items.map((e) => ChoiceBoxModel<T>(
-      id: widget.idCb(e),
-      title: widget.titleCb(e),
-      isSelected: widget.selectedCb(e),
-      data: e,
-    ))
+    final models = widget.items
+        .map((e) => ChoiceBoxModel<T>(
+              id: widget.idCb(e),
+              title: widget.titleCb(e),
+              isSelected: widget.selectedCb(e),
+              data: e,
+            ))
         .toList();
     return NChoiceExpansion<ChoiceBoxModel<T>>(
       title: widget.title,
@@ -186,17 +194,18 @@ class _NChoiceExpansionOfModelState<T> extends State<NChoiceExpansionOfModel<T>>
           }
         }
 
-        final selecetdItems = models.where((e) => e.isSelected).map((e) => e.data).toList();
+        final selecetdItems =
+            models.where((e) => e.isSelected).map((e) => e.data).toList();
         // ddlog(items.map((e) => "${titleCb(e)},${e.isSelected}" ).toList().join("\n"));
         widget.onChanged(selecetdItems);
 
         final first = selecetdItems.isEmpty ? null : selecetdItems.first;
         widget.onSingleChanged?.call(first);
       },
-      itemBuilder: (e, isSelected) => widget.itemBuilder?.call(e.data, e.isSelected),
+      itemBuilder: (e, isSelected) =>
+          widget.itemBuilder?.call(e.data, e.isSelected),
       headerBuilder: widget.headerBuilder,
       footerBuilder: widget.footerBuilder,
     );
   }
-
 }

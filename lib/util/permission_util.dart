@@ -6,7 +6,6 @@
 //  Copyright © 2023/10/19 shang. All rights reserved.
 //
 
-
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
@@ -14,7 +13,6 @@ import 'package:device_info_plus/device_info_plus.dart';
 
 import 'package:flutter_templet_project/cache/cache_service.dart';
 import 'package:permission_handler/permission_handler.dart';
-
 
 class PermissionUtil {
   /// [源方法]检查权限
@@ -27,6 +25,7 @@ class PermissionUtil {
       PermissionStatus.granted,
       PermissionStatus.limited,
     ],
+
     /// 权限名称
     VoidCallback? onConfirm,
   }) async {
@@ -68,10 +67,7 @@ class PermissionUtil {
 
   /// 检查相册权限
   static Future<bool> checkPhotoAlbum({VoidCallback? onConfirm}) async {
-    if ([
-      Platform.isIOS,
-      Platform.isAndroid
-    ].contains(true) == false) {
+    if ([Platform.isIOS, Platform.isAndroid].contains(true) == false) {
       return true;
     }
 
@@ -124,7 +120,8 @@ class PermissionUtil {
 
       if (statusMap[Permission.camera] == PermissionStatus.permanentlyDenied ||
           statusMap[Permission.camera] == PermissionStatus.denied ||
-          statusMap[Permission.microphone] == PermissionStatus.permanentlyDenied ||
+          statusMap[Permission.microphone] ==
+              PermissionStatus.permanentlyDenied ||
           statusMap[Permission.microphone] == PermissionStatus.denied) {
         // GetDialog.showConfirm(
         //     title: '提示',
@@ -166,7 +163,8 @@ class PermissionUtil {
         Permission.microphone,
       ].request();
 
-      if (statusMap[Permission.microphone] == PermissionStatus.permanentlyDenied ||
+      if (statusMap[Permission.microphone] ==
+              PermissionStatus.permanentlyDenied ||
           statusMap[Permission.microphone] == PermissionStatus.denied) {
         // GetDialog.showConfirm(
         //     title: '提示',
@@ -228,7 +226,7 @@ class PermissionUtil {
   }
 
   /// 检查安装权限
-  static Future<bool> checkInstall({VoidCallback? onConfirm}) async{
+  static Future<bool> checkInstall({VoidCallback? onConfirm}) async {
     Permission permission = Permission.requestInstallPackages;
     return await PermissionUtil.check(
       permission: permission,
@@ -246,11 +244,10 @@ class PermissionUtil {
     AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
     int sdkInt = androidInfo.version.sdkInt;
     Permission permission =
-    sdkInt < 33 ? Permission.storage : Permission.photos;
+        sdkInt < 33 ? Permission.storage : Permission.photos;
     return check(
       permission: permission,
       name: '文件',
     );
   }
-
 }

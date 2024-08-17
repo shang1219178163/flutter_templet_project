@@ -9,11 +9,7 @@
 import 'package:flutter/material.dart';
 
 class OverflowDemo extends StatefulWidget {
-
-  const OverflowDemo({
-    Key? key, 
-    this.title
-  }) : super(key: key);
+  const OverflowDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -22,8 +18,6 @@ class OverflowDemo extends StatefulWidget {
 }
 
 class _OverflowDemoState extends State<OverflowDemo> {
-
-
   @override
   Widget build(BuildContext context) {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
@@ -31,12 +25,17 @@ class _OverflowDemoState extends State<OverflowDemo> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          onPressed: () => debugPrint(e.toString()),
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),)
-        ).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  onPressed: () => debugPrint(e.toString()),
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ))
+            .toList(),
       ),
       body: _buildBody(),
     );
@@ -60,6 +59,4 @@ class _OverflowDemoState extends State<OverflowDemo> {
       ),
     );
   }
-
 }
-

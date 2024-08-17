@@ -18,20 +18,19 @@ class AnchoredOverlay extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints) {
-
-          return OverlayBuilder(
-            showOverlay: showOverlay,
-            overlayBuilder: (BuildContext overlayContext) {
-              var box = context.findRenderObject() as RenderBox?;
-              var center = box?.size.center(box.localToGlobal(const Offset(0.0, 0.0)));
-              center ??= Offset(0.0, 0.0);
-              return overlayBuilder(overlayContext, center!);
-            },
-            child: child,
-          );
-        }
-      ),
+          builder: (BuildContext context, BoxConstraints constraints) {
+        return OverlayBuilder(
+          showOverlay: showOverlay,
+          overlayBuilder: (BuildContext overlayContext) {
+            var box = context.findRenderObject() as RenderBox?;
+            var center =
+                box?.size.center(box.localToGlobal(const Offset(0.0, 0.0)));
+            center ??= Offset(0.0, 0.0);
+            return overlayBuilder(overlayContext, center!);
+          },
+          child: child,
+        );
+      }),
     );
   }
 }

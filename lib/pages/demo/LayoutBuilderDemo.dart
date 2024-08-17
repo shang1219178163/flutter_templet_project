@@ -14,10 +14,8 @@ import 'package:flutter_templet_project/extension/image_ext.dart';
 import 'package:flutter_templet_project/util/R.dart';
 import 'package:flutter_templet_project/extension/num_ext.dart';
 
-
 class LayoutBuilderDemo extends StatefulWidget {
-  
-  const LayoutBuilderDemo({ Key? key, this.title}) : super(key: key);
+  const LayoutBuilderDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -26,19 +24,22 @@ class LayoutBuilderDemo extends StatefulWidget {
 }
 
 class _LayoutBuilderDemoState extends State<LayoutBuilderDemo> {
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          onPressed: onPressed,
-            child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),)
-        ).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  onPressed: onPressed,
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ))
+            .toList(),
       ),
       body: Column(
         children: [
@@ -49,7 +50,7 @@ class _LayoutBuilderDemoState extends State<LayoutBuilderDemo> {
     );
   }
 
-  onPressed(){
+  onPressed() {
     setState(() {});
   }
 
@@ -89,25 +90,25 @@ class _LayoutBuilderDemoState extends State<LayoutBuilderDemo> {
     );
   }
 
-   /// 占位
-   Widget _buildLoadingBuilder(BuildContext context, Widget child, ImageChunkEvent? loadingProgress,) {
-     if (loadingProgress == null) {
-       return child;
-     }
-     final text = loadingProgress.current?.toStringAsPercent(2) ?? '';
-     return Container(
-       // color: Colors.green,
-       width: 100,
-       height: 100,
-       child: Center(
-         child: Text(text)
-       )
-     );
-     return Center(
-       child: CircularProgressIndicator(
-         value: loadingProgress.current,
-       ),
-     );
-   }
-
+  /// 占位
+  Widget _buildLoadingBuilder(
+    BuildContext context,
+    Widget child,
+    ImageChunkEvent? loadingProgress,
+  ) {
+    if (loadingProgress == null) {
+      return child;
+    }
+    final text = loadingProgress.current?.toStringAsPercent(2) ?? '';
+    return Container(
+        // color: Colors.green,
+        width: 100,
+        height: 100,
+        child: Center(child: Text(text)));
+    return Center(
+      child: CircularProgressIndicator(
+        value: loadingProgress.current,
+      ),
+    );
+  }
 }

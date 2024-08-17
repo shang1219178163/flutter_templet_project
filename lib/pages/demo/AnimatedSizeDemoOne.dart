@@ -1,13 +1,7 @@
-
-
 import 'package:flutter/material.dart';
 
 class AnimatedSizeDemoOne extends StatefulWidget {
-
-  AnimatedSizeDemoOne({
-    Key? key,
-    this.title
-  }) : super(key: key);
+  AnimatedSizeDemoOne({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -15,7 +9,8 @@ class AnimatedSizeDemoOne extends StatefulWidget {
   _AnimatedSizeDemoOneState createState() => _AnimatedSizeDemoOneState();
 }
 
-class _AnimatedSizeDemoOneState extends State<AnimatedSizeDemoOne> with SingleTickerProviderStateMixin {
+class _AnimatedSizeDemoOneState extends State<AnimatedSizeDemoOne>
+    with SingleTickerProviderStateMixin {
   late final _controller = AnimationController(
     vsync: this,
     duration: Duration(seconds: 1),
@@ -25,7 +20,6 @@ class _AnimatedSizeDemoOneState extends State<AnimatedSizeDemoOne> with SingleTi
     parent: _controller,
     curve: Curves.easeIn,
   );
-
 
   @override
   void initState() {
@@ -40,18 +34,22 @@ class _AnimatedSizeDemoOneState extends State<AnimatedSizeDemoOne> with SingleTi
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () => debugPrint(e),)
-        ).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () => debugPrint(e),
+                ))
+            .toList(),
       ),
       body: buildBody(),
     );
@@ -67,5 +65,4 @@ class _AnimatedSizeDemoOneState extends State<AnimatedSizeDemoOne> with SingleTi
       ),
     );
   }
-
 }

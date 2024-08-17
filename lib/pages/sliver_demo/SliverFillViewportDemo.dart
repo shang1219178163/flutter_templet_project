@@ -19,13 +19,14 @@ class SliverFillViewportDemo extends StatelessWidget {
     return CustomScrollView(
       slivers: <Widget>[
         SliverFillViewport(
-          delegate: SliverChildBuilderDelegate((context, index) {
+          delegate: SliverChildBuilderDelegate(
+            (context, index) {
               return Container(
                 color: colors[index],
                 child: Center(child: Text('$index')),
               );
             },
-              childCount: colors.length,
+            childCount: colors.length,
           ),
           viewportFraction: 1.0,
         ),

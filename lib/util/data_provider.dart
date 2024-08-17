@@ -18,21 +18,19 @@ abstract class DataFetcher {
 /// 低层模块
 class NetworkFetcher extends DataFetcher {
   @override
-  Future<Map<String, dynamic>?> fetchData(Map<String, dynamic>? params){
+  Future<Map<String, dynamic>?> fetchData(Map<String, dynamic>? params) {
     // TODO: implement fetchData
     throw UnimplementedError();
   }
-
 }
 
 /// 低层模块
 class DatabaseFetcher extends DataFetcher {
   @override
-  Future<Map<String, dynamic>?> fetchData(Map<String, dynamic>? params){
+  Future<Map<String, dynamic>?> fetchData(Map<String, dynamic>? params) {
     // TODO: implement fetchData
     throw UnimplementedError();
   }
-
 }
 
 /// 高层模块
@@ -47,5 +45,4 @@ class DataProvider {
     final map = _fetcher?.fetchData(params);
     return map;
   }
-
 }

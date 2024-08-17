@@ -6,15 +6,12 @@
 //  Copyright © 12/12/22 shang. All rights reserved.
 //
 
-
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 
-
-extension ScrollControllerExt on ScrollController{
-
-  printInfo(){
+extension ScrollControllerExt on ScrollController {
+  printInfo() {
     position.printInfo();
 
     // print('/***********************ScrollController***********************/');
@@ -30,13 +27,20 @@ extension ScrollControllerExt on ScrollController{
   /// 滚动到
   Future<void> scrollTo(
     double offset, {
-      Duration delay = const Duration(milliseconds: 100),
-      Duration duration = const Duration(milliseconds: 350),
-      Curve curve = Curves.ease,
-    }) async {
-    Future.delayed(delay, () {
-      animateTo(offset, duration: duration, curve: curve,);
-    },);
+    Duration delay = const Duration(milliseconds: 100),
+    Duration duration = const Duration(milliseconds: 350),
+    Curve curve = Curves.ease,
+  }) async {
+    Future.delayed(
+      delay,
+      () {
+        animateTo(
+          offset,
+          duration: duration,
+          curve: curve,
+        );
+      },
+    );
   }
 
   ///水平移动
@@ -74,15 +78,13 @@ extension ScrollControllerExt on ScrollController{
       }
       if (scrollController.hasClients) {
         scrollController.animateTo(animateToOffset,
-          duration: duration ?? const Duration(milliseconds: 200),
-          curve: Curves.linear
-        );
+            duration: duration ?? const Duration(milliseconds: 200),
+            curve: Curves.linear);
       }
     } catch (e) {
       debugPrint('JumToHorizontal->$e');
     }
   }
-
 
   scrollToItemNew({
     required GlobalKey itemKey,
@@ -98,32 +100,34 @@ extension ScrollControllerExt on ScrollController{
       return;
     }
 
-    var local = renderBox.localToGlobal(Offset.zero, ancestor: scrollKey.currentContext?.findRenderObject());
+    var local = renderBox.localToGlobal(Offset.zero,
+        ancestor: scrollKey.currentContext?.findRenderObject());
     var size = renderBox.size;
 
     var value = scrollDirection == Axis.horizontal ? local.dx : local.dy;
 
     var offset = value + scrollController.offset;
-    debugPrint("scrollToItemNew local:$local, size:$size, offset: ${scrollController.offset}, offset: $offset");
+    debugPrint(
+        "scrollToItemNew local:$local, size:$size, offset: ${scrollController.offset}, offset: $offset");
 
     var padding = MediaQueryData.fromWindow(ui.window).padding;
-    var paddingStart = scrollDirection == Axis.horizontal ? padding.left : padding.top;
+    var paddingStart =
+        scrollDirection == Axis.horizontal ? padding.left : padding.top;
 
     final extentAfter = scrollController.position.extentAfter;
     if (extentAfter <= local.dy) {
-      debugPrint("scrollToItemNew extentAfter:$extentAfter local.dy:${local.dy}");
+      debugPrint(
+          "scrollToItemNew extentAfter:$extentAfter local.dy:${local.dy}");
       scrollController.animateTo(scrollController.position.maxScrollExtent,
           duration: duration ?? const Duration(milliseconds: 200),
-          curve: Curves.linear
-      );
+          curve: Curves.linear);
       return;
     }
 
     if (scrollController.hasClients) {
       scrollController.animateTo(offset - paddingStart,
           duration: duration ?? const Duration(milliseconds: 200),
-          curve: Curves.linear
-      );
+          curve: Curves.linear);
     }
   }
 
@@ -140,7 +144,10 @@ extension ScrollControllerExt on ScrollController{
       return;
     }
 
-    var dy = renderBox.localToGlobal(Offset.zero, ancestor: scrollKey.currentContext?.findRenderObject()).dy;
+    var dy = renderBox
+        .localToGlobal(Offset.zero,
+            ancestor: scrollKey.currentContext?.findRenderObject())
+        .dy;
     var offset = dy + scrollController.offset;
     var stateTopH = MediaQueryData.fromWindow(ui.window).padding.top;
 
@@ -151,15 +158,12 @@ extension ScrollControllerExt on ScrollController{
     if (scrollController.hasClients) {
       scrollController.animateTo(offset - stateTopH,
           duration: duration ?? const Duration(milliseconds: 200),
-          curve: Curves.linear
-      );
+          curve: Curves.linear);
     }
   }
 }
 
-
-extension ListViewExt on ListView{
-
+extension ListViewExt on ListView {
   // 滑动到指定下标的item
   scrollToIndex({
     required ScrollController scrollController,
@@ -178,16 +182,15 @@ extension ListViewExt on ListView{
     var stateTopH = MediaQueryData.fromWindow(ui.window).padding.top;
     scrollController.animateTo(offset - stateTopH,
         duration: duration ?? const Duration(milliseconds: 200),
-        curve: Curves.linear
-    );
+        curve: Curves.linear);
 
     final extentAfter = scrollController.position.extentAfter;
     debugPrint('scrollController:${scrollController.position}');
   }
 }
 
-extension ScrollPositionExt on ScrollPosition{
-  printInfo(){
+extension ScrollPositionExt on ScrollPosition {
+  printInfo() {
     final result = """
   /*********************** ScrollPosition ***********************/
   minScrollExtent: $minScrollExtent
@@ -203,6 +206,3 @@ extension ScrollPositionExt on ScrollPosition{
     debugPrint(result);
   }
 }
-
-
-

@@ -4,7 +4,6 @@ import 'package:flutter_templet_project/basicWidget/voice_animation_image.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 
-
 ///类似微信语音播放动画
 class SoundPlayDemo extends StatefulWidget {
   SoundPlayDemo({Key? key}) : super(key: key);
@@ -22,12 +21,14 @@ class _SoundPlayDemoState extends State<SoundPlayDemo> {
 
   bool isPlaying = false;
 
-  final _voiceGlobalKey = GlobalKey<VoiceAnimationImageState>(debugLabel: "VoiceAnimationImageState");
+  final _voiceGlobalKey = GlobalKey<VoiceAnimationImageState>(
+      debugLabel: "VoiceAnimationImageState");
 
   final FlutterSoundPlayer? _mPlayer = FlutterSoundPlayer();
   bool _mPlayerIsInited = false;
 
-  final _exampleAudioFilePathMP3 = 'https://flutter-sound.canardoux.xyz/extract/05.mp3';
+  final _exampleAudioFilePathMP3 =
+      'https://flutter-sound.canardoux.xyz/extract/05.mp3';
 
   @override
   void dispose() {
@@ -87,13 +88,13 @@ class _SoundPlayDemoState extends State<SoundPlayDemo> {
       return;
     }
     await _mPlayer!.startPlayer(
-      fromURI: _exampleAudioFilePathMP3,
-      codec: Codec.mp3,
-      whenFinished: () {
-        debugPrint("whenFinished");
-        // setState(() {});
-        _voiceGlobalKey.currentState?.stop();
-      });
+        fromURI: _exampleAudioFilePathMP3,
+        codec: Codec.mp3,
+        whenFinished: () {
+          debugPrint("whenFinished");
+          // setState(() {});
+          _voiceGlobalKey.currentState?.stop();
+        });
   }
 
   Future<void> stopPlayer() async {
@@ -112,6 +113,5 @@ class _SoundPlayDemoState extends State<SoundPlayDemo> {
       return null;
     }
     return _mPlayer!.isStopped ? play() : stopPlayer();
-
   }
 }

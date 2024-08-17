@@ -10,18 +10,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 
 class AnimatedWidgetDemo extends StatefulWidget {
-
   final String? title;
 
-  const AnimatedWidgetDemo({ Key? key, this.title}) : super(key: key);
+  const AnimatedWidgetDemo({Key? key, this.title}) : super(key: key);
 
-  
   @override
   _AnimatedWidgetDemoState createState() => _AnimatedWidgetDemoState();
 }
 
 class _AnimatedWidgetDemoState extends State<AnimatedWidgetDemo> {
-
   double _padding = 10;
   var _align = Alignment.topRight;
   double _height = 100;
@@ -55,7 +52,7 @@ class _AnimatedWidgetDemoState extends State<AnimatedWidgetDemo> {
         children: <Widget>[
           ElevatedButton(
             onPressed: () {
-              _padding = _padding == 10 ? 20: 10;
+              _padding = _padding == 10 ? 20 : 10;
               setState(() {});
             },
             child: AnimatedPadding(
@@ -90,7 +87,9 @@ class _AnimatedWidgetDemoState extends State<AnimatedWidgetDemo> {
               alignment: _align,
               child: ElevatedButton(
                 onPressed: () {
-                  _align = _align == Alignment.centerLeft ? Alignment.center : Alignment.centerLeft;
+                  _align = _align == Alignment.centerLeft
+                      ? Alignment.center
+                      : Alignment.centerLeft;
                   setState(() {});
                 },
                 child: Text("AnimatedAlign"),
@@ -103,12 +102,14 @@ class _AnimatedWidgetDemoState extends State<AnimatedWidgetDemo> {
               AnimatedOpacity(
                 opacity: opacityLevel,
                 duration: const Duration(seconds: 3),
-                child: const FlutterLogo(size: 80,),
+                child: const FlutterLogo(
+                  size: 80,
+                ),
               ),
               ElevatedButton(
-                onPressed: (){
+                onPressed: () {
                   opacityLevel = opacityLevel == 0 ? 1.0 : 0.0;
-                  setState((){});
+                  setState(() {});
                 },
                 child: const Text('AnimatedOpacity'),
               ),
@@ -143,9 +144,12 @@ class _AnimatedWidgetDemoState extends State<AnimatedWidgetDemo> {
             },
             child: AnimatedCrossFade(
               duration: const Duration(seconds: 1),
-              firstChild: const FlutterLogo(style: FlutterLogoStyle.horizontal, size: 100.0),
-              secondChild: const FlutterLogo(style: FlutterLogoStyle.stacked, size: 100.0),
-              crossFadeState: _first ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+              firstChild: const FlutterLogo(
+                  style: FlutterLogoStyle.horizontal, size: 100.0),
+              secondChild: const FlutterLogo(
+                  style: FlutterLogoStyle.stacked, size: 100.0),
+              crossFadeState:
+                  _first ? CrossFadeState.showFirst : CrossFadeState.showSecond,
             ),
           ),
           AnimatedContainer(
@@ -206,8 +210,6 @@ class _AnimatedWidgetDemoState extends State<AnimatedWidgetDemo> {
   }
 }
 
-
-
 class AnimatedDecoratedBox extends ImplicitlyAnimatedWidget {
   const AnimatedDecoratedBox({
     Key? key,
@@ -216,10 +218,10 @@ class AnimatedDecoratedBox extends ImplicitlyAnimatedWidget {
     Curve curve = Curves.linear,
     required Duration duration,
   }) : super(
-    key: key,
-    curve: curve,
-    duration: duration,
-  );
+          key: key,
+          curve: curve,
+          duration: duration,
+        );
   final BoxDecoration decoration;
   final Widget child;
 
@@ -227,7 +229,8 @@ class AnimatedDecoratedBox extends ImplicitlyAnimatedWidget {
   _AnimatedDecoratedBoxState createState() => _AnimatedDecoratedBoxState();
 }
 
-class _AnimatedDecoratedBoxState extends AnimatedWidgetBaseState<AnimatedDecoratedBox> {
+class _AnimatedDecoratedBoxState
+    extends AnimatedWidgetBaseState<AnimatedDecoratedBox> {
   late DecorationTween _decoration; //定义一个Tween
 
   @override

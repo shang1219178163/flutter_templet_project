@@ -13,7 +13,6 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/num_ext.dart';
 
-
 class StaggeredGridViewDemo extends StatefulWidget {
   final String? title;
 
@@ -24,7 +23,6 @@ class StaggeredGridViewDemo extends StatefulWidget {
 }
 
 class _StaggeredGridViewDemoState extends State<StaggeredGridViewDemo> {
-
   bool _type = true;
 
   @override
@@ -35,11 +33,16 @@ class _StaggeredGridViewDemoState extends State<StaggeredGridViewDemo> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: [
-          TextButton(onPressed: (){
-            setState(() {
-              _type = _type == true ? false : true;
-            });
-          }, child: Icon(Icons.change_circle_outlined, color: Colors.white,)),
+          TextButton(
+              onPressed: () {
+                setState(() {
+                  _type = _type == true ? false : true;
+                });
+              },
+              child: Icon(
+                Icons.change_circle_outlined,
+                color: Colors.white,
+              )),
         ],
       ),
       body: _type == true ? _buildBody() : _buildCustomScrollView(),
@@ -47,8 +50,7 @@ class _StaggeredGridViewDemoState extends State<StaggeredGridViewDemo> {
   }
 
   _buildBody() {
-    return Container(
-    );
+    return Container();
     // return ClipRRect(
     //   borderRadius: BorderRadius.circular(30),
     //   child: StaggeredGridView.countBuilder(
@@ -86,10 +88,12 @@ class _StaggeredGridViewDemoState extends State<StaggeredGridViewDemo> {
   }
 
   _buildGrid() {
-    var list = List<Widget>.generate(9, (index) => Container(
-      color: Colors.primaries[index],
-      child: Text('$index'),
-    ));
+    var list = List<Widget>.generate(
+        9,
+        (index) => Container(
+              color: Colors.primaries[index],
+              child: Text('$index'),
+            ));
 
     return GridView.custom(
       gridDelegate: SliverWovenGridDelegate.count(
@@ -106,11 +110,11 @@ class _StaggeredGridViewDemoState extends State<StaggeredGridViewDemo> {
         ],
       ),
       childrenDelegate: SliverChildBuilderDelegate(
-            (context, index) {
-              return Container(
-                child: Text("$index"),
-              );
-            },
+        (context, index) {
+          return Container(
+            child: Text("$index"),
+          );
+        },
       ),
     );
 
@@ -163,5 +167,4 @@ class _StaggeredGridViewDemoState extends State<StaggeredGridViewDemo> {
     }
     return child;
   }
-
 }

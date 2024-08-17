@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
@@ -31,14 +30,12 @@ class NAppBarThemChange extends StatefulWidget {
 }
 
 class _NAppBarThemChangeState extends State<NAppBarThemChange> {
-
   late bool noDefault = !widget.isDefault;
 
   @override
   void initState() {
     super.initState();
   }
-
 
   ThemeData get _transparentThemeData {
     return Theme.of(context).copyWith(
@@ -53,7 +50,7 @@ class _NAppBarThemChangeState extends State<NAppBarThemChange> {
         systemOverlayStyle: NSystemOverlayStyle.transparent,
         backgroundColor: Colors.transparent,
         titleTextStyle: const TextStyle(color: Colors.transparent),
-        shadowColor: Colors.transparent,//不加,暗黑模式有灰色阴影
+        shadowColor: Colors.transparent, //不加,暗黑模式有灰色阴影
       ),
     );
   }
@@ -102,7 +99,9 @@ class _NAppBarThemChangeState extends State<NAppBarThemChange> {
 
   @override
   Widget build(BuildContext context) {
-    final data = noDefault ? (widget.themeData ?? _transparentThemeData) : (widget.defaultThemeData ?? _whiteThemeData);
+    final data = noDefault
+        ? (widget.themeData ?? _transparentThemeData)
+        : (widget.defaultThemeData ?? _whiteThemeData);
 
     return NotificationListener<ScrollNotification>(
       onNotification: onNotification,

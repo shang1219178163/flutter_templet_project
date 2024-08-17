@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
@@ -7,7 +5,6 @@ import 'package:get/get.dart';
 
 /// 队列弹窗
 class QueueAlertDemo extends StatefulWidget {
-
   const QueueAlertDemo({
     super.key,
     this.arguments,
@@ -20,27 +17,35 @@ class QueueAlertDemo extends StatefulWidget {
 }
 
 class _QueueAlertDemoState extends State<QueueAlertDemo> {
-
-  bool get hideApp => Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
+  bool get hideApp =>
+      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
 
   final _scrollController = ScrollController();
 
   Map<String, dynamic> arguments = Get.arguments ?? <String, dynamic>{};
+
   /// id
   late final id = arguments["id"];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: hideApp ? null : AppBar(
-        title: Text("$widget"),
-        actions: ['done',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () => debugPrint(e),)
-        ).toList(),
-      ),
+      appBar: hideApp
+          ? null
+          : AppBar(
+              title: Text("$widget"),
+              actions: [
+                'done',
+              ]
+                  .map((e) => TextButton(
+                        child: Text(
+                          e,
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        onPressed: () => debugPrint(e),
+                      ))
+                  .toList(),
+            ),
       body: buildBody(),
     );
   }
@@ -54,7 +59,7 @@ class _QueueAlertDemoState extends State<QueueAlertDemo> {
           children: [
             Text("$widget"),
             TextButton(
-              onPressed: (){
+              onPressed: () {
                 showQueueAlert();
               },
               child: Text("队列弹窗"),
@@ -71,11 +76,9 @@ class _QueueAlertDemoState extends State<QueueAlertDemo> {
     intercepts.add(VerifyIntercept());
     intercepts.add(VerifyAgainIntercept());
 
-    intercepts.intercept(DialogPass('你确定你要阅读全部协议吗1？',1));
+    intercepts.intercept(DialogPass('你确定你要阅读全部协议吗1？', 1));
   }
-
 }
-
 
 class InterceptChain<T> {
   InterceptChain? next;
@@ -124,11 +127,12 @@ class TipsIntercept extends InterceptChain<DialogPass> {
       title: Text("$this"),
       actions: [
         TextButton(
-          onPressed: (){
+          onPressed: () {
             Get.back();
             super.intercept(data);
           },
-          child: Text("确定"),),
+          child: Text("确定"),
+        ),
       ],
     ).toShowCupertinoDialog(context: Get.context!);
   }
@@ -141,11 +145,12 @@ class VerifyIntercept extends InterceptChain<DialogPass> {
       title: Text("$this"),
       actions: [
         TextButton(
-          onPressed: (){
+          onPressed: () {
             Get.back();
             super.intercept(data);
           },
-          child: Text("确定"),),
+          child: Text("确定"),
+        ),
       ],
     ).toShowCupertinoDialog(context: Get.context!);
   }
@@ -158,11 +163,12 @@ class VerifyAgainIntercept extends InterceptChain<DialogPass> {
       title: Text("$this"),
       actions: [
         TextButton(
-          onPressed: (){
+          onPressed: () {
             Get.back();
             super.intercept(data);
           },
-          child: Text("确定"),),
+          child: Text("确定"),
+        ),
       ],
     ).toShowCupertinoDialog(context: Get.context!);
   }

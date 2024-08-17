@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/n_transform_view.dart';
@@ -7,9 +5,8 @@ import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:get/get.dart';
 
 class NTransformViewDemo extends StatefulWidget {
-
   NTransformViewDemo({
-    super.key, 
+    super.key,
     this.arguments,
   });
 
@@ -20,10 +17,11 @@ class NTransformViewDemo extends StatefulWidget {
 }
 
 class _NTransformViewDemoState extends State<NTransformViewDemo> {
-
-  bool get hideApp => Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
+  bool get hideApp =>
+      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
 
   Map<String, dynamic> arguments = Get.arguments ?? <String, dynamic>{};
+
   /// id
   late final id = arguments["id"];
 
@@ -39,26 +37,34 @@ class _NTransformViewDemoState extends State<NTransformViewDemo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: hideApp ? null : AppBar(
-        title: Text("$widget"),
-        actions: ['done',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () => debugPrint(e),)
-        ).toList(),
-      ),
+      appBar: hideApp
+          ? null
+          : AppBar(
+              title: Text("$widget"),
+              actions: [
+                'done',
+              ]
+                  .map((e) => TextButton(
+                        child: Text(
+                          e,
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        onPressed: () => debugPrint(e),
+                      ))
+                  .toList(),
+            ),
       body: NTransformView(
         controller: transformViewController,
-        title: NText('测试',
+        title: NText(
+          '测试',
           fontSize: 20,
           fontWeight: FontWeight.w500,
         ),
-        message: NText("这是一条提示信息",
+        message: NText(
+          "这是一条提示信息",
           maxLines: 3,
         ),
-        toolbarBuilder: (_){
-
+        toolbarBuilder: (_) {
           return Wrap(
             spacing: 8,
             runSpacing: 8,
@@ -93,7 +99,7 @@ class _NTransformViewDemoState extends State<NTransformViewDemo> {
     onGenerate();
   }
 
-  onCreate(){
+  onCreate() {
     ddlog(transformViewController.out);
   }
 }

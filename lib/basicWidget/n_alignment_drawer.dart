@@ -6,13 +6,10 @@
 //  Copyright © 2024/3/4 shang. All rights reserved.
 //
 
-
-
 import 'package:flutter/material.dart';
 
 /// 弹窗/抽屉/页面展示
 class NAlignmentDrawer extends StatefulWidget {
-
   NAlignmentDrawer({
     super.key,
     this.duration = const Duration(milliseconds: 350),
@@ -25,6 +22,7 @@ class NAlignmentDrawer extends StatefulWidget {
 
   /// 动画时间
   final Duration duration;
+
   /// 目标位置
   final Alignment alignment;
 
@@ -40,7 +38,8 @@ class NAlignmentDrawer extends StatefulWidget {
   State<NAlignmentDrawer> createState() => _NAlignmentDrawerState();
 }
 
-class _NAlignmentDrawerState extends State<NAlignmentDrawer> with SingleTickerProviderStateMixin {
+class _NAlignmentDrawerState extends State<NAlignmentDrawer>
+    with SingleTickerProviderStateMixin {
   final _scrollController = ScrollController();
 
   Tween<Offset> get tween {
@@ -65,18 +64,20 @@ class _NAlignmentDrawerState extends State<NAlignmentDrawer> with SingleTickerPr
     );
   }
 
-  late final controller = AnimationController(duration: widget.duration, vsync: this,);
+  late final controller = AnimationController(
+    duration: widget.duration,
+    vsync: this,
+  );
 
   late final Animation<Offset> offsetAnimation = tween.animate(CurvedAnimation(
-      parent: controller,
-      curve: Curves.decelerate,
+    parent: controller,
+    curve: Curves.decelerate,
   ));
 
   late final Animation<double> fadeAnimation = CurvedAnimation(
     parent: controller,
     curve: Curves.easeIn,
   );
-
 
   @override
   void dispose() {
@@ -93,7 +94,7 @@ class _NAlignmentDrawerState extends State<NAlignmentDrawer> with SingleTickerPr
     controller.forward();
   }
 
-  void onListener(){
+  void onListener() {
     setState(() {});
   }
 
@@ -101,7 +102,6 @@ class _NAlignmentDrawerState extends State<NAlignmentDrawer> with SingleTickerPr
     await controller.reverse();
     Navigator.of(context).pop();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -112,12 +112,12 @@ class _NAlignmentDrawerState extends State<NAlignmentDrawer> with SingleTickerPr
           actions: [
             TextButton(
               onPressed: onHide,
-              child: Text('取消',
+              child: Text(
+                '取消',
                 style: TextStyle(color: Colors.white),
               ),
             ),
-          ]
-      ),
+          ]),
       body: buildBody(),
     );
 
@@ -136,13 +136,13 @@ class _NAlignmentDrawerState extends State<NAlignmentDrawer> with SingleTickerPr
     );
 
     return InkWell(
-      onTap: widget.onBarrier ?? onHide,
-      child: Container(
-        alignment: widget.alignment,
-        color: widget.barrierColor ?? Theme.of(context).bottomSheetTheme.modalBarrierColor,
-        child: child,
-      )
-    );
+        onTap: widget.onBarrier ?? onHide,
+        child: Container(
+          alignment: widget.alignment,
+          color: widget.barrierColor ??
+              Theme.of(context).bottomSheetTheme.modalBarrierColor,
+          child: child,
+        ));
   }
 
   buildBody() {
@@ -152,15 +152,15 @@ class _NAlignmentDrawerState extends State<NAlignmentDrawer> with SingleTickerPr
       child: SingleChildScrollView(
         controller: _scrollController,
         child: Column(
-          children: indexs.map((e) {
-
-            return ListTile(
-              title: Text("选项$e"),
-            );
-          },).toList(),
+          children: indexs.map(
+            (e) {
+              return ListTile(
+                title: Text("选项$e"),
+              );
+            },
+          ).toList(),
         ),
       ),
     );
   }
-  
 }

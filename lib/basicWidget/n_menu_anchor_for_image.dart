@@ -6,13 +6,11 @@
 //  Copyright © 2023/10/31 shang. All rights reserved.
 //
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 
 /// 图标弹出菜单 简易封装,方便代码复用
 class NMenuAnchorForImage extends StatefulWidget {
-
   NMenuAnchorForImage({
     super.key,
     required this.values,
@@ -24,6 +22,7 @@ class NMenuAnchorForImage extends StatefulWidget {
 
   /// 数据源
   final List<String> values;
+
   /// 初始化数据
   final String initialItem;
 
@@ -33,7 +32,6 @@ class NMenuAnchorForImage extends StatefulWidget {
   final EdgeInsets itemPadding;
 
   final double itemSpacing;
-
 
   @override
   State<NMenuAnchorForImage> createState() => _NMenuAnchorForImageState();
@@ -48,26 +46,23 @@ class _NMenuAnchorForImageState extends State<NMenuAnchorForImage> {
   Widget build(BuildContext context) {
     return Theme(
       data: ThemeData(
-        menuTheme: MenuThemeData(
-          style: MenuStyle(
+          menuTheme: MenuThemeData(
+              style: MenuStyle(
             backgroundColor: MaterialStateProperty.all(Colors.transparent),
             shadowColor: MaterialStateProperty.all(Colors.transparent),
             // surfaceTintColor: MaterialStateProperty.all(Colors.red),
-            shape: MaterialStateProperty.all<OutlinedBorder?>(const RoundedRectangleBorder()),
+            shape: MaterialStateProperty.all<OutlinedBorder?>(
+                const RoundedRectangleBorder()),
             elevation: MaterialStateProperty.all<double?>(0.0),
-          )
-        ),
-        menuButtonTheme: MenuButtonThemeData(
-          style: ButtonStyle(
+          )),
+          menuButtonTheme: MenuButtonThemeData(
+              style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all(Colors.transparent),
             shadowColor: MaterialStateProperty.all(Colors.transparent),
-          )
-        )
-      ),
+          ))),
       child: MenuAnchor(
         controller: menuController,
         builder: (context, MenuController controller, Widget? child) {
-
           return buildItem(
             imgName: selectedItem,
             padding: widget.itemPadding,
@@ -81,7 +76,6 @@ class _NMenuAnchorForImageState extends State<NMenuAnchorForImage> {
           );
         },
         menuChildren: widget.values.map((e) {
-
           return Padding(
             padding: EdgeInsets.only(bottom: widget.itemSpacing),
             child: buildItem(
@@ -147,5 +141,4 @@ class _NMenuAnchorForImageState extends State<NMenuAnchorForImage> {
     //   ),
     // );
   }
-
 }

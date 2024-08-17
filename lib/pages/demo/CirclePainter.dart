@@ -6,7 +6,6 @@
 //  Copyright © 12/14/21 shang. All rights reserved.
 //
 
-
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -36,6 +35,3 @@ class CirclePainter extends CustomPainter {
     canvas.drawCircle(point, min(size.width, size.height) * 0.5, paint);
   }
 }
-
-
-

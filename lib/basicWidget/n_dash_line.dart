@@ -6,13 +6,11 @@
 //  Copyright © 7/16/21 shang. All rights reserved.
 //
 
-
 import 'package:flutter/material.dart';
 import 'package:tuple/tuple.dart';
 
 /// 自定义虚线
 class NDashLine extends StatelessWidget {
-
   const NDashLine({
     Key? key,
     this.direction = Axis.horizontal,
@@ -24,12 +22,16 @@ class NDashLine extends StatelessWidget {
 
   /// 单色虚线
   final Color color;
+
   /// 彩色虚线
   final List<Tuple2<double, Color>> steps;
+
   /// 方向
   final Axis direction;
+
   /// 线条高度
   final double height;
+
   /// 单色步长
   final double step;
 
@@ -51,44 +53,42 @@ class NDashLine extends StatelessWidget {
         final dashHeight = height;
         final count = boxWidth / (2 * step);
         final dashCount = count.floor();
+
         /// 剩余宽度不够一组
-        final otherCount = ((count%1)*2).truncate();
+        final otherCount = ((count % 1) * 2).truncate();
         // debugPrint("boxWidth:$boxWidth, dashWidth:$step");
         // debugPrint("count:$count, dashCount:$dashCount, otherCount:$otherCount");
 
         return Flex(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          direction: direction,
-          children: [
-            ...List.generate(dashCount, (_) {
-              return SizedBox(
-                width: direction == Axis.horizontal ? step : dashHeight,
-                height: direction == Axis.horizontal ? dashHeight : step,
-                child: DecoratedBox(
-                  decoration: BoxDecoration(color: color),
-                ),
-              );
-            }),
-            ...List.generate(otherCount, (_) {
-              return SizedBox(
-                width: direction == Axis.horizontal ? step : dashHeight,
-                height: direction == Axis.horizontal ? dashHeight : step,
-                child: DecoratedBox(
-                  decoration: BoxDecoration(color: color),
-                ),
-              );
-            }),
-          ]
-        );
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            direction: direction,
+            children: [
+              ...List.generate(dashCount, (_) {
+                return SizedBox(
+                  width: direction == Axis.horizontal ? step : dashHeight,
+                  height: direction == Axis.horizontal ? dashHeight : step,
+                  child: DecoratedBox(
+                    decoration: BoxDecoration(color: color),
+                  ),
+                );
+              }),
+              ...List.generate(otherCount, (_) {
+                return SizedBox(
+                  width: direction == Axis.horizontal ? step : dashHeight,
+                  height: direction == Axis.horizontal ? dashHeight : step,
+                  child: DecoratedBox(
+                    decoration: BoxDecoration(color: color),
+                  ),
+                );
+              }),
+            ]);
       },
     );
   }
 }
 
-
 /// 多颜色虚线
 class NDashLineOfMutiColor extends StatelessWidget {
-
   const NDashLineOfMutiColor({
     Key? key,
     this.direction = Axis.horizontal,
@@ -103,11 +103,12 @@ class NDashLineOfMutiColor extends StatelessWidget {
 
   /// 每种颜色及步长宽度
   final List<Tuple2<double, Color>> steps;
+
   /// 水平或者垂直
   final Axis direction;
+
   /// 线条高度
   final double height;
-
 
   @override
   Widget build(BuildContext context) {
@@ -122,8 +123,9 @@ class NDashLineOfMutiColor extends StatelessWidget {
         final dashHeight = height;
         final count = boxWidth / step;
         final dashCount = count.floor();
+
         /// 剩余宽度不够一组
-        final otherCount = ((count%1)*steps.length).truncate();
+        final otherCount = ((count % 1) * steps.length).truncate();
         // debugPrint("boxWidth:$boxWidth, dashWidth:$step");
         // debugPrint("count:$count, dashCount:$dashCount, otherCount:$otherCount");
 

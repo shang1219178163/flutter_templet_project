@@ -1,14 +1,10 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/horizontal_cell.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/util/R.dart';
 
-
-
 class HorizontalCellDemo extends StatefulWidget {
-
-  const HorizontalCellDemo({ Key? key, this.title}) : super(key: key);
+  const HorizontalCellDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -17,9 +13,7 @@ class HorizontalCellDemo extends StatefulWidget {
 }
 
 class _HorizontalCellDemoState extends State<HorizontalCellDemo> {
-
   var sliderVN = ValueNotifier(100.0);
-
 
   @override
   Widget build(BuildContext context) {
@@ -29,11 +23,11 @@ class _HorizontalCellDemoState extends State<HorizontalCellDemo> {
         backgroundColor: Colors.green,
       ),
       body: Column(
-          children: <Widget>[
-            _buildSlider(),
-            _buildCell(),
-          ],
-        ),
+        children: <Widget>[
+          _buildSlider(),
+          _buildCell(),
+        ],
+      ),
     );
   }
 
@@ -42,36 +36,33 @@ class _HorizontalCellDemoState extends State<HorizontalCellDemo> {
     return Row(
       children: [
         Expanded(
-          child: StatefulBuilder(
-            builder: (context, setState) {
-              return Slider(
-                inactiveColor: Color(0xffC0C0C0),
-                activeColor: Color(0xff21BA45),
-                divisions: 100,
-                //label: 'Admitida',
-                value: sliderVN.value,
-                min: 0.0,
-                max: 100.0,
-                onChanged: (double value) {
-                  sliderVN.value = value;
-                  setState(() {});
-                },
-              );
-            }
-          ),
+          child: StatefulBuilder(builder: (context, setState) {
+            return Slider(
+              inactiveColor: Color(0xffC0C0C0),
+              activeColor: Color(0xff21BA45),
+              divisions: 100,
+              //label: 'Admitida',
+              value: sliderVN.value,
+              min: 0.0,
+              max: 100.0,
+              onChanged: (double value) {
+                sliderVN.value = value;
+                setState(() {});
+              },
+            );
+          }),
         ),
         ValueListenableBuilder(
             valueListenable: sliderVN,
             builder: (BuildContext context, double value, Widget? child) {
-              final result = (value/100).toStringAsFixed(2);
+              final result = (value / 100).toStringAsFixed(2);
               return TextButton(
                 onPressed: () {
                   debugPrint(result);
                 },
                 child: Text(result),
               );
-            }
-        ),
+            }),
       ],
     );
   }
@@ -115,12 +106,7 @@ class _HorizontalCellDemoState extends State<HorizontalCellDemo> {
         arrow: Container(
           // color: Colors.green,
           // padding: EdgeInsets.all(8),
-          child: Icon(
-              Icons.arrow_forward_ios,
-              size: 20,
-              color: Colors.grey
-          ),
-        )
-    );
+          child: Icon(Icons.arrow_forward_ios, size: 20, color: Colors.grey),
+        ));
   }
 }

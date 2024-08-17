@@ -5,7 +5,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 
 import 'package:flutter_templet_project/extension/edge_insets_ext.dart';
 
-
 /// 组件通用外观设置
 class NBox extends StatelessWidget {
   NBox({
@@ -78,6 +77,7 @@ class NBox extends StatelessWidget {
 
   /// 前景滤镜
   ui.ImageFilter? foregroundFilter;
+
   /// 背景滤镜
   ui.ImageFilter? filter;
 
@@ -102,24 +102,23 @@ class NBox extends StatelessWidget {
     );
   }
 
-  _buildBody({
-    double? width,
-    double? height,
-    double blur = 0,
-    double bgBlur = 0,
-    double? opacity = 1.0,
-    EdgeInsets margin = const EdgeInsets.all(0),
-    EdgeInsets padding = const EdgeInsets.all(0),
-    BoxBorder? border,
-    BorderRadius? borderRadius,
-    Color? bgColor,
-    Gradient? bgGradient,
-    String? bgUrl,
-    BoxFit? imageFit,
-    List<BoxShadow>? boxShadows,
-    required Widget child,
-    bool? hideBlur = false
-  }) {
+  _buildBody(
+      {double? width,
+      double? height,
+      double blur = 0,
+      double bgBlur = 0,
+      double? opacity = 1.0,
+      EdgeInsets margin = const EdgeInsets.all(0),
+      EdgeInsets padding = const EdgeInsets.all(0),
+      BoxBorder? border,
+      BorderRadius? borderRadius,
+      Color? bgColor,
+      Gradient? bgGradient,
+      String? bgUrl,
+      BoxFit? imageFit,
+      List<BoxShadow>? boxShadows,
+      required Widget child,
+      bool? hideBlur = false}) {
     // add test
     // bgGradient = LinearGradient(
     //     colors: [Colors.red, Colors.green],
@@ -132,9 +131,10 @@ class NBox extends StatelessWidget {
     var decorationImage = bgUrl?.startsWith('http') == true
         ? DecorationImage(
 //         image: NetworkImage(bgUrl),
-          image: CachedNetworkImageProvider(bgUrl!),
-          fit: imageFit,
-    ) : null;
+            image: CachedNetworkImageProvider(bgUrl!),
+            fit: imageFit,
+          )
+        : null;
 
     if (width != null && height != null) {
       /// 留出阴影空间
@@ -167,20 +167,21 @@ class NBox extends StatelessWidget {
         margin: margin.isNonNegative ? margin : EdgeInsets.zero,
         padding: padding,
         decoration: decoration,
-          child: ClipRRect(
-            borderRadius: borderRadius ?? BorderRadius.zero,
-            child: BackdropFilter(
-              filter: filter ?? ui.ImageFilter.blur(
-                sigmaX: bgBlur,
-                sigmaY: bgBlur,
-              ),
-              child: ImageFiltered(
-                imageFilter: foregroundFilter ?? ui.ImageFilter.blur(
-                  sigmaX: blur,
-                  sigmaY: blur,
+        child: ClipRRect(
+          borderRadius: borderRadius ?? BorderRadius.zero,
+          child: BackdropFilter(
+            filter: filter ??
+                ui.ImageFilter.blur(
+                  sigmaX: bgBlur,
+                  sigmaY: bgBlur,
                 ),
-                child: child
-              ),
+            child: ImageFiltered(
+                imageFilter: foregroundFilter ??
+                    ui.ImageFilter.blur(
+                      sigmaX: blur,
+                      sigmaY: blur,
+                    ),
+                child: child),
           ),
         ),
       ),

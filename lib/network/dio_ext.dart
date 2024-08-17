@@ -1,9 +1,8 @@
-
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
 
-extension ResponseExt on Response{
+extension ResponseExt on Response {
   /// 请求调试信息
   String toDescription() {
     var jsonStr = data;
@@ -22,5 +21,4 @@ jsonStr:
 $jsonStr
 """;
   }
-
 }

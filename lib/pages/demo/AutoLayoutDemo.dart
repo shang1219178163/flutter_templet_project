@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/n_flexible_cell.dart';
@@ -7,11 +5,7 @@ import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 
 class AutoLayoutDemo extends StatefulWidget {
-
-  AutoLayoutDemo({
-    Key? key,
-    this.title
-  }) : super(key: key);
+  AutoLayoutDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -20,20 +14,22 @@ class AutoLayoutDemo extends StatefulWidget {
 }
 
 class _AutoLayoutDemoState extends State<AutoLayoutDemo> {
-
-
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () => debugPrint(e),)
-        ).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () => debugPrint(e),
+                ))
+            .toList(),
       ),
       body: buildBody(),
     );
@@ -42,34 +38,37 @@ class _AutoLayoutDemoState extends State<AutoLayoutDemo> {
   buildBody() {
     return ListView(
       children: [
-        for (var i = 1; i <= 3; i++) Padding(
-          padding: EdgeInsets.symmetric(vertical: 4),
-          child: NFlexibleCell(
-            decoration: BoxDecoration(
-              color: Colors.orange,
-              borderRadius: BorderRadius.all(Radius.circular(16)),
-            ),
-            // prefix: Container(
-            //   color: Colors.red,
-            //   width: 50,
-            //   height: 20,
-            // ),
-            suffix: Padding(
-              padding: EdgeInsets.only(left: 6),
-              child: Icon(Icons.notification_add,
+        for (var i = 1; i <= 3; i++)
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 4),
+            child: NFlexibleCell(
+              decoration: BoxDecoration(
+                color: Colors.orange,
+                borderRadius: BorderRadius.all(Radius.circular(16)),
+              ),
+              // prefix: Container(
+              //   color: Colors.red,
+              //   width: 50,
+              //   height: 20,
+              // ),
+              suffix: Padding(
+                padding: EdgeInsets.only(left: 6),
+                child: Icon(
+                  Icons.notification_add,
+                  color: Colors.white,
+                  size: 16,
+                ),
+              ),
+              content: NText(
+                "自适应横向布局" * i,
+                textAlign: TextAlign.center,
+                fontSize: 16.sp,
                 color: Colors.white,
-                size: 16,
+                fontWeight: FontWeight.w500,
+                maxLines: 6,
               ),
             ),
-            content: NText("自适应横向布局"*i,
-              textAlign: TextAlign.center,
-              fontSize: 16.sp,
-              color: Colors.white,
-              fontWeight: FontWeight.w500,
-              maxLines: 6,
-            ),
           ),
-        ),
         Row(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -77,18 +76,16 @@ class _AutoLayoutDemoState extends State<AutoLayoutDemo> {
             FlutterLogo(),
             Flexible(
               child: buildText(
-                text: '自适应横向布局'*10,
-                onTap: (){
-                  debugPrint("onTap");
-                }
-              ),
+                  text: '自适应横向布局' * 10,
+                  onTap: () {
+                    debugPrint("onTap");
+                  }),
             ),
             OutlinedButton(
-              onPressed: (){
-                debugPrint("OutlinedButton");
-              },
-              child: Text("OutlinedButton")
-            ),
+                onPressed: () {
+                  debugPrint("OutlinedButton");
+                },
+                child: Text("OutlinedButton")),
           ],
         ),
       ],
@@ -102,7 +99,8 @@ class _AutoLayoutDemoState extends State<AutoLayoutDemo> {
   }) {
     return buildTag(
       onTap: onTap,
-      content: Text(text,
+      content: Text(
+        text,
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
         style: TextStyle(color: color),
@@ -116,7 +114,8 @@ class _AutoLayoutDemoState extends State<AutoLayoutDemo> {
       ),
       suffix: Padding(
         padding: EdgeInsets.only(left: 4),
-        child: Icon(Icons.arrow_forward_ios_sharp,
+        child: Icon(
+          Icons.arrow_forward_ios_sharp,
           size: 20,
           color: color,
         ),
@@ -153,10 +152,15 @@ class _AutoLayoutDemoState extends State<AutoLayoutDemo> {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            prefix ?? Padding(
-              padding: EdgeInsets.only(right: 4),
-              child: Icon(Icons.send, size: 20, color: color,),
-            ),
+            prefix ??
+                Padding(
+                  padding: EdgeInsets.only(right: 4),
+                  child: Icon(
+                    Icons.send,
+                    size: 20,
+                    color: color,
+                  ),
+                ),
             Flexible(
               child: content,
             ),
@@ -166,5 +170,4 @@ class _AutoLayoutDemoState extends State<AutoLayoutDemo> {
       ),
     );
   }
-
 }

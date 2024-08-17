@@ -9,11 +9,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/scheduler.dart';
 
-typedef AfterLayoutWidgetBuilder = Widget Function(BuildContext context, Widget? child, Size? size);
+typedef AfterLayoutWidgetBuilder = Widget Function(
+    BuildContext context, Widget? child, Size? size);
 
 /// 获取布局尺寸
 class AfterLayoutBuilder extends StatefulWidget {
-
   const AfterLayoutBuilder({
     Key? key,
     this.child,
@@ -29,7 +29,6 @@ class AfterLayoutBuilder extends StatefulWidget {
 }
 
 class _AfterLayoutBuilderState extends State<AfterLayoutBuilder> {
-
   Size? _currentSize;
 
   @override
@@ -40,7 +39,7 @@ class _AfterLayoutBuilderState extends State<AfterLayoutBuilder> {
         return;
       }
       _currentSize = context.size;
-      if(mounted) setState(() {});
+      if (mounted) setState(() {});
     });
     super.initState();
   }
@@ -49,5 +48,4 @@ class _AfterLayoutBuilderState extends State<AfterLayoutBuilder> {
   Widget build(BuildContext context) {
     return widget.builder(context, widget.child, _currentSize);
   }
-
 }

@@ -40,7 +40,7 @@ class _ThemePageState extends State<ThemePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: TitleAppBar(title: Text( 'Theme')),
+      appBar: TitleAppBar(title: Text('Theme')),
       body: Stack(
         children: [
           ListView(

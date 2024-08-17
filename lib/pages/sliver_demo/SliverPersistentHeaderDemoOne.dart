@@ -6,7 +6,6 @@
 //  Copyright © 10/13/21 shang. All rights reserved.
 //
 
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_sliver_persistent_header_delegate.dart';
@@ -39,16 +38,14 @@ class SliverPersistentHeaderDemoOne extends StatelessWidget {
   }
 
   // 构建颜色列表
-  Widget _buildSliverList({required List<Color> list}) =>
-      SliverList(
-        delegate: SliverChildBuilderDelegate((_, int index)
-        => _buildColorItem(list[index], index),
+  Widget _buildSliverList({required List<Color> list}) => SliverList(
+        delegate: SliverChildBuilderDelegate(
+            (_, int index) => _buildColorItem(list[index], index),
             childCount: list.length),
       );
 
   // 构建颜色列表item
-  Widget _buildColorItem(Color color, int index) =>
-      Card(
+  Widget _buildColorItem(Color color, int index) => Card(
         child: Container(
           alignment: Alignment.center,
           width: 100,
@@ -56,13 +53,9 @@ class SliverPersistentHeaderDemoOne extends StatelessWidget {
           color: color,
           child: Text(
             index == 0 ? colorString(color) : colorString1(color),
-            style: const TextStyle(
-                color: Colors.white,
-                shadows: [
-                  Shadow(color: Colors.black,
-                      offset: Offset(.5, .5),
-                      blurRadius: 2)
-                ]),
+            style: const TextStyle(color: Colors.white, shadows: [
+              Shadow(color: Colors.black, offset: Offset(.5, .5), blurRadius: 2)
+            ]),
           ),
         ),
       );
@@ -74,18 +67,15 @@ class SliverPersistentHeaderDemoOne extends StatelessWidget {
       "#${color.value.toRadixString(16).toUpperCase()}";
 
   Widget _buildPersistentHeader(String title) => SliverPersistentHeader(
-    pinned: true,
-    floating: true,
-    delegate: NSliverPersistentHeaderDelegate(
-      builder: (ctx, offset, overlapsContent) => Container(
-        alignment: Alignment.center,
-        color: Colors.orangeAccent,
-        child: Text(
-          "$title shrinkOffset:${offset.toStringAsFixed(1)}",
-          style: TextStyle(fontSize: 20, color: Colors.white),
-        ),
-      )
-    )
-  );
-
+      pinned: true,
+      floating: true,
+      delegate: NSliverPersistentHeaderDelegate(
+          builder: (ctx, offset, overlapsContent) => Container(
+                alignment: Alignment.center,
+                color: Colors.orangeAccent,
+                child: Text(
+                  "$title shrinkOffset:${offset.toStringAsFixed(1)}",
+                  style: TextStyle(fontSize: 20, color: Colors.white),
+                ),
+              )));
 }

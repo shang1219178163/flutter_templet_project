@@ -24,23 +24,21 @@ class ProviderDemoOne extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return ChangeNotifierProvider(
       create: (_) => ToggleNotifier(val: true, val1: false),
       child: Scaffold(
-        appBar: AppBar(
-          title: Text("ProviderDemoOne"),
-        ),
-        body: ListView(
-          children: [
-            Column(
-              children: [
-                _buildSelector(),
-              ],
-            ),
-          ],
-        )
-      ),
+          appBar: AppBar(
+            title: Text("ProviderDemoOne"),
+          ),
+          body: ListView(
+            children: [
+              Column(
+                children: [
+                  _buildSelector(),
+                ],
+              ),
+            ],
+          )),
     );
   }
 
@@ -51,13 +49,12 @@ class ProviderDemoOne extends StatelessWidget {
         Selector<ToggleNotifier, bool>(
           selector: (ctx, model) => model.current,
           builder: (ctx, value, child) {
-
             return Text("ToggleNotifier: ${value.toString()}");
           },
         ),
         Selector<ToggleNotifier, ToggleNotifier>(
           selector: (ctx, model) => model,
-          builder: (ctx, model, child){
+          builder: (ctx, model, child) {
             return Column(
               children: [
                 ElevatedButton(
@@ -77,9 +74,7 @@ class ProviderDemoOne extends StatelessWidget {
       ],
     );
   }
-
 }
-
 
 class ToggleNotifier extends ChangeNotifier {
   dynamic val;
@@ -88,14 +83,10 @@ class ToggleNotifier extends ChangeNotifier {
   dynamic _current;
   dynamic get current => _current;
 
-  ToggleNotifier({
-    required this.val,
-    required this.val1
-  });
+  ToggleNotifier({required this.val, required this.val1});
 
   void update() {
     _current = _current == val ? val1 : val;
     notifyListeners();
   }
-
 }

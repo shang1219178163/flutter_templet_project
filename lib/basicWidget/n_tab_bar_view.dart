@@ -12,7 +12,6 @@ import 'package:tuple/tuple.dart';
 
 /// TabBar + TabBarView
 class NTabBarView extends StatefulWidget {
-
   const NTabBarView({
     Key? key,
     this.isTabBottom = false,
@@ -26,40 +25,48 @@ class NTabBarView extends StatefulWidget {
     this.canPageChanged,
   }) : super(key: key);
 
-
   final List<Tuple2<String, Widget>> items;
+
   /// tab背景颜色
   final Color? tabBgColor;
+
   /// 标题和指示器颜色
   final Color? labelColor;
+
   /// 字体样式
   final TextStyle? labelStyle;
+
   /// Tab 控制器
   final TabController? tabController;
+
   /// 初始索引
   final int initialIndex;
+
   /// 左右滑动回调
   final ValueChanged<int> onPageChanged;
+
   /// 范围 false 时,锁定不在滚动
   final bool Function(int)? canPageChanged;
+
   /// tab 位置底部 false 顶部, true 底部
   final bool isTabBottom;
-
 
   @override
   _NTabBarViewState createState() => _NTabBarViewState();
 }
 
-class _NTabBarViewState extends State<NTabBarView> with SingleTickerProviderStateMixin {
-
-  late final _tabController = widget.tabController ?? TabController(
-    initialIndex: widget.initialIndex,
-    length: widget.items.length, vsync: this
-  );
+class _NTabBarViewState extends State<NTabBarView>
+    with SingleTickerProviderStateMixin {
+  late final _tabController = widget.tabController ??
+      TabController(
+          initialIndex: widget.initialIndex,
+          length: widget.items.length,
+          vsync: this);
 
   ///是否允许滚动
   bool get canScrollable {
-    final disable = (widget.canPageChanged?.call(_tabController.index) == false);
+    final disable =
+        (widget.canPageChanged?.call(_tabController.index) == false);
     return !disable;
   }
 
@@ -82,7 +89,8 @@ class _NTabBarViewState extends State<NTabBarView> with SingleTickerProviderStat
         widget.labelColor != oldWidget.labelColor ||
         widget.labelStyle != oldWidget.labelStyle ||
         widget.isTabBottom != oldWidget.isTabBottom ||
-        widget.items.map((e) => e.item1).join(",") != oldWidget.items.map((e) => e.item1).join(",")) {
+        widget.items.map((e) => e.item1).join(",") !=
+            oldWidget.items.map((e) => e.item1).join(",")) {
       setState(() {});
     }
   }
@@ -103,10 +111,8 @@ class _NTabBarViewState extends State<NTabBarView> with SingleTickerProviderStat
   }
 
   Widget buildTabBar() {
-    final textColor = widget.labelColor ?? Theme
-        .of(context)
-        .colorScheme
-        .primary;
+    final textColor =
+        widget.labelColor ?? Theme.of(context).colorScheme.primary;
 
     final borderSide = BorderSide(
       color: textColor,
@@ -125,7 +131,6 @@ class _NTabBarViewState extends State<NTabBarView> with SingleTickerProviderStat
       ),
     );
 
-
     final tabBar = TabBar(
       controller: _tabController,
       tabs: widget.items.map((e) => Tab(text: e.item1)).toList(),
@@ -133,7 +138,7 @@ class _NTabBarViewState extends State<NTabBarView> with SingleTickerProviderStat
       labelStyle: widget.labelStyle,
       indicator: widget.isTabBottom ? decorationTop : decorationBom,
       onTap: (index) {
-        setState(() { });
+        setState(() {});
       },
     );
 
@@ -153,10 +158,11 @@ class _NTabBarViewState extends State<NTabBarView> with SingleTickerProviderStat
     return Expanded(
       child: TabBarView(
         controller: _tabController,
-        physics: canScrollable ? BouncingScrollPhysics() : NeverScrollableScrollPhysics(),
+        physics: canScrollable
+            ? BouncingScrollPhysics()
+            : NeverScrollableScrollPhysics(),
         children: widget.items.map((e) => e.item2).toList(),
       ),
     );
   }
-
 }

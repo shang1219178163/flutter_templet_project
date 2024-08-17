@@ -42,7 +42,8 @@ class SliverDecoratedBox extends SingleChildRenderObjectWidget {
   }
 
   @override
-  void updateRenderObject(BuildContext context, RenderSliverDecoratedBox renderObject) {
+  void updateRenderObject(
+      BuildContext context, RenderSliverDecoratedBox renderObject) {
     renderObject
       ..decoration = decoration
       ..configuration = createLocalImageConfiguration(context)
@@ -73,7 +74,7 @@ class RenderSliverDecoratedBox extends RenderProxySliver {
     DecorationPosition position = DecorationPosition.background,
     ImageConfiguration configuration = ImageConfiguration.empty,
     RenderSliver? sliver,
-  }) :  _decoration = decoration,
+  })  : _decoration = decoration,
         _position = position,
         _configuration = configuration {
     child = sliver;
@@ -124,11 +125,7 @@ class RenderSliverDecoratedBox extends RenderProxySliver {
         var clipRect = borderRadius
             .resolve(configuration.textDirection)
             .toRRect(Rect.fromLTRB(
-            0,
-            0,
-            constraints.crossAxisExtent,
-            geometry!.maxPaintExtent)
-        );
+                0, 0, constraints.crossAxisExtent, geometry!.maxPaintExtent));
         context.pushClipRRect(
           needsCompositing,
           offset,
@@ -139,8 +136,7 @@ class RenderSliverDecoratedBox extends RenderProxySliver {
       }
     }
     _painter ??= _decoration.createBoxPainter(markNeedsPaint);
-    final filledConfiguration =
-        configuration.copyWith(size: size);
+    final filledConfiguration = configuration.copyWith(size: size);
     if (position == DecorationPosition.background) {
       int? debugSaveCount;
       assert(() {

@@ -14,7 +14,8 @@ class AppDetailRootModel {
     }
     resultCount = json['resultCount'];
     if (json['results'] != null) {
-      final array = (json['results'] as List).map((e) => ResultsModel.fromJson(e));
+      final array =
+          (json['results'] as List).map((e) => ResultsModel.fromJson(e));
       results = List<ResultsModel>.from(array);
     }
   }

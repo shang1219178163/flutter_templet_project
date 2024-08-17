@@ -9,18 +9,15 @@
 import 'package:flutter/material.dart';
 
 class OffstageDemo extends StatefulWidget {
-
   final String? title;
 
-  const OffstageDemo({ Key? key, this.title}) : super(key: key);
-
+  const OffstageDemo({Key? key, this.title}) : super(key: key);
 
   @override
   _OffstageDemoState createState() => _OffstageDemoState();
 }
 
 class _OffstageDemoState extends State<OffstageDemo> {
-
   bool _offstage = true;
 
   @override
@@ -28,10 +25,10 @@ class _OffstageDemoState extends State<OffstageDemo> {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
 
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title ?? "$widget"),
-        ),
-        body: _buildOffstageExampele(),
+      appBar: AppBar(
+        title: Text(widget.title ?? "$widget"),
+      ),
+      body: _buildOffstageExampele(),
     );
   }
 
@@ -55,7 +52,8 @@ class _OffstageDemoState extends State<OffstageDemo> {
             size: 150.0,
           ),
         ),
-        if (_offstage) ElevatedButton(
+        if (_offstage)
+          ElevatedButton(
             onPressed: () {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
@@ -64,11 +62,8 @@ class _OffstageDemoState extends State<OffstageDemo> {
               );
             },
             child: const Text('Get Flutter Logo size'),
-        ),
+          ),
       ],
     );
   }
 }
-
-
-

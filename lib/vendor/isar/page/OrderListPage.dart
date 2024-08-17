@@ -1,5 +1,3 @@
-
-
 import 'dart:async';
 
 import 'package:easy_refresh/easy_refresh.dart';
@@ -17,11 +15,7 @@ import 'package:provider/provider.dart';
 
 /// DBGenericProvider 示例
 class OrderListPage extends StatefulWidget {
-
-  OrderListPage({
-    super.key,
-    this.title
-  });
+  OrderListPage({super.key, this.title});
 
   final String? title;
 
@@ -30,19 +24,19 @@ class OrderListPage extends StatefulWidget {
 }
 
 class _OrderListPageState extends State<OrderListPage> with DBDialogMxin {
-
   final _scrollController = ScrollController();
 
   final titleController = TextEditingController();
 
   bool isAllChoic = false;
 
-  DBGenericProvider<DBOrder> get provider => Provider.of<DBGenericProvider<DBOrder>>(context, listen: false);
-
+  DBGenericProvider<DBOrder> get provider =>
+      Provider.of<DBGenericProvider<DBOrder>>(context, listen: false);
 
   @override
   Widget build(BuildContext context) {
-    final automaticallyImplyLeading = Get.currentRoute.toLowerCase() == "/$widget".toLowerCase();
+    final automaticallyImplyLeading =
+        Get.currentRoute.toLowerCase() == "/$widget".toLowerCase();
 
     return Scaffold(
       backgroundColor: Colors.black12,
@@ -50,39 +44,39 @@ class _OrderListPageState extends State<OrderListPage> with DBDialogMxin {
         title: Text("$widget"),
         automaticallyImplyLeading: automaticallyImplyLeading,
         actions: [
-          IconButton(
-            onPressed: onAddItemRandom,
-            icon: Icon(Icons.add)
-          ),
+          IconButton(onPressed: onAddItemRandom, icon: Icon(Icons.add)),
         ],
       ),
       body: Consumer<DBGenericProvider<DBOrder>>(
         builder: (context, value, child) {
+          final checkedItems =
+              value.entitys.where((e) => e.isSelected == true).toList();
+          isAllChoic =
+              value.entitys.firstWhereOrNull((e) => e.isSelected == false) ==
+                  null;
 
-          final checkedItems = value.entitys.where((e) => e.isSelected == true).toList();
-          isAllChoic = value.entitys.firstWhereOrNull((e) => e.isSelected == false) == null;
-
-          final checkIcon = isAllChoic ? Icons.check_box : Icons.check_box_outline_blank;
-          final checkDesc = "已选择 ${checkedItems.length}/${value.entitys.length}";
+          final checkIcon =
+              isAllChoic ? Icons.check_box : Icons.check_box_outline_blank;
+          final checkDesc =
+              "已选择 ${checkedItems.length}/${value.entitys.length}";
 
           Widget content = NPlaceholder(
-            onTap: (){
+            onTap: () {
               provider.update();
             },
           );
           if (value.entitys.isNotEmpty) {
             content = buildRefresh(
-              onRefresh: (){
+              onRefresh: () {
                 provider.update();
               },
               child: ListView.builder(
                   padding: EdgeInsets.all(10),
                   itemCount: value.entitys.length,
                   itemBuilder: (context, index) {
-
                     final model = value.entitys.reversed.toList()[index];
 
-                    onToggle(){
+                    onToggle() {
                       model.isSelected = !model.isSelected;
                       provider.put(model);
                     }
@@ -92,25 +86,22 @@ class _OrderListPageState extends State<OrderListPage> with DBDialogMxin {
                       child: OrderItem(
                         model: model,
                         onToggle: onToggle,
-                        onEdit: (){
+                        onEdit: () {
                           titleController.text = model.title;
 
                           presentDialog(
-                            controller: titleController,
-                            onSure: (val){
-                              model.title = val;
-                              provider.put(model);
-
-                            }
-                          );
+                              controller: titleController,
+                              onSure: (val) {
+                                model.title = val;
+                                provider.put(model);
+                              });
                         },
                         onDelete: () {
                           provider.delete(model.id);
                         },
                       ),
                     );
-                  }
-              ),
+                  }),
             );
           }
 
@@ -131,8 +122,11 @@ class _OrderListPageState extends State<OrderListPage> with DBDialogMxin {
                   provider.putAll(value.entitys);
                 },
                 onAdd: onAddItemRandom,
-                onDelete:  () async {
-                  final choicItems = value.entitys.where((e) => e.isSelected).map((e) => e.id).toList();
+                onDelete: () async {
+                  final choicItems = value.entitys
+                      .where((e) => e.isSelected)
+                      .map((e) => e.id)
+                      .toList();
                   await provider.deleteAll(choicItems);
                 },
               ),

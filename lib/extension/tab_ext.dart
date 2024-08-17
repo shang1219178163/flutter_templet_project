@@ -9,8 +9,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-
-extension TabBarExt on TabBar{
+extension TabBarExt on TabBar {
   /// 自定义 copy
   TabBar copy({
     List<Widget>? tabs,
@@ -44,7 +43,8 @@ extension TabBarExt on TabBar{
       isScrollable: isScrollable ?? this.isScrollable,
       padding: padding ?? this.padding,
       indicatorColor: indicatorColor ?? this.indicatorColor,
-      automaticIndicatorColorAdjustment: automaticIndicatorColorAdjustment ?? this.automaticIndicatorColorAdjustment,
+      automaticIndicatorColorAdjustment: automaticIndicatorColorAdjustment ??
+          this.automaticIndicatorColorAdjustment,
       indicatorWeight: indicatorWeight ?? this.indicatorWeight,
       indicatorPadding: indicatorPadding ?? this.indicatorPadding,
       indicator: indicator ?? this.indicator,
@@ -78,7 +78,8 @@ extension TabBarExt on TabBar{
       isScrollable: tabBar.isScrollable,
       padding: tabBar.padding ?? padding,
       indicatorColor: tabBar.indicatorColor ?? indicatorColor,
-      automaticIndicatorColorAdjustment: tabBar.automaticIndicatorColorAdjustment,
+      automaticIndicatorColorAdjustment:
+          tabBar.automaticIndicatorColorAdjustment,
       indicatorWeight: tabBar.indicatorWeight,
       indicatorPadding: tabBar.indicatorPadding,
       indicator: tabBar.indicator ?? indicator,

@@ -1,5 +1,3 @@
-
-
 import 'dart:async';
 
 import 'package:easy_refresh/easy_refresh.dart';
@@ -17,7 +15,6 @@ import 'package:provider/provider.dart';
 
 /// DBGenericProvider<DBTodo> 示例
 class TodoListPageOne extends StatefulWidget {
-
   TodoListPageOne({
     super.key,
     this.title,
@@ -33,11 +30,10 @@ class TodoListPageOne extends StatefulWidget {
 }
 
 class _TodoListPageOneState extends State<TodoListPageOne> with DBDialogMxin {
-
-  late final Map<String, dynamic> arguments = widget.arguments ?? Get.arguments ?? {};
+  late final Map<String, dynamic> arguments =
+      widget.arguments ?? Get.arguments ?? {};
 
   late final hideAppBar = arguments["hideAppBar"] as bool?;
-
 
   final _scrollController = ScrollController();
 
@@ -45,52 +41,55 @@ class _TodoListPageOneState extends State<TodoListPageOne> with DBDialogMxin {
 
   bool isAllChoic = false;
 
-  DBGenericProvider<DBTodo> get provider => Provider.of<DBGenericProvider<DBTodo>>(context, listen: false);
-
+  DBGenericProvider<DBTodo> get provider =>
+      Provider.of<DBGenericProvider<DBTodo>>(context, listen: false);
 
   @override
   Widget build(BuildContext context) {
-    final automaticallyImplyLeading = Get.currentRoute.toLowerCase() == "/$widget".toLowerCase();
+    final automaticallyImplyLeading =
+        Get.currentRoute.toLowerCase() == "/$widget".toLowerCase();
 
     return Scaffold(
       backgroundColor: Colors.black12,
-      appBar: hideAppBar == true ? null : AppBar(
-        title: Text("$widget"),
-        automaticallyImplyLeading: automaticallyImplyLeading,
-        actions: [
-          IconButton(
-            onPressed: onAddItemRandom,
-            icon: Icon(Icons.add)
-          ),
-        ],
-      ),
+      appBar: hideAppBar == true
+          ? null
+          : AppBar(
+              title: Text("$widget"),
+              automaticallyImplyLeading: automaticallyImplyLeading,
+              actions: [
+                IconButton(onPressed: onAddItemRandom, icon: Icon(Icons.add)),
+              ],
+            ),
       body: Consumer<DBGenericProvider<DBTodo>>(
         builder: (context, value, child) {
+          final checkedItems =
+              value.entitys.where((e) => e.isFinished == true).toList();
+          isAllChoic =
+              value.entitys.firstWhereOrNull((e) => e.isFinished == false) ==
+                  null;
 
-          final checkedItems = value.entitys.where((e) => e.isFinished == true).toList();
-          isAllChoic = value.entitys.firstWhereOrNull((e) => e.isFinished == false) == null;
-
-          final checkIcon = isAllChoic ? Icons.check_box : Icons.check_box_outline_blank;
-          final checkDesc = "已选择 ${checkedItems.length}/${value.entitys.length}";
+          final checkIcon =
+              isAllChoic ? Icons.check_box : Icons.check_box_outline_blank;
+          final checkDesc =
+              "已选择 ${checkedItems.length}/${value.entitys.length}";
 
           Widget content = NPlaceholder(
-            onTap: (){
+            onTap: () {
               provider.update();
             },
           );
           if (value.entitys.isNotEmpty) {
             content = buildRefresh(
-              onRefresh: (){
+              onRefresh: () {
                 provider.update();
               },
               child: ListView.builder(
                   padding: EdgeInsets.all(10),
                   itemCount: value.entitys.length,
                   itemBuilder: (context, index) {
-
                     final model = value.entitys.reversed.toList()[index];
 
-                    onToggle(){
+                    onToggle() {
                       model.isFinished = !model.isFinished;
                       provider.put(model);
                     }
@@ -100,25 +99,22 @@ class _TodoListPageOneState extends State<TodoListPageOne> with DBDialogMxin {
                       child: TodoItem(
                         model: model,
                         onToggle: onToggle,
-                        onEdit: (){
+                        onEdit: () {
                           titleController.text = model.title;
 
                           presentDialog(
-                            controller: titleController,
-                            onSure: (val){
-                              model.title = val;
-                              provider.put(model);
-
-                            }
-                          );
+                              controller: titleController,
+                              onSure: (val) {
+                                model.title = val;
+                                provider.put(model);
+                              });
                         },
                         onDelete: () {
                           provider.delete(model.id);
                         },
                       ),
                     );
-                  }
-              ),
+                  }),
             );
           }
 
@@ -139,8 +135,11 @@ class _TodoListPageOneState extends State<TodoListPageOne> with DBDialogMxin {
                   provider.putAll(value.entitys);
                 },
                 onAdd: onAddItemRandom,
-                onDelete:  () async {
-                  final choicItems = value.entitys.where((e) => e.isFinished).map((e) => e.id).toList();
+                onDelete: () async {
+                  final choicItems = value.entitys
+                      .where((e) => e.isFinished)
+                      .map((e) => e.id)
+                      .toList();
                   await provider.deleteAll(choicItems);
                 },
               ),

@@ -1,5 +1,3 @@
-
-
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -14,11 +12,9 @@ import 'package:flutter_templet_project/mixin/BottomBouncingScrollPhysics.dart';
 import 'package:flutter_templet_project/mixin/MyScrollPhysics.dart';
 import 'package:flutter_templet_project/routes/AppRouteObserver.dart';
 
-
 class ThirdPage extends StatefulWidget {
-
   final String? title;
-  const ThirdPage({ Key? key, this.title}) : super(key: key);
+  const ThirdPage({Key? key, this.title}) : super(key: key);
 
   @override
   _ThirdPageState createState() => _ThirdPageState();
@@ -45,7 +41,6 @@ class _ThirdPageState extends State<ThirdPage> with RouteAware {
   void initState() {
     super.initState();
 
-
     _scrollController.addListener(() {
       offsetY.value = _scrollController.position.pixels;
     });
@@ -59,7 +54,9 @@ class _ThirdPageState extends State<ThirdPage> with RouteAware {
 
   @override
   void didChangeDependencies() {
-    AppRouteObserver().routeObserver.subscribe(this, ModalRoute.of(context)!); //订阅
+    AppRouteObserver()
+        .routeObserver
+        .subscribe(this, ModalRoute.of(context)!); //订阅
     super.didChangeDependencies();
   }
 
@@ -92,12 +89,17 @@ class _ThirdPageState extends State<ThirdPage> with RouteAware {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          onPressed: onDone,
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),)
-        ).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  onPressed: onDone,
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ))
+            .toList(),
       ),
       body: buildRefresh(
         child: buildListView(
@@ -105,23 +107,23 @@ class _ThirdPageState extends State<ThirdPage> with RouteAware {
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: (){
+        onPressed: () {
           _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
         },
         label: ValueListenableBuilder<double>(
-           valueListenable: offsetY,
-           builder: (context, value, child){
+            valueListenable: offsetY,
+            builder: (context, value, child) {
               if (value == 0) {
                 return Text("偏移量");
               }
-             // return Text("datadata");
-             final maxScrollExtent = _scrollController.position.maxScrollExtent.toStringAsFixed(0);
-             debugPrint("maxScrollExtent: $maxScrollExtent");
+              // return Text("datadata");
+              final maxScrollExtent =
+                  _scrollController.position.maxScrollExtent.toStringAsFixed(0);
+              debugPrint("maxScrollExtent: $maxScrollExtent");
               return Container(
                 child: Text("${value.toStringAsFixed(0)}/${maxScrollExtent}"),
               );
-          }
-        ),
+            }),
       ),
     );
   }
@@ -131,7 +133,7 @@ class _ThirdPageState extends State<ThirdPage> with RouteAware {
   }
 
   Widget buildRefresh({
-   required Widget child,
+    required Widget child,
   }) {
     return EasyRefresh(
       controller: _easyRefreshController,
@@ -160,10 +162,11 @@ class _ThirdPageState extends State<ThirdPage> with RouteAware {
       if (!mounted) {
         return;
       }
-      items.addAll(List<String>.generate(
-          20, (i) => 'Item ${items.length + i}')
-      );
-      _easyRefreshController.finishLoad(items.length >= 60 ? IndicatorResult.noMore : IndicatorResult.success);
+      items
+          .addAll(List<String>.generate(20, (i) => 'Item ${items.length + i}'));
+      _easyRefreshController.finishLoad(items.length >= 60
+          ? IndicatorResult.noMore
+          : IndicatorResult.success);
       setState(() {});
     });
   }
@@ -188,10 +191,13 @@ class _ThirdPageState extends State<ThirdPage> with RouteAware {
             selected: (selectedIndex == index),
             // trailing: selectedIndex == index ? Icon(Icons.check) : null,
             trailing: selectedIndex == index ? Icon(Icons.check) : null,
-            onTap: (){
+            onTap: () {
               selectedIndex = index;
               setState(() {});
-              ddlog([selectedIndex, index,]);
+              ddlog([
+                selectedIndex,
+                index,
+              ]);
               ddlog([_globalKey(index).currentContext?.frame]);
             },
           );
@@ -215,10 +221,9 @@ class _ThirdPageState extends State<ThirdPage> with RouteAware {
               return buildConfirmDismiss(context);
             },
             child: Container(
-              height: IntExt.random(max: 100, min: 45).toDouble(),
-              color: ColorExt.random,
-              child: child
-            ),
+                height: IntExt.random(max: 100, min: 45).toDouble(),
+                color: ColorExt.random,
+                child: child),
           );
         },
         // separatorBuilder: (context, index) {
@@ -234,25 +239,23 @@ class _ThirdPageState extends State<ThirdPage> with RouteAware {
   }
 
   Widget buildFavorite(BuildContext context) {
-    return
-      Container(
-        color: Colors.green,
-        child: Padding(
-          padding: EdgeInsets.all(15),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Icon(Icons.favorite, color: Colors.white),
-              Text('Move to favorites', style: TextStyle(color: Colors.white)),
-            ],
-          ),
+    return Container(
+      color: Colors.green,
+      child: Padding(
+        padding: EdgeInsets.all(15),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Icon(Icons.favorite, color: Colors.white),
+            Text('Move to favorites', style: TextStyle(color: Colors.white)),
+          ],
         ),
-      );
+      ),
+    );
   }
 
   Widget buildDelete(BuildContext context) {
-    return
-    Container(
+    return Container(
       color: Colors.red,
       child: Padding(
         padding: EdgeInsets.all(15),
@@ -277,8 +280,7 @@ class _ThirdPageState extends State<ThirdPage> with RouteAware {
           actions: <Widget>[
             TextButton(
                 onPressed: () => Navigator.of(context).pop(true),
-                child: const Text("Delete")
-            ),
+                child: const Text("Delete")),
             TextButton(
               onPressed: () => Navigator.of(context).pop(false),
               child: const Text("Cancel"),

@@ -16,66 +16,63 @@ class _NeomorphismLoginScreenState extends State<NeomorphismLoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(context,
-        designSize: Size(1080, 2160),
+    ScreenUtil.init(
+      context,
+      designSize: Size(1080, 2160),
     );
     return Scaffold(
-      backgroundColor: Color(0xFFF1F3F6),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Container(
-            margin: EdgeInsets.symmetric(
-              horizontal: 120.w
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                SizedBox(
-                  height: 100.h,
-                ),
-                Text(
-                  "Login",
-                  style: TextStyle(
-                    color: Color(0xFF4D70A6),
-                    fontSize: 26,
-                    fontWeight: FontWeight.bold
-                  ),
-                ),
-                SizedBox(
-                  height: 170.h,
-                ),
-                Row(
+        backgroundColor: Color(0xFFF1F3F6),
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Container(
+                margin: EdgeInsets.symmetric(horizontal: 120.w),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Expanded(
-                      child: buildButton(Icon(
-                        FontAwesomeIcons.facebookF,
-                        color: Color(0xFF4D70A6),
-                      )),
+                    SizedBox(
+                      height: 100.h,
+                    ),
+                    Text(
+                      "Login",
+                      style: TextStyle(
+                          color: Color(0xFF4D70A6),
+                          fontSize: 26,
+                          fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
-                      width: 60.w,
+                      height: 170.h,
                     ),
-                    Expanded(
-                      child: buildButton(Icon(
-                        FontAwesomeIcons.google,
-                        color: Color(0xFF4D70A6),
-                      )),
-                    )
+                    Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: buildButton(Icon(
+                            FontAwesomeIcons.facebookF,
+                            color: Color(0xFF4D70A6),
+                          )),
+                        ),
+                        SizedBox(
+                          width: 60.w,
+                        ),
+                        Expanded(
+                          child: buildButton(Icon(
+                            FontAwesomeIcons.google,
+                            color: Color(0xFF4D70A6),
+                          )),
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: 20.h,
+                    ),
+                    ...buildAccountBox(),
+                    SizedBox(
+                      height: 130.h,
+                    ),
+                    ...buildLoginBox(),
                   ],
-                ),
-                SizedBox(
-                  height: 20.h,
-                ),
-                ...buildAccountBox(),
-                SizedBox(
-                  height: 130.h,
-                ),
-                ...buildLoginBox(),
-              ],
-            )
+                )),
           ),
-        ),
-      ));
+        ));
   }
 
   Widget buildButton(Widget child) {
@@ -96,15 +93,12 @@ class _NeomorphismLoginScreenState extends State<NeomorphismLoginScreen> {
           BoxShadow(
               offset: Offset(10, 10),
               color: Color(0xFF4D70A6).withOpacity(0.2),
-              blurRadius: 16
-          ),
+              blurRadius: 16),
           BoxShadow(
               offset: Offset(-10, -10),
               color: Color.fromARGB(170, 255, 255, 255),
-              blurRadius: 10
-          ),
-        ]
-    );
+              blurRadius: 10),
+        ]);
   }
 
   List<Widget> buildAccountBox() {
@@ -115,17 +109,10 @@ class _NeomorphismLoginScreenState extends State<NeomorphismLoginScreen> {
             style: TextStyle(color: Color(0xFF4D70A6)),
             decoration: InputDecoration(
                 focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(
-                      color: Color(0xFF4D70A6),
-                      width: 2
-                  ),
+                  borderSide: BorderSide(color: Color(0xFF4D70A6), width: 2),
                 ),
                 labelText: "Username",
-                labelStyle: TextStyle(
-                    color: Color(0xFF4D70A6),
-                    fontSize: 14
-                )
-            ),
+                labelStyle: TextStyle(color: Color(0xFF4D70A6), fontSize: 14)),
           ),
           Positioned(
             right: 1,
@@ -149,15 +136,10 @@ class _NeomorphismLoginScreenState extends State<NeomorphismLoginScreen> {
         style: TextStyle(color: Color(0xFF4D70A6)),
         decoration: InputDecoration(
             focusedBorder: UnderlineInputBorder(
-              borderSide:
-              BorderSide(color: Color(0xFF4D70A6), width: 2),
+              borderSide: BorderSide(color: Color(0xFF4D70A6), width: 2),
             ),
             labelText: "Password",
-            labelStyle: TextStyle(
-                color: Color(0xFF4D70A6),
-                fontSize: 14
-            )
-        ),
+            labelStyle: TextStyle(color: Color(0xFF4D70A6), fontSize: 14)),
       ),
       SizedBox(
         height: 70.h,
@@ -166,7 +148,7 @@ class _NeomorphismLoginScreenState extends State<NeomorphismLoginScreen> {
         children: <Widget>[
           Container(
             decoration: BoxDecoration(
-              /*boxShadow: [
+                /*boxShadow: [
                         BoxShadow(
                             offset: Offset(5, 5),
                             color: Color(0xFF4D70A6).withOpacity(0.2),
@@ -176,7 +158,7 @@ class _NeomorphismLoginScreenState extends State<NeomorphismLoginScreen> {
                             color: Color.fromARGB(170, 255, 255, 255),
                             blurRadius: 10),
                       ]*/
-            ),
+                ),
             child: CustomSwitch(
               activeColor: Color(0xFFF1F3F6),
               value: status,
@@ -212,8 +194,7 @@ class _NeomorphismLoginScreenState extends State<NeomorphismLoginScreen> {
       GestureDetector(
         onTap: () {
           Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => NeomorphismCardsScreen())
-          );
+              builder: (context) => NeomorphismCardsScreen()));
         },
         child: Container(
           width: double.infinity,
@@ -223,8 +204,7 @@ class _NeomorphismLoginScreenState extends State<NeomorphismLoginScreen> {
           decoration: buildShadowDecoration(),
           child: Text(
             "Login",
-            style:
-            TextStyle(color: Color(0xFF4D70A6), fontSize: 16),
+            style: TextStyle(color: Color(0xFF4D70A6), fontSize: 16),
           ),
         ),
       ),
@@ -232,17 +212,10 @@ class _NeomorphismLoginScreenState extends State<NeomorphismLoginScreen> {
         child: RichText(
           text: TextSpan(children: <TextSpan>[
             TextSpan(
-              text: "Don't have an account?",
-              style: TextStyle(
-                color: Colors.grey
-              )
-            ),
+                text: "Don't have an account?",
+                style: TextStyle(color: Colors.grey)),
             TextSpan(
-              text: " Sign Up",
-              style: TextStyle(
-                color: Color(0xFF4D70A6)
-              )
-            ),
+                text: " Sign Up", style: TextStyle(color: Color(0xFF4D70A6))),
           ]),
         ),
       ),

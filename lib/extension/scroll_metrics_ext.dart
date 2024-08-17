@@ -6,11 +6,9 @@
 //  Copyright © 12/15/22 shang. All rights reserved.
 //
 
-
 import 'package:flutter/cupertino.dart';
 
-extension ScrollMetricsExt on ScrollMetrics{
-
+extension ScrollMetricsExt on ScrollMetrics {
   printInfo() {
     var metrics = this;
     final info = """
@@ -36,10 +34,7 @@ extension ScrollMetricsExt on ScrollMetrics{
   //底部
   bool get isEnd => atEdge && extentAfter <= 0;
   //滚动进度
-  double get progress => pixels/maxScrollExtent;
+  double get progress => pixels / maxScrollExtent;
   //滚动进度
-  String get progressPerecent => "${(progress*100).toInt()}%";
+  String get progressPerecent => "${(progress * 100).toInt()}%";
 }
-
-
-

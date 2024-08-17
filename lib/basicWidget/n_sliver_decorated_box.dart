@@ -1,4 +1,3 @@
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -27,7 +26,7 @@ class NSliverDecoratedBox extends SingleChildRenderObjectWidget {
     required this.decoration,
     this.position = DecorationPosition.background,
     Widget? sliver,
-  })  : super(key: key, child: sliver);
+  }) : super(key: key, child: sliver);
 
   final Decoration decoration;
 
@@ -121,13 +120,12 @@ class RenderSliverDecoratedBox extends RenderProxySliver {
   void paint(PaintingContext context, Offset offset) {
     var size = getAbsoluteSize();
     if (decoration is BoxDecoration) {
-      var borderRadius =
-          (decoration as BoxDecoration).borderRadius;
+      var borderRadius = (decoration as BoxDecoration).borderRadius;
       if (borderRadius != null) {
         var clipRect = borderRadius
             .resolve(configuration.textDirection)
             .toRRect(Rect.fromLTRB(
-            0, 0, constraints.crossAxisExtent, geometry!.maxPaintExtent));
+                0, 0, constraints.crossAxisExtent, geometry!.maxPaintExtent));
         context.pushClipRRect(
           needsCompositing,
           offset,
@@ -138,8 +136,7 @@ class RenderSliverDecoratedBox extends RenderProxySliver {
       }
     }
     _painter ??= _decoration.createBoxPainter(markNeedsPaint);
-    final filledConfiguration =
-    configuration.copyWith(size: size);
+    final filledConfiguration = configuration.copyWith(size: size);
     if (position == DecorationPosition.background) {
       int? debugSaveCount;
       assert(() {
@@ -154,8 +151,8 @@ class RenderSliverDecoratedBox extends RenderProxySliver {
                 '${_decoration.runtimeType} painter had mismatching save and restore calls.'),
             ErrorDescription(
               'Before painting the decoration, the canvas save count was $debugSaveCount. '
-                  'After painting it, the canvas save count was ${context.canvas.getSaveCount()}. '
-                  'Every call to save() or saveLayer() must be matched by a call to restore().',
+              'After painting it, the canvas save count was ${context.canvas.getSaveCount()}. '
+              'Every call to save() or saveLayer() must be matched by a call to restore().',
             ),
             DiagnosticsProperty<Decoration>('The decoration was', decoration,
                 style: DiagnosticsTreeStyle.errorProperty),

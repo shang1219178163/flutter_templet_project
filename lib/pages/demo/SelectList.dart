@@ -1,5 +1,3 @@
-
-
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -8,22 +6,19 @@ import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/model/user_model.dart';
 
-
-
 /// 单选/多选模型
 class SelectListPage extends StatefulWidget {
-
-  SelectListPage({super.key, });
-
+  SelectListPage({
+    super.key,
+  });
 
   @override
   State<SelectListPage> createState() => _SelectListPageState();
 }
 
 class _SelectListPageState extends State<SelectListPage> {
-
   final _scrollController = ScrollController();
-  
+
   bool isMultiple = true;
 
   late final List<UserModel> models = List.generate(20, (i) {
@@ -38,15 +33,20 @@ class _SelectListPageState extends State<SelectListPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("$widget"),
-        actions: ['done',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () {
-            isMultiple = !isMultiple;
-            setState(() {});
-          },)
-        ).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () {
+                    isMultiple = !isMultiple;
+                    setState(() {});
+                  },
+                ))
+            .toList(),
       ),
       body: buildBody(),
     );
@@ -61,14 +61,11 @@ class _SelectListPageState extends State<SelectListPage> {
       },
     );
   }
-
-  
 }
 
-
 class SelectList extends StatefulWidget {
-
-  SelectList({super.key,
+  SelectList({
+    super.key,
     this.isMultiple = true,
     required this.models,
     required this.onSelected,
@@ -85,19 +82,22 @@ class SelectList extends StatefulWidget {
 }
 
 class _SelectListState extends State<SelectList> {
-
   final _scrollController = ScrollController();
-
 
   late final List<UserModel> models = widget.models;
 
   late final dataList = ValueNotifier(models);
+
   /// 当前选择个数
-  late final selectedCount = ValueNotifier(models.where((e) => e.isSelected == true).length);
+  late final selectedCount =
+      ValueNotifier(models.where((e) => e.isSelected == true).length);
+
   /// 是否全选
   bool get isAll => dataList.value.where((e) => e.isSelected != true).isEmpty;
+
   /// 已选择
-  List<UserModel> get selectedItems => dataList.value.where((e) => e.isSelected == true).toList();
+  List<UserModel> get selectedItems =>
+      dataList.value.where((e) => e.isSelected == true).toList();
 
   @override
   Widget build(BuildContext context) {
@@ -116,14 +116,13 @@ class _SelectListState extends State<SelectList> {
         child: ListView.builder(
           controller: _scrollController,
           itemCount: dataList.value.length,
-          itemBuilder: (context, i){
-
+          itemBuilder: (context, i) {
             final e = dataList.value[i];
 
-            onTap(){
+            onTap() {
               e.isSelected = !(e.isSelected ?? false);
               // ddlog(e.toJson());
-              setState((){});
+              setState(() {});
 
               updateSelectedCount();
 
@@ -156,10 +155,12 @@ class _SelectListState extends State<SelectList> {
                         title: NText(e.name ?? "--"),
                         subtitle: NText("第$i位候选人"),
                       ),
-                      Divider(indent: 70, height: 1,),
+                      Divider(
+                        indent: 70,
+                        height: 1,
+                      ),
                     ],
-                  )
-              ),
+                  )),
             );
           },
         ),
@@ -187,7 +188,6 @@ class _SelectListState extends State<SelectList> {
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.stretch,
-
         children: [
           // CheckboxListTile
           TextButton(
@@ -197,7 +197,7 @@ class _SelectListState extends State<SelectList> {
               // minimumSize: Size(50, 30),
               // backgroundColor: Colors.red
             ),
-            onPressed: (){
+            onPressed: () {
               // ddlog("isAll: $isAll");
               // ddlog(dataList.value
               //     .where((e) => e.isSelected != true)
@@ -222,7 +222,8 @@ class _SelectListState extends State<SelectList> {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(right: 8.0),
-                  child: Icon(isAll ? Icons.check_box : Icons.check_box_outline_blank),
+                  child: Icon(
+                      isAll ? Icons.check_box : Icons.check_box_outline_blank),
                 ),
                 Text("全选"),
               ],
@@ -233,8 +234,7 @@ class _SelectListState extends State<SelectList> {
                 selectedCount,
                 dataList,
               ]),
-              builder: (context, child){
-
+              builder: (context, child) {
                 return Container(
                   width: 70,
                   padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -244,14 +244,16 @@ class _SelectListState extends State<SelectList> {
                     // border: Border.all(color: Colors.blue),
                     borderRadius: BorderRadius.all(Radius.circular(0)),
                   ),
-                  child: NText("(${selectedCount.value}/${dataList.value.length})"),
+                  child: NText(
+                      "(${selectedCount.value}/${dataList.value.length})"),
                 );
-              }
+              }),
+          SizedBox(
+            width: 30,
           ),
-          SizedBox(width: 30,),
           Expanded(
             child: ElevatedButton(
-              onPressed: (){
+              onPressed: () {
                 widget.onSelected(selectedItems);
               },
               child: Text("确定"),
@@ -265,5 +267,4 @@ class _SelectListState extends State<SelectList> {
   updateSelectedCount() {
     selectedCount.value = selectedItems.length;
   }
-
 }

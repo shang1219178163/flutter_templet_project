@@ -1,14 +1,10 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_footer_button_bar.dart';
 import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 
-
-mixin DBDialogMxin<T extends StatefulWidget> on State<T>{
-
+mixin DBDialogMxin<T extends StatefulWidget> on State<T> {
   presentDialog({
     required TextEditingController controller,
     required ValueChanged<String> onSure,
@@ -32,7 +28,8 @@ mixin DBDialogMxin<T extends StatefulWidget> on State<T>{
               hintText: "请输入",
               fillColor: Colors.white,
               filled: true,
-              contentPadding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
+              contentPadding:
+                  EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
             ),
           ),
           const SizedBox(
@@ -46,7 +43,7 @@ mixin DBDialogMxin<T extends StatefulWidget> on State<T>{
             enable: true,
             // hideCancel: true,
             // isReverse: true,
-            onCancel:  () {
+            onCancel: () {
               Navigator.of(context).pop();
             },
             onConfirm: () {

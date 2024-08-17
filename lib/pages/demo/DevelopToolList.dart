@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
@@ -10,11 +8,7 @@ import 'package:tuple/tuple.dart';
 
 /// 开发工具列表
 class DevelopToolList extends StatefulWidget {
-
-  DevelopToolList({
-    Key? key, 
-    this.title
-  }) : super(key: key);
+  DevelopToolList({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -23,15 +17,13 @@ class DevelopToolList extends StatefulWidget {
 }
 
 class _DevelopToolListState extends State<DevelopToolList> {
-
   final _scrollController = ScrollController();
-  
+
   final items = <Tuple2<String, String>>[
     Tuple2("系统图标", APPRouter.systemIconsPage),
     Tuple2("系统颜色", APPRouter.systemColorPage),
     Tuple2("字符串转换", APPRouter.stringTransformPage),
     Tuple2("json转model", APPRouter.jsonToDartPage),
-
   ];
 
   @override
@@ -49,8 +41,7 @@ class _DevelopToolListState extends State<DevelopToolList> {
       body: buildBody(),
     );
   }
-  
-  
+
   buildBody() {
     return Scrollbar(
       controller: _scrollController,
@@ -65,9 +56,9 @@ class _DevelopToolListState extends State<DevelopToolList> {
           ),
           // alignment: Alignment.center,
           decoration: BoxDecoration(
-            // color: Colors.green,
-            // border: Border.all(color: Colors.blue),
-          ),
+              // color: Colors.green,
+              // border: Border.all(color: Colors.blue),
+              ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -80,13 +71,15 @@ class _DevelopToolListState extends State<DevelopToolList> {
                     spacing: spacing,
                     runSpacing: runSpacing,
                     // alignment: WrapAlignment.start,
-                    children: items.map((e) => OutlinedButton(
-                        onPressed: (){
-                          debugPrint(e.item2);
-                          Get.toNamed(e.item2);
-                        },
-                        child: NText(e.item1),
-                    )).toList(),
+                    children: items
+                        .map((e) => OutlinedButton(
+                              onPressed: () {
+                                debugPrint(e.item2);
+                                Get.toNamed(e.item2);
+                              },
+                              child: NText(e.item1),
+                            ))
+                        .toList(),
                   );
                 }),
               ),
@@ -96,5 +89,4 @@ class _DevelopToolListState extends State<DevelopToolList> {
       ),
     );
   }
-
 }

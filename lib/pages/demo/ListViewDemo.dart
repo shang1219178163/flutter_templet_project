@@ -7,14 +7,13 @@ import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/model/mock_data.dart';
 import 'package:tuple/tuple.dart';
 
-typedef KeyCallback = void Function(BuildContext context, int index, GlobalKey key);
+typedef KeyCallback = void Function(
+    BuildContext context, int index, GlobalKey key);
 
 class ListViewDemo extends StatefulWidget {
-
   final String? title;
 
-  const ListViewDemo({ Key? key, this.title}) : super(key: key);
-
+  const ListViewDemo({Key? key, this.title}) : super(key: key);
 
   @override
   _ListViewDemoState createState() => _ListViewDemoState();
@@ -45,17 +44,14 @@ class _ListViewDemoState extends State<ListViewDemo> {
       false,
     ),
     Tuple4(
-      'https://cdn.pixabay.com/photo/2022/09/01/09/31/sunset-glow-7425170_1280.jpg',
-      '海尔｜无边界其他',
-       '跳转url',
-       false
-    ),
-    ...List.generate(19, (index) => Tuple4(
-        'item_$index${'z'*index}',
+        'https://cdn.pixabay.com/photo/2022/09/01/09/31/sunset-glow-7425170_1280.jpg',
         '海尔｜无边界其他',
         '跳转url',
-        false
-    )),
+        false),
+    ...List.generate(
+        19,
+        (index) =>
+            Tuple4('item_$index${'z' * index}', '海尔｜无边界其他', '跳转url', false)),
   ];
 
   final offsetY = ValueNotifier(0.0);
@@ -71,19 +67,20 @@ class _ListViewDemoState extends State<ListViewDemo> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: [
           TextButton(
-            onPressed: () {
-              test();
-              debugPrint("$_scrollController");
-              // _scrollController.jumpTo(200);
-            },
-              child: Text('done', style: TextStyle(color: Colors.white),)
-          ),
+              onPressed: () {
+                test();
+                debugPrint("$_scrollController");
+                // _scrollController.jumpTo(200);
+              },
+              child: Text(
+                'done',
+                style: TextStyle(color: Colors.white),
+              )),
           IconButton(
             onPressed: () {
               height = height == 100 ? 200 : 100;
@@ -99,38 +96,35 @@ class _ListViewDemoState extends State<ListViewDemo> {
           // _buildListViewSeparated(),
           // _buildListViewSeparatedNew(),
           _buildListView(
-            height: 100,
-            key: _globalKey,
-            controller: _scrollController,
+              height: 100,
+              key: _globalKey,
+              controller: _scrollController,
               scrollDirection: Axis.horizontal,
               onKeyCallback: (context, index, itemKey) {
-              _scrollController.jumToHorizontal(
-                key: itemKey,
-                offsetX: (MediaQuery.of(context).size.width / 2)
-              );
-            }
-          ),
+                _scrollController.jumToHorizontal(
+                    key: itemKey,
+                    offsetX: (MediaQuery.of(context).size.width / 2));
+              }),
           Expanded(
             child: _buildListView(
-              height: 600,
-              key: _globalKey2,
-              controller: _scrollController2,
-              scrollDirection: Axis.vertical,
-              onKeyCallback: (context, index, itemKey) {
-                // _scrollController2.scrollToItem(
-                //   itemKey: itemKey,
-                //   scrollKey: _globalKey2,
-                // );
+                height: 600,
+                key: _globalKey2,
+                controller: _scrollController2,
+                scrollDirection: Axis.vertical,
+                onKeyCallback: (context, index, itemKey) {
+                  // _scrollController2.scrollToItem(
+                  //   itemKey: itemKey,
+                  //   scrollKey: _globalKey2,
+                  // );
 
-                _scrollController2.scrollToItemNew(
-                  itemKey: itemKey,
-                  scrollKey: _globalKey2,
-                  scrollDirection: Axis.vertical,
-                );
+                  _scrollController2.scrollToItemNew(
+                    itemKey: itemKey,
+                    scrollKey: _globalKey2,
+                    scrollDirection: Axis.vertical,
+                  );
 
-                _scrollController2.printInfo();
-              }
-            ),
+                  _scrollController2.printInfo();
+                }),
           ),
         ],
       ),
@@ -138,21 +132,17 @@ class _ListViewDemoState extends State<ListViewDemo> {
         onPressed: () {
           debugPrint("${_scrollController2.position.printInfo()}");
           scrollToBottom(controller: _scrollController2);
-
         },
         child: ValueListenableBuilder<double>(
-           valueListenable: offsetY,
-           builder: (context,  value, child){
-
+            valueListenable: offsetY,
+            builder: (context, value, child) {
               return Container(
                 child: Text("${value.toStringAsFixed(1)}"),
               );
-            }
-        ),
+            }),
       ),
     );
   }
-
 
   Widget _buildListView({
     required GlobalKey key,
@@ -163,7 +153,6 @@ class _ListViewDemoState extends State<ListViewDemo> {
     required double height,
     double gap = 8,
   }) {
-
     return Container(
       height: height,
       padding: EdgeInsets.all(8),
@@ -178,38 +167,37 @@ class _ListViewDemoState extends State<ListViewDemo> {
             padding: EdgeInsets.all(0),
             itemCount: items.length,
             // cacheExtent: 10,
-            itemBuilder: itemBuilder ?? (context, index) {
-              final e = items[index];
+            itemBuilder: itemBuilder ??
+                (context, index) {
+                  final e = items[index];
 
-              final itemKey = GlobalKey(debugLabel: e.item1);
-              return InkWell(
-                key: itemKey,
-                onTap: () {
-                  onKeyCallback(context, index, itemKey);
+                  final itemKey = GlobalKey(debugLabel: e.item1);
+                  return InkWell(
+                    key: itemKey,
+                    onTap: () {
+                      onKeyCallback(context, index, itemKey);
+                    },
+                    child: Container(
+                      color: Colors.green,
+                      child: e.item1.startsWith('http')
+                          ? FadeInImage(
+                              placeholder: 'img_placeholder.png'.toAssetImage(),
+                              image: NetworkImage(e.item1),
+                              fit: BoxFit.cover,
+                              height: 60,
+                            )
+                          : Container(
+                              height: 60, child: Text('Index:${e.item1}')),
+                    ),
+                  );
                 },
-                child: Container(
-                  color: Colors.green,
-                  child: e.item1.startsWith('http') ? FadeInImage(
-                    placeholder: 'img_placeholder.png'.toAssetImage(),
-                    image: NetworkImage(e.item1),
-                    fit: BoxFit.cover,
-                    height: 60,
-                  ) : Container(
-                    height: 60,
-                    child: Text('Index:${e.item1}')
-                  ),
-                ),
-              );
-            },
             separatorBuilder: (context, index) => Divider(
-              indent: gap,
-              // color: Colors.blue,
-            )
-        ),
+                  indent: gap,
+                  // color: Colors.blue,
+                )),
       ),
     );
   }
-
 
   _buildListViewSeparated({
     IndexedWidgetBuilder? itemBuilder,
@@ -222,47 +210,48 @@ class _ListViewDemoState extends State<ListViewDemo> {
       child: Scrollbar(
         thumbVisibility: true,
         child: ListView.separated(
-          key: _globalKey,
-          controller: _scrollController,
-          scrollDirection: Axis.horizontal,
-          padding: EdgeInsets.all(0),
-          itemCount: items.length,
-          // cacheExtent: 10,
-          itemBuilder: itemBuilder ?? (context, index) {
-            final e = items[index];
+            key: _globalKey,
+            controller: _scrollController,
+            scrollDirection: Axis.horizontal,
+            padding: EdgeInsets.all(0),
+            itemCount: items.length,
+            // cacheExtent: 10,
+            itemBuilder: itemBuilder ??
+                (context, index) {
+                  final e = items[index];
 
-            final itemKey = GlobalKey(debugLabel: e.item1);
-            return InkWell(
-              key: itemKey,
-              onTap: () {
-                debugPrint("$e");
-                _scrollController.jumToHorizontal(
+                  final itemKey = GlobalKey(debugLabel: e.item1);
+                  return InkWell(
                     key: itemKey,
-                    offsetX: (MediaQuery.of(context).size.width / 2)
-                );
+                    onTap: () {
+                      debugPrint("$e");
+                      _scrollController.jumToHorizontal(
+                          key: itemKey,
+                          offsetX: (MediaQuery.of(context).size.width / 2));
 
-                // _scrollController.scrollToItem(
-                //   itemKey: itemKey,
-                //   scrollKey: _globalKey,
-                // );
-              },
-              child: Container(
-                padding: padding,
-                color: Colors.green,
-                // width: 200,
-                child: e.item1.startsWith('http') ? FadeInImage(
-                    placeholder: 'img_placeholder.png'.toAssetImage() ,
-                    image: NetworkImage(e.item1),
-                    fit: BoxFit.cover,
-                ) : Center(child: Text('Index:${e.item1}')),
-              ),
-            );
-          },
-          separatorBuilder: (context, index) => Divider(
-            indent: gap,
-            // color: Colors.blue,
-          )
-        ),
+                      // _scrollController.scrollToItem(
+                      //   itemKey: itemKey,
+                      //   scrollKey: _globalKey,
+                      // );
+                    },
+                    child: Container(
+                      padding: padding,
+                      color: Colors.green,
+                      // width: 200,
+                      child: e.item1.startsWith('http')
+                          ? FadeInImage(
+                              placeholder: 'img_placeholder.png'.toAssetImage(),
+                              image: NetworkImage(e.item1),
+                              fit: BoxFit.cover,
+                            )
+                          : Center(child: Text('Index:${e.item1}')),
+                    ),
+                  );
+                },
+            separatorBuilder: (context, index) => Divider(
+                  indent: gap,
+                  // color: Colors.blue,
+                )),
       ),
     );
   }
@@ -276,57 +265,54 @@ class _ListViewDemoState extends State<ListViewDemo> {
       height: 600,
       padding: EdgeInsets.all(8),
       child: ListView.separated(
-        key: _globalKey2,
-        controller: _scrollController2,
-        // scrollDirection: Axis.horizontal,
-        padding: EdgeInsets.all(0),
-        itemCount: items.length,
-        // cacheExtent: 10,
-        itemBuilder: itemBuilder ?? (context, index) {
-          final e = items[index];
+          key: _globalKey2,
+          controller: _scrollController2,
+          // scrollDirection: Axis.horizontal,
+          padding: EdgeInsets.all(0),
+          itemCount: items.length,
+          // cacheExtent: 10,
+          itemBuilder: itemBuilder ??
+              (context, index) {
+                final e = items[index];
 
-          final itemKey = GlobalKey(debugLabel: e.item1);
-          return InkWell(
-            key: itemKey,
-            onTap: () {
-              // _scrollController2.scrollToItem(
-              //     itemKey: itemKey,
-              //     scrollKey: _globalKey2,
-              // );
-              _scrollController2.scrollToItemNew(
-                scrollDirection: Axis.vertical,
-                itemKey: itemKey,
-                scrollKey: _globalKey2,
-              );
-              _scrollController2.printInfo();
-            },
-            child: Padding(
-              padding: padding,
-              child: Container(
-                color: Colors.green,
-                // width: 200,
-                child: e.item1.startsWith('http') ? FadeInImage(
-                    placeholder: 'img_placeholder.png'.toAssetImage() ,
-                    image: NetworkImage(e.item1),
-                    fit: BoxFit.cover,
-                    height: 70
-                ) : Container(
-                    height: 75,
-                    child: Center(
-                      child: Text('Index:${e.item1}')
-                    )
-                ),
-              ),
-            ),
-          );
-        },
-        separatorBuilder: (context, index) => Divider(
-          indent: gap,
-          // color: Colors.blue,
-        )
-      ),
+                final itemKey = GlobalKey(debugLabel: e.item1);
+                return InkWell(
+                  key: itemKey,
+                  onTap: () {
+                    // _scrollController2.scrollToItem(
+                    //     itemKey: itemKey,
+                    //     scrollKey: _globalKey2,
+                    // );
+                    _scrollController2.scrollToItemNew(
+                      scrollDirection: Axis.vertical,
+                      itemKey: itemKey,
+                      scrollKey: _globalKey2,
+                    );
+                    _scrollController2.printInfo();
+                  },
+                  child: Padding(
+                    padding: padding,
+                    child: Container(
+                      color: Colors.green,
+                      // width: 200,
+                      child: e.item1.startsWith('http')
+                          ? FadeInImage(
+                              placeholder: 'img_placeholder.png'.toAssetImage(),
+                              image: NetworkImage(e.item1),
+                              fit: BoxFit.cover,
+                              height: 70)
+                          : Container(
+                              height: 75,
+                              child: Center(child: Text('Index:${e.item1}'))),
+                    ),
+                  ),
+                );
+              },
+          separatorBuilder: (context, index) => Divider(
+                indent: gap,
+                // color: Colors.blue,
+              )),
     );
-
   }
 
   _buildListViewSeparatedTwo({
@@ -357,7 +343,8 @@ class _ListViewDemoState extends State<ListViewDemo> {
               color: Color(0xFF333333),
             ),
           ),
-          subtitle: Text(data.content,
+          subtitle: Text(
+            data.content,
             // maxLines: 1,
             // overflow: TextOverflow.ellipsis,
             style: TextStyle(
@@ -365,13 +352,15 @@ class _ListViewDemoState extends State<ListViewDemo> {
               color: Color(0xFF999999),
             ),
           ),
-          trailing: Text(data.time,
+          trailing: Text(
+            data.time,
             style: TextStyle(
               fontSize: 13,
               color: Color(0xFF999999),
             ),
           ),
-          subtrailing: Text("已完成",
+          subtrailing: Text(
+            "已完成",
             style: TextStyle(
               fontSize: 13,
               color: Colors.blue,
@@ -383,13 +372,12 @@ class _ListViewDemoState extends State<ListViewDemo> {
         return Divider();
       },
     );
-
   }
 
   scrollToBottom({required ScrollController controller}) {
     Future.delayed(
       const Duration(milliseconds: 100),
-          () {
+      () {
         if (!controller.hasClients) {
           return;
         }
@@ -404,10 +392,12 @@ class _ListViewDemoState extends State<ListViewDemo> {
   }
 
   test() {
-    debugPrint("Testing:${[GlobalKey(),GlobalKey(),]}");
+    debugPrint("Testing:${[
+      GlobalKey(),
+      GlobalKey(),
+    ]}");
   }
 }
-
 
 Map<String, double> itemMap = {
   '1': 327,
@@ -417,11 +407,9 @@ Map<String, double> itemMap = {
 };
 
 class ScrollWidget extends StatelessWidget {
-
-
   const ScrollWidget({
-  	Key? key,
-  	this.title,
+    Key? key,
+    this.title,
     this.showCount = 1,
   }) : super(key: key);
 
@@ -441,27 +429,24 @@ class ScrollWidget extends StatelessWidget {
     final items = List.generate(3, (index) => "$index");
 
     return ListView.separated(
-      scrollDirection: Axis.horizontal,
-      padding: EdgeInsets.all(0),
-      itemCount: items.length,
-      cacheExtent: 10,
-      itemBuilder: (context, index) {
-        final e = items[index];
-        return InkWell(
-          onTap: () => debugPrint("$e"),
-          child: Container(
-            color: Colors.green,
-            width: 200,
-            child: Text('Index:$index'),
-          ),
-        );
-      },
-      separatorBuilder: (context, index) => Divider(
-        indent: 8,
-        // color: Colors.blue,
-      )
-    );
+        scrollDirection: Axis.horizontal,
+        padding: EdgeInsets.all(0),
+        itemCount: items.length,
+        cacheExtent: 10,
+        itemBuilder: (context, index) {
+          final e = items[index];
+          return InkWell(
+            onTap: () => debugPrint("$e"),
+            child: Container(
+              color: Colors.green,
+              width: 200,
+              child: Text('Index:$index'),
+            ),
+          );
+        },
+        separatorBuilder: (context, index) => Divider(
+              indent: 8,
+              // color: Colors.blue,
+            ));
   }
 }
-
-

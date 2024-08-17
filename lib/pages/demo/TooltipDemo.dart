@@ -6,15 +6,10 @@
 //  Copyright © 3/15/23 shang. All rights reserved.
 //
 
-
 import 'package:flutter/material.dart';
 
 class TooltipDemo extends StatefulWidget {
-
-  const TooltipDemo({
-    Key? key,
-    this.title
-  }) : super(key: key);
+  const TooltipDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -23,53 +18,53 @@ class TooltipDemo extends StatefulWidget {
 }
 
 class _TooltipDemoState extends State<TooltipDemo> {
-
-
   @override
   Widget build(BuildContext context) {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          onPressed: () => debugPrint(e),
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),)
-        ).toList(),
-      ),
-      body: Center(
-        child: _buildTooltip(),
-      )
-    );
-  }
-  
-  _buildTooltip() {
-    return Tooltip(
-      preferBelow: false,
-      padding: EdgeInsets.symmetric(horizontal: 40,vertical: 5),
-      margin: EdgeInsets.all(10),
-      verticalOffset: 15,
-      message: "Tooltip",
-      textStyle: TextStyle(
-        color: Colors.red,
-        shadows: [
-          Shadow(
-            color: Colors.white,
-            offset: Offset(1, 1),
-          ),
-        ],
-      ),
-      decoration: BoxDecoration(boxShadow: [
-        BoxShadow(
-          color: Colors.orangeAccent,
-          offset: Offset(1, 1),
-          blurRadius: 8,
-        )
-      ]),
-      child: Icon(Icons.info_outline)
-    );
+        appBar: AppBar(
+          title: Text(widget.title ?? "$widget"),
+          actions: [
+            'done',
+          ]
+              .map((e) => TextButton(
+                    onPressed: () => debugPrint(e),
+                    child: Text(
+                      e,
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ))
+              .toList(),
+        ),
+        body: Center(
+          child: _buildTooltip(),
+        ));
   }
 
+  _buildTooltip() {
+    return Tooltip(
+        preferBelow: false,
+        padding: EdgeInsets.symmetric(horizontal: 40, vertical: 5),
+        margin: EdgeInsets.all(10),
+        verticalOffset: 15,
+        message: "Tooltip",
+        textStyle: TextStyle(
+          color: Colors.red,
+          shadows: [
+            Shadow(
+              color: Colors.white,
+              offset: Offset(1, 1),
+            ),
+          ],
+        ),
+        decoration: BoxDecoration(boxShadow: [
+          BoxShadow(
+            color: Colors.orangeAccent,
+            offset: Offset(1, 1),
+            blurRadius: 8,
+          )
+        ]),
+        child: Icon(Icons.info_outline));
+  }
 }

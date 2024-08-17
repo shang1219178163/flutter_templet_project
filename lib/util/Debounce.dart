@@ -1,5 +1,3 @@
-
-
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
@@ -29,8 +27,6 @@ class Debounce {
 // onTextChange(String text) {
 //   _debounce(() => print(text));
 // }
-
-
 
 // /// 函数防抖
 // ///

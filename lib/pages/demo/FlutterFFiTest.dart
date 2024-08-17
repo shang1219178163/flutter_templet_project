@@ -3,13 +3,8 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 
-
 class FlutterFFiTest extends StatefulWidget {
-
-  FlutterFFiTest({
-    super.key,
-    this.title
-  });
+  FlutterFFiTest({super.key, this.title});
 
   final String? title;
 
@@ -18,7 +13,6 @@ class FlutterFFiTest extends StatefulWidget {
 }
 
 class _FlutterFFiTestState extends State<FlutterFFiTest> {
-
   final _scrollController = ScrollController();
 
   @override
@@ -26,12 +20,17 @@ class _FlutterFFiTestState extends State<FlutterFFiTest> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () => debugPrint(e),)
-        ).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () => debugPrint(e),
+                ))
+            .toList(),
       ),
       body: buildBody(),
     );

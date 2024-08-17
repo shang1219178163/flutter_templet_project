@@ -10,26 +10,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_header.dart';
 
 class BorderDemo extends StatefulWidget {
-
   final String? title;
 
-  const BorderDemo({ Key? key, this.title}) : super(key: key);
-
+  const BorderDemo({Key? key, this.title}) : super(key: key);
 
   @override
   _BorderDemoState createState() => _BorderDemoState();
 }
 
 class _BorderDemoState extends State<BorderDemo> {
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title ?? "$widget"),
-        ),
-        body: buildBody(),
+      appBar: AppBar(
+        title: Text(widget.title ?? "$widget"),
+      ),
+      body: buildBody(),
     );
   }
 
@@ -44,9 +40,7 @@ class _BorderDemoState extends State<BorderDemo> {
                 style: TextButton.styleFrom(
                   side: BorderSide(color: Colors.red, width: 1),
                 ),
-                onPressed: () {
-
-                },
+                onPressed: () {},
                 child: Text('BorderSide'),
               ),
             ),
@@ -58,29 +52,27 @@ class _BorderDemoState extends State<BorderDemo> {
                     style: TextButton.styleFrom(
                       shape: _buildBeveledRectangleBorder(radius: 0),
                     ),
-                    onPressed: () {
-
-                    },
+                    onPressed: () {},
                     child: Text('BeveledRectangleBorder - radius: 0'),
                   ),
-                  SizedBox(height: 8,),
+                  SizedBox(
+                    height: 8,
+                  ),
                   TextButton(
                     style: TextButton.styleFrom(
                       shape: _buildBeveledRectangleBorder(radius: 10),
                     ),
-                    onPressed: () {
-
-                    },
+                    onPressed: () {},
                     child: Text('BeveledRectangleBorder - radius: 10'),
                   ),
-                  SizedBox(height: 8,),
+                  SizedBox(
+                    height: 8,
+                  ),
                   TextButton(
                     style: TextButton.styleFrom(
                       shape: _buildBeveledRectangleBorder(radius: 100),
                     ),
-                    onPressed: () {
-
-                    },
+                    onPressed: () {},
                     child: Text('BeveledRectangleBorder - radius: 100'),
                   ),
                 ],
@@ -97,9 +89,7 @@ class _BorderDemoState extends State<BorderDemo> {
                       ),
                       minimumSize: Size(100, 100),
                     ),
-                    onPressed: () {
-
-                    },
+                    onPressed: () {},
                     child: Text('CircleBorder'),
                   ),
                 ],
@@ -111,12 +101,9 @@ class _BorderDemoState extends State<BorderDemo> {
                 style: TextButton.styleFrom(
                   shape: ContinuousRectangleBorder(
                       side: BorderSide(width: 1, color: Colors.red),
-                      borderRadius: BorderRadius.circular(20)
-                  ),
+                      borderRadius: BorderRadius.circular(20)),
                 ),
-                onPressed: () {
-
-                },
+                onPressed: () {},
                 child: Text('ContinuousRectangleBorder'),
               ),
             ),
@@ -130,9 +117,7 @@ class _BorderDemoState extends State<BorderDemo> {
                     bottom: LinearBorderEdge(),
                   ),
                 ),
-                onPressed: () {
-
-                },
+                onPressed: () {},
                 child: Text('LinearBorder'),
               ),
             ),
@@ -142,12 +127,9 @@ class _BorderDemoState extends State<BorderDemo> {
                 style: TextButton.styleFrom(
                   shape: RoundedRectangleBorder(
                       side: BorderSide(width: 1, color: Colors.red),
-                      borderRadius: BorderRadius.circular(8)
-                  ),
+                      borderRadius: BorderRadius.circular(8)),
                 ),
-                onPressed: () {
-
-                },
+                onPressed: () {},
                 child: Text('RoundedRectangleBorder'),
               ),
             ),
@@ -159,9 +141,7 @@ class _BorderDemoState extends State<BorderDemo> {
                     side: BorderSide(width: 1, color: Colors.red),
                   ),
                 ),
-                onPressed: () {
-
-                },
+                onPressed: () {},
                 child: Text('StadiumBorder'),
               ),
             ),
@@ -174,9 +154,7 @@ class _BorderDemoState extends State<BorderDemo> {
                     side: BorderSide(color: Colors.blue),
                   ),
                 ),
-                onPressed: () {
-
-                },
+                onPressed: () {},
                 child: Text('StarBorder'),
               ),
             ),
@@ -188,15 +166,19 @@ class _BorderDemoState extends State<BorderDemo> {
                 width: 60,
                 height: 60,
                 decoration: BoxDecoration(
-                  color: Colors.blue,
-                  border: Border(
-                    top: BorderSide(color: Colors.red, width: 3,)
-                  )
+                    color: Colors.blue,
+                    border: Border(
+                        top: BorderSide(
+                      color: Colors.red,
+                      width: 3,
+                    ))),
+                child: Icon(
+                  Icons.pool,
+                  size: 32,
+                  color: Colors.white,
                 ),
-                child: Icon(Icons.pool, size: 32, color: Colors.white,),
               ),
             ),
-
             NSectionHeader(
               title: "BoxDecoration - BoxShape.circle",
               child: Container(
@@ -212,7 +194,6 @@ class _BorderDemoState extends State<BorderDemo> {
                 ),
               ),
             ),
-
             NSectionHeader(
               title: "ShapeDecoration - ShapeBorder",
               child: Column(
@@ -220,10 +201,12 @@ class _BorderDemoState extends State<BorderDemo> {
                   Container(
                     margin: EdgeInsets.all(8),
                     decoration: ShapeDecoration(
-                      // color: Colors.green,
-                        shape: Border.all(color: Colors.green, width: 2)
+                        // color: Colors.green,
+                        shape: Border.all(color: Colors.green, width: 2)),
+                    child: TextButton(
+                      onPressed: () {},
+                      child: Text("ShapeDecoration - Border.all"),
                     ),
-                    child: TextButton( onPressed: () {  },child: Text("ShapeDecoration - Border.all"),),
                   ),
                   Container(
                     margin: EdgeInsets.all(8),
@@ -232,10 +215,12 @@ class _BorderDemoState extends State<BorderDemo> {
                             top: BorderSide(color: Colors.red, width: 5),
                             bottom: BorderSide(color: Colors.yellow, width: 5),
                             right: BorderSide(color: Colors.blue, width: 5),
-                            left: BorderSide(color: Colors.green, width: 5)
-                        )
+                            left: BorderSide(color: Colors.green, width: 5))),
+                    child: TextButton(
+                      onPressed: () {},
+                      child: Text(
+                          'ShapeDecoration - Border.top,bottom,right,left'),
                     ),
-                    child: TextButton( onPressed: () {  },child: Text('ShapeDecoration - Border.top,bottom,right,left'),),
                   ),
                   Container(
                     margin: EdgeInsets.all(8),
@@ -243,13 +228,9 @@ class _BorderDemoState extends State<BorderDemo> {
                         color: Colors.yellowAccent,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(Radius.circular(10)),
-                            side: BorderSide(color: Colors.red, width: 2)
-                        )
-                    ),
+                            side: BorderSide(color: Colors.red, width: 2))),
                     child: TextButton(
-                      onPressed: () {
-
-                      },
+                      onPressed: () {},
                       child: Text('ShapeDecoration - RoundedRectangleBorder'),
                     ),
                   ),
@@ -259,20 +240,16 @@ class _BorderDemoState extends State<BorderDemo> {
                         color: Colors.yellowAccent,
                         shape: BeveledRectangleBorder(
                             borderRadius: BorderRadius.all(Radius.circular(10)),
-                            side: BorderSide(color: Colors.red, width: 2)
-                        )
-                    ),
+                            side: BorderSide(color: Colors.red, width: 2))),
                     child: TextButton(
-                      onPressed: () {
-
-                      },
+                      onPressed: () {},
                       child: Text('ShapeDecoration - BeveledRectangleBorder'),
                     ),
                   ),
                   Container(
                     margin: EdgeInsets.all(8),
                     decoration: ShapeDecoration(
-                      // color: Colors.yellowAccent,
+                        // color: Colors.yellowAccent,
                         gradient: LinearGradient(
                           colors: [
                             Colors.yellow,
@@ -280,13 +257,10 @@ class _BorderDemoState extends State<BorderDemo> {
                           ],
                         ),
                         shape: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.red, width: 2)
-                        )
-                    ),
+                            borderSide:
+                                BorderSide(color: Colors.red, width: 2))),
                     child: TextButton(
-                      onPressed: () {
-
-                      },
+                      onPressed: () {},
                       child: Text('ShapeDecoration - UnderlineInputBorder'),
                     ),
                   ),
@@ -299,12 +273,9 @@ class _BorderDemoState extends State<BorderDemo> {
                 margin: EdgeInsets.all(8),
                 decoration: UnderlineTabIndicator(
                     borderSide: BorderSide(width: 2.0, color: Colors.red),
-                    insets: EdgeInsets.fromLTRB(0, 0, 0, 10)
-                ),
+                    insets: EdgeInsets.fromLTRB(0, 0, 0, 10)),
                 child: TextButton(
-                  onPressed: () {
-
-                  },
+                  onPressed: () {},
                   child: Text('Decoration - UnderlineTabIndicator'),
                 ),
               ),
@@ -322,9 +293,7 @@ class _BorderDemoState extends State<BorderDemo> {
                       ),
                     ),
                     child: TextButton(
-                      onPressed: () {
-
-                      },
+                      onPressed: () {},
                       child: Text('ShapeDecoration - OutlineInputBorder'),
                     ),
                   ),
@@ -340,9 +309,7 @@ class _BorderDemoState extends State<BorderDemo> {
                 ),
               ),
               child: TextButton(
-                onPressed: () {
-
-                },
+                onPressed: () {},
                 child: Text('ShapeDecoration - UnderlineInputBorder'),
               ),
             ),
@@ -353,16 +320,13 @@ class _BorderDemoState extends State<BorderDemo> {
   }
 
   /// 斜角矩形边框
-  _buildBeveledRectangleBorder({required double radius, double width = 1, Color color = Colors.red,}) {
+  _buildBeveledRectangleBorder({
+    required double radius,
+    double width = 1,
+    Color color = Colors.red,
+  }) {
     return BeveledRectangleBorder(
         side: BorderSide(width: width, color: color),
-        borderRadius: BorderRadius.circular(radius)
-    );
+        borderRadius: BorderRadius.circular(radius));
   }
-
-
 }
-
-
-
-

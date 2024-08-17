@@ -6,17 +6,14 @@
 //  Copyright © 2024/4/8 shang. All rights reserved.
 //
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 
-
 /// 筛选
 class NChoiceExpansion<T> extends StatefulWidget {
-
   NChoiceExpansion({
     super.key,
     this.controller,
@@ -40,29 +37,40 @@ class NChoiceExpansion<T> extends StatefulWidget {
 
   /// 控制器
   final NChoiceExpansionController? controller;
+
   /// 标题
   final String title;
+
   /// 标题字体样式
   final TextStyle? titleStyle;
+
   /// 组数据
   final List<T> items;
+
   /// 选择判断
   final bool Function(T e) selectedCb;
+
   /// 标题显示
   final String Function(T e) titleCb;
 
   /// 选择事件
   final ValueChanged<T> onSelected;
+
   /// 初始展开还是关闭
   final bool isExpand;
+
   /// 最小折叠值
   final int collapseCount;
+
   /// 折叠展开
   final ValueChanged<bool>? onExpand;
+
   /// 子项样式自定义
   final Widget? Function(T e, bool isSelected)? itemBuilder;
+
   /// 头部项目自定义
   final Widget Function(VoidCallback onToggle)? headerBuilder;
+
   /// 尾部自定义
   final Widget Function(VoidCallback onToggle)? footerBuilder;
 
@@ -71,7 +79,6 @@ class NChoiceExpansion<T> extends StatefulWidget {
 }
 
 class _NChoiceExpansionState<T> extends State<NChoiceExpansion<T>> {
-
   late bool isExpand = widget.isExpand;
 
   final weChatSubTitleColor = Color(0xff737373);
@@ -104,29 +111,28 @@ class _NChoiceExpansionState<T> extends State<NChoiceExpansion<T>> {
 
   @override
   Widget build(BuildContext context) {
-    final items = isExpand
-        ? widget.items
-        : widget.items.take(6).toList();
+    final items = isExpand ? widget.items : widget.items.take(6).toList();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        widget.headerBuilder?.call(onToggle) ?? Padding(
-          padding: const EdgeInsets.only(
-            top: 15,
-            bottom: 12,
-          ),
-          child: Row(
-            children: [
-              Expanded(
-                child: Text(
-                  widget.title,
-                  style: widget.titleStyle,
-                ),
+        widget.headerBuilder?.call(onToggle) ??
+            Padding(
+              padding: const EdgeInsets.only(
+                top: 15,
+                bottom: 12,
               ),
-              buildExpandButton(),
-            ],
-          ),
-        ),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      widget.title,
+                      style: widget.titleStyle,
+                    ),
+                  ),
+                  buildExpandButton(),
+                ],
+              ),
+            ),
         Wrap(
           spacing: 8,
           runSpacing: 8,
@@ -149,27 +155,30 @@ class _NChoiceExpansionState<T> extends State<NChoiceExpansion<T>> {
         widget.onSelected(e);
         setState(() {});
       },
-      child: widget.itemBuilder?.call(e, isSelected) ?? Container(
-        padding: const EdgeInsets.symmetric(
-          vertical: 4,
-          horizontal: 10,
-        ),
-        decoration: BoxDecoration(
-          color: isSelected ? context.primaryColor.withOpacity(0.1) : bgColor,
-          borderRadius: const BorderRadius.all(Radius.circular(4)),
-          border: Border.all(
-              width: 0.5,
-              color: isSelected ? context.primaryColor : bgColor),
-        ),
-        child: NText(
-          title,
-          fontSize: 14,
-          color: isSelected ? context.primaryColor : weChatSubTitleColor,
-          fontWeight: FontWeight.w400,
-        ),
-      ),
+      child: widget.itemBuilder?.call(e, isSelected) ??
+          Container(
+            padding: const EdgeInsets.symmetric(
+              vertical: 4,
+              horizontal: 10,
+            ),
+            decoration: BoxDecoration(
+              color:
+                  isSelected ? context.primaryColor.withOpacity(0.1) : bgColor,
+              borderRadius: const BorderRadius.all(Radius.circular(4)),
+              border: Border.all(
+                  width: 0.5,
+                  color: isSelected ? context.primaryColor : bgColor),
+            ),
+            child: NText(
+              title,
+              fontSize: 14,
+              color: isSelected ? context.primaryColor : weChatSubTitleColor,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
     );
   }
+
   /// 折叠展开按钮
   Widget buildExpandButton() {
     final hideExpandButton = (widget.items.length <= widget.collapseCount);
@@ -203,7 +212,7 @@ class _NChoiceExpansionState<T> extends State<NChoiceExpansion<T>> {
                 width: 0,
               ),
               Icon(
-                isExpand? Icons.expand_less : Icons.expand_more,
+                isExpand ? Icons.expand_less : Icons.expand_more,
                 size: 18,
                 color: weChatSubTitleColor,
               ),
@@ -222,10 +231,8 @@ class _NChoiceExpansionState<T> extends State<NChoiceExpansion<T>> {
   }
 }
 
-
 /// NFilterDropBox 组件控制器,将 State 的私有属性或者方法暴漏出去
 class NChoiceExpansionController {
-
   _NChoiceExpansionState? _anchor;
 
   void onToggle() {

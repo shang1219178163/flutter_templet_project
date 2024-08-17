@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 
 class ErrorCustomWidget extends StatelessWidget {
-
   const ErrorCustomWidget({
-  	Key? key,
-  	required this.details,
+    Key? key,
+    required this.details,
   }) : super(key: key);
 
   final FlutterErrorDetails details;

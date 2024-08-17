@@ -1,7 +1,5 @@
-
 ///选择通用模型
 class SelectModel<T> {
-
   SelectModel({
     required this.id,
     required this.name,
@@ -14,9 +12,9 @@ class SelectModel<T> {
   String? name;
 
   bool? isSelected;
+
   /// 通用数据
   T? data;
-
 
   SelectModel.fromJson(Map<String, dynamic>? json) {
     if (json == null) {

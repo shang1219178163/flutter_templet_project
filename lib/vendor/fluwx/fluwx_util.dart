@@ -7,14 +7,10 @@ import 'package:flutter_templet_project/util/Debounce.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:fluwx/fluwx.dart';
 
-
 // https://pub-web.flutter-io.cn/packages/fluwx
 
 // 防抖
 final _debounce = Debounce();
-
-
-
 
 /// fluwx 功能封装类
 class FluwxUtil {
@@ -23,14 +19,13 @@ class FluwxUtil {
   factory FluwxUtil() => _instance;
   static FluwxUtil get instance => _instance;
 
-
   static const weChatAppKey = 'wxdf948255a98cb714';
   // static const weChatAppSecret = '6fab866e9f5306ebb13ad257182cd549';
 
   /// 未安装微信提示语
   static String notWechat = '没有安装微信，请安装后使用该功能';
 
-  static const universalLink ='https://h.yljk.cn/';
+  static const universalLink = 'https://h.yljk.cn/';
 
   final Fluwx fluwx = Fluwx();
 
@@ -74,12 +69,14 @@ class FluwxUtil {
 
   /// 微信授权登录
   void authLogin() {
-    fluwx.authBy(
+    fluwx
+        .authBy(
       which: NormalAuth(
         scope: "snsapi_userinfo",
         state: "wechat_sdk_demo_test",
       ),
-    ).then((data) {
+    )
+        .then((data) {
       if (!data) {
         ToastUtil.show('没有安装微信，请安装微信后使用该功能');
       }
@@ -97,8 +94,7 @@ class FluwxUtil {
       timestamp: params['timeStamp'],
       sign: params['sign'],
     );
-    fluwx.pay(which: payment)
-        .then((data) {
+    fluwx.pay(which: payment).then((data) {
       debugPrint('微信支付返回值：$data');
     }).catchError((e) {
       debugPrint('微信支付异常：$e');
@@ -150,7 +146,8 @@ class FluwxUtil {
     required String content,
     WeChatScene scene = WeChatScene.session,
   }) {
-    final model = WeChatShareTextModel(content,
+    final model = WeChatShareTextModel(
+      content,
       title: title,
       scene: scene,
     );

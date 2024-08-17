@@ -10,5 +10,6 @@ class TimelineModel {
     required this.title,
     required this.description,
     required this.day,
-    required this.time,});
+    required this.time,
+  });
 }

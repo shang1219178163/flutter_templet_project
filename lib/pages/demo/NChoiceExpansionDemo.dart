@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_choice_box.dart';
@@ -15,7 +14,6 @@ import 'package:flutter_templet_project/model/user_model.dart';
 import 'package:get/get.dart';
 
 class NChoiceExpansionDemo extends StatefulWidget {
-
   NChoiceExpansionDemo({
     super.key,
     this.arguments,
@@ -28,8 +26,8 @@ class NChoiceExpansionDemo extends StatefulWidget {
 }
 
 class _NChoiceExpansionDemoState extends State<NChoiceExpansionDemo> {
-
-  bool get hideApp => Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
+  bool get hideApp =>
+      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
 
   final _scrollController = ScrollController();
 
@@ -37,10 +35,12 @@ class _NChoiceExpansionDemoState extends State<NChoiceExpansionDemo> {
 
   bool isSingle = false;
 
-  final tags = List.generate(10, (i) => TagDetailModel(
-    id: i.toString(),
-    name: "标签$i",
-  )).toList();
+  final tags = List.generate(
+      10,
+      (i) => TagDetailModel(
+            id: i.toString(),
+            name: "标签$i",
+          )).toList();
   List<TagDetailModel> selectedTags = [];
 
   final users = List.generate(10, (i) {
@@ -54,19 +54,25 @@ class _NChoiceExpansionDemoState extends State<NChoiceExpansionDemo> {
 
   List<UserModel> selectedUsers = [];
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: hideApp ? null : AppBar(
-        title: Text("$widget"),
-        actions: ['done',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () => debugPrint(e),)
-        ).toList(),
-      ),
+      appBar: hideApp
+          ? null
+          : AppBar(
+              title: Text("$widget"),
+              actions: [
+                'done',
+              ]
+                  .map((e) => TextButton(
+                        child: Text(
+                          e,
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        onPressed: () => debugPrint(e),
+                      ))
+                  .toList(),
+            ),
       body: buildBody(),
     );
   }
@@ -76,25 +82,23 @@ class _NChoiceExpansionDemoState extends State<NChoiceExpansionDemo> {
   buildBody() {
     return Scrollbar(
       child: SingleChildScrollView(
-        child: Column(
-            children: [
-              NPair(
-                icon: NText("单选($isSingle)"),
-                child: NResize(
-                  width: 40,
-                  height: 25,
-                  child: CupertinoSwitch(
-                    value: isSingle,
-                    onChanged: (bool val) {
-                      isSingle = val;
-                      setState(() {});
-                    },
-                  ),
-                ),
+        child: Column(children: [
+          NPair(
+            icon: NText("单选($isSingle)"),
+            child: NResize(
+              width: 40,
+              height: 25,
+              child: CupertinoSwitch(
+                value: isSingle,
+                onChanged: (bool val) {
+                  isSingle = val;
+                  setState(() {});
+                },
               ),
-              ...buildChoiceExpansions(),
-            ]
-        ),
+            ),
+          ),
+          ...buildChoiceExpansions(),
+        ]),
       ),
     );
   }
@@ -117,7 +121,11 @@ class _NChoiceExpansionDemoState extends State<NChoiceExpansionDemo> {
         },
         itemBuilder: (e, isSelected) {
           // final isSelected = e.id == selectTag?.id;
-          return buildItem(e: e, isSelected: isSelected, titleCb: (e) => e.name ?? "",);
+          return buildItem(
+            e: e,
+            isSelected: isSelected,
+            titleCb: (e) => e.name ?? "",
+          );
         },
       ),
       NChoiceExpansionOfModel(
@@ -127,13 +135,17 @@ class _NChoiceExpansionDemoState extends State<NChoiceExpansionDemo> {
         idCb: (e) => e.id ?? "",
         titleCb: (e) => e.name ?? "",
         selectedCb: (e) => selectedTags.map((e) => e.id).contains(e.id),
-        onChanged: (list){
+        onChanged: (list) {
           ddlog("list: ${list.map((e) => "${e.name}_${e.isSelected}")}");
           selectedTags = list;
         },
         itemBuilder: (e, isSelected) {
           // final isSelected = selectedTags.map((e) => e.id).contains(e.id);
-          return buildItem(e: e, isSelected: isSelected, titleCb: (e) => e.name ?? "",);
+          return buildItem(
+            e: e,
+            isSelected: isSelected,
+            titleCb: (e) => e.name ?? "",
+          );
         },
       ),
       NChoiceExpansionOfModel(
@@ -143,19 +155,25 @@ class _NChoiceExpansionDemoState extends State<NChoiceExpansionDemo> {
         idCb: (e) => e.id ?? "",
         titleCb: (e) => e.name ?? "",
         selectedCb: (e) => selectedUsers.map((e) => e.id).contains(e.id),
-        onChanged: (list){
+        onChanged: (list) {
           ddlog("list: ${list.map((e) => "${e.name}_${e.isSelected}")}");
           selectedUsers = list;
         },
         itemBuilder: (e, isSelected) {
           // final isSelected = selectedUsers.map((e) => e.id).contains(e.id);
-          return buildItem(e: e, isSelected: isSelected, titleCb: (e) => e.name ?? "",);
+          return buildItem(
+            e: e,
+            isSelected: isSelected,
+            titleCb: (e) => e.name ?? "",
+          );
         },
       ),
-    ].map((e) => Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: e,
-    )).toList();
+    ]
+        .map((e) => Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: e,
+            ))
+        .toList();
   }
 
   /// 子元素自定义

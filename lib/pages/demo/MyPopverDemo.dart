@@ -6,14 +6,12 @@
 //  Copyright © 1/20/23 shang. All rights reserved.
 //
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:svgaplayer_flutter/proto/svga.pb.dart';
 
 class MyPopverDemo extends StatefulWidget {
-
-  const MyPopverDemo({ Key? key, this.title}) : super(key: key);
+  const MyPopverDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -22,7 +20,6 @@ class MyPopverDemo extends StatefulWidget {
 }
 
 class _MyPopverDemoState extends State<MyPopverDemo> {
-
   final _globalKey = GlobalKey();
 
   var btnIdx = 0;
@@ -36,9 +33,17 @@ class _MyPopverDemoState extends State<MyPopverDemo> {
       ),
       body: ListView(
         children: [
-          ...List.generate(10, (index) => ListTile(title: Text("top_$index"),)).toList(),
+          ...List.generate(
+              10,
+              (index) => ListTile(
+                    title: Text("top_$index"),
+                  )).toList(),
           _buildSection(),
-          ...List.generate(20, (index) => ListTile(title: Text("row_$index"),)).toList(),
+          ...List.generate(
+              20,
+              (index) => ListTile(
+                    title: Text("row_$index"),
+                  )).toList(),
         ],
       ),
     );
@@ -51,14 +56,14 @@ class _MyPopverDemoState extends State<MyPopverDemo> {
       children: [
         _buildMenu(),
         if (isVisible)
-        Positioned(
-          // left: 0,
-          right: 0.0,
-          top: _globalKey.currentContext?.renderBoxSize?.height ?? 30,
-          width: context.screenSize.width,
-          height: 300.0,
-          child: _buildDropBox(),
-        ),
+          Positioned(
+            // left: 0,
+            right: 0.0,
+            top: _globalKey.currentContext?.renderBoxSize?.height ?? 30,
+            width: context.screenSize.width,
+            height: 300.0,
+            child: _buildDropBox(),
+          ),
       ],
     );
   }
@@ -66,31 +71,31 @@ class _MyPopverDemoState extends State<MyPopverDemo> {
   _buildMenu({int count = 3}) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: List.generate(count, (index) => ElevatedButton(
-        onPressed: () {
-          final val = _globalKey.currentContext?.origin();
-          debugPrint("菜单${index}_$val");
-          btnIdx = index;
-          isVisible = !isVisible;
-          setState(() {});
-        },
-        child: Text("菜单$index"),
-      )).map((e) => Expanded(child: e)).toList(),
+      children: List.generate(
+          count,
+          (index) => ElevatedButton(
+                onPressed: () {
+                  final val = _globalKey.currentContext?.origin();
+                  debugPrint("菜单${index}_$val");
+                  btnIdx = index;
+                  isVisible = !isVisible;
+                  setState(() {});
+                },
+                child: Text("菜单$index"),
+              )).map((e) => Expanded(child: e)).toList(),
     );
   }
 
   _buildDropBox() {
-    return Builder(
-      builder: (context) {
-        if (btnIdx == 0) {
-          return _buildDropBox1();
-        }
-        if (btnIdx == 1) {
-          return _buildDropBox2();
-        }
-        return _buildDropBox3();
+    return Builder(builder: (context) {
+      if (btnIdx == 0) {
+        return _buildDropBox1();
       }
-    );
+      if (btnIdx == 1) {
+        return _buildDropBox2();
+      }
+      return _buildDropBox3();
+    });
   }
 
   _buildDropBox1() {
@@ -99,8 +104,7 @@ class _MyPopverDemoState extends State<MyPopverDemo> {
           color: Colors.green,
           border: Border.all(width: 5, color: Colors.red),
         ),
-        child: Center(child: Text("one"))
-    );
+        child: Center(child: Text("one")));
   }
 
   _buildDropBox2() {
@@ -109,8 +113,7 @@ class _MyPopverDemoState extends State<MyPopverDemo> {
           color: Colors.green,
           border: Border.all(width: 5, color: Colors.yellow),
         ),
-        child: Center(child: Text("two"))
-    );
+        child: Center(child: Text("two")));
   }
 
   _buildDropBox3() {
@@ -123,7 +126,11 @@ class _MyPopverDemoState extends State<MyPopverDemo> {
         children: [
           Column(
             children: [
-              ...List.generate(20, (index) => ListTile(title: Text("我是弹窗_$index"),)).toList(),
+              ...List.generate(
+                  20,
+                  (index) => ListTile(
+                        title: Text("我是弹窗_$index"),
+                      )).toList(),
             ],
           ),
         ],
@@ -140,25 +147,17 @@ class _MyPopverDemoState extends State<MyPopverDemo> {
   );
 
   _build() {
-    return Column(
-      children: [
-        LayoutBuilder(
-          builder: (BuildContext context, BoxConstraints constraints){
-            return SizedBox();
-          }
-        ),
-        Builder(
-          builder: (context) {
-            return SizedBox();
-          }
-        ),
-        StatefulBuilder(
-          builder: (BuildContext context, StateSetter setState) {
-            return SizedBox();
-          }
-        ),
-      ]
-    );
+    return Column(children: [
+      LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints constraints) {
+        return SizedBox();
+      }),
+      Builder(builder: (context) {
+        return SizedBox();
+      }),
+      StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
+        return SizedBox();
+      }),
+    ]);
   }
-
 }

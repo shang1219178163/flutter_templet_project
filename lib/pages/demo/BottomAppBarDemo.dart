@@ -19,7 +19,8 @@ class BottomAppBarDemo extends StatefulWidget {
 class _BottomAppBarDemoState extends State<BottomAppBarDemo> {
   bool _showFab = true;
   bool _showNotch = true;
-  FloatingActionButtonLocation _fabLocation = FloatingActionButtonLocation.endDocked;
+  FloatingActionButtonLocation _fabLocation =
+      FloatingActionButtonLocation.endDocked;
 
   final locations = FloatingActionButtonLocationExt.allCases;
 
@@ -33,65 +34,67 @@ class _BottomAppBarDemoState extends State<BottomAppBarDemo> {
     _showNotch = _fabLocation.toString().contains("Docked");
     setState(() {});
   }
-  
+
   @override
   Widget build(BuildContext context) {
     // return _buildPage1();//椭圆形
 
     return Scaffold(
-        appBar: AppBar(
-          // automaticallyImplyLeading: false,
-          title: const Text('Bottom App Bar Demo'),
-        ),
-        body: ListView(
-          padding: const EdgeInsets.only(bottom: 88),
-          children: <Widget>[
-            SwitchListTile(
-              title: const Text(
-                'Floating Action Button',
+      appBar: AppBar(
+        // automaticallyImplyLeading: false,
+        title: const Text('Bottom App Bar Demo'),
+      ),
+      body: ListView(
+        padding: const EdgeInsets.only(bottom: 88),
+        children: <Widget>[
+          SwitchListTile(
+            title: const Text(
+              'Floating Action Button',
+            ),
+            value: _showFab,
+            onChanged: _onShowFabChanged,
+          ),
+          const Padding(
+            padding: EdgeInsets.all(16),
+            child: Text(
+              'Floating action button position:',
+              style: TextStyle(fontSize: 18),
+            ),
+          ),
+          Column(
+            children: locations
+                .map((e) => RadioListTile<FloatingActionButtonLocation>(
+                      title: Text(e.toString().split(".").last),
+                      value: e,
+                      groupValue: _fabLocation,
+                      onChanged: _onFabLocationChanged,
+                    ))
+                .toList(),
+          ),
+        ],
+      ),
+      floatingActionButton: _showFab
+          ? Align(
+              alignment: Alignment(0.2, 0.1),
+              child: FloatingActionButton(
+                onPressed: () {},
+                tooltip: 'Create',
+                child: const Icon(Icons.add),
               ),
-              value: _showFab,
-              onChanged: _onShowFabChanged,
-            ),
-            const Padding(
-              padding: EdgeInsets.all(16),
-              child: Text('Floating action button position:', style: TextStyle(fontSize: 18),),
-            ),
-            Column(
-              children: locations.map((e) => RadioListTile<FloatingActionButtonLocation>(
-                title: Text(e.toString().split(".").last),
-                value: e,
-                groupValue: _fabLocation,
-                onChanged: _onFabLocationChanged,
-              )).toList(),
-            ),
-          ],
-        ),
-        floatingActionButton: _showFab
-            ? Align(
-                alignment: Alignment(0.2, 0.1),
-                child: FloatingActionButton(
-                  onPressed: () {},
-                  tooltip: 'Create',
-                  child: const Icon(Icons.add),
-                ),
             )
-            : null,
-        floatingActionButtonLocation: _fabLocation,
-        bottomNavigationBar: _DemoBottomAppBar(
-          fabLocation: _fabLocation,
-          // shape: _showNotch ? const CircularNotchedRectangle() : null,
-        ),
-      );
+          : null,
+      floatingActionButtonLocation: _fabLocation,
+      bottomNavigationBar: _DemoBottomAppBar(
+        fabLocation: _fabLocation,
+        // shape: _showNotch ? const CircularNotchedRectangle() : null,
+      ),
+    );
   }
-  
+
   _buildPage1() {
-    ShapeBorder? buttonShape = BeveledRectangleBorder(
-      borderRadius: BorderRadius.circular(10)
-    );
-    buttonShape = StadiumBorder(
-        side: BorderSide(color: Colors.transparent)
-    );
+    ShapeBorder? buttonShape =
+        BeveledRectangleBorder(borderRadius: BorderRadius.circular(10));
+    buttonShape = StadiumBorder(side: BorderSide(color: Colors.transparent));
     return Scaffold(
       appBar: AppBar(
         // automaticallyImplyLeading: false,
@@ -107,24 +110,25 @@ class _BottomAppBarDemoState extends State<BottomAppBarDemo> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
             IconButton(
-              icon: Icon(Icons.home), onPressed: () {  },
+              icon: Icon(Icons.home),
+              onPressed: () {},
             ),
             IconButton(
-              icon: Icon(Icons.people), onPressed: () {  },
+              icon: Icon(Icons.people),
+              onPressed: () {},
             )
           ],
-          ),
         ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: FloatingActionButton.extended(
-          onPressed: () {},
-          shape: buttonShape,
-          icon: Icon(Icons.add),
-          label: const Text("label"),
-        ),
-      );
-    }
-
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {},
+        shape: buttonShape,
+        icon: Icon(Icons.add),
+        label: const Text("label"),
+      ),
+    );
+  }
 }
 
 class _DemoBottomAppBar extends StatelessWidget {
@@ -150,7 +154,8 @@ class _DemoBottomAppBar extends StatelessWidget {
         data: IconThemeData(color: Theme.of(context).colorScheme.onPrimary),
         child: Row(
           children: <Widget>[
-            if (fabLocation == FloatingActionButtonLocation.startDocked) const Spacer(),
+            if (fabLocation == FloatingActionButtonLocation.startDocked)
+              const Spacer(),
             IconButton(
               tooltip: 'Open navigation menu',
               icon: const Icon(Icons.menu),

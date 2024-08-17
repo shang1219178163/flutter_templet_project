@@ -23,29 +23,28 @@ class ProxyProviderDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("ProxyProvider"),
-      ),
-      body: Column(
-        children: [
-          _buildConsumer(),
-          Divider(),
-          _buildSelector(),
-        ],
-      )
-    );
+        appBar: AppBar(
+          title: Text("ProxyProvider"),
+        ),
+        body: Column(
+          children: [
+            _buildConsumer(),
+            Divider(),
+            _buildSelector(),
+          ],
+        ));
   }
-  
+
   _buildConsumer() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        Consumer<EatModel>(
-          builder: (ctx, model, child) {
-            return Text(model.whoEat);
+        Consumer<EatModel>(builder: (ctx, model, child) {
+          return Text(model.whoEat);
         }),
-        Consumer<Person>( // 拿到person对象，调用方法
-          builder: (ctx, model, child){
+        Consumer<Person>(
+          // 拿到person对象，调用方法
+          builder: (ctx, model, child) {
             return Column(
               children: [
                 ElevatedButton(
@@ -78,7 +77,7 @@ class ProxyProviderDemo extends StatelessWidget {
         ),
         Selector<Person, Person>(
           selector: (ctx, person) => person,
-          builder: (ctx, model, child){
+          builder: (ctx, model, child) {
             return Column(
               children: [
                 ElevatedButton(
@@ -100,5 +99,4 @@ class ProxyProviderDemo extends StatelessWidget {
       ],
     );
   }
-
 }

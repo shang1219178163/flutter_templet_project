@@ -6,11 +6,7 @@ import 'package:flutter_templet_project/util/R.dart';
 import 'package:flutter_templet_project/basicWidget/EnhanceTab/enhance_tab_bar.dart';
 
 class EnhanceTabBarDemo extends StatefulWidget {
-
-  const EnhanceTabBarDemo({
-    Key? key,
-    this.title
-  }) : super(key: key);
+  const EnhanceTabBarDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -18,8 +14,8 @@ class EnhanceTabBarDemo extends StatefulWidget {
   _EnhanceTabBarDemoState createState() => _EnhanceTabBarDemoState();
 }
 
-class _EnhanceTabBarDemoState extends State<EnhanceTabBarDemo> with SingleTickerProviderStateMixin {
-
+class _EnhanceTabBarDemoState extends State<EnhanceTabBarDemo>
+    with SingleTickerProviderStateMixin {
   final indicatorSizes = EnhanceTabBarIndicatorSize.values;
 
   // List<String> get indicatorTypes => indicatorSizes.map((e) => e.toString().split(".").last).toList();
@@ -62,13 +58,12 @@ class _EnhanceTabBarDemoState extends State<EnhanceTabBarDemo> with SingleTicker
     return buildPageTwo();
   }
 
-  Widget buildItem({
-    required String e,
-    required int index,
-    required bool isSelect,
-    double height = 46
-  }) {
-    if (index != 1){
+  Widget buildItem(
+      {required String e,
+      required int index,
+      required bool isSelect,
+      double height = 46}) {
+    if (index != 1) {
       return Tab(height: height, text: e);
     }
     final url = isSelect ? R.image.urls[1] : R.image.urls[0];
@@ -95,24 +90,28 @@ class _EnhanceTabBarDemoState extends State<EnhanceTabBarDemo> with SingleTicker
           tabs: titles.map((e) => Tab(text: e * titles.indexOf(e))).toList(),
         ),
       ),
-      body: TabBarView( //构建
+      body: TabBarView(
+        //构建
         controller: _tabController,
         children: titles.map((e) {
           return Container(
             alignment: Alignment.center,
-            child: Text(e, style: TextStyle(color: Colors.red),),
+            child: Text(
+              e,
+              style: TextStyle(color: Colors.red),
+            ),
           );
         }).toList(),
       ),
     );
   }
 
-
   buildEnhanceTabBar({
     required TabController? controller,
     required ValueNotifier<int> indexVN,
     required List<String> items,
-    EnhanceTabBarIndicatorSize? indicatorSize = EnhanceTabBarIndicatorSize.fixedWidth,
+    EnhanceTabBarIndicatorSize? indicatorSize =
+        EnhanceTabBarIndicatorSize.fixedWidth,
   }) {
     return EnhanceTabBar(
       isScrollable: true,
@@ -125,35 +124,43 @@ class _EnhanceTabBarDemoState extends State<EnhanceTabBarDemo> with SingleTicker
       // indicatorPadding: EdgeInsets.only(left: 8, right: 8),
       indicator: UnderlineTabIndicator(
           borderSide: BorderSide(
-            style: BorderStyle.solid,
-            width: 4,
-            color: Colors.red,
-          )
-      ),
-      tabs: items.map((e) => Tab(
-        child: ValueListenableBuilder<int>(
-            valueListenable: indexVN,
-            builder: (BuildContext context, int value, Widget? child) {
-              final index = items.indexOf(e);
-              if (index != 1){
-                if (index == 2){
-                  return Tab(child: Text(e + e,),);
-                }
-                if (index == 3){
-                  return Tab(child: Text(e + e, style: TextStyle(fontSize: 20)),);
-                }
-                return Tab(text: e);
-              }
+        style: BorderStyle.solid,
+        width: 4,
+        color: Colors.red,
+      )),
+      tabs: items
+          .map((e) => Tab(
+                child: ValueListenableBuilder<int>(
+                    valueListenable: indexVN,
+                    builder: (BuildContext context, int value, Widget? child) {
+                      final index = items.indexOf(e);
+                      if (index != 1) {
+                        if (index == 2) {
+                          return Tab(
+                            child: Text(
+                              e + e,
+                            ),
+                          );
+                        }
+                        if (index == 3) {
+                          return Tab(
+                            child: Text(e + e, style: TextStyle(fontSize: 20)),
+                          );
+                        }
+                        return Tab(text: e);
+                      }
 
-              final url = (value == index) ? R.image.urls[1] : R.image.urls[0];
-              return Tab(
-                child: FadeInImage(
-                  image: NetworkImage(url),
-                  placeholder: "flutter_logo.png".toAssetImage(),
-                ),
-              );
-            }),
-      )).toList(),
+                      final url =
+                          (value == index) ? R.image.urls[1] : R.image.urls[0];
+                      return Tab(
+                        child: FadeInImage(
+                          image: NetworkImage(url),
+                          placeholder: "flutter_logo.png".toAssetImage(),
+                        ),
+                      );
+                    }),
+              ))
+          .toList(),
     );
   }
 
@@ -161,13 +168,17 @@ class _EnhanceTabBarDemoState extends State<EnhanceTabBarDemo> with SingleTicker
     required TabController? controller,
     required List<String> items,
   }) {
-    return TabBarView( //构建
+    return TabBarView(
+      //构建
       controller: controller,
       children: items.map((e) {
         return Container(
           color: ColorExt.random,
           alignment: Alignment.center,
-          child: Text(e, style: TextStyle(color: Colors.red),),
+          child: Text(
+            e,
+            style: TextStyle(color: Colors.red),
+          ),
         );
       }).toList(),
     );
@@ -181,56 +192,43 @@ class _EnhanceTabBarDemoState extends State<EnhanceTabBarDemo> with SingleTicker
           _buildDropdownButton(),
         ],
         bottom: buildEnhanceTabBar(
-          controller: _tabController,
-          indexVN: indexVN,
-          items: titles
-        ),
+            controller: _tabController, indexVN: indexVN, items: titles),
       ),
-      body: buildTabBarView(
-        controller: _tabController,
-        items: titles
-      ),
+      body: buildTabBarView(controller: _tabController, items: titles),
     );
   }
 
   Widget buildPageTwo() {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title ?? "$widget"),
-        actions: [
-          _buildDropdownButton(),
-        ],
-      ),
-      body: CustomScrollView(
-        slivers: [
-          Container(
-            height: 60,
-            color: Colors.lightBlue,
-            child: buildEnhanceTabBar(
-              controller: _tabController,
-              indexVN: indexVN,
-              items: titles
+        appBar: AppBar(
+          title: Text(widget.title ?? "$widget"),
+          actions: [
+            _buildDropdownButton(),
+          ],
+        ),
+        body: CustomScrollView(
+          slivers: [
+            Container(
+              height: 60,
+              color: Colors.lightBlue,
+              child: buildEnhanceTabBar(
+                  controller: _tabController, indexVN: indexVN, items: titles),
+            ).toSliverToBoxAdapter(),
+            SliverFillRemaining(
+              child: buildTabBarView(controller: _tabController, items: titles),
             ),
-          ).toSliverToBoxAdapter(),
-          SliverFillRemaining(
-            child: buildTabBarView(
-                controller: _tabController,
-                items: titles
-            ),
-          ),
-          // Container(
-          //   height: 400,
-          //   color: ColorExt.random,
-          //   child: buildTabBarView(
-          //     controller: _tabController,
-          //     items: titles
-          //   ),
-          // ),
-        ]
-            // .map((e) => SliverToBoxAdapter(child: e,)).toList()
-        ,
-      )
-    );
+            // Container(
+            //   height: 400,
+            //   color: ColorExt.random,
+            //   child: buildTabBarView(
+            //     controller: _tabController,
+            //     items: titles
+            //   ),
+            // ),
+          ]
+          // .map((e) => SliverToBoxAdapter(child: e,)).toList()
+          ,
+        ));
   }
 
   Widget _buildDropdownButton() {
@@ -239,12 +237,14 @@ class _EnhanceTabBarDemoState extends State<EnhanceTabBarDemo> with SingleTicker
 
     return DropdownButton<EnhanceTabBarIndicatorSize>(
       value: dropValue,
-      items: indicatorSizes.map((e) => DropdownMenuItem(
-        value: e,
-        child: Center(
-          child: Text(e.toString().split(".").last)
-        ),
-      ),).toList(),
+      items: indicatorSizes
+          .map(
+            (e) => DropdownMenuItem(
+              value: e,
+              child: Center(child: Text(e.toString().split(".").last)),
+            ),
+          )
+          .toList(),
       onChanged: (value) {
         if (value == null) {
           return;

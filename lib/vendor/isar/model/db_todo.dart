@@ -1,5 +1,3 @@
-
-
 import 'package:isar/isar.dart';
 part 'db_todo.g.dart';
 
@@ -20,7 +18,6 @@ class DBTodo {
   String? createdDate;
   String? updatedDate;
 
-
   static DBTodo? fromJson(Map<String, dynamic>? map) {
     if (map == null) {
       return null;
@@ -33,7 +30,7 @@ class DBTodo {
     );
   }
 
-  Map<String, dynamic>toJson() {
+  Map<String, dynamic> toJson() {
     return {
       "id": id,
       "title": title,
@@ -42,9 +39,7 @@ class DBTodo {
       "updatedDate": updatedDate,
     };
   }
-
 }
-
 
 class DBBaseModel {
   DBBaseModel({
@@ -52,5 +47,4 @@ class DBBaseModel {
   });
 
   Id id;
-
 }

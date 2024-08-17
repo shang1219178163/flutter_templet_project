@@ -22,19 +22,44 @@ class NPinnedTabBarPageDemo extends StatefulWidget {
 
 class _NPinnedTabBarPageDemoState extends State<NPinnedTabBarPageDemo>
     with SingleTickerProviderStateMixin {
-
   bool get hideApp =>
       Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
 
   late final List<({Tab tab, Widget child})> tabItems = [
-    (tab: Tab(text: "选项卡0",), child: buildList(tabIndex: 1)),
-    (tab: Tab(text: "选项卡1",), child: buildList(tabIndex: 2)),
-    (tab: Tab(text: "选项卡2",), child: buildList(tabIndex: 3)),
-    (tab: Tab(text: "选项卡3",), child: buildList(tabIndex: 4)),
-    (tab: Tab(text: "选项卡4",), child: buildList(tabIndex: 5)),
+    (
+      tab: Tab(
+        text: "选项卡0",
+      ),
+      child: buildList(tabIndex: 1)
+    ),
+    (
+      tab: Tab(
+        text: "选项卡1",
+      ),
+      child: buildList(tabIndex: 2)
+    ),
+    (
+      tab: Tab(
+        text: "选项卡2",
+      ),
+      child: buildList(tabIndex: 3)
+    ),
+    (
+      tab: Tab(
+        text: "选项卡3",
+      ),
+      child: buildList(tabIndex: 4)
+    ),
+    (
+      tab: Tab(
+        text: "选项卡4",
+      ),
+      child: buildList(tabIndex: 5)
+    ),
   ];
 
-  late final tabController = TabController(length: tabItems.length, vsync: this);
+  late final tabController =
+      TabController(length: tabItems.length, vsync: this);
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +120,6 @@ class _NPinnedTabBarPageDemoState extends State<NPinnedTabBarPageDemo>
         length: tabItems.length,
         child: NestedScrollView(
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-
             final top = mediaQuery.viewPadding.top + kToolbarHeight;
             return <Widget>[
               SliverAppBar(
@@ -106,7 +130,9 @@ class _NPinnedTabBarPageDemoState extends State<NPinnedTabBarPageDemo>
                 actions: actions,
                 flexibleSpace: FlexibleSpaceBar(
                   background: Container(
-                    padding: EdgeInsets.only(top: top,),
+                    padding: EdgeInsets.only(
+                      top: top,
+                    ),
                     // decoration: BoxDecoration(
                     //   color: Colors.green,
                     //   border: Border.all(color: Colors.blue),
@@ -118,7 +144,6 @@ class _NPinnedTabBarPageDemoState extends State<NPinnedTabBarPageDemo>
               NSliverPersistentHeaderBuilder(
                 pinned: true,
                 builder: (context, offset, overlapsContent) {
-
                   final tabBar = TabBar(
                     controller: tabController,
                     // labelColor: Colors.black87,
@@ -155,17 +180,14 @@ class _NPinnedTabBarPageDemoState extends State<NPinnedTabBarPageDemo>
           },
           body: TabBarView(
             controller: tabController,
-            children: tabItems.map((e){
-
+            children: tabItems.map((e) {
               return MediaQuery.removePadding(
                 context: context,
                 removeTop: true,
-                child: Builder(
-                  builder: (context) {
-                    return e.child;
-                    return buildList(tabIndex: tabController.index);
-                  }
-                ),
+                child: Builder(builder: (context) {
+                  return e.child;
+                  return buildList(tabIndex: tabController.index);
+                }),
               );
             }).toList(),
           ),
@@ -179,14 +201,14 @@ class _NPinnedTabBarPageDemoState extends State<NPinnedTabBarPageDemo>
       return NRefreshViewDemo();
     }
     return ListView.builder(
-      itemBuilder: (context, index){
+      itemBuilder: (context, index) {
         return buildCell(index: index);
       },
       itemCount: 20,
     );
   }
 
-  Widget buildCell({required int index}){
+  Widget buildCell({required int index}) {
     return Container(
       decoration: BoxDecoration(
         color: Colors.transparent,
@@ -197,6 +219,4 @@ class _NPinnedTabBarPageDemoState extends State<NPinnedTabBarPageDemo>
       ),
     );
   }
-
-
 }

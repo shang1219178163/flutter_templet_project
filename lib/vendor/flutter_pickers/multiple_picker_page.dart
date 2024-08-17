@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_pickers/pickers.dart';
 import 'package:flutter_pickers/style/default_style.dart';
@@ -81,7 +80,10 @@ class _MultiplePickerPageState extends State<MultiplePickerPage> {
             title: Text(title),
             onTap: () => _onClickItem(),
             trailing: Row(mainAxisSize: MainAxisSize.min, children: <Widget>[
-              NText('$hourse时 $minute分', color: Colors.grey,),
+              NText(
+                '$hourse时 $minute分',
+                color: Colors.grey,
+              ),
               rightIcon
             ]),
           ),
@@ -100,7 +102,10 @@ class _MultiplePickerPageState extends State<MultiplePickerPage> {
             title: Text(title),
             onTap: () => _onClickItem2(),
             trailing: Row(mainAxisSize: MainAxisSize.min, children: <Widget>[
-              NText(listTime.toString(), color: Colors.grey,),
+              NText(
+                listTime.toString(),
+                color: Colors.grey,
+              ),
               rightIcon
             ]),
           ),
@@ -119,7 +124,10 @@ class _MultiplePickerPageState extends State<MultiplePickerPage> {
             title: Text(title),
             onTap: () => _onClickItem3(),
             trailing: Row(mainAxisSize: MainAxisSize.min, children: <Widget>[
-              NText(listTime.toString(), color: Colors.grey, ),
+              NText(
+                listTime.toString(),
+                color: Colors.grey,
+              ),
               rightIcon
             ]),
           ),
@@ -138,8 +146,10 @@ class _MultiplePickerPageState extends State<MultiplePickerPage> {
             title: Text(title),
             onTap: () => _onClickItem4(),
             trailing: Row(mainAxisSize: MainAxisSize.min, children: <Widget>[
-              NText(timeData2Select.toString(),
-                  color: Colors.grey,),
+              NText(
+                timeData2Select.toString(),
+                color: Colors.grey,
+              ),
               rightIcon
             ]),
           ),

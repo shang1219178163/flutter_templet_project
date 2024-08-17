@@ -10,12 +10,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 
 class LocalImagePage extends StatelessWidget {
-
   final String? title;
 
   LocalImagePage({
-  	Key? key,
-  	this.title,
+    Key? key,
+    this.title,
   }) : super(key: key);
 
   @override
@@ -38,24 +37,21 @@ class LocalImagePage extends StatelessWidget {
       crossAxisSpacing: 8,
       mainAxisSpacing: 8,
       childAspectRatio: 4 / 3,
-      children: imageNames.map((e) => GridTile(
-        footer: Container(
-          color: Colors.green,
-          height: 25,
-          child: Center(
-            child: FittedBox(
-              fit: BoxFit.fitWidth,
-              child: Text(e)
-            ),
-          )
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image(image: e.toAssetImage(), fit: BoxFit.contain),
-          ]
-        ),
-      )).toList(),
+      children: imageNames
+          .map((e) => GridTile(
+                footer: Container(
+                    color: Colors.green,
+                    height: 25,
+                    child: Center(
+                      child: FittedBox(fit: BoxFit.fitWidth, child: Text(e)),
+                    )),
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image(image: e.toAssetImage(), fit: BoxFit.contain),
+                    ]),
+              ))
+          .toList(),
     );
   }
 
@@ -85,6 +81,3 @@ class LocalImagePage extends StatelessWidget {
   //   Image.asset(" img_upload_placeholder.png", fit: BoxFit.fill),
   // ];
 }
-
-
-

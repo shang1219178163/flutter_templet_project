@@ -1,10 +1,8 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/regexp_ext.dart';
 
 class RegExpDemo extends StatefulWidget {
-
-  const RegExpDemo({ Key? key, this.title}) : super(key: key);
+  const RegExpDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -13,8 +11,6 @@ class RegExpDemo extends StatefulWidget {
 }
 
 class _RegExpDemoState extends State<RegExpDemo> {
-
-
   @override
   void initState() {
     super.initState();
@@ -22,18 +18,22 @@ class _RegExpDemoState extends State<RegExpDemo> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title ?? "$widget"),
-          actions: ['done',].map((e) => TextButton(
-            onPressed: onPressed,
-            child: Text(e,
-              style: TextStyle(color: Colors.white),
-            ),)
-          ).toList(),
-        ),
-        body: _buildBody(),
+      appBar: AppBar(
+        title: Text(widget.title ?? "$widget"),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  onPressed: onPressed,
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ))
+            .toList(),
+      ),
+      body: _buildBody(),
     );
   }
 
@@ -43,16 +43,19 @@ class _RegExpDemoState extends State<RegExpDemo> {
     return CustomScrollView(
       slivers: [
         Text(arguments.toString()),
-        
-      ].map((e) => SliverToBoxAdapter(child: e,)).toList(),
+      ]
+          .map((e) => SliverToBoxAdapter(
+                child: e,
+              ))
+          .toList(),
     );
   }
 
-  onPressed(){
+  onPressed() {
     testRegExpMatch();
   }
 
-  testRegExpMatch(){
+  testRegExpMatch() {
     const str = "streetAddressLine2";
     final reg = RegExp('[A-Z]');
     final matchs = reg.allMatches(str);
@@ -65,12 +68,9 @@ class _RegExpDemoState extends State<RegExpDemo> {
 
     debugPrint("allMatchesOfString: ${reg.allMatchesOfString(str)}");
   }
-
 }
 
-
-extension MatchExt on Match{
-
+extension MatchExt on Match {
   String get description {
     return """
       start ${start}

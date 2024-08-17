@@ -15,21 +15,21 @@ class _BoxShadowDemoOneState extends State<BoxShadowDemoOne> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title ?? "$widget"),
-          actions: [
-            'done',
-          ]
-              .map((e) => TextButton(
-                    child: Text(
-                      e,
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    onPressed: () => debugPrint(e),
-                  ))
-              .toList(),
-        ),
-        body: buildBody(),
+      appBar: AppBar(
+        title: Text(widget.title ?? "$widget"),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () => debugPrint(e),
+                ))
+            .toList(),
+      ),
+      body: buildBody(),
     );
   }
 
@@ -44,13 +44,17 @@ class _BoxShadowDemoOneState extends State<BoxShadowDemoOne> {
               height: 60,
               child: NText("内外阴影"),
             ),
-            SizedBox(height: 10,),
+            SizedBox(
+              height: 10,
+            ),
             buildShadow(
               width: 100,
               height: 100,
               child: NText("内外阴影"),
             ),
-            SizedBox(height: 10,),
+            SizedBox(
+              height: 10,
+            ),
             buildShadow(
               width: 100,
               height: 50,

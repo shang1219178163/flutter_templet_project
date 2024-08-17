@@ -4,7 +4,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class CustomSwitch extends StatefulWidget {
-
   /// Public properties, set on constructor
   final bool value;
   final double height;
@@ -28,28 +27,25 @@ class CustomSwitch extends StatefulWidget {
   late final Text _inactiveTextWidget;
   late final double _spaceRequiredForText;
 
-  CustomSwitch(
-      {Key? key,
-        required this.value,
-        required this.onChanged,
-        this.height = 35,
-        this.fontSize = 16,
-        this.activeColor = Colors.blue,
-        this.inactiveColor = Colors.grey,
-        this.activeText = 'On',
-        this.inactiveText = 'Off',
-        this.activeTextColor = Colors.white,
-        this.inactiveTextColor = Colors.white,
-        this.activeThumbColor = Colors.white,
-        this.inactiveThumbColor = Colors.white,
-        this.activeTooltip = "",
-        this.inactiveTooltip = "",
-        this.activeThumbIcon,
-        this.inactiveThumbIcon,
-
-      })
-      : super(key: key) {
-
+  CustomSwitch({
+    Key? key,
+    required this.value,
+    required this.onChanged,
+    this.height = 35,
+    this.fontSize = 16,
+    this.activeColor = Colors.blue,
+    this.inactiveColor = Colors.grey,
+    this.activeText = 'On',
+    this.inactiveText = 'Off',
+    this.activeTextColor = Colors.white,
+    this.inactiveTextColor = Colors.white,
+    this.activeThumbColor = Colors.white,
+    this.inactiveThumbColor = Colors.white,
+    this.activeTooltip = "",
+    this.inactiveTooltip = "",
+    this.activeThumbIcon,
+    this.inactiveThumbIcon,
+  }) : super(key: key) {
     /// Create the text widgets so that we can use their size to determine widget
     /// width.
     _activeTextWidget = Text(
@@ -69,10 +65,8 @@ class CustomSwitch extends StatefulWidget {
     );
 
     // Get size required for text. Max size of the above
-    _spaceRequiredForText = max(
-        _textSize(_activeTextWidget).width,
-        _textSize(_inactiveTextWidget).width
-    );
+    _spaceRequiredForText = max(_textSize(_activeTextWidget).width,
+        _textSize(_inactiveTextWidget).width);
   }
 
   @override
@@ -81,7 +75,9 @@ class CustomSwitch extends StatefulWidget {
   Size _textSize(Text text) {
     /// Method to get size of text widget
     final TextPainter textPainter = TextPainter(
-        text: TextSpan(text: text.data, style: text.style), maxLines: 1, textDirection: TextDirection.ltr)
+        text: TextSpan(text: text.data, style: text.style),
+        maxLines: 1,
+        textDirection: TextDirection.ltr)
       ..layout(minWidth: 0, maxWidth: double.infinity);
     return textPainter.size;
   }
@@ -98,10 +94,10 @@ class _CustomSwitchState extends State<CustomSwitch>
     _animationController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 60));
     _circleAnimation = AlignmentTween(
-        begin: widget.value ? Alignment.centerRight : Alignment.centerLeft,
-        end: widget.value ? Alignment.centerLeft : Alignment.centerRight)
+            begin: widget.value ? Alignment.centerRight : Alignment.centerLeft,
+            end: widget.value ? Alignment.centerLeft : Alignment.centerRight)
         .animate(CurvedAnimation(
-        parent: _animationController, curve: Curves.linear));
+            parent: _animationController, curve: Curves.linear));
   }
 
   @override
@@ -119,56 +115,62 @@ class _CustomSwitchState extends State<CustomSwitch>
               widget.onChanged(!widget.value);
             },
             child: Tooltip(
-              message: widget.value ? widget.activeTooltip : widget.inactiveTooltip,
+              message:
+                  widget.value ? widget.activeTooltip : widget.inactiveTooltip,
               child: Container(
                 // text size + thumb size (widget height) + 3 lots of padding,
                 // both edges and padding between thumb and text
                 width: widget._spaceRequiredForText + widget.height + 12,
                 height: widget.height,
-                margin: const EdgeInsets.only(top: 4.0, bottom: 4.0, right: 4.0, left: 4.0),
+                margin: const EdgeInsets.only(
+                    top: 4.0, bottom: 4.0, right: 4.0, left: 4.0),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(50.0),
-                    color: widget.value ? widget.activeColor : widget.inactiveColor),
+                    color: widget.value
+                        ? widget.activeColor
+                        : widget.inactiveColor),
                 child: Padding(
                   padding: const EdgeInsets.only(
                       top: 4.0, bottom: 4.0, right: 4.0, left: 4.0),
                   child: Row(
-                    mainAxisAlignment: widget.value ? MainAxisAlignment.end : MainAxisAlignment.start,
+                    mainAxisAlignment: widget.value
+                        ? MainAxisAlignment.end
+                        : MainAxisAlignment.start,
                     children: [
-                      widget.value ? Padding(
-                        padding: const EdgeInsets.only(left: 4.0, right: 4.0),
-                        child: widget._activeTextWidget,
-                      ) : Container(),
+                      widget.value
+                          ? Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 4.0, right: 4.0),
+                              child: widget._activeTextWidget,
+                            )
+                          : Container(),
                       Align(
                         alignment: _circleAnimation.value,
                         child: Container(
                             alignment: Alignment.center,
                             width: widget.height - 8,
-                            height:widget.height - 8,
+                            height: widget.height - 8,
                             decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: widget.value
                                     ? widget.activeThumbColor
-                                    : widget.inactiveThumbColor
-                            ),
+                                    : widget.inactiveThumbColor),
                             child: widget.value
                                 ? widget.activeThumbIcon ?? Container()
-                                : widget.inactiveThumbIcon ?? Container()
-
-                        ),
+                                : widget.inactiveThumbIcon ?? Container()),
                       ),
                       !widget.value
                           ? Padding(
-                        padding: const EdgeInsets.only(left: 4.0, right: 5.0),
-                        child: widget._inactiveTextWidget,
-                      )
+                              padding:
+                                  const EdgeInsets.only(left: 4.0, right: 5.0),
+                              child: widget._inactiveTextWidget,
+                            )
                           : Container(),
                     ],
                   ),
                 ),
               ),
-            )
-        );
+            ));
       },
     );
   }

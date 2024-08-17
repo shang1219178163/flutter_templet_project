@@ -2,20 +2,18 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class DismissibleDemo extends StatefulWidget {
-
   final String? title;
 
-  const DismissibleDemo({ Key? key, this.title}) : super(key: key);
+  const DismissibleDemo({Key? key, this.title}) : super(key: key);
 
-  
   @override
   _DismissibleDemoState createState() => _DismissibleDemoState();
 }
 
 class _DismissibleDemoState extends State<DismissibleDemo> {
-
   final List<Map> _list = List<Map>.generate(
-    20,(i) => {'title': '标题$i', 'subTitle': '二级标题$i'},
+    20,
+    (i) => {'title': '标题$i', 'subTitle': '二级标题$i'},
   );
 
   @override
@@ -23,10 +21,10 @@ class _DismissibleDemoState extends State<DismissibleDemo> {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
 
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title ?? "$widget"),
-        ),
-        body: _buildBody(),
+      appBar: AppBar(
+        title: Text(widget.title ?? "$widget"),
+      ),
+      body: _buildBody(),
     );
   }
 

@@ -1,10 +1,7 @@
-
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_context_menu_region.dart';
 
-class NContextMenu extends StatelessWidget{
+class NContextMenu extends StatelessWidget {
   const NContextMenu({
     super.key,
     this.items = const [
@@ -22,7 +19,6 @@ class NContextMenu extends StatelessWidget{
 
   final Widget child;
 
-
   @override
   Widget build(BuildContext context) {
     return NContextMenuRegion(
@@ -31,17 +27,17 @@ class NContextMenu extends StatelessWidget{
             anchors: TextSelectionToolbarAnchors(
               primaryAnchor: offset,
             ),
-            buttonItems: items.map((e) => ContextMenuButtonItem(
-              onPressed: () {
-                onItem(e);
-                ContextMenuController.removeAny();
-              },
-              label: e,
-            )).toList()
-        );
+            buttonItems: items
+                .map((e) => ContextMenuButtonItem(
+                      onPressed: () {
+                        onItem(e);
+                        ContextMenuController.removeAny();
+                      },
+                      label: e,
+                    ))
+                .toList());
       },
       child: child,
     );
   }
-
 }

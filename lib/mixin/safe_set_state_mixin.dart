@@ -10,7 +10,6 @@ import 'package:flutter/material.dart';
 
 /// 重写方法,避免页面退出之后方法 调用导致的问题
 mixin SafeSetStateMixin<T extends StatefulWidget> on State<T> {
-
   /// 重写方法,避免页面退出之后调用导致的问题
   @override
   void setState(VoidCallback fn) {
@@ -19,5 +18,4 @@ mixin SafeSetStateMixin<T extends StatefulWidget> on State<T> {
     }
     super.setState(fn);
   }
-
 }

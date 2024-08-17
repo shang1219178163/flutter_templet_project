@@ -23,28 +23,24 @@ import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/util/R.dart';
 
 class BoxDemo extends StatefulWidget {
-
   final String? title;
 
-  const BoxDemo({ Key? key, this.title}) : super(key: key);
-
+  const BoxDemo({Key? key, this.title}) : super(key: key);
 
   @override
   _BoxDemoState createState() => _BoxDemoState();
 }
 
 class _BoxDemoState extends State<BoxDemo> {
-
-
   @override
   Widget build(BuildContext context) {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
 
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title ?? "$widget"),
-        ),
-        body: buildBody(),
+      appBar: AppBar(
+        title: Text(widget.title ?? "$widget"),
+      ),
+      body: buildBody(),
     );
   }
 
@@ -89,13 +85,11 @@ class _BoxDemoState extends State<BoxDemo> {
               title: "buildAvatarBage",
               child: buildAvatarBage(),
             ),
-
           ],
         ),
       ),
     );
   }
-
 
   Widget buildSizedBox() {
     return Container(
@@ -126,9 +120,9 @@ class _BoxDemoState extends State<BoxDemo> {
   Widget buildConstrainedBox() {
     return ConstrainedBox(
       constraints: BoxConstraints(
-        minWidth: double.infinity, //宽度尽可能大
-        minHeight: 50.0 //最小高度为50像素
-      ),
+          minWidth: double.infinity, //宽度尽可能大
+          minHeight: 50.0 //最小高度为50像素
+          ),
       child: Container(
         // height: 5.0,
         alignment: Alignment.center,
@@ -148,30 +142,30 @@ class _BoxDemoState extends State<BoxDemo> {
       child: FittedBox(
         fit: BoxFit.contain,
         // child: Image.network('https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg'),
-        child: Image.asset('bg.png'.toPath(),
+        child: Image.asset(
+          'bg.png'.toPath(),
           fit: BoxFit.cover,
         ),
       ),
     );
   }
-  
+
   /// UnconstrainedBox会消除上层组件的约束，也就意味着UnconstrainedBox 的子组件将不再受到约束，大小完全取决于自己。
   Widget buildUnconstrainedBox() {
     return Container(
-      child: ConstrainedBox(
-        constraints: BoxConstraints(minWidth: 200.0, minHeight: 100.0),  //父
-        child: UnconstrainedBox( //“去除”父级限制
-          child: ConstrainedBox(
-            constraints: BoxConstraints(minWidth: 90.0, minHeight: 30.0),//子
-            child: DecoratedBox(
-              decoration: BoxDecoration(color: Colors.red),
-            ),
-          ),
-        )
-      )
-    );
+        child: ConstrainedBox(
+            constraints: BoxConstraints(minWidth: 200.0, minHeight: 100.0), //父
+            child: UnconstrainedBox(
+              //“去除”父级限制
+              child: ConstrainedBox(
+                constraints:
+                    BoxConstraints(minWidth: 90.0, minHeight: 30.0), //子
+                child: DecoratedBox(
+                  decoration: BoxDecoration(color: Colors.red),
+                ),
+              ),
+            )));
   }
-
 
   Widget buildOverflowBox({
     double width = 70.0,
@@ -228,7 +222,7 @@ class _BoxDemoState extends State<BoxDemo> {
             // width: size,
             height: size,
             constraints: BoxConstraints(
-              minWidth: size + padding.horizontal*2,
+              minWidth: size + padding.horizontal * 2,
             ),
             padding: padding,
             alignment: Alignment.center,
@@ -236,7 +230,8 @@ class _BoxDemoState extends State<BoxDemo> {
               color: Colors.red,
               shape: badgeStr.length <= 2 ? CircleBorder() : StadiumBorder(),
             ),
-            child: Text(badgeStr,
+            child: Text(
+              badgeStr,
               style: TextStyle(
                 fontSize: 12,
                 color: Colors.white,
@@ -248,7 +243,7 @@ class _BoxDemoState extends State<BoxDemo> {
     );
 
     return InkWell(
-      onTap: (){
+      onTap: () {
         badge = badge < 999 ? badge * 10 : 9;
         ddlog("badge: $badge");
         badgeStr = badge > 99 ? "$badge+" : "$badge";
@@ -261,7 +256,7 @@ class _BoxDemoState extends State<BoxDemo> {
 
   Widget buildAvatarBage() {
     return InkWell(
-      onTap: (){
+      onTap: () {
         badge = badge < 999 ? badge * 10 : 9;
         ddlog("badge: $badge");
         badgeStr = badge > 99 ? "$badge+" : "$badge";
@@ -274,7 +269,4 @@ class _BoxDemoState extends State<BoxDemo> {
       ),
     );
   }
-
 }
-
-

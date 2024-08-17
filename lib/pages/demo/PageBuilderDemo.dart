@@ -1,13 +1,7 @@
-
-
 import 'package:flutter/material.dart';
 
 class PageBuilderDemo extends StatefulWidget {
-
-  PageBuilderDemo({
-    Key? key,
-    this.title
-  }) : super(key: key);
+  PageBuilderDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -16,7 +10,6 @@ class PageBuilderDemo extends StatefulWidget {
 }
 
 class _PageBuilderDemoState extends State<PageBuilderDemo> {
-
   final items = [
     "OpenUpwardsPageTransitionsBuilder",
     "ZoomPageTransitionsBuilder",
@@ -24,23 +17,25 @@ class _PageBuilderDemoState extends State<PageBuilderDemo> {
     "FadeUpwardsPageTransitionsBuilder",
   ];
 
-
   @override
   Widget build(BuildContext context) {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () => debugPrint(e),)
-        ).toList(),
-      ),
-      body: Text(arguments.toString())
-    );
+        appBar: AppBar(
+          title: Text(widget.title ?? "$widget"),
+          actions: [
+            'done',
+          ]
+              .map((e) => TextButton(
+                    child: Text(
+                      e,
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onPressed: () => debugPrint(e),
+                  ))
+              .toList(),
+        ),
+        body: Text(arguments.toString()));
   }
-
 }

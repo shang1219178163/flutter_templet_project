@@ -13,7 +13,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 
-
 enum NLineSegmentStyle {
   top,
   bottom,
@@ -21,9 +20,8 @@ enum NLineSegmentStyle {
 
 ///线条指示器分段组件
 class NLineSegmentView<T> extends StatefulWidget {
-  
   final Map<T, Widget> children;
-  
+
   T? groupValue;
 
   final EdgeInsetsGeometry padding;
@@ -56,21 +54,19 @@ class NLineSegmentView<T> extends StatefulWidget {
     this.margin = const EdgeInsets.symmetric(horizontal: 15),
     this.radius = const Radius.circular(4),
     required this.onValueChanged,
-
   }) : super(key: key);
-
 
   @override
   _NLineSegmentViewState createState() => _NLineSegmentViewState();
 }
 
 class _NLineSegmentViewState extends State<NLineSegmentView> {
-
   @override
   Widget build(BuildContext context) {
     var screenWidth = MediaQuery.of(context).size.width;
 
-    var contentWidth = screenWidth - widget.margin.horizontal - widget.padding.horizontal;
+    var contentWidth =
+        screenWidth - widget.margin.horizontal - widget.padding.horizontal;
     var itemWidth = contentWidth / widget.children.values.length;
 
     return Container(
@@ -83,32 +79,41 @@ class _NLineSegmentViewState extends State<NLineSegmentView> {
       child: Stack(
         children: [
           Row(
-            children: widget.children.values.map((e) => Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Container(
-                  height: widget.height,
-                  width: itemWidth,
-                  child: TextButton(
-                    onPressed: (){
-                      // ddlog(e);
-                      setState(() {
-                        widget.groupValue = widget.children.values.toList().indexOf(e);
-                      });
-                      widget.onValueChanged(widget.groupValue);
-                    },
-                    child: e,
+            children: widget.children.values
+                .map(
+                  (e) => Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Container(
+                        height: widget.height,
+                        width: itemWidth,
+                        child: TextButton(
+                          onPressed: () {
+                            // ddlog(e);
+                            setState(() {
+                              widget.groupValue =
+                                  widget.children.values.toList().indexOf(e);
+                            });
+                            widget.onValueChanged(widget.groupValue);
+                          },
+                          child: e,
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-              ],
-            ),
-            ).toList(),
+                )
+                .toList(),
           ),
           AnimatedPositioned(
             duration: Duration(milliseconds: 200),
-            top: widget.style == NLineSegmentStyle.top ? 0 : widget.height - widget.lineHeight,
-            left: widget.lineWidth != null ? widget.groupValue*itemWidth + (itemWidth - widget.lineWidth!)*0.5 : widget.groupValue*itemWidth,
+            top: widget.style == NLineSegmentStyle.top
+                ? 0
+                : widget.height - widget.lineHeight,
+            left: widget.lineWidth != null
+                ? widget.groupValue * itemWidth +
+                    (itemWidth - widget.lineWidth!) * 0.5
+                : widget.groupValue * itemWidth,
             child: Container(
               height: widget.lineHeight,
               width: widget.lineWidth ?? itemWidth,

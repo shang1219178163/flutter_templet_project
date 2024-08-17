@@ -1,13 +1,10 @@
-
-
-
 import 'package:flutter/cupertino.dart';
 
-typedef NSingleTickerStatefulWidgetBuilder<T> = Widget Function(BuildContext context, StateSetter setState, T value);
+typedef NSingleTickerStatefulWidgetBuilder<T> = Widget Function(
+    BuildContext context, StateSetter setState, T value);
 
 /// 混入 SingleTickerProviderStateMixin 的 StatefulBuilder
 class NSingleTickerStatefulBuilder<T> extends StatefulWidget {
-
   const NSingleTickerStatefulBuilder({
     super.key,
     this.initFunc,
@@ -19,11 +16,13 @@ class NSingleTickerStatefulBuilder<T> extends StatefulWidget {
   final T Function()? initFunc;
 
   @override
-  _NSingleTickerStatefulBuilderState createState() => _NSingleTickerStatefulBuilderState<T>();
+  _NSingleTickerStatefulBuilderState createState() =>
+      _NSingleTickerStatefulBuilderState<T>();
 }
 
-class _NSingleTickerStatefulBuilderState<T> extends State<NSingleTickerStatefulBuilder> with SingleTickerProviderStateMixin {
-
+class _NSingleTickerStatefulBuilderState<T>
+    extends State<NSingleTickerStatefulBuilder>
+    with SingleTickerProviderStateMixin {
   late final _val = widget.initFunc?.call();
 
   @override

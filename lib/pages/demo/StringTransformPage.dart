@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
@@ -8,11 +6,7 @@ import 'package:tuple/tuple.dart';
 
 /// 字符串转换
 class StringTransformPage extends StatefulWidget {
-
-  StringTransformPage({
-    Key? key,
-    this.title
-  }) : super(key: key);
+  StringTransformPage({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -21,7 +15,6 @@ class StringTransformPage extends StatefulWidget {
 }
 
 class _StringTransformPageState extends State<StringTransformPage> {
-
   late final _editingController = TextEditingController();
 
   late final items = <Tuple2<String, VoidCallback>>[
@@ -32,17 +25,16 @@ class _StringTransformPageState extends State<StringTransformPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("字符串转换"),
-        // actions: ['done',].map((e) => TextButton(
-        //   child: Text(e,
-        //     style: TextStyle(color: Colors.white),
-        //   ),
-        //   onPressed: () => debugPrint(e),)
-        // ).toList(),
-      ),
-      body: buildBody()
-    );
+        appBar: AppBar(
+          title: Text("字符串转换"),
+          // actions: ['done',].map((e) => TextButton(
+          //   child: Text(e,
+          //     style: TextStyle(color: Colors.white),
+          //   ),
+          //   onPressed: () => debugPrint(e),)
+          // ).toList(),
+        ),
+        body: buildBody());
   }
 
   buildBody() {
@@ -58,7 +50,9 @@ class _StringTransformPageState extends State<StringTransformPage> {
               maxLines: 5,
             ),
           ),
-          SizedBox(height: 16,),
+          SizedBox(
+            height: 16,
+          ),
           Container(
             child: LayoutBuilder(builder: (context, constraints) {
               final spacing = 8.0;
@@ -68,10 +62,12 @@ class _StringTransformPageState extends State<StringTransformPage> {
                 spacing: spacing,
                 runSpacing: runSpacing,
                 // alignment: WrapAlignment.start,
-                children: items.map((e) => OutlinedButton(
-                  onPressed: e.item2,
-                  child: NText(e.item1),
-                )).toList(),
+                children: items
+                    .map((e) => OutlinedButton(
+                          onPressed: e.item2,
+                          child: NText(e.item1),
+                        ))
+                    .toList(),
               );
             }),
           ),
@@ -109,10 +105,10 @@ class _StringTransformPageState extends State<StringTransformPage> {
         ),
         counterText: '',
       ),
-      onChanged: (val) async{
+      onChanged: (val) async {
         // debugPrint("onChanged: $val");
       },
-      onSubmitted: (val){
+      onSubmitted: (val) {
         debugPrint("onSubmitted: $val");
       },
       onEditingComplete: () {
@@ -127,15 +123,13 @@ class _StringTransformPageState extends State<StringTransformPage> {
     );
   }
 
-
-  camelToUnderScoreCase(){
+  camelToUnderScoreCase() {
     final tmp = _editingController.text;
     _editingController.text = tmp.toUncamlCase("_");
   }
 
-  underScoreCaseToCamel(){
+  underScoreCaseToCamel() {
     final tmp = _editingController.text;
     _editingController.text = tmp.toCamlCase("_");
   }
-
 }

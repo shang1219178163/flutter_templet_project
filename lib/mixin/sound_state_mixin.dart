@@ -10,13 +10,9 @@ import 'package:flutter_templet_project/cache/asset_cache_service.dart';
 import 'package:logger/logger.dart' show Level, Logger;
 import 'package:permission_handler/permission_handler.dart';
 
-
 const theSource = AudioSource.microphone;
 
-
 mixin SoundStateMixin<T extends StatefulWidget> on State<T> {
-
-
   Codec _codec = Codec.aacMP4;
   String _mPath = 'tau_file.mp4';
   FlutterSoundPlayer? _mPlayer = FlutterSoundPlayer();
@@ -32,6 +28,7 @@ mixin SoundStateMixin<T extends StatefulWidget> on State<T> {
   bool get isStopped => _mPlayer!.isStopped;
 
   int recordingStartTimestamp = DateTime.now().millisecondsSinceEpoch;
+
   /// 语音秒数
   int soundDuration = 0;
 
@@ -80,7 +77,8 @@ mixin SoundStateMixin<T extends StatefulWidget> on State<T> {
     // var time = DateTime.now();
     // var timeStr = DateTimeExt.stringFromDate(date: time, format: DATE_FORMAT_INT);
     // String path = '${tempDir.path}/tmp_sound_${timeStr}${ext[_codec.index]}';
-    var path = '${tempDir.path}/tmp_sound_record${ext[_codec.index]}';//音频录制替换旧的
+    var path =
+        '${tempDir.path}/tmp_sound_record${ext[_codec.index]}'; //音频录制替换旧的
     var file = File(path);
     if (!file.existsSync()) {
       file.createSync();
@@ -109,11 +107,11 @@ mixin SoundStateMixin<T extends StatefulWidget> on State<T> {
     await session.configure(AudioSessionConfiguration(
       avAudioSessionCategory: AVAudioSessionCategory.playAndRecord,
       avAudioSessionCategoryOptions:
-      AVAudioSessionCategoryOptions.allowBluetooth |
-      AVAudioSessionCategoryOptions.defaultToSpeaker,
+          AVAudioSessionCategoryOptions.allowBluetooth |
+              AVAudioSessionCategoryOptions.defaultToSpeaker,
       avAudioSessionMode: AVAudioSessionMode.spokenAudio,
       avAudioSessionRouteSharingPolicy:
-      AVAudioSessionRouteSharingPolicy.defaultPolicy,
+          AVAudioSessionRouteSharingPolicy.defaultPolicy,
       avAudioSessionSetActiveOptions: AVAudioSessionSetActiveOptions.none,
       androidAudioAttributes: const AndroidAudioAttributes(
         contentType: AndroidAudioContentType.speech,
@@ -129,7 +127,9 @@ mixin SoundStateMixin<T extends StatefulWidget> on State<T> {
 
   // ----------------------  Here is the code for recording and playback -------
   /// 开始录音
-  soundStartRecord({String? toFile,}) async {
+  soundStartRecord({
+    String? toFile,
+  }) async {
     recordingStartTimestamp = DateTime.now().millisecondsSinceEpoch;
     return await _mRecorder!.startRecorder(
       toFile: toFile ?? _mPath,
@@ -137,15 +137,19 @@ mixin SoundStateMixin<T extends StatefulWidget> on State<T> {
       audioSource: theSource,
     );
   }
+
   /// 停止录音
   Future<String?> stopSoundRecorder() async {
-    soundDuration = (DateTime.now().millisecondsSinceEpoch - recordingStartTimestamp)~/1000;
+    soundDuration =
+        (DateTime.now().millisecondsSinceEpoch - recordingStartTimestamp) ~/
+            1000;
     debugPrint("soundDuration: $soundDuration");
     return _mRecorder!.stopRecorder();
   }
 
   /// 播放音频
-  Future<Duration?> playSound({String? fromURI, VoidCallback? whenFinished}) async {
+  Future<Duration?> playSound(
+      {String? fromURI, VoidCallback? whenFinished}) async {
     // assert(_mPlayerIsInited &&
     //     _mplaybackReady &&
     //     _mRecorder!.isStopped &&
@@ -154,10 +158,11 @@ mixin SoundStateMixin<T extends StatefulWidget> on State<T> {
     return _mPlayer!.startPlayer(
       fromURI: fromURI ?? _mPath,
       codec: kIsWeb ? Codec.opusWebM : Codec.aacADTS,
-      whenFinished: whenFinished ?? () async {
-        final playerState = await _mPlayer!.getPlayerState();
-        debugPrint("whenFinished playerState: $playerState");
-      },
+      whenFinished: whenFinished ??
+          () async {
+            final playerState = await _mPlayer!.getPlayerState();
+            debugPrint("whenFinished playerState: $playerState");
+          },
     );
   }
 
@@ -189,16 +194,16 @@ mixin SoundStateMixin<T extends StatefulWidget> on State<T> {
     if (!_mPlayerIsInited) {
       return null;
     }
-    debugPrint("isPlaying:${_mPlayer!.isPlaying}_isPaused:${_mPlayer!.isPaused}_isStopped:${_mPlayer!.isStopped}");
+    debugPrint(
+        "isPlaying:${_mPlayer!.isPlaying}_isPaused:${_mPlayer!.isPaused}_isStopped:${_mPlayer!.isStopped}");
     if (_mPlayer!.isStopped) {
-      await playSound(fromURI:fromURI, whenFinished: cb);
+      await playSound(fromURI: fromURI, whenFinished: cb);
       cb;
     } else {
       await stopSoundPlayer();
       cb;
     }
   }
-
 
 // @override
 // Widget build(BuildContext context) {

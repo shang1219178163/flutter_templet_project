@@ -125,14 +125,12 @@ class _TableEventsExampleState extends State<TableEventsExample> {
             onPageChanged: (focusedDay) {
               _focusedDay = focusedDay;
             },
-
           ),
           const SizedBox(height: 8.0),
           Expanded(
             child: ValueListenableBuilder<List<Event>>(
               valueListenable: _selectedEvents,
               builder: (context, value, _) {
-
                 return ListView.builder(
                   itemCount: value.length,
                   itemBuilder: (context, index) {

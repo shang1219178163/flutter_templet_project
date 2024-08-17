@@ -17,7 +17,6 @@ import 'package:get/get.dart';
 
 import 'package:flutter_templet_project/basicWidget/TextInputFormatter/int_clamp_text_input_formatter.dart';
 
-
 ///自定义数值增减 Stepper
 class NumberStepper extends StatefulWidget {
   NumberStepper({
@@ -37,38 +36,44 @@ class NumberStepper extends StatefulWidget {
     required this.onChanged,
   }) : super(key: key);
 
-
   ///最小值
   final int min;
+
   /// 最大值
   final int max;
+
   /// 步长
   final int step;
+
   /// 当前值
   final int value;
 
   /// icon 尺寸
   final double iconSize;
+
   /// 到达边界值是否继续
   final bool wraps;
+
   /// icon 颜色
   final Color color;
+
   /// 是否可以编辑
   final bool readOnly;
+
   /// 圆角
   final double radius;
+
   /// 字体样式
   final TextStyle? style;
+
   /// 回调
   final ValueChanged<int> onChanged;
-
 
   @override
   _NumberStepperState createState() => _NumberStepperState();
 }
 
 class _NumberStepperState extends State<NumberStepper> {
-
   // 控制器
   final _textController = TextEditingController();
   // 焦点
@@ -77,12 +82,12 @@ class _NumberStepperState extends State<NumberStepper> {
   // late int current = widget.value;
   late int _current = widget.value;
 
-  set current(val){
+  set current(val) {
     _current = val;
     _textController.text = "${_current}";
   }
 
-  int get current{
+  int get current {
     return _current;
   }
 
@@ -152,7 +157,7 @@ class _NumberStepperState extends State<NumberStepper> {
         ),
         Container(
           // margin: EdgeInsets.symmetric(horizontal: 4),
-          width: widget.max.toString().length*16*widget.iconSize/30,
+          width: widget.max.toString().length * 16 * widget.iconSize / 30,
           // width: widget.iconSize + 20,
           child: buildTexfield(),
         ),
@@ -196,10 +201,11 @@ class _NumberStepperState extends State<NumberStepper> {
       //   selectAll: false,
       //   //by default all are disabled 'false'
       // ),
-      style: widget.style ?? const TextStyle(
-        fontSize: 20,
-        fontWeight: FontWeight.w400,
-      ),
+      style: widget.style ??
+          const TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.w400,
+          ),
       decoration: InputDecoration(
         hintText: "",
         isCollapsed: true,
@@ -207,8 +213,8 @@ class _NumberStepperState extends State<NumberStepper> {
         border: InputBorder.none,
         filled: true,
         fillColor: Color(0xffEDEDED),
-      // labelText: "请输入内容",//输入框内无文字时提示内容，有内容时会自动浮在内容上方
-      // helperText: "随便输入文字或数字", //输入框底部辅助性说明文字
+        // labelText: "请输入内容",//输入框内无文字时提示内容，有内容时会自动浮在内容上方
+        // helperText: "随便输入文字或数字", //输入框底部辅助性说明文字
       ),
       inputFormatters: [
         FilteringTextInputFormatter.digitsOnly,
@@ -219,7 +225,8 @@ class _NumberStepperState extends State<NumberStepper> {
   }
 
   void go(int stepValue) {
-    if (stepValue < 0 && (current == widget.min || current + stepValue < widget.min)) {
+    if (stepValue < 0 &&
+        (current == widget.min || current + stepValue < widget.min)) {
       ddlog("it's minValue!");
       if (widget.wraps) {
         current = widget.max;
@@ -227,7 +234,8 @@ class _NumberStepperState extends State<NumberStepper> {
       widget.onChanged(current);
       return;
     }
-    if (stepValue > 0 && (current == widget.max || current + stepValue > widget.max)) {
+    if (stepValue > 0 &&
+        (current == widget.max || current + stepValue > widget.max)) {
       ddlog("it's maxValue!");
       if (widget.wraps) {
         current = widget.min;

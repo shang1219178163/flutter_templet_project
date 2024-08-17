@@ -1,15 +1,8 @@
-
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_header.dart';
 
 class OverlayPortalDemo extends StatefulWidget {
-
-  OverlayPortalDemo({
-    Key? key,
-    this.title
-  }) : super(key: key);
+  OverlayPortalDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -18,7 +11,6 @@ class OverlayPortalDemo extends StatefulWidget {
 }
 
 class _OverlayPortalDemoState extends State<OverlayPortalDemo> {
-
   final _scrollController = ScrollController();
 
   @override
@@ -26,12 +18,17 @@ class _OverlayPortalDemoState extends State<OverlayPortalDemo> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),
-          onPressed: () => debugPrint(e),)
-        ).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () => debugPrint(e),
+                ))
+            .toList(),
       ),
       body: buildBody(),
     );
@@ -57,7 +54,7 @@ class _OverlayPortalDemoState extends State<OverlayPortalDemo> {
 
   final _portalController = OverlayPortalController();
 
-  Widget buildOverlayPortal(){
+  Widget buildOverlayPortal() {
     return TextButton(
       onPressed: _portalController.toggle,
       child: DefaultTextStyle(
@@ -65,7 +62,6 @@ class _OverlayPortalDemoState extends State<OverlayPortalDemo> {
         child: OverlayPortal(
           controller: _portalController,
           overlayChildBuilder: (BuildContext context) {
-
             return Positioned(
               right: 30,
               bottom: 30,

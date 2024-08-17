@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 
 class RefreshIndicatorDemo extends StatefulWidget {
-
-  const RefreshIndicatorDemo({
-    Key? key, 
-    this.title
-  }) : super(key: key);
+  const RefreshIndicatorDemo({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
@@ -14,19 +10,22 @@ class RefreshIndicatorDemo extends StatefulWidget {
 }
 
 class _RefreshIndicatorDemoState extends State<RefreshIndicatorDemo> {
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: ['done',].map((e) => TextButton(
-          onPressed: () => debugPrint(e.toString()),
-          child: Text(e,
-            style: TextStyle(color: Colors.white),
-          ),)
-        ).toList(),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  onPressed: () => debugPrint(e.toString()),
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ))
+            .toList(),
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
@@ -57,7 +56,6 @@ class _RefreshIndicatorDemoState extends State<RefreshIndicatorDemo> {
       child: ListView.builder(
         itemCount: 25,
         itemBuilder: (BuildContext context, int index) {
-          
           return ListTile(
             title: Text('Item $index'),
           );
@@ -65,6 +63,4 @@ class _RefreshIndicatorDemoState extends State<RefreshIndicatorDemo> {
       ),
     );
   }
-
 }
-
