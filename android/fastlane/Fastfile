@@ -10,9 +10,9 @@ platform :android do
   PgyerApiKey = "*"
 
   # 生产包目录
-  ProductionDir  = "/Users/#{`whoami`}/Desktop/ipa_appStore".gsub("\n", "")
+  ProductionDir  = "/Users/#{`whoami`}/Desktop/app_appStore".gsub("\n", "")
     # 开发包目录
-  DevelopmentDir  = "/Users/#{`whoami`}/Desktop/ipa_development".gsub("\n", "")
+  DevelopmentDir  = "/Users/#{`whoami`}/Desktop/app_development".gsub("\n", "")
   
 
   ## Common
