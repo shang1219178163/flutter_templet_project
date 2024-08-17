@@ -146,3 +146,49 @@ class Company {
     return data;
   }
 }
+
+extension on UserModel {
+  UserModel copyWith({
+    String? id,
+    String? avatar,
+    String? name,
+    String? nickName,
+    String? jobTitle,
+    String? email,
+    AddressDetailModel? address,
+    String? phone,
+    String? website,
+    Company? company,
+  }) =>
+      UserModel(
+        id: id ?? this.id,
+        avatar: avatar ?? this.avatar,
+        name: name ?? this.name,
+        nickName: nickName ?? this.nickName,
+        jobTitle: jobTitle ?? this.jobTitle,
+        email: email ?? this.email,
+        address: address ?? this.address,
+        phone: phone ?? this.phone,
+        website: website ?? this.website,
+        company: company ?? this.company,
+      );
+
+  /// 合并
+  UserModel merge(UserModel? val) {
+    if (val == null) {
+      return this;
+    }
+    return copyWith(
+      id: val.id,
+      avatar: val.avatar,
+      name: val.name,
+      nickName: val.nickName,
+      jobTitle: val.jobTitle,
+      email: val.email,
+      address: val.address,
+      phone: val.phone,
+      website: val.website,
+      company: val.company,
+    );
+  }
+}

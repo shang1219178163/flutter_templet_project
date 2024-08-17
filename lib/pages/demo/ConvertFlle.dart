@@ -21,6 +21,7 @@ import 'package:flutter_templet_project/basicWidget/n_transform_view.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/mixin/create_file_mixin.dart';
 import 'package:flutter_templet_project/pages/demo/convert/ConvertProtocol.dart';
+import 'package:flutter_templet_project/pages/demo/convert/CopyWithConvert.dart';
 import 'package:flutter_templet_project/pages/demo/convert/PackageExportConvert.dart';
 import 'package:flutter_templet_project/pages/demo/convert/SizeFilterConvert.dart';
 import 'package:flutter_templet_project/pages/demo/convert/WidgetNameConvert.dart';
@@ -75,6 +76,7 @@ class _ConvertFlleState extends State<ConvertFlle> with CreateFileMixin {
     WidgetNameConvert(),
     PackageExportConvert(),
     SizeFilterConvert(),
+    CopyWithConvert(),
   ];
 
   late var current = convertTypes[convertTypeIndex];
