@@ -42,7 +42,7 @@ class _NNetworkOnLineState extends State<NNetworkOnLine> {
       valueListenable: widget.onLine ?? ConnectivityService().onLine,
       child: widget.cachedChild,
       builder: (context, value, child) {
-        debugPrint('ValueListenableBuilder: $value');
+        // debugPrint('ValueListenableBuilder: $value');
         if (!value) {
           return widget.offlineBuilder(context, child);
         }

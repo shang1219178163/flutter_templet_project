@@ -11,7 +11,7 @@ import 'package:flutter_templet_project/basicWidget/enhance/enhance_expansion/en
 import 'package:flutter_templet_project/extension/color_ext.dart';
 
 class NTree extends StatefulWidget {
-  NTree({
+  const NTree({
     Key? key,
     required this.list,
     this.color = Colors.black87,
@@ -20,16 +20,16 @@ class NTree extends StatefulWidget {
   }) : super(key: key);
 
   /// 数据源
-  List<NTreeNodeModel> list;
+  final List<NTreeNodeModel> list;
 
   /// 标题颜色
-  Color color;
+  final Color color;
 
   /// 文字颜色
-  Color iconColor;
+  final Color iconColor;
 
   /// 层级缩进
-  double indent;
+  final double indent;
 
   @override
   _NTreeState createState() => _NTreeState();

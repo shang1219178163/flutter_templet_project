@@ -9,7 +9,7 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_network/n_network_online.dart';
+import 'package:flutter_templet_project/basicWidget/n_network_online.dart';
 import 'package:flutter_templet_project/service/connectivity_service.dart';
 
 class NetStateListenerDemo extends StatefulWidget {
