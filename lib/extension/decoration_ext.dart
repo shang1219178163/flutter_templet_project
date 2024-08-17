@@ -26,7 +26,24 @@ const shadow3D = [
 /// 外观样式
 enum IndicatorStyle { topLine, bottomLine, box }
 
-extension on BoxDecoration {}
+extension BoxDecorationExt on BoxDecoration {
+  /// 合并
+  BoxDecoration merge(BoxDecoration? decoration) {
+    if (decoration == null) {
+      return this;
+    }
+    return copyWith(
+      color: decoration.color,
+      image: decoration.image,
+      border: decoration.border,
+      borderRadius: decoration.borderRadius,
+      boxShadow: decoration.boxShadow,
+      gradient: decoration.gradient,
+      backgroundBlendMode: decoration.backgroundBlendMode,
+      shape: decoration.shape,
+    );
+  }
+}
 
 extension BorderExt on Border {
   /// 扩展方法
