@@ -8,6 +8,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_alignment_drawer.dart';
+import 'package:flutter_templet_project/basicWidget/n_footer_button_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_pair.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/button_ext.dart';
@@ -44,8 +45,10 @@ class _BottomSheetDemoState extends State<BottomSheetDemo> {
 
   late var items = [
     ("默认样式", onShowModalBottomSheet),
-    ("GetSheet - showBottom", onGetBottom),
-    ("GetSheet - showInput", onGetBottomInput),
+    ("GetBottomSheet - showBottom", onGetBottom),
+    ("GetBottomSheet - showInput", onGetBottomInput),
+    ("GetDialog - showBottom", onGetDialog),
+    ("GetDialog - showInput", onGetDialogInput),
   ];
 
   final textController = TextEditingController();
@@ -69,7 +72,12 @@ class _BottomSheetDemoState extends State<BottomSheetDemo> {
         controller: _scrollController,
         child: Column(
           children: [
-            Text(textController.text),
+            ValueListenableBuilder(
+              valueListenable: textController,
+              builder: (context, value, child) {
+                return Text(textController.text);
+              },
+            ),
             Wrap(
               spacing: 8.0, // 主轴(水平)方向间距
               runSpacing: 8.0, // 纵轴（垂直）方向间距
@@ -261,6 +269,53 @@ class _BottomSheetDemoState extends State<BottomSheetDemo> {
       onConfirm: () {
         Navigator.of(context).pop();
         setState(() {});
+      },
+    );
+  }
+
+  void onGetDialog() {
+    GetDialog.showCustom(
+      header: Container(
+        height: 44,
+        decoration: BoxDecoration(
+          color: Colors.transparent,
+          border: Border(
+            bottom: BorderSide(width: .5, color: Color(0xffE5E5E5)),
+          ),
+        ),
+        child: NavigationToolbar(
+          middle: Text(
+            "onGetDialog",
+            style: TextStyle(fontWeight: FontWeight.w500),
+          ),
+        ),
+      ),
+      footer: NFooterButtonBar(
+        onCancel: () {
+          Navigator.of(context).pop();
+        },
+        onConfirm: () {
+          Navigator.of(context).maybePop();
+        },
+      ),
+      child: Wrap(
+        children: List.generate(
+            20,
+            (i) => ListTile(
+                  title: Text(i.toString()),
+                )),
+      ),
+    );
+  }
+
+  void onGetDialogInput() {
+    GetDialog.showInput(
+      controller: textController,
+      onCancel: () {
+        Navigator.of(context).pop();
+      },
+      onConfirm: () {
+        Navigator.of(context).pop();
       },
     );
   }

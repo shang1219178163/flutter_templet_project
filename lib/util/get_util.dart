@@ -1,12 +1,17 @@
 import 'dart:io';
 import 'dart:math';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_templet_project/basicWidget/n_footer_button_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/n_textfield.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
+import 'package:flutter_templet_project/extension/widget_ext.dart';
+import 'package:flutter_templet_project/pages/demo/FlexibleDemo.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:get/get.dart';
 import 'package:tuple/tuple.dart';
@@ -29,9 +34,9 @@ extension GetRouteUtil on GetInterface {
 class GetBottomSheet {
   /// 弹框 - 自定义child
   static void showCustom({
-    Widget? child,
     bool enableDrag = false,
-    bool needUnconstrainedBox = true,
+    bool addUnconstrainedBox = true,
+    required Widget child,
   }) {
     Widget content = Container(
       clipBehavior: Clip.hardEdge,
@@ -45,12 +50,16 @@ class GetBottomSheet {
       ),
       child: child,
     );
-    if (needUnconstrainedBox) {
+    if (addUnconstrainedBox) {
       content = UnconstrainedBox(
         child: content,
       );
     }
-    Get.bottomSheet(content, enableDrag: enableDrag, isScrollControlled: true);
+    Get.bottomSheet(
+      content,
+      enableDrag: enableDrag,
+      isScrollControlled: true,
+    );
   }
 
   /// 底部展示菜单
@@ -117,7 +126,116 @@ class GetBottomSheet {
   }
 }
 
-/// 底部弹窗
+class GetDialog {
+  /// 弹框 - 自定义child
+  static void showCustom({
+    bool enableDrag = false,
+    bool needUnconstrainedBox = false,
+    BoxConstraints? constraints,
+    BoxDecoration? decoration,
+    Widget? header,
+    Widget? footer,
+    required Widget child,
+  }) {
+    Widget content = Align(
+      alignment: Alignment.center,
+      child: Container(
+        clipBehavior: Clip.hardEdge,
+        margin: EdgeInsets.symmetric(horizontal: 30),
+        constraints:
+            constraints ?? BoxConstraints(maxHeight: 550, minHeight: 150),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.all(Radius.circular(12)),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            header ?? SizedBox(),
+            Flexible(
+              child: Scrollbar(
+                child: SingleChildScrollView(
+                  child: Container(
+                    clipBehavior: Clip.hardEdge,
+                    alignment: Alignment.center,
+                    decoration: decoration ??
+                        const BoxDecoration(
+                          color: white,
+                          borderRadius: BorderRadius.all(Radius.circular(12)),
+                        ),
+                    child: child,
+                  ),
+                ),
+              ),
+            ),
+            footer ?? SizedBox(),
+          ],
+        ),
+      ),
+    );
+    if (needUnconstrainedBox) {
+      content = UnconstrainedBox(
+        child: content,
+      );
+    }
+    Get.dialog(
+      content,
+      barrierDismissible: false,
+    );
+  }
+
+  /// 输入框弹窗
+  ///
+  /// controller 输入框控制器
+  /// lengthLimit 字数限制,默认 200
+  /// textFieldPadding textField边距
+  /// onCancel 取消回调
+  /// onConfirm 确定回调
+  /// header 输入框上面
+  /// middle 输入框下面
+  /// footer 取消和确定按钮下面
+  static void showInput({
+    BoxConstraints? constraints,
+    required TextEditingController controller,
+    String title = "编辑原因",
+    int lengthLimit = 200,
+    EdgeInsets textFieldPadding = const EdgeInsets.only(
+      top: 20,
+      left: 15,
+      right: 15,
+      bottom: 12,
+    ),
+    VoidCallback? onCancel,
+    required VoidCallback? onConfirm,
+    Widget? header,
+    Widget? middle,
+    Widget? footer,
+  }) {
+    final context = Get.context;
+    final primary = context?.primaryColor ?? Colors.transparent;
+
+    showCustom(
+      constraints: constraints,
+      enableDrag: false,
+      child: NBottomInputBox(
+        controller: controller,
+        title: title,
+        lengthLimit: 200,
+        textFieldPadding: textFieldPadding,
+        onCancel: onCancel,
+        onConfirm: onConfirm,
+        dragIndicator: SizedBox(),
+        header: header,
+        middle: middle,
+        footer: footer,
+      ),
+    );
+  }
+}
+
+/// 底部弹窗列表
 class NBottomSheet<T extends ({VoidCallback onTap, Widget child})>
     extends StatelessWidget {
   const NBottomSheet({
@@ -193,7 +311,7 @@ class NBottomSheet<T extends ({VoidCallback onTap, Widget child})>
   }
 }
 
-/// 带输入框
+/// 输入框带取消确认按钮
 class NBottomInputBox extends StatelessWidget {
   const NBottomInputBox({
     super.key,
@@ -204,6 +322,7 @@ class NBottomInputBox extends StatelessWidget {
         const EdgeInsets.only(top: 20, left: 15, right: 15, bottom: 12),
     this.onCancel,
     required this.onConfirm,
+    this.dragIndicator,
     this.header,
     this.middle,
     this.footer,
@@ -215,6 +334,7 @@ class NBottomInputBox extends StatelessWidget {
   final EdgeInsets textFieldPadding;
   final VoidCallback? onCancel;
   final VoidCallback? onConfirm;
+  final Widget? dragIndicator;
   final Widget? header;
   final Widget? middle;
   final Widget? footer;
@@ -223,30 +343,29 @@ class NBottomInputBox extends StatelessWidget {
   Widget build(BuildContext context) {
     final primary = Theme.of(context).primaryColor;
 
-    return Container(
-      width: double.infinity,
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-        color: white,
-        borderRadius: BorderRadius.circular(4),
-      ),
+    return ColoredBox(
+      color: white,
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
-          const SizedBox(height: 8),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                width: 40,
-                height: 3,
-                decoration: BoxDecoration(
-                  color: lineColor,
-                  borderRadius: BorderRadius.circular(2),
+          SizedBox(height: 8),
+          dragIndicator ??
+              Padding(
+                padding: const EdgeInsets.only(bottom: 13),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: 40,
+                      height: 3,
+                      decoration: BoxDecoration(
+                        color: lineColor,
+                        borderRadius: BorderRadius.circular(2),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ],
-          ),
-          const SizedBox(height: 13),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -285,73 +404,27 @@ class NBottomInputBox extends StatelessWidget {
             ),
           ),
           middle ?? const SizedBox(),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: Row(
-              children: [
-                Expanded(
-                  child: InkWell(
-                    onTap: onCancel ?? () => Get.back(),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: primary.withOpacity(0.08),
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(8),
-                        ),
-                      ),
-                      height: 44,
-                      alignment: Alignment.center,
-                      child: Text(
-                        '取消',
-                        style: TextStyle(
-                          color: primary,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 11),
-                Expanded(
-                  child: InkWell(
-                    onTap: onConfirm,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: primary,
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(8),
-                        ),
-                        gradient: LinearGradient(
-                          colors: [primary, primary],
-                        ),
-                        boxShadow: const [
-                          BoxShadow(
-                            offset: Offset(0, 5),
-                            blurRadius: 10,
-                            color: Color(0x52007DBF),
-                          )
-                        ],
-                      ),
-                      height: 44,
-                      alignment: Alignment.center,
-                      child: const Text(
-                        '提交',
-                        style: TextStyle(
-                          color: white,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+          NFooterButtonBar(
+            confirmTitle: "提交",
+            padding: EdgeInsets.only(
+              top: 0,
+              left: 16,
+              right: 16,
+              // bottom: max(12, MediaQuery.of(context).padding.bottom),
             ),
-          ),
+            decoration: const BoxDecoration(
+              color: Colors.white,
+              // border: Border(
+              //   top: BorderSide(width: 0.5, color: Color(0xffE5E5E5)),
+              // ),
+            ),
+            onCancel: onCancel,
+            onConfirm: onConfirm,
+          ).toColoredBox(),
           footer ?? const SizedBox(),
           SizedBox(
-            height: max(MediaQuery.of(context).padding.bottom, 12),
+            height: max(12, MediaQuery.of(context).padding.bottom),
           ),
-          // const SizedBox(
-          //   height: 12,
-          // ),
         ],
       ),
     );
