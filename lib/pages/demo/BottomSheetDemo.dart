@@ -204,36 +204,24 @@ class _BottomSheetDemoState extends State<BottomSheetDemo> {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         NPair<int>(
-          child: Text("Share"),
-          icon: Icon(
-            Icons.share,
-            color: Colors.blue,
-          ),
+          icon: Icon(Icons.share, color: Colors.blue),
           data: 0,
+          child: Text("Share"),
         ),
         NPair<int>(
-          child: Text("Get link"),
-          icon: Icon(
-            Icons.link,
-            color: Colors.blue,
-          ),
+          icon: Icon(Icons.link, color: Colors.blue),
           data: 1,
+          child: Text("Get link"),
         ),
         NPair<int>(
-          child: Text("Edit name"),
-          icon: Icon(
-            Icons.edit,
-            color: Colors.blue,
-          ),
+          icon: Icon(Icons.edit, color: Colors.blue),
           data: 2,
+          child: Text("Edit name"),
         ),
         NPair<int>(
-          child: Text('Delete collection'),
-          icon: Icon(
-            Icons.delete,
-            color: Colors.blue,
-          ),
+          icon: Icon(Icons.delete, color: Colors.blue),
           data: 3,
+          child: Text('Delete collection'),
         ),
       ].map((e) {
         return ListTile(
@@ -249,8 +237,20 @@ class _BottomSheetDemoState extends State<BottomSheetDemo> {
   void onGetBottom() {
     GetBottomSheet.showActions(
       actions: [
-        (onTap: () {}, child: NText('拍摄')),
-        (onTap: () {}, child: NText('从相册选择')),
+        (
+          onTap: () {
+            ddlog('拍摄');
+            Get.back();
+          },
+          child: NText('拍摄'),
+        ),
+        (
+          onTap: () {
+            ddlog('从相册选择');
+            Get.back();
+          },
+          child: NText('从相册选择'),
+        ),
       ],
     );
   }

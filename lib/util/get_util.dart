@@ -99,112 +99,11 @@ class GetBottomSheet {
       return;
     }
 
-    showCustom(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          ...actions
-              .map((e) => buildActionCell(
-                    onTap: e.onTap,
-                    hasDivider: actions.indexOf(e) != 0,
-                    child: e.child,
-                  ))
-              .toList(),
-          Container(height: 8, color: bgColor),
-          buildActionCancel(onTap: onCancel),
-          SizedBox(height: Platform.isIOS ? 34 : 8),
-        ],
+    GetBottomSheet.showCustom(
+      child: NBottomSheet(
+        actions: actions,
+        onCancel: onCancel,
       ),
-    );
-  }
-
-  /// 弹框 - bottomSheet类型
-  ///
-  /// actions 数据
-  /// onItem 回调参数
-  static void showActionTitles({
-    required List<String> actions,
-    required Function(int) onItem,
-  }) {
-    showCustom(
-      child: Column(
-        children: [
-          ...actions.map((e) {
-            final i = actions.indexOf(e);
-
-            return buildActionCell(
-              onTap: () => onItem(i),
-              child: NText(
-                e,
-                color: fontColor,
-              ),
-            );
-          }).toList(),
-          Container(height: 8, color: bgColor),
-          buildActionCell(
-            onTap: () => Get.back(),
-            child: const NText(
-              '取消',
-              color: fontColor,
-            ),
-          ),
-          SizedBox(height: Platform.isIOS ? 30 : 0),
-        ],
-      ),
-    );
-  }
-
-  /// 展示菜单子项
-  ///
-  /// hasDivider 是否显示分割线
-  /// onTap 点击回调
-  /// child 子组件
-  static Widget buildActionCell({
-    bool hasDivider = true,
-    required Widget child,
-    required VoidCallback? onTap,
-  }) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        if (hasDivider)
-          const Divider(
-            height: 1,
-          ),
-        InkWell(
-          onTap: onTap,
-          child: Container(
-            width: double.infinity,
-            alignment: Alignment.center,
-            // color: ColorExt.random,
-            padding: EdgeInsets.symmetric(vertical: 12.h),
-            child: child,
-          ),
-        ),
-      ],
-    );
-  }
-
-  /// 展示菜单取消项
-  ///
-  /// onTap 点击回调
-  /// child 自定义内容
-  static Widget buildActionCancel({
-    VoidCallback? onTap,
-    Widget? child,
-  }) {
-    return buildActionCell(
-      onTap: () {
-        if (onTap != null) {
-          onTap.call();
-        } else {
-          Get.back();
-        }
-      },
-      child: child ??
-          const NText(
-            '取消',
-          ),
     );
   }
 
@@ -238,145 +137,257 @@ class GetBottomSheet {
     final primary = context?.primaryColor ?? Colors.transparent;
 
     showCustom(
-      child: Container(
-        width: double.infinity,
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          color: white,
-          borderRadius: BorderRadius.circular(4),
+      child: NBottomInputBox(
+        controller: controller,
+        title: title,
+        lengthLimit: 200,
+        textFieldPadding: textFieldPadding,
+        onCancel: onCancel,
+        onConfirm: onConfirm,
+        header: header,
+        middle: middle,
+        footer: footer,
+      ),
+    );
+  }
+}
+
+/// 底部弹窗
+class NBottomSheet<T extends ({VoidCallback onTap, Widget child})>
+    extends StatelessWidget {
+  const NBottomSheet({
+    super.key,
+    required this.actions,
+    this.onCancel,
+  });
+
+  final List<T> actions;
+  final VoidCallback? onCancel;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        ...actions
+            .map((e) => buildActionCell(
+                  onTap: e.onTap,
+                  hasDivider: actions.indexOf(e) != 0,
+                  child: e.child,
+                ))
+            .toList(),
+        Container(height: 8, color: bgColor),
+        buildActionCancel(
+          onTap: onCancel ?? () => Navigator.of(context).maybePop(),
         ),
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 8,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+        SizedBox(height: Platform.isIOS ? 34 : 8),
+      ],
+    );
+  }
+
+  /// 展示菜单子项
+  ///
+  /// hasDivider 是否显示分割线
+  /// onTap 点击回调
+  /// child 子组件
+  Widget buildActionCell({
+    bool hasDivider = true,
+    required Widget child,
+    required VoidCallback? onTap,
+  }) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        if (hasDivider) const Divider(height: 0.5, color: lineColor),
+        InkWell(
+          onTap: onTap,
+          child: Container(
+            width: double.infinity,
+            alignment: Alignment.center,
+            // color: ColorExt.random,
+            padding: EdgeInsets.symmetric(vertical: 12),
+            child: child,
+          ),
+        ),
+      ],
+    );
+  }
+
+  /// 展示菜单取消项
+  ///
+  /// onTap 点击回调
+  /// child 自定义内容
+  Widget buildActionCancel({
+    required VoidCallback onTap,
+    Widget? child,
+  }) {
+    return buildActionCell(
+      onTap: onTap,
+      child: child ?? const NText('取消'),
+    );
+  }
+}
+
+/// 带输入框
+class NBottomInputBox extends StatelessWidget {
+  const NBottomInputBox({
+    super.key,
+    required this.controller,
+    this.title = "编辑原因",
+    this.lengthLimit = 200,
+    this.textFieldPadding =
+        const EdgeInsets.only(top: 20, left: 15, right: 15, bottom: 12),
+    this.onCancel,
+    required this.onConfirm,
+    this.header,
+    this.middle,
+    this.footer,
+  });
+
+  final TextEditingController controller;
+  final String title;
+  final int lengthLimit;
+  final EdgeInsets textFieldPadding;
+  final VoidCallback? onCancel;
+  final VoidCallback? onConfirm;
+  final Widget? header;
+  final Widget? middle;
+  final Widget? footer;
+
+  @override
+  Widget build(BuildContext context) {
+    final primary = Theme.of(context).primaryColor;
+
+    return Container(
+      width: double.infinity,
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        color: white,
+        borderRadius: BorderRadius.circular(4),
+      ),
+      child: Column(
+        children: [
+          const SizedBox(height: 8),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                width: 40,
+                height: 3,
+                decoration: BoxDecoration(
+                  color: lineColor,
+                  borderRadius: BorderRadius.circular(2),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 13),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                title,
+                style: TextStyle(
+                  color: fontColor,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                ),
+              )
+            ],
+          ),
+          header ?? const SizedBox(),
+          Container(
+            padding: textFieldPadding,
+            constraints: const BoxConstraints(minHeight: 82),
+            child: Column(
               children: [
-                Container(
-                  width: 40,
-                  height: 3,
-                  decoration: BoxDecoration(
-                    color: lineColor,
-                    borderRadius: BorderRadius.circular(2),
+                NTextField(
+                  controller: controller,
+                  hintText: '请输入...',
+                  hintStyle: TextStyle(fontSize: 14, color: fontColor),
+                  minLines: 5,
+                  maxLines: 10,
+                  autofocus: true,
+                  fillColor: Colors.white,
+                  radius: 8,
+                  inputFormatters: [
+                    LengthLimitingTextInputFormatter(lengthLimit),
+                  ],
+                  onChanged: (String value) {},
+                  onSubmitted: (String value) {},
+                ),
+              ],
+            ),
+          ),
+          middle ?? const SizedBox(),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: Row(
+              children: [
+                Expanded(
+                  child: InkWell(
+                    onTap: onCancel ?? () => Get.back(),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: primary.withOpacity(0.08),
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(8),
+                        ),
+                      ),
+                      height: 44,
+                      alignment: Alignment.center,
+                      child: Text(
+                        '取消',
+                        style: TextStyle(
+                          color: primary,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 11),
+                Expanded(
+                  child: InkWell(
+                    onTap: onConfirm,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: primary,
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(8),
+                        ),
+                        gradient: LinearGradient(
+                          colors: [primary, primary],
+                        ),
+                        boxShadow: const [
+                          BoxShadow(
+                            offset: Offset(0, 5),
+                            blurRadius: 10,
+                            color: Color(0x52007DBF),
+                          )
+                        ],
+                      ),
+                      height: 44,
+                      alignment: Alignment.center,
+                      child: const Text(
+                        '提交',
+                        style: TextStyle(
+                          color: white,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ],
             ),
-            const SizedBox(
-              height: 13,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  title,
-                  style: TextStyle(
-                    color: fontColor,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
-                  ),
-                )
-              ],
-            ),
-            header ?? const SizedBox(),
-            Container(
-              padding: textFieldPadding,
-              constraints: const BoxConstraints(minHeight: 82),
-              child: Column(
-                children: [
-                  NTextField(
-                    controller: controller,
-                    hintText: '请输入...',
-                    hintStyle: TextStyle(fontSize: 14, color: fontColor),
-                    minLines: 5,
-                    maxLines: 10,
-                    autofocus: true,
-                    fillColor: Colors.white,
-                    radius: 8,
-                    inputFormatters: [
-                      LengthLimitingTextInputFormatter(lengthLimit),
-                    ],
-                    onChanged: (String value) {},
-                    onSubmitted: (String value) {},
-                  ),
-                ],
-              ),
-            ),
-            middle ?? const SizedBox(),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: InkWell(
-                      onTap: onCancel ?? () => Get.back(),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: primary.withOpacity(0.08),
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(8),
-                          ),
-                        ),
-                        height: 44,
-                        alignment: Alignment.center,
-                        child: Text(
-                          '取消',
-                          style: TextStyle(
-                            color: primary,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 11,
-                  ),
-                  Expanded(
-                    child: InkWell(
-                      onTap: onConfirm,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: primary,
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(8),
-                          ),
-                          gradient: LinearGradient(
-                            colors: [primary, primary],
-                          ),
-                          boxShadow: const [
-                            BoxShadow(
-                              offset: Offset(0, 5),
-                              blurRadius: 10,
-                              color: Color(0x52007DBF),
-                            )
-                          ],
-                        ),
-                        height: 44,
-                        alignment: Alignment.center,
-                        child: const Text(
-                          '提交',
-                          style: TextStyle(
-                            color: white,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            footer ?? const SizedBox(),
-            SizedBox(
-              height: max(
-                  context == null ? 0 : MediaQuery.of(context).padding.bottom,
-                  12),
-            ),
-            // const SizedBox(
-            //   height: 12,
-            // ),
-          ],
-        ),
+          ),
+          footer ?? const SizedBox(),
+          SizedBox(
+            height: max(MediaQuery.of(context).padding.bottom, 12),
+          ),
+          // const SizedBox(
+          //   height: 12,
+          // ),
+        ],
       ),
     );
   }
