@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_templet_project/basicWidget/GradientBoundPainter.dart';
 import 'package:flutter_templet_project/basicWidget/after_layout_builder.dart';
+import 'package:flutter_templet_project/basicWidget/n_button.dart';
 import 'package:flutter_templet_project/basicWidget/n_dash_decoration.dart';
 import 'package:flutter_templet_project/basicWidget/n_painter_arc.dart';
 import 'package:flutter_templet_project/basicWidget/n_pair.dart';
@@ -44,6 +45,7 @@ class _SecondPageState extends State<SecondPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
         actions: [
@@ -94,6 +96,45 @@ class _SecondPageState extends State<SecondPage> {
         Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
+            NSectionHeader(
+              title: "NButton",
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Row(
+                    children: [
+                      NButton(
+                        onPressed: () {
+                          DLog.d("NButton");
+                        },
+                      ),
+                      NButton(
+                        enable: false,
+                        onPressed: () {},
+                      ),
+                      NButton(
+                        primary: Colors.red,
+                        onPressed: () {},
+                      ),
+                      ButtonOutline(
+                        primary: Colors.red,
+                        onPressed: () {},
+                      ),
+                      ButtonText(
+                        // primary: Colors.red,
+                        onPressed: () {},
+                      ),
+                    ]
+                        .map((e) => Expanded(
+                                child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: e,
+                            )))
+                        .toList(),
+                  ),
+                ],
+              ),
+            ),
             NSectionHeader(
               title: "MaterialState",
               child: buildBtnColor(),

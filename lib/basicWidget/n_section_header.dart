@@ -63,12 +63,7 @@ class NSectionHeader extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: EdgeInsets.only(
-            top: padding.top,
-            bottom: padding.bottom,
-            left: padding.left,
-            right: padding.right,
-          ),
+          padding: padding,
           child: child,
         ),
         divider ?? Divider(),

@@ -76,25 +76,34 @@ class _NFooterButtonBarDemoState extends State<NFooterButtonBarDemo> {
             ),
           ),
         ),
-        buildPageFooter(onConfirm: () {
-          ddlog("NFooterButtonBar");
-        }),
-        buildPageFooter1(onConfirm: () {
-          ddlog("NFooterButtonBar");
-        }),
+        buildPageFooter(
+          primary: Colors.red,
+          onConfirm: () {
+            ddlog("NFooterButtonBar");
+          },
+        ),
+        buildPageFooter1(
+          onConfirm: () {
+            ddlog("NFooterButtonBar");
+          },
+        ),
       ],
     );
   }
 
-  buildPageFooter({required VoidCallback onConfirm}) {
+  buildPageFooter({
+    Color? primary = Colors.blue,
+    required VoidCallback onConfirm,
+  }) {
     return ValueListenableBuilder(
       valueListenable: enableVN,
       builder: (context, value, child) {
         return NFooterButtonBar(
-          primary: Colors.red,
+          primary: primary,
           decoration: const BoxDecoration(
-              color: Colors.white,
-              border: Border(top: BorderSide(color: Color(0xffE5E5E5)))),
+            color: Colors.white,
+            border: Border(top: BorderSide(color: Color(0xffE5E5E5))),
+          ),
           confirmTitle: "保存",
           enable: value,
           // hideCancel: true,
