@@ -182,6 +182,8 @@ dependencies:
     git:
       url: git@github.com:Sky24n/github_language_colors.git
 
+  # 签名
+  signature: ^5.3.0
 
   #震动
   vibration: ^1.8.4
