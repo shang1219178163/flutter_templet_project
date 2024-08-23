@@ -98,41 +98,49 @@ class _SecondPageState extends State<SecondPage> {
           children: <Widget>[
             NSectionHeader(
               title: "NButton",
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
+              child: Wrap(
+                crossAxisAlignment: WrapCrossAlignment.center,
                 children: [
-                  Row(
-                    children: [
-                      NButton(
-                        onPressed: () {
-                          DLog.d("NButton");
-                        },
-                      ),
-                      NButton(
-                        enable: false,
-                        onPressed: () {},
-                      ),
-                      NButton(
-                        primary: Colors.red,
-                        onPressed: () {},
-                      ),
-                      ButtonOutline(
-                        primary: Colors.red,
-                        onPressed: () {},
-                      ),
-                      ButtonText(
-                        // primary: Colors.red,
-                        onPressed: () {},
-                      ),
-                    ]
-                        .map((e) => Expanded(
-                                child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: e,
-                            )))
-                        .toList(),
+                  NButton(
+                    onPressed: () {
+                      DLog.d("NButton");
+                    },
                   ),
-                ],
+                  NButton(
+                    title: "禁用",
+                    enable: false,
+                    onPressed: () {},
+                  ),
+                  NButton(
+                    primary: Colors.red,
+                    onPressed: () {},
+                  ),
+                  NButton.outline(
+                    primary: Colors.red,
+                    onPressed: () {},
+                  ),
+                  NButton.outline(
+                    primary: Colors.white,
+                    border: Border.all(color: Colors.black12),
+                    onPressed: () {},
+                    child: NText(
+                      "确定",
+                      color: Colors.black,
+                      fontSize: 16,
+                      maxLines: 1,
+                    ),
+                  ),
+                  NButton.text(
+                    primary: Colors.red,
+                    onPressed: () {},
+                  ),
+                ]
+                    .map((e) => Container(
+                          width: 120,
+                          padding: const EdgeInsets.all(8.0),
+                          child: e,
+                        ))
+                    .toList(),
               ),
             ),
             NSectionHeader(

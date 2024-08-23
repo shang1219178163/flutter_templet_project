@@ -17,31 +17,64 @@ class NButton extends StatelessWidget {
   const NButton({
     super.key,
     this.primary,
+    this.enable = true,
     this.title = '确定',
-    required this.onPressed,
-    this.onTap,
-    this.height,
     this.width,
+    this.height,
     this.margin,
     this.padding,
     this.borderRadius,
     this.gradient,
     this.boxShadow,
-    this.enable = true,
+    this.border,
+    required this.onPressed,
+    this.onLongPressed,
+    this.onTap,
     this.child,
   });
 
-  final Color? primary;
+  factory NButton.outline({
+    Key? key,
+    Color? primary,
+    String title,
+    bool enable,
+    double? width,
+    double? height,
+    EdgeInsets? margin,
+    EdgeInsets? padding,
+    BorderRadius? borderRadius,
+    Border? border,
+    VoidCallback? onLongPressed,
+    required VoidCallback? onPressed,
+    ValueChanged<String>? onTap,
+    Widget? child,
+  }) = ButtonOutline;
 
-  /// 按钮是否可点击
-  final bool enable;
+  factory NButton.text({
+    Key? key,
+    Color? primary,
+    String title,
+    bool enable,
+    double? width,
+    double? height,
+    EdgeInsets? margin,
+    EdgeInsets? padding,
+    BorderRadius? borderRadius,
+    Border? border,
+    VoidCallback? onLongPressed,
+    required VoidCallback? onPressed,
+    ValueChanged<String>? onTap,
+    Widget? child,
+  }) = ButtonText;
+
+  /// 主题色
+  final Color? primary;
 
   /// 标题
   final String title;
 
-  /// 点击事件
-  final VoidCallback? onPressed;
-  final ValueChanged<String>? onTap;
+  /// 按钮是否可点击
+  final bool enable;
 
   /// 高度
   final double? height;
@@ -56,6 +89,13 @@ class NButton extends StatelessWidget {
   /// 阴影
   final List<BoxShadow>? boxShadow;
   final BorderRadius? borderRadius;
+  final Border? border;
+
+  /// 点击事件
+  final VoidCallback? onPressed;
+  final VoidCallback? onLongPressed;
+
+  final ValueChanged<String>? onTap;
 
   final Widget? child;
 
@@ -113,7 +153,7 @@ class NButton extends StatelessWidget {
     final decoration = enable ? decorationEnable : decorationDisable;
     final textColor = enable ? Colors.white : Color(0xffb3b3b3);
 
-    return InkWell(
+    return GestureDetector(
       onTap: () {
         if (!enable) {
           DLog.d("按钮禁用");
@@ -125,6 +165,7 @@ class NButton extends StatelessWidget {
         }
         onPressed?.call();
       },
+      onLongPress: onLongPressed,
       child: Container(
         width: width,
         height: heightNew,
@@ -137,6 +178,7 @@ class NButton extends StatelessWidget {
               title,
               color: textColor,
               fontSize: 16,
+              maxLines: 1,
             ),
       ),
     );
@@ -144,45 +186,23 @@ class NButton extends StatelessWidget {
 }
 
 /// 带边框线
-class ButtonOutline extends StatelessWidget {
+class ButtonOutline extends NButton {
   const ButtonOutline({
     super.key,
-    this.primary,
-    this.title = '确定',
-    required this.onPressed,
-    this.onTap,
-    this.height,
-    this.width,
-    this.margin,
-    this.padding,
-    this.borderRadius,
-    this.enable = true,
-    this.child,
+    super.primary,
+    super.title = '确定',
+    super.enable,
+    super.width,
+    super.height,
+    super.margin,
+    super.padding,
+    super.borderRadius,
+    super.border,
+    required super.onPressed,
+    super.onLongPressed,
+    super.onTap,
+    super.child,
   });
-
-  final Color? primary;
-
-  /// 标题
-  final String title;
-
-  /// 点击事件
-  final VoidCallback? onPressed;
-  final ValueChanged<String>? onTap;
-
-  /// 高度
-  final double? height;
-  final double? width;
-
-  final EdgeInsets? margin;
-
-  final EdgeInsets? padding;
-
-  final BorderRadius? borderRadius;
-
-  /// 按钮是否可点击
-  final bool enable;
-
-  final Widget? child;
 
   @override
   Widget build(BuildContext context) {
@@ -199,14 +219,14 @@ class ButtonOutline extends StatelessWidget {
 
     final decoration = BoxDecoration(
       color: primaryNew.withOpacity(0.1),
-      border: theTheme?.border ?? Border.all(color: primaryNew),
+      border: border ?? theTheme?.border ?? Border.all(color: primaryNew),
       borderRadius:
           theTheme?.borderRadius ?? const BorderRadius.all(Radius.circular(8)),
     );
 
     final textColor = primaryNew;
 
-    return InkWell(
+    return GestureDetector(
       onTap: () {
         if (onTap != null) {
           onTap?.call(title);
@@ -214,6 +234,7 @@ class ButtonOutline extends StatelessWidget {
         }
         onPressed?.call();
       },
+      onLongPress: onLongPressed,
       child: Container(
         width: width,
         height: heightNew,
@@ -226,6 +247,7 @@ class ButtonOutline extends StatelessWidget {
               title,
               color: textColor,
               fontSize: 16,
+              maxLines: 1,
             ),
       ),
     );
@@ -233,45 +255,23 @@ class ButtonOutline extends StatelessWidget {
 }
 
 /// 纯文字
-class ButtonText extends StatelessWidget {
+class ButtonText extends NButton {
   const ButtonText({
     super.key,
-    this.primary,
-    this.title = '确定',
-    required this.onPressed,
-    this.onTap,
-    this.height,
-    this.width,
-    this.margin,
-    this.padding,
-    this.borderRadius,
-    this.enable = true,
-    this.child,
+    super.primary,
+    super.title = '确定',
+    super.enable,
+    super.width,
+    super.height,
+    super.margin,
+    super.padding,
+    super.borderRadius,
+    super.border,
+    required super.onPressed,
+    super.onLongPressed,
+    super.onTap,
+    super.child,
   });
-
-  final Color? primary;
-
-  /// 标题
-  final String title;
-
-  /// 点击事件
-  final VoidCallback? onPressed;
-  final ValueChanged<String>? onTap;
-
-  /// 高度
-  final double? height;
-  final double? width;
-
-  final EdgeInsets? margin;
-
-  final EdgeInsets? padding;
-
-  final BorderRadius? borderRadius;
-
-  /// 按钮是否可点击
-  final bool enable;
-
-  final Widget? child;
 
   @override
   Widget build(BuildContext context) {
@@ -282,20 +282,21 @@ class ButtonText extends StatelessWidget {
     final theTheme = Theme.of(context).extension<NButtonTheme>();
 
     final primaryNew = primary ?? theTheme?.primary ?? context.primaryColor;
-    final heightNew = height ?? theTheme?.height ?? 44;
+    final heightNew = height ?? theTheme?.height;
     final marginNew = margin ?? theTheme?.margin;
     final paddingNew = padding ?? theTheme?.padding;
 
     final decoration = BoxDecoration(
       // color: primaryNew.withOpacity(0.1),
-      // border: theTheme?.border ?? Border.all(color: primaryNew),
+      border:
+          border ?? theTheme?.border ?? Border.all(color: Colors.transparent),
       borderRadius:
           theTheme?.borderRadius ?? const BorderRadius.all(Radius.circular(8)),
     );
 
     final textColor = primaryNew;
 
-    return InkWell(
+    return GestureDetector(
       onTap: () {
         if (onTap != null) {
           onTap?.call(title);
@@ -303,6 +304,7 @@ class ButtonText extends StatelessWidget {
         }
         onPressed?.call();
       },
+      onLongPress: onLongPressed,
       child: Container(
         width: width,
         height: heightNew,
@@ -315,6 +317,7 @@ class ButtonText extends StatelessWidget {
               title,
               color: textColor,
               fontSize: 16,
+              maxLines: 1,
             ),
       ),
     );
