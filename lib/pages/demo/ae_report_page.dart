@@ -534,7 +534,7 @@ class _AeReportPageState extends State<AeReportPage> with SafeSetStateMixin {
           enable: !readOnly,
           onCancel: onCancel.debounce,
           onConfirm: () {},
-          onConfirmTap: (val) => onSubmit.debounce(value: val),
+          onConfirmTitle: (val) => onSubmit.debounce(value: val),
           // onConfirmTap: (v) {
           //   _debounce(() => onSubmit(v));
           // },

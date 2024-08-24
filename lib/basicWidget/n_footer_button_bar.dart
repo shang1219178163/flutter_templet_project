@@ -24,9 +24,9 @@ class NFooterButtonBar extends StatelessWidget {
     this.gap = 16,
     this.btnBorderRadius = const BorderRadius.all(Radius.circular(8)),
     this.onCancel,
-    this.onCancelTap,
+    this.onCancelTitle,
     required this.onConfirm,
-    this.onConfirmTap,
+    this.onConfirmTitle,
     this.hideCancel = false,
     this.hideConfirm = false,
     this.boxShadow,
@@ -67,10 +67,10 @@ class NFooterButtonBar extends StatelessWidget {
   final VoidCallback? onConfirm;
 
   /// 取消按钮回调(带标题)
-  final ValueChanged<String>? onCancelTap;
+  final ValueChanged<String>? onCancelTitle;
 
   /// 确定按钮回调(带标题)
-  final ValueChanged<String>? onConfirmTap;
+  final ValueChanged<String>? onConfirmTitle;
 
   /// 确定按钮渐变色
   final Gradient? gradient;
@@ -135,7 +135,7 @@ class NFooterButtonBar extends StatelessWidget {
           child: NButtonCancel(
             title: cancelTitle,
             onPressed: onCancel,
-            onTap: onCancelTap,
+            onTitle: onCancelTitle,
             borderRadius: btnBorderRadius,
           ),
         ),
@@ -148,7 +148,7 @@ class NFooterButtonBar extends StatelessWidget {
             title: confirmTitle,
             enable: enable,
             onPressed: onConfirm,
-            onTap: onConfirmTap,
+            onTitle: onConfirmTitle,
             borderRadius: btnBorderRadius,
           ),
         ),

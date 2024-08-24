@@ -17,7 +17,7 @@ class NButtonConfirm extends StatelessWidget {
     this.bgColor,
     this.title = '确定',
     required this.onPressed,
-    this.onTap,
+    this.onTitle,
     this.height = 44,
     this.width,
     this.margin,
@@ -36,7 +36,7 @@ class NButtonConfirm extends StatelessWidget {
 
   /// 点击事件
   final VoidCallback? onPressed;
-  final ValueChanged<String>? onTap;
+  final ValueChanged<String>? onTitle;
 
   /// 高度
   final double height;
@@ -86,10 +86,34 @@ class NButtonConfirm extends StatelessWidget {
       );
     }
 
+    final borderRadiusNew =
+        borderRadius ?? const BorderRadius.all(Radius.circular(8));
+
+    final gradientNew = gradient ??
+        LinearGradient(
+          colors: [
+            primary.withOpacity(0.8),
+            primary,
+            // Color(0xff359EEB),
+            // Color(0xff007DBF),
+          ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        );
+
+    final boxShadowNew = boxShadow ??
+        [
+          BoxShadow(
+            color: primary.withOpacity(0.32),
+            offset: const Offset(0, 5),
+            blurRadius: 10,
+          ),
+        ];
+
     return InkWell(
       onTap: () {
-        if (onTap != null) {
-          onTap?.call(title);
+        if (onTitle != null) {
+          onTitle?.call(title);
           return;
         }
         onPressed?.call();
@@ -100,34 +124,18 @@ class NButtonConfirm extends StatelessWidget {
         padding: padding,
         alignment: Alignment.center,
         decoration: BoxDecoration(
-            // color: Colors.transparent,
-            //   border: Border.all(color: Colors.blue),
-            borderRadius:
-                borderRadius ?? const BorderRadius.all(Radius.circular(8)),
-            gradient: gradient ??
-                LinearGradient(
-                  colors: [
-                    primary.withOpacity(0.8),
-                    primary,
-                    // Color(0xff359EEB),
-                    // Color(0xff007DBF),
-                  ],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
-            boxShadow: boxShadow ??
-                [
-                  BoxShadow(
-                    color: primary.withOpacity(0.32),
-                    offset: const Offset(0, 5),
-                    blurRadius: 10,
-                  ),
-                ]),
+          // color: Colors.transparent,
+          //   border: Border.all(color: Colors.blue),
+          borderRadius: borderRadiusNew,
+          gradient: gradientNew,
+          boxShadow: boxShadowNew,
+        ),
         child: child ??
             NText(
               title,
               color: Colors.white,
               fontSize: 16,
+              maxLines: 1,
             ),
       ),
     );

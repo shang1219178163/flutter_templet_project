@@ -17,7 +17,7 @@ class NButtonCancel extends StatelessWidget {
     this.bgColor,
     this.title = '取消',
     required this.onPressed,
-    this.onTap,
+    this.onTitle,
     this.height = 44,
     this.width,
     this.margin,
@@ -36,7 +36,7 @@ class NButtonCancel extends StatelessWidget {
   final VoidCallback? onPressed;
 
   /// 带标题回调
-  final ValueChanged<String>? onTap;
+  final ValueChanged<String>? onTitle;
 
   /// 高度
   final double height;
@@ -81,8 +81,8 @@ class NButtonCancel extends StatelessWidget {
 
     return InkWell(
       onTap: () {
-        if (onTap != null) {
-          onTap?.call(title);
+        if (onTitle != null) {
+          onTitle?.call(title);
           return;
         }
         onPressed?.call();
