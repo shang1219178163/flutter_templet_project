@@ -98,64 +98,7 @@ class _SecondPageState extends State<SecondPage> {
           children: <Widget>[
             NSectionHeader(
               title: "NButton",
-              child: Wrap(
-                  crossAxisAlignment: WrapCrossAlignment.center,
-                  children: [
-                    ...[
-                      NButton(
-                        title: "NButton",
-                        onPressed: () {
-                          DLog.d("NButton");
-                        },
-                      ),
-                      NButton(
-                        title: "NButton: 禁用",
-                        enable: false,
-                        onPressed: () {},
-                      ),
-                      NButton(
-                        title: "NButton: red",
-                        primary: Colors.red,
-                        onPressed: () {},
-                      ),
-                      NButton.tonal(
-                        title: "NButton.tonal",
-                        // primary: Colors.red,
-                        // border: Border.all(color: Colors.transparent),
-                        onPressed: () {},
-                      ),
-                      NButton.tonal(
-                        title: "NButton.tonal",
-                        primary: Colors.red,
-                        // border: Border.all(color: Colors.transparent),
-                        onPressed: () {},
-                      ),
-                      NButton.tonal(
-                        primary: Colors.white,
-                        title: "NButton.tonal",
-                        style: TextStyle(color: Colors.black87),
-                        border: Border.all(color: Color(0xffe4e4e4)),
-                        onPressed: () {},
-                      ),
-                      NButton.text(
-                        // primary: Colors.red,
-                        title: "NButton.text",
-                        onPressed: () {},
-                      ),
-                    ]
-                        .map((e) => Container(
-                              width: 180,
-                              padding: const EdgeInsets.all(8.0),
-                              child: e,
-                            ))
-                        .toList(),
-                    NButton.text(
-                      // primary: Colors.red,
-                      width: 26,
-                      child: Icon(Icons.arrow_back_ios_new, color: Colors.blue),
-                      onPressed: () {},
-                    ),
-                  ]),
+              child: buildNButton(),
             ),
             NSectionHeader(
               title: "MaterialState",
@@ -711,13 +654,9 @@ class _SecondPageState extends State<SecondPage> {
               decoration: TriangleDecoration(color: Colors.red, size: 8.0),
               child: NText("TriangleDecoration"),
             ),
-            SizedBox(
-              height: 20,
-            ),
+            SizedBox(height: 20),
             _buildGradientBound(),
-            SizedBox(
-              height: 20,
-            ),
+            SizedBox(height: 20),
             buildElevatedButtonGradient(
               width: 300,
               title: 'ElevatedButton',
@@ -755,6 +694,89 @@ class _SecondPageState extends State<SecondPage> {
         ),
       ],
     );
+  }
+
+  Widget buildNButton() {
+    return LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+      final spacing = 8.0;
+      final rowCount = 3.0;
+      final itemWidth =
+          (constraints.maxWidth - spacing * (rowCount - 1)) / rowCount;
+
+      return Wrap(
+          spacing: spacing,
+          runSpacing: spacing,
+          crossAxisAlignment: WrapCrossAlignment.center,
+          children: [
+            ...[
+              NButton(
+                title: "NButton",
+                onPressed: () {
+                  DLog.d("NButton");
+                },
+              ),
+              NButton(
+                title: "NButton: 禁用",
+                enable: false,
+                onPressed: () {},
+              ),
+              NButton(
+                title: "NButton: red",
+                primary: Colors.red,
+                onPressed: () {},
+              ),
+              NButton.tonal(
+                title: "NButton.tonal",
+                // primary: Colors.red,
+                // border: Border.all(color: Colors.transparent),
+                onPressed: () {},
+              ),
+              NButton.tonal(
+                title: "NButton.tonal",
+                primary: Colors.red,
+                // border: Border.all(color: Colors.transparent),
+                onPressed: () {},
+              ),
+              NButton.tonal(
+                primary: Colors.white,
+                title: "NButton.tonal",
+                style: TextStyle(color: Colors.black87),
+                border: Border.all(color: Color(0xffe4e4e4)),
+                onPressed: () {},
+              ),
+              NButton.tonal(
+                primary: Colors.black87,
+                title: "NButton.tonal",
+                style: TextStyle(color: Colors.black87),
+                border: Border.all(color: Colors.transparent),
+                gradient: LinearGradient(
+                  colors: [Colors.black38, Colors.black38],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                onPressed: () {},
+              ),
+              NButton.text(
+                // primary: Colors.red,
+                title: "NButton.text",
+                onPressed: () {},
+              ),
+            ]
+                .map((e) => Container(
+                      width: itemWidth.truncateToDouble(),
+                      // padding: const EdgeInsets.all(8.0),
+                      child: e,
+                    ))
+                .toList(),
+            NButton.text(
+              // primary: Colors.red,
+              width: 26,
+              child: Icon(Icons.arrow_back_ios_new, color: Colors.blue),
+              onPressed: () {},
+            ),
+          ]);
+    });
   }
 
   /// icon 上下左右

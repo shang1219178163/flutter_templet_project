@@ -46,6 +46,7 @@ class NButton extends StatelessWidget {
     EdgeInsets? padding,
     BorderRadius? borderRadius,
     Border? border,
+    Gradient? gradient,
     VoidCallback? onLongPressed,
     required VoidCallback? onPressed,
     ValueChanged<String>? onTitle,
@@ -259,6 +260,7 @@ class _NButtonTonal extends NButton {
       border: border ?? theTheme?.border ?? Border.all(color: primaryNew),
       borderRadius:
           theTheme?.borderRadius ?? const BorderRadius.all(Radius.circular(8)),
+      gradient: gradient,
     );
 
     final textColor = primaryNew;
