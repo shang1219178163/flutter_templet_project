@@ -99,57 +99,63 @@ class _SecondPageState extends State<SecondPage> {
             NSectionHeader(
               title: "NButton",
               child: Wrap(
-                crossAxisAlignment: WrapCrossAlignment.center,
-                children: [
-                  NButton(
-                    title: "NButton",
-                    onPressed: () {
-                      DLog.d("NButton");
-                    },
-                  ),
-                  NButton(
-                    title: "NButton: 禁用",
-                    enable: false,
-                    onPressed: () {},
-                  ),
-                  NButton(
-                    title: "NButton: red",
-                    primary: Colors.red,
-                    onPressed: () {},
-                  ),
-                  NButton.tonal(
-                    title: "NButton.tonal",
-                    // primary: Colors.red,
-                    // border: Border.all(color: Colors.transparent),
-                    onPressed: () {},
-                  ),
-                  NButton.tonal(
-                    title: "NButton.tonal",
-                    primary: Colors.red,
-                    // border: Border.all(color: Colors.transparent),
-                    onPressed: () {},
-                  ),
-                  NButton.tonal(
-                    primary: Colors.white,
-                    title: "NButton.tonal",
-                    style: TextStyle(color: Colors.black87),
-                    border: Border.all(color: Color(0xffe4e4e4)),
-                    onPressed: () {},
-                  ),
-                  NButton.text(
-                    // primary: Colors.red,
-                    title: "NButton.text",
-                    onPressed: () {},
-                  ),
-                  // ElevatedButton(onPressed: onPressed, child: child)
-                ]
-                    .map((e) => Container(
-                          width: 180,
-                          padding: const EdgeInsets.all(8.0),
-                          child: e,
-                        ))
-                    .toList(),
-              ),
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  children: [
+                    ...[
+                      NButton(
+                        title: "NButton",
+                        onPressed: () {
+                          DLog.d("NButton");
+                        },
+                      ),
+                      NButton(
+                        title: "NButton: 禁用",
+                        enable: false,
+                        onPressed: () {},
+                      ),
+                      NButton(
+                        title: "NButton: red",
+                        primary: Colors.red,
+                        onPressed: () {},
+                      ),
+                      NButton.tonal(
+                        title: "NButton.tonal",
+                        // primary: Colors.red,
+                        // border: Border.all(color: Colors.transparent),
+                        onPressed: () {},
+                      ),
+                      NButton.tonal(
+                        title: "NButton.tonal",
+                        primary: Colors.red,
+                        // border: Border.all(color: Colors.transparent),
+                        onPressed: () {},
+                      ),
+                      NButton.tonal(
+                        primary: Colors.white,
+                        title: "NButton.tonal",
+                        style: TextStyle(color: Colors.black87),
+                        border: Border.all(color: Color(0xffe4e4e4)),
+                        onPressed: () {},
+                      ),
+                      NButton.text(
+                        // primary: Colors.red,
+                        title: "NButton.text",
+                        onPressed: () {},
+                      ),
+                    ]
+                        .map((e) => Container(
+                              width: 180,
+                              padding: const EdgeInsets.all(8.0),
+                              child: e,
+                            ))
+                        .toList(),
+                    NButton.text(
+                      // primary: Colors.red,
+                      width: 26,
+                      child: Icon(Icons.arrow_back_ios_new, color: Colors.blue),
+                      onPressed: () {},
+                    ),
+                  ]),
             ),
             NSectionHeader(
               title: "MaterialState",
