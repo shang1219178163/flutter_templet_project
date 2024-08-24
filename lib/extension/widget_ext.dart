@@ -12,6 +12,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_pickers/time_picker/model/pduration.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 
@@ -69,6 +70,16 @@ extension WidgetExt on Widget {
           backgroundBlendMode: backgroundBlendMode,
           shape: shape,
         ),
+        child: this,
+      );
+
+  AnimatedOpacity toOpacity({
+    required double opacity,
+    Duration duration = const Duration(seconds: 0),
+  }) =>
+      AnimatedOpacity(
+        opacity: opacity,
+        duration: duration,
         child: this,
       );
 

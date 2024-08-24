@@ -12,13 +12,14 @@ import 'package:flutter_templet_project/basicWidget/theme/n_button_theme.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 
-/// 主题色确定按钮
+/// 主题色背景确定按钮
 class NButton extends StatelessWidget {
   const NButton({
     super.key,
     this.primary,
     this.enable = true,
     this.title = '确定',
+    this.style,
     this.width,
     this.height,
     this.margin,
@@ -29,14 +30,15 @@ class NButton extends StatelessWidget {
     this.border,
     required this.onPressed,
     this.onLongPressed,
-    this.onTap,
+    this.onTitle,
     this.child,
   });
 
-  factory NButton.outline({
+  factory NButton.tonal({
     Key? key,
     Color? primary,
     String title,
+    TextStyle? style,
     bool enable,
     double? width,
     double? height,
@@ -46,14 +48,15 @@ class NButton extends StatelessWidget {
     Border? border,
     VoidCallback? onLongPressed,
     required VoidCallback? onPressed,
-    ValueChanged<String>? onTap,
+    ValueChanged<String>? onTitle,
     Widget? child,
-  }) = ButtonOutline;
+  }) = _NButtonTonal;
 
   factory NButton.text({
     Key? key,
     Color? primary,
     String title,
+    TextStyle? style,
     bool enable,
     double? width,
     double? height,
@@ -63,9 +66,9 @@ class NButton extends StatelessWidget {
     Border? border,
     VoidCallback? onLongPressed,
     required VoidCallback? onPressed,
-    ValueChanged<String>? onTap,
+    ValueChanged<String>? onTitle,
     Widget? child,
-  }) = ButtonText;
+  }) = _NButtonText;
 
   /// 主题色
   final Color? primary;
@@ -73,29 +76,44 @@ class NButton extends StatelessWidget {
   /// 标题
   final String title;
 
+  /// 标题样式
+  final TextStyle? style;
+
   /// 按钮是否可点击
   final bool enable;
 
   /// 高度
   final double? height;
+
+  /// 宽度
   final double? width;
 
+  /// 外边距
   final EdgeInsets? margin;
 
+  /// 内边距
   final EdgeInsets? padding;
 
+  /// 渐进色背景
   final Gradient? gradient;
 
   /// 阴影
   final List<BoxShadow>? boxShadow;
+
+  /// 圆角
   final BorderRadius? borderRadius;
+
+  /// 边框线
   final Border? border;
 
   /// 点击事件
   final VoidCallback? onPressed;
+
+  /// 长按事件
   final VoidCallback? onLongPressed;
 
-  final ValueChanged<String>? onTap;
+  /// 标题回调
+  final ValueChanged<String>? onTitle;
 
   final Widget? child;
 
@@ -159,8 +177,8 @@ class NButton extends StatelessWidget {
           DLog.d("按钮禁用");
           return;
         }
-        if (onTap != null) {
-          onTap?.call(title);
+        if (onTitle != null) {
+          onTitle?.call(title);
           return;
         }
         onPressed?.call();
@@ -179,35 +197,54 @@ class NButton extends StatelessWidget {
               color: textColor,
               fontSize: 16,
               maxLines: 1,
+              style: style ?? theTheme?.textStyle,
             ),
       ),
     );
   }
 }
 
-/// 带边框线
-class ButtonOutline extends NButton {
-  const ButtonOutline({
+/// 主题浅色背景
+class _NButtonTonal extends NButton {
+  const _NButtonTonal({
     super.key,
     super.primary,
-    super.title = '确定',
     super.enable,
+    super.title = '确定',
+    super.style,
     super.width,
     super.height,
     super.margin,
     super.padding,
+    super.gradient,
     super.borderRadius,
     super.border,
     required super.onPressed,
     super.onLongPressed,
-    super.onTap,
+    super.onTitle,
     super.child,
   });
 
   @override
   Widget build(BuildContext context) {
     if (!enable) {
-      return NButton(enable: enable, onPressed: () {});
+      return NButton(
+        key: key,
+        enable: enable,
+        title: title,
+        style: style,
+        width: width,
+        height: height,
+        margin: margin,
+        padding: padding,
+        gradient: gradient,
+        borderRadius: borderRadius,
+        border: border,
+        onPressed: onPressed,
+        onLongPressed: onLongPressed,
+        onTitle: onTitle,
+        child: child,
+      );
     }
 
     final theTheme = Theme.of(context).extension<NButtonTheme>();
@@ -228,8 +265,8 @@ class ButtonOutline extends NButton {
 
     return GestureDetector(
       onTap: () {
-        if (onTap != null) {
-          onTap?.call(title);
+        if (onTitle != null) {
+          onTitle?.call(title);
           return;
         }
         onPressed?.call();
@@ -248,6 +285,7 @@ class ButtonOutline extends NButton {
               color: textColor,
               fontSize: 16,
               maxLines: 1,
+              style: style ?? theTheme?.textStyle,
             ),
       ),
     );
@@ -255,12 +293,13 @@ class ButtonOutline extends NButton {
 }
 
 /// 纯文字
-class ButtonText extends NButton {
-  const ButtonText({
+class _NButtonText extends NButton {
+  const _NButtonText({
     super.key,
     super.primary,
-    super.title = '确定',
     super.enable,
+    super.title = '确定',
+    super.style,
     super.width,
     super.height,
     super.margin,
@@ -269,14 +308,30 @@ class ButtonText extends NButton {
     super.border,
     required super.onPressed,
     super.onLongPressed,
-    super.onTap,
+    super.onTitle,
     super.child,
   });
 
   @override
   Widget build(BuildContext context) {
     if (!enable) {
-      return NButton(enable: enable, onPressed: () {});
+      return NButton(
+        key: key,
+        enable: enable,
+        title: title,
+        style: style,
+        width: width,
+        height: height,
+        margin: margin,
+        padding: padding,
+        gradient: gradient,
+        borderRadius: borderRadius,
+        border: border,
+        onPressed: onPressed,
+        onLongPressed: onLongPressed,
+        onTitle: onTitle,
+        child: child,
+      );
     }
 
     final theTheme = Theme.of(context).extension<NButtonTheme>();
@@ -298,8 +353,8 @@ class ButtonText extends NButton {
 
     return GestureDetector(
       onTap: () {
-        if (onTap != null) {
-          onTap?.call(title);
+        if (onTitle != null) {
+          onTitle?.call(title);
           return;
         }
         onPressed?.call();
@@ -318,6 +373,7 @@ class ButtonText extends NButton {
               color: textColor,
               fontSize: 16,
               maxLines: 1,
+              style: style ?? theTheme?.textStyle,
             ),
       ),
     );

@@ -102,41 +102,49 @@ class _SecondPageState extends State<SecondPage> {
                 crossAxisAlignment: WrapCrossAlignment.center,
                 children: [
                   NButton(
+                    title: "NButton",
                     onPressed: () {
                       DLog.d("NButton");
                     },
                   ),
                   NButton(
-                    title: "禁用",
+                    title: "NButton: 禁用",
                     enable: false,
                     onPressed: () {},
                   ),
                   NButton(
+                    title: "NButton: red",
                     primary: Colors.red,
                     onPressed: () {},
                   ),
-                  NButton.outline(
-                    primary: Colors.red,
+                  NButton.tonal(
+                    title: "NButton.tonal",
+                    // primary: Colors.red,
+                    // border: Border.all(color: Colors.transparent),
                     onPressed: () {},
                   ),
-                  NButton.outline(
+                  NButton.tonal(
+                    title: "NButton.tonal",
+                    primary: Colors.red,
+                    // border: Border.all(color: Colors.transparent),
+                    onPressed: () {},
+                  ),
+                  NButton.tonal(
                     primary: Colors.white,
-                    border: Border.all(color: Colors.black12),
+                    title: "NButton.tonal",
+                    style: TextStyle(color: Colors.black87),
+                    border: Border.all(color: Color(0xffe4e4e4)),
                     onPressed: () {},
-                    child: NText(
-                      "确定",
-                      color: Colors.black,
-                      fontSize: 16,
-                      maxLines: 1,
-                    ),
                   ),
                   NButton.text(
-                    primary: Colors.red,
+                    // primary: Colors.red,
+                    title: "NButton.text",
                     onPressed: () {},
                   ),
+                  // ElevatedButton(onPressed: onPressed, child: child)
                 ]
                     .map((e) => Container(
-                          width: 120,
+                          width: 180,
                           padding: const EdgeInsets.all(8.0),
                           child: e,
                         ))
