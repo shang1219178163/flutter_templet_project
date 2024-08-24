@@ -9,6 +9,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_templet_project/basicWidget/theme/n_button_theme.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/list_ext.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
@@ -24,110 +25,114 @@ class APPThemeService {
   // static APPThemeSettings get instance => _instance;
 
   late ThemeData themeData = ThemeData.light(useMaterial3: false).copyWith(
-      platform: TargetPlatform.iOS,
-      splashFactory: NoSplash.splashFactory,
-      splashColor: Colors.transparent, // 点击时的高亮效果设置为透明
-      highlightColor: Colors.transparent, // 长按时的扩散效果设置为透明
-      // primaryColor: Colors.blue, //主色调为青色
-      // indicatorColor: Colors.white,
-      // iconTheme: IconThemeData(color: Colors.yellow),//设置icon主题色为黄色
-      // textTheme: ThemeData.light().textTheme.copyWith(
-      //     button: TextStyle(color: Colors.red)
-      // ),//设置文本颜色为红色
-      scaffoldBackgroundColor: bgColor,
-      appBarTheme: const AppBarTheme(
-        elevation: 0,
-        scrolledUnderElevation: 0,
-        titleTextStyle: TextStyle(
+    platform: TargetPlatform.iOS,
+    splashFactory: NoSplash.splashFactory,
+    splashColor: Colors.transparent, // 点击时的高亮效果设置为透明
+    highlightColor: Colors.transparent, // 长按时的扩散效果设置为透明
+    // primaryColor: Colors.blue, //主色调为青色
+    // indicatorColor: Colors.white,
+    // iconTheme: IconThemeData(color: Colors.yellow),//设置icon主题色为黄色
+    // textTheme: ThemeData.light().textTheme.copyWith(
+    //     button: TextStyle(color: Colors.red)
+    // ),//设置文本颜色为红色
+    scaffoldBackgroundColor: bgColor,
+    appBarTheme: const AppBarTheme(
+      elevation: 0,
+      scrolledUnderElevation: 0,
+      titleTextStyle: TextStyle(
+        fontSize: 18,
+        fontWeight: FontWeight.w500,
+      ),
+      toolbarTextStyle: TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.w400,
+      ),
+    ),
+    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+    dividerTheme: const DividerThemeData(
+      color: Color(0xFFE4E4E4),
+      space: 0.5,
+      thickness: 1,
+    ),
+    badgeTheme: const BadgeThemeData(
+      offset: Offset(-1, -4),
+      largeSize: 20,
+      smallSize: 20,
+      textColor: Colors.white,
+      textStyle: TextStyle(
+        fontWeight: FontWeight.w500,
+        color: Colors.white,
+        fontSize: 11,
+      ),
+    ),
+    bottomAppBarTheme: const BottomAppBarTheme(
+      surfaceTintColor: Color(0xFFFFFFFF),
+      color: Color(0xFFFFFFFF),
+    ),
+    chipTheme: ChipThemeData(
+      pressElevation: 0,
+      elevation: 0,
+      showCheckmark: false,
+      side: BorderSide.none,
+    ),
+    buttonTheme: ButtonThemeData(
+      splashColor: Colors.transparent,
+      hoverColor: Colors.transparent,
+      buttonColor: Colors.blue,
+      focusColor: Colors.transparent,
+    ),
+    textButtonTheme: TextButtonThemeData(
+      style: TextButton.styleFrom(
+        splashFactory: NoSplash.splashFactory,
+        foregroundColor: Colors.blue,
+      ).merge(buildButtonStyle()),
+    ),
+    outlinedButtonTheme: OutlinedButtonThemeData(
+      style: OutlinedButton.styleFrom(
+        splashFactory: NoSplash.splashFactory,
+        foregroundColor: Colors.blue,
+      ).merge(buildButtonStyle()),
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        splashFactory: NoSplash.splashFactory,
+        backgroundColor: Colors.blue,
+      ).merge(buildButtonStyle()),
+    ),
+    filledButtonTheme: FilledButtonThemeData(
+      style: FilledButton.styleFrom(
+        splashFactory: NoSplash.splashFactory,
+        backgroundColor: Colors.blue,
+      ).merge(buildButtonStyle()),
+    ),
+    extensions: [
+      AppTheme(
+        primary: const Color(0xFF00B451),
+        primary2: const Color(0xFF00B451).withOpacity(0.8),
+        bgColor: const Color(0xFFF3F3F3),
+        fontColor: const Color(0xFF1A1A1A),
+        titleStyle: const TextStyle(
+          color: Color(0xFF1A1A1A),
           fontSize: 18,
           fontWeight: FontWeight.w500,
+          decoration: TextDecoration.none,
         ),
-        toolbarTextStyle: TextStyle(
+        textStyle: const TextStyle(
+          color: Color(0xFF1A1A1A),
           fontSize: 16,
           fontWeight: FontWeight.w400,
+          decoration: TextDecoration.none,
         ),
+        cancelColor: const Color(0xFFE65F55),
+        lineColor: const Color(0xffE4E4E4),
+        borderColor: const Color(0xFFE5E5E5),
+        disabledColor: const Color(0xffB3B3B3),
       ),
-      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-      dividerTheme: const DividerThemeData(
-        color: Color(0xFFE4E4E4),
-        space: 0.5,
-        thickness: 1,
+      NButtonTheme(
+        primary: const Color(0xFF00B451),
       ),
-      badgeTheme: const BadgeThemeData(
-        offset: Offset(-1, -4),
-        largeSize: 20,
-        smallSize: 20,
-        textColor: Colors.white,
-        textStyle: TextStyle(
-          fontWeight: FontWeight.w500,
-          color: Colors.white,
-          fontSize: 11,
-        ),
-      ),
-      bottomAppBarTheme: const BottomAppBarTheme(
-        surfaceTintColor: Color(0xFFFFFFFF),
-        color: Color(0xFFFFFFFF),
-      ),
-      chipTheme: ChipThemeData(
-        pressElevation: 0,
-        elevation: 0,
-        showCheckmark: false,
-        side: BorderSide.none,
-      ),
-      buttonTheme: ButtonThemeData(
-        splashColor: Colors.transparent,
-        hoverColor: Colors.transparent,
-        buttonColor: Colors.blue,
-        focusColor: Colors.transparent,
-      ),
-      textButtonTheme: TextButtonThemeData(
-        style: TextButton.styleFrom(
-          splashFactory: NoSplash.splashFactory,
-          foregroundColor: Colors.blue,
-        ).merge(buildButtonStyle()),
-      ),
-      outlinedButtonTheme: OutlinedButtonThemeData(
-        style: OutlinedButton.styleFrom(
-          splashFactory: NoSplash.splashFactory,
-          foregroundColor: Colors.blue,
-        ).merge(buildButtonStyle()),
-      ),
-      elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ElevatedButton.styleFrom(
-          splashFactory: NoSplash.splashFactory,
-          backgroundColor: Colors.blue,
-        ).merge(buildButtonStyle()),
-      ),
-      filledButtonTheme: FilledButtonThemeData(
-        style: FilledButton.styleFrom(
-          splashFactory: NoSplash.splashFactory,
-          backgroundColor: Colors.blue,
-        ).merge(buildButtonStyle()),
-      ),
-      extensions: [
-        AppTheme(
-          primary: const Color(0xFF00B451),
-          primary2: const Color(0xFF00B451).withOpacity(0.8),
-          bgColor: const Color(0xFFF3F3F3),
-          fontColor: const Color(0xFF1A1A1A),
-          titleStyle: const TextStyle(
-            color: Color(0xFF1A1A1A),
-            fontSize: 18,
-            fontWeight: FontWeight.w500,
-            decoration: TextDecoration.none,
-          ),
-          textStyle: const TextStyle(
-            color: Color(0xFF1A1A1A),
-            fontSize: 16,
-            fontWeight: FontWeight.w400,
-            decoration: TextDecoration.none,
-          ),
-          cancelColor: const Color(0xFFE65F55),
-          lineColor: const Color(0xffE4E4E4),
-          borderColor: const Color(0xFFE5E5E5),
-          disabledColor: const Color(0xffB3B3B3),
-        ),
-      ]);
+    ],
+  );
 
   // ThemeData? darkThemeData;
   ThemeData darkThemeData = ThemeData.dark(useMaterial3: false).copyWith(

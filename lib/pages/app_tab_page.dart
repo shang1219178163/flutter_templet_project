@@ -55,7 +55,7 @@ class _AppTabPageState extends State<AppTabPage>
 
   final List<Tuple2<Tuple2<String, Widget>, Widget>> items = [
     Tuple2(Tuple2("首页", Icon(Icons.home)), TabBarTabBarViewDemo()),
-    Tuple2(Tuple2("按钮", Icon(Icons.merge_type_sharp)), SecondPage()),
+    Tuple2(Tuple2("按钮", Icon(Icons.pets)), SecondPage()),
     Tuple2(Tuple2("消息", Icon(Icons.message)), TabBarViewDemo()),
     Tuple2(Tuple2("购物车", Icon(Icons.shopping_cart)), ThirdPage()),
     Tuple2(Tuple2("我的", Icon(Icons.person)), APPUserCenterPage()),
