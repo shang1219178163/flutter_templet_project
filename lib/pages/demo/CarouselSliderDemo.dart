@@ -59,7 +59,8 @@ class CarouselSliderDemo extends StatelessWidget {
                     // Image.network(item, fit: BoxFit.cover, width: double.infinity),
                     FadeInImage(
                       image: NetworkImage(item),
-                      placeholder: AssetImage('assets/images/img_404.png'),
+                      placeholder:
+                          AssetImage('assets/images/img_placehorder.png'),
                       fit: BoxFit.cover,
                     ),
                     Positioned(
