@@ -25,6 +25,7 @@ class NButton extends StatelessWidget {
     this.margin,
     this.padding,
     this.borderRadius,
+    this.backgroudColor,
     this.gradient,
     this.boxShadow,
     this.border,
@@ -46,6 +47,7 @@ class NButton extends StatelessWidget {
     EdgeInsets? padding,
     BorderRadius? borderRadius,
     Border? border,
+    Color? backgroudColor,
     Gradient? gradient,
     VoidCallback? onLongPressed,
     required VoidCallback? onPressed,
@@ -95,6 +97,9 @@ class NButton extends StatelessWidget {
   /// 内边距
   final EdgeInsets? padding;
 
+  /// 背景色
+  final Color? backgroudColor;
+
   /// 渐进色背景
   final Gradient? gradient;
 
@@ -126,6 +131,11 @@ class NButton extends StatelessWidget {
     final heightNew = height ?? theTheme?.height ?? 44;
     final marginNew = margin ?? theTheme?.margin;
     final paddingNew = padding ?? theTheme?.padding;
+
+    final backgroudColorNew = backgroudColor ?? theTheme?.backgroudColor;
+    final backgroudColorDisableNew =
+        theTheme?.backgroudColorDisable ?? Color(0xffF3F3F3);
+
     final gradientNew = gradient ??
         theTheme?.gradient ??
         LinearGradient(
@@ -154,7 +164,7 @@ class NButton extends StatelessWidget {
     final borderDisableNew = theTheme?.borderDisable;
 
     final decorationEnable = BoxDecoration(
-      // color: Colors.transparent,
+      color: backgroudColorNew,
       border: borderNew,
       borderRadius: borderRadiusNew,
       gradient: gradientNew,
@@ -162,7 +172,7 @@ class NButton extends StatelessWidget {
     );
 
     final decorationDisable = BoxDecoration(
-      // color: Colors.transparent,
+      color: backgroudColorDisableNew,
       border: borderDisableNew,
       borderRadius: borderRadiusDisableNew,
       gradient: gradientDisableNew,
@@ -217,6 +227,7 @@ class _NButtonTonal extends NButton {
     super.height,
     super.margin,
     super.padding,
+    super.backgroudColor,
     super.gradient,
     super.borderRadius,
     super.border,
@@ -238,6 +249,7 @@ class _NButtonTonal extends NButton {
         height: height,
         margin: margin,
         padding: padding,
+        backgroudColor: backgroudColor,
         gradient: gradient,
         borderRadius: borderRadius,
         border: border,
@@ -256,7 +268,7 @@ class _NButtonTonal extends NButton {
     final paddingNew = padding ?? theTheme?.padding;
 
     final decoration = BoxDecoration(
-      color: primaryNew.withOpacity(0.1),
+      color: backgroudColor ?? primaryNew.withOpacity(0.1),
       border: border ?? theTheme?.border ?? Border.all(color: primaryNew),
       borderRadius:
           theTheme?.borderRadius ?? const BorderRadius.all(Radius.circular(8)),

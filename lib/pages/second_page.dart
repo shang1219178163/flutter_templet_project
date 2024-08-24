@@ -748,13 +748,13 @@ class _SecondPageState extends State<SecondPage> {
               NButton.tonal(
                 primary: Colors.black87,
                 title: "NButton.tonal",
-                style: TextStyle(color: Colors.black87),
                 border: Border.all(color: Colors.transparent),
-                gradient: LinearGradient(
-                  colors: [Colors.black38, Colors.black38],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
+                backgroudColor: Color(0xffF3F3F3),
+                // gradient: LinearGradient(
+                //   colors: [Colors.green, Colors.red],
+                //   begin: Alignment.topLeft,
+                //   end: Alignment.bottomRight,
+                // ),
                 onPressed: () {},
               ),
               NButton.text(

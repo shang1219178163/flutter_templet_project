@@ -10,6 +10,8 @@ class NButtonTheme extends ThemeExtension<NButtonTheme> {
     this.height,
     this.margin,
     this.padding,
+    this.backgroudColor,
+    this.backgroudColorDisable,
     this.gradient,
     this.gradientDisable,
     this.boxShadow,
@@ -32,6 +34,10 @@ class NButtonTheme extends ThemeExtension<NButtonTheme> {
 
   /// 点击区域内边距
   final EdgeInsets? padding;
+
+  /// 背景色
+  final Color? backgroudColor;
+  final Color? backgroudColorDisable;
 
   /// 点击区域背景颜色(渐进)
   final Gradient? gradient;
@@ -58,6 +64,8 @@ class NButtonTheme extends ThemeExtension<NButtonTheme> {
     double? height,
     EdgeInsets? margin,
     EdgeInsets? padding,
+    Color? backgroudColor,
+    Color? backgroudColorDisable,
     Gradient? gradient,
     Gradient? gradientDisable,
     List<BoxShadow>? boxShadow,
@@ -73,6 +81,9 @@ class NButtonTheme extends ThemeExtension<NButtonTheme> {
         margin: margin ?? this.margin,
         padding: padding ?? this.padding,
         gradient: gradient ?? this.gradient,
+        backgroudColor: backgroudColor ?? this.backgroudColor,
+        backgroudColorDisable:
+            backgroudColorDisable ?? this.backgroudColorDisable,
         gradientDisable: gradientDisable ?? this.gradientDisable,
         boxShadow: boxShadow ?? this.boxShadow,
         boxShadowDisable: boxShadowDisable ?? this.boxShadowDisable,
@@ -91,6 +102,9 @@ class NButtonTheme extends ThemeExtension<NButtonTheme> {
         primary: Color.lerp(primary, other?.primary, t),
         margin: EdgeInsets.lerp(margin, other?.margin, t),
         padding: EdgeInsets.lerp(padding, other?.padding, t),
+        backgroudColor: Color.lerp(backgroudColor, other?.backgroudColor, t),
+        backgroudColorDisable:
+            Color.lerp(backgroudColorDisable, other?.backgroudColorDisable, t),
         gradient: Gradient.lerp(gradient, other?.gradient, t),
         gradientDisable:
             Gradient.lerp(gradientDisable, other?.gradientDisable, t),
