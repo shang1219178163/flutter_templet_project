@@ -53,24 +53,19 @@ class _SwitchDemoState extends State<SwitchDemo> {
     return Column(
       children: [
         Switch(
-            value: value,
-            onChanged: (val) {
-              value = val;
-              setState(() {});
-            }),
-        Switch(
-            thumbIcon: MaterialStateProperty.all(Icon(Icons.add)),
-            activeThumbImage: "icon_arrow_down.png".toAssetImage(),
-            inactiveThumbImage: "icon_arrow_up.png".toAssetImage(),
-            value: value,
-            onChanged: (val) {
-              value = val;
-              setState(() {});
-            }),
-        Switch(
           thumbIcon: thumbIcon,
           value: value,
           onChanged: (bool val) {
+            value = val;
+            setState(() {});
+          },
+        ),
+        Switch(
+          thumbIcon: MaterialStateProperty.all(Icon(Icons.add)),
+          activeThumbImage: "icon_check_circle_selected.png".toAssetImage(),
+          inactiveThumbImage: "icon_clear.png".toAssetImage(),
+          value: value,
+          onChanged: (val) {
             value = val;
             setState(() {});
           },
