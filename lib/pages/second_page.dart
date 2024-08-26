@@ -757,6 +757,13 @@ class _SecondPageState extends State<SecondPage> {
                 // ),
                 onPressed: () {},
               ),
+              NButton.tonal(
+                primary: Colors.black87,
+                title: "tonal",
+                border: Border.all(color: Colors.transparent),
+                backgroudColor: Colors.transparent,
+                onPressed: () {},
+              ),
               NButton.text(
                 // primary: Colors.red,
                 title: "NButton.text",
