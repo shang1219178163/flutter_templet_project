@@ -42,6 +42,7 @@ class _DisplayFeatureDemoState extends State<DisplayFeatureDemo> {
           children: [
             Text("$widget"),
             buildSubScreen(),
+            buildDisplayFeature(),
           ],
         ),
       ),
@@ -56,6 +57,25 @@ class _DisplayFeatureDemoState extends State<DisplayFeatureDemo> {
         height: 300,
         color: Colors.red,
       ),
+    );
+  }
+
+  Widget buildDisplayFeature() {
+    final mediaQuery = MediaQuery.of(context);
+    final displayFeatures = mediaQuery.displayFeatures;
+
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        if (displayFeatures.isNotEmpty)
+          ...displayFeatures.map((feature) {
+            return Text(
+              'Feature type: ${feature.type}, bounds: ${feature.bounds}',
+            );
+          }).toList()
+        else
+          const Text('No display features detected.'),
+      ],
     );
   }
 }
