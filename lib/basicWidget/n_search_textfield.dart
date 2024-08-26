@@ -8,9 +8,11 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/util/Debounce.dart';
+import 'package:flutter_templet_project/util/color_util.dart';
 
 // ```
 // Expanded(
@@ -43,7 +45,7 @@ class NSearchTextField extends StatefulWidget {
     this.decoration,
     this.backgroundColor,
     this.borderRadius = const BorderRadius.all(Radius.circular(6)),
-    this.padding = const EdgeInsetsDirectional.fromSTEB(3.8, 8, 5, 8),
+    this.padding = const EdgeInsets.all(0),
     this.milliseconds = 500,
     required this.onChanged,
     this.onSubmitted,
@@ -182,6 +184,55 @@ class NSearchTextFieldState extends State<NSearchTextField> {
         enabled: widget.enabled,
         autofocus: widget.autofocus,
       ),
+    );
+  }
+}
+
+class NSearchBar extends StatelessWidget {
+  const NSearchBar({
+    super.key,
+    this.placeholder = "搜索",
+    required this.onChanged,
+    this.onCancel,
+  });
+
+  final String placeholder;
+  final ValueChanged<String> onChanged;
+  final VoidCallback? onCancel;
+
+  @override
+  Widget build(BuildContext context) {
+    final textfield = NSearchTextField(
+      autofocus: true,
+      backgroundColor: Colors.white,
+      placeholder: placeholder,
+      onChanged: onChanged,
+    );
+    if (onCancel == null) {
+      return textfield;
+    }
+
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Expanded(
+          child: textfield,
+        ),
+        InkWell(
+          onTap: onCancel,
+          child: Container(
+            height: 36,
+            padding: const EdgeInsets.only(left: 15, top: 8, bottom: 8),
+            alignment: Alignment.center,
+            child: const NText(
+              '取消',
+              fontSize: 15,
+              color: fontColor,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

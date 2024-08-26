@@ -11,6 +11,7 @@ import 'package:flutter_templet_project/basicWidget/n_alignment_drawer.dart';
 import 'package:flutter_templet_project/basicWidget/n_footer_button_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_pair.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
+import 'package:flutter_templet_project/basicWidget/n_textfield.dart';
 import 'package:flutter_templet_project/extension/button_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/navigator_ext.dart';
@@ -47,6 +48,7 @@ class _BottomSheetDemoState extends State<BottomSheetDemo> {
     ("默认样式", onShowModalBottomSheet),
     ("GetBottomSheet - showBottom", onGetBottom),
     ("GetBottomSheet - showInput", onGetBottomInput),
+    ("GetBottomSheet - onGetBottomDialog", onGetBottomDialog),
     ("GetDialog - showBottom", onGetDialog),
     ("GetDialog - showInput", onGetDialogInput),
   ];
@@ -270,6 +272,38 @@ class _BottomSheetDemoState extends State<BottomSheetDemo> {
         Navigator.of(context).pop();
         setState(() {});
       },
+    );
+  }
+
+  void onGetBottomDialog() {
+    GetBottomSheet.showCustom(
+      child: SafeArea(
+        bottom: false,
+        child: NDialogBox(
+          context: context,
+          title: "编辑原因",
+          message: "编辑原因" * 99,
+          // messagePadding: EdgeInsets.symmetric(vertical: 60),
+          // messageWidget: NTextField(
+          //   fillColor: Colors.white,
+          //   minLines: 4,
+          //   maxLines: 4,
+          //   maxLength: 100,
+          //   onChanged: (String value) {
+          //     DLog.d(value);
+          //   },
+          //   onSubmitted: (String value) {},
+          // ),
+          // onCancel: () {
+          //   DLog.d("onCancel");
+          //   Get.back();
+          // },
+          // onConfirm: () {
+          //   DLog.d("onConfirm");
+          //   Get.back();
+          // },
+        ),
+      ),
     );
   }
 

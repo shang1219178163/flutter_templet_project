@@ -105,33 +105,7 @@ class APPThemeService {
         backgroundColor: Colors.blue,
       ).merge(buildButtonStyle()),
     ),
-    extensions: [
-      AppTheme(
-        primary: const Color(0xFF00B451),
-        primary2: const Color(0xFF00B451).withOpacity(0.8),
-        bgColor: const Color(0xFFF3F3F3),
-        fontColor: const Color(0xFF1A1A1A),
-        titleStyle: const TextStyle(
-          color: Color(0xFF1A1A1A),
-          fontSize: 18,
-          fontWeight: FontWeight.w500,
-          decoration: TextDecoration.none,
-        ),
-        textStyle: const TextStyle(
-          color: Color(0xFF1A1A1A),
-          fontSize: 16,
-          fontWeight: FontWeight.w400,
-          decoration: TextDecoration.none,
-        ),
-        cancelColor: const Color(0xFFE65F55),
-        lineColor: const Color(0xffE4E4E4),
-        borderColor: const Color(0xFFE5E5E5),
-        disabledColor: const Color(0xffB3B3B3),
-      ),
-      NButtonTheme(
-        primary: const Color(0xFF00B451),
-      ),
-    ],
+    extensions: appThemeDataExtensions(),
   );
 
   // ThemeData? darkThemeData;
@@ -183,6 +157,54 @@ class APPThemeService {
       showCheckmark: false,
     ),
   );
+
+  /// 初始化配置
+  Iterable<ThemeExtension<dynamic>>? appThemeDataExtensions() {
+    final appTheme = NAppTheme(
+      primary: const Color(0xFF00B451),
+      primary2: const Color(0xFF00B451).withOpacity(0.8),
+      bgColor: const Color(0xFFF3F3F3),
+      fontColor: const Color(0xFF1A1A1A),
+      titleStyle: const TextStyle(
+        color: Color(0xFF1A1A1A),
+        fontSize: 18,
+        fontWeight: FontWeight.w500,
+        decoration: TextDecoration.none,
+      ),
+      textStyle: const TextStyle(
+        color: Color(0xFF1A1A1A),
+        fontSize: 16,
+        fontWeight: FontWeight.w400,
+        decoration: TextDecoration.none,
+      ),
+      cancelColor: const Color(0xFFE65F55),
+      lineColor: const Color(0xffE4E4E4),
+      borderColor: const Color(0xFFE5E5E5),
+      disabledColor: const Color(0xffB3B3B3),
+    );
+    return [
+      appTheme,
+      NButtonTheme(
+        primary: const Color(0xFF00B451),
+      ),
+      NDialogTheme(
+        width: 368,
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+        titleStyle: TextStyle(
+          fontSize: 24,
+          fontWeight: FontWeight.w500,
+          color: appTheme.fontColor,
+          decoration: TextDecoration.none,
+        ),
+        textStyle: TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.w400,
+          color: appTheme.fontColor,
+          decoration: TextDecoration.none,
+        ),
+      ),
+    ];
+  }
 
   /// 自定义行为
   ButtonStyle buildButtonStyle() {
@@ -372,9 +394,9 @@ class APPThemeService {
 }
 
 /// App 自定义主题
-class AppTheme extends ThemeExtension<AppTheme> {
+class NAppTheme extends ThemeExtension<NAppTheme> {
   /// App 自定义主题
-  AppTheme({
+  NAppTheme({
     this.primary = const Color(0xFF007DBF),
     this.primary2 = const Color(0xFF359EEB),
     this.bgColor = const Color(0xFFF3F3F3),
@@ -428,7 +450,7 @@ class AppTheme extends ThemeExtension<AppTheme> {
   final Color? disabledColor;
 
   @override
-  ThemeExtension<AppTheme> copyWith({
+  ThemeExtension<NAppTheme> copyWith({
     Color? primary,
     Color? primary2,
     Color? bgColor,
@@ -440,7 +462,7 @@ class AppTheme extends ThemeExtension<AppTheme> {
     Color? borderColor,
     Color? disabledColor,
   }) =>
-      AppTheme(
+      NAppTheme(
         primary: primary ?? this.primary,
         primary2: primary2 ?? this.primary2,
         bgColor: bgColor ?? this.bgColor,
@@ -454,11 +476,11 @@ class AppTheme extends ThemeExtension<AppTheme> {
       );
 
   @override
-  ThemeExtension<AppTheme> lerp(
-    covariant AppTheme? other,
+  ThemeExtension<NAppTheme> lerp(
+    covariant NAppTheme? other,
     double t,
   ) =>
-      AppTheme(
+      NAppTheme(
         primary: Color.lerp(primary, other?.primary, t),
         primary2: Color.lerp(primary2, other?.primary2, t),
         bgColor: Color.lerp(bgColor, other?.bgColor, t),
@@ -469,5 +491,69 @@ class AppTheme extends ThemeExtension<AppTheme> {
         lineColor: Color.lerp(lineColor, other?.lineColor, t),
         borderColor: Color.lerp(borderColor, other?.borderColor, t),
         disabledColor: Color.lerp(disabledColor, other?.disabledColor, t),
+      );
+}
+
+/// 弹窗 主题文件
+class NDialogTheme extends ThemeExtension<NDialogTheme> {
+  /// App 默认主题
+  const NDialogTheme({
+    this.width = 315,
+    this.padding = const EdgeInsets.all(20),
+    this.raidus = 16,
+    this.titleStyle = const TextStyle(
+      color: Color(0xFF1A1A1A),
+      fontSize: 24,
+      fontWeight: FontWeight.w500,
+      decoration: TextDecoration.none,
+    ),
+    this.textStyle = const TextStyle(
+      color: Color(0xFF1A1A1A),
+      fontSize: 16,
+      fontWeight: FontWeight.w400,
+      decoration: TextDecoration.none,
+    ),
+  });
+
+  /// 宽
+  final double? width;
+
+  /// 内边距
+  final EdgeInsets? padding;
+
+  /// 圆角
+  final double? raidus;
+
+  /// 标题字体样式
+  final TextStyle? titleStyle;
+
+  /// 字体样式
+  final TextStyle? textStyle;
+
+  @override
+  ThemeExtension<NDialogTheme> copyWith({
+    double? width,
+    EdgeInsets? padding,
+    double? raidus,
+    TextStyle? titleStyle,
+    TextStyle? textStyle,
+  }) =>
+      NDialogTheme(
+        width: width ?? this.width,
+        padding: padding ?? this.padding,
+        raidus: raidus ?? this.raidus,
+        titleStyle: titleStyle ?? this.titleStyle,
+        textStyle: textStyle ?? this.textStyle,
+      );
+
+  @override
+  ThemeExtension<NDialogTheme> lerp(
+    covariant NDialogTheme? other,
+    double t,
+  ) =>
+      NDialogTheme(
+        padding: EdgeInsets.lerp(padding, other?.padding, t),
+        titleStyle: TextStyle.lerp(titleStyle, other?.titleStyle, t),
+        textStyle: TextStyle.lerp(textStyle, other?.textStyle, t),
       );
 }

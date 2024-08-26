@@ -3,9 +3,11 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_templet_project/APPThemeSettings.dart';
 import 'package:flutter_templet_project/basicWidget/n_footer_button_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/n_textfield.dart';
@@ -34,7 +36,7 @@ extension GetRouteUtil on GetInterface {
 class GetBottomSheet {
   /// 弹框 - 自定义child
   static void showCustom({
-    bool enableDrag = false,
+    bool enableDrag = true,
     bool addUnconstrainedBox = true,
     required Widget child,
   }) {
@@ -307,6 +309,103 @@ class NBottomSheet<T extends ({VoidCallback onTap, Widget child})>
     return buildActionCell(
       onTap: onTap,
       child: child ?? const NText('取消'),
+    );
+  }
+}
+
+/// 弹窗内容显示组件
+class NDialogBox extends StatelessWidget {
+  const NDialogBox({
+    super.key,
+    required this.context,
+    this.padding,
+    this.title,
+    this.titleWidget,
+    this.message,
+    this.messageWidget,
+    this.messagePadding = const EdgeInsets.symmetric(vertical: 16),
+    this.bottomWidget,
+    this.onCancel,
+    this.onConfirm,
+  });
+
+  final BuildContext context;
+
+  /// 内边距
+  final EdgeInsets? padding;
+
+  /// 标题
+  final String? title;
+
+  /// 内容组件
+  final Widget? titleWidget;
+
+  /// 内容
+  final String? message;
+
+  /// 内容组件
+  final Widget? messageWidget;
+
+  final EdgeInsets? messagePadding;
+
+  /// 按钮组件
+  final Widget? bottomWidget;
+
+  /// 取消
+  final VoidCallback? onCancel;
+
+  /// 确定
+  final VoidCallback? onConfirm;
+
+  @override
+  Widget build(BuildContext context) {
+    final appTheme = Theme.of(context).extension<NAppTheme>();
+    final fontColor = appTheme?.fontColor;
+
+    final dialogTheme = Theme.of(context).extension<NDialogTheme>();
+
+    return Container(
+      width: dialogTheme?.width ?? 315,
+      clipBehavior: Clip.hardEdge,
+      alignment: Alignment.center,
+      padding: padding ??
+          dialogTheme?.padding ??
+          const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(dialogTheme?.raidus ?? 16),
+      ),
+      child: Column(
+        children: [
+          titleWidget ??
+              NText(
+                title ?? "",
+                textAlign: TextAlign.center,
+                style: appTheme?.titleStyle,
+              ),
+          Container(
+            alignment: Alignment.center,
+            padding: messagePadding,
+            child: messageWidget ??
+                NText(
+                  message ?? "",
+                  color: fontColor,
+                  textAlign: TextAlign.center,
+                  style: appTheme?.textStyle,
+                ),
+          ),
+          bottomWidget ??
+              NFooterButtonBar(
+                padding: EdgeInsets.zero,
+                gap: 16,
+                decoration: const BoxDecoration(
+                  color: Colors.transparent,
+                ),
+                onCancel: onCancel,
+                onConfirm: onConfirm,
+              ),
+        ],
+      ),
     );
   }
 }

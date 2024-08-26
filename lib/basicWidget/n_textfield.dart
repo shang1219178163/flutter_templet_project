@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
+import 'package:flutter_templet_project/extension/editable_text_ext.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 
 // Padding(
@@ -41,6 +42,7 @@ class NTextField extends StatefulWidget {
     this.hintStyle = const TextStyle(fontSize: 16, color: Color(0xff737373)),
     this.minLines = 1,
     this.maxLines = 1,
+    this.maxLength,
     this.keyboardType,
     this.textInputAction = TextInputAction.done,
     this.autofocus = false,
@@ -89,6 +91,9 @@ class NTextField extends StatefulWidget {
 
   /// 最大行数
   final int? maxLines;
+
+  /// 最大字数
+  final int? maxLength;
 
   /// 键盘类型
   final TextInputType? keyboardType;
@@ -165,6 +170,48 @@ class _NTextFieldState extends State<NTextField> {
 
   @override
   Widget build(BuildContext context) {
+    // final defaultPrefixIcon = ValueListenableBuilder<bool>(
+    //   valueListenable: hasFocusVN,
+    //   builder: (_, isFocus, child) {
+    //     final color = isFocus ? context.primaryColor : null;
+    //     return Icon(
+    //       Icons.account_circle,
+    //       color: color,
+    //     );
+    //   },
+    // );
+    //
+    // final defaultSuffixIcon = ValueListenableBuilder<bool>(
+    //   valueListenable: hasFocusVN,
+    //   builder: (_, isFocus, child) {
+    //     return IconButton(
+    //       focusColor: context.primaryColor,
+    //       icon: Image.asset(
+    //         isCloseEye
+    //             ? 'assets/images/icon_eye_close.png'
+    //             : 'assets/images/icon_eye_open.png',
+    //         width: 20,
+    //         height: 20,
+    //         color: isFocus ? context.primaryColor : null,
+    //       ),
+    //       onPressed: () {
+    //         isCloseEye = !isCloseEye;
+    //         setState(() {});
+    //       },
+    //     );
+    //   },
+    // );
+
+    final prefixIcon = widget.prefixIconBuilder?.call(hasFocusVN.value);
+
+    final suffixIcon =
+        widget.suffixIconBuilder?.call(hasFocusVN.value, isCloseEye);
+
+    final counter = widget.maxLength != null
+        ? textEditingController.buildInputDecorationCounter(
+            maxLength: widget.maxLength!)
+        : null;
+
     return TextField(
       controller: textEditingController,
       textAlign: widget.textAlign,
@@ -190,7 +237,10 @@ class _NTextFieldState extends State<NTextField> {
             fontWeight: FontWeight.w400,
             color: fontColor,
           ),
-      inputFormatters: widget.inputFormatters,
+      inputFormatters: widget.inputFormatters ??
+          [
+            LengthLimitingTextInputFormatter(widget.maxLength!),
+          ],
       decoration: InputDecoration(
         filled: true,
         // fillColor: widget.focusColor,
@@ -208,31 +258,9 @@ class _NTextFieldState extends State<NTextField> {
         hintText: widget.hintText,
         hintStyle: widget.hintStyle,
         isCollapsed: widget.isCollapsed ?? false,
-        prefixIcon: widget.prefixIconBuilder == null
-            ? null
-            : ValueListenableBuilder<bool>(
-                valueListenable: hasFocusVN,
-                builder: (_, isFocus, child) {
-                  return widget.prefixIconBuilder?.call(isFocus) ?? SizedBox();
-                }),
-        suffixIcon: widget.suffixIconBuilder == null
-            ? null
-            : ValueListenableBuilder<bool>(
-                valueListenable: hasFocusVN,
-                builder: (_, isFocus, child) {
-                  return IconButton(
-                    focusColor: context.primaryColor,
-                    icon: widget.suffixIconBuilder?.call(
-                          isFocus,
-                          isCloseEye,
-                        ) ??
-                        SizedBox(),
-                    onPressed: () {
-                      isCloseEye = !isCloseEye;
-                      setState(() {});
-                    },
-                  );
-                }),
+        prefixIcon: prefixIcon,
+        suffixIcon: suffixIcon,
+        counter: counter,
       ),
     );
   }
