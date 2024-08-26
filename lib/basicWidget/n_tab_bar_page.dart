@@ -100,24 +100,27 @@ class _NTabBarPageState extends State<NTabBarPage>
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         ValueListenableBuilder(
-            valueListenable: tabBarIndex,
-            builder: (context, index, child) {
-              return widget.headerBuilder?.call(context, index) ?? SizedBox();
-            }),
+          valueListenable: tabBarIndex,
+          builder: (context, index, child) {
+            return widget.headerBuilder?.call(context, index) ?? SizedBox();
+          },
+        ),
         buildTabBar(),
         ValueListenableBuilder(
-            valueListenable: tabBarIndex,
-            builder: (context, index, child) {
-              return widget.middleBuilder?.call(context, index) ?? SizedBox();
-            }),
+          valueListenable: tabBarIndex,
+          builder: (context, index, child) {
+            return widget.middleBuilder?.call(context, index) ?? SizedBox();
+          },
+        ),
         Expanded(
           child: buildBody(),
         ),
         ValueListenableBuilder(
-            valueListenable: tabBarIndex,
-            builder: (context, index, child) {
-              return widget.footerBuilder?.call(context, index) ?? SizedBox();
-            }),
+          valueListenable: tabBarIndex,
+          builder: (context, index, child) {
+            return widget.footerBuilder?.call(context, index) ?? SizedBox();
+          },
+        ),
       ],
     );
   }
@@ -136,6 +139,7 @@ class _NTabBarPageState extends State<NTabBarPage>
           // indicatorPadding: EdgeInsets.only(left: 6, right: 6),
           labelColor: textColor,
           indicatorColor: textColor,
+          dividerColor: Colors.transparent,
           onTap: widget.onTabBar,
         ),
       ),

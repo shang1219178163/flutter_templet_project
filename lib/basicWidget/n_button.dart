@@ -268,7 +268,9 @@ class _NButtonTonal extends NButton {
     final paddingNew = padding ?? theTheme?.padding;
 
     final decoration = BoxDecoration(
-      color: backgroudColor ?? primaryNew.withOpacity(0.1),
+      color: backgroudColor ??
+          theTheme?.backgroudColor ??
+          primaryNew.withOpacity(0.1),
       border: border ?? theTheme?.border ?? Border.all(color: primaryNew),
       borderRadius:
           theTheme?.borderRadius ?? const BorderRadius.all(Radius.circular(8)),
