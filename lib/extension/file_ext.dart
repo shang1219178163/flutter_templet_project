@@ -11,6 +11,26 @@ import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 
+/// app 文件类型
+enum NFileType {
+  unknown("未知", []),
+  image("图片", ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp', 'heic']),
+  video("视频", ["mp4", "avi", "wmv", "rmvb", "mpg", "mpeg", "mov", "3gp"]),
+  audio("音频", ["mp3", "wav", "wma", "amr", "ogg"]),
+  doc("word文档", ["doc", "docx"]),
+  excel("excel文档", ["xls", "xlsx"]),
+  ppt("ppt文档", ["ppt", "pptx"]),
+  pdf("ppt文档", ["pdf"]);
+
+  const NFileType(this.message, this.exts);
+
+  /// 描述
+  final String message;
+
+  /// 类型
+  final List<String> exts;
+}
+
 extension FileExt on File {
   /// assets 路径转 File
   static Future<File> fromAssets(String path) async {
@@ -27,6 +47,9 @@ extension FileExt on File {
     ));
     return file;
   }
+
+  /// 获取文件类型
+  NFileType get fileType => path.fileType;
 
   /// 是否是视频
   bool get isVideo {
@@ -107,5 +130,22 @@ extension FileIntExt on int {
       return 60;
     }
     return 90;
+  }
+}
+
+extension FileStringExt on String {
+  /// 获取文件类型
+  NFileType get fileType {
+    if (!contains(".")) {
+      return NFileType.unknown;
+    }
+
+    final ext = split('.').last.toLowerCase();
+    for (final e in NFileType.values) {
+      if (e.exts.contains(ext)) {
+        return e;
+      }
+    }
+    return NFileType.unknown;
   }
 }
