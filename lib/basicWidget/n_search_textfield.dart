@@ -54,6 +54,8 @@ class NSearchTextField extends StatefulWidget {
     this.onFocus,
     this.autofocus = false,
     this.enabled = true,
+    this.hidePrefixIcon = false,
+    this.suffixInsets,
   }) : super(key: key);
 
   final String? title;
@@ -69,6 +71,12 @@ class NSearchTextField extends StatefulWidget {
 
   /// 默认浅灰色
   final Color? backgroundColor;
+
+  /// 是否隐藏 PrefixIcon
+  final bool hidePrefixIcon;
+
+  /// 尾部边距
+  final EdgeInsets? suffixInsets;
 
   /// 默认圆角 4px
   final BorderRadius? borderRadius;
@@ -207,6 +215,7 @@ class NSearchBar extends StatelessWidget {
       backgroundColor: Colors.white,
       placeholder: placeholder,
       onChanged: onChanged,
+      hidePrefixIcon: false,
     );
     if (onCancel == null) {
       return textfield;
