@@ -135,7 +135,7 @@ class _ConvertFlleState extends State<ConvertFlle> with CreateFileMixin {
                 child: NMenuAnchor<ConvertProtocol>(
                   values: convertTypes,
                   initialItem: current,
-                  cbName: (e) => e.name,
+                  cbName: (e) => e?.name ?? "请选择",
                   onChanged: (e) async {
                     debugPrint(e.name);
                     current = e;

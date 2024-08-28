@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_drop_menu_filter_section_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_header.dart';
+import 'package:flutter_templet_project/extension/ddlog.dart';
 
 class DropdownMenuDemo extends StatefulWidget {
   DropdownMenuDemo({Key? key, this.title}) : super(key: key);
@@ -51,6 +55,21 @@ class _DropdownMenuDemoState extends State<DropdownMenuDemo> {
                   debugPrint(e.name);
                   _selectedItemVN.value = e;
                 },
+              ),
+            ),
+            NSectionHeader(
+              title: "PatientFilterSectionBar",
+              child: NDropMenuFilterSectionBar(
+                onChanged: (e) {
+                  DLog.d(jsonEncode(e.toJson()));
+                },
+                onSearchChanged: (String value) {
+                  DLog.d("onSearchChanged: $value");
+                },
+                onItemName: (name) => "$name${"\t\t" * 9}",
+                constraints: BoxConstraints(
+                  maxHeight: 300,
+                ),
               ),
             ),
           ],

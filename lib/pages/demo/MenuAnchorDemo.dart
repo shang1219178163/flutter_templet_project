@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_menu_anchor.dart';
 import 'package:flutter_templet_project/basicWidget/n_menu_anchor_for_image.dart';
+import 'package:flutter_templet_project/extension/color_ext.dart';
 
 enum SomeItemType { none, itemOne, itemTwo, itemThree }
 
@@ -69,15 +70,21 @@ class _MenuAnchorDemoState extends State<MenuAnchorDemo> {
         NMenuAnchor<SomeItemType>(
           values: SomeItemType.values,
           initialItem: SomeItemType.itemThree,
-          cbName: (e) => e.name,
+          cbName: (e) => e?.name ?? "请选择",
           onChanged: (SomeItemType e) {
             debugPrint(e.name);
             _selectedItemVN.value = e;
           },
           itemBuilder: (e, isSeleced) {
-            return SizedBox(
+            return Container(
               width: 100,
               height: 45,
+              margin: EdgeInsets.symmetric(horizontal: 4, vertical: 4),
+              decoration: BoxDecoration(
+                color: ColorExt.random,
+                border: Border.all(color: Colors.blue),
+                borderRadius: BorderRadius.all(Radius.circular(0)),
+              ),
               child: ListTile(
                 dense: true,
                 // leading: FlutterLogo(size: 24),

@@ -245,7 +245,7 @@ class _ApiCreatePageState extends State<ApiCreatePage> {
             onChanged: (val) {
               appScheme = val;
             },
-            cbName: (e) => e,
+            cbName: (e) => e ?? "请选择",
           ),
         ),
         Row(

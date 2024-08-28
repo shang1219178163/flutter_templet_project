@@ -13,22 +13,35 @@ import 'package:flutter_templet_project/extension/widget_ext.dart';
 class NMenuAnchor<E> extends StatelessWidget {
   const NMenuAnchor({
     super.key,
+    this.controller,
     this.style,
+    this.dropButtonStyle,
+    this.constraints,
+    this.decoration,
     required this.values,
     required this.initialItem,
     this.builder,
     this.itemBuilder,
     required this.onChanged,
     required this.cbName,
+    this.placeholder = "请选择",
   });
 
+  final MenuController? controller;
   final MenuStyle? style;
+  final ButtonStyle? dropButtonStyle;
+
+  /// 下拉框约束
+  final BoxConstraints? constraints;
+
+  /// 下拉框装饰
+  final BoxDecoration? decoration;
 
   /// 数据源
   final List<E> values;
 
   /// 初始化数据
-  final E initialItem;
+  final E? initialItem;
 
   /// item 子视图构建器
   final Widget Function(MenuController controller, E? selectedItem)? builder;
@@ -40,7 +53,8 @@ class NMenuAnchor<E> extends StatelessWidget {
   final ValueChanged<E> onChanged;
 
   /// 标题回调
-  final String Function(E e) cbName;
+  final String Function(E? e) cbName;
+  final String placeholder;
 
   @override
   Widget build(BuildContext context) {
@@ -55,18 +69,36 @@ class NMenuAnchor<E> extends StatelessWidget {
           onChanged.call(e);
         }
 
+        final menuItems = values.map((e) {
+          return MenuItemButton(
+            style: dropButtonStyle,
+            // style: ButtonStyle(
+            //   padding: MaterialStatePropertyAll(EdgeInsets.all(8)),
+            //   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            //   // backgroundColor: MaterialStateProperty.all(Colors.yellow),
+            // ),
+            onPressed: () {
+              onItem(e);
+            },
+            child: itemBuilder?.call(e, e == selectedItem) ?? Text(cbName(e)),
+          );
+        }).toList();
+
         return MenuTheme(
           data: MenuThemeData(
             style: style ??
                 MenuStyle(
-                  padding: MaterialStateProperty.all(EdgeInsets.all(0.0)),
-                  // backgroundColor: MaterialStateProperty.all(Colors.white),
+                  padding: MaterialStateProperty.all(EdgeInsets.all(0)),
                   elevation: MaterialStateProperty.all(8),
                   shadowColor: MaterialStateProperty.all(Colors.black54),
                 ),
           ),
           child: MenuAnchor(
+            controller: controller,
             builder: (context, MenuController controller, Widget? child) {
+              final defaultName =
+                  selectedItem == null ? placeholder : cbName(selectedItem);
+
               return builder?.call(controller, selectedItem) ??
                   OutlinedButton(
                     style: OutlinedButton.styleFrom(
@@ -90,96 +122,47 @@ class NMenuAnchor<E> extends StatelessWidget {
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text(cbName(selectedItem)),
+                        Text(defaultName),
                         Icon(Icons.arrow_drop_down),
                       ],
                     ),
                   );
             },
-            menuChildren: values.map((e) {
-              return MenuItemButton(
-                onPressed: () {
-                  onItem(e);
-                },
-                child:
-                    itemBuilder?.call(e, e == selectedItem) ?? Text(cbName(e)),
-              );
-            }).toList(),
+            menuChildren: [
+              if (constraints != null)
+                buildMenu(
+                  constraints: constraints!,
+                  decoration: decoration,
+                  children: menuItems,
+                ),
+              if (constraints == null) ...menuItems,
+            ],
           ),
         );
       },
     );
   }
-}
 
-// class NEnumMenuAnchor<E extends Enum> extends StatelessWidget {
-//
-//   NEnumMenuAnchor({
-//     super.key,
-//     required this.values,
-//     // this.selectedItem,
-//     this.initialItem,
-//     this.defaultValue = "-",
-//     this.itemBuilder,
-//     required this.onChanged,
-//   });
-//
-//   final List<E> values;
-//   // E? selectedItem;
-//   final E? initialItem;
-//   final String defaultValue;
-//   final Widget Function(MenuController controller, E? selectedItem)? itemBuilder;
-//   final ValueChanged<E> onChanged;
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     var selectedItem = initialItem;
-//
-//     return StatefulBuilder(
-//         builder: (BuildContext context, StateSetter setState) {
-//
-//           return MenuAnchor(
-//             builder: (context, MenuController controller, Widget? child) {
-//
-//               return itemBuilder?.call(controller, selectedItem) ?? OutlinedButton(
-//                 style: OutlinedButton.styleFrom(
-//                   // backgroundColor: Color(0xff5690F4).withOpacity(0.1),
-//                   // foregroundColor: Color(0xff5690F4),
-//                   elevation: 0,
-//                   // shape: StadiumBorder(),
-//                   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-//                   // minimumSize: Size(64, 32),
-//                   padding: EdgeInsets.only(left: 8, right: 2, top: 6, bottom: 6),
-//                 ),
-//                 onPressed: (){
-//                   if (controller.isOpen) {
-//                     controller.close();
-//                   } else {
-//                     controller.open();
-//                   }
-//                 },
-//                 // child: Text(selectedItem?.name ?? defaultValue),
-//                 child: Row(
-//                   mainAxisSize: MainAxisSize.min,
-//                   children: [
-//                     Text(selectedItem?.name ?? defaultValue),
-//                     Icon(Icons.arrow_drop_down),
-//                   ],
-//                 ),
-//               );
-//             },
-//             menuChildren: values.map((e) {
-//               return MenuItemButton(
-//                 onPressed: () {
-//                   selectedItem = e;
-//                   setState(() {});
-//                   onChanged.call(e);
-//                 },
-//                 child: Text(e.name),
-//               );
-//             }).toList(),
-//           );
-//         }
-//     );
-//   }
-// }
+  Widget buildMenu({
+    required BoxConstraints constraints,
+    required BoxDecoration? decoration,
+    required List<Widget> children,
+  }) {
+    final scrollController = ScrollController();
+
+    return Container(
+      constraints: constraints,
+      decoration: decoration,
+      child: Scrollbar(
+        controller: scrollController,
+        thumbVisibility: true,
+        child: SingleChildScrollView(
+          controller: scrollController,
+          child: Column(
+            children: children,
+          ),
+        ),
+      ),
+    );
+  }
+}

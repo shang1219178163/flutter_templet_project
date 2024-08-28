@@ -49,7 +49,7 @@ class _AnimatedSwitcherDemoState extends State<AnimatedSwitcherDemo> {
           child: NMenuAnchor<AxisDirection>(
             values: AxisDirection.values,
             initialItem: selectedItemVN.value,
-            cbName: (e) => e.name,
+            cbName: (e) => e?.name ?? "请选择",
             onChanged: (e) {
               debugPrint(e.name);
               selectedItemVN.value = e;

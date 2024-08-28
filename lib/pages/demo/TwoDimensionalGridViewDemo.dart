@@ -53,7 +53,7 @@ class _TwoDimensionalGridViewDemoState
             diagonalDragBehavior = val;
             setState(() {});
           },
-          cbName: (e) => "DiagonalDragBehavior.${e.name}",
+          cbName: (e) => "DiagonalDragBehavior.${e?.name}",
         ),
         Expanded(
           child: TwoDimensionalGridView(
