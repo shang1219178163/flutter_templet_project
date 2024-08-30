@@ -54,6 +54,7 @@ class _TwoDimensionalGridViewDemoState
             setState(() {});
           },
           cbName: (e) => "DiagonalDragBehavior.${e?.name}",
+          equal: (a, b) => a == b,
         ),
         Expanded(
           child: TwoDimensionalGridView(

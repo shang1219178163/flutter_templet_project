@@ -136,6 +136,7 @@ class _ConvertFlleState extends State<ConvertFlle> with CreateFileMixin {
                   values: convertTypes,
                   initialItem: current,
                   cbName: (e) => e?.name ?? "请选择",
+                  equal: (a, b) => a == b,
                   onChanged: (e) async {
                     debugPrint(e.name);
                     current = e;

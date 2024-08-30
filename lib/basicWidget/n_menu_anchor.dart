@@ -23,6 +23,7 @@ class NMenuAnchor<E> extends StatelessWidget {
     this.builder,
     this.itemBuilder,
     required this.onChanged,
+    required this.equal,
     required this.cbName,
     this.placeholder = "请选择",
   });
@@ -52,6 +53,9 @@ class NMenuAnchor<E> extends StatelessWidget {
   /// 选择回调
   final ValueChanged<E> onChanged;
 
+  /// 相等对比
+  final bool Function(E a, E? b) equal;
+
   /// 标题回调
   final String Function(E? e) cbName;
   final String placeholder;
@@ -70,6 +74,8 @@ class NMenuAnchor<E> extends StatelessWidget {
         }
 
         final menuItems = values.map((e) {
+          final isSelected = equal(e, selectedItem);
+
           return MenuItemButton(
             style: dropButtonStyle,
             // style: ButtonStyle(
@@ -80,7 +86,7 @@ class NMenuAnchor<E> extends StatelessWidget {
             onPressed: () {
               onItem(e);
             },
-            child: itemBuilder?.call(e, e == selectedItem) ?? Text(cbName(e)),
+            child: itemBuilder?.call(e, isSelected) ?? Text(cbName(e)),
           );
         }).toList();
 

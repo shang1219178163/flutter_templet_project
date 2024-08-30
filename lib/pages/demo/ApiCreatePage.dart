@@ -246,6 +246,7 @@ class _ApiCreatePageState extends State<ApiCreatePage> {
               appScheme = val;
             },
             cbName: (e) => e ?? "请选择",
+            equal: (a, b) => a == b,
           ),
         ),
         Row(

@@ -76,6 +76,7 @@ class _AlignmentDrawDemoState extends State<AlignmentDrawDemo> {
                   presentDrawer(alignment: topAlignment);
                 },
                 cbName: (e) => "$e",
+                equal: (a, b) => a == b,
               ),
             ],
           ),

@@ -71,6 +71,7 @@ class _MenuAnchorDemoState extends State<MenuAnchorDemo> {
           values: SomeItemType.values,
           initialItem: SomeItemType.itemThree,
           cbName: (e) => e?.name ?? "请选择",
+          equal: (a, b) => a == b,
           onChanged: (SomeItemType e) {
             debugPrint(e.name);
             _selectedItemVN.value = e;

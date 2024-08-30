@@ -50,6 +50,7 @@ class _AnimatedSwitcherDemoState extends State<AnimatedSwitcherDemo> {
             values: AxisDirection.values,
             initialItem: selectedItemVN.value,
             cbName: (e) => e?.name ?? "请选择",
+            equal: (a, b) => a == b,
             onChanged: (e) {
               debugPrint(e.name);
               selectedItemVN.value = e;

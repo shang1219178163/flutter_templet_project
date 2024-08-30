@@ -29,6 +29,7 @@ class NDropMenuFilterSectionBar extends NDropMenuFilterBar {
           values: List.generate(
               19, (i) => SectionDetailModel(id: i.toString(), name: "分组_$i")),
           cbName: (e) => e?.name ?? "",
+          equal: (a, b) => a.code == b?.code,
           onItemName: onItemName ?? (name) => "$name${"\t\t" * 3}",
           // onChanged: onChanged,
           onChanged: (e) {

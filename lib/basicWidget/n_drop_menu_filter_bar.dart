@@ -23,6 +23,7 @@ class NDropMenuFilterBar<E> extends StatelessWidget {
     required this.values,
     this.selectedItemVN,
     required this.cbName,
+    required this.equal,
     this.placeholder = "请选择",
     required this.onChanged,
     this.searchPlaceholder = "请输入筛选号",
@@ -46,6 +47,9 @@ class NDropMenuFilterBar<E> extends StatelessWidget {
 
   /// 下拉菜单标题回调
   final String Function(E? e) cbName;
+
+  /// 相等对比
+  final bool Function(E a, E? b) equal;
 
   /// 下拉菜单默认标题
   final String placeholder;
@@ -112,6 +116,7 @@ class NDropMenuFilterBar<E> extends StatelessWidget {
                   child: NMenuAnchor<E>(
                     values: values,
                     initialItem: selectedItemVN?.value,
+                    equal: equal,
                     cbName: cbName,
                     onChanged: (e) {
                       selectedItemVN?.value = e;
