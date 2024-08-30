@@ -89,6 +89,16 @@ class _TextFieldWidgetDemoState extends State<TextFieldWidgetDemo> {
               ),
             ),
             NSectionHeader(
+              title: "NTextField - hidePrefix",
+              child: buildNTextField(
+                prefixImage: AssetImage("assets/images/icon_account.png"),
+                suffixImage: AssetImage("assets/images/icon_camera.png"),
+                decorationBuilder: (dt) {
+                  return dt.copyWith(fillColor: Colors.white);
+                },
+              ),
+            ),
+            NSectionHeader(
               title: "NTextField - hidePrefix & hideSuffix",
               child: buildNTextField(
                 hidePrefix: true,
@@ -99,10 +109,13 @@ class _TextFieldWidgetDemoState extends State<TextFieldWidgetDemo> {
               ),
             ),
             NSectionHeader(
-              title: "NTextField - hidePrefix",
+              title: "NTextField - hidePrefix & hideSuffix & maxLines: 4",
               child: buildNTextField(
-                prefixImage: AssetImage("assets/images/icon_account.png"),
-                suffixImage: AssetImage("assets/images/icon_camera.png"),
+                maxLines: 4,
+                maxLength: 200,
+                hidePrefix: true,
+                hideSuffix: true,
+                hideClear: true,
                 decorationBuilder: (dt) {
                   return dt.copyWith(fillColor: Colors.white);
                 },
@@ -117,8 +130,12 @@ class _TextFieldWidgetDemoState extends State<TextFieldWidgetDemo> {
   Widget buildNTextField({
     bool hidePrefix = false,
     bool hideSuffix = false,
+    bool hideClear = false,
     AssetImage? prefixImage,
     AssetImage? suffixImage,
+    Widget? suffix,
+    int? maxLines,
+    int? maxLength,
     InputDecoration Function(InputDecoration decoration)? decorationBuilder,
   }) {
     // final prefixImage = Image(
@@ -162,10 +179,13 @@ class _TextFieldWidgetDemoState extends State<TextFieldWidgetDemo> {
       // },
       // suffixIconConstraints: suffixIconConstraints,
       // suffix: Icon(Icons.cancel, size: 16, color: Colors.black38),
+      maxLines: maxLines,
+      maxLength: maxLength,
       prefixImage: prefixImage,
       suffixImage: suffixImage,
       hidePrefix: hidePrefix,
       hideSuffix: hideSuffix,
+      hideClear: hideClear,
       decorationBuilder: decorationBuilder,
       onChanged: (String value) {
         if (value.trim().isEmpty) {

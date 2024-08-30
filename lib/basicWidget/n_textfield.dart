@@ -66,6 +66,7 @@ class NTextField extends StatefulWidget {
     this.inputFormatters,
     this.hidePrefix = false,
     this.hideSuffix = false,
+    this.hideClear = false,
     this.prefixImage,
     this.suffixImage,
     this.decorationBuilder,
@@ -155,6 +156,8 @@ class NTextField extends StatefulWidget {
 
   final bool hideSuffix;
 
+  final bool hideClear;
+
   final AssetImage? prefixImage;
   final AssetImage? suffixImage;
 
@@ -232,7 +235,7 @@ class _NTextFieldState extends State<NTextField> {
     Widget? suffixIcon = widget.suffixIconBuilder?.call(hasFocusVN.value) ??
         Padding(padding: suffixPadding, child: suffixImage);
 
-    final defaultSuffix = GestureDetector(
+    Widget? defaultSuffix = GestureDetector(
       onTap: () {
         textEditingController.clear();
         widget.onChanged("");
@@ -256,6 +259,10 @@ class _NTextFieldState extends State<NTextField> {
     if (widget.hideSuffix) {
       suffixIcon = null;
       suffixIconConstraints = null;
+    }
+
+    if (widget.hideClear) {
+      defaultSuffix = null;
     }
 
     final decoration = InputDecoration(
