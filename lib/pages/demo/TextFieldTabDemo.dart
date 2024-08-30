@@ -4,6 +4,7 @@ import 'package:flutter_templet_project/basicWidget/n_tab_bar_page.dart';
 import 'package:flutter_templet_project/pages/demo/TextFieldDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/TextFieldDemoTwo.dart';
 import 'package:flutter_templet_project/pages/demo/TextFieldLoginDemo.dart';
+import 'package:flutter_templet_project/pages/demo/TextFieldWidgetDemo.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:tuple/tuple.dart';
@@ -31,6 +32,7 @@ class _TextFieldTabDemoState extends State<TextFieldTabDemo> {
     Tuple2("TextFieldDemoOne", TextFieldDemoOne()),
     Tuple2("TextFieldDemoTwo", TextFieldDemoTwo()),
     Tuple2("TextFieldLoginDemo", TextFieldLoginDemo()),
+    Tuple2("TextFieldWidgetDemo", TextFieldWidgetDemo()),
   ];
 
   @override
