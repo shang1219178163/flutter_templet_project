@@ -406,6 +406,7 @@ var list = <Tuple2<String, String>>[
   Tuple2(APPRouter.textFieldDemo, "textFieldDemo"),
   Tuple2(APPRouter.textFieldDemoOne, "textFieldDemoOne"),
   Tuple2(APPRouter.textFieldDemoTwo, "textFieldDemoTwo"),
+  Tuple2(APPRouter.textFieldWidgetDemo, "textFieldWidgetDemo"),
   Tuple2(APPRouter.layoutBuilderDemo, "layoutBuilderDemo"),
   Tuple2(APPRouter.tableDemo, "tableDemo"),
   Tuple2(APPRouter.nestedScrollViewDemo, "nestedScrollViewDemo"),

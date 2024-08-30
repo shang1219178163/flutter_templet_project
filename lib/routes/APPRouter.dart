@@ -65,6 +65,7 @@ import 'package:flutter_templet_project/pages/demo/SliverMainAxisGroupDemoOne.da
 import 'package:flutter_templet_project/pages/demo/SplitViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/StringTransformPage.dart';
 import 'package:flutter_templet_project/pages/demo/TextFieldDemoTwo.dart';
+import 'package:flutter_templet_project/pages/demo/TextFieldWidgetDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ThemeColorDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TwoDimensionalGridViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/YamlParsePage.dart';
@@ -464,6 +465,7 @@ class APPRouter {
   static const textFieldDemo = '/TextFieldDemo';
   static const textFieldDemoOne = '/TextFieldDemoOne';
   static const textFieldDemoTwo = '/textFieldDemoTwo';
+  static const textFieldWidgetDemo = '/TextFieldWidgetDemo';
 
   static const cupertinoFormDemo = '/CupertinoFormDemo';
   static const contextMenuActionDemo = '/ContextMenuActionDemo';
@@ -1168,6 +1170,11 @@ class AppPage {
       name: APPRouter.textFieldDemoTwo,
       page: () => TextFieldDemoTwo(),
     ),
+    GetPage(
+      name: APPRouter.textFieldWidgetDemo,
+      page: () => TextFieldWidgetDemo(),
+    ),
+
     GetPage(
       name: APPRouter.cupertinoFormDemo,
       page: () => CupertinoFormDemo(),

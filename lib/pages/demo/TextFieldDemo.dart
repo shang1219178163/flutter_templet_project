@@ -64,17 +64,6 @@ class _TextFieldDemoState extends State<TextFieldDemo> {
           ? null
           : AppBar(
               title: Text(widget.title ?? "$widget"),
-              actions: [
-                'done',
-              ]
-                  .map((e) => TextButton(
-                        child: Text(
-                          e,
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        onPressed: onPressed,
-                      ))
-                  .toList(),
             ),
       body: buildColumn(context),
       bottomSheet: Container(

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
@@ -30,12 +31,12 @@ import 'package:flutter_templet_project/util/color_util.dart';
 /// 封装输入框组件
 class NTextField extends StatefulWidget {
   NTextField({
-    Key? key,
+    super.key,
     this.value = "",
     this.controller,
     required this.onChanged,
-    required this.onSubmitted,
-    this.style,
+    this.onSubmitted,
+    this.style = const TextStyle(fontSize: 16),
     this.textAlign = TextAlign.left,
     this.readOnly = false,
     this.hintText = "请输入",
@@ -55,11 +56,20 @@ class NTextField extends StatefulWidget {
     this.enabledBorder,
     this.focusedBorder,
     this.prefixIconBuilder,
+    this.prefix,
+    this.prefixIconConstraints,
     this.suffixIconBuilder,
+    this.suffix,
+    this.suffixIconConstraints,
     this.focusNode,
     this.isCollapsed,
     this.inputFormatters,
-  }) : super(key: key);
+    this.hidePrefix = false,
+    this.hideSuffix = false,
+    this.prefixImage,
+    this.suffixImage,
+    this.decorationBuilder,
+  });
 
   final String? value;
 
@@ -126,12 +136,29 @@ class NTextField extends StatefulWidget {
   final Widget Function(bool isFocus)? prefixIconBuilder;
 
   /// 右边组件构造器
-  final Widget Function(bool isFocus, bool isCloseEye)? suffixIconBuilder;
+  final Widget Function(bool isFocus)? suffixIconBuilder;
+
+  final BoxConstraints? prefixIconConstraints;
+
+  final Widget? prefix;
+
+  final BoxConstraints? suffixIconConstraints;
+
+  final Widget? suffix;
 
   // true代表取消textfield最小高度限制
   final bool? isCollapsed;
 
   final List<TextInputFormatter>? inputFormatters;
+
+  final bool hidePrefix;
+
+  final bool hideSuffix;
+
+  final AssetImage? prefixImage;
+  final AssetImage? suffixImage;
+
+  final InputDecoration Function(InputDecoration decoration)? decorationBuilder;
 
   @override
   _NTextFieldState createState() => _NTextFieldState();
@@ -170,47 +197,93 @@ class _NTextFieldState extends State<NTextField> {
 
   @override
   Widget build(BuildContext context) {
-    // final defaultPrefixIcon = ValueListenableBuilder<bool>(
-    //   valueListenable: hasFocusVN,
-    //   builder: (_, isFocus, child) {
-    //     final color = isFocus ? context.primaryColor : null;
-    //     return Icon(
-    //       Icons.account_circle,
-    //       color: color,
-    //     );
-    //   },
-    // );
-    //
-    // final defaultSuffixIcon = ValueListenableBuilder<bool>(
-    //   valueListenable: hasFocusVN,
-    //   builder: (_, isFocus, child) {
-    //     return IconButton(
-    //       focusColor: context.primaryColor,
-    //       icon: Image.asset(
-    //         isCloseEye
-    //             ? 'assets/images/icon_eye_close.png'
-    //             : 'assets/images/icon_eye_open.png',
-    //         width: 20,
-    //         height: 20,
-    //         color: isFocus ? context.primaryColor : null,
-    //       ),
-    //       onPressed: () {
-    //         isCloseEye = !isCloseEye;
-    //         setState(() {});
-    //       },
-    //     );
-    //   },
-    // );
+    final prefixImage = Image(
+      image: widget.prefixImage ?? AssetImage("assets/images/icon_search.png"),
+      width: 16,
+      height: 16,
+      fit: BoxFit.fill,
+    );
+    final prefixPadding = const EdgeInsets.only(left: 8, right: 4);
+    BoxConstraints? prefixIconConstraints = widget.prefixIconConstraints ??
+        BoxConstraints(
+          maxHeight: prefixImage.height!,
+          maxWidth:
+              prefixImage.width! + prefixPadding.left + prefixPadding.right,
+        );
 
-    final prefixIcon = widget.prefixIconBuilder?.call(hasFocusVN.value);
+    final suffixImage = Image(
+      image: widget.suffixImage ?? AssetImage("assets/images/icon_scan.png"),
+      width: 16,
+      height: 16,
+      color: context.primaryColor,
+      fit: BoxFit.fill,
+    );
+    final suffixPadding = const EdgeInsets.only(left: 4, right: 8);
+    BoxConstraints? suffixIconConstraints = widget.suffixIconConstraints ??
+        BoxConstraints(
+          maxHeight: suffixImage.height!,
+          maxWidth:
+              suffixImage.width! + suffixPadding.left + suffixPadding.right,
+        );
 
-    final suffixIcon =
-        widget.suffixIconBuilder?.call(hasFocusVN.value, isCloseEye);
+    Widget? prefixIcon = widget.prefixIconBuilder?.call(hasFocusVN.value) ??
+        Padding(padding: prefixPadding, child: prefixImage);
+
+    Widget? suffixIcon = widget.suffixIconBuilder?.call(hasFocusVN.value) ??
+        Padding(padding: suffixPadding, child: suffixImage);
+
+    final defaultSuffix = GestureDetector(
+      onTap: () {
+        textEditingController.clear();
+        widget.onChanged("");
+      },
+      child: Padding(
+        padding: const EdgeInsets.only(top: 4),
+        child: Icon(Icons.cancel, size: 15, color: Colors.black38),
+      ),
+    );
 
     final counter = widget.maxLength != null
         ? textEditingController.buildInputDecorationCounter(
             maxLength: widget.maxLength!)
         : null;
+
+    if (widget.hidePrefix) {
+      prefixIcon = null;
+      prefixIconConstraints = null;
+    }
+
+    if (widget.hideSuffix) {
+      suffixIcon = null;
+      suffixIconConstraints = null;
+    }
+
+    final decoration = InputDecoration(
+      filled: true,
+      fillColor: widget.fillColor,
+      focusColor: widget.focusColor,
+      contentPadding: widget.contentPadding ??
+          const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+      border: widget.border ?? InputBorder.none,
+      enabledBorder: widget.readOnly
+          ? null
+          : widget.enabledBorder ?? buildEnabledBorder(radius: widget.radius),
+      focusedBorder: widget.readOnly
+          ? null
+          : widget.focusedBorder ??
+              buildEnabledBorder(
+                  borderColor: context.primaryColor, radius: widget.radius),
+      hintText: widget.hintText,
+      hintStyle: widget.hintStyle,
+      isCollapsed: widget.isCollapsed ?? false,
+      prefixIcon: prefixIcon,
+      suffixIcon: suffixIcon,
+      prefix: widget.prefix,
+      prefixIconConstraints: prefixIconConstraints,
+      suffix: widget.suffix ?? defaultSuffix,
+      suffixIconConstraints: suffixIconConstraints,
+      counter: counter,
+    );
 
     return TextField(
       controller: textEditingController,
@@ -239,50 +312,19 @@ class _NTextFieldState extends State<NTextField> {
           ),
       inputFormatters: widget.inputFormatters ??
           [
-            LengthLimitingTextInputFormatter(widget.maxLength!),
+            if (widget.maxLength != null)
+              LengthLimitingTextInputFormatter(widget.maxLength!),
           ],
-      decoration: InputDecoration(
-        filled: true,
-        // fillColor: widget.focusColor,
-        fillColor: widget.fillColor,
-        focusColor: widget.focusColor,
-        contentPadding: widget.contentPadding ??
-            const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-        border: widget.border ?? InputBorder.none,
-        enabledBorder: widget.readOnly
-            ? null
-            : widget.enabledBorder ?? buildEnabledBorder(radus: widget.radius),
-        focusedBorder: widget.readOnly
-            ? null
-            : widget.focusedBorder ?? buildFocusedBorder(radus: widget.radius),
-        hintText: widget.hintText,
-        hintStyle: widget.hintStyle,
-        isCollapsed: widget.isCollapsed ?? false,
-        prefixIcon: prefixIcon,
-        suffixIcon: suffixIcon,
-        counter: counter,
-      ),
+      decoration: widget.decorationBuilder?.call(decoration) ?? decoration,
     );
   }
 
-  buildEnabledBorder({double radus = 4}) {
+  buildEnabledBorder({Color? borderColor = lineColor, double radius = 4}) {
     return OutlineInputBorder(
-      borderRadius: BorderRadius.all(
-        Radius.circular(radus), //边角
-      ),
+      borderRadius: BorderRadius.all(Radius.circular(radius)),
       borderSide: BorderSide(
         color: lineColor, //边线颜色为白色
         width: 1, //边线宽度为1
-      ),
-    );
-  }
-
-  buildFocusedBorder({double radus = 4}) {
-    return OutlineInputBorder(
-      borderRadius: BorderRadius.all(Radius.circular(radus)), //边角
-      borderSide: BorderSide(
-        color: context.primaryColor, //边框颜色为白色
-        width: 1, //宽度为1
       ),
     );
   }
