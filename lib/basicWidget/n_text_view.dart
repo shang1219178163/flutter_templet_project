@@ -128,7 +128,7 @@ class _NTextViewState extends State<NTextView> {
         final border = buildBorder(color: Colors.white);
 
         final focusedBorder = widget.isCounterInner
-            ? InputBorder.none
+            ? buildBorder(color: Colors.white)
             : buildBorder(color: context.primaryColor);
 
         final dtNew = dt.copyWith(
@@ -152,7 +152,7 @@ class _NTextViewState extends State<NTextView> {
       builder: (context, value, child) {
         final borderColor = value ? context.primaryColor : Colors.transparent;
         return Container(
-          padding: contentMargin,
+          padding: contentMargin.copyWith(top: 4),
           decoration: BoxDecoration(
             color: Colors.white,
             border: Border.all(color: borderColor, width: 1),
