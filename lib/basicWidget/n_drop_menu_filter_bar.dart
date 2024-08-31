@@ -98,7 +98,6 @@ class NDropMenuFilterBar<E> extends StatelessWidget {
                 // padding: EdgeInsets.only(left: 8, top: 4, bottom: 4),
                 child: NSearchTextField(
                   padding: const EdgeInsets.only(left: 4, top: 4, bottom: 4),
-                  suffixInsets: const EdgeInsets.only(left: 4, right: 4),
                   backgroundColor: white,
                   hidePrefixIcon: true,
                   autofocus: false,

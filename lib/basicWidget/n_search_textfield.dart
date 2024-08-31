@@ -9,7 +9,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
+import 'package:flutter_templet_project/basicWidget/theme/n_search_theme.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
+import 'package:flutter_templet_project/extension/function_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/util/Debounce.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
@@ -35,37 +37,43 @@ import 'package:flutter_templet_project/util/color_util.dart';
 // ```
 
 /// 搜索框封装
-class NSearchTextField extends StatefulWidget {
+class NSearchTextField extends StatelessWidget {
   const NSearchTextField({
-    Key? key,
-    this.title,
+    super.key,
     this.controller,
+    this.style,
     this.placeholder = "请输入",
     this.placeholderStyle,
+    this.textAlign = TextAlign.start,
+    this.suffixMode = OverlayVisibilityMode.editing,
     this.decoration,
     this.backgroundColor,
     this.borderRadius = const BorderRadius.all(Radius.circular(6)),
-    this.padding = const EdgeInsets.all(0),
-    this.milliseconds = 500,
+    this.padding = const EdgeInsets.symmetric(vertical: 7),
+    this.debounceDuration,
     required this.onChanged,
     this.onSubmitted,
     this.onSuffixTap,
+    this.suffix,
     this.focusNode,
     this.onFocus,
     this.autofocus = false,
     this.enabled = true,
     this.hidePrefixIcon = false,
-    this.suffixInsets,
-  }) : super(key: key);
-
-  final String? title;
+  });
 
   final TextEditingController? controller;
 
   /// 默认请输入
   final String placeholder;
 
+  final TextStyle? style;
+
   final TextStyle? placeholderStyle;
+
+  final TextAlign textAlign;
+
+  final OverlayVisibilityMode suffixMode;
 
   final BoxDecoration? decoration;
 
@@ -75,16 +83,15 @@ class NSearchTextField extends StatefulWidget {
   /// 是否隐藏 PrefixIcon
   final bool hidePrefixIcon;
 
-  /// 尾部边距
-  final EdgeInsets? suffixInsets;
+  final Widget? suffix;
 
   /// 默认圆角 4px
   final BorderRadius? borderRadius;
 
   final EdgeInsetsGeometry padding;
 
-  /// 默认0.5秒延迟
-  final int? milliseconds;
+  /// 防抖延迟
+  final Duration? debounceDuration;
 
   /// 回调
   final ValueChanged<String> onChanged;
@@ -104,107 +111,120 @@ class NSearchTextField extends StatefulWidget {
   final bool enabled;
 
   @override
-  NSearchTextFieldState createState() => NSearchTextFieldState();
-}
-
-class NSearchTextFieldState extends State<NSearchTextField> {
-  late final _debounce =
-      Debounce(delay: Duration(milliseconds: widget.milliseconds ?? 500));
-
-  late final _controller = widget.controller ?? TextEditingController();
-
-  late final _focusNode = widget.focusNode ?? FocusNode();
-
-  final hasFocusVN = ValueNotifier<bool>(false);
-
-  @override
-  void dispose() {
-    _focusNode.removeListener(_onFocusChange);
-    // _focusNode.dispose();
-
-    super.dispose();
-  }
-
-  @override
-  void initState() {
-    super.initState();
-
-    _focusNode.addListener(_onFocusChange);
-  }
-
-  void _onFocusChange() {
-    hasFocusVN.value = _focusNode.hasFocus;
-    debugPrint("hasFocusVN.value: ${hasFocusVN.value}");
-    widget.onFocus?.call(hasFocusVN.value);
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context).extension<NSearchTextFieldThemeData>();
+
+    final controllerNew = controller ?? TextEditingController();
+    onClear() {
+      controllerNew.clear();
+      onChanged("");
+    }
+
+    final placeholderStyleNew = placeholderStyle ??
+        theme?.placeholderStyle ??
+        const TextStyle(
+          fontSize: 15,
+          color: Color(0xffB3B3B3),
+          fontWeight: FontWeight.w400,
+          height: 1.37,
+        );
+
+    final styleNew = style ??
+        theme?.style ??
+        TextStyle(
+          fontSize: 15,
+          color: fontColor,
+          fontWeight: FontWeight.w400,
+        );
+
+    final prefix = Padding(
+      padding: const EdgeInsets.only(left: 8, right: 6),
+      child: Image(
+        image: const AssetImage("assets/images/icon_search.png"),
+        width: 16,
+        height: 16,
+        color: fontColor ?? theme?.fontColor,
+      ),
+    );
+
+    final suffixNew = suffix ??
+        Padding(
+          padding: const EdgeInsets.only(left: 6, right: 8),
+          child: Icon(Icons.cancel, color: Color(0xff999999), size: 16),
+        );
+
+    final decorationNew = decoration ??
+        BoxDecoration(
+          color: backgroundColor ?? theme?.backgroundColor,
+          borderRadius: borderRadius ?? theme?.borderRadius,
+        );
+
     return DefaultSelectionStyle(
       cursorColor: context.primaryColor,
       child: CupertinoTextField(
-        focusNode: widget.focusNode,
-        controller: widget.controller,
-        padding: widget.padding ?? EdgeInsets.zero,
-        placeholder: widget.placeholder,
-        placeholderStyle: widget.placeholderStyle ??
-            const TextStyle(
-              fontSize: 14,
-              color: Color(0xFF737373),
-              fontWeight: FontWeight.w400,
-            ),
+        focusNode: focusNode,
+        controller: controllerNew,
+        padding: padding ?? theme?.padding ?? EdgeInsets.zero,
+        placeholder: placeholder,
+        placeholderStyle: placeholderStyleNew,
+        style: styleNew,
+        textAlign: textAlign,
         textAlignVertical: TextAlignVertical.center,
+        suffixMode: suffixMode,
         clearButtonMode: OverlayVisibilityMode.editing,
-        prefix: Padding(
-          padding: const EdgeInsets.only(left: 15, top: 9, bottom: 9, right: 9),
-          child: Image(
-            image: "icon_search.png".toAssetImage(),
-            width: 14,
-            height: 14,
-          ),
+        decoration: decorationNew,
+        prefix: prefix,
+        suffix: InkWell(
+          onTap: onSuffixTap ?? onClear,
+          child: suffixNew,
         ),
-        decoration: widget.decoration ??
-            BoxDecoration(
-              color: widget.backgroundColor,
-              borderRadius: BorderRadius.all(Radius.circular(4)),
-            ),
-        // suffix: InkWell(
-        //   onTap: onSuffixTap ?? (){
-        //     controller.clear();
-        //     onChanged.call("");
-        //   },
-        //   child: const Padding(
-        //     padding: EdgeInsets.only(
-        //       left: 6,
-        //       top: 10,
-        //       bottom: 10,
-        //       right: 12,
-        //     ),
-        //     child: Icon(
-        //       Icons.cancel,
-        //       color: Color(0xff999999),
-        //       size: 16,
-        //     ),
-        //   ),
-        // ),
-        onChanged: widget.onChanged,
-        onSubmitted: widget.onChanged,
-        enabled: widget.enabled,
-        autofocus: widget.autofocus,
+        onChanged: debounceDuration == null
+            ? onChanged
+            : (v) => onChanged.debounce(duration: debounceDuration!, value: v),
+        onSubmitted: onChanged,
+        enabled: enabled,
+        autofocus: autofocus,
       ),
     );
+
+    // if (textAlign == TextAlign.start) {
+    //   return DefaultSelectionStyle(
+    //     cursorColor: context.primaryColor,
+    //     child: CupertinoSearchTextField(
+    //       controller: controllerNew,
+    //       placeholder: placeholder ?? theme?.placeholder,
+    //       padding: padding ?? theme?.padding ?? EdgeInsets.zero,
+    //       placeholderStyle: placeholderStyleNew,
+    //       style: styleNew,
+    //       decoration: decorationNew,
+    //       prefixIcon: prefixImage,
+    //       prefixInsets: prefixPadding,
+    //       suffixIcon: suffix,
+    //       suffixInsets: suffixPadding,
+    //       onSuffixTap: onSuffixTap ?? onClear,
+    //       onChanged: onChanged,
+    //       onSubmitted: onSubmitted ?? onChanged,
+    //       enabled: enabled,
+    //       autofocus: autofocus ?? false,
+    //     ),
+    //   );
+    // }
   }
 }
 
+/// 搜索框 + 取消按钮
 class NSearchBar extends StatelessWidget {
   const NSearchBar({
     super.key,
     this.placeholder = "搜索",
+    this.decoration,
     required this.onChanged,
     this.onCancel,
   });
 
   final String placeholder;
+  final BoxDecoration? decoration;
+
   final ValueChanged<String> onChanged;
   final VoidCallback? onCancel;
 
@@ -213,6 +233,7 @@ class NSearchBar extends StatelessWidget {
     final textfield = NSearchTextField(
       autofocus: true,
       backgroundColor: Colors.white,
+      decoration: decoration,
       placeholder: placeholder,
       onChanged: onChanged,
       hidePrefixIcon: false,

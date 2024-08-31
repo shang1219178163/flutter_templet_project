@@ -6,8 +6,10 @@
 //  Copyright © 2024/8/30 shang. All rights reserved.
 //
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_button.dart';
+import 'package:flutter_templet_project/basicWidget/n_search_textfield.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_header.dart';
 import 'package:flutter_templet_project/basicWidget/n_textfield.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
@@ -51,77 +53,134 @@ class _TextFieldWidgetDemoState extends State<TextFieldWidgetDemo> {
   }
 
   Widget buildBody() {
-    return Scrollbar(
-      controller: _scrollController,
-      child: SingleChildScrollView(
+    return SafeArea(
+      child: Scrollbar(
         controller: _scrollController,
-        child: Column(
-          children: [
-            NSectionHeader(
-              title: "NTextField",
-              child: NButton.tonal(
-                title: "取消焦点",
-                onPressed: () {
-                  FocusManager.instance.primaryFocus?.unfocus();
-                },
-              ),
-            ),
-            NSectionHeader(
-              title: "NTextField",
-              child: buildNTextField(
-                decorationBuilder: (dt) {
-                  return dt.copyWith(fillColor: Colors.white);
-                },
-              ),
-            ),
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-              ),
-              child: NSectionHeader(
-                title: "NTextField - hideSuffix",
-                child: buildNTextField(
-                  hideSuffix: true,
-                  decorationBuilder: (dt) {
-                    return dt.copyWith(fillColor: bgColor);
+        child: SingleChildScrollView(
+          controller: _scrollController,
+          child: Column(
+            children: [
+              NSectionHeader(
+                title: "NTextField",
+                child: NButton.tonal(
+                  title: "取消焦点",
+                  onPressed: () {
+                    FocusManager.instance.primaryFocus?.unfocus();
                   },
                 ),
               ),
-            ),
-            NSectionHeader(
-              title: "NTextField - hidePrefix",
-              child: buildNTextField(
-                prefixImage: AssetImage("assets/images/icon_account.png"),
-                suffixImage: AssetImage("assets/images/icon_camera.png"),
-                decorationBuilder: (dt) {
-                  return dt.copyWith(fillColor: Colors.white);
-                },
+              NSectionHeader(
+                title: "NTextField",
+                child: buildNTextField(
+                  decorationBuilder: (dt) {
+                    return dt.copyWith(fillColor: Colors.white);
+                  },
+                ),
               ),
-            ),
-            NSectionHeader(
-              title: "NTextField - hidePrefix & hideSuffix",
-              child: buildNTextField(
-                hidePrefix: true,
-                hideSuffix: true,
-                decorationBuilder: (dt) {
-                  return dt.copyWith(fillColor: Colors.white);
-                },
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                ),
+                child: NSectionHeader(
+                  title: "NTextField - hideSuffix",
+                  child: buildNTextField(
+                    hideSuffix: true,
+                    decorationBuilder: (dt) {
+                      return dt.copyWith(fillColor: bgColor);
+                    },
+                  ),
+                ),
               ),
-            ),
-            NSectionHeader(
-              title: "NTextField - hidePrefix & hideSuffix & maxLines: 4",
-              child: buildNTextField(
-                maxLines: 4,
-                maxLength: 200,
-                hidePrefix: true,
-                hideSuffix: true,
-                hideClear: true,
-                decorationBuilder: (dt) {
-                  return dt.copyWith(fillColor: Colors.white);
-                },
+              NSectionHeader(
+                title: "NTextField - hidePrefix",
+                child: buildNTextField(
+                  prefixImage: AssetImage("assets/images/icon_account.png"),
+                  suffixImage: AssetImage("assets/images/icon_camera.png"),
+                  decorationBuilder: (dt) {
+                    return dt.copyWith(fillColor: Colors.white);
+                  },
+                ),
               ),
-            ),
-          ],
+              NSectionHeader(
+                title: "NTextField - hidePrefix & hideSuffix",
+                child: buildNTextField(
+                  hidePrefix: true,
+                  hideSuffix: true,
+                  decorationBuilder: (dt) {
+                    return dt.copyWith(fillColor: Colors.white);
+                  },
+                ),
+              ),
+              NSectionHeader(
+                title: "NTextField - hidePrefix & hideSuffix & maxLines: 4",
+                child: buildNTextField(
+                  maxLines: 4,
+                  maxLength: 200,
+                  hidePrefix: true,
+                  hideSuffix: true,
+                  hideClear: true,
+                  decorationBuilder: (dt) {
+                    return dt.copyWith(fillColor: Colors.white);
+                  },
+                ),
+              ),
+              NSectionHeader(
+                title: "NSearchTextField",
+                child: NSearchTextField(
+                  backgroundColor: Colors.white,
+                  onChanged: (String value) {},
+                ),
+              ),
+              NSectionHeader(
+                title: "NSearchTextField - textAlign: TextAlign.center",
+                child: NSearchTextField(
+                  backgroundColor: Colors.white,
+                  textAlign: TextAlign.center,
+                  onChanged: (String value) {},
+                ),
+              ),
+              NSectionHeader(
+                title: "NSearchBar ",
+                child: NSearchBar(
+                  onChanged: (String value) {},
+                  onCancel: () {},
+                ),
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                ),
+                child: NSectionHeader(
+                  title: "NSearchBar ",
+                  child: NSearchBar(
+                    decoration: BoxDecoration(
+                      color: bgColor,
+                      borderRadius: BorderRadius.all(Radius.circular(4)),
+                    ),
+                    onChanged: (String value) {},
+                    onCancel: () {},
+                  ),
+                ),
+              ),
+              // NSectionHeader(
+              //   title: "CupertinoSearchTextField",
+              //   child: CupertinoSearchTextField(
+              //     backgroundColor: Colors.white,
+              //     onChanged: (String value) {},
+              //   ),
+              // ),
+              // NSectionHeader(
+              //   title: "CupertinoTextField",
+              //   child: CupertinoTextField(
+              //     placeholder: "🔍搜索",
+              //     minLines: 1,
+              //     maxLines: 4,
+              //     textAlign: TextAlign.center,
+              //     onChanged: (String value) {},
+              //   ),
+              // ),
+            ],
+          ),
         ),
       ),
     );
