@@ -92,37 +92,29 @@ class _TextFieldDemoState extends State<TextFieldDemo> {
                 child: CupertinoTextField(
                   controller: _textController,
                   placeholder: "请输入",
-                  textAlign: TextAlign.start,
+                  textAlign: TextAlign.center,
                   padding:
                       EdgeInsets.only(left: 8, top: 8, bottom: 8, right: 8),
                   suffixMode: OverlayVisibilityMode.editing,
-                  onChanged: (val) => onChanged.debounce(value: val),
+                  decoration: BoxDecoration(
+                    // color: CupertinoColors.tertiarySystemFill,
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(Radius.circular(4)),
+                  ),
                 ),
-              ),
-              NSectionHeader(
-                title: "CupertinoTextField 1",
-                child: CupertinoTextField(
-                    controller: _textController,
-                    placeholder: "请输入",
-                    textAlign: TextAlign.center,
-                    padding:
-                        EdgeInsets.only(left: 8, top: 8, bottom: 8, right: 8),
-                    suffixMode: OverlayVisibilityMode.editing,
-                    decoration: BoxDecoration(
-                      color: CupertinoColors.tertiarySystemFill,
-                      border: Border.all(color: Colors.blue),
-                      borderRadius: BorderRadius.all(Radius.circular(0)),
-                    )),
               ),
               NSectionHeader(
                 title: "CupertinoSearchTextField",
                 child: CupertinoSearchTextField(
                   // prefixIcon: SizedBox(),
                   // prefixInsets: EdgeInsets.zero,
-                  // backgroundColor: Colors.white,
                   padding:
                       EdgeInsets.only(left: 8, top: 8, bottom: 8, right: 8),
                   placeholder: "请输入",
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(Radius.circular(4)),
+                  ),
                   onChanged: (String value) {
                     // debugPrint('onChanged: $value');
                     delayed(() => debugPrint('delayed: $value'));
@@ -375,7 +367,7 @@ class _TextFieldDemoState extends State<TextFieldDemo> {
   }) {
     final contentPadding = EdgeInsets.symmetric(
       horizontal: 8,
-      vertical: 12,
+      vertical: 6,
     );
     return buildTextField(
       controller: controller,

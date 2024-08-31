@@ -72,30 +72,6 @@ class _NOrderNumUnitState extends State<NOrderNumUnit> {
 
   @override
   Widget build(BuildContext context) {
-    return buildTextField();
-  }
-
-  Widget buildTextField(
-      //     {
-      //   TextEditingController? controller,
-      //   TextInputType keyboardType = TextInputType.text,
-      //   bool readOnly = false,
-      //   String? labelText,
-      //   Color? fillColor = Colors.black12,
-      //   Color? fillColorReadOnly = Colors.transparent,
-      //   Color borderColor = Colors.transparent,
-      //   double borderRadius = 4,
-      //   bool isCollapsed = true,
-      //   EdgeInsets? contentPadding = const EdgeInsets.symmetric(
-      //     horizontal: 8,
-      //     vertical: 12,
-      //   ),
-      //   List<TextInputFormatter>? inputFormatters,
-      //   Widget? suffixIcon,
-      //   BoxConstraints? suffixIconConstraints,
-      //   String unit = "元",
-      // }
-      ) {
     final border = OutlineInputBorder(
       borderSide: BorderSide(color: widget.borderColor),
       borderRadius: BorderRadius.circular(widget.borderRadius),
@@ -103,7 +79,7 @@ class _NOrderNumUnitState extends State<NOrderNumUnit> {
 
     final contentPadding = EdgeInsets.symmetric(
       horizontal: 8,
-      vertical: 12,
+      vertical: 6,
     );
 
     return TextField(

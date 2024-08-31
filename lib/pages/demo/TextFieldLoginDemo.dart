@@ -315,8 +315,8 @@ class _LoginInputState extends State<LoginInput> {
         // fillColor:  widget.focusColor,
         contentPadding: const EdgeInsets.only(left: 20, right: 20),
         border: InputBorder.none,
-        enabledBorder: buildEnabledBorder(),
-        focusedBorder: buildFocusedBorder(),
+        enabledBorder: buildBorder(color: lineColor),
+        focusedBorder: buildBorder(color: context.primaryColor),
         hintText: widget.hint,
         hintStyle: TextStyle(fontSize: 16.sp, color: fontColorF9F9F9),
         prefixIcon: IconButton(
@@ -337,26 +337,14 @@ class _LoginInputState extends State<LoginInput> {
     );
   }
 
-  buildEnabledBorder() {
-    return const OutlineInputBorder(
-      borderRadius: BorderRadius.all(
-        Radius.circular(30), //边角
-      ),
-      borderSide: BorderSide(
-        color: lineColor, //边线颜色为白色
-        width: 1, //边线宽度为1
-      ),
-    );
-  }
-
-  buildFocusedBorder() {
+  buildBorder({Color? color, double raduis = 6}) {
     return OutlineInputBorder(
-      borderSide: BorderSide(
-        color: primaryColor,
-        width: 1, //宽度为1
-      ),
       borderRadius: BorderRadius.all(
-        Radius.circular(30), //边角
+        Radius.circular(raduis),
+      ),
+      borderSide: BorderSide(
+        color: color ?? lineColor, //边线颜色为白色
+        width: 1, //边线宽度为1
       ),
     );
   }
