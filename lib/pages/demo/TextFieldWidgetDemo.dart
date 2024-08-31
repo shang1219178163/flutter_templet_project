@@ -11,7 +11,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_button.dart';
 import 'package:flutter_templet_project/basicWidget/n_search_textfield.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_header.dart';
+import 'package:flutter_templet_project/basicWidget/n_text_view.dart';
 import 'package:flutter_templet_project/basicWidget/n_textfield.dart';
+import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
@@ -34,11 +36,6 @@ class _TextFieldWidgetDemoState extends State<TextFieldWidgetDemo> {
       Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
 
   final _scrollController = ScrollController();
-
-  Map<String, dynamic> arguments = Get.arguments ?? <String, dynamic>{};
-
-  /// id
-  late final id = arguments["id"];
 
   @override
   Widget build(BuildContext context) {
@@ -125,6 +122,22 @@ class _TextFieldWidgetDemoState extends State<TextFieldWidgetDemo> {
                 ),
               ),
               NSectionHeader(
+                title: "NTextView - counterInner: false",
+                child: NTextView(
+                  isCounterInner: false,
+                  minLines: 4,
+                  onChanged: (String value) {},
+                ),
+              ),
+              NSectionHeader(
+                title: "NTextView - counterInner: true",
+                child: NTextView(
+                  isCounterInner: true,
+                  minLines: 4,
+                  onChanged: (String value) {},
+                ),
+              ),
+              NSectionHeader(
                 title: "NSearchTextField",
                 child: NSearchTextField(
                   backgroundColor: Colors.white,
@@ -187,6 +200,7 @@ class _TextFieldWidgetDemoState extends State<TextFieldWidgetDemo> {
   }
 
   Widget buildNTextField({
+    FocusNode? focusNode,
     bool hidePrefix = false,
     bool hideSuffix = false,
     bool hideClear = false,
@@ -221,6 +235,7 @@ class _TextFieldWidgetDemoState extends State<TextFieldWidgetDemo> {
     //   maxWidth: suffixImage.width! + suffixPadding.left + suffixPadding.right,
     // );
     return NTextField(
+      focusNode: focusNode,
       isCollapsed: true,
       // fillColor: Colors.white,
       // contentPadding: const EdgeInsets.only(
