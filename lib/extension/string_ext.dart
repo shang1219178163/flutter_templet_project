@@ -53,44 +53,20 @@ extension StringExt on String {
     return result;
   }
 
-  /// 移除左边
-  String trimLeftChar(String char) {
-    var result = this;
-    if (result.startsWith(char)) {
-      result = result.substring(char.length);
-    }
-    return result;
-  }
-
-  /// 移除右边
-  String trimRightChar(String char) {
-    var result = this;
-    if (result.endsWith(char)) {
-      result = result.substring(0, result.length - char.length);
-    }
-    return result;
-  }
-
-  /// 移除两端
-  String trimChar(String char) {
-    var result = trimLeftChar(char).trimRightChar(char);
-    return result;
-  }
-
-  /// 添加前缀后缀
-  String padding({
-    String prefix = "",
-    String suffix = "",
-  }) {
-    var result = this;
-    if (!result.startsWith(prefix)) {
-      result = "$prefix$result";
-    }
-    if (!result.endsWith(suffix)) {
-      result = "$result$suffix";
-    }
-    return result;
-  }
+  // /// 添加前缀后缀
+  // String padding({
+  //   String prefix = "",
+  //   String suffix = "",
+  // }) {
+  //   var result = this;
+  //   if (!result.startsWith(prefix)) {
+  //     result = "$prefix$result";
+  //   }
+  //   if (!result.endsWith(suffix)) {
+  //     result = "$result$suffix";
+  //   }
+  //   return result;
+  // }
 
   /// 转类型 T
   T? tryJsonDecode<T>({Object? Function(Object? key, Object? value)? reviver}) {

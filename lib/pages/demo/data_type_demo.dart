@@ -256,12 +256,17 @@ class _DataTypeDemoState extends State<DataTypeDemo> {
     ddlog("resultC: $resultC");
 
     final listA = [
-      a1.map((v) => "A1"),
-      a2.map((v) => "A2"),
-      a3.map((v) => "A3"),
-      a4.map((v) => "A4"),
+      a1.map((v) => Text("A1")),
+      a2.map((v) => Text("A2")),
+      a3.map((v) => Text("A3")),
+      a4.map((v) => Text("A4")),
     ];
     ddlog(listA);
+
+    // 使用正则表达式删除左边的所有0
+    String strZero = "000123450";
+    String resultZero = strZero.replaceFirst(RegExp(r'^0+'), '');
+    debugPrint('resultZero: $resultZero');
   }
 
   void onDate() {
