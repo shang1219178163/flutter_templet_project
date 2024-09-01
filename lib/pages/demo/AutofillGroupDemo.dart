@@ -32,8 +32,6 @@ class _AutofillGroupDemoState extends State<AutofillGroupDemo> {
 
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
@@ -55,26 +53,8 @@ class _AutofillGroupDemoState extends State<AutofillGroupDemo> {
 
   onPressed() {
     const str = "streetAddressLine2";
-    final reg = RegExp('[A-Z]');
-    final matchs = reg.allMatches(str);
-    for (final Match m in matchs) {
-      var match = m[0]!;
-      debugPrint(match);
-    }
-    final seperators = matchs.map((e) => e[0] ?? "").toList();
-    debugPrint("seperators: $seperators");
-
-    var str1 = "streetAddressLine2";
-    seperators.forEach((e) => str1 = str1.replaceAll(e, "_$e"));
-    debugPrint("str1: $str1");
-
-    const original = 'Hello World';
-    const find = 'World';
-    const replaceWith = 'Home';
-    final newString = original.replaceAll(find, replaceWith);
-    debugPrint("newString: $newString");
-
-    final result = str.seperatorByChars(cb: (String e) => " $e");
+    final result =
+        str.splitMapJoin(RegExp('[A-Z]'), onMatch: (m) => " ${m[0]}");
     debugPrint("result: $result");
   }
 
@@ -89,17 +69,21 @@ class _AutofillGroupDemoState extends State<AutofillGroupDemo> {
                 controller: shippingAddress1,
                 autofillHints: const <String>[AutofillHints.streetAddressLine1],
                 decoration: _buildInputDecoration(
-                    textEditingController: shippingAddress1,
-                    hintText: AutofillHints.streetAddressLine1
-                        .seperatorByChars(cb: (String e) => " $e")),
+                  textEditingController: shippingAddress1,
+                  hintText: AutofillHints.streetAddressLine1.splitMapJoin(
+                      RegExp('[A-Z]'),
+                      onMatch: (m) => " ${m[0]}"),
+                ),
               ),
               TextField(
                 controller: shippingAddress2,
                 autofillHints: const <String>[AutofillHints.streetAddressLine2],
                 decoration: _buildInputDecoration(
-                    textEditingController: shippingAddress2,
-                    hintText: AutofillHints.streetAddressLine2
-                        .seperatorByChars(cb: (String e) => " $e")),
+                  textEditingController: shippingAddress2,
+                  hintText: AutofillHints.streetAddressLine2.splitMapJoin(
+                      RegExp('[A-Z]'),
+                      onMatch: (m) => " ${m[0]}"),
+                ),
               ),
             ],
           ),
@@ -124,9 +108,11 @@ class _AutofillGroupDemoState extends State<AutofillGroupDemo> {
                     AutofillHints.streetAddressLine1,
                   ],
                   decoration: _buildInputDecoration(
-                      textEditingController: billingAddress1,
-                      hintText: AutofillHints.streetAddressLine1
-                          .seperatorByChars(cb: (String e) => " $e")),
+                    textEditingController: billingAddress1,
+                    hintText: AutofillHints.streetAddressLine1.splitMapJoin(
+                        RegExp('[A-Z]'),
+                        onMatch: (m) => " ${m[0]}"),
+                  ),
                 ),
                 TextField(
                   controller: billingAddress2,
@@ -134,9 +120,11 @@ class _AutofillGroupDemoState extends State<AutofillGroupDemo> {
                     AutofillHints.streetAddressLine2,
                   ],
                   decoration: _buildInputDecoration(
-                      textEditingController: billingAddress2,
-                      hintText: AutofillHints.streetAddressLine2
-                          .seperatorByChars(cb: (String e) => " $e")),
+                    textEditingController: billingAddress2,
+                    hintText: AutofillHints.streetAddressLine2.splitMapJoin(
+                        RegExp('[A-Z]'),
+                        onMatch: (m) => " ${m[0]}"),
+                  ),
                 ),
               ],
             ),
@@ -150,8 +138,9 @@ class _AutofillGroupDemoState extends State<AutofillGroupDemo> {
                 autofillHints: const <String>[AutofillHints.creditCardNumber],
                 decoration: _buildInputDecoration(
                     textEditingController: creditCardNumber,
-                    hintText: AutofillHints.creditCardNumber
-                        .seperatorByChars(cb: (String e) => " $e")),
+                    hintText: AutofillHints.creditCardNumber.splitMapJoin(
+                        RegExp('[A-Z]'),
+                        onMatch: (m) => " ${m[0]}")),
               ),
               TextField(
                 controller: creditCardSecurityCode,
@@ -160,8 +149,9 @@ class _AutofillGroupDemoState extends State<AutofillGroupDemo> {
                 ],
                 decoration: _buildInputDecoration(
                     textEditingController: billingAddress2,
-                    hintText: AutofillHints.creditCardSecurityCode
-                        .seperatorByChars(cb: (String e) => " $e")),
+                    hintText: AutofillHints.creditCardSecurityCode.splitMapJoin(
+                        RegExp('[A-Z]'),
+                        onMatch: (m) => " ${m[0]}")),
               ),
             ],
           ),
@@ -171,20 +161,22 @@ class _AutofillGroupDemoState extends State<AutofillGroupDemo> {
           controller: phoneNumber,
           autofillHints: const <String>[AutofillHints.telephoneNumber],
           decoration: _buildInputDecoration(
-              textEditingController: phoneNumber,
-              hintText: AutofillHints.telephoneNumber
-                  .seperatorByChars(cb: (String e) => " $e")),
+            textEditingController: phoneNumber,
+            hintText: AutofillHints.telephoneNumber
+                .splitMapJoin(RegExp('[A-Z]'), onMatch: (m) => " ${m[0]}"),
+          ),
         ),
       ],
     );
   }
 
   /// 输入框修饰器
-  _buildInputDecoration(
-      {required TextEditingController textEditingController,
-      String hintText = "请输入",
-      bool hasEnabledBorder = false,
-      InputBorder? enabledBorder}) {
+  _buildInputDecoration({
+    required TextEditingController textEditingController,
+    String hintText = "请输入",
+    bool hasEnabledBorder = false,
+    InputBorder? enabledBorder,
+  }) {
     final enabledBorderWidget = enabledBorder ??
         (!hasEnabledBorder
             ? null

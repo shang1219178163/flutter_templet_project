@@ -112,9 +112,9 @@ class UserModel with SelectableMixin {
       return null;
     }
 
-    final className = content.splitBySet(["class ", "with "].toSet())[1].trim();
+    final className = content.splitSet(["class ", "with "].toSet())[1].trim();
     final list =
-        content.splitBySet(["});", "$className.fromJson("].toSet()).toList();
+        content.splitSet(["});", "$className.fromJson("].toSet()).toList();
 
     final exports = list[1]
         .split("\n")

@@ -180,14 +180,6 @@ xxxx十分重视用户权利及隐私政策并严格按照相关法律法规的�
     final list = reg.map((e) => e.group(0)).toList();
     ddlog(list);
 
-    final result = text.allMatchesByReg(RegExp(r'《[^《》]+》', multiLine: true));
-    ddlog(result);
-
-    var prefix = "《";
-    var suffix = "》";
-    final origin = '$prefix[^$prefix$suffix]+$suffix';
-    ddlog(text.allMatchesByReg(RegExp(origin)));
-
     var str3 = '''
   Multi
   Line

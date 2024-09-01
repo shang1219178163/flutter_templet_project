@@ -143,7 +143,7 @@ static const String patientGroupPage = '/patientGroupPage';
     }).map((e) {
       final line = e.trim();
       final chars = ["const String", "="];
-      final list = line.splitBySet(chars.toSet());
+      final list = line.splitSet(chars.toSet());
       final name = list[1].trim();
       // ddlog("name: $name");
       final result =

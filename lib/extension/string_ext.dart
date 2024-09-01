@@ -10,8 +10,6 @@ import 'dart:convert';
 import 'dart:typed_data';
 import 'package:flutter/cupertino.dart';
 
-typedef TransformCallback<E> = E Function(E e);
-
 extension StringExt on String {
   static bool isEmpty(String? val) {
     return val == null || val.isEmpty;
@@ -152,13 +150,6 @@ extension StringExt on String {
     return hash;
   }
 
-  /// 获取匹配到的元素数组
-  List<String> allMatchesByReg(RegExp regExp) {
-    final reg = regExp.allMatches(this);
-    final list = reg.map((e) => e.group(0)).whereType<String>().toList();
-    return list;
-  }
-
   ///首字母大写
   String toCapitalize() {
     if (length <= 1) {
@@ -192,29 +183,10 @@ extension StringExt on String {
   }
 
   /// 用多个字符串分割文本
-  List<String> splitBySet(Set<String> set) {
+  List<String> splitSet(Set<String> set) {
     var pattern = set.map((d) => RegExp.escape(d)).join('|');
     var parts = split(RegExp(pattern, multiLine: true));
     return parts;
-  }
-
-  ///解析
-  static parseResponse(dynamic data) {
-    try {
-      var result = "";
-      if (data is Map) {
-        result += jsonEncode(data);
-      } else if (data is List) {
-        result += jsonEncode(data);
-      } else if (data is bool || data is num) {
-        result += data.toString();
-      } else if (data is String) {
-        result += data;
-      }
-      return result;
-    } catch (e) {
-      debugPrint("parseResponse $e");
-    }
   }
 
   /// 字符串版本对比
@@ -274,73 +246,6 @@ extension StringExt on String {
     return a.compareTo(b);
   }
 
-  /// 用字符切分字符串
-  seperatorByChars({
-    TransformCallback<String>? cb,
-    String source = '[A-Z]',
-    bool multiLine = false,
-    bool caseSensitive = true,
-    bool unicode = false,
-    bool dotAll = false,
-  }) {
-    final reg = RegExp(
-      source,
-      multiLine: multiLine,
-      caseSensitive: caseSensitive,
-      unicode: unicode,
-      dotAll: dotAll,
-    );
-
-    final matchs = reg.allMatches(this);
-    // for (final Match m in matchs) {
-    //   String match = m[0]!;
-    //   print(match);
-    // }
-    final seperators =
-        matchs.map((e) => e[0] ?? "").where((e) => e.isNotEmpty).toList();
-
-    var result = this;
-    seperators.forEach((e) => result = result.replaceAll(e, cb?.call(e) ?? e));
-    return result;
-  }
-
-  /// 根据 pattern 将首次匹配的部分高亮显示
-  InlineSpan firstMatchLight({
-    required String pattern,
-    TextStyle? textStyle,
-    TextStyle? lightTextStyle,
-  }) {
-    String text = this;
-
-    final regexp = RegExp(pattern, caseSensitive: false, multiLine: true);
-    final match = regexp.firstMatch(text);
-    final matchedText = match?.group(0);
-    if (matchedText == null) {
-      return TextSpan(text: text);
-    }
-
-    var index = text.indexOf(matchedText);
-    var endIndex = index + matchedText.length;
-
-    final sub = text.substring(index, endIndex);
-    final leftStr = text.substring(0, index);
-    final rightStr = text.substring(endIndex);
-
-    return TextSpan(
-      children: [
-        TextSpan(
-          text: leftStr,
-          style: textStyle,
-        ),
-        TextSpan(text: sub, style: lightTextStyle),
-        TextSpan(
-          text: rightStr,
-          style: textStyle,
-        ),
-      ],
-    );
-  }
-
   /// url 阿里云存储处理
   processAliOSS({
     int? cacheWidth,
@@ -367,7 +272,7 @@ extension StringExt on String {
 
 extension StringNullableExt on String? {
   /// 赋予默认值
-  String get orBlank {
+  String get orEmpty {
     return this ?? "";
   }
 }

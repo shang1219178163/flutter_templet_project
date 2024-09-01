@@ -242,8 +242,14 @@ class _DataTypeDemoState extends State<DataTypeDemo> {
     String? a3;
     String? a4 = "a4";
     final resultA = a1.or("") + a2.or("") + a3.or("") + a4.or("");
-    final resultB = a1.orBlank + a2.orBlank + a3.orBlank + a4.orBlank;
+    final resultB = a1.orEmpty + a2.orEmpty + a3.orEmpty + a4.orEmpty;
     final resultC = [a1, a2, a3, a4].removeNull();
+
+    // String a5 = a4.or(Text(e));
+    // final a13 = a3.map((e) => Text(e));
+    // final a14 = a4.map((e) => Text(e));
+    // ddlog("result13: ${[a13, a14]}");
+    // return;
 
     ddlog("resultA: $resultA");
     ddlog("resultB: $resultB");
