@@ -1,8 +1,6 @@
 import 'package:enhance_expansion_panel/enhance_expansion_panel.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_templet_project/basicWidget/n_cancel_and_confirm_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_choice_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_choice_expansion_of_model.dart';
 import 'package:flutter_templet_project/basicWidget/n_date_start_end.dart';
@@ -10,19 +8,14 @@ import 'package:flutter_templet_project/basicWidget/n_filter_drop_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_pair.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/n_textfield_search.dart';
-import 'package:flutter_templet_project/extension/build_context_ext.dart';
-import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/num_ext.dart';
-import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
+import 'package:flutter_templet_project/model/fake_data_model.dart';
 import 'package:flutter_templet_project/model/order_model.dart';
 import 'package:flutter_templet_project/model/tag_detail_model.dart';
 import 'package:flutter_templet_project/util/Debounce.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
-import 'package:flutter_templet_project/model/fake_data_model.dart';
-import 'package:flutter_templet_project/vendor/flutter_pickers/flutter_picker_util.dart';
-import 'package:get_storage/get_storage.dart';
 
 class DropBoxChoicDemo extends StatefulWidget {
   DropBoxChoicDemo({Key? key, this.title}) : super(key: key);

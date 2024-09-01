@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:enhance_expansion_panel/enhance_expansion_panel.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/choice_filter_box.dart';
@@ -14,12 +12,12 @@ import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/model/fake_data_model.dart';
-import 'package:flutter_templet_project/model/order_model.dart';
 import 'package:flutter_templet_project/model/tag_detail_model.dart';
 import 'package:flutter_templet_project/model/user_model.dart';
 import 'package:flutter_templet_project/util/Debounce.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 
+/// 筛选框重构
 class DropBoxChoicDemoNew extends StatefulWidget {
   DropBoxChoicDemoNew({Key? key, this.title}) : super(key: key);
 
