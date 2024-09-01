@@ -18,8 +18,8 @@ import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/mixin/selectable_mixin.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 
-class ChoiceFilterBoxItemModel<T extends SelectableMixin> {
-  ChoiceFilterBoxItemModel({
+class NChoiceFilterBoxItemModel<T extends SelectableMixin> {
+  NChoiceFilterBoxItemModel({
     required this.title,
     required this.models,
     required this.selectedModels,
@@ -69,8 +69,8 @@ class ChoiceFilterBoxItemModel<T extends SelectableMixin> {
   }
 }
 
-class ChoiceFilterBoxModel {
-  ChoiceFilterBoxModel({
+class NChoiceFilterBoxModel {
+  NChoiceFilterBoxModel({
     required this.choices,
     this.startTime,
     this.startTimeTmp,
@@ -80,7 +80,7 @@ class ChoiceFilterBoxModel {
   });
 
   /// 选项组
-  final List<ChoiceFilterBoxItemModel> choices;
+  final List<NChoiceFilterBoxItemModel> choices;
 
   /// 入组时间 - 开始
   String? startTime;
@@ -121,8 +121,8 @@ class ChoiceFilterBoxModel {
 }
 
 /// 患者筛选弹窗(分组+状态+时段)
-class ChoiceFilterBox extends StatefulWidget {
-  ChoiceFilterBox({
+class NChoiceFilterBox extends StatefulWidget {
+  NChoiceFilterBox({
     super.key,
     this.controller,
     required this.model,
@@ -139,7 +139,7 @@ class ChoiceFilterBox extends StatefulWidget {
   /// 控制器
   final ChoiceFilterBoxController? controller;
 
-  final ChoiceFilterBoxModel model;
+  final NChoiceFilterBoxModel model;
 
   /// 是否有改变
   final ValueNotifier<bool> isChanged;
@@ -148,13 +148,13 @@ class ChoiceFilterBox extends StatefulWidget {
   final VoidCallback? onInit;
 
   /// 筛选弹窗 - 取消
-  final ValueChanged<ChoiceFilterBoxModel> onCancel;
+  final ValueChanged<NChoiceFilterBoxModel> onCancel;
 
   /// 筛选弹窗 - 重置
-  final ValueChanged<ChoiceFilterBoxModel> onReset;
+  final ValueChanged<NChoiceFilterBoxModel> onReset;
 
   /// 筛选弹窗 - 确定
-  final ValueChanged<ChoiceFilterBoxModel> onConfirm;
+  final ValueChanged<NChoiceFilterBoxModel> onConfirm;
 
   /// 内容对齐方式
   final Alignment contentAlignment;
@@ -166,10 +166,10 @@ class ChoiceFilterBox extends StatefulWidget {
   final Widget child;
 
   @override
-  State<ChoiceFilterBox> createState() => _ChoiceFilterBoxState();
+  State<NChoiceFilterBox> createState() => _NChoiceFilterBoxState();
 }
 
-class _ChoiceFilterBoxState extends State<ChoiceFilterBox>
+class _NChoiceFilterBoxState extends State<NChoiceFilterBox>
     with SingleTickerProviderStateMixin {
   //筛选按钮是否高亮
   late final isHighlight = widget.isChanged;
@@ -194,7 +194,7 @@ class _ChoiceFilterBoxState extends State<ChoiceFilterBox>
   }
 
   @override
-  void didUpdateWidget(covariant ChoiceFilterBox oldWidget) {
+  void didUpdateWidget(covariant NChoiceFilterBox oldWidget) {
     super.didUpdateWidget(oldWidget);
     final isChange = widget.model != oldWidget.model;
     if (!isChange) {
@@ -410,14 +410,14 @@ class _ChoiceFilterBoxState extends State<ChoiceFilterBox>
 }
 
 class ChoiceFilterBoxController {
-  _ChoiceFilterBoxState? _anchor;
-  _ChoiceFilterBoxState? get anchor => _anchor;
+  _NChoiceFilterBoxState? _anchor;
+  _NChoiceFilterBoxState? get anchor => _anchor;
 
-  void _attach(_ChoiceFilterBoxState anchor) {
+  void _attach(_NChoiceFilterBoxState anchor) {
     _anchor = anchor;
   }
 
-  void _detach(_ChoiceFilterBoxState anchor) {
+  void _detach(_NChoiceFilterBoxState anchor) {
     if (_anchor == anchor) {
       _anchor = null;
     }

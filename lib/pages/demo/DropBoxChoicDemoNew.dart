@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_templet_project/basicWidget/choice_filter_box.dart';
+import 'package:flutter_templet_project/basicWidget/n_choice_filter_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_filter_button.dart';
 import 'package:flutter_templet_project/basicWidget/n_filter_drop_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_refresh_view.dart';
@@ -47,9 +47,9 @@ class _DropBoxChoicDemoNewState extends State<DropBoxChoicDemoNew> {
   NFilterDropBoxController? get filterController =>
       patientFilterController.anchor?.filterController;
 
-  final filterModel = ChoiceFilterBoxModel(
+  final filterModel = NChoiceFilterBoxModel(
     choices: [
-      ChoiceFilterBoxItemModel(
+      NChoiceFilterBoxItemModel(
         title: "选项",
         models: List.generate(20, (i) => i)
             .map((e) => FakeDataModel(
@@ -61,7 +61,7 @@ class _DropBoxChoicDemoNewState extends State<DropBoxChoicDemoNew> {
         selectedModelsTmp: [],
         // isSingle: true,
       ),
-      ChoiceFilterBoxItemModel(
+      NChoiceFilterBoxItemModel(
         title: "标签",
         models: List.generate(20, (i) => i)
             .map((e) => TagDetailModel(
@@ -96,7 +96,7 @@ class _DropBoxChoicDemoNewState extends State<DropBoxChoicDemoNew> {
         children: [
           buildSearchBar(),
           Expanded(
-            child: ChoiceFilterBox(
+            child: NChoiceFilterBox(
               controller: patientFilterController,
               model: filterModel,
               isChanged: isHighlight,
