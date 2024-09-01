@@ -487,6 +487,7 @@ var list = <Tuple2<String, String>>[
   Tuple2(APPRouter.nestedScrollViewDemoTwo, "nestedScrollViewDemoTwo"),
   Tuple2(APPRouter.expansionTileCard, "expansionTileCard"),
   Tuple2(APPRouter.dropBoxChoicDemo, "下拉菜单"),
+  Tuple2(APPRouter.dropBoxChoicDemoNew, "下拉菜单New"),
   Tuple2(APPRouter.dropBoxMutiRowChoicDemo, "下拉菜单多行选择"),
   Tuple2(APPRouter.customSingleChildLayoutDemo, "customSingleChildLayoutDemo"),
   Tuple2(APPRouter.customMultiChildLayoutDemo, "customMultiChildLayoutDemo"),

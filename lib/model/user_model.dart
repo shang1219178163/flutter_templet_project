@@ -20,6 +20,7 @@ class UserModel with SelectableMixin {
     this.phone,
     this.website,
     this.company,
+    this.tag,
   });
 
   String? id;
@@ -32,6 +33,7 @@ class UserModel with SelectableMixin {
   String? phone;
   String? website;
   Company? company;
+  String? tag;
 
   @override
   String get selectableId => id.toString();
@@ -53,6 +55,7 @@ class UserModel with SelectableMixin {
     website = json['website'];
     company =
         json['company'] != null ? Company.fromJson(json['company']) : null;
+    tag = json['tag'];
 
     isSelected = json['isSelected'] ?? false;
   }
@@ -69,6 +72,7 @@ class UserModel with SelectableMixin {
     data['phone'] = phone;
     data['website'] = website;
     data['company'] = company?.toJson();
+    data['tag'] = tag;
 
     data['isSelected'] = isSelected;
     return data;

@@ -15,18 +15,23 @@ import 'package:flutter_templet_project/util/color_util.dart';
 class NFilterSection<T> extends StatefulWidget {
   NFilterSection({
     super.key,
-    this.title = "分组",
+    required this.title,
+    this.isSingle = true,
     this.isExpand = false,
     this.collapseCount = 6,
     required this.items,
     required this.cbID,
     required this.cbName,
     required this.cbSelected,
-    required this.onChanged,
+    this.itemBuilder,
+    this.onChanged,
+    this.onSingleChanged,
   });
 
   /// 标题
   final String title;
+
+  final bool isSingle;
 
   /// 默认展开还是收起
   final bool isExpand;
@@ -39,18 +44,32 @@ class NFilterSection<T> extends StatefulWidget {
   final String Function(T) cbID;
   final String Function(T) cbName;
   final bool Function(T) cbSelected;
-  final ValueChanged<T?> onChanged;
+
+  /// 子项样式自定义
+  final Widget? Function(T e, bool isSelected)? itemBuilder;
+
+  /// 单选回调
+  final ValueChanged<T?>? onSingleChanged;
+
+  /// 多选回调
+  final ValueChanged<List<T>>? onChanged;
 
   @override
   State<NFilterSection<T>> createState() => _NFilterSectionState<T>();
 }
 
 class _NFilterSectionState<T> extends State<NFilterSection<T>> {
-  final _scrollController = ScrollController();
-
   late bool isExpand = widget.isExpand;
 
-  final weChatTitleColor = Color(0xff1A1A1A);
+  @override
+  void didUpdateWidget(covariant NFilterSection<T> oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    final ids = widget.items.map((e) => widget.cbID(e)).join(",");
+    final oldWidgetIds = oldWidget.items.map((e) => widget.cbID(e)).join(",");
+    if (ids != oldWidgetIds) {
+      setState(() {});
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -86,9 +105,18 @@ class _NFilterSectionState<T> extends State<NFilterSection<T>> {
                       ))
                   .toList(),
               onChanged: (value) {
-                final tmp = value.isEmpty ? null : value.first.data;
-                widget.onChanged(tmp);
+                if (widget.isSingle) {
+                  final tmp = value.isEmpty ? null : value.first.data;
+                  widget.onSingleChanged?.call(tmp);
+                } else {
+                  var tmp = value
+                      .map((e) => e.data!)
+                      .where((e) => e != null)
+                      .toList();
+                  widget.onChanged?.call(tmp);
+                }
               },
+              itemBuilder: widget.itemBuilder,
             ),
           ],
         ),
@@ -130,7 +158,7 @@ class _NFilterSectionState<T> extends State<NFilterSection<T>> {
         title: Text(
           title,
           style: TextStyle(
-            color: weChatTitleColor,
+            color: fontColor,
             fontSize: 15,
             fontWeight: FontWeight.w500,
           ),

@@ -36,6 +36,7 @@ import 'package:flutter_templet_project/pages/demo/DevelopToolList.dart';
 import 'package:flutter_templet_project/pages/demo/DialogChoiceChipDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DirectoryTestDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DisplayFeatureDemo.dart';
+import 'package:flutter_templet_project/pages/demo/DropBoxChoicDemoNew.dart';
 import 'package:flutter_templet_project/pages/demo/EmojiPage.dart';
 import 'package:flutter_templet_project/pages/demo/FlutterFFiTest.dart';
 import 'package:flutter_templet_project/pages/demo/FlutterPickerUtilDemo.dart';
@@ -648,6 +649,7 @@ class APPRouter {
   static const pageViewAndBarDemo = '/pageViewAndBarDemo';
   static const pageViewDemoOne = '/pageViewDemoOne';
   static const dropBoxChoicDemo = '/dropBoxChoicDemo';
+  static const dropBoxChoicDemoNew = '/dropBoxChoicDemoNew';
   static const dropBoxMutiRowChoicDemo = '/dropBoxMutiRowChoicDemo';
   static const slidableDemoOne = '/slidableDemoOne';
   static const imChatPage = '/imChatPage';
@@ -1827,6 +1829,11 @@ class AppPage {
       name: APPRouter.dropBoxChoicDemo,
       page: () => DropBoxChoicDemo(),
     ),
+    GetPage(
+      name: APPRouter.dropBoxChoicDemoNew,
+      page: () => DropBoxChoicDemoNew(),
+    ),
+
     GetPage(
       name: APPRouter.dropBoxMutiRowChoicDemo,
       page: () => DropBoxMutiRowChoicDemo(),
