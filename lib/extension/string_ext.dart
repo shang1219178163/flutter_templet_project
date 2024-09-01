@@ -239,9 +239,12 @@ extension StringExt on String {
     var regIntNon = RegExp(r"[^0-9]");
 
     if (a.contains(regInt) && b.contains(regInt)) {
-      final one = int.parse(a.replaceAll(regIntNon, ''));
-      final two = int.parse(b.replaceAll(regIntNon, ''));
-      return one.compareTo(two);
+      final aInt = int.tryParse(a.replaceAll(regIntNon, ''));
+      final bInt = int.tryParse(b.replaceAll(regIntNon, ''));
+      if (aInt == null || bInt == null) {
+        return 0;
+      }
+      return aInt.compareTo(bInt);
     }
     return a.compareTo(b);
   }
