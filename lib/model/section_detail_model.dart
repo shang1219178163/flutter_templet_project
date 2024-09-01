@@ -128,6 +128,7 @@ class SectionDetailModel with SelectableMixin {
     subjectUserCount = (json['subjectUserCount'] as int?);
   }
 
+  @override
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['id'] = id;

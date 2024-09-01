@@ -747,7 +747,7 @@ class _SecondPageState extends State<SecondPage> {
               ),
               NButton.tonal(
                 primary: Colors.black87,
-                title: "NButton.tonal",
+                title: "NButton.tonal1",
                 border: Border.all(color: Colors.transparent),
                 backgroudColor: Color(0xffF3F3F3),
                 // gradient: LinearGradient(

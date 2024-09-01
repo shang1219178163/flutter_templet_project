@@ -6,38 +6,131 @@
 //  Copyright © 2024/8/31 shang. All rights reserved.
 //
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_choice_expansion_of_model.dart';
 import 'package:flutter_templet_project/basicWidget/n_date_start_end.dart';
 import 'package:flutter_templet_project/basicWidget/n_filter_drop_box.dart';
-import 'package:flutter_templet_project/basicWidget/n_filter_section.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
-import 'package:flutter_templet_project/cache/cache_service.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
-import 'package:flutter_templet_project/model/fake_data_model.dart';
-import 'package:flutter_templet_project/model/section_detail_model.dart';
-import 'package:flutter_templet_project/model/status_detail_model.dart';
-import 'package:flutter_templet_project/model/tag_detail_model.dart';
+import 'package:flutter_templet_project/mixin/selectable_mixin.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
+
+class ChoiceFilterBoxItemModel<T extends SelectableMixin> {
+  ChoiceFilterBoxItemModel({
+    required this.title,
+    required this.models,
+    required this.selectedModels,
+    required this.selectedModelsTmp,
+    this.hide = false,
+    this.isSingle = false,
+  });
+
+  final String title;
+
+  /// 选项组
+  final List<T> models;
+
+  final List<T> selectedModels;
+  final List<T> selectedModelsTmp;
+
+  /// 隐藏分组
+  final bool hide;
+
+  /// 是否单选
+  final bool isSingle;
+
+  bool get isNotEmpty => [
+        selectedModels,
+        selectedModelsTmp,
+      ].isNotEmpty;
+
+  Map<String, dynamic> toJson() {
+    final data = Map<String, dynamic>();
+    data['title'] = title;
+    data['models'] = models.map((e) => e.toJson()).toList();
+    data['selectedModels'] = selectedModels.map((e) => e.toJson()).toList();
+    data['selectedModelsTmp'] =
+        selectedModelsTmp.map((e) => e.toJson()).toList();
+    data['hide'] = hide;
+    data['isSingle'] = isSingle;
+    return data;
+  }
+
+  @override
+  String toString() {
+    final result = toJson();
+    result.removeWhere(
+        (key, value) => !["selectedModels", "selectedModelsTmp"].contains(key));
+    var encoder = JsonEncoder.withIndent('  '); // 使用带缩进的 JSON 编码器
+    return encoder.convert(result);
+  }
+}
+
+class ChoiceFilterBoxModel {
+  ChoiceFilterBoxModel({
+    required this.choices,
+    this.startTime,
+    this.startTimeTmp,
+    this.endTime,
+    this.endTimeTmp,
+    this.hideDateRange = false,
+  });
+
+  /// 选项组
+  final List<ChoiceFilterBoxItemModel> choices;
+
+  /// 入组时间 - 开始
+  String? startTime;
+  String? startTimeTmp;
+
+  /// 入组时间 - 结束
+  String? endTime;
+  String? endTimeTmp;
+
+  /// 隐藏时间起止
+  final bool hideDateRange;
+
+  bool get isNotEmpty =>
+      [
+        startTime,
+        endTime,
+        startTimeTmp,
+        endTimeTmp,
+      ].where((e) => e != null).isNotEmpty &&
+      choices.map((e) => e.isNotEmpty).contains(true);
+
+  Map<String, dynamic> toJson() {
+    final data = Map<String, dynamic>();
+    data['choices'] = choices.map((e) => e.toString()).toList();
+    data['startTime'] = startTime;
+    data['startTimeTmp'] = startTimeTmp;
+    data['endTime'] = endTime;
+    data['endTimeTmp'] = endTimeTmp;
+    return data;
+  }
+
+  @override
+  String toString() {
+    final result = toJson();
+    final encoder = JsonEncoder.withIndent('  '); // 使用带缩进的 JSON 编码器
+    return encoder.convert(result);
+  }
+}
 
 /// 患者筛选弹窗(分组+状态+时段)
 class ChoiceFilterBox extends StatefulWidget {
   ChoiceFilterBox({
     super.key,
     this.controller,
-    this.selectedModels = const [],
-    this.selectedTags = const [],
-    this.startTime,
-    this.endTime,
+    required this.model,
     required this.isChanged,
     this.onInit,
     required this.onCancel,
     required this.onReset,
     required this.onConfirm,
-    this.hideSection = false,
-    this.hideStatus = false,
-    this.hideDateRange = false,
     this.contentAlignment = Alignment.topCenter,
     this.onInitState,
     required this.child,
@@ -46,15 +139,7 @@ class ChoiceFilterBox extends StatefulWidget {
   /// 控制器
   final ChoiceFilterBoxController? controller;
 
-  List<FakeDataModel> selectedModels;
-
-  List<TagDetailModel> selectedTags;
-
-  /// 默认选择的时间起始
-  String? startTime;
-
-  /// 默认选择的时间截止
-  String? endTime;
+  final ChoiceFilterBoxModel model;
 
   /// 是否有改变
   final ValueNotifier<bool> isChanged;
@@ -63,22 +148,13 @@ class ChoiceFilterBox extends StatefulWidget {
   final VoidCallback? onInit;
 
   /// 筛选弹窗 - 取消
-  final VoidCallback onCancel;
+  final ValueChanged<ChoiceFilterBoxModel> onCancel;
 
   /// 筛选弹窗 - 重置
-  final VoidCallback onReset;
+  final ValueChanged<ChoiceFilterBoxModel> onReset;
 
   /// 筛选弹窗 - 确定
-  final ValueChanged<Map<String, dynamic>> onConfirm;
-
-  /// 隐藏分组
-  final bool hideSection;
-
-  /// 隐藏状态
-  final bool hideStatus;
-
-  /// 隐藏时间起止
-  final bool hideDateRange;
+  final ValueChanged<ChoiceFilterBoxModel> onConfirm;
 
   /// 内容对齐方式
   final Alignment contentAlignment;
@@ -100,36 +176,6 @@ class _ChoiceFilterBoxState extends State<ChoiceFilterBox>
 
   final filterController = NFilterDropBoxController();
 
-  /// 选项组
-  List<FakeDataModel> get models => List.generate(
-      20,
-      (e) => FakeDataModel(
-            id: "id_$e",
-            name: "选项_$e",
-          ));
-
-  /// 标签组
-  List<TagDetailModel> get tagModels => List.generate(
-      20,
-      (e) => TagDetailModel(
-            id: "id_$e",
-            name: "标签_$e",
-          ));
-
-  List<FakeDataModel> selectedModels = [];
-  List<FakeDataModel> selectedModelsTmp = [];
-
-  List<TagDetailModel> selectedTags = [];
-  List<TagDetailModel> selectedTagsTmp = [];
-
-  /// 入组时间 - 开始
-  String? startTime;
-  String? startTimeTmp;
-
-  /// 入组时间 - 结束
-  String? endTime;
-  String? endTimeTmp;
-
   @override
   void dispose() {
     widget.controller?._detach(this);
@@ -150,20 +196,14 @@ class _ChoiceFilterBoxState extends State<ChoiceFilterBox>
   @override
   void didUpdateWidget(covariant ChoiceFilterBox oldWidget) {
     super.didUpdateWidget(oldWidget);
-    final isChange = widget.selectedModels != oldWidget.selectedModels ||
-        widget.selectedTags != oldWidget.selectedTags ||
-        widget.startTime != oldWidget.startTime ||
-        widget.endTime != oldWidget.endTime ||
-        widget.hideSection != oldWidget.hideSection ||
-        widget.hideStatus != oldWidget.hideStatus ||
-        widget.hideDateRange != oldWidget.hideDateRange;
+    final isChange = widget.model != oldWidget.model;
     if (!isChange) {
       return;
     }
-    selectedModels = selectedModelsTmp = widget.selectedModels;
-    selectedTags = selectedTagsTmp = widget.selectedTags;
-    startTime = startTimeTmp = widget.startTime;
-    endTime = endTimeTmp = widget.endTime;
+    // selectedModels = selectedModelsTmp = widget.model.selectedModels;
+    // selectedTags = selectedTagsTmp = widget.selectedTags;
+    // startTime = startTimeTmp = widget.startTime;
+    // endTime = endTimeTmp = widget.endTime;
     setState(() {});
   }
 
@@ -185,39 +225,28 @@ class _ChoiceFilterBoxState extends State<ChoiceFilterBox>
 
   /// 筛选弹窗
   /// 筛选弹窗
-  List<Widget> getDropBoxSections({
-    bool isSingle = false,
-  }) {
+  List<Widget> getDropBoxSections() {
     final sections = [
-      NChoiceExpansionOfModel(
-        title: '标签',
-        items: models,
-        isSingle: isSingle,
-        idCb: (e) => e.id ?? "",
-        titleCb: (e) => e.name ?? "",
-        selectedCb: (e) => selectedModels.map((e) => e.id).contains(e.id),
-        onChanged: (list) {
-          ddlog(
-              "NChoiceExpansionOfModel: ${list.map((e) => "${e.name}_${e.isSelected}")}");
-          selectedModelsTmp = list;
-        },
-      ),
-      NChoiceExpansionOfModel(
-        title: '标签',
-        items: tagModels,
-        // selectedItems: selectedTagModelsTmp,
-        isSingle: isSingle,
-        idCb: (e) => e.id ?? "",
-        titleCb: (e) => e.name ?? "",
-        selectedCb: (e) => selectedTags.map((e) => e.id).contains(e.id),
-        onChanged: (list) {
-          // ddlog(list.map((e) => "${e.name}_${e.isSelected}"));
-          selectedTagsTmp = list;
-          debugPrint(
-              "重置 selectedTagModelsTmp: ${selectedTagsTmp.map((e) => e.name).toList()}");
-          // setState((){});
-        },
-      ),
+      ...widget.model.choices.map((choice) {
+        final i = widget.model.choices.indexOf(choice);
+
+        return NChoiceExpansionOfModel<SelectableMixin>(
+          title: choice.title,
+          items: choice.models,
+          isSingle: choice.isSingle,
+          idCb: (e) => e.selectableId ?? "",
+          titleCb: (e) => e.selectableName ?? "",
+          selectedCb: (e) => choice.selectedModels
+              .map((e) => e.selectableId)
+              .contains(e.selectableId),
+          onChanged: (list) {
+            ddlog(
+                "$widget ${choice.title}: ${list.map((e) => "${e.selectableName}_${e.isSelected}")}");
+            widget.model.choices[i].selectedModelsTmp.clear();
+            widget.model.choices[i].selectedModelsTmp.addAll(list);
+          },
+        );
+      }),
       Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -233,15 +262,15 @@ class _ChoiceFilterBoxState extends State<ChoiceFilterBox>
             ),
           ),
           NDateStartEnd(
-            startDate: () => startTimeTmp,
-            endDate: () => endTimeTmp,
+            startDate: () => widget.model.startTimeTmp,
+            endDate: () => widget.model.endTimeTmp,
             onStart: (dateStr) {
               ddlog("onStart: $dateStr");
-              startTimeTmp = dateStr;
+              widget.model.startTimeTmp = dateStr;
             },
             onEnd: (dateStr) {
               ddlog("onEnd: $dateStr");
-              endTimeTmp = dateStr;
+              widget.model.endTimeTmp = dateStr;
             },
           ),
         ],
@@ -301,21 +330,16 @@ class _ChoiceFilterBoxState extends State<ChoiceFilterBox>
     );
   }
 
-  Widget buildDvider() {
-    return Container(
-      height: 8,
-      margin: const EdgeInsets.only(top: 15),
-      color: const Color(0xffF3F3F3),
-    );
-  }
-
   /// 筛选弹窗 - 初始化
   void onFilterInit() {
-    selectedModelsTmp = selectedModels;
-    selectedTagsTmp = selectedTags;
+    for (var i = 0; i < widget.model.choices.length; i++) {
+      final choice = widget.model.choices[i];
+      widget.model.choices[i].selectedModelsTmp.clear();
+      widget.model.choices[i].selectedModelsTmp.addAll(choice.selectedModels);
+    }
 
-    startTimeTmp = startTime;
-    endTimeTmp = endTime;
+    widget.model.startTimeTmp = widget.model.startTime;
+    widget.model.endTimeTmp = widget.model.endTime;
     updateHighlight();
 
     widget.onInit?.call();
@@ -324,62 +348,54 @@ class _ChoiceFilterBoxState extends State<ChoiceFilterBox>
   /// 筛选弹窗 - 取消
   void onFilterCancel() {
     closeDropBox();
-    selectedModelsTmp = [];
-    selectedTagsTmp = [];
-    if (startTime == null) {
-      startTimeTmp = null;
+    for (var i = 0; i < widget.model.choices.length; i++) {
+      widget.model.choices[i].selectedModelsTmp.clear();
     }
-    if (endTime == null) {
-      endTimeTmp = null;
+
+    if (widget.model.startTime == null) {
+      widget.model.startTimeTmp = null;
+    }
+    if (widget.model.endTime == null) {
+      widget.model.endTimeTmp = null;
     }
 
     updateHighlight();
-    widget.onCancel();
+    widget.onCancel(widget.model);
   }
 
   /// 筛选弹窗 - 重置过滤参数
   void onFilterReset() {
     closeDropBox();
-    selectedModels = selectedModelsTmp = [];
-    selectedTags = selectedTagsTmp = [];
-    startTime = startTimeTmp = null;
-    endTime = endTimeTmp = null;
+    for (var i = 0; i < widget.model.choices.length; i++) {
+      widget.model.choices[i].selectedModelsTmp.clear();
+      widget.model.choices[i].selectedModels.clear();
+    }
 
+    widget.model.startTimeTmp = widget.model.startTime = null;
+    widget.model.endTimeTmp = widget.model.endTime = null;
     isHighlight.value = false;
 
-    widget.onReset();
+    widget.onReset(widget.model);
   }
 
   /// 筛选弹窗 - 确定过滤参数
   void onFilterConfirm() {
     closeDropBox();
-    selectedModels = selectedModelsTmp;
-    selectedTags = selectedTagsTmp;
-    startTime = startTimeTmp;
-    endTime = endTimeTmp;
+    for (final choice in widget.model.choices) {
+      choice.selectedModels.clear();
+      choice.selectedModels.addAll(choice.selectedModelsTmp);
+    }
+
+    widget.model.startTime = widget.model.startTimeTmp;
+    widget.model.endTime = widget.model.endTimeTmp;
     updateHighlight();
 
-    final val = <String, dynamic>{
-      "selectedModels": selectedModels,
-      "selectedTags": selectedTags,
-      "startTime": startTime,
-      "endTime": endTime,
-    };
-    widget.onConfirm(val);
+    widget.onConfirm(widget.model);
   }
 
   //选择的时候动态改变筛选按钮高亮状态
   void updateHighlight() {
-    isHighlight.value = [
-      selectedModels,
-      selectedTags,
-      startTime,
-      endTime,
-      selectedModelsTmp,
-      selectedTagsTmp,
-      startTimeTmp,
-      endTimeTmp,
-    ].where((e) => e != null).isNotEmpty;
+    isHighlight.value = widget.model.isNotEmpty;
   }
 
   closeDropBox() {

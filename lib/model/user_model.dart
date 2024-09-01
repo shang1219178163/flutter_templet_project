@@ -60,6 +60,7 @@ class UserModel with SelectableMixin {
     isSelected = json['isSelected'] ?? false;
   }
 
+  @override
   Map<String, dynamic> toJson() {
     var data = Map<String, dynamic>();
     data['id'] = id;

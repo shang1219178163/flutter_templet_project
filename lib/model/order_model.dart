@@ -28,6 +28,7 @@ class OrderModel with SelectableMixin {
     name = json["name"];
   }
 
+  @override
   Map<String, dynamic> toJson() {
     var json = Map<String, dynamic>();
     json["name"] = name;

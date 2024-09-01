@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter_templet_project/mixin/selectable_mixin.dart';
 
 class FakeDataModel with SelectableMixin {
@@ -24,6 +26,7 @@ class FakeDataModel with SelectableMixin {
     isSelected = json['isSelected'];
   }
 
+  @override
   Map<String, dynamic> toJson() {
     final data = Map<String, dynamic>();
     data['id'] = id;
@@ -35,8 +38,15 @@ class FakeDataModel with SelectableMixin {
   }
 
   @override
-  String get selectableId => code ?? "";
+  String get selectableId => id ?? code ?? "";
 
   @override
   String get selectableName => name ?? "";
+
+  @override
+  String toString() {
+    final result = toJson();
+    var encoder = JsonEncoder.withIndent('  '); // 使用带缩进的 JSON 编码器
+    return encoder.convert(result);
+  }
 }

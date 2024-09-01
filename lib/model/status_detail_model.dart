@@ -73,7 +73,6 @@ class StatusDetailModel with SelectableMixin {
     this.lockStatus,
     this.remark,
     this.scope,
-    this.isSelected = false,
   });
 
   String? id;
@@ -93,10 +92,6 @@ class StatusDetailModel with SelectableMixin {
   @override
   String get selectableName => name ?? itemValue ?? "";
 
-  /// 非接口返回字段
-  @override
-  bool isSelected = false;
-
   StatusDetailModel.fromJson(Map<String, dynamic>? json) {
     if (json == null) {
       return;
@@ -114,6 +109,7 @@ class StatusDetailModel with SelectableMixin {
     isSelected = (json['isSelected']) as bool? ?? false;
   }
 
+  @override
   Map<String, dynamic> toJson() {
     final map = Map<String, dynamic>();
     map['id'] = id;

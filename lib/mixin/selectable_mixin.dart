@@ -17,6 +17,18 @@ mixin SelectableMixin {
   /// 是否可用
   bool get enable => true;
 
-  /// 是否已选择
-  bool isSelected = false;
+  // /// 是否已选择
+  // bool isSelected = false;
+
+  bool _isSelected = false;
+
+  bool get isSelected => _isSelected;
+
+  set isSelected(bool value) {
+    _isSelected = value;
+  }
+
+  Map<String, dynamic> toJson() {
+    throw UnimplementedError("❌$this 未实现 toJson");
+  }
 }

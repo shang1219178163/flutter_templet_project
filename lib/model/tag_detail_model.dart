@@ -6,6 +6,8 @@
 //  Copyright © 2024/4/9 shang. All rights reserved.
 //
 
+import 'dart:convert';
+
 import 'package:flutter_templet_project/mixin/selectable_mixin.dart';
 
 class TagsRootModel {
@@ -79,9 +81,6 @@ class TagDetailModel with SelectableMixin {
   String? name;
   String? color;
 
-  // @override
-  // bool isSelected = true;
-
   TagDetailModel.fromJson(Map<String, dynamic>? json) {
     if (json == null) {
       return;
@@ -94,6 +93,7 @@ class TagDetailModel with SelectableMixin {
     isSelected = json['isSelected'];
   }
 
+  @override
   Map<String, dynamic> toJson() {
     final data = Map<String, dynamic>();
     data['id'] = id;
@@ -110,4 +110,9 @@ class TagDetailModel with SelectableMixin {
 
   @override
   String get selectableName => name ?? "";
+
+  String _formatJson(Map<String, dynamic> jsonData) {
+    final encoder = JsonEncoder.withIndent('  '); // 使用带缩进的 JSON 编码器
+    return encoder.convert(toJson());
+  }
 }

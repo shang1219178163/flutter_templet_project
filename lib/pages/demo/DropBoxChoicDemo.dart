@@ -9,6 +9,7 @@ import 'package:flutter_templet_project/basicWidget/n_date_start_end.dart';
 import 'package:flutter_templet_project/basicWidget/n_filter_drop_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_pair.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
+import 'package:flutter_templet_project/basicWidget/n_textfield_search.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
@@ -110,36 +111,19 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
               closeKeyboard();
             },
           ),
-          AnimatedBuilder(
-              animation: Listenable.merge([
-                dataDesc,
-                tagDesc,
-              ]),
-              builder: (context, child) {
-                return Container(
-                  decoration: BoxDecoration(
-                    color: Colors.green,
-                  ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      if (dataDesc.value.isNotEmpty) NText(dataDesc.value),
-                      if (dataDesc.value.isNotEmpty) NText(tagDesc.value),
-                    ],
-                  ),
-                );
-              }),
+          buildDesc(),
           Expanded(
-              child: NFilterDropBox(
-            controller: dropBoxController,
-            sections: getDropBoxSections(isSingle: isSingle),
-            onCancel: onFilterCancel,
-            onReset: onFitlerReset,
-            onConfirm: onFitlerConfirm,
-            child: buildList(
-              items: items.map((e) => "item_$e").toList(),
+            child: NFilterDropBox(
+              controller: dropBoxController,
+              sections: getDropBoxSections(isSingle: isSingle),
+              onCancel: onFilterCancel,
+              onReset: onFitlerReset,
+              onConfirm: onFitlerConfirm,
+              child: buildList(
+                items: items.map((e) => "item_$e").toList(),
+              ),
             ),
-          )),
+          ),
         ],
       ),
     );
@@ -149,15 +133,17 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
     required VoidCallback onToggle,
   }) {
     return Container(
-      key: _globalKey,
       padding: EdgeInsets.only(left: 16.w, right: 8.w, top: 12.w, bottom: 12.w),
       child: Row(
         children: [
           Expanded(
-            child: buildSearch(cb: (value) {
-              searchText = value;
-              //...
-            }),
+            child: NSearchTextField(
+              placeholder: "搜索",
+              backgroundColor: white,
+              onChanged: (String value) {
+                searchText = value;
+              },
+            ),
           ),
           SizedBox(
             width: 8,
@@ -170,48 +156,26 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
     );
   }
 
-  buildSearch({String placeholder = "搜索", ValueChanged<String>? cb}) {
-    return Container(
-      height: 36.h,
-      // width: 295.w,
-      // padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 1.h),
-      child: CupertinoSearchTextField(
-        controller: searchtEditingController,
-        padding: EdgeInsets.zero,
-        // prefixIcon: Icon(Icons.search, color: Color(0xff999999), size: 20.h,),
-        prefixIcon: Image(
-          image: "icon_search.png".toAssetImage(),
-          width: 14.w,
-          height: 14.w,
-        ),
-        suffixIcon: Icon(
-          Icons.clear,
-          color: const Color(0xff999999),
-          size: 20.h,
-        ),
-        prefixInsets:
-            EdgeInsets.only(left: 14.w, top: 5, bottom: 5, right: 6.w),
-        // padding: EdgeInsets.only(left: 3, top: 5, bottom: 5, right: 5),
-        placeholder: placeholder,
-        placeholderStyle: TextStyle(fontSize: 15.sp, color: fontColorBCBFC2),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(4.w)),
-          color: Colors.white,
-        ),
-        onChanged: (String value) {
-          _debounce(() {
-            debugPrint('searchText: $value');
-            cb?.call(value);
-          });
-        },
-        onSubmitted: (String value) {
-          _debounce(() {
-            debugPrint('onSubmitted: $value');
-            cb?.call(value);
-          });
-        },
-      ),
-    );
+  Widget buildDesc() {
+    return AnimatedBuilder(
+        animation: Listenable.merge([
+          dataDesc,
+          tagDesc,
+        ]),
+        builder: (context, child) {
+          return Container(
+            decoration: BoxDecoration(
+              color: Colors.green,
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                if (dataDesc.value.isNotEmpty) NText(dataDesc.value),
+                if (dataDesc.value.isNotEmpty) NText(tagDesc.value),
+              ],
+            ),
+          );
+        });
   }
 
   Widget buildFilterBtn({
