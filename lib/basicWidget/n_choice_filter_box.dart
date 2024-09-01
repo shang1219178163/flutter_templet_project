@@ -42,10 +42,13 @@ class NChoiceFilterBoxItemModel<T extends SelectableMixin> {
   /// 是否单选
   final bool isSingle;
 
-  bool get isNotEmpty => [
-        selectedModels,
-        selectedModelsTmp,
-      ].isNotEmpty;
+  bool get isNotEmpty {
+    final result = [
+      selectedModels,
+      selectedModelsTmp,
+    ].map((e) => e.isNotEmpty).contains(true);
+    return result;
+  }
 
   Map<String, dynamic> toJson() {
     final data = Map<String, dynamic>();
@@ -93,14 +96,16 @@ class NChoiceFilterBoxModel {
   /// 隐藏时间起止
   final bool hideDateRange;
 
-  bool get isNotEmpty =>
-      [
-        startTime,
-        endTime,
-        startTimeTmp,
-        endTimeTmp,
-      ].where((e) => e != null).isNotEmpty &&
-      choices.map((e) => e.isNotEmpty).contains(true);
+  bool get isNotEmpty {
+    final result = [
+          startTime,
+          endTime,
+          startTimeTmp,
+          endTimeTmp,
+        ].where((e) => e != null).isNotEmpty ||
+        choices.map((e) => e.isNotEmpty).contains(true);
+    return result;
+  }
 
   Map<String, dynamic> toJson() {
     final data = Map<String, dynamic>();
@@ -128,6 +133,7 @@ class NChoiceFilterBox extends StatefulWidget {
     required this.model,
     required this.isChanged,
     this.onInit,
+    this.onClose,
     required this.onCancel,
     required this.onReset,
     required this.onConfirm,
@@ -146,6 +152,7 @@ class NChoiceFilterBox extends StatefulWidget {
 
   /// 筛选弹窗 - 初始化
   final VoidCallback? onInit;
+  final VoidCallback? onClose;
 
   /// 筛选弹窗 - 取消
   final ValueChanged<NChoiceFilterBoxModel> onCancel;
@@ -215,6 +222,9 @@ class _NChoiceFilterBoxState extends State<NChoiceFilterBox>
       controller: filterController,
       sections: sections,
       barrierColor: bgColor000000.withOpacity(0.52),
+      onVisible: (visible) {
+        widget.onClose?.call();
+      },
       onCancel: onFilterCancel,
       onReset: onFilterReset,
       onConfirm: onFilterConfirm,

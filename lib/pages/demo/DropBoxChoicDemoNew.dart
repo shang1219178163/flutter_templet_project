@@ -103,17 +103,21 @@ class _DropBoxChoicDemoNewState extends State<DropBoxChoicDemoNew> {
               // hideSection: true,
               // hideStatus: true,
               // hideDateRange: true,
+              onClose: () {
+                isHighlight.value = filterModel.isNotEmpty;
+                DLog.d("isHighlight.value1: ${isHighlight.value}");
+              },
               onCancel: (result) {
-                DLog.d(result);
+                // DLog.d(result);
                 filterDesc.value = result.toString();
               },
               onReset: (result) {
-                DLog.d(result);
+                // DLog.d(result);
                 filterDesc.value = result.toString();
                 refreshViewController.onRefresh();
               },
               onConfirm: (result) {
-                DLog.d(result);
+                // DLog.d(result);
                 filterDesc.value = result.toString();
                 refreshViewController.onRefresh();
               },
@@ -155,7 +159,6 @@ class _DropBoxChoicDemoNewState extends State<DropBoxChoicDemoNew> {
                   patientFilterController.anchor?.onFilterInit();
                   filterController?.onToggle();
                   patientFilterController.anchor?.closeKeyboard();
-
                   if (filterController!.isVisible) {
                     refreshFilter();
                   }
