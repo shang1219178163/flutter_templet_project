@@ -139,6 +139,8 @@ class NChoiceFilterBox extends StatefulWidget {
     required this.onConfirm,
     this.contentAlignment = Alignment.topCenter,
     this.onInitState,
+    this.filterHeader,
+    this.filterFooter,
     required this.child,
   });
 
@@ -168,6 +170,12 @@ class NChoiceFilterBox extends StatefulWidget {
 
   /// initState
   final VoidCallback? onInitState;
+
+  /// 弹窗头
+  final Widget? filterHeader;
+
+  /// 弹窗尾
+  final Widget? filterFooter;
 
   /// 一般是列表组件
   final Widget child;
@@ -203,14 +211,12 @@ class _NChoiceFilterBoxState extends State<NChoiceFilterBox>
   @override
   void didUpdateWidget(covariant NChoiceFilterBox oldWidget) {
     super.didUpdateWidget(oldWidget);
-    final isChange = widget.model != oldWidget.model;
+    final isChange = widget.model != oldWidget.model ||
+        widget.controller != oldWidget.controller ||
+        widget.contentAlignment != oldWidget.contentAlignment;
     if (!isChange) {
       return;
     }
-    // selectedModels = selectedModelsTmp = widget.model.selectedModels;
-    // selectedTags = selectedTagsTmp = widget.selectedTags;
-    // startTime = startTimeTmp = widget.startTime;
-    // endTime = endTimeTmp = widget.endTime;
     setState(() {});
   }
 
@@ -229,6 +235,8 @@ class _NChoiceFilterBoxState extends State<NChoiceFilterBox>
       onReset: onFilterReset,
       onConfirm: onFilterConfirm,
       contentAlignment: widget.contentAlignment,
+      header: (_) => widget.filterHeader ?? SizedBox(),
+      footer: (_) => widget.filterFooter ?? SizedBox(),
       child: widget.child,
     );
   }
@@ -250,8 +258,8 @@ class _NChoiceFilterBoxState extends State<NChoiceFilterBox>
               .map((e) => e.selectableId)
               .contains(e.selectableId),
           onChanged: (list) {
-            ddlog(
-                "$widget ${choice.title}: ${list.map((e) => "${e.selectableName}_${e.isSelected}")}");
+            // ddlog(
+            //     "$widget ${choice.title}: ${list.map((e) => "${e.selectableName}_${e.isSelected}")}");
             widget.model.choices[i].selectedModelsTmp.clear();
             widget.model.choices[i].selectedModelsTmp.addAll(list);
           },
@@ -284,7 +292,7 @@ class _NChoiceFilterBoxState extends State<NChoiceFilterBox>
             },
           ),
         ],
-      )
+      ),
     ];
 
     return sections.map((e) {

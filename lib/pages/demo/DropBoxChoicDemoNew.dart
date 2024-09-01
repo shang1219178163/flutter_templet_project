@@ -121,6 +121,14 @@ class _DropBoxChoicDemoNewState extends State<DropBoxChoicDemoNew> {
                 filterDesc.value = result.toString();
                 refreshViewController.onRefresh();
               },
+              // filterHeader: Container(
+              //   height: 35,
+              //   color: Colors.green,
+              // ),
+              // filterFooter: Container(
+              //   height: 35,
+              //   color: Colors.yellow,
+              // ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [

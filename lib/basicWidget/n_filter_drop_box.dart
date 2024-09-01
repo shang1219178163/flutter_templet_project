@@ -36,6 +36,7 @@ class NFilterDropBox extends StatefulWidget {
     required this.child,
     this.header,
     this.footer,
+    this.buttonBar,
   });
 
   /// 控制器
@@ -78,8 +79,9 @@ class NFilterDropBox extends StatefulWidget {
   final ValueChanged<bool>? onVisible;
 
   final Widget Function(BuildContext context)? header;
-
   final Widget Function(BuildContext context)? footer;
+
+  final Widget Function(BuildContext context, Widget buttonBar)? buttonBar;
 
   final Widget child;
 
@@ -136,6 +138,12 @@ class _NFilterDropBoxState extends State<NFilterDropBox> {
   }
 
   Widget buildDropBox() {
+    final buttonBar = buildDropBoxButtonBar(
+      borderRadius: widget.borderRadius,
+      onCancel: widget.onReset,
+      onConfirm: widget.onConfirm,
+    );
+
     return GestureDetector(
       onTap: widget.onCancel,
       child: Container(
@@ -161,11 +169,6 @@ class _NFilterDropBoxState extends State<NFilterDropBox> {
               ),
               child: Column(
                 children: [
-                  widget.header?.call(context) ??
-                      const Divider(
-                        height: 1,
-                        color: lineColor,
-                      ),
                   Expanded(
                     child: Scrollbar(
                       controller: scrollController,
@@ -174,18 +177,19 @@ class _NFilterDropBoxState extends State<NFilterDropBox> {
                         child: Container(
                           color: Colors.white,
                           child: Column(
-                            children: widget.sections,
+                            children: [
+                              widget.header?.call(context) ??
+                                  const Divider(height: 1, color: lineColor),
+                              ...widget.sections,
+                              widget.footer?.call(context) ??
+                                  const Divider(height: 1, color: lineColor),
+                            ],
                           ),
                         ),
                       ),
                     ),
                   ),
-                  widget.footer?.call(context) ??
-                      buildDropBoxButtonBar(
-                        borderRadius: widget.borderRadius,
-                        onCancel: widget.onReset,
-                        onConfirm: widget.onConfirm,
-                      ),
+                  widget.buttonBar?.call(context, buttonBar) ?? buttonBar,
                 ],
               ),
             ),
