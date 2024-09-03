@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:flutter_templet_project/basicWidget/n_section_header.dart';
+import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_cancel_and_confirm_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/n_overlay.dart';
@@ -130,7 +130,7 @@ class _OverlayDemoState extends State<OverlayDemo> {
                 child: Text('PopupView: $e'),
               );
             }).toList(),
-            NSectionHeader(
+            NSectionBox(
               title: "NToast",
               child: Column(
                 children: [
@@ -171,7 +171,7 @@ class _OverlayDemoState extends State<OverlayDemo> {
                 }).toList(),
               ),
             ),
-            NSectionHeader(
+            NSectionBox(
               title: "Loadding",
               child: Column(
                 children: [

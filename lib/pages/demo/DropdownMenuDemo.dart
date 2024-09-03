@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_drop_menu_filter_section_bar.dart';
-import 'package:flutter_templet_project/basicWidget/n_section_header.dart';
+import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 
 class DropdownMenuDemo extends StatefulWidget {
@@ -41,11 +41,11 @@ class _DropdownMenuDemoState extends State<DropdownMenuDemo> {
       body: SafeArea(
         child: Column(
           children: <Widget>[
-            NSectionHeader(
+            NSectionBox(
               title: "DropdownMenu",
               child: buildDropdownMenu(),
             ),
-            NSectionHeader(
+            NSectionBox(
               title: "MenuAnchor",
               child: buildMenuAnchor<BoxFit>(
                 values: BoxFit.values,
@@ -57,7 +57,7 @@ class _DropdownMenuDemoState extends State<DropdownMenuDemo> {
                 },
               ),
             ),
-            NSectionHeader(
+            NSectionBox(
               title: "PatientFilterSectionBar",
               child: NDropMenuFilterSectionBar(
                 onChanged: (e) {

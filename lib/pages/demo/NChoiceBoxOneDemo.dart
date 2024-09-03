@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_choice_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_choice_box_one.dart';
-import 'package:flutter_templet_project/basicWidget/n_section_header.dart';
+import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/num_ext.dart';
@@ -85,7 +85,7 @@ class _NChoiceBoxOneDemoState extends State<NChoiceBoxOneDemo> {
         child: Column(
           children: [
             buildRpTypeBox(),
-            NSectionHeader(
+            NSectionBox(
               title: "标签选择",
               child: buildChoiceBox(
                 models: tags,
@@ -108,7 +108,7 @@ class _NChoiceBoxOneDemoState extends State<NChoiceBoxOneDemo> {
                 // },
               ),
             ),
-            NSectionHeader(
+            NSectionBox(
               title: "人员选择",
               child: buildChoiceBox(
                 models: orders,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_section_header.dart';
+import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 
 class OverlayPortalDemo extends StatefulWidget {
   OverlayPortalDemo({Key? key, this.title}) : super(key: key);
@@ -42,7 +42,7 @@ class _OverlayPortalDemoState extends State<OverlayPortalDemo> {
         child: Column(
           children: [
             Text("$widget"),
-            NSectionHeader(
+            NSectionBox(
               title: "OverlayPortal",
               child: buildOverlayPortal(),
             ),

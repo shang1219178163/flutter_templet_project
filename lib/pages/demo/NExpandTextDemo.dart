@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_expand_text_vertical.dart';
 import 'package:flutter_templet_project/basicWidget/n_footer_button_bar.dart';
-import 'package:flutter_templet_project/basicWidget/n_section_header.dart';
+import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_expand_text.dart';
 import 'package:flutter_templet_project/basicWidget/n_footer.dart';
 import 'package:flutter_templet_project/extension/text_painter_ext.dart';
@@ -44,7 +44,7 @@ class _NExpandTextDemoState extends State<NExpandTextDemo> {
               SizedBox(
                 height: 14,
               ),
-              NSectionHeader(
+              NSectionBox(
                 title: "字符串不够一行时",
                 child: Container(
                   color: Colors.yellowAccent,
@@ -55,7 +55,7 @@ class _NExpandTextDemoState extends State<NExpandTextDemo> {
                       expandTitleStyle: TextStyle(color: Colors.green)),
                 ),
               ),
-              NSectionHeader(
+              NSectionBox(
                 title: "字符串超过一行时(折叠)",
                 child: Container(
                   color: Colors.yellow,
@@ -66,7 +66,7 @@ class _NExpandTextDemoState extends State<NExpandTextDemo> {
                       expandTitleStyle: TextStyle(color: Colors.green)),
                 ),
               ),
-              NSectionHeader(
+              NSectionBox(
                 title: "字符串超过一行时(展开)",
                 child: Container(
                   color: Colors.yellow,
@@ -77,7 +77,7 @@ class _NExpandTextDemoState extends State<NExpandTextDemo> {
                       expandTitleStyle: TextStyle(color: Colors.green)),
                 ),
               ),
-              NSectionHeader(
+              NSectionBox(
                 title: "NExpandTextVertical",
                 child: NExpandTextVertical(
                   text: text * 2,
@@ -85,7 +85,7 @@ class _NExpandTextDemoState extends State<NExpandTextDemo> {
                   expandMinLine: 3,
                 ),
               ),
-              NSectionHeader(
+              NSectionBox(
                 title: "NExpandTextVertical",
                 child: NExpandTextVertical(
                   text: text * 2,

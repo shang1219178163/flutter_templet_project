@@ -8,8 +8,8 @@
 
 import 'package:flutter/material.dart';
 
-class NSectionHeader extends StatelessWidget {
-  const NSectionHeader({
+class NSectionBox extends StatelessWidget {
+  const NSectionBox({
     Key? key,
     this.title = '',
     this.text,

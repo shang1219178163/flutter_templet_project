@@ -2,7 +2,7 @@ import 'dart:math' as math;
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_section_header.dart';
+import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/alignment_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
@@ -134,7 +134,7 @@ class _GradientDemoState extends State<GradientDemo> with BottomSheetMixin {
   _buildBody() {
     return ListView(children: <Widget>[
       buildTop(),
-      NSectionHeader(
+      NSectionBox(
         title: "LinearGradient",
         child: Column(
           children: [
@@ -226,7 +226,7 @@ class _GradientDemoState extends State<GradientDemo> with BottomSheetMixin {
           ],
         ),
       ),
-      NSectionHeader(
+      NSectionBox(
         title: "SweepGradient",
         child: Column(
           children: [
@@ -296,7 +296,7 @@ class _GradientDemoState extends State<GradientDemo> with BottomSheetMixin {
           ],
         ),
       ),
-      NSectionHeader(
+      NSectionBox(
         title: "RadialGradient",
         child: Column(
           children: [
@@ -340,7 +340,7 @@ class _GradientDemoState extends State<GradientDemo> with BottomSheetMixin {
           ],
         ),
       ),
-      NSectionHeader(
+      NSectionBox(
         title: "ShaderMask - RadialGradient",
         child: Column(
           children: [

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/src/size_extension.dart';
-import 'package:flutter_templet_project/basicWidget/n_section_header.dart';
+import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/extension/scroll_controller_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/util/R.dart';
@@ -99,7 +99,7 @@ class _CustomScrollBarDemoState extends State<CustomScrollBarDemo> {
 
   _buildBody({isCustomScrollView = false}) {
     final child = ListView(children: [
-      NSectionHeader(
+      NSectionBox(
         title:
             "${isCustomScrollView ? "CustomScrollView" : "ListView"}(自定义滚动条/ScrollerBar)",
         child: Container(

@@ -8,7 +8,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_expansion_fade.dart';
-import 'package:flutter_templet_project/basicWidget/n_section_header.dart';
+import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/change_notifier_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
@@ -72,19 +72,19 @@ class _AnimatedContainerDemoState extends State<AnimatedContainerDemo> {
             onPressed: _changeSize,
             child: const Text('更新宽高'),
           ),
-          NSectionHeader(
+          NSectionBox(
             title: "searchContainer",
             child: buildAnimatedContainer(),
           ),
-          NSectionHeader(
+          NSectionBox(
             title: "searchContainer",
             child: searchContainer(),
           ),
-          NSectionHeader(
+          NSectionBox(
             title: "ExpansionCrossFade",
             child: buildExpansionCrossFade(),
           ),
-          NSectionHeader(
+          NSectionBox(
             title: "ExpansionCrossFade",
             child: NExpansionFade(
               childBuilder: (isExpanded, onToggle) {

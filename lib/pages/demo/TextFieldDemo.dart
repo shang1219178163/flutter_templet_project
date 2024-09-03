@@ -9,7 +9,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_templet_project/basicWidget/n_section_header.dart';
+import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_order_num_unit.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/function_ext.dart';
@@ -87,7 +87,7 @@ class _TextFieldDemoState extends State<TextFieldDemo> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              NSectionHeader(
+              NSectionBox(
                 title: "CupertinoTextField",
                 child: CupertinoTextField(
                   controller: _textController,
@@ -103,7 +103,7 @@ class _TextFieldDemoState extends State<TextFieldDemo> {
                   ),
                 ),
               ),
-              NSectionHeader(
+              NSectionBox(
                 title: "CupertinoSearchTextField",
                 child: CupertinoSearchTextField(
                   // prefixIcon: SizedBox(),
@@ -125,7 +125,7 @@ class _TextFieldDemoState extends State<TextFieldDemo> {
                   },
                 ),
               ),
-              NSectionHeader(
+              NSectionBox(
                 title: "TextField",
                 child: buildTextField(
                   controller: editingController,
@@ -133,7 +133,7 @@ class _TextFieldDemoState extends State<TextFieldDemo> {
                   labelText: 'Weight (KG)',
                 ),
               ),
-              NSectionHeader(
+              NSectionBox(
                 title: "TextField readOnly",
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -171,7 +171,7 @@ class _TextFieldDemoState extends State<TextFieldDemo> {
                   ],
                 ),
               ),
-              NSectionHeader(
+              NSectionBox(
                 title: "NOrderNumUnit",
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -211,7 +211,7 @@ class _TextFieldDemoState extends State<TextFieldDemo> {
                   ],
                 ),
               ),
-              NSectionHeader(
+              NSectionBox(
                 title: "TextFormField",
                 child: TextFormField(
                   //用户名
@@ -256,7 +256,7 @@ class _TextFieldDemoState extends State<TextFieldDemo> {
                   },
                 ),
               ),
-              NSectionHeader(
+              NSectionBox(
                 title: "TextFormField - pwd",
                 child: TextFormField(
                   //密码

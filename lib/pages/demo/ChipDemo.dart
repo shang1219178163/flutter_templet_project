@@ -7,7 +7,7 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_section_header.dart';
+import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_choice_box_one.dart';
 import 'package:flutter_templet_project/basicWidget/n_indicator_point.dart';
 import 'package:flutter_templet_project/basicWidget/n_tag_box.dart';
@@ -63,7 +63,7 @@ class _ChipDemoState extends State<ChipDemo> with CupertinoAlertDialogMixin {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          NSectionHeader(
+          NSectionBox(
             title: "Chip",
             crossAxisAlignment: CrossAxisAlignment.start,
             child: Wrap(
@@ -139,7 +139,7 @@ class _ChipDemoState extends State<ChipDemo> with CupertinoAlertDialogMixin {
               ],
             ),
           ),
-          NSectionHeader(
+          NSectionBox(
             title: "RawChip",
             crossAxisAlignment: CrossAxisAlignment.start,
             child: Wrap(
@@ -178,7 +178,7 @@ class _ChipDemoState extends State<ChipDemo> with CupertinoAlertDialogMixin {
               ],
             ),
           ),
-          NSectionHeader(
+          NSectionBox(
             title: "CircleAvatar",
             crossAxisAlignment: CrossAxisAlignment.start,
             child: Wrap(
@@ -226,7 +226,7 @@ class _ChipDemoState extends State<ChipDemo> with CupertinoAlertDialogMixin {
           ),
           buildTagManager(),
           buildTagManagerNew(),
-          NSectionHeader(
+          NSectionBox(
             title: "ChoiceChip",
             crossAxisAlignment: CrossAxisAlignment.start,
             child: Wrap(
@@ -276,7 +276,7 @@ class _ChipDemoState extends State<ChipDemo> with CupertinoAlertDialogMixin {
               ],
             ),
           ),
-          NSectionHeader(
+          NSectionBox(
             title: "InputChip",
             crossAxisAlignment: CrossAxisAlignment.start,
             child: Wrap(
@@ -314,7 +314,7 @@ class _ChipDemoState extends State<ChipDemo> with CupertinoAlertDialogMixin {
 
   /// 标签管理器
   buildTagManager() {
-    return NSectionHeader(
+    return NSectionBox(
       title: "NTagBox",
       crossAxisAlignment: CrossAxisAlignment.start,
       child: StatefulBuilder(
@@ -342,7 +342,7 @@ class _ChipDemoState extends State<ChipDemo> with CupertinoAlertDialogMixin {
 
   /// 标签管理器
   buildTagManagerNew() {
-    return NSectionHeader(
+    return NSectionBox(
       title: "NTagBoxNew",
       crossAxisAlignment: CrossAxisAlignment.start,
       child: NTagBoxNew<(int, String)>(

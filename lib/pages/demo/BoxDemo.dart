@@ -15,7 +15,7 @@
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_avatar_badge.dart';
-import 'package:flutter_templet_project/basicWidget/n_section_header.dart';
+import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
@@ -49,39 +49,39 @@ class _BoxDemoState extends State<BoxDemo> {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            NSectionHeader(
+            NSectionBox(
               title: "UnconstrainedBox",
               child: buildSizedBox(),
             ),
-            NSectionHeader(
+            NSectionBox(
               title: "UnconstrainedBox",
               child: buildConstrainedBox(),
             ),
-            NSectionHeader(
+            NSectionBox(
               title: "FittedBox",
               child: buildFittedBox(),
             ),
-            NSectionHeader(
+            NSectionBox(
               title: "UnconstrainedBox",
               child: buildUnconstrainedBox(),
             ),
-            NSectionHeader(
+            NSectionBox(
               title: "OverflowBox",
               child: buildOverflowBox(),
             ),
-            NSectionHeader(
+            NSectionBox(
               title: "OverflowBox1",
               child: buildOverflowBox(alignment: Alignment.center),
             ),
-            NSectionHeader(
+            NSectionBox(
               title: "OverflowBox2",
               child: buildOverflowBox(alignment: Alignment.topRight),
             ),
-            NSectionHeader(
+            NSectionBox(
               title: "buildBage",
               child: buildBage(),
             ),
-            NSectionHeader(
+            NSectionBox(
               title: "buildAvatarBage",
               child: buildAvatarBage(),
             ),

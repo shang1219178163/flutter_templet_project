@@ -12,7 +12,7 @@ import 'package:flutter_templet_project/basicWidget/n_choice_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_expansion_fade.dart';
 import 'package:flutter_templet_project/basicWidget/n_expansion_menu.dart';
 import 'package:flutter_templet_project/basicWidget/n_list_view_segment_control.dart';
-import 'package:flutter_templet_project/basicWidget/n_section_header.dart';
+import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/cache/cache_service.dart';
 import 'package:flutter_templet_project/extension/change_notifier_ext.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
@@ -72,23 +72,23 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
       ),
       body: ListView(
         children: [
-          NSectionHeader(
+          NSectionBox(
             title: "ExpansionTile",
             child: buildExpandColorMenu(),
           ),
-          NSectionHeader(
+          NSectionBox(
             title: "ListViewSegmentControl",
             child: buildListViewHorizontal(),
           ),
-          NSectionHeader(
+          NSectionBox(
             title: "Visibility",
             child: _buildVisbility(),
           ),
-          NSectionHeader(
+          NSectionBox(
             title: "自定义 VisibleContainer",
             child: _buildVisibleContainer(),
           ),
-          NSectionHeader(
+          NSectionBox(
             title: "自定义 FoldMenu - NExpansionFade",
             child: NExpansionFade(
               isExpanded: false,
@@ -132,7 +132,7 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
               ),
             ),
           ),
-          NSectionHeader(
+          NSectionBox(
             title: "自定义 NExpansionMenu",
             child: buildTagChoice(),
           ),
@@ -413,7 +413,7 @@ class _ExpansionTileCardState extends State<ExpansionTileCard> {
   _buildBody() {
     return Column(
       children: [
-        NSectionHeader(
+        NSectionBox(
           title: "ExpansionTile",
           child: ExpansionTile(
             onExpansionChanged: (value) {
@@ -448,7 +448,7 @@ class _ExpansionTileCardState extends State<ExpansionTileCard> {
             ],
           ),
         ),
-        NSectionHeader(
+        NSectionBox(
           title: "NExpansionFade",
           child: NExpansionFade(
             isExpanded: isExpanded.value,

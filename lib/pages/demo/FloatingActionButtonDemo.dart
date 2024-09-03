@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_section_header.dart';
+import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:tuple/tuple.dart';
 
@@ -65,7 +65,7 @@ class _FloatingActionButtonDemoState extends State<FloatingActionButtonDemo> {
         SingleChildScrollView(
           child: Column(
             children: items
-                .map((e) => NSectionHeader(
+                .map((e) => NSectionBox(
                       title: e.item1,
                       child: e.item2,
                     ))

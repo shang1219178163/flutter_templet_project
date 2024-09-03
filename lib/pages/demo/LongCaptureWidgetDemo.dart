@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_section_header.dart';
+import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/text_style_ext.dart';
@@ -64,7 +64,7 @@ class _LongCaptureWidgetDemoState extends State<LongCaptureWidgetDemo> {
                       color: ColorExt.random,
                       height: 90,
                     )),
-            NSectionHeader(
+            NSectionBox(
               title: "buildCalendarDatePicker",
               child: Container(
                 alignment: Alignment.center,

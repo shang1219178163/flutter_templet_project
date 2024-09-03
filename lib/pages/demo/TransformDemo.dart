@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_section_header.dart';
+import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'dart:math' as math;
 
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
@@ -32,7 +32,7 @@ class _TransformDemoState extends State<TransformDemo> {
   _buildBody() {
     return ListView(
       children: [
-        NSectionHeader(
+        NSectionBox(
           title: "Matrix4.skewX",
           mainAxisSize: MainAxisSize.min,
           child: Container(
@@ -48,7 +48,7 @@ class _TransformDemoState extends State<TransformDemo> {
             ),
           ),
         ),
-        NSectionHeader(
+        NSectionBox(
           title: "Matrix4.skewY",
           mainAxisSize: MainAxisSize.min,
           child: Container(
@@ -64,7 +64,7 @@ class _TransformDemoState extends State<TransformDemo> {
             ),
           ),
         ),
-        NSectionHeader(
+        NSectionBox(
           title: "Transform.rotate",
           child: Transform.rotate(
             angle: pi / 4,
@@ -76,7 +76,7 @@ class _TransformDemoState extends State<TransformDemo> {
             ),
           ),
         ),
-        NSectionHeader(
+        NSectionBox(
           title: "Transform.translate",
           child: DecoratedBox(
             decoration: BoxDecoration(color: Colors.red),
@@ -87,7 +87,7 @@ class _TransformDemoState extends State<TransformDemo> {
             ),
           ),
         ),
-        NSectionHeader(
+        NSectionBox(
           title: "Transform.rotate",
           child: DecoratedBox(
             decoration: BoxDecoration(color: Colors.red),
@@ -98,7 +98,7 @@ class _TransformDemoState extends State<TransformDemo> {
             ),
           ),
         ),
-        NSectionHeader(
+        NSectionBox(
           title: "Transform.scale",
           child: DecoratedBox(
               decoration: BoxDecoration(color: Colors.red),
@@ -106,7 +106,7 @@ class _TransformDemoState extends State<TransformDemo> {
                   scale: 1.5, //放大到1.5倍
                   child: Text("Hello world"))),
         ),
-        NSectionHeader(
+        NSectionBox(
           title: "RotatedBox",
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,

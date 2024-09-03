@@ -9,7 +9,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter_templet_project/basicWidget/n_section_header.dart';
+import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
@@ -68,14 +68,14 @@ class _IndicatorDemoState extends State<IndicatorDemo>
         padding: EdgeInsets.all(20.0),
         child: Column(
           children: <Widget>[
-            NSectionHeader(
+            NSectionBox(
               title: "CupertinoActivityIndicator",
               child: CupertinoActivityIndicator(
                 radius: 24,
                 color: primaryColor,
               ),
             ),
-            NSectionHeader(
+            NSectionBox(
               title: "CircularProgressIndicator",
               child: SizedBox(
                 width: 60,
@@ -98,7 +98,7 @@ class _IndicatorDemoState extends State<IndicatorDemo>
                 ),
               ),
             ),
-            NSectionHeader(
+            NSectionBox(
               title: "LinearProgressIndicator",
               child: LinearProgressIndicator(
                 value: controller.value,

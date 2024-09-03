@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_section_header.dart';
+import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 
 class WrapDemo extends StatefulWidget {
@@ -25,7 +25,7 @@ class _WrapDemoState extends State<WrapDemo> {
   buildBody() {
     return Column(
       children: [
-        NSectionHeader(
+        NSectionBox(
           title: "Axis.horizontal",
           child: Container(
             // height: 200,
@@ -41,7 +41,7 @@ class _WrapDemoState extends State<WrapDemo> {
             ),
           ),
         ),
-        NSectionHeader(
+        NSectionBox(
           title: "Axis.vertical",
           child: Container(
             // height: 200,

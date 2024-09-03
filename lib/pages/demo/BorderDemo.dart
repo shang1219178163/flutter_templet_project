@@ -7,7 +7,7 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_section_header.dart';
+import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 
 class BorderDemo extends StatefulWidget {
   final String? title;
@@ -34,7 +34,7 @@ class _BorderDemoState extends State<BorderDemo> {
       children: [
         Column(
           children: [
-            NSectionHeader(
+            NSectionBox(
               title: "BorderSide",
               child: TextButton(
                 style: TextButton.styleFrom(
@@ -44,7 +44,7 @@ class _BorderDemoState extends State<BorderDemo> {
                 child: Text('BorderSide'),
               ),
             ),
-            NSectionHeader(
+            NSectionBox(
               title: "BeveledRectangleBorder",
               child: Column(
                 children: [
@@ -78,7 +78,7 @@ class _BorderDemoState extends State<BorderDemo> {
                 ],
               ),
             ),
-            NSectionHeader(
+            NSectionBox(
               title: "CircleBorder",
               child: Column(
                 children: [
@@ -95,7 +95,7 @@ class _BorderDemoState extends State<BorderDemo> {
                 ],
               ),
             ),
-            NSectionHeader(
+            NSectionBox(
               title: "ContinuousRectangleBorder",
               child: TextButton(
                 style: TextButton.styleFrom(
@@ -107,7 +107,7 @@ class _BorderDemoState extends State<BorderDemo> {
                 child: Text('ContinuousRectangleBorder'),
               ),
             ),
-            NSectionHeader(
+            NSectionBox(
               title: "OutlinedBorder - LinearBorder",
               child: TextButton(
                 style: TextButton.styleFrom(
@@ -121,7 +121,7 @@ class _BorderDemoState extends State<BorderDemo> {
                 child: Text('LinearBorder'),
               ),
             ),
-            NSectionHeader(
+            NSectionBox(
               title: "RoundedRectangleBorder",
               child: TextButton(
                 style: TextButton.styleFrom(
@@ -133,7 +133,7 @@ class _BorderDemoState extends State<BorderDemo> {
                 child: Text('RoundedRectangleBorder'),
               ),
             ),
-            NSectionHeader(
+            NSectionBox(
               title: "StadiumBorder",
               child: TextButton(
                 style: TextButton.styleFrom(
@@ -145,7 +145,7 @@ class _BorderDemoState extends State<BorderDemo> {
                 child: Text('StadiumBorder'),
               ),
             ),
-            NSectionHeader(
+            NSectionBox(
               title: "OutlinedBorder - StarBorder",
               child: TextButton(
                 style: TextButton.styleFrom(
@@ -158,7 +158,7 @@ class _BorderDemoState extends State<BorderDemo> {
                 child: Text('StarBorder'),
               ),
             ),
-            NSectionHeader(
+            NSectionBox(
               title: "BoxDecoration - BoxBorder",
               child: Container(
                 padding: EdgeInsets.all(16),
@@ -179,7 +179,7 @@ class _BorderDemoState extends State<BorderDemo> {
                 ),
               ),
             ),
-            NSectionHeader(
+            NSectionBox(
               title: "BoxDecoration - BoxShape.circle",
               child: Container(
                 decoration: BoxDecoration(
@@ -194,7 +194,7 @@ class _BorderDemoState extends State<BorderDemo> {
                 ),
               ),
             ),
-            NSectionHeader(
+            NSectionBox(
               title: "ShapeDecoration - ShapeBorder",
               child: Column(
                 children: [
@@ -267,7 +267,7 @@ class _BorderDemoState extends State<BorderDemo> {
                 ],
               ),
             ),
-            NSectionHeader(
+            NSectionBox(
               title: "Decoration - UnderlineTabIndicator",
               child: Container(
                 margin: EdgeInsets.all(8),
@@ -280,7 +280,7 @@ class _BorderDemoState extends State<BorderDemo> {
                 ),
               ),
             ),
-            NSectionHeader(
+            NSectionBox(
               title: "ShapeDecoration - InputBorder",
               child: Column(
                 children: [

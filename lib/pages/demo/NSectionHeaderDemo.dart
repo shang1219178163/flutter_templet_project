@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_section_header.dart';
+import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/extension/text_style_ext.dart';
 
 class NSectionHeaderDemo extends StatefulWidget {
@@ -42,32 +42,32 @@ class _NSectionHeaderDemoState extends State<NSectionHeaderDemo> {
         controller: _scrollController,
         child: Column(
           children: [
-            NSectionHeader(
+            NSectionBox(
               title: "NSectionHeader - h1",
               style: TextStyle().h1,
               child: SizedBox(),
             ),
-            NSectionHeader(
+            NSectionBox(
               title: "NSectionHeader - h2",
               style: TextStyle().h2,
               child: SizedBox(),
             ),
-            NSectionHeader(
+            NSectionBox(
               title: "NSectionHeader - h3",
               style: TextStyle().h3,
               child: SizedBox(),
             ),
-            NSectionHeader(
+            NSectionBox(
               title: "NSectionHeader - h4",
               style: TextStyle().h4,
               child: SizedBox(),
             ),
-            NSectionHeader(
+            NSectionBox(
               title: "NSectionHeader - h5",
               style: TextStyle().h5,
               child: SizedBox(),
             ),
-            NSectionHeader(
+            NSectionBox(
               title: "NSectionHeader - h6",
               style: TextStyle().h6,
               child: SizedBox(),

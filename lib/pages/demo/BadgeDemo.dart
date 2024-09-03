@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_section_header.dart';
+import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_badge.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 
@@ -43,7 +43,7 @@ class _BadgeDemoState extends State<BadgeDemo> {
         controller: _scrollController,
         child: Column(
           children: [
-            NSectionHeader(
+            NSectionBox(
               title: "Badge",
               child: Badge(
                 // offset: Offset(4, -6),
@@ -63,7 +63,7 @@ class _BadgeDemoState extends State<BadgeDemo> {
                 ),
               ),
             ),
-            NSectionHeader(
+            NSectionBox(
               title: "NBadge",
               child: NBadge(
                 value: 111,

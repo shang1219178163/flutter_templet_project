@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/APPThemeSettings.dart';
-import 'package:flutter_templet_project/basicWidget/n_section_header.dart';
+import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:tuple/tuple.dart';
 
 /// scaffoldBackgroundColor 背景色
@@ -263,11 +263,11 @@ class _ThemeColorDemoState extends State<ThemeColorDemo> {
             //     style: TextStyle(color: Colors.green,),
             //   )
             // ),
-            NSectionHeader(
+            NSectionBox(
               title: "Theme.of(context)",
               child: buildBox(items: items),
             ),
-            NSectionHeader(
+            NSectionBox(
               title: "Theme.of(context).colorScheme",
               child: buildBox(items: colorSchemeItems),
             ),

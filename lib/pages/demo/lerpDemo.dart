@@ -8,7 +8,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_section_header.dart';
+import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_slider.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:get/get.dart';
@@ -77,7 +77,7 @@ class _LerpDemoState extends State<LerpDemo>
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              NSectionHeader(
+              NSectionBox(
                 text: Text(desc),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -95,7 +95,7 @@ class _LerpDemoState extends State<LerpDemo>
                   ],
                 ),
               ),
-              NSectionHeader(
+              NSectionBox(
                 text: Text(
                   "二. 随滑块变化的颜色和尺寸",
                   style: TextStyle(
@@ -104,7 +104,7 @@ class _LerpDemoState extends State<LerpDemo>
                 ),
                 child: buildLerpColor(),
               ),
-              NSectionHeader(
+              NSectionBox(
                 text: Text(
                   "三. 基于 ColorTween 的动画",
                   style: TextStyle(

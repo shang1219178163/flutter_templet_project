@@ -13,7 +13,7 @@ import 'package:flutter_templet_project/basicWidget/n_pair.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/n_text_button.dart';
 import 'package:flutter_templet_project/basicWidget/radial_button.dart';
-import 'package:flutter_templet_project/basicWidget/n_section_header.dart';
+import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/triangle_decoration.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
@@ -96,15 +96,15 @@ class _SecondPageState extends State<SecondPage> {
         Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            NSectionHeader(
+            NSectionBox(
               title: "NButton",
               child: buildNButton(),
             ),
-            NSectionHeader(
+            NSectionBox(
               title: "MaterialState",
               child: buildBtnColor(),
             ),
-            NSectionHeader(
+            NSectionBox(
               title: "RadialButton",
               child: Column(
                 children: [
@@ -134,7 +134,7 @@ class _SecondPageState extends State<SecondPage> {
                 ],
               ),
             ),
-            NSectionHeader(
+            NSectionBox(
               title: "AfterLayoutBuilder",
               child: AfterLayoutBuilder(
                 builder: (BuildContext context, Widget? child, Size? size) {
@@ -152,13 +152,13 @@ class _SecondPageState extends State<SecondPage> {
                     child: SelectableText("离离原上草, 一岁一枯荣")),
               ),
             ),
-            NSectionHeader(
+            NSectionBox(
               title: "LinearGradient",
               child: _buildGradientButton(
                 onTap: () => debugPrint("LinearGradient"),
               ),
             ),
-            NSectionHeader(
+            NSectionBox(
               title: "MaterialButton",
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -200,7 +200,7 @@ class _SecondPageState extends State<SecondPage> {
                 ],
               ),
             ),
-            NSectionHeader(
+            NSectionBox(
               title: "BackButton",
               child: BackButton(
                 color: Colors.red,
@@ -213,7 +213,7 @@ class _SecondPageState extends State<SecondPage> {
                 onPressed: () => debugPrint("BackButton"),
               ).toColoredBox(),
             ),
-            NSectionHeader(
+            NSectionBox(
               title: "IconButton",
               child: IconButton(
                 style: TextButton.styleFrom(
@@ -235,7 +235,7 @@ class _SecondPageState extends State<SecondPage> {
                 },
               ).toColoredBox(),
             ),
-            NSectionHeader(
+            NSectionBox(
               title: "FilledButton",
               child: Row(
                 children: [
@@ -255,7 +255,7 @@ class _SecondPageState extends State<SecondPage> {
                 ],
               ),
             ),
-            NSectionHeader(
+            NSectionBox(
               title: "TextButton",
               child: Row(
                 children: [
@@ -296,7 +296,7 @@ class _SecondPageState extends State<SecondPage> {
                 ],
               ),
             ),
-            NSectionHeader(
+            NSectionBox(
               title: "OutlinedButton",
               child: OutlinedButton.icon(
                 key: _globalKey1,
@@ -314,7 +314,7 @@ class _SecondPageState extends State<SecondPage> {
                 ),
               ),
             ),
-            NSectionHeader(
+            NSectionBox(
               title: "ElevatedButton",
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -333,7 +333,7 @@ class _SecondPageState extends State<SecondPage> {
                 }).toList(),
               ),
             ),
-            NSectionHeader(
+            NSectionBox(
               title: "ElevatedButton",
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -363,7 +363,7 @@ class _SecondPageState extends State<SecondPage> {
                 ],
               ),
             ),
-            NSectionHeader(
+            NSectionBox(
               title: "ElevatedButton OutlinedBorder",
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -401,7 +401,7 @@ class _SecondPageState extends State<SecondPage> {
                 }).toList(),
               ),
             ),
-            NSectionHeader(
+            NSectionBox(
               title: "FloatingActionButton",
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -446,7 +446,7 @@ class _SecondPageState extends State<SecondPage> {
                 ],
               ),
             ),
-            NSectionHeader(
+            NSectionBox(
               title: "TextSelectionToolbarTextButton",
               child: TextSelectionToolbarTextButton(
                 padding: EdgeInsets.all(8),
@@ -456,7 +456,7 @@ class _SecondPageState extends State<SecondPage> {
                 child: Text("TextSelectionToolbarTextButton"),
               ),
             ),
-            NSectionHeader(
+            NSectionBox(
               title: "NPair + OutlinedButton",
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -475,7 +475,7 @@ class _SecondPageState extends State<SecondPage> {
                     .toList(),
               ),
             ),
-            NSectionHeader(
+            NSectionBox(
               title: "NPair + ElevatedButton",
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -500,18 +500,17 @@ class _SecondPageState extends State<SecondPage> {
                     .toList(),
               ),
             ),
-            NSectionHeader(
+            NSectionBox(
               title: "ToggleButtons",
               child: buildToggleButtons(),
             ),
-            NSectionHeader(
-                title: "DropdownButton", child: _buildDropdownButton()),
-            NSectionHeader(
+            NSectionBox(title: "DropdownButton", child: _buildDropdownButton()),
+            NSectionBox(
                 title: "_buildDropdownButton1", child: _buildDropdownButton1()),
-            NSectionHeader(
+            NSectionBox(
                 title: "_buildPopupMenuButtonExt",
                 child: _buildPopupMenuButtonExt()),
-            NSectionHeader(
+            NSectionBox(
               title: "UploadButton",
               child: UploadButton(
                 image: Image.asset(
@@ -534,7 +533,7 @@ class _SecondPageState extends State<SecondPage> {
                 },
               ),
             ),
-            NSectionHeader(
+            NSectionBox(
               title: "SpreadArea",
               child: Column(
                 children: [
@@ -562,9 +561,8 @@ class _SecondPageState extends State<SecondPage> {
                 ],
               ),
             ),
-            NSectionHeader(
-                title: "_buildCustomPaint", child: _buildCustomPaint()),
-            NSectionHeader(
+            NSectionBox(title: "_buildCustomPaint", child: _buildCustomPaint()),
+            NSectionBox(
               title: "MyPainterArc",
               child: Container(
                 height: 100,
@@ -581,11 +579,11 @@ class _SecondPageState extends State<SecondPage> {
                 ),
               ),
             ),
-            NSectionHeader(
+            NSectionBox(
               title: "_buildInkWell",
               child: _buildInkWell(),
             ),
-            NSectionHeader(
+            NSectionBox(
               title: "_buildButtonBar",
               child: ButtonBar(
                 children: [

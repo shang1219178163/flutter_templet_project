@@ -10,7 +10,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_button.dart';
 import 'package:flutter_templet_project/basicWidget/n_textfield_search.dart';
-import 'package:flutter_templet_project/basicWidget/n_section_header.dart';
+import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_text_view.dart';
 import 'package:flutter_templet_project/basicWidget/n_textfield.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
@@ -57,7 +57,7 @@ class _TextFieldWidgetDemoState extends State<TextFieldWidgetDemo> {
           controller: _scrollController,
           child: Column(
             children: [
-              NSectionHeader(
+              NSectionBox(
                 title: "NTextField",
                 child: NButton.tonal(
                   title: "取消焦点",
@@ -66,7 +66,7 @@ class _TextFieldWidgetDemoState extends State<TextFieldWidgetDemo> {
                   },
                 ),
               ),
-              NSectionHeader(
+              NSectionBox(
                 title: "NTextField",
                 child: buildNTextField(
                   decorationBuilder: (dt) {
@@ -78,7 +78,7 @@ class _TextFieldWidgetDemoState extends State<TextFieldWidgetDemo> {
                 decoration: BoxDecoration(
                   color: Colors.white,
                 ),
-                child: NSectionHeader(
+                child: NSectionBox(
                   title: "NTextField - hideSuffix",
                   child: buildNTextField(
                     hideSuffix: true,
@@ -88,7 +88,7 @@ class _TextFieldWidgetDemoState extends State<TextFieldWidgetDemo> {
                   ),
                 ),
               ),
-              NSectionHeader(
+              NSectionBox(
                 title: "NTextField - hidePrefix",
                 child: buildNTextField(
                   prefixImage: AssetImage("assets/images/icon_account.png"),
@@ -98,7 +98,7 @@ class _TextFieldWidgetDemoState extends State<TextFieldWidgetDemo> {
                   },
                 ),
               ),
-              NSectionHeader(
+              NSectionBox(
                 title: "NTextField - hidePrefix & hideSuffix",
                 child: buildNTextField(
                   hidePrefix: true,
@@ -108,7 +108,7 @@ class _TextFieldWidgetDemoState extends State<TextFieldWidgetDemo> {
                   },
                 ),
               ),
-              NSectionHeader(
+              NSectionBox(
                 title: "NTextField - hidePrefix & hideSuffix & maxLines: 4",
                 child: buildNTextField(
                   maxLines: 4,
@@ -121,7 +121,7 @@ class _TextFieldWidgetDemoState extends State<TextFieldWidgetDemo> {
                   },
                 ),
               ),
-              NSectionHeader(
+              NSectionBox(
                 title: "NTextView - counterInner: false",
                 child: NTextView(
                   isCounterInner: false,
@@ -129,7 +129,7 @@ class _TextFieldWidgetDemoState extends State<TextFieldWidgetDemo> {
                   onChanged: (String value) {},
                 ),
               ),
-              NSectionHeader(
+              NSectionBox(
                 title: "NTextView - counterInner: true",
                 child: NTextView(
                   isCounterInner: true,
@@ -137,14 +137,14 @@ class _TextFieldWidgetDemoState extends State<TextFieldWidgetDemo> {
                   onChanged: (String value) {},
                 ),
               ),
-              NSectionHeader(
+              NSectionBox(
                 title: "NSearchTextField",
                 child: NSearchTextField(
                   backgroundColor: Colors.white,
                   onChanged: (String value) {},
                 ),
               ),
-              NSectionHeader(
+              NSectionBox(
                 title: "NSearchTextField - textAlign: TextAlign.center",
                 child: NSearchTextField(
                   backgroundColor: Colors.white,
@@ -152,7 +152,7 @@ class _TextFieldWidgetDemoState extends State<TextFieldWidgetDemo> {
                   onChanged: (String value) {},
                 ),
               ),
-              NSectionHeader(
+              NSectionBox(
                 title: "NSearchBar ",
                 child: NSearchBar(
                   onChanged: (String value) {},
@@ -163,7 +163,7 @@ class _TextFieldWidgetDemoState extends State<TextFieldWidgetDemo> {
                 decoration: BoxDecoration(
                   color: Colors.white,
                 ),
-                child: NSectionHeader(
+                child: NSectionBox(
                   title: "NSearchBar ",
                   child: NSearchBar(
                     decoration: BoxDecoration(

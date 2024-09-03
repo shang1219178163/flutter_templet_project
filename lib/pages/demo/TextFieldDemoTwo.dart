@@ -11,7 +11,7 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_templet_project/basicWidget/n_section_header.dart';
+import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/TextInputFormatter/fraction_digits_text_input_formatter.dart';
 import 'package:flutter_templet_project/basicWidget/n_expand_textfield.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
@@ -101,7 +101,7 @@ class _TextFieldDemoTwoState extends State<TextFieldDemoTwo>
             //   title: "TextField",
             //   child: buildTextField(),
             // ),
-            NSectionHeader(
+            NSectionBox(
               title: "填空组件封装",
               child: Container(
                 // color: Colors.yellowAccent,
@@ -126,7 +126,7 @@ class _TextFieldDemoTwoState extends State<TextFieldDemoTwo>
               decoration: BoxDecoration(
                 color: bgColor,
               ),
-              child: NSectionHeader(
+              child: NSectionBox(
                 title: "填空组件封装 - 白底",
                 child: Container(
                   // color: Colors.yellowAccent,

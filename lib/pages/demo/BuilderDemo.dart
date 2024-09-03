@@ -1,6 +1,6 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_section_header.dart';
+import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 
 class BuilderDemo extends StatefulWidget {
   final String? title;
@@ -50,7 +50,7 @@ class _BuilderDemoState extends State<BuilderDemo>
   _buildBody() {
     return Column(
       children: [
-        NSectionHeader(
+        NSectionBox(
           title: "AnimatedBuilder",
           child: AnimatedBuilder(
             animation: _controller,
@@ -63,7 +63,7 @@ class _BuilderDemoState extends State<BuilderDemo>
             },
           ),
         ),
-        NSectionHeader(
+        NSectionBox(
           title: "AnimatedBuilder",
           child: AnimatedBuilder(
             animation: _controller,
@@ -77,7 +77,7 @@ class _BuilderDemoState extends State<BuilderDemo>
           ),
         ),
 
-        NSectionHeader(
+        NSectionBox(
           title: 'Builder/约等于 StatelessWidget',
           child: AnimatedBuilder(
             animation: _controller,
@@ -90,7 +90,7 @@ class _BuilderDemoState extends State<BuilderDemo>
           ),
         ),
 
-        NSectionHeader(
+        NSectionBox(
           title: 'Builder/约等于 StatelessWidget',
           child: AnimatedBuilder(
             animation: _controller,

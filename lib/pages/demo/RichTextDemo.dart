@@ -7,7 +7,7 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_section_header.dart';
+import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/rich_text_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
@@ -89,15 +89,15 @@ xxxx十分重视用户权利及隐私政策并严格按照相关法律法规的�
         child: SingleChildScrollView(
           child: Column(
             children: [
-              NSectionHeader(
+              NSectionBox(
                 title: "buildRichText",
                 child: buildRichText().toBorder(),
               ),
-              NSectionHeader(
+              NSectionBox(
                 title: "buildWidgetSpan",
                 child: buildWidgetSpan(),
               ),
-              NSectionHeader(
+              NSectionBox(
                 title: "richTextWid04",
                 child: richTextWid04(),
               ),

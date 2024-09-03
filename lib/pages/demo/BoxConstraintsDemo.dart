@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_section_header.dart';
+import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 
 class BoxConstraintsDemo extends StatefulWidget {
   final String? title;
@@ -31,7 +31,7 @@ class _BoxConstraintsDemoState extends State<BoxConstraintsDemo> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              NSectionHeader(
+              NSectionBox(
                 title: "ConstrainedBox",
                 child: ConstrainedBox(
                   // BoxConstraints 构造
@@ -44,35 +44,35 @@ class _BoxConstraintsDemoState extends State<BoxConstraintsDemo> {
                   child: _buildBox(),
                 ),
               ),
-              NSectionHeader(
+              NSectionBox(
                 title: "ConstrainedBox.expand（展开约束）",
                 child: ConstrainedBox(
                   constraints: BoxConstraints.expand(width: 300, height: 100),
                   child: _buildBox(),
                 ),
               ),
-              NSectionHeader(
+              NSectionBox(
                 title: "ConstrainedBox.loose（松约束）",
                 child: ConstrainedBox(
                   constraints: BoxConstraints.loose(Size(300, 100)),
                   child: _buildBox(),
                 ),
               ),
-              NSectionHeader(
+              NSectionBox(
                 title: "ConstrainedBox.tight（紧约束）",
                 child: ConstrainedBox(
                   constraints: BoxConstraints.tight(Size(300, 100)),
                   child: _buildBox(),
                 ),
               ),
-              NSectionHeader(
+              NSectionBox(
                 title: "BoxConstraints.tightForFinite（有限紧约束）",
                 child: ConstrainedBox(
                   constraints: BoxConstraints.tightForFinite(height: 100),
                   child: _buildBox(),
                 ),
               ),
-              NSectionHeader(
+              NSectionBox(
                 title: ".loosen()",
                 child: ConstrainedBox(
                   // BoxConstraints 构造,转换为松约束
@@ -85,14 +85,14 @@ class _BoxConstraintsDemoState extends State<BoxConstraintsDemo> {
                   child: _buildBox(),
                 ),
               ),
-              NSectionHeader(
+              NSectionBox(
                 title: "list",
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: list.map((e) => Text(e)).toList(),
                 ),
               ),
-              NSectionHeader(
+              NSectionBox(
                 title: "buildTextView",
                 child: buildTextView(
                   constraints: BoxConstraints(

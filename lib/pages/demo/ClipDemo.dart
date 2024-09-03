@@ -7,7 +7,7 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_section_header.dart';
+import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/triangle_path.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/pages/demo/ChipDemo.dart';
@@ -40,7 +40,7 @@ class _ClipDemoState extends State<ClipDemo> {
         Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            NSectionHeader(
+            NSectionBox(
               title: 'ClipRect //将溢出部分剪裁',
               child: ClipRect(
                 child: Align(
@@ -50,27 +50,27 @@ class _ClipDemoState extends State<ClipDemo> {
                 ),
               ),
             ),
-            NSectionHeader(
+            NSectionBox(
               title: "ClipRRect",
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
                 child: _buildBox(),
               ),
             ),
-            NSectionHeader(
+            NSectionBox(
               title: "ClipOval",
               child: ClipOval(
                 child: _buildBox(),
               ),
             ),
-            NSectionHeader(
+            NSectionBox(
               title: "ClipPath.shape",
               child: ClipPath.shape(
                 shape: StadiumBorder(),
                 child: _buildBox(),
               ),
             ),
-            NSectionHeader(
+            NSectionBox(
               title: "ClipPath - TrianglePath",
               child: ClipPath(
                 clipper: TrianglePath(),

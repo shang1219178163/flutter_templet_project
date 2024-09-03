@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_section_header.dart';
+import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
@@ -26,19 +26,19 @@ class _FlexDemoState extends State<FlexDemo> {
         body: Padding(
           padding: const EdgeInsets.only(bottom: 20),
           child: ListView(children: [
-            NSectionHeader(
+            NSectionBox(
                 title: "Flex.Horizontal", child: _buildFlexHorizontal()),
-            NSectionHeader(title: "Flex.Vertical", child: _buildFlexVertical()),
-            NSectionHeader(title: "_buildSection", child: _buildSection()),
-            NSectionHeader(title: "_buildSection2", child: _buildSection2()),
-            NSectionHeader(title: "_buildSection3", child: _buildSection3()),
-            NSectionHeader(
+            NSectionBox(title: "Flex.Vertical", child: _buildFlexVertical()),
+            NSectionBox(title: "_buildSection", child: _buildSection()),
+            NSectionBox(title: "_buildSection2", child: _buildSection2()),
+            NSectionBox(title: "_buildSection3", child: _buildSection3()),
+            NSectionBox(
                 title: "buildMutipleExpanded", child: buildMutipleExpanded()),
-            NSectionHeader(
+            NSectionBox(
               title: "buildMutipleFlexible",
               child: buildMutipleFlexible(),
             ),
-            NSectionHeader(
+            NSectionBox(
               title: "tips",
               child:
                   buildTipsWidget(showTips: showTips, tips: "这是一个提示信息或者警告⚠️"),

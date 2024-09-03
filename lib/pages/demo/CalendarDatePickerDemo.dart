@@ -9,7 +9,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_section_header.dart';
+import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/util/localizations/AppCupertinoLocalizations.dart';
 
@@ -33,11 +33,11 @@ class _CalendarDatePickerDemoState extends State<CalendarDatePickerDemo> {
           child: Container(
             child: Column(
               children: [
-                NSectionHeader(
+                NSectionBox(
                   title: "buildCalendarDatePicker",
                   child: buildCalendarDatePicker(),
                 ),
-                NSectionHeader(
+                NSectionBox(
                   title: "buildCalendarDatePicker",
                   child: Column(
                     children: [

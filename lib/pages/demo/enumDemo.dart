@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_section_header.dart';
+import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_pair.dart';
 import 'package:flutter_templet_project/enum/ActivityType.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
@@ -53,7 +53,7 @@ class _EnumDemoState extends State<EnumDemo> {
     return SingleChildScrollView(
       child: Column(
         children: [
-          NSectionHeader(
+          NSectionBox(
             title: "1.ActivityTypeNew.values",
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -72,7 +72,7 @@ class _EnumDemoState extends State<EnumDemo> {
                   .toList(),
             ),
           ),
-          NSectionHeader(
+          NSectionBox(
             title: "1.ActivityTypeNew.values",
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -95,7 +95,7 @@ class _EnumDemoState extends State<EnumDemo> {
               }).toList(),
             ),
           ),
-          NSectionHeader(
+          NSectionBox(
             title: "2. ActivityType.values",
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
