@@ -39,12 +39,16 @@ extension DurationExt on Duration {
     }
 
     Duration duration = this;
+    final prefix = duration.isNegative ? "-" : "";
+    final durationNew = duration.abs();
+
     String line = "";
     if (duration.inHours != 0) {
-      line = "${_twoDigits(duration.inHours.remainder(24))}:";
+      line = "$prefix${durationNew.inHours}天";
+      line += "${_twoDigits(durationNew.inHours.remainder(24))}:";
     }
-    line += "${_twoDigits(duration.inMinutes.remainder(60))}:";
-    line += _twoDigits(duration.inSeconds.remainder(60));
+    line += "${_twoDigits(durationNew.inMinutes.remainder(60))}:";
+    line += _twoDigits(durationNew.inSeconds.remainder(60));
     return line;
   }
 }

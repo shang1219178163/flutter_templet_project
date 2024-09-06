@@ -86,7 +86,7 @@ extension DynamicExt<E> on E? {
   }
 
   /// 不为空则转换为目标类型
-  T? map<T>(T Function(E v) fn) {
+  T? convert<T>(T Function(E v) fn) {
     if (this == null) {
       return null;
     }

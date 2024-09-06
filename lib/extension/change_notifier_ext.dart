@@ -27,3 +27,10 @@ extension StringVN on String {
   /// 获取
   ValueNotifier get vn => ValueNotifier<String>(this);
 }
+
+extension ValueNotifierListWxt on ValueNotifier<List> {
+  /// 更新
+  void update() {
+    value = [...value];
+  }
+}

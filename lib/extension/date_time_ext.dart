@@ -34,6 +34,16 @@ extension DateTimeExt on DateTime {
   /// 时间戳(秒)
   int get secondsSinceEpoch => millisecondsSinceEpoch ~/ 1000;
 
+  /// yyyy-MM-dd 00:00:00
+  DateTime get dayStart {
+    return DateTime(year, month, day, 0, 0, 0);
+  }
+
+  /// yyyy-MM-dd 23:59:59
+  DateTime get dayEnd {
+    return DateTime(year, month, day, 23, 59, 59);
+  }
+
   /// 时间戳 转 DateTime
   static DateTime? dateFromTimestamp({
     required int? timestamp,
