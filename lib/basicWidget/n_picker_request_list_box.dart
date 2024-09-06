@@ -14,6 +14,7 @@ import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 
+/// 基于接口的搜索选择列表(子类实现 PickerDrugBox)
 class NPickerRequestListBox<E> extends StatefulWidget {
   const NPickerRequestListBox({
     super.key,
