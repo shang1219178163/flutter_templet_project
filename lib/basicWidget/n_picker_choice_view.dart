@@ -60,22 +60,30 @@ class NPickerChoiceViewState<E> extends State<NPickerChoiceView<E>> {
   final searchVN = ValueNotifier("");
 
   @override
+  void didUpdateWidget(covariant NPickerChoiceView<E> oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.title != widget.title || oldWidget.items != widget.items) {
+      setState(() {});
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     final child = Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        if (widget.toolbar == null)
-          NPickerToolBar(
-            title: widget.title,
-            onCancel: widget.onCancel ??
-                () {
-                  Navigator.of(context).pop();
-                },
-            onConfirm: widget.onConfirm ??
-                () {
-                  Navigator.of(context).pop();
-                },
-          ),
+        widget.toolbar ??
+            NPickerToolBar(
+              title: widget.title,
+              onCancel: widget.onCancel ??
+                  () {
+                    Navigator.of(context).pop();
+                  },
+              onConfirm: widget.onConfirm ??
+                  () {
+                    Navigator.of(context).pop();
+                  },
+            ),
         widget.divider ?? Divider(height: 0.5),
         Expanded(
           child: Scrollbar(

@@ -22,6 +22,7 @@ class AeSectionHeader extends StatelessWidget {
       fontWeight: FontWeight.w400,
       color: Color(0xFF737373),
     ),
+    this.tailing,
   });
 
   /// 标题
@@ -36,13 +37,15 @@ class AeSectionHeader extends StatelessWidget {
   /// 竖线指示器
   final bool hasIndicator;
 
+  final Widget? tailing;
+
   @override
   Widget build(BuildContext context) {
     if (title.isEmpty) {
       return const SizedBox();
     }
 
-    return Text.rich(
+    final leading = Text.rich(
       TextSpan(
         children: [
           if (hasIndicator)
@@ -74,6 +77,16 @@ class AeSectionHeader extends StatelessWidget {
         ],
       ),
       maxLines: 3,
+    );
+    if (tailing == null) {
+      return leading;
+    }
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Expanded(child: leading),
+        tailing ?? const SizedBox(),
+      ],
     );
   }
 }

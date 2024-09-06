@@ -104,7 +104,10 @@ class AeChooseItem<T> extends StatelessWidget {
               child: ValueListenableBuilder(
                 valueListenable: selectVN,
                 builder: (context, value, child) {
-                  var name = value != null ? '请选择' : "";
+                  final names =
+                      (value ?? []).map((e) => convertCb(e)).join(",");
+
+                  var name = value == null ? '请选择' : names;
                   final color = enable
                       ? (value != null ? fontColor : fontColorB3B3B3)
                       : (disableTextColor ?? fontColorB3B3B3);
@@ -173,12 +176,9 @@ class AeChooseItem<T> extends StatelessWidget {
                 ListTile(
                   title: Text(
                     name,
-                    style: TextStyle(color: textColor),
+                    style: TextStyle(color: textColor, fontSize: 14),
                   ),
-                  trailing: Icon(
-                    Icons.check,
-                    color: checkColor,
-                  ),
+                  trailing: Icon(Icons.check, color: checkColor),
                   onTap: () {
                     // Navigator.of(context).pop(idx);
                     final list = <T>[...selectVN.value ?? []];
@@ -192,10 +192,7 @@ class AeChooseItem<T> extends StatelessWidget {
                     //     "$this selectVN.value${selectVN.value.hashCode}: ${selectVN.value}");
                   },
                 ),
-                Divider(
-                  height: 0.5,
-                  indent: 15,
-                ),
+                Divider(height: 0.5, indent: 15),
               ],
             );
           },

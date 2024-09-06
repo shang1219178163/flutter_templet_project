@@ -199,6 +199,24 @@ class _NTextFieldState extends State<NTextField> {
   }
 
   @override
+  void didUpdateWidget(covariant NTextField oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (widget.value != oldWidget.value ||
+        widget.readOnly != oldWidget.readOnly ||
+        widget.minLines != oldWidget.minLines ||
+        widget.maxLines != oldWidget.maxLines ||
+        widget.fillColor != oldWidget.fillColor ||
+        widget.focusColor != oldWidget.focusColor ||
+        widget.contentPadding != oldWidget.contentPadding ||
+        widget.isCollapsed != oldWidget.isCollapsed ||
+        widget.suffixIconBuilder != oldWidget.suffixIconBuilder) {
+      textEditingController.text = widget.value ?? "";
+      setState(() {});
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     final prefixImage = Image(
       image: widget.prefixImage ?? AssetImage("assets/images/icon_search.png"),

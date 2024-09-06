@@ -9,6 +9,8 @@
 import 'package:flutter/material.dart';
 import 'package:tuple/tuple.dart';
 
+// typedef TabRecord<T> = ({Widget tab, Widget child});
+
 /// 选项卡页面封装
 class NTabBarPage extends StatefulWidget {
   const NTabBarPage({
@@ -140,16 +142,28 @@ class _NTabBarPageState extends State<NTabBarPage>
           labelColor: textColor,
           indicatorColor: textColor,
           dividerColor: Colors.transparent,
-          onTap: widget.onTabBar,
+          onTap: (index) {
+            tabBarIndex.value = index;
+            widget.onTabBar?.call(index);
+          },
         ),
       ),
     );
   }
 
   Widget buildBody() {
-    return TabBarView(
-      controller: tabController,
-      children: items.map((e) => e.item2).toList(),
+    return ValueListenableBuilder(
+      valueListenable: tabBarIndex,
+      builder: (context, value, child) {
+        return IndexedStack(
+          index: value,
+          children: items.map((e) => e.item2).toList(),
+        );
+      },
     );
+    // return TabBarView(
+    //   controller: tabController,
+    //   children: items.map((e) => e.item2).toList(),
+    // );
   }
 }
