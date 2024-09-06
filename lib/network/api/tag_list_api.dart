@@ -12,8 +12,11 @@ import 'package:flutter_templet_project/cache/cache_service.dart';
 import 'package:flutter_templet_project/network/base_request_api.dart';
 
 /// 标签列表获取
-class TagListApi extends BaseRequestAPI {
+class TagListApi extends BaseListApi {
   TagListApi({
+    super.pageNo,
+    super.pageSize,
+    super.search,
     this.departmentId,
   });
 

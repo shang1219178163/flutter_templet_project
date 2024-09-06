@@ -197,14 +197,50 @@ class BaseRequestAPI {
   }
 }
 
-/// 请求分页基类
-class BasePageRequestApi extends BaseRequestAPI {
-  BasePageRequestApi({
+/// 分页请求基类
+class BaseListApi extends BaseRequestAPI {
+  BaseListApi({
     this.pageNo = 1,
     this.pageSize = 30,
+    this.startTime,
+    this.endTime,
+    this.search,
   });
 
+  /// 页码
   int pageNo;
 
+  /// 页数
   int pageSize;
+
+  /// 入组时间开始
+  String? startTime;
+
+  /// 入组时间开始
+  String? endTime;
+
+  /// 搜索
+  String? search;
+
+  @override
+  HttpMethod get requestType => HttpMethod.GET;
+
+  @override
+  Map<String, dynamic> get requestParams {
+    final map = <String, dynamic>{};
+    map["pageNo"] = pageNo;
+    map["pageSize"] = pageSize;
+
+    if (startTime != null) {
+      map["startTime"] = startTime;
+    }
+    if (endTime != null) {
+      map["endTime"] = endTime;
+    }
+
+    if (search != null) {
+      map["search"] = search;
+    }
+    return map;
+  }
 }
