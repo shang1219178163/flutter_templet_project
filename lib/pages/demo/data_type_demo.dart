@@ -256,10 +256,10 @@ class _DataTypeDemoState extends State<DataTypeDemo> {
     ddlog("resultC: $resultC");
 
     final listA = [
-      a1.map((v) => Text("A1")),
-      a2.map((v) => Text("A2")),
-      a3.map((v) => Text("A3")),
-      a4.map((v) => Text("A4")),
+      a1.convert((v) => Text("A1")),
+      a2.convert((v) => Text("A2")),
+      a3.convert((v) => Text("A3")),
+      a4.convert((v) => Text("A4")),
     ];
     ddlog(listA);
 
@@ -377,8 +377,8 @@ class _DataTypeDemoState extends State<DataTypeDemo> {
   }
 
   void onObject() {
-    // testData();
-    onVersion();
+    testData();
+    // onVersion();
   }
 
   removeSame() {
@@ -431,15 +431,24 @@ class _DataTypeDemoState extends State<DataTypeDemo> {
     ddlog([
       a.orElse(() => "456"),
       b.or("333"),
-      a.map((v) => Text("$a")),
-      b.map((v) => Text("$b"))
+      a.convert((v) => Text("$a")),
+      b.convert((v) => Text("$b"))
     ].asMap());
 
-    final Text? z = a.map((v) => Text("$a"));
+    final Text? z = a.convert((v) => Text("$a"));
 
     final nums = List<int>.generate(10, (i) => i);
     final val = nums.reduce((v, e) => v + e);
     ddlog("reduce int: $val");
+
+    // for (var i = 0; i < nums.length; i++) {
+    //   ddlog("i: ${nums[i]}");
+    //   if (i >= 3) {
+    //     return;
+    //   }
+    // }
+
+    return;
 
     final array1 = nums.map((e) => "$e").toList();
     final result = array1.reduce((v, e) => v + e);

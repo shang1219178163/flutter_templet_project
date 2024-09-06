@@ -1,8 +1,15 @@
 import 'dart:ui' as ui;
 
+import 'package:flutter/animation.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_flex_spacing.dart';
+import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
+import 'package:flutter_templet_project/basicWidget/n_text.dart';
+import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
+import 'package:flutter_templet_project/util/R.dart';
 
 class ContainerDemo extends StatefulWidget {
   final String? title;
@@ -114,7 +121,7 @@ class _ContainerDemoState extends State<ContainerDemo> {
               ),
             ],
             image: DecorationImage(
-              image: NetworkImage('R.image.urls[0]'),
+              image: NetworkImage(R.image.urls[0]),
               fit: BoxFit.cover,
             ),
           ),
@@ -174,23 +181,77 @@ class _ContainerDemoState extends State<ContainerDemo> {
   }
 
   Widget buildSection3() {
-    return Container(
-      width: 150,
-      height: 150,
-      margin: const EdgeInsets.all(50),
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: Colors.blue,
-        // borderRadius: BorderRadius.only(
-        //   topLeft: Radius.circular(20.0),
-        //   topRight: Radius.circular(20.0),
-        //   bottomLeft: Radius.zero,
-        //   bottomRight: Radius.zero,
-        // ),
+    final children = List.generate(
+        3,
+        (index) => Container(
+              decoration: BoxDecoration(
+                  // color: ColorExt.random,
+                  // border: Border.all(color: Colors.blue),
+                  ),
+              child: NText("项目_$index"),
+            )).toList();
+
+    Widget separated = Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: VerticalDivider(
+        color: Colors.red,
+        width: 1,
+        indent: 0,
+        endIndent: 0,
       ),
-      child: Text(
-        "hello",
+    );
+    return Container(
+      // color: Colors.green,
+      child: Column(
+        children: [
+          NSectionBox(
+            title: "ListView.separated",
+            child: Container(
+              height: 20,
+              child: ListView.separated(
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (_, i) => children[i],
+                separatorBuilder: (_, i) => separated,
+                itemCount: children.length,
+              ),
+            ),
+          ),
+          NSectionBox(
+            title: "NFlexSeparated - SizedBox",
+            child: SizedBox(
+              height: 30,
+              child: NFlexSeparated(
+                direction: Axis.horizontal,
+                separatedBuilder: (i) {
+                  return separated;
+                },
+                children: children,
+              ),
+            ),
+          ),
+          NSectionBox(
+            title: "NFlexSeparated - IntrinsicHeight",
+            child: IntrinsicHeight(
+              child: NFlexSeparated(
+                direction: Axis.horizontal,
+                separatedBuilder: (i) {
+                  return separated;
+                },
+                children: children,
+              ),
+            ),
+          ),
+          NSectionBox(
+            title: "NFlexSeparated.spacing",
+            child: IntrinsicHeight(
+              child: NFlexSeparated.spacing(
+                direction: Axis.horizontal,
+                spacing: 30,
+                children: children,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
