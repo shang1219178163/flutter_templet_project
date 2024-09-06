@@ -26,11 +26,11 @@ class _ColoredBoxDemoState extends State<ColoredBoxDemo> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
       ),
-      body: _buildBody(),
+      body: buildBody(),
     );
   }
 
-  _buildBody() {
+  buildBody() {
     return Column(
       children: [
         ColoredBox(

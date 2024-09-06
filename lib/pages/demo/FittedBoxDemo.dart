@@ -24,11 +24,11 @@ class _FittedBoxDemoState extends State<FittedBoxDemo> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
       ),
-      body: _buildBody(),
+      body: buildBody(),
     );
   }
 
-  _buildBody() {
+  buildBody() {
     return Center(
       child: Column(
         children: [

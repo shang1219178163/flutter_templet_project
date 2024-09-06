@@ -37,11 +37,11 @@ class _OverflowDemoState extends State<OverflowDemo> {
                 ))
             .toList(),
       ),
-      body: _buildBody(),
+      body: buildBody(),
     );
   }
 
-  _buildBody() {
+  buildBody() {
     return Container(
       color: Colors.yellow,
       width: 200.0,

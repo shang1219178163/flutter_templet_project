@@ -31,7 +31,7 @@ class _BackdropFilterDemoState extends State<BackdropFilterDemo> {
     );
   }
 
-  _buildBody() {
+  buildBody() {
     return Stack(
       fit: StackFit.expand,
       children: <Widget>[

@@ -59,11 +59,11 @@ class _DateRangePickerDialogDemoState extends State<DateRangePickerDialogDemo>
               .toList(),
         ),
       ),
-      body: _buildBody(),
+      body: buildBody(),
     );
   }
 
-  _buildBody() {
+  buildBody() {
     return SafeArea(
       child: CustomScrollView(
         slivers: <Widget>[

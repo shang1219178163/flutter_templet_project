@@ -93,11 +93,11 @@ class _CustomScrollBarDemoState extends State<CustomScrollBarDemo> {
                 ))
             .toList(),
       ),
-      body: _buildBody(isCustomScrollView: isCustomScrollView),
+      body: buildBody(isCustomScrollView: isCustomScrollView),
     );
   }
 
-  _buildBody({isCustomScrollView = false}) {
+  buildBody({isCustomScrollView = false}) {
     final child = ListView(children: [
       NSectionBox(
         title:

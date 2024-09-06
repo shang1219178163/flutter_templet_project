@@ -93,14 +93,14 @@ class _LogisticsTimeLineState extends State<LogisticsTimeLine> {
 
   _getBody() {
     final map = {
-      0: _buildBody(),
-      1: _buildBody1(),
-      2: _buildBody2(),
+      0: buildBody(),
+      1: buildBody1(),
+      2: buildBody2(),
     };
     return map[groupValue] ?? Container();
   }
 
-  _buildBody() {
+  buildBody() {
     return ListView(
       // crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -175,7 +175,7 @@ class _LogisticsTimeLineState extends State<LogisticsTimeLine> {
     );
   }
 
-  _buildBody1() {
+  buildBody1() {
     return ListView(
       children: [
         Padding(
@@ -231,7 +231,7 @@ class _LogisticsTimeLineState extends State<LogisticsTimeLine> {
     );
   }
 
-  _buildBody2() {
+  buildBody2() {
     return ListView(
       // crossAxisAlignment: CrossAxisAlignment.start,
       children: [

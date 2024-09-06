@@ -20,10 +20,10 @@ class _BoxConstraintsDemoState extends State<BoxConstraintsDemo> {
         appBar: AppBar(
           title: Text(widget.title ?? "$widget"),
         ),
-        body: _buildBody());
+        body: buildBody());
   }
 
-  _buildBody() {
+  buildBody() {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 12, horizontal: 8),
       child: ListView(

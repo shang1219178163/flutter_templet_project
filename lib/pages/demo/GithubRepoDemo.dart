@@ -72,12 +72,12 @@ class _GithubRepoDemoState extends State<GithubRepoDemo> {
               )),
         ],
       ),
-      body: _isModel ? _buildBodyByModel() : _buildBody(),
-      // body: _isModel ? _buildBodyByModel1() : _buildBody(),
+      body: _isModel ? _buildBodyByModel() : buildBody(),
+      // body: _isModel ? _buildBodyByModel1() : buildBody(),
     );
   }
 
-  Widget _buildBody() {
+  Widget buildBody() {
     return Container(
       alignment: Alignment.center,
       child: FutureBuilder(

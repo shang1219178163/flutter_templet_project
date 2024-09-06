@@ -30,10 +30,10 @@ class _TextViewDemoState extends State<TextViewDemo> {
         appBar: AppBar(
           title: Text(widget.title ?? "$widget"),
         ),
-        body: _buildBody());
+        body: buildBody());
   }
 
-  _buildBody() {
+  buildBody() {
     return Container(
       constraints: BoxConstraints(
         // minWidth: 100,

@@ -22,11 +22,11 @@ class _VisibilityDetectorDemoState extends State<VisibilityDetectorDemo> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
       ),
-      body: _buildBody(),
+      body: buildBody(),
     );
   }
 
-  Widget _buildBody() {
+  Widget buildBody() {
     return VisibilityDetector(
       key: Key("page"),
       onVisibilityChanged: (visibilityInfo) {

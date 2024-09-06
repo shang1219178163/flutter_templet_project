@@ -93,7 +93,7 @@ class SnackBarDemoState extends State<SnackBarDemo> {
             ),
           ],
         ),
-        body: _buildBody(),
+        body: buildBody(),
       ),
     );
   }
@@ -121,7 +121,7 @@ class SnackBarDemoState extends State<SnackBarDemo> {
     }
   }
 
-  _buildBody() {
+  buildBody() {
     return Builder(builder: (BuildContext context) {
       return RepaintBoundary(
         key: globalKey,

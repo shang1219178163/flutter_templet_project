@@ -77,11 +77,11 @@ class _NTreeDemoState extends State<NTreeDemo> {
                 ))
             .toList(),
       ),
-      body: _buildBody(),
+      body: buildBody(),
     );
   }
 
-  _buildBody() {
+  buildBody() {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
 
     return CustomScrollView(

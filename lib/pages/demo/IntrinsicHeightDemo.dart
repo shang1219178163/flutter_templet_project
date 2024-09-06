@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/util/R.dart';
 
 class IntrinsicHeightDemo extends StatefulWidget {
   const IntrinsicHeightDemo({Key? key, this.title}) : super(key: key);
@@ -30,10 +31,10 @@ class _IntrinsicHeightDemoState extends State<IntrinsicHeightDemo> {
                 )),
           ],
         ),
-        body: flag ? _buildBody() : _buildRow());
+        body: flag ? buildBody() : _buildRow());
   }
 
-  _buildBody() {
+  buildBody() {
     return IntrinsicHeight(
       child: Row(
         children: [
@@ -67,7 +68,7 @@ class _IntrinsicHeightDemoState extends State<IntrinsicHeightDemo> {
             decoration: BoxDecoration(
               border: Border.all(color: Colors.blue),
               image: DecorationImage(
-                image: NetworkImage('R.image.urls[0]'),
+                image: NetworkImage(R.image.urls[0]),
                 fit: BoxFit.cover,
               ),
             ),

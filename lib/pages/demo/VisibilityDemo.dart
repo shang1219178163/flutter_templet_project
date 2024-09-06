@@ -32,10 +32,10 @@ class _VisibilityDemoState extends State<VisibilityDemo> {
                   ))
               .toList(),
         ),
-        body: _buildBody());
+        body: buildBody());
   }
 
-  _buildBody() {
+  buildBody() {
     final child = Container(
       width: 100,
       height: 100,

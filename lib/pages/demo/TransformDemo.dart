@@ -25,11 +25,11 @@ class _TransformDemoState extends State<TransformDemo> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
       ),
-      body: _buildBody(),
+      body: buildBody(),
     );
   }
 
-  _buildBody() {
+  buildBody() {
     return ListView(
       children: [
         NSectionBox(

@@ -88,12 +88,12 @@ class SnackBarDemoOneState extends State<SnackBarDemoOne>
             ),
           ],
         ),
-        body: _buildBody(),
+        body: buildBody(),
       ),
     );
   }
 
-  _buildBody() {
+  buildBody() {
     return Builder(builder: (BuildContext context) {
       return RepaintBoundary(
         key: globalKey,

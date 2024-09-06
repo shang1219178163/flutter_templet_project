@@ -18,11 +18,11 @@ class _ScrollbarDemoState extends State<ScrollbarDemo> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
       ),
-      body: _buildBody(),
+      body: buildBody(),
     );
   }
 
-  _buildBody() {
+  buildBody() {
     return NotificationListener<OverscrollIndicatorNotification>(
       onNotification: (notification) {
         //滑动指示器是否在头部 true在前端，false在末端

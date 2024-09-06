@@ -41,11 +41,11 @@ class _AzlistviewDemoState extends State<AzlistviewDemo> {
                 ))
             .toList(),
       ),
-      body: _buildBody(),
+      body: buildBody(),
     );
   }
 
-  _buildBody() {
+  buildBody() {
     return ListPage([
       PageInfo("GitHub Languages", (ctx) => GitHubLanguagePage(), false),
       PageInfo("Contacts", (ctx) => ContactsPage(), false),

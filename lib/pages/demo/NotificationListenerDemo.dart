@@ -31,12 +31,12 @@ class _NotificationListenerDemoState extends State<NotificationListenerDemo> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
       ),
-      body: _buildBody(),
+      body: buildBody(),
       floatingActionButton: _buildFloatingActionButton(),
     );
   }
 
-  _buildBody() {
+  buildBody() {
     return NotificationListener<ScrollNotification>(
       onNotification: onNotification,
       child: ListView.separated(

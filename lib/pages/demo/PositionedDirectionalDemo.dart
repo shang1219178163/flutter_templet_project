@@ -27,11 +27,11 @@ class _PositionedDirectionalDemoState extends State<PositionedDirectionalDemo> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
       ),
-      body: _buildBody(),
+      body: buildBody(),
     );
   }
 
-  _buildBody() {
+  buildBody() {
     return Stack(
       children: <Widget>[
         PositionedDirectional(

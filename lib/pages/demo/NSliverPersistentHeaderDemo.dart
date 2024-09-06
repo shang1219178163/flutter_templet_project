@@ -45,11 +45,11 @@ class _NSliverPersistentHeaderDemoState
                 ))
             .toList(),
       ),
-      body: _buildBody(),
+      body: buildBody(),
     );
   }
 
-  _buildBody() {
+  buildBody() {
     return CustomScrollView(
       slivers: [
         Container(

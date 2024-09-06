@@ -24,11 +24,11 @@ class _OverflowBarDemoState extends State<OverflowBarDemo> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
       ),
-      body: _buildBody(),
+      body: buildBody(),
     );
   }
 
-  _buildBody() {
+  buildBody() {
     return Container(
       alignment: Alignment.center,
       padding: const EdgeInsets.all(16),

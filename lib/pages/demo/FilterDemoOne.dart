@@ -45,11 +45,11 @@ class _FilterDemoOneState extends State<FilterDemoOne> {
                 ))
             .toList(),
       ),
-      body: _buildBody(),
+      body: buildBody(),
     );
   }
 
-  _buildBody() {
+  buildBody() {
     return Container(
       child: Center(
         child: Column(

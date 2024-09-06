@@ -32,7 +32,7 @@ class _BuilderDemoState extends State<BuilderDemo>
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
       ),
-      body: _buildBody(),
+      body: buildBody(),
     );
   }
 
@@ -47,7 +47,7 @@ class _BuilderDemoState extends State<BuilderDemo>
     );
   }
 
-  _buildBody() {
+  buildBody() {
     return Column(
       children: [
         NSectionBox(

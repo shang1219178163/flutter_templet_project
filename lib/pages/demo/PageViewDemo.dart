@@ -59,11 +59,11 @@ class _PageViewDemoState extends State<PageViewDemo> {
                 ))
             .toList(),
       ),
-      body: _buildBody(),
+      body: buildBody(),
     );
   }
 
-  _buildBody({
+  buildBody({
     margin = const EdgeInsets.all(15),
     padding = const EdgeInsets.all(15),
   }) {

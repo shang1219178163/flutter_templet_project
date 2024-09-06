@@ -11,11 +11,11 @@ class SliverFillRemainingDemo extends StatelessWidget {
           'SliverFillRemaining',
         ),
       ),
-      body: _buildBody(),
+      body: buildBody(),
     );
   }
 
-  _buildBody() {
+  buildBody() {
     return CustomScrollView(
       slivers: <Widget>[
         SliverToBoxAdapter(

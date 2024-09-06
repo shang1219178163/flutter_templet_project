@@ -30,7 +30,7 @@ class _NavigationToolbarDemoState extends State<NavigationToolbarDemo> {
       ),
       body: Column(
         children: [
-          _buildBody(),
+          buildBody(),
           Divider(),
           NPickerToolBar(
             onCancel: () {
@@ -46,7 +46,7 @@ class _NavigationToolbarDemoState extends State<NavigationToolbarDemo> {
     );
   }
 
-  _buildBody() {
+  buildBody() {
     return Container(
       height: 50,
       // decoration: BoxDecoration(

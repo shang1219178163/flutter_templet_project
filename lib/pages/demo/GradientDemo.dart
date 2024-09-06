@@ -57,7 +57,7 @@ class _GradientDemoState extends State<GradientDemo> with BottomSheetMixin {
                 ],
               ),
             )),
-        body: _buildBody());
+        body: buildBody());
   }
 
   showSheetTileMode() {
@@ -131,7 +131,7 @@ class _GradientDemoState extends State<GradientDemo> with BottomSheetMixin {
     );
   }
 
-  _buildBody() {
+  buildBody() {
     return ListView(children: <Widget>[
       buildTop(),
       NSectionBox(

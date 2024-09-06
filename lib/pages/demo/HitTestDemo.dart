@@ -20,11 +20,11 @@ class HitTest extends StatelessWidget {
       appBar: AppBar(
         title: Text('Hit Test'),
       ),
-      body: _buildBody(),
+      body: buildBody(),
     );
   }
 
-  _buildBody() {
+  buildBody() {
     return Material(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,

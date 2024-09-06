@@ -9,11 +9,11 @@ class SliverFillViewportDemo extends StatelessWidget {
       appBar: AppBar(
         title: Text('SliverFillViewport'),
       ),
-      body: _buildBody(),
+      body: buildBody(),
     );
   }
 
-  _buildBody() {
+  buildBody() {
     List<Color> colors = Colors.primaries.sublist(6, 10);
 
     return CustomScrollView(

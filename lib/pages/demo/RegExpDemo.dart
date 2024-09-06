@@ -33,11 +33,11 @@ class _RegExpDemoState extends State<RegExpDemo> {
                 ))
             .toList(),
       ),
-      body: _buildBody(),
+      body: buildBody(),
     );
   }
 
-  _buildBody() {
+  buildBody() {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
 
     return CustomScrollView(

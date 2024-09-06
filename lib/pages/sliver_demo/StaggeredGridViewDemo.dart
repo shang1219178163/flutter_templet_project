@@ -45,11 +45,11 @@ class _StaggeredGridViewDemoState extends State<StaggeredGridViewDemo> {
               )),
         ],
       ),
-      body: _type == true ? _buildBody() : _buildCustomScrollView(),
+      body: _type == true ? buildBody() : _buildCustomScrollView(),
     );
   }
 
-  _buildBody() {
+  buildBody() {
     return Container();
     // return ClipRRect(
     //   borderRadius: BorderRadius.circular(30),

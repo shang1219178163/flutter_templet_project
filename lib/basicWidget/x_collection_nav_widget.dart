@@ -42,7 +42,7 @@ class XCollectionNavWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // return _buildSwiper();
-    return _buildBody();
+    return buildBody();
   }
 
   _buildSwiper() {
@@ -63,7 +63,7 @@ class XCollectionNavWidget extends StatelessWidget {
     );
   }
 
-  _buildBody() {
+  buildBody() {
     return LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
       var edgeHorizontal = spacing * 0.5;

@@ -29,12 +29,12 @@ class _SteperConnectorDemoState extends State<SteperConnectorDemo> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
       ),
-      body: _buildBody(),
+      body: buildBody(),
       //   body: _buildBodyColumn(),
     );
   }
 
-  _buildBody() {
+  buildBody() {
     return ListView(
       children: [
         TimelineTile(

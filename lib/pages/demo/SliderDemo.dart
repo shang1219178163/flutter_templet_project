@@ -32,11 +32,11 @@ class _SliderDemoState extends State<SliderDemo> {
           title: Text(widget.title ?? "$widget"),
         ),
         body: SafeArea(
-          child: _buildBody(),
+          child: buildBody(),
         ));
   }
 
-  _buildBody() {
+  buildBody() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

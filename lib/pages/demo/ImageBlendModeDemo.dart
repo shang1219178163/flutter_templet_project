@@ -28,7 +28,7 @@ class _ImageBlendModeDemoState extends State<ImageBlendModeDemo> {
               icon: Icon(Icons.change_circle_outlined))
         ],
       ),
-      body: _buildBody(),
+      body: buildBody(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           APPThemeService().changeTheme();
@@ -38,7 +38,7 @@ class _ImageBlendModeDemoState extends State<ImageBlendModeDemo> {
     );
   }
 
-  _buildBody({
+  buildBody({
     int rowCount = 4,
     double spacing = 8,
     double runSpacing = 8,

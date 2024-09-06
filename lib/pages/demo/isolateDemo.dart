@@ -20,11 +20,11 @@ class _IsolateDemoState extends State<IsolateDemo> {
       appBar: AppBar(
         title: Text("Isolate"),
       ),
-      body: _buildBody(),
+      body: buildBody(),
     );
   }
 
-  _buildBody() {
+  buildBody() {
     return SafeArea(
       child: Center(
         child: Column(

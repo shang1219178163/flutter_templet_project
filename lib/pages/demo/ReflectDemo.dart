@@ -39,11 +39,11 @@ class _ReflectDemoState extends State<ReflectDemo> {
                 ))
             .toList(),
       ),
-      body: _buildBody(),
+      body: buildBody(),
     );
   }
 
-  _buildBody() {
+  buildBody() {
     return SafeArea(
       child: CustomScrollView(
         slivers: <Widget>[

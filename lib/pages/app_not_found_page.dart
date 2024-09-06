@@ -24,11 +24,11 @@ class APPNotFoundPage extends StatelessWidget {
       appBar: AppBar(
         title: Text("404"),
       ),
-      body: _buildBody(),
+      body: buildBody(),
     );
   }
 
-  _buildBody() {
+  buildBody() {
     return Padding(
       padding: const EdgeInsets.only(top: 200.0),
       child: Center(

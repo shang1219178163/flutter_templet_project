@@ -30,11 +30,11 @@ class _ClipDemoState extends State<ClipDemo> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
       ),
-      body: _buildBody(),
+      body: buildBody(),
     );
   }
 
-  _buildBody() {
+  buildBody() {
     return ListView(
       children: [
         Column(

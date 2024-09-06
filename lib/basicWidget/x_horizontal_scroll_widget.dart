@@ -72,10 +72,10 @@ class XHorizontalScrollWidget extends StatelessWidget {
     if (isSwiper) {
       return _buildBodySwiper();
     }
-    return _buildBody();
+    return buildBody();
   }
 
-  _buildBody() {
+  buildBody() {
     return Container(
         width: width,
         height: height,

@@ -26,13 +26,13 @@ class _BannerDemoState extends State<BannerDemo> {
       ),
       body: Column(
         children: [
-          _buildBody(),
+          buildBody(),
         ],
       ),
     );
   }
 
-  _buildBody() {
+  buildBody() {
     return Container(
       padding: EdgeInsets.all(16),
       child: Align(

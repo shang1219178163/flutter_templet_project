@@ -36,11 +36,11 @@ class _StateManagerDemoState extends State<StateManagerDemo> {
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
       ),
-      body: _buildBody(),
+      body: buildBody(),
     );
   }
 
-  _buildBody() {
+  buildBody() {
     return ListView.builder(
         itemCount: _tuples.length,
         itemBuilder: (BuildContext context, int index) {

@@ -70,7 +70,7 @@ class _NestedScrollViewDemoTwoState extends State<NestedScrollViewDemoTwo>
                 ))
             .toList(),
       ),
-      body: _buildBody(),
+      body: buildBody(),
     );
   }
 
@@ -79,7 +79,7 @@ class _NestedScrollViewDemoTwoState extends State<NestedScrollViewDemoTwo>
     setState(() {});
   }
 
-  _buildBody() {
+  buildBody() {
     if (flagVN.value) {
       return _buildBody2(
           scrollController: _scrollController,

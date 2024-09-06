@@ -95,7 +95,7 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
           ),
         ],
       ),
-      // body: _buildBody(),
+      // body: buildBody(),
       body: _buildBodyNew(),
     );
   }
@@ -131,7 +131,7 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
     );
   }
 
-  _buildBody() {
+  buildBody() {
     final screenSize = MediaQuery.of(context).size;
 
     var children = detailList.map((e) {
