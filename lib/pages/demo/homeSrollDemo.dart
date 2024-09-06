@@ -34,11 +34,11 @@ class _HomeSrollDemoState extends State<HomeSrollDemo> {
           ),
         ],
       ),
-      body: isList ? _buildBodyList() : _buildBody(),
+      body: isList ? _buildBodyList() : buildBody(),
     );
   }
 
-  _buildBody() {
+  buildBody() {
     return buildDecoration(child: buildHorizontalScrollWidget(showCount: 2.0));
   }
 
@@ -114,16 +114,11 @@ class _HomeSrollDemoState extends State<HomeSrollDemo> {
       blur: 5,
       // margin: const EdgeInsets.all(50),
       padding: const EdgeInsets.all(10),
-      borderRadius: BorderRadiusExt.fromRadius(
-        topLeft: 15,
-        topRight: 15,
-        bottomLeft: 15,
-        bottomRight: 15,
-      ),
+      borderRadius: BorderRadius.all(Radius.circular(15)),
       bgUrl: R.image.urls[0],
       // bgChild: FadeInImage.assetNetwork(
       //   placeholder: 'assets/images/img_placeholder.png',
-      //   image: 'R.image.urls[0]',
+      //   image: R.image.urls[0],
       //   fit: BoxFit.fill,
       //   width: 400,
       //   height: 400,

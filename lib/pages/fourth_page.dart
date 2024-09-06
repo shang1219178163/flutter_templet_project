@@ -12,11 +12,25 @@ class FourthPage extends StatelessWidget {
       appBar: AppBar(
         title: Text("$this"),
       ),
-      body: _buildBody(),
+      body: buildBody(),
     );
   }
 
-  _buildBody() {
+  buildBody() {
+    ///默认 3D 阴影
+    const shadow3D = [
+      Shadow(
+        offset: Offset(4.0, 4.0),
+        blurRadius: 3.0,
+        color: Color.fromARGB(99, 64, 64, 64),
+      ),
+      Shadow(
+        offset: Offset(1.0, 1.0),
+        blurRadius: 8.0,
+        color: Colors.grey,
+      ),
+    ];
+
     return ListView(
       children: [
         Column(
