@@ -86,7 +86,7 @@ class _AssetUploadButtonState extends State<AssetUploadButton>
   Widget build(BuildContext context) {
     super.build(context);
 
-    Widget img = Image(image: "img_placehorder.png".toAssetImage());
+    Widget img = Image(image: "img_placeholder.png".toAssetImage());
     if (widget.model.url?.startsWith("http") == true) {
       final imgUrl = widget.model.url ?? "";
       img = widget.imgBuilder?.call(imgUrl) ?? NNetworkImage(url: imgUrl);

@@ -14,7 +14,7 @@ class NNetworkImage extends StatelessWidget {
     super.key,
     this.title,
     required this.url,
-    this.placeholder = const AssetImage("assets/images/img_placehorder.png"),
+    this.placeholder = const AssetImage("assets/images/img_placeholder.png"),
     this.fit = BoxFit.fill,
     this.width,
     this.height,
