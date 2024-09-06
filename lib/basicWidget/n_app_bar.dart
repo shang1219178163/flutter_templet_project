@@ -25,6 +25,7 @@ class NAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.elevation = 0,
     this.toolbarHeight = kToolbarHeight,
     this.onBack,
+    this.copyBuilder,
   });
 
   final String titleStr;
@@ -44,6 +45,9 @@ class NAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool automaticallyImplyLeading; //配合leading 使用，如果左侧不需要图标 ，设置false
   /// 默认返回按钮事件
   final VoidCallback? onBack;
+
+  /// 二次赋值
+  final AppBar Function(AppBar appBar)? copyBuilder;
 
   @override
   Size get preferredSize =>
@@ -81,7 +85,7 @@ class NAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
     );
 
-    return AppBar(
+    final child = AppBar(
       title: title ?? defaultTitle,
       backgroundColor: backgroundColor,
       elevation: elevation,
@@ -97,5 +101,6 @@ class NAppBar extends StatelessWidget implements PreferredSizeWidget {
       toolbarHeight: toolbarHeight,
       bottom: bottom,
     );
+    return copyBuilder?.call(child) ?? child;
   }
 }
