@@ -44,7 +44,7 @@ class _IMChatPageState extends State<IMChatPage>
         SafeSetStateMixin,
         BottomSheetPhrasesMixin {
   bool get hideApp =>
-      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
+      "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
 
   final _scrollController = ScrollController();
 

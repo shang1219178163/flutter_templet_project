@@ -22,7 +22,7 @@ class TextPaintDemo extends StatefulWidget {
 
 class _TextPaintDemoState extends State<TextPaintDemo> {
   bool get hideApp =>
-      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
+      "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
 
   final _scrollController = ScrollController();
 

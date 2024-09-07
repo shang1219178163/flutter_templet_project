@@ -22,7 +22,7 @@ class RiverPodPageCreate extends StatefulWidget {
 
 class _RiverPodPageCreateState extends State<RiverPodPageCreate> {
   bool get hideApp =>
-      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
+      "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
 
   final scrollController = ScrollController();
 

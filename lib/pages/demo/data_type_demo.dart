@@ -43,7 +43,7 @@ class DataTypeDemo extends StatefulWidget {
 
 class _DataTypeDemoState extends State<DataTypeDemo> {
   bool get hideApp =>
-      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
+      "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
 
   final _scrollController = ScrollController();
 

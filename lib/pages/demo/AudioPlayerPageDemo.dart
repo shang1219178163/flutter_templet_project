@@ -17,7 +17,7 @@ class AudioPlayPageDemo extends StatefulWidget {
 
 class _AudioPlayPageDemoState extends State<AudioPlayPageDemo> {
   bool get hideApp =>
-      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
+      "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
 
   final _scrollController = ScrollController();
 

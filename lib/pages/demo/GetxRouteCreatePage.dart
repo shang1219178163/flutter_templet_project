@@ -22,7 +22,7 @@ class GetxRouteCreatePage extends StatefulWidget {
 
 class _GetxRouteCreatePageState extends State<GetxRouteCreatePage> {
   bool get hideApp =>
-      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
+      "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
 
   final scrollController = ScrollController();
 

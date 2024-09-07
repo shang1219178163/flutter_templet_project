@@ -35,7 +35,7 @@ class BottomSheetDemo extends StatefulWidget {
 
 class _BottomSheetDemoState extends State<BottomSheetDemo> {
   bool get hideApp =>
-      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
+      "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
 
   final _scrollController = ScrollController();
 

@@ -31,7 +31,7 @@ class SegmentVerticalDemo extends StatefulWidget {
 
 class _SegmentVerticalDemoState extends State<SegmentVerticalDemo> {
   bool get hideApp =>
-      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
+      "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
 
   final _scrollController = ScrollController();
 

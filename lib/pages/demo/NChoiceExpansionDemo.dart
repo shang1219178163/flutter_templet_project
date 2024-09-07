@@ -27,7 +27,7 @@ class NChoiceExpansionDemo extends StatefulWidget {
 
 class _NChoiceExpansionDemoState extends State<NChoiceExpansionDemo> {
   bool get hideApp =>
-      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
+      "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
 
   final _scrollController = ScrollController();
 

@@ -313,11 +313,11 @@ class _NFileUploadBoxState extends State<NFileUploadBox> {
           break;
         case NFileType.audio:
           {
-            // Get.toNamed(APPRouter.visitEvaluateAudioPlayPage, arguments: {
-            //   "url": model.url,
-            //   "desc": fileName,
-            //   "title": fileName,
-            // });
+            Get.toNamed(APPRouter.audioPlayPage, arguments: {
+              "url": model.url,
+              "desc": fileName,
+              "title": fileName,
+            });
           }
           break;
         case NFileType.doc:

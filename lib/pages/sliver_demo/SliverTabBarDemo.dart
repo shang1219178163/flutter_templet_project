@@ -25,7 +25,7 @@ class SliverTabBarDemo extends StatefulWidget {
 class _SliverTabBarDemoState extends State<SliverTabBarDemo>
     with SingleTickerProviderStateMixin {
   bool get hideApp =>
-      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
+      "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
 
   late final List<Tuple2<String, Widget>> items = [
     Tuple2("人群画像", buildPage()),

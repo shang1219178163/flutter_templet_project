@@ -17,7 +17,7 @@ class TextFieldLoginDemo extends StatefulWidget {
 
 class _TextFieldLoginDemoState extends State<TextFieldLoginDemo> {
   bool get hideApp =>
-      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
+      "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
 
   late final FocusNode _focusNode = FocusNode();
 

@@ -27,7 +27,7 @@ class SegmentedControlDemoOne extends StatefulWidget {
 
 class _SegmentedControlDemoOneState extends State<SegmentedControlDemoOne> {
   bool get hideApp =>
-      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
+      "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
 
   final _scrollController = ScrollController();
 

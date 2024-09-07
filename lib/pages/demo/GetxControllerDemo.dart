@@ -16,7 +16,7 @@ class GetxControllerDemo extends StatefulWidget {
 
 class _GetxControllerDemoState extends State<GetxControllerDemo> {
   bool get hideApp =>
-      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
+      "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
 
   final _scrollController = ScrollController();
 

@@ -35,7 +35,7 @@ class NRefreshViewDemo extends StatefulWidget {
 
 class _NRefreshViewDemoState extends State<NRefreshViewDemo> {
   bool get hideApp =>
-      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
+      "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
 
   /// 获取上个页面传的参数
   /// userId --- 用户id

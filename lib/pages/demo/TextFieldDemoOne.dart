@@ -28,7 +28,7 @@ class TextFieldDemoOne extends StatefulWidget {
 
 class _TextFieldDemoOneState extends State<TextFieldDemoOne> {
   bool get hideApp =>
-      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
+      "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
 
   final textEditingController = TextEditingController();
 

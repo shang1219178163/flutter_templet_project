@@ -28,7 +28,7 @@ class FileUploadBoxDemo extends StatefulWidget {
 
 class _FileUploadBoxDemoState extends State<FileUploadBoxDemo> {
   bool get hideApp =>
-      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
+      "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
 
   final _scrollController = ScrollController();
 
@@ -36,6 +36,11 @@ class _FileUploadBoxDemoState extends State<FileUploadBoxDemo> {
   final isAllUploadFinished = ValueNotifier(false);
 
   var selectedFiles = [].map((e) => NFileUploadModel(url: e)).toList();
+
+  @override
+  void didUpdateWidget(covariant FileUploadBoxDemo oldWidget) {
+    super.didUpdateWidget(oldWidget);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +61,6 @@ class _FileUploadBoxDemoState extends State<FileUploadBoxDemo> {
         controller: _scrollController,
         child: Column(
           children: [
-            Text("$widget"),
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
               padding: const EdgeInsets.all(12),

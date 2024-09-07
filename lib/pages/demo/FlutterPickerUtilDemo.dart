@@ -18,7 +18,7 @@ class FlutterPickerUtilDemo extends StatefulWidget {
 
 class _FlutterPickerUtilDemoState extends State<FlutterPickerUtilDemo> {
   bool get hideApp =>
-      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
+      "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
 
   final _scrollController = ScrollController();
 

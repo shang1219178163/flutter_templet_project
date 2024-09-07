@@ -23,7 +23,7 @@ class TextFieldTabDemo extends StatefulWidget {
 
 class _TextFieldTabDemoState extends State<TextFieldTabDemo> {
   bool get hideApp =>
-      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
+      "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
 
   final _scrollController = ScrollController();
 

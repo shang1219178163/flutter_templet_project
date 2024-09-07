@@ -18,7 +18,7 @@ class NTransformViewDemo extends StatefulWidget {
 
 class _NTransformViewDemoState extends State<NTransformViewDemo> {
   bool get hideApp =>
-      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
+    "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
 
   Map<String, dynamic> arguments = Get.arguments ?? <String, dynamic>{};
 

@@ -20,7 +20,7 @@ class AsyncDemo extends StatefulWidget {
 
 class _AsyncDemoState extends State<AsyncDemo> {
   bool get hideApp =>
-      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
+      "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
 
   final _scrollController = ScrollController();
 

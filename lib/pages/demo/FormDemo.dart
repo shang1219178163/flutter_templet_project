@@ -32,7 +32,7 @@ class FormDemo extends StatefulWidget {
 
 class _FormDemoState extends State<FormDemo> {
   bool get hideApp =>
-      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
+      "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
 
   final _scrollController = ScrollController();
 
