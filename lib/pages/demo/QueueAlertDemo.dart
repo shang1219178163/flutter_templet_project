@@ -18,7 +18,7 @@ class QueueAlertDemo extends StatefulWidget {
 
 class _QueueAlertDemoState extends State<QueueAlertDemo> {
   bool get hideApp =>
-      "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
+      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
 
   final _scrollController = ScrollController();
 

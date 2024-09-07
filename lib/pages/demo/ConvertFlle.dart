@@ -44,7 +44,7 @@ class ConvertFlle extends StatefulWidget {
 
 class _ConvertFlleState extends State<ConvertFlle> with CreateFileMixin {
   bool get hideApp =>
-      "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
+      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
 
   Map<String, dynamic> arguments = Get.arguments ?? <String, dynamic>{};
 

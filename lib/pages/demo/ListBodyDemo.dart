@@ -23,7 +23,7 @@ class ListBodyDemo extends StatefulWidget {
 
 class _ListBodyDemoState extends State<ListBodyDemo> {
   bool get hideApp =>
-      "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
+      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
 
   final _scrollController = ScrollController();
 

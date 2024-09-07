@@ -11,7 +11,7 @@ import 'package:flutter/services.dart';
 
 extension AppBarExt on AppBar {
   /// 自定义 copy
-  AppBar copy({
+  AppBar? copy({
     Widget? leading,
     bool? automaticallyImplyLeading,
     Widget? title,
@@ -39,7 +39,11 @@ extension AppBarExt on AppBar {
     TextStyle? toolbarTextStyle,
     TextStyle? titleTextStyle,
     SystemUiOverlayStyle? systemOverlayStyle,
+    bool hide = false,
   }) {
+    if (hide) {
+      return null;
+    }
     return AppBar(
       leading: leading ?? this.leading,
       automaticallyImplyLeading:

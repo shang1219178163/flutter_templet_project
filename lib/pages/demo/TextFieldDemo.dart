@@ -32,7 +32,7 @@ class TextFieldDemo extends StatefulWidget {
 
 class _TextFieldDemoState extends State<TextFieldDemo> {
   bool get hideApp =>
-      "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
+      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
 
   late final _textController = TextEditingController(text: '测试');
   late final editingController = TextEditingController(text: '测试');

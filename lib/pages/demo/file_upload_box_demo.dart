@@ -28,7 +28,7 @@ class FileUploadBoxDemo extends StatefulWidget {
 
 class _FileUploadBoxDemoState extends State<FileUploadBoxDemo> {
   bool get hideApp =>
-      "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
+      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
 
   final _scrollController = ScrollController();
 

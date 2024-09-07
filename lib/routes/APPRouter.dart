@@ -663,7 +663,7 @@ class APPRouter {
   static const suspensionButtonDemo = '/suspensionButtonDemo';
   static const neomorphismHomePage = '/neomorphismHomePage';
   static const uploadFileDemo = '/uploadFileDemo';
-  static const fileUploadBoxDemo = '/NFileUploadBoxDemo';
+  static const fileUploadBoxDemo = '/fileUploadBoxDemo';
 
   static const customSingleChildLayoutDemo = '/customSingleChildLayoutDemo';
   static const customMultiChildLayoutDemo = '/customMultiChildLayoutDemo';

@@ -19,7 +19,7 @@ class DirectoryTestDemo extends StatefulWidget {
 
 class _DirectoryTestDemoState extends State<DirectoryTestDemo> {
   bool get hideApp =>
-      "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
+      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
 
   final _scrollController = ScrollController();
 

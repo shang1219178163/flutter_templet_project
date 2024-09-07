@@ -33,7 +33,7 @@ class TextFieldWidgetDemo extends StatefulWidget {
 
 class _TextFieldWidgetDemoState extends State<TextFieldWidgetDemo> {
   bool get hideApp =>
-      "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
+    "$widget".endsWith(Get.currentRoute.replaceFirst("/", ""));
 
   final _scrollController = ScrollController();
 

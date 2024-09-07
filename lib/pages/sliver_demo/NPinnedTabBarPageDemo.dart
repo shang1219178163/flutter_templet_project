@@ -23,7 +23,7 @@ class NPinnedTabBarPageDemo extends StatefulWidget {
 class _NPinnedTabBarPageDemoState extends State<NPinnedTabBarPageDemo>
     with SingleTickerProviderStateMixin {
   bool get hideApp =>
-      "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
+      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
 
   late final List<({Tab tab, Widget child})> tabItems = [
     (
