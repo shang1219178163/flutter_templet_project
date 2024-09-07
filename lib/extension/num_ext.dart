@@ -53,16 +53,30 @@ extension IntExt on int {
   }
 
   /// 生成随机字符串
-  String generateChars({String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"}) {
+  String generateChars({
+    String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    String Function(String e)? convert,
+  }) {
+    if (this == 0) {
+      return "";
+    }
+    return generateList(items: chars.split("").toList(), convert: convert);
+  }
+
+  /// 生成随机字符串
+  String generateList({
+    required List<String> items,
+    String Function(String e)? convert,
+  }) {
     if (this == 0) {
       return "";
     }
     int length = this;
     var tmp = "";
     for (var i = 0; i < length; i++) {
-      var randomIndex = IntExt.random(max: chars.length);
-      var randomChar = chars[randomIndex];
-      tmp += randomChar;
+      var randomIndex = IntExt.random(max: items.length);
+      var randomChar = items[randomIndex];
+      tmp += convert?.call(randomChar) ?? randomChar;
     }
     return tmp;
   }
@@ -75,11 +89,16 @@ extension IntExt on int {
 }
 
 extension DoubleExt on double {
+  /// 保留小数位数
+  double fixed(int fractionDigits) {
+    return double.parse(toStringAsFixed(fractionDigits));
+  }
+
   /// 2位小数
-  double get fixed2 => double.parse(toStringAsFixed(2));
+  double get fixed2 => fixed(2);
 
   /// 3位小数
-  double get fixed3 => double.parse(toStringAsFixed(3));
+  double get fixed3 => fixed(3);
 
   /// 转为百分比描述
   String toStringAsPercent(int fractionDigits) {

@@ -264,10 +264,8 @@ class _NTextFieldState extends State<NTextField> {
       ),
     );
 
-    final counter = widget.maxLength != null
-        ? textEditingController.buildInputDecorationCounter(
-            maxLength: widget.maxLength!)
-        : null;
+    final counter = textEditingController.buildInputDecorationCounter(
+        maxLength: widget.maxLength);
 
     if (widget.hidePrefix) {
       prefixIcon = null;

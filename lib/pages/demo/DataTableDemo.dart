@@ -6,12 +6,50 @@
 //  Copyright © 6/4/21 shang. All rights reserved.
 //
 
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/list_ext.dart';
+import 'package:flutter_templet_project/extension/map_ext.dart';
+import 'package:flutter_templet_project/extension/num_ext.dart';
+import 'package:flutter_templet_project/extension/object_ext.dart';
+import 'package:flutter_templet_project/mixin/selectable_mixin.dart';
+import 'package:flutter_templet_project/model/user_model.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:tuple/tuple.dart';
+
+final titles = [
+  (title: "姓名", key: "name"),
+  (title: "性别", key: "sex"),
+  (title: "年龄", key: "age"),
+  (title: '出生年份', key: "birdthYear"),
+  (title: '描述', key: "desc"),
+];
+
+List<UserModel> models = [
+  ...List.generate(120, (i) {
+    // final name = "name$i";
+    final name = "${1.generateList(items: ["张三", "赵四", "王五", "李六"])}$i";
+    final sex = [0, 1].randomOne == 1 ? "男" : "女";
+    final age = IntExt.random(max: 100);
+    final birdthYear = IntExt.random(min: 1990, max: 2024);
+    final birthMonth = 1.generateList(
+        items: "子（鼠）、丑（牛）、寅（虎）、卯（兔）、辰（龙）、巳"
+                "（蛇）、午（马）、未（羊）、申（猴）、酉（鸡）、戌（狗）、亥（猪）"
+            .split("、")
+            .toList());
+
+    return UserModel(
+      name: name,
+      sex: sex,
+      age: age,
+      birthYear: birdthYear,
+      desc: birthMonth,
+    );
+  }),
+];
 
 class DataTableDemo extends StatefulWidget {
   final String? title;
@@ -23,58 +61,6 @@ class DataTableDemo extends StatefulWidget {
 }
 
 class _DataTableDemoState extends State<DataTableDemo> {
-  // List<String> titles = ['姓名', '年龄', '性别', '出生年份', '出生月份'];
-  List<Tuple2> titles = [
-    Tuple2(
-      "姓名",
-      "name",
-    ),
-    Tuple2(
-      "性别",
-      "sex",
-    ),
-    Tuple2(
-      "年龄",
-      "age",
-    ),
-    Tuple2(
-      '出生年份',
-      "birdthYear",
-    ),
-    Tuple2(
-      '出生月份',
-      "birdthMonth",
-    ),
-  ];
-
-  List<User> models = [
-    User(name: "name", sex: "男", age: 28, birdthYear: 2020, birdthMonth: 12),
-    User(name: "name1", sex: "女", age: 18, birdthYear: 2018, birdthMonth: 8),
-    User(name: "name2", sex: "男", age: 21, birdthYear: 2017, birdthMonth: 5),
-    User(name: "name3", sex: "女", age: 19, birdthYear: 2020, birdthMonth: 7),
-    User(name: "name4", sex: "男", age: 30, birdthYear: 2019, birdthMonth: 9),
-    User(name: "name5", sex: "女", age: 22, birdthYear: 2016, birdthMonth: 18),
-    User(name: "name6", sex: "男", age: 28, birdthYear: 2020, birdthMonth: 12),
-    User(name: "name7", sex: "女", age: 18, birdthYear: 2018, birdthMonth: 8),
-    User(name: "name8", sex: "男", age: 21, birdthYear: 2017, birdthMonth: 5),
-    User(name: "name9", sex: "女", age: 19, birdthYear: 2020, birdthMonth: 7),
-    User(name: "name10", sex: "男", age: 30, birdthYear: 2019, birdthMonth: 9),
-    User(name: "name11", sex: "女", age: 22, birdthYear: 2016, birdthMonth: 18),
-    User(name: "name12", sex: "男", age: 28, birdthYear: 2020, birdthMonth: 12),
-    User(name: "name13", sex: "女", age: 18, birdthYear: 2018, birdthMonth: 8),
-    User(name: "name14", sex: "男", age: 21, birdthYear: 2017, birdthMonth: 5),
-    User(name: "name15", sex: "女", age: 19, birdthYear: 2020, birdthMonth: 7),
-    User(name: "name16", sex: "男", age: 30, birdthYear: 2019, birdthMonth: 9),
-    User(name: "name17", sex: "女", age: 22, birdthYear: 2016, birdthMonth: 18),
-    User(name: "name18", sex: "男", age: 28, birdthYear: 2020, birdthMonth: 12),
-    User(name: "name19", sex: "女", age: 18, birdthYear: 2018, birdthMonth: 8),
-    User(name: "name20", sex: "男", age: 21, birdthYear: 2017, birdthMonth: 5),
-    User(name: "name21", sex: "女", age: 19, birdthYear: 2020, birdthMonth: 7),
-    User(name: "name22", sex: "男", age: 30, birdthYear: 2019, birdthMonth: 9),
-    User(name: "name23", sex: "女", age: 22, birdthYear: 2016, birdthMonth: 18),
-    User(name: "name24", sex: "男", age: 30, birdthYear: 2019, birdthMonth: 9),
-  ];
-
   var _sortAscending = true;
   var _sortColumnIndex = 0;
 
@@ -138,7 +124,7 @@ class _DataTableDemoState extends State<DataTableDemo> {
             showCheckboxColumn: true,
             columns: titles
                 .map((e) => DataColumn(
-                      label: Text(e.item1),
+                      label: Text(e.title),
                       onSort: (int columnIndex, bool ascending) {
                         _changeSort(
                             columnIndex: columnIndex, ascending: ascending);
@@ -148,11 +134,11 @@ class _DataTableDemoState extends State<DataTableDemo> {
             rows: models
                 .map((e) => DataRow(
                       cells: [
-                        DataCell(Text(e.name)),
-                        DataCell(Text('${e.age}')),
-                        DataCell(Text(e.sex)),
-                        DataCell(Text('${e.birdthYear}')),
-                        DataCell(Text('${e.birdthMonth}')),
+                        DataCell(Text(e.name ?? "")),
+                        DataCell(Text('${e.age ?? ""}')),
+                        DataCell(Text(e.sex ?? "")),
+                        DataCell(Text('${e.birthYear ?? ""}')),
+                        DataCell(Text('${e.desc ?? ""}')),
                       ],
                       selected: e.isSelected,
                       onSelectChanged: (bool? value) {
@@ -189,19 +175,18 @@ class _DataTableDemoState extends State<DataTableDemo> {
 
         case 3:
           models.sortedByValue(
-              ascending: ascending, cb: (obj) => obj.birdthYear);
+              ascending: ascending, cb: (obj) => obj.birthYear);
           break;
 
         case 4:
-          models.sortedByValue(
-              ascending: ascending, cb: (obj) => obj.birdthMonth);
+          models.sortedByValue(ascending: ascending, cb: (obj) => obj.desc);
           break;
 
         default:
           // if (ascending) {
-          //   models.sort((a, b) => a.name.compareTo(b.name));
+          //   models.sort((a, b) => a.name!.compareTo(b.name!));
           // } else {
-          //   models.sort((a, b) => b.name.compareTo(a.name));
+          //   models.sort((a, b) => b.name!.compareTo(a.name!));
           // }
           models.sortedByValue(ascending: ascending, cb: (obj) => obj.name);
           break;
@@ -210,48 +195,15 @@ class _DataTableDemoState extends State<DataTableDemo> {
   }
 }
 
-class User {
-  User(
-      {required this.name,
-      required this.sex,
-      required this.age,
-      required this.birdthYear,
-      required this.birdthMonth});
-
-  final String name;
-  final String sex;
-
-  final int age;
-  final int birdthYear;
-  final int birdthMonth;
-
-  bool isSelected = false;
-}
-
 class PaginatedDataTableDemo extends StatelessWidget {
   PaginatedDataTableDemo({Key? key}) : super(key: key);
 
-  List<Tuple2> titles = [
-    Tuple2(
-      "姓名",
-      "name",
-    ),
-    Tuple2(
-      "性别",
-      "sex",
-    ),
-    Tuple2(
-      "年龄",
-      "age",
-    ),
-    Tuple2(
-      '出生年份',
-      "birdthYear",
-    ),
-    Tuple2(
-      '出生月份',
-      "birdthMonth",
-    ),
+  final titles = [
+    (title: "姓名", key: "name"),
+    (title: "性别", key: "sex"),
+    (title: "年龄", key: "age"),
+    (title: '出生年份', key: "birdthYear"),
+    (title: '描述', key: "desc"),
   ];
 
   @override
@@ -264,14 +216,25 @@ class PaginatedDataTableDemo extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         children: [
           PaginatedDataTable(
-            header: Text('Header Text'),
-            rowsPerPage: 3,
+            header: Text('人员花名册'),
+            rowsPerPage: 10,
             columns: titles
                 .map((e) => DataColumn(
-                      label: Text(e.item1),
+                      label: Text(e.title),
                     ))
                 .toList(),
-            source: _DataSource(context),
+            source: _DataSource(
+              dataList: models,
+              rowKeys: ["name", "age", "sex", "birthYear", "desc"],
+              cellBuilder: (i, e, k) {
+                final map = e.toJson();
+                final val = map[k];
+                if (val == null) {
+                  return Text("-");
+                }
+                return Text("$val");
+              },
+            ),
           ),
         ],
       ),
@@ -279,27 +242,28 @@ class PaginatedDataTableDemo extends StatelessWidget {
   }
 }
 
-class _DataSource extends DataTableSource {
-  _DataSource(this.context) {
-    _rows = <User>[
-      User(name: "name", sex: "男", age: 28, birdthYear: 2020, birdthMonth: 12),
-      User(name: "name1", sex: "女", age: 18, birdthYear: 2018, birdthMonth: 8),
-      User(name: "name2", sex: "男", age: 21, birdthYear: 2017, birdthMonth: 5),
-      User(name: "name3", sex: "女", age: 19, birdthYear: 2019, birdthMonth: 7),
-    ];
-  }
+class _DataSource<E extends SelectableMixin> extends DataTableSource {
+  _DataSource({
+    required this.rowKeys,
+    required this.dataList,
+    required this.cellBuilder,
+  });
 
-  final BuildContext context;
-  late List<User> _rows;
+  final List<String> rowKeys;
+
+  final List<E> dataList;
+
+  final Widget Function(int i, E e, String key) cellBuilder;
 
   int _selectedCount = 0;
 
   @override
   DataRow? getRow(int index) {
-    if (index >= _rows.length) {
+    if (index >= dataList.length) {
       return null;
     }
-    final e = _rows[index];
+
+    final e = dataList[index];
     return DataRow.byIndex(
       index: index,
       selected: e.isSelected,
@@ -315,17 +279,15 @@ class _DataSource extends DataTableSource {
         }
       },
       cells: [
-        DataCell(Text(e.name)),
-        DataCell(Text('${e.age}')),
-        DataCell(Text(e.sex)),
-        DataCell(Text('${e.birdthYear}')),
-        DataCell(Text('${e.birdthMonth}')),
+        ...List.generate(rowKeys.length, (i) {
+          return DataCell(cellBuilder(i, e, rowKeys[i]));
+        }),
       ],
     );
   }
 
   @override
-  int get rowCount => _rows.length;
+  int get rowCount => dataList.length;
 
   @override
   bool get isRowCountApproximate => false;

@@ -35,41 +35,45 @@ extension TextEditingControllerExt on TextEditingController {
   }
 
   /// 创建 InputDecoration 的 Counter 组件
-  Widget buildInputDecorationCounter(
-      {required int? maxLength, Color? current, Color? total}) {
+  Widget? buildInputDecorationCounter({
+    required int? maxLength,
+    Color? current,
+    Color? total,
+  }) {
     if (maxLength == null) {
-      return SizedBox();
+      return null;
     }
     return ValueListenableBuilder(
-        valueListenable: this,
-        builder: (context, value, child) {
-          var items = <({String text, Color color})>[
-            (
-              text: "${value.text.characters.length}",
-              color: current ?? Colors.black87,
-            ),
-            (
-              text: '/$maxLength',
-              color: total ?? Color(0xFF737373),
-            ),
-          ];
+      valueListenable: this,
+      builder: (context, value, child) {
+        var items = <({String text, Color color})>[
+          (
+            text: "${value.text.characters.length}",
+            color: current ?? Colors.black87,
+          ),
+          (
+            text: '/$maxLength',
+            color: total ?? Color(0xFF737373),
+          ),
+        ];
 
-          return Text.rich(
-            TextSpan(
-              children: items.map((e) {
-                return TextSpan(
-                  text: e.text,
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400,
-                    color: e.color,
-                  ),
-                );
-              }).toList(),
-            ),
-            maxLines: 1,
-          );
-        });
+        return Text.rich(
+          TextSpan(
+            children: items.map((e) {
+              return TextSpan(
+                text: e.text,
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w400,
+                  color: e.color,
+                ),
+              );
+            }).toList(),
+          ),
+          maxLines: 1,
+        );
+      },
+    );
   }
 }
 

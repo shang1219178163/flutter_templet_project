@@ -14,6 +14,10 @@ class UserModel with SelectableMixin {
     this.avatar,
     this.name,
     this.nickName,
+    this.sex,
+    this.age,
+    this.birthYear,
+    this.desc,
     this.jobTitle,
     this.email,
     this.address,
@@ -27,6 +31,11 @@ class UserModel with SelectableMixin {
   String? avatar;
   String? name;
   String? nickName;
+  String? sex;
+  int? age;
+  int? birthYear;
+  String? desc;
+
   String? jobTitle;
   String? email;
   AddressDetailModel? address;
@@ -41,11 +50,18 @@ class UserModel with SelectableMixin {
   @override
   String get selectableName => name ?? "";
 
-  UserModel.fromJson(Map<String, dynamic> json) {
+  UserModel.fromJson(
+    Map<String, dynamic> json,
+  ) {
     id = json['id'];
     avatar = json['avatar'];
     name = json['name'];
     nickName = json['nickName'];
+    sex = json['sex'];
+    age = json['age'];
+    birthYear = json['birthYear'];
+    desc = json['desc'];
+
     jobTitle = json['jobTitle'];
     email = json['email'];
     address = json['address'] != null
@@ -68,6 +84,11 @@ class UserModel with SelectableMixin {
     data['jobTitle'] = jobTitle;
     data['name'] = name;
     data['nickName'] = nickName;
+    data['sex'] = sex;
+    data['age'] = age;
+    data['birthYear'] = birthYear;
+    data['desc'] = desc;
+
     data['email'] = email;
     data['address'] = address?.toJson();
     data['phone'] = phone;

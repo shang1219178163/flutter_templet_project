@@ -12,13 +12,14 @@ import 'package:flutter/material.dart';
 
 extension StackExt on Stack {
   /// 创建高斯模糊
-  static Widget createBlurView(
-      {required Widget child,
-      required double? blur,
-      BorderRadius? borderRadius = BorderRadius.zero,
-      CustomClipper<RRect>? clipper,
-      Clip clipBehavior = Clip.antiAlias,
-      TileMode tileMode = TileMode.clamp}) {
+  static Widget createBlurView({
+    required Widget child,
+    required double? blur,
+    BorderRadius? borderRadius = BorderRadius.zero,
+    CustomClipper<RRect>? clipper,
+    Clip clipBehavior = Clip.antiAlias,
+    TileMode tileMode = TileMode.clamp,
+  }) {
     if (blur == null || blur <= 0.0) {
       return child;
     }
@@ -28,21 +29,22 @@ extension StackExt on Stack {
       children: [
         child,
         Positioned.fill(
-            child: ClipRRect(
-          borderRadius: borderRadius ?? BorderRadius.zero,
-          clipper: clipper,
-          clipBehavior: clipBehavior,
-          child: BackdropFilter(
-            filter: ui.ImageFilter.blur(
-              sigmaX: blur,
-              sigmaY: blur,
-              tileMode: tileMode,
-            ),
-            child: Container(
-              color: Colors.black.withOpacity(0),
+          child: ClipRRect(
+            borderRadius: borderRadius ?? BorderRadius.zero,
+            clipper: clipper,
+            clipBehavior: clipBehavior,
+            child: BackdropFilter(
+              filter: ui.ImageFilter.blur(
+                sigmaX: blur,
+                sigmaY: blur,
+                tileMode: tileMode,
+              ),
+              child: Container(
+                color: Colors.black.withOpacity(0),
+              ),
             ),
           ),
-        ))
+        )
       ],
     );
   }

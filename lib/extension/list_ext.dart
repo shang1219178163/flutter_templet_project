@@ -191,30 +191,9 @@ extension ListExt<T, E> on List<E> {
       recursion(cb);
     });
   }
-
-  // /// 转为 Map<String, dynamic>
-  // Map<String, E> toMap() {
-  //   var map = <String, E>{};
-  //   for (final item in this) {
-  //     map["$item"] = item;
-  //   }
-  //   return map;
-  // }
 }
 
 extension ListExtObject<E extends Object> on List<E> {
-  // List<E> sortedByKey(String key, {bool ascending = true}) {
-  //   this.forEach((element) {
-  //     print("sortByKey:${element}");
-  //   });
-  //   if (ascending) {
-  //     this.sort((a, b) => a[key].compareTo(b[key]));
-  //   } else {
-  //     this.sort((a, b) => b[key].compareTo(a[key]));
-  //   }
-  //   return this;
-  // }
-
   List<E> sortedByValue(
       {bool ascending = true, required dynamic Function(E obj) cb}) {
     if (ascending) {

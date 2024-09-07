@@ -12,6 +12,7 @@ import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/cache/cache_service.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/list_ext.dart';
+import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/extension/type_util.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/map_ext.dart';
@@ -313,6 +314,14 @@ class _DataTypeDemoState extends State<DataTypeDemo> {
     maxline = "1";
     final flag1 = (maxline?.isNotEmpty == true);
     debugPrint('flag1: $flag1');
+
+    final randomItems = List.generate(9, (index) {
+      final sufix = 3.generateChars(
+        chars: "0123456789",
+      );
+      return "选项$sufix";
+    });
+    ddlog("randomItems.sorted(): ${randomItems.sorted()}");
   }
 
   void onSet() {}

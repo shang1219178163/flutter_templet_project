@@ -211,18 +211,24 @@ extension StringExt on String {
   int compareCustom(String b) {
     var a = this;
 
-    var regInt = RegExp(r"[0-9]");
-    var regIntNon = RegExp(r"[^0-9]");
+    // var regInt = RegExp(r"[0-9]");
+    // var regIntNon = RegExp(r"[^0-9]");
 
-    if (a.contains(regInt) && b.contains(regInt)) {
-      final aInt = int.tryParse(a.replaceAll(regIntNon, ''));
-      final bInt = int.tryParse(b.replaceAll(regIntNon, ''));
-      if (aInt == null || bInt == null) {
-        return 0;
-      }
-      return aInt.compareTo(bInt);
+    final aNonIntPart = a.replaceAll(RegExp(r'\d+$'), '');
+    final bNonIntPart = b.replaceAll(RegExp(r'\d+$'), '');
+    if (aNonIntPart != bNonIntPart) {
+      return a.compareTo(b);
     }
-    return a.compareTo(b);
+
+    final aIntPart = a.replaceAll(aNonIntPart, '');
+    final bIntPart = b.replaceAll(bNonIntPart, '');
+
+    final aInt = int.tryParse(aIntPart);
+    final bInt = int.tryParse(bIntPart);
+    if (aInt == null || bInt == null) {
+      return 0;
+    }
+    return aInt.compareTo(bInt);
   }
 
   /// url 阿里云存储处理

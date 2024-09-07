@@ -129,20 +129,21 @@ extension OverlayExt<T extends StatefulWidget> on State<T> {
     }
 
     showEntry(
-        isReplace: isReplace,
-        maintainState: maintainState,
-        child: Material(
-          color: Colors.black.withOpacity(0.1),
-          child: InkWell(
-            onTap: !barrierDismissible ? null : onHide,
-            child: NSlideTransitionBuilder(
-              key: globalKey,
-              alignment: alignment,
-              duration: duration,
-              hasFade: false,
-              child: builder(context, onHide),
-            ),
+      isReplace: isReplace,
+      maintainState: maintainState,
+      child: Material(
+        color: Colors.black.withOpacity(0.1),
+        child: InkWell(
+          onTap: !barrierDismissible ? null : onHide,
+          child: NSlideTransitionBuilder(
+            key: globalKey,
+            alignment: alignment,
+            duration: duration,
+            hasFade: false,
+            child: builder(context, onHide),
           ),
-        ));
+        ),
+      ),
+    );
   }
 }

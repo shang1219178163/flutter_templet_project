@@ -121,7 +121,7 @@ extension FutureExt on Future {
       future: this,
       builder: (context, snapshot) {
         if (snapshot.connectionState != ConnectionState.done) {
-          return loading?.call() ?? const Text('加载中');
+          return loading?.call() ?? const CupertinoActivityIndicator();
         }
         if (snapshot.hasError) {
           return error(snapshot.error, snapshot.stackTrace);

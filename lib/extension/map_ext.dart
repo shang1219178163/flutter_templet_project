@@ -30,7 +30,7 @@ extension MapExt on Map<String, dynamic> {
   }
 
   /// 递归遍历
-  recursion(void Function(String key, dynamic value)? cb) {
+  recursion(void Function(String k, dynamic v)? cb) {
     forEach((key, value) {
       cb?.call(key, value);
       recursion(cb);
@@ -38,7 +38,7 @@ extension MapExt on Map<String, dynamic> {
   }
 
   /// 过滤满足条件的键值对
-  Map<String, dynamic> filter(bool Function(String key, dynamic value) test) {
+  Map<String, dynamic> filter(bool Function(String k, dynamic v) test) {
     final map = <String, dynamic>{};
     for (final e in entries) {
       if (test(e.key, e.value)) {

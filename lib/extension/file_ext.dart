@@ -51,34 +51,6 @@ extension FileExt on File {
   /// 获取文件类型
   NFileType get fileType => path.fileType;
 
-  /// 是否是视频
-  bool get isVideo {
-    var ext = path.toLowerCase();
-
-    return ext.endsWith(".mp4") ||
-        ext.endsWith(".avi") ||
-        ext.endsWith(".wmv") ||
-        ext.endsWith(".rmvb") ||
-        ext.endsWith(".mpg") ||
-        ext.endsWith(".mpeg") ||
-        ext.endsWith(".3gp");
-  }
-
-  /// 是否是图片
-  bool get isImage {
-    final extension = path.toLowerCase().split('.').last;
-    const imageExtensions = [
-      'jpg',
-      'jpeg',
-      'png',
-      'gif',
-      'bmp',
-      'webp',
-      'heic'
-    ];
-    return imageExtensions.contains(extension);
-  }
-
   /// length 转为 MB 描述
   String get fileSizeDesc {
     final length = lengthSync();
