@@ -280,6 +280,7 @@ import 'package:flutter_templet_project/pages/demo/box_shadow_demo.dart';
 import 'package:flutter_templet_project/pages/demo/box_shadow_demo_one.dart';
 import 'package:flutter_templet_project/pages/demo/drawImageNineDemo.dart';
 import 'package:flutter_templet_project/pages/demo/enumDemo.dart';
+import 'package:flutter_templet_project/pages/demo/file_upload_box_demo.dart';
 import 'package:flutter_templet_project/pages/demo/isolateDemo.dart';
 import 'package:flutter_templet_project/pages/demo/lerpDemo.dart';
 import 'package:flutter_templet_project/pages/demo/merge_images_demo.dart';
@@ -662,6 +663,8 @@ class APPRouter {
   static const suspensionButtonDemo = '/suspensionButtonDemo';
   static const neomorphismHomePage = '/neomorphismHomePage';
   static const uploadFileDemo = '/uploadFileDemo';
+  static const fileUploadBoxDemo = '/NFileUploadBoxDemo';
+
   static const customSingleChildLayoutDemo = '/customSingleChildLayoutDemo';
   static const customMultiChildLayoutDemo = '/customMultiChildLayoutDemo';
   static const refreshListView = '/refreshListView';
@@ -1869,6 +1872,10 @@ class AppPage {
     GetPage(
       name: APPRouter.uploadFileDemo,
       page: () => UploadFileDemo(),
+    ),
+    GetPage(
+      name: APPRouter.fileUploadBoxDemo,
+      page: () => FileUploadBoxDemo(),
     ),
     GetPage(
       name: APPRouter.customSingleChildLayoutDemo,

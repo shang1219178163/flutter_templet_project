@@ -653,6 +653,7 @@ var customs = [
   Tuple2(APPRouter.expandTextDemo, "可折叠文字"),
   Tuple2(APPRouter.suspensionButtonDemo, "悬浮按钮"),
   Tuple2(APPRouter.uploadFileDemo, "上传demo"),
+  Tuple2(APPRouter.fileUploadBoxDemo, "上传文件demo"),
   Tuple2(APPRouter.jsonToDartPage, "json转模型"),
   Tuple2(APPRouter.assetUploadBoxDemo, "assetUploadBoxDemo"),
   Tuple2(APPRouter.dashLineDemo, "dashLineDemo"),
