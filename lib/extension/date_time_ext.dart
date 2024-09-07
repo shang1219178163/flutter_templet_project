@@ -132,13 +132,6 @@ extension DateTimeExt on DateTime {
     return result;
   }
 
-  /// 打印代码执行时间(毫秒)
-  static int logDifference(DateTime before) {
-    final now = DateTime.now();
-    final gap = now.difference(before).inMilliseconds;
-    return gap;
-  }
-
   bool isSameDay(DateTime? date) {
     if (date == null) {
       return false;
