@@ -88,7 +88,7 @@ class _GridViewDemoState extends State<GridViewDemo> {
               ),
             ),
             NSectionBox(
-              title: "NGridView",
+              title: "NGridView - 动态宽度",
               child: NGridView(
                 children: avatars,
               ),
