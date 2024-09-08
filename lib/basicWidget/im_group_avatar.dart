@@ -20,7 +20,6 @@ class ImGroupAvatar extends StatelessWidget {
     required this.title,
     required this.subtitle,
     this.hasSubtitle = true,
-    this.width = 54.0,
   });
 
   final VoidCallback? onTap;
@@ -35,14 +34,12 @@ class ImGroupAvatar extends StatelessWidget {
 
   final bool hasSubtitle;
 
-  final double width;
-
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
       child: Container(
-        width: width,
+        // width: width,
         alignment: Alignment.topCenter,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

@@ -7,60 +7,22 @@
 //
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/extension/ddlog.dart';
 
 /// GridView 效果
 class NGridView extends StatelessWidget {
   const NGridView({
     super.key,
-    this.numPerRow = 5,
-    this.itemWidth = 54,
-    this.runSpacing = 16,
-    required this.children,
-  });
-
-  /// 每行列数
-  final int numPerRow;
-
-  /// 子项宽度
-  final double itemWidth;
-
-  /// 垂直间距
-  final double runSpacing;
-
-  /// 子项
-  final List<Widget> children;
-
-  @override
-  Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
-        final spacing = (constraints.maxWidth - itemWidth * numPerRow) /
-            (numPerRow - 1).truncateToDouble().toInt();
-
-        return Wrap(
-          spacing: spacing, //适配折叠屏
-          runSpacing: runSpacing,
-          alignment: WrapAlignment.start,
-          runAlignment: WrapAlignment.start,
-          children: children,
-        );
-      },
-    );
-  }
-}
-
-/// GridView 效果,动态宽度
-class NGridViewOne extends StatelessWidget {
-  const NGridViewOne({
-    super.key,
     this.numPerRow = 4,
     this.spacing = 9,
     this.runSpacing = 16,
     this.radius = 4,
+    this.itemWidth,
     this.itemHeight,
     required this.children,
-    this.onAdd,
-    this.onDelete,
+    this.addItem,
+    this.deleteItem,
+    this.itemBuilder,
   });
 
   ///每页列数
@@ -72,6 +34,9 @@ class NGridViewOne extends StatelessWidget {
   /// 子项垂直间距
   final double runSpacing;
 
+  /// 子项宽度, 为空则自动利用最大宽度
+  final double? itemWidth;
+
   /// 子项高度
   final double? itemHeight;
 
@@ -81,50 +46,51 @@ class NGridViewOne extends StatelessWidget {
   /// 子项数组
   final List<Widget> children;
 
-  final Widget? onAdd;
+  /// 自定义添加
+  final Widget? addItem;
 
-  final Widget? onDelete;
+  /// 自定义删除
+  final Widget? deleteItem;
+
+  /// 子项自定义
+  final Widget Function(Widget? item, double itemWidth)? itemBuilder;
 
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
-        final maxWidth = constraints.maxWidth;
-        final itemWidth = (maxWidth - spacing * (numPerRow - 1)) / numPerRow;
-
-        // final spacing = (constraints.maxWidth - itemWidth * numPerRow) /
-        //     (numPerRow - 1).truncateToDouble().toInt();
+        var spacingNew = spacing;
+        var itemWidthNew =
+            (constraints.maxWidth - spacingNew * (numPerRow - 1)) / numPerRow;
+        if (itemWidth != null && itemWidth! > 0 == true) {
+          itemWidthNew = itemWidth!.truncateToDouble();
+          spacingNew = (constraints.maxWidth - itemWidthNew * numPerRow) /
+              (numPerRow - 1).truncateToDouble();
+        }
 
         Widget buildItem({required Widget child}) {
-          return ClipRRect(
-            borderRadius: BorderRadius.circular(radius),
-            child: SizedBox(
-              width: itemWidth,
-              height: itemHeight,
-              child: child,
-            ),
-          );
+          return itemBuilder?.call(child, itemWidthNew) ??
+              ClipRRect(
+                borderRadius: BorderRadius.circular(radius),
+                child: SizedBox(
+                  width: itemWidthNew,
+                  height: itemHeight,
+                  child: child,
+                ),
+              );
         }
 
         return Wrap(
-          spacing: spacing, //适配折叠屏
+          spacing: spacingNew, //适配折叠屏
           runSpacing: runSpacing,
           alignment: WrapAlignment.start,
           runAlignment: WrapAlignment.start,
           children: [
-            ...children.map((e) {
-              return buildItem(child: e);
-              // return ClipRRect(
-              //   borderRadius: BorderRadius.circular(radius),
-              //   child: SizedBox(
-              //     width: itemWidth,
-              //     height: itemWidth,
-              //     child: e,
-              //   ),
-              // );
-            }).toList(),
-            onAdd != null ? buildItem(child: onAdd!) : const SizedBox(),
-            onDelete != null ? buildItem(child: onDelete!) : const SizedBox(),
+            ...children.map((e) => buildItem(child: e)).toList(),
+            addItem != null ? buildItem(child: addItem!) : const SizedBox(),
+            deleteItem != null
+                ? buildItem(child: deleteItem!)
+                : const SizedBox(),
           ],
         );
       },

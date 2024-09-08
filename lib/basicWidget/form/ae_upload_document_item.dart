@@ -67,38 +67,6 @@ class AeUploadDocumentItem extends StatelessWidget {
   }
 
   Widget buildBody(BuildContext context) {
-    // if (!enable) {
-    //   final addWidget = selectedModels.isNotEmpty
-    //       ? const SizedBox()
-    //       : buildAdd(
-    //           onTap: () {
-    //             YLog.d("onAdd");
-    //           },
-    //         );
-    //   return NGridViewOne(
-    //     numPerRow: 4,
-    //     spacing: 11,
-    //     onAdd: addWidget,
-    //     children: selectedModels.map((e) {
-    //       return GestureDetector(
-    //         onTap: () {
-    //           final urls = selectedModels
-    //               .where((e) => e.url?.startsWith("http") == true)
-    //               .map((e) => e.url ?? "")
-    //               .toList();
-    //           final index = urls.indexOf(e.url ?? "");
-    //           ToolUtil.removeInputFocus();
-    //           ToolUtil.openImagePreviewPage(urls, index);
-    //         },
-    //         child: NNetworkImage(
-    //           url: e.url ?? "",
-    //           radius: 4,
-    //         ),
-    //       );
-    //     }).toList(),
-    //   );
-    // }
-
     List<AssetUploadDocumentModel> selectedModelsNew = [...selectedModels];
 
     return AssetUploadDocumentBox(

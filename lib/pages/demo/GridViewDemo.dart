@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/im_group_avatar.dart';
 import 'package:flutter_templet_project/basicWidget/n_grid_view.dart';
 import 'package:flutter_templet_project/basicWidget/n_network_image.dart';
+import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
@@ -27,14 +28,34 @@ class _GridViewDemoState extends State<GridViewDemo> {
 
   Color get primaryColor => Theme.of(context).primaryColor;
 
+  final indexs = List.generate(10, (index) => index);
+  late final memberList = indexs
+      .map((e) => UserModel(
+            id: e.toString(),
+            name: "用户名称${IntExt.random(max: 10000, min: 1000)}",
+            nickName: "${4.generateChars()}",
+            avatar: R.image.urls[IntExt.random(max: R.image.urls.length)],
+          ))
+      .toList();
+
+  late final avatars = buildGroupAvatars(
+    list: memberList,
+    onTap: (model) {
+      ddlog(model.toJson().filter((key, value) => value != null));
+    },
+    onAdd: () {
+      ddlog("onAdd");
+    },
+    onDel: () {
+      ddlog("onDel");
+    },
+  ).map((e) => e.toColoredBox()).toList();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("$widget"),
-        actions: [
-          TextButton(onPressed: () {}, child: Text("done")),
-        ],
       ),
       body: buildBody(),
     );
@@ -46,19 +67,36 @@ class _GridViewDemoState extends State<GridViewDemo> {
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
-            buildNGridView(),
-            Container(
-              height: 400,
-              child: buildGridView(titles),
+            NSectionBox(
+              title: "GridView.count",
+              padding: EdgeInsets.symmetric(horizontal: 0),
+              child: Container(
+                height: 300,
+                child: buildGridView(titles),
+              ),
+            ),
+            NSectionBox(
+              title: "NGridView",
+              padding: EdgeInsets.symmetric(horizontal: 0),
+              child: buildNGridView(),
+            ),
+            NSectionBox(
+              title: "NGridView - itemWidth",
+              child: NGridView(
+                itemWidth: 64,
+                children: avatars,
+              ),
+            ),
+            NSectionBox(
+              title: "NGridView",
+              child: NGridView(
+                children: avatars,
+              ),
             ),
           ],
         ),
       ),
     );
-  }
-
-  void _onPressed(int e) {
-    ddlog(e);
   }
 
   Widget buildGridView(List<String> list) {
@@ -74,7 +112,7 @@ class _GridViewDemoState extends State<GridViewDemo> {
       // 上下间隔
       mainAxisSpacing: 8,
       //宽高比
-      childAspectRatio: 3 / 5,
+      childAspectRatio: 3 / 4,
 
       children: [
         GridTile(
@@ -242,16 +280,6 @@ class _GridViewDemoState extends State<GridViewDemo> {
   }
 
   Widget buildNGridView() {
-    final indexs = List.generate(10, (index) => index);
-    final memberList = indexs
-        .map((e) => UserModel(
-              id: e.toString(),
-              name: "用户名称${IntExt.random(max: 10000, min: 1000)}",
-              nickName: "${4.generateChars()}",
-              avatar: R.image.urls[IntExt.random(max: R.image.urls.length)],
-            ))
-        .toList();
-
     return Container(
       // height: 170,
       padding: const EdgeInsets.only(
@@ -270,23 +298,10 @@ class _GridViewDemoState extends State<GridViewDemo> {
         mainAxisSize: MainAxisSize.min,
         children: [
           NGridView(
-            children: buildGroupAvatars(
-              list: memberList,
-              onTap: (model) {
-                ddlog(model.toJson().filter((key, value) => value != null));
-              },
-              onAdd: () {
-                ddlog("onAdd");
-              },
-              onDel: () {
-                ddlog("onDel");
-              },
-              itemWidth: 54,
-            ),
+            itemWidth: 64,
+            children: avatars,
           ),
-          const SizedBox(
-            height: 20,
-          ),
+          const SizedBox(height: 20),
           InkWell(
             onTap: () {},
             child: Row(
@@ -318,7 +333,6 @@ class _GridViewDemoState extends State<GridViewDemo> {
     VoidCallback? onAdd,
     VoidCallback? onDel,
     int showLength = 10,
-    double itemWidth = 54,
   }) {
     List<UserModel> listNew =
         list.length > showLength ? list.sublist(0, showLength) : list;
@@ -335,7 +349,6 @@ class _GridViewDemoState extends State<GridViewDemo> {
           avatar: avatarUrl,
           title: title,
           subtitle: subtitle,
-          width: itemWidth,
         );
       },
     ).toList();
@@ -346,7 +359,6 @@ class _GridViewDemoState extends State<GridViewDemo> {
         placeholder: const AssetImage("assets/images/icon_user_add.png"),
         title: "",
         subtitle: "",
-        width: itemWidth,
       ));
     }
 
@@ -357,7 +369,6 @@ class _GridViewDemoState extends State<GridViewDemo> {
         placeholder: const AssetImage("assets/images/icon_user_del.png"),
         title: "",
         subtitle: "",
-        width: itemWidth,
       ));
     }
     return items;
