@@ -37,6 +37,7 @@ class NDropMenuFilterSectionBar extends NDropMenuFilterBar {
           },
           placeholder: placeholder,
           searchPlaceholder: searchPlaceholder,
-          constraints: constraints ?? BoxConstraints(maxHeight: 300),
+          constraints:
+              constraints ?? BoxConstraints(maxHeight: 300, maxWidth: 200),
         );
 }

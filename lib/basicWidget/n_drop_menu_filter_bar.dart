@@ -26,7 +26,9 @@ class NDropMenuFilterBar<E> extends StatelessWidget {
     required this.equal,
     this.placeholder = "请选择",
     required this.onChanged,
+    this.hideDropMenu = false,
     this.searchPlaceholder = "请输入筛选号",
+    this.search,
     this.onSearchChanged,
     this.radius = 4,
     this.onItemName,
@@ -60,8 +62,14 @@ class NDropMenuFilterBar<E> extends StatelessWidget {
   /// 下拉菜单选择回调
   final ValueChanged<E> onChanged;
 
+  /// 隐藏下拉列表
+  final bool hideDropMenu;
+
   /// 输入框提示
   final String searchPlaceholder;
+
+  /// 输入框回调
+  final String? search;
 
   /// 输入框回调
   final ValueChanged<String>? onSearchChanged;
@@ -75,6 +83,7 @@ class NDropMenuFilterBar<E> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final primary = context.primaryColor;
+    final controller = TextEditingController(text: search);
 
     return Container(
       margin: margin,
@@ -102,100 +111,111 @@ class NDropMenuFilterBar<E> extends StatelessWidget {
                   hidePrefixIcon: true,
                   autofocus: false,
                   placeholder: searchPlaceholder,
+                  controller: controller,
                   onChanged: onSearchChanged!,
                 ),
               ),
             ),
-          Expanded(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                // NText(data: "分组: "),
-                Expanded(
-                  child: NMenuAnchor<E>(
-                    values: values,
-                    initialItem: selectedItemVN?.value,
-                    equal: equal,
-                    cbName: cbName,
-                    onChanged: (e) {
-                      selectedItemVN?.value = e;
-                      onChanged(e);
-                    },
-                    dropButtonStyle: ButtonStyle(
-                      padding:
-                          const MaterialStatePropertyAll(EdgeInsets.all(8)),
-                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                      backgroundColor: MaterialStateProperty.all(bgColor),
-                    ),
-                    constraints: constraints,
-                    builder: (controller, selectedItem) {
-                      final name = getName(selectedItem);
-                      final nameStyle = getNameStyle(name: name);
-                      return InkWell(
-                        onTap: () {
-                          if (controller.isOpen) {
-                            controller.close();
-                          } else {
-                            controller.open();
-                          }
-                        },
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 8,
-                            vertical: 4,
-                          ),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(color: lineColor),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(radius)),
-                          ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Expanded(
-                                child: Text(
-                                  name ?? placeholder,
-                                  style: nameStyle,
-                                ),
-                              ),
-                              Image(
-                                image: AssetImage(
-                                    "assets/images/icon_arrow_down.png"),
-                                width: 16,
-                                height: 16,
-                              ),
-                            ],
-                          ),
+          if (!hideDropMenu)
+            Expanded(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  // NText(data: "分组: "),
+                  Expanded(
+                    child: NMenuAnchor<E>(
+                      values: values,
+                      initialItem: selectedItemVN?.value,
+                      equal: equal,
+                      cbName: cbName,
+                      onChanged: (e) {
+                        selectedItemVN?.value = e;
+                        onChanged(e);
+                      },
+                      dropButtonStyle: ButtonStyle(
+                        padding: const MaterialStatePropertyAll(
+                          EdgeInsets.symmetric(horizontal: 4, vertical: 6),
                         ),
-                      );
-                    },
-                    itemBuilder: (e, bool isSelected) {
-                      final textColor = isSelected ? primary : fontColor;
-                      final iconColor =
-                          isSelected ? primary : Colors.transparent;
+                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        minimumSize:
+                            const MaterialStatePropertyAll(Size(20, 18)),
+                        backgroundColor: MaterialStateProperty.all(bgColor),
+                      ),
+                      constraints: constraints,
+                      builder: (controller, selectedItem) {
+                        final name = getName(selectedItem);
+                        final nameStyle = getNameStyle(name: name);
+                        return InkWell(
+                          onTap: () {
+                            if (controller.isOpen) {
+                              controller.close();
+                            } else {
+                              controller.open();
+                            }
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8,
+                              vertical: 4,
+                            ),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              border: Border.all(color: lineColor),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(radius)),
+                            ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    name ?? placeholder,
+                                    style: nameStyle,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                                Image(
+                                  image: AssetImage(
+                                      "assets/images/icon_arrow_down.png"),
+                                  width: 16,
+                                  height: 16,
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                      itemBuilder: (e, bool isSelected) {
+                        final textColor = isSelected ? primary : fontColor;
+                        final iconColor =
+                            isSelected ? primary : Colors.transparent;
 
-                      var name = getName(e) ?? "";
-                      name = onItemName?.call(name) ?? name;
-                      return Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(right: 8.0),
-                            child: Icon(Icons.check, color: iconColor),
-                          ),
-                          Flexible(
-                            child: NText(name, color: textColor),
-                          ),
-                        ],
-                      );
-                    },
+                        var name = getName(e) ?? "";
+                        name = onItemName?.call(name) ?? name;
+                        return Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(right: 8.0),
+                              child: Icon(Icons.check, color: iconColor),
+                            ),
+                            Flexible(
+                              child: NText(
+                                name,
+                                color: textColor,
+                                maxLines: 2,
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
         ],
       ),
     );
