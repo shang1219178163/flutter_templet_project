@@ -107,6 +107,7 @@ typedef RequestListCallback<T> = Future<List<T>> Function(
 class NRefreshView<T> extends StatefulWidget {
   const NRefreshView({
     super.key,
+    this.listViewKey,
     this.controller,
     this.child,
     this.placeholder,
@@ -124,6 +125,9 @@ class NRefreshView<T> extends StatefulWidget {
     this.refreshController,
     this.tag,
   });
+
+  /// 列表 key
+  final Key? listViewKey;
 
   /// 控制器
   final NRefreshViewController<T>? controller;
@@ -318,6 +322,7 @@ class NRefreshViewState<T> extends State<NRefreshView<T>>
     Widget child = Scrollbar(
       controller: controller,
       child: ListView.separated(
+        key: widget.listViewKey,
         controller: controller,
         itemCount: itemCount,
         // itemBuilder: (context, index) => widget.itemBuilder(
