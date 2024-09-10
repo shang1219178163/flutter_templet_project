@@ -9,6 +9,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
+import 'package:flutter_templet_project/basicWidget/n_type_writer_text.dart';
 import 'package:flutter_templet_project/cache/cache_service.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/list_ext.dart';
@@ -97,6 +98,9 @@ class _DataTypeDemoState extends State<DataTypeDemo> {
           children: [
             buildSectionBox(items: specialItems),
             buildSectionBox(items: items),
+            NTypeWriterText(
+              text: 60.generateChars(),
+            ),
           ]
               .map(
                 (e) => Padding(
