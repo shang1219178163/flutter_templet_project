@@ -164,9 +164,14 @@ class _NFileUploadBoxState extends State<NFileUploadBox> {
             ),
           );
         }).toList(),
-        if (selectedModels.length < widget.maxCount && widget.canEdit)
+        if (selectedModels.length < widget.maxCount)
           buildUploadButton(
             onPressed: () async {
+              ToolUtil.removeInputFocus();
+              if (!widget.canEdit) {
+                debugPrint("无编辑权限");
+                return;
+              }
               await onPickFile(
                 maxMB: widget.maxMB,
                 maxCount: widget.maxCount,
@@ -289,6 +294,7 @@ class _NFileUploadBoxState extends State<NFileUploadBox> {
   }
 
   onTapItem(NFileUploadModel model) {
+    FocusScope.of(context).unfocus();
     if (model.url?.startsWith("http") == true) {
       final fileName = model.url?.split("/").last;
       switch (model.url!.fileType) {
@@ -320,13 +326,17 @@ class _NFileUploadBoxState extends State<NFileUploadBox> {
             });
           }
           break;
-        case NFileType.doc:
-        case NFileType.excel:
-        case NFileType.ppt:
-        case NFileType.pdf:
+        case NFileType.document:
           {
-            FocusScope.of(context).unfocus();
-            ToolUtil.webViewPreview(model.url ?? "", title: fileName ?? "");
+            // ToolUtil.webViewPreview(model.url ?? "", title: fileName ?? "");
+
+            if (model.url?.startsWith("http") != true) {
+              ToastUtil.show("文件链接失效");
+              return;
+            }
+            final fileName = model.url?.split("/").last ?? "";
+            final filUrl = model.url ?? "";
+            ToolUtil.filePreview(fileName, filUrl);
           }
           break;
         default:

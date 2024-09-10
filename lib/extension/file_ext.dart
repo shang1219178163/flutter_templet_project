@@ -17,6 +17,7 @@ enum NFileType {
   image("图片", ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp', 'heic']),
   video("视频", ["mp4", "avi", "wmv", "rmvb", "mpg", "mpeg", "mov", "3gp"]),
   audio("音频", ["mp3", "wav", "wma", "amr", "ogg"]),
+  document('文档', ['doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'pdf']),
   doc("word文档", ["doc", "docx"]),
   excel("excel文档", ["xls", "xlsx"]),
   ppt("ppt文档", ["ppt", "pptx"]),
