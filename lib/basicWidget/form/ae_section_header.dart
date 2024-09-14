@@ -22,6 +22,7 @@ class AeSectionHeader extends StatelessWidget {
       fontWeight: FontWeight.w400,
       color: Color(0xFF737373),
     ),
+    this.maxLines,
     this.tailing,
   });
 
@@ -30,6 +31,7 @@ class AeSectionHeader extends StatelessWidget {
 
   /// 标题样式
   final TextStyle style;
+  final int? maxLines;
 
   /// 小红点
   final bool isRequired;
@@ -76,11 +78,14 @@ class AeSectionHeader extends StatelessWidget {
           ),
         ],
       ),
-      maxLines: 3,
+      maxLines: maxLines ?? 3,
+      overflow: TextOverflow.ellipsis,
     );
+
     if (tailing == null) {
       return leading;
     }
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [

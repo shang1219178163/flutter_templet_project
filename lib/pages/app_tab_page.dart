@@ -120,6 +120,7 @@ class _AppTabPageState extends State<AppTabPage>
   @override
   void onAppLifecycleStateChanged(AppLifecycleState state) {
     appController.appState.value = state;
+    appController.appStateVN.value = state;
     ddlog("$widget ${state.name}, ${appController.appState.value}");
   }
 

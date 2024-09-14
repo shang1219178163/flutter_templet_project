@@ -8,6 +8,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/mixin/safe_set_state_mixin.dart';
 
 class NTypeWriterText extends StatefulWidget {
   const NTypeWriterText({
@@ -23,7 +24,8 @@ class NTypeWriterText extends StatefulWidget {
   State<NTypeWriterText> createState() => _NTypeWriterTextState();
 }
 
-class _NTypeWriterTextState extends State<NTypeWriterText> {
+class _NTypeWriterTextState extends State<NTypeWriterText>
+    with SafeSetStateMixin {
   late String text = widget.text;
   String displayedText = "";
   int charPosition = 0;
@@ -43,10 +45,9 @@ class _NTypeWriterTextState extends State<NTypeWriterText> {
   void _typeWriterEffect() {
     Future.delayed(Duration(milliseconds: 100), () {
       if (charPosition < text.length) {
-        setState(() {
-          displayedText += text[charPosition];
-          charPosition++;
-        });
+        displayedText += text[charPosition];
+        charPosition++;
+        setState(() {});
         _typeWriterEffect();
       }
     });
