@@ -23,6 +23,7 @@ class AppTabBarController extends GetxController {
 
   /// 全局 app 前后台切换
   var appState = AppLifecycleState.resumed.obs;
+  var appStateVN = ValueNotifier(AppLifecycleState.resumed);
 
   /// 返回 appTabPage
   void backTabPage() {
