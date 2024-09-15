@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/cache/file_manager.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/util/yaml_ext.dart';
 import 'package:path/path.dart' as path;
 import 'package:yaml/yaml.dart';
 
@@ -64,10 +65,11 @@ class _YamlParsePageState extends State<YamlParsePage> {
         child: Column(
           children: [
             ValueListenableBuilder(
-                valueListenable: contentVN,
-                builder: (context, value, child) {
-                  return Text("$value");
-                }),
+              valueListenable: contentVN,
+              builder: (context, value, child) {
+                return Text("$value");
+              },
+            ),
           ],
         ),
       ),
@@ -88,11 +90,14 @@ class _YamlParsePageState extends State<YamlParsePage> {
   }
 
   onParse() async {
-    String yamlPath1 = path.dirname(Platform.script.toFilePath());
-    ddlog("yamlPath1: $yamlPath1");
+    // 获取当前文件的 URI
+    Uri currentScript = Platform.script;
+    // 将 URI 转换为文件系统路径
+    String currentPath = currentScript.toFilePath();
+    ddlog('当前文件路径: $currentPath');
 
-    String yamlPath2 = Platform.script.path;
-    ddlog("yamlPath2: $yamlPath2");
+    String yamlPath1 = path.dirname(currentPath);
+    ddlog("yamlPath1: $yamlPath1");
 
     String yamlPath3 = path.join(yamlPath1, '../pubspec.yaml');
     ddlog("yamlPath3: $yamlPath3");
@@ -107,15 +112,10 @@ class _YamlParsePageState extends State<YamlParsePage> {
     File file = File(yamlPath);
     String yamlStr = file.readAsStringSync();
     contentVN.value = yamlStr;
-  }
 
-  Future<Map<String, dynamic>> parseYaml({required String path}) async {
-    File file = File(path);
-    String yamlStr = file.readAsStringSync();
-    // ddlog("yamlText: $yamlText");
-    Map<String, dynamic> yamlMap = loadYaml(yamlStr);
-    // final jsonStr = jsonEncode(yamlMap);
-    // ddlog("yamlMap: \n${jsonStr}");
-    return yamlMap;
+    final yamlMap = await YamlMapExt.parseYaml(path: yamlPath);
+
+    final encoder = JsonEncoder.withIndent('  '); // 使用带缩进的 JSON 编码器
+    contentVN.value = encoder.convert(yamlMap);
   }
 }

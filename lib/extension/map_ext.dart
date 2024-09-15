@@ -50,6 +50,13 @@ extension MapExt on Map<String, dynamic> {
 
   Map<String, dynamic> get asMapHash =>
       map((k, v) => MapEntry(k, "$v,${v.hashCode}"));
+
+  /// 带缩进转换
+  String convertByIndent({String indent = '  '}) {
+    final encoder = JsonEncoder.withIndent(indent); // 使用带缩进的 JSON 编码器
+    final result = encoder.convert(this);
+    return result;
+  }
 }
 
 /// 请求结果脱壳
