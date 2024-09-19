@@ -24,6 +24,23 @@ class NFileUploadModel {
   /// 本地选择的文件实体
   NPickFile? assetFile;
 
+  /// 文件名称(带类型)
+  String? get fileName {
+    final fileName = assetFile?.name ?? url?.split("/").last;
+    return fileName;
+  }
+
+  /// 文件尺寸描述(MB)
+  String? get fileDesc {
+    int? length = assetFile?.size;
+    if (length == null) {
+      return null;
+    }
+    final result = length / (1024 * 1024);
+    final desc = "${result.toStringAsFixed(2)}MB";
+    return desc;
+  }
+
   Map<String, dynamic> toJson() {
     final data = Map<String, dynamic>();
     data['url'] = url;

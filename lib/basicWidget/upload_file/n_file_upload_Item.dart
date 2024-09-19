@@ -18,6 +18,14 @@ import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/network/oss/oss_util.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 
+typedef NFileUploadItemBuilder = Widget Function(
+  NFileUploadModel model,
+  VoidCallback? onDelete,
+  VoidCallback? onRefresh,
+  ValueNotifier<bool> successVN,
+  ValueNotifier<double> percentVN,
+);
+
 /// 上传图片单元(基于 wechat_assets_picker)
 class NFileUploadItem extends StatefulWidget {
   const NFileUploadItem({
@@ -29,6 +37,7 @@ class NFileUploadItem extends StatefulWidget {
     this.canEdit = true,
     this.showFileSize = false,
     this.borderColor = Colors.transparent,
+    this.builder,
   });
 
   final NFileUploadModel model;
@@ -50,6 +59,8 @@ class NFileUploadItem extends StatefulWidget {
 
   /// 是否可编辑 - 删除
   final bool canEdit;
+
+  final NFileUploadItemBuilder? builder;
 
   @override
   NFileUploadItemState createState() => NFileUploadItemState();
@@ -82,8 +93,12 @@ class NFileUploadItemState extends State<NFileUploadItem>
   @override
   void didUpdateWidget(covariant NFileUploadItem oldWidget) {
     super.didUpdateWidget(oldWidget);
+    final urlSame = widget.model.url?.startsWith("http") == true &&
+        oldWidget.model.url?.startsWith("http") == true &&
+        widget.model.url == oldWidget.model.url;
+
     if (widget.model.assetFile?.path == oldWidget.model.assetFile?.path ||
-        widget.model.url?.startsWith("http") == true) {
+        urlSame) {
       // EasyToast.showInfoToast("path相同");
       return;
     }
@@ -94,12 +109,20 @@ class NFileUploadItemState extends State<NFileUploadItem>
   Widget build(BuildContext context) {
     super.build(context);
 
-    final fileName = widget.model.assetFile?.name ??
-        widget.model.url?.split("/").last ??
-        "--";
+    final fileName = widget.model.fileName ?? "--";
 
     final fileNameNew = fileName.split(".").firstOrNull ?? "--";
     final ext = fileName.split(".").lastOrNull ?? "";
+
+    if (widget.builder != null) {
+      return widget.builder!(
+        widget.model,
+        widget.onDelete,
+        onRefresh,
+        _successVN,
+        _percentVN,
+      );
+    }
 
     final nameWidget = Row(
       children: [
@@ -143,13 +166,7 @@ class NFileUploadItemState extends State<NFileUploadItem>
             children: [
               Flexible(
                 child: GestureDetector(
-                  child: nameWidget ??
-                      NText(
-                        fileName,
-                        fontSize: 14,
-                        color: fontColor737373,
-                        maxLines: 1,
-                      ),
+                  child: nameWidget,
                 ),
               ),
               buildDelete(),
@@ -268,6 +285,12 @@ class NFileUploadItemState extends State<NFileUploadItem>
     if (!widget.canEdit) {
       return;
     }
+
+    if (widget.model.assetFile == null &&
+        widget.model.url?.startsWith("http") == true) {
+      return;
+    }
+
     // debugPrint("onRefresh ${widget.entity}");
     final path = widget.model.assetFile?.path;
     if (path == null || path.isEmpty) {

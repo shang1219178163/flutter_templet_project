@@ -16,6 +16,7 @@ import 'package:flutter_templet_project/basicWidget/n_pair.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/upload_file/n_file_upload_Item.dart';
 import 'package:flutter_templet_project/basicWidget/upload_file/n_file_upload_model.dart';
+import 'package:flutter_templet_project/basicWidget/upload_file/n_file_upload_protocol.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/routes/APPRouter.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
@@ -31,6 +32,8 @@ class NFileUploadBox extends StatefulWidget {
     super.key,
     this.controller,
     required this.items,
+    this.itemWidth,
+    this.itemHeight,
     this.title = "上传文件",
     this.description = "支持格式/单个文件大小限制/最大数量",
     required this.onChanged,
@@ -45,11 +48,14 @@ class NFileUploadBox extends StatefulWidget {
     required this.allowedExtensions,
     this.header,
     this.footer,
+    this.fileUpload,
   });
 
   final NFileUploadBoxController? controller;
 
   final List<NFileUploadModel> items;
+  final double? itemWidth;
+  final double? itemHeight;
   final String title;
   final String description;
 
@@ -79,6 +85,8 @@ class NFileUploadBox extends StatefulWidget {
   final Widget? header;
 
   final Widget? footer;
+
+  final NFileUploadProtocol? fileUpload;
 
   @override
   State<NFileUploadBox> createState() => _NFileUploadBoxState();
@@ -118,6 +126,35 @@ class _NFileUploadBoxState extends State<NFileUploadBox> {
 
   @override
   Widget build(BuildContext context) {
+    void urlBlock(String url) {
+      final isAllFinished = selectedModels.where((e) => e.url == null).isEmpty;
+      // debugPrint("isAllFinished: ${isAllFinished}");
+      if (isAllFinished) {
+        final urls = selectedModels.map((e) => e.url).toList();
+        debugPrint("isAllFinished urls: $urls");
+        widget.onChanged(selectedModels);
+        isAllUploadFinished.value = true;
+      }
+    }
+
+    onPick() async {
+      await onPickFile(
+        maxMB: widget.maxMB,
+        maxCount: widget.maxCount,
+        type: widget.type,
+        allowMultiple: widget.allowMultiple,
+        allowedExtensions: widget.allowedExtensions,
+        onPermission: () async {
+          //todo: 安卓权限
+          // bool isGranted = await PhonePermission.checkDocument(
+          //   permissionType: PermissionTypeEnum.im,
+          // );
+          // return isGranted;
+          return true;
+        },
+      );
+    }
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -134,61 +171,40 @@ class _NFileUploadBoxState extends State<NFileUploadBox> {
         ...selectedModels.map((e) {
           final index = selectedModels.indexOf(e);
 
+          void deleteItem() {
+            debugPrint(
+                "onDelete: $index, length: ${selectedModels[index].assetFile?.path}");
+            selectedModels.remove(e);
+            setState(() {});
+            widget.onChanged(selectedModels);
+          }
+
           // final fileName = (e.assetFile?.path ?? "").split("/").last;
           return GestureDetector(
-            onTap: () => onTapItem(e),
-            child: NFileUploadItem(
-              model: e,
-              canEdit: widget.canEdit,
-              urlBlock: (url) {
-                final isAllFinished =
-                    selectedModels.where((e) => e.url == null).isEmpty;
-                // debugPrint("isAllFinished: ${isAllFinished}");
-                if (isAllFinished) {
-                  final urls = selectedModels.map((e) => e.url).toList();
-                  debugPrint("isAllFinished urls: $urls");
-                  widget.onChanged(selectedModels);
-                  isAllUploadFinished.value = true;
-                }
-              },
-              onDelete: widget.canEdit == false
-                  ? null
-                  : () {
-                      debugPrint(
-                          "onDelete: $index, length: ${selectedModels[index].assetFile?.path}");
-                      selectedModels.remove(e);
-                      setState(() {});
-                      widget.onChanged(selectedModels);
-                    },
-              showFileSize: widget.showFileSize,
-            ),
+            onTap: () {
+              FocusScope.of(context).unfocus();
+              onTapItem(e);
+            },
+            child: widget.fileUpload?.buildItem(
+                    itemWidth: widget.itemWidth,
+                    itemHeight: widget.itemHeight,
+                    e: e,
+                    urlBlock: urlBlock,
+                    deleteItem: deleteItem,
+                    canEdit: widget.canEdit,
+                    showFileSize: widget.showFileSize) ??
+                NFileUploadItem(
+                  model: e,
+                  canEdit: widget.canEdit,
+                  urlBlock: urlBlock,
+                  onDelete: widget.canEdit == false ? null : deleteItem,
+                  showFileSize: widget.showFileSize,
+                ),
           );
         }).toList(),
         if (selectedModels.length < widget.maxCount)
-          buildUploadButton(
-            onPressed: () async {
-              ToolUtil.removeInputFocus();
-              if (!widget.canEdit) {
-                debugPrint("无编辑权限");
-                return;
-              }
-              await onPickFile(
-                maxMB: widget.maxMB,
-                maxCount: widget.maxCount,
-                type: widget.type,
-                allowMultiple: widget.allowMultiple,
-                allowedExtensions: widget.allowedExtensions,
-                onPermission: () async {
-                  //todo: 安卓权限
-                  // bool isGranted = await PhonePermission.checkDocument(
-                  //   permissionType: PermissionTypeEnum.im,
-                  // );
-                  // return isGranted;
-                  return true;
-                },
-              );
-            },
-          ),
+          widget.fileUpload?.buildUploadButton(onPressed: onPick) ??
+              buildUploadButton(onPressed: onPick),
         Offstage(
           offstage: !widget.canEdit,
           child: widget.footer ??
@@ -241,6 +257,12 @@ class _NFileUploadBoxState extends State<NFileUploadBox> {
     required List<String> allowedExtensions,
     required FutureOr<bool> Function() onPermission,
   }) async {
+    ToolUtil.removeInputFocus();
+    if (!widget.canEdit) {
+      debugPrint("无编辑权限");
+      return;
+    }
+
     if (!await onPermission()) {
       return;
     }
