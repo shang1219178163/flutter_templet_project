@@ -64,6 +64,7 @@ class NTextField extends StatefulWidget {
     this.focusNode,
     this.isCollapsed,
     this.inputFormatters,
+    this.scrollPhysics,
     this.hidePrefix = false,
     this.hideSuffix = false,
     this.hideClear = false,
@@ -151,6 +152,7 @@ class NTextField extends StatefulWidget {
   final bool? isCollapsed;
 
   final List<TextInputFormatter>? inputFormatters;
+  final ScrollPhysics? scrollPhysics;
 
   final bool hidePrefix;
 
@@ -202,8 +204,7 @@ class _NTextFieldState extends State<NTextField> {
   void didUpdateWidget(covariant NTextField oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    if (widget.value != oldWidget.value ||
-        widget.readOnly != oldWidget.readOnly ||
+    if (widget.readOnly != oldWidget.readOnly ||
         widget.minLines != oldWidget.minLines ||
         widget.maxLines != oldWidget.maxLines ||
         widget.fillColor != oldWidget.fillColor ||
@@ -211,7 +212,6 @@ class _NTextFieldState extends State<NTextField> {
         widget.contentPadding != oldWidget.contentPadding ||
         widget.isCollapsed != oldWidget.isCollapsed ||
         widget.suffixIconBuilder != oldWidget.suffixIconBuilder) {
-      textEditingController.text = widget.value ?? "";
       setState(() {});
     }
   }
@@ -338,6 +338,7 @@ class _NTextFieldState extends State<NTextField> {
             if (widget.maxLength != null)
               LengthLimitingTextInputFormatter(widget.maxLength!),
           ],
+      scrollPhysics: widget.scrollPhysics,
       decoration: widget.decorationBuilder?.call(decoration) ?? decoration,
     );
   }

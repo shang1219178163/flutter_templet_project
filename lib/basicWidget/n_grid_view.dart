@@ -13,9 +13,9 @@ import 'package:flutter_templet_project/extension/ddlog.dart';
 class NGridView extends StatelessWidget {
   const NGridView({
     super.key,
-    this.numPerRow = 4,
-    this.spacing = 9,
-    this.runSpacing = 16,
+    this.crossAxisCount = 4,
+    this.crossAxisSpacing = 9,
+    this.mainAxisSpacing = 16,
     this.radius = 4,
     this.itemWidth,
     this.itemHeight,
@@ -25,14 +25,14 @@ class NGridView extends StatelessWidget {
     this.itemBuilder,
   });
 
-  ///每页列数
-  final int numPerRow;
+  /// 每页列数
+  final int crossAxisCount;
 
   /// 子项间距
-  final double spacing;
+  final double crossAxisSpacing;
 
   /// 子项垂直间距
-  final double runSpacing;
+  final double mainAxisSpacing;
 
   /// 子项宽度, 为空则自动利用最大宽度
   final double? itemWidth;
@@ -59,13 +59,14 @@ class NGridView extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
-        var spacingNew = spacing;
+        var spacingNew = crossAxisSpacing;
         var itemWidthNew =
-            (constraints.maxWidth - spacingNew * (numPerRow - 1)) / numPerRow;
+            (constraints.maxWidth - spacingNew * (crossAxisCount - 1)) /
+                crossAxisCount;
         if (itemWidth != null && itemWidth! > 0 == true) {
           itemWidthNew = itemWidth!.truncateToDouble();
-          spacingNew = (constraints.maxWidth - itemWidthNew * numPerRow) /
-              (numPerRow - 1).truncateToDouble();
+          spacingNew = (constraints.maxWidth - itemWidthNew * crossAxisCount) /
+              (crossAxisCount - 1).truncateToDouble();
         }
 
         Widget buildItem({required Widget child}) {
@@ -82,7 +83,7 @@ class NGridView extends StatelessWidget {
 
         return Wrap(
           spacing: spacingNew, //适配折叠屏
-          runSpacing: runSpacing,
+          runSpacing: mainAxisSpacing,
           alignment: WrapAlignment.start,
           runAlignment: WrapAlignment.start,
           children: [
