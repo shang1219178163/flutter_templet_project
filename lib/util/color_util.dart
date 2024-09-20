@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 const white = Color(0xFFFFFFFF);
 
 // ///主色调
-// const MaterialColor primary = Colors.blueAccent;
+const Color primary = Colors.blueAccent;
 
 /// 默认字体颜色 #1A1A1A
 const fontColor = Color(0xFF1A1A1A);
