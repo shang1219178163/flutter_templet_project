@@ -28,7 +28,7 @@ extension StringVN on String {
   ValueNotifier get vn => ValueNotifier<String>(this);
 }
 
-extension ValueNotifierListWxt on ValueNotifier<List> {
+extension ValueNotifierListExt on ValueNotifier<List> {
   /// 更新
   void update() {
     value = [...value];
