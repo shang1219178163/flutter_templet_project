@@ -13,34 +13,23 @@ import 'package:flutter/material.dart';
 extension ScrollControllerExt on ScrollController {
   printInfo() {
     position.printInfo();
-
-    // print('/***********************ScrollController***********************/');
-    // print('minScrollExtent: ${scrollController.position.minScrollExtent}');
-    // print('maxScrollExtent: ${scrollController.position.maxScrollExtent}');
-    // print('pixels: ${scrollController.position.pixels}');
-    // print('viewportDimension: ${scrollController.position.viewportDimension}');
-    // print('extentAfter: ${scrollController.position.extentAfter}');
-    // print('extentBefore: ${scrollController.position.extentBefore}');
-    // print('extentInside: ${scrollController.position.extentInside}');
   }
 
-  /// 滚动到
-  Future<void> scrollTo(
-    double offset, {
-    Duration delay = const Duration(milliseconds: 100),
+  /// 跳转到对应位子
+  Future<void> jumpTo(
+    double value, {
+    Duration delay = const Duration(seconds: 0),
     Duration duration = const Duration(milliseconds: 350),
     Curve curve = Curves.ease,
   }) async {
-    Future.delayed(
-      delay,
-      () {
-        animateTo(
-          offset,
-          duration: duration,
-          curve: curve,
-        );
-      },
-    );
+    if (!hasClients) {
+      return;
+    }
+    if (duration == Duration.zero) {
+      jumpTo(value);
+    } else {
+      await animateTo(value, duration: duration, curve: curve);
+    }
   }
 
   ///水平移动
