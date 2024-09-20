@@ -13,9 +13,11 @@ import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/Pages/app_user_center_page.dart';
 import 'package:flutter_templet_project/Pages/second_page.dart';
+import 'package:flutter_templet_project/basicWidget/enhance/bottom_navigation_bar/n_bottom_navigation_bar.dart';
 import 'package:flutter_templet_project/cache/cache_service.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/button_ext.dart';
@@ -53,7 +55,7 @@ class _AppTabPageState extends State<AppTabPage>
 
   final unreadVN = ValueNotifier(0);
 
-  final List<Tuple2<Tuple2<String, Widget>, Widget>> items = [
+  final List<Tuple2<Tuple2<String, Icon>, Widget>> items = [
     Tuple2(Tuple2("首页", Icon(Icons.home)), TabBarTabBarViewDemo()),
     Tuple2(Tuple2("按钮", Icon(Icons.pets)), SecondPage()),
     Tuple2(Tuple2("消息", Icon(Icons.message)), TabBarViewDemo()),
@@ -135,7 +137,7 @@ class _AppTabPageState extends State<AppTabPage>
         data: Theme.of(context).copyWith(
             // canvasColor: Colors.red,
             ),
-        child: BottomNavigationBar(
+        child: NBottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           currentIndex: currentIndex,
           selectedFontSize: 10.sp, // 选中字体大小
@@ -161,6 +163,24 @@ class _AppTabPageState extends State<AppTabPage>
                 ),
               )
               .toList(),
+          tileBuilder: (int index, bool selected, Widget icon, Widget label) {
+            if (index == 0 && selected) {
+              final e = items[index];
+              return Container(
+                decoration: ShapeDecoration(
+                  shape: CircleBorder(side: BorderSide(color: Colors.blue)),
+                ),
+                constraints: BoxConstraints(maxHeight: 40),
+                alignment: Alignment.center,
+                child: Icon(Icons.color_lens, color: primaryColor, size: 40),
+              );
+            }
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[icon, label],
+            );
+          },
         ),
       ),
       body: items.map((e) => e.item2).toList()[currentIndex],
