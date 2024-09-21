@@ -7,7 +7,6 @@
 //
 
 import 'dart:async';
-import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
@@ -15,16 +14,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_pair.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/upload_file/n_file_upload_Item.dart';
+import 'package:flutter_templet_project/basicWidget/upload_file/n_file_upload_handle.dart';
 import 'package:flutter_templet_project/basicWidget/upload_file/n_file_upload_model.dart';
-import 'package:flutter_templet_project/basicWidget/upload_file/n_file_upload_protocol.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/file_ext.dart';
+import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/routes/APPRouter.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:flutter_templet_project/util/tool_util.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:get/get.dart';
-import 'package:flutter_templet_project/extension/file_ext.dart';
-import 'package:flutter_templet_project/extension/string_ext.dart';
 
 /// 从文件存储系统选择文件
 class NFileUploadBox extends StatefulWidget {
@@ -86,7 +85,7 @@ class NFileUploadBox extends StatefulWidget {
 
   final Widget? footer;
 
-  final NFileUploadProtocol? fileUpload;
+  final NFileUploadHandle? fileUpload;
 
   @override
   State<NFileUploadBox> createState() => _NFileUploadBoxState();

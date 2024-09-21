@@ -6,19 +6,18 @@
 //  Copyright © 2024/9/13 shang. All rights reserved.
 //
 
-import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_pair.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/upload_file/n_file_upload_Item.dart';
+import 'package:flutter_templet_project/basicWidget/upload_file/n_file_upload_handle.dart';
 import 'package:flutter_templet_project/basicWidget/upload_file/n_file_upload_model.dart';
-import 'package:flutter_templet_project/basicWidget/upload_file/n_file_upload_protocol.dart';
 import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 
 /// 文件上传样式示例
-class NFileUploadPI extends NFileUploadProtocol {
+class NFileUploadPI extends NFileUploadHandle {
   /// 子项
   @override
   NFileUploadItem buildItem({

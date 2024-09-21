@@ -19,8 +19,10 @@ import 'package:flutter_templet_project/util/tool_util.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:get/get.dart';
 
-/// 文件上传协议
-class NFileUploadProtocol {
+/// 文件上传基类
+class NFileUploadHandle {
+  const NFileUploadHandle();
+
   /// 子项展示
   NFileUploadItem buildItem({
     double? itemWidth,
