@@ -224,6 +224,7 @@ class NRefreshViewState<T> extends State<NRefreshView<T>>
         widget.separatorBuilder != oldWidget.separatorBuilder ||
         widget.cachedChild != oldWidget.cachedChild ||
         widget.tag != widget.tag) {
+      widget.controller?._attach(this);
       onRefresh();
     }
   }
