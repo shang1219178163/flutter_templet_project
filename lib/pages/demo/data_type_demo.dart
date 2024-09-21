@@ -21,10 +21,12 @@ import 'package:flutter_templet_project/extension/object_ext.dart';
 import 'package:flutter_templet_project/extension/snack_bar_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
+import 'package:flutter_templet_project/mixin/app_lifecycle_state_mixin.dart';
 import 'package:flutter_templet_project/model/NPerson.dart';
 import 'package:flutter_templet_project/util/Codable.dart';
 import 'package:flutter_templet_project/util/Singleton.dart';
 import 'package:flutter_templet_project/vendor/amap_location/location_detail_model.dart';
+import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:quiver/collection.dart';
@@ -42,7 +44,8 @@ class DataTypeDemo extends StatefulWidget {
   State<DataTypeDemo> createState() => _DataTypeDemoState();
 }
 
-class _DataTypeDemoState extends State<DataTypeDemo> {
+class _DataTypeDemoState extends State<DataTypeDemo>
+    with WidgetsBindingObserver, AppLifecycleStateOriginMixin {
   bool get hideApp =>
       Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
 
@@ -64,6 +67,28 @@ class _DataTypeDemoState extends State<DataTypeDemo> {
     (e: "Record", action: onRecord),
     (e: "Object", action: onObject),
   ];
+
+  @override
+  void initState() {
+    super.initState();
+
+    appLifecycleStateChanged = (state) {
+      switch (state) {
+        case AppLifecycleState.resumed:
+          {
+            ToastUtil.show("resumed");
+          }
+          break;
+        case AppLifecycleState.paused:
+          {
+            ToastUtil.show("resumed");
+          }
+          break;
+        default:
+          break;
+      }
+    };
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -98,9 +123,9 @@ class _DataTypeDemoState extends State<DataTypeDemo> {
           children: [
             buildSectionBox(items: specialItems),
             buildSectionBox(items: items),
-            NTypeWriterText(
-              text: 60.generateChars(),
-            ),
+            // NTypeWriterText(
+            //   text: 60.generateChars(),
+            // ),
           ]
               .map(
                 (e) => Padding(
