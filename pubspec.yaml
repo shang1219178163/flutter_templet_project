@@ -230,6 +230,10 @@ dev_dependencies:
 
   build_runner: ^2.4.8
   isar_generator: ^3.1.0+1
+  args: ^2.4.2
+  # 通过dart进行调用shll命令执行
+  process_run:
+  color_logger: ^1.0.2
 
 
 # The following section is specific to Flutter.

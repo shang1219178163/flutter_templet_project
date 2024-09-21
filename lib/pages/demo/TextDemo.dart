@@ -1,8 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'dart:ui' as ui;
 
-import 'package:flutter_templet_project/extension/widget_ext.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 
 /// TextStyle 研究
 class TextDemo extends StatefulWidget {
@@ -66,7 +65,10 @@ class _TextDemoState extends State<TextDemo> {
                 ),
               );
             }).toList(),
-            buildPaintText(),
+            NSectionBox(
+              title: "MyTextPainter",
+              child: buildPaintText(),
+            ),
           ],
         ),
       ),

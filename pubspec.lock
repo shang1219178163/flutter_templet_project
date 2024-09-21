@@ -34,7 +34,7 @@ packages:
     source: hosted
     version: "3.4.10"
   args:
-    dependency: transitive
+    dependency: "direct dev"
     description:
       name: args
       sha256: "7cf60b9f0cc88203c5a190b4cd62a99feea42759a7fa695010eb5de1c0b2252a"
@@ -337,6 +337,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.2.1"
+  color_logger:
+    dependency: "direct dev"
+    description:
+      name: color_logger
+      sha256: "269e6f1c117fc333f37fa0b9f776eeae3cd7078beb7368e0a20bdb1a4b92ba6c"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.2"
   common_utils:
     dependency: "direct main"
     description:
@@ -1608,6 +1616,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.3.0"
+  process_run:
+    dependency: "direct dev"
+    description:
+      name: process_run
+      sha256: bc3c841708c7ea5afdf810f70b7a3e453b45a11c2d0a0b1073f3ece7ec793dfa
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.1"
   protobuf:
     dependency: transitive
     description:
