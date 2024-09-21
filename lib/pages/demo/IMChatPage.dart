@@ -395,57 +395,65 @@ class _IMChatPageState extends State<IMChatPage>
       contentFontColor: contentFontColor,
     );
 
-    late final menueItems = <Tuple2<String, String>>[
-      Tuple2(
-        "复制",
-        "icon_copy.png",
-      ),
-      Tuple2(
-        "引用",
-        "icon_quote.png",
-      ),
-      Tuple2(
-        "撤回",
-        "icon_revoke.png",
-      ),
+    late final menueItems = <Tuple2<String, AssetImage>>[
+      Tuple2("复制", "icon_copy.png".toAssetImage()),
+      Tuple2("引用", "icon_quote.png".toAssetImage()),
+      Tuple2("撤回", "icon_revoke.png".toAssetImage()),
     ];
+
+    if (modelIndex == 0) {
+      menueItems.addAll([
+        Tuple2("标记", "icon_quote.png".toAssetImage()),
+        Tuple2("取消", "icon_revoke.png".toAssetImage()),
+      ]);
+    }
+    menueItems.addAll([
+      Tuple2("${menueItems.length}", "icon_quote.png".toAssetImage()),
+    ]);
 
     if (menueItems.isEmpty) {
       return child;
     }
 
+    final targetFollowerController = NTargetFollowerController();
+
     child = NTargetFollower(
-        targetAnchor: isOwner ? Alignment.topRight : Alignment.topLeft,
-        followerAnchor: isOwner ? Alignment.bottomRight : Alignment.bottomLeft,
-        // targetAnchor: isOwner ? Alignment.topCenter : Alignment.topCenter,
-        // followerAnchor: isOwner ? Alignment.bottomCenter : Alignment.bottomCenter,
-        entries: longPressEntries,
-        offset: Offset(0, -8),
-        onLongPressEnd: (e) {
-          // 勿删
-        },
-        target: child,
-        followerBuilder: (context, onHide) {
-          // debugPrint("${DateTime.now()} followerBuilder:");
-          return TapRegion(
-            onTapInside: (tap) {
-              debugPrint('On Tap Inside!!');
-            },
-            onTapOutside: (tap) {
-              debugPrint('On Tap Outside!!');
+      controller: targetFollowerController,
+      targetAnchor: isOwner ? Alignment.topRight : Alignment.topLeft,
+      followerAnchor: isOwner ? Alignment.bottomRight : Alignment.bottomLeft,
+      // targetAnchor: isOwner ? Alignment.topCenter : Alignment.topCenter,
+      // followerAnchor: isOwner ? Alignment.bottomCenter : Alignment.bottomCenter,
+      entries: longPressEntries,
+      offset: Offset(0, -8),
+      // onTap: () {
+      //   debugPrint('NTargetFollower On Tap!!');
+      //   // targetFollowerController.toggle();
+      // },
+      onLongPressEnd: (e) {
+        // 勿删
+      },
+      target: child,
+      followerBuilder: (context, onHide) {
+        // debugPrint("${DateTime.now()} followerBuilder:");
+        return TapRegion(
+          onTapInside: (tap) {
+            debugPrint('On Tap Inside!!');
+          },
+          onTapOutside: (tap) {
+            debugPrint('On Tap Outside!!');
+            onHide();
+          },
+          child: NLongPressMenu(
+            items: menueItems,
+            onItem: (Tuple2<String, AssetImage> t) {
               onHide();
+              debugPrint("onChanged_$t");
+              ToastUtil.show(t.item1);
             },
-            child: NLongPressMenu(
-                items: menueItems
-                    .map((e) => Tuple2(e.item1, e.item2.toAssetImage()))
-                    .toList(),
-                onItem: (Tuple2<String, AssetImage> t) {
-                  onHide();
-                  debugPrint("onChanged_$t");
-                  ToastUtil.show(t.item1);
-                }),
-          );
-        });
+          ),
+        );
+      },
+    );
     return child;
   }
 
