@@ -120,6 +120,9 @@ class _NFileUploadBoxState extends State<NFileUploadBox> {
         ..clear()
         ..addAll(widget.items);
     }
+    if (oldWidget.controller != widget.controller) {
+      widget.controller?._attach(this);
+    }
     super.didUpdateWidget(oldWidget);
   }
 
