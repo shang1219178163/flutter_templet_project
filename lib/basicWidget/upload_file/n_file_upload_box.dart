@@ -185,6 +185,10 @@ class _NFileUploadBoxState extends State<NFileUploadBox> {
           return GestureDetector(
             onTap: () {
               FocusScope.of(context).unfocus();
+              if (widget.fileUpload != null) {
+                widget.fileUpload?.onTapItem(e);
+                return;
+              }
               onTapItem(e);
             },
             child: widget.fileUpload?.buildItem(
