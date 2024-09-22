@@ -87,7 +87,6 @@ class _IMChatPageState extends State<IMChatPage>
 
   @override
   void dispose() {
-    // TODO: implement dispose
     // _controller.dispose();
     super.dispose();
   }
@@ -159,40 +158,42 @@ class _IMChatPageState extends State<IMChatPage>
     return PreferredSize(
       preferredSize: Size.fromHeight(48),
       child: ValueListenableBuilder<List<String>>(
-          valueListenable: dataList,
-          builder: (context, value, child) {
-            // if (value.length < 3) {
-            //   return SizedBox();
-            // }
-            return Container(
-              width: double.maxFinite,
-              height: 48,
-              decoration: BoxDecoration(
-                color: context.scaffoldBackgroundColor,
-                // border: Border.all(color: Colors.blue),
-                borderRadius: BorderRadius.all(Radius.circular(0.w)),
-              ),
-              alignment: Alignment.center,
-              child: Text("${value.length}条数据"),
-            );
-          }),
+        valueListenable: dataList,
+        builder: (context, value, child) {
+          // if (value.length < 3) {
+          //   return SizedBox();
+          // }
+          return Container(
+            width: double.maxFinite,
+            height: 48,
+            decoration: BoxDecoration(
+              color: context.scaffoldBackgroundColor,
+              // border: Border.all(color: Colors.blue),
+              borderRadius: BorderRadius.all(Radius.circular(0.w)),
+            ),
+            alignment: Alignment.center,
+            child: Text("${value.length}条数据"),
+          );
+        },
+      ),
     );
   }
 
   buildBody() {
     return SafeArea(
-        // bottom: false,
-        child: Column(
-      children: [
-        buildTips1(tips: "患者暂未购买问诊服务"),
-        buildTips2(tips: "患者暂未购买问诊服务"),
-        Expanded(
-          // flex: 1,
-          child: buildListView(),
-        ),
-        buildInputBar(),
-      ],
-    ));
+      // bottom: false,
+      child: Column(
+        children: [
+          buildTips1(tips: "患者暂未购买问诊服务"),
+          buildTips2(tips: "患者暂未购买问诊服务"),
+          Expanded(
+            // flex: 1,
+            child: buildListView(),
+          ),
+          buildInputBar(),
+        ],
+      ),
+    );
   }
 
   Widget buildListView() {
@@ -648,139 +649,6 @@ class _IMChatPageState extends State<IMChatPage>
     final val = "onLoad_${dataList.value.length}";
     dataList.value = [...dataList.value, val];
   }
-
-  // buildIMInputBar({
-  //   Widget? heaer,
-  //   Widget? footer,
-  //   double spacing = 6,
-  //   double runSpacing = 14,
-  //   bool isVoice = false,
-  //   // bool isExpand = false,
-  // }) {
-  //
-  //   final textfield = NTextfield(
-  //       maxLines: 3,
-  //       keyboardType: TextInputType.multiline,
-  //       obscureText: false,
-  //       onChanged: (val) async {
-  //       },
-  //       onSubmitted: (val) async {
-  //         debugPrint("val:${val}");
-  //         dataList.value = [...dataList.value, val];
-  //       },
-  //   );
-  //
-  //   final box = GestureDetector(
-  //     onLongPressStart: (details){
-  //       debugPrint("onLongPressStart");
-  //     },
-  //     onLongPressEnd: (details){
-  //       debugPrint("onLongPressEnd");
-  //     },
-  //     onLongPressCancel: () {
-  //       debugPrint("onLongPressCancel");
-  //     },
-  //     child: Container(
-  //       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.w),
-  //       decoration: BoxDecoration(
-  //         color: Colors.white,
-  //         borderRadius: BorderRadius.all(Radius.circular(4.w)),
-  //       ),
-  //       child: Text("按住说话",
-  //         textAlign: TextAlign.center,
-  //         style: TextStyle(
-  //             fontSize: 18.sp,
-  //             fontWeight: FontWeight.bold,
-  //             color: fontColor
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  //
-  //   return Container(
-  //     color: bgColor,
-  //     // padding: EdgeInsets.all(6.w),
-  //     child: StatefulBuilder(
-  //       builder: (context, setState) {
-  //         return Column(
-  //           children: [
-  //             heaer ?? const SizedBox(),
-  //             Padding(
-  //               padding: EdgeInsets.symmetric(
-  //                 horizontal: spacing,
-  //                 vertical: runSpacing,
-  //               ),
-  //               child: Row(
-  //                 children: [
-  //                   Padding(
-  //                     padding: EdgeInsets.symmetric(horizontal: 8.w),
-  //                     child: InkWell(
-  //                       onTap: () {
-  //                         isVoice = !isVoice;
-  //                         setState(() {});
-  //                       },
-  //                       child: Image(
-  //                         image: "icon_voice_circle.png".toAssetImage(),
-  //                         width: 30.w,
-  //                         height: 30.w,
-  //                         // color: color,
-  //                       ),
-  //                     ),
-  //                   ),
-  //                   Expanded(
-  //                     child: isVoice ? box : textfield,
-  //                   ),
-  //                   Padding(
-  //                     padding: EdgeInsets.symmetric(horizontal: 6.w),
-  //                     child: InkWell(
-  //                       onTap: () {
-  //                         isExpand = !isExpand;
-  //                         if (_controller.value == _controller.upperBound) {
-  //                           _controller.reverse().orCancel;
-  //                         } else {
-  //                           _controller.forward().orCancel;
-  //                         }
-  //                         setState(() {});
-  //                       },
-  //                       child: Image(
-  //                         image: "icon_add_circle.png".toAssetImage(),
-  //                         width: 30.w,
-  //                         height: 30.w,
-  //                         // color: color,
-  //                       ),
-  //                     ),
-  //                   ),
-  //                   SizedBox(width: 6.w,),
-  //                 ],
-  //               ),
-  //             ),
-  //             // AnimatedBuilder(
-  //             //   animation: _controller.view,
-  //             //   builder: (context, Widget? child) {
-  //             //     final bool closed = !isExpand && _controller.isDismissed;
-  //             //
-  //             //     return Offstage(
-  //             //       offstage: closed,
-  //             //       child: footer ?? const SizedBox()
-  //             //     );
-  //             //   },
-  //             //   // child: shouldRemoveChildren ? null : result,
-  //             // ),
-  //             AnimatedContainer(
-  //               duration: Duration(milliseconds: 350),
-  //               height: _heightFactor.value,
-  //               child: footer ?? const SizedBox(),
-  //             ),
-  //             // if (isExpand) footer ?? const SizedBox(),
-  //             SizedBox(
-  //               height: max(runSpacing, MediaQuery.of(context).padding.bottom),
-  //             )
-  //           ],
-  //         );
-  //       },
-  //     ),
-  //   );
-  // }
 
   buildIMBarFooter({
     int rowCount = 4,
