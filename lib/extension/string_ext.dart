@@ -260,4 +260,6 @@ extension StringNullableExt on String? {
   String get orEmpty {
     return this ?? "";
   }
+
+  bool get isNotEmptyNew => (this ?? "").isNotEmpty;
 }

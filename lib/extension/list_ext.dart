@@ -282,3 +282,8 @@ extension ListNullExt<E> on List<E?> {
     return list;
   }
 }
+
+extension ListNullNewExt on List? {
+  /// 可选值是否为空
+  bool get isNotEmptyNew => (this ?? []).isNotEmpty;
+}

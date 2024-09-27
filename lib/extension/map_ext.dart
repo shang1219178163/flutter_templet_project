@@ -59,6 +59,11 @@ extension MapExt on Map<String, dynamic> {
   }
 }
 
+extension MapNullExt on Map? {
+  /// 可选值是否为空
+  bool get isNotEmptyNew => (this ?? {}).isNotEmpty;
+}
+
 /// 请求结果脱壳
 extension MapResponseExt on Map<String, dynamic> {
   /// 数据请求
