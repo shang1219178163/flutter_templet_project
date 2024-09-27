@@ -10,11 +10,12 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 
-extension ScrollControllerExt on ScrollController {
-  printInfo() {
-    position.printInfo();
-  }
+// Scrollable.ensureVisible(
+// ensureVisibleKey.currentContext!,
+// alignment: Alignment.bottomCenter.y,
+// };
 
+extension ScrollControllerExt on ScrollController {
   /// 跳转到对应位子
   Future<void> jumpTo(
     double value, {
@@ -30,6 +31,18 @@ extension ScrollControllerExt on ScrollController {
     } else {
       await animateTo(value, duration: duration, curve: curve);
     }
+  }
+
+  /// 跳转到对应位子
+  Future<void> jumpToBottom(
+    double value, {
+    Duration delay = const Duration(seconds: 0),
+    Duration duration = const Duration(milliseconds: 350),
+    Curve curve = Curves.ease,
+  }) async {
+    final offset =
+        position.pixels.clamp(position.pixels, position.maxScrollExtent);
+    await jumpTo(offset, duration: duration, curve: curve);
   }
 
   ///水平移动
@@ -99,7 +112,7 @@ extension ScrollControllerExt on ScrollController {
     debugPrint(
         "scrollToItemNew local:$local, size:$size, offset: ${scrollController.offset}, offset: $offset");
 
-    var padding = MediaQueryData.fromWindow(ui.window).padding;
+    var padding = MediaQueryData.fromView(ui.window).padding;
     var paddingStart =
         scrollDirection == Axis.horizontal ? padding.left : padding.top;
 
@@ -112,86 +125,40 @@ extension ScrollControllerExt on ScrollController {
           curve: Curves.linear);
       return;
     }
-
-    if (scrollController.hasClients) {
-      scrollController.animateTo(offset - paddingStart,
-          duration: duration ?? const Duration(milliseconds: 200),
-          curve: Curves.linear);
-    }
-  }
-
-  scrollToItem({
-    required GlobalKey itemKey,
-    required GlobalKey scrollKey,
-    Duration? duration = const Duration(milliseconds: 200),
-  }) {
-    var scrollController = this;
-
-    var renderBox = itemKey.currentContext?.findRenderObject() as RenderBox?;
-    if (renderBox == null) {
-      debugPrint("Please bind the key to the widget!!!");
-      return;
-    }
-
-    var dy = renderBox
-        .localToGlobal(Offset.zero,
-            ancestor: scrollKey.currentContext?.findRenderObject())
-        .dy;
-    var offset = dy + scrollController.offset;
-    var stateTopH = MediaQueryData.fromWindow(ui.window).padding.top;
-
-    final extentAfter = scrollController.position.extentAfter;
-    if (extentAfter <= 0.0) {
-      return;
-    }
-    if (scrollController.hasClients) {
-      scrollController.animateTo(offset - stateTopH,
-          duration: duration ?? const Duration(milliseconds: 200),
-          curve: Curves.linear);
-    }
+    jumpTo(offset - paddingStart,
+        duration: duration ?? const Duration(milliseconds: 200));
   }
 }
 
-extension ListViewExt on ListView {
-  // 滑动到指定下标的item
-  scrollToIndex({
-    required ScrollController scrollController,
-    required GlobalKey globalKey,
-    required double offsetX,
-    Duration? duration = const Duration(milliseconds: 200),
-  }) {
-    var renderBox = globalKey.currentContext?.findRenderObject() as RenderBox?;
-    if (renderBox == null) {
-      debugPrint("Please bind the key to the widget!!!");
-      return;
-    }
+extension ScrollPositionExt on ScrollPosition {}
 
-    var dy = renderBox.localToGlobal(Offset.zero).dy;
-    var offset = dy + scrollController.offset;
-    var stateTopH = MediaQueryData.fromWindow(ui.window).padding.top;
-    scrollController.animateTo(offset - stateTopH,
-        duration: duration ?? const Duration(milliseconds: 200),
-        curve: Curves.linear);
-
-    final extentAfter = scrollController.position.extentAfter;
-    debugPrint('scrollController:${scrollController.position}');
-  }
-}
-
-extension ScrollPositionExt on ScrollPosition {
+extension ScrollMetricsExt on ScrollMetrics {
   printInfo() {
-    final result = """
-  /*********************** ScrollPosition ***********************/
-  minScrollExtent: $minScrollExtent
-  maxScrollExtent: $maxScrollExtent
-  pixels: $pixels
-  viewportDimension: $viewportDimension
-  extentAfter: $extentAfter
-  extentBefore: $extentBefore
-  extentInside: $extentInside
-  outOfRange: $outOfRange
-  atEdge: $atEdge
-""";
-    debugPrint(result);
+    var metrics = this;
+    final info = """
+    ScrollMetrics####################
+    atEdge: ${metrics.atEdge}
+    axis: ${metrics.axis}
+    axisDirection: ${metrics.axisDirection}
+    extentAfter: ${metrics.extentAfter}
+    extentBefore: ${metrics.extentBefore}
+    extentInside: ${metrics.extentInside}
+    hasContentDimensions: ${metrics.hasContentDimensions}
+    maxScrollExtent: ${metrics.maxScrollExtent}
+    minScrollExtent: ${metrics.minScrollExtent}
+    outOfRange: ${metrics.outOfRange}
+    pixels: ${metrics.pixels}
+    viewportDimension: ${metrics.viewportDimension}
+    """;
+    debugPrint(info);
   }
+
+  //顶部
+  bool get isStart => atEdge && extentBefore <= 0;
+  //底部
+  bool get isEnd => atEdge && extentAfter <= 0;
+  //滚动进度
+  double get progress => pixels / maxScrollExtent;
+  //滚动进度
+  String get progressPerecent => "${(progress * 100).toInt()}%";
 }
