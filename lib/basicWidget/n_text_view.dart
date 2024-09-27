@@ -15,7 +15,7 @@ import 'package:flutter_templet_project/util/color_util.dart';
 
 /// 封装输入框组件
 class NTextView extends StatefulWidget {
-  NTextView({
+  const NTextView({
     super.key,
     this.value = "",
     this.controller,
