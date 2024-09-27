@@ -123,7 +123,7 @@ class _ListViewDemoState extends State<ListViewDemo> {
                     scrollDirection: Axis.vertical,
                   );
 
-                  _scrollController2.printInfo();
+                  _scrollController2.position.printInfo();
                 }),
           ),
         ],
@@ -149,7 +149,6 @@ class _ListViewDemoState extends State<ListViewDemo> {
     required ScrollController? controller,
     required KeyCallback onKeyCallback,
     Axis scrollDirection = Axis.vertical,
-    IndexedWidgetBuilder? itemBuilder,
     required double height,
     double gap = 8,
   }) {
@@ -159,42 +158,39 @@ class _ListViewDemoState extends State<ListViewDemo> {
       child: Scrollbar(
         controller: controller,
         thumbVisibility: true,
+        // scrollbarOrientation: ScrollbarOrientation.left,
         child: ListView.separated(
-            key: key,
-            // reverse: true,
-            controller: controller,
-            scrollDirection: scrollDirection,
-            padding: EdgeInsets.all(0),
-            itemCount: items.length,
-            // cacheExtent: 10,
-            itemBuilder: itemBuilder ??
-                (context, index) {
-                  final e = items[index];
+          key: key,
+          // reverse: true,
+          controller: controller,
+          scrollDirection: scrollDirection,
+          padding: EdgeInsets.all(0),
+          itemCount: items.length,
+          // cacheExtent: 10,
+          itemBuilder: (context, index) {
+            final e = items[index];
 
-                  final itemKey = GlobalKey(debugLabel: e.item1);
-                  return InkWell(
-                    key: itemKey,
-                    onTap: () {
-                      onKeyCallback(context, index, itemKey);
-                    },
-                    child: Container(
-                      color: Colors.green,
-                      child: e.item1.startsWith('http')
-                          ? FadeInImage(
-                              placeholder: 'img_placeholder.png'.toAssetImage(),
-                              image: NetworkImage(e.item1),
-                              fit: BoxFit.cover,
-                              height: 60,
-                            )
-                          : Container(
-                              height: 60, child: Text('Index:${e.item1}')),
-                    ),
-                  );
-                },
-            separatorBuilder: (context, index) => Divider(
-                  indent: gap,
-                  // color: Colors.blue,
-                )),
+            final itemKey = GlobalKey(debugLabel: e.item1);
+            return InkWell(
+              key: itemKey,
+              onTap: () {
+                onKeyCallback(context, index, itemKey);
+              },
+              child: Container(
+                color: Colors.green,
+                child: e.item1.startsWith('http')
+                    ? FadeInImage(
+                        placeholder: 'img_placeholder.png'.toAssetImage(),
+                        image: NetworkImage(e.item1),
+                        fit: BoxFit.cover,
+                        height: 60,
+                      )
+                    : Container(height: 60, child: Text('Index:${e.item1}')),
+              ),
+            );
+          },
+          separatorBuilder: (context, index) => Divider(indent: gap),
+        ),
       ),
     );
   }
@@ -288,7 +284,7 @@ class _ListViewDemoState extends State<ListViewDemo> {
                       itemKey: itemKey,
                       scrollKey: _globalKey2,
                     );
-                    _scrollController2.printInfo();
+                    _scrollController2.position.printInfo();
                   },
                   child: Padding(
                     padding: padding,

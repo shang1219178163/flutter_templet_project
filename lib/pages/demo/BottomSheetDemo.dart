@@ -14,6 +14,7 @@ import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/n_textfield.dart';
 import 'package:flutter_templet_project/extension/button_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/list_ext.dart';
 import 'package:flutter_templet_project/extension/navigator_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 
@@ -245,23 +246,26 @@ class _BottomSheetDemoState extends State<BottomSheetDemo> {
   }
 
   void onGetBottom() {
+    final actions = [
+      (
+        onTap: () {
+          ddlog('拍摄');
+          Get.back();
+        },
+        child: NText('拍摄'),
+      ),
+      (
+        onTap: () {
+          ddlog('从相册选择');
+          Get.back();
+        },
+        child: NText('从相册选择'),
+      ),
+    ];
     GetBottomSheet.showActions(
-      actions: [
-        (
-          onTap: () {
-            ddlog('拍摄');
-            Get.back();
-          },
-          child: NText('拍摄'),
-        ),
-        (
-          onTap: () {
-            ddlog('从相册选择');
-            Get.back();
-          },
-          child: NText('从相册选择'),
-        ),
-      ],
+      enableDrag: false,
+      addUnconstrainedBox: false,
+      actions: actions,
     );
   }
 
@@ -277,10 +281,12 @@ class _BottomSheetDemoState extends State<BottomSheetDemo> {
 
   void onGetBottomDialog() {
     GetBottomSheet.showCustom(
+      addUnconstrainedBox: false,
       child: SafeArea(
         bottom: false,
         child: NDialogBox(
           context: context,
+
           title: "编辑原因",
           message: "编辑原因" * 99,
           // messagePadding: EdgeInsets.symmetric(vertical: 60),
