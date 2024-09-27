@@ -8,6 +8,7 @@
 
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -62,6 +63,40 @@ extension FileExt on File {
   int get compressQuality {
     final length = lengthSync();
     return length.compressQuality;
+  }
+
+  /// 文件名称显示组件
+  Widget buildFileName({
+    TextStyle style = const TextStyle(
+      fontSize: 14,
+      color: Color(0xff737373),
+    ),
+  }) {
+    assert(path.contains("."), "文件名必须带扩展名");
+
+    final fileName = path.split("/").last;
+    final fileNameNew = fileName.split(".").firstOrNull ?? "--";
+    final ext = fileName.split(".").lastOrNull ?? "";
+
+    return Row(
+      children: [
+        Flexible(
+          child: Text(
+            fileNameNew,
+            style: style,
+            maxLines: 1,
+            textAlign: TextAlign.left,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
+        Text(
+          ".$ext",
+          style: style,
+          maxLines: 1,
+          textAlign: TextAlign.left,
+        ),
+      ],
+    );
   }
 }
 
