@@ -84,7 +84,7 @@ class _NTargetFollowerState extends State<NTargetFollower> {
         oldWidget.entries != widget.entries ||
         oldWidget.offset != widget.offset ||
         oldWidget.target != widget.target ||
-        oldWidget.followerBuilder == widget.followerBuilder;
+        oldWidget.followerBuilder != widget.followerBuilder;
     if (!canUpdate) {
       return;
     }
