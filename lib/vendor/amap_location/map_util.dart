@@ -17,6 +17,39 @@ class MapUtil {
   static String androidKey = "";
 
   /// 高德地图
+  static Future<List<({String name, String url})>> jumpMap(
+      longitude, latitude) async {
+    // 高德地图
+    var aMapUrl = '${Platform.isAndroid ? 'android' : 'ios'}'
+        'amap://navi?sourceApplication=amap&lat=$latitude&lon=$longitude&dev=0&style=2';
+    // qq地图
+    var qqMapUrl =
+        'qqmap://map/routeplan?type=drive&fromcoord=CurrentLocation&tocoord=$latitude,$longitude&referer=IXHBZ-QIZE4-ZQ6UP-DJYEO-HC2K2-EZBXJ';
+    // 百度地图
+    var baiDuUrl =
+        'baidumap://map/direction?destination=$latitude,$longitude&coord_type=bd09ll&mode=driving';
+
+    /// 苹果地图
+    var appleUrl = 'http://maps.apple.com/?&daddr=$latitude,$longitude';
+
+    final items = [
+      (name: "高德地图", url: aMapUrl),
+      (name: "腾讯地图", url: qqMapUrl),
+      (name: "百度地图", url: baiDuUrl),
+      (name: "苹果地图", url: appleUrl),
+    ];
+
+    var list = <({String name, String url})>[];
+    for (final e in items) {
+      var canLaunchUrl = await canLaunch(e.url);
+      if (canLaunchUrl) {
+        list.add(e);
+      }
+    }
+    return list;
+  }
+
+  /// 高德地图
   static Future<bool> jumpAMap(longitude, latitude) async {
     var url = '${Platform.isAndroid ? 'android' : 'ios'}'
         'amap://navi?sourceApplication=amap&lat=$latitude&lon=$longitude&dev=0&style=2';

@@ -18,6 +18,8 @@ extension TextPainterExt on TextPainter {
   }) {
     var textSpan = TextSpan(text: text, style: textStyle);
     var textPainter = TextPainter(
+      ///AUTO：华为手机如果不指定locale的时候，该方法算出来的文字高度是比系统计算偏小的。
+      locale: WidgetsBinding.instance.window.locale,
       text: textSpan,
       maxLines: maxLine,
       textDirection: TextDirection.ltr,

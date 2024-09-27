@@ -275,6 +275,9 @@ class _DataTypeDemoState extends State<DataTypeDemo>
     final resultB = a1.orEmpty + a2.orEmpty + a3.orEmpty + a4.orEmpty;
     final resultC = [a1, a2, a3, a4].removeNull();
 
+    ddlog("a1.isNotEmptyNew: ${a1.isNotEmptyNew}");
+    return;
+
     // String a5 = a4.or(Text(e));
     // final a13 = a3.map((e) => Text(e));
     // final a14 = a4.map((e) => Text(e));
@@ -376,6 +379,10 @@ class _DataTypeDemoState extends State<DataTypeDemo>
     await CacheService().set("info", info.data);
     final result = CacheService().get("info");
     ddlog("info:${result}");
+
+    Map? a1;
+    ddlog("a1.isNotEmptyNew: ${a1.isNotEmptyNew}");
+    return;
   }
 
   void onLruMap() {

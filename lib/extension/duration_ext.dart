@@ -29,6 +29,16 @@ extension DurationExt on Duration {
     return result;
   }
 
+  /// 天
+  String formatedString() {
+    final hh = '${inHours % 24}'.padLeft(2, '0');
+    final mm = '${inMinutes % 60}'.padLeft(2, '0');
+    final ss = '${inSeconds % 60}'.padLeft(2, '0');
+    var hms = '$hh:$mm:$ss';
+    final result = inDays > 0 ? '$inDays天$hms' : hms;
+    return result;
+  }
+
   /// 转为 00:00:00
   String toTimeNew() {
     String _twoDigits(int n) {

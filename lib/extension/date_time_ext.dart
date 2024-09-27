@@ -215,6 +215,23 @@ extension DateTimeExt on DateTime {
     return result ?? "";
   }
 
+  /// 日历当前页日期数组
+  List<DateTime> getCalenderCurrentPage(DateTime date) {
+    final dateList = <DateTime>[];
+    final newDate = DateTime(date.year, date.month, 0);
+    int previousMothDay = 0;
+    if (newDate.weekday < 7) {
+      previousMothDay = newDate.weekday;
+      for (var i = 1; i <= previousMothDay; i++) {
+        dateList.add(newDate.subtract(Duration(days: previousMothDay - i)));
+      }
+    }
+    for (var i = 0; i < (42 - previousMothDay); i++) {
+      dateList.add(newDate.add(Duration(days: i + 1)));
+    }
+    return dateList;
+  }
+
   // void describe() {
   //   var now = DateTime.now();
   //   var diff = this.difference(DateTime(now.year, now.month, now.day));

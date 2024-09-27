@@ -38,11 +38,28 @@ class GetBottomSheet {
   static void showCustom({
     bool enableDrag = true,
     bool addUnconstrainedBox = true,
+    bool isScrollControlled = false,
+    bool hideDragIndicator = true,
     required Widget child,
   }) {
+    if (!hideDragIndicator) {
+      child = Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const SizedBox(height: 8),
+          Container(
+            width: 40,
+            height: 3,
+            color: const Color(0xffE5E5E5),
+          ),
+          Flexible(child: child),
+        ],
+      );
+    }
+
     Widget content = Container(
       clipBehavior: Clip.hardEdge,
-      width: Get.width,
+      width: double.infinity,
       decoration: const BoxDecoration(
         color: white,
         borderRadius: BorderRadius.only(
@@ -52,15 +69,18 @@ class GetBottomSheet {
       ),
       child: child,
     );
+
     if (addUnconstrainedBox) {
       content = UnconstrainedBox(
         child: content,
       );
     }
+
     Get.bottomSheet(
       content,
       enableDrag: enableDrag,
-      isScrollControlled: true,
+      useRootNavigator: true,
+      isScrollControlled: isScrollControlled,
     );
   }
 
@@ -68,6 +88,8 @@ class GetBottomSheet {
   ///
   /// actions 每项点击事件及视图 ({VoidCallback onTap, Widget child}
   static void showActions<T extends ({VoidCallback onTap, Widget child})>({
+    bool enableDrag = true,
+    bool addUnconstrainedBox = true,
     required List<T> actions,
     VoidCallback? onCancel,
   }) {
@@ -76,6 +98,8 @@ class GetBottomSheet {
     }
 
     GetBottomSheet.showCustom(
+      enableDrag: enableDrag,
+      addUnconstrainedBox: addUnconstrainedBox,
       child: NBottomSheet(
         actions: actions,
         onCancel: onCancel,
@@ -113,6 +137,7 @@ class GetBottomSheet {
     final primary = context?.primaryColor ?? Colors.transparent;
 
     showCustom(
+      addUnconstrainedBox: false,
       child: NBottomInputBox(
         controller: controller,
         title: title,
@@ -251,22 +276,26 @@ class NBottomSheet<T extends ({VoidCallback onTap, Widget child})>
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        ...actions
-            .map((e) => buildActionCell(
-                  onTap: e.onTap,
-                  hasDivider: actions.indexOf(e) != 0,
-                  child: e.child,
-                ))
-            .toList(),
-        Container(height: 8, color: bgColor),
-        buildActionCancel(
-          onTap: onCancel ?? () => Navigator.of(context).maybePop(),
+    return Scrollbar(
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ...actions
+                .map((e) => buildActionCell(
+                      onTap: e.onTap,
+                      hasDivider: e != actions.first,
+                      child: e.child,
+                    ))
+                .toList(),
+            Container(height: 8, color: bgColor),
+            buildActionCancel(
+              onTap: onCancel ?? () => Navigator.of(context).maybePop(),
+            ),
+            SizedBox(height: Platform.isIOS ? 34 : 8),
+          ],
         ),
-        SizedBox(height: Platform.isIOS ? 34 : 8),
-      ],
+      ),
     );
   }
 
@@ -280,21 +309,21 @@ class NBottomSheet<T extends ({VoidCallback onTap, Widget child})>
     required Widget child,
     required VoidCallback? onTap,
   }) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        if (hasDivider) const Divider(height: 0.5, color: lineColor),
-        InkWell(
-          onTap: onTap,
-          child: Container(
+    return InkWell(
+      onTap: onTap,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (hasDivider) const Divider(height: 0.5, color: lineColor),
+          Container(
             width: double.infinity,
             alignment: Alignment.center,
             // color: ColorExt.random,
             padding: EdgeInsets.symmetric(vertical: 12),
             child: child,
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
@@ -383,16 +412,22 @@ class NDialogBox extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: appTheme?.titleStyle,
               ),
-          Container(
-            alignment: Alignment.center,
-            padding: messagePadding,
-            child: messageWidget ??
-                NText(
-                  message ?? "",
-                  color: fontColor,
-                  textAlign: TextAlign.center,
-                  style: appTheme?.textStyle,
+          Flexible(
+            child: Scrollbar(
+              child: SingleChildScrollView(
+                child: Container(
+                  alignment: Alignment.center,
+                  padding: messagePadding,
+                  child: messageWidget ??
+                      NText(
+                        message ?? "",
+                        color: fontColor,
+                        textAlign: TextAlign.center,
+                        style: appTheme?.textStyle,
+                      ),
                 ),
+              ),
+            ),
           ),
           bottomWidget ??
               NFooterButtonBar(
