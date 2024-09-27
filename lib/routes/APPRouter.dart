@@ -54,6 +54,7 @@ import 'package:flutter_templet_project/pages/demo/NChoiceExpansionDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NSegmentVerticalDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NTransformViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NTargetFollowerDemo.dart';
+import 'package:flutter_templet_project/pages/demo/NestedNavigatorDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PageLifecycleFuncTest.dart';
 import 'package:flutter_templet_project/pages/demo/QueueAlertDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ReflectDemo.dart';
@@ -752,6 +753,7 @@ class APPRouter {
   static const convertFlle = '/ConvertFlle';
   static const splitViewDemo = '/SplitViewDemo';
   static const directoryTestDemo = '/directoryTestDemo';
+  static const nestedNavigatorDemo = '/nestedNavigatorDemo';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -2223,6 +2225,10 @@ class AppPage {
     GetPage(
       name: APPRouter.directoryTestDemo,
       page: () => DirectoryTestDemo(),
+    ),
+    GetPage(
+      name: APPRouter.nestedNavigatorDemo,
+      page: () => NestedNavigatorDemo(),
     ),
   ];
 }
