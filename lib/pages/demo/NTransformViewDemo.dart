@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
-import 'package:flutter_templet_project/basicWidget/n_transform_view.dart';
+import 'package:flutter_templet_project/basicWidget/n_convert_view.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:get/get.dart';
 
@@ -18,7 +18,7 @@ class NTransformViewDemo extends StatefulWidget {
 
 class _NTransformViewDemoState extends State<NTransformViewDemo> {
   bool get hideApp =>
-    "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
+      "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
 
   Map<String, dynamic> arguments = Get.arguments ?? <String, dynamic>{};
 
@@ -53,7 +53,7 @@ class _NTransformViewDemoState extends State<NTransformViewDemo> {
                       ))
                   .toList(),
             ),
-      body: NTransformView(
+      body: NConvertView(
         controller: transformViewController,
         title: NText(
           '测试',

@@ -15,8 +15,8 @@ import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 
 /// 字符串转文件
-class NTransformView extends StatefulWidget {
-  NTransformView({
+class NConvertView extends StatefulWidget {
+  NConvertView({
     super.key,
     this.controller,
     this.title,
@@ -48,10 +48,10 @@ class NTransformView extends StatefulWidget {
   final Widget Function(BuildContext context) toolbarBuilder;
 
   @override
-  NTransformViewState createState() => NTransformViewState();
+  NConvertViewState createState() => NConvertViewState();
 }
 
-class NTransformViewState extends State<NTransformView> {
+class NConvertViewState extends State<NConvertView> {
   final _textEditingController = TextEditingController();
   final _focusNode = FocusNode();
 
@@ -284,13 +284,13 @@ class NTransformViewState extends State<NTransformView> {
 }
 
 class NTransformViewController {
-  NTransformViewState? _anchor;
+  NConvertViewState? _anchor;
 
-  void _attach(NTransformViewState anchor) {
+  void _attach(NConvertViewState anchor) {
     _anchor = anchor;
   }
 
-  void _detach(NTransformViewState anchor) {
+  void _detach(NConvertViewState anchor) {
     if (_anchor == anchor) {
       _anchor = null;
     }
