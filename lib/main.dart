@@ -176,7 +176,10 @@ class MyApp extends StatelessWidget {
       initialRoute: AppPage.INITIAL,
       getPages: AppPage.routes,
       unknownRoute: AppPage.unknownRoute,
-      navigatorObservers: [AppRouteObserver().routeObserver],
+      navigatorObservers: [
+        AppRouteObserver().routeObserver,
+        CustomRouteObserver(),
+      ],
       routingCallback: AppRouteObserver().routingCallback ??
           (routing) {
             // if (routing != null) {
