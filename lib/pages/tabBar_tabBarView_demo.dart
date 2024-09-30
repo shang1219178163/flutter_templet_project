@@ -544,6 +544,7 @@ var list = <Tuple2<String, String>>[
   Tuple2(APPRouter.splitViewDemo, "splitViewDemo"),
   Tuple2(APPRouter.directoryTestDemo, "directoryTestDemo"),
   Tuple2(APPRouter.nestedNavigatorDemo, "nestedNavigatorDemo"),
+  Tuple2(APPRouter.nTweenTransitionDemo, "nTweenTransitionDemo"),
 ];
 
 var slivers = <Tuple2<String, String>>[
