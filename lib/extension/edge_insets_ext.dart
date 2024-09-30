@@ -47,13 +47,6 @@ extension EdgeInsetsExt on EdgeInsets {
     final rightOffset = shadowRadius + shadow.offset.dx;
     final leftOffset = shadowRadius - shadow.offset.dx;
 
-    // final marginNew = EdgeInsets.only(
-    //   top: top + topOffset,
-    //   bottom: bottom + bottomOffset,
-    //   right: right + rightOffset,
-    //   left: left + leftOffset,
-    // );
-
     final marginNew = EdgeInsets.only(
       top: max(top, topOffset),
       bottom: max(bottom, bottomOffset),
