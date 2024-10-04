@@ -43,6 +43,7 @@ import 'package:flutter_templet_project/pages/demo/FlutterPickerUtilDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FormDemo.dart';
 import 'package:flutter_templet_project/pages/demo/GetxControllerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/GetxRouteCreatePage.dart';
+import 'package:flutter_templet_project/pages/demo/HapticFeedbackDemo.dart';
 import 'package:flutter_templet_project/pages/demo/HomeNavDemo.dart';
 import 'package:flutter_templet_project/pages/demo/IconConvertPage.dart';
 import 'package:flutter_templet_project/pages/demo/ListBodyDemo.dart';
@@ -756,6 +757,7 @@ class APPRouter {
   static const directoryTestDemo = '/directoryTestDemo';
   static const nestedNavigatorDemo = '/nestedNavigatorDemo';
   static const nTweenTransitionDemo = '/nTweenTransitionDemo';
+  static const hapticFeedbackDemo = '/hapticFeedbackDemo';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -2235,6 +2237,10 @@ class AppPage {
     GetPage(
       name: APPRouter.nTweenTransitionDemo,
       page: () => NTweenTransitionDemo(),
+    ),
+    GetPage(
+      name: APPRouter.hapticFeedbackDemo,
+      page: () => HapticFeedbackDemo(),
     ),
   ];
 }
