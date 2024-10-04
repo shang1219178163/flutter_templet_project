@@ -219,6 +219,15 @@ dependency_overrides:
   # 修复 SUPPRESS_ERROR_PAGE https://github.com/pichillilorenzo/flutter_inappwebview/issues/2150
   webview_flutter_android: 3.16.1
 
+  url_launcher_ios: ^6.3.1
+
+  flutter_inappwebview_ios:
+    git:
+      url: https://github.com/andychucs/flutter_inappwebview.git
+      ref: master
+      path: flutter_inappwebview_ios
+
+
 # User:
 #   path: ../User
 
