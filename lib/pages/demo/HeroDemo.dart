@@ -107,24 +107,28 @@ class _HeroDemoState extends State<HeroDemo> {
     required Widget child,
   }) {
     //打开B路由
-    Navigator.push(context, PageRouteBuilder(
-      pageBuilder: (
-        context,
-        animation,
-        secondaryAnimation,
-      ) {
-        return FadeTransition(
-          opacity: animation,
-          child: HeroAnimationDetailPage(
-            heroTag: heroTag,
-            onTap: () {
-              Navigator.of(context).pop();
-            },
-            child: child,
-          ),
-        );
-      },
-    ));
+    pushPage(
+      page: HeroAnimationDetailPage(
+        heroTag: heroTag,
+        onTap: () {
+          Navigator.of(context).pop();
+        },
+        child: child,
+      ),
+    );
+  }
+
+  pushPage({
+    required Widget page,
+  }) {
+    Navigator.push(
+      context,
+      PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) {
+          return FadeTransition(opacity: animation, child: page);
+        },
+      ),
+    );
   }
 }
 

@@ -8,8 +8,8 @@
 
 import 'package:flutter/cupertino.dart';
 
-class FadeRoute extends PageRoute {
-  FadeRoute({
+class NFadePageRoute extends PageRoute {
+  NFadePageRoute({
     required this.builder,
     this.transitionDuration = const Duration(milliseconds: 300),
     this.opaque = true,
@@ -17,6 +17,7 @@ class FadeRoute extends PageRoute {
     this.barrierColor,
     this.barrierLabel,
     this.maintainState = true,
+    this.needFadeTransition = true,
   });
 
   @override
@@ -37,6 +38,10 @@ class FadeRoute extends PageRoute {
   @override
   final bool maintainState;
 
+  /// 需要 FadeTransition
+  final bool needFadeTransition;
+
+  /// 构造器
   final WidgetBuilder builder;
 
   @override
@@ -51,6 +56,11 @@ class FadeRoute extends PageRoute {
     if (!isActive) {
       return builder(context);
     }
+
+    if (!needFadeTransition) {
+      return builder(context);
+    }
+
     return FadeTransition(
       opacity: animation,
       child: builder(context),
