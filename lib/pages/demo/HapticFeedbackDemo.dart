@@ -8,6 +8,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/type_util.dart';
 import 'package:get/get.dart';
 
@@ -71,7 +72,7 @@ class _HapticFeedbackDemoState extends State<HapticFeedbackDemo> {
                 padding: const EdgeInsets.only(top: 8.0),
                 child: ElevatedButton(
                   onPressed: () async {
-                    await e.action;
+                    onHaptic(e.name);
                   },
                   child: Text(e.name),
                 ),
@@ -81,5 +82,29 @@ class _HapticFeedbackDemoState extends State<HapticFeedbackDemo> {
         ),
       ),
     );
+  }
+
+  /// 点击反馈
+  Future<void> onHaptic(String name) async {
+    switch (name) {
+      case "vibrate":
+        await HapticFeedback.vibrate();
+        break;
+      case "lightImpact":
+        await HapticFeedback.lightImpact();
+        break;
+      case "mediumImpact":
+        await HapticFeedback.mediumImpact();
+        break;
+      case "heavyImpact":
+        await HapticFeedback.heavyImpact();
+        break;
+      case "selectionClick":
+        await HapticFeedback.selectionClick();
+        break;
+      default:
+        DLog.d("name: $name");
+        break;
+    }
   }
 }
