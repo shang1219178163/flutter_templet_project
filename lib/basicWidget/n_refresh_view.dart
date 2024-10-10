@@ -252,10 +252,7 @@ class NRefreshViewState<T> extends State<NRefreshView<T>>
       valueListenable: items,
       builder: (context, list, child) {
         if (list.isEmpty) {
-          return widget.placeholder ??
-              NPlaceholder(
-                onTap: onRefresh,
-              );
+          return widget.placeholder ?? NPlaceholder(onTap: onRefresh);
         }
 
         return buildRefresh(
@@ -326,11 +323,6 @@ class NRefreshViewState<T> extends State<NRefreshView<T>>
         key: widget.listViewKey,
         controller: controller,
         itemCount: itemCount,
-        // itemBuilder: (context, index) => widget.itemBuilder(
-        //   context,
-        //   index,
-        //   items[index],
-        // ),
         itemBuilder: (context, index) {
           if (index == 0) {
             return widget.headerBuilder?.call(items.length) ?? const SizedBox();
@@ -341,18 +333,11 @@ class NRefreshViewState<T> extends State<NRefreshView<T>>
           }
 
           final i = index - 1;
-          return widget.itemBuilder(
-            context,
-            i,
-            items[i],
-          );
+          return widget.itemBuilder(context, i, items[i]);
         },
         separatorBuilder: widget.separatorBuilder ??
             (context, index) {
-              return const Divider(
-                color: Color(0xffe4e4e4),
-                height: 1,
-              );
+              return const Divider(color: Color(0xffe4e4e4), height: 0.5);
             },
       ),
     );
