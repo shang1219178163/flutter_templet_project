@@ -1,41 +1,29 @@
+//
+//  GetUtil.dart
+//  flutter_templet_project
+//
+//  Created by shang on 2024/10/10 17:42.
+//  Copyright © 2024/10/10 shang. All rights reserved.
+//
+
 import 'dart:io';
 import 'dart:math';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/APPThemeSettings.dart';
 import 'package:flutter_templet_project/basicWidget/n_footer_button_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/n_textfield.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
-import 'package:flutter_templet_project/pages/demo/FlexibleDemo.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:get/get.dart';
-import 'package:tuple/tuple.dart';
-
-/// 自定义路由函数封装
-extension GetRouteUtil on GetInterface {
-  /// 当前路由堆栈是否包含此路由
-  bool hasRoute(String routeName) {
-    final routes = Get.routeTree.routes.reversed;
-    for (final route in routes) {
-      if (route.name == routeName) {
-        return true;
-      }
-    }
-    return false;
-  }
-}
 
 /// Get.bottomSheet 封装类
 class GetBottomSheet {
   /// 弹框 - 自定义child
-  static void showCustom({
+  static Future<dynamic> showCustom({
     bool enableDrag = true,
     bool addUnconstrainedBox = true,
     bool isScrollControlled = false,
@@ -76,7 +64,7 @@ class GetBottomSheet {
       );
     }
 
-    Get.bottomSheet(
+    return Get.bottomSheet(
       content,
       enableDrag: enableDrag,
       useRootNavigator: true,
@@ -117,7 +105,7 @@ class GetBottomSheet {
   /// header 输入框上面
   /// middle 输入框下面
   /// footer 取消和确定按钮下面
-  static void showInput({
+  static Future<dynamic> showInput({
     required TextEditingController controller,
     String title = "编辑原因",
     int lengthLimit = 200,
@@ -136,7 +124,7 @@ class GetBottomSheet {
     final context = Get.context;
     final primary = context?.primaryColor ?? Colors.transparent;
 
-    showCustom(
+    return showCustom(
       addUnconstrainedBox: false,
       child: NBottomInputBox(
         controller: controller,
@@ -155,7 +143,7 @@ class GetBottomSheet {
 
 class GetDialog {
   /// 弹框 - 自定义child
-  static void showCustom({
+  static Future<dynamic> showCustom({
     bool enableDrag = false,
     bool needUnconstrainedBox = false,
     BoxConstraints? constraints,
@@ -207,9 +195,50 @@ class GetDialog {
         child: content,
       );
     }
-    Get.dialog(
+    return Get.dialog(
       content,
       barrierDismissible: false,
+    );
+  }
+
+  static Future<dynamic> showConfirm({
+    required String title,
+    required String message,
+    bool hideCancel = false,
+    VoidCallback? onConfirm,
+    VoidCallback? onCancel,
+  }) async {
+    return GetDialog.showCustom(
+      header: Container(
+        height: 44,
+        decoration: BoxDecoration(
+          color: Colors.transparent,
+          border: Border(
+            bottom: BorderSide(width: .5, color: Color(0xffE5E5E5)),
+          ),
+        ),
+        child: NavigationToolbar(
+          middle: Text(
+            title,
+            style: TextStyle(fontWeight: FontWeight.w500),
+          ),
+        ),
+      ),
+      footer: NFooterButtonBar(
+        hideCancel: hideCancel,
+        onCancel: onCancel ??
+            () {
+              Get.back();
+            },
+        onConfirm: onConfirm ??
+            () {
+              Get.back();
+            },
+      ),
+      child: Text(
+        message,
+        style: TextStyle(fontWeight: FontWeight.w400),
+      ),
     );
   }
 
@@ -223,7 +252,7 @@ class GetDialog {
   /// header 输入框上面
   /// middle 输入框下面
   /// footer 取消和确定按钮下面
-  static void showInput({
+  static Future<dynamic> showInput({
     BoxConstraints? constraints,
     required TextEditingController controller,
     String title = "编辑原因",
@@ -243,7 +272,7 @@ class GetDialog {
     final context = Get.context;
     final primary = context?.primaryColor ?? Colors.transparent;
 
-    showCustom(
+    return showCustom(
       constraints: constraints,
       enableDrag: false,
       child: NBottomInputBox(
