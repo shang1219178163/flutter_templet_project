@@ -55,7 +55,11 @@ extension ColorExt on Color {
   ///随机颜色
   static Color get random {
     return Color.fromRGBO(
-        Random().nextInt(256), Random().nextInt(256), Random().nextInt(256), 1);
+      Random().nextInt(256),
+      Random().nextInt(256),
+      Random().nextInt(256),
+      1,
+    );
   }
 
   /// 十六进制转颜色
@@ -94,13 +98,8 @@ extension ColorExt on Color {
   }
 
   ///转渐进色
-  Gradient? toGradient() => LinearGradient(colors: [
-        this,
-        this,
-      ], stops: const [
-        0.0,
-        1
-      ]);
+  Gradient? toGradient() =>
+      LinearGradient(colors: [this, this], stops: const [0.0, 1]);
 
   Color randomOpacity() {
     return withOpacity(Random().nextInt(100) / 100);

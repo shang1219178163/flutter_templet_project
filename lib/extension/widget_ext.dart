@@ -21,10 +21,7 @@ import 'package:flutter_templet_project/extension/ddlog.dart';
 extension WidgetExt on Widget {
   ///运算符重载
   List<Widget> operator *(int value) {
-    var l = <Widget>[];
-    for (var i = 0; i < value; i++) {
-      l.add(this);
-    }
+    var l = List<Widget>.generate(value, (index) => this);
     return l;
   }
 
