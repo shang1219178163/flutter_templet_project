@@ -217,6 +217,7 @@ class _NChoiceFilterBoxState extends State<NChoiceFilterBox>
     if (!isChange) {
       return;
     }
+    widget.controller?._attach(this);
     setState(() {});
   }
 
