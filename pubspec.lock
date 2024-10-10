@@ -41,6 +41,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.5.0"
+  asn1lib:
+    dependency: transitive
+    description:
+      name: asn1lib
+      sha256: "6b151826fcc95ff246cd219a0bf4c753ea14f4081ad71c61939becf3aba27f70"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.5.5"
   async:
     dependency: transitive
     description:
@@ -394,7 +402,7 @@ packages:
     source: hosted
     version: "0.3.3+8"
   crypto:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: crypto
       sha256: ff625774173754681d66daaf4a448684fb04b78f902da9cb3d308c19cc5e8bab
@@ -529,6 +537,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "3.3.4"
+  encrypt:
+    dependency: "direct main"
+    description:
+      name: encrypt
+      sha256: "62d9aa4670cc2a8798bab89b39fc71b6dfbacf615de6cf5001fb39f7e4a996a2"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "5.0.3"
   enhance_expansion_panel:
     dependency: "direct main"
     description:
@@ -752,14 +768,13 @@ packages:
     source: hosted
     version: "1.1.1"
   flutter_inappwebview_ios:
-    dependency: "direct overridden"
+    dependency: transitive
     description:
-      path: flutter_inappwebview_ios
-      ref: master
-      resolved-ref: "615214fb2fd3f830955d526cfb6698d6e20b7b7a"
-      url: "https://github.com/andychucs/flutter_inappwebview.git"
-    source: git
-    version: "1.0.14"
+      name: flutter_inappwebview_ios
+      sha256: f363577208b97b10b319cd0c428555cd8493e88b468019a8c5635a0e4312bd0f
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.13"
   flutter_inappwebview_macos:
     dependency: transitive
     description:

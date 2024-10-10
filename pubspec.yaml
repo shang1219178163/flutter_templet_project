@@ -48,6 +48,8 @@ dependencies:
   fluttertoast: ^8.0.7
   flutter_easyloading: ^3.0.5
 
+  encrypt: ^5.0.0
+  crypto: ^3.0.0
 
 #  flutter_local_notifications: ^5.0.0+4
   url_launcher: ^6.0.4
@@ -221,11 +223,11 @@ dependency_overrides:
 
   url_launcher_ios: ^6.3.1
 
-  flutter_inappwebview_ios:
-    git:
-      url: https://github.com/andychucs/flutter_inappwebview.git
-      ref: master
-      path: flutter_inappwebview_ios
+#  flutter_inappwebview_ios:
+#    git:
+#      url: https://github.com/andychucs/flutter_inappwebview.git
+#      ref: master
+#      path: flutter_inappwebview_ios
 
 
 # User:
