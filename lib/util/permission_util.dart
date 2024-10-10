@@ -8,12 +8,13 @@
 
 import 'dart:io';
 
-import 'package:flutter/cupertino.dart';
 import 'package:device_info_plus/device_info_plus.dart';
-
-import 'package:flutter_templet_project/cache/cache_service.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_templet_project/util/get_util.dart';
+import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+/// 权限管理
 class PermissionUtil {
   /// [源方法]检查权限
   /// permission - Permission.camera/Permission.photos ...
@@ -25,12 +26,9 @@ class PermissionUtil {
       PermissionStatus.granted,
       PermissionStatus.limited,
     ],
-
-    /// 权限名称
     VoidCallback? onConfirm,
   }) async {
     var status = await permission.status;
-
     final isGranted = statuses.contains(status);
     if (isGranted) {
       return true;
@@ -41,14 +39,15 @@ class PermissionUtil {
     ].request();
 
     if (!statuses.contains(statusMap[permission])) {
-      // GetDialog.showConfirm(
-      //     title: '提示',
-      //     message: '$name权限被禁用，请到设置中打开',
-      //     confirm: onConfirm ??
-      //             () {
-      //           Get.back();
-      //           openAppSettings();
-      //         });
+      GetDialog.showConfirm(
+        title: '提示',
+        message: '$name权限被禁用，请到设置中打开',
+        onConfirm: onConfirm ??
+            () {
+              Get.back();
+              openAppSettings();
+            },
+      );
       return false;
     }
 
@@ -67,10 +66,6 @@ class PermissionUtil {
 
   /// 检查相册权限
   static Future<bool> checkPhotoAlbum({VoidCallback? onConfirm}) async {
-    if ([Platform.isIOS, Platform.isAndroid].contains(true) == false) {
-      return true;
-    }
-
     if (Platform.isIOS) {
       var permission = Permission.photos;
       return PermissionUtil.check(
@@ -83,9 +78,9 @@ class PermissionUtil {
     var deviceInfo = DeviceInfoPlugin();
     var androidInfo = await deviceInfo.androidInfo;
     // debugPrint('设备信息：$androidInfo');
-    int sdkInt = androidInfo.version.sdkInt;
+    var sdkInt = androidInfo.version.sdkInt;
     var permission = sdkInt < 33 ? Permission.storage : Permission.photos;
-    return await PermissionUtil.check(
+    return PermissionUtil.check(
       permission: permission,
       name: "相册",
       onConfirm: onConfirm,
@@ -103,52 +98,32 @@ class PermissionUtil {
         Permission.microphone,
       ].request();
 
-      debugPrint('statusMap: $statusMap');
+      final deniedCamera = [
+        PermissionStatus.permanentlyDenied,
+        PermissionStatus.denied,
+      ].contains(statusMap[Permission.camera]);
+
+      final deniedMicro = [
+        PermissionStatus.permanentlyDenied,
+        PermissionStatus.denied,
+      ].contains(statusMap[Permission.microphone]);
+
       // 这里针对华为手机，华为手机禁用权限一次之后为永久禁用，去要跳转到设置中打开
       // 安卓手机禁用后，下次还会唤起权限选择
-      // if (statuses[Permission.camera] == PermissionStatus.permanentlyDenied &&
-      //     statuses[Permission.microphone] == PermissionStatus.permanentlyDenied) {
-      //   GetDialog.showConfirm(
-      //       title: '提示',
-      //       message: '相机和麦克风的权限被禁用，请到设置中打开',
-      //       confirm: () {
-      //         Get.back();
-      //         openAppSettings();
-      //       });
-      //   return false;
-      // }
-
-      if (statusMap[Permission.camera] == PermissionStatus.permanentlyDenied ||
-          statusMap[Permission.camera] == PermissionStatus.denied ||
-          statusMap[Permission.microphone] ==
-              PermissionStatus.permanentlyDenied ||
-          statusMap[Permission.microphone] == PermissionStatus.denied) {
-        // GetDialog.showConfirm(
-        //     title: '提示',
-        //     message: '相机/麦克风权限被禁用，请到设置中打开',
-        //     confirm: () {
-        //       Get.back();
-        //       openAppSettings();
-        //     });
+      if (deniedCamera || deniedMicro) {
+        GetDialog.showConfirm(
+          title: '提示',
+          message: '相机/麦克风权限被禁用，请到设置中打开',
+          onConfirm: () {
+            Get.back();
+            openAppSettings();
+          },
+        );
         return false;
       }
 
-      // if (statuses[Permission.microphone] == PermissionStatus.permanentlyDenied) {
-      //   GetDialog.showConfirm(
-      //       title: '提示',
-      //       message: '麦克风权限被禁用，请到设置中打开',
-      //       confirm: () {
-      //         Get.back();
-      //         openAppSettings();
-      //       });
-      //   return false;
-      // }
-
-      if (statusMap[Permission.camera] == PermissionStatus.granted) {
-        return true;
-      } else {
-        return false;
-      }
+      final result = statusMap[Permission.camera] == PermissionStatus.granted;
+      return result;
     } else {
       return true;
     }
@@ -156,32 +131,32 @@ class PermissionUtil {
 
   ///检查麦克风权限
   static Future<bool> checkMicrophone({VoidCallback? onConfirm}) async {
-    var microphoneStatusIsGranted =
-        await Permission.microphone.status.isGranted;
-    if (!microphoneStatusIsGranted) {
+    var isGranted = await Permission.microphone.status.isGranted;
+    if (!isGranted) {
       var statusMap = await [
         Permission.microphone,
       ].request();
 
-      if (statusMap[Permission.microphone] ==
-              PermissionStatus.permanentlyDenied ||
-          statusMap[Permission.microphone] == PermissionStatus.denied) {
-        // GetDialog.showConfirm(
-        //     title: '提示',
-        //     message: '麦克风权限被禁用，请到设置中打开',
-        //     confirm: () {
-        //       onConfirm?.call();
-        //       Get.back();
-        //       openAppSettings();
-        //     });
+      final deniedCamera = [
+        PermissionStatus.permanentlyDenied,
+        PermissionStatus.denied,
+      ].contains(statusMap[Permission.microphone]);
+      if (deniedCamera) {
+        GetDialog.showConfirm(
+          title: '提示',
+          message: '麦克风权限被禁用，请到设置中打开',
+          onConfirm: onConfirm ??
+              () {
+                Get.back();
+                openAppSettings();
+              },
+        );
         return false;
       }
 
-      if (statusMap[Permission.microphone] == PermissionStatus.granted) {
-        return true;
-      } else {
-        return false;
-      }
+      final result =
+          statusMap[Permission.microphone] == PermissionStatus.granted;
+      return result;
     } else {
       return true;
     }
@@ -189,46 +164,41 @@ class PermissionUtil {
 
   /// 检查位置权限
   static Future<bool> checkLocation() async {
-    final permi = Permission.location;
-    var isGranted = await permi.status.isGranted;
-    var isPermanentlyDenied = await permi.status.isPermanentlyDenied;
-    int getCount = CacheService().getInt("getCount") ?? 0;
-    if (!isGranted) {
-      Map<Permission, PermissionStatus> statuses = {};
-      if (!isPermanentlyDenied) {
-        statuses = await [Permission.location].request();
-      }
-
-      if (statuses[Permission.location] == PermissionStatus.permanentlyDenied ||
-          statuses[Permission.location] == PermissionStatus.denied) {
-        CacheService().setInt("getCount", getCount + 1);
-        if (getCount > 0) {
-          // GetDialog.showConfirm(
-          //     title: '提示',
-          //     message: '位置权限被禁用，请在设置-应用管理-执业版中开启位置权限，以正常使用定位功能',
-          //     confirm: () {
-          //       Get.back();
-          //       openAppSettings();
-          //     },
-          //     cancel: () {});
-          return false;
-        }
-      }
-
-      if (statuses[Permission.location] == PermissionStatus.granted) {
-        return true;
-      } else {
-        return false;
-      }
-    } else {
+    final perm = Permission.location;
+    var isGranted = await perm.status.isGranted;
+    if (isGranted) {
       return true;
     }
+    // var isPermanentlyDenied = await perm.status.isPermanentlyDenied;
+    var statuses = await [
+      Permission.location,
+    ].request();
+
+    final isDenied = [
+      PermissionStatus.permanentlyDenied,
+      PermissionStatus.denied,
+    ].contains(statuses[Permission.location]);
+
+    if (isDenied) {
+      GetDialog.showConfirm(
+        title: '提示',
+        message: '位置权限被禁用，请在设置-应用管理-执业版中开启位置权限，以正常使用定位功能',
+        onConfirm: () {
+          Get.back();
+          openAppSettings();
+        },
+      );
+      return false;
+    }
+
+    final result = statuses[Permission.location] == PermissionStatus.granted;
+    return result;
   }
 
   /// 检查安装权限
   static Future<bool> checkInstall({VoidCallback? onConfirm}) async {
-    Permission permission = Permission.requestInstallPackages;
-    return await PermissionUtil.check(
+    var permission = Permission.requestInstallPackages;
+    return PermissionUtil.check(
       permission: permission,
       name: "文件管理被禁止安装应用，可在系统设置中修改安装未知应用权限",
       onConfirm: onConfirm,
@@ -240,14 +210,10 @@ class PermissionUtil {
     if (Platform.isIOS) {
       return true;
     }
-    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
-    AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
-    int sdkInt = androidInfo.version.sdkInt;
-    Permission permission =
-        sdkInt < 33 ? Permission.storage : Permission.photos;
-    return check(
-      permission: permission,
-      name: '文件',
-    );
+    var deviceInfo = DeviceInfoPlugin();
+    var androidInfo = await deviceInfo.androidInfo;
+    var sdkInt = androidInfo.version.sdkInt;
+    var permission = sdkInt < 33 ? Permission.storage : Permission.photos;
+    return check(permission: permission, name: '文件');
   }
 }
