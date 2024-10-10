@@ -255,6 +255,7 @@ class _AppTabPageState extends State<AppTabPage>
   void onTapBar(int index) {
     /*如果点击的导航项不是当前项  切换 */
     if (index != currentIndex) {
+      appController.tabIndexVN.value = index;
       currentIndex = index;
       ddlog(currentIndex);
       setState(() {});

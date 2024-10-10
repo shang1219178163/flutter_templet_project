@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_templet_project/cache/cache_service.dart';
 import 'package:flutter_templet_project/routes/APPRouter.dart';
 import 'package:get/get.dart';
@@ -24,6 +25,27 @@ class AppTabBarController extends GetxController {
   /// 全局 app 前后台切换
   var appState = AppLifecycleState.resumed.obs;
   var appStateVN = ValueNotifier(AppLifecycleState.resumed);
+
+  var tabIndexVN = ValueNotifier(0);
+
+  /// tab 索引变化监听
+  ValueChanged<int>? tabIndexChanged;
+
+  @override
+  void onClose() {
+    tabIndexVN.removeListener(tabIndexChangedLtr);
+    super.onClose();
+  }
+
+  @override
+  void onInit() {
+    super.onInit();
+    tabIndexVN.addListener(tabIndexChangedLtr);
+  }
+
+  void tabIndexChangedLtr() {
+    tabIndexChanged?.call(tabIndexVN.value);
+  }
 
   /// 返回 appTabPage
   void backTabPage() {
