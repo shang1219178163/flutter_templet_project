@@ -296,6 +296,7 @@ import 'package:flutter_templet_project/pages/demo/smart_dialog_demo.dart';
 import 'package:flutter_templet_project/pages/demo/steper_connector_demo.dart';
 import 'package:flutter_templet_project/pages/demo/data_type_demo.dart';
 import 'package:flutter_templet_project/pages/demo/test_page.dart';
+import 'package:flutter_templet_project/pages/demo/webview_demo.dart';
 import 'package:flutter_templet_project/pages/demo/will_pop_scope_demo.dart';
 import 'package:flutter_templet_project/pages/demo/homeSrollDemo.dart';
 import 'package:flutter_templet_project/pages/demo/keyboard_attach_demo.dart';
@@ -328,6 +329,7 @@ import 'package:flutter_templet_project/vendor/SVGAImageDemo.dart';
 import 'package:flutter_templet_project/vendor/ScribbleDemo.dart';
 import 'package:flutter_templet_project/vendor/SlidableDemoOne.dart';
 import 'package:flutter_templet_project/vendor/VisibilityDetectorDemo.dart';
+import 'package:flutter_templet_project/vendor/app_webView_page.dart';
 import 'package:flutter_templet_project/vendor/audioplayers/audio_play_page.dart';
 import 'package:flutter_templet_project/vendor/azlistview/azlistview_demo.dart';
 import 'package:flutter_templet_project/vendor/color_converter_demo.dart';
@@ -758,6 +760,7 @@ class APPRouter {
   static const nestedNavigatorDemo = '/nestedNavigatorDemo';
   static const nTweenTransitionDemo = '/nTweenTransitionDemo';
   static const hapticFeedbackDemo = '/hapticFeedbackDemo';
+  static const webviewDemo = '/webviewDemo';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -2241,6 +2244,10 @@ class AppPage {
     GetPage(
       name: APPRouter.hapticFeedbackDemo,
       page: () => HapticFeedbackDemo(),
+    ),
+    GetPage(
+      name: APPRouter.webviewDemo,
+      page: () => WebviewDemo(),
     ),
   ];
 }
