@@ -54,7 +54,7 @@ class _PromptBuilderDemoState extends State<PromptBuilderDemo>
             ),
             Text(
               '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+              style: Theme.of(context).textTheme.headlineMedium,
             ),
           ],
         ),

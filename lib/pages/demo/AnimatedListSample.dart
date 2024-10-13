@@ -176,7 +176,7 @@ class CardItem extends StatelessWidget {
   ///
   @override
   Widget build(BuildContext context) {
-    var textStyle = Theme.of(context).textTheme.button;
+    var textStyle = Theme.of(context).textTheme.labelLarge;
     if (selected) {
       textStyle = textStyle?.copyWith(color: Colors.lightGreenAccent[400]);
     }

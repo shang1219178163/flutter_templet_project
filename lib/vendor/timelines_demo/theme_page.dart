@@ -76,7 +76,7 @@ class _ThemePageState extends State<ThemePage> {
                     children: [
                       Text(
                         'TimelineTheme',
-                        style: Theme.of(context).textTheme.headline6,
+                        style: Theme.of(context).textTheme.titleLarge,
                       ),
                       _ThemeDropdown(
                         title: 'Direction',
@@ -142,7 +142,7 @@ class _ThemePageState extends State<ThemePage> {
                     children: [
                       Text(
                         'IndicatorTheme',
-                        style: Theme.of(context).textTheme.headline6,
+                        style: Theme.of(context).textTheme.titleLarge,
                       ),
                       _ThemeDropdown<Color?>(
                         title: 'Color',
@@ -194,7 +194,7 @@ class _ThemePageState extends State<ThemePage> {
                     children: [
                       Text(
                         'ConnectorTheme',
-                        style: Theme.of(context).textTheme.headline6,
+                        style: Theme.of(context).textTheme.titleLarge,
                       ),
                       _ThemeDropdown<Color?>(
                         title: 'Color',

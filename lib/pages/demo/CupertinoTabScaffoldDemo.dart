@@ -71,7 +71,7 @@ class OnePage extends StatelessWidget {
       child: Center(
         child: Text(
           'This is 主⻚ layout',
-          style: Theme.of(context).textTheme.button,
+          style: Theme.of(context).textTheme.labelLarge,
         ),
       ),
     );
@@ -93,7 +93,7 @@ class TwoPage extends StatelessWidget {
       child: Center(
         child: Text(
           'This is 聊天面板 layout',
-          style: Theme.of(context).textTheme.button,
+          style: Theme.of(context).textTheme.labelLarge,
         ),
       ),
     );
@@ -115,7 +115,7 @@ class ThreePage extends StatelessWidget {
       child: Center(
         child: Text(
           'This is 聊天面板 layout',
-          style: Theme.of(context).textTheme.button,
+          style: Theme.of(context).textTheme.labelLarge,
         ),
       ),
     );

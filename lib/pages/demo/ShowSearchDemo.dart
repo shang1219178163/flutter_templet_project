@@ -142,7 +142,7 @@ class CustomSearchDelegate extends SearchDelegate<String> {
                 leading: Icon(Icons.message),
                 title: Text(
                   e,
-                  style: Theme.of(context).textTheme.headline6,
+                  style: Theme.of(context).textTheme.titleLarge,
                 ),
                 onTap: () {
                   query = e;
