@@ -21,6 +21,8 @@ class AeJudgeItem extends StatelessWidget {
     this.keyName,
     required this.isYes,
     this.onChanged,
+    this.numPerRow = 4,
+    this.itemPadding,
     this.enable = true,
     this.header,
     this.footer,
@@ -30,6 +32,11 @@ class AeJudgeItem extends StatelessWidget {
   final String? title;
 
   final String? keyName;
+
+  /// 每列数
+  final int numPerRow;
+
+  final EdgeInsets? itemPadding;
 
   final ValueNotifier<bool?> isYes;
 
@@ -83,7 +90,8 @@ class AeJudgeItem extends StatelessWidget {
       primaryColor: context.primaryColor,
       backgroundColor: Colors.white,
       selectedColor: Colors.white,
-      numPerRow: 4,
+      numPerRow: numPerRow,
+      itemPadding: itemPadding,
       style: const TextStyle(
         color: fontColorB3B3B3,
         fontSize: 14,

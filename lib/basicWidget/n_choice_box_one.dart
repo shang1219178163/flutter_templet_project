@@ -29,6 +29,7 @@ class NChoiceBoxOne<T> extends StatefulWidget {
     this.onChanged,
     required this.canChanged,
     this.primaryColor = Colors.blue,
+    this.itemPadding,
     this.avatar,
     this.avatarSelected,
     this.style,
@@ -50,6 +51,7 @@ class NChoiceBoxOne<T> extends StatefulWidget {
   final int numPerRow;
 
   final Color primaryColor;
+  final EdgeInsets? itemPadding;
 
   final double spacing;
   final double runSpacing;
@@ -170,10 +172,12 @@ class _NChoiceBoxOneState<T> extends State<NChoiceBoxOne<T>> {
         onTap(e: e, isSelected: isSelected);
       },
       child: Container(
-        padding: const EdgeInsets.symmetric(
-          vertical: 4,
-          horizontal: 10,
-        ),
+        alignment: Alignment.centerLeft,
+        padding: widget.itemPadding ??
+            const EdgeInsets.symmetric(
+              vertical: 4,
+              horizontal: 10,
+            ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(4)),
           // border: Border.all(color: Colors.blue),
