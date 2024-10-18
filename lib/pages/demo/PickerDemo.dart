@@ -1,20 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/PickerUtil.dart';
+import 'package:flutter_templet_project/basicWidget/n_pick_users_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_picker_list_view.dart';
 import 'package:flutter_templet_project/basicWidget/n_picker_tool_bar.dart';
-import 'package:flutter_templet_project/basicWidget/chioce_wrap.dart';
-import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/date_time_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/basicWidget/chioce_list.dart';
 import 'package:flutter_templet_project/extension/list_ext.dart';
+import 'package:flutter_templet_project/extension/map_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/mixin/bottom_sheet_mixin.dart';
+import 'package:flutter_templet_project/model/user_model.dart';
 import 'package:flutter_templet_project/pages/demo/AlertSheetDemo.dart';
 
 import 'package:flutter_templet_project/pages/demo/ListTileDemo.dart';
-import 'package:get_storage/get_storage.dart';
+import 'package:flutter_templet_project/util/get_util.dart';
 
 class PickerDemo extends StatefulWidget {
   const PickerDemo({Key? key}) : super(key: key);
@@ -39,6 +40,7 @@ class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
     (name: "日期时段选择", action: onRangeDate),
     (name: "单项选择", action: onSingleOne),
     (name: "多项选择", action: onWeight),
+    (name: "网络人员选择", action: onPickUser),
   ];
 
   /// 体重
@@ -359,6 +361,27 @@ class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
         onCancel: () {
           Navigator.of(context).pop();
         });
+  }
+
+  Future onPickUser() {
+    final items = <UserModel>[];
+    FocusManager.instance.primaryFocus?.unfocus();
+    return GetBottomSheet.showCustom(
+      addUnconstrainedBox: false,
+      hideDragIndicator: false,
+      enableDrag: true,
+      child: Container(
+        height: 475,
+        child: NPickUsersBox(
+          title: "人员选择",
+          items: items ?? [],
+          onChanged: (list) {
+            DLog.d(
+                "list: ${list.map((e) => e.toJson().filter((k, v) => v != null))}");
+          },
+        ),
+      ),
+    );
   }
 
   void _showDatePicker({
