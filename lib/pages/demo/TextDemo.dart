@@ -45,6 +45,8 @@ class _TextDemoState extends State<TextDemo> {
   }
 
   buildBody() {
+    final text =
+        "刚开始进行搜索，发现很多都是让在每段开始的时候采用空格进行填充，但是采用这种形式之后，不知道为何首行直接溢出了，最后采用下面方法进行实现的。";
     return Scrollbar(
       controller: _scrollController,
       child: SingleChildScrollView(
@@ -68,6 +70,29 @@ class _TextDemoState extends State<TextDemo> {
             NSectionBox(
               title: "MyTextPainter",
               child: buildPaintText(),
+            ),
+            NSectionBox(
+              title: "justify",
+              child: Container(
+                width: 200,
+                child: RichText(
+                  text: TextSpan(
+                    children: [
+                      // WidgetSpan(
+                      //   child: Container(
+                      //     width: 20, // 首行缩进的宽度
+                      //     height: 0,
+                      //   ),
+                      // ),
+                      TextSpan(
+                        text: text.substring(0, 16), // 主体文本
+                        style: TextStyle(fontSize: 14.0, color: Colors.black),
+                      )
+                    ],
+                  ),
+                  textAlign: TextAlign.justify, // 设置两端对齐
+                ),
+              ),
             ),
           ],
         ),
