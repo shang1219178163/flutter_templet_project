@@ -30,11 +30,8 @@ class ToolUtil {
   // 移除输入框焦点
   static void removeInputFocus() {
     // SystemChannels.textInput.invokeMethod('TextInput.hide');
+    FocusScope.of(globalContext).unfocus();
     FocusManager.instance.primaryFocus?.unfocus();
-    // 延迟，保证获取到context
-    // Future.delayed(Duration.zero, () {
-    //   FocusScope.of(globalContext).requestFocus(FocusNode());
-    // });
   }
 
   // 访问外部链接

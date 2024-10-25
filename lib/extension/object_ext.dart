@@ -59,8 +59,9 @@ extension ObjectExt on Object {
   }
 
   /// 转字符串
-  String? tryJsonEncode<T>(
-      {Object? Function(Object? nonEncodable)? toEncodable}) {
+  String? tryJsonEncode<T>({
+    Object? Function(Object? nonEncodable)? toEncodable,
+  }) {
     try {
       final result = jsonEncode(this, toEncodable: toEncodable);
       return result;
@@ -68,6 +69,13 @@ extension ObjectExt on Object {
       debugPrint("❌tryJsonEncode: $e");
       return null;
     }
+  }
+
+  /// 格式化字符串
+  String formatedString() {
+    const encoder = JsonEncoder.withIndent('  ');
+    final result = encoder.convert(this);
+    return result;
   }
 }
 

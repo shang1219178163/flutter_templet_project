@@ -17,8 +17,11 @@ class NTargetFollower extends StatefulWidget {
     this.controller,
     this.targetAnchor = Alignment.topCenter,
     this.followerAnchor = Alignment.bottomCenter,
+    this.targetAnchorBuilder,
+    this.followerAnchorBuilder,
     this.showWhenUnlinked = true,
     this.offset = Offset.zero,
+    this.offsetBuilder,
     this.onTap,
     this.onLongPressEnd,
     required this.target,
@@ -31,9 +34,21 @@ class NTargetFollower extends StatefulWidget {
   final Alignment targetAnchor;
   final Alignment followerAnchor;
 
+  /// 目标对齐方式(高优先级)
+  final Alignment Function(BuildContext context, LongPressStartDetails details)?
+      targetAnchorBuilder;
+
+  /// 跟随者对齐方式(高优先级)
+  final Alignment Function(BuildContext context, LongPressStartDetails details)?
+      followerAnchorBuilder;
+
   final bool showWhenUnlinked;
 
   final Offset offset;
+
+  /// 跟随者对齐方式(高优先级)
+  final Offset Function(BuildContext context, LongPressStartDetails details)?
+      offsetBuilder;
 
   final GestureTapCallback? onTap;
 
@@ -99,12 +114,12 @@ class _NTargetFollowerState extends State<NTargetFollower> {
     }
 
     return GestureDetector(
-      onTap: widget.onTap ?? _showOverlay,
+      onTap: widget.onTap,
       // onTap: _showOverlay,
       // onPanStart: (e) => _showOverlay(),
       // onPanEnd: (e) => _hideOverlay(),
       // onPanUpdate: updateIndicator,
-      onLongPressStart: (e) => _showOverlay(),
+      onLongPressStart: (e) => _showOverlay(e),
       onLongPressEnd: widget.onLongPressEnd ?? (e) => _hideOverlay(),
       onLongPressMoveUpdate: updateIndicatorLongPress,
       child: CompositedTransformTarget(
@@ -114,10 +129,10 @@ class _NTargetFollowerState extends State<NTargetFollower> {
     );
   }
 
-  void _showOverlay() {
+  void _showOverlay(LongPressStartDetails details) {
     _hideOverlay();
 
-    _overlayEntry = _createOverlayEntry(indicatorOffset);
+    _overlayEntry = _createOverlayEntry(indicatorOffset, details: details);
     _entries.add(_overlayEntry);
     Overlay.of(context).insert(_overlayEntry);
   }
@@ -139,15 +154,21 @@ class _NTargetFollowerState extends State<NTargetFollower> {
     _overlayEntry?.markNeedsBuild();
   }
 
-  OverlayEntry _createOverlayEntry(Offset localPosition) {
+  OverlayEntry _createOverlayEntry(
+    Offset localPosition, {
+    required LongPressStartDetails details,
+  }) {
     indicatorOffset = localPosition;
     return OverlayEntry(
       builder: (BuildContext context) => UnconstrainedBox(
         child: CompositedTransformFollower(
           link: layerLink,
-          targetAnchor: widget.targetAnchor,
-          followerAnchor: widget.followerAnchor,
-          offset: widget.offset,
+          targetAnchor: widget.targetAnchorBuilder?.call(context, details) ??
+              widget.targetAnchor,
+          followerAnchor:
+              widget.followerAnchorBuilder?.call(context, details) ??
+                  widget.followerAnchor,
+          offset: widget.offsetBuilder?.call(context, details) ?? widget.offset,
           showWhenUnlinked: widget.showWhenUnlinked,
           child: widget.followerBuilder?.call(context, _hideOverlay),
         ),
@@ -172,7 +193,11 @@ class NTargetFollowerController {
   bool? get isShowing => _anchor?.isShowing;
 
   void show() {
-    _anchor?._showOverlay();
+    final details = LongPressStartDetails(
+      localPosition: Offset.zero,
+      globalPosition: Offset.zero,
+    );
+    _anchor?._showOverlay(details);
   }
 
   void hide() {

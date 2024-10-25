@@ -377,6 +377,18 @@ class NRefreshViewController<E> {
     _anchor!.onRefresh();
   }
 
+  /// 更新列表
+  ///
+  /// - test 过滤条件
+  void onUpdate(bool Function(E element)? test) {
+    assert(_anchor != null);
+    if (test != null) {
+      _anchor!.items.value = _anchor!.items.value.where(test).toList();
+      return;
+    }
+    _anchor!.items.value = [..._anchor!.items.value];
+  }
+
   /// 页码减一
   void turnPrePage() {
     assert(_anchor != null);
