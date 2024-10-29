@@ -230,6 +230,11 @@ class _AutocompleteDemoState extends State<AutocompleteDemo> {
       },
       onEditingComplete: () {
         debugPrint("onEditingComplete: ${textEditingController.text}");
+        final filters = Get.routeTree.routes
+            .where((e) => e.name == textEditingController.text);
+        if (filters.isNotEmpty) {
+          onSelected(OptionModel(name: textEditingController.text));
+        }
       },
       decoration: buildInputDecoration(
         textEditingController: textEditingController,
