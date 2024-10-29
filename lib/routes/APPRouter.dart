@@ -292,7 +292,7 @@ import 'package:flutter_templet_project/pages/demo/n_collection_nav_widget_demo.
 import 'package:flutter_templet_project/pages/demo/n_horizontal_scroll_widget_demo.dart';
 import 'package:flutter_templet_project/pages/demo/operator_demo.dart';
 import 'package:flutter_templet_project/pages/demo/rp_template_qrcode_page.dart';
-import 'package:flutter_templet_project/pages/demo/secure_keyboard_textfield_demo.dart';
+import 'package:flutter_templet_project/pages/demo/secure_keyboard_demo.dart';
 import 'package:flutter_templet_project/pages/demo/smart_dialog_demo.dart';
 import 'package:flutter_templet_project/pages/demo/steper_connector_demo.dart';
 import 'package:flutter_templet_project/pages/demo/data_type_demo.dart';
