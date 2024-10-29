@@ -58,6 +58,7 @@ import 'package:flutter_templet_project/pages/demo/NTargetFollowerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NTweenTransitionDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NestedNavigatorDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PageLifecycleFuncTest.dart';
+import 'package:flutter_templet_project/pages/demo/PopScopeDemo.dart';
 import 'package:flutter_templet_project/pages/demo/QueueAlertDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ReflectDemo.dart';
 import 'package:flutter_templet_project/pages/demo/RegExpDemo.dart';
@@ -763,6 +764,7 @@ class APPRouter {
   static const hapticFeedbackDemo = '/hapticFeedbackDemo';
   static const webviewDemo = '/webviewDemo';
   static const secureKeyboardDemo = '/secureKeyboardDemo';
+  static const popScopeDemo = '/popScopeDemo';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -2254,6 +2256,10 @@ class AppPage {
     GetPage(
       name: APPRouter.secureKeyboardDemo,
       page: () => SecureKeyboardDemo(),
+    ),
+    GetPage(
+      name: APPRouter.popScopeDemo,
+      page: () => PopScopeDemo(),
     ),
   ];
 }

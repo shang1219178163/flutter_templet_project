@@ -548,6 +548,7 @@ var list = <Tuple2<String, String>>[
   Tuple2(APPRouter.hapticFeedbackDemo, "hapticFeedbackDemo"),
   Tuple2(APPRouter.webviewDemo, "webviewDemo"),
   Tuple2(APPRouter.secureKeyboardDemo, "secureKeyboardDemo"),
+  Tuple2(APPRouter.popScopeDemo, "popScopeDemo"),
 ];
 
 var slivers = <Tuple2<String, String>>[
