@@ -10,6 +10,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
+import 'package:flutter_templet_project/extension/scroll_controller_ext.dart';
 
 class SliverAppBarDemoOne extends StatefulWidget {
   final String? title;
@@ -22,6 +23,10 @@ class SliverAppBarDemoOne extends StatefulWidget {
 
 class _SliverAppBarDemoOneState extends State<SliverAppBarDemoOne>
     with SingleTickerProviderStateMixin {
+  /// 嵌套滚动
+  final scrollControllerNew = ScrollController();
+  final scrollY = ValueNotifier(0.0);
+
   var items = List.generate(3, (index) => "Tab $index");
 
   late TabController tabController;
@@ -30,6 +35,9 @@ class _SliverAppBarDemoOneState extends State<SliverAppBarDemoOne>
   void initState() {
     super.initState();
 
+    scrollControllerNew.addListener(() {
+      scrollY.value = scrollControllerNew.offset;
+    });
     tabController = TabController(length: items.length, vsync: this);
   }
 
@@ -44,9 +52,12 @@ class _SliverAppBarDemoOneState extends State<SliverAppBarDemoOne>
   }
 
   Widget buildDefaultTabController() {
+    const collapsedHeight = 40.0;
+
     return DefaultTabController(
       length: items.length, // This is the number of tabs.
       child: NestedScrollView(
+        controller: scrollControllerNew,
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           // These are the slivers that show up in the "outer" scroll view.
           return <Widget>[
@@ -59,7 +70,40 @@ class _SliverAppBarDemoOneState extends State<SliverAppBarDemoOne>
                     Navigator.of(context).pop();
                   },
                 ),
-                title: Text(widget.title ?? "$widget"),
+                title: ValueListenableBuilder(
+                  valueListenable: scrollY,
+                  builder: (context, value, child) {
+                    try {
+                      // YLog.d("scrollY: ${[
+                      //   value,
+                      //   scrollControllerNew.position.progress
+                      // ]}");
+
+                      final opacity =
+                          scrollControllerNew.position.progress > 0.9
+                              ? 1.0
+                              : 0.0;
+                      return AnimatedOpacity(
+                        opacity: opacity,
+                        duration: const Duration(milliseconds: 100),
+                        child: Row(
+                          children: [
+                            FlutterLogo(),
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 0.60),
+                              child: Text(widget.title ?? "$widget"),
+                            ),
+                          ],
+                        ),
+                      );
+                    } catch (e) {
+                      debugPrint("$this $e");
+                    }
+                    return const SizedBox();
+                  },
+                ),
+                toolbarHeight: collapsedHeight,
+                collapsedHeight: collapsedHeight,
                 centerTitle: false,
                 pinned: true,
                 floating: false,
@@ -94,7 +138,13 @@ class _SliverAppBarDemoOneState extends State<SliverAppBarDemoOne>
             ),
           ];
         },
-        body: buildTabBarView(),
+        body: Column(
+          children: [
+            Expanded(
+              child: buildTabBarView(),
+            ),
+          ],
+        ),
       ),
     );
   }
