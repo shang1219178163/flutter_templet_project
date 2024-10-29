@@ -69,13 +69,14 @@ class NLongPressMenu extends StatelessWidget {
   }
 }
 
+/// 长按黑色菜单(中间有横线版本)
 class NLongPressMenuOne extends StatelessWidget {
   const NLongPressMenuOne({
     Key? key,
     required this.items,
     this.hideAssetImage = false,
     required this.onItem,
-    this.crossAxisCount = 4,
+    this.itemWidth = 65,
   }) : super(key: key);
 
   /// 标题和本地图片
@@ -83,15 +84,15 @@ class NLongPressMenuOne extends StatelessWidget {
 
   final bool hideAssetImage;
 
-  /// 横向数量
-  final int crossAxisCount;
+  // 子项宽度
+  final int itemWidth;
 
   /// 点击菜单回调
   final ValueChanged<Tuple2<String, AssetImage>> onItem;
 
   @override
   Widget build(BuildContext context) {
-    var padding = EdgeInsets.only(left: 8, right: 8, top: 8, bottom: 8);
+    var padding = const EdgeInsets.only(left: 8, right: 8, top: 8, bottom: 8);
 
     return Container(
       padding: const EdgeInsets.all(10),
@@ -101,91 +102,103 @@ class NLongPressMenuOne extends StatelessWidget {
         borderRadius: BorderRadius.all(Radius.circular(4)),
       ),
       constraints: BoxConstraints(
-        maxWidth: MediaQuery.of(context).size.width * 0.85,
+        maxWidth: MediaQuery.of(context).size.width * 0.8,
         minWidth: 0,
         maxHeight: 400,
       ),
-      child: Wrap(
-        // spacing: 16,
-        // runSpacing: 16,
-        alignment: WrapAlignment.start,
-        children: items.map((e) {
-          final index = items.indexOf(e);
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          // 获取 Wrap 父容器的宽度
+          double containerWidth = constraints.maxWidth;
+          // 计算每行可以显示的组件数
+          int crossAxisCount = (containerWidth / (itemWidth + 0)).floor();
+          // 计算行数
           final rowCount = items.length % crossAxisCount == 0
               ? items.length / crossAxisCount
               : items.length ~/ crossAxisCount + 1;
-          final isFirtRow = index < crossAxisCount;
-          final isLastRow = index > ((rowCount - 1) * crossAxisCount - 1);
-          // YLog.d([
-          //   index,
-          //   e.item1,
-          //   rowCount,
-          //   isFirtRow,
-          //   isLastRow,
-          //   ((rowCount - 1) * crossAxisCount - 1)
-          // ]);
 
-          final borderSideColor = isLastRow
-              ? Colors.transparent
-              : const Color(0xffE5E5E5).withOpacity(0.2);
+          return Wrap(
+            // spacing: 16,
+            // runSpacing: 16,
+            alignment: WrapAlignment.start,
+            children: items.map((e) {
+              final index = items.indexOf(e);
 
-          if (isFirtRow) {
-            padding = padding.copyWith(top: 0, bottom: 8);
-          }
+              final isFirtRow = index < crossAxisCount;
+              final isLastRow = index > ((rowCount - 1) * crossAxisCount - 1);
+              // YLog.d([
+              //   index,
+              //   e.item1,
+              //   rowCount,
+              //   isFirtRow,
+              //   isLastRow,
+              //   ((rowCount - 1) * crossAxisCount - 1)
+              // ]);
 
-          if (isLastRow) {
-            padding = padding.copyWith(top: 8, bottom: 0);
-          }
+              final borderSideColor = isLastRow
+                  ? Colors.transparent
+                  : const Color(0xffE5E5E5).withOpacity(0.2);
 
-          if (rowCount == 1) {
-            padding = padding.copyWith(top: 0, bottom: 0);
-          }
+              if (isFirtRow) {
+                padding = padding.copyWith(top: 0, bottom: 8);
+              }
 
-          final child = Container(
-            width: 53 + padding.left + padding.right,
-            height: 43 + padding.top + padding.bottom,
-            padding: padding,
-            decoration: BoxDecoration(
-              color: Colors.transparent,
-              border: Border(
-                bottom: BorderSide(
-                  width: 0.5,
-                  color: borderSideColor,
-                ),
-              ),
-            ),
-            child: NPair(
-              direction: Axis.vertical,
-              icon: hideAssetImage
-                  ? null
-                  : Image(
-                      image: e.item2,
-                      width: 18,
-                      height: 18,
-                      fit: BoxFit.fill,
+              if (isLastRow) {
+                padding = padding.copyWith(top: 8, bottom: 0);
+              }
+
+              if (rowCount == 1) {
+                padding = padding.copyWith(top: 0, bottom: 0);
+              }
+
+              final child = Container(
+                width: 53 + padding.left + padding.right,
+                height: 43 + padding.top + padding.bottom,
+                padding: padding,
+                decoration: BoxDecoration(
+                  color: Colors.transparent,
+                  // color: ColorExt.random,
+                  border: Border(
+                    bottom: BorderSide(
+                      width: 0.5,
+                      color: borderSideColor,
                     ),
-              child: NText(
-                e.item1,
-                color: Colors.white,
-                fontSize: 13,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-          );
+                  ),
+                ),
+                child: NPair(
+                  direction: Axis.vertical,
+                  icon: hideAssetImage
+                      ? null
+                      : Image(
+                          image: e.item2,
+                          width: 18,
+                          height: 18,
+                          fit: BoxFit.fill,
+                        ),
+                  child: NText(
+                    e.item1,
+                    color: Colors.white,
+                    fontSize: 13,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              );
 
-          return Material(
-            color: Colors.transparent,
-            // shape: const RoundedRectangleBorder(
-            //   side: BorderSide(color: Colors.red),
-            // ),
-            child: InkWell(
-              onTap: () {
-                onItem(e);
-              },
-              child: child,
-            ),
+              return Material(
+                color: Colors.transparent,
+                // shape: const RoundedRectangleBorder(
+                //   side: BorderSide(color: Colors.red),
+                // ),
+                child: InkWell(
+                  onTap: () {
+                    onItem(e);
+                  },
+                  child: child,
+                ),
+              );
+            }).toList(),
           );
-        }).toList(),
+        },
       ),
     );
   }
