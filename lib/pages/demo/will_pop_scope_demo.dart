@@ -29,13 +29,40 @@ class _WillPopScopeDemoState extends State<WillPopScopeDemo> {
   Widget build(BuildContext context) {
     return WillPopScope(
       // onWillPop: null,// 为 null 可返回
-      onWillPop: onWillPopNull
+      onWillPop: enable
           ? null
           : () async {
-              return enable;
+              await showAlert();
+              return false;
             },
       child: buildPage(context),
     );
+  }
+
+  Future<void> showAlert() async {
+    // 弹出确认对话框
+    bool shouldPop = await showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text("确认"),
+            content: Text("你确定要离开这个页面吗？"),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(false),
+                child: Text("取消"),
+              ),
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(true),
+                child: Text("确定"),
+              ),
+            ],
+          ),
+        ) ??
+        false;
+    DLog.d("shouldPop: $shouldPop");
+    if (shouldPop) {
+      Navigator.of(context).pop();
+    }
   }
 
   Widget buildPage(BuildContext context) {
