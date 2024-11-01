@@ -45,6 +45,7 @@ class NSliverPersistentHeaderDelegate extends SliverPersistentHeaderDelegate {
 }
 
 /// SliverPersistentHeader
+@Deprecated("已弃用,请使用 NSliverPersistentHeaderBuilder")
 class NSliverPersistentHeader extends StatelessWidget {
   const NSliverPersistentHeader({
     super.key,
@@ -88,7 +89,7 @@ class NSliverPersistentHeaderBuilder extends SliverPersistentHeader {
     bool pinned = false,
     bool floating = false,
     required Widget Function(
-            BuildContext context, double offset, bool overlapsContent)
+            BuildContext context, double shrinkOffset, bool overlapsContent)
         builder,
   }) : super(
           key: key,

@@ -88,10 +88,8 @@ class NGridView extends StatelessWidget {
           runAlignment: WrapAlignment.start,
           children: [
             ...children.map((e) => buildItem(child: e)).toList(),
-            addItem != null ? buildItem(child: addItem!) : const SizedBox(),
-            deleteItem != null
-                ? buildItem(child: deleteItem!)
-                : const SizedBox(),
+            if (addItem != null) buildItem(child: addItem!),
+            if (deleteItem != null) buildItem(child: deleteItem!),
           ],
         );
       },

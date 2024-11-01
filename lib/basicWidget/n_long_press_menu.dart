@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_pair.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
+import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:tuple/tuple.dart';
 
@@ -77,6 +78,7 @@ class NLongPressMenuOne extends StatelessWidget {
     this.hideAssetImage = false,
     required this.onItem,
     this.itemWidth = 65,
+    this.itemHeight,
   }) : super(key: key);
 
   /// 标题和本地图片
@@ -85,17 +87,18 @@ class NLongPressMenuOne extends StatelessWidget {
   final bool hideAssetImage;
 
   // 子项宽度
-  final int itemWidth;
+  final double itemWidth;
+  final double? itemHeight;
 
   /// 点击菜单回调
   final ValueChanged<Tuple2<String, AssetImage>> onItem;
 
   @override
   Widget build(BuildContext context) {
-    var padding = const EdgeInsets.only(left: 8, right: 8, top: 8, bottom: 8);
+    final itemWidthNew = itemWidth.truncateToDouble();
 
     return Container(
-      padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
       decoration: const BoxDecoration(
         color: Color(0xff4d4d4d),
         // border: Border.all(color: Colors.blue),
@@ -111,12 +114,13 @@ class NLongPressMenuOne extends StatelessWidget {
           // 获取 Wrap 父容器的宽度
           double containerWidth = constraints.maxWidth;
           // 计算每行可以显示的组件数
-          int crossAxisCount = (containerWidth / (itemWidth + 0)).floor();
+          int crossAxisCount = (containerWidth / (itemWidthNew + 0)).floor();
           // 计算行数
           final rowCount = items.length % crossAxisCount == 0
               ? items.length / crossAxisCount
               : items.length ~/ crossAxisCount + 1;
 
+          DLog.d([crossAxisCount, rowCount, itemWidthNew]);
           return Wrap(
             // spacing: 16,
             // runSpacing: 16,
@@ -126,7 +130,7 @@ class NLongPressMenuOne extends StatelessWidget {
 
               final isFirtRow = index < crossAxisCount;
               final isLastRow = index > ((rowCount - 1) * crossAxisCount - 1);
-              // YLog.d([
+              // DLog.d([
               //   index,
               //   e.item1,
               //   rowCount,
@@ -139,22 +143,11 @@ class NLongPressMenuOne extends StatelessWidget {
                   ? Colors.transparent
                   : const Color(0xffE5E5E5).withOpacity(0.2);
 
-              if (isFirtRow) {
-                padding = padding.copyWith(top: 0, bottom: 8);
-              }
-
-              if (isLastRow) {
-                padding = padding.copyWith(top: 8, bottom: 0);
-              }
-
-              if (rowCount == 1) {
-                padding = padding.copyWith(top: 0, bottom: 0);
-              }
-
               final child = Container(
-                width: 53 + padding.left + padding.right,
-                height: 43 + padding.top + padding.bottom,
-                padding: padding,
+                width: itemWidthNew,
+                height: itemHeight,
+                padding:
+                    const EdgeInsets.only(left: 8, right: 8, top: 8, bottom: 8),
                 decoration: BoxDecoration(
                   color: Colors.transparent,
                   // color: ColorExt.random,
@@ -178,17 +171,19 @@ class NLongPressMenuOne extends StatelessWidget {
                   child: NText(
                     e.item1,
                     color: Colors.white,
-                    fontSize: 13,
+                    fontSize: 12,
                     fontWeight: FontWeight.w400,
+                    textAlign: TextAlign.center,
+                    maxLines: 1,
                   ),
                 ),
               );
 
               return Material(
                 color: Colors.transparent,
-                // shape: const RoundedRectangleBorder(
-                //   side: BorderSide(color: Colors.red),
-                // ),
+                shape: const RoundedRectangleBorder(
+                    // side: BorderSide(color: Colors.red),
+                    ),
                 child: InkWell(
                   onTap: () {
                     onItem(e);
