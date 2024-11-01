@@ -57,6 +57,7 @@ import 'package:flutter_templet_project/pages/demo/NTransformViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NTargetFollowerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NTweenTransitionDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NestedNavigatorDemo.dart';
+import 'package:flutter_templet_project/pages/demo/NestedScrollViewDemoHome.dart';
 import 'package:flutter_templet_project/pages/demo/PageLifecycleFuncTest.dart';
 import 'package:flutter_templet_project/pages/demo/PopScopeDemo.dart';
 import 'package:flutter_templet_project/pages/demo/QueueAlertDemo.dart';
@@ -307,9 +308,12 @@ import 'package:flutter_templet_project/pages/first_page.dart';
 import 'package:flutter_templet_project/pages/fourth_page.dart';
 import 'package:flutter_templet_project/pages/neomorphism/neomorphism_home_page.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/NPinnedTabBarPageDemo.dart';
+import 'package:flutter_templet_project/pages/sliver_demo/PinnedHeaderSliverDemo.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/SliverAppBarDemo.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/SliverFamilyDemo.dart';
+import 'package:flutter_templet_project/pages/sliver_demo/SliverFloatingHeaderDemo.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/SliverPersistentHeaderDemo.dart';
+import 'package:flutter_templet_project/pages/sliver_demo/SliverResizingHeaderDemo.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/listener_header_page.dart';
 import 'package:flutter_templet_project/pages/demo/system_color_page.dart';
 import 'package:flutter_templet_project/pages/demo/system_curves_page.dart';
@@ -765,6 +769,7 @@ class APPRouter {
   static const webviewDemo = '/webviewDemo';
   static const secureKeyboardDemo = '/secureKeyboardDemo';
   static const popScopeDemo = '/popScopeDemo';
+  static const nestedScrollViewDemoHome = '/nestedScrollViewDemoHome';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -2260,6 +2265,10 @@ class AppPage {
     GetPage(
       name: APPRouter.popScopeDemo,
       page: () => PopScopeDemo(),
+    ),
+    GetPage(
+      name: APPRouter.nestedScrollViewDemoHome,
+      page: () => NestedScrollViewDemoHome(),
     ),
   ];
 }

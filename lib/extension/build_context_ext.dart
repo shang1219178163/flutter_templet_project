@@ -123,6 +123,11 @@ extension BuildContextExt on BuildContext {
   /// 视图距离底边的高度(有键盘:键盘高度 + 34, 无键盘 0)
   double get viewBottom => mediaQuery.viewInsets.bottom;
 
+  double get screenWidth => MediaQuery.of(this).size.width;
+  double get screenHeight => MediaQuery.of(this).size.height;
+  double get paddingTop => MediaQuery.of(this).padding.top;
+  double get paddingBottom => MediaQuery.of(this).padding.bottom;
+
   /// 截图(组件必须是 RepaintBoundary)
   Future<ui.Image?> toImage({double? pixelRatio}) async {
     var boundary = findRenderObject() as RenderRepaintBoundary?;
