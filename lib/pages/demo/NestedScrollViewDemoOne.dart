@@ -126,7 +126,7 @@ class _NestedScrollViewDemoOneState extends State<NestedScrollViewDemoOne>
   }
 
   buildNSliverPersistentHeader() {
-    return NSliverPersistentHeader(
+    return NSliverPersistentHeaderBuilder(
         pinned: true,
         builder: (ctx, offset, overlapsContent) {
           return ColoredBox(

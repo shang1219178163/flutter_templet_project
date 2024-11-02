@@ -112,4 +112,10 @@ extension ColorExt on Color {
     }
     return toString();
   }
+
+  // /// 颜色名称描述
+  // String get toRadixString {
+  //   final result = "#${value.toRadixString(16).padLeft(8, '0').toUpperCase()}";
+  //   return result;
+  // }
 }

@@ -58,7 +58,7 @@ class _NSliverPersistentHeaderDemoState
                 color: Colors.green,
                 child: Text("${widget}"))
             .toSliverToBoxAdapter(),
-        NSliverPersistentHeader(
+        NSliverPersistentHeaderBuilder(
           // pinned: true,
           // floating: true,
           builder: (context, offset, overlapsContent) {

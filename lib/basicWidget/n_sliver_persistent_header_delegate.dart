@@ -8,6 +8,7 @@
 
 import 'package:flutter/material.dart';
 
+/// 自定义 SliverPersistentHeaderDelegate
 class NSliverPersistentHeaderDelegate extends SliverPersistentHeaderDelegate {
   NSliverPersistentHeaderDelegate({
     this.min = 48,
@@ -44,43 +45,7 @@ class NSliverPersistentHeaderDelegate extends SliverPersistentHeaderDelegate {
   }
 }
 
-/// SliverPersistentHeader
-@Deprecated("已弃用,请使用 NSliverPersistentHeaderBuilder")
-class NSliverPersistentHeader extends StatelessWidget {
-  const NSliverPersistentHeader({
-    super.key,
-    this.pinned = false,
-    this.floating = false,
-    this.min = 48,
-    this.max = 80,
-    required this.builder,
-  });
-
-  final bool pinned;
-
-  final bool floating;
-
-  final double min;
-
-  final double max;
-
-  final Widget Function(
-      BuildContext context, double offset, bool overlapsContent) builder;
-
-  @override
-  Widget build(BuildContext context) {
-    return SliverPersistentHeader(
-      pinned: pinned,
-      floating: floating,
-      delegate: NSliverPersistentHeaderDelegate(
-        min: min,
-        max: max,
-        builder: builder,
-      ),
-    );
-  }
-}
-
+/// 自定义 SliverPersistentHeader
 class NSliverPersistentHeaderBuilder extends SliverPersistentHeader {
   NSliverPersistentHeaderBuilder({
     Key? key,
