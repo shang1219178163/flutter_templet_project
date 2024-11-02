@@ -54,6 +54,11 @@ class NestedScrollViewDemoHomeState
   double _visibleFraction = 0.0;
 
   @override
+  void onBarTap(int index) {
+    // TODO: implement onBarTap
+  }
+
+  @override
   void initState() {
     scrollControllerNew.addListener(() {
       scrollY.value = scrollControllerNew.offset;
@@ -262,56 +267,6 @@ class NestedScrollViewDemoHomeState
     );
   }
 
-  /// 待办事项 & 患者日程
-  Widget buildScheduleBox() {
-    return Container(
-      height: context.screenHeight - context.paddingTop - 40,
-      padding: const EdgeInsets.symmetric(horizontal: 15),
-      child: Column(
-        children: [
-          /// 待办事项
-          _todoListWidget(),
-
-          /// 患者日程
-          Expanded(
-            child: MediaQuery.removePadding(
-              context: context,
-              removeTop: true,
-              child: EasyRefresh(
-                onRefresh: () {
-                  DLog.d("onRefresh");
-                },
-                onLoad: () {
-                  DLog.d("onLoad");
-                },
-                child: ListView.separated(
-                  itemBuilder: (_, index) {
-                    final random = IntExt.random(max: R.image.urls.length);
-                    return ListTile(
-                      leading: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8),
-                        child: NNetworkImage(
-                          url: R.image.urls[random],
-                          width: 40,
-                          fit: BoxFit.fitHeight,
-                        ),
-                      ),
-                      title: NText("用户 $index"),
-                    );
-                  },
-                  separatorBuilder: (_, index) {
-                    return Divider(height: 0.5, color: lineColor);
-                  },
-                  itemCount: 20,
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
   Widget buildUserBar() {
     var realNameAndTypeText = "SoaringHeart，您好";
 
@@ -516,7 +471,7 @@ class NestedScrollViewDemoHomeState
   }
 
   /// 底部 待办事项
-  Widget _todoListWidget() {
+  Widget buildHeader() {
     return InkWell(
       onTap: () {
         DLog.d("待办事项");
@@ -705,9 +660,69 @@ class NestedScrollViewDemoHomeState
     );
   }
 
-  @override
-  void onBarTap(int index) {
-    // TODO: implement onBarTap
+  /// 待办事项
+  Widget buildScheduleBox() {
+    return Container(
+      height: context.screenHeight - context.paddingTop - 40,
+      padding: const EdgeInsets.symmetric(horizontal: 15),
+      child: Column(
+        children: [
+          buildHeader(),
+          Expanded(
+            child: buildListView(),
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// 待办事项列表
+  Widget buildListView() {
+    return MediaQuery.removePadding(
+      context: context,
+      removeTop: true,
+      child: EasyRefresh(
+        onRefresh: () {
+          DLog.d("onRefresh");
+        },
+        onLoad: () {
+          DLog.d("onLoad");
+        },
+        child: ListView.separated(
+          itemBuilder: (_, index) {
+            final random = IntExt.random(max: R.image.urls.length);
+            return Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                // border: Border.all(color: Colors.blue),
+                borderRadius: BorderRadius.all(Radius.circular(8)),
+              ),
+              child: ListTile(
+                leading: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 0.8),
+                  child: NNetworkImage(
+                    url: R.image.urls[random],
+                    width: 48,
+                    fit: BoxFit.fitHeight,
+                  ),
+                ),
+                title: NText("用户 $index"),
+                subtitle: NText(
+                  80.generateChars(),
+                  fontSize: 12,
+                  maxLines: 1,
+                ),
+              ),
+            );
+          },
+          separatorBuilder: (_, index) {
+            return SizedBox(height: 8);
+            return Divider(height: 0.5, color: lineColor);
+          },
+          itemCount: 20,
+        ),
+      ),
+    );
   }
 }
 

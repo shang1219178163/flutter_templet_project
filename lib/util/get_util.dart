@@ -442,18 +442,20 @@ class NDialogBox extends StatelessWidget {
                 style: appTheme?.titleStyle,
               ),
           Flexible(
-            child: Scrollbar(
-              child: SingleChildScrollView(
-                child: Container(
-                  alignment: Alignment.center,
-                  padding: messagePadding,
-                  child: messageWidget ??
-                      NText(
-                        message ?? "",
-                        color: fontColor,
-                        textAlign: TextAlign.center,
-                        style: appTheme?.textStyle,
-                      ),
+            child: Container(
+              padding: messagePadding,
+              child: Scrollbar(
+                child: SingleChildScrollView(
+                  child: Container(
+                    alignment: Alignment.center,
+                    child: messageWidget ??
+                        NText(
+                          message ?? "",
+                          color: fontColor,
+                          // textAlign: TextAlign.center,
+                          style: appTheme?.textStyle,
+                        ),
+                  ),
                 ),
               ),
             ),

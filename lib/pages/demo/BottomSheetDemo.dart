@@ -7,6 +7,7 @@
 //
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/n_alignment_drawer.dart';
 import 'package:flutter_templet_project/basicWidget/n_footer_button_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_pair.dart';
@@ -55,6 +56,24 @@ class _BottomSheetDemoState extends State<BottomSheetDemo> {
   ];
 
   final textController = TextEditingController();
+
+  var kuanRong = "";
+
+  @override
+  void initState() {
+    super.initState();
+
+    initData();
+  }
+
+  initData() async {
+    kuanRong = await loadData();
+  }
+
+  Future<String> loadData() async {
+    final response = await rootBundle.loadString('assets/data/kuan_rong.txt');
+    return response;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -280,16 +299,19 @@ class _BottomSheetDemoState extends State<BottomSheetDemo> {
   }
 
   void onGetBottomDialog() {
+    final lines = kuanRong.split("\n");
+    final lineNews = lines.map((e) => e.isEmpty ? "\n" : e).toList();
+    final title = lineNews.first;
+    final content = lineNews.skip(2).join("\n");
     GetBottomSheet.showCustom(
       addUnconstrainedBox: false,
       child: SafeArea(
         bottom: false,
         child: NDialogBox(
           context: context,
-
-          title: "编辑原因",
-          message: "编辑原因" * 99,
-          // messagePadding: EdgeInsets.symmetric(vertical: 60),
+          title: title,
+          message: content,
+          messagePadding: EdgeInsets.symmetric(horizontal: 8, vertical: 12),
           // messageWidget: NTextField(
           //   fillColor: Colors.white,
           //   minLines: 4,

@@ -101,7 +101,7 @@ extension ListExt<T, E> on List<E> {
   /// 用多个元素取代数组中满足条件的第一个元素
   /// replacements 取代某个元素的集合
   /// isReversed 是否倒序查询
-  List<E> replace(
+  List<E> replaceFirst(
     bool Function(E) test, {
     required List<E> replacements,
     bool isReversed = false,

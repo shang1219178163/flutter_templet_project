@@ -60,9 +60,9 @@ class ResizingHeaderDelegate extends SliverPersistentHeaderDelegate {
           fit: BoxFit.cover,
         ),
         // 带有渐变的遮罩层
-        Container(
-          color: Colors.black.withOpacity(0.3),
-        ),
+        // Container(
+        //   color: Colors.black.withOpacity(0.3),
+        // ),
         // 标题内容
         Center(
           child: Text(
