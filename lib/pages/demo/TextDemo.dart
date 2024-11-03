@@ -2,6 +2,8 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
+import 'package:flutter_templet_project/basicWidget/n_slider.dart';
+import 'package:flutter_templet_project/mixin/asset_resource_mixin.dart';
 
 /// TextStyle 研究
 class TextDemo extends StatefulWidget {
@@ -13,7 +15,7 @@ class TextDemo extends StatefulWidget {
   State<TextDemo> createState() => _TextDemoState();
 }
 
-class _TextDemoState extends State<TextDemo> {
+class _TextDemoState extends State<TextDemo> with AssetResourceMixin {
   final _scrollController = ScrollController();
 
   final textDecorations = [
@@ -46,7 +48,9 @@ class _TextDemoState extends State<TextDemo> {
 
   buildBody() {
     final text =
-        "刚开始进行搜索，发现很多都是让在每段开始的时候采用空格进行填充，但是采用这种形式之后，不知道为何首行直接溢出了，最后采用下面方法进行实现的。";
+        "刚开始进行搜索，发现很多都是让在每段开始的时候采用空格进行填充，但是采用这种形式之后，不知道为何首行直接溢出了，最后采用下面方法进行实现"
+        "的。";
+
     return Scrollbar(
       controller: _scrollController,
       child: SingleChildScrollView(
@@ -74,18 +78,18 @@ class _TextDemoState extends State<TextDemo> {
             NSectionBox(
               title: "justify",
               child: Container(
-                width: 200,
+                // width: 200,
                 child: RichText(
                   text: TextSpan(
                     children: [
-                      // WidgetSpan(
-                      //   child: Container(
-                      //     width: 20, // 首行缩进的宽度
-                      //     height: 0,
-                      //   ),
-                      // ),
+                      WidgetSpan(
+                        child: Container(
+                          width: 28, // 首行缩进的宽度
+                          height: 0,
+                        ),
+                      ),
                       TextSpan(
-                        text: text.substring(0, 16), // 主体文本
+                        text: text, // 主体文本
                         style: TextStyle(fontSize: 14.0, color: Colors.black),
                       )
                     ],
@@ -94,6 +98,7 @@ class _TextDemoState extends State<TextDemo> {
                 ),
               ),
             ),
+            buildTextTransform(),
           ],
         ),
       ),
@@ -101,16 +106,63 @@ class _TextDemoState extends State<TextDemo> {
   }
 
   Widget buildPaintText() {
-    return CustomPaint(
-      size: Size(300, 200),
-      painter: MyTextPainter(
-        Text(
-          'Hello, Flutter developers! This is a '
-          'sample text to demonstrate '
-          'ParagraphStyle.',
-          style: DefaultTextStyle.of(context).style,
-          maxLines: 1000,
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.transparent,
+        border: Border.all(color: Colors.blue),
+      ),
+      child: CustomPaint(
+        size: Size.fromHeight(60),
+        painter: MyTextPainter(
+          Text(
+            'Hello, Flutter developers! This is a '
+            'sample text to demonstrate '
+            'ParagraphStyle.',
+            style: DefaultTextStyle.of(context).style,
+            maxLines: 1000,
+          ),
         ),
+      ),
+    );
+  }
+
+  Widget buildTextTransform() {
+    final sliderVN = ValueNotifier(0.0);
+    return NSectionBox(
+      title: "Matrix4.skewX",
+      mainAxisSize: MainAxisSize.min,
+      child: Column(
+        children: [
+          ValueListenableBuilder(
+            valueListenable: sliderVN,
+            builder: (context, value, child) {
+              return Container(
+                color: Colors.black,
+                child: Transform(
+                  alignment: Alignment.centerLeft,
+                  transform: Matrix4.skewX(-value),
+                  child: Container(
+                    padding: const EdgeInsets.all(8.0),
+                    color: const Color(0xFFE8581C),
+                    child: const Text('Apartment for rent!'),
+                  ),
+                ),
+              );
+            },
+          ),
+          NSlider(
+            max: 100,
+            leading: Text('倾斜角度'),
+            onChanged: (double value) {
+              debugPrint('NNSlider onChangeEnd: $value');
+              sliderVN.value = value / 100;
+            },
+            trailingBuilder: (context, value) {
+              final result = "${value.toStringAsFixed(0)}%";
+              return Text(result);
+            },
+          ),
+        ],
       ),
     );
   }
