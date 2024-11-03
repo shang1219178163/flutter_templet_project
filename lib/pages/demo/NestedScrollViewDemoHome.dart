@@ -8,6 +8,7 @@
 
 import 'dart:async';
 import 'dart:io';
+import 'dart:math';
 
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/cupertino.dart';
@@ -245,16 +246,7 @@ class NestedScrollViewDemoHomeState
                         const SizedBox(height: 11),
                         _headerCountWidget(),
                         const SizedBox(height: 10),
-                        Container(
-                          height: 55,
-                          child: ListTile(
-                            leading: FlutterLogo(
-                              size: 32,
-                            ),
-                            title: NText("消息提醒"),
-                            subtitle: NText("你收到一条新的消息…"),
-                          ),
-                        )
+                        buildSystemMessage(),
                       ],
                     ),
                   ),
@@ -380,37 +372,37 @@ class NestedScrollViewDemoHomeState
   /// 顶部功能模块
   Widget _headerCountWidget() {
     final children = [
-      _todoCardBuilder(
+      _menuItemCard(
         asyncNumber: Future(() => 1),
         color: const Color(0xFFE65F55),
-        subText: '位受试者待处理',
-        textImage: '不良事件',
+        subText: '件事情待处理',
+        textImage: '事情',
         iconImage: 'assets/images/icon_adverse_event.png',
         onTap: () {},
       ),
-      _todoCardBuilder(
+      _menuItemCard(
         count: 1,
         color: const Color(0xFFFF8F3E),
-        subText: '条消息待处理',
-        textImage: '受试者日记',
+        subText: '条记录待处理',
+        textImage: '记录',
         iconImage: 'assets/images/icon_wait_reply.png',
         onTap: () {},
       ),
-      _todoCardBuilder(
+      _menuItemCard(
         asyncNumber: Future(() => 3),
         color: const Color(0xFF2277E5),
         subText: '项方案待审核',
-        textImage: '预约',
+        textImage: '方案',
         iconImage: 'assets/images/icon_reviewed.png',
         onTap: () {
           //待审核
         },
       ),
-      _todoCardBuilder(
+      _menuItemCard(
         asyncNumber: Future(() => 4),
         color: const Color(0xFF00B451),
-        subText: '项事件待安排',
-        textImage: '样本采集',
+        subText: '个样本待处理',
+        textImage: '样本',
         iconImage: 'assets/images/icon_arranged.png',
         onTap: () {
           //待安排
@@ -526,7 +518,7 @@ class NestedScrollViewDemoHomeState
   }
 
   /// 顶部功能模块子条目卡片
-  Widget _todoCardBuilder({
+  Widget _menuItemCard({
     required Color color,
     required String textImage,
     required String iconImage,
@@ -561,9 +553,13 @@ class NestedScrollViewDemoHomeState
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                NText(
-                  textImage,
-                  fontWeight: FontWeight.bold,
+                Transform(
+                  alignment: Alignment.topRight,
+                  transform: Matrix4.skewX(-0.15), //字体倾斜15度
+                  child: NText(
+                    textImage,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 Image.asset(
                   iconImage,

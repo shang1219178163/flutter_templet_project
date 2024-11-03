@@ -215,7 +215,7 @@ List<Tuple3<String, String, Widget>> _list = [
     SliverResizingHeaderDemo(),
   ),
   Tuple3(
-    'nestedScrollViewPageDemo',
+    'NestedScrollViewDemoHome',
     '嵌套滚动',
     NestedScrollViewDemoHome(),
   ),
