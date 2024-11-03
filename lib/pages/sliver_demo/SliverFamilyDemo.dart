@@ -22,6 +22,7 @@ import 'package:flutter_templet_project/pages/sliver_demo/SliverListDemo.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/SliverListPopverDemo.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/SliverPersistentHeaderDemo.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/SliverPersistentHeaderDemoOne.dart';
+import 'package:flutter_templet_project/pages/sliver_demo/SliverPersistentHeaderDemoTwo.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/SliverResizingHeaderDemo.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/SliverTabBarDemo.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/SliverTabbarDemoOne.dart';
@@ -152,6 +153,11 @@ List<Tuple3<String, String, Widget>> _list = [
     'SliverPersistentHeaderDemoOne',
     '吸顶效果',
     SliverPersistentHeaderDemoOne(),
+  ),
+  Tuple3(
+    'SliverPersistentHeaderDemoTwo',
+    '吸顶效果测试',
+    SliverPersistentHeaderDemoTwo(),
   ),
   Tuple3(
     'SliverAnimatedList',
