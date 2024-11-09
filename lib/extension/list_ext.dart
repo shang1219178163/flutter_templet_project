@@ -15,11 +15,8 @@ import 'package:get/get.dart';
 extension ListExt<T, E> on List<E> {
   ///运算符重载
   List<E> operator *(int value) {
-    var l = <E>[];
-    for (var i = 0; i < value; i++) {
-      l.addAll([...this]);
-    }
-    return l;
+    var result = List<E>.generate(value, (index) => this as E);
+    return result;
   }
 
   /// 获取随机元素
@@ -142,7 +139,7 @@ extension ListExt<T, E> on List<E> {
   }
 
   /// 根据值排序
-  void sortByValue({
+  List<E> sortedByValue({
     bool ascending = true,
     required num? Function(E e) cb,
   }) {
@@ -161,14 +158,6 @@ extension ListExt<T, E> on List<E> {
       }
       return bValue.compareTo(aValue);
     });
-  }
-
-  /// 根据值排序
-  List<E> sortedByValue({
-    bool ascending = true,
-    required num? Function(E e) cb,
-  }) {
-    sortByValue(ascending: ascending, cb: cb);
     return this;
   }
 
@@ -194,8 +183,7 @@ extension ListExt<T, E> on List<E> {
 }
 
 extension ListExtObject<E extends Object> on List<E> {
-  List<E> sortedByValue(
-      {bool ascending = true, required dynamic Function(E obj) cb}) {
+  List<E> sortedByValue({bool ascending = true, required dynamic Function(E obj) cb}) {
     if (ascending) {
       // this.sort((a, b) => cb(a).compareTo(cb(b)));
       sort((a, b) => _customeCompare(cb(a), cb(b)));
