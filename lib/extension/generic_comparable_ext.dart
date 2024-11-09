@@ -24,7 +24,7 @@ extension GenericComparableExt<T extends Comparable<T>> on T {
     return result;
   }
 
-  /// 超出底线用底线, 超出上线用上线
+  /// 超出底限用底限, 超出上限用上限
   T clamp(T lowerLimit, T upperLimit) {
     if (compareTo(lowerLimit) < 0) {
       return lowerLimit;
