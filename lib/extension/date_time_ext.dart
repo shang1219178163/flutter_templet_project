@@ -126,25 +126,82 @@ extension DateTimeExt on DateTime {
       return null;
     }
 
-    var dateTime =
-        DateTimeExt.dateFromTimestamp(timestamp: timestamp, isUtc: isUtc);
+    var dateTime = DateTimeExt.dateFromTimestamp(timestamp: timestamp, isUtc: isUtc);
     var result = stringFromDate(date: dateTime, format: format);
     return result;
   }
 
-  bool isSameDay(DateTime? date) {
-    if (date == null) {
+  bool isSameYear(DateTime? value) {
+    if (value == null) {
       return false;
     }
-    final result = year == date.year && month == date.month && day == date.day;
+    final result = year == value.year;
+    return result;
+  }
+
+  bool isSameMonth(DateTime? value) {
+    if (value == null) {
+      return false;
+    }
+    final result = year == value.year && month == value.month;
+    return result;
+  }
+
+  bool isSameDay(DateTime? value) {
+    if (value == null) {
+      return false;
+    }
+    final result = year == value.year && month == value.month && day == value.day;
+    return result;
+  }
+
+  bool isSameHour(DateTime? value) {
+    if (value == null) {
+      return false;
+    }
+    final result = year == value.year && month == value.month && day == value.day && hour == value.hour;
+    return result;
+  }
+
+  bool isSameMinute(DateTime? value) {
+    if (value == null) {
+      return false;
+    }
+    final result = year == value.year &&
+        month == value.month &&
+        day == value.day &&
+        minute == value.hour &&
+        minute == value.minute;
+    return result;
+  }
+
+  bool isSameSecond(DateTime? value) {
+    if (value == null) {
+      return false;
+    }
+    final result = year == value.year &&
+        month == value.month &&
+        day == value.day &&
+        minute == value.hour &&
+        minute == value.minute &&
+        second == value.second;
+    return result;
+  }
+
+  bool inRange(DateTime lowLimit, DateTime highLimit) {
+    final result = compareTo(lowLimit) >= 0 && compareTo(highLimit) <= 0;
+    debugPrint("inRange ${{
+      "lowLimit": lowLimit.toString(),
+      "this": toString(),
+      "highLimit": highLimit.toString(),
+    }}");
     return result;
   }
 
   String toString19() => toString().split(".").first;
 
   DateTime offsetDay({required int count}) {
-    final timstamp =
-        DateTime.now().millisecondsSinceEpoch + count * 24 * 60 * 60 * 1000;
+    final timstamp = DateTime.now().millisecondsSinceEpoch + count * 24 * 60 * 60 * 1000;
     var dateTime = DateTime.fromMillisecondsSinceEpoch(timstamp);
     return dateTime;
   }
@@ -185,8 +242,7 @@ extension DateTimeExt on DateTime {
     var dateTime = this;
     if (dateTime.weekday != 7) {
       final monthFisrtDay = DateTime(year, month, 1);
-      final timestamp = monthFisrtDay.millisecondsSinceEpoch -
-          monthFisrtDay.weekday * 24 * 60 * 60 * 1000;
+      final timestamp = monthFisrtDay.millisecondsSinceEpoch - monthFisrtDay.weekday * 24 * 60 * 60 * 1000;
       dateTime = DateTime.fromMillisecondsSinceEpoch(timestamp);
     }
 
@@ -202,12 +258,10 @@ extension DateTimeExt on DateTime {
 
     var dateTime = day;
     if (day.weekday == 7) {
-      final timestamp =
-          day.millisecondsSinceEpoch + (7 - 1) * 24 * 60 * 60 * 1000;
+      final timestamp = day.millisecondsSinceEpoch + (7 - 1) * 24 * 60 * 60 * 1000;
       dateTime = DateTime.fromMillisecondsSinceEpoch(timestamp);
     } else {
-      final timestamp =
-          day.millisecondsSinceEpoch + (6 - day.weekday) * 24 * 60 * 60 * 1000;
+      final timestamp = day.millisecondsSinceEpoch + (6 - day.weekday) * 24 * 60 * 60 * 1000;
       dateTime = DateTime.fromMillisecondsSinceEpoch(timestamp);
     }
 

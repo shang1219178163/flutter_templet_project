@@ -140,8 +140,7 @@ class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
       child: CupertinoPicker(
         backgroundColor: Colors.white,
         itemExtent: 30,
-        scrollController:
-            FixedExtentScrollController(initialItem: _selectedValue),
+        scrollController: FixedExtentScrollController(initialItem: _selectedValue),
         onSelectedItemChanged: (val) {
           _selectedValue = val;
           // setState(() {});
@@ -376,8 +375,7 @@ class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
           title: "人员选择",
           items: items ?? [],
           onChanged: (list) {
-            DLog.d(
-                "list: ${list.map((e) => e.toJson().filter((k, v) => v != null))}");
+            DLog.d("list: ${list.map((e) => e.toJson().filter((k, v) => v != null))}");
           },
         ),
       ),
@@ -395,36 +393,38 @@ class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
     var dateTime = initialDateTime ?? DateTime.now();
 
     showCupertinoModalPopup(
-        context: context,
-        builder: (_) {
-          return Container(
-            height: 300,
-            // color: Color.fromARGB(255, 255, 255, 255),
-            color: Colors.white,
-            child: Column(
-              children: [
-                NPickerToolBar(
-                  onCancel: onCancel,
-                  onConfirm: onConfirm,
+      context: context,
+      builder: (_) {
+        return Container(
+          height: 300,
+          // color: Color.fromARGB(255, 255, 255, 255),
+          color: Colors.white,
+          child: Column(
+            children: [
+              NPickerToolBar(
+                onCancel: onCancel,
+                onConfirm: onConfirm,
+              ),
+              Divider(height: 1.0),
+              Container(
+                height: 216,
+                color: Colors.white,
+                child: CupertinoDatePicker(
+                  mode: mode,
+                  initialDateTime: dateTime,
+                  dateOrder: DatePickerDateOrder.ymd,
+                  onDateTimeChanged: (val) {
+                    dateTime = val;
+                    onDateTimeChanged(val);
+                    setState(() {});
+                  },
                 ),
-                Divider(height: 1.0),
-                Container(
-                  height: 216,
-                  color: Colors.white,
-                  child: CupertinoDatePicker(
-                      mode: mode,
-                      initialDateTime: dateTime,
-                      dateOrder: DatePickerDateOrder.ymd,
-                      onDateTimeChanged: (val) {
-                        dateTime = val;
-                        onDateTimeChanged(val);
-                        setState(() {});
-                      }),
-                ),
-              ],
-            ),
-          );
-        });
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 }
 
@@ -446,9 +446,7 @@ class DatePickerDemo extends StatefulWidget {
 class _DatePickerDemoState extends State<DatePickerDemo> {
   @override
   Widget build(BuildContext context) {
-    final time = widget.dateTime != null
-        ? widget.dateTime!.toString19()
-        : 'datetime picked';
+    final time = widget.dateTime != null ? widget.dateTime!.toString19() : 'datetime picked';
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
         middle: Text('$widget.dateTime'),

@@ -139,12 +139,12 @@ class _TextDemoState extends State<TextDemo> with AssetResourceMixin {
               return Container(
                 color: Colors.black,
                 child: Transform(
-                  alignment: Alignment.centerLeft,
+                  alignment: Alignment.bottomLeft,
                   transform: Matrix4.skewX(-value),
                   child: Container(
                     padding: const EdgeInsets.all(8.0),
                     color: const Color(0xFFE8581C),
-                    child: const Text('Apartment for rent!'),
+                    child: Text('Apartment for rent!'),
                   ),
                 ),
               );
