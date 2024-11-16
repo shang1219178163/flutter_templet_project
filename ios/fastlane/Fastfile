@@ -24,6 +24,8 @@ platform :ios do
 =end
   desc "打包 release 版本, to: pgy/fir/release"
   lane :release do |options|
+    stime = archiveExecutionStart();
+
     platform = options[:to] || "release"
     en = options[:en] || "prod"
 
@@ -33,6 +35,9 @@ platform :ios do
     archiveRelease(ipaDir: fileDir)
 
     sh "fastlane releaseupload to:#{platform}"
+
+    UI.message "#{ipaDir}"
+    archiveExecutionEnd(stime: stime)
   end
 
 
@@ -59,6 +64,8 @@ platform :ios do
 =end
   desc "打包 development 版本, to: pgy/fir"
   lane :develop do |options|
+    stime = archiveExecutionStart();
+
     platform = options[:to] ||"pgy"
     en = options[:en] || "pre"
 
@@ -68,6 +75,9 @@ platform :ios do
     archiveDevelopment(ipaDir: fileDir)
 
     sh "fastlane developupload to:#{platform}"
+
+    UI.message "#{ipaDir}"
+    archiveExecutionEnd(stime: stime)
   end
 
 
@@ -256,6 +266,37 @@ platform :ios do
       
   end
 
+
+  # 秒转时分秒
+  def seconds_to_hms(seconds)
+    # 计算小时数
+    hours = seconds / 3600
+    # 计算剩余的秒数并转换为分钟数
+    minutes = (seconds % 3600) / 60
+    # 计算剩余的秒数
+    seconds = seconds % 60
+
+    result = format("%02d:%02d:%02d", hours, minutes, seconds)
+    return result;
+  end
+
+
+  # 打包开始
+  def archiveExecutionStart()
+    stime = Time.now();
+    UI.message "🌟🌟🌟🌟 打包开始".blue
+    return stime;
+  end
+
+  # 打包时长统计函数
+  def archiveExecutionEnd(stime: Time?)
+    etime = Time.now
+
+    # 计算时间差
+    time_difference = etime - stime
+
+    UI.message "🌟🌟🌟🌟 打包结束, 总耗时: #{seconds_to_hms(time_difference)}".blue
+  end
 
   desc "测试"
   lane :test do |options|
