@@ -42,20 +42,22 @@ class _SuspensionButtonDemoState extends State<SuspensionButtonDemo> {
 
   buildBody() {
     return NSuspension(
+      attachHorizalEdge: true,
+      // attachVerticalEdge: true,
       padding: EdgeInsets.only(left: 20, top: 30, right: 40, bottom: 50),
       childSize: Size(80, 80),
+      bgChild: Container(
+        color: Colors.black.withOpacity(0.1), //Color.fromRGBO(242, 243, 248, 1),
+      ),
       child: Container(
         width: 80,
         height: 80,
         decoration: BoxDecoration(
           color: Colors.blue,
           border: Border.all(color: Colors.blue),
-          borderRadius: BorderRadius.all(Radius.circular(8.w)),
+          borderRadius: BorderRadius.all(Radius.circular(8)),
         ),
-      ),
-      bgChild: Container(
-        color:
-            Colors.black.withOpacity(0.1), //Color.fromRGBO(242, 243, 248, 1),
+        child: FlutterLogo(),
       ),
     );
   }
