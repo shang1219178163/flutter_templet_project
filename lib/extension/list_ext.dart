@@ -12,7 +12,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:get/get.dart';
 
-extension ListExt<T, E> on List<E> {
+extension IterableExt<E> on Iterable<E> {
+  /// 动态值
+  E operator [](int index) {
+    final i = index.clamp(0, length);
+    return this[i];
+  }
+
+  /// 动态复制
+  void operator []=(int index, E? val) {
+    final i = index.clamp(0, length);
+    this[i] = val;
+  }
+
   ///运算符重载
   List<E> operator *(int value) {
     var result = List<E>.generate(value, (index) => this as E);
@@ -84,17 +96,36 @@ extension ListExt<T, E> on List<E> {
   /// 倒叙查询符合条件元素
   int? lastIndexWhere(bool Function(E) test) => findLastIndex(test);
 
-  /// 所有元素都满足需求(回调返回第一个不满足需求的元素)
-  bool every(bool Function(E) test, {ValueChanged<E>? cb}) {
-    for (final element in this) {
-      if (!test(element)) {
-        cb?.call(element);
-        return false;
-      }
+  Iterable<E> exchange(int fromIdx, int toIdx) {
+    if (fromIdx >= length || toIdx >= length) {
+      return this;
     }
-    return true;
+    var e = this[fromIdx];
+    var toE = this[toIdx];
+    //exchange
+    this[fromIdx] = toE;
+    this[toIdx] = e;
+    return this;
   }
 
+  /// 递归遍历
+  recursion(void Function(E e)? cb) {
+    forEach((item) {
+      cb?.call(item);
+      recursion(cb);
+    });
+  }
+}
+
+extension IterableNullableItemExt<E> on Iterable<E?> {
+  /// 移除数组空值
+  Iterable<E> removeNull() {
+    var result = where((e) => e != null).whereType<E>();
+    return result;
+  }
+}
+
+extension ListExt<T, E> on List<E> {
   /// 用多个元素取代数组中满足条件的第一个元素
   /// replacements 取代某个元素的集合
   /// isReversed 是否倒序查询
@@ -123,15 +154,6 @@ extension ListExt<T, E> on List<E> {
     return this;
   }
 
-  /// 数组降维() expand
-  // List<T> flatMap(List<T> action(E e)) {
-  // var result = <T>[];
-  // this.forEach((e) {
-  //   result.addAll(action(e));
-  // });
-  // return result;
-  // }
-
   /// 同 sorted
   List<E> sorted([int Function(E a, E b)? compare]) {
     sort(compare);
@@ -141,137 +163,16 @@ extension ListExt<T, E> on List<E> {
   /// 根据值排序
   List<E> sortedByValue({
     bool ascending = true,
-    required num? Function(E e) cb,
+    required num Function(E e) cb,
   }) {
     sort((a, b) {
       final aValue = cb(a);
       final bValue = cb(b);
       if (ascending) {
-        if (aValue == null || bValue == null) {
-          return 1;
-        }
         return aValue.compareTo(bValue);
-      }
-
-      if (aValue == null || bValue == null) {
-        return -1;
       }
       return bValue.compareTo(aValue);
     });
     return this;
   }
-
-  List<E> exchange(int fromIdx, int toIdx) {
-    if (fromIdx >= length || toIdx >= length) {
-      return this;
-    }
-    var e = this[fromIdx];
-    var toE = this[toIdx];
-    //exchange
-    this[fromIdx] = toE;
-    this[toIdx] = e;
-    return this;
-  }
-
-  /// 递归遍历
-  recursion(void Function(E e)? cb) {
-    forEach((item) {
-      cb?.call(item);
-      recursion(cb);
-    });
-  }
-}
-
-extension ListExtObject<E extends Object> on List<E> {
-  List<E> sortedByValue({bool ascending = true, required dynamic Function(E obj) cb}) {
-    if (ascending) {
-      // this.sort((a, b) => cb(a).compareTo(cb(b)));
-      sort((a, b) => _customeCompare(cb(a), cb(b)));
-    } else {
-      // this.sort((a, b) => cb(b).compareTo(cb(a)));
-      sort((a, b) => _customeCompare(cb(b), cb(a)));
-    }
-    return this;
-  }
-
-  /// 处理字符串中包含数字排序异常的问题
-  _customeCompare(dynamic a, dynamic b) {
-    if (a is String && b is String) {
-      return a.compareCustom(b);
-    }
-    return a.compareTo(b);
-  }
-}
-
-extension IterableExt<E> on Iterable<E> {
-  /// 动态值
-  E operator [](int index) {
-    final i = index.clamp(0, length);
-    return this[i];
-  }
-
-  /// 动态复制
-  void operator []=(int index, E? val) {
-    final i = index.clamp(0, length);
-    this[i] = val;
-  }
-
-  // /// 重新
-  // E? get firstNBew {
-  //   var it = iterator;
-  //   if (!it.moveNext()) {
-  //     return null;
-  //   }
-  //   return it.current;
-  // }
-  //
-  // E? get last {
-  //   var it = iterator;
-  //   if (!it.moveNext()) {
-  //     return null;
-  //   }
-  //   E result;
-  //   do {
-  //     result = it.current;
-  //   } while (it.moveNext());
-  //   return result;
-  // }
-
-  // double sum(double Function(T) cb) {
-  //   var result = 0.0;
-  //   for (final e in this) {
-  //     result += cb(e);
-  //   }
-  //   return result;
-  // }
-
-  // Iterable<T> filter() {
-  //   return whereType<T>();
-  // }
-}
-
-extension ListNullExt<E> on List<E?> {
-  /// 移除数组空值
-  List<E> removeNull() {
-    var val = this;
-    val.removeWhere((e) => e == null);
-    final result = val.whereType<E>().toList();
-    return result;
-  }
-
-  /// 移除数组空值
-  List<E> mapNonNull() {
-    var list = <E>[];
-    for (final e in this) {
-      if (e != null) {
-        list.add(e);
-      }
-    }
-    return list;
-  }
-}
-
-extension ListNullNewExt on List? {
-  /// 可选值是否为空
-  bool get isNotEmptyNew => (this ?? []).isNotEmpty;
 }
