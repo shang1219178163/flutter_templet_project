@@ -15,6 +15,7 @@ import 'package:flutter_templet_project/extension/list_ext.dart';
 import 'package:flutter_templet_project/extension/map_ext.dart';
 import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/extension/object_ext.dart';
+import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/mixin/selectable_mixin.dart';
 import 'package:flutter_templet_project/model/user_model.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
@@ -78,18 +79,15 @@ class _DataTableDemoState extends State<DataTableDemo> {
   final children = <int, Widget>{
     0: Container(
       padding: EdgeInsets.all(8),
-      child:
-          Text("Item 1", style: TextStyle(fontSize: 15, color: Colors.black)),
+      child: Text("Item 1", style: TextStyle(fontSize: 15, color: Colors.black)),
     ),
     1: Container(
       padding: EdgeInsets.all(8),
-      child:
-          Text("Item 2", style: TextStyle(fontSize: 15, color: Colors.black)),
+      child: Text("Item 2", style: TextStyle(fontSize: 15, color: Colors.black)),
     ),
     2: Container(
       padding: EdgeInsets.all(8),
-      child:
-          Text("Item 3", style: TextStyle(fontSize: 15, color: Colors.black)),
+      child: Text("Item 3", style: TextStyle(fontSize: 15, color: Colors.black)),
     ),
   };
 
@@ -126,8 +124,7 @@ class _DataTableDemoState extends State<DataTableDemo> {
                 .map((e) => DataColumn(
                       label: Text(e.title),
                       onSort: (int columnIndex, bool ascending) {
-                        _changeSort(
-                            columnIndex: columnIndex, ascending: ascending);
+                        _changeSort(columnIndex: columnIndex, ascending: ascending);
                       },
                     ))
                 .toList(),
@@ -146,10 +143,8 @@ class _DataTableDemoState extends State<DataTableDemo> {
                         setState(() {
                           e.isSelected = value;
                         });
-                        ddlog(models
-                            .where((e) => e.isSelected == true)
-                            .map((e) => "${e.name}_${e.isSelected}")
-                            .toList());
+                        ddlog(
+                            models.where((e) => e.isSelected == true).map((e) => "${e.name}_${e.isSelected}").toList());
                       },
                     ))
                 .toList(),
@@ -174,8 +169,7 @@ class _DataTableDemoState extends State<DataTableDemo> {
           break;
 
         case 3:
-          models.sortedByValue(
-              ascending: ascending, cb: (obj) => obj.birthYear);
+          models.sortedByValue(ascending: ascending, cb: (obj) => obj.birthYear);
           break;
 
         case 4:
@@ -294,4 +288,25 @@ class _DataSource<E extends SelectableMixin> extends DataTableSource {
 
   @override
   int get selectedRowCount => _selectedCount;
+}
+
+extension ListExtObject<E extends Object> on List<E> {
+  List<E> sortedByValue({bool ascending = true, required dynamic Function(E obj) cb}) {
+    if (ascending) {
+      // this.sort((a, b) => cb(a).compareTo(cb(b)));
+      sort((a, b) => _customeCompare(cb(a), cb(b)));
+    } else {
+      // this.sort((a, b) => cb(b).compareTo(cb(a)));
+      sort((a, b) => _customeCompare(cb(b), cb(a)));
+    }
+    return this;
+  }
+
+  /// 处理字符串中包含数字排序异常的问题
+  _customeCompare(dynamic a, dynamic b) {
+    if (a is String && b is String) {
+      return a.compareCustom(b);
+    }
+    return a.compareTo(b);
+  }
 }

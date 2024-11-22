@@ -53,8 +53,7 @@ class _SecondPageState extends State<SecondPage> {
             icon: Icon(Icons.change_circle_outlined),
             color: Colors.white,
             onPressed: () {
-              debugPrint(
-                  "AppUti.navigatorKey: ${ToolUtil.navigatorKey.currentWidget}");
+              debugPrint("AppUti.navigatorKey: ${ToolUtil.navigatorKey.currentWidget}");
 
               _isList = !_isList;
               setState(() {});
@@ -75,8 +74,7 @@ class _SecondPageState extends State<SecondPage> {
     return TextButton(
       onPressed: () {},
       style: ButtonStyle(
-        foregroundColor: MaterialStateProperty.resolveWith<Color>(
-            (Set<MaterialState> states) {
+        foregroundColor: MaterialStateProperty.resolveWith<Color>((Set<MaterialState> states) {
           if (states.contains(MaterialState.pressed)) {
             return Colors.green;
           }
@@ -147,9 +145,7 @@ class _SecondPageState extends State<SecondPage> {
                     child: child,
                   );
                 },
-                child: Container(
-                    padding: EdgeInsets.all(10),
-                    child: SelectableText("离离原上草, 一岁一枯荣")),
+                child: Container(padding: EdgeInsets.all(10), child: SelectableText("离离原上草, 一岁一枯荣")),
               ),
             ),
             NSectionBox(
@@ -171,8 +167,7 @@ class _SecondPageState extends State<SecondPage> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(8)),
                     ),
-                    onPressed: () =>
-                        debugPrint("MaterialButton: ${DateTime.now()}"),
+                    onPressed: () => debugPrint("MaterialButton: ${DateTime.now()}"),
                     child: Text(
                       "MaterialButton",
                     ),
@@ -307,10 +302,8 @@ class _SecondPageState extends State<SecondPage> {
                 },
                 style: OutlinedButton.styleFrom(
                   padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                  side: BorderSide(
-                      width: 1.0,
-                      color: Theme.of(context).colorScheme.secondary,
-                      style: BorderStyle.solid),
+                  side:
+                      BorderSide(width: 1.0, color: Theme.of(context).colorScheme.secondary, style: BorderStyle.solid),
                 ),
               ),
             ),
@@ -410,8 +403,7 @@ class _SecondPageState extends State<SecondPage> {
                     extendedIconLabelSpacing: 0,
                     elevation: 0,
                     // isExtended: false,
-                    extendedPadding:
-                        EdgeInsets.symmetric(horizontal: 12, vertical: 0),
+                    extendedPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 0),
                     backgroundColor: const Color(0xff03dac6),
                     // foregroundColor: Colors.black,
                     onPressed: () {
@@ -433,8 +425,7 @@ class _SecondPageState extends State<SecondPage> {
                   FloatingActionButton.extended(
                     elevation: 0,
                     // isExtended: false,
-                    extendedPadding:
-                        EdgeInsets.symmetric(horizontal: 12, vertical: 0),
+                    extendedPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 0),
                     backgroundColor: const Color(0xff03dac6),
                     // foregroundColor: Colors.black,
                     onPressed: () {
@@ -480,21 +471,23 @@ class _SecondPageState extends State<SecondPage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: iconDirectionItems()
-                    .map((e) => ElevatedButton(
-                          // style: ElevatedButton.styleFrom(
-                          //   padding: EdgeInsets.zero,
-                          //   // padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                          //   side: BorderSide(color: ColorExt.random),
-                          // ),
-                          onPressed: () {
-                            debugPrint("ElevatedButton");
-                          },
-                          child: e,
-                        ).copy(
-                          style: ElevatedButton.styleFrom(
-                            padding: const EdgeInsets.all(8.0),
-                            // padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                            // side: BorderSide(color: ColorExt.random),
+                    .map((e) => Flexible(
+                          child: ElevatedButton(
+                            // style: ElevatedButton.styleFrom(
+                            //   padding: EdgeInsets.zero,
+                            //   // padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                            //   side: BorderSide(color: ColorExt.random),
+                            // ),
+                            onPressed: () {
+                              debugPrint("ElevatedButton");
+                            },
+                            child: e,
+                          ).copy(
+                            style: ElevatedButton.styleFrom(
+                              padding: const EdgeInsets.all(8.0),
+                              // padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                              // side: BorderSide(color: ColorExt.random),
+                            ),
                           ),
                         ))
                     .toList(),
@@ -505,11 +498,8 @@ class _SecondPageState extends State<SecondPage> {
               child: buildToggleButtons(),
             ),
             NSectionBox(title: "DropdownButton", child: _buildDropdownButton()),
-            NSectionBox(
-                title: "_buildDropdownButton1", child: _buildDropdownButton1()),
-            NSectionBox(
-                title: "_buildPopupMenuButtonExt",
-                child: _buildPopupMenuButtonExt()),
+            NSectionBox(title: "_buildDropdownButton1", child: _buildDropdownButton1()),
+            NSectionBox(title: "_buildPopupMenuButtonExt", child: _buildPopupMenuButtonExt()),
             NSectionBox(
               title: "UploadButton",
               child: UploadButton(
@@ -635,12 +625,7 @@ class _SecondPageState extends State<SecondPage> {
                 pointWidth: 1,
                 radius: Radius.circular(15),
                 gradient: SweepGradient(
-                  colors: [
-                    Colors.blue,
-                    Colors.red,
-                    Colors.yellow,
-                    Colors.green
-                  ],
+                  colors: [Colors.blue, Colors.red, Colors.yellow, Colors.green],
                 ),
               ),
               alignment: Alignment.center,
@@ -695,92 +680,86 @@ class _SecondPageState extends State<SecondPage> {
   }
 
   Widget buildNButton() {
-    return LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints) {
+    return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
       final spacing = 8.0;
       final rowCount = 3.0;
-      final itemWidth =
-          (constraints.maxWidth - spacing * (rowCount - 1)) / rowCount;
+      final itemWidth = (constraints.maxWidth - spacing * (rowCount - 1)) / rowCount;
 
-      return Wrap(
-          spacing: spacing,
-          runSpacing: spacing,
-          crossAxisAlignment: WrapCrossAlignment.center,
-          children: [
-            ...[
-              NButton(
-                title: "NButton",
-                onPressed: () {
-                  DLog.d("NButton");
-                },
-              ),
-              NButton(
-                title: "NButton: 禁用",
-                enable: false,
-                onPressed: () {},
-              ),
-              NButton(
-                title: "NButton: red",
-                primary: Colors.red,
-                onPressed: () {},
-              ),
-              NButton.tonal(
-                title: "NButton.tonal",
-                // primary: Colors.red,
-                // border: Border.all(color: Colors.transparent),
-                onPressed: () {},
-              ),
-              NButton.tonal(
-                title: "NButton.tonal",
-                primary: Colors.red,
-                // border: Border.all(color: Colors.transparent),
-                onPressed: () {},
-              ),
-              NButton.tonal(
-                primary: Colors.white,
-                title: "NButton.tonal",
-                style: TextStyle(color: Colors.black87),
-                border: Border.all(color: Color(0xffe4e4e4)),
-                onPressed: () {},
-              ),
-              NButton.tonal(
-                primary: Colors.black87,
-                title: "NButton.tonal1",
-                border: Border.all(color: Colors.transparent),
-                backgroudColor: Color(0xffF3F3F3),
-                // gradient: LinearGradient(
-                //   colors: [Colors.green, Colors.red],
-                //   begin: Alignment.topLeft,
-                //   end: Alignment.bottomRight,
-                // ),
-                onPressed: () {},
-              ),
-              NButton.tonal(
-                primary: Colors.black87,
-                title: "tonal",
-                border: Border.all(color: Colors.transparent),
-                backgroudColor: Colors.transparent,
-                onPressed: () {},
-              ),
-              NButton.text(
-                // primary: Colors.red,
-                title: "NButton.text",
-                onPressed: () {},
-              ),
-            ]
-                .map((e) => Container(
-                      width: itemWidth.truncateToDouble(),
-                      // padding: const EdgeInsets.all(8.0),
-                      child: e,
-                    ))
-                .toList(),
-            NButton.text(
-              // primary: Colors.red,
-              width: 26,
-              child: Icon(Icons.arrow_back_ios_new, color: Colors.blue),
-              onPressed: () {},
-            ),
-          ]);
+      return Wrap(spacing: spacing, runSpacing: spacing, crossAxisAlignment: WrapCrossAlignment.center, children: [
+        ...[
+          NButton(
+            title: "NButton",
+            onPressed: () {
+              DLog.d("NButton");
+            },
+          ),
+          NButton(
+            title: "NButton: 禁用",
+            enable: false,
+            onPressed: () {},
+          ),
+          NButton(
+            title: "NButton: red",
+            primary: Colors.red,
+            onPressed: () {},
+          ),
+          NButton.tonal(
+            title: "NButton.tonal",
+            // primary: Colors.red,
+            // border: Border.all(color: Colors.transparent),
+            onPressed: () {},
+          ),
+          NButton.tonal(
+            title: "NButton.tonal",
+            primary: Colors.red,
+            // border: Border.all(color: Colors.transparent),
+            onPressed: () {},
+          ),
+          NButton.tonal(
+            primary: Colors.white,
+            title: "NButton.tonal",
+            style: TextStyle(color: Colors.black87),
+            border: Border.all(color: Color(0xffe4e4e4)),
+            onPressed: () {},
+          ),
+          NButton.tonal(
+            primary: Colors.black87,
+            title: "NButton.tonal1",
+            border: Border.all(color: Colors.transparent),
+            backgroudColor: Color(0xffF3F3F3),
+            // gradient: LinearGradient(
+            //   colors: [Colors.green, Colors.red],
+            //   begin: Alignment.topLeft,
+            //   end: Alignment.bottomRight,
+            // ),
+            onPressed: () {},
+          ),
+          NButton.tonal(
+            primary: Colors.black87,
+            title: "tonal",
+            border: Border.all(color: Colors.transparent),
+            backgroudColor: Colors.transparent,
+            onPressed: () {},
+          ),
+          NButton.text(
+            // primary: Colors.red,
+            title: "NButton.text",
+            onPressed: () {},
+          ),
+        ]
+            .map((e) => Container(
+                  width: itemWidth.truncateToDouble(),
+                  // padding: const EdgeInsets.all(8.0),
+                  child: e,
+                ))
+            .toList(),
+        NButton.text(
+          // primary: Colors.red,
+          width: 26,
+          child: Icon(Icons.arrow_back_ios_new, color: Colors.blue),
+          onPressed: () {},
+        ),
+      ]);
     });
   }
 
@@ -820,15 +799,10 @@ class _SecondPageState extends State<SecondPage> {
       childAspectRatio: 4 / 3,
       children: _tuples
           .map((e) => GridTile(
-                footer: Container(
-                    color: Colors.green,
-                    height: 25,
-                    child: Center(child: Text(e.item1))),
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      e.item2,
-                    ]),
+                footer: Container(color: Colors.green, height: 25, child: Center(child: Text(e.item1))),
+                child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  e.item2,
+                ]),
               ))
           .toList(),
     );
@@ -1002,8 +976,7 @@ class _SecondPageState extends State<SecondPage> {
 
     return Container(
       padding: const EdgeInsets.all(5.0),
-      decoration:
-          BoxDecoration(color: Colors.greenAccent, border: Border.all()),
+      decoration: BoxDecoration(color: Colors.greenAccent, border: Border.all()),
       child: DropdownButton(
         // Initial
         value: dropdownvalue,

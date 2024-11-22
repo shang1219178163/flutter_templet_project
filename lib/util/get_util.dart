@@ -26,7 +26,7 @@ class GetBottomSheet {
   static Future<dynamic> showCustom({
     bool enableDrag = true,
     bool addUnconstrainedBox = true,
-    bool isScrollControlled = false,
+    bool isScrollControlled = false, //控制高度
     bool hideDragIndicator = true,
     required Widget child,
   }) {
@@ -157,8 +157,7 @@ class GetDialog {
       child: Container(
         clipBehavior: Clip.hardEdge,
         margin: EdgeInsets.symmetric(horizontal: 30),
-        constraints:
-            constraints ?? BoxConstraints(maxHeight: 550, minHeight: 150),
+        constraints: constraints ?? BoxConstraints(maxHeight: 550, minHeight: 150),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(12)),
@@ -292,8 +291,7 @@ class GetDialog {
 }
 
 /// 底部弹窗列表
-class NBottomSheet<T extends ({VoidCallback onTap, Widget child})>
-    extends StatelessWidget {
+class NBottomSheet<T extends ({VoidCallback onTap, Widget child})> extends StatelessWidget {
   const NBottomSheet({
     super.key,
     required this.actions,
@@ -426,9 +424,7 @@ class NDialogBox extends StatelessWidget {
       width: dialogTheme?.width ?? 315,
       clipBehavior: Clip.hardEdge,
       alignment: Alignment.center,
-      padding: padding ??
-          dialogTheme?.padding ??
-          const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+      padding: padding ?? dialogTheme?.padding ?? const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(dialogTheme?.raidus ?? 16),
@@ -483,8 +479,7 @@ class NBottomInputBox extends StatelessWidget {
     required this.controller,
     this.title = "编辑原因",
     this.lengthLimit = 200,
-    this.textFieldPadding =
-        const EdgeInsets.only(top: 20, left: 15, right: 15, bottom: 12),
+    this.textFieldPadding = const EdgeInsets.only(top: 20, left: 15, right: 15, bottom: 12),
     this.onCancel,
     required this.onConfirm,
     this.dragIndicator,
