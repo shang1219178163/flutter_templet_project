@@ -88,6 +88,7 @@ import 'package:flutter_templet_project/pages/demo/DismissibleDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DisplayFeatureDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DragAndDropDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DraggableDemo.dart';
+import 'package:flutter_templet_project/pages/demo/DraggableFloatingButtonDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DraggableScrollableSheetDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DrawCanvasDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DropBoxChoicDemo.dart';
@@ -202,6 +203,8 @@ import 'package:flutter_templet_project/pages/demo/OffstageDemo.dart';
 import 'package:flutter_templet_project/pages/demo/OverflowBarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/OverflowDemo.dart';
 import 'package:flutter_templet_project/pages/demo/OverlayDemo.dart';
+import 'package:flutter_templet_project/pages/demo/OverlayDemoOne.dart';
+import 'package:flutter_templet_project/pages/demo/OverlayMixinDemo.dart';
 import 'package:flutter_templet_project/pages/demo/OverlayPortalDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PageBuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PageLifecycleFuncTest.dart';
@@ -256,6 +259,7 @@ import 'package:flutter_templet_project/pages/demo/StepperDemo.dart';
 import 'package:flutter_templet_project/pages/demo/StreamBuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/StringTransformPage.dart';
 import 'package:flutter_templet_project/pages/demo/SuspensionButtonDemo.dart';
+import 'package:flutter_templet_project/pages/demo/SuspensionButtonDemoNew.dart';
 import 'package:flutter_templet_project/pages/demo/SwitchDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TableDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TapRegionDemo.dart';
@@ -573,6 +577,9 @@ class APPRouter {
   static const listViewStyleDemo = '/listViewStyleDemo';
   static const builderDemo = '/builderDemo';
   static const overlayDemo = '/overlayDemo';
+  static const overlayDemoOne = '/overlayDemoOne';
+  static const overlayMixinDemo = '/overlayMixinDemo';
+
   static const decorationDemo = '/decorationDemo';
   static const stackDemo = '/stackDemo';
   static const stackDemoOne = '/stackDemoOne';
@@ -669,6 +676,7 @@ class APPRouter {
   static const syncfusionFlutterDatepickerDemo = '/syncfusionFlutterDatepickerDemo';
   static const tableCalenderMain = '/tableCalenderMain';
   static const suspensionButtonDemo = '/suspensionButtonDemo';
+  static const suspensionButtonDemoNew = '/suspensionButtonDemoNew';
   static const neomorphismHomePage = '/neomorphismHomePage';
   static const uploadFileDemo = '/uploadFileDemo';
   static const fileUploadBoxDemo = '/fileUploadBoxDemo';
@@ -769,6 +777,7 @@ class APPRouter {
   static const irregularClipperDemo = '/irregularClipperDemo';
   static const ocrPhotoDemo = '/ocrPhotoDemo';
   static const translationTextPage = '/translationTextPage';
+  static const draggableFloatingButtonDemo = '/draggableFloatingButtonDemo';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -1519,6 +1528,15 @@ class AppPage {
       page: () => OverlayDemo(),
     ),
     GetPage(
+      name: APPRouter.overlayDemoOne,
+      page: () => OverlayDemoOne(),
+    ),
+    GetPage(
+      name: APPRouter.overlayMixinDemo,
+      page: () => OverlayMixinDemo(),
+    ),
+
+    GetPage(
       name: APPRouter.decorationDemo,
       page: () => DecorationDemo(),
     ),
@@ -1882,6 +1900,11 @@ class AppPage {
       name: APPRouter.suspensionButtonDemo,
       page: () => SuspensionButtonDemo(),
     ),
+    GetPage(
+      name: APPRouter.suspensionButtonDemoNew,
+      page: () => SuspensionButtonDemoNew(),
+    ),
+
     GetPage(
       name: APPRouter.neomorphismHomePage,
       page: () => NeomorphismHomePage(),
@@ -2280,6 +2303,10 @@ class AppPage {
     GetPage(
       name: APPRouter.translationTextPage,
       page: () => TranslationTextPage(),
+    ),
+    GetPage(
+      name: APPRouter.draggableFloatingButtonDemo,
+      page: () => DraggableFloatingButtonDemo(),
     ),
   ];
 }

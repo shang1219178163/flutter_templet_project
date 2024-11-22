@@ -539,6 +539,7 @@ var list = <Tuple2<String, String>>[
   Tuple2(APPRouter.irregularClipperDemo, "irregularClipperDemo"),
   Tuple2(APPRouter.ocrPhotoDemo, "ocrPhotoDemo"),
   Tuple2(APPRouter.translationTextPage, "translationTextPage"),
+  Tuple2(APPRouter.draggableFloatingButtonDemo, "draggableFloatingButtonDemo"),
 ];
 
 var slivers = <Tuple2<String, String>>[
@@ -579,6 +580,8 @@ var specials = <Tuple2<String, String>>[
   Tuple2(APPRouter.promptBuilderDemo, "指引模板"),
   Tuple2(APPRouter.isolateDemo, "isolateDemo"),
   Tuple2(APPRouter.overlayDemo, "overlay弹窗"),
+  Tuple2(APPRouter.overlayDemoOne, "overlay弹窗1"),
+  Tuple2(APPRouter.overlayMixinDemo, "overlayMixinDemo"),
   Tuple2(APPRouter.boxConstraintsDemo, "boxConstraints"),
   Tuple2(APPRouter.gradientDemo, "渐变色"),
   Tuple2(APPRouter.imageBlendModeDemo, "图片渲染模式"),
@@ -648,6 +651,7 @@ var customs = [
   Tuple2(APPRouter.imChatPage, "聊天列表"),
   Tuple2(APPRouter.expandTextDemo, "可折叠文字"),
   Tuple2(APPRouter.suspensionButtonDemo, "悬浮按钮"),
+  Tuple2(APPRouter.suspensionButtonDemoNew, "悬浮按钮2"),
   Tuple2(APPRouter.uploadFileDemo, "上传demo"),
   Tuple2(APPRouter.fileUploadBoxDemo, "上传文件demo"),
   Tuple2(APPRouter.jsonToDartPage, "json转模型"),
