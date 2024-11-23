@@ -13,13 +13,13 @@ import 'package:device_info_plus/device_info_plus.dart';
 
 extension DeviceInfoPluginExt on DeviceInfoPlugin {
   /// 是否是模拟器
-  FutureOr<bool> isSimulator() async {
+  static FutureOr<bool> isSimulator() async {
     final result = await isPhysicalDevice();
     return !result;
   }
 
   /// 是真机
-  FutureOr<bool> isPhysicalDevice() async {
+  static FutureOr<bool> isPhysicalDevice() async {
     final supports = [Platform.isIOS, Platform.isAndroid];
     if (!supports.contains(true)) {
       return false;
@@ -36,7 +36,7 @@ extension DeviceInfoPluginExt on DeviceInfoPlugin {
   }
 
   /// 是pad
-  FutureOr<bool> isPad() async {
+  static FutureOr<bool> isPad() async {
     final supports = [Platform.isIOS, Platform.isAndroid];
     if (!supports.contains(true)) {
       return false;

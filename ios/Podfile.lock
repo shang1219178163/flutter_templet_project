@@ -81,6 +81,10 @@ PODS:
   - google_mlkit_commons (0.9.0):
     - Flutter
     - MLKitVision
+  - google_mlkit_language_id (0.12.0):
+    - Flutter
+    - google_mlkit_commons
+    - GoogleMLKit/LanguageID (~> 7.0.0)
   - google_mlkit_text_recognition (0.14.0):
     - Flutter
     - google_mlkit_commons
@@ -92,6 +96,9 @@ PODS:
   - GoogleDataTransport (10.1.0):
     - nanopb (~> 3.30910.0)
     - PromisesObjC (~> 2.4)
+  - GoogleMLKit/LanguageID (7.0.0):
+    - GoogleMLKit/MLKitCore
+    - MLKitLanguageID (~> 7.0.0)
   - GoogleMLKit/MLKitCore (7.0.0):
     - MLKitCommon (~> 12.0.0)
   - GoogleMLKit/TextRecognition (7.0.0):
@@ -154,6 +161,8 @@ PODS:
     - GoogleUtilities/Logger (~> 8.0)
     - GoogleUtilities/UserDefaults (~> 8.0)
     - GTMSessionFetcher/Core (< 4.0, >= 3.3.2)
+  - MLKitLanguageID (7.0.0):
+    - MLKitNaturalLanguage (~> 8.0)
   - MLKitNaturalLanguage (8.0.0):
     - GoogleToolboxForMac/Logger (< 5.0, >= 4.2.1)
     - "GoogleToolboxForMac/NSData+zlib (< 5.0, >= 4.2.1)"
@@ -261,6 +270,7 @@ DEPENDENCIES:
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
   - fluwx (from `.symlinks/plugins/fluwx/ios`)
   - google_mlkit_commons (from `.symlinks/plugins/google_mlkit_commons/ios`)
+  - google_mlkit_language_id (from `.symlinks/plugins/google_mlkit_language_id/ios`)
   - google_mlkit_text_recognition (from `.symlinks/plugins/google_mlkit_text_recognition/ios`)
   - google_mlkit_translation (from `.symlinks/plugins/google_mlkit_translation/ios`)
   - GoogleMLKit/TextRecognitionChinese (~> 7.0.0)
@@ -302,6 +312,7 @@ SPEC REPOS:
     - Mantle
     - MLImage
     - MLKitCommon
+    - MLKitLanguageID
     - MLKitNaturalLanguage
     - MLKitTextRecognition
     - MLKitTextRecognitionChinese
@@ -356,6 +367,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/fluwx/ios"
   google_mlkit_commons:
     :path: ".symlinks/plugins/google_mlkit_commons/ios"
+  google_mlkit_language_id:
+    :path: ".symlinks/plugins/google_mlkit_language_id/ios"
   google_mlkit_text_recognition:
     :path: ".symlinks/plugins/google_mlkit_text_recognition/ios"
   google_mlkit_translation:
@@ -428,6 +441,7 @@ SPEC CHECKSUMS:
   fluttertoast: 9f2f8e81bb5ce18facb9748d7855bf5a756fe3db
   fluwx: daa284756ce53442b3d0417ceeda66e981906811
   google_mlkit_commons: 384e4e206e122b6dad430d3158205e0b2fac6789
+  google_mlkit_language_id: 52df284ee6ac2eadad3429a036599e9b12e9969c
   google_mlkit_text_recognition: e540f2aff997f2b0daaa1b4fd5ead3b0b7030adc
   google_mlkit_translation: d7f4dbc00677b2ef0a35e16be1c2c3172ac157d6
   GoogleDataTransport: aae35b7ea0c09004c3797d53c8c41f66f219d6a7
@@ -444,6 +458,7 @@ SPEC CHECKSUMS:
   Mantle: c5aa8794a29a022dfbbfc9799af95f477a69b62d
   MLImage: 0ad1c5f50edd027672d8b26b0fee78a8b4a0fc56
   MLKitCommon: 07c2c33ae5640e5380beaaa6e4b9c249a205542d
+  MLKitLanguageID: f52e378d875f1a5e67ac0f259ebddaab95faa1c7
   MLKitNaturalLanguage: 1faece38017b0cf8eb49ac69cff10cb419f68c01
   MLKitTextRecognition: 3b41f3ff084a79afb214408d25d2068d77ab322c
   MLKitTextRecognitionChinese: a7e2d3e54d8be80091f7064741c54e2298a9d498

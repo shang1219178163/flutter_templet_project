@@ -1039,6 +1039,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.9.0"
+  google_mlkit_language_id:
+    dependency: "direct main"
+    description:
+      name: google_mlkit_language_id
+      sha256: "80446a42cf5f9daf39f28489b2b38ce883aa9e3daadd73e1fe1591022507248a"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.12.0"
   google_mlkit_text_recognition:
     dependency: "direct main"
     description:
