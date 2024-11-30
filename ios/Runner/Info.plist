@@ -30,6 +30,7 @@
 	<false/>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
+	   <string>https</string>
 		<string>sms</string>
 		<string>tel</string>
 		<string>weixin</string>

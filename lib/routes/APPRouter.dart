@@ -280,6 +280,7 @@ import 'package:flutter_templet_project/pages/demo/TransformDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TranslationTextPage.dart';
 import 'package:flutter_templet_project/pages/demo/TwoDimensionalGridViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/UploadFileDemo.dart';
+import 'package:flutter_templet_project/pages/demo/UrlLauncherDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ValueListenableBuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/VideoPlayerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/VisibilityDemo.dart';
@@ -778,6 +779,7 @@ class APPRouter {
   static const ocrPhotoDemo = '/ocrPhotoDemo';
   static const translationTextPage = '/translationTextPage';
   static const draggableFloatingButtonDemo = '/draggableFloatingButtonDemo';
+  static const urlLauncherDemo = '/urlLauncherDemo';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -2307,6 +2309,10 @@ class AppPage {
     GetPage(
       name: APPRouter.draggableFloatingButtonDemo,
       page: () => DraggableFloatingButtonDemo(),
+    ),
+    GetPage(
+      name: APPRouter.urlLauncherDemo,
+      page: () => UrlLauncherDemo(),
     ),
   ];
 }
