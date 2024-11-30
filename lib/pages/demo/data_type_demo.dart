@@ -6,6 +6,8 @@
 //  Copyright © 2024/5/1 shang. All rights reserved.
 //
 
+import 'dart:developer';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
@@ -15,6 +17,7 @@ import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/generic_comparable_ext.dart';
 import 'package:flutter_templet_project/extension/list_ext.dart';
 import 'package:flutter_templet_project/extension/num_ext.dart';
+import 'package:flutter_templet_project/extension/service_protocol_info_ext.dart';
 import 'package:flutter_templet_project/extension/type_util.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/map_ext.dart';
@@ -244,7 +247,7 @@ class _DataTypeDemoState extends State<DataTypeDemo> with WidgetsBindingObserver
     // [log] DLog 2024-11-09 09:47:02.637086 d1 < d2: true
   }
 
-  void onString() {
+  Future<void> onString() async {
     final a = 'Eats shoots leaves'.splitMapJoin((RegExp(r'shoots')),
         onMatch: (m) => m[0] ?? "", // (or no onMatch at all)
         onNonMatch: (n) => '*'); // Result: "*shoots*"
@@ -324,6 +327,9 @@ class _DataTypeDemoState extends State<DataTypeDemo> with WidgetsBindingObserver
     String strZero = "000123450";
     String resultZero = strZero.replaceFirst(RegExp(r'^0+'), '');
     debugPrint('resultZero: $resultZero');
+
+    final serviceInfo = await Service.getInfo();
+    serviceInfo.printIsarConnection();
   }
 
   void onDate() {

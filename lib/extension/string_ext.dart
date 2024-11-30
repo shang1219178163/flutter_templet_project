@@ -82,8 +82,7 @@ extension StringExt on String {
   }
 
   /// 转 Map<String, dynamic>
-  Map<String, dynamic>? decodeMap(
-      {Object? Function(Object? key, Object? value)? reviver}) {
+  Map<String, dynamic>? decodeMap({Object? Function(Object? key, Object? value)? reviver}) {
     return tryJsonDecode<Map<String, dynamic>>(reviver: reviver);
   }
 
@@ -101,8 +100,7 @@ extension StringExt on String {
 
   /// 图片名称转 AssetImage
   AssetImage toAssetImage({AssetBundle? bundle, String? package}) {
-    final assetName =
-        startsWith("assets/images/") ? this : "assets/images/$this";
+    final assetName = startsWith("assets/images/") ? this : "assets/images/$this";
     return AssetImage(assetName, bundle: bundle, package: package);
   }
 
@@ -154,9 +152,7 @@ extension StringExt on String {
     var reg = RegExp(r'[A-Z]');
     return split("").map((e) {
       final i = indexOf(e);
-      return e.contains(reg)
-          ? "${i == 0 ? "" : separator}${e.toLowerCase()}"
-          : e;
+      return e.contains(reg) ? "${i == 0 ? "" : separator}${e.toLowerCase()}" : e;
     }).join("");
   }
 
@@ -165,6 +161,26 @@ extension StringExt on String {
     var pattern = set.map((d) => RegExp.escape(d)).join('|');
     var parts = split(RegExp(pattern, multiLine: true));
     return parts;
+  }
+
+  /// 填满一行
+  String filledLine({
+    required int maxLength,
+    String fill = ' ',
+    Alignment alignment = Alignment.center,
+  }) {
+    String text = this;
+
+    final fillCount = maxLength - text.length;
+    final left = List.filled(fillCount ~/ 2, fill);
+    final right = List.filled(fillCount - left.length, fill);
+    var result = left.join() + text + right.join();
+    if (alignment.x < 0) {
+      result = text + left.join() + right.join();
+    } else if (alignment.x > 0) {
+      result = left.join() + right.join() + text;
+    }
+    return result;
   }
 
   /// 字符串版本对比

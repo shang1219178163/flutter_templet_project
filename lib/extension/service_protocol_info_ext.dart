@@ -7,11 +7,15 @@
 //
 
 import 'dart:developer';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:isar/isar.dart';
 
 extension ServiceProtocolInfoExt on ServiceProtocolInfo {
   /// 获取 isar 链接
-  String? get isarUrl {
+  String? getIsarUrl({
+    bool isCommunityVersion = false,
+  }) {
     if (serverUri == null) {
       return null;
     }
@@ -24,7 +28,40 @@ extension ServiceProtocolInfoExt on ServiceProtocolInfo {
     if (path.endsWith('=')) {
       path = path.substring(0, path.length - 1);
     }
-    final url = ' https://inspect.isar-community.dev/${Isar.version}/#/$port$path ';
+
+    var url = ' https://inspect.isar.dev/${Isar.version}/#/$port$path ';
+    if (isCommunityVersion) {
+      url = ' https://inspect.isar-community.dev/${Isar.version}/#/$port$path ';
+    }
     return url;
+  }
+
+  /// 打印 isar 链接
+  printIsarConnection() async {
+    final url = getIsarUrl();
+    if (url == null) {
+      return;
+    }
+    final maxLength = url.length;
+    final lines = [
+      ''.filledLine(maxLength: maxLength, fill: "═"),
+      'ISAR CONNECT STARTED'.filledLine(maxLength: maxLength),
+      ''.filledLine(maxLength: maxLength, fill: "─"),
+      'Open the link to connect to the Isar'.filledLine(maxLength: maxLength),
+      'Inspector while this build is running.'.filledLine(maxLength: maxLength),
+      ''.filledLine(maxLength: maxLength, fill: "─"),
+      url,
+      ''.filledLine(maxLength: maxLength, fill: "═"),
+    ];
+    for (var i = 0; i < lines.length; i++) {
+      final line = lines[i];
+      if (i == 0) {
+        debugPrint('╔$line╗');
+      } else if (i == lines.length - 1) {
+        debugPrint('╚$line╝');
+      } else {
+        debugPrint('║$line║');
+      }
+    }
   }
 }
