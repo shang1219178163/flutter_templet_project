@@ -540,6 +540,7 @@ var list = <Tuple2<String, String>>[
   Tuple2(APPRouter.ocrPhotoDemo, "ocrPhotoDemo"),
   Tuple2(APPRouter.translationTextPage, "translationTextPage"),
   Tuple2(APPRouter.draggableFloatingButtonDemo, "draggableFloatingButtonDemo"),
+  Tuple2(APPRouter.urlLauncherDemo, "urlLauncherDemo"),
 ];
 
 var slivers = <Tuple2<String, String>>[
