@@ -378,6 +378,15 @@ class _DataTypeDemoState extends State<DataTypeDemo> with WidgetsBindingObserver
       return "选项$sufix";
     });
     ddlog("randomItems.sorted(): ${randomItems.sorted()}");
+
+    final strides = List.generate(20, (index) => "选项$index").splitStride(
+      by: 4,
+      onItem: (start, end, items) {
+        debugPrint("splitStride onItem $start $end: ${items[start]}, ${items[end]}");
+        return items.getRange(start, end);
+      },
+    );
+    ddlog("strides: ${strides}");
   }
 
   void onSet() {}
