@@ -53,20 +53,22 @@ extension StringExt on String {
     return result;
   }
 
-  // /// 添加前缀后缀
-  // String padding({
-  //   String prefix = "",
-  //   String suffix = "",
-  // }) {
-  //   var result = this;
-  //   if (!result.startsWith(prefix)) {
-  //     result = "$prefix$result";
-  //   }
-  //   if (!result.endsWith(suffix)) {
-  //     result = "$result$suffix";
-  //   }
-  //   return result;
-  // }
+  /// 通过步长切割字符串
+  ///
+  /// from - 开始索引,默认 0
+  /// to - 结束索引, 默认总长
+  /// by - 每次分割最大长度,默认1
+  List<String> splitStride({int from = 0, int? to, int by = 1}) {
+    final count = to ?? length;
+
+    var result = <String>[];
+    for (var i = from; i < count; i += by) {
+      var end = (i + by) < count ? (i + by) : count;
+      result.add(substring(i, end));
+    }
+
+    return result;
+  }
 
   /// 转类型 T
   T? tryJsonDecode<T>({Object? Function(Object? key, Object? value)? reviver}) {
