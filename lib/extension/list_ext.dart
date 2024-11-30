@@ -9,28 +9,11 @@
 import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:get/get.dart';
 
 extension IterableExt<E> on Iterable<E> {
-  /// 动态值
-  E operator [](int index) {
-    final i = index.clamp(0, length);
-    return this[i];
-  }
-
-  /// 动态复制
-  void operator []=(int index, E? val) {
-    final i = index.clamp(0, length);
-    this[i] = val;
-  }
-
-  ///运算符重载
-  List<E> operator *(int value) {
-    var result = List<E>.generate(value, (index) => this as E);
-    return result;
-  }
-
   /// 获取随机元素
   E? get randomOne {
     if (isEmpty) {
@@ -54,7 +37,7 @@ extension IterableExt<E> on Iterable<E> {
   /// 倒叙查询符合条件元素
   E? findLast(bool Function(E) test) {
     for (var i = length - 1; i >= 0; i--) {
-      final element = this[i];
+      final element = elementAt(i);
       if (test(element)) {
         return element;
       }
@@ -71,7 +54,7 @@ extension IterableExt<E> on Iterable<E> {
   /// 查询符合条件元素,没有则返回为空
   int? findIndex(bool Function(E) test) {
     for (var i = 0; i <= length - 1; i++) {
-      final element = this[i];
+      final element = elementAt(i);
       if (test(element)) {
         return i;
       }
@@ -82,7 +65,7 @@ extension IterableExt<E> on Iterable<E> {
   /// 倒叙查询符合条件元素
   int? findLastIndex(bool Function(E) test) {
     for (var i = length - 1; i >= 0; i--) {
-      final element = this[i];
+      final element = elementAt(i);
       if (test(element)) {
         return i;
       }
@@ -96,24 +79,34 @@ extension IterableExt<E> on Iterable<E> {
   /// 倒叙查询符合条件元素
   int? lastIndexWhere(bool Function(E) test) => findLastIndex(test);
 
-  Iterable<E> exchange(int fromIdx, int toIdx) {
-    if (fromIdx >= length || toIdx >= length) {
-      return this;
-    }
-    var e = this[fromIdx];
-    var toE = this[toIdx];
-    //exchange
-    this[fromIdx] = toE;
-    this[toIdx] = e;
-    return this;
-  }
-
   /// 递归遍历
   recursion(void Function(E e)? cb) {
     forEach((item) {
       cb?.call(item);
       recursion(cb);
     });
+  }
+
+  /// 通过步长切割字符串
+  ///
+  /// from - 开始索引,默认 0
+  /// to - 结束索引, 默认总长
+  /// by - 每次分割最大长度,默认1
+  List<T> splitStride<T>({
+    int from = 0,
+    int? to,
+    int by = 1,
+    required T Function(int start, int end, List<E> items) onItem,
+  }) {
+    final count = to ?? length;
+
+    var result = <T>[];
+    for (var i = from; i < count; i += by) {
+      var end = (i + by) < count ? (i + by) : count - 1;
+      result.add(onItem(i, end, toList()));
+    }
+
+    return result;
   }
 }
 
@@ -126,6 +119,24 @@ extension IterableNullableItemExt<E> on Iterable<E?> {
 }
 
 extension ListExt<T, E> on List<E> {
+  /// 动态值
+  E operator [](int index) {
+    final i = index.clamp(0, length - 1);
+    return this[i];
+  }
+
+  /// 动态复制
+  void operator []=(int index, E val) {
+    final i = index.clamp(0, length - 1);
+    this[i] = val;
+  }
+
+  ///运算符重载
+  List<E> operator *(int value) {
+    var result = List<E>.generate(value, (index) => this as E);
+    return result;
+  }
+
   /// 用多个元素取代数组中满足条件的第一个元素
   /// replacements 取代某个元素的集合
   /// isReversed 是否倒序查询
@@ -151,6 +162,18 @@ extension ListExt<T, E> on List<E> {
     if (index != -1) {
       replaceRange(index, index + 1, replacements);
     }
+    return this;
+  }
+
+  Iterable<E> exchange(int fromIdx, int toIdx) {
+    if (fromIdx >= length || toIdx >= length) {
+      return this;
+    }
+    var e = this[fromIdx];
+    var toE = this[toIdx];
+    //exchange
+    this[fromIdx] = toE;
+    this[toIdx] = e;
     return this;
   }
 
