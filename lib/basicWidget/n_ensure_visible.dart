@@ -4,8 +4,16 @@ import 'package:flutter/material.dart';
 class NEnsureVisible extends StatefulWidget {
   const NEnsureVisible({
     super.key,
+    this.delayed = kThemeAnimationDuration,
+    this.duration = kThemeAnimationDuration,
     this.child = const SizedBox(),
   });
+
+  /// 延迟滚动
+  final Duration delayed;
+
+  /// 滚动出现动画时长
+  final Duration duration;
 
   final Widget child;
 
@@ -14,6 +22,9 @@ class NEnsureVisible extends StatefulWidget {
 }
 
 class _NEnsureVisibleState extends State<NEnsureVisible> with WidgetsBindingObserver {
+  late Duration delayed = widget.delayed;
+  late Duration duration = widget.duration;
+
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
@@ -27,20 +38,15 @@ class _NEnsureVisibleState extends State<NEnsureVisible> with WidgetsBindingObse
   }
 
   @override
-  void didUpdateWidget(covariant NEnsureVisible oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (oldWidget.child != widget.child) {
-      setState(() {});
-    }
-  }
-
-  @override
   void didChangeMetrics() {
-    Future.delayed(kThemeAnimationDuration).then((value) {
+    Future.delayed(delayed).then((value) {
+      if (!mounted) {
+        return;
+      }
       Scrollable.ensureVisible(
         context,
         alignment: Alignment.bottomCenter.y,
-        duration: kThemeAnimationDuration,
+        duration: duration ?? kThemeAnimationDuration,
       );
     });
 
