@@ -137,6 +137,7 @@ import 'package:flutter_templet_project/pages/demo/InheritedWidgetDemo.dart';
 import 'package:flutter_templet_project/pages/demo/InputDatePickerFormFieldDemo.dart';
 import 'package:flutter_templet_project/pages/demo/InteractiveViewerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/IntrinsicHeightDemo.dart';
+import 'package:flutter_templet_project/pages/demo/IteratorDemo.dart';
 import 'package:flutter_templet_project/pages/demo/JsonToModelPage.dart';
 import 'package:flutter_templet_project/pages/demo/KeyDemo.dart';
 import 'package:flutter_templet_project/pages/demo/LayoutBuilderDemo.dart';
@@ -780,6 +781,7 @@ class APPRouter {
   static const translationTextPage = '/translationTextPage';
   static const draggableFloatingButtonDemo = '/draggableFloatingButtonDemo';
   static const urlLauncherDemo = '/urlLauncherDemo';
+  static const iteratorDemo = '/iteratorDemo';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -2313,6 +2315,10 @@ class AppPage {
     GetPage(
       name: APPRouter.urlLauncherDemo,
       page: () => UrlLauncherDemo(),
+    ),
+    GetPage(
+      name: APPRouter.iteratorDemo,
+      page: () => IteratorDemo(),
     ),
   ];
 }

@@ -541,6 +541,7 @@ var list = <Tuple2<String, String>>[
   Tuple2(APPRouter.translationTextPage, "translationTextPage"),
   Tuple2(APPRouter.draggableFloatingButtonDemo, "draggableFloatingButtonDemo"),
   Tuple2(APPRouter.urlLauncherDemo, "urlLauncherDemo"),
+  Tuple2(APPRouter.iteratorDemo, "iteratorDemo"),
 ];
 
 var slivers = <Tuple2<String, String>>[
