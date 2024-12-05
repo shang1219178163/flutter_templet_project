@@ -15,7 +15,7 @@ const String DATE_FORMAT_INT = 'yyyyMMddHHmmss';
 /// yyyy-dd-MM HH:mm:ss
 const String DATE_FORMAT = 'yyyy-MM-dd HH:mm:ss';
 
-/// yyyy-dd-MM
+/// yyyy-MM-dd
 const String DATE_FORMAT_DAY = 'yyyy-MM-dd';
 
 /// yyyy-dd-MM 00:00:00
@@ -313,5 +313,50 @@ extension DateTimeIntExt on int {
     }
 
     return value;
+  }
+}
+
+/// 时间样式
+enum DateFormatEnum {
+  /// yyyyMMddHHmmss
+  yyyyMMddHHmmss(name: "yyyyMMddHHmmss", fmt: "yyyy-MM-dd HH:mm:ss"),
+
+  /// yyyy-MM-dd HH:mm:ss
+  yyyyMMdd(name: "yyyyMMdd", fmt: "yyyy-MM-d"),
+
+  /// yyyy-MM-dd 00:00:00
+  yyyyMMdd000000(name: "yyyyMMdd000000", fmt: "yyyy-MM-dd 00:00:00"),
+
+  /// yyyy-MM-dd 23:59:59
+  yyyyMMdd235959(name: "yyyyMMdd235959", fmt: "yyyy-MM-dd 23:59:59"),
+
+  /// HH:mm:
+  HHmm(name: "HHmm", fmt: "HH:mm"),
+
+  /// HH:mm:ss
+  HHmmss(name: "HHmmss", fmt: "HH:mm:ss");
+
+  const DateFormatEnum({required this.name, required this.fmt});
+
+  /// name
+  final String name;
+
+  /// 格式
+  final String fmt;
+
+  /// 日期格式化
+  String? formatDate({required DateTime? date}) {
+    return DateTimeExt.stringFromDate(date: date);
+  }
+
+  /// 日期时间二次格式化
+  String? formatDateString({required String? dateStr}) {
+    final date = DateTimeExt.dateFromString(dateStr: dateStr);
+    return DateTimeExt.stringFromDate(date: date);
+  }
+
+  /// 时间戳格式化
+  String? formatTimestamp({required int? timestamp}) {
+    return DateTimeExt.stringFromTimestamp(timestamp: timestamp);
   }
 }
