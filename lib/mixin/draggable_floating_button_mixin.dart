@@ -203,42 +203,35 @@ mixin DraggableFloatingButtonMixin<T extends StatefulWidget> on State<T> {
   }
 
   /// DraggableFloatingButtonMixin 拖拽按钮配置类
-  // DraggableFloatingButtonConfig get draggableFloatingButtonConfig => throw UnimplementedError("❌$this 未实现 draggableFloatingButtonConfig");
   DraggableFloatingButtonConfig get draggableFloatingButtonConfig {
     return DraggableFloatingButtonConfig(
-      buttonSize: _floatingButtonSize(),
-      buttonMargin: _floatingButtonMargin(),
-      button: _floatingButton(),
-    );
-  }
-
-  Widget _floatingButton() {
-    return Material(
-      color: Colors.transparent,
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.orangeAccent,
-          shape: BoxShape.circle,
+        buttonMargin: EdgeInsets.only(
+          top: MediaQuery.of(context).viewPadding.top + kToolbarHeight,
+          bottom: MediaQuery.of(context).viewPadding.bottom,
+          left: 4,
+          right: 4,
         ),
-        child: Icon(Icons.add, color: Colors.white, size: 40),
-      ),
-    );
+        buttonSize: Size(60, 60),
+        button: Material(
+          color: Colors.transparent,
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.green,
+              borderRadius: BorderRadius.all(Radius.circular(30)),
+            ),
+            child: Icon(
+              Icons.circle_notifications_rounded,
+              color: Colors.white,
+              size: 40,
+            ),
+          ),
+        ),
+        onButton: () {
+          DLog.d("$this onButton");
+        });
   }
 
-  /// 悬浮按钮尺寸
-  Size _floatingButtonSize() {
-    return Size(60, 60);
-  }
-
-  EdgeInsets _floatingButtonMargin() {
-    return EdgeInsets.only(
-      top: MediaQuery.of(context).viewPadding.top + kToolbarHeight,
-      bottom: MediaQuery.of(context).viewPadding.bottom,
-      left: 4,
-      right: 4,
-    );
-  }
-
+  /// 悬浮按钮展示/隐藏切换
   void floatingButtonToggle() {
     if (isFloatingButtonShow) {
       floatingButtonHide();
