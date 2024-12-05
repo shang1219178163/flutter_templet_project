@@ -40,7 +40,7 @@ class _DraggableFloatingButtonDemoState extends State<DraggableFloatingButtonDem
   @override
   DraggableFloatingButtonConfig get draggableFloatingButtonConfig {
     return super.draggableFloatingButtonConfig.copyWith(
-          // globalPosition: Offset(dx, dy),
+          globalPosition: Offset(context.screenWidth, context.screenHeight - kBottomNavigationBarHeight - 68),
           buttonSize: Size(52, 68),
           button: buildFirst(childSize: Size(52, 68)),
           expandedButtonSize: Size(200, 90),

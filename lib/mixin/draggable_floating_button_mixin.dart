@@ -101,6 +101,18 @@ mixin DraggableFloatingButtonMixin<T extends StatefulWidget> on State<T> {
     super.initState();
     // Insert the overlay into the overlay stack when the widget is first created
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) {
+        return;
+      }
+
+      final screenSize = MediaQuery.of(context).size;
+      final maxWidth = screenSize.width;
+
+      final defaultPosition = draggableFloatingButtonConfig.globalPosition ?? Offset(maxWidth, 120);
+      _top = defaultPosition.dy;
+      _left = defaultPosition.dx;
+      _right = maxWidth - defaultPosition.dx;
+
       floatingButtonShow();
     });
   }
@@ -128,11 +140,6 @@ mixin DraggableFloatingButtonMixin<T extends StatefulWidget> on State<T> {
 
     var topMin = max(buttonVerticalHalf, padding.top) + buttonVerticalHalf;
     var topMax = maxHeight - max(buttonVerticalHalf, padding.bottom);
-
-    final defaultPosition = draggableFloatingButtonConfig.globalPosition ?? Offset(maxWidth, 120);
-    _top = defaultPosition.dy;
-    _left = defaultPosition.dx;
-    _right = maxWidth - defaultPosition.dx;
 
     var midX = _left + currButtonSize.width / 2;
     var isLeft = midX < maxWidth * 0.5;
@@ -207,7 +214,7 @@ mixin DraggableFloatingButtonMixin<T extends StatefulWidget> on State<T> {
     return DraggableFloatingButtonConfig(
         buttonMargin: EdgeInsets.only(
           top: MediaQuery.of(context).viewPadding.top + kToolbarHeight,
-          bottom: MediaQuery.of(context).viewPadding.bottom,
+          bottom: MediaQuery.of(context).viewPadding.bottom + kBottomNavigationBarHeight,
           left: 4,
           right: 4,
         ),
