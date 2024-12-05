@@ -57,6 +57,9 @@ import 'package:tuple/tuple.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  // /// 从  --dart-define=app_env=beta 读取运行环境
+  // current = APPEnvironment.fromEnvString(const String.fromEnvironment("app_env"));
+
   // final ping = Ping('baidu.com', count: 20);
   // ping.stream.listen((event) {
   //   ddlog("ping $event");

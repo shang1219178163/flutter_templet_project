@@ -33,8 +33,10 @@ class _PopScopeDemoState extends State<PopScopeDemo> {
   @override
   Widget build(BuildContext context) {
     return PopScope(
+      //popGesture: false 时 iOS 生效
       canPop: canPop,
       onPopInvoked: (pop) async {
+        DLog.d("onPopInvoked: $pop");
         await showAlert();
       },
       child: Scaffold(
