@@ -85,6 +85,7 @@ class FloatingButtonConfig {
 mixin FloatingButtonMixin<T extends StatefulWidget> on State<T> {
   late OverlayEntry _overlayEntry;
   final _entries = <OverlayEntry>[];
+  List<OverlayEntry> get entries => _entries;
 
   double _left = 100.0;
 
@@ -273,8 +274,22 @@ mixin FloatingButtonMixin<T extends StatefulWidget> on State<T> {
 
   /// 隐藏(销毁)悬浮按钮
   void floatingButtonHide() {
-    _entries.remove(_overlayEntry);
-    _overlayEntry.remove();
+    // _entries.remove(_overlayEntry);
+    // _overlayEntry.remove();
+    final list = [...entries];
+    for (final e in list) {
+      _entries.remove(_overlayEntry);
+      e.remove();
+    }
+  }
+
+  /// 插入新 OverlayEntry
+  insertOverlayEntry(int index, OverlayEntry overlayEntry) {
+    if (_entries.contains(overlayEntry)) {
+      return;
+    }
+    _entries.insert(index, overlayEntry);
+    Overlay.of(context).insert(overlayEntry);
   }
 
   void _rebuild() {
