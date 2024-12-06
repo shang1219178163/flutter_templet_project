@@ -40,6 +40,7 @@ class DraggableFloatingButtonConfig {
   /// 悬浮按钮
   Widget button;
 
+  /// expandedButton 为空时回调
   VoidCallback? onButton;
 
   /// 悬浮按钮尺寸
@@ -184,9 +185,11 @@ mixin DraggableFloatingButtonMixin<T extends StatefulWidget> on State<T> {
 
               if (!_isExpanded && draggableFloatingButtonConfig.rotationY == true) {
                 var radians = isLeftTmp != isLeft ? pi : 0.0;
-                currButton = Transform(
+                currButton = AnimatedContainer(
+                  duration: const Duration(milliseconds: 300),
                   transform: Matrix4.rotationY(radians),
-                  alignment: Alignment.center,
+                  transformAlignment: Alignment.center,
+                  alignment: isLeftTmp ? Alignment.centerLeft : Alignment.centerRight,
                   child: currButton,
                 );
               }
