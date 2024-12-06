@@ -1,17 +1,20 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_templet_project/basicWidget/n_suspension.dart';
+import 'dart:math';
 
-class SuspensionButtonDemo extends StatefulWidget {
-  SuspensionButtonDemo({Key? key, this.title}) : super(key: key);
+import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_floating_button.dart';
+import 'package:flutter_templet_project/extension/build_context_ext.dart';
+import 'package:flutter_templet_project/extension/string_ext.dart';
+
+class FloatingButtonDemoOne extends StatefulWidget {
+  FloatingButtonDemoOne({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
   @override
-  _SuspensionButtonDemoState createState() => _SuspensionButtonDemoState();
+  _FloatingButtonDemoOneState createState() => _FloatingButtonDemoOneState();
 }
 
-class _SuspensionButtonDemoState extends State<SuspensionButtonDemo> {
+class _FloatingButtonDemoOneState extends State<FloatingButtonDemoOne> {
   @override
   Widget build(BuildContext context) {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
@@ -41,7 +44,7 @@ class _SuspensionButtonDemoState extends State<SuspensionButtonDemo> {
   }
 
   buildBody() {
-    return NSuspension(
+    return NFloatingButton(
       attachHorizalEdge: true,
       // attachVerticalEdge: true,
       padding: EdgeInsets.only(left: 20, top: 30, right: 40, bottom: 50),

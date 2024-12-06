@@ -10,21 +10,23 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_app_bar.dart';
+import 'package:flutter_templet_project/basicWidget/n_floating_button.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
-import 'package:flutter_templet_project/mixin/draggable_floating_button_mixin.dart';
+import 'package:flutter_templet_project/mixin/floating_button_mixin.dart';
 import 'package:get/get.dart';
 
-class DraggableFloatingButtonDemo extends StatefulWidget {
-  const DraggableFloatingButtonDemo({super.key});
+/// 通过 FloatingButtonMixin 实现悬浮按钮
+class FloatingButtonDemo extends StatefulWidget {
+  const FloatingButtonDemo({super.key});
 
   @override
-  _DraggableFloatingButtonDemoState createState() => _DraggableFloatingButtonDemoState();
+  _FloatingButtonDemoState createState() => _FloatingButtonDemoState();
 }
 
-class _DraggableFloatingButtonDemoState extends State<DraggableFloatingButtonDemo> with DraggableFloatingButtonMixin {
+class _FloatingButtonDemoState extends State<FloatingButtonDemo> with FloatingButtonMixin {
   @override
   void dispose() {
     DLog.d("$widget dispose");
@@ -38,7 +40,7 @@ class _DraggableFloatingButtonDemoState extends State<DraggableFloatingButtonDem
   }
 
   @override
-  DraggableFloatingButtonConfig get draggableFloatingButtonConfig {
+  FloatingButtonConfig get draggableFloatingButtonConfig {
     return super.draggableFloatingButtonConfig.copyWith(
           globalPosition: Offset(context.screenWidth, context.screenHeight - kBottomNavigationBarHeight - 68),
           buttonSize: Size(52, 68),
@@ -280,6 +282,146 @@ class _DraggableFloatingButtonDemoState extends State<DraggableFloatingButtonDem
           ),
         ),
       ],
+    );
+  }
+
+  var _isExpanded = false;
+
+  /// 展开收起
+  onToggle() {
+    _isExpanded = !_isExpanded;
+    setState(() {});
+  }
+}
+
+/// 旋风拖拽按钮
+class NFloatingButtonTest extends StatefulWidget {
+  const NFloatingButtonTest({
+    super.key,
+    this.isLeft = true,
+    required this.childSize,
+  });
+
+  final bool isLeft;
+  final Size childSize;
+
+  @override
+  State<NFloatingButtonTest> createState() => _NFloatingButtonTestState();
+}
+
+class _NFloatingButtonTestState extends State<NFloatingButtonTest> {
+  @override
+  void didUpdateWidget(covariant NFloatingButtonTest oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.isLeft != widget.isLeft || oldWidget.childSize != widget.childSize) {
+      setState(() {});
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.blue),
+      ),
+      child: buildToggle(
+        isLeft: widget.isLeft,
+        childSize: widget.childSize,
+      ),
+    );
+  }
+
+  AnimatedCrossFade buildToggle({bool isLeft = true, required Size childSize}) {
+    Widget bom = FittedBox(
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Padding(
+            padding: EdgeInsets.only(right: 8.0),
+            child: Image(
+              image: "assets/images/icon_again_shopping_cart.png".toAssetImage(),
+              width: 27,
+              height: 27,
+            ),
+          ),
+          Flexible(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "测试用药",
+                  style: TextStyle(color: Colors.white, fontSize: 14),
+                ),
+                Flexible(
+                  child: Text(
+                    "药品b(1片*1板/盒),心安宁...",
+                    style: TextStyle(color: Colors.white, fontSize: 12),
+                    maxLines: 1,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+
+    return AnimatedCrossFade(
+      duration: const Duration(milliseconds: 350),
+      firstChild: InkWell(
+        onTap: onToggle,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 300),
+          transform: Matrix4.rotationY(isLeft ? 2 * pi : pi),
+          transformAlignment: Alignment.center,
+          // transformAlignment: isLeft ? Alignment.centerLeft : Alignment.centerRight,
+          child: Image(
+            image: "assets/images/rec_left_flot_btn.gif".toAssetImage(),
+            width: childSize.width,
+            height: childSize.height,
+            alignment: !isLeft ? Alignment.centerLeft : Alignment.centerRight,
+          ),
+        ),
+      ),
+      secondChild: InkWell(
+        onTap: onToggle,
+        child: Stack(
+          children: [
+            Container(
+              margin: EdgeInsets.only(top: 44),
+              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              decoration: BoxDecoration(
+                // color: Colors.transparent,
+                borderRadius: BorderRadius.all(Radius.circular(30)),
+                gradient: LinearGradient(
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                  colors: [primaryColor.withOpacity(.35), primaryColor.withOpacity(.7)],
+                ),
+              ),
+              child: bom,
+            ),
+            Positioned(
+              top: 15,
+              left: 40,
+              right: 0,
+              child: Container(
+                decoration: const BoxDecoration(
+                  color: Colors.transparent,
+                  // border: Border.all(color: Colors.blue),
+                ),
+                child: Image(
+                  image: "assets/images/icon_rec_cat.png".toAssetImage(),
+                  width: 45,
+                  height: 40,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+      crossFadeState: !_isExpanded ? CrossFadeState.showFirst : CrossFadeState.showSecond,
     );
   }
 

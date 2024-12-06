@@ -17,8 +17,8 @@ import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:yaml/yaml.dart';
 
 /// 浮动拖拽按钮配置类
-class DraggableFloatingButtonConfig {
-  DraggableFloatingButtonConfig({
+class FloatingButtonConfig {
+  FloatingButtonConfig({
     this.globalPosition,
     required this.buttonMargin,
     required this.buttonSize,
@@ -52,7 +52,7 @@ class DraggableFloatingButtonConfig {
   /// Y 轴旋转
   bool? rotationY;
 
-  DraggableFloatingButtonConfig copyWith({
+  FloatingButtonConfig copyWith({
     Offset? globalPosition,
     EdgeInsets? buttonMargin,
     Size? buttonSize,
@@ -62,7 +62,7 @@ class DraggableFloatingButtonConfig {
     VoidCallback? onButton,
     bool? rotationY,
   }) {
-    return DraggableFloatingButtonConfig(
+    return FloatingButtonConfig(
       globalPosition: globalPosition ?? this.globalPosition,
       buttonMargin: buttonMargin ?? this.buttonMargin,
       buttonSize: buttonSize ?? this.buttonSize,
@@ -76,7 +76,7 @@ class DraggableFloatingButtonConfig {
 }
 
 /// 浮动拖拽按钮
-mixin DraggableFloatingButtonMixin<T extends StatefulWidget> on State<T> {
+mixin FloatingButtonMixin<T extends StatefulWidget> on State<T> {
   late OverlayEntry _overlayEntry;
   final _entries = <OverlayEntry>[];
 
@@ -213,8 +213,8 @@ mixin DraggableFloatingButtonMixin<T extends StatefulWidget> on State<T> {
   }
 
   /// DraggableFloatingButtonMixin 拖拽按钮配置类
-  DraggableFloatingButtonConfig get draggableFloatingButtonConfig {
-    return DraggableFloatingButtonConfig(
+  FloatingButtonConfig get draggableFloatingButtonConfig {
+    return FloatingButtonConfig(
         buttonMargin: EdgeInsets.only(
           top: MediaQuery.of(context).viewPadding.top + kToolbarHeight,
           bottom: MediaQuery.of(context).viewPadding.bottom + kBottomNavigationBarHeight,

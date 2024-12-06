@@ -88,7 +88,6 @@ import 'package:flutter_templet_project/pages/demo/DismissibleDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DisplayFeatureDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DragAndDropDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DraggableDemo.dart';
-import 'package:flutter_templet_project/pages/demo/DraggableFloatingButtonDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DraggableScrollableSheetDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DrawCanvasDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DropBoxChoicDemo.dart';
@@ -105,6 +104,9 @@ import 'package:flutter_templet_project/pages/demo/FlexDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FlexibleDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FlexibleSpaceDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FloatingActionButtonDemo.dart';
+import 'package:flutter_templet_project/pages/demo/FloatingButtonDemo.dart';
+import 'package:flutter_templet_project/pages/demo/FloatingButtonDemoOne.dart';
+import 'package:flutter_templet_project/pages/demo/FloatingButtonDemoTwo.dart';
 import 'package:flutter_templet_project/pages/demo/FlutterFFiTest.dart';
 import 'package:flutter_templet_project/pages/demo/FlutterPickerUtilDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FormDemo.dart';
@@ -259,8 +261,6 @@ import 'package:flutter_templet_project/pages/demo/StatefulBuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/StepperDemo.dart';
 import 'package:flutter_templet_project/pages/demo/StreamBuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/StringTransformPage.dart';
-import 'package:flutter_templet_project/pages/demo/SuspensionButtonDemo.dart';
-import 'package:flutter_templet_project/pages/demo/SuspensionButtonDemoNew.dart';
 import 'package:flutter_templet_project/pages/demo/SwitchDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TableDemo.dart';
 import 'package:flutter_templet_project/pages/demo/TapRegionDemo.dart';
@@ -677,8 +677,6 @@ class APPRouter {
   static const expandTextDemo = '/expandTextDemo';
   static const syncfusionFlutterDatepickerDemo = '/syncfusionFlutterDatepickerDemo';
   static const tableCalenderMain = '/tableCalenderMain';
-  static const suspensionButtonDemo = '/suspensionButtonDemo';
-  static const suspensionButtonDemoNew = '/suspensionButtonDemoNew';
   static const neomorphismHomePage = '/neomorphismHomePage';
   static const uploadFileDemo = '/uploadFileDemo';
   static const fileUploadBoxDemo = '/fileUploadBoxDemo';
@@ -779,7 +777,9 @@ class APPRouter {
   static const irregularClipperDemo = '/irregularClipperDemo';
   static const ocrPhotoDemo = '/ocrPhotoDemo';
   static const translationTextPage = '/translationTextPage';
-  static const draggableFloatingButtonDemo = '/draggableFloatingButtonDemo';
+  static const floatingButtonDemo = '/floatingButtonDemo';
+  static const floatingButtonDemoOne = '/floatingButtonDemoOne';
+  static const floatingButtonDemoTwo = '/floatingButtonDemoTwo';
   static const urlLauncherDemo = '/urlLauncherDemo';
   static const iteratorDemo = '/iteratorDemo';
 
@@ -1901,14 +1901,17 @@ class AppPage {
       page: () => TableCalenderMain(),
     ),
     GetPage(
-      name: APPRouter.suspensionButtonDemo,
-      page: () => SuspensionButtonDemo(),
+      name: APPRouter.floatingButtonDemo,
+      page: () => FloatingButtonDemo(),
     ),
     GetPage(
-      name: APPRouter.suspensionButtonDemoNew,
-      page: () => SuspensionButtonDemoNew(),
+      name: APPRouter.floatingButtonDemoOne,
+      page: () => FloatingButtonDemoOne(),
     ),
-
+    GetPage(
+      name: APPRouter.floatingButtonDemoTwo,
+      page: () => FloatingButtonDemoTwo(),
+    ),
     GetPage(
       name: APPRouter.neomorphismHomePage,
       page: () => NeomorphismHomePage(),
@@ -2309,8 +2312,8 @@ class AppPage {
       page: () => TranslationTextPage(),
     ),
     GetPage(
-      name: APPRouter.draggableFloatingButtonDemo,
-      page: () => DraggableFloatingButtonDemo(),
+      name: APPRouter.floatingButtonDemo,
+      page: () => FloatingButtonDemo(),
     ),
     GetPage(
       name: APPRouter.urlLauncherDemo,

@@ -12,8 +12,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 
-class SuspensionButtonDemoNew extends StatefulWidget {
-  const SuspensionButtonDemoNew({
+class FloatingButtonDemoTwo extends StatefulWidget {
+  const FloatingButtonDemoTwo({
     super.key,
     this.title,
   });
@@ -21,10 +21,10 @@ class SuspensionButtonDemoNew extends StatefulWidget {
   final String? title;
 
   @override
-  State<SuspensionButtonDemoNew> createState() => _SuspensionButtonDemoNewState();
+  State<FloatingButtonDemoTwo> createState() => _FloatingButtonDemoTwoState();
 }
 
-class _SuspensionButtonDemoNewState extends State<SuspensionButtonDemoNew> {
+class _FloatingButtonDemoTwoState extends State<FloatingButtonDemoTwo> {
   final _topVN = ValueNotifier(0.0);
   final _leftVN = ValueNotifier(0.0);
   final _rightVN = ValueNotifier(0.0);
@@ -55,7 +55,7 @@ class _SuspensionButtonDemoNewState extends State<SuspensionButtonDemoNew> {
           children: [
             buildSuspension(
               onPanStart: (e) {
-                onToggle();
+                // onToggle();
               },
               bgChild: Container(
                 color: Colors.green.withOpacity(0.5),

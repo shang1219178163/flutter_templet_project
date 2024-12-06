@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 /// 悬浮组件
-class NSuspension extends StatefulWidget {
-  NSuspension({
+class NFloatingButton extends StatefulWidget {
+  NFloatingButton({
     Key? key,
     required this.child,
     required this.bgChild,
@@ -43,10 +43,10 @@ class NSuspension extends StatefulWidget {
   final bool attachVerticalEdge;
 
   @override
-  _NSuspensionState createState() => _NSuspensionState();
+  _NFloatingButtonState createState() => _NFloatingButtonState();
 }
 
-class _NSuspensionState extends State<NSuspension> {
+class _NFloatingButtonState extends State<NFloatingButton> {
   final _topVN = ValueNotifier(0.0);
   final _leftVN = ValueNotifier(0.0);
   final _rightVN = ValueNotifier(0.0);
