@@ -27,6 +27,7 @@ class FloatingButtonConfig {
     this.expandedButton,
     this.onButton,
     this.rotationY = true,
+    this.draggable = true,
   });
 
   /// 悬浮按钮外边距
@@ -52,6 +53,9 @@ class FloatingButtonConfig {
   /// Y 轴旋转
   bool? rotationY;
 
+  /// 是否可拖拽
+  bool? draggable;
+
   FloatingButtonConfig copyWith({
     Offset? globalPosition,
     EdgeInsets? buttonMargin,
@@ -61,6 +65,7 @@ class FloatingButtonConfig {
     Widget? expandedButton,
     VoidCallback? onButton,
     bool? rotationY,
+    bool? draggable,
   }) {
     return FloatingButtonConfig(
       globalPosition: globalPosition ?? this.globalPosition,
@@ -71,6 +76,7 @@ class FloatingButtonConfig {
       expandedButton: expandedButton ?? this.expandedButton,
       onButton: onButton ?? this.onButton,
       rotationY: rotationY ?? this.rotationY,
+      draggable: draggable ?? this.draggable,
     );
   }
 }
@@ -109,7 +115,7 @@ mixin FloatingButtonMixin<T extends StatefulWidget> on State<T> {
       final screenSize = MediaQuery.of(context).size;
       final maxWidth = screenSize.width;
 
-      final defaultPosition = draggableFloatingButtonConfig.globalPosition ?? Offset(maxWidth, 120);
+      final defaultPosition = floatingButtonConfig.globalPosition ?? Offset(maxWidth, 120);
       _top = defaultPosition.dy;
       _left = defaultPosition.dx;
       _right = maxWidth - defaultPosition.dx;
@@ -125,17 +131,17 @@ mixin FloatingButtonMixin<T extends StatefulWidget> on State<T> {
     final maxWidth = screenSize.width;
     final maxHeight = screenSize.height;
 
-    var button = draggableFloatingButtonConfig.button;
-    var expandedButton = draggableFloatingButtonConfig.expandedButton ?? button;
+    var button = floatingButtonConfig.button;
+    var expandedButton = floatingButtonConfig.expandedButton ?? button;
     var currButton = (_isExpanded ? expandedButton : button);
 
-    var buttonSize = draggableFloatingButtonConfig.buttonSize;
-    var expandedButtonSize = draggableFloatingButtonConfig.expandedButtonSize ?? buttonSize;
+    var buttonSize = floatingButtonConfig.buttonSize;
+    var expandedButtonSize = floatingButtonConfig.expandedButtonSize ?? buttonSize;
     var currButtonSize = _isExpanded ? expandedButtonSize : buttonSize;
     var buttonHorizalHalf = currButtonSize.width * 0.5;
     var buttonVerticalHalf = currButtonSize.height * 0.5;
 
-    var padding = draggableFloatingButtonConfig.buttonMargin;
+    var padding = floatingButtonConfig.buttonMargin;
     var leftMin = max(buttonHorizalHalf, padding.left);
     var leftMax = maxWidth - max(buttonHorizalHalf, padding.right);
 
@@ -156,6 +162,10 @@ mixin FloatingButtonMixin<T extends StatefulWidget> on State<T> {
             // DLog.d("onPanStart isLeft: $isLeft, $d");
           },
           onPanUpdate: (details) {
+            if (floatingButtonConfig.draggable != true) {
+              return;
+            }
+
             if (details.globalPosition.dx <= leftMin || details.globalPosition.dx >= leftMax) {
               return;
             }
@@ -169,6 +179,10 @@ mixin FloatingButtonMixin<T extends StatefulWidget> on State<T> {
             _overlayEntry.markNeedsBuild();
           },
           onPanEnd: (DragEndDetails e) {
+            if (floatingButtonConfig.draggable != true) {
+              return;
+            }
+
             // debugPrint("_leftVN.value:${_leftVN.value}");
             final midX = _left + currButtonSize.width / 2;
             final midY = _top + currButtonSize.height / 2;
@@ -183,7 +197,7 @@ mixin FloatingButtonMixin<T extends StatefulWidget> on State<T> {
               _right = maxWidth - _left - currButtonSize.width;
               _overlayEntry.markNeedsBuild();
 
-              if (!_isExpanded && draggableFloatingButtonConfig.rotationY == true) {
+              if (!_isExpanded && floatingButtonConfig.rotationY == true) {
                 var radians = isLeftTmp != isLeft ? pi : 0.0;
                 currButton = AnimatedContainer(
                   duration: const Duration(milliseconds: 300),
@@ -202,7 +216,7 @@ mixin FloatingButtonMixin<T extends StatefulWidget> on State<T> {
               width: currButtonSize.width,
               height: currButtonSize.height,
               child: InkWell(
-                onTap: _onMarkNeedsBuild,
+                onTap: _rebuild,
                 child: currButton,
               ),
             ),
@@ -213,7 +227,7 @@ mixin FloatingButtonMixin<T extends StatefulWidget> on State<T> {
   }
 
   /// DraggableFloatingButtonMixin 拖拽按钮配置类
-  FloatingButtonConfig get draggableFloatingButtonConfig {
+  FloatingButtonConfig get floatingButtonConfig {
     return FloatingButtonConfig(
         buttonMargin: EdgeInsets.only(
           top: MediaQuery.of(context).viewPadding.top + kToolbarHeight,
@@ -263,9 +277,9 @@ mixin FloatingButtonMixin<T extends StatefulWidget> on State<T> {
     _overlayEntry.remove();
   }
 
-  void _onMarkNeedsBuild() {
-    if (draggableFloatingButtonConfig.expandedButton == null) {
-      draggableFloatingButtonConfig.onButton?.call();
+  void _rebuild() {
+    if (floatingButtonConfig.expandedButton == null) {
+      floatingButtonConfig.onButton?.call();
       return;
     }
     _isExpanded = !_isExpanded;

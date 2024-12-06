@@ -40,8 +40,8 @@ class _FloatingButtonDemoState extends State<FloatingButtonDemo> with FloatingBu
   }
 
   @override
-  FloatingButtonConfig get draggableFloatingButtonConfig {
-    return super.draggableFloatingButtonConfig.copyWith(
+  FloatingButtonConfig get floatingButtonConfig {
+    return super.floatingButtonConfig.copyWith(
           globalPosition: Offset(context.screenWidth, context.screenHeight - kBottomNavigationBarHeight - 68),
           buttonSize: Size(52, 68),
           button: buildFirst(childSize: Size(52, 68)),
@@ -50,9 +50,10 @@ class _FloatingButtonDemoState extends State<FloatingButtonDemo> with FloatingBu
           onButton: () {
             DLog.d("onButton");
           },
+          draggable: false,
         );
 
-    return super.draggableFloatingButtonConfig.copyWith(
+    return super.floatingButtonConfig.copyWith(
           button: Material(
             color: Colors.transparent,
             child: Container(
