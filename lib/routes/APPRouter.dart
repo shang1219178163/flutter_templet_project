@@ -60,6 +60,7 @@ import 'package:flutter_templet_project/pages/demo/BuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ButtonStyleDemo.dart';
 import 'package:flutter_templet_project/pages/demo/CalendarDatePickerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/CarouselSliderDemo.dart';
+import 'package:flutter_templet_project/pages/demo/ChemotherapyRegimenDrugCaculator.dart';
 import 'package:flutter_templet_project/pages/demo/ChipDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ClipDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ColoredBoxDemo.dart';
@@ -782,6 +783,7 @@ class APPRouter {
   static const floatingButtonDemoTwo = '/floatingButtonDemoTwo';
   static const urlLauncherDemo = '/urlLauncherDemo';
   static const iteratorDemo = '/iteratorDemo';
+  static const chemotherapyRegimenDrugCaculator = '/chemotherapyRegimenDrugCaculator';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -2322,6 +2324,10 @@ class AppPage {
     GetPage(
       name: APPRouter.iteratorDemo,
       page: () => IteratorDemo(),
+    ),
+    GetPage(
+      name: APPRouter.chemotherapyRegimenDrugCaculator,
+      page: () => ChemotherapyRegimenDrugCaculator(),
     ),
   ];
 }
