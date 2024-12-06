@@ -197,7 +197,7 @@ mixin DraggableFloatingButtonMixin<T extends StatefulWidget> on State<T> {
           },
           child: Material(
             color: Colors.transparent,
-            shape: Border.all(color: Colors.red),
+            // shape: Border.all(color: Colors.red),
             child: SizedBox(
               width: currButtonSize.width,
               height: currButtonSize.height,
