@@ -542,6 +542,7 @@ var list = <Tuple2<String, String>>[
   Tuple2(APPRouter.floatingButtonDemo, "floatingButtonDemo"),
   Tuple2(APPRouter.floatingButtonDemoOne, "floatingButtonDemoOne"),
   Tuple2(APPRouter.floatingButtonDemoTwo, "floatingButtonDemoTwo"),
+  Tuple2(APPRouter.floatingButtonDemoThree, "floatingButtonDemoThree"),
   Tuple2(APPRouter.urlLauncherDemo, "urlLauncherDemo"),
   Tuple2(APPRouter.iteratorDemo, "iteratorDemo"),
   Tuple2(APPRouter.chemotherapyRegimenDrugCaculator, "chemotherapyRegimenDrugCaculator"),

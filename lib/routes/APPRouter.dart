@@ -107,6 +107,7 @@ import 'package:flutter_templet_project/pages/demo/FlexibleSpaceDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FloatingActionButtonDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FloatingButtonDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FloatingButtonDemoOne.dart';
+import 'package:flutter_templet_project/pages/demo/FloatingButtonDemoThree.dart';
 import 'package:flutter_templet_project/pages/demo/FloatingButtonDemoTwo.dart';
 import 'package:flutter_templet_project/pages/demo/FlutterFFiTest.dart';
 import 'package:flutter_templet_project/pages/demo/FlutterPickerUtilDemo.dart';
@@ -781,6 +782,8 @@ class APPRouter {
   static const floatingButtonDemo = '/floatingButtonDemo';
   static const floatingButtonDemoOne = '/floatingButtonDemoOne';
   static const floatingButtonDemoTwo = '/floatingButtonDemoTwo';
+  static const floatingButtonDemoThree = '/floatingButtonDemoThree';
+
   static const urlLauncherDemo = '/urlLauncherDemo';
   static const iteratorDemo = '/iteratorDemo';
   static const chemotherapyRegimenDrugCaculator = '/chemotherapyRegimenDrugCaculator';
@@ -1914,6 +1917,11 @@ class AppPage {
       name: APPRouter.floatingButtonDemoTwo,
       page: () => FloatingButtonDemoTwo(),
     ),
+    GetPage(
+      name: APPRouter.floatingButtonDemoThree,
+      page: () => FloatingButtonDemoThree(),
+    ),
+
     GetPage(
       name: APPRouter.neomorphismHomePage,
       page: () => NeomorphismHomePage(),
