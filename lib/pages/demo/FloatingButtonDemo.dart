@@ -59,10 +59,10 @@ class _FloatingButtonDemoState extends State<FloatingButtonDemo> with FloatingBu
           button: (onToggle) => GestureDetector(onTap: onToggle, child: buildFirst(childSize: Size(52, 68))),
           expandedButtonSize: Size(200, 90),
           expandedButton: (onToggle) => GestureDetector(onTap: onToggle, child: buildSecond(childSize: Size(200, 90))),
-          onButton: () {
-            DLog.d("onButton");
-          },
           // draggable: false,
+          onChanged: (v) {
+            DLog.d("onChanged: $v");
+          },
         );
 
     return super.floatingButtonConfig.copyWith(

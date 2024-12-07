@@ -25,36 +25,36 @@ class FloatingButtonConfig {
     required this.button,
     this.expandedButtonSize,
     this.expandedButton,
-    this.onButton,
     this.rotationY = true,
     this.draggable = true,
+    this.onChanged,
   });
 
   /// 悬浮按钮外边距
-  EdgeInsets buttonMargin;
+  final EdgeInsets buttonMargin;
 
-  Offset? globalPosition;
-
-  /// 悬浮按钮尺寸
-  Size buttonSize;
-
-  /// 悬浮按钮
-  Widget Function(VoidCallback onToggle) button;
-
-  /// expandedButton 为空时回调
-  VoidCallback? onButton;
+  final Offset? globalPosition;
 
   /// 悬浮按钮尺寸
-  Size? expandedButtonSize;
+  final Size buttonSize;
 
   /// 悬浮按钮
-  Widget Function(VoidCallback onToggle)? expandedButton;
+  final Widget Function(VoidCallback onToggle) button;
+
+  /// 悬浮按钮尺寸
+  final Size? expandedButtonSize;
+
+  /// 悬浮按钮
+  final Widget Function(VoidCallback onToggle)? expandedButton;
 
   /// Y 轴旋转
-  bool? rotationY;
+  final bool? rotationY;
 
   /// 是否可拖拽
-  bool? draggable;
+  final bool? draggable;
+
+  /// 改变回调
+  final ValueChanged<bool>? onChanged;
 
   FloatingButtonConfig copyWith({
     Offset? globalPosition,
@@ -66,6 +66,7 @@ class FloatingButtonConfig {
     VoidCallback? onButton,
     bool? rotationY,
     bool? draggable,
+    ValueChanged<bool>? onChanged,
   }) {
     return FloatingButtonConfig(
       globalPosition: globalPosition ?? this.globalPosition,
@@ -74,9 +75,9 @@ class FloatingButtonConfig {
       button: button ?? this.button,
       expandedButtonSize: expandedButtonSize ?? this.expandedButtonSize,
       expandedButton: expandedButton ?? this.expandedButton,
-      onButton: onButton ?? this.onButton,
       rotationY: rotationY ?? this.rotationY,
       draggable: draggable ?? this.draggable,
+      onChanged: onChanged ?? this.onChanged,
     );
   }
 }
@@ -249,9 +250,6 @@ mixin FloatingButtonMixin<T extends StatefulWidget> on State<T> {
           ),
         ),
       ),
-      onButton: () {
-        DLog.d("$this onButton");
-      },
     );
   }
 
@@ -304,10 +302,11 @@ mixin FloatingButtonMixin<T extends StatefulWidget> on State<T> {
 
   void _rebuild() {
     if (floatingButtonConfig.expandedButton == null) {
-      floatingButtonConfig.onButton?.call();
+      floatingButtonConfig.onChanged?.call(_isExpanded);
       return;
     }
     _isExpanded = !_isExpanded;
+    floatingButtonConfig.onChanged?.call(_isExpanded);
     floatingButtonHide();
     floatingButtonShow();
   }
