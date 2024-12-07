@@ -39,7 +39,7 @@ class FloatingButtonConfig {
   Size buttonSize;
 
   /// 悬浮按钮
-  Widget button;
+  Widget Function(VoidCallback onToggle) button;
 
   /// expandedButton 为空时回调
   VoidCallback? onButton;
@@ -48,7 +48,7 @@ class FloatingButtonConfig {
   Size? expandedButtonSize;
 
   /// 悬浮按钮
-  Widget? expandedButton;
+  Widget Function(VoidCallback onToggle)? expandedButton;
 
   /// Y 轴旋转
   bool? rotationY;
@@ -60,9 +60,9 @@ class FloatingButtonConfig {
     Offset? globalPosition,
     EdgeInsets? buttonMargin,
     Size? buttonSize,
-    Widget? button,
+    Widget Function(VoidCallback onToggle)? button,
     Size? expandedButtonSize,
-    Widget? expandedButton,
+    Widget Function(VoidCallback onToggle)? expandedButton,
     VoidCallback? onButton,
     bool? rotationY,
     bool? draggable,
@@ -134,7 +134,7 @@ mixin FloatingButtonMixin<T extends StatefulWidget> on State<T> {
 
     var button = floatingButtonConfig.button;
     var expandedButton = floatingButtonConfig.expandedButton ?? button;
-    var currButton = (_isExpanded ? expandedButton : button);
+    Widget currButton = (_isExpanded ? expandedButton(_rebuild) : button(_rebuild));
 
     var buttonSize = floatingButtonConfig.buttonSize;
     var expandedButtonSize = floatingButtonConfig.expandedButtonSize ?? buttonSize;
@@ -217,10 +217,7 @@ mixin FloatingButtonMixin<T extends StatefulWidget> on State<T> {
             child: SizedBox(
               width: currButtonSize.width,
               height: currButtonSize.height,
-              child: InkWell(
-                onTap: _rebuild,
-                child: currButton,
-              ),
+              child: currButton,
             ),
           ),
         ),
@@ -231,30 +228,31 @@ mixin FloatingButtonMixin<T extends StatefulWidget> on State<T> {
   /// DraggableFloatingButtonMixin 拖拽按钮配置类
   FloatingButtonConfig get floatingButtonConfig {
     return FloatingButtonConfig(
-        buttonMargin: EdgeInsets.only(
-          top: MediaQuery.of(context).viewPadding.top + kToolbarHeight,
-          bottom: MediaQuery.of(context).viewPadding.bottom + kBottomNavigationBarHeight,
-          left: 4,
-          right: 4,
-        ),
-        buttonSize: Size(60, 60),
-        button: Material(
-          color: Colors.transparent,
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.green,
-              borderRadius: BorderRadius.all(Radius.circular(30)),
-            ),
-            child: Icon(
-              Icons.circle_notifications_rounded,
-              color: Colors.white,
-              size: 40,
-            ),
+      buttonMargin: EdgeInsets.only(
+        top: MediaQuery.of(context).viewPadding.top + kToolbarHeight,
+        bottom: MediaQuery.of(context).viewPadding.bottom + kBottomNavigationBarHeight,
+        left: 4,
+        right: 4,
+      ),
+      buttonSize: Size(60, 60),
+      button: (onToggle) => Material(
+        color: Colors.transparent,
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.green,
+            borderRadius: BorderRadius.all(Radius.circular(30)),
+          ),
+          child: Icon(
+            Icons.circle_notifications_rounded,
+            color: Colors.white,
+            size: 40,
           ),
         ),
-        onButton: () {
-          DLog.d("$this onButton");
-        });
+      ),
+      onButton: () {
+        DLog.d("$this onButton");
+      },
+    );
   }
 
   /// 悬浮按钮展示/隐藏切换

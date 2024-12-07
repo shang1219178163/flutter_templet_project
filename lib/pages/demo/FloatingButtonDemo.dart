@@ -10,6 +10,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_app_bar.dart';
+import 'package:flutter_templet_project/basicWidget/n_cross_fade.dart';
 import 'package:flutter_templet_project/basicWidget/n_floating_button.dart';
 import 'package:flutter_templet_project/basicWidget/n_menu_anchor.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
@@ -55,9 +56,9 @@ class _FloatingButtonDemoState extends State<FloatingButtonDemo> with FloatingBu
     return super.floatingButtonConfig.copyWith(
           globalPosition: Offset(context.screenWidth, context.screenHeight - kBottomNavigationBarHeight - 68),
           buttonSize: Size(52, 68),
-          button: buildFirst(childSize: Size(52, 68)),
+          button: (onToggle) => GestureDetector(onTap: onToggle, child: buildFirst(childSize: Size(52, 68))),
           expandedButtonSize: Size(200, 90),
-          expandedButton: buildSecond(childSize: Size(200, 90)),
+          expandedButton: (onToggle) => GestureDetector(onTap: onToggle, child: buildSecond(childSize: Size(200, 90))),
           onButton: () {
             DLog.d("onButton");
           },
@@ -65,7 +66,7 @@ class _FloatingButtonDemoState extends State<FloatingButtonDemo> with FloatingBu
         );
 
     return super.floatingButtonConfig.copyWith(
-          button: Material(
+          button: (onToggle) => Material(
             color: Colors.transparent,
             child: Container(
               decoration: BoxDecoration(
@@ -124,6 +125,7 @@ class _FloatingButtonDemoState extends State<FloatingButtonDemo> with FloatingBu
             OutlinedButton(
               onPressed: () {
                 floatingButtonToggle();
+                setState(() {});
               },
               child: Text(isFloatingButtonShow ? "hide" : "show"),
             ),
@@ -222,43 +224,44 @@ class _FloatingButtonDemoState extends State<FloatingButtonDemo> with FloatingBu
         bottom: floatingButtonConfig.buttonMargin.bottom,
         child: Align(
           alignment: alignment,
-          child: StatefulBuilder(
-            builder: (BuildContext context, StateSetter setState) {
-              /// 展开收起
-              onToggle() {
-                _isExpanded = !_isExpanded;
-                DLog.d("onToggle $_isExpanded");
-                setState(() {});
-              }
-
-              return AnimatedCrossFade(
-                duration: const Duration(milliseconds: 350),
-                firstChild: InkWell(
-                  onTap: onToggle,
-                  child: Container(
-                    height: 100,
-                    width: 200,
-                    decoration: BoxDecoration(
-                      color: Colors.green,
-                      border: Border.all(color: Colors.blue),
-                    ),
-                  ),
-                ),
-                secondChild: InkWell(
-                  onTap: onToggle,
-                  child: Container(
-                    height: 200,
-                    width: 100,
-                    decoration: BoxDecoration(
-                      color: Colors.yellow,
-                      border: Border.all(color: Colors.blue),
-                    ),
-                  ),
-                ),
-                crossFadeState: !_isExpanded ? CrossFadeState.showFirst : CrossFadeState.showSecond,
-              );
-            },
-          ),
+          child: buildNCrossFade(),
+          // child: StatefulBuilder(
+          //   builder: (BuildContext context, StateSetter setState) {
+          //     /// 展开收起
+          //     onToggle() {
+          //       _isExpanded = !_isExpanded;
+          //       DLog.d("onToggle $_isExpanded");
+          //       setState(() {});
+          //     }
+          //
+          //     return AnimatedCrossFade(
+          //       duration: const Duration(milliseconds: 350),
+          //       firstChild: InkWell(
+          //         onTap: onToggle,
+          //         child: Container(
+          //           height: 100,
+          //           width: 200,
+          //           decoration: BoxDecoration(
+          //             color: Colors.green,
+          //             border: Border.all(color: Colors.blue),
+          //           ),
+          //         ),
+          //       ),
+          //       secondChild: InkWell(
+          //         onTap: onToggle,
+          //         child: Container(
+          //           height: 200,
+          //           width: 100,
+          //           decoration: BoxDecoration(
+          //             color: Colors.yellow,
+          //             border: Border.all(color: Colors.blue),
+          //           ),
+          //         ),
+          //       ),
+          //       crossFadeState: !_isExpanded ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+          //     );
+          //   },
+          // ),
         ),
       ),
     );
@@ -268,6 +271,49 @@ class _FloatingButtonDemoState extends State<FloatingButtonDemo> with FloatingBu
   onToggle() {
     _isExpanded = !_isExpanded;
     setState(() {});
+  }
+
+  Widget buildNCrossFade() {
+    return NCrossFade(
+      isFirst: true,
+      onChanged: (v) {
+        DLog.d("onChanged: $v");
+      },
+      firstChild: (onToggle) => Container(
+        height: 200,
+        width: 100,
+        decoration: BoxDecoration(
+          color: Colors.yellow,
+          border: Border.all(color: Colors.blue),
+        ),
+        child: Center(
+          child: ElevatedButton(
+            onPressed: () {
+              DLog.d("视图2");
+              onToggle();
+            },
+            child: Text("视图2"),
+          ),
+        ),
+      ),
+      secondChild: (onToggle) => Container(
+        height: 100,
+        width: 200,
+        decoration: BoxDecoration(
+          color: Colors.green,
+          border: Border.all(color: Colors.blue),
+        ),
+        child: Center(
+          child: ElevatedButton(
+            onPressed: () {
+              DLog.d("视图1");
+              onToggle();
+            },
+            child: Text("视图1"),
+          ),
+        ),
+      ),
+    );
   }
 }
 
