@@ -295,7 +295,7 @@ mixin FloatingButtonMixin<T extends StatefulWidget> on State<T> {
 
   /// 溢出 OverlayEntry
   hideOverlayEntry(int index) {
-    assert(index < entries.length, "索引必须 小于数组长度");
+    // assert(index < entries.length, "索引必须 小于数组长度");
     if (index >= entries.length) {
       return false;
     }
