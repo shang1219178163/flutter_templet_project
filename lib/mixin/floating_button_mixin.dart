@@ -157,6 +157,7 @@ mixin FloatingButtonMixin<T extends StatefulWidget> on State<T> {
         top: _top,
         left: isLeft ? _left : null,
         right: !isLeft ? _right : null,
+        // bottom: 0,
         child: GestureDetector(
           onPanStart: (d) {
             isLeft = d.globalPosition.dx < maxWidth * 0.5;
@@ -278,7 +279,7 @@ mixin FloatingButtonMixin<T extends StatefulWidget> on State<T> {
     // _overlayEntry.remove();
     final list = [...entries];
     for (final e in list) {
-      _entries.remove(_overlayEntry);
+      _entries.remove(e);
       e.remove();
     }
   }
@@ -290,6 +291,17 @@ mixin FloatingButtonMixin<T extends StatefulWidget> on State<T> {
     }
     _entries.insert(index, overlayEntry);
     Overlay.of(context).insert(overlayEntry);
+  }
+
+  /// 溢出 OverlayEntry
+  hideOverlayEntry(int index) {
+    assert(index < entries.length, "索引必须 小于数组长度");
+    if (index >= entries.length) {
+      return false;
+    }
+    final e = entries[index];
+    _entries.remove(e);
+    e.remove();
   }
 
   void _rebuild() {

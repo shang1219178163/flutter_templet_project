@@ -11,6 +11,9 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_app_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_floating_button.dart';
+import 'package:flutter_templet_project/basicWidget/n_menu_anchor.dart';
+import 'package:flutter_templet_project/basicWidget/n_text.dart';
+import 'package:flutter_templet_project/extension/alignment_ext.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/num_ext.dart';
@@ -27,6 +30,10 @@ class FloatingButtonDemo extends StatefulWidget {
 }
 
 class _FloatingButtonDemoState extends State<FloatingButtonDemo> with FloatingButtonMixin {
+  Alignment topAlignment = Alignment.topCenter;
+
+  var _isExpanded = false;
+
   @override
   void dispose() {
     DLog.d("$widget dispose");
@@ -37,6 +44,10 @@ class _FloatingButtonDemoState extends State<FloatingButtonDemo> with FloatingBu
   void initState() {
     super.initState();
     DLog.d("$widget initState");
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      insertOverlayEntry(0, buildOverlayEntry());
+    });
   }
 
   @override
@@ -50,7 +61,7 @@ class _FloatingButtonDemoState extends State<FloatingButtonDemo> with FloatingBu
           onButton: () {
             DLog.d("onButton");
           },
-          draggable: false,
+          // draggable: false,
         );
 
     return super.floatingButtonConfig.copyWith(
@@ -82,6 +93,7 @@ class _FloatingButtonDemoState extends State<FloatingButtonDemo> with FloatingBu
         appBar: NAppBar(
           title: Text("$widget"),
           onBack: () {
+            floatingButtonHide();
             Get.back();
           },
         ),
@@ -97,120 +109,35 @@ class _FloatingButtonDemoState extends State<FloatingButtonDemo> with FloatingBu
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            NMenuAnchor(
+              values: AlignmentExt.allCases,
+              initialItem: topAlignment,
+              onChanged: (val) {
+                ddlog(val);
+                topAlignment = val;
+                hideOverlayEntry(0);
+                insertOverlayEntry(0, buildOverlayEntry(alignment: topAlignment));
+              },
+              cbName: (e) => "$e",
+              equal: (a, b) => a == b,
+            ),
             OutlinedButton(
               onPressed: () {
                 floatingButtonToggle();
               },
               child: Text(isFloatingButtonShow ? "hide" : "show"),
             ),
-          ],
+          ].map((e) => Padding(padding: EdgeInsets.symmetric(vertical: 4), child: e)).toList(),
         ),
       ),
-    );
-  }
-
-  AnimatedCrossFade buildToggle({bool isLeft = true, required Size childSize}) {
-    Widget bom = FittedBox(
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Padding(
-            padding: EdgeInsets.only(right: 8.0),
-            child: Image(
-              image: "assets/images/icon_again_shopping_cart.png".toAssetImage(),
-              width: 27,
-              height: 27,
-            ),
-          ),
-          Flexible(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "测试用药",
-                  style: TextStyle(color: Colors.white, fontSize: 14),
-                ),
-                Flexible(
-                  child: Text(
-                    "药品b(1片*1板/盒),心安宁...",
-                    style: TextStyle(color: Colors.white, fontSize: 12),
-                    maxLines: 1,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-
-    return AnimatedCrossFade(
-      duration: const Duration(milliseconds: 350),
-      firstChild: InkWell(
-        onTap: onToggle,
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 300),
-          transform: Matrix4.rotationY(isLeft ? 2 * pi : pi),
-          transformAlignment: Alignment.center,
-          child: Image(
-            image: "assets/images/rec_left_flot_btn.gif".toAssetImage(),
-            width: childSize.width,
-            height: childSize.height,
-          ),
-        ),
-      ),
-      secondChild: InkWell(
-        onTap: onToggle,
-        child: Stack(
-          children: [
-            Container(
-              margin: EdgeInsets.only(top: 44),
-              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-              decoration: BoxDecoration(
-                // color: Colors.transparent,
-                borderRadius: BorderRadius.all(Radius.circular(30)),
-                gradient: LinearGradient(
-                  begin: Alignment.centerLeft,
-                  end: Alignment.centerRight,
-                  colors: [primaryColor.withOpacity(.35), primaryColor.withOpacity(.7)],
-                ),
-              ),
-              child: bom,
-            ),
-            Positioned(
-              top: 15,
-              left: 40,
-              right: 0,
-              child: Container(
-                decoration: const BoxDecoration(
-                  color: Colors.transparent,
-                  // border: Border.all(color: Colors.blue),
-                ),
-                child: Image(
-                  image: "assets/images/icon_rec_cat.png".toAssetImage(),
-                  width: 45,
-                  height: 40,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-      crossFadeState: !_isExpanded ? CrossFadeState.showFirst : CrossFadeState.showSecond,
     );
   }
 
   Widget buildFirst({VoidCallback? onTap, bool isLeft = true, required Size childSize}) {
-    return AnimatedContainer(
-      duration: const Duration(milliseconds: 300),
-      transform: Matrix4.rotationY(isLeft ? 2 * pi : pi),
-      transformAlignment: Alignment.center,
-      child: Image(
-        image: "assets/images/rec_left_flot_btn.gif".toAssetImage(),
-        width: childSize.width,
-        height: childSize.height,
-      ),
+    return Image(
+      image: "assets/images/rec_left_flot_btn.gif".toAssetImage(),
+      width: childSize.width,
+      height: childSize.height,
     );
   }
 
@@ -286,7 +213,56 @@ class _FloatingButtonDemoState extends State<FloatingButtonDemo> with FloatingBu
     );
   }
 
-  var _isExpanded = false;
+  OverlayEntry buildOverlayEntry({Alignment alignment = Alignment.topCenter}) {
+    return OverlayEntry(
+      builder: (context) => Positioned(
+        top: floatingButtonConfig.buttonMargin.top,
+        left: 0,
+        right: 0,
+        bottom: floatingButtonConfig.buttonMargin.bottom,
+        child: Align(
+          alignment: alignment,
+          child: StatefulBuilder(
+            builder: (BuildContext context, StateSetter setState) {
+              /// 展开收起
+              onToggle() {
+                _isExpanded = !_isExpanded;
+                DLog.d("onToggle $_isExpanded");
+                setState(() {});
+              }
+
+              return AnimatedCrossFade(
+                duration: const Duration(milliseconds: 350),
+                firstChild: InkWell(
+                  onTap: onToggle,
+                  child: Container(
+                    height: 100,
+                    width: 200,
+                    decoration: BoxDecoration(
+                      color: Colors.green,
+                      border: Border.all(color: Colors.blue),
+                    ),
+                  ),
+                ),
+                secondChild: InkWell(
+                  onTap: onToggle,
+                  child: Container(
+                    height: 200,
+                    width: 100,
+                    decoration: BoxDecoration(
+                      color: Colors.yellow,
+                      border: Border.all(color: Colors.blue),
+                    ),
+                  ),
+                ),
+                crossFadeState: !_isExpanded ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+              );
+            },
+          ),
+        ),
+      ),
+    );
+  }
 
   /// 展开收起
   onToggle() {

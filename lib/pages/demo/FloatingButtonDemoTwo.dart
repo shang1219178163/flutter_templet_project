@@ -53,7 +53,7 @@ class _FloatingButtonDemoTwoState extends State<FloatingButtonDemoTwo> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            buildSuspension(
+            buildFloatingButton(
               onPanStart: (e) {
                 // onToggle();
               },
@@ -78,7 +78,7 @@ class _FloatingButtonDemoTwoState extends State<FloatingButtonDemoTwo> {
   }
 
   /// 创建悬浮按钮
-  buildSuspension({
+  buildFloatingButton({
     GestureDragStartCallback? onPanStart,
     GestureDragEndCallback? onPanEnd,
     EdgeInsets padding = const EdgeInsets.only(
@@ -216,15 +216,10 @@ class _FloatingButtonDemoTwoState extends State<FloatingButtonDemoTwo> {
       duration: const Duration(milliseconds: 350),
       firstChild: InkWell(
         onTap: onToggle,
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 300),
-          transform: Matrix4.rotationY(isLeft ? 2 * pi : pi),
-          transformAlignment: Alignment.center,
-          child: Image(
-            image: "assets/images/rec_left_flot_btn.gif".toAssetImage(),
-            width: childSize.width,
-            height: childSize.height,
-          ),
+        child: Image(
+          image: "assets/images/rec_left_flot_btn.gif".toAssetImage(),
+          width: childSize.width,
+          height: childSize.height,
         ),
       ),
       secondChild: InkWell(
