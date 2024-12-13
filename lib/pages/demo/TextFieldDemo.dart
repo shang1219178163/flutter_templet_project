@@ -6,22 +6,30 @@
 //  Copyright © 8/14/21 shang. All rights reserved.
 //
 
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_templet_project/basicWidget/n_footer_button_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_order_num_unit.dart';
+import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/n_textfield_unit.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/function_ext.dart';
 import 'package:flutter_templet_project/extension/image_ext.dart';
+import 'package:flutter_templet_project/extension/list_ext.dart';
 import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/mixin/asset_resource_mixin.dart';
+import 'package:flutter_templet_project/pages/demo/FocusNodeDemo.dart';
 import 'package:flutter_templet_project/util/Debounce.dart';
 import 'package:flutter_templet_project/util/Throttle.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/get_util.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_workers/utils/debouncer.dart';
 
@@ -60,6 +68,12 @@ class _TextFieldDemoState extends State<TextFieldDemo> with AssetResourceMixin {
 
   final _throttle = Throttle();
 
+  var tips = [
+    "安卓手机普通键盘和安全键盘切换时焦点丢失?可以通过延迟 300ms 通过 focusNode 二次获取焦点解决.",
+    "如果 sheet 弹窗中包含 TextField 键盘弹起后焦点丢失?可以给 TextField 的 focusNode属性赋值,解决动画之后焦点丢失的问题.",
+    "TextField 的 readOnly 为 true 时,仍会唤起键盘? 可以设置 enabled 为 false 解决."
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,6 +81,18 @@ class _TextFieldDemoState extends State<TextFieldDemo> with AssetResourceMixin {
           ? null
           : AppBar(
               title: Text(widget.title ?? "$widget"),
+              actions: [
+                GestureDetector(
+                  onTap: onSheetTips,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    child: Icon(
+                      Icons.warning_amber,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ],
             ),
       body: buildColumn(),
       bottomSheet: Container(
@@ -333,6 +359,103 @@ class _TextFieldDemoState extends State<TextFieldDemo> with AssetResourceMixin {
     _throttle(() => debugPrint("${DateTime.now()}: onPressed"));
   }
 
+  void onSheetTips() {
+    // tips = kuanRong.split("\n");
+    GetBottomSheet.showCustom(
+      hideDragIndicator: false,
+      addUnconstrainedBox: false,
+      isScrollControlled: true,
+      child: Material(
+        child: Container(
+          padding: EdgeInsets.only(
+            top: 12,
+            bottom: max(12, MediaQuery.of(context).padding.bottom) - 8,
+          ),
+          constraints: BoxConstraints(
+            maxHeight: 600,
+            minHeight: 300,
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                padding: const EdgeInsets.only(
+                  top: 12,
+                  left: 15,
+                  right: 15,
+                  bottom: 8,
+                ),
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: Colors.transparent,
+                  // border: Border.all(color: Colors.blue),
+                ),
+                child: const NText(
+                  "焦点问题",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                    color: fontColor,
+                  ),
+                ),
+              ),
+              Flexible(
+                child: Scrollbar(
+                  child: SingleChildScrollView(
+                    child: Container(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          ...tips.map((e) {
+                            final i = tips.indexOf(e);
+                            final question = "${i + 1}.${e.split("?").firstOrNull ?? "-"}";
+                            final answer = e.split("?").lastOrNull ?? "-";
+
+                            return Container(
+                              padding: EdgeInsets.only(
+                                left: 15,
+                                right: 15,
+                              ),
+                              child: ListTile(
+                                dense: true,
+                                title: NText(question),
+                                subtitle: NText(answer),
+                              ),
+                            );
+                          }),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              NFooterButtonBar(
+                // hideCancel: !readOnly,
+                boxShadow: const [],
+                // enable: enable,
+                padding: EdgeInsets.only(
+                  top: 12,
+                  left: 15,
+                  right: 15,
+                ),
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                ),
+                onCancel: () {
+                  Navigator.of(context).pop();
+                },
+                onConfirm: () async {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
   Widget buildTextField({
     TextEditingController? controller,
     TextInputType keyboardType = TextInputType.text,
@@ -476,7 +599,11 @@ class _TextFieldDemoState extends State<TextFieldDemo> with AssetResourceMixin {
     );
   }
 
-  buildFocusedBorder({double radus = 4, double borderWidth = 1, Color color = lineColor}) {
+  InputBorder buildFocusedBorder({
+    double radus = 4,
+    double borderWidth = 1,
+    Color color = lineColor,
+  }) {
     return OutlineInputBorder(
       borderRadius: BorderRadius.all(Radius.circular(radus)), //边角
       borderSide: BorderSide(

@@ -18,6 +18,8 @@ import 'package:flutter_templet_project/util/color_util.dart';
 class NTextfieldUnit extends StatelessWidget {
   const NTextfieldUnit({
     super.key,
+    this.focusNode,
+    this.enabled,
     required this.name,
     required this.value,
     this.controller,
@@ -40,6 +42,12 @@ class NTextfieldUnit extends StatelessWidget {
     this.keyboardType,
     this.inputFormatters,
   });
+
+  /// 输入框焦点
+  final FocusNode? focusNode;
+
+  /// 是否禁用
+  final bool? enabled;
 
   /// 左边标题
   final String name;
@@ -119,8 +127,10 @@ class NTextfieldUnit extends StatelessWidget {
     final hasFocusVN = ValueNotifier<bool>(false);
 
     Widget child = _NTextField(
+      enabled: enabled,
       value: valueNew,
       controller: controllerNew,
+      focusNode: focusNode,
       hasFocusVN: hasFocusVN,
       isCollapsed: true,
       maxLines: maxLines,
@@ -273,7 +283,8 @@ class NTextfieldUnit extends StatelessWidget {
 /// 封装输入框组件
 class _NTextField extends StatefulWidget {
   const _NTextField({
-    Key? key,
+    super.key,
+    this.enabled,
     this.value = "",
     this.controller,
     this.contextMenuBuilder,
@@ -311,7 +322,9 @@ class _NTextField extends StatefulWidget {
     this.isCollapsed,
     this.inputFormatters,
     this.debounceMilliseconds = 0,
-  }) : super(key: key);
+  });
+
+  final bool? enabled;
 
   final String? value;
 
@@ -439,7 +452,8 @@ class _NTextFieldState extends State<_NTextField> {
   void didUpdateWidget(covariant _NTextField oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    if (widget.value != oldWidget.value ||
+    if (widget.enabled != oldWidget.enabled ||
+        widget.value != oldWidget.value ||
         widget.controller != oldWidget.controller ||
         widget.readOnly != oldWidget.readOnly ||
         widget.minLines != oldWidget.minLines ||
@@ -477,6 +491,7 @@ class _NTextFieldState extends State<_NTextField> {
         widget.maxLength != null ? controller.buildInputDecorationCounter(maxLength: widget.maxLength!) : null;
 
     return TextField(
+      enabled: widget.enabled,
       contextMenuBuilder: widget.contextMenuBuilder ??
           (_, editableTextState) => AdaptiveTextSelectionToolbar.editableText(
                 editableTextState: editableTextState,
