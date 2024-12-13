@@ -17,6 +17,22 @@ import 'package:flutter_templet_project/pages/demo/AlertSheetDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ListTileDemo.dart';
 import 'package:flutter_templet_project/util/get_util.dart';
 
+// CupertinoPicker({
+// super.key,
+// this.diameterRatio = _kDefaultDiameterRatio,//数值越小，滚轮弧度越明显；数值越大，滚轮更趋于平面显示。
+// this.backgroundColor,
+// this.offAxisFraction = 0.0,//用于让滚轮从中心偏移显示。
+// this.useMagnifier = false,//是否启用选中项的放大效果。
+// this.magnification = 1.0,//放大选中项以突出显示。
+// this.scrollController,
+// this.squeeze = _kSqueeze,//值越小，间距越紧密；值越大，间距越宽松。
+// required this.itemExtent,//设置每个子项的高度。
+// required this.onSelectedItemChanged,
+// required List<Widget> children,
+// this.selectionOverlay = const CupertinoPickerDefaultSelectionOverlay(),
+// bool looping = false,
+// })
+
 class PickerDemo extends StatefulWidget {
   const PickerDemo({Key? key}) : super(key: key);
 
