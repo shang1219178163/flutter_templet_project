@@ -11,13 +11,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_order_num_unit.dart';
+import 'package:flutter_templet_project/basicWidget/n_textfield_unit.dart';
+import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/function_ext.dart';
 import 'package:flutter_templet_project/extension/image_ext.dart';
 import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
+import 'package:flutter_templet_project/mixin/asset_resource_mixin.dart';
 import 'package:flutter_templet_project/util/Debounce.dart';
 import 'package:flutter_templet_project/util/Throttle.dart';
+import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_workers/utils/debouncer.dart';
 
@@ -30,9 +34,8 @@ class TextFieldDemo extends StatefulWidget {
   _TextFieldDemoState createState() => _TextFieldDemoState();
 }
 
-class _TextFieldDemoState extends State<TextFieldDemo> {
-  bool get hideApp =>
-      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
+class _TextFieldDemoState extends State<TextFieldDemo> with AssetResourceMixin {
+  bool get hideApp => Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
 
   late final _textController = TextEditingController(text: '测试');
   late final editingController = TextEditingController(text: '测试');
@@ -65,7 +68,7 @@ class _TextFieldDemoState extends State<TextFieldDemo> {
           : AppBar(
               title: Text(widget.title ?? "$widget"),
             ),
-      body: buildColumn(context),
+      body: buildColumn(),
       bottomSheet: Container(
         child: Row(
           children: <Widget>[
@@ -80,10 +83,9 @@ class _TextFieldDemoState extends State<TextFieldDemo> {
     );
   }
 
-  Widget buildColumn(BuildContext context) {
+  Widget buildColumn() {
     return SafeArea(
-      child: Container(
-        padding: EdgeInsets.all(15),
+      child: Scrollbar(
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -93,8 +95,7 @@ class _TextFieldDemoState extends State<TextFieldDemo> {
                   controller: _textController,
                   placeholder: "请输入",
                   textAlign: TextAlign.center,
-                  padding:
-                      EdgeInsets.only(left: 8, top: 8, bottom: 8, right: 8),
+                  padding: EdgeInsets.only(left: 8, top: 8, bottom: 8, right: 8),
                   suffixMode: OverlayVisibilityMode.editing,
                   decoration: BoxDecoration(
                     // color: CupertinoColors.tertiarySystemFill,
@@ -108,8 +109,7 @@ class _TextFieldDemoState extends State<TextFieldDemo> {
                 child: CupertinoSearchTextField(
                   // prefixIcon: SizedBox(),
                   // prefixInsets: EdgeInsets.zero,
-                  padding:
-                      EdgeInsets.only(left: 8, top: 8, bottom: 8, right: 8),
+                  padding: EdgeInsets.only(left: 8, top: 8, bottom: 8, right: 8),
                   placeholder: "请输入",
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -224,32 +224,37 @@ class _TextFieldDemoState extends State<TextFieldDemo> {
                   textInputAction: TextInputAction.next,
                   //显示'下一步'
                   decoration: InputDecoration(
-                      hintText: '请输入账号',
-                      // labelText: "账号",
-                      // contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-                      prefixIcon: Icon(Icons.perm_identity),
-                      // border: OutlineInputBorder(
-                      //     borderRadius: BorderRadius.circular(4.0) //圆角大小
-                      // ),
-                      suffixIcon: _unameController.text.isNotEmpty
-                          ? IconButton(
-                              icon: Icon(
-                                Icons.cancel,
-                                color: Colors.grey,
-                              ),
-                              onPressed: () {
-                                _unameController.clear();
-                                //   _unameController.text = '';
-                                //   // checkLoginText();
-                                setState(() {});
-                              },
-                            )
-                          : null),
+                    isCollapsed: true,
+                    hintText: '请输入账号',
+                    // labelText: "账号",
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
+                    prefixIcon: Icon(Icons.perm_identity),
+                    // border: OutlineInputBorder(
+                    //     borderRadius: BorderRadius.circular(4.0) //圆角大小
+                    // ),
+                    suffixIcon: _unameController.text.isNotEmpty
+                        ? IconButton(
+                            icon: Icon(
+                              Icons.cancel,
+                              color: Colors.grey,
+                              size: 18,
+                            ),
+                            onPressed: () {
+                              _unameController.clear();
+                              //   _unameController.text = '';
+                              //   // checkLoginText();
+                              setState(() {});
+                            },
+                          )
+                        : null,
+                    border: buildFocusedBorder(),
+                    focusedBorder: buildFocusedBorder(color: primaryColor),
+                    enabledBorder: buildFocusedBorder(),
+                  ),
                   validator: (v) {
                     return !_unameExp.hasMatch(v!) ? '账号由6到12位数字与小写字母组成' : null;
                   },
-                  onEditingComplete: () =>
-                      FocusScope.of(context).requestFocus(focusNode2),
+                  onEditingComplete: () => FocusScope.of(context).requestFocus(focusNode2),
                   onChanged: (v) {
                     // checkLoginText();
                     setState(() {});
@@ -269,22 +274,28 @@ class _TextFieldDemoState extends State<TextFieldDemo> {
                   textInputAction: TextInputAction.done,
                   //显示'完成'
                   decoration: InputDecoration(
-                      hintText: '请输入密码',
-                      // labelText: '密码',
-                      // contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-                      prefixIcon: Icon(Icons.lock),
-                      // border: OutlineInputBorder(
-                      //     borderRadius: BorderRadius.circular(40.0)
-                      // ),
-                      suffixIcon: IconButton(
-                        icon: Icon(
-                          Icons.remove_red_eye,
-                        ),
-                        onPressed: () {
-                          isEye = !isEye;
-                          setState(() {});
-                        },
-                      )),
+                    isCollapsed: true,
+                    hintText: '请输入密码',
+                    // labelText: '密码',
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                    prefixIcon: Icon(Icons.lock),
+                    // border: OutlineInputBorder(
+                    //     borderRadius: BorderRadius.circular(40.0)
+                    // ),
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        Icons.remove_red_eye,
+                        size: 20,
+                      ),
+                      onPressed: () {
+                        isEye = !isEye;
+                        setState(() {});
+                      },
+                    ),
+                    border: buildFocusedBorder(),
+                    focusedBorder: buildFocusedBorder(color: primaryColor),
+                    enabledBorder: buildFocusedBorder(),
+                  ),
                   validator: (v) {
                     return !_pwdExp.hasMatch(v!) ? '密码由6到12位数字与小写字母组成' : null;
                   },
@@ -295,6 +306,15 @@ class _TextFieldDemoState extends State<TextFieldDemo> {
                   onEditingComplete: () {
                     ddlog("onEditingComplete");
                   }, //'完成'回调
+                ),
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                ),
+                child: NSectionBox(
+                  title: "buildUnit",
+                  child: buildUnit(),
                 ),
               ),
             ],
@@ -397,6 +417,72 @@ class _TextFieldDemoState extends State<TextFieldDemo> {
               ),
             ],
           ),
+    );
+  }
+
+  Widget buildUnit() {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          NTextfieldUnit(
+            name: "输入模式：",
+            value: "175.0",
+            unit: "kg",
+            keyboardType: const TextInputType.numberWithOptions(decimal: true), // 显示数字键盘
+            inputFormatters: [
+              FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*')), // 允许数字和小数点
+            ],
+            showClear: true,
+            debounceMilliseconds: 500,
+            onChanged: (value) async {
+              DLog.d("体 重：$value");
+            },
+          ),
+          NTextfieldUnit(
+            name: "选择模式：",
+            value: '',
+            hitText: "请选择",
+            onTap: () {
+              DLog.d("化疗方案");
+            },
+            readOnly: true,
+            readOnlyFillColor: white,
+            onChanged: (value) {
+              DLog.d("化疗方案：$value");
+            },
+          ),
+          NTextfieldUnit(
+            name: "只读模式：",
+            value: kuanRong,
+            hitText: "",
+            maxLines: 9,
+            onChanged: (value) {
+              DLog.d("剂量公式：$value");
+            },
+            hideSuffix: true,
+            readOnly: true,
+          ),
+        ]
+            .map((e) => Padding(
+                  padding: EdgeInsets.only(bottom: 8),
+                  child: e,
+                ))
+            .toList(),
+      ),
+    );
+  }
+
+  buildFocusedBorder({double radus = 4, double borderWidth = 1, Color color = lineColor}) {
+    return OutlineInputBorder(
+      borderRadius: BorderRadius.all(Radius.circular(radus)), //边角
+      borderSide: BorderSide(
+        color: color, //边框颜色为白色
+        width: borderWidth, //宽度为1
+      ),
     );
   }
 }
