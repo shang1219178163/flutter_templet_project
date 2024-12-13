@@ -25,7 +25,6 @@ import 'package:flutter_templet_project/extension/list_ext.dart';
 import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/mixin/asset_resource_mixin.dart';
-import 'package:flutter_templet_project/pages/demo/FocusNodeDemo.dart';
 import 'package:flutter_templet_project/util/Debounce.dart';
 import 'package:flutter_templet_project/util/Throttle.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
