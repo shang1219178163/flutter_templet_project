@@ -96,6 +96,7 @@ class _FloatingButtonDemoThreeState extends State<FloatingButtonDemoThree> {
     required Size expandChildSize,
     bool attachHorizalEdge = true,
     bool attachVerticalEdge = false,
+    bool rotationY = true,
   }) {
     return LayoutBuilder(
       builder: (context, constraints) {
@@ -170,18 +171,20 @@ class _FloatingButtonDemoThreeState extends State<FloatingButtonDemoThree> {
 
                       var radians = isLeftTmp != isLeft ? pi : 0.0;
                       DLog.d("isLeft: $isLeft, isLeftTmp: $isLeftTmp, $radians");
-                      if (!isExpanded) {
-                        child = AnimatedContainer(
-                          duration: const Duration(milliseconds: 300),
-                          transform: Matrix4.rotationY(radians),
-                          transformAlignment: Alignment.center,
-                          alignment: isLeftTmp ? Alignment.centerLeft : Alignment.centerRight,
-                          child: child,
-                        );
-                      }
+                      if (rotationY) {
+                        if (!isExpanded) {
+                          child = AnimatedContainer(
+                            duration: const Duration(milliseconds: 300),
+                            transform: Matrix4.rotationY(radians),
+                            transformAlignment: Alignment.center,
+                            alignment: isLeftTmp ? Alignment.centerLeft : Alignment.centerRight,
+                            child: child,
+                          );
+                        }
 
-                      if (isExpanded) {
-                        onToggle();
+                        if (isExpanded) {
+                          onToggle();
+                        }
                       }
                       onPanEnd?.call(e);
                     },
