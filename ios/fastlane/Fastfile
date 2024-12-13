@@ -298,6 +298,49 @@ platform :ios do
     UI.message "🌟🌟🌟🌟 打包结束, 总耗时: #{seconds_to_hms(time_difference)}".blue
   end
 
+  # 当前目录
+  lane :app_dir do
+    current = Dir.pwd;
+    puts "Dir.pwd: #{current}"
+
+    current = File.expand_path("..", current);
+    current = File.expand_path("..", current);
+
+    appDir = "#{current}/build/app/outputs/flutter-ipa"
+    puts "#{appDir}"
+  end
+
+  def update_build_number
+    current = Dir.pwd;
+    current = File.expand_path("..", current);
+    
+    # 获取 Info.plist 文件路径
+    plist_path = "#{current}/Runner/Info.plist"
+  
+    # 读取当前的 build number
+    current_build_number = get_info_plist_value(
+      path: plist_path,
+      key: "CFBundleVersion"
+    ).to_i
+  
+    # 自增 build number
+    new_build_number = (current_build_number + 1).to_s
+  
+    # 更新 Info.plist 中的 build number
+    set_info_plist_value(
+      path: plist_path,
+      key: "CFBundleVersion",
+      value: new_build_number
+    )
+  
+
+    build_number = get_info_plist_value(
+      path: plist_path,
+      key: "CFBundleVersion"
+    ).to_i
+    puts "build_number:#{current_build_number} -> #{build_number}"
+  end
+
   desc "测试"
   lane :test do |options|
     # clear_cache_files()
@@ -309,6 +352,8 @@ platform :ios do
     
     # handleDingSlack()
     # handleDingTalk()
+
+    update_build_number();
   end
 
 
