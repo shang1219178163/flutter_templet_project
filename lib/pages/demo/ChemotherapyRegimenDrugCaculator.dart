@@ -10,12 +10,14 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_button.dart';
 import 'package:flutter_templet_project/basicWidget/n_menu_anchor.dart';
+import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/object_ext.dart';
 import 'package:flutter_templet_project/pages/medication_calculator.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 /// 化疗药品计算
 class ChemotherapyRegimenDrugCaculator extends StatefulWidget {
@@ -35,23 +37,22 @@ class _ChemotherapyRegimenDrugCaculatorState extends State<ChemotherapyRegimenDr
 
   final _scrollController = ScrollController();
 
-  Map<String, dynamic> arguments = Get.arguments ?? <String, dynamic>{};
+  // 输入患者身高和体重
+  double height = 175.0; // 身高 (cm)
+  double weight = 85.0; // 体重 (kg)
+  double bsa = 0.0; // 体重 (kg)
 
-  /// id
-  late final id = arguments["id"];
+  final strategyMap = ChemotherapyRegimenTreatmentStrategyEnum.map;
+  ChemotherapyRegimenTreatmentStrategyEnum? selectedStrategy = ChemotherapyRegimenTreatmentStrategyEnum.GN;
 
-  final strategyMap = <String, TreatmentStrategy>{
-    "GN": GNStrategy(),
-    "FLOFIRINOX": FLOFIRINOXStrategy(),
-    "MFLOFIRINOX": MFLOFIRINOXStrategy(),
-  };
-
-  String? strategyInitail;
-  String? selectedStrategy;
+  final dosageVN = ValueNotifier("");
 
   @override
-  void didUpdateWidget(covariant ChemotherapyRegimenDrugCaculator oldWidget) {
-    super.didUpdateWidget(oldWidget);
+  void initState() {
+    super.initState();
+
+    bsa = BSAUtils.calculateBSA(height: height, weight: weight);
+    caculatorEnum(strategy: selectedStrategy);
   }
 
   @override
@@ -82,15 +83,38 @@ class _ChemotherapyRegimenDrugCaculatorState extends State<ChemotherapyRegimenDr
       controller: _scrollController,
       child: SingleChildScrollView(
         controller: _scrollController,
-        child: Column(
-          children: [
-            FractionallySizedBox(
-              widthFactor: 0.35,
-              // alignment: Alignment.centerLeft,
-              child: buildMenuAnchor(),
-            ),
-            OutlinedButton(onPressed: onCaculator, child: Text("onCaculator")),
-          ].map((e) => Padding(padding: EdgeInsets.symmetric(vertical: 8), child: e)).toList(),
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              NText("身高: ${height}"),
+              NText("体重: ${weight}"),
+              NText("体表面积: $bsa"),
+              FractionallySizedBox(
+                widthFactor: 0.40,
+                alignment: Alignment.centerLeft,
+                child: OutlinedButton(
+                  onPressed: onCaculator,
+                  child: Text("计算所有方案"),
+                ),
+              ),
+              FractionallySizedBox(
+                widthFactor: 0.40,
+                alignment: Alignment.centerLeft,
+                child: buildMenuAnchor(),
+              ),
+              ValueListenableBuilder(
+                valueListenable: dosageVN,
+                builder: (context, value, child) {
+                  if (value.isEmpty) {
+                    return SizedBox();
+                  }
+                  return SelectableText("方案药品: \n$value");
+                },
+              ),
+            ].map((e) => Padding(padding: EdgeInsets.symmetric(vertical: 8), child: e)).toList(),
+          ),
         ),
       ),
     );
@@ -98,25 +122,20 @@ class _ChemotherapyRegimenDrugCaculatorState extends State<ChemotherapyRegimenDr
 
   /// 选择框
   Widget buildMenuAnchor() {
-    return NMenuAnchor(
+    return NMenuAnchor<ChemotherapyRegimenTreatmentStrategyEnum>(
       style: MenuStyle(
         alignment: Alignment.centerLeft,
       ),
       values: strategyMap.keys.toList(),
-      initialItem: strategyInitail,
+      initialItem: selectedStrategy,
       onChanged: (val) {
         selectedStrategy = val;
-        final strategy = strategyMap[val];
-        DLog.d("val: $selectedStrategy, ${strategy}");
-        if (strategy == null) {
-          return;
-        }
-        caculator(strategy: strategy);
+        caculatorEnum(strategy: val);
       },
       equal: (a, b) => a == b,
-      cbName: (e) => "$e",
+      cbName: (e) => "${e?.name}",
       builder: (controller, selectedItem) {
-        final name = selectedItem;
+        final name = selectedItem?.name;
         final nameStyle = TextStyle(
           fontSize: 15,
           color: fontColor,
@@ -168,30 +187,42 @@ class _ChemotherapyRegimenDrugCaculatorState extends State<ChemotherapyRegimenDr
 
   /// 计算所有方案
   void onCaculator() {
-    // 输入患者身高和体重
-    double height = 170.0; // 身高 (cm)
-    double weight = 65.0; // 体重 (kg)
+    // // 输入患者身高和体重
+    // double height = 170.0; // 身高 (cm)
+    // double weight = 65.0; // 体重 (kg)
+
+    // // 计算体表面积
+    // double bsa = BSAUtils.calculateBSA(height: height, weight: weight);
+    // print('体表面积: $bsa');
 
     // 计算GN方案
-    var gnQuantities = GNStrategy().calculateDrugQuantities(height: height, weight: weight);
-    DLog.d('GN方案药品数量: ${jsonEncode(gnQuantities.map((e) => e.toJson()).toList())}');
+    final gNCalculator = ChemotherapyRegimenTreatmentCalculator(GNStrategy());
+    final gnQuantities = gNCalculator.calculateDrugDosage(bsa: bsa);
+    DLog.d('GN方案: \n${jsonEncode(gnQuantities.map((e) => e.toJson()).toList())}');
 
     // 计算FLOFIRINOX方案
-    var flofirinoxQuantities = FLOFIRINOXStrategy().calculateDrugQuantities(height: height, weight: weight);
-    DLog.d('FLOFIRINOX方案药品数量: ${jsonEncode(flofirinoxQuantities.map((e) => e.toJson()).toList())}');
+    final fLOFIRINOXCalculator = ChemotherapyRegimenTreatmentCalculator(FLOFIRINOXStrategy());
+    final flofirinoxQuantities = fLOFIRINOXCalculator.calculateDrugDosage(bsa: bsa);
+    DLog.d('FLOFIRINOX方案: \n${jsonEncode(flofirinoxQuantities.map((e) => e.toJson()).toList())}');
 
-    var mflofirinoxQuantities = MFLOFIRINOXStrategy().calculateDrugQuantities(height: height, weight: weight);
-    DLog.d('mflofirinox 方案药品数量: ${jsonEncode(mflofirinoxQuantities.map((e) => e.toJson()).toList())}');
+    final mFLOFIRINOXCalculator = ChemotherapyRegimenTreatmentCalculator(MFLOFIRINOXStrategy());
+    final mflofirinoxQuantities = mFLOFIRINOXCalculator.calculateDrugDosage(bsa: bsa);
+    DLog.d('mflofirinox 方案: \n${jsonEncode(mflofirinoxQuantities.map((e) => e.toJson()).toList())}');
   }
 
   /// 计算选中方案
-  void caculator({required TreatmentStrategy strategy}) {
-    // 输入患者身高和体重
-    double height = 170.0; // 身高 (cm)
-    double weight = 65.0; // 体重 (kg)
-
+  void caculatorEnum({required ChemotherapyRegimenTreatmentStrategyEnum? strategy}) {
     // 计算方案
-    var gnQuantities = strategy.calculateDrugQuantities(height: height, weight: weight);
-    DLog.d('$strategy 方案药品数量: ${jsonEncode(gnQuantities.map((e) => e.toJson()).toList())}');
+    var gnQuantities = strategy?.caculator(bsa: bsa) ?? [];
+    final jsonStr = gnQuantities.map((e) => e.toJson()).toList().formatedString();
+    DLog.d('${strategy?.runtimeType} 方案药品: \n$jsonStr');
+    dosageVN.value = jsonStr;
   }
+
+  // /// 计算选中方案
+  // void caculator({required ChemotherapyRegimenTreatmentStrategy strategy}) {
+  //   // 计算方案
+  //   var gnQuantities = strategy.calculateDrugQuantities(bsa: bsa);
+  //   DLog.d('${strategy.runtimeType} 方案药品数量: \n${jsonEncode(gnQuantities.map((e) => e.toJson()).toList())}');
+  // }
 }

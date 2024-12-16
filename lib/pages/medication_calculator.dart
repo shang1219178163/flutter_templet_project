@@ -11,6 +11,14 @@ import 'package:flutter/cupertino.dart';
 
 /// 化疗药品
 class ChemotherapyRegimenDrug {
+  ChemotherapyRegimenDrug({
+    required this.name,
+    required this.dosagePerBSA,
+    required this.specification,
+    this.recommendedDosage,
+    this.recommendedQuantity,
+  });
+
   // 药品名称
   final String name;
   // 每单位体表面积的推荐剂量
@@ -24,14 +32,6 @@ class ChemotherapyRegimenDrug {
 
   /// 推荐剂数
   final int? recommendedQuantity;
-
-  ChemotherapyRegimenDrug({
-    required this.name,
-    required this.dosagePerBSA,
-    required this.specification,
-    this.recommendedDosage,
-    this.recommendedQuantity,
-  });
 
   ChemotherapyRegimenDrug copyWith({
     String? name,
@@ -61,15 +61,14 @@ class ChemotherapyRegimenDrug {
 }
 
 // 定义方案策略接口
-abstract class TreatmentStrategy {
+abstract class ChemotherapyRegimenTreatmentStrategy {
+  /// 药品组合
   List<ChemotherapyRegimenDrug> get drugs => [];
 
-  List<ChemotherapyRegimenDrug> calculateDrugQuantities({
-    required double height,
-    required double weight,
+  /// 计算推荐剂量
+  List<ChemotherapyRegimenDrug> calculateDrugDosage({
+    required double bsa,
   }) {
-    double bsa = BSAUtils.calculateBSA(height: height, weight: weight);
-
     final result = drugs.map((drug) {
       double recommendedDosage = drug.dosagePerBSA * bsa;
       final recommendedDosageNew = double.parse(recommendedDosage.toStringAsFixed(3)); // 3位小数
@@ -84,44 +83,78 @@ abstract class TreatmentStrategy {
 }
 
 // GN方案策略
-class GNStrategy extends TreatmentStrategy {
+class GNStrategy extends ChemotherapyRegimenTreatmentStrategy {
   @override
   List<ChemotherapyRegimenDrug> get drugs => [
         ChemotherapyRegimenDrug(name: "吉西他滨", dosagePerBSA: 1000, specification: 200), // 药品规格：0.2g
+        ChemotherapyRegimenDrug(name: "吉西他滨", dosagePerBSA: 1000, specification: 1000), // 药品规格：1g
         ChemotherapyRegimenDrug(name: "紫杉醇", dosagePerBSA: 125, specification: 100), // 药品规格：100mg
       ];
 }
 
 // FLOFIRINOX方案策略
-class FLOFIRINOXStrategy extends TreatmentStrategy {
+class FLOFIRINOXStrategy extends ChemotherapyRegimenTreatmentStrategy {
   @override
   List<ChemotherapyRegimenDrug> get drugs => [
         ChemotherapyRegimenDrug(name: "奥沙利铂", dosagePerBSA: 85, specification: 50), // 药品规格：50mg
         ChemotherapyRegimenDrug(name: "伊立替康", dosagePerBSA: 180, specification: 300), // 药品规格：0.3g
-        ChemotherapyRegimenDrug(name: "亚叶酸钙", dosagePerBSA: 400, specification: 25), // 药品规格：25mg
-        ChemotherapyRegimenDrug(name: "氟尿嘧啶", dosagePerBSA: 400, specification: 10), // 药品规格：10mg，快速注射
+        ChemotherapyRegimenDrug(name: "亚叶酸钙", dosagePerBSA: 400, specification: 100), // 药品规格：25mg
+        ChemotherapyRegimenDrug(name: "氟尿嘧啶", dosagePerBSA: 400, specification: 250), // 药品规格：10mg，快速注射
       ];
 }
 
 // FLOFIRINOX方案策略
-class MFLOFIRINOXStrategy extends TreatmentStrategy {
+class MFLOFIRINOXStrategy extends ChemotherapyRegimenTreatmentStrategy {
   @override
   List<ChemotherapyRegimenDrug> get drugs => [
         ChemotherapyRegimenDrug(name: "奥沙利铂", dosagePerBSA: 85, specification: 50), // 药品规格：50mg
         ChemotherapyRegimenDrug(name: "伊立替康", dosagePerBSA: 150, specification: 300), // 药品规格：0.3g
-        ChemotherapyRegimenDrug(name: "亚叶酸钙", dosagePerBSA: 400, specification: 25), // 药品规格：25mg
-        ChemotherapyRegimenDrug(name: "氟尿嘧啶", dosagePerBSA: 2400, specification: 10), // 药品规格：10mg，快速注射
+        ChemotherapyRegimenDrug(name: "亚叶酸钙", dosagePerBSA: 400, specification: 100), // 药品规格：25mg
+        ChemotherapyRegimenDrug(name: "氟尿嘧啶", dosagePerBSA: 2400, specification: 250), // 药品规格：10mg，快速注射
       ];
 }
 
 // 计算上下文类
-class TreatmentCalculator {
-  TreatmentCalculator(this.strategy);
+class ChemotherapyRegimenTreatmentCalculator {
+  ChemotherapyRegimenTreatmentCalculator(this.strategy);
 
-  final TreatmentStrategy strategy;
+  ChemotherapyRegimenTreatmentStrategy strategy;
 
-  List<ChemotherapyRegimenDrug> calculateDrugQuantities(double height, double weight) {
-    return strategy.calculateDrugQuantities(height: height, weight: weight);
+  List<ChemotherapyRegimenDrug> calculateDrugDosage({required double bsa}) {
+    return strategy.calculateDrugDosage(bsa: bsa);
+  }
+}
+
+/// 化疗方案枚举
+enum ChemotherapyRegimenTreatmentStrategyEnum {
+  GN(name: "GN", desc: "方案GN"),
+
+  FLOFIRINOX(name: "FLOFIRINOX", desc: '方案FLOFIRINOX'),
+
+  mFLOFIRINOX(name: "mFLOFIRINOX", desc: '方案mFLOFIRINOX');
+
+  const ChemotherapyRegimenTreatmentStrategyEnum({
+    required this.name,
+    required this.desc,
+  });
+
+  /// 当前枚举值对应的 name
+  final String name;
+
+  /// 当前枚举对应的 描述文字
+  final String desc;
+
+  /// 方案集合(因为 enum 子项无法支持声明类常量)
+  static Map<ChemotherapyRegimenTreatmentStrategyEnum, ChemotherapyRegimenTreatmentStrategy> get map => {
+        GN: GNStrategy(),
+        FLOFIRINOX: FLOFIRINOXStrategy(),
+        mFLOFIRINOX: MFLOFIRINOXStrategy(),
+      };
+
+  /// 计算
+  List<ChemotherapyRegimenDrug>? caculator({required double bsa}) {
+    final strategy = ChemotherapyRegimenTreatmentStrategyEnum.map[this];
+    return strategy?.calculateDrugDosage(bsa: bsa);
   }
 }
 
@@ -141,14 +174,21 @@ class BSAUtils {
 //   double weight = 65.0; // 体重 (kg)
 //
 //   // 计算体表面积
-//   double bsa = BSAUtils.calculateBSA(height, weight);
+//   double bsa = BSAUtils.calculateBSA(height: height, weight: weight);
 //   print('体表面积: $bsa');
 //
 //   // 计算GN方案
-//   var gnQuantities = GNStrategy().calculateDrugQuantities(bsa);
+//   final gNCalculator = ChemotherapyRegimenTreatmentCalculator(GNStrategy());
+//   final gnQuantities = gNCalculator.calculateDrugQuantities(bsa: bsa);
 //   print('GN方案药品数量: $gnQuantities');
 //
 //   // 计算FLOFIRINOX方案
-//   var flofirinoxQuantities = FLOFIRINOXStrategy().calculateDrugQuantities(bsa);
+//   final flofirinoxCalculator = ChemotherapyRegimenTreatmentCalculator(FLOFIRINOXStrategy());
+//   final flofirinoxQuantities = flofirinoxCalculator.calculateDrugQuantities(bsa: bsa);
 //   print('FLOFIRINOX方案药品数量: $flofirinoxQuantities');
+//
+//   // 计算mFLOFIRINOX方案
+//   final mflofirinoxCalculator = ChemotherapyRegimenTreatmentCalculator(MFLOFIRINOXStrategy());
+//   final mflofirinoxQuantities = mflofirinoxCalculator.calculateDrugQuantities(bsa: bsa);
+//   print('mFLOFIRINOX方案药品数量: $flofirinoxQuantities');
 // }
