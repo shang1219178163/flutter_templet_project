@@ -577,6 +577,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.0.1"
+  expressions:
+    dependency: "direct main"
+    description:
+      name: expressions
+      sha256: "308a621b602923dd8a0cf3072793b24850d06453eb49c6b698cbda41a282e904"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.2.5+2"
   extended_image:
     dependency: "direct main"
     description:

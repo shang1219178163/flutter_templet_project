@@ -98,6 +98,7 @@ import 'package:flutter_templet_project/pages/demo/DropdownMenuDemo.dart';
 import 'package:flutter_templet_project/pages/demo/EmojiPage.dart';
 import 'package:flutter_templet_project/pages/demo/ExpandIconDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ExpandIconDemoNew.dart';
+import 'package:flutter_templet_project/pages/demo/ExpressionsCalulatorDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FilterDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FilterDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/FittedBoxDemo.dart';
@@ -787,6 +788,7 @@ class APPRouter {
   static const urlLauncherDemo = '/urlLauncherDemo';
   static const iteratorDemo = '/iteratorDemo';
   static const chemotherapyRegimenDrugCaculator = '/chemotherapyRegimenDrugCaculator';
+  static const expressionsCalulatorDemo = '/expressionsCalulatorDemo';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -2336,6 +2338,10 @@ class AppPage {
     GetPage(
       name: APPRouter.chemotherapyRegimenDrugCaculator,
       page: () => ChemotherapyRegimenDrugCaculator(),
+    ),
+    GetPage(
+      name: APPRouter.expressionsCalulatorDemo,
+      page: () => ExpressionsCalulatorDemo(),
     ),
   ];
 }
