@@ -197,24 +197,23 @@ class _ChemotherapyRegimenDrugCaculatorState extends State<ChemotherapyRegimenDr
 
     // 计算GN方案
     final gNCalculator = ChemotherapyRegimenTreatmentCalculator(GNStrategy());
-    final gnQuantities = gNCalculator.calculateDrugDosage(bsa: bsa);
-    DLog.d('GN方案: \n${jsonEncode(gnQuantities.map((e) => e.toJson()).toList())}');
+    final gnDrugs = gNCalculator.calculateDrugDosage(bsa: bsa);
+    DLog.d('GN方案: \n${jsonEncode(gnDrugs.map((e) => e.toJson()).toList())}');
 
     // 计算FLOFIRINOX方案
     final fLOFIRINOXCalculator = ChemotherapyRegimenTreatmentCalculator(FLOFIRINOXStrategy());
-    final flofirinoxQuantities = fLOFIRINOXCalculator.calculateDrugDosage(bsa: bsa);
-    DLog.d('FLOFIRINOX方案: \n${jsonEncode(flofirinoxQuantities.map((e) => e.toJson()).toList())}');
+    final flofirinoxDrugs = fLOFIRINOXCalculator.calculateDrugDosage(bsa: bsa);
+    DLog.d('FLOFIRINOX方案: \n${jsonEncode(flofirinoxDrugs.map((e) => e.toJson()).toList())}');
 
     final mFLOFIRINOXCalculator = ChemotherapyRegimenTreatmentCalculator(MFLOFIRINOXStrategy());
-    final mflofirinoxQuantities = mFLOFIRINOXCalculator.calculateDrugDosage(bsa: bsa);
-    DLog.d('mflofirinox 方案: \n${jsonEncode(mflofirinoxQuantities.map((e) => e.toJson()).toList())}');
+    final mflofirinoxDrugs = mFLOFIRINOXCalculator.calculateDrugDosage(bsa: bsa);
+    DLog.d('mflofirinox 方案: \n${jsonEncode(mflofirinoxDrugs.map((e) => e.toJson()).toList())}');
   }
 
   /// 计算选中方案
   void caculatorEnum({required ChemotherapyRegimenTreatmentStrategyEnum? strategy}) {
-    // 计算方案
-    var gnQuantities = strategy?.caculator(bsa: bsa) ?? [];
-    final jsonStr = gnQuantities.map((e) => e.toJson()).toList().formatedString();
+    final drugs = strategy?.caculator(bsa: bsa) ?? [];
+    final jsonStr = drugs.map((e) => e.toJson()).toList().formatedString();
     DLog.d('${strategy?.runtimeType} 方案药品: \n$jsonStr');
     dosageVN.value = jsonStr;
   }
