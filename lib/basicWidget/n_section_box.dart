@@ -14,12 +14,12 @@ class NSectionBox extends StatelessWidget {
     this.title = '',
     this.text,
     this.style = const TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
-    this.padding = const EdgeInsets.all(16),
+    this.padding = const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
     this.alignment = Alignment.centerLeft,
     this.divider,
     this.mainAxisAlignment = MainAxisAlignment.start,
     this.mainAxisSize = MainAxisSize.max,
-    this.crossAxisAlignment = CrossAxisAlignment.center,
+    this.crossAxisAlignment = CrossAxisAlignment.start,
     this.addSliverToBoxAdapter = false,
     required this.child,
   }) : super(key: key);
@@ -62,7 +62,7 @@ class NSectionBox extends StatelessWidget {
           padding: padding,
           child: child,
         ),
-        divider ?? Divider(),
+        divider ?? Divider(height: 0.5),
       ],
     );
     if (addSliverToBoxAdapter) {
