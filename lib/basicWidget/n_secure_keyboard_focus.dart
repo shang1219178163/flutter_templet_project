@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 /// 安全键盘聚焦组件
@@ -32,6 +33,7 @@ class NSecureKeyboardFocus extends StatelessWidget {
         // 确保再次获取焦点前先失去焦点, 并记录本次弹出的键盘类型
         await Future.delayed(const Duration(milliseconds: 350));
         focusNode.requestFocus();
+        SystemChannels.textInput.invokeMethod('TextInput.show');
 
         _prevIsObscure = isObscure;
       },
