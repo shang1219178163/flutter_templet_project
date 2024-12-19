@@ -11,14 +11,6 @@ import 'dart:typed_data';
 import 'package:flutter/cupertino.dart';
 
 extension StringExt on String {
-  static bool isEmpty(String? val) {
-    return val == null || val.isEmpty;
-  }
-
-  static bool isNotEmpty(String? val) {
-    return val != null && val.isNotEmpty;
-  }
-
   ///运算符重载
   bool operator >(String val) {
     return compareTo(val) == 1;
@@ -226,7 +218,7 @@ extension StringExt on String {
   }
 
   /// 处理字符串中包含数字排序异常的问题
-  int compareCustom(String b) {
+  int compareContainInt(String b) {
     var a = this;
 
     // var regInt = RegExp(r"[0-9]");
@@ -274,10 +266,21 @@ extension StringExt on String {
 }
 
 extension StringNullableExt on String? {
-  /// 赋予默认值
-  String get orEmpty {
-    return this ?? "";
+  /// 字符串为空
+  bool get isEmpty => (this ?? "").isEmpty;
+
+  /// 字符串不为空
+  bool get isNotEmpty => (this ?? "").isNotEmpty;
+
+  /// 转 double
+  double? toDouble() {
+    final result = double.tryParse(this ?? "");
+    return result;
   }
 
-  bool get isNotEmptyNew => (this ?? "").isNotEmpty;
+  /// 转 int
+  int? toInt() {
+    final result = int.tryParse(this ?? "");
+    return result;
+  }
 }

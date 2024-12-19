@@ -299,10 +299,12 @@ class _DataTypeDemoState extends State<DataTypeDemo> with WidgetsBindingObserver
     String? a3;
     String? a4 = "a4";
     final resultA = a1.or("") + a2.or("") + a3.or("") + a4.or("");
-    final resultB = a1.orEmpty + a2.orEmpty + a3.orEmpty + a4.orEmpty;
+    final resultB = [a1, a2, a3, a4].map((e) => e ?? "").toList();
     final resultC = [a1, a2, a3, a4].removeNull();
 
-    ddlog("a1.isNotEmptyNew: ${a1.isNotEmptyNew}");
+    a1.isNotEmpty;
+
+    ddlog("a1.isNotEmptyNew: ${a1.isNotEmpty}");
     return;
 
     // String a5 = a4.or(Text(e));

@@ -182,20 +182,4 @@ extension ListExt<T, E> on List<E> {
     sort(compare);
     return this;
   }
-
-  /// 根据值排序
-  List<E> sortedByValue({
-    bool ascending = true,
-    required num Function(E e) cb,
-  }) {
-    sort((a, b) {
-      final aValue = cb(a);
-      final bValue = cb(b);
-      if (ascending) {
-        return aValue.compareTo(bValue);
-      }
-      return bValue.compareTo(aValue);
-    });
-    return this;
-  }
 }
