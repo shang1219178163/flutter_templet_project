@@ -17,6 +17,7 @@ class ChemotherapyRegimenDrug {
     required this.specification,
     this.recommendedDosage,
     this.recommendedQuantity,
+    this.remark,
   });
 
   // 药品名称
@@ -33,12 +34,16 @@ class ChemotherapyRegimenDrug {
   /// 推荐剂数
   final int? recommendedQuantity;
 
+  /// 备注
+  final String? remark;
+
   ChemotherapyRegimenDrug copyWith({
     String? name,
     double? dosagePerBSA,
     double? specification,
     double? recommendedDosage,
     int? recommendedQuantity,
+    String? remark,
   }) {
     return ChemotherapyRegimenDrug(
       name: name ?? this.name,
@@ -46,6 +51,7 @@ class ChemotherapyRegimenDrug {
       specification: specification ?? this.specification,
       recommendedDosage: recommendedDosage ?? this.recommendedDosage,
       recommendedQuantity: recommendedQuantity ?? this.recommendedQuantity,
+      remark: remark ?? this.remark,
     );
   }
 
@@ -56,6 +62,7 @@ class ChemotherapyRegimenDrug {
     data['specification'] = specification;
     data['recommendedDosage'] = recommendedDosage;
     data['recommendedQuantity'] = recommendedQuantity;
+    data['remark'] = remark;
     return data;
   }
 }
@@ -76,6 +83,7 @@ abstract class ChemotherapyRegimenTreatmentStrategy {
       return drug.copyWith(
         recommendedDosage: recommendedDosageNew,
         recommendedQuantity: quantity,
+        remark: "默认计算公式",
       );
     }).toList();
     return result;
@@ -101,6 +109,24 @@ class FLOFIRINOXStrategy extends ChemotherapyRegimenTreatmentStrategy {
         ChemotherapyRegimenDrug(name: "亚叶酸钙", dosagePerBSA: 400, specification: 100), // 药品规格：25mg
         ChemotherapyRegimenDrug(name: "氟尿嘧啶", dosagePerBSA: 400, specification: 250), // 药品规格：10mg，快速注射
       ];
+
+  /// 计算推荐剂量
+  @override
+  List<ChemotherapyRegimenDrug> calculateDrugDosage({
+    required double bsa,
+  }) {
+    final result = drugs.map((drug) {
+      double recommendedDosage = drug.dosagePerBSA * bsa;
+      final recommendedDosageNew = double.parse(recommendedDosage.toStringAsFixed(3)); // 3位小数
+      int quantity = (recommendedDosageNew / drug.specification).ceil();
+      return drug.copyWith(
+        recommendedDosage: recommendedDosageNew,
+        recommendedQuantity: quantity,
+        remark: "FLOFIRINOX 计算公式",
+      );
+    }).toList();
+    return result;
+  }
 }
 
 // FLOFIRINOX方案策略
@@ -112,6 +138,24 @@ class MFLOFIRINOXStrategy extends ChemotherapyRegimenTreatmentStrategy {
         ChemotherapyRegimenDrug(name: "亚叶酸钙", dosagePerBSA: 400, specification: 100), // 药品规格：25mg
         ChemotherapyRegimenDrug(name: "氟尿嘧啶", dosagePerBSA: 2400, specification: 250), // 药品规格：10mg，快速注射
       ];
+
+  /// 计算推荐剂量
+  @override
+  List<ChemotherapyRegimenDrug> calculateDrugDosage({
+    required double bsa,
+  }) {
+    final result = drugs.map((drug) {
+      double recommendedDosage = drug.dosagePerBSA * bsa;
+      final recommendedDosageNew = double.parse(recommendedDosage.toStringAsFixed(3)); // 3位小数
+      int quantity = (recommendedDosageNew / drug.specification).ceil();
+      return drug.copyWith(
+        recommendedDosage: recommendedDosageNew,
+        recommendedQuantity: quantity,
+        remark: "mFLOFIRINOX 计算公式",
+      );
+    }).toList();
+    return result;
+  }
 }
 
 // 计算上下文类
@@ -124,6 +168,27 @@ class ChemotherapyRegimenTreatmentCalculator {
     return strategy.calculateDrugDosage(bsa: bsa);
   }
 }
+
+// enum ChemotherapyRegimenTreatmentStrategyEnum1 {
+//   GN(name: "GN", desc: "方案GN", strategy: GNStrategy()),
+//
+//   FLOFIRINOX(name: "FLOFIRINOX", desc: '方案FLOFIRINOX'),
+//
+//   mFLOFIRINOX(name: "mFLOFIRINOX", desc: '方案mFLOFIRINOX');
+//
+//   const ChemotherapyRegimenTreatmentStrategyEnum1({
+//     required this.name,
+//     required this.desc,
+//     required this.strategy,
+//   });
+//
+//   /// 当前枚举值对应的 name
+//   final String name;
+//
+//   /// 当前枚举对应的 描述文字
+//   final String desc;
+//   final ChemotherapyRegimenTreatmentStrategy strategy;
+// }
 
 /// 化疗方案枚举
 enum ChemotherapyRegimenTreatmentStrategyEnum {
@@ -152,7 +217,7 @@ enum ChemotherapyRegimenTreatmentStrategyEnum {
       };
 
   /// 计算
-  List<ChemotherapyRegimenDrug>? caculator({required double bsa}) {
+  List<ChemotherapyRegimenDrug>? calculateDrugDosage({required double bsa}) {
     final strategy = ChemotherapyRegimenTreatmentStrategyEnum.map[this];
     return strategy?.calculateDrugDosage(bsa: bsa);
   }

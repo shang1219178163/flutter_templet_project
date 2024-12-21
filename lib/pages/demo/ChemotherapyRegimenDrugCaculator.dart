@@ -212,7 +212,7 @@ class _ChemotherapyRegimenDrugCaculatorState extends State<ChemotherapyRegimenDr
 
   /// 计算选中方案
   void caculatorEnum({required ChemotherapyRegimenTreatmentStrategyEnum? strategy}) {
-    final drugs = strategy?.caculator(bsa: bsa) ?? [];
+    final drugs = strategy?.calculateDrugDosage(bsa: bsa) ?? [];
     final jsonStr = drugs.map((e) => e.toJson()).toList().formatedString();
     DLog.d('${strategy?.runtimeType} 方案药品: \n$jsonStr');
     dosageVN.value = jsonStr;
