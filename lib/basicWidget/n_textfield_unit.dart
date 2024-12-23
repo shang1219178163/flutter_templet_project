@@ -30,6 +30,8 @@ class NTextfieldUnit extends StatelessWidget {
     this.suffixHeight = 36,
     this.suffix,
     this.hitText = "请输入",
+    this.textColor,
+    this.hintTextColor,
     this.debounceMilliseconds = 300,
     required this.onChanged,
     this.onTap,
@@ -78,6 +80,10 @@ class NTextfieldUnit extends StatelessWidget {
 
   /// 提示语
   final String hitText;
+
+  final Color? textColor;
+
+  final Color? hintTextColor;
 
   /// 防抖间距
   final int debounceMilliseconds;
@@ -144,16 +150,16 @@ class NTextfieldUnit extends StatelessWidget {
         top: 7,
         bottom: 7,
       ),
-      style: const TextStyle(
+      style: TextStyle(
         fontSize: 14,
         fontWeight: FontWeight.w400,
-        color: fontColor,
+        color: textColor ?? fontColor,
       ),
       hintText: hitText,
       hintStyle: TextStyle(
         fontSize: 14,
         fontWeight: FontWeight.w400,
-        color: readOnly ? fontColor737373 : fontColorB3B3B3,
+        color: hintTextColor ?? fontColorB3B3B3,
       ),
       suffixIconBuilder: (isFocus) {
         if (hideSuffix) {
