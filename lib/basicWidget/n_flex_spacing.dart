@@ -26,17 +26,16 @@ class NFlexSeparated extends Flex {
           children: [
             ...children.map((e) {
               final i = children.indexOf(e);
-              final hide = e == children.last;
-              final separatedNew = hide ? SizedBox() : separatedBuilder(i);
-              return IntrinsicHeight(
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    e,
-                    separatedNew,
-                  ],
-                ),
+              final hasSeparated = e != children.last;
+
+              return Flex(
+                direction: direction,
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  e,
+                  if (hasSeparated) separatedBuilder(i),
+                ],
               );
             }),
           ],
