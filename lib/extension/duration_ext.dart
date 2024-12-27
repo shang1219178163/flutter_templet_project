@@ -52,9 +52,11 @@ extension DurationExt on Duration {
     final prefix = duration.isNegative ? "-" : "";
     final durationNew = duration.abs();
 
-    String line = "";
+    String line = prefix;
+    if (duration.inDays != 0) {
+      line += "${durationNew.inDays}天";
+    }
     if (duration.inHours != 0) {
-      line = "$prefix${durationNew.inHours}天";
       line += "${_twoDigits(durationNew.inHours.remainder(24))}:";
     }
     line += "${_twoDigits(durationNew.inMinutes.remainder(60))}:";

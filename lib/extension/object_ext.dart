@@ -51,16 +51,14 @@ abstract class ObjectEnhanceMixin {
 extension ObjectExt on Object {
   ///运算符重载
   List operator *(int value) {
-    var result = [];
-    for (var i = 0; i < value; i++) {
-      result.add(this);
-    }
+    var result = List.generate(value, (index) => this);
     return result;
   }
 
   /// 转字符串
-  String? tryJsonEncode<T>(
-      {Object? Function(Object? nonEncodable)? toEncodable}) {
+  String? tryJsonEncode<T>({
+    Object? Function(Object? nonEncodable)? toEncodable,
+  }) {
     try {
       final result = jsonEncode(this, toEncodable: toEncodable);
       return result;
@@ -68,6 +66,13 @@ extension ObjectExt on Object {
       debugPrint("❌tryJsonEncode: $e");
       return null;
     }
+  }
+
+  /// 格式化字符串
+  String formatedString() {
+    const encoder = JsonEncoder.withIndent('  ');
+    final result = encoder.convert(this);
+    return result;
   }
 }
 

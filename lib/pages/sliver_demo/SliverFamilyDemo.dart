@@ -7,23 +7,27 @@
 //
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/pages/demo/NestedScrollViewDemoHome.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/NPinnedTabBarPageDemo.dart';
+import 'package:flutter_templet_project/pages/sliver_demo/PinnedHeaderSliverDemo.dart';
+import 'package:flutter_templet_project/pages/sliver_demo/SliverAnimatedListDemo.dart';
+import 'package:flutter_templet_project/pages/sliver_demo/SliverAppBarDemo.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/SliverAppBarDemoOne.dart';
+import 'package:flutter_templet_project/pages/sliver_demo/SliverBaseDemo.dart';
+import 'package:flutter_templet_project/pages/sliver_demo/SliverFillRemainingDemo.dart';
+import 'package:flutter_templet_project/pages/sliver_demo/SliverFillViewportDemo.dart';
+import 'package:flutter_templet_project/pages/sliver_demo/SliverFloatingHeaderDemo.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/SliverGridDemo.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/SliverListDemo.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/SliverListPopverDemo.dart';
+import 'package:flutter_templet_project/pages/sliver_demo/SliverPersistentHeaderDemo.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/SliverPersistentHeaderDemoOne.dart';
+import 'package:flutter_templet_project/pages/sliver_demo/SliverPersistentHeaderDemoTwo.dart';
+import 'package:flutter_templet_project/pages/sliver_demo/SliverResizingHeaderDemo.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/SliverTabBarDemo.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/SliverTabbarDemoOne.dart';
 import 'package:flutter_templet_project/pages/sliver_demo/StaggeredGridViewDemo.dart';
 import 'package:tuple/tuple.dart';
-
-import 'package:flutter_templet_project/pages/sliver_demo/SliverPersistentHeaderDemo.dart';
-import 'package:flutter_templet_project/pages/sliver_demo/SliverAnimatedListDemo.dart';
-import 'package:flutter_templet_project/pages/sliver_demo/SliverAppBarDemo.dart';
-import 'package:flutter_templet_project/pages/sliver_demo/SliverFillRemainingDemo.dart';
-import 'package:flutter_templet_project/pages/sliver_demo/SliverFillViewportDemo.dart';
-import 'package:flutter_templet_project/pages/sliver_demo/SliverBaseDemo.dart';
 
 class SliverFamilyDemo extends StatefulWidget {
   final String? title;
@@ -151,6 +155,11 @@ List<Tuple3<String, String, Widget>> _list = [
     SliverPersistentHeaderDemoOne(),
   ),
   Tuple3(
+    'SliverPersistentHeaderDemoTwo',
+    '吸顶效果测试',
+    SliverPersistentHeaderDemoTwo(),
+  ),
+  Tuple3(
     'SliverAnimatedList',
     '带动画的SliverList组件',
     SliverAnimatedListDemo(),
@@ -189,5 +198,25 @@ List<Tuple3<String, String, Widget>> _list = [
     'NPinnedTabBarPageDemo',
     '测试1',
     NPinnedTabBarPageDemo(),
+  ),
+  Tuple3(
+    "pinnedHeaderSliverDemo",
+    'pinned: true',
+    PinnedHeaderSliverDemo(),
+  ),
+  Tuple3(
+    "sliverFloatingHeaderDemo",
+    'pinned: true,floating: true,',
+    SliverFloatingHeaderDemo(),
+  ),
+  Tuple3(
+    "sliverResizingHeaderDemo",
+    'pinned: true,',
+    SliverResizingHeaderDemo(),
+  ),
+  Tuple3(
+    'NestedScrollViewDemoHome',
+    '嵌套滚动',
+    NestedScrollViewDemoHome(),
   ),
 ];

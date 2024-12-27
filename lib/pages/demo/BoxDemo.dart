@@ -15,7 +15,9 @@
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_avatar_badge.dart';
+import 'package:flutter_templet_project/basicWidget/n_menu_anchor.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
+import 'package:flutter_templet_project/extension/alignment_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
@@ -32,10 +34,11 @@ class BoxDemo extends StatefulWidget {
 }
 
 class _BoxDemoState extends State<BoxDemo> {
+  final values = AlignmentExt.allCases;
+  late final selectedItemVN = ValueNotifier<Alignment>(Alignment.topRight);
+
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
@@ -49,9 +52,27 @@ class _BoxDemoState extends State<BoxDemo> {
       child: SingleChildScrollView(
         child: Column(
           children: [
+            NMenuAnchor<Alignment>(
+              values: values,
+              initialItem: values.first,
+              cbName: (e) => e.toString() ?? "请选择",
+              equal: (a, b) => a == b,
+              onChanged: (e) {
+                selectedItemVN.value = e;
+              },
+            ),
             NSectionBox(
               title: "UnconstrainedBox",
               child: buildSizedBox(),
+            ),
+            ValueListenableBuilder(
+              valueListenable: selectedItemVN,
+              builder: (context, value, child) {
+                return NSectionBox(
+                  title: "SizedOverflowBox",
+                  child: buildSizedOverflowBox(),
+                );
+              },
             ),
             NSectionBox(
               title: "UnconstrainedBox",
@@ -116,6 +137,60 @@ class _BoxDemoState extends State<BoxDemo> {
     );
   }
 
+  /// SizedOverflowBox
+  Widget buildSizedOverflowBox() {
+    Alignment alignment = Alignment.topRight;
+    alignment = selectedItemVN.value;
+
+    final size = Size(100, 100);
+    final childSize = Size(50, 50);
+    final radius = 8.0;
+    final childSizeRadius = 25.0;
+    return Container(
+      padding: EdgeInsets.only(
+        left: alignment.x == -1 ? childSize.width * 0.5 : 0,
+        right: alignment.x == 1 ? childSize.width * 0.5 : 0,
+        top: alignment.y == -1 ? childSize.height * 0.5 : 0,
+        bottom: alignment.y == 1 ? childSize.height * 0.5 : 0,
+      ),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.red),
+      ),
+      child: Container(
+        width: size.width,
+        height: size.height,
+        alignment: alignment,
+        decoration: BoxDecoration(
+          color: Colors.green[400],
+          borderRadius: BorderRadius.circular(radius),
+        ),
+        child: SizedOverflowBox(
+          size: Size.zero,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(childSizeRadius),
+            child: Container(
+              width: childSize.width,
+              height: childSize.height,
+              child: GridView.count(
+                crossAxisCount: 2,
+                mainAxisSpacing: 0,
+                crossAxisSpacing: 0,
+                childAspectRatio: 1,
+                children: [
+                  ...Colors.primaries.sublist(0, 4).map(
+                    (e) {
+                      return Container(color: e);
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   /// ConstrainedBox用于对子组件添加额外的约束。
   Widget buildConstrainedBox() {
     return ConstrainedBox(
@@ -158,8 +233,7 @@ class _BoxDemoState extends State<BoxDemo> {
             child: UnconstrainedBox(
               //“去除”父级限制
               child: ConstrainedBox(
-                constraints:
-                    BoxConstraints(minWidth: 90.0, minHeight: 30.0), //子
+                constraints: BoxConstraints(minWidth: 90.0, minHeight: 30.0), //子
                 child: DecoratedBox(
                   decoration: BoxDecoration(color: Colors.red),
                 ),

@@ -204,9 +204,9 @@ class FluwxUtil {
       image = WeChatImage.file(File(thumbFile));
     } else if (thumbBytes != null) {
       image = WeChatImage.binary(thumbBytes);
-    } else if (StringExt.isNotEmpty(networkThumb)) {
+    } else if (networkThumb.isNotEmpty) {
       image = WeChatImage.network(Uri.encodeFull(networkThumb!));
-    } else if (StringExt.isNotEmpty(assetThumb)) {
+    } else if (assetThumb.isNotEmpty) {
       image = WeChatImage.asset(assetThumb!, suffix: ".png");
     }
     var model = WeChatShareWebPageModel(

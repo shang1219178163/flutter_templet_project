@@ -33,16 +33,24 @@ class ImageService {
       // debugPrint('fileName_${fileName}');
       // debugPrint('assetDir_${assetDir}');
       // debugPrint('targetPath_${targetPath}');
-
       final filePath = file.absolute.path;
+      if (filePath == targetPath) {
+        final fileNameItems = fileName.split(".");
+        final fileNameNew = "${fileNameItems.first}_1.${fileNameItems.last}";
+        targetPath = '${assetDir.path}/$fileNameNew';
+      }
 
       var format = CompressFormat.jpeg;
-      if (filePath.toLowerCase().endsWith(".png")) {
+      if (filePath.toLowerCase().endsWith(".jpeg")) {
+        format = CompressFormat.jpeg;
+      } else if (filePath.toLowerCase().endsWith(".png")) {
         format = CompressFormat.png;
-      } else if (filePath.toLowerCase().endsWith(".webp")) {
-        format = CompressFormat.webp;
       } else if (filePath.toLowerCase().endsWith(".heic")) {
         format = CompressFormat.heic;
+      } else if (filePath.toLowerCase().endsWith(".webp")) {
+        format = CompressFormat.webp;
+      } else {
+        return file;
       }
 
       final compressQuality = file.lengthSync().compressQuality;
@@ -58,8 +66,8 @@ class ImageService {
         return file;
       }
 
+      final length = await result.length();
       if (needLogInfo) {
-        final length = await result.length();
         final infos = [
           "图片名称: $fileName",
           "压缩前: ${file.lengthSync().fileSizeDesc}",
@@ -71,6 +79,9 @@ class ImageService {
         debugPrint("图片压缩: ${infos.join("\n")}");
       }
 
+      if (length == 0) {
+        return file;
+      }
       return File(path);
     } catch (e) {
       debugPrint("compressAndGetFile:${e.toString()}");

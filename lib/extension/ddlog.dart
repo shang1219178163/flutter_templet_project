@@ -7,8 +7,7 @@
 //
 
 import 'dart:developer' as developer;
-import 'package:flutter/foundation.dart'
-    show TargetPlatform, defaultTargetPlatform, kReleaseMode;
+import 'package:flutter/foundation.dart' show TargetPlatform, defaultTargetPlatform, kReleaseMode;
 import 'package:flutter/material.dart';
 
 // ignore: non_constant_identifier_names, unnecessary_question_mark
@@ -34,7 +33,7 @@ void ddlog(dynamic obj, {bool hasTime = true, String prefix = "ddlog"}) {
 class DLog {
   /// 防止日志被截断
   static void d(
-    dynamic obj, {
+    Object? obj, {
     String prefix = "DLog",
     bool hasTime = true,
   }) {
@@ -93,12 +92,8 @@ class DDTraceModel {
           var traceString2 = _trace.toString().split("\n")[2];
           // print(traceString2);
 
-          var list = traceString2
-              .split(" ")
-              .where((element) => element != "")
-              .toList();
-          selectorName =
-              list.last.replaceAll("[", "").replaceAll("]", "()").trim();
+          var list = traceString2.split(" ").where((element) => element != "").toList();
+          selectorName = list.last.replaceAll("[", "").replaceAll("]", "()").trim();
 
           _parseClassName(path: list.first);
           _parseLineAndcolumn(location: list[1]);
@@ -137,12 +132,7 @@ class DDTraceModel {
       return;
     }
     assert(path.contains("/"));
-    var list = path
-        .split("/")
-        .last
-        .split(" ")
-        .where((element) => element != "")
-        .toList();
+    var list = path.split("/").last.split(" ").where((element) => element != "").toList();
     fileName = list.first.trim();
   }
 

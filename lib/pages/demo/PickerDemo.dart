@@ -1,20 +1,37 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/PickerUtil.dart';
+import 'package:flutter_templet_project/basicWidget/n_pick_users_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_picker_list_view.dart';
 import 'package:flutter_templet_project/basicWidget/n_picker_tool_bar.dart';
-import 'package:flutter_templet_project/basicWidget/chioce_wrap.dart';
-import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/date_time_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/basicWidget/chioce_list.dart';
 import 'package:flutter_templet_project/extension/list_ext.dart';
+import 'package:flutter_templet_project/extension/map_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/mixin/bottom_sheet_mixin.dart';
+import 'package:flutter_templet_project/model/user_model.dart';
 import 'package:flutter_templet_project/pages/demo/AlertSheetDemo.dart';
 
 import 'package:flutter_templet_project/pages/demo/ListTileDemo.dart';
-import 'package:get_storage/get_storage.dart';
+import 'package:flutter_templet_project/util/get_util.dart';
+
+// CupertinoPicker({
+// super.key,
+// this.diameterRatio = _kDefaultDiameterRatio,//数值越小，滚轮弧度越明显；数值越大，滚轮更趋于平面显示。
+// this.backgroundColor,
+// this.offAxisFraction = 0.0,//用于让滚轮从中心偏移显示。
+// this.useMagnifier = false,//是否启用选中项的放大效果。
+// this.magnification = 1.0,//放大选中项以突出显示。
+// this.scrollController,
+// this.squeeze = _kSqueeze,//值越小，间距越紧密；值越大，间距越宽松。
+// required this.itemExtent,//设置每个子项的高度。
+// required this.onSelectedItemChanged,
+// required List<Widget> children,
+// this.selectionOverlay = const CupertinoPickerDefaultSelectionOverlay(),
+// bool looping = false,
+// })
 
 class PickerDemo extends StatefulWidget {
   const PickerDemo({Key? key}) : super(key: key);
@@ -39,6 +56,7 @@ class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
     (name: "日期时段选择", action: onRangeDate),
     (name: "单项选择", action: onSingleOne),
     (name: "多项选择", action: onWeight),
+    (name: "网络人员选择", action: onPickUser),
   ];
 
   /// 体重
@@ -138,8 +156,7 @@ class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
       child: CupertinoPicker(
         backgroundColor: Colors.white,
         itemExtent: 30,
-        scrollController:
-            FixedExtentScrollController(initialItem: _selectedValue),
+        scrollController: FixedExtentScrollController(initialItem: _selectedValue),
         onSelectedItemChanged: (val) {
           _selectedValue = val;
           // setState(() {});
@@ -361,6 +378,26 @@ class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
         });
   }
 
+  Future onPickUser() {
+    final items = <UserModel>[];
+    FocusManager.instance.primaryFocus?.unfocus();
+    return GetBottomSheet.showCustom(
+      addUnconstrainedBox: false,
+      hideDragIndicator: false,
+      enableDrag: true,
+      child: Container(
+        height: 475,
+        child: NPickUsersBox(
+          title: "人员选择",
+          items: items ?? [],
+          onChanged: (list) {
+            DLog.d("list: ${list.map((e) => e.toJson().filter((k, v) => v != null))}");
+          },
+        ),
+      ),
+    );
+  }
+
   void _showDatePicker({
     required BuildContext context,
     DateTime? initialDateTime,
@@ -372,36 +409,38 @@ class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
     var dateTime = initialDateTime ?? DateTime.now();
 
     showCupertinoModalPopup(
-        context: context,
-        builder: (_) {
-          return Container(
-            height: 300,
-            // color: Color.fromARGB(255, 255, 255, 255),
-            color: Colors.white,
-            child: Column(
-              children: [
-                NPickerToolBar(
-                  onCancel: onCancel,
-                  onConfirm: onConfirm,
+      context: context,
+      builder: (_) {
+        return Container(
+          height: 300,
+          // color: Color.fromARGB(255, 255, 255, 255),
+          color: Colors.white,
+          child: Column(
+            children: [
+              NPickerToolBar(
+                onCancel: onCancel,
+                onConfirm: onConfirm,
+              ),
+              Divider(height: 1.0),
+              Container(
+                height: 216,
+                color: Colors.white,
+                child: CupertinoDatePicker(
+                  mode: mode,
+                  initialDateTime: dateTime,
+                  dateOrder: DatePickerDateOrder.ymd,
+                  onDateTimeChanged: (val) {
+                    dateTime = val;
+                    onDateTimeChanged(val);
+                    setState(() {});
+                  },
                 ),
-                Divider(height: 1.0),
-                Container(
-                  height: 216,
-                  color: Colors.white,
-                  child: CupertinoDatePicker(
-                      mode: mode,
-                      initialDateTime: dateTime,
-                      dateOrder: DatePickerDateOrder.ymd,
-                      onDateTimeChanged: (val) {
-                        dateTime = val;
-                        onDateTimeChanged(val);
-                        setState(() {});
-                      }),
-                ),
-              ],
-            ),
-          );
-        });
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 }
 
@@ -423,9 +462,7 @@ class DatePickerDemo extends StatefulWidget {
 class _DatePickerDemoState extends State<DatePickerDemo> {
   @override
   Widget build(BuildContext context) {
-    final time = widget.dateTime != null
-        ? widget.dateTime!.toString19()
-        : 'datetime picked';
+    final time = widget.dateTime != null ? widget.dateTime!.toString19() : 'datetime picked';
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
         middle: Text('$widget.dateTime'),

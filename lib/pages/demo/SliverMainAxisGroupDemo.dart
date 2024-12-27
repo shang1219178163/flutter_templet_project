@@ -88,7 +88,7 @@ class _SliverMainAxisGroupDemoState extends State<SliverMainAxisGroupDemo> {
   }
 
   Widget buildSliverHeader({required Text child, double height = 30}) {
-    return NSliverPersistentHeader(
+    return NSliverPersistentHeaderBuilder(
       pinned: true,
       max: height,
       min: height,

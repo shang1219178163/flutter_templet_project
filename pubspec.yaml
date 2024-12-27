@@ -202,6 +202,12 @@ dependencies:
   # 含 LruMap
   quiver: ^3.2.1
 
+  google_mlkit_text_recognition: ^0.14.0
+  google_mlkit_translation: ^0.12.0
+  google_mlkit_language_id: ^0.12.0
+
+  expressions: ^0.2.5+2
+
 #  User:
 #    hosted:
 #      name: syn_mine_pages

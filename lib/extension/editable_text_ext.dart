@@ -12,8 +12,7 @@ import 'package:flutter/material.dart';
 extension TextEditingControllerExt on TextEditingController {
   /// 删除单个字符
   deleteChar() {
-    final textBeforeCursor =
-        selection.textBefore(text).characters.skipLast(1).toString();
+    final textBeforeCursor = selection.textBefore(text).characters.skipLast(1).toString();
     final textAfterCursor = selection.textAfter(text);
     text = textBeforeCursor + textAfterCursor;
 
@@ -32,6 +31,8 @@ extension TextEditingControllerExt on TextEditingController {
       affinity: TextAffinity.downstream,
       offset: text.length,
     ));
+
+    // selection = TextSelection.collapsed(offset: text.length);
   }
 
   /// 创建 InputDecoration 的 Counter 组件

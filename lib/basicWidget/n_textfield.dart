@@ -34,6 +34,9 @@ class NTextField extends StatefulWidget {
     super.key,
     this.value = "",
     this.controller,
+    this.contextMenuBuilder,
+    this.onTap,
+    this.onTapOutside,
     required this.onChanged,
     this.onSubmitted,
     this.style = const TextStyle(fontSize: 16),
@@ -52,6 +55,7 @@ class NTextField extends StatefulWidget {
     this.fillColor = bgColor,
     this.focusColor = Colors.white,
     this.radius = 4,
+    this.borderWidth = 1,
     this.border,
     this.enabledBorder,
     this.focusedBorder,
@@ -62,6 +66,7 @@ class NTextField extends StatefulWidget {
     this.suffix,
     this.suffixIconConstraints,
     this.focusNode,
+    this.hasFocusVN,
     this.isCollapsed,
     this.inputFormatters,
     this.scrollPhysics,
@@ -77,6 +82,10 @@ class NTextField extends StatefulWidget {
 
   /// 控制器
   final TextEditingController? controller;
+  final EditableTextContextMenuBuilder? contextMenuBuilder;
+
+  final VoidCallback? onTap;
+  final TapRegionCallback? onTapOutside;
 
   /// 改变回调
   final ValueChanged<String> onChanged;
@@ -126,8 +135,13 @@ class NTextField extends StatefulWidget {
   /// 圆角
   final double radius;
 
+  /// 边框线
+  final double borderWidth;
+
   /// 输入框焦点
   final FocusNode? focusNode;
+
+  final ValueNotifier<bool>? hasFocusVN;
 
   final InputBorder? border;
 
@@ -138,7 +152,7 @@ class NTextField extends StatefulWidget {
   final Widget Function(bool isFocus)? prefixIconBuilder;
 
   /// 右边组件构造器
-  final Widget Function(bool isFocus)? suffixIconBuilder;
+  final Widget? Function(bool isFocus)? suffixIconBuilder;
 
   final BoxConstraints? prefixIconConstraints;
 
@@ -170,14 +184,13 @@ class NTextField extends StatefulWidget {
 }
 
 class _NTextFieldState extends State<NTextField> {
-  late final textEditingController =
-      widget.controller ?? TextEditingController(text: widget.value);
+  late final textEditingController = widget.controller ?? TextEditingController(text: widget.value);
 
   final current = ValueNotifier("");
 
-  late final _focusNode = widget.focusNode ?? FocusNode();
+  late var _focusNode = widget.focusNode ?? FocusNode();
 
-  final hasFocusVN = ValueNotifier<bool>(false);
+  late var hasFocusVN = widget.hasFocusVN ?? ValueNotifier<bool>(false);
 
   bool isCloseEye = true;
 
@@ -204,14 +217,25 @@ class _NTextFieldState extends State<NTextField> {
   void didUpdateWidget(covariant NTextField oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    if (widget.readOnly != oldWidget.readOnly ||
+    if (widget.value != oldWidget.value ||
+        widget.controller != oldWidget.controller ||
+        widget.readOnly != oldWidget.readOnly ||
         widget.minLines != oldWidget.minLines ||
         widget.maxLines != oldWidget.maxLines ||
         widget.fillColor != oldWidget.fillColor ||
         widget.focusColor != oldWidget.focusColor ||
         widget.contentPadding != oldWidget.contentPadding ||
         widget.isCollapsed != oldWidget.isCollapsed ||
+        widget.inputFormatters != oldWidget.inputFormatters ||
+        widget.focusNode != oldWidget.focusNode ||
+        widget.hasFocusVN != oldWidget.hasFocusVN ||
         widget.suffixIconBuilder != oldWidget.suffixIconBuilder) {
+      textEditingController.text = widget.value ?? "";
+      hasFocusVN = widget.hasFocusVN ?? ValueNotifier<bool>(false);
+
+      _focusNode.removeListener(_onFocusChange);
+      _focusNode = widget.focusNode ?? FocusNode();
+      _focusNode.addListener(_onFocusChange);
       setState(() {});
     }
   }
@@ -228,8 +252,7 @@ class _NTextFieldState extends State<NTextField> {
     BoxConstraints? prefixIconConstraints = widget.prefixIconConstraints ??
         BoxConstraints(
           maxHeight: prefixImage.height!,
-          maxWidth:
-              prefixImage.width! + prefixPadding.left + prefixPadding.right,
+          maxWidth: prefixImage.width! + prefixPadding.left + prefixPadding.right,
         );
 
     final suffixImage = Image(
@@ -243,15 +266,14 @@ class _NTextFieldState extends State<NTextField> {
     BoxConstraints? suffixIconConstraints = widget.suffixIconConstraints ??
         BoxConstraints(
           maxHeight: suffixImage.height!,
-          maxWidth:
-              suffixImage.width! + suffixPadding.left + suffixPadding.right,
+          maxWidth: suffixImage.width! + suffixPadding.left + suffixPadding.right,
         );
 
-    Widget? prefixIcon = widget.prefixIconBuilder?.call(hasFocusVN.value) ??
-        Padding(padding: prefixPadding, child: prefixImage);
+    Widget? prefixIcon =
+        widget.prefixIconBuilder?.call(hasFocusVN.value) ?? Padding(padding: prefixPadding, child: prefixImage);
 
-    Widget? suffixIcon = widget.suffixIconBuilder?.call(hasFocusVN.value) ??
-        Padding(padding: suffixPadding, child: suffixImage);
+    Widget? suffixIcon =
+        widget.suffixIconBuilder?.call(hasFocusVN.value) ?? Padding(padding: suffixPadding, child: suffixImage);
 
     Widget? defaultSuffix = GestureDetector(
       onTap: () {
@@ -264,8 +286,7 @@ class _NTextFieldState extends State<NTextField> {
       ),
     );
 
-    final counter = textEditingController.buildInputDecorationCounter(
-        maxLength: widget.maxLength);
+    final counter = textEditingController.buildInputDecorationCounter(maxLength: widget.maxLength);
 
     if (widget.hidePrefix) {
       prefixIcon = null;
@@ -285,17 +306,12 @@ class _NTextFieldState extends State<NTextField> {
       filled: true,
       fillColor: widget.fillColor,
       focusColor: widget.focusColor,
-      contentPadding: widget.contentPadding ??
-          const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+      contentPadding: widget.contentPadding ?? const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
       border: widget.border ?? InputBorder.none,
-      enabledBorder: widget.readOnly
-          ? null
-          : widget.enabledBorder ?? buildEnabledBorder(radius: widget.radius),
+      enabledBorder: widget.readOnly ? null : widget.enabledBorder ?? buildEnabledBorder(radius: widget.radius),
       focusedBorder: widget.readOnly
           ? null
-          : widget.focusedBorder ??
-              buildEnabledBorder(
-                  borderColor: context.primaryColor, radius: widget.radius),
+          : widget.focusedBorder ?? buildEnabledBorder(color: context.primaryColor, radius: widget.radius),
       hintText: widget.hintText,
       hintStyle: widget.hintStyle,
       isCollapsed: widget.isCollapsed ?? false,
@@ -310,6 +326,12 @@ class _NTextFieldState extends State<NTextField> {
 
     return TextField(
       controller: textEditingController,
+      contextMenuBuilder: widget.contextMenuBuilder ??
+          (_, editableTextState) => AdaptiveTextSelectionToolbar.editableText(
+                editableTextState: editableTextState,
+              ),
+      onTap: widget.onTap,
+      onTapOutside: widget.onTapOutside,
       textAlign: widget.textAlign,
       readOnly: widget.readOnly,
       minLines: widget.minLines,
@@ -322,8 +344,7 @@ class _NTextFieldState extends State<NTextField> {
         widget.onSubmitted?.call(val);
         textEditingController.clear();
       },
-      obscureText:
-          widget.obscureText != null ? widget.obscureText! : isCloseEye,
+      obscureText: widget.obscureText != null ? widget.obscureText! : isCloseEye,
       keyboardType: widget.keyboardType,
       textInputAction: widget.textInputAction,
       autofocus: widget.autofocus,
@@ -335,19 +356,18 @@ class _NTextFieldState extends State<NTextField> {
           ),
       inputFormatters: widget.inputFormatters ??
           [
-            if (widget.maxLength != null)
-              LengthLimitingTextInputFormatter(widget.maxLength!),
+            if (widget.maxLength != null) LengthLimitingTextInputFormatter(widget.maxLength!),
           ],
       scrollPhysics: widget.scrollPhysics,
       decoration: widget.decorationBuilder?.call(decoration) ?? decoration,
     );
   }
 
-  buildEnabledBorder({Color? borderColor = lineColor, double radius = 4}) {
+  buildEnabledBorder({Color color = lineColor, double radius = 4}) {
     return OutlineInputBorder(
       borderRadius: BorderRadius.all(Radius.circular(radius)),
       borderSide: BorderSide(
-        color: lineColor, //边线颜色为白色
+        color: color, //边线颜色为白色
         width: 1, //边线宽度为1
       ),
     );

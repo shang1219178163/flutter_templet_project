@@ -19,16 +19,50 @@ class WillPopScopeDemo extends StatefulWidget {
 }
 
 class _WillPopScopeDemoState extends State<WillPopScopeDemo> {
-  bool _disable = false;
+  /// onWillPop 返回值
+  bool enable = true;
+
+  /// onWillPop 事项为空
+  bool onWillPopNull = false;
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () async {
-        return !_disable;
-      },
+      // onWillPop: null,// 为 null 可返回
+      onWillPop: enable
+          ? null
+          : () async {
+              await showAlert();
+              return false;
+            },
       child: buildPage(context),
     );
+  }
+
+  Future<void> showAlert() async {
+    // 弹出确认对话框
+    bool shouldPop = await showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text("确认"),
+            content: Text("你确定要离开这个页面吗？"),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(false),
+                child: Text("取消"),
+              ),
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(true),
+                child: Text("确定"),
+              ),
+            ],
+          ),
+        ) ??
+        false;
+    DLog.d("shouldPop: $shouldPop");
+    if (shouldPop) {
+      Navigator.of(context).pop();
+    }
   }
 
   Widget buildPage(BuildContext context) {
@@ -37,34 +71,49 @@ class _WillPopScopeDemoState extends State<WillPopScopeDemo> {
         title: Text(widget.title ?? "$widget"),
         centerTitle: true,
         elevation: 0,
+        scrolledUnderElevation: 0,
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text('不可返回：'),
-              Switch(
-                value: _disable,
-                onChanged: (bool val) {
-                  setState(() {
-                    _disable = val;
-                  });
-                },
-              )
-            ],
-          ),
-        ],
+      body: Container(
+        padding: EdgeInsets.all(10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            buildSwitch(
+              name: 'onWillPop 返回：',
+              value: enable,
+              onChanged: (bool val) {
+                enable = val;
+                setState(() {});
+              },
+            ),
+            buildSwitch(
+              name: 'onWillPop 参数为空：',
+              value: onWillPopNull,
+              onChanged: (bool val) {
+                onWillPopNull = val;
+                setState(() {});
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
 
-  void handleAction() {
-    ddlog("obj");
-  }
-
-  void handleAction1() {
-    ddlog('我是外面的按钮，不受影响');
+  Widget buildSwitch({
+    required String name,
+    required bool value,
+    required ValueChanged<bool> onChanged,
+  }) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+        Text(name),
+        Switch(
+          value: value,
+          onChanged: onChanged,
+        )
+      ],
+    );
   }
 }

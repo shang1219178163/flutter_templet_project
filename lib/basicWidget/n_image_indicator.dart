@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-/**
- * @author[yilian]
- * @version[创建日期，2024/4/1 10:00]
- * @function[图片指示器]
- **/
 
+/// 图片指示器
 class NImageIndicator extends StatelessWidget {
   final PageController controller;
   final int itemCount;
@@ -45,8 +41,7 @@ class NImageIndicator extends StatelessWidget {
       offset = controller.page;
     }
     return CustomPaint(
-      size: Size(
-          maxSize * _kMaxCircleCount + space * (_kMaxCircleCount - 1), maxSize),
+      size: Size(maxSize * _kMaxCircleCount + space * (_kMaxCircleCount - 1), maxSize),
       painter: ImageIndicatorPainter(
           itemCount: itemCount,
           indicatorColor: indicatorColor,
@@ -56,8 +51,7 @@ class NImageIndicator extends StatelessWidget {
           pageIndex: index,
           space: space,
           pageOffset: offset! - index,
-          isStart:
-              (offset > index) && (index + _kMaxCircleCount - 1 < itemCount),
+          isStart: (offset > index) && (index + _kMaxCircleCount - 1 < itemCount),
           isEnd: index + _kMaxCircleCount - 2 >= itemCount),
     );
   }
@@ -112,36 +106,24 @@ class ImageIndicatorPainter extends CustomPainter {
         mPaint = Paint()
           ..color = indicatorColor!
           ..isAntiAlias = true;
-        canvas.drawCircle(
-            Offset(
-                (i * childWidth) + (childWidth / 2) - childWidth * pageOffset!,
-                childWidth / 2),
-            maxSize! - (maxSize! - minSize!) * pageOffset!,
-            mPaint..color = indicatorColor!);
+        canvas.drawCircle(Offset((i * childWidth) + (childWidth / 2) - childWidth * pageOffset!, childWidth / 2),
+            maxSize! - (maxSize! - minSize!) * pageOffset!, mPaint..color = indicatorColor!);
       }
       //画左边的圆
       else if (i <= _centerCircleIndex) {
         mPaint = Paint()
           ..color = indicatorOtherColor!
           ..isAntiAlias = true;
-        canvas.drawCircle(
-            Offset(
-                (i * childWidth) + (childWidth / 2) - childWidth * pageOffset!,
-                childWidth / 2),
-            minSize! * (1 - pageOffset!),
-            mPaint..color = indicatorOtherColor!);
+        canvas.drawCircle(Offset((i * childWidth) + (childWidth / 2) - childWidth * pageOffset!, childWidth / 2),
+            minSize! * (1 - pageOffset!), mPaint..color = indicatorOtherColor!);
       }
       //话右边的圆
       else {
         mPaint = Paint()
           ..color = indicatorOtherColor!
           ..isAntiAlias = true;
-        canvas.drawCircle(
-            Offset(
-                (i * childWidth) + (childWidth / 2) - childWidth * pageOffset!,
-                childWidth / 2),
-            minSize! + (maxSize! - minSize!) * pageOffset!,
-            mPaint..color = indicatorOtherColor!);
+        canvas.drawCircle(Offset((i * childWidth) + (childWidth / 2) - childWidth * pageOffset!, childWidth / 2),
+            minSize! + (maxSize! - minSize!) * pageOffset!, mPaint..color = indicatorOtherColor!);
       }
     }
     //向左移的时候画后面的圆
@@ -150,11 +132,7 @@ class ImageIndicatorPainter extends CustomPainter {
         ..color = indicatorOtherColor!
         ..isAntiAlias = true;
       canvas.drawCircle(
-          Offset(
-              (_kMaxCircleCount * childWidth) +
-                  (childWidth / 2) -
-                  childWidth * pageOffset!,
-              childWidth / 2),
+          Offset((_kMaxCircleCount * childWidth) + (childWidth / 2) - childWidth * pageOffset!, childWidth / 2),
           minSize! * pageOffset!,
           mPaint..color = indicatorOtherColor!);
     }

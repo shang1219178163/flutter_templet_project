@@ -15,7 +15,7 @@ const String DATE_FORMAT_INT = 'yyyyMMddHHmmss';
 /// yyyy-dd-MM HH:mm:ss
 const String DATE_FORMAT = 'yyyy-MM-dd HH:mm:ss';
 
-/// yyyy-dd-MM
+/// yyyy-MM-dd
 const String DATE_FORMAT_DAY = 'yyyy-MM-dd';
 
 /// yyyy-dd-MM 00:00:00
@@ -126,25 +126,82 @@ extension DateTimeExt on DateTime {
       return null;
     }
 
-    var dateTime =
-        DateTimeExt.dateFromTimestamp(timestamp: timestamp, isUtc: isUtc);
+    var dateTime = DateTimeExt.dateFromTimestamp(timestamp: timestamp, isUtc: isUtc);
     var result = stringFromDate(date: dateTime, format: format);
     return result;
   }
 
-  bool isSameDay(DateTime? date) {
-    if (date == null) {
+  bool isSameYear(DateTime? value) {
+    if (value == null) {
       return false;
     }
-    final result = year == date.year && month == date.month && day == date.day;
+    final result = year == value.year;
+    return result;
+  }
+
+  bool isSameMonth(DateTime? value) {
+    if (value == null) {
+      return false;
+    }
+    final result = year == value.year && month == value.month;
+    return result;
+  }
+
+  bool isSameDay(DateTime? value) {
+    if (value == null) {
+      return false;
+    }
+    final result = year == value.year && month == value.month && day == value.day;
+    return result;
+  }
+
+  bool isSameHour(DateTime? value) {
+    if (value == null) {
+      return false;
+    }
+    final result = year == value.year && month == value.month && day == value.day && hour == value.hour;
+    return result;
+  }
+
+  bool isSameMinute(DateTime? value) {
+    if (value == null) {
+      return false;
+    }
+    final result = year == value.year &&
+        month == value.month &&
+        day == value.day &&
+        minute == value.hour &&
+        minute == value.minute;
+    return result;
+  }
+
+  bool isSameSecond(DateTime? value) {
+    if (value == null) {
+      return false;
+    }
+    final result = year == value.year &&
+        month == value.month &&
+        day == value.day &&
+        minute == value.hour &&
+        minute == value.minute &&
+        second == value.second;
+    return result;
+  }
+
+  bool inRange(DateTime lowLimit, DateTime highLimit) {
+    final result = compareTo(lowLimit) >= 0 && compareTo(highLimit) <= 0;
+    debugPrint("inRange ${{
+      "lowLimit": lowLimit.toString(),
+      "this": toString(),
+      "highLimit": highLimit.toString(),
+    }}");
     return result;
   }
 
   String toString19() => toString().split(".").first;
 
   DateTime offsetDay({required int count}) {
-    final timstamp =
-        DateTime.now().millisecondsSinceEpoch + count * 24 * 60 * 60 * 1000;
+    final timstamp = DateTime.now().millisecondsSinceEpoch + count * 24 * 60 * 60 * 1000;
     var dateTime = DateTime.fromMillisecondsSinceEpoch(timstamp);
     return dateTime;
   }
@@ -185,8 +242,7 @@ extension DateTimeExt on DateTime {
     var dateTime = this;
     if (dateTime.weekday != 7) {
       final monthFisrtDay = DateTime(year, month, 1);
-      final timestamp = monthFisrtDay.millisecondsSinceEpoch -
-          monthFisrtDay.weekday * 24 * 60 * 60 * 1000;
+      final timestamp = monthFisrtDay.millisecondsSinceEpoch - monthFisrtDay.weekday * 24 * 60 * 60 * 1000;
       dateTime = DateTime.fromMillisecondsSinceEpoch(timestamp);
     }
 
@@ -202,12 +258,10 @@ extension DateTimeExt on DateTime {
 
     var dateTime = day;
     if (day.weekday == 7) {
-      final timestamp =
-          day.millisecondsSinceEpoch + (7 - 1) * 24 * 60 * 60 * 1000;
+      final timestamp = day.millisecondsSinceEpoch + (7 - 1) * 24 * 60 * 60 * 1000;
       dateTime = DateTime.fromMillisecondsSinceEpoch(timestamp);
     } else {
-      final timestamp =
-          day.millisecondsSinceEpoch + (6 - day.weekday) * 24 * 60 * 60 * 1000;
+      final timestamp = day.millisecondsSinceEpoch + (6 - day.weekday) * 24 * 60 * 60 * 1000;
       dateTime = DateTime.fromMillisecondsSinceEpoch(timestamp);
     }
 
@@ -259,5 +313,50 @@ extension DateTimeIntExt on int {
     }
 
     return value;
+  }
+}
+
+/// 时间样式
+enum DateFormatEnum {
+  /// yyyyMMddHHmmss
+  yyyyMMddHHmmss(name: "yyyyMMddHHmmss", fmt: "yyyy-MM-dd HH:mm:ss"),
+
+  /// yyyy-MM-dd HH:mm:ss
+  yyyyMMdd(name: "yyyyMMdd", fmt: "yyyy-MM-d"),
+
+  /// yyyy-MM-dd 00:00:00
+  yyyyMMdd000000(name: "yyyyMMdd000000", fmt: "yyyy-MM-dd 00:00:00"),
+
+  /// yyyy-MM-dd 23:59:59
+  yyyyMMdd235959(name: "yyyyMMdd235959", fmt: "yyyy-MM-dd 23:59:59"),
+
+  /// HH:mm:
+  HHmm(name: "HHmm", fmt: "HH:mm"),
+
+  /// HH:mm:ss
+  HHmmss(name: "HHmmss", fmt: "HH:mm:ss");
+
+  const DateFormatEnum({required this.name, required this.fmt});
+
+  /// name
+  final String name;
+
+  /// 格式
+  final String fmt;
+
+  /// 日期格式化
+  String? formatDate({required DateTime? date}) {
+    return DateTimeExt.stringFromDate(date: date);
+  }
+
+  /// 日期时间二次格式化
+  String? formatDateString({required String? dateStr}) {
+    final date = DateTimeExt.dateFromString(dateStr: dateStr);
+    return DateTimeExt.stringFromDate(date: date);
+  }
+
+  /// 时间戳格式化
+  String? formatTimestamp({required int? timestamp}) {
+    return DateTimeExt.stringFromTimestamp(timestamp: timestamp);
   }
 }

@@ -24,6 +24,8 @@ platform :ios do
 =end
   desc "打包 release 版本, to: pgy/fir/release"
   lane :release do |options|
+    stime = archiveExecutionStart();
+
     platform = options[:to] || "release"
     en = options[:en] || "prod"
 
@@ -33,6 +35,9 @@ platform :ios do
     archiveRelease(ipaDir: fileDir)
 
     sh "fastlane releaseupload to:#{platform}"
+
+    UI.message "#{ipaDir}"
+    archiveExecutionEnd(stime: stime)
   end
 
 
@@ -59,6 +64,8 @@ platform :ios do
 =end
   desc "打包 development 版本, to: pgy/fir"
   lane :develop do |options|
+    stime = archiveExecutionStart();
+
     platform = options[:to] ||"pgy"
     en = options[:en] || "pre"
 
@@ -68,6 +75,9 @@ platform :ios do
     archiveDevelopment(ipaDir: fileDir)
 
     sh "fastlane developupload to:#{platform}"
+
+    UI.message "#{ipaDir}"
+    archiveExecutionEnd(stime: stime)
   end
 
 
@@ -257,6 +267,80 @@ platform :ios do
   end
 
 
+  # 秒转时分秒
+  def seconds_to_hms(seconds)
+    # 计算小时数
+    hours = seconds / 3600
+    # 计算剩余的秒数并转换为分钟数
+    minutes = (seconds % 3600) / 60
+    # 计算剩余的秒数
+    seconds = seconds % 60
+
+    result = format("%02d:%02d:%02d", hours, minutes, seconds)
+    return result;
+  end
+
+
+  # 打包开始
+  def archiveExecutionStart()
+    stime = Time.now();
+    UI.message "🌟🌟🌟🌟 打包开始".blue
+    return stime;
+  end
+
+  # 打包时长统计函数
+  def archiveExecutionEnd(stime: Time?)
+    etime = Time.now
+
+    # 计算时间差
+    time_difference = etime - stime
+
+    UI.message "🌟🌟🌟🌟 打包结束, 总耗时: #{seconds_to_hms(time_difference)}".blue
+  end
+
+  # 当前目录
+  lane :app_dir do
+    current = Dir.pwd;
+    puts "Dir.pwd: #{current}"
+
+    current = File.expand_path("..", current);
+    current = File.expand_path("..", current);
+
+    appDir = "#{current}/build/app/outputs/flutter-ipa"
+    puts "#{appDir}"
+  end
+
+  def update_build_number
+    current = Dir.pwd;
+    current = File.expand_path("..", current);
+    
+    # 获取 Info.plist 文件路径
+    plist_path = "#{current}/Runner/Info.plist"
+  
+    # 读取当前的 build number
+    current_build_number = get_info_plist_value(
+      path: plist_path,
+      key: "CFBundleVersion"
+    ).to_i
+  
+    # 自增 build number
+    new_build_number = (current_build_number + 1).to_s
+  
+    # 更新 Info.plist 中的 build number
+    set_info_plist_value(
+      path: plist_path,
+      key: "CFBundleVersion",
+      value: new_build_number
+    )
+  
+
+    build_number = get_info_plist_value(
+      path: plist_path,
+      key: "CFBundleVersion"
+    ).to_i
+    puts "build_number:#{current_build_number} -> #{build_number}"
+  end
+
   desc "测试"
   lane :test do |options|
     # clear_cache_files()
@@ -268,6 +352,8 @@ platform :ios do
     
     # handleDingSlack()
     # handleDingTalk()
+
+    update_build_number();
   end
 
 

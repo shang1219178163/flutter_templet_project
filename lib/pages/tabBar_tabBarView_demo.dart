@@ -45,8 +45,7 @@ class TabBarTabBarViewDemo extends StatefulWidget {
   _TabBarTabBarViewDemoState createState() => _TabBarTabBarViewDemoState();
 }
 
-class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo>
-    with SingleTickerProviderStateMixin {
+class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with SingleTickerProviderStateMixin {
   late final _tabController = TabController(length: items.length, vsync: this);
 
   final textEditingController = TextEditingController();
@@ -111,10 +110,7 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo>
         bottom: TabBar(
           controller: _tabController,
           isScrollable: true,
-          tabs: items
-              .map((e) =>
-                  Tab(key: PageStorageKey<String>(e.item1), text: e.item1))
-              .toList(),
+          tabs: items.map((e) => Tab(key: PageStorageKey<String>(e.item1), text: e.item1)).toList(),
           // indicatorSize: TabBarIndicatorSize.label,
           // indicatorPadding: EdgeInsets.only(left: 6, right: 6),
         ),
@@ -140,9 +136,7 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo>
     return AnchoredOverlay(
       showOverlay: true,
       overlayBuilder: (context, offset) {
-        final dy = isTop
-            ? offset.dy - icons.length * 35.0
-            : offset.dy + icons.length * 35.0;
+        final dy = isTop ? offset.dy - icons.length * 35.0 : offset.dy + icons.length * 35.0;
         return CenterAbout(
           position: Offset(offset.dx, dy),
           child: ExpandIcons(
@@ -318,8 +312,7 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo>
 
     return EnhanceExpandListView(
       children: tuples
-          .map<ExpandPanelModel<Tuple2<String, String>>>((e) =>
-              ExpandPanelModel(
+          .map<ExpandPanelModel<Tuple2<String, String>>>((e) => ExpandPanelModel(
                 canTapOnHeader: true,
                 isExpanded: false,
                 arrowPosition: EnhanceExpansionPanelArrowPosition.none,
@@ -327,8 +320,7 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo>
                 headerBuilder: (context, isExpand) {
                   return buildHeader(isExpand: isExpand, sectionTile: e.item1);
                 },
-                bodyChildren: e.item2.sorted((a, b) =>
-                    a.item1.toLowerCase().compareTo(b.item1.toLowerCase())),
+                bodyChildren: e.item2.sorted((a, b) => a.item1.toLowerCase().compareTo(b.item1.toLowerCase())),
                 bodyItemBuilder: (context, e) {
                   return buildItem(e);
                 },
@@ -337,8 +329,7 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo>
     );
   }
 
-  List<String> getTitles(
-      {required List<Tuple2<String, List<Tuple2<String, String>>>> tuples}) {
+  List<String> getTitles({required List<Tuple2<String, List<Tuple2<String, String>>>> tuples}) {
     final titles = tuples.expand((e) => e.item2.map((e) => e.item1)).toList();
     final result = List<String>.from(titles.sorted());
     // print('titles runtimeType:${titles.runtimeType},${titles.every((element) => element is String)},');
@@ -377,8 +368,7 @@ var list = <Tuple2<String, String>>[
   Tuple2(APPRouter.dataTableDemo, "dateTableDemo"),
   Tuple2(APPRouter.dataTableByPaginatedDemo, "dataTableByPaginatedDemo"),
   Tuple2(APPRouter.draggableDemo, "draggableDemo"),
-  Tuple2(
-      APPRouter.draggableScrollableSheetDemo, "draggableScrollableSheetDemo"),
+  Tuple2(APPRouter.draggableScrollableSheetDemo, "draggableScrollableSheetDemo"),
   Tuple2(APPRouter.expandIconDemo, "expandIconDemo"),
   Tuple2(APPRouter.expandIconDemoNew, "ExpandIconDemoNew"),
   Tuple2(APPRouter.gridViewDemo, "GridView"),
@@ -466,8 +456,7 @@ var list = <Tuple2<String, String>>[
   Tuple2(APPRouter.borderDemo, "buttonBorderDemo"),
   Tuple2(APPRouter.overflowDemo, "overflowDemo"),
   Tuple2(APPRouter.flexibleSpaceDemo, "flexibleSpaceDemo"),
-  Tuple2(
-      APPRouter.nnHorizontalScrollWidgetDemo, "nnHorizontalScrollWidgetDemo"),
+  Tuple2(APPRouter.nnHorizontalScrollWidgetDemo, "nnHorizontalScrollWidgetDemo"),
   Tuple2(APPRouter.interactiveViewerDemo, "图片缩放"),
   Tuple2(APPRouter.dateRangePickerDialogDemo, "日期范围组件"),
   Tuple2(APPRouter.mergeableMaterialDemo, "mergeableMaterialDemo"),
@@ -481,8 +470,7 @@ var list = <Tuple2<String, String>>[
   Tuple2(APPRouter.filterDemoOne, "NNFilterDemoOne"),
   Tuple2(APPRouter.fractionallySizedBoxDemo, "fractionallySizedBoxDemo"),
   Tuple2(APPRouter.listWheelScrollViewDemo, "listWheelScrollViewDemo"),
-  Tuple2(
-      APPRouter.nnsliverPersistentHeaderDemo, "nnsliverPersistentHeaderDemo"),
+  Tuple2(APPRouter.nnsliverPersistentHeaderDemo, "nnsliverPersistentHeaderDemo"),
   Tuple2(APPRouter.nestedScrollViewDemoOne, "nestedScrollViewDemoOne"),
   Tuple2(APPRouter.nestedScrollViewDemoTwo, "nestedScrollViewDemoTwo"),
   Tuple2(APPRouter.expansionTileCard, "expansionTileCard"),
@@ -500,13 +488,11 @@ var list = <Tuple2<String, String>>[
   Tuple2(APPRouter.searchDemo, "searchDemo"),
   Tuple2(APPRouter.switchDemo, "switchDemo"),
   Tuple2(APPRouter.gestureDetectorDemo, "gestureDetectorDemo"),
-  Tuple2(
-      APPRouter.compositedTransformTargetDemo, "compositedTransformTargetDemo"),
+  Tuple2(APPRouter.compositedTransformTargetDemo, "compositedTransformTargetDemo"),
   Tuple2(APPRouter.contextMenuDemo, "contextMenuDemo"),
   Tuple2(APPRouter.targetFollowerDemo, "targetFollowerDemo"),
   Tuple2(APPRouter.tapRegionDemo, "tapRegionDemo"),
-  Tuple2(APPRouter.glowingOverscrollIndicatorDemo,
-      "glowingOverscrollIndicatorDemo"),
+  Tuple2(APPRouter.glowingOverscrollIndicatorDemo, "glowingOverscrollIndicatorDemo"),
   Tuple2(APPRouter.progressClipperDemo, "progressClipperDemo"),
   Tuple2(APPRouter.heroDemo, "heroDemo"),
   Tuple2(APPRouter.hitTestBehaviorDemo, "hitTestBehaviorDemo"),
@@ -546,6 +532,20 @@ var list = <Tuple2<String, String>>[
   Tuple2(APPRouter.nestedNavigatorDemo, "nestedNavigatorDemo"),
   Tuple2(APPRouter.nTweenTransitionDemo, "nTweenTransitionDemo"),
   Tuple2(APPRouter.hapticFeedbackDemo, "hapticFeedbackDemo"),
+  Tuple2(APPRouter.webviewDemo, "webviewDemo"),
+  Tuple2(APPRouter.secureKeyboardDemo, "secureKeyboardDemo"),
+  Tuple2(APPRouter.popScopeDemo, "popScopeDemo"),
+  Tuple2(APPRouter.nestedScrollViewDemoHome, "nestedScrollViewDemoHome"),
+  Tuple2(APPRouter.irregularClipperDemo, "irregularClipperDemo"),
+  Tuple2(APPRouter.ocrPhotoDemo, "ocrPhotoDemo"),
+  Tuple2(APPRouter.translationTextPage, "translationTextPage"),
+  Tuple2(APPRouter.floatingButtonDemo, "floatingButtonDemo"),
+  Tuple2(APPRouter.floatingButtonDemoOne, "floatingButtonDemoOne"),
+  Tuple2(APPRouter.floatingButtonDemoTwo, "floatingButtonDemoTwo"),
+  Tuple2(APPRouter.floatingButtonDemoThree, "floatingButtonDemoThree"),
+  Tuple2(APPRouter.urlLauncherDemo, "urlLauncherDemo"),
+  Tuple2(APPRouter.iteratorDemo, "iteratorDemo"),
+  Tuple2(APPRouter.chemotherapyRegimenDrugCaculator, "chemotherapyRegimenDrugCaculator"),
 ];
 
 var slivers = <Tuple2<String, String>>[
@@ -586,6 +586,8 @@ var specials = <Tuple2<String, String>>[
   Tuple2(APPRouter.promptBuilderDemo, "指引模板"),
   Tuple2(APPRouter.isolateDemo, "isolateDemo"),
   Tuple2(APPRouter.overlayDemo, "overlay弹窗"),
+  Tuple2(APPRouter.overlayDemoOne, "overlay弹窗1"),
+  Tuple2(APPRouter.overlayMixinDemo, "overlayMixinDemo"),
   Tuple2(APPRouter.boxConstraintsDemo, "boxConstraints"),
   Tuple2(APPRouter.gradientDemo, "渐变色"),
   Tuple2(APPRouter.imageBlendModeDemo, "图片渲染模式"),
@@ -613,6 +615,7 @@ var specials = <Tuple2<String, String>>[
   Tuple2(APPRouter.asyncDemo, "asyncDemo"),
   Tuple2(APPRouter.dataTypeDemo, "testDataTyeDemo"),
   Tuple2(APPRouter.audioPlayPageDemo, "audioPlayPage"),
+  Tuple2(APPRouter.expressionsCalulatorDemo, "简单表达式计算"),
 ];
 
 var animateds = <Tuple2<String, String>>[
@@ -654,7 +657,6 @@ var customs = [
   Tuple2(APPRouter.dialogChoiceChipDemo, "选择弹窗"),
   Tuple2(APPRouter.imChatPage, "聊天列表"),
   Tuple2(APPRouter.expandTextDemo, "可折叠文字"),
-  Tuple2(APPRouter.suspensionButtonDemo, "悬浮按钮"),
   Tuple2(APPRouter.uploadFileDemo, "上传demo"),
   Tuple2(APPRouter.fileUploadBoxDemo, "上传文件demo"),
   Tuple2(APPRouter.jsonToDartPage, "json转模型"),
@@ -731,8 +733,7 @@ var others = <Tuple2<String, String>>[
 var forms = <Tuple2<String, String>>[
   Tuple2(APPRouter.autocompleteDemo, "autocompleteDemo"),
   Tuple2(APPRouter.autofillGroupDemo, "autofillGroupDemo"),
-  Tuple2(
-      APPRouter.inputDatePickerFormFieldDemo, "inputDatePickerFormFieldDemo"),
+  Tuple2(APPRouter.inputDatePickerFormFieldDemo, "inputDatePickerFormFieldDemo"),
 ];
 
 var dataTypes = <Tuple2<String, String>>[

@@ -1,16 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/Pages/second_page.dart';
 
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
+import 'package:flutter_templet_project/routes/APPRouter.dart';
+import 'package:get/get.dart';
 import 'package:tuple/tuple.dart';
 
 class CupertinoTabScaffoldDemo extends StatefulWidget {
   const CupertinoTabScaffoldDemo({Key? key}) : super(key: key);
 
   @override
-  _CupertinoTabScaffoldDemoState createState() =>
-      _CupertinoTabScaffoldDemoState();
+  _CupertinoTabScaffoldDemoState createState() => _CupertinoTabScaffoldDemoState();
 }
 
 class _CupertinoTabScaffoldDemoState extends State {
@@ -87,7 +89,15 @@ class TwoPage extends StatelessWidget {
       backgroundColor: Colors.lightBlue,
       navigationBar: CupertinoNavigationBar(
         leading: Icon(CupertinoIcons.back),
-        trailing: Icon(CupertinoIcons.add),
+        trailing: InkWell(
+          onTap: () {
+            final route = MaterialPageRoute(
+              builder: (context) => SecondPage(),
+            );
+            Navigator.of(context).push(route);
+          },
+          child: Icon(CupertinoIcons.add),
+        ),
         middle: Text("聊天面板"),
       ),
       child: Center(

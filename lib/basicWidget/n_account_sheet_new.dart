@@ -14,8 +14,7 @@ import 'package:flutter_templet_project/cache/file_manager.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 
 /// 账号选择器(泛型尝试)
-class NAccountSheetNew<E extends MapEntry<String, dynamic>>
-    extends StatefulWidget {
+class NAccountSheetNew<E extends MapEntry<String, dynamic>> extends StatefulWidget {
   const NAccountSheetNew({
     super.key,
     this.controller,
@@ -45,14 +44,14 @@ class NAccountSheetNew<E extends MapEntry<String, dynamic>>
   State<NAccountSheetNew<E>> createState() => _NAccountSheetNewState<E>();
 }
 
-class _NAccountSheetNewState<E extends MapEntry<String, dynamic>>
-    extends State<NAccountSheetNew<E>> {
+class _NAccountSheetNewState<E extends MapEntry<String, dynamic>> extends State<NAccountSheetNew<E>> {
+  final cacheKey = CacheKey.accountList.name;
+
   late List<E> items = widget.items;
 
   late E? current = items.isEmpty ? null : items.first;
 
-  String get btnTitle =>
-      current == null ? "请选择账号" : widget.selecetdCb(current!);
+  String get btnTitle => current == null ? "请选择账号" : widget.selecetdCb(current!);
 
   @override
   void dispose() {
@@ -65,7 +64,7 @@ class _NAccountSheetNewState<E extends MapEntry<String, dynamic>>
     super.initState();
     widget.controller?._attach(this);
 
-    var map = CacheService().getMap(CACHE_ACCOUNT_List) ?? <String, dynamic>{};
+    var map = CacheService().getMap(cacheKey) ?? <String, dynamic>{};
     if (map.isNotEmpty) {
       updateItems(map.entries.toList() as List<E>);
     }
@@ -179,12 +178,10 @@ class NAccountSheetNewController<E extends MapEntry<String, dynamic>> {
     required String pwd,
   }) async {
     assert(_anchor != null);
-    final map =
-        await FileManager().readJson(fileName: CACHE_ACCOUNT_List) ?? {};
+    final map = await FileManager().readJson(fileName: CacheKey.accountList.name) ?? {};
     map[account] = pwd;
 
-    final accounts =
-        map.entries.map((e) => (account: e.key, pwd: e.value) as E).toList();
+    final accounts = map.entries.map((e) => (account: e.key, pwd: e.value) as E).toList();
     updateItems(accounts);
     _anchor?.updateCurrent(MapEntry(account, pwd));
   }

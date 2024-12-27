@@ -23,41 +23,66 @@ class _WrapDemoState extends State<WrapDemo> {
   }
 
   buildBody() {
-    return Column(
-      children: [
-        NSectionBox(
-          title: "Axis.horizontal",
-          child: Container(
-            // height: 200,
-            // width: 400,
-            constraints: BoxConstraints(
-              maxHeight: 200,
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.transparent,
+              border: Border.all(color: Colors.blue),
+              borderRadius: BorderRadius.all(Radius.circular(0)),
             ),
-            margin: EdgeInsets.all(12),
-            child: WrapWidget(
-              width: screenSize.width - 24,
-              direction: Axis.horizontal,
-              // height: 500,
-            ),
-          ),
-        ),
-        NSectionBox(
-          title: "Axis.vertical",
-          child: Container(
-            // height: 200,
-            // width: 400,
-            constraints: BoxConstraints(
-              maxHeight: 200,
-            ),
-            margin: EdgeInsets.all(12),
-            child: WrapWidget(
-              width: screenSize.width - 24,
-              direction: Axis.vertical,
-              // height: 500,
+            child: Wrap(
+              spacing: 8.0,
+              runSpacing: 8.0,
+              children: List.generate(12, (index) {
+                return Container(
+                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: Colors.transparent,
+                    border: Border.all(color: Colors.blue),
+                    borderRadius: BorderRadius.all(Radius.circular(0)),
+                  ),
+                  child: Text("选项_$index"),
+                );
+              }).toList(),
             ),
           ),
-        ),
-      ],
+          NSectionBox(
+            title: "Axis.horizontal",
+            child: Container(
+              // height: 200,
+              // width: 400,
+              constraints: BoxConstraints(
+                maxHeight: 200,
+              ),
+              margin: EdgeInsets.all(12),
+              child: WrapWidget(
+                width: screenSize.width - 24,
+                direction: Axis.horizontal,
+                // height: 500,
+              ),
+            ),
+          ),
+          NSectionBox(
+            title: "Axis.vertical",
+            child: Container(
+              // height: 200,
+              // width: 400,
+              constraints: BoxConstraints(
+                maxHeight: 200,
+              ),
+              margin: EdgeInsets.all(12),
+              child: WrapWidget(
+                width: screenSize.width - 24,
+                direction: Axis.vertical,
+                // height: 500,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

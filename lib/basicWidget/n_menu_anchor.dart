@@ -7,6 +7,7 @@
 //
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 
 /// MenuAnchor 简易封装,方便代码复用
@@ -26,6 +27,7 @@ class NMenuAnchor<E> extends StatelessWidget {
     required this.equal,
     required this.cbName,
     this.placeholder = "请选择",
+    this.leadingIconBuilder,
   });
 
   final MenuController? controller;
@@ -60,6 +62,8 @@ class NMenuAnchor<E> extends StatelessWidget {
   final String Function(E? e) cbName;
   final String placeholder;
 
+  final Widget Function(bool isSelected)? leadingIconBuilder;
+
   @override
   Widget build(BuildContext context) {
     var selectedItem = initialItem;
@@ -83,6 +87,11 @@ class NMenuAnchor<E> extends StatelessWidget {
             //   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
             //   // backgroundColor: MaterialStateProperty.all(Colors.yellow),
             // ),
+            leadingIcon: leadingIconBuilder?.call(isSelected) ??
+                Icon(
+                  Icons.check,
+                  color: isSelected ? context.primaryColor : Colors.transparent,
+                ),
             onPressed: () {
               onItem(e);
             },
@@ -102,8 +111,7 @@ class NMenuAnchor<E> extends StatelessWidget {
           child: MenuAnchor(
             controller: controller,
             builder: (context, MenuController controller, Widget? child) {
-              final defaultName =
-                  selectedItem == null ? placeholder : cbName(selectedItem);
+              final defaultName = selectedItem == null ? placeholder : cbName(selectedItem);
 
               return builder?.call(controller, selectedItem) ??
                   OutlinedButton(
@@ -114,8 +122,7 @@ class NMenuAnchor<E> extends StatelessWidget {
                       // shape: StadiumBorder(),
                       tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                       // minimumSize: Size(64, 32),
-                      padding:
-                          EdgeInsets.only(left: 8, right: 2, top: 6, bottom: 6),
+                      padding: EdgeInsets.only(left: 8, right: 2, top: 6, bottom: 6),
                       foregroundColor: Colors.black87,
                     ),
                     onPressed: () {

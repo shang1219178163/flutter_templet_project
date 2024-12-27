@@ -53,8 +53,7 @@ class AssetUploadButton extends StatefulWidget {
   _AssetUploadButtonState createState() => _AssetUploadButtonState();
 }
 
-class _AssetUploadButtonState extends State<AssetUploadButton>
-    with AutomaticKeepAliveClientMixin {
+class _AssetUploadButtonState extends State<AssetUploadButton> with AutomaticKeepAliveClientMixin {
   /// 防止触发多次上传动作
   var _isLoading = false;
 
@@ -89,7 +88,12 @@ class _AssetUploadButtonState extends State<AssetUploadButton>
     Widget img = Image(image: "img_placeholder.png".toAssetImage());
     if (widget.model.url?.startsWith("http") == true) {
       final imgUrl = widget.model.url ?? "";
-      img = widget.imgBuilder?.call(imgUrl) ?? NNetworkImage(url: imgUrl);
+      img = widget.imgBuilder?.call(imgUrl) ??
+          NNetworkImage(
+            url: imgUrl,
+            fit: BoxFit.cover,
+            radius: widget.radius,
+          );
     }
 
     if (widget.model.file != null) {
@@ -180,8 +184,7 @@ class _AssetUploadButtonState extends State<AssetUploadButton>
           return const SizedBox();
         }
 
-        final showPercent = widget.model.file != null &&
-            (widget.model.file!.lengthSync() > 2 * 1024 * 1024) == true;
+        final showPercent = widget.model.file != null && (widget.model.file!.lengthSync() > 2 * 1024 * 1024) == true;
 
         final desc = showPercent ? value.toStringAsPercent(2) : "上传中";
 
@@ -292,9 +295,7 @@ class _AssetUploadButtonState extends State<AssetUploadButton>
       }
       final isImage = (widget.model.entity!.type == AssetType.image);
 
-      final fileNew = isImage
-          ? ImageService().compressAndGetFile(file)
-          : VideoService.compressVideo(file);
+      final fileNew = isImage ? ImageService().compressAndGetFile(file) : VideoService.compressVideo(file);
       // return ImageService().compressAndGetFile(file);
       return fileNew;
     }).then((file) {

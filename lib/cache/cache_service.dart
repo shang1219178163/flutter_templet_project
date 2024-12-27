@@ -6,36 +6,67 @@ import 'package:flutter_templet_project/model/tag_detail_model.dart';
 import 'package:flutter_templet_project/network/RequestConfig.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-/// 请求环境信息缓存
-const String CACHE_REQUEST_ENV = "CACHE_REQUEST_ENV";
+// /// 请求环境信息缓存
+// const String CACHE_REQUEST_ENV = "CACHE_REQUEST_ENV";
+//
+// const String CACHE_REQUEST_ENV_DEV_ORIGIN = "CACHE_REQUEST_ENV_DEV_ORIGIN";
+//
+// /// 请求错误缓存
+// const String CACHE_REQUEST_ERROR = "CACHE_REQUEST_ERROR";
+//
+// /// 缓存app 名称
+// const String CACHE_APP_NAME = "CACHE_APP_NAME"; // 医链执业版
+// /// 缓存app 版本号
+// const String CACHE_APP_VERSION = "CACHE_APP_VERSION"; // 1.0.0
+// /// 缓存app 包名 - com.yilian.ylHealthApp
+// const String CACHE_APP_PACKAGE_NAME = "CACHE_APP_PACKAGE_NAME";
+//
+// const String CACHE_TOKEN = "CACHE_TOKEN";
+//
+// /// 缓存用户登录账号
+// const String CACHE_USER_LOGIN_NAME = "USER_LOGIN_NAME";
+//
+// /// 缓存用户登录账号密码
+// const String CACHE_USER_LOGIN_PWD = "USER_LOGIN_PWD";
+//
+// /// 用户信息 key
+// const String CACHE_USER_ID = "CACHE_USER_ID";
+//
+// const String CACHE_TAG_ROOT_MODEL = "CACHE_TAG_ROOT_MODEL";
+//
+// /// 账号列表缓存
+// const String CACHE_ACCOUNT_List = "CACHE_ACCOUNT_List";
 
-const String CACHE_REQUEST_ENV_DEV_ORIGIN = "CACHE_REQUEST_ENV_DEV_ORIGIN";
+/// CacheService 阎村key
+enum CacheKey {
+  requestEnv(name: "requestEnv", needLogin: false, desc: "请求环境"),
+  requestEnvDevOrigin(name: "requestEnvDevOrigin", needLogin: false, desc: "请求环境(dev)"),
+  requestError(name: "requestError", needLogin: false, desc: "请求错误缓存"),
+  appName(name: "appName", needLogin: false, desc: "App名称"), //医链执业版
+  appVersion(name: "appVersion", needLogin: false, desc: "App版本号"),
+  appPackageName(name: "appPackageName", needLogin: false, desc: "App包名Com.Yilian.Ylhealthapp"),
+  token(name: "token", needLogin: false, desc: "token"),
+  loginAccount(name: "loginAccount", needLogin: false, desc: "用户登录账号"),
+  loginPwd(name: "loginPwd", needLogin: false, desc: "账号密码"),
+  userId(name: "userId", needLogin: true, desc: "用户id"),
+  tagRootModel(name: "tagRootModel", needLogin: true, desc: "标签缓存"),
+  accountList(name: "accountList", needLogin: false, desc: "账号列表");
 
-/// 请求错误缓存
-const String CACHE_REQUEST_ERROR = "CACHE_REQUEST_ERROR";
+  const CacheKey({
+    required this.name,
+    required this.desc,
+    required this.needLogin,
+  });
 
-/// 缓存app 名称
-const String CACHE_APP_NAME = "CACHE_APP_NAME"; // 医链执业版
-/// 缓存app 版本号
-const String CACHE_APP_VERSION = "CACHE_APP_VERSION"; // 1.0.0
-/// 缓存app 包名 - com.yilian.ylHealthApp
-const String CACHE_APP_PACKAGE_NAME = "CACHE_APP_PACKAGE_NAME";
+  /// 缓存name
+  final String name;
 
-const String CACHE_TOKEN = "CACHE_TOKEN";
+  /// 当前枚举对应的 描述文字
+  final String desc;
 
-/// 缓存用户登录账号
-const String CACHE_USER_LOGIN_NAME = "USER_LOGIN_NAME";
-
-/// 缓存用户登录账号密码
-const String CACHE_USER_LOGIN_PWD = "USER_LOGIN_PWD";
-
-/// 用户信息 key
-const String CACHE_USER_ID = "CACHE_USER_ID";
-
-const String CACHE_TAG_ROOT_MODEL = "CACHE_TAG_ROOT_MODEL";
-
-/// 账号列表缓存
-const String CACHE_ACCOUNT_List = "CACHE_ACCOUNT_List";
+  /// 仅登录可用
+  final bool needLogin;
+}
 
 class CacheService {
   CacheService._() {
@@ -78,6 +109,16 @@ class CacheService {
   Future<bool> remove(String key) {
     _memoryMap.remove(key);
     return prefs.remove(key);
+  }
+
+  /// 退出登录时清除
+  Future<bool>? clear() async {
+    for (final e in CacheKey.values) {
+      if (e.needLogin) {
+        await remove(e.name);
+      }
+    }
+    return true;
   }
 
   /// 动态值
@@ -258,13 +299,15 @@ class CacheService {
   }
 
   /// 更新
-  FutureOr<bool> updateMap({
+  Future<Map<String, dynamic>> updateMap({
     required String key,
     required Map<String, dynamic> Function(Map<String, dynamic> v) onUpdate,
-  }) {
+  }) async {
     final map = CacheService().getMap(key) ?? <String, dynamic>{};
-    onUpdate(map);
-    return CacheService().setMap(key, map);
+    final mapNew = onUpdate(map ?? {});
+    await CacheService().setMap(key, mapNew);
+    final mapAfter = CacheService().getMap(key) ?? {};
+    return mapAfter;
   }
 
   /// 标签
@@ -272,13 +315,13 @@ class CacheService {
     if (model == null) {
       return;
     }
-    _memoryMap[CACHE_TAG_ROOT_MODEL] = model.toJson();
-    CacheService().setMap(CACHE_TAG_ROOT_MODEL, model.toJson());
+    _memoryMap[CacheKey.tagRootModel.name] = model.toJson();
+    CacheService().setMap(CacheKey.tagRootModel.name, model.toJson());
   }
 
   TagsRootModel? get tagsRootModel {
-    final val = _memoryMap[CACHE_TAG_ROOT_MODEL];
-    final json = val ?? CacheService().getMap(CACHE_TAG_ROOT_MODEL);
+    final val = _memoryMap[CacheKey.tagRootModel.name];
+    final json = val ?? CacheService().getMap(CacheKey.tagRootModel.name);
     if (json == null) {
       return null;
     }
@@ -290,12 +333,12 @@ class CacheService {
 extension CacheServiceExt on CacheService {
   /// 清除缓存数据
   Future<bool>? clear() async {
-    final env = CacheService().getString(CACHE_REQUEST_ENV);
+    final env = CacheService().getString(CacheKey.requestEnv.name);
 
     final isClear = await prefs.clear();
     debugPrint("isClear: $isClear");
 
-    CacheService().setString(CACHE_REQUEST_ENV, env);
+    CacheService().setString(CacheKey.requestEnv.name, env);
 
     return Future.value(true);
   }
@@ -315,13 +358,13 @@ extension CacheServiceExt on CacheService {
 
   List<String> get noClearKeys {
     return [
-      CACHE_REQUEST_ENV,
+      CacheKey.requestEnv.name,
     ];
   }
 
   /// 清除登录环境
   clearEnv() {
-    CacheService().remove(CACHE_REQUEST_ENV);
+    CacheService().remove(CacheKey.requestEnv.name);
   }
 
   /// 设置登录环境
@@ -330,12 +373,12 @@ extension CacheServiceExt on CacheService {
       return;
     }
     final result = val.toString();
-    CacheService().setString(CACHE_REQUEST_ENV, result);
+    CacheService().setString(CacheKey.requestEnv.name, result);
   }
 
   /// 获取登录环境
   APPEnvironment? get env {
-    final result = CacheService().getString(CACHE_REQUEST_ENV);
+    final result = CacheService().getString(CacheKey.requestEnv.name);
     final val = APPEnvironment.fromString(result);
     return val;
   }
@@ -345,27 +388,27 @@ extension CacheServiceExt on CacheService {
     if (val == null || val.isEmpty) {
       return;
     }
-    CacheService().setString(CACHE_REQUEST_ENV_DEV_ORIGIN, val);
+    CacheService().setString(CacheKey.requestEnvDevOrigin.name, val);
   }
 
   /// 获取登录环境 dev 下的域名
   String? get devOrigin {
-    return CacheService().getString(CACHE_REQUEST_ENV_DEV_ORIGIN);
+    return CacheService().getString(CacheKey.requestEnvDevOrigin.name);
   }
 
   /// 医链执业版
   String? get appName {
-    return CacheService().getString(CACHE_APP_NAME);
+    return CacheService().getString(CacheKey.appName.name);
   }
 
   /// 1.0.0
   String? get appVersion {
-    return CacheService().getString(CACHE_APP_VERSION);
+    return CacheService().getString(CacheKey.appVersion.name);
   }
 
   /// com.yilian.ylHealthApp
   String? get packageName {
-    return CacheService().getString(CACHE_APP_PACKAGE_NAME);
+    return CacheService().getString(CacheKey.appPackageName.name);
   }
 
   /// 设置 token
@@ -373,12 +416,12 @@ extension CacheServiceExt on CacheService {
     if (val == null || val.isEmpty) {
       return;
     }
-    CacheService().setString(CACHE_TOKEN, val);
+    CacheService().setString(CacheKey.token.name, val);
   }
 
   /// 获取token
   String? get token {
-    return CacheService().getString(CACHE_TOKEN);
+    return CacheService().getString(CacheKey.token.name);
   }
 
   /// 是否是登录状态
@@ -389,16 +432,16 @@ extension CacheServiceExt on CacheService {
   }
 
   /// 设置登录账号
-  set loginId(String? val) {
+  set loginAccount(String? val) {
     if (val == null || val.isEmpty) {
       return;
     }
-    CacheService().setString(CACHE_USER_LOGIN_NAME, val);
+    CacheService().setString(CacheKey.loginAccount.name, val);
   }
 
   /// 获取登录账号
-  String? get loginId {
-    return CacheService().getString(CACHE_USER_LOGIN_NAME);
+  String? get loginAccount {
+    return CacheService().getString(CacheKey.loginAccount.name);
   }
 
   /// 设置 登录账号密码
@@ -406,16 +449,16 @@ extension CacheServiceExt on CacheService {
     if (val == null || val.isEmpty) {
       return;
     }
-    CacheService().setString(CACHE_USER_LOGIN_PWD, val);
+    CacheService().setString(CacheKey.loginPwd.name, val);
   }
 
   /// 获取登录账号密码
   String? get loginPwd {
-    return CacheService().getString(CACHE_USER_LOGIN_PWD);
+    return CacheService().getString(CacheKey.loginPwd.name);
   }
 
   /// 获取用户id
   String? get userID {
-    return CacheService().getString(CACHE_USER_ID);
+    return CacheService().getString(CacheKey.userId.name);
   }
 }

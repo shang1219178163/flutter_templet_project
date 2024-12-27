@@ -17,7 +17,7 @@ enum NFileType {
   unknown("未知", []),
   image("图片", ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp', 'heic']),
   video("视频", ["mp4", "avi", "wmv", "rmvb", "mpg", "mpeg", "mov", "3gp"]),
-  audio("音频", ["mp3", "wav", "wma", "amr", "ogg"]),
+  audio("音频", ["mp3", "wav", "wma", "amr", "ogg", "m4a"]),
   document('文档', ['doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'pdf']),
   doc("word文档", ["doc", "docx"]),
   excel("excel文档", ["xls", "xlsx"]),
@@ -108,8 +108,7 @@ extension FileIntExt on int {
     final kb = length / 1024;
     final mb = kb / 1024;
 
-    final result =
-        kb > 1024 ? '${mb.toStringAsFixed(2)}MB' : "${kb.toStringAsFixed(0)}kb";
+    final result = kb > 1024 ? '${mb.toStringAsFixed(2)}MB' : "${kb.toStringAsFixed(0)}kb";
     return result;
   }
 

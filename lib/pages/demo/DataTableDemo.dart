@@ -15,6 +15,7 @@ import 'package:flutter_templet_project/extension/list_ext.dart';
 import 'package:flutter_templet_project/extension/map_ext.dart';
 import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/extension/object_ext.dart';
+import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/mixin/selectable_mixin.dart';
 import 'package:flutter_templet_project/model/user_model.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
@@ -22,8 +23,8 @@ import 'package:tuple/tuple.dart';
 
 final titles = [
   (title: "姓名", key: "name"),
-  (title: "性别", key: "sex"),
   (title: "年龄", key: "age"),
+  (title: "性别", key: "sex"),
   (title: '出生年份', key: "birdthYear"),
   (title: '描述', key: "desc"),
 ];
@@ -32,8 +33,8 @@ List<UserModel> models = [
   ...List.generate(120, (i) {
     // final name = "name$i";
     final name = "${1.generateList(items: ["张三", "赵四", "王五", "李六"])}$i";
-    final sex = [0, 1].randomOne == 1 ? "男" : "女";
     final age = IntExt.random(max: 100);
+    final sex = [0, 1].randomOne == 1 ? "男" : "女";
     final birdthYear = IntExt.random(min: 1990, max: 2024);
     final birthMonth = 1.generateList(
         items: "子（鼠）、丑（牛）、寅（虎）、卯（兔）、辰（龙）、巳"
@@ -78,18 +79,15 @@ class _DataTableDemoState extends State<DataTableDemo> {
   final children = <int, Widget>{
     0: Container(
       padding: EdgeInsets.all(8),
-      child:
-          Text("Item 1", style: TextStyle(fontSize: 15, color: Colors.black)),
+      child: Text("Item 1", style: TextStyle(fontSize: 15, color: Colors.black)),
     ),
     1: Container(
       padding: EdgeInsets.all(8),
-      child:
-          Text("Item 2", style: TextStyle(fontSize: 15, color: Colors.black)),
+      child: Text("Item 2", style: TextStyle(fontSize: 15, color: Colors.black)),
     ),
     2: Container(
       padding: EdgeInsets.all(8),
-      child:
-          Text("Item 3", style: TextStyle(fontSize: 15, color: Colors.black)),
+      child: Text("Item 3", style: TextStyle(fontSize: 15, color: Colors.black)),
     ),
   };
 
@@ -126,8 +124,7 @@ class _DataTableDemoState extends State<DataTableDemo> {
                 .map((e) => DataColumn(
                       label: Text(e.title),
                       onSort: (int columnIndex, bool ascending) {
-                        _changeSort(
-                            columnIndex: columnIndex, ascending: ascending);
+                        _changeSort(columnIndex: columnIndex, ascending: ascending);
                       },
                     ))
                 .toList(),
@@ -142,14 +139,14 @@ class _DataTableDemoState extends State<DataTableDemo> {
                       ],
                       selected: e.isSelected,
                       onSelectChanged: (bool? value) {
-                        if (value == null) return;
+                        if (value == null) {
+                          return;
+                        }
                         setState(() {
                           e.isSelected = value;
                         });
-                        ddlog(models
-                            .where((e) => e.isSelected == true)
-                            .map((e) => "${e.name}_${e.isSelected}")
-                            .toList());
+                        ddlog(
+                            models.where((e) => e.isSelected == true).map((e) => "${e.name}_${e.isSelected}").toList());
                       },
                     ))
                 .toList(),
@@ -166,29 +163,23 @@ class _DataTableDemoState extends State<DataTableDemo> {
 
       switch (columnIndex) {
         case 1:
-          models.sortedByValue(ascending: ascending, cb: (obj) => obj.age);
+          models.sortedByValue(ascending: ascending, cb: (obj) => obj.age?.toString());
           break;
 
         case 2:
-          models.sortedByValue(ascending: ascending, cb: (obj) => obj.sex);
+          models.sortedByValue(ascending: ascending, cb: (obj) => obj.sex?.toString());
           break;
 
         case 3:
-          models.sortedByValue(
-              ascending: ascending, cb: (obj) => obj.birthYear);
+          models.sortedByValue(ascending: ascending, cb: (obj) => obj.birthYear?.toString());
           break;
 
         case 4:
-          models.sortedByValue(ascending: ascending, cb: (obj) => obj.desc);
+          models.sortedByValue(ascending: ascending, cb: (obj) => obj.desc?.toString());
           break;
 
         default:
-          // if (ascending) {
-          //   models.sort((a, b) => a.name!.compareTo(b.name!));
-          // } else {
-          //   models.sort((a, b) => b.name!.compareTo(a.name!));
-          // }
-          models.sortedByValue(ascending: ascending, cb: (obj) => obj.name);
+          models.sortedByValue(ascending: ascending, cb: (obj) => obj.name?.toString());
           break;
       }
     });
@@ -200,8 +191,8 @@ class PaginatedDataTableDemo extends StatelessWidget {
 
   final titles = [
     (title: "姓名", key: "name"),
-    (title: "性别", key: "sex"),
-    (title: "年龄", key: "age"),
+    (title: "年龄", key: "sex"),
+    (title: "性别", key: "age"),
     (title: '出生年份', key: "birdthYear"),
     (title: '描述', key: "desc"),
   ];
@@ -294,4 +285,27 @@ class _DataSource<E extends SelectableMixin> extends DataTableSource {
 
   @override
   int get selectedRowCount => _selectedCount;
+}
+
+extension ListExtObject<E extends Object> on List<E> {
+  /// 排序
+  List<E> sortedByValue({bool ascending = true, required String? Function(E e) cb}) {
+    if (ascending) {
+      // this.sort((a, b) => cb(a).compareTo(cb(b)));
+      sort((a, b) => _customeCompare(cb(a), cb(b)));
+    } else {
+      // this.sort((a, b) => cb(b).compareTo(cb(a)));
+      sort((a, b) => _customeCompare(cb(b), cb(a)));
+    }
+    return this;
+  }
+
+  /// 处理字符串中包含数字排序异常的问题
+  int _customeCompare(String? a, String? b) {
+    if (a == null || b == null) {
+      return -1;
+    }
+    final result = (a ?? "").compareContainInt(b ?? "");
+    return result;
+  }
 }

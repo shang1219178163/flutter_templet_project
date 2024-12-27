@@ -13,7 +13,7 @@ class NAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.title,
     this.centerTitle = true,
     this.actions,
-    this.backgroundColor = bgColorF3F3F3,
+    this.backgroundColor,
     this.titleSpacing,
     this.bottom,
     this.leading,
@@ -50,19 +50,15 @@ class NAppBar extends StatelessWidget implements PreferredSizeWidget {
   final AppBar Function(AppBar appBar)? copyBuilder;
 
   @override
-  Size get preferredSize =>
-      Size.fromHeight(toolbarHeight + (bottom?.preferredSize.height ?? 0.0));
+  Size get preferredSize => Size.fromHeight(toolbarHeight + (bottom?.preferredSize.height ?? 0.0));
 
   @override
   Widget build(BuildContext context) {
+    final iconColor = AppBarTheme.of(context).iconTheme?.color;
     // 默认标题
     final defaultTitle = Text(
       titleStr.toShort(),
-      style: TextStyle(
-        fontSize: 18,
-        fontWeight: FontWeight.w500,
-        color: fontColor,
-      ),
+      style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: iconColor),
       maxLines: 1,
     );
 
@@ -77,11 +73,7 @@ class NAppBar extends StatelessWidget implements PreferredSizeWidget {
             Navigator.of(context).pop();
           }
         },
-        icon: Icon(
-          Icons.arrow_back_ios_new_outlined,
-          color: fontColor,
-          size: 18,
-        ),
+        icon: Icon(Icons.arrow_back_ios_new_outlined, color: iconColor, size: 18),
       ),
     );
 

@@ -8,13 +8,12 @@
 
 import 'dart:convert';
 
-import 'package:flutter_templet_project/basicWidget/n_picker_request_list_box'
-    '.dart';
+import 'package:flutter_templet_project/basicWidget/n_pick_request_list_box.dart';
 import 'package:flutter_templet_project/model/tag_detail_model.dart';
 import 'package:flutter_templet_project/network/api/tag_list_api.dart';
 
 /// 网络选择盒子
-class PickerDrugBox extends NPickerRequestListBox {
+class PickerDrugBox extends NPickRequestListBox {
   PickerDrugBox({
     super.key,
     super.title,
@@ -38,7 +37,7 @@ class PickerDrugBox extends NPickerRequestListBox {
             return list;
           },
           cbName: (e) => e.name,
-          equal: (items, b) {
+          selected: (items, b) {
             return false;
 
             final result = items.map((e) => e.id).contains(b?.id);

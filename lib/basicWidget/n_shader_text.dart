@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 
-/// @author[yilian]
-/// @version[创建日期，2024/4/7 10:20]
-/// @function[渐变文字效果 ]
-
+/// 渐变文字效果
 class NShaderText extends StatelessWidget {
   const NShaderText({
     super.key,

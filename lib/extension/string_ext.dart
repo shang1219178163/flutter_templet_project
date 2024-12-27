@@ -11,14 +11,6 @@ import 'dart:typed_data';
 import 'package:flutter/cupertino.dart';
 
 extension StringExt on String {
-  static bool isEmpty(String? val) {
-    return val == null || val.isEmpty;
-  }
-
-  static bool isNotEmpty(String? val) {
-    return val != null && val.isNotEmpty;
-  }
-
   ///运算符重载
   bool operator >(String val) {
     return compareTo(val) == 1;
@@ -53,20 +45,22 @@ extension StringExt on String {
     return result;
   }
 
-  // /// 添加前缀后缀
-  // String padding({
-  //   String prefix = "",
-  //   String suffix = "",
-  // }) {
-  //   var result = this;
-  //   if (!result.startsWith(prefix)) {
-  //     result = "$prefix$result";
-  //   }
-  //   if (!result.endsWith(suffix)) {
-  //     result = "$result$suffix";
-  //   }
-  //   return result;
-  // }
+  /// 通过步长切割字符串
+  ///
+  /// from - 开始索引,默认 0
+  /// to - 结束索引, 默认总长
+  /// by - 每次分割最大长度,默认1
+  List<String> splitStride({int from = 0, int? to, int by = 1}) {
+    final count = to ?? length;
+
+    var result = <String>[];
+    for (var i = from; i < count; i += by) {
+      var end = (i + by) < count ? (i + by) : count;
+      result.add(substring(i, end));
+    }
+
+    return result;
+  }
 
   /// 转类型 T
   T? tryJsonDecode<T>({Object? Function(Object? key, Object? value)? reviver}) {
@@ -80,8 +74,7 @@ extension StringExt on String {
   }
 
   /// 转 Map<String, dynamic>
-  Map<String, dynamic>? decodeMap(
-      {Object? Function(Object? key, Object? value)? reviver}) {
+  Map<String, dynamic>? decodeMap({Object? Function(Object? key, Object? value)? reviver}) {
     return tryJsonDecode<Map<String, dynamic>>(reviver: reviver);
   }
 
@@ -99,8 +92,7 @@ extension StringExt on String {
 
   /// 图片名称转 AssetImage
   AssetImage toAssetImage({AssetBundle? bundle, String? package}) {
-    final assetName =
-        startsWith("assets/images/") ? this : "assets/images/$this";
+    final assetName = startsWith("assets/images/") ? this : "assets/images/$this";
     return AssetImage(assetName, bundle: bundle, package: package);
   }
 
@@ -152,9 +144,7 @@ extension StringExt on String {
     var reg = RegExp(r'[A-Z]');
     return split("").map((e) {
       final i = indexOf(e);
-      return e.contains(reg)
-          ? "${i == 0 ? "" : separator}${e.toLowerCase()}"
-          : e;
+      return e.contains(reg) ? "${i == 0 ? "" : separator}${e.toLowerCase()}" : e;
     }).join("");
   }
 
@@ -163,6 +153,26 @@ extension StringExt on String {
     var pattern = set.map((d) => RegExp.escape(d)).join('|');
     var parts = split(RegExp(pattern, multiLine: true));
     return parts;
+  }
+
+  /// 填满一行
+  String filledLine({
+    required int maxLength,
+    String fill = ' ',
+    Alignment alignment = Alignment.center,
+  }) {
+    String text = this;
+
+    final fillCount = maxLength - text.length;
+    final left = List.filled(fillCount ~/ 2, fill);
+    final right = List.filled(fillCount - left.length, fill);
+    var result = left.join() + text + right.join();
+    if (alignment.x < 0) {
+      result = text + left.join() + right.join();
+    } else if (alignment.x > 0) {
+      result = left.join() + right.join() + text;
+    }
+    return result;
   }
 
   /// 字符串版本对比
@@ -208,7 +218,7 @@ extension StringExt on String {
   }
 
   /// 处理字符串中包含数字排序异常的问题
-  int compareCustom(String b) {
+  int compareContainInt(String b) {
     var a = this;
 
     // var regInt = RegExp(r"[0-9]");
@@ -256,10 +266,21 @@ extension StringExt on String {
 }
 
 extension StringNullableExt on String? {
-  /// 赋予默认值
-  String get orEmpty {
-    return this ?? "";
+  /// 字符串为空
+  bool get isEmpty => (this ?? "").isEmpty;
+
+  /// 字符串不为空
+  bool get isNotEmpty => (this ?? "").isNotEmpty;
+
+  /// 转 double
+  double? toDouble() {
+    final result = double.tryParse(this ?? "");
+    return result;
   }
 
-  bool get isNotEmptyNew => (this ?? "").isNotEmpty;
+  /// 转 int
+  int? toInt() {
+    final result = int.tryParse(this ?? "");
+    return result;
+  }
 }

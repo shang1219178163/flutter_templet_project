@@ -47,10 +47,10 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 上传 develop 版本, to: pgy/fir
 
-### ios test
+### ios archive
 
 ```sh
-[bundle exec] fastlane ios test
+[bundle exec] fastlane ios archive
 ```
 
 [通用]发布新版本到 AppStore
@@ -63,19 +63,9 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 上传ipad 到 Pgyer
 
-更新BuildVersion
-
 webhook 钉钉
 
 推送通知到slack
-
-测试
-
-### ios archive
-
-```sh
-[bundle exec] fastlane ios archive
-```
 
 archive sign: develop/release, to: pgy/fir/release, target: A/B/C
 
@@ -86,6 +76,22 @@ archive sign: develop/release, to: pgy/fir/release, target: A/B/C
 ```
 
 upload sign: develop/release, to:pgy/fir/release, target: A/B/C
+
+### ios dir
+
+```sh
+[bundle exec] fastlane ios dir
+```
+
+
+
+### ios test
+
+```sh
+[bundle exec] fastlane ios test
+```
+
+测试
 
 ----
 

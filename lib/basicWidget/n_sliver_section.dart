@@ -48,7 +48,7 @@ class _NSliverSectionState<T> extends State<NSliverSection<T>> {
   Widget build(BuildContext context) {
     return SliverMainAxisGroup(
       slivers: [
-        NSliverPersistentHeader(
+        NSliverPersistentHeaderBuilder(
           pinned: true,
           min: widget.headerHeight,
           max: widget.headerHeight,

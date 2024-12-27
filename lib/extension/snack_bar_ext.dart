@@ -16,6 +16,7 @@ extension SnackBarExt<T extends StatefulWidget> on State<T> {
   ScaffoldMessengerState get scaffoldMessenger =>
       ScaffoldMessenger.of(Get.context ?? context);
 
+  /// 当前 snackBar 堆栈
   List<Widget> get snackBars => _snackBars;
 
   /// 清除 SnackBar

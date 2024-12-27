@@ -158,7 +158,15 @@ extension ScrollMetricsExt on ScrollMetrics {
   //底部
   bool get isEnd => atEdge && extentAfter <= 0;
   //滚动进度
-  double get progress => pixels / maxScrollExtent;
+  double get progress {
+    try {
+      return pixels / maxScrollExtent;
+    } catch (e) {
+      debugPrint("$this $e");
+    }
+    return 0;
+  }
+
   //滚动进度
   String get progressPerecent => "${(progress * 100).toInt()}%";
 }

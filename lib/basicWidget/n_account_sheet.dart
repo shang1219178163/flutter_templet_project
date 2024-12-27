@@ -14,8 +14,6 @@ import 'package:flutter_templet_project/cache/file_manager.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 
-final cacheKey = CACHE_ACCOUNT_List;
-
 /// 账号选择器
 class NAccountSheet extends StatefulWidget {
   const NAccountSheet({
@@ -47,6 +45,8 @@ class NAccountSheet extends StatefulWidget {
 }
 
 class _NAccountSheetState extends State<NAccountSheet> {
+  final cacheKey = CacheKey.accountList.name;
+
   late List<MapEntry<String, dynamic>> items = widget.items;
 
   late MapEntry<String, dynamic>? current = items.isEmpty ? null : items.first;
@@ -185,6 +185,8 @@ class _NAccountSheetState extends State<NAccountSheet> {
 
 class NAccountSheetController {
   _NAccountSheetState? _anchor;
+
+  String get cacheKey => CacheKey.accountList.name;
 
   void _attach(_NAccountSheetState anchor) {
     _anchor = anchor;

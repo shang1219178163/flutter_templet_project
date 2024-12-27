@@ -26,17 +26,6 @@ class _OverlayDemoOneState extends State<OverlayDemoOne> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
-        actions: [
-          'done',
-        ]
-            .map((e) => TextButton(
-                  child: Text(
-                    e,
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  onPressed: () => debugPrint(e),
-                ))
-            .toList(),
       ),
       body: buildBody(),
     );
@@ -84,8 +73,7 @@ class _OverlayDemoOneState extends State<OverlayDemoOne> {
       double dx = 110.0;
       double dy = 110.0;
 
-      if ((offset.dx > 0) &&
-          ((offset.dx + overlayWidth) < ScreenUtil().screenWidth)) {
+      if ((offset.dx > 0) && ((offset.dx + overlayWidth) < ScreenUtil().screenWidth)) {
         dx = offset.dx;
       } else if ((offset.dx + overlayWidth) >= ScreenUtil().screenWidth) {
         dx = ScreenUtil().screenWidth - overlayWidth;
@@ -93,8 +81,7 @@ class _OverlayDemoOneState extends State<OverlayDemoOne> {
         dx = 0;
       }
 
-      if ((offset.dy > 0) &&
-          ((offset.dy + overlayWidth) < ScreenUtil().screenHeight)) {
+      if ((offset.dy > 0) && ((offset.dy + overlayWidth) < ScreenUtil().screenHeight)) {
         dy = offset.dy;
       } else if ((offset.dy + overlayWidth) >= ScreenUtil().screenHeight) {
         dy = ScreenUtil().screenWidth - overlayWidth;
@@ -106,17 +93,25 @@ class _OverlayDemoOneState extends State<OverlayDemoOne> {
         top: dy,
         left: dx,
         child: Draggable(
-          feedback: _contentBody(),
-          child: _contentBody(),
-          childWhenDragging: Container(), //拖动过程回调
+          feedback: feedback(),
+          childWhenDragging: childWhenDragging(), //拖动过程回调
           onDraggableCanceled: (Velocity velocity, Offset offset) {
             this.offset = offset;
             setState(() {});
           },
+          child: _contentBody(),
         ),
       );
     });
     return overlayEntry;
+  }
+
+  Widget childWhenDragging() {
+    return Container(
+      color: Colors.blueAccent,
+      width: overlayWidth,
+      height: overlayWidth,
+    );
   }
 
   Widget _contentBody() {
@@ -124,6 +119,14 @@ class _OverlayDemoOneState extends State<OverlayDemoOne> {
       color: Colors.red,
       width: overlayWidth,
       height: overlayWidth,
+    );
+  }
+
+  Widget feedback() {
+    return Container(
+      color: Colors.green,
+      width: overlayWidth * 1.5,
+      height: overlayWidth * 1.5,
     );
   }
 }

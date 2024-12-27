@@ -208,6 +208,9 @@ class _ContainerDemoState extends State<ContainerDemo> {
             title: "ListView.separated",
             child: Container(
               height: 20,
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.blue),
+              ),
               child: ListView.separated(
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (_, i) => children[i],
@@ -218,32 +221,45 @@ class _ContainerDemoState extends State<ContainerDemo> {
           ),
           NSectionBox(
             title: "NFlexSeparated - SizedBox",
-            child: SizedBox(
+            child: Container(
               height: 30,
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.blue),
+              ),
               child: NFlexSeparated(
                 direction: Axis.horizontal,
                 separatedBuilder: (i) {
-                  return separated;
+                  return Container(color: Colors.cyan, width: 12);
+                  // return separated;
                 },
                 children: children,
               ),
             ),
           ),
           NSectionBox(
-            title: "NFlexSeparated - IntrinsicHeight",
-            child: IntrinsicHeight(
-              child: NFlexSeparated(
-                direction: Axis.horizontal,
-                separatedBuilder: (i) {
-                  return separated;
-                },
-                children: children,
+            title: "NFlexSeparated - vertical",
+            child: Container(
+              decoration: BoxDecoration(
+                  // border: Border.all(color: Colors.blue),
+                  ),
+              child: IntrinsicWidth(
+                child: NFlexSeparated(
+                  direction: Axis.vertical,
+                  separatedBuilder: (i) {
+                    return Container(color: Colors.cyan, height: 12);
+                    // return separated;
+                  },
+                  children: children,
+                ),
               ),
             ),
           ),
           NSectionBox(
             title: "NFlexSeparated.spacing",
-            child: IntrinsicHeight(
+            child: Container(
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.blue),
+              ),
               child: NFlexSeparated.spacing(
                 direction: Axis.horizontal,
                 spacing: 30,

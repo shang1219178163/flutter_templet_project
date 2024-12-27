@@ -47,8 +47,7 @@ class AppTabPage extends StatefulWidget {
   _AppTabPageState createState() => _AppTabPageState();
 }
 
-class _AppTabPageState extends State<AppTabPage>
-    with WidgetsBindingObserver, AppLifecycleObserverMixin {
+class _AppTabPageState extends State<AppTabPage> with WidgetsBindingObserver, AppLifecycleObserverMixin {
   final appController = Get.find<AppTabBarController>();
 
   int currentIndex = 0;
@@ -63,11 +62,11 @@ class _AppTabPageState extends State<AppTabPage>
     Tuple2(Tuple2("我的", Icon(Icons.person)), APPUserCenterPage()),
   ];
 
-  late AppLifecycleListener _lifecycleListener;
+  late AppLifecycleListener? _lifecycleListener;
 
   @override
   void dispose() {
-    _lifecycleListener.dispose();
+    _lifecycleListener?.dispose();
     super.dispose();
   }
 

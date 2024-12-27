@@ -6,14 +6,18 @@
 //  Copyright © 2024/5/1 shang. All rights reserved.
 //
 
+import 'dart:developer';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/n_type_writer_text.dart';
 import 'package:flutter_templet_project/cache/cache_service.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
+import 'package:flutter_templet_project/extension/generic_comparable_ext.dart';
 import 'package:flutter_templet_project/extension/list_ext.dart';
 import 'package:flutter_templet_project/extension/num_ext.dart';
+import 'package:flutter_templet_project/extension/service_protocol_info_ext.dart';
 import 'package:flutter_templet_project/extension/type_util.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/map_ext.dart';
@@ -44,16 +48,15 @@ class DataTypeDemo extends StatefulWidget {
   State<DataTypeDemo> createState() => _DataTypeDemoState();
 }
 
-class _DataTypeDemoState extends State<DataTypeDemo>
-    with WidgetsBindingObserver, AppLifecycleStateOriginMixin {
-  bool get hideApp =>
-      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
+class _DataTypeDemoState extends State<DataTypeDemo> with WidgetsBindingObserver, AppLifecycleStateOriginMixin {
+  bool get hideApp => Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
 
   final _scrollController = ScrollController();
 
   late final specialItems = <ActionRecord>[
     (e: "Singleton", action: onSingleton),
     (e: "Equals", action: onEquals),
+    (e: "Comparable", action: onComparable),
   ];
 
   late final items = <ActionRecord>[
@@ -129,8 +132,7 @@ class _DataTypeDemoState extends State<DataTypeDemo>
           ]
               .map(
                 (e) => Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -188,8 +190,7 @@ class _DataTypeDemoState extends State<DataTypeDemo>
     final list1 = ["aaa"];
     final list2 = ["aaa"];
     debugPrint("${DateTime.now()} list ==: ${list1 == list2}");
-    debugPrint(
-        "${DateTime.now()} list listEquals: ${listEquals(list1, list2)}");
+    debugPrint("${DateTime.now()} list listEquals: ${listEquals(list1, list2)}");
 
     final map1 = {"a": "aa"};
     final map2 = {"a": "aa"};
@@ -218,7 +219,35 @@ class _DataTypeDemoState extends State<DataTypeDemo>
     debugPrint("NPerson bob1: ${bob.hashCode1}"); // false
   }
 
-  void onString() {
+  void onComparable() {
+    final now = DateTime.now();
+    final before = now.subtract(Duration(hours: 1));
+    final after = now.add(Duration(hours: 1));
+
+    final d1 = Duration(hours: 1);
+    final d2 = Duration(hours: 2);
+    DLog.d("now: $now");
+    DLog.d("before: $before");
+    DLog.d("after: $after");
+    DLog.d("now.inRange(before, after): ${now.inRange(before, after)}");
+    DLog.d("before.clamp(now, after): ${before.clamp(now, after)}");
+    DLog.d("now > before: ${now > before}");
+    DLog.d("now > after: ${now > after}");
+    DLog.d("d1 > d2: ${d1 > d2}");
+    DLog.d("d1 < d2: ${d1 < d2}");
+
+    // [log] DLog 2024-11-09 09:47:02.634885 now: 2024-11-09 09:47:02.634465
+    // [log] DLog 2024-11-09 09:47:02.635243 before: 2024-11-09 08:47:02.634465
+    // [log] DLog 2024-11-09 09:47:02.635631 after: 2024-11-09 10:47:02.634465
+    // [log] DLog 2024-11-09 09:47:02.635907 now.inRange(before, after): true
+    // [log] DLog 2024-11-09 09:47:02.636189 before.clamp(now, after): 2024-11-09 09:47:02.634465
+    // [log] DLog 2024-11-09 09:47:02.636434 now > before: true
+    // [log] DLog 2024-11-09 09:47:02.636705 now > after: false
+    // [log] DLog 2024-11-09 09:47:02.636899 d1 > d2: false
+    // [log] DLog 2024-11-09 09:47:02.637086 d1 < d2: true
+  }
+
+  Future<void> onString() async {
     final a = 'Eats shoots leaves'.splitMapJoin((RegExp(r'shoots')),
         onMatch: (m) => m[0] ?? "", // (or no onMatch at all)
         onNonMatch: (n) => '*'); // Result: "*shoots*"
@@ -253,9 +282,7 @@ class _DataTypeDemoState extends State<DataTypeDemo>
     showSnackBar(SnackBar(content: Text(d2)));
 
     int j = 0; //第n次匹配
-    String pigLatin(String words) =>
-        words.replaceAllMapped(RegExp(r'([a|e])', caseSensitive: false),
-            (Match m) {
+    String pigLatin(String words) => words.replaceAllMapped(RegExp(r'([a|e])', caseSensitive: false), (Match m) {
           for (var i = 0; i < m.groupCount; i++) {
             ddlog("${j}_m[${i}]/${m.groupCount - 1}: ${m[i]}");
             j++;
@@ -272,10 +299,12 @@ class _DataTypeDemoState extends State<DataTypeDemo>
     String? a3;
     String? a4 = "a4";
     final resultA = a1.or("") + a2.or("") + a3.or("") + a4.or("");
-    final resultB = a1.orEmpty + a2.orEmpty + a3.orEmpty + a4.orEmpty;
+    final resultB = [a1, a2, a3, a4].map((e) => e ?? "").toList();
     final resultC = [a1, a2, a3, a4].removeNull();
 
-    ddlog("a1.isNotEmptyNew: ${a1.isNotEmptyNew}");
+    a1.isNotEmpty;
+
+    ddlog("a1.isNotEmptyNew: ${a1.isNotEmpty}");
     return;
 
     // String a5 = a4.or(Text(e));
@@ -300,6 +329,9 @@ class _DataTypeDemoState extends State<DataTypeDemo>
     String strZero = "000123450";
     String resultZero = strZero.replaceFirst(RegExp(r'^0+'), '');
     debugPrint('resultZero: $resultZero');
+
+    final serviceInfo = await Service.getInfo();
+    serviceInfo.printIsarConnection();
   }
 
   void onDate() {
@@ -354,6 +386,15 @@ class _DataTypeDemoState extends State<DataTypeDemo>
       return "选项$sufix";
     });
     ddlog("randomItems.sorted(): ${randomItems.sorted()}");
+
+    final strides = List.generate(20, (index) => "选项$index").splitStride(
+      by: 4,
+      onItem: (start, end, items) {
+        debugPrint("splitStride onItem $start $end: ${items[start]}, ${items[end]}");
+        return items.getRange(start, end);
+      },
+    );
+    ddlog("strides: ${strides}");
   }
 
   void onSet() {}
@@ -473,12 +514,7 @@ class _DataTypeDemoState extends State<DataTypeDemo>
     ddlog([a.runtimeType, a1.runtimeType, array.runtimeType].asMap());
 
     const String? b = null;
-    ddlog([
-      a.orElse(() => "456"),
-      b.or("333"),
-      a.convert((v) => Text("$a")),
-      b.convert((v) => Text("$b"))
-    ].asMap());
+    ddlog([a.orElse(() => "456"), b.or("333"), a.convert((v) => Text("$a")), b.convert((v) => Text("$b"))].asMap());
 
     final Text? z = a.convert((v) => Text("$a"));
 

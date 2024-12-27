@@ -208,8 +208,7 @@ class APPThemeService {
 
   /// 自定义行为
   ButtonStyle buildButtonStyle() {
-    return ButtonStyle(
-        elevation: MaterialStateProperty.resolveWith<double>((states) {
+    return ButtonStyle(elevation: MaterialStateProperty.resolveWith<double>((states) {
       if (states.contains(MaterialState.pressed)) {
         return 0; // 点击时阴影隐藏
       }
@@ -322,14 +321,13 @@ class APPThemeService {
             // thumbColor: e,
             trackColor: MaterialStateProperty.all(e),
           ),
-      bottomNavigationBarTheme:
-          ThemeData.light().bottomNavigationBarTheme.copyWith(
-                type: BottomNavigationBarType.fixed,
-                selectedItemColor: e,
-                selectedIconTheme: IconThemeData(color: e),
-                selectedLabelStyle: const TextStyle(fontSize: 12),
-                unselectedLabelStyle: const TextStyle(fontSize: 12),
-              ),
+      bottomNavigationBarTheme: ThemeData.light().bottomNavigationBarTheme.copyWith(
+            type: BottomNavigationBarType.fixed,
+            selectedItemColor: e,
+            selectedIconTheme: IconThemeData(color: e),
+            selectedLabelStyle: const TextStyle(fontSize: 12),
+            unselectedLabelStyle: const TextStyle(fontSize: 12),
+          ),
       cupertinoOverrideTheme: CupertinoThemeData(
         primaryColor: e,
         // textTheme:
@@ -420,34 +418,34 @@ class NAppTheme extends ThemeExtension<NAppTheme> {
   });
 
   /// 字体颜色
-  final Color? primary;
+  final Color primary;
 
   /// 主色调辅助色(用于渐进色)
-  final Color? primary2;
+  final Color primary2;
 
   /// 背景色
-  final Color? bgColor;
+  final Color bgColor;
 
   /// 标题字体样式
-  final Color? fontColor;
+  final Color fontColor;
 
   /// 标题字体样式
-  final TextStyle? titleStyle;
+  final TextStyle titleStyle;
 
   /// 字体样式
-  final TextStyle? textStyle;
+  final TextStyle textStyle;
 
   /// 取消按钮的那种深红色 cancel 0xFFE65F55
-  final Color? cancelColor;
+  final Color cancelColor;
 
   /// 线条 #E5E5E5
-  final Color? lineColor;
+  final Color lineColor;
 
   /// 边框线条 #E5E5E5
-  final Color? borderColor;
+  final Color borderColor;
 
   /// 禁用状态的颜色 #B3B3B3
-  final Color? disabledColor;
+  final Color disabledColor;
 
   @override
   ThemeExtension<NAppTheme> copyWith({
@@ -477,20 +475,20 @@ class NAppTheme extends ThemeExtension<NAppTheme> {
 
   @override
   ThemeExtension<NAppTheme> lerp(
-    covariant NAppTheme? other,
+    covariant NAppTheme other,
     double t,
   ) =>
       NAppTheme(
-        primary: Color.lerp(primary, other?.primary, t),
-        primary2: Color.lerp(primary2, other?.primary2, t),
-        bgColor: Color.lerp(bgColor, other?.bgColor, t),
-        fontColor: Color.lerp(fontColor, other?.fontColor, t),
-        titleStyle: TextStyle.lerp(titleStyle, other?.titleStyle, t),
-        textStyle: TextStyle.lerp(textStyle, other?.textStyle, t),
-        cancelColor: Color.lerp(cancelColor, other?.cancelColor, t),
-        lineColor: Color.lerp(lineColor, other?.lineColor, t),
-        borderColor: Color.lerp(borderColor, other?.borderColor, t),
-        disabledColor: Color.lerp(disabledColor, other?.disabledColor, t),
+        primary: Color.lerp(primary, other.primary, t) ?? primary,
+        primary2: Color.lerp(primary2, other.primary2, t) ?? primary2,
+        bgColor: Color.lerp(bgColor, other.bgColor, t) ?? bgColor,
+        fontColor: Color.lerp(fontColor, other.fontColor, t) ?? fontColor,
+        titleStyle: TextStyle.lerp(titleStyle, other.titleStyle, t) ?? titleStyle,
+        textStyle: TextStyle.lerp(textStyle, other.textStyle, t) ?? textStyle,
+        cancelColor: Color.lerp(cancelColor, other.cancelColor, t) ?? cancelColor,
+        lineColor: Color.lerp(lineColor, other.lineColor, t) ?? lineColor,
+        borderColor: Color.lerp(borderColor, other.borderColor, t) ?? borderColor,
+        disabledColor: Color.lerp(disabledColor, other.disabledColor, t) ?? disabledColor,
       );
 }
 

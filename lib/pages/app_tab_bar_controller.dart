@@ -64,9 +64,9 @@ class AppTabBarController extends GetxController {
     // String buildNumber = packageInfo.buildNumber;//1
     // debugPrint("packageInfo: ${packageInfo.toString()}");
 
-    await CacheService().setString(CACHE_APP_NAME, info.appName);
-    await CacheService().setString(CACHE_APP_PACKAGE_NAME, info.packageName);
-    await CacheService().setString(CACHE_APP_VERSION, info.version);
+    await CacheService().setString(CacheKey.appName.name, info.appName);
+    await CacheService().setString(CacheKey.appPackageName.name, info.packageName);
+    await CacheService().setString(CacheKey.appVersion.name, info.version);
     _packageInfo = info;
   }
 

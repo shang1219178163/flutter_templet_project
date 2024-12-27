@@ -68,11 +68,7 @@ class _PageViewDemoState extends State<PageViewDemo> {
     padding = const EdgeInsets.all(15),
   }) {
     return LayoutBuilder(builder: (context, constraints) {
-      final pageViewWidth = constraints.maxWidth -
-          margin.left -
-          margin.right -
-          padding.left -
-          padding.right;
+      final pageViewWidth = constraints.maxWidth - margin._left - margin.right - padding._left - padding.right;
       return Container(
         margin: margin,
         padding: padding,
@@ -109,10 +105,7 @@ class _PageViewDemoState extends State<PageViewDemo> {
     );
   }
 
-  Widget pageIndicator(
-      {required int pageCount,
-      required double pageViewWidth,
-      double factor = 0.3}) {
+  Widget pageIndicator({required int pageCount, required double pageViewWidth, double factor = 0.3}) {
     var width = pageViewWidth * factor;
     var itemWidth = width / pageCount;
     return Stack(

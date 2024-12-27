@@ -30,11 +30,8 @@ class ToolUtil {
   // 移除输入框焦点
   static void removeInputFocus() {
     // SystemChannels.textInput.invokeMethod('TextInput.hide');
-    FocusManager.instance.primaryFocus?.unfocus();
-    // 延迟，保证获取到context
-    // Future.delayed(Duration.zero, () {
-    //   FocusScope.of(globalContext).requestFocus(FocusNode());
-    // });
+    FocusScope.of(globalContext).unfocus();
+    FocusManager.instance.primaryFocus?.unfocus(); //（flutter 框架本身持有一个焦点，需要手动失焦）。
   }
 
   // 访问外部链接

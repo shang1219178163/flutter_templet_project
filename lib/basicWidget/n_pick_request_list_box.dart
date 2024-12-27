@@ -15,8 +15,8 @@ import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 
 /// 基于接口的搜索选择列表(子类实现 PickerDrugBox)
-class NPickerRequestListBox<E> extends StatefulWidget {
-  const NPickerRequestListBox({
+class NPickRequestListBox<E> extends StatefulWidget {
+  const NPickRequestListBox({
     super.key,
     this.title = "请选择",
     this.leading,
@@ -24,8 +24,10 @@ class NPickerRequestListBox<E> extends StatefulWidget {
     required this.items,
     required this.onChanged,
     required this.requestList,
+    this.onSelectedTap,
     required this.cbName,
-    required this.equal,
+    required this.selected,
+    this.nameWidget,
     this.itemBuilder,
   });
 
@@ -48,21 +50,25 @@ class NPickerRequestListBox<E> extends StatefulWidget {
   final Future<List<E>> Function(
       bool isRefresh, int pageNo, int pageSize, String? search) requestList;
 
+  /// 选择
+  final E Function(E e)? onSelectedTap;
+
   /// E 转 name
   final String Function(E e) cbName;
 
+  final Widget Function(int index, E e)? nameWidget;
+
   /// 相等对比
-  final bool Function(List<E> items, E? b) equal;
+  final bool Function(List<E> items, E? b) selected;
 
   /// 子项卡片自定义
   final Widget Function({int index, E e})? itemBuilder;
 
   @override
-  State<NPickerRequestListBox<E>> createState() =>
-      _NPickerRequestListBoxState<E>();
+  State<NPickRequestListBox<E>> createState() => _NPickRequestListBoxState<E>();
 }
 
-class _NPickerRequestListBoxState<E> extends State<NPickerRequestListBox<E>> {
+class _NPickRequestListBoxState<E> extends State<NPickRequestListBox<E>> {
   final refreshViewController = NRefreshViewController<E>();
 
   var search = "";
@@ -157,16 +163,17 @@ class _NPickerRequestListBoxState<E> extends State<NPickerRequestListBox<E>> {
         return await widget.requestList(isRefresh, page, pageSize, search);
       },
       itemBuilder: (BuildContext context, int index, model) {
-        final isSelecetd = widget.equal(widget.items, model);
-        final textColor = isSelecetd ? primary : fontColor;
-        final color = isSelecetd ? primary : Colors.transparent;
+        final isSelected = widget.selected(widget.items, model);
+        final textColor = isSelected ? primary : fontColor;
+        final color = isSelected ? primary : Colors.transparent;
 
         final name = widget.cbName(model) ?? "--";
 
         void onTapItem() {
           // YLog.d("${jsonEncode(model.toJson())}");
           selecetdModel = model;
-          widget.items.add(model);
+          final modelNew = widget.onSelectedTap?.call(model) ?? model;
+          widget.items.add(modelNew);
           widget.onChanged(widget.items);
           Navigator.of(context).pop();
         }
@@ -183,11 +190,12 @@ class _NPickerRequestListBoxState<E> extends State<NPickerRequestListBox<E>> {
             ListTile(
               dense: true,
               onTap: onTapItem,
-              title: NText(
-                name ?? "",
-                fontSize: 16,
-                color: textColor,
-              ),
+              title: widget.nameWidget?.call(index, model) ??
+                  NText(
+                    name ?? "",
+                    fontSize: 16,
+                    color: textColor,
+                  ),
               trailing: Icon(Icons.check, color: color),
             ),
             const Divider(indent: 15, endIndent: 15),

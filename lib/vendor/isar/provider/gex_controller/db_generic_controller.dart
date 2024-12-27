@@ -41,23 +41,21 @@ class DBGenericController<E> extends GetxController {
   /// 查
   ///
   /// filterCb 为空,返回所有实体
-  Future<List<E>> findEntitys(
-      {Future<List<E>> Function(QueryBuilder<E, E, QFilterCondition> isarItems)?
-          filterCb}) async {
+  Future<List<E>> findEntitys({
+    Future<List<E>> Function(QueryBuilder<E, E, QFilterCondition> isarItems)? filterCb,
+  }) async {
     final collections = isar.collection<E>();
     final filters = collections.filter();
-    final items =
-        await filterCb?.call(filters) ?? await collections.where().findAll();
+    final items = await filterCb?.call(filters) ?? await collections.where().findAll();
     _entitys.clear();
     _entitys.addAll(items);
     return _entitys;
   }
 
   /// 寻找第一个
-  Future<E?> findEntity(
-      {required Future<E?> Function(
-              QueryBuilder<E, E, QFilterCondition> isarItems)
-          filterCb}) async {
+  Future<E?> findEntity({
+    required Future<E?> Function(QueryBuilder<E, E, QFilterCondition> isarItems) filterCb,
+  }) async {
     final collections = isar.collection<E>();
     final filters = collections.filter();
     final item = await filterCb(filters);
@@ -75,6 +73,20 @@ class DBGenericController<E> extends GetxController {
   /// 增/改
   Future<void> put(E e) async {
     await putAll([e]);
+  }
+
+  /// 更新
+  Future<bool> updateEntity({
+    required Future<E?> Function(QueryBuilder<E, E, QFilterCondition> isarItems) filterCb,
+    required void Function(E e) onUpdate,
+  }) async {
+    final entity = await findEntity(filterCb: filterCb);
+    if (entity == null) {
+      return false;
+    }
+    onUpdate(entity);
+    await put(entity);
+    return true;
   }
 
   /// 删
@@ -107,5 +119,12 @@ class DBGenericController<E> extends GetxController {
         await collections.putAll(models);
       });
     }
+  }
+
+  /// 清除
+  Future<void> clear() async {
+    await isar.writeTxn(() async {
+      await isar.clear();
+    });
   }
 }
