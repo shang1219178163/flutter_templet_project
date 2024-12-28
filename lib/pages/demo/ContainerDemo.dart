@@ -3,12 +3,15 @@ import 'dart:ui' as ui;
 import 'package:flutter/animation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_templet_project/basicWidget/n_flex_spacing.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
+import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
+import 'package:flutter_templet_project/pages/demo/FlexDemo.dart';
 import 'package:flutter_templet_project/util/R.dart';
 
 class ContainerDemo extends StatefulWidget {
@@ -182,13 +185,13 @@ class _ContainerDemoState extends State<ContainerDemo> {
 
   Widget buildSection3() {
     final children = List.generate(
-        3,
+        4,
         (index) => Container(
               decoration: BoxDecoration(
-                  // color: ColorExt.random,
-                  // border: Border.all(color: Colors.blue),
-                  ),
-              child: NText("项目_$index"),
+                color: Colors.green,
+                // border: Border.all(color: Colors.blue),
+              ),
+              child: NText("选项_$index"),
             )).toList();
 
     Widget separated = Padding(
@@ -220,7 +223,7 @@ class _ContainerDemoState extends State<ContainerDemo> {
             ),
           ),
           NSectionBox(
-            title: "NFlexSeparated - SizedBox",
+            title: "NFlexSeparated - separatedBuilder",
             child: Container(
               height: 30,
               decoration: BoxDecoration(
@@ -228,8 +231,18 @@ class _ContainerDemoState extends State<ContainerDemo> {
               ),
               child: NFlexSeparated(
                 direction: Axis.horizontal,
+                spacing: 60,
                 separatedBuilder: (i) {
-                  return Container(color: Colors.cyan, width: 12);
+                  final spacing = (i + 1) * 16.0;
+                  return Container(
+                    width: spacing,
+                    color: Colors.yellow,
+                    alignment: Alignment.center,
+                    child: NText(
+                      spacing.toInt().toString(),
+                      style: TextStyle(fontSize: 13),
+                    ),
+                  );
                   // return separated;
                 },
                 children: children,
@@ -237,38 +250,169 @@ class _ContainerDemoState extends State<ContainerDemo> {
             ),
           ),
           NSectionBox(
-            title: "NFlexSeparated - vertical",
+            title: "NFlexSeparated - spacing: 16",
             child: Container(
+              height: 30,
               decoration: BoxDecoration(
-                  // border: Border.all(color: Colors.blue),
-                  ),
-              child: IntrinsicWidth(
-                child: NFlexSeparated(
-                  direction: Axis.vertical,
-                  separatedBuilder: (i) {
-                    return Container(color: Colors.cyan, height: 12);
-                    // return separated;
-                  },
-                  children: children,
-                ),
+                border: Border.all(color: Colors.blue),
+              ),
+              alignment: Alignment.center,
+              child: NFlexSeparated(
+                direction: Axis.horizontal,
+                spacing: 16,
+                // separatedBuilder: (i) {
+                //   return Container(color: Colors.cyan, width: 12);
+                //   // return separated;
+                // },
+                children: children,
               ),
             ),
           ),
           NSectionBox(
-            title: "NFlexSeparated.spacing",
+            title: "NFlexSeparated - vertical - separatedBuilder",
+            child: IntrinsicWidth(
+              child: NFlexSeparated(
+                direction: Axis.vertical,
+                spacing: 60,
+                separatedBuilder: (i) {
+                  final spacing = (i + 1) * 16.0;
+                  return Container(
+                    height: spacing,
+                    color: Colors.yellow,
+                    alignment: Alignment.center,
+                    child: NText(
+                      spacing.toInt().toString(),
+                      style: TextStyle(fontSize: 13),
+                    ),
+                  );
+                  // return separated;
+                },
+                children: children,
+              ),
+            ),
+          ),
+          NSectionBox(
+            title: "NFlexSeparated - vertical - spacing: 16",
+            child: IntrinsicWidth(
+              child: NFlexSeparated(
+                direction: Axis.vertical,
+                separatedBuilder: (i) {
+                  final spacing = 16.0;
+                  return Container(
+                    height: spacing,
+                    color: Colors.yellow,
+                    alignment: Alignment.center,
+                    child: NText(
+                      spacing.toInt().toString(),
+                      style: TextStyle(fontSize: 13),
+                    ),
+                  );
+                  // return separated;
+                },
+                children: children,
+              ),
+            ),
+          ),
+          NSectionBox(
+            title: "NFlexSeparated - horizontal",
             child: Container(
+              height: 45,
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.blue),
               ),
-              child: NFlexSeparated.spacing(
-                direction: Axis.horizontal,
-                spacing: 30,
-                children: children,
+              child: IntrinsicHeight(
+                child: buildFlexSeparated(direction: Axis.horizontal),
+              ),
+            ),
+          ),
+          NSectionBox(
+            title: "NFlexSeparated - vertical",
+            child: Container(
+              height: 400,
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.blue),
+              ),
+              child: IntrinsicWidth(
+                child: buildFlexSeparated(direction: Axis.vertical),
               ),
             ),
           ),
         ],
       ),
+    );
+  }
+
+  /// 带分隔的 Flex
+  Widget buildFlexSeparated({
+    required Axis direction,
+    Alignment? textAlignment = Alignment.center,
+    double spacing = 0,
+    Widget Function(int index)? separatedBuilder,
+  }) {
+    return NFlexSeparated(
+      direction: direction,
+      // crossAxisAlignment: CrossAxisAlignment.start,
+      spacing: 12,
+      separatedBuilder: separatedBuilder ??
+          (i) {
+            final spacing = 16.0 * (i + 1);
+            return Container(
+              width: direction == Axis.horizontal ? spacing : null,
+              height: direction == Axis.horizontal ? null : spacing,
+              color: Colors.yellow,
+              alignment: Alignment.center,
+              child: NText(
+                spacing.toInt().toString(),
+                style: TextStyle(fontSize: 13),
+              ),
+            );
+          },
+      children: [
+        Flexible(
+          flex: 1,
+          child: Container(
+            color: Colors.red,
+            alignment: textAlignment,
+            child: Text(
+              "flex: 1",
+              style: TextStyle(fontSize: 13),
+            ),
+          ),
+        ),
+        Flexible(
+          flex: 2,
+          child: Container(
+            color: Colors.green,
+            alignment: textAlignment,
+            child: Text(
+              "flex: 2",
+              style: TextStyle(fontSize: 13),
+            ),
+          ),
+        ),
+        Flexible(
+          flex: 3,
+          child: Container(
+            color: Colors.blue,
+            alignment: textAlignment,
+            child: Text(
+              "flex: 3",
+              style: TextStyle(fontSize: 18),
+            ),
+          ),
+        ),
+        Flexible(
+          flex: 1,
+          child: Container(
+            color: Colors.purple,
+            alignment: textAlignment,
+            child: Text(
+              "flex: 1",
+              style: TextStyle(fontSize: 13),
+            ),
+          ),
+        ),
+      ],
     );
   }
 
