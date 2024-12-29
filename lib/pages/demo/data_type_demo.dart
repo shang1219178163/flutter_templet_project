@@ -341,6 +341,25 @@ class _DataTypeDemoState extends State<DataTypeDemo> with WidgetsBindingObserver
   }
 
   void onList() {
+    final array1 = [
+      1,
+      [
+        2,
+        3,
+      ],
+      [
+        4,
+        [
+          5,
+          6,
+          [7, 8]
+        ]
+      ]
+    ];
+    final array1New = array1.flatMap();
+    debugPrint('array1New:$array1New');
+
+    return;
     double? z;
     double? z1;
     final list = [z, z1];
