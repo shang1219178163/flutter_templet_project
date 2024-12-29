@@ -188,7 +188,7 @@ extension ListExt<T, E> on List<E> {
     final list = <E>[];
     for (final e in this) {
       if (e is List<E>) {
-        list.addAll(e.toList().flatMap());
+        list.addAll((e as List<E>).flatMap());
       } else {
         list.add(e);
       }
