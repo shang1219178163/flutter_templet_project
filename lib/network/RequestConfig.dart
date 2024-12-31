@@ -9,7 +9,7 @@
 import 'package:flutter_templet_project/cache/cache_service.dart';
 
 /// 当前 api 环境
-enum APPEnvironment {
+enum AppEnvironment {
   /// 开发环境
   dev('https://*.cn'),
 
@@ -25,7 +25,7 @@ enum APPEnvironment {
   /// 生产环境
   prod('https://*.cn');
 
-  const APPEnvironment(
+  const AppEnvironment(
     this.origin,
   );
 
@@ -33,7 +33,7 @@ enum APPEnvironment {
   final String origin;
 
   /// 字符串转类型
-  static APPEnvironment? fromString(String? val) {
+  static AppEnvironment? fromString(String? val) {
     if (val == null || !val.contains(",")) {
       return null;
     }
@@ -44,16 +44,16 @@ enum APPEnvironment {
     }
 
     final first = list[0];
-    final isEnumType = APPEnvironment.values.map((e) => e.name).contains(first);
+    final isEnumType = AppEnvironment.values.map((e) => e.name).contains(first);
     if (!isEnumType) {
       return null;
     }
-    return APPEnvironment.values.firstWhere((e) => e.name == first);
+    return AppEnvironment.values.firstWhere((e) => e.name == first);
   }
 
   @override
   String toString() {
-    if (this == APPEnvironment.dev) {
+    if (this == AppEnvironment.dev) {
       return "$name,${CacheService().devOrigin ?? origin}";
     }
     return "$name,$origin";
@@ -62,14 +62,14 @@ enum APPEnvironment {
 
 ///request config
 class RequestConfig {
-  static APPEnvironment current = APPEnvironment.dev;
+  static AppEnvironment current = AppEnvironment.dev;
 
   /// 网络请求域名
   static String get baseUrl {
     final env = CacheService().env;
     if (env != null) {
       current = env;
-      if (env == APPEnvironment.dev) {
+      if (env == AppEnvironment.dev) {
         return CacheService().devOrigin ?? current.origin;
       }
     }

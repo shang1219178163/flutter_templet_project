@@ -26,7 +26,7 @@ class NOriginSheet extends StatefulWidget {
   });
 
   /// 改变回调
-  final void Function(APPEnvironment env, String origin)? onChanged;
+  final void Function(AppEnvironment env, String origin)? onChanged;
 
   @override
   State<NOriginSheet> createState() => _NOriginSheetState();
@@ -35,7 +35,7 @@ class NOriginSheet extends StatefulWidget {
 class _NOriginSheetState extends State<NOriginSheet> {
   final textController = TextEditingController();
 
-  APPEnvironment get currentEnv {
+  AppEnvironment get currentEnv {
     final env = CacheService().env;
     final result = env ?? RequestConfig.current;
     return result;
@@ -48,11 +48,11 @@ class _NOriginSheetState extends State<NOriginSheet> {
 
   /// 域名选择
   Widget buildOriginSheet() {
-    if (currentEnv == APPEnvironment.prod && kReleaseMode) {
+    if (currentEnv == AppEnvironment.prod && kReleaseMode) {
       return const SizedBox();
     }
 
-    const list = APPEnvironment.values;
+    const list = AppEnvironment.values;
 
     // final currentWidget = Column(
     //   children: [
@@ -110,14 +110,14 @@ class _NOriginSheetState extends State<NOriginSheet> {
             width: 4,
           ),
           Opacity(
-            opacity: currentEnv == APPEnvironment.dev ? 1 : 0,
+            opacity: currentEnv == AppEnvironment.dev ? 1 : 0,
             child: InkWell(
                 onTap: () {
                   // YLog.d("edit");
 
                   showAlertTextField(onChanged: (String value) {
                     ddlog("showAlertTextField $value");
-                    onUpdate(env: APPEnvironment.dev, origin: value);
+                    onUpdate(env: AppEnvironment.dev, origin: value);
                   });
                 },
                 child: Icon(
@@ -176,8 +176,7 @@ class _NOriginSheetState extends State<NOriginSheet> {
               color: fontColor,
             ),
             isCollapsed: true,
-            contentPadding:
-                const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+            contentPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
             onChanged: (String value) {
               // YLog.d("onChanged $value");
             },
@@ -208,12 +207,12 @@ class _NOriginSheetState extends State<NOriginSheet> {
   }
 
   onUpdate({
-    required APPEnvironment env,
+    required AppEnvironment env,
     required String origin,
   }) {
     RequestConfig.current = env;
     CacheService().env = env;
-    if (env == APPEnvironment.dev) {
+    if (env == AppEnvironment.dev) {
       CacheService().devOrigin = origin;
     }
     setState(() {});

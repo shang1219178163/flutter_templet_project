@@ -368,7 +368,7 @@ extension CacheServiceExt on CacheService {
   }
 
   /// 设置登录环境
-  set env(APPEnvironment? val) {
+  set env(AppEnvironment? val) {
     if (val == null) {
       return;
     }
@@ -377,9 +377,9 @@ extension CacheServiceExt on CacheService {
   }
 
   /// 获取登录环境
-  APPEnvironment? get env {
+  AppEnvironment? get env {
     final result = CacheService().getString(CacheKey.requestEnv.name);
-    final val = APPEnvironment.fromString(result);
+    final val = AppEnvironment.fromString(result);
     return val;
   }
 
