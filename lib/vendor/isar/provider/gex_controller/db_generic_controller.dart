@@ -34,7 +34,6 @@ class DBGenericController<E> extends GetxController {
     if (!Get.isRegistered<DBGenericController<E>>()) {
       return;
     }
-    await findEntitys();
     super.update(ids, condition);
   }
 

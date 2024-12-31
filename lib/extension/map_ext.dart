@@ -15,18 +15,23 @@ extension MapExt on Map<String, dynamic> {
   Map get reversed => {
         for (final e in entries) e.value: e.key,
       };
-
   // 拼接键值成字符串
-  String join({String char = '&'}) {
-    if (keys.isEmpty) {
+  String toQueryString() {
+    if (isEmpty) {
       return '';
     }
-    var paramStr = '';
-    forEach((key, value) {
-      paramStr += '$key=$value$char';
+
+    // 转换 Map 的值为字符串
+    Map<String, String> stringParams = map((key, value) {
+      if (value is List) {
+        return MapEntry(key, value.join(',')); // 将 List 转为逗号分隔的字符串
+      }
+      return MapEntry(key, value.toString());
     });
-    final result = paramStr.substring(0, paramStr.length - 1);
-    return result;
+
+    // 转换为查询字符串
+    String queryString = Uri(queryParameters: stringParams).query;
+    return queryString;
   }
 
   /// 递归遍历
@@ -48,8 +53,7 @@ extension MapExt on Map<String, dynamic> {
     return map;
   }
 
-  Map<String, dynamic> get asMapHash =>
-      map((k, v) => MapEntry(k, "$v,${v.hashCode}"));
+  Map<String, dynamic> get asMapHash => map((k, v) => MapEntry(k, "$v,${v.hashCode}"));
 
   /// 带缩进转换
   String convertByIndent({String indent = '  '}) {
@@ -57,15 +61,9 @@ extension MapExt on Map<String, dynamic> {
     final result = encoder.convert(this);
     return result;
   }
-}
 
-extension MapNullExt on Map? {
-  /// 可选值是否为空
-  bool get isNotEmptyNew => (this ?? {}).isNotEmpty;
-}
+  /********************************请求结果脱壳********************************/
 
-/// 请求结果脱壳
-extension MapResponseExt on Map<String, dynamic> {
   /// 数据请求
   ///
   /// onResult 根据 response 返回和泛型 T 对应的值(默认值取 response["result"])
@@ -83,8 +81,7 @@ extension MapResponseExt on Map<String, dynamic> {
     }
     bool isSuccess = response['code'] == "OK";
     String message = response["message"] as String? ?? "";
-    final resultNew =
-        onResult?.call(response) ?? response["result"] as T? ?? defaultValue;
+    final resultNew = onResult?.call(response) ?? response["result"] as T? ?? defaultValue;
     return (isSuccess: isSuccess, message: message, result: resultNew);
   }
 
@@ -119,8 +116,7 @@ extension MapResponseExt on Map<String, dynamic> {
   /// onList 根据字典返回数组;(默认取 response["result"] 对应的数组值)
   ///
   /// return (请求是否成功, 提示语, 数组)
-  Future<({bool isSuccess, String message, List<T> result})>
-      fetchList<T extends Map<String, dynamic>>({
+  Future<({bool isSuccess, String message, List<T> result})> fetchList<T extends Map<String, dynamic>>({
     List<T> Function(Map<String, dynamic> response)? onList,
     required List<dynamic> Function(Map<String, dynamic> response) onValue,
     List<T> defaultValue = const [],
@@ -166,5 +162,37 @@ extension MapResponseExt on Map<String, dynamic> {
     final list = tuple.result;
     final models = list.map(onModel).toList();
     return (isSuccess: tuple.isSuccess, message: tuple.message, result: models);
+  }
+}
+
+extension MapNullExt on Map? {
+  /// 可选值是否为空
+  bool get isNotEmptyNew => (this ?? {}).isNotEmpty;
+}
+
+extension MapGenericExt<K, V> on Map<K, V> {
+  /// 排序
+  /// value - 用来对比的值
+  /// isAsc - 默认升序 true;
+  /// compare 对比算法,默认 value(a).compareTo(value(b))
+  Map<K, V> sortedBy(
+    Comparable Function(MapEntry<K, V> v) value, {
+    bool isAsc = true,
+    int Function(MapEntry<K, V> a, MapEntry<K, V> b)? compare,
+  }) {
+    final entries = this.entries.toList();
+
+    /// 排序
+    sortCompare(a, b) {
+      if (compare != null) {
+        return isAsc ? compare(a, b) : compare(b, a);
+      }
+
+      final result = isAsc ? value(a).compareTo(value(b)) : value(b).compareTo(value(a));
+      return result;
+    }
+
+    entries.sort(sortCompare);
+    return Map<K, V>.fromEntries(entries);
   }
 }

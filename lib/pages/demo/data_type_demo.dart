@@ -425,13 +425,10 @@ class _DataTypeDemoState extends State<DataTypeDemo> with WidgetsBindingObserver
       'msgUnreadNum': 3,
     };
 
-    ddlog('getUrlParams():${getUrlParams(map: map)}');
-    ddlog('map.join():${map.join()}');
+    ddlog('map.toQueryString():${map.toQueryString()}');
 
     final _memoryMap = <String, dynamic>{};
-
     _memoryMap['msgTag'] = null;
-    // ddlog('_memoryMap:${_memoryMap}');
     _memoryMap["sss"] = "ssss";
 
     final info = await PackageInfo.fromPlatform();
@@ -442,6 +439,75 @@ class _DataTypeDemoState extends State<DataTypeDemo> with WidgetsBindingObserver
 
     Map? a1;
     ddlog("a1.isNotEmptyNew: ${a1.isNotEmptyNew}");
+
+    // 示例动态 Map
+    Map<String, dynamic> params = {
+      'name': 'John Doe',
+      'age': 25,
+      'isStudent': true,
+      'courses': ['Math', 'Science'], // 复杂值需要处理
+    };
+
+    // 转换为查询字符串
+    String queryString = params.toQueryString();
+    ddlog('Query String: $queryString');
+    return;
+
+    mapSorted();
+  }
+
+  void mapSorted() {
+    Map<String, int> unsortedMap = {
+      'pinch': 3,
+      'banana': 5,
+      'apple': 3,
+      'cherry': 2,
+    };
+
+    // 根据 Value 和 Key 进行排序
+    sortValueAndKey<K extends Comparable, V extends Comparable>(
+      MapEntry<K, V> a,
+      MapEntry<K, V> b, {
+      bool isAsc = true,
+    }) {
+      int result = isAsc ? a.value.compareTo(b.value) : b.value.compareTo(a.value);
+      if (result != 0) {
+        return result;
+      }
+      return isAsc ? a.key.compareTo(b.key) : b.key.compareTo(a.key); // 如果值相同，按键排序
+    }
+
+    // // 自定义排序（首先按值排序，如果值相同按键排序）
+    // var sortedMap = Map.fromEntries(
+    //   unsortedMap.entries.toList()..sort(sortValueAndKey),
+    // );
+    //
+    // final sortedMapNew = unsortedMap.sortedBy(
+    //   (k) => k.value,
+    //   compare: sortValueAndKey,
+    // );
+    // final sortedMapNew1 = unsortedMap.sortedBy(
+    //   (k) => k.value,
+    //   isAsc: false,
+    //   compare: sortValueAndKey,
+    // );
+    // ddlog('sortedMap: $sortedMap');
+    // ddlog('sortedMapNew: $sortedMapNew');
+    // ddlog('sortedMapNew1: $sortedMapNew1');
+    // return;
+
+    // 模型属性排序
+    Map<String, MapItem> data2 = {
+      "2022-11-01": MapItem(count: 12, name: "book"),
+      "2022-11-12": MapItem(count: 2, name: "pencil"),
+      "2022-11-05": MapItem(count: 18, name: "keyboard"),
+      "2022-11-24": MapItem(count: 8, name: "scissors"),
+    };
+
+    final sortByCount = data2.sortedBy((k) => k.value.count).toString();
+    final sortByName = data2.sortedBy((k) => k.value.name).toString();
+    ddlog('Sort by Count: > $sortByCount');
+    ddlog('Sort by Name : > $sortByName');
     return;
   }
 
@@ -498,18 +564,6 @@ class _DataTypeDemoState extends State<DataTypeDemo> with WidgetsBindingObserver
 
     list.retainWhere((e) => ids.remove(e['id']));
     debugPrint('list: ${list}');
-  }
-
-  getUrlParams({Map<String, dynamic> map = const {}}) {
-    if (map.keys.isEmpty) {
-      return '';
-    }
-    var paramStr = '';
-    map.forEach((key, value) {
-      paramStr += '$key=$value&';
-    });
-    var result = paramStr.substring(0, paramStr.length - 1);
-    return result;
   }
 
   void printFormat() {
@@ -606,5 +660,28 @@ class _DataTypeDemoState extends State<DataTypeDemo> with WidgetsBindingObserver
 
     // 如果所有部分都相等，则返回 0
     return 0;
+  }
+}
+
+/// 测试类
+class MapItem implements Codable {
+  MapItem({
+    required this.name,
+    required this.count,
+  });
+  final String name;
+  final int count;
+
+  @override
+  Map<String, dynamic> toJson() {
+    return {
+      "name": name,
+      "count": count,
+    };
+  }
+
+  @override
+  String toString() {
+    return toJson().toString();
   }
 }
