@@ -2,6 +2,8 @@ name: flutter_templet_project
 description: A new Flutter project.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+100
+#自定义字段 - 项目别名
+alias: flutter_templet
 
 analyzer:
 #  enable-experiment:
