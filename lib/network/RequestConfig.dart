@@ -6,6 +6,7 @@
 //  Copyright © 2024/1/6 shang. All rights reserved.
 //
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_templet_project/cache/cache_service.dart';
 
 /// 当前 api 环境
@@ -51,6 +52,16 @@ enum AppEnvironment {
     return AppEnvironment.values.firstWhere((e) => e.name == first);
   }
 
+  /// name 转枚举
+  static AppEnvironment fromName(String name) {
+    for (final e in AppEnvironment.values) {
+      if (e.name == name) {
+        return e;
+      }
+    }
+    return kDebugMode ? AppEnvironment.test : AppEnvironment.prod;
+  }
+
   @override
   String toString() {
     if (this == AppEnvironment.dev) {
@@ -63,6 +74,12 @@ enum AppEnvironment {
 ///request config
 class RequestConfig {
   static AppEnvironment current = AppEnvironment.dev;
+
+  static void initFromEnvironment() {
+    /// 从  --dart-define=app_env=beta 读取运行环境
+    final env = const String.fromEnvironment("app_env");
+    current = AppEnvironment.fromName(env);
+  }
 
   /// 网络请求域名
   static String get baseUrl {

@@ -20,6 +20,7 @@ import 'package:flutter_templet_project/APPThemeSettings.dart';
 import 'package:flutter_templet_project/basicWidget/error_custom_widget.dart';
 import 'package:flutter_templet_project/cache/cache_service.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/network/RequestConfig.dart';
 import 'package:flutter_templet_project/provider/color_filtered_provider.dart';
 import 'package:flutter_templet_project/provider/notifier_demo.dart';
 import 'package:flutter_templet_project/provider/provider_demo.dart';
@@ -58,7 +59,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // /// 从  --dart-define=app_env=beta 读取运行环境
-  // current = APPEnvironment.fromEnvString(const String.fromEnvironment("app_env"));
+  RequestConfig.initFromEnvironment();
 
   // final ping = Ping('baidu.com', count: 20);
   // ping.stream.listen((event) {
