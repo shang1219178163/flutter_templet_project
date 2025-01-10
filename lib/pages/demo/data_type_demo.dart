@@ -331,7 +331,7 @@ class _DataTypeDemoState extends State<DataTypeDemo> with WidgetsBindingObserver
     debugPrint('resultZero: $resultZero');
 
     final serviceInfo = await Service.getInfo();
-    serviceInfo.printIsarConnection();
+    serviceInfo.printIsarLink();
   }
 
   void onDate() {

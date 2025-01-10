@@ -23,6 +23,10 @@ class DBManager {
   factory DBManager() => _instance;
   static DBManager get instance => _instance;
 
+  String get exception => _exception ?? "";
+
+  String? _exception;
+
   late Isar isar;
 
   /// 会话详情控制器
