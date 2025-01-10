@@ -8,8 +8,11 @@
 
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter_templet_project/cache/cache_service.dart';
+import 'package:flutter_templet_project/cache/file_manager.dart';
+import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:get/get.dart';
 
 class CacheController {
@@ -115,4 +118,47 @@ class CacheController {
   //   final key = "PatientList_$userId";
   //   return getModels(key: key, modelCb: (e) => PatientDetailModel.fromJson(e));
   // }
+
+  /// 从沙盒读取数据
+  Future<Map<String, dynamic>> readFromDisk({required String cacheKey}) async {
+    try {
+      final map = CacheService().getMap(cacheKey) ?? {};
+      if (map.isNotEmpty) {
+        return map;
+      }
+
+      final dir = await FileManager().getDocumentsDir();
+      final mapNew = await FileManager().readJson(fileName: cacheKey, dir: dir);
+      return mapNew ?? {};
+    } catch (e) {
+      DLog.d("$runtimeType readFromDisk $e");
+    }
+    return {};
+  }
+
+  /// 保存数据到沙盒
+  Future<File?> saveToDisk({required String cacheKey, required Map<String, dynamic> map}) async {
+    try {
+      final dir = await FileManager().getDocumentsDir();
+      final file = await FileManager().saveJson(fileName: cacheKey, map: map, dir: dir);
+      DLog.d("$runtimeType saveToDisk file: $file");
+      return file;
+    } catch (e) {
+      DLog.d("$runtimeType $e");
+    }
+    return null;
+  }
+
+  /// 保存数据到沙盒
+  Future<File?> readFile({required String cacheKey}) async {
+    try {
+      final dir = await FileManager().getDocumentsDir();
+      final file = await FileManager().readFile(fileName: cacheKey, dir: dir);
+      DLog.d("$runtimeType readFile file: $file");
+      return file;
+    } catch (e) {
+      DLog.d("$runtimeType readFile $e");
+    }
+    return null;
+  }
 }

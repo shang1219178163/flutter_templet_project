@@ -22,21 +22,21 @@ class FileManager {
   static FileManager get instance => _instance;
 
   ///获取缓存目录路径
-  Future<String> getCacheDirPath() async {
+  Future<Directory> getCacheDir() async {
     var directory = await getTemporaryDirectory();
-    return directory.path;
+    return directory;
   }
 
   ///获取文件缓存目录路径
-  Future<String> getFilesDirPath() async {
+  Future<Directory> getFilesDir() async {
     var directory = await getApplicationSupportDirectory();
-    return directory.path;
+    return directory;
   }
 
   ///获取文档存储目录路径
-  Future<String> getDocumentsDirPath() async {
+  Future<Directory> getDocumentsDir() async {
     var directory = await getApplicationDocumentsDirectory();
-    return directory.path;
+    return directory;
   }
 
   /// 文件创建
@@ -120,11 +120,7 @@ class FileManager {
     required Map<String, dynamic> map,
   }) async {
     final content = jsonEncode(map);
-    final file = await FileManager().createFile(
-      fileName: fileName,
-      ext: ext,
-      content: content,
-    );
+    final file = await FileManager().createFile(fileName: fileName, ext: ext, content: content, dir: dir);
     return file;
   }
 
@@ -159,8 +155,7 @@ class FileManager {
     required String fileName,
     String ext = "dart",
     Directory? dir,
-    required Future<Map<String, dynamic>> Function(Map<String, dynamic> map)
-        onUpdate,
+    required Future<Map<String, dynamic>> Function(Map<String, dynamic> map) onUpdate,
   }) async {
     final map = await readJson(fileName: fileName, ext: ext, dir: dir);
     final mapNew = await onUpdate(map ?? {});
@@ -185,8 +180,7 @@ class FileManager {
 
     final percentVN = ValueNotifier(0.0);
 
-    final response = await Dio().download(url, tmpPath,
-        onReceiveProgress: (received, total) {
+    final response = await Dio().download(url, tmpPath, onReceiveProgress: (received, total) {
       if (total != -1) {
         final percent = (received / total);
         final percentStr = "${(percent * 100).toStringAsFixed(0)}%";
