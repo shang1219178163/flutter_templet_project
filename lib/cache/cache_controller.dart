@@ -18,7 +18,7 @@ import 'package:get/get.dart';
 class CacheController {
   CacheController();
 
-  String get userId => CacheService().userID ?? "";
+  // String get userId => CacheService().userID ?? "";
 
   // /// 群聊天模型列表转存
   // Future<bool>? setGroupHistorys<T extends IMMsgDetailModel>({

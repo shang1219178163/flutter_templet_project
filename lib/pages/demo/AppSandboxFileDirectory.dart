@@ -27,9 +27,7 @@ import 'package:flutter_templet_project/extension/object_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/mixin/debug_bottom_sheet_mixin.dart';
 import 'package:flutter_templet_project/model/user_model.dart';
-import 'package:flutter_templet_project/pages/demo/DataTableDemo.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
-import 'package:flutter_templet_project/vendor/isar/model/db_order.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
@@ -48,13 +46,7 @@ class AppSandboxFileDirectory extends StatefulWidget {
 }
 
 class _AppSandboxFileDirectoryState extends State<AppSandboxFileDirectory> with DebugBottomSheetMixin {
-  bool get hideApp => "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
-
-  final _scrollController = ScrollController();
-
-  Map<String, dynamic> arguments = Get.arguments ?? <String, dynamic>{};
-
-  var dirEnums = <PathProviderDirectory>[];
+  var directorys = <PathProviderDirectory>[];
 
   final cacheUserMapVN = ValueNotifier(<String, dynamic>{});
 
@@ -63,9 +55,9 @@ class _AppSandboxFileDirectoryState extends State<AppSandboxFileDirectory> with 
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      dirEnums = await PathProviderDirectory.initail();
-      dirEnums = dirEnums.where((e) => e.custom?["dir"] != null).toList();
-      DLog.d("dirEnums: ${dirEnums.length}");
+      directorys = await PathProviderDirectory.initail();
+      directorys = directorys.where((e) => e.custom?["dir"] != null).toList();
+      DLog.d("directorys: ${directorys.length}");
       setState(() {});
       cacheUserMapVN.value = await getCacheUserMap();
     });
@@ -79,14 +71,12 @@ class _AppSandboxFileDirectoryState extends State<AppSandboxFileDirectory> with 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: hideApp
-          ? null
-          : AppBar(
-              title: GestureDetector(
-                onLongPress: onDebugSheet,
-                child: Text("$widget"),
-              ),
-            ),
+      appBar: AppBar(
+        title: GestureDetector(
+          onLongPress: onDebugSheet,
+          child: Text("$widget"),
+        ),
+      ),
       body: buildBody(),
     );
   }
@@ -266,7 +256,7 @@ class _AppSandboxFileDirectoryState extends State<AppSandboxFileDirectory> with 
   buildChooseDir() {
     return NMenuAnchor<PathProviderDirectory>(
       dropItemPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      values: dirEnums,
+      values: directorys,
       initialItem: PathProviderDirectory.applicationDocumentsDirectory,
       onChanged: (val) {
         DLog.d("NMenuAnchor: $val");
@@ -474,18 +464,5 @@ class _AppSandboxFileDirectoryState extends State<AppSandboxFileDirectory> with 
     final list = (map[k] as List?) ?? [];
     final items = list.map((json) => UserModel.fromJson(json)).toList();
     return items;
-  }
-
-  /// 获取当前选择用户的缓存列表中和日程模型匹配的缓存
-  Future<UserModel?> getCachePatientCollect({
-    required List<UserModel> list,
-    required UserModel model,
-  }) async {
-    // final list = await getCachePatientCollects();
-    final result = list.firstWhereOrNull((e) {
-      final result = e.id == model.id;
-      return result;
-    });
-    return result;
   }
 }
