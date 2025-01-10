@@ -69,6 +69,8 @@ PODS:
     - Flutter
     - flutter_sound_core (= 9.6.0)
   - flutter_sound_core (9.6.0)
+  - flutter_tts (0.0.1):
+    - Flutter
   - fluttertoast (0.0.2):
     - Flutter
     - Toast
@@ -267,6 +269,7 @@ DEPENDENCIES:
   - flutter_isolate (from `.symlinks/plugins/flutter_isolate/ios`)
   - flutter_native_splash (from `.symlinks/plugins/flutter_native_splash/ios`)
   - flutter_sound (from `.symlinks/plugins/flutter_sound/ios`)
+  - flutter_tts (from `.symlinks/plugins/flutter_tts/ios`)
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
   - fluwx (from `.symlinks/plugins/fluwx/ios`)
   - google_mlkit_commons (from `.symlinks/plugins/google_mlkit_commons/ios`)
@@ -361,6 +364,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_native_splash/ios"
   flutter_sound:
     :path: ".symlinks/plugins/flutter_sound/ios"
+  flutter_tts:
+    :path: ".symlinks/plugins/flutter_tts/ios"
   fluttertoast:
     :path: ".symlinks/plugins/fluttertoast/ios"
   fluwx:
@@ -438,6 +443,7 @@ SPEC CHECKSUMS:
   flutter_native_splash: edf599c81f74d093a4daf8e17bd7a018854bc778
   flutter_sound: dde9a913063b65a27ba8fdc2039036b99b136c79
   flutter_sound_core: 0c6eb9d5268adc70ff159b3d65fd3d98a82d3a27
+  flutter_tts: 0f492aab6accf87059b72354fcb4ba934304771d
   fluttertoast: 9f2f8e81bb5ce18facb9748d7855bf5a756fe3db
   fluwx: daa284756ce53442b3d0417ceeda66e981906811
   google_mlkit_commons: 384e4e206e122b6dad430d3158205e0b2fac6789
