@@ -27,6 +27,7 @@ class _APPDrawerMenuPageState extends State<APPDrawerMenuPage> {
     Tuple3(Icons.share, "分享", "share"),
     Tuple3(Icons.open_in_new, "退出", "exit"),
     Tuple3(Icons.color_lens_outlined, "主题色", APPRouter.themeColorDemo),
+    Tuple3(Icons.terminal, "本地日志", APPRouter.jPushInfoPage),
   ];
 
   bool isGrey = false;
@@ -56,11 +57,9 @@ class _APPDrawerMenuPageState extends State<APPDrawerMenuPage> {
                           children: [
                             ListTile(
                               dense: true,
-                              contentPadding: EdgeInsets.symmetric(
-                                  horizontal: 16, vertical: 4),
+                              contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
                               leading: Icon(e.item1),
-                              title: Text(e.item2,
-                                  style: TextStyle(fontSize: 16.0)),
+                              title: Text(e.item2, style: TextStyle(fontSize: 16.0)),
                               trailing: Icon(Icons.chevron_right),
                               // horizontalTitleGap: 0,
                               minLeadingWidth: 0,
@@ -75,7 +74,7 @@ class _APPDrawerMenuPageState extends State<APPDrawerMenuPage> {
                         ))
                     .toList(),
                 buildGrayMode(),
-                Divider(),
+                Divider(height: 1),
               ],
             ),
             Column(

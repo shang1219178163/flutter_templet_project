@@ -41,6 +41,7 @@ import 'package:flutter_templet_project/pages/demo/AppLaunchPage.dart';
 import 'package:flutter_templet_project/pages/demo/AppLifecycleStateObserverDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AppRouteAwareDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AppRouteAwareDemoOne.dart';
+import 'package:flutter_templet_project/pages/demo/AppSandboxFileDirectory.dart';
 import 'package:flutter_templet_project/pages/demo/AppWebViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AsyncDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AudioPlayerPageDemo.dart';
@@ -354,6 +355,7 @@ import 'package:flutter_templet_project/vendor/getx/getx_demo.dart';
 import 'package:flutter_templet_project/vendor/isar/page/OrderListTabPage.dart';
 import 'package:flutter_templet_project/vendor/isar/page/StudentTabPage.dart';
 import 'package:flutter_templet_project/vendor/isar/page/TodoListTabPage.dart';
+import 'package:flutter_templet_project/vendor/jpush/jpush_info_page.dart';
 import 'package:flutter_templet_project/vendor/popover_demo.dart';
 import 'package:flutter_templet_project/vendor/qr/qr_code_scanner_demo.dart';
 import 'package:flutter_templet_project/vendor/qr/qr_flutter_demo.dart';
@@ -372,6 +374,11 @@ class APPRouter {
 
   static const appLifecycleObserverDemo = '/appLifecycleObserverDemo';
   static const themeColorDemo = '/themeColorDemo';
+  static const appSandboxFileDirectory = '/AppSandboxFileDirectory';
+
+  static const jPushInfoPage = '/JPushInfoPage';
+
+
 
   static const launchPage = '/APPLaunchPage';
   static const emojiPage = '/emojiPage';
@@ -835,6 +842,14 @@ class AppPage {
     GetPage(
       name: APPRouter.themeColorDemo,
       page: () => ThemeColorDemo(),
+    ),
+    GetPage(
+      name: APPRouter.appSandboxFileDirectory,
+      page: () => AppSandboxFileDirectory(),
+    ),
+    GetPage(
+      name: APPRouter.jPushInfoPage,
+      page: () => JPushInfoPage(),
     ),
     GetPage(
       name: APPRouter.emojiPage,
