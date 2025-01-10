@@ -210,6 +210,9 @@ dependencies:
 
   expressions: ^0.2.5+2
 
+  # 语音阅读
+  flutter_tts: ^3.8.5
+
 #  User:
 #    hosted:
 #      name: syn_mine_pages
