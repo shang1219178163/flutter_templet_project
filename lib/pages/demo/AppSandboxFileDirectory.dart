@@ -188,7 +188,7 @@ class _AppSandboxFileDirectoryState extends State<AppSandboxFileDirectory> with 
                           Container(
                             padding: EdgeInsets.symmetric(vertical: 4),
                             child: NText(
-                              "分组${index} $key (数量: ${models.length})",
+                              "分组${index + 1} $key (数量: ${models.length})",
                               style: TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w500,
@@ -205,7 +205,7 @@ class _AppSandboxFileDirectoryState extends State<AppSandboxFileDirectory> with 
                             }
 
                             return Dismissible(
-                              key: ValueKey(model.id),
+                              key: ObjectKey(model),
                               direction: DismissDirection.endToStart,
                               background: Container(color: Colors.blue),
                               secondaryBackground: Container(color: Colors.red),
@@ -215,7 +215,6 @@ class _AppSandboxFileDirectoryState extends State<AppSandboxFileDirectory> with 
                               child: Column(
                                 children: [
                                   ListTile(
-                                    key: ValueKey(model.id),
                                     dense: true,
                                     title: Text(desc),
                                     trailing: InkWell(
@@ -350,10 +349,9 @@ class _AppSandboxFileDirectoryState extends State<AppSandboxFileDirectory> with 
         final cacheMap = await cacheController.readFromDisk(cacheKey: cacheKey);
         DLog.d("$runtimeType cacheUser cacheMap ${jsonEncode(cacheMap)}");
       }
-
       return true;
     } catch (e) {
-      DLog.d("$runtimeType $e");
+      DLog.d("❌$runtimeType cacheUser $e");
     }
     return false;
   }
@@ -379,20 +377,13 @@ class _AppSandboxFileDirectoryState extends State<AppSandboxFileDirectory> with 
     final _cacheUserMap = await cacheController.readFromDisk(cacheKey: cacheKey);
     _cacheUserMap[k] ??= [];
     // final index = (_cacheUserMap[k] as List).indexWhere((e) => e["id"] == model.id);
-    final index = (_cacheUserMap[k] as List).indexWhere((e) {
-      final result = e["id"] == model.id;
-      // if (result) {
-      //   DLog.d("$runtimeType cacheUserDelete indexWhere ${[model.id, e["id"], result].join(",")}");
-      // }
-      return result;
-    });
-
+    final index = (_cacheUserMap[k] as List).indexWhere((e) => e["id"] == model.id);
     if (index == -1) {
       return false;
     } else {
-      DLog.d("$runtimeType cacheUserDelete List ${(_cacheUserMap[k] as List).length}");
+      if (isLog) DLog.d("$runtimeType cacheUserDelete List ${(_cacheUserMap[k] as List).length}");
       (_cacheUserMap[k] as List).removeAt(index);
-      DLog.d("$runtimeType cacheUserDeleteAfter List ${(_cacheUserMap[k] as List).length}");
+      if (isLog) DLog.d("$runtimeType cacheUserDeleteAfter List ${(_cacheUserMap[k] as List).length}");
     }
 
     try {
@@ -410,7 +401,7 @@ class _AppSandboxFileDirectoryState extends State<AppSandboxFileDirectory> with 
       }
       return true;
     } catch (e) {
-      DLog.d("$runtimeType $e");
+      DLog.d("❌$runtimeType cacheUserDelete $e");
     }
     return false;
   }
@@ -466,7 +457,7 @@ class _AppSandboxFileDirectoryState extends State<AppSandboxFileDirectory> with 
     //   _cacheUserMap.addAll(mapNew ?? {});
     // }
     //
-    // DLog.d("$runtimeType getCacheUserMap ${_cacheUserMap.map((k, v) => MapEntry(k, (v as List).length))}");
+    // DLog.d("$runtimeType getCacheUserMap ${mapNew.map((k, v) => MapEntry(k, (v as List).length))}");
     return mapNew;
   }
 

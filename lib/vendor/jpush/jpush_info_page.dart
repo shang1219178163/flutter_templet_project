@@ -167,14 +167,13 @@ class _JPushInfoPageState extends State<JPushInfoPage> with DebugBottomSheetMixi
           if (data.isNotEmpty != true) {
             return const Padding(
               padding: EdgeInsets.all(8.0),
-              child: NText("本地操作日志获取失败"),
+              child: NText("本地操作日志获取失败", fontWeight: FontWeight.w500),
             );
           }
 
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const NText("本地操作日志获取失败", fontWeight: FontWeight.w500),
               ...data.entries.map((e) {
                 final content = [e.value, e.key].join(" ");
                 return NText(content, fontSize: 12);
@@ -212,6 +211,7 @@ class _JPushInfoPageState extends State<JPushInfoPage> with DebugBottomSheetMixi
         SnackBar(content: Text('复制成功: $text')),
       );
       _printIsarLink(text);
+      CacheService().updateLogs(value: "$runtimeType $text");
     });
   }
 }
