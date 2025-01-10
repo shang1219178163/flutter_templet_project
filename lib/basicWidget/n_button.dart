@@ -24,6 +24,7 @@ class NButton extends StatelessWidget {
     this.height,
     this.margin,
     this.padding,
+    this.constraints,
     this.borderRadius,
     this.backgroudColor,
     this.gradient,
@@ -43,6 +44,7 @@ class NButton extends StatelessWidget {
     bool enable,
     double? width,
     double? height,
+    BoxConstraints? constraints,
     EdgeInsets? margin,
     EdgeInsets? padding,
     BorderRadius? borderRadius,
@@ -63,6 +65,7 @@ class NButton extends StatelessWidget {
     bool enable,
     double? width,
     double? height,
+    BoxConstraints? constraints,
     EdgeInsets? margin,
     EdgeInsets? padding,
     BorderRadius? borderRadius,
@@ -90,6 +93,9 @@ class NButton extends StatelessWidget {
 
   /// 宽度
   final double? width;
+
+  /// 约束
+  final BoxConstraints? constraints;
 
   /// 外边距
   final EdgeInsets? margin;
@@ -129,12 +135,17 @@ class NButton extends StatelessWidget {
 
     final primaryNew = primary ?? theTheme?.primary ?? context.primaryColor;
     final heightNew = height ?? theTheme?.height ?? 44;
+    final constraintsNew = constraints ??
+        theTheme?.constraints ??
+        BoxConstraints(
+          minWidth: 10,
+          minHeight: 10,
+        );
     final marginNew = margin ?? theTheme?.margin;
     final paddingNew = padding ?? theTheme?.padding;
 
     final backgroudColorNew = backgroudColor ?? theTheme?.backgroudColor;
-    final backgroudColorDisableNew =
-        theTheme?.backgroudColorDisable ?? Color(0xffF3F3F3);
+    final backgroudColorDisableNew = theTheme?.backgroudColorDisable ?? Color(0xffF3F3F3);
 
     final gradientNew = gradient ??
         theTheme?.gradient ??
@@ -155,10 +166,8 @@ class NButton extends StatelessWidget {
 
     final boxShadowNew = boxShadow ?? theTheme?.boxShadow;
     final boxShadowDisableNew = theTheme?.boxShadowDisable;
-    final borderRadiusNew =
-        theTheme?.borderRadius ?? const BorderRadius.all(Radius.circular(8));
-    final borderRadiusDisableNew = theTheme?.borderRadiusDisable ??
-        const BorderRadius.all(Radius.circular(8));
+    final borderRadiusNew = theTheme?.borderRadius ?? const BorderRadius.all(Radius.circular(8));
+    final borderRadiusDisableNew = theTheme?.borderRadiusDisable ?? const BorderRadius.all(Radius.circular(8));
 
     final borderNew = theTheme?.border;
     final borderDisableNew = theTheme?.borderDisable;
@@ -198,6 +207,7 @@ class NButton extends StatelessWidget {
       child: Container(
         width: width,
         height: heightNew,
+        constraints: constraintsNew,
         margin: marginNew,
         padding: paddingNew,
         alignment: Alignment.center,
@@ -225,6 +235,7 @@ class _NButtonTonal extends NButton {
     super.style,
     super.width,
     super.height,
+    super.constraints,
     super.margin,
     super.padding,
     super.backgroudColor,
@@ -268,12 +279,9 @@ class _NButtonTonal extends NButton {
     final paddingNew = padding ?? theTheme?.padding;
 
     final decoration = BoxDecoration(
-      color: backgroudColor ??
-          theTheme?.backgroudColor ??
-          primaryNew.withOpacity(0.1),
+      color: backgroudColor ?? theTheme?.backgroudColor ?? primaryNew.withOpacity(0.1),
       border: border ?? theTheme?.border ?? Border.all(color: primaryNew),
-      borderRadius:
-          theTheme?.borderRadius ?? const BorderRadius.all(Radius.circular(8)),
+      borderRadius: theTheme?.borderRadius ?? const BorderRadius.all(Radius.circular(8)),
       gradient: gradient,
     );
 
@@ -291,6 +299,7 @@ class _NButtonTonal extends NButton {
       child: Container(
         width: width,
         height: heightNew,
+        constraints: constraints,
         margin: marginNew,
         padding: paddingNew,
         alignment: Alignment.center,
@@ -318,6 +327,7 @@ class _NButtonText extends NButton {
     super.style,
     super.width,
     super.height,
+    super.constraints,
     super.margin,
     super.padding,
     super.borderRadius,
@@ -338,6 +348,7 @@ class _NButtonText extends NButton {
         style: style,
         width: width,
         height: height,
+        constraints: constraints,
         margin: margin,
         padding: padding,
         gradient: gradient,
@@ -359,10 +370,8 @@ class _NButtonText extends NButton {
 
     final decoration = BoxDecoration(
       // color: primaryNew.withOpacity(0.1),
-      border:
-          border ?? theTheme?.border ?? Border.all(color: Colors.transparent),
-      borderRadius:
-          theTheme?.borderRadius ?? const BorderRadius.all(Radius.circular(8)),
+      border: border ?? theTheme?.border ?? Border.all(color: Colors.transparent),
+      borderRadius: theTheme?.borderRadius ?? const BorderRadius.all(Radius.circular(8)),
     );
 
     final textColor = primaryNew;
@@ -379,6 +388,7 @@ class _NButtonText extends NButton {
       child: Container(
         width: width,
         height: heightNew,
+        constraints: constraints,
         margin: marginNew,
         padding: paddingNew,
         alignment: Alignment.center,
