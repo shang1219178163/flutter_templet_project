@@ -70,7 +70,7 @@ class FileManager {
     assert(fileNameNew.contains("."), "文件类型不能为空");
 
     var path = '${tempDir.path}/$fileNameNew';
-    debugPrint("$this $fileNameNew: $path");
+    debugPrint("$runtimeType $fileNameNew: $path");
     var file = File(path);
     if (cover && file.existsSync()) {
       file.deleteSync();
@@ -101,7 +101,7 @@ class FileManager {
     assert(fileNameNew.contains("."), "文件类型不能为空");
 
     var path = '${tempDir.path}/$fileNameNew';
-    debugPrint("$this $fileNameNew: $path");
+    debugPrint("$runtimeType $fileNameNew: $path");
     var file = File(path);
     return file;
   }
@@ -143,7 +143,7 @@ class FileManager {
     );
     final fileExists = file.existsSync();
     if (!fileExists) {
-      debugPrint("❌ $this $fileName.$ext: 文件不存在");
+      debugPrint("❌ $runtimeType $fileName.$ext: 文件不存在");
       return null;
     }
     final content = await file.readAsString();

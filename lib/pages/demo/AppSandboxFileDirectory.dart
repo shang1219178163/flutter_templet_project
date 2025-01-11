@@ -9,9 +9,7 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_templet_project/basicWidget/n_button.dart';
 import 'package:flutter_templet_project/basicWidget/n_footer_button_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_menu_anchor.dart';
@@ -20,8 +18,10 @@ import 'package:flutter_templet_project/cache/cache_controller.dart';
 import 'package:flutter_templet_project/cache/cache_service.dart';
 import 'package:flutter_templet_project/cache/file_browser_page.dart';
 import 'package:flutter_templet_project/enum/path_provider_enum.dart';
+import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/date_time_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/list_ext.dart';
 import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/extension/object_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
@@ -106,23 +106,13 @@ class _AppSandboxFileDirectoryState extends State<AppSandboxFileDirectory> with 
                 if (cacheUserMapVN.value.isEmpty) {
                   return;
                 }
-                final key = secondCacheKey ?? "";
-                await cacheUserClear(k: key);
+                await cacheUserClear(section: getSection(0), isLog: true);
                 cacheUserMapVN.value = await getCacheUserMap();
               },
               confirmTitle: "新增",
               onConfirm: () async {
-                final model = UserModel(
-                  id: 6.generateChars(chars: "0123456789"),
-                  name: 3.generateChars(chars: "天行健,君子自强不息"),
-                  age: 2.generateChars(chars: "0123456789").toInt(),
-                );
-                final isSuccess = await cacheUser(model: model);
-                if (isSuccess) {
-                  cacheUserMapVN.value = await getCacheUserMap();
-                } else {
-                  ToastUtil.show("操作失败");
-                }
+                await onAdd(section: getSection(-1));
+                await onAdd(section: getSection(0));
               },
               trailing: GestureDetector(
                 onTap: onDebugSheet,
@@ -142,7 +132,7 @@ class _AppSandboxFileDirectoryState extends State<AppSandboxFileDirectory> with 
             child: ValueListenableBuilder(
               valueListenable: cacheUserMapVN,
               builder: (context, map, child) {
-                final keys = map.keys.toList();
+                final keys = map.keys.toList().sorted((a, b) => b.compareTo(a));
 
                 return Scrollbar(
                   child: ListView.separated(
@@ -170,28 +160,44 @@ class _AppSandboxFileDirectoryState extends State<AppSandboxFileDirectory> with 
                       }
 
                       var models = list.map((e) => UserModel.fromJson(e)).toList();
-                      // models = models.sortedByValue(cb: (e) => e.id);
+                      models = models.sorted((a, b) => (a.id ?? "0").compareTo((b.id ?? "0")));
                       return Column(
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Container(
                             padding: EdgeInsets.symmetric(vertical: 4),
-                            child: NText(
-                              "分组${index + 1} $key (数量: ${models.length})",
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500,
-                              ),
+                            child: Row(
+                              children: [
+                                NText(
+                                  "分组${index + 1} $key (数量: ${models.length})",
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    DLog.d("key: $key");
+                                    onAdd(section: key);
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                    child: Icon(
+                                      Icons.add_circle_outline,
+                                      color: context.primaryColor,
+                                      size: 20,
+                                    ),
+                                  ),
+                                )
+                              ],
                             ),
                           ),
                           ...models.map((model) {
                             final desc = [model.id, model.name, model.age].join("_");
 
-                            onDelete() async {
-                              await cacheUserDelete(model: model, isLog: true);
-                              final result = await getCacheUserMap();
-                              cacheUserMapVN.value = {...result};
+                            onItemDelete() async {
+                              onDelete(section: key, model: model);
                             }
 
                             return Dismissible(
@@ -200,7 +206,7 @@ class _AppSandboxFileDirectoryState extends State<AppSandboxFileDirectory> with 
                               background: Container(color: Colors.blue),
                               secondaryBackground: Container(color: Colors.red),
                               onDismissed: (direction) {
-                                onDelete();
+                                onItemDelete();
                               },
                               child: Column(
                                 children: [
@@ -208,7 +214,7 @@ class _AppSandboxFileDirectoryState extends State<AppSandboxFileDirectory> with 
                                     dense: true,
                                     title: Text(desc),
                                     trailing: InkWell(
-                                      onTap: onDelete,
+                                      onTap: onItemDelete,
                                       child: Container(
                                         margin: EdgeInsets.symmetric(horizontal: 4, vertical: 4),
                                         padding: EdgeInsets.symmetric(horizontal: 6, vertical: 2),
@@ -245,15 +251,8 @@ class _AppSandboxFileDirectoryState extends State<AppSandboxFileDirectory> with 
     );
   }
 
-  onDelete({
-    required UserModel model,
-  }) async {
-    await cacheUserDelete(model: model, isLog: true);
-    final result = await getCacheUserMap();
-    cacheUserMapVN.value = {...result};
-  }
-
-  buildChooseDir() {
+  /// 目录下拉菜单
+  Widget buildChooseDir() {
     return NMenuAnchor<PathProviderDirectory>(
       dropItemPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       values: directorys,
@@ -273,6 +272,7 @@ class _AppSandboxFileDirectoryState extends State<AppSandboxFileDirectory> with 
     );
   }
 
+  /// 显示沙盒文件缓存内容
   onDebugSheet() {
     final mapNew = cacheUserMapVN.value
         .map((k, v) => MapEntry(k, (v as List).map((e) => [e["id"], e["name"]].join("_")).toList()));
@@ -286,21 +286,50 @@ class _AppSandboxFileDirectoryState extends State<AppSandboxFileDirectory> with 
 
   final cacheController = CacheController();
 
-  /// 采样文件名称
+  /// 文件名称
   String get _cacheFileName {
     return "CACHE_User_Model";
   }
 
-  /// 采样患者采集列表缓存key
-  String? get secondCacheKey {
-    final date = DateTime.now();
-    final dateStr = DateTimeExt.stringFromDate(date: date, format: DateFormatEnum.yyyyMMdd.name);
-    return dateStr;
+  /// 新增
+  ///
+  /// section - 分组
+  onAdd({required String section}) async {
+    final model = UserModel(
+      id: 6.generateChars(chars: "0123456789"),
+      name: 3.generateChars(chars: "天行健,君子自强不息"),
+      age: 2.generateChars(chars: "0123456789").toInt(),
+    );
+    final isSuccess = await cacheUser(model: model, section: section);
+    if (isSuccess) {
+      cacheUserMapVN.value = await getCacheUserMap();
+    } else {
+      ToastUtil.show("操作失败");
+    }
   }
 
-  /// 缓存采样
+  /// 删除
+  onDelete({
+    required UserModel model,
+    required String section,
+    bool isLog = false,
+  }) async {
+    await cacheUserDelete(section: section, model: model, isLog: isLog);
+    final result = await getCacheUserMap();
+    cacheUserMapVN.value = {...result};
+  }
+
+  ///获取分组key
+  String getSection(int day) {
+    final date = DateTime.now().add(Duration(days: day));
+    final dateStr = DateTimeExt.stringFromDate(date: date, format: DateFormatEnum.yyyyMMdd.name);
+    return dateStr ?? "other";
+  }
+
+  /// 缓存
   FutureOr<bool> cacheUser({
     required UserModel model,
+    required String section,
     bool isLog = false,
   }) async {
     if (model.id?.isNotEmpty != true) {
@@ -309,32 +338,25 @@ class _AppSandboxFileDirectoryState extends State<AppSandboxFileDirectory> with 
     }
 
     final cacheKey = _cacheFileName;
-
-    final k = secondCacheKey;
-    if (k == null || k.isNotEmpty != true) {
-      DLog.d("❌$runtimeType cachePatientCollect 患者 k 不能为空");
-      return false;
-    }
-
-    final _cacheMap = await cacheController.readFromDisk(cacheKey: cacheKey);
-    _cacheMap[k] ??= [];
-    final index = (_cacheMap[k] as List).indexWhere((e) => e["id"] == model.id);
+    final cacheMap = await cacheController.readFromDisk(cacheKey: cacheKey);
+    cacheMap[section] ??= [];
+    final index = (cacheMap[section] as List).indexWhere((e) => e["id"] == model.id);
     if (index == -1) {
-      (_cacheMap[k] as List).insert(0, model.toJson());
+      (cacheMap[section] as List).insert(0, model.toJson());
     } else {
-      (_cacheMap[k] as List)[index] = model.toJson();
+      (cacheMap[section] as List)[index] = model.toJson();
     }
 
     try {
       final mapNew = await CacheService().updateMap(
         key: cacheKey,
         onUpdate: (map) {
-          map.addAll(_cacheMap);
+          map.addAll(cacheMap);
           return map;
         },
       );
-      _cacheMap.addAll(mapNew);
-      await cacheController.saveToDisk(cacheKey: cacheKey, map: _cacheMap);
+      cacheMap.addAll(mapNew);
+      await cacheController.saveToDisk(cacheKey: cacheKey, map: cacheMap);
       if (isLog) {
         final cacheMap = await cacheController.readFromDisk(cacheKey: cacheKey);
         DLog.d("$runtimeType cacheUser cacheMap ${jsonEncode(cacheMap)}");
@@ -346,9 +368,10 @@ class _AppSandboxFileDirectoryState extends State<AppSandboxFileDirectory> with 
     return false;
   }
 
-  /// 删除采样缓存
+  /// 删除缓存
   FutureOr<bool> cacheUserDelete({
     required UserModel model,
+    required String section,
     bool isLog = false,
   }) async {
     if (model.id?.isNotEmpty != true) {
@@ -357,34 +380,26 @@ class _AppSandboxFileDirectoryState extends State<AppSandboxFileDirectory> with 
     }
 
     final cacheKey = _cacheFileName;
-
-    final k = secondCacheKey;
-    if (k == null || k.isNotEmpty != true) {
-      DLog.d("❌$runtimeType cacheUserDelete 患者 k 不能为空");
-      return false;
-    }
-
-    final _cacheUserMap = await cacheController.readFromDisk(cacheKey: cacheKey);
-    _cacheUserMap[k] ??= [];
-    // final index = (_cacheUserMap[k] as List).indexWhere((e) => e["id"] == model.id);
-    final index = (_cacheUserMap[k] as List).indexWhere((e) => e["id"] == model.id);
+    final cacheMap = await cacheController.readFromDisk(cacheKey: cacheKey);
+    cacheMap[section] ??= [];
+    final index = (cacheMap[section] as List).indexWhere((e) => e["id"] == model.id);
     if (index == -1) {
       return false;
     } else {
-      if (isLog) DLog.d("$runtimeType cacheUserDelete List ${(_cacheUserMap[k] as List).length}");
-      (_cacheUserMap[k] as List).removeAt(index);
-      if (isLog) DLog.d("$runtimeType cacheUserDeleteAfter List ${(_cacheUserMap[k] as List).length}");
+      if (isLog) DLog.d("$runtimeType cacheUserDelete List ${(cacheMap[section] as List).length}");
+      (cacheMap[section] as List).removeAt(index);
+      if (isLog) DLog.d("$runtimeType cacheUserDeleteAfter List ${(cacheMap[section] as List).length}");
     }
 
     try {
       final mapNew = await CacheService().updateMap(
           key: cacheKey,
           onUpdate: (map) {
-            map.addAll(_cacheUserMap);
+            map.addAll(cacheMap);
             return map;
           });
-      _cacheUserMap.addAll(mapNew);
-      await cacheController.saveToDisk(cacheKey: cacheKey, map: _cacheUserMap);
+      cacheMap.addAll(mapNew);
+      await cacheController.saveToDisk(cacheKey: cacheKey, map: cacheMap);
       if (isLog) {
         final cacheMap = await cacheController.readFromDisk(cacheKey: cacheKey);
         DLog.d("$runtimeType cacheUserDelete cacheMap ${cacheMap.map((k, v) => MapEntry(k, (v as List).length))}");
@@ -398,18 +413,12 @@ class _AppSandboxFileDirectoryState extends State<AppSandboxFileDirectory> with 
 
   /// 删除缓存
   FutureOr<bool> cacheUserClear({
-    required String k,
+    required String section,
     bool isLog = false,
   }) async {
     final cacheKey = _cacheFileName;
-
-    if (k.isNotEmpty != true) {
-      DLog.d("❌$runtimeType cacheUserDelete 患者 k 不能为空");
-      return false;
-    }
-
-    final _cacheUserMap = await cacheController.readFromDisk(cacheKey: cacheKey);
-    _cacheUserMap[k] = [];
+    final cacheMap = await cacheController.readFromDisk(cacheKey: cacheKey);
+    cacheMap[section] = [];
 
     try {
       final mapNew = await CacheService().updateMap(
@@ -417,8 +426,8 @@ class _AppSandboxFileDirectoryState extends State<AppSandboxFileDirectory> with 
           onUpdate: (map) {
             return {};
           });
-      _cacheUserMap.addAll(mapNew);
-      await cacheController.saveToDisk(cacheKey: cacheKey, map: {});
+      cacheMap.addAll(mapNew);
+      await cacheController.saveToDisk(cacheKey: cacheKey, map: cacheMap);
       if (isLog) {
         final cacheMap = await cacheController.readFromDisk(cacheKey: cacheKey);
         DLog.d("$runtimeType cacheUserDelete cacheMap ${cacheMap.map((k, v) => MapEntry(k, (v as List).length))}");
@@ -430,38 +439,20 @@ class _AppSandboxFileDirectoryState extends State<AppSandboxFileDirectory> with 
     return false;
   }
 
-  /// 获取所有的样本采集
+  /// 获取缓存文件内容
   Future<Map<String, dynamic>> getCacheUserMap() async {
     final cacheKey = _cacheFileName;
-
-    final k = secondCacheKey;
-    if (k == null || k.isNotEmpty != true) {
-      DLog.d("❌$runtimeType getCachePatientCollect 患者 k 不能为空");
-      return {};
-    }
-
-    final mapNew = await cacheController.readFromDisk(cacheKey: cacheKey);
-
-    // if (_cacheUserMap.isEmpty || !_cacheUserMap.keys.contains(k)) {
-    //   final mapNew = await cacheController.readFromDisk(cacheKey: cacheKey);
-    //   _cacheUserMap.addAll(mapNew ?? {});
-    // }
-    //
+    final cacheMap = await cacheController.readFromDisk(cacheKey: cacheKey);
     // DLog.d("$runtimeType getCacheUserMap ${mapNew.map((k, v) => MapEntry(k, (v as List).length))}");
-    return mapNew;
+    return cacheMap;
   }
 
   /// 获取当前选择用户的缓存列表
-  Future<List<UserModel>> getCacheUsers() async {
+  Future<List<UserModel>> getCacheUsers({
+    required String section,
+  }) async {
     final map = await getCacheUserMap();
-
-    final k = secondCacheKey;
-    if (k == null || k.isNotEmpty != true) {
-      DLog.d("❌$runtimeType getCachePatientCollectsByPatient 患者 k 不能为空");
-      return [];
-    }
-
-    final list = (map[k] as List?) ?? [];
+    final list = (map[section] as List?) ?? [];
     final items = list.map((json) => UserModel.fromJson(json)).toList();
     return items;
   }

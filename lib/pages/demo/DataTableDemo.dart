@@ -287,7 +287,7 @@ class _DataSource<E extends SelectableMixin> extends DataTableSource {
   int get selectedRowCount => _selectedCount;
 }
 
-extension ListExtObject<E extends Object> on List<E> {
+extension _ListExtObject<E extends Object> on List<E> {
   /// 排序
   List<E> sortedByValue({bool ascending = true, required String? Function(E e) cb}) {
     if (ascending) {
