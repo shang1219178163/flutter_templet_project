@@ -69,7 +69,7 @@ class NTextField extends StatefulWidget {
     this.hasFocusVN,
     this.isCollapsed,
     this.inputFormatters,
-    this.scrollPhysics,
+    this.scrollPhysics = const ClampingScrollPhysics(), //避免触发下拉刷新
     this.hidePrefix = true,
     this.hideSuffix = true,
     this.hideClear = true,
