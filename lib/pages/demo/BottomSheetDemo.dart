@@ -20,6 +20,7 @@ import 'package:flutter_templet_project/extension/navigator_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/mixin/asset_resource_mixin.dart';
 import 'package:flutter_templet_project/util/get_util.dart';
 import 'package:get/get.dart';
 
@@ -35,9 +36,8 @@ class BottomSheetDemo extends StatefulWidget {
   State<BottomSheetDemo> createState() => _BottomSheetDemoState();
 }
 
-class _BottomSheetDemoState extends State<BottomSheetDemo> {
-  bool get hideApp =>
-      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
+class _BottomSheetDemoState extends State<BottomSheetDemo> with AssetResourceMixin {
+  bool get hideApp => Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
 
   final _scrollController = ScrollController();
 
@@ -56,24 +56,6 @@ class _BottomSheetDemoState extends State<BottomSheetDemo> {
   ];
 
   final textController = TextEditingController();
-
-  var kuanRong = "";
-
-  @override
-  void initState() {
-    super.initState();
-
-    initData();
-  }
-
-  initData() async {
-    kuanRong = await loadData();
-  }
-
-  Future<String> loadData() async {
-    final response = await rootBundle.loadString('assets/data/kuan_rong.txt');
-    return response;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -148,8 +130,7 @@ class _BottomSheetDemoState extends State<BottomSheetDemo> {
   Widget _buildList(BuildContext context) {
     final theme = Theme.of(context);
 
-    final titleMediumStyle = theme.textTheme.titleMedium
-        ?.copyWith(color: theme.colorScheme.onPrimary);
+    final titleMediumStyle = theme.textTheme.titleMedium?.copyWith(color: theme.colorScheme.onPrimary);
 
     return Wrap(
       children: [
@@ -299,7 +280,8 @@ class _BottomSheetDemoState extends State<BottomSheetDemo> {
   }
 
   void onGetBottomDialog() {
-    final lines = kuanRong.split("\n");
+    final assetFileContent = assetFileModels.firstOrNull?.content ?? "";
+    final lines = assetFileContent.split("\n");
     final lineNews = lines.map((e) => e.isEmpty ? "\n" : e).toList();
     final title = lineNews.first;
     final content = lineNews.skip(2).join("\n");

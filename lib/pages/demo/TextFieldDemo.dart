@@ -543,6 +543,8 @@ class _TextFieldDemoState extends State<TextFieldDemo> with AssetResourceMixin {
   }
 
   Widget buildUnit() {
+    final assetFileContent = assetFileModels.firstOrNull?.content ?? "";
+
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -579,7 +581,7 @@ class _TextFieldDemoState extends State<TextFieldDemo> with AssetResourceMixin {
           ),
           NTextfieldUnit(
             name: "只读模式：",
-            value: kuanRong,
+            value: assetFileContent,
             hitText: "",
             maxLines: 9,
             onChanged: (value) {
