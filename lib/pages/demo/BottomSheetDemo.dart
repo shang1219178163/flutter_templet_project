@@ -57,6 +57,16 @@ class _BottomSheetDemoState extends State<BottomSheetDemo> with AssetResourceMix
 
   final textController = TextEditingController();
 
+  /// 获取本地文件目录
+  ({String title, String content}) getFileContent() {
+    final assetFileContent = assetFileModels.firstOrNull?.content ?? "";
+    final lines = assetFileContent.split("\n");
+    final lineNews = lines.map((e) => e.isEmpty ? "\n" : e).toList();
+    final title = lineNews.first;
+    final content = lineNews.skip(2).join("\n");
+    return (title: title, content: content);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -280,11 +290,9 @@ class _BottomSheetDemoState extends State<BottomSheetDemo> with AssetResourceMix
   }
 
   void onGetBottomDialog() {
-    final assetFileContent = assetFileModels.firstOrNull?.content ?? "";
-    final lines = assetFileContent.split("\n");
-    final lineNews = lines.map((e) => e.isEmpty ? "\n" : e).toList();
-    final title = lineNews.first;
-    final content = lineNews.skip(2).join("\n");
+    final result = getFileContent();
+    final title = result.title;
+    final content = result.content;
     GetBottomSheet.showCustom(
       addUnconstrainedBox: false,
       child: SafeArea(
@@ -318,6 +326,10 @@ class _BottomSheetDemoState extends State<BottomSheetDemo> with AssetResourceMix
   }
 
   void onGetDialog() {
+    final result = getFileContent();
+    final title = result.title ?? "onGetDialog";
+    final content = result.content;
+
     GetDialog.showCustom(
       header: Container(
         height: 44,
@@ -329,7 +341,7 @@ class _BottomSheetDemoState extends State<BottomSheetDemo> with AssetResourceMix
         ),
         child: NavigationToolbar(
           middle: Text(
-            "onGetDialog",
+            title,
             style: TextStyle(fontWeight: FontWeight.w500),
           ),
         ),
@@ -342,12 +354,9 @@ class _BottomSheetDemoState extends State<BottomSheetDemo> with AssetResourceMix
           Navigator.of(context).maybePop();
         },
       ),
-      child: Wrap(
-        children: List.generate(
-            20,
-            (i) => ListTile(
-                  title: Text(i.toString()),
-                )),
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        child: Text(content),
       ),
     );
   }
