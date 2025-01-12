@@ -12,8 +12,8 @@ import 'package:flutter/services.dart';
 /// 本地文件读取
 mixin AssetResourceMixin<T extends StatefulWidget> on State<T> {
   /// 本地文件
-  List<AssetResourceModel> assetFileModels = [
-    AssetResourceModel(
+  List<AssetResourceMixinModel> assetFileModels = [
+    AssetResourceMixinModel(
       path: 'assets/data/kuan_rong.txt',
     )
   ];
@@ -40,7 +40,7 @@ mixin AssetResourceMixin<T extends StatefulWidget> on State<T> {
 }
 
 /// 本地文件路径
-class AssetResourceModel {
+class AssetResourceMixinModel {
   /// 文件路径
   String path = "";
 
@@ -50,9 +50,9 @@ class AssetResourceModel {
   /// 异常
   String? exception;
 
-  AssetResourceModel({required this.path, this.content, this.exception});
+  AssetResourceMixinModel({required this.path, this.content, this.exception});
 
-  AssetResourceModel.fromJson(Map<String, dynamic> json) {
+  AssetResourceMixinModel.fromJson(Map<String, dynamic> json) {
     path = json['path'] ?? "";
     content = json['content'];
     exception = json['exception'];
@@ -66,26 +66,3 @@ class AssetResourceModel {
     return data;
   }
 }
-
-// mixin AssetResourceMixin<T extends StatefulWidget> on State<T> {
-//   /// 宽容序曲
-//   var assetFileContent = "";
-//
-//   String get assetFilePath => 'assets/data/kuan_rong.txt';
-//
-//   @override
-//   void initState() {
-//     super.initState();
-//
-//     _initData();
-//   }
-//
-//   _initData() async {
-//     assetFileContent = await _loadData();
-//   }
-//
-//   Future<String> _loadData() async {
-//     final response = await rootBundle.loadString(assetFilePath);
-//     return response;
-//   }
-// }
