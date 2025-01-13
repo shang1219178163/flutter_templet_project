@@ -89,12 +89,9 @@ Future<void> main() async {
         // ChangeNotifierProvider.value(value: ColorFilteredProvider()),
         ChangeNotifierProvider(create: (context) => ColorFilteredProvider()),
 
-        ChangeNotifierProvider(
-            create: (context) => DBGenericProvider<DBTodo>()),
-        ChangeNotifierProvider(
-            create: (context) => DBGenericProvider<DBStudent>()),
-        ChangeNotifierProvider(
-            create: (context) => DBGenericProvider<DBOrder>()),
+        ChangeNotifierProvider(create: (context) => DBGenericProvider<DBTodo>()),
+        ChangeNotifierProvider(create: (context) => DBGenericProvider<DBStudent>()),
+        ChangeNotifierProvider(create: (context) => DBGenericProvider<DBOrder>()),
 
         ChangeNotifierProvider(create: (context) => CartModel()),
         ChangeNotifierProvider<Person>(
@@ -112,18 +109,23 @@ Future<void> main() async {
     ),
   );
 
-  var systemUiOverlayStyle =
-      SystemUiOverlayStyle(statusBarColor: Colors.transparent);
+  var systemUiOverlayStyle = SystemUiOverlayStyle(statusBarColor: Colors.transparent);
   SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
 }
 
 void setCustomErrorPage() {
-  // FlutterError.onError = (details) {
-  //   FlutterError.presentError(details);
-  // };
+  FlutterError.onError = (details) {
+    FlutterError.presentError(details);
+    final errorDesc = "FlutterError.onError $details";
+    CacheService().updateLogs(value: errorDesc, isClear: true);
+    // exit(1);
+  };
 
-  ErrorWidget.builder = (FlutterErrorDetails details) {
-    debugPrint("flutterErrorDetails:${details.toString()}");
+  ErrorWidget.builder = (details) {
+    final errorDesc = "ErrorWidget.builder $details";
+    debugPrint(errorDesc);
+    CacheService().updateLogs(value: errorDesc, isClear: true);
+
     return ErrorCustomWidget(details: details);
   };
 }
