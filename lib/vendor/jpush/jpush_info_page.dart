@@ -27,6 +27,8 @@ class JPushInfoPage extends StatefulWidget {
 
 class _JPushInfoPageState extends State<JPushInfoPage> with DebugBottomSheetMixin {
   late final items = [
+    "名称: ${CacheService().appName}",
+    "版本: ${'v${CacheService().appVersion}.${CacheService().appVersionCode}'}",
     "环境: ${RequestConfig.current.name}",
     "域名: ${RequestConfig.baseUrl}",
     "loginId: ${CacheService().loginAccount}",
