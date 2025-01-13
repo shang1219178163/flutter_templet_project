@@ -12,6 +12,16 @@ import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:yaml/yaml.dart';
 
 extension YamlMapExt on YamlMap {
+  /// 字符串转
+  static Future<dynamic> fromString({required String content}) async {
+    final yamlMap = loadYaml(content);
+    var result = yamlMap;
+    if (yamlMap is YamlMap) {
+      result = yamlMap.toMap();
+    }
+    return result;
+  }
+
   /// 解析
   static Future<dynamic> parseYaml({required String path}) async {
     // 读取 pubspec.yaml 文件
@@ -22,11 +32,7 @@ extension YamlMapExt on YamlMap {
     }
 
     final content = await file.readAsString();
-    final yamlMap = loadYaml(content);
-    var result = yamlMap;
-    if (yamlMap is YamlMap) {
-      result = yamlMap.toMap();
-    }
+    final result = await fromString(content: content);
     return result;
   }
 

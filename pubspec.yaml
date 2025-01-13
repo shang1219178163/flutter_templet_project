@@ -212,6 +212,7 @@ dependencies:
 
   # 语音阅读
   flutter_tts: ^3.8.5
+  pubspec_parse: ^1.4.0
 
 #  User:
 #    hosted:
@@ -262,9 +263,11 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
+#    - pubspec.yaml(此处声明,方可读取)
     - assets/data/
     - assets/images/
 #    - assets/images/3.0x/
 #    - assets/images/2.0x/
     - assets/images/curve/
+
 
