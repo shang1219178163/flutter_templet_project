@@ -263,7 +263,7 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-#    - pubspec.yaml(此处声明,方可读取)
+    - pubspec.yaml #此处声明,方可读取
     - assets/data/
     - assets/images/
 #    - assets/images/3.0x/
