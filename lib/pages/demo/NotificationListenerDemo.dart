@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_text.dart';
+import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/scroll_controller_ext.dart';
 
 class NotificationListenerDemo extends StatefulWidget {
@@ -7,8 +9,7 @@ class NotificationListenerDemo extends StatefulWidget {
   const NotificationListenerDemo({Key? key, this.title}) : super(key: key);
 
   @override
-  _NotificationListenerDemoState createState() =>
-      _NotificationListenerDemoState();
+  _NotificationListenerDemoState createState() => _NotificationListenerDemoState();
 }
 
 class _NotificationListenerDemoState extends State<NotificationListenerDemo> {
@@ -31,7 +32,7 @@ class _NotificationListenerDemoState extends State<NotificationListenerDemo> {
         title: Text(widget.title ?? "$widget"),
       ),
       body: buildBody(),
-      floatingActionButton: _buildFloatingActionButton(),
+      floatingActionButton: buildFloatingActionButton(),
     );
   }
 
@@ -53,36 +54,37 @@ class _NotificationListenerDemoState extends State<NotificationListenerDemo> {
     );
   }
 
-  _buildFloatingActionButton() {
+  buildFloatingActionButton() {
     return ValueListenableBuilder(
-        valueListenable: isScrolling,
-        builder: (context, bool value, child) {
-          debugPrint('Offstage value:$value');
-          return Offstage(
-            offstage: value,
-            child: FloatingActionButton(
-              tooltip: 'Increment',
-              onPressed: () {
-                if (progress.value >= 1.0) {
-                  _scrollController.jumpTo(0);
-                } else {
-                  debugPrint(
-                      'progress.value: ${progress.value.toStringAsFixed(2)}');
+      valueListenable: isScrolling,
+      builder: (context, bool value, child) {
+        debugPrint('Offstage value:$value');
+        return Offstage(
+          offstage: value,
+          child: FloatingActionButton(
+            tooltip: 'Increment',
+            onPressed: () {
+              if (progress.value >= 1.0) {
+                _scrollController.jumpTo(0);
+              } else {
+                debugPrint('progress.value: ${progress.value.toStringAsFixed(2)}');
+              }
+            },
+            child: ValueListenableBuilder(
+              valueListenable: progress,
+              builder: (context, double value, child) {
+                // print('isScrolling:${isScrolling.value} value: ${value.toString()}');
+                final progressInfo = (value * 100).toInt();
+                if (value >= 1.0) {
+                  return Icon(Icons.arrow_upward);
                 }
+                return Text("$progressInfo%");
               },
-              child: ValueListenableBuilder(
-                  valueListenable: progress,
-                  builder: (context, double value, child) {
-                    // print('isScrolling:${isScrolling.value} value: ${value.toString()}');
-                    final progressInfo = (value * 100).toInt();
-                    if (value >= 1.0) {
-                      return Icon(Icons.arrow_upward);
-                    }
-                    return Text("${progressInfo}%");
-                  }),
             ),
-          );
-        });
+          ),
+        );
+      },
+    );
   }
 
   bool onNotification(ScrollNotification n) {
@@ -139,7 +141,7 @@ class NotificationCustomDemo extends StatefulWidget {
 }
 
 class NotificationCustomDemoState extends State<NotificationCustomDemo> {
-  String _msg = "";
+  final messageVN = ValueNotifier("");
 
   @override
   Widget build(BuildContext context) {
@@ -148,42 +150,54 @@ class NotificationCustomDemoState extends State<NotificationCustomDemo> {
       appBar: AppBar(
         title: Text("$widget"),
       ),
-      body: StatefulBuilder(builder: (context, setStates) {
-        return NotificationListener<MyNotification>(
-          onNotification: (n) {
-            _msg += n.msg;
+      body: buildBody(),
+    );
+  }
 
-            // setState(() {});
-            Future.delayed(Duration(milliseconds: 100), () {
-              setStates(() {});
-            }); //如果太过频繁会被冲掉,需要延迟才会触发 StatefulBuilder的builder
-            return true;
-          },
-          child: Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Builder(
-                  builder: (context) {
-                    return ElevatedButton(
-                      //按钮点击时分发通知
-                      onPressed: () => MyNotification("Hi").dispatch(context),
-                      child: Text("Send Notification"),
-                    );
-                  },
-                ),
-                Text(_msg),
-                Material()
-              ],
+  Widget buildBody() {
+    return NotificationListener<CustomNotification<String>>(
+      onNotification: (n) {
+        // DLog.d("onNotification: $n");
+        messageVN.value += n.data;
+        return true;
+      },
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            NText(
+              "由于 dispatch() 需要节点的 context，而不是 build(BuildContext context) 中的根 context，所以需要使用 Builder，包裹一下节点 "
+              "Widget，以获得该位置的 context。",
+              style: TextStyle(fontSize: 12),
             ),
-          ),
-        );
-      }),
+            Builder(
+              builder: (context) {
+                return ElevatedButton(
+                  onPressed: () {
+                    //按钮点击时分发通知
+                    CustomNotification("Hi").dispatch(context);
+                  },
+                  child: Text("Send Notification"),
+                );
+              },
+            ),
+            ValueListenableBuilder(
+              valueListenable: messageVN,
+              builder: (context, value, child) {
+                return Text(value);
+              },
+            ),
+            Material()
+          ].map((e) => Padding(padding: EdgeInsets.only(bottom: 8), child: e)).toList(),
+        ),
+      ),
     );
   }
 }
 
-class MyNotification extends Notification {
-  MyNotification(this.msg);
-  final String msg;
+/// 自定义通知
+class CustomNotification<T> extends Notification {
+  CustomNotification(this.data);
+  final T data;
 }
