@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_network_image.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
+import 'package:flutter_templet_project/extension/num_ext.dart';
+import 'package:flutter_templet_project/util/R.dart';
 
 class WrapDemo extends StatefulWidget {
   final String? title;
@@ -22,33 +25,13 @@ class _WrapDemoState extends State<WrapDemo> {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Container(
-            decoration: BoxDecoration(
-              color: Colors.transparent,
-              border: Border.all(color: Colors.blue),
-              borderRadius: BorderRadius.all(Radius.circular(0)),
-            ),
-            child: Wrap(
-              spacing: 8.0,
-              runSpacing: 8.0,
-              children: List.generate(12, (index) {
-                return Container(
-                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                  decoration: BoxDecoration(
-                    color: Colors.transparent,
-                    border: Border.all(color: Colors.blue),
-                    borderRadius: BorderRadius.all(Radius.circular(0)),
-                  ),
-                  child: Text("选项_$index"),
-                );
-              }).toList(),
-            ),
-          ),
+          buildWrapBox(),
           NSectionBox(
             title: "Axis.horizontal",
             child: Container(
@@ -85,6 +68,41 @@ class _WrapDemoState extends State<WrapDemo> {
       ),
     );
   }
+
+  Widget buildWrapBox() {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.transparent,
+        border: Border.all(color: Colors.blue),
+        borderRadius: BorderRadius.all(Radius.circular(0)),
+      ),
+      child: Wrap(
+        spacing: 8.0,
+        runSpacing: 8.0,
+        children: List.generate(12, (index) {
+          return Container(
+            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+            decoration: BoxDecoration(
+              color: Colors.transparent,
+              border: Border.all(color: Colors.blue),
+              borderRadius: BorderRadius.all(Radius.circular(0)),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                NNetworkImage(
+                  width: 50,
+                  height: 60,
+                  url: R.image.urls[IntExt.random(max: R.image.urls.length)],
+                ),
+                Text("选项_$index"),
+              ],
+            ),
+          );
+        }).toList(),
+      ),
+    );
+  }
 }
 
 class WrapWidget extends StatelessWidget {
@@ -115,8 +133,7 @@ class WrapWidget extends StatelessWidget {
   final int rowCount;
 
   itemWidth() {
-    var contentWidth =
-        width - padding.left - padding.right - margin.left - margin.right;
+    var contentWidth = width - padding.left - padding.right - margin.left - margin.right;
     var w = (contentWidth - (rowCount - 1) * spacing) / rowCount;
     return w;
   }
@@ -137,10 +154,7 @@ class WrapWidget extends StatelessWidget {
         // children: images.map((e) => _buildItem(url: e, text: "装修灵感啊", onPressed: (){
         //   print(e);
         // })).toList(),
-        children: Colors.primaries
-            .take(10)
-            .map((e) => _buildItemNew(color: e))
-            .toList(),
+        children: Colors.primaries.take(10).map((e) => _buildItemNew(color: e)).toList(),
       ),
     );
   }
@@ -157,8 +171,7 @@ class WrapWidget extends StatelessWidget {
             FittedBox(
               child: FadeInImage.assetNetwork(
                 placeholder: 'assets/images/img_placeholder.png',
-                image:
-                    'https://pic.616pic.com/bg_w1180/00/07/20/2gfqq0N3qX.jpg!/fw/1120',
+                image: 'https://pic.616pic.com/bg_w1180/00/07/20/2gfqq0N3qX.jpg!/fw/1120',
                 fit: BoxFit.fill,
                 width: 44,
                 height: 44,

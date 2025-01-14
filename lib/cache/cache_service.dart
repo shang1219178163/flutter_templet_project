@@ -14,6 +14,7 @@ enum CacheKey {
   requestError(name: "requestError", needLogin: false, desc: "请求错误缓存"),
   appName(name: "appName", needLogin: false, desc: "App名称"),
   appVersion(name: "appVersion", needLogin: false, desc: "App版本号"),
+  appVersionCode(name: "appVersionCode", needLogin: false, desc: "App版本号(安卓)"),
   appPackageName(name: "appPackageName", needLogin: false, desc: "App包名Com.Yilian.Ylhealthapp"),
   token(name: "token", needLogin: false, desc: "token"),
   loginAccount(name: "loginAccount", needLogin: false, desc: "用户登录账号"),
@@ -320,7 +321,7 @@ class CacheService {
   }
 
   /// 更新本地操作日志
-  Future<Map<String, String>> updateLogs({required String value}) async {
+  Future<Map<String, String>> updateLogs({required String value, bool isClear = false}) async {
     final cacheKey = CacheKey.localOperateLog.name;
     final Map<String, dynamic> cache = getMap(cacheKey) ?? {};
     final Map<String, String> map = Map<String, String>.from(cache);
@@ -328,6 +329,9 @@ class CacheService {
       return map;
     }
 
+    if (isClear) {
+      map.clear();
+    }
     map[value] = DateTime.now().toString().substring(0, 23);
     await setMap(cacheKey, map);
     return map;
@@ -408,6 +412,11 @@ extension CacheServiceExt on CacheService {
   /// 1.0.0
   String? get appVersion {
     return CacheService().getString(CacheKey.appVersion.name);
+  }
+
+  /// 应用版本号 100
+  String? get appVersionCode {
+    return CacheService().getString(CacheKey.appVersionCode.name);
   }
 
   /// com.yilian.ylHealthApp

@@ -1,17 +1,14 @@
 import 'dart:convert';
 import 'dart:io';
-import 'dart:isolate';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_templet_project/cache/file_manager.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
-import 'package:flutter_templet_project/extension/object_ext.dart';
 import 'package:flutter_templet_project/util/yaml_ext.dart';
 import 'package:path/path.dart' as path;
 import 'package:pubspec_parse/pubspec_parse.dart';
-import 'package:yaml/yaml.dart';
 
+/// 解析 Yaml
 class YamlParsePage extends StatefulWidget {
   YamlParsePage({super.key, this.title});
 
@@ -28,7 +25,6 @@ class _YamlParsePageState extends State<YamlParsePage> {
 
   List<({String title, VoidCallback action})> get items => [
         (title: "路径检测", action: onPath),
-        (title: "读取 pubspec.yaml", action: onRead),
         (title: "解析 pubspec.yaml", action: onParse),
       ];
 
@@ -72,7 +68,7 @@ class _YamlParsePageState extends State<YamlParsePage> {
             ValueListenableBuilder(
               valueListenable: contentVN,
               builder: (context, value, child) {
-                return Text("$value");
+                return Text(value);
               },
             ),
           ],
@@ -109,23 +105,7 @@ class _YamlParsePageState extends State<YamlParsePage> {
 
     String yamlPath4 = Uri.file(yamlPath3).path;
     ddlog("yamlPath4: ${"文件${File(yamlPath4).existsSync() ? "" : "不"}存在"} $yamlPath4");
-  }
 
-  onRead() async {
-    String source = await rootBundle.loadString("pubspec.yaml");
-    // debugPrint('source: $source');
-    contentVN.value = source;
-
-    // final Map mapData = await YamlMapExt.fromString(content: source);
-    // contentVN.value = mapData.formatedString();
-
-    // 转为模型
-    // final parsed = Pubspec.parse(source);
-    // ddlog('parsed: ${parsed}');
-    // contentVN.value = parsed.toString();
-  }
-
-  onParse() async {
     String yamlPath = '/Users/shang/GitHub/flutter_templet_project/pubspec.yaml';
     ddlog("yamlPath: $yamlPath");
 
@@ -134,14 +114,17 @@ class _YamlParsePageState extends State<YamlParsePage> {
       contentVN.value = "文件不存在";
       return;
     }
+    contentVN.value = "文件存在";
+  }
 
-    final yamlMap = await YamlMapExt.parseYaml(path: yamlPath);
+  onParse() async {
+    String content = await rootBundle.loadString("pubspec.yaml");
+    final yamlMap = await YamlMapExt.fromString(content: content);
     final encoder = JsonEncoder.withIndent('  '); // 使用带缩进的 JSON 编码器
     contentVN.value = encoder.convert(yamlMap);
 
     // 通过 pubspec_parse 解析,返回模型
-    String yamlStr = file.readAsStringSync();
-    final parsed = Pubspec.parse(yamlStr);
-    ddlog('parsed: ${parsed}');
+    final pubspecModel = Pubspec.parse(content);
+    ddlog('pubspecModel: $pubspecModel');
   }
 }
