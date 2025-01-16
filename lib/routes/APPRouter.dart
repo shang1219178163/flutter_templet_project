@@ -219,6 +219,7 @@ import 'package:flutter_templet_project/pages/demo/PageLifecycleFuncTest.dart';
 import 'package:flutter_templet_project/pages/demo/PageViewAndBarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PageViewDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/PageViewDemoThree.dart';
+import 'package:flutter_templet_project/pages/demo/PageViewVerticalDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PhysicalModelDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PickerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PopScopeDemo.dart';
@@ -796,6 +797,7 @@ class APPRouter {
   static const chemotherapyRegimenDrugCaculator = '/chemotherapyRegimenDrugCaculator';
   static const expressionsCalulatorDemo = '/expressionsCalulatorDemo';
   static const flexbleListViewDemo = '/flexbleListViewDemo';
+  static const pageViewVerticalDemo = '/PageViewVerticalDemo';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -2361,6 +2363,10 @@ class AppPage {
     GetPage(
       name: APPRouter.flexbleListViewDemo,
       page: () => FlexbleListViewDemo(),
+    ),
+    GetPage(
+      name: APPRouter.pageViewVerticalDemo,
+      page: () => PageViewVerticalDemo(),
     ),
   ];
 }

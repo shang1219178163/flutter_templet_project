@@ -618,6 +618,7 @@ var specials = <Tuple2<String, String>>[
   Tuple2(APPRouter.audioPlayPageDemo, "audioPlayPage"),
   Tuple2(APPRouter.expressionsCalulatorDemo, "简单表达式计算"),
   Tuple2(APPRouter.flexbleListViewDemo, "简单表达式计算"),
+  Tuple2(APPRouter.pageViewVerticalDemo, "垂直滚动"),
 ];
 
 var animateds = <Tuple2<String, String>>[
