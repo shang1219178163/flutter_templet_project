@@ -12,10 +12,11 @@ import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 
 /// 滑动分段组件(ENCupertinoSlidingSegmentedControl)封装
-class NSlidingSegmentedControl extends StatefulWidget {
+class NSlidingSegmentedControl<T> extends StatefulWidget {
   const NSlidingSegmentedControl({
     super.key,
     required this.items,
+    this.itemBuilder,
     this.selectedIndex = 0,
     required this.onChanged,
     this.textColor,
@@ -27,11 +28,10 @@ class NSlidingSegmentedControl extends StatefulWidget {
   });
 
   /// 数据源
-  final List<
-      ({
-        String title,
-        String icon,
-      })> items;
+  final List<T> items;
+
+  /// 数据子项
+  final Widget Function(T e, bool isSelecetd)? itemBuilder;
 
   /// 初始化位置
   final int selectedIndex;
@@ -58,15 +58,14 @@ class NSlidingSegmentedControl extends StatefulWidget {
   final EdgeInsets? padding;
 
   @override
-  State<NSlidingSegmentedControl> createState() =>
-      _NSlidingSegmentedControlState();
+  State<NSlidingSegmentedControl<T>> createState() => _NSlidingSegmentedControlState<T>();
 }
 
-class _NSlidingSegmentedControlState extends State<NSlidingSegmentedControl> {
-  late var current = widget.items[widget.selectedIndex];
+class _NSlidingSegmentedControlState<T> extends State<NSlidingSegmentedControl<T>> {
+  late var current = widget.items[widget.selectedIndex] as T?;
 
   @override
-  void didUpdateWidget(covariant NSlidingSegmentedControl oldWidget) {
+  void didUpdateWidget(covariant NSlidingSegmentedControl<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.items != widget.items ||
         oldWidget.selectedIndex != widget.selectedIndex ||
@@ -86,6 +85,7 @@ class _NSlidingSegmentedControlState extends State<NSlidingSegmentedControl> {
   Widget build(BuildContext context) {
     return buildSegmentedControl(
       items: widget.items,
+      itemBuilder: widget.itemBuilder,
       textColor: widget.textColor,
       thumbTextColor: widget.thumbTextColor,
       backgroundColor: widget.backgroundColor,
@@ -97,12 +97,8 @@ class _NSlidingSegmentedControlState extends State<NSlidingSegmentedControl> {
   }
 
   Widget buildSegmentedControl({
-    required List<
-            ({
-              String title,
-              String icon,
-            })>
-        items,
+    required List<T> items,
+    required Widget Function(T e, bool isSelecetd)? itemBuilder,
     Color? textColor,
     Color? thumbTextColor,
     Color? backgroundColor,
@@ -111,68 +107,38 @@ class _NSlidingSegmentedControlState extends State<NSlidingSegmentedControl> {
     EdgeInsets? padding,
     required ValueChanged<int> onChanged,
   }) {
-    return ENCupertinoSlidingSegmentedControl<
-        ({
-          String title,
-          String icon,
-        })>(
+    return ENCupertinoSlidingSegmentedControl<T>(
       groupValue: current,
       // children: children,
-      children: Map<
-          ({
-            String title,
-            String icon,
-          }),
-          Widget>.fromIterable(
+      children: Map<T, Widget>.fromIterable(
         items,
         key: (v) => v,
         value: (val) {
-          final e = val as ({
-            String title,
-            String icon,
-          });
+          final e = val;
 
-          final isSelecetd = current == val;
+          final isSelecetd = current == e;
 
-          final color = isSelecetd
-              ? (thumbTextColor ?? Colors.white)
-              : (textColor ?? Color(0xff737373));
-          final icon = isSelecetd ? e.icon : e.icon;
+          final color = isSelecetd ? (thumbTextColor ?? Colors.white) : (textColor ?? Color(0xff737373));
 
-          return Container(
-            height: 32,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: Colors.transparent,
-              // border: Border.all(color: Colors.blue),
-              // borderRadius: BorderRadius.all(Radius.circular(0)),
-            ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                if (icon.isNotEmpty)
-                  Padding(
-                    padding: const EdgeInsets.only(right: 4),
-                    child: Image(
-                      image: icon.toAssetImage(),
-                      width: 12,
-                      height: 14,
-                      color: color,
-                    ),
+          return itemBuilder?.call(val, isSelecetd) ??
+              Container(
+                height: 32,
+                padding: padding,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: Colors.transparent,
+                  // border: Border.all(color: Colors.blue),
+                  // borderRadius: BorderRadius.all(Radius.circular(0)),
+                ),
+                child: Text(
+                  e.toString(),
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: color,
+                    fontWeight: FontWeight.w500,
                   ),
-                if (e.title.isNotEmpty)
-                  Flexible(
-                    child: Text(
-                      e.title,
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: color,
-                      ),
-                    ),
-                  ),
-              ],
-            ),
-          );
+                ),
+              );
         },
       ),
       onValueChanged: (val) {
@@ -189,4 +155,61 @@ class _NSlidingSegmentedControlState extends State<NSlidingSegmentedControl> {
       padding: padding ?? EdgeInsets.all(2),
     );
   }
+}
+
+/// 带图标默认实现
+class NSlidingSegmentedControlIconAndTitlel extends NSlidingSegmentedControl<({String title, String icon})> {
+  NSlidingSegmentedControlIconAndTitlel({
+    super.key,
+    required super.items,
+    required super.onChanged,
+    super.selectedIndex,
+    super.textColor,
+    required Color thumbTextColor,
+    EdgeInsets? padding,
+    super.backgroundColor,
+    super.thumbColor,
+    super.radius,
+  }) : super(
+          itemBuilder: (({String icon, String title}) e, bool isSelecetd) {
+            final color = isSelecetd ? Colors.white : thumbTextColor;
+            final icon = isSelecetd ? e.icon : e.icon;
+
+            return Container(
+              height: 32,
+              padding: padding,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: Colors.transparent,
+                // border: Border.all(color: Colors.blue),
+                // borderRadius: BorderRadius.all(Radius.circular(0)),
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  if (icon.isNotEmpty)
+                    Padding(
+                      padding: const EdgeInsets.only(right: 4),
+                      child: Image(
+                        image: icon.toAssetImage(),
+                        width: 12,
+                        height: 14,
+                        color: color,
+                      ),
+                    ),
+                  if (e.title.isNotEmpty)
+                    Flexible(
+                      child: Text(
+                        e.title,
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: color,
+                        ),
+                      ),
+                    ),
+                ],
+              ),
+            );
+          },
+        );
 }

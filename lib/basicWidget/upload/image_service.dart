@@ -15,8 +15,7 @@ import 'package:image_gallery_saver/image_gallery_saver.dart';
 /// 图片处理工具类
 class ImageService {
   /// 图片压缩
-  Future<File> compressAndGetFile(File file,
-      {String? targetPath, bool needLogInfo = true}) async {
+  Future<File> compressAndGetFile(File file, {String? targetPath, bool needLogInfo = true}) async {
     try {
       var fileName = file.absolute.path.split('/').last;
 
@@ -140,14 +139,17 @@ class ImageService {
   }) async {
     final percentVN = ValueNotifier(0.0);
 
-    ToastUtil.loading("文件下载中",
-        indicator: ValueListenableBuilder<double>(
-            valueListenable: percentVN,
-            builder: (context, value, child) {
-              return CircularProgressIndicator(
-                value: value,
-              );
-            }));
+    ToastUtil.loading(
+      "文件下载中",
+      indicator: ValueListenableBuilder<double>(
+        valueListenable: percentVN,
+        builder: (context, value, child) {
+          return CircularProgressIndicator(
+            value: value,
+          );
+        },
+      ),
+    );
 
     String? name;
     try {
