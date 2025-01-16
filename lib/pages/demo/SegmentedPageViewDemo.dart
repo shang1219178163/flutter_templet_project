@@ -3,6 +3,7 @@ import 'package:flutter_templet_project/basicWidget/enhance/en_sliding_segmented
 import 'package:flutter_templet_project/basicWidget/enhance/en_sliding_segmented_control/n_sliding_segmented_page_view.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:get/get.dart';
 
 /// 带页面的滑动分段组件页面 NSlidingSegmentedPageView
@@ -19,8 +20,7 @@ class SegmentedPageViewDemo extends StatefulWidget {
 }
 
 class _SegmentedPageViewDemoState extends State<SegmentedPageViewDemo> {
-  bool get hideApp =>
-    !"$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
+  bool get hideApp => !"$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
 
   final _scrollController = ScrollController();
 
@@ -86,8 +86,7 @@ class _SegmentedPageViewDemoState extends State<SegmentedPageViewDemo> {
   }
 
   buildSlidingSegmentedControl({
-    Widget Function(NSlidingSegmentedControl segmentedControl)?
-        segmentedBuilder,
+    Widget Function(NSlidingSegmentedControl segmentedControl)? segmentedBuilder,
   }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -96,15 +95,51 @@ class _SegmentedPageViewDemoState extends State<SegmentedPageViewDemo> {
             valueListenable: selectedIndexVN,
             builder: (context, selectedIndex, child) {
               final segmentedControl = NSlidingSegmentedControl(
-                items:
-                    items.map((e) => (title: e.title, icon: e.icon)).toList(),
+                items: items.map((e) => (title: e.title, icon: e.icon)).toList(),
                 selectedIndex: selectedIndex,
                 onChanged: (int index) {
                   ddlog("onChanged: $index");
-                  pageController.animateToPage(index,
-                      duration: Duration(milliseconds: 350),
-                      curve: Curves.ease);
+                  pageController.animateToPage(index, duration: Duration(milliseconds: 350), curve: Curves.ease);
                   // pageController.jumpToPage(index);
+                },
+                itemBuilder: (({String icon, String title}) e, bool isSelecetd) {
+                  final color = isSelecetd ? Colors.white : Color(0xff737373);
+                  final icon = isSelecetd ? e.icon : e.icon;
+
+                  return Container(
+                    height: 32,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: Colors.transparent,
+                      // border: Border.all(color: Colors.blue),
+                      // borderRadius: BorderRadius.all(Radius.circular(0)),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        if (icon.isNotEmpty)
+                          Padding(
+                            padding: const EdgeInsets.only(right: 4),
+                            child: Image(
+                              image: icon.toAssetImage(),
+                              width: 12,
+                              height: 14,
+                              color: color,
+                            ),
+                          ),
+                        if (e.title.isNotEmpty)
+                          Flexible(
+                            child: Text(
+                              e.title,
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: color,
+                              ),
+                            ),
+                          ),
+                      ],
+                    ),
+                  );
                 },
               );
 
