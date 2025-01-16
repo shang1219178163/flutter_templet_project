@@ -104,6 +104,7 @@ import 'package:flutter_templet_project/pages/demo/FilterDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FilterDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/FittedBoxDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FlexDemo.dart';
+import 'package:flutter_templet_project/pages/demo/FlexbleListViewPage.dart';
 import 'package:flutter_templet_project/pages/demo/FlexibleDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FlexibleSpaceDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FloatingActionButtonDemo.dart';
@@ -377,8 +378,6 @@ class APPRouter {
   static const appSandboxFileDirectory = '/AppSandboxFileDirectory';
 
   static const jPushInfoPage = '/JPushInfoPage';
-
-
 
   static const launchPage = '/APPLaunchPage';
   static const emojiPage = '/emojiPage';
@@ -796,6 +795,7 @@ class APPRouter {
   static const iteratorDemo = '/iteratorDemo';
   static const chemotherapyRegimenDrugCaculator = '/chemotherapyRegimenDrugCaculator';
   static const expressionsCalulatorDemo = '/expressionsCalulatorDemo';
+  static const flexbleListViewDemo = '/flexbleListViewDemo';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -2357,6 +2357,10 @@ class AppPage {
     GetPage(
       name: APPRouter.expressionsCalulatorDemo,
       page: () => ExpressionsCalulatorDemo(),
+    ),
+    GetPage(
+      name: APPRouter.flexbleListViewDemo,
+      page: () => FlexbleListViewDemo(),
     ),
   ];
 }
