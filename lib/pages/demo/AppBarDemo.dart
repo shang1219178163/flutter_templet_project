@@ -15,8 +15,7 @@ class AppBarDemo extends StatefulWidget {
   _AppBarDemoState createState() => _AppBarDemoState();
 }
 
-class _AppBarDemoState extends State<AppBarDemo>
-    with SingleTickerProviderStateMixin {
+class _AppBarDemoState extends State<AppBarDemo> with SingleTickerProviderStateMixin {
   late final items = <String>[
     'AppBar隐藏',
     'AppBar背景',
@@ -140,6 +139,11 @@ class _AppBarDemoState extends State<AppBarDemo>
           labelColor: theme.primaryColor,
           labelPadding: EdgeInsets.symmetric(horizontal: 8),
           tabs: items.map((e) => Tab(text: e)).toList(),
+          onTap: (index) {
+            debugPrint("index: $index");
+            tabIndex.value = index;
+            setState(() {});
+          },
         ),
         Expanded(
           child: TabBarView(

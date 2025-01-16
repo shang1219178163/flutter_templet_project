@@ -17,8 +17,7 @@ class PageViewDemoOne extends StatefulWidget {
   _PageViewDemoOneState createState() => _PageViewDemoOneState();
 }
 
-class _PageViewDemoOneState extends State<PageViewDemoOne>
-    with SingleTickerProviderStateMixin {
+class _PageViewDemoOneState extends State<PageViewDemoOne> with SingleTickerProviderStateMixin {
   late final scrollController = ScrollController();
 
   late final List<Tuple3<String, Widget, List<ItemModel>>> _tabItems = [
@@ -26,21 +25,18 @@ class _PageViewDemoOneState extends State<PageViewDemoOne>
     Tuple3("我的患者", buildPageViewChild(), []),
   ];
 
-  List<Tuple3<String, Widget, List<ItemModel>>> get tabItems =>
-      _tabItems.where((e) => e.item3.isNotEmpty).toList();
+  List<Tuple3<String, Widget, List<ItemModel>>> get tabItems => _tabItems.where((e) => e.item3.isNotEmpty).toList();
 
   final tabIndex = ValueNotifier(0);
 
-  late final _tabController =
-      TabController(length: _tabItems.length, vsync: this);
+  late final tabController = TabController(length: _tabItems.length, vsync: this);
 
-  late final _pageController =
-      PageController(initialPage: tabIndex.value, keepPage: true);
+  late final pageController = PageController(initialPage: tabIndex.value, keepPage: true);
 
   @override
   void dispose() {
-    _tabController.dispose();
-    _pageController.dispose();
+    tabController.dispose();
+    pageController.dispose();
     scrollController.dispose();
     super.dispose();
   }
@@ -54,21 +50,22 @@ class _PageViewDemoOneState extends State<PageViewDemoOne>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title ?? "$widget"),
-          actions: [
-            'done',
-          ]
-              .map((e) => TextButton(
-                    child: Text(
-                      e,
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    onPressed: () => debugPrint(e),
-                  ))
-              .toList(),
-        ),
-        body: buildBody());
+      appBar: AppBar(
+        title: Text(widget.title ?? "$widget"),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () => debugPrint(e),
+                ))
+            .toList(),
+      ),
+      body: buildBody(),
+    );
   }
 
   buildBody() {
@@ -84,20 +81,15 @@ class _PageViewDemoOneState extends State<PageViewDemoOne>
             child: Column(
               children: [
                 buildTab(
-                    controller: _tabController,
-                    tabs: _tabItems
-                        .map((e) => Tab(
-                              text: e.item1,
-                            ))
-                        .toList(),
-                    onTap: (int index) async {
-                      // debugPrint("buildTab: $index");
-                      tabIndex.value = index;
-                      _pageController.jumpToPage(index);
-                    }),
-                SizedBox(
-                  height: 8.w,
+                  controller: tabController,
+                  tabs: _tabItems.map((e) => Tab(text: e.item1)).toList(),
+                  onTap: (int index) async {
+                    // debugPrint("buildTab: $index");
+                    tabIndex.value = index;
+                    pageController.jumpToPage(index);
+                  },
                 ),
+                SizedBox(height: 8),
                 buildDebugInfo(),
               ],
             ),
@@ -155,10 +147,10 @@ class _PageViewDemoOneState extends State<PageViewDemoOne>
     return Stack(
       children: [
         PageView(
-          controller: _pageController,
+          controller: pageController,
           onPageChanged: (index) {
             tabIndex.value = index;
-            _tabController.animateTo(index);
+            tabController.animateTo(index);
             // setState(() {});
           },
           children: _tabItems.map((e) {
@@ -182,24 +174,23 @@ class _PageViewDemoOneState extends State<PageViewDemoOne>
             child: Container(
               // color: Colors.black12,
               child: ValueListenableBuilder<int>(
-                  valueListenable: tabIndex,
-                  builder: (context, value, child) {
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: List<Widget>.generate(
-                        _tabItems.length,
-                        (index) => Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8),
-                          child: CircleAvatar(
-                            radius: 5,
-                            backgroundColor: index == value
-                                ? Colors.greenAccent
-                                : Colors.white30,
-                          ),
+                valueListenable: tabIndex,
+                builder: (context, value, child) {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: List<Widget>.generate(
+                      _tabItems.length,
+                      (index) => Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
+                        child: CircleAvatar(
+                          radius: 5,
+                          backgroundColor: index == value ? Colors.greenAccent : Colors.white30,
                         ),
                       ),
-                    );
-                  }),
+                    ),
+                  );
+                },
+              ),
             ),
           ),
       ],
@@ -221,56 +212,16 @@ class _PageViewDemoOneState extends State<PageViewDemoOne>
     );
   }
 
-  // Widget buildPageViewNew({
-  //   required PageView pageView,
-  //
-  // }) {
-  //
-  //   final itemCount = (pageView.childrenDelegate as SliverChildListDelegate).children.length;
-  //   return Scaffold(
-  //     // will make use of Stack Widget, so that One Widget can we placed on top
-  //     body: Stack(
-  //       children: [
-  //         pageView,
-  //         Positioned(
-  //           bottom: 0,
-  //           left: 0,
-  //           right: 0,
-  //           height: 40,
-  //           child: Container(
-  //             color: Colors.black12,
-  //             child: Row(
-  //               mainAxisAlignment: MainAxisAlignment.center,
-  //               children: List<Widget>.generate(
-  //                 itemCount,
-  //                  (index) => Padding(
-  //                     padding: const EdgeInsets.symmetric(horizontal: 8),
-  //                     child: CircleAvatar(
-  //                         radius: 5,
-  //                         backgroundColor: _activePage == index
-  //                             ? Colors.greenAccent
-  //                             : Colors.white30,
-  //                       ),
-  //                     ),
-  //               ),
-  //             ),
-  //           ),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
-
   /// Debug 信息
   Widget buildDebugInfo() {
     return SizedBox();
   }
 
   jumpToPage(int page) {
-    if (!_pageController.hasClients) {
+    if (!pageController.hasClients) {
       return;
     }
-    _pageController.jumpToPage(page);
+    pageController.jumpToPage(page);
   }
 }
 

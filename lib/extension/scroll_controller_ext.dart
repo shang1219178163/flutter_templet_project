@@ -19,7 +19,6 @@ extension ScrollControllerExt on ScrollController {
   /// 跳转到对应位子
   Future<void> jumpTo(
     double value, {
-    Duration delay = const Duration(seconds: 0),
     Duration duration = const Duration(milliseconds: 350),
     Curve curve = Curves.ease,
   }) async {
@@ -40,8 +39,7 @@ extension ScrollControllerExt on ScrollController {
     Duration duration = const Duration(milliseconds: 350),
     Curve curve = Curves.ease,
   }) async {
-    final offset =
-        position.pixels.clamp(position.pixels, position.maxScrollExtent);
+    final offset = position.pixels.clamp(position.pixels, position.maxScrollExtent);
     await jumpTo(offset, duration: duration, curve: curve);
   }
 
@@ -80,8 +78,7 @@ extension ScrollControllerExt on ScrollController {
       }
       if (scrollController.hasClients) {
         scrollController.animateTo(animateToOffset,
-            duration: duration ?? const Duration(milliseconds: 200),
-            curve: Curves.linear);
+            duration: duration ?? const Duration(milliseconds: 200), curve: Curves.linear);
       }
     } catch (e) {
       debugPrint('JumToHorizontal->$e');
@@ -102,31 +99,25 @@ extension ScrollControllerExt on ScrollController {
       return;
     }
 
-    var local = renderBox.localToGlobal(Offset.zero,
-        ancestor: scrollKey.currentContext?.findRenderObject());
+    var local = renderBox.localToGlobal(Offset.zero, ancestor: scrollKey.currentContext?.findRenderObject());
     var size = renderBox.size;
 
     var value = scrollDirection == Axis.horizontal ? local.dx : local.dy;
 
     var offset = value + scrollController.offset;
-    debugPrint(
-        "scrollToItemNew local:$local, size:$size, offset: ${scrollController.offset}, offset: $offset");
+    debugPrint("scrollToItemNew local:$local, size:$size, offset: ${scrollController.offset}, offset: $offset");
 
     var padding = MediaQueryData.fromView(ui.window).padding;
-    var paddingStart =
-        scrollDirection == Axis.horizontal ? padding.left : padding.top;
+    var paddingStart = scrollDirection == Axis.horizontal ? padding.left : padding.top;
 
     final extentAfter = scrollController.position.extentAfter;
     if (extentAfter <= local.dy) {
-      debugPrint(
-          "scrollToItemNew extentAfter:$extentAfter local.dy:${local.dy}");
+      debugPrint("scrollToItemNew extentAfter:$extentAfter local.dy:${local.dy}");
       scrollController.animateTo(scrollController.position.maxScrollExtent,
-          duration: duration ?? const Duration(milliseconds: 200),
-          curve: Curves.linear);
+          duration: duration ?? const Duration(milliseconds: 200), curve: Curves.linear);
       return;
     }
-    jumpTo(offset - paddingStart,
-        duration: duration ?? const Duration(milliseconds: 200));
+    jumpTo(offset - paddingStart, duration: duration ?? const Duration(milliseconds: 200));
   }
 }
 
