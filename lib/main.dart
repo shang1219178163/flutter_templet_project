@@ -37,6 +37,7 @@ import 'package:flutter_templet_project/vendor/isar/model/db_todo.dart';
 import 'package:flutter_templet_project/vendor/isar/provider/change_notifier/db_generic_provider.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+import 'package:route_stack_manager/route_stack_manager.dart';
 import 'package:tuple/tuple.dart';
 
 // void main() {
@@ -184,7 +185,7 @@ class MyApp extends StatelessWidget {
       unknownRoute: AppPage.unknownRoute,
       navigatorObservers: [
         AppRouteObserver().routeObserver,
-        CustomRouteObserver(),
+        RouteManagerObserver(),
       ],
       routingCallback: AppRouteObserver().routingCallback ??
           (routing) {

@@ -177,7 +177,7 @@ dependencies:
   #微信登录+支付+分享
   fluwx: ^4.4.10
   # 苹果登录
-  sign_in_with_apple: ^5.0.0
+  sign_in_with_apple: ^6.1.4
 
   azlistview: ^2.0.0
   common_utils: ^2.0.0
@@ -213,6 +213,8 @@ dependencies:
   # 语音阅读
   flutter_tts: ^3.8.5
   pubspec_parse: ^1.4.0
+
+  route_stack_manager: ^1.1.1
 
 #  User:
 #    hosted:
