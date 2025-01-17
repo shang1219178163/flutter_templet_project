@@ -1,21 +1,18 @@
 import 'dart:async';
-import 'dart:convert';
-import 'dart:math';
 
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_templet_project/basicWidget/im_textfield_bar.dart';
+import 'package:flutter_templet_project/basicWidget/n_cross_notice.dart';
 import 'package:flutter_templet_project/basicWidget/n_long_press_menu.dart';
 import 'package:flutter_templet_project/basicWidget/n_network_image.dart';
 import 'package:flutter_templet_project/basicWidget/n_target_follower.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
-import 'package:flutter_templet_project/basicWidget/n_textfield.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/editable_text_ext.dart';
 import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
-import 'package:flutter_templet_project/extension/widget_ext.dart';
-import 'package:flutter_templet_project/basicWidget/im_textfield_bar.dart';
 import 'package:flutter_templet_project/mixin/bottom_sheet_phrases_mixin.dart';
 import 'package:flutter_templet_project/mixin/keyboard_change_mixin.dart';
 import 'package:flutter_templet_project/mixin/safe_set_state_mixin.dart';
@@ -43,8 +40,7 @@ class _IMChatPageState extends State<IMChatPage>
         KeyboardChangeMixin,
         SafeSetStateMixin,
         BottomSheetPhrasesMixin {
-  bool get hideApp =>
-      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
+  bool get hideApp => Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
 
   final _scrollController = ScrollController();
 
@@ -54,14 +50,11 @@ class _IMChatPageState extends State<IMChatPage>
 
   var dataList = ValueNotifier(<String>[]);
 
-  late final AnimationController _controller =
-      AnimationController(duration: Duration(milliseconds: 350), vsync: this);
+  late final AnimationController _controller = AnimationController(duration: Duration(milliseconds: 350), vsync: this);
   final Animatable<double> _easeInTween = CurveTween(curve: Curves.easeIn);
 
-  late final Animation<double> _heightFactor =
-      Tween(begin: 0.0, end: 200.0).animate(_controller);
-  late final Animation<double> _heightFactorNew =
-      _controller.drive(_easeInTween);
+  late final Animation<double> _heightFactor = Tween(begin: 0.0, end: 200.0).animate(_controller);
+  late final Animation<double> _heightFactorNew = _controller.drive(_easeInTween);
 
   var isExpand = false;
 
@@ -77,8 +70,8 @@ class _IMChatPageState extends State<IMChatPage>
     const Tuple3("其他2", Icons.color_lens_outlined, ""),
   ];
 
-  static final RegExp emojiReg = RegExp(
-      r'(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])');
+  static final RegExp emojiReg =
+      RegExp(r'(\u00a9|\u00ae|[\u2000-\u3300]|\ud83c[\ud000-\udfff]|\ud83d[\ud000-\udfff]|\ud83e[\ud000-\udfff])');
 
   /// 长按菜单专用
   final List<OverlayEntry> longPressEntries = [];
@@ -119,26 +112,11 @@ class _IMChatPageState extends State<IMChatPage>
   Widget build(BuildContext context) {
     // _controller.forward();
     return Scaffold(
-      backgroundColor: Colors.black12,
+      // backgroundColor: Colors.black12,
       appBar: hideApp
           ? null
           : AppBar(
               title: Text(widget.title ?? "$widget"),
-              actions: [
-                'done',
-              ]
-                  .map(
-                    (e) => TextButton(
-                        child: Text(
-                          e,
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        onPressed: () {
-                          debugPrint(e);
-                          setState(() {});
-                        }),
-                  )
-                  .toList(),
               elevation: 0,
               // bottom: buildAppbarBottom(),
             ),
@@ -184,6 +162,7 @@ class _IMChatPageState extends State<IMChatPage>
       // bottom: false,
       child: Column(
         children: [
+          buildWarning(),
           buildTips1(tips: "患者暂未购买问诊服务"),
           buildTips2(tips: "患者暂未购买问诊服务"),
           Expanded(
@@ -198,70 +177,68 @@ class _IMChatPageState extends State<IMChatPage>
 
   Widget buildListView() {
     return ValueListenableBuilder<List<String>>(
-        valueListenable: dataList,
-        builder: (context, list, child) {
-          if (list.isEmpty) {
-            return SizedBox();
-          }
+      valueListenable: dataList,
+      builder: (context, list, child) {
+        if (list.isEmpty) {
+          return SizedBox();
+        }
 
-          return buildRefresh(
-              onRefresh: onLoad,
-              // onLoad: onRefresh,
-              child: MediaQuery.removePadding(
-                removeTop: true,
-                removeBottom: true,
-                context: context,
-                child: GestureDetector(
-                  behavior: HitTestBehavior.translucent,
-                  onTap: () {
-                    debugPrint("onTap");
-                  },
-                  child: Scrollbar(
-                    controller: _scrollController,
-                    child: ListView.builder(
-                      controller: _scrollController,
-                      reverse: true,
-                      shrinkWrap: true,
-                      // physics: ClampingScrollPhysics(),
-                      // cacheExtent: 600,
-                      itemCount: list.length,
-                      itemBuilder: (context, index) {
-                        final e = list[index];
+        return buildRefresh(
+          onRefresh: onLoad,
+          // onLoad: onRefresh,
+          child: MediaQuery.removePadding(
+            removeTop: true,
+            removeBottom: true,
+            context: context,
+            child: GestureDetector(
+              behavior: HitTestBehavior.translucent,
+              onTap: () {
+                debugPrint("onTap");
+              },
+              child: Scrollbar(
+                controller: _scrollController,
+                child: ListView.builder(
+                  controller: _scrollController,
+                  reverse: true,
+                  shrinkWrap: true,
+                  // physics: ClampingScrollPhysics(),
+                  // cacheExtent: 600,
+                  itemCount: list.length,
+                  itemBuilder: (context, index) {
+                    final e = list[index];
 
-                        final isOwner = index % 2 == 0;
-                        return InkWell(
-                          onTap: () {
-                            debugPrint("index: ${index}, $e");
-                          },
-                          child: buildChatCell(
-                            modelIndex: index,
-                            imgUrl: R.image.urls[IntExt.random(
-                              max: R.image.urls.length,
-                            )],
-                            isOwner: isOwner,
-                            name: "路人甲",
-                            title: "title",
-                            contentChild: buildContentChild(
-                              modelIndex: index,
-                              isOwner: isOwner,
-                              // text: "buildContentChild",
-                              text: "聊一会" *
-                                  IntExt.random(
-                                    min: 1,
-                                    max: 6,
-                                  ),
-                            ),
-                          ),
-                          // child: ListTile(title: Text(e),
-                          //   subtitle: Text("index: ${index}"),
-                          // ),
-                        );
+                    final isOwner = index % 2 == 0;
+                    return InkWell(
+                      onTap: () {
+                        debugPrint("index: ${index}, $e");
                       },
-                    ),
-                  ),
+                      child: buildChatCell(
+                        modelIndex: index,
+                        imgUrl: R.image.urls[IntExt.random(
+                          max: R.image.urls.length,
+                        )],
+                        isOwner: isOwner,
+                        name: "路人甲",
+                        title: "title",
+                        contentChild: buildContentChild(
+                          modelIndex: index,
+                          isOwner: isOwner,
+                          // text: "buildContentChild",
+                          text: "聊一会" * IntExt.random(min: 1, max: 6),
+                        ),
+                      ),
+                      // child: ListTile(title: Text(e),
+                      //   subtitle: Text("index: ${index}"),
+                      // ),
+                    );
+                  },
                 ),
-              ));
-        });
+              ),
+            ),
+          ),
+        );
+      },
+    );
   }
 
   Widget buildChatCell({
@@ -336,9 +313,7 @@ class _IMChatPageState extends State<IMChatPage>
               Expanded(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: isOwner
-                      ? CrossAxisAlignment.end
-                      : CrossAxisAlignment.start,
+                  crossAxisAlignment: isOwner ? CrossAxisAlignment.end : CrossAxisAlignment.start,
                   children: [
                     if (!isOwner)
                       Container(
@@ -473,9 +448,7 @@ class _IMChatPageState extends State<IMChatPage>
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 9),
       constraints: const BoxConstraints(minHeight: 37),
-      margin: isOwner == true
-          ? const EdgeInsets.only(right: 6)
-          : const EdgeInsets.only(left: 6),
+      margin: isOwner == true ? const EdgeInsets.only(right: 6) : const EdgeInsets.only(left: 6),
       decoration: BoxDecoration(
         color: contentBgColor,
         borderRadius: borderRadius,
@@ -487,12 +460,14 @@ class _IMChatPageState extends State<IMChatPage>
           if (isOwner != true && image != null) image,
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: NText(text ?? "",
-                // textAlign: TextAlign.right,
-                fontSize: 15,
-                color: contentFontColor,
-                maxLines: 100,
-                fontWeight: FontWeight.w500),
+            child: NText(
+              text ?? "",
+              // textAlign: TextAlign.right,
+              fontSize: 15,
+              color: contentFontColor,
+              maxLines: 100,
+              fontWeight: FontWeight.w500,
+            ),
           ),
           if (isOwner == true && image != null) image,
         ],
@@ -520,9 +495,7 @@ class _IMChatPageState extends State<IMChatPage>
         color: contentBgColor,
         borderRadius: borderRadius,
       ),
-      margin: isOwner
-          ? const EdgeInsets.only(right: 6)
-          : const EdgeInsets.only(left: 6),
+      margin: isOwner ? const EdgeInsets.only(right: 6) : const EdgeInsets.only(left: 6),
       constraints: const BoxConstraints(minHeight: 37),
       // constraints: BoxConstraints().loosen(),
       child: NText(
@@ -576,20 +549,12 @@ class _IMChatPageState extends State<IMChatPage>
                   onChanged: (val) {
                     debugPrint("onChanged: ${val}");
                     _inputController.text += val;
-                    debugPrint(
-                        "onChanged _inputController.text: ${_inputController.text}");
+                    debugPrint("onChanged _inputController.text: ${_inputController.text}");
 
                     _inputController.moveCursorEnd();
                   },
                   onDelete: () {
-                    // debugPrint("onDelete: ${_inputController.text}");
-                    // final baseOffset = _inputController.selection.baseOffset;
-                    // debugPrint("baseOffset: ${baseOffset}");
-
                     _inputController.deleteChar();
-
-                    debugPrint(
-                        "_inputController.text: ${_inputController.text}");
                   },
                   onSend: (val) {
                     debugPrint("onSend: ${val}");
@@ -668,8 +633,7 @@ class _IMChatPageState extends State<IMChatPage>
         // final itemWidth = ((constraints.maxWidth - spacing * (rowCount - 1))/rowCount).truncateToDouble();
 
         final itemWidth = 64.w;
-        final spacing = (constraints.maxWidth - itemWidth * rowCount) /
-            (rowCount - 1).truncateToDouble();
+        final spacing = (constraints.maxWidth - itemWidth * rowCount) / (rowCount - 1).truncateToDouble();
         return Wrap(
           spacing: spacing,
           runSpacing: runSpacing,
@@ -713,6 +677,18 @@ class _IMChatPageState extends State<IMChatPage>
           }).toList(),
         );
       }),
+    );
+  }
+
+  Widget buildWarning() {
+    final text = "注: 线上平台仅针对复诊用户提供医疗咨询，若您初诊时的症状持续或加重，或出现新的症状、体征，请尽早线下就诊。";
+
+    return NCrossNotice(
+      childBuilder: (isExpand) => NText(
+        text,
+        fontSize: 14,
+        maxLines: isExpand ? 10 : 1,
+      ),
     );
   }
 
