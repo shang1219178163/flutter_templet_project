@@ -216,6 +216,8 @@ dependencies:
 
   route_stack_manager: ^1.1.1
 
+  flutter_markdown: ^0.7.4+3
+
 #  User:
 #    hosted:
 #      name: syn_mine_pages

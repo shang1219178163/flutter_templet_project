@@ -160,6 +160,7 @@ import 'package:flutter_templet_project/pages/demo/LoginPage.dart';
 import 'package:flutter_templet_project/pages/demo/LoginPageOne.dart';
 import 'package:flutter_templet_project/pages/demo/LoginPageTwo.dart';
 import 'package:flutter_templet_project/pages/demo/LongCaptureWidgetDemo.dart';
+import 'package:flutter_templet_project/pages/demo/MarkdownBodyDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MarqueeWidgetDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MaterialBannerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MaterialDemo.dart';
@@ -798,6 +799,7 @@ class APPRouter {
   static const expressionsCalulatorDemo = '/expressionsCalulatorDemo';
   static const flexbleListViewDemo = '/flexbleListViewDemo';
   static const pageViewVerticalDemo = '/PageViewVerticalDemo';
+  static const markdownBodyDemo = '/markdownBodyDemo';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -2367,6 +2369,10 @@ class AppPage {
     GetPage(
       name: APPRouter.pageViewVerticalDemo,
       page: () => PageViewVerticalDemo(),
+    ),
+    GetPage(
+      name: APPRouter.markdownBodyDemo,
+      page: () => MarkdownBodyDemo(),
     ),
   ];
 }
