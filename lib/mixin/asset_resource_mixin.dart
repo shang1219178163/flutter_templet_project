@@ -18,6 +18,9 @@ mixin AssetResourceMixin<T extends StatefulWidget> on State<T> {
     )
   ];
 
+  /// 本地资源加载结束回调
+  late void Function() onAssetResourceFinished;
+
   @override
   void initState() {
     super.initState();
@@ -36,6 +39,7 @@ mixin AssetResourceMixin<T extends StatefulWidget> on State<T> {
         assetFileModels[i].exception = exception.toString();
       }
     }
+    onAssetResourceFinished();
   }
 }
 

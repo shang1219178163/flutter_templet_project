@@ -9,6 +9,7 @@
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/extension/object_ext.dart';
 
 // Scrollable.ensureVisible(
 // ensureVisibleKey.currentContext!,
@@ -33,12 +34,13 @@ extension ScrollControllerExt on ScrollController {
   }
 
   /// 跳转到对应位子
-  Future<void> jumpToBottom(
-    double value, {
-    Duration delay = const Duration(seconds: 0),
+  Future<void> jumpToBottom({
     Duration duration = const Duration(milliseconds: 350),
     Curve curve = Curves.ease,
   }) async {
+    if (!hasClients) {
+      return;
+    }
     final offset = position.pixels.clamp(position.pixels, position.maxScrollExtent);
     await jumpTo(offset, duration: duration, curve: curve);
   }
@@ -124,22 +126,32 @@ extension ScrollControllerExt on ScrollController {
 extension ScrollPositionExt on ScrollPosition {}
 
 extension ScrollMetricsExt on ScrollMetrics {
+  /// 转 Map
+  Map<String, dynamic> toJson() {
+    return {
+      "minScrollExtent": minScrollExtent,
+      "maxScrollExtent": maxScrollExtent,
+      "hasContentDimensions": hasContentDimensions,
+      "pixels": pixels,
+      "hasPixels": hasPixels,
+      "viewportDimension": viewportDimension,
+      "hasViewportDimension": hasViewportDimension,
+      "axisDirection": axisDirection.name,
+      "axis": axisDirectionToAxis(axisDirection).name,
+      "outOfRange": outOfRange,
+      "atEdge": atEdge,
+      "extentBefore": extentBefore,
+      "extentInside": extentInside,
+      "extentAfter": extentAfter,
+      "extentTotal": extentTotal,
+      "devicePixelRatio": devicePixelRatio,
+    };
+  }
+
   printInfo() {
-    var metrics = this;
-    final info = """
-    ScrollMetrics####################
-    atEdge: ${metrics.atEdge}
-    axis: ${metrics.axis}
-    axisDirection: ${metrics.axisDirection}
-    extentAfter: ${metrics.extentAfter}
-    extentBefore: ${metrics.extentBefore}
-    extentInside: ${metrics.extentInside}
-    hasContentDimensions: ${metrics.hasContentDimensions}
-    maxScrollExtent: ${metrics.maxScrollExtent}
-    minScrollExtent: ${metrics.minScrollExtent}
-    outOfRange: ${metrics.outOfRange}
-    pixels: ${metrics.pixels}
-    viewportDimension: ${metrics.viewportDimension}
+    var info = """
+ScrollMetrics:
+${toJson().formatedString()}
     """;
     debugPrint(info);
   }
