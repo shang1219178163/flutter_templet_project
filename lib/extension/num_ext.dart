@@ -19,12 +19,6 @@ extension IntExt on int {
     return min + Random().nextInt(max - min);
   }
 
-  /// 随机布尔值
-  static bool randomBool() {
-    final result = Random().nextInt(2) == 1;
-    return result;
-  }
-
   String toHanzi() {
     if (this == 0) return '零';
 
@@ -37,17 +31,13 @@ extension IntExt on int {
 
     while (number > 0) {
       int digit = number % 10;
-      result = (digit == 0 ? '' : chineseDigits[digit]) +
-          chineseUnits[unitIndex] +
-          result;
+      result = (digit == 0 ? '' : chineseDigits[digit]) + chineseUnits[unitIndex] + result;
       unitIndex++;
       number ~/= 10;
     }
 
     // 处理连续的零
-    result = result
-        .replaceAllMapped(RegExp('零+'), (match) => '零')
-        .replaceAll(RegExp('^零|零\$'), '');
+    result = result.replaceAllMapped(RegExp('零+'), (match) => '零').replaceAll(RegExp('^零|零\$'), '');
 
     return result;
   }

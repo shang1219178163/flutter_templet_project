@@ -15,8 +15,7 @@ enum IMTextfieldBarEvent {
   add,
 }
 
-typedef EventWidgetBuilder = Widget Function(
-    BuildContext context, IMTextfieldBarEvent event);
+typedef EventWidgetBuilder = Widget Function(BuildContext context, IMTextfieldBarEvent event);
 
 class IMTextfieldBar extends StatefulWidget {
   IMTextfieldBar({
@@ -71,8 +70,7 @@ class IMTextfieldBar extends StatefulWidget {
   _IMTextfieldBarState createState() => _IMTextfieldBarState();
 }
 
-class _IMTextfieldBarState extends State<IMTextfieldBar>
-    with WidgetsBindingObserver {
+class _IMTextfieldBarState extends State<IMTextfieldBar> with WidgetsBindingObserver {
   var isExpand = ValueNotifier(false);
   var isExpandEmoji = ValueNotifier(false);
 
@@ -137,6 +135,7 @@ class _IMTextfieldBarState extends State<IMTextfieldBar>
       textInputAction: TextInputAction.done,
       obscureText: false,
       contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+      fillColor: Colors.white,
       border: buildBorder(),
       enabledBorder: buildBorder(),
       onChanged: widget.onChanged,
@@ -144,7 +143,7 @@ class _IMTextfieldBarState extends State<IMTextfieldBar>
     );
 
     final soundRecordBar = IMSoundRecordBar(
-      height: 48,
+      height: 36,
       onRecordStart: () async {
         // debugPrint("${DateTime.now()} onRecordStart");
         // await soundStartRecord();
@@ -190,8 +189,8 @@ class _IMTextfieldBarState extends State<IMTextfieldBar>
                         },
                         child: Image(
                           image: "icon_voice_circle.png".toAssetImage(),
-                          width: 30.w,
-                          height: 30.w,
+                          width: 30,
+                          height: 30,
                           // color: color,
                         ),
                       ),
@@ -257,9 +256,7 @@ class _IMTextfieldBarState extends State<IMTextfieldBar>
                       if (isKeyboardVisibleVN.value) {
                         FocusScope.of(context).unfocus();
                       }
-                      return widget.footerBuilder
-                              ?.call(context, IMTextfieldBarEvent.emoji) ??
-                          SizedBox();
+                      return widget.footerBuilder?.call(context, IMTextfieldBarEvent.emoji) ?? SizedBox();
                     }),
               if (widget.footerBuilder != null)
                 ValueListenableBuilder<bool>(
@@ -271,13 +268,10 @@ class _IMTextfieldBarState extends State<IMTextfieldBar>
                       if (isKeyboardVisibleVN.value) {
                         FocusScope.of(context).unfocus();
                       }
-                      return widget.footerBuilder
-                              ?.call(context, IMTextfieldBarEvent.add) ??
-                          SizedBox();
+                      return widget.footerBuilder?.call(context, IMTextfieldBarEvent.add) ?? SizedBox();
                     }),
               SizedBox(
-                height: max(
-                    widget.runSpacing, MediaQuery.of(context).padding.bottom),
+                height: max(widget.runSpacing, MediaQuery.of(context).padding.bottom),
               ),
             ],
           );

@@ -9,13 +9,17 @@ import 'package:flutter_templet_project/basicWidget/n_long_press_menu.dart';
 import 'package:flutter_templet_project/basicWidget/n_network_image.dart';
 import 'package:flutter_templet_project/basicWidget/n_target_follower.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
+import 'package:flutter_templet_project/extension/bool_ext.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
+import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/editable_text_ext.dart';
+import 'package:flutter_templet_project/extension/list_ext.dart';
 import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/mixin/bottom_sheet_phrases_mixin.dart';
 import 'package:flutter_templet_project/mixin/keyboard_change_mixin.dart';
 import 'package:flutter_templet_project/mixin/safe_set_state_mixin.dart';
+import 'package:flutter_templet_project/model/im_msg_list_root_model.dart';
 import 'package:flutter_templet_project/pages/demo/EmojiPage.dart';
 import 'package:flutter_templet_project/util/R.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
@@ -48,13 +52,13 @@ class _IMChatPageState extends State<IMChatPage>
 
   var currentEmojiVN = ValueNotifier("");
 
-  var dataList = ValueNotifier(<String>[]);
+  var dataList = ValueNotifier(<IMMsgDetailModel>[]);
 
   late final AnimationController _controller = AnimationController(duration: Duration(milliseconds: 350), vsync: this);
   final Animatable<double> _easeInTween = CurveTween(curve: Curves.easeIn);
 
-  late final Animation<double> _heightFactor = Tween(begin: 0.0, end: 200.0).animate(_controller);
-  late final Animation<double> _heightFactorNew = _controller.drive(_easeInTween);
+  // late final Animation<double> _heightFactor = Tween(begin: 0.0, end: 200.0).animate(_controller);
+  // late final Animation<double> _heightFactorNew = _controller.drive(_easeInTween);
 
   var isExpand = false;
 
@@ -105,7 +109,7 @@ class _IMChatPageState extends State<IMChatPage>
   }
 
   initData() {
-    dataList.value = List.generate(20, (index) => "index_$index");
+    dataList.value = getMsgsModel();
   }
 
   @override
@@ -135,7 +139,7 @@ class _IMChatPageState extends State<IMChatPage>
   PreferredSize buildAppbarBottom() {
     return PreferredSize(
       preferredSize: Size.fromHeight(48),
-      child: ValueListenableBuilder<List<String>>(
+      child: ValueListenableBuilder<List<IMMsgDetailModel>>(
         valueListenable: dataList,
         builder: (context, value, child) {
           // if (value.length < 3) {
@@ -157,7 +161,7 @@ class _IMChatPageState extends State<IMChatPage>
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return SafeArea(
       // bottom: false,
       child: Column(
@@ -176,7 +180,7 @@ class _IMChatPageState extends State<IMChatPage>
   }
 
   Widget buildListView() {
-    return ValueListenableBuilder<List<String>>(
+    return ValueListenableBuilder<List<IMMsgDetailModel>>(
       valueListenable: dataList,
       builder: (context, list, child) {
         if (list.isEmpty) {
@@ -184,8 +188,8 @@ class _IMChatPageState extends State<IMChatPage>
         }
 
         return buildRefresh(
-          onRefresh: onLoad,
-          // onLoad: onRefresh,
+          // onRefresh: onLoad,
+          onLoad: onLoad,
           child: MediaQuery.removePadding(
             removeTop: true,
             removeBottom: true,
@@ -207,24 +211,20 @@ class _IMChatPageState extends State<IMChatPage>
                   itemBuilder: (context, index) {
                     final e = list[index];
 
-                    final isOwner = index % 2 == 0;
+                    final isOwner = e.isOwner == true;
                     return InkWell(
                       onTap: () {
                         debugPrint("index: ${index}, $e");
                       },
                       child: buildChatCell(
                         modelIndex: index,
-                        imgUrl: R.image.urls[IntExt.random(
-                          max: R.image.urls.length,
-                        )],
-                        isOwner: isOwner,
-                        name: "路人甲",
-                        title: "title",
+                        model: e,
                         contentChild: buildContentChild(
                           modelIndex: index,
                           isOwner: isOwner,
                           // text: "buildContentChild",
-                          text: "聊一会" * IntExt.random(min: 1, max: 6),
+                          // text: "聊一会" * IntExt.random(min: 1, max: 6),
+                          text: e.restructureMsgBody ?? "",
                         ),
                       ),
                       // child: ListTile(title: Text(e),
@@ -243,18 +243,21 @@ class _IMChatPageState extends State<IMChatPage>
 
   Widget buildChatCell({
     required int modelIndex,
-    required bool isOwner,
-    required String imgUrl,
-    required String name,
-    String title = "",
+    required IMMsgDetailModel model,
     String extra = "",
-    String time = "",
     double spacing = 16,
     double runSpacing = 12,
     double imgSize = 40,
     double imgGap = 10,
     Widget? contentChild,
+    bool showDebugInfo = true,
   }) {
+    final isOwner = model.isOwner ?? false;
+    final imgUrl = model.avatar ?? "";
+    final name = model.nickName ?? "";
+    String time = "";
+    DLog.d("${[model.seqIntValue, model.isOwner, model.nickName]}");
+
     // if (model.restructureMsgBody?.contains("inviteID") == true) {
     //   final dataSignalModel = model.restructureMsgBodyFirst?.msgContent?.dataSignalModel;
     //   final dataSignalDataModel = model.restructureMsgBodyFirst?.msgContent?.dataSignalDataModel;
@@ -268,7 +271,7 @@ class _IMChatPageState extends State<IMChatPage>
           color: contentBgColor,
           padding: const EdgeInsets.only(left: 4, bottom: 4),
           child: NText(
-            "--" * 3,
+            "--",
             fontSize: 14,
             color: contentFontColor,
             maxLines: 100,
@@ -326,6 +329,17 @@ class _IMChatPageState extends State<IMChatPage>
                         ),
                       ),
                     contentWidget,
+                    if (showDebugInfo)
+                      Container(
+                        color: primaryColor,
+                        padding: const EdgeInsets.only(left: 4, bottom: 4),
+                        child: NText(
+                          model.sequence ?? "",
+                          fontSize: 14,
+                          color: contentFontColor,
+                          maxLines: 100,
+                        ),
+                      ),
                   ],
                 ),
               ),
@@ -350,7 +364,7 @@ class _IMChatPageState extends State<IMChatPage>
     );
   }
 
-  buildContentChild({
+  Widget buildContentChild({
     required int modelIndex,
     required bool isOwner,
     required String text,
@@ -358,8 +372,8 @@ class _IMChatPageState extends State<IMChatPage>
     final contentBgColor = Colors.green;
     final contentFontColor = Colors.white;
 
-    double bottomRightRadius = isOwner != true ? 8 : 0;
-    double bottomLeftRadius = isOwner == true ? 8 : 0;
+    // double bottomRightRadius = isOwner != true ? 8 : 0;
+    // double bottomLeftRadius = isOwner == true ? 8 : 0;
 
     final borderRadius = BorderRadius.circular(4);
 
@@ -494,6 +508,7 @@ class _IMChatPageState extends State<IMChatPage>
       decoration: BoxDecoration(
         color: contentBgColor,
         borderRadius: borderRadius,
+        // border: Border.all(color: Colors.red),
       ),
       margin: isOwner ? const EdgeInsets.only(right: 6) : const EdgeInsets.only(left: 6),
       constraints: const BoxConstraints(minHeight: 37),
@@ -516,6 +531,7 @@ class _IMChatPageState extends State<IMChatPage>
       },
       onSubmitted: (String val) {
         debugPrint("onSubmitted:$val");
+        sendTextMessage();
       },
       // header: Container(
       //   color: Colors.green,
@@ -558,12 +574,7 @@ class _IMChatPageState extends State<IMChatPage>
                   },
                   onSend: (val) {
                     debugPrint("onSend: ${val}");
-                    if (_inputController.text.trim().isEmpty) {
-                      return;
-                    }
-
-                    dataList.value = [_inputController.text, ...dataList.value];
-                    _inputController.clear();
+                    sendTextMessage();
                   },
                 ),
               );
@@ -575,6 +586,16 @@ class _IMChatPageState extends State<IMChatPage>
         return child;
       },
     );
+  }
+
+  void sendTextMessage() {
+    if (_inputController.text.trim().isEmpty) {
+      return;
+    }
+
+    final msgModel = createOwnerMsgModel(content: _inputController.text);
+    dataList.value = [msgModel, ...dataList.value];
+    _inputController.clear();
   }
 
   Widget buildRefresh({
@@ -610,9 +631,9 @@ class _IMChatPageState extends State<IMChatPage>
   }
 
   onLoad() async {
-    await Future.delayed(const Duration(milliseconds: 1500), () {});
-    final val = "onLoad_${dataList.value.length}";
-    dataList.value = [...dataList.value, val];
+    await Future.delayed(const Duration(milliseconds: 500), () {});
+    final list = getMsgsModel();
+    dataList.value = [...dataList.value, ...list];
   }
 
   buildIMBarFooter({
@@ -784,5 +805,41 @@ class _IMChatPageState extends State<IMChatPage>
       ),
     );
     return child;
+  }
+
+  /// 获取消息西列表
+  List<IMMsgDetailModel> getMsgsModel({int total = 1000}) {
+    return List.generate(20, (index) {
+      final length = IntExt.random(max: 20, min: 4);
+      final text = length.generateChars(chars: "天行健, 君子自强不息。");
+
+      final isOwner = BoolExt.random();
+      final names = ["路人甲", "路人乙", "路人丙", "路人丁"];
+      final name = names.randomOne ?? "未知";
+      // final sequence = "${total - (index + 1) + (dataList.value.lastOrNull?.seqIntValue ?? -) - } ";
+      final sequence = "${(dataList.value.lastOrNull?.seqIntValue ?? total) - (index + 1)}";
+
+      final model = IMMsgDetailModel(
+        sequence: sequence,
+        isOwner: isOwner,
+        restructureMsgBody: text,
+        avatar: isOwner ? R.image.urls.first : R.image.urls.sublist(1).randomOne,
+        nickName: isOwner ? "我" : name,
+      );
+      return model;
+    });
+  }
+
+  /// 创建本地消息
+  IMMsgDetailModel createOwnerMsgModel({required String content}) {
+    final sequence = ((dataList.value.firstOrNull?.seqIntValue ?? 0) + 1).toString();
+    final msgModel = IMMsgDetailModel(
+      sequence: sequence,
+      isOwner: true,
+      restructureMsgBody: content,
+      avatar: R.image.urls.first,
+      nickName: "我",
+    );
+    return msgModel;
   }
 }

@@ -6,10 +6,19 @@
 //  Copyright © 2024/6/25 shang. All rights reserved.
 //
 
+import 'dart:math';
+import 'package:flutter_templet_project/extension/num_ext.dart';
+
 extension BoolExt on bool? {
   /// 转字符串
   String toValue({String trueValue = "Y", String falseValue = "N"}) {
     return this == true ? trueValue : falseValue;
+  }
+
+  /// 随机布尔值
+  static bool random() {
+    final result = Random().nextInt(2) == 1;
+    return result;
   }
 }
 
