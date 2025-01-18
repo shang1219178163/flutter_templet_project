@@ -59,13 +59,12 @@ class IMMsgDetailModel with DbMixin {
       return null;
     }
 
-    final date = DateTimeExt.dateFromTimestamp(timestamp: time!);
-    // final date = DateTime.fromMillisecondsSinceEpoch(time!);
-    final dateStr = DateTimeExt.stringFromDate(date: date) ?? "";
-    if (dateStr.startsWith("1970") == true || dateStr.length < 10) {
-      return null;
+    final msgTime = DateTime.fromMillisecondsSinceEpoch((time ?? 0) * 1000);
+    var dateStr = msgTime.toString().substring(0, 19);
+    final hide = DateTime.now().difference(msgTime).inSeconds <= 60; // 最新60秒内不显示
+    if (hide) {
+      dateStr = "";
     }
-
     return dateStr;
   }
 

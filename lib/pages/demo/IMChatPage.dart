@@ -256,8 +256,7 @@ class _IMChatPageState extends State<IMChatPage>
     final isOwner = model.isOwner ?? false;
     final imgUrl = model.avatar ?? "";
     final name = model.nickName ?? "";
-    var timeStr = "${DateTime.now().toString().substring(0, 19)}";
-    timeStr = DateTime.fromMillisecondsSinceEpoch((model.time ?? 0) * 1000).toString().substring(0, 19);
+    final timeStr = model.timeDes ?? "";
 
     final contentBgColor = isOwner ? primaryColor : bgColor;
     final contentFontColor = Colors.white;
@@ -279,15 +278,16 @@ class _IMChatPageState extends State<IMChatPage>
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
       child: Column(
         children: [
-          Container(
-            padding: const EdgeInsets.only(left: 4, bottom: 12),
-            child: NText(
-              timeStr,
-              color: Colors.black.withOpacity(0.5),
-              fontSize: 13,
-              fontWeight: FontWeight.w400,
+          if (timeStr.isNotEmpty == true)
+            Container(
+              padding: const EdgeInsets.only(left: 4, bottom: 12),
+              child: NText(
+                timeStr,
+                color: Colors.black.withOpacity(0.5),
+                fontSize: 13,
+                fontWeight: FontWeight.w400,
+              ),
             ),
-          ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             // mainAxisSize: MainAxisSize.min,
