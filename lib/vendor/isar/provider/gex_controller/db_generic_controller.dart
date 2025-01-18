@@ -8,6 +8,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/vendor/isar/DBManager.dart';
+import 'package:flutter_templet_project/vendor/isar/db_mixin.dart';
 import 'package:flutter_templet_project/vendor/isar/model/db_todo.dart';
 import 'package:get/get.dart';
 import 'package:isar/isar.dart';
@@ -65,8 +66,8 @@ class DBGenericController<E> extends GetxController {
   Future<void> putAll(List<E> list) async {
     await isar.writeTxn(() async {
       await isar.collection<E>().putAll(list);
-      await update();
     });
+    await update();
   }
 
   /// 增/改
@@ -103,6 +104,23 @@ class DBGenericController<E> extends GetxController {
     await deleteAll([id]);
   }
 
+  /// 删除部分
+  Future<void> deleteAllBy({
+    required Future<List<E>> Function(QueryBuilder<E, E, QFilterCondition> isarItems) filterCb,
+    required int Function(E e) idCb,
+  }) async {
+    final entitys = await findEntitys(filterCb: filterCb);
+    final ids = entitys.map((e) => idCb(e)).toList();
+    await deleteAll(ids);
+  }
+
+  /// 清除
+  Future<void> clear() async {
+    await isar.writeTxn(() async {
+      await isar.clear();
+    });
+  }
+
   /// 模型字段更新
   Future<void> migrate({
     int limit = 50,
@@ -118,12 +136,5 @@ class DBGenericController<E> extends GetxController {
         await collections.putAll(models);
       });
     }
-  }
-
-  /// 清除
-  Future<void> clear() async {
-    await isar.writeTxn(() async {
-      await isar.clear();
-    });
   }
 }
