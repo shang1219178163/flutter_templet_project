@@ -11,6 +11,7 @@ import 'package:flutter_templet_project/basicWidget/n_target_follower.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/bool_ext.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
+import 'package:flutter_templet_project/extension/date_time_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/editable_text_ext.dart';
 import 'package:flutter_templet_project/extension/list_ext.dart';
@@ -255,14 +256,9 @@ class _IMChatPageState extends State<IMChatPage>
     final isOwner = model.isOwner ?? false;
     final imgUrl = model.avatar ?? "";
     final name = model.nickName ?? "";
-    String time = "";
-    DLog.d("${[model.seqIntValue, model.isOwner, model.nickName]}");
+    var timeStr = "${DateTime.now().toString().substring(0, 19)}";
+    timeStr = DateTime.fromMillisecondsSinceEpoch((model.time ?? 0) * 1000).toString().substring(0, 19);
 
-    // if (model.restructureMsgBody?.contains("inviteID") == true) {
-    //   final dataSignalModel = model.restructureMsgBodyFirst?.msgContent?.dataSignalModel;
-    //   final dataSignalDataModel = model.restructureMsgBodyFirst?.msgContent?.dataSignalDataModel;
-    //   debugPrint("$dataSignalModel$dataSignalDataModel");
-    // }
     final contentBgColor = isOwner ? primaryColor : bgColor;
     final contentFontColor = Colors.white;
 
@@ -286,7 +282,7 @@ class _IMChatPageState extends State<IMChatPage>
           Container(
             padding: const EdgeInsets.only(left: 4, bottom: 12),
             child: NText(
-              "${DateTime.now().toString().substring(0, 19)}",
+              timeStr,
               color: Colors.black.withOpacity(0.5),
               fontSize: 13,
               fontWeight: FontWeight.w400,
@@ -825,6 +821,7 @@ class _IMChatPageState extends State<IMChatPage>
         restructureMsgBody: text,
         avatar: isOwner ? R.image.urls.first : R.image.urls.sublist(1).randomOne,
         nickName: isOwner ? "我" : name,
+        time: DateTime.now().secondsSinceEpoch,
       );
       return model;
     });
@@ -839,6 +836,7 @@ class _IMChatPageState extends State<IMChatPage>
       restructureMsgBody: content,
       avatar: R.image.urls.first,
       nickName: "我",
+      time: DateTime.now().secondsSinceEpoch,
     );
     return msgModel;
   }
