@@ -9,12 +9,24 @@
 // 定义药物模型
 import 'package:flutter/cupertino.dart';
 
+/// 药品使用类型
+enum DrugUseWayEnum {
+  FAST("FAST", "快速注射"),
+  SUSTAIN("SUSTAIN", "持续输注");
+
+  const DrugUseWayEnum(this.name, this.desc);
+
+  final String name;
+  final String desc;
+}
+
 /// 化疗药品
 class ChemotherapyRegimenDrug {
   ChemotherapyRegimenDrug({
     required this.name,
     required this.dosagePerBSA,
     required this.specification,
+    // required this.formula,
     this.recommendedDosage,
     this.recommendedQuantity,
     this.remark,
@@ -27,6 +39,9 @@ class ChemotherapyRegimenDrug {
 
   /// 药品规格（单位：mg）
   final double specification;
+
+  /// 药品剂量公式
+  // final String formula;
 
   /// 推荐剂量（单位：mg）3位小数
   final double? recommendedDosage;
@@ -41,6 +56,7 @@ class ChemotherapyRegimenDrug {
     String? name,
     double? dosagePerBSA,
     double? specification,
+    // String? formula,
     double? recommendedDosage,
     int? recommendedQuantity,
     String? remark,
@@ -49,6 +65,7 @@ class ChemotherapyRegimenDrug {
       name: name ?? this.name,
       dosagePerBSA: dosagePerBSA ?? this.dosagePerBSA,
       specification: specification ?? this.specification,
+      // formula: formula ?? this.formula,
       recommendedDosage: recommendedDosage ?? this.recommendedDosage,
       recommendedQuantity: recommendedQuantity ?? this.recommendedQuantity,
       remark: remark ?? this.remark,
@@ -60,6 +77,7 @@ class ChemotherapyRegimenDrug {
     data['name'] = name;
     data['dosagePerBSA'] = dosagePerBSA;
     data['specification'] = specification;
+    // data['formula'] = formula;
     data['recommendedDosage'] = recommendedDosage;
     data['recommendedQuantity'] = recommendedQuantity;
     data['remark'] = remark;
@@ -215,6 +233,8 @@ enum ChemotherapyRegimenTreatmentStrategyEnum {
         FLOFIRINOX: FLOFIRINOXStrategy(),
         mFLOFIRINOX: MFLOFIRINOXStrategy(),
       };
+
+  ChemotherapyRegimenTreatmentStrategy? get strategy => map[this];
 
   /// 计算
   List<ChemotherapyRegimenDrug>? calculateDrugDosage({required double bsa}) {

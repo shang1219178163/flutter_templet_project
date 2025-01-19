@@ -26,8 +26,8 @@ class GetBottomSheet {
   static Future<dynamic> showCustom({
     bool enableDrag = true,
     bool addUnconstrainedBox = true,
-    bool isScrollControlled = false, //控制高度
     bool hideDragIndicator = true,
+    bool isScrollControlled = false, //控制高度
     required Widget child,
   }) {
     if (!hideDragIndicator) {
@@ -47,7 +47,7 @@ class GetBottomSheet {
 
     Widget content = Container(
       clipBehavior: Clip.hardEdge,
-      width: double.infinity,
+      width: Get.width,
       decoration: const BoxDecoration(
         color: white,
         borderRadius: BorderRadius.only(

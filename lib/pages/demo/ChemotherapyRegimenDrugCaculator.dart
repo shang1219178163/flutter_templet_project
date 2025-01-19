@@ -14,8 +14,10 @@ import 'package:flutter_templet_project/basicWidget/n_menu_anchor.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/object_ext.dart';
+import 'package:flutter_templet_project/pages/demo/drug_dosage_cal_page.dart';
 import 'package:flutter_templet_project/pages/medication_calculator.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/get_util.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
@@ -70,7 +72,9 @@ class _ChemotherapyRegimenDrugCaculatorState extends State<ChemotherapyRegimenDr
                           e,
                           style: TextStyle(color: Colors.white),
                         ),
-                        onPressed: () => debugPrint(e),
+                        onPressed: () {
+                          onPicker();
+                        },
                       ))
                   .toList(),
             ),
@@ -224,4 +228,28 @@ class _ChemotherapyRegimenDrugCaculatorState extends State<ChemotherapyRegimenDr
   //   var gnQuantities = strategy.calculateDrugQuantities(bsa: bsa);
   //   DLog.d('${strategy.runtimeType} 方案药品数量: \n${jsonEncode(gnQuantities.map((e) => e.toJson()).toList())}');
   // }
+
+  void onPicker() {
+    double heightTmp = 170.0; // 身高 (cm)
+    double weightTmp = 65.0; // 体重 (kg)
+
+    GetBottomSheet.showCustom(
+      enableDrag: false,
+      hideDragIndicator: false,
+      isScrollControlled: true,
+      child: DrugDosageCalPage(
+        height: heightTmp.toString(),
+        weight: weightTmp.toString(),
+        // drugId: "drugId",
+        // drugName: "drugName",
+        drugFormulas: ChemotherapyRegimenTreatmentStrategyEnum.values,
+        drugFormulaSelected: ChemotherapyRegimenTreatmentStrategyEnum.values.first,
+        drugPlanSelected: ChemotherapyRegimenTreatmentStrategyEnum.values.first,
+        drugUseWaySelected: DrugUseWayEnum.FAST,
+        // dosage: scheduleInfo?.calFormula?.dosage,
+        onPatient: (val) {},
+        onConfirm: (value) {},
+      ),
+    );
+  }
 }
