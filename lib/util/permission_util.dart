@@ -90,8 +90,7 @@ class PermissionUtil {
   /// 检查摄像头和麦克风权限
   static Future<bool> checkCameraAndMicrophone() async {
     var cameraStatusIsGranted = await Permission.camera.status.isGranted;
-    var microphoneStatusIsGranted =
-        await Permission.microphone.status.isGranted;
+    var microphoneStatusIsGranted = await Permission.microphone.status.isGranted;
     if (!cameraStatusIsGranted || !microphoneStatusIsGranted) {
       var statusMap = await [
         Permission.camera,
@@ -154,8 +153,7 @@ class PermissionUtil {
         return false;
       }
 
-      final result =
-          statusMap[Permission.microphone] == PermissionStatus.granted;
+      final result = statusMap[Permission.microphone] == PermissionStatus.granted;
       return result;
     } else {
       return true;
