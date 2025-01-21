@@ -212,9 +212,9 @@ class GetDialog {
         height: 44,
         decoration: BoxDecoration(
           color: Colors.transparent,
-          border: Border(
-            bottom: BorderSide(width: .5, color: Color(0xffE5E5E5)),
-          ),
+          // border: Border(
+          //   bottom: BorderSide(width: .5, color: Color(0xffE5E5E5)),
+          // ),
         ),
         child: NavigationToolbar(
           middle: Text(
@@ -225,6 +225,9 @@ class GetDialog {
       ),
       footer: NFooterButtonBar(
         hideCancel: hideCancel,
+        decoration: BoxDecoration(
+          color: Colors.white,
+        ),
         onCancel: onCancel ??
             () {
               Get.back();

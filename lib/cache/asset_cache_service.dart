@@ -40,7 +40,7 @@ class AssetCacheService {
       return;
     }
 
-    if (file is Directory) {
+    if (file is Directory && file.existsSync()) {
       final List<FileSystemEntity> children = file.listSync();
       for (final FileSystemEntity child in children) {
         await deleteDirectory(child);

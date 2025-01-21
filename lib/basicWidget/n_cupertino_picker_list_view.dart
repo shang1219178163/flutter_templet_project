@@ -112,6 +112,7 @@ class NNCupertinoPickerListViewState<E> extends State<NCupertinoPickerListView<E
                       width: 16,
                       height: 16,
                       // fit: BoxFit.fill,
+                      color: Colors.grey,
                     ),
                   ),
           ),
