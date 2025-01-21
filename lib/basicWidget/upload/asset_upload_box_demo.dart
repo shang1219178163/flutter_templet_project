@@ -8,8 +8,8 @@ import 'package:flutter_templet_project/basicWidget/upload/asset_upload_model.da
 import 'package:flutter_templet_project/cache/asset_cache_service.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:flutter_templet_project/util/fade_page_route.dart';
-import 'package:flutter_templet_project/util/tool_util.dart';
 
+/// AssetUploadBox演示demo
 class AssetUploadBoxDemo extends StatefulWidget {
   AssetUploadBoxDemo({Key? key, this.title}) : super(key: key);
 
@@ -25,8 +25,20 @@ class _AssetUploadBoxDemoState extends State<AssetUploadBoxDemo> {
 
   /// 有默认数据
   var selectedModels = [
-    "https://yl-prescription-share.oss-cn-beijing.aliyuncs.com/beta/Health_APP/20230825/fb013ec6b90a4c5bb1059b003dada9ee.jpg",
-    "https://yl-prescription-share.oss-cn-beijing.aliyuncs.com/beta/Health_APP/20230825/ce326143c5b84fd9b99ffca943353b05.jpg",
+    'https://yl-prescription-share.oss-cn-beijing.aliyuncs.com/test/message/document/1737078692/im/msg/rec/651722246582308864.jpg',
+    'https://yl-prescription-share.oss-cn-beijing.aliyuncs.com/test/message/document/1737078705/im/msg/rec/651722301611577344.jpg',
+    'https://yl-prescription-share.oss-cn-beijing.aliyuncs.com/test/message/document/1737337130/im/msg/rec/652806214488559616.jpg',
+    'https://yl-prescription-share.oss-cn-beijing.aliyuncs.com/test/message/document/1737337130/im/msg/rec/652806216854147072.jpg',
+    'https://yl-prescription-share.oss-cn-beijing.aliyuncs.com/test/message/document/1737337130/im/msg/rec/652806216086589440.jpg',
+    'https://yl-prescription-share.oss-cn-beijing.aliyuncs.com/test/message/document/1737337130/im/msg/rec/652806217546207232.jpg',
+    'https://yl-prescription-share.oss-cn-beijing.aliyuncs.com/test/message/document/1737337131/im/msg/rec/652806218489925632.jpg',
+    'https://yl-prescription-share.oss-cn-beijing.aliyuncs.com/test/message/document/1737337131/im/msg/rec/652806219450421248.jpg',
+    'https://yl-prescription-share.oss-cn-beijing.aliyuncs.com/test/message/document/1737337131/im/msg/rec/652806220805181440.jpg',
+    'https://yl-prescription-share.oss-cn-beijing.aliyuncs.com/test/message/document/1737337132/im/msg/rec/652806222130581504.jpg',
+    'https://yl-prescription-share.oss-cn-beijing.aliyuncs.com/test/message/document/1737337132/im/msg/rec/652806224420671488.jpg',
+    'https://yl-prescription-share.oss-cn-beijing.aliyuncs.com/test/message/document/1737343844/im/msg/rec/652834375670566912.jpg',
+    'https://yl-prescription-share.oss-cn-beijing.aliyuncs.com/test/message/document/1737343889/im/msg/rec/652834566318460928.jpg',
+    'https://yl-prescription-share.oss-cn-beijing.aliyuncs.com/test/message/document/1737343924/im/msg/rec/652834709679771648.png',
   ].map((e) => AssetUploadModel(url: e, entity: null)).toList();
 
   /// 获取图片链接数组
@@ -57,36 +69,21 @@ class _AssetUploadBoxDemoState extends State<AssetUploadBoxDemo> {
     );
   }
 
-  buildAppBar({required Widget? title, List<Widget>? actions}) {
+  Widget buildAppBar({required Widget? title, List<Widget>? actions}) {
     return AppBar(
-        backgroundColor: Colors.white,
-        iconTheme: const IconThemeData(
-          color: fontColor,
-          // size: 20,
-        ),
-        elevation: 0,
-        shadowColor: const Color(0xffe4e4e4),
-        title: Text(widget.title ?? "$widget"),
-        titleTextStyle: const TextTheme(
-          titleMedium: TextStyle(
-            // headline6 is used for setting title's theme
-            color: fontColor,
-            fontWeight: FontWeight.bold,
-            fontSize: 18,
-          ),
-        ).titleMedium,
-        toolbarTextStyle: const TextTheme(
-          titleMedium: TextStyle(
-            // headline6 is used for setting title's theme
-            color: fontColor,
-            fontWeight: FontWeight.bold,
-            fontSize: 18,
-          ),
-        ).titleMedium,
-        actions: actions);
+      backgroundColor: Colors.white,
+      iconTheme: const IconThemeData(
+        color: fontColor,
+        // size: 20,
+      ),
+      elevation: 0,
+      shadowColor: const Color(0xffe4e4e4),
+      title: Text(widget.title ?? "$widget"),
+      actions: actions,
+    );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return SingleChildScrollView(
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -106,9 +103,7 @@ class _AssetUploadBoxDemoState extends State<AssetUploadBoxDemo> {
               // showFileSize: true,
               onChanged: (items) {
                 debugPrint("onChanged items.length: ${items.length}");
-                selectedModels = items
-                    .where((e) => e.url?.startsWith("http") == true)
-                    .toList();
+                selectedModels = items.where((e) => e.url?.startsWith("http") == true).toList();
                 urls = selectedModels.map((e) => e.url ?? "").toList();
                 setState(() {});
               },
@@ -135,7 +130,7 @@ class _AssetUploadBoxDemoState extends State<AssetUploadBoxDemo> {
     );
   }
 
-  photoSection({
+  Widget photoSection({
     List<AssetUploadModel> items = const [],
     int maxCount = 9,
     int rowCount = 4,
@@ -143,11 +138,8 @@ class _AssetUploadBoxDemoState extends State<AssetUploadBoxDemo> {
     double runSpacing = 10,
     bool hasAddBtn = false,
   }) {
-    return LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints) {
-      var itemWidth =
-          ((constraints.maxWidth - spacing * (rowCount - 1)) / rowCount)
-              .truncateToDouble();
+    return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+      var itemWidth = ((constraints.maxWidth - spacing * (rowCount - 1)) / rowCount).truncateToDouble();
       // print("itemWidth: $itemWidth");
       return Wrap(spacing: spacing, runSpacing: runSpacing, children: [
         ...items.map((e) {
@@ -166,10 +158,8 @@ class _AssetUploadBoxDemoState extends State<AssetUploadBoxDemo> {
                     child: InkWell(
                       onTap: () {
                         // debugPrint("onTap: ${e.url}");
-                        final urls = items
-                            .where((e) => e.url?.startsWith("http") == true)
-                            .map((e) => e.url ?? "")
-                            .toList();
+                        final urls =
+                            items.where((e) => e.url?.startsWith("http") == true).map((e) => e.url ?? "").toList();
                         final index = urls.indexOf(e.url ?? "");
                         // debugPrint("urls: ${urls.length}, $index");
                         jumpImagePreview(urls: urls, index: index);
