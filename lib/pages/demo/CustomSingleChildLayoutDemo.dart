@@ -6,12 +6,10 @@ class CustomSingleChildLayoutDemo extends StatefulWidget {
   final String? title;
 
   @override
-  _CustomSingleChildLayoutDemoState createState() =>
-      _CustomSingleChildLayoutDemoState();
+  _CustomSingleChildLayoutDemoState createState() => _CustomSingleChildLayoutDemoState();
 }
 
-class _CustomSingleChildLayoutDemoState
-    extends State<CustomSingleChildLayoutDemo> {
+class _CustomSingleChildLayoutDemoState extends State<CustomSingleChildLayoutDemo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,19 +60,19 @@ class _MySingleChildLayoutDelegate extends SingleChildLayoutDelegate {
 
   @override
   Size getSize(BoxConstraints constraints) {
-    debugPrint('--getSize:--constraints:$constraints');
+    debugPrint('$runtimeType getSize constraints: $constraints');
     return super.getSize(constraints);
   }
 
   @override
   Offset getPositionForChild(Size size, Size childSize) {
-    debugPrint('--size:$size--childSize:$childSize');
+    debugPrint('$runtimeType getPositionForChild size: $size, childSize: $childSize');
     return super.getPositionForChild(size, childSize);
   }
 
   @override
   BoxConstraints getConstraintsForChild(BoxConstraints constraints) {
-    debugPrint('--getConstraintsForChild:--constraints:$constraints');
+    debugPrint('$runtimeType getConstraintsForChild constraints:$constraints');
     return super.getConstraintsForChild(constraints);
   }
 }
