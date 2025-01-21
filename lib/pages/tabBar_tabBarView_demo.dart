@@ -725,6 +725,7 @@ var others = <Tuple2<String, String>>[
   Tuple2(APPRouter.richTextDemo, "richTextDemo"),
   Tuple2(APPRouter.testPage, "testPage"),
   Tuple2(APPRouter.testPageOne, "testPageOne"),
+  Tuple2(APPRouter.customPainterPageDemo, "customPainterPageDemo"),
   Tuple2(APPRouter.decorationDemo, "decorationDemo"),
   Tuple2(APPRouter.homeSrollDemo, "HomeSrollDemo"),
   Tuple2(APPRouter.homeNavDemo, "HomeNavDemo"),

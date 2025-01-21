@@ -73,6 +73,7 @@ import 'package:flutter_templet_project/pages/demo/ContextMenuDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ConvertFlle.dart';
 import 'package:flutter_templet_project/pages/demo/CupertinoFormDemo.dart';
 import 'package:flutter_templet_project/pages/demo/CustomMultiChildLayoutDemo.dart';
+import 'package:flutter_templet_project/pages/demo/CustomPainterPageDemo.dart';
 import 'package:flutter_templet_project/pages/demo/CustomScrollBarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/CustomSingleChildLayoutDemo.dart';
 import 'package:flutter_templet_project/pages/demo/CustomSwipperDemo.dart';
@@ -530,6 +531,7 @@ class APPRouter {
   static const responsiveColumnDemo = '/responsiveColumnDemo';
   static const testPage = '/testPage';
   static const testPageOne = '/testPageOne';
+  static const customPainterPageDemo = '/customPainterPageDemo';
   static const offstageDemo = '/OffstageDemo';
   static const bottomAppBarDemo = '/bottomAppBarDemo';
   static const calendarDatePickerDemo = '/CalendarDatePickerDemo';
@@ -908,6 +910,10 @@ class AppPage {
     GetPage(
       name: APPRouter.testPageOne,
       page: () => TestPageOne(),
+    ),
+    GetPage(
+      name: APPRouter.customPainterPageDemo,
+      page: () => CustomPainterPageDemo(),
     ),
     GetPage(
       name: APPRouter.loginPage, page: () => LoginPage(),
