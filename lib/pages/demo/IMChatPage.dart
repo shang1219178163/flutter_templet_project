@@ -26,6 +26,7 @@ import 'package:flutter_templet_project/util/R.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:get/get.dart';
+import 'package:scrollview_observer/scrollview_observer.dart';
 import 'package:tuple/tuple.dart';
 
 class IMChatPage extends StatefulWidget {
@@ -48,6 +49,7 @@ class _IMChatPageState extends State<IMChatPage>
   bool get hideApp => Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
 
   final _scrollController = ScrollController();
+  late final observerController = ListObserverController(controller: _scrollController);
 
   final _inputController = TextEditingController();
 
@@ -123,7 +125,10 @@ class _IMChatPageState extends State<IMChatPage>
           : AppBar(
               title: Text(widget.title ?? "$widget"),
               elevation: 0,
+              scrolledUnderElevation: 0,
+              centerTitle: true,
               // bottom: buildAppbarBottom(),
+              actions: buildRightItems(),
             ),
       body: buildBody(),
       // body: buildListView(),
@@ -135,6 +140,36 @@ class _IMChatPageState extends State<IMChatPage>
       //   child: Icon(Icons.vertical_align_top),
       // ),
     );
+  }
+
+  List<Widget> buildRightItems() {
+    late final buttonItems = [
+      (
+        name: "跳3",
+        action: () {
+          observerController.jumpTo(index: 3);
+        }
+      ),
+      (
+        name: "其他",
+        action: () {
+          DLog.d("其他");
+        }
+      ),
+    ];
+
+    return [
+      ...buttonItems.map((e) {
+        return GestureDetector(
+          onTap: e.action,
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 8),
+            child: Center(child: Text(e.name)),
+          ),
+        );
+      }),
+      SizedBox(width: 8),
+    ];
   }
 
   PreferredSize buildAppbarBottom() {
@@ -202,37 +237,40 @@ class _IMChatPageState extends State<IMChatPage>
               },
               child: Scrollbar(
                 controller: _scrollController,
-                child: ListView.builder(
-                  controller: _scrollController,
-                  reverse: true,
-                  shrinkWrap: true,
-                  // physics: ClampingScrollPhysics(),
-                  // cacheExtent: 600,
-                  itemCount: list.length,
-                  itemBuilder: (context, index) {
-                    final e = list[index];
+                child: ListViewObserver(
+                  controller: observerController,
+                  child: ListView.builder(
+                    controller: _scrollController,
+                    reverse: true,
+                    shrinkWrap: true,
+                    // physics: ClampingScrollPhysics(),
+                    // cacheExtent: 600,
+                    itemCount: list.length,
+                    itemBuilder: (context, index) {
+                      final e = list[index];
 
-                    final isOwner = e.isOwner == true;
-                    return InkWell(
-                      onTap: () {
-                        debugPrint("index: ${index}, $e");
-                      },
-                      child: buildChatCell(
-                        modelIndex: index,
-                        model: e,
-                        contentChild: buildContentChild(
+                      final isOwner = e.isOwner == true;
+                      return InkWell(
+                        onTap: () {
+                          debugPrint("index: ${index}, $e");
+                        },
+                        child: buildChatCell(
                           modelIndex: index,
-                          isOwner: isOwner,
-                          // text: "buildContentChild",
-                          // text: "聊一会" * IntExt.random(min: 1, max: 6),
-                          text: e.restructureMsgBody ?? "",
+                          model: e,
+                          contentChild: buildContentChild(
+                            modelIndex: index,
+                            isOwner: isOwner,
+                            // text: "buildContentChild",
+                            // text: "聊一会" * IntExt.random(min: 1, max: 6),
+                            text: e.restructureMsgBody ?? "",
+                          ),
                         ),
-                      ),
-                      // child: ListTile(title: Text(e),
-                      //   subtitle: Text("index: ${index}"),
-                      // ),
-                    );
-                  },
+                        // child: ListTile(title: Text(e),
+                        //   subtitle: Text("index: ${index}"),
+                        // ),
+                      );
+                    },
+                  ),
                 ),
               ),
             ),

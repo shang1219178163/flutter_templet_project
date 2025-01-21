@@ -38,6 +38,7 @@ dependencies:
   flutter_isolate: ^2.0.4
   cached_network_image: ^3.2.0
 
+  scrollview_observer: ^1.24.0
   # 省市区选择
   flutter_pickers: ^2.1.9
 
