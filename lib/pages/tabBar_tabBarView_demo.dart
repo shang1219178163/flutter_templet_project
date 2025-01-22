@@ -679,6 +679,8 @@ var customs = [
   Tuple2(APPRouter.nwebViewDemo, "nwebViewDemo"),
   Tuple2(APPRouter.iconConvertPage, "iconConvertPage"),
   Tuple2(APPRouter.alignmentDrawDemo, "alignmentDrawDemo"),
+  Tuple2(APPRouter.pageRouteDemo, "pageRouteDemo"),
+  Tuple2(APPRouter.pageRouteAnimationDemo, "pageRouteAnimationDemo"),
 ];
 
 var vendors = <Tuple2<String, String>>[

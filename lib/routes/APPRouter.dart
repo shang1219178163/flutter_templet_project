@@ -219,6 +219,8 @@ import 'package:flutter_templet_project/pages/demo/OverlayMixinDemo.dart';
 import 'package:flutter_templet_project/pages/demo/OverlayPortalDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PageBuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PageLifecycleFuncTest.dart';
+import 'package:flutter_templet_project/pages/demo/PageRouteAnimationDemo.dart';
+import 'package:flutter_templet_project/pages/demo/PageRouteDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PageViewAndBarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PageViewDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/PageViewDemoThree.dart';
@@ -807,7 +809,8 @@ class APPRouter {
   static const tabContainerDemo = '/tabContainerDemo';
   static const curvedNavigationBarDemo = '/CurvedNavigationBarDemo';
   static const swiperCardDemo = '/swiperCardDemo';
-
+  static const pageRouteDemo = '/pageRouteDemo';
+  static const pageRouteAnimationDemo = '/pageRouteAnimationDemo';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -2398,7 +2401,13 @@ class AppPage {
       name: APPRouter.swiperCardDemo,
       page: () => SwiperCardDemo(),
     ),
-
-
+    GetPage(
+      name: APPRouter.pageRouteDemo,
+      page: () => PageRouteDemo(),
+    ),
+    GetPage(
+      name: APPRouter.pageRouteAnimationDemo,
+      page: () => PageRouteAnimationDemo(),
+    ),
   ];
 }
