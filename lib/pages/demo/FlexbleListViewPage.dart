@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_templet_project/basicWidget/n_sliver_persistent_header_delegate.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
+import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/pages/demo/FittedBoxDemo.dart';
 import 'package:get/get.dart';
 
@@ -132,7 +133,8 @@ class _FlexbleListViewDemoState extends State<FlexbleListViewDemo> {
 
   Widget buildPage1() {
     MediaQueryData mediaQuery = MediaQuery.of(context);
-    final min = mediaQuery.viewPadding.top + kToolbarHeight;
+    var min = mediaQuery.viewPadding.top;
+
     final max = 200.0;
 
     return Scaffold(
@@ -163,18 +165,36 @@ class _FlexbleListViewDemoState extends State<FlexbleListViewDemo> {
                 //   }} ",
                 //   style: TextStyle(color: Colors.white, fontSize: 20),
                 // ),
+                // child: SearchBar(
+                //   hintText: "search",
+                // ),
+              );
+            },
+          ),
+          NSliverPersistentHeaderBuilder(
+            pinned: true,
+            min: 40,
+            max: 40,
+            builder: (BuildContext context, double shrinkOffset, bool overlapsContent) {
+              return Container(
+                padding: EdgeInsets.symmetric(horizontal: 12),
+                decoration: BoxDecoration(
+                  color: Colors.green,
+                ),
                 child: SearchBar(
+                  backgroundColor: MaterialStateProperty.all(Colors.white),
                   hintText: "search",
                 ),
               );
             },
           ),
-          // 用 SliverList 填充内容
           SliverList(
             delegate: SliverChildBuilderDelegate(
-              (context, index) => ListTile(
-                title: Text('Item #$index'),
-              ),
+              (context, index) {
+                return ListTile(
+                  title: Text('Item #$index'),
+                );
+              },
               childCount: 20,
             ),
           ),
