@@ -620,6 +620,7 @@ var specials = <Tuple2<String, String>>[
   Tuple2(APPRouter.flexbleListViewDemo, "简单表达式计算"),
   Tuple2(APPRouter.pageViewVerticalDemo, "垂直滚动"),
   Tuple2(APPRouter.markdownBodyDemo, "stream markdown"),
+  Tuple2(APPRouter.tabContainerDemo, "第三方 tabContainer"),
 ];
 
 var animateds = <Tuple2<String, String>>[

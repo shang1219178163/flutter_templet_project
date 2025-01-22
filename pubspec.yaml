@@ -220,6 +220,8 @@ dependencies:
 
   flutter_markdown: ^0.7.4+3
 
+  tab_container: ^3.5.3
+
 #  User:
 #    hosted:
 #      name: syn_mine_pages

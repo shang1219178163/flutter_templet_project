@@ -320,6 +320,7 @@ import 'package:flutter_templet_project/pages/demo/steper_connector_demo.dart';
 import 'package:flutter_templet_project/pages/demo/system_color_page.dart';
 import 'package:flutter_templet_project/pages/demo/system_curves_page.dart';
 import 'package:flutter_templet_project/pages/demo/system_icons_page.dart';
+import 'package:flutter_templet_project/pages/demo/tab_container_demo.dart';
 import 'package:flutter_templet_project/pages/demo/test_page.dart';
 import 'package:flutter_templet_project/pages/demo/test_page_one.dart';
 import 'package:flutter_templet_project/pages/demo/webview_demo.dart';
@@ -802,6 +803,7 @@ class APPRouter {
   static const flexbleListViewDemo = '/flexbleListViewDemo';
   static const pageViewVerticalDemo = '/PageViewVerticalDemo';
   static const markdownBodyDemo = '/markdownBodyDemo';
+  static const tabContainerDemo = '/tabContainerDemo';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -2379,6 +2381,10 @@ class AppPage {
     GetPage(
       name: APPRouter.markdownBodyDemo,
       page: () => MarkdownBodyDemo(),
+    ),
+    GetPage(
+      name: APPRouter.tabContainerDemo,
+      page: () => TabContainerDemo(),
     ),
   ];
 }
