@@ -603,7 +603,6 @@ class APPRouter {
   static const stackDemoTwo = '/stackDemoTwo';
 
   static const badgeDemo = '/badgeDemo';
-  static const badgesDemo = '/badgesDemo';
   static const flutterSwiperDemo = '/flutterSwiperDemo';
   static const flutterSwiperIndicatorDemo = '/flutterSwiperIndicatorDemo';
   static const homeSrollDemo = '/synHomeSrollDemo';

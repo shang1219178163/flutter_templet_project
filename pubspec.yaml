@@ -220,8 +220,10 @@ dependencies:
 
   flutter_markdown: ^0.7.4+3
 
+  animations: ^2.0.9
   tab_container: ^3.5.3
   curved_navigation_bar: ^1.0.6
+  rotated_corner_decoration: ^2.1.0+1
 
 #  User:
 #    hosted:

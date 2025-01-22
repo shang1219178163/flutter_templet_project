@@ -17,6 +17,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "5.13.0"
+  animations:
+    dependency: "direct main"
+    description:
+      name: animations
+      sha256: d3d6dcfb218225bbe68e87ccf6378bbb2e32a94900722c5f81611dad089911cb
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.0.11"
   ansicolor:
     dependency: transitive
     description:
@@ -1872,6 +1880,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "4.1.0"
+  rotated_corner_decoration:
+    dependency: "direct main"
+    description:
+      name: rotated_corner_decoration
+      sha256: "4ad15b18e0c2dacbfb1061370ab48c2baec62b02ec8ecdf6cdf20fbcc6de7ad6"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.1.0+1"
   route_stack_manager:
     dependency: "direct main"
     description:
