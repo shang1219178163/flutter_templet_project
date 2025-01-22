@@ -148,7 +148,7 @@ class _PageRouteAnimationDemoState extends State<PageRouteAnimationDemo> {
           child: NNetworkImage(
             url: url,
             width: 64,
-            fit: BoxFit.fitHeight,
+            fit: BoxFit.contain,
           ),
         ),
       ),
