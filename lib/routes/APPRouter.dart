@@ -318,6 +318,7 @@ import 'package:flutter_templet_project/pages/demo/rp_template_qrcode_page.dart'
 import 'package:flutter_templet_project/pages/demo/secure_keyboard_demo.dart';
 import 'package:flutter_templet_project/pages/demo/smart_dialog_demo.dart';
 import 'package:flutter_templet_project/pages/demo/steper_connector_demo.dart';
+import 'package:flutter_templet_project/pages/demo/swiper_card_demo.dart';
 import 'package:flutter_templet_project/pages/demo/system_color_page.dart';
 import 'package:flutter_templet_project/pages/demo/system_curves_page.dart';
 import 'package:flutter_templet_project/pages/demo/system_icons_page.dart';
@@ -805,6 +806,8 @@ class APPRouter {
   static const markdownBodyDemo = '/markdownBodyDemo';
   static const tabContainerDemo = '/tabContainerDemo';
   static const curvedNavigationBarDemo = '/CurvedNavigationBarDemo';
+  static const swiperCardDemo = '/swiperCardDemo';
+
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -2391,5 +2394,11 @@ class AppPage {
       name: APPRouter.curvedNavigationBarDemo,
       page: () => CurvedNavigationBarDemo(),
     ),
+    GetPage(
+      name: APPRouter.swiperCardDemo,
+      page: () => SwiperCardDemo(),
+    ),
+
+
   ];
 }

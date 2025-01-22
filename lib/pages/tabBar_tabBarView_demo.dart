@@ -622,6 +622,7 @@ var specials = <Tuple2<String, String>>[
   Tuple2(APPRouter.markdownBodyDemo, "stream markdown"),
   Tuple2(APPRouter.tabContainerDemo, "第三方 tabContainer"),
   Tuple2(APPRouter.curvedNavigationBarDemo, "第三方 curvedNavigationBar"),
+  Tuple2(APPRouter.swiperCardDemo, "第三方 swiperCardDemo"),
 ];
 
 var animateds = <Tuple2<String, String>>[
