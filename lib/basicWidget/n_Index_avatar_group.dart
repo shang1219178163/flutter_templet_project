@@ -10,15 +10,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_network_image.dart';
 
 /// 层叠头像组
-class NIndexAvatarGroup extends StatelessWidget {
-  const NIndexAvatarGroup({
+class NAvatarGroup extends StatelessWidget {
+  const NAvatarGroup({
     Key? key,
     required this.avatars,
-    this.placehorder =
-        const AssetImage("assets/images/img_placeholder_doctor.png"),
+    this.placehorder = const AssetImage("assets/images/img_placeholder_doctor.png"),
     this.isRevered = false,
     this.itemWidth = 28,
     this.scale = 18 / 28,
+    this.itemPadding = const EdgeInsets.all(2),
   }) : super(key: key);
 
   /// url
@@ -32,6 +32,9 @@ class NIndexAvatarGroup extends StatelessWidget {
 
   /// 子项宽高
   final double itemWidth;
+
+  /// 子项 padding
+  final EdgeInsets? itemPadding;
 
   /// 层叠比
   final double scale;
@@ -79,7 +82,7 @@ class NIndexAvatarGroup extends StatelessWidget {
     required AssetImage placehorder,
   }) {
     return Container(
-      padding: const EdgeInsets.all(2),
+      padding: itemPadding ?? const EdgeInsets.all(2),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(itemWidth * 0.5),

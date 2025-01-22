@@ -57,6 +57,9 @@ class _RImage {
     'https://www.10wallpaper.com/wallpaper/1366x768/1207/balls_3d-Abstract_design_wallpaper_1366x768.jpg',
     'https://www.10wallpaper.com/wallpaper/1366x768/1803/Colorful_fibre_optics_abstract_spotlight_1366x768.jpg',
     'https://www.10wallpaper.com/wallpaper/1366x768/1807/Blue_particle_tech_abstract_art_background_1366x768.jpg',
+    "https://yl-prescription-share.oss-cn-beijing.aliyuncs.com/beta/Health_APP/20231219/e0a448a8201c47ed8bd46cf1ec6fe1af.jpg",
+    "https://yl-prescription-share.oss-cn-beijing.aliyuncs.com/beta/Health_APP/20231219/56415da814454ddcb8ed83608f471619.jpg",
+    "https://yl-prescription-share.oss-cn-beijing.aliyuncs.com/beta/Health_APP/20231219/3dc1b7f4e3b94a99bc5de47f3836ec96.jpg",
   ];
 
   /// 原理图

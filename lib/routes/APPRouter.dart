@@ -182,7 +182,7 @@ import 'package:flutter_templet_project/pages/demo/NChoiceBoxOneDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NChoiceExpansionDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NExpandTextDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NFooterButtonBarDemo.dart';
-import 'package:flutter_templet_project/pages/demo/NIndexAvatarGroupDemo.dart';
+import 'package:flutter_templet_project/pages/demo/NAvatarGroupDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NPageViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NRefreshViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NSectionHeaderDemo.dart';
@@ -731,7 +731,7 @@ class APPRouter {
   static const choiceBoxOneDemo = '/choiceBoxOneDemo';
   static const apiConvertPage = '/apiConvertPage';
   static const selectListPage = '/selectListPage';
-  static const indexAvatarGroupDemo = '/indexAvatarGroupDemo';
+  static const avatarGroupDemo = '/AvatarGroupDemo';
   static const overlayPortalDemo = '/overlayPortalDemo';
   static const appBarColorChangerDemo = '/appBarColorChangerDemo';
   static const footerButtonBarDemo = '/footerButtonBarDemo';
@@ -2110,8 +2110,8 @@ class AppPage {
       page: () => SelectListPage(),
     ),
     GetPage(
-      name: APPRouter.indexAvatarGroupDemo,
-      page: () => NIndexAvatarGroupDemo(),
+      name: APPRouter.avatarGroupDemo,
+      page: () => NAvatarGroupDemo(),
     ),
     GetPage(
       name: APPRouter.overlayPortalDemo,
