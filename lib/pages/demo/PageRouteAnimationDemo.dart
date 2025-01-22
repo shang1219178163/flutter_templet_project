@@ -9,6 +9,7 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_templet_project/Pages/second_page.dart';
 import 'package:flutter_templet_project/basicWidget/n_button.dart';
 import 'package:flutter_templet_project/basicWidget/n_network_image.dart';
@@ -39,6 +40,8 @@ class _PageRouteAnimationDemoState extends State<PageRouteAnimationDemo> {
   /// id
   late final id = arguments["id"];
 
+  final items = ["Hero路由动画"];
+
   @override
   void didUpdateWidget(covariant PageRouteAnimationDemo oldWidget) {
     super.didUpdateWidget(oldWidget);
@@ -59,38 +62,53 @@ class _PageRouteAnimationDemoState extends State<PageRouteAnimationDemo> {
   Widget buildBody() {
     final list = R.image.urls;
 
-    return GridView.count(
-      padding: EdgeInsets.all(15.0),
-      crossAxisCount: 2,
-      scrollDirection: Axis.vertical,
-      crossAxisSpacing: 8,
-      mainAxisSpacing: 8,
-      childAspectRatio: 3 / 4,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        ...list.map((e) {
-          final i = list.indexOf(e);
-          return _NOpenContainer<bool>(
-            openBuilder: (BuildContext _, VoidCallback openContainer) {
-              return SecondPage();
-            },
-            closedBuilder: (BuildContext _, VoidCallback openContainer) {
-              return buildCard(
-                onTap: openContainer,
-                url: e,
-                title: 'title $i',
-                subtitle: 'subtitle',
-              );
-            },
-            onClosed: (isMarkedAsDone) {
-              DLog.d("isMarkedAsDone: $isMarkedAsDone");
-              if (isMarkedAsDone ?? false) {
-                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                  content: Text('Marked as done!'),
-                ));
-              }
-            },
-          );
-        })
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          child: Column(
+            children: [
+              ...items.map((e) => Text(e)),
+            ],
+          ),
+        ),
+        Expanded(
+          child: GridView.count(
+            padding: EdgeInsets.all(15.0),
+            crossAxisCount: 2,
+            scrollDirection: Axis.vertical,
+            crossAxisSpacing: 8,
+            mainAxisSpacing: 8,
+            childAspectRatio: 3 / 4,
+            children: [
+              ...list.map((e) {
+                final i = list.indexOf(e);
+                return _NOpenContainer<bool>(
+                  openBuilder: (BuildContext _, VoidCallback openContainer) {
+                    return SecondPage();
+                  },
+                  closedBuilder: (BuildContext _, VoidCallback openContainer) {
+                    return buildCard(
+                      onTap: openContainer,
+                      url: e,
+                      title: 'title $i',
+                      subtitle: 'subtitle',
+                    );
+                  },
+                  onClosed: (isMarkedAsDone) {
+                    DLog.d("isMarkedAsDone: $isMarkedAsDone");
+                    if (isMarkedAsDone ?? false) {
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text('Marked as done!'),
+                      ));
+                    }
+                  },
+                );
+              })
+            ],
+          ),
+        ),
       ],
     );
   }
