@@ -144,6 +144,7 @@ class GetBottomSheet {
 class GetDialog {
   /// 弹框 - 自定义child
   static Future<dynamic> showCustom({
+    bool barrierDismissible = false,
     bool enableDrag = false,
     bool needUnconstrainedBox = false,
     BoxConstraints? constraints,
@@ -196,7 +197,7 @@ class GetDialog {
     }
     return Get.dialog(
       content,
-      barrierDismissible: false,
+      barrierDismissible: barrierDismissible,
     );
   }
 
