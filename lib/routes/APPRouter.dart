@@ -72,6 +72,7 @@ import 'package:flutter_templet_project/pages/demo/ContextMenuActionDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ContextMenuDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ConvertFlle.dart';
 import 'package:flutter_templet_project/pages/demo/CupertinoFormDemo.dart';
+import 'package:flutter_templet_project/pages/demo/CurvedNavigationBarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/CustomMultiChildLayoutDemo.dart';
 import 'package:flutter_templet_project/pages/demo/CustomPainterPageDemo.dart';
 import 'package:flutter_templet_project/pages/demo/CustomScrollBarDemo.dart';
@@ -804,6 +805,7 @@ class APPRouter {
   static const pageViewVerticalDemo = '/PageViewVerticalDemo';
   static const markdownBodyDemo = '/markdownBodyDemo';
   static const tabContainerDemo = '/tabContainerDemo';
+  static const curvedNavigationBarDemo = '/CurvedNavigationBarDemo';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -2385,6 +2387,10 @@ class AppPage {
     GetPage(
       name: APPRouter.tabContainerDemo,
       page: () => TabContainerDemo(),
+    ),
+    GetPage(
+      name: APPRouter.curvedNavigationBarDemo,
+      page: () => CurvedNavigationBarDemo(),
     ),
   ];
 }

@@ -425,6 +425,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.0.8"
+  curved_navigation_bar:
+    dependency: "direct main"
+    description:
+      name: curved_navigation_bar
+      sha256: bb4ab128fcb6f4a9f0f1f72d227db531818b20218984789777f049fcbf919279
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.6"
   custom_timer:
     dependency: "direct main"
     description:
