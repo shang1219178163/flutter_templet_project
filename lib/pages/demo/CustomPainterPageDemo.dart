@@ -9,6 +9,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:get/get.dart';
 
 class CustomPainterPageDemo extends StatefulWidget {
@@ -26,7 +27,7 @@ class CustomPainterPageDemo extends StatefulWidget {
 class _CustomPainterPageDemoState extends State<CustomPainterPageDemo> {
   bool get hideApp => "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
 
-  final _scrollController = ScrollController();
+  final scrollController = ScrollController();
 
   Map<String, dynamic> arguments = Get.arguments ?? <String, dynamic>{};
 
@@ -64,32 +65,61 @@ class _CustomPainterPageDemoState extends State<CustomPainterPageDemo> {
   }
 
   Widget buildBody() {
+    final spacing = 16.0;
+    final itemWidth = (context.screenWidth - spacing * 4) / 3.0.truncateToDouble();
     return Scrollbar(
-      controller: _scrollController,
+      controller: scrollController,
       child: SingleChildScrollView(
-        controller: _scrollController,
-        child: Column(
-          children: [
-            buildPriceTag(),
-            CustomPaint(
-              painter: CameraClosePainter(),
-              child: Container(
-                height: 200,
+        controller: scrollController,
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: spacing, vertical: 12),
+          child: Wrap(
+            spacing: spacing,
+            runSpacing: spacing,
+            children: [
+              buildPriceTag(),
+              CustomPaint(
+                painter: CameraClosePainter(),
+                child: Container(
+                  height: 200,
+                  decoration: BoxDecoration(
+                    color: Colors.transparent,
+                    border: Border.all(color: Colors.blue),
+                  ),
+                ),
+              ),
+              buildHexagon(),
+              Container(
                 decoration: BoxDecoration(
                   color: Colors.transparent,
                   border: Border.all(color: Colors.blue),
                 ),
+                child: CustomPaint(
+                  size: Size(200, 200), // 指定绘制区域大小
+                  painter: ArcPainter(
+                    startPoint: Offset(100, 100),
+                    backgroundColor: Colors.green.withOpacity(0.3),
+                  ),
+                ),
               ),
-            ),
-            buildHexagon(),
-          ]
-              .map((e) => Container(
-                    width: 200,
-                    margin: EdgeInsets.only(bottom: 15),
-                    padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-                    child: e,
-                  ))
-              .toList(),
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.transparent,
+                  border: Border.all(color: Colors.blue),
+                ),
+                child: CustomPaint(
+                  // size: Size(150, 150), // 指定绘制区域大小
+                  painter: RightArrowPainter(),
+                ),
+              ),
+            ]
+                .map((e) => Container(
+                      width: itemWidth,
+                      height: itemWidth,
+                      child: e,
+                    ))
+                .toList(),
+          ),
         ),
       ),
     );
@@ -109,14 +139,16 @@ class _CustomPainterPageDemoState extends State<CustomPainterPageDemo> {
           color: Colors.transparent,
           border: Border.all(color: Colors.blue),
         ),
-        child: Text(
-          '28 book summariesa month',
-          style: TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.w500,
-            color: Colors.blue,
+        child: Center(
+          child: Text(
+            '28 book summariesa month',
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w500,
+              color: Colors.blue,
+            ),
+            textAlign: TextAlign.center,
           ),
-          textAlign: TextAlign.center,
         ),
       ),
     );
@@ -366,9 +398,90 @@ class Hexagon extends CustomPainter {
 }
 
 // 扩展方法：向量归一化
-extension VectorExtensions on Offset {
+extension _OffsetExtensions on Offset {
   Offset get normalized {
     final double length = distance;
     return length == 0 ? this : this / length;
+  }
+}
+
+class ArcPainter extends CustomPainter {
+  final Color color;
+  final Offset startPoint;
+  final double radius;
+  final double startAngle;
+  final double sweepAngle;
+  final Color backgroundColor;
+
+  ArcPainter({
+    this.color = Colors.blue,
+    required this.startPoint,
+    this.radius = 15.0,
+    this.startAngle = 0.0,
+    this.sweepAngle = pi / 2, // 默认为90度
+    this.backgroundColor = Colors.green,
+  });
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    //背景
+    final paintBg = Paint()..color = backgroundColor;
+
+    // 使用 drawRect 来绘制背景色
+    canvas.drawRect(Rect.fromLTWH(0, 0, size.width, size.height), paintBg);
+
+    // 你也可以使用 drawPaint 绘制背景色
+    // canvas.drawPaint(paint);
+
+    final Paint paint = Paint()
+      ..color = color
+      ..style = PaintingStyle.fill;
+
+    // 计算等边三角形的三个顶点
+    double centerX = size.width / 2;
+    double centerY = size.height / 2;
+    double sideLength = min(size.width, size.height) * 0.8; // 等边三角形的边长，取画布的80%
+
+    // 计算三角形的三个顶点坐标
+    double height = (sqrt(3) / 2) * sideLength; // 高度公式：h = (sqrt(3) / 2) * a
+    Offset p1 = Offset(centerX, centerY - height / 2); // 顶点
+    Offset p2 = Offset(centerX - sideLength / 2, centerY + height / 2); // 左下角
+    Offset p3 = Offset(centerX + sideLength / 2, centerY + height / 2); // 右下角
+
+    // 创建路径并绘制三角形
+    Path path = Path()..addPolygon([p1, p2, p3], true);
+    canvas.drawPath(path, paint);
+
+    // 创建圆弧的矩形区域
+    // 图案
+    final Paint paintOne = Paint()
+      ..color = Colors.red
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 2.0;
+
+    final c = radius / sin(pi / 6);
+    final b = radius / tan(pi / 6);
+
+    Offset p1One = Offset(p1.dx, p1.dy + c);
+    Offset p2One = Offset(p2.dx + b, p2.dy - radius);
+    Offset p3One = Offset(p3.dx - b, p3.dy - radius);
+    Path pathOne = Path()..addPolygon([p1One, p2One, p3One], true);
+    // canvas.drawPath(pathOne, paintOne);
+
+    // 顶部弧形区域
+    final radians = pi / 180;
+    Rect rect1 = Rect.fromCircle(center: p1One, radius: radius);
+    canvas.drawArc(rect1, -radians * 135, radians * 90, true, paintOne);
+    // 左下角弧形区域
+    Rect rect2 = Rect.fromCircle(center: p2One, radius: radius);
+    canvas.drawArc(rect2, radians * 105, radians * 90, true, paintOne);
+    // 右下角弧形区域
+    Rect rect3 = Rect.fromCircle(center: p3One, radius: radius);
+    canvas.drawArc(rect3, -radians * 15, radians * 90, true, paintOne);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return false;
   }
 }
