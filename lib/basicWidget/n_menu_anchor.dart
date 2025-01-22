@@ -28,7 +28,7 @@ class NMenuAnchor<E> extends StatelessWidget {
     required this.cbName,
     this.placeholder = "请选择",
     this.leadingIconBuilder,
-    this.dropItemPadding,
+    this.dropItemPadding = const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
   });
 
   final MenuController? controller;
