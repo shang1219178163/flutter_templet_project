@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_resize_switch.dart';
+import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 
 class VisibilityDemo extends StatefulWidget {
@@ -15,68 +17,93 @@ class _VisibilityDemoState extends State<VisibilityDemo> {
 
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title ?? "$widget"),
-          actions: [
-            'done',
-          ]
-              .map((e) => TextButton(
-                    onPressed: onDone,
-                    child: Text(
-                      e,
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ))
-              .toList(),
-        ),
-        body: buildBody());
+      appBar: AppBar(
+        title: Text(widget.title ?? "$widget"),
+      ),
+      body: buildBody(),
+    );
   }
 
-  buildBody() {
-    final child = Container(
-      width: 100,
-      height: 100,
-      color: ColorExt.random,
-    );
-    return Container(
-      child: Row(
-        children: <Widget>[
-          Visibility(
-            visible: isVisible,
-            maintainAnimation: true,
-            maintainSize: true,
-            maintainState: true,
-            child: _buildItem('Visibility'),
+  Widget buildBody() {
+    return Scrollbar(
+      child: SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(right: 8.0),
+                    child: NText(
+                      "isVisible",
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  NResizeSwitch(
+                    value: isVisible,
+                    onChanged: (bool value) {
+                      isVisible = value;
+                      setState(() {});
+                    },
+                  ),
+                ],
+              ),
+              Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                children: [
+                  Visibility(
+                    visible: isVisible,
+                    // maintainAnimation: true,
+                    // maintainSize: true,
+                    // maintainState: true,
+                    replacement: _buildItem('Visibility\nreplacement'),
+                    child: _buildItem('Visibility'),
+                  ),
+                  Opacity(
+                    opacity: isVisible ? 1 : 0.5,
+                    child: _buildItem('Opacity'),
+                  ),
+                  AnimatedOpacity(
+                    opacity: isVisible ? 1 : 0.5,
+                    duration: Duration.zero,
+                    child: _buildItem('AnimatedOpacity'),
+                  ),
+                  Offstage(
+                    offstage: !isVisible,
+                    child: _buildItem('Offstage'),
+                  ),
+                ],
+              )
+            ],
           ),
-          // VerticalDivider(),
-          Offstage(
-            offstage: !isVisible,
-            child: _buildItem('Offstage'),
-          ),
-          // VerticalDivider(),
-          Opacity(
-            opacity: isVisible ? 1 : 0.5,
-            child: _buildItem('Opacity'),
-          ),
-        ],
+        ),
       ),
     );
   }
 
   _buildItem(String text) {
     return Container(
-      width: 100,
-      height: 100,
-      color: ColorExt.random,
-      child: Text(text),
+      width: 120,
+      height: 120,
+      decoration: BoxDecoration(
+        color: Colors.green,
+        // border: Border.all(color: Colors.blue),
+        borderRadius: BorderRadius.all(Radius.circular(4)),
+      ),
+      child: Text(
+        text,
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 20,
+          fontWeight: FontWeight.w500,
+        ),
+      ),
     );
-  }
-
-  onDone() {
-    isVisible = !isVisible;
-    setState(() {});
   }
 }
