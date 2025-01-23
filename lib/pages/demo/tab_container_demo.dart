@@ -7,6 +7,8 @@
 //
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/n_swiper_gesture_detector.dart';
+import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:get/get.dart';
 import 'package:tab_container/tab_container.dart';
 
@@ -30,20 +32,8 @@ class _TabContainerDemoState extends State<TabContainerDemo> with SingleTickerPr
 
   Map<String, dynamic> arguments = Get.arguments ?? <String, dynamic>{};
 
-  late final TabController _controller;
+  late final TabController _controller = TabController(vsync: this, length: kCreditCards.length);
   late TextTheme textTheme;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = TabController(vsync: this, length: 3);
-  }
-
-  @override
-  void didChangeDependencies() {
-    textTheme = Theme.of(context).textTheme;
-    super.didChangeDependencies();
-  }
 
   @override
   void dispose() {
@@ -52,8 +42,30 @@ class _TabContainerDemoState extends State<TabContainerDemo> with SingleTickerPr
   }
 
   @override
-  void didUpdateWidget(covariant TabContainerDemo oldWidget) {
-    super.didUpdateWidget(oldWidget);
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    textTheme = Theme.of(context).textTheme;
+    super.didChangeDependencies();
+  }
+
+  /// 后退
+  onPre() {
+    if (_controller.index == 0) {
+      return;
+    }
+    _controller.index -= 1;
+  }
+
+  /// 前进
+  onNext() {
+    if (_controller.index == _controller.length - 1) {
+      return;
+    }
+    _controller.index += 1;
   }
 
   @override
@@ -78,6 +90,13 @@ class _TabContainerDemoState extends State<TabContainerDemo> with SingleTickerPr
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           child: Column(
             children: [
+              NSwiperGestureDetector(
+                onPre: onPre,
+                onNext: onNext,
+                child: Image.network(
+                  'https://fastly.jsdelivr.net/npm/@vant/assets/apple-1.jpeg',
+                ),
+              ),
               buildCardBox(),
               buildCarBox(),
               buildTabRight(),
@@ -116,31 +135,33 @@ class _TabContainerDemoState extends State<TabContainerDemo> with SingleTickerPr
       child: AspectRatio(
         aspectRatio: 10 / 8,
         child: TabContainer(
+          controller: _controller,
           borderRadius: BorderRadius.circular(20),
           tabEdge: TabEdge.bottom,
           curve: Curves.easeIn,
-          transitionBuilder: (child, animation) {
-            animation = CurvedAnimation(curve: Curves.easeIn, parent: animation);
-            return SlideTransition(
-              position: Tween(
-                begin: const Offset(0.2, 0.0),
-                end: const Offset(0.0, 0.0),
-              ).animate(animation),
-              child: FadeTransition(
-                opacity: animation,
-                child: child,
-              ),
-            );
-          },
+          // transitionBuilder: (child, animation) {
+          //   animation = CurvedAnimation(curve: Curves.easeIn, parent: animation);
+          //   return SlideTransition(
+          //     position: Tween(begin: const Offset(0.2, 0.0), end: const Offset(0.0, 0.0)).animate(animation),
+          //     child: FadeTransition(opacity: animation, child: child),
+          //   );
+          // },
           colors: const <Color>[
             Color(0xfffa86be),
             Color(0xffa275e3),
             Color(0xff9aebed),
+            Colors.blue,
           ],
           selectedTextStyle: textTheme.bodyMedium?.copyWith(fontSize: 15.0),
           unselectedTextStyle: textTheme.bodyMedium?.copyWith(fontSize: 13.0),
           tabs: _getTabs1(),
-          children: _getChildren1(),
+          children: _getChildren1().map((e) {
+            return NSwiperGestureDetector(
+              onPre: onPre,
+              onNext: onNext,
+              child: e,
+            );
+          }).toList(),
         ),
       ),
     );
@@ -156,11 +177,14 @@ class _TabContainerDemoState extends State<TabContainerDemo> with SingleTickerPr
             'https://images.unsplash.com/photo-1494905998402-395d579af36f?q=80&w=400&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'),
         Image.network(
             'https://images.unsplash.com/photo-1583121274602-3e2820c69888?q=80&w=400&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'),
+        Image.network(
+          'https://fastly.jsdelivr.net/npm/@vant/assets/apple-1.jpeg',
+        ),
       ];
     }
 
     List<Widget> _getTabs2() {
-      return <Widget>[const Text('选项 1'), const Text('选项 2'), const Text('选项 3')];
+      return List.generate(4, (i) => Text('选项 $i'));
     }
 
     return Column(
@@ -175,17 +199,23 @@ class _TabContainerDemoState extends State<TabContainerDemo> with SingleTickerPr
           selectedTextStyle: textTheme.bodyMedium?.copyWith(color: Colors.white),
           unselectedTextStyle: textTheme.bodyMedium?.copyWith(color: Colors.black),
           tabs: _getTabs2(),
-          children: _getChildren2(),
+          children: _getChildren2().map((e) {
+            return NSwiperGestureDetector(
+              onPre: onPre,
+              onNext: onNext,
+              child: e,
+            );
+          }).toList(),
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             IconButton(
-              onPressed: () => _controller.index -= 1,
+              onPressed: onPre,
               icon: const Icon(Icons.arrow_back),
             ),
             IconButton(
-              onPressed: () => _controller.index += 1,
+              onPressed: onNext,
               icon: const Icon(Icons.arrow_forward),
             ),
           ],
@@ -322,6 +352,7 @@ class _TabContainerDemoState extends State<TabContainerDemo> with SingleTickerPr
       child: Padding(
         padding: const EdgeInsets.all(20.0),
         child: TabContainer(
+          controller: _controller,
           color: Theme.of(context).colorScheme.secondary,
           tabEdge: TabEdge.right,
           childPadding: const EdgeInsets.all(20.0),
@@ -381,12 +412,14 @@ Donec ac libero arcu. Pellentesque sollicitudin mi et lectus interdum, sit amet 
       child: Padding(
         padding: const EdgeInsets.all(20.0),
         child: TabContainer(
+          controller: _controller,
           color: Theme.of(context).colorScheme.primary,
           tabEdge: TabEdge.left,
           tabsStart: 0.1,
           tabsEnd: 0.6,
           childPadding: const EdgeInsets.all(20.0),
           tabs: _getTabs4().map((e) => e.title).toList(),
+          // tabExtent: 80,
           selectedTextStyle: const TextStyle(
             color: Colors.white,
             fontSize: 15.0,
@@ -527,6 +560,14 @@ const List<Map<String, dynamic>> kCreditCards = [
     'bank': 'Aerarium',
     'name': 'John Doe',
     'number': '5234 4321 1234 4323',
+    'expiration': '09/23',
+    'cvc': '456',
+  },
+  {
+    'index': 3,
+    'bank': 'Aerarium',
+    'name': 'John Doe',
+    'number': '5234 4321 1234 4324',
     'expiration': '09/23',
     'cvc': '456',
   },
