@@ -304,6 +304,7 @@ import 'package:flutter_templet_project/pages/demo/box_shadow_demo.dart';
 import 'package:flutter_templet_project/pages/demo/box_shadow_demo_one.dart';
 import 'package:flutter_templet_project/pages/demo/data_type_demo.dart';
 import 'package:flutter_templet_project/pages/demo/drawImageNineDemo.dart';
+import 'package:flutter_templet_project/pages/demo/email_sender_demo.dart';
 import 'package:flutter_templet_project/pages/demo/enumDemo.dart';
 import 'package:flutter_templet_project/pages/demo/file_upload_box_demo.dart';
 import 'package:flutter_templet_project/pages/demo/homeSrollDemo.dart';
@@ -811,6 +812,7 @@ class APPRouter {
   static const String swiperCardDemo = '/swiperCardDemo';
   static const String pageRouteDemo = '/pageRouteDemo';
   static const String pageRouteAnimationDemo = '/pageRouteAnimationDemo';
+  static const String emailSenderDemo = '/emailSenderDemo';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -2408,6 +2410,10 @@ class AppPage {
     GetPage(
       name: APPRouter.pageRouteAnimationDemo,
       page: () => PageRouteAnimationDemo(),
+    ),
+    GetPage(
+      name: APPRouter.emailSenderDemo,
+      page: () => EmailSenderDemo(),
     ),
   ];
 }
