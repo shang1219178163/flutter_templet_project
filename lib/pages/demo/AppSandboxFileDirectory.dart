@@ -118,7 +118,7 @@ class _AppSandboxFileDirectoryState extends State<AppSandboxFileDirectory>
                   title: "图像缓存",
                   onPressed: () async {
                     final directory = await AssetCacheService().getDir();
-                    Get.to(() => FileBrowserPage(directory: directory, fileContent: fileContent));
+                    Get.to(() => FileBrowserPage(directory: directory, contentBuilder: fileContent));
                   },
                 ),
                 NButton(
@@ -140,7 +140,7 @@ class _AppSandboxFileDirectoryState extends State<AppSandboxFileDirectory>
               title: "DocumentsDirectory",
               onPressed: () async {
                 final directory = await getApplicationDocumentsDirectory();
-                Get.to(() => FileBrowserPage(directory: directory, fileContent: fileContent));
+                Get.to(() => FileBrowserPage(directory: directory, contentBuilder: fileContent));
               },
             ),
             buildChooseDir(),
@@ -312,7 +312,7 @@ class _AppSandboxFileDirectoryState extends State<AppSandboxFileDirectory>
           ToastUtil.show(exception ?? "");
           return;
         }
-        Get.to(() => FileBrowserPage(directory: directory, fileContent: fileContent));
+        Get.to(() => FileBrowserPage(directory: directory, contentBuilder: fileContent));
       },
       equal: (a, b) => a.name == b?.name,
       cbName: (e) => e?.name ?? "-",

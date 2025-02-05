@@ -23,12 +23,14 @@ class FileBrowserPage extends StatefulWidget {
   const FileBrowserPage({
     super.key,
     required this.directory,
-    this.fileContent,
+    this.contentBuilder,
   });
 
+  /// 文件目录
   final Directory? directory;
 
-  final Future<Widget> Function(File file)? fileContent;
+  /// 文件内容回调
+  final Future<Widget> Function(File file)? contentBuilder;
 
   @override
   State<FileBrowserPage> createState() => _FileBrowserPageState();
@@ -155,10 +157,10 @@ class _FileBrowserPageState extends State<FileBrowserPage> with DebugBottomSheet
     }
 
     Widget contentWidget = Text(content);
-    if (widget.fileContent != null) {
+    if (widget.contentBuilder != null) {
       // contentWidget = widget.fileContent?.call(file) ?? SizedBox();
       contentWidget = FutureBuilder<Widget>(
-        future: widget.fileContent?.call(file),
+        future: widget.contentBuilder?.call(file),
         builder: (context, snapshot) {
           if (snapshot.connectionState != ConnectionState.done) {
             return CupertinoActivityIndicator();
