@@ -74,6 +74,14 @@ class _TextFieldDemoState extends State<TextFieldDemo> with AssetResourceMixin {
   ];
 
   @override
+  void initState() {
+    super.initState();
+    onAssetResourceFinished = () {
+      DLog.d(assetFileModels);
+    };
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: hideApp
