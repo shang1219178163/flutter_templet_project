@@ -8,12 +8,17 @@
 
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/n_button.dart';
 import 'package:flutter_templet_project/basicWidget/n_footer_button_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_menu_anchor.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
+import 'package:flutter_templet_project/basicWidget/upload/image_service.dart';
+import 'package:flutter_templet_project/basicWidget/upload/video_service.dart';
+import 'package:flutter_templet_project/cache/asset_cache_service.dart';
 import 'package:flutter_templet_project/cache/cache_controller.dart';
 import 'package:flutter_templet_project/cache/cache_service.dart';
 import 'package:flutter_templet_project/cache/file_browser_page.dart';
@@ -21,12 +26,15 @@ import 'package:flutter_templet_project/enum/path_provider_enum.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/date_time_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/file_ext.dart';
 import 'package:flutter_templet_project/extension/list_ext.dart';
 import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/extension/object_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
+import 'package:flutter_templet_project/mixin/asset_picker_mixin.dart';
 import 'package:flutter_templet_project/mixin/debug_bottom_sheet_mixin.dart';
 import 'package:flutter_templet_project/model/user_model.dart';
+import 'package:flutter_templet_project/util/R.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:get/get.dart';
@@ -45,7 +53,8 @@ class AppSandboxFileDirectory extends StatefulWidget {
   State<AppSandboxFileDirectory> createState() => _AppSandboxFileDirectoryState();
 }
 
-class _AppSandboxFileDirectoryState extends State<AppSandboxFileDirectory> with DebugBottomSheetMixin {
+class _AppSandboxFileDirectoryState extends State<AppSandboxFileDirectory>
+    with DebugBottomSheetMixin, AssetPickerMixin {
   var directorys = <PathProviderDirectory>[];
 
   final cacheUserMapVN = ValueNotifier(<String, dynamic>{});
@@ -88,12 +97,50 @@ class _AppSandboxFileDirectoryState extends State<AppSandboxFileDirectory> with 
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           ...[
+            Row(
+              children: [
+                NButton(
+                  height: 40,
+                  padding: EdgeInsets.symmetric(horizontal: 8),
+                  title: "写入图像",
+                  onPressed: () async {
+                    await onAssetPicker(
+                      needCompress: true,
+                      onItemCompressed: (e) async {
+                        await AssetCacheService().saveFile(file: e.file!);
+                      },
+                    );
+                  },
+                ),
+                NButton(
+                  height: 40,
+                  padding: EdgeInsets.symmetric(horizontal: 8),
+                  title: "图像缓存",
+                  onPressed: () async {
+                    final directory = await AssetCacheService().getDir();
+                    Get.to(() => FileBrowserPage(directory: directory, fileContent: fileContent));
+                  },
+                ),
+                NButton(
+                  height: 40,
+                  padding: EdgeInsets.symmetric(horizontal: 8),
+                  title: "网络图像缓存",
+                  onPressed: () async {
+                    await AssetCacheService().saveNetworkImage(url: R.image.urls.randomOne!);
+                  },
+                ),
+              ]
+                  .map(
+                    (e) => Padding(padding: EdgeInsets.only(right: 8), child: e),
+                  )
+                  .toList(),
+            ),
             NButton(
               constraints: BoxConstraints(maxHeight: 35),
               title: "DocumentsDirectory",
               onPressed: () async {
                 final directory = await getApplicationDocumentsDirectory();
-                Get.to(() => FileBrowserPage(directory: directory));
+                Get.to(() => FileBrowserPage(directory: directory, fileContent: fileContent));
               },
             ),
             buildChooseDir(),
@@ -265,7 +312,7 @@ class _AppSandboxFileDirectoryState extends State<AppSandboxFileDirectory> with 
           ToastUtil.show(exception ?? "");
           return;
         }
-        Get.to(() => FileBrowserPage(directory: directory));
+        Get.to(() => FileBrowserPage(directory: directory, fileContent: fileContent));
       },
       equal: (a, b) => a.name == b?.name,
       cbName: (e) => e?.name ?? "-",
@@ -455,5 +502,57 @@ class _AppSandboxFileDirectoryState extends State<AppSandboxFileDirectory> with 
     final list = (map[section] as List?) ?? [];
     final items = list.map((json) => UserModel.fromJson(json)).toList();
     return items;
+  }
+
+  ///
+  /// 文件内容读取
+  Future<Widget> fileContent(File file) async {
+    if (!file.existsSync()) {
+      return Text("文件不存在: ${file.path}");
+    }
+
+    final filePath = file.path;
+    final fileName = file.absolute.path.split('/').last;
+    final fileType = file.path.fileType;
+
+    Widget result = Text("未知类型");
+    switch (fileType) {
+      case NFileType.image:
+        {
+          result = Image.file(file);
+        }
+      case NFileType.video:
+        {
+          var content = '';
+          try {
+            final mediaInfo = await VideoService.getMediaInfo(filePath);
+            final obj = mediaInfo.toJson();
+            content = obj.formatedString();
+          } catch (e) {
+            debugPrint("$this $e");
+            content = "文件读取失败: $e";
+          }
+          result = Text(content);
+        }
+        break;
+      default:
+        {
+          var content = '';
+          try {
+            content = file.readAsStringSync();
+            final obj = jsonDecode(content);
+            if (obj is Object) {
+              content = obj.formatedString();
+            }
+          } catch (e) {
+            debugPrint("$this $e");
+            content = "文件读取失败: $e";
+          }
+          result = Text(content);
+        }
+        break;
+    }
+
+    return result;
   }
 }

@@ -23,9 +23,12 @@ class FileBrowserPage extends StatefulWidget {
   const FileBrowserPage({
     super.key,
     required this.directory,
+    this.fileContent,
   });
 
   final Directory? directory;
+
+  final Future<Widget> Function(File file)? fileContent;
 
   @override
   State<FileBrowserPage> createState() => _FileBrowserPageState();
@@ -151,13 +154,30 @@ class _FileBrowserPageState extends State<FileBrowserPage> with DebugBottomSheet
       content = "文件读取失败: $e";
     }
 
+    Widget contentWidget = Text(content);
+    if (widget.fileContent != null) {
+      // contentWidget = widget.fileContent?.call(file) ?? SizedBox();
+      contentWidget = FutureBuilder<Widget>(
+        future: widget.fileContent?.call(file),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState != ConnectionState.done) {
+            return CupertinoActivityIndicator();
+          }
+          if (snapshot.hasError) {
+            return Text(snapshot.error.toString());
+          }
+          return snapshot.data!;
+        },
+      );
+    }
+
     onDebugBottomSheet(
       title: title,
       confirmTitle: Platform.isIOS ? "分享" : "下载",
       onConfirm: () {
         Share.shareXFiles([XFile(path)]);
       },
-      content: Text(content),
+      content: contentWidget,
     );
   }
 }
