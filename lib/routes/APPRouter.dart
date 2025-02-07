@@ -102,6 +102,7 @@ import 'package:flutter_templet_project/pages/demo/EmojiPage.dart';
 import 'package:flutter_templet_project/pages/demo/ExpandIconDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ExpandIconDemoNew.dart';
 import 'package:flutter_templet_project/pages/demo/ExpressionsCalulatorDemo.dart';
+import 'package:flutter_templet_project/pages/demo/FaceDetectionPage.dart';
 import 'package:flutter_templet_project/pages/demo/FilterDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FilterDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/FittedBoxDemo.dart';
@@ -813,6 +814,7 @@ class APPRouter {
   static const String pageRouteDemo = '/pageRouteDemo';
   static const String pageRouteAnimationDemo = '/pageRouteAnimationDemo';
   static const String emailSenderDemo = '/emailSenderDemo';
+  static const String faceDetectionPage = '/faceDetectionPage';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -2414,6 +2416,10 @@ class AppPage {
     GetPage(
       name: APPRouter.emailSenderDemo,
       page: () => EmailSenderDemo(),
+    ),
+    GetPage(
+      name: APPRouter.faceDetectionPage,
+      page: () => FaceDetectionPage(),
     ),
   ];
 }
