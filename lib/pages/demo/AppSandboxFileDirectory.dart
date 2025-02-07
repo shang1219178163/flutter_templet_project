@@ -9,6 +9,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'package:image/image.dart' as img;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -126,7 +127,15 @@ class _AppSandboxFileDirectoryState extends State<AppSandboxFileDirectory>
                   padding: EdgeInsets.symmetric(horizontal: 8),
                   title: "网络图像缓存",
                   onPressed: () async {
-                    await AssetCacheService().saveNetworkImage(url: R.image.urls.randomOne!);
+                    final file = await AssetCacheService().saveNetworkImage(url: R.image.urls.randomOne!);
+                    final bytes = await file.readAsBytes();
+
+                    // 使用 image 库加载图片
+                    img.Image? image = img.decodeImage(Uint8List.fromList(bytes));
+                    if (image == null) {
+                      return;
+                    }
+                    DLog.d("image: $image");
                   },
                 ),
               ]
