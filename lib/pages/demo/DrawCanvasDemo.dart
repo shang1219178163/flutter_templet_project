@@ -2,6 +2,8 @@ import 'dart:math';
 
 import 'package:dash_painter/dash_decoration.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_templet_project/basicWidget/n_dash_decoration.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/pages/demo/curve_painter.dart';
@@ -16,16 +18,25 @@ class DrawCanvasDemo extends StatefulWidget {
 }
 
 class _DrawCanvasDemoState extends State<DrawCanvasDemo> {
+  final scrollController = ScrollController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
       ),
-      body: Container(
-        margin: EdgeInsets.all(10),
-        child: Column(
-            // crossAxisAlignment: CrossAxisAlignment.stretch,
+      body: buildBody(),
+    );
+  }
+
+  Widget buildBody() {
+    return Scrollbar(
+      child: SingleChildScrollView(
+        child: Container(
+          margin: EdgeInsets.all(10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Image(
                 image: "assets/images/canvas_draw_arc.png".toAssetImage(),
@@ -40,6 +51,10 @@ class _DrawCanvasDemoState extends State<DrawCanvasDemo> {
                   spacing: 12,
                   runSpacing: 12,
                   children: [
+                    CustomPaint(
+                      size: Size(100, 100), // 设置进度条的大小
+                      painter: ProgressBarPainter(progress: 0.79),
+                    ),
                     Container(
                       height: 100,
                       width: 100,
@@ -57,7 +72,7 @@ class _DrawCanvasDemoState extends State<DrawCanvasDemo> {
                         // pointWidth: 2,
                         // pointCount: 1,
                         radius: Radius.circular(15),
-                        strokeWidth: 3,
+                        strokeWidth: 1,
                         strokeColor: Colors.red,
                       ),
                       alignment: Alignment.center,
@@ -104,7 +119,9 @@ class _DrawCanvasDemoState extends State<DrawCanvasDemo> {
                       .toList(),
                 ),
               ),
-            ]),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -202,5 +219,58 @@ class MYCustomPainter extends CustomPainter {
         radius != oldDelegate.radius ||
         strokeWidth != oldDelegate.strokeWidth ||
         otherPaint != oldDelegate.otherPaint;
+  }
+}
+
+/// 环形进度器
+class ProgressBarPainter extends CustomPainter {
+  ProgressBarPainter({
+    required this.progress,
+    this.strokeWidth = 10,
+    this.backgroudColor = const Color(0xffe9e9e9),
+    this.color = Colors.lightBlue,
+  });
+
+  /// 进度值
+  final double progress;
+  final double strokeWidth;
+  final Color backgroudColor;
+  final Color color;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final Paint backgroundPaint = Paint()
+      ..color = backgroudColor
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = strokeWidth;
+
+    final Paint foregroundPaint = Paint()
+      ..color = color
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = strokeWidth;
+
+    // 计算弧形的圆心和半径
+    final center = size.center(Offset.zero);
+    final radius = (min(size.width, size.height) - strokeWidth) / 2;
+
+    // 绘制背景弧
+    canvas.drawCircle(center, radius, backgroundPaint);
+
+    // 计算进度的角度
+    double sweepAngle = 2 * pi * progress;
+
+    // 绘制前景弧（表示进度）
+    canvas.drawArc(
+      Rect.fromCircle(center: center, radius: radius),
+      -pi / 2,
+      sweepAngle, // 根据进度值计算的角度
+      false, // 是否是扇形
+      foregroundPaint,
+    );
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return false; // 这里不需要重绘
   }
 }
