@@ -49,6 +49,8 @@ PODS:
   - Flutter (1.0.0)
   - flutter_boost (0.0.2):
     - Flutter
+  - flutter_email_sender (0.0.1):
+    - Flutter
   - flutter_image_compress_common (1.0.0):
     - Flutter
     - Mantle
@@ -116,6 +118,9 @@ PODS:
   - GoogleMLKit/TextRecognitionChinese (7.0.0):
     - GoogleMLKit/MLKitCore
     - MLKitTextRecognitionChinese (~> 4.0.0)
+  - GoogleMLKit/TextRecognitionJapanese (7.0.0):
+    - GoogleMLKit/MLKitCore
+    - MLKitTextRecognitionJapanese (~> 4.0.0)
   - GoogleMLKit/Translate (7.0.0):
     - GoogleMLKit/MLKitCore
     - MLKitTranslate (~> 6.0.0)
@@ -191,6 +196,10 @@ PODS:
     - MLKitVision (~> 8.0)
   - MLKitTextRecognitionCommon (4.0.0):
     - MLKitCommon (~> 12.0)
+    - MLKitVision (~> 8.0)
+  - MLKitTextRecognitionJapanese (4.0.0):
+    - MLKitCommon (~> 12.0)
+    - MLKitTextRecognitionCommon (= 4.0.0)
     - MLKitVision (~> 8.0)
   - MLKitTranslate (6.0.0):
     - MLKitNaturalLanguage (~> 8.0)
@@ -274,6 +283,7 @@ DEPENDENCIES:
   - file_preview (from `.symlinks/plugins/file_preview/ios`)
   - Flutter (from `Flutter`)
   - flutter_boost (from `.symlinks/plugins/flutter_boost/ios`)
+  - flutter_email_sender (from `.symlinks/plugins/flutter_email_sender/ios`)
   - flutter_image_compress_common (from `.symlinks/plugins/flutter_image_compress_common/ios`)
   - flutter_inappwebview_ios (from `.symlinks/plugins/flutter_inappwebview_ios/ios`)
   - flutter_isolate (from `.symlinks/plugins/flutter_isolate/ios`)
@@ -288,6 +298,7 @@ DEPENDENCIES:
   - google_mlkit_text_recognition (from `.symlinks/plugins/google_mlkit_text_recognition/ios`)
   - google_mlkit_translation (from `.symlinks/plugins/google_mlkit_translation/ios`)
   - GoogleMLKit/TextRecognitionChinese (~> 7.0.0)
+  - GoogleMLKit/TextRecognitionJapanese (~> 7.0.0)
   - http_proxy (from `.symlinks/plugins/http_proxy/ios`)
   - image_cropper (from `.symlinks/plugins/image_cropper/ios`)
   - image_gallery_saver (from `.symlinks/plugins/image_gallery_saver/ios`)
@@ -332,6 +343,7 @@ SPEC REPOS:
     - MLKitTextRecognition
     - MLKitTextRecognitionChinese
     - MLKitTextRecognitionCommon
+    - MLKitTextRecognitionJapanese
     - MLKitTranslate
     - MLKitVision
     - MTBBarcodeScanner
@@ -366,6 +378,8 @@ EXTERNAL SOURCES:
     :path: Flutter
   flutter_boost:
     :path: ".symlinks/plugins/flutter_boost/ios"
+  flutter_email_sender:
+    :path: ".symlinks/plugins/flutter_email_sender/ios"
   flutter_image_compress_common:
     :path: ".symlinks/plugins/flutter_image_compress_common/ios"
   flutter_inappwebview_ios:
@@ -451,6 +465,7 @@ SPEC CHECKSUMS:
   file_preview: f1f26bfb9836a41685d3098dccf3ebecd01f85b9
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   flutter_boost: 3e8a6e28c86d24c83be5b2fab067746dc77a1ad6
+  flutter_email_sender: 10a22605f92809a11ef52b2f412db806c6082d40
   flutter_image_compress_common: ec1d45c362c9d30a3f6a0426c297f47c52007e3e
   flutter_inappwebview_ios: 97215cf7d4677db55df76782dbd2930c5e1c1ea0
   flutter_isolate: 0edf5081826d071adf21759d1eb10ff5c24503b5
@@ -485,6 +500,7 @@ SPEC CHECKSUMS:
   MLKitTextRecognition: 3b41f3ff084a79afb214408d25d2068d77ab322c
   MLKitTextRecognitionChinese: a7e2d3e54d8be80091f7064741c54e2298a9d498
   MLKitTextRecognitionCommon: cd44577a8c506fc6bba065096de03bec0d01a213
+  MLKitTextRecognitionJapanese: 4a62c24ecf1cbaeccc8a235c81c0ba397807d7d8
   MLKitTranslate: 2082cce437292f2f7477bfef02022ef69d8e77aa
   MLKitVision: 45e79d68845a2de77e2dd4d7f07947f0ed157b0e
   MTBBarcodeScanner: f453b33c4b7dfe545d8c6484ed744d55671788cb
@@ -518,6 +534,6 @@ SPEC CHECKSUMS:
   webview_flutter_wkwebview: 2a23822e9039b7b1bc52e5add778e5d89ad488d1
   WechatOpenSDK-XCFramework: 36fb2bea0754266c17184adf4963d7e6ff98b69f
 
-PODFILE CHECKSUM: 155ccac2ed9ed450c83608e4c3e09a6c538f571c
+PODFILE CHECKSUM: ad3215b4a948cf1b7c264875b2364dee52b37b7d
 
 COCOAPODS: 1.15.2

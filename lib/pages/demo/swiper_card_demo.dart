@@ -10,9 +10,17 @@ import 'package:appinio_swiper/appinio_swiper.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_templet_project/basicWidget/n_network_image.dart';
+import 'package:flutter_templet_project/cache/asset_cache_service.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/list_ext.dart';
+import 'package:flutter_templet_project/mixin/debug_bottom_sheet_mixin.dart';
+import 'package:flutter_templet_project/mixin/equal_identical_mixin.dart';
+import 'package:flutter_templet_project/mixin/equal_identical_mixin.dart';
+import 'package:flutter_templet_project/pages/demo/OcrPhotoDemo.dart';
+import 'package:flutter_templet_project/service/ocr_text_recognition_manager.dart';
 import 'package:flutter_templet_project/util/R.dart';
 import 'package:get/get.dart';
 
@@ -28,7 +36,7 @@ class SwiperCardDemo extends StatefulWidget {
   State<SwiperCardDemo> createState() => _SwiperCardDemoState();
 }
 
-class _SwiperCardDemoState extends State<SwiperCardDemo> {
+class _SwiperCardDemoState extends State<SwiperCardDemo> with DebugBottomSheetMixin {
   bool get hideApp => "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
 
   final _scrollController = ScrollController();
@@ -120,7 +128,15 @@ class _SwiperCardDemoState extends State<SwiperCardDemo> {
                         ColorExt.random,
                       ],
                     );
-                    return _CandidateCard(candidate: e);
+                    return GestureDetector(
+                      onTap: () {
+                        onOCRSheet(index: index);
+                      },
+                      child: _CandidateCard(
+                        key: ValueKey(e),
+                        model: e,
+                      ),
+                    );
                   },
                 ),
               ),
@@ -288,9 +304,54 @@ class _SwiperCardDemoState extends State<SwiperCardDemo> {
       ),
     );
   }
+
+  /// OCR 识别
+  void onOCRSheet({int index = 0}) {
+    Widget buildPageView({int index = 0}) {
+      final urls = candidates.map((e) => e.avatar).toList();
+      final pageController = PageController(initialPage: index);
+      final indexVN = ValueNotifier(index);
+
+      return Container(
+        constraints: BoxConstraints(
+          minHeight: 400,
+          maxHeight: 600,
+        ),
+        child: Column(
+          children: [
+            ValueListenableBuilder(
+              valueListenable: indexVN,
+              builder: (context, value, child) {
+                return Text("${value}/${urls.length}");
+              },
+            ),
+            Expanded(
+              child: PageView(
+                controller: pageController,
+                onPageChanged: (index) {
+                  indexVN.value = index;
+                },
+                children: urls.map((e) {
+                  return OCRNetImageCard(
+                    key: ValueKey(e),
+                    avatar: e,
+                  );
+                }).toList(),
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
+    onDebugBottomSheet(
+      title: "文字识别",
+      content: buildPageView(index: index),
+    );
+  }
 }
 
-class _CandidateModel {
+class _CandidateModel with EqualIdenticalMixin {
   _CandidateModel({
     this.avatar,
     this.name,
@@ -314,18 +375,46 @@ class _CandidateModel {
     data['color'] = color;
     return data;
   }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other.runtimeType != runtimeType) {
+      return false;
+    }
+    return other is _CandidateModel && other.toJson() == toJson();
+  }
+
+  @override
+  int get hashCode {
+    return Object.hash(
+      avatar,
+      name,
+      job,
+      city,
+      color,
+    );
+  }
 }
 
 class _CandidateCard extends StatelessWidget {
-  final _CandidateModel candidate;
-
   const _CandidateCard({
-    Key? key,
-    required this.candidate,
-  }) : super(key: key);
+    super.key,
+    required this.model,
+  });
+
+  final _CandidateModel model;
 
   @override
   Widget build(BuildContext context) {
+    final avatar = model.avatar ?? "";
+    final name = model.name ?? "";
+    final job = model.job ?? "";
+    final city = model.city ?? "";
+    final color = model.color;
+
     return Container(
       alignment: Alignment.center,
       decoration: BoxDecoration(
@@ -345,14 +434,14 @@ class _CandidateCard extends StatelessWidget {
           Flexible(
             child: Container(
               decoration: BoxDecoration(
-                gradient: candidate.color,
+                gradient: color,
                 borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(10),
                   topRight: Radius.circular(10),
                 ),
                 image: DecorationImage(
                   image: ExtendedNetworkImageProvider(
-                    candidate.avatar ?? "",
+                    avatar,
                     cache: true,
                   ),
                   fit: BoxFit.fill,
@@ -377,33 +466,29 @@ class _CandidateCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      candidate.name!,
+                      name,
                       style: const TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
                       ),
                     ),
-                    const SizedBox(
-                      height: 5,
-                    ),
+                    const SizedBox(height: 5),
                     Text(
-                      candidate.job!,
+                      job,
                       style: const TextStyle(
                         color: Colors.grey,
                         fontSize: 15,
                       ),
                     ),
-                    const SizedBox(
-                      height: 5,
-                    ),
+                    const SizedBox(height: 5),
                     Text(
-                      candidate.city!,
+                      city,
                       style: const TextStyle(
                         color: Colors.grey,
                         fontSize: 15,
                       ),
-                    )
+                    ),
                   ],
                 ),
               ],
