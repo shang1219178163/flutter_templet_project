@@ -200,6 +200,7 @@ import 'package:flutter_templet_project/pages/demo/NavigationRailDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NavigationToolbarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NestedNavigatorDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NestedScrollViewDemo.dart';
+import 'package:flutter_templet_project/pages/demo/NestedScrollViewDemoFour.dart';
 import 'package:flutter_templet_project/pages/demo/NestedScrollViewDemoHome.dart';
 import 'package:flutter_templet_project/pages/demo/NestedScrollViewDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/NestedScrollViewDemoThree.dart';
@@ -815,6 +816,7 @@ class APPRouter {
   static const String pageRouteAnimationDemo = '/pageRouteAnimationDemo';
   static const String emailSenderDemo = '/emailSenderDemo';
   static const String faceDetectionPage = '/faceDetectionPage';
+  static const String nestedScrollViewDemoFour = '/nestedScrollViewDemoFour';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -2420,6 +2422,11 @@ class AppPage {
     GetPage(
       name: APPRouter.faceDetectionPage,
       page: () => FaceDetectionPage(),
+    ),
+
+    GetPage(
+      name: APPRouter.nestedScrollViewDemoFour,
+      page: () => NestedScrollViewDemoFour(),
     ),
   ];
 }

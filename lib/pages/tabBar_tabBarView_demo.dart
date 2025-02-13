@@ -683,6 +683,7 @@ var customs = [
   Tuple2(APPRouter.pageRouteAnimationDemo, "pageRouteAnimationDemo"),
   Tuple2(APPRouter.emailSenderDemo, "emailSenderDemo"),
   Tuple2(APPRouter.faceDetectionPage, "faceDetectionPage"),
+  Tuple2(APPRouter.nestedScrollViewDemoFour, "nestedScrollViewDemoFour"),
 ];
 
 var vendors = <Tuple2<String, String>>[
