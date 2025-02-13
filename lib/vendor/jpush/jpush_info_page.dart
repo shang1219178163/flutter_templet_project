@@ -48,6 +48,7 @@ class _JPushInfoPageState extends State<JPushInfoPage> with DebugBottomSheetMixi
         (title: "解绑手机", action: onUnbindPhone),
         (title: "清除账号列表", action: onClearAccount),
         (title: "查看操作日志", action: onOperateLog),
+        (title: "清除操作日志", action: onOperateLogClear),
       ];
 
   @override
@@ -185,6 +186,10 @@ class _JPushInfoPageState extends State<JPushInfoPage> with DebugBottomSheetMixi
         },
       ),
     );
+  }
+
+  onOperateLogClear() {
+    CacheService().remove(CacheKey.localOperateLog.name);
   }
 
   void _printIsarLink(String url) {
