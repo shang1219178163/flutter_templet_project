@@ -1,20 +1,24 @@
 import 'package:flutter/cupertino.dart';
 
+/// 保活组件
 class KeepAliveWrapper extends StatefulWidget {
   const KeepAliveWrapper({
-    Key? key,
+    super.key,
     this.keepAlive = true,
     required this.child,
-  }) : super(key: key);
+  });
+
+  /// 是否需要保活
   final bool keepAlive;
+
+  /// 组件
   final Widget child;
 
   @override
   _KeepAliveWrapperState createState() => _KeepAliveWrapperState();
 }
 
-class _KeepAliveWrapperState extends State<KeepAliveWrapper>
-    with AutomaticKeepAliveClientMixin {
+class _KeepAliveWrapperState extends State<KeepAliveWrapper> with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     super.build(context);
