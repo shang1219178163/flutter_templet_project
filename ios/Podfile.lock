@@ -89,6 +89,10 @@ PODS:
   - google_mlkit_commons (0.9.0):
     - Flutter
     - MLKitVision
+  - google_mlkit_face_detection (0.12.0):
+    - Flutter
+    - google_mlkit_commons
+    - GoogleMLKit/FaceDetection (~> 7.0.0)
   - google_mlkit_language_id (0.12.0):
     - Flutter
     - google_mlkit_commons
@@ -107,6 +111,9 @@ PODS:
   - GoogleMLKit/BarcodeScanning (7.0.0):
     - GoogleMLKit/MLKitCore
     - MLKitBarcodeScanning (~> 6.0.0)
+  - GoogleMLKit/FaceDetection (7.0.0):
+    - GoogleMLKit/MLKitCore
+    - MLKitFaceDetection (~> 6.0.0)
   - GoogleMLKit/LanguageID (7.0.0):
     - GoogleMLKit/MLKitCore
     - MLKitLanguageID (~> 7.0.0)
@@ -178,6 +185,9 @@ PODS:
     - GoogleUtilities/Logger (~> 8.0)
     - GoogleUtilities/UserDefaults (~> 8.0)
     - GTMSessionFetcher/Core (< 4.0, >= 3.3.2)
+  - MLKitFaceDetection (6.0.0):
+    - MLKitCommon (~> 12.0)
+    - MLKitVision (~> 8.0)
   - MLKitLanguageID (7.0.0):
     - MLKitNaturalLanguage (~> 8.0)
   - MLKitNaturalLanguage (8.0.0):
@@ -294,6 +304,7 @@ DEPENDENCIES:
   - fluwx (from `.symlinks/plugins/fluwx/ios`)
   - google_mlkit_barcode_scanning (from `.symlinks/plugins/google_mlkit_barcode_scanning/ios`)
   - google_mlkit_commons (from `.symlinks/plugins/google_mlkit_commons/ios`)
+  - google_mlkit_face_detection (from `.symlinks/plugins/google_mlkit_face_detection/ios`)
   - google_mlkit_language_id (from `.symlinks/plugins/google_mlkit_language_id/ios`)
   - google_mlkit_text_recognition (from `.symlinks/plugins/google_mlkit_text_recognition/ios`)
   - google_mlkit_translation (from `.symlinks/plugins/google_mlkit_translation/ios`)
@@ -338,6 +349,7 @@ SPEC REPOS:
     - MLImage
     - MLKitBarcodeScanning
     - MLKitCommon
+    - MLKitFaceDetection
     - MLKitLanguageID
     - MLKitNaturalLanguage
     - MLKitTextRecognition
@@ -400,6 +412,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/google_mlkit_barcode_scanning/ios"
   google_mlkit_commons:
     :path: ".symlinks/plugins/google_mlkit_commons/ios"
+  google_mlkit_face_detection:
+    :path: ".symlinks/plugins/google_mlkit_face_detection/ios"
   google_mlkit_language_id:
     :path: ".symlinks/plugins/google_mlkit_language_id/ios"
   google_mlkit_text_recognition:
@@ -477,6 +491,7 @@ SPEC CHECKSUMS:
   fluwx: daa284756ce53442b3d0417ceeda66e981906811
   google_mlkit_barcode_scanning: 1a409f86a4c7df45e6dee9ba06e520357b2c7110
   google_mlkit_commons: 384e4e206e122b6dad430d3158205e0b2fac6789
+  google_mlkit_face_detection: ff627695d8eba051db7e0f13f7b20d802df1f84c
   google_mlkit_language_id: 52df284ee6ac2eadad3429a036599e9b12e9969c
   google_mlkit_text_recognition: e540f2aff997f2b0daaa1b4fd5ead3b0b7030adc
   google_mlkit_translation: d7f4dbc00677b2ef0a35e16be1c2c3172ac157d6
@@ -495,6 +510,7 @@ SPEC CHECKSUMS:
   MLImage: 0ad1c5f50edd027672d8b26b0fee78a8b4a0fc56
   MLKitBarcodeScanning: 0a3064da0a7f49ac24ceb3cb46a5bc67496facd2
   MLKitCommon: 07c2c33ae5640e5380beaaa6e4b9c249a205542d
+  MLKitFaceDetection: 2a593db4837db503ad3426b565e7aab045cefea5
   MLKitLanguageID: f52e378d875f1a5e67ac0f259ebddaab95faa1c7
   MLKitNaturalLanguage: 1faece38017b0cf8eb49ac69cff10cb419f68c01
   MLKitTextRecognition: 3b41f3ff084a79afb214408d25d2068d77ab322c
