@@ -47,6 +47,11 @@ class APPThemeService {
         fontSize: 16,
         fontWeight: FontWeight.w400,
       ),
+      actionsIconTheme: IconThemeData(
+        color: Colors.white, // 图标颜色
+        size: 24.0, // 图标大小
+        opacity: 0.8, // 图标透明度
+      ),
     ),
     materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
     dividerTheme: const DividerThemeData(
