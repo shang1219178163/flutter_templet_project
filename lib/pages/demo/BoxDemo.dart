@@ -12,6 +12,8 @@
 /// FractionallySizedBox 可以根据父容器宽高的百分比来设置子组件宽高等
 ///
 
+import 'dart:math';
+
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_avatar_badge.dart';
@@ -143,9 +145,9 @@ class _BoxDemoState extends State<BoxDemo> {
     alignment = selectedItemVN.value;
 
     final size = Size(100, 100);
-    final childSize = Size(50, 50);
+    final childSize = size * 0.5;
     final radius = 8.0;
-    final childSizeRadius = 25.0;
+    final childSizeRadius = min(childSize.width, childSize.height) * 0.5;
     return Container(
       padding: EdgeInsets.only(
         left: alignment.x == -1 ? childSize.width * 0.5 : 0,
