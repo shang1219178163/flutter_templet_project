@@ -123,6 +123,15 @@ class _ImChatPageState extends State<ImChatPage>
       appBar: hideApp
           ? null
           : AppBar(
+              flexibleSpace: Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [Colors.lightBlue, Colors.green], // 渐变的颜色
+                    begin: Alignment.centerLeft, // 渐变的起始位置
+                    end: Alignment.centerRight, // 渐变的结束位置
+                  ),
+                ),
+              ),
               title: Text(widget.title ?? "$widget"),
               elevation: 0,
               scrolledUnderElevation: 0,
