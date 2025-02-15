@@ -18,7 +18,7 @@ class DBGenericController<E> extends GetxController {
     init();
   }
 
-  final isar = DBManager().isar;
+  Isar get isar => DBManager().isar!;
 
   final List<E> _entitys = <E>[];
   List<E> get entitys => _entitys;
