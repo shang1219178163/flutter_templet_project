@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_avatar_group.dart';
+import 'package:flutter_templet_project/basicWidget/n_network_image.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/util/R.dart';
 
@@ -61,6 +62,13 @@ class _NAvatarGroupDemoState extends State<NAvatarGroupDemo> {
                 width: 150,
                 child: buildAvatarGroup(),
               ),
+              Row(
+                children: [
+                  buildGroupAvatar(urls: R.image.urls.sublist(0, 4)),
+                  SizedBox(width: 16),
+                  buildGroupAvatar(urls: []),
+                ],
+              ),
             ]
                 .map((e) => Container(
                       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -95,6 +103,51 @@ class _NAvatarGroupDemoState extends State<NAvatarGroupDemo> {
           isRevered: false,
         );
       },
+    );
+  }
+
+  /// 聊天群组头像
+  Widget buildGroupAvatar({required List<String> urls, int max = 9, AssetImage? placeholder}) {
+    final width = 124.0;
+    final height = 124.0;
+
+    final rowCount = 3;
+    final spacing = 1.0;
+
+    final itemWidth = ((width - spacing * (rowCount - 1) * rowCount) / rowCount).truncateToDouble();
+    final itemHeight = ((height - spacing * (rowCount - 1) * rowCount) / rowCount).truncateToDouble();
+
+    final avatars = urls.sublist(0, urls.length.clamp(0, max));
+
+    var content = urls.isEmpty
+        ? Image(
+            image: placeholder ?? AssetImage("assets/images/img_placeholder_patient.png"),
+          )
+        : Wrap(
+            spacing: spacing,
+            runSpacing: spacing,
+            alignment: WrapAlignment.center,
+            children: [
+              ...avatars.map((e) => NNetworkImage(
+                    url: e,
+                    width: itemWidth,
+                    height: itemHeight,
+                    fit: BoxFit.fill,
+                    radius: 0,
+                  )),
+            ],
+          );
+
+    return Container(
+      width: width,
+      height: height,
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        color: Colors.transparent,
+        border: Border.all(color: Colors.blue, width: spacing),
+        borderRadius: BorderRadius.all(Radius.circular(4)),
+      ),
+      child: content,
     );
   }
 }
