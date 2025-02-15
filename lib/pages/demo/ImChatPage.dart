@@ -29,16 +29,16 @@ import 'package:get/get.dart';
 import 'package:scrollview_observer/scrollview_observer.dart';
 import 'package:tuple/tuple.dart';
 
-class IMChatPage extends StatefulWidget {
-  IMChatPage({Key? key, this.title}) : super(key: key);
+class ImChatPage extends StatefulWidget {
+  ImChatPage({Key? key, this.title}) : super(key: key);
 
   final String? title;
 
   @override
-  _IMChatPageState createState() => _IMChatPageState();
+  _ImChatPageState createState() => _ImChatPageState();
 }
 
-class _IMChatPageState extends State<IMChatPage>
+class _ImChatPageState extends State<ImChatPage>
     with
         SingleTickerProviderStateMixin,
         RouteAware,
