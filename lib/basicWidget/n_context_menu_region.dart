@@ -1,10 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-typedef WidgetOffsetBuilder = Widget Function(
-    BuildContext context, Offset offset);
+typedef WidgetOffsetBuilder = Widget Function(BuildContext context, Offset offset);
 
-SelectionArea
+// flutter 3.3 后官方组件 SelectionArea
 /// Shows and hides the context menu based on user gestures.
 ///
 /// By default, shows the menu on right clicks and long presses.
