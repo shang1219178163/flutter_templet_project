@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 typedef WidgetOffsetBuilder = Widget Function(
     BuildContext context, Offset offset);
 
+SelectionArea
 /// Shows and hides the context menu based on user gestures.
 ///
 /// By default, shows the menu on right clicks and long presses.
