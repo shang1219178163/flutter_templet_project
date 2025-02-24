@@ -225,6 +225,7 @@ class MyHitTestRenderBox extends RenderBox {
       // radius,
       // constraints,
       // r,
+      contains,
     ].asMap());
 
     if (contains) {

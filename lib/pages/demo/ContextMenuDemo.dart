@@ -128,7 +128,7 @@ class _ContextMenuDemoState extends State<ContextMenuDemo> {
                 );
               },
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   Text(
                       'Flutter 3.3 中的 SelectionArea 功能。它补全了 Selection 异常问题，使用简单，默认实现常见功能且针对不同平台有差异化。可通过继承 TextSelectionControls 自定义，Handle 颜色默认来自 TextSelectionTheme 和 Theme。'),
@@ -137,7 +137,7 @@ class _ContextMenuDemoState extends State<ContextMenuDemo> {
             ),
           ]
               .map((e) => Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 16),
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 16),
                     child: e,
                   ))
               .toList(),
