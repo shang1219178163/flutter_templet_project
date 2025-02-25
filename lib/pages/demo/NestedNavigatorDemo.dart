@@ -6,15 +6,12 @@
 //  Copyright © 2024/9/27 shang. All rights reserved.
 //
 
-import 'package:flutter/cupertino.dart';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/Pages/second_page.dart';
-import 'package:flutter_templet_project/basicWidget/n_picker_tool_bar.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
-import 'package:flutter_templet_project/pages/app_tab_page.dart';
 import 'package:flutter_templet_project/pages/demo/CupertinoTabScaffoldDemo.dart';
-import 'package:flutter_templet_project/pages/third_page.dart';
 import 'package:flutter_templet_project/routes/APPRouter.dart';
 import 'package:get/get.dart';
 
@@ -91,6 +88,73 @@ class _NestedNavigatorDemoState extends State<NestedNavigatorDemo> {
   }
 
   Widget buildNavigatorBox() {
+    onNext({required BuildContext context, required String title}) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) {
+            return NestedNavigatorSubpage(
+              appBar: AppBar(
+                centerTitle: true,
+                title: Text(title),
+                actions: [
+                  GestureDetector(
+                    onTap: () {
+                      DLog.d("error");
+                    },
+                    child: Icon(Icons.error_outline),
+                  ),
+                ]
+                    .map((e) => Container(
+                          padding: EdgeInsets.only(right: 8),
+                          child: e,
+                        ))
+                    .toList(),
+              ),
+              child: Column(
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      onNext(context: context, title: title);
+                    },
+                    child: Text('next page'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text('Go back'),
+                  ),
+                  Wrap(
+                    spacing: 8,
+                    runSpacing: 8,
+                    children: [
+                      ...List.generate(Random().nextInt(9), (index) {
+                        final title = "选项_$index";
+
+                        return OutlinedButton(
+                          style: TextButton.styleFrom(
+                            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                            minimumSize: Size(50, 18),
+                            // primary: primary,
+                          ),
+                          onPressed: () {
+                            DLog.d(title);
+                          },
+                          child: Text(title),
+                        );
+                      }),
+                    ],
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
+      );
+    }
+
     return Container(
       height: 400,
       child: Theme(
@@ -132,50 +196,9 @@ class _NestedNavigatorDemoState extends State<NestedNavigatorDemo> {
                     children: [
                       ElevatedButton(
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) {
-                                return NestedNavigatorSubpage(
-                                  appBar: AppBar(
-                                    centerTitle: true,
-                                    title: Text("子页面"),
-                                    actions: [
-                                      GestureDetector(
-                                        onTap: () {
-                                          DLog.d("error");
-                                        },
-                                        child: Icon(Icons.error_outline),
-                                      ),
-                                      GestureDetector(
-                                        onTap: () {
-                                          DLog.d("notifications_active");
-                                        },
-                                        child: Icon(Icons.notifications_active_outlined),
-                                      ),
-                                    ]
-                                        .map((e) => Container(
-                                              padding: EdgeInsets.only(right: 8),
-                                              child: e,
-                                            ))
-                                        .toList(),
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      ElevatedButton(
-                                        onPressed: () {
-                                          Navigator.pop(context);
-                                        },
-                                        child: Text('Go to back'),
-                                      ),
-                                    ],
-                                  ),
-                                );
-                              },
-                            ),
-                          );
+                          onNext(context: context, title: "子页面");
                         },
-                        child: Text('Go to next page'),
+                        child: Text('next page'),
                       )
                     ],
                   ),
@@ -281,6 +304,15 @@ class NestedNavigatorSubpage extends StatefulWidget {
 
 class _NestedNavigatorSubpageState extends State<NestedNavigatorSubpage> {
   final scrollController = ScrollController();
+
+  @override
+  void didUpdateWidget(covariant NestedNavigatorSubpage oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (oldWidget.appBar != widget.appBar || oldWidget.child != widget.child) {
+      setState(() {});
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
