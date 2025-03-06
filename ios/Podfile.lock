@@ -1,6 +1,9 @@
 PODS:
   - audio_session (0.0.1):
     - Flutter
+  - audio_visualizer (0.0.1):
+    - Flutter
+    - FlutterMacOS
   - audioplayers_darwin (0.0.1):
     - Flutter
   - camera_avfoundation (0.0.1):
@@ -244,6 +247,8 @@ PODS:
     - Flutter
     - MTBBarcodeScanner
   - ReachabilitySwift (5.2.4)
+  - record_darwin (1.0.0):
+    - Flutter
   - SDWebImage (5.20.0):
     - SDWebImage/Core (= 5.20.0)
   - SDWebImage/Core (5.20.0)
@@ -285,6 +290,7 @@ PODS:
 
 DEPENDENCIES:
   - audio_session (from `.symlinks/plugins/audio_session/ios`)
+  - audio_visualizer (from `.symlinks/plugins/audio_visualizer/darwin`)
   - audioplayers_darwin (from `.symlinks/plugins/audioplayers_darwin/ios`)
   - camera_avfoundation (from `.symlinks/plugins/camera_avfoundation/ios`)
   - connectivity_plus (from `.symlinks/plugins/connectivity_plus/ios`)
@@ -321,6 +327,7 @@ DEPENDENCIES:
   - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
   - photo_manager (from `.symlinks/plugins/photo_manager/ios`)
   - qr_code_scanner (from `.symlinks/plugins/qr_code_scanner/ios`)
+  - record_darwin (from `.symlinks/plugins/record_darwin/ios`)
   - sensors_plus (from `.symlinks/plugins/sensors_plus/ios`)
   - share (from `.symlinks/plugins/share/ios`)
   - share_plus (from `.symlinks/plugins/share_plus/ios`)
@@ -374,6 +381,8 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   audio_session:
     :path: ".symlinks/plugins/audio_session/ios"
+  audio_visualizer:
+    :path: ".symlinks/plugins/audio_visualizer/darwin"
   audioplayers_darwin:
     :path: ".symlinks/plugins/audioplayers_darwin/ios"
   camera_avfoundation:
@@ -442,6 +451,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/photo_manager/ios"
   qr_code_scanner:
     :path: ".symlinks/plugins/qr_code_scanner/ios"
+  record_darwin:
+    :path: ".symlinks/plugins/record_darwin/ios"
   sensors_plus:
     :path: ".symlinks/plugins/sensors_plus/ios"
   share:
@@ -469,6 +480,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   audio_session: 088d2483ebd1dc43f51d253d4a1c517d9a2e7207
+  audio_visualizer: f10a8d5043e0ab0f5134303caf5326f4dcd0457f
   audioplayers_darwin: 877d9a4d06331c5c374595e46e16453ac7eafa40
   camera_avfoundation: dd002b0330f4981e1bbcb46ae9b62829237459a4
   connectivity_plus: bf0076dd84a130856aa636df1c71ccaff908fa1d
@@ -530,6 +542,7 @@ SPEC CHECKSUMS:
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   qr_code_scanner: bb67d64904c3b9658ada8c402e8b4d406d5d796e
   ReachabilitySwift: 32793e867593cfc1177f5d16491e3a197d2fccda
+  record_darwin: 3b1a8e7d5c0cbf45ad6165b4d83a6ca643d929c3
   SDWebImage: 73c6079366fea25fa4bb9640d5fb58f0893facd8
   SDWebImageWebPCoder: e38c0a70396191361d60c092933e22c20d5b1380
   sensors_plus: 18a9b346c43e157da17d2c8e99def703f9efb9d8

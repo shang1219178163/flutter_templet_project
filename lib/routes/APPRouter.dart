@@ -303,6 +303,7 @@ import 'package:flutter_templet_project/pages/demo/WeatherInfoPage.dart';
 import 'package:flutter_templet_project/pages/demo/WrapDemo.dart';
 import 'package:flutter_templet_project/pages/demo/YamlParsePage.dart';
 import 'package:flutter_templet_project/pages/demo/ae_report_page.dart';
+import 'package:flutter_templet_project/pages/demo/audio_visualizer_demo.dart';
 import 'package:flutter_templet_project/pages/demo/box_shadow_demo.dart';
 import 'package:flutter_templet_project/pages/demo/box_shadow_demo_one.dart';
 import 'package:flutter_templet_project/pages/demo/data_type_demo.dart';
@@ -331,6 +332,7 @@ import 'package:flutter_templet_project/pages/demo/system_icons_page.dart';
 import 'package:flutter_templet_project/pages/demo/tab_container_demo.dart';
 import 'package:flutter_templet_project/pages/demo/test_page.dart';
 import 'package:flutter_templet_project/pages/demo/test_page_one.dart';
+import 'package:flutter_templet_project/pages/demo/weather/screens/weather_home.dart';
 import 'package:flutter_templet_project/pages/demo/webview_demo.dart';
 import 'package:flutter_templet_project/pages/demo/will_pop_scope_demo.dart';
 import 'package:flutter_templet_project/pages/first_page.dart';
@@ -820,6 +822,8 @@ class APPRouter {
   static const String emailSenderDemo = '/emailSenderDemo';
   static const String faceDetectionPage = '/faceDetectionPage';
   static const String nestedScrollViewDemoFour = '/nestedScrollViewDemoFour';
+  static const String weatherHome = '/weatherHome';
+  static const String audioVisualizerDemo = '/audioVisualizerDemo';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -2434,6 +2438,15 @@ class AppPage {
     GetPage(
       name: APPRouter.nestedScrollViewDemoFour,
       page: () => NestedScrollViewDemoFour(),
+    ),
+    GetPage(
+      name: APPRouter.weatherHome,
+      page: () => WeatherHome(),
+    ),
+
+    GetPage(
+      name: APPRouter.audioVisualizerDemo,
+      page: () => AudioVisualizerDemo(),
     ),
   ];
 }

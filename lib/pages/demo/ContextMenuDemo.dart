@@ -92,6 +92,9 @@ class _ContextMenuDemoState extends State<ContextMenuDemo> {
               color: Colors.white,
               child: SelectionArea(
                 // focusNode: ,
+                onSelectionChanged: (v) {
+                  DLog.d("onSelectionChanged: $v");
+                },
                 child: EditableText(
                   controller: _editableController,
                   focusNode: FocusNode(),
@@ -112,6 +115,9 @@ class _ContextMenuDemoState extends State<ContextMenuDemo> {
               ),
             ),
             SelectionArea(
+              onSelectionChanged: (v) {
+                DLog.d("onSelectionChanged: ${v?.plainText}");
+              },
               contextMenuBuilder: (BuildContext context, SelectableRegionState selectableRegionState) {
                 return AdaptiveTextSelectionToolbar.buttonItems(
                   anchors: selectableRegionState.contextMenuAnchors,
