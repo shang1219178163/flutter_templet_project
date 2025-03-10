@@ -144,7 +144,7 @@ class _TranslationTextPageState extends State<TranslationTextPage> {
                       initialItem: sourceLanguage,
                       placeholder: "自动检测",
                       onChanged: (val) async {
-                        ddlog(val);
+                        DLog.d(val);
                         sourceLanguage = val;
                         await onTranslateText(text: _textController.text);
                       },
@@ -162,7 +162,7 @@ class _TranslationTextPageState extends State<TranslationTextPage> {
                       values: TranslateLanguage.values,
                       initialItem: targetLanguage,
                       onChanged: (val) async {
-                        ddlog(val);
+                        DLog.d(val);
                         targetLanguage = val;
                         await onTranslateText(text: _textController.text);
                       },

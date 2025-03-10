@@ -184,7 +184,7 @@ class _APPDrawerMenuPageState extends State<APPDrawerMenuPage> {
       minLeadingWidth: 0,
       minVerticalPadding: 0,
       onTap: () {
-        ddlog("退出");
+        DLog.d("退出");
       },
     );
   }

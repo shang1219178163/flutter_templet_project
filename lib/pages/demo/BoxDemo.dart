@@ -323,7 +323,7 @@ class _BoxDemoState extends State<BoxDemo> {
     return InkWell(
       onTap: () {
         badge = badge < 999 ? badge * 10 : 9;
-        ddlog("badge: $badge");
+        DLog.d("badge: $badge");
         badgeStr = badge > 99 ? "$badge+" : "$badge";
         // badgeStr = "1";
         setState(() {});
@@ -336,7 +336,7 @@ class _BoxDemoState extends State<BoxDemo> {
     return InkWell(
       onTap: () {
         badge = badge < 999 ? badge * 10 : 9;
-        ddlog("badge: $badge");
+        DLog.d("badge: $badge");
         badgeStr = badge > 99 ? "$badge+" : "$badge";
         // badgeStr = "1";
         setState(() {});

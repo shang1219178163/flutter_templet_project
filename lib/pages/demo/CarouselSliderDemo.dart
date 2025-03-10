@@ -48,7 +48,7 @@ class CarouselSliderDemo extends StatelessWidget {
         .map(
           (item) => InkWell(
             onTap: () {
-              ddlog("No. ${imgList.indexOf(item)} image");
+              DLog.d("No. ${imgList.indexOf(item)} image");
             },
             child: Container(
               margin: EdgeInsets.all(5.0),
@@ -59,8 +59,7 @@ class CarouselSliderDemo extends StatelessWidget {
                     // Image.network(item, fit: BoxFit.cover, width: double.infinity),
                     FadeInImage(
                       image: NetworkImage(item),
-                      placeholder:
-                          AssetImage('assets/images/img_placeholder.png'),
+                      placeholder: AssetImage('assets/images/img_placeholder.png'),
                       fit: BoxFit.cover,
                     ),
                     Positioned(
@@ -70,16 +69,12 @@ class CarouselSliderDemo extends StatelessWidget {
                       child: Container(
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
-                            colors: [
-                              Color.fromARGB(200, 0, 0, 0),
-                              Color.fromARGB(0, 0, 0, 0)
-                            ],
+                            colors: [Color.fromARGB(200, 0, 0, 0), Color.fromARGB(0, 0, 0, 0)],
                             begin: Alignment.bottomCenter,
                             end: Alignment.topCenter,
                           ),
                         ),
-                        padding: EdgeInsets.symmetric(
-                            vertical: 10.0, horizontal: 20.0),
+                        padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                         child: Text(
                           'No. ${imgList.indexOf(item)} image',
                           style: TextStyle(

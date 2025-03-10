@@ -226,7 +226,7 @@ class _SecondPageState extends State<SecondPage> {
                 padding: EdgeInsets.zero,
                 constraints: BoxConstraints(),
                 onPressed: () {
-                  ddlog("这是一个图标按钮");
+                  DLog.d("这是一个图标按钮");
                 },
               ).toColoredBox(),
             ),
@@ -235,7 +235,7 @@ class _SecondPageState extends State<SecondPage> {
               child: Row(
                 children: [
                   FilledButton(
-                    onPressed: () => ddlog('TextButton'),
+                    onPressed: () => DLog.d('TextButton'),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -255,7 +255,7 @@ class _SecondPageState extends State<SecondPage> {
               child: Row(
                 children: [
                   TextButton(
-                    onPressed: () => ddlog('TextButton'),
+                    onPressed: () => DLog.d('TextButton'),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -276,7 +276,7 @@ class _SecondPageState extends State<SecondPage> {
                       backgroundColor: Colors.green.withOpacity(0.1),
                       foregroundColor: Colors.green,
                     ),
-                    onPressed: () => ddlog('TextButton'),
+                    onPressed: () => DLog.d('TextButton'),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -298,7 +298,7 @@ class _SecondPageState extends State<SecondPage> {
                 icon: Icon(Icons.add),
                 label: Text("OutlinedButton"),
                 onPressed: () {
-                  ddlog(_globalKey1.currentContext?.frame);
+                  DLog.d(_globalKey1.currentContext?.frame);
                 },
                 style: OutlinedButton.styleFrom(
                   padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
@@ -407,7 +407,7 @@ class _SecondPageState extends State<SecondPage> {
                     backgroundColor: const Color(0xff03dac6),
                     // foregroundColor: Colors.black,
                     onPressed: () {
-                      ddlog("FloatingActionButton.extended");
+                      DLog.d("FloatingActionButton.extended");
                     },
                     icon: SizedBox(),
                     label: Text('EXTEND'.toLowerCase()),
@@ -418,7 +418,7 @@ class _SecondPageState extends State<SecondPage> {
                     backgroundColor: const Color(0xff03dac6),
                     // foregroundColor: Colors.black,
                     onPressed: () {
-                      ddlog("FloatingActionButton");
+                      DLog.d("FloatingActionButton");
                     },
                     child: Icon(Icons.open_with),
                   ),
@@ -429,7 +429,7 @@ class _SecondPageState extends State<SecondPage> {
                     backgroundColor: const Color(0xff03dac6),
                     // foregroundColor: Colors.black,
                     onPressed: () {
-                      ddlog("FloatingActionButton.extended");
+                      DLog.d("FloatingActionButton.extended");
                     },
                     icon: Icon(Icons.add),
                     label: Text('EXTEND'.toLowerCase()),
@@ -516,10 +516,10 @@ class _SecondPageState extends State<SecondPage> {
                   height: 25,
                 ),
                 onPressed: () {
-                  ddlog("onPressed");
+                  DLog.d("onPressed");
                 },
                 onDetele: () {
-                  ddlog("onDetele");
+                  DLog.d("onDetele");
                 },
               ),
             ),
@@ -529,21 +529,21 @@ class _SecondPageState extends State<SecondPage> {
                 children: [
                   OutlinedButton(
                       onPressed: () {
-                        ddlog("OutlinedButton");
+                        DLog.d("OutlinedButton");
                       },
                       child: Text("OutlinedButton")),
                   GestureDetector(
                     ///这里设置behavior
                     behavior: HitTestBehavior.translucent,
                     onTap: () {
-                      ddlog("onTap");
+                      DLog.d("onTap");
                     },
                     child: Container(
                       color: Colors.yellow,
                       padding: EdgeInsets.symmetric(horizontal: 20),
                       child: OutlinedButton(
                           onPressed: () {
-                            ddlog("OutlinedButton");
+                            DLog.d("OutlinedButton");
                           },
                           child: Text("OutlinedButton")),
                     ),
@@ -647,7 +647,7 @@ class _SecondPageState extends State<SecondPage> {
             ),
             buildMaterialButtonGradient(
               onPressed: () {
-                ddlog("buildMaterialButtonGradient");
+                DLog.d("buildMaterialButtonGradient");
               },
             ),
             buildMaterialButtonGradient(
@@ -822,7 +822,7 @@ class _SecondPageState extends State<SecondPage> {
           key: _globalKey,
           onPressed: () {
             // _showCustomPopView();
-            ddlog(_globalKey1.currentContext?.frame);
+            DLog.d(_globalKey1.currentContext?.frame);
             // test();
           },
         ),
@@ -834,7 +834,7 @@ class _SecondPageState extends State<SecondPage> {
           label: Text("OutlinedButton"),
           key: _globalKey1,
           onPressed: () {
-            ddlog(_globalKey1.currentContext?.frame);
+            DLog.d(_globalKey1.currentContext?.frame);
             // test();
           },
         ),
@@ -842,7 +842,7 @@ class _SecondPageState extends State<SecondPage> {
       Tuple2(
         "TextButton",
         TextButton(
-          onPressed: () => ddlog('$this'),
+          onPressed: () => DLog.d('$this'),
           child: Row(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -859,7 +859,7 @@ class _SecondPageState extends State<SecondPage> {
       Tuple2(
         "TextButton",
         TextButton(
-          onPressed: () => ddlog('TextButton'),
+          onPressed: () => DLog.d('TextButton'),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -880,7 +880,7 @@ class _SecondPageState extends State<SecondPage> {
           iconSize: 30,
           color: Theme.of(context).colorScheme.secondary,
           onPressed: () {
-            ddlog("这是一个图标按钮");
+            DLog.d("这是一个图标按钮");
           },
         ),
       ),
@@ -895,7 +895,7 @@ class _SecondPageState extends State<SecondPage> {
           backgroundColor: const Color(0xff03dac6),
           foregroundColor: Colors.black,
           onPressed: () {
-            ddlog("FloatingActionButton");
+            DLog.d("FloatingActionButton");
           },
           child: Icon(Icons.open_with),
         ),
@@ -906,7 +906,7 @@ class _SecondPageState extends State<SecondPage> {
           backgroundColor: const Color(0xff03dac6),
           foregroundColor: Colors.black,
           onPressed: () {
-            ddlog("FloatingActionButton.extended");
+            DLog.d("FloatingActionButton.extended");
           },
           icon: Icon(Icons.add),
           label: Text('EXTENDED'),
@@ -952,7 +952,7 @@ class _SecondPageState extends State<SecondPage> {
           )
           .toList(),
       onChanged: (value) {
-        ddlog(value);
+        DLog.d(value);
         if (value == null) {
           return;
         }
@@ -1014,7 +1014,7 @@ class _SecondPageState extends State<SecondPage> {
               }).toList(),
               offset: Offset(0, 30),
               onSelected: (value) {
-                ddlog(value);
+                DLog.d(value);
                 selectedValue = value;
                 setState(() {});
               },
@@ -1038,7 +1038,7 @@ class _SecondPageState extends State<SecondPage> {
               }).toList(),
               offset: Offset(0, 30),
               onSelected: (value) {
-                ddlog(value);
+                DLog.d(value);
                 selectedValue = value;
                 setState(() {});
               },
@@ -1060,7 +1060,7 @@ class _SecondPageState extends State<SecondPage> {
   Widget _buildCustomPaint() {
     return GestureDetector(
       onTap: () {
-        ddlog("ontap");
+        DLog.d("ontap");
       },
       child: Container(
         height: 100,

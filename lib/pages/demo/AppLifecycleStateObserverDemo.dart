@@ -38,26 +38,26 @@ class _AppLifecycleStateObserverDemoState
   @override
   void initState() {
     super.initState();
-    ddlog("$widget initState");
+    DLog.d("$widget initState");
 
     // _lifecycleListener = AppLifecycleListener(
     //   onRestart: () {
-    //     ddlog("$widget onRestart - AppLifecycleListener");
+    //     DLog.d("$widget onRestart - AppLifecycleListener");
     //   },
     //   onResume: () {
-    //     ddlog("$widget onResume - AppLifecycleListener");
+    //     DLog.d("$widget onResume - AppLifecycleListener");
     //   },
     //   onInactive: () {
-    //     ddlog("$widget onInactive - AppLifecycleListener");
+    //     DLog.d("$widget onInactive - AppLifecycleListener");
     //   },
     //   onPause: () {
-    //     ddlog("$widget onPause - AppLifecycleListener");
+    //     DLog.d("$widget onPause - AppLifecycleListener");
     //   },
     //   onDetach: () {
-    //     ddlog("$widget onDetach - AppLifecycleListener");
+    //     DLog.d("$widget onDetach - AppLifecycleListener");
     //   },
     //   onHide: () {
-    //     ddlog("$widget onHide - AppLifecycleListener");
+    //     DLog.d("$widget onHide - AppLifecycleListener");
     //   },
     // );
   }
@@ -126,13 +126,13 @@ class _AppLifecycleStateObserverDemoState
       durationVN.value = duration;
 
       // countVN.value++;
-      // ddlog("countVN.value: ${countVN.value}");
+      // DLog.d("countVN.value: ${countVN.value}");
     });
   }
 
   /*************** AppLifecycleObserverMixin ***************/
   @override
   void onAppLifecycleStateChanged(AppLifecycleState state) {
-    ddlog("$widget ${state.name}");
+    DLog.d("$widget ${state.name}");
   }
 }

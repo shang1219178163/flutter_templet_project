@@ -45,13 +45,8 @@ class _FirstPageState extends State<FirstPage> {
                       color: Color(0xffEBECF1),
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    child: Icon(
-                        _hiddenAppBar == false
-                            ? Icons.bedtime
-                            : Icons.beach_access,
-                        color: _hiddenAppBar == false
-                            ? Colors.yellow
-                            : Colors.black),
+                    child: Icon(_hiddenAppBar == false ? Icons.bedtime : Icons.beach_access,
+                        color: _hiddenAppBar == false ? Colors.yellow : Colors.black),
                   ),
                 ),
               ],
@@ -59,7 +54,7 @@ class _FirstPageState extends State<FirstPage> {
           ),
           floatingActionButton: FloatingActionButton(
             tooltip: 'Increment',
-            onPressed: () => ddlog('floatingActionButton'),
+            onPressed: () => DLog.d('floatingActionButton'),
             child: Icon(Icons.add),
           ), // This trailing comma makes auto-formatting nicer for build methods.
         ),

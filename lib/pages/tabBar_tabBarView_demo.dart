@@ -255,7 +255,7 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
   Widget buildHeader() {
     return ElevatedButton(
         onPressed: () {
-          ddlog("buildHeader");
+          DLog.d("buildHeader");
         },
         child: Text("header_${IntExt.random(max: 100)}"));
   }
@@ -300,7 +300,7 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
         dense: true,
         // contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
         onTap: () {
-          ddlog("section_");
+          DLog.d("section_");
           if (e.item1.toLowerCase().contains("loginPage".toLowerCase())) {
             Get.offNamed(e.item1, arguments: e.item1);
           } else {

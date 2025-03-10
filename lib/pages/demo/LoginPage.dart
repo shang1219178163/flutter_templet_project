@@ -88,8 +88,8 @@ class _LoginPageState extends State<LoginPage> {
     } else {
       focusScopeNode.requestFocus(focusNode2);
     }
-    // ddlog(focusNode1.hasFocus);
-    // ddlog(focusNode2.hasFocus);
+    // DLog.d(focusNode1.hasFocus);
+    // DLog.d(focusNode2.hasFocus);
   }
 
   _unfocusNodes() {

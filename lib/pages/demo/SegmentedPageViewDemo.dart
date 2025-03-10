@@ -98,7 +98,7 @@ class _SegmentedPageViewDemoState extends State<SegmentedPageViewDemo> {
                 items: items.map((e) => (title: e.title, icon: e.icon)).toList(),
                 selectedIndex: selectedIndex,
                 onChanged: (int index) {
-                  ddlog("onChanged: $index");
+                  DLog.d("onChanged: $index");
                   pageController.animateToPage(index, duration: Duration(milliseconds: 350), curve: Curves.ease);
                   // pageController.jumpToPage(index);
                 },

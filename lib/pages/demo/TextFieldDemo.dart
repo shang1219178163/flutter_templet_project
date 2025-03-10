@@ -337,7 +337,7 @@ class _TextFieldDemoState extends State<TextFieldDemo> with AssetResourceMixin {
                     setState(() {});
                   },
                   onEditingComplete: () {
-                    ddlog("onEditingComplete");
+                    DLog.d("onEditingComplete");
                   }, //'完成'回调
                 ),
               ),
@@ -359,7 +359,7 @@ class _TextFieldDemoState extends State<TextFieldDemo> with AssetResourceMixin {
 
   void onChanged(val) {
     final index = IntExt.random(min: 1000, max: 9999);
-    ddlog("onChanged: $val, $index");
+    DLog.d("onChanged: $val, $index");
   }
 
   onPressed() {

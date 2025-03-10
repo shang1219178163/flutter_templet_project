@@ -9,8 +9,7 @@ class SearchResultsListView extends StatefulWidget {
   TextEditingController? editingController;
 
   Widget Function(String key)? leadingBuilder;
-  Widget Function(BuildContext context, int index, List searchResults)?
-      itemBuilder;
+  Widget Function(BuildContext context, int index, List searchResults)? itemBuilder;
   IndexedWidgetBuilder? separatorBuilder;
 
   void Function(String value)? searchCallback;
@@ -80,7 +79,7 @@ class _SearchResultsListViewState extends State<SearchResultsListView> {
     return TextField(
       onChanged: _textfieldChanged,
       //   onChanged: (value) {
-      //   ddlog(value);
+      //   DLog.d(value);
       // },
       controller: widget.editingController,
       decoration: InputDecoration(
@@ -152,7 +151,7 @@ class _SearchResultsListViewState extends State<SearchResultsListView> {
       } else {
         searchResults = keys.where((e) => "$e".contains(value)).toList();
       }
-      // ddlog("_changeValue:${value} searchResults:${searchResults}");
+      // DLog.d("_changeValue:${value} searchResults:${searchResults}");
     });
   }
 }

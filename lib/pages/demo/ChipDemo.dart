@@ -97,7 +97,7 @@ class _ChipDemoState extends State<ChipDemo> with CupertinoAlertDialogMixin {
                   ),
                   // deleteIcon: Icon( Icons.cancel, color: Colors.black45,),
                   // onDeleted: () {
-                  //   ddlog("onDeleted: 带 deleteIcon的 Chip");
+                  //   DLog.d("onDeleted: 带 deleteIcon的 Chip");
                   //   setState(() {});
                   // },
                   // deleteButtonTooltipMessage: "弹出提示",
@@ -111,28 +111,28 @@ class _ChipDemoState extends State<ChipDemo> with CupertinoAlertDialogMixin {
                     Icons.cancel,
                   ),
                   onDeleted: () {
-                    ddlog("onDeleted:带 avatar 和 deleteIcon的 Chip");
+                    DLog.d("onDeleted:带 avatar 和 deleteIcon的 Chip");
                     setState(() {});
                   },
                 ),
                 Chip(
                   avatar: InkWell(
                     onTap: () {
-                      ddlog("onTap:Chip");
+                      DLog.d("onTap:Chip");
                     },
                     child: Icon(
                       Icons.add_circle,
                     ),
                   ),
                   // avatar: IconButton(
-                  //   onPressed: () { setState(() { ddlog("add"); } ); },
+                  //   onPressed: () { setState(() { DLog.d("add"); } ); },
                   //   padding: EdgeInsets.all(0),
                   //   icon: Icon(Icons.add_circle)) ,
                   label: Text("Chip"),
                   // deleteIcon: Icon(Icons.remove_circle),
                   deleteIcon: Icon(Icons.remove_circle),
                   onDeleted: () {
-                    ddlog("onDeleted:Chip");
+                    DLog.d("onDeleted:Chip");
                     setState(() {});
                   },
                 ),
@@ -154,13 +154,13 @@ class _ChipDemoState extends State<ChipDemo> with CupertinoAlertDialogMixin {
                   avatar: Image.asset("avatar.png".toPath(), fit: BoxFit.fill),
                   padding: EdgeInsets.all(0),
                   onPressed: () {
-                    ddlog("onPressed: RawChip");
+                    DLog.d("onPressed: RawChip");
                   },
                   deleteIcon: Icon(
                     Icons.close,
                   ),
                   onDeleted: () {
-                    ddlog("onDeleted: RawChip");
+                    DLog.d("onDeleted: RawChip");
                   },
                 ),
                 RawChip(
@@ -172,7 +172,7 @@ class _ChipDemoState extends State<ChipDemo> with CupertinoAlertDialogMixin {
                   ),
                   padding: EdgeInsets.all(0),
                   onPressed: () {
-                    ddlog("onPressed: RawChip");
+                    DLog.d("onPressed: RawChip");
                   },
                 ),
               ],
@@ -194,11 +194,7 @@ class _ChipDemoState extends State<ChipDemo> with CupertinoAlertDialogMixin {
                       .map((e) => ActionChip(
                             avatar: CircleAvatar(
                                 backgroundColor: Theme.of(context).primaryColor,
-                                child: Text(e
-                                    .toString()
-                                    .characters
-                                    .first
-                                    .toUpperCase())),
+                                child: Text(e.toString().characters.first.toUpperCase())),
                             label: Text("Action_$e"),
                             onPressed: () {
                               _onPressed(titles.indexOf(e));
@@ -243,7 +239,7 @@ class _ChipDemoState extends State<ChipDemo> with CupertinoAlertDialogMixin {
                           // padding: EdgeInsets.only(left: 8, right: 8),
                           selected: _value == e,
                           onSelected: (bool selected) {
-                            ddlog(e);
+                            DLog.d(e);
                             _value = selected ? e : null;
                             setState(() {});
                           },
@@ -309,7 +305,7 @@ class _ChipDemoState extends State<ChipDemo> with CupertinoAlertDialogMixin {
   }
 
   void _onPressed(int e) {
-    ddlog(e);
+    DLog.d(e);
   }
 
   /// 标签管理器
@@ -317,8 +313,7 @@ class _ChipDemoState extends State<ChipDemo> with CupertinoAlertDialogMixin {
     return NSectionBox(
       title: "NTagBox",
       crossAxisAlignment: CrossAxisAlignment.start,
-      child: StatefulBuilder(
-          builder: (BuildContext context, StateSetter setState) {
+      child: StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
         return NTagBox<(int, String)>(
             keywords: "初步诊断",
             items: tuples,

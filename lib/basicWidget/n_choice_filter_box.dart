@@ -55,8 +55,7 @@ class NChoiceFilterBoxItemModel<T extends SelectableMixin> {
     data['title'] = title;
     data['models'] = models.map((e) => e.toJson()).toList();
     data['selectedModels'] = selectedModels.map((e) => e.toJson()).toList();
-    data['selectedModelsTmp'] =
-        selectedModelsTmp.map((e) => e.toJson()).toList();
+    data['selectedModelsTmp'] = selectedModelsTmp.map((e) => e.toJson()).toList();
     data['hide'] = hide;
     data['isSingle'] = isSingle;
     return data;
@@ -65,8 +64,7 @@ class NChoiceFilterBoxItemModel<T extends SelectableMixin> {
   @override
   String toString() {
     final result = toJson();
-    result.removeWhere(
-        (key, value) => !["selectedModels", "selectedModelsTmp"].contains(key));
+    result.removeWhere((key, value) => !["selectedModels", "selectedModelsTmp"].contains(key));
     var encoder = JsonEncoder.withIndent('  '); // 使用带缩进的 JSON 编码器
     return encoder.convert(result);
   }
@@ -184,8 +182,7 @@ class NChoiceFilterBox extends StatefulWidget {
   State<NChoiceFilterBox> createState() => _NChoiceFilterBoxState();
 }
 
-class _NChoiceFilterBoxState extends State<NChoiceFilterBox>
-    with SingleTickerProviderStateMixin {
+class _NChoiceFilterBoxState extends State<NChoiceFilterBox> with SingleTickerProviderStateMixin {
   //筛选按钮是否高亮
   late final isHighlight = widget.isChanged;
 
@@ -255,11 +252,9 @@ class _NChoiceFilterBoxState extends State<NChoiceFilterBox>
           isSingle: choice.isSingle,
           idCb: (e) => e.selectableId ?? "",
           titleCb: (e) => e.selectableName ?? "",
-          selectedCb: (e) => choice.selectedModels
-              .map((e) => e.selectableId)
-              .contains(e.selectableId),
+          selectedCb: (e) => choice.selectedModels.map((e) => e.selectableId).contains(e.selectableId),
           onChanged: (list) {
-            // ddlog(
+            // DLog.d(
             //     "$widget ${choice.title}: ${list.map((e) => "${e.selectableName}_${e.isSelected}")}");
             widget.model.choices[i].selectedModelsTmp.clear();
             widget.model.choices[i].selectedModelsTmp.addAll(list);
@@ -284,11 +279,11 @@ class _NChoiceFilterBoxState extends State<NChoiceFilterBox>
             startDate: () => widget.model.startTimeTmp,
             endDate: () => widget.model.endTimeTmp,
             onStart: (dateStr) {
-              ddlog("onStart: $dateStr");
+              DLog.d("onStart: $dateStr");
               widget.model.startTimeTmp = dateStr;
             },
             onEnd: (dateStr) {
-              ddlog("onEnd: $dateStr");
+              DLog.d("onEnd: $dateStr");
               widget.model.endTimeTmp = dateStr;
             },
           ),

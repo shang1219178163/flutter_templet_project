@@ -21,8 +21,7 @@ class GetxRouteCreatePage extends StatefulWidget {
 }
 
 class _GetxRouteCreatePageState extends State<GetxRouteCreatePage> {
-  bool get hideApp =>
-      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
+  bool get hideApp => Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
 
   final scrollController = ScrollController();
 
@@ -145,13 +144,12 @@ static const String patientGroupPage = '/patientGroupPage';
       final chars = ["const String", "="];
       final list = line.splitSet(chars.toSet());
       final name = list[1].trim();
-      // ddlog("name: $name");
-      final result =
-          "GetPage(name: APPRouter.$name, page: () => const ${name.toCapitalize()}()),\n";
-      ddlog("$result");
+      // DLog.d("name: $name");
+      final result = "GetPage(name: APPRouter.$name, page: () => const ${name.toCapitalize()}()),\n";
+      DLog.d("$result");
       return result;
     }).toList();
-    // ddlog("list: \n$list");
+    // DLog.d("list: \n$list");
     // toCreateDartFile(fileName: "AppPages");
   }
 
@@ -162,8 +160,7 @@ static const String patientGroupPage = '/patientGroupPage';
       final content = ceatePage(className: className);
 
       /// 生成本地文件
-      final file =
-          await FileManager().createFile(fileName: fileName, content: content);
+      final file = await FileManager().createFile(fileName: fileName, content: content);
       debugPrint("file: ${file.path}");
 
       showSnackBar(SnackBar(

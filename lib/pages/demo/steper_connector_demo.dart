@@ -200,10 +200,7 @@ class _SteperConnectorDemoState extends State<SteperConnectorDemo> {
     ]);
   }
 
-  _buildNode(
-      {Axis direction = Axis.vertical,
-      Widget? startConnector,
-      Widget? endConnector}) {
+  _buildNode({Axis direction = Axis.vertical, Widget? startConnector, Widget? endConnector}) {
     final indicator = Container(
       color: Colors.green,
       width: 30,
@@ -301,7 +298,7 @@ class _SteperConnectorDemoState extends State<SteperConnectorDemo> {
                       ),
                     ),
                     onPressed: () {
-                      ddlog("onPressed");
+                      DLog.d("onPressed");
                     },
                     child: Text('查看'),
                   ),
@@ -329,7 +326,7 @@ class _SteperConnectorDemoState extends State<SteperConnectorDemo> {
                       padding: EdgeInsets.all(5),
                     ),
                     onPressed: () {
-                      ddlog("onPressed");
+                      DLog.d("onPressed");
                     },
                     child: Text(
                       '更多',

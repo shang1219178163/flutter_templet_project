@@ -34,7 +34,7 @@ class _ProviderListDemoState extends State<ProviderListDemo> {
   static ValueNotifierOrderModels orderModels = ValueNotifierOrderModels();
   // /// ValueNotifier
   // static ValueNotifierNum valueNotifierInt = ValueNotifierNum(initValue: 6, minValue: 0, maxValue: 9, block: (int minValue, int maxValue){
-  //   ddlog("数值必须在${minValue} - ${maxValue} 之间");
+  //   DLog.d("数值必须在${minValue} - ${maxValue} 之间");
   // });
 
   /// ValueNotifier
@@ -43,7 +43,7 @@ class _ProviderListDemoState extends State<ProviderListDemo> {
       minValue: 0,
       maxValue: 9,
       block: (num minValue, num maxValue) {
-        ddlog("数值必须在$minValue - $maxValue 之间");
+        DLog.d("数值必须在$minValue - $maxValue 之间");
       });
 
   static ValueNotifierNum valueNotifierDouble = ValueNotifierNum(
@@ -51,19 +51,17 @@ class _ProviderListDemoState extends State<ProviderListDemo> {
       minValue: 0,
       maxValue: 9,
       block: (num minValue, num maxValue) {
-        ddlog("数值必须在$minValue - $maxValue 之间");
+        DLog.d("数值必须在$minValue - $maxValue 之间");
       });
   // static ValueNotifierInt valueNotifierInt = ValueNotifierInt(initValue: 6, minValue: 0, maxValue: 9);
 
   ValueNotifier<int> notifier = ValueNotifier(3);
 
   /// ValueNotifier
-  static ValueNotifierList valueNotifierList =
-      ValueNotifierList(<OrderModel>[]);
+  static ValueNotifierList valueNotifierList = ValueNotifierList(<OrderModel>[]);
 
   /// ValueNotifier(addListener无效 因为数组地址未发生改变, 推荐使用 ValueNotifierList)
-  static ValueNotifier<List<OrderModel>> valueNotifierListOrigin =
-      ValueNotifier(<OrderModel>[]);
+  static ValueNotifier<List<OrderModel>> valueNotifierListOrigin = ValueNotifier(<OrderModel>[]);
 
   var counter = 3.notifier;
 
@@ -142,9 +140,7 @@ class _ProviderListDemoState extends State<ProviderListDemo> {
             child: Container(
               height: 30,
               color: Colors.green,
-              child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text("SliverToBoxAdapter")),
+              child: Align(alignment: Alignment.centerLeft, child: Text("SliverToBoxAdapter")),
             ),
           ),
           // buildListView(context),
@@ -238,24 +234,23 @@ class _ProviderListDemoState extends State<ProviderListDemo> {
         content: Text(
       "数据变化监听回调, 刷新重建界面",
     )));
-    // ddlog("数据变化监听回调, 刷新重建界面");
+    // DLog.d("数据变化监听回调, 刷新重建界面");
     setState(() {});
   }
 
-  void handleActionNum(
-      {required ValueNotifierModel e, required int value, required int idx}) {
+  void handleActionNum({required ValueNotifierModel e, required int value, required int idx}) {
     switch (e.name) {
       case "valueNotifierIntKey":
         {
           valueNotifierInt.add(value);
-          ddlog("${valueNotifierInt.value.toInt()}");
+          DLog.d("${valueNotifierInt.value.toInt()}");
         }
         break;
       case "valueNotifierDoubleKey":
         {
           valueNotifierDouble.add(value);
-          // ddlog(cartCountKey.toString());
-          ddlog("${valueNotifierDouble.value.toDouble()}");
+          // DLog.d(cartCountKey.toString());
+          DLog.d("${valueNotifierDouble.value.toDouble()}");
         }
         break;
 
@@ -268,8 +263,8 @@ class _ProviderListDemoState extends State<ProviderListDemo> {
             cartModel.removeLast();
           }
 
-          ddlog(cartModel.toString());
-          // ddlog("${cartModelKey.totalPrice}");
+          DLog.d(cartModel.toString());
+          // DLog.d("${cartModelKey.totalPrice}");
         }
         break;
 
@@ -282,10 +277,10 @@ class _ProviderListDemoState extends State<ProviderListDemo> {
             cartModelNew.removeLast();
           }
 
-          ddlog(cartModelNew.toString());
-          ddlog(cartModelNew.totalPrice);
+          DLog.d(cartModelNew.toString());
+          DLog.d(cartModelNew.totalPrice);
 
-          // ddlog("${cartModelKey.totalPrice}");
+          // DLog.d("${cartModelKey.totalPrice}");
         }
         break;
       case "valueNotifierOrderModels":
@@ -297,8 +292,8 @@ class _ProviderListDemoState extends State<ProviderListDemo> {
             orderModels.removeLast();
           }
 
-          ddlog(orderModels.toString());
-          // ddlog("${cartModelOneKey.totalPrice}");
+          DLog.d(orderModels.toString());
+          // DLog.d("${cartModelOneKey.totalPrice}");
         }
         break;
       case "valueNotifierList":
@@ -310,8 +305,8 @@ class _ProviderListDemoState extends State<ProviderListDemo> {
             valueNotifierList.removeLast();
           }
 
-          ddlog(valueNotifierList.toString());
-          // ddlog("${cartModelOneKey.totalPrice}");
+          DLog.d(valueNotifierList.toString());
+          // DLog.d("${cartModelOneKey.totalPrice}");
         }
         break;
 
@@ -319,8 +314,8 @@ class _ProviderListDemoState extends State<ProviderListDemo> {
         {
           notifier.value += value;
 
-          // ddlog(cartCountKey.toString());
-          ddlog("${notifier.value}");
+          // DLog.d(cartCountKey.toString());
+          DLog.d("${notifier.value}");
         }
         break;
 
@@ -337,8 +332,8 @@ class _ProviderListDemoState extends State<ProviderListDemo> {
 
           ///监听无效,需要手动调整
 
-          ddlog(valueNotifierListOrigin.value.length.toString());
-          // ddlog("${cartModelOneKey.totalPrice}");
+          DLog.d(valueNotifierListOrigin.value.length.toString());
+          // DLog.d("${cartModelOneKey.totalPrice}");
         }
         break;
       default:
@@ -355,13 +350,12 @@ class _ProviderListDemoState extends State<ProviderListDemo> {
     }
 
     update();
-    ddlog(model.toString());
+    DLog.d(model.toString());
 
     if (value > 0) {
       ScaffoldMessenger.of(context).removeCurrentSnackBar();
       ScaffoldMessenger.of(context).clearSnackBars();
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('CartModel num\'s +1')));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('CartModel num\'s +1')));
     } else {
       showSnackBar(SnackBar(content: Text('CartModel num\'s -1')));
     }
@@ -369,8 +363,7 @@ class _ProviderListDemoState extends State<ProviderListDemo> {
 
   var list = [
     ValueNotifierModel(name: "valueNotifierIntKey", notifier: valueNotifierInt),
-    ValueNotifierModel(
-        name: "valueNotifierDoubleKey", notifier: valueNotifierDouble),
+    ValueNotifierModel(name: "valueNotifierDoubleKey", notifier: valueNotifierDouble),
     ValueNotifierModel(name: "valueNotifierOrderModels", notifier: orderModels),
 
     ValueNotifierModel(name: "cartModelNew", notifier: cartModelNew),
@@ -378,8 +371,7 @@ class _ProviderListDemoState extends State<ProviderListDemo> {
     ValueNotifierModel(name: "valueNotifierList", notifier: valueNotifierList),
 
     // ValueNotifierModel(name: "valueNotifierIntOrigin", notifier: valueNotifierIntOrigin),
-    ValueNotifierModel(
-        name: "valueNotifierListOrigin", notifier: valueNotifierListOrigin),
+    ValueNotifierModel(name: "valueNotifierListOrigin", notifier: valueNotifierListOrigin),
   ];
 }
 

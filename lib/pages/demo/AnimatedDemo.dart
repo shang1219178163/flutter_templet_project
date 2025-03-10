@@ -23,10 +23,9 @@ class AnimatedDemo extends StatefulWidget {
   _AnimatedDemoState createState() => _AnimatedDemoState();
 }
 
-class _AnimatedDemoState extends State<AnimatedDemo>
-    with TickerProviderStateMixin {
-  late final AnimationController _controller = AnimationController(
-      duration: const Duration(milliseconds: 350), vsync: this);
+class _AnimatedDemoState extends State<AnimatedDemo> with TickerProviderStateMixin {
+  late final AnimationController _controller =
+      AnimationController(duration: const Duration(milliseconds: 350), vsync: this);
 
   double size = 100;
   final isLoading = ValueNotifier(true);
@@ -79,7 +78,7 @@ class _AnimatedDemoState extends State<AnimatedDemo>
     return Center(
       child: InkWell(
         onTap: () {
-          ddlog("AnimatedIcon");
+          DLog.d("AnimatedIcon");
           if (_controller.status == AnimationStatus.completed) {
             _controller.reverse();
           } else if (_controller.status == AnimationStatus.dismissed) {
@@ -105,7 +104,7 @@ class _AnimatedDemoState extends State<AnimatedDemo>
   Widget _buildAnimatedSizeIcon() {
     return GestureDetector(
       onTap: () {
-        ddlog("AnimatedSize");
+        DLog.d("AnimatedSize");
         setState(() {
           size = size == 100 ? 200 : 100;
         });
@@ -155,11 +154,10 @@ class _AnimatedDemoState extends State<AnimatedDemo>
           ),
         ),
         onTap: () {
-          ddlog("AnimatedCrossFade");
+          DLog.d("AnimatedCrossFade");
           setState(() {
-            _crossFadeState = _crossFadeState == CrossFadeState.showFirst
-                ? CrossFadeState.showSecond
-                : CrossFadeState.showFirst;
+            _crossFadeState =
+                _crossFadeState == CrossFadeState.showFirst ? CrossFadeState.showSecond : CrossFadeState.showFirst;
           });
         },
       ),
@@ -192,7 +190,7 @@ class _AnimatedDemoState extends State<AnimatedDemo>
           ),
           OutlinedButton(
             onPressed: () {
-              ddlog("AnimatedSwitcher");
+              DLog.d("AnimatedSwitcher");
 
               setState(() {
                 _count += 1;
@@ -231,7 +229,7 @@ class _AnimatedDemoState extends State<AnimatedDemo>
           ),
           OutlinedButton(
             onPressed: () {
-              ddlog("AnimatedSwitcher");
+              DLog.d("AnimatedSwitcher");
 
               setState(() {
                 _count += 1;
@@ -273,7 +271,7 @@ class _AnimatedDemoState extends State<AnimatedDemo>
           ),
           OutlinedButton(
             onPressed: () {
-              ddlog("AnimatedSwitcher");
+              DLog.d("AnimatedSwitcher");
 
               setState(() {
                 _count += 1;

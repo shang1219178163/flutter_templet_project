@@ -48,7 +48,7 @@ class _ComponentMiddlePageState extends State<ComponentMiddlePage> {
           ),
           buildPageFooter(
             onConfirm: () {
-              ddlog("onConfirm");
+              DLog.d("onConfirm");
             },
           ),
         ],

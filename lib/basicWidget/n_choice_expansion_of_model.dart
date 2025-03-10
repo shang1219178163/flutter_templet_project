@@ -71,7 +71,7 @@ import 'package:flutter_templet_project/model/tag_detail_model.dart';
 //       selectedCb: selectedCb ?? (e) => e.isSelected,
 //       // selectedCb: (e) => e.isSelected,
 //       onSelected: (e) {
-//         // ddlog(e.name);
+//         // DLog.d(e.name);
 //         for (final element in items) {
 //           if (idCb(element) == idCb(e)) {
 //             element.isSelected = !element.isSelected;
@@ -82,7 +82,7 @@ import 'package:flutter_templet_project/model/tag_detail_model.dart';
 //           }
 //         }
 //         final selecetdItems = items.where((e) => e.isSelected).toList();
-//         // ddlog(items.map((e) => "${titleCb(e)},${e.isSelected}" ).toList().join("\n"));
+//         // DLog.d(items.map((e) => "${titleCb(e)},${e.isSelected}" ).toList().join("\n"));
 //         onChanged(selecetdItems);
 //
 //         final first = selecetdItems.isEmpty ? null : selecetdItems.first;
@@ -196,7 +196,7 @@ class _NChoiceExpansionOfModelState<T>
 
         final selecetdItems =
             models.where((e) => e.isSelected).map((e) => e.data).toList();
-        // ddlog(items.map((e) => "${titleCb(e)},${e.isSelected}" ).toList().join("\n"));
+        // DLog.d(items.map((e) => "${titleCb(e)},${e.isSelected}" ).toList().join("\n"));
         widget.onChanged(selecetdItems);
 
         final first = selecetdItems.isEmpty ? null : selecetdItems.first;

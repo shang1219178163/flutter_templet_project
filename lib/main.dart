@@ -65,7 +65,7 @@ Future<void> main() async {
 
   // final ping = Ping('baidu.com', count: 20);
   // ping.stream.listen((event) {
-  //   ddlog("ping $event");
+  //   DLog.d("ping $event");
   // });
 
   /// That's all done.You can use Charles or other proxy tools now.
@@ -192,7 +192,7 @@ class MyApp extends StatelessWidget {
       routingCallback: AppRouteObserver().routingCallback ??
           (routing) {
             // if (routing != null) {
-            //   ddlog([routing.previous, routing.current]);
+            //   DLog.d([routing.previous, routing.current]);
             // }
           },
       // routes: {

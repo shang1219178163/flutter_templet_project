@@ -71,7 +71,7 @@ class _AlignmentDrawDemoState extends State<AlignmentDrawDemo> {
                 values: AlignmentExt.allCases,
                 initialItem: topAlignment,
                 onChanged: (val) {
-                  ddlog(val);
+                  DLog.d(val);
                   topAlignment = val;
                   presentDrawer(alignment: topAlignment);
                 },
@@ -97,18 +97,15 @@ class _AlignmentDrawDemoState extends State<AlignmentDrawDemo> {
             width: 300,
             height: 400,
             child: Scaffold(
-              appBar: AppBar(
-                  title: Text("NAlignmentDrawer"),
-                  automaticallyImplyLeading: false,
-                  actions: [
-                    TextButton(
-                      onPressed: onHide,
-                      child: Text(
-                        '取消',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ]),
+              appBar: AppBar(title: Text("NAlignmentDrawer"), automaticallyImplyLeading: false, actions: [
+                TextButton(
+                  onPressed: onHide,
+                  child: Text(
+                    '取消',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ]),
               body: buildBody(),
             ),
           ),

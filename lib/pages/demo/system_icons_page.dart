@@ -120,7 +120,7 @@ class _SystemIconsPageState extends State<SystemIconsPage> {
               title: Text("$item"),
               // subtitle: Text(array[0]),
               onTap: () {
-                ddlog(item);
+                DLog.d(item);
                 // Clipboard.setData(ClipboardData(text: "$item"));
                 editingController.text = item.split('.').last;
                 onChanged(editingController.text);
@@ -149,11 +149,8 @@ class _SystemIconsPageState extends State<SystemIconsPage> {
           decoration: BoxDecoration(
             // color: index % 2 == 0 ? Colors.green : Colors.white,
             border: Border(
-              top: BorderSide(
-                  color: index > 2 ? Colors.transparent : Color(0xffe4e4e4)),
-              right: BorderSide(
-                  color:
-                      index % 3 == 2 ? Colors.transparent : Color(0xffe4e4e4)),
+              top: BorderSide(color: index > 2 ? Colors.transparent : Color(0xffe4e4e4)),
+              right: BorderSide(color: index % 3 == 2 ? Colors.transparent : Color(0xffe4e4e4)),
               bottom: BorderSide(color: Color(0xffe4e4e4)),
             ),
           ),
@@ -177,7 +174,7 @@ class _SystemIconsPageState extends State<SystemIconsPage> {
       searchResults = list;
     } else {
       searchResults = list.where((e) => e.contains(value)).toList();
-      ddlog(searchResults.length);
+      DLog.d(searchResults.length);
     }
     setState(() {});
   }

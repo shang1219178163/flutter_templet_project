@@ -150,7 +150,7 @@ class _PageViewDemoState extends State<PageViewDemo> {
                 .map(
                   (e) => CupertinoActionSheetAction(
                     onPressed: () {
-                      ddlog(e);
+                      DLog.d(e);
                       Navigator.pop(context);
                     },
                     child: Text(e),

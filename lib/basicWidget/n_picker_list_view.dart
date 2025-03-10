@@ -67,8 +67,7 @@ class NPickerListView<E> extends StatefulWidget {
   final List<E> items;
 
   /// 子相
-  final Widget? Function(BuildContext context, int index, List<E> items)
-      itemBuilder;
+  final Widget? Function(BuildContext context, int index, List<E> items) itemBuilder;
 
   /// 搜索过滤
   final bool Function(E element, String search)? filterCb;
@@ -105,7 +104,7 @@ class NPickerListViewState<E> extends State<NPickerListView<E>> {
               backgroundColor: Color(0xffEDEDED),
               onChanged: (String value) {
                 searchVN.value = value;
-                ddlog("onChanged: $value, ${searchVN.value}, ");
+                DLog.d("onChanged: $value, ${searchVN.value}, ");
               },
             ),
           ),
@@ -116,9 +115,7 @@ class NPickerListViewState<E> extends State<NPickerListView<E>> {
                 final list = value.isEmpty
                     ? widget.items
                     : widget.items
-                        .where((e) => widget.filterCb == null
-                            ? e != null
-                            : widget.filterCb!(e, value))
+                        .where((e) => widget.filterCb == null ? e != null : widget.filterCb!(e, value))
                         .toList();
 
                 if (list.isEmpty) {

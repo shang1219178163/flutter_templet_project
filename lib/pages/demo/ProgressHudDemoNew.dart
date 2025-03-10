@@ -119,7 +119,7 @@ class _ProgressHudDemoNewState extends State<ProgressHudDemoNew> {
   }
 
   void _onPressed(int e) {
-    ddlog(e);
+    DLog.d(e);
   }
 
   Widget buildColumn() {
@@ -181,7 +181,7 @@ class _ToastContextState extends State<ToastContext> {
     super.initState();
 
     Future.delayed(const Duration(milliseconds: 100), () {
-      ddlog(_globalKey.currentState);
+      DLog.d(_globalKey.currentState);
       fToast.init(_globalKey.currentState!.context);
     });
 

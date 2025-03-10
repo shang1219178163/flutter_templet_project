@@ -54,9 +54,7 @@ class _ThirdPageState extends State<ThirdPage> with RouteAware {
 
   @override
   void didChangeDependencies() {
-    AppRouteObserver()
-        .routeObserver
-        .subscribe(this, ModalRoute.of(context)!); //订阅
+    AppRouteObserver().routeObserver.subscribe(this, ModalRoute.of(context)!); //订阅
     super.didChangeDependencies();
   }
 
@@ -117,8 +115,7 @@ class _ThirdPageState extends State<ThirdPage> with RouteAware {
                 return Text("偏移量");
               }
               // return Text("datadata");
-              final maxScrollExtent =
-                  _scrollController.position.maxScrollExtent.toStringAsFixed(0);
+              final maxScrollExtent = _scrollController.position.maxScrollExtent.toStringAsFixed(0);
               debugPrint("maxScrollExtent: $maxScrollExtent");
               return Container(
                 child: Text("${value.toStringAsFixed(0)}/${maxScrollExtent}"),
@@ -144,7 +141,7 @@ class _ThirdPageState extends State<ThirdPage> with RouteAware {
   }
 
   onRefresh() async {
-    ddlog("onRefresh");
+    DLog.d("onRefresh");
     await Future.delayed(Duration(seconds: 1), () {
       if (!mounted) {
         return;
@@ -157,16 +154,13 @@ class _ThirdPageState extends State<ThirdPage> with RouteAware {
   }
 
   onLoad() async {
-    ddlog("onLoad");
+    DLog.d("onLoad");
     await Future.delayed(Duration(seconds: 1), () {
       if (!mounted) {
         return;
       }
-      items
-          .addAll(List<String>.generate(20, (i) => 'Item ${items.length + i}'));
-      _easyRefreshController.finishLoad(items.length >= 60
-          ? IndicatorResult.noMore
-          : IndicatorResult.success);
+      items.addAll(List<String>.generate(20, (i) => 'Item ${items.length + i}'));
+      _easyRefreshController.finishLoad(items.length >= 60 ? IndicatorResult.noMore : IndicatorResult.success);
       setState(() {});
     });
   }
@@ -194,11 +188,11 @@ class _ThirdPageState extends State<ThirdPage> with RouteAware {
             onTap: () {
               selectedIndex = index;
               setState(() {});
-              ddlog([
+              DLog.d([
                 selectedIndex,
                 index,
               ]);
-              ddlog([_globalKey(index).currentContext?.frame]);
+              DLog.d([_globalKey(index).currentContext?.frame]);
             },
           );
 
@@ -210,9 +204,9 @@ class _ThirdPageState extends State<ThirdPage> with RouteAware {
               });
 
               if (direction == DismissDirection.startToEnd) {
-                ddlog("Add to favorite");
+                DLog.d("Add to favorite");
               } else {
-                ddlog('Remove item');
+                DLog.d('Remove item');
               }
             },
             background: buildFavorite(context),
@@ -220,10 +214,7 @@ class _ThirdPageState extends State<ThirdPage> with RouteAware {
             confirmDismiss: (DismissDirection direction) async {
               return buildConfirmDismiss(context);
             },
-            child: Container(
-                height: IntExt.random(max: 100, min: 45).toDouble(),
-                color: ColorExt.random,
-                child: child),
+            child: Container(height: IntExt.random(max: 100, min: 45).toDouble(), color: ColorExt.random, child: child),
           );
         },
         // separatorBuilder: (context, index) {
@@ -278,9 +269,7 @@ class _ThirdPageState extends State<ThirdPage> with RouteAware {
           title: const Text("Delete Confirmation"),
           content: const Text("Are you sure you want to delete this item?"),
           actions: <Widget>[
-            TextButton(
-                onPressed: () => Navigator.of(context).pop(true),
-                child: const Text("Delete")),
+            TextButton(onPressed: () => Navigator.of(context).pop(true), child: const Text("Delete")),
             TextButton(
               onPressed: () => Navigator.of(context).pop(false),
               child: const Text("Cancel"),

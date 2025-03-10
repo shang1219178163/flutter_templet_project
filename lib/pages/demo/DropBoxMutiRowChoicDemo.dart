@@ -27,8 +27,7 @@ class DropBoxMutiRowChoicDemo extends StatefulWidget {
   final String? title;
 
   @override
-  _DropBoxMutiRowChoicDemoState createState() =>
-      _DropBoxMutiRowChoicDemoState();
+  _DropBoxMutiRowChoicDemoState createState() => _DropBoxMutiRowChoicDemoState();
 }
 
 class _DropBoxMutiRowChoicDemoState extends State<DropBoxMutiRowChoicDemo> {
@@ -128,7 +127,7 @@ class _DropBoxMutiRowChoicDemoState extends State<DropBoxMutiRowChoicDemo> {
             onToggle: () {
               onFilterInit();
               dropBoxController.onToggle();
-              ddlog("dropBoxController: ${dropBoxController.isVisible}");
+              DLog.d("dropBoxController: ${dropBoxController.isVisible}");
               closeKeyboard();
             },
           ),
@@ -192,14 +191,11 @@ class _DropBoxMutiRowChoicDemoState extends State<DropBoxMutiRowChoicDemo> {
           color: const Color(0xff999999),
           size: 20.h,
         ),
-        prefixInsets:
-            EdgeInsets.only(left: 14.w, top: 5, bottom: 5, right: 6.w),
+        prefixInsets: EdgeInsets.only(left: 14.w, top: 5, bottom: 5, right: 6.w),
         // padding: EdgeInsets.only(left: 3, top: 5, bottom: 5, right: 5),
         placeholder: placeholder,
         placeholderStyle: TextStyle(fontSize: 15.sp, color: fontColorBCBFC2),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(4.w)),
-            color: bgColor),
+        decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(4.w)), color: bgColor),
         onChanged: (String value) {
           _debounce(() {
             debugPrint('searchText: $value');
@@ -251,15 +247,11 @@ class _DropBoxMutiRowChoicDemoState extends State<DropBoxMutiRowChoicDemo> {
         cbID: (e) => e.id ?? "",
         cbName: (e) => e.name ?? "",
         cbSelected: (row, e) {
-          final result = row.selectedModelsTmp
-              .map((e) => e.id ?? "")
-              .toList()
-              .contains(e.id);
+          final result = row.selectedModelsTmp.map((e) => e.id ?? "").toList().contains(e.id);
           return result;
         },
         onChanged: (row) {
-          debugPrint(
-              "${row.title} selectedModelsTmp: ${row.selectedModelsTmp.map((e) => e.name).toList()}");
+          debugPrint("${row.title} selectedModelsTmp: ${row.selectedModelsTmp.map((e) => e.name).toList()}");
         },
         itemBuilder: (e, isSelected) {
           return buildItem(
@@ -380,8 +372,7 @@ selectedModels: ${item.selectedModels.map((e) => e.name).toList()},""");
                       child: NChoiceBoxHorizontal<T>(
                         isSingle: row.isSingle,
                         onChanged: (value) {
-                          row.selectedModelsTmp =
-                              value.map((e) => e.data).toList();
+                          row.selectedModelsTmp = value.map((e) => e.data).toList();
                           onChanged(row);
                         },
                         items: row.models
@@ -404,8 +395,7 @@ selectedModels: ${item.selectedModels.map((e) => e.name).toList()},""");
             padding: EdgeInsets.symmetric(horizontal: 0, vertical: 1),
             child: GestureDetector(
               onTap: onToggle,
-              child:
-                  Icon(isExpand ? Icons.arrow_drop_up : Icons.arrow_drop_down),
+              child: Icon(isExpand ? Icons.arrow_drop_up : Icons.arrow_drop_down),
             ),
           ),
         ],

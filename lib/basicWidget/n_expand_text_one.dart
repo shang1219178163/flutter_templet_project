@@ -48,18 +48,14 @@ class _NExpandTextOneState extends State<NExpandTextOne> {
 
   @override
   Widget build(BuildContext context) {
-    assert(
-        widget.tailing != null && widget.tailingWidth > 0 ||
-            widget.tailing == null,
-        "tailingWidth 应该是tailing的宽度");
+    assert(widget.tailing != null && widget.tailingWidth > 0 || widget.tailing == null, "tailingWidth 应该是tailing的宽度");
 
     onToggle() {
       isExpand = !isExpand;
       setState(() {});
     }
 
-    final arrowImage =
-        isExpand ? "icon_expand_arrow_up.png" : "icon_expand_arrow_down.png";
+    final arrowImage = isExpand ? "icon_expand_arrow_up.png" : "icon_expand_arrow_down.png";
 
     Widget buildArrow() {
       // return Text(
@@ -76,8 +72,7 @@ class _NExpandTextOneState extends State<NExpandTextOne> {
       );
     }
 
-    return LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints) {
+    return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
       final textPainter = TextPainterExt.getTextPainter(
         text: widget.data,
         textStyle: widget.textStyle,
@@ -86,7 +81,7 @@ class _NExpandTextOneState extends State<NExpandTextOne> {
       );
 
       final isBeyond = textPainter.didExceedMaxLines;
-      // ddlog([data.length,
+      // DLog.d([data.length,
       //   constraints.maxWidth - tailingWidth,
       //   textPainter.height,
       //   textPainter.didExceedMaxLines,

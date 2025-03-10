@@ -79,7 +79,7 @@ class _YamlParsePageState extends State<YamlParsePage> {
 
   String _scriptPath() {
     var script = Platform.script.toString();
-    ddlog("script: $script");
+    DLog.d("script: $script");
 
     if (script.startsWith("file://")) {
       script = script.substring(7);
@@ -95,19 +95,19 @@ class _YamlParsePageState extends State<YamlParsePage> {
     Uri currentScript = Platform.script;
     // 将 URI 转换为文件系统路径
     String currentPath = currentScript.toFilePath();
-    ddlog('当前文件路径: $currentPath');
+    DLog.d('当前文件路径: $currentPath');
 
     String yamlPath1 = path.dirname(currentPath);
-    ddlog("yamlPath1: ${"目录${Directory(yamlPath1).existsSync() ? "" : "不"}存在"} $yamlPath1");
+    DLog.d("yamlPath1: ${"目录${Directory(yamlPath1).existsSync() ? "" : "不"}存在"} $yamlPath1");
 
     String yamlPath3 = path.join(yamlPath1, '../pubspec.yaml');
-    ddlog("yamlPath3: ${"文件${File(yamlPath3).existsSync() ? "" : "不"}存在"} $yamlPath3");
+    DLog.d("yamlPath3: ${"文件${File(yamlPath3).existsSync() ? "" : "不"}存在"} $yamlPath3");
 
     String yamlPath4 = Uri.file(yamlPath3).path;
-    ddlog("yamlPath4: ${"文件${File(yamlPath4).existsSync() ? "" : "不"}存在"} $yamlPath4");
+    DLog.d("yamlPath4: ${"文件${File(yamlPath4).existsSync() ? "" : "不"}存在"} $yamlPath4");
 
     String yamlPath = '/Users/shang/GitHub/flutter_templet_project/pubspec.yaml';
-    ddlog("yamlPath: $yamlPath");
+    DLog.d("yamlPath: $yamlPath");
 
     File file = File(yamlPath);
     if (!file.existsSync()) {
@@ -125,6 +125,6 @@ class _YamlParsePageState extends State<YamlParsePage> {
 
     // 通过 pubspec_parse 解析,返回模型
     final pubspecModel = Pubspec.parse(content);
-    ddlog('pubspecModel: $pubspecModel');
+    DLog.d('pubspecModel: $pubspecModel');
   }
 }

@@ -27,7 +27,7 @@ extension YamlMapExt on YamlMap {
     // 读取 pubspec.yaml 文件
     final file = File(path);
     if (!file.existsSync()) {
-      ddlog('❌文件未找到: $path');
+      DLog.d('❌文件未找到: $path');
       return null;
     }
 

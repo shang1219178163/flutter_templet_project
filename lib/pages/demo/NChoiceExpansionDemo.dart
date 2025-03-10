@@ -26,8 +26,7 @@ class NChoiceExpansionDemo extends StatefulWidget {
 }
 
 class _NChoiceExpansionDemoState extends State<NChoiceExpansionDemo> {
-  bool get hideApp =>
-      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
+  bool get hideApp => Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
 
   final _scrollController = ScrollController();
 
@@ -116,8 +115,8 @@ class _NChoiceExpansionDemoState extends State<NChoiceExpansionDemo> {
           } else {
             selectTag = e;
           }
-          ddlog(e.name);
-          // ddlog(items.where((e) => e.isSelected).map((e) => e.name ?? ""));
+          DLog.d(e.name);
+          // DLog.d(items.where((e) => e.isSelected).map((e) => e.name ?? ""));
         },
         itemBuilder: (e, isSelected) {
           // final isSelected = e.id == selectTag?.id;
@@ -136,7 +135,7 @@ class _NChoiceExpansionDemoState extends State<NChoiceExpansionDemo> {
         titleCb: (e) => e.name ?? "",
         selectedCb: (e) => selectedTags.map((e) => e.id).contains(e.id),
         onChanged: (list) {
-          ddlog("list: ${list.map((e) => "${e.name}_${e.isSelected}")}");
+          DLog.d("list: ${list.map((e) => "${e.name}_${e.isSelected}")}");
           selectedTags = list;
         },
         itemBuilder: (e, isSelected) {
@@ -156,7 +155,7 @@ class _NChoiceExpansionDemoState extends State<NChoiceExpansionDemo> {
         titleCb: (e) => e.name ?? "",
         selectedCb: (e) => selectedUsers.map((e) => e.id).contains(e.id),
         onChanged: (list) {
-          ddlog("list: ${list.map((e) => "${e.name}_${e.isSelected}")}");
+          DLog.d("list: ${list.map((e) => "${e.name}_${e.isSelected}")}");
           selectedUsers = list;
         },
         itemBuilder: (e, isSelected) {

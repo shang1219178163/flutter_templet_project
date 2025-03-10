@@ -101,7 +101,7 @@ class _DataTableDemoState extends State<DataTableDemo> {
         setState(() {
           groupValue = newValue;
         });
-        ddlog(groupValue);
+        DLog.d(groupValue);
       },
       groupValue: groupValue,
     );
@@ -145,7 +145,7 @@ class _DataTableDemoState extends State<DataTableDemo> {
                         setState(() {
                           e.isSelected = value;
                         });
-                        ddlog(
+                        DLog.d(
                             models.where((e) => e.isSelected == true).map((e) => "${e.name}_${e.isSelected}").toList());
                       },
                     ))

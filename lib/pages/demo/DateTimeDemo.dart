@@ -48,11 +48,11 @@ class _DateTimeDemoState extends State<DateTimeDemo> {
     var interval = dateTime.millisecondsSinceEpoch; //时间转毫秒时间戳
     var intendtime = DateTime.fromMillisecondsSinceEpoch(interval); //毫秒时间戳转时间
 
-    ddlog(dateTime);
-    ddlog(interval);
-    ddlog(intendtime);
+    DLog.d(dateTime);
+    DLog.d(interval);
+    DLog.d(intendtime);
 
-    ddlog([
+    DLog.d([
       now,
       now.toUtc(),
     ]);

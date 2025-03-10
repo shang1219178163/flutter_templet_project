@@ -179,7 +179,7 @@ class _AbsorbPointerDemoState extends State<AbsorbPointerDemo> {
   }
 
   onClick(String msg) {
-    // ddlog(msg);
+    // DLog.d(msg);
     debugPrint(msg);
     desc.value = msg;
   }

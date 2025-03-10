@@ -30,10 +30,8 @@ class _NFooterButtonBarDemoState extends State<NFooterButtonBarDemo> {
   void initState() {
     //监听滚动事件，打印滚动位置
     _scrollController.addListener(() {
-      ddlog(
-          "_scrollController.offset: ${_scrollController.offset}/${_scrollController.position.maxScrollExtent}");
-      enableVN.value = (_scrollController.offset >=
-          _scrollController.position.maxScrollExtent);
+      DLog.d("_scrollController.offset: ${_scrollController.offset}/${_scrollController.position.maxScrollExtent}");
+      enableVN.value = (_scrollController.offset >= _scrollController.position.maxScrollExtent);
     });
 
     super.initState();
@@ -79,12 +77,12 @@ class _NFooterButtonBarDemoState extends State<NFooterButtonBarDemo> {
         buildPageFooter(
           primary: Colors.red,
           onConfirm: () {
-            ddlog("NFooterButtonBar");
+            DLog.d("NFooterButtonBar");
           },
         ),
         buildPageFooter1(
           onConfirm: () {
-            ddlog("NFooterButtonBar");
+            DLog.d("NFooterButtonBar");
           },
         ),
       ],
@@ -111,7 +109,7 @@ class _NFooterButtonBarDemoState extends State<NFooterButtonBarDemo> {
           onConfirm: onConfirm,
           leading: GestureDetector(
             onTap: () {
-              ddlog("left");
+              DLog.d("left");
             },
             child: Padding(
               padding: const EdgeInsets.only(right: 8.0),
@@ -123,7 +121,7 @@ class _NFooterButtonBarDemoState extends State<NFooterButtonBarDemo> {
           ),
           trailing: GestureDetector(
             onTap: () {
-              ddlog("right");
+              DLog.d("right");
             },
             child: Padding(
               padding: const EdgeInsets.only(left: 8.0),
@@ -144,9 +142,8 @@ class _NFooterButtonBarDemoState extends State<NFooterButtonBarDemo> {
         builder: (context, value, child) {
           return NFooterButtonBar(
             primary: Colors.red,
-            decoration: const BoxDecoration(
-                color: Colors.white,
-                border: Border(top: BorderSide(color: Color(0xffE5E5E5)))),
+            decoration:
+                const BoxDecoration(color: Colors.white, border: Border(top: BorderSide(color: Color(0xffE5E5E5)))),
             confirmTitle: "保存",
             enable: value,
             // hideCancel: true,

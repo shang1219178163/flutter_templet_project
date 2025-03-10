@@ -22,33 +22,33 @@ class TagGetxController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    // ddlog("$this 初始化");
+    // DLog.d("$this 初始化");
     // 监听count的值,当它发生改变的时候调用
-    worker = ever(count, (callback) => ddlog("ever----$count"));
+    worker = ever(count, (callback) => DLog.d("ever----$count"));
 
     // 监听多个值,当它们发生改变的时候调用
-    everAll([count], (callback) => ddlog("everAll----$count"));
+    everAll([count], (callback) => DLog.d("everAll----$count"));
 
     // count值改变时调用,只执行一次
-    once(count, (callback) => ddlog("once----$count"));
+    once(count, (callback) => DLog.d("once----$count"));
 
     // 用户停止打字时1秒后调用,主要是防DDos
-    debounce(count, (callback) => ddlog("debounce----$count"));
+    debounce(count, (callback) => DLog.d("debounce----$count"));
 
     // 忽略3秒内的所有变动
-    interval(count, (callback) => ddlog("interval----$count"));
+    interval(count, (callback) => DLog.d("interval----$count"));
   }
 
   @override
   void onReady() {
     super.onReady();
-    ddlog("$this onReady 加载完成");
+    DLog.d("$this onReady 加载完成");
   }
 
   @override
   void onClose() {
     super.onClose();
-    // ddlog("$this 控制器被释放");
+    // DLog.d("$this 控制器被释放");
     worker?.dispose();
   }
 
@@ -101,8 +101,7 @@ class TagGetxController extends GetxController {
   }
 
   /// 获取标签
-  Future<({bool isSuccess, String message, List<TagDetailModel> result})>
-      requestTagList({
+  Future<({bool isSuccess, String message, List<TagDetailModel> result})> requestTagList({
     required String departmentId,
   }) async {
     var api = TagListApi(
@@ -118,8 +117,7 @@ class TagGetxController extends GetxController {
     // );
 
     var tuple = await api.fetchModels(
-      onValue: (response) =>
-          List<Map<String, dynamic>>.from(response["result"] ?? []),
+      onValue: (response) => List<Map<String, dynamic>>.from(response["result"] ?? []),
       onModel: (json) => TagDetailModel.fromJson(json), //dart 泛型传递有问题,必须声明一下
     );
     list = tuple.result;

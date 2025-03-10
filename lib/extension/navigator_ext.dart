@@ -14,7 +14,7 @@ extension NavigatorExt on Navigator {
   // @optionalTypeArgs
   // static void popPage<T extends Object?>(BuildContext context, [ T? result ]) {
   //   if (!Navigator.canPop(context)) {
-  //     ddlog("已经是根页面了！");
+  //     DLog.d("已经是根页面了！");
   //     return;
   //   }
   //   Navigator.of(context).pop<T>(result);

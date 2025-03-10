@@ -80,7 +80,7 @@ class RequestManager extends BaseRequestAPI {
       },
       onResponse: (Response response, handler) {
         // print("响应之前");
-        // ddlog(response.toDescription());
+        // DLog.d(response.toDescription());
         return handler.next(response);
       },
       onError: (DioException e, handler) async {
@@ -135,8 +135,7 @@ class RequestManager extends BaseRequestAPI {
     return _handleResponse(response: response, api: api);
   }
 
-  Future<Response<Map<String, dynamic>>?>
-      sendRequest<T extends Map<String, dynamic>>({
+  Future<Response<Map<String, dynamic>>?> sendRequest<T extends Map<String, dynamic>>({
     required String url,
     required HttpMethod method,
     dynamic queryParams,
@@ -311,8 +310,7 @@ class RequestManager extends BaseRequestAPI {
       return resMap;
     }
 
-    if (api?.errorCodes.contains(codeStr) == true ||
-        errorCodes.contains(codeStr)) {
+    if (api?.errorCodes.contains(codeStr) == true || errorCodes.contains(codeStr)) {
       return resMap;
     }
 

@@ -114,7 +114,7 @@ class _FloatingButtonDemoState extends State<FloatingButtonDemo> with FloatingBu
               values: AlignmentExt.allCases,
               initialItem: topAlignment,
               onChanged: (val) {
-                ddlog(val);
+                DLog.d(val);
                 topAlignment = val;
                 hideOverlayEntry(0);
                 insertOverlayEntry(0, buildOverlayEntry(alignment: topAlignment));

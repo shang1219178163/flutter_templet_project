@@ -43,8 +43,7 @@ class ConvertFlle extends StatefulWidget {
 }
 
 class _ConvertFlleState extends State<ConvertFlle> with CreateFileMixin {
-  bool get hideApp =>
-      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
+  bool get hideApp => Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
 
   Map<String, dynamic> arguments = Get.arguments ?? <String, dynamic>{};
 
@@ -166,7 +165,7 @@ class _ConvertFlleState extends State<ConvertFlle> with CreateFileMixin {
           ? null
           : buildDragBox(
               onDropChanged: (List<File> files) async {
-                // ddlog(files);
+                // DLog.d(files);
                 this.files = files;
                 await onDragChanged();
               },
@@ -329,7 +328,7 @@ class _ConvertFlleState extends State<ConvertFlle> with CreateFileMixin {
   }) async {
     final model = await current.convert(content: content);
     if (model == null) {
-      ddlog("❌convert 转换失败");
+      DLog.d("❌convert 转换失败");
       return;
     }
 

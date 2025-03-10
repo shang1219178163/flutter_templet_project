@@ -51,8 +51,12 @@ class _LogisticsTimeLineState extends State<LogisticsTimeLine> {
       3,
       (i) {
         return Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Text('样式$i', style: TextStyle(fontSize: 15)));
+          padding: EdgeInsets.all(8.0),
+          child: Text(
+            '样式$i',
+            style: TextStyle(fontSize: 15),
+          ),
+        );
       },
     ).toList();
 
@@ -74,7 +78,7 @@ class _LogisticsTimeLineState extends State<LogisticsTimeLine> {
                 children: map,
                 groupValue: groupValue,
                 onValueChanged: (int value) {
-                  ddlog(value.toString());
+                  DLog.d(value.toString());
                   setState(() {
                     groupValue = value;
                   });
@@ -106,8 +110,10 @@ class _LogisticsTimeLineState extends State<LogisticsTimeLine> {
       children: [
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text('商品名称: 某某至尊版',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
+          child: Text(
+            '商品名称: 某某至尊版',
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+          ),
         ),
         Padding(
           padding: const EdgeInsets.all(.0),
@@ -180,8 +186,10 @@ class _LogisticsTimeLineState extends State<LogisticsTimeLine> {
       children: [
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text('商品名称: 某某至尊版',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
+          child: Text(
+            '商品名称: 某某至尊版',
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+          ),
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
@@ -219,8 +227,7 @@ class _LogisticsTimeLineState extends State<LogisticsTimeLine> {
                   ),
                 );
               },
-              connectorStyleBuilder: (context, index) =>
-                  ConnectorStyle.solidLine,
+              connectorStyleBuilder: (context, index) => ConnectorStyle.solidLine,
               // connectorStyleBuilder: (context, index) => index == 0 ? ConnectorStyle.transparent : ConnectorStyle.solidLine,
               indicatorStyleBuilder: (context, index) => IndicatorStyle.dot,
               itemCount: listData.length,
@@ -237,8 +244,7 @@ class _LogisticsTimeLineState extends State<LogisticsTimeLine> {
       children: [
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text('商品名称: 某某至尊版',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
+          child: Text('商品名称: 某某至尊版', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
         ),
         Padding(
           padding: const EdgeInsets.all(.0),
@@ -304,7 +310,7 @@ class _LogisticsTimeLineState extends State<LogisticsTimeLine> {
                                 ),
                               ),
                               onPressed: () {
-                                ddlog("onPressed");
+                                DLog.d("onPressed");
                               },
                               child: Text('查看'),
                             ),
@@ -332,12 +338,11 @@ class _LogisticsTimeLineState extends State<LogisticsTimeLine> {
                                 padding: EdgeInsets.all(5),
                               ),
                               onPressed: () {
-                                ddlog("onPressed");
+                                DLog.d("onPressed");
                               },
                               child: Text(
                                 '更多',
-                                style: TextStyle(
-                                    decoration: TextDecoration.underline),
+                                style: TextStyle(decoration: TextDecoration.underline),
                               ),
                             ),
                           ],
@@ -358,11 +363,7 @@ class _LogisticsTimeLineState extends State<LogisticsTimeLine> {
 
 class PlainDataModel {
   PlainDataModel(
-      {required this.id,
-      required this.title,
-      required this.description,
-      required this.day,
-      required this.time});
+      {required this.id, required this.title, required this.description, required this.day, required this.time});
 
   late String id;
   late String title;

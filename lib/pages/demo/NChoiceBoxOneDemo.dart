@@ -95,8 +95,7 @@ class _NChoiceBoxOneDemoState extends State<NChoiceBoxOneDemo> {
                 selectedCb: (e) => selectedTags.map((e) => e.id).contains(e.id),
                 onChanged: (list) {
                   selectedTags = list;
-                  debugPrint(
-                      "重置 selectedTagModelsTmp: ${selectedTags.map((e) => e.name).toList()}");
+                  debugPrint("重置 selectedTagModelsTmp: ${selectedTags.map((e) => e.name).toList()}");
                 },
                 // itemBuilder: (e, isSelected) {
                 //   return buildItem(
@@ -115,13 +114,11 @@ class _NChoiceBoxOneDemoState extends State<NChoiceBoxOneDemo> {
                 isSingle: isSingle,
                 idCb: (e) => e.id.toString() ?? "",
                 titleCb: (e) => e.name ?? "",
-                selectedCb: (e) =>
-                    selectedOrders.map((e) => e.id).contains(e.id ?? ""),
+                selectedCb: (e) => selectedOrders.map((e) => e.id).contains(e.id ?? ""),
                 onChanged: (list) {
-                  // ddlog(list.map((e) => "${e.name}_${e.isSelected}"));
+                  // DLog.d(list.map((e) => "${e.name}_${e.isSelected}"));
                   selectedOrders = list;
-                  debugPrint(
-                      "重置 selectedUsers: ${selectedOrders.map((e) => e.name).toList()}");
+                  debugPrint("重置 selectedUsers: ${selectedOrders.map((e) => e.name).toList()}");
                   // setState((){});
                 },
                 itemBuilder: (e, isSelected) {
@@ -305,10 +302,7 @@ class _NChoiceBoxOneDemoState extends State<NChoiceBoxOneDemo> {
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          NText(detailTitle ?? "",
-                              color: fontColorBCBFC2,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w500),
+                          NText(detailTitle ?? "", color: fontColorBCBFC2, fontSize: 12, fontWeight: FontWeight.w500),
                         ],
                       ),
                   ],

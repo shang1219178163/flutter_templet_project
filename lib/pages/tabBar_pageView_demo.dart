@@ -35,13 +35,10 @@ class TabBarPageViewDemo extends StatefulWidget {
   _TabBarPageViewDemoState createState() => _TabBarPageViewDemoState();
 }
 
-class _TabBarPageViewDemoState extends State<TabBarPageViewDemo>
-    with SingleTickerProviderStateMixin {
-  late final TabController _tabController =
-      TabController(length: items.length, vsync: this);
+class _TabBarPageViewDemoState extends State<TabBarPageViewDemo> with SingleTickerProviderStateMixin {
+  late final TabController _tabController = TabController(length: items.length, vsync: this);
 
-  late final PageController _pageController =
-      PageController(initialPage: 0, keepPage: true);
+  late final PageController _pageController = PageController(initialPage: 0, keepPage: true);
 
   var isTabBar = ValueNotifier(false);
 
@@ -90,9 +87,7 @@ class _TabBarPageViewDemoState extends State<TabBarPageViewDemo>
     return PreferredSize(
       preferredSize: Size.fromHeight(48),
       child: Theme(
-        data: Theme.of(context).copyWith(
-            colorScheme:
-                ColorScheme.fromSwatch().copyWith(secondary: Colors.white)),
+        data: Theme.of(context).copyWith(colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.white)),
         child: Container(
           height: 40,
           alignment: Alignment.center, //圆点居中
@@ -141,7 +136,7 @@ class _TabBarPageViewDemoState extends State<TabBarPageViewDemo>
               ),
             ),
             onTap: (index) {
-              ddlog(index);
+              DLog.d(index);
               setState(() {
                 // _tabController.animateTo(index);
                 _pageController.jumpToPage(index);
@@ -264,8 +259,7 @@ class _TabBarPageViewDemoState extends State<TabBarPageViewDemo>
         itemList: tuples
             .map((e) => e.item2)
             .toList()
-            .map((e) => e.sorted((a, b) =>
-                a.item1.toLowerCase().compareTo(b.item1.toLowerCase())))
+            .map((e) => e.sorted((a, b) => a.item1.toLowerCase().compareTo(b.item1.toLowerCase())))
             .toList(),
         headerBuilder: (e) {
           return Container(

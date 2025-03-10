@@ -33,12 +33,10 @@ class _AppUpdateCardState extends State<AppUpdateCard> {
           // color: Colors.green,
           // border: Border.all(color: Colors.blue, width: 1),
           ),
-      child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            buildTopSection(),
-            buildBottomSection(),
-          ]),
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
+        buildTopSection(),
+        buildBottomSection(),
+      ]),
     );
   }
 
@@ -66,14 +64,13 @@ class _AppUpdateCardState extends State<AppUpdateCard> {
           mainAxisAlignment: MainAxisAlignment.center, //垂直方向居中对⻬
           crossAxisAlignment: CrossAxisAlignment.start, //水平方向居左对⻬
           children: <Widget>[
-            Text(widget.data.appName,
-                maxLines: 1, overflow: TextOverflow.ellipsis), //App名字
+            Text(widget.data.appName, maxLines: 1, overflow: TextOverflow.ellipsis), //App名字
             Text(widget.data.appDate, maxLines: 1), //App更新日期
           ],
         ),
       ),
       ElevatedButton(
-        onPressed: () => ddlog('Make a Note'),
+        onPressed: () => DLog.d('Make a Note'),
         child: Row(
           children: [
             Text("更新"),
@@ -125,8 +122,7 @@ class _AppUpdateCardState extends State<AppUpdateCard> {
                           onPressed: _changeState,
                           child: Text(
                             widget.isExpand ? '收起' : "展开",
-                            style: TextStyle(
-                                color: Theme.of(context).primaryColor),
+                            style: TextStyle(color: Theme.of(context).primaryColor),
                           ),
                         ),
                       )),

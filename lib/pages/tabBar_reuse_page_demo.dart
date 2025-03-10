@@ -72,7 +72,7 @@ class _TabBarReusePageDemoState extends State<TabBarReusePageDemo> {
         //   return (index != 1);
         // },
         onPageChanged: (index) {
-          ddlog(index);
+          DLog.d(index);
         });
   }
 
@@ -87,7 +87,7 @@ class _TabBarReusePageDemoState extends State<TabBarReusePageDemo> {
         //   return (index != 1);
         // },
         onPageChanged: (index) {
-          ddlog(index);
+          DLog.d(index);
         });
   }
 

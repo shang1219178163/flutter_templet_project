@@ -24,7 +24,7 @@ class _PopoverDemoState extends State<PopoverDemo> {
         actions: [
           TextButton(
               onPressed: () {
-                ddlog("change");
+                DLog.d("change");
                 setState(() {
                   isListStyle = !isListStyle;
                 });
@@ -142,7 +142,7 @@ class PopoverButton extends StatelessWidget {
         onTap: () {
           // _handleShowPopover(context);
           _handleShowPopover1(context);
-          ddlog(context.frame);
+          DLog.d(context.frame);
         });
   }
 

@@ -41,13 +41,13 @@ class _GridViewDemoState extends State<GridViewDemo> {
   late final avatars = buildGroupAvatars(
     list: memberList,
     onTap: (model) {
-      ddlog(model.toJson().filter((key, value) => value != null));
+      DLog.d(model.toJson().filter((key, value) => value != null));
     },
     onAdd: () {
-      ddlog("onAdd");
+      DLog.d("onAdd");
     },
     onDel: () {
-      ddlog("onDel");
+      DLog.d("onDel");
     },
   ).map((e) => e.toColoredBox()).toList();
 
@@ -252,7 +252,7 @@ class _GridViewDemoState extends State<GridViewDemo> {
                       minimumSize: Size(50, 18),
                     ),
                     onPressed: () {
-                      ddlog('YES');
+                      DLog.d('YES');
                     },
                     child: Text('YES'),
                   ),
@@ -266,7 +266,7 @@ class _GridViewDemoState extends State<GridViewDemo> {
                       minimumSize: Size(50, 18),
                     ),
                     onPressed: () {
-                      ddlog('NO');
+                      DLog.d('NO');
                     },
                     child: Text('NO'),
                   ),
@@ -334,8 +334,7 @@ class _GridViewDemoState extends State<GridViewDemo> {
     VoidCallback? onDel,
     int showLength = 10,
   }) {
-    List<UserModel> listNew =
-        list.length > showLength ? list.sublist(0, showLength) : list;
+    List<UserModel> listNew = list.length > showLength ? list.sublist(0, showLength) : list;
 
     List<Widget> items = listNew.map(
       (e) {

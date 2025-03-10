@@ -71,7 +71,7 @@ class _ListTileDemoState extends State<ListTileDemo> {
             subtitle: Text("subtitle"),
             trailing: Icon(Icons.arrow_forward_ios),
             onTap: () {
-              ddlog("ListTile");
+              DLog.d("ListTile");
             },
           ),
           CheckboxListTile(
@@ -79,7 +79,7 @@ class _ListTileDemoState extends State<ListTileDemo> {
               subtitle: Text("subtitle"),
               value: _isSelected,
               onChanged: (value) {
-                ddlog(["CheckboxListTile", value]);
+                DLog.d(["CheckboxListTile", value]);
                 if (value == null) {
                   return;
                 }
@@ -91,7 +91,7 @@ class _ListTileDemoState extends State<ListTileDemo> {
               subtitle: Text("subtitle"),
               value: _isSelected,
               onChanged: (value) {
-                ddlog(["SwitchListTile", value]);
+                DLog.d(["SwitchListTile", value]);
                 setState(() {
                   _isSelected = value;
                 });
@@ -104,10 +104,8 @@ class _ListTileDemoState extends State<ListTileDemo> {
                   "RadioGroup 性别选择",
                 ),
               ),
-              footer: Container(
-                  color: Colors.lightGreen,
-                  alignment: Alignment.centerLeft,
-                  child: Text("RadioGroup 备注信息")),
+              footer:
+                  Container(color: Colors.lightGreen, alignment: Alignment.centerLeft, child: Text("RadioGroup 备注信息")),
               cb: (value) {
                 sexValue = value;
                 debugPrint(["_buildRadioGroup", sexValue].toString());
@@ -127,8 +125,7 @@ class _ListTileDemoState extends State<ListTileDemo> {
       ValueChanged<String>? cb,
       Widget? header,
       Widget? footer}) {
-    return StatefulBuilder(
-        builder: (BuildContext context, StateSetter setState) {
+    return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
       return Column(
         children: [
           if (header != null) header,

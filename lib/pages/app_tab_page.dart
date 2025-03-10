@@ -84,22 +84,22 @@ class _AppTabPageState extends State<AppTabPage> with WidgetsBindingObserver, Ap
 
     // _lifecycleListener = AppLifecycleListener(
     //   onRestart: (){
-    //     ddlog("$widget onRestart - AppLifecycleListener");
+    //     DLog.d("$widget onRestart - AppLifecycleListener");
     //   },
     //   onResume: (){
-    //     ddlog("$widget onResume - AppLifecycleListener");
+    //     DLog.d("$widget onResume - AppLifecycleListener");
     //   },
     //   onInactive: (){
-    //     ddlog("$widget onInactive - AppLifecycleListener");
+    //     DLog.d("$widget onInactive - AppLifecycleListener");
     //   },
     //   onPause: (){
-    //     ddlog("$widget onPause - AppLifecycleListener");
+    //     DLog.d("$widget onPause - AppLifecycleListener");
     //   },
     //   onDetach: (){
-    //     ddlog("$widget onDetach - AppLifecycleListener");
+    //     DLog.d("$widget onDetach - AppLifecycleListener");
     //   },
     //   onHide: (){
-    //     ddlog("$widget onHide - AppLifecycleListener");
+    //     DLog.d("$widget onHide - AppLifecycleListener");
     //   },
     // );
 
@@ -114,7 +114,7 @@ class _AppTabPageState extends State<AppTabPage> with WidgetsBindingObserver, Ap
 
     /// app 生命周期监听
     // appController.appState.listen((event) {
-    //   ddlog("$widget appController.appState.listen ${event}");
+    //   DLog.d("$widget appController.appState.listen ${event}");
     // });
   }
 
@@ -122,7 +122,7 @@ class _AppTabPageState extends State<AppTabPage> with WidgetsBindingObserver, Ap
   void onAppLifecycleStateChanged(AppLifecycleState state) {
     appController.appState.value = state;
     appController.appStateVN.value = state;
-    ddlog("$widget ${state.name}, ${appController.appState.value}");
+    DLog.d("$widget ${state.name}, ${appController.appState.value}");
   }
 
   @override
@@ -256,7 +256,7 @@ class _AppTabPageState extends State<AppTabPage> with WidgetsBindingObserver, Ap
     if (index != currentIndex) {
       appController.tabIndexVN.value = index;
       currentIndex = index;
-      ddlog(currentIndex);
+      DLog.d(currentIndex);
       setState(() {});
     }
   }
@@ -347,7 +347,7 @@ class _AppTabPageState extends State<AppTabPage> with WidgetsBindingObserver, Ap
             children: [
               TextButton(
                 onPressed: () {
-                  ddlog("以后再说");
+                  DLog.d("以后再说");
                 },
                 child: Text(
                   "以后再说",
@@ -356,7 +356,7 @@ class _AppTabPageState extends State<AppTabPage> with WidgetsBindingObserver, Ap
               ),
               TextButton(
                 onPressed: () {
-                  ddlog("立即升级");
+                  DLog.d("立即升级");
                 },
                 child: Text(
                   "立即升级",

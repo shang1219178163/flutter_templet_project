@@ -31,8 +31,7 @@ class FormDemo extends StatefulWidget {
 }
 
 class _FormDemoState extends State<FormDemo> {
-  bool get hideApp =>
-      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
+  bool get hideApp => Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
 
   final _scrollController = ScrollController();
 
@@ -118,7 +117,7 @@ class _FormDemoState extends State<FormDemo> {
 
   onPressed() {
     final isSame = items[1].controller == items[1].controller;
-    ddlog("isSame: $isSame");
+    DLog.d("isSame: $isSame");
   }
 
   buildBody() {
@@ -178,7 +177,7 @@ class _FormDemoState extends State<FormDemo> {
                   text: text,
                   textTaps: delimiters,
                   onLink: (textTap) {
-                    ddlog("textTap: $textTap");
+                    DLog.d("textTap: $textTap");
                   },
                 ),
               ),

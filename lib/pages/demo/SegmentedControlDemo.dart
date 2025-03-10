@@ -53,8 +53,8 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
                 groupValue: groupValue,
                 onValueChanged: (value) {
                   // TODO: - fix it
-                  ddlog(value.runtimeType);
-                  ddlog(value.toString());
+                  DLog.d(value.runtimeType);
+                  DLog.d(value.toString());
                   setState(() {
                     groupValue = int.parse("$value");
                   });
@@ -92,7 +92,7 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
           radius: Radius.circular(24),
           padding: EdgeInsets.all(4),
           onChanged: (int index) {
-            ddlog("index: $index");
+            DLog.d("index: $index");
           },
         ),
 
@@ -119,7 +119,7 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
               ],
               selectedIndex: 1,
               onChanged: (int index) {
-                ddlog("onChanged: $index");
+                DLog.d("onChanged: $index");
               },
               itemBuilder: (({String icon, String title}) e, bool isSelecetd) {
                 final color = isSelecetd ? Colors.white : Color(0xff737373);
@@ -218,7 +218,7 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
         setState(() {
           groupValue = newValue;
         });
-        ddlog(groupValue);
+        DLog.d(groupValue);
       },
       groupValue: groupValue,
       // borderColor: Colors.white,
@@ -248,7 +248,7 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
         setState(() {
           groupValue = int.parse("$i");
         });
-        ddlog(groupValue);
+        DLog.d(groupValue);
       },
       backgroundColor: Colors.transparent,
       thumbColor: Colors.transparent,
@@ -347,7 +347,7 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
             }
             current = val;
             setState(() {});
-            ddlog(current);
+            DLog.d(current);
           },
           backgroundColor: Color(0xfff3F3F3),
           thumbColor: context.primaryColor,
@@ -494,7 +494,7 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
         setState(() {
           groupValue = int.parse("$i");
         });
-        ddlog(groupValue);
+        DLog.d(groupValue);
       },
       thumbColor: Colors.orangeAccent,
       // backgroundColor: Colors.transparent,
@@ -524,7 +524,7 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
         setState(() {
           groupValue = int.parse("$i");
         });
-        ddlog(groupValue);
+        DLog.d(groupValue);
       },
       // thumbColor: Colors.orangeAccent,
       backgroundColor: Colors.transparent,
@@ -560,7 +560,7 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
           setState(() {
             groupValue = int.parse("$i");
           });
-          ddlog(groupValue);
+          DLog.d(groupValue);
         },
       );
     }
@@ -575,7 +575,7 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
         setState(() {
           groupValue = int.parse("$i");
         });
-        ddlog(groupValue);
+        DLog.d(groupValue);
       },
     );
   }
@@ -592,7 +592,7 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
         // itemWidths: itemWiths,
         selectedIndex: 0,
         onValueChanged: (index) {
-          ddlog(index);
+          DLog.d(index);
         });
   }
 
@@ -609,7 +609,7 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
         itemRadius: 0,
         itemSelectedTextStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         onValueChanged: (index) {
-          ddlog(index);
+          DLog.d(index);
         });
   }
 
@@ -667,7 +667,7 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
       ],
       currentIndex: 1,
       onChanged: (index) {
-        ddlog("index $index");
+        DLog.d("index $index");
       },
       // selectedBgColor: Colors.red,
       // bgColor: Colors.blue,

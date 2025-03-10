@@ -30,8 +30,7 @@ class TodoListPageOne extends StatefulWidget {
 }
 
 class _TodoListPageOneState extends State<TodoListPageOne> with DBDialogMxin {
-  late final Map<String, dynamic> arguments =
-      widget.arguments ?? Get.arguments ?? {};
+  late final Map<String, dynamic> arguments = widget.arguments ?? Get.arguments ?? {};
 
   late final hideAppBar = arguments["hideAppBar"] as bool?;
 
@@ -41,13 +40,11 @@ class _TodoListPageOneState extends State<TodoListPageOne> with DBDialogMxin {
 
   bool isAllChoic = false;
 
-  DBGenericProvider<DBTodo> get provider =>
-      Provider.of<DBGenericProvider<DBTodo>>(context, listen: false);
+  DBGenericProvider<DBTodo> get provider => Provider.of<DBGenericProvider<DBTodo>>(context, listen: false);
 
   @override
   Widget build(BuildContext context) {
-    final automaticallyImplyLeading =
-        Get.currentRoute.toLowerCase() == "/$widget".toLowerCase();
+    final automaticallyImplyLeading = Get.currentRoute.toLowerCase() == "/$widget".toLowerCase();
 
     return Scaffold(
       backgroundColor: Colors.black12,
@@ -62,16 +59,11 @@ class _TodoListPageOneState extends State<TodoListPageOne> with DBDialogMxin {
             ),
       body: Consumer<DBGenericProvider<DBTodo>>(
         builder: (context, value, child) {
-          final checkedItems =
-              value.entitys.where((e) => e.isFinished == true).toList();
-          isAllChoic =
-              value.entitys.firstWhereOrNull((e) => e.isFinished == false) ==
-                  null;
+          final checkedItems = value.entitys.where((e) => e.isFinished == true).toList();
+          isAllChoic = value.entitys.firstWhereOrNull((e) => e.isFinished == false) == null;
 
-          final checkIcon =
-              isAllChoic ? Icons.check_box : Icons.check_box_outline_blank;
-          final checkDesc =
-              "已选择 ${checkedItems.length}/${value.entitys.length}";
+          final checkIcon = isAllChoic ? Icons.check_box : Icons.check_box_outline_blank;
+          final checkDesc = "已选择 ${checkedItems.length}/${value.entitys.length}";
 
           Widget content = NPlaceholder(
             onTap: () {
@@ -127,7 +119,7 @@ class _TodoListPageOneState extends State<TodoListPageOne> with DBDialogMxin {
                 checkIcon: checkIcon,
                 checkDesc: checkDesc,
                 onCheck: () async {
-                  ddlog("isAllChoic TextButton: $isAllChoic");
+                  DLog.d("isAllChoic TextButton: $isAllChoic");
                   for (var i = 0; i < value.entitys.length; i++) {
                     final e = value.entitys[i];
                     e.isFinished = !isAllChoic;
@@ -136,10 +128,7 @@ class _TodoListPageOneState extends State<TodoListPageOne> with DBDialogMxin {
                 },
                 onAdd: onAddItemRandom,
                 onDelete: () async {
-                  final choicItems = value.entitys
-                      .where((e) => e.isFinished)
-                      .map((e) => e.id)
-                      .toList();
+                  final choicItems = value.entitys.where((e) => e.isFinished).map((e) => e.id).toList();
                   await provider.deleteAll(choicItems);
                 },
               ),

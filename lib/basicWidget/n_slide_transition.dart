@@ -31,7 +31,7 @@ class NSlideTransition extends AnimatedWidget {
         _tween = Tween(begin: Offset(1, 0), end: Offset(0, 0));
         break;
     }
-    // ddlog("_tween: ${_tween.begin},${_tween.end}");
+    // DLog.d("_tween: ${_tween.begin},${_tween.end}");
   }
 
   final bool transformHitTests;

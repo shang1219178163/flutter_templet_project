@@ -126,15 +126,15 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
     final b = "nested ${a ? "strings" : "can"} be wrapped by a double quote";
 
     final val = "1# 8ji#2_3I  ".toInt();
-    ddlog("val: $val");
+    DLog.d("val: $val");
 
     final duration = Duration(milliseconds: 146 * 1000);
-    ddlog("duration: $duration");
+    DLog.d("duration: $duration");
 
-    ddlog("toTimeNew: ${duration.toTimeNew()}");
-    ddlog("toTime: ${duration.toTime()}");
+    DLog.d("toTimeNew: ${duration.toTimeNew()}");
+    DLog.d("toTime: ${duration.toTime()}");
 
-    ddlog("list: ${[
+    DLog.d("list: ${[
       duration.inHours.remainder(24),
       duration.inMinutes.remainder(60),
       duration.inSeconds.remainder(60),
@@ -257,7 +257,7 @@ class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin
 
   Future<void> _onPressed(int e) async {
     final file = await FileExt.fromAssets("assets/images/icon_skipping.gif");
-    ddlog("file: ${file.fileSizeDesc}");
+    DLog.d("file: ${file.fileSizeDesc}");
   }
 
   test() {}

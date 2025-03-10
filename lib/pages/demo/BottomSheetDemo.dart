@@ -127,7 +127,7 @@ class _BottomSheetDemoState extends State<BottomSheetDemo> with AssetResourceMix
               foregroundColor: Colors.blue,
               backgroundColor: Colors.white,
               onPressed: () {
-                ddlog("directions_bike");
+                DLog.d("directions_bike");
               },
               child: Icon(Icons.directions_bike),
             ),
@@ -259,14 +259,14 @@ class _BottomSheetDemoState extends State<BottomSheetDemo> with AssetResourceMix
     final actions = [
       (
         onTap: () {
-          ddlog('拍摄');
+          DLog.d('拍摄');
           Get.back();
         },
         child: NText('拍摄'),
       ),
       (
         onTap: () {
-          ddlog('从相册选择');
+          DLog.d('从相册选择');
           Get.back();
         },
         child: NText('从相册选择'),

@@ -45,12 +45,11 @@ class APPNotFoundPage extends StatelessWidget {
             ),
             Padding(
               padding: EdgeInsets.symmetric(vertical: 8),
-              child: Text('哎呀, 你的页面跑路了!',
-                  style: TextStyle(fontSize: 17.0, color: Colors.black)),
+              child: Text('哎呀, 你的页面跑路了!', style: TextStyle(fontSize: 17.0, color: Colors.black)),
             ),
             TextButton(
               onPressed: () {
-                ddlog('哎呀, 你的页面跑路了!');
+                DLog.d('哎呀, 你的页面跑路了!');
               },
               child: Text('立即捉它回家!', style: TextStyle(fontSize: 17.0)),
             ),

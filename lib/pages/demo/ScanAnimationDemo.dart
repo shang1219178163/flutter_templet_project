@@ -17,8 +17,7 @@ class ScanAnimationDemo extends StatefulWidget {
   State<ScanAnimationDemo> createState() => _ScanAnimationDemoState();
 }
 
-class _ScanAnimationDemoState extends State<ScanAnimationDemo>
-    with SingleTickerProviderStateMixin, PhotoPickerMixin {
+class _ScanAnimationDemoState extends State<ScanAnimationDemo> with SingleTickerProviderStateMixin, PhotoPickerMixin {
   final _scrollController = ScrollController();
 
   File? image;
@@ -82,7 +81,7 @@ class _ScanAnimationDemoState extends State<ScanAnimationDemo>
       () => NScanPhotoDemo(arguments: {
         "image": file,
         "onScanStop": () {
-          ddlog(file.path);
+          DLog.d(file.path);
           Get.back();
         }
       }),

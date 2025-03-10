@@ -225,18 +225,16 @@ class _NumberStepperState extends State<NumberStepper> {
   }
 
   void go(int stepValue) {
-    if (stepValue < 0 &&
-        (current == widget.min || current + stepValue < widget.min)) {
-      ddlog("it's minValue!");
+    if (stepValue < 0 && (current == widget.min || current + stepValue < widget.min)) {
+      DLog.d("it's minValue!");
       if (widget.wraps) {
         current = widget.max;
       }
       widget.onChanged(current);
       return;
     }
-    if (stepValue > 0 &&
-        (current == widget.max || current + stepValue > widget.max)) {
-      ddlog("it's maxValue!");
+    if (stepValue > 0 && (current == widget.max || current + stepValue > widget.max)) {
+      DLog.d("it's maxValue!");
       if (widget.wraps) {
         current = widget.min;
       }

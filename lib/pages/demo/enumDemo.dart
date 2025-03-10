@@ -46,7 +46,7 @@ class _EnumDemoState extends State<EnumDemo> {
     final v2 = ActivityTypeNew.values.by((e) => e.name == "cycling");
     final v3 = ActivityTypeNew.values.by((e) => e.index == 2);
 
-    ddlog([v, v1, v2].asMap());
+    DLog.d([v, v1, v2].asMap());
   }
 
   buildBody() {

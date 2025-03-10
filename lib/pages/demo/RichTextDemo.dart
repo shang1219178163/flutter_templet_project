@@ -165,7 +165,7 @@ xxxx十分重视用户权利及隐私政策并严格按照相关法律法规的�
           textTaps: linkMap.keys.toList(),
           // linkStyle: TextStyle(fontSize: 18.0, color: Colors.red),
           onLink: (textTap) {
-            ddlog(textTap);
+            DLog.d(textTap);
           },
         ),
       ),
@@ -300,7 +300,7 @@ xxxx十分重视用户权利及隐私政策并严格按照相关法律法规的�
   void matchRegExp() {
     final reg = RegExp(r'《[^《》]+》', multiLine: true).allMatches(text);
     final list = reg.map((e) => e.group(0)).toList();
-    ddlog(list);
+    DLog.d(list);
 
     var str3 = '''
   Multi
@@ -314,11 +314,11 @@ xxxx十分重视用户权利及隐私政策并严格按照相关法律法规的�
     debugPrint(result1);
 
     var s = 'bezkoder';
-    ddlog(s.padLeft(10)); // '  bezkoder'
-    ddlog(s.padLeft(10, ' ')); // '==bezkoder'
+    DLog.d(s.padLeft(10)); // '  bezkoder'
+    DLog.d(s.padLeft(10, ' ')); // '==bezkoder'
 
-    ddlog(s.padRight(12)); // 'bezkoder  '
-    ddlog(s.padRight(12, '=')); // 'bezkoder=='
+    DLog.d(s.padRight(12)); // 'bezkoder  '
+    DLog.d(s.padRight(12, '=')); // 'bezkoder=='
   }
 
   void onLink(String? text) {
