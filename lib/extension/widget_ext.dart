@@ -293,8 +293,7 @@ extension ScrollViewExt on ScrollView {
         thumbVisibility: isAlwaysShown,
         thickness: thickness,
         radius: radius,
-        notificationPredicate:
-            notificationPredicate ?? defaultScrollNotificationPredicate,
+        notificationPredicate: notificationPredicate ?? defaultScrollNotificationPredicate,
         child: this,
       );
 }
@@ -307,9 +306,7 @@ extension FlexExt on Flex {
   }) =>
       CustomScrollView(
         key: key,
-        slivers: children
-            .map((e) => itemBuilder?.call(e) ?? e.toSliverToBoxAdapter())
-            .toList(),
+        slivers: children.map((e) => itemBuilder?.call(e) ?? e.toSliverToBoxAdapter()).toList(),
         clipBehavior: clipBehavior,
       );
 }
@@ -348,9 +345,7 @@ extension ListViewExt on ListView {
 extension CustomScrollViewExt on CustomScrollView {
   /// 转为 ListView
   ListView toListView() {
-    final children = slivers
-        .map((e) => (e is SliverToBoxAdapter ? e.child ?? SizedBox() : e))
-        .toList();
+    final children = slivers.map((e) => (e is SliverToBoxAdapter ? e.child ?? SizedBox() : e)).toList();
     return ListView(
       key: key,
       scrollDirection: scrollDirection,
@@ -380,9 +375,7 @@ extension CustomScrollViewExt on CustomScrollView {
     TextDirection? textDirection,
     Clip clipBehavior = Clip.none,
   }) {
-    final children = slivers
-        .map((e) => (e is SliverToBoxAdapter ? e.child ?? SizedBox() : e))
-        .toList();
+    final children = slivers.map((e) => (e is SliverToBoxAdapter ? e.child ?? SizedBox() : e)).toList();
     return Flex(
       key: key,
       direction: direction,

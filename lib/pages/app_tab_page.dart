@@ -7,32 +7,28 @@
 //
 
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/Pages/app_user_center_page.dart';
 import 'package:flutter_templet_project/Pages/second_page.dart';
 import 'package:flutter_templet_project/basicWidget/enhance/bottom_navigation_bar/n_bottom_navigation_bar.dart';
-import 'package:flutter_templet_project/cache/cache_service.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
-import 'package:flutter_templet_project/extension/button_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/network/proxy/dio_proxy.dart';
 import 'package:flutter_templet_project/pages/app_tab_bar_controller.dart';
-import 'package:flutter_templet_project/pages/demo/APPDrawerMenuPage.dart';
+import 'package:flutter_templet_project/pages/demo/AppDrawerMenuPage.dart';
 import 'package:flutter_templet_project/pages/demo/TabBarViewDemo.dart';
 import 'package:flutter_templet_project/pages/tabBar_tabBarView_demo.dart';
 import 'package:flutter_templet_project/pages/third_page.dart';
 import 'package:flutter_templet_project/provider/color_filtered_provider.dart';
+import 'package:flutter_templet_project/routes/AppRouteObserver.dart';
 import 'package:flutter_templet_project/util/AppLifecycleObserver.dart';
 import 'package:get/get.dart';
 
-import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
 import 'package:tuple/tuple.dart';
 
@@ -116,6 +112,10 @@ class _AppTabPageState extends State<AppTabPage> with WidgetsBindingObserver, Ap
     // appController.appState.listen((event) {
     //   DLog.d("$widget appController.appState.listen ${event}");
     // });
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      AppRouteObserver.resetRoute();
+    });
   }
 
   @override
@@ -129,8 +129,8 @@ class _AppTabPageState extends State<AppTabPage> with WidgetsBindingObserver, Ap
   Widget build(BuildContext context) {
     final page = Scaffold(
       key: kScaffoldKey,
-      drawer: APPDrawerMenuPage(),
-      endDrawer: APPDrawerMenuPage(),
+      drawer: AppDrawerMenuPage(),
+      endDrawer: AppDrawerMenuPage(),
       // appBar: buildAppBar(),
       bottomNavigationBar: Theme(
         data: Theme.of(context).copyWith(

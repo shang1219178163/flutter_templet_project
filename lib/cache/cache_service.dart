@@ -8,32 +8,29 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 /// CacheService 阎村key
 enum CacheKey {
-  localOperateLog(name: "localOperateLog", needLogin: false, desc: "本地操作日志缓存"),
-  requestEnv(name: "requestEnv", needLogin: false, desc: "请求环境"),
-  requestEnvDevOrigin(name: "requestEnvDevOrigin", needLogin: false, desc: "请求环境(dev)"),
-  requestError(name: "requestError", needLogin: false, desc: "请求错误缓存"),
-  appName(name: "appName", needLogin: false, desc: "App名称"),
-  appVersion(name: "appVersion", needLogin: false, desc: "App版本号"),
-  appVersionCode(name: "appVersionCode", needLogin: false, desc: "App版本号(安卓)"),
-  appPackageName(name: "appPackageName", needLogin: false, desc: "App包名Com.Yilian.Ylhealthapp"),
-  token(name: "token", needLogin: false, desc: "token"),
-  loginAccount(name: "loginAccount", needLogin: false, desc: "用户登录账号"),
-  loginPwd(name: "loginPwd", needLogin: false, desc: "账号密码"),
-  userId(name: "userId", needLogin: true, desc: "用户id"),
-  registrationId(name: "registrationId", needLogin: true, desc: "极光注册id"),
-  lastJPush(name: "lastJPush", needLogin: true, desc: "极光推送消息"),
-  lastRequestError(name: "lastRequestError", needLogin: true, desc: "最后一次请求报错"),
-  tagRootModel(name: "tagRootModel", needLogin: true, desc: "标签缓存"),
-  accountList(name: "accountList", needLogin: false, desc: "账号列表");
+  localOperateLog(needLogin: false, desc: "本地操作日志缓存"),
+  requestEnv(needLogin: false, desc: "请求环境"),
+  requestEnvDevOrigin(needLogin: false, desc: "请求环境(dev)"),
+  requestError(needLogin: false, desc: "请求错误缓存"),
+  appName(needLogin: false, desc: "App名称"),
+  appVersion(needLogin: false, desc: "App版本号"),
+  appVersionCode(needLogin: false, desc: "App版本号(安卓)"),
+  appPackageName(needLogin: false, desc: "App包名Com.Yilian.Ylhealthapp"),
+  token(needLogin: false, desc: "token"),
+  loginAccount(needLogin: false, desc: "用户登录账号"),
+  loginPwd(needLogin: false, desc: "账号密码"),
+  userId(needLogin: true, desc: "用户id"),
+  registrationId(needLogin: true, desc: "极光注册id"),
+  lastJPush(needLogin: true, desc: "极光推送消息"),
+  lastRequestError(needLogin: true, desc: "最后一次请求报错"),
+  tagRootModel(needLogin: true, desc: "标签缓存"),
+  accountList(needLogin: false, desc: "账号列表"),
+  lastPageRoute(needLogin: true, desc: "最后一次在的页面路由");
 
   const CacheKey({
-    required this.name,
     required this.desc,
     required this.needLogin,
   });
-
-  /// 缓存name
-  final String name;
 
   /// 当前枚举对应的 描述文字
   final String desc;
