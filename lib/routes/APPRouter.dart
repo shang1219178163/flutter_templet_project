@@ -231,6 +231,7 @@ import 'package:flutter_templet_project/pages/demo/PageViewDemoThree.dart';
 import 'package:flutter_templet_project/pages/demo/PageViewVerticalDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PhysicalModelDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PickerDemo.dart';
+import 'package:flutter_templet_project/pages/demo/PlatformDispatcherDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PopScopeDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PositionedDirectionalDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PreferredSizeDemo.dart';
@@ -826,6 +827,7 @@ class APPRouter {
   static const String weatherHome = '/weatherHome';
   static const String audioVisualizerDemo = '/audioVisualizerDemo';
   static const String listenableDemo = '/listenableDemo';
+  static const String platformDispatcherDemo = '/PlatformDispatcherDemo';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -2454,6 +2456,10 @@ class AppPage {
     GetPage(
       name: APPRouter.listenableDemo,
       page: () => ListenableDemo(),
+    ),
+    GetPage(
+      name: APPRouter.platformDispatcherDemo,
+      page: () => PlatformDispatcherDemo(),
     ),
   ];
 }
