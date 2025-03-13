@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
-import 'package:flutter_templet_project/mixin/keyboard_change_mixin.dart';
+
 import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:tuple/tuple.dart';
 
@@ -19,15 +19,13 @@ class KeyboardAttachDemo extends StatefulWidget {
   _KeyboardAttachDemoState createState() => _KeyboardAttachDemoState();
 }
 
-class _KeyboardAttachDemoState extends State<KeyboardAttachDemo>
-    with WidgetsBindingObserver, KeyboardChangeMixin {
+class _KeyboardAttachDemoState extends State<KeyboardAttachDemo> with WidgetsBindingObserver {
   final _textController = TextEditingController();
 
   final isKeyboardVisibleVN = ValueNotifier(false);
 
-  Widget get safeAreaBottom => SizedBox(
-      height: max(MediaQuery.of(context).viewInsets.bottom,
-          MediaQuery.of(context).viewPadding.bottom));
+  Widget get safeAreaBottom =>
+      SizedBox(height: max(MediaQuery.of(context).viewInsets.bottom, MediaQuery.of(context).viewPadding.bottom));
 
   @override
   void onKeyboardChanged(bool visible) {
@@ -45,8 +43,7 @@ class _KeyboardAttachDemoState extends State<KeyboardAttachDemo>
   void initState() {
     // TODO: implement initState
     SystemChannels.navigation.setMethodCallHandler((call) {
-      debugPrint(
-          '<SystemChannels.navigation> ${call.method} (${call.arguments})');
+      debugPrint('<SystemChannels.navigation> ${call.method} (${call.arguments})');
       /*
    popRoute
    pushRoute
@@ -238,8 +235,7 @@ class _KeyboardAttachDemoState extends State<KeyboardAttachDemo>
         return Container(
           // height: viewInsets.bottom,
           color: Colors.white,
-          child: StatefulBuilder(
-              builder: (BuildContext context, StateSetter setState) {
+          child: StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
             return Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,

@@ -159,6 +159,7 @@ import 'package:flutter_templet_project/pages/demo/ListViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ListViewOneDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ListViewStyleDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ListWheelScrollViewDemo.dart';
+import 'package:flutter_templet_project/pages/demo/ListenableDemo.dart';
 import 'package:flutter_templet_project/pages/demo/LocalImagePage.dart';
 import 'package:flutter_templet_project/pages/demo/LoginPage.dart';
 import 'package:flutter_templet_project/pages/demo/LoginPageOne.dart';
@@ -824,6 +825,7 @@ class APPRouter {
   static const String nestedScrollViewDemoFour = '/nestedScrollViewDemoFour';
   static const String weatherHome = '/weatherHome';
   static const String audioVisualizerDemo = '/audioVisualizerDemo';
+  static const String listenableDemo = '/listenableDemo';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -2447,6 +2449,11 @@ class AppPage {
     GetPage(
       name: APPRouter.audioVisualizerDemo,
       page: () => AudioVisualizerDemo(),
+    ),
+
+    GetPage(
+      name: APPRouter.listenableDemo,
+      page: () => ListenableDemo(),
     ),
   ];
 }

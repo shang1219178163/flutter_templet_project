@@ -18,7 +18,7 @@ import 'package:flutter_templet_project/extension/list_ext.dart';
 import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/mixin/bottom_sheet_phrases_mixin.dart';
-import 'package:flutter_templet_project/mixin/keyboard_change_mixin.dart';
+
 import 'package:flutter_templet_project/mixin/safe_set_state_mixin.dart';
 import 'package:flutter_templet_project/model/im_msg_list_root_model.dart';
 import 'package:flutter_templet_project/pages/demo/EmojiPage.dart';
@@ -43,7 +43,6 @@ class _ImChatPageState extends State<ImChatPage>
         SingleTickerProviderStateMixin,
         RouteAware,
         WidgetsBindingObserver,
-        KeyboardChangeMixin,
         SafeSetStateMixin,
         BottomSheetPhrasesMixin {
   bool get hideApp => Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
