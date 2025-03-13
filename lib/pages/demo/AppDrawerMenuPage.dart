@@ -1,10 +1,13 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_templet_project/APPThemeSettings.dart';
+import 'package:flutter_templet_project/cache/cache_service.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/route_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
+import 'package:flutter_templet_project/model/cell_model.dart';
 import 'package:flutter_templet_project/provider/color_filtered_provider.dart';
 import 'package:flutter_templet_project/routes/APPRouter.dart';
 import 'package:get/get.dart';
@@ -21,14 +24,20 @@ class AppDrawerMenuPage extends StatefulWidget {
 }
 
 class _AppDrawerMenuPageState extends State<AppDrawerMenuPage> {
-  final items = <Tuple3<IconData, String, String>>[
-    Tuple3(Icons.person, "我的", "mine"),
-    Tuple3(Icons.volume_up, "消息", "notice"),
-    Tuple3(Icons.settings, "设置", "setting"),
-    Tuple3(Icons.share, "分享", "share"),
-    Tuple3(Icons.open_in_new, "退出", "exit"),
-    Tuple3(Icons.color_lens_outlined, "主题色", APPRouter.themeColorDemo),
-    Tuple3(Icons.terminal, "本地日志", APPRouter.jPushInfoPage),
+  final items = <CellModel>[
+    CellModel(icon: Icons.person, title: "我的"),
+    CellModel(icon: Icons.open_in_new, title: "退出"),
+    CellModel(icon: Icons.color_lens_outlined, title: "主题色", arguments: {
+      "name": APPRouter.themeColorDemo,
+    }),
+    CellModel(icon: Icons.terminal, title: "本地日志", arguments: {
+      "name": APPRouter.jPushInfoPage,
+    }),
+    CellModel(
+      icon: Icons.recycling,
+      title: "记录路由",
+      isOpen: CacheService().getBool(CacheKey.resetLastPageRoute.name) ?? false,
+    ),
   ];
 
   bool isGrey = false;
@@ -53,43 +62,77 @@ class _AppDrawerMenuPageState extends State<AppDrawerMenuPage> {
               padding: EdgeInsets.zero, //去掉顶部灰色部分
               children: <Widget>[
                 ...buildHeader(),
-                ...items
-                    .map((e) => Column(
-                          children: [
-                            ListTile(
-                              dense: true,
+                ...items.map((e) {
+                  if (e.isOpen != null) {
+                    return Column(
+                      children: [
+                        StatefulBuilder(
+                          builder: (BuildContext context, StateSetter setState) {
+                            final open = e.isOpen ?? false;
+                            return ListTile(
+                              dense: false,
                               contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-                              leading: Icon(e.item1),
-                              title: Text(e.item2, style: TextStyle(fontSize: 16.0)),
-                              trailing: Icon(Icons.chevron_right),
+                              leading: Icon(e.icon),
+                              title: Text(e.title, style: TextStyle(fontSize: 16.0)),
+                              trailing: Switch(
+                                onChanged: (bool value) {
+                                  e.isOpen = !open;
+                                  setState(() {});
+                                  CacheService().setBool(CacheKey.resetLastPageRoute.name, e.isOpen);
+                                  DLog.d(
+                                      "resetLastPageRoute: ${CacheService().getBool(CacheKey.resetLastPageRoute.name)}");
+                                },
+                                value: open,
+                              ),
                               // horizontalTitleGap: 0,
                               minLeadingWidth: 0,
                               minVerticalPadding: 0,
                               onTap: () {
-                                Navigator.pop(context);
-                                Get.toNamed(e.item3,
-                                    arguments: RouteSettings(
-                                      name: e.item3,
-                                      arguments: {
-                                        "name": e.item3,
-                                        "args": "args",
-                                      },
-                                    ).toJson());
+                                DLog.d("退出");
                               },
-                            ),
-                            Divider(),
-                          ],
-                        ))
-                    .toList(),
+                            );
+                          },
+                        ),
+                        Divider(height: 1),
+                      ],
+                    );
+                  }
+                  return Column(
+                    children: [
+                      ListTile(
+                        dense: true,
+                        contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                        leading: Icon(e.icon),
+                        title: Text(e.title, style: TextStyle(fontSize: 16.0)),
+                        trailing: Icon(Icons.chevron_right),
+                        // horizontalTitleGap: 0,
+                        minLeadingWidth: 0,
+                        minVerticalPadding: 0,
+                        onTap: () {
+                          Navigator.pop(context);
+
+                          final name = e.arguments?["name"] as String? ?? "";
+                          Get.toNamed(name,
+                              arguments: RouteSettings(
+                                name: name,
+                                arguments: {
+                                  "name": name,
+                                  "args": "args",
+                                },
+                              ).toJson());
+                        },
+                      ),
+                      Divider(height: 1),
+                    ],
+                  );
+                }).toList(),
                 buildGrayMode(),
                 Divider(height: 1),
               ],
             ),
             Column(
               children: [
-                SizedBox(
-                  height: 12,
-                ),
+                SizedBox(height: 12),
                 ...buildFooter(),
               ],
             )
@@ -171,7 +214,6 @@ class _AppDrawerMenuPageState extends State<AppDrawerMenuPage> {
 
   buildGrayMode() {
     var filteredProvider = Provider.of<ColorFilteredProvider>(context);
-
     return ListTile(
       dense: false,
       contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),

@@ -25,7 +25,8 @@ enum CacheKey {
   lastRequestError(needLogin: true, desc: "最后一次请求报错"),
   tagRootModel(needLogin: true, desc: "标签缓存"),
   accountList(needLogin: false, desc: "账号列表"),
-  lastPageRoute(needLogin: true, desc: "最后一次在的页面路由");
+  lastPageRoute(needLogin: true, desc: "重启app前页面路由"),
+  resetLastPageRoute(needLogin: true, desc: "是否恢复重启前页面路由");
 
   const CacheKey({
     required this.desc,

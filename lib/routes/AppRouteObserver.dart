@@ -37,6 +37,11 @@ class AppRouteObserver {
 
   /// 恢复路由
   static Future<void> resetRoute() async {
+    final isReset = CacheService().getBool(CacheKey.resetLastPageRoute.name) ?? false;
+    // DLog.d("resetLastPageRoute: ${CacheService().getBool(CacheKey.resetLastPageRoute.name)}");
+    if (!isReset) {
+      return;
+    }
     final lastRouteInfo = CacheService().getMap(CacheKey.lastPageRoute.name);
     final settings = RouteSettingsExt.fromJson(lastRouteInfo);
     if (AppPage.routes.firstWhereOrNull((e) => e.name == settings.name) == null) {
