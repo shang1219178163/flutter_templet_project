@@ -101,33 +101,3 @@ extension ValueChangedExt<T> on ValueChanged<T> {
     debounceFn(() => this.call(value));
   }
 }
-
-extension FutureExt on Future {
-  /// 打印代码执行时间
-  Future codeExecution() async {
-    final stime = DateTime.now();
-    await this;
-    var etime = DateTime.now();
-    final inMilliseconds = etime.difference(stime).inMilliseconds;
-    debugPrint("codeExecution $etime 执行时长：$inMilliseconds 毫秒.");
-  }
-
-  FutureBuilder when<T>({
-    required Widget Function(T? data) data,
-    required Widget Function(Object? e, StackTrace? s) error,
-    required Widget Function()? loading,
-  }) {
-    return FutureBuilder(
-      future: this,
-      builder: (context, snapshot) {
-        if (snapshot.connectionState != ConnectionState.done) {
-          return loading?.call() ?? const CupertinoActivityIndicator();
-        }
-        if (snapshot.hasError) {
-          return error(snapshot.error, snapshot.stackTrace);
-        }
-        return data(snapshot.data as T?);
-      },
-    );
-  }
-}
