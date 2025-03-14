@@ -15,10 +15,8 @@ final _debounceMap = <Function, Debounce>{};
 
 extension FunctionExt on Function {
   /// 同 Function.apply
-  static apply(Function function, List<dynamic>? positionalArguments,
-      [Map<String, dynamic>? namedArguments]) {
-    final arguments =
-        namedArguments?.map((key, value) => MapEntry(Symbol(key), value));
+  static apply(Function function, List<dynamic>? positionalArguments, [Map<String, dynamic>? namedArguments]) {
+    final arguments = namedArguments?.map((key, value) => MapEntry(Symbol(key), value));
     return Function.apply(function, positionalArguments, arguments);
   }
 
@@ -27,18 +25,14 @@ extension FunctionExt on Function {
     List<dynamic>? positionalArguments,
     Map<String, dynamic>? namedArguments,
   }) {
-    final arguments =
-        namedArguments?.map((key, value) => MapEntry(Symbol(key), value));
+    final arguments = namedArguments?.map((key, value) => MapEntry(Symbol(key), value));
     return Function.apply(this, positionalArguments, arguments);
   }
 
   /// try catch 包装 applyNew
-  tryCall(List<dynamic>? positionalArguments,
-      [Map<String, dynamic>? namedArguments]) {
+  tryCall(List<dynamic>? positionalArguments, [Map<String, dynamic>? namedArguments]) {
     try {
-      return applyNew(
-          positionalArguments: positionalArguments,
-          namedArguments: namedArguments);
+      return applyNew(positionalArguments: positionalArguments, namedArguments: namedArguments);
     } catch (e) {
       debugPrint("$this $e");
     }
@@ -93,8 +87,8 @@ extension VoidCallbackExt on VoidCallback {
 
 extension ValueChangedExt<T> on ValueChanged<T> {
   /// 防抖
-  debounce({
-    required T value,
+  debounce(
+    T value, {
     Duration duration = const Duration(milliseconds: 500),
   }) {
     var debounceFn = getDebounceFn(duration: duration);

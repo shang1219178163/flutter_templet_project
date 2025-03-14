@@ -11,6 +11,7 @@ import 'package:flutter_templet_project/basicWidget/n_textfield_search.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/function_ext.dart';
+import 'package:flutter_templet_project/extension/future_ext.dart';
 import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/util/Debounce.dart';
 
@@ -83,7 +84,7 @@ class _TestFunctionState extends State<TestFunction> {
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               child: NSearchTextField(
                 backgroundColor: Colors.black12,
-                onChanged: (val) => onChanged.debounce(value: val),
+                onChanged: (val) => onChanged.debounce(val),
               ),
             )
           ],

@@ -565,17 +565,17 @@ class _DataTypeDemoState extends State<DataTypeDemo> with WidgetsBindingObserver
   }
 
   void printFormat() {
-    // final list = [
-    //   '***************************************************',
-    //   '',
-    //   'ISAR CONNECT STARTED',
-    //   '',
-    //   'Open the link to connect to the Isar',
-    //   'Inspector while this build is running.',
-    //   '',
-    //   '***************************************************',
-    // ];
-    // DLog.center(list);
+    final list = [
+      '***************************************************',
+      '',
+      'ISAR CONNECT STARTED',
+      '',
+      'Open the link to connect to the Isar',
+      'Inspector while this build is running.',
+      '',
+      '***************************************************',
+    ];
+    DLog.center(list);
   }
 
   void onPrint() {

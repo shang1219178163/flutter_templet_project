@@ -178,9 +178,7 @@ class NSearchTextField extends StatelessWidget {
           onTap: onSuffixTap ?? onClear,
           child: suffixNew,
         ),
-        onChanged: debounceDuration == null
-            ? onChanged
-            : (v) => onChanged.debounce(duration: debounceDuration!, value: v),
+        onChanged: debounceDuration == null ? onChanged : (v) => onChanged.debounce(v, duration: debounceDuration!),
         onSubmitted: onChanged,
         enabled: enabled,
         autofocus: autofocus,
