@@ -126,6 +126,7 @@ final mediaQueryData = MediaQueryData.fromView(keyView);
   void onPrint() {
     final keyView = WidgetsBinding.instance.platformDispatcher.views.first;
     final mediaQueryData = MediaQueryData.fromView(keyView);
+    double dpr = View.of(context).devicePixelRatio;
 
     DLog.d([
       WidgetsBinding.instance.platformDispatcher.views,
