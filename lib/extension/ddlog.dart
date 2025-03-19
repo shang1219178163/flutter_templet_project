@@ -42,8 +42,11 @@ import 'package:flutter/foundation.dart';
 // }
 
 class DLog {
-  // 是否启用日志打印
+  /// 是否启用日志打印
   static bool enableLog = true;
+
+  /// 开启颜色
+  static bool enableColor = false;
 
   // ANSI 颜色代码
   static const String _ansiReset = '\x1B[0m';
@@ -166,9 +169,13 @@ class DLog {
   // 原生平台的打印实现
   static void _printLogNative(String level, String message, String ansiColor) {
     final sb = StringBuffer();
-    sb.write(ansiColor);
+    if (enableColor) {
+      sb.write(ansiColor);
+    }
     sb.write(message);
-    sb.write(_ansiReset);
+    if (enableColor) {
+      sb.write(_ansiReset);
+    }
     developer.log(sb.toString());
   }
 }
