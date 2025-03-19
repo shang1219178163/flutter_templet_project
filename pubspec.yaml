@@ -260,11 +260,11 @@ dependency_overrides:
 
   url_launcher_ios: ^6.3.1
 
-#  flutter_inappwebview_ios:
-#    git:
-#      url: https://github.com/andychucs/flutter_inappwebview.git
-#      ref: master
-#      path: flutter_inappwebview_ios
+  flutter_inappwebview_ios:
+    git:
+      url: https://github.com/andychucs/flutter_inappwebview.git
+      ref: master
+      path: flutter_inappwebview_ios
 
 
 # User:
