@@ -121,11 +121,11 @@ class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
     _showDatePicker(
       context: context,
       onCancel: () {
-        ddlog("${DateTime.now()}");
+        DLog.d("${DateTime.now()}");
         Navigator.of(context).pop();
       },
       onConfirm: () {
-        ddlog("${DateTime.now()}");
+        DLog.d("${DateTime.now()}");
         Navigator.of(context).pop();
       },
       onDateTimeChanged: (DateTime val) {
@@ -184,7 +184,7 @@ class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
 // height: 500,
         child: TextButton(
           onPressed: () {
-            ddlog("Button");
+            DLog.d("Button");
           },
           child: Text("Button"),
         ),
@@ -221,7 +221,7 @@ class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
           ),
           onTap: () {
             // Navigator.of(context).pop(idx);
-            ddlog(item);
+            DLog.d(item);
             selectedItem = item;
           },
         );
@@ -246,7 +246,7 @@ class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
             title: "单选",
             confirmTitle: "",
             onConfirm: () {
-              ddlog("NPickerToolBar");
+              DLog.d("NPickerToolBar");
             },
           ),
           const Divider(height: 0.5),
@@ -257,7 +257,7 @@ class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
               indexs: [0],
               canScroll: true,
               callback: (Object index) {
-                ddlog(index);
+                DLog.d(index);
               },
             ),
           ),
@@ -288,7 +288,7 @@ class _PickerDemoState extends State<PickerDemo> with BottomSheetMixin {
           indexs: [0],
           canScroll: true,
           callback: (Object index) {
-            ddlog(index);
+            DLog.d(index);
           },
         ),
       ),
@@ -496,7 +496,7 @@ class _DatePickerDemoState extends State<DatePickerDemo> {
 //   context.showDatePicker(
 //       mode: CupertinoDatePickerMode.date,
 //       callback: (datetime, title){
-//     ddlog("$datetime, $title");
+//     DLog.d("$datetime, $title");
 //     if (title == "取消") {
 //       return;
 //     }

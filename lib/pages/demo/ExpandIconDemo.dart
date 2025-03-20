@@ -101,12 +101,10 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
                 // foldCount: 2,
                 isVisible: isVisible,
                 onValueChanged: (row, index, indexs) {
-                  ddlog("$row, $index, $indexs");
+                  DLog.d("$row, $index, $indexs");
                 },
                 indicator: IconButton(
-                  icon: isExpanded
-                      ? Icon(Icons.keyboard_arrow_up)
-                      : Icon(Icons.keyboard_arrow_down),
+                  icon: isExpanded ? Icon(Icons.keyboard_arrow_up) : Icon(Icons.keyboard_arrow_down),
                   onPressed: onToggle,
                 ),
               ),
@@ -121,12 +119,10 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
                 // foldCount: 3,
                 isVisible: isVisible,
                 onValueChanged: (row, index, indexs) {
-                  ddlog("$row, $index, $indexs");
+                  DLog.d("$row, $index, $indexs");
                 },
                 indicator: IconButton(
-                  icon: isExpanded
-                      ? Icon(Icons.keyboard_arrow_up)
-                      : Icon(Icons.keyboard_arrow_down),
+                  icon: isExpanded ? Icon(Icons.keyboard_arrow_up) : Icon(Icons.keyboard_arrow_down),
                   onPressed: onToggle,
                 ),
               ),
@@ -171,7 +167,7 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
                 return InkWell(
                   onTap: () {
                     selectedColor.value = e;
-                    ddlog(
+                    DLog.d(
                       e.nameDes,
                     );
                     setState(() {});
@@ -206,7 +202,7 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
       // itemWidths: itemWiths,
       selectedIndex: 0,
       onValueChanged: (index) {
-        ddlog(index);
+        DLog.d(index);
       },
     );
   }
@@ -223,18 +219,14 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
           visible: _isShowing,
           child: Column(children: [
             SizedBox(height: 5),
-            buildListViewHorizontal(
-                titles: List.generate(8, (index) => "item4_$index")),
+            buildListViewHorizontal(titles: List.generate(8, (index) => "item4_$index")),
             SizedBox(height: 5),
-            buildListViewHorizontal(
-                titles: List.generate(8, (index) => "item5_$index")),
+            buildListViewHorizontal(titles: List.generate(8, (index) => "item5_$index")),
             SizedBox(height: 5),
           ]),
         ),
         IconButton(
-          icon: _isShowing
-              ? Icon(Icons.keyboard_arrow_up)
-              : Icon(Icons.keyboard_arrow_down),
+          icon: _isShowing ? Icon(Icons.keyboard_arrow_up) : Icon(Icons.keyboard_arrow_down),
           onPressed: () {
             setState(() {
               _isShowing = !_isShowing;
@@ -280,9 +272,7 @@ class _ExpandIconDemoState extends State<ExpandIconDemo> {
           ),
         ),
         IconButton(
-          icon: isVisible
-              ? Icon(Icons.keyboard_arrow_up)
-              : Icon(Icons.keyboard_arrow_down),
+          icon: isVisible ? Icon(Icons.keyboard_arrow_up) : Icon(Icons.keyboard_arrow_down),
           onPressed: () {
             isVisible = !isVisible;
             setState(() {});
@@ -501,9 +491,7 @@ class _ExpansionTileCardState extends State<ExpansionTileCard> {
     bool isExpand = true,
     Color color = Colors.blueAccent,
   }) {
-    final tuple = isExpand
-        ? (title: "收起", icon: Icons.expand_less)
-        : (title: "展开", icon: Icons.expand_more);
+    final tuple = isExpand ? (title: "收起", icon: Icons.expand_less) : (title: "展开", icon: Icons.expand_more);
 
     return Icon(
       tuple.icon,

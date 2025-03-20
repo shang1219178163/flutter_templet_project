@@ -28,6 +28,7 @@ class NMenuAnchor<E> extends StatelessWidget {
     required this.cbName,
     this.placeholder = "请选择",
     this.leadingIconBuilder,
+    this.dropItemPadding = const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
   });
 
   final MenuController? controller;
@@ -64,6 +65,8 @@ class NMenuAnchor<E> extends StatelessWidget {
 
   final Widget Function(bool isSelected)? leadingIconBuilder;
 
+  final EdgeInsets? dropItemPadding;
+
   @override
   Widget build(BuildContext context) {
     var selectedItem = initialItem;
@@ -81,12 +84,13 @@ class NMenuAnchor<E> extends StatelessWidget {
           final isSelected = equal(e, selectedItem);
 
           return MenuItemButton(
-            style: dropButtonStyle,
-            // style: ButtonStyle(
-            //   padding: MaterialStatePropertyAll(EdgeInsets.all(8)),
-            //   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            //   // backgroundColor: MaterialStateProperty.all(Colors.yellow),
-            // ),
+            style: dropButtonStyle ??
+                ButtonStyle(
+                  padding: MaterialStatePropertyAll(dropItemPadding ?? EdgeInsets.zero),
+                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  minimumSize: MaterialStatePropertyAll(Size(20, 18)),
+                  // backgroundColor: MaterialStateProperty.all(Colors.yellow),
+                ),
             leadingIcon: leadingIconBuilder?.call(isSelected) ??
                 Icon(
                   Icons.check,
@@ -120,6 +124,9 @@ class NMenuAnchor<E> extends StatelessWidget {
                       // foregroundColor: Color(0xff5690F4),
                       elevation: 0,
                       // shape: StadiumBorder(),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(4.0),
+                      ),
                       tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                       // minimumSize: Size(64, 32),
                       padding: EdgeInsets.only(left: 8, right: 2, top: 6, bottom: 6),

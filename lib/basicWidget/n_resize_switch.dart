@@ -16,7 +16,7 @@ class NResizeSwitch extends StatefulWidget {
     this.width,
     this.height,
     this.value = false,
-    this.onChanged,
+    required this.onChanged,
     this.child,
   });
 

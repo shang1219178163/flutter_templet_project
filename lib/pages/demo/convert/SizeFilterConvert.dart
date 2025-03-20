@@ -452,7 +452,7 @@ class SizeFilterConvert extends ConvertProtocol {
         return false;
       }
       // if (e.contains("dialog/")) {
-      //   ddlog("${lines.indexOf(content)}:$e");
+      //   DLog.d("${lines.indexOf(content)}:$e");
       // }
 
       List<String> parts = e.split(RegExp(r'[\[\]]'));
@@ -463,7 +463,7 @@ class SizeFilterConvert extends ConvertProtocol {
       final num = double.tryParse(size.replaceFirst("K", "").trim()) ?? 0;
       final result = num > 20.0;
       // if (result) {
-      //   ddlog("${lines.indexOf(content)}:$e, $num, $result");
+      //   DLog.d("${lines.indexOf(content)}:$e, $num, $result");
       // }
       return result;
     }).toList();
@@ -483,8 +483,7 @@ class SizeFilterConvert extends ConvertProtocol {
     var clsName = "BigFile";
     var clsNameNew = clsName;
 
-    final fileName =
-        "${clsNameNew.toUncamlCase("_")}_${DateTime.now().toString19()}"
+    final fileName = "${clsNameNew.toUncamlCase("_")}_${DateTime.now().toString19()}"
         ".dart";
     final contentNew = """
 ${exports.join("\n")}

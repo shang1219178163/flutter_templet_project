@@ -58,7 +58,7 @@ class _SystemColorPageState extends State<SystemColorPage> {
         actions: [
           TextButton(
             onPressed: () {
-              ddlog("$widget");
+              DLog.d("$widget");
             },
             child: Text(
               "Done",
@@ -78,8 +78,7 @@ class _SystemColorPageState extends State<SystemColorPage> {
         tap: (obj) {
           debugPrint("obj:$obj");
         },
-        itemBuilder: (context, index, searchResults) =>
-            _buildCell(context, index, searchResults),
+        itemBuilder: (context, index, searchResults) => _buildCell(context, index, searchResults),
       ),
     );
   }
@@ -101,7 +100,7 @@ class _SystemColorPageState extends State<SystemColorPage> {
       title: Text("$str"),
       subtitle: Text(subtitle),
       onTap: () {
-        ddlog(str);
+        DLog.d(str);
         final value = "$str".split('.').last;
 
         final ctx = _globalKey.currentContext;

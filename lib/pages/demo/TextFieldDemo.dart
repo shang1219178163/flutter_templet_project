@@ -74,6 +74,14 @@ class _TextFieldDemoState extends State<TextFieldDemo> with AssetResourceMixin {
   ];
 
   @override
+  void initState() {
+    super.initState();
+    onAssetResourceFinished = () {
+      DLog.d(assetFileModels);
+    };
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: hideApp
@@ -329,7 +337,7 @@ class _TextFieldDemoState extends State<TextFieldDemo> with AssetResourceMixin {
                     setState(() {});
                   },
                   onEditingComplete: () {
-                    ddlog("onEditingComplete");
+                    DLog.d("onEditingComplete");
                   }, //'完成'回调
                 ),
               ),
@@ -351,7 +359,7 @@ class _TextFieldDemoState extends State<TextFieldDemo> with AssetResourceMixin {
 
   void onChanged(val) {
     final index = IntExt.random(min: 1000, max: 9999);
-    ddlog("onChanged: $val, $index");
+    DLog.d("onChanged: $val, $index");
   }
 
   onPressed() {
@@ -543,6 +551,8 @@ class _TextFieldDemoState extends State<TextFieldDemo> with AssetResourceMixin {
   }
 
   Widget buildUnit() {
+    final assetFileContent = assetFileModels.firstOrNull?.content ?? "";
+
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -579,7 +589,7 @@ class _TextFieldDemoState extends State<TextFieldDemo> with AssetResourceMixin {
           ),
           NTextfieldUnit(
             name: "只读模式：",
-            value: kuanRong,
+            value: assetFileContent,
             hitText: "",
             maxLines: 9,
             onChanged: (value) {

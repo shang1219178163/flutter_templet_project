@@ -14,6 +14,7 @@ import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/n_type_writer_text.dart';
 import 'package:flutter_templet_project/cache/cache_service.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
+import 'package:flutter_templet_project/extension/future_ext.dart';
 import 'package:flutter_templet_project/extension/generic_comparable_ext.dart';
 import 'package:flutter_templet_project/extension/list_ext.dart';
 import 'package:flutter_templet_project/extension/num_ext.dart';
@@ -71,6 +72,12 @@ class _DataTypeDemoState extends State<DataTypeDemo> with WidgetsBindingObserver
     (e: "Object", action: onObject),
   ];
 
+  late final others = <ActionRecord>[
+    (e: "printFormat", action: printFormat),
+    (e: "onPrint", action: onPrint),
+    (e: "onTrackTime", action: onTrackTime),
+  ];
+
   @override
   void initState() {
     super.initState();
@@ -100,17 +107,6 @@ class _DataTypeDemoState extends State<DataTypeDemo> with WidgetsBindingObserver
           ? null
           : AppBar(
               title: Text("$widget"),
-              actions: [
-                'done',
-              ]
-                  .map((e) => TextButton(
-                        child: Text(
-                          e,
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        onPressed: () => debugPrint(e),
-                      ))
-                  .toList(),
             ),
       body: buildBody(),
     );
@@ -126,6 +122,8 @@ class _DataTypeDemoState extends State<DataTypeDemo> with WidgetsBindingObserver
           children: [
             buildSectionBox(items: specialItems),
             buildSectionBox(items: items),
+            buildSectionBox(items: others),
+
             // NTypeWriterText(
             //   text: 60.generateChars(),
             // ),
@@ -251,40 +249,40 @@ class _DataTypeDemoState extends State<DataTypeDemo> with WidgetsBindingObserver
     final a = 'Eats shoots leaves'.splitMapJoin((RegExp(r'shoots')),
         onMatch: (m) => m[0] ?? "", // (or no onMatch at all)
         onNonMatch: (n) => '*'); // Result: "*shoots*"
-    ddlog(a);
+    DLog.d(a);
 
     final b = 'Eats shoots leaves'.splitMapJoin(
       (RegExp(r's|o')),
       onMatch: (m) => "_",
     );
-    ddlog(b);
+    DLog.d(b);
 
     final c = 'Eats shoots leaves'.split(RegExp(r's|o'));
-    ddlog(c);
+    DLog.d(c);
 
     final d = "easy_refresh_plugin".toCamlCase("_");
-    ddlog(d);
+    DLog.d(d);
 
     final d1 = "easyRefreshPlugin".toUncamlCase("_");
-    ddlog(d1);
+    DLog.d(d1);
 
     final d2 = "easyRefreshPlugin".toCapitalize();
-    ddlog(d2);
+    DLog.d(d2);
 
     var aa = 85.99999;
     var bb = 488.236;
     var cc = 488.3;
 
-    ddlog(aa.toStringAsExponential(2));
-    ddlog(aa.toStringAsFixed(2));
-    ddlog(aa.toStringAsPrecision(2));
+    DLog.d(aa.toStringAsExponential(2));
+    DLog.d(aa.toStringAsFixed(2));
+    DLog.d(aa.toStringAsPrecision(2));
 
     showSnackBar(SnackBar(content: Text(d2)));
 
     int j = 0; //第n次匹配
     String pigLatin(String words) => words.replaceAllMapped(RegExp(r'([a|e])', caseSensitive: false), (Match m) {
           for (var i = 0; i < m.groupCount; i++) {
-            ddlog("${j}_m[${i}]/${m.groupCount - 1}: ${m[i]}");
+            DLog.d("${j}_m[${i}]/${m.groupCount - 1}: ${m[i]}");
             j++;
           }
 
@@ -292,7 +290,7 @@ class _DataTypeDemoState extends State<DataTypeDemo> with WidgetsBindingObserver
           return result;
         });
     final result = pigLatin('I have a secret now!');
-    ddlog(result); // 'Iway avehay away ecretsay ownay!'
+    DLog.d(result); // 'Iway avehay away ecretsay ownay!'
 
     String? a1;
     String? a2 = "a2";
@@ -304,18 +302,18 @@ class _DataTypeDemoState extends State<DataTypeDemo> with WidgetsBindingObserver
 
     a1.isNotEmpty;
 
-    ddlog("a1.isNotEmptyNew: ${a1.isNotEmpty}");
+    DLog.d("a1.isNotEmptyNew: ${a1.isNotEmpty}");
     return;
 
     // String a5 = a4.or(Text(e));
     // final a13 = a3.map((e) => Text(e));
     // final a14 = a4.map((e) => Text(e));
-    // ddlog("result13: ${[a13, a14]}");
+    // DLog.d("result13: ${[a13, a14]}");
     // return;
 
-    ddlog("resultA: $resultA");
-    ddlog("resultB: $resultB");
-    ddlog("resultC: $resultC");
+    DLog.d("resultA: $resultA");
+    DLog.d("resultB: $resultB");
+    DLog.d("resultC: $resultC");
 
     final listA = [
       a1.convert((v) => Text("A1")),
@@ -323,7 +321,7 @@ class _DataTypeDemoState extends State<DataTypeDemo> with WidgetsBindingObserver
       a3.convert((v) => Text("A3")),
       a4.convert((v) => Text("A4")),
     ];
-    ddlog(listA);
+    DLog.d(listA);
 
     // 使用正则表达式删除左边的所有0
     String strZero = "000123450";
@@ -331,7 +329,7 @@ class _DataTypeDemoState extends State<DataTypeDemo> with WidgetsBindingObserver
     debugPrint('resultZero: $resultZero');
 
     final serviceInfo = await Service.getInfo();
-    serviceInfo.printIsarConnection();
+    serviceInfo.printIsarLink();
   }
 
   void onDate() {
@@ -341,6 +339,25 @@ class _DataTypeDemoState extends State<DataTypeDemo> with WidgetsBindingObserver
   }
 
   void onList() {
+    final array1 = [
+      1,
+      [
+        2,
+        3,
+      ],
+      [
+        4,
+        [
+          5,
+          6,
+          [7, 8]
+        ]
+      ]
+    ];
+    final array1New = array1.flatMap();
+    debugPrint('array1New:$array1New');
+
+    return;
     double? z;
     double? z1;
     final list = [z, z1];
@@ -385,7 +402,7 @@ class _DataTypeDemoState extends State<DataTypeDemo> with WidgetsBindingObserver
       );
       return "选项$sufix";
     });
-    ddlog("randomItems.sorted(): ${randomItems.sorted()}");
+    DLog.d("randomItems.sorted(): ${randomItems.sorted()}");
 
     final strides = List.generate(20, (index) => "选项$index").splitStride(
       by: 4,
@@ -394,7 +411,7 @@ class _DataTypeDemoState extends State<DataTypeDemo> with WidgetsBindingObserver
         return items.getRange(start, end);
       },
     );
-    ddlog("strides: ${strides}");
+    DLog.d("strides: ${strides}");
   }
 
   void onSet() {}
@@ -406,23 +423,89 @@ class _DataTypeDemoState extends State<DataTypeDemo> with WidgetsBindingObserver
       'msgUnreadNum': 3,
     };
 
-    ddlog('getUrlParams():${getUrlParams(map: map)}');
-    ddlog('map.join():${map.join()}');
+    DLog.d('map.toQueryString():${map.toQueryString()}');
 
     final _memoryMap = <String, dynamic>{};
-
     _memoryMap['msgTag'] = null;
-    // ddlog('_memoryMap:${_memoryMap}');
     _memoryMap["sss"] = "ssss";
 
     final info = await PackageInfo.fromPlatform();
 
     await CacheService().set("info", info.data);
     final result = CacheService().get("info");
-    ddlog("info:${result}");
+    DLog.d("info:${result}");
 
     Map? a1;
-    ddlog("a1.isNotEmptyNew: ${a1.isNotEmptyNew}");
+    DLog.d("a1.isNotEmptyNew: ${a1.isNotEmptyNew}");
+
+    // 示例动态 Map
+    Map<String, dynamic> params = {
+      'name': 'John Doe',
+      'age': 25,
+      'isStudent': true,
+      'courses': ['Math', 'Science'], // 复杂值需要处理
+    };
+
+    // 转换为查询字符串
+    String queryString = params.toQueryString();
+    DLog.d('Query String: $queryString');
+    return;
+
+    mapSorted();
+  }
+
+  void mapSorted() {
+    Map<String, int> unsortedMap = {
+      'pinch': 3,
+      'banana': 5,
+      'apple': 3,
+      'cherry': 2,
+    };
+
+    // 根据 Value 和 Key 进行排序
+    sortValueAndKey<K extends Comparable, V extends Comparable>(
+      MapEntry<K, V> a,
+      MapEntry<K, V> b, {
+      bool isAsc = true,
+    }) {
+      int result = isAsc ? a.value.compareTo(b.value) : b.value.compareTo(a.value);
+      if (result != 0) {
+        return result;
+      }
+      return isAsc ? a.key.compareTo(b.key) : b.key.compareTo(a.key); // 如果值相同，按键排序
+    }
+
+    // // 自定义排序（首先按值排序，如果值相同按键排序）
+    // var sortedMap = Map.fromEntries(
+    //   unsortedMap.entries.toList()..sort(sortValueAndKey),
+    // );
+    //
+    // final sortedMapNew = unsortedMap.sortedBy(
+    //   (k) => k.value,
+    //   compare: sortValueAndKey,
+    // );
+    // final sortedMapNew1 = unsortedMap.sortedBy(
+    //   (k) => k.value,
+    //   isAsc: false,
+    //   compare: sortValueAndKey,
+    // );
+    // DLog.d('sortedMap: $sortedMap');
+    // DLog.d('sortedMapNew: $sortedMapNew');
+    // DLog.d('sortedMapNew1: $sortedMapNew1');
+    // return;
+
+    // 模型属性排序
+    Map<String, MapItem> data2 = {
+      "2022-11-01": MapItem(count: 12, name: "book"),
+      "2022-11-12": MapItem(count: 2, name: "pencil"),
+      "2022-11-05": MapItem(count: 18, name: "keyboard"),
+      "2022-11-24": MapItem(count: 8, name: "scissors"),
+    };
+
+    final sortByCount = data2.sortedBy((k) => k.value.count).toString();
+    final sortByName = data2.sortedBy((k) => k.value.name).toString();
+    DLog.d('Sort by Count: > $sortByCount');
+    DLog.d('Sort by Name : > $sortByName');
     return;
   }
 
@@ -435,9 +518,9 @@ class _DataTypeDemoState extends State<DataTypeDemo> with WidgetsBindingObserver
       final key = "key$i";
       lruMap.addAll({key: map});
       if (i > 9) {
-        ddlog("lruMap[key3]: ${lruMap["key3"]}");
+        DLog.d("lruMap[key3]: ${lruMap["key3"]}");
       }
-      ddlog("lruMap: $i, ${lruMap.length}, ${lruMap.keys.map((e) => e)}");
+      DLog.d("lruMap: $i, ${lruMap.length}, ${lruMap.keys.map((e) => e)}");
     }
   }
 
@@ -481,18 +564,6 @@ class _DataTypeDemoState extends State<DataTypeDemo> with WidgetsBindingObserver
     debugPrint('list: ${list}');
   }
 
-  getUrlParams({Map<String, dynamic> map = const {}}) {
-    if (map.keys.isEmpty) {
-      return '';
-    }
-    var paramStr = '';
-    map.forEach((key, value) {
-      paramStr += '$key=$value&';
-    });
-    var result = paramStr.substring(0, paramStr.length - 1);
-    return result;
-  }
-
   void printFormat() {
     final list = [
       '***************************************************',
@@ -507,23 +578,43 @@ class _DataTypeDemoState extends State<DataTypeDemo> with WidgetsBindingObserver
     DLog.center(list);
   }
 
+  void onPrint() {
+    DLog.d("$runtimeType d");
+    DLog.i("$runtimeType i");
+    DLog.w("$runtimeType w");
+    DLog.e("$runtimeType e");
+  }
+
+  /// 函数执行耗时统计
+  Future<void> onTrackTime() async {
+    await Future.delayed(Duration(milliseconds: 111))
+        // .then((_) => throw Exception("错误1"))
+        .trackTime("fetchData 1");
+
+    await Future.delayed(Duration(milliseconds: 555))
+        // .then((_) => throw Exception("错误2"))
+        .trackTime("fetchData 2");
+
+    await Future.delayed(Duration(milliseconds: 1200)).then((_) => throw Exception("错误3")).trackTime("fetchData 3");
+  }
+
   testData() {
     const String? a = null;
     const String? a1 = "a1";
     const List<String>? array = null;
-    ddlog([a.runtimeType, a1.runtimeType, array.runtimeType].asMap());
+    DLog.d([a.runtimeType, a1.runtimeType, array.runtimeType].asMap());
 
     const String? b = null;
-    ddlog([a.orElse(() => "456"), b.or("333"), a.convert((v) => Text("$a")), b.convert((v) => Text("$b"))].asMap());
+    DLog.d([a.orElse(() => "456"), b.or("333"), a.convert((v) => Text("$a")), b.convert((v) => Text("$b"))].asMap());
 
     final Text? z = a.convert((v) => Text("$a"));
 
     final nums = List<int>.generate(10, (i) => i);
     final val = nums.reduce((v, e) => v + e);
-    ddlog("reduce int: $val");
+    DLog.d("reduce int: $val");
 
     // for (var i = 0; i < nums.length; i++) {
-    //   ddlog("i: ${nums[i]}");
+    //   DLog.d("i: ${nums[i]}");
     //   if (i >= 3) {
     //     return;
     //   }
@@ -533,9 +624,9 @@ class _DataTypeDemoState extends State<DataTypeDemo> with WidgetsBindingObserver
 
     final array1 = nums.map((e) => "$e").toList();
     final result = array1.reduce((v, e) => v + e);
-    ddlog("reduce String: $result");
+    DLog.d("reduce String: $result");
 
-    ddlog(array.orElse(() => array1));
+    DLog.d(array.orElse(() => array1));
 
     // 定义一个数组
     List<int> numbers = [3, 7, 2, 9, 5, 1];
@@ -547,20 +638,20 @@ class _DataTypeDemoState extends State<DataTypeDemo> with WidgetsBindingObserver
       return result;
     });
 
-    ddlog("maxValue: $maxValue");
+    DLog.d("maxValue: $maxValue");
   }
 
   void onVersion() {
-    ddlog(compareVersion("1.0.33", "1.0.27")); // 输出 1
-    ddlog(compareVersion("1.0.0", "1.0.0")); // 输出 0
-    ddlog(compareVersion("1.0.1", "1.0.2")); // 输出 -1
-    ddlog(compareVersion("2.1", "2.1.0")); // 输出 0
-    ddlog(compareVersion("3.2.1", "3.2.0")); // 输出 1
-    ddlog(compareVersion("3.2.0", "3.2")); // 输出 0
+    DLog.d(compareVersion("1.0.33", "1.0.27")); // 输出 1
+    DLog.d(compareVersion("1.0.0", "1.0.0")); // 输出 0
+    DLog.d(compareVersion("1.0.1", "1.0.2")); // 输出 -1
+    DLog.d(compareVersion("2.1", "2.1.0")); // 输出 0
+    DLog.d(compareVersion("3.2.1", "3.2.0")); // 输出 1
+    DLog.d(compareVersion("3.2.0", "3.2")); // 输出 0
   }
 
   int compareVersion(String version1, String version2) {
-    ddlog("__${version1.compareVersion(version2)}"); // 输出 -1
+    DLog.d("__${version1.compareVersion(version2)}"); // 输出 -1
 
     // 将版本号字符串分割成整数列表
     List<int> v1 = version1.split('.').map(int.parse).toList();
@@ -587,5 +678,28 @@ class _DataTypeDemoState extends State<DataTypeDemo> with WidgetsBindingObserver
 
     // 如果所有部分都相等，则返回 0
     return 0;
+  }
+}
+
+/// 测试类
+class MapItem implements Codable {
+  MapItem({
+    required this.name,
+    required this.count,
+  });
+  final String name;
+  final int count;
+
+  @override
+  Map<String, dynamic> toJson() {
+    return {
+      "name": name,
+      "count": count,
+    };
+  }
+
+  @override
+  String toString() {
+    return toJson().toString();
   }
 }

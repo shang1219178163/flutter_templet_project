@@ -60,10 +60,7 @@ class User {
   String name;
   bool isSelected;
 
-  static User? fromJson(Map<String, dynamic>? map) {
-    if (map == null) {
-      return null;
-    }
+  static User fromJson(Map<String, dynamic> map) {
     return User(
       name: map["title"],
       isSelected: map["isSelected"],

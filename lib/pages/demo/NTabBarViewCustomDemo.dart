@@ -23,16 +23,14 @@ class NTabBarViewCustomDemo extends StatefulWidget {
 }
 
 class _NTabBarViewCustomDemoState extends State<NTabBarViewCustomDemo> {
-  late List<({AssetImage unselected, AssetImage selected, Widget child})>
-      items = [
+  late List<({AssetImage unselected, AssetImage selected, Widget child})> items = [
     (
       unselected: AssetImage("assets/images/icon_inquiry_pay_unselected.png"),
       selected: AssetImage("assets/images/icon_inquiry_pay_selected.png"),
       child: buildSubpage(prefix: "选项zero"),
     ),
     (
-      unselected:
-          AssetImage("assets/images/icon_inquiry_rights_unselected.png"),
+      unselected: AssetImage("assets/images/icon_inquiry_rights_unselected.png"),
       selected: AssetImage("assets/images/icon_inquiry_rights_selected.png"),
       child: buildSubpage(prefix: "选项one"),
     ),
@@ -88,10 +86,10 @@ class _NTabBarViewCustomDemoState extends State<NTabBarViewCustomDemo> {
       isThemeBg: isThemeBg,
       isScrollable: true,
       onChanged: (index) {
-        ddlog("NTabBarPage onChanged: $index");
+        DLog.d("NTabBarPage onChanged: $index");
       },
       onTabBar: (index) {
-        ddlog("NTabBarPage onTabBar: $index");
+        DLog.d("NTabBarPage onTabBar: $index");
       },
       // headerBuilder: (context, index) {
       //   return Container(

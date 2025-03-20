@@ -6,19 +6,18 @@
 //  Copyright © 12/2/21 shang. All rights reserved.
 //
 
-import 'dart:io';
-import 'dart:ui' as ui;
-
 import 'package:flutter/material.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
+import 'package:flutter_templet_project/cache/cache_service.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
+import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/duration_ext.dart';
 import 'package:flutter_templet_project/extension/file_ext.dart';
-import 'package:get/get.dart';
-import 'package:tuple/tuple.dart';
-
-import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/util/R.dart';
+import 'package:http/http.dart' as http;
+// import 'package:get/get.dart';
+import 'package:tuple/tuple.dart';
 
 class TestPage extends StatefulWidget {
   const TestPage({Key? key, this.title}) : super(key: key);
@@ -29,8 +28,7 @@ class TestPage extends StatefulWidget {
   _TestPageState createState() => _TestPageState();
 }
 
-class _TestPageState extends State<TestPage>
-    with SingleTickerProviderStateMixin {
+class _TestPageState extends State<TestPage> with SingleTickerProviderStateMixin {
   List<String> items = List.generate(6, (index) => 'item_$index').toList();
   late TabController _tabController;
 
@@ -103,9 +101,7 @@ class _TestPageState extends State<TestPage>
               ),
               buildSection4(),
               buildSection5(),
-              SizedBox(
-                height: 34,
-              ),
+              SizedBox(height: 34),
             ],
           ),
         ));
@@ -131,15 +127,15 @@ class _TestPageState extends State<TestPage>
     final b = "nested ${a ? "strings" : "can"} be wrapped by a double quote";
 
     final val = "1# 8ji#2_3I  ".toInt();
-    ddlog("val: $val");
+    DLog.d("val: $val");
 
     final duration = Duration(milliseconds: 146 * 1000);
-    ddlog("duration: $duration");
+    DLog.d("duration: $duration");
 
-    ddlog("toTimeNew: ${duration.toTimeNew()}");
-    ddlog("toTime: ${duration.toTime()}");
+    DLog.d("toTimeNew: ${duration.toTimeNew()}");
+    DLog.d("toTime: ${duration.toTime()}");
 
-    ddlog("list: ${[
+    DLog.d("list: ${[
       duration.inHours.remainder(24),
       duration.inMinutes.remainder(60),
       duration.inSeconds.remainder(60),
@@ -154,8 +150,7 @@ class _TestPageState extends State<TestPage>
       children: titles
           .map((e) => ActionChip(
                 avatar: CircleAvatar(
-                    backgroundColor: Theme.of(context).primaryColor,
-                    child: Text(e.characters.first.toUpperCase())),
+                    backgroundColor: Theme.of(context).primaryColor, child: Text(e.characters.first.toUpperCase())),
                 label: Text(e),
                 onPressed: () {
                   _onPressed(titles.indexOf(e));
@@ -224,8 +219,7 @@ class _TestPageState extends State<TestPage>
   buildSection4() {
     final tuples = [
       Tuple2('Color(0xFF4286f4)', Color(0xFF4286f4)),
-      Tuple2('Color(0xFF4286f4).withOpacity(0.5)',
-          Color(0xFF4286f4).withOpacity(0.5)),
+      Tuple2('Color(0xFF4286f4).withOpacity(0.5)', Color(0xFF4286f4).withOpacity(0.5)),
       Tuple2('Colors.black.withOpacity(0.4)', Colors.black.withOpacity(0.4)),
     ];
     return Column(
@@ -255,8 +249,7 @@ class _TestPageState extends State<TestPage>
             itemBuilder: (ctx, index) {
               return Container(
                 height: 60,
-                child: ColoredBox(
-                    color: ColorExt.random, child: Text('Row_$index')),
+                child: ColoredBox(color: ColorExt.random, child: Text('Row_$index')),
               );
             }),
       ),
@@ -265,7 +258,15 @@ class _TestPageState extends State<TestPage>
 
   Future<void> _onPressed(int e) async {
     final file = await FileExt.fromAssets("assets/images/icon_skipping.gif");
-    ddlog("file: ${file.fileSizeDesc}");
+    DLog.d("file: ${file.fileSizeDesc}");
+  }
+
+  test() {}
+
+  Future<XFile> multipartFileToXFile(http.MultipartFile file) async {
+    final bytes = await file.finalize().toBytes();
+    final xFile = XFile.fromData(bytes, name: file.filename ?? "unknown_file");
+    return xFile;
   }
 }
 

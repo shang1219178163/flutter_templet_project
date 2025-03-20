@@ -10,7 +10,7 @@ class AuthMiddleware extends GetMiddleware {
 
   // @override
   // RouteSettings? redirect(String? route) {
-  //   ddlog("$runtimeType redirect: ${[
+  //   DLog.d("$runtimeType redirect: ${[
   //     Get.arguments,
   //     Get.parameters,
   //     Get.rootDelegate.arguments(),
@@ -26,7 +26,7 @@ class AuthMiddleware extends GetMiddleware {
 
   @override
   Future<GetNavConfig?> redirectDelegate(GetNavConfig route) async {
-    ddlog("$runtimeType redirectDelegate: ${[
+    DLog.d("$runtimeType redirectDelegate: ${[
       Get.arguments,
       Get.parameters,
       Get.rootDelegate.arguments(),

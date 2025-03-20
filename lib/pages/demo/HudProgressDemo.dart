@@ -45,8 +45,7 @@ class HudProgressDemo extends StatelessWidget {
     );
   }
 
-  Widget buildGridView(
-      {required BuildContext context, required List<String> list}) {
+  Widget buildGridView({required BuildContext context, required List<String> list}) {
     return GridView.count(
         padding: EdgeInsets.all(15.0),
         //一行多少个
@@ -75,7 +74,7 @@ class HudProgressDemo extends StatelessWidget {
   }
 
   void _onPressed({required BuildContext context, required String e}) {
-    ddlog(e);
+    DLog.d(e);
     switch (titles.indexOf(e)) {
       case 1:
         {
@@ -84,8 +83,7 @@ class HudProgressDemo extends StatelessWidget {
             loadingView: CirclePulseLoadingWidget(
               itemColor: Colors.white,
             ),
-            message:
-                "经查，涉事两名攻击者非法获取某互联网公司客户信息共计 11.8 亿条，在 8 个月的时间里利用该信息经营共获利 34 万余元。"
+            message: "经查，涉事两名攻击者非法获取某互联网公司客户信息共计 11.8 亿条，在 8 个月的时间里利用该信息经营共获利 34 万余元。"
                 "最终，二人因侵犯公民个人信息罪，分别被判处有期徒刑三年六个月，有期徒刑三年三个月。",
             messageMargin: EdgeInsets.only(left: 40, right: 40),
           );
@@ -111,8 +109,7 @@ class HudProgressDemo extends StatelessWidget {
           ToastDialog.show(
             context: context,
             // loadingView: CirclePulseLoadingWidget(itemColor: Colors.white,),
-            message:
-                "经查，涉事两名攻击者非法获取某互联网公司客户信息共计 11.8 亿条，在 8 个月的时间里利用该信息经营共获利 34 万余元。"
+            message: "经查，涉事两名攻击者非法获取某互联网公司客户信息共计 11.8 亿条，在 8 个月的时间里利用该信息经营共获利 34 万余元。"
                 "最终，二人因侵犯公民个人信息罪，分别被判处有期徒刑三年六个月，有期徒刑三年三个月。",
             messageMargin: EdgeInsets.only(left: 40, right: 40),
           );
@@ -175,8 +172,7 @@ class HudProgressDemo extends StatelessWidget {
     //       );
     //     });
 
-    const message =
-        "经查，涉事两名攻击者非法获取某互联网公司客户信息共计 11.8 亿条，在 8 个月的时间里利用该信息经营共获利 34 万余元。"
+    const message = "经查，涉事两名攻击者非法获取某互联网公司客户信息共计 11.8 亿条，在 8 个月的时间里利用该信息经营共获利 34 万余元。"
         "最终，二人因侵犯公民个人信息罪，分别被判处有期徒刑三年六个月，有期徒刑三年三个月。";
 
     showDialog(

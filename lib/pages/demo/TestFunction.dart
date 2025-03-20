@@ -11,6 +11,7 @@ import 'package:flutter_templet_project/basicWidget/n_textfield_search.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/function_ext.dart';
+import 'package:flutter_templet_project/extension/future_ext.dart';
 import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/util/Debounce.dart';
 
@@ -73,7 +74,7 @@ class _TestFunctionState extends State<TestFunction> {
                   onPressed: testVoidCallback.auth(onAuth: () {
                     return false;
                   }, onUnauth: () {
-                    ddlog("OutlinedButton - onUnauth");
+                    DLog.d("OutlinedButton - onUnauth");
                   }),
                   child: NText("testVoidCallback.auth"),
                 ),
@@ -83,7 +84,7 @@ class _TestFunctionState extends State<TestFunction> {
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               child: NSearchTextField(
                 backgroundColor: Colors.black12,
-                onChanged: (val) => onChanged.debounce(value: val),
+                onChanged: (val) => onChanged.debounce(val),
               ),
             )
           ],
@@ -128,8 +129,7 @@ class _TestFunctionState extends State<TestFunction> {
 
     Function.apply(fcOne, [2018], {#country: 'USA', #city: 'Dominus Estate'});
     final map = {"country": 'USA', "city": 'Dominus Estate'};
-    final mapNew =
-        {"country": 'USA1', "city": 'Dominus Estate1'}.mapSymbolKey();
+    final mapNew = {"country": 'USA1', "city": 'Dominus Estate1'}.mapSymbolKey();
 
     Function.apply(fcOne, [2018], mapNew);
     FunctionExt.apply(fcOne, [2019], map);
@@ -180,31 +180,31 @@ class _TestFunctionState extends State<TestFunction> {
 
   void onChanged(val) {
     final index = IntExt.random(max: 1000);
-    ddlog("onChanged: $val, index: $index");
+    DLog.d("onChanged: $val, index: $index");
   }
 
   void testFuntion({
     required String name,
   }) {
     final index = IntExt.random(max: 1000);
-    ddlog("name: $name, index: $index");
+    DLog.d("name: $name, index: $index");
   }
 
   void testVoidCallback() {
     final index = IntExt.random(max: 1000);
-    ddlog("testVoidCallback index: $index");
+    DLog.d("testVoidCallback index: $index");
 
     final isEqual = Symbol("city") == #city;
-    ddlog("testVoidCallback isEqual: $isEqual");
+    DLog.d("testVoidCallback isEqual: $isEqual");
     // [log] 2024-04-21 12:33:04.265310 testVoidCallback isEqual: true
   }
 
   void testVoidCallbackOne() {
     // final index = IntExt.random(max: 1000);
-    // ddlog("testVoidCallbackOne index: $index");
+    // DLog.d("testVoidCallbackOne index: $index");
     //
     // final isEqual = Symbol("city") == #city;
-    // ddlog("testVoidCallbackOne isEqual: $isEqual");
+    // DLog.d("testVoidCallbackOne isEqual: $isEqual");
     // [log] 2024-04-21 12:33:04.265310 testVoidCallback isEqual: true
 
     // fn1();
@@ -220,12 +220,12 @@ class _TestFunctionState extends State<TestFunction> {
 
   void fn1() {
     final index = IntExt.random(max: 1000);
-    ddlog("fn1 index: $index");
+    DLog.d("fn1 index: $index");
   }
 
   void fn2() {
     final index = IntExt.random(max: 1000);
-    ddlog("fn2 index: $index");
+    DLog.d("fn2 index: $index");
   }
 }
 

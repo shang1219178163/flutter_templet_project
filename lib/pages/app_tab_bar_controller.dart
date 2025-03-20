@@ -75,8 +75,8 @@ class AppTabBarController extends GetxController {
     final serviceProtocolInfo = await Service.getInfo();
     final serverUri = serviceProtocolInfo.serverUri;
     final serverWebSocketUri = serviceProtocolInfo.serverWebSocketUri;
-    // ddlog("serverUri: $serverUri");
-    // ddlog("serverWebSocketUri: $serverWebSocketUri");
+    // DLog.d("serverUri: $serverUri");
+    // DLog.d("serverWebSocketUri: $serverWebSocketUri");
     return serverUri;
   }
 }

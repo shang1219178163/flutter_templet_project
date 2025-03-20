@@ -68,8 +68,7 @@ class _SectionListViewState<H, E> extends State<SectionListView<H, E>> {
   Widget buildSliverList({required int section, required List<E> list}) {
     final items = widget.itemList[section];
     return SliverList(
-      delegate: SliverChildBuilderDelegate(
-          (_, int index) => widget.itemBuilder(section, index, items[index]),
+      delegate: SliverChildBuilderDelegate((_, int index) => widget.itemBuilder(section, index, items[index]),
           childCount: items.length),
     );
   }
@@ -82,10 +81,9 @@ class _SectionListViewState<H, E> extends State<SectionListView<H, E>> {
         section: i,
         child: widget.headerBuilder(headerItem),
       ));
-      slivers.add(
-          buildSliverList(section: i, list: items.whereType<E>().toList()));
+      slivers.add(buildSliverList(section: i, list: items.whereType<E>().toList()));
     }
-    // ddlog([widget.sectionTitles.length, slivers.length]);
+    // DLog.d([widget.sectionTitles.length, slivers.length]);
 
     setState(() {});
   }

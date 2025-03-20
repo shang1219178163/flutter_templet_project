@@ -62,8 +62,7 @@ class _AlertSheetDemoState extends State<AlertSheetDemo> with BottomSheetMixin {
       children: items
           .map((e) => ActionChip(
                 avatar: CircleAvatar(
-                    backgroundColor: Theme.of(context).primaryColor,
-                    child: Text(e.$1.characters.first.toUpperCase())),
+                    backgroundColor: Theme.of(context).primaryColor, child: Text(e.$1.characters.first.toUpperCase())),
                 label: Text(e.$1),
                 onPressed: () {
                   e.$2();
@@ -95,7 +94,7 @@ class _AlertSheetDemoState extends State<AlertSheetDemo> with BottomSheetMixin {
               .map(
                 (e) => CupertinoActionSheetAction(
                   onPressed: () {
-                    ddlog(e);
+                    DLog.d(e);
                     Navigator.pop(context);
                   },
                   child: Text(e),
@@ -210,7 +209,7 @@ class _AlertSheetDemoState extends State<AlertSheetDemo> with BottomSheetMixin {
         title: Text('Add account'),
         trailing: Icon(Icons.check),
         onTap: () {
-          ddlog("account");
+          DLog.d("account");
           Navigator.pop(context);
         },
       ),
@@ -218,7 +217,7 @@ class _AlertSheetDemoState extends State<AlertSheetDemo> with BottomSheetMixin {
         leading: Icon(Icons.settings),
         title: Text('Manage accounts'),
         onTap: () {
-          ddlog("accounts");
+          DLog.d("accounts");
           Navigator.pop(context);
         },
       ),
@@ -228,7 +227,7 @@ class _AlertSheetDemoState extends State<AlertSheetDemo> with BottomSheetMixin {
           "Your Profile",
         ),
         onTap: () {
-          ddlog("Profile");
+          DLog.d("Profile");
           Navigator.pop(context);
         },
       ),
@@ -279,7 +278,7 @@ class _AlertSheetDemoState extends State<AlertSheetDemo> with BottomSheetMixin {
           indexs: [1],
           canScroll: false,
           callback: (indexs) {
-            ddlog([indexs.runtimeType, indexs]);
+            DLog.d([indexs.runtimeType, indexs]);
           },
         ),
       ],
@@ -319,8 +318,7 @@ class RadioListChooseNewWidget extends StatefulWidget {
   Object? selectedIndex = 0;
 
   @override
-  _RadioListChooseNewWidgetState createState() =>
-      _RadioListChooseNewWidgetState();
+  _RadioListChooseNewWidgetState createState() => _RadioListChooseNewWidgetState();
 }
 
 class _RadioListChooseNewWidgetState extends State<RadioListChooseNewWidget> {
@@ -416,9 +414,7 @@ class _RadioTileSexWidgetState extends State<RadioTileSexWidget> {
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text("你选择的是${widget.selectedIndex == 1 ? "男" : "女"}")
-            ],
+            children: <Widget>[Text("你选择的是${widget.selectedIndex == 1 ? "男" : "女"}")],
           )
         ],
       ),
@@ -432,7 +428,7 @@ class _RadioTileSexWidgetState extends State<RadioTileSexWidget> {
     setState(() {
       widget.selectedIndex = value;
     });
-    ddlog(widget.selectedIndex);
+    DLog.d(widget.selectedIndex);
   }
 }
 
@@ -442,9 +438,5 @@ final payTypes = <Tuple4<String, String, Widget, bool>>[
   Tuple4("阿里支付", "支付就用支付宝", Icon(Icons.palette), false),
   Tuple4("银联支付", "不打开APP就支付", Icon(Icons.payment), false),
 ]
-    .map((e) => ChioceDataModel(
-        title: Text(e.item1),
-        subtitle: Text(e.item2),
-        secondary: e.item3,
-        selected: e.item4))
+    .map((e) => ChioceDataModel(title: Text(e.item1), subtitle: Text(e.item2), secondary: e.item3, selected: e.item4))
     .toList();

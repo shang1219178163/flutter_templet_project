@@ -14,6 +14,7 @@ class NAvatarBadge extends StatelessWidget {
   const NAvatarBadge({
     super.key,
     required this.url,
+    this.decorationImage,
     this.width = 60,
     this.height = 60,
     this.borderRadius = const BorderRadius.all(Radius.circular(8)),
@@ -34,6 +35,8 @@ class NAvatarBadge extends StatelessWidget {
 
   /// 头像链接
   final String url;
+
+  final DecorationImage? decorationImage;
 
   /// 头像圆角
   final BorderRadius borderRadius;
@@ -59,37 +62,43 @@ class NAvatarBadge extends StatelessWidget {
       decoration: BoxDecoration(
         // color: Colors.grey.withAlpha(88),
         borderRadius: borderRadius,
-        image: DecorationImage(
-          image: ExtendedNetworkImageProvider(
-            url,
-            cache: true,
-          ),
-          fit: BoxFit.fill,
-        ),
+        image: decorationImage ??
+            (!url.startsWith("http")
+                ? null
+                : DecorationImage(
+                    image: ExtendedNetworkImageProvider(
+                      url,
+                      cache: true,
+                    ),
+                    fit: BoxFit.fill,
+                  )),
       ),
-      child: SizedOverflowBox(
-        alignment: Alignment.center,
-        size: Size.zero,
-        child: UnconstrainedBox(
-          child: Container(
-            // width: size,
-            height: badgeSize,
-            constraints: BoxConstraints(
-              minWidth: badgeSize + badgePadding.horizontal * 2,
+      child: badgeStr.isEmpty
+          ? SizedBox()
+          : SizedOverflowBox(
+              alignment: Alignment.center,
+              size: Size.zero,
+              child: UnconstrainedBox(
+                child: Container(
+                  height: badgeSize,
+                  constraints: BoxConstraints(
+                    minWidth: badgeSize,
+                  ),
+                  padding: badgePadding,
+                  alignment: Alignment.center,
+                  decoration: ShapeDecoration(
+                    color: Colors.red,
+                    shape: badgeStr.length < 2 ? CircleBorder() : StadiumBorder(),
+                  ),
+                  child: FittedBox(
+                    child: Text(
+                      badgeStr,
+                      style: badgeTextStyle,
+                    ),
+                  ),
+                ),
+              ),
             ),
-            padding: badgePadding,
-            alignment: Alignment.center,
-            decoration: ShapeDecoration(
-              color: Colors.red,
-              shape: badgeStr.length <= 2 ? CircleBorder() : StadiumBorder(),
-            ),
-            child: Text(
-              badgeStr,
-              style: badgeTextStyle,
-            ),
-          ),
-        ),
-      ),
     );
   }
 }

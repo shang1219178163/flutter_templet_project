@@ -54,7 +54,7 @@ class _NavgationBarDemoState extends State<NavgationBarDemo> {
       actions: [
         IconButton(
           onPressed: () {
-            ddlog("share");
+            DLog.d("share");
           },
           icon: Icon(Icons.share),
         ),

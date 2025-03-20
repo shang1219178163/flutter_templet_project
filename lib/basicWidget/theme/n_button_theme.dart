@@ -8,6 +8,7 @@ class NButtonTheme extends ThemeExtension<NButtonTheme> {
   const NButtonTheme({
     this.primary,
     this.height,
+    this.constraints,
     this.margin,
     this.padding,
     this.backgroudColor,
@@ -28,6 +29,8 @@ class NButtonTheme extends ThemeExtension<NButtonTheme> {
 
   /// 点击区域高
   final double? height;
+
+  final BoxConstraints? constraints;
 
   /// 点击区域外边距
   final EdgeInsets? margin;
@@ -62,6 +65,7 @@ class NButtonTheme extends ThemeExtension<NButtonTheme> {
   ThemeExtension<NButtonTheme> copyWith({
     Color? primary,
     double? height,
+    BoxConstraints? constraints,
     EdgeInsets? margin,
     EdgeInsets? padding,
     Color? backgroudColor,
@@ -78,12 +82,12 @@ class NButtonTheme extends ThemeExtension<NButtonTheme> {
       NButtonTheme(
         primary: primary ?? this.primary,
         height: height ?? this.height,
+        constraints: constraints ?? this.constraints,
         margin: margin ?? this.margin,
         padding: padding ?? this.padding,
         gradient: gradient ?? this.gradient,
         backgroudColor: backgroudColor ?? this.backgroudColor,
-        backgroudColorDisable:
-            backgroudColorDisable ?? this.backgroudColorDisable,
+        backgroudColorDisable: backgroudColorDisable ?? this.backgroudColorDisable,
         gradientDisable: gradientDisable ?? this.gradientDisable,
         boxShadow: boxShadow ?? this.boxShadow,
         boxShadowDisable: boxShadowDisable ?? this.boxShadowDisable,
@@ -103,14 +107,11 @@ class NButtonTheme extends ThemeExtension<NButtonTheme> {
         margin: EdgeInsets.lerp(margin, other?.margin, t),
         padding: EdgeInsets.lerp(padding, other?.padding, t),
         backgroudColor: Color.lerp(backgroudColor, other?.backgroudColor, t),
-        backgroudColorDisable:
-            Color.lerp(backgroudColorDisable, other?.backgroudColorDisable, t),
+        backgroudColorDisable: Color.lerp(backgroudColorDisable, other?.backgroudColorDisable, t),
         gradient: Gradient.lerp(gradient, other?.gradient, t),
-        gradientDisable:
-            Gradient.lerp(gradientDisable, other?.gradientDisable, t),
+        gradientDisable: Gradient.lerp(gradientDisable, other?.gradientDisable, t),
         borderRadius: BorderRadius.lerp(borderRadius, other?.borderRadius, t),
-        borderRadiusDisable: BorderRadius.lerp(
-            borderRadiusDisable, other?.borderRadiusDisable, t),
+        borderRadiusDisable: BorderRadius.lerp(borderRadiusDisable, other?.borderRadiusDisable, t),
         border: Border.lerp(border, other?.border, t),
         borderDisable: Border.lerp(borderDisable, other?.borderDisable, t),
       );

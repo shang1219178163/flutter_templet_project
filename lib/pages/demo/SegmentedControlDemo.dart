@@ -46,21 +46,15 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
             Expanded(
               child: CupertinoSegmentedControl(
                 children: const <int, Widget>{
-                  0: Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text('Midnight', style: TextStyle(fontSize: 15))),
-                  1: Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text('Viridian', style: TextStyle(fontSize: 15))),
-                  2: Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text('Cerulean', style: TextStyle(fontSize: 15)))
+                  0: Padding(padding: EdgeInsets.all(8.0), child: Text('Midnight', style: TextStyle(fontSize: 15))),
+                  1: Padding(padding: EdgeInsets.all(8.0), child: Text('Viridian', style: TextStyle(fontSize: 15))),
+                  2: Padding(padding: EdgeInsets.all(8.0), child: Text('Cerulean', style: TextStyle(fontSize: 15)))
                 },
                 groupValue: groupValue,
                 onValueChanged: (value) {
                   // TODO: - fix it
-                  ddlog(value.runtimeType);
-                  ddlog(value.toString());
+                  DLog.d(value.runtimeType);
+                  DLog.d(value.toString());
                   setState(() {
                     groupValue = int.parse("$value");
                   });
@@ -98,7 +92,7 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
           radius: Radius.circular(24),
           padding: EdgeInsets.all(4),
           onChanged: (int index) {
-            ddlog("index: $index");
+            DLog.d("index: $index");
           },
         ),
 
@@ -113,10 +107,7 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
               // borderRadius: BorderRadius.all(Radius.circular(0)),
             ),
             child: NSlidingSegmentedControl(
-              items: <({
-                String title,
-                String icon,
-              })>[
+              items: <({String title, String icon})>[
                 (
                   title: "医生",
                   icon: "icon_segmented_control_doctor_gray.png",
@@ -128,7 +119,46 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
               ],
               selectedIndex: 1,
               onChanged: (int index) {
-                ddlog("onChanged: $index");
+                DLog.d("onChanged: $index");
+              },
+              itemBuilder: (({String icon, String title}) e, bool isSelecetd) {
+                final color = isSelecetd ? Colors.white : Color(0xff737373);
+                final icon = isSelecetd ? e.icon : e.icon;
+
+                return Container(
+                  height: 32,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: Colors.transparent,
+                    // border: Border.all(color: Colors.blue),
+                    // borderRadius: BorderRadius.all(Radius.circular(0)),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      if (icon.isNotEmpty)
+                        Padding(
+                          padding: const EdgeInsets.only(right: 4),
+                          child: Image(
+                            image: icon.toAssetImage(),
+                            width: 12,
+                            height: 14,
+                            color: color,
+                          ),
+                        ),
+                      if (e.title.isNotEmpty)
+                        Flexible(
+                          child: Text(
+                            e.title,
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: color,
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
+                );
               },
             ),
           ),
@@ -144,12 +174,10 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
         buildSlidingSegmentedControl3(),
 
         SizedBox(height: 15),
-        buildLineSegmentControl(null,
-            lineColor: Theme.of(context).primaryColor),
+        buildLineSegmentControl(null, lineColor: Theme.of(context).primaryColor),
 
         SizedBox(height: 15),
-        buildLineSegmentControl(Colors.transparent,
-            lineColor: Theme.of(context).primaryColor),
+        buildLineSegmentControl(Colors.transparent, lineColor: Theme.of(context).primaryColor),
 
         SizedBox(height: 15),
         buildLineSegmentControl(Colors.black87, lineColor: Colors.white),
@@ -171,18 +199,15 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
   final Map<int, Widget> children = <int, Widget>{
     0: Container(
       padding: EdgeInsets.all(8),
-      child:
-          Text("Item 1", style: TextStyle(fontSize: 15, color: Colors.black)),
+      child: Text("Item 1", style: TextStyle(fontSize: 15, color: Colors.black)),
     ),
     1: Container(
       padding: EdgeInsets.all(8),
-      child:
-          Text("Item 2", style: TextStyle(fontSize: 15, color: Colors.black)),
+      child: Text("Item 2", style: TextStyle(fontSize: 15, color: Colors.black)),
     ),
     2: Container(
       padding: EdgeInsets.all(8),
-      child:
-          Text("Item 3", style: TextStyle(fontSize: 15, color: Colors.black)),
+      child: Text("Item 3", style: TextStyle(fontSize: 15, color: Colors.black)),
     ),
   };
 
@@ -193,7 +218,7 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
         setState(() {
           groupValue = newValue;
         });
-        ddlog(groupValue);
+        DLog.d(groupValue);
       },
       groupValue: groupValue,
       // borderColor: Colors.white,
@@ -223,7 +248,7 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
         setState(() {
           groupValue = int.parse("$i");
         });
-        ddlog(groupValue);
+        DLog.d(groupValue);
       },
       backgroundColor: Colors.transparent,
       thumbColor: Colors.transparent,
@@ -251,8 +276,7 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
 
     var current = items[0];
 
-    return StatefulBuilder(
-        builder: (BuildContext context, StateSetter setState) {
+    return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
       return Container(
         // height: 56,
         padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -323,7 +347,7 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
             }
             current = val;
             setState(() {});
-            ddlog(current);
+            DLog.d(current);
           },
           backgroundColor: Color(0xfff3F3F3),
           thumbColor: context.primaryColor,
@@ -359,8 +383,7 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
 
     var current = items[0];
 
-    return StatefulBuilder(
-        builder: (BuildContext context, StateSetter setState) {
+    return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
       return Container(
         // height: 56,
         padding: EdgeInsets.symmetric(horizontal: 48, vertical: 0),
@@ -392,9 +415,7 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
 
               final isSelecetd = current == val;
 
-              final color = isSelecetd
-                  ? (thumbTextColor ?? Colors.white)
-                  : (textColor ?? Color(0xff737373));
+              final color = isSelecetd ? (thumbTextColor ?? Colors.white) : (textColor ?? Color(0xff737373));
               final icon = isSelecetd ? e.icon : e.icon;
 
               return Container(
@@ -473,7 +494,7 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
         setState(() {
           groupValue = int.parse("$i");
         });
-        ddlog(groupValue);
+        DLog.d(groupValue);
       },
       thumbColor: Colors.orangeAccent,
       // backgroundColor: Colors.transparent,
@@ -503,15 +524,14 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
         setState(() {
           groupValue = int.parse("$i");
         });
-        ddlog(groupValue);
+        DLog.d(groupValue);
       },
       // thumbColor: Colors.orangeAccent,
       backgroundColor: Colors.transparent,
     );
   }
 
-  Widget buildLineSegmentControl(Color? backgroundColor,
-      {required Color lineColor}) {
+  Widget buildLineSegmentControl(Color? backgroundColor, {required Color lineColor}) {
     const children = <int, Widget>{
       0: Text(
         "Item 111",
@@ -540,7 +560,7 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
           setState(() {
             groupValue = int.parse("$i");
           });
-          ddlog(groupValue);
+          DLog.d(groupValue);
         },
       );
     }
@@ -555,7 +575,7 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
         setState(() {
           groupValue = int.parse("$i");
         });
-        ddlog(groupValue);
+        DLog.d(groupValue);
       },
     );
   }
@@ -572,7 +592,7 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
         // itemWidths: itemWiths,
         selectedIndex: 0,
         onValueChanged: (index) {
-          ddlog(index);
+          DLog.d(index);
         });
   }
 
@@ -587,10 +607,9 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
         itemSelectedBgColor: Colors.transparent,
         itemWidth: 70,
         itemRadius: 0,
-        itemSelectedTextStyle:
-            TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        itemSelectedTextStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         onValueChanged: (index) {
-          ddlog(index);
+          DLog.d(index);
         });
   }
 
@@ -648,7 +667,7 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
       ],
       currentIndex: 1,
       onChanged: (index) {
-        ddlog("index $index");
+        DLog.d("index $index");
       },
       // selectedBgColor: Colors.red,
       // bgColor: Colors.blue,

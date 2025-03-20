@@ -2,6 +2,8 @@ name: flutter_templet_project
 description: A new Flutter project.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+100
+#自定义字段 - 项目别名
+alias: flutter_templet
 
 analyzer:
 #  enable-experiment:
@@ -15,6 +17,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  plugin_platform_interface: ^2.1.8
   cupertino_icons: ^1.0.3
   flutter_localizations:
     sdk: flutter
@@ -36,6 +39,7 @@ dependencies:
   flutter_isolate: ^2.0.4
   cached_network_image: ^3.2.0
 
+  scrollview_observer: ^1.24.0
   # 省市区选择
   flutter_pickers: ^2.1.9
 
@@ -175,7 +179,7 @@ dependencies:
   #微信登录+支付+分享
   fluwx: ^4.4.10
   # 苹果登录
-  sign_in_with_apple: ^5.0.0
+  sign_in_with_apple: ^6.1.4
 
   azlistview: ^2.0.0
   common_utils: ^2.0.0
@@ -202,11 +206,38 @@ dependencies:
   # 含 LruMap
   quiver: ^3.2.1
 
+  google_mlkit_barcode_scanning: ^0.13.0
   google_mlkit_text_recognition: ^0.14.0
+  google_mlkit_face_detection: ^0.12.0
   google_mlkit_translation: ^0.12.0
   google_mlkit_language_id: ^0.12.0
 
+#  ffmpeg_kit_flutter_full: ^5.1.0
+
+
   expressions: ^0.2.5+2
+
+  # 语音阅读
+  flutter_tts: ^3.8.5
+  pubspec_parse: ^1.4.0
+
+  route_stack_manager: ^1.1.1
+
+  flutter_markdown: ^0.7.4+3
+
+  animations: ^2.0.9
+  tab_container: ^3.5.3
+  curved_navigation_bar: ^1.0.6
+  rotated_corner_decoration: ^2.1.0+1
+
+  appinio_swiper: ^2.1.1
+  flutter_email_sender: ^6.0.3
+
+  record: ^5.1.2
+  audio_visualizer:
+    git:
+      url: 'git@github.com:shang1219178163/audio_visualizer.git'
+      ref: 'develop'
 
 #  User:
 #    hosted:
@@ -229,11 +260,11 @@ dependency_overrides:
 
   url_launcher_ios: ^6.3.1
 
-#  flutter_inappwebview_ios:
-#    git:
-#      url: https://github.com/andychucs/flutter_inappwebview.git
-#      ref: master
-#      path: flutter_inappwebview_ios
+  flutter_inappwebview_ios:
+    git:
+      url: https://github.com/andychucs/flutter_inappwebview.git
+      ref: master
+      path: flutter_inappwebview_ios
 
 
 # User:
@@ -257,9 +288,12 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
+    - pubspec.yaml #此处声明,方可读取
+    - assets/
     - assets/data/
     - assets/images/
 #    - assets/images/3.0x/
 #    - assets/images/2.0x/
     - assets/images/curve/
+
 

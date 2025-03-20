@@ -55,4 +55,24 @@ extension EdgeInsetsExt on EdgeInsets {
     );
     return marginNew;
   }
+
+  /// 将 EdgeInsets 转换为 JSON 格式
+  Map<String, double> toJson() {
+    return {
+      "left": left,
+      "top": top,
+      "right": right,
+      "bottom": bottom,
+    };
+  }
+
+  /// 从 JSON 解析 EdgeInsets
+  static EdgeInsets fromJson(Map<String, dynamic> json) {
+    return EdgeInsets.only(
+      left: json["left"] ?? 0.0,
+      top: json["top"] ?? 0.0,
+      right: json["right"] ?? 0.0,
+      bottom: json["bottom"] ?? 0.0,
+    );
+  }
 }

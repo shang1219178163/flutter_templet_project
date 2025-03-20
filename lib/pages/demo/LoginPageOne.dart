@@ -28,7 +28,7 @@ class _LoginPageOneState extends State<LoginPageOne> {
 
   // final accountExp = RegExp(r'^(?![0-9]+$)(?![a-z]+$)[0-9a-z]{6,12}$');
   final accountExp = RegExp(r'^\d{6,12}$');
-  final pwdExp = RegExp(r'^(?![0-9]+$)(?![a-z]+$)[0-9a-z]{6,12}$');
+  final pwdExp = RegExp(r'^(?![0-9]+$)(?![a-zA-Z]+$)[0-9a-zA-Z]{6,12}$');
 
   // 焦点
   final focusNode1 = FocusNode();
@@ -37,7 +37,7 @@ class _LoginPageOneState extends State<LoginPageOne> {
   final _formKey = GlobalKey<FormState>();
 
   bool isEye = true;
-  final isBtnEnabled = ValueNotifier(false);
+  final btnEnable = ValueNotifier(false);
 
   @override
   void initState() {
@@ -118,19 +118,16 @@ class _LoginPageOneState extends State<LoginPageOne> {
           buildInputBox(),
           SizedBox(height: 25),
           ValueListenableBuilder(
-              valueListenable: isBtnEnabled,
+              valueListenable: btnEnable,
               builder: (context, enabled, child) {
                 return ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(3)),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(3)),
                   ),
                   onPressed: !enabled ? null : onLogin,
                   child: Container(
                       padding: EdgeInsets.symmetric(vertical: 10),
-                      child: Text('登录',
-                          style:
-                              TextStyle(fontSize: 18.0, color: Colors.white))),
+                      child: Text('登录', style: TextStyle(fontSize: 18.0, color: Colors.white))),
                 );
               }),
           TextButton(
@@ -138,8 +135,7 @@ class _LoginPageOneState extends State<LoginPageOne> {
               // Navigator.pushNamed(context, 'forget');
               Get.toNamed(APPRouter.forgetPasswordPage, arguments: "forget");
             },
-            child: Text('忘记密码?',
-                style: TextStyle(color: Colors.black54, fontSize: 15.0)),
+            child: Text('忘记密码?', style: TextStyle(color: Colors.black54, fontSize: 15.0)),
           ),
           // buildOriginSheet(),
         ],
@@ -169,38 +165,28 @@ class _LoginPageOneState extends State<LoginPageOne> {
             textAlignVertical: TextAlignVertical.center,
             decoration: InputDecoration(
                 isCollapsed: true,
-                contentPadding:
-                    EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 hintText: '请输入账号',
                 // labelText: "账号",
                 // contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
                 prefixIcon: Icon(Icons.perm_identity),
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(4.0) //圆角大小
-                    ),
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(4.0)),
                 suffixIcon: accountController.text.isNotEmpty
                     ? IconButton(
-                        icon: Icon(
-                          Icons.clear,
-                          size: 21,
-                          color: Color(0xff666666),
-                        ),
+                        icon: Icon(Icons.clear, size: 21, color: Color(0xff666666)),
                         onPressed: () {
-                          setState(() {
-                            accountController.text = '';
-                            checkLogin();
-                          });
+                          accountController.text = '';
+                          checkLogin();
+                          setState(() {});
                         },
                       )
                     : null),
             validator: (v) {
               return !accountExp.hasMatch(v!) ? '账号由6到12位数字与小写字母组成' : null;
             },
-            onEditingComplete: () =>
-                FocusScope.of(context).requestFocus(focusNode2),
+            onEditingComplete: () => FocusScope.of(context).requestFocus(focusNode2),
             onChanged: (v) {
               checkLogin();
-              setState(() {});
             },
           ),
           // SizedBox(height: 15.0),
@@ -213,33 +199,28 @@ class _LoginPageOneState extends State<LoginPageOne> {
             textInputAction: TextInputAction.done, //显示'完成'
             textAlignVertical: TextAlignVertical.center,
             decoration: InputDecoration(
-                isCollapsed: true,
-                contentPadding:
-                    EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                hintText: '请输入密码',
-                // labelText: '密码',
-                // contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-                prefixIcon: Icon(Icons.lock),
-                // border: OutlineInputBorder(
-                //     borderRadius: BorderRadius.circular(40.0)
-                // ),
-                suffixIcon: IconButton(
-                  icon: Icon(
-                    Icons.remove_red_eye,
-                    size: 21,
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      isEye = !isEye;
-                    });
-                  },
-                )),
+              isCollapsed: true,
+              contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              hintText: '请输入密码',
+              // labelText: '密码',
+              // contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+              prefixIcon: Icon(Icons.lock),
+              // border: OutlineInputBorder(
+              //     borderRadius: BorderRadius.circular(40.0)
+              // ),
+              suffixIcon: IconButton(
+                icon: Icon(!isEye ? Icons.remove_red_eye : Icons.remove_red_eye_outlined, size: 21),
+                onPressed: () {
+                  isEye = !isEye;
+                  setState(() {});
+                },
+              ),
+            ),
             validator: (v) {
               return !pwdExp.hasMatch(v!) ? '密码由6到12位数字与小写字母组成' : null;
             },
             onChanged: (v) {
               checkLogin();
-              setState(() {});
             },
             onEditingComplete: onLogin, //'完成'回调
           )
@@ -257,11 +238,10 @@ class _LoginPageOneState extends State<LoginPageOne> {
 
   // 登录按钮是否可点击
   void checkLogin() {
-    if (accountExp.hasMatch(accountController.text) &&
-        pwdExp.hasMatch(pwdController.text)) {
-      isBtnEnabled.value = true;
+    if (accountExp.hasMatch(accountController.text) && pwdExp.hasMatch(pwdController.text)) {
+      btnEnable.value = true;
     } else {
-      isBtnEnabled.value = false;
+      btnEnable.value = false;
     }
   }
 
@@ -286,7 +266,7 @@ class _LoginPageOneState extends State<LoginPageOne> {
   final accountSheetController = NAccountSheetController();
 
   Widget buildAccountSheet() {
-    if (RequestConfig.current == APPEnvironment.prod) {
+    if (RequestConfig.current == AppEnvironment.prod) {
       return const SizedBox();
     }
     return NAccountSheet(

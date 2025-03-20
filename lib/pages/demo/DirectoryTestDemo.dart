@@ -18,8 +18,7 @@ class DirectoryTestDemo extends StatefulWidget {
 }
 
 class _DirectoryTestDemoState extends State<DirectoryTestDemo> {
-  bool get hideApp =>
-      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
+  bool get hideApp => Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
 
   final _scrollController = ScrollController();
 
@@ -71,7 +70,7 @@ class _DirectoryTestDemoState extends State<DirectoryTestDemo> {
     // 获取项目根目录路径（假设你要向上回溯路径，具体要根据实际情况处理）
     String projectPath = path.dirname(path.dirname(currentPath));
 
-    ddlog('Current Directory: $currentPath');
-    ddlog('Project Directory: $projectPath');
+    DLog.d('Current Directory: $currentPath');
+    DLog.d('Project Directory: $projectPath');
   }
 }

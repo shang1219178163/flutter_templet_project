@@ -53,10 +53,7 @@ class NSectionBox extends StatelessWidget {
             left: padding.left,
             right: padding.right,
           ),
-          child: Align(
-            alignment: Alignment.centerLeft,
-            child: text ?? Text(title, style: style),
-          ),
+          child: text ?? Text(title, style: style),
         ),
         Padding(
           padding: padding,

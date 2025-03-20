@@ -19,8 +19,7 @@ class NAppBarColorChangerDemo extends StatefulWidget {
   final String? title;
 
   @override
-  State<NAppBarColorChangerDemo> createState() =>
-      _NAppBarColorChangerDemoState();
+  State<NAppBarColorChangerDemo> createState() => _NAppBarColorChangerDemoState();
 }
 
 class _NAppBarColorChangerDemoState extends State<NAppBarColorChangerDemo> {
@@ -38,7 +37,7 @@ class _NAppBarColorChangerDemoState extends State<NAppBarColorChangerDemo> {
               .map((e) => buildAppBarButton(
                     title: e,
                     onPressed: () {
-                      ddlog("onTap: $e");
+                      DLog.d("onTap: $e");
                     },
                   ))
               .toList(),
@@ -52,7 +51,7 @@ class _NAppBarColorChangerDemoState extends State<NAppBarColorChangerDemo> {
     return InkWell(
       onTap: onPressed ??
           () {
-            ddlog("onTap: $title");
+            DLog.d("onTap: $title");
           },
       child: Container(
         margin: EdgeInsets.only(right: 16, top: 12, bottom: 12),

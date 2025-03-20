@@ -22,10 +22,8 @@ class SliverTabBarDemo extends StatefulWidget {
   State<SliverTabBarDemo> createState() => _SliverTabBarDemoState();
 }
 
-class _SliverTabBarDemoState extends State<SliverTabBarDemo>
-    with SingleTickerProviderStateMixin {
-  bool get hideApp =>
-      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
+class _SliverTabBarDemoState extends State<SliverTabBarDemo> with SingleTickerProviderStateMixin {
+  bool get hideApp => Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
 
   late final List<Tuple2<String, Widget>> items = [
     Tuple2("人群画像", buildPage()),
@@ -46,7 +44,7 @@ class _SliverTabBarDemoState extends State<SliverTabBarDemo>
     super.initState();
     scrollController.addListener(() {
       // offsetY.value = scrollController.position.pixels;
-      // ddlog("offsetY.value: ${offsetY.value}");
+      // DLog.d("offsetY.value: ${offsetY.value}");
     });
   }
 
@@ -98,8 +96,7 @@ class _SliverTabBarDemoState extends State<SliverTabBarDemo>
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  border: Border(
-                      bottom: BorderSide(width: 0, color: Color(0xFFE5E5E5))),
+                  border: Border(bottom: BorderSide(width: 0, color: Color(0xFFE5E5E5))),
                 ),
                 child: TabBar(
                   controller: tabController,

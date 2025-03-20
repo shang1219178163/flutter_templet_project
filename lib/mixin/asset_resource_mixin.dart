@@ -9,10 +9,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
-/// 滚动方向改变监听
+/// 本地文件读取
 mixin AssetResourceMixin<T extends StatefulWidget> on State<T> {
-  /// 宽容序曲
-  var kuanRong = "";
+  /// 本地文件
+  List<AssetResourceMixinModel> assetFileModels = [
+    AssetResourceMixinModel(
+      path: 'assets/data/kuan_rong.txt',
+    )
+  ];
+
+  /// 本地资源加载结束回调
+  late void Function() onAssetResourceFinished;
 
   @override
   void initState() {
@@ -22,11 +29,44 @@ mixin AssetResourceMixin<T extends StatefulWidget> on State<T> {
   }
 
   _initData() async {
-    kuanRong = await _loadData();
+    for (var i = 0; i < assetFileModels.length; i++) {
+      final e = assetFileModels[i];
+      try {
+        final response = await rootBundle.loadString(e.path);
+        assetFileModels[i].content = response;
+      } catch (exception) {
+        debugPrint("$this $exception");
+        assetFileModels[i].exception = exception.toString();
+      }
+    }
+    onAssetResourceFinished();
+  }
+}
+
+/// 本地文件路径
+class AssetResourceMixinModel {
+  /// 文件路径
+  String path = "";
+
+  /// 文件内容
+  String? content;
+
+  /// 异常
+  String? exception;
+
+  AssetResourceMixinModel({required this.path, this.content, this.exception});
+
+  AssetResourceMixinModel.fromJson(Map<String, dynamic> json) {
+    path = json['path'] ?? "";
+    content = json['content'];
+    exception = json['exception'];
   }
 
-  Future<String> _loadData() async {
-    final response = await rootBundle.loadString('assets/data/kuan_rong.txt');
-    return response;
+  Map<String, dynamic> toJson() {
+    var data = Map<String, dynamic>();
+    data['path'] = path;
+    data['content'] = content;
+    data['exception'] = exception;
+    return data;
   }
 }

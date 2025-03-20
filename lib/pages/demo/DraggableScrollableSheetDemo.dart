@@ -23,12 +23,10 @@ class DraggableScrollableSheetDemo extends StatefulWidget {
   const DraggableScrollableSheetDemo({Key? key, this.title}) : super(key: key);
 
   @override
-  _DraggableScrollableSheetDemoState createState() =>
-      _DraggableScrollableSheetDemoState();
+  _DraggableScrollableSheetDemoState createState() => _DraggableScrollableSheetDemoState();
 }
 
-class _DraggableScrollableSheetDemoState
-    extends State<DraggableScrollableSheetDemo> {
+class _DraggableScrollableSheetDemoState extends State<DraggableScrollableSheetDemo> {
   final _scrollController = ScrollController();
 
   final draggableController = DraggableScrollableController();
@@ -47,7 +45,7 @@ class _DraggableScrollableSheetDemoState
     //   final isBottom =_scrollController.position.pixels ==
     //       _scrollController.position.maxScrollExtent;
     //   final isTop =_scrollController.position.pixels <= 0;
-    //   ddlog("isTop: $isTop, isBottom: $isBottom");
+    //   DLog.d("isTop: $isTop, isBottom: $isBottom");
     //
     //   if (isBottom) {
     //     // 滑动到底部，执行加载更多操作
@@ -147,15 +145,15 @@ class _DraggableScrollableSheetDemoState
   }
 
   void onCollect() {
-    ddlog("onCollect");
+    DLog.d("onCollect");
   }
 
   void onShare() {
-    ddlog("onShare");
+    DLog.d("onShare");
   }
 
   void onMore() {
-    ddlog("onMore");
+    DLog.d("onMore");
   }
 
   Widget buildBody({double minChildSize = 0.3}) {
@@ -203,7 +201,7 @@ class _DraggableScrollableSheetDemoState
           NotificationListener<DraggableScrollableNotification>(
             onNotification: (DraggableScrollableNotification e) {
               // doing this in setState breaks DraggableScrollableSheet behaviour
-              ddlog("e: $e");
+              DLog.d("e: $e");
               extentVN.value = e.extent;
               return false;
             },
@@ -212,8 +210,7 @@ class _DraggableScrollableSheetDemoState
               initialChildSize: minChildSize,
               minChildSize: minChildSize,
               maxChildSize: 1,
-              snap:
-                  true, //true：触发滚动则滚动到maxChildSize或者minChildSize，不在跟随手势滚动距离 false:滚动跟随手势滚动距离
+              snap: true, //true：触发滚动则滚动到maxChildSize或者minChildSize，不在跟随手势滚动距离 false:滚动跟随手势滚动距离
               builder: (context, scrollController) {
                 return Container(
                   color: Colors.green,

@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_context_menu.dart';
 import 'package:flutter_templet_project/basicWidget/n_context_menu_region.dart';
+import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:tuple/tuple.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -20,8 +21,6 @@ class _ContextMenuDemoState extends State<ContextMenuDemo> {
   static const String title = 'Context Menu Anywhere Example';
   static const String subtitle = 'A context menu outside of a text field';
 
-  // final PlatformCallback onChangedPlatform;
-
   final _materialController = TextEditingController(
     text: 'TextField shows the default menu still.',
   );
@@ -32,84 +31,123 @@ class _ContextMenuDemoState extends State<ContextMenuDemo> {
     text: 'EditableText has no default menu, so it shows the custom one.',
   );
 
+  late final contextItems = <({String title, VoidCallback event})>[
+    (title: "按钮1", event: onContextItem),
+    (title: "按钮2", event: onContextItem),
+    (title: "按钮3", event: onContextItem),
+    (title: "分享", event: onContextItem),
+    (title: "搜索", event: onContextItem),
+    (title: "自定义按钮", event: onContextItem),
+  ];
+
+  void onContextItem() {
+    DLog.d("onContextItem");
+  }
+
+  final focusNode = FocusNode();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("$widget"),
-        actions: <Widget>[
-          // PlatformSelector(
-          //   onChangedPlatform: onChangedPlatform,
-          // ),
-          // IconButton(
-          //   icon: const Icon(Icons.code),
-          //   onPressed: () async {
-          //     if (!await launchUrl(Uri.parse(url))) {
-          //       throw 'Could not launch $url';
-          //     }
-          //   },
-          // ),
-        ],
+        actions: <Widget>[],
       ),
-      body: NContextMenuRegion(
-        contextMenuBuilder: (context, primaryAnchor, [secondaryAnchor]) {
-          return AdaptiveTextSelectionToolbar.buttonItems(
-            anchors: TextSelectionToolbarAnchors(
-              primaryAnchor: primaryAnchor,
-              secondaryAnchor: secondaryAnchor as Offset?,
-            ),
-            buttonItems: <ContextMenuButtonItem>[
-              ContextMenuButtonItem(
-                onPressed: () {
-                  ContextMenuController.removeAny();
-                  Navigator.of(context).pop();
-                },
-                label: 'Back',
-              ),
-            ],
-          );
-        },
-        child: buildChild(),
-      ),
+      body: buildBody(),
     );
   }
 
-  buildChild() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 64.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          Container(height: 20.0),
-          const Text(
-            'Right click anywhere outside of a field to show a custom menu.',
-          ),
-          Container(height: 140.0),
-          CupertinoTextField(controller: _cupertinoController),
-          Container(height: 40.0),
-          TextField(controller: _materialController),
-          Container(height: 40.0),
-          Container(
-            color: Colors.white,
-            child: EditableText(
-              controller: _editableController,
-              focusNode: FocusNode(),
-              style: Typography.material2021().black.displayMedium!,
-              cursorColor: Colors.blue,
-              backgroundCursorColor: Colors.white,
+  Widget buildBody() {
+    return Scrollbar(
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            NContextMenuRegion(
+              contextMenuBuilder: (context, primaryAnchor, [secondaryAnchor]) {
+                return AdaptiveTextSelectionToolbar.buttonItems(
+                  anchors: TextSelectionToolbarAnchors(
+                    primaryAnchor: primaryAnchor,
+                    secondaryAnchor: secondaryAnchor as Offset?,
+                  ),
+                  buttonItems: <ContextMenuButtonItem>[
+                    ...contextItems.map((e) => ContextMenuButtonItem(
+                          onPressed: () {
+                            ContextMenuController.removeAny();
+                            // Navigator.of(context).pop();
+                            e.event();
+                          },
+                          label: e.title,
+                        )),
+                  ],
+                );
+              },
+              child: const Text(
+                'Right click anywhere outside of a field to show a custom menu.',
+              ),
             ),
-          ),
-          NContextMenu(
-            items: const ['保存', '分享', '编辑'],
-            onItem: (val) {
-              debugPrint(val);
-            },
-            child: Image.asset(
-              'assets/images/404.png',
-              height: 200,
+            CupertinoTextField(controller: _cupertinoController),
+            TextField(controller: _materialController),
+            Container(
+              color: Colors.white,
+              child: SelectionArea(
+                // focusNode: ,
+                onSelectionChanged: (v) {
+                  DLog.d("onSelectionChanged: $v");
+                },
+                child: EditableText(
+                  controller: _editableController,
+                  focusNode: FocusNode(),
+                  style: Typography.material2021().black.displayMedium!,
+                  cursorColor: Colors.blue,
+                  backgroundCursorColor: Colors.white,
+                ),
+              ),
             ),
-          ),
-        ],
+            NContextMenu(
+              items: const ['保存', '分享', '编辑'],
+              onItem: (val) {
+                debugPrint(val);
+              },
+              child: Image.asset(
+                'assets/images/404.png',
+                height: 200,
+              ),
+            ),
+            SelectionArea(
+              onSelectionChanged: (v) {
+                DLog.d("onSelectionChanged: ${v?.plainText}");
+              },
+              contextMenuBuilder: (BuildContext context, SelectableRegionState selectableRegionState) {
+                return AdaptiveTextSelectionToolbar.buttonItems(
+                  anchors: selectableRegionState.contextMenuAnchors,
+                  buttonItems: <ContextMenuButtonItem>[
+                    ...contextItems.map((e) => ContextMenuButtonItem(
+                          onPressed: () {
+                            ContextMenuController.removeAny();
+                            // Navigator.of(context).pop();
+                            e.event();
+                          },
+                          label: e.title,
+                        )),
+                  ],
+                );
+              },
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                      'Flutter 3.3 中的 SelectionArea 功能。它补全了 Selection 异常问题，使用简单，默认实现常见功能且针对不同平台有差异化。可通过继承 TextSelectionControls 自定义，Handle 颜色默认来自 TextSelectionTheme 和 Theme。'),
+                ],
+              ),
+            ),
+          ]
+              .map((e) => Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 16),
+                    child: e,
+                  ))
+              .toList(),
+        ),
       ),
     );
   }

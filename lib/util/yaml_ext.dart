@@ -12,21 +12,27 @@ import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:yaml/yaml.dart';
 
 extension YamlMapExt on YamlMap {
-  /// 解析
-  static Future<dynamic> parseYaml({required String path}) async {
-    // 读取 pubspec.yaml 文件
-    final file = File(path);
-    if (!file.existsSync()) {
-      ddlog('❌文件未找到: $path');
-      return null;
-    }
-
-    final content = await file.readAsString();
+  /// 字符串转
+  static Future<dynamic> fromString({required String content}) async {
     final yamlMap = loadYaml(content);
     var result = yamlMap;
     if (yamlMap is YamlMap) {
       result = yamlMap.toMap();
     }
+    return result;
+  }
+
+  /// 解析
+  static Future<dynamic> parseYaml({required String path}) async {
+    // 读取 pubspec.yaml 文件
+    final file = File(path);
+    if (!file.existsSync()) {
+      DLog.d('❌文件未找到: $path');
+      return null;
+    }
+
+    final content = await file.readAsString();
+    final result = await fromString(content: content);
     return result;
   }
 

@@ -6,60 +6,49 @@ import 'package:flutter_templet_project/model/tag_detail_model.dart';
 import 'package:flutter_templet_project/network/RequestConfig.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-// /// 请求环境信息缓存
-// const String CACHE_REQUEST_ENV = "CACHE_REQUEST_ENV";
-//
-// const String CACHE_REQUEST_ENV_DEV_ORIGIN = "CACHE_REQUEST_ENV_DEV_ORIGIN";
-//
-// /// 请求错误缓存
-// const String CACHE_REQUEST_ERROR = "CACHE_REQUEST_ERROR";
-//
-// /// 缓存app 名称
-// const String CACHE_APP_NAME = "CACHE_APP_NAME"; // 医链执业版
-// /// 缓存app 版本号
-// const String CACHE_APP_VERSION = "CACHE_APP_VERSION"; // 1.0.0
-// /// 缓存app 包名 - com.yilian.ylHealthApp
-// const String CACHE_APP_PACKAGE_NAME = "CACHE_APP_PACKAGE_NAME";
-//
-// const String CACHE_TOKEN = "CACHE_TOKEN";
-//
-// /// 缓存用户登录账号
-// const String CACHE_USER_LOGIN_NAME = "USER_LOGIN_NAME";
-//
-// /// 缓存用户登录账号密码
-// const String CACHE_USER_LOGIN_PWD = "USER_LOGIN_PWD";
-//
-// /// 用户信息 key
-// const String CACHE_USER_ID = "CACHE_USER_ID";
-//
-// const String CACHE_TAG_ROOT_MODEL = "CACHE_TAG_ROOT_MODEL";
-//
-// /// 账号列表缓存
-// const String CACHE_ACCOUNT_List = "CACHE_ACCOUNT_List";
-
 /// CacheService 阎村key
 enum CacheKey {
-  requestEnv(name: "requestEnv", needLogin: false, desc: "请求环境"),
-  requestEnvDevOrigin(name: "requestEnvDevOrigin", needLogin: false, desc: "请求环境(dev)"),
-  requestError(name: "requestError", needLogin: false, desc: "请求错误缓存"),
-  appName(name: "appName", needLogin: false, desc: "App名称"), //医链执业版
-  appVersion(name: "appVersion", needLogin: false, desc: "App版本号"),
-  appPackageName(name: "appPackageName", needLogin: false, desc: "App包名Com.Yilian.Ylhealthapp"),
-  token(name: "token", needLogin: false, desc: "token"),
-  loginAccount(name: "loginAccount", needLogin: false, desc: "用户登录账号"),
-  loginPwd(name: "loginPwd", needLogin: false, desc: "账号密码"),
-  userId(name: "userId", needLogin: true, desc: "用户id"),
-  tagRootModel(name: "tagRootModel", needLogin: true, desc: "标签缓存"),
-  accountList(name: "accountList", needLogin: false, desc: "账号列表");
+  localOperateLog(needLogin: false, desc: "本地操作日志缓存"),
+  requestEnv(needLogin: false, desc: "请求环境"),
+  requestEnvDevOrigin(needLogin: false, desc: "请求环境(dev)"),
+  requestError(needLogin: false, desc: "请求错误缓存"),
+  appName(needLogin: false, desc: "App名称"),
+  appVersion(needLogin: false, desc: "App版本号"),
+  appVersionCode(needLogin: false, desc: "App版本号(安卓)"),
+  appPackageName(needLogin: false, desc: "App包名Com.Yilian.Ylhealthapp"),
+  token(needLogin: false, desc: "token"),
+  loginAccount(needLogin: false, desc: "用户登录账号"),
+  loginPwd(needLogin: false, desc: "账号密码"),
+  userId(needLogin: true, desc: "用户id"),
+  registrationId(needLogin: true, desc: "极光注册id"),
+  lastJPush(needLogin: true, desc: "极光推送消息"),
+  lastRequestError(needLogin: true, desc: "最后一次请求报错"),
+  tagRootModel(needLogin: true, desc: "标签缓存"),
+  accountList(needLogin: false, desc: "账号列表"),
+  lastPageRoute(needLogin: true, desc: "重启app前页面路由"),
+  resetLastPageRoute(needLogin: true, desc: "是否恢复重启前页面路由");
 
   const CacheKey({
-    required this.name,
     required this.desc,
     required this.needLogin,
   });
 
-  /// 缓存name
-  final String name;
+  /// 当前枚举对应的 描述文字
+  final String desc;
+
+  /// 仅登录可用
+  final bool needLogin;
+}
+
+enum CacheNewKey {
+  aaa(needLogin: true, desc: "用户id"),
+  bbb(needLogin: true, desc: "标签缓存"),
+  ccc(needLogin: false, desc: "账号列表");
+
+  const CacheNewKey({
+    required this.desc,
+    required this.needLogin,
+  });
 
   /// 当前枚举对应的 描述文字
   final String desc;
@@ -328,6 +317,23 @@ class CacheService {
     final model = TagsRootModel.fromJson(json);
     return model;
   }
+
+  /// 更新本地操作日志
+  Future<Map<String, String>> updateLogs({required String value, bool isClear = false}) async {
+    final cacheKey = CacheKey.localOperateLog.name;
+    final Map<String, dynamic> cache = getMap(cacheKey) ?? {};
+    final Map<String, String> map = Map<String, String>.from(cache);
+    if (value.isEmpty) {
+      return map;
+    }
+
+    if (isClear) {
+      map.clear();
+    }
+    map[value] = DateTime.now().toString().substring(0, 23);
+    await setMap(cacheKey, map);
+    return map;
+  }
 }
 
 extension CacheServiceExt on CacheService {
@@ -368,7 +374,7 @@ extension CacheServiceExt on CacheService {
   }
 
   /// 设置登录环境
-  set env(APPEnvironment? val) {
+  set env(AppEnvironment? val) {
     if (val == null) {
       return;
     }
@@ -377,9 +383,9 @@ extension CacheServiceExt on CacheService {
   }
 
   /// 获取登录环境
-  APPEnvironment? get env {
+  AppEnvironment? get env {
     final result = CacheService().getString(CacheKey.requestEnv.name);
-    final val = APPEnvironment.fromString(result);
+    final val = AppEnvironment.fromString(result);
     return val;
   }
 
@@ -404,6 +410,11 @@ extension CacheServiceExt on CacheService {
   /// 1.0.0
   String? get appVersion {
     return CacheService().getString(CacheKey.appVersion.name);
+  }
+
+  /// 应用版本号 100
+  String? get appVersionCode {
+    return CacheService().getString(CacheKey.appVersionCode.name);
   }
 
   /// com.yilian.ylHealthApp

@@ -17,8 +17,7 @@ class NTransformViewDemo extends StatefulWidget {
 }
 
 class _NTransformViewDemoState extends State<NTransformViewDemo> {
-  bool get hideApp =>
-      "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
+  bool get hideApp => "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
 
   Map<String, dynamic> arguments = Get.arguments ?? <String, dynamic>{};
 
@@ -100,6 +99,6 @@ class _NTransformViewDemoState extends State<NTransformViewDemo> {
   }
 
   onCreate() {
-    ddlog(transformViewController.out);
+    DLog.d(transformViewController.out);
   }
 }

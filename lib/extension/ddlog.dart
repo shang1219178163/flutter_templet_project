@@ -7,47 +7,80 @@
 //
 
 import 'dart:developer' as developer;
-import 'package:flutter/foundation.dart' show TargetPlatform, defaultTargetPlatform, kReleaseMode;
-import 'package:flutter/material.dart';
-
-// ignore: non_constant_identifier_names, unnecessary_question_mark
-void ddlog(dynamic obj, {bool hasTime = true, String prefix = "ddlog"}) {
-  if (kReleaseMode) {
-    return;
-  }
-  developer.log("$prefix ${hasTime ? DateTime.now() : ""} $obj");
-
-  // var model = DDTraceModel(StackTrace.current);
-  //
-  // var items = [
-  //   DateTime.now().toString(),
-  //   model.fileName,
-  //   model.className,
-  //   model.selectorName,
-  //   "[${model.lineNumber}:${model.columnNumber}]"
-  // ].where((element) => element != "");
-  // debugPrint("${items.join(" ")}: $obj");
-}
+import 'dart:io' show Platform;
+import 'package:flutter/foundation.dart';
 
 /// DLog 日志打印
+// class DLog {
+//   static void d(
+//     Object? obj, {
+//     String prefix = "DLog",
+//     bool hasTime = true,
+//     }) {
+//     if (kReleaseMode) {
+//       return;
+//     }
+//     developer.log("$prefix ${hasTime ? DateTime.now() : ""} $obj");
+//   }
+//
+//   static void center(List<String> list) {
+//     String line(String text, {String fill = "", required int maxLength}) {
+//       final fillCount = maxLength - text.length;
+//       final left = List.filled(fillCount ~/ 2, fill);
+//       final right = List.filled(fillCount - left.length, fill);
+//       return left.join() + text + right.join();
+//     }
+//
+//     final listNew = [...list];
+//     listNew.sort((a, b) => b.length.compareTo(a.length));
+//     final maxLength = listNew.first.length;
+//
+//     for (final e in list) {
+//       d(line(e, fill: ' ', maxLength: maxLength));
+//     }
+//   }
+// }
+
 class DLog {
-  /// 防止日志被截断
-  static void d(
-    Object? obj, {
-    String prefix = "DLog",
-    bool hasTime = true,
-  }) {
-    ddlog(obj, prefix: prefix, hasTime: hasTime);
+  /// 是否启用日志打印
+  static bool enableLog = true;
+
+  /// 开启颜色
+  static bool enableColor = false;
+
+  // ANSI 颜色代码
+  static const String _ansiReset = '\x1B[0m';
+  static const String _ansiRed = '\x1B[31m';
+  static const String _ansiGreen = '\x1B[32m';
+  static const String _ansiYellow = '\x1B[33m';
+  static const String _ansiBlue = '\x1B[34m';
+  static const String _ansiGray = '\x1B[37m';
+
+  // Web 控制台颜色样式
+  static const String _webRed = 'color: red';
+  static const String _webGreen = 'color: #4CAF50';
+  static const String _webYellow = 'color: #FFC107';
+  static const String _webBlue = 'color: #2196F3';
+  static const String _webGray = 'color: #9E9E9E';
+
+  // 打印调试日志
+  static void d(dynamic message) {
+    _printLog('DEBUG', message, _ansiBlue, _webBlue);
   }
 
-  /// 函数执行时间
-  static void codeExecution({
-    required DateTime stime,
-    String? funcName,
-  }) {
-    var etime = DateTime.now();
-    final inMilliseconds = etime.difference(stime).inMilliseconds;
-    DLog.d("$funcName 执行时长：$inMilliseconds 毫秒.");
+  // 打印信息日志
+  static void i(dynamic message) {
+    _printLog('INFO', message, _ansiGreen, _webGreen);
+  }
+
+  // 打印警告日志
+  static void w(dynamic message) {
+    _printLog('WARN', message, _ansiYellow, _webYellow);
+  }
+
+  // 打印错误日志
+  static void e(dynamic message) {
+    _printLog('ERROR', message, _ansiRed, _webRed);
   }
 
   static void center(List<String> list) {
@@ -63,85 +96,86 @@ class DLog {
     final maxLength = listNew.first.length;
 
     for (final e in list) {
-      d(line(e, fill: ' ', maxLength: maxLength), hasTime: false);
-    }
-  }
-}
-
-/// TraceModel
-class DDTraceModel {
-  final StackTrace _trace;
-
-  String fileName = "";
-  String className = "";
-  String selectorName = "";
-  int lineNumber = 0;
-  int columnNumber = 0;
-
-  DDTraceModel(this._trace) {
-    _parseTrace();
-  }
-
-  /// parse trace
-  void _parseTrace() {
-    switch (defaultTargetPlatform) {
-      case TargetPlatform.linux:
-      case TargetPlatform.macOS:
-      case TargetPlatform.windows:
-        {
-          var traceString2 = _trace.toString().split("\n")[2];
-          // print(traceString2);
-
-          var list = traceString2.split(" ").where((element) => element != "").toList();
-          selectorName = list.last.replaceAll("[", "").replaceAll("]", "()").trim();
-
-          _parseClassName(path: list.first);
-          _parseLineAndcolumn(location: list[1]);
-        }
-        break;
-      default:
-        {
-          var traceString1 = _trace.toString().split("\n")[1];
-          // print(traceString1);
-
-          var list = traceString1
-              .replaceAll("#1", "")
-              .replaceAll(".<anonymous closure>", "")
-              .replaceAll(")", "")
-              .replaceAll("(", "")
-              .replaceAll(".dart:", ".dart ")
-              .split(" ")
-              .where((element) => element != "")
-              .toList();
-
-          var fileInfo = list.first.split(".").toList();
-          className = fileInfo.first;
-          selectorName = "${fileInfo.last}()";
-
-          _parseClassName(path: list[1]);
-          _parseLineAndcolumn(location: list.last);
-        }
-        break;
+      d(line(e, fill: ' ', maxLength: maxLength));
     }
   }
 
-  /// parse className
-  void _parseClassName({required String path}) {
-    if (path.contains("/") == false) {
-      debugPrint("[DateTime.now(), path]");
+  // 获取调用信息
+  static (String className, String functionName, String fileName, int lineNumber) _getCallerInfo() {
+    try {
+      final frames = StackTrace.current.toString().split('\n');
+      // 第一帧是当前方法，第二帧是日志方法（d/i/w/e），第三帧是调用者
+      if (frames.length > 2) {
+        final frame = frames[3]; // 获取调用者的帧
+        // 匹配类名和方法名
+        final classMatch = RegExp(r'#\d+\s+([^.]+)\.(\w+)').firstMatch(frame);
+        final className = classMatch?.group(1) ?? 'Unknown';
+        final functionName = classMatch?.group(2) ?? 'unknown';
+
+        // 匹配文件名和行号
+        final fileMatch = RegExp(r'\((.+?):(\d+)(?::\d+)?\)').firstMatch(frame);
+        final fileName = fileMatch?.group(1) ?? 'unknown';
+        final lineNumber = int.tryParse(fileMatch?.group(2) ?? '0') ?? 0;
+
+        return (className, functionName, fileName, lineNumber);
+      }
+    } catch (e) {
+      debugPrint('Error getting caller info: $e');
+    }
+    return ('', '', '', 0);
+  }
+
+  // 获取当前平台
+  static String _getPlatform() {
+    if (kIsWeb) {
+      return 'Web';
+    }
+    try {
+      return Platform.operatingSystem;
+    } catch (e) {
+      // 如果 Platform 不可用，返回 Unknown
+      return '';
+    }
+  }
+
+  // 内部打印方法
+  static void _printLog(String level, dynamic message, String ansiColor, String webColor) {
+    if (!enableLog || !kDebugMode) {
       return;
     }
-    assert(path.contains("/"));
-    var list = path.split("/").last.split(" ").where((element) => element != "").toList();
-    fileName = list.first.trim();
+
+    final (className, functionName, fileName, lineNumber) = _getCallerInfo();
+    final now = DateTime.now();
+    final timeStr =
+        '${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')}:${now.second.toString().padLeft(2, '0')}.${now.millisecond.toString().padLeft(3, '0')}';
+    final platform = _getPlatform();
+
+    final logMessage = kIsWeb
+        ? '[$timeStr][$level][$platform]$message'
+        : '[$timeStr][$level][$platform][$className.$functionName $lineNumber] $message';
+
+    if (kIsWeb) {
+      _printLogWeb(level, logMessage, webColor);
+    } else {
+      _printLogNative(level, logMessage, ansiColor);
+    }
   }
 
-  /// parse Line and column
-  void _parseLineAndcolumn({required String location}) {
-    if (location.contains(":")) {
-      var list = location.split(":");
-      lineNumber = int.parse(list.first.trim());
-      columnNumber = int.parse(list.last.trim());
+  // Web 平台的打印实现
+  static void _printLogWeb(String level, String message, String webColor) {
+    developer.log(message);
+  }
+
+  // 原生平台的打印实现
+  static void _printLogNative(String level, String message, String ansiColor) {
+    final sb = StringBuffer();
+    if (enableColor) {
+      sb.write(ansiColor);
     }
+    sb.write(message);
+    if (enableColor) {
+      sb.write(_ansiReset);
+    }
+    developer.log(sb.toString());
   }
 }

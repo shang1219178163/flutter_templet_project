@@ -34,8 +34,7 @@ class NRefreshViewDemo extends StatefulWidget {
 }
 
 class _NRefreshViewDemoState extends State<NRefreshViewDemo> {
-  bool get hideApp =>
-      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
+  bool get hideApp => Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
 
   /// 获取上个页面传的参数
   /// userId --- 用户id
@@ -100,7 +99,7 @@ class _NRefreshViewDemoState extends State<NRefreshViewDemo> {
                         // "isSelected": e.isSelected,
                       })
                   .toList();
-              ddlog(items);
+              DLog.d(items);
 
               final count = list.length;
               var desc = "已选择 $count";
@@ -117,21 +116,18 @@ class _NRefreshViewDemoState extends State<NRefreshViewDemo> {
                 return NRefreshView<UserModel>(
                   controller: refreshViewController,
                   pageSize: 10,
-                  onRequest:
-                      (bool isRefresh, int page, int pageSize, last) async {
-                    return requestList(
-                        isRefresh: isRefresh, pageNo: page, pageSize: pageSize);
+                  onRequest: (bool isRefresh, int page, int pageSize, last) async {
+                    return requestList(isRefresh: isRefresh, pageNo: page, pageSize: pageSize);
                   },
                   itemBuilder: (BuildContext context, int index, e) {
-                    return StatefulBuilder(
-                        builder: (BuildContext context, StateSetter setState) {
+                    return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
                       void onTap() {
-                        ddlog("onSelected: ${e.toJson()}");
+                        DLog.d("onSelected: ${e.toJson()}");
                       }
 
                       void onToggle() {
                         e.isSelected = !e.isSelected;
-                        ddlog("onSelected: ${e.isSelected}");
+                        DLog.d("onSelected: ${e.isSelected}");
                         setState(() {});
 
                         if (e.isSelected) {
@@ -150,8 +146,7 @@ class _NRefreshViewDemoState extends State<NRefreshViewDemo> {
                         onTap: !isEdit ? onTap : onToggle,
                         leading: NNetworkImage(
                           url: "",
-                          placeholder: AssetImage(
-                              "img_placeholder_patient.png".toPath()),
+                          placeholder: AssetImage("img_placeholder_patient.png".toPath()),
                           width: 40,
                           height: 40,
                         ),

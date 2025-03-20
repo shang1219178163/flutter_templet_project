@@ -112,8 +112,7 @@ class _AppUpgradeWidget extends State<AppUpgradeView> {
   _buildTitle() {
     return Padding(
         padding: EdgeInsets.only(top: 20),
-        child: Text(widget.title ?? '',
-            style: widget.titleStyle ?? TextStyle(fontSize: 22)));
+        child: Text(widget.title ?? '', style: widget.titleStyle ?? TextStyle(fontSize: 22)));
   }
 
   /// 构建版本更新信息
@@ -156,12 +155,9 @@ class _AppUpgradeWidget extends State<AppUpgradeView> {
   _buildCancelButton() {
     return Material(
       child: Ink(
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(widget.borderRadius))),
+        decoration: BoxDecoration(borderRadius: BorderRadius.only(bottomLeft: Radius.circular(widget.borderRadius))),
         child: InkWell(
-          borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(widget.borderRadius)),
+          borderRadius: BorderRadius.only(bottomLeft: Radius.circular(widget.borderRadius)),
           onTap: () {
             // widget.onCancel?.call();
             Navigator.of(context).pop();
@@ -169,8 +165,7 @@ class _AppUpgradeWidget extends State<AppUpgradeView> {
           child: Container(
             height: 45,
             alignment: Alignment.center,
-            child: Text(widget.cancelText ?? '以后再说',
-                style: widget.cancelTextStyle ?? TextStyle()),
+            child: Text(widget.cancelText ?? '以后再说', style: widget.cancelTextStyle ?? TextStyle()),
           ),
         ),
       ),
@@ -179,17 +174,12 @@ class _AppUpgradeWidget extends State<AppUpgradeView> {
 
   /// 确定按钮
   _buildConfirmButton() {
-    var borderRadius =
-        BorderRadius.only(bottomRight: Radius.circular(widget.borderRadius));
+    var borderRadius = BorderRadius.only(bottomRight: Radius.circular(widget.borderRadius));
     if (widget.force) {
       borderRadius = BorderRadius.only(
-          bottomRight: Radius.circular(widget.borderRadius),
-          bottomLeft: Radius.circular(widget.borderRadius));
+          bottomRight: Radius.circular(widget.borderRadius), bottomLeft: Radius.circular(widget.borderRadius));
     }
-    var _okBackgroundColors = [
-      Theme.of(context).primaryColor,
-      Theme.of(context).primaryColor
-    ];
+    var _okBackgroundColors = [Theme.of(context).primaryColor, Theme.of(context).primaryColor];
 
     return Material(
       child: Ink(
@@ -202,14 +192,13 @@ class _AppUpgradeWidget extends State<AppUpgradeView> {
         child: InkWell(
           borderRadius: borderRadius,
           onTap: () {
-            ddlog(widget.okText ?? '立即体验');
+            DLog.d(widget.okText ?? '立即体验');
             // onConfirm();
           },
           child: Container(
             height: 45,
             alignment: Alignment.center,
-            child: Text(widget.okText ?? '立即体验',
-                style: widget.okTextStyle ?? TextStyle(color: Colors.white)),
+            child: Text(widget.okText ?? '立即体验', style: widget.okTextStyle ?? TextStyle(color: Colors.white)),
           ),
         ),
       ),

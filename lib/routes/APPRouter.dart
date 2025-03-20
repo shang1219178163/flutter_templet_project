@@ -41,6 +41,7 @@ import 'package:flutter_templet_project/pages/demo/AppLaunchPage.dart';
 import 'package:flutter_templet_project/pages/demo/AppLifecycleStateObserverDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AppRouteAwareDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AppRouteAwareDemoOne.dart';
+import 'package:flutter_templet_project/pages/demo/AppSandboxFileDirectory.dart';
 import 'package:flutter_templet_project/pages/demo/AppWebViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AsyncDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AudioPlayerPageDemo.dart';
@@ -71,7 +72,9 @@ import 'package:flutter_templet_project/pages/demo/ContextMenuActionDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ContextMenuDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ConvertFlle.dart';
 import 'package:flutter_templet_project/pages/demo/CupertinoFormDemo.dart';
+import 'package:flutter_templet_project/pages/demo/CurvedNavigationBarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/CustomMultiChildLayoutDemo.dart';
+import 'package:flutter_templet_project/pages/demo/CustomPainterPageDemo.dart';
 import 'package:flutter_templet_project/pages/demo/CustomScrollBarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/CustomSingleChildLayoutDemo.dart';
 import 'package:flutter_templet_project/pages/demo/CustomSwipperDemo.dart';
@@ -99,10 +102,12 @@ import 'package:flutter_templet_project/pages/demo/EmojiPage.dart';
 import 'package:flutter_templet_project/pages/demo/ExpandIconDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ExpandIconDemoNew.dart';
 import 'package:flutter_templet_project/pages/demo/ExpressionsCalulatorDemo.dart';
+import 'package:flutter_templet_project/pages/demo/FaceDetectionPage.dart';
 import 'package:flutter_templet_project/pages/demo/FilterDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FilterDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/FittedBoxDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FlexDemo.dart';
+import 'package:flutter_templet_project/pages/demo/FlexbleListViewPage.dart';
 import 'package:flutter_templet_project/pages/demo/FlexibleDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FlexibleSpaceDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FloatingActionButtonDemo.dart';
@@ -131,9 +136,10 @@ import 'package:flutter_templet_project/pages/demo/HitTestDemo.dart';
 import 'package:flutter_templet_project/pages/demo/HomeNavDemo.dart';
 import 'package:flutter_templet_project/pages/demo/HorizontalCellDemo.dart';
 import 'package:flutter_templet_project/pages/demo/HudProgressDemo.dart';
-import 'package:flutter_templet_project/pages/demo/IMChatPage.dart';
 import 'package:flutter_templet_project/pages/demo/IconConvertPage.dart';
 import 'package:flutter_templet_project/pages/demo/IgnorePointerDemo.dart';
+import 'package:flutter_templet_project/pages/demo/ImChatPage.dart';
+import 'package:flutter_templet_project/pages/demo/ImConversationPage.dart';
 import 'package:flutter_templet_project/pages/demo/ImageBlendModeDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ImageStretchDemo.dart';
 import 'package:flutter_templet_project/pages/demo/IndexedStackDemo.dart';
@@ -153,11 +159,13 @@ import 'package:flutter_templet_project/pages/demo/ListViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ListViewOneDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ListViewStyleDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ListWheelScrollViewDemo.dart';
+import 'package:flutter_templet_project/pages/demo/ListenableDemo.dart';
 import 'package:flutter_templet_project/pages/demo/LocalImagePage.dart';
 import 'package:flutter_templet_project/pages/demo/LoginPage.dart';
 import 'package:flutter_templet_project/pages/demo/LoginPageOne.dart';
 import 'package:flutter_templet_project/pages/demo/LoginPageTwo.dart';
 import 'package:flutter_templet_project/pages/demo/LongCaptureWidgetDemo.dart';
+import 'package:flutter_templet_project/pages/demo/MarkdownBodyDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MarqueeWidgetDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MaterialBannerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MaterialDemo.dart';
@@ -177,7 +185,7 @@ import 'package:flutter_templet_project/pages/demo/NChoiceBoxOneDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NChoiceExpansionDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NExpandTextDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NFooterButtonBarDemo.dart';
-import 'package:flutter_templet_project/pages/demo/NIndexAvatarGroupDemo.dart';
+import 'package:flutter_templet_project/pages/demo/NAvatarGroupDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NPageViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NRefreshViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NSectionHeaderDemo.dart';
@@ -194,6 +202,7 @@ import 'package:flutter_templet_project/pages/demo/NavigationRailDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NavigationToolbarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NestedNavigatorDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NestedScrollViewDemo.dart';
+import 'package:flutter_templet_project/pages/demo/NestedScrollViewDemoFour.dart';
 import 'package:flutter_templet_project/pages/demo/NestedScrollViewDemoHome.dart';
 import 'package:flutter_templet_project/pages/demo/NestedScrollViewDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/NestedScrollViewDemoThree.dart';
@@ -214,11 +223,15 @@ import 'package:flutter_templet_project/pages/demo/OverlayMixinDemo.dart';
 import 'package:flutter_templet_project/pages/demo/OverlayPortalDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PageBuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PageLifecycleFuncTest.dart';
+import 'package:flutter_templet_project/pages/demo/PageRouteAnimationDemo.dart';
+import 'package:flutter_templet_project/pages/demo/PageRouteDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PageViewAndBarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PageViewDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/PageViewDemoThree.dart';
+import 'package:flutter_templet_project/pages/demo/PageViewVerticalDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PhysicalModelDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PickerDemo.dart';
+import 'package:flutter_templet_project/pages/demo/PlatformDispatcherDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PopScopeDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PositionedDirectionalDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PreferredSizeDemo.dart';
@@ -292,10 +305,12 @@ import 'package:flutter_templet_project/pages/demo/WeatherInfoPage.dart';
 import 'package:flutter_templet_project/pages/demo/WrapDemo.dart';
 import 'package:flutter_templet_project/pages/demo/YamlParsePage.dart';
 import 'package:flutter_templet_project/pages/demo/ae_report_page.dart';
+import 'package:flutter_templet_project/pages/demo/audio_visualizer_demo.dart';
 import 'package:flutter_templet_project/pages/demo/box_shadow_demo.dart';
 import 'package:flutter_templet_project/pages/demo/box_shadow_demo_one.dart';
 import 'package:flutter_templet_project/pages/demo/data_type_demo.dart';
 import 'package:flutter_templet_project/pages/demo/drawImageNineDemo.dart';
+import 'package:flutter_templet_project/pages/demo/email_sender_demo.dart';
 import 'package:flutter_templet_project/pages/demo/enumDemo.dart';
 import 'package:flutter_templet_project/pages/demo/file_upload_box_demo.dart';
 import 'package:flutter_templet_project/pages/demo/homeSrollDemo.dart';
@@ -312,11 +327,14 @@ import 'package:flutter_templet_project/pages/demo/rp_template_qrcode_page.dart'
 import 'package:flutter_templet_project/pages/demo/secure_keyboard_demo.dart';
 import 'package:flutter_templet_project/pages/demo/smart_dialog_demo.dart';
 import 'package:flutter_templet_project/pages/demo/steper_connector_demo.dart';
+import 'package:flutter_templet_project/pages/demo/swiper_card_demo.dart';
 import 'package:flutter_templet_project/pages/demo/system_color_page.dart';
 import 'package:flutter_templet_project/pages/demo/system_curves_page.dart';
 import 'package:flutter_templet_project/pages/demo/system_icons_page.dart';
+import 'package:flutter_templet_project/pages/demo/tab_container_demo.dart';
 import 'package:flutter_templet_project/pages/demo/test_page.dart';
 import 'package:flutter_templet_project/pages/demo/test_page_one.dart';
+import 'package:flutter_templet_project/pages/demo/weather/screens/weather_home.dart';
 import 'package:flutter_templet_project/pages/demo/webview_demo.dart';
 import 'package:flutter_templet_project/pages/demo/will_pop_scope_demo.dart';
 import 'package:flutter_templet_project/pages/first_page.dart';
@@ -354,6 +372,7 @@ import 'package:flutter_templet_project/vendor/getx/getx_demo.dart';
 import 'package:flutter_templet_project/vendor/isar/page/OrderListTabPage.dart';
 import 'package:flutter_templet_project/vendor/isar/page/StudentTabPage.dart';
 import 'package:flutter_templet_project/vendor/isar/page/TodoListTabPage.dart';
+import 'package:flutter_templet_project/vendor/jpush/jpush_info_page.dart';
 import 'package:flutter_templet_project/vendor/popover_demo.dart';
 import 'package:flutter_templet_project/vendor/qr/qr_code_scanner_demo.dart';
 import 'package:flutter_templet_project/vendor/qr/qr_flutter_demo.dart';
@@ -367,428 +386,448 @@ import 'package:get/get.dart';
 
 ///https://www.jianshu.com/p/b9d6ec92926f
 class APPRouter {
-  static const appTabPage = '/AppTabPage';
-  static const yamlParsePage = '/yamlParsePage';
+  static const String appTabPage = '/AppTabPage';
+  static const String yamlParsePage = '/yamlParsePage';
 
-  static const appLifecycleObserverDemo = '/appLifecycleObserverDemo';
-  static const themeColorDemo = '/themeColorDemo';
+  static const String appLifecycleObserverDemo = '/appLifecycleObserverDemo';
+  static const String themeColorDemo = '/themeColorDemo';
+  static const String appSandboxFileDirectory = '/AppSandboxFileDirectory';
 
-  static const launchPage = '/APPLaunchPage';
-  static const emojiPage = '/emojiPage';
-  static const developToolList = '/developToolList';
+  static const String jPushInfoPage = '/JPushInfoPage';
 
-  static const notFound = '/APPNotFoundPage';
+  static const String launchPage = '/APPLaunchPage';
+  static const String emojiPage = '/emojiPage';
+  static const String developToolList = '/developToolList';
 
-  static const mediaQueryScreeenDemo = '/mediaQueryScreeenDemo';
-  static const autoLayoutDemo = '/AutoLayoutDemo';
-  static const appBarDemo = '/appBarDemo';
-  static const textDemo = '/textDemo';
+  static const String notFound = '/APPNotFoundPage';
 
-  static const loginPage = '/LoginPage';
-  static const loginPageOne = '/loginPageOne';
-  static const loginPageTwo = '/loginPageTwo';
+  static const String mediaQueryScreeenDemo = '/mediaQueryScreeenDemo';
+  static const String autoLayoutDemo = '/AutoLayoutDemo';
+  static const String appBarDemo = '/appBarDemo';
+  static const String textDemo = '/textDemo';
 
-  static const signinPage = '/SigninPage';
+  static const String loginPage = '/LoginPage';
+  static const String loginPageOne = '/loginPageOne';
+  static const String loginPageTwo = '/loginPageTwo';
 
-  static const firstPage = '/FirstPage';
-  static const secondPage = '/SecondPage';
-  static const thirdPage = '/ThirdPage';
-  static const fourthPage = '/FourthPage';
+  static const String signinPage = '/SigninPage';
 
-  static const pageBuilderDemo = '/pageBuilderDemo';
+  static const String firstPage = '/FirstPage';
+  static const String secondPage = '/SecondPage';
+  static const String thirdPage = '/ThirdPage';
+  static const String fourthPage = '/FourthPage';
 
-  static const stringTransformPage = '/stringTransformPage';
+  static const String pageBuilderDemo = '/pageBuilderDemo';
 
-  static const enumDemo = '/enumDemo';
-  static const reflectDemo = '/moldelReflectDemo';
-  static const appRouteObserverDemo = '/appRouteObserverDemo';
-  static const appRouteObserverDemoOne = '/appRouteObserverDemoOne';
-  static const pageLifecycleObserverDemo = '/pageLifecycleObserverDemo';
-  static const pageLifecycleFuncTest = '/pageLifecycleFuncTest';
-  static const mediaQueryDemo = '/mediaQueryDemo';
-  static const mediaQueryDemoOne = '/mediaQueryDemoOne';
+  static const String stringTransformPage = '/stringTransformPage';
 
-  static const tabBarDemo = '/TabBarDemo';
-  static const widgetListPage = '/WidgetListPage';
-  static const animatedDemo = '/AnimatedDemo';
-  static const animatedWidgetDemo = '/AnimatedWidgetDemo';
-  static const animatedSwitcherDemo = '/AnimatedSwitcherDemo';
-  static const animatedListDemo = '/animatedListDemo';
-  static const animatedGroupDemo = '/animatedGroupDemo';
-  static const animatedBuilderDemo = '/animatedBuilderDemo';
-  static const animatedListSample = '/animatedListSample';
-  static const animatedSizeDemo = '/animatedSizeDemo';
-  static const animatedSizeDemoOne = '/animatedSizeDemoOne';
+  static const String enumDemo = '/enumDemo';
+  static const String reflectDemo = '/moldelReflectDemo';
+  static const String appRouteObserverDemo = '/appRouteObserverDemo';
+  static const String appRouteObserverDemoOne = '/appRouteObserverDemoOne';
+  static const String pageLifecycleObserverDemo = '/pageLifecycleObserverDemo';
+  static const String pageLifecycleFuncTest = '/pageLifecycleFuncTest';
+  static const String mediaQueryDemo = '/mediaQueryDemo';
+  static const String mediaQueryDemoOne = '/mediaQueryDemoOne';
 
-  static const textlessDemo = '/textlessDemo';
-  static const alertDialogDemo = '/AlertDialogDemo';
-  static const alertDialogTagSelectDemo = '/alertDialogTagSelectDemo';
+  static const String tabBarDemo = '/TabBarDemo';
+  static const String widgetListPage = '/WidgetListPage';
+  static const String animatedDemo = '/AnimatedDemo';
+  static const String animatedWidgetDemo = '/AnimatedWidgetDemo';
+  static const String animatedSwitcherDemo = '/AnimatedSwitcherDemo';
+  static const String animatedListDemo = '/animatedListDemo';
+  static const String animatedGroupDemo = '/animatedGroupDemo';
+  static const String animatedBuilderDemo = '/animatedBuilderDemo';
+  static const String animatedListSample = '/animatedListSample';
+  static const String animatedSizeDemo = '/animatedSizeDemo';
+  static const String animatedSizeDemoOne = '/animatedSizeDemoOne';
 
-  static const alertSheetDemo = '/AlertSheetDemo';
-  static const systemIconsPage = '/systemIconsPage';
-  static const systemColorPage = '/systemColorPage';
-  static const systemCurvesPage = '/systemCurvesPage';
+  static const String textlessDemo = '/textlessDemo';
+  static const String alertDialogDemo = '/AlertDialogDemo';
+  static const String alertDialogTagSelectDemo = '/alertDialogTagSelectDemo';
 
-  static const gridViewDemo = '/GridViewDemo';
-  static const gridPaperDemo = '/GridPaperDemo';
+  static const String alertSheetDemo = '/AlertSheetDemo';
+  static const String systemIconsPage = '/systemIconsPage';
+  static const String systemColorPage = '/systemColorPage';
+  static const String systemCurvesPage = '/systemCurvesPage';
 
-  static const pageViewDemo = '/PageViewDemo';
-  static const pageViewDemoThree = '/pageViewDemoThree';
+  static const String gridViewDemo = '/GridViewDemo';
+  static const String gridPaperDemo = '/GridPaperDemo';
 
-  static const snackBarDemo = '/SnackBarDemo';
-  static const snackBarDemoOne = '/SnackBarDemoOne';
-  static const cupertinoTabScaffoldDemo = '/CupertinoTabScaffoldDemo';
-  static const pickerDemo = '/PickerDemo';
-  static const datePickerDemo = '/datePickerDemo';
-  static const datePickerPage = '/DatePickerPage';
-  static const showSearchDemo = '/ShowSearchDemo';
-  static const localNotifationDemo = '/LocalNotifationDemo';
-  static const progressHudDemoNew = '/ProgressHudDemoNew';
-  static const toastContext = '/ToastContext';
-  static const toastNoContext = '/ToastNoContext';
-  static const listDismissibleDemo = '/listDismissibleDemo';
-  static const slidableDemo = '/SlidaableDemo';
-  static const settingsPage = '/AppSettingsPage';
-  static const containerDemo = '/containerDemo';
-  static const animatedContainerDemo = '/animatedContainerDemo';
-  static const draggableDemo = '/DraggableDemo';
-  static const forgetPasswordPage = '/ForgetPasswordPage';
-  static const dataTableDemo = '/DataTableDemo';
-  static const dataTableByPaginatedDemo = '/dataTableByPaginatedDemo';
-  static const segmentedControlDemo = '/segmentedControlDemo';
-  static const segmentedControlDemoOne = '/segmentedControlDemoOne';
-  static const segmentedButtonDemo = '/SegmentedButtonDemo';
+  static const String pageViewDemo = '/PageViewDemo';
+  static const String pageViewDemoThree = '/pageViewDemoThree';
 
-  static const sliderDemo = '/sliderDemo';
-  static const draggableScrollableSheetDemo = '/DraggableScrollableSheetDemo';
-  static const indicatorDemo = '/IndicatorDemo';
-  static const appWebViewDemo = '/AppWebViewDemo';
-  static const carouselSliderDemo = '/carouselSliderDemo';
-  static const sliverAppBarDemo = '/SliverAppBarDemo';
-  static const sliverFamilyDemo = '/SliverFamilyDemo';
-  static const sliverFamilyPageViewDemo = '/sliverFamilyPageViewDemo';
+  static const String snackBarDemo = '/SnackBarDemo';
+  static const String snackBarDemoOne = '/SnackBarDemoOne';
+  static const String cupertinoTabScaffoldDemo = '/CupertinoTabScaffoldDemo';
+  static const String pickerDemo = '/PickerDemo';
+  static const String datePickerDemo = '/datePickerDemo';
+  static const String datePickerPage = '/DatePickerPage';
+  static const String showSearchDemo = '/ShowSearchDemo';
+  static const String localNotifationDemo = '/LocalNotifationDemo';
+  static const String progressHudDemoNew = '/ProgressHudDemoNew';
+  static const String toastContext = '/ToastContext';
+  static const String toastNoContext = '/ToastNoContext';
+  static const String listDismissibleDemo = '/listDismissibleDemo';
+  static const String slidableDemo = '/SlidaableDemo';
+  static const String settingsPage = '/AppSettingsPage';
+  static const String containerDemo = '/containerDemo';
+  static const String animatedContainerDemo = '/animatedContainerDemo';
+  static const String draggableDemo = '/DraggableDemo';
+  static const String forgetPasswordPage = '/ForgetPasswordPage';
+  static const String dataTableDemo = '/DataTableDemo';
+  static const String dataTableByPaginatedDemo = '/dataTableByPaginatedDemo';
+  static const String segmentedControlDemo = '/segmentedControlDemo';
+  static const String segmentedControlDemoOne = '/segmentedControlDemoOne';
+  static const String segmentedButtonDemo = '/SegmentedButtonDemo';
 
-  static const hudProgressDemo = '/HudProgressDemo';
-  static const reorderableListViewDemo = '/ReorderableListViewDemo';
-  static const expandIconDemoNew = '/ExpandIconDemoNew';
-  static const expandIconDemo = '/ExpandIconDemo';
-  static const stepperDemo = '/StepperDemo';
-  static const numberStepperDemo = '/NumberStepperDemo';
-  static const tableViewDemo = '/TableViewDemo';
-  static const githubRepoDemo = '/GithubRepoDemo';
-  static const progressHudDemo = '/ProgressHudDemo';
-  static const locationPopView = '/LocationPopView';
-  static const backdropFilterDemo = '/BackdropFilterDemo';
-  static const richTextDemo = '/RichTextDemo';
-  static const numberFormatDemo = '/NumberFormatDemo';
-  static const dateTimeDemo = '/DateTimeDemo';
-  static const textFieldDemo = '/TextFieldDemo';
-  static const textFieldDemoOne = '/TextFieldDemoOne';
-  static const textFieldDemoTwo = '/textFieldDemoTwo';
-  static const textFieldWidgetDemo = '/TextFieldWidgetDemo';
+  static const String sliderDemo = '/sliderDemo';
+  static const String draggableScrollableSheetDemo = '/DraggableScrollableSheetDemo';
+  static const String indicatorDemo = '/IndicatorDemo';
+  static const String appWebViewDemo = '/AppWebViewDemo';
+  static const String carouselSliderDemo = '/carouselSliderDemo';
+  static const String sliverAppBarDemo = '/SliverAppBarDemo';
+  static const String sliverFamilyDemo = '/SliverFamilyDemo';
+  static const String sliverFamilyPageViewDemo = '/sliverFamilyPageViewDemo';
 
-  static const cupertinoFormDemo = '/CupertinoFormDemo';
-  static const contextMenuActionDemo = '/ContextMenuActionDemo';
-  static const menuDemo = '/MenuDemo';
-  static const providerRoute = '/ProviderRoute';
-  static const providerListDemo = '/providerListDemo';
-  static const sliverPersistentHeaderDemo = '/SliverPersistentHeaderDemo';
-  static const layoutBuilderDemo = '/LayoutBuilderDemo';
-  static const tableDemo = '/TableDemo';
-  static const widgetDemoList = '/WidgetDemoList';
+  static const String hudProgressDemo = '/HudProgressDemo';
+  static const String reorderableListViewDemo = '/ReorderableListViewDemo';
+  static const String expandIconDemoNew = '/ExpandIconDemoNew';
+  static const String expandIconDemo = '/ExpandIconDemo';
+  static const String stepperDemo = '/StepperDemo';
+  static const String numberStepperDemo = '/NumberStepperDemo';
+  static const String tableViewDemo = '/TableViewDemo';
+  static const String githubRepoDemo = '/GithubRepoDemo';
+  static const String progressHudDemo = '/ProgressHudDemo';
+  static const String locationPopView = '/LocationPopView';
+  static const String backdropFilterDemo = '/BackdropFilterDemo';
+  static const String richTextDemo = '/RichTextDemo';
+  static const String numberFormatDemo = '/NumberFormatDemo';
+  static const String dateTimeDemo = '/DateTimeDemo';
+  static const String textFieldDemo = '/TextFieldDemo';
+  static const String textFieldDemoOne = '/TextFieldDemoOne';
+  static const String textFieldDemoTwo = '/textFieldDemoTwo';
+  static const String textFieldWidgetDemo = '/TextFieldWidgetDemo';
 
-  static const futureBuilderDemo = '/FutureBuilderDemo';
-  static const streamBuilderDemo = '/StreamBuilderDemo';
-  static const nestedScrollViewDemo = '/NestedScrollViewDemo';
+  static const String cupertinoFormDemo = '/CupertinoFormDemo';
+  static const String contextMenuActionDemo = '/ContextMenuActionDemo';
+  static const String menuDemo = '/MenuDemo';
+  static const String providerRoute = '/ProviderRoute';
+  static const String providerListDemo = '/providerListDemo';
+  static const String sliverPersistentHeaderDemo = '/SliverPersistentHeaderDemo';
+  static const String layoutBuilderDemo = '/LayoutBuilderDemo';
+  static const String tableDemo = '/TableDemo';
+  static const String widgetDemoList = '/WidgetDemoList';
 
-  static const popoverDemo = '/popoverDemo';
-  static const tabBarViewDemo = '/tabBarViewDemo';
+  static const String futureBuilderDemo = '/FutureBuilderDemo';
+  static const String streamBuilderDemo = '/StreamBuilderDemo';
+  static const String nestedScrollViewDemo = '/NestedScrollViewDemo';
 
-  static const tabBarTabBarViewDemo = '/tabBarTabBarViewDemo';
-  static const tabBarPageViewDemo = '/tabBarPageViewDemo';
-  static const tabBarPageViewDemoNew = '/tabBarPageViewDemoNew';
-  static const tabBarReusePageDemo = '/tabBarReusePageDemo';
-  static const absorbPointerDemo = '/AbsorbPointerDemo';
-  static const willPopScopeDemo = '/WillPopScopeDemo';
-  static const bannerDemo = '/bannerDemo';
-  static const indexedStackDemo = '/IndexedStackDemo';
+  static const String popoverDemo = '/popoverDemo';
+  static const String tabBarViewDemo = '/tabBarViewDemo';
 
-  static const rxDartProviderDemo = '/RxDartProviderDemo';
-  static const stateManagerDemo = '/StateManagerDemo';
+  static const String tabBarTabBarViewDemo = '/tabBarTabBarViewDemo';
+  static const String tabBarPageViewDemo = '/tabBarPageViewDemo';
+  static const String tabBarPageViewDemoNew = '/tabBarPageViewDemoNew';
+  static const String tabBarReusePageDemo = '/tabBarReusePageDemo';
+  static const String absorbPointerDemo = '/AbsorbPointerDemo';
+  static const String willPopScopeDemo = '/WillPopScopeDemo';
+  static const String bannerDemo = '/bannerDemo';
+  static const String indexedStackDemo = '/IndexedStackDemo';
 
-  static const getxStateDemo = '/getxStateDemo';
-  static const getxStateDemoNew = '/getxStateDemoNew';
+  static const String rxDartProviderDemo = '/RxDartProviderDemo';
+  static const String stateManagerDemo = '/StateManagerDemo';
 
-  static const responsiveColumnDemo = '/responsiveColumnDemo';
-  static const testPage = '/testPage';
-  static const testPageOne = '/testPageOne';
-  static const offstageDemo = '/OffstageDemo';
-  static const bottomAppBarDemo = '/bottomAppBarDemo';
-  static const calendarDatePickerDemo = '/CalendarDatePickerDemo';
-  static const chipDemo = '/ChipDemo';
-  static const chipFilterDemo = '/chipFilterDemo';
-  static const bottomSheetDemo = '/bottomSheetDemo';
-  static const timePickerDemo = '/timePickerDemo';
-  static const shaderMaskDemo = '/ShaderMaskDemo';
-  static const blurViewDemo = '/blurViewDemo';
-  static const boxDemo = '/BoxDemo';
-  static const mouseRegionDemo = '/MouseRegionDemo';
-  static const localImagePage = '/LocalImagePage';
-  static const timelineDemo = '/timelineDemo';
-  static const timelinesDemo = '/timelinesDemo';
-  static const hitTest = '/hitTest';
-  static const navgationBarDemo = '/transparentNavgationBarDemo';
-  static const borderDemo = '/borderDemo';
-  static const clipDemo = '/clipDemo';
-  static const steperConnectorDemo = '/steperConnectorDemo';
-  static const textViewDemo = '/textViewDemo';
-  static const navigationBarDemo = '/navigationBarDemo';
-  static const qrCodeScannerDemo = '/qrCodeScannerDemo';
-  static const qrFlutterDemo = '/qrFlutterDemo';
-  static const scribbleDemo = '/scribbleDemo';
-  static const aestheticDialogsDemo = '/aestheticDialogsDemo';
-  static const customTimerDemo = '/customTimerDemo';
-  static const skeletonDemo = '/skeletonDemo';
+  static const String getxStateDemo = '/getxStateDemo';
+  static const String getxStateDemoNew = '/getxStateDemoNew';
 
-  static const flutterFFiTest = '/flutterFFiTest';
-  static const smartDialogPageDemo = '/smartDialogPageDemo';
-  static const mergeImagesDemo = '/mergeImagesDemo';
-  static const mergeNetworkImagesDemo = '/mergeNetworkImagesDemo';
-  static const drawImageNineDemo = '/drawImageNineDemo';
-  static const proxyProviderDemo = '/proxyProviderDemo';
-  static const ratingBarDemo = '/ratingBarDemo';
-  static const shortcutsDemo = '/shortcutsDemo';
-  static const shortcutsDemoOne = '/shortcutsDemoOne';
-  static const dragAndDropDemo = '/dragAndDropDemo';
-  static const transformDemo = '/transformDemo';
-  static const fittedBoxDemo = '/fittedBoxDemo';
-  static const coloredBoxDemo = '/coloredBoxDemo';
-  static const positionedDirectionalDemo = '/positionedDirectionalDemo';
-  static const statefulBuilderDemo = '/statefulBuilderDemo';
-  static const valueListenableBuilderDemo = '/valueListenableBuilderDemo';
-  static const overflowBarDemo = '/overflowBarDemo';
-  static const navigationToolbarDemo = '/navigationToolbarDemo';
-  static const selectableTextDemo = '/SelectableTextDemo';
-  static const materialBannerDemo = '/materialBannerDemo';
-  static const autocompleteDemo = '/autocompleteDemo';
+  static const String responsiveColumnDemo = '/responsiveColumnDemo';
+  static const String testPage = '/testPage';
+  static const String testPageOne = '/testPageOne';
+  static const String customPainterPageDemo = '/customPainterPageDemo';
+  static const String offstageDemo = '/OffstageDemo';
+  static const String bottomAppBarDemo = '/bottomAppBarDemo';
+  static const String calendarDatePickerDemo = '/CalendarDatePickerDemo';
+  static const String chipDemo = '/ChipDemo';
+  static const String chipFilterDemo = '/chipFilterDemo';
+  static const String bottomSheetDemo = '/bottomSheetDemo';
+  static const String timePickerDemo = '/timePickerDemo';
+  static const String shaderMaskDemo = '/ShaderMaskDemo';
+  static const String blurViewDemo = '/blurViewDemo';
+  static const String boxDemo = '/BoxDemo';
+  static const String mouseRegionDemo = '/MouseRegionDemo';
+  static const String localImagePage = '/LocalImagePage';
+  static const String timelineDemo = '/timelineDemo';
+  static const String timelinesDemo = '/timelinesDemo';
+  static const String hitTest = '/hitTest';
+  static const String navgationBarDemo = '/transparentNavgationBarDemo';
+  static const String borderDemo = '/borderDemo';
+  static const String clipDemo = '/clipDemo';
+  static const String steperConnectorDemo = '/steperConnectorDemo';
+  static const String textViewDemo = '/textViewDemo';
+  static const String navigationBarDemo = '/navigationBarDemo';
+  static const String qrCodeScannerDemo = '/qrCodeScannerDemo';
+  static const String qrFlutterDemo = '/qrFlutterDemo';
+  static const String scribbleDemo = '/scribbleDemo';
+  static const String aestheticDialogsDemo = '/aestheticDialogsDemo';
+  static const String customTimerDemo = '/customTimerDemo';
+  static const String skeletonDemo = '/skeletonDemo';
 
-  static const autofillGroupDemo = '/autofillGroupDemo';
-  static const promptBuilderDemo = '/promptBuilderDemo';
-  static const rotatedBoxDemo = '/rotatedBoxDemo';
-  static const dismissibleDemo = '/dismissibleDemo';
-  static const modalBarrierDemo = '/modalBarrierDemo';
-  static const isolateDemo = '/isolateDemo';
-  static const listViewDemo = '/listViewDemo';
-  static const listViewStyleDemo = '/listViewStyleDemo';
-  static const builderDemo = '/builderDemo';
-  static const overlayDemo = '/overlayDemo';
-  static const overlayDemoOne = '/overlayDemoOne';
-  static const overlayMixinDemo = '/overlayMixinDemo';
+  static const String flutterFFiTest = '/flutterFFiTest';
+  static const String smartDialogPageDemo = '/smartDialogPageDemo';
+  static const String mergeImagesDemo = '/mergeImagesDemo';
+  static const String mergeNetworkImagesDemo = '/mergeNetworkImagesDemo';
+  static const String drawImageNineDemo = '/drawImageNineDemo';
+  static const String proxyProviderDemo = '/proxyProviderDemo';
+  static const String ratingBarDemo = '/ratingBarDemo';
+  static const String shortcutsDemo = '/shortcutsDemo';
+  static const String shortcutsDemoOne = '/shortcutsDemoOne';
+  static const String dragAndDropDemo = '/dragAndDropDemo';
+  static const String transformDemo = '/transformDemo';
+  static const String fittedBoxDemo = '/fittedBoxDemo';
+  static const String coloredBoxDemo = '/coloredBoxDemo';
+  static const String positionedDirectionalDemo = '/positionedDirectionalDemo';
+  static const String statefulBuilderDemo = '/statefulBuilderDemo';
+  static const String valueListenableBuilderDemo = '/valueListenableBuilderDemo';
+  static const String overflowBarDemo = '/overflowBarDemo';
+  static const String navigationToolbarDemo = '/navigationToolbarDemo';
+  static const String selectableTextDemo = '/SelectableTextDemo';
+  static const String materialBannerDemo = '/materialBannerDemo';
+  static const String autocompleteDemo = '/autocompleteDemo';
 
-  static const decorationDemo = '/decorationDemo';
-  static const stackDemo = '/stackDemo';
-  static const stackDemoOne = '/stackDemoOne';
-  static const stackDemoTwo = '/stackDemoTwo';
+  static const String autofillGroupDemo = '/autofillGroupDemo';
+  static const String promptBuilderDemo = '/promptBuilderDemo';
+  static const String rotatedBoxDemo = '/rotatedBoxDemo';
+  static const String dismissibleDemo = '/dismissibleDemo';
+  static const String modalBarrierDemo = '/modalBarrierDemo';
+  static const String isolateDemo = '/isolateDemo';
+  static const String listViewDemo = '/listViewDemo';
+  static const String listViewStyleDemo = '/listViewStyleDemo';
+  static const String builderDemo = '/builderDemo';
+  static const String overlayDemo = '/overlayDemo';
+  static const String overlayDemoOne = '/overlayDemoOne';
+  static const String overlayMixinDemo = '/overlayMixinDemo';
 
-  static const badgeDemo = '/badgeDemo';
-  static const badgesDemo = '/badgesDemo';
-  static const flutterSwiperDemo = '/flutterSwiperDemo';
-  static const flutterSwiperIndicatorDemo = '/flutterSwiperIndicatorDemo';
-  static const homeSrollDemo = '/synHomeSrollDemo';
-  static const homeNavDemo = '/synHomeNavDemo';
-  static const wrapDemo = '/wrapDemo';
-  static const boxConstraintsDemo = '/boxConstraintsDemo';
-  static const gradientDemo = '/gradientDemo';
-  static const imageBlendModeDemo = '/imageBlendModeDemo';
-  static const customSwipperDemo = '/customSwipperDemo';
-  static const visibilityDetectorDemo = '/visibilityDetectorDemo';
-  static const svgaImageDemo = '/svgaImageDemo';
-  static const providerDemo = '/providerDemo';
-  static const providerDemoOne = '/providerDemoOne';
-  static const inheritedWidgetDemo = '/inheritedWidgetDemo';
-  static const notificationListenerDemo = '/notificationListenerDemo';
-  static const scrollbarDemo = '/scrollbarDemo';
-  static const notificationCustomDemo = '/notificationCustomDemo';
-  static const scrollControllerDemo = '/scrollControllerDemo';
-  static const colorConverterDemo = '/colorConverterDemo';
-  static const intrinsicHeightDemo = '/intrinsicHeightDemo';
-  static const flexDemo = '/flexDemo';
-  static const flexibleDemo = '/flexibleDemo';
+  static const String decorationDemo = '/decorationDemo';
+  static const String stackDemo = '/stackDemo';
+  static const String stackDemoOne = '/stackDemoOne';
+  static const String stackDemoTwo = '/stackDemoTwo';
 
-  static const physicalModelDemo = '/physicalModelDemo';
-  static const neumorphismDemo = '/neumorphismDemo';
-  static const wechatAssetsPickerDemo = '/wechatAssetsPickerDemo';
-  static const wechatPhotoPickerDemo = '/wechatPhotoPickerDemo';
-  static const visibilityDemo = '/visibilityDemo';
-  static const ignorePointerDemo = '/ignorePointerDemo';
-  static const horizontalCellDemo = '/horizontalCellDemo';
-  static const boxShadowDemo = '/boxShadowDemo';
-  static const listViewOneDemo = '/listViewOneDemo';
-  static const marqueeWidgetDemo = '/marqueeWidgetDemo';
-  static const animatedStaggerDemo = '/animatedStaggerDemo';
-  static const buttonStyleDemo = '/buttonStyleDemo';
-  static const ticketDemo = '/ticketDemo';
-  static const myPopverDemo = '/myPopverDemo';
-  static const keyDemo = '/keyDemo';
-  static const customScrollBarDemo = '/customScrollBarDemo';
-  static const overflowDemo = '/overflowDemo';
-  static const segmentTabBarNewDemo = '/segmentTabBarNewDemo';
-  static const enhanceTabBarDemo = '/enhanceTabBarDemo';
-  static const collectionNavWidgetDemo = '/collectionNavWidgetDemo';
-  static const materialDemo = '/materialDemo';
-  static const flexibleSpaceDemo = '/flexibleSpaceDemo';
-  static const operatorDemo = '/operatorDemo';
-  static const nnHorizontalScrollWidgetDemo = '/nnHorizontalScrollWidgetDemo';
-  static const netStateListenerDemo = '/netStateListenerDemo';
-  static const netStateListenerDemoOne = '/netStateListenerDemoOne';
-  static const interactiveViewerDemo = '/interactiveViewerDemo';
-  static const defaultTabControllerDemo = '/defaultTabControllerDemo';
-  static const regExpDemo = '/regExpDemo';
-  static const inputDatePickerFormFieldDemo = '/inputDatePickerFormFieldDemo';
-  static const dateRangePickerDialogDemo = '/dateRangePickerDialogDemo';
-  static const mergeableMaterialDemo = '/mergeableMaterialDemo';
-  static const navigationRailDemo = '/navigationRailDemo';
-  static const listTileDemo = '/listTileDemo';
-  static const refreshIndicatorDemo = '/refreshIndicatorDemo';
-  static const refreshIndicatorDemoOne = '/refreshIndicatorDemoOne';
-  static const tooltipDemo = '/tooltipDemo';
-  static const filterDemo = '/filterDemo';
-  static const filterDemoOne = '/filterDemoOne';
-  static const videoPlayerScreenDemo = '/videoPlayerScreenDemo';
-  static const boxWidgetDemo = '/boxWidgetDemo';
-  static const fractionallySizedBoxDemo = '/fractionallySizedBoxDemo';
-  static const listWheelScrollViewDemo = '/listWheelScrollViewDemo';
-  static const nnsliverPersistentHeaderDemo = '/nnsliverPersistentHeaderDemo';
-  static const nestedScrollViewDemoOne = '/nestedScrollViewDemoOne';
-  static const nestedScrollViewDemoTwo = '/nestedScrollViewDemoTwo';
-  static const testFunction = '/testFunction';
-  static const nSkeletonDemo = '/nSkeletonDemo';
-  static const nTreeDemo = '/nTreeDemo';
-  static const azlistviewDemo = '/azlistviewDemo';
-  static const expansionTileCard = '/expansionTileCard';
-  static const dialogChoiceChipDemo = '/dialogChoiceChipDemo';
-  static const textFieldLoginDemo = '/textFieldLoginDemo';
-  static const pageViewAndBarDemo = '/pageViewAndBarDemo';
-  static const pageViewDemoOne = '/pageViewDemoOne';
-  static const dropBoxChoicDemo = '/dropBoxChoicDemo';
-  static const dropBoxChoicDemoNew = '/dropBoxChoicDemoNew';
-  static const dropBoxMutiRowChoicDemo = '/dropBoxMutiRowChoicDemo';
-  static const slidableDemoOne = '/slidableDemoOne';
-  static const imChatPage = '/imChatPage';
-  static const soundPlayDemo = '/soundPlayDemo';
-  static const wPopupMenuDemo = '/wPopupMenuDemo';
-  static const expandTextDemo = '/expandTextDemo';
-  static const syncfusionFlutterDatepickerDemo = '/syncfusionFlutterDatepickerDemo';
-  static const tableCalenderMain = '/tableCalenderMain';
-  static const neomorphismHomePage = '/neomorphismHomePage';
-  static const uploadFileDemo = '/uploadFileDemo';
-  static const fileUploadBoxDemo = '/fileUploadBoxDemo';
+  static const String badgeDemo = '/badgeDemo';
+  static const String flutterSwiperDemo = '/flutterSwiperDemo';
+  static const String flutterSwiperIndicatorDemo = '/flutterSwiperIndicatorDemo';
+  static const String homeSrollDemo = '/synHomeSrollDemo';
+  static const String homeNavDemo = '/synHomeNavDemo';
+  static const String wrapDemo = '/wrapDemo';
+  static const String boxConstraintsDemo = '/boxConstraintsDemo';
+  static const String gradientDemo = '/gradientDemo';
+  static const String imageBlendModeDemo = '/imageBlendModeDemo';
+  static const String customSwipperDemo = '/customSwipperDemo';
+  static const String visibilityDetectorDemo = '/visibilityDetectorDemo';
+  static const String svgaImageDemo = '/svgaImageDemo';
+  static const String providerDemo = '/providerDemo';
+  static const String providerDemoOne = '/providerDemoOne';
+  static const String inheritedWidgetDemo = '/inheritedWidgetDemo';
+  static const String notificationListenerDemo = '/notificationListenerDemo';
+  static const String scrollbarDemo = '/scrollbarDemo';
+  static const String notificationCustomDemo = '/notificationCustomDemo';
+  static const String scrollControllerDemo = '/scrollControllerDemo';
+  static const String colorConverterDemo = '/colorConverterDemo';
+  static const String intrinsicHeightDemo = '/intrinsicHeightDemo';
+  static const String flexDemo = '/flexDemo';
+  static const String flexibleDemo = '/flexibleDemo';
 
-  static const customSingleChildLayoutDemo = '/customSingleChildLayoutDemo';
-  static const customMultiChildLayoutDemo = '/customMultiChildLayoutDemo';
-  static const refreshListView = '/refreshListView';
-  static const npageViewDemo = '/npageViewDemo';
-  static const boxShadowDemoOne = '/boxShadowDemoOne';
-  static const getxDemo = '/getxDemo';
-  static const globalIsolateDemo = '/globalIsolateDemo';
-  static const longCaptureWidgetDemo = '/LongCaptureWidgetDemo';
-  static const jsonToDartPage = '/jsonToDartPage';
-  static const assetUploadBoxDemo = '/assetUploadBoxDemo';
-  static const keyboardAttachDemo = '/keyboardAttachDemo';
-  static const dashLineDemo = '/dashLineDemo';
-  static const scaffoldBottomSheet = '/scaffoldBottomSheet';
-  static const floatingActionButtonDemo = '/floatingActionButtonDemo';
-  static const weatherInfoPage = '/weatherInfoPage';
-  static const flutterPickersDemo = '/flutterPickersDemo';
-  static const imageStretchDemo = '/imageStretchDemo';
-  static const dropdownMenuDemo = '/dropdownMenuDemo';
-  static const searchDemo = '/searchDemo';
-  static const switchDemo = '/switchDemo';
-  static const gestureDetectorDemo = '/gestureDetectorDemo';
-  static const compositedTransformTargetDemo = '/compositedTransformTargetDemo';
-  static const drawCanvasDemo = '/drawCanvasDemo';
-  static const contextMenuDemo = '/contextMenuDemo';
-  static const targetFollowerDemo = '/targetFollowerDemo';
-  static const tapRegionDemo = '/tapRegionDemo';
-  static const glowingOverscrollIndicatorDemo = '/glowingOverscrollIndicatorDemo';
-  static const progressClipperDemo = '/progressClipperDemo';
-  static const heroDemo = '/heroDemo';
-  static const hitTestBehaviorDemo = '/hitTestBehaviorDemo';
-  static const qrcodePage = '/qrcodePage';
-  static const menuAnchorDemo = '/menuAnchorDemo';
-  static const myMenuBarDemo = '/myMenuBarDemo';
-  static const choiceBoxOneDemo = '/choiceBoxOneDemo';
-  static const apiConvertPage = '/apiConvertPage';
-  static const selectListPage = '/selectListPage';
-  static const indexAvatarGroupDemo = '/indexAvatarGroupDemo';
-  static const overlayPortalDemo = '/overlayPortalDemo';
-  static const appBarColorChangerDemo = '/appBarColorChangerDemo';
-  static const footerButtonBarDemo = '/footerButtonBarDemo';
-  static const sectionHeaderDemo = '/sectionHeaderDemo';
-  static const todoListTabPage = '/todoListTabPage';
-  static const studentTabPage = '/studentTabPage';
-  static const orderListTabPage = '/orderListTabPage';
-  static const componentMiddlePage = '/componentMiddlePage';
-  static const sliverMainAxisGroupDemo = '/sliverMainAxisGroupDemo';
-  static const twoDimensionalGridViewDemo = '/TwoDimensionalGridViewDemo';
-  static const listenerHeaderPage = '/listenerHeaderPage';
-  static const nwebViewDemo = '/nwebViewDemo';
-  static const iconConvertPage = '/iconConvertPage';
-  static const alignmentDrawDemo = '/alignmentDrawDemo';
-  static const displayFeatureDemo = '/displayFeatureDemo';
-  static const preferredSizeDemo = '/preferredSizeDemo';
-  static const ntabBarPageDemo = '/ntabBarPageDemo';
-  static const nTabBarViewCustomDemo = '/nTabBarViewCustomDemo';
-  static const textFieldTabDemo = '/textFieldTabDemo';
-  static const textPaintDemo = '/textPaintDemo';
-  static const segmentedPageViewDemo = '/segmentedPageViewDemo';
-  static const nPinnedTabBarPageDemo = '/nPinnedTabBarPageDemo';
-  static const nRefreshViewDemo = '/nRefreshViewDemo';
-  static const nestedScrollViewDemoThree = '/nestedScrollViewDemoThree';
-  static const apiCreatePage = '/apiCreatePage';
-  static const formDemo = '/formDemo';
-  static const asyncDemo = '/asyncDemo';
-  static const choiceExpansionDemo = '/nchoiceExpansionDemo';
-  static const riverPodPageCreate = '/riverPodPageCreate';
-  static const getxRouteCreatePage = '/getxRouteCreatePage';
-  static const getxControllerDemo = '/GetxControllerDemo';
-  static const nTransformViewDemo = '/nTransformViewDemo';
-  static const dataTypeDemo = '/dataTypeDemo';
-  static const queueAlertDemo = '/queueAlertDemo';
-  static const flutterPickerUtilDemo = '/flutterPickerUtilDemo';
-  static const audioPlayPage = '/AudioPlayPage';
-  static const audioPlayPageDemo = '/AudioPlayPageDemo';
-  static const chewiePlayerPage = '/chewiePlayerPage';
-  static const segmentVerticalDemo = '/segmentVerticalDemo';
-  static const decoratedBoxTransitionDemo = '/decoratedBoxTransitionDemo';
-  static const aeReportPage = '/aeReportPage';
-  static const scaffoldDemo = '/scaffoldDemo';
-  static const sliverMainAxisGroupDemoOne = '/SliverMainAxisGroupDemoOne';
-  static const listBodyDemo = '/listBodyDemo';
-  static const scanAnimationDemo = '/scanAnimationDemo';
-  static const lerpDemo = '/lerpDemo';
-  static const convertFlle = '/ConvertFlle';
-  static const splitViewDemo = '/SplitViewDemo';
-  static const directoryTestDemo = '/directoryTestDemo';
-  static const nestedNavigatorDemo = '/nestedNavigatorDemo';
-  static const nTweenTransitionDemo = '/nTweenTransitionDemo';
-  static const hapticFeedbackDemo = '/hapticFeedbackDemo';
-  static const webviewDemo = '/webviewDemo';
-  static const secureKeyboardDemo = '/secureKeyboardDemo';
-  static const popScopeDemo = '/popScopeDemo';
-  static const nestedScrollViewDemoHome = '/nestedScrollViewDemoHome';
-  static const irregularClipperDemo = '/irregularClipperDemo';
-  static const ocrPhotoDemo = '/ocrPhotoDemo';
-  static const translationTextPage = '/translationTextPage';
-  static const floatingButtonDemo = '/floatingButtonDemo';
-  static const floatingButtonDemoOne = '/floatingButtonDemoOne';
-  static const floatingButtonDemoTwo = '/floatingButtonDemoTwo';
-  static const floatingButtonDemoThree = '/floatingButtonDemoThree';
+  static const String physicalModelDemo = '/physicalModelDemo';
+  static const String neumorphismDemo = '/neumorphismDemo';
+  static const String wechatAssetsPickerDemo = '/wechatAssetsPickerDemo';
+  static const String wechatPhotoPickerDemo = '/wechatPhotoPickerDemo';
+  static const String visibilityDemo = '/visibilityDemo';
+  static const String ignorePointerDemo = '/ignorePointerDemo';
+  static const String horizontalCellDemo = '/horizontalCellDemo';
+  static const String boxShadowDemo = '/boxShadowDemo';
+  static const String listViewOneDemo = '/listViewOneDemo';
+  static const String marqueeWidgetDemo = '/marqueeWidgetDemo';
+  static const String animatedStaggerDemo = '/animatedStaggerDemo';
+  static const String buttonStyleDemo = '/buttonStyleDemo';
+  static const String ticketDemo = '/ticketDemo';
+  static const String myPopverDemo = '/myPopverDemo';
+  static const String keyDemo = '/keyDemo';
+  static const String customScrollBarDemo = '/customScrollBarDemo';
+  static const String overflowDemo = '/overflowDemo';
+  static const String segmentTabBarNewDemo = '/segmentTabBarNewDemo';
+  static const String enhanceTabBarDemo = '/enhanceTabBarDemo';
+  static const String collectionNavWidgetDemo = '/collectionNavWidgetDemo';
+  static const String materialDemo = '/materialDemo';
+  static const String flexibleSpaceDemo = '/flexibleSpaceDemo';
+  static const String operatorDemo = '/operatorDemo';
+  static const String nnHorizontalScrollWidgetDemo = '/nnHorizontalScrollWidgetDemo';
+  static const String netStateListenerDemo = '/netStateListenerDemo';
+  static const String netStateListenerDemoOne = '/netStateListenerDemoOne';
+  static const String interactiveViewerDemo = '/interactiveViewerDemo';
+  static const String defaultTabControllerDemo = '/defaultTabControllerDemo';
+  static const String regExpDemo = '/regExpDemo';
+  static const String inputDatePickerFormFieldDemo = '/inputDatePickerFormFieldDemo';
+  static const String dateRangePickerDialogDemo = '/dateRangePickerDialogDemo';
+  static const String mergeableMaterialDemo = '/mergeableMaterialDemo';
+  static const String navigationRailDemo = '/navigationRailDemo';
+  static const String listTileDemo = '/listTileDemo';
+  static const String refreshIndicatorDemo = '/refreshIndicatorDemo';
+  static const String refreshIndicatorDemoOne = '/refreshIndicatorDemoOne';
+  static const String tooltipDemo = '/tooltipDemo';
+  static const String filterDemo = '/filterDemo';
+  static const String filterDemoOne = '/filterDemoOne';
+  static const String videoPlayerScreenDemo = '/videoPlayerScreenDemo';
+  static const String boxWidgetDemo = '/boxWidgetDemo';
+  static const String fractionallySizedBoxDemo = '/fractionallySizedBoxDemo';
+  static const String listWheelScrollViewDemo = '/listWheelScrollViewDemo';
+  static const String nnsliverPersistentHeaderDemo = '/nnsliverPersistentHeaderDemo';
+  static const String nestedScrollViewDemoOne = '/nestedScrollViewDemoOne';
+  static const String nestedScrollViewDemoTwo = '/nestedScrollViewDemoTwo';
+  static const String testFunction = '/testFunction';
+  static const String nSkeletonDemo = '/nSkeletonDemo';
+  static const String nTreeDemo = '/nTreeDemo';
+  static const String azlistviewDemo = '/azlistviewDemo';
+  static const String expansionTileCard = '/expansionTileCard';
+  static const String dialogChoiceChipDemo = '/dialogChoiceChipDemo';
+  static const String textFieldLoginDemo = '/textFieldLoginDemo';
+  static const String pageViewAndBarDemo = '/pageViewAndBarDemo';
+  static const String pageViewDemoOne = '/pageViewDemoOne';
+  static const String dropBoxChoicDemo = '/dropBoxChoicDemo';
+  static const String dropBoxChoicDemoNew = '/dropBoxChoicDemoNew';
+  static const String dropBoxMutiRowChoicDemo = '/dropBoxMutiRowChoicDemo';
+  static const String slidableDemoOne = '/slidableDemoOne';
 
-  static const urlLauncherDemo = '/urlLauncherDemo';
-  static const iteratorDemo = '/iteratorDemo';
-  static const chemotherapyRegimenDrugCaculator = '/chemotherapyRegimenDrugCaculator';
-  static const expressionsCalulatorDemo = '/expressionsCalulatorDemo';
+  static const String imConversationPage = '/imConversationPage';
+  static const String imChatPage = '/imChatPage';
+  static const String soundPlayDemo = '/soundPlayDemo';
+  static const String wPopupMenuDemo = '/wPopupMenuDemo';
+  static const String expandTextDemo = '/expandTextDemo';
+  static const String syncfusionFlutterDatepickerDemo = '/syncfusionFlutterDatepickerDemo';
+  static const String tableCalenderMain = '/tableCalenderMain';
+  static const String neomorphismHomePage = '/neomorphismHomePage';
+  static const String uploadFileDemo = '/uploadFileDemo';
+  static const String fileUploadBoxDemo = '/fileUploadBoxDemo';
+
+  static const String customSingleChildLayoutDemo = '/customSingleChildLayoutDemo';
+  static const String customMultiChildLayoutDemo = '/customMultiChildLayoutDemo';
+  static const String refreshListView = '/refreshListView';
+  static const String npageViewDemo = '/npageViewDemo';
+  static const String boxShadowDemoOne = '/boxShadowDemoOne';
+  static const String getxDemo = '/getxDemo';
+  static const String globalIsolateDemo = '/globalIsolateDemo';
+  static const String longCaptureWidgetDemo = '/LongCaptureWidgetDemo';
+  static const String jsonToDartPage = '/jsonToDartPage';
+  static const String assetUploadBoxDemo = '/assetUploadBoxDemo';
+  static const String keyboardAttachDemo = '/keyboardAttachDemo';
+  static const String dashLineDemo = '/dashLineDemo';
+  static const String scaffoldBottomSheet = '/scaffoldBottomSheet';
+  static const String floatingActionButtonDemo = '/floatingActionButtonDemo';
+  static const String weatherInfoPage = '/weatherInfoPage';
+  static const String flutterPickersDemo = '/flutterPickersDemo';
+  static const String imageStretchDemo = '/imageStretchDemo';
+  static const String dropdownMenuDemo = '/dropdownMenuDemo';
+  static const String searchDemo = '/searchDemo';
+  static const String switchDemo = '/switchDemo';
+  static const String gestureDetectorDemo = '/gestureDetectorDemo';
+  static const String compositedTransformTargetDemo = '/compositedTransformTargetDemo';
+  static const String drawCanvasDemo = '/drawCanvasDemo';
+  static const String contextMenuDemo = '/contextMenuDemo';
+  static const String targetFollowerDemo = '/targetFollowerDemo';
+  static const String tapRegionDemo = '/tapRegionDemo';
+  static const String glowingOverscrollIndicatorDemo = '/glowingOverscrollIndicatorDemo';
+  static const String progressClipperDemo = '/progressClipperDemo';
+  static const String heroDemo = '/heroDemo';
+  static const String hitTestBehaviorDemo = '/hitTestBehaviorDemo';
+  static const String qrcodePage = '/qrcodePage';
+  static const String menuAnchorDemo = '/menuAnchorDemo';
+  static const String myMenuBarDemo = '/myMenuBarDemo';
+  static const String choiceBoxOneDemo = '/choiceBoxOneDemo';
+  static const String apiConvertPage = '/apiConvertPage';
+  static const String selectListPage = '/selectListPage';
+  static const String avatarGroupDemo = '/AvatarGroupDemo';
+  static const String overlayPortalDemo = '/overlayPortalDemo';
+  static const String appBarColorChangerDemo = '/appBarColorChangerDemo';
+  static const String footerButtonBarDemo = '/footerButtonBarDemo';
+  static const String sectionHeaderDemo = '/sectionHeaderDemo';
+  static const String todoListTabPage = '/todoListTabPage';
+  static const String studentTabPage = '/studentTabPage';
+  static const String orderListTabPage = '/orderListTabPage';
+  static const String componentMiddlePage = '/componentMiddlePage';
+  static const String sliverMainAxisGroupDemo = '/sliverMainAxisGroupDemo';
+  static const String twoDimensionalGridViewDemo = '/TwoDimensionalGridViewDemo';
+  static const String listenerHeaderPage = '/listenerHeaderPage';
+  static const String nwebViewDemo = '/nwebViewDemo';
+  static const String iconConvertPage = '/iconConvertPage';
+  static const String alignmentDrawDemo = '/alignmentDrawDemo';
+  static const String displayFeatureDemo = '/displayFeatureDemo';
+  static const String preferredSizeDemo = '/preferredSizeDemo';
+  static const String ntabBarPageDemo = '/ntabBarPageDemo';
+  static const String nTabBarViewCustomDemo = '/nTabBarViewCustomDemo';
+  static const String textFieldTabDemo = '/textFieldTabDemo';
+  static const String textPaintDemo = '/textPaintDemo';
+  static const String segmentedPageViewDemo = '/segmentedPageViewDemo';
+  static const String nPinnedTabBarPageDemo = '/nPinnedTabBarPageDemo';
+  static const String nRefreshViewDemo = '/nRefreshViewDemo';
+  static const String nestedScrollViewDemoThree = '/nestedScrollViewDemoThree';
+  static const String apiCreatePage = '/apiCreatePage';
+  static const String formDemo = '/formDemo';
+  static const String asyncDemo = '/asyncDemo';
+  static const String choiceExpansionDemo = '/nchoiceExpansionDemo';
+  static const String riverPodPageCreate = '/riverPodPageCreate';
+  static const String getxRouteCreatePage = '/getxRouteCreatePage';
+  static const String getxControllerDemo = '/GetxControllerDemo';
+  static const String nTransformViewDemo = '/nTransformViewDemo';
+  static const String dataTypeDemo = '/dataTypeDemo';
+  static const String queueAlertDemo = '/queueAlertDemo';
+  static const String flutterPickerUtilDemo = '/flutterPickerUtilDemo';
+  static const String audioPlayPage = '/AudioPlayPage';
+  static const String audioPlayPageDemo = '/AudioPlayPageDemo';
+  static const String chewiePlayerPage = '/chewiePlayerPage';
+  static const String segmentVerticalDemo = '/segmentVerticalDemo';
+  static const String decoratedBoxTransitionDemo = '/decoratedBoxTransitionDemo';
+  static const String aeReportPage = '/aeReportPage';
+  static const String scaffoldDemo = '/scaffoldDemo';
+  static const String sliverMainAxisGroupDemoOne = '/SliverMainAxisGroupDemoOne';
+  static const String listBodyDemo = '/listBodyDemo';
+  static const String scanAnimationDemo = '/scanAnimationDemo';
+  static const String lerpDemo = '/lerpDemo';
+  static const String convertFlle = '/ConvertFlle';
+  static const String splitViewDemo = '/SplitViewDemo';
+  static const String directoryTestDemo = '/directoryTestDemo';
+  static const String nestedNavigatorDemo = '/nestedNavigatorDemo';
+  static const String nTweenTransitionDemo = '/nTweenTransitionDemo';
+  static const String hapticFeedbackDemo = '/hapticFeedbackDemo';
+  static const String webviewDemo = '/webviewDemo';
+  static const String secureKeyboardDemo = '/secureKeyboardDemo';
+  static const String popScopeDemo = '/popScopeDemo';
+  static const String nestedScrollViewDemoHome = '/nestedScrollViewDemoHome';
+  static const String irregularClipperDemo = '/irregularClipperDemo';
+  static const String ocrPhotoDemo = '/ocrPhotoDemo';
+  static const String translationTextPage = '/translationTextPage';
+  static const String floatingButtonDemo = '/floatingButtonDemo';
+  static const String floatingButtonDemoOne = '/floatingButtonDemoOne';
+  static const String floatingButtonDemoTwo = '/floatingButtonDemoTwo';
+  static const String floatingButtonDemoThree = '/floatingButtonDemoThree';
+
+  static const String urlLauncherDemo = '/urlLauncherDemo';
+  static const String iteratorDemo = '/iteratorDemo';
+  static const String chemotherapyRegimenDrugCaculator = '/chemotherapyRegimenDrugCaculator';
+  static const String expressionsCalulatorDemo = '/expressionsCalulatorDemo';
+  static const String flexbleListViewDemo = '/flexbleListViewDemo';
+  static const String pageViewVerticalDemo = '/PageViewVerticalDemo';
+  static const String markdownBodyDemo = '/markdownBodyDemo';
+  static const String tabContainerDemo = '/tabContainerDemo';
+  static const String curvedNavigationBarDemo = '/CurvedNavigationBarDemo';
+  static const String swiperCardDemo = '/swiperCardDemo';
+  static const String pageRouteDemo = '/pageRouteDemo';
+  static const String pageRouteAnimationDemo = '/pageRouteAnimationDemo';
+  static const String emailSenderDemo = '/emailSenderDemo';
+  static const String faceDetectionPage = '/faceDetectionPage';
+  static const String nestedScrollViewDemoFour = '/nestedScrollViewDemoFour';
+  static const String weatherHome = '/weatherHome';
+  static const String audioVisualizerDemo = '/audioVisualizerDemo';
+  static const String listenableDemo = '/listenableDemo';
+  static const String platformDispatcherDemo = '/PlatformDispatcherDemo';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -835,6 +874,14 @@ class AppPage {
     GetPage(
       name: APPRouter.themeColorDemo,
       page: () => ThemeColorDemo(),
+    ),
+    GetPage(
+      name: APPRouter.appSandboxFileDirectory,
+      page: () => AppSandboxFileDirectory(),
+    ),
+    GetPage(
+      name: APPRouter.jPushInfoPage,
+      page: () => JPushInfoPage(),
     ),
     GetPage(
       name: APPRouter.emojiPage,
@@ -889,6 +936,10 @@ class AppPage {
     GetPage(
       name: APPRouter.testPageOne,
       page: () => TestPageOne(),
+    ),
+    GetPage(
+      name: APPRouter.customPainterPageDemo,
+      page: () => CustomPainterPageDemo(),
     ),
     GetPage(
       name: APPRouter.loginPage, page: () => LoginPage(),
@@ -1892,8 +1943,12 @@ class AppPage {
       page: () => SlidableDemoOne(),
     ),
     GetPage(
+      name: APPRouter.imConversationPage,
+      page: () => ImConversationPage(),
+    ),
+    GetPage(
       name: APPRouter.imChatPage,
-      page: () => IMChatPage(),
+      page: () => ImChatPage(),
     ),
     GetPage(
       name: APPRouter.soundPlayDemo,
@@ -2082,8 +2137,8 @@ class AppPage {
       page: () => SelectListPage(),
     ),
     GetPage(
-      name: APPRouter.indexAvatarGroupDemo,
-      page: () => NIndexAvatarGroupDemo(),
+      name: APPRouter.avatarGroupDemo,
+      page: () => NAvatarGroupDemo(),
     ),
     GetPage(
       name: APPRouter.overlayPortalDemo,
@@ -2342,6 +2397,69 @@ class AppPage {
     GetPage(
       name: APPRouter.expressionsCalulatorDemo,
       page: () => ExpressionsCalulatorDemo(),
+    ),
+    GetPage(
+      name: APPRouter.flexbleListViewDemo,
+      page: () => FlexbleListViewDemo(),
+    ),
+    GetPage(
+      name: APPRouter.pageViewVerticalDemo,
+      page: () => PageViewVerticalDemo(),
+    ),
+    GetPage(
+      name: APPRouter.markdownBodyDemo,
+      page: () => MarkdownBodyDemo(),
+    ),
+    GetPage(
+      name: APPRouter.tabContainerDemo,
+      page: () => TabContainerDemo(),
+    ),
+    GetPage(
+      name: APPRouter.curvedNavigationBarDemo,
+      page: () => CurvedNavigationBarDemo(),
+    ),
+    GetPage(
+      name: APPRouter.swiperCardDemo,
+      page: () => SwiperCardDemo(),
+    ),
+    GetPage(
+      name: APPRouter.pageRouteDemo,
+      page: () => PageRouteDemo(),
+    ),
+    GetPage(
+      name: APPRouter.pageRouteAnimationDemo,
+      page: () => PageRouteAnimationDemo(),
+    ),
+    GetPage(
+      name: APPRouter.emailSenderDemo,
+      page: () => EmailSenderDemo(),
+    ),
+    GetPage(
+      name: APPRouter.faceDetectionPage,
+      page: () => FaceDetectionPage(),
+    ),
+
+    GetPage(
+      name: APPRouter.nestedScrollViewDemoFour,
+      page: () => NestedScrollViewDemoFour(),
+    ),
+    GetPage(
+      name: APPRouter.weatherHome,
+      page: () => WeatherHome(),
+    ),
+
+    GetPage(
+      name: APPRouter.audioVisualizerDemo,
+      page: () => AudioVisualizerDemo(),
+    ),
+
+    GetPage(
+      name: APPRouter.listenableDemo,
+      page: () => ListenableDemo(),
+    ),
+    GetPage(
+      name: APPRouter.platformDispatcherDemo,
+      page: () => PlatformDispatcherDemo(),
     ),
   ];
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/extension/ddlog.dart';
 
 class HitTestBehaviorDemo extends StatefulWidget {
   HitTestBehaviorDemo({Key? key, this.title}) : super(key: key);
@@ -11,6 +12,18 @@ class HitTestBehaviorDemo extends StatefulWidget {
 
 class _HitTestBehaviorDemoState extends State<HitTestBehaviorDemo> {
   final _scrollController = ScrollController();
+
+  final message = """
+  //在命中测试过程中 Listener 组件如何表现。
+enum HitTestBehavior {
+  // 组件是否通过命中测试取决于子组件是否通过命中测试
+  deferToChild,
+  // 组件必然会通过命中测试，同时其 hitTest 返回值始终为 true
+  opaque,
+  // 组件必然会通过命中测试，但其 hitTest 返回值可能为 true 也可能为 false
+  translucent,
+}
+  """;
 
   @override
   Widget build(BuildContext context) {
@@ -33,22 +46,34 @@ class _HitTestBehaviorDemoState extends State<HitTestBehaviorDemo> {
     );
   }
 
-  buildBody() {
+  Widget buildBody() {
     return Scrollbar(
       controller: _scrollController,
       child: SingleChildScrollView(
         controller: _scrollController,
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text("$widget"),
-            buildSection(),
-          ],
+            Text(message),
+            Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: [
+                ...HitTestBehavior.values.map((e) => buildBehaviorItem(behavior: e)),
+              ],
+            )
+          ]
+              .map((e) => Container(
+                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                    child: e,
+                  ))
+              .toList(),
         ),
       ),
     );
   }
 
-  buildSection() {
+  Widget buildBehaviorItem({required HitTestBehavior behavior}) {
     // deferToChild	事件是否消费完全取决于他的儿子
     // opaque	position在自己的范围内，子类的HitTestSlef只要不被重写，自身就会消费事件
     // translucent	position在自己的范围内，都会消费事件
@@ -57,28 +82,19 @@ class _HitTestBehaviorDemoState extends State<HitTestBehaviorDemo> {
     // 1. 设置behavior为HitTestBehavior.opaque或者translucent
     // 2. Container设置背景色,任意背景色都可以
     return GestureDetector(
-      behavior: HitTestBehavior.deferToChild,
+      behavior: behavior,
       child: Container(
-        height: 50,
-        color: Colors.transparent,
-        padding: EdgeInsets.only(left: 5, right: 5),
-        alignment: Alignment.center,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
-            Text(
-              "left text",
-              style: TextStyle(fontSize: 20),
-            ),
-            Text(
-              "right text",
-              style: TextStyle(fontSize: 20),
-            ),
-          ],
+        padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.blue),
+        ),
+        child: Text(
+          behavior.name,
+          style: TextStyle(fontSize: 16),
         ),
       ),
       onTap: () {
-        debugPrint("${DateTime.now().toString().split(".").first} click");
+        DLog.d("$widget ${behavior.name}");
       },
     );
   }

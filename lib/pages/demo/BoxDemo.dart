@@ -12,6 +12,8 @@
 /// FractionallySizedBox 可以根据父容器宽高的百分比来设置子组件宽高等
 ///
 
+import 'dart:math';
+
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_avatar_badge.dart';
@@ -143,9 +145,9 @@ class _BoxDemoState extends State<BoxDemo> {
     alignment = selectedItemVN.value;
 
     final size = Size(100, 100);
-    final childSize = Size(50, 50);
+    final childSize = size * 0.5;
     final radius = 8.0;
-    final childSizeRadius = 25.0;
+    final childSizeRadius = min(childSize.width, childSize.height) * 0.5;
     return Container(
       padding: EdgeInsets.only(
         left: alignment.x == -1 ? childSize.width * 0.5 : 0,
@@ -195,9 +197,9 @@ class _BoxDemoState extends State<BoxDemo> {
   Widget buildConstrainedBox() {
     return ConstrainedBox(
       constraints: BoxConstraints(
-          minWidth: double.infinity, //宽度尽可能大
-          minHeight: 50.0 //最小高度为50像素
-          ),
+        minWidth: double.infinity, //宽度尽可能大
+        minHeight: 50.0, //最小高度为50像素
+      ),
       child: Container(
         // height: 5.0,
         alignment: Alignment.center,
@@ -228,17 +230,19 @@ class _BoxDemoState extends State<BoxDemo> {
   /// UnconstrainedBox会消除上层组件的约束，也就意味着UnconstrainedBox 的子组件将不再受到约束，大小完全取决于自己。
   Widget buildUnconstrainedBox() {
     return Container(
-        child: ConstrainedBox(
-            constraints: BoxConstraints(minWidth: 200.0, minHeight: 100.0), //父
-            child: UnconstrainedBox(
-              //“去除”父级限制
-              child: ConstrainedBox(
-                constraints: BoxConstraints(minWidth: 90.0, minHeight: 30.0), //子
-                child: DecoratedBox(
-                  decoration: BoxDecoration(color: Colors.red),
-                ),
-              ),
-            )));
+      child: ConstrainedBox(
+        constraints: BoxConstraints(minWidth: 200.0, minHeight: 100.0), //父
+        child: UnconstrainedBox(
+          //“去除”父级限制
+          child: ConstrainedBox(
+            constraints: BoxConstraints(minWidth: 90.0, minHeight: 30.0), //子
+            child: DecoratedBox(
+              decoration: BoxDecoration(color: Colors.red),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 
   Widget buildOverflowBox({
@@ -319,7 +323,7 @@ class _BoxDemoState extends State<BoxDemo> {
     return InkWell(
       onTap: () {
         badge = badge < 999 ? badge * 10 : 9;
-        ddlog("badge: $badge");
+        DLog.d("badge: $badge");
         badgeStr = badge > 99 ? "$badge+" : "$badge";
         // badgeStr = "1";
         setState(() {});
@@ -332,7 +336,7 @@ class _BoxDemoState extends State<BoxDemo> {
     return InkWell(
       onTap: () {
         badge = badge < 999 ? badge * 10 : 9;
-        ddlog("badge: $badge");
+        DLog.d("badge: $badge");
         badgeStr = badge > 99 ? "$badge+" : "$badge";
         // badgeStr = "1";
         setState(() {});

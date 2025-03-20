@@ -2,6 +2,17 @@ import 'package:flutter/material.dart';
 
 /// 图片指示器
 class NImageIndicator extends StatelessWidget {
+  const NImageIndicator({
+    super.key,
+    required this.controller,
+    required this.itemCount,
+    this.indicatorColor = Colors.white70,
+    this.indicatorOtherColor = Colors.white30,
+    this.maxSize = 6,
+    this.space = 16.0,
+    this.minSize = 4,
+  });
+
   final PageController controller;
   final int itemCount;
   final Color indicatorColor;
@@ -9,17 +20,6 @@ class NImageIndicator extends StatelessWidget {
   final double maxSize;
   final double minSize;
   final double space;
-
-  const NImageIndicator(
-      {Key? key,
-      required this.controller,
-      required this.itemCount,
-      this.indicatorColor = Colors.white70,
-      this.indicatorOtherColor = Colors.white30,
-      this.maxSize = 6,
-      this.space = 16.0,
-      this.minSize = 4})
-      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -21,8 +21,7 @@ class TextPaintDemo extends StatefulWidget {
 }
 
 class _TextPaintDemoState extends State<TextPaintDemo> {
-  bool get hideApp =>
-      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
+  bool get hideApp => Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
 
   final _scrollController = ScrollController();
 
@@ -70,7 +69,7 @@ class _TextPaintDemoState extends State<TextPaintDemo> {
                 tailingWidth: 56,
                 tailing: InkWell(
                   onTap: () {
-                    ddlog("异常");
+                    DLog.d("异常");
                   },
                   child: Container(
                     width: 40,
@@ -91,7 +90,7 @@ class _TextPaintDemoState extends State<TextPaintDemo> {
                 tailingWidth: 56,
                 tailing: InkWell(
                   onTap: () {
-                    ddlog("异常");
+                    DLog.d("异常");
                   },
                   child: Container(
                     width: 40,
@@ -128,7 +127,7 @@ class _TextPaintDemoState extends State<TextPaintDemo> {
               color: Colors.black,
             ),
             onPainted: (TextPainter textPainter) {
-              // ddlog([message,
+              // DLog.d([message,
               //   textPainter.didExceedMaxLines,
               //   textPainter.height,
               //   textPainter.computeLineMetrics().length,
@@ -151,8 +150,7 @@ class _TextPaintDemoState extends State<TextPaintDemo> {
       tailingWidth: tailingWidth,
     );
 
-    return LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints) {
+    return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
       final textStyle = TextStyle(
         fontSize: 14,
         fontWeight: FontWeight.w500,
@@ -166,7 +164,7 @@ class _TextPaintDemoState extends State<TextPaintDemo> {
       );
 
       final isBeyond = textPainter.didExceedMaxLines;
-      ddlog([
+      DLog.d([
         data.length,
         constraints.maxWidth - tailingWidth,
         textPainter.height,
@@ -180,11 +178,8 @@ class _TextPaintDemoState extends State<TextPaintDemo> {
           // color: Colors.green,
           border: Border.all(color: Colors.blue),
         ),
-        child: StatefulBuilder(
-            builder: (BuildContext context, StateSetter setState) {
-          final arrowImage = isExpand
-              ? "icon_expand_arrow_up.png"
-              : "icon_expand_arrow_down.png";
+        child: StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
+          final arrowImage = isExpand ? "icon_expand_arrow_up.png" : "icon_expand_arrow_down.png";
 
           onToggle() {
             isExpand = !isExpand;
@@ -339,7 +334,7 @@ class MyTextPainter extends CustomPainter {
       paint.color = Colors.green;
       // canvas.drawRRect(RRect(), paint);
       canvas.drawRect(rect, paint);
-      // ddlog("rect: $rect");
+      // DLog.d("rect: $rect");
     }
 
     textPainter.layout(

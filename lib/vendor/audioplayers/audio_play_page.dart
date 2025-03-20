@@ -30,8 +30,7 @@ class AudioPlayPage extends StatefulWidget {
 }
 
 class _AudioPlayPageState extends State<AudioPlayPage> {
-  late Map<String, dynamic> arguments =
-      widget.arguments ?? Get.arguments ?? <String, dynamic>{};
+  late Map<String, dynamic> arguments = widget.arguments ?? Get.arguments ?? <String, dynamic>{};
 
   /// 必传 链接
   late String? url = arguments["url"];
@@ -86,7 +85,7 @@ class _AudioPlayPageState extends State<AudioPlayPage> {
           AudioPlayerBar(
             url: url ?? '',
             onDuration: (val) {
-              ddlog(val.toTime());
+              DLog.d(val.toTime());
             },
           ),
         ],
@@ -174,9 +173,7 @@ class MediaRecordCard extends StatelessWidget {
   }
 
   Widget buildMediaBox({required bool isVideo}) {
-    final imageName = isVideo
-        ? "icon_video_visit_evaluate.png"
-        : "icon_audio_visit_evaluate.png";
+    final imageName = isVideo ? "icon_video_visit_evaluate.png" : "icon_audio_visit_evaluate.png";
     return Container(
       width: 80,
       height: 80,

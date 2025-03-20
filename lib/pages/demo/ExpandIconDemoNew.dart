@@ -59,8 +59,7 @@ class ExpandIconDemoNewState extends State<ExpandIconDemoNew> {
             children: <Widget>[
               SizedBox(width: 25),
               Expanded(
-                child: Text('ExpandIcon Row',
-                    style: TextStyle(color: Colors.white, fontSize: 22)),
+                child: Text('ExpandIcon Row', style: TextStyle(color: Colors.white, fontSize: 22)),
               ),
               ExpandIcon(
                 isExpanded: _isExpanded,
@@ -70,7 +69,7 @@ class ExpandIconDemoNewState extends State<ExpandIconDemoNew> {
                 onPressed: (bool isExpanded) {
                   setState(() {
                     _isExpanded = !isExpanded;
-                    ddlog(isExpanded);
+                    DLog.d(isExpanded);
                   });
                 },
               ),
@@ -144,11 +143,10 @@ class ExpandIconDemoNewState extends State<ExpandIconDemoNew> {
                 children: [
                   ListTile(
                       title: Text("detail index: $e"),
-                      subtitle:
-                          Text('To delete this panel, tap the trash can icon'),
+                      subtitle: Text('To delete this panel, tap the trash can icon'),
                       trailing: Icon(Icons.delete),
                       onTap: () {
-                        ddlog("section_${section}_$e");
+                        DLog.d("section_${section}_$e");
                         setState(() {});
                       }),
                   Divider(
@@ -167,8 +165,7 @@ class ExpandIconDemoNewState extends State<ExpandIconDemoNew> {
         trailing: Icon(Icons.delete),
         onTap: () {
           setState(() {
-            _data
-                .removeWhere((ExpandedItem currentItem) => item == currentItem);
+            _data.removeWhere((ExpandedItem currentItem) => item == currentItem);
           });
         });
   }
@@ -232,8 +229,7 @@ class CustomExpansionTileState extends State<CustomExpansionTile> {
         ),
       ),
       subtitle: Text("subtitle"),
-      onExpansionChanged: (bool expanding) =>
-          setState(() => isExpanded = expanding),
+      onExpansionChanged: (bool expanding) => setState(() => isExpanded = expanding),
       children: <Widget>[
         Text("Child Widget One"),
         Text("Child Widget Two"),

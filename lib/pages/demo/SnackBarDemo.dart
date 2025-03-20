@@ -66,9 +66,7 @@ class SnackBarDemoState extends State<SnackBarDemo> {
         return true;
       },
       child: Scaffold(
-        persistentFooterButtons: footerItems
-            .map((e) => TextButton(onPressed: e.action, child: Text(e.title)))
-            .toList(),
+        persistentFooterButtons: footerItems.map((e) => TextButton(onPressed: e.action, child: Text(e.title))).toList(),
         bottomSheet: Container(
           color: Colors.green,
           height: 100,
@@ -78,9 +76,7 @@ class SnackBarDemoState extends State<SnackBarDemo> {
           actions: [
             IconButton(
               onPressed: () {
-                behavior = behavior == SnackBarBehavior.floating
-                    ? SnackBarBehavior.fixed
-                    : SnackBarBehavior.floating;
+                behavior = behavior == SnackBarBehavior.floating ? SnackBarBehavior.fixed : SnackBarBehavior.floating;
                 setState(() {});
               },
               icon: Icon(Icons.all_inclusive),
@@ -106,14 +102,14 @@ class SnackBarDemoState extends State<SnackBarDemo> {
       backgroundColor: Colors.white,
       duration: Duration(milliseconds: 1),
       onTap: (snack) {
-        ddlog("isSnackbarOpen: ${Get.isSnackbarOpen}");
+        DLog.d("isSnackbarOpen: ${Get.isSnackbarOpen}");
         snackbarController?.close();
       },
     );
   }
 
   void onToggle() {
-    ddlog("isSnackbarOpen: ${Get.isSnackbarOpen}");
+    DLog.d("isSnackbarOpen: ${Get.isSnackbarOpen}");
     if (Get.isSnackbarOpen) {
       snackbarController?.close();
     } else {
@@ -229,8 +225,7 @@ class SnackBarDemoState extends State<SnackBarDemo> {
       onVisible: () {
         debugPrint("显示SnackBar");
       },
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(50))),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(50))),
       behavior: SnackBarBehavior.floating,
       backgroundColor: Colors.orange,
       content: Text('断网了？'),

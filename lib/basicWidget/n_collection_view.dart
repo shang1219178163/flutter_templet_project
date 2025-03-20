@@ -8,7 +8,9 @@ class NCollectionView extends StatefulWidget {
   const NCollectionView({
     Key? key,
     required this.items,
-    this.itemWidth,
+    this.spacing = 8.0,
+    this.runSpacing = 16.0,
+    // this.itemWidth,
     this.itemStyle,
     this.contentPadding,
     this.decoration,
@@ -18,12 +20,18 @@ class NCollectionView extends StatefulWidget {
   final BoxDecoration? decoration;
 
   /// 第一个参数: 标题
-  /// 第二个参数: 本地图路径
+  /// 第二个参数: 本地图片路径
   /// 第三个参数: 回调方法
   final List<Tuple3<String, String, VoidCallback>> items;
 
-  /// item 宽度
-  final double? itemWidth;
+  /// 水平间距
+  final double spacing;
+
+  /// 竖直间距
+  final double runSpacing;
+
+  // /// item 宽度
+  // final double? itemWidth;
 
   /// item 字体样式
   final TextStyle? itemStyle;
@@ -34,12 +42,10 @@ class NCollectionView extends StatefulWidget {
   _NCollectionViewState createState() => _NCollectionViewState();
 }
 
-class _NCollectionViewState extends State<NCollectionView>
-    with SingleTickerProviderStateMixin {
+class _NCollectionViewState extends State<NCollectionView> with SingleTickerProviderStateMixin {
   final indexVN = ValueNotifier(0);
 
-  late final _pageController =
-      PageController(initialPage: indexVN.value, keepPage: true);
+  late final _pageController = PageController(initialPage: indexVN.value, keepPage: true);
 
   ///每页行数
   int rowNum = 2;
@@ -63,7 +69,7 @@ class _NCollectionViewState extends State<NCollectionView>
       decoration: widget.decoration,
       child: buildPageView(
         items: widget.items,
-        itemWidth: widget.itemWidth ?? 64,
+        // itemWidth: widget.itemWidth ?? 64,
         itemStyle: widget.itemStyle,
         contentPadding: widget.contentPadding,
       ),
@@ -72,12 +78,10 @@ class _NCollectionViewState extends State<NCollectionView>
 
   Widget buildPageView({
     required List<Tuple3<String, String, VoidCallback>> items,
-    double itemWidth = 64,
+    // double itemWidth = 64,
     TextStyle? itemStyle,
     EdgeInsets? contentPadding,
   }) {
-    // debugPrint("rowNum: $rowNum, numPerRow: $numPerRow, numPerPage: $numPerPage");
-
     final num = items.length ~/ numPerPage;
     final pageCount = items.length % numPerPage == 0 ? num : num + 1;
     final array = List.generate(pageCount.toInt(), (index) => index).toList();
@@ -96,23 +100,20 @@ class _NCollectionViewState extends State<NCollectionView>
           },
           itemBuilder: (BuildContext context, int pageIndex) {
             return Container(
-              // height: 200.w,
-              padding: contentPadding ??
-                  EdgeInsets.only(
-                    left: 20.w,
-                    right: 20.w,
-                    top: 20.h,
-                    bottom: 16.h,
-                  ),
+              // height: 200,
+              padding: contentPadding ?? EdgeInsets.only(left: 4, right: 4, top: 20, bottom: 16),
               // alignment: Alignment.center,
               decoration: BoxDecoration(
                 color: Color(0xffF3F3F3),
                 // border: Border.all(color: Colors.blue),
               ),
               child: LayoutBuilder(builder: (context, constraints) {
-                final spacing = (constraints.maxWidth - itemWidth * numPerRow) /
-                    (numPerRow - 1).truncateToDouble();
-                final runSpacing = 16.0;
+                // final spacing = (constraints.maxWidth - itemWidth * numPerRow) /
+                //     (numPerRow - 1).truncateToDouble();
+
+                final spacing = widget.spacing;
+                final itemWidth = (constraints.maxWidth - (spacing * (numPerRow - 1))) / numPerRow.truncateToDouble();
+                final runSpacing = widget.runSpacing;
 
                 return Wrap(
                   spacing: spacing,
@@ -132,18 +133,21 @@ class _NCollectionViewState extends State<NCollectionView>
                       onTap: () {
                         e.item3();
                       },
-                      child: SizedBox(
+                      child: Container(
                         width: itemWidth,
+                        decoration: BoxDecoration(
+                          color: Colors.transparent,
+                          // border: Border.all(color: Colors.blue),
+                        ),
                         child: Column(
                           children: [
                             Container(
-                              width: 54.w,
-                              height: 54.w,
-                              padding: EdgeInsets.all(10.w),
+                              width: 54,
+                              height: 54,
+                              padding: EdgeInsets.all(10),
                               decoration: BoxDecoration(
                                 color: Colors.white,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(14.w)),
+                                borderRadius: BorderRadius.all(Radius.circular(14)),
                                 // border: Border.all(),
                               ),
                               child: Image(
@@ -151,7 +155,7 @@ class _NCollectionViewState extends State<NCollectionView>
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsets.only(top: 8.w),
+                              padding: EdgeInsets.only(top: 8),
                               child: Text(
                                 e.item1,
                                 style: itemStyle ??
@@ -174,7 +178,7 @@ class _NCollectionViewState extends State<NCollectionView>
         ),
         if (array.length > 1)
           Positioned(
-            bottom: 8.w,
+            bottom: 8,
             left: 0,
             right: 0,
             // height: 40,
@@ -192,26 +196,25 @@ class _NCollectionViewState extends State<NCollectionView>
     return Container(
       // color: Colors.black12,
       child: ValueListenableBuilder<int>(
-          valueListenable: indexVN,
-          builder: (context, value, child) {
-            return Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: List<Widget>.generate(
-                count,
-                (index) {
-                  return Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 4.w),
-                    child: CircleAvatar(
-                      radius: 4.w,
-                      backgroundColor: index == value
-                          ? Color(0xff7C7C7C)
-                          : Color(0xffDDDDDD),
-                    ),
-                  );
-                },
-              ),
-            );
-          }),
+        valueListenable: indexVN,
+        builder: (context, value, child) {
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: List<Widget>.generate(
+              count,
+              (index) {
+                return Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 4),
+                  child: CircleAvatar(
+                    radius: 4,
+                    backgroundColor: index == value ? Color(0xff7C7C7C) : Color(0xffDDDDDD),
+                  ),
+                );
+              },
+            ),
+          );
+        },
+      ),
     );
   }
 }

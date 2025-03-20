@@ -182,4 +182,17 @@ extension ListExt<T, E> on List<E> {
     sort(compare);
     return this;
   }
+
+  /// 数组降维
+  List<E> flatMap() {
+    final list = <E>[];
+    for (final e in this) {
+      if (e is List<E>) {
+        list.addAll((e as List<E>).flatMap());
+      } else {
+        list.add(e);
+      }
+    }
+    return list;
+  }
 }

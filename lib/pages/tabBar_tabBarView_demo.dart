@@ -255,7 +255,7 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
   Widget buildHeader() {
     return ElevatedButton(
         onPressed: () {
-          ddlog("buildHeader");
+          DLog.d("buildHeader");
         },
         child: Text("header_${IntExt.random(max: 100)}"));
   }
@@ -300,7 +300,7 @@ class _TabBarTabBarViewDemoState extends State<TabBarTabBarViewDemo> with Single
         dense: true,
         // contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
         onTap: () {
-          ddlog("section_");
+          DLog.d("section_");
           if (e.item1.toLowerCase().contains("loginPage".toLowerCase())) {
             Get.offNamed(e.item1, arguments: e.item1);
           } else {
@@ -546,6 +546,10 @@ var list = <Tuple2<String, String>>[
   Tuple2(APPRouter.urlLauncherDemo, "urlLauncherDemo"),
   Tuple2(APPRouter.iteratorDemo, "iteratorDemo"),
   Tuple2(APPRouter.chemotherapyRegimenDrugCaculator, "chemotherapyRegimenDrugCaculator"),
+  Tuple2(APPRouter.weatherHome, "weatherHome"),
+  Tuple2(APPRouter.audioVisualizerDemo, "audioVisualizerDemo"),
+  Tuple2(APPRouter.listenableDemo, "listenableDemo"),
+  Tuple2(APPRouter.platformDispatcherDemo, "platformDispatcherDemo"),
 ];
 
 var slivers = <Tuple2<String, String>>[
@@ -560,6 +564,7 @@ var specials = <Tuple2<String, String>>[
   Tuple2(APPRouter.yamlParsePage, "yaml解析"),
   Tuple2(APPRouter.appLifecycleObserverDemo, "appLifecycleObserverDemo"),
   Tuple2(APPRouter.themeColorDemo, "themeColor"),
+  Tuple2(APPRouter.appSandboxFileDirectory, "appSandboxFileDirectory"),
   Tuple2(APPRouter.emojiPage, "emoji"),
   Tuple2(APPRouter.operatorDemo, "特殊操作符"),
   Tuple2(APPRouter.mediaQueryDemo, "mediaQuery"),
@@ -616,6 +621,12 @@ var specials = <Tuple2<String, String>>[
   Tuple2(APPRouter.dataTypeDemo, "testDataTyeDemo"),
   Tuple2(APPRouter.audioPlayPageDemo, "audioPlayPage"),
   Tuple2(APPRouter.expressionsCalulatorDemo, "简单表达式计算"),
+  Tuple2(APPRouter.flexbleListViewDemo, "简单表达式计算"),
+  Tuple2(APPRouter.pageViewVerticalDemo, "垂直滚动"),
+  Tuple2(APPRouter.markdownBodyDemo, "stream markdown"),
+  Tuple2(APPRouter.tabContainerDemo, "第三方 tabContainer"),
+  Tuple2(APPRouter.curvedNavigationBarDemo, "第三方 curvedNavigationBar"),
+  Tuple2(APPRouter.swiperCardDemo, "第三方 swiperCardDemo"),
 ];
 
 var animateds = <Tuple2<String, String>>[
@@ -655,6 +666,7 @@ var customs = [
   Tuple2(APPRouter.nSkeletonDemo, "骨架图"),
   Tuple2(APPRouter.nTreeDemo, "树形组件"),
   Tuple2(APPRouter.dialogChoiceChipDemo, "选择弹窗"),
+  Tuple2(APPRouter.imConversationPage, "会话列表"),
   Tuple2(APPRouter.imChatPage, "聊天列表"),
   Tuple2(APPRouter.expandTextDemo, "可折叠文字"),
   Tuple2(APPRouter.uploadFileDemo, "上传demo"),
@@ -665,13 +677,18 @@ var customs = [
   Tuple2(APPRouter.choiceBoxOneDemo, "choiceBoxOneDemo"),
   Tuple2(APPRouter.apiConvertPage, "APIConvertPage"),
   Tuple2(APPRouter.selectListPage, "selectListPage"),
-  Tuple2(APPRouter.indexAvatarGroupDemo, "indexAvatarGroupDemo"),
+  Tuple2(APPRouter.avatarGroupDemo, "indexAvatarGroupDemo"),
   Tuple2(APPRouter.appBarColorChangerDemo, "appBarColorChangerDemo"),
   Tuple2(APPRouter.footerButtonBarDemo, "footerButtonBarDemo"),
   Tuple2(APPRouter.sectionHeaderDemo, "sectionHeaderDemo"),
   Tuple2(APPRouter.nwebViewDemo, "nwebViewDemo"),
   Tuple2(APPRouter.iconConvertPage, "iconConvertPage"),
   Tuple2(APPRouter.alignmentDrawDemo, "alignmentDrawDemo"),
+  Tuple2(APPRouter.pageRouteDemo, "pageRouteDemo"),
+  Tuple2(APPRouter.pageRouteAnimationDemo, "pageRouteAnimationDemo"),
+  Tuple2(APPRouter.emailSenderDemo, "emailSenderDemo"),
+  Tuple2(APPRouter.faceDetectionPage, "faceDetectionPage"),
+  Tuple2(APPRouter.nestedScrollViewDemoFour, "nestedScrollViewDemoFour"),
 ];
 
 var vendors = <Tuple2<String, String>>[
@@ -688,7 +705,6 @@ var vendors = <Tuple2<String, String>>[
   Tuple2(APPRouter.ratingBarDemo, "星评"),
   Tuple2(APPRouter.dragAndDropDemo, "文件拖拽"),
   Tuple2(APPRouter.popoverDemo, "popoverDemo"),
-  Tuple2(APPRouter.badgesDemo, "badgesDemo"),
   Tuple2(APPRouter.flutterSwiperDemo, "flutterSwiperDemo"),
   Tuple2(APPRouter.flutterSwiperIndicatorDemo, "flutterSwiperIndicatorDemo"),
   Tuple2(APPRouter.visibilityDetectorDemo, "visibilityDetector 曝光检测"),
@@ -721,6 +737,7 @@ var others = <Tuple2<String, String>>[
   Tuple2(APPRouter.richTextDemo, "richTextDemo"),
   Tuple2(APPRouter.testPage, "testPage"),
   Tuple2(APPRouter.testPageOne, "testPageOne"),
+  Tuple2(APPRouter.customPainterPageDemo, "customPainterPageDemo"),
   Tuple2(APPRouter.decorationDemo, "decorationDemo"),
   Tuple2(APPRouter.homeSrollDemo, "HomeSrollDemo"),
   Tuple2(APPRouter.homeNavDemo, "HomeNavDemo"),

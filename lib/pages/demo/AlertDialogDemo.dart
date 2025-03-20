@@ -34,8 +34,7 @@ class AlertDialogDemo extends StatefulWidget {
   _AlertDialogDemoState createState() => _AlertDialogDemoState();
 }
 
-class _AlertDialogDemoState extends State<AlertDialogDemo>
-    with SingleTickerProviderStateMixin, DialogMixin {
+class _AlertDialogDemoState extends State<AlertDialogDemo> with SingleTickerProviderStateMixin, DialogMixin {
   var itemSize = Size(70, 70);
 
   var titles = [
@@ -160,8 +159,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
                     showSnackBar(
                       SnackBar(content: Text(name)),
                     );
-                    debugPrint(
-                        "alignment:$alignment ${alignment.x} ${alignment.y}");
+                    debugPrint("alignment:$alignment ${alignment.x} ${alignment.y}");
                   },
                   child: Text(
                     name,
@@ -329,7 +327,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
                         child: ChioceWrap(
                           indexs: [0],
                           callback: (indexs) {
-                            ddlog(indexs);
+                            DLog.d(indexs);
                           },
                           children: titles.map((e) => Text(e)).toList(),
                         ),
@@ -391,7 +389,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
               color: Colors.green,
               child: TextButton(
                 onPressed: () {
-                  ddlog("Button");
+                  DLog.d("Button");
                 },
                 child: Text("Button"),
               ),
@@ -420,7 +418,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
                 height: size.height,
                 child: TextButton.icon(
                   onPressed: () {
-                    ddlog("刷新");
+                    DLog.d("刷新");
                     Navigator.of(context).pop();
                   },
                   icon: Icon(Icons.refresh),
@@ -440,7 +438,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
             NPopupRoute(
               alignment: alignment,
               onClick: () {
-                ddlog("exit");
+                DLog.d("exit");
                 //点击空白处
                 Navigator.of(context).pop();
               },
@@ -496,7 +494,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
                   child: Text("确定"),
                 ),
                 // actions: ["选择A", "选择B", "选择C", "选择D"].map((e) => TextButton(onPressed: (){
-                //   ddlog(e);
+                //   DLog.d(e);
                 //   Navigator.pop(context);
                 // }, child: Text(e),)).toList(),
               ),
@@ -538,8 +536,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
                   child: Container(
                       height: 400,
                       color: Colors.red,
-                      margin:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 100),
+                      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 100),
                       child: TextButton(
                           onPressed: () {
                             Navigator.of(context).pop();
@@ -595,8 +592,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
         break;
       case 21:
         {
-          presentCupertinoAlert(context, content: Text("presentCupertinoAlert"),
-              onConfirm: () async {
+          presentCupertinoAlert(context, content: Text("presentCupertinoAlert"), onConfirm: () async {
             // Navigator.of(context).pop();
           });
         }
@@ -616,7 +612,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
     //   ),
     //   children: titles.map((e) => OutlinedButton(
     //       onPressed: () {
-    //         // ddlog(e);
+    //         // DLog.d(e);
     //         _onPressed(titles.indexOf(e));
     //       },
     //       child: Text('${e}_${titles.indexOf(e)}')))
@@ -676,7 +672,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
       actions: ["取消", "确定"]
           .map((e) => TextButton(
                 onPressed: () {
-                  ddlog(e);
+                  DLog.d(e);
                   Navigator.pop(context);
                 },
                 child: Text(e),
@@ -696,7 +692,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
                 padding: const EdgeInsets.symmetric(vertical: 2),
                 child: TextButton.icon(
                   onPressed: () {
-                    ddlog(titles.indexOf(e));
+                    DLog.d(titles.indexOf(e));
                     // }, icon: Icon(Icons.check_circle_outline), label: Text("Button"))).toList(),
                   },
                   icon: Icon(Icons.radio_button_unchecked_outlined),
@@ -722,7 +718,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
         indexs: [0],
         canScroll: false,
         callback: (indexs) {
-          ddlog([indexs.runtimeType, indexs]);
+          DLog.d([indexs.runtimeType, indexs]);
         },
       ),
       actions: [
@@ -744,7 +740,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
         isMutiple: isMutiple,
         indexs: [0],
         callback: (indexs) {
-          ddlog(indexs);
+          DLog.d(indexs);
         },
         children: titles.map((e) => Text(e)).toList(),
       ),
@@ -775,13 +771,11 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
             horizontal: spacingHor,
             vertical: spacingVer,
           ),
-          child: Text(title1,
-              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16)),
+          child: Text(title1, style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16)),
         ),
         Container(
           // color: Colors.green,
-          padding: EdgeInsets.only(
-              left: spacingHor, right: spacingHor, bottom: spacingVer),
+          padding: EdgeInsets.only(left: spacingHor, right: spacingHor, bottom: spacingVer),
           child: Text(message1),
         ),
         Container(
@@ -795,19 +789,18 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
               Expanded(
                 child: TextButton.icon(
                   onPressed: () {
-                    ddlog("取消");
+                    DLog.d("取消");
                     Navigator.of(context).pop();
                   },
                   icon: Icon(Icons.cancel_outlined),
                   label: Text("取消"),
                 ),
               ),
-              Container(
-                  height: 55, child: VerticalDivider(color: Colors.grey[400])),
+              Container(height: 55, child: VerticalDivider(color: Colors.grey[400])),
               Expanded(
                 child: TextButton.icon(
                   onPressed: () {
-                    ddlog("确定");
+                    DLog.d("确定");
                     Navigator.of(context).pop();
                   },
                   icon: Icon(Icons.check),
@@ -828,7 +821,7 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
 
     return GestureDetector(
       onTap: () {
-        ddlog("tap Container");
+        DLog.d("tap Container");
       },
       child: Container(
         width: screenSize.width - 30,
@@ -841,19 +834,14 @@ class _AlertDialogDemoState extends State<AlertDialogDemo>
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: EdgeInsets.only(
-                  top: spacingVer,
-                  left: spacingHor,
-                  bottom: spacingVer,
-                  right: spacingHor),
+              padding: EdgeInsets.only(top: spacingVer, left: spacingHor, bottom: spacingVer, right: spacingHor),
               child: Text(
                 title1,
                 style: TextStyle(fontWeight: FontWeight.w600),
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(
-                  left: spacingHor, bottom: spacingVer, right: spacingHor),
+              padding: EdgeInsets.only(left: spacingHor, bottom: spacingVer, right: spacingHor),
               child: Text(
                 message1,
                 style: TextStyle(fontWeight: FontWeight.w300),
@@ -895,23 +883,22 @@ xxxx十分重视用户权利及隐私政策并严格按照相关法律法规的�
           //     text: text,
           //     linkMap: protocolMap,
           //     onTap: (key, value){
-          //       ddlog(key);
-          //       ddlog(value);
+          //       DLog.d(key);
+          //       DLog.d(value);
           //     }
           // ).textSpans,
           children: RichTextExt.createTextSpans(
             text: text,
             textTaps: linkMap.keys.toList(),
             onLink: (textTap) {
-              ddlog(textTap);
+              DLog.d(textTap);
             },
           )),
     );
 
     showGeneralDialog(
         context: context,
-        pageBuilder: (BuildContext context, Animation<double> animation,
-            Animation<double> secondaryAnimation) {
+        pageBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
           return NUserPrivacy(
             title: Text(
               '用户隐私及协议',
@@ -919,11 +906,11 @@ xxxx十分重视用户权利及隐私政策并严格按照相关法律法规的�
             ),
             content: textRich,
             onCancel: () {
-              ddlog("Cancel");
+              DLog.d("Cancel");
               Navigator.of(context).pop();
             },
             onConfirm: () {
-              ddlog("Confirm");
+              DLog.d("Confirm");
               Navigator.of(context).pop();
             },
           );
@@ -932,10 +919,7 @@ xxxx十分重视用户权利及隐私政策并严格按照相关法律法规的�
 }
 
 class TestFlowDelegate extends FlowDelegate {
-  TestFlowDelegate(
-      {this.margin = const EdgeInsets.all(0),
-      this.spacing = 8.0,
-      this.flowHeight = double.infinity});
+  TestFlowDelegate({this.margin = const EdgeInsets.all(0), this.spacing = 8.0, this.flowHeight = double.infinity});
 
   EdgeInsets margin;
 

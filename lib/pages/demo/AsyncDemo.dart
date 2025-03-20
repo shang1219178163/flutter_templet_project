@@ -19,8 +19,7 @@ class AsyncDemo extends StatefulWidget {
 }
 
 class _AsyncDemoState extends State<AsyncDemo> {
-  bool get hideApp =>
-      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
+  bool get hideApp => Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
 
   final _scrollController = ScrollController();
 
@@ -78,8 +77,8 @@ class _AsyncDemoState extends State<AsyncDemo> {
     resultVN.value = await asyncMethod();
     await Future.delayed(Duration(milliseconds: 1000));
     resultVN.value = await asyncMethod1(handOut: (val) async {
-      ddlog("asyncMethod1: $val");
-      ddlog("asyncMethod2: ${await val}");
+      DLog.d("asyncMethod1: $val");
+      DLog.d("asyncMethod2: ${await val}");
     });
 
     String data = ' ';

@@ -54,14 +54,14 @@ class _FlutterFFiTestState extends State<FlutterFFiTest> {
     // Allocate and free some native memory with calloc and free.
     final pointer = calloc<Uint8>();
     pointer.value = 3;
-    ddlog(pointer.value);
+    DLog.d(pointer.value);
     calloc.free(pointer);
 
     // Use the Utf8 helper to encode zero-terminated UTF-8 strings in native memory.
     final String myString = '😎👿💬';
     final Pointer<Utf8> charPointer = myString.toNativeUtf8();
-    ddlog('First byte is: ${charPointer.cast<Uint8>().value}');
-    ddlog(charPointer.toDartString());
+    DLog.d('First byte is: ${charPointer.cast<Uint8>().value}');
+    DLog.d(charPointer.toDartString());
     calloc.free(charPointer);
   }
 }

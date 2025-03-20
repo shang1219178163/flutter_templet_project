@@ -101,7 +101,7 @@ class _DataTableDemoState extends State<DataTableDemo> {
         setState(() {
           groupValue = newValue;
         });
-        ddlog(groupValue);
+        DLog.d(groupValue);
       },
       groupValue: groupValue,
     );
@@ -145,7 +145,7 @@ class _DataTableDemoState extends State<DataTableDemo> {
                         setState(() {
                           e.isSelected = value;
                         });
-                        ddlog(
+                        DLog.d(
                             models.where((e) => e.isSelected == true).map((e) => "${e.name}_${e.isSelected}").toList());
                       },
                     ))
@@ -287,7 +287,7 @@ class _DataSource<E extends SelectableMixin> extends DataTableSource {
   int get selectedRowCount => _selectedCount;
 }
 
-extension ListExtObject<E extends Object> on List<E> {
+extension _ListExtObject<E extends Object> on List<E> {
   /// 排序
   List<E> sortedByValue({bool ascending = true, required String? Function(E e) cb}) {
     if (ascending) {

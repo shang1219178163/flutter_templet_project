@@ -64,11 +64,11 @@ class _PageViewDemoState extends State<PageViewDemo> {
   }
 
   buildBody({
-    margin = const EdgeInsets.all(15),
-    padding = const EdgeInsets.all(15),
+    EdgeInsets margin = const EdgeInsets.all(15),
+    EdgeInsets padding = const EdgeInsets.all(15),
   }) {
     return LayoutBuilder(builder: (context, constraints) {
-      final pageViewWidth = constraints.maxWidth - margin._left - margin.right - padding._left - padding.right;
+      final pageViewWidth = constraints.maxWidth - margin.left - margin.right - padding.left - padding.right;
       return Container(
         margin: margin,
         padding: padding,
@@ -150,7 +150,7 @@ class _PageViewDemoState extends State<PageViewDemo> {
                 .map(
                   (e) => CupertinoActionSheetAction(
                     onPressed: () {
-                      ddlog(e);
+                      DLog.d(e);
                       Navigator.pop(context);
                     },
                     child: Text(e),

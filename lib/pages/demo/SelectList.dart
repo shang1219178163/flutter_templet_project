@@ -57,7 +57,7 @@ class _SelectListPageState extends State<SelectListPage> {
       models: models,
       isMultiple: isMultiple,
       onSelected: (List<UserModel> items) {
-        ddlog(items.map((e) => (e.name,)));
+        DLog.d(items.map((e) => (e.name,)));
       },
     );
   }
@@ -89,15 +89,13 @@ class _SelectListState extends State<SelectList> {
   late final dataList = ValueNotifier(models);
 
   /// 当前选择个数
-  late final selectedCount =
-      ValueNotifier(models.where((e) => e.isSelected == true).length);
+  late final selectedCount = ValueNotifier(models.where((e) => e.isSelected == true).length);
 
   /// 是否全选
   bool get isAll => dataList.value.where((e) => e.isSelected != true).isEmpty;
 
   /// 已选择
-  List<UserModel> get selectedItems =>
-      dataList.value.where((e) => e.isSelected == true).toList();
+  List<UserModel> get selectedItems => dataList.value.where((e) => e.isSelected == true).toList();
 
   @override
   Widget build(BuildContext context) {
@@ -121,7 +119,7 @@ class _SelectListState extends State<SelectList> {
 
             onTap() {
               e.isSelected = !(e.isSelected ?? false);
-              // ddlog(e.toJson());
+              // DLog.d(e.toJson());
               setState(() {});
 
               updateSelectedCount();
@@ -198,8 +196,8 @@ class _SelectListState extends State<SelectList> {
               // backgroundColor: Colors.red
             ),
             onPressed: () {
-              // ddlog("isAll: $isAll");
-              // ddlog(dataList.value
+              // DLog.d("isAll: $isAll");
+              // DLog.d(dataList.value
               //     .where((e) => e.isSelected != true)
               //     .map((e) => (e.name, e.isSelected)).toList());
 
@@ -216,14 +214,13 @@ class _SelectListState extends State<SelectList> {
               }
               setState(() {});
               updateSelectedCount();
-              // ddlog(selectedItems);
+              // DLog.d(selectedItems);
             },
             child: Row(
               children: [
                 Padding(
                   padding: const EdgeInsets.only(right: 8.0),
-                  child: Icon(
-                      isAll ? Icons.check_box : Icons.check_box_outline_blank),
+                  child: Icon(isAll ? Icons.check_box : Icons.check_box_outline_blank),
                 ),
                 Text("全选"),
               ],
@@ -244,8 +241,7 @@ class _SelectListState extends State<SelectList> {
                     // border: Border.all(color: Colors.blue),
                     borderRadius: BorderRadius.all(Radius.circular(0)),
                   ),
-                  child: NText(
-                      "(${selectedCount.value}/${dataList.value.length})"),
+                  child: NText("(${selectedCount.value}/${dataList.value.length})"),
                 );
               }),
           SizedBox(

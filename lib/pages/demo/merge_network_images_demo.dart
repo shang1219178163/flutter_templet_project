@@ -28,32 +28,28 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
   List<MaterialDetailConfig> detailList = <MaterialDetailConfig>[
     MaterialDetailConfig(
       id: 1,
-      message:
-          'https://cdn.pixabay.com/photo/2022/09/01/09/31/sunset-glow-7425170_1280.jpg',
+      message: 'https://cdn.pixabay.com/photo/2022/09/01/09/31/sunset-glow-7425170_1280.jpg',
       materialWidth: '400',
       materialHeight: '300',
       // globalKey: GlobalKey(),
     ),
     MaterialDetailConfig(
       id: 2,
-      message:
-          'https://pic.616pic.com/bg_w1180/00/04/08/G5Bftx5ZDI.jpg!/fw/1120',
+      message: 'https://pic.616pic.com/bg_w1180/00/04/08/G5Bftx5ZDI.jpg!/fw/1120',
       materialWidth: '400',
       materialHeight: '300',
       // globalKey: GlobalKey(),
     ),
     MaterialDetailConfig(
       id: 3,
-      message:
-          'https://pic.616pic.com/bg_w1180/00/07/20/2gfqq0N3qX.jpg!/fw/1120',
+      message: 'https://pic.616pic.com/bg_w1180/00/07/20/2gfqq0N3qX.jpg!/fw/1120',
       materialWidth: '400',
       materialHeight: '300',
       // globalKey: GlobalKey(),
     ),
   ]; // 素材详情列表
 
-  final qrCodeUrl =
-      "https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web/img/article.9d13ff7.png";
+  final qrCodeUrl = "https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web/img/article.9d13ff7.png";
 
   @override
   Widget build(BuildContext context) {
@@ -66,8 +62,7 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
           TextButton(
               onPressed: () async {
                 _globalKey.currentState?.toCompositePics().then((pngBytes) {
-                  imageMerged = Image.memory(pngBytes,
-                      width: screenSize.width, height: 600);
+                  imageMerged = Image.memory(pngBytes, width: screenSize.width, height: 600);
                   setState(() {});
                 });
               },
@@ -83,7 +78,7 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
                   quality: 100,
                 );
               }).then((result) {
-                ddlog("result:${result}");
+                DLog.d("result:${result}");
               }).catchError((e) {
                 debugPrint("error:${e}");
               });
@@ -143,8 +138,7 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
           key: e.globalKey,
           child: FadeInImage.assetNetwork(
             placeholder: 'assets/images/sha_qiu.png',
-            image: e.message ??
-                'https://fastly.jsdelivr.net/npm/@vant/assets/apple-1.jpeg',
+            image: e.message ?? 'https://fastly.jsdelivr.net/npm/@vant/assets/apple-1.jpeg',
             fit: BoxFit.cover,
             width: double.parse(e.materialWidth ?? "${screenSize.width}"),
             height: double.parse(e.materialHeight ?? "${screenSize.height}"),
@@ -276,8 +270,7 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
       child: FloatingActionButton(
         heroTag: null,
         backgroundColor: Colors.grey,
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(radius))),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(radius))),
         onPressed: onTap,
         child: image,
       ),
@@ -293,10 +286,8 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
     //根据 GlobalKey 获取 Image 数组
     //根据 GlobalKey 获取 Image 数组
     var imgs = await Future.wait(keys.map((key) async {
-      var boundary =
-          key?.currentContext?.findRenderObject() as RenderRepaintBoundary?;
-      var image =
-          await boundary?.toImage(pixelRatio: ui.window.devicePixelRatio);
+      var boundary = key?.currentContext?.findRenderObject() as RenderRepaintBoundary?;
+      var image = await boundary?.toImage(pixelRatio: ui.window.devicePixelRatio);
       return image;
     }).toList());
 
@@ -320,19 +311,14 @@ class _MergeNetworkImagesDemoState extends State<MergeNetworkImagesDemo> {
       //画图
       for (var i = 0; i < images.length; i++) {
         final e = images[i];
-        final offsetY =
-            i == 0 ? 0 : imageHeights.sublist(0, i).reduce((a, b) => a + b);
+        final offsetY = i == 0 ? 0 : imageHeights.sublist(0, i).reduce((a, b) => a + b);
         // print("offset:${i}_${e.height}_${offsetY}");
-        canvas.drawRect(
-            Rect.fromLTWH(
-                0, offsetY.toDouble(), totalWidth * 1.0, e.height * 1.0),
-            paint);
+        canvas.drawRect(Rect.fromLTWH(0, offsetY.toDouble(), totalWidth * 1.0, e.height * 1.0), paint);
         canvas.drawImage(e, Offset(0, offsetY.toDouble()), paint);
       }
 
       //获取合成的图片
-      var image =
-          await recorder.endRecording().toImage(totalWidth, totalHeight);
+      var image = await recorder.endRecording().toImage(totalWidth, totalHeight);
       var byteData = await image.toByteData(format: ui.ImageByteFormat.png);
       var pngBytes = byteData?.buffer.asUint8List();
       //图片大小

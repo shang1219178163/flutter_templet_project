@@ -96,7 +96,7 @@ class OssUtil {
         return '$url/$fileName';
       }
     } catch (e) {
-      ddlog(e);
+      DLog.d(e);
     }
     return null;
   }

@@ -9,6 +9,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
+import 'package:flutter_templet_project/extension/string_ext.dart';
 
 class KeyDemo extends StatefulWidget {
   const KeyDemo({Key? key, this.title}) : super(key: key);
@@ -20,6 +21,8 @@ class KeyDemo extends StatefulWidget {
 }
 
 class _KeyDemoState extends State<KeyDemo> {
+  final scrollController = ScrollController();
+
   List<Widget> items = [
     Padding(
       key: UniqueKey(),
@@ -53,15 +56,33 @@ class _KeyDemoState extends State<KeyDemo> {
                 ))
             .toList(),
       ),
-      body: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: items,
-        ),
-      ),
+      body: buildBody(),
       floatingActionButton: FloatingActionButton(
         onPressed: switchWidget,
-        child: Icon(Icons.undo),
+        child: Icon(Icons.autorenew),
+      ),
+    );
+  }
+
+  Widget buildBody() {
+    return Scrollbar(
+      controller: scrollController,
+      child: SingleChildScrollView(
+        controller: scrollController,
+        child: Column(
+          children: [
+            Image(
+              image: "assets/images/flutter_key.webp".toAssetImage(),
+              fit: BoxFit.fitWidth,
+            ),
+            Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: items,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

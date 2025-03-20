@@ -6,12 +6,12 @@
 //  Copyright © 2024/9/27 shang. All rights reserved.
 //
 
+import 'dart:math';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/Pages/second_page.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
-import 'package:flutter_templet_project/pages/app_tab_page.dart';
+import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/pages/demo/CupertinoTabScaffoldDemo.dart';
-import 'package:flutter_templet_project/pages/third_page.dart';
 import 'package:flutter_templet_project/routes/APPRouter.dart';
 import 'package:get/get.dart';
 
@@ -79,8 +79,133 @@ class _NestedNavigatorDemoState extends State<NestedNavigatorDemo> {
                   );
                 }).toList(),
               ),
+              buildNavigatorBox(),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget buildNavigatorBox() {
+    onNext({required BuildContext context, required String title}) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) {
+            return NestedNavigatorSubpage(
+              appBar: AppBar(
+                centerTitle: true,
+                title: Text(title),
+                actions: [
+                  GestureDetector(
+                    onTap: () {
+                      DLog.d("error");
+                    },
+                    child: Icon(Icons.error_outline),
+                  ),
+                ]
+                    .map((e) => Container(
+                          padding: EdgeInsets.only(right: 8),
+                          child: e,
+                        ))
+                    .toList(),
+              ),
+              child: Column(
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      onNext(context: context, title: title);
+                    },
+                    child: Text('next page'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text('Go back'),
+                  ),
+                  Wrap(
+                    spacing: 8,
+                    runSpacing: 8,
+                    children: [
+                      ...List.generate(Random().nextInt(9), (index) {
+                        final title = "选项_$index";
+
+                        return OutlinedButton(
+                          style: TextButton.styleFrom(
+                            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                            minimumSize: Size(50, 18),
+                            // primary: primary,
+                          ),
+                          onPressed: () {
+                            DLog.d(title);
+                          },
+                          child: Text(title),
+                        );
+                      }),
+                    ],
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
+      );
+    }
+
+    return Container(
+      height: 400,
+      child: Theme(
+        data: ThemeData(
+          appBarTheme: const AppBarTheme(
+            backgroundColor: Colors.lightBlueAccent,
+            elevation: 0,
+            scrolledUnderElevation: 0,
+            titleTextStyle: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w500,
+            ),
+            toolbarTextStyle: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w400,
+            ),
+            iconTheme: IconThemeData(
+              color: Colors.white, // 图标颜色
+              size: 24.0, // 图标大小
+              opacity: 0.8, // 图标透明度
+            ),
+            actionsIconTheme: IconThemeData(
+              color: Colors.white, // 图标颜色
+              size: 24.0, // 图标大小
+              opacity: 0.8, // 图标透明度
+            ),
+          ),
+        ),
+        child: Navigator(
+          onGenerateRoute: (RouteSettings settings) {
+            return MaterialPageRoute(
+              builder: (context) {
+                return NestedNavigatorSubpage(
+                  appBar: AppBar(
+                    centerTitle: true,
+                    title: Text("嵌套导航主页面"),
+                  ),
+                  child: Column(
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          onNext(context: context, title: "子页面");
+                        },
+                        child: Text('next page'),
+                      )
+                    ],
+                  ),
+                );
+              },
+            );
+          },
         ),
       ),
     );
@@ -156,6 +281,72 @@ class _NestedNavigatorDemoState extends State<NestedNavigatorDemo> {
             },
           ),
         ),
+      ),
+    );
+  }
+}
+
+/// 嵌套导航子视图
+class NestedNavigatorSubpage extends StatefulWidget {
+  const NestedNavigatorSubpage({
+    super.key,
+    this.appBar,
+    required this.child,
+  });
+
+  final AppBar? appBar;
+
+  final Widget child;
+
+  @override
+  State<NestedNavigatorSubpage> createState() => _NestedNavigatorSubpageState();
+}
+
+class _NestedNavigatorSubpageState extends State<NestedNavigatorSubpage> {
+  final scrollController = ScrollController();
+
+  @override
+  void didUpdateWidget(covariant NestedNavigatorSubpage oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (oldWidget.appBar != widget.appBar || oldWidget.child != widget.child) {
+      setState(() {});
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: widget.appBar ??
+          AppBar(
+            title: Text("$widget"),
+          ),
+      body: buildBody(),
+    );
+  }
+
+  Widget buildBody() {
+    return Container(
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        // color: color,
+        border: Border.all(color: Colors.blue),
+      ),
+      child: Column(
+        children: [
+          // NPickerToolBar(
+          //   title: title,
+          //   onCancel: onBack,
+          //   onConfirm: onNext,
+          // ),
+          Expanded(
+            child: Scrollbar(
+              child: SingleChildScrollView(
+                child: widget.child,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

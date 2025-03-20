@@ -6,12 +6,21 @@
 //  Copyright © 7/31/21 shang. All rights reserved.
 //
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_templet_project/basicWidget/n_footer.dart';
+import 'package:flutter_templet_project/basicWidget/n_footer_button_bar.dart';
+import 'package:flutter_templet_project/basicWidget/n_picker_tool_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
+import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/extension/rich_text_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
+import 'package:flutter_templet_project/pages/demo/ScrollbarDemo.dart';
+import 'package:flutter_templet_project/util/color_util.dart';
+import 'package:flutter_templet_project/util/get_util.dart';
 import 'package:tuple/tuple.dart';
 
 class RichTextDemo extends StatefulWidget {
@@ -24,6 +33,11 @@ class RichTextDemo extends StatefulWidget {
 }
 
 class _RichTextDemoState extends State<RichTextDemo> {
+  List<({String title, VoidCallback action})> get records => [
+        (title: "展示隐私", action: onShowPrivacy),
+        (title: "展示服务", action: onShowService),
+      ];
+
   var linkMap = {
     '《用户协议》': 'https://flutter.dev',
     '《隐私政策》': 'https://flutter.dev',
@@ -88,11 +102,31 @@ xxxx十分重视用户权利及隐私政策并严格按照相关法律法规的�
       body: Scrollbar(
         child: SingleChildScrollView(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              NSectionBox(
-                title: "buildRichText",
-                child: buildRichText().toBorder(),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                child: Wrap(
+                  spacing: 8,
+                  runSpacing: 8,
+                  children: records.map((e) {
+                    return ElevatedButton(
+                      style: TextButton.styleFrom(
+                        // padding: EdgeInsets.zero,
+                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        minimumSize: const Size(24, 28),
+                        // foregroundColor: Colors.blue,
+                      ),
+                      onPressed: e.action,
+                      child: Text(e.title),
+                    );
+                  }).toList(),
+                ),
               ),
+              // NSectionBox(
+              //   title: "buildRichText",
+              //   child: buildRichText().toBorder(),
+              // ),
               NSectionBox(
                 title: "buildWidgetSpan",
                 child: buildWidgetSpan(),
@@ -100,6 +134,21 @@ xxxx十分重视用户权利及隐私政策并严格按照相关法律法规的�
               NSectionBox(
                 title: "richTextWid04",
                 child: richTextWid04(),
+              ),
+              NSectionBox(
+                title: "buildHospital - PlaceholderAlignment",
+                child: Column(
+                  children: [
+                    ...PlaceholderAlignment.values.map((e) {
+                      return NSectionBox(
+                        title: "buildHospital - ${e.name}",
+                        child: buildHospital(
+                          alignment: e,
+                        ),
+                      );
+                    }),
+                  ],
+                ),
               ),
             ],
           ),
@@ -109,25 +158,22 @@ xxxx十分重视用户权利及隐私政策并严格按照相关法律法规的�
   }
 
   Widget buildRichText() {
-    return Container(
-      // padding: EdgeInsets.all(12),
-      child: Text.rich(
-        TextSpan(
-          children: RichTextExt.createTextSpans(
-            text: text,
-            textTaps: linkMap.keys.toList(),
-            // linkStyle: TextStyle(fontSize: 18.0, color: Colors.red),
-            onLink: (textTap) {
-              ddlog(textTap);
-            },
-          ),
+    return Text.rich(
+      TextSpan(
+        children: RichTextExt.createTextSpans(
+          text: text,
+          textTaps: linkMap.keys.toList(),
+          // linkStyle: TextStyle(fontSize: 18.0, color: Colors.red),
+          onLink: (textTap) {
+            DLog.d(textTap);
+          },
         ),
-        // style: TextStyle(
-        //   wordSpacing: 12
-        // ),
-        strutStyle: StrutStyle(
-          leading: 0.4,
-        ),
+      ),
+      // style: TextStyle(
+      //   wordSpacing: 12
+      // ),
+      strutStyle: StrutStyle(
+        leading: 0.4,
       ),
     );
   }
@@ -144,7 +190,9 @@ xxxx十分重视用户权利及隐私政策并严格按照相关法律法规的�
             width: 120,
             height: 40,
             child: Card(
-                color: Colors.blue, child: Center(child: Text('Hello World!'))),
+              color: Colors.blue,
+              child: Center(child: Text('Hello World!')),
+            ),
           ),
         ),
         WidgetSpan(
@@ -175,10 +223,84 @@ xxxx十分重视用户权利及隐私政策并严格按照相关法律法规的�
     );
   }
 
+  /// WidgetSpan 和文字首行对齐
+  Widget buildHospital({
+    TextBaseline textBaseline = TextBaseline.alphabetic,
+    PlaceholderAlignment alignment = PlaceholderAlignment.baseline,
+    double spacing = 7,
+  }) {
+    var departmentDesc = ["第四军医大西京医院", "眼科"].where((e) => e?.isNotEmpty == true).join("·");
+    departmentDesc *= 6;
+
+    var hospitalLevel = "三级甲等";
+    // hospitalLevel = "";
+
+    return Opacity(
+      opacity: hospitalLevel.isEmpty && departmentDesc.isEmpty ? 0 : 1,
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 2, horizontal: spacing).copyWith(
+            // left: hospitalLevel.isNotEmpty ? 0 : 7,
+            // top: hospitalLevel.isNotEmpty ? 0 : 2,
+            // bottom: 0,
+            ),
+        // padding: EdgeInsets.only(right: 70),
+        decoration: BoxDecoration(
+          // color: const Color(0xFFF6F6F6),
+          color: Colors.grey.withOpacity(0.1),
+          borderRadius: BorderRadius.circular(4),
+        ),
+        child: Text.rich(
+          style: TextStyle(
+            textBaseline: textBaseline,
+          ),
+          TextSpan(
+            children: [
+              WidgetSpan(
+                alignment: alignment,
+                baseline: textBaseline,
+                child: Transform.translate(
+                  offset: Offset(-spacing, 0),
+                  child: Visibility(
+                    visible: hospitalLevel.isNotEmpty,
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: spacing, vertical: 2),
+                      margin: const EdgeInsets.only(right: 0.5),
+                      decoration: BoxDecoration(
+                        gradient: const LinearGradient(
+                          colors: [Color(0xFF55C82B), Color(0xFF12B199)],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ),
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: NText(
+                        hospitalLevel,
+                        fontSize: 14,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              TextSpan(
+                text: departmentDesc,
+                style: TextStyle(
+                  fontSize: 14,
+                  color: fontColor737373,
+                  // height: 1.5,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
   void matchRegExp() {
     final reg = RegExp(r'《[^《》]+》', multiLine: true).allMatches(text);
     final list = reg.map((e) => e.group(0)).toList();
-    ddlog(list);
+    DLog.d(list);
 
     var str3 = '''
   Multi
@@ -186,21 +308,72 @@ xxxx十分重视用户权利及隐私政策并严格按照相关法律法规的�
   String
   ''';
 
-    final result1 = str3.splitMapJoin(
-        RegExp(r'^', multiLine: true), // Matches the beginning of the line
+    final result1 = str3.splitMapJoin(RegExp(r'^', multiLine: true), // Matches the beginning of the line
         onMatch: (m) => '** ${m.group(0)}', // Adds asterisk to match
         onNonMatch: (n) => n); // Just return non-matches
     debugPrint(result1);
 
     var s = 'bezkoder';
-    ddlog(s.padLeft(10)); // '  bezkoder'
-    ddlog(s.padLeft(10, ' ')); // '==bezkoder'
+    DLog.d(s.padLeft(10)); // '  bezkoder'
+    DLog.d(s.padLeft(10, ' ')); // '==bezkoder'
 
-    ddlog(s.padRight(12)); // 'bezkoder  '
-    ddlog(s.padRight(12, '=')); // 'bezkoder=='
+    DLog.d(s.padRight(12)); // 'bezkoder  '
+    DLog.d(s.padRight(12, '=')); // 'bezkoder=='
   }
 
   void onLink(String? text) {
     debugPrint("onTap: $text");
+  }
+
+  void onShowPrivacy() {
+    Widget content = Container(
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+      child: buildRichText(),
+    );
+    GetDialog.showCustom(
+      header: Container(
+        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+        child: Center(
+          child: NText(
+            "用户协议",
+            fontSize: 18,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
+      footer: NFooterButtonBar(
+        onCancel: () {
+          Navigator.of(context).pop();
+        },
+        onConfirm: () {
+          Navigator.of(context).pop();
+        },
+      ),
+      child: content,
+    );
+  }
+
+  void onShowService() {
+    Widget content = Container(
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+      child: buildRichText(),
+    );
+
+    content = Scrollbar(child: SingleChildScrollView(child: content));
+
+    GetBottomSheet.showCustom(
+      addUnconstrainedBox: false,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          NPickerToolBar(
+            title: "用户服务",
+            // confirmTitle: "同意",
+            onConfirm: () {},
+          ),
+          Flexible(child: content),
+        ],
+      ),
+    );
   }
 }

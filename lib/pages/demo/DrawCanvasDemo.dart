@@ -2,7 +2,10 @@ import 'dart:math';
 
 import 'package:dash_painter/dash_decoration.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_templet_project/basicWidget/n_dash_decoration.dart';
+import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/pages/demo/curve_painter.dart';
 
 class DrawCanvasDemo extends StatefulWidget {
@@ -15,106 +18,112 @@ class DrawCanvasDemo extends StatefulWidget {
 }
 
 class _DrawCanvasDemoState extends State<DrawCanvasDemo> {
+  final scrollController = ScrollController();
+
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title ?? "$widget"),
-          actions: [
-            'done',
-          ]
-              .map((e) => TextButton(
-                    child: Text(
-                      e,
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    onPressed: () => debugPrint(e),
-                  ))
-              .toList(),
-        ),
-        body: SafeArea(
-          child: Container(
-            // padding: EdgeInsets.all(30),
-            margin: EdgeInsets.all(30),
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: Colors.greenAccent,
-            ),
-            child: Column(
-              children: [
-                Container(
-                  height: 100,
-                  width: 100,
-                  child: CustomPaint(
-                    painter: CurvePainter(
-                      color: Colors.yellow,
-                    ),
-                  ),
-                ),
-                // Container(
-                //   width: 160,
-                //   height: 60,
-                //   decoration: NDashDecoration(
-                //     step: 2,
-                //     // pointWidth: 2,
-                //     // pointCount: 1,
-                //     radius: Radius.circular(15),
-                //     strokeWidth: 3,
-                //     strokeColor: Colors.red,
-                //   ),
-                //   alignment: Alignment.center,
-                //   child: Text("自定义虚线\nNDashDecoration"),
-                // ),
-                // SizedBox(height: 8,),
-                // Container(
-                //   width: 160,
-                //   height: 60,
-                //   decoration: DashDecoration(
-                //     step: 5,
-                //     span: 5,
-                //     // pointCount: 0,
-                //     pointWidth: 1,
-                //     radius: Radius.circular(15),
-                //     gradient: SweepGradient(
-                //       colors: [
-                //         Colors.blue,
-                //         Colors.red,
-                //         Colors.yellow,
-                //         Colors.green
-                //       ],
-                //     ),
-                //   ),
-                //   alignment: Alignment.center,
-                //   child: Text("dash_painter"),
-                // ),
-                SizedBox(
-                  height: 20,
-                ),
+      appBar: AppBar(
+        title: Text(widget.title ?? "$widget"),
+      ),
+      body: buildBody(),
+    );
+  }
 
-                CustomPaint(
-                  painter: NTrianglePainter(),
-                  size: Size(130, 130),
+  Widget buildBody() {
+    return Scrollbar(
+      child: SingleChildScrollView(
+        child: Container(
+          margin: EdgeInsets.all(10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Image(
+                image: "assets/images/canvas_draw_arc.png".toAssetImage(),
+                fit: BoxFit.fitWidth,
+              ),
+              Container(
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: Colors.greenAccent,
                 ),
-                SizedBox(
-                  height: 20,
-                ),
-
-                Container(
-                  color: Colors.red,
-                  width: 100,
-                  height: 50,
-                  child: CustomPaint(
-                    painter: MYCustomPainter(
-                      radius: 10,
+                child: Wrap(
+                  spacing: 12,
+                  runSpacing: 12,
+                  children: [
+                    CustomPaint(
+                      size: Size(100, 100), // 设置进度条的大小
+                      painter: ProgressBarPainter(progress: 0.79),
                     ),
-                  ),
-                )
-              ],
-            ),
+                    Container(
+                      height: 100,
+                      width: 100,
+                      child: CustomPaint(
+                        painter: CurvePainter(
+                          color: Colors.yellow,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      width: 160,
+                      height: 60,
+                      decoration: NDashDecoration(
+                        step: 2,
+                        // pointWidth: 2,
+                        // pointCount: 1,
+                        radius: Radius.circular(15),
+                        strokeWidth: 1,
+                        strokeColor: Colors.red,
+                      ),
+                      alignment: Alignment.center,
+                      child: Text("自定义虚线\nNDashDecoration"),
+                    ),
+                    Container(
+                      width: 160,
+                      height: 60,
+                      decoration: DashDecoration(
+                        step: 5,
+                        span: 5,
+                        // pointCount: 0,
+                        pointWidth: 1,
+                        radius: Radius.circular(15),
+                        gradient: SweepGradient(
+                          colors: [Colors.blue, Colors.red, Colors.yellow, Colors.green],
+                        ),
+                      ),
+                      alignment: Alignment.center,
+                      child: Text("dash_painter"),
+                    ),
+                    CustomPaint(
+                      painter: NTrianglePainter(),
+                      size: Size(130, 130),
+                    ),
+                    Container(
+                      color: Colors.red,
+                      width: 100,
+                      height: 50,
+                      child: CustomPaint(
+                        painter: MYCustomPainter(
+                          radius: 10,
+                        ),
+                      ),
+                    ),
+                  ]
+                      .map((e) => Container(
+                            padding: EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.blue),
+                            ),
+                            child: e,
+                          ))
+                      .toList(),
+                ),
+              ),
+            ],
           ),
-        ));
+        ),
+      ),
+    );
   }
 }
 
@@ -145,9 +154,7 @@ class NTrianglePainter extends CustomPainter {
     path.lineTo(size.width, size.height / 2);
 
     path.arcTo(
-      Rect.fromCircle(
-          center: Offset(size.width - arrowRadius, size.height / 2),
-          radius: arrowRadius),
+      Rect.fromCircle(center: Offset(size.width - arrowRadius, size.height / 2), radius: arrowRadius),
       -90.0 * (pi / 180.0), // 起始弧度
       180.0 * (pi / 180.0), // 结束弧度
       false,
@@ -195,13 +202,11 @@ class MYCustomPainter extends CustomPainter {
 
     path.moveTo(0, size.height);
     path.lineTo(size.width / 2 - radius, radius); //开始点
-    path.quadraticBezierTo(
-        size.width / 2, 0, size.width / 2 + radius, 0); //中间点，结束点
+    path.quadraticBezierTo(size.width / 2, 0, size.width / 2 + radius, 0); //中间点，结束点
     path.lineTo(size.width - radius, 0);
     path.quadraticBezierTo(size.width, 0, size.width, radius); //中间点，结束点
     path.lineTo(size.width, size.height - radius);
-    path.quadraticBezierTo(
-        size.width, size.height, size.width - radius, size.height); //中间点，结束点
+    path.quadraticBezierTo(size.width, size.height, size.width - radius, size.height); //中间点，结束点
     path.lineTo(size.height, size.height);
 
     canvas.drawPath(path, otherPaint ?? paint);
@@ -214,5 +219,58 @@ class MYCustomPainter extends CustomPainter {
         radius != oldDelegate.radius ||
         strokeWidth != oldDelegate.strokeWidth ||
         otherPaint != oldDelegate.otherPaint;
+  }
+}
+
+/// 环形进度器
+class ProgressBarPainter extends CustomPainter {
+  ProgressBarPainter({
+    required this.progress,
+    this.strokeWidth = 10,
+    this.backgroudColor = const Color(0xffe9e9e9),
+    this.color = Colors.lightBlue,
+  });
+
+  /// 进度值
+  final double progress;
+  final double strokeWidth;
+  final Color backgroudColor;
+  final Color color;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final Paint backgroundPaint = Paint()
+      ..color = backgroudColor
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = strokeWidth;
+
+    final Paint foregroundPaint = Paint()
+      ..color = color
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = strokeWidth;
+
+    // 计算弧形的圆心和半径
+    final center = size.center(Offset.zero);
+    final radius = (min(size.width, size.height) - strokeWidth) / 2;
+
+    // 绘制背景弧
+    canvas.drawCircle(center, radius, backgroundPaint);
+
+    // 计算进度的角度
+    double sweepAngle = 2 * pi * progress;
+
+    // 绘制前景弧（表示进度）
+    canvas.drawArc(
+      Rect.fromCircle(center: center, radius: radius),
+      -pi / 2,
+      sweepAngle, // 根据进度值计算的角度
+      false, // 是否是扇形
+      foregroundPaint,
+    );
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return false; // 这里不需要重绘
   }
 }

@@ -62,11 +62,9 @@ class _StepperDemoState extends State<StepperDemo> {
         actions: [
           TextButton(
               onPressed: () {
-                ddlog("change");
+                DLog.d("change");
                 setState(() {
-                  _type = _type == StepperType.vertical
-                      ? StepperType.horizontal
-                      : StepperType.vertical;
+                  _type = _type == StepperType.vertical ? StepperType.horizontal : StepperType.vertical;
                 });
               },
               child: Icon(
@@ -77,8 +75,7 @@ class _StepperDemoState extends State<StepperDemo> {
         bottom: buildPreferredSize(context),
       ),
       // body: buildStepper(context),
-      body:
-          groupValue == 0 ? buildStepper(context) : buildStepperCustom(context),
+      body: groupValue == 0 ? buildStepper(context) : buildStepperCustom(context),
       //   body: Theme(
       //     data: ThemeData(
       //     accentColor: Colors.orange,
@@ -104,18 +101,14 @@ class _StepperDemoState extends State<StepperDemo> {
             Expanded(
               child: CupertinoSegmentedControl(
                 children: const <int, Widget>{
-                  0: Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text('Stepper', style: TextStyle(fontSize: 15))),
+                  0: Padding(padding: EdgeInsets.all(8.0), child: Text('Stepper', style: TextStyle(fontSize: 15))),
                   1: Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text('enhance_stepper',
-                          style: TextStyle(fontSize: 15))),
+                      padding: EdgeInsets.all(8.0), child: Text('enhance_stepper', style: TextStyle(fontSize: 15))),
                 },
                 groupValue: groupValue,
                 onValueChanged: (value) {
                   // TODO: - fix it
-                  ddlog(value.toString());
+                  DLog.d(value.toString());
                   setState(() {
                     groupValue = int.parse("$value");
                   });
@@ -134,12 +127,12 @@ class _StepperDemoState extends State<StepperDemo> {
 
   void go(int index) {
     if (index == -1 && _index <= 0) {
-      ddlog("it's first Step!");
+      DLog.d("it's first Step!");
       return;
     }
 
     if (index == 1 && _index >= tuples.length - 1) {
-      ddlog("it's last Step!");
+      DLog.d("it's last Step!");
       return;
     }
 
@@ -171,7 +164,7 @@ class _StepperDemoState extends State<StepperDemo> {
           go(1);
         },
         onStepTapped: (index) {
-          ddlog(index);
+          DLog.d(index);
           setState(() {
             _index = index;
           });
@@ -185,9 +178,7 @@ class _StepperDemoState extends State<StepperDemo> {
               if (_index != tuples.length - 1)
                 ElevatedButton(
                   onPressed: details.onStepContinue,
-                  style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(
-                          Theme.of(context).primaryColor)),
+                  style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Theme.of(context).primaryColor)),
                   child: Text("Continue"),
                 ),
               SizedBox(
@@ -196,9 +187,7 @@ class _StepperDemoState extends State<StepperDemo> {
               if (_index != 0)
                 ElevatedButton(
                   onPressed: details.onStepCancel,
-                  style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(
-                          Theme.of(context).primaryColor)),
+                  style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Theme.of(context).primaryColor)),
                   child: Text("Cancel"),
                 ),
             ],
@@ -244,7 +233,7 @@ class _StepperDemoState extends State<StepperDemo> {
           go(1);
         },
         onStepTapped: (index) {
-          ddlog(index);
+          DLog.d(index);
           setState(() {
             _index = index;
           });
@@ -257,9 +246,7 @@ class _StepperDemoState extends State<StepperDemo> {
               ),
               ElevatedButton(
                 onPressed: details.onStepContinue,
-                style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(
-                        Theme.of(context).primaryColor)),
+                style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Theme.of(context).primaryColor)),
                 child: Text("Next"),
               ),
               SizedBox(
@@ -267,9 +254,7 @@ class _StepperDemoState extends State<StepperDemo> {
               ),
               TextButton(
                 onPressed: details.onStepCancel,
-                style: ButtonStyle(
-                    foregroundColor: MaterialStateProperty.all(
-                        Theme.of(context).primaryColor)),
+                style: ButtonStyle(foregroundColor: MaterialStateProperty.all(Theme.of(context).primaryColor)),
                 child: Text("Back"),
               ),
             ],

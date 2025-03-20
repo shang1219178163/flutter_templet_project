@@ -208,8 +208,7 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
         titleCb: (e) => e.name ?? "",
         selectedCb: (e) => selectedModels.map((e) => e.id).contains(e.id),
         onChanged: (list) {
-          ddlog(
-              "NChoiceExpansionOfModel: ${list.map((e) => "${e.name}_${e.isSelected}")}");
+          DLog.d("NChoiceExpansionOfModel: ${list.map((e) => "${e.name}_${e.isSelected}")}");
           selectedModelsTmp = list;
         },
       ),
@@ -222,10 +221,9 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
         titleCb: (e) => e.name ?? "",
         selectedCb: (e) => selectedTags.map((e) => e.id).contains(e.id),
         onChanged: (list) {
-          // ddlog(list.map((e) => "${e.name}_${e.isSelected}"));
+          // DLog.d(list.map((e) => "${e.name}_${e.isSelected}"));
           selectedTagsTmp = list;
-          debugPrint(
-              "重置 selectedTagModelsTmp: ${selectedTagsTmp.map((e) => e.name).toList()}");
+          debugPrint("重置 selectedTagModelsTmp: ${selectedTagsTmp.map((e) => e.name).toList()}");
           // setState((){});
         },
       ),
@@ -235,13 +233,11 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
         models: orders,
         cbID: (e) => e.id.toString(),
         cbName: (e) => e.name ?? "",
-        cbSelected: (e) =>
-            selectedOrders.map((e) => e.id ?? "").toList().contains(e.id),
+        cbSelected: (e) => selectedOrders.map((e) => e.id ?? "").toList().contains(e.id),
         onChanged: (value) {
           // debugPrint("selectedModels: $value");
           selectedOrdersTmp = value;
-          debugPrint(
-              "selectedModelsTmp: ${selectedOrdersTmp.map((e) => e.name).toList()}");
+          debugPrint("selectedModelsTmp: ${selectedOrdersTmp.map((e) => e.name).toList()}");
         },
       ),
       Column(
@@ -262,11 +258,11 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
             startDate: () => startTimeTmp,
             endDate: () => endTimeTmp,
             onStart: (dateStr) {
-              ddlog("onStart: $dateStr");
+              DLog.d("onStart: $dateStr");
               startTimeTmp = dateStr;
             },
             onEnd: (dateStr) {
-              ddlog("onEnd: $dateStr");
+              DLog.d("onEnd: $dateStr");
               endTimeTmp = dateStr;
             },
           ),
@@ -373,10 +369,8 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
       endTimeTmp = null;
     }
 
-    debugPrint(
-        "取消 selectedModels: ${selectedModels.map((e) => e.name).toList()}");
-    debugPrint(
-        "取消 selectedTagModels: ${selectedTags.map((e) => e.name).toList()}");
+    debugPrint("取消 selectedModels: ${selectedModels.map((e) => e.name).toList()}");
+    debugPrint("取消 selectedTagModels: ${selectedTags.map((e) => e.name).toList()}");
     updateFitlerInfo();
     updateFilterHighlight();
   }
@@ -390,10 +384,8 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
     selectedOrders = selectedOrdersTmp = [];
     startTime = startTimeTmp = null;
     endTime = endTimeTmp = null;
-    debugPrint(
-        "重置 selectedModels: ${selectedModels.map((e) => e.name).toList()}");
-    debugPrint(
-        "重置 selectedTagModels: ${selectedTags.map((e) => e.name).toList()}");
+    debugPrint("重置 selectedModels: ${selectedModels.map((e) => e.name).toList()}");
+    debugPrint("重置 selectedTagModels: ${selectedTags.map((e) => e.name).toList()}");
     updateFitlerInfo();
     updateFilterHighlight();
   }
@@ -407,10 +399,8 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
     selectedOrders = selectedOrdersTmp;
     startTime = startTimeTmp;
     endTime = endTimeTmp;
-    debugPrint(
-        "重置 selectedModels: ${selectedModels.map((e) => e.name).toList()}");
-    debugPrint(
-        "确定 selectedTagModels: ${selectedTags.map((e) => e.name).toList()}");
+    debugPrint("重置 selectedModels: ${selectedModels.map((e) => e.name).toList()}");
+    debugPrint("确定 selectedTagModels: ${selectedTags.map((e) => e.name).toList()}");
     updateFitlerInfo();
     //请求
   }
@@ -492,9 +482,8 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
     Color color = Colors.blueAccent,
   }) {
     final title = isExpand ? "收起" : "展开";
-    final icon = isExpand
-        ? Icon(Icons.expand_less, size: 24, color: color)
-        : Icon(Icons.expand_more, size: 24, color: color);
+    final icon =
+        isExpand ? Icon(Icons.expand_less, size: 24, color: color) : Icon(Icons.expand_more, size: 24, color: color);
 
     return Container(
       decoration: ShapeDecoration(

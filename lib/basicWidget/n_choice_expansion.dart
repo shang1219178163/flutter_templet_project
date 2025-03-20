@@ -105,8 +105,8 @@ class _NChoiceExpansionState<T> extends State<NChoiceExpansion<T>> {
   //   //   setState(() {});
   //   // }
   //
-  //   ddlog("tmp: $tmp");
-  //   ddlog("tmpNew: $tmpNew");
+  //   DLog.d("tmp: $tmp");
+  //   DLog.d("tmpNew: $tmpNew");
   // }
 
   @override
@@ -148,7 +148,7 @@ class _NChoiceExpansionState<T> extends State<NChoiceExpansion<T>> {
   Widget buildItem(T e) {
     final title = widget.titleCb(e);
     final isSelected = widget.selectedCb(e);
-    // ddlog("buildItem: ${title}, $isSelected");
+    // DLog.d("buildItem: ${title}, $isSelected");
 
     return InkWell(
       onTap: () {
@@ -162,12 +162,9 @@ class _NChoiceExpansionState<T> extends State<NChoiceExpansion<T>> {
               horizontal: 10,
             ),
             decoration: BoxDecoration(
-              color:
-                  isSelected ? context.primaryColor.withOpacity(0.1) : bgColor,
+              color: isSelected ? context.primaryColor.withOpacity(0.1) : bgColor,
               borderRadius: const BorderRadius.all(Radius.circular(4)),
-              border: Border.all(
-                  width: 0.5,
-                  color: isSelected ? context.primaryColor : bgColor),
+              border: Border.all(width: 0.5, color: isSelected ? context.primaryColor : bgColor),
             ),
             child: NText(
               title,

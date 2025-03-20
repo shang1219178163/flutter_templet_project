@@ -7,32 +7,28 @@
 //
 
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/Pages/app_user_center_page.dart';
 import 'package:flutter_templet_project/Pages/second_page.dart';
 import 'package:flutter_templet_project/basicWidget/enhance/bottom_navigation_bar/n_bottom_navigation_bar.dart';
-import 'package:flutter_templet_project/cache/cache_service.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
-import 'package:flutter_templet_project/extension/button_ext.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 import 'package:flutter_templet_project/network/proxy/dio_proxy.dart';
 import 'package:flutter_templet_project/pages/app_tab_bar_controller.dart';
-import 'package:flutter_templet_project/pages/demo/APPDrawerMenuPage.dart';
+import 'package:flutter_templet_project/pages/demo/AppDrawerMenuPage.dart';
 import 'package:flutter_templet_project/pages/demo/TabBarViewDemo.dart';
 import 'package:flutter_templet_project/pages/tabBar_tabBarView_demo.dart';
 import 'package:flutter_templet_project/pages/third_page.dart';
 import 'package:flutter_templet_project/provider/color_filtered_provider.dart';
+import 'package:flutter_templet_project/routes/AppRouteObserver.dart';
 import 'package:flutter_templet_project/util/AppLifecycleObserver.dart';
 import 'package:get/get.dart';
 
-import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
 import 'package:tuple/tuple.dart';
 
@@ -84,22 +80,22 @@ class _AppTabPageState extends State<AppTabPage> with WidgetsBindingObserver, Ap
 
     // _lifecycleListener = AppLifecycleListener(
     //   onRestart: (){
-    //     ddlog("$widget onRestart - AppLifecycleListener");
+    //     DLog.d("$widget onRestart - AppLifecycleListener");
     //   },
     //   onResume: (){
-    //     ddlog("$widget onResume - AppLifecycleListener");
+    //     DLog.d("$widget onResume - AppLifecycleListener");
     //   },
     //   onInactive: (){
-    //     ddlog("$widget onInactive - AppLifecycleListener");
+    //     DLog.d("$widget onInactive - AppLifecycleListener");
     //   },
     //   onPause: (){
-    //     ddlog("$widget onPause - AppLifecycleListener");
+    //     DLog.d("$widget onPause - AppLifecycleListener");
     //   },
     //   onDetach: (){
-    //     ddlog("$widget onDetach - AppLifecycleListener");
+    //     DLog.d("$widget onDetach - AppLifecycleListener");
     //   },
     //   onHide: (){
-    //     ddlog("$widget onHide - AppLifecycleListener");
+    //     DLog.d("$widget onHide - AppLifecycleListener");
     //   },
     // );
 
@@ -114,23 +110,27 @@ class _AppTabPageState extends State<AppTabPage> with WidgetsBindingObserver, Ap
 
     /// app 生命周期监听
     // appController.appState.listen((event) {
-    //   ddlog("$widget appController.appState.listen ${event}");
+    //   DLog.d("$widget appController.appState.listen ${event}");
     // });
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      AppRouteObserver.resetRoute();
+    });
   }
 
   @override
   void onAppLifecycleStateChanged(AppLifecycleState state) {
     appController.appState.value = state;
     appController.appStateVN.value = state;
-    ddlog("$widget ${state.name}, ${appController.appState.value}");
+    DLog.d("$widget ${state.name}, ${appController.appState.value}");
   }
 
   @override
   Widget build(BuildContext context) {
     final page = Scaffold(
       key: kScaffoldKey,
-      drawer: APPDrawerMenuPage(),
-      endDrawer: APPDrawerMenuPage(),
+      drawer: AppDrawerMenuPage(),
+      endDrawer: AppDrawerMenuPage(),
       // appBar: buildAppBar(),
       bottomNavigationBar: Theme(
         data: Theme.of(context).copyWith(
@@ -256,7 +256,7 @@ class _AppTabPageState extends State<AppTabPage> with WidgetsBindingObserver, Ap
     if (index != currentIndex) {
       appController.tabIndexVN.value = index;
       currentIndex = index;
-      ddlog(currentIndex);
+      DLog.d(currentIndex);
       setState(() {});
     }
   }
@@ -347,7 +347,7 @@ class _AppTabPageState extends State<AppTabPage> with WidgetsBindingObserver, Ap
             children: [
               TextButton(
                 onPressed: () {
-                  ddlog("以后再说");
+                  DLog.d("以后再说");
                 },
                 child: Text(
                   "以后再说",
@@ -356,7 +356,7 @@ class _AppTabPageState extends State<AppTabPage> with WidgetsBindingObserver, Ap
               ),
               TextButton(
                 onPressed: () {
-                  ddlog("立即升级");
+                  DLog.d("立即升级");
                 },
                 child: Text(
                   "立即升级",

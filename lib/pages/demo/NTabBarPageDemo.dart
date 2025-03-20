@@ -59,10 +59,10 @@ class _NTabBarPageDemoState extends State<NTabBarPageDemo> {
         // tabBarAlignment: Alignment.centerLeft,
         isThemeBg: isThemeBg,
         onChanged: (index) {
-          ddlog("NTabBarPage onChanged: $index");
+          DLog.d("NTabBarPage onChanged: $index");
         },
         onTabBar: (index) {
-          ddlog("NTabBarPage onTabBar: $index");
+          DLog.d("NTabBarPage onTabBar: $index");
         },
         // headerBuilder: (context, index) {
         //   return Container(

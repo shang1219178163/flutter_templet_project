@@ -6,10 +6,11 @@
 //  Copyright © 2024/1/6 shang. All rights reserved.
 //
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_templet_project/cache/cache_service.dart';
 
 /// 当前 api 环境
-enum APPEnvironment {
+enum AppEnvironment {
   /// 开发环境
   dev('https://*.cn'),
 
@@ -25,7 +26,7 @@ enum APPEnvironment {
   /// 生产环境
   prod('https://*.cn');
 
-  const APPEnvironment(
+  const AppEnvironment(
     this.origin,
   );
 
@@ -33,7 +34,7 @@ enum APPEnvironment {
   final String origin;
 
   /// 字符串转类型
-  static APPEnvironment? fromString(String? val) {
+  static AppEnvironment? fromString(String? val) {
     if (val == null || !val.contains(",")) {
       return null;
     }
@@ -44,16 +45,26 @@ enum APPEnvironment {
     }
 
     final first = list[0];
-    final isEnumType = APPEnvironment.values.map((e) => e.name).contains(first);
+    final isEnumType = AppEnvironment.values.map((e) => e.name).contains(first);
     if (!isEnumType) {
       return null;
     }
-    return APPEnvironment.values.firstWhere((e) => e.name == first);
+    return AppEnvironment.values.firstWhere((e) => e.name == first);
+  }
+
+  /// name 转枚举
+  static AppEnvironment fromName(String name) {
+    for (final e in AppEnvironment.values) {
+      if (e.name == name) {
+        return e;
+      }
+    }
+    return kDebugMode ? AppEnvironment.test : AppEnvironment.prod;
   }
 
   @override
   String toString() {
-    if (this == APPEnvironment.dev) {
+    if (this == AppEnvironment.dev) {
       return "$name,${CacheService().devOrigin ?? origin}";
     }
     return "$name,$origin";
@@ -62,14 +73,20 @@ enum APPEnvironment {
 
 ///request config
 class RequestConfig {
-  static APPEnvironment current = APPEnvironment.dev;
+  static AppEnvironment current = AppEnvironment.dev;
+
+  static void initFromEnvironment() {
+    /// 从  --dart-define=app_env=beta 读取运行环境
+    final env = const String.fromEnvironment("app_env");
+    current = AppEnvironment.fromName(env);
+  }
 
   /// 网络请求域名
   static String get baseUrl {
     final env = CacheService().env;
     if (env != null) {
       current = env;
-      if (env == APPEnvironment.dev) {
+      if (env == AppEnvironment.dev) {
         return CacheService().devOrigin ?? current.origin;
       }
     }

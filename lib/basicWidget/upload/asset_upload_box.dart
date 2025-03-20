@@ -12,6 +12,7 @@ import 'package:flutter_templet_project/basicWidget/upload/asset_upload_model.da
 import 'package:flutter_templet_project/extension/overlay_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/util/fade_page_route.dart';
+import 'package:flutter_templet_project/util/permission_util.dart';
 import 'package:flutter_templet_project/util/tool_util.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:wechat_assets_picker/wechat_assets_picker.dart';
@@ -114,8 +115,7 @@ class AssetUploadBoxState extends State<AssetUploadBox> {
   @override
   void didUpdateWidget(covariant AssetUploadBox oldWidget) {
     final entityIds = widget.items.map((e) => e.entity?.id).join(",");
-    final oldWidgetEntityIds =
-        oldWidget.items.map((e) => e.entity?.id).join(",");
+    final oldWidgetEntityIds = oldWidget.items.map((e) => e.entity?.id).join(",");
     if (entityIds != oldWidgetEntityIds) {
       selectedModels
         ..clear()
@@ -144,110 +144,99 @@ class AssetUploadBoxState extends State<AssetUploadBox> {
     double runSpacing = 10,
     bool canEdit = true,
   }) {
-    return LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints) {
-      var itemWidth =
-          ((constraints.maxWidth - spacing * (rowCount - 1)) / rowCount)
-              .truncateToDouble();
+    return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+      var itemWidth = ((constraints.maxWidth - spacing * (rowCount - 1)) / rowCount).truncateToDouble();
       // print("itemWidth: $itemWidth");
-      return Wrap(
-          spacing: spacing,
-          runSpacing: runSpacing,
-          alignment: WrapAlignment.start,
-          children: [
-            ...items.map((e) {
-              // final size = await e.length()/(1024*1024);
+      return Wrap(spacing: spacing, runSpacing: runSpacing, alignment: WrapAlignment.start, children: [
+        ...items.map((e) {
+          // final size = await e.length()/(1024*1024);
 
-              final index = items.indexOf(e);
+          final index = items.indexOf(e);
 
-              return Container(
-                child: Column(
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.all(Radius.circular(8)),
-                      child: SizedBox(
-                        width: itemWidth,
-                        height: itemWidth,
-                        child: InkWell(
-                          onTap: () {
-                            // debugPrint("onTap: ${e.url}");
-                            final urls = items
-                                .where((e) => e.url?.startsWith("http") == true)
-                                .map((e) => e.url ?? "")
-                                .toList();
-                            final index = urls.indexOf(e.url ?? "");
-                            // debugPrint("urls: ${urls.length}, $index");
-                            FocusScope.of(context).unfocus();
+          return Container(
+            child: Column(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(8)),
+                  child: SizedBox(
+                    width: itemWidth,
+                    height: itemWidth,
+                    child: InkWell(
+                      onTap: () {
+                        // debugPrint("onTap: ${e.url}");
+                        final urls =
+                            items.where((e) => e.url?.startsWith("http") == true).map((e) => e.url ?? "").toList();
+                        final index = urls.indexOf(e.url ?? "");
+                        // debugPrint("urls: ${urls.length}, $index");
+                        FocusScope.of(context).unfocus();
 
-                            if (widget.onTap != null) {
-                              widget.onTap?.call(urls, index);
-                              return;
-                            }
+                        if (widget.onTap != null) {
+                          widget.onTap?.call(urls, index);
+                          return;
+                        }
 
-                            jumpImagePreview(urls: urls, index: index);
-                          },
-                          child: AssetUploadButton(
-                            model: e,
-                            urlBlock: (url) {
-                              // e.url = url;
-                              // debugPrint("e: ${e.data?.name}_${e.url}");
-                              final isAllFinished =
-                                  items.where((e) => e.url == null).isEmpty;
-                              // debugPrint("isAllFinsied: ${isAllFinsied}");
-                              if (isAllFinished) {
-                                final urls = items.map((e) => e.url).toList();
-                                debugPrint("isAllFinsied urls: ${urls}");
+                        jumpImagePreview(urls: urls, index: index);
+                      },
+                      child: AssetUploadButton(
+                        model: e,
+                        urlBlock: (url) {
+                          // e.url = url;
+                          // debugPrint("e: ${e.data?.name}_${e.url}");
+                          final isAllFinished = items.where((e) => e.url == null).isEmpty;
+                          // debugPrint("isAllFinsied: ${isAllFinsied}");
+                          if (isAllFinished) {
+                            final urls = items.map((e) => e.url).toList();
+                            debugPrint("isAllFinsied urls: ${urls}");
+                            widget.onChanged(items);
+                            isAllUploadFinished.value = true;
+                          }
+                        },
+                        onDelete: canEdit == false
+                            ? null
+                            : () {
+                                debugPrint("onDelete: $index, lenth: ${items[index].file?.path}");
+                                items.remove(e);
+                                setState(() {});
                                 widget.onChanged(items);
-                                isAllUploadFinished.value = true;
-                              }
-                            },
-                            onDelete: canEdit == false
-                                ? null
-                                : () {
-                                    debugPrint(
-                                        "onDelete: $index, lenth: ${items[index].file?.path}");
-                                    items.remove(e);
-                                    setState(() {});
-                                    widget.onChanged(items);
-                                  },
-                            showFileSize: widget.showFileSize,
-                          ),
-                        ),
+                              },
+                        showFileSize: widget.showFileSize,
                       ),
                     ),
-                  ],
-                ),
-              );
-            }).toList(),
-            if (items.length < maxCount)
-              InkWell(
-                onTap: () {
-                  if (!canEdit) {
-                    debugPrint("无图片编辑权限");
-                    return;
-                  }
-                  onPicker(maxCount: maxCount);
-                },
-                child: Container(
-                  margin: EdgeInsets.only(top: 10, right: 10),
-                  width: itemWidth - 10,
-                  height: itemWidth - 10,
-                  decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.1),
-                    // border: Border.all(width: 1),
-                    borderRadius: BorderRadius.all(Radius.circular(4)),
-                  ),
-                  // child: Icon(Icons.camera_alt, color: Colors.black12,),
-                  child: Center(
-                    child: Image(
-                      image: AssetImage("assets/images/icon_camera.png"),
-                      width: 24.w,
-                      height: 24.w,
-                    ),
                   ),
                 ),
-              )
-          ]);
+              ],
+            ),
+          );
+        }).toList(),
+        if (items.length < maxCount)
+          InkWell(
+            onTap: () {
+              if (!canEdit) {
+                debugPrint("无图片编辑权限");
+                return;
+              }
+              onPicker(maxCount: maxCount);
+            },
+            child: Container(
+              margin: EdgeInsets.only(top: 10, right: 10),
+              width: itemWidth - 10,
+              height: itemWidth - 10,
+              decoration: BoxDecoration(
+                color: Colors.black.withOpacity(0.1),
+                // border: Border.all(width: 1),
+                borderRadius: BorderRadius.all(Radius.circular(4)),
+              ),
+              // child: Icon(Icons.camera_alt, color: Colors.black12,),
+              child: Center(
+                child: Image(
+                  image: AssetImage("assets/images/icon_camera.png"),
+                  width: 24.w,
+                  height: 24.w,
+                ),
+              ),
+            ),
+          )
+      ]);
     });
   }
 
@@ -256,15 +245,14 @@ class AssetUploadBoxState extends State<AssetUploadBox> {
     // required Function(int length, String result) cb,
   }) async {
     try {
-      // if (!await widget.onPermission()) {
-      //   debugPrint("授权失败");
-      //   return;
-      // }
+      bool isGranted = await PermissionUtil.checkPhotoAlbum();
+      if (!isGranted) {
+        debugPrint("授权失败");
+        return;
+      }
 
-      final tmpUrls =
-          selectedModels.map((e) => e.url).where((e) => e != null).toList();
-      final tmpEntity =
-          selectedModels.map((e) => e.entity).where((e) => e != null).toList();
+      final tmpUrls = selectedModels.map((e) => e.url).where((e) => e != null).toList();
+      final tmpEntity = selectedModels.map((e) => e.entity).where((e) => e != null).toList();
 
       final selectedEntitys = List<AssetEntity>.from(tmpEntity);
 
@@ -312,8 +300,7 @@ class AssetUploadBoxState extends State<AssetUploadBox> {
           [];
 
       // BrunoUtil.showLoading("图片处理中...");
-      final same = result.map((e) => e.id).join() ==
-          selectedEntitys.map((e) => e.id).join();
+      final same = result.map((e) => e.id).join() == selectedEntitys.map((e) => e.id).join();
       if (result.isEmpty || same) {
         debugPrint("没有添加新图片");
         widget.onCancel?.call();
@@ -328,8 +315,7 @@ class AssetUploadBoxState extends State<AssetUploadBox> {
           selectedModels.add(AssetUploadModel(entity: e));
         }
       }
-      debugPrint(
-          "selectedEntitys:${selectedEntitys.length} ${selectedModels.length}");
+      debugPrint("selectedEntitys:${selectedEntitys.length} ${selectedModels.length}");
       setState(() {});
     } catch (err) {
       debugPrint("err:$err");
@@ -383,8 +369,7 @@ class AssetUploadBoxState extends State<AssetUploadBox> {
       //   return;
       // }
 
-      final tmpEntities =
-          selectedModels.map((e) => e.entity).where((e) => e != null).toList();
+      final tmpEntities = selectedModels.map((e) => e.entity).where((e) => e != null).toList();
 
       final selectedEntities = List<AssetEntity>.from(tmpEntities);
       //相机

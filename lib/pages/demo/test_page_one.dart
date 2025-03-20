@@ -104,8 +104,8 @@ class _TestPageOneState extends State<TestPageOne> {
     final listNew = jsonEncode(list1);
 
     final has = tmpNew.startsWith('\\');
-    ddlog("tmp: $tmp");
-    ddlog("tmp1: ${tmpNew},${has}");
+    DLog.d("tmp: $tmp");
+    DLog.d("tmp1: ${tmpNew},${has}");
   }
 
   int searchInsert(List<int> nums, int target) {

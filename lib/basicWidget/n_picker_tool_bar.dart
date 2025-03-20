@@ -19,6 +19,8 @@ class NPickerToolBar extends StatelessWidget {
     this.confirmTitle = '确定',
     this.onCancel,
     this.onConfirm,
+    this.leading,
+    this.trailing,
   });
 
   final double? width;
@@ -26,56 +28,66 @@ class NPickerToolBar extends StatelessWidget {
   final String title;
   final String cancelTitle;
   final String confirmTitle;
+
+  /// 取消事件
   final VoidCallback? onCancel;
+
+  /// 确定事件
   final VoidCallback? onConfirm;
+
+  /// 左边组件
+  final Widget? leading;
+
+  /// 右边组件
+  final Widget? trailing;
 
   @override
   Widget build(BuildContext context) {
-    final toolbar = NavigationToolbar(
-      leading: CupertinoButton(
-        padding: EdgeInsets.all(12),
-        onPressed: onCancel ??
-            () {
-              Navigator.of(context).pop();
-            },
-        child: Text(
-          cancelTitle,
+    return SizedBox(
+      width: width ?? double.infinity,
+      height: height ?? 50,
+      child: NavigationToolbar(
+        leading: CupertinoButton(
+          padding: EdgeInsets.all(12),
+          onPressed: onCancel ??
+              () {
+                Navigator.of(context).pop();
+              },
+          child: leading ??
+              Text(
+                cancelTitle,
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.black54,
+                ),
+              ),
+        ),
+        middle: Text(
+          title,
           style: TextStyle(
             fontSize: 16,
-            color: Colors.black54,
+            fontWeight: FontWeight.w500,
+            color: Colors.black,
+            backgroundColor: Colors.white,
+            decoration: TextDecoration.none,
           ),
+          textAlign: TextAlign.center,
         ),
+        trailing: trailing ??
+            Offstage(
+              offstage: onConfirm == null,
+              child: CupertinoButton(
+                padding: EdgeInsets.all(12),
+                onPressed: onConfirm,
+                child: Text(
+                  confirmTitle,
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
+                ),
+              ),
+            ),
       ),
-      middle: Text(
-        title,
-        style: TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.w500,
-          color: Colors.black,
-          backgroundColor: Colors.white,
-          decoration: TextDecoration.none,
-        ),
-        textAlign: TextAlign.center,
-      ),
-      trailing: CupertinoButton(
-        padding: EdgeInsets.all(12),
-        onPressed: confirmTitle.isEmpty ? null : onConfirm,
-        child: Text(
-          confirmTitle,
-          style: TextStyle(
-            fontSize: 16,
-          ),
-        ),
-      ),
-    );
-
-    return Container(
-      height: height,
-      width: width,
-      // decoration: BoxDecoration(
-      //     border: Border.all(color: Colors.blueAccent)
-      // ),
-      child: toolbar,
     );
   }
 

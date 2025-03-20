@@ -43,10 +43,10 @@ class _NumberFormatDemoState extends State<NumberFormatDemo> {
   void handleNumber() {
     final format = NumberFormat("#,##0.00", "en_US");
 
-    ddlog("Eg. 1: ${format.format(123456789.75)}");
-    ddlog("Eg. 2: ${format.format(.715)}");
-    ddlog("Eg. 3: ${format.format(12345678975 / 100)}");
-    ddlog("Eg. 4: ${format.format(int.parse('12345678975') / 100)}");
-    ddlog("Eg. 5: ${format.format(double.parse('123456789.75'))}");
+    DLog.d("Eg. 1: ${format.format(123456789.75)}");
+    DLog.d("Eg. 2: ${format.format(.715)}");
+    DLog.d("Eg. 3: ${format.format(12345678975 / 100)}");
+    DLog.d("Eg. 4: ${format.format(int.parse('12345678975') / 100)}");
+    DLog.d("Eg. 5: ${format.format(double.parse('123456789.75'))}");
   }
 }

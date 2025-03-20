@@ -54,14 +54,14 @@ class _MouseRegionDemoState extends State<MouseRegionDemo> {
           MouseRegion(
               onEnter: (PointerEvent details) {
                 setState(() {
-                  setState(() => ddlog(details));
+                  setState(() => DLog.d(details));
                   widget.title = "onEnter";
                   _isVisible = true;
                 });
               },
               onExit: (PointerEvent details) {
                 setState(() {
-                  setState(() => ddlog(details));
+                  setState(() => DLog.d(details));
                   widget.title = "onExit";
                   // _isVisible = false;
                 });
@@ -73,7 +73,7 @@ class _MouseRegionDemoState extends State<MouseRegionDemo> {
                 // color: Colors.green,
                 child: TextButton(
                   onPressed: () {
-                    setState(() => ddlog("鼠标悬浮菜单"));
+                    setState(() => DLog.d("鼠标悬浮菜单"));
                     _isVisible = !_isVisible;
                   },
                   child: Center(
@@ -104,7 +104,7 @@ class _MouseRegionDemoState extends State<MouseRegionDemo> {
                         .map((e) => ListTile(
                               title: Text(e),
                               onTap: () {
-                                setState(() => ddlog("鼠标悬浮菜单"));
+                                setState(() => DLog.d("鼠标悬浮菜单"));
                                 _isVisible = !_isVisible;
                               },
                             ))

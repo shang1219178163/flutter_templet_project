@@ -9,6 +9,7 @@
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/extension/object_ext.dart';
 
 // Scrollable.ensureVisible(
 // ensureVisibleKey.currentContext!,
@@ -19,7 +20,6 @@ extension ScrollControllerExt on ScrollController {
   /// 跳转到对应位子
   Future<void> jumpTo(
     double value, {
-    Duration delay = const Duration(seconds: 0),
     Duration duration = const Duration(milliseconds: 350),
     Curve curve = Curves.ease,
   }) async {
@@ -34,14 +34,14 @@ extension ScrollControllerExt on ScrollController {
   }
 
   /// 跳转到对应位子
-  Future<void> jumpToBottom(
-    double value, {
-    Duration delay = const Duration(seconds: 0),
+  Future<void> jumpToBottom({
     Duration duration = const Duration(milliseconds: 350),
     Curve curve = Curves.ease,
   }) async {
-    final offset =
-        position.pixels.clamp(position.pixels, position.maxScrollExtent);
+    if (!hasClients) {
+      return;
+    }
+    final offset = position.pixels.clamp(position.pixels, position.maxScrollExtent);
     await jumpTo(offset, duration: duration, curve: curve);
   }
 
@@ -80,8 +80,7 @@ extension ScrollControllerExt on ScrollController {
       }
       if (scrollController.hasClients) {
         scrollController.animateTo(animateToOffset,
-            duration: duration ?? const Duration(milliseconds: 200),
-            curve: Curves.linear);
+            duration: duration ?? const Duration(milliseconds: 200), curve: Curves.linear);
       }
     } catch (e) {
       debugPrint('JumToHorizontal->$e');
@@ -102,53 +101,57 @@ extension ScrollControllerExt on ScrollController {
       return;
     }
 
-    var local = renderBox.localToGlobal(Offset.zero,
-        ancestor: scrollKey.currentContext?.findRenderObject());
+    var local = renderBox.localToGlobal(Offset.zero, ancestor: scrollKey.currentContext?.findRenderObject());
     var size = renderBox.size;
 
     var value = scrollDirection == Axis.horizontal ? local.dx : local.dy;
 
     var offset = value + scrollController.offset;
-    debugPrint(
-        "scrollToItemNew local:$local, size:$size, offset: ${scrollController.offset}, offset: $offset");
+    debugPrint("scrollToItemNew local:$local, size:$size, offset: ${scrollController.offset}, offset: $offset");
 
     var padding = MediaQueryData.fromView(ui.window).padding;
-    var paddingStart =
-        scrollDirection == Axis.horizontal ? padding.left : padding.top;
+    var paddingStart = scrollDirection == Axis.horizontal ? padding.left : padding.top;
 
     final extentAfter = scrollController.position.extentAfter;
     if (extentAfter <= local.dy) {
-      debugPrint(
-          "scrollToItemNew extentAfter:$extentAfter local.dy:${local.dy}");
+      debugPrint("scrollToItemNew extentAfter:$extentAfter local.dy:${local.dy}");
       scrollController.animateTo(scrollController.position.maxScrollExtent,
-          duration: duration ?? const Duration(milliseconds: 200),
-          curve: Curves.linear);
+          duration: duration ?? const Duration(milliseconds: 200), curve: Curves.linear);
       return;
     }
-    jumpTo(offset - paddingStart,
-        duration: duration ?? const Duration(milliseconds: 200));
+    jumpTo(offset - paddingStart, duration: duration ?? const Duration(milliseconds: 200));
   }
 }
 
 extension ScrollPositionExt on ScrollPosition {}
 
 extension ScrollMetricsExt on ScrollMetrics {
+  /// 转 Map
+  Map<String, dynamic> toJson() {
+    return {
+      "minScrollExtent": minScrollExtent,
+      "maxScrollExtent": maxScrollExtent,
+      "hasContentDimensions": hasContentDimensions,
+      "pixels": pixels,
+      "hasPixels": hasPixels,
+      "viewportDimension": viewportDimension,
+      "hasViewportDimension": hasViewportDimension,
+      "axisDirection": axisDirection.name,
+      "axis": axisDirectionToAxis(axisDirection).name,
+      "outOfRange": outOfRange,
+      "atEdge": atEdge,
+      "extentBefore": extentBefore,
+      "extentInside": extentInside,
+      "extentAfter": extentAfter,
+      "extentTotal": extentTotal,
+      "devicePixelRatio": devicePixelRatio,
+    };
+  }
+
   printInfo() {
-    var metrics = this;
-    final info = """
-    ScrollMetrics####################
-    atEdge: ${metrics.atEdge}
-    axis: ${metrics.axis}
-    axisDirection: ${metrics.axisDirection}
-    extentAfter: ${metrics.extentAfter}
-    extentBefore: ${metrics.extentBefore}
-    extentInside: ${metrics.extentInside}
-    hasContentDimensions: ${metrics.hasContentDimensions}
-    maxScrollExtent: ${metrics.maxScrollExtent}
-    minScrollExtent: ${metrics.minScrollExtent}
-    outOfRange: ${metrics.outOfRange}
-    pixels: ${metrics.pixels}
-    viewportDimension: ${metrics.viewportDimension}
+    var info = """
+ScrollMetrics:
+${toJson().formatedString()}
     """;
     debugPrint(info);
   }

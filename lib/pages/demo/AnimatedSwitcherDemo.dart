@@ -37,49 +37,54 @@ class _AnimatedSwitcherDemoState extends State<AnimatedSwitcherDemo> {
 
   Widget buildBody() {
     final child = Text(
-      '第 $_count 相很长长长长长长长长长长长长长长长',
+      '第 $_count 相很长长长',
       //显示指定key，不同的key会被认为是不同的Text，这样才能执行动画
       key: ValueKey<int>(_count),
       style: Theme.of(context).textTheme.titleMedium,
     );
 
-    return ListView(
-      children: [
-        UnconstrainedBox(
-          child: NMenuAnchor<AxisDirection>(
-            values: AxisDirection.values,
-            initialItem: selectedItemVN.value,
-            cbName: (e) => e?.name ?? "请选择",
-            equal: (a, b) => a == b,
-            onChanged: (e) {
-              debugPrint(e.name);
-              selectedItemVN.value = e;
-              setState(() {});
+    return Scrollbar(
+      child: ListView(
+        children: [
+          UnconstrainedBox(
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 12),
+              child: NMenuAnchor<AxisDirection>(
+                values: AxisDirection.values,
+                initialItem: selectedItemVN.value,
+                cbName: (e) => e?.name ?? "请选择",
+                equal: (a, b) => a == b,
+                onChanged: (e) {
+                  debugPrint(e.name);
+                  selectedItemVN.value = e;
+                  setState(() {});
+                },
+              ),
+            ),
+          ),
+          AnimatedSwitcher(
+            duration: Duration(milliseconds: 200),
+            child: child,
+            transitionBuilder: (Widget child, Animation<double> animation) {
+              // var tween = Tween<Offset>(begin: Offset(1, 0), end: Offset(0, 0));
+
+              // return ScaleTransition(scale: animation, child: child);
+              return NSlideTransition(
+                direction: selectedItemVN.value, //上入下出
+                position: animation,
+                child: child,
+              );
             },
           ),
-        ),
-        AnimatedSwitcher(
-          duration: Duration(milliseconds: 200),
-          child: child,
-          transitionBuilder: (Widget child, Animation<double> animation) {
-            // var tween = Tween<Offset>(begin: Offset(1, 0), end: Offset(0, 0));
-            return NSlideTransition(
-              direction: selectedItemVN.value, //上入下出
-              position: animation,
-              child: child,
-            );
-          },
-        ),
-        OutlinedButton(
-          onPressed: () {
-            _count += 1;
-            setState(() {});
-          },
-          child: const Text(
-            '+1',
+          OutlinedButton(
+            onPressed: () {
+              _count += 1;
+              setState(() {});
+            },
+            child: const Text('+1'),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

@@ -30,8 +30,7 @@ class SegmentVerticalDemo extends StatefulWidget {
 }
 
 class _SegmentVerticalDemoState extends State<SegmentVerticalDemo> {
-  bool get hideApp =>
-      Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
+  bool get hideApp => Get.currentRoute.toLowerCase() != "/$widget".toLowerCase();
 
   final _scrollController = ScrollController();
 
@@ -94,7 +93,7 @@ class _SegmentVerticalDemoState extends State<SegmentVerticalDemo> {
               leftList(
                 list: list,
                 onChanged: (SelectableMixin e) {
-                  ddlog("onChanged $e");
+                  DLog.d("onChanged $e");
                 },
               ),
               // Expanded(child: _rightListWidget()),
@@ -115,8 +114,7 @@ class _SegmentVerticalDemoState extends State<SegmentVerticalDemo> {
       child: MediaQuery.removePadding(
         removeTop: true,
         context: context,
-        child: StatefulBuilder(
-            builder: (BuildContext context, StateSetter setState) {
+        child: StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
           return ListView.builder(
             physics: const ClampingScrollPhysics(),
             itemBuilder: (context, index) {
@@ -165,12 +163,8 @@ class _SegmentVerticalDemoState extends State<SegmentVerticalDemo> {
         decoration: BoxDecoration(
           color: bgColor,
           borderRadius: BorderRadius.only(
-            bottomRight: Radius.circular(
-                (selectedIndex - 1) >= 0 && index == selectedIndex - 1 ? 8 : 0),
-            topRight: Radius.circular(
-                (selectedIndex < list.length - 1 && index == selectedIndex + 1)
-                    ? 8
-                    : 0),
+            bottomRight: Radius.circular((selectedIndex - 1) >= 0 && index == selectedIndex - 1 ? 8 : 0),
+            topRight: Radius.circular((selectedIndex < list.length - 1 && index == selectedIndex + 1) ? 8 : 0),
           ),
         ),
         child: child ??
@@ -184,8 +178,7 @@ class _SegmentVerticalDemoState extends State<SegmentVerticalDemo> {
                       name,
                       style: TextStyle(
                         fontSize: 14,
-                        color:
-                            isSelected ? context.primaryColor : fontColor737373,
+                        color: isSelected ? context.primaryColor : fontColor737373,
                         fontWeight: FontWeight.w500,
                       ),
                       maxLines: 1,
@@ -195,8 +188,7 @@ class _SegmentVerticalDemoState extends State<SegmentVerticalDemo> {
                 Divider(
                   height: 0.5,
                   color: (!isSelected &&
-                          !((selectedIndex - 1) >= 0 &&
-                              index == selectedIndex - 1) &&
+                          !((selectedIndex - 1) >= 0 && index == selectedIndex - 1) &&
                           index != list.length - 1)
                       ? lineColor
                       : Colors.transparent,

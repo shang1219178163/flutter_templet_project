@@ -13,8 +13,7 @@ class CupertinoFormDemo extends StatefulWidget {
 }
 
 class _CupertinoFormDemoState extends State<CupertinoFormDemo> {
-  late final TextEditingController _textController =
-      TextEditingController(text: 'initial text');
+  late final TextEditingController _textController = TextEditingController(text: 'initial text');
 
   bool isSwitch = true;
 
@@ -40,64 +39,62 @@ class _CupertinoFormDemoState extends State<CupertinoFormDemo> {
         child: Form(
           child: Column(
             children: [
-              CupertinoFormSection.insetGrouped(
-                  header: Text('SECTION 1'),
-                  children: [
-                    CupertinoFormRow(
-                      padding: EdgeInsets.all(15),
-                      child: InkWell(
-                        onTap: () {
-                          ddlog("buildSubtitleRow");
-                        },
-                        child: buildSubtitleRow(context),
-                      ),
-                    ),
-                    CupertinoFormRow(
-                      child: InkWell(
-                        onTap: () {
-                          ddlog("buildRightButtonRow");
-                        },
-                        child: buildRightButtonRow(context),
-                      ),
-                    ),
-                    CupertinoFormRow(
-                      child: InkWell(
-                        onTap: () {
-                          ddlog("buildSwitchRow");
-                        },
-                        child: buildSwitchRow(context),
-                      ),
-                    ),
-                    CupertinoFormRow(
-                      child: InkWell(
-                        onTap: () {
-                          showDatePicker(context);
-                        },
-                        child: buildDatePickerRow(context),
-                      ),
-                    ),
-                    CupertinoTextFormFieldRow(
-                      prefix: Text('TextField'),
-                      placeholder: 'Enter text',
-                      textAlign: TextAlign.end,
-                      validator: (String? value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter a value';
-                        }
-                        if (value.length < 6) {
-                          return '长度不能小于6';
-                        }
-                        return null;
-                      },
-                      onChanged: (value) {
-                        ddlog(value);
-                        setState(() {});
-                      },
-                      onEditingComplete: () {
-                        ddlog("onEditingComplete");
-                      },
-                    ),
-                  ]),
+              CupertinoFormSection.insetGrouped(header: Text('SECTION 1'), children: [
+                CupertinoFormRow(
+                  padding: EdgeInsets.all(15),
+                  child: InkWell(
+                    onTap: () {
+                      DLog.d("buildSubtitleRow");
+                    },
+                    child: buildSubtitleRow(context),
+                  ),
+                ),
+                CupertinoFormRow(
+                  child: InkWell(
+                    onTap: () {
+                      DLog.d("buildRightButtonRow");
+                    },
+                    child: buildRightButtonRow(context),
+                  ),
+                ),
+                CupertinoFormRow(
+                  child: InkWell(
+                    onTap: () {
+                      DLog.d("buildSwitchRow");
+                    },
+                    child: buildSwitchRow(context),
+                  ),
+                ),
+                CupertinoFormRow(
+                  child: InkWell(
+                    onTap: () {
+                      showDatePicker(context);
+                    },
+                    child: buildDatePickerRow(context),
+                  ),
+                ),
+                CupertinoTextFormFieldRow(
+                  prefix: Text('TextField'),
+                  placeholder: 'Enter text',
+                  textAlign: TextAlign.end,
+                  validator: (String? value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter a value';
+                    }
+                    if (value.length < 6) {
+                      return '长度不能小于6';
+                    }
+                    return null;
+                  },
+                  onChanged: (value) {
+                    DLog.d(value);
+                    setState(() {});
+                  },
+                  onEditingComplete: () {
+                    DLog.d("onEditingComplete");
+                  },
+                ),
+              ]),
               CupertinoFormSection.insetGrouped(
                 header: Text('SECTION 2'),
                 children: List<Widget>.generate(5, (int index) {
@@ -171,11 +168,7 @@ class _CupertinoFormDemoState extends State<CupertinoFormDemo> {
           ],
         ),
       ),
-      Text(
-          dateTime.toString() == "null"
-              ? "choose"
-              : dateTime.toString().split(".").first,
-          maxLines: 1),
+      Text(dateTime.toString() == "null" ? "choose" : dateTime.toString().split(".").first, maxLines: 1),
       // TextButton(
       //   onPressed: onPressed,
       //   child: Text(dateTime.toString() == "null" ? "choose" : dateTime.toString().split(".").first, maxLines: 1),),
@@ -218,7 +211,7 @@ class _CupertinoFormDemoState extends State<CupertinoFormDemo> {
       ),
       TextButton(
         onPressed: () {
-          ddlog("button");
+          DLog.d("button");
         },
         child: Text(
           "button",
@@ -236,17 +229,17 @@ class _CupertinoFormDemoState extends State<CupertinoFormDemo> {
           return NDatePicker(
             // mode: CupertinoDatePickerMode.time,
             onDateTimeChanged: (val) {
-              ddlog(val.toString());
+              DLog.d(val.toString());
               dateTime = val;
             },
             confirmOnPressed: () {
-              ddlog("confirm");
+              DLog.d("confirm");
               setState(() {});
 
               Navigator.of(context).pop();
             },
             cancellOnPressed: () {
-              ddlog("cancell");
+              DLog.d("cancell");
               Navigator.of(context).pop();
             },
           );

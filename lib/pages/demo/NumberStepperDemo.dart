@@ -43,7 +43,7 @@ class NumberStepperDemo extends StatelessWidget {
                     fontSize: 40,
                   ),
                   onChanged: (value) {
-                    ddlog(value);
+                    DLog.d(value);
                   },
                 ),
               ),
@@ -60,7 +60,7 @@ class NumberStepperDemo extends StatelessWidget {
                   color: Theme.of(context).primaryColor,
                   readOnly: false,
                   onChanged: (value) {
-                    ddlog(value);
+                    DLog.d(value);
                   },
                 ),
               ),
@@ -75,7 +75,7 @@ class NumberStepperDemo extends StatelessWidget {
                 value: 999,
                 color: Theme.of(context).primaryColor,
                 onChanged: (value) {
-                  ddlog(value);
+                  DLog.d(value);
                 },
               ),
 
@@ -92,13 +92,9 @@ class NumberStepperDemo extends StatelessWidget {
         child: Container(
       height: 300,
       width: 300,
-      decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(8.0),
-          boxShadow: [
-            BoxShadow(
-                color: Colors.red, offset: Offset(0, 20), blurRadius: 30.0),
-          ]),
+      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(8.0), boxShadow: [
+        BoxShadow(color: Colors.red, offset: Offset(0, 20), blurRadius: 30.0),
+      ]),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -150,7 +146,7 @@ class NumberStepperDemo extends StatelessWidget {
                   value: 1000,
                   color: Colors.red,
                   onChanged: (value) {
-                    ddlog(value);
+                    DLog.d(value);
                   },
                 )
               ],

@@ -58,7 +58,7 @@ class _GithubRepoDemoState extends State<GithubRepoDemo> {
                 // 'pull': false,
                 // };
                 // final model = Permissions.fromJson(map);
-                // ddlog(model);
+                // DLog.d(model);
               },
               icon: Icon(Icons.refresh)),
           TextButton(
@@ -111,8 +111,7 @@ class _GithubRepoDemoState extends State<GithubRepoDemo> {
     return Container(
       alignment: Alignment.center,
       child: FutureBuilder(
-          future: _dio
-              .get<String>("https://api.github.com/orgs/flutterchina/repos"),
+          future: _dio.get<String>("https://api.github.com/orgs/flutterchina/repos"),
           // future: RequestClient.get("https://api.github.com/orgs/flutterchina/repos"),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             //请求完成
@@ -127,8 +126,7 @@ class _GithubRepoDemoState extends State<GithubRepoDemo> {
               List<dynamic> list = jsonDecode(response.data);
 
               ///json转模型
-              var models =
-                  list.map<Repository>((e) => Repository.fromJson(e)).toList();
+              var models = list.map<Repository>((e) => Repository.fromJson(e)).toList();
 
               ///界面显示
               return ListView(
@@ -164,9 +162,7 @@ class _GithubRepoDemoState extends State<GithubRepoDemo> {
               ///字符串转json
               // List<dynamic> list = jsonDecode(response.data);
               ///json转模型
-              List<Repository> models = response.data
-                  .map<Repository>((e) => Repository.fromJson(e))
-                  .toList();
+              List<Repository> models = response.data.map<Repository>((e) => Repository.fromJson(e)).toList();
 
               ///界面显示
               return ListView(
@@ -190,8 +186,7 @@ class _GithubRepoDemoState extends State<GithubRepoDemo> {
 
     final map = await RequestManager().request(api);
 
-    var response =
-        await _dio.get("https://api.github.com/orgs/flutterchina/repos");
+    var response = await _dio.get("https://api.github.com/orgs/flutterchina/repos");
     debugPrint("requestRepos: ${response.data.toString()}");
   }
 }

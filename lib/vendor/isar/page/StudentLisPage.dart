@@ -29,8 +29,7 @@ class StudentLisPage extends StatefulWidget {
 }
 
 class _StudentLisPageState extends State<StudentLisPage> with DBDialogMxin {
-  late final Map<String, dynamic> arguments =
-      widget.arguments ?? Get.arguments ?? {};
+  late final Map<String, dynamic> arguments = widget.arguments ?? Get.arguments ?? {};
 
   late final hideAppBar = arguments["hideAppBar"] as bool?;
 
@@ -44,8 +43,7 @@ class _StudentLisPageState extends State<StudentLisPage> with DBDialogMxin {
 
   @override
   Widget build(BuildContext context) {
-    final automaticallyImplyLeading =
-        Get.currentRoute.toLowerCase() == "/$widget".toLowerCase();
+    final automaticallyImplyLeading = Get.currentRoute.toLowerCase() == "/$widget".toLowerCase();
 
     return Scaffold(
       backgroundColor: Colors.black12,
@@ -60,16 +58,11 @@ class _StudentLisPageState extends State<StudentLisPage> with DBDialogMxin {
             ),
       body: GetBuilder<DBGenericController<DBStudent>>(
         builder: (value) {
-          final checkedItems =
-              value.entitys.where((e) => e.isSelected == true).toList();
-          isAllChoic =
-              value.entitys.firstWhereOrNull((e) => e.isSelected == false) ==
-                  null;
+          final checkedItems = value.entitys.where((e) => e.isSelected == true).toList();
+          isAllChoic = value.entitys.firstWhereOrNull((e) => e.isSelected == false) == null;
 
-          final checkIcon =
-              isAllChoic ? Icons.check_box : Icons.check_box_outline_blank;
-          final checkDesc =
-              "已选择 ${checkedItems.length}/${value.entitys.length}";
+          final checkIcon = isAllChoic ? Icons.check_box : Icons.check_box_outline_blank;
+          final checkDesc = "已选择 ${checkedItems.length}/${value.entitys.length}";
 
           Widget content = NPlaceholder(
             onTap: () {
@@ -125,7 +118,7 @@ class _StudentLisPageState extends State<StudentLisPage> with DBDialogMxin {
                 checkIcon: checkIcon,
                 checkDesc: checkDesc,
                 onCheck: () async {
-                  ddlog("isAllChoic TextButton: $isAllChoic");
+                  DLog.d("isAllChoic TextButton: $isAllChoic");
                   for (var i = 0; i < value.entitys.length; i++) {
                     final e = value.entitys[i];
                     e.isSelected = !isAllChoic;
@@ -134,10 +127,7 @@ class _StudentLisPageState extends State<StudentLisPage> with DBDialogMxin {
                 },
                 onAdd: onAddItemRandom,
                 onDelete: () async {
-                  final choicItems = value.entitys
-                      .where((e) => e.isSelected)
-                      .map((e) => e.id)
-                      .toList();
+                  final choicItems = value.entitys.where((e) => e.isSelected).map((e) => e.id).toList();
                   await provider.deleteAll(choicItems);
                 },
               ),

@@ -26,8 +26,8 @@ class GetBottomSheet {
   static Future<dynamic> showCustom({
     bool enableDrag = true,
     bool addUnconstrainedBox = true,
-    bool isScrollControlled = false, //控制高度
     bool hideDragIndicator = true,
+    bool isScrollControlled = false, //控制高度
     required Widget child,
   }) {
     if (!hideDragIndicator) {
@@ -47,7 +47,7 @@ class GetBottomSheet {
 
     Widget content = Container(
       clipBehavior: Clip.hardEdge,
-      width: double.infinity,
+      width: Get.width,
       decoration: const BoxDecoration(
         color: white,
         borderRadius: BorderRadius.only(
@@ -144,6 +144,7 @@ class GetBottomSheet {
 class GetDialog {
   /// 弹框 - 自定义child
   static Future<dynamic> showCustom({
+    bool barrierDismissible = false,
     bool enableDrag = false,
     bool needUnconstrainedBox = false,
     BoxConstraints? constraints,
@@ -196,7 +197,7 @@ class GetDialog {
     }
     return Get.dialog(
       content,
-      barrierDismissible: false,
+      barrierDismissible: barrierDismissible,
     );
   }
 
@@ -212,9 +213,9 @@ class GetDialog {
         height: 44,
         decoration: BoxDecoration(
           color: Colors.transparent,
-          border: Border(
-            bottom: BorderSide(width: .5, color: Color(0xffE5E5E5)),
-          ),
+          // border: Border(
+          //   bottom: BorderSide(width: .5, color: Color(0xffE5E5E5)),
+          // ),
         ),
         child: NavigationToolbar(
           middle: Text(
@@ -225,6 +226,9 @@ class GetDialog {
       ),
       footer: NFooterButtonBar(
         hideCancel: hideCancel,
+        decoration: BoxDecoration(
+          color: Colors.white,
+        ),
         onCancel: onCancel ??
             () {
               Get.back();

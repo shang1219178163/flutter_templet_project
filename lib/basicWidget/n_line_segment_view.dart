@@ -65,8 +65,7 @@ class _NLineSegmentViewState extends State<NLineSegmentView> {
   Widget build(BuildContext context) {
     var screenWidth = MediaQuery.of(context).size.width;
 
-    var contentWidth =
-        screenWidth - widget.margin.horizontal - widget.padding.horizontal;
+    var contentWidth = screenWidth - widget.margin.horizontal - widget.padding.horizontal;
     var itemWidth = contentWidth / widget.children.values.length;
 
     return Container(
@@ -90,10 +89,9 @@ class _NLineSegmentViewState extends State<NLineSegmentView> {
                         width: itemWidth,
                         child: TextButton(
                           onPressed: () {
-                            // ddlog(e);
+                            // DLog.d(e);
                             setState(() {
-                              widget.groupValue =
-                                  widget.children.values.toList().indexOf(e);
+                              widget.groupValue = widget.children.values.toList().indexOf(e);
                             });
                             widget.onValueChanged(widget.groupValue);
                           },
@@ -107,12 +105,9 @@ class _NLineSegmentViewState extends State<NLineSegmentView> {
           ),
           AnimatedPositioned(
             duration: Duration(milliseconds: 200),
-            top: widget.style == NLineSegmentStyle.top
-                ? 0
-                : widget.height - widget.lineHeight,
+            top: widget.style == NLineSegmentStyle.top ? 0 : widget.height - widget.lineHeight,
             left: widget.lineWidth != null
-                ? widget.groupValue * itemWidth +
-                    (itemWidth - widget.lineWidth!) * 0.5
+                ? widget.groupValue * itemWidth + (itemWidth - widget.lineWidth!) * 0.5
                 : widget.groupValue * itemWidth,
             child: Container(
               height: widget.lineHeight,
