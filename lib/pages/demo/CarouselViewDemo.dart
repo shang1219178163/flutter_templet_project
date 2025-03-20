@@ -59,9 +59,9 @@ class _CarouselViewDemoState extends State<CarouselViewDemo> {
             ConstrainedBox(
               constraints: const BoxConstraints(maxHeight: 200),
               child: CarouselView(
-                itemExtent: 300,
+                itemExtent: 300.0, // 每个子项的宽度
+                shrinkExtent: 50.0, // 子项缩小后的宽度
                 itemSnapping: true,
-                shrinkExtent: 20,
                 children: List<Widget>.generate(20, (int index) {
                   return UncontainedLayoutCard(index: index, label: 'Item $index');
                 }),

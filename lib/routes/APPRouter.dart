@@ -173,12 +173,12 @@ import 'package:flutter_templet_project/pages/demo/ModalBarrierDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MouseRegionDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MyPopverDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NAppBarColorChangerDemo.dart';
+import 'package:flutter_templet_project/pages/demo/NAvatarGroupDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NBoxWidgetDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NChoiceBoxOneDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NChoiceExpansionDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NExpandTextDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NFooterButtonBarDemo.dart';
-import 'package:flutter_templet_project/pages/demo/NIndexAvatarGroupDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NPageViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NRefreshViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NSectionHeaderDemo.dart';
@@ -355,6 +355,7 @@ import 'package:flutter_templet_project/vendor/getx/getx_demo.dart';
 import 'package:flutter_templet_project/vendor/isar/page/OrderListTabPage.dart';
 import 'package:flutter_templet_project/vendor/isar/page/StudentTabPage.dart';
 import 'package:flutter_templet_project/vendor/isar/page/TodoListTabPage.dart';
+import 'package:flutter_templet_project/vendor/jpush/jpush_info_page.dart';
 import 'package:flutter_templet_project/vendor/popover_demo.dart';
 import 'package:flutter_templet_project/vendor/qr/qr_code_scanner_demo.dart';
 import 'package:flutter_templet_project/vendor/qr/qr_flutter_demo.dart';
@@ -722,7 +723,7 @@ class APPRouter {
   static const choiceBoxOneDemo = '/choiceBoxOneDemo';
   static const apiConvertPage = '/apiConvertPage';
   static const selectListPage = '/selectListPage';
-  static const indexAvatarGroupDemo = '/indexAvatarGroupDemo';
+  static const avatarGroupDemo = '/avatarGroupDemo';
   static const overlayPortalDemo = '/overlayPortalDemo';
   static const appBarColorChangerDemo = '/appBarColorChangerDemo';
   static const footerButtonBarDemo = '/footerButtonBarDemo';
@@ -791,6 +792,7 @@ class APPRouter {
   static const iteratorDemo = '/iteratorDemo';
   static const chemotherapyRegimenDrugCaculator = '/chemotherapyRegimenDrugCaculator';
   static const expressionsCalulatorDemo = '/expressionsCalulatorDemo';
+  static const jPushInfoPage = '/jPushInfoPage';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -1899,7 +1901,7 @@ class AppPage {
     ),
     GetPage(
       name: APPRouter.imChatPage,
-      page: () => IMChatPage(),
+      page: () => ImChatPage(),
     ),
     GetPage(
       name: APPRouter.soundPlayDemo,
@@ -2088,8 +2090,8 @@ class AppPage {
       page: () => SelectListPage(),
     ),
     GetPage(
-      name: APPRouter.indexAvatarGroupDemo,
-      page: () => NIndexAvatarGroupDemo(),
+      name: APPRouter.avatarGroupDemo,
+      page: () => NAvatarGroupDemo(),
     ),
     GetPage(
       name: APPRouter.overlayPortalDemo,
@@ -2348,6 +2350,10 @@ class AppPage {
     GetPage(
       name: APPRouter.expressionsCalulatorDemo,
       page: () => ExpressionsCalulatorDemo(),
+    ),
+    GetPage(
+      name: APPRouter.jPushInfoPage,
+      page: () => JPushInfoPage(),
     ),
   ];
 }
