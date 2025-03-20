@@ -57,6 +57,8 @@ end
 
 
 post_install do |installer|
+  system("python3 generate_privacy_info.py")
+
   installer.pods_project.targets.each do |target|
     flutter_additional_ios_build_settings(target)
         # Start of the permission_handler configuration
