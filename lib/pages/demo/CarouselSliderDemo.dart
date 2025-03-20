@@ -6,10 +6,9 @@
 //  Copyright © 6/8/21 shang. All rights reserved.
 //
 
-import 'package:carousel_slider/carousel_slider.dart';
+// import 'package:carousel_slider/carousel_slider.dart' as carousel_slider;
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 
 class CarouselSliderDemo extends StatelessWidget {
   const CarouselSliderDemo({Key? key}) : super(key: key);
@@ -20,15 +19,15 @@ class CarouselSliderDemo extends StatelessWidget {
       appBar: AppBar(title: Text('CarouselSliderDemo')),
       body: Column(
         children: <Widget>[
-          CarouselSlider(
-            options: CarouselOptions(
-              autoPlay: true,
-              aspectRatio: 2.0,
-              enlargeCenterPage: true,
-              enlargeStrategy: CenterPageEnlargeStrategy.height,
-            ),
-            items: imageSliders(),
-          ),
+          // carousel_slider.CarouselSlider(
+          //   options: carousel_slider.CarouselOptions(
+          //     autoPlay: true,
+          //     aspectRatio: 2.0,
+          //     enlargeCenterPage: true,
+          //     enlargeStrategy: carousel_slider.CenterPageEnlargeStrategy.height,
+          //   ),
+          //   items: imageSliders(),
+          // ),
         ],
       ),
     );

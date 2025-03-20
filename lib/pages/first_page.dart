@@ -34,7 +34,7 @@ class _FirstPageState extends State<FirstPage> {
                 ),
                 Text(
                   '_counter',
-                  style: Theme.of(context).textTheme.headline4,
+                  style: Theme.of(context).textTheme.headlineMedium,
                 ),
                 InkWell(
                   onTap: _changeAppBarState,

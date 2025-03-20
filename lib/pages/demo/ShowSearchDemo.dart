@@ -44,11 +44,7 @@ class _ShowSearchDemoState extends State<ShowSearchDemo> {
                   list: filters,
                   select: '',
                   onSelected: (String query) {
-                    filters = list
-                        .where((e) => query.isEmpty
-                            ? e != null
-                            : e.contains(query.trim()))
-                        .toList();
+                    filters = list.where((e) => query.isEmpty ? e != null : e.contains(query.trim())).toList();
                     setState(() {});
                   },
                 ),
@@ -142,7 +138,7 @@ class CustomSearchDelegate extends SearchDelegate<String> {
                 leading: Icon(Icons.message),
                 title: Text(
                   e,
-                  style: Theme.of(context).textTheme.headline6,
+                  style: Theme.of(context).textTheme.titleLarge,
                 ),
                 onTap: () {
                   query = e;
@@ -228,9 +224,7 @@ class SearchBarViewDelegate extends SearchDelegate<String> {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    var suggest = query.isEmpty
-        ? suggestList
-        : sourceList.where((input) => input.startsWith(query)).toList();
+    var suggest = query.isEmpty ? suggestList : sourceList.where((input) => input.startsWith(query)).toList();
     return ListView.builder(
       itemCount: suggest.length,
       itemBuilder: (BuildContext context, int index) => InkWell(
@@ -244,9 +238,7 @@ class SearchBarViewDelegate extends SearchDelegate<String> {
           title: RichText(
             text: TextSpan(
               text: suggest[index].substring(0, query.length),
-              style: TextStyle(
-                  color: Theme.of(context).primaryColor,
-                  fontWeight: FontWeight.bold),
+              style: TextStyle(color: Theme.of(context).primaryColor, fontWeight: FontWeight.bold),
               children: [
                 TextSpan(
                   text: suggest[index].substring(query.length),

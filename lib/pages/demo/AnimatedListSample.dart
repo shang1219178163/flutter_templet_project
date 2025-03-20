@@ -14,8 +14,7 @@ class _AnimatedListSampleState extends State<AnimatedListSample> {
   final GlobalKey<AnimatedListState> _listKey = GlobalKey<AnimatedListState>();
   late ListModel<int> _list;
   int? _selectedItem = 0;
-  int _nextItem =
-      0; // The next item inserted when the user presses the '+' button.
+  int _nextItem = 0; // The next item inserted when the user presses the '+' button.
   ///
   @override
   void initState() {
@@ -60,8 +59,7 @@ class _AnimatedListSampleState extends State<AnimatedListSample> {
 
   ///
   // Used to build list items that haven't been removed.
-  Widget _buildItem(
-      BuildContext context, int index, Animation<double> animation) {
+  Widget _buildItem(BuildContext context, int index, Animation<double> animation) {
     if (index == 0) {
       return Container();
     }
@@ -81,8 +79,7 @@ class _AnimatedListSampleState extends State<AnimatedListSample> {
     );
   }
 
-  Widget _buildRemovedItem(
-      int item, BuildContext context, Animation<double> animation) {
+  Widget _buildRemovedItem(int item, BuildContext context, Animation<double> animation) {
     return CardItem(
       animation: animation,
       item: item,
@@ -156,12 +153,7 @@ class ListModel<E> {
 }
 
 class CardItem extends StatelessWidget {
-  const CardItem(
-      {Key? key,
-      required this.animation,
-      this.onTap,
-      required this.item,
-      this.selected = false})
+  const CardItem({Key? key, required this.animation, this.onTap, required this.item, this.selected = false})
       : assert(animation != null),
         assert(item != null && item >= 0),
         assert(selected != null),
@@ -176,7 +168,7 @@ class CardItem extends StatelessWidget {
   ///
   @override
   Widget build(BuildContext context) {
-    var textStyle = Theme.of(context).textTheme.button;
+    var textStyle = Theme.of(context).textTheme.labelLarge;
     if (selected) {
       textStyle = textStyle?.copyWith(color: Colors.lightGreenAccent[400]);
     }

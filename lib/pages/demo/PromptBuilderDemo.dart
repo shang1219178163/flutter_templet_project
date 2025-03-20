@@ -10,8 +10,7 @@ class PromptBuilderDemo extends StatefulWidget {
   _PromptBuilderDemoState createState() => _PromptBuilderDemoState();
 }
 
-class _PromptBuilderDemoState extends State<PromptBuilderDemo>
-    with WidgetsBindingObserver {
+class _PromptBuilderDemoState extends State<PromptBuilderDemo> with WidgetsBindingObserver {
   int _counter = 0;
   GlobalKey centerWidgetKey = GlobalKey();
   GlobalKey bottomWidgetKey = GlobalKey();
@@ -54,7 +53,7 @@ class _PromptBuilderDemoState extends State<PromptBuilderDemo>
             ),
             Text(
               '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+              style: Theme.of(context).textTheme.headlineMedium,
             ),
           ],
         ),
