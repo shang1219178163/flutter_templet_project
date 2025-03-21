@@ -30,7 +30,7 @@ extension BarcodeExt on Barcode {
   }
 
   /// 基于缓存图片文件获取
-  static Future<List<String>> barcodesFromFilePath({required String path}) async {
+  static Future<List<String>> barcodeFromFilePath({required String path}) async {
     final barcodeScanner = BarcodeScanner();
     final barcodes = await barcodeScanner.processImage(InputImage.fromFilePath(path));
     final qr = barcodes.map((e) => e.rawValue ?? "").where((e) => e.isNotEmpty).toList();
@@ -38,11 +38,11 @@ extension BarcodeExt on Barcode {
   }
 
   /// 基于 extended_image 的缓存图片文件获取
-  static Future<List<String>> barcodesFromUrl({required String url}) async {
+  static Future<List<String>> barcodeFromUrl({required String url}) async {
     final path = await getCachedImageFilePath(url);
     if (path == null) {
       return [];
     }
-    return barcodesFromFilePath(path: path);
+    return barcodeFromFilePath(path: path);
   }
 }

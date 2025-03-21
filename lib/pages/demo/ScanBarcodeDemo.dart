@@ -6,7 +6,14 @@
 //  Copyright © 2025/3/21 shang. All rights reserved.
 //
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/extension/bar_code_ext.dart';
+import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/object_ext.dart';
+import 'package:flutter_templet_project/extension/string_ext.dart';
+import 'package:flutter_templet_project/mixin/photo_picker_mixin.dart';
 import 'package:get/get.dart';
 
 class ScanBarcodeDemo extends StatefulWidget {
@@ -21,20 +28,16 @@ class ScanBarcodeDemo extends StatefulWidget {
   State<ScanBarcodeDemo> createState() => _ScanBarcodeDemoState();
 }
 
-class _ScanBarcodeDemoState extends State<ScanBarcodeDemo> {
+class _ScanBarcodeDemoState extends State<ScanBarcodeDemo> with PhotoPickerMixin {
   bool get hideApp => "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
 
   final scrollController = ScrollController();
 
-  Map<String, dynamic> arguments = Get.arguments ?? <String, dynamic>{};
+  /// 图片文件
+  File? file;
 
-  /// id
-  late final id = arguments["id"];
-
-  @override
-  void didUpdateWidget(covariant ScanBarcodeDemo oldWidget) {
-    super.didUpdateWidget(oldWidget);
-  }
+  /// 码识别结果
+  var recognizedCodes = [];
 
   @override
   Widget build(BuildContext context) {
@@ -43,19 +46,15 @@ class _ScanBarcodeDemoState extends State<ScanBarcodeDemo> {
           ? null
           : AppBar(
               title: Text("$widget"),
-              actions: [
-                'done',
-              ]
-                  .map((e) => TextButton(
-                        child: Text(
-                          e,
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        onPressed: () => debugPrint(e),
-                      ))
-                  .toList(),
             ),
       body: buildBody(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          await recognizedBarcode();
+          setState(() {});
+        },
+        child: Icon(Icons.ac_unit),
+      ),
     );
   }
 
@@ -65,11 +64,44 @@ class _ScanBarcodeDemoState extends State<ScanBarcodeDemo> {
       child: SingleChildScrollView(
         controller: scrollController,
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("$widget"),
+            if (recognizedCodes.isNotEmpty) Text(recognizedCodes.formatedString()),
+            buildImage(),
           ],
         ),
       ),
     );
+  }
+
+  Widget buildImage() {
+    Widget content = file == null
+        ? Image(
+            image: "assets/images/img_placeholder.png".toAssetImage(),
+          )
+        : Image.file(file!);
+    return GestureDetector(
+      onTap: () async {
+        final list = await onPicker();
+        file = await list?.firstOrNull?.file;
+        setState(() {});
+
+        await recognizedBarcode();
+        setState(() {});
+      },
+      child: content,
+    );
+  }
+
+  /// 识别二维码
+  Future<void> recognizedBarcode() async {
+    try {
+      final items = await BarcodeExt.barcodeFromFilePath(path: file!.path);
+      DLog.d(items);
+      recognizedCodes = items;
+    } catch (e) {
+      debugPrint("$this $e");
+      recognizedCodes = [e.toString()];
+    }
   }
 }
