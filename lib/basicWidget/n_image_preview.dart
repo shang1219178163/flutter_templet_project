@@ -410,23 +410,3 @@ class _NImagePreviewState extends State<NImagePreview> {
     }
   }
 }
-
-extension BarcodeExt on Barcode {
-  Map<String, dynamic> toJson() {
-    final data = Map<String, dynamic>();
-    data['type'] = type.index;
-    data['format'] = format.index;
-    data['displayValue'] = displayValue;
-    data['rawValue'] = rawValue;
-    data['rawBytes'] = rawBytes;
-    data['boundingBox'] = {
-      'left': boundingBox.left,
-      'top': boundingBox.top,
-      'right': boundingBox.right,
-      'bottom': boundingBox.bottom,
-    };
-    data['points'] = cornerPoints.map((e) => {"x": e.x, "y": e.y});
-    data['value'] = value;
-    return data;
-  }
-}
