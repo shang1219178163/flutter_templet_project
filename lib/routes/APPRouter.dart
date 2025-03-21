@@ -240,6 +240,7 @@ import 'package:flutter_templet_project/pages/demo/RotatedBoxDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ScaffoldBottomSheet.dart';
 import 'package:flutter_templet_project/pages/demo/ScaffoldDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ScanAnimationDemo.dart';
+import 'package:flutter_templet_project/pages/demo/ScanBarcodeDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ScrollControllerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ScrollbarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/SearchDemo.dart';
@@ -793,6 +794,7 @@ class APPRouter {
   static const chemotherapyRegimenDrugCaculator = '/chemotherapyRegimenDrugCaculator';
   static const expressionsCalulatorDemo = '/expressionsCalulatorDemo';
   static const jPushInfoPage = '/jPushInfoPage';
+  static const scanBarcodeDemo = '/scanBarcodeDemo';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -2355,5 +2357,13 @@ class AppPage {
       name: APPRouter.jPushInfoPage,
       page: () => JPushInfoPage(),
     ),
+    GetPage(
+      name: APPRouter.scanBarcodeDemo,
+      page: () => ScanBarcodeDemo(),
+    ),
   ];
 }
+
+// class AppGetPage<T> extends GetPage<T> {
+//   AppGetPage({required super.name, required super.page});
+// }
