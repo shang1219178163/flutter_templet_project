@@ -7,6 +7,7 @@
 //
 
 // import 'package:carousel_slider/carousel_slider.dart' as carousel_slider;
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/ddlog.dart';
 
@@ -19,15 +20,15 @@ class CarouselSliderDemo extends StatelessWidget {
       appBar: AppBar(title: Text('CarouselSliderDemo')),
       body: Column(
         children: <Widget>[
-          // carousel_slider.CarouselSlider(
-          //   options: carousel_slider.CarouselOptions(
-          //     autoPlay: true,
-          //     aspectRatio: 2.0,
-          //     enlargeCenterPage: true,
-          //     enlargeStrategy: CenterPageEnlargeStrategy.height,
-          //   ),
-          //   items: imageSliders(),
-          // ),
+          CarouselSlider(
+            options: CarouselOptions(
+              autoPlay: true,
+              aspectRatio: 1.20,
+              enlargeCenterPage: true,
+              enlargeStrategy: CenterPageEnlargeStrategy.height,
+            ),
+            items: imageSliders(),
+          ),
         ],
       ),
     );
@@ -59,7 +60,7 @@ class CarouselSliderDemo extends StatelessWidget {
                     FadeInImage(
                       image: NetworkImage(item),
                       placeholder: AssetImage('assets/images/img_placeholder.png'),
-                      fit: BoxFit.cover,
+                      fit: BoxFit.fill,
                     ),
                     Positioned(
                       bottom: 0.0,
