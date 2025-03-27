@@ -1,8 +1,12 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
-import 'package:get/get.dart';
-
 import 'dart:io';
+
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_templet_project/basicWidget/n_text.dart';
+import 'package:flutter_templet_project/extension/build_context_ext.dart';
+import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/type_util.dart';
+import 'package:get/get.dart';
 import 'package:path/path.dart' as path;
 
 class DirectoryTestDemo extends StatefulWidget {
@@ -22,10 +26,10 @@ class _DirectoryTestDemoState extends State<DirectoryTestDemo> {
 
   final _scrollController = ScrollController();
 
-  Map<String, dynamic> arguments = Get.arguments ?? <String, dynamic>{};
-
-  /// id
-  late final id = arguments["id"];
+  late final items = <ActionRecord>[
+    (e: "current", action: onDone),
+    (e: "assets", action: onAssets),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -34,17 +38,6 @@ class _DirectoryTestDemoState extends State<DirectoryTestDemo> {
           ? null
           : AppBar(
               title: Text("$widget"),
-              actions: [
-                'done',
-              ]
-                  .map((e) => TextButton(
-                        onPressed: onDone,
-                        child: Text(
-                          e,
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ))
-                  .toList(),
             ),
       body: buildBody(),
     );
@@ -55,12 +48,41 @@ class _DirectoryTestDemoState extends State<DirectoryTestDemo> {
       controller: _scrollController,
       child: SingleChildScrollView(
         controller: _scrollController,
-        child: Column(
-          children: [
-            Text("$widget"),
-          ],
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+          child: Column(
+            children: [
+              buildSectionBox(items: items),
+            ],
+          ),
         ),
       ),
+    );
+  }
+
+  Widget buildSectionBox({
+    required List<ActionRecord> items,
+  }) {
+    return Wrap(
+      spacing: 8,
+      runSpacing: 8,
+      children: items.map((e) {
+        return InkWell(
+          onTap: e.action,
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+            decoration: BoxDecoration(
+              color: Colors.transparent,
+              border: Border.all(color: Colors.blue),
+              borderRadius: BorderRadius.all(Radius.circular(4)),
+            ),
+            child: NText(
+              e.e,
+              color: context.primaryColor,
+            ),
+          ),
+        );
+      }).toList(),
     );
   }
 
@@ -73,4 +95,10 @@ class _DirectoryTestDemoState extends State<DirectoryTestDemo> {
     DLog.d('Current Directory: $currentPath');
     DLog.d('Project Directory: $projectPath');
   }
+
+  void onAssets() {
+    listAssets();
+  }
+
+  Future<void> listAssets() async {}
 }
