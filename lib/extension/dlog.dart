@@ -54,33 +54,33 @@ class DLog {
   static const String _ansiGreen = '\x1B[32m';
   static const String _ansiYellow = '\x1B[33m';
   static const String _ansiBlue = '\x1B[34m';
-  static const String _ansiGray = '\x1B[37m';
+  // static const String _ansiGray = '\x1B[37m';
 
   // Web 控制台颜色样式
   static const String _webRed = 'color: red';
   static const String _webGreen = 'color: #4CAF50';
   static const String _webYellow = 'color: #FFC107';
   static const String _webBlue = 'color: #2196F3';
-  static const String _webGray = 'color: #9E9E9E';
+  // static const String _webGray = 'color: #9E9E9E';
 
   // 打印调试日志
-  static void d(dynamic message) {
-    _printLog('DEBUG', message, _ansiBlue, _webBlue);
+  static String d(dynamic message) {
+    return _printLog('DEBUG', message, _ansiBlue, _webBlue);
   }
 
   // 打印信息日志
-  static void i(dynamic message) {
-    _printLog('INFO', message, _ansiGreen, _webGreen);
+  static String i(dynamic message) {
+    return _printLog('INFO', message, _ansiGreen, _webGreen);
   }
 
   // 打印警告日志
-  static void w(dynamic message) {
-    _printLog('WARN', message, _ansiYellow, _webYellow);
+  static String w(dynamic message) {
+    return _printLog('WARN', message, _ansiYellow, _webYellow);
   }
 
   // 打印错误日志
-  static void e(dynamic message) {
-    _printLog('ERROR', message, _ansiRed, _webRed);
+  static String e(dynamic message) {
+    return _printLog('ERROR', message, _ansiRed, _webRed);
   }
 
   static void center(List<String> list) {
@@ -139,36 +139,35 @@ class DLog {
   }
 
   // 内部打印方法
-  static void _printLog(String level, dynamic message, String ansiColor, String webColor) {
+  static String _printLog(String level, dynamic message, String ansiColor, String webColor) {
     if (!enableLog || !kDebugMode) {
-      return;
+      return "";
     }
 
     final (className, functionName, fileName, lineNumber) = _getCallerInfo();
     final now = DateTime.now();
-    // final timeStr =
-    //     '${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')}:${now.second.toString().padLeft(2, '0')}.${now.millisecond.toString().padLeft(3, '0')}';
     final timeStr = now.toString();
     final platform = _getPlatform();
 
     final logMessage = kIsWeb
         ? '[$timeStr][$level][$platform]: $message'
-        : '[$timeStr][$level][$platform][$className.$functionName $lineNumber]: $message';
+        : '[$timeStr][$level][$platform][$className.$functionName Line:$lineNumber]: $message';
 
     if (kIsWeb) {
-      _printLogWeb(level, logMessage, webColor);
+      return _printLogWeb(level, logMessage, webColor);
     } else {
-      _printLogNative(level, logMessage, ansiColor);
+      return _printLogNative(level, logMessage, ansiColor);
     }
   }
 
   // Web 平台的打印实现
-  static void _printLogWeb(String level, String message, String webColor) {
+  static String _printLogWeb(String level, String message, String webColor) {
     developer.log(message);
+    return message;
   }
 
   // 原生平台的打印实现
-  static void _printLogNative(String level, String message, String ansiColor) {
+  static String _printLogNative(String level, String message, String ansiColor) {
     final sb = StringBuffer();
     if (enableColor) {
       sb.write(ansiColor);
@@ -177,6 +176,9 @@ class DLog {
     if (enableColor) {
       sb.write(_ansiReset);
     }
+
+    final result = sb.toString();
     developer.log(sb.toString());
+    return result;
   }
 }
