@@ -30,6 +30,7 @@ import 'package:flutter_templet_project/pages/demo/AnimatedDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedGroupDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedListDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedListSample.dart';
+import 'package:flutter_templet_project/pages/demo/AnimatedModalBarrierDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedSizeDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedSizeDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedStaggerDemo.dart';
@@ -169,6 +170,7 @@ import 'package:flutter_templet_project/pages/demo/MenuAnchorDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MenuDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MenuEntryDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MergeableMaterialDemo.dart';
+import 'package:flutter_templet_project/pages/demo/MetaDataDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ModalBarrierDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MouseRegionDemo.dart';
 import 'package:flutter_templet_project/pages/demo/MyPopverDemo.dart';
@@ -795,6 +797,8 @@ class APPRouter {
   static const String expressionsCalulatorDemo = '/expressionsCalulatorDemo';
   static const String jPushInfoPage = '/jPushInfoPage';
   static const String scanBarcodeDemo = '/scanBarcodeDemo';
+  static const String animatedModalBarrierDemo = '/animatedModalBarrierDemo';
+  static const String metaDataDemo = '/metaDataDemo';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -2360,6 +2364,14 @@ class AppPage {
     GetPage(
       name: APPRouter.scanBarcodeDemo,
       page: () => ScanBarcodeDemo(),
+    ),
+    GetPage(
+      name: APPRouter.animatedModalBarrierDemo,
+      page: () => AnimatedModalBarrierDemo(),
+    ),
+    GetPage(
+      name: APPRouter.metaDataDemo,
+      page: () => MetaDataDemo(),
     ),
   ];
 }

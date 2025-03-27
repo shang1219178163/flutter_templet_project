@@ -709,6 +709,8 @@ var vendors = <Tuple2<String, String>>[
   Tuple2(APPRouter.getxDemo, "getxDemo"),
   Tuple2(APPRouter.flutterPickersDemo, "flutterPickersDemo"),
   Tuple2(APPRouter.scanBarcodeDemo, "scanBarcodeDemo"),
+  Tuple2(APPRouter.animatedModalBarrierDemo, "animatedModalBarrierDemo"),
+  Tuple2(APPRouter.metaDataDemo, "metaDataDemo"),
 ];
 
 var others = <Tuple2<String, String>>[
