@@ -39,8 +39,8 @@ class NBlurView extends StatelessWidget {
       child: backdropFilter ??
           BackdropFilter(
             filter: ui.ImageFilter.blur(
-              sigmaX: blur ?? 20,
-              sigmaY: blur ?? 20,
+              sigmaX: blur,
+              sigmaY: blur,
             ),
             child: child,
           ),

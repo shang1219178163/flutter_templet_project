@@ -1,7 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_templet_project/network/RequestConfig.dart';
-import 'package:flutter_templet_project/network/RequestError.dart';
 import 'package:flutter_templet_project/network/RequestManager.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 
@@ -109,12 +107,12 @@ class BaseRequestAPI {
     T Function(Map<String, dynamic> response)? onResult,
     required T defaultValue,
   }) async {
-    BaseRequestAPI api = this;
+    var api = this;
     final response = await api.fetch();
     if (response.isEmpty) {
       return (isSuccess: false, message: "", result: defaultValue); //断网
     }
-    bool isSuccess = response["code"] == "OK";
+    var isSuccess = response["code"] == "OK";
     String message = response["message"] ?? "";
     final result = response["result"] as T? ?? defaultValue;
     final resultNew = onResult?.call(response) ?? result ?? defaultValue;

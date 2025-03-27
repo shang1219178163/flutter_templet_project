@@ -36,7 +36,7 @@ class OssAuthModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
+    final data = <String, dynamic>{};
     data['accessKeyId'] = accessKeyId;
     data['accessKeySecret'] = accessKeySecret;
     data['securityToken'] = securityToken;

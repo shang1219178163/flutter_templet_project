@@ -83,6 +83,9 @@ class _AnimatedListDemoState extends State<AnimatedListDemo> {
   // 创建一个 “+” 按钮，点击后会向列表中插入一项
   Widget buildAddBtn() {
     return Positioned(
+      bottom: 30,
+      // left: 0,
+      right: 0,
       child: FloatingActionButton(
         onPressed: () {
           // 添加一个列表项
@@ -93,9 +96,6 @@ class _AnimatedListDemoState extends State<AnimatedListDemo> {
         },
         child: Icon(Icons.add),
       ),
-      bottom: 30,
-      // left: 0,
-      right: 0,
     );
   }
 

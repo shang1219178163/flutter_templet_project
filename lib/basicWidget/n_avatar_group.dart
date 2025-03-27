@@ -55,7 +55,7 @@ class NAvatarGroup extends StatelessWidget {
   }
 
   List<Positioned> buildAvatars() {
-    List<Positioned> list = [];
+    var list = <Positioned>[];
     for (var i = 0; i < avatars.length; i++) {
       final url = avatars[i];
       final left = itemWidth * scale * i.toDouble();

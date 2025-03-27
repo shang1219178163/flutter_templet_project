@@ -181,15 +181,15 @@ class RenderTwoDimensionalGridViewport extends RenderTwoDimensionalViewport {
 
   @override
   void layoutChildSequence() {
-    final double horizontalPixels = horizontalOffset.pixels;
-    final double verticalPixels = verticalOffset.pixels;
-    final double viewportWidth = viewportDimension.width + cacheExtent;
-    final double viewportHeight = viewportDimension.height + cacheExtent;
-    final TwoDimensionalChildBuilderDelegate builderDelegate =
+    final horizontalPixels = horizontalOffset.pixels;
+    final verticalPixels = verticalOffset.pixels;
+    final viewportWidth = viewportDimension.width + cacheExtent;
+    final viewportHeight = viewportDimension.height + cacheExtent;
+    final builderDelegate =
         delegate as TwoDimensionalChildBuilderDelegate;
 
-    final int maxRowIndex = builderDelegate.maxYIndex!;
-    final int maxColumnIndex = builderDelegate.maxXIndex!;
+    final maxRowIndex = builderDelegate.maxYIndex!;
+    final maxColumnIndex = builderDelegate.maxXIndex!;
 
     final int leadingColumn = math.max((horizontalPixels / 200).floor(), 0);
     final int leadingRow = math.max((verticalPixels / 200).floor(), 0);
@@ -202,13 +202,13 @@ class RenderTwoDimensionalGridViewport extends RenderTwoDimensionalViewport {
       maxRowIndex,
     );
 
-    double xLayoutOffset = (leadingColumn * 200) - horizontalOffset.pixels;
-    for (int column = leadingColumn; column <= trailingColumn; column++) {
-      double yLayoutOffset = (leadingRow * 200) - verticalOffset.pixels;
-      for (int row = leadingRow; row <= trailingRow; row++) {
-        final ChildVicinity vicinity =
+    var xLayoutOffset = (leadingColumn * 200) - horizontalOffset.pixels;
+    for (var column = leadingColumn; column <= trailingColumn; column++) {
+      var yLayoutOffset = (leadingRow * 200) - verticalOffset.pixels;
+      for (var row = leadingRow; row <= trailingRow; row++) {
+        final vicinity =
             ChildVicinity(xIndex: column, yIndex: row);
-        final RenderBox child = buildOrObtainChildFor(vicinity)!;
+        final child = buildOrObtainChildFor(vicinity)!;
         child.layout(constraints.loosen());
 
         // Subclasses only need to set the normalized layout offset. The super
@@ -220,13 +220,13 @@ class RenderTwoDimensionalGridViewport extends RenderTwoDimensionalViewport {
     }
 
     // Set the min and max scroll extents for each axis.
-    final double verticalExtent = 200 * (maxRowIndex + 1);
+    final verticalExtent = 200 * (maxRowIndex + 1);
     verticalOffset.applyContentDimensions(
       0.0,
       clampDouble(
           verticalExtent - viewportDimension.height, 0.0, double.infinity),
     );
-    final double horizontalExtent = 200 * (maxColumnIndex + 1);
+    final horizontalExtent = 200 * (maxColumnIndex + 1);
     horizontalOffset.applyContentDimensions(
       0.0,
       clampDouble(

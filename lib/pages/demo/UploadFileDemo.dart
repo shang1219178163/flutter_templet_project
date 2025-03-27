@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/upload/asset_upload_box.dart';
 import 'package:flutter_templet_project/basicWidget/upload_document/asset_upload_document_box.dart';
 import 'package:flutter_templet_project/basicWidget/upload_document/asset_upload_document_model.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
-import 'package:image_picker/image_picker.dart';
 
 class UploadFileDemo extends StatefulWidget {
   UploadFileDemo({Key? key, this.title}) : super(key: key);

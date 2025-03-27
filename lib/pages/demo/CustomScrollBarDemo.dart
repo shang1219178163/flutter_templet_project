@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/src/size_extension.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/extension/scroll_controller_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
-import 'package:flutter_templet_project/util/R.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
+import 'package:flutter_templet_project/util/R.dart';
 
 /// 自定义 ScrollBar
 class CustomScrollBarDemo extends StatefulWidget {
@@ -210,11 +209,11 @@ class _CustomScrollBarDemoState extends State<CustomScrollBarDemo> {
               ),
               if (url.endsWith(".mp4"))
                 Positioned(
-                  top: 1.w,
-                  bottom: 1.w,
+                  top: 1,
+                  bottom: 1,
                   child: Container(
-                    width: 24.w,
-                    height: 24.w,
+                    width: 24,
+                    height: 24,
                     child: Image.asset(
                       'icon_play.png'.toPath(),
                     ),

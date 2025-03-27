@@ -6,9 +6,10 @@
 //  Copyright © 10/10/22 shang. All rights reserved.
 //
 import 'dart:io';
-import 'package:flutter/material.dart';
-import 'package:desktop_drop/desktop_drop.dart';
+
 import 'package:cross_file/cross_file.dart';
+import 'package:desktop_drop/desktop_drop.dart';
+import 'package:flutter/material.dart';
 
 class DragDestinationView extends StatefulWidget {
   const DragDestinationView({
@@ -94,7 +95,7 @@ class _DragDestinationViewState extends State<DragDestinationView> {
             Icons.undo,
             size: iconSize,
           );
-    var text = file != null ? (file.name ?? "") : '拖拽文件';
+    var text = file != null ? file.name : '拖拽文件';
 
     return Container(
       padding: EdgeInsets.all(8),

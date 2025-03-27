@@ -46,7 +46,7 @@ class _NEnsureVisibleState extends State<NEnsureVisible> with WidgetsBindingObse
       Scrollable.ensureVisible(
         context,
         alignment: Alignment.bottomCenter.y,
-        duration: duration ?? kThemeAnimationDuration,
+        duration: duration,
       );
     });
 

@@ -8,7 +8,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
-import 'package:flutter_templet_project/extension/widget_ext.dart';
 
 /// MenuAnchor 简易封装,方便代码复用
 class NMenuAnchor<E> extends StatelessWidget {
@@ -86,9 +85,9 @@ class NMenuAnchor<E> extends StatelessWidget {
           return MenuItemButton(
             style: dropButtonStyle ??
                 ButtonStyle(
-                  padding: MaterialStatePropertyAll(dropItemPadding ?? EdgeInsets.zero),
+                  padding: WidgetStatePropertyAll(dropItemPadding ?? EdgeInsets.zero),
                   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  minimumSize: MaterialStatePropertyAll(Size(20, 18)),
+                  minimumSize: WidgetStatePropertyAll(Size(20, 18)),
                   // backgroundColor: MaterialStateProperty.all(Colors.yellow),
                 ),
             leadingIcon: leadingIconBuilder?.call(isSelected) ??
@@ -107,9 +106,9 @@ class NMenuAnchor<E> extends StatelessWidget {
           data: MenuThemeData(
             style: style ??
                 MenuStyle(
-                  padding: MaterialStateProperty.all(EdgeInsets.all(0)),
-                  elevation: MaterialStateProperty.all(8),
-                  shadowColor: MaterialStateProperty.all(Colors.black54),
+                  padding: WidgetStateProperty.all(EdgeInsets.all(0)),
+                  elevation: WidgetStateProperty.all(8),
+                  shadowColor: WidgetStateProperty.all(Colors.black54),
                 ),
           ),
           child: MenuAnchor(

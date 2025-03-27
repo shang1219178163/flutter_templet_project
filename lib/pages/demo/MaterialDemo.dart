@@ -9,8 +9,7 @@ class MaterialDemo extends StatefulWidget {
   _MaterialDemoState createState() => _MaterialDemoState();
 }
 
-class _MaterialDemoState extends State<MaterialDemo>
-    with SingleTickerProviderStateMixin {
+class _MaterialDemoState extends State<MaterialDemo> with SingleTickerProviderStateMixin {
   TabController? _tabController;
 
   var types = MaterialType.values;
@@ -34,8 +33,6 @@ class _MaterialDemoState extends State<MaterialDemo>
 
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
@@ -54,9 +51,7 @@ class _MaterialDemoState extends State<MaterialDemo>
           isScrollable: true,
           controller: _tabController,
           indicatorSize: TabBarIndicatorSize.label,
-          tabs: types
-              .map((e) => Tab(text: e.toString().split(".").last))
-              .toList(),
+          tabs: types.map((e) => Tab(text: e.toString().split(".").last)).toList(),
         ),
       ),
       body: buildBody(),
@@ -88,12 +83,10 @@ class _MaterialDemoState extends State<MaterialDemo>
                                   alignment: Alignment.center,
                                   height: 60,
                                   width: 70,
-                                  decoration:
-                                      BoxDecoration(border: Border.all()),
+                                  decoration: BoxDecoration(border: Border.all()),
                                   child: InkWell(
                                     onTap: () {
-                                      debugPrint(
-                                          "Press: ${e.toString().split(".")[1]}");
+                                      debugPrint("Press: ${e.toString().split(".")[1]}");
                                     },
                                     child: Text(e.toString().split(".")[1]),
                                   ),

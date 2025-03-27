@@ -7,7 +7,6 @@
 //
 
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 
@@ -32,7 +31,7 @@ class NFileUploadModel {
 
   /// 文件尺寸描述(MB)
   String? get fileDesc {
-    int? length = assetFile?.size;
+    var length = assetFile?.size;
     if (length == null) {
       return null;
     }

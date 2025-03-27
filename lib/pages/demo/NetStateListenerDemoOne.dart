@@ -8,7 +8,6 @@
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/cache/cache_service.dart';
 import 'package:flutter_templet_project/service/connectivity_service.dart';
 
 class NetStateListenerDemoOne extends StatefulWidget {

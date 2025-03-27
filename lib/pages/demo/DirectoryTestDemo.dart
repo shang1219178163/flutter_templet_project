@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
@@ -88,9 +87,9 @@ class _DirectoryTestDemoState extends State<DirectoryTestDemo> {
 
   void onDone() {
     // 获取当前脚本的路径
-    String currentPath = Directory.current.path;
+    var currentPath = Directory.current.path;
     // 获取项目根目录路径（假设你要向上回溯路径，具体要根据实际情况处理）
-    String projectPath = path.dirname(path.dirname(currentPath));
+    var projectPath = path.dirname(path.dirname(currentPath));
 
     DLog.d('Current Directory: $currentPath');
     DLog.d('Project Directory: $projectPath');

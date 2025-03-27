@@ -8,7 +8,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_swiper_gesture_detector.dart';
-import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:get/get.dart';
 import 'package:tab_container/tab_container.dart';
 
@@ -120,13 +119,13 @@ class _TabContainerDemoState extends State<TabContainerDemo> with SingleTickerPr
   /// 银行卡效果
   Widget buildCardBox() {
     List<Widget> _getChildren1() {
-      List<CreditCardData> cards = kCreditCards.map((e) => CreditCardData.fromJson(e)).toList();
+      var cards = kCreditCards.map((e) => CreditCardData.fromJson(e)).toList();
 
       return cards.map((e) => CreditCard(data: e)).toList();
     }
 
     List<Widget> _getTabs1() {
-      List<CreditCardData> cards = kCreditCards.map((e) => CreditCardData.fromJson(e)).toList();
+      var cards = kCreditCards.map((e) => CreditCardData.fromJson(e)).toList();
       return cards.map((e) => Text('*${e.number.substring(e.number.length - 4, e.number.length)}')).toList();
     }
 

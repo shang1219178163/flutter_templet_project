@@ -69,11 +69,11 @@ class _NTreeDemoState extends State<NTreeDemo> {
           'done',
         ]
             .map((e) => TextButton(
+                  onPressed: onPressed,
                   child: Text(
                     e,
                     style: TextStyle(color: Colors.white),
                   ),
-                  onPressed: onPressed,
                 ))
             .toList(),
       ),

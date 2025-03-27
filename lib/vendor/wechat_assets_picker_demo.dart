@@ -186,28 +186,28 @@ class WechatPhotoPicker extends StatefulWidget {
   }) : super(key: key);
 
   /// 最大个数
-  int maxCount;
+  final int maxCount;
 
   /// 每行元素个数
-  int rowCount;
+  final int rowCount;
 
   /// 元素间距
-  double spacing;
+  final double spacing;
 
   /// 元素修饰器
-  BoxDecoration? decoration;
+  final BoxDecoration? decoration;
 
   /// 占位图片
-  ImageProvider placeholder;
+  final ImageProvider placeholder;
 
   /// 添加图片
-  Widget Function(BuildContext context, double itemWidth)? addBuilder;
+  final Widget Function(BuildContext context, double itemWidth)? addBuilder;
 
   /// 确认选择回调函数
-  void Function(List<AssetEntity> assets) onChanged;
+  final void Function(List<AssetEntity> assets) onChanged;
 
   /// 解决flutter数据无法透传的问题(透传 AssetPicker.pickAssets 方法)
-  Future<List<AssetEntity>?> Function()? onPicker;
+  final Future<List<AssetEntity>?> Function()? onPicker;
 
   @override
   WechatPhotoPickerState createState() => WechatPhotoPickerState();

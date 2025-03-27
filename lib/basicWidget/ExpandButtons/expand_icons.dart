@@ -37,8 +37,8 @@ class ExpandIconsState extends State<ExpandIcons>
   }
 
   Widget _buildChild(int index) {
-    Color backgroundColor = Theme.of(context).cardColor;
-    Color foregroundColor = Theme.of(context).primaryColor;
+    var backgroundColor = Theme.of(context).cardColor;
+    var foregroundColor = Theme.of(context).primaryColor;
     return Container(
       height: 70.0,
       width: 56.0,
@@ -69,8 +69,8 @@ class ExpandIconsState extends State<ExpandIcons>
         }
       },
       tooltip: 'Increment',
-      child: Icon(Icons.add),
       elevation: 2.0,
+      child: Icon(Icons.add),
     );
   }
 

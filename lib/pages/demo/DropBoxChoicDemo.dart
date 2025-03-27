@@ -69,7 +69,7 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
       .map((e) => OrderModel(
             id: e,
             name: "订单_$e",
-            pirce: IntExt.random(max: 1000, min: 100).toDouble(),
+            price: IntExt.random(max: 1000, min: 100).toDouble(),
           ))
       .toList();
   List<OrderModel> selectedOrders = [];
@@ -88,7 +88,7 @@ class _DropBoxChoicDemoState extends State<DropBoxChoicDemo> {
 
   @override
   Widget build(BuildContext context) {
-    bool isSingle = false; //单选多选
+    var isSingle = false; //单选多选
 
     return Scaffold(
       appBar: AppBar(

@@ -1,15 +1,9 @@
-import 'dart:math';
-
-import 'package:flutter/material.dart';
-
 import 'package:easy_refresh/easy_refresh.dart';
-
+import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/extension/num_ext.dart';
-import 'package:flutter_templet_project/mixin/BottomBouncingScrollPhysics.dart';
-import 'package:flutter_templet_project/mixin/MyScrollPhysics.dart';
 import 'package:flutter_templet_project/routes/AppRouteObserver.dart';
 
 class ThirdPage extends StatefulWidget {
@@ -118,7 +112,7 @@ class _ThirdPageState extends State<ThirdPage> with RouteAware {
               final maxScrollExtent = _scrollController.position.maxScrollExtent.toStringAsFixed(0);
               debugPrint("maxScrollExtent: $maxScrollExtent");
               return Container(
-                child: Text("${value.toStringAsFixed(0)}/${maxScrollExtent}"),
+                child: Text("${value.toStringAsFixed(0)}/$maxScrollExtent"),
               );
             }),
       ),

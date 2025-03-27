@@ -20,8 +20,6 @@ class DateTimeDemo extends StatefulWidget {
 class _DateTimeDemoState extends State<DateTimeDemo> {
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),

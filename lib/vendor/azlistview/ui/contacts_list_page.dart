@@ -1,9 +1,6 @@
+import 'package:azlistview/azlistview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-import 'package:azlistview/azlistview.dart';
-import 'package:flutter_templet_project/extension/color_ext.dart';
-import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/vendor/azlistview/common/index.dart';
 
 class ContactListPage extends StatefulWidget {
@@ -37,8 +34,8 @@ class _ContactListPageState extends State<ContactListPage> {
   void _handleList(List<ContactInfo> list) {
     if (list.isEmpty) return;
     for (int i = 0, length = list.length; i < length; i++) {
-      String pinyin = PinyinHelper.getPinyinE(list[i].name);
-      String tag = pinyin.substring(0, 1).toUpperCase();
+      var pinyin = PinyinHelper.getPinyinE(list[i].name);
+      var tag = pinyin.substring(0, 1).toUpperCase();
       list[i].namePinyin = pinyin;
       if (RegExp("[A-Z]").hasMatch(tag)) {
         list[i].tagIndex = tag;
@@ -74,7 +71,7 @@ class _ContactListPageState extends State<ContactListPage> {
             padding: const EdgeInsets.all(8.0),
             child: Text(
               "远行",
-              textScaleFactor: 1.2,
+              textScaler: TextScaler.linear(1.2),
             ),
           ),
           Text("+86 182-286-44678"),
@@ -93,8 +90,8 @@ class _ContactListPageState extends State<ContactListPage> {
       child: Row(
         children: <Widget>[
           Text(
-            '$susTag',
-            textScaleFactor: 1.2,
+            susTag,
+            textScaler: TextScaler.linear(1.2),
           ),
           Expanded(
               child: Divider(
@@ -107,7 +104,7 @@ class _ContactListPageState extends State<ContactListPage> {
   }
 
   Widget _buildListItem(ContactInfo model) {
-    String susTag = model.getSuspensionTag();
+    var susTag = model.getSuspensionTag();
     debugPrint("_buildListItem:${model.name}_${model.isShowSuspension}");
     return Container(
       height: 90,
@@ -151,11 +148,11 @@ class _ContactListPageState extends State<ContactListPage> {
       itemCount: _contacts.length,
       itemBuilder: (BuildContext context, int index) {
         // if (index == 0) return _buildHeader();
-        ContactInfo model = _contacts[index];
+        var model = _contacts[index];
         return _buildListItem(model);
       },
       susItemBuilder: (BuildContext context, int index) {
-        ContactInfo model = _contacts[index];
+        var model = _contacts[index];
         final str = "section${model.getSuspensionTag()}";
         return Container(
           height: 40,

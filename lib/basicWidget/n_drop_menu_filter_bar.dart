@@ -11,7 +11,6 @@ import 'package:flutter_templet_project/basicWidget/n_menu_anchor.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/n_textfield_search.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
-import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 
 /// 搜索框加 dropMenu
@@ -133,13 +132,13 @@ class NDropMenuFilterBar<E> extends StatelessWidget {
                         onChanged(e);
                       },
                       dropButtonStyle: ButtonStyle(
-                        padding: const MaterialStatePropertyAll(
+                        padding: const WidgetStatePropertyAll(
                           EdgeInsets.symmetric(horizontal: 4, vertical: 6),
                         ),
                         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                         minimumSize:
-                            const MaterialStatePropertyAll(Size(20, 18)),
-                        backgroundColor: MaterialStateProperty.all(bgColor),
+                            const WidgetStatePropertyAll(Size(20, 18)),
+                        backgroundColor: WidgetStateProperty.all(bgColor),
                       ),
                       constraints: constraints,
                       builder: (controller, selectedItem) {

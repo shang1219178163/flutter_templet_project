@@ -28,7 +28,7 @@ class _SnowEffectState extends State<SnowEffect>
     )..repeat();
 
     // 创建雪花
-    for (int i = 0; i < 100; i++) {
+    for (var i = 0; i < 100; i++) {
       snowflakes.add(Snowflake(
         x: random.nextDouble() * 500,
         y: random.nextDouble() * 800 - 800,
@@ -54,7 +54,7 @@ class _SnowEffectState extends State<SnowEffect>
       animation: _controller,
       builder: (context, child) {
         // 更新雪花位置
-        for (var snowflake in snowflakes) {
+        for (final snowflake in snowflakes) {
           // 使用动画速度参数调整雪花下落和摆动速度
           snowflake.y += snowflake.speed * widget.animationSpeed;
           snowflake.angle += snowflake.swingSpeed * widget.animationSpeed;
@@ -116,7 +116,7 @@ class SnowPainter extends CustomPainter {
     canvas.drawRect(groundRect, groundPaint);
 
     // 绘制雪花
-    for (var snowflake in snowflakes) {
+    for (final snowflake in snowflakes) {
       final paint = Paint()
         ..color = Colors.white.withOpacity(snowflake.opacity);
 
@@ -125,7 +125,7 @@ class SnowPainter extends CustomPainter {
 
       // 绘制雪花细节
       if (snowflake.size > 4) {
-        for (int i = 0; i < 6; i++) {
+        for (var i = 0; i < 6; i++) {
           final angle = 2 * pi / 6 * i;
           final lineLength = snowflake.size * 1.2;
 

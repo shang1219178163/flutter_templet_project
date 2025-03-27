@@ -19,12 +19,12 @@ mixin FilePickerMixin<T extends StatefulWidget> on State<T> {
     int maxMB = 28,
     bool allowMultiple = true,
   }) async {
-    bool isGranted = await PermissionUtil.checkDocument();
+    var isGranted = await PermissionUtil.checkDocument();
     if (!isGranted) {
       return <File>[];
     }
 
-    FilePickerResult? result = await FilePicker.platform.pickFiles(
+    var result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
       allowMultiple: allowMultiple,
       allowedExtensions: [
@@ -40,7 +40,7 @@ mixin FilePickerMixin<T extends StatefulWidget> on State<T> {
     if (result == null) {
       return <File>[];
     }
-    List<File> files = result.paths
+    var files = result.paths
         .where((e) => e != null)
         .whereType<String>()
         .map((path) => File(path))

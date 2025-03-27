@@ -6,8 +6,6 @@ import 'dart:collection' show Queue;
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:vector_math/vector_math_64.dart' show Vector3;
 
 /// 官方 BottomNavigationBar 不支持 onDoubleTap
@@ -212,16 +210,16 @@ class NBottomNavigationBar extends StatefulWidget {
   /// items.
   ///
   /// If [mouseCursor] is a [MaterialStateProperty<MouseCursor>],
-  /// [MaterialStateProperty.resolve] is used for the following [MaterialState]s:
+  /// [WidgetStateProperty.resolve] is used for the following [WidgetState]s:
   ///
-  ///  * [MaterialState.selected].
+  ///  * [WidgetState.selected].
   ///
   /// If null, then the value of [BottomNavigationBarThemeData.mouseCursor] is used. If
-  /// that is also null, then [MaterialStateMouseCursor.clickable] is used.
+  /// that is also null, then [WidgetStateMouseCursor.clickable] is used.
   ///
   /// See also:
   ///
-  ///  * [MaterialStateMouseCursor], which can be used to create a [MouseCursor]
+  ///  * [WidgetStateMouseCursor], which can be used to create a [MouseCursor]
   ///    that is also a [MaterialStateProperty<MouseCursor>].
   final MouseCursor? mouseCursor;
 
@@ -345,10 +343,10 @@ class _NBottomNavigationTile extends StatelessWidget {
     // (which is an integer) by a large number.
     final int size;
 
-    final double selectedFontSize = selectedLabelStyle.fontSize!;
+    final selectedFontSize = selectedLabelStyle.fontSize!;
 
-    final double selectedIconSize = selectedIconTheme?.size ?? iconSize;
-    final double unselectedIconSize = unselectedIconTheme?.size ?? iconSize;
+    final selectedIconSize = selectedIconTheme?.size ?? iconSize;
+    final unselectedIconSize = unselectedIconTheme?.size ?? iconSize;
 
     // The amount that the selected icon is bigger than the unselected icons,
     // (or zero if the selected icon is not bigger than the unselected icons).
@@ -360,7 +358,7 @@ class _NBottomNavigationTile extends StatelessWidget {
         math.max(unselectedIconSize - selectedIconSize, 0);
 
     // The effective tool tip message to be shown on the BottomNavigationBarItem.
-    final String? effectiveTooltip = item.tooltip == '' ? null : item.tooltip;
+    final effectiveTooltip = item.tooltip == '' ? null : item.tooltip;
 
     // Defines the padding for the animating icons + labels.
     //
@@ -452,6 +450,7 @@ class _NBottomNavigationTile extends StatelessWidget {
                 layout: layout,
                 icon: icon,
                 label: label,
+                children: null,
               ),
         ),
       ),
@@ -496,7 +495,7 @@ class _Tile extends StatelessWidget {
     required this.layout,
     required this.icon,
     required this.label,
-    this.children,
+    required this.children,  
   });
 
   final BottomNavigationBarLandscapeLayout layout;
@@ -545,12 +544,12 @@ class _TileIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color? iconColor = colorTween.evaluate(animation);
-    final IconThemeData defaultIconTheme = IconThemeData(
+    final iconColor = colorTween.evaluate(animation);
+    final defaultIconTheme = IconThemeData(
       color: iconColor,
       size: iconSize,
     );
-    final IconThemeData iconThemeData = IconThemeData.lerp(
+    final iconThemeData = IconThemeData.lerp(
       defaultIconTheme.merge(unselectedIconTheme),
       defaultIconTheme.merge(selectedIconTheme),
       animation.value,
@@ -588,15 +587,15 @@ class _Label extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double? selectedFontSize = selectedLabelStyle.fontSize;
-    final double? unselectedFontSize = unselectedLabelStyle.fontSize;
+    final selectedFontSize = selectedLabelStyle.fontSize;
+    final unselectedFontSize = unselectedLabelStyle.fontSize;
 
-    final TextStyle customStyle = TextStyle.lerp(
+    final customStyle = TextStyle.lerp(
       unselectedLabelStyle,
       selectedLabelStyle,
       animation.value,
     )!;
-    Widget text = DefaultTextStyle.merge(
+    var text = DefaultTextStyle.merge(
       style: customStyle.copyWith(
         fontSize: selectedFontSize,
         color: colorTween.evaluate(animation),
@@ -649,11 +648,8 @@ class _Label extends StatelessWidget {
     if (item.label != null) {
       // Do not grow text in bottom navigation bar when we can show a tooltip
       // instead.
-      final MediaQueryData mediaQueryData = MediaQuery.of(context);
-      text = MediaQuery(
-        data: mediaQueryData.copyWith(
-          textScaleFactor: math.min(1.0, mediaQueryData.textScaleFactor),
-        ),
+      text = MediaQuery.withClampedTextScaling(
+        maxScaleFactor: 1.0,
         child: text,
       );
     }
@@ -678,10 +674,10 @@ class _NBottomNavigationBarState extends State<NBottomNavigationBar>
       Tween<double>(begin: 1.0, end: 1.5);
 
   void _resetState() {
-    for (final AnimationController controller in _controllers) {
+    for (final controller in _controllers) {
       controller.dispose();
     }
-    for (final _Circle circle in _circles) {
+    for (final circle in _circles) {
       circle.dispose();
     }
     _circles.clear();
@@ -747,10 +743,10 @@ class _NBottomNavigationBarState extends State<NBottomNavigationBar>
 
   @override
   void dispose() {
-    for (final AnimationController controller in _controllers) {
+    for (final controller in _controllers) {
       controller.dispose();
     }
-    for (final _Circle circle in _circles) {
+    for (final circle in _circles) {
       circle.dispose();
     }
     super.dispose();
@@ -772,7 +768,7 @@ class _NBottomNavigationBarState extends State<NBottomNavigationBar>
               switch (status) {
                 case AnimationStatus.completed:
                   setState(() {
-                    final _Circle circle = _circles.removeFirst();
+                    final circle = _circles.removeFirst();
                     _backgroundColor = circle.color;
                     circle.dispose();
                   });
@@ -834,11 +830,11 @@ class _NBottomNavigationBarState extends State<NBottomNavigationBar>
   }
 
   List<Widget> _createTiles(BottomNavigationBarLandscapeLayout layout) {
-    final MaterialLocalizations localizations =
+    final localizations =
         MaterialLocalizations.of(context);
 
-    final ThemeData themeData = Theme.of(context);
-    final BottomNavigationBarThemeData bottomTheme =
+    final themeData = Theme.of(context);
+    final bottomTheme =
         BottomNavigationBarTheme.of(context);
 
     final Color themeColor;
@@ -849,23 +845,23 @@ class _NBottomNavigationBarState extends State<NBottomNavigationBar>
         themeColor = themeData.colorScheme.secondary;
     }
 
-    final TextStyle effectiveSelectedLabelStyle = _effectiveTextStyle(
+    final effectiveSelectedLabelStyle = _effectiveTextStyle(
       widget.selectedLabelStyle ?? bottomTheme.selectedLabelStyle,
       widget.selectedFontSize,
     );
 
-    final TextStyle effectiveUnselectedLabelStyle = _effectiveTextStyle(
+    final effectiveUnselectedLabelStyle = _effectiveTextStyle(
       widget.unselectedLabelStyle ?? bottomTheme.unselectedLabelStyle,
       widget.unselectedFontSize,
     );
 
-    final IconThemeData effectiveSelectedIconTheme = _effectiveIconTheme(
+    final effectiveSelectedIconTheme = _effectiveIconTheme(
         widget.selectedIconTheme ?? bottomTheme.selectedIconTheme,
         widget.selectedItemColor ??
             bottomTheme.selectedItemColor ??
             themeColor);
 
-    final IconThemeData effectiveUnselectedIconTheme = _effectiveIconTheme(
+    final effectiveUnselectedIconTheme = _effectiveIconTheme(
         widget.unselectedIconTheme ?? bottomTheme.unselectedIconTheme,
         widget.unselectedItemColor ??
             bottomTheme.unselectedItemColor ??
@@ -948,17 +944,17 @@ class _NBottomNavigationBarState extends State<NBottomNavigationBar>
         );
     }
 
-    final List<Widget> tiles = <Widget>[];
-    for (int i = 0; i < widget.items.length; i++) {
-      final Set<MaterialState> states = <MaterialState>{
-        if (i == widget.currentIndex) MaterialState.selected,
+    final tiles = <Widget>[];
+    for (var i = 0; i < widget.items.length; i++) {
+      final states = <WidgetState>{
+        if (i == widget.currentIndex) WidgetState.selected,
       };
 
-      final MouseCursor effectiveMouseCursor =
-          MaterialStateProperty.resolveAs<MouseCursor?>(
+      final effectiveMouseCursor =
+          WidgetStateProperty.resolveAs<MouseCursor?>(
                   widget.mouseCursor, states) ??
               bottomTheme.mouseCursor?.resolve(states) ??
-              MaterialStateMouseCursor.clickable.resolve(states);
+              WidgetStateMouseCursor.clickable.resolve(states);
 
       tiles.add(_NBottomNavigationTile(
         _effectiveType,
@@ -1010,12 +1006,12 @@ class _NBottomNavigationBarState extends State<NBottomNavigationBar>
     assert(debugCheckHasMediaQuery(context));
     assert(debugCheckHasOverlay(context));
 
-    final BottomNavigationBarThemeData bottomTheme =
+    final bottomTheme =
         BottomNavigationBarTheme.of(context);
-    final BottomNavigationBarLandscapeLayout layout = widget.landscapeLayout ??
+    final layout = widget.landscapeLayout ??
         bottomTheme.landscapeLayout ??
         BottomNavigationBarLandscapeLayout.spread;
-    final double additionalBottomPadding =
+    final additionalBottomPadding =
         MediaQuery.viewPaddingOf(context).bottom;
 
     Color? backgroundColor;
@@ -1082,7 +1078,7 @@ class _Bar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget alignedChild = child;
+    var alignedChild = child;
     if (MediaQuery.orientationOf(context) == Orientation.landscape &&
         layout == BottomNavigationBarLandscapeLayout.centered) {
       alignedChild = Align(
@@ -1136,9 +1132,9 @@ class _Circle {
           .fold<double>(0.0, (double sum, double value) => sum + value);
     }
 
-    final double allWeights = weightSum(state._animations);
+    final allWeights = weightSum(state._animations);
     // These weights sum to the start edge of the indexed item.
-    final double leadingWeights =
+    final leadingWeights =
         weightSum(state._animations.sublist(0, index));
 
     // Add half of its flex value in order to get to the center.
@@ -1183,7 +1179,7 @@ class _RadialPainter extends CustomPainter {
     if (circles.length != oldPainter.circles.length) {
       return true;
     }
-    for (int i = 0; i < circles.length; i += 1) {
+    for (var i = 0; i < circles.length; i += 1) {
       if (circles[i] != oldPainter.circles[i]) {
         return true;
       }
@@ -1193,9 +1189,9 @@ class _RadialPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    for (final _Circle circle in circles) {
-      final Paint paint = Paint()..color = circle.color;
-      final Rect rect = Rect.fromLTWH(0.0, 0.0, size.width, size.height);
+    for (final circle in circles) {
+      final paint = Paint()..color = circle.color;
+      final rect = Rect.fromLTWH(0.0, 0.0, size.width, size.height);
       canvas.clipRect(rect);
       final double leftFraction;
       switch (textDirection) {
@@ -1204,9 +1200,9 @@ class _RadialPainter extends CustomPainter {
         case TextDirection.ltr:
           leftFraction = circle.horizontalLeadingOffset;
       }
-      final Offset center =
+      final center =
           Offset(leftFraction * size.width, size.height / 2.0);
-      final Tween<double> radiusTween = Tween<double>(
+      final radiusTween = Tween<double>(
         begin: 0.0,
         end: _maxRadius(center, size),
       );

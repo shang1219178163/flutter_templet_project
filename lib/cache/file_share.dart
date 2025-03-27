@@ -1,7 +1,4 @@
-import 'dart:io';
 
-import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/cache/file_manager.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
@@ -37,6 +34,6 @@ class FileShare {
     if (file == null) {
       return;
     }
-    Share.shareXFiles([XFile(file!.path)]);
+    Share.shareXFiles([XFile(file.path)]);
   }
 }

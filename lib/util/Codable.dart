@@ -7,7 +7,7 @@ abstract class Codable {
   //   throw UnimplementedError();
   // }
 
-  factory Codable.fromJson(Map<String, dynamic> json) {
+  factory Codable.fromJson() {
     throw UnimplementedError();
   }
 

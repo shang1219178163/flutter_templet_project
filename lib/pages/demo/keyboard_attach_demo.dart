@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 
@@ -66,11 +65,11 @@ class _KeyboardAttachDemoState extends State<KeyboardAttachDemo> with WidgetsBin
           'done',
         ]
             .map((e) => TextButton(
+                  onPressed: onPressed,
                   child: Text(
                     e,
                     style: TextStyle(color: Colors.white),
                   ),
-                  onPressed: onPressed,
                 ))
             .toList(),
       ),

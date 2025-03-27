@@ -18,8 +18,6 @@ class ShaderMaskDemo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
         appBar: AppBar(
           title: Text("$this"),

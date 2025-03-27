@@ -8,7 +8,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
-import 'package:get/get.dart';
 
 class PopScopeDemo extends StatefulWidget {
   const PopScopeDemo({
@@ -64,7 +63,7 @@ class _PopScopeDemoState extends State<PopScopeDemo> {
 
   Future<void> showAlert() async {
     // 弹出确认对话框
-    bool shouldPop = await showDialog(
+    var shouldPop = await showDialog(
           context: context,
           builder: (context) => AlertDialog(
             title: Text("确认"),

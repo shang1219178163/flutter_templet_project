@@ -113,8 +113,8 @@ class _NChromeSegmentState extends State<NChromeSegment> {
   }) {
     final isSelected = (currentIndex == eIndex);
 
-    double topLeftRadius = widget.radius;
-    double bottomRightRadius = widget.radius;
+    var topLeftRadius = widget.radius;
+    var bottomRightRadius = widget.radius;
     if (isSelected) {
       if (eIndex == currentIndex) {
         if (currentIndex == widget.items.length - 1) {

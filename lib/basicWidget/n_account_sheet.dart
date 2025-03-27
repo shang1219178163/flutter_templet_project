@@ -179,7 +179,7 @@ class _NAccountSheetState extends State<NAccountSheet> {
 
   void updateCurrent(MapEntry<String, dynamic>? e) {
     current = e;
-    debugPrint("current: ${current}");
+    debugPrint("current: $current");
   }
 }
 

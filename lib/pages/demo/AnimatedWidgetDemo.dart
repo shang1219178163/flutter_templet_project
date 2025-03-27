@@ -35,8 +35,6 @@ class _AnimatedWidgetDemoState extends State<AnimatedWidgetDemo> {
 
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
@@ -87,9 +85,7 @@ class _AnimatedWidgetDemoState extends State<AnimatedWidgetDemo> {
               alignment: _align,
               child: ElevatedButton(
                 onPressed: () {
-                  _align = _align == Alignment.centerLeft
-                      ? Alignment.center
-                      : Alignment.centerLeft;
+                  _align = _align == Alignment.centerLeft ? Alignment.center : Alignment.centerLeft;
                   setState(() {});
                 },
                 child: Text("AnimatedAlign"),
@@ -144,12 +140,9 @@ class _AnimatedWidgetDemoState extends State<AnimatedWidgetDemo> {
             },
             child: AnimatedCrossFade(
               duration: const Duration(seconds: 1),
-              firstChild: const FlutterLogo(
-                  style: FlutterLogoStyle.horizontal, size: 100.0),
-              secondChild: const FlutterLogo(
-                  style: FlutterLogoStyle.stacked, size: 100.0),
-              crossFadeState:
-                  _first ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+              firstChild: const FlutterLogo(style: FlutterLogoStyle.horizontal, size: 100.0),
+              secondChild: const FlutterLogo(style: FlutterLogoStyle.stacked, size: 100.0),
+              crossFadeState: _first ? CrossFadeState.showFirst : CrossFadeState.showSecond,
             ),
           ),
           AnimatedContainer(
@@ -170,6 +163,8 @@ class _AnimatedWidgetDemoState extends State<AnimatedWidgetDemo> {
             ),
           ),
           AnimatedDefaultTextStyle(
+            style: _style,
+            duration: duration,
             child: GestureDetector(
               onTap: () {
                 _style = TextStyle(
@@ -181,8 +176,6 @@ class _AnimatedWidgetDemoState extends State<AnimatedWidgetDemo> {
               },
               child: Text("AnimatedDefaultTextStyle"),
             ),
-            style: _style,
-            duration: duration,
           ),
           // AnimatedDecoratedBox(
           //   duration: duration,
@@ -229,8 +222,7 @@ class AnimatedDecoratedBox extends ImplicitlyAnimatedWidget {
   _AnimatedDecoratedBoxState createState() => _AnimatedDecoratedBoxState();
 }
 
-class _AnimatedDecoratedBoxState
-    extends AnimatedWidgetBaseState<AnimatedDecoratedBox> {
+class _AnimatedDecoratedBoxState extends AnimatedWidgetBaseState<AnimatedDecoratedBox> {
   late DecorationTween _decoration; //定义一个Tween
 
   @override

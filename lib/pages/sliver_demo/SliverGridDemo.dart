@@ -12,8 +12,6 @@ class SliverGridDemo extends StatefulWidget {
 class _SliverGridDemoState extends State<SliverGridDemo> {
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
@@ -50,9 +48,7 @@ class _SliverGridDemoState extends State<SliverGridDemo> {
 
     return CustomScrollView(
       slivers: <Widget>[
-        sectionHeader(
-            child:
-                Text('SliverGrid - SliverGridDelegateWithFixedCrossAxisCount')),
+        sectionHeader(child: Text('SliverGrid - SliverGridDelegateWithFixedCrossAxisCount')),
         SliverGrid(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 4,
@@ -61,9 +57,7 @@ class _SliverGridDemoState extends State<SliverGridDemo> {
             list,
           ),
         ),
-        sectionHeader(
-            child:
-                Text('SliverGrid - SliverGridDelegateWithMaxCrossAxisExtent')),
+        sectionHeader(child: Text('SliverGrid - SliverGridDelegateWithMaxCrossAxisExtent')),
         SliverGrid(
           gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
             maxCrossAxisExtent: 120,

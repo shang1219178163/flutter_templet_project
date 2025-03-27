@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/FloatingActionButtonLocationOffset.dart';
-import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
+import 'package:flutter_templet_project/basicWidget/n_target_follower.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
-import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/regexp_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:tuple/tuple.dart';
-
-import 'package:flutter_templet_project/basicWidget/n_target_follower.dart';
 
 //https://getemoji.com/
 //https://emoji-copy-paste.com/
@@ -73,11 +70,11 @@ class _EmojiPageState extends State<EmojiPage> {
                 'done',
               ]
                   .map((e) => TextButton(
+                        onPressed: onPressed,
                         child: Text(
                           e,
                           style: TextStyle(color: Colors.white),
                         ),
-                        onPressed: onPressed,
                       ))
                   .toList(),
             ),

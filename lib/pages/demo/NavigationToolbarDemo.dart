@@ -6,7 +6,6 @@
 //  Copyright © 10/11/22 shang. All rights reserved.
 //
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_picker_tool_bar.dart';
 
@@ -22,8 +21,6 @@ class NavigationToolbarDemo extends StatefulWidget {
 class _NavigationToolbarDemoState extends State<NavigationToolbarDemo> {
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),

@@ -8,12 +8,10 @@ class CustomMultiChildLayoutDemo extends StatefulWidget {
   final String? title;
 
   @override
-  _CustomMultiChildLayoutDemoState createState() =>
-      _CustomMultiChildLayoutDemoState();
+  _CustomMultiChildLayoutDemoState createState() => _CustomMultiChildLayoutDemoState();
 }
 
-class _CustomMultiChildLayoutDemoState extends State<CustomMultiChildLayoutDemo>
-    with SingleTickerProviderStateMixin {
+class _CustomMultiChildLayoutDemoState extends State<CustomMultiChildLayoutDemo> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
   @override
@@ -36,8 +34,6 @@ class _CustomMultiChildLayoutDemoState extends State<CustomMultiChildLayoutDemo>
 
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.title ?? "$widget"),
@@ -93,7 +89,7 @@ class _CustomMultiChildLayoutDemoState extends State<CustomMultiChildLayoutDemo>
         child: AnimatedBuilder(
           animation: _controller,
           builder: (_, __) {
-            double _v = (2 * (_controller.value - 0.5)).abs();
+            var _v = (2 * (_controller.value - 0.5)).abs();
             return CircleLayout(
               // radiusRatio: _v,
               initAngle: _controller.value * 360,
@@ -101,8 +97,7 @@ class _CustomMultiChildLayoutDemoState extends State<CustomMultiChildLayoutDemo>
                 9,
                 (index) => index == 8
                     ? buildPoint(width: 80, height: 80, color: Colors.red)
-                    : buildPoint(
-                        width: 100, height: 40, shape: BoxShape.rectangle),
+                    : buildPoint(width: 100, height: 40, shape: BoxShape.rectangle),
               ),
             );
           },
@@ -124,7 +119,7 @@ class _CustomMultiChildLayoutDemoState extends State<CustomMultiChildLayoutDemo>
         child: AnimatedBuilder(
           animation: _controller,
           builder: (_, __) {
-            double _v = (2 * (_controller.value - 0.5)).abs();
+            var _v = (2 * (_controller.value - 0.5)).abs();
             return CircleLayout(
               // radiusRatio: _v,
               initAngle: _controller.value * 360,
@@ -133,13 +128,9 @@ class _CustomMultiChildLayoutDemoState extends State<CustomMultiChildLayoutDemo>
                   return buildPoint(width: 80, height: 80, color: Colors.red);
                 }
                 if (index % 2 == 0) {
-                  return buildPoint(
-                      width: 40,
-                      height: 50 * _v + 30,
-                      shape: BoxShape.rectangle);
+                  return buildPoint(width: 40, height: 50 * _v + 30, shape: BoxShape.rectangle);
                 }
-                return buildPoint(
-                    width: 50 * _v + 30, height: 30, shape: BoxShape.rectangle);
+                return buildPoint(width: 50 * _v + 30, height: 30, shape: BoxShape.rectangle);
               }),
             );
           },

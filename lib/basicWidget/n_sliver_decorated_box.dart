@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
@@ -85,7 +84,9 @@ class RenderSliverDecoratedBox extends RenderProxySliver {
   Decoration _decoration;
   Decoration get decoration => _decoration;
   set decoration(Decoration value) {
-    if (value == _decoration) return;
+    if (value == _decoration) {
+      return;
+    }
     _painter?.dispose();
     _painter = null;
     _decoration = value;
@@ -95,7 +96,9 @@ class RenderSliverDecoratedBox extends RenderProxySliver {
   DecorationPosition _position;
   DecorationPosition get position => _position;
   set position(DecorationPosition value) {
-    if (value == _position) return;
+    if (value == _position) {
+      return;
+    }
     _position = value;
     markNeedsPaint();
   }
@@ -103,7 +106,9 @@ class RenderSliverDecoratedBox extends RenderProxySliver {
   ImageConfiguration _configuration;
   ImageConfiguration get configuration => _configuration;
   set configuration(ImageConfiguration value) {
-    if (value == _configuration) return;
+    if (value == _configuration) {
+      return;
+    }
     _configuration = value;
     markNeedsPaint();
   }
@@ -162,12 +167,16 @@ class RenderSliverDecoratedBox extends RenderProxySliver {
         }
         return true;
       }());
-      if (decoration.isComplex) context.setIsComplexHint();
+      if (decoration.isComplex) {
+        context.setIsComplexHint();
+      }
     }
     super.paint(context, offset);
     if (position == DecorationPosition.foreground) {
       _painter!.paint(context.canvas, offset, filledConfiguration);
-      if (decoration.isComplex) context.setIsComplexHint();
+      if (decoration.isComplex) {
+        context.setIsComplexHint();
+      }
     }
   }
 

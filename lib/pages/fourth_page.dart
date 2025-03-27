@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/APPThemeSettings.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
-import 'package:flutter_templet_project/extension/decoration_ext.dart';
 
 class FourthPage extends StatelessWidget {
   const FourthPage({Key? key}) : super(key: key);

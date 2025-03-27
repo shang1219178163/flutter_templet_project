@@ -21,7 +21,6 @@ class NavgationBarDemo extends StatefulWidget {
 class _NavgationBarDemoState extends State<NavgationBarDemo> {
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
     return Scaffold(
       extendBodyBehindAppBar: true,
       // backgroundColor: Colors.blue,

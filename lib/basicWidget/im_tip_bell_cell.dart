@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_templet_project/basicWidget/n_flexible_cell.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 
 class IMTipBellCell extends StatelessWidget {

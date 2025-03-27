@@ -6,9 +6,7 @@
 //	Copyright © 2021 Bin Shang. All rights reserved.
 //
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
 
 class ListTileDemo extends StatefulWidget {
@@ -41,7 +39,6 @@ class _ListTileDemoState extends State<ListTileDemo> {
 
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),

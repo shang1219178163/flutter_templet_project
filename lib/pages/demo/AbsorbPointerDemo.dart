@@ -59,7 +59,7 @@ class _AbsorbPointerDemoState extends State<AbsorbPointerDemo> {
   buildSwitchCell() {
     return Row(
       children: <Widget>[
-        Text('不可点击：absorbing: ${_disable}'),
+        Text('不可点击：absorbing: $_disable'),
         Switch(
           value: _disable,
           onChanged: (bool val) {

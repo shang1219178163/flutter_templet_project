@@ -28,8 +28,6 @@ class _FilterDemoOneState extends State<FilterDemoOne> {
 
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
@@ -62,8 +60,7 @@ class _FilterDemoOneState extends State<FilterDemoOne> {
               },
               child: Container(
                 padding: EdgeInsets.symmetric(vertical: 6),
-                child: Text(
-                    "前景模糊 ImageFilter 显示在组件上边, \n背景模糊 BackdropFilter 显示在组件下边"),
+                child: Text("前景模糊 ImageFilter 显示在组件上边, \n背景模糊 BackdropFilter 显示在组件下边"),
               ),
             ),
             _buildNNSlider(
@@ -79,8 +76,7 @@ class _FilterDemoOneState extends State<FilterDemoOne> {
                   backdropFilterVN.value = val;
                 }),
             AnimatedBuilder(
-                animation:
-                    Listenable.merge([imageFilteredVN, backdropFilterVN]),
+                animation: Listenable.merge([imageFilteredVN, backdropFilterVN]),
                 builder: (context, child) {
                   return Stack(
                     alignment: AlignmentDirectional.center,
@@ -111,8 +107,7 @@ class _FilterDemoOneState extends State<FilterDemoOne> {
     );
   }
 
-  _buildNNSlider(
-      {double max = 100, Widget? leading, ValueChanged<double>? onChanged}) {
+  _buildNNSlider({double max = 100, Widget? leading, ValueChanged<double>? onChanged}) {
     return NSlider(
       leading: leading,
       max: max,

@@ -6,10 +6,10 @@
 //  Copyright © 2024/4/9 shang. All rights reserved.
 //
 
+// ignore_for_file: use_setters_to_change_properties
+
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_footer_button_bar.dart';
-import 'package:flutter_templet_project/extension/build_context_ext.dart';
-import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 
 class NFilterDropBox extends StatefulWidget {

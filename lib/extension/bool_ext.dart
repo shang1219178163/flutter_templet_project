@@ -7,7 +7,6 @@
 //
 
 import 'dart:math';
-import 'package:flutter_templet_project/extension/num_ext.dart';
 
 extension BoolExt on bool? {
   /// 转字符串

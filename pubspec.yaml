@@ -79,7 +79,7 @@ dependencies:
   #设备信息
   device_info_plus: ^9.0.3
   share: ^2.0.1
-#  path_provider: ^2.0.1
+  path_provider: ^2.1.4
   provider: ^6.0.1
   rxdart: ^0.27.3
 

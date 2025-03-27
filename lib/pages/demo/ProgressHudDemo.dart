@@ -6,10 +6,8 @@
 //  Copyright © 7/27/21 shang. All rights reserved.
 //
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/hud/progresshud.dart';
-import 'package:flutter_templet_project/extension/dlog.dart';
 
 class ProgressHudDemo extends StatefulWidget {
   final String? title;
@@ -30,8 +28,6 @@ class _ProgressHudDemoState extends State<ProgressHudDemo> {
 
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
@@ -105,8 +101,7 @@ class _ProgressHudDemoState extends State<ProgressHudDemo> {
           TextButton(
             style: buttonStyle,
             onPressed: () {
-              NNProgressHUD.showToast(context,
-                  message: "这是一个 NNProgressHUD.toast 类型的文字提示 toast.");
+              NNProgressHUD.showToast(context, message: "这是一个 NNProgressHUD.toast 类型的文字提示 toast.");
             },
             child: Text("showToast"),
           ),

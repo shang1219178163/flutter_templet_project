@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/n_cancel_and_confirm_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_pair.dart';
-import 'package:flutter_templet_project/basicWidget/n_textfield_search.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
-import 'package:flutter_templet_project/extension/date_time_ext.dart';
+import 'package:flutter_templet_project/basicWidget/n_textfield_search.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 
@@ -234,12 +233,12 @@ class _NRequestBoxState extends State<NRequestBox> {
                     ),
                     onPressed: onClick,
                     child: NPair(
-                      child: NText("筛选", fontSize: 16.sp),
                       icon: Image(
                         image: "icon_patient_filter.png".toAssetImage(),
                         width: 18.w,
                         height: 18.h,
                       ),
+                      child: NText("筛选", fontSize: 16.sp),
                     ),
                     // direction: Axis.vertical,
                     // isReverse: true,

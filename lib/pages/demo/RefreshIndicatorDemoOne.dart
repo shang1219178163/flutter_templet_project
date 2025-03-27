@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/snack_bar_ext.dart';
 
 class RefreshIndicatorDemoOne extends StatefulWidget {
@@ -8,8 +7,7 @@ class RefreshIndicatorDemoOne extends StatefulWidget {
   final String? title;
 
   @override
-  _RefreshIndicatorDemoOneState createState() =>
-      _RefreshIndicatorDemoOneState();
+  _RefreshIndicatorDemoOneState createState() => _RefreshIndicatorDemoOneState();
 }
 
 class _RefreshIndicatorDemoOneState extends State<RefreshIndicatorDemoOne> {
@@ -28,8 +26,6 @@ class _RefreshIndicatorDemoOneState extends State<RefreshIndicatorDemoOne> {
 
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
@@ -61,9 +57,7 @@ class _RefreshIndicatorDemoOneState extends State<RefreshIndicatorDemoOne> {
     return NotificationListener(
       onNotification: (ScrollNotification n) {
         /// 判断滑动距离【小于等于400 】和 滚动方向
-        final needRefresh =
-            n.metrics.pixels >= (n.metrics.maxScrollExtent - 400) &&
-                n.metrics.axis == Axis.vertical;
+        final needRefresh = n.metrics.pixels >= (n.metrics.maxScrollExtent - 400) && n.metrics.axis == Axis.vertical;
         if (needRefresh) {
           _pageIndex += 1;
           loadData(_pageIndex);

@@ -16,8 +16,6 @@ class SlidableDemoOne extends StatefulWidget {
 class _SlidableDemoOneState extends State<SlidableDemoOne> {
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
@@ -121,9 +119,7 @@ class _SlidableDemoOneState extends State<SlidableDemoOne> {
             child: buildSlideAction(
               disable: disableVoice,
               title: isBan ? "取消禁言" : "禁言",
-              imagePath: isBan
-                  ? "icon_member_voice.png"
-                  : "icon_member_voice_disable.png",
+              imagePath: isBan ? "icon_member_voice.png" : "icon_member_voice_disable.png",
               bgColors: [
                 const Color(0xff27BDCE),
                 const Color(0xff2BCDAE),

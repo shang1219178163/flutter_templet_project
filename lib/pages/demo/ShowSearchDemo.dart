@@ -6,11 +6,8 @@
 //  Copyright © 5/17/21 shang. All rights reserved.
 //
 
-import 'dart:math';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/dlog.dart';
 
 class ShowSearchDemo extends StatefulWidget {
   final String? title;
@@ -210,7 +207,7 @@ class SearchBarViewDelegate extends SearchDelegate<String> {
     var result = <String>[];
 
     ///模拟搜索过程
-    for (var str in sourceList) {
+    for (final str in sourceList) {
       ///query 就是输入框的 TextEditingController
       if (query.isNotEmpty && str.contains(query)) {
         result.add(str);

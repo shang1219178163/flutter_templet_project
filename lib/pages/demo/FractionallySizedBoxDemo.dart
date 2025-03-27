@@ -14,15 +14,12 @@ class FractionallySizedBoxDemo extends StatefulWidget {
   final String? title;
 
   @override
-  _FractionallySizedBoxDemoState createState() =>
-      _FractionallySizedBoxDemoState();
+  _FractionallySizedBoxDemoState createState() => _FractionallySizedBoxDemoState();
 }
 
 class _FractionallySizedBoxDemoState extends State<FractionallySizedBoxDemo> {
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.title ?? "$widget"),

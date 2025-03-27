@@ -1,8 +1,8 @@
 // import 'package:flutter/cupertino.dart';
 // import 'package:flutter/src/painting/colors.dart';
 
-import 'package:flutter/material.dart';
 import 'package:color_converter/color_converter.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 
 class ColorConverterDemo extends StatefulWidget {
@@ -37,8 +37,6 @@ class _ColorConverterDemoState extends State<ColorConverterDemo> {
 
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.title ?? "$widget"),

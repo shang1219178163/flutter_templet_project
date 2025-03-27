@@ -145,7 +145,7 @@ class _NAccountSheetNewState<E extends MapEntry<String, dynamic>> extends State<
 
   void updateCurrent(E e) {
     current = e;
-    debugPrint("current: ${current}");
+    debugPrint("current: $current");
   }
 }
 

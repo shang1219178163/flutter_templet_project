@@ -8,12 +8,10 @@ class NHorizontalScrollWidgetDemo extends StatefulWidget {
   final String? title;
 
   @override
-  _NHorizontalScrollWidgetDemoState createState() =>
-      _NHorizontalScrollWidgetDemoState();
+  _NHorizontalScrollWidgetDemoState createState() => _NHorizontalScrollWidgetDemoState();
 }
 
-class _NHorizontalScrollWidgetDemoState
-    extends State<NHorizontalScrollWidgetDemo> {
+class _NHorizontalScrollWidgetDemoState extends State<NHorizontalScrollWidgetDemo> {
   List<String> imgUrls = R.image.urls;
 
   var _items = <AttrCarouseItem>[];
@@ -21,16 +19,13 @@ class _NHorizontalScrollWidgetDemoState
   @override
   void initState() {
     // TODO: implement initState
-    _items = List.generate(imgUrls.length,
-        (index) => AttrCarouseItem(icon: imgUrls[index], title: "标题_$index"));
+    _items = List.generate(imgUrls.length, (index) => AttrCarouseItem(icon: imgUrls[index], title: "标题_$index"));
 
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),

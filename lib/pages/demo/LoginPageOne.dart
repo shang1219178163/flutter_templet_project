@@ -1,16 +1,12 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_account_sheet.dart';
-import 'package:flutter_templet_project/basicWidget/n_account_sheet_new.dart';
 import 'package:flutter_templet_project/basicWidget/n_origin_sheet.dart';
 import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
-import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/network/RequestConfig.dart';
 import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:get/get.dart';
-import 'package:tuple/tuple.dart';
 
 class LoginPageOne extends StatefulWidget {
   const LoginPageOne({Key? key, this.title}) : super(key: key);
@@ -49,7 +45,7 @@ class _LoginPageOneState extends State<LoginPageOne> {
   initData() {
     final phone = IntExt.random(max: 200000000, min: 100000000);
     final pwd = IntExt.random(max: 200000, min: 100000);
-    final result = "${1.generateChars()}${pwd}";
+    final result = "${1.generateChars()}$pwd";
     accountController.text = "$phone";
     pwdController.text = result;
     checkLogin();

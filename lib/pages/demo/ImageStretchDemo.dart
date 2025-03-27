@@ -97,7 +97,7 @@ class _ImageStretchDemoState extends State<ImageStretchDemo> {
           final lineMetric = textPainter.computeLineMetrics()[0];
           final textWidth = lineMetric.width;
 
-          debugPrint("textWidth:${textWidth}");
+          debugPrint("textWidth:$textWidth");
 
           return Stack(
             children: [

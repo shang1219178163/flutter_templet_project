@@ -55,7 +55,7 @@ class TagsRootModel {
   Map<String, dynamic> toJson() {
     final data = Map<String, dynamic>();
     data['code'] = code;
-    if (this.result != null) {
+    if (result != null) {
       data['result'] = result!.map((v) => v.toJson()).toList();
     }
     data['application'] = application;

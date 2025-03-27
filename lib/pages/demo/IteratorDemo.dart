@@ -91,13 +91,13 @@ class _IteratorDemoState extends State<IteratorDemo> {
   }
 
   Stream<String> fetchEmojis(int count) async* {
-    for (int i = 0; i < count; i++) {
+    for (var i = 0; i < count; i++) {
       yield await fetchEmoji(i);
     }
   }
 
   Future<String> fetchEmoji(int count) async {
-    Runes first = Runes('\u{1f47f}');
+    var first = Runes('\u{1f47f}');
     DLog.d('加载开始--${DateTime.now().toIso8601String()}');
     await Future.delayed(Duration(milliseconds: 500)); //模拟耗时
     DLog.d('加载结束--${DateTime.now().toIso8601String()}');
@@ -105,8 +105,8 @@ class _IteratorDemoState extends State<IteratorDemo> {
   }
 
   Iterable<String> fetchEmojisNew(int count) sync* {
-    Runes first = Runes('\u{1f47f}');
-    for (int i = 0; i < count; i++) {
+    var first = Runes('\u{1f47f}');
+    for (var i = 0; i < count; i++) {
       yield String.fromCharCodes(first.map((e) => e + i));
     }
   }

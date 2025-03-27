@@ -6,11 +6,8 @@
 //  Copyright © 3/13/23 shang. All rights reserved.
 //
 
-import 'package:dart_ping/dart_ping.dart';
-import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -20,8 +17,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/APPThemeSettings.dart';
 import 'package:flutter_templet_project/basicWidget/error_custom_widget.dart';
 import 'package:flutter_templet_project/cache/cache_service.dart';
-import 'package:flutter_templet_project/extension/dlog.dart';
-import 'package:flutter_templet_project/extension/route_ext.dart';
 import 'package:flutter_templet_project/network/RequestConfig.dart';
 import 'package:flutter_templet_project/provider/color_filtered_provider.dart';
 import 'package:flutter_templet_project/provider/notifier_demo.dart';
@@ -40,7 +35,6 @@ import 'package:flutter_templet_project/vendor/isar/provider/change_notifier/db_
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:route_stack_manager/route_stack_manager.dart';
-import 'package:tuple/tuple.dart';
 
 // void main() {
 //   runZonedGuarded(() async {

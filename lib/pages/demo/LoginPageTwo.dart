@@ -1,8 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/model/user_model.dart';
-import 'package:provider/provider.dart';
-import 'package:flutter_templet_project/extension/string_ext.dart';
 
 class LoginPageTwo extends StatefulWidget {
   const LoginPageTwo({Key? key, this.title}) : super(key: key);
@@ -25,10 +21,8 @@ class _LoginPageTwoState extends State<LoginPageTwo> {
     // 自动填充上次登录的用户名，填充后将焦点定位到密码输入框
     // _unameController.text = Global.profile.lastLogin;
     _unameController.text = "Global.profile.lastLogin";
-    if (_unameController.text != null) {
-      _nameAutoFocus = false;
-    }
-    super.initState();
+    _nameAutoFocus = false;
+      super.initState();
   }
 
   @override

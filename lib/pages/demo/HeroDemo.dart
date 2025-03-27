@@ -1,8 +1,6 @@
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_network_image.dart';
-import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/util/R.dart';
 
 class HeroDemo extends StatefulWidget {
@@ -61,8 +59,8 @@ class _HeroDemoState extends State<HeroDemo> {
         children: <Widget>[
           LayoutBuilder(
               builder: (BuildContext context, BoxConstraints constraints) {
-            double spacing = 8;
-            double runSpacing = 8;
+            var spacing = 8.0;
+            var runSpacing = 8.0;
 
             final rowCount = 4;
             final itemWidth =

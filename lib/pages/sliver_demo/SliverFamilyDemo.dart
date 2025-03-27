@@ -59,8 +59,7 @@ class _SliverFamilyDemoState extends State<SliverFamilyDemo> {
           dense: true,
           title: Text(e.item1),
           subtitle: Text(e.item2),
-          trailing: Icon(Icons.arrow_forward_ios_rounded,
-              color: Colors.grey.withOpacity(0.5)),
+          trailing: Icon(Icons.arrow_forward_ios_rounded, color: Colors.grey.withOpacity(0.5)),
           onTap: () {
             Navigator.of(context).push(MaterialPageRoute(builder: (context) {
               return e.item3;
@@ -81,15 +80,12 @@ class SliverFamilyPageViewDemo extends StatefulWidget {
   const SliverFamilyPageViewDemo({Key? key, this.title}) : super(key: key);
 
   @override
-  _SliverFamilyPageViewDemoState createState() =>
-      _SliverFamilyPageViewDemoState();
+  _SliverFamilyPageViewDemoState createState() => _SliverFamilyPageViewDemoState();
 }
 
 class _SliverFamilyPageViewDemoState extends State<SliverFamilyPageViewDemo> {
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),

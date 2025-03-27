@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/routes/APPRouter.dart';
 import 'package:flutter_templet_project/vendor/video_player/video_player_controller.dart';
 import 'package:get/get.dart';
 

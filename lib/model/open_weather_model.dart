@@ -70,7 +70,7 @@ class OpenWeatherRoot {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> map = {};
+    final map = <String, dynamic>{};
     if (coord != null) {
       map['coord'] = coord!.toJson();
     }
@@ -119,7 +119,7 @@ class OpenWeatherCoord {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> map = {};
+    final map = <String, dynamic>{};
     map['lon'] = lon;
     map['lat'] = lat;
     return map;
@@ -153,7 +153,7 @@ class OpenWeather {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> map = {};
+    final map = <String, dynamic>{};
     map['id'] = id;
     map['main'] = main;
     map['description'] = description;
@@ -205,7 +205,7 @@ class OpenWeatherMain {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> map = {};
+    final map = <String, dynamic>{};
     map['temp'] = temp;
     map['feels_like'] = feelsLike;
     map['temp_min'] = tempMin;
@@ -241,7 +241,7 @@ class OpenWeatherWind {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> map = {};
+    final map = <String, dynamic>{};
     map['speed'] = speed;
     map['deg'] = deg;
     map['gust'] = gust;
@@ -264,7 +264,7 @@ class OpenWeatherCloud {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> map = {};
+    final map = <String, dynamic>{};
     map['all'] = all;
     return map;
   }
@@ -292,7 +292,7 @@ class OpenWeatherRain {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> map = {};
+    final map = <String, dynamic>{};
     map['rain1h'] = rain1h;
     map['rain3h'] = rain3h;
     map['3h'] = d3h;
@@ -331,7 +331,7 @@ class OpenWeatherSys {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> map = {};
+    final map = <String, dynamic>{};
     map['type'] = type;
     map['id'] = id;
     map['country'] = country;

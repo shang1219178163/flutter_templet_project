@@ -6,6 +6,8 @@
 //  Copyright © 12/12/22 shang. All rights reserved.
 //
 
+// ignore_for_file: unused_import
+
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
@@ -109,7 +111,8 @@ extension ScrollControllerExt on ScrollController {
     var offset = value + scrollController.offset;
     debugPrint("scrollToItemNew local:$local, size:$size, offset: ${scrollController.offset}, offset: $offset");
 
-    var padding = MediaQueryData.fromView(ui.window).padding;
+    final keyView = WidgetsBinding.instance.platformDispatcher.views.first;
+    var padding = MediaQueryData.fromView(keyView).padding;
     var paddingStart = scrollDirection == Axis.horizontal ? padding.left : padding.top;
 
     final extentAfter = scrollController.position.extentAfter;

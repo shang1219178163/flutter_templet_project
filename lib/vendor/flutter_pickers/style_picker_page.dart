@@ -61,7 +61,7 @@ class _StylePickerPageState extends State<StylePickerPage> {
   }
 
   PickerStyle customizeStyle() {
-    double menuHeight = 46.0;
+    var menuHeight = 46.0;
     Widget _headMenuView = Container(
         color: Colors.deepPurple[400],
         height: menuHeight,

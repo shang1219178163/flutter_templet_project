@@ -20,8 +20,6 @@ class TableDemo extends StatefulWidget {
 class _TableDemoState extends State<TableDemo> {
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
@@ -58,13 +56,11 @@ class _TableDemoState extends State<TableDemo> {
               ),
               Container(
                 padding: EdgeInsets.all(8),
-                child: Text(
-                    titles.indexOf(e) % 2 == 0 ? 'content' : 'content' * 13),
+                child: Text(titles.indexOf(e) % 2 == 0 ? 'content' : 'content' * 13),
               ),
               Container(
                 padding: EdgeInsets.all(8),
-                child:
-                    Text(titles.indexOf(e) % 2 == 0 ? 'three' : 'three' * 13),
+                child: Text(titles.indexOf(e) % 2 == 0 ? 'three' : 'three' * 13),
               ),
             ]))
         .toList();

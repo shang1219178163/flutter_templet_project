@@ -15,7 +15,6 @@ class _Uint8ListDemoState extends State<Uint8ListDemo> {
   @override
   Widget build(BuildContext context) {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.title ?? "$widget"),
@@ -31,11 +30,12 @@ class _Uint8ListDemoState extends State<Uint8ListDemo> {
                   ))
               .toList(),
         ),
-        body: Text(arguments.toString()));
+        body: Text(arguments.toString()),
+      );
   }
 
   onPress() {
-    Uint8List bytes = Uint8List.fromList([63, 158, 184, 82]);
+    var bytes = Uint8List.fromList([63, 158, 184, 82]);
     List<int> floatList = bytes.buffer.asInt8List();
     debugPrint(floatList.toString());
   }

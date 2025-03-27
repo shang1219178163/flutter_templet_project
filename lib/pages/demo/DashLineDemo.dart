@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_dash_line.dart';
-import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:tuple/tuple.dart';
 
 class DashLineDemo extends StatefulWidget {

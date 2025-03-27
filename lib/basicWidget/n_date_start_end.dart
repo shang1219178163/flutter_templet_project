@@ -6,7 +6,6 @@
 //  Copyright © 2023/12/29 shang. All rights reserved.
 //
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_pickers/time_picker/model/pduration.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';

@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/CircleSectorProgressIndicator.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
@@ -29,11 +28,11 @@ class _ProgressClipperDemoState extends State<ProgressClipperDemo> {
           'done',
         ]
             .map((e) => TextButton(
+                  onPressed: onPressed,
                   child: Text(
                     e,
                     style: TextStyle(color: Colors.white),
                   ),
-                  onPressed: onPressed,
                 ))
             .toList(),
       ),

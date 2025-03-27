@@ -260,7 +260,7 @@ class _ImChatPageState extends State<ImChatPage>
                       final isOwner = e.isOwner == true;
                       return InkWell(
                         onTap: () {
-                          debugPrint("index: ${index}, $e");
+                          debugPrint("index: $index, $e");
                         },
                         child: buildChatCell(
                           modelIndex: index,
@@ -419,7 +419,7 @@ class _ImChatPageState extends State<ImChatPage>
 
     final borderRadius = BorderRadius.circular(4);
 
-    Widget child = buildTextChild(
+    var child = buildTextChild(
       text: text,
       isOwner: true,
       borderRadius: borderRadius,
@@ -605,7 +605,7 @@ class _ImChatPageState extends State<ImChatPage>
                   hideAppBar: true,
                   hideSelected: true,
                   onChanged: (val) {
-                    debugPrint("onChanged: ${val}");
+                    debugPrint("onChanged: $val");
                     _inputController.text += val;
                     debugPrint("onChanged _inputController.text: ${_inputController.text}");
 
@@ -615,7 +615,7 @@ class _ImChatPageState extends State<ImChatPage>
                     _inputController.deleteChar();
                   },
                   onSend: (val) {
-                    debugPrint("onSend: ${val}");
+                    debugPrint("onSend: $val");
                     sendTextMessage();
                   },
                 ),
@@ -683,7 +683,7 @@ class _ImChatPageState extends State<ImChatPage>
     required ValueChanged<int> cb,
   }) {
     return Container(
-      color: Color(0xe3e3e3),
+      color: Color(0x00e3e3e3),
       padding: EdgeInsets.only(
         top: 16.w,
         left: 16.w,

@@ -34,23 +34,13 @@ extension FutureWidgetEx<T> on Future<T> {
     );
   }
 
-  /// 打印代码执行时间
-  @Deprecated("已弃用,请使用 trackTime")
-  Future codeExecution() async {
-    final stime = DateTime.now();
-    await this;
-    var etime = DateTime.now();
-    final inMilliseconds = etime.difference(stime).inMilliseconds;
-    debugPrint("codeExecution $etime 执行时长：$inMilliseconds 毫秒.");
-  }
-
   /// 统计 Future 的耗时
   Future<T> trackTime(String methodName, {Function(int time)? onResult}) async {
     final stopwatch = Stopwatch()..start();
     try {
-      T result = await this;
+      var result = await this;
       stopwatch.stop();
-      int elapsed = stopwatch.elapsedMilliseconds;
+      var elapsed = stopwatch.elapsedMilliseconds;
 
       // 如果提供了回调，则回调耗时
       onResult?.call(elapsed);

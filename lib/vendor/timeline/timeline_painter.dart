@@ -1,8 +1,5 @@
-import 'dart:async';
-import 'dart:ui' as ui;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 ///自定义视图展示
 class TimelinePainter extends CustomPainter {

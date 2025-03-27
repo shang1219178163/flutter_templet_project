@@ -5,10 +5,9 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/date_time_ext.dart';
+import 'package:flutter_templet_project/vendor/table_calendar/table_calendar_utils.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:tuple/tuple.dart';
-
-import 'package:flutter_templet_project/vendor/table_calendar/table_calendar_utils.dart';
 
 class TableBasicsExample extends StatefulWidget {
   const TableBasicsExample({Key? key}) : super(key: key);
@@ -221,8 +220,8 @@ class _TableBasicsExampleState extends State<TableBasicsExample> {
                         borderRadius: BorderRadius.circular(12.0),
                       ),
                       child: ListTile(
-                        onTap: () => debugPrint('${e.title}'),
-                        title: Text('${e.title}'),
+                        onTap: () => debugPrint(e.title),
+                        title: Text(e.title),
                       ),
                     );
                   },

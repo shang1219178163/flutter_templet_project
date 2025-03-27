@@ -21,9 +21,7 @@ import 'package:flutter_templet_project/basicWidget/n_menu_anchor.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/extension/alignment_ext.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
-import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
-import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/util/R.dart';
 
 class BoxDemo extends StatefulWidget {
@@ -57,7 +55,7 @@ class _BoxDemoState extends State<BoxDemo> {
             NMenuAnchor<Alignment>(
               values: values,
               initialItem: values.first,
-              cbName: (e) => e.toString() ?? "请选择",
+              cbName: (e) => e.toString(),
               equal: (a, b) => a == b,
               onChanged: (e) {
                 selectedItemVN.value = e;
@@ -101,12 +99,12 @@ class _BoxDemoState extends State<BoxDemo> {
               child: buildOverflowBox(alignment: Alignment.topRight),
             ),
             NSectionBox(
-              title: "buildBage",
-              child: buildBage(),
+              title: "buildBadge",
+              child: buildBadge(),
             ),
             NSectionBox(
-              title: "buildAvatarBage",
-              child: buildAvatarBage(),
+              title: "buildAvatarBadge",
+              child: buildAvatarBadge(),
             ),
           ],
         ),
@@ -141,7 +139,7 @@ class _BoxDemoState extends State<BoxDemo> {
 
   /// SizedOverflowBox
   Widget buildSizedOverflowBox() {
-    Alignment alignment = Alignment.topRight;
+    var alignment = Alignment.topRight;
     alignment = selectedItemVN.value;
 
     final size = Size(100, 100);
@@ -270,10 +268,10 @@ class _BoxDemoState extends State<BoxDemo> {
   var badge = 9;
   var badgeStr = "999+";
 
-  Widget buildBage() {
-    double width = 60;
-    double height = 60;
-    double size = 20;
+  Widget buildBadge() {
+    var width = 60.0;
+    var height = 60.0;
+    var size = 20.0;
 
     final padding = EdgeInsets.symmetric(horizontal: 4, vertical: 2);
 
@@ -332,7 +330,7 @@ class _BoxDemoState extends State<BoxDemo> {
     );
   }
 
-  Widget buildAvatarBage() {
+  Widget buildAvatarBadge() {
     return InkWell(
       onTap: () {
         badge = badge < 999 ? badge * 10 : 9;

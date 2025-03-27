@@ -110,7 +110,7 @@ class _JPushInfoPageState extends State<JPushInfoPage> with DebugBottomSheetMixi
                           OutlinedButton(
                             onPressed: () {
                               // 将文本复制到剪切板
-                              _copyToClipboard(isarUrl ?? "");
+                              _copyToClipboard(isarUrl);
                             },
                             child: const Text("复制"),
                           ),

@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
-import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/util/R.dart';
-import 'package:get_storage/get_storage.dart';
-import 'package:tuple/tuple.dart';
 
 class AppBarDemo extends StatefulWidget {
   AppBarDemo({Key? key, this.title}) : super(key: key);

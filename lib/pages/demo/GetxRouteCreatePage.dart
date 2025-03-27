@@ -92,11 +92,11 @@ static const String patientGroupPage = '/patientGroupPage';
               ]
                   .map(
                     (e) => TextButton(
+                      onPressed: onCreate,
                       child: Text(
                         e,
                         style: TextStyle(color: Colors.white),
                       ),
-                      onPressed: onCreate,
                     ),
                   )
                   .toList(),
@@ -146,7 +146,7 @@ static const String patientGroupPage = '/patientGroupPage';
       final name = list[1].trim();
       // DLog.d("name: $name");
       final result = "GetPage(name: APPRouter.$name, page: () => const ${name.toCapitalize()}()),\n";
-      DLog.d("$result");
+      DLog.d(result);
       return result;
     }).toList();
     // DLog.d("list: \n$list");

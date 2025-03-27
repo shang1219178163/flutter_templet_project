@@ -2,9 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import 'package:flutter/material.dart';
-import 'package:table_calendar/table_calendar.dart';
-
 import 'package:flutter_templet_project/vendor/table_calendar/table_calendar_utils.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 class TableEventsExample extends StatefulWidget {
   const TableEventsExample({Key? key}) : super(key: key);
@@ -146,8 +145,8 @@ class _TableEventsExampleState extends State<TableEventsExample> {
                         borderRadius: BorderRadius.circular(12.0),
                       ),
                       child: ListTile(
-                        onTap: () => debugPrint('${e.title}'),
-                        title: Text('${e.title}'),
+                        onTap: () => debugPrint(e.title),
+                        title: Text(e.title),
                       ),
                     );
                   },

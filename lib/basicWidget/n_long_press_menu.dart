@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_pair.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
-import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:tuple/tuple.dart';
 
 /// 长按黑色菜单
@@ -112,9 +111,9 @@ class NLongPressMenuOne extends StatelessWidget {
       child: LayoutBuilder(
         builder: (context, constraints) {
           // 获取 Wrap 父容器的宽度
-          double containerWidth = constraints.maxWidth;
+          var containerWidth = constraints.maxWidth;
           // 计算每行可以显示的组件数
-          int crossAxisCount = (containerWidth / (itemWidthNew + 0)).floor();
+          var crossAxisCount = (containerWidth / (itemWidthNew + 0)).floor();
           // 计算行数
           final rowCount = items.length % crossAxisCount == 0
               ? items.length / crossAxisCount

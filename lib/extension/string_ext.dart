@@ -7,7 +7,6 @@
 //
 
 import 'dart:convert';
-import 'dart:typed_data';
 import 'package:flutter/cupertino.dart';
 
 extension StringExt on String {
@@ -104,6 +103,7 @@ extension StringExt on String {
 
   /// 针对 Dart 字符串优化的 64 位哈希算法 FNV-1a
   int get fastHash {
+    // ignore: avoid_js_rounded_ints
     var hash = 0xcbf29ce484222325;
 
     var i = 0;
@@ -161,7 +161,7 @@ extension StringExt on String {
     String fill = ' ',
     Alignment alignment = Alignment.center,
   }) {
-    String text = this;
+    var text = this;
 
     final fillCount = maxLength - text.length;
     final left = List.filled(fillCount ~/ 2, fill);
@@ -187,13 +187,13 @@ extension StringExt on String {
     String absent = "0",
     bool caseSensitive = true,
   }) {
-    String version1 = this;
+    var version1 = this;
     // 将版本号字符串分割成整数列表
-    List<String> v1 = version1.split(separator).toList();
-    List<String> v2 = version2.split(separator).toList();
+    var v1 = version1.split(separator).toList();
+    var v2 = version2.split(separator).toList();
 
     // 获取最大长度
-    int maxLength = v1.length > v2.length ? v1.length : v2.length;
+    var maxLength = v1.length > v2.length ? v1.length : v2.length;
 
     // 补全较短的版本号列表
     for (var i = v1.length; i < maxLength; i++) {

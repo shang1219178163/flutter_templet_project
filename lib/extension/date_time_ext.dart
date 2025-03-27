@@ -273,7 +273,7 @@ extension DateTimeExt on DateTime {
   List<DateTime> getCalenderCurrentPage(DateTime date) {
     final dateList = <DateTime>[];
     final newDate = DateTime(date.year, date.month, 0);
-    int previousMothDay = 0;
+    var previousMothDay = 0;
     if (newDate.weekday < 7) {
       previousMothDay = newDate.weekday;
       for (var i = 1; i <= previousMothDay; i++) {

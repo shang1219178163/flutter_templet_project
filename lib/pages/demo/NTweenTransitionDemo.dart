@@ -77,7 +77,7 @@ class _NTweenTransitionDemoState extends State<NTweenTransitionDemo> {
             return Container(
               width: 200,
               height: 200,
-              child: Text("${animation.value.toStringAsFixed(2)}"),
+              child: Text(animation.value.toStringAsFixed(2)),
             );
           },
         );

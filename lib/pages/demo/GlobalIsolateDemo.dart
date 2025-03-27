@@ -16,28 +16,28 @@ class _GlobalIsolateDemoState extends State<GlobalIsolateDemo> {
   @override
   Widget build(BuildContext context) {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title ?? "$widget"),
-          actions: [
-            'done',
-          ]
-              .map((e) => TextButton(
-                    child: Text(
-                      e,
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    onPressed: () => test(),
-                  ))
-              .toList(),
-        ),
-        body: Text(arguments.toString()));
+      appBar: AppBar(
+        title: Text(widget.title ?? "$widget"),
+        actions: [
+          'done',
+        ]
+            .map((e) => TextButton(
+                  child: Text(
+                    e,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () => test(),
+                ))
+            .toList(),
+      ),
+      body: Text(arguments.toString()),
+    );
   }
 
   test() async {
     // await GlobalIsolate.init();
-    int a = 10;
+    var a = 10;
 
     final result = await GlobalIsolate.isolateDo(
         params: {"a": a},

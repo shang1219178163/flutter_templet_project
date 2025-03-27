@@ -1,7 +1,7 @@
 import 'dart:convert';
-import 'package:flutter/material.dart';
 
 import 'package:azlistview/azlistview.dart';
+import 'package:flutter/material.dart';
 import 'package:github_language_colors/github_language_colors.dart';
 
 class CityModel extends ISuspensionBean {
@@ -41,7 +41,7 @@ class ContactInfo extends ISuspensionBean {
 
   String? img;
   String? id;
-  String? firstletter;
+  String? firstLetter;
 
   ContactInfo({
     required this.name,
@@ -51,20 +51,20 @@ class ContactInfo extends ISuspensionBean {
     this.iconData,
     this.img,
     this.id,
-    this.firstletter,
+    this.firstLetter,
   });
 
   ContactInfo.fromJson(Map<String, dynamic> json)
       : name = json['name'],
         img = json['img'],
         id = json['id']?.toString(),
-        firstletter = json['firstletter'];
+        firstLetter = json['firstLetter'];
 
   Map<String, dynamic> toJson() => {
 //        'id': id,
         'name': name,
         'img': img,
-//        'firstletter': firstletter,
+//        'firstLetter': firstLetter,
 //        'tagIndex': tagIndex,
 //        'namePinyin': namePinyin,
 //        'isShowSuspension': isShowSuspension
@@ -86,12 +86,12 @@ class Languages extends GithubLanguage with ISuspensionBean {
 
   @override
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> map = super.toJson();
-    void addIfNonNull(String fieldName, dynamic value) {
-      if (value != null) {
-        map[fieldName] = value;
-      }
-    }
+    final map = super.toJson();
+    // void addIfNonNull(String fieldName, dynamic value) {
+    //   if (value != null) {
+    //     map[fieldName] = value;
+    //   }
+    // }
 
 //    addIfNonNull('tagIndex', tagIndex);
     return map;

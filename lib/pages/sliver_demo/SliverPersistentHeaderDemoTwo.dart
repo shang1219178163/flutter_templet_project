@@ -1,17 +1,13 @@
 import 'package:easy_refresh/easy_refresh.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_templet_project/basicWidget/n_pair.dart';
 import 'package:flutter_templet_project/basicWidget/n_resize_switch.dart';
 import 'package:flutter_templet_project/basicWidget/n_sliver_persistent_header_delegate.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
-import 'package:flutter_templet_project/pages/demo/HitTestDemo.dart';
 import 'package:flutter_templet_project/util/R.dart';
 import 'package:get/get.dart';
-import 'package:visibility_detector/visibility_detector.dart';
 
 class SliverPersistentHeaderDemoTwo extends StatefulWidget {
   const SliverPersistentHeaderDemoTwo({
@@ -22,14 +18,11 @@ class SliverPersistentHeaderDemoTwo extends StatefulWidget {
   final Map<String, dynamic>? arguments;
 
   @override
-  State<SliverPersistentHeaderDemoTwo> createState() =>
-      _SliverPersistentHeaderDemoTwoState();
+  State<SliverPersistentHeaderDemoTwo> createState() => _SliverPersistentHeaderDemoTwoState();
 }
 
-class _SliverPersistentHeaderDemoTwoState
-    extends State<SliverPersistentHeaderDemoTwo> {
-  bool get hideApp =>
-      "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
+class _SliverPersistentHeaderDemoTwoState extends State<SliverPersistentHeaderDemoTwo> {
+  bool get hideApp => "$widget".toLowerCase().endsWith(Get.currentRoute.toLowerCase());
 
   final _scrollController = ScrollController();
 
@@ -70,26 +63,25 @@ class _SliverPersistentHeaderDemoTwoState
   }
 
   Widget buildHeader() {
-    double min = context.paddingTop;
-    double max = 250;
+    var min = context.paddingTop;
+    var max = 250.0;
     return NSliverPersistentHeaderBuilder(
       pinned: pinned,
       floating: floating,
       min: min,
       max: max,
-      builder:
-          (BuildContext context, double shrinkOffset, bool overlapsContent) {
+      builder: (BuildContext context, double shrinkOffset, bool overlapsContent) {
         // 根据 shrinkOffset 动态调整标题内容大小
-        double sizeFactor = 1 - (shrinkOffset / (max - min));
-        double titleSize = 30 * sizeFactor; // 标题文字的动态大小
+        var sizeFactor = 1 - (shrinkOffset / (max - min));
+        var titleSize = 30 * sizeFactor; // 标题文字的动态大小
 
-        double leaveOffset = (max - shrinkOffset);
+        var leaveOffset = (max - shrinkOffset);
         // double progress = shrinkOffset / (max - min);
-        double progress = shrinkOffset / (max - 0);
+        var progress = shrinkOffset / (max - 0);
 
         final isExpanded = progress < 1.0;
 
-        double opacity = (1.0 - progress).clamp(0, 1);
+        var opacity = (1.0 - progress).clamp(0.0, 1.0);
 
         return Stack(
           fit: StackFit.expand,
@@ -105,7 +97,7 @@ class _SliverPersistentHeaderDemoTwoState
             ),
             if (progress >= 0.5)
               AnimatedOpacity(
-                opacity: 1 - opacity,
+                opacity: 1.0 - opacity,
                 duration: Duration(milliseconds: 100),
                 child: Text(
                   "Resizable Header ${{

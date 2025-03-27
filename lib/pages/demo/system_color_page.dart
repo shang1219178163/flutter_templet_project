@@ -6,14 +6,11 @@
 //  Copyright © 2022/9/17 shang. All rights reserved.
 //
 
-import 'dart:math';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/search_results_list_view.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
 
-import 'package:flutter_templet_project/extension/widget_ext.dart';
 
 // List<Color> others = [
 //   Colors.transparent,

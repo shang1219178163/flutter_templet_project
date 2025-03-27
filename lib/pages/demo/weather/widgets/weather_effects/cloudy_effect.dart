@@ -28,7 +28,7 @@ class _CloudyEffectState extends State<CloudyEffect>
     )..repeat();
 
     // 创建云
-    for (int i = 0; i < 5; i++) {
+    for (var i = 0; i < 5; i++) {
       clouds.add(Cloud(
         x: random.nextDouble() * 300 - 100,
         y: 30.0 + random.nextDouble() * 250,
@@ -54,7 +54,7 @@ class _CloudyEffectState extends State<CloudyEffect>
       animation: _controller,
       builder: (context, child) {
         // 更新云的位置
-        for (var cloud in clouds) {
+        for (final cloud in clouds) {
           // 使用动画速度参数调整云移动速度
           cloud.x += cloud.speed * widget.animationSpeed;
           if (cloud.x > size.width + 100) {
@@ -111,7 +111,7 @@ class CloudPainter extends CustomPainter {
     canvas.drawRect(Rect.fromLTWH(0, 0, size.width, size.height), skyPaint);
 
     // 绘制云
-    for (var cloud in clouds) {
+    for (final cloud in clouds) {
       final cloudPaint = Paint()
         ..color = Colors.white.withOpacity(cloud.opacity)
         ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 15);

@@ -42,11 +42,11 @@ class _AsyncDemoState extends State<AsyncDemo> {
               ]
                   .map(
                     (e) => TextButton(
+                      onPressed: onPressed,
                       child: Text(
                         e,
                         style: TextStyle(color: Colors.white),
                       ),
-                      onPressed: onPressed,
                     ),
                   )
                   .toList(),
@@ -65,7 +65,7 @@ class _AsyncDemoState extends State<AsyncDemo> {
             ValueListenableBuilder(
                 valueListenable: resultVN,
                 builder: (context, value, child) {
-                  return Text("$value");
+                  return Text(value);
                 }),
           ],
         ),
@@ -81,7 +81,7 @@ class _AsyncDemoState extends State<AsyncDemo> {
       DLog.d("asyncMethod2: ${await val}");
     });
 
-    String data = ' ';
+    var data = ' ';
 
     var original = utf8.encode(data);
     var compressed = gzip.encode(original);

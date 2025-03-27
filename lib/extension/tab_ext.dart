@@ -28,7 +28,7 @@ extension TabBarExt on TabBar {
     TextStyle? labelStyle,
     TextStyle? unselectedLabelStyle,
     EdgeInsetsGeometry? labelPadding,
-    MaterialStateProperty<Color?>? overlayColor,
+    WidgetStateProperty<Color?>? overlayColor,
     DragStartBehavior? dragStartBehavior,
     MouseCursor? mouseCursor,
     bool? enableFeedback,

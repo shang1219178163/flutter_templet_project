@@ -1,12 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:url_launcher/url_launcher.dart';
-
 import 'package:flutter_templet_project/vendor/timelines_demo/showcase/package_delivery_tracking.dart';
 import 'package:flutter_templet_project/vendor/timelines_demo/showcase/process_timeline.dart';
 import 'package:flutter_templet_project/vendor/timelines_demo/showcase/timeline_status.dart';
 import 'package:flutter_templet_project/vendor/timelines_demo/timelines_widgets.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ShowcasePage extends StatelessWidget {
   const ShowcasePage({Key? key}) : super(key: key);

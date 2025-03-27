@@ -10,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/triangle_path.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
-import 'package:flutter_templet_project/pages/demo/ChipDemo.dart';
 
 class ClipDemo extends StatefulWidget {
   final String? title;
@@ -24,8 +23,6 @@ class ClipDemo extends StatefulWidget {
 class _ClipDemoState extends State<ClipDemo> {
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),

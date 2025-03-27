@@ -1,5 +1,3 @@
-import 'package:flutter/foundation.dart';
-import 'package:flutter/services.dart';
 
 /// app 激活挂起监听
 // class AppLifecycleService {

@@ -8,7 +8,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
-import 'package:flutter_templet_project/extension/widget_ext.dart';
 
 class IndexedStackDemo extends StatefulWidget {
   final String? title;

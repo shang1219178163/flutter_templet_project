@@ -75,8 +75,8 @@ class NTagBox<E> extends StatelessWidget {
         }).toList(),
         if (items.length < 9)
           buildTagItem<String>(
-            e: "+添加${keywords}",
-            titleCb: (e) => "+添加${keywords}",
+            e: "+添加$keywords",
+            titleCb: (e) => "+添加$keywords",
             onSelected: (selected) {
               // debugPrint('onSelected: $selected');
               onAdd.call();

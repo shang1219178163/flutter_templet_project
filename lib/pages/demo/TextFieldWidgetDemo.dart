@@ -6,16 +6,13 @@
 //  Copyright © 2024/8/30 shang. All rights reserved.
 //
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_button.dart';
-import 'package:flutter_templet_project/basicWidget/n_textfield_search.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_text_view.dart';
 import 'package:flutter_templet_project/basicWidget/n_textfield.dart';
-import 'package:flutter_templet_project/extension/build_context_ext.dart';
+import 'package:flutter_templet_project/basicWidget/n_textfield_search.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
-import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:get/get.dart';
 

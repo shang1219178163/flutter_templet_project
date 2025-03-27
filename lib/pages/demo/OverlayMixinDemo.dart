@@ -11,7 +11,6 @@ import 'package:flutter_templet_project/basicWidget/n_cancel_and_confirm_bar.dar
 import 'package:flutter_templet_project/basicWidget/n_menu_anchor.dart';
 import 'package:flutter_templet_project/extension/alignment_ext.dart';
 import 'package:flutter_templet_project/mixin/overlay_mixin.dart';
-import 'package:get/get.dart';
 
 class OverlayMixinDemo extends StatefulWidget {
   const OverlayMixinDemo({

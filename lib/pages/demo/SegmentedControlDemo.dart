@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_chrome_segment.dart';
-import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/enhance/en_sliding_segmented_control/en_sliding_segmented_control.dart';
 import 'package:flutter_templet_project/basicWidget/enhance/en_sliding_segmented_control/n_sliding_segmented_control.dart';
+import 'package:flutter_templet_project/basicWidget/n_chrome_segment.dart';
 import 'package:flutter_templet_project/basicWidget/n_line_segment_view.dart';
 import 'package:flutter_templet_project/basicWidget/n_list_view_segment_control.dart';
+import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
@@ -52,7 +52,6 @@ class _SegmentedControlDemoState extends State<SegmentedControlDemo> {
                 },
                 groupValue: groupValue,
                 onValueChanged: (value) {
-                  // TODO: - fix it
                   DLog.d(value.runtimeType);
                   DLog.d(value.toString());
                   setState(() {

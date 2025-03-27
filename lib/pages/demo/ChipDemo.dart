@@ -7,19 +7,14 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_choice_box_one.dart';
-import 'package:flutter_templet_project/basicWidget/n_indicator_point.dart';
+import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_tag_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_tag_box_new.dart';
-import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
-import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/mixin/cupertino_alert_dialog_mixin.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:tuple/tuple.dart';
 
 class ChipDemo extends StatefulWidget {

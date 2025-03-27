@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/APPThemeSettings.dart';
-import 'package:get/get.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
 
 class FirstPage extends StatefulWidget {

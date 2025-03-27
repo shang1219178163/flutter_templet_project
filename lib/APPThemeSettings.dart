@@ -10,8 +10,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/theme/n_button_theme.dart';
-import 'package:flutter_templet_project/extension/dlog.dart';
-import 'package:flutter_templet_project/extension/list_ext.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:get/get.dart';
 
@@ -213,8 +211,8 @@ class APPThemeService {
 
   /// 自定义行为
   ButtonStyle buildButtonStyle() {
-    return ButtonStyle(elevation: MaterialStateProperty.resolveWith<double>((states) {
-      if (states.contains(MaterialState.pressed)) {
+    return ButtonStyle(elevation: WidgetStateProperty.resolveWith<double>((states) {
+      if (states.contains(WidgetState.pressed)) {
         return 0; // 点击时阴影隐藏
       }
       return 0; // 正常时阴影隐藏
@@ -307,24 +305,24 @@ class APPThemeService {
           ),
       textButtonTheme: TextButtonThemeData(
         style: ButtonStyle(
-          foregroundColor: MaterialStateProperty.all(e),
+          foregroundColor: WidgetStateProperty.all(e),
           // textStyle: MaterialStateProperty.all(TextStyle(color: Colors.red)),
         ),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(e),
+          backgroundColor: WidgetStateProperty.all(e),
         ),
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: ButtonStyle(
-          foregroundColor: MaterialStateProperty.all(e),
+          foregroundColor: WidgetStateProperty.all(e),
           // textStyle: MaterialStateProperty.all(TextStyle(color: e)),
         ),
       ),
       switchTheme: ThemeData.light().switchTheme.copyWith(
             // thumbColor: e,
-            trackColor: MaterialStateProperty.all(e),
+            trackColor: WidgetStateProperty.all(e),
           ),
       bottomNavigationBarTheme: ThemeData.light().bottomNavigationBarTheme.copyWith(
             type: BottomNavigationBarType.fixed,

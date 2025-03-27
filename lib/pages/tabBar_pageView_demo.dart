@@ -7,24 +7,16 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter_templet_project/basicWidget/app_update_card.dart';
 import 'package:flutter_templet_project/basicWidget/list_subtitle_cell.dart';
-import 'package:flutter_templet_project/extension/color_ext.dart';
-import 'package:flutter_templet_project/extension/divider_ext.dart';
+import 'package:flutter_templet_project/basicWidget/section_list_view.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/extension/list_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
-import 'package:flutter_templet_project/main.dart';
-import 'package:flutter_templet_project/basicWidget/app_update_card.dart';
-import 'package:flutter_templet_project/extension/dlog.dart';
-import 'package:flutter_templet_project/basicWidget/section_list_view.dart';
 import 'package:flutter_templet_project/model/mock_data.dart';
 import 'package:flutter_templet_project/pages/tabBar_tabBarView_demo.dart';
-import 'package:flutter_templet_project/routes/AppRouter.dart';
-
 import 'package:get/get.dart';
 import 'package:tuple/tuple.dart';
-
-import 'package:flutter_templet_project/extension/widget_ext.dart';
 
 class TabBarPageViewDemo extends StatefulWidget {
   final String? title;

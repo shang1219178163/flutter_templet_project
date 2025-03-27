@@ -1,20 +1,17 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/im_group_avatar.dart';
 import 'package:flutter_templet_project/basicWidget/n_grid_view.dart';
-import 'package:flutter_templet_project/basicWidget/n_network_image.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
-import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/extension/map_ext.dart';
+import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/model/user_model.dart';
 import 'package:flutter_templet_project/util/R.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
-import 'package:get/get.dart';
 
 class GridViewDemo extends StatefulWidget {
   const GridViewDemo({Key? key}) : super(key: key);
@@ -33,7 +30,7 @@ class _GridViewDemoState extends State<GridViewDemo> {
       .map((e) => UserModel(
             id: e.toString(),
             name: "用户名称${IntExt.random(max: 10000, min: 1000)}",
-            nickName: "${4.generateChars()}",
+            nickName: 4.generateChars(),
             avatar: R.image.urls[IntExt.random(max: R.image.urls.length)],
           ))
       .toList();
@@ -334,14 +331,14 @@ class _GridViewDemoState extends State<GridViewDemo> {
     VoidCallback? onDel,
     int showLength = 10,
   }) {
-    List<UserModel> listNew = list.length > showLength ? list.sublist(0, showLength) : list;
+    var listNew = list.length > showLength ? list.sublist(0, showLength) : list;
 
     List<Widget> items = listNew.map(
       (e) {
         var avatarUrl = e.avatar;
-        String title = e.name ?? '';
+        var title = e.name ?? '';
         // String memberAccount = e.userId ?? "";
-        String subtitle = e.nickName ?? "";
+        var subtitle = e.nickName ?? "";
 
         return ImGroupAvatar(
           onTap: () => onTap?.call(e),

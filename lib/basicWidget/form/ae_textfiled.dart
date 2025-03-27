@@ -8,10 +8,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/editable_text_ext.dart';
-import 'package:flutter_templet_project/util/color_util.dart';
 
 /// AE 输入框组件
 class AeTextfiled extends StatelessWidget {

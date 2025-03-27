@@ -63,7 +63,7 @@ class _NOriginSheetState extends State<NOriginSheet> {
     // );
 
     final currentWidget = Column(
-      children: "${currentEnv}".split(",").map((e) {
+      children: "$currentEnv".split(",").map((e) {
         return Text(
           e,
         );

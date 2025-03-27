@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 
 enum NPlaceholderType {
@@ -42,7 +41,7 @@ class NPlaceholder extends StatelessWidget {
       child: TextButton(
           style: ButtonStyle(
             overlayColor:
-                MaterialStateColor.resolveWith((states) => Colors.transparent),
+                WidgetStateColor.resolveWith((states) => Colors.transparent),
           ),
           onPressed: onTap,
           child: Column(

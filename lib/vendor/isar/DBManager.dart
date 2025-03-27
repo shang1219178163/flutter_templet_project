@@ -56,7 +56,7 @@ class DBManager {
 
   // 通知所有监听器
   void notifyListeners() {
-    for (var ltr in _listeners) {
+    for (final ltr in _listeners) {
       ltr();
     }
   }

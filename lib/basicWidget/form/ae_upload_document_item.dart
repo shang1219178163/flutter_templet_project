@@ -67,7 +67,7 @@ class AeUploadDocumentItem extends StatelessWidget {
   }
 
   Widget buildBody(BuildContext context) {
-    List<AssetUploadDocumentModel> selectedModelsNew = [...selectedModels];
+    var selectedModelsNew = <AssetUploadDocumentModel>[...selectedModels];
 
     return AssetUploadDocumentBox(
       controller: uploadDocumentBoxController,

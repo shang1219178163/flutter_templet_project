@@ -1,6 +1,7 @@
-import 'package:flutter/material.dart';
 import 'dart:ffi';
+
 import 'package:ffi/ffi.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
 
 class FlutterFFiTest extends StatefulWidget {
@@ -58,8 +59,8 @@ class _FlutterFFiTestState extends State<FlutterFFiTest> {
     calloc.free(pointer);
 
     // Use the Utf8 helper to encode zero-terminated UTF-8 strings in native memory.
-    final String myString = '😎👿💬';
-    final Pointer<Utf8> charPointer = myString.toNativeUtf8();
+    final myString = '😎👿💬';
+    final charPointer = myString.toNativeUtf8();
     DLog.d('First byte is: ${charPointer.cast<Uint8>().value}');
     DLog.d(charPointer.toDartString());
     calloc.free(charPointer);

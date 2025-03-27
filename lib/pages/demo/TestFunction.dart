@@ -7,13 +7,11 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_textfield_search.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
+import 'package:flutter_templet_project/basicWidget/n_textfield_search.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/extension/function_ext.dart';
-import 'package:flutter_templet_project/extension/future_ext.dart';
 import 'package:flutter_templet_project/extension/num_ext.dart';
-import 'package:flutter_templet_project/util/Debounce.dart';
 
 class TestFunction extends StatefulWidget {
   const TestFunction({Key? key, this.title}) : super(key: key);
@@ -99,7 +97,7 @@ class _TestFunctionState extends State<TestFunction> {
     debugPrint("b: ${func()}");
 
     final funcOne = repeat(onChanged: (val) {
-      debugPrint("onChanged: ${val}");
+      debugPrint("onChanged: $val");
     });
 
     funcOne();
@@ -171,7 +169,7 @@ class _TestFunctionState extends State<TestFunction> {
   }
 
   Future<void> onExecution() async {
-    await tes().codeExecution();
+    // await tes().codeExecution();
   }
 
   Future<void> tes() async {

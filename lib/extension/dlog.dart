@@ -46,7 +46,7 @@ class DLog {
   static bool enableLog = true;
 
   /// 开启颜色
-  static bool enableColor = false;
+  static bool enableColor = true;
 
   // ANSI 颜色代码
   static const String _ansiReset = '\x1B[0m';

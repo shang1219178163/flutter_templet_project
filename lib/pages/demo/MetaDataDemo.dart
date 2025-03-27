@@ -153,6 +153,7 @@ class _MetaDataDemoState extends State<MetaDataDemo> {
 
   void onTest() {
     // DLog.d("AAA");
+    DLog.enableColor = true;
     try {
       var map = {};
       jsonDecode(map["a"]);

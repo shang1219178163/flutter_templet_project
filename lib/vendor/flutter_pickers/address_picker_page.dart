@@ -92,7 +92,7 @@ class _AddressPickerPageState extends State<AddressPickerPage> {
   }
 
   Widget _checkLocation3() {
-    double menuHeight = 36.0;
+    var menuHeight = 36.0;
     Widget _headMenuView = Container(
         color: Colors.grey[700],
         height: menuHeight,

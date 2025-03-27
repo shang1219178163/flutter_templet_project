@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
-import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
+import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/text_style_ext.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
 /// 长截图
 class LongCaptureWidgetDemo extends StatefulWidget {
@@ -28,11 +27,11 @@ class _LongCaptureWidgetDemoState extends State<LongCaptureWidgetDemo> {
           'done',
         ]
             .map((e) => TextButton(
+                  onPressed: onPressed,
                   child: Text(
                     e,
                     style: TextStyle(color: Colors.white),
                   ),
-                  onPressed: onPressed,
                 ))
             .toList(),
       ),

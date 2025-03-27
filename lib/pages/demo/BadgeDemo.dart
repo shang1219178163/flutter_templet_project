@@ -1,7 +1,7 @@
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_badge.dart';
+import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/util/R.dart';
 import 'package:rotated_corner_decoration/rotated_corner_decoration.dart';
@@ -126,9 +126,9 @@ class _BadgeDemoState extends State<BadgeDemo> {
                   ),
                 ),
                 NSectionBox(
-                  title: "buildBage",
+                  title: "buildBadge",
                   mainAxisSize: MainAxisSize.min,
-                  child: buildBage(),
+                  child: buildBadge(),
                 ),
               ]
                   .map((e) => Container(
@@ -159,7 +159,7 @@ class _BadgeDemoState extends State<BadgeDemo> {
   }
 
   /// 自定义红色角标
-  buildCustomBage({
+  buildCustomBadge({
     required String badge,
     TextStyle? textStyle,
     double minWidth = 20,
@@ -194,10 +194,10 @@ class _BadgeDemoState extends State<BadgeDemo> {
 
   var badge = 9;
 
-  Widget buildBage() {
-    double width = 60;
-    double height = 60;
-    double size = 20;
+  Widget buildBadge() {
+    var width = 60.0;
+    var height = 60.0;
+    // var size = 20.0;
 
     var badgeStr = badge > 99 ? "$badge+" : "$badge";
     return InkWell(
@@ -219,7 +219,7 @@ class _BadgeDemoState extends State<BadgeDemo> {
             fit: BoxFit.fill,
           ),
         ),
-        child: buildCustomBage(badge: badgeStr),
+        child: buildCustomBadge(badge: badgeStr),
       ),
     );
   }

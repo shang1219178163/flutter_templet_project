@@ -6,6 +6,8 @@
 //  Copyright © 2024/8/27 shang. All rights reserved.
 //
 
+// ignore_for_file: use_setters_to_change_properties
+
 import 'dart:async';
 
 import 'package:file_picker/file_picker.dart';
@@ -274,7 +276,7 @@ class _NFileUploadBoxState extends State<NFileUploadBox> {
     }
 
     try {
-      FilePickerResult? pickerResult = await FilePicker.platform.pickFiles(
+      var pickerResult = await FilePicker.platform.pickFiles(
         type: type,
         allowMultiple: allowMultiple,
         allowedExtensions: allowedExtensions,

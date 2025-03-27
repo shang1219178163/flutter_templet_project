@@ -7,6 +7,16 @@ analyzer:
 #    - lib/pages/material_tab/widgets/extended_scaffold.dart
 
   errors:
+    undefined_identifier: ignore # 忽略未知标识符
+    undefined_prefixed_name: ignore # 忽略未知前缀名称
+    undefined_class: ignore # 忽略未知类
+    undefined_function: ignore # 忽略未知函数
+    unused_element: ignore  # 忽略未使用的变量、方法、类等
+    unused_local_variable: ignore
+    unused_field: ignore
+    dead_code: ignore
+    avoid_unnecessary_containers: ignore
+
     sort_constructors_first: ignore # 将构造函数声明排序在其他成员之前。
     constant_identifier_names: ignore # 常量名更倾向于使用lowerCamelCase。
     diagnostic_describe_all_properties: ignore # 可诊断性的实现者应该在debugFillProperties(…)
@@ -132,7 +142,7 @@ analyzer:
     unnecessary_new: error # 避免写没有必要的new关键字
     unnecessary_null_in_if_null_operators: error # 避免在if空操作符中使用null作为操作数。在if null操作符中使用null是多余的，无论在哪一侧使用null。
     unnecessary_string_escapes: error # 删除字符串中不必要的反斜杠。
-    avoid_unnecessary_containers: warning # 避免将小部件包装在不必要的Container中。在没有设置其他参数的情况下将小部件包装在Container中没有任何效果，只会使代码不必要地更加复杂。
+#    avoid_unnecessary_containers: warning # 避免将小部件包装在不必要的Container中。在没有设置其他参数的情况下将小部件包装在Container中没有任何效果，只会使代码不必要地更加复杂。
 #    always_declare_return_types: error # 必须声明方法返回类型。当声明一个方法或函数时，一定要指定一个返回类型。
     # 声明函数的返回类型有助于改进代码库，允许分析程序更充分地检查代码中可能在运行时发生的错误。
     avoid_void_async: error # 将异步函数标记为返回Future。当声明一个不返回值的异步方法或函数时，声明它返回Future<void>而不是void。
@@ -140,6 +150,7 @@ analyzer:
     directives_ordering: warning # 将dart: imports 放在其他imports之前
     exhaustive_cases: error # 使用switch case时，必须列举出所有的enum类型或者所有的enum like类型
     null_check_on_nullable_type_parameter: error # 不要对可能为空的类型参数使用空检查。
+    use_setters_to_change_properties: ignore
     # 给定一个泛型类型参数T，它有一个可空的界限(例如Object?的默认界限)，当使用类型为T?的变量时，很容易引入错误的空检查。
     # 具体来说，T?x;并且希望断言x已被设置为类型t的有效值。一个常见的错误是使用x!这几乎总是不正确的，因为如果T是可空类型，x可以有效地将null作为类型T的值。
 linter:

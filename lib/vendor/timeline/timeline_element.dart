@@ -1,11 +1,10 @@
-import 'package:flutter/material.dart';
+// ignore_for_file: avoid_dynamic_calls
 
+import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/vendor/timeline/common/colors.dart';
 import 'package:flutter_templet_project/vendor/timeline/common/font_const.dart';
-import 'package:flutter_templet_project/vendor/timeline/triangle_painter.dart';
-
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/vendor/timeline/timeline_painter.dart';
+import 'package:flutter_templet_project/vendor/timeline/triangle_painter.dart';
 
 ///构建timeline 组件Widget
 class TimelineElement extends StatelessWidget {
@@ -26,7 +25,7 @@ class TimelineElement extends StatelessWidget {
 
   final Color lineColor;
   final Color backgroundColor;
-  final dynamic model;
+  final Map<String, dynamic> model;
   final bool firstElement;
   final bool lastElement;
   final Animation<double> controller;

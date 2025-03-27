@@ -19,7 +19,7 @@ class DecimalInputFormatter extends TextInputFormatter {
   @override
   TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
     // 正则表达式用于限制最多两位小数
-    String newText = newValue.text;
+    var newText = newValue.text;
 
     // 如果输入是空字符串，允许
     if (newText.isEmpty) {
@@ -28,9 +28,9 @@ class DecimalInputFormatter extends TextInputFormatter {
 
     // 如果输入包含小数点，处理小数位数
     if (newText.contains('.')) {
-      int decimalIndex = newText.indexOf('.');
-      String integerPart = newText.substring(0, decimalIndex);
-      String decimalPart = newText.substring(decimalIndex + 1);
+      var decimalIndex = newText.indexOf('.');
+      var integerPart = newText.substring(0, decimalIndex);
+      var decimalPart = newText.substring(decimalIndex + 1);
 
       if (decimalPart.length > fractionDigits) {
         // 如果小数部分超过两位，截断

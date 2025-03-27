@@ -6,22 +6,15 @@
 //  Copyright © 7/31/21 shang. All rights reserved.
 //
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_templet_project/basicWidget/n_footer.dart';
 import 'package:flutter_templet_project/basicWidget/n_footer_button_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_picker_tool_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/extension/rich_text_ext.dart';
-import 'package:flutter_templet_project/extension/string_ext.dart';
-import 'package:flutter_templet_project/extension/widget_ext.dart';
-import 'package:flutter_templet_project/pages/demo/ScrollbarDemo.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:flutter_templet_project/util/get_util.dart';
-import 'package:tuple/tuple.dart';
 
 class RichTextDemo extends StatefulWidget {
   final String? title;
@@ -229,7 +222,7 @@ xxxx十分重视用户权利及隐私政策并严格按照相关法律法规的�
     PlaceholderAlignment alignment = PlaceholderAlignment.baseline,
     double spacing = 7,
   }) {
-    var departmentDesc = ["第四军医大西京医院", "眼科"].where((e) => e?.isNotEmpty == true).join("·");
+    var departmentDesc = ["第四军医大西京医院", "眼科"].where((e) => e.isNotEmpty == true).join("·");
     departmentDesc *= 6;
 
     var hospitalLevel = "三级甲等";

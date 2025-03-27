@@ -61,7 +61,7 @@ interface class Coding {
   //   throw UnimplementedError();
   // }
 
-  factory Coding.fromJson(Map<String, dynamic>? json) {
+  factory Coding.fromJson() {
     throw UnimplementedError();
   }
 

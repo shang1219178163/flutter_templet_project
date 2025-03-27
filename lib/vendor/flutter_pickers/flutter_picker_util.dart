@@ -179,15 +179,15 @@ class FlutterPickerUtil {
         if (initProvince == province && initCity == city && initTown == town) {
           return;
         }
-        String c1 = city;
-        String t1 = town ?? '';
-        List<String> codes = Address.getCityCodeByName(
+        var c1 = city;
+        var t1 = town ?? '';
+        var codes = Address.getCityCodeByName(
           provinceName: province,
           cityName: city,
           townName: town,
         );
-        String cCode = codes[1];
-        String tCode = '';
+        var cCode = codes[1];
+        var tCode = '';
         if (codes.length > 2) {
           tCode = codes[2];
         } else {

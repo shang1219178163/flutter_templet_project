@@ -7,7 +7,6 @@ import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/cache/file_manager.dart';
 import 'package:flutter_templet_project/extension/snack_bar_ext.dart';
 import 'package:tuple/tuple.dart';
-import 'package:path_provider/path_provider.dart';
 
 class IconConvertPage extends StatefulWidget {
   IconConvertPage({super.key, this.title});
@@ -164,7 +163,7 @@ Map<String, IconData> kIConDic = {
   }
 
   Future<List<String>> readFile({required String path}) async {
-    List<String> contents = [];
+    var contents = <String>[];
     try {
       final file = File(path);
       // Read the file

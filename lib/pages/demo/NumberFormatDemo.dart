@@ -22,22 +22,22 @@ class _NumberFormatDemoState extends State<NumberFormatDemo> {
   @override
   Widget build(BuildContext context) {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title ?? "$widget"),
-          actions: [
-            TextButton(
-                onPressed: () {
-                  handleNumber();
-                },
-                child: Text(
-                  "done",
-                  style: TextStyle(color: Colors.white),
-                )),
-          ],
-        ),
-        body: Text(arguments.toString()));
+      appBar: AppBar(
+        title: Text(widget.title ?? "$widget"),
+        actions: [
+          TextButton(
+              onPressed: () {
+                handleNumber();
+              },
+              child: Text(
+                "done",
+                style: TextStyle(color: Colors.white),
+              )),
+        ],
+      ),
+      body: Text(arguments.toString()),
+    );
   }
 
   void handleNumber() {

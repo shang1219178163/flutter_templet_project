@@ -74,7 +74,7 @@ class CustomSwitch extends StatefulWidget {
 
   Size _textSize(Text text) {
     /// Method to get size of text widget
-    final TextPainter textPainter = TextPainter(
+    final textPainter = TextPainter(
         text: TextSpan(text: text.data, style: text.style),
         maxLines: 1,
         textDirection: TextDirection.ltr)

@@ -1,9 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_templet_project/APPThemeSettings.dart';
 import 'package:flutter_templet_project/cache/cache_service.dart';
-import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/extension/route_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
@@ -12,7 +10,6 @@ import 'package:flutter_templet_project/provider/color_filtered_provider.dart';
 import 'package:flutter_templet_project/routes/APPRouter.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:tuple/tuple.dart';
 
 class AppDrawerMenuPage extends StatefulWidget {
   const AppDrawerMenuPage({Key? key, this.title}) : super(key: key);

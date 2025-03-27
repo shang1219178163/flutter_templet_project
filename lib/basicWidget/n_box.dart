@@ -1,16 +1,13 @@
 import 'dart:ui' as ui;
 
-import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-
+import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/edge_insets_ext.dart';
 
 /// 组件通用外观设置
 class NBox extends StatelessWidget {
   NBox({
-    Key? key,
-    this.title,
-    required this.child,
+    super.key,
     this.width,
     this.height,
     this.opacity = 1.0,
@@ -25,61 +22,62 @@ class NBox extends StatelessWidget {
     this.bgUrl,
     this.imageFit = BoxFit.cover,
     this.boxShadows,
-  }) : super(key: key);
+    this.filter,
+    this.foregroundFilter,
+    required this.child,
+  });
 
-  /// 标题
-  String? title;
-
-  /// 高斯模糊
-  double? width;
 
   /// 高斯模糊
-  double? height;
+  final double? width;
+
+  /// 高斯模糊
+  final double? height;
 
   /// 透明度 0 - 1
-  double? opacity;
+  final double? opacity;
 
   /// 高斯模糊
-  double blur;
+  final double blur;
 
   /// 背景高斯模糊
-  double bgBlur;
+  final double bgBlur;
 
   /// 外间距
-  EdgeInsets margin;
+  final EdgeInsets margin;
 
   /// 内间距
-  EdgeInsets padding;
+  final EdgeInsets padding;
 
   ///四个位置圆角
-  BorderRadius? borderRadius;
+  final BorderRadius? borderRadius;
 
   /// 描边
-  BoxBorder? border;
+  final BoxBorder? border;
 
   /// 组件背景
-  String? bgUrl;
+  final String? bgUrl;
 
   /// 组件背景 fit 模式,默认 BoxFit.cover
-  BoxFit? imageFit;
+  final BoxFit? imageFit;
 
   /// 组件背景颜色
-  Color? bgColor;
+  final Color? bgColor;
 
   /// 渐变色背景色
-  Gradient? bgGradient;
+  final Gradient? bgGradient;
 
   /// 组件子组件
-  Widget child;
+  final Widget child;
 
   /// 阴影
-  List<BoxShadow>? boxShadows;
+  final List<BoxShadow>? boxShadows;
 
   /// 前景滤镜
-  ui.ImageFilter? foregroundFilter;
+  final ui.ImageFilter? foregroundFilter;
 
   /// 背景滤镜
-  ui.ImageFilter? filter;
+  final ui.ImageFilter? filter;
 
   @override
   Widget build(BuildContext context) {
@@ -117,8 +115,7 @@ class NBox extends StatelessWidget {
       String? bgUrl,
       BoxFit? imageFit,
       List<BoxShadow>? boxShadows,
-      required Widget child,
-      bool? hideBlur = false}) {
+      required Widget child}) {
     // add test
     // bgGradient = LinearGradient(
     //     colors: [Colors.red, Colors.green],

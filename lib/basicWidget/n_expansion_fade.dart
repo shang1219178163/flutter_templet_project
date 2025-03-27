@@ -6,6 +6,8 @@
 //  Copyright © 2024/3/6 shang. All rights reserved.
 //
 
+// ignore_for_file: use_setters_to_change_properties
+
 import 'package:flutter/material.dart';
 
 /// 折叠展开菜单

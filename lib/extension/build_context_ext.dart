@@ -105,14 +105,10 @@ extension BuildContextExt on BuildContext {
 
   /// 安全区域底部高度(有刘海的屏幕:34 没有刘海的屏幕0)
   // double get safeAreaBottom => mediaQuery.viewPadding.bottom;
-  double get safeAreaBottom =>
-      Platform.isIOS ? 34 : mediaQuery.padding.bottom + 10;
+  double get safeAreaBottom => Platform.isIOS ? 34 : mediaQuery.padding.bottom + 10;
 
   /// 安全区高度(去除电池栏高度和 iphone底部34)
-  double get safeAreaHeight =>
-      mediaQuery.size.height -
-      mediaQuery.viewPadding.top -
-      mediaQuery.viewPadding.bottom;
+  double get safeAreaHeight => mediaQuery.size.height - mediaQuery.viewPadding.top - mediaQuery.viewPadding.bottom;
 
   /// 状态栏高度
   double get statusBarHeight => safeAreaTop;
@@ -131,8 +127,7 @@ extension BuildContextExt on BuildContext {
   /// 截图(组件必须是 RepaintBoundary)
   Future<ui.Image?> toImage({double? pixelRatio}) async {
     var boundary = findRenderObject() as RenderRepaintBoundary?;
-    var image = await boundary?.toImage(
-        pixelRatio: pixelRatio ?? ui.window.devicePixelRatio);
+    var image = await boundary?.toImage(pixelRatio: pixelRatio ?? devicePixelRatio);
 
     // ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
     // Uint8List? pngBytes = byteData?.buffer.asUint8List() ?? Uint8List(10);

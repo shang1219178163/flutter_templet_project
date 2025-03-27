@@ -7,13 +7,9 @@
 //
 
 import 'package:extended_image/extended_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_templet_project/basicWidget/n_sliver_persistent_header_delegate.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
-import 'package:flutter_templet_project/extension/widget_ext.dart';
-import 'package:flutter_templet_project/pages/demo/FittedBoxDemo.dart';
 import 'package:get/get.dart';
 
 class FlexbleListViewDemo extends StatefulWidget {
@@ -132,7 +128,7 @@ class _FlexbleListViewDemoState extends State<FlexbleListViewDemo> {
   }
 
   Widget buildPage1() {
-    MediaQueryData mediaQuery = MediaQuery.of(context);
+    var mediaQuery = MediaQuery.of(context);
     var min = mediaQuery.viewPadding.top;
 
     final max = 200.0;
@@ -145,7 +141,7 @@ class _FlexbleListViewDemoState extends State<FlexbleListViewDemo> {
             min: min,
             max: max,
             builder: (BuildContext context, double shrinkOffset, bool overlapsContent) {
-              final double opacity = 1 - (shrinkOffset / (max - min));
+              final opacity = 1 - (shrinkOffset / (max - min));
 
               return Container(
                 alignment: Alignment.bottomCenter,
@@ -182,7 +178,7 @@ class _FlexbleListViewDemoState extends State<FlexbleListViewDemo> {
                   color: Colors.green,
                 ),
                 child: SearchBar(
-                  backgroundColor: MaterialStateProperty.all(Colors.white),
+                  backgroundColor: WidgetStateProperty.all(Colors.white),
                   hintText: "search",
                 ),
               );

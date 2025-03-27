@@ -13,8 +13,6 @@ class SvgaImageDemo extends StatefulWidget {
 class _SvgaImageDemoState extends State<SvgaImageDemo> {
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
@@ -25,9 +23,7 @@ class _SvgaImageDemoState extends State<SvgaImageDemo> {
 
   Widget buildBody() {
     return Container(
-      child: SVGASimpleImage(
-          resUrl:
-              "https://github.com/yyued/SVGA-Samples/blob/master/angel.svga?raw=true"),
+      child: SVGASimpleImage(resUrl: "https://github.com/yyued/SVGA-Samples/blob/master/angel.svga?raw=true"),
     );
   }
 }

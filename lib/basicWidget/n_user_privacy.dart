@@ -8,7 +8,6 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_webview_page.dart';
 
 class NUserPrivacy extends StatefulWidget {
   const NUserPrivacy({

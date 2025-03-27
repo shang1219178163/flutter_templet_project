@@ -1,25 +1,17 @@
-import 'package:enhance_expansion_panel/enhance_expansion_panel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-// import 'package:flutter_templet_project/basicWidget/enhance/enhance_expansion/en_expansion_tile.dart';
-
-import 'package:flutter_templet_project/basicWidget/n_cancel_and_confirm_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_choice_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_choice_box_horizontal.dart';
 import 'package:flutter_templet_project/basicWidget/n_filter_drop_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_pair.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
-import 'package:flutter_templet_project/extension/build_context_ext.dart';
-import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
+import 'package:flutter_templet_project/model/fake_data_model.dart';
 import 'package:flutter_templet_project/util/Debounce.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
-import 'package:flutter_templet_project/model/fake_data_model.dart';
-import 'package:get_storage/get_storage.dart';
-import 'package:tuple/tuple.dart';
 
 class DropBoxMutiRowChoicDemo extends StatefulWidget {
   DropBoxMutiRowChoicDemo({Key? key, this.title}) : super(key: key);
@@ -105,7 +97,7 @@ class _DropBoxMutiRowChoicDemoState extends State<DropBoxMutiRowChoicDemo> {
 
   @override
   Widget build(BuildContext context) {
-    bool isSingle = true;
+    var isSingle = true;
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),

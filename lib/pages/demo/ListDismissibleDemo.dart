@@ -6,11 +6,8 @@
 //  Copyright © 5/19/21 shang. All rights reserved.
 //
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:intl/intl.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 
 class ListDismissibleDemo extends StatefulWidget {
   final String? title;
@@ -187,7 +184,7 @@ class _ListDismissibleDemoState extends State<ListDismissibleDemo> {
                 ],
               ),
               Spacer(),
-              ButtonBar(
+              OverflowBar(
                 children: [
                   ElevatedButton(
                     onPressed: () => Navigator.pop(context),

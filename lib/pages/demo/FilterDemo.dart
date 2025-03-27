@@ -10,7 +10,6 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_filter.dart';
-import 'package:flutter_templet_project/basicWidget/n_slider.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 
 class FilterDemo extends StatefulWidget {
@@ -25,8 +24,6 @@ class FilterDemo extends StatefulWidget {
 class _FilterDemoState extends State<FilterDemo> {
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.title ?? "$widget"),
@@ -56,13 +53,12 @@ class _FilterDemoState extends State<FilterDemo> {
                     },
                     child: Container(
                       padding: EdgeInsets.symmetric(vertical: 6),
-                      child:
-                          Text("ImageFilter 显示在组件上边, \nBackdropFilter 显示在组件下边"),
+                      child: Text("ImageFilter 显示在组件上边, \nBackdropFilter 显示在组件下边"),
                     ),
                   ),
                   // buildImageFilter(),
                   // buildBackdropFilter(),
-                  // buildCombin(),
+                  // buildCombine(),
                   NFilter(
                     foregroundFilter: ui.ImageFilter.blur(
                       sigmaX: 2,
@@ -153,29 +149,29 @@ class _FilterDemoState extends State<FilterDemo> {
     );
   }
 
-  _buildNNSlider() {
-    return NSlider(
-      max: 100,
-      leading: IconButton(
-        icon: Icon(Icons.download),
-        onPressed: () {
-          debugPrint("Downloading");
-        },
-      ),
-      onChangeEnd: (double value) {
-        debugPrint('NNSlider onChangeEnd: $value');
-      },
-      trailingBuilder: (context, value) {
-        // final result = (value/100).toStringAsFixed(2);
-        final result = "${value.toStringAsFixed(0)}%";
+  // _buildNNSlider() {
+  //   return NSlider(
+  //     max: 100,
+  //     leading: IconButton(
+  //       icon: Icon(Icons.download),
+  //       onPressed: () {
+  //         debugPrint("Downloading");
+  //       },
+  //     ),
+  //     onChangeEnd: (double value) {
+  //       debugPrint('NNSlider onChangeEnd: $value');
+  //     },
+  //     trailingBuilder: (context, value) {
+  //       // final result = (value/100).toStringAsFixed(2);
+  //       final result = "${value.toStringAsFixed(0)}%";
 
-        return TextButton(
-          onPressed: () {
-            debugPrint("Downloading");
-          },
-          child: Text(result),
-        );
-      },
-    );
-  }
+  //       return TextButton(
+  //         onPressed: () {
+  //           debugPrint("Downloading");
+  //         },
+  //         child: Text(result),
+  //       );
+  //     },
+  //   );
+  // }
 }

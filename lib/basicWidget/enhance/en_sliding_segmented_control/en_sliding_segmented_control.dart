@@ -9,7 +9,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/physics.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 
 // Extracted from https://developer.apple.com/design/resources/.
 
@@ -57,7 +56,7 @@ const double _kTouchYDistanceThreshold = 50.0 * 50.0;
 // The corner radius of the segmented control.
 //
 // Inspected from iOS 13.2 simulator.
-const double _kCornerRadius = 8;
+// const double _kCornerRadius = 8.0;
 
 // The minimum opacity of an unselected segment, when the user presses on the
 // segment and it starts to fadeout.
@@ -444,7 +443,7 @@ class _ENSegmentedControlState<T>
     // If the long press or horizontal drag recognizer gets accepted, we know for
     // sure the gesture is meant for the segmented control. Hand everything to
     // the drag gesture recognizer.
-    final GestureArenaTeam team = GestureArenaTeam();
+    final team = GestureArenaTeam();
     longPress.team = team;
     drag.team = team;
     team.captain = drag;
@@ -503,11 +502,11 @@ class _ENSegmentedControlState<T>
   // Converts local coordinate to segments. This method assumes each segment has
   // the same width.
   T segmentForXPosition(double dx) {
-    final RenderBox renderBox = context.findRenderObject()! as RenderBox;
-    final int numOfChildren = widget.children.length;
+    final renderBox = context.findRenderObject()! as RenderBox;
+    final numOfChildren = widget.children.length;
     assert(renderBox.hasSize);
     assert(numOfChildren >= 2);
-    int index = (dx ~/ (renderBox.size.width / numOfChildren))
+    var index = (dx ~/ (renderBox.size.width / numOfChildren))
         .clamp(0, numOfChildren - 1); // ignore_clamp_double_lint
 
     switch (Directionality.of(context)) {
@@ -521,12 +520,12 @@ class _ENSegmentedControlState<T>
   }
 
   bool _hasDraggedTooFar(DragUpdateDetails details) {
-    final RenderBox renderBox = context.findRenderObject()! as RenderBox;
+    final renderBox = context.findRenderObject()! as RenderBox;
     assert(renderBox.hasSize);
-    final Size size = renderBox.size;
-    final Offset offCenter =
+    final size = renderBox.size;
+    final offCenter =
         details.localPosition - Offset(size.width / 2, size.height / 2);
-    final double l2 =
+    final l2 =
         math.pow(math.max(0.0, offCenter.dx.abs() - size.width / 2), 2) +
                 math.pow(math.max(0.0, offCenter.dy.abs() - size.height / 2), 2)
             as double;
@@ -578,7 +577,7 @@ class _ENSegmentedControlState<T>
     if (isThumbDragging) {
       return;
     }
-    final T segment = segmentForXPosition(details.localPosition.dx);
+    final segment = segmentForXPosition(details.localPosition.dx);
     onPressedChangedByGesture(null);
     if (segment != widget.groupValue) {
       widget.onValueChanged(segment);
@@ -586,7 +585,7 @@ class _ENSegmentedControlState<T>
   }
 
   void onDown(DragDownDetails details) {
-    final T touchDownSegment = segmentForXPosition(details.localPosition.dx);
+    final touchDownSegment = segmentForXPosition(details.localPosition.dx);
     _startedOnSelectedSegment = touchDownSegment == highlighted;
     onPressedChangedByGesture(touchDownSegment);
 
@@ -597,11 +596,11 @@ class _ENSegmentedControlState<T>
 
   void onUpdate(DragUpdateDetails details) {
     if (isThumbDragging) {
-      final T segment = segmentForXPosition(details.localPosition.dx);
+      final segment = segmentForXPosition(details.localPosition.dx);
       onPressedChangedByGesture(segment);
       onHighlightChangedByGesture(segment);
     } else {
-      final T? segment = _hasDraggedTooFar(details)
+      final segment = _hasDraggedTooFar(details)
           ? null
           : segmentForXPosition(details.localPosition.dx);
       onPressedChangedByGesture(segment);
@@ -609,7 +608,7 @@ class _ENSegmentedControlState<T>
   }
 
   void onEnd(DragEndDetails details) {
-    final T? pressed = this.pressed;
+    final pressed = this.pressed;
     if (isThumbDragging) {
       _playThumbScaleAnimation(isExpanding: true);
       if (highlighted != widget.groupValue) {
@@ -650,13 +649,13 @@ class _ENSegmentedControlState<T>
   @override
   Widget build(BuildContext context) {
     assert(widget.children.length >= 2);
-    List<Widget> children = <Widget>[];
-    bool isPreviousSegmentHighlighted = false;
+    var children = <Widget>[];
+    var isPreviousSegmentHighlighted = false;
 
-    int index = 0;
+    var index = 0;
     int? highlightedIndex;
-    for (final MapEntry<T, Widget> entry in widget.children.entries) {
-      final bool isHighlighted = highlighted == entry.key;
+    for (final entry in widget.children.entries) {
+      final isHighlighted = highlighted == entry.key;
       if (isHighlighted) {
         highlightedIndex = index;
       }
@@ -905,17 +904,17 @@ class _ENRenderSegmentedControl<T> extends RenderBox
       (_kSeparatorInset.horizontal + _kSeparatorWidth) * (childCount ~/ 2);
 
   RenderBox? nonSeparatorChildAfter(RenderBox child) {
-    final RenderBox? nextChild = childAfter(child);
+    final nextChild = childAfter(child);
     return nextChild == null ? null : childAfter(nextChild);
   }
 
   @override
   double computeMinIntrinsicWidth(double height) {
-    final int childCount = this.childCount ~/ 2 + 1;
-    RenderBox? child = firstChild;
-    double maxMinChildWidth = 0;
+    final childCount = this.childCount ~/ 2 + 1;
+    var child = firstChild;
+    var maxMinChildWidth = 0.0;
     while (child != null) {
-      final double childWidth = child.getMinIntrinsicWidth(height);
+      final childWidth = child.getMinIntrinsicWidth(height);
       maxMinChildWidth = math.max(maxMinChildWidth, childWidth);
       child = nonSeparatorChildAfter(child);
     }
@@ -925,11 +924,11 @@ class _ENRenderSegmentedControl<T> extends RenderBox
 
   @override
   double computeMaxIntrinsicWidth(double height) {
-    final int childCount = this.childCount ~/ 2 + 1;
-    RenderBox? child = firstChild;
-    double maxMaxChildWidth = 0;
+    final childCount = this.childCount ~/ 2 + 1;
+    var child = firstChild;
+    var maxMaxChildWidth = 0.0;
     while (child != null) {
-      final double childWidth = child.getMaxIntrinsicWidth(height);
+      final childWidth = child.getMaxIntrinsicWidth(height);
       maxMaxChildWidth = math.max(maxMaxChildWidth, childWidth);
       child = nonSeparatorChildAfter(child);
     }
@@ -939,10 +938,10 @@ class _ENRenderSegmentedControl<T> extends RenderBox
 
   @override
   double computeMinIntrinsicHeight(double width) {
-    RenderBox? child = firstChild;
-    double maxMinChildHeight = _kMinSegmentedControlHeight;
+    var child = firstChild;
+    var maxMinChildHeight = _kMinSegmentedControlHeight;
     while (child != null) {
-      final double childHeight = child.getMinIntrinsicHeight(width);
+      final childHeight = child.getMinIntrinsicHeight(width);
       maxMinChildHeight = math.max(maxMinChildHeight, childHeight);
       child = nonSeparatorChildAfter(child);
     }
@@ -951,10 +950,10 @@ class _ENRenderSegmentedControl<T> extends RenderBox
 
   @override
   double computeMaxIntrinsicHeight(double width) {
-    RenderBox? child = firstChild;
-    double maxMaxChildHeight = _kMinSegmentedControlHeight;
+    var child = firstChild;
+    var maxMaxChildHeight = _kMinSegmentedControlHeight;
     while (child != null) {
-      final double childHeight = child.getMaxIntrinsicHeight(width);
+      final childHeight = child.getMaxIntrinsicHeight(width);
       maxMaxChildHeight = math.max(maxMaxChildHeight, childHeight);
       child = nonSeparatorChildAfter(child);
     }
@@ -974,11 +973,11 @@ class _ENRenderSegmentedControl<T> extends RenderBox
   }
 
   Size _calculateChildSize(BoxConstraints constraints) {
-    final int childCount = this.childCount ~/ 2 + 1;
-    double childWidth =
+    final childCount = this.childCount ~/ 2 + 1;
+    var childWidth =
         (constraints.minWidth - totalSeparatorWidth) / childCount;
-    double maxHeight = _kMinSegmentedControlHeight;
-    RenderBox? child = firstChild;
+    var maxHeight = _kMinSegmentedControlHeight;
+    var child = firstChild;
     while (child != null) {
       childWidth = math.max(
           childWidth,
@@ -992,7 +991,7 @@ class _ENRenderSegmentedControl<T> extends RenderBox
     );
     child = firstChild;
     while (child != null) {
-      final double boxHeight = child.getMaxIntrinsicHeight(childWidth);
+      final boxHeight = child.getMaxIntrinsicHeight(childWidth);
       maxHeight = math.max(maxHeight, boxHeight);
       child = nonSeparatorChildAfter(child);
     }
@@ -1001,34 +1000,34 @@ class _ENRenderSegmentedControl<T> extends RenderBox
 
   Size _computeOverallSizeFromChildSize(
       Size childSize, BoxConstraints constraints) {
-    final int childCount = this.childCount ~/ 2 + 1;
+    final childCount = this.childCount ~/ 2 + 1;
     return constraints.constrain(Size(
         childSize.width * childCount + totalSeparatorWidth, childSize.height));
   }
 
   @override
   Size computeDryLayout(BoxConstraints constraints) {
-    final Size childSize = _calculateChildSize(constraints);
+    final childSize = _calculateChildSize(constraints);
     return _computeOverallSizeFromChildSize(childSize, constraints);
   }
 
   @override
   void performLayout() {
-    final BoxConstraints constraints = this.constraints;
-    final Size childSize = _calculateChildSize(constraints);
-    final BoxConstraints childConstraints = BoxConstraints.tight(childSize);
-    final BoxConstraints separatorConstraints =
+    final constraints = this.constraints;
+    final childSize = _calculateChildSize(constraints);
+    final childConstraints = BoxConstraints.tight(childSize);
+    final separatorConstraints =
         childConstraints.heightConstraints();
 
-    RenderBox? child = firstChild;
-    int index = 0;
-    double start = 0;
+    var child = firstChild;
+    var index = 0;
+    var start = 0.0;
     while (child != null) {
       child.layout(index.isEven ? childConstraints : separatorConstraints,
           parentUsesSize: true);
-      final _ENSegmentedControlContainerBoxParentData childParentData =
+      final childParentData =
           child.parentData! as _ENSegmentedControlContainerBoxParentData;
-      final Offset childOffset = Offset(start, 0);
+      final childOffset = Offset(start, 0);
       childParentData.offset = childOffset;
       start += child.size.width;
       assert(
@@ -1057,11 +1056,11 @@ class _ENRenderSegmentedControl<T> extends RenderBox
       return null;
     }
 
-    final Offset firstChildOffset = (children.first.parentData!
+    final firstChildOffset = (children.first.parentData!
             as _ENSegmentedControlContainerBoxParentData)
         .offset;
-    final double leftMost = firstChildOffset.dx;
-    final double rightMost =
+    final leftMost = firstChildOffset.dx;
+    final rightMost =
         (children.last.parentData! as _ENSegmentedControlContainerBoxParentData)
                 .offset
                 .dx +
@@ -1080,37 +1079,37 @@ class _ENRenderSegmentedControl<T> extends RenderBox
 
   @override
   void paint(PaintingContext context, Offset offset) {
-    final List<RenderBox> children = getChildrenAsList();
+    final children = getChildrenAsList();
 
-    for (int index = 1; index < childCount; index += 2) {
+    for (var index = 1; index < childCount; index += 2) {
       _paintSeparator(context, offset, children[index]);
     }
 
-    final int? highlightedChildIndex = highlightedIndex;
+    final highlightedChildIndex = highlightedIndex;
     // Paint thumb if there's a highlighted segment.
     if (highlightedChildIndex != null) {
-      final RenderBox selectedChild = children[highlightedChildIndex * 2];
+      final selectedChild = children[highlightedChildIndex * 2];
 
-      final _ENSegmentedControlContainerBoxParentData childParentData =
+      final childParentData =
           selectedChild.parentData!
               as _ENSegmentedControlContainerBoxParentData;
-      final Rect newThumbRect = _kThumbInsets
+      final newThumbRect = _kThumbInsets
           .inflateRect(childParentData.offset & selectedChild.size);
 
       // Update thumb animation's tween, in case the end rect changed (e.g., a
       // new segment is added during the animation).
       if (state.thumbController.isAnimating) {
-        final Animatable<Rect?>? thumbTween = state.thumbAnimatable;
+        final thumbTween = state.thumbAnimatable;
         if (thumbTween == null) {
           // This is the first frame of the animation.
-          final Rect startingRect =
+          final startingRect =
               moveThumbRectInBound(currentThumbRect, children) ?? newThumbRect;
           state.thumbAnimatable =
               RectTween(begin: startingRect, end: newThumbRect);
         } else if (newThumbRect != thumbTween.transform(1)) {
           // The thumbTween of the running sliding animation needs updating,
           // without restarting the animation.
-          final Rect startingRect =
+          final startingRect =
               moveThumbRectInBound(currentThumbRect, children) ?? newThumbRect;
           state.thumbAnimatable =
               RectTween(begin: startingRect, end: newThumbRect).chain(
@@ -1120,11 +1119,11 @@ class _ENRenderSegmentedControl<T> extends RenderBox
         state.thumbAnimatable = null;
       }
 
-      final Rect unscaledThumbRect =
+      final unscaledThumbRect =
           state.thumbAnimatable?.evaluate(state.thumbController) ??
               newThumbRect;
       currentThumbRect = unscaledThumbRect;
-      final Rect thumbRect = Rect.fromCenter(
+      final thumbRect = Rect.fromCenter(
         center: unscaledThumbRect.center,
         width: unscaledThumbRect.width * thumbScale,
         height: unscaledThumbRect.height * thumbScale,
@@ -1135,7 +1134,7 @@ class _ENRenderSegmentedControl<T> extends RenderBox
       currentThumbRect = null;
     }
 
-    for (int index = 0; index < children.length; index += 2) {
+    for (var index = 0; index < children.length; index += 2) {
       _paintChild(context, offset, children[index]);
     }
   }
@@ -1144,20 +1143,20 @@ class _ENRenderSegmentedControl<T> extends RenderBox
   final Paint separatorPaint = Paint();
   void _paintSeparator(
       PaintingContext context, Offset offset, RenderBox child) {
-    final _ENSegmentedControlContainerBoxParentData childParentData =
+    final childParentData =
         child.parentData! as _ENSegmentedControlContainerBoxParentData;
     context.paintChild(child, offset + childParentData.offset);
   }
 
   void _paintChild(PaintingContext context, Offset offset, RenderBox child) {
-    final _ENSegmentedControlContainerBoxParentData childParentData =
+    final childParentData =
         child.parentData! as _ENSegmentedControlContainerBoxParentData;
     context.paintChild(child, childParentData.offset + offset);
   }
 
   void _paintThumb(PaintingContext context, Offset offset, Rect thumbRect) {
     // Colors extracted from https://developer.apple.com/design/resources/.
-    const List<BoxShadow> thumbShadow = <BoxShadow>[
+    const thumbShadow = <BoxShadow>[
       BoxShadow(
         color: Color(0x1F000000),
         offset: Offset(0, 3),
@@ -1170,10 +1169,10 @@ class _ENRenderSegmentedControl<T> extends RenderBox
       ),
     ];
 
-    final RRect thumbRRect =
+    final thumbRRect =
         RRect.fromRectAndRadius(thumbRect.shift(offset), radius);
 
-    for (final BoxShadow shadow in thumbShadow) {
+    for (final shadow in thumbShadow) {
       context.canvas
           .drawRRect(thumbRRect.shift(shadow.offset), shadow.toPaint());
     }
@@ -1191,9 +1190,9 @@ class _ENRenderSegmentedControl<T> extends RenderBox
 
   @override
   bool hitTestChildren(BoxHitTestResult result, {required Offset position}) {
-    RenderBox? child = lastChild;
+    var child = lastChild;
     while (child != null) {
-      final _ENSegmentedControlContainerBoxParentData childParentData =
+      final childParentData =
           child.parentData! as _ENSegmentedControlContainerBoxParentData;
       if ((childParentData.offset & child.size).contains(position)) {
         return result.addWithPaintOffset(

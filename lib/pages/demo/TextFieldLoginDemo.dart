@@ -48,7 +48,7 @@ class _TextFieldLoginDemoState extends State<TextFieldLoginDemo> {
       appBar: hideApp
           ? null
           : AppBar(
-              title: Text('${widget}'),
+              title: Text('$widget'),
             ),
       body: Container(
           padding: EdgeInsets.all(40.0),

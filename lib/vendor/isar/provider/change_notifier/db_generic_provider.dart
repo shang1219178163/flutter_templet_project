@@ -8,7 +8,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/vendor/isar/DBManager.dart';
-import 'package:flutter_templet_project/vendor/isar/model/db_todo.dart';
 import 'package:isar/isar.dart';
 
 class DBGenericProvider<E> extends ChangeNotifier {

@@ -196,7 +196,7 @@ class ImConversationDetailModel with DbMixin, EqualIdenticalMixin {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
+    final data = <String, dynamic>{};
     data['conversationID'] = conversationID;
     data['type'] = type;
     data['userID'] = userID;

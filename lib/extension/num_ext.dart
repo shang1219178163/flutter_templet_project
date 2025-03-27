@@ -9,8 +9,6 @@
 import 'dart:math';
 
 // import 'package:flutter/cupertino.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 extension NumExt on num {}
 
@@ -20,17 +18,19 @@ extension IntExt on int {
   }
 
   String toHanzi() {
-    if (this == 0) return '零';
+    if (this == 0) {
+      return '零';
+    }
 
-    final List<String> chineseDigits = '零一二三四五六七八九'.split("").toList();
-    final List<String> chineseUnits = '十百千万亿'.split("").toList();
+    final chineseDigits = '零一二三四五六七八九'.split("").toList();
+    final chineseUnits = '十百千万亿'.split("").toList();
 
-    String result = '';
-    int unitIndex = 0;
-    int number = this;
+    var result = '';
+    var unitIndex = 0;
+    var number = this;
 
     while (number > 0) {
-      int digit = number % 10;
+      var digit = number % 10;
       result = (digit == 0 ? '' : chineseDigits[digit]) + chineseUnits[unitIndex] + result;
       unitIndex++;
       number ~/= 10;
@@ -61,7 +61,7 @@ extension IntExt on int {
     if (this == 0) {
       return "";
     }
-    int length = this;
+    var length = this;
     var tmp = "";
     for (var i = 0; i < length; i++) {
       var randomIndex = IntExt.random(max: items.length);

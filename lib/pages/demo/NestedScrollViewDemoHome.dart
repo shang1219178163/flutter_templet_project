@@ -7,13 +7,10 @@
 //
 
 import 'dart:async';
-import 'dart:io';
-import 'dart:math';
 
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_templet_project/basicWidget/enhance/en_app_bar/en_app_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_grid_view.dart';
 import 'package:flutter_templet_project/basicWidget/n_network_image.dart';
@@ -26,11 +23,9 @@ import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/extension/scroll_controller_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/pages/app_tab_bar_controller.dart';
-import 'package:flutter_templet_project/pages/demo/HitTestDemo.dart';
 import 'package:flutter_templet_project/util/R.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:get/get.dart';
-import 'package:table_calendar/table_calendar.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 /// 嵌套滚动
@@ -496,7 +491,7 @@ class NestedScrollViewDemoHomeState
             Row(
               children: [
                 NText(
-                  '${DateTime.now().toString().split(" ").first}',
+                  DateTime.now().toString().split(" ").first,
                   fontSize: 14,
                   color: fontColor737373,
                 ),

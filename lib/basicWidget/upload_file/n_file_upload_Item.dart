@@ -333,10 +333,10 @@ class NFileUploadItemState extends State<NFileUploadItem>
   Future<File> compressFile({required File file}) async {
     final ext = file.path.split(".").last;
     if (NFileType.video.exts.contains(ext)) {
-      return await VideoService.compressVideo(file, showToast: false);
+      return VideoService.compressVideo(file, showToast: false);
     }
     if (NFileType.image.exts.contains(ext)) {
-      return await ImageService().compressAndGetFile(file, needLogInfo: false);
+      return ImageService().compressAndGetFile(file, needLogInfo: false);
     }
     return file;
   }

@@ -12,8 +12,6 @@ import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/basicWidget/theme/n_search_theme.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/extension/function_ext.dart';
-import 'package:flutter_templet_project/extension/string_ext.dart';
-import 'package:flutter_templet_project/util/Debounce.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 
 // ```
@@ -143,7 +141,7 @@ class NSearchTextField extends StatelessWidget {
         image: const AssetImage("assets/images/icon_search.png"),
         width: 16,
         height: 16,
-        color: fontColor ?? theme?.fontColor,
+        color: fontColor,
       ),
     );
 
@@ -164,7 +162,7 @@ class NSearchTextField extends StatelessWidget {
       child: CupertinoTextField(
         focusNode: focusNode,
         controller: controllerNew,
-        padding: padding ?? theme?.padding ?? EdgeInsets.zero,
+        padding: padding,
         placeholder: placeholder,
         placeholderStyle: placeholderStyleNew,
         style: styleNew,

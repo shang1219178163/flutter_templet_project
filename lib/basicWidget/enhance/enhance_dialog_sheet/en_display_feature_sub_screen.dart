@@ -99,15 +99,15 @@ class EnDisplayFeatureSubScreen extends StatelessWidget {
           alternative:
               "Alternatively, consider specifying the 'anchorPoint' argument on the DisplayFeatureSubScreen.",
         ));
-    final MediaQueryData mediaQuery = MediaQuery.of(context);
-    final Size parentSize = mediaQuery.size;
-    final Rect wantedBounds = Offset.zero & parentSize;
-    final Offset resolvedAnchorPoint =
+    final mediaQuery = MediaQuery.of(context);
+    final parentSize = mediaQuery.size;
+    final wantedBounds = Offset.zero & parentSize;
+    final resolvedAnchorPoint =
         _capOffset(anchorPoint ?? _fallbackAnchorPoint(context), parentSize);
 
-    final Iterable<Rect> subScreens =
+    final subScreens =
         subScreensInBounds(wantedBounds, avoidBounds(mediaQuery));
-    final Rect closestSubScreen =
+    final closestSubScreen =
         _closestToAnchorPoint(subScreens, resolvedAnchorPoint);
 
     return Padding(
@@ -125,7 +125,7 @@ class EnDisplayFeatureSubScreen extends StatelessWidget {
   }
 
   static Offset _fallbackAnchorPoint(BuildContext context) {
-    final TextDirection textDirection = Directionality.of(context);
+    final textDirection = Directionality.of(context);
     switch (textDirection) {
       case TextDirection.rtl:
         return const Offset(double.maxFinite, 0);
@@ -149,11 +149,11 @@ class EnDisplayFeatureSubScreen extends StatelessWidget {
   /// Returns the closest sub-screen to the [anchorPoint].
   static Rect _closestToAnchorPoint(
       Iterable<Rect> subScreens, Offset anchorPoint) {
-    Rect closestScreen = subScreens.first;
-    double closestDistance =
+    var closestScreen = subScreens.first;
+    var closestDistance =
         _distanceFromPointToRect(anchorPoint, closestScreen);
-    for (final Rect screen in subScreens) {
-      final double subScreenDistance =
+    for (final screen in subScreens) {
+      final subScreenDistance =
           _distanceFromPointToRect(anchorPoint, screen);
       if (subScreenDistance < closestDistance) {
         closestScreen = screen;
@@ -209,9 +209,9 @@ class EnDisplayFeatureSubScreen extends StatelessWidget {
   static Iterable<Rect> subScreensInBounds(
       Rect wantedBounds, Iterable<Rect> avoidBounds) {
     Iterable<Rect> subScreens = <Rect>[wantedBounds];
-    for (final Rect bounds in avoidBounds) {
-      final List<Rect> newSubScreens = <Rect>[];
-      for (final Rect screen in subScreens) {
+    for (final bounds in avoidBounds) {
+      final newSubScreens = <Rect>[];
+      for (final screen in subScreens) {
         if (screen.top >= bounds.top && screen.bottom <= bounds.bottom) {
           // Display feature splits the screen vertically
           if (screen.left < bounds.left) {

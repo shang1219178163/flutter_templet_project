@@ -7,7 +7,6 @@
 //
 
 import 'dart:collection';
-import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -360,7 +359,7 @@ class _AppWebViewPageState extends State<AppWebViewPage> {
   }
 
   onShare() async {
-    Directory tempDir = await AssetCacheService().getDir();
+    var tempDir = await AssetCacheService().getDir();
     var tmpPath = '${tempDir.path}/${widget.title}';
 
     final percentVN = ValueNotifier(0.0);
@@ -411,11 +410,11 @@ class _AppWebViewPageState extends State<AppWebViewPage> {
     final document = html_parser.parse(htmlContent);
     final elements = document.querySelectorAll('video');
     final videoModels = elements.map((el) {
-      Map sourceAttributes = el.nodes.firstOrNull?.attributes ?? {};
-      Map attributes = el.attributes ?? {};
+      var sourceAttributes = el.nodes.firstOrNull?.attributes ?? {};
+      var attributes = el.attributes ?? {};
 
       // 创建字典并将 <video> 标签的属性添加进去
-      Map<String, dynamic> videoAttributes = {
+      var videoAttributes = <String, dynamic>{
         ...sourceAttributes,
         ...attributes,
       };

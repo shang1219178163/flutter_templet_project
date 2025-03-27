@@ -20,7 +20,6 @@ import 'package:flutter_templet_project/pages/medication_calculator.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:flutter_templet_project/util/get_util.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
-import 'package:get/get.dart';
 
 /// 药品计量推荐
 class DrugDosageCalPage extends StatefulWidget {

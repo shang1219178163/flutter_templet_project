@@ -6,15 +6,12 @@
 //  Copyright © 2023/9/19 shang. All rights reserved.
 //
 
-import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_webview_page.dart';
 import 'package:flutter_templet_project/cache/asset_cache_service.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 import 'package:share_plus/share_plus.dart';
 
 /// 网页加载
@@ -105,7 +102,7 @@ class _WebviewFilePreviewPageState extends State<WebviewFilePreviewPage> {
       }
     });
     // debugPrint("response: ${response.data}");
-    debugPrint("tmpPath: ${tmpPath}");
+    debugPrint("tmpPath: $tmpPath");
     ToastUtil.hideLoading();
 
     Share.shareXFiles([XFile(tmpPath)]);

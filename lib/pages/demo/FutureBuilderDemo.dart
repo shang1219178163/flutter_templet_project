@@ -11,7 +11,6 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/model/git_repo_model.dart';
-import 'package:flutter_templet_project/model/user_model.dart';
 
 class FutureBuilderDemo extends StatefulWidget {
   final String? title;
@@ -39,8 +38,6 @@ class _FutureBuilderDemoState extends State<FutureBuilderDemo> {
 
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
@@ -75,9 +72,7 @@ class _FutureBuilderDemoState extends State<FutureBuilderDemo> {
             // return Text("Contents: ${snapshot.data}");
 
             final response = snapshot.data;
-            var items = (response.data ?? [])
-                .map((e) => GitRepoModel.fromJson(e))
-                .toList();
+            var items = (response.data ?? []).map((e) => GitRepoModel.fromJson(e)).toList();
             final itemsNew = List<GitRepoModel>.from(items);
             return buildList(list: itemsNew);
           } else {
@@ -144,8 +139,7 @@ class _FutureBuilderDemoState extends State<FutureBuilderDemo> {
     final response = await _dio.get<List<dynamic>>(
       url,
     );
-    var items =
-        (response.data ?? []).map((e) => GitRepoModel.fromJson(e)).toList();
+    var items = (response.data ?? []).map((e) => GitRepoModel.fromJson(e)).toList();
     debugPrint("users: ${items.first.runtimeType}");
 
     dataList.value = items;
@@ -158,7 +152,7 @@ class _FutureBuilderDemoState extends State<FutureBuilderDemo> {
       url,
     );
     final jsonStr = jsonEncode(response);
-    debugPrint("${jsonStr}");
+    debugPrint(jsonStr);
     final list = jsonDecode(jsonStr);
     debugPrint("list:${list.runtimeType.toString()}");
 

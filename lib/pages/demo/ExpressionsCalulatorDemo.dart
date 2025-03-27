@@ -13,7 +13,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
-import 'package:flutter_templet_project/extension/object_ext.dart';
 import 'package:flutter_templet_project/mixin/expression_formula_mxin.dart';
 import 'package:get/get.dart';
 
@@ -115,7 +114,7 @@ class _ExpressionsCalulatorDemoState extends State<ExpressionsCalulatorDemo> {
                   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
                   divider: SizedBox(),
                   child: NText(
-                    e.params?.toString() ?? "",
+                    e.params.toString() ?? "",
                     fontSize: 12,
                   ),
                 ),

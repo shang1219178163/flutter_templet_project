@@ -8,10 +8,6 @@
 
 import 'dart:math';
 
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_templet_project/extension/dlog.dart';
-import 'package:flutter_templet_project/extension/string_ext.dart';
-import 'package:get/get.dart';
 
 extension IterableExt<E> on Iterable<E> {
   /// 获取随机元素

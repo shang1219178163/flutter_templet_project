@@ -58,7 +58,7 @@ class FileManager {
     // final dateStr = "${DateTime.now()}".split(".").first ?? "";
 
     /// 本地文件目录
-    Directory tempDir = dir ?? await getApplicationCacheDirectory();
+    var tempDir = dir ?? await getApplicationCacheDirectory();
     if (Platform.isMacOS) {
       final downloadsDir = await getDownloadsDirectory();
       if (downloadsDir != null) {

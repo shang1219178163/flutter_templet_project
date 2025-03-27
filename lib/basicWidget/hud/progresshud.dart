@@ -6,7 +6,6 @@
 //  Copyright © 7/29/21 shang. All rights reserved.
 //
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 enum NNProgressHUDType {
@@ -162,7 +161,7 @@ class ProgressHUD<T> extends PopupRoute<T> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
-        if (icon != null) icon,
+        icon,
         if (message != null)
           Padding(
               padding: EdgeInsets.only(left: 5.0, right: 5.0),

@@ -1,17 +1,12 @@
 import 'dart:async';
-import 'dart:io';
-import 'dart:math';
 import 'dart:typed_data';
-
 import 'dart:ui' as ui;
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_templet_project/extension/image_ext.dart';
 import 'package:flutter_templet_project/extension/list_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
-
-import 'package:image_gallery_saver/image_gallery_saver.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MergeImagesDemo extends StatefulWidget {
   final String? title;
@@ -33,10 +28,9 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
   Widget? imageMerged;
   ImageProvider? _imageProvider;
 
+
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
@@ -45,8 +39,7 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
             onPressed: () => {
               // print("保存")
               _compositePicNew().then((pngBytes) {
-                imageMerged = Image.memory(pngBytes!,
-                    width: double.maxFinite, height: 1200);
+                imageMerged = Image.memory(pngBytes!, width: double.maxFinite, height: 1200);
                 setState(() {});
               })
             },
@@ -57,15 +50,10 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
           ),
           TextButton(
             onPressed: () {
-              final keys = [
-                repaintBoundaryKey1,
-                repaintBoundaryKey2,
-                repaintBoundaryKey3
-              ];
+              final keys = [repaintBoundaryKey1, repaintBoundaryKey2, repaintBoundaryKey3];
               _compositePics(keys).then(
                 (pngBytes) {
-                  imageMerged =
-                      Image.memory(pngBytes!, width: 400, height: 600);
+                  imageMerged = Image.memory(pngBytes!, width: 400, height: 600);
                   setState(() {});
                 },
               );
@@ -170,8 +158,7 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
                 child: FloatingActionButton(
                   heroTag: null,
                   backgroundColor: Colors.red,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(radius))),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(radius))),
                   onPressed: () => callback?.call(1),
                   child: Icon(
                     Icons.arrow_circle_down,
@@ -185,8 +172,7 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
                 child: FloatingActionButton(
                   heroTag: null,
                   backgroundColor: Colors.red,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(radius))),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(radius))),
                   onPressed: () => callback?.call(-1),
                   child: Icon(
                     Icons.arrow_circle_up,
@@ -207,7 +193,8 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
       return null;
     }
     var boundary = buildContext.findRenderObject() as RenderRepaintBoundary?;
-    var image = await boundary?.toImage(pixelRatio: ui.window.devicePixelRatio);
+    final keyView = WidgetsBinding.instance.platformDispatcher.views.first;
+    var image = await boundary?.toImage(pixelRatio: keyView.devicePixelRatio);
 
     // ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
     // Uint8List? pngBytes = byteData?.buffer.asUint8List() ?? Uint8List(10);
@@ -227,8 +214,7 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
 
       debugPrint("three: ${three.width} ${three.height}");
       // var totalWidth = one.width > two.width ? one.width : two.width;
-      var totalWidth =
-          [one.width, two.width, three.width].reduce((a, b) => a > b ? a : b);
+      var totalWidth = [one.width, two.width, three.width].reduce((a, b) => a > b ? a : b);
 
       // int totalHeight = one.height + two.height + 20.h.toInt();
       // int totalHeight = one.height + two.height;
@@ -237,30 +223,18 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
       final paint = Paint();
       var canvas = Canvas(recorder);
       //画第一张图
-      canvas.drawRect(
-          Rect.fromLTWH(0, 0, totalWidth * 1.0, one.height * 1.0), paint);
+      canvas.drawRect(Rect.fromLTWH(0, 0, totalWidth * 1.0, one.height * 1.0), paint);
       canvas.drawImage(one, Offset((totalWidth - one.width) / 2, 0), paint);
       //画第二张图
       paint.shader = null;
       paint.color = Colors.red;
-      canvas.drawRect(
-          Rect.fromLTWH(
-              0, one.height * 1.0, totalWidth * 1.0, two.height * 1.0),
-          paint);
+      canvas.drawRect(Rect.fromLTWH(0, one.height * 1.0, totalWidth * 1.0, two.height * 1.0), paint);
       canvas.drawImage(two, Offset(0, one.height + 12), paint);
       //画第三张图
-      canvas.drawRect(
-          Rect.fromLTWH(0, one.height * 1.0 + two.height * 1.0,
-              totalWidth * 1.0, two.height * 1.0),
-          paint);
-      canvas.drawImage(
-          three,
-          Offset((totalWidth - two.width) / 2, one.height + two.height + 12),
-          paint);
+      canvas.drawRect(Rect.fromLTWH(0, one.height * 1.0 + two.height * 1.0, totalWidth * 1.0, two.height * 1.0), paint);
+      canvas.drawImage(three, Offset((totalWidth - two.width) / 2, one.height + two.height + 12), paint);
 
-      var image = await recorder
-          .endRecording()
-          .toImage(totalWidth, one.height + two.height + three.height + 24);
+      var image = await recorder.endRecording().toImage(totalWidth, one.height + two.height + three.height + 24);
       //获取合成的图片
       var byteData = await image.toByteData(format: ui.ImageByteFormat.png);
       var pngBytes = byteData?.buffer.asUint8List();
@@ -280,10 +254,9 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
   ]) async {
     //根据 GlobalKey 获取 Image 数组
     var imgs = await Future.wait(keys.map((key) async {
-      var boundary =
-          key.currentContext?.findRenderObject() as RenderRepaintBoundary?;
-      var image =
-          await boundary?.toImage(pixelRatio: ui.window.devicePixelRatio);
+      var boundary = key.currentContext?.findRenderObject() as RenderRepaintBoundary?;
+      var devicePixelRatio = View.of(context).devicePixelRatio;
+      var image = await boundary?.toImage(pixelRatio: devicePixelRatio);
       return image;
     }).toList());
 
@@ -307,20 +280,14 @@ class _MergeImagesDemoState extends State<MergeImagesDemo> {
       //画图
       for (var i = 0; i < images.length; i++) {
         final e = images[i];
-        final offsetY =
-            i == 0 ? 0 : imageHeights.sublist(0, i).reduce((a, b) => a + b);
+        final offsetY = i == 0 ? 0 : imageHeights.sublist(0, i).reduce((a, b) => a + b);
         // print("offset:${i}_${e.height}_${offsetY}");
-        canvas.drawRect(
-            Rect.fromLTWH(
-                0, offsetY.toDouble(), totalWidth * 1.0, e.height * 1.0),
-            paint);
+        canvas.drawRect(Rect.fromLTWH(0, offsetY.toDouble(), totalWidth * 1.0, e.height * 1.0), paint);
         canvas.drawImage(e, Offset(0, offsetY.toDouble()), paint);
       }
 
       //获取合成的图片
-      var image = await recorder
-          .endRecording()
-          .toImage(totalWidth.toInt(), totalHeight.toInt());
+      var image = await recorder.endRecording().toImage(totalWidth.toInt(), totalHeight.toInt());
       var byteData = await image.toByteData(format: ui.ImageByteFormat.png);
       var pngBytes = byteData?.buffer.asUint8List();
       //图片大小

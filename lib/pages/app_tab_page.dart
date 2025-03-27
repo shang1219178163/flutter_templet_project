@@ -139,8 +139,8 @@ class _AppTabPageState extends State<AppTabPage> with WidgetsBindingObserver, Ap
         child: NBottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           currentIndex: currentIndex,
-          selectedFontSize: 10.sp, // 选中字体大小
-          unselectedFontSize: 10.sp, // 未选中字体大小
+          selectedFontSize: 11, // 选中字体大小
+          unselectedFontSize: 11, // 未选中字体大小
           selectedItemColor: context.primaryColor,
           onTap: (index) => onTapBar(index),
           items: items

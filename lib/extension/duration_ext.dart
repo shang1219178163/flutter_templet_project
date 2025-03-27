@@ -48,11 +48,11 @@ extension DurationExt on Duration {
       return "0$n";
     }
 
-    Duration duration = this;
+    var duration = this;
     final prefix = duration.isNegative ? "-" : "";
     final durationNew = duration.abs();
 
-    String line = prefix;
+    var line = prefix;
     if (duration.inDays != 0) {
       line += "${durationNew.inDays}天";
     }

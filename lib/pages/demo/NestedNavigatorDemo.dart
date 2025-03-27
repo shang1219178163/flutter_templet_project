@@ -212,7 +212,7 @@ class _NestedNavigatorDemoState extends State<NestedNavigatorDemo> {
   }
 
   Future<Object?> onNavigator() async {
-    Alignment alignment = Alignment.centerLeft;
+    var alignment = Alignment.centerLeft;
     Tween<Offset> getTween() {
       // debugPrint("alignment:${alignment} ${alignment.y}");
       if ([-1, 1].contains(alignment.y)) {
@@ -267,7 +267,6 @@ class _NestedNavigatorDemoState extends State<NestedNavigatorDemo> {
         width: screenSize.width * 0.7,
         child: Theme(
           data: Theme.of(context).copyWith(
-            useMaterial3: false,
             appBarTheme: AppBarTheme.of(context).copyWith(
               elevation: 0,
             ),

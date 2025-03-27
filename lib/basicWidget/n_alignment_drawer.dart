@@ -121,7 +121,7 @@ class _NAlignmentDrawerState extends State<NAlignmentDrawer>
       body: buildBody(),
     );
 
-    Widget child = widget.builder?.call(onHide) ?? defaultWidget;
+    var child = widget.builder?.call(onHide) ?? defaultWidget;
 
     if (widget.hasFade) {
       child = FadeTransition(

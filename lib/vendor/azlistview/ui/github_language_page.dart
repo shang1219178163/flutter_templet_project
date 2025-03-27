@@ -1,9 +1,7 @@
-import 'package:flutter/material.dart';
-
 import 'package:azlistview/azlistview.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/vendor/azlistview/common/index.dart';
-
 import 'package:github_language_colors/github_language_colors.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
@@ -42,8 +40,8 @@ class _GitHubLanguagePageState extends State<GitHubLanguagePage> {
 
   loadData() async {
     originList = LanguageHelper.getGithubLanguages().map((v) {
-      Languages model = Languages.fromJson(v.toJson());
-      String tag = model.name.substring(0, 1).toUpperCase();
+      var model = Languages.fromJson(v.toJson());
+      var tag = model.name.substring(0, 1).toUpperCase();
       if (RegExp("[A-Z]").hasMatch(tag)) {
         model.tagIndex = tag;
       } else {
@@ -83,7 +81,7 @@ class _GitHubLanguagePageState extends State<GitHubLanguagePage> {
       color: Color(0xFFF3F4F5),
       alignment: Alignment.centerLeft,
       child: Text(
-        '$tag',
+        tag,
         softWrap: false,
         style: TextStyle(
           fontSize: 14.0,
@@ -113,7 +111,7 @@ class _GitHubLanguagePageState extends State<GitHubLanguagePage> {
     if (ObjectUtil.isEmpty(text)) {
       _handleList(originList);
     } else {
-      List<Languages> list = originList.where((v) {
+      var list = originList.where((v) {
         return v.name.toLowerCase().contains(text.toLowerCase());
       }).toList();
       _handleList(list);
@@ -169,12 +167,12 @@ class _GitHubLanguagePageState extends State<GitHubLanguagePage> {
                 physics: AlwaysScrollableScrollPhysics(),
                 itemCount: dataList.length,
                 itemBuilder: (BuildContext context, int index) {
-                  Languages model = dataList[index];
+                  var model = dataList[index];
                   return getListItem(context, model);
                 },
                 itemScrollController: itemScrollController,
                 susItemBuilder: (BuildContext context, int index) {
-                  Languages model = dataList[index];
+                  var model = dataList[index];
                   return getSusItem(context, model.getSuspensionTag());
                 },
                 indexBarOptions: IndexBarOptions(

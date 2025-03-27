@@ -86,14 +86,14 @@ class ImageIndicatorPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     //初始化画笔
-    Paint mPaint = Paint();
+    var mPaint = Paint();
     //获取中间的圆点为第几个
     final _centerCircleIndex = _kMaxCircleCount ~/ 2;
     //获取每个圆点占据的大小，把widget分为3份
-    double childWidth = size.width / _kMaxCircleCount;
+    var childWidth = size.width / _kMaxCircleCount;
 
     //遍历画圆点
-    for (int i = 0; i < _kMaxCircleCount; i++) {
+    for (var i = 0; i < _kMaxCircleCount; i++) {
       // 当页数为0的时候，也就是第一页，不画第一个圆点
       if (pageIndex == 0 && i == 0) {
         continue;

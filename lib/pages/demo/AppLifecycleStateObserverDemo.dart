@@ -121,8 +121,8 @@ class _AppLifecycleStateObserverDemoState
   timeUpdate() {
     timeReset();
     _timer = Timer.periodic(const Duration(seconds: 1), (Timer timer) {
-      DateTime now = DateTime.now();
-      Duration duration = now.difference(_startTime);
+      var now = DateTime.now();
+      var duration = now.difference(_startTime);
       durationVN.value = duration;
 
       // countVN.value++;
@@ -130,7 +130,7 @@ class _AppLifecycleStateObserverDemoState
     });
   }
 
-  /*************** AppLifecycleObserverMixin ***************/
+  /// ************* AppLifecycleObserverMixin **************
   @override
   void onAppLifecycleStateChanged(AppLifecycleState state) {
     DLog.d("$widget ${state.name}");

@@ -6,11 +6,8 @@
 //  Copyright © 2024/8/6 shang. All rights reserved.
 //
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
-import 'package:flutter_templet_project/basicWidget/n_slider.dart';
-import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:get/get.dart';
 
 class LerpDemo extends StatefulWidget {
@@ -149,11 +146,11 @@ class _LerpDemoState extends State<LerpDemo>
       builder: (context, setState) {
         Color a = Colors.red;
         Color b = Colors.blue;
-        Color? color = Color.lerp(a, b, current);
+        var color = Color.lerp(a, b, current);
 
-        Size sizeStart = Size(240, 150);
-        Size sizeEnd = Size(300, 200);
-        Size? size = Size.lerp(sizeStart, sizeEnd, current);
+        var sizeStart = Size(240, 150);
+        var sizeEnd = Size(300, 200);
+        var size = Size.lerp(sizeStart, sizeEnd, current);
 
         final desc = "t: ${current.toStringAsFixed(2)}";
 

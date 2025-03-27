@@ -373,9 +373,6 @@ class PlainDataModel {
 
   // ignore: sort_constructors_first
   PlainDataModel.fromJson(Map<String, dynamic> json) {
-    if (json is! Map) {
-      return;
-    }
     id = json['id'] ?? "-";
     title = json['title'] ?? "-";
     description = json['description'] ?? "-";

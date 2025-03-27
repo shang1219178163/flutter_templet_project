@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_templet_project/basicWidget/n_long_press_menu.dart';
-
-import 'package:flutter_templet_project/basicWidget/n_target_follower.dart';
 import 'package:flutter_templet_project/basicWidget/n_pair.dart';
+import 'package:flutter_templet_project/basicWidget/n_target_follower.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
-import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/vendor/toast_util.dart';
 import 'package:tuple/tuple.dart';
 
@@ -179,7 +177,7 @@ class _NTargetFollowerDemoState extends State<NTargetFollowerDemo> {
         minWidth: 0,
       ),
       child: Wrap(
-        children: List.generate((index / 3).toInt() + 1, (i) => i).map((e) {
+        children: List.generate(index ~/ 3 + 1, (i) => i).map((e) {
           return OutlinedButton(
             onPressed: () {
               debugPrint("button_$e");

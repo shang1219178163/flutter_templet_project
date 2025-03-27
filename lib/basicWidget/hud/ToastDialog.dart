@@ -1,9 +1,6 @@
 // import 'dart:ffi';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter_templet_project/basicWidget/hud/CirclePulseLoadingWidget.dart';
 
 //loading加载框
 class ToastDialog extends Dialog {
@@ -66,9 +63,7 @@ class ToastDialog extends Dialog {
 
     if (loadingView != null) {
       return buildProgressIndicator(
-          loadingView: loadingView,
-          backgroundColor: backgroundColor ?? Colors.black54,
-          radius: radius ?? 10);
+          loadingView: loadingView, backgroundColor: backgroundColor ?? Colors.black54, radius: radius ?? 10);
     }
 
     return buildMessage(
@@ -88,17 +83,13 @@ class ToastDialog extends Dialog {
     );
   }
 
-  Widget buildProgressIndicator(
-      {Widget? loadingView,
-      required Color backgroundColor,
-      required double radius}) {
+  Widget buildProgressIndicator({Widget? loadingView, required Color backgroundColor, required double radius}) {
     return Center(
         child: Container(
       height: 90,
       width: 90,
       // color: Colors.black,
-      decoration:
-          buildDecoration(backgroundColor: backgroundColor, radius: radius),
+      decoration: buildDecoration(backgroundColor: backgroundColor, radius: radius),
       child: loadingView ??
           Container(
             padding: EdgeInsets.all(12),
@@ -107,8 +98,7 @@ class ToastDialog extends Dialog {
     ));
   }
 
-  Widget buildMessage(
-      {required String message, required Color backgroundColor}) {
+  Widget buildMessage({required String message, required Color backgroundColor}) {
     return Center(
         widthFactor: 1,
         heightFactor: 1,
@@ -116,8 +106,7 @@ class ToastDialog extends Dialog {
           margin: messageMargin ?? EdgeInsets.only(left: 20, right: 20),
           padding: EdgeInsets.all(8),
           // color: Colors.black,
-          decoration:
-              buildDecoration(backgroundColor: backgroundColor, radius: 4),
+          decoration: buildDecoration(backgroundColor: backgroundColor, radius: 4),
           child: Text(
             message,
             style: TextStyle(
@@ -132,18 +121,14 @@ class ToastDialog extends Dialog {
   }
 
   Widget buildProgressIndicatorAndText(
-      {Widget? loadingView,
-      required String message,
-      required Color backgroundColor,
-      required double radius}) {
+      {Widget? loadingView, required String message, required Color backgroundColor, required double radius}) {
     return Center(
       // widthFactor: 1,
       // heightFactor: 1,
       child: Container(
         margin: messageMargin ?? EdgeInsets.only(left: 20, right: 20),
         padding: EdgeInsets.all(8),
-        decoration:
-            buildDecoration(backgroundColor: backgroundColor, radius: radius),
+        decoration: buildDecoration(backgroundColor: backgroundColor, radius: radius),
         // child: Container(child: CircularProgressIndicator(), padding: EdgeInsets.all(12),),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -184,9 +169,10 @@ class Toast extends StatelessWidget {
     dynamic arguments = ModalRoute.of(context)!.settings.arguments;
 
     return Scaffold(
-        appBar: AppBar(
-          title: Text(arguments[1]),
-        ),
-        body: Text(arguments.toString()));
+      appBar: AppBar(
+        title: Text("$runtimeType"),
+      ),
+      body: Text(arguments.toString()),
+    );
   }
 }

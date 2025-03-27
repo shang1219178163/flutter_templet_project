@@ -18,7 +18,6 @@ import 'package:flutter_templet_project/basicWidget/form/ae_judge_item.dart';
 import 'package:flutter_templet_project/basicWidget/form/ae_patient_card.dart';
 import 'package:flutter_templet_project/basicWidget/form/ae_section_header.dart';
 import 'package:flutter_templet_project/basicWidget/form/ae_single_choose_item.dart';
-import 'package:flutter_templet_project/basicWidget/form/ae_textfiled.dart';
 import 'package:flutter_templet_project/basicWidget/form/ae_upload_document_item.dart';
 import 'package:flutter_templet_project/basicWidget/form/ae_upload_image_item.dart';
 import 'package:flutter_templet_project/basicWidget/n_footer_button_bar.dart';
@@ -27,9 +26,9 @@ import 'package:flutter_templet_project/basicWidget/upload/asset_upload_model.da
 import 'package:flutter_templet_project/basicWidget/upload_document/asset_upload_document_model.dart';
 import 'package:flutter_templet_project/enum/ActivityType.dart';
 import 'package:flutter_templet_project/extension/bool_ext.dart';
-import 'package:flutter_templet_project/extension/type_util.dart';
 import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/extension/function_ext.dart';
+import 'package:flutter_templet_project/extension/type_util.dart';
 import 'package:flutter_templet_project/mixin/safe_set_state_mixin.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:flutter_templet_project/util/tool_util.dart';
@@ -644,7 +643,7 @@ class AdverseEventRecord {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
+    final data = <String, dynamic>{};
     data['id'] = id;
     data['createTime'] = createTime;
     data['updateTime'] = updateTime;

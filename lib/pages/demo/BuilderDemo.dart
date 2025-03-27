@@ -11,8 +11,7 @@ class BuilderDemo extends StatefulWidget {
   _BuilderDemoState createState() => _BuilderDemoState();
 }
 
-class _BuilderDemoState extends State<BuilderDemo>
-    with TickerProviderStateMixin {
+class _BuilderDemoState extends State<BuilderDemo> with TickerProviderStateMixin {
   late final AnimationController _controller = AnimationController(
     duration: const Duration(seconds: 10),
     vsync: this,
@@ -26,8 +25,6 @@ class _BuilderDemoState extends State<BuilderDemo>
 
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
@@ -96,8 +93,7 @@ class _BuilderDemoState extends State<BuilderDemo>
             animation: _controller,
             child: _buildBox('AnimatedBuilder'),
             builder: (BuildContext context, Widget? child) {
-              return StatefulBuilder(
-                  builder: (BuildContext context, StateSetter setState) {
+              return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
                 return _buildBox('StatefulBuilder');
               });
             },

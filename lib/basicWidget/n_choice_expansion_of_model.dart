@@ -9,9 +9,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/basicWidget/n_choice_box.dart';
 import 'package:flutter_templet_project/basicWidget/n_choice_expansion.dart';
-import 'package:flutter_templet_project/extension/dlog.dart';
-import 'package:flutter_templet_project/mixin/selectable_mixin.dart';
-import 'package:flutter_templet_project/model/tag_detail_model.dart';
 
 /// 模型(必须包含 bool isSelected 属性)的标签选择器
 // class NChoiceExpansionOfModel<T extends SelectableMixin> extends StatelessWidget {
@@ -161,11 +158,11 @@ class NChoiceExpansionOfModel<T> extends StatefulWidget {
 
 class _NChoiceExpansionOfModelState<T>
     extends State<NChoiceExpansionOfModel<T>> {
-  @override
-  void didUpdateWidget(covariant NChoiceExpansionOfModel<T> oldWidget) {
-    // TODO: implement didUpdateWidget
-    super.didUpdateWidget(oldWidget);
-  }
+  // @override
+  // void didUpdateWidget(covariant NChoiceExpansionOfModel<T> oldWidget) {
+  //   // TODO: implement didUpdateWidget
+  //   super.didUpdateWidget(oldWidget);
+  // }
 
   @override
   Widget build(BuildContext context) {

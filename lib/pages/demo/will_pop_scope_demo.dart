@@ -41,7 +41,7 @@ class _WillPopScopeDemoState extends State<WillPopScopeDemo> {
 
   Future<void> showAlert() async {
     // 弹出确认对话框
-    bool shouldPop = await showDialog(
+    var shouldPop = await showDialog(
           context: context,
           builder: (context) => AlertDialog(
             title: Text("确认"),

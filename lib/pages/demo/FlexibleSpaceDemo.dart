@@ -10,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/APPThemeSettings.dart';
 import 'package:flutter_templet_project/basicWidget/n_flexible_space_bar.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
-import 'package:flutter_templet_project/extension/color_ext.dart';
 
 class FlexibleSpaceDemo extends StatefulWidget {
   const FlexibleSpaceDemo({Key? key, this.title}) : super(key: key);
@@ -58,9 +57,9 @@ class _FlexibleSpaceDemoState extends State<FlexibleSpaceDemo> {
   }
 
   buildPage() {
-    bool isDark = Theme.of(context).brightness == Brightness.dark;
-    Color? appBarColor = Theme.of(context).appBarTheme.backgroundColor;
-    Color? appBarTextColor =
+    var isDark = Theme.of(context).brightness == Brightness.dark;
+    var appBarColor = Theme.of(context).appBarTheme.backgroundColor;
+    var appBarTextColor =
         Theme.of(context).appBarTheme.titleTextStyle?.color;
 
     final textColor = isDark ? appBarTextColor : Color(0xff262626);

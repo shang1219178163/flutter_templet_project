@@ -32,8 +32,8 @@ mixin ScrollDirectionMixin<T extends StatefulWidget> on State<T> {
 
   void _handleScrollNotification(ScrollNotification notification) {
     if (notification is ScrollUpdateNotification) {
-      final bool oldScrolledUnder = _scrolledUnder;
-      final ScrollMetrics metrics = notification.metrics;
+      final oldScrolledUnder = _scrolledUnder;
+      final metrics = notification.metrics;
       switch (metrics.axisDirection) {
         case AxisDirection.up:
           // Scroll view is reversed

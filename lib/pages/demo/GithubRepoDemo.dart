@@ -8,16 +8,11 @@
 
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-
 import 'package:dio/dio.dart';
-import 'package:flutter_templet_project/extension/dlog.dart';
-import 'package:flutter_templet_project/model/repo_model.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/model/repository.dart';
 import 'package:flutter_templet_project/network/RequestManager.dart';
 import 'package:flutter_templet_project/network/base_request_api.dart';
-import 'package:json_annotation/json_annotation.dart';
 
 class GithubRepoDemo extends StatefulWidget {
   final String? title;

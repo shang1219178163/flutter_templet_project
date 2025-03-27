@@ -84,7 +84,7 @@ class DialogTagSelect with DialogMixin {
       onCancel: () {
         selectTagsTmp = selectTags;
         final ids = selectTagsTmp.map((e) => e.id).toList();
-        for (var element in tags) {
+        for (final element in tags) {
           element.isSelected = ids.contains(element.id);
         }
 
@@ -106,7 +106,7 @@ class DialogTagSelect with DialogMixin {
         }
 
         final ids = selectTags.map((e) => e.id).toList();
-        for (var element in tags) {
+        for (final element in tags) {
           element.isSelected = ids.contains(element.id);
         }
 
@@ -137,7 +137,7 @@ class DialogTagSelect with DialogMixin {
                     final chooseCount =
                         tags.where((e) => e.isSelected == true).toList().length;
 
-                    for (var element in tags) {
+                    for (final element in tags) {
                       if (element.id == e.id) {
                         if (selected && max != null && chooseCount == max) {
                           onMax?.call();

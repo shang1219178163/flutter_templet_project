@@ -281,12 +281,11 @@ class XHorizontalScrollWidget extends StatelessWidget {
 
 class _SynHomeSwiperTitleWidget extends StatelessWidget {
   const _SynHomeSwiperTitleWidget({
-    Key? key,
-    this.title,
-    this.text,
-    this.maxLines,
-    this.style,
-    this.padding,
+    Key? key, 
+    this.text, 
+    this.maxLines, 
+    this.style, this.title, 
+    this.padding, 
     this.alignment,
   }) : super(key: key);
 
@@ -406,7 +405,6 @@ class HorizontalScrollWidget extends StatelessWidget {
   _buildListView({
     bool addToSliverBox = false,
     IndexedWidgetBuilder? itemBuilder,
-    EdgeInsets padding = const EdgeInsets.all(0),
   }) {
     // final items = List.generate(3, (index) => "${index}");
 

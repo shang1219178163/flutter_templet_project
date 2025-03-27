@@ -6,7 +6,6 @@
 //  Copyright © 7/2/21 shang. All rights reserved.
 //
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 /// Defines the [Stepper]'s titles position when the [type] is [StepperType.horizontal].
@@ -388,7 +387,7 @@ class _EnhanceStepperState extends State<EnhanceStepper> with TickerProviderStat
     if (!_isDark()) {
       return widget.steps[index].isActive ? colorScheme.primary : colorScheme.onSurface.withOpacity(0.38);
     } else {
-      return widget.steps[index].isActive ? colorScheme.secondary : colorScheme.background;
+      return widget.steps[index].isActive ? colorScheme.secondary : colorScheme.surface;
     }
   }
 
@@ -501,16 +500,16 @@ class _EnhanceStepperState extends State<EnhanceStepper> with TickerProviderStat
             TextButton(
               onPressed: widget.onStepContinue,
               style: ButtonStyle(
-                foregroundColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
-                  return states.contains(MaterialState.disabled)
+                foregroundColor: WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
+                  return states.contains(WidgetState.disabled)
                       ? null
                       : (_isDark() ? colorScheme.onSurface : colorScheme.onPrimary);
                 }),
-                backgroundColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
-                  return _isDark() || states.contains(MaterialState.disabled) ? null : colorScheme.primary;
+                backgroundColor: WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
+                  return _isDark() || states.contains(WidgetState.disabled) ? null : colorScheme.primary;
                 }),
-                padding: MaterialStateProperty.all<EdgeInsetsGeometry>(buttonPadding),
-                shape: MaterialStateProperty.all<OutlinedBorder>(buttonShape),
+                padding: WidgetStateProperty.all<EdgeInsetsGeometry>(buttonPadding),
+                shape: WidgetStateProperty.all<OutlinedBorder>(buttonShape),
               ),
               child: Text(localizations.continueButtonLabel),
             ),

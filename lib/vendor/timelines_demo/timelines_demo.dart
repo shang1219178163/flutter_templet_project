@@ -1,8 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:timelines/timelines.dart';
-
 import 'package:flutter_templet_project/vendor/timelines_demo/component_page.dart';
 import 'package:flutter_templet_project/vendor/timelines_demo/logistics_time_line.dart';
 import 'package:flutter_templet_project/vendor/timelines_demo/showcase/package_delivery_tracking.dart';
@@ -11,6 +8,7 @@ import 'package:flutter_templet_project/vendor/timelines_demo/showcase/timeline_
 import 'package:flutter_templet_project/vendor/timelines_demo/showcase_page.dart';
 import 'package:flutter_templet_project/vendor/timelines_demo/theme_page.dart';
 import 'package:flutter_templet_project/vendor/timelines_demo/timelines_widgets.dart';
+import 'package:timelines/timelines.dart';
 
 class TimelinesDemo extends StatelessWidget {
   const TimelinesDemo({Key? key}) : super(key: key);

@@ -1,33 +1,25 @@
-import 'dart:math';
-
 import 'package:dash_painter/dash_decoration.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter_templet_project/basicWidget/GradientBoundPainter.dart';
 import 'package:flutter_templet_project/basicWidget/after_layout_builder.dart';
 import 'package:flutter_templet_project/basicWidget/n_button.dart';
 import 'package:flutter_templet_project/basicWidget/n_dash_decoration.dart';
 import 'package:flutter_templet_project/basicWidget/n_painter_arc.dart';
 import 'package:flutter_templet_project/basicWidget/n_pair.dart';
-import 'package:flutter_templet_project/basicWidget/n_text.dart';
-import 'package:flutter_templet_project/basicWidget/n_text_button.dart';
-import 'package:flutter_templet_project/basicWidget/radial_button.dart';
 import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
+import 'package:flutter_templet_project/basicWidget/n_text.dart';
+import 'package:flutter_templet_project/basicWidget/radial_button.dart';
 import 'package:flutter_templet_project/basicWidget/triangle_decoration.dart';
+import 'package:flutter_templet_project/basicWidget/upload_button.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
+import 'package:flutter_templet_project/extension/button_ext.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
-import 'package:flutter_templet_project/extension/decoration_ext.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/pages/demo/CirclePainter.dart';
-import 'package:flutter_templet_project/basicWidget/n_popup_route.dart';
-import 'package:flutter_templet_project/basicWidget/upload_button.dart';
-import 'package:flutter_templet_project/extension/button_ext.dart';
-import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/pages/demo/curve_painter.dart';
 import 'package:flutter_templet_project/util/tool_util.dart';
-
 import 'package:tuple/tuple.dart';
 
 class SecondPage extends StatefulWidget {
@@ -74,8 +66,8 @@ class _SecondPageState extends State<SecondPage> {
     return TextButton(
       onPressed: () {},
       style: ButtonStyle(
-        foregroundColor: MaterialStateProperty.resolveWith<Color>((Set<MaterialState> states) {
-          if (states.contains(MaterialState.pressed)) {
+        foregroundColor: WidgetStateProperty.resolveWith<Color>((Set<WidgetState> states) {
+          if (states.contains(WidgetState.pressed)) {
             return Colors.green;
           }
           return Colors.black87; // Defer to the widget's default.
@@ -200,9 +192,9 @@ class _SecondPageState extends State<SecondPage> {
               child: BackButton(
                 color: Colors.red,
                 style: ButtonStyle(
-                  padding: MaterialStatePropertyAll(EdgeInsets.all(1)),
+                  padding: WidgetStatePropertyAll(EdgeInsets.all(1)),
                   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  minimumSize: MaterialStatePropertyAll(Size(24, 24)),
+                  minimumSize: WidgetStatePropertyAll(Size(24, 24)),
                   // fixedSize: MaterialStatePropertyAll(Size(24, 24)),
                 ),
                 onPressed: () => debugPrint("BackButton"),
@@ -575,7 +567,7 @@ class _SecondPageState extends State<SecondPage> {
             ),
             NSectionBox(
               title: "_buildButtonBar",
-              child: ButtonBar(
+              child: OverflowBar(
                 children: [
                   'Ok',
                   'Cancel',
@@ -1104,8 +1096,6 @@ class _SecondPageState extends State<SecondPage> {
   }
 
   Widget _buildGradientBound({
-    Gradient? gradient,
-    Widget? child,
     VoidCallback? onTap,
   }) {
     return InkWell(
@@ -1158,7 +1148,7 @@ class _SecondPageState extends State<SecondPage> {
     double radius = 22.5,
     Gradient? gradient,
   }) {
-    bool enable = (onPressed != null);
+    var enable = (onPressed != null);
 
     final borderRadius = BorderRadius.circular(radius);
 

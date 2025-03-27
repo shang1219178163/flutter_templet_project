@@ -7,7 +7,6 @@
 //
 
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/extension/color_ext.dart';
 import 'package:flutter_templet_project/pages/demo/PageLifecycleObserverDemo.dart';
 
 class PageLifecycleFuncTest extends StatefulWidget {
@@ -36,11 +35,11 @@ class _PageLifecycleFuncTestState extends State<PageLifecycleFuncTest> {
           'done',
         ]
             .map((e) => TextButton(
+                  onPressed: onPressed,
                   child: Text(
                     e,
                     style: TextStyle(color: Colors.white),
                   ),
-                  onPressed: onPressed,
                 ))
             .toList(),
       ),

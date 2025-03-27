@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_templet_project/basicWidget/n_section_box.dart';
-import 'package:flutter_templet_project/extension/widget_ext.dart';
 
 class SliverBaseDemo extends StatelessWidget {
   const SliverBaseDemo({Key? key}) : super(key: key);

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/mixin/dialog_tag_select.dart';
 import 'package:flutter_templet_project/model/selected_model.dart';
-import 'package:get/get.dart';
 
 class AlertDialogTagSelectDemo extends StatefulWidget {
   AlertDialogTagSelectDemo({Key? key, this.title}) : super(key: key);
@@ -20,7 +19,7 @@ class _AlertDialogTagSelectDemoState extends State<AlertDialogTagSelectDemo> {
   late List<SelectModel> tags = items
       .map((e) => SelectModel(
             id: e.toString(),
-            name: "标签_${e}",
+            name: "标签_$e",
           ))
       .toList();
 
@@ -43,11 +42,11 @@ class _AlertDialogTagSelectDemoState extends State<AlertDialogTagSelectDemo> {
             'done',
           ]
               .map((e) => TextButton(
+                    onPressed: onPressed,
                     child: Text(
                       e,
                       style: TextStyle(color: Colors.white),
                     ),
-                    onPressed: onPressed,
                   ))
               .toList(),
         ),
@@ -72,7 +71,7 @@ class _AlertDialogTagSelectDemoState extends State<AlertDialogTagSelectDemo> {
         return ActionChip(
           avatar: CircleAvatar(
             backgroundColor: Theme.of(context).primaryColor,
-            child: Text("$e"),
+            child: Text(e),
           ),
           label: Text(e),
           onPressed: () => onTap.call(i),

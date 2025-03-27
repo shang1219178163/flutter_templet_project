@@ -31,8 +31,6 @@ class _BoxShadowDemoState extends State<BoxShadowDemo> {
 
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title ?? "$widget"),
@@ -80,8 +78,7 @@ class _BoxShadowDemoState extends State<BoxShadowDemo> {
             ]),
           ),
           _buildBox(
-            text:
-                "spreadRadius: 5.0, blurRadius: 5.0, offset: Offset(3.0, 3.0)",
+            text: "spreadRadius: 5.0, blurRadius: 5.0, offset: Offset(3.0, 3.0)",
             decoration: BoxDecoration(
               color: Color(0xffffffff),
               boxShadow: [

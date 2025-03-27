@@ -14,12 +14,10 @@ class DateRangePickerDialogDemo extends StatefulWidget {
   final String? title;
 
   @override
-  _DateRangePickerDialogDemoState createState() =>
-      _DateRangePickerDialogDemoState();
+  _DateRangePickerDialogDemoState createState() => _DateRangePickerDialogDemoState();
 }
 
-class _DateRangePickerDialogDemoState extends State<DateRangePickerDialogDemo>
-    with SingleTickerProviderStateMixin {
+class _DateRangePickerDialogDemoState extends State<DateRangePickerDialogDemo> with SingleTickerProviderStateMixin {
   TabController? _tabController;
 
   final models = DatePickerEntryMode.values;
@@ -33,8 +31,6 @@ class _DateRangePickerDialogDemoState extends State<DateRangePickerDialogDemo>
 
   @override
   Widget build(BuildContext context) {
-    dynamic arguments = ModalRoute.of(context)!.settings.arguments;
-
     debugPrint("models: $models");
     return Scaffold(
       appBar: AppBar(
@@ -54,9 +50,7 @@ class _DateRangePickerDialogDemoState extends State<DateRangePickerDialogDemo>
           isScrollable: true,
           controller: _tabController,
           indicatorSize: TabBarIndicatorSize.label,
-          tabs: models
-              .map((e) => Tab(text: e.toString().split(".").last))
-              .toList(),
+          tabs: models.map((e) => Tab(text: e.toString().split(".").last)).toList(),
         ),
       ),
       body: buildBody(),
