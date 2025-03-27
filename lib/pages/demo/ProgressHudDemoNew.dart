@@ -13,7 +13,7 @@ import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:get/get.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:tuple/tuple.dart';
 
 final GlobalKey _globalKey = GlobalKey();

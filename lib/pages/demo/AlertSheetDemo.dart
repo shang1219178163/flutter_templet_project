@@ -6,7 +6,7 @@ import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:get/get.dart';
 
-import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 
 import 'package:flutter_templet_project/basicWidget/chioce_list.dart';
 import 'package:flutter_templet_project/basicWidget/chioce_wrap.dart';

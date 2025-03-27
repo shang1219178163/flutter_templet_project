@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:ffi';
 import 'package:ffi/ffi.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 
 class FlutterFFiTest extends StatefulWidget {
   FlutterFFiTest({super.key, this.title});

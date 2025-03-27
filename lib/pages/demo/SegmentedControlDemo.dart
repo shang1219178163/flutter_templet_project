@@ -7,7 +7,7 @@ import 'package:flutter_templet_project/basicWidget/enhance/en_sliding_segmented
 import 'package:flutter_templet_project/basicWidget/n_line_segment_view.dart';
 import 'package:flutter_templet_project/basicWidget/n_list_view_segment_control.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 

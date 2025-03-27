@@ -146,13 +146,14 @@ class DLog {
 
     final (className, functionName, fileName, lineNumber) = _getCallerInfo();
     final now = DateTime.now();
-    final timeStr =
-        '${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')}:${now.second.toString().padLeft(2, '0')}.${now.millisecond.toString().padLeft(3, '0')}';
+    // final timeStr =
+    //     '${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')}:${now.second.toString().padLeft(2, '0')}.${now.millisecond.toString().padLeft(3, '0')}';
+    final timeStr = now.toString();
     final platform = _getPlatform();
 
     final logMessage = kIsWeb
-        ? '[$timeStr][$level][$platform]$message'
-        : '[$timeStr][$level][$platform][$className.$functionName $lineNumber] $message';
+        ? '[$timeStr][$level][$platform]: $message'
+        : '[$timeStr][$level][$platform][$className.$functionName $lineNumber]: $message';
 
     if (kIsWeb) {
       _printLogWeb(level, logMessage, webColor);

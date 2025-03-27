@@ -20,7 +20,7 @@ import 'package:flutter_templet_project/extension/list_ext.dart';
 import 'package:flutter_templet_project/extension/num_ext.dart';
 import 'package:flutter_templet_project/extension/service_protocol_info_ext.dart';
 import 'package:flutter_templet_project/extension/type_util.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/extension/map_ext.dart';
 import 'package:flutter_templet_project/extension/object_ext.dart';
 import 'package:flutter_templet_project/extension/snack_bar_ext.dart';

@@ -15,7 +15,7 @@ import 'package:flutter_templet_project/extension/button_ext.dart';
 import 'package:flutter_templet_project/extension/string_ext.dart';
 import 'package:flutter_templet_project/extension/widget_ext.dart';
 import 'package:flutter_templet_project/main.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/extension/navigator_ext.dart';
 import 'package:flutter_templet_project/extension/dialog_ext.dart';
 import 'package:flutter_templet_project/mixin/bottom_sheet_image_mixin.dart';

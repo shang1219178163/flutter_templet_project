@@ -7,7 +7,7 @@ import 'package:flutter_templet_project/basicWidget/n_resize_switch.dart';
 import 'package:flutter_templet_project/basicWidget/n_sliver_persistent_header_delegate.dart';
 import 'package:flutter_templet_project/basicWidget/n_text.dart';
 import 'package:flutter_templet_project/extension/build_context_ext.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/pages/demo/HitTestDemo.dart';
 import 'package:flutter_templet_project/util/R.dart';
 import 'package:get/get.dart';

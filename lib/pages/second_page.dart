@@ -24,7 +24,7 @@ import 'package:flutter_templet_project/pages/demo/CirclePainter.dart';
 import 'package:flutter_templet_project/basicWidget/n_popup_route.dart';
 import 'package:flutter_templet_project/basicWidget/upload_button.dart';
 import 'package:flutter_templet_project/extension/button_ext.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/pages/demo/curve_painter.dart';
 import 'package:flutter_templet_project/util/tool_util.dart';
 

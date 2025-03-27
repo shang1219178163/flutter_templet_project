@@ -12,7 +12,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:dio/dio.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 import 'package:flutter_templet_project/model/repo_model.dart';
 import 'package:flutter_templet_project/model/repository.dart';
 import 'package:flutter_templet_project/network/RequestManager.dart';

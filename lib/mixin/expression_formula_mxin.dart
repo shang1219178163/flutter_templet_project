@@ -8,7 +8,7 @@
 
 import 'package:expressions/expressions.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_templet_project/extension/ddlog.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 
 /// 表达公式计算
 mixin ExpressionFormulaMxin {
