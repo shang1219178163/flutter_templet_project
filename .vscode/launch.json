@@ -8,7 +8,8 @@
     {
       "name": "flutter_templet_project",
       "request": "launch",
-      "type": "dart"
+      "type": "dart",
+      "deviceId": "E5A00D5F-42D9-497F-A789-FAD398EE3F17"
     },
     {
       "name": "flutter_templet_project (profile mode)",
