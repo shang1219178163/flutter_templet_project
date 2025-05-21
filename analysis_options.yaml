@@ -97,7 +97,7 @@ analyzer:
     unnecessary_overrides: error # 不做没有必要的重写，比如，重写之后，并没有自己的逻辑代码，只是简单的调用了超方法。
     unrelated_type_equality_checks: error # 不要比较不相关类型的引用是否相等。
     # 比较一个类型的引用，如果两者都不是另一个类型的子类型，则很可能返回false，并且可能不反映程序员的意图。
-    # 来自package:fixnum的Int64和Int32允许与int进行比较，前提是int在右边。规则允许这作为一个特殊的情况。
+    # 来自package:fixme的Int64和Int32允许与int进行比较，前提是int在右边。规则允许这作为一个特殊的情况。
     void_checks: error # 不要赋值给void。
     avoid_init_to_null: error #不要显式地将变量初始化为null。
     #如果一个变量的类型是非空的或者是final的，如果你在它被明确初始化之前尝试使用它，Dart会报告一个编译错误。
@@ -171,7 +171,6 @@ linter:
     - always_use_package_imports
     - empty_statements
     - avoid_dynamic_calls
-    - avoid_returning_null_for_future
     - avoid_slow_async_io
     - avoid_type_to_string
     - avoid_types_as_parameter_names
@@ -191,8 +190,6 @@ linter:
     - avoid_relative_lib_imports
     - curly_braces_in_flow_control_structures
 #    - file_names
-    - iterable_contains_unrelated_type
-    - list_remove_unrelated_type
     - non_constant_identifier_names
     - prefer_generic_function_type_aliases
     - prefer_is_empty
@@ -237,7 +234,7 @@ linter:
     - recursive_getters
     - slash_for_doc_comments
     - type_init_formals
-    - unnecessary_brace_in_string_interps
+    - unnecessary_brace_in_string_interns
     - unnecessary_const
     - unnecessary_getters_setters
     - unnecessary_new
