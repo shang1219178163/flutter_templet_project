@@ -255,26 +255,30 @@ class APPThemeService {
 
       return Container(
         color: e,
-        child: Column(
+        child: Row(
           children: [
-            const SizedBox(height: 18),
-            GestureDetector(
-              onTap: () {
-                changeThemeLight(e);
-                Navigator.pop(context);
-                cb();
-              },
-              child: Text(
-                text,
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.white,
-                  backgroundColor: e,
-                  decoration: TextDecoration.none,
+            Column(
+              children: [
+                const SizedBox(height: 18),
+                GestureDetector(
+                  onTap: () {
+                    changeThemeLight(e);
+                    Navigator.pop(context);
+                    cb();
+                  },
+                  child: Text(
+                    text,
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.white,
+                      backgroundColor: e,
+                      decoration: TextDecoration.none,
+                    ),
+                  ),
                 ),
-              ),
+                const SizedBox(height: 18),
+              ],
             ),
-            const SizedBox(height: 18),
           ],
         ),
       );

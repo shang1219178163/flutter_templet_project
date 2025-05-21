@@ -696,6 +696,7 @@ var vendors = <Tuple2<String, String>>[
   Tuple2(APPRouter.scanBarcodeDemo, "scanBarcodeDemo"),
   Tuple2(APPRouter.animatedModalBarrierDemo, "animatedModalBarrierDemo"),
   Tuple2(APPRouter.metaDataDemo, "metaDataDemo"),
+  Tuple2(APPRouter.appLocaleChangePage, "appLocaleChangePage"),
 ];
 
 var others = <Tuple2<String, String>>[

@@ -6,6 +6,7 @@
 //  Copyright © 3/13/23 shang. All rights reserved.
 //
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -26,7 +27,6 @@ import 'package:flutter_templet_project/routes/AppRouteObserver.dart';
 import 'package:flutter_templet_project/routes/AppRouter.dart';
 import 'package:flutter_templet_project/routes/InitialBinding.dart';
 import 'package:flutter_templet_project/util/tool_util.dart';
-
 import 'package:flutter_templet_project/vendor/isar/DBManager.dart';
 import 'package:flutter_templet_project/vendor/isar/model/db_order.dart';
 import 'package:flutter_templet_project/vendor/isar/model/db_student.dart';
@@ -54,6 +54,7 @@ import 'package:route_stack_manager/route_stack_manager.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
 
   // /// 从  --dart-define=app_env=beta 读取运行环境
   RequestConfig.initFromEnvironment();
@@ -102,7 +103,12 @@ Future<void> main() async {
           update: (ctx, person, eatModel) => EatModel(name: person.name),
         ),
       ],
-      child: MyApp(),
+      child: EasyLocalization(
+        supportedLocales: [Locale('zh'), Locale('en')],
+        path: 'assets/translations', // <-- change the path of the translation files
+        fallbackLocale: Locale('zh'),
+        child: MyApp(),
+      ),
     ),
   );
 
@@ -161,17 +167,19 @@ class MyApp extends StatelessWidget {
       navigatorKey: ToolUtil.navigatorKey,
       title: 'Flutter Templet',
       debugShowCheckedModeBanner: false,
-      locale: const Locale('zh'),
       initialBinding: InitialBinding(),
+      // locale: const Locale('zh'),
+      // supportedLocales: const [Locale('zh', 'CH')],
+      locale: context.locale,
+      supportedLocales: context.supportedLocales,
       localizationsDelegates: [
         // AppCupertinoLocalizations.delegate,
         // ZhCupertinoLocalizations.delegate,
-
+        ...context.localizationDelegates,
         GlobalCupertinoLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
       ],
-      supportedLocales: const [Locale('zh', 'CH')],
       theme: APPThemeService().themeData,
       // darkTheme: APPThemeSettings.instance.darkThemeData,
       // home: MyHomePage(title: 'Flutter Demo Home Page'),

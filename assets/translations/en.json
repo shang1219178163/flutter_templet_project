@@ -1,0 +1,11 @@
+{
+  "language": "英文",
+  "hello": "Hello",
+  "world": "World!",
+  "title": "My App",
+  "money": {
+    "zero": "{name} has no money",
+    "0": "{name} has no money",
+    "other": "{name} has {money} dollars"
+  }
+}

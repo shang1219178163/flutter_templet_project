@@ -16,6 +16,7 @@ import 'package:flutter_templet_project/basicWidget/NTree/NTreeDemo.dart';
 import 'package:flutter_templet_project/basicWidget/responsive_column.dart';
 import 'package:flutter_templet_project/basicWidget/upload/asset_upload_box_demo.dart';
 import 'package:flutter_templet_project/pages/IrregularClipperDemo.dart';
+import 'package:flutter_templet_project/pages/app_locale_change_page.dart';
 import 'package:flutter_templet_project/pages/app_not_found_page.dart';
 import 'package:flutter_templet_project/pages/app_settings_page.dart';
 import 'package:flutter_templet_project/pages/app_tab_page.dart';
@@ -799,6 +800,7 @@ class APPRouter {
   static const String scanBarcodeDemo = '/scanBarcodeDemo';
   static const String animatedModalBarrierDemo = '/animatedModalBarrierDemo';
   static const String metaDataDemo = '/metaDataDemo';
+  static const String appLocaleChangePage = '/appLocaleChangePage';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -2372,6 +2374,10 @@ class AppPage {
     GetPage(
       name: APPRouter.metaDataDemo,
       page: () => MetaDataDemo(),
+    ),
+    GetPage(
+      name: APPRouter.appLocaleChangePage,
+      page: () => AppLocaleChangePage(),
     ),
   ];
 }

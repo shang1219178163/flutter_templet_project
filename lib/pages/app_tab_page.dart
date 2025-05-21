@@ -114,7 +114,7 @@ class _AppTabPageState extends State<AppTabPage> with WidgetsBindingObserver, Ap
     // });
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      AppRouteObserver.resetRoute();
+      // AppRouteObserver.resetRoute();
     });
   }
 
