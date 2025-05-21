@@ -34,8 +34,12 @@ class _PopScopeDemoState extends State<PopScopeDemo> {
     return PopScope(
       //popGesture: false 时 iOS 生效
       canPop: canPop,
-      onPopInvoked: (pop) async {
-        DLog.d("onPopInvoked: $pop");
+      // onPopInvoked: (pop) async {
+      //   DLog.d("onPopInvoked: $pop");
+      //   await showAlert();
+      // },
+      onPopInvokedWithResult: (bool didPop, result) async {
+        DLog.d("onPopInvokedWithResult: $didPop, $result");
         await showAlert();
       },
       child: Scaffold(
@@ -83,7 +87,7 @@ class _PopScopeDemoState extends State<PopScopeDemo> {
         false;
     DLog.d("shouldPop: $shouldPop");
     if (shouldPop) {
-      Navigator.of(context).pop();
+      Navigator.of(context).pop({"a": "999"});
     }
   }
 

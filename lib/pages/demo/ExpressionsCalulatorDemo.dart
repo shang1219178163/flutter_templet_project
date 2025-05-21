@@ -67,17 +67,6 @@ class _ExpressionsCalulatorDemoState extends State<ExpressionsCalulatorDemo> {
           ? null
           : AppBar(
               title: Text("$widget"),
-              actions: [
-                'done',
-              ]
-                  .map((e) => TextButton(
-                        child: Text(
-                          e,
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        onPressed: () => debugPrint(e),
-                      ))
-                  .toList(),
             ),
       body: buildBody(),
     );
