@@ -50,6 +50,7 @@ import 'package:flutter_templet_project/pages/demo/AutoLayoutDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AutocompleteDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AutofillGroupDemo.dart';
 import 'package:flutter_templet_project/pages/demo/BackdropFilterDemo.dart';
+import 'package:flutter_templet_project/pages/demo/BackgroundTaskDemo.dart';
 import 'package:flutter_templet_project/pages/demo/BadgeDemo.dart';
 import 'package:flutter_templet_project/pages/demo/BannerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/BlurViewDemo.dart';
@@ -801,6 +802,7 @@ class APPRouter {
   static const String animatedModalBarrierDemo = '/animatedModalBarrierDemo';
   static const String metaDataDemo = '/metaDataDemo';
   static const String appLocaleChangePage = '/appLocaleChangePage';
+  static const String backgroundTaskDemo = '/backgroundTaskDemo';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -2378,6 +2380,10 @@ class AppPage {
     GetPage(
       name: APPRouter.appLocaleChangePage,
       page: () => AppLocaleChangePage(),
+    ),
+    GetPage(
+      name: APPRouter.backgroundTaskDemo,
+      page: () => BackgroundTaskDemo(),
     ),
   ];
 }

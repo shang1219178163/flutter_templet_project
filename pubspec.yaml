@@ -100,6 +100,8 @@ dependencies:
   dio_cookie_manager: ^3.1.1
   dio_cache_interceptor: ^3.5.0
 
+  workmanager: ^0.6.0
+
   popover: ^0.3.0
 
 #  pull_to_refresh: ^1.6.5
@@ -240,6 +242,7 @@ dependencies:
     git:
       url: 'git@github.com:shang1219178163/audio_visualizer.git'
       ref: 'develop'
+
 
 #  User:
 #    hosted:
