@@ -54,7 +54,6 @@ import 'package:route_stack_manager/route_stack_manager.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await EasyLocalization.ensureInitialized();
 
   // /// 从  --dart-define=app_env=beta 读取运行环境
   RequestConfig.initFromEnvironment();
@@ -73,13 +72,18 @@ Future<void> main() async {
       // empty debugPrint implementation in the release mode
     };
   }
-  await ScreenUtil.ensureScreenSize();
-  await CacheService().init();
-  await DBManager().init();
+
+  await Future.wait([
+    EasyLocalization.ensureInitialized(),
+    ScreenUtil.ensureScreenSize(),
+    CacheService().init(),
+    DBManager().init(),
+    initServices(),
+    initDebugInfo(),
+  ]);
 
   setCustomErrorPage();
-  await initServices();
-  await initDebugInfo();
+
   // AppInit.catchException(() => runApp(MyApp()));
   runApp(
     MultiProvider(

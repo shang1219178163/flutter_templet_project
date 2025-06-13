@@ -73,7 +73,7 @@ class CacheService {
   SharedPreferences? _prefs;
   SharedPreferences get prefs => _prefs!;
 
-  init() async {
+  Future<void> init() async {
     _prefs ??= await SharedPreferences.getInstance();
     // debugPrint("init prefs: $prefs");
   }
