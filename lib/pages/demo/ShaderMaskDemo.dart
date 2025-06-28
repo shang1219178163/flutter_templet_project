@@ -62,7 +62,10 @@ class _ShaderMaskDemoState extends State<ShaderMaskDemo> {
         return RadialGradient(
           center: Alignment.topLeft,
           radius: 1.0,
-          colors: <Color>[Colors.yellow, Colors.deepOrange.shade900],
+          colors: <Color>[
+            Colors.yellow,
+            Colors.deepOrange.shade900,
+          ],
           tileMode: TileMode.mirror,
         ).createShader(bounds);
       },
