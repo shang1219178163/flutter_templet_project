@@ -67,6 +67,7 @@ import 'package:flutter_templet_project/pages/demo/CarouselViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ChemotherapyRegimenDrugCaculator.dart';
 import 'package:flutter_templet_project/pages/demo/ChipDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ClipDemo.dart';
+import 'package:flutter_templet_project/pages/demo/ColorSchemeDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ColoredBoxDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ComponentMiddlePage.dart';
 import 'package:flutter_templet_project/pages/demo/CompositedTransformTargetDemo.dart';
@@ -803,6 +804,7 @@ class APPRouter {
   static const String metaDataDemo = '/metaDataDemo';
   static const String appLocaleChangePage = '/appLocaleChangePage';
   static const String backgroundTaskDemo = '/backgroundTaskDemo';
+  static const String colorSchemeDemo = '/colorSchemeDemo';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -2384,6 +2386,10 @@ class AppPage {
     GetPage(
       name: APPRouter.backgroundTaskDemo,
       page: () => BackgroundTaskDemo(),
+    ),
+    GetPage(
+      name: APPRouter.colorSchemeDemo,
+      page: () => ColorSchemeDemo(),
     ),
   ];
 }

@@ -33,12 +33,10 @@ class NestedScrollViewDemoHome extends StatefulWidget {
   const NestedScrollViewDemoHome({super.key});
 
   @override
-  NestedScrollViewDemoHomeState createState() =>
-      NestedScrollViewDemoHomeState();
+  NestedScrollViewDemoHomeState createState() => NestedScrollViewDemoHomeState();
 }
 
-class NestedScrollViewDemoHomeState
-    extends AppTabBarState<NestedScrollViewDemoHome> {
+class NestedScrollViewDemoHomeState extends AppTabBarState<NestedScrollViewDemoHome> {
   final _homeController = Get.put(HomeController(), permanent: true);
 
   /// 嵌套滚动
@@ -55,13 +53,20 @@ class NestedScrollViewDemoHomeState
   }
 
   @override
-  void initState() {
-    scrollControllerNew.addListener(() {
-      scrollY.value = scrollControllerNew.offset;
-      scrollProgress.value = scrollControllerNew.position.progress;
-    });
+  void dispose() {
+    scrollControllerNew.removeListener(onScrollerLtr);
+    super.dispose();
+  }
 
+  @override
+  void initState() {
+    scrollControllerNew.addListener(onScrollerLtr);
     super.initState();
+  }
+
+  onScrollerLtr() {
+    scrollY.value = scrollControllerNew.offset;
+    scrollProgress.value = scrollControllerNew.position.progress;
   }
 
   refresh() {
@@ -118,17 +123,14 @@ class NestedScrollViewDemoHomeState
               snap: false,
               primary: true,
               backgroundColor: () {
-                final color = scrollProgress.value > 0.65
-                    ? collapsedBackgroundColor
-                    : bgColor;
+                final color = scrollProgress.value > 0.65 ? collapsedBackgroundColor : bgColor;
                 return color;
               },
               title: ValueListenableBuilder(
                 valueListenable: scrollY,
                 builder: (context, value, child) {
                   try {
-                    final opacity =
-                        scrollControllerNew.position.progress > 0.9 ? 1.0 : 0.0;
+                    final opacity = scrollControllerNew.position.progress > 0.9 ? 1.0 : 0.0;
                     return AnimatedOpacity(
                       opacity: opacity,
                       duration: const Duration(milliseconds: 100),
@@ -336,8 +338,7 @@ class NestedScrollViewDemoHomeState
                         Container(
                           padding: const EdgeInsets.only(left: 8.0),
                           child: Image(
-                            image:
-                                'assets/images/icon_switch.png'.toAssetImage(),
+                            image: 'assets/images/icon_switch.png'.toAssetImage(),
                             width: 14,
                             height: 14,
                           ),
@@ -583,14 +584,11 @@ class NestedScrollViewDemoHomeState
                                 orElse: () => const Text('0'),
                                 loading: () => Align(
                                   alignment: Alignment.centerLeft,
-                                  child: CupertinoActivityIndicator(
-                                      radius: 8, color: color),
+                                  child: CupertinoActivityIndicator(radius: 8, color: color),
                                 ),
                                 data: (number) => number > 99
                                     ? const Text.rich(
-                                        style: TextStyle(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w600),
+                                        style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
                                         TextSpan(
                                           text: '99',
                                           children: [
@@ -601,16 +599,12 @@ class NestedScrollViewDemoHomeState
                                         ),
                                       )
                                     : Text('$number',
-                                        style: const TextStyle(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w600)),
+                                        style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
                               )
                             : count != null
                                 ? count > 99
                                     ? const Text.rich(
-                                        style: TextStyle(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w600),
+                                        style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
                                         TextSpan(
                                           text: '99',
                                           children: [
@@ -620,10 +614,7 @@ class NestedScrollViewDemoHomeState
                                           ],
                                         ),
                                       )
-                                    : Text('$count',
-                                        style: const TextStyle(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w600))
+                                    : Text('$count', style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600))
                                 : const SizedBox(),
                         const SizedBox(width: 2),
                         NText(
