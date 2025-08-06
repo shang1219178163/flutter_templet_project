@@ -699,6 +699,7 @@ var vendors = <Tuple2<String, String>>[
   Tuple2(APPRouter.appLocaleChangePage, "appLocaleChangePage"),
   Tuple2(APPRouter.backgroundTaskDemo, "backgroundTaskDemo"),
   Tuple2(APPRouter.colorSchemeDemo, "colorSchemeDemo"),
+  Tuple2(APPRouter.concurrentExecutorDemo, "concurrentExecutorDemo"),
 ];
 
 var others = <Tuple2<String, String>>[

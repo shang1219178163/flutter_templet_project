@@ -71,6 +71,7 @@ import 'package:flutter_templet_project/pages/demo/ColorSchemeDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ColoredBoxDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ComponentMiddlePage.dart';
 import 'package:flutter_templet_project/pages/demo/CompositedTransformTargetDemo.dart';
+import 'package:flutter_templet_project/pages/demo/ConcurrentExecutorDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ContainerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ContextMenuActionDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ContextMenuDemo.dart';
@@ -805,6 +806,7 @@ class APPRouter {
   static const String appLocaleChangePage = '/appLocaleChangePage';
   static const String backgroundTaskDemo = '/backgroundTaskDemo';
   static const String colorSchemeDemo = '/colorSchemeDemo';
+  static const String concurrentExecutorDemo = '/concurrentExecutorDemo';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -2390,6 +2392,10 @@ class AppPage {
     GetPage(
       name: APPRouter.colorSchemeDemo,
       page: () => ColorSchemeDemo(),
+    ),
+    GetPage(
+      name: APPRouter.concurrentExecutorDemo,
+      page: () => ConcurrentExecutorDemo(),
     ),
   ];
 }
