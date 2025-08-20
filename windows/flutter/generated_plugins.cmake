@@ -9,6 +9,7 @@ list(APPEND FLUTTER_PLUGIN_LIST
   file_selector_windows
   flutter_tts
   isar_flutter_libs
+  local_auth_windows
   permission_handler_windows
   record_windows
   share_plus

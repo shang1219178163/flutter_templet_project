@@ -161,6 +161,7 @@ import 'package:flutter_templet_project/pages/demo/ListViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ListViewOneDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ListViewStyleDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ListWheelScrollViewDemo.dart';
+import 'package:flutter_templet_project/pages/demo/LocalAuthDemo.dart';
 import 'package:flutter_templet_project/pages/demo/LocalImagePage.dart';
 import 'package:flutter_templet_project/pages/demo/LoginPage.dart';
 import 'package:flutter_templet_project/pages/demo/LoginPageOne.dart';
@@ -811,6 +812,7 @@ class APPRouter {
   static const String concurrentExecutorDemo = '/concurrentExecutorDemo';
   static const String gameMathPage = '/gameMathPage';
   static const String gameMathPageNew = '/gameMathPageNew';
+  static const String localAuthDemo = '/localAuthDemo';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -2408,6 +2410,11 @@ class AppPage {
     GetPage(
       name: APPRouter.gameMathPageNew,
       page: () => GameMathPageNew(),
+    ),
+
+    GetPage(
+      name: APPRouter.localAuthDemo,
+      page: () => LocalAuthDemo(),
     ),
   ];
 }
