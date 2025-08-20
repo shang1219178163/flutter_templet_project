@@ -36,10 +36,10 @@ class _IteratorDemoState extends State<IteratorDemo> {
 
   final message = """
 1. yield 和 yield* 就像 return，但它们不会结束函数；
-2.yield 和 yield* 只能在 async* 或 sync* 生成器函数中使用；
-3. yield 和 yield* 在 async* 中使用时，返回Stream；
-4.yield 和 yield* 在 sync* 中使用时，返回 Iterable；
-5.yield 用于生成值，而 yield* 用于把当前生成器函数的流程委托给另一个生成器函数。
+2. yield 和 yield* 只能在 async* 或 sync* 生成器函数中使用；
+3. yield 和 yield* 在 async* 中使用时，返回 Stream；
+4. yield 和 yield* 在 sync* 中使用时，返回 Iterable；
+5. yield 用于生成值，而 yield* 用于把当前生成器函数的流程委托给另一个生成器函数。
   """;
 
   @override
