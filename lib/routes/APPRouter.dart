@@ -121,6 +121,8 @@ import 'package:flutter_templet_project/pages/demo/FlutterPickerUtilDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FormDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FractionallySizedBoxDemo.dart';
 import 'package:flutter_templet_project/pages/demo/FutureBuilderDemo.dart';
+import 'package:flutter_templet_project/pages/demo/GameMathPage.dart';
+import 'package:flutter_templet_project/pages/demo/GameMathPageNew.dart';
 import 'package:flutter_templet_project/pages/demo/GestureDetectorDemo.dart';
 import 'package:flutter_templet_project/pages/demo/GetxControllerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/GetxRouteCreatePage.dart';
@@ -807,6 +809,8 @@ class APPRouter {
   static const String backgroundTaskDemo = '/backgroundTaskDemo';
   static const String colorSchemeDemo = '/colorSchemeDemo';
   static const String concurrentExecutorDemo = '/concurrentExecutorDemo';
+  static const String gameMathPage = '/gameMathPage';
+  static const String gameMathPageNew = '/gameMathPageNew';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -2396,6 +2400,14 @@ class AppPage {
     GetPage(
       name: APPRouter.concurrentExecutorDemo,
       page: () => ConcurrentExecutorDemo(),
+    ),
+    GetPage(
+      name: APPRouter.gameMathPage,
+      page: () => GameMathPage(),
+    ),
+    GetPage(
+      name: APPRouter.gameMathPageNew,
+      page: () => GameMathPageNew(),
     ),
   ];
 }

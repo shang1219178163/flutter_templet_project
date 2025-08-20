@@ -700,6 +700,8 @@ var vendors = <Tuple2<String, String>>[
   Tuple2(APPRouter.backgroundTaskDemo, "backgroundTaskDemo"),
   Tuple2(APPRouter.colorSchemeDemo, "colorSchemeDemo"),
   Tuple2(APPRouter.concurrentExecutorDemo, "concurrentExecutorDemo"),
+  Tuple2(APPRouter.gameMathPage, "gameMathPage"),
+  Tuple2(APPRouter.gameMathPageNew, "GameMathPageNew"),
 ];
 
 var others = <Tuple2<String, String>>[
