@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/util/R.dart';
 import 'package:get/get.dart';
+import 'package:scribble/scribble.dart';
 
 class GameMathPage extends StatefulWidget {
   const GameMathPage({
@@ -460,14 +461,14 @@ class _GameMatchItemState extends State<GameMatchItem> {
 
   initData() async {
     _image = await _loadImage(widget.imageUrl);
-    _imageRight = await _loadImage(widget.imageUrlRight);
+    // _imageRight = await _loadImage(widget.imageUrlRight);
   }
 
   @override
   void didUpdateWidget(covariant GameMatchItem oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    if (_image == null) {
+    if (_image == null || _imageRight == null) {
       initData();
     }
   }
@@ -520,14 +521,170 @@ class GameMatchItemPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    if (image == null) {
-      return;
-    }
+    double lineHori = 50;
+    double lineVert = 30;
+
+    double leve1Hori = lineHori * 2.4;
+    double leve2Hori = lineHori * 1.2;
+    double leve3Hori = lineHori * 0.6;
+
+    leve1Hori = size.width / 4;
+    leve2Hori = size.width / 4 - 3 * 10 - 20;
+    leve3Hori = size.width / 8 - 7 * 4 + 4;
+
+    final level0 = paintGameItem(canvas, size,
+        startPoint: size.center(ui.Offset(0, 100)), lineVert: lineVert, lineHori: leve1Hori);
+    final level10 =
+        paintGameItem(canvas, size, startPoint: level0.leftEndPoint, lineVert: lineVert, lineHori: leve2Hori);
+    final level11 =
+        paintGameItem(canvas, size, startPoint: level0.rightEndPoint, lineVert: lineVert, lineHori: leve2Hori);
+
+    final level20 =
+        paintGameItem(canvas, size, startPoint: level10.leftEndPoint, lineVert: lineVert, lineHori: leve3Hori);
+    final level21 =
+        paintGameItem(canvas, size, startPoint: level10.rightEndPoint, lineVert: lineVert, lineHori: leve3Hori);
+
+    final level22 =
+        paintGameItem(canvas, size, startPoint: level11.leftEndPoint, lineVert: lineVert, lineHori: leve3Hori);
+    final level23 =
+        paintGameItem(canvas, size, startPoint: level11.rightEndPoint, lineVert: lineVert, lineHori: leve3Hori);
+    return;
+
+    // // 绘制曲线
+    // var line = paintGameLine(
+    //   canvas,
+    //   size,
+    //   startPoint: size.center(ui.Offset.zero),
+    //   lineHori: lineHori,
+    //   lineVert: lineVert,
+    // );
+    //
+    // // 比分
+    // customDrawTextCenter(
+    //   canvas,
+    //   point: Offset(
+    //     line.startPoint.dx,
+    //     line.startPoint.dy - lineVert - lineVert / 2,
+    //   ),
+    //   text: "99 - 66",
+    //   style: const TextStyle(
+    //     color: Colors.white,
+    //     fontSize: 14,
+    //     fontWeight: FontWeight.bold,
+    //     backgroundColor: Colors.green,
+    //   ),
+    // );
+    //
+    // /// 绘制左边图文
+    // paintGameImageAndText(canvas, size, startPoint: line.leftEndPoint, text: text, image: image!);
+    //
+    // /// 绘制右边图文
+    // paintGameImageAndText(canvas, size, startPoint: line.rightEndPoint, text: textRight, image: image!);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
+
+  ({ui.Offset startPoint, ui.Offset leftEndPoint, ui.Offset rightEndPoint}) paintGameItem(
+    Canvas canvas,
+    Size size, {
+    required Offset startPoint,
+    double lineHori = 60,
+    double lineVert = 30,
+  }) {
+    // 绘制曲线
+    var line = paintGameLine(
+      canvas,
+      size,
+      startPoint: startPoint,
+      lineHori: lineHori,
+      lineVert: lineVert,
+    );
+
+    // 比分
+    customDrawTextCenter(
+      canvas,
+      point: Offset(
+        line.startPoint.dx,
+        line.startPoint.dy - lineVert - lineVert / 2,
+      ),
+      text: "99 - 66",
+      style: const TextStyle(
+        color: Colors.white,
+        fontSize: 10,
+        fontWeight: FontWeight.bold,
+        backgroundColor: Colors.green,
+      ),
+    );
+
+    /// 绘制左边图文
+    var left = paintGameImageAndText(canvas, size, startPoint: line.leftEndPoint, text: text, image: image!);
+
+    /// 绘制右边图文
+    var right = paintGameImageAndText(canvas, size, startPoint: line.rightEndPoint, text: textRight, image: image!);
+    return (startPoint: startPoint, leftEndPoint: left.endPoint, rightEndPoint: right.endPoint);
+  }
+
+  /// 绘制直线
+  ({ui.Offset startPoint, ui.Offset leftEndPoint, ui.Offset rightEndPoint}) paintGameLine(
+    Canvas canvas,
+    Size size, {
+    required ui.Offset startPoint,
+    double lineHori = 120,
+    double lineVert = 60,
+  }) {
+    final paintCenter = Paint()
+      ..color = Colors.white38
+      ..strokeWidth = 2
+      ..style = PaintingStyle.stroke;
+
+    final paintLeft = Paint()
+      ..color = Colors.red
+      ..strokeWidth = 2
+      ..style = PaintingStyle.stroke;
+
+    final paintRight = Paint()
+      ..color = Colors.blue
+      ..strokeWidth = 2
+      ..style = PaintingStyle.stroke;
+
+    final centerPoint = Offset(startPoint.dx, startPoint.dy - lineVert);
+    final pointLeft1 = Offset(centerPoint.dx - lineHori, centerPoint.dy);
+    final pointLeft2 = Offset(pointLeft1.dx, pointLeft1.dy - lineVert);
+    final pointRight1 = Offset(centerPoint.dx + lineHori, centerPoint.dy);
+    final pointRight2 = Offset(pointRight1.dx, pointRight1.dy - lineVert);
+    // 中间到决赛
+    canvas.drawLine(startPoint, centerPoint, paintCenter);
+
+    // 中间到上半场
+    canvas.drawLine(centerPoint, pointLeft1, paintLeft);
+    canvas.drawLine(pointLeft1, pointLeft2, paintLeft);
+
+    // 下半场到中间
+    canvas.drawLine(centerPoint, pointRight1, paintRight);
+    canvas.drawLine(pointRight1, pointRight2, paintRight);
+
+    return (startPoint: startPoint, leftEndPoint: pointLeft2, rightEndPoint: pointRight2);
+  }
+
+  /// 上图下字
+  ({ui.Offset startPoint, ui.Offset endPoint}) paintGameImageAndText(
+    Canvas canvas,
+    Size size, {
+    required ui.Offset startPoint,
+    required String text,
+    required ui.Image image,
+  }) {
+    double imgTextSpacing = 4;
 
     // 文字绘制
     final textSpan = TextSpan(
       text: text,
-      style: const TextStyle(color: Colors.white, fontSize: 14),
+      style: const TextStyle(
+        color: Colors.white,
+        fontSize: 11,
+        backgroundColor: Colors.green,
+      ),
     );
     final textPainter = TextPainter(
       text: textSpan,
@@ -535,112 +692,71 @@ class GameMatchItemPainter extends CustomPainter {
       textDirection: TextDirection.ltr,
     );
     textPainter.layout();
-    final offset1 = Offset(25, 10);
-
+    //
     // 5. 绘制到 Canvas
-    textPainter.paint(canvas, offset1);
+    final offset = Offset(
+      startPoint.dx - textPainter.width / 2,
+      startPoint.dy - textPainter.height / 2 - 10,
+    );
+    textPainter.paint(canvas, offset);
 
     // 图片高度（限制最大高度）
-    double imgHeight = size.height - textPainter.height - 8;
-    double imgWidth = (imgHeight / image!.height) * image!.width;
+    double imgHeight = 30;
+    double imgWidth = 30;
 
-    imgWidth = 30;
-    imgHeight = 30;
+    // 总高度
+    final totalHeight = imgHeight + imgTextSpacing * 2 + textPainter.height;
 
-    // 计算整体垂直居中
-    final totalHeight = imgHeight + 4 + textPainter.height;
-    double startY = (size.height - totalHeight) / 2;
-    startY = 0;
+    final endPoint = Offset(startPoint.dx, startPoint.dy - totalHeight);
 
     // 绘制图片（居中）
-    final imgRect = Rect.fromLTWH(
-      (size.width - imgWidth) / 2,
-      startY,
-      imgWidth,
-      imgHeight,
+    var imgRect = Rect.fromCenter(
+      center: Offset(endPoint.dx, endPoint.dy + imgHeight / 2),
+      width: imgWidth,
+      height: imgHeight,
     );
+
+    final paintCenter = Paint()
+      ..color = Colors.white38
+      ..strokeWidth = 2
+      ..style = PaintingStyle.stroke;
+    canvas.drawRect(imgRect, paintCenter);
+
     paintImage(
       canvas: canvas,
       rect: imgRect,
       image: image!,
       fit: BoxFit.contain,
     );
+    return (startPoint: startPoint, endPoint: endPoint);
+  }
 
-    // 绘制文字（在图片下方居中）
-    final textOffset = Offset(
-      (size.width - textPainter.width) / 2,
-      startY + imgHeight + 4,
-    );
-    textPainter.paint(canvas, textOffset);
-
-    final paint = Paint()
-      ..color = Colors.white38
-      ..strokeWidth = 2
-      ..style = PaintingStyle.stroke;
-
-    final paint2 = Paint()
-      ..color = Colors.red
-      ..strokeWidth = 2
-      ..style = PaintingStyle.stroke;
-
-    final paint3 = Paint()
-      ..color = Colors.blue
-      ..strokeWidth = 2
-      ..style = PaintingStyle.stroke;
-
-    double paddingX = 25;
-    double paddingY = 54;
-
-    double lineHori = (size.width - paddingX * 2) / 2;
-    double lineVert = (size.height - paddingY * 2) / 2;
-
-    // 上半场到中间
-    canvas.drawLine(Offset(paddingX, paddingY), Offset(paddingX, size.height / 2), paint);
-    canvas.drawLine(Offset(paddingX, size.height / 2), Offset(size.width / 2, size.height / 2), paint);
-
-    // 下半场到中间
-    canvas.drawLine(Offset(size.width / 2, size.height / 2), Offset(size.width - paddingX, size.height / 2), paint2);
-    canvas.drawLine(Offset(size.width - paddingX, size.height / 2), Offset(size.width - paddingX, paddingY), paint2);
-
-    // 中间到决赛
-    canvas.drawLine(Offset(size.width / 2, size.height / 2), Offset(size.width / 2, size.height - paddingY), paint3);
-
+  /// 绘制文字居中
+  TextPainter customDrawTextCenter(
+    Canvas canvas, {
+    required Offset point,
+    required String text,
+    required TextStyle style,
+  }) {
+    // InlineSpan? text
     // 1. 定义文字内容与样式
-    final textSpanCompare = TextSpan(
-      text: "99 - 66",
-      style: const TextStyle(
-        color: Colors.white,
-        fontSize: 16,
-        fontWeight: FontWeight.bold,
-        backgroundColor: Colors.amberAccent,
-      ),
-    );
 
-    // 2. 创建 TextPainter
-    final textPainterCompare = TextPainter(
-      text: textSpanCompare,
+    // 1. 创建 TextPainter
+    final textPainter = TextPainter(
+      text: TextSpan(text: text, style: style),
       textAlign: TextAlign.center,
       textDirection: TextDirection.ltr,
     );
-
     // 3. 排版
-    textPainterCompare.layout();
-
+    textPainter.layout();
     // 4. 计算绘制位置（居中）
-    // final offset = Offset(
-    //   (size.width - textPainter.width) / 2,
-    //   (size.height - textPainter.height) / 2,
-    // );
-
     final offset = Offset(
-      (size.width - textPainterCompare.width) / 2,
-      paddingY,
+      point.dx - textPainter.width / 2,
+      point.dy - textPainter.height / 2,
     );
 
     // 5. 绘制到 Canvas
-    textPainterCompare.paint(canvas, offset);
+    textPainter.paint(canvas, offset);
+    return textPainter;
   }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
 }
