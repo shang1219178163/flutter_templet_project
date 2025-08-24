@@ -48,10 +48,10 @@ class _GameMathPageState extends State<GameMathPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const Padding(
-                  padding: EdgeInsets.all(16),
-                  child: TournamentView(),
-                ),
+                // const Padding(
+                //   padding: EdgeInsets.all(16),
+                //   child: TournamentView(),
+                // ),
                 Container(
                   height: 600,
                   decoration: BoxDecoration(
@@ -522,7 +522,7 @@ class GameMatchItemPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     double lineHori = 50;
-    double lineVert = 30;
+    double lineVert = 20;
 
     double leve1Hori = lineHori * 2.4;
     double leve2Hori = lineHori * 1.2;
@@ -548,6 +548,24 @@ class GameMatchItemPainter extends CustomPainter {
         paintGameItem(canvas, size, startPoint: level11.leftEndPoint, lineVert: lineVert, lineHori: leve3Hori);
     final level23 =
         paintGameItem(canvas, size, startPoint: level11.rightEndPoint, lineVert: lineVert, lineHori: leve3Hori);
+
+    final level0Bom = paintGameItem(canvas, size,
+        isReverse: false, startPoint: size.center(ui.Offset(0, 100 + 40)), lineVert: lineVert, lineHori: leve1Hori);
+    final level10Bom = paintGameItem(canvas, size,
+        isReverse: false, startPoint: level0Bom.leftEndPoint, lineVert: lineVert, lineHori: leve2Hori);
+    final level11Bom = paintGameItem(canvas, size,
+        isReverse: false, startPoint: level0Bom.rightEndPoint, lineVert: lineVert, lineHori: leve2Hori);
+
+    final level20Bom = paintGameItem(canvas, size,
+        isReverse: false, startPoint: level10Bom.leftEndPoint, lineVert: lineVert, lineHori: leve3Hori);
+    final level21Bom = paintGameItem(canvas, size,
+        isReverse: false, startPoint: level10Bom.rightEndPoint, lineVert: lineVert, lineHori: leve3Hori);
+
+    final level22Bom = paintGameItem(canvas, size,
+        isReverse: false, startPoint: level11Bom.leftEndPoint, lineVert: lineVert, lineHori: leve3Hori);
+    final level23Bom = paintGameItem(canvas, size,
+        isReverse: false, startPoint: level11Bom.rightEndPoint, lineVert: lineVert, lineHori: leve3Hori);
+
     return;
 
     // // 绘制曲线
@@ -588,14 +606,18 @@ class GameMatchItemPainter extends CustomPainter {
   ({ui.Offset startPoint, ui.Offset leftEndPoint, ui.Offset rightEndPoint}) paintGameItem(
     Canvas canvas,
     Size size, {
+    bool isReverse = true,
     required Offset startPoint,
     double lineHori = 60,
     double lineVert = 30,
   }) {
+    double factor = isReverse == true ? 1.0 : -1.0;
+
     // 绘制曲线
     var line = paintGameLine(
       canvas,
       size,
+      isReverse: isReverse,
       startPoint: startPoint,
       lineHori: lineHori,
       lineVert: lineVert,
@@ -606,7 +628,7 @@ class GameMatchItemPainter extends CustomPainter {
       canvas,
       point: Offset(
         line.startPoint.dx,
-        line.startPoint.dy - lineVert - lineVert / 2,
+        line.startPoint.dy - (lineVert + lineVert / 2) * factor,
       ),
       text: "99 - 66",
       style: const TextStyle(
@@ -618,10 +640,24 @@ class GameMatchItemPainter extends CustomPainter {
     );
 
     /// 绘制左边图文
-    var left = paintGameImageAndText(canvas, size, startPoint: line.leftEndPoint, text: text, image: image!);
+    var left = paintGameImageAndText(
+      canvas,
+      size,
+      isReverse: isReverse,
+      startPoint: line.leftEndPoint,
+      text: text,
+      image: image,
+    );
 
     /// 绘制右边图文
-    var right = paintGameImageAndText(canvas, size, startPoint: line.rightEndPoint, text: textRight, image: image!);
+    var right = paintGameImageAndText(
+      canvas,
+      size,
+      isReverse: isReverse,
+      startPoint: line.rightEndPoint,
+      text: textRight,
+      image: image,
+    );
     return (startPoint: startPoint, leftEndPoint: left.endPoint, rightEndPoint: right.endPoint);
   }
 
@@ -629,6 +665,7 @@ class GameMatchItemPainter extends CustomPainter {
   ({ui.Offset startPoint, ui.Offset leftEndPoint, ui.Offset rightEndPoint}) paintGameLine(
     Canvas canvas,
     Size size, {
+    required bool isReverse,
     required ui.Offset startPoint,
     double lineHori = 120,
     double lineVert = 60,
@@ -648,11 +685,20 @@ class GameMatchItemPainter extends CustomPainter {
       ..strokeWidth = 2
       ..style = PaintingStyle.stroke;
 
-    final centerPoint = Offset(startPoint.dx, startPoint.dy - lineVert);
-    final pointLeft1 = Offset(centerPoint.dx - lineHori, centerPoint.dy);
-    final pointLeft2 = Offset(pointLeft1.dx, pointLeft1.dy - lineVert);
-    final pointRight1 = Offset(centerPoint.dx + lineHori, centerPoint.dy);
-    final pointRight2 = Offset(pointRight1.dx, pointRight1.dy - lineVert);
+    var centerPoint = Offset(startPoint.dx, startPoint.dy - lineVert);
+    var pointLeft1 = Offset(centerPoint.dx - lineHori, centerPoint.dy);
+    var pointLeft2 = Offset(pointLeft1.dx, pointLeft1.dy - lineVert);
+    var pointRight1 = Offset(centerPoint.dx + lineHori, centerPoint.dy);
+    var pointRight2 = Offset(pointRight1.dx, pointRight1.dy - lineVert);
+
+    if (!isReverse) {
+      centerPoint = Offset(startPoint.dx, startPoint.dy + lineVert);
+      pointLeft1 = Offset(centerPoint.dx - lineHori, centerPoint.dy);
+      pointLeft2 = Offset(pointLeft1.dx, pointLeft1.dy + lineVert);
+      pointRight1 = Offset(centerPoint.dx + lineHori, centerPoint.dy);
+      pointRight2 = Offset(pointRight1.dx, pointRight1.dy + lineVert);
+    }
+
     // 中间到决赛
     canvas.drawLine(startPoint, centerPoint, paintCenter);
 
@@ -671,11 +717,17 @@ class GameMatchItemPainter extends CustomPainter {
   ({ui.Offset startPoint, ui.Offset endPoint}) paintGameImageAndText(
     Canvas canvas,
     Size size, {
+    required bool isReverse,
     required ui.Offset startPoint,
     required String text,
-    required ui.Image image,
+    required ui.Image? image,
   }) {
+    // 图片高度（限制最大高度）
+    double imgHeight = 30;
+    double imgWidth = 30;
     double imgTextSpacing = 4;
+
+    double factor = isReverse == true ? 1.0 : -1.0;
 
     // 文字绘制
     final textSpan = TextSpan(
@@ -692,42 +744,56 @@ class GameMatchItemPainter extends CustomPainter {
       textDirection: TextDirection.ltr,
     );
     textPainter.layout();
-    //
-    // 5. 绘制到 Canvas
-    final offset = Offset(
-      startPoint.dx - textPainter.width / 2,
-      startPoint.dy - textPainter.height / 2 - 10,
-    );
-    textPainter.paint(canvas, offset);
 
-    // 图片高度（限制最大高度）
-    double imgHeight = 30;
-    double imgWidth = 30;
+    // 5. 绘制到 Canvas
+    var offset = Offset(
+      startPoint.dx - textPainter.width / 2,
+      startPoint.dy - (textPainter.height + imgTextSpacing) * factor,
+    );
+
+    if (!isReverse) {
+      offset = Offset(
+        startPoint.dx - textPainter.width / 2,
+        startPoint.dy + imgTextSpacing + imgHeight,
+      );
+    }
+
+    textPainter.paint(canvas, offset);
 
     // 总高度
     final totalHeight = imgHeight + imgTextSpacing * 2 + textPainter.height;
 
-    final endPoint = Offset(startPoint.dx, startPoint.dy - totalHeight);
+    final endPoint = Offset(startPoint.dx, startPoint.dy - totalHeight * factor);
 
-    // 绘制图片（居中）
-    var imgRect = Rect.fromCenter(
-      center: Offset(endPoint.dx, endPoint.dy + imgHeight / 2),
-      width: imgWidth,
-      height: imgHeight,
-    );
+    if (image != null) {
+      // 绘制图片（居中）
+      var imgRect = Rect.fromCenter(
+        center: Offset(endPoint.dx, endPoint.dy + imgHeight / 2 * factor),
+        width: imgWidth,
+        height: imgHeight,
+      );
 
-    final paintCenter = Paint()
-      ..color = Colors.white38
-      ..strokeWidth = 2
-      ..style = PaintingStyle.stroke;
-    canvas.drawRect(imgRect, paintCenter);
+      if (!isReverse) {
+        imgRect = Rect.fromCenter(
+          center: Offset(endPoint.dx, startPoint.dy + imgHeight / 2),
+          width: imgWidth,
+          height: imgHeight,
+        );
+      }
 
-    paintImage(
-      canvas: canvas,
-      rect: imgRect,
-      image: image!,
-      fit: BoxFit.contain,
-    );
+      final paintCenter = Paint()
+        ..color = Colors.white38
+        ..strokeWidth = 2
+        ..style = PaintingStyle.stroke;
+      canvas.drawRect(imgRect, paintCenter);
+
+      paintImage(
+        canvas: canvas,
+        rect: imgRect,
+        image: image!,
+        fit: BoxFit.contain,
+      );
+    }
     return (startPoint: startPoint, endPoint: endPoint);
   }
 
