@@ -5,7 +5,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_templet_project/util/R.dart';
 import 'package:get/get.dart';
-import 'package:scribble/scribble.dart';
 
 class GameMathPage extends StatefulWidget {
   const GameMathPage({
@@ -36,59 +35,36 @@ class _GameMathPageState extends State<GameMathPage> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: '淘汰赛对阵图',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData.dark(),
-      home: Scaffold(
-        backgroundColor: const Color(0xFF1B1B1B),
-        body: SafeArea(
-          child: SingleChildScrollView(
-            // scrollDirection: Axis.horizontal,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                // const Padding(
-                //   padding: EdgeInsets.all(16),
-                //   child: TournamentView(),
-                // ),
-                Container(
-                  height: 600,
-                  decoration: BoxDecoration(
-                    color: Colors.transparent,
-                    border: Border.all(color: Colors.blue),
-                  ),
-                  child: GameMatchItem(
-                    imageUrl: 'https://flagcdn.com/w40/kr.png',
-                    text: '韩国男篮',
-                    imageUrlRight: 'https://flagcdn.com/w40/gum.png',
-                    textRight: '关岛男篮',
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-
     return Scaffold(
+      backgroundColor: const Color(0xFF1B1B1B),
       appBar: AppBar(
-        title: Text("$widget"),
+        title: Text('淘汰赛对阵图'),
       ),
-      body: buildBody(),
-    );
-  }
-
-  Widget buildBody() {
-    return Scrollbar(
-      controller: scrollController,
-      child: SingleChildScrollView(
-        controller: scrollController,
-        child: Column(
-          children: [
-            Text("$widget"),
-          ],
+      body: SafeArea(
+        child: SingleChildScrollView(
+          // scrollDirection: Axis.horizontal,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              // const Padding(
+              //   padding: EdgeInsets.all(16),
+              //   child: TournamentView(),
+              // ),
+              Container(
+                height: 500,
+                decoration: BoxDecoration(
+                  color: Colors.transparent,
+                  // border: Border.all(color: Colors.blue),
+                ),
+                child: GameMatchItem(
+                  imageUrl: 'https://flagcdn.com/w40/kr.png',
+                  text: '韩国男篮',
+                  imageUrlRight: 'https://flagcdn.com/w40/gum.png',
+                  textRight: '关岛男篮',
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -550,7 +526,7 @@ class GameMatchItemPainter extends CustomPainter {
         paintGameItem(canvas, size, startPoint: level11.rightEndPoint, lineVert: lineVert, lineHori: leve3Hori);
 
     final level0Bom = paintGameItem(canvas, size,
-        isReverse: false, startPoint: size.center(ui.Offset(0, 100 + 40)), lineVert: lineVert, lineHori: leve1Hori);
+        isReverse: false, startPoint: size.center(ui.Offset(0, 100 + 60)), lineVert: lineVert, lineHori: leve1Hori);
     final level10Bom = paintGameItem(canvas, size,
         isReverse: false, startPoint: level0Bom.leftEndPoint, lineVert: lineVert, lineHori: leve2Hori);
     final level11Bom = paintGameItem(canvas, size,
@@ -565,6 +541,13 @@ class GameMatchItemPainter extends CustomPainter {
         isReverse: false, startPoint: level11Bom.leftEndPoint, lineVert: lineVert, lineHori: leve3Hori);
     final level23Bom = paintGameItem(canvas, size,
         isReverse: false, startPoint: level11Bom.rightEndPoint, lineVert: lineVert, lineHori: leve3Hori);
+
+    /// 决赛
+    final left = size.center(ui.Offset(0 - 50, 165));
+    final right = size.center(ui.Offset(0 + 50, 165));
+
+    paintGameImageAndText(canvas, size, isReverse: true, startPoint: left, text: text, image: image);
+    paintGameImageAndText(canvas, size, isReverse: true, startPoint: right, text: text, image: image);
 
     return;
 
