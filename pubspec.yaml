@@ -181,6 +181,10 @@ dependencies:
   # 视频压缩
   video_compress: ^3.1.2
 
+  flutter_screen_wake: ^1.0.2
+  volume_controller: ^2.0.7
+  pip: ^0.0.3
+
   #微信登录+支付+分享
   fluwx: ^4.4.10
   # 苹果登录

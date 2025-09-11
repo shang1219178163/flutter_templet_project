@@ -603,6 +603,7 @@ var specials = <Tuple2<String, String>>[
   Tuple2(APPRouter.audioPlayPageDemo, "audioPlayPage"),
   Tuple2(APPRouter.expressionsCalulatorDemo, "简单表达式计算"),
   Tuple2(APPRouter.localAuthDemo, "生物识别技术（例如指纹或面部识别）"),
+  Tuple2(APPRouter.deviceBrightnessAndVolumeControllerDemo, "deviceBrightnessAndVolumeControllerDemo"),
 ];
 
 var animateds = <Tuple2<String, String>>[

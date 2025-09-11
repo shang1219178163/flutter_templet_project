@@ -89,6 +89,7 @@ import 'package:flutter_templet_project/pages/demo/DecoratedBoxTransitionDemo.da
 import 'package:flutter_templet_project/pages/demo/DecorationDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DefaultTabControllerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DevelopToolList.dart';
+import 'package:flutter_templet_project/pages/demo/DeviceBrightnessAndVolumeControllerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DialogChoiceChipDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DirectoryTestDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DismissibleDemo.dart';
@@ -813,6 +814,7 @@ class APPRouter {
   static const String gameMathPage = '/gameMathPage';
   static const String gameMathPageNew = '/gameMathPageNew';
   static const String localAuthDemo = '/localAuthDemo';
+  static const String deviceBrightnessAndVolumeControllerDemo = '/deviceBrightnessAndVolumeControllerDemo';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -2415,6 +2417,10 @@ class AppPage {
     GetPage(
       name: APPRouter.localAuthDemo,
       page: () => LocalAuthDemo(),
+    ),
+    GetPage(
+      name: APPRouter.deviceBrightnessAndVolumeControllerDemo,
+      page: () => DeviceBrightnessAndVolumeControllerDemo(),
     ),
   ];
 }
