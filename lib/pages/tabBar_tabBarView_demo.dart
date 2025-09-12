@@ -704,6 +704,7 @@ var vendors = <Tuple2<String, String>>[
   Tuple2(APPRouter.concurrentExecutorDemo, "concurrentExecutorDemo"),
   Tuple2(APPRouter.gameMathPage, "gameMathPage"),
   Tuple2(APPRouter.gameMathPageNew, "GameMathPageNew"),
+  Tuple2(APPRouter.clickNotificationDemo, "clickNotificationDemo"),
 ];
 
 var others = <Tuple2<String, String>>[

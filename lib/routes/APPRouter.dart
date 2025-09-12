@@ -66,6 +66,7 @@ import 'package:flutter_templet_project/pages/demo/CarouselSliderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/CarouselViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ChemotherapyRegimenDrugCaculator.dart';
 import 'package:flutter_templet_project/pages/demo/ChipDemo.dart';
+import 'package:flutter_templet_project/pages/demo/ClickNotificationDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ClipDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ColorSchemeDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ColoredBoxDemo.dart';
@@ -815,6 +816,7 @@ class APPRouter {
   static const String gameMathPageNew = '/gameMathPageNew';
   static const String localAuthDemo = '/localAuthDemo';
   static const String deviceBrightnessAndVolumeControllerDemo = '/deviceBrightnessAndVolumeControllerDemo';
+  static const String clickNotificationDemo = '/clickNotificationDemo';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -2421,6 +2423,10 @@ class AppPage {
     GetPage(
       name: APPRouter.deviceBrightnessAndVolumeControllerDemo,
       page: () => DeviceBrightnessAndVolumeControllerDemo(),
+    ),
+    GetPage(
+      name: APPRouter.clickNotificationDemo,
+      page: () => ClickNotificationDemo(),
     ),
   ];
 }
