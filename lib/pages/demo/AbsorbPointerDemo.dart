@@ -9,6 +9,7 @@
 
 import "package:flutter/material.dart";
 import "package:flutter_templet_project/basicWidget/n_text.dart";
+import "package:flutter_templet_project/extension/dlog.dart";
 
 class AbsorbPointerDemo extends StatefulWidget {
   const AbsorbPointerDemo({Key? key}) : super(key: key);
@@ -23,6 +24,8 @@ class _AbsorbPointerDemoState extends State<AbsorbPointerDemo> {
 
   final desc = ValueNotifier("");
 
+  final message = "AbsorbPointer本身可以接收点击事件，消耗掉事件，而IgnorePointer无法接收点击事件，其父控件可以接收到点击事件。";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,26 +34,97 @@ class _AbsorbPointerDemoState extends State<AbsorbPointerDemo> {
         centerTitle: true,
         elevation: 0,
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          buildSwitchCell(),
-          // _buildSection2(),
-          Divider(),
-          _buildAbsorbPointerNew(absorbing: _disable),
-          MaterialButton(
-            color: Colors.lightBlue,
-            onPressed: () => onClick('我是外面的按钮，不受影响'),
-            child: Text('我是外面的按钮，不受影响'),
-          ),
-          ValueListenableBuilder(
+      body: Container(
+        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Text(message),
+            buildSwitchCell(),
+            // _buildSection2(),
+            Divider(),
+            _buildAbsorbPointerNew(absorbing: _disable),
+            MaterialButton(
+              color: Colors.lightBlue,
+              onPressed: () => onClick('我是外面的按钮，不受影响'),
+              child: Text('我是外面的按钮，不受影响'),
+            ),
+            ValueListenableBuilder(
               valueListenable: desc,
               builder: (context, value, child) {
                 return Container(
                   padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   child: NText(value),
                 );
-              }),
+              },
+            ),
+
+            buildBox4(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildBox4() {
+    return Container(
+      height: 200,
+      width: 200,
+      child: Stack(
+        // alignment: Alignment.center,
+        children: <Widget>[
+          Listener(
+            onPointerDown: (v) {
+              DLog.d('click red');
+            },
+            child: Container(
+              color: Colors.red,
+            ),
+          ),
+          Positioned(
+            left: 30,
+            top: 30,
+            child: Listener(
+              onPointerDown: (v) {
+                DLog.d('click blue self');
+              },
+              child: AbsorbPointer(
+                child: Listener(
+                  onPointerDown: (v) {
+                    DLog.d('click blue child');
+                  },
+                  child: Container(
+                    color: Colors.blue,
+                    width: 140,
+                    height: 50,
+                    child: Text("AbsorbPointer"),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            left: 30,
+            bottom: 30,
+            child: Listener(
+              onPointerDown: (v) {
+                DLog.d('click yellow self');
+              },
+              child: IgnorePointer(
+                child: Listener(
+                  onPointerDown: (v) {
+                    DLog.d('click yellow child');
+                  },
+                  child: Container(
+                    color: Colors.yellow,
+                    width: 140,
+                    height: 50,
+                    child: Text("IgnorePointer"),
+                  ),
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );
