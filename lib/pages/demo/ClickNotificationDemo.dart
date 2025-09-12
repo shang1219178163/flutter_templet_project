@@ -20,8 +20,7 @@ class ClickNotificationDemo extends StatelessWidget {
       body: TapGestureIntercept(
         ignoring: true,
         onTap: () {
-          // 拦截所有点击事件
-          DLog.d('全局点击事件');
+          DLog.d('页面点击事件');
         },
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
@@ -44,12 +43,12 @@ class ClickNotificationDemo extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  debugPrint("点击这个区域");
+                  debugPrint("点击黄色区域");
                 },
                 child: Container(
-                  color: Colors.amber,
+                  color: Colors.yellow,
                   padding: EdgeInsets.all(20),
-                  child: Text("点击这个区域"),
+                  child: Text("点击黄色区域"),
                 ),
               ),
             ],
