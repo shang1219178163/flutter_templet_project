@@ -108,6 +108,36 @@ class APPThemeService {
         backgroundColor: Colors.blue,
       ).merge(buildButtonStyle()),
     ),
+    textTheme: ThemeData.dark().textTheme.apply(
+          bodyColor: Colors.black, // 普通文字颜色
+          displayColor: Colors.black, // 标题文字颜色
+        ),
+    // textTheme: const TextTheme(
+    //   displayLarge: TextStyle(color: Colors.black, fontSize: 96.0, fontWeight: FontWeight.w300),
+    //   displayMedium: TextStyle(color: Colors.black, fontSize: 60.0, fontWeight: FontWeight.w300),
+    //   displaySmall: TextStyle(color: Colors.black, fontSize: 48.0, fontWeight: FontWeight.w400),
+    //   headlineMedium: TextStyle(color: Colors.black, fontSize: 34.0, fontWeight: FontWeight.w400),
+    //   headlineSmall: TextStyle(color: Colors.black, fontSize: 24.0, fontWeight: FontWeight.w400),
+    //   titleLarge: TextStyle(color: Colors.black, fontSize: 20.0, fontWeight: FontWeight.w500),
+    //   titleMedium: TextStyle(color: Colors.black, fontSize: 16.0, fontWeight: FontWeight.w400),
+    //   titleSmall: TextStyle(color: Colors.black, fontSize: 14.0, fontWeight: FontWeight.w500),
+    //   bodyLarge: TextStyle(color: Colors.black, fontSize: 16.0, fontWeight: FontWeight.w400),
+    //   bodyMedium: TextStyle(color: Colors.black, fontSize: 14.0, fontWeight: FontWeight.w400),
+    //   bodySmall: TextStyle(color: Colors.black, fontSize: 12.0, fontWeight: FontWeight.w400),
+    //   labelLarge: TextStyle(color: Colors.black, fontSize: 14.0, fontWeight: FontWeight.w500),
+    //   labelSmall: TextStyle(color: Colors.black, fontSize: 10.0, fontWeight: FontWeight.w400),
+    // ),
+    bottomSheetTheme: BottomSheetThemeData(
+      backgroundColor: Colors.white.withOpacity(0.8), // 底部弹窗背景色
+      // elevation: 8, // 阴影
+      modalBackgroundColor: Colors.black.withOpacity(0.7), // 调整遮罩层的透明度
+      surfaceTintColor: Colors.red,
+      // shape: RoundedRectangleBorder(
+      //   // 圆角
+      //   borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+      // ),
+      // clipBehavior: Clip.antiAlias, // 防止内容溢出
+    ),
     extensions: appThemeDataExtensions(),
   );
 
@@ -396,6 +426,82 @@ class APPThemeService {
       ),
     );
   }
+
+  final inputDecorationThemeDark = InputDecorationTheme(
+    isCollapsed: true,
+    contentPadding: const EdgeInsets.symmetric(vertical: 11),
+    filled: true,
+    fillColor: Colors.white.withOpacity(0.05),
+    hintStyle: TextStyle(
+      fontSize: 14,
+      color: Colors.white.withOpacity(0.4),
+      fontWeight: FontWeight.w400,
+    ),
+    labelStyle: TextStyle(
+      fontSize: 14,
+      color: Colors.red.withOpacity(0.9),
+      fontWeight: FontWeight.w400,
+    ),
+    prefixIconColor: Color(0xFF7C7C85),
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(8),
+      borderSide: BorderSide(
+        width: 1,
+        color: const Color(0xFFA79AF8).withOpacity(0.1),
+      ),
+    ),
+    enabledBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(8),
+      borderSide: BorderSide(
+        width: 1,
+        color: const Color(0xFFA79AF8).withOpacity(0.1),
+      ),
+    ),
+    focusedBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(8),
+      borderSide: BorderSide(
+        width: 1,
+        color: const Color(0xFFA79AF8).withOpacity(0.1),
+      ),
+    ),
+  );
+
+  final inputDecorationThemeLight = InputDecorationTheme(
+    isCollapsed: true,
+    contentPadding: const EdgeInsets.symmetric(vertical: 11),
+    filled: true,
+    fillColor: Colors.white,
+    hintStyle: const TextStyle(
+      fontSize: 14,
+      color: Color(0xFFA7A7AE),
+      fontWeight: FontWeight.w400,
+    ),
+    labelStyle: const TextStyle(
+      fontSize: 14,
+      color: Colors.red,
+      fontWeight: FontWeight.w400,
+    ),
+    floatingLabelStyle: TextStyle(color: Colors.red, fontSize: 12),
+    prefixIconColor: Color(0xFF7C7C85),
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(8),
+      borderSide: BorderSide(
+        width: 1,
+        color: Colors.white,
+      ),
+    ),
+    enabledBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(8),
+      borderSide: BorderSide(width: 1, color: Colors.white),
+    ),
+    focusedBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(8),
+      borderSide: BorderSide(
+        width: 1,
+        color: Colors.white,
+      ),
+    ),
+  );
 }
 
 /// App 自定义主题

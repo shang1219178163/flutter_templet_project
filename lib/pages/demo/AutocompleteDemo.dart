@@ -50,9 +50,7 @@ class _AutocompleteDemoState extends State<AutocompleteDemo> {
     _tuples = tuples
         .map((e) => OptionModel(
               name: e.item1,
-              children: e.item2
-                  .map((e) => OptionModel(name: e.item1, desc: e.item2))
-                  .toList(),
+              children: e.item2.map((e) => OptionModel(name: e.item1, desc: e.item2)).toList(),
             ))
         .toList();
   }
@@ -70,8 +68,7 @@ class _AutocompleteDemoState extends State<AutocompleteDemo> {
             ...buildHeader(),
             Autocomplete<OptionModel>(
               displayStringForOption: (option) => option.name,
-              fieldViewBuilder:
-                  _params[0].isOpen ? buildFieldView : buildFieldViewDefault,
+              fieldViewBuilder: _params[0].isOpen ? buildFieldView : buildFieldViewDefault,
               onSelected: onSelected,
               optionsBuilder: _buildOptions,
               // optionsViewBuilder: _buildOptionsView,
@@ -139,9 +136,7 @@ class _AutocompleteDemoState extends State<AutocompleteDemo> {
     }
 
     final items = _tuples.expand((e) => e.children).toList();
-    final result = items
-        .where((e) => e.name.toLowerCase().contains(text.toLowerCase()))
-        .toList();
+    final result = items.where((e) => e.name.toLowerCase().contains(text.toLowerCase())).toList();
     return result;
   }
 
@@ -224,8 +219,7 @@ class _AutocompleteDemoState extends State<AutocompleteDemo> {
       },
       onEditingComplete: () {
         debugPrint("onEditingComplete: ${textEditingController.text}");
-        final filters = Get.routeTree.routes
-            .where((e) => e.name == textEditingController.text);
+        final filters = Get.routeTree.routes.where((e) => e.name == textEditingController.text);
         if (filters.isNotEmpty) {
           onSelected(OptionModel(name: textEditingController.text));
         }
@@ -275,8 +269,7 @@ class _AutocompleteDemoState extends State<AutocompleteDemo> {
             ? null
             : OutlineInputBorder(
                 borderRadius: BorderRadius.circular(15),
-                borderSide:
-                    const BorderSide(width: 1.5, color: Colors.lightBlue),
+                borderSide: const BorderSide(width: 1.5, color: Colors.lightBlue),
               ));
 
     return InputDecoration(
@@ -430,8 +423,7 @@ class OptionModel {
     return OptionModel(
       name: json['name'],
       desc: json['desc'],
-      children: List<OptionModel>.from(
-          (json["children"] ?? []).map((e) => OptionModel.fromJson(e))),
+      children: List<OptionModel>.from((json["children"] ?? []).map((e) => OptionModel.fromJson(e))),
     );
   }
 
