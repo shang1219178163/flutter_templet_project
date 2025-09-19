@@ -705,6 +705,9 @@ var vendors = <Tuple2<String, String>>[
   Tuple2(APPRouter.gameMathPage, "gameMathPage"),
   Tuple2(APPRouter.gameMathPageNew, "GameMathPageNew"),
   Tuple2(APPRouter.clickNotificationDemo, "clickNotificationDemo"),
+  Tuple2(APPRouter.colorFilterDemo, "colorFilterDemo"),
+  Tuple2(APPRouter.pageTopBackgroudImageDemo, "pageTopBackgroudImageDemo"),
+  Tuple2(APPRouter.fingerViewDemo, "fingerViewDemo"),
 ];
 
 var others = <Tuple2<String, String>>[

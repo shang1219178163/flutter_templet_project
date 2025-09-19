@@ -68,6 +68,7 @@ import 'package:flutter_templet_project/pages/demo/ChemotherapyRegimenDrugCacula
 import 'package:flutter_templet_project/pages/demo/ChipDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ClickNotificationDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ClipDemo.dart';
+import 'package:flutter_templet_project/pages/demo/ColorFilterDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ColorSchemeDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ColoredBoxDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ComponentMiddlePage.dart';
@@ -189,6 +190,7 @@ import 'package:flutter_templet_project/pages/demo/NBoxWidgetDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NChoiceBoxOneDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NChoiceExpansionDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NExpandTextDemo.dart';
+import 'package:flutter_templet_project/pages/demo/NFingerViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NFooterButtonBarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NPageViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/NRefreshViewDemo.dart';
@@ -226,6 +228,7 @@ import 'package:flutter_templet_project/pages/demo/OverlayMixinDemo.dart';
 import 'package:flutter_templet_project/pages/demo/OverlayPortalDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PageBuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PageLifecycleFuncTest.dart';
+import 'package:flutter_templet_project/pages/demo/PageTopBackgroudImageDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PageViewAndBarDemo.dart';
 import 'package:flutter_templet_project/pages/demo/PageViewDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/PageViewDemoThree.dart';
@@ -817,6 +820,10 @@ class APPRouter {
   static const String localAuthDemo = '/localAuthDemo';
   static const String deviceBrightnessAndVolumeControllerDemo = '/deviceBrightnessAndVolumeControllerDemo';
   static const String clickNotificationDemo = '/clickNotificationDemo';
+
+  static const String colorFilterDemo = '/colorFilterDemo';
+  static const String pageTopBackgroudImageDemo = '/pageTopBackgroudImageDemo';
+  static const String fingerViewDemo = '/fingerViewDemo';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -2427,6 +2434,18 @@ class AppPage {
     GetPage(
       name: APPRouter.clickNotificationDemo,
       page: () => ClickNotificationDemo(),
+    ),
+    GetPage(
+      name: APPRouter.colorFilterDemo,
+      page: () => ColorFilterDemo(),
+    ),
+    GetPage(
+      name: APPRouter.pageTopBackgroudImageDemo,
+      page: () => PageTopBackgroudImageDemo(),
+    ),
+    GetPage(
+      name: APPRouter.fingerViewDemo,
+      page: () => NFingerViewDemo(),
     ),
   ];
 }
