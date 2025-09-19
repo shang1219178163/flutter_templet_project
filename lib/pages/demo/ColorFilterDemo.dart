@@ -91,7 +91,7 @@ class _ColorFilterDemoState extends State<ColorFilterDemo> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   image: DecorationImage(
-                    image: AssetImage("assets/images/predict_lv_bg.png"),
+                    image: AssetImage("assets/images/bg_predict.png"),
                     colorFilter: ColorFilter.mode(
                       Color(0xFF49CFB7),
                       e,
