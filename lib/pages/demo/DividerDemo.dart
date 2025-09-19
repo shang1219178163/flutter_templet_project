@@ -29,6 +29,8 @@ class _DividerDemoState extends State<DividerDemo> {
 
   final heightVN = ValueNotifier(50.0);
   final thicknessVN = ValueNotifier(10.0);
+  final indentVN = ValueNotifier(50.0);
+  final endIndentVN = ValueNotifier(50.0);
 
   @override
   void didUpdateWidget(covariant DividerDemo oldWidget) {
@@ -56,6 +58,8 @@ class _DividerDemoState extends State<DividerDemo> {
               animation: Listenable.merge([
                 heightVN,
                 thicknessVN,
+                indentVN,
+                endIndentVN,
               ]),
               builder: (context, child) {
                 return Row(
@@ -70,6 +74,8 @@ class _DividerDemoState extends State<DividerDemo> {
                         color: Colors.green,
                         height: heightVN.value,
                         thickness: thicknessVN.value,
+                        indent: indentVN.value,
+                        endIndent: endIndentVN.value,
                       ),
                     ),
                     Container(
@@ -82,6 +88,8 @@ class _DividerDemoState extends State<DividerDemo> {
                         color: Colors.green,
                         width: heightVN.value,
                         thickness: thicknessVN.value,
+                        indent: indentVN.value,
+                        endIndent: endIndentVN.value,
                       ),
                     ),
                   ],
@@ -104,6 +112,24 @@ class _DividerDemoState extends State<DividerDemo> {
               value: thicknessVN.value,
               onChanged: (v) {
                 thicknessVN.value = v;
+              },
+            ),
+            NSlider(
+              leading: Text("indent"),
+              min: 10,
+              max: 100,
+              value: indentVN.value,
+              onChanged: (v) {
+                indentVN.value = v;
+              },
+            ),
+            NSlider(
+              leading: Text("endIndent"),
+              min: 10,
+              max: 100,
+              value: endIndentVN.value,
+              onChanged: (v) {
+                endIndentVN.value = v;
               },
             ),
           ],
