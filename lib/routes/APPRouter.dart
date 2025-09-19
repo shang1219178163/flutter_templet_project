@@ -96,6 +96,7 @@ import 'package:flutter_templet_project/pages/demo/DialogChoiceChipDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DirectoryTestDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DismissibleDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DisplayFeatureDemo.dart';
+import 'package:flutter_templet_project/pages/demo/DividerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DragAndDropDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DraggableDemo.dart';
 import 'package:flutter_templet_project/pages/demo/DraggableScrollableSheetDemo.dart';
@@ -824,6 +825,7 @@ class APPRouter {
   static const String colorFilterDemo = '/colorFilterDemo';
   static const String pageTopBackgroudImageDemo = '/pageTopBackgroudImageDemo';
   static const String fingerViewDemo = '/fingerViewDemo';
+  static const String dividerDemo = '/dividerDemo';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -2446,6 +2448,10 @@ class AppPage {
     GetPage(
       name: APPRouter.fingerViewDemo,
       page: () => NFingerViewDemo(),
+    ),
+    GetPage(
+      name: APPRouter.dividerDemo,
+      page: () => DividerDemo(),
     ),
   ];
 }

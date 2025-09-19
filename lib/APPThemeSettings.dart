@@ -127,16 +127,18 @@ class APPThemeService {
     //   labelLarge: TextStyle(color: Colors.black, fontSize: 14.0, fontWeight: FontWeight.w500),
     //   labelSmall: TextStyle(color: Colors.black, fontSize: 10.0, fontWeight: FontWeight.w400),
     // ),
-    bottomSheetTheme: BottomSheetThemeData(
-      backgroundColor: Colors.white.withOpacity(0.8), // 底部弹窗背景色
-      // elevation: 8, // 阴影
-      modalBackgroundColor: Colors.black.withOpacity(0.7), // 调整遮罩层的透明度
-      surfaceTintColor: Colors.red,
-      // shape: RoundedRectangleBorder(
-      //   // 圆角
-      //   borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
-      // ),
-      // clipBehavior: Clip.antiAlias, // 防止内容溢出
+    bottomSheetTheme: const BottomSheetThemeData(
+      backgroundColor: Colors.white,
+      surfaceTintColor: Colors.white,
+      elevation: 8.0,
+      modalElevation: 16.0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16.0)),
+      ),
+      clipBehavior: Clip.antiAlias,
+      showDragHandle: true,
+      dragHandleColor: Colors.blueGrey,
+      dragHandleSize: Size(40, 4),
     ),
     extensions: appThemeDataExtensions(),
   );
@@ -188,6 +190,19 @@ class APPThemeService {
     chipTheme: ChipThemeData(
       pressElevation: 0, //不明原因未生效
       showCheckmark: false,
+    ),
+    bottomSheetTheme: BottomSheetThemeData(
+      backgroundColor: Colors.grey[900],
+      surfaceTintColor: Colors.black,
+      elevation: 12.0,
+      modalElevation: 24.0,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16.0)),
+      ),
+      clipBehavior: Clip.antiAlias,
+      showDragHandle: true,
+      dragHandleColor: Colors.grey[400],
+      dragHandleSize: const Size(40, 4),
     ),
   );
 

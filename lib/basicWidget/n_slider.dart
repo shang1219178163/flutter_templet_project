@@ -84,6 +84,14 @@ class _NSliderState extends State<NSlider> {
   }
 
   @override
+  void didUpdateWidget(covariant NSlider oldWidget) {
+    // TODO: implement didUpdateWidget
+    super.didUpdateWidget(oldWidget);
+    sliderVN.value = widget.value ?? 0;
+    setState(() {});
+  }
+
+  @override
   Widget build(BuildContext context) {
     return _buildSlider();
   }
@@ -120,9 +128,7 @@ class _NSliderState extends State<NSlider> {
         ValueListenableBuilder<double>(
             valueListenable: sliderVN,
             builder: (context, value, child) {
-              final result = widget.max > 1
-                  ? value.toStringAsFixed(0)
-                  : value.toStringAsFixed(2);
+              final result = widget.max > 1 ? value.toStringAsFixed(0) : value.toStringAsFixed(2);
               return widget.trailingBuilder?.call(context, value) ??
                   TextButton(
                     onPressed: () {
