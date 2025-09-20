@@ -302,6 +302,7 @@ import 'package:flutter_templet_project/pages/demo/TranslationTextPage.dart';
 import 'package:flutter_templet_project/pages/demo/TwoDimensionalGridViewDemo.dart';
 import 'package:flutter_templet_project/pages/demo/UploadFileDemo.dart';
 import 'package:flutter_templet_project/pages/demo/UrlLauncherDemo.dart';
+import 'package:flutter_templet_project/pages/demo/UserDetailPage.dart';
 import 'package:flutter_templet_project/pages/demo/ValueListenableBuilderDemo.dart';
 import 'package:flutter_templet_project/pages/demo/VideoPlayerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/VisibilityDemo.dart';
@@ -826,6 +827,7 @@ class APPRouter {
   static const String pageTopBackgroudImageDemo = '/pageTopBackgroudImageDemo';
   static const String fingerViewDemo = '/fingerViewDemo';
   static const String dividerDemo = '/dividerDemo';
+  static const String userDetailPage = '/userDetailPage';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -2452,6 +2454,10 @@ class AppPage {
     GetPage(
       name: APPRouter.dividerDemo,
       page: () => DividerDemo(),
+    ),
+    GetPage(
+      name: APPRouter.userDetailPage,
+      page: () => UserDetailPage(),
     ),
   ];
 }
