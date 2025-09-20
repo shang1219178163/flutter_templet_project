@@ -14,9 +14,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_templet_project/basicWidget/n_network_image.dart';
 import 'package:flutter_templet_project/basicWidget/n_tab_bar_fixed_width_indicator.dart';
 import 'package:flutter_templet_project/extension/color_ext.dart';
-import 'package:flutter_templet_project/provider/theme_provider.dart';
 import 'package:flutter_templet_project/util/R.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_templet_project/extension/dlog.dart';
 
 class UserDetailPage extends StatelessWidget {
   const UserDetailPage({super.key});
@@ -25,32 +24,6 @@ class UserDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     var height = 30;
     return _HeadView(height);
-  }
-}
-
-class LoadingView extends StatelessWidget {
-  const LoadingView({super.key, this.isDark = true});
-
-  final bool isDark;
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      type: MaterialType.transparency,
-      child: Center(
-        child: Container(
-          width: 80,
-          height: 80,
-          decoration: BoxDecoration(
-            color: isDark ? Colors.white.withOpacity(0.06) : Colors.white,
-            borderRadius: const BorderRadius.all(Radius.circular(8)),
-          ),
-          child: CupertinoActivityIndicator(
-            color: isDark ? Colors.white : Color(0xff313135),
-          ),
-        ),
-      ),
-    );
   }
 }
 
@@ -290,9 +263,9 @@ class _HeadViewState extends State<_HeadView> with SingleTickerProviderStateMixi
         if (renderBox != null && mounted) {
           final height = renderBox.size.height;
           if (height > 0) {
-            setState(() {
-              maxHeight.value = height;
-            });
+            maxHeight.value = height;
+
+            setState(() {});
           } else {
             // 如果测量失败，使用默认值或重新尝试
             WidgetsBinding.instance.addPostFrameCallback((_) => _measureHeaderHeight());
@@ -307,18 +280,21 @@ class _HeadViewState extends State<_HeadView> with SingleTickerProviderStateMixi
       mainAxisSize: MainAxisSize.min,
       children: [
         _headerView(
-          onPop: () => Navigator.pop(context),
+          onPop: () {
+            DLog.d("_headerView");
+            Navigator.pop(context);
+          },
           avatarUrl: avatar,
           isFollow: true,
-          followCallback: () async {},
-          personalLetterCallback: () {},
-          reportCallback: () {},
+          onFollow: () async {},
+          onPersonalLetter: () {},
+          onReport: () {},
         ),
         Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             _nameInfoView(
-              name: "意难平",
+              name: "意难平1",
               level: 90,
               follow: 91,
               vermicelli: 92,
@@ -352,9 +328,9 @@ class _HeadViewState extends State<_HeadView> with SingleTickerProviderStateMixi
     required void Function() onPop,
     required String avatarUrl,
     required bool isFollow,
-    void Function()? followCallback,
-    void Function()? personalLetterCallback,
-    void Function()? reportCallback,
+    VoidCallback? onFollow,
+    VoidCallback? onPersonalLetter,
+    VoidCallback? onReport,
   }) {
     return Builder(builder: (context) {
       return Container(
@@ -394,9 +370,9 @@ class _HeadViewState extends State<_HeadView> with SingleTickerProviderStateMixi
               right: 0,
               child: _actionView(
                 isFollow: isFollow,
-                followCallback: followCallback,
-                personalLetterCallback: personalLetterCallback,
-                reportCallback: reportCallback,
+                followCallback: onFollow,
+                personalLetterCallback: onPersonalLetter,
+                reportCallback: onReport,
               ),
             ),
             Positioned(
@@ -640,6 +616,32 @@ class _HeadViewState extends State<_HeadView> with SingleTickerProviderStateMixi
             ),
           )
         ],
+      ),
+    );
+  }
+}
+
+class LoadingView extends StatelessWidget {
+  const LoadingView({super.key, this.isDark = true});
+
+  final bool isDark;
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      type: MaterialType.transparency,
+      child: Center(
+        child: Container(
+          width: 80,
+          height: 80,
+          decoration: BoxDecoration(
+            color: isDark ? Colors.white.withOpacity(0.06) : Colors.white,
+            borderRadius: const BorderRadius.all(Radius.circular(8)),
+          ),
+          child: CupertinoActivityIndicator(
+            color: isDark ? Colors.white : Color(0xff313135),
+          ),
+        ),
       ),
     );
   }
