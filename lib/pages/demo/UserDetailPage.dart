@@ -318,32 +318,26 @@ class _HeadViewState extends State<_HeadView> with SingleTickerProviderStateMixi
           mainAxisSize: MainAxisSize.min,
           children: [
             _nameInfoView(
-              name: "意难平1",
+              name: "意难平",
               level: 90,
               follow: 91,
               vermicelli: 92,
-              userCode: "anchorDetailEntity.userCode",
+              userCode: "userCode",
             ),
             Container(
               decoration: BoxDecoration(
-                color: ColorExt.random,
                 border: Border.all(color: Colors.blue),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  // AnchorLiveView(
-                  //   anchorDetailEntity: anchorDetailEntity,
-                  //   myLivingRecordEntity: provider.myLivingRecordEntity,
-                  // ),
                   Container(
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                      border: Border.all(color: Colors.blue),
-                      borderRadius: BorderRadius.all(Radius.circular(0)),
-                    ),
-                    child: Text("AnchorLiveView"),
+                        // border: Border.all(color: Colors.blue),
+                        ),
+                    child: Text("其他组件"),
                   ),
                 ],
               ),
