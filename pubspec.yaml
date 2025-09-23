@@ -242,6 +242,8 @@ dependencies:
   appinio_swiper: ^2.1.1
   flutter_email_sender: ^6.0.3
 
+  animated_toggle_switch: ^0.8.5
+
   record: ^5.1.2
   audio_visualizer:
     git:
@@ -298,13 +300,19 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - pubspec.yaml #此处声明,方可读取
+    - pubspec.yaml
     - assets/
     - assets/translations/
     - assets/data/
     - assets/images/
-#    - assets/images/3.0x/
-#    - assets/images/2.0x/
     - assets/images/curve/
+    - lib/pages/demo/
+    - lib/pages/demo/widget/
+    - lib/pages/demo/convert/
+    - lib/pages/demo/weather/
+    - lib/pages/demo/weather/models/
+    - lib/pages/demo/weather/screens/
+    - lib/pages/demo/weather/widgets/
+    - lib/pages/demo/weather/widgets/weather_effects/
 
 

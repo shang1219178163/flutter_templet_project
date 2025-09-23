@@ -36,6 +36,7 @@ import 'package:flutter_templet_project/pages/demo/AnimatedSizeDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedSizeDemoOne.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedStaggerDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedSwitcherDemo.dart';
+import 'package:flutter_templet_project/pages/demo/AnimatedToggleSwitchDemo.dart';
 import 'package:flutter_templet_project/pages/demo/AnimatedWidgetDemo.dart';
 import 'package:flutter_templet_project/pages/demo/ApiCreatePage.dart';
 import 'package:flutter_templet_project/pages/demo/AppBarDemo.dart';
@@ -828,6 +829,7 @@ class APPRouter {
   static const String fingerViewDemo = '/fingerViewDemo';
   static const String dividerDemo = '/dividerDemo';
   static const String userDetailPage = '/userDetailPage';
+  static const String animatedToggleSwitchDemo = '/animatedToggleSwitchDemo';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -2458,6 +2460,10 @@ class AppPage {
     GetPage(
       name: APPRouter.userDetailPage,
       page: () => UserDetailPage(),
+    ),
+    GetPage(
+      name: APPRouter.animatedToggleSwitchDemo,
+      page: () => AnimatedToggleSwitchDemo(),
     ),
   ];
 }
