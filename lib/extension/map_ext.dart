@@ -9,11 +9,18 @@
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 
 extension MapExt on Map<String, dynamic> {
   Map get reversed => {
         for (final e in entries) e.value: e.key,
       };
+
+  /// 相等判断
+  bool equal(Map<String, dynamic> other) {
+    return mapEquals(this, other);
+  }
+
   // 拼接键值成字符串
   String toQueryString() {
     if (isEmpty) {
