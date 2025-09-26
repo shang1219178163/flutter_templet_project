@@ -89,21 +89,9 @@ class ThemeProvider extends ChangeNotifier {
 
   void _setCurrentSystemChrome() {
     if (themeMode == ThemeMode.dark) {
-      // 设置系统UI样式
-      SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-        systemNavigationBarColor: Color(0xff25233D), // 底部导航栏颜色
-        systemNavigationBarIconBrightness: Brightness.light, // 底部导航栏图标颜色
-        statusBarColor: Colors.transparent, // 顶部状态栏颜色
-        statusBarIconBrightness: Brightness.light, // 顶部状态栏图标颜色
-      ));
+      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
     } else {
-      // 设置系统UI样式
-      SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-        systemNavigationBarColor: Colors.white, // 底部导航栏颜色
-        systemNavigationBarIconBrightness: Brightness.dark, // 底部导航栏图标颜色
-        statusBarColor: Colors.transparent, // 顶部状态栏颜色
-        statusBarIconBrightness: Brightness.dark, // 顶部状态栏图标颜色
-      ));
+      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
     }
   }
 

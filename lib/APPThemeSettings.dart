@@ -127,18 +127,51 @@ class APPThemeService {
     //   labelLarge: TextStyle(color: Colors.black, fontSize: 14.0, fontWeight: FontWeight.w500),
     //   labelSmall: TextStyle(color: Colors.black, fontSize: 10.0, fontWeight: FontWeight.w400),
     // ),
-    bottomSheetTheme: const BottomSheetThemeData(
+    dialogBackgroundColor: Colors.white,
+    dialogTheme: DialogTheme(
       backgroundColor: Colors.white,
-      surfaceTintColor: Colors.white,
-      elevation: 8.0,
-      modalElevation: 16.0,
+      // shadowColor: AppColors.color_242434,
+      // elevation: 8,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(16.0)),
+        borderRadius: BorderRadius.circular(8),
       ),
-      clipBehavior: Clip.antiAlias,
+      alignment: Alignment.center,
+      titleTextStyle: const TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.bold,
+        color: Color(0xFF313135),
+      ),
+      contentTextStyle: const TextStyle(
+        fontSize: 14,
+        color: Color(0xFF313135),
+      ),
+      iconColor: Color(0xFF313135),
+      actionsPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+    ),
+    bottomSheetTheme: BottomSheetThemeData(
+      backgroundColor: Colors.white,
+      surfaceTintColor: Color(0xFFE3F2FD),
+      elevation: 8,
+      modalBackgroundColor: Colors.white,
+      modalElevation: 12,
+      shadowColor: Colors.black.withOpacity(0.2),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+      ),
       showDragHandle: true,
-      dragHandleColor: Colors.blueGrey,
-      dragHandleSize: Size(40, 4),
+      dragHandleColor: Colors.blue,
+      dragHandleSize: const Size(40, 6),
+      clipBehavior: Clip.antiAlias,
+      constraints: const BoxConstraints(
+        minHeight: 100,
+        maxHeight: 400,
+        minWidth: double.infinity,
+      ),
+    ),
+    sliderTheme: const SliderThemeData(
+      activeTrackColor: Colors.blue,
+      thumbColor: Colors.blue,
+      overlayColor: Colors.grey,
     ),
     extensions: appThemeDataExtensions(),
   );
@@ -191,18 +224,45 @@ class APPThemeService {
       pressElevation: 0, //不明原因未生效
       showCheckmark: false,
     ),
-    bottomSheetTheme: BottomSheetThemeData(
-      backgroundColor: Colors.grey[900],
-      surfaceTintColor: Colors.black,
-      elevation: 12.0,
-      modalElevation: 24.0,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(16.0)),
+    dialogBackgroundColor: Color(0xFF242434),
+    dialogTheme: DialogTheme(
+      backgroundColor: Color(0xFF242434),
+      // elevation: 8,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8),
       ),
-      clipBehavior: Clip.antiAlias,
+      alignment: Alignment.center,
+      titleTextStyle: const TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.bold,
+        color: Colors.white,
+      ),
+      contentTextStyle: const TextStyle(
+        fontSize: 14,
+        color: Colors.white,
+      ),
+      iconColor: Colors.white,
+      actionsPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+    ),
+    bottomSheetTheme: BottomSheetThemeData(
+      backgroundColor: Color(0xFF212121),
+      surfaceTintColor: Color(0xFF424242),
+      modalBackgroundColor: Color(0xFF212121),
+      shadowColor: Colors.black.withOpacity(0.7),
+      elevation: 8,
+      modalElevation: 12,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+      ),
       showDragHandle: true,
-      dragHandleColor: Colors.grey[400],
-      dragHandleSize: const Size(40, 4),
+      dragHandleColor: Colors.tealAccent,
+      dragHandleSize: const Size(40, 6),
+      clipBehavior: Clip.antiAlias,
+      constraints: const BoxConstraints(
+        minHeight: 100,
+        maxHeight: 400,
+        minWidth: double.infinity,
+      ),
     ),
   );
 
@@ -603,20 +663,20 @@ class NAppTheme extends ThemeExtension<NAppTheme> {
 
   @override
   ThemeExtension<NAppTheme> lerp(
-    covariant NAppTheme other,
+    covariant NAppTheme? other,
     double t,
   ) =>
       NAppTheme(
-        primary: Color.lerp(primary, other.primary, t) ?? primary,
-        primary2: Color.lerp(primary2, other.primary2, t) ?? primary2,
-        bgColor: Color.lerp(bgColor, other.bgColor, t) ?? bgColor,
-        fontColor: Color.lerp(fontColor, other.fontColor, t) ?? fontColor,
-        titleStyle: TextStyle.lerp(titleStyle, other.titleStyle, t) ?? titleStyle,
-        textStyle: TextStyle.lerp(textStyle, other.textStyle, t) ?? textStyle,
-        cancelColor: Color.lerp(cancelColor, other.cancelColor, t) ?? cancelColor,
-        lineColor: Color.lerp(lineColor, other.lineColor, t) ?? lineColor,
-        borderColor: Color.lerp(borderColor, other.borderColor, t) ?? borderColor,
-        disabledColor: Color.lerp(disabledColor, other.disabledColor, t) ?? disabledColor,
+        primary: Color.lerp(primary, other?.primary, t) ?? primary,
+        primary2: Color.lerp(primary2, other?.primary2, t) ?? primary2,
+        bgColor: Color.lerp(bgColor, other?.bgColor, t) ?? bgColor,
+        fontColor: Color.lerp(fontColor, other?.fontColor, t) ?? fontColor,
+        titleStyle: TextStyle.lerp(titleStyle, other?.titleStyle, t) ?? titleStyle,
+        textStyle: TextStyle.lerp(textStyle, other?.textStyle, t) ?? textStyle,
+        cancelColor: Color.lerp(cancelColor, other?.cancelColor, t) ?? cancelColor,
+        lineColor: Color.lerp(lineColor, other?.lineColor, t) ?? lineColor,
+        borderColor: Color.lerp(borderColor, other?.borderColor, t) ?? borderColor,
+        disabledColor: Color.lerp(disabledColor, other?.disabledColor, t) ?? disabledColor,
       );
 }
 
