@@ -313,6 +313,7 @@ import 'package:flutter_templet_project/pages/demo/YamlParsePage.dart';
 import 'package:flutter_templet_project/pages/demo/ae_report_page.dart';
 import 'package:flutter_templet_project/pages/demo/box_shadow_demo.dart';
 import 'package:flutter_templet_project/pages/demo/box_shadow_demo_one.dart';
+import 'package:flutter_templet_project/pages/demo/custom_tabbar_page.dart';
 import 'package:flutter_templet_project/pages/demo/data_type_demo.dart';
 import 'package:flutter_templet_project/pages/demo/drawImageNineDemo.dart';
 import 'package:flutter_templet_project/pages/demo/enumDemo.dart';
@@ -830,6 +831,7 @@ class APPRouter {
   static const String dividerDemo = '/dividerDemo';
   static const String userDetailPage = '/userDetailPage';
   static const String animatedToggleSwitchDemo = '/animatedToggleSwitchDemo';
+  static const String customTabbarPage = '/customTabbarPage';
 
   // static final routes = <String, WidgetBuilder>{
   //   homePage: (context) => MyHomePage(),
@@ -2464,6 +2466,11 @@ class AppPage {
     GetPage(
       name: APPRouter.animatedToggleSwitchDemo,
       page: () => AnimatedToggleSwitchDemo(),
+    ),
+
+    GetPage(
+      name: APPRouter.customTabbarPage,
+      page: () => CustomTabbarPage(),
     ),
   ];
 }
