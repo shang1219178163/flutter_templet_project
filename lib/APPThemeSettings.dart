@@ -9,6 +9,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_templet_project/basicWidget/seed_color_box.dart';
 import 'package:flutter_templet_project/basicWidget/theme/n_button_theme.dart';
 import 'package:flutter_templet_project/util/color_util.dart';
 import 'package:get/get.dart';
@@ -326,68 +327,65 @@ class APPThemeService {
 
   late ScrollController? actionScrollController = ScrollController();
 
-  void showThemePicker({
+  /// 选择主题
+  void showSeedColorPicker({
     required BuildContext context,
-    required void Function() cb,
+    ValueChanged<Color>? onColorChanged,
+    ValueChanged<Brightness>? onBrightnessChanged,
+    bool dismiss = true,
   }) {
-    showCupertinoModalPopup(
+    final colors = [
+      Colors.blue,
+      Colors.red,
+      Colors.green,
+      Colors.orange,
+      Colors.purple,
+      Colors.pink,
+      Colors.teal,
+      Colors.indigo,
+      Colors.cyan,
+      Colors.deepPurple,
+      Colors.lime,
+      Colors.amber,
+    ];
+    showModalBottomSheet(
       context: context,
-      builder: (context) => CupertinoActionSheet(
-        actionScrollController: actionScrollController,
-        title: const Text("请选择主题色"),
-        // message: Text(message),
-        actions: _buildActions(context: context, cb: cb),
-        cancelButton: CupertinoActionSheetAction(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: const Text('取消'),
-        ),
+      isScrollControlled: true,
+      constraints: BoxConstraints(
+        minHeight: 200,
+        maxHeight: 500,
       ),
-    );
-  }
-
-  _buildActions({
-    required BuildContext context,
-    required void Function() cb,
-  }) {
-    return colors.map((e) {
-      final text = e
-          .toString()
-          .replaceAll('MaterialColor(primary value:', '')
-          .replaceAll('MaterialAccentColor(primary value:', '')
-          .replaceAll('))', ')');
-
-      return Container(
-        color: e,
-        child: Row(
-          children: [
-            Column(
+      builder: (context) {
+        return SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            child: Column(
               children: [
-                const SizedBox(height: 18),
-                GestureDetector(
-                  onTap: () {
-                    changeThemeLight(e);
-                    Navigator.pop(context);
-                    cb();
+                SeedColorBox(
+                  colorOptions: colors,
+                  onColorChanged: (v) {
+                    if (dismiss) {
+                      Navigator.of(context).pop();
+                    }
+                    onColorChanged?.call(v);
+                    changeThemeLight(v);
                   },
-                  child: Text(
-                    text,
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.white,
-                      backgroundColor: e,
-                      decoration: TextDecoration.none,
-                    ),
-                  ),
+                  brightness: Get.isDarkMode ? Brightness.dark : Brightness.light,
+                  onBrightnessChanged: (v) {
+                    if (dismiss) {
+                      Navigator.of(context).pop();
+                    }
+                    onBrightnessChanged?.call(v);
+                    changeTheme();
+                  },
                 ),
-                const SizedBox(height: 18),
+                SizedBox(height: 20),
               ],
             ),
-          ],
-        ),
-      );
-    }).toList();
+          ),
+        );
+      },
+    );
   }
 
   void changeTheme() {
@@ -451,11 +449,6 @@ class APPThemeService {
     );
     Get.changeTheme(themeData);
   }
-
-  final List<Color> colors = [
-    ...Colors.primaries,
-    ...Colors.accents,
-  ];
 
   buildMaterial3Theme() {
     final color = Colors.blue;

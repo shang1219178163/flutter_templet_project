@@ -180,30 +180,23 @@ class _AppDrawerMenuPageState extends State<AppDrawerMenuPage> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Icon(
-                  Icons.change_circle_outlined,
-                ),
-                SizedBox(
-                  width: 3,
-                ),
-                Text(
-                  themeTitle,
-                ),
+                Icon(Icons.change_circle_outlined),
+                SizedBox(width: 3),
+                Text(themeTitle),
               ],
             ),
           ),
           TextButton.icon(
-              onPressed: () {
-                APPThemeService().showThemePicker(
-                    context: context,
-                    cb: () {
-                      Navigator.of(context).pop();
-                    });
-              },
-              icon: Icon(Icons.color_lens),
-              label: Text(
-                "Light主题切换",
-              )),
+            onPressed: () {
+              APPThemeService().showSeedColorPicker(
+                context: context,
+              );
+            },
+            icon: Icon(Icons.color_lens),
+            label: Text(
+              "Light主题切换",
+            ),
+          ),
         ],
       ),
     ];

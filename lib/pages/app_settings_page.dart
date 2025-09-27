@@ -44,11 +44,9 @@ class _AppSettingsPageState extends State<AppSettingsPage> {
         actions: [
           TextButton(
               onPressed: () {
-                APPThemeService().showThemePicker(
-                    context: context,
-                    cb: () {
-                      Navigator.of(context).pop();
-                    });
+                APPThemeService().showSeedColorPicker(
+                  context: context,
+                );
               },
               child: Text(
                 "主题色",
